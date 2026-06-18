@@ -74,4 +74,3 @@ type WKFrameInfoable interface {
 }
 
 var _ WKFrameInfoable = (*WKFrameInfo)(nil)
-

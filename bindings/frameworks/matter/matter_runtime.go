@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_matterLib uintptr
-	_loadOnce sync.Once
+	_matterLib     uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -50,12 +50,20 @@ func _loadLibrary() {
 	}
 	_register("MTRAttributeNameForID", func() { purego.RegisterLibFunc(&_fnMTRAttributeNameForID, _matterLib, "MTRAttributeNameForID") })
 	_register("MTRClusterNameForID", func() { purego.RegisterLibFunc(&_fnMTRClusterNameForID, _matterLib, "MTRClusterNameForID") })
-	_register("MTRDeviceControllerStorageClasses", func() { purego.RegisterLibFunc(&_fnMTRDeviceControllerStorageClasses, _matterLib, "MTRDeviceControllerStorageClasses") })
+	_register("MTRDeviceControllerStorageClasses", func() {
+		purego.RegisterLibFunc(&_fnMTRDeviceControllerStorageClasses, _matterLib, "MTRDeviceControllerStorageClasses")
+	})
 	_register("MTREventNameForID", func() { purego.RegisterLibFunc(&_fnMTREventNameForID, _matterLib, "MTREventNameForID") })
-	_register("MTRRequestCommandNameForID", func() { purego.RegisterLibFunc(&_fnMTRRequestCommandNameForID, _matterLib, "MTRRequestCommandNameForID") })
-	_register("MTRResponseCommandNameForID", func() { purego.RegisterLibFunc(&_fnMTRResponseCommandNameForID, _matterLib, "MTRResponseCommandNameForID") })
+	_register("MTRRequestCommandNameForID", func() {
+		purego.RegisterLibFunc(&_fnMTRRequestCommandNameForID, _matterLib, "MTRRequestCommandNameForID")
+	})
+	_register("MTRResponseCommandNameForID", func() {
+		purego.RegisterLibFunc(&_fnMTRResponseCommandNameForID, _matterLib, "MTRResponseCommandNameForID")
+	})
 	_register("MTRSetLogCallback", func() { purego.RegisterLibFunc(&_fnMTRSetLogCallback, _matterLib, "MTRSetLogCallback") })
-	_register("MTRSetMessageReliabilityParameters", func() { purego.RegisterLibFunc(&_fnMTRSetMessageReliabilityParameters, _matterLib, "MTRSetMessageReliabilityParameters") })
+	_register("MTRSetMessageReliabilityParameters", func() {
+		purego.RegisterLibFunc(&_fnMTRSetMessageReliabilityParameters, _matterLib, "MTRSetMessageReliabilityParameters")
+	})
 }
 
 func init() {

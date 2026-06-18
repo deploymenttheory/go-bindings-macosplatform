@@ -82,9 +82,13 @@ func (x *RecognizedPointsObservation) AvailableGroupKeys() []*foundation.NSStrin
 	})
 }
 
-func (x *RecognizedPointsObservation) asRecognizedPointsObservation() *raw.VNRecognizedPointsObservation { return x.inner }
+func (x *RecognizedPointsObservation) asRecognizedPointsObservation() *raw.VNRecognizedPointsObservation {
+	return x.inner
+}
 
-func (x *RecognizedPointsObservation) asObservation() *raw.VNObservation { return &x.inner.VNObservation }
+func (x *RecognizedPointsObservation) asObservation() *raw.VNObservation {
+	return &x.inner.VNObservation
+}
 
 // RecognizedPointsObservationable is the interface implemented by [RecognizedPointsObservation], for mocking and DI.
 type RecognizedPointsObservationable interface {
@@ -97,4 +101,3 @@ type RecognizedPointsObservationable interface {
 }
 
 var _ RecognizedPointsObservationable = (*RecognizedPointsObservation)(nil)
-

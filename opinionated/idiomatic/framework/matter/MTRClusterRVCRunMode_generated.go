@@ -101,9 +101,13 @@ func (x *MTRClusterRVCRunMode) ReadAttributeClusterRevisionWithParams(params *ra
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterRVCRunMode) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterRVCRunMode) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterRVCRunMode) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterRVCRunMode) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterRVCRunModeable is the interface implemented by [MTRClusterRVCRunMode], for mocking and DI.
 type MTRClusterRVCRunModeable interface {
@@ -119,4 +123,3 @@ type MTRClusterRVCRunModeable interface {
 }
 
 var _ MTRClusterRVCRunModeable = (*MTRClusterRVCRunMode)(nil)
-

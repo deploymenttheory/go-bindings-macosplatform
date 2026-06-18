@@ -16,7 +16,9 @@ type WebAuthenticationSessionCallback struct {
 }
 
 // Unwrap returns the underlying [raw.ASWebAuthenticationSessionCallback].
-func (x *WebAuthenticationSessionCallback) Unwrap() *raw.ASWebAuthenticationSessionCallback { return x.inner }
+func (x *WebAuthenticationSessionCallback) Unwrap() *raw.ASWebAuthenticationSessionCallback {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -48,4 +50,3 @@ type WebAuthenticationSessionCallbackable interface {
 }
 
 var _ WebAuthenticationSessionCallbackable = (*WebAuthenticationSessionCallback)(nil)
-

@@ -12,9 +12,9 @@ import (
 type MLComputeUnits int64
 
 const (
-	MLComputeUnitsCPUOnly MLComputeUnits = 0
-	MLComputeUnitsCPUAndGPU MLComputeUnits = 1
-	MLComputeUnitsAll MLComputeUnits = 2
+	MLComputeUnitsCPUOnly            MLComputeUnits = 0
+	MLComputeUnitsCPUAndGPU          MLComputeUnits = 1
+	MLComputeUnitsAll                MLComputeUnits = 2
 	MLComputeUnitsCPUAndNeuralEngine MLComputeUnits = 3
 )
 
@@ -83,8 +83,8 @@ type MLImageSizeConstraintType int64
 
 const (
 	MLImageSizeConstraintTypeUnspecified MLImageSizeConstraintType = 0
-	MLImageSizeConstraintTypeEnumerated MLImageSizeConstraintType = 2
-	MLImageSizeConstraintTypeRange MLImageSizeConstraintType = 3
+	MLImageSizeConstraintTypeEnumerated  MLImageSizeConstraintType = 2
+	MLImageSizeConstraintTypeRange       MLImageSizeConstraintType = 3
 )
 
 func (e MLImageSizeConstraintType) String() string {
@@ -103,13 +103,13 @@ func (e MLImageSizeConstraintType) String() string {
 type MLMultiArrayDataType int64
 
 const (
-	MLMultiArrayDataTypeDouble MLMultiArrayDataType = 65600
+	MLMultiArrayDataTypeDouble  MLMultiArrayDataType = 65600
 	MLMultiArrayDataTypeFloat64 MLMultiArrayDataType = 65600
 	MLMultiArrayDataTypeFloat32 MLMultiArrayDataType = 65568
 	MLMultiArrayDataTypeFloat16 MLMultiArrayDataType = 65552
-	MLMultiArrayDataTypeFloat MLMultiArrayDataType = 65568
-	MLMultiArrayDataTypeInt32 MLMultiArrayDataType = 131104
-	MLMultiArrayDataTypeInt8 MLMultiArrayDataType = 131080
+	MLMultiArrayDataTypeFloat   MLMultiArrayDataType = 65568
+	MLMultiArrayDataTypeInt32   MLMultiArrayDataType = 131104
+	MLMultiArrayDataTypeInt8    MLMultiArrayDataType = 131080
 )
 
 func (e MLMultiArrayDataType) String() string {
@@ -133,8 +133,8 @@ type MLMultiArrayShapeConstraintType int64
 
 const (
 	MLMultiArrayShapeConstraintTypeUnspecified MLMultiArrayShapeConstraintType = 1
-	MLMultiArrayShapeConstraintTypeEnumerated MLMultiArrayShapeConstraintType = 2
-	MLMultiArrayShapeConstraintTypeRange MLMultiArrayShapeConstraintType = 3
+	MLMultiArrayShapeConstraintTypeEnumerated  MLMultiArrayShapeConstraintType = 2
+	MLMultiArrayShapeConstraintTypeRange       MLMultiArrayShapeConstraintType = 3
 )
 
 func (e MLMultiArrayShapeConstraintType) String() string {
@@ -193,11 +193,11 @@ func (e MLSpecializationStrategy) String() string {
 type MLTaskState int64
 
 const (
-	MLTaskStateSuspended MLTaskState = 1
-	MLTaskStateRunning MLTaskState = 2
+	MLTaskStateSuspended  MLTaskState = 1
+	MLTaskStateRunning    MLTaskState = 2
 	MLTaskStateCancelling MLTaskState = 3
-	MLTaskStateCompleted MLTaskState = 4
-	MLTaskStateFailed MLTaskState = 5
+	MLTaskStateCompleted  MLTaskState = 4
+	MLTaskStateFailed     MLTaskState = 5
 )
 
 func (e MLTaskState) String() string {
@@ -222,8 +222,8 @@ type MLUpdateProgressEvent int64
 
 const (
 	MLUpdateProgressEventTrainingBegin MLUpdateProgressEvent = 1
-	MLUpdateProgressEventEpochEnd MLUpdateProgressEvent = 2
-	MLUpdateProgressEventMiniBatchEnd MLUpdateProgressEvent = 4
+	MLUpdateProgressEventEpochEnd      MLUpdateProgressEvent = 2
+	MLUpdateProgressEventMiniBatchEnd  MLUpdateProgressEvent = 4
 )
 
 func (e MLUpdateProgressEvent) String() string {
@@ -242,4 +242,3 @@ func (e MLUpdateProgressEvent) String() string {
 	}
 	return strings.Join(parts, "|")
 }
-

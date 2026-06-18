@@ -69,4 +69,3 @@ type NNScaleNodeable interface {
 }
 
 var _ NNScaleNodeable = (*NNScaleNode)(nil)
-

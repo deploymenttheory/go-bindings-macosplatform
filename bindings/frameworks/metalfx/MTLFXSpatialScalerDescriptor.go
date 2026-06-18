@@ -17,25 +17,25 @@ type MTLFXSpatialScalerDescriptor struct {
 }
 
 var (
-	_clsMTLFXSpatialScalerDescriptor = _objcClass("MTLFXSpatialScalerDescriptor")
-	_mTLFXSpatialScalerDescriptorSelNewSpatialScalerWithDevice = objc.RegisterName("newSpatialScalerWithDevice:")
+	_clsMTLFXSpatialScalerDescriptor                                   = _objcClass("MTLFXSpatialScalerDescriptor")
+	_mTLFXSpatialScalerDescriptorSelNewSpatialScalerWithDevice         = objc.RegisterName("newSpatialScalerWithDevice:")
 	_mTLFXSpatialScalerDescriptorSelNewSpatialScalerWithDeviceCompiler = objc.RegisterName("newSpatialScalerWithDevice:compiler:")
-	_mTLFXSpatialScalerDescriptorSelSupportsMetal4FX = objc.RegisterName("supportsMetal4FX:")
-	_mTLFXSpatialScalerDescriptorSelSupportsDevice = objc.RegisterName("supportsDevice:")
-	_mTLFXSpatialScalerDescriptorSelColorTextureFormat = objc.RegisterName("colorTextureFormat")
-	_mTLFXSpatialScalerDescriptorSelSetColorTextureFormat = objc.RegisterName("setColorTextureFormat:")
-	_mTLFXSpatialScalerDescriptorSelOutputTextureFormat = objc.RegisterName("outputTextureFormat")
-	_mTLFXSpatialScalerDescriptorSelSetOutputTextureFormat = objc.RegisterName("setOutputTextureFormat:")
-	_mTLFXSpatialScalerDescriptorSelInputWidth = objc.RegisterName("inputWidth")
-	_mTLFXSpatialScalerDescriptorSelSetInputWidth = objc.RegisterName("setInputWidth:")
-	_mTLFXSpatialScalerDescriptorSelInputHeight = objc.RegisterName("inputHeight")
-	_mTLFXSpatialScalerDescriptorSelSetInputHeight = objc.RegisterName("setInputHeight:")
-	_mTLFXSpatialScalerDescriptorSelOutputWidth = objc.RegisterName("outputWidth")
-	_mTLFXSpatialScalerDescriptorSelSetOutputWidth = objc.RegisterName("setOutputWidth:")
-	_mTLFXSpatialScalerDescriptorSelOutputHeight = objc.RegisterName("outputHeight")
-	_mTLFXSpatialScalerDescriptorSelSetOutputHeight = objc.RegisterName("setOutputHeight:")
-	_mTLFXSpatialScalerDescriptorSelColorProcessingMode = objc.RegisterName("colorProcessingMode")
-	_mTLFXSpatialScalerDescriptorSelSetColorProcessingMode = objc.RegisterName("setColorProcessingMode:")
+	_mTLFXSpatialScalerDescriptorSelSupportsMetal4FX                   = objc.RegisterName("supportsMetal4FX:")
+	_mTLFXSpatialScalerDescriptorSelSupportsDevice                     = objc.RegisterName("supportsDevice:")
+	_mTLFXSpatialScalerDescriptorSelColorTextureFormat                 = objc.RegisterName("colorTextureFormat")
+	_mTLFXSpatialScalerDescriptorSelSetColorTextureFormat              = objc.RegisterName("setColorTextureFormat:")
+	_mTLFXSpatialScalerDescriptorSelOutputTextureFormat                = objc.RegisterName("outputTextureFormat")
+	_mTLFXSpatialScalerDescriptorSelSetOutputTextureFormat             = objc.RegisterName("setOutputTextureFormat:")
+	_mTLFXSpatialScalerDescriptorSelInputWidth                         = objc.RegisterName("inputWidth")
+	_mTLFXSpatialScalerDescriptorSelSetInputWidth                      = objc.RegisterName("setInputWidth:")
+	_mTLFXSpatialScalerDescriptorSelInputHeight                        = objc.RegisterName("inputHeight")
+	_mTLFXSpatialScalerDescriptorSelSetInputHeight                     = objc.RegisterName("setInputHeight:")
+	_mTLFXSpatialScalerDescriptorSelOutputWidth                        = objc.RegisterName("outputWidth")
+	_mTLFXSpatialScalerDescriptorSelSetOutputWidth                     = objc.RegisterName("setOutputWidth:")
+	_mTLFXSpatialScalerDescriptorSelOutputHeight                       = objc.RegisterName("outputHeight")
+	_mTLFXSpatialScalerDescriptorSelSetOutputHeight                    = objc.RegisterName("setOutputHeight:")
+	_mTLFXSpatialScalerDescriptorSelColorProcessingMode                = objc.RegisterName("colorProcessingMode")
+	_mTLFXSpatialScalerDescriptorSelSetColorProcessingMode             = objc.RegisterName("setColorProcessingMode:")
 )
 
 func MTLFXSpatialScalerDescriptorFromID(id objc.ID) *MTLFXSpatialScalerDescriptor {
@@ -66,7 +66,7 @@ func MTLFXSpatialScalerDescriptorSupportsMetal4FX(device metal.MTLDevice) bool {
 	return _ret
 }
 
-// Returns a Boolean value that indicates whether the spatial scaler works with a GPU. - Parameters: - device: An ``MTLDevice`` instance that represents a GPU. - Returns: <doc://com.apple.documentation/documentation/swift/true> if the device supports spatial scaling, <doc://com.apple.documentation/documentation/swift/false> otherwise.
+// Returns a Boolean value that indicates whether the spatial scaler works with a GPU. - Parameters: - device: An “MTLDevice“ instance that represents a GPU. - Returns: <doc://com.apple.documentation/documentation/swift/true> if the device supports spatial scaling, <doc://com.apple.documentation/documentation/swift/false> otherwise.
 func MTLFXSpatialScalerDescriptorSupportsDevice(device metal.MTLDevice) bool {
 	_ret := objc.Send[bool](objc.ID(_clsMTLFXSpatialScalerDescriptor), _mTLFXSpatialScalerDescriptorSelSupportsDevice, device)
 	return _ret
@@ -132,7 +132,7 @@ func (o *MTLFXSpatialScalerDescriptor) SetOutputHeight(outputHeight uint) {
 	o.Ptr().Send(_mTLFXSpatialScalerDescriptorSelSetOutputHeight, outputHeight)
 }
 
-// The color space of the input color texture for the spatial scaler you create with this descriptor. This property's default value is ``MTLFXSpatialScalerColorProcessingMode/MTLFXSpatialScalerColorProcessingModePerceptual``.
+// The color space of the input color texture for the spatial scaler you create with this descriptor. This property's default value is “MTLFXSpatialScalerColorProcessingMode/MTLFXSpatialScalerColorProcessingModePerceptual“.
 func (o *MTLFXSpatialScalerDescriptor) ColorProcessingMode() MTLFXSpatialScalerColorProcessingMode {
 	_ret := objc.Send[MTLFXSpatialScalerColorProcessingMode](o.Ptr(), _mTLFXSpatialScalerDescriptorSelColorProcessingMode)
 	return _ret
@@ -141,4 +141,3 @@ func (o *MTLFXSpatialScalerDescriptor) ColorProcessingMode() MTLFXSpatialScalerC
 func (o *MTLFXSpatialScalerDescriptor) SetColorProcessingMode(colorProcessingMode MTLFXSpatialScalerColorProcessingMode) {
 	o.Ptr().Send(_mTLFXSpatialScalerDescriptorSelSetColorProcessingMode, colorProcessingMode)
 }
-

@@ -21,20 +21,20 @@ type PHContentEditingInput struct {
 }
 
 var (
-	_clsPHContentEditingInput = _objcClass("PHContentEditingInput")
-	_pHContentEditingInputSelMediaType = objc.RegisterName("mediaType")
-	_pHContentEditingInputSelMediaSubtypes = objc.RegisterName("mediaSubtypes")
-	_pHContentEditingInputSelCreationDate = objc.RegisterName("creationDate")
-	_pHContentEditingInputSelLocation = objc.RegisterName("location")
-	_pHContentEditingInputSelContentType = objc.RegisterName("contentType")
-	_pHContentEditingInputSelUniformTypeIdentifier = objc.RegisterName("uniformTypeIdentifier")
-	_pHContentEditingInputSelPlaybackStyle = objc.RegisterName("playbackStyle")
-	_pHContentEditingInputSelAdjustmentData = objc.RegisterName("adjustmentData")
-	_pHContentEditingInputSelDisplaySizeImage = objc.RegisterName("displaySizeImage")
-	_pHContentEditingInputSelFullSizeImageURL = objc.RegisterName("fullSizeImageURL")
+	_clsPHContentEditingInput                         = _objcClass("PHContentEditingInput")
+	_pHContentEditingInputSelMediaType                = objc.RegisterName("mediaType")
+	_pHContentEditingInputSelMediaSubtypes            = objc.RegisterName("mediaSubtypes")
+	_pHContentEditingInputSelCreationDate             = objc.RegisterName("creationDate")
+	_pHContentEditingInputSelLocation                 = objc.RegisterName("location")
+	_pHContentEditingInputSelContentType              = objc.RegisterName("contentType")
+	_pHContentEditingInputSelUniformTypeIdentifier    = objc.RegisterName("uniformTypeIdentifier")
+	_pHContentEditingInputSelPlaybackStyle            = objc.RegisterName("playbackStyle")
+	_pHContentEditingInputSelAdjustmentData           = objc.RegisterName("adjustmentData")
+	_pHContentEditingInputSelDisplaySizeImage         = objc.RegisterName("displaySizeImage")
+	_pHContentEditingInputSelFullSizeImageURL         = objc.RegisterName("fullSizeImageURL")
 	_pHContentEditingInputSelFullSizeImageOrientation = objc.RegisterName("fullSizeImageOrientation")
-	_pHContentEditingInputSelAudiovisualAsset = objc.RegisterName("audiovisualAsset")
-	_pHContentEditingInputSelLivePhoto = objc.RegisterName("livePhoto")
+	_pHContentEditingInputSelAudiovisualAsset         = objc.RegisterName("audiovisualAsset")
+	_pHContentEditingInputSelLivePhoto                = objc.RegisterName("livePhoto")
 )
 
 func PHContentEditingInputFromID(id objc.ID) *PHContentEditingInput {
@@ -59,7 +59,9 @@ func (o *PHContentEditingInput) MediaSubtypes() PHAssetMediaSubtype {
 
 func (o *PHContentEditingInput) CreationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHContentEditingInputSelCreationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -71,14 +73,18 @@ func (o *PHContentEditingInput) Location() unsafe.Pointer {
 // The type of data provided as the asset's content editing input image or video.
 func (o *PHContentEditingInput) ContentType() *uniformtypeidentifiers.UTType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHContentEditingInputSelContentType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return uniformtypeidentifiers.UTTypeFromID(_ret)
 }
 
 // Deprecated: Use contentType instead
 func (o *PHContentEditingInput) UniformTypeIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHContentEditingInputSelUniformTypeIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -89,19 +95,25 @@ func (o *PHContentEditingInput) PlaybackStyle() PHAssetPlaybackStyle {
 
 func (o *PHContentEditingInput) AdjustmentData() *PHAdjustmentData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHContentEditingInputSelAdjustmentData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHAdjustmentDataFromID(_ret)
 }
 
 func (o *PHContentEditingInput) DisplaySizeImage() *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHContentEditingInputSelDisplaySizeImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSImageFromID(_ret)
 }
 
 func (o *PHContentEditingInput) FullSizeImageURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHContentEditingInputSelFullSizeImageURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -112,13 +124,16 @@ func (o *PHContentEditingInput) FullSizeImageOrientation() int {
 
 func (o *PHContentEditingInput) AudiovisualAsset() *avfoundation.AVAsset {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHContentEditingInputSelAudiovisualAsset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return avfoundation.AVAssetFromID(_ret)
 }
 
 func (o *PHContentEditingInput) LivePhoto() *PHLivePhoto {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHContentEditingInputSelLivePhoto)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHLivePhotoFromID(_ret)
 }
-

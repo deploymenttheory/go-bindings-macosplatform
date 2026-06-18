@@ -48,7 +48,9 @@ func (x *MTRDoorLockClusterDlCredential) WithCredentialIndex(credentialIndex *fo
 	return x
 }
 
-func (x *MTRDoorLockClusterDlCredential) asMTRDoorLockClusterCredentialStruct() *raw.MTRDoorLockClusterCredentialStruct { return &x.inner.MTRDoorLockClusterCredentialStruct }
+func (x *MTRDoorLockClusterDlCredential) asMTRDoorLockClusterCredentialStruct() *raw.MTRDoorLockClusterCredentialStruct {
+	return &x.inner.MTRDoorLockClusterCredentialStruct
+}
 
 // MTRDoorLockClusterDlCredentialable is the interface implemented by [MTRDoorLockClusterDlCredential], for mocking and DI.
 type MTRDoorLockClusterDlCredentialable interface {
@@ -58,4 +60,3 @@ type MTRDoorLockClusterDlCredentialable interface {
 }
 
 var _ MTRDoorLockClusterDlCredentialable = (*MTRDoorLockClusterDlCredential)(nil)
-

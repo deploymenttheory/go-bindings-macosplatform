@@ -80,4 +80,3 @@ func LoadPlugInAtPath(path string) bool {
 func RegisterPlugInClass(aClass objc.Class) {
 	raw.QCPlugInRegisterPlugInClass(aClass)
 }
-

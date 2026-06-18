@@ -18,16 +18,16 @@ type MTRClusterRefrigeratorAndTemperatureControlledCabinetMode struct {
 }
 
 var (
-	_clsMTRClusterRefrigeratorAndTemperatureControlledCabinetMode = _objcClass("MTRClusterRefrigeratorAndTemperatureControlledCabinetMode")
+	_clsMTRClusterRefrigeratorAndTemperatureControlledCabinetMode                                                                    = _objcClass("MTRClusterRefrigeratorAndTemperatureControlledCabinetMode")
 	_mTRClusterRefrigeratorAndTemperatureControlledCabinetModeSelChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("changeToModeWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeSupportedModesWithParams = objc.RegisterName("readAttributeSupportedModesWithParams:")
-	_mTRClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeCurrentModeWithParams = objc.RegisterName("readAttributeCurrentModeWithParams:")
-	_mTRClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterRefrigeratorAndTemperatureControlledCabinetModeSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeSupportedModesWithParams                               = objc.RegisterName("readAttributeSupportedModesWithParams:")
+	_mTRClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeCurrentModeWithParams                                  = objc.RegisterName("readAttributeCurrentModeWithParams:")
+	_mTRClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeGeneratedCommandListWithParams                         = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeAcceptedCommandListWithParams                          = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeAttributeListWithParams                                = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeFeatureMapWithParams                                   = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeClusterRevisionWithParams                              = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterRefrigeratorAndTemperatureControlledCabinetModeSelInitWithDeviceEndpointIDQueue                                       = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterRefrigeratorAndTemperatureControlledCabinetModeFromID(id objc.ID) *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode {
@@ -92,7 +92,8 @@ func (o *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttribut
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterRefrigeratorAndTemperatureControlledCabinetModeSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterRefrigeratorAndTemperatureControlledCabinetModeFromID(_ret)
 }
-

@@ -18,7 +18,9 @@ type MutableVideoCompositionInstruction struct {
 }
 
 // Unwrap returns the underlying [raw.AVMutableVideoCompositionInstruction].
-func (x *MutableVideoCompositionInstruction) Unwrap() *raw.AVMutableVideoCompositionInstruction { return x.inner }
+func (x *MutableVideoCompositionInstruction) Unwrap() *raw.AVMutableVideoCompositionInstruction {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -51,7 +53,9 @@ func (x *MutableVideoCompositionInstruction) WithLayerInstructions(items ...Vide
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asVideoCompositionLayerInstruction().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asVideoCompositionLayerInstruction().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.AVVideoCompositionLayerInstruction](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -73,7 +77,9 @@ func (x *MutableVideoCompositionInstruction) WithRequiredSourceSampleDataTrackID
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -112,7 +118,9 @@ func (x *MutableVideoCompositionInstruction) SetRequiredSourceSampleDataTrackIDs
 	x.inner.SetRequiredSourceSampleDataTrackIDs(requiredSourceSampleDataTrackIDs)
 }
 
-func (x *MutableVideoCompositionInstruction) asVideoCompositionInstruction() *raw.AVVideoCompositionInstruction { return &x.inner.AVVideoCompositionInstruction }
+func (x *MutableVideoCompositionInstruction) asVideoCompositionInstruction() *raw.AVVideoCompositionInstruction {
+	return &x.inner.AVVideoCompositionInstruction
+}
 
 // MutableVideoCompositionInstructionable is the interface implemented by [MutableVideoCompositionInstruction], for mocking and DI.
 type MutableVideoCompositionInstructionable interface {
@@ -130,4 +138,3 @@ type MutableVideoCompositionInstructionable interface {
 }
 
 var _ MutableVideoCompositionInstructionable = (*MutableVideoCompositionInstruction)(nil)
-

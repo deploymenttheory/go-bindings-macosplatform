@@ -118,4 +118,3 @@ type NWTLSParametersable interface {
 }
 
 var _ NWTLSParametersable = (*NWTLSParameters)(nil)
-

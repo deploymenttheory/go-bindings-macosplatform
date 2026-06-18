@@ -35,4 +35,3 @@ func (e ATTrackingManagerAuthorizationStatus) String() string {
 		return fmt.Sprintf("ATTrackingManagerAuthorizationStatus(%d)", int64(e))
 	}
 }
-

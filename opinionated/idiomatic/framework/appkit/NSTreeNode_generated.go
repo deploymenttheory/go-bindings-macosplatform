@@ -112,4 +112,3 @@ type TreeNodeable interface {
 }
 
 var _ TreeNodeable = (*TreeNode)(nil)
-

@@ -96,4 +96,3 @@ type ConstraintConflictable interface {
 }
 
 var _ ConstraintConflictable = (*ConstraintConflict)(nil)
-

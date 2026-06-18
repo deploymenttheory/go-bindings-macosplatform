@@ -40,7 +40,9 @@ func (x *PaymentPass) ActivationState() raw.PKPaymentPassActivationState {
 	return x.inner.ActivationState()
 }
 
-func (x *PaymentPass) asSecureElementPass() *raw.PKSecureElementPass { return &x.inner.PKSecureElementPass }
+func (x *PaymentPass) asSecureElementPass() *raw.PKSecureElementPass {
+	return &x.inner.PKSecureElementPass
+}
 
 func (x *PaymentPass) asPass() *raw.PKPass { return &x.inner.PKSecureElementPass.PKPass }
 
@@ -51,4 +53,3 @@ type PaymentPassable interface {
 }
 
 var _ PaymentPassable = (*PaymentPass)(nil)
-

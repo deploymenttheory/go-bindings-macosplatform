@@ -20,12 +20,12 @@ func (o *AVSpeechSynthesisProviderAudioUnit) Ptr() objc.ID { return o.ptr }
 func (o *AVSpeechSynthesisProviderAudioUnit) InitPtr(id objc.ID) { o.ptr = id }
 
 var (
-	_clsAVSpeechSynthesisProviderAudioUnit = _objcClass("AVSpeechSynthesisProviderAudioUnit")
-	_aVSpeechSynthesisProviderAudioUnitSelSynthesizeSpeechRequest = objc.RegisterName("synthesizeSpeechRequest:")
-	_aVSpeechSynthesisProviderAudioUnitSelCancelSpeechRequest = objc.RegisterName("cancelSpeechRequest")
-	_aVSpeechSynthesisProviderAudioUnitSelSpeechVoices = objc.RegisterName("speechVoices")
-	_aVSpeechSynthesisProviderAudioUnitSelSetSpeechVoices = objc.RegisterName("setSpeechVoices:")
-	_aVSpeechSynthesisProviderAudioUnitSelSpeechSynthesisOutputMetadataBlock = objc.RegisterName("speechSynthesisOutputMetadataBlock")
+	_clsAVSpeechSynthesisProviderAudioUnit                                      = _objcClass("AVSpeechSynthesisProviderAudioUnit")
+	_aVSpeechSynthesisProviderAudioUnitSelSynthesizeSpeechRequest               = objc.RegisterName("synthesizeSpeechRequest:")
+	_aVSpeechSynthesisProviderAudioUnitSelCancelSpeechRequest                   = objc.RegisterName("cancelSpeechRequest")
+	_aVSpeechSynthesisProviderAudioUnitSelSpeechVoices                          = objc.RegisterName("speechVoices")
+	_aVSpeechSynthesisProviderAudioUnitSelSetSpeechVoices                       = objc.RegisterName("setSpeechVoices:")
+	_aVSpeechSynthesisProviderAudioUnitSelSpeechSynthesisOutputMetadataBlock    = objc.RegisterName("speechSynthesisOutputMetadataBlock")
 	_aVSpeechSynthesisProviderAudioUnitSelSetSpeechSynthesisOutputMetadataBlock = objc.RegisterName("setSpeechSynthesisOutputMetadataBlock:")
 )
 
@@ -52,7 +52,9 @@ func (o *AVSpeechSynthesisProviderAudioUnit) CancelSpeechRequest() {
 // @brief  Returns the voices this audio unit has available and ready for synthesis. @discussion This method should fetch and return the voices ready to synthesize that a user can select from (usually through Settings). Required for speech synthesizer audio unit extensions. An audio unit with a dynamic list of voices can override this property's getter to perform a more complex fetch.
 func (o *AVSpeechSynthesisProviderAudioUnit) SpeechVoices() *foundation.NSArray[*AVSpeechSynthesisProviderVoice] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechSynthesisProviderAudioUnitSelSpeechVoices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVSpeechSynthesisProviderVoice](_ret)
 }
 
@@ -82,4 +84,3 @@ func (o *AVSpeechSynthesisProviderAudioUnit) SetSpeechSynthesisOutputMetadataBlo
 	}
 	o.Ptr().Send(_aVSpeechSynthesisProviderAudioUnitSelSetSpeechSynthesisOutputMetadataBlock, __block_speechSynthesisOutputMetadataBlock)
 }
-

@@ -61,4 +61,3 @@ func AVSampleBufferAttachContentKey(sbuf unsafe.Pointer, contentKey *raw.AVConte
 func CMTagCollectionCreateWithVideoOutputPreset(allocator unsafe.Pointer, preset raw.CMTagCollectionVideoOutputPreset, newCollectionOut unsafe.Pointer) int {
 	return raw.CMTagCollectionCreateWithVideoOutputPreset(allocator, preset, newCollectionOut)
 }
-

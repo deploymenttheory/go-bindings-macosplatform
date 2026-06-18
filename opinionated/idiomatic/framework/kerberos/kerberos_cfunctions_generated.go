@@ -1969,4 +1969,3 @@ func ResetComErrHook() unsafe.Pointer {
 func SetComErrHook(handler unsafe.Pointer) unsafe.Pointer {
 	return raw.SetComErrHook(handler)
 }
-

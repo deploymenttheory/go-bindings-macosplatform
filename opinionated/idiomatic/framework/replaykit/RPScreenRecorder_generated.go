@@ -315,4 +315,3 @@ type ScreenRecorderable interface {
 }
 
 var _ ScreenRecorderable = (*ScreenRecorder)(nil)
-

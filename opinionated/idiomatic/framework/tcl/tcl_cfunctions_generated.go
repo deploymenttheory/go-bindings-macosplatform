@@ -2928,4 +2928,3 @@ func Tcl_WriteRaw(chan_ unsafe.Pointer, src string, srcLen int) int {
 func Tcl_WrongNumArgs(interp *raw.Tcl_Interp, objc int, objv unsafe.Pointer, message string) {
 	raw.Tcl_WrongNumArgs(interp, objc, objv, message)
 }
-

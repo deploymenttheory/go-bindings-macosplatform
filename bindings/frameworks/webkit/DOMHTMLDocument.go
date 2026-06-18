@@ -16,36 +16,36 @@ type DOMHTMLDocument struct {
 }
 
 var (
-	_clsDOMHTMLDocument = _objcClass("DOMHTMLDocument")
-	_dOMHTMLDocumentSelOpen = objc.RegisterName("open")
-	_dOMHTMLDocumentSelClose = objc.RegisterName("close")
-	_dOMHTMLDocumentSelWrite = objc.RegisterName("write:")
-	_dOMHTMLDocumentSelWriteln = objc.RegisterName("writeln:")
-	_dOMHTMLDocumentSelClear = objc.RegisterName("clear")
-	_dOMHTMLDocumentSelCaptureEvents = objc.RegisterName("captureEvents")
-	_dOMHTMLDocumentSelReleaseEvents = objc.RegisterName("releaseEvents")
-	_dOMHTMLDocumentSelEmbeds = objc.RegisterName("embeds")
-	_dOMHTMLDocumentSelPlugins = objc.RegisterName("plugins")
-	_dOMHTMLDocumentSelScripts = objc.RegisterName("scripts")
-	_dOMHTMLDocumentSelWidth = objc.RegisterName("width")
-	_dOMHTMLDocumentSelHeight = objc.RegisterName("height")
-	_dOMHTMLDocumentSelDir = objc.RegisterName("dir")
-	_dOMHTMLDocumentSelSetDir = objc.RegisterName("setDir:")
-	_dOMHTMLDocumentSelDesignMode = objc.RegisterName("designMode")
-	_dOMHTMLDocumentSelSetDesignMode = objc.RegisterName("setDesignMode:")
-	_dOMHTMLDocumentSelCompatMode = objc.RegisterName("compatMode")
-	_dOMHTMLDocumentSelBgColor = objc.RegisterName("bgColor")
-	_dOMHTMLDocumentSelSetBgColor = objc.RegisterName("setBgColor:")
-	_dOMHTMLDocumentSelFgColor = objc.RegisterName("fgColor")
-	_dOMHTMLDocumentSelSetFgColor = objc.RegisterName("setFgColor:")
-	_dOMHTMLDocumentSelAlinkColor = objc.RegisterName("alinkColor")
-	_dOMHTMLDocumentSelSetAlinkColor = objc.RegisterName("setAlinkColor:")
-	_dOMHTMLDocumentSelLinkColor = objc.RegisterName("linkColor")
-	_dOMHTMLDocumentSelSetLinkColor = objc.RegisterName("setLinkColor:")
-	_dOMHTMLDocumentSelVlinkColor = objc.RegisterName("vlinkColor")
-	_dOMHTMLDocumentSelSetVlinkColor = objc.RegisterName("setVlinkColor:")
+	_clsDOMHTMLDocument                                              = _objcClass("DOMHTMLDocument")
+	_dOMHTMLDocumentSelOpen                                          = objc.RegisterName("open")
+	_dOMHTMLDocumentSelClose                                         = objc.RegisterName("close")
+	_dOMHTMLDocumentSelWrite                                         = objc.RegisterName("write:")
+	_dOMHTMLDocumentSelWriteln                                       = objc.RegisterName("writeln:")
+	_dOMHTMLDocumentSelClear                                         = objc.RegisterName("clear")
+	_dOMHTMLDocumentSelCaptureEvents                                 = objc.RegisterName("captureEvents")
+	_dOMHTMLDocumentSelReleaseEvents                                 = objc.RegisterName("releaseEvents")
+	_dOMHTMLDocumentSelEmbeds                                        = objc.RegisterName("embeds")
+	_dOMHTMLDocumentSelPlugins                                       = objc.RegisterName("plugins")
+	_dOMHTMLDocumentSelScripts                                       = objc.RegisterName("scripts")
+	_dOMHTMLDocumentSelWidth                                         = objc.RegisterName("width")
+	_dOMHTMLDocumentSelHeight                                        = objc.RegisterName("height")
+	_dOMHTMLDocumentSelDir                                           = objc.RegisterName("dir")
+	_dOMHTMLDocumentSelSetDir                                        = objc.RegisterName("setDir:")
+	_dOMHTMLDocumentSelDesignMode                                    = objc.RegisterName("designMode")
+	_dOMHTMLDocumentSelSetDesignMode                                 = objc.RegisterName("setDesignMode:")
+	_dOMHTMLDocumentSelCompatMode                                    = objc.RegisterName("compatMode")
+	_dOMHTMLDocumentSelBgColor                                       = objc.RegisterName("bgColor")
+	_dOMHTMLDocumentSelSetBgColor                                    = objc.RegisterName("setBgColor:")
+	_dOMHTMLDocumentSelFgColor                                       = objc.RegisterName("fgColor")
+	_dOMHTMLDocumentSelSetFgColor                                    = objc.RegisterName("setFgColor:")
+	_dOMHTMLDocumentSelAlinkColor                                    = objc.RegisterName("alinkColor")
+	_dOMHTMLDocumentSelSetAlinkColor                                 = objc.RegisterName("setAlinkColor:")
+	_dOMHTMLDocumentSelLinkColor                                     = objc.RegisterName("linkColor")
+	_dOMHTMLDocumentSelSetLinkColor                                  = objc.RegisterName("setLinkColor:")
+	_dOMHTMLDocumentSelVlinkColor                                    = objc.RegisterName("vlinkColor")
+	_dOMHTMLDocumentSelSetVlinkColor                                 = objc.RegisterName("setVlinkColor:")
 	_dOMHTMLDocumentSelCreateDocumentFragmentWithMarkupStringBaseURL = objc.RegisterName("createDocumentFragmentWithMarkupString:baseURL:")
-	_dOMHTMLDocumentSelCreateDocumentFragmentWithText = objc.RegisterName("createDocumentFragmentWithText:")
+	_dOMHTMLDocumentSelCreateDocumentFragmentWithText                = objc.RegisterName("createDocumentFragmentWithText:")
 )
 
 func DOMHTMLDocumentFromID(id objc.ID) *DOMHTMLDocument {
@@ -88,19 +88,25 @@ func (o *DOMHTMLDocument) ReleaseEvents() {
 
 func (o *DOMHTMLDocument) Embeds() *DOMHTMLCollection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLDocumentSelEmbeds)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMHTMLCollectionFromID(_ret)
 }
 
 func (o *DOMHTMLDocument) Plugins() *DOMHTMLCollection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLDocumentSelPlugins)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMHTMLCollectionFromID(_ret)
 }
 
 func (o *DOMHTMLDocument) Scripts() *DOMHTMLCollection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLDocumentSelScripts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMHTMLCollectionFromID(_ret)
 }
 
@@ -116,7 +122,9 @@ func (o *DOMHTMLDocument) Height() int {
 
 func (o *DOMHTMLDocument) Dir() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLDocumentSelDir)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -126,7 +134,9 @@ func (o *DOMHTMLDocument) SetDir(dir *foundation.NSString) {
 
 func (o *DOMHTMLDocument) DesignMode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLDocumentSelDesignMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -136,13 +146,17 @@ func (o *DOMHTMLDocument) SetDesignMode(designMode *foundation.NSString) {
 
 func (o *DOMHTMLDocument) CompatMode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLDocumentSelCompatMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLDocument) BgColor() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLDocumentSelBgColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -152,7 +166,9 @@ func (o *DOMHTMLDocument) SetBgColor(bgColor *foundation.NSString) {
 
 func (o *DOMHTMLDocument) FgColor() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLDocumentSelFgColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -162,7 +178,9 @@ func (o *DOMHTMLDocument) SetFgColor(fgColor *foundation.NSString) {
 
 func (o *DOMHTMLDocument) AlinkColor() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLDocumentSelAlinkColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -172,7 +190,9 @@ func (o *DOMHTMLDocument) SetAlinkColor(alinkColor *foundation.NSString) {
 
 func (o *DOMHTMLDocument) LinkColor() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLDocumentSelLinkColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -182,7 +202,9 @@ func (o *DOMHTMLDocument) SetLinkColor(linkColor *foundation.NSString) {
 
 func (o *DOMHTMLDocument) VlinkColor() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLDocumentSelVlinkColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -192,13 +214,16 @@ func (o *DOMHTMLDocument) SetVlinkColor(vlinkColor *foundation.NSString) {
 
 func (o *DOMHTMLDocument) CreateDocumentFragmentWithMarkupStringBaseURL(markupString *foundation.NSString, baseURL *foundation.NSURL) *DOMDocumentFragment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLDocumentSelCreateDocumentFragmentWithMarkupStringBaseURL, markupString.Ptr(), baseURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMDocumentFragmentFromID(_ret)
 }
 
 func (o *DOMHTMLDocument) CreateDocumentFragmentWithText(text *foundation.NSString) *DOMDocumentFragment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLDocumentSelCreateDocumentFragmentWithText, text.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMDocumentFragmentFromID(_ret)
 }
-

@@ -18,10 +18,10 @@ type AVMetadataItemValueRequest struct {
 }
 
 var (
-	_clsAVMetadataItemValueRequest = _objcClass("AVMetadataItemValueRequest")
+	_clsAVMetadataItemValueRequest                 = _objcClass("AVMetadataItemValueRequest")
 	_aVMetadataItemValueRequestSelRespondWithValue = objc.RegisterName("respondWithValue:")
 	_aVMetadataItemValueRequestSelRespondWithError = objc.RegisterName("respondWithError:")
-	_aVMetadataItemValueRequestSelMetadataItem = objc.RegisterName("metadataItem")
+	_aVMetadataItemValueRequestSelMetadataItem     = objc.RegisterName("metadataItem")
 )
 
 func AVMetadataItemValueRequestFromID(id objc.ID) *AVMetadataItemValueRequest {
@@ -46,7 +46,8 @@ func (o *AVMetadataItemValueRequest) RespondWithError(error_ unsafe.Pointer) {
 
 func (o *AVMetadataItemValueRequest) MetadataItem() *AVMetadataItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetadataItemValueRequestSelMetadataItem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMetadataItemFromID(_ret)
 }
-

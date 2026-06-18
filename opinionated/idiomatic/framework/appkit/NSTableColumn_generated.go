@@ -342,4 +342,3 @@ type TableColumnable interface {
 }
 
 var _ TableColumnable = (*TableColumn)(nil)
-

@@ -15,7 +15,9 @@ type ChangeHistoryDropEverythingEvent struct {
 }
 
 // Unwrap returns the underlying [raw.CNChangeHistoryDropEverythingEvent].
-func (x *ChangeHistoryDropEverythingEvent) Unwrap() *raw.CNChangeHistoryDropEverythingEvent { return x.inner }
+func (x *ChangeHistoryDropEverythingEvent) Unwrap() *raw.CNChangeHistoryDropEverythingEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -35,7 +37,9 @@ func NewChangeHistoryDropEverythingEvent() *ChangeHistoryDropEverythingEvent {
 	return &ChangeHistoryDropEverythingEvent{inner: raw.CNChangeHistoryDropEverythingEventFromID(_id)}
 }
 
-func (x *ChangeHistoryDropEverythingEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent { return &x.inner.CNChangeHistoryEvent }
+func (x *ChangeHistoryDropEverythingEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent {
+	return &x.inner.CNChangeHistoryEvent
+}
 
 // ChangeHistoryDropEverythingEventable is the interface implemented by [ChangeHistoryDropEverythingEvent], for mocking and DI.
 type ChangeHistoryDropEverythingEventable interface {
@@ -43,4 +47,3 @@ type ChangeHistoryDropEverythingEventable interface {
 }
 
 var _ ChangeHistoryDropEverythingEventable = (*ChangeHistoryDropEverythingEvent)(nil)
-

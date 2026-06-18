@@ -16,13 +16,16 @@ func MCErrorDomain() uintptr {
 
 func KMCSessionMaximumNumberOfPeers() uint {
 	ptr, _ := purego.Dlsym(_multipeerconnectivityLib, "kMCSessionMaximumNumberOfPeers")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*uint)(unsafe.Pointer(ptr))
 }
 
 func KMCSessionMinimumNumberOfPeers() uint {
 	ptr, _ := purego.Dlsym(_multipeerconnectivityLib, "kMCSessionMinimumNumberOfPeers")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*uint)(unsafe.Pointer(ptr))
 }
-

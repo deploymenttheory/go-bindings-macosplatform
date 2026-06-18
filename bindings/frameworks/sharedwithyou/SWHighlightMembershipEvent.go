@@ -16,9 +16,9 @@ type SWHighlightMembershipEvent struct {
 }
 
 var (
-	_clsSWHighlightMembershipEvent = _objcClass("SWHighlightMembershipEvent")
+	_clsSWHighlightMembershipEvent                         = _objcClass("SWHighlightMembershipEvent")
 	_sWHighlightMembershipEventSelInitWithHighlightTrigger = objc.RegisterName("initWithHighlight:trigger:")
-	_sWHighlightMembershipEventSelMembershipEventTrigger = objc.RegisterName("membershipEventTrigger")
+	_sWHighlightMembershipEventSelMembershipEventTrigger   = objc.RegisterName("membershipEventTrigger")
 )
 
 func SWHighlightMembershipEventFromID(id objc.ID) *SWHighlightMembershipEvent {
@@ -34,7 +34,9 @@ func SWHighlightMembershipEventFromID(id objc.ID) *SWHighlightMembershipEvent {
 // Initializes a highlight membership event object to represent changes to a highlight membership. @param highlight The object on which the event occurred. @param trigger The trigger membership event for the highlight.
 func (o *SWHighlightMembershipEvent) InitWithHighlightTrigger(highlight *SWHighlight, trigger SWHighlightMembershipEventTrigger) *SWHighlightMembershipEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWHighlightMembershipEventSelInitWithHighlightTrigger, highlight.Ptr(), trigger)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SWHighlightMembershipEventFromID(_ret)
 }
 
@@ -43,4 +45,3 @@ func (o *SWHighlightMembershipEvent) MembershipEventTrigger() SWHighlightMembers
 	_ret := objc.Send[SWHighlightMembershipEventTrigger](o.Ptr(), _sWHighlightMembershipEventSelMembershipEventTrigger)
 	return _ret
 }
-

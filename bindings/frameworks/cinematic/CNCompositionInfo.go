@@ -20,7 +20,7 @@ type CNCompositionInfo struct {
 }
 
 var (
-	_clsCNCompositionInfo = _objcClass("CNCompositionInfo")
+	_clsCNCompositionInfo                                               = _objcClass("CNCompositionInfo")
 	_cNCompositionInfoSelInsertTimeRangeOfCinematicAssetInfoAtTimeError = objc.RegisterName("insertTimeRange:ofCinematicAssetInfo:atTime:error:")
 )
 
@@ -43,4 +43,3 @@ func (o *CNCompositionInfo) InsertTimeRangeOfCinematicAssetInfoAtTimeError(timeR
 	}
 	return _ret, nil
 }
-

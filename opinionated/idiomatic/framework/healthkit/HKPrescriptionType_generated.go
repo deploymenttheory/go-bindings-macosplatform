@@ -37,7 +37,9 @@ func NewPrescriptionType() *PrescriptionType {
 
 func (x *PrescriptionType) asSampleType() *raw.HKSampleType { return &x.inner.HKSampleType }
 
-func (x *PrescriptionType) asObjectType() *raw.HKObjectType { return &x.inner.HKSampleType.HKObjectType }
+func (x *PrescriptionType) asObjectType() *raw.HKObjectType {
+	return &x.inner.HKSampleType.HKObjectType
+}
 
 // PrescriptionTypeable is the interface implemented by [PrescriptionType], for mocking and DI.
 type PrescriptionTypeable interface {
@@ -45,4 +47,3 @@ type PrescriptionTypeable interface {
 }
 
 var _ PrescriptionTypeable = (*PrescriptionType)(nil)
-

@@ -99,7 +99,9 @@ func (x *PlayerItem) WithTextStyleRules(items ...*raw.AVTextStyleRule) *PlayerIt
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.AVTextStyleRule](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -199,7 +201,9 @@ func (x *PlayerItem) WithPreferredCustomMediaSelectionSchemes(items ...*raw.AVCu
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.AVCustomMediaSelectionScheme](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -988,4 +992,3 @@ type PlayerItemable interface {
 }
 
 var _ PlayerItemable = (*PlayerItem)(nil)
-

@@ -16,16 +16,16 @@ type MLFeatureDescription struct {
 }
 
 var (
-	_clsMLFeatureDescription = _objcClass("MLFeatureDescription")
-	_mLFeatureDescriptionSelIsAllowedValue = objc.RegisterName("isAllowedValue:")
-	_mLFeatureDescriptionSelName = objc.RegisterName("name")
-	_mLFeatureDescriptionSelType = objc.RegisterName("type")
-	_mLFeatureDescriptionSelIsOptional = objc.RegisterName("isOptional")
+	_clsMLFeatureDescription                     = _objcClass("MLFeatureDescription")
+	_mLFeatureDescriptionSelIsAllowedValue       = objc.RegisterName("isAllowedValue:")
+	_mLFeatureDescriptionSelName                 = objc.RegisterName("name")
+	_mLFeatureDescriptionSelType                 = objc.RegisterName("type")
+	_mLFeatureDescriptionSelIsOptional           = objc.RegisterName("isOptional")
 	_mLFeatureDescriptionSelMultiArrayConstraint = objc.RegisterName("multiArrayConstraint")
-	_mLFeatureDescriptionSelImageConstraint = objc.RegisterName("imageConstraint")
+	_mLFeatureDescriptionSelImageConstraint      = objc.RegisterName("imageConstraint")
 	_mLFeatureDescriptionSelDictionaryConstraint = objc.RegisterName("dictionaryConstraint")
-	_mLFeatureDescriptionSelSequenceConstraint = objc.RegisterName("sequenceConstraint")
-	_mLFeatureDescriptionSelStateConstraint = objc.RegisterName("stateConstraint")
+	_mLFeatureDescriptionSelSequenceConstraint   = objc.RegisterName("sequenceConstraint")
+	_mLFeatureDescriptionSelStateConstraint      = objc.RegisterName("stateConstraint")
 )
 
 func MLFeatureDescriptionFromID(id objc.ID) *MLFeatureDescription {
@@ -47,7 +47,9 @@ func (o *MLFeatureDescription) IsAllowedValue(value *MLFeatureValue) bool {
 // Name of feature
 func (o *MLFeatureDescription) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLFeatureDescriptionSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -66,35 +68,44 @@ func (o *MLFeatureDescription) IsOptional() bool {
 // Constraint when type == MLFeatureTypeMultiArray, nil otherwise
 func (o *MLFeatureDescription) MultiArrayConstraint() *MLMultiArrayConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLFeatureDescriptionSelMultiArrayConstraint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLMultiArrayConstraintFromID(_ret)
 }
 
 // Constraint when type == MLFeatureTypeImage, nil otherwise
 func (o *MLFeatureDescription) ImageConstraint() *MLImageConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLFeatureDescriptionSelImageConstraint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLImageConstraintFromID(_ret)
 }
 
 // Constraint when type == MLFeatureTypeDictionary, nil otherwise
 func (o *MLFeatureDescription) DictionaryConstraint() *MLDictionaryConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLFeatureDescriptionSelDictionaryConstraint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLDictionaryConstraintFromID(_ret)
 }
 
 // Constraint when type == MLFeatureTypeSequence, nil otherwise
 func (o *MLFeatureDescription) SequenceConstraint() *MLSequenceConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLFeatureDescriptionSelSequenceConstraint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLSequenceConstraintFromID(_ret)
 }
 
 // The state feature value constraint. The property has a value when `.type == MLFeatureTypeState`.
 func (o *MLFeatureDescription) StateConstraint() *MLStateConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLFeatureDescriptionSelStateConstraint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLStateConstraintFromID(_ret)
 }
-

@@ -22,28 +22,28 @@ type IOBluetoothDeviceSelectorController struct {
 }
 
 var (
-	_clsIOBluetoothDeviceSelectorController = _objcClass("IOBluetoothDeviceSelectorController")
-	_iOBluetoothDeviceSelectorControllerSelDeviceSelector = objc.RegisterName("deviceSelector")
-	_iOBluetoothDeviceSelectorControllerSelRunModal = objc.RegisterName("runModal")
+	_clsIOBluetoothDeviceSelectorController                                                               = _objcClass("IOBluetoothDeviceSelectorController")
+	_iOBluetoothDeviceSelectorControllerSelDeviceSelector                                                 = objc.RegisterName("deviceSelector")
+	_iOBluetoothDeviceSelectorControllerSelRunModal                                                       = objc.RegisterName("runModal")
 	_iOBluetoothDeviceSelectorControllerSelBeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo = objc.RegisterName("beginSheetModalForWindow:modalDelegate:didEndSelector:contextInfo:")
-	_iOBluetoothDeviceSelectorControllerSelGetResults = objc.RegisterName("getResults")
-	_iOBluetoothDeviceSelectorControllerSelSetOptions = objc.RegisterName("setOptions:")
-	_iOBluetoothDeviceSelectorControllerSelGetOptions = objc.RegisterName("getOptions")
-	_iOBluetoothDeviceSelectorControllerSelSetSearchAttributes = objc.RegisterName("setSearchAttributes:")
-	_iOBluetoothDeviceSelectorControllerSelGetSearchAttributes = objc.RegisterName("getSearchAttributes")
-	_iOBluetoothDeviceSelectorControllerSelAddAllowedUUID = objc.RegisterName("addAllowedUUID:")
-	_iOBluetoothDeviceSelectorControllerSelAddAllowedUUIDArray = objc.RegisterName("addAllowedUUIDArray:")
-	_iOBluetoothDeviceSelectorControllerSelClearAllowedUUIDs = objc.RegisterName("clearAllowedUUIDs")
-	_iOBluetoothDeviceSelectorControllerSelSetTitle = objc.RegisterName("setTitle:")
-	_iOBluetoothDeviceSelectorControllerSelGetTitle = objc.RegisterName("getTitle")
-	_iOBluetoothDeviceSelectorControllerSelSetHeader = objc.RegisterName("setHeader:")
-	_iOBluetoothDeviceSelectorControllerSelGetHeader = objc.RegisterName("getHeader")
-	_iOBluetoothDeviceSelectorControllerSelSetDescriptionText = objc.RegisterName("setDescriptionText:")
-	_iOBluetoothDeviceSelectorControllerSelGetDescriptionText = objc.RegisterName("getDescriptionText")
-	_iOBluetoothDeviceSelectorControllerSelSetPrompt = objc.RegisterName("setPrompt:")
-	_iOBluetoothDeviceSelectorControllerSelGetPrompt = objc.RegisterName("getPrompt")
-	_iOBluetoothDeviceSelectorControllerSelSetCancel = objc.RegisterName("setCancel:")
-	_iOBluetoothDeviceSelectorControllerSelGetCancel = objc.RegisterName("getCancel")
+	_iOBluetoothDeviceSelectorControllerSelGetResults                                                     = objc.RegisterName("getResults")
+	_iOBluetoothDeviceSelectorControllerSelSetOptions                                                     = objc.RegisterName("setOptions:")
+	_iOBluetoothDeviceSelectorControllerSelGetOptions                                                     = objc.RegisterName("getOptions")
+	_iOBluetoothDeviceSelectorControllerSelSetSearchAttributes                                            = objc.RegisterName("setSearchAttributes:")
+	_iOBluetoothDeviceSelectorControllerSelGetSearchAttributes                                            = objc.RegisterName("getSearchAttributes")
+	_iOBluetoothDeviceSelectorControllerSelAddAllowedUUID                                                 = objc.RegisterName("addAllowedUUID:")
+	_iOBluetoothDeviceSelectorControllerSelAddAllowedUUIDArray                                            = objc.RegisterName("addAllowedUUIDArray:")
+	_iOBluetoothDeviceSelectorControllerSelClearAllowedUUIDs                                              = objc.RegisterName("clearAllowedUUIDs")
+	_iOBluetoothDeviceSelectorControllerSelSetTitle                                                       = objc.RegisterName("setTitle:")
+	_iOBluetoothDeviceSelectorControllerSelGetTitle                                                       = objc.RegisterName("getTitle")
+	_iOBluetoothDeviceSelectorControllerSelSetHeader                                                      = objc.RegisterName("setHeader:")
+	_iOBluetoothDeviceSelectorControllerSelGetHeader                                                      = objc.RegisterName("getHeader")
+	_iOBluetoothDeviceSelectorControllerSelSetDescriptionText                                             = objc.RegisterName("setDescriptionText:")
+	_iOBluetoothDeviceSelectorControllerSelGetDescriptionText                                             = objc.RegisterName("getDescriptionText")
+	_iOBluetoothDeviceSelectorControllerSelSetPrompt                                                      = objc.RegisterName("setPrompt:")
+	_iOBluetoothDeviceSelectorControllerSelGetPrompt                                                      = objc.RegisterName("getPrompt")
+	_iOBluetoothDeviceSelectorControllerSelSetCancel                                                      = objc.RegisterName("setCancel:")
+	_iOBluetoothDeviceSelectorControllerSelGetCancel                                                      = objc.RegisterName("getCancel")
 )
 
 func IOBluetoothDeviceSelectorControllerFromID(id objc.ID) *IOBluetoothDeviceSelectorController {
@@ -59,7 +59,9 @@ func IOBluetoothDeviceSelectorControllerFromID(id objc.ID) *IOBluetoothDeviceSel
 // @method	deviceSelector @abstract @discussion	Method call to instantiate a new IOBluetoothDeviceSelectorController object. @result Success - a new instance of the device selector Controller Failure	- nil
 func IOBluetoothDeviceSelectorControllerDeviceSelector() *IOBluetoothDeviceSelectorController {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothDeviceSelectorController), _iOBluetoothDeviceSelectorControllerSelDeviceSelector)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothDeviceSelectorControllerFromID(_ret)
 }
 
@@ -114,7 +116,9 @@ func (o *IOBluetoothDeviceSelectorController) SetTitle(windowTitle *foundation.N
 
 func (o *IOBluetoothDeviceSelectorController) GetTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelectorControllerSelGetTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -124,7 +128,9 @@ func (o *IOBluetoothDeviceSelectorController) SetHeader(headerText *foundation.N
 
 func (o *IOBluetoothDeviceSelectorController) GetHeader() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelectorControllerSelGetHeader)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -134,7 +140,9 @@ func (o *IOBluetoothDeviceSelectorController) SetDescriptionText(descriptionText
 
 func (o *IOBluetoothDeviceSelectorController) GetDescriptionText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelectorControllerSelGetDescriptionText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -144,7 +152,9 @@ func (o *IOBluetoothDeviceSelectorController) SetPrompt(prompt *foundation.NSStr
 
 func (o *IOBluetoothDeviceSelectorController) GetPrompt() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelectorControllerSelGetPrompt)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -154,7 +164,8 @@ func (o *IOBluetoothDeviceSelectorController) SetCancel(prompt *foundation.NSStr
 
 func (o *IOBluetoothDeviceSelectorController) GetCancel() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelectorControllerSelGetCancel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

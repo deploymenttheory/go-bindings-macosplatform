@@ -18,20 +18,20 @@ type ITLibAlbum struct {
 }
 
 var (
-	_clsITLibAlbum = _objcClass("ITLibAlbum")
-	_iTLibAlbumSelTitle = objc.RegisterName("title")
-	_iTLibAlbumSelSortTitle = objc.RegisterName("sortTitle")
-	_iTLibAlbumSelIsCompilation = objc.RegisterName("isCompilation")
-	_iTLibAlbumSelArtist = objc.RegisterName("artist")
-	_iTLibAlbumSelDiscCount = objc.RegisterName("discCount")
-	_iTLibAlbumSelDiscNumber = objc.RegisterName("discNumber")
-	_iTLibAlbumSelRating = objc.RegisterName("rating")
+	_clsITLibAlbum                 = _objcClass("ITLibAlbum")
+	_iTLibAlbumSelTitle            = objc.RegisterName("title")
+	_iTLibAlbumSelSortTitle        = objc.RegisterName("sortTitle")
+	_iTLibAlbumSelIsCompilation    = objc.RegisterName("isCompilation")
+	_iTLibAlbumSelArtist           = objc.RegisterName("artist")
+	_iTLibAlbumSelDiscCount        = objc.RegisterName("discCount")
+	_iTLibAlbumSelDiscNumber       = objc.RegisterName("discNumber")
+	_iTLibAlbumSelRating           = objc.RegisterName("rating")
 	_iTLibAlbumSelIsRatingComputed = objc.RegisterName("isRatingComputed")
-	_iTLibAlbumSelIsGapless = objc.RegisterName("isGapless")
-	_iTLibAlbumSelTrackCount = objc.RegisterName("trackCount")
-	_iTLibAlbumSelAlbumArtist = objc.RegisterName("albumArtist")
-	_iTLibAlbumSelSortAlbumArtist = objc.RegisterName("sortAlbumArtist")
-	_iTLibAlbumSelPersistentID = objc.RegisterName("persistentID")
+	_iTLibAlbumSelIsGapless        = objc.RegisterName("isGapless")
+	_iTLibAlbumSelTrackCount       = objc.RegisterName("trackCount")
+	_iTLibAlbumSelAlbumArtist      = objc.RegisterName("albumArtist")
+	_iTLibAlbumSelSortAlbumArtist  = objc.RegisterName("sortAlbumArtist")
+	_iTLibAlbumSelPersistentID     = objc.RegisterName("persistentID")
 )
 
 func ITLibAlbumFromID(id objc.ID) *ITLibAlbum {
@@ -47,14 +47,18 @@ func ITLibAlbumFromID(id objc.ID) *ITLibAlbum {
 // @abstract The name of this album.
 func (o *ITLibAlbum) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibAlbumSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract The name of this that should be used for sorting purposes.
 func (o *ITLibAlbum) SortTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibAlbumSelSortTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -109,21 +113,26 @@ func (o *ITLibAlbum) TrackCount() uint {
 // @abstract The artist associated with this album.
 func (o *ITLibAlbum) AlbumArtist() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibAlbumSelAlbumArtist)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract The artist associated with this album. This field should be used when sorting.
 func (o *ITLibAlbum) SortAlbumArtist() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibAlbumSelSortAlbumArtist)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract The unique identifier of this album.
 func (o *ITLibAlbum) PersistentID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibAlbumSelPersistentID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
-

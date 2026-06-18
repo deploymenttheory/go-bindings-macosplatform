@@ -16,29 +16,29 @@ type AVSpeechUtterance struct {
 }
 
 var (
-	_clsAVSpeechUtterance = _objcClass("AVSpeechUtterance")
-	_aVSpeechUtteranceSelSpeechUtteranceWithString = objc.RegisterName("speechUtteranceWithString:")
-	_aVSpeechUtteranceSelSpeechUtteranceWithAttributedString = objc.RegisterName("speechUtteranceWithAttributedString:")
+	_clsAVSpeechUtterance                                      = _objcClass("AVSpeechUtterance")
+	_aVSpeechUtteranceSelSpeechUtteranceWithString             = objc.RegisterName("speechUtteranceWithString:")
+	_aVSpeechUtteranceSelSpeechUtteranceWithAttributedString   = objc.RegisterName("speechUtteranceWithAttributedString:")
 	_aVSpeechUtteranceSelSpeechUtteranceWithSSMLRepresentation = objc.RegisterName("speechUtteranceWithSSMLRepresentation:")
-	_aVSpeechUtteranceSelInitWithString = objc.RegisterName("initWithString:")
-	_aVSpeechUtteranceSelInitWithAttributedString = objc.RegisterName("initWithAttributedString:")
-	_aVSpeechUtteranceSelInitWithSSMLRepresentation = objc.RegisterName("initWithSSMLRepresentation:")
-	_aVSpeechUtteranceSelVoice = objc.RegisterName("voice")
-	_aVSpeechUtteranceSelSetVoice = objc.RegisterName("setVoice:")
-	_aVSpeechUtteranceSelSpeechString = objc.RegisterName("speechString")
-	_aVSpeechUtteranceSelAttributedSpeechString = objc.RegisterName("attributedSpeechString")
-	_aVSpeechUtteranceSelRate = objc.RegisterName("rate")
-	_aVSpeechUtteranceSelSetRate = objc.RegisterName("setRate:")
-	_aVSpeechUtteranceSelPitchMultiplier = objc.RegisterName("pitchMultiplier")
-	_aVSpeechUtteranceSelSetPitchMultiplier = objc.RegisterName("setPitchMultiplier:")
-	_aVSpeechUtteranceSelVolume = objc.RegisterName("volume")
-	_aVSpeechUtteranceSelSetVolume = objc.RegisterName("setVolume:")
-	_aVSpeechUtteranceSelPrefersAssistiveTechnologySettings = objc.RegisterName("prefersAssistiveTechnologySettings")
+	_aVSpeechUtteranceSelInitWithString                        = objc.RegisterName("initWithString:")
+	_aVSpeechUtteranceSelInitWithAttributedString              = objc.RegisterName("initWithAttributedString:")
+	_aVSpeechUtteranceSelInitWithSSMLRepresentation            = objc.RegisterName("initWithSSMLRepresentation:")
+	_aVSpeechUtteranceSelVoice                                 = objc.RegisterName("voice")
+	_aVSpeechUtteranceSelSetVoice                              = objc.RegisterName("setVoice:")
+	_aVSpeechUtteranceSelSpeechString                          = objc.RegisterName("speechString")
+	_aVSpeechUtteranceSelAttributedSpeechString                = objc.RegisterName("attributedSpeechString")
+	_aVSpeechUtteranceSelRate                                  = objc.RegisterName("rate")
+	_aVSpeechUtteranceSelSetRate                               = objc.RegisterName("setRate:")
+	_aVSpeechUtteranceSelPitchMultiplier                       = objc.RegisterName("pitchMultiplier")
+	_aVSpeechUtteranceSelSetPitchMultiplier                    = objc.RegisterName("setPitchMultiplier:")
+	_aVSpeechUtteranceSelVolume                                = objc.RegisterName("volume")
+	_aVSpeechUtteranceSelSetVolume                             = objc.RegisterName("setVolume:")
+	_aVSpeechUtteranceSelPrefersAssistiveTechnologySettings    = objc.RegisterName("prefersAssistiveTechnologySettings")
 	_aVSpeechUtteranceSelSetPrefersAssistiveTechnologySettings = objc.RegisterName("setPrefersAssistiveTechnologySettings:")
-	_aVSpeechUtteranceSelPreUtteranceDelay = objc.RegisterName("preUtteranceDelay")
-	_aVSpeechUtteranceSelSetPreUtteranceDelay = objc.RegisterName("setPreUtteranceDelay:")
-	_aVSpeechUtteranceSelPostUtteranceDelay = objc.RegisterName("postUtteranceDelay")
-	_aVSpeechUtteranceSelSetPostUtteranceDelay = objc.RegisterName("setPostUtteranceDelay:")
+	_aVSpeechUtteranceSelPreUtteranceDelay                     = objc.RegisterName("preUtteranceDelay")
+	_aVSpeechUtteranceSelSetPreUtteranceDelay                  = objc.RegisterName("setPreUtteranceDelay:")
+	_aVSpeechUtteranceSelPostUtteranceDelay                    = objc.RegisterName("postUtteranceDelay")
+	_aVSpeechUtteranceSelSetPostUtteranceDelay                 = objc.RegisterName("setPostUtteranceDelay:")
 )
 
 func AVSpeechUtteranceFromID(id objc.ID) *AVSpeechUtterance {
@@ -53,45 +53,59 @@ func AVSpeechUtteranceFromID(id objc.ID) *AVSpeechUtterance {
 
 func AVSpeechUtteranceSpeechUtteranceWithString(string_ *foundation.NSString) *AVSpeechUtterance {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVSpeechUtterance), _aVSpeechUtteranceSelSpeechUtteranceWithString, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVSpeechUtteranceFromID(_ret)
 }
 
 func AVSpeechUtteranceSpeechUtteranceWithAttributedString(string_ *foundation.NSAttributedString) *AVSpeechUtterance {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVSpeechUtterance), _aVSpeechUtteranceSelSpeechUtteranceWithAttributedString, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVSpeechUtteranceFromID(_ret)
 }
 
 // A speech utterance that expects markup written using the Speech Synthesis Markup Language (SSML) standard. Returns nil if invalid SSML is passed in.
 func AVSpeechUtteranceSpeechUtteranceWithSSMLRepresentation(string_ *foundation.NSString) *AVSpeechUtterance {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVSpeechUtterance), _aVSpeechUtteranceSelSpeechUtteranceWithSSMLRepresentation, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVSpeechUtteranceFromID(_ret)
 }
 
 func (o *AVSpeechUtterance) InitWithString(string_ *foundation.NSString) *AVSpeechUtterance {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechUtteranceSelInitWithString, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVSpeechUtteranceFromID(_ret)
 }
 
 func (o *AVSpeechUtterance) InitWithAttributedString(string_ *foundation.NSAttributedString) *AVSpeechUtterance {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechUtteranceSelInitWithAttributedString, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVSpeechUtteranceFromID(_ret)
 }
 
 // @abstract A speech utterance that expects markup written using the Speech Synthesis Markup Language (SSML)  standard. @discussion Uses SSML markup to add attributes. If using SSML to request voices that fall under certain attributes, a single utterance may be split into multiple parts, each sent to the appropriate synthesizer. If no voice matches the properties, the voice in the @c voice property of the utterance will be used. If no @c voice is specified, the system's default will be used. @c AVSpeechUtterance properties that affect the prosidy of a voice such as @c rate, @c pitchMultiplier, @c pitchMultiplier will not apply to an utterance that uses an SSML representation. Returns nil if invalid SSML is passed in.
 func (o *AVSpeechUtterance) InitWithSSMLRepresentation(string_ *foundation.NSString) *AVSpeechUtterance {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechUtteranceSelInitWithSSMLRepresentation, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVSpeechUtteranceFromID(_ret)
 }
 
 func (o *AVSpeechUtterance) Voice() *AVSpeechSynthesisVoice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechUtteranceSelVoice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVSpeechSynthesisVoiceFromID(_ret)
 }
 
@@ -101,13 +115,17 @@ func (o *AVSpeechUtterance) SetVoice(voice *AVSpeechSynthesisVoice) {
 
 func (o *AVSpeechUtterance) SpeechString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechUtteranceSelSpeechString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *AVSpeechUtterance) AttributedSpeechString() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechUtteranceSelAttributedSpeechString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
@@ -164,4 +182,3 @@ func (o *AVSpeechUtterance) PostUtteranceDelay() float64 {
 func (o *AVSpeechUtterance) SetPostUtteranceDelay(postUtteranceDelay float64) {
 	o.Ptr().Send(_aVSpeechUtteranceSelSetPostUtteranceDelay, postUtteranceDelay)
 }
-

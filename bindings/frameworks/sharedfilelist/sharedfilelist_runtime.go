@@ -14,8 +14,8 @@ import (
 
 var (
 	_sharedfilelistLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce          sync.Once
+	_failedSymbols     = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -48,28 +48,72 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("LSSharedFileListAddObserver", func() { purego.RegisterLibFunc(&_fnLSSharedFileListAddObserver, _sharedfilelistLib, "LSSharedFileListAddObserver") })
-	_register("LSSharedFileListCopyProperty", func() { purego.RegisterLibFunc(&_fnLSSharedFileListCopyProperty, _sharedfilelistLib, "LSSharedFileListCopyProperty") })
-	_register("LSSharedFileListCopySnapshot", func() { purego.RegisterLibFunc(&_fnLSSharedFileListCopySnapshot, _sharedfilelistLib, "LSSharedFileListCopySnapshot") })
-	_register("LSSharedFileListCreate", func() { purego.RegisterLibFunc(&_fnLSSharedFileListCreate, _sharedfilelistLib, "LSSharedFileListCreate") })
-	_register("LSSharedFileListGetSeedValue", func() { purego.RegisterLibFunc(&_fnLSSharedFileListGetSeedValue, _sharedfilelistLib, "LSSharedFileListGetSeedValue") })
-	_register("LSSharedFileListGetTypeID", func() { purego.RegisterLibFunc(&_fnLSSharedFileListGetTypeID, _sharedfilelistLib, "LSSharedFileListGetTypeID") })
-	_register("LSSharedFileListInsertItemFSRef", func() { purego.RegisterLibFunc(&_fnLSSharedFileListInsertItemFSRef, _sharedfilelistLib, "LSSharedFileListInsertItemFSRef") })
-	_register("LSSharedFileListInsertItemURL", func() { purego.RegisterLibFunc(&_fnLSSharedFileListInsertItemURL, _sharedfilelistLib, "LSSharedFileListInsertItemURL") })
-	_register("LSSharedFileListItemCopyDisplayName", func() { purego.RegisterLibFunc(&_fnLSSharedFileListItemCopyDisplayName, _sharedfilelistLib, "LSSharedFileListItemCopyDisplayName") })
-	_register("LSSharedFileListItemCopyIconRef", func() { purego.RegisterLibFunc(&_fnLSSharedFileListItemCopyIconRef, _sharedfilelistLib, "LSSharedFileListItemCopyIconRef") })
-	_register("LSSharedFileListItemCopyProperty", func() { purego.RegisterLibFunc(&_fnLSSharedFileListItemCopyProperty, _sharedfilelistLib, "LSSharedFileListItemCopyProperty") })
-	_register("LSSharedFileListItemCopyResolvedURL", func() { purego.RegisterLibFunc(&_fnLSSharedFileListItemCopyResolvedURL, _sharedfilelistLib, "LSSharedFileListItemCopyResolvedURL") })
-	_register("LSSharedFileListItemGetID", func() { purego.RegisterLibFunc(&_fnLSSharedFileListItemGetID, _sharedfilelistLib, "LSSharedFileListItemGetID") })
-	_register("LSSharedFileListItemGetTypeID", func() { purego.RegisterLibFunc(&_fnLSSharedFileListItemGetTypeID, _sharedfilelistLib, "LSSharedFileListItemGetTypeID") })
-	_register("LSSharedFileListItemMove", func() { purego.RegisterLibFunc(&_fnLSSharedFileListItemMove, _sharedfilelistLib, "LSSharedFileListItemMove") })
-	_register("LSSharedFileListItemRemove", func() { purego.RegisterLibFunc(&_fnLSSharedFileListItemRemove, _sharedfilelistLib, "LSSharedFileListItemRemove") })
-	_register("LSSharedFileListItemResolve", func() { purego.RegisterLibFunc(&_fnLSSharedFileListItemResolve, _sharedfilelistLib, "LSSharedFileListItemResolve") })
-	_register("LSSharedFileListItemSetProperty", func() { purego.RegisterLibFunc(&_fnLSSharedFileListItemSetProperty, _sharedfilelistLib, "LSSharedFileListItemSetProperty") })
-	_register("LSSharedFileListRemoveAllItems", func() { purego.RegisterLibFunc(&_fnLSSharedFileListRemoveAllItems, _sharedfilelistLib, "LSSharedFileListRemoveAllItems") })
-	_register("LSSharedFileListRemoveObserver", func() { purego.RegisterLibFunc(&_fnLSSharedFileListRemoveObserver, _sharedfilelistLib, "LSSharedFileListRemoveObserver") })
-	_register("LSSharedFileListSetAuthorization", func() { purego.RegisterLibFunc(&_fnLSSharedFileListSetAuthorization, _sharedfilelistLib, "LSSharedFileListSetAuthorization") })
-	_register("LSSharedFileListSetProperty", func() { purego.RegisterLibFunc(&_fnLSSharedFileListSetProperty, _sharedfilelistLib, "LSSharedFileListSetProperty") })
+	_register("LSSharedFileListAddObserver", func() {
+		purego.RegisterLibFunc(&_fnLSSharedFileListAddObserver, _sharedfilelistLib, "LSSharedFileListAddObserver")
+	})
+	_register("LSSharedFileListCopyProperty", func() {
+		purego.RegisterLibFunc(&_fnLSSharedFileListCopyProperty, _sharedfilelistLib, "LSSharedFileListCopyProperty")
+	})
+	_register("LSSharedFileListCopySnapshot", func() {
+		purego.RegisterLibFunc(&_fnLSSharedFileListCopySnapshot, _sharedfilelistLib, "LSSharedFileListCopySnapshot")
+	})
+	_register("LSSharedFileListCreate", func() {
+		purego.RegisterLibFunc(&_fnLSSharedFileListCreate, _sharedfilelistLib, "LSSharedFileListCreate")
+	})
+	_register("LSSharedFileListGetSeedValue", func() {
+		purego.RegisterLibFunc(&_fnLSSharedFileListGetSeedValue, _sharedfilelistLib, "LSSharedFileListGetSeedValue")
+	})
+	_register("LSSharedFileListGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnLSSharedFileListGetTypeID, _sharedfilelistLib, "LSSharedFileListGetTypeID")
+	})
+	_register("LSSharedFileListInsertItemFSRef", func() {
+		purego.RegisterLibFunc(&_fnLSSharedFileListInsertItemFSRef, _sharedfilelistLib, "LSSharedFileListInsertItemFSRef")
+	})
+	_register("LSSharedFileListInsertItemURL", func() {
+		purego.RegisterLibFunc(&_fnLSSharedFileListInsertItemURL, _sharedfilelistLib, "LSSharedFileListInsertItemURL")
+	})
+	_register("LSSharedFileListItemCopyDisplayName", func() {
+		purego.RegisterLibFunc(&_fnLSSharedFileListItemCopyDisplayName, _sharedfilelistLib, "LSSharedFileListItemCopyDisplayName")
+	})
+	_register("LSSharedFileListItemCopyIconRef", func() {
+		purego.RegisterLibFunc(&_fnLSSharedFileListItemCopyIconRef, _sharedfilelistLib, "LSSharedFileListItemCopyIconRef")
+	})
+	_register("LSSharedFileListItemCopyProperty", func() {
+		purego.RegisterLibFunc(&_fnLSSharedFileListItemCopyProperty, _sharedfilelistLib, "LSSharedFileListItemCopyProperty")
+	})
+	_register("LSSharedFileListItemCopyResolvedURL", func() {
+		purego.RegisterLibFunc(&_fnLSSharedFileListItemCopyResolvedURL, _sharedfilelistLib, "LSSharedFileListItemCopyResolvedURL")
+	})
+	_register("LSSharedFileListItemGetID", func() {
+		purego.RegisterLibFunc(&_fnLSSharedFileListItemGetID, _sharedfilelistLib, "LSSharedFileListItemGetID")
+	})
+	_register("LSSharedFileListItemGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnLSSharedFileListItemGetTypeID, _sharedfilelistLib, "LSSharedFileListItemGetTypeID")
+	})
+	_register("LSSharedFileListItemMove", func() {
+		purego.RegisterLibFunc(&_fnLSSharedFileListItemMove, _sharedfilelistLib, "LSSharedFileListItemMove")
+	})
+	_register("LSSharedFileListItemRemove", func() {
+		purego.RegisterLibFunc(&_fnLSSharedFileListItemRemove, _sharedfilelistLib, "LSSharedFileListItemRemove")
+	})
+	_register("LSSharedFileListItemResolve", func() {
+		purego.RegisterLibFunc(&_fnLSSharedFileListItemResolve, _sharedfilelistLib, "LSSharedFileListItemResolve")
+	})
+	_register("LSSharedFileListItemSetProperty", func() {
+		purego.RegisterLibFunc(&_fnLSSharedFileListItemSetProperty, _sharedfilelistLib, "LSSharedFileListItemSetProperty")
+	})
+	_register("LSSharedFileListRemoveAllItems", func() {
+		purego.RegisterLibFunc(&_fnLSSharedFileListRemoveAllItems, _sharedfilelistLib, "LSSharedFileListRemoveAllItems")
+	})
+	_register("LSSharedFileListRemoveObserver", func() {
+		purego.RegisterLibFunc(&_fnLSSharedFileListRemoveObserver, _sharedfilelistLib, "LSSharedFileListRemoveObserver")
+	})
+	_register("LSSharedFileListSetAuthorization", func() {
+		purego.RegisterLibFunc(&_fnLSSharedFileListSetAuthorization, _sharedfilelistLib, "LSSharedFileListSetAuthorization")
+	})
+	_register("LSSharedFileListSetProperty", func() {
+		purego.RegisterLibFunc(&_fnLSSharedFileListSetProperty, _sharedfilelistLib, "LSSharedFileListSetProperty")
+	})
 }
 
 func init() {

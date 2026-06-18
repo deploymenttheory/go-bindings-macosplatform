@@ -15,19 +15,19 @@ type CSUserQueryContext struct {
 }
 
 var (
-	_clsCSUserQueryContext = _objcClass("CSUserQueryContext")
-	_cSUserQueryContextSelUserQueryContext = objc.RegisterName("userQueryContext")
+	_clsCSUserQueryContext                                      = _objcClass("CSUserQueryContext")
+	_cSUserQueryContextSelUserQueryContext                      = objc.RegisterName("userQueryContext")
 	_cSUserQueryContextSelUserQueryContextWithCurrentSuggestion = objc.RegisterName("userQueryContextWithCurrentSuggestion:")
-	_cSUserQueryContextSelEnableRankedResults = objc.RegisterName("enableRankedResults")
-	_cSUserQueryContextSelSetEnableRankedResults = objc.RegisterName("setEnableRankedResults:")
-	_cSUserQueryContextSelDisableSemanticSearch = objc.RegisterName("disableSemanticSearch")
-	_cSUserQueryContextSelSetDisableSemanticSearch = objc.RegisterName("setDisableSemanticSearch:")
-	_cSUserQueryContextSelMaxResultCount = objc.RegisterName("maxResultCount")
-	_cSUserQueryContextSelSetMaxResultCount = objc.RegisterName("setMaxResultCount:")
-	_cSUserQueryContextSelMaxSuggestionCount = objc.RegisterName("maxSuggestionCount")
-	_cSUserQueryContextSelSetMaxSuggestionCount = objc.RegisterName("setMaxSuggestionCount:")
-	_cSUserQueryContextSelMaxRankedResultCount = objc.RegisterName("maxRankedResultCount")
-	_cSUserQueryContextSelSetMaxRankedResultCount = objc.RegisterName("setMaxRankedResultCount:")
+	_cSUserQueryContextSelEnableRankedResults                   = objc.RegisterName("enableRankedResults")
+	_cSUserQueryContextSelSetEnableRankedResults                = objc.RegisterName("setEnableRankedResults:")
+	_cSUserQueryContextSelDisableSemanticSearch                 = objc.RegisterName("disableSemanticSearch")
+	_cSUserQueryContextSelSetDisableSemanticSearch              = objc.RegisterName("setDisableSemanticSearch:")
+	_cSUserQueryContextSelMaxResultCount                        = objc.RegisterName("maxResultCount")
+	_cSUserQueryContextSelSetMaxResultCount                     = objc.RegisterName("setMaxResultCount:")
+	_cSUserQueryContextSelMaxSuggestionCount                    = objc.RegisterName("maxSuggestionCount")
+	_cSUserQueryContextSelSetMaxSuggestionCount                 = objc.RegisterName("setMaxSuggestionCount:")
+	_cSUserQueryContextSelMaxRankedResultCount                  = objc.RegisterName("maxRankedResultCount")
+	_cSUserQueryContextSelSetMaxRankedResultCount               = objc.RegisterName("setMaxRankedResultCount:")
 )
 
 func CSUserQueryContextFromID(id objc.ID) *CSUserQueryContext {
@@ -42,13 +42,17 @@ func CSUserQueryContextFromID(id objc.ID) *CSUserQueryContext {
 
 func CSUserQueryContextUserQueryContext() *CSUserQueryContext {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCSUserQueryContext), _cSUserQueryContextSelUserQueryContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CSUserQueryContextFromID(_ret)
 }
 
 func CSUserQueryContextUserQueryContextWithCurrentSuggestion(currentSuggestion *CSSuggestion) *CSUserQueryContext {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCSUserQueryContext), _cSUserQueryContextSelUserQueryContextWithCurrentSuggestion, currentSuggestion.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CSUserQueryContextFromID(_ret)
 }
 
@@ -96,4 +100,3 @@ func (o *CSUserQueryContext) MaxRankedResultCount() int {
 func (o *CSUserQueryContext) SetMaxRankedResultCount(maxRankedResultCount int) {
 	o.Ptr().Send(_cSUserQueryContextSelSetMaxRankedResultCount, maxRankedResultCount)
 }
-

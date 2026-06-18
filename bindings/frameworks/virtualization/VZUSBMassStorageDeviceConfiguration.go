@@ -15,7 +15,7 @@ type VZUSBMassStorageDeviceConfiguration struct {
 }
 
 var (
-	_clsVZUSBMassStorageDeviceConfiguration = _objcClass("VZUSBMassStorageDeviceConfiguration")
+	_clsVZUSBMassStorageDeviceConfiguration                   = _objcClass("VZUSBMassStorageDeviceConfiguration")
 	_vZUSBMassStorageDeviceConfigurationSelInitWithAttachment = objc.RegisterName("initWithAttachment:")
 )
 
@@ -32,7 +32,8 @@ func VZUSBMassStorageDeviceConfigurationFromID(id objc.ID) *VZUSBMassStorageDevi
 // @abstract Initialize a VZUSBMassStorageDeviceConfiguration with a device attachment. @param attachment The storage device attachment. This defines how the virtualized device operates on the host side. @see VZDiskImageStorageDeviceAttachment
 func (o *VZUSBMassStorageDeviceConfiguration) InitWithAttachment(attachment *VZStorageDeviceAttachment) *VZUSBMassStorageDeviceConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZUSBMassStorageDeviceConfigurationSelInitWithAttachment, attachment.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZUSBMassStorageDeviceConfigurationFromID(_ret)
 }
-

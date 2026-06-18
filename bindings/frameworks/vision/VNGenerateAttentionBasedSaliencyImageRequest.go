@@ -25,4 +25,3 @@ func VNGenerateAttentionBasedSaliencyImageRequestFromID(id objc.ID) *VNGenerateA
 	purego.Track(o)
 	return o
 }
-

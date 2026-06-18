@@ -84,9 +84,13 @@ func (x *MTRClusterUserLabel) ReadAttributeClusterRevisionWithParams(params *raw
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterUserLabel) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterUserLabel) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterUserLabel) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterUserLabel) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterUserLabelable is the interface implemented by [MTRClusterUserLabel], for mocking and DI.
 type MTRClusterUserLabelable interface {
@@ -102,4 +106,3 @@ type MTRClusterUserLabelable interface {
 }
 
 var _ MTRClusterUserLabelable = (*MTRClusterUserLabel)(nil)
-

@@ -67,4 +67,3 @@ type ColorSwatchTextureable interface {
 }
 
 var _ ColorSwatchTextureable = (*ColorSwatchTexture)(nil)
-

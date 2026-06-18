@@ -18,47 +18,47 @@ type CLSContext struct {
 }
 
 var (
-	_clsCLSContext = _objcClass("CLSContext")
-	_cLSContextSelInitWithTypeIdentifierTitle = objc.RegisterName("initWithType:identifier:title:")
-	_cLSContextSelBecomeActive = objc.RegisterName("becomeActive")
-	_cLSContextSelResignActive = objc.RegisterName("resignActive")
-	_cLSContextSelSetType = objc.RegisterName("setType:")
-	_cLSContextSelAddProgressReportingCapabilities = objc.RegisterName("addProgressReportingCapabilities:")
-	_cLSContextSelResetProgressReportingCapabilities = objc.RegisterName("resetProgressReportingCapabilities")
-	_cLSContextSelIdentifierPath = objc.RegisterName("identifierPath")
-	_cLSContextSelIdentifier = objc.RegisterName("identifier")
-	_cLSContextSelUniversalLinkURL = objc.RegisterName("universalLinkURL")
-	_cLSContextSelSetUniversalLinkURL = objc.RegisterName("setUniversalLinkURL:")
-	_cLSContextSelType = objc.RegisterName("type")
-	_cLSContextSelCustomTypeName = objc.RegisterName("customTypeName")
-	_cLSContextSelSetCustomTypeName = objc.RegisterName("setCustomTypeName:")
-	_cLSContextSelTitle = objc.RegisterName("title")
-	_cLSContextSelSetTitle = objc.RegisterName("setTitle:")
-	_cLSContextSelDisplayOrder = objc.RegisterName("displayOrder")
-	_cLSContextSelSetDisplayOrder = objc.RegisterName("setDisplayOrder:")
-	_cLSContextSelTopic = objc.RegisterName("topic")
-	_cLSContextSelSetTopic = objc.RegisterName("setTopic:")
-	_cLSContextSelIsAssignable = objc.RegisterName("isAssignable")
-	_cLSContextSelSetAssignable = objc.RegisterName("setAssignable:")
-	_cLSContextSelSuggestedAge = objc.RegisterName("suggestedAge")
-	_cLSContextSelSetSuggestedAge = objc.RegisterName("setSuggestedAge:")
-	_cLSContextSelSuggestedCompletionTime = objc.RegisterName("suggestedCompletionTime")
-	_cLSContextSelSetSuggestedCompletionTime = objc.RegisterName("setSuggestedCompletionTime:")
-	_cLSContextSelProgressReportingCapabilities = objc.RegisterName("progressReportingCapabilities")
-	_cLSContextSelSummary = objc.RegisterName("summary")
-	_cLSContextSelSetSummary = objc.RegisterName("setSummary:")
-	_cLSContextSelThumbnail = objc.RegisterName("thumbnail")
-	_cLSContextSelSetThumbnail = objc.RegisterName("setThumbnail:")
-	_cLSContextSelIsActive = objc.RegisterName("isActive")
-	_cLSContextSelRemoveFromParent = objc.RegisterName("removeFromParent")
-	_cLSContextSelAddChildContext = objc.RegisterName("addChildContext:")
+	_clsCLSContext                                           = _objcClass("CLSContext")
+	_cLSContextSelInitWithTypeIdentifierTitle                = objc.RegisterName("initWithType:identifier:title:")
+	_cLSContextSelBecomeActive                               = objc.RegisterName("becomeActive")
+	_cLSContextSelResignActive                               = objc.RegisterName("resignActive")
+	_cLSContextSelSetType                                    = objc.RegisterName("setType:")
+	_cLSContextSelAddProgressReportingCapabilities           = objc.RegisterName("addProgressReportingCapabilities:")
+	_cLSContextSelResetProgressReportingCapabilities         = objc.RegisterName("resetProgressReportingCapabilities")
+	_cLSContextSelIdentifierPath                             = objc.RegisterName("identifierPath")
+	_cLSContextSelIdentifier                                 = objc.RegisterName("identifier")
+	_cLSContextSelUniversalLinkURL                           = objc.RegisterName("universalLinkURL")
+	_cLSContextSelSetUniversalLinkURL                        = objc.RegisterName("setUniversalLinkURL:")
+	_cLSContextSelType                                       = objc.RegisterName("type")
+	_cLSContextSelCustomTypeName                             = objc.RegisterName("customTypeName")
+	_cLSContextSelSetCustomTypeName                          = objc.RegisterName("setCustomTypeName:")
+	_cLSContextSelTitle                                      = objc.RegisterName("title")
+	_cLSContextSelSetTitle                                   = objc.RegisterName("setTitle:")
+	_cLSContextSelDisplayOrder                               = objc.RegisterName("displayOrder")
+	_cLSContextSelSetDisplayOrder                            = objc.RegisterName("setDisplayOrder:")
+	_cLSContextSelTopic                                      = objc.RegisterName("topic")
+	_cLSContextSelSetTopic                                   = objc.RegisterName("setTopic:")
+	_cLSContextSelIsAssignable                               = objc.RegisterName("isAssignable")
+	_cLSContextSelSetAssignable                              = objc.RegisterName("setAssignable:")
+	_cLSContextSelSuggestedAge                               = objc.RegisterName("suggestedAge")
+	_cLSContextSelSetSuggestedAge                            = objc.RegisterName("setSuggestedAge:")
+	_cLSContextSelSuggestedCompletionTime                    = objc.RegisterName("suggestedCompletionTime")
+	_cLSContextSelSetSuggestedCompletionTime                 = objc.RegisterName("setSuggestedCompletionTime:")
+	_cLSContextSelProgressReportingCapabilities              = objc.RegisterName("progressReportingCapabilities")
+	_cLSContextSelSummary                                    = objc.RegisterName("summary")
+	_cLSContextSelSetSummary                                 = objc.RegisterName("setSummary:")
+	_cLSContextSelThumbnail                                  = objc.RegisterName("thumbnail")
+	_cLSContextSelSetThumbnail                               = objc.RegisterName("setThumbnail:")
+	_cLSContextSelIsActive                                   = objc.RegisterName("isActive")
+	_cLSContextSelRemoveFromParent                           = objc.RegisterName("removeFromParent")
+	_cLSContextSelAddChildContext                            = objc.RegisterName("addChildContext:")
 	_cLSContextSelDescendantMatchingIdentifierPathCompletion = objc.RegisterName("descendantMatchingIdentifierPath:completion:")
-	_cLSContextSelAddNavigationChildContext = objc.RegisterName("addNavigationChildContext:")
-	_cLSContextSelRemoveNavigationChildContext = objc.RegisterName("removeNavigationChildContext:")
-	_cLSContextSelParent = objc.RegisterName("parent")
-	_cLSContextSelNavigationChildContexts = objc.RegisterName("navigationChildContexts")
-	_cLSContextSelCreateNewActivity = objc.RegisterName("createNewActivity")
-	_cLSContextSelCurrentActivity = objc.RegisterName("currentActivity")
+	_cLSContextSelAddNavigationChildContext                  = objc.RegisterName("addNavigationChildContext:")
+	_cLSContextSelRemoveNavigationChildContext               = objc.RegisterName("removeNavigationChildContext:")
+	_cLSContextSelParent                                     = objc.RegisterName("parent")
+	_cLSContextSelNavigationChildContexts                    = objc.RegisterName("navigationChildContexts")
+	_cLSContextSelCreateNewActivity                          = objc.RegisterName("createNewActivity")
+	_cLSContextSelCurrentActivity                            = objc.RegisterName("currentActivity")
 )
 
 func CLSContextFromID(id objc.ID) *CLSContext {
@@ -74,7 +74,9 @@ func CLSContextFromID(id objc.ID) *CLSContext {
 // @abstract      Initialize and configure the type of content this context represents. @param         identifier     App-assigned identifier for this context. 256 characters max length. @param         type           The type of content this context represents. @param         title          Title for what this context represents. 256 characters max length.
 func (o *CLSContext) InitWithTypeIdentifierTitle(type_ CLSContextType, identifier *foundation.NSString, title *foundation.NSString) *CLSContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSContextSelInitWithTypeIdentifierTitle, type_, identifier.Ptr(), title.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLSContextFromID(_ret)
 }
 
@@ -112,14 +114,18 @@ func (o *CLSContext) IdentifierPath() *foundation.NSArray[*foundation.NSString] 
 // @abstract      App-assigned identifier. This identifier should work across users and devices and be unique with regards to its siblings within its parent. @discussion    The identifier could be used to embed information later used for deep linking. For example: @em hydrogen-element, or @em chapter-1.
 func (o *CLSContext) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSContextSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract      Alternative deep link URL using universal links. @discussion    If your app supports universal links, you can supply them here to link the content this context represents.
 func (o *CLSContext) UniversalLinkURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSContextSelUniversalLinkURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -136,7 +142,9 @@ func (o *CLSContext) Type() CLSContextType {
 // @abstract      An optional user-visible name for the context if its type is CLSContextTypeCustom. @discussion    This property is relevant only if the type is CLSContextTypeCustom. This string should be localized. If this property is not set for a context of type CLSContextTypeCustom, Schoolwork app will use a default localized string ‘Custom’ as the name of the activity representing this context.
 func (o *CLSContext) CustomTypeName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSContextSelCustomTypeName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -147,7 +155,9 @@ func (o *CLSContext) SetCustomTypeName(customTypeName *foundation.NSString) {
 // @abstract      Title of this context. @discussion    For example: @em Level 1 @em.
 func (o *CLSContext) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSContextSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -168,7 +178,9 @@ func (o *CLSContext) SetDisplayOrder(displayOrder int) {
 // @abstract      Topic associated with this context. @discussion    See above for valid, predefined topics.
 func (o *CLSContext) Topic() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSContextSelTopic)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -209,14 +221,18 @@ func (o *CLSContext) SetSuggestedCompletionTime(suggestedCompletionTime foundati
 // @abstract      Specifies progress reporting capablities of the app for this context. @discussion    This information is intended to help teachers as they choose activities for their students. By default a CLSContext will have one CLSProgressReportingCapability instance of kind CLSProgressReportingCapabilityKindDuration. More progress reporting capabilities can be specified via '-addProgressReportingCapabilities:' to customize this set.
 func (o *CLSContext) ProgressReportingCapabilities() *foundation.NSSet[*CLSProgressReportingCapability] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSContextSelProgressReportingCapabilities)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*CLSProgressReportingCapability](_ret)
 }
 
 // @abstract      An optional user-visible summary describing the context limited to 4000 characters in length. @discussion    This may be used to provide information about the types of activities available under a given context or the context itself. This string should be localized.
 func (o *CLSContext) Summary() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSContextSelSummary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -278,28 +294,35 @@ func (o *CLSContext) RemoveNavigationChildContext(child *CLSContext) {
 // @abstract      Returns the parent of this context.
 func (o *CLSContext) Parent() *CLSContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSContextSelParent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLSContextFromID(_ret)
 }
 
 // @abstract      Child contexts that can be navigated to from this context. @discussion    Returns all the child contexts added via @code -[CLSContext addNavigationChildContext:] @endcode
 func (o *CLSContext) NavigationChildContexts() *foundation.NSArray[*CLSContext] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSContextSelNavigationChildContexts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CLSContext](_ret)
 }
 
 // @abstract      Creates a new activity @discussion    Creates a new activity and sets it as the current activity.
 func (o *CLSContext) CreateNewActivity() *CLSActivity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSContextSelCreateNewActivity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLSActivityFromID(_ret)
 }
 
 // @abstract      Returns the current activity. @discussion    Activity associated with a context.  If no activity was ever created this is nil. See: @c -[CLSContext createNewActivity]; for more details.
 func (o *CLSContext) CurrentActivity() *CLSActivity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSContextSelCurrentActivity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLSActivityFromID(_ret)
 }
-

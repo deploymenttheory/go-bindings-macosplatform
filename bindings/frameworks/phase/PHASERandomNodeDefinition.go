@@ -16,11 +16,11 @@ type PHASERandomNodeDefinition struct {
 }
 
 var (
-	_clsPHASERandomNodeDefinition = _objcClass("PHASERandomNodeDefinition")
-	_pHASERandomNodeDefinitionSelInit = objc.RegisterName("init")
-	_pHASERandomNodeDefinitionSelInitWithIdentifier = objc.RegisterName("initWithIdentifier:")
-	_pHASERandomNodeDefinitionSelAddSubtreeWeight = objc.RegisterName("addSubtree:weight:")
-	_pHASERandomNodeDefinitionSelUniqueSelectionQueueLength = objc.RegisterName("uniqueSelectionQueueLength")
+	_clsPHASERandomNodeDefinition                              = _objcClass("PHASERandomNodeDefinition")
+	_pHASERandomNodeDefinitionSelInit                          = objc.RegisterName("init")
+	_pHASERandomNodeDefinitionSelInitWithIdentifier            = objc.RegisterName("initWithIdentifier:")
+	_pHASERandomNodeDefinitionSelAddSubtreeWeight              = objc.RegisterName("addSubtree:weight:")
+	_pHASERandomNodeDefinitionSelUniqueSelectionQueueLength    = objc.RegisterName("uniqueSelectionQueueLength")
 	_pHASERandomNodeDefinitionSelSetUniqueSelectionQueueLength = objc.RegisterName("setUniqueSelectionQueueLength:")
 )
 
@@ -37,14 +37,18 @@ func PHASERandomNodeDefinitionFromID(id objc.ID) *PHASERandomNodeDefinition {
 // @method init @abstract Create a random node definition @return A new PHASERandomNodeDefinition object
 func (o *PHASERandomNodeDefinition) Init() *PHASERandomNodeDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASERandomNodeDefinitionSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASERandomNodeDefinitionFromID(_ret)
 }
 
 // @method initWithIdentifier @abstract Create a random node definition @param identifier An optional custom identifier to give to this object @return A new PHASERandomNodeDefinition object
 func (o *PHASERandomNodeDefinition) InitWithIdentifier(identifier *foundation.NSString) *PHASERandomNodeDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASERandomNodeDefinitionSelInitWithIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASERandomNodeDefinitionFromID(_ret)
 }
 
@@ -61,4 +65,3 @@ func (o *PHASERandomNodeDefinition) UniqueSelectionQueueLength() int {
 func (o *PHASERandomNodeDefinition) SetUniqueSelectionQueueLength(uniqueSelectionQueueLength int) {
 	o.Ptr().Send(_pHASERandomNodeDefinitionSelSetUniqueSelectionQueueLength, uniqueSelectionQueueLength)
 }
-

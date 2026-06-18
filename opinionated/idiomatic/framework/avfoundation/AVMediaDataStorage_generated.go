@@ -49,4 +49,3 @@ type MediaDataStorageable interface {
 }
 
 var _ MediaDataStorageable = (*MediaDataStorage)(nil)
-

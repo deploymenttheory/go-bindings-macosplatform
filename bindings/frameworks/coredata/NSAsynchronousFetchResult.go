@@ -16,9 +16,9 @@ type NSAsynchronousFetchResult[ResultType purego.AnyObject] struct {
 }
 
 var (
-	_clsNSAsynchronousFetchResult = _objcClass("NSAsynchronousFetchResult")
+	_clsNSAsynchronousFetchResult             = _objcClass("NSAsynchronousFetchResult")
 	_nSAsynchronousFetchResultSelFetchRequest = objc.RegisterName("fetchRequest")
-	_nSAsynchronousFetchResultSelFinalResult = objc.RegisterName("finalResult")
+	_nSAsynchronousFetchResultSelFinalResult  = objc.RegisterName("finalResult")
 )
 
 func NSAsynchronousFetchResultFromID[ResultType purego.AnyObject](id objc.ID) *NSAsynchronousFetchResult[ResultType] {
@@ -33,13 +33,16 @@ func NSAsynchronousFetchResultFromID[ResultType purego.AnyObject](id objc.ID) *N
 
 func (o *NSAsynchronousFetchResult[ResultType]) FetchRequest() *NSAsynchronousFetchRequest[ResultType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAsynchronousFetchResultSelFetchRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAsynchronousFetchRequestFromID[ResultType](_ret)
 }
 
 func (o *NSAsynchronousFetchResult[ResultType]) FinalResult() *foundation.NSArray[ResultType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAsynchronousFetchResultSelFinalResult)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[ResultType](_ret)
 }
-

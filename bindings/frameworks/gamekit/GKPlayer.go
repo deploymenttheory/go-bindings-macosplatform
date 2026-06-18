@@ -19,17 +19,17 @@ type GKPlayer struct {
 }
 
 var (
-	_clsGKPlayer = _objcClass("GKPlayer")
-	_gKPlayerSelScopedIDsArePersistent = objc.RegisterName("scopedIDsArePersistent")
-	_gKPlayerSelAnonymousGuestPlayerWithIdentifier = objc.RegisterName("anonymousGuestPlayerWithIdentifier:")
-	_gKPlayerSelGamePlayerID = objc.RegisterName("gamePlayerID")
-	_gKPlayerSelTeamPlayerID = objc.RegisterName("teamPlayerID")
-	_gKPlayerSelAlias = objc.RegisterName("alias")
-	_gKPlayerSelGuestIdentifier = objc.RegisterName("guestIdentifier")
-	_gKPlayerSelIsInvitable = objc.RegisterName("isInvitable")
-	_gKPlayerSelLoadPhotoForSizeWithCompletionHandler = objc.RegisterName("loadPhotoForSize:withCompletionHandler:")
+	_clsGKPlayer                                               = _objcClass("GKPlayer")
+	_gKPlayerSelScopedIDsArePersistent                         = objc.RegisterName("scopedIDsArePersistent")
+	_gKPlayerSelAnonymousGuestPlayerWithIdentifier             = objc.RegisterName("anonymousGuestPlayerWithIdentifier:")
+	_gKPlayerSelGamePlayerID                                   = objc.RegisterName("gamePlayerID")
+	_gKPlayerSelTeamPlayerID                                   = objc.RegisterName("teamPlayerID")
+	_gKPlayerSelAlias                                          = objc.RegisterName("alias")
+	_gKPlayerSelGuestIdentifier                                = objc.RegisterName("guestIdentifier")
+	_gKPlayerSelIsInvitable                                    = objc.RegisterName("isInvitable")
+	_gKPlayerSelLoadPhotoForSizeWithCompletionHandler          = objc.RegisterName("loadPhotoForSize:withCompletionHandler:")
 	_gKPlayerSelLoadPlayersForIdentifiersWithCompletionHandler = objc.RegisterName("loadPlayersForIdentifiers:withCompletionHandler:")
-	_gKPlayerSelIsFriend = objc.RegisterName("isFriend")
+	_gKPlayerSelIsFriend                                       = objc.RegisterName("isFriend")
 )
 
 func GKPlayerFromID(id objc.ID) *GKPlayer {
@@ -50,34 +50,44 @@ func (o *GKPlayer) ScopedIDsArePersistent() bool {
 
 func GKPlayerAnonymousGuestPlayerWithIdentifier(guestIdentifier *foundation.NSString) *GKPlayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKPlayer), _gKPlayerSelAnonymousGuestPlayerWithIdentifier, guestIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKPlayerFromID(_ret)
 }
 
 // This is the player's unique and persistent ID that is scoped to this application.
 func (o *GKPlayer) GamePlayerID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKPlayerSelGamePlayerID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // This is the player's unique and persistent ID that is scoped to the Apple Store Connect Team identifier of this application.
 func (o *GKPlayer) TeamPlayerID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKPlayerSelTeamPlayerID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The alias property contains the player's nickname. When you need to display the name to the user, consider using displayName instead. The nickname is unique but not invariant: the player may change their nickname. The nickname may be very long, so be sure to use appropriate string truncation API when drawing.
 func (o *GKPlayer) Alias() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKPlayerSelAlias)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *GKPlayer) GuestIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKPlayerSelGuestIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -122,4 +132,3 @@ func (o *GKPlayer) IsFriend() bool {
 	_ret := objc.Send[bool](o.Ptr(), _gKPlayerSelIsFriend)
 	return _ret
 }
-

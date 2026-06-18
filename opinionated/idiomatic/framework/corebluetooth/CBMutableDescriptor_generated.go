@@ -46,4 +46,3 @@ type MutableDescriptorable interface {
 }
 
 var _ MutableDescriptorable = (*MutableDescriptor)(nil)
-

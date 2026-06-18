@@ -18,17 +18,17 @@ type PKStroke struct {
 }
 
 var (
-	_clsPKStroke = _objcClass("PKStroke")
-	_pKStrokeSelInitWithInkStrokePathTransformMask = objc.RegisterName("initWithInk:strokePath:transform:mask:")
+	_clsPKStroke                                             = _objcClass("PKStroke")
+	_pKStrokeSelInitWithInkStrokePathTransformMask           = objc.RegisterName("initWithInk:strokePath:transform:mask:")
 	_pKStrokeSelInitWithInkStrokePathTransformMaskRandomSeed = objc.RegisterName("initWithInk:strokePath:transform:mask:randomSeed:")
-	_pKStrokeSelInk = objc.RegisterName("ink")
-	_pKStrokeSelTransform = objc.RegisterName("transform")
-	_pKStrokeSelPath = objc.RegisterName("path")
-	_pKStrokeSelMask = objc.RegisterName("mask")
-	_pKStrokeSelRenderBounds = objc.RegisterName("renderBounds")
-	_pKStrokeSelMaskedPathRanges = objc.RegisterName("maskedPathRanges")
-	_pKStrokeSelRandomSeed = objc.RegisterName("randomSeed")
-	_pKStrokeSelRequiredContentVersion = objc.RegisterName("requiredContentVersion")
+	_pKStrokeSelInk                                          = objc.RegisterName("ink")
+	_pKStrokeSelTransform                                    = objc.RegisterName("transform")
+	_pKStrokeSelPath                                         = objc.RegisterName("path")
+	_pKStrokeSelMask                                         = objc.RegisterName("mask")
+	_pKStrokeSelRenderBounds                                 = objc.RegisterName("renderBounds")
+	_pKStrokeSelMaskedPathRanges                             = objc.RegisterName("maskedPathRanges")
+	_pKStrokeSelRandomSeed                                   = objc.RegisterName("randomSeed")
+	_pKStrokeSelRequiredContentVersion                       = objc.RegisterName("requiredContentVersion")
 )
 
 func PKStrokeFromID(id objc.ID) *PKStroke {
@@ -43,20 +43,26 @@ func PKStrokeFromID(id objc.ID) *PKStroke {
 
 func (o *PKStroke) InitWithInkStrokePathTransformMask(ink *PKInk, strokePath *PKStrokePath, transform corefoundation.CGAffineTransform, mask *appkit.NSBezierPath) *PKStroke {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokeSelInitWithInkStrokePathTransformMask, ink.Ptr(), strokePath.Ptr(), transform, mask.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKStrokeFromID(_ret)
 }
 
 func (o *PKStroke) InitWithInkStrokePathTransformMaskRandomSeed(ink *PKInk, strokePath *PKStrokePath, transform corefoundation.CGAffineTransform, mask *appkit.NSBezierPath, randomSeed uint32) *PKStroke {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokeSelInitWithInkStrokePathTransformMaskRandomSeed, ink.Ptr(), strokePath.Ptr(), transform, mask.Ptr(), randomSeed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKStrokeFromID(_ret)
 }
 
 // The ink used to render this stroke.
 func (o *PKStroke) Ink() *PKInk {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokeSelInk)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKInkFromID(_ret)
 }
 
@@ -69,13 +75,17 @@ func (o *PKStroke) Transform() corefoundation.CGAffineTransform {
 // The B-spline path that describes this stroke.
 func (o *PKStroke) Path() *PKStrokePath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokeSelPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKStrokePathFromID(_ret)
 }
 
 func (o *PKStroke) Mask() *appkit.NSBezierPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokeSelMask)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSBezierPathFromID(_ret)
 }
 
@@ -88,7 +98,9 @@ func (o *PKStroke) RenderBounds() corefoundation.CGRect {
 // These are the parametric parameter ranges of points in `strokePath` that intersect the stroke's mask.
 func (o *PKStroke) MaskedPathRanges() *foundation.NSArray[*PKFloatRange] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokeSelMaskedPathRanges)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PKFloatRange](_ret)
 }
 
@@ -103,4 +115,3 @@ func (o *PKStroke) RequiredContentVersion() PKContentVersion {
 	_ret := objc.Send[PKContentVersion](o.Ptr(), _pKStrokeSelRequiredContentVersion)
 	return _ret
 }
-

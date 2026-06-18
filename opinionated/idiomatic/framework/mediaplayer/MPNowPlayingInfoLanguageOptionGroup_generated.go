@@ -17,7 +17,9 @@ type NowPlayingInfoLanguageOptionGroup struct {
 }
 
 // Unwrap returns the underlying [raw.MPNowPlayingInfoLanguageOptionGroup].
-func (x *NowPlayingInfoLanguageOptionGroup) Unwrap() *raw.MPNowPlayingInfoLanguageOptionGroup { return x.inner }
+func (x *NowPlayingInfoLanguageOptionGroup) Unwrap() *raw.MPNowPlayingInfoLanguageOptionGroup {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -72,4 +74,3 @@ type NowPlayingInfoLanguageOptionGroupable interface {
 }
 
 var _ NowPlayingInfoLanguageOptionGroupable = (*NowPlayingInfoLanguageOptionGroup)(nil)
-

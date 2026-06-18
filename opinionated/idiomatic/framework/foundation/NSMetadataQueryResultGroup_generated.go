@@ -97,4 +97,3 @@ type MetadataQueryResultGroupable interface {
 }
 
 var _ MetadataQueryResultGroupable = (*MetadataQueryResultGroup)(nil)
-

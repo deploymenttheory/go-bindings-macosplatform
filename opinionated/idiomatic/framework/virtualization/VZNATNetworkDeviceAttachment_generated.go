@@ -35,7 +35,9 @@ func NewNATNetworkDeviceAttachment() *NATNetworkDeviceAttachment {
 	return &NATNetworkDeviceAttachment{inner: raw.VZNATNetworkDeviceAttachmentFromID(_id)}
 }
 
-func (x *NATNetworkDeviceAttachment) asNetworkDeviceAttachment() *raw.VZNetworkDeviceAttachment { return &x.inner.VZNetworkDeviceAttachment }
+func (x *NATNetworkDeviceAttachment) asNetworkDeviceAttachment() *raw.VZNetworkDeviceAttachment {
+	return &x.inner.VZNetworkDeviceAttachment
+}
 
 // NATNetworkDeviceAttachmentable is the interface implemented by [NATNetworkDeviceAttachment], for mocking and DI.
 type NATNetworkDeviceAttachmentable interface {
@@ -43,4 +45,3 @@ type NATNetworkDeviceAttachmentable interface {
 }
 
 var _ NATNetworkDeviceAttachmentable = (*NATNetworkDeviceAttachment)(nil)
-

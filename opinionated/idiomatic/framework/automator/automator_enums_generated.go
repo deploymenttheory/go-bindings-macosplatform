@@ -12,8 +12,8 @@ type AMLogLevel uint64
 
 const (
 	AMLogLevelDebug AMLogLevel = 0
-	AMLogLevelInfo AMLogLevel = 1
-	AMLogLevelWarn AMLogLevel = 2
+	AMLogLevelInfo  AMLogLevel = 1
+	AMLogLevelWarn  AMLogLevel = 2
 	AMLogLevelError AMLogLevel = 3
 )
 
@@ -31,4 +31,3 @@ func (e AMLogLevel) String() string {
 		return fmt.Sprintf("AMLogLevel(%d)", int64(e))
 	}
 }
-

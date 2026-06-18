@@ -18,10 +18,10 @@ type PHCloudIdentifier struct {
 }
 
 var (
-	_clsPHCloudIdentifier = _objcClass("PHCloudIdentifier")
+	_clsPHCloudIdentifier                    = _objcClass("PHCloudIdentifier")
 	_pHCloudIdentifierSelInitWithStringValue = objc.RegisterName("initWithStringValue:")
-	_pHCloudIdentifierSelNotFoundIdentifier = objc.RegisterName("notFoundIdentifier")
-	_pHCloudIdentifierSelStringValue = objc.RegisterName("stringValue")
+	_pHCloudIdentifierSelNotFoundIdentifier  = objc.RegisterName("notFoundIdentifier")
+	_pHCloudIdentifierSelStringValue         = objc.RegisterName("stringValue")
 )
 
 func PHCloudIdentifierFromID(id objc.ID) *PHCloudIdentifier {
@@ -37,7 +37,9 @@ func PHCloudIdentifierFromID(id objc.ID) *PHCloudIdentifier {
 // Deserialization
 func (o *PHCloudIdentifier) InitWithStringValue(stringValue *foundation.NSString) *PHCloudIdentifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHCloudIdentifierSelInitWithStringValue, stringValue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHCloudIdentifierFromID(_ret)
 }
 
@@ -52,7 +54,8 @@ func PHCloudIdentifierNotFoundIdentifier() unsafe.Pointer {
 // Deprecated: since macOS 12.
 func (o *PHCloudIdentifier) StringValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHCloudIdentifierSelStringValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

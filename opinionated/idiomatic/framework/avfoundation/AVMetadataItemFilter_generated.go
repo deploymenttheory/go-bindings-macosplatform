@@ -41,4 +41,3 @@ type MetadataItemFilterable interface {
 }
 
 var _ MetadataItemFilterable = (*MetadataItemFilter)(nil)
-

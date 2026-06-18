@@ -286,4 +286,3 @@ type Popoverable interface {
 }
 
 var _ Popoverable = (*Popover)(nil)
-

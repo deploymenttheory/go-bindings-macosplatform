@@ -70,4 +70,3 @@ type FunctionConstantable interface {
 }
 
 var _ FunctionConstantable = (*FunctionConstant)(nil)
-

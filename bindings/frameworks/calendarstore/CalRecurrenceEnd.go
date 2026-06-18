@@ -16,12 +16,12 @@ type CalRecurrenceEnd struct {
 }
 
 var (
-	_clsCalRecurrenceEnd = _objcClass("CalRecurrenceEnd")
-	_calRecurrenceEndSelRecurrenceEndWithEndDate = objc.RegisterName("recurrenceEndWithEndDate:")
+	_clsCalRecurrenceEnd                                 = _objcClass("CalRecurrenceEnd")
+	_calRecurrenceEndSelRecurrenceEndWithEndDate         = objc.RegisterName("recurrenceEndWithEndDate:")
 	_calRecurrenceEndSelRecurrenceEndWithOccurrenceCount = objc.RegisterName("recurrenceEndWithOccurrenceCount:")
-	_calRecurrenceEndSelUsesEndDate = objc.RegisterName("usesEndDate")
-	_calRecurrenceEndSelEndDate = objc.RegisterName("endDate")
-	_calRecurrenceEndSelOccurrenceCount = objc.RegisterName("occurrenceCount")
+	_calRecurrenceEndSelUsesEndDate                      = objc.RegisterName("usesEndDate")
+	_calRecurrenceEndSelEndDate                          = objc.RegisterName("endDate")
+	_calRecurrenceEndSelOccurrenceCount                  = objc.RegisterName("occurrenceCount")
 )
 
 func CalRecurrenceEndFromID(id objc.ID) *CalRecurrenceEnd {
@@ -55,7 +55,9 @@ func (o *CalRecurrenceEnd) UsesEndDate() bool {
 // Deprecated: since macOS 10.8.
 func (o *CalRecurrenceEnd) EndDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calRecurrenceEndSelEndDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -64,4 +66,3 @@ func (o *CalRecurrenceEnd) OccurrenceCount() uint {
 	_ret := objc.Send[uint](o.Ptr(), _calRecurrenceEndSelOccurrenceCount)
 	return _ret
 }
-

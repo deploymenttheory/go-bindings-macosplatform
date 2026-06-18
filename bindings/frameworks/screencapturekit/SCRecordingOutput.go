@@ -17,10 +17,10 @@ type SCRecordingOutput struct {
 }
 
 var (
-	_clsSCRecordingOutput = _objcClass("SCRecordingOutput")
+	_clsSCRecordingOutput                              = _objcClass("SCRecordingOutput")
 	_sCRecordingOutputSelInitWithConfigurationDelegate = objc.RegisterName("initWithConfiguration:delegate:")
-	_sCRecordingOutputSelRecordedDuration = objc.RegisterName("recordedDuration")
-	_sCRecordingOutputSelRecordedFileSize = objc.RegisterName("recordedFileSize")
+	_sCRecordingOutputSelRecordedDuration              = objc.RegisterName("recordedDuration")
+	_sCRecordingOutputSelRecordedFileSize              = objc.RegisterName("recordedFileSize")
 )
 
 func SCRecordingOutputFromID(id objc.ID) *SCRecordingOutput {
@@ -36,7 +36,9 @@ func SCRecordingOutputFromID(id objc.ID) *SCRecordingOutput {
 // @method initWithConfiguration:delegate: @abstract initialize SCRecordingOutput object with SCRecordingOutputConfiguration and SCRecordingOutputDelegate @param recordingOutputConfiguration the requested recording configuration to be applied to the SCRecordingOutput @parame delegate object conforming SCRecordingOutputDelegate protocol. Clients must specify a delegate so that they can be notified about recording event. @discussion Client can create a SCRecordingOutput with this initializer and add to SCStream to record all captured media into one recording file given output url specified in recordingOutputConfig. The recording will be using H264 and file format is MPEG-4.
 func (o *SCRecordingOutput) InitWithConfigurationDelegate(recordingOutputConfiguration *SCRecordingOutputConfiguration, delegate SCRecordingOutputDelegate) *SCRecordingOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCRecordingOutputSelInitWithConfigurationDelegate, recordingOutputConfiguration.Ptr(), delegate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCRecordingOutputFromID(_ret)
 }
 
@@ -51,4 +53,3 @@ func (o *SCRecordingOutput) RecordedFileSize() int {
 	_ret := objc.Send[int](o.Ptr(), _sCRecordingOutputSelRecordedFileSize)
 	return _ret
 }
-

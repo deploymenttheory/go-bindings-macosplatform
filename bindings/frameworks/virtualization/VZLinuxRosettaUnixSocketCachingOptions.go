@@ -18,10 +18,10 @@ type VZLinuxRosettaUnixSocketCachingOptions struct {
 }
 
 var (
-	_clsVZLinuxRosettaUnixSocketCachingOptions = _objcClass("VZLinuxRosettaUnixSocketCachingOptions")
+	_clsVZLinuxRosettaUnixSocketCachingOptions                  = _objcClass("VZLinuxRosettaUnixSocketCachingOptions")
 	_vZLinuxRosettaUnixSocketCachingOptionsSelInitWithPathError = objc.RegisterName("initWithPath:error:")
-	_vZLinuxRosettaUnixSocketCachingOptionsSelInit = objc.RegisterName("init")
-	_vZLinuxRosettaUnixSocketCachingOptionsSelPath = objc.RegisterName("path")
+	_vZLinuxRosettaUnixSocketCachingOptionsSelInit              = objc.RegisterName("init")
+	_vZLinuxRosettaUnixSocketCachingOptionsSelPath              = objc.RegisterName("path")
 	_vZLinuxRosettaUnixSocketCachingOptionsSelMaximumPathLength = objc.RegisterName("maximumPathLength")
 )
 
@@ -39,7 +39,9 @@ func VZLinuxRosettaUnixSocketCachingOptionsFromID(id objc.ID) *VZLinuxRosettaUni
 func (o *VZLinuxRosettaUnixSocketCachingOptions) InitWithPathError(path *foundation.NSString) (*VZLinuxRosettaUnixSocketCachingOptions, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZLinuxRosettaUnixSocketCachingOptionsSelInitWithPathError, path.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -49,14 +51,18 @@ func (o *VZLinuxRosettaUnixSocketCachingOptions) InitWithPathError(path *foundat
 // @abstract Initialize default options to be set on a VZLinuxRosettaDirectoryShare. @discussion The default translation caching configuration uses a Unix Domain Socket at /run/rosettad/rosetta.sock.
 func (o *VZLinuxRosettaUnixSocketCachingOptions) Init() *VZLinuxRosettaUnixSocketCachingOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZLinuxRosettaUnixSocketCachingOptionsSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZLinuxRosettaUnixSocketCachingOptionsFromID(_ret)
 }
 
 // @abstract Path set by initWithPath. @discussion This is the path of the Unix Domain Socket to be used by Rosetta.
 func (o *VZLinuxRosettaUnixSocketCachingOptions) Path() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZLinuxRosettaUnixSocketCachingOptionsSelPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -65,4 +71,3 @@ func VZLinuxRosettaUnixSocketCachingOptionsMaximumPathLength() uint {
 	_ret := objc.Send[uint](objc.ID(_clsVZLinuxRosettaUnixSocketCachingOptions), _vZLinuxRosettaUnixSocketCachingOptionsSelMaximumPathLength)
 	return _ret
 }
-

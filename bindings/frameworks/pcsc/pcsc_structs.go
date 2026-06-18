@@ -8,165 +8,165 @@ import (
 )
 
 type CFDyLibPointers struct {
-	PvfWriteFramework unsafe.Pointer
+	PvfWriteFramework   unsafe.Pointer
 	PvfInitializePlugin unsafe.Pointer
-	PvfIdentifyToken unsafe.Pointer
-	PvfFinalizePlugin unsafe.Pointer
-	PvfGetStatus unsafe.Pointer
-	PvfGetCapabilities unsafe.Pointer
-	PvfExtendedFeature unsafe.Pointer
-	PvfGenerateKeys unsafe.Pointer
-	PvfImportKey unsafe.Pointer
-	PvfExportKey unsafe.Pointer
-	PvfComputeCrypt unsafe.Pointer
-	PvfExtAuthenticate unsafe.Pointer
-	PvfListKeys unsafe.Pointer
-	PvfCreatePIN unsafe.Pointer
-	PvfVerifyPIN unsafe.Pointer
-	PvfChangePIN unsafe.Pointer
-	PvfUnblockPIN unsafe.Pointer
-	PvfListPINs unsafe.Pointer
-	PvfCreateObject unsafe.Pointer
-	PvfDeleteObject unsafe.Pointer
-	PvfWriteObject unsafe.Pointer
-	PvfReadObject unsafe.Pointer
-	PvfListObjects unsafe.Pointer
-	PvfLogoutAll unsafe.Pointer
-	PvfGetChallenge unsafe.Pointer
+	PvfIdentifyToken    unsafe.Pointer
+	PvfFinalizePlugin   unsafe.Pointer
+	PvfGetStatus        unsafe.Pointer
+	PvfGetCapabilities  unsafe.Pointer
+	PvfExtendedFeature  unsafe.Pointer
+	PvfGenerateKeys     unsafe.Pointer
+	PvfImportKey        unsafe.Pointer
+	PvfExportKey        unsafe.Pointer
+	PvfComputeCrypt     unsafe.Pointer
+	PvfExtAuthenticate  unsafe.Pointer
+	PvfListKeys         unsafe.Pointer
+	PvfCreatePIN        unsafe.Pointer
+	PvfVerifyPIN        unsafe.Pointer
+	PvfChangePIN        unsafe.Pointer
+	PvfUnblockPIN       unsafe.Pointer
+	PvfListPINs         unsafe.Pointer
+	PvfCreateObject     unsafe.Pointer
+	PvfDeleteObject     unsafe.Pointer
+	PvfWriteObject      unsafe.Pointer
+	PvfReadObject       unsafe.Pointer
+	PvfListObjects      unsafe.Pointer
+	PvfLogoutAll        unsafe.Pointer
+	PvfGetChallenge     unsafe.Pointer
 }
 
 type MSCCryptInit struct {
-	KeyNum uint8
-	CipherMode uint8
+	KeyNum          uint8
+	CipherMode      uint8
 	CipherDirection uint8
-	OptParams *uint8
-	OptParamsSize uint16
+	OptParams       *uint8
+	OptParamsSize   uint16
 }
 
 type MSCEventWaitInfo struct {
-	ArraySize uint32
+	ArraySize  uint32
 	TokenArray *MSCTokenInfo
-	AppData unsafe.Pointer
-	CallBack unsafe.Pointer
+	AppData    unsafe.Pointer
+	CallBack   unsafe.Pointer
 }
 
 type MSCGenKeyParams struct {
-	AlgoType uint8
-	KeySize uint16
-	PrivateKeyACL MSCKeyACL
-	PublicKeyACL MSCKeyACL
+	AlgoType         uint8
+	KeySize          uint16
+	PrivateKeyACL    MSCKeyACL
+	PublicKeyACL     MSCKeyACL
 	PrivateKeyPolicy MSCKeyPolicy
-	PublicKeyPolicy MSCKeyPolicy
-	KeyGenOptions uint8
-	POptParams *uint8
-	OptParamsSize uint32
+	PublicKeyPolicy  MSCKeyPolicy
+	KeyGenOptions    uint8
+	POptParams       *uint8
+	OptParamsSize    uint32
 }
 
 type MSCInitTokenParams struct {
-	TransportKey [264]uint8
-	TransportKeyLen uint32
-	TransportBehavior uint8
-	ObjectMemory uint32
-	NewTransportKey [264]uint8
-	NewTransportKeyLen uint32
-	DefaultCHV [264]uint8
-	DefaultCHVLen uint32
-	DefaultCHVTries uint8
-	DefaultCHVUnblock [264]uint8
-	DefaultCHVUnblockSize uint32
+	TransportKey           [264]uint8
+	TransportKeyLen        uint32
+	TransportBehavior      uint8
+	ObjectMemory           uint32
+	NewTransportKey        [264]uint8
+	NewTransportKeyLen     uint32
+	DefaultCHV             [264]uint8
+	DefaultCHVLen          uint32
+	DefaultCHVTries        uint8
+	DefaultCHVUnblock      [264]uint8
+	DefaultCHVUnblockSize  uint32
 	DefaultCHVUnblockTries uint8
-	CreateObjectACL uint16
-	CreateKeysACL uint16
-	CreatePINsACL uint16
-	MaxNumberKeys uint8
-	MaxNumberPINs uint8
-	MaxNumberObjects uint16
+	CreateObjectACL        uint16
+	CreateKeysACL          uint16
+	CreatePINsACL          uint16
+	MaxNumberKeys          uint8
+	MaxNumberPINs          uint8
+	MaxNumberObjects       uint16
 }
 
 type MSCKeyACL struct {
-	ReadPermission uint16
+	ReadPermission  uint16
 	WritePermission uint16
-	UsePermission uint16
+	UsePermission   uint16
 }
 
 type MSCKeyInfo struct {
-	KeyNum uint8
-	KeyType uint8
+	KeyNum     uint8
+	KeyType    uint8
 	KeyPartner uint8
 	KeyMapping uint8
-	KeySize uint16
-	KeyPolicy MSCKeyPolicy
-	KeyACL MSCKeyACL
+	KeySize    uint16
+	KeyPolicy  MSCKeyPolicy
+	KeyACL     MSCKeyACL
 }
 
 type MSCKeyPolicy struct {
-	CipherMode uint16
+	CipherMode      uint16
 	CipherDirection uint16
 }
 
 type MSCObjectACL struct {
-	ReadPermission uint16
-	WritePermission uint16
+	ReadPermission   uint16
+	WritePermission  uint16
 	DeletePermission uint16
 }
 
 type MSCObjectInfo struct {
-	ObjectID [16]int8
+	ObjectID   [16]int8
 	ObjectSize uint32
-	ObjectACL MSCObjectACL
+	ObjectACL  MSCObjectACL
 }
 
 type MSCStatusInfo struct {
-	AppVersion uint16
-	SwVersion uint16
-	FreeMemory uint32
+	AppVersion  uint16
+	SwVersion   uint16
+	FreeMemory  uint32
 	TotalMemory uint32
-	UsedPINs uint8
-	UsedKeys uint8
-	LoggedID uint16
+	UsedPINs    uint8
+	UsedKeys    uint8
+	LoggedID    uint16
 }
 
 type MSCTokenConnection struct {
-	HContext int32
-	HCard int32
-	IoType *SCARDIOREQUEST
-	PMac [128]uint8
-	MacSize uint32
+	HContext       int32
+	HCard          int32
+	IoType         *SCARDIOREQUEST
+	PMac           [128]uint8
+	MacSize        uint32
 	TokenLibHandle unsafe.Pointer
-	LibPointers CFDyLibPointers
-	TokenInfo MSCTokenInfo
-	LoggedIDs uint8
-	ShareMode uint32
-	RwCallback unsafe.Pointer
+	LibPointers    CFDyLibPointers
+	TokenInfo      MSCTokenInfo
+	LoggedIDs      uint8
+	ShareMode      uint32
+	RwCallback     unsafe.Pointer
 }
 
 type MSCTokenInfo struct {
-	TokenName [150]int8
-	SlotName [52]int8
-	SvProvider [200]int8
-	TokenId [33]uint8
-	TokenApp [64]uint8
-	TokenAppLen uint32
+	TokenName     [150]int8
+	SlotName      [52]int8
+	SvProvider    [200]int8
+	TokenId       [33]uint8
+	TokenApp      [64]uint8
+	TokenAppLen   uint32
 	TokenIdLength uint32
-	TokenState uint32
-	TokenType uint32
-	AddParams unsafe.Pointer
+	TokenState    uint32
+	TokenType     uint32
+	AddParams     unsafe.Pointer
 	AddParamsSize uint32
 }
 
 type SCARD_READERSTATE_A struct {
-	SzReader string
-	PvUserData unsafe.Pointer
+	SzReader       string
+	PvUserData     unsafe.Pointer
 	DwCurrentState uint32
-	DwEventState uint32
-	CbAtr uint32
-	RgbAtr [33]uint8
+	DwEventState   uint32
+	CbAtr          uint32
+	RgbAtr         [33]uint8
 }
 
 // Protocol Control Information (PCI)
 // C struct: _SCARD_IO_REQUEST
 type SCARDIOREQUEST struct {
-	DwProtocol uint32
+	DwProtocol  uint32
 	CbPciLength uint32
 }
 
@@ -223,4 +223,3 @@ type PSCARD_IO_REQUEST = *SCARDIOREQUEST
 
 // SCARD_IO_REQUEST is an alias for _SCARD_IO_REQUEST (C typedef SCARD_IO_REQUEST).
 type SCARD_IO_REQUEST = SCARDIOREQUEST
-

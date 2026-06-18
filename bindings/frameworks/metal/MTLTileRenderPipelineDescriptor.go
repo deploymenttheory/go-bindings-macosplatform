@@ -16,34 +16,34 @@ type MTLTileRenderPipelineDescriptor struct {
 }
 
 var (
-	_clsMTLTileRenderPipelineDescriptor = _objcClass("MTLTileRenderPipelineDescriptor")
-	_mTLTileRenderPipelineDescriptorSelReset = objc.RegisterName("reset")
-	_mTLTileRenderPipelineDescriptorSelLabel = objc.RegisterName("label")
-	_mTLTileRenderPipelineDescriptorSelSetLabel = objc.RegisterName("setLabel:")
-	_mTLTileRenderPipelineDescriptorSelTileFunction = objc.RegisterName("tileFunction")
-	_mTLTileRenderPipelineDescriptorSelSetTileFunction = objc.RegisterName("setTileFunction:")
-	_mTLTileRenderPipelineDescriptorSelRasterSampleCount = objc.RegisterName("rasterSampleCount")
-	_mTLTileRenderPipelineDescriptorSelSetRasterSampleCount = objc.RegisterName("setRasterSampleCount:")
-	_mTLTileRenderPipelineDescriptorSelColorAttachments = objc.RegisterName("colorAttachments")
-	_mTLTileRenderPipelineDescriptorSelThreadgroupSizeMatchesTileSize = objc.RegisterName("threadgroupSizeMatchesTileSize")
+	_clsMTLTileRenderPipelineDescriptor                                  = _objcClass("MTLTileRenderPipelineDescriptor")
+	_mTLTileRenderPipelineDescriptorSelReset                             = objc.RegisterName("reset")
+	_mTLTileRenderPipelineDescriptorSelLabel                             = objc.RegisterName("label")
+	_mTLTileRenderPipelineDescriptorSelSetLabel                          = objc.RegisterName("setLabel:")
+	_mTLTileRenderPipelineDescriptorSelTileFunction                      = objc.RegisterName("tileFunction")
+	_mTLTileRenderPipelineDescriptorSelSetTileFunction                   = objc.RegisterName("setTileFunction:")
+	_mTLTileRenderPipelineDescriptorSelRasterSampleCount                 = objc.RegisterName("rasterSampleCount")
+	_mTLTileRenderPipelineDescriptorSelSetRasterSampleCount              = objc.RegisterName("setRasterSampleCount:")
+	_mTLTileRenderPipelineDescriptorSelColorAttachments                  = objc.RegisterName("colorAttachments")
+	_mTLTileRenderPipelineDescriptorSelThreadgroupSizeMatchesTileSize    = objc.RegisterName("threadgroupSizeMatchesTileSize")
 	_mTLTileRenderPipelineDescriptorSelSetThreadgroupSizeMatchesTileSize = objc.RegisterName("setThreadgroupSizeMatchesTileSize:")
-	_mTLTileRenderPipelineDescriptorSelTileBuffers = objc.RegisterName("tileBuffers")
-	_mTLTileRenderPipelineDescriptorSelMaxTotalThreadsPerThreadgroup = objc.RegisterName("maxTotalThreadsPerThreadgroup")
-	_mTLTileRenderPipelineDescriptorSelSetMaxTotalThreadsPerThreadgroup = objc.RegisterName("setMaxTotalThreadsPerThreadgroup:")
-	_mTLTileRenderPipelineDescriptorSelBinaryArchives = objc.RegisterName("binaryArchives")
-	_mTLTileRenderPipelineDescriptorSelSetBinaryArchives = objc.RegisterName("setBinaryArchives:")
-	_mTLTileRenderPipelineDescriptorSelPreloadedLibraries = objc.RegisterName("preloadedLibraries")
-	_mTLTileRenderPipelineDescriptorSelSetPreloadedLibraries = objc.RegisterName("setPreloadedLibraries:")
-	_mTLTileRenderPipelineDescriptorSelLinkedFunctions = objc.RegisterName("linkedFunctions")
-	_mTLTileRenderPipelineDescriptorSelSetLinkedFunctions = objc.RegisterName("setLinkedFunctions:")
-	_mTLTileRenderPipelineDescriptorSelSupportAddingBinaryFunctions = objc.RegisterName("supportAddingBinaryFunctions")
-	_mTLTileRenderPipelineDescriptorSelSetSupportAddingBinaryFunctions = objc.RegisterName("setSupportAddingBinaryFunctions:")
-	_mTLTileRenderPipelineDescriptorSelMaxCallStackDepth = objc.RegisterName("maxCallStackDepth")
-	_mTLTileRenderPipelineDescriptorSelSetMaxCallStackDepth = objc.RegisterName("setMaxCallStackDepth:")
-	_mTLTileRenderPipelineDescriptorSelShaderValidation = objc.RegisterName("shaderValidation")
-	_mTLTileRenderPipelineDescriptorSelSetShaderValidation = objc.RegisterName("setShaderValidation:")
-	_mTLTileRenderPipelineDescriptorSelRequiredThreadsPerThreadgroup = objc.RegisterName("requiredThreadsPerThreadgroup")
-	_mTLTileRenderPipelineDescriptorSelSetRequiredThreadsPerThreadgroup = objc.RegisterName("setRequiredThreadsPerThreadgroup:")
+	_mTLTileRenderPipelineDescriptorSelTileBuffers                       = objc.RegisterName("tileBuffers")
+	_mTLTileRenderPipelineDescriptorSelMaxTotalThreadsPerThreadgroup     = objc.RegisterName("maxTotalThreadsPerThreadgroup")
+	_mTLTileRenderPipelineDescriptorSelSetMaxTotalThreadsPerThreadgroup  = objc.RegisterName("setMaxTotalThreadsPerThreadgroup:")
+	_mTLTileRenderPipelineDescriptorSelBinaryArchives                    = objc.RegisterName("binaryArchives")
+	_mTLTileRenderPipelineDescriptorSelSetBinaryArchives                 = objc.RegisterName("setBinaryArchives:")
+	_mTLTileRenderPipelineDescriptorSelPreloadedLibraries                = objc.RegisterName("preloadedLibraries")
+	_mTLTileRenderPipelineDescriptorSelSetPreloadedLibraries             = objc.RegisterName("setPreloadedLibraries:")
+	_mTLTileRenderPipelineDescriptorSelLinkedFunctions                   = objc.RegisterName("linkedFunctions")
+	_mTLTileRenderPipelineDescriptorSelSetLinkedFunctions                = objc.RegisterName("setLinkedFunctions:")
+	_mTLTileRenderPipelineDescriptorSelSupportAddingBinaryFunctions      = objc.RegisterName("supportAddingBinaryFunctions")
+	_mTLTileRenderPipelineDescriptorSelSetSupportAddingBinaryFunctions   = objc.RegisterName("setSupportAddingBinaryFunctions:")
+	_mTLTileRenderPipelineDescriptorSelMaxCallStackDepth                 = objc.RegisterName("maxCallStackDepth")
+	_mTLTileRenderPipelineDescriptorSelSetMaxCallStackDepth              = objc.RegisterName("setMaxCallStackDepth:")
+	_mTLTileRenderPipelineDescriptorSelShaderValidation                  = objc.RegisterName("shaderValidation")
+	_mTLTileRenderPipelineDescriptorSelSetShaderValidation               = objc.RegisterName("setShaderValidation:")
+	_mTLTileRenderPipelineDescriptorSelRequiredThreadsPerThreadgroup     = objc.RegisterName("requiredThreadsPerThreadgroup")
+	_mTLTileRenderPipelineDescriptorSelSetRequiredThreadsPerThreadgroup  = objc.RegisterName("setRequiredThreadsPerThreadgroup:")
 )
 
 func MTLTileRenderPipelineDescriptorFromID(id objc.ID) *MTLTileRenderPipelineDescriptor {
@@ -63,7 +63,9 @@ func (o *MTLTileRenderPipelineDescriptor) Reset() {
 // @property label: @abstract The descriptor label.
 func (o *MTLTileRenderPipelineDescriptor) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLTileRenderPipelineDescriptorSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -92,7 +94,9 @@ func (o *MTLTileRenderPipelineDescriptor) SetRasterSampleCount(rasterSampleCount
 
 func (o *MTLTileRenderPipelineDescriptor) ColorAttachments() *MTLTileRenderPipelineColorAttachmentDescriptorArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLTileRenderPipelineDescriptorSelColorAttachments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLTileRenderPipelineColorAttachmentDescriptorArrayFromID(_ret)
 }
 
@@ -108,7 +112,9 @@ func (o *MTLTileRenderPipelineDescriptor) SetThreadgroupSizeMatchesTileSize(thre
 
 func (o *MTLTileRenderPipelineDescriptor) TileBuffers() *MTLPipelineBufferDescriptorArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLTileRenderPipelineDescriptorSelTileBuffers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLPipelineBufferDescriptorArrayFromID(_ret)
 }
 
@@ -125,7 +131,9 @@ func (o *MTLTileRenderPipelineDescriptor) SetMaxTotalThreadsPerThreadgroup(maxTo
 // @property binaryArchives @abstract The set of MTLBinaryArchive to search for compiled code when creating the pipeline state. @discussion Accelerate pipeline state creation by providing archives of compiled code such that no compilation needs to happen on the fast path. @see MTLBinaryArchive
 func (o *MTLTileRenderPipelineDescriptor) BinaryArchives() *foundation.NSArray[MTLBinaryArchive] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLTileRenderPipelineDescriptorSelBinaryArchives)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTLBinaryArchive](_ret)
 }
 
@@ -136,7 +144,9 @@ func (o *MTLTileRenderPipelineDescriptor) SetBinaryArchives(binaryArchives *foun
 // @property preloadedLibraries @abstract The set of MTLDynamicLibrary to use to resolve external symbols before considering symbols from dependent MTLDynamicLibrary. @discussion Typical workflows use the libraries property of MTLCompileOptions to record dependent libraries at compile time without having to use preloadedLibraries. This property can be used to override symbols from dependent libraries for experimentation or evaluating alternative implementations. It can also be used to provide dynamic libraries that are dynamically created (for example, from source) that have no stable installName that can be used to automatically load from the file system. @see MTLDynamicLibrary
 func (o *MTLTileRenderPipelineDescriptor) PreloadedLibraries() *foundation.NSArray[MTLDynamicLibrary] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLTileRenderPipelineDescriptorSelPreloadedLibraries)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTLDynamicLibrary](_ret)
 }
 
@@ -147,7 +157,9 @@ func (o *MTLTileRenderPipelineDescriptor) SetPreloadedLibraries(preloadedLibrari
 // @property linkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the tile function. @see MTLLinkedFunctions
 func (o *MTLTileRenderPipelineDescriptor) LinkedFunctions() *MTLLinkedFunctions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLTileRenderPipelineDescriptorSelLinkedFunctions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLLinkedFunctionsFromID(_ret)
 }
 
@@ -197,4 +209,3 @@ func (o *MTLTileRenderPipelineDescriptor) RequiredThreadsPerThreadgroup() MTLSiz
 func (o *MTLTileRenderPipelineDescriptor) SetRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup MTLSize) {
 	o.Ptr().Send(_mTLTileRenderPipelineDescriptorSelSetRequiredThreadsPerThreadgroup, requiredThreadsPerThreadgroup)
 }
-

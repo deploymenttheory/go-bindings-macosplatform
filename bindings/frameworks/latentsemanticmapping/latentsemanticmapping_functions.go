@@ -219,4 +219,3 @@ func LSMTextCreate(alloc unsafe.Pointer, mapref unsafe.Pointer) unsafe.Pointer {
 func LSMTextGetTypeID() uint {
 	return _fnLSMTextGetTypeID()
 }
-

@@ -16,31 +16,31 @@ type MTRUnitTestingClusterNullablesAndOptionalsStruct struct {
 }
 
 var (
-	_clsMTRUnitTestingClusterNullablesAndOptionalsStruct = _objcClass("MTRUnitTestingClusterNullablesAndOptionalsStruct")
-	_mTRUnitTestingClusterNullablesAndOptionalsStructSelNullableInt = objc.RegisterName("nullableInt")
-	_mTRUnitTestingClusterNullablesAndOptionalsStructSelSetNullableInt = objc.RegisterName("setNullableInt:")
-	_mTRUnitTestingClusterNullablesAndOptionalsStructSelOptionalInt = objc.RegisterName("optionalInt")
-	_mTRUnitTestingClusterNullablesAndOptionalsStructSelSetOptionalInt = objc.RegisterName("setOptionalInt:")
-	_mTRUnitTestingClusterNullablesAndOptionalsStructSelNullableOptionalInt = objc.RegisterName("nullableOptionalInt")
-	_mTRUnitTestingClusterNullablesAndOptionalsStructSelSetNullableOptionalInt = objc.RegisterName("setNullableOptionalInt:")
-	_mTRUnitTestingClusterNullablesAndOptionalsStructSelNullableString = objc.RegisterName("nullableString")
-	_mTRUnitTestingClusterNullablesAndOptionalsStructSelSetNullableString = objc.RegisterName("setNullableString:")
-	_mTRUnitTestingClusterNullablesAndOptionalsStructSelOptionalString = objc.RegisterName("optionalString")
-	_mTRUnitTestingClusterNullablesAndOptionalsStructSelSetOptionalString = objc.RegisterName("setOptionalString:")
-	_mTRUnitTestingClusterNullablesAndOptionalsStructSelNullableOptionalString = objc.RegisterName("nullableOptionalString")
+	_clsMTRUnitTestingClusterNullablesAndOptionalsStruct                          = _objcClass("MTRUnitTestingClusterNullablesAndOptionalsStruct")
+	_mTRUnitTestingClusterNullablesAndOptionalsStructSelNullableInt               = objc.RegisterName("nullableInt")
+	_mTRUnitTestingClusterNullablesAndOptionalsStructSelSetNullableInt            = objc.RegisterName("setNullableInt:")
+	_mTRUnitTestingClusterNullablesAndOptionalsStructSelOptionalInt               = objc.RegisterName("optionalInt")
+	_mTRUnitTestingClusterNullablesAndOptionalsStructSelSetOptionalInt            = objc.RegisterName("setOptionalInt:")
+	_mTRUnitTestingClusterNullablesAndOptionalsStructSelNullableOptionalInt       = objc.RegisterName("nullableOptionalInt")
+	_mTRUnitTestingClusterNullablesAndOptionalsStructSelSetNullableOptionalInt    = objc.RegisterName("setNullableOptionalInt:")
+	_mTRUnitTestingClusterNullablesAndOptionalsStructSelNullableString            = objc.RegisterName("nullableString")
+	_mTRUnitTestingClusterNullablesAndOptionalsStructSelSetNullableString         = objc.RegisterName("setNullableString:")
+	_mTRUnitTestingClusterNullablesAndOptionalsStructSelOptionalString            = objc.RegisterName("optionalString")
+	_mTRUnitTestingClusterNullablesAndOptionalsStructSelSetOptionalString         = objc.RegisterName("setOptionalString:")
+	_mTRUnitTestingClusterNullablesAndOptionalsStructSelNullableOptionalString    = objc.RegisterName("nullableOptionalString")
 	_mTRUnitTestingClusterNullablesAndOptionalsStructSelSetNullableOptionalString = objc.RegisterName("setNullableOptionalString:")
-	_mTRUnitTestingClusterNullablesAndOptionalsStructSelNullableStruct = objc.RegisterName("nullableStruct")
-	_mTRUnitTestingClusterNullablesAndOptionalsStructSelSetNullableStruct = objc.RegisterName("setNullableStruct:")
-	_mTRUnitTestingClusterNullablesAndOptionalsStructSelOptionalStruct = objc.RegisterName("optionalStruct")
-	_mTRUnitTestingClusterNullablesAndOptionalsStructSelSetOptionalStruct = objc.RegisterName("setOptionalStruct:")
-	_mTRUnitTestingClusterNullablesAndOptionalsStructSelNullableOptionalStruct = objc.RegisterName("nullableOptionalStruct")
+	_mTRUnitTestingClusterNullablesAndOptionalsStructSelNullableStruct            = objc.RegisterName("nullableStruct")
+	_mTRUnitTestingClusterNullablesAndOptionalsStructSelSetNullableStruct         = objc.RegisterName("setNullableStruct:")
+	_mTRUnitTestingClusterNullablesAndOptionalsStructSelOptionalStruct            = objc.RegisterName("optionalStruct")
+	_mTRUnitTestingClusterNullablesAndOptionalsStructSelSetOptionalStruct         = objc.RegisterName("setOptionalStruct:")
+	_mTRUnitTestingClusterNullablesAndOptionalsStructSelNullableOptionalStruct    = objc.RegisterName("nullableOptionalStruct")
 	_mTRUnitTestingClusterNullablesAndOptionalsStructSelSetNullableOptionalStruct = objc.RegisterName("setNullableOptionalStruct:")
-	_mTRUnitTestingClusterNullablesAndOptionalsStructSelNullableList = objc.RegisterName("nullableList")
-	_mTRUnitTestingClusterNullablesAndOptionalsStructSelSetNullableList = objc.RegisterName("setNullableList:")
-	_mTRUnitTestingClusterNullablesAndOptionalsStructSelOptionalList = objc.RegisterName("optionalList")
-	_mTRUnitTestingClusterNullablesAndOptionalsStructSelSetOptionalList = objc.RegisterName("setOptionalList:")
-	_mTRUnitTestingClusterNullablesAndOptionalsStructSelNullableOptionalList = objc.RegisterName("nullableOptionalList")
-	_mTRUnitTestingClusterNullablesAndOptionalsStructSelSetNullableOptionalList = objc.RegisterName("setNullableOptionalList:")
+	_mTRUnitTestingClusterNullablesAndOptionalsStructSelNullableList              = objc.RegisterName("nullableList")
+	_mTRUnitTestingClusterNullablesAndOptionalsStructSelSetNullableList           = objc.RegisterName("setNullableList:")
+	_mTRUnitTestingClusterNullablesAndOptionalsStructSelOptionalList              = objc.RegisterName("optionalList")
+	_mTRUnitTestingClusterNullablesAndOptionalsStructSelSetOptionalList           = objc.RegisterName("setOptionalList:")
+	_mTRUnitTestingClusterNullablesAndOptionalsStructSelNullableOptionalList      = objc.RegisterName("nullableOptionalList")
+	_mTRUnitTestingClusterNullablesAndOptionalsStructSelSetNullableOptionalList   = objc.RegisterName("setNullableOptionalList:")
 )
 
 func MTRUnitTestingClusterNullablesAndOptionalsStructFromID(id objc.ID) *MTRUnitTestingClusterNullablesAndOptionalsStruct {
@@ -55,7 +55,9 @@ func MTRUnitTestingClusterNullablesAndOptionalsStructFromID(id objc.ID) *MTRUnit
 
 func (o *MTRUnitTestingClusterNullablesAndOptionalsStruct) NullableInt() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterNullablesAndOptionalsStructSelNullableInt)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -65,7 +67,9 @@ func (o *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetNullableInt(nullab
 
 func (o *MTRUnitTestingClusterNullablesAndOptionalsStruct) OptionalInt() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterNullablesAndOptionalsStructSelOptionalInt)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -75,7 +79,9 @@ func (o *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetOptionalInt(option
 
 func (o *MTRUnitTestingClusterNullablesAndOptionalsStruct) NullableOptionalInt() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterNullablesAndOptionalsStructSelNullableOptionalInt)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -85,7 +91,9 @@ func (o *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetNullableOptionalIn
 
 func (o *MTRUnitTestingClusterNullablesAndOptionalsStruct) NullableString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterNullablesAndOptionalsStructSelNullableString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -95,7 +103,9 @@ func (o *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetNullableString(nul
 
 func (o *MTRUnitTestingClusterNullablesAndOptionalsStruct) OptionalString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterNullablesAndOptionalsStructSelOptionalString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -105,7 +115,9 @@ func (o *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetOptionalString(opt
 
 func (o *MTRUnitTestingClusterNullablesAndOptionalsStruct) NullableOptionalString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterNullablesAndOptionalsStructSelNullableOptionalString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -115,7 +127,9 @@ func (o *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetNullableOptionalSt
 
 func (o *MTRUnitTestingClusterNullablesAndOptionalsStruct) NullableStruct() *MTRUnitTestingClusterSimpleStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterNullablesAndOptionalsStructSelNullableStruct)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRUnitTestingClusterSimpleStructFromID(_ret)
 }
 
@@ -125,7 +139,9 @@ func (o *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetNullableStruct(nul
 
 func (o *MTRUnitTestingClusterNullablesAndOptionalsStruct) OptionalStruct() *MTRUnitTestingClusterSimpleStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterNullablesAndOptionalsStructSelOptionalStruct)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRUnitTestingClusterSimpleStructFromID(_ret)
 }
 
@@ -135,7 +151,9 @@ func (o *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetOptionalStruct(opt
 
 func (o *MTRUnitTestingClusterNullablesAndOptionalsStruct) NullableOptionalStruct() *MTRUnitTestingClusterSimpleStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterNullablesAndOptionalsStructSelNullableOptionalStruct)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRUnitTestingClusterSimpleStructFromID(_ret)
 }
 
@@ -169,4 +187,3 @@ func (o *MTRUnitTestingClusterNullablesAndOptionalsStruct) NullableOptionalList(
 func (o *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetNullableOptionalList(nullableOptionalList *foundation.NSArray[objc.ID]) {
 	o.Ptr().Send(_mTRUnitTestingClusterNullablesAndOptionalsStructSelSetNullableOptionalList, nullableOptionalList)
 }
-

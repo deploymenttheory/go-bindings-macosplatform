@@ -16,12 +16,12 @@ type NLModelConfiguration struct {
 }
 
 var (
-	_clsNLModelConfiguration = _objcClass("NLModelConfiguration")
+	_clsNLModelConfiguration                          = _objcClass("NLModelConfiguration")
 	_nLModelConfigurationSelSupportedRevisionsForType = objc.RegisterName("supportedRevisionsForType:")
-	_nLModelConfigurationSelCurrentRevisionForType = objc.RegisterName("currentRevisionForType:")
-	_nLModelConfigurationSelType = objc.RegisterName("type")
-	_nLModelConfigurationSelLanguage = objc.RegisterName("language")
-	_nLModelConfigurationSelRevision = objc.RegisterName("revision")
+	_nLModelConfigurationSelCurrentRevisionForType    = objc.RegisterName("currentRevisionForType:")
+	_nLModelConfigurationSelType                      = objc.RegisterName("type")
+	_nLModelConfigurationSelLanguage                  = objc.RegisterName("language")
+	_nLModelConfigurationSelRevision                  = objc.RegisterName("revision")
 )
 
 func NLModelConfigurationFromID(id objc.ID) *NLModelConfiguration {
@@ -36,7 +36,9 @@ func NLModelConfigurationFromID(id objc.ID) *NLModelConfiguration {
 
 func NLModelConfigurationSupportedRevisionsForType(type_ NLModelType) *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNLModelConfiguration), _nLModelConfigurationSelSupportedRevisionsForType, type_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
@@ -52,7 +54,9 @@ func (o *NLModelConfiguration) Type() NLModelType {
 
 func (o *NLModelConfiguration) Language() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLModelConfigurationSelLanguage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -60,4 +64,3 @@ func (o *NLModelConfiguration) Revision() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nLModelConfigurationSelRevision)
 	return _ret
 }
-

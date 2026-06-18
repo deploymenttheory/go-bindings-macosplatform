@@ -18,9 +18,9 @@ type HKObserverQuery struct {
 }
 
 var (
-	_clsHKObserverQuery = _objcClass("HKObserverQuery")
+	_clsHKObserverQuery                                         = _objcClass("HKObserverQuery")
 	_hKObserverQuerySelInitWithSampleTypePredicateUpdateHandler = objc.RegisterName("initWithSampleType:predicate:updateHandler:")
-	_hKObserverQuerySelInitWithQueryDescriptorsUpdateHandler = objc.RegisterName("initWithQueryDescriptors:updateHandler:")
+	_hKObserverQuerySelInitWithQueryDescriptorsUpdateHandler    = objc.RegisterName("initWithQueryDescriptors:updateHandler:")
 )
 
 func HKObserverQueryFromID(id objc.ID) *HKObserverQuery {
@@ -45,7 +45,9 @@ func (o *HKObserverQuery) InitWithSampleTypePredicateUpdateHandler(sampleType *H
 		defer __block_updateHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKObserverQuerySelInitWithSampleTypePredicateUpdateHandler, sampleType.Ptr(), predicate.Ptr(), __block_updateHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKObserverQueryFromID(_ret)
 }
 
@@ -65,7 +67,8 @@ func (o *HKObserverQuery) InitWithQueryDescriptorsUpdateHandler(queryDescriptors
 		defer __block_updateHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKObserverQuerySelInitWithQueryDescriptorsUpdateHandler, queryDescriptors.Ptr(), __block_updateHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKObserverQueryFromID(_ret)
 }
-

@@ -35,4 +35,3 @@ func FilterManager() *quartz.QuartzFilterManager {
 func FiltersInDomains(domains *foundation.NSArray[objc.ID]) *foundation.NSArray[objc.ID] {
 	return raw.QuartzFilterManagerFiltersInDomains(domains)
 }
-

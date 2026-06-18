@@ -15,41 +15,41 @@ type NSMetadataQuery struct {
 }
 
 var (
-	_clsNSMetadataQuery = _objcClass("NSMetadataQuery")
-	_nSMetadataQuerySelStartQuery = objc.RegisterName("startQuery")
-	_nSMetadataQuerySelStopQuery = objc.RegisterName("stopQuery")
-	_nSMetadataQuerySelDisableUpdates = objc.RegisterName("disableUpdates")
-	_nSMetadataQuerySelEnableUpdates = objc.RegisterName("enableUpdates")
-	_nSMetadataQuerySelResultAtIndex = objc.RegisterName("resultAtIndex:")
-	_nSMetadataQuerySelEnumerateResultsUsing = objc.RegisterName("enumerateResultsUsingBlock:")
+	_clsNSMetadataQuery                                 = _objcClass("NSMetadataQuery")
+	_nSMetadataQuerySelStartQuery                       = objc.RegisterName("startQuery")
+	_nSMetadataQuerySelStopQuery                        = objc.RegisterName("stopQuery")
+	_nSMetadataQuerySelDisableUpdates                   = objc.RegisterName("disableUpdates")
+	_nSMetadataQuerySelEnableUpdates                    = objc.RegisterName("enableUpdates")
+	_nSMetadataQuerySelResultAtIndex                    = objc.RegisterName("resultAtIndex:")
+	_nSMetadataQuerySelEnumerateResultsUsing            = objc.RegisterName("enumerateResultsUsingBlock:")
 	_nSMetadataQuerySelEnumerateResultsWithOptionsUsing = objc.RegisterName("enumerateResultsWithOptions:usingBlock:")
-	_nSMetadataQuerySelIndexOfResult = objc.RegisterName("indexOfResult:")
+	_nSMetadataQuerySelIndexOfResult                    = objc.RegisterName("indexOfResult:")
 	_nSMetadataQuerySelValueOfAttributeForResultAtIndex = objc.RegisterName("valueOfAttribute:forResultAtIndex:")
-	_nSMetadataQuerySelDelegate = objc.RegisterName("delegate")
-	_nSMetadataQuerySelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSMetadataQuerySelPredicate = objc.RegisterName("predicate")
-	_nSMetadataQuerySelSetPredicate = objc.RegisterName("setPredicate:")
-	_nSMetadataQuerySelSortDescriptors = objc.RegisterName("sortDescriptors")
-	_nSMetadataQuerySelSetSortDescriptors = objc.RegisterName("setSortDescriptors:")
-	_nSMetadataQuerySelValueListAttributes = objc.RegisterName("valueListAttributes")
-	_nSMetadataQuerySelSetValueListAttributes = objc.RegisterName("setValueListAttributes:")
-	_nSMetadataQuerySelGroupingAttributes = objc.RegisterName("groupingAttributes")
-	_nSMetadataQuerySelSetGroupingAttributes = objc.RegisterName("setGroupingAttributes:")
-	_nSMetadataQuerySelNotificationBatchingInterval = objc.RegisterName("notificationBatchingInterval")
-	_nSMetadataQuerySelSetNotificationBatchingInterval = objc.RegisterName("setNotificationBatchingInterval:")
-	_nSMetadataQuerySelSearchScopes = objc.RegisterName("searchScopes")
-	_nSMetadataQuerySelSetSearchScopes = objc.RegisterName("setSearchScopes:")
-	_nSMetadataQuerySelSearchItems = objc.RegisterName("searchItems")
-	_nSMetadataQuerySelSetSearchItems = objc.RegisterName("setSearchItems:")
-	_nSMetadataQuerySelOperationQueue = objc.RegisterName("operationQueue")
-	_nSMetadataQuerySelSetOperationQueue = objc.RegisterName("setOperationQueue:")
-	_nSMetadataQuerySelIsStarted = objc.RegisterName("isStarted")
-	_nSMetadataQuerySelIsGathering = objc.RegisterName("isGathering")
-	_nSMetadataQuerySelIsStopped = objc.RegisterName("isStopped")
-	_nSMetadataQuerySelResultCount = objc.RegisterName("resultCount")
-	_nSMetadataQuerySelResults = objc.RegisterName("results")
-	_nSMetadataQuerySelValueLists = objc.RegisterName("valueLists")
-	_nSMetadataQuerySelGroupedResults = objc.RegisterName("groupedResults")
+	_nSMetadataQuerySelDelegate                         = objc.RegisterName("delegate")
+	_nSMetadataQuerySelSetDelegate                      = objc.RegisterName("setDelegate:")
+	_nSMetadataQuerySelPredicate                        = objc.RegisterName("predicate")
+	_nSMetadataQuerySelSetPredicate                     = objc.RegisterName("setPredicate:")
+	_nSMetadataQuerySelSortDescriptors                  = objc.RegisterName("sortDescriptors")
+	_nSMetadataQuerySelSetSortDescriptors               = objc.RegisterName("setSortDescriptors:")
+	_nSMetadataQuerySelValueListAttributes              = objc.RegisterName("valueListAttributes")
+	_nSMetadataQuerySelSetValueListAttributes           = objc.RegisterName("setValueListAttributes:")
+	_nSMetadataQuerySelGroupingAttributes               = objc.RegisterName("groupingAttributes")
+	_nSMetadataQuerySelSetGroupingAttributes            = objc.RegisterName("setGroupingAttributes:")
+	_nSMetadataQuerySelNotificationBatchingInterval     = objc.RegisterName("notificationBatchingInterval")
+	_nSMetadataQuerySelSetNotificationBatchingInterval  = objc.RegisterName("setNotificationBatchingInterval:")
+	_nSMetadataQuerySelSearchScopes                     = objc.RegisterName("searchScopes")
+	_nSMetadataQuerySelSetSearchScopes                  = objc.RegisterName("setSearchScopes:")
+	_nSMetadataQuerySelSearchItems                      = objc.RegisterName("searchItems")
+	_nSMetadataQuerySelSetSearchItems                   = objc.RegisterName("setSearchItems:")
+	_nSMetadataQuerySelOperationQueue                   = objc.RegisterName("operationQueue")
+	_nSMetadataQuerySelSetOperationQueue                = objc.RegisterName("setOperationQueue:")
+	_nSMetadataQuerySelIsStarted                        = objc.RegisterName("isStarted")
+	_nSMetadataQuerySelIsGathering                      = objc.RegisterName("isGathering")
+	_nSMetadataQuerySelIsStopped                        = objc.RegisterName("isStopped")
+	_nSMetadataQuerySelResultCount                      = objc.RegisterName("resultCount")
+	_nSMetadataQuerySelResults                          = objc.RegisterName("results")
+	_nSMetadataQuerySelValueLists                       = objc.RegisterName("valueLists")
+	_nSMetadataQuerySelGroupedResults                   = objc.RegisterName("groupedResults")
 )
 
 func NSMetadataQueryFromID(id objc.ID) *NSMetadataQuery {
@@ -127,7 +127,9 @@ func (o *NSMetadataQuery) SetDelegate(delegate NSMetadataQueryDelegate) {
 
 func (o *NSMetadataQuery) Predicate() *NSPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQuerySelPredicate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPredicateFromID(_ret)
 }
 
@@ -137,7 +139,9 @@ func (o *NSMetadataQuery) SetPredicate(predicate *NSPredicate) {
 
 func (o *NSMetadataQuery) SortDescriptors() *NSArray[*NSSortDescriptor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQuerySelSortDescriptors)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSSortDescriptor](_ret)
 }
 
@@ -147,7 +151,9 @@ func (o *NSMetadataQuery) SetSortDescriptors(sortDescriptors *NSArray[*NSSortDes
 
 func (o *NSMetadataQuery) ValueListAttributes() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQuerySelValueListAttributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -157,7 +163,9 @@ func (o *NSMetadataQuery) SetValueListAttributes(valueListAttributes *NSArray[*N
 
 func (o *NSMetadataQuery) GroupingAttributes() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQuerySelGroupingAttributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -194,7 +202,9 @@ func (o *NSMetadataQuery) SetSearchItems(searchItems *NSArray[objc.ID]) {
 
 func (o *NSMetadataQuery) OperationQueue() *NSOperationQueue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQuerySelOperationQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOperationQueueFromID(_ret)
 }
 
@@ -234,7 +244,8 @@ func (o *NSMetadataQuery) ValueLists() *NSDictionary[*NSString, objc.ID] {
 
 func (o *NSMetadataQuery) GroupedResults() *NSArray[*NSMetadataQueryResultGroup] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQuerySelGroupedResults)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSMetadataQueryResultGroup](_ret)
 }
-

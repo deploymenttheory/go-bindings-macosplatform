@@ -18,9 +18,9 @@ type PHPersistentChange struct {
 }
 
 var (
-	_clsPHPersistentChange = _objcClass("PHPersistentChange")
+	_clsPHPersistentChange                                = _objcClass("PHPersistentChange")
 	_pHPersistentChangeSelChangeDetailsForObjectTypeError = objc.RegisterName("changeDetailsForObjectType:error:")
-	_pHPersistentChangeSelChangeToken = objc.RegisterName("changeToken")
+	_pHPersistentChangeSelChangeToken                     = objc.RegisterName("changeToken")
 )
 
 func PHPersistentChangeFromID(id objc.ID) *PHPersistentChange {
@@ -36,7 +36,9 @@ func PHPersistentChangeFromID(id objc.ID) *PHPersistentChange {
 func (o *PHPersistentChange) ChangeDetailsForObjectTypeError(objectType PHObjectType) (*PHPersistentObjectChangeDetails, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHPersistentChangeSelChangeDetailsForObjectTypeError, objectType, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -45,7 +47,8 @@ func (o *PHPersistentChange) ChangeDetailsForObjectTypeError(objectType PHObject
 
 func (o *PHPersistentChange) ChangeToken() *PHPersistentChangeToken {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHPersistentChangeSelChangeToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHPersistentChangeTokenFromID(_ret)
 }
-

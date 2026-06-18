@@ -26,4 +26,3 @@ func VZSocketDeviceFromID(id objc.ID) *VZSocketDevice {
 	purego.Track(o)
 	return o
 }
-

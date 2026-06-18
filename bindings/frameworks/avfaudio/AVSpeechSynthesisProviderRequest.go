@@ -16,10 +16,10 @@ type AVSpeechSynthesisProviderRequest struct {
 }
 
 var (
-	_clsAVSpeechSynthesisProviderRequest = _objcClass("AVSpeechSynthesisProviderRequest")
+	_clsAVSpeechSynthesisProviderRequest                                = _objcClass("AVSpeechSynthesisProviderRequest")
 	_aVSpeechSynthesisProviderRequestSelInitWithSSMLRepresentationVoice = objc.RegisterName("initWithSSMLRepresentation:voice:")
-	_aVSpeechSynthesisProviderRequestSelSsmlRepresentation = objc.RegisterName("ssmlRepresentation")
-	_aVSpeechSynthesisProviderRequestSelVoice = objc.RegisterName("voice")
+	_aVSpeechSynthesisProviderRequestSelSsmlRepresentation              = objc.RegisterName("ssmlRepresentation")
+	_aVSpeechSynthesisProviderRequestSelVoice                           = objc.RegisterName("voice")
 )
 
 func AVSpeechSynthesisProviderRequestFromID(id objc.ID) *AVSpeechSynthesisProviderRequest {
@@ -34,21 +34,26 @@ func AVSpeechSynthesisProviderRequestFromID(id objc.ID) *AVSpeechSynthesisProvid
 
 func (o *AVSpeechSynthesisProviderRequest) InitWithSSMLRepresentationVoice(text *foundation.NSString, voice *AVSpeechSynthesisProviderVoice) *AVSpeechSynthesisProviderRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechSynthesisProviderRequestSelInitWithSSMLRepresentationVoice, text.Ptr(), voice.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVSpeechSynthesisProviderRequestFromID(_ret)
 }
 
 // @abstract The SSML representation of the text to be synthesized with the corresponding speech synthesis attributes for customization of pitch, rate, intonation, and more. @see https://www.w3.org/TR/speech-synthesis11/
 func (o *AVSpeechSynthesisProviderRequest) SsmlRepresentation() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechSynthesisProviderRequestSelSsmlRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract The voice to be used in this speech request
 func (o *AVSpeechSynthesisProviderRequest) Voice() *AVSpeechSynthesisProviderVoice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechSynthesisProviderRequestSelVoice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVSpeechSynthesisProviderVoiceFromID(_ret)
 }
-

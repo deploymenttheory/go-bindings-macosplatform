@@ -75,4 +75,3 @@ type MediaPresentationSelectorable interface {
 }
 
 var _ MediaPresentationSelectorable = (*MediaPresentationSelector)(nil)
-

@@ -19,80 +19,80 @@ type CAEmitterCell struct {
 }
 
 var (
-	_clsCAEmitterCell = _objcClass("CAEmitterCell")
-	_cAEmitterCellSelEmitterCell = objc.RegisterName("emitterCell")
-	_cAEmitterCellSelDefaultValueForKey = objc.RegisterName("defaultValueForKey:")
-	_cAEmitterCellSelShouldArchiveValueForKey = objc.RegisterName("shouldArchiveValueForKey:")
-	_cAEmitterCellSelName = objc.RegisterName("name")
-	_cAEmitterCellSelSetName = objc.RegisterName("setName:")
-	_cAEmitterCellSelIsEnabled = objc.RegisterName("isEnabled")
-	_cAEmitterCellSelSetEnabled = objc.RegisterName("setEnabled:")
-	_cAEmitterCellSelBirthRate = objc.RegisterName("birthRate")
-	_cAEmitterCellSelSetBirthRate = objc.RegisterName("setBirthRate:")
-	_cAEmitterCellSelLifetime = objc.RegisterName("lifetime")
-	_cAEmitterCellSelSetLifetime = objc.RegisterName("setLifetime:")
-	_cAEmitterCellSelLifetimeRange = objc.RegisterName("lifetimeRange")
-	_cAEmitterCellSelSetLifetimeRange = objc.RegisterName("setLifetimeRange:")
-	_cAEmitterCellSelEmissionLatitude = objc.RegisterName("emissionLatitude")
-	_cAEmitterCellSelSetEmissionLatitude = objc.RegisterName("setEmissionLatitude:")
-	_cAEmitterCellSelEmissionLongitude = objc.RegisterName("emissionLongitude")
-	_cAEmitterCellSelSetEmissionLongitude = objc.RegisterName("setEmissionLongitude:")
-	_cAEmitterCellSelEmissionRange = objc.RegisterName("emissionRange")
-	_cAEmitterCellSelSetEmissionRange = objc.RegisterName("setEmissionRange:")
-	_cAEmitterCellSelVelocity = objc.RegisterName("velocity")
-	_cAEmitterCellSelSetVelocity = objc.RegisterName("setVelocity:")
-	_cAEmitterCellSelVelocityRange = objc.RegisterName("velocityRange")
-	_cAEmitterCellSelSetVelocityRange = objc.RegisterName("setVelocityRange:")
-	_cAEmitterCellSelXAcceleration = objc.RegisterName("xAcceleration")
-	_cAEmitterCellSelSetXAcceleration = objc.RegisterName("setXAcceleration:")
-	_cAEmitterCellSelYAcceleration = objc.RegisterName("yAcceleration")
-	_cAEmitterCellSelSetYAcceleration = objc.RegisterName("setYAcceleration:")
-	_cAEmitterCellSelZAcceleration = objc.RegisterName("zAcceleration")
-	_cAEmitterCellSelSetZAcceleration = objc.RegisterName("setZAcceleration:")
-	_cAEmitterCellSelScale = objc.RegisterName("scale")
-	_cAEmitterCellSelSetScale = objc.RegisterName("setScale:")
-	_cAEmitterCellSelScaleRange = objc.RegisterName("scaleRange")
-	_cAEmitterCellSelSetScaleRange = objc.RegisterName("setScaleRange:")
-	_cAEmitterCellSelScaleSpeed = objc.RegisterName("scaleSpeed")
-	_cAEmitterCellSelSetScaleSpeed = objc.RegisterName("setScaleSpeed:")
-	_cAEmitterCellSelSpin = objc.RegisterName("spin")
-	_cAEmitterCellSelSetSpin = objc.RegisterName("setSpin:")
-	_cAEmitterCellSelSpinRange = objc.RegisterName("spinRange")
-	_cAEmitterCellSelSetSpinRange = objc.RegisterName("setSpinRange:")
-	_cAEmitterCellSelColor = objc.RegisterName("color")
-	_cAEmitterCellSelSetColor = objc.RegisterName("setColor:")
-	_cAEmitterCellSelRedRange = objc.RegisterName("redRange")
-	_cAEmitterCellSelSetRedRange = objc.RegisterName("setRedRange:")
-	_cAEmitterCellSelGreenRange = objc.RegisterName("greenRange")
-	_cAEmitterCellSelSetGreenRange = objc.RegisterName("setGreenRange:")
-	_cAEmitterCellSelBlueRange = objc.RegisterName("blueRange")
-	_cAEmitterCellSelSetBlueRange = objc.RegisterName("setBlueRange:")
-	_cAEmitterCellSelAlphaRange = objc.RegisterName("alphaRange")
-	_cAEmitterCellSelSetAlphaRange = objc.RegisterName("setAlphaRange:")
-	_cAEmitterCellSelRedSpeed = objc.RegisterName("redSpeed")
-	_cAEmitterCellSelSetRedSpeed = objc.RegisterName("setRedSpeed:")
-	_cAEmitterCellSelGreenSpeed = objc.RegisterName("greenSpeed")
-	_cAEmitterCellSelSetGreenSpeed = objc.RegisterName("setGreenSpeed:")
-	_cAEmitterCellSelBlueSpeed = objc.RegisterName("blueSpeed")
-	_cAEmitterCellSelSetBlueSpeed = objc.RegisterName("setBlueSpeed:")
-	_cAEmitterCellSelAlphaSpeed = objc.RegisterName("alphaSpeed")
-	_cAEmitterCellSelSetAlphaSpeed = objc.RegisterName("setAlphaSpeed:")
-	_cAEmitterCellSelContents = objc.RegisterName("contents")
-	_cAEmitterCellSelSetContents = objc.RegisterName("setContents:")
-	_cAEmitterCellSelContentsRect = objc.RegisterName("contentsRect")
-	_cAEmitterCellSelSetContentsRect = objc.RegisterName("setContentsRect:")
-	_cAEmitterCellSelContentsScale = objc.RegisterName("contentsScale")
-	_cAEmitterCellSelSetContentsScale = objc.RegisterName("setContentsScale:")
-	_cAEmitterCellSelMinificationFilter = objc.RegisterName("minificationFilter")
-	_cAEmitterCellSelSetMinificationFilter = objc.RegisterName("setMinificationFilter:")
-	_cAEmitterCellSelMagnificationFilter = objc.RegisterName("magnificationFilter")
-	_cAEmitterCellSelSetMagnificationFilter = objc.RegisterName("setMagnificationFilter:")
-	_cAEmitterCellSelMinificationFilterBias = objc.RegisterName("minificationFilterBias")
+	_clsCAEmitterCell                          = _objcClass("CAEmitterCell")
+	_cAEmitterCellSelEmitterCell               = objc.RegisterName("emitterCell")
+	_cAEmitterCellSelDefaultValueForKey        = objc.RegisterName("defaultValueForKey:")
+	_cAEmitterCellSelShouldArchiveValueForKey  = objc.RegisterName("shouldArchiveValueForKey:")
+	_cAEmitterCellSelName                      = objc.RegisterName("name")
+	_cAEmitterCellSelSetName                   = objc.RegisterName("setName:")
+	_cAEmitterCellSelIsEnabled                 = objc.RegisterName("isEnabled")
+	_cAEmitterCellSelSetEnabled                = objc.RegisterName("setEnabled:")
+	_cAEmitterCellSelBirthRate                 = objc.RegisterName("birthRate")
+	_cAEmitterCellSelSetBirthRate              = objc.RegisterName("setBirthRate:")
+	_cAEmitterCellSelLifetime                  = objc.RegisterName("lifetime")
+	_cAEmitterCellSelSetLifetime               = objc.RegisterName("setLifetime:")
+	_cAEmitterCellSelLifetimeRange             = objc.RegisterName("lifetimeRange")
+	_cAEmitterCellSelSetLifetimeRange          = objc.RegisterName("setLifetimeRange:")
+	_cAEmitterCellSelEmissionLatitude          = objc.RegisterName("emissionLatitude")
+	_cAEmitterCellSelSetEmissionLatitude       = objc.RegisterName("setEmissionLatitude:")
+	_cAEmitterCellSelEmissionLongitude         = objc.RegisterName("emissionLongitude")
+	_cAEmitterCellSelSetEmissionLongitude      = objc.RegisterName("setEmissionLongitude:")
+	_cAEmitterCellSelEmissionRange             = objc.RegisterName("emissionRange")
+	_cAEmitterCellSelSetEmissionRange          = objc.RegisterName("setEmissionRange:")
+	_cAEmitterCellSelVelocity                  = objc.RegisterName("velocity")
+	_cAEmitterCellSelSetVelocity               = objc.RegisterName("setVelocity:")
+	_cAEmitterCellSelVelocityRange             = objc.RegisterName("velocityRange")
+	_cAEmitterCellSelSetVelocityRange          = objc.RegisterName("setVelocityRange:")
+	_cAEmitterCellSelXAcceleration             = objc.RegisterName("xAcceleration")
+	_cAEmitterCellSelSetXAcceleration          = objc.RegisterName("setXAcceleration:")
+	_cAEmitterCellSelYAcceleration             = objc.RegisterName("yAcceleration")
+	_cAEmitterCellSelSetYAcceleration          = objc.RegisterName("setYAcceleration:")
+	_cAEmitterCellSelZAcceleration             = objc.RegisterName("zAcceleration")
+	_cAEmitterCellSelSetZAcceleration          = objc.RegisterName("setZAcceleration:")
+	_cAEmitterCellSelScale                     = objc.RegisterName("scale")
+	_cAEmitterCellSelSetScale                  = objc.RegisterName("setScale:")
+	_cAEmitterCellSelScaleRange                = objc.RegisterName("scaleRange")
+	_cAEmitterCellSelSetScaleRange             = objc.RegisterName("setScaleRange:")
+	_cAEmitterCellSelScaleSpeed                = objc.RegisterName("scaleSpeed")
+	_cAEmitterCellSelSetScaleSpeed             = objc.RegisterName("setScaleSpeed:")
+	_cAEmitterCellSelSpin                      = objc.RegisterName("spin")
+	_cAEmitterCellSelSetSpin                   = objc.RegisterName("setSpin:")
+	_cAEmitterCellSelSpinRange                 = objc.RegisterName("spinRange")
+	_cAEmitterCellSelSetSpinRange              = objc.RegisterName("setSpinRange:")
+	_cAEmitterCellSelColor                     = objc.RegisterName("color")
+	_cAEmitterCellSelSetColor                  = objc.RegisterName("setColor:")
+	_cAEmitterCellSelRedRange                  = objc.RegisterName("redRange")
+	_cAEmitterCellSelSetRedRange               = objc.RegisterName("setRedRange:")
+	_cAEmitterCellSelGreenRange                = objc.RegisterName("greenRange")
+	_cAEmitterCellSelSetGreenRange             = objc.RegisterName("setGreenRange:")
+	_cAEmitterCellSelBlueRange                 = objc.RegisterName("blueRange")
+	_cAEmitterCellSelSetBlueRange              = objc.RegisterName("setBlueRange:")
+	_cAEmitterCellSelAlphaRange                = objc.RegisterName("alphaRange")
+	_cAEmitterCellSelSetAlphaRange             = objc.RegisterName("setAlphaRange:")
+	_cAEmitterCellSelRedSpeed                  = objc.RegisterName("redSpeed")
+	_cAEmitterCellSelSetRedSpeed               = objc.RegisterName("setRedSpeed:")
+	_cAEmitterCellSelGreenSpeed                = objc.RegisterName("greenSpeed")
+	_cAEmitterCellSelSetGreenSpeed             = objc.RegisterName("setGreenSpeed:")
+	_cAEmitterCellSelBlueSpeed                 = objc.RegisterName("blueSpeed")
+	_cAEmitterCellSelSetBlueSpeed              = objc.RegisterName("setBlueSpeed:")
+	_cAEmitterCellSelAlphaSpeed                = objc.RegisterName("alphaSpeed")
+	_cAEmitterCellSelSetAlphaSpeed             = objc.RegisterName("setAlphaSpeed:")
+	_cAEmitterCellSelContents                  = objc.RegisterName("contents")
+	_cAEmitterCellSelSetContents               = objc.RegisterName("setContents:")
+	_cAEmitterCellSelContentsRect              = objc.RegisterName("contentsRect")
+	_cAEmitterCellSelSetContentsRect           = objc.RegisterName("setContentsRect:")
+	_cAEmitterCellSelContentsScale             = objc.RegisterName("contentsScale")
+	_cAEmitterCellSelSetContentsScale          = objc.RegisterName("setContentsScale:")
+	_cAEmitterCellSelMinificationFilter        = objc.RegisterName("minificationFilter")
+	_cAEmitterCellSelSetMinificationFilter     = objc.RegisterName("setMinificationFilter:")
+	_cAEmitterCellSelMagnificationFilter       = objc.RegisterName("magnificationFilter")
+	_cAEmitterCellSelSetMagnificationFilter    = objc.RegisterName("setMagnificationFilter:")
+	_cAEmitterCellSelMinificationFilterBias    = objc.RegisterName("minificationFilterBias")
 	_cAEmitterCellSelSetMinificationFilterBias = objc.RegisterName("setMinificationFilterBias:")
-	_cAEmitterCellSelEmitterCells = objc.RegisterName("emitterCells")
-	_cAEmitterCellSelSetEmitterCells = objc.RegisterName("setEmitterCells:")
-	_cAEmitterCellSelStyle = objc.RegisterName("style")
-	_cAEmitterCellSelSetStyle = objc.RegisterName("setStyle:")
+	_cAEmitterCellSelEmitterCells              = objc.RegisterName("emitterCells")
+	_cAEmitterCellSelSetEmitterCells           = objc.RegisterName("setEmitterCells:")
+	_cAEmitterCellSelStyle                     = objc.RegisterName("style")
+	_cAEmitterCellSelSetStyle                  = objc.RegisterName("setStyle:")
 )
 
 func CAEmitterCellFromID(id objc.ID) *CAEmitterCell {
@@ -107,7 +107,9 @@ func CAEmitterCellFromID(id objc.ID) *CAEmitterCell {
 
 func CAEmitterCellEmitterCell() *CAEmitterCell {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCAEmitterCell), _cAEmitterCellSelEmitterCell)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CAEmitterCellFromID(_ret)
 }
 
@@ -123,7 +125,9 @@ func (o *CAEmitterCell) ShouldArchiveValueForKey(key *foundation.NSString) bool 
 
 func (o *CAEmitterCell) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cAEmitterCellSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -394,7 +398,9 @@ func (o *CAEmitterCell) SetContentsScale(contentsScale float64) {
 
 func (o *CAEmitterCell) MinificationFilter() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cAEmitterCellSelMinificationFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -404,7 +410,9 @@ func (o *CAEmitterCell) SetMinificationFilter(minificationFilter *foundation.NSS
 
 func (o *CAEmitterCell) MagnificationFilter() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cAEmitterCellSelMagnificationFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -423,7 +431,9 @@ func (o *CAEmitterCell) SetMinificationFilterBias(minificationFilterBias float32
 
 func (o *CAEmitterCell) EmitterCells() *foundation.NSArray[*CAEmitterCell] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cAEmitterCellSelEmitterCells)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CAEmitterCell](_ret)
 }
 
@@ -439,4 +449,3 @@ func (o *CAEmitterCell) Style() *foundation.NSDictionary[objc.ID, objc.ID] {
 func (o *CAEmitterCell) SetStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) {
 	o.Ptr().Send(_cAEmitterCellSelSetStyle, style)
 }
-

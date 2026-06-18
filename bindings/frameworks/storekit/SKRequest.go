@@ -17,10 +17,10 @@ type SKRequest struct {
 }
 
 var (
-	_clsSKRequest = _objcClass("SKRequest")
-	_sKRequestSelCancel = objc.RegisterName("cancel")
-	_sKRequestSelStart = objc.RegisterName("start")
-	_sKRequestSelDelegate = objc.RegisterName("delegate")
+	_clsSKRequest            = _objcClass("SKRequest")
+	_sKRequestSelCancel      = objc.RegisterName("cancel")
+	_sKRequestSelStart       = objc.RegisterName("start")
+	_sKRequestSelDelegate    = objc.RegisterName("delegate")
 	_sKRequestSelSetDelegate = objc.RegisterName("setDelegate:")
 )
 
@@ -50,4 +50,3 @@ func (o *SKRequest) Delegate() SKRequestDelegate {
 func (o *SKRequest) SetDelegate(delegate SKRequestDelegate) {
 	o.Ptr().Send(_sKRequestSelSetDelegate, delegate)
 }
-

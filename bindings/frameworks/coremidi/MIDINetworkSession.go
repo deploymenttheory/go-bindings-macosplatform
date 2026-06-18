@@ -16,22 +16,22 @@ type MIDINetworkSession struct {
 }
 
 var (
-	_clsMIDINetworkSession = _objcClass("MIDINetworkSession")
-	_mIDINetworkSessionSelDefaultSession = objc.RegisterName("defaultSession")
-	_mIDINetworkSessionSelContacts = objc.RegisterName("contacts")
-	_mIDINetworkSessionSelAddContact = objc.RegisterName("addContact:")
-	_mIDINetworkSessionSelRemoveContact = objc.RegisterName("removeContact:")
-	_mIDINetworkSessionSelConnections = objc.RegisterName("connections")
-	_mIDINetworkSessionSelAddConnection = objc.RegisterName("addConnection:")
-	_mIDINetworkSessionSelRemoveConnection = objc.RegisterName("removeConnection:")
-	_mIDINetworkSessionSelSourceEndpoint = objc.RegisterName("sourceEndpoint")
+	_clsMIDINetworkSession                    = _objcClass("MIDINetworkSession")
+	_mIDINetworkSessionSelDefaultSession      = objc.RegisterName("defaultSession")
+	_mIDINetworkSessionSelContacts            = objc.RegisterName("contacts")
+	_mIDINetworkSessionSelAddContact          = objc.RegisterName("addContact:")
+	_mIDINetworkSessionSelRemoveContact       = objc.RegisterName("removeContact:")
+	_mIDINetworkSessionSelConnections         = objc.RegisterName("connections")
+	_mIDINetworkSessionSelAddConnection       = objc.RegisterName("addConnection:")
+	_mIDINetworkSessionSelRemoveConnection    = objc.RegisterName("removeConnection:")
+	_mIDINetworkSessionSelSourceEndpoint      = objc.RegisterName("sourceEndpoint")
 	_mIDINetworkSessionSelDestinationEndpoint = objc.RegisterName("destinationEndpoint")
-	_mIDINetworkSessionSelIsEnabled = objc.RegisterName("isEnabled")
-	_mIDINetworkSessionSelSetEnabled = objc.RegisterName("setEnabled:")
-	_mIDINetworkSessionSelNetworkPort = objc.RegisterName("networkPort")
-	_mIDINetworkSessionSelNetworkName = objc.RegisterName("networkName")
-	_mIDINetworkSessionSelLocalName = objc.RegisterName("localName")
-	_mIDINetworkSessionSelConnectionPolicy = objc.RegisterName("connectionPolicy")
+	_mIDINetworkSessionSelIsEnabled           = objc.RegisterName("isEnabled")
+	_mIDINetworkSessionSelSetEnabled          = objc.RegisterName("setEnabled:")
+	_mIDINetworkSessionSelNetworkPort         = objc.RegisterName("networkPort")
+	_mIDINetworkSessionSelNetworkName         = objc.RegisterName("networkName")
+	_mIDINetworkSessionSelLocalName           = objc.RegisterName("localName")
+	_mIDINetworkSessionSelConnectionPolicy    = objc.RegisterName("connectionPolicy")
 	_mIDINetworkSessionSelSetConnectionPolicy = objc.RegisterName("setConnectionPolicy:")
 )
 
@@ -47,13 +47,17 @@ func MIDINetworkSessionFromID(id objc.ID) *MIDINetworkSession {
 
 func MIDINetworkSessionDefaultSession() *MIDINetworkSession {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMIDINetworkSession), _mIDINetworkSessionSelDefaultSession)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MIDINetworkSessionFromID(_ret)
 }
 
 func (o *MIDINetworkSession) Contacts() *foundation.NSSet[*MIDINetworkHost] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDINetworkSessionSelContacts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*MIDINetworkHost](_ret)
 }
 
@@ -69,7 +73,9 @@ func (o *MIDINetworkSession) RemoveContact(contact *MIDINetworkHost) bool {
 
 func (o *MIDINetworkSession) Connections() *foundation.NSSet[*MIDINetworkConnection] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDINetworkSessionSelConnections)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*MIDINetworkConnection](_ret)
 }
 
@@ -109,13 +115,17 @@ func (o *MIDINetworkSession) NetworkPort() uint {
 
 func (o *MIDINetworkSession) NetworkName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDINetworkSessionSelNetworkName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MIDINetworkSession) LocalName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDINetworkSessionSelLocalName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -127,4 +137,3 @@ func (o *MIDINetworkSession) ConnectionPolicy() MIDINetworkConnectionPolicy {
 func (o *MIDINetworkSession) SetConnectionPolicy(connectionPolicy MIDINetworkConnectionPolicy) {
 	o.Ptr().Send(_mIDINetworkSessionSelSetConnectionPolicy, connectionPolicy)
 }
-

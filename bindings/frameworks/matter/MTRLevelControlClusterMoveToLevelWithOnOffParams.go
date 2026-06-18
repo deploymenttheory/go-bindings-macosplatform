@@ -16,18 +16,18 @@ type MTRLevelControlClusterMoveToLevelWithOnOffParams struct {
 }
 
 var (
-	_clsMTRLevelControlClusterMoveToLevelWithOnOffParams = _objcClass("MTRLevelControlClusterMoveToLevelWithOnOffParams")
-	_mTRLevelControlClusterMoveToLevelWithOnOffParamsSelLevel = objc.RegisterName("level")
-	_mTRLevelControlClusterMoveToLevelWithOnOffParamsSelSetLevel = objc.RegisterName("setLevel:")
-	_mTRLevelControlClusterMoveToLevelWithOnOffParamsSelTransitionTime = objc.RegisterName("transitionTime")
-	_mTRLevelControlClusterMoveToLevelWithOnOffParamsSelSetTransitionTime = objc.RegisterName("setTransitionTime:")
-	_mTRLevelControlClusterMoveToLevelWithOnOffParamsSelOptionsMask = objc.RegisterName("optionsMask")
-	_mTRLevelControlClusterMoveToLevelWithOnOffParamsSelSetOptionsMask = objc.RegisterName("setOptionsMask:")
-	_mTRLevelControlClusterMoveToLevelWithOnOffParamsSelOptionsOverride = objc.RegisterName("optionsOverride")
-	_mTRLevelControlClusterMoveToLevelWithOnOffParamsSelSetOptionsOverride = objc.RegisterName("setOptionsOverride:")
-	_mTRLevelControlClusterMoveToLevelWithOnOffParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRLevelControlClusterMoveToLevelWithOnOffParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRLevelControlClusterMoveToLevelWithOnOffParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRLevelControlClusterMoveToLevelWithOnOffParams                               = _objcClass("MTRLevelControlClusterMoveToLevelWithOnOffParams")
+	_mTRLevelControlClusterMoveToLevelWithOnOffParamsSelLevel                          = objc.RegisterName("level")
+	_mTRLevelControlClusterMoveToLevelWithOnOffParamsSelSetLevel                       = objc.RegisterName("setLevel:")
+	_mTRLevelControlClusterMoveToLevelWithOnOffParamsSelTransitionTime                 = objc.RegisterName("transitionTime")
+	_mTRLevelControlClusterMoveToLevelWithOnOffParamsSelSetTransitionTime              = objc.RegisterName("setTransitionTime:")
+	_mTRLevelControlClusterMoveToLevelWithOnOffParamsSelOptionsMask                    = objc.RegisterName("optionsMask")
+	_mTRLevelControlClusterMoveToLevelWithOnOffParamsSelSetOptionsMask                 = objc.RegisterName("setOptionsMask:")
+	_mTRLevelControlClusterMoveToLevelWithOnOffParamsSelOptionsOverride                = objc.RegisterName("optionsOverride")
+	_mTRLevelControlClusterMoveToLevelWithOnOffParamsSelSetOptionsOverride             = objc.RegisterName("setOptionsOverride:")
+	_mTRLevelControlClusterMoveToLevelWithOnOffParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRLevelControlClusterMoveToLevelWithOnOffParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRLevelControlClusterMoveToLevelWithOnOffParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRLevelControlClusterMoveToLevelWithOnOffParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -43,7 +43,9 @@ func MTRLevelControlClusterMoveToLevelWithOnOffParamsFromID(id objc.ID) *MTRLeve
 
 func (o *MTRLevelControlClusterMoveToLevelWithOnOffParams) Level() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRLevelControlClusterMoveToLevelWithOnOffParamsSelLevel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -53,7 +55,9 @@ func (o *MTRLevelControlClusterMoveToLevelWithOnOffParams) SetLevel(level *found
 
 func (o *MTRLevelControlClusterMoveToLevelWithOnOffParams) TransitionTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRLevelControlClusterMoveToLevelWithOnOffParamsSelTransitionTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -63,7 +67,9 @@ func (o *MTRLevelControlClusterMoveToLevelWithOnOffParams) SetTransitionTime(tra
 
 func (o *MTRLevelControlClusterMoveToLevelWithOnOffParams) OptionsMask() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRLevelControlClusterMoveToLevelWithOnOffParamsSelOptionsMask)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -73,7 +79,9 @@ func (o *MTRLevelControlClusterMoveToLevelWithOnOffParams) SetOptionsMask(option
 
 func (o *MTRLevelControlClusterMoveToLevelWithOnOffParams) OptionsOverride() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRLevelControlClusterMoveToLevelWithOnOffParamsSelOptionsOverride)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -84,7 +92,9 @@ func (o *MTRLevelControlClusterMoveToLevelWithOnOffParams) SetOptionsOverride(op
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRLevelControlClusterMoveToLevelWithOnOffParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRLevelControlClusterMoveToLevelWithOnOffParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -95,11 +105,12 @@ func (o *MTRLevelControlClusterMoveToLevelWithOnOffParams) SetTimedInvokeTimeout
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRLevelControlClusterMoveToLevelWithOnOffParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRLevelControlClusterMoveToLevelWithOnOffParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRLevelControlClusterMoveToLevelWithOnOffParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRLevelControlClusterMoveToLevelWithOnOffParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

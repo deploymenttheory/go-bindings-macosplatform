@@ -35,7 +35,9 @@ func NewNNBinaryGradientState() *NNBinaryGradientState {
 	return &NNBinaryGradientState{inner: raw.MPSNNBinaryGradientStateFromID(_id)}
 }
 
-func (x *NNBinaryGradientState) asNNBinaryGradientState() *raw.MPSNNBinaryGradientState { return x.inner }
+func (x *NNBinaryGradientState) asNNBinaryGradientState() *raw.MPSNNBinaryGradientState {
+	return x.inner
+}
 
 // NNBinaryGradientStateable is the interface implemented by [NNBinaryGradientState], for mocking and DI.
 type NNBinaryGradientStateable interface {
@@ -43,4 +45,3 @@ type NNBinaryGradientStateable interface {
 }
 
 var _ NNBinaryGradientStateable = (*NNBinaryGradientState)(nil)
-

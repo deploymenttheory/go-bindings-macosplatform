@@ -18,15 +18,15 @@ type NLGazetteer struct {
 }
 
 var (
-	_clsNLGazetteer = _objcClass("NLGazetteer")
-	_nLGazetteerSelGazetteerWithContentsOfURLError = objc.RegisterName("gazetteerWithContentsOfURL:error:")
-	_nLGazetteerSelInitWithContentsOfURLError = objc.RegisterName("initWithContentsOfURL:error:")
-	_nLGazetteerSelInitWithDataError = objc.RegisterName("initWithData:error:")
-	_nLGazetteerSelInitWithDictionaryLanguageError = objc.RegisterName("initWithDictionary:language:error:")
-	_nLGazetteerSelLabelForString = objc.RegisterName("labelForString:")
+	_clsNLGazetteer                                              = _objcClass("NLGazetteer")
+	_nLGazetteerSelGazetteerWithContentsOfURLError               = objc.RegisterName("gazetteerWithContentsOfURL:error:")
+	_nLGazetteerSelInitWithContentsOfURLError                    = objc.RegisterName("initWithContentsOfURL:error:")
+	_nLGazetteerSelInitWithDataError                             = objc.RegisterName("initWithData:error:")
+	_nLGazetteerSelInitWithDictionaryLanguageError               = objc.RegisterName("initWithDictionary:language:error:")
+	_nLGazetteerSelLabelForString                                = objc.RegisterName("labelForString:")
 	_nLGazetteerSelWriteGazetteerForDictionaryLanguageToURLError = objc.RegisterName("writeGazetteerForDictionary:language:toURL:error:")
-	_nLGazetteerSelLanguage = objc.RegisterName("language")
-	_nLGazetteerSelData = objc.RegisterName("data")
+	_nLGazetteerSelLanguage                                      = objc.RegisterName("language")
+	_nLGazetteerSelData                                          = objc.RegisterName("data")
 )
 
 func NLGazetteerFromID(id objc.ID) *NLGazetteer {
@@ -42,7 +42,9 @@ func NLGazetteerFromID(id objc.ID) *NLGazetteer {
 func NLGazetteerGazetteerWithContentsOfURLError(url *foundation.NSURL) (*NLGazetteer, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNLGazetteer), _nLGazetteerSelGazetteerWithContentsOfURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -52,7 +54,9 @@ func NLGazetteerGazetteerWithContentsOfURLError(url *foundation.NSURL) (*NLGazet
 func (o *NLGazetteer) InitWithContentsOfURLError(url *foundation.NSURL) (*NLGazetteer, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLGazetteerSelInitWithContentsOfURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -62,7 +66,9 @@ func (o *NLGazetteer) InitWithContentsOfURLError(url *foundation.NSURL) (*NLGaze
 func (o *NLGazetteer) InitWithDataError(data *foundation.NSData) (*NLGazetteer, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLGazetteerSelInitWithDataError, data.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -72,7 +78,9 @@ func (o *NLGazetteer) InitWithDataError(data *foundation.NSData) (*NLGazetteer, 
 func (o *NLGazetteer) InitWithDictionaryLanguageError(dictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], language *foundation.NSString) (*NLGazetteer, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLGazetteerSelInitWithDictionaryLanguageError, dictionary, language.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -81,7 +89,9 @@ func (o *NLGazetteer) InitWithDictionaryLanguageError(dictionary *foundation.NSD
 
 func (o *NLGazetteer) LabelForString(string_ *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLGazetteerSelLabelForString, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -96,13 +106,16 @@ func NLGazetteerWriteGazetteerForDictionaryLanguageToURLError(dictionary *founda
 
 func (o *NLGazetteer) Language() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLGazetteerSelLanguage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NLGazetteer) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLGazetteerSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

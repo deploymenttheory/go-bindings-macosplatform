@@ -16,13 +16,13 @@ type MTL4PipelineStageDynamicLinkingDescriptor struct {
 }
 
 var (
-	_clsMTL4PipelineStageDynamicLinkingDescriptor = _objcClass("MTL4PipelineStageDynamicLinkingDescriptor")
-	_mTL4PipelineStageDynamicLinkingDescriptorSelMaxCallStackDepth = objc.RegisterName("maxCallStackDepth")
-	_mTL4PipelineStageDynamicLinkingDescriptorSelSetMaxCallStackDepth = objc.RegisterName("setMaxCallStackDepth:")
-	_mTL4PipelineStageDynamicLinkingDescriptorSelBinaryLinkedFunctions = objc.RegisterName("binaryLinkedFunctions")
+	_clsMTL4PipelineStageDynamicLinkingDescriptor                         = _objcClass("MTL4PipelineStageDynamicLinkingDescriptor")
+	_mTL4PipelineStageDynamicLinkingDescriptorSelMaxCallStackDepth        = objc.RegisterName("maxCallStackDepth")
+	_mTL4PipelineStageDynamicLinkingDescriptorSelSetMaxCallStackDepth     = objc.RegisterName("setMaxCallStackDepth:")
+	_mTL4PipelineStageDynamicLinkingDescriptorSelBinaryLinkedFunctions    = objc.RegisterName("binaryLinkedFunctions")
 	_mTL4PipelineStageDynamicLinkingDescriptorSelSetBinaryLinkedFunctions = objc.RegisterName("setBinaryLinkedFunctions:")
-	_mTL4PipelineStageDynamicLinkingDescriptorSelPreloadedLibraries = objc.RegisterName("preloadedLibraries")
-	_mTL4PipelineStageDynamicLinkingDescriptorSelSetPreloadedLibraries = objc.RegisterName("setPreloadedLibraries:")
+	_mTL4PipelineStageDynamicLinkingDescriptorSelPreloadedLibraries       = objc.RegisterName("preloadedLibraries")
+	_mTL4PipelineStageDynamicLinkingDescriptorSelSetPreloadedLibraries    = objc.RegisterName("setPreloadedLibraries:")
 )
 
 func MTL4PipelineStageDynamicLinkingDescriptorFromID(id objc.ID) *MTL4PipelineStageDynamicLinkingDescriptor {
@@ -45,10 +45,12 @@ func (o *MTL4PipelineStageDynamicLinkingDescriptor) SetMaxCallStackDepth(maxCall
 	o.Ptr().Send(_mTL4PipelineStageDynamicLinkingDescriptorSelSetMaxCallStackDepth, maxCallStackDepth)
 }
 
-// Provides the array of binary functions to link. Binary functions are shader functions that you compile from Metal IR to machine code ahead of time using instances of ``MTL4Compiler``.
+// Provides the array of binary functions to link. Binary functions are shader functions that you compile from Metal IR to machine code ahead of time using instances of “MTL4Compiler“.
 func (o *MTL4PipelineStageDynamicLinkingDescriptor) BinaryLinkedFunctions() *foundation.NSArray[MTL4BinaryFunction] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4PipelineStageDynamicLinkingDescriptorSelBinaryLinkedFunctions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTL4BinaryFunction](_ret)
 }
 
@@ -59,11 +61,12 @@ func (o *MTL4PipelineStageDynamicLinkingDescriptor) SetBinaryLinkedFunctions(bin
 // Provides an array of dynamic libraries the compiler loads when it builds the pipeline.
 func (o *MTL4PipelineStageDynamicLinkingDescriptor) PreloadedLibraries() *foundation.NSArray[MTLDynamicLibrary] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4PipelineStageDynamicLinkingDescriptorSelPreloadedLibraries)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTLDynamicLibrary](_ret)
 }
 
 func (o *MTL4PipelineStageDynamicLinkingDescriptor) SetPreloadedLibraries(preloadedLibraries *foundation.NSArray[MTLDynamicLibrary]) {
 	o.Ptr().Send(_mTL4PipelineStageDynamicLinkingDescriptorSelSetPreloadedLibraries, preloadedLibraries.Ptr())
 }
-

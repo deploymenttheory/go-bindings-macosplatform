@@ -16,13 +16,13 @@ type PHLivePhotoRequestOptions struct {
 }
 
 var (
-	_clsPHLivePhotoRequestOptions = _objcClass("PHLivePhotoRequestOptions")
-	_pHLivePhotoRequestOptionsSelDeliveryMode = objc.RegisterName("deliveryMode")
-	_pHLivePhotoRequestOptionsSelSetDeliveryMode = objc.RegisterName("setDeliveryMode:")
-	_pHLivePhotoRequestOptionsSelIsNetworkAccessAllowed = objc.RegisterName("isNetworkAccessAllowed")
+	_clsPHLivePhotoRequestOptions                        = _objcClass("PHLivePhotoRequestOptions")
+	_pHLivePhotoRequestOptionsSelDeliveryMode            = objc.RegisterName("deliveryMode")
+	_pHLivePhotoRequestOptionsSelSetDeliveryMode         = objc.RegisterName("setDeliveryMode:")
+	_pHLivePhotoRequestOptionsSelIsNetworkAccessAllowed  = objc.RegisterName("isNetworkAccessAllowed")
 	_pHLivePhotoRequestOptionsSelSetNetworkAccessAllowed = objc.RegisterName("setNetworkAccessAllowed:")
-	_pHLivePhotoRequestOptionsSelProgressHandler = objc.RegisterName("progressHandler")
-	_pHLivePhotoRequestOptionsSelSetProgressHandler = objc.RegisterName("setProgressHandler:")
+	_pHLivePhotoRequestOptionsSelProgressHandler         = objc.RegisterName("progressHandler")
+	_pHLivePhotoRequestOptionsSelSetProgressHandler      = objc.RegisterName("setProgressHandler:")
 )
 
 func PHLivePhotoRequestOptionsFromID(id objc.ID) *PHLivePhotoRequestOptions {
@@ -61,4 +61,3 @@ func (o *PHLivePhotoRequestOptions) ProgressHandler() objc.Block {
 func (o *PHLivePhotoRequestOptions) SetProgressHandler(progressHandler objc.Block) {
 	o.Ptr().Send(_pHLivePhotoRequestOptionsSelSetProgressHandler, progressHandler)
 }
-

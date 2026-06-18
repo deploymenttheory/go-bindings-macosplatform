@@ -13,51 +13,67 @@ import (
 
 func ASAuthorizationAppleIDProviderCredentialRevokedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASAuthorizationAppleIDProviderCredentialRevokedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func ASAuthorizationErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASAuthorizationErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func ASAuthorizationOperationImplicit() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASAuthorizationOperationImplicit")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func ASAuthorizationOperationLogin() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASAuthorizationOperationLogin")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func ASAuthorizationOperationLogout() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASAuthorizationOperationLogout")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func ASAuthorizationOperationRefresh() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASAuthorizationOperationRefresh")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @abstract Operation which is invoked when the extension configuration is removed from the system.
 func ASAuthorizationProviderAuthorizationOperationConfigurationRemoved() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASAuthorizationProviderAuthorizationOperationConfigurationRemoved")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @abstract Operation which is invoked when a request is sent direct to the extension instead of loaded in an ASWebAuthenticationSession.
 func ASAuthorizationProviderAuthorizationOperationDirectRequest() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASAuthorizationProviderAuthorizationOperationDirectRequest")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -102,73 +118,97 @@ func ASAuthorizationProviderExtensionSigningAlgorithmEd25519() uintptr {
 
 func ASAuthorizationPublicKeyCredentialAttestationKindDirect() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASAuthorizationPublicKeyCredentialAttestationKindDirect")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func ASAuthorizationPublicKeyCredentialAttestationKindEnterprise() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASAuthorizationPublicKeyCredentialAttestationKindEnterprise")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func ASAuthorizationPublicKeyCredentialAttestationKindIndirect() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASAuthorizationPublicKeyCredentialAttestationKindIndirect")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func ASAuthorizationPublicKeyCredentialAttestationKindNone() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASAuthorizationPublicKeyCredentialAttestationKindNone")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func ASAuthorizationPublicKeyCredentialResidentKeyPreferenceDiscouraged() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASAuthorizationPublicKeyCredentialResidentKeyPreferenceDiscouraged")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func ASAuthorizationPublicKeyCredentialResidentKeyPreferencePreferred() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASAuthorizationPublicKeyCredentialResidentKeyPreferencePreferred")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func ASAuthorizationPublicKeyCredentialResidentKeyPreferenceRequired() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASAuthorizationPublicKeyCredentialResidentKeyPreferenceRequired")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func ASAuthorizationPublicKeyCredentialUserVerificationPreferenceDiscouraged() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASAuthorizationPublicKeyCredentialUserVerificationPreferenceDiscouraged")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func ASAuthorizationPublicKeyCredentialUserVerificationPreferencePreferred() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASAuthorizationPublicKeyCredentialUserVerificationPreferencePreferred")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func ASAuthorizationPublicKeyCredentialUserVerificationPreferenceRequired() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASAuthorizationPublicKeyCredentialUserVerificationPreferenceRequired")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func ASAuthorizationScopeEmail() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASAuthorizationScopeEmail")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func ASAuthorizationScopeFullName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASAuthorizationScopeFullName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -189,19 +229,24 @@ func ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportUSB() uintp
 
 func ASCredentialIdentityStoreErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASCredentialIdentityStoreErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func ASExtensionErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASExtensionErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func ASWebAuthenticationSessionErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASWebAuthenticationSessionErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
-

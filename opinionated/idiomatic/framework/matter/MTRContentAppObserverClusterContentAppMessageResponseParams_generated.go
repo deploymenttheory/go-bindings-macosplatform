@@ -18,11 +18,15 @@ type MTRContentAppObserverClusterContentAppMessageResponseParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRContentAppObserverClusterContentAppMessageResponseParams].
-func (x *MTRContentAppObserverClusterContentAppMessageResponseParams) Unwrap() *raw.MTRContentAppObserverClusterContentAppMessageResponseParams { return x.inner }
+func (x *MTRContentAppObserverClusterContentAppMessageResponseParams) Unwrap() *raw.MTRContentAppObserverClusterContentAppMessageResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRContentAppObserverClusterContentAppMessageResponseParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRContentAppObserverClusterContentAppMessageResponseParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRContentAppObserverClusterContentAppMessageResponseParamsFromID adopts an existing object pointer as a MTRContentAppObserverClusterContentAppMessageResponseParams (nil for 0).
 func MTRContentAppObserverClusterContentAppMessageResponseParamsFromID(id objc.ID) *MTRContentAppObserverClusterContentAppMessageResponseParams {
@@ -114,4 +118,3 @@ type MTRContentAppObserverClusterContentAppMessageResponseParamsable interface {
 }
 
 var _ MTRContentAppObserverClusterContentAppMessageResponseParamsable = (*MTRContentAppObserverClusterContentAppMessageResponseParams)(nil)
-

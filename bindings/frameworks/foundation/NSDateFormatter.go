@@ -17,85 +17,85 @@ type NSDateFormatter struct {
 }
 
 var (
-	_clsNSDateFormatter = _objcClass("NSDateFormatter")
-	_nSDateFormatterSelGetObjectValueForStringRangeError = objc.RegisterName("getObjectValue:forString:range:error:")
-	_nSDateFormatterSelStringFromDate = objc.RegisterName("stringFromDate:")
-	_nSDateFormatterSelDateFromString = objc.RegisterName("dateFromString:")
+	_clsNSDateFormatter                                          = _objcClass("NSDateFormatter")
+	_nSDateFormatterSelGetObjectValueForStringRangeError         = objc.RegisterName("getObjectValue:forString:range:error:")
+	_nSDateFormatterSelStringFromDate                            = objc.RegisterName("stringFromDate:")
+	_nSDateFormatterSelDateFromString                            = objc.RegisterName("dateFromString:")
 	_nSDateFormatterSelLocalizedStringFromDateDateStyleTimeStyle = objc.RegisterName("localizedStringFromDate:dateStyle:timeStyle:")
-	_nSDateFormatterSelDateFormatFromTemplateOptionsLocale = objc.RegisterName("dateFormatFromTemplate:options:locale:")
-	_nSDateFormatterSelSetLocalizedDateFormatFromTemplate = objc.RegisterName("setLocalizedDateFormatFromTemplate:")
-	_nSDateFormatterSelFormattingContext = objc.RegisterName("formattingContext")
-	_nSDateFormatterSelSetFormattingContext = objc.RegisterName("setFormattingContext:")
-	_nSDateFormatterSelDefaultFormatterBehavior = objc.RegisterName("defaultFormatterBehavior")
-	_nSDateFormatterSelSetDefaultFormatterBehavior = objc.RegisterName("setDefaultFormatterBehavior:")
-	_nSDateFormatterSelDateFormat = objc.RegisterName("dateFormat")
-	_nSDateFormatterSelSetDateFormat = objc.RegisterName("setDateFormat:")
-	_nSDateFormatterSelDateStyle = objc.RegisterName("dateStyle")
-	_nSDateFormatterSelSetDateStyle = objc.RegisterName("setDateStyle:")
-	_nSDateFormatterSelTimeStyle = objc.RegisterName("timeStyle")
-	_nSDateFormatterSelSetTimeStyle = objc.RegisterName("setTimeStyle:")
-	_nSDateFormatterSelLocale = objc.RegisterName("locale")
-	_nSDateFormatterSelSetLocale = objc.RegisterName("setLocale:")
-	_nSDateFormatterSelGeneratesCalendarDates = objc.RegisterName("generatesCalendarDates")
-	_nSDateFormatterSelSetGeneratesCalendarDates = objc.RegisterName("setGeneratesCalendarDates:")
-	_nSDateFormatterSelFormatterBehavior = objc.RegisterName("formatterBehavior")
-	_nSDateFormatterSelSetFormatterBehavior = objc.RegisterName("setFormatterBehavior:")
-	_nSDateFormatterSelTimeZone = objc.RegisterName("timeZone")
-	_nSDateFormatterSelSetTimeZone = objc.RegisterName("setTimeZone:")
-	_nSDateFormatterSelCalendar = objc.RegisterName("calendar")
-	_nSDateFormatterSelSetCalendar = objc.RegisterName("setCalendar:")
-	_nSDateFormatterSelIsLenient = objc.RegisterName("isLenient")
-	_nSDateFormatterSelSetLenient = objc.RegisterName("setLenient:")
-	_nSDateFormatterSelTwoDigitStartDate = objc.RegisterName("twoDigitStartDate")
-	_nSDateFormatterSelSetTwoDigitStartDate = objc.RegisterName("setTwoDigitStartDate:")
-	_nSDateFormatterSelDefaultDate = objc.RegisterName("defaultDate")
-	_nSDateFormatterSelSetDefaultDate = objc.RegisterName("setDefaultDate:")
-	_nSDateFormatterSelEraSymbols = objc.RegisterName("eraSymbols")
-	_nSDateFormatterSelSetEraSymbols = objc.RegisterName("setEraSymbols:")
-	_nSDateFormatterSelMonthSymbols = objc.RegisterName("monthSymbols")
-	_nSDateFormatterSelSetMonthSymbols = objc.RegisterName("setMonthSymbols:")
-	_nSDateFormatterSelShortMonthSymbols = objc.RegisterName("shortMonthSymbols")
-	_nSDateFormatterSelSetShortMonthSymbols = objc.RegisterName("setShortMonthSymbols:")
-	_nSDateFormatterSelWeekdaySymbols = objc.RegisterName("weekdaySymbols")
-	_nSDateFormatterSelSetWeekdaySymbols = objc.RegisterName("setWeekdaySymbols:")
-	_nSDateFormatterSelShortWeekdaySymbols = objc.RegisterName("shortWeekdaySymbols")
-	_nSDateFormatterSelSetShortWeekdaySymbols = objc.RegisterName("setShortWeekdaySymbols:")
-	_nSDateFormatterSelAMSymbol = objc.RegisterName("AMSymbol")
-	_nSDateFormatterSelSetAMSymbol = objc.RegisterName("setAMSymbol:")
-	_nSDateFormatterSelPMSymbol = objc.RegisterName("PMSymbol")
-	_nSDateFormatterSelSetPMSymbol = objc.RegisterName("setPMSymbol:")
-	_nSDateFormatterSelLongEraSymbols = objc.RegisterName("longEraSymbols")
-	_nSDateFormatterSelSetLongEraSymbols = objc.RegisterName("setLongEraSymbols:")
-	_nSDateFormatterSelVeryShortMonthSymbols = objc.RegisterName("veryShortMonthSymbols")
-	_nSDateFormatterSelSetVeryShortMonthSymbols = objc.RegisterName("setVeryShortMonthSymbols:")
-	_nSDateFormatterSelStandaloneMonthSymbols = objc.RegisterName("standaloneMonthSymbols")
-	_nSDateFormatterSelSetStandaloneMonthSymbols = objc.RegisterName("setStandaloneMonthSymbols:")
-	_nSDateFormatterSelShortStandaloneMonthSymbols = objc.RegisterName("shortStandaloneMonthSymbols")
-	_nSDateFormatterSelSetShortStandaloneMonthSymbols = objc.RegisterName("setShortStandaloneMonthSymbols:")
-	_nSDateFormatterSelVeryShortStandaloneMonthSymbols = objc.RegisterName("veryShortStandaloneMonthSymbols")
-	_nSDateFormatterSelSetVeryShortStandaloneMonthSymbols = objc.RegisterName("setVeryShortStandaloneMonthSymbols:")
-	_nSDateFormatterSelVeryShortWeekdaySymbols = objc.RegisterName("veryShortWeekdaySymbols")
-	_nSDateFormatterSelSetVeryShortWeekdaySymbols = objc.RegisterName("setVeryShortWeekdaySymbols:")
-	_nSDateFormatterSelStandaloneWeekdaySymbols = objc.RegisterName("standaloneWeekdaySymbols")
-	_nSDateFormatterSelSetStandaloneWeekdaySymbols = objc.RegisterName("setStandaloneWeekdaySymbols:")
-	_nSDateFormatterSelShortStandaloneWeekdaySymbols = objc.RegisterName("shortStandaloneWeekdaySymbols")
-	_nSDateFormatterSelSetShortStandaloneWeekdaySymbols = objc.RegisterName("setShortStandaloneWeekdaySymbols:")
-	_nSDateFormatterSelVeryShortStandaloneWeekdaySymbols = objc.RegisterName("veryShortStandaloneWeekdaySymbols")
-	_nSDateFormatterSelSetVeryShortStandaloneWeekdaySymbols = objc.RegisterName("setVeryShortStandaloneWeekdaySymbols:")
-	_nSDateFormatterSelQuarterSymbols = objc.RegisterName("quarterSymbols")
-	_nSDateFormatterSelSetQuarterSymbols = objc.RegisterName("setQuarterSymbols:")
-	_nSDateFormatterSelShortQuarterSymbols = objc.RegisterName("shortQuarterSymbols")
-	_nSDateFormatterSelSetShortQuarterSymbols = objc.RegisterName("setShortQuarterSymbols:")
-	_nSDateFormatterSelStandaloneQuarterSymbols = objc.RegisterName("standaloneQuarterSymbols")
-	_nSDateFormatterSelSetStandaloneQuarterSymbols = objc.RegisterName("setStandaloneQuarterSymbols:")
-	_nSDateFormatterSelShortStandaloneQuarterSymbols = objc.RegisterName("shortStandaloneQuarterSymbols")
-	_nSDateFormatterSelSetShortStandaloneQuarterSymbols = objc.RegisterName("setShortStandaloneQuarterSymbols:")
-	_nSDateFormatterSelGregorianStartDate = objc.RegisterName("gregorianStartDate")
-	_nSDateFormatterSelSetGregorianStartDate = objc.RegisterName("setGregorianStartDate:")
-	_nSDateFormatterSelDoesRelativeDateFormatting = objc.RegisterName("doesRelativeDateFormatting")
-	_nSDateFormatterSelSetDoesRelativeDateFormatting = objc.RegisterName("setDoesRelativeDateFormatting:")
-	_nSDateFormatterSelInitWithDateFormatAllowNaturalLanguage = objc.RegisterName("initWithDateFormat:allowNaturalLanguage:")
-	_nSDateFormatterSelAllowsNaturalLanguage = objc.RegisterName("allowsNaturalLanguage")
+	_nSDateFormatterSelDateFormatFromTemplateOptionsLocale       = objc.RegisterName("dateFormatFromTemplate:options:locale:")
+	_nSDateFormatterSelSetLocalizedDateFormatFromTemplate        = objc.RegisterName("setLocalizedDateFormatFromTemplate:")
+	_nSDateFormatterSelFormattingContext                         = objc.RegisterName("formattingContext")
+	_nSDateFormatterSelSetFormattingContext                      = objc.RegisterName("setFormattingContext:")
+	_nSDateFormatterSelDefaultFormatterBehavior                  = objc.RegisterName("defaultFormatterBehavior")
+	_nSDateFormatterSelSetDefaultFormatterBehavior               = objc.RegisterName("setDefaultFormatterBehavior:")
+	_nSDateFormatterSelDateFormat                                = objc.RegisterName("dateFormat")
+	_nSDateFormatterSelSetDateFormat                             = objc.RegisterName("setDateFormat:")
+	_nSDateFormatterSelDateStyle                                 = objc.RegisterName("dateStyle")
+	_nSDateFormatterSelSetDateStyle                              = objc.RegisterName("setDateStyle:")
+	_nSDateFormatterSelTimeStyle                                 = objc.RegisterName("timeStyle")
+	_nSDateFormatterSelSetTimeStyle                              = objc.RegisterName("setTimeStyle:")
+	_nSDateFormatterSelLocale                                    = objc.RegisterName("locale")
+	_nSDateFormatterSelSetLocale                                 = objc.RegisterName("setLocale:")
+	_nSDateFormatterSelGeneratesCalendarDates                    = objc.RegisterName("generatesCalendarDates")
+	_nSDateFormatterSelSetGeneratesCalendarDates                 = objc.RegisterName("setGeneratesCalendarDates:")
+	_nSDateFormatterSelFormatterBehavior                         = objc.RegisterName("formatterBehavior")
+	_nSDateFormatterSelSetFormatterBehavior                      = objc.RegisterName("setFormatterBehavior:")
+	_nSDateFormatterSelTimeZone                                  = objc.RegisterName("timeZone")
+	_nSDateFormatterSelSetTimeZone                               = objc.RegisterName("setTimeZone:")
+	_nSDateFormatterSelCalendar                                  = objc.RegisterName("calendar")
+	_nSDateFormatterSelSetCalendar                               = objc.RegisterName("setCalendar:")
+	_nSDateFormatterSelIsLenient                                 = objc.RegisterName("isLenient")
+	_nSDateFormatterSelSetLenient                                = objc.RegisterName("setLenient:")
+	_nSDateFormatterSelTwoDigitStartDate                         = objc.RegisterName("twoDigitStartDate")
+	_nSDateFormatterSelSetTwoDigitStartDate                      = objc.RegisterName("setTwoDigitStartDate:")
+	_nSDateFormatterSelDefaultDate                               = objc.RegisterName("defaultDate")
+	_nSDateFormatterSelSetDefaultDate                            = objc.RegisterName("setDefaultDate:")
+	_nSDateFormatterSelEraSymbols                                = objc.RegisterName("eraSymbols")
+	_nSDateFormatterSelSetEraSymbols                             = objc.RegisterName("setEraSymbols:")
+	_nSDateFormatterSelMonthSymbols                              = objc.RegisterName("monthSymbols")
+	_nSDateFormatterSelSetMonthSymbols                           = objc.RegisterName("setMonthSymbols:")
+	_nSDateFormatterSelShortMonthSymbols                         = objc.RegisterName("shortMonthSymbols")
+	_nSDateFormatterSelSetShortMonthSymbols                      = objc.RegisterName("setShortMonthSymbols:")
+	_nSDateFormatterSelWeekdaySymbols                            = objc.RegisterName("weekdaySymbols")
+	_nSDateFormatterSelSetWeekdaySymbols                         = objc.RegisterName("setWeekdaySymbols:")
+	_nSDateFormatterSelShortWeekdaySymbols                       = objc.RegisterName("shortWeekdaySymbols")
+	_nSDateFormatterSelSetShortWeekdaySymbols                    = objc.RegisterName("setShortWeekdaySymbols:")
+	_nSDateFormatterSelAMSymbol                                  = objc.RegisterName("AMSymbol")
+	_nSDateFormatterSelSetAMSymbol                               = objc.RegisterName("setAMSymbol:")
+	_nSDateFormatterSelPMSymbol                                  = objc.RegisterName("PMSymbol")
+	_nSDateFormatterSelSetPMSymbol                               = objc.RegisterName("setPMSymbol:")
+	_nSDateFormatterSelLongEraSymbols                            = objc.RegisterName("longEraSymbols")
+	_nSDateFormatterSelSetLongEraSymbols                         = objc.RegisterName("setLongEraSymbols:")
+	_nSDateFormatterSelVeryShortMonthSymbols                     = objc.RegisterName("veryShortMonthSymbols")
+	_nSDateFormatterSelSetVeryShortMonthSymbols                  = objc.RegisterName("setVeryShortMonthSymbols:")
+	_nSDateFormatterSelStandaloneMonthSymbols                    = objc.RegisterName("standaloneMonthSymbols")
+	_nSDateFormatterSelSetStandaloneMonthSymbols                 = objc.RegisterName("setStandaloneMonthSymbols:")
+	_nSDateFormatterSelShortStandaloneMonthSymbols               = objc.RegisterName("shortStandaloneMonthSymbols")
+	_nSDateFormatterSelSetShortStandaloneMonthSymbols            = objc.RegisterName("setShortStandaloneMonthSymbols:")
+	_nSDateFormatterSelVeryShortStandaloneMonthSymbols           = objc.RegisterName("veryShortStandaloneMonthSymbols")
+	_nSDateFormatterSelSetVeryShortStandaloneMonthSymbols        = objc.RegisterName("setVeryShortStandaloneMonthSymbols:")
+	_nSDateFormatterSelVeryShortWeekdaySymbols                   = objc.RegisterName("veryShortWeekdaySymbols")
+	_nSDateFormatterSelSetVeryShortWeekdaySymbols                = objc.RegisterName("setVeryShortWeekdaySymbols:")
+	_nSDateFormatterSelStandaloneWeekdaySymbols                  = objc.RegisterName("standaloneWeekdaySymbols")
+	_nSDateFormatterSelSetStandaloneWeekdaySymbols               = objc.RegisterName("setStandaloneWeekdaySymbols:")
+	_nSDateFormatterSelShortStandaloneWeekdaySymbols             = objc.RegisterName("shortStandaloneWeekdaySymbols")
+	_nSDateFormatterSelSetShortStandaloneWeekdaySymbols          = objc.RegisterName("setShortStandaloneWeekdaySymbols:")
+	_nSDateFormatterSelVeryShortStandaloneWeekdaySymbols         = objc.RegisterName("veryShortStandaloneWeekdaySymbols")
+	_nSDateFormatterSelSetVeryShortStandaloneWeekdaySymbols      = objc.RegisterName("setVeryShortStandaloneWeekdaySymbols:")
+	_nSDateFormatterSelQuarterSymbols                            = objc.RegisterName("quarterSymbols")
+	_nSDateFormatterSelSetQuarterSymbols                         = objc.RegisterName("setQuarterSymbols:")
+	_nSDateFormatterSelShortQuarterSymbols                       = objc.RegisterName("shortQuarterSymbols")
+	_nSDateFormatterSelSetShortQuarterSymbols                    = objc.RegisterName("setShortQuarterSymbols:")
+	_nSDateFormatterSelStandaloneQuarterSymbols                  = objc.RegisterName("standaloneQuarterSymbols")
+	_nSDateFormatterSelSetStandaloneQuarterSymbols               = objc.RegisterName("setStandaloneQuarterSymbols:")
+	_nSDateFormatterSelShortStandaloneQuarterSymbols             = objc.RegisterName("shortStandaloneQuarterSymbols")
+	_nSDateFormatterSelSetShortStandaloneQuarterSymbols          = objc.RegisterName("setShortStandaloneQuarterSymbols:")
+	_nSDateFormatterSelGregorianStartDate                        = objc.RegisterName("gregorianStartDate")
+	_nSDateFormatterSelSetGregorianStartDate                     = objc.RegisterName("setGregorianStartDate:")
+	_nSDateFormatterSelDoesRelativeDateFormatting                = objc.RegisterName("doesRelativeDateFormatting")
+	_nSDateFormatterSelSetDoesRelativeDateFormatting             = objc.RegisterName("setDoesRelativeDateFormatting:")
+	_nSDateFormatterSelInitWithDateFormatAllowNaturalLanguage    = objc.RegisterName("initWithDateFormat:allowNaturalLanguage:")
+	_nSDateFormatterSelAllowsNaturalLanguage                     = objc.RegisterName("allowsNaturalLanguage")
 )
 
 func NSDateFormatterFromID(id objc.ID) *NSDateFormatter {
@@ -119,25 +119,33 @@ func (o *NSDateFormatter) GetObjectValueForStringRangeError(obj **ObjcObject, st
 
 func (o *NSDateFormatter) StringFromDate(date *NSDate) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelStringFromDate, date.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSDateFormatter) DateFromString(string_ *NSString) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelDateFromString, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func NSDateFormatterLocalizedStringFromDateDateStyleTimeStyle(date *NSDate, dstyle NSDateFormatterStyle, tstyle NSDateFormatterStyle) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDateFormatter), _nSDateFormatterSelLocalizedStringFromDateDateStyleTimeStyle, date.Ptr(), dstyle, tstyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func NSDateFormatterDateFormatFromTemplateOptionsLocale(tmplate *NSString, opts uint, locale *NSLocale) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDateFormatter), _nSDateFormatterSelDateFormatFromTemplateOptionsLocale, tmplate.Ptr(), opts, locale.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -165,7 +173,9 @@ func NSDateFormatterSetDefaultFormatterBehavior(defaultFormatterBehavior NSDateF
 
 func (o *NSDateFormatter) DateFormat() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelDateFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -193,7 +203,9 @@ func (o *NSDateFormatter) SetTimeStyle(timeStyle NSDateFormatterStyle) {
 
 func (o *NSDateFormatter) Locale() *NSLocale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelLocale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLocaleFromID(_ret)
 }
 
@@ -221,7 +233,9 @@ func (o *NSDateFormatter) SetFormatterBehavior(formatterBehavior NSDateFormatter
 
 func (o *NSDateFormatter) TimeZone() *NSTimeZone {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelTimeZone)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTimeZoneFromID(_ret)
 }
 
@@ -231,7 +245,9 @@ func (o *NSDateFormatter) SetTimeZone(timeZone *NSTimeZone) {
 
 func (o *NSDateFormatter) Calendar() *NSCalendar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelCalendar)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCalendarFromID(_ret)
 }
 
@@ -250,7 +266,9 @@ func (o *NSDateFormatter) SetLenient(lenient bool) {
 
 func (o *NSDateFormatter) TwoDigitStartDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelTwoDigitStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
@@ -260,7 +278,9 @@ func (o *NSDateFormatter) SetTwoDigitStartDate(twoDigitStartDate *NSDate) {
 
 func (o *NSDateFormatter) DefaultDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelDefaultDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
@@ -270,7 +290,9 @@ func (o *NSDateFormatter) SetDefaultDate(defaultDate *NSDate) {
 
 func (o *NSDateFormatter) EraSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelEraSymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -280,7 +302,9 @@ func (o *NSDateFormatter) SetEraSymbols(eraSymbols *NSArray[*NSString]) {
 
 func (o *NSDateFormatter) MonthSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelMonthSymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -290,7 +314,9 @@ func (o *NSDateFormatter) SetMonthSymbols(monthSymbols *NSArray[*NSString]) {
 
 func (o *NSDateFormatter) ShortMonthSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelShortMonthSymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -300,7 +326,9 @@ func (o *NSDateFormatter) SetShortMonthSymbols(shortMonthSymbols *NSArray[*NSStr
 
 func (o *NSDateFormatter) WeekdaySymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelWeekdaySymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -310,7 +338,9 @@ func (o *NSDateFormatter) SetWeekdaySymbols(weekdaySymbols *NSArray[*NSString]) 
 
 func (o *NSDateFormatter) ShortWeekdaySymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelShortWeekdaySymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -320,7 +350,9 @@ func (o *NSDateFormatter) SetShortWeekdaySymbols(shortWeekdaySymbols *NSArray[*N
 
 func (o *NSDateFormatter) AMSymbol() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelAMSymbol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -330,7 +362,9 @@ func (o *NSDateFormatter) SetAMSymbol(aMSymbol *NSString) {
 
 func (o *NSDateFormatter) PMSymbol() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelPMSymbol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -340,7 +374,9 @@ func (o *NSDateFormatter) SetPMSymbol(pMSymbol *NSString) {
 
 func (o *NSDateFormatter) LongEraSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelLongEraSymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -350,7 +386,9 @@ func (o *NSDateFormatter) SetLongEraSymbols(longEraSymbols *NSArray[*NSString]) 
 
 func (o *NSDateFormatter) VeryShortMonthSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelVeryShortMonthSymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -360,7 +398,9 @@ func (o *NSDateFormatter) SetVeryShortMonthSymbols(veryShortMonthSymbols *NSArra
 
 func (o *NSDateFormatter) StandaloneMonthSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelStandaloneMonthSymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -370,7 +410,9 @@ func (o *NSDateFormatter) SetStandaloneMonthSymbols(standaloneMonthSymbols *NSAr
 
 func (o *NSDateFormatter) ShortStandaloneMonthSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelShortStandaloneMonthSymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -380,7 +422,9 @@ func (o *NSDateFormatter) SetShortStandaloneMonthSymbols(shortStandaloneMonthSym
 
 func (o *NSDateFormatter) VeryShortStandaloneMonthSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelVeryShortStandaloneMonthSymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -390,7 +434,9 @@ func (o *NSDateFormatter) SetVeryShortStandaloneMonthSymbols(veryShortStandalone
 
 func (o *NSDateFormatter) VeryShortWeekdaySymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelVeryShortWeekdaySymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -400,7 +446,9 @@ func (o *NSDateFormatter) SetVeryShortWeekdaySymbols(veryShortWeekdaySymbols *NS
 
 func (o *NSDateFormatter) StandaloneWeekdaySymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelStandaloneWeekdaySymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -410,7 +458,9 @@ func (o *NSDateFormatter) SetStandaloneWeekdaySymbols(standaloneWeekdaySymbols *
 
 func (o *NSDateFormatter) ShortStandaloneWeekdaySymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelShortStandaloneWeekdaySymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -420,7 +470,9 @@ func (o *NSDateFormatter) SetShortStandaloneWeekdaySymbols(shortStandaloneWeekda
 
 func (o *NSDateFormatter) VeryShortStandaloneWeekdaySymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelVeryShortStandaloneWeekdaySymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -430,7 +482,9 @@ func (o *NSDateFormatter) SetVeryShortStandaloneWeekdaySymbols(veryShortStandalo
 
 func (o *NSDateFormatter) QuarterSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelQuarterSymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -440,7 +494,9 @@ func (o *NSDateFormatter) SetQuarterSymbols(quarterSymbols *NSArray[*NSString]) 
 
 func (o *NSDateFormatter) ShortQuarterSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelShortQuarterSymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -450,7 +506,9 @@ func (o *NSDateFormatter) SetShortQuarterSymbols(shortQuarterSymbols *NSArray[*N
 
 func (o *NSDateFormatter) StandaloneQuarterSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelStandaloneQuarterSymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -460,7 +518,9 @@ func (o *NSDateFormatter) SetStandaloneQuarterSymbols(standaloneQuarterSymbols *
 
 func (o *NSDateFormatter) ShortStandaloneQuarterSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelShortStandaloneQuarterSymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -470,7 +530,9 @@ func (o *NSDateFormatter) SetShortStandaloneQuarterSymbols(shortStandaloneQuarte
 
 func (o *NSDateFormatter) GregorianStartDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelGregorianStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
@@ -498,4 +560,3 @@ func (o *NSDateFormatter) AllowsNaturalLanguage() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDateFormatterSelAllowsNaturalLanguage)
 	return _ret
 }
-

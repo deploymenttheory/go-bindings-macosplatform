@@ -25,4 +25,3 @@ func VNDetectFaceCaptureQualityRequestFromID(id objc.ID) *VNDetectFaceCaptureQua
 	purego.Track(o)
 	return o
 }
-

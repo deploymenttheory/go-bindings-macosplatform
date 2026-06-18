@@ -25,4 +25,3 @@ func MTRTestClusterClusterTestNestedStructArgumentRequestParamsFromID(id objc.ID
 	purego.Track(o)
 	return o
 }
-

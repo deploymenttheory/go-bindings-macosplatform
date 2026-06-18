@@ -58,4 +58,3 @@ type SelectionLayerable interface {
 }
 
 var _ SelectionLayerable = (*SelectionLayer)(nil)
-

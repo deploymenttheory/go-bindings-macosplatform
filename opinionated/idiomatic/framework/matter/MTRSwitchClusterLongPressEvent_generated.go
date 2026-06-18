@@ -61,4 +61,3 @@ type MTRSwitchClusterLongPressEventable interface {
 }
 
 var _ MTRSwitchClusterLongPressEventable = (*MTRSwitchClusterLongPressEvent)(nil)
-

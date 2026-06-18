@@ -18,36 +18,36 @@ type MDLSkyCubeTexture struct {
 }
 
 var (
-	_clsMDLSkyCubeTexture = _objcClass("MDLSkyCubeTexture")
-	_mDLSkyCubeTextureSelInitWithNameChannelEncodingTextureDimensionsTurbiditySunElevationUpperAtmosphereScatteringGroundAlbedo = objc.RegisterName("initWithName:channelEncoding:textureDimensions:turbidity:sunElevation:upperAtmosphereScattering:groundAlbedo:")
+	_clsMDLSkyCubeTexture                                                                                                                 = _objcClass("MDLSkyCubeTexture")
+	_mDLSkyCubeTextureSelInitWithNameChannelEncodingTextureDimensionsTurbiditySunElevationUpperAtmosphereScatteringGroundAlbedo           = objc.RegisterName("initWithName:channelEncoding:textureDimensions:turbidity:sunElevation:upperAtmosphereScattering:groundAlbedo:")
 	_mDLSkyCubeTextureSelInitWithNameChannelEncodingTextureDimensionsTurbiditySunElevationSunAzimuthUpperAtmosphereScatteringGroundAlbedo = objc.RegisterName("initWithName:channelEncoding:textureDimensions:turbidity:sunElevation:sunAzimuth:upperAtmosphereScattering:groundAlbedo:")
-	_mDLSkyCubeTextureSelUpdateTexture = objc.RegisterName("updateTexture")
-	_mDLSkyCubeTextureSelTurbidity = objc.RegisterName("turbidity")
-	_mDLSkyCubeTextureSelSetTurbidity = objc.RegisterName("setTurbidity:")
-	_mDLSkyCubeTextureSelSunElevation = objc.RegisterName("sunElevation")
-	_mDLSkyCubeTextureSelSetSunElevation = objc.RegisterName("setSunElevation:")
-	_mDLSkyCubeTextureSelSunAzimuth = objc.RegisterName("sunAzimuth")
-	_mDLSkyCubeTextureSelSetSunAzimuth = objc.RegisterName("setSunAzimuth:")
-	_mDLSkyCubeTextureSelUpperAtmosphereScattering = objc.RegisterName("upperAtmosphereScattering")
-	_mDLSkyCubeTextureSelSetUpperAtmosphereScattering = objc.RegisterName("setUpperAtmosphereScattering:")
-	_mDLSkyCubeTextureSelGroundAlbedo = objc.RegisterName("groundAlbedo")
-	_mDLSkyCubeTextureSelSetGroundAlbedo = objc.RegisterName("setGroundAlbedo:")
-	_mDLSkyCubeTextureSelHorizonElevation = objc.RegisterName("horizonElevation")
-	_mDLSkyCubeTextureSelSetHorizonElevation = objc.RegisterName("setHorizonElevation:")
-	_mDLSkyCubeTextureSelGroundColor = objc.RegisterName("groundColor")
-	_mDLSkyCubeTextureSelSetGroundColor = objc.RegisterName("setGroundColor:")
-	_mDLSkyCubeTextureSelGamma = objc.RegisterName("gamma")
-	_mDLSkyCubeTextureSelSetGamma = objc.RegisterName("setGamma:")
-	_mDLSkyCubeTextureSelExposure = objc.RegisterName("exposure")
-	_mDLSkyCubeTextureSelSetExposure = objc.RegisterName("setExposure:")
-	_mDLSkyCubeTextureSelBrightness = objc.RegisterName("brightness")
-	_mDLSkyCubeTextureSelSetBrightness = objc.RegisterName("setBrightness:")
-	_mDLSkyCubeTextureSelContrast = objc.RegisterName("contrast")
-	_mDLSkyCubeTextureSelSetContrast = objc.RegisterName("setContrast:")
-	_mDLSkyCubeTextureSelSaturation = objc.RegisterName("saturation")
-	_mDLSkyCubeTextureSelSetSaturation = objc.RegisterName("setSaturation:")
-	_mDLSkyCubeTextureSelHighDynamicRangeCompression = objc.RegisterName("highDynamicRangeCompression")
-	_mDLSkyCubeTextureSelSetHighDynamicRangeCompression = objc.RegisterName("setHighDynamicRangeCompression:")
+	_mDLSkyCubeTextureSelUpdateTexture                                                                                                    = objc.RegisterName("updateTexture")
+	_mDLSkyCubeTextureSelTurbidity                                                                                                        = objc.RegisterName("turbidity")
+	_mDLSkyCubeTextureSelSetTurbidity                                                                                                     = objc.RegisterName("setTurbidity:")
+	_mDLSkyCubeTextureSelSunElevation                                                                                                     = objc.RegisterName("sunElevation")
+	_mDLSkyCubeTextureSelSetSunElevation                                                                                                  = objc.RegisterName("setSunElevation:")
+	_mDLSkyCubeTextureSelSunAzimuth                                                                                                       = objc.RegisterName("sunAzimuth")
+	_mDLSkyCubeTextureSelSetSunAzimuth                                                                                                    = objc.RegisterName("setSunAzimuth:")
+	_mDLSkyCubeTextureSelUpperAtmosphereScattering                                                                                        = objc.RegisterName("upperAtmosphereScattering")
+	_mDLSkyCubeTextureSelSetUpperAtmosphereScattering                                                                                     = objc.RegisterName("setUpperAtmosphereScattering:")
+	_mDLSkyCubeTextureSelGroundAlbedo                                                                                                     = objc.RegisterName("groundAlbedo")
+	_mDLSkyCubeTextureSelSetGroundAlbedo                                                                                                  = objc.RegisterName("setGroundAlbedo:")
+	_mDLSkyCubeTextureSelHorizonElevation                                                                                                 = objc.RegisterName("horizonElevation")
+	_mDLSkyCubeTextureSelSetHorizonElevation                                                                                              = objc.RegisterName("setHorizonElevation:")
+	_mDLSkyCubeTextureSelGroundColor                                                                                                      = objc.RegisterName("groundColor")
+	_mDLSkyCubeTextureSelSetGroundColor                                                                                                   = objc.RegisterName("setGroundColor:")
+	_mDLSkyCubeTextureSelGamma                                                                                                            = objc.RegisterName("gamma")
+	_mDLSkyCubeTextureSelSetGamma                                                                                                         = objc.RegisterName("setGamma:")
+	_mDLSkyCubeTextureSelExposure                                                                                                         = objc.RegisterName("exposure")
+	_mDLSkyCubeTextureSelSetExposure                                                                                                      = objc.RegisterName("setExposure:")
+	_mDLSkyCubeTextureSelBrightness                                                                                                       = objc.RegisterName("brightness")
+	_mDLSkyCubeTextureSelSetBrightness                                                                                                    = objc.RegisterName("setBrightness:")
+	_mDLSkyCubeTextureSelContrast                                                                                                         = objc.RegisterName("contrast")
+	_mDLSkyCubeTextureSelSetContrast                                                                                                      = objc.RegisterName("setContrast:")
+	_mDLSkyCubeTextureSelSaturation                                                                                                       = objc.RegisterName("saturation")
+	_mDLSkyCubeTextureSelSetSaturation                                                                                                    = objc.RegisterName("setSaturation:")
+	_mDLSkyCubeTextureSelHighDynamicRangeCompression                                                                                      = objc.RegisterName("highDynamicRangeCompression")
+	_mDLSkyCubeTextureSelSetHighDynamicRangeCompression                                                                                   = objc.RegisterName("setHighDynamicRangeCompression:")
 )
 
 func MDLSkyCubeTextureFromID(id objc.ID) *MDLSkyCubeTexture {
@@ -62,13 +62,17 @@ func MDLSkyCubeTextureFromID(id objc.ID) *MDLSkyCubeTexture {
 
 func (o *MDLSkyCubeTexture) InitWithNameChannelEncodingTextureDimensionsTurbiditySunElevationUpperAtmosphereScatteringGroundAlbedo(name *foundation.NSString, channelEncoding MDLTextureChannelEncoding, textureDimensions unsafe.Pointer, turbidity float32, sunElevation float32, upperAtmosphereScattering float32, groundAlbedo float32) *MDLSkyCubeTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLSkyCubeTextureSelInitWithNameChannelEncodingTextureDimensionsTurbiditySunElevationUpperAtmosphereScatteringGroundAlbedo, name.Ptr(), channelEncoding, textureDimensions, turbidity, sunElevation, upperAtmosphereScattering, groundAlbedo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLSkyCubeTextureFromID(_ret)
 }
 
 func (o *MDLSkyCubeTexture) InitWithNameChannelEncodingTextureDimensionsTurbiditySunElevationSunAzimuthUpperAtmosphereScatteringGroundAlbedo(name *foundation.NSString, channelEncoding MDLTextureChannelEncoding, textureDimensions unsafe.Pointer, turbidity float32, sunElevation float32, sunAzimuth float32, upperAtmosphereScattering float32, groundAlbedo float32) *MDLSkyCubeTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLSkyCubeTextureSelInitWithNameChannelEncodingTextureDimensionsTurbiditySunElevationSunAzimuthUpperAtmosphereScatteringGroundAlbedo, name.Ptr(), channelEncoding, textureDimensions, turbidity, sunElevation, sunAzimuth, upperAtmosphereScattering, groundAlbedo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLSkyCubeTextureFromID(_ret)
 }
 
@@ -193,4 +197,3 @@ func (o *MDLSkyCubeTexture) HighDynamicRangeCompression() unsafe.Pointer {
 func (o *MDLSkyCubeTexture) SetHighDynamicRangeCompression(highDynamicRangeCompression unsafe.Pointer) {
 	o.Ptr().Send(_mDLSkyCubeTextureSelSetHighDynamicRangeCompression, highDynamicRangeCompression)
 }
-

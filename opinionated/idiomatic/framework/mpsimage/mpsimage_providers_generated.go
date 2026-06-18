@@ -57,4 +57,3 @@ type ImageScaleProvider interface {
 type UnaryImageKernelProvider interface {
 	asUnaryImageKernel() *raw.MPSUnaryImageKernel
 }
-

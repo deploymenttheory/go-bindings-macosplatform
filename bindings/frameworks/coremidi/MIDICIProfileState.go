@@ -16,12 +16,12 @@ type MIDICIProfileState struct {
 }
 
 var (
-	_clsMIDICIProfileState = _objcClass("MIDICIProfileState")
+	_clsMIDICIProfileState                                               = _objcClass("MIDICIProfileState")
 	_mIDICIProfileStateSelInitWithChannelEnabledProfilesDisabledProfiles = objc.RegisterName("initWithChannel:enabledProfiles:disabledProfiles:")
-	_mIDICIProfileStateSelInitWithEnabledProfilesDisabledProfiles = objc.RegisterName("initWithEnabledProfiles:disabledProfiles:")
-	_mIDICIProfileStateSelMidiChannel = objc.RegisterName("midiChannel")
-	_mIDICIProfileStateSelEnabledProfiles = objc.RegisterName("enabledProfiles")
-	_mIDICIProfileStateSelDisabledProfiles = objc.RegisterName("disabledProfiles")
+	_mIDICIProfileStateSelInitWithEnabledProfilesDisabledProfiles        = objc.RegisterName("initWithEnabledProfiles:disabledProfiles:")
+	_mIDICIProfileStateSelMidiChannel                                    = objc.RegisterName("midiChannel")
+	_mIDICIProfileStateSelEnabledProfiles                                = objc.RegisterName("enabledProfiles")
+	_mIDICIProfileStateSelDisabledProfiles                               = objc.RegisterName("disabledProfiles")
 )
 
 func MIDICIProfileStateFromID(id objc.ID) *MIDICIProfileState {
@@ -37,14 +37,18 @@ func MIDICIProfileStateFromID(id objc.ID) *MIDICIProfileState {
 // Deprecated: since macOS 15.0.
 func (o *MIDICIProfileState) InitWithChannelEnabledProfilesDisabledProfiles(midiChannelNum uint8, enabled *foundation.NSArray[*MIDICIProfile], disabled *foundation.NSArray[*MIDICIProfile]) *MIDICIProfileState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICIProfileStateSelInitWithChannelEnabledProfilesDisabledProfiles, midiChannelNum, enabled.Ptr(), disabled.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MIDICIProfileStateFromID(_ret)
 }
 
 // Deprecated: since macOS 15.0.
 func (o *MIDICIProfileState) InitWithEnabledProfilesDisabledProfiles(enabled *foundation.NSArray[*MIDICIProfile], disabled *foundation.NSArray[*MIDICIProfile]) *MIDICIProfileState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICIProfileStateSelInitWithEnabledProfilesDisabledProfiles, enabled.Ptr(), disabled.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MIDICIProfileStateFromID(_ret)
 }
 
@@ -55,13 +59,16 @@ func (o *MIDICIProfileState) MidiChannel() uint8 {
 
 func (o *MIDICIProfileState) EnabledProfiles() *foundation.NSArray[*MIDICIProfile] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICIProfileStateSelEnabledProfiles)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MIDICIProfile](_ret)
 }
 
 func (o *MIDICIProfileState) DisabledProfiles() *foundation.NSArray[*MIDICIProfile] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICIProfileStateSelDisabledProfiles)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MIDICIProfile](_ret)
 }
-

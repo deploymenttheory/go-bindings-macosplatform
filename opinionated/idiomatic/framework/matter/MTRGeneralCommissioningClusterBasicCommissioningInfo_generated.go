@@ -16,7 +16,9 @@ type MTRGeneralCommissioningClusterBasicCommissioningInfo struct {
 }
 
 // Unwrap returns the underlying [raw.MTRGeneralCommissioningClusterBasicCommissioningInfo].
-func (x *MTRGeneralCommissioningClusterBasicCommissioningInfo) Unwrap() *raw.MTRGeneralCommissioningClusterBasicCommissioningInfo { return x.inner }
+func (x *MTRGeneralCommissioningClusterBasicCommissioningInfo) Unwrap() *raw.MTRGeneralCommissioningClusterBasicCommissioningInfo {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -80,4 +82,3 @@ type MTRGeneralCommissioningClusterBasicCommissioningInfoable interface {
 }
 
 var _ MTRGeneralCommissioningClusterBasicCommissioningInfoable = (*MTRGeneralCommissioningClusterBasicCommissioningInfo)(nil)
-

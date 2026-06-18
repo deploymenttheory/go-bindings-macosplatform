@@ -15,33 +15,33 @@ type NSURLRequest struct {
 }
 
 var (
-	_clsNSURLRequest = _objcClass("NSURLRequest")
-	_nSURLRequestSelRequestWithURL = objc.RegisterName("requestWithURL:")
+	_clsNSURLRequest                                         = _objcClass("NSURLRequest")
+	_nSURLRequestSelRequestWithURL                           = objc.RegisterName("requestWithURL:")
 	_nSURLRequestSelRequestWithURLCachePolicyTimeoutInterval = objc.RegisterName("requestWithURL:cachePolicy:timeoutInterval:")
-	_nSURLRequestSelInitWithURL = objc.RegisterName("initWithURL:")
-	_nSURLRequestSelInitWithURLCachePolicyTimeoutInterval = objc.RegisterName("initWithURL:cachePolicy:timeoutInterval:")
-	_nSURLRequestSelSupportsSecureCoding = objc.RegisterName("supportsSecureCoding")
-	_nSURLRequestSelURL = objc.RegisterName("URL")
-	_nSURLRequestSelCachePolicy = objc.RegisterName("cachePolicy")
-	_nSURLRequestSelTimeoutInterval = objc.RegisterName("timeoutInterval")
-	_nSURLRequestSelMainDocumentURL = objc.RegisterName("mainDocumentURL")
-	_nSURLRequestSelNetworkServiceType = objc.RegisterName("networkServiceType")
-	_nSURLRequestSelAllowsCellularAccess = objc.RegisterName("allowsCellularAccess")
-	_nSURLRequestSelAllowsExpensiveNetworkAccess = objc.RegisterName("allowsExpensiveNetworkAccess")
-	_nSURLRequestSelAllowsConstrainedNetworkAccess = objc.RegisterName("allowsConstrainedNetworkAccess")
-	_nSURLRequestSelAllowsUltraConstrainedNetworkAccess = objc.RegisterName("allowsUltraConstrainedNetworkAccess")
-	_nSURLRequestSelAssumesHTTP3Capable = objc.RegisterName("assumesHTTP3Capable")
-	_nSURLRequestSelAttribution = objc.RegisterName("attribution")
-	_nSURLRequestSelRequiresDNSSECValidation = objc.RegisterName("requiresDNSSECValidation")
-	_nSURLRequestSelAllowsPersistentDNS = objc.RegisterName("allowsPersistentDNS")
-	_nSURLRequestSelCookiePartitionIdentifier = objc.RegisterName("cookiePartitionIdentifier")
-	_nSURLRequestSelValueForHTTPHeaderField = objc.RegisterName("valueForHTTPHeaderField:")
-	_nSURLRequestSelHTTPMethod = objc.RegisterName("HTTPMethod")
-	_nSURLRequestSelAllHTTPHeaderFields = objc.RegisterName("allHTTPHeaderFields")
-	_nSURLRequestSelHTTPBody = objc.RegisterName("HTTPBody")
-	_nSURLRequestSelHTTPBodyStream = objc.RegisterName("HTTPBodyStream")
-	_nSURLRequestSelHTTPShouldHandleCookies = objc.RegisterName("HTTPShouldHandleCookies")
-	_nSURLRequestSelHTTPShouldUsePipelining = objc.RegisterName("HTTPShouldUsePipelining")
+	_nSURLRequestSelInitWithURL                              = objc.RegisterName("initWithURL:")
+	_nSURLRequestSelInitWithURLCachePolicyTimeoutInterval    = objc.RegisterName("initWithURL:cachePolicy:timeoutInterval:")
+	_nSURLRequestSelSupportsSecureCoding                     = objc.RegisterName("supportsSecureCoding")
+	_nSURLRequestSelURL                                      = objc.RegisterName("URL")
+	_nSURLRequestSelCachePolicy                              = objc.RegisterName("cachePolicy")
+	_nSURLRequestSelTimeoutInterval                          = objc.RegisterName("timeoutInterval")
+	_nSURLRequestSelMainDocumentURL                          = objc.RegisterName("mainDocumentURL")
+	_nSURLRequestSelNetworkServiceType                       = objc.RegisterName("networkServiceType")
+	_nSURLRequestSelAllowsCellularAccess                     = objc.RegisterName("allowsCellularAccess")
+	_nSURLRequestSelAllowsExpensiveNetworkAccess             = objc.RegisterName("allowsExpensiveNetworkAccess")
+	_nSURLRequestSelAllowsConstrainedNetworkAccess           = objc.RegisterName("allowsConstrainedNetworkAccess")
+	_nSURLRequestSelAllowsUltraConstrainedNetworkAccess      = objc.RegisterName("allowsUltraConstrainedNetworkAccess")
+	_nSURLRequestSelAssumesHTTP3Capable                      = objc.RegisterName("assumesHTTP3Capable")
+	_nSURLRequestSelAttribution                              = objc.RegisterName("attribution")
+	_nSURLRequestSelRequiresDNSSECValidation                 = objc.RegisterName("requiresDNSSECValidation")
+	_nSURLRequestSelAllowsPersistentDNS                      = objc.RegisterName("allowsPersistentDNS")
+	_nSURLRequestSelCookiePartitionIdentifier                = objc.RegisterName("cookiePartitionIdentifier")
+	_nSURLRequestSelValueForHTTPHeaderField                  = objc.RegisterName("valueForHTTPHeaderField:")
+	_nSURLRequestSelHTTPMethod                               = objc.RegisterName("HTTPMethod")
+	_nSURLRequestSelAllHTTPHeaderFields                      = objc.RegisterName("allHTTPHeaderFields")
+	_nSURLRequestSelHTTPBody                                 = objc.RegisterName("HTTPBody")
+	_nSURLRequestSelHTTPBodyStream                           = objc.RegisterName("HTTPBodyStream")
+	_nSURLRequestSelHTTPShouldHandleCookies                  = objc.RegisterName("HTTPShouldHandleCookies")
+	_nSURLRequestSelHTTPShouldUsePipelining                  = objc.RegisterName("HTTPShouldUsePipelining")
 )
 
 func NSURLRequestFromID(id objc.ID) *NSURLRequest {
@@ -57,28 +57,36 @@ func NSURLRequestFromID(id objc.ID) *NSURLRequest {
 // @method requestWithURL: @abstract Allocates and initializes an NSURLRequest with the given URL. @discussion Default values are used for cache policy (NSURLRequestUseProtocolCachePolicy) and timeout interval (60 seconds). @param URL The URL for the request. @result A newly-created and autoreleased NSURLRequest instance.
 func NSURLRequestRequestWithURL(uRL *NSURL) *NSURLRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLRequest), _nSURLRequestSelRequestWithURL, uRL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLRequestFromID(_ret)
 }
 
 // @method requestWithURL:cachePolicy:timeoutInterval: @abstract Allocates and initializes a NSURLRequest with the given URL and cache policy. @param URL The URL for the request. @param cachePolicy The cache policy for the request. @param timeoutInterval The timeout interval for the request. See the commentary for the <tt>timeoutInterval</tt> for more information on timeout intervals. @result A newly-created and autoreleased NSURLRequest instance.
 func NSURLRequestRequestWithURLCachePolicyTimeoutInterval(uRL *NSURL, cachePolicy NSURLRequestCachePolicy, timeoutInterval float64) *NSURLRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLRequest), _nSURLRequestSelRequestWithURLCachePolicyTimeoutInterval, uRL.Ptr(), cachePolicy, timeoutInterval)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLRequestFromID(_ret)
 }
 
 // @method initWithURL: @abstract Initializes an NSURLRequest with the given URL. @discussion Default values are used for cache policy (NSURLRequestUseProtocolCachePolicy) and timeout interval (60 seconds). @param URL The URL for the request. @result An initialized NSURLRequest.
 func (o *NSURLRequest) InitWithURL(uRL *NSURL) *NSURLRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLRequestSelInitWithURL, uRL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLRequestFromID(_ret)
 }
 
 // @method initWithURL: @abstract Initializes an NSURLRequest with the given URL and cache policy. @discussion This is the designated initializer for the NSURLRequest class. @param URL The URL for the request. @param cachePolicy The cache policy for the request. @param timeoutInterval The timeout interval for the request. See the commentary for the <tt>timeoutInterval</tt> for more information on timeout intervals. @result An initialized NSURLRequest.
 func (o *NSURLRequest) InitWithURLCachePolicyTimeoutInterval(uRL *NSURL, cachePolicy NSURLRequestCachePolicy, timeoutInterval float64) *NSURLRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLRequestSelInitWithURLCachePolicyTimeoutInterval, uRL.Ptr(), cachePolicy, timeoutInterval)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLRequestFromID(_ret)
 }
 
@@ -91,7 +99,9 @@ func NSURLRequestSupportsSecureCoding() bool {
 // @abstract Returns the URL of the receiver. @result The URL of the receiver.
 func (o *NSURLRequest) URL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLRequestSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
@@ -110,7 +120,9 @@ func (o *NSURLRequest) TimeoutInterval() float64 {
 // @abstract The main document URL associated with this load. @discussion This URL is used for the cookie "same domain as main document" policy, and attributing the request as a sub-resource of a user-specified URL. There may also be other future uses. See setMainDocumentURL: @result The main document URL.
 func (o *NSURLRequest) MainDocumentURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLRequestSelMainDocumentURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
@@ -170,42 +182,54 @@ func (o *NSURLRequest) AllowsPersistentDNS() bool {
 
 func (o *NSURLRequest) CookiePartitionIdentifier() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLRequestSelCookiePartitionIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // @method valueForHTTPHeaderField: @abstract Returns the value which corresponds to the given header field. Note that, in keeping with the HTTP RFC, HTTP header field names are case-insensitive. @param field the header field name to use for the lookup (case-insensitive). @result the value associated with the given header field, or nil if there is no value associated with the given header field.
 func (o *NSURLRequest) ValueForHTTPHeaderField(field *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLRequestSelValueForHTTPHeaderField, field.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // @abstract Returns the HTTP request method of the receiver. @result the HTTP request method of the receiver.
 func (o *NSURLRequest) HTTPMethod() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLRequestSelHTTPMethod)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // @abstract Returns a dictionary containing all the HTTP header fields of the receiver. @result a dictionary containing all the HTTP header fields of the receiver.
 func (o *NSURLRequest) AllHTTPHeaderFields() *NSDictionary[*NSString, *NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLRequestSelAllHTTPHeaderFields)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDictionaryFromID[*NSString, *NSString](_ret)
 }
 
 // @abstract Returns the request body data of the receiver. @discussion This data is sent as the message body of the request, as in done in an HTTP POST request. @result The request body data of the receiver.
 func (o *NSURLRequest) HTTPBody() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLRequestSelHTTPBody)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
 // @abstract Returns the request body stream of the receiver if any has been set @discussion The stream is returned for examination only; it is not safe for the caller to manipulate the stream in any way.  Also note that the HTTPBodyStream and HTTPBody are mutually exclusive - only one can be set on a given request.  Also note that the body stream is preserved across copies, but is LOST when the request is coded via the NSCoding protocol @result The request body stream of the receiver.
 func (o *NSURLRequest) HTTPBodyStream() *NSInputStream {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLRequestSelHTTPBodyStream)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSInputStreamFromID(_ret)
 }
 
@@ -221,4 +245,3 @@ func (o *NSURLRequest) HTTPShouldUsePipelining() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLRequestSelHTTPShouldUsePipelining)
 	return _ret
 }
-

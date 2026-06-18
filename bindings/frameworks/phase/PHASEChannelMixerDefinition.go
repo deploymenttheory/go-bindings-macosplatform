@@ -17,10 +17,10 @@ type PHASEChannelMixerDefinition struct {
 }
 
 var (
-	_clsPHASEChannelMixerDefinition = _objcClass("PHASEChannelMixerDefinition")
+	_clsPHASEChannelMixerDefinition                                = _objcClass("PHASEChannelMixerDefinition")
 	_pHASEChannelMixerDefinitionSelInitWithChannelLayoutIdentifier = objc.RegisterName("initWithChannelLayout:identifier:")
-	_pHASEChannelMixerDefinitionSelInitWithChannelLayout = objc.RegisterName("initWithChannelLayout:")
-	_pHASEChannelMixerDefinitionSelInputChannelLayout = objc.RegisterName("inputChannelLayout")
+	_pHASEChannelMixerDefinitionSelInitWithChannelLayout           = objc.RegisterName("initWithChannelLayout:")
+	_pHASEChannelMixerDefinitionSelInputChannelLayout              = objc.RegisterName("inputChannelLayout")
 )
 
 func PHASEChannelMixerDefinitionFromID(id objc.ID) *PHASEChannelMixerDefinition {
@@ -36,20 +36,25 @@ func PHASEChannelMixerDefinitionFromID(id objc.ID) *PHASEChannelMixerDefinition 
 // @method initWithChannelLayout:identifier @abstract Create a new PHASEChannelMixerDefinition @note Any connected sampler must match this channel layout. @param layout The input channel layout. @param identifier An optional custom identifier to give to this object @return A new PHASEChannelMixerDefinition object
 func (o *PHASEChannelMixerDefinition) InitWithChannelLayoutIdentifier(layout *avfaudio.AVAudioChannelLayout, identifier *foundation.NSString) *PHASEChannelMixerDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEChannelMixerDefinitionSelInitWithChannelLayoutIdentifier, layout.Ptr(), identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEChannelMixerDefinitionFromID(_ret)
 }
 
 // @method initWithChannelLayout @abstract Create a new PHASEChannelMixerDefinition @note Any connected sampler must match this channel layout. @param layout The input channel layout. Any connected sampler must match this channel layout. @return A new PHASEChannelMixerDefinition object
 func (o *PHASEChannelMixerDefinition) InitWithChannelLayout(layout *avfaudio.AVAudioChannelLayout) *PHASEChannelMixerDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEChannelMixerDefinitionSelInitWithChannelLayout, layout.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEChannelMixerDefinitionFromID(_ret)
 }
 
 func (o *PHASEChannelMixerDefinition) InputChannelLayout() *avfaudio.AVAudioChannelLayout {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEChannelMixerDefinitionSelInputChannelLayout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return avfaudio.AVAudioChannelLayoutFromID(_ret)
 }
-

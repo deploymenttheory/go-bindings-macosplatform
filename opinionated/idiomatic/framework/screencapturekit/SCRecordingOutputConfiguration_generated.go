@@ -132,4 +132,3 @@ type RecordingOutputConfigurationable interface {
 }
 
 var _ RecordingOutputConfigurationable = (*RecordingOutputConfiguration)(nil)
-

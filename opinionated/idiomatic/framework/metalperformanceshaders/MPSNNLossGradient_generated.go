@@ -266,7 +266,9 @@ func (x *NNLossGradient) SetComputeLabelGradients(computeLabelGradients bool) {
 	x.inner.SetComputeLabelGradients(computeLabelGradients)
 }
 
-func (x *NNLossGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNBinaryKernel }
+func (x *NNLossGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNBinaryKernel
+}
 
 func (x *NNLossGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNBinaryKernel.MPSKernel }
 
@@ -315,4 +317,3 @@ type NNLossGradientable interface {
 }
 
 var _ NNLossGradientable = (*NNLossGradient)(nil)
-

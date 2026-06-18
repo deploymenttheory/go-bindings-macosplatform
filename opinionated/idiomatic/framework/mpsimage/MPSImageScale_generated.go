@@ -82,7 +82,9 @@ func (x *ImageScale) SetScaleTransform(scaleTransform *mpscore.MPSScaleTransform
 
 func (x *ImageScale) asImageScale() *raw.MPSImageScale { return x.inner }
 
-func (x *ImageScale) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageScale) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
 // ImageScaleable is the interface implemented by [ImageScale], for mocking and DI.
 type ImageScaleable interface {
@@ -96,4 +98,3 @@ type ImageScaleable interface {
 }
 
 var _ ImageScaleable = (*ImageScale)(nil)
-

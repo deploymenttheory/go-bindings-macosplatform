@@ -10,4 +10,3 @@ var (
 func AudioChannelLayoutTag_GetNumberOfChannels(inLayoutTag uint) uint {
 	return _fnAudioChannelLayoutTag_GetNumberOfChannels(inLayoutTag)
 }
-

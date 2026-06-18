@@ -17,22 +17,22 @@ type MKLookAroundViewController struct {
 }
 
 var (
-	_clsMKLookAroundViewController = _objcClass("MKLookAroundViewController")
-	_mKLookAroundViewControllerSelInitWithScene = objc.RegisterName("initWithScene:")
-	_mKLookAroundViewControllerSelInitWithNibNameBundle = objc.RegisterName("initWithNibName:bundle:")
-	_mKLookAroundViewControllerSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_mKLookAroundViewControllerSelDelegate = objc.RegisterName("delegate")
-	_mKLookAroundViewControllerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_mKLookAroundViewControllerSelScene = objc.RegisterName("scene")
-	_mKLookAroundViewControllerSelSetScene = objc.RegisterName("setScene:")
-	_mKLookAroundViewControllerSelIsNavigationEnabled = objc.RegisterName("isNavigationEnabled")
-	_mKLookAroundViewControllerSelSetNavigationEnabled = objc.RegisterName("setNavigationEnabled:")
-	_mKLookAroundViewControllerSelShowsRoadLabels = objc.RegisterName("showsRoadLabels")
-	_mKLookAroundViewControllerSelSetShowsRoadLabels = objc.RegisterName("setShowsRoadLabels:")
-	_mKLookAroundViewControllerSelPointOfInterestFilter = objc.RegisterName("pointOfInterestFilter")
+	_clsMKLookAroundViewController                         = _objcClass("MKLookAroundViewController")
+	_mKLookAroundViewControllerSelInitWithScene            = objc.RegisterName("initWithScene:")
+	_mKLookAroundViewControllerSelInitWithNibNameBundle    = objc.RegisterName("initWithNibName:bundle:")
+	_mKLookAroundViewControllerSelInitWithCoder            = objc.RegisterName("initWithCoder:")
+	_mKLookAroundViewControllerSelDelegate                 = objc.RegisterName("delegate")
+	_mKLookAroundViewControllerSelSetDelegate              = objc.RegisterName("setDelegate:")
+	_mKLookAroundViewControllerSelScene                    = objc.RegisterName("scene")
+	_mKLookAroundViewControllerSelSetScene                 = objc.RegisterName("setScene:")
+	_mKLookAroundViewControllerSelIsNavigationEnabled      = objc.RegisterName("isNavigationEnabled")
+	_mKLookAroundViewControllerSelSetNavigationEnabled     = objc.RegisterName("setNavigationEnabled:")
+	_mKLookAroundViewControllerSelShowsRoadLabels          = objc.RegisterName("showsRoadLabels")
+	_mKLookAroundViewControllerSelSetShowsRoadLabels       = objc.RegisterName("setShowsRoadLabels:")
+	_mKLookAroundViewControllerSelPointOfInterestFilter    = objc.RegisterName("pointOfInterestFilter")
 	_mKLookAroundViewControllerSelSetPointOfInterestFilter = objc.RegisterName("setPointOfInterestFilter:")
-	_mKLookAroundViewControllerSelBadgePosition = objc.RegisterName("badgePosition")
-	_mKLookAroundViewControllerSelSetBadgePosition = objc.RegisterName("setBadgePosition:")
+	_mKLookAroundViewControllerSelBadgePosition            = objc.RegisterName("badgePosition")
+	_mKLookAroundViewControllerSelSetBadgePosition         = objc.RegisterName("setBadgePosition:")
 )
 
 func MKLookAroundViewControllerFromID(id objc.ID) *MKLookAroundViewController {
@@ -47,19 +47,25 @@ func MKLookAroundViewControllerFromID(id objc.ID) *MKLookAroundViewController {
 
 func (o *MKLookAroundViewController) InitWithScene(scene *MKLookAroundScene) *MKLookAroundViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLookAroundViewControllerSelInitWithScene, scene.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKLookAroundViewControllerFromID(_ret)
 }
 
 func (o *MKLookAroundViewController) InitWithNibNameBundle(nibNameOrNil *foundation.NSString, nibBundleOrNil *foundation.NSBundle) *MKLookAroundViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLookAroundViewControllerSelInitWithNibNameBundle, nibNameOrNil.Ptr(), nibBundleOrNil.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKLookAroundViewControllerFromID(_ret)
 }
 
 func (o *MKLookAroundViewController) InitWithCoder(coder *foundation.NSCoder) *MKLookAroundViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLookAroundViewControllerSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKLookAroundViewControllerFromID(_ret)
 }
 
@@ -74,7 +80,9 @@ func (o *MKLookAroundViewController) SetDelegate(delegate MKLookAroundViewContro
 
 func (o *MKLookAroundViewController) Scene() *MKLookAroundScene {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLookAroundViewControllerSelScene)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKLookAroundSceneFromID(_ret)
 }
 
@@ -102,7 +110,9 @@ func (o *MKLookAroundViewController) SetShowsRoadLabels(showsRoadLabels bool) {
 
 func (o *MKLookAroundViewController) PointOfInterestFilter() *MKPointOfInterestFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLookAroundViewControllerSelPointOfInterestFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPointOfInterestFilterFromID(_ret)
 }
 
@@ -118,4 +128,3 @@ func (o *MKLookAroundViewController) BadgePosition() MKLookAroundBadgePosition {
 func (o *MKLookAroundViewController) SetBadgePosition(badgePosition MKLookAroundBadgePosition) {
 	o.Ptr().Send(_mKLookAroundViewControllerSelSetBadgePosition, badgePosition)
 }
-

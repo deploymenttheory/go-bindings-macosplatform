@@ -19,16 +19,16 @@ type CIKernel struct {
 }
 
 var (
-	_clsCIKernel = _objcClass("CIKernel")
-	_cIKernelSelKernelsWithString = objc.RegisterName("kernelsWithString:")
-	_cIKernelSelKernelsWithMetalStringError = objc.RegisterName("kernelsWithMetalString:error:")
-	_cIKernelSelKernelWithString = objc.RegisterName("kernelWithString:")
-	_cIKernelSelKernelWithFunctionNameFromMetalLibraryDataError = objc.RegisterName("kernelWithFunctionName:fromMetalLibraryData:error:")
+	_clsCIKernel                                                                 = _objcClass("CIKernel")
+	_cIKernelSelKernelsWithString                                                = objc.RegisterName("kernelsWithString:")
+	_cIKernelSelKernelsWithMetalStringError                                      = objc.RegisterName("kernelsWithMetalString:error:")
+	_cIKernelSelKernelWithString                                                 = objc.RegisterName("kernelWithString:")
+	_cIKernelSelKernelWithFunctionNameFromMetalLibraryDataError                  = objc.RegisterName("kernelWithFunctionName:fromMetalLibraryData:error:")
 	_cIKernelSelKernelWithFunctionNameFromMetalLibraryDataOutputPixelFormatError = objc.RegisterName("kernelWithFunctionName:fromMetalLibraryData:outputPixelFormat:error:")
-	_cIKernelSelKernelNamesFromMetalLibraryData = objc.RegisterName("kernelNamesFromMetalLibraryData:")
-	_cIKernelSelSetROISelector = objc.RegisterName("setROISelector:")
-	_cIKernelSelApplyWithExtentRoiCallbackArguments = objc.RegisterName("applyWithExtent:roiCallback:arguments:")
-	_cIKernelSelName = objc.RegisterName("name")
+	_cIKernelSelKernelNamesFromMetalLibraryData                                  = objc.RegisterName("kernelNamesFromMetalLibraryData:")
+	_cIKernelSelSetROISelector                                                   = objc.RegisterName("setROISelector:")
+	_cIKernelSelApplyWithExtentRoiCallbackArguments                              = objc.RegisterName("applyWithExtent:roiCallback:arguments:")
+	_cIKernelSelName                                                             = objc.RegisterName("name")
 )
 
 func CIKernelFromID(id objc.ID) *CIKernel {
@@ -43,14 +43,18 @@ func CIKernelFromID(id objc.ID) *CIKernel {
 
 func CIKernelKernelsWithString(string_ *foundation.NSString) *foundation.NSArray[*CIKernel] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIKernel), _cIKernelSelKernelsWithString, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CIKernel](_ret)
 }
 
 func CIKernelKernelsWithMetalStringError(source *foundation.NSString) (*foundation.NSArray[*CIKernel], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIKernel), _cIKernelSelKernelsWithMetalStringError, source.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -59,14 +63,18 @@ func CIKernelKernelsWithMetalStringError(source *foundation.NSString) (*foundati
 
 func CIKernelKernelWithString(string_ *foundation.NSString) *CIKernel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIKernel), _cIKernelSelKernelWithString, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIKernelFromID(_ret)
 }
 
 func CIKernelKernelWithFunctionNameFromMetalLibraryDataError(name *foundation.NSString, data *foundation.NSData) (*CIKernel, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIKernel), _cIKernelSelKernelWithFunctionNameFromMetalLibraryDataError, name.Ptr(), data.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -76,7 +84,9 @@ func CIKernelKernelWithFunctionNameFromMetalLibraryDataError(name *foundation.NS
 func CIKernelKernelWithFunctionNameFromMetalLibraryDataOutputPixelFormatError(name *foundation.NSString, data *foundation.NSData, format int) (*CIKernel, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIKernel), _cIKernelSelKernelWithFunctionNameFromMetalLibraryDataOutputPixelFormatError, name.Ptr(), data.Ptr(), format, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -94,13 +104,16 @@ func (o *CIKernel) SetROISelector(method objc.SEL) {
 
 func (o *CIKernel) ApplyWithExtentRoiCallbackArguments(extent corefoundation.CGRect, callback objc.Block, args *foundation.NSArray[objc.ID]) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIKernelSelApplyWithExtentRoiCallbackArguments, extent, callback, args)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIImageFromID(_ret)
 }
 
 func (o *CIKernel) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIKernelSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

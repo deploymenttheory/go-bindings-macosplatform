@@ -50,9 +50,13 @@ func (x *CNNNeuronSigmoidNode) WithLabel(label string) *CNNNeuronSigmoidNode {
 	return x
 }
 
-func (x *CNNNeuronSigmoidNode) asCNNNeuronNode() *mpsneuralnetwork.MPSCNNNeuronNode { return &x.inner.MPSCNNNeuronNode }
+func (x *CNNNeuronSigmoidNode) asCNNNeuronNode() *mpsneuralnetwork.MPSCNNNeuronNode {
+	return &x.inner.MPSCNNNeuronNode
+}
 
-func (x *CNNNeuronSigmoidNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSCNNNeuronNode.MPSNNFilterNode }
+func (x *CNNNeuronSigmoidNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSCNNNeuronNode.MPSNNFilterNode
+}
 
 // CNNNeuronSigmoidNodeable is the interface implemented by [CNNNeuronSigmoidNode], for mocking and DI.
 type CNNNeuronSigmoidNodeable interface {
@@ -62,4 +66,3 @@ type CNNNeuronSigmoidNodeable interface {
 }
 
 var _ CNNNeuronSigmoidNodeable = (*CNNNeuronSigmoidNode)(nil)
-

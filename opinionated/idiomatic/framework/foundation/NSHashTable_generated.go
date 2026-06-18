@@ -164,4 +164,3 @@ type HashTableable interface {
 }
 
 var _ HashTableable = (*HashTable)(nil)
-

@@ -50,7 +50,9 @@ func (x *UserNotificationCenter) WithScheduledNotifications(items ...*raw.NSUser
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := raw.NSArrayFromID[*raw.NSUserNotification](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -148,4 +150,3 @@ type UserNotificationCenterable interface {
 }
 
 var _ UserNotificationCenterable = (*UserNotificationCenter)(nil)
-

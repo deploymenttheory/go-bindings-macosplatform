@@ -18,18 +18,18 @@ type GKChallengeDefinition struct {
 }
 
 var (
-	_clsGKChallengeDefinition = _objcClass("GKChallengeDefinition")
-	_gKChallengeDefinitionSelLoadImageWithCompletionHandler = objc.RegisterName("loadImageWithCompletionHandler:")
-	_gKChallengeDefinitionSelIdentifier = objc.RegisterName("identifier")
-	_gKChallengeDefinitionSelGroupIdentifier = objc.RegisterName("groupIdentifier")
-	_gKChallengeDefinitionSelTitle = objc.RegisterName("title")
-	_gKChallengeDefinitionSelDetails = objc.RegisterName("details")
-	_gKChallengeDefinitionSelDurationOptions = objc.RegisterName("durationOptions")
-	_gKChallengeDefinitionSelIsRepeatable = objc.RegisterName("isRepeatable")
-	_gKChallengeDefinitionSelLeaderboard = objc.RegisterName("leaderboard")
-	_gKChallengeDefinitionSelReleaseState = objc.RegisterName("releaseState")
+	_clsGKChallengeDefinition                                              = _objcClass("GKChallengeDefinition")
+	_gKChallengeDefinitionSelLoadImageWithCompletionHandler                = objc.RegisterName("loadImageWithCompletionHandler:")
+	_gKChallengeDefinitionSelIdentifier                                    = objc.RegisterName("identifier")
+	_gKChallengeDefinitionSelGroupIdentifier                               = objc.RegisterName("groupIdentifier")
+	_gKChallengeDefinitionSelTitle                                         = objc.RegisterName("title")
+	_gKChallengeDefinitionSelDetails                                       = objc.RegisterName("details")
+	_gKChallengeDefinitionSelDurationOptions                               = objc.RegisterName("durationOptions")
+	_gKChallengeDefinitionSelIsRepeatable                                  = objc.RegisterName("isRepeatable")
+	_gKChallengeDefinitionSelLeaderboard                                   = objc.RegisterName("leaderboard")
+	_gKChallengeDefinitionSelReleaseState                                  = objc.RegisterName("releaseState")
 	_gKChallengeDefinitionSelLoadChallengeDefinitionsWithCompletionHandler = objc.RegisterName("loadChallengeDefinitionsWithCompletionHandler:")
-	_gKChallengeDefinitionSelHasActiveChallengesWithCompletionHandler = objc.RegisterName("hasActiveChallengesWithCompletionHandler:")
+	_gKChallengeDefinitionSelHasActiveChallengesWithCompletionHandler      = objc.RegisterName("hasActiveChallengesWithCompletionHandler:")
 )
 
 func GKChallengeDefinitionFromID(id objc.ID) *GKChallengeDefinition {
@@ -57,28 +57,36 @@ func (o *GKChallengeDefinition) LoadImageWithCompletionHandler(completionHandler
 // The developer defined identifier for a given challenge definition.
 func (o *GKChallengeDefinition) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKChallengeDefinitionSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The group identifier for the challenge definition, if one exists.
 func (o *GKChallengeDefinition) GroupIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKChallengeDefinitionSelGroupIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // A short title for the challenge definition.
 func (o *GKChallengeDefinition) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKChallengeDefinitionSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // A more detailed description of the challenge definition.
 func (o *GKChallengeDefinition) Details() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKChallengeDefinitionSelDetails)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -97,7 +105,9 @@ func (o *GKChallengeDefinition) IsRepeatable() bool {
 // Scores submitted to this leaderboard will also be submitted as scores in this challenge.
 func (o *GKChallengeDefinition) Leaderboard() *GKLeaderboard {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKChallengeDefinitionSelLeaderboard)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKLeaderboardFromID(_ret)
 }
 
@@ -133,4 +143,3 @@ func (o *GKChallengeDefinition) HasActiveChallengesWithCompletionHandler(complet
 	}
 	o.Ptr().Send(_gKChallengeDefinitionSelHasActiveChallengesWithCompletionHandler, __block_completionHandler)
 }
-

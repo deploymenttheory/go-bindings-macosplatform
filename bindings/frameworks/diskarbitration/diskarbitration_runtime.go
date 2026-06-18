@@ -14,8 +14,8 @@ import (
 
 var (
 	_diskarbitrationLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce           sync.Once
+	_failedSymbols      = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -48,44 +48,86 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("DAApprovalSessionCreate", func() { purego.RegisterLibFunc(&_fnDAApprovalSessionCreate, _diskarbitrationLib, "DAApprovalSessionCreate") })
-	_register("DAApprovalSessionGetTypeID", func() { purego.RegisterLibFunc(&_fnDAApprovalSessionGetTypeID, _diskarbitrationLib, "DAApprovalSessionGetTypeID") })
-	_register("DAApprovalSessionScheduleWithRunLoop", func() { purego.RegisterLibFunc(&_fnDAApprovalSessionScheduleWithRunLoop, _diskarbitrationLib, "DAApprovalSessionScheduleWithRunLoop") })
-	_register("DAApprovalSessionUnscheduleFromRunLoop", func() { purego.RegisterLibFunc(&_fnDAApprovalSessionUnscheduleFromRunLoop, _diskarbitrationLib, "DAApprovalSessionUnscheduleFromRunLoop") })
+	_register("DAApprovalSessionCreate", func() {
+		purego.RegisterLibFunc(&_fnDAApprovalSessionCreate, _diskarbitrationLib, "DAApprovalSessionCreate")
+	})
+	_register("DAApprovalSessionGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnDAApprovalSessionGetTypeID, _diskarbitrationLib, "DAApprovalSessionGetTypeID")
+	})
+	_register("DAApprovalSessionScheduleWithRunLoop", func() {
+		purego.RegisterLibFunc(&_fnDAApprovalSessionScheduleWithRunLoop, _diskarbitrationLib, "DAApprovalSessionScheduleWithRunLoop")
+	})
+	_register("DAApprovalSessionUnscheduleFromRunLoop", func() {
+		purego.RegisterLibFunc(&_fnDAApprovalSessionUnscheduleFromRunLoop, _diskarbitrationLib, "DAApprovalSessionUnscheduleFromRunLoop")
+	})
 	_register("DADiskClaim", func() { purego.RegisterLibFunc(&_fnDADiskClaim, _diskarbitrationLib, "DADiskClaim") })
-	_register("DADiskCopyDescription", func() { purego.RegisterLibFunc(&_fnDADiskCopyDescription, _diskarbitrationLib, "DADiskCopyDescription") })
+	_register("DADiskCopyDescription", func() {
+		purego.RegisterLibFunc(&_fnDADiskCopyDescription, _diskarbitrationLib, "DADiskCopyDescription")
+	})
 	_register("DADiskCopyIOMedia", func() { purego.RegisterLibFunc(&_fnDADiskCopyIOMedia, _diskarbitrationLib, "DADiskCopyIOMedia") })
 	_register("DADiskCopyWholeDisk", func() { purego.RegisterLibFunc(&_fnDADiskCopyWholeDisk, _diskarbitrationLib, "DADiskCopyWholeDisk") })
-	_register("DADiskCreateFromBSDName", func() { purego.RegisterLibFunc(&_fnDADiskCreateFromBSDName, _diskarbitrationLib, "DADiskCreateFromBSDName") })
-	_register("DADiskCreateFromIOMedia", func() { purego.RegisterLibFunc(&_fnDADiskCreateFromIOMedia, _diskarbitrationLib, "DADiskCreateFromIOMedia") })
-	_register("DADiskCreateFromVolumePath", func() { purego.RegisterLibFunc(&_fnDADiskCreateFromVolumePath, _diskarbitrationLib, "DADiskCreateFromVolumePath") })
+	_register("DADiskCreateFromBSDName", func() {
+		purego.RegisterLibFunc(&_fnDADiskCreateFromBSDName, _diskarbitrationLib, "DADiskCreateFromBSDName")
+	})
+	_register("DADiskCreateFromIOMedia", func() {
+		purego.RegisterLibFunc(&_fnDADiskCreateFromIOMedia, _diskarbitrationLib, "DADiskCreateFromIOMedia")
+	})
+	_register("DADiskCreateFromVolumePath", func() {
+		purego.RegisterLibFunc(&_fnDADiskCreateFromVolumePath, _diskarbitrationLib, "DADiskCreateFromVolumePath")
+	})
 	_register("DADiskEject", func() { purego.RegisterLibFunc(&_fnDADiskEject, _diskarbitrationLib, "DADiskEject") })
 	_register("DADiskGetBSDName", func() { purego.RegisterLibFunc(&_fnDADiskGetBSDName, _diskarbitrationLib, "DADiskGetBSDName") })
 	_register("DADiskGetOptions", func() { purego.RegisterLibFunc(&_fnDADiskGetOptions, _diskarbitrationLib, "DADiskGetOptions") })
 	_register("DADiskGetTypeID", func() { purego.RegisterLibFunc(&_fnDADiskGetTypeID, _diskarbitrationLib, "DADiskGetTypeID") })
 	_register("DADiskIsClaimed", func() { purego.RegisterLibFunc(&_fnDADiskIsClaimed, _diskarbitrationLib, "DADiskIsClaimed") })
 	_register("DADiskMount", func() { purego.RegisterLibFunc(&_fnDADiskMount, _diskarbitrationLib, "DADiskMount") })
-	_register("DADiskMountWithArguments", func() { purego.RegisterLibFunc(&_fnDADiskMountWithArguments, _diskarbitrationLib, "DADiskMountWithArguments") })
+	_register("DADiskMountWithArguments", func() {
+		purego.RegisterLibFunc(&_fnDADiskMountWithArguments, _diskarbitrationLib, "DADiskMountWithArguments")
+	})
 	_register("DADiskRename", func() { purego.RegisterLibFunc(&_fnDADiskRename, _diskarbitrationLib, "DADiskRename") })
 	_register("DADiskSetOptions", func() { purego.RegisterLibFunc(&_fnDADiskSetOptions, _diskarbitrationLib, "DADiskSetOptions") })
 	_register("DADiskUnclaim", func() { purego.RegisterLibFunc(&_fnDADiskUnclaim, _diskarbitrationLib, "DADiskUnclaim") })
 	_register("DADiskUnmount", func() { purego.RegisterLibFunc(&_fnDADiskUnmount, _diskarbitrationLib, "DADiskUnmount") })
 	_register("DADissenterCreate", func() { purego.RegisterLibFunc(&_fnDADissenterCreate, _diskarbitrationLib, "DADissenterCreate") })
 	_register("DADissenterGetStatus", func() { purego.RegisterLibFunc(&_fnDADissenterGetStatus, _diskarbitrationLib, "DADissenterGetStatus") })
-	_register("DADissenterGetStatusString", func() { purego.RegisterLibFunc(&_fnDADissenterGetStatusString, _diskarbitrationLib, "DADissenterGetStatusString") })
-	_register("DARegisterDiskAppearedCallback", func() { purego.RegisterLibFunc(&_fnDARegisterDiskAppearedCallback, _diskarbitrationLib, "DARegisterDiskAppearedCallback") })
-	_register("DARegisterDiskDescriptionChangedCallback", func() { purego.RegisterLibFunc(&_fnDARegisterDiskDescriptionChangedCallback, _diskarbitrationLib, "DARegisterDiskDescriptionChangedCallback") })
-	_register("DARegisterDiskDisappearedCallback", func() { purego.RegisterLibFunc(&_fnDARegisterDiskDisappearedCallback, _diskarbitrationLib, "DARegisterDiskDisappearedCallback") })
-	_register("DARegisterDiskEjectApprovalCallback", func() { purego.RegisterLibFunc(&_fnDARegisterDiskEjectApprovalCallback, _diskarbitrationLib, "DARegisterDiskEjectApprovalCallback") })
-	_register("DARegisterDiskMountApprovalCallback", func() { purego.RegisterLibFunc(&_fnDARegisterDiskMountApprovalCallback, _diskarbitrationLib, "DARegisterDiskMountApprovalCallback") })
-	_register("DARegisterDiskPeekCallback", func() { purego.RegisterLibFunc(&_fnDARegisterDiskPeekCallback, _diskarbitrationLib, "DARegisterDiskPeekCallback") })
-	_register("DARegisterDiskUnmountApprovalCallback", func() { purego.RegisterLibFunc(&_fnDARegisterDiskUnmountApprovalCallback, _diskarbitrationLib, "DARegisterDiskUnmountApprovalCallback") })
+	_register("DADissenterGetStatusString", func() {
+		purego.RegisterLibFunc(&_fnDADissenterGetStatusString, _diskarbitrationLib, "DADissenterGetStatusString")
+	})
+	_register("DARegisterDiskAppearedCallback", func() {
+		purego.RegisterLibFunc(&_fnDARegisterDiskAppearedCallback, _diskarbitrationLib, "DARegisterDiskAppearedCallback")
+	})
+	_register("DARegisterDiskDescriptionChangedCallback", func() {
+		purego.RegisterLibFunc(&_fnDARegisterDiskDescriptionChangedCallback, _diskarbitrationLib, "DARegisterDiskDescriptionChangedCallback")
+	})
+	_register("DARegisterDiskDisappearedCallback", func() {
+		purego.RegisterLibFunc(&_fnDARegisterDiskDisappearedCallback, _diskarbitrationLib, "DARegisterDiskDisappearedCallback")
+	})
+	_register("DARegisterDiskEjectApprovalCallback", func() {
+		purego.RegisterLibFunc(&_fnDARegisterDiskEjectApprovalCallback, _diskarbitrationLib, "DARegisterDiskEjectApprovalCallback")
+	})
+	_register("DARegisterDiskMountApprovalCallback", func() {
+		purego.RegisterLibFunc(&_fnDARegisterDiskMountApprovalCallback, _diskarbitrationLib, "DARegisterDiskMountApprovalCallback")
+	})
+	_register("DARegisterDiskPeekCallback", func() {
+		purego.RegisterLibFunc(&_fnDARegisterDiskPeekCallback, _diskarbitrationLib, "DARegisterDiskPeekCallback")
+	})
+	_register("DARegisterDiskUnmountApprovalCallback", func() {
+		purego.RegisterLibFunc(&_fnDARegisterDiskUnmountApprovalCallback, _diskarbitrationLib, "DARegisterDiskUnmountApprovalCallback")
+	})
 	_register("DASessionCreate", func() { purego.RegisterLibFunc(&_fnDASessionCreate, _diskarbitrationLib, "DASessionCreate") })
 	_register("DASessionGetTypeID", func() { purego.RegisterLibFunc(&_fnDASessionGetTypeID, _diskarbitrationLib, "DASessionGetTypeID") })
-	_register("DASessionScheduleWithRunLoop", func() { purego.RegisterLibFunc(&_fnDASessionScheduleWithRunLoop, _diskarbitrationLib, "DASessionScheduleWithRunLoop") })
-	_register("DASessionSetDispatchQueue", func() { purego.RegisterLibFunc(&_fnDASessionSetDispatchQueue, _diskarbitrationLib, "DASessionSetDispatchQueue") })
-	_register("DASessionUnscheduleFromRunLoop", func() { purego.RegisterLibFunc(&_fnDASessionUnscheduleFromRunLoop, _diskarbitrationLib, "DASessionUnscheduleFromRunLoop") })
-	_register("DAUnregisterApprovalCallback", func() { purego.RegisterLibFunc(&_fnDAUnregisterApprovalCallback, _diskarbitrationLib, "DAUnregisterApprovalCallback") })
+	_register("DASessionScheduleWithRunLoop", func() {
+		purego.RegisterLibFunc(&_fnDASessionScheduleWithRunLoop, _diskarbitrationLib, "DASessionScheduleWithRunLoop")
+	})
+	_register("DASessionSetDispatchQueue", func() {
+		purego.RegisterLibFunc(&_fnDASessionSetDispatchQueue, _diskarbitrationLib, "DASessionSetDispatchQueue")
+	})
+	_register("DASessionUnscheduleFromRunLoop", func() {
+		purego.RegisterLibFunc(&_fnDASessionUnscheduleFromRunLoop, _diskarbitrationLib, "DASessionUnscheduleFromRunLoop")
+	})
+	_register("DAUnregisterApprovalCallback", func() {
+		purego.RegisterLibFunc(&_fnDAUnregisterApprovalCallback, _diskarbitrationLib, "DAUnregisterApprovalCallback")
+	})
 	_register("DAUnregisterCallback", func() { purego.RegisterLibFunc(&_fnDAUnregisterCallback, _diskarbitrationLib, "DAUnregisterCallback") })
 }
 

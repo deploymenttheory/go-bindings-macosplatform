@@ -120,4 +120,3 @@ type Pathable interface {
 }
 
 var _ Pathable = (*Path)(nil)
-

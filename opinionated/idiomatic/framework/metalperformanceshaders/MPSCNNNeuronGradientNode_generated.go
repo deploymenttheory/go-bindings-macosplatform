@@ -55,9 +55,13 @@ func (x *CNNNeuronGradientNode) Descriptor() *mpsneuralnetwork.MPSNNNeuronDescri
 	return x.inner.Descriptor()
 }
 
-func (x *CNNNeuronGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
+func (x *CNNNeuronGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode {
+	return &x.inner.MPSNNGradientFilterNode
+}
 
-func (x *CNNNeuronGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
+func (x *CNNNeuronGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode
+}
 
 // CNNNeuronGradientNodeable is the interface implemented by [CNNNeuronGradientNode], for mocking and DI.
 type CNNNeuronGradientNodeable interface {
@@ -68,4 +72,3 @@ type CNNNeuronGradientNodeable interface {
 }
 
 var _ CNNNeuronGradientNodeable = (*CNNNeuronGradientNode)(nil)
-

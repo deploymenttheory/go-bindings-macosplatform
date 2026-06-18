@@ -25,4 +25,3 @@ func NEOnDemandRuleConnectFromID(id objc.ID) *NEOnDemandRuleConnect {
 	purego.Track(o)
 	return o
 }
-

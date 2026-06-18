@@ -88,7 +88,9 @@ func (x *CNNNeuronSoftSign) WithDestinationImageAllocator(destinationImageAlloca
 
 func (x *CNNNeuronSoftSign) asCNNNeuron() *raw.MPSCNNNeuron { return &x.inner.MPSCNNNeuron }
 
-func (x *CNNNeuronSoftSign) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel }
+func (x *CNNNeuronSoftSign) asCNNKernel() *raw.MPSCNNKernel {
+	return &x.inner.MPSCNNNeuron.MPSCNNKernel
+}
 
 // CNNNeuronSoftSignable is the interface implemented by [CNNNeuronSoftSign], for mocking and DI.
 type CNNNeuronSoftSignable interface {
@@ -104,4 +106,3 @@ type CNNNeuronSoftSignable interface {
 }
 
 var _ CNNNeuronSoftSignable = (*CNNNeuronSoftSign)(nil)
-

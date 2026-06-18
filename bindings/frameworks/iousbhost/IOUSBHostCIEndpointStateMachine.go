@@ -20,17 +20,17 @@ type IOUSBHostCIEndpointStateMachine struct {
 }
 
 var (
-	_clsIOUSBHostCIEndpointStateMachine = _objcClass("IOUSBHostCIEndpointStateMachine")
-	_iOUSBHostCIEndpointStateMachineSelInitWithInterfaceCommandError = objc.RegisterName("initWithInterface:command:error:")
-	_iOUSBHostCIEndpointStateMachineSelInspectCommandError = objc.RegisterName("inspectCommand:error:")
-	_iOUSBHostCIEndpointStateMachineSelRespondToCommandStatusError = objc.RegisterName("respondToCommand:status:error:")
-	_iOUSBHostCIEndpointStateMachineSelProcessDoorbellError = objc.RegisterName("processDoorbell:error:")
+	_clsIOUSBHostCIEndpointStateMachine                                                             = _objcClass("IOUSBHostCIEndpointStateMachine")
+	_iOUSBHostCIEndpointStateMachineSelInitWithInterfaceCommandError                                = objc.RegisterName("initWithInterface:command:error:")
+	_iOUSBHostCIEndpointStateMachineSelInspectCommandError                                          = objc.RegisterName("inspectCommand:error:")
+	_iOUSBHostCIEndpointStateMachineSelRespondToCommandStatusError                                  = objc.RegisterName("respondToCommand:status:error:")
+	_iOUSBHostCIEndpointStateMachineSelProcessDoorbellError                                         = objc.RegisterName("processDoorbell:error:")
 	_iOUSBHostCIEndpointStateMachineSelEnqueueTransferCompletionForMessageStatusTransferLengthError = objc.RegisterName("enqueueTransferCompletionForMessage:status:transferLength:error:")
-	_iOUSBHostCIEndpointStateMachineSelEndpointState = objc.RegisterName("endpointState")
-	_iOUSBHostCIEndpointStateMachineSelDeviceAddress = objc.RegisterName("deviceAddress")
-	_iOUSBHostCIEndpointStateMachineSelEndpointAddress = objc.RegisterName("endpointAddress")
-	_iOUSBHostCIEndpointStateMachineSelCurrentTransferMessage = objc.RegisterName("currentTransferMessage")
-	_iOUSBHostCIEndpointStateMachineSelControllerInterface = objc.RegisterName("controllerInterface")
+	_iOUSBHostCIEndpointStateMachineSelEndpointState                                                = objc.RegisterName("endpointState")
+	_iOUSBHostCIEndpointStateMachineSelDeviceAddress                                                = objc.RegisterName("deviceAddress")
+	_iOUSBHostCIEndpointStateMachineSelEndpointAddress                                              = objc.RegisterName("endpointAddress")
+	_iOUSBHostCIEndpointStateMachineSelCurrentTransferMessage                                       = objc.RegisterName("currentTransferMessage")
+	_iOUSBHostCIEndpointStateMachineSelControllerInterface                                          = objc.RegisterName("controllerInterface")
 )
 
 func IOUSBHostCIEndpointStateMachineFromID(id objc.ID) *IOUSBHostCIEndpointStateMachine {
@@ -47,7 +47,9 @@ func IOUSBHostCIEndpointStateMachineFromID(id objc.ID) *IOUSBHostCIEndpointState
 func (o *IOUSBHostCIEndpointStateMachine) InitWithInterfaceCommandError(interface_ *IOUSBHostControllerInterface, command *IOUSBHostCIMessage) (*IOUSBHostCIEndpointStateMachine, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostCIEndpointStateMachineSelInitWithInterfaceCommandError, interface_.Ptr(), command, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -116,7 +118,8 @@ func (o *IOUSBHostCIEndpointStateMachine) CurrentTransferMessage() *IOUSBHostCIM
 
 func (o *IOUSBHostCIEndpointStateMachine) ControllerInterface() *IOUSBHostControllerInterface {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostCIEndpointStateMachineSelControllerInterface)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOUSBHostControllerInterfaceFromID(_ret)
 }
-

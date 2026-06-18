@@ -436,4 +436,3 @@ func NSWindowList(size int, list *int64) {
 func NSWindowListForContext(context_ int, size int, list *int64) {
 	raw.NSWindowListForContext(context_, size, list)
 }
-

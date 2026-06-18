@@ -17,7 +17,7 @@ type MPSCNNNeuronSoftSignNode struct {
 }
 
 var (
-	_clsMPSCNNNeuronSoftSignNode = _objcClass("MPSCNNNeuronSoftSignNode")
+	_clsMPSCNNNeuronSoftSignNode               = _objcClass("MPSCNNNeuronSoftSignNode")
 	_mPSCNNNeuronSoftSignNodeSelNodeWithSource = objc.RegisterName("nodeWithSource:")
 	_mPSCNNNeuronSoftSignNodeSelInitWithSource = objc.RegisterName("initWithSource:")
 )
@@ -35,14 +35,17 @@ func MPSCNNNeuronSoftSignNodeFromID(id objc.ID) *MPSCNNNeuronSoftSignNode {
 // @abstract Create an autoreleased node with default values for parameters a & b
 func MPSCNNNeuronSoftSignNodeNodeWithSource(sourceNode *MPSNNImageNode) *MPSCNNNeuronSoftSignNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNNeuronSoftSignNode), _mPSCNNNeuronSoftSignNodeSelNodeWithSource, sourceNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronSoftSignNodeFromID(_ret)
 }
 
 // @abstract Init a node with default values for parameters a & b
 func (o *MPSCNNNeuronSoftSignNode) InitWithSource(sourceNode *MPSNNImageNode) *MPSCNNNeuronSoftSignNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronSoftSignNodeSelInitWithSource, sourceNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronSoftSignNodeFromID(_ret)
 }
-

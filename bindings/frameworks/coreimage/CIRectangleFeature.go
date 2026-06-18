@@ -16,10 +16,10 @@ type CIRectangleFeature struct {
 }
 
 var (
-	_clsCIRectangleFeature = _objcClass("CIRectangleFeature")
-	_cIRectangleFeatureSelTopLeft = objc.RegisterName("topLeft")
-	_cIRectangleFeatureSelTopRight = objc.RegisterName("topRight")
-	_cIRectangleFeatureSelBottomLeft = objc.RegisterName("bottomLeft")
+	_clsCIRectangleFeature            = _objcClass("CIRectangleFeature")
+	_cIRectangleFeatureSelTopLeft     = objc.RegisterName("topLeft")
+	_cIRectangleFeatureSelTopRight    = objc.RegisterName("topRight")
+	_cIRectangleFeatureSelBottomLeft  = objc.RegisterName("bottomLeft")
 	_cIRectangleFeatureSelBottomRight = objc.RegisterName("bottomRight")
 )
 
@@ -56,4 +56,3 @@ func (o *CIRectangleFeature) BottomRight() corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _cIRectangleFeatureSelBottomRight)
 	return _ret
 }
-

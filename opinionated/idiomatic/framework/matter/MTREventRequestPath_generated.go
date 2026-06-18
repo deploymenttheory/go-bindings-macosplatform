@@ -60,4 +60,3 @@ type MTREventRequestPathable interface {
 }
 
 var _ MTREventRequestPathable = (*MTREventRequestPath)(nil)
-

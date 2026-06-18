@@ -16,21 +16,21 @@ type MTL4AccelerationStructureGeometryDescriptor struct {
 }
 
 var (
-	_clsMTL4AccelerationStructureGeometryDescriptor = _objcClass("MTL4AccelerationStructureGeometryDescriptor")
-	_mTL4AccelerationStructureGeometryDescriptorSelIntersectionFunctionTableOffset = objc.RegisterName("intersectionFunctionTableOffset")
-	_mTL4AccelerationStructureGeometryDescriptorSelSetIntersectionFunctionTableOffset = objc.RegisterName("setIntersectionFunctionTableOffset:")
-	_mTL4AccelerationStructureGeometryDescriptorSelOpaque = objc.RegisterName("opaque")
-	_mTL4AccelerationStructureGeometryDescriptorSelSetOpaque = objc.RegisterName("setOpaque:")
-	_mTL4AccelerationStructureGeometryDescriptorSelAllowDuplicateIntersectionFunctionInvocation = objc.RegisterName("allowDuplicateIntersectionFunctionInvocation")
+	_clsMTL4AccelerationStructureGeometryDescriptor                                                = _objcClass("MTL4AccelerationStructureGeometryDescriptor")
+	_mTL4AccelerationStructureGeometryDescriptorSelIntersectionFunctionTableOffset                 = objc.RegisterName("intersectionFunctionTableOffset")
+	_mTL4AccelerationStructureGeometryDescriptorSelSetIntersectionFunctionTableOffset              = objc.RegisterName("setIntersectionFunctionTableOffset:")
+	_mTL4AccelerationStructureGeometryDescriptorSelOpaque                                          = objc.RegisterName("opaque")
+	_mTL4AccelerationStructureGeometryDescriptorSelSetOpaque                                       = objc.RegisterName("setOpaque:")
+	_mTL4AccelerationStructureGeometryDescriptorSelAllowDuplicateIntersectionFunctionInvocation    = objc.RegisterName("allowDuplicateIntersectionFunctionInvocation")
 	_mTL4AccelerationStructureGeometryDescriptorSelSetAllowDuplicateIntersectionFunctionInvocation = objc.RegisterName("setAllowDuplicateIntersectionFunctionInvocation:")
-	_mTL4AccelerationStructureGeometryDescriptorSelLabel = objc.RegisterName("label")
-	_mTL4AccelerationStructureGeometryDescriptorSelSetLabel = objc.RegisterName("setLabel:")
-	_mTL4AccelerationStructureGeometryDescriptorSelPrimitiveDataBuffer = objc.RegisterName("primitiveDataBuffer")
-	_mTL4AccelerationStructureGeometryDescriptorSelSetPrimitiveDataBuffer = objc.RegisterName("setPrimitiveDataBuffer:")
-	_mTL4AccelerationStructureGeometryDescriptorSelPrimitiveDataStride = objc.RegisterName("primitiveDataStride")
-	_mTL4AccelerationStructureGeometryDescriptorSelSetPrimitiveDataStride = objc.RegisterName("setPrimitiveDataStride:")
-	_mTL4AccelerationStructureGeometryDescriptorSelPrimitiveDataElementSize = objc.RegisterName("primitiveDataElementSize")
-	_mTL4AccelerationStructureGeometryDescriptorSelSetPrimitiveDataElementSize = objc.RegisterName("setPrimitiveDataElementSize:")
+	_mTL4AccelerationStructureGeometryDescriptorSelLabel                                           = objc.RegisterName("label")
+	_mTL4AccelerationStructureGeometryDescriptorSelSetLabel                                        = objc.RegisterName("setLabel:")
+	_mTL4AccelerationStructureGeometryDescriptorSelPrimitiveDataBuffer                             = objc.RegisterName("primitiveDataBuffer")
+	_mTL4AccelerationStructureGeometryDescriptorSelSetPrimitiveDataBuffer                          = objc.RegisterName("setPrimitiveDataBuffer:")
+	_mTL4AccelerationStructureGeometryDescriptorSelPrimitiveDataStride                             = objc.RegisterName("primitiveDataStride")
+	_mTL4AccelerationStructureGeometryDescriptorSelSetPrimitiveDataStride                          = objc.RegisterName("setPrimitiveDataStride:")
+	_mTL4AccelerationStructureGeometryDescriptorSelPrimitiveDataElementSize                        = objc.RegisterName("primitiveDataElementSize")
+	_mTL4AccelerationStructureGeometryDescriptorSelSetPrimitiveDataElementSize                     = objc.RegisterName("setPrimitiveDataElementSize:")
 )
 
 func MTL4AccelerationStructureGeometryDescriptorFromID(id objc.ID) *MTL4AccelerationStructureGeometryDescriptor {
@@ -43,7 +43,7 @@ func MTL4AccelerationStructureGeometryDescriptorFromID(id objc.ID) *MTL4Accelera
 	return o
 }
 
-// Sets the offset that this geometry contributes to determining the intersection function to invoke when a ray intersects it. When you perform a ray tracing operation in the Metal Shading Language, and provide the ray intersector object with an instance of ``MTLIntersectionFunctionTable``, Metal adds this offset to the instance offset from structs such as: - ``MTLAccelerationStructureInstanceDescriptor`` - ``MTLAccelerationStructureUserIDInstanceDescriptor`` - ``MTLAccelerationStructureMotionInstanceDescriptor`` - ``MTLIndirectAccelerationStructureInstanceDescriptor`` - ``MTLIndirectAccelerationStructureMotionInstanceDescriptor`` The sum of these offsets provides an index into the intersection function table that the ray tracing system uses to retrieve and invoke the function at this index, allowing you to customize the intersection evaluation process.
+// Sets the offset that this geometry contributes to determining the intersection function to invoke when a ray intersects it. When you perform a ray tracing operation in the Metal Shading Language, and provide the ray intersector object with an instance of “MTLIntersectionFunctionTable“, Metal adds this offset to the instance offset from structs such as: - “MTLAccelerationStructureInstanceDescriptor“ - “MTLAccelerationStructureUserIDInstanceDescriptor“ - “MTLAccelerationStructureMotionInstanceDescriptor“ - “MTLIndirectAccelerationStructureInstanceDescriptor“ - “MTLIndirectAccelerationStructureMotionInstanceDescriptor“ The sum of these offsets provides an index into the intersection function table that the ray tracing system uses to retrieve and invoke the function at this index, allowing you to customize the intersection evaluation process.
 func (o *MTL4AccelerationStructureGeometryDescriptor) IntersectionFunctionTableOffset() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mTL4AccelerationStructureGeometryDescriptorSelIntersectionFunctionTableOffset)
 	return _ret
@@ -76,7 +76,9 @@ func (o *MTL4AccelerationStructureGeometryDescriptor) SetAllowDuplicateIntersect
 // Assigns an optional label you can assign to this geometry for debugging purposes.
 func (o *MTL4AccelerationStructureGeometryDescriptor) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4AccelerationStructureGeometryDescriptorSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -94,7 +96,7 @@ func (o *MTL4AccelerationStructureGeometryDescriptor) SetPrimitiveDataBuffer(pri
 	o.Ptr().Send(_mTL4AccelerationStructureGeometryDescriptorSelSetPrimitiveDataBuffer, primitiveDataBuffer)
 }
 
-// Defines the stride, in bytes, between each primitive's data in the primitive data buffer ``primitiveDataBuffer`` references. You are responsible for ensuring the stride is at least ``primitiveDataElementSize`` in size and a multiple of 4 bytes. This property defaults to `0` bytes,  which indicates the stride is equal to ``primitiveDataElementSize``.
+// Defines the stride, in bytes, between each primitive's data in the primitive data buffer “primitiveDataBuffer“ references. You are responsible for ensuring the stride is at least “primitiveDataElementSize“ in size and a multiple of 4 bytes. This property defaults to `0` bytes,  which indicates the stride is equal to “primitiveDataElementSize“.
 func (o *MTL4AccelerationStructureGeometryDescriptor) PrimitiveDataStride() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mTL4AccelerationStructureGeometryDescriptorSelPrimitiveDataStride)
 	return _ret
@@ -104,7 +106,7 @@ func (o *MTL4AccelerationStructureGeometryDescriptor) SetPrimitiveDataStride(pri
 	o.Ptr().Send(_mTL4AccelerationStructureGeometryDescriptorSelSetPrimitiveDataStride, primitiveDataStride)
 }
 
-// Sets the size, in bytes, of the data for each primitive in the primitive data buffer ``primitiveDataBuffer`` references. This size needs to be at most ``primitiveDataStride`` in size and a multiple of 4 bytes. This property defaults to 0 bytes.
+// Sets the size, in bytes, of the data for each primitive in the primitive data buffer “primitiveDataBuffer“ references. This size needs to be at most “primitiveDataStride“ in size and a multiple of 4 bytes. This property defaults to 0 bytes.
 func (o *MTL4AccelerationStructureGeometryDescriptor) PrimitiveDataElementSize() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mTL4AccelerationStructureGeometryDescriptorSelPrimitiveDataElementSize)
 	return _ret
@@ -113,4 +115,3 @@ func (o *MTL4AccelerationStructureGeometryDescriptor) PrimitiveDataElementSize()
 func (o *MTL4AccelerationStructureGeometryDescriptor) SetPrimitiveDataElementSize(primitiveDataElementSize uint) {
 	o.Ptr().Send(_mTL4AccelerationStructureGeometryDescriptorSelSetPrimitiveDataElementSize, primitiveDataElementSize)
 }
-

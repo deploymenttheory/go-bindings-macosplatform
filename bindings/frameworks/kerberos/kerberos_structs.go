@@ -11,32 +11,32 @@ import (
 
 // C struct: _krb5_address
 type Krb5Address struct {
-	Magic int
+	Magic    int
 	Addrtype int
-	Length uint
+	Length   uint
 	Contents *uint8
 }
 
 // C struct: _krb5_ap_rep
 type Krb5ApRep struct {
-	Magic int
+	Magic    int
 	Enc_part Krb5EncData
 }
 
 // C struct: _krb5_ap_rep_enc_part
 type Krb5ApRepEncPart struct {
-	Magic int
-	Ctime int
-	Cusec int
-	Subkey *Krb5Keyblock
+	Magic      int
+	Ctime      int
+	Cusec      int
+	Subkey     *Krb5Keyblock
 	Seq_number uint
 }
 
 // C struct: _krb5_ap_req
 type Krb5ApReq struct {
-	Magic int
-	Ap_options int
-	Ticket *Krb5Ticket
+	Magic         int
+	Ap_options    int
+	Ticket        *Krb5Ticket
 	Authenticator Krb5EncData
 }
 
@@ -46,21 +46,21 @@ type Krb5AuthContext struct{}
 
 // C struct: _krb5_authdata
 type Krb5Authdata struct {
-	Magic int
-	Ad_type int
-	Length uint
+	Magic    int
+	Ad_type  int
+	Length   uint
 	Contents *uint8
 }
 
 // C struct: _krb5_authenticator
 type Krb5Authenticator struct {
-	Magic int
-	Client *Krb5PrincipalData
-	Checksum *Krb5Checksum
-	Cusec int
-	Ctime int
-	Subkey *Krb5Keyblock
-	Seq_number uint
+	Magic              int
+	Client             *Krb5PrincipalData
+	Checksum           *Krb5Checksum
+	Cusec              int
+	Ctime              int
+	Subkey             *Krb5Keyblock
+	Seq_number         uint
 	Authorization_data *Krb5Authdata
 }
 
@@ -78,10 +78,10 @@ type Krb5CccolCursor struct{}
 
 // C struct: _krb5_checksum
 type Krb5Checksum struct {
-	Magic int
+	Magic         int
 	Checksum_type int
-	Length uint
-	Contents *uint8
+	Length        uint
+	Contents      *uint8
 }
 
 // C struct: _krb5_context
@@ -90,47 +90,47 @@ type Krb5Context struct{}
 
 // C struct: _krb5_cred
 type Krb5Cred struct {
-	Magic int
-	Tickets *Krb5Ticket
-	Enc_part Krb5EncData
+	Magic     int
+	Tickets   *Krb5Ticket
+	Enc_part  Krb5EncData
 	Enc_part2 *Krb5CredEncPart
 }
 
 // C struct: _krb5_cred_enc_part
 type Krb5CredEncPart struct {
-	Magic int
-	Nonce int
-	Timestamp int
-	Usec int
-	S_address *Krb5Address
-	R_address *Krb5Address
+	Magic       int
+	Nonce       int
+	Timestamp   int
+	Usec        int
+	S_address   *Krb5Address
+	R_address   *Krb5Address
 	Ticket_info *Krb5CredInfo
 }
 
 // C struct: _krb5_cred_info
 type Krb5CredInfo struct {
-	Magic int
+	Magic   int
 	Session *Krb5Keyblock
-	Client *Krb5PrincipalData
-	Server *Krb5PrincipalData
-	Flags int
-	Times Krb5TicketTimes
-	Caddrs *Krb5Address
+	Client  *Krb5PrincipalData
+	Server  *Krb5PrincipalData
+	Flags   int
+	Times   Krb5TicketTimes
+	Caddrs  *Krb5Address
 }
 
 // C struct: _krb5_creds
 type Krb5Creds struct {
-	Magic int
-	Client *Krb5PrincipalData
-	Server *Krb5PrincipalData
-	Keyblock Krb5Keyblock
-	Times Krb5TicketTimes
-	Is_skey uint
-	Ticket_flags int
-	Addresses *Krb5Address
-	Ticket Krb5Data
+	Magic         int
+	Client        *Krb5PrincipalData
+	Server        *Krb5PrincipalData
+	Keyblock      Krb5Keyblock
+	Times         Krb5TicketTimes
+	Is_skey       uint
+	Ticket_flags  int
+	Addresses     *Krb5Address
+	Ticket        Krb5Data
 	Second_ticket Krb5Data
-	Authdata *Krb5Authdata
+	Authdata      *Krb5Authdata
 }
 
 // C struct: _krb5_cryptosystem_entry
@@ -139,125 +139,125 @@ type Krb5CryptosystemEntry struct{}
 
 // C struct: _krb5_data
 type Krb5Data struct {
-	Magic int
+	Magic  int
 	Length uint
-	Data string
+	Data   string
 }
 
 // C struct: _krb5_enc_data
 type Krb5EncData struct {
-	Magic int
-	Enctype int
-	Kvno uint
+	Magic      int
+	Enctype    int
+	Kvno       uint
 	Ciphertext Krb5Data
 }
 
 // C struct: _krb5_enc_kdc_rep_part
 type Krb5EncKdcRepPart struct {
-	Magic int
+	Magic    int
 	Msg_type uint
-	Session *Krb5Keyblock
+	Session  *Krb5Keyblock
 	Last_req *Krb5LastReqEntry
-	Nonce int
-	Key_exp int
-	Flags int
-	Times Krb5TicketTimes
-	Server *Krb5PrincipalData
-	Caddrs *Krb5Address
+	Nonce    int
+	Key_exp  int
+	Flags    int
+	Times    Krb5TicketTimes
+	Server   *Krb5PrincipalData
+	Caddrs   *Krb5Address
 }
 
 // C struct: _krb5_enc_tkt_part
 type Krb5EncTktPart struct {
-	Magic int
-	Flags int
-	Session *Krb5Keyblock
-	Client *Krb5PrincipalData
-	Transited Krb5Transited
-	Times Krb5TicketTimes
-	Caddrs *Krb5Address
+	Magic              int
+	Flags              int
+	Session            *Krb5Keyblock
+	Client             *Krb5PrincipalData
+	Transited          Krb5Transited
+	Times              Krb5TicketTimes
+	Caddrs             *Krb5Address
 	Authorization_data *Krb5Authdata
 }
 
 // C struct: _krb5_encrypt_block
 type Krb5EncryptBlock struct {
-	Magic int
+	Magic        int
 	Crypto_entry int
-	Key *Krb5Keyblock
+	Key          *Krb5Keyblock
 }
 
 // C struct: _krb5_error
 type Krb5Error struct {
-	Magic int
-	Ctime int
-	Cusec int
-	Susec int
-	Stime int
-	Error uint
+	Magic  int
+	Ctime  int
+	Cusec  int
+	Susec  int
+	Stime  int
+	Error  uint
 	Client *Krb5PrincipalData
 	Server *Krb5PrincipalData
-	Text Krb5Data
+	Text   Krb5Data
 	E_data Krb5Data
 }
 
 // Deprecated: Use GSS.framework
 // C struct: _krb5_get_init_creds_opt
 type Krb5GetInitCredsOpt struct {
-	Flags int
-	Tkt_life int
-	Renew_life int
-	Forwardable int
-	Proxiable int
-	Etype_list *int
-	Etype_list_length int
-	Address_list *Krb5Address
-	Preauth_list *int
+	Flags               int
+	Tkt_life            int
+	Renew_life          int
+	Forwardable         int
+	Proxiable           int
+	Etype_list          *int
+	Etype_list_length   int
+	Address_list        *Krb5Address
+	Preauth_list        *int
 	Preauth_list_length int
-	Salt *Krb5Data
+	Salt                *Krb5Data
 }
 
 // Deprecated: Use GSS.framework
 // C struct: _krb5_gic_opt_pa_data
 type Krb5GicOptPaData struct {
-	Attr string
+	Attr  string
 	Value string
 }
 
 // C struct: _krb5_kdc_rep
 type Krb5KdcRep struct {
-	Magic int
-	Msg_type uint
-	Padata *Krb5PaData
-	Client *Krb5PrincipalData
-	Ticket *Krb5Ticket
-	Enc_part Krb5EncData
+	Magic     int
+	Msg_type  uint
+	Padata    *Krb5PaData
+	Client    *Krb5PrincipalData
+	Ticket    *Krb5Ticket
+	Enc_part  Krb5EncData
 	Enc_part2 *Krb5EncKdcRepPart
 }
 
 // C struct: _krb5_kdc_req
 type Krb5KdcReq struct {
-	Magic int
-	Msg_type uint
-	Padata *Krb5PaData
-	Kdc_options int
-	Client *Krb5PrincipalData
-	Server *Krb5PrincipalData
-	From int
-	Till int
-	Rtime int
-	Nonce int
-	Nktypes int
-	Ktype *int
-	Addresses *Krb5Address
+	Magic              int
+	Msg_type           uint
+	Padata             *Krb5PaData
+	Kdc_options        int
+	Client             *Krb5PrincipalData
+	Server             *Krb5PrincipalData
+	From               int
+	Till               int
+	Rtime              int
+	Nonce              int
+	Nktypes            int
+	Ktype              *int
+	Addresses          *Krb5Address
 	Authorization_data Krb5EncData
-	Unenc_authdata *Krb5Authdata
-	Second_ticket *Krb5Ticket
+	Unenc_authdata     *Krb5Authdata
+	Second_ticket      *Krb5Ticket
 }
 
 // C struct: _krb5_keyblock
 type Krb5Keyblock struct {
-	Magic int
-	Enctype int
-	Length uint
+	Magic    int
+	Enctype  int
+	Length   uint
 	Contents *uint8
 }
 
@@ -267,23 +267,23 @@ type Krb5Kt struct{}
 
 // C struct: _krb5_last_req_entry
 type Krb5LastReqEntry struct {
-	Magic int
+	Magic   int
 	Lr_type int
-	Value int
+	Value   int
 }
 
 // C struct: _krb5_octet_data
 type Krb5OctetData struct {
-	Magic int
+	Magic  int
 	Length uint
-	Data *uint8
+	Data   *uint8
 }
 
 // C struct: _krb5_pa_data
 type Krb5PaData struct {
-	Magic int
-	Pa_type int
-	Length uint
+	Magic    int
+	Pa_type  int
+	Length   uint
 	Contents *uint8
 }
 
@@ -291,66 +291,66 @@ type Krb5PaData struct {
 type Krb5Prompt struct {
 	Prompt string
 	Hidden int
-	Reply *Krb5Data
+	Reply  *Krb5Data
 }
 
 // C struct: _krb5_pwd_data
 type Krb5PwdData struct {
-	Magic int
+	Magic          int
 	Sequence_count int
-	Element *PasswdPhraseElement
+	Element        *PasswdPhraseElement
 }
 
 // C struct: _krb5_response
 type Krb5Response struct {
-	Magic int
-	Message_type uint8
-	Response Krb5Data
+	Magic          int
+	Message_type   uint8
+	Response       Krb5Data
 	Expected_nonce int
-	Request_time int
+	Request_time   int
 }
 
 // C struct: _krb5_ticket
 type Krb5Ticket struct {
-	Magic int
-	Server *Krb5PrincipalData
-	Enc_part Krb5EncData
+	Magic     int
+	Server    *Krb5PrincipalData
+	Enc_part  Krb5EncData
 	Enc_part2 *Krb5EncTktPart
 }
 
 // C struct: _krb5_ticket_times
 type Krb5TicketTimes struct {
-	Authtime int
-	Starttime int
-	Endtime int
+	Authtime   int
+	Starttime  int
+	Endtime    int
 	Renew_till int
 }
 
 // C struct: _krb5_tkt_authent
 type Krb5TktAuthent struct {
-	Magic int
-	Ticket *Krb5Ticket
+	Magic         int
+	Ticket        *Krb5Ticket
 	Authenticator *Krb5Authenticator
-	Ap_options int
+	Ap_options    int
 }
 
 // C struct: _krb5_transited
 type Krb5Transited struct {
-	Magic int
-	Tr_type uint8
+	Magic       int
+	Tr_type     uint8
 	Tr_contents Krb5Data
 }
 
 // Deprecated: Use GSS.framework
 // C struct: _krb5_verify_init_creds_opt
 type Krb5VerifyInitCredsOpt struct {
-	Flags int
+	Flags         int
 	Ap_req_nofail int
 }
 
 // C struct: _passwd_phrase_element
 type PasswdPhraseElement struct {
-	Magic int
+	Magic  int
 	Passwd *Krb5Data
 	Phrase *Krb5Data
 }
@@ -361,45 +361,45 @@ type ProfileT struct{}
 
 // C struct: apple_gss_krb5_authdata_if_relevant_key
 type AppleGssKrb5AuthdataIfRelevantKey struct {
-	Type uint32
+	Type   uint32
 	Length uint32
-	Data unsafe.Pointer
+	Data   unsafe.Pointer
 }
 
 // C struct: cc_ccache_d
 type CcCcacheD struct {
-	Functions *CcCcacheF
+	Functions        *CcCcacheF
 	Vector_functions *CcCcacheF
 }
 
 // Function pointer table for cc_ccache_t.  For more information see \ref cc_ccache_reference.
 // C struct: cc_ccache_f
 type CcCcacheF struct {
-	Release unsafe.Pointer
-	Destroy unsafe.Pointer
-	Set_default unsafe.Pointer
-	Get_credentials_version unsafe.Pointer
-	Get_name unsafe.Pointer
-	Get_principal unsafe.Pointer
-	Set_principal unsafe.Pointer
-	Store_credentials unsafe.Pointer
-	Remove_credentials unsafe.Pointer
+	Release                  unsafe.Pointer
+	Destroy                  unsafe.Pointer
+	Set_default              unsafe.Pointer
+	Get_credentials_version  unsafe.Pointer
+	Get_name                 unsafe.Pointer
+	Get_principal            unsafe.Pointer
+	Set_principal            unsafe.Pointer
+	Store_credentials        unsafe.Pointer
+	Remove_credentials       unsafe.Pointer
 	New_credentials_iterator unsafe.Pointer
-	Move unsafe.Pointer
-	Lock unsafe.Pointer
-	Unlock unsafe.Pointer
-	Get_last_default_time unsafe.Pointer
-	Get_change_time unsafe.Pointer
-	Compare unsafe.Pointer
-	Get_kdc_time_offset unsafe.Pointer
-	Set_kdc_time_offset unsafe.Pointer
-	Clear_kdc_time_offset unsafe.Pointer
-	Wait_for_change unsafe.Pointer
+	Move                     unsafe.Pointer
+	Lock                     unsafe.Pointer
+	Unlock                   unsafe.Pointer
+	Get_last_default_time    unsafe.Pointer
+	Get_change_time          unsafe.Pointer
+	Compare                  unsafe.Pointer
+	Get_kdc_time_offset      unsafe.Pointer
+	Set_kdc_time_offset      unsafe.Pointer
+	Clear_kdc_time_offset    unsafe.Pointer
+	Wait_for_change          unsafe.Pointer
 }
 
 // C struct: cc_ccache_iterator_d
 type CcCcacheIteratorD struct {
-	Functions *CcCcacheIteratorF
+	Functions        *CcCcacheIteratorF
 	Vector_functions *CcCcacheIteratorF
 }
 
@@ -407,38 +407,38 @@ type CcCcacheIteratorD struct {
 // C struct: cc_ccache_iterator_f
 type CcCcacheIteratorF struct {
 	Release unsafe.Pointer
-	Next unsafe.Pointer
-	Clone unsafe.Pointer
+	Next    unsafe.Pointer
+	Clone   unsafe.Pointer
 }
 
 // C struct: cc_context_d
 type CcContextD struct {
-	Functions *CcContextF
+	Functions        *CcContextF
 	Vector_functions *CcContextF
 }
 
 // Function pointer table for cc_context_t.  For more information see \ref cc_context_reference.
 // C struct: cc_context_f
 type CcContextF struct {
-	Release unsafe.Pointer
-	Get_change_time unsafe.Pointer
+	Release                 unsafe.Pointer
+	Get_change_time         unsafe.Pointer
 	Get_default_ccache_name unsafe.Pointer
-	Open_ccache unsafe.Pointer
-	Open_default_ccache unsafe.Pointer
-	Create_ccache unsafe.Pointer
-	Create_default_ccache unsafe.Pointer
-	Create_new_ccache unsafe.Pointer
-	New_ccache_iterator unsafe.Pointer
-	Lock unsafe.Pointer
-	Unlock unsafe.Pointer
-	Compare unsafe.Pointer
-	Wait_for_change unsafe.Pointer
+	Open_ccache             unsafe.Pointer
+	Open_default_ccache     unsafe.Pointer
+	Create_ccache           unsafe.Pointer
+	Create_default_ccache   unsafe.Pointer
+	Create_new_ccache       unsafe.Pointer
+	New_ccache_iterator     unsafe.Pointer
+	Lock                    unsafe.Pointer
+	Unlock                  unsafe.Pointer
+	Compare                 unsafe.Pointer
+	Wait_for_change         unsafe.Pointer
 }
 
 // C struct: cc_credentials_d
 type CcCredentialsD struct {
-	Data *CcCredentialsUnion
-	Functions *CcCredentialsF
+	Data           *CcCredentialsUnion
+	Functions      *CcCredentialsF
 	OtherFunctions *CcCredentialsF
 }
 
@@ -451,7 +451,7 @@ type CcCredentialsF struct {
 
 // C struct: cc_credentials_iterator_d
 type CcCredentialsIteratorD struct {
-	Functions *CcCredentialsIteratorF
+	Functions        *CcCredentialsIteratorF
 	Vector_functions *CcCredentialsIteratorF
 }
 
@@ -459,65 +459,65 @@ type CcCredentialsIteratorD struct {
 // C struct: cc_credentials_iterator_f
 type CcCredentialsIteratorF struct {
 	Release unsafe.Pointer
-	Next unsafe.Pointer
-	Clone unsafe.Pointer
+	Next    unsafe.Pointer
+	Clone   unsafe.Pointer
 }
 
 // C struct: cc_credentials_union
 type CcCredentialsUnion struct {
-	Version uint32
+	Version     uint32
 	Credentials unsafe.Pointer
 }
 
 // If a cc_credentials_t variable is used to store Kerberos v4 credentials, then credentials.credentials_v4 points to a v4 credentials structure.  This structure is similar to a krb4 API CREDENTIALS structure.
 // C struct: cc_credentials_v4_t
 type CcCredentialsV4T struct {
-	Version uint32
-	Principal [40]int8
+	Version            uint32
+	Principal          [40]int8
 	Principal_instance [40]int8
-	Service [40]int8
-	Service_instance [40]int8
-	Realm [40]int8
-	Session_key [8]uint8
-	Kvno int32
+	Service            [40]int8
+	Service_instance   [40]int8
+	Realm              [40]int8
+	Session_key        [8]uint8
+	Kvno               int32
 	String_to_key_type int32
-	Issue_date uint32
-	Lifetime int32
-	Address uint32
-	Ticket_size int32
-	Ticket [1254]uint8
+	Issue_date         uint32
+	Lifetime           int32
+	Address            uint32
+	Ticket_size        int32
+	Ticket             [1254]uint8
 }
 
 // If a cc_credentials_t variable is used to store Kerberos v5 c redentials, and then credentials.credentials_v5 points to a v5 credentials structure.  This structure is similar to a krb5_creds structure.
 // C struct: cc_credentials_v5_t
 type CcCredentialsV5T struct {
-	Client string
-	Server string
-	Keyblock CcData
-	Authtime uint32
-	Starttime uint32
-	Endtime uint32
-	Renew_till uint32
-	Is_skey uint32
-	Ticket_flags uint32
-	Addresses *CcData
-	Ticket CcData
+	Client        string
+	Server        string
+	Keyblock      CcData
+	Authtime      uint32
+	Starttime     uint32
+	Endtime       uint32
+	Renew_till    uint32
+	Is_skey       uint32
+	Ticket_flags  uint32
+	Addresses     *CcData
+	Ticket        CcData
 	Second_ticket CcData
-	Authdata *CcData
+	Authdata      *CcData
 }
 
 // The CCAPI data structure.  This structure is similar to a krb5_data structure. In a v5 credentials structure, cc_data structures are used to store tagged variable-length binary data. Specifically, for cc_credentials_v5.ticket and cc_credentials_v5.second_ticket, the cc_data.type field must be zero. For the cc_credentials_v5.addresses, cc_credentials_v5.authdata, and cc_credentials_v5.keyblock, the cc_data.type field should be the address type, authorization data type, and encryption type, as defined by the Kerberos v5 protocol definition.
 // C struct: cc_data
 type CcData struct {
-	Type uint32
+	Type   uint32
 	Length uint32
-	Data unsafe.Pointer
+	Data   unsafe.Pointer
 }
 
 // C struct: cc_string_d
 type CcStringD struct {
-	Data string
-	Functions *CcStringF
+	Data             string
+	Functions        *CcStringF
 	Vector_functions *CcStringF
 }
 
@@ -535,35 +535,35 @@ type Credentials struct{}
 // C struct: error_table
 type ErrorTable struct {
 	Messages unsafe.Pointer
-	Base int32
-	Count int32
+	Base     int32
+	Count    int32
 }
 
 // C struct: gss_OID_desc_struct
 type GssOIDDescStruct struct {
-	Length uint32
+	Length   uint32
 	Elements unsafe.Pointer
 }
 
 // C struct: gss_OID_set_desc_struct
 type GssOIDSetDescStruct struct {
-	Count uint
+	Count    uint
 	Elements *gss.GssOIDDescStruct
 }
 
 // C struct: gss_buffer_desc_struct
 type GssBufferDescStruct struct {
 	Length uint
-	Value unsafe.Pointer
+	Value  unsafe.Pointer
 }
 
 // C struct: gss_channel_bindings_struct
 type GssChannelBindingsStruct struct {
 	Initiator_addrtype uint32
-	Initiator_address gss.GssBufferDescStruct
-	Acceptor_addrtype uint32
-	Acceptor_address gss.GssBufferDescStruct
-	Application_data gss.GssBufferDescStruct
+	Initiator_address  gss.GssBufferDescStruct
+	Acceptor_addrtype  uint32
+	Acceptor_address   gss.GssBufferDescStruct
+	Application_data   gss.GssBufferDescStruct
 }
 
 // C struct: gss_cred_id_struct
@@ -577,20 +577,20 @@ type GssCtxIdStruct struct{}
 // C struct: gss_krb5_cfx_keydata
 type GssKrb5CfxKeydata struct {
 	Have_acceptor_subkey uint32
-	Ctx_key gss.GssKrb5LucidKey
-	Acceptor_subkey gss.GssKrb5LucidKey
+	Ctx_key              gss.GssKrb5LucidKey
+	Acceptor_subkey      gss.GssKrb5LucidKey
 }
 
 // C struct: gss_krb5_lucid_context_v1
 type GssKrb5LucidContextV1 struct {
-	Version uint32
-	Initiate uint32
-	Endtime uint32
-	Send_seq uint64
-	Recv_seq uint64
-	Protocol uint32
+	Version    uint32
+	Initiate   uint32
+	Endtime    uint32
+	Send_seq   uint64
+	Recv_seq   uint64
+	Protocol   uint32
 	Rfc1964_kd gss.GssKrb5Rfc1964Keydata
-	Cfx_kd gss.GssKrb5CfxKeydata
+	Cfx_kd     gss.GssKrb5CfxKeydata
 }
 
 // C struct: gss_krb5_lucid_context_version
@@ -600,16 +600,16 @@ type GssKrb5LucidContextVersion struct {
 
 // C struct: gss_krb5_lucid_key
 type GssKrb5LucidKey struct {
-	Type uint32
+	Type   uint32
 	Length uint32
-	Data unsafe.Pointer
+	Data   unsafe.Pointer
 }
 
 // C struct: gss_krb5_rfc1964_keydata
 type GssKrb5Rfc1964Keydata struct {
 	Sign_alg uint32
 	Seal_alg uint32
-	Ctx_key gss.GssKrb5LucidKey
+	Ctx_key  gss.GssKrb5LucidKey
 }
 
 // C struct: gss_name_struct
@@ -626,20 +626,20 @@ type KimOptionsOpaque struct{}
 
 // C struct: krb5_keytab_entry_st
 type Krb5KeytabEntrySt struct {
-	Magic int
+	Magic     int
 	Principal *Krb5PrincipalData
 	Timestamp int
-	Vno uint
-	Key Krb5Keyblock
+	Vno       uint
+	Key       Krb5Keyblock
 }
 
 // C struct: krb5_principal_data
 type Krb5PrincipalData struct {
-	Magic int
-	Realm Krb5Data
-	Data *Krb5Data
+	Magic  int
+	Realm  Krb5Data
+	Data   *Krb5Data
 	Length int
-	Type int
+	Type   int
 }
 
 // C struct: krb5_rc_st
@@ -649,8 +649,8 @@ type Krb5RcSt struct{}
 // C struct: krb5_replay_data
 type Krb5ReplayData struct {
 	Timestamp int
-	Usec int
-	Seq uint
+	Usec      int
+	Seq       uint
 }
 
 // AppleGssKrb5AuthdataIfRelevant is an alias for apple_gss_krb5_authdata_if_relevant_key (C typedef apple_gss_krb5_authdata_if_relevant).
@@ -694,4 +694,3 @@ type GssKrb5Rfc1964KeydataT = gss.GssKrb5Rfc1964Keydata
 
 // Krb5KeytabEntry is an alias for krb5_keytab_entry_st (C typedef krb5_keytab_entry).
 type Krb5KeytabEntry = Krb5KeytabEntrySt
-

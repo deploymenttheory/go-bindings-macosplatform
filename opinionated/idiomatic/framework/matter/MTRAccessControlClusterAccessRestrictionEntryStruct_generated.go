@@ -16,7 +16,9 @@ type MTRAccessControlClusterAccessRestrictionEntryStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRAccessControlClusterAccessRestrictionEntryStruct].
-func (x *MTRAccessControlClusterAccessRestrictionEntryStruct) Unwrap() *raw.MTRAccessControlClusterAccessRestrictionEntryStruct { return x.inner }
+func (x *MTRAccessControlClusterAccessRestrictionEntryStruct) Unwrap() *raw.MTRAccessControlClusterAccessRestrictionEntryStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -111,4 +113,3 @@ type MTRAccessControlClusterAccessRestrictionEntryStructable interface {
 }
 
 var _ MTRAccessControlClusterAccessRestrictionEntryStructable = (*MTRAccessControlClusterAccessRestrictionEntryStruct)(nil)
-

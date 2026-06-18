@@ -20,43 +20,43 @@ type SKSpriteNode struct {
 }
 
 var (
-	_clsSKSpriteNode = _objcClass("SKSpriteNode")
-	_sKSpriteNodeSelSpriteNodeWithTextureSize = objc.RegisterName("spriteNodeWithTexture:size:")
-	_sKSpriteNodeSelSpriteNodeWithTexture = objc.RegisterName("spriteNodeWithTexture:")
-	_sKSpriteNodeSelSpriteNodeWithTextureNormalMap = objc.RegisterName("spriteNodeWithTexture:normalMap:")
-	_sKSpriteNodeSelSpriteNodeWithImageNamed = objc.RegisterName("spriteNodeWithImageNamed:")
+	_clsSKSpriteNode                                     = _objcClass("SKSpriteNode")
+	_sKSpriteNodeSelSpriteNodeWithTextureSize            = objc.RegisterName("spriteNodeWithTexture:size:")
+	_sKSpriteNodeSelSpriteNodeWithTexture                = objc.RegisterName("spriteNodeWithTexture:")
+	_sKSpriteNodeSelSpriteNodeWithTextureNormalMap       = objc.RegisterName("spriteNodeWithTexture:normalMap:")
+	_sKSpriteNodeSelSpriteNodeWithImageNamed             = objc.RegisterName("spriteNodeWithImageNamed:")
 	_sKSpriteNodeSelSpriteNodeWithImageNamedNormalMapped = objc.RegisterName("spriteNodeWithImageNamed:normalMapped:")
-	_sKSpriteNodeSelSpriteNodeWithColorSize = objc.RegisterName("spriteNodeWithColor:size:")
-	_sKSpriteNodeSelInitWithTextureColorSize = objc.RegisterName("initWithTexture:color:size:")
-	_sKSpriteNodeSelInitWithTexture = objc.RegisterName("initWithTexture:")
-	_sKSpriteNodeSelInitWithImageNamed = objc.RegisterName("initWithImageNamed:")
-	_sKSpriteNodeSelInitWithColorSize = objc.RegisterName("initWithColor:size:")
-	_sKSpriteNodeSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_sKSpriteNodeSelScaleToSize = objc.RegisterName("scaleToSize:")
-	_sKSpriteNodeSelTexture = objc.RegisterName("texture")
-	_sKSpriteNodeSelSetTexture = objc.RegisterName("setTexture:")
-	_sKSpriteNodeSelNormalTexture = objc.RegisterName("normalTexture")
-	_sKSpriteNodeSelSetNormalTexture = objc.RegisterName("setNormalTexture:")
-	_sKSpriteNodeSelLightingBitMask = objc.RegisterName("lightingBitMask")
-	_sKSpriteNodeSelSetLightingBitMask = objc.RegisterName("setLightingBitMask:")
-	_sKSpriteNodeSelShadowCastBitMask = objc.RegisterName("shadowCastBitMask")
-	_sKSpriteNodeSelSetShadowCastBitMask = objc.RegisterName("setShadowCastBitMask:")
-	_sKSpriteNodeSelShadowedBitMask = objc.RegisterName("shadowedBitMask")
-	_sKSpriteNodeSelSetShadowedBitMask = objc.RegisterName("setShadowedBitMask:")
-	_sKSpriteNodeSelCenterRect = objc.RegisterName("centerRect")
-	_sKSpriteNodeSelSetCenterRect = objc.RegisterName("setCenterRect:")
-	_sKSpriteNodeSelColorBlendFactor = objc.RegisterName("colorBlendFactor")
-	_sKSpriteNodeSelSetColorBlendFactor = objc.RegisterName("setColorBlendFactor:")
-	_sKSpriteNodeSelColor = objc.RegisterName("color")
-	_sKSpriteNodeSelSetColor = objc.RegisterName("setColor:")
-	_sKSpriteNodeSelBlendMode = objc.RegisterName("blendMode")
-	_sKSpriteNodeSelSetBlendMode = objc.RegisterName("setBlendMode:")
-	_sKSpriteNodeSelAnchorPoint = objc.RegisterName("anchorPoint")
-	_sKSpriteNodeSelSetAnchorPoint = objc.RegisterName("setAnchorPoint:")
-	_sKSpriteNodeSelSize = objc.RegisterName("size")
-	_sKSpriteNodeSelSetSize = objc.RegisterName("setSize:")
-	_sKSpriteNodeSelShader = objc.RegisterName("shader")
-	_sKSpriteNodeSelSetShader = objc.RegisterName("setShader:")
+	_sKSpriteNodeSelSpriteNodeWithColorSize              = objc.RegisterName("spriteNodeWithColor:size:")
+	_sKSpriteNodeSelInitWithTextureColorSize             = objc.RegisterName("initWithTexture:color:size:")
+	_sKSpriteNodeSelInitWithTexture                      = objc.RegisterName("initWithTexture:")
+	_sKSpriteNodeSelInitWithImageNamed                   = objc.RegisterName("initWithImageNamed:")
+	_sKSpriteNodeSelInitWithColorSize                    = objc.RegisterName("initWithColor:size:")
+	_sKSpriteNodeSelInitWithCoder                        = objc.RegisterName("initWithCoder:")
+	_sKSpriteNodeSelScaleToSize                          = objc.RegisterName("scaleToSize:")
+	_sKSpriteNodeSelTexture                              = objc.RegisterName("texture")
+	_sKSpriteNodeSelSetTexture                           = objc.RegisterName("setTexture:")
+	_sKSpriteNodeSelNormalTexture                        = objc.RegisterName("normalTexture")
+	_sKSpriteNodeSelSetNormalTexture                     = objc.RegisterName("setNormalTexture:")
+	_sKSpriteNodeSelLightingBitMask                      = objc.RegisterName("lightingBitMask")
+	_sKSpriteNodeSelSetLightingBitMask                   = objc.RegisterName("setLightingBitMask:")
+	_sKSpriteNodeSelShadowCastBitMask                    = objc.RegisterName("shadowCastBitMask")
+	_sKSpriteNodeSelSetShadowCastBitMask                 = objc.RegisterName("setShadowCastBitMask:")
+	_sKSpriteNodeSelShadowedBitMask                      = objc.RegisterName("shadowedBitMask")
+	_sKSpriteNodeSelSetShadowedBitMask                   = objc.RegisterName("setShadowedBitMask:")
+	_sKSpriteNodeSelCenterRect                           = objc.RegisterName("centerRect")
+	_sKSpriteNodeSelSetCenterRect                        = objc.RegisterName("setCenterRect:")
+	_sKSpriteNodeSelColorBlendFactor                     = objc.RegisterName("colorBlendFactor")
+	_sKSpriteNodeSelSetColorBlendFactor                  = objc.RegisterName("setColorBlendFactor:")
+	_sKSpriteNodeSelColor                                = objc.RegisterName("color")
+	_sKSpriteNodeSelSetColor                             = objc.RegisterName("setColor:")
+	_sKSpriteNodeSelBlendMode                            = objc.RegisterName("blendMode")
+	_sKSpriteNodeSelSetBlendMode                         = objc.RegisterName("setBlendMode:")
+	_sKSpriteNodeSelAnchorPoint                          = objc.RegisterName("anchorPoint")
+	_sKSpriteNodeSelSetAnchorPoint                       = objc.RegisterName("setAnchorPoint:")
+	_sKSpriteNodeSelSize                                 = objc.RegisterName("size")
+	_sKSpriteNodeSelSetSize                              = objc.RegisterName("setSize:")
+	_sKSpriteNodeSelShader                               = objc.RegisterName("shader")
+	_sKSpriteNodeSelSetShader                            = objc.RegisterName("setShader:")
 )
 
 func SKSpriteNodeFromID(id objc.ID) *SKSpriteNode {
@@ -72,75 +72,97 @@ func SKSpriteNodeFromID(id objc.ID) *SKSpriteNode {
 // Create a sprite with an SKTexture and the specified size. @param texture the texture to reference for size and content @param size the size of the sprite in points
 func SKSpriteNodeSpriteNodeWithTextureSize(texture *SKTexture, size corefoundation.CGSize) *SKSpriteNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKSpriteNode), _sKSpriteNodeSelSpriteNodeWithTextureSize, texture.Ptr(), size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKSpriteNodeFromID(_ret)
 }
 
 // Create a sprite with an SKTexture and set its size to the SKTexture's pixel width/height. @param texture the texture to reference for size and content
 func SKSpriteNodeSpriteNodeWithTexture(texture *SKTexture) *SKSpriteNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKSpriteNode), _sKSpriteNodeSelSpriteNodeWithTexture, texture.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKSpriteNodeFromID(_ret)
 }
 
 func SKSpriteNodeSpriteNodeWithTextureNormalMap(texture *SKTexture, normalMap *SKTexture) *SKSpriteNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKSpriteNode), _sKSpriteNodeSelSpriteNodeWithTextureNormalMap, texture.Ptr(), normalMap.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKSpriteNodeFromID(_ret)
 }
 
 // Create a sprite with an image from your app bundle (An SKTexture is created for the image and set on the sprite. Its size is set to the SKTexture's pixel width/height) The position of the sprite is (0, 0) and the texture anchored at (0.5, 0.5), so that it is offset by half the width and half the height. Thus the sprite has the texture centered about the position. If you wish to have the texture anchored at a different offset set the anchorPoint to another pair of values in the interval from 0.0 up to and including 1.0. @param name is the name of an image file stored in the app bundle.
 func SKSpriteNodeSpriteNodeWithImageNamed(name *foundation.NSString) *SKSpriteNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKSpriteNode), _sKSpriteNodeSelSpriteNodeWithImageNamed, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKSpriteNodeFromID(_ret)
 }
 
 func SKSpriteNodeSpriteNodeWithImageNamedNormalMapped(name *foundation.NSString, generateNormalMap bool) *SKSpriteNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKSpriteNode), _sKSpriteNodeSelSpriteNodeWithImageNamedNormalMapped, name.Ptr(), generateNormalMap)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKSpriteNodeFromID(_ret)
 }
 
 // Create a sprite with a color and the specified bounds. @param color the color to use for tinting the sprite. @param size the size of the sprite in points
 func SKSpriteNodeSpriteNodeWithColorSize(color *appkit.NSColor, size corefoundation.CGSize) *SKSpriteNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKSpriteNode), _sKSpriteNodeSelSpriteNodeWithColorSize, color.Ptr(), size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKSpriteNodeFromID(_ret)
 }
 
 // Designated Initializer Initialize a sprite with a color and the specified bounds. @param texture the texture to use (can be nil for colored sprite) @param color the color to use for tinting the sprite. @param size the size of the sprite in points
 func (o *SKSpriteNode) InitWithTextureColorSize(texture *SKTexture, color *appkit.NSColor, size corefoundation.CGSize) *SKSpriteNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelInitWithTextureColorSize, texture.Ptr(), color.Ptr(), size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKSpriteNodeFromID(_ret)
 }
 
 // Initialize a sprite with an SKTexture and set its size to the SKTexture's width/height. @param texture the texture to reference for size and content
 func (o *SKSpriteNode) InitWithTexture(texture *SKTexture) *SKSpriteNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelInitWithTexture, texture.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKSpriteNodeFromID(_ret)
 }
 
 // Initialize a sprite with an image from your app bundle (An SKTexture is created for the image and set on the sprite. Its size is set to the SKTexture's pixel width/height) The position of the sprite is (0, 0) and the texture anchored at (0.5, 0.5), so that it is offset by half the width and half the height. Thus the sprite has the texture centered about the position. If you wish to have the texture anchored at a different offset set the anchorPoint to another pair of values in the interval from 0.0 up to and including 1.0. @param name the name or path of the image to load.
 func (o *SKSpriteNode) InitWithImageNamed(name *foundation.NSString) *SKSpriteNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelInitWithImageNamed, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKSpriteNodeFromID(_ret)
 }
 
 // Initialize a sprite with a color and the specified bounds. @param color the color to use for tinting the sprite. @param size the size of the sprite in points
 func (o *SKSpriteNode) InitWithColorSize(color *appkit.NSColor, size corefoundation.CGSize) *SKSpriteNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelInitWithColorSize, color.Ptr(), size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKSpriteNodeFromID(_ret)
 }
 
 // Support coding and decoding via NSKeyedArchiver.
 func (o *SKSpriteNode) InitWithCoder(aDecoder *foundation.NSCoder) *SKSpriteNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelInitWithCoder, aDecoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKSpriteNodeFromID(_ret)
 }
 
@@ -152,7 +174,9 @@ func (o *SKSpriteNode) ScaleToSize(size corefoundation.CGSize) {
 // Texture to be drawn (is stretched to fill the sprite)
 func (o *SKSpriteNode) Texture() *SKTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelTexture)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTextureFromID(_ret)
 }
 
@@ -163,7 +187,9 @@ func (o *SKSpriteNode) SetTexture(texture *SKTexture) {
 // Texture to use for generating normals that lights use to light this sprite. This will only be used if the sprite is lit by at least one light. @see SKLightNode @see lightingBitMask
 func (o *SKSpriteNode) NormalTexture() *SKTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelNormalTexture)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTextureFromID(_ret)
 }
 
@@ -222,7 +248,9 @@ func (o *SKSpriteNode) SetColorBlendFactor(colorBlendFactor float64) {
 // Base color for the sprite (If no texture is present, the color still is drawn)
 func (o *SKSpriteNode) Color() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -262,11 +290,12 @@ func (o *SKSpriteNode) SetSize(size corefoundation.CGSize) {
 
 func (o *SKSpriteNode) Shader() *SKShader {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelShader)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKShaderFromID(_ret)
 }
 
 func (o *SKSpriteNode) SetShader(shader *SKShader) {
 	o.Ptr().Send(_sKSpriteNodeSelSetShader, shader.Ptr())
 }
-

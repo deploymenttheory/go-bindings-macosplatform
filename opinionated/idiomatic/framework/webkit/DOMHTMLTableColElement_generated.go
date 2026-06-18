@@ -255,15 +255,25 @@ func (x *DOMHTMLTableColElement) SetWidth(width string) {
 	x.inner.SetWidth(foundation.NSStringStringWithUTF8String(width))
 }
 
-func (x *DOMHTMLTableColElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
+func (x *DOMHTMLTableColElement) asDOMHTMLElement() *raw.DOMHTMLElement {
+	return &x.inner.DOMHTMLElement
+}
 
-func (x *DOMHTMLTableColElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
+func (x *DOMHTMLTableColElement) asDOMElement() *raw.DOMElement {
+	return &x.inner.DOMHTMLElement.DOMElement
+}
 
-func (x *DOMHTMLTableColElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTMLElement.DOMElement.DOMNode }
+func (x *DOMHTMLTableColElement) asDOMNode() *raw.DOMNode {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode
+}
 
-func (x *DOMHTMLTableColElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
+func (x *DOMHTMLTableColElement) asDOMObject() *raw.DOMObject {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject
+}
 
-func (x *DOMHTMLTableColElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+func (x *DOMHTMLTableColElement) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject
+}
 
 // DOMHTMLTableColElementable is the interface implemented by [DOMHTMLTableColElement], for mocking and DI.
 type DOMHTMLTableColElementable interface {
@@ -306,4 +316,3 @@ type DOMHTMLTableColElementable interface {
 }
 
 var _ DOMHTMLTableColElementable = (*DOMHTMLTableColElement)(nil)
-

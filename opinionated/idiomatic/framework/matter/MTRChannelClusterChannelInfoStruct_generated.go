@@ -17,7 +17,9 @@ type MTRChannelClusterChannelInfoStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRChannelClusterChannelInfoStruct].
-func (x *MTRChannelClusterChannelInfoStruct) Unwrap() *raw.MTRChannelClusterChannelInfoStruct { return x.inner }
+func (x *MTRChannelClusterChannelInfoStruct) Unwrap() *raw.MTRChannelClusterChannelInfoStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -165,7 +167,9 @@ func (x *MTRChannelClusterChannelInfoStruct) SetType(type_ *foundation.NSNumber)
 	x.inner.SetType(type_)
 }
 
-func (x *MTRChannelClusterChannelInfoStruct) asMTRChannelClusterChannelInfoStruct() *raw.MTRChannelClusterChannelInfoStruct { return x.inner }
+func (x *MTRChannelClusterChannelInfoStruct) asMTRChannelClusterChannelInfoStruct() *raw.MTRChannelClusterChannelInfoStruct {
+	return x.inner
+}
 
 // MTRChannelClusterChannelInfoStructable is the interface implemented by [MTRChannelClusterChannelInfoStruct], for mocking and DI.
 type MTRChannelClusterChannelInfoStructable interface {
@@ -194,4 +198,3 @@ type MTRChannelClusterChannelInfoStructable interface {
 }
 
 var _ MTRChannelClusterChannelInfoStructable = (*MTRChannelClusterChannelInfoStruct)(nil)
-

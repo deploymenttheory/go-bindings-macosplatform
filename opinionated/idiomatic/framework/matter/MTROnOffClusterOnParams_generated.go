@@ -80,4 +80,3 @@ type MTROnOffClusterOnParamsable interface {
 }
 
 var _ MTROnOffClusterOnParamsable = (*MTROnOffClusterOnParams)(nil)
-

@@ -16,9 +16,9 @@ type SFSpeechURLRecognitionRequest struct {
 }
 
 var (
-	_clsSFSpeechURLRecognitionRequest = _objcClass("SFSpeechURLRecognitionRequest")
+	_clsSFSpeechURLRecognitionRequest            = _objcClass("SFSpeechURLRecognitionRequest")
 	_sFSpeechURLRecognitionRequestSelInitWithURL = objc.RegisterName("initWithURL:")
-	_sFSpeechURLRecognitionRequestSelURL = objc.RegisterName("URL")
+	_sFSpeechURLRecognitionRequestSelURL         = objc.RegisterName("URL")
 )
 
 func SFSpeechURLRecognitionRequestFromID(id objc.ID) *SFSpeechURLRecognitionRequest {
@@ -31,16 +31,19 @@ func SFSpeechURLRecognitionRequestFromID(id objc.ID) *SFSpeechURLRecognitionRequ
 	return o
 }
 
-// Creates a speech recognition request, initialized with the specified URL. Use this method to create a request to recognize speech in a recorded audio file that resides at the specified URL. Pass the request to the recognizer's ``SFSpeechRecognizer/recognitionTask(with:delegate:)`` method to start recognition.
+// Creates a speech recognition request, initialized with the specified URL. Use this method to create a request to recognize speech in a recorded audio file that resides at the specified URL. Pass the request to the recognizer's “SFSpeechRecognizer/recognitionTask(with:delegate:)“ method to start recognition.
 func (o *SFSpeechURLRecognitionRequest) InitWithURL(uRL *foundation.NSURL) *SFSpeechURLRecognitionRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFSpeechURLRecognitionRequestSelInitWithURL, uRL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SFSpeechURLRecognitionRequestFromID(_ret)
 }
 
 func (o *SFSpeechURLRecognitionRequest) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFSpeechURLRecognitionRequestSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
-

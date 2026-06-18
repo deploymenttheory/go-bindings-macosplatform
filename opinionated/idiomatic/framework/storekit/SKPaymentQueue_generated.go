@@ -150,4 +150,3 @@ type PaymentQueueable interface {
 }
 
 var _ PaymentQueueable = (*PaymentQueue)(nil)
-

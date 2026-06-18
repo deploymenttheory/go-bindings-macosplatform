@@ -169,4 +169,3 @@ type GridColumnable interface {
 }
 
 var _ GridColumnable = (*GridColumn)(nil)
-

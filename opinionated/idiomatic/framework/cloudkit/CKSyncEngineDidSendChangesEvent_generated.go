@@ -44,7 +44,9 @@ func (x *SyncEngineDidSendChangesEvent) Context() *SyncEngineSendChangesContext 
 	return &SyncEngineSendChangesContext{inner: _r}
 }
 
-func (x *SyncEngineDidSendChangesEvent) asSyncEngineEvent() *raw.CKSyncEngineEvent { return &x.inner.CKSyncEngineEvent }
+func (x *SyncEngineDidSendChangesEvent) asSyncEngineEvent() *raw.CKSyncEngineEvent {
+	return &x.inner.CKSyncEngineEvent
+}
 
 // SyncEngineDidSendChangesEventable is the interface implemented by [SyncEngineDidSendChangesEvent], for mocking and DI.
 type SyncEngineDidSendChangesEventable interface {
@@ -53,4 +55,3 @@ type SyncEngineDidSendChangesEventable interface {
 }
 
 var _ SyncEngineDidSendChangesEventable = (*SyncEngineDidSendChangesEvent)(nil)
-

@@ -18,9 +18,9 @@ type FSClient struct {
 }
 
 var (
-	_clsFSClient = _objcClass("FSClient")
+	_clsFSClient                                              = _objcClass("FSClient")
 	_fSClientSelFetchInstalledExtensionsWithCompletionHandler = objc.RegisterName("fetchInstalledExtensionsWithCompletionHandler:")
-	_fSClientSelSharedInstance = objc.RegisterName("sharedInstance")
+	_fSClientSelSharedInstance                                = objc.RegisterName("sharedInstance")
 )
 
 func FSClientFromID(id objc.ID) *FSClient {
@@ -33,7 +33,7 @@ func FSClientFromID(id objc.ID) *FSClient {
 	return o
 }
 
-// Asynchronously retrieves an list of installed file system modules. In Swift, you can either call this method and pass a completion handler closure, or get the value of the `installedExtensions` property with the `async` keyword. - Parameter completionHandler: A block or closure that executes when FSKit finishes its fetch process. If the fetch succeeds, the first parameter contains an array of ``FSModuleIdentity`` instances that identify installed modules. If the fetch fails, the second parameter contains an error detailing the failure.
+// Asynchronously retrieves an list of installed file system modules. In Swift, you can either call this method and pass a completion handler closure, or get the value of the `installedExtensions` property with the `async` keyword. - Parameter completionHandler: A block or closure that executes when FSKit finishes its fetch process. If the fetch succeeds, the first parameter contains an array of “FSModuleIdentity“ instances that identify installed modules. If the fetch fails, the second parameter contains an error detailing the failure.
 func (o *FSClient) FetchInstalledExtensionsWithCompletionHandler(completionHandler func(*foundation.NSArray[*FSModuleIdentity], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -51,7 +51,8 @@ func (o *FSClient) FetchInstalledExtensionsWithCompletionHandler(completionHandl
 // The shared instance of the FSKit client class.
 func FSClientSharedInstance() *FSClient {
 	_ret := objc.Send[objc.ID](objc.ID(_clsFSClient), _fSClientSelSharedInstance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return FSClientFromID(_ret)
 }
-

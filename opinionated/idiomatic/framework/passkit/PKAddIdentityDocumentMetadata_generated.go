@@ -52,7 +52,9 @@ func (x *AddIdentityDocumentMetadata) Preview() *AddPassMetadataPreview {
 	return &AddPassMetadataPreview{inner: _r}
 }
 
-func (x *AddIdentityDocumentMetadata) asIdentityDocumentMetadata() *raw.PKIdentityDocumentMetadata { return &x.inner.PKIdentityDocumentMetadata }
+func (x *AddIdentityDocumentMetadata) asIdentityDocumentMetadata() *raw.PKIdentityDocumentMetadata {
+	return &x.inner.PKIdentityDocumentMetadata
+}
 
 // AddIdentityDocumentMetadataable is the interface implemented by [AddIdentityDocumentMetadata], for mocking and DI.
 type AddIdentityDocumentMetadataable interface {
@@ -62,4 +64,3 @@ type AddIdentityDocumentMetadataable interface {
 }
 
 var _ AddIdentityDocumentMetadataable = (*AddIdentityDocumentMetadata)(nil)
-

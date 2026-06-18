@@ -16,17 +16,17 @@ type FSFileName struct {
 }
 
 var (
-	_clsFSFileName = _objcClass("FSFileName")
-	_fSFileNameSelInitWithCString = objc.RegisterName("initWithCString:")
+	_clsFSFileName                    = _objcClass("FSFileName")
+	_fSFileNameSelInitWithCString     = objc.RegisterName("initWithCString:")
 	_fSFileNameSelInitWithBytesLength = objc.RegisterName("initWithBytes:length:")
-	_fSFileNameSelInitWithData = objc.RegisterName("initWithData:")
-	_fSFileNameSelInitWithString = objc.RegisterName("initWithString:")
-	_fSFileNameSelNameWithCString = objc.RegisterName("nameWithCString:")
+	_fSFileNameSelInitWithData        = objc.RegisterName("initWithData:")
+	_fSFileNameSelInitWithString      = objc.RegisterName("initWithString:")
+	_fSFileNameSelNameWithCString     = objc.RegisterName("nameWithCString:")
 	_fSFileNameSelNameWithBytesLength = objc.RegisterName("nameWithBytes:length:")
-	_fSFileNameSelNameWithData = objc.RegisterName("nameWithData:")
-	_fSFileNameSelNameWithString = objc.RegisterName("nameWithString:")
-	_fSFileNameSelData = objc.RegisterName("data")
-	_fSFileNameSelString = objc.RegisterName("string")
+	_fSFileNameSelNameWithData        = objc.RegisterName("nameWithData:")
+	_fSFileNameSelNameWithString      = objc.RegisterName("nameWithString:")
+	_fSFileNameSelData                = objc.RegisterName("data")
+	_fSFileNameSelString              = objc.RegisterName("string")
 )
 
 func FSFileNameFromID(id objc.ID) *FSFileName {
@@ -39,73 +39,92 @@ func FSFileNameFromID(id objc.ID) *FSFileName {
 	return o
 }
 
-// Initializes a filename from a null-terminated character sequence. > Note: This initializer is unavailable in Swift. Use ``initWithData:`` or ``initWithString:`` instead. - Parameter name: A pointer to a C string.
+// Initializes a filename from a null-terminated character sequence. > Note: This initializer is unavailable in Swift. Use “initWithData:“ or “initWithString:“ instead. - Parameter name: A pointer to a C string.
 func (o *FSFileName) InitWithCString(name string) *FSFileName {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSFileNameSelInitWithCString, name)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return FSFileNameFromID(_ret)
 }
 
-// Initializes a file name by copying a character sequence from a byte array. > Note: This initializer is unavailable in Swift. Use ``initWithData:`` or ``initWithString:`` instead. - Parameters: - bytes: A pointer to the character data to copy, up to a maximum of `length`. The sequence terminates if a `NUL` character exists prior to `length`. - length: The size of the `bytes` array.
+// Initializes a file name by copying a character sequence from a byte array. > Note: This initializer is unavailable in Swift. Use “initWithData:“ or “initWithString:“ instead. - Parameters: - bytes: A pointer to the character data to copy, up to a maximum of `length`. The sequence terminates if a `NUL` character exists prior to `length`. - length: The size of the `bytes` array.
 func (o *FSFileName) InitWithBytesLength(bytes_ string, length uint) *FSFileName {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSFileNameSelInitWithBytesLength, bytes_, length)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return FSFileNameFromID(_ret)
 }
 
 // Creates a filename by copying a character sequence data object. This initializer copies up to `name.length` characters of the sequence pointed to by `bytes`. - Parameter name: The data object containing the character sequence to use for the filename. The sequence terminates if a `NUL` character exists prior to `name.length`.
 func (o *FSFileName) InitWithData(name *foundation.NSData) *FSFileName {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSFileNameSelInitWithData, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return FSFileNameFromID(_ret)
 }
 
 // Creates a filename by copying a character sequence from a string instance. This initializer copies the UTF-8 representation of the characters in `string`. If `string` contains a `NUL` character, the sequence terminates. - Parameter name: The string containing the character sequence to use for the filename.
 func (o *FSFileName) InitWithString(name *foundation.NSString) *FSFileName {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSFileNameSelInitWithString, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return FSFileNameFromID(_ret)
 }
 
 // Creates a filename from a null-terminated character sequence. - Parameter name: A pointer to a C string.
 func FSFileNameNameWithCString(name string) *FSFileName {
 	_ret := objc.Send[objc.ID](objc.ID(_clsFSFileName), _fSFileNameSelNameWithCString, name)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return FSFileNameFromID(_ret)
 }
 
 // Creates a filename by copying a character sequence from a byte array. - Parameters: - bytes: A pointer to the character data to copy, up to a maximum of `length`. The sequence terminates if a `NUL` character exists prior to `length`. - length: The size of the `bytes` array.
 func FSFileNameNameWithBytesLength(bytes_ string, length uint) *FSFileName {
 	_ret := objc.Send[objc.ID](objc.ID(_clsFSFileName), _fSFileNameSelNameWithBytesLength, bytes_, length)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return FSFileNameFromID(_ret)
 }
 
 // Creates a filename by copying a character sequence data object. This initializer copies up to `name.length` characters of the sequence pointed to by `bytes`. - Parameter name: The data object containing the character sequence to use for the filename. The sequence terminates if a `NUL` character exists prior to `name.length`.
 func FSFileNameNameWithData(name *foundation.NSData) *FSFileName {
 	_ret := objc.Send[objc.ID](objc.ID(_clsFSFileName), _fSFileNameSelNameWithData, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return FSFileNameFromID(_ret)
 }
 
 // Creates a filename by copying a character sequence from a string instance. This initializer copies the UTF-8 representation of the characters in `string`. If `string` contains a `NUL` character, the sequence terminates. - Parameter name: The string containing the character sequence to use for the filename.
 func FSFileNameNameWithString(name *foundation.NSString) *FSFileName {
 	_ret := objc.Send[objc.ID](objc.ID(_clsFSFileName), _fSFileNameSelNameWithString, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return FSFileNameFromID(_ret)
 }
 
 // The byte sequence of the filename, as a data object. This property always provides a value.
 func (o *FSFileName) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSFileNameSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
-// The filename, represented as a Unicode string. If the value of the filename's ``FSFileName/data`` is not a valid UTF-8 byte sequence, this property is empty.
+// The filename, represented as a Unicode string. If the value of the filename's “FSFileName/data“ is not a valid UTF-8 byte sequence, this property is empty.
 func (o *FSFileName) String() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSFileNameSelString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

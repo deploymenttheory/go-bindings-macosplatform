@@ -16,10 +16,10 @@ type MTRClusterPath struct {
 }
 
 var (
-	_clsMTRClusterPath = _objcClass("MTRClusterPath")
+	_clsMTRClusterPath                                   = _objcClass("MTRClusterPath")
 	_mTRClusterPathSelClusterPathWithEndpointIDClusterID = objc.RegisterName("clusterPathWithEndpointID:clusterID:")
-	_mTRClusterPathSelEndpoint = objc.RegisterName("endpoint")
-	_mTRClusterPathSelCluster = objc.RegisterName("cluster")
+	_mTRClusterPathSelEndpoint                           = objc.RegisterName("endpoint")
+	_mTRClusterPathSelCluster                            = objc.RegisterName("cluster")
 )
 
 func MTRClusterPathFromID(id objc.ID) *MTRClusterPath {
@@ -34,19 +34,24 @@ func MTRClusterPathFromID(id objc.ID) *MTRClusterPath {
 
 func MTRClusterPathClusterPathWithEndpointIDClusterID(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber) *MTRClusterPath {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRClusterPath), _mTRClusterPathSelClusterPathWithEndpointIDClusterID, endpointID.Ptr(), clusterID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterPathFromID(_ret)
 }
 
 func (o *MTRClusterPath) Endpoint() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterPathSelEndpoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRClusterPath) Cluster() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterPathSelCluster)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
-

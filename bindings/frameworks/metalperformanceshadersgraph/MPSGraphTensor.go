@@ -18,9 +18,9 @@ type MPSGraphTensor struct {
 }
 
 var (
-	_clsMPSGraphTensor = _objcClass("MPSGraphTensor")
-	_mPSGraphTensorSelShape = objc.RegisterName("shape")
-	_mPSGraphTensorSelDataType = objc.RegisterName("dataType")
+	_clsMPSGraphTensor          = _objcClass("MPSGraphTensor")
+	_mPSGraphTensorSelShape     = objc.RegisterName("shape")
+	_mPSGraphTensorSelDataType  = objc.RegisterName("dataType")
 	_mPSGraphTensorSelOperation = objc.RegisterName("operation")
 )
 
@@ -49,7 +49,8 @@ func (o *MPSGraphTensor) DataType() mpscore.MPSDataType {
 // The operation responsible for creating this tensor.
 func (o *MPSGraphTensor) Operation() *MPSGraphOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphTensorSelOperation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSGraphOperationFromID(_ret)
 }
-

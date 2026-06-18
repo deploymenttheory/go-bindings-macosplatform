@@ -46,7 +46,9 @@ func (x *DOMCSSUnknownRule) asDOMCSSRule() *raw.DOMCSSRule { return &x.inner.DOM
 
 func (x *DOMCSSUnknownRule) asDOMObject() *raw.DOMObject { return &x.inner.DOMCSSRule.DOMObject }
 
-func (x *DOMCSSUnknownRule) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMCSSRule.DOMObject.WebScriptObject }
+func (x *DOMCSSUnknownRule) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMCSSRule.DOMObject.WebScriptObject
+}
 
 // DOMCSSUnknownRuleable is the interface implemented by [DOMCSSUnknownRule], for mocking and DI.
 type DOMCSSUnknownRuleable interface {
@@ -55,4 +57,3 @@ type DOMCSSUnknownRuleable interface {
 }
 
 var _ DOMCSSUnknownRuleable = (*DOMCSSUnknownRule)(nil)
-

@@ -96,7 +96,9 @@ func (x *CollectionListChangeRequest) SetTitle(title string) {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 }
 
-func (x *CollectionListChangeRequest) asChangeRequest() *raw.PHChangeRequest { return &x.inner.PHChangeRequest }
+func (x *CollectionListChangeRequest) asChangeRequest() *raw.PHChangeRequest {
+	return &x.inner.PHChangeRequest
+}
 
 // CollectionListChangeRequestable is the interface implemented by [CollectionListChangeRequest], for mocking and DI.
 type CollectionListChangeRequestable interface {
@@ -114,4 +116,3 @@ type CollectionListChangeRequestable interface {
 }
 
 var _ CollectionListChangeRequestable = (*CollectionListChangeRequest)(nil)
-

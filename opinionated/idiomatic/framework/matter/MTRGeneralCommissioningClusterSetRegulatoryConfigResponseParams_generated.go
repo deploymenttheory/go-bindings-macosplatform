@@ -18,11 +18,15 @@ type MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams].
-func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) Unwrap() *raw.MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams { return x.inner }
+func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) Unwrap() *raw.MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsFromID adopts an existing object pointer as a MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams (nil for 0).
 func MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsFromID(id objc.ID) *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams {
@@ -110,4 +114,3 @@ type MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsable interfa
 }
 
 var _ MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsable = (*MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams)(nil)
-

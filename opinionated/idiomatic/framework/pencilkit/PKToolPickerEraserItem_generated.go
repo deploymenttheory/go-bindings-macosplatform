@@ -52,7 +52,9 @@ func (x *ToolPickerEraserItem) EraserTool() *EraserTool {
 	return &EraserTool{inner: _r}
 }
 
-func (x *ToolPickerEraserItem) asToolPickerItem() *raw.PKToolPickerItem { return &x.inner.PKToolPickerItem }
+func (x *ToolPickerEraserItem) asToolPickerItem() *raw.PKToolPickerItem {
+	return &x.inner.PKToolPickerItem
+}
 
 // ToolPickerEraserItemable is the interface implemented by [ToolPickerEraserItem], for mocking and DI.
 type ToolPickerEraserItemable interface {
@@ -61,4 +63,3 @@ type ToolPickerEraserItemable interface {
 }
 
 var _ ToolPickerEraserItemable = (*ToolPickerEraserItem)(nil)
-

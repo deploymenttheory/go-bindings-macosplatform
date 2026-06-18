@@ -81,4 +81,3 @@ type RMSPropOptimizerable interface {
 }
 
 var _ RMSPropOptimizerable = (*RMSPropOptimizer)(nil)
-

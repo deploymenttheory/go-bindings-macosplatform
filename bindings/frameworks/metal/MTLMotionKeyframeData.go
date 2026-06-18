@@ -16,11 +16,11 @@ type MTLMotionKeyframeData struct {
 }
 
 var (
-	_clsMTLMotionKeyframeData = _objcClass("MTLMotionKeyframeData")
-	_mTLMotionKeyframeDataSelData = objc.RegisterName("data")
-	_mTLMotionKeyframeDataSelBuffer = objc.RegisterName("buffer")
+	_clsMTLMotionKeyframeData          = _objcClass("MTLMotionKeyframeData")
+	_mTLMotionKeyframeDataSelData      = objc.RegisterName("data")
+	_mTLMotionKeyframeDataSelBuffer    = objc.RegisterName("buffer")
 	_mTLMotionKeyframeDataSelSetBuffer = objc.RegisterName("setBuffer:")
-	_mTLMotionKeyframeDataSelOffset = objc.RegisterName("offset")
+	_mTLMotionKeyframeDataSelOffset    = objc.RegisterName("offset")
 	_mTLMotionKeyframeDataSelSetOffset = objc.RegisterName("setOffset:")
 )
 
@@ -36,7 +36,9 @@ func MTLMotionKeyframeDataFromID(id objc.ID) *MTLMotionKeyframeData {
 
 func MTLMotionKeyframeDataData() *MTLMotionKeyframeData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLMotionKeyframeData), _mTLMotionKeyframeDataSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLMotionKeyframeDataFromID(_ret)
 }
 
@@ -59,4 +61,3 @@ func (o *MTLMotionKeyframeData) Offset() uint {
 func (o *MTLMotionKeyframeData) SetOffset(offset uint) {
 	o.Ptr().Send(_mTLMotionKeyframeDataSelSetOffset, offset)
 }
-

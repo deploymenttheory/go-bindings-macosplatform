@@ -16,8 +16,8 @@ type MTROccupancySensingClusterOccupancyChangedEvent struct {
 }
 
 var (
-	_clsMTROccupancySensingClusterOccupancyChangedEvent = _objcClass("MTROccupancySensingClusterOccupancyChangedEvent")
-	_mTROccupancySensingClusterOccupancyChangedEventSelOccupancy = objc.RegisterName("occupancy")
+	_clsMTROccupancySensingClusterOccupancyChangedEvent             = _objcClass("MTROccupancySensingClusterOccupancyChangedEvent")
+	_mTROccupancySensingClusterOccupancyChangedEventSelOccupancy    = objc.RegisterName("occupancy")
 	_mTROccupancySensingClusterOccupancyChangedEventSelSetOccupancy = objc.RegisterName("setOccupancy:")
 )
 
@@ -33,11 +33,12 @@ func MTROccupancySensingClusterOccupancyChangedEventFromID(id objc.ID) *MTROccup
 
 func (o *MTROccupancySensingClusterOccupancyChangedEvent) Occupancy() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROccupancySensingClusterOccupancyChangedEventSelOccupancy)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTROccupancySensingClusterOccupancyChangedEvent) SetOccupancy(occupancy *foundation.NSNumber) {
 	o.Ptr().Send(_mTROccupancySensingClusterOccupancyChangedEventSelSetOccupancy, occupancy.Ptr())
 }
-

@@ -858,4 +858,3 @@ func UAZoomEnabled() uint8 {
 func WakeUpProcess(pSN unsafe.Pointer) int16 {
 	return raw.WakeUpProcess(pSN)
 }
-

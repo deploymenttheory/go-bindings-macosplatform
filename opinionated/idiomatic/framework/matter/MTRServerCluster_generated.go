@@ -98,4 +98,3 @@ type MTRServerClusterable interface {
 }
 
 var _ MTRServerClusterable = (*MTRServerCluster)(nil)
-

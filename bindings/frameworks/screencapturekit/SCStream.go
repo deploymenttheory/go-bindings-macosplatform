@@ -18,17 +18,17 @@ type SCStream struct {
 }
 
 var (
-	_clsSCStream = _objcClass("SCStream")
-	_sCStreamSelInitWithFilterConfigurationDelegate = objc.RegisterName("initWithFilter:configuration:delegate:")
+	_clsSCStream                                           = _objcClass("SCStream")
+	_sCStreamSelInitWithFilterConfigurationDelegate        = objc.RegisterName("initWithFilter:configuration:delegate:")
 	_sCStreamSelAddStreamOutputTypeSampleHandlerQueueError = objc.RegisterName("addStreamOutput:type:sampleHandlerQueue:error:")
-	_sCStreamSelRemoveStreamOutputTypeError = objc.RegisterName("removeStreamOutput:type:error:")
-	_sCStreamSelUpdateContentFilterCompletionHandler = objc.RegisterName("updateContentFilter:completionHandler:")
-	_sCStreamSelUpdateConfigurationCompletionHandler = objc.RegisterName("updateConfiguration:completionHandler:")
-	_sCStreamSelStartCaptureWithCompletionHandler = objc.RegisterName("startCaptureWithCompletionHandler:")
-	_sCStreamSelStopCaptureWithCompletionHandler = objc.RegisterName("stopCaptureWithCompletionHandler:")
-	_sCStreamSelAddRecordingOutputError = objc.RegisterName("addRecordingOutput:error:")
-	_sCStreamSelRemoveRecordingOutputError = objc.RegisterName("removeRecordingOutput:error:")
-	_sCStreamSelSynchronizationClock = objc.RegisterName("synchronizationClock")
+	_sCStreamSelRemoveStreamOutputTypeError                = objc.RegisterName("removeStreamOutput:type:error:")
+	_sCStreamSelUpdateContentFilterCompletionHandler       = objc.RegisterName("updateContentFilter:completionHandler:")
+	_sCStreamSelUpdateConfigurationCompletionHandler       = objc.RegisterName("updateConfiguration:completionHandler:")
+	_sCStreamSelStartCaptureWithCompletionHandler          = objc.RegisterName("startCaptureWithCompletionHandler:")
+	_sCStreamSelStopCaptureWithCompletionHandler           = objc.RegisterName("stopCaptureWithCompletionHandler:")
+	_sCStreamSelAddRecordingOutputError                    = objc.RegisterName("addRecordingOutput:error:")
+	_sCStreamSelRemoveRecordingOutputError                 = objc.RegisterName("removeRecordingOutput:error:")
+	_sCStreamSelSynchronizationClock                       = objc.RegisterName("synchronizationClock")
 )
 
 func SCStreamFromID(id objc.ID) *SCStream {
@@ -44,7 +44,9 @@ func SCStreamFromID(id objc.ID) *SCStream {
 // @abstract initWithFilter:configuration:delegate: @param contentFilter the requested content filter to be captured @param streamConfig the requested stream configuration to be applied to the SCStream @param delegate the SCStream delegate object @discussion this method create a SCStream object that has the particular output settings for the content stream
 func (o *SCStream) InitWithFilterConfigurationDelegate(contentFilter *SCContentFilter, streamConfig *SCStreamConfiguration, delegate SCStreamDelegate) *SCStream {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCStreamSelInitWithFilterConfigurationDelegate, contentFilter.Ptr(), streamConfig.Ptr(), delegate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCStreamFromID(_ret)
 }
 
@@ -140,4 +142,3 @@ func (o *SCStream) SynchronizationClock() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sCStreamSelSynchronizationClock)
 	return _ret
 }
-

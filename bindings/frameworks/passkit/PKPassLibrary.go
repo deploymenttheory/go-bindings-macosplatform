@@ -18,38 +18,38 @@ type PKPassLibrary struct {
 }
 
 var (
-	_clsPKPassLibrary = _objcClass("PKPassLibrary")
-	_pKPassLibrarySelIsPassLibraryAvailable = objc.RegisterName("isPassLibraryAvailable")
+	_clsPKPassLibrary                                                               = _objcClass("PKPassLibrary")
+	_pKPassLibrarySelIsPassLibraryAvailable                                         = objc.RegisterName("isPassLibraryAvailable")
 	_pKPassLibrarySelRequestAutomaticPassPresentationSuppressionWithResponseHandler = objc.RegisterName("requestAutomaticPassPresentationSuppressionWithResponseHandler:")
-	_pKPassLibrarySelEndAutomaticPassPresentationSuppressionWithRequestToken = objc.RegisterName("endAutomaticPassPresentationSuppressionWithRequestToken:")
-	_pKPassLibrarySelIsSuppressingAutomaticPassPresentation = objc.RegisterName("isSuppressingAutomaticPassPresentation")
-	_pKPassLibrarySelIsPaymentPassActivationAvailable = objc.RegisterName("isPaymentPassActivationAvailable")
-	_pKPassLibrarySelPasses = objc.RegisterName("passes")
-	_pKPassLibrarySelPassWithPassTypeIdentifierSerialNumber = objc.RegisterName("passWithPassTypeIdentifier:serialNumber:")
-	_pKPassLibrarySelPassesWithReaderIdentifier = objc.RegisterName("passesWithReaderIdentifier:")
-	_pKPassLibrarySelPassesOfType = objc.RegisterName("passesOfType:")
-	_pKPassLibrarySelRemotePaymentPasses = objc.RegisterName("remotePaymentPasses")
-	_pKPassLibrarySelRemovePass = objc.RegisterName("removePass:")
-	_pKPassLibrarySelContainsPass = objc.RegisterName("containsPass:")
-	_pKPassLibrarySelReplacePassWithPass = objc.RegisterName("replacePassWithPass:")
-	_pKPassLibrarySelAddPassesWithCompletionHandler = objc.RegisterName("addPasses:withCompletionHandler:")
-	_pKPassLibrarySelOpenPaymentSetup = objc.RegisterName("openPaymentSetup")
-	_pKPassLibrarySelOpenPaymentSetupWithMerchantIdentifier = objc.RegisterName("openPaymentSetupWithMerchantIdentifier:")
-	_pKPassLibrarySelPresentPaymentPass = objc.RegisterName("presentPaymentPass:")
-	_pKPassLibrarySelPresentSecureElementPass = objc.RegisterName("presentSecureElementPass:")
-	_pKPassLibrarySelCanAddPaymentPassWithPrimaryAccountIdentifier = objc.RegisterName("canAddPaymentPassWithPrimaryAccountIdentifier:")
-	_pKPassLibrarySelCanAddSecureElementPassWithPrimaryAccountIdentifier = objc.RegisterName("canAddSecureElementPassWithPrimaryAccountIdentifier:")
-	_pKPassLibrarySelCanAddFelicaPass = objc.RegisterName("canAddFelicaPass")
-	_pKPassLibrarySelActivatePaymentPassWithActivationDataCompletion = objc.RegisterName("activatePaymentPass:withActivationData:completion:")
-	_pKPassLibrarySelActivatePaymentPassWithActivationCodeCompletion = objc.RegisterName("activatePaymentPass:withActivationCode:completion:")
-	_pKPassLibrarySelActivateSecureElementPassWithActivationDataCompletion = objc.RegisterName("activateSecureElementPass:withActivationData:completion:")
-	_pKPassLibrarySelSignDataWithSecureElementPassCompletion = objc.RegisterName("signData:withSecureElementPass:completion:")
-	_pKPassLibrarySelEncryptedServiceProviderDataForSecureElementPassCompletion = objc.RegisterName("encryptedServiceProviderDataForSecureElementPass:completion:")
-	_pKPassLibrarySelServiceProviderDataForSecureElementPassCompletion = objc.RegisterName("serviceProviderDataForSecureElementPass:completion:")
-	_pKPassLibrarySelAuthorizationStatusForCapability = objc.RegisterName("authorizationStatusForCapability:")
-	_pKPassLibrarySelRequestAuthorizationForCapabilityCompletion = objc.RegisterName("requestAuthorizationForCapability:completion:")
-	_pKPassLibrarySelIsSecureElementPassActivationAvailable = objc.RegisterName("isSecureElementPassActivationAvailable")
-	_pKPassLibrarySelRemoteSecureElementPasses = objc.RegisterName("remoteSecureElementPasses")
+	_pKPassLibrarySelEndAutomaticPassPresentationSuppressionWithRequestToken        = objc.RegisterName("endAutomaticPassPresentationSuppressionWithRequestToken:")
+	_pKPassLibrarySelIsSuppressingAutomaticPassPresentation                         = objc.RegisterName("isSuppressingAutomaticPassPresentation")
+	_pKPassLibrarySelIsPaymentPassActivationAvailable                               = objc.RegisterName("isPaymentPassActivationAvailable")
+	_pKPassLibrarySelPasses                                                         = objc.RegisterName("passes")
+	_pKPassLibrarySelPassWithPassTypeIdentifierSerialNumber                         = objc.RegisterName("passWithPassTypeIdentifier:serialNumber:")
+	_pKPassLibrarySelPassesWithReaderIdentifier                                     = objc.RegisterName("passesWithReaderIdentifier:")
+	_pKPassLibrarySelPassesOfType                                                   = objc.RegisterName("passesOfType:")
+	_pKPassLibrarySelRemotePaymentPasses                                            = objc.RegisterName("remotePaymentPasses")
+	_pKPassLibrarySelRemovePass                                                     = objc.RegisterName("removePass:")
+	_pKPassLibrarySelContainsPass                                                   = objc.RegisterName("containsPass:")
+	_pKPassLibrarySelReplacePassWithPass                                            = objc.RegisterName("replacePassWithPass:")
+	_pKPassLibrarySelAddPassesWithCompletionHandler                                 = objc.RegisterName("addPasses:withCompletionHandler:")
+	_pKPassLibrarySelOpenPaymentSetup                                               = objc.RegisterName("openPaymentSetup")
+	_pKPassLibrarySelOpenPaymentSetupWithMerchantIdentifier                         = objc.RegisterName("openPaymentSetupWithMerchantIdentifier:")
+	_pKPassLibrarySelPresentPaymentPass                                             = objc.RegisterName("presentPaymentPass:")
+	_pKPassLibrarySelPresentSecureElementPass                                       = objc.RegisterName("presentSecureElementPass:")
+	_pKPassLibrarySelCanAddPaymentPassWithPrimaryAccountIdentifier                  = objc.RegisterName("canAddPaymentPassWithPrimaryAccountIdentifier:")
+	_pKPassLibrarySelCanAddSecureElementPassWithPrimaryAccountIdentifier            = objc.RegisterName("canAddSecureElementPassWithPrimaryAccountIdentifier:")
+	_pKPassLibrarySelCanAddFelicaPass                                               = objc.RegisterName("canAddFelicaPass")
+	_pKPassLibrarySelActivatePaymentPassWithActivationDataCompletion                = objc.RegisterName("activatePaymentPass:withActivationData:completion:")
+	_pKPassLibrarySelActivatePaymentPassWithActivationCodeCompletion                = objc.RegisterName("activatePaymentPass:withActivationCode:completion:")
+	_pKPassLibrarySelActivateSecureElementPassWithActivationDataCompletion          = objc.RegisterName("activateSecureElementPass:withActivationData:completion:")
+	_pKPassLibrarySelSignDataWithSecureElementPassCompletion                        = objc.RegisterName("signData:withSecureElementPass:completion:")
+	_pKPassLibrarySelEncryptedServiceProviderDataForSecureElementPassCompletion     = objc.RegisterName("encryptedServiceProviderDataForSecureElementPass:completion:")
+	_pKPassLibrarySelServiceProviderDataForSecureElementPassCompletion              = objc.RegisterName("serviceProviderDataForSecureElementPass:completion:")
+	_pKPassLibrarySelAuthorizationStatusForCapability                               = objc.RegisterName("authorizationStatusForCapability:")
+	_pKPassLibrarySelRequestAuthorizationForCapabilityCompletion                    = objc.RegisterName("requestAuthorizationForCapability:completion:")
+	_pKPassLibrarySelIsSecureElementPassActivationAvailable                         = objc.RegisterName("isSecureElementPassActivationAvailable")
+	_pKPassLibrarySelRemoteSecureElementPasses                                      = objc.RegisterName("remoteSecureElementPasses")
 )
 
 func PKPassLibraryFromID(id objc.ID) *PKPassLibrary {
@@ -100,31 +100,41 @@ func (o *PKPassLibrary) IsPaymentPassActivationAvailable() bool {
 
 func (o *PKPassLibrary) Passes() *foundation.NSArray[*PKPass] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPassLibrarySelPasses)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PKPass](_ret)
 }
 
 func (o *PKPassLibrary) PassWithPassTypeIdentifierSerialNumber(identifier *foundation.NSString, serialNumber *foundation.NSString) *PKPass {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPassLibrarySelPassWithPassTypeIdentifierSerialNumber, identifier.Ptr(), serialNumber.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKPassFromID(_ret)
 }
 
 func (o *PKPassLibrary) PassesWithReaderIdentifier(readerIdentifier *foundation.NSString) *foundation.NSSet[*PKSecureElementPass] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPassLibrarySelPassesWithReaderIdentifier, readerIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*PKSecureElementPass](_ret)
 }
 
 func (o *PKPassLibrary) PassesOfType(passType PKPassType) *foundation.NSArray[*PKPass] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPassLibrarySelPassesOfType, passType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PKPass](_ret)
 }
 
 func (o *PKPassLibrary) RemotePaymentPasses() *foundation.NSArray[*PKPaymentPass] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPassLibrarySelRemotePaymentPasses)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PKPaymentPass](_ret)
 }
 
@@ -275,7 +285,8 @@ func (o *PKPassLibrary) IsSecureElementPassActivationAvailable() bool {
 
 func (o *PKPassLibrary) RemoteSecureElementPasses() *foundation.NSArray[*PKSecureElementPass] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPassLibrarySelRemoteSecureElementPasses)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PKSecureElementPass](_ret)
 }
-

@@ -16,7 +16,9 @@ type MTRContentLauncherClusterLaunchResponseParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRContentLauncherClusterLaunchResponseParams].
-func (x *MTRContentLauncherClusterLaunchResponseParams) Unwrap() *raw.MTRContentLauncherClusterLaunchResponseParams { return x.inner }
+func (x *MTRContentLauncherClusterLaunchResponseParams) Unwrap() *raw.MTRContentLauncherClusterLaunchResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -54,7 +56,9 @@ func (x *MTRContentLauncherClusterLaunchResponseParams) WithTimedInvokeTimeoutMs
 	return x
 }
 
-func (x *MTRContentLauncherClusterLaunchResponseParams) asMTRContentLauncherClusterLauncherResponseParams() *raw.MTRContentLauncherClusterLauncherResponseParams { return &x.inner.MTRContentLauncherClusterLauncherResponseParams }
+func (x *MTRContentLauncherClusterLaunchResponseParams) asMTRContentLauncherClusterLauncherResponseParams() *raw.MTRContentLauncherClusterLauncherResponseParams {
+	return &x.inner.MTRContentLauncherClusterLauncherResponseParams
+}
 
 // MTRContentLauncherClusterLaunchResponseParamsable is the interface implemented by [MTRContentLauncherClusterLaunchResponseParams], for mocking and DI.
 type MTRContentLauncherClusterLaunchResponseParamsable interface {
@@ -65,4 +69,3 @@ type MTRContentLauncherClusterLaunchResponseParamsable interface {
 }
 
 var _ MTRContentLauncherClusterLaunchResponseParamsable = (*MTRContentLauncherClusterLaunchResponseParams)(nil)
-

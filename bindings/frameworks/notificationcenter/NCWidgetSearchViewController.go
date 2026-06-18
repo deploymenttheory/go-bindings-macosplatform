@@ -18,17 +18,17 @@ type NCWidgetSearchViewController struct {
 }
 
 var (
-	_clsNCWidgetSearchViewController = _objcClass("NCWidgetSearchViewController")
-	_nCWidgetSearchViewControllerSelDelegate = objc.RegisterName("delegate")
-	_nCWidgetSearchViewControllerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nCWidgetSearchViewControllerSelSearchResults = objc.RegisterName("searchResults")
-	_nCWidgetSearchViewControllerSelSetSearchResults = objc.RegisterName("setSearchResults:")
-	_nCWidgetSearchViewControllerSelSearchDescription = objc.RegisterName("searchDescription")
-	_nCWidgetSearchViewControllerSelSetSearchDescription = objc.RegisterName("setSearchDescription:")
-	_nCWidgetSearchViewControllerSelSearchResultsPlaceholderString = objc.RegisterName("searchResultsPlaceholderString")
+	_clsNCWidgetSearchViewController                                  = _objcClass("NCWidgetSearchViewController")
+	_nCWidgetSearchViewControllerSelDelegate                          = objc.RegisterName("delegate")
+	_nCWidgetSearchViewControllerSelSetDelegate                       = objc.RegisterName("setDelegate:")
+	_nCWidgetSearchViewControllerSelSearchResults                     = objc.RegisterName("searchResults")
+	_nCWidgetSearchViewControllerSelSetSearchResults                  = objc.RegisterName("setSearchResults:")
+	_nCWidgetSearchViewControllerSelSearchDescription                 = objc.RegisterName("searchDescription")
+	_nCWidgetSearchViewControllerSelSetSearchDescription              = objc.RegisterName("setSearchDescription:")
+	_nCWidgetSearchViewControllerSelSearchResultsPlaceholderString    = objc.RegisterName("searchResultsPlaceholderString")
 	_nCWidgetSearchViewControllerSelSetSearchResultsPlaceholderString = objc.RegisterName("setSearchResultsPlaceholderString:")
-	_nCWidgetSearchViewControllerSelSearchResultKeyPath = objc.RegisterName("searchResultKeyPath")
-	_nCWidgetSearchViewControllerSelSetSearchResultKeyPath = objc.RegisterName("setSearchResultKeyPath:")
+	_nCWidgetSearchViewControllerSelSearchResultKeyPath               = objc.RegisterName("searchResultKeyPath")
+	_nCWidgetSearchViewControllerSelSetSearchResultKeyPath            = objc.RegisterName("setSearchResultKeyPath:")
 )
 
 func NCWidgetSearchViewControllerFromID(id objc.ID) *NCWidgetSearchViewController {
@@ -61,7 +61,9 @@ func (o *NCWidgetSearchViewController) SetSearchResults(searchResults *foundatio
 
 func (o *NCWidgetSearchViewController) SearchDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nCWidgetSearchViewControllerSelSearchDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -71,7 +73,9 @@ func (o *NCWidgetSearchViewController) SetSearchDescription(searchDescription *f
 
 func (o *NCWidgetSearchViewController) SearchResultsPlaceholderString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nCWidgetSearchViewControllerSelSearchResultsPlaceholderString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -81,11 +85,12 @@ func (o *NCWidgetSearchViewController) SetSearchResultsPlaceholderString(searchR
 
 func (o *NCWidgetSearchViewController) SearchResultKeyPath() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nCWidgetSearchViewControllerSelSearchResultKeyPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NCWidgetSearchViewController) SetSearchResultKeyPath(searchResultKeyPath *foundation.NSString) {
 	o.Ptr().Send(_nCWidgetSearchViewControllerSelSetSearchResultKeyPath, searchResultKeyPath.Ptr())
 }
-

@@ -17,4 +17,3 @@ type EnvironmentMechanismProvider interface {
 type RightProvider interface {
 	asRight() *raw.LARight
 }
-

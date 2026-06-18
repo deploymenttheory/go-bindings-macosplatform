@@ -173,4 +173,3 @@ type ScriptCommandDescriptionable interface {
 }
 
 var _ ScriptCommandDescriptionable = (*ScriptCommandDescription)(nil)
-

@@ -99,9 +99,13 @@ func (x *NEAppProxyProvider) HandleNewUDPFlowInitialRemoteEndpoint(flow *raw.NEA
 
 func (x *NEAppProxyProvider) asNEAppProxyProvider() *raw.NEAppProxyProvider { return x.inner }
 
-func (x *NEAppProxyProvider) asNETunnelProvider() *raw.NETunnelProvider { return &x.inner.NETunnelProvider }
+func (x *NEAppProxyProvider) asNETunnelProvider() *raw.NETunnelProvider {
+	return &x.inner.NETunnelProvider
+}
 
-func (x *NEAppProxyProvider) asNEProvider() *raw.NEProvider { return &x.inner.NETunnelProvider.NEProvider }
+func (x *NEAppProxyProvider) asNEProvider() *raw.NEProvider {
+	return &x.inner.NETunnelProvider.NEProvider
+}
 
 // NEAppProxyProviderable is the interface implemented by [NEAppProxyProvider], for mocking and DI.
 type NEAppProxyProviderable interface {
@@ -116,4 +120,3 @@ type NEAppProxyProviderable interface {
 }
 
 var _ NEAppProxyProviderable = (*NEAppProxyProvider)(nil)
-

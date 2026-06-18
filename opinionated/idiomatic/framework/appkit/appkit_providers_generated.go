@@ -218,4 +218,3 @@ type ViewControllerProvider interface {
 type WindowProvider interface {
 	asWindow() *raw.NSWindow
 }
-

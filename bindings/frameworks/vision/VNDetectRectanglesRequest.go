@@ -15,18 +15,18 @@ type VNDetectRectanglesRequest struct {
 }
 
 var (
-	_clsVNDetectRectanglesRequest = _objcClass("VNDetectRectanglesRequest")
-	_vNDetectRectanglesRequestSelMinimumAspectRatio = objc.RegisterName("minimumAspectRatio")
-	_vNDetectRectanglesRequestSelSetMinimumAspectRatio = objc.RegisterName("setMinimumAspectRatio:")
-	_vNDetectRectanglesRequestSelMaximumAspectRatio = objc.RegisterName("maximumAspectRatio")
-	_vNDetectRectanglesRequestSelSetMaximumAspectRatio = objc.RegisterName("setMaximumAspectRatio:")
-	_vNDetectRectanglesRequestSelQuadratureTolerance = objc.RegisterName("quadratureTolerance")
+	_clsVNDetectRectanglesRequest                       = _objcClass("VNDetectRectanglesRequest")
+	_vNDetectRectanglesRequestSelMinimumAspectRatio     = objc.RegisterName("minimumAspectRatio")
+	_vNDetectRectanglesRequestSelSetMinimumAspectRatio  = objc.RegisterName("setMinimumAspectRatio:")
+	_vNDetectRectanglesRequestSelMaximumAspectRatio     = objc.RegisterName("maximumAspectRatio")
+	_vNDetectRectanglesRequestSelSetMaximumAspectRatio  = objc.RegisterName("setMaximumAspectRatio:")
+	_vNDetectRectanglesRequestSelQuadratureTolerance    = objc.RegisterName("quadratureTolerance")
 	_vNDetectRectanglesRequestSelSetQuadratureTolerance = objc.RegisterName("setQuadratureTolerance:")
-	_vNDetectRectanglesRequestSelMinimumSize = objc.RegisterName("minimumSize")
-	_vNDetectRectanglesRequestSelSetMinimumSize = objc.RegisterName("setMinimumSize:")
-	_vNDetectRectanglesRequestSelMinimumConfidence = objc.RegisterName("minimumConfidence")
-	_vNDetectRectanglesRequestSelSetMinimumConfidence = objc.RegisterName("setMinimumConfidence:")
-	_vNDetectRectanglesRequestSelMaximumObservations = objc.RegisterName("maximumObservations")
+	_vNDetectRectanglesRequestSelMinimumSize            = objc.RegisterName("minimumSize")
+	_vNDetectRectanglesRequestSelSetMinimumSize         = objc.RegisterName("setMinimumSize:")
+	_vNDetectRectanglesRequestSelMinimumConfidence      = objc.RegisterName("minimumConfidence")
+	_vNDetectRectanglesRequestSelSetMinimumConfidence   = objc.RegisterName("setMinimumConfidence:")
+	_vNDetectRectanglesRequestSelMaximumObservations    = objc.RegisterName("maximumObservations")
 	_vNDetectRectanglesRequestSelSetMaximumObservations = objc.RegisterName("setMaximumObservations:")
 )
 
@@ -99,4 +99,3 @@ func (o *VNDetectRectanglesRequest) MaximumObservations() uint {
 func (o *VNDetectRectanglesRequest) SetMaximumObservations(maximumObservations uint) {
 	o.Ptr().Send(_vNDetectRectanglesRequestSelSetMaximumObservations, maximumObservations)
 }
-

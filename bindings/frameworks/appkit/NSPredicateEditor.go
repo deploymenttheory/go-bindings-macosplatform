@@ -16,8 +16,8 @@ type NSPredicateEditor struct {
 }
 
 var (
-	_clsNSPredicateEditor = _objcClass("NSPredicateEditor")
-	_nSPredicateEditorSelRowTemplates = objc.RegisterName("rowTemplates")
+	_clsNSPredicateEditor                = _objcClass("NSPredicateEditor")
+	_nSPredicateEditorSelRowTemplates    = objc.RegisterName("rowTemplates")
 	_nSPredicateEditorSelSetRowTemplates = objc.RegisterName("setRowTemplates:")
 )
 
@@ -33,11 +33,12 @@ func NSPredicateEditorFromID(id objc.ID) *NSPredicateEditor {
 
 func (o *NSPredicateEditor) RowTemplates() *foundation.NSArray[*NSPredicateEditorRowTemplate] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPredicateEditorSelRowTemplates)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSPredicateEditorRowTemplate](_ret)
 }
 
 func (o *NSPredicateEditor) SetRowTemplates(rowTemplates *foundation.NSArray[*NSPredicateEditorRowTemplate]) {
 	o.Ptr().Send(_nSPredicateEditorSelSetRowTemplates, rowTemplates.Ptr())
 }
-

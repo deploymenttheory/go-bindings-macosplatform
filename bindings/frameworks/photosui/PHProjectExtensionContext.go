@@ -17,11 +17,11 @@ type PHProjectExtensionContext struct {
 }
 
 var (
-	_clsPHProjectExtensionContext = _objcClass("PHProjectExtensionContext")
-	_pHProjectExtensionContextSelShowEditorForAsset = objc.RegisterName("showEditorForAsset:")
+	_clsPHProjectExtensionContext                                            = _objcClass("PHProjectExtensionContext")
+	_pHProjectExtensionContextSelShowEditorForAsset                          = objc.RegisterName("showEditorForAsset:")
 	_pHProjectExtensionContextSelUpdatedProjectInfoFromProjectInfoCompletion = objc.RegisterName("updatedProjectInfoFromProjectInfo:completion:")
-	_pHProjectExtensionContextSelPhotoLibrary = objc.RegisterName("photoLibrary")
-	_pHProjectExtensionContextSelProject = objc.RegisterName("project")
+	_pHProjectExtensionContextSelPhotoLibrary                                = objc.RegisterName("photoLibrary")
+	_pHProjectExtensionContextSelProject                                     = objc.RegisterName("project")
 )
 
 func PHProjectExtensionContextFromID(id objc.ID) *PHProjectExtensionContext {
@@ -52,19 +52,24 @@ func (o *PHProjectExtensionContext) UpdatedProjectInfoFromProjectInfoCompletion(
 		defer __block_completion.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectExtensionContextSelUpdatedProjectInfoFromProjectInfoCompletion, existingProjectInfo.Ptr(), __block_completion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSProgressFromID(_ret)
 }
 
 func (o *PHProjectExtensionContext) PhotoLibrary() *photos.PHPhotoLibrary {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectExtensionContextSelPhotoLibrary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return photos.PHPhotoLibraryFromID(_ret)
 }
 
 func (o *PHProjectExtensionContext) Project() *photos.PHProject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectExtensionContextSelProject)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return photos.PHProjectFromID(_ret)
 }
-

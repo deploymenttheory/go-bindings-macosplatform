@@ -89,4 +89,3 @@ type ExternalStorageDeviceable interface {
 }
 
 var _ ExternalStorageDeviceable = (*ExternalStorageDevice)(nil)
-

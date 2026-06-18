@@ -17,19 +17,19 @@ type NSCollectionViewLayoutInvalidationContext struct {
 }
 
 var (
-	_clsNSCollectionViewLayoutInvalidationContext = _objcClass("NSCollectionViewLayoutInvalidationContext")
-	_nSCollectionViewLayoutInvalidationContextSelInvalidateItemsAtIndexPaths = objc.RegisterName("invalidateItemsAtIndexPaths:")
+	_clsNSCollectionViewLayoutInvalidationContext                                                  = _objcClass("NSCollectionViewLayoutInvalidationContext")
+	_nSCollectionViewLayoutInvalidationContextSelInvalidateItemsAtIndexPaths                       = objc.RegisterName("invalidateItemsAtIndexPaths:")
 	_nSCollectionViewLayoutInvalidationContextSelInvalidateSupplementaryElementsOfKindAtIndexPaths = objc.RegisterName("invalidateSupplementaryElementsOfKind:atIndexPaths:")
-	_nSCollectionViewLayoutInvalidationContextSelInvalidateDecorationElementsOfKindAtIndexPaths = objc.RegisterName("invalidateDecorationElementsOfKind:atIndexPaths:")
-	_nSCollectionViewLayoutInvalidationContextSelInvalidateEverything = objc.RegisterName("invalidateEverything")
-	_nSCollectionViewLayoutInvalidationContextSelInvalidateDataSourceCounts = objc.RegisterName("invalidateDataSourceCounts")
-	_nSCollectionViewLayoutInvalidationContextSelInvalidatedItemIndexPaths = objc.RegisterName("invalidatedItemIndexPaths")
-	_nSCollectionViewLayoutInvalidationContextSelInvalidatedSupplementaryIndexPaths = objc.RegisterName("invalidatedSupplementaryIndexPaths")
-	_nSCollectionViewLayoutInvalidationContextSelInvalidatedDecorationIndexPaths = objc.RegisterName("invalidatedDecorationIndexPaths")
-	_nSCollectionViewLayoutInvalidationContextSelContentOffsetAdjustment = objc.RegisterName("contentOffsetAdjustment")
-	_nSCollectionViewLayoutInvalidationContextSelSetContentOffsetAdjustment = objc.RegisterName("setContentOffsetAdjustment:")
-	_nSCollectionViewLayoutInvalidationContextSelContentSizeAdjustment = objc.RegisterName("contentSizeAdjustment")
-	_nSCollectionViewLayoutInvalidationContextSelSetContentSizeAdjustment = objc.RegisterName("setContentSizeAdjustment:")
+	_nSCollectionViewLayoutInvalidationContextSelInvalidateDecorationElementsOfKindAtIndexPaths    = objc.RegisterName("invalidateDecorationElementsOfKind:atIndexPaths:")
+	_nSCollectionViewLayoutInvalidationContextSelInvalidateEverything                              = objc.RegisterName("invalidateEverything")
+	_nSCollectionViewLayoutInvalidationContextSelInvalidateDataSourceCounts                        = objc.RegisterName("invalidateDataSourceCounts")
+	_nSCollectionViewLayoutInvalidationContextSelInvalidatedItemIndexPaths                         = objc.RegisterName("invalidatedItemIndexPaths")
+	_nSCollectionViewLayoutInvalidationContextSelInvalidatedSupplementaryIndexPaths                = objc.RegisterName("invalidatedSupplementaryIndexPaths")
+	_nSCollectionViewLayoutInvalidationContextSelInvalidatedDecorationIndexPaths                   = objc.RegisterName("invalidatedDecorationIndexPaths")
+	_nSCollectionViewLayoutInvalidationContextSelContentOffsetAdjustment                           = objc.RegisterName("contentOffsetAdjustment")
+	_nSCollectionViewLayoutInvalidationContextSelSetContentOffsetAdjustment                        = objc.RegisterName("setContentOffsetAdjustment:")
+	_nSCollectionViewLayoutInvalidationContextSelContentSizeAdjustment                             = objc.RegisterName("contentSizeAdjustment")
+	_nSCollectionViewLayoutInvalidationContextSelSetContentSizeAdjustment                          = objc.RegisterName("setContentSizeAdjustment:")
 )
 
 func NSCollectionViewLayoutInvalidationContextFromID(id objc.ID) *NSCollectionViewLayoutInvalidationContext {
@@ -96,4 +96,3 @@ func (o *NSCollectionViewLayoutInvalidationContext) ContentSizeAdjustment() core
 func (o *NSCollectionViewLayoutInvalidationContext) SetContentSizeAdjustment(contentSizeAdjustment corefoundation.CGSize) {
 	o.Ptr().Send(_nSCollectionViewLayoutInvalidationContextSelSetContentSizeAdjustment, contentSizeAdjustment)
 }
-

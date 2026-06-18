@@ -61,4 +61,3 @@ type CollectionLayoutSizeable interface {
 }
 
 var _ CollectionLayoutSizeable = (*CollectionLayoutSize)(nil)
-

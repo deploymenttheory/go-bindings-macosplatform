@@ -17,8 +17,8 @@ type MPSCNNSoftMaxGradient struct {
 }
 
 var (
-	_clsMPSCNNSoftMaxGradient = _objcClass("MPSCNNSoftMaxGradient")
-	_mPSCNNSoftMaxGradientSelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsMPSCNNSoftMaxGradient                    = _objcClass("MPSCNNSoftMaxGradient")
+	_mPSCNNSoftMaxGradientSelInitWithDevice      = objc.RegisterName("initWithDevice:")
 	_mPSCNNSoftMaxGradientSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
 )
 
@@ -35,14 +35,17 @@ func MPSCNNSoftMaxGradientFromID(id objc.ID) *MPSCNNSoftMaxGradient {
 // @abstract   Initializes a MPSCNNSoftMaxGradient function @param      device                          The MTLDevice on which this MPSCNNSoftMaxGradient filter will be used @return     A valid MPSCNNSoftMaxGradient object or nil, if failure.
 func (o *MPSCNNSoftMaxGradient) InitWithDevice(device metal.MTLDevice) *MPSCNNSoftMaxGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNSoftMaxGradientSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNSoftMaxGradientFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSCNNSoftMaxGradient) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSCNNSoftMaxGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNSoftMaxGradientSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNSoftMaxGradientFromID(_ret)
 }
-

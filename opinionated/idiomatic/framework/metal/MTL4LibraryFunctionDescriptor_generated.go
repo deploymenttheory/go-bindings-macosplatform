@@ -73,7 +73,9 @@ func (x *MTL4LibraryFunctionDescriptor) SetLibrary(library raw.MTLLibrary) {
 	x.inner.SetLibrary(library)
 }
 
-func (x *MTL4LibraryFunctionDescriptor) asMTL4FunctionDescriptor() *raw.MTL4FunctionDescriptor { return &x.inner.MTL4FunctionDescriptor }
+func (x *MTL4LibraryFunctionDescriptor) asMTL4FunctionDescriptor() *raw.MTL4FunctionDescriptor {
+	return &x.inner.MTL4FunctionDescriptor
+}
 
 // MTL4LibraryFunctionDescriptorable is the interface implemented by [MTL4LibraryFunctionDescriptor], for mocking and DI.
 type MTL4LibraryFunctionDescriptorable interface {
@@ -87,4 +89,3 @@ type MTL4LibraryFunctionDescriptorable interface {
 }
 
 var _ MTL4LibraryFunctionDescriptorable = (*MTL4LibraryFunctionDescriptor)(nil)
-

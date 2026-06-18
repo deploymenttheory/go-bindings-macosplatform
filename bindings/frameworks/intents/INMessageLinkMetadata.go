@@ -16,18 +16,18 @@ type INMessageLinkMetadata struct {
 }
 
 var (
-	_clsINMessageLinkMetadata = _objcClass("INMessageLinkMetadata")
+	_clsINMessageLinkMetadata                                                 = _objcClass("INMessageLinkMetadata")
 	_iNMessageLinkMetadataSelInitWithSiteNameSummaryTitleOpenGraphTypeLinkURL = objc.RegisterName("initWithSiteName:summary:title:openGraphType:linkURL:")
-	_iNMessageLinkMetadataSelSiteName = objc.RegisterName("siteName")
-	_iNMessageLinkMetadataSelSetSiteName = objc.RegisterName("setSiteName:")
-	_iNMessageLinkMetadataSelSummary = objc.RegisterName("summary")
-	_iNMessageLinkMetadataSelSetSummary = objc.RegisterName("setSummary:")
-	_iNMessageLinkMetadataSelTitle = objc.RegisterName("title")
-	_iNMessageLinkMetadataSelSetTitle = objc.RegisterName("setTitle:")
-	_iNMessageLinkMetadataSelOpenGraphType = objc.RegisterName("openGraphType")
-	_iNMessageLinkMetadataSelSetOpenGraphType = objc.RegisterName("setOpenGraphType:")
-	_iNMessageLinkMetadataSelLinkURL = objc.RegisterName("linkURL")
-	_iNMessageLinkMetadataSelSetLinkURL = objc.RegisterName("setLinkURL:")
+	_iNMessageLinkMetadataSelSiteName                                         = objc.RegisterName("siteName")
+	_iNMessageLinkMetadataSelSetSiteName                                      = objc.RegisterName("setSiteName:")
+	_iNMessageLinkMetadataSelSummary                                          = objc.RegisterName("summary")
+	_iNMessageLinkMetadataSelSetSummary                                       = objc.RegisterName("setSummary:")
+	_iNMessageLinkMetadataSelTitle                                            = objc.RegisterName("title")
+	_iNMessageLinkMetadataSelSetTitle                                         = objc.RegisterName("setTitle:")
+	_iNMessageLinkMetadataSelOpenGraphType                                    = objc.RegisterName("openGraphType")
+	_iNMessageLinkMetadataSelSetOpenGraphType                                 = objc.RegisterName("setOpenGraphType:")
+	_iNMessageLinkMetadataSelLinkURL                                          = objc.RegisterName("linkURL")
+	_iNMessageLinkMetadataSelSetLinkURL                                       = objc.RegisterName("setLinkURL:")
 )
 
 func INMessageLinkMetadataFromID(id objc.ID) *INMessageLinkMetadata {
@@ -42,13 +42,17 @@ func INMessageLinkMetadataFromID(id objc.ID) *INMessageLinkMetadata {
 
 func (o *INMessageLinkMetadata) InitWithSiteNameSummaryTitleOpenGraphTypeLinkURL(siteName *foundation.NSString, summary *foundation.NSString, title *foundation.NSString, openGraphType *foundation.NSString, linkURL *foundation.NSURL) *INMessageLinkMetadata {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNMessageLinkMetadataSelInitWithSiteNameSummaryTitleOpenGraphTypeLinkURL, siteName.Ptr(), summary.Ptr(), title.Ptr(), openGraphType.Ptr(), linkURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INMessageLinkMetadataFromID(_ret)
 }
 
 func (o *INMessageLinkMetadata) SiteName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNMessageLinkMetadataSelSiteName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -58,7 +62,9 @@ func (o *INMessageLinkMetadata) SetSiteName(siteName *foundation.NSString) {
 
 func (o *INMessageLinkMetadata) Summary() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNMessageLinkMetadataSelSummary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -68,7 +74,9 @@ func (o *INMessageLinkMetadata) SetSummary(summary *foundation.NSString) {
 
 func (o *INMessageLinkMetadata) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNMessageLinkMetadataSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -78,7 +86,9 @@ func (o *INMessageLinkMetadata) SetTitle(title *foundation.NSString) {
 
 func (o *INMessageLinkMetadata) OpenGraphType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNMessageLinkMetadataSelOpenGraphType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -88,11 +98,12 @@ func (o *INMessageLinkMetadata) SetOpenGraphType(openGraphType *foundation.NSStr
 
 func (o *INMessageLinkMetadata) LinkURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNMessageLinkMetadataSelLinkURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *INMessageLinkMetadata) SetLinkURL(linkURL *foundation.NSURL) {
 	o.Ptr().Send(_iNMessageLinkMetadataSelSetLinkURL, linkURL.Ptr())
 }
-

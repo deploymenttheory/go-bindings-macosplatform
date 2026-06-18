@@ -18,26 +18,26 @@ type MTRClusterICDManagement struct {
 }
 
 var (
-	_clsMTRClusterICDManagement = _objcClass("MTRClusterICDManagement")
-	_mTRClusterICDManagementSelRegisterClientWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("registerClientWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterICDManagementSelUnregisterClientWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("unregisterClientWithParams:expectedValues:expectedValueInterval:completion:")
+	_clsMTRClusterICDManagement                                                                         = _objcClass("MTRClusterICDManagement")
+	_mTRClusterICDManagementSelRegisterClientWithParamsExpectedValuesExpectedValueIntervalCompletion    = objc.RegisterName("registerClientWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterICDManagementSelUnregisterClientWithParamsExpectedValuesExpectedValueIntervalCompletion  = objc.RegisterName("unregisterClientWithParams:expectedValues:expectedValueInterval:completion:")
 	_mTRClusterICDManagementSelStayActiveRequestWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("stayActiveRequestWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterICDManagementSelReadAttributeIdleModeDurationWithParams = objc.RegisterName("readAttributeIdleModeDurationWithParams:")
-	_mTRClusterICDManagementSelReadAttributeActiveModeDurationWithParams = objc.RegisterName("readAttributeActiveModeDurationWithParams:")
-	_mTRClusterICDManagementSelReadAttributeActiveModeThresholdWithParams = objc.RegisterName("readAttributeActiveModeThresholdWithParams:")
-	_mTRClusterICDManagementSelReadAttributeRegisteredClientsWithParams = objc.RegisterName("readAttributeRegisteredClientsWithParams:")
-	_mTRClusterICDManagementSelReadAttributeICDCounterWithParams = objc.RegisterName("readAttributeICDCounterWithParams:")
-	_mTRClusterICDManagementSelReadAttributeClientsSupportedPerFabricWithParams = objc.RegisterName("readAttributeClientsSupportedPerFabricWithParams:")
-	_mTRClusterICDManagementSelReadAttributeUserActiveModeTriggerHintWithParams = objc.RegisterName("readAttributeUserActiveModeTriggerHintWithParams:")
-	_mTRClusterICDManagementSelReadAttributeUserActiveModeTriggerInstructionWithParams = objc.RegisterName("readAttributeUserActiveModeTriggerInstructionWithParams:")
-	_mTRClusterICDManagementSelReadAttributeOperatingModeWithParams = objc.RegisterName("readAttributeOperatingModeWithParams:")
-	_mTRClusterICDManagementSelReadAttributeMaximumCheckInBackOffWithParams = objc.RegisterName("readAttributeMaximumCheckInBackOffWithParams:")
-	_mTRClusterICDManagementSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterICDManagementSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterICDManagementSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterICDManagementSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterICDManagementSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterICDManagementSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterICDManagementSelReadAttributeIdleModeDurationWithParams                                  = objc.RegisterName("readAttributeIdleModeDurationWithParams:")
+	_mTRClusterICDManagementSelReadAttributeActiveModeDurationWithParams                                = objc.RegisterName("readAttributeActiveModeDurationWithParams:")
+	_mTRClusterICDManagementSelReadAttributeActiveModeThresholdWithParams                               = objc.RegisterName("readAttributeActiveModeThresholdWithParams:")
+	_mTRClusterICDManagementSelReadAttributeRegisteredClientsWithParams                                 = objc.RegisterName("readAttributeRegisteredClientsWithParams:")
+	_mTRClusterICDManagementSelReadAttributeICDCounterWithParams                                        = objc.RegisterName("readAttributeICDCounterWithParams:")
+	_mTRClusterICDManagementSelReadAttributeClientsSupportedPerFabricWithParams                         = objc.RegisterName("readAttributeClientsSupportedPerFabricWithParams:")
+	_mTRClusterICDManagementSelReadAttributeUserActiveModeTriggerHintWithParams                         = objc.RegisterName("readAttributeUserActiveModeTriggerHintWithParams:")
+	_mTRClusterICDManagementSelReadAttributeUserActiveModeTriggerInstructionWithParams                  = objc.RegisterName("readAttributeUserActiveModeTriggerInstructionWithParams:")
+	_mTRClusterICDManagementSelReadAttributeOperatingModeWithParams                                     = objc.RegisterName("readAttributeOperatingModeWithParams:")
+	_mTRClusterICDManagementSelReadAttributeMaximumCheckInBackOffWithParams                             = objc.RegisterName("readAttributeMaximumCheckInBackOffWithParams:")
+	_mTRClusterICDManagementSelReadAttributeGeneratedCommandListWithParams                              = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterICDManagementSelReadAttributeAcceptedCommandListWithParams                               = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterICDManagementSelReadAttributeAttributeListWithParams                                     = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterICDManagementSelReadAttributeFeatureMapWithParams                                        = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterICDManagementSelReadAttributeClusterRevisionWithParams                                   = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterICDManagementSelInitWithDeviceEndpointIDQueue                                            = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterICDManagementFromID(id objc.ID) *MTRClusterICDManagement {
@@ -167,7 +167,8 @@ func (o *MTRClusterICDManagement) ReadAttributeClusterRevisionWithParams(params 
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterICDManagement) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterICDManagement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterICDManagementSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterICDManagementFromID(_ret)
 }
-

@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_imageioLib uintptr
-	_loadOnce sync.Once
+	_imageioLib    uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -48,64 +48,164 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("CGAnimateImageAtURLWithBlock", func() { purego.RegisterLibFunc(&_fnCGAnimateImageAtURLWithBlock, _imageioLib, "CGAnimateImageAtURLWithBlock") })
-	_register("CGAnimateImageDataWithBlock", func() { purego.RegisterLibFunc(&_fnCGAnimateImageDataWithBlock, _imageioLib, "CGAnimateImageDataWithBlock") })
-	_register("CGImageDestinationAddAuxiliaryDataInfo", func() { purego.RegisterLibFunc(&_fnCGImageDestinationAddAuxiliaryDataInfo, _imageioLib, "CGImageDestinationAddAuxiliaryDataInfo") })
-	_register("CGImageDestinationAddImage", func() { purego.RegisterLibFunc(&_fnCGImageDestinationAddImage, _imageioLib, "CGImageDestinationAddImage") })
-	_register("CGImageDestinationAddImageAndMetadata", func() { purego.RegisterLibFunc(&_fnCGImageDestinationAddImageAndMetadata, _imageioLib, "CGImageDestinationAddImageAndMetadata") })
-	_register("CGImageDestinationAddImageFromSource", func() { purego.RegisterLibFunc(&_fnCGImageDestinationAddImageFromSource, _imageioLib, "CGImageDestinationAddImageFromSource") })
-	_register("CGImageDestinationCopyImageSource", func() { purego.RegisterLibFunc(&_fnCGImageDestinationCopyImageSource, _imageioLib, "CGImageDestinationCopyImageSource") })
-	_register("CGImageDestinationCopyTypeIdentifiers", func() { purego.RegisterLibFunc(&_fnCGImageDestinationCopyTypeIdentifiers, _imageioLib, "CGImageDestinationCopyTypeIdentifiers") })
-	_register("CGImageDestinationCreateWithData", func() { purego.RegisterLibFunc(&_fnCGImageDestinationCreateWithData, _imageioLib, "CGImageDestinationCreateWithData") })
-	_register("CGImageDestinationCreateWithDataConsumer", func() { purego.RegisterLibFunc(&_fnCGImageDestinationCreateWithDataConsumer, _imageioLib, "CGImageDestinationCreateWithDataConsumer") })
-	_register("CGImageDestinationCreateWithURL", func() { purego.RegisterLibFunc(&_fnCGImageDestinationCreateWithURL, _imageioLib, "CGImageDestinationCreateWithURL") })
-	_register("CGImageDestinationFinalize", func() { purego.RegisterLibFunc(&_fnCGImageDestinationFinalize, _imageioLib, "CGImageDestinationFinalize") })
-	_register("CGImageDestinationGetTypeID", func() { purego.RegisterLibFunc(&_fnCGImageDestinationGetTypeID, _imageioLib, "CGImageDestinationGetTypeID") })
-	_register("CGImageDestinationSetProperties", func() { purego.RegisterLibFunc(&_fnCGImageDestinationSetProperties, _imageioLib, "CGImageDestinationSetProperties") })
-	_register("CGImageMetadataCopyStringValueWithPath", func() { purego.RegisterLibFunc(&_fnCGImageMetadataCopyStringValueWithPath, _imageioLib, "CGImageMetadataCopyStringValueWithPath") })
-	_register("CGImageMetadataCopyTagMatchingImageProperty", func() { purego.RegisterLibFunc(&_fnCGImageMetadataCopyTagMatchingImageProperty, _imageioLib, "CGImageMetadataCopyTagMatchingImageProperty") })
-	_register("CGImageMetadataCopyTagWithPath", func() { purego.RegisterLibFunc(&_fnCGImageMetadataCopyTagWithPath, _imageioLib, "CGImageMetadataCopyTagWithPath") })
+	_register("CGAnimateImageAtURLWithBlock", func() {
+		purego.RegisterLibFunc(&_fnCGAnimateImageAtURLWithBlock, _imageioLib, "CGAnimateImageAtURLWithBlock")
+	})
+	_register("CGAnimateImageDataWithBlock", func() {
+		purego.RegisterLibFunc(&_fnCGAnimateImageDataWithBlock, _imageioLib, "CGAnimateImageDataWithBlock")
+	})
+	_register("CGImageDestinationAddAuxiliaryDataInfo", func() {
+		purego.RegisterLibFunc(&_fnCGImageDestinationAddAuxiliaryDataInfo, _imageioLib, "CGImageDestinationAddAuxiliaryDataInfo")
+	})
+	_register("CGImageDestinationAddImage", func() {
+		purego.RegisterLibFunc(&_fnCGImageDestinationAddImage, _imageioLib, "CGImageDestinationAddImage")
+	})
+	_register("CGImageDestinationAddImageAndMetadata", func() {
+		purego.RegisterLibFunc(&_fnCGImageDestinationAddImageAndMetadata, _imageioLib, "CGImageDestinationAddImageAndMetadata")
+	})
+	_register("CGImageDestinationAddImageFromSource", func() {
+		purego.RegisterLibFunc(&_fnCGImageDestinationAddImageFromSource, _imageioLib, "CGImageDestinationAddImageFromSource")
+	})
+	_register("CGImageDestinationCopyImageSource", func() {
+		purego.RegisterLibFunc(&_fnCGImageDestinationCopyImageSource, _imageioLib, "CGImageDestinationCopyImageSource")
+	})
+	_register("CGImageDestinationCopyTypeIdentifiers", func() {
+		purego.RegisterLibFunc(&_fnCGImageDestinationCopyTypeIdentifiers, _imageioLib, "CGImageDestinationCopyTypeIdentifiers")
+	})
+	_register("CGImageDestinationCreateWithData", func() {
+		purego.RegisterLibFunc(&_fnCGImageDestinationCreateWithData, _imageioLib, "CGImageDestinationCreateWithData")
+	})
+	_register("CGImageDestinationCreateWithDataConsumer", func() {
+		purego.RegisterLibFunc(&_fnCGImageDestinationCreateWithDataConsumer, _imageioLib, "CGImageDestinationCreateWithDataConsumer")
+	})
+	_register("CGImageDestinationCreateWithURL", func() {
+		purego.RegisterLibFunc(&_fnCGImageDestinationCreateWithURL, _imageioLib, "CGImageDestinationCreateWithURL")
+	})
+	_register("CGImageDestinationFinalize", func() {
+		purego.RegisterLibFunc(&_fnCGImageDestinationFinalize, _imageioLib, "CGImageDestinationFinalize")
+	})
+	_register("CGImageDestinationGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnCGImageDestinationGetTypeID, _imageioLib, "CGImageDestinationGetTypeID")
+	})
+	_register("CGImageDestinationSetProperties", func() {
+		purego.RegisterLibFunc(&_fnCGImageDestinationSetProperties, _imageioLib, "CGImageDestinationSetProperties")
+	})
+	_register("CGImageMetadataCopyStringValueWithPath", func() {
+		purego.RegisterLibFunc(&_fnCGImageMetadataCopyStringValueWithPath, _imageioLib, "CGImageMetadataCopyStringValueWithPath")
+	})
+	_register("CGImageMetadataCopyTagMatchingImageProperty", func() {
+		purego.RegisterLibFunc(&_fnCGImageMetadataCopyTagMatchingImageProperty, _imageioLib, "CGImageMetadataCopyTagMatchingImageProperty")
+	})
+	_register("CGImageMetadataCopyTagWithPath", func() {
+		purego.RegisterLibFunc(&_fnCGImageMetadataCopyTagWithPath, _imageioLib, "CGImageMetadataCopyTagWithPath")
+	})
 	_register("CGImageMetadataCopyTags", func() { purego.RegisterLibFunc(&_fnCGImageMetadataCopyTags, _imageioLib, "CGImageMetadataCopyTags") })
-	_register("CGImageMetadataCreateFromXMPData", func() { purego.RegisterLibFunc(&_fnCGImageMetadataCreateFromXMPData, _imageioLib, "CGImageMetadataCreateFromXMPData") })
-	_register("CGImageMetadataCreateMutable", func() { purego.RegisterLibFunc(&_fnCGImageMetadataCreateMutable, _imageioLib, "CGImageMetadataCreateMutable") })
-	_register("CGImageMetadataCreateMutableCopy", func() { purego.RegisterLibFunc(&_fnCGImageMetadataCreateMutableCopy, _imageioLib, "CGImageMetadataCreateMutableCopy") })
-	_register("CGImageMetadataCreateXMPData", func() { purego.RegisterLibFunc(&_fnCGImageMetadataCreateXMPData, _imageioLib, "CGImageMetadataCreateXMPData") })
-	_register("CGImageMetadataEnumerateTagsUsingBlock", func() { purego.RegisterLibFunc(&_fnCGImageMetadataEnumerateTagsUsingBlock, _imageioLib, "CGImageMetadataEnumerateTagsUsingBlock") })
+	_register("CGImageMetadataCreateFromXMPData", func() {
+		purego.RegisterLibFunc(&_fnCGImageMetadataCreateFromXMPData, _imageioLib, "CGImageMetadataCreateFromXMPData")
+	})
+	_register("CGImageMetadataCreateMutable", func() {
+		purego.RegisterLibFunc(&_fnCGImageMetadataCreateMutable, _imageioLib, "CGImageMetadataCreateMutable")
+	})
+	_register("CGImageMetadataCreateMutableCopy", func() {
+		purego.RegisterLibFunc(&_fnCGImageMetadataCreateMutableCopy, _imageioLib, "CGImageMetadataCreateMutableCopy")
+	})
+	_register("CGImageMetadataCreateXMPData", func() {
+		purego.RegisterLibFunc(&_fnCGImageMetadataCreateXMPData, _imageioLib, "CGImageMetadataCreateXMPData")
+	})
+	_register("CGImageMetadataEnumerateTagsUsingBlock", func() {
+		purego.RegisterLibFunc(&_fnCGImageMetadataEnumerateTagsUsingBlock, _imageioLib, "CGImageMetadataEnumerateTagsUsingBlock")
+	})
 	_register("CGImageMetadataGetTypeID", func() { purego.RegisterLibFunc(&_fnCGImageMetadataGetTypeID, _imageioLib, "CGImageMetadataGetTypeID") })
-	_register("CGImageMetadataRegisterNamespaceForPrefix", func() { purego.RegisterLibFunc(&_fnCGImageMetadataRegisterNamespaceForPrefix, _imageioLib, "CGImageMetadataRegisterNamespaceForPrefix") })
-	_register("CGImageMetadataRemoveTagWithPath", func() { purego.RegisterLibFunc(&_fnCGImageMetadataRemoveTagWithPath, _imageioLib, "CGImageMetadataRemoveTagWithPath") })
-	_register("CGImageMetadataSetTagWithPath", func() { purego.RegisterLibFunc(&_fnCGImageMetadataSetTagWithPath, _imageioLib, "CGImageMetadataSetTagWithPath") })
-	_register("CGImageMetadataSetValueMatchingImageProperty", func() { purego.RegisterLibFunc(&_fnCGImageMetadataSetValueMatchingImageProperty, _imageioLib, "CGImageMetadataSetValueMatchingImageProperty") })
-	_register("CGImageMetadataSetValueWithPath", func() { purego.RegisterLibFunc(&_fnCGImageMetadataSetValueWithPath, _imageioLib, "CGImageMetadataSetValueWithPath") })
-	_register("CGImageMetadataTagCopyName", func() { purego.RegisterLibFunc(&_fnCGImageMetadataTagCopyName, _imageioLib, "CGImageMetadataTagCopyName") })
-	_register("CGImageMetadataTagCopyNamespace", func() { purego.RegisterLibFunc(&_fnCGImageMetadataTagCopyNamespace, _imageioLib, "CGImageMetadataTagCopyNamespace") })
-	_register("CGImageMetadataTagCopyPrefix", func() { purego.RegisterLibFunc(&_fnCGImageMetadataTagCopyPrefix, _imageioLib, "CGImageMetadataTagCopyPrefix") })
-	_register("CGImageMetadataTagCopyQualifiers", func() { purego.RegisterLibFunc(&_fnCGImageMetadataTagCopyQualifiers, _imageioLib, "CGImageMetadataTagCopyQualifiers") })
-	_register("CGImageMetadataTagCopyValue", func() { purego.RegisterLibFunc(&_fnCGImageMetadataTagCopyValue, _imageioLib, "CGImageMetadataTagCopyValue") })
+	_register("CGImageMetadataRegisterNamespaceForPrefix", func() {
+		purego.RegisterLibFunc(&_fnCGImageMetadataRegisterNamespaceForPrefix, _imageioLib, "CGImageMetadataRegisterNamespaceForPrefix")
+	})
+	_register("CGImageMetadataRemoveTagWithPath", func() {
+		purego.RegisterLibFunc(&_fnCGImageMetadataRemoveTagWithPath, _imageioLib, "CGImageMetadataRemoveTagWithPath")
+	})
+	_register("CGImageMetadataSetTagWithPath", func() {
+		purego.RegisterLibFunc(&_fnCGImageMetadataSetTagWithPath, _imageioLib, "CGImageMetadataSetTagWithPath")
+	})
+	_register("CGImageMetadataSetValueMatchingImageProperty", func() {
+		purego.RegisterLibFunc(&_fnCGImageMetadataSetValueMatchingImageProperty, _imageioLib, "CGImageMetadataSetValueMatchingImageProperty")
+	})
+	_register("CGImageMetadataSetValueWithPath", func() {
+		purego.RegisterLibFunc(&_fnCGImageMetadataSetValueWithPath, _imageioLib, "CGImageMetadataSetValueWithPath")
+	})
+	_register("CGImageMetadataTagCopyName", func() {
+		purego.RegisterLibFunc(&_fnCGImageMetadataTagCopyName, _imageioLib, "CGImageMetadataTagCopyName")
+	})
+	_register("CGImageMetadataTagCopyNamespace", func() {
+		purego.RegisterLibFunc(&_fnCGImageMetadataTagCopyNamespace, _imageioLib, "CGImageMetadataTagCopyNamespace")
+	})
+	_register("CGImageMetadataTagCopyPrefix", func() {
+		purego.RegisterLibFunc(&_fnCGImageMetadataTagCopyPrefix, _imageioLib, "CGImageMetadataTagCopyPrefix")
+	})
+	_register("CGImageMetadataTagCopyQualifiers", func() {
+		purego.RegisterLibFunc(&_fnCGImageMetadataTagCopyQualifiers, _imageioLib, "CGImageMetadataTagCopyQualifiers")
+	})
+	_register("CGImageMetadataTagCopyValue", func() {
+		purego.RegisterLibFunc(&_fnCGImageMetadataTagCopyValue, _imageioLib, "CGImageMetadataTagCopyValue")
+	})
 	_register("CGImageMetadataTagCreate", func() { purego.RegisterLibFunc(&_fnCGImageMetadataTagCreate, _imageioLib, "CGImageMetadataTagCreate") })
-	_register("CGImageMetadataTagGetType", func() { purego.RegisterLibFunc(&_fnCGImageMetadataTagGetType, _imageioLib, "CGImageMetadataTagGetType") })
-	_register("CGImageMetadataTagGetTypeID", func() { purego.RegisterLibFunc(&_fnCGImageMetadataTagGetTypeID, _imageioLib, "CGImageMetadataTagGetTypeID") })
-	_register("CGImageSourceCopyAuxiliaryDataInfoAtIndex", func() { purego.RegisterLibFunc(&_fnCGImageSourceCopyAuxiliaryDataInfoAtIndex, _imageioLib, "CGImageSourceCopyAuxiliaryDataInfoAtIndex") })
-	_register("CGImageSourceCopyMetadataAtIndex", func() { purego.RegisterLibFunc(&_fnCGImageSourceCopyMetadataAtIndex, _imageioLib, "CGImageSourceCopyMetadataAtIndex") })
-	_register("CGImageSourceCopyProperties", func() { purego.RegisterLibFunc(&_fnCGImageSourceCopyProperties, _imageioLib, "CGImageSourceCopyProperties") })
-	_register("CGImageSourceCopyPropertiesAtIndex", func() { purego.RegisterLibFunc(&_fnCGImageSourceCopyPropertiesAtIndex, _imageioLib, "CGImageSourceCopyPropertiesAtIndex") })
-	_register("CGImageSourceCopyTypeIdentifiers", func() { purego.RegisterLibFunc(&_fnCGImageSourceCopyTypeIdentifiers, _imageioLib, "CGImageSourceCopyTypeIdentifiers") })
-	_register("CGImageSourceCreateImageAtIndex", func() { purego.RegisterLibFunc(&_fnCGImageSourceCreateImageAtIndex, _imageioLib, "CGImageSourceCreateImageAtIndex") })
-	_register("CGImageSourceCreateIncremental", func() { purego.RegisterLibFunc(&_fnCGImageSourceCreateIncremental, _imageioLib, "CGImageSourceCreateIncremental") })
-	_register("CGImageSourceCreateThumbnailAtIndex", func() { purego.RegisterLibFunc(&_fnCGImageSourceCreateThumbnailAtIndex, _imageioLib, "CGImageSourceCreateThumbnailAtIndex") })
-	_register("CGImageSourceCreateWithData", func() { purego.RegisterLibFunc(&_fnCGImageSourceCreateWithData, _imageioLib, "CGImageSourceCreateWithData") })
-	_register("CGImageSourceCreateWithDataProvider", func() { purego.RegisterLibFunc(&_fnCGImageSourceCreateWithDataProvider, _imageioLib, "CGImageSourceCreateWithDataProvider") })
-	_register("CGImageSourceCreateWithURL", func() { purego.RegisterLibFunc(&_fnCGImageSourceCreateWithURL, _imageioLib, "CGImageSourceCreateWithURL") })
+	_register("CGImageMetadataTagGetType", func() {
+		purego.RegisterLibFunc(&_fnCGImageMetadataTagGetType, _imageioLib, "CGImageMetadataTagGetType")
+	})
+	_register("CGImageMetadataTagGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnCGImageMetadataTagGetTypeID, _imageioLib, "CGImageMetadataTagGetTypeID")
+	})
+	_register("CGImageSourceCopyAuxiliaryDataInfoAtIndex", func() {
+		purego.RegisterLibFunc(&_fnCGImageSourceCopyAuxiliaryDataInfoAtIndex, _imageioLib, "CGImageSourceCopyAuxiliaryDataInfoAtIndex")
+	})
+	_register("CGImageSourceCopyMetadataAtIndex", func() {
+		purego.RegisterLibFunc(&_fnCGImageSourceCopyMetadataAtIndex, _imageioLib, "CGImageSourceCopyMetadataAtIndex")
+	})
+	_register("CGImageSourceCopyProperties", func() {
+		purego.RegisterLibFunc(&_fnCGImageSourceCopyProperties, _imageioLib, "CGImageSourceCopyProperties")
+	})
+	_register("CGImageSourceCopyPropertiesAtIndex", func() {
+		purego.RegisterLibFunc(&_fnCGImageSourceCopyPropertiesAtIndex, _imageioLib, "CGImageSourceCopyPropertiesAtIndex")
+	})
+	_register("CGImageSourceCopyTypeIdentifiers", func() {
+		purego.RegisterLibFunc(&_fnCGImageSourceCopyTypeIdentifiers, _imageioLib, "CGImageSourceCopyTypeIdentifiers")
+	})
+	_register("CGImageSourceCreateImageAtIndex", func() {
+		purego.RegisterLibFunc(&_fnCGImageSourceCreateImageAtIndex, _imageioLib, "CGImageSourceCreateImageAtIndex")
+	})
+	_register("CGImageSourceCreateIncremental", func() {
+		purego.RegisterLibFunc(&_fnCGImageSourceCreateIncremental, _imageioLib, "CGImageSourceCreateIncremental")
+	})
+	_register("CGImageSourceCreateThumbnailAtIndex", func() {
+		purego.RegisterLibFunc(&_fnCGImageSourceCreateThumbnailAtIndex, _imageioLib, "CGImageSourceCreateThumbnailAtIndex")
+	})
+	_register("CGImageSourceCreateWithData", func() {
+		purego.RegisterLibFunc(&_fnCGImageSourceCreateWithData, _imageioLib, "CGImageSourceCreateWithData")
+	})
+	_register("CGImageSourceCreateWithDataProvider", func() {
+		purego.RegisterLibFunc(&_fnCGImageSourceCreateWithDataProvider, _imageioLib, "CGImageSourceCreateWithDataProvider")
+	})
+	_register("CGImageSourceCreateWithURL", func() {
+		purego.RegisterLibFunc(&_fnCGImageSourceCreateWithURL, _imageioLib, "CGImageSourceCreateWithURL")
+	})
 	_register("CGImageSourceGetCount", func() { purego.RegisterLibFunc(&_fnCGImageSourceGetCount, _imageioLib, "CGImageSourceGetCount") })
-	_register("CGImageSourceGetPrimaryImageIndex", func() { purego.RegisterLibFunc(&_fnCGImageSourceGetPrimaryImageIndex, _imageioLib, "CGImageSourceGetPrimaryImageIndex") })
+	_register("CGImageSourceGetPrimaryImageIndex", func() {
+		purego.RegisterLibFunc(&_fnCGImageSourceGetPrimaryImageIndex, _imageioLib, "CGImageSourceGetPrimaryImageIndex")
+	})
 	_register("CGImageSourceGetStatus", func() { purego.RegisterLibFunc(&_fnCGImageSourceGetStatus, _imageioLib, "CGImageSourceGetStatus") })
-	_register("CGImageSourceGetStatusAtIndex", func() { purego.RegisterLibFunc(&_fnCGImageSourceGetStatusAtIndex, _imageioLib, "CGImageSourceGetStatusAtIndex") })
+	_register("CGImageSourceGetStatusAtIndex", func() {
+		purego.RegisterLibFunc(&_fnCGImageSourceGetStatusAtIndex, _imageioLib, "CGImageSourceGetStatusAtIndex")
+	})
 	_register("CGImageSourceGetType", func() { purego.RegisterLibFunc(&_fnCGImageSourceGetType, _imageioLib, "CGImageSourceGetType") })
 	_register("CGImageSourceGetTypeID", func() { purego.RegisterLibFunc(&_fnCGImageSourceGetTypeID, _imageioLib, "CGImageSourceGetTypeID") })
-	_register("CGImageSourceRemoveCacheAtIndex", func() { purego.RegisterLibFunc(&_fnCGImageSourceRemoveCacheAtIndex, _imageioLib, "CGImageSourceRemoveCacheAtIndex") })
-	_register("CGImageSourceSetAllowableTypes", func() { purego.RegisterLibFunc(&_fnCGImageSourceSetAllowableTypes, _imageioLib, "CGImageSourceSetAllowableTypes") })
+	_register("CGImageSourceRemoveCacheAtIndex", func() {
+		purego.RegisterLibFunc(&_fnCGImageSourceRemoveCacheAtIndex, _imageioLib, "CGImageSourceRemoveCacheAtIndex")
+	})
+	_register("CGImageSourceSetAllowableTypes", func() {
+		purego.RegisterLibFunc(&_fnCGImageSourceSetAllowableTypes, _imageioLib, "CGImageSourceSetAllowableTypes")
+	})
 	_register("CGImageSourceUpdateData", func() { purego.RegisterLibFunc(&_fnCGImageSourceUpdateData, _imageioLib, "CGImageSourceUpdateData") })
-	_register("CGImageSourceUpdateDataProvider", func() { purego.RegisterLibFunc(&_fnCGImageSourceUpdateDataProvider, _imageioLib, "CGImageSourceUpdateDataProvider") })
+	_register("CGImageSourceUpdateDataProvider", func() {
+		purego.RegisterLibFunc(&_fnCGImageSourceUpdateDataProvider, _imageioLib, "CGImageSourceUpdateDataProvider")
+	})
 }
 
 func init() {

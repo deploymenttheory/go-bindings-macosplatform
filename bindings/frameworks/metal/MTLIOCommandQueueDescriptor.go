@@ -16,16 +16,16 @@ type MTLIOCommandQueueDescriptor struct {
 }
 
 var (
-	_clsMTLIOCommandQueueDescriptor = _objcClass("MTLIOCommandQueueDescriptor")
-	_mTLIOCommandQueueDescriptorSelMaxCommandBufferCount = objc.RegisterName("maxCommandBufferCount")
-	_mTLIOCommandQueueDescriptorSelSetMaxCommandBufferCount = objc.RegisterName("setMaxCommandBufferCount:")
-	_mTLIOCommandQueueDescriptorSelPriority = objc.RegisterName("priority")
-	_mTLIOCommandQueueDescriptorSelSetPriority = objc.RegisterName("setPriority:")
-	_mTLIOCommandQueueDescriptorSelType = objc.RegisterName("type")
-	_mTLIOCommandQueueDescriptorSelSetType = objc.RegisterName("setType:")
-	_mTLIOCommandQueueDescriptorSelMaxCommandsInFlight = objc.RegisterName("maxCommandsInFlight")
-	_mTLIOCommandQueueDescriptorSelSetMaxCommandsInFlight = objc.RegisterName("setMaxCommandsInFlight:")
-	_mTLIOCommandQueueDescriptorSelScratchBufferAllocator = objc.RegisterName("scratchBufferAllocator")
+	_clsMTLIOCommandQueueDescriptor                          = _objcClass("MTLIOCommandQueueDescriptor")
+	_mTLIOCommandQueueDescriptorSelMaxCommandBufferCount     = objc.RegisterName("maxCommandBufferCount")
+	_mTLIOCommandQueueDescriptorSelSetMaxCommandBufferCount  = objc.RegisterName("setMaxCommandBufferCount:")
+	_mTLIOCommandQueueDescriptorSelPriority                  = objc.RegisterName("priority")
+	_mTLIOCommandQueueDescriptorSelSetPriority               = objc.RegisterName("setPriority:")
+	_mTLIOCommandQueueDescriptorSelType                      = objc.RegisterName("type")
+	_mTLIOCommandQueueDescriptorSelSetType                   = objc.RegisterName("setType:")
+	_mTLIOCommandQueueDescriptorSelMaxCommandsInFlight       = objc.RegisterName("maxCommandsInFlight")
+	_mTLIOCommandQueueDescriptorSelSetMaxCommandsInFlight    = objc.RegisterName("setMaxCommandsInFlight:")
+	_mTLIOCommandQueueDescriptorSelScratchBufferAllocator    = objc.RegisterName("scratchBufferAllocator")
 	_mTLIOCommandQueueDescriptorSelSetScratchBufferAllocator = objc.RegisterName("setScratchBufferAllocator:")
 )
 
@@ -88,4 +88,3 @@ func (o *MTLIOCommandQueueDescriptor) ScratchBufferAllocator() MTLIOScratchBuffe
 func (o *MTLIOCommandQueueDescriptor) SetScratchBufferAllocator(scratchBufferAllocator MTLIOScratchBufferAllocator) {
 	o.Ptr().Send(_mTLIOCommandQueueDescriptorSelSetScratchBufferAllocator, scratchBufferAllocator)
 }
-

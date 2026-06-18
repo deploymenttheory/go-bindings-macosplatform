@@ -272,9 +272,13 @@ func (x *MTRClusterEnergyEVSE) ReadAttributeClusterRevisionWithParams(params *ra
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterEnergyEVSE) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterEnergyEVSE) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterEnergyEVSE) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterEnergyEVSE) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterEnergyEVSEable is the interface implemented by [MTRClusterEnergyEVSE], for mocking and DI.
 type MTRClusterEnergyEVSEable interface {
@@ -320,4 +324,3 @@ type MTRClusterEnergyEVSEable interface {
 }
 
 var _ MTRClusterEnergyEVSEable = (*MTRClusterEnergyEVSE)(nil)
-

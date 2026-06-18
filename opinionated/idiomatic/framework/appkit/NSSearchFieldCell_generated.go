@@ -84,7 +84,9 @@ func (x *SearchFieldCell) WithRecentSearches(items ...*foundation.NSString) *Sea
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -148,7 +150,9 @@ func (x *SearchFieldCell) WithAllowedInputSourceLocales(items ...*foundation.NSS
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -556,7 +560,9 @@ func (x *SearchFieldCell) SetSendsSearchStringImmediately(sendsSearchStringImmed
 
 func (x *SearchFieldCell) asTextFieldCell() *raw.NSTextFieldCell { return &x.inner.NSTextFieldCell }
 
-func (x *SearchFieldCell) asActionCell() *raw.NSActionCell { return &x.inner.NSTextFieldCell.NSActionCell }
+func (x *SearchFieldCell) asActionCell() *raw.NSActionCell {
+	return &x.inner.NSTextFieldCell.NSActionCell
+}
 
 func (x *SearchFieldCell) asCell() *raw.NSCell { return &x.inner.NSTextFieldCell.NSActionCell.NSCell }
 
@@ -647,4 +653,3 @@ type SearchFieldCellable interface {
 }
 
 var _ SearchFieldCellable = (*SearchFieldCell)(nil)
-

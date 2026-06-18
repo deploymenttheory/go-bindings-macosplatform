@@ -17,34 +17,34 @@ type NSPrinter struct {
 }
 
 var (
-	_clsNSPrinter = _objcClass("NSPrinter")
-	_nSPrinterSelPrinterWithName = objc.RegisterName("printerWithName:")
-	_nSPrinterSelPrinterWithType = objc.RegisterName("printerWithType:")
-	_nSPrinterSelPageSizeForPaper = objc.RegisterName("pageSizeForPaper:")
-	_nSPrinterSelPrinterNames = objc.RegisterName("printerNames")
-	_nSPrinterSelPrinterTypes = objc.RegisterName("printerTypes")
-	_nSPrinterSelName = objc.RegisterName("name")
-	_nSPrinterSelType = objc.RegisterName("type")
-	_nSPrinterSelLanguageLevel = objc.RegisterName("languageLevel")
-	_nSPrinterSelDeviceDescription = objc.RegisterName("deviceDescription")
-	_nSPrinterSelStatusForTable = objc.RegisterName("statusForTable:")
-	_nSPrinterSelIsKeyInTable = objc.RegisterName("isKey:inTable:")
-	_nSPrinterSelBooleanForKeyInTable = objc.RegisterName("booleanForKey:inTable:")
-	_nSPrinterSelFloatForKeyInTable = objc.RegisterName("floatForKey:inTable:")
-	_nSPrinterSelIntForKeyInTable = objc.RegisterName("intForKey:inTable:")
-	_nSPrinterSelRectForKeyInTable = objc.RegisterName("rectForKey:inTable:")
-	_nSPrinterSelSizeForKeyInTable = objc.RegisterName("sizeForKey:inTable:")
-	_nSPrinterSelStringForKeyInTable = objc.RegisterName("stringForKey:inTable:")
-	_nSPrinterSelStringListForKeyInTable = objc.RegisterName("stringListForKey:inTable:")
-	_nSPrinterSelImageRectForPaper = objc.RegisterName("imageRectForPaper:")
-	_nSPrinterSelAcceptsBinary = objc.RegisterName("acceptsBinary")
-	_nSPrinterSelIsColor = objc.RegisterName("isColor")
-	_nSPrinterSelIsFontAvailable = objc.RegisterName("isFontAvailable:")
-	_nSPrinterSelIsOutputStackInReverseOrder = objc.RegisterName("isOutputStackInReverseOrder")
+	_clsNSPrinter                                        = _objcClass("NSPrinter")
+	_nSPrinterSelPrinterWithName                         = objc.RegisterName("printerWithName:")
+	_nSPrinterSelPrinterWithType                         = objc.RegisterName("printerWithType:")
+	_nSPrinterSelPageSizeForPaper                        = objc.RegisterName("pageSizeForPaper:")
+	_nSPrinterSelPrinterNames                            = objc.RegisterName("printerNames")
+	_nSPrinterSelPrinterTypes                            = objc.RegisterName("printerTypes")
+	_nSPrinterSelName                                    = objc.RegisterName("name")
+	_nSPrinterSelType                                    = objc.RegisterName("type")
+	_nSPrinterSelLanguageLevel                           = objc.RegisterName("languageLevel")
+	_nSPrinterSelDeviceDescription                       = objc.RegisterName("deviceDescription")
+	_nSPrinterSelStatusForTable                          = objc.RegisterName("statusForTable:")
+	_nSPrinterSelIsKeyInTable                            = objc.RegisterName("isKey:inTable:")
+	_nSPrinterSelBooleanForKeyInTable                    = objc.RegisterName("booleanForKey:inTable:")
+	_nSPrinterSelFloatForKeyInTable                      = objc.RegisterName("floatForKey:inTable:")
+	_nSPrinterSelIntForKeyInTable                        = objc.RegisterName("intForKey:inTable:")
+	_nSPrinterSelRectForKeyInTable                       = objc.RegisterName("rectForKey:inTable:")
+	_nSPrinterSelSizeForKeyInTable                       = objc.RegisterName("sizeForKey:inTable:")
+	_nSPrinterSelStringForKeyInTable                     = objc.RegisterName("stringForKey:inTable:")
+	_nSPrinterSelStringListForKeyInTable                 = objc.RegisterName("stringListForKey:inTable:")
+	_nSPrinterSelImageRectForPaper                       = objc.RegisterName("imageRectForPaper:")
+	_nSPrinterSelAcceptsBinary                           = objc.RegisterName("acceptsBinary")
+	_nSPrinterSelIsColor                                 = objc.RegisterName("isColor")
+	_nSPrinterSelIsFontAvailable                         = objc.RegisterName("isFontAvailable:")
+	_nSPrinterSelIsOutputStackInReverseOrder             = objc.RegisterName("isOutputStackInReverseOrder")
 	_nSPrinterSelPrinterWithNameDomainIncludeUnavailable = objc.RegisterName("printerWithName:domain:includeUnavailable:")
-	_nSPrinterSelDomain = objc.RegisterName("domain")
-	_nSPrinterSelHost = objc.RegisterName("host")
-	_nSPrinterSelNote = objc.RegisterName("note")
+	_nSPrinterSelDomain                                  = objc.RegisterName("domain")
+	_nSPrinterSelHost                                    = objc.RegisterName("host")
+	_nSPrinterSelNote                                    = objc.RegisterName("note")
 )
 
 func NSPrinterFromID(id objc.ID) *NSPrinter {
@@ -59,13 +59,17 @@ func NSPrinterFromID(id objc.ID) *NSPrinter {
 
 func NSPrinterPrinterWithName(name *foundation.NSString) *NSPrinter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPrinter), _nSPrinterSelPrinterWithName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPrinterFromID(_ret)
 }
 
 func NSPrinterPrinterWithType(type_ *foundation.NSString) *NSPrinter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPrinter), _nSPrinterSelPrinterWithType, type_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPrinterFromID(_ret)
 }
 
@@ -86,13 +90,17 @@ func NSPrinterPrinterTypes() *foundation.NSArray[*foundation.NSString] {
 
 func (o *NSPrinter) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrinterSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSPrinter) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrinterSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -151,7 +159,9 @@ func (o *NSPrinter) SizeForKeyInTable(key *foundation.NSString, table *foundatio
 // Deprecated: since macOS 10.9.
 func (o *NSPrinter) StringForKeyInTable(key *foundation.NSString, table *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrinterSelStringForKeyInTable, key.Ptr(), table.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -194,28 +204,35 @@ func (o *NSPrinter) IsOutputStackInReverseOrder() bool {
 // Deprecated: since macOS 10.2.
 func NSPrinterPrinterWithNameDomainIncludeUnavailable(name *foundation.NSString, domain *foundation.NSString, flag bool) *NSPrinter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPrinter), _nSPrinterSelPrinterWithNameDomainIncludeUnavailable, name.Ptr(), domain.Ptr(), flag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPrinterFromID(_ret)
 }
 
 // Deprecated: since macOS 10.2.
 func (o *NSPrinter) Domain() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrinterSelDomain)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Deprecated: since macOS 10.2.
 func (o *NSPrinter) Host() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrinterSelHost)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Deprecated: since macOS 10.2.
 func (o *NSPrinter) Note() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrinterSelNote)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

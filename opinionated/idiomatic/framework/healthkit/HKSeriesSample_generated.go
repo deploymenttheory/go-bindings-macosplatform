@@ -53,4 +53,3 @@ type SeriesSampleable interface {
 }
 
 var _ SeriesSampleable = (*SeriesSample)(nil)
-

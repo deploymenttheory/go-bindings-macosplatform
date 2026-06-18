@@ -17,7 +17,9 @@ type MTRFixedLabelClusterLabelStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRFixedLabelClusterLabelStruct].
-func (x *MTRFixedLabelClusterLabelStruct) Unwrap() *raw.MTRFixedLabelClusterLabelStruct { return x.inner }
+func (x *MTRFixedLabelClusterLabelStruct) Unwrap() *raw.MTRFixedLabelClusterLabelStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -89,4 +91,3 @@ type MTRFixedLabelClusterLabelStructable interface {
 }
 
 var _ MTRFixedLabelClusterLabelStructable = (*MTRFixedLabelClusterLabelStruct)(nil)
-

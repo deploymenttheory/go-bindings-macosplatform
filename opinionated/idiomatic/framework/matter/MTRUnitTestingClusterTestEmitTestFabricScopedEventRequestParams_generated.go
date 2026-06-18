@@ -16,11 +16,15 @@ type MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams].
-func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) Unwrap() *raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams { return x.inner }
+func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) Unwrap() *raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParamsFromID adopts an existing object pointer as a MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams (nil for 0).
 func MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParamsFromID(id objc.ID) *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams {
@@ -84,7 +88,9 @@ func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) SetSer
 	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
 }
 
-func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) asMTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams() *raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams { return x.inner }
+func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) asMTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams() *raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams {
+	return x.inner
+}
 
 // MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParamsable is the interface implemented by [MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams], for mocking and DI.
 type MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParamsable interface {
@@ -101,4 +107,3 @@ type MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParamsable interfa
 }
 
 var _ MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParamsable = (*MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams)(nil)
-

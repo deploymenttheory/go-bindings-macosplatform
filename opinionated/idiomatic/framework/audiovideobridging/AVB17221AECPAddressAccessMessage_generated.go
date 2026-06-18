@@ -18,7 +18,9 @@ type AVB17221AECPAddressAccessMessage struct {
 }
 
 // Unwrap returns the underlying [raw.AVB17221AECPAddressAccessMessage].
-func (x *AVB17221AECPAddressAccessMessage) Unwrap() *raw.AVB17221AECPAddressAccessMessage { return x.inner }
+func (x *AVB17221AECPAddressAccessMessage) Unwrap() *raw.AVB17221AECPAddressAccessMessage {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -45,7 +47,9 @@ func (x *AVB17221AECPAddressAccessMessage) WithTlvs(items ...*raw.AVB17221AECPAd
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.AVB17221AECPAddressAccessTLV](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -106,7 +110,9 @@ func (x *AVB17221AECPAddressAccessMessage) SetTlvs(tlvs *foundation.NSArray[*raw
 	x.inner.SetTlvs(tlvs)
 }
 
-func (x *AVB17221AECPAddressAccessMessage) asAVB17221AECPMessage() *raw.AVB17221AECPMessage { return &x.inner.AVB17221AECPMessage }
+func (x *AVB17221AECPAddressAccessMessage) asAVB17221AECPMessage() *raw.AVB17221AECPMessage {
+	return &x.inner.AVB17221AECPMessage
+}
 
 // AVB17221AECPAddressAccessMessageable is the interface implemented by [AVB17221AECPAddressAccessMessage], for mocking and DI.
 type AVB17221AECPAddressAccessMessageable interface {
@@ -123,4 +129,3 @@ type AVB17221AECPAddressAccessMessageable interface {
 }
 
 var _ AVB17221AECPAddressAccessMessageable = (*AVB17221AECPAddressAccessMessage)(nil)
-

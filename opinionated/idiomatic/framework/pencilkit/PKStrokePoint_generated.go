@@ -111,4 +111,3 @@ type StrokePointable interface {
 }
 
 var _ StrokePointable = (*StrokePoint)(nil)
-

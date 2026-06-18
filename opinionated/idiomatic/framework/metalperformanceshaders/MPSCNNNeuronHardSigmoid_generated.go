@@ -100,11 +100,17 @@ func (x *CNNNeuronHardSigmoid) WithLabel(label string) *CNNNeuronHardSigmoid {
 	return x
 }
 
-func (x *CNNNeuronHardSigmoid) asCNNNeuron() *mpsneuralnetwork.MPSCNNNeuron { return &x.inner.MPSCNNNeuron }
+func (x *CNNNeuronHardSigmoid) asCNNNeuron() *mpsneuralnetwork.MPSCNNNeuron {
+	return &x.inner.MPSCNNNeuron
+}
 
-func (x *CNNNeuronHardSigmoid) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel }
+func (x *CNNNeuronHardSigmoid) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNNeuron.MPSCNNKernel
+}
 
-func (x *CNNNeuronHardSigmoid) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel }
+func (x *CNNNeuronHardSigmoid) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel
+}
 
 // CNNNeuronHardSigmoidable is the interface implemented by [CNNNeuronHardSigmoid], for mocking and DI.
 type CNNNeuronHardSigmoidable interface {
@@ -122,4 +128,3 @@ type CNNNeuronHardSigmoidable interface {
 }
 
 var _ CNNNeuronHardSigmoidable = (*CNNNeuronHardSigmoid)(nil)
-

@@ -82,7 +82,9 @@ func (x *ImageMedian) KernelDiameter() uint {
 	return x.inner.KernelDiameter()
 }
 
-func (x *ImageMedian) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageMedian) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
 func (x *ImageMedian) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
 
@@ -98,4 +100,3 @@ type ImageMedianable interface {
 }
 
 var _ ImageMedianable = (*ImageMedian)(nil)
-

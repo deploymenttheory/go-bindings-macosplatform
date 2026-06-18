@@ -16,11 +16,11 @@ type PHAdjustmentData struct {
 }
 
 var (
-	_clsPHAdjustmentData = _objcClass("PHAdjustmentData")
+	_clsPHAdjustmentData                                          = _objcClass("PHAdjustmentData")
 	_pHAdjustmentDataSelInitWithFormatIdentifierFormatVersionData = objc.RegisterName("initWithFormatIdentifier:formatVersion:data:")
-	_pHAdjustmentDataSelFormatIdentifier = objc.RegisterName("formatIdentifier")
-	_pHAdjustmentDataSelFormatVersion = objc.RegisterName("formatVersion")
-	_pHAdjustmentDataSelData = objc.RegisterName("data")
+	_pHAdjustmentDataSelFormatIdentifier                          = objc.RegisterName("formatIdentifier")
+	_pHAdjustmentDataSelFormatVersion                             = objc.RegisterName("formatVersion")
+	_pHAdjustmentDataSelData                                      = objc.RegisterName("data")
 )
 
 func PHAdjustmentDataFromID(id objc.ID) *PHAdjustmentData {
@@ -35,25 +35,32 @@ func PHAdjustmentDataFromID(id objc.ID) *PHAdjustmentData {
 
 func (o *PHAdjustmentData) InitWithFormatIdentifierFormatVersionData(formatIdentifier *foundation.NSString, formatVersion *foundation.NSString, data *foundation.NSData) *PHAdjustmentData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHAdjustmentDataSelInitWithFormatIdentifierFormatVersionData, formatIdentifier.Ptr(), formatVersion.Ptr(), data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHAdjustmentDataFromID(_ret)
 }
 
 func (o *PHAdjustmentData) FormatIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHAdjustmentDataSelFormatIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PHAdjustmentData) FormatVersion() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHAdjustmentDataSelFormatVersion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PHAdjustmentData) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHAdjustmentDataSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

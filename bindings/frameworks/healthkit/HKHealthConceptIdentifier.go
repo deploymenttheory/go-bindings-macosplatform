@@ -16,7 +16,7 @@ type HKHealthConceptIdentifier struct {
 }
 
 var (
-	_clsHKHealthConceptIdentifier = _objcClass("HKHealthConceptIdentifier")
+	_clsHKHealthConceptIdentifier       = _objcClass("HKHealthConceptIdentifier")
 	_hKHealthConceptIdentifierSelDomain = objc.RegisterName("domain")
 )
 
@@ -33,7 +33,8 @@ func HKHealthConceptIdentifierFromID(id objc.ID) *HKHealthConceptIdentifier {
 // The domain this identifier belongs to. This value identifies the group of concepts the identifier comes from. For example, if the identifier represents a medication, the category will be the medication domain.
 func (o *HKHealthConceptIdentifier) Domain() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKHealthConceptIdentifierSelDomain)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

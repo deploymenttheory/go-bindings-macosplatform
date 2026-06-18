@@ -19,18 +19,18 @@ type SWHighlightCenter struct {
 }
 
 var (
-	_clsSWHighlightCenter = _objcClass("SWHighlightCenter")
-	_sWHighlightCenterSelGetHighlightForURLCompletionHandler = objc.RegisterName("getHighlightForURL:completionHandler:")
-	_sWHighlightCenterSelCollaborationHighlightForIdentifierError = objc.RegisterName("collaborationHighlightForIdentifier:error:")
-	_sWHighlightCenterSelGetCollaborationHighlightForURLCompletionHandler = objc.RegisterName("getCollaborationHighlightForURL:completionHandler:")
-	_sWHighlightCenterSelPostNoticeForHighlightEvent = objc.RegisterName("postNoticeForHighlightEvent:")
-	_sWHighlightCenterSelClearNoticesForHighlight = objc.RegisterName("clearNoticesForHighlight:")
+	_clsSWHighlightCenter                                                                          = _objcClass("SWHighlightCenter")
+	_sWHighlightCenterSelGetHighlightForURLCompletionHandler                                       = objc.RegisterName("getHighlightForURL:completionHandler:")
+	_sWHighlightCenterSelCollaborationHighlightForIdentifierError                                  = objc.RegisterName("collaborationHighlightForIdentifier:error:")
+	_sWHighlightCenterSelGetCollaborationHighlightForURLCompletionHandler                          = objc.RegisterName("getCollaborationHighlightForURL:completionHandler:")
+	_sWHighlightCenterSelPostNoticeForHighlightEvent                                               = objc.RegisterName("postNoticeForHighlightEvent:")
+	_sWHighlightCenterSelClearNoticesForHighlight                                                  = objc.RegisterName("clearNoticesForHighlight:")
 	_sWHighlightCenterSelGetSignedIdentityProofForCollaborationHighlightUsingDataCompletionHandler = objc.RegisterName("getSignedIdentityProofForCollaborationHighlight:usingData:completionHandler:")
-	_sWHighlightCenterSelDelegate = objc.RegisterName("delegate")
-	_sWHighlightCenterSelSetDelegate = objc.RegisterName("setDelegate:")
-	_sWHighlightCenterSelHighlights = objc.RegisterName("highlights")
-	_sWHighlightCenterSelHighlightCollectionTitle = objc.RegisterName("highlightCollectionTitle")
-	_sWHighlightCenterSelIsSystemCollaborationSupportAvailable = objc.RegisterName("isSystemCollaborationSupportAvailable")
+	_sWHighlightCenterSelDelegate                                                                  = objc.RegisterName("delegate")
+	_sWHighlightCenterSelSetDelegate                                                               = objc.RegisterName("setDelegate:")
+	_sWHighlightCenterSelHighlights                                                                = objc.RegisterName("highlights")
+	_sWHighlightCenterSelHighlightCollectionTitle                                                  = objc.RegisterName("highlightCollectionTitle")
+	_sWHighlightCenterSelIsSystemCollaborationSupportAvailable                                     = objc.RegisterName("isSystemCollaborationSupportAvailable")
 )
 
 func SWHighlightCenterFromID(id objc.ID) *SWHighlightCenter {
@@ -61,7 +61,9 @@ func (o *SWHighlightCenter) GetHighlightForURLCompletionHandler(uRL *foundation.
 func (o *SWHighlightCenter) CollaborationHighlightForIdentifierError(collaborationIdentifier *foundation.NSString) (*SWCollaborationHighlight, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWHighlightCenterSelCollaborationHighlightForIdentifierError, collaborationIdentifier.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -120,14 +122,18 @@ func (o *SWHighlightCenter) SetDelegate(delegate SWHighlightCenterDelegate) {
 
 func (o *SWHighlightCenter) Highlights() *foundation.NSArray[*SWHighlight] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWHighlightCenterSelHighlights)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SWHighlight](_ret)
 }
 
 // @abstract Localized title to display with a collection of highlights @discussion Use this string as the title for a collection of shared highlight links displayed to the user.
 func SWHighlightCenterHighlightCollectionTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSWHighlightCenter), _sWHighlightCenterSelHighlightCollectionTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -136,4 +142,3 @@ func SWHighlightCenterIsSystemCollaborationSupportAvailable() bool {
 	_ret := objc.Send[bool](objc.ID(_clsSWHighlightCenter), _sWHighlightCenterSelIsSystemCollaborationSupportAvailable)
 	return _ret
 }
-

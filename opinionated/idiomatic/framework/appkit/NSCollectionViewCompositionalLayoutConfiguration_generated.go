@@ -18,7 +18,9 @@ type CollectionViewCompositionalLayoutConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.NSCollectionViewCompositionalLayoutConfiguration].
-func (x *CollectionViewCompositionalLayoutConfiguration) Unwrap() *raw.NSCollectionViewCompositionalLayoutConfiguration { return x.inner }
+func (x *CollectionViewCompositionalLayoutConfiguration) Unwrap() *raw.NSCollectionViewCompositionalLayoutConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -57,7 +59,9 @@ func (x *CollectionViewCompositionalLayoutConfiguration) WithBoundarySupplementa
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSCollectionLayoutBoundarySupplementaryItem](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -117,4 +121,3 @@ type CollectionViewCompositionalLayoutConfigurationable interface {
 }
 
 var _ CollectionViewCompositionalLayoutConfigurationable = (*CollectionViewCompositionalLayoutConfiguration)(nil)
-

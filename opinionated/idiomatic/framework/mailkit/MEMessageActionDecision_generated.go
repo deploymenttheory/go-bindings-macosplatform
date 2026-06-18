@@ -41,4 +41,3 @@ type MessageActionDecisionable interface {
 }
 
 var _ MessageActionDecisionable = (*MessageActionDecision)(nil)
-

@@ -22,25 +22,25 @@ func (o *PKPass) Ptr() objc.ID { return o.ptr }
 func (o *PKPass) InitPtr(id objc.ID) { o.ptr = id }
 
 var (
-	_clsPKPass = _objcClass("PKPass")
-	_pKPassSelInitWithDataError = objc.RegisterName("initWithData:error:")
+	_clsPKPass                          = _objcClass("PKPass")
+	_pKPassSelInitWithDataError         = objc.RegisterName("initWithData:error:")
 	_pKPassSelLocalizedValueForFieldKey = objc.RegisterName("localizedValueForFieldKey:")
-	_pKPassSelPassType = objc.RegisterName("passType")
-	_pKPassSelPaymentPass = objc.RegisterName("paymentPass")
-	_pKPassSelSecureElementPass = objc.RegisterName("secureElementPass")
-	_pKPassSelSerialNumber = objc.RegisterName("serialNumber")
-	_pKPassSelPassTypeIdentifier = objc.RegisterName("passTypeIdentifier")
-	_pKPassSelWebServiceURL = objc.RegisterName("webServiceURL")
-	_pKPassSelAuthenticationToken = objc.RegisterName("authenticationToken")
-	_pKPassSelLocalizedName = objc.RegisterName("localizedName")
-	_pKPassSelLocalizedDescription = objc.RegisterName("localizedDescription")
-	_pKPassSelOrganizationName = objc.RegisterName("organizationName")
-	_pKPassSelRelevantDate = objc.RegisterName("relevantDate")
-	_pKPassSelRelevantDates = objc.RegisterName("relevantDates")
-	_pKPassSelUserInfo = objc.RegisterName("userInfo")
-	_pKPassSelPassURL = objc.RegisterName("passURL")
-	_pKPassSelIsRemotePass = objc.RegisterName("isRemotePass")
-	_pKPassSelDeviceName = objc.RegisterName("deviceName")
+	_pKPassSelPassType                  = objc.RegisterName("passType")
+	_pKPassSelPaymentPass               = objc.RegisterName("paymentPass")
+	_pKPassSelSecureElementPass         = objc.RegisterName("secureElementPass")
+	_pKPassSelSerialNumber              = objc.RegisterName("serialNumber")
+	_pKPassSelPassTypeIdentifier        = objc.RegisterName("passTypeIdentifier")
+	_pKPassSelWebServiceURL             = objc.RegisterName("webServiceURL")
+	_pKPassSelAuthenticationToken       = objc.RegisterName("authenticationToken")
+	_pKPassSelLocalizedName             = objc.RegisterName("localizedName")
+	_pKPassSelLocalizedDescription      = objc.RegisterName("localizedDescription")
+	_pKPassSelOrganizationName          = objc.RegisterName("organizationName")
+	_pKPassSelRelevantDate              = objc.RegisterName("relevantDate")
+	_pKPassSelRelevantDates             = objc.RegisterName("relevantDates")
+	_pKPassSelUserInfo                  = objc.RegisterName("userInfo")
+	_pKPassSelPassURL                   = objc.RegisterName("passURL")
+	_pKPassSelIsRemotePass              = objc.RegisterName("isRemotePass")
+	_pKPassSelDeviceName                = objc.RegisterName("deviceName")
 )
 
 func PKPassFromID(id objc.ID) *PKPass {
@@ -56,7 +56,9 @@ func PKPassFromID(id objc.ID) *PKPass {
 func (o *PKPass) InitWithDataError(data *foundation.NSData) (*PKPass, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPassSelInitWithDataError, data.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -76,68 +78,90 @@ func (o *PKPass) PassType() PKPassType {
 // Deprecated: Use -[PKPass secureElementPass] instead
 func (o *PKPass) PaymentPass() *PKPaymentPass {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPassSelPaymentPass)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKPaymentPassFromID(_ret)
 }
 
 func (o *PKPass) SecureElementPass() *PKSecureElementPass {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPassSelSecureElementPass)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKSecureElementPassFromID(_ret)
 }
 
 func (o *PKPass) SerialNumber() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPassSelSerialNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKPass) PassTypeIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPassSelPassTypeIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKPass) WebServiceURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPassSelWebServiceURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *PKPass) AuthenticationToken() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPassSelAuthenticationToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKPass) LocalizedName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPassSelLocalizedName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKPass) LocalizedDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPassSelLocalizedDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKPass) OrganizationName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPassSelOrganizationName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Deprecated: Use relevantDates
 func (o *PKPass) RelevantDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPassSelRelevantDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *PKPass) RelevantDates() *foundation.NSArray[*PKPassRelevantDate] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPassSelRelevantDates)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PKPassRelevantDate](_ret)
 }
 
@@ -148,7 +172,9 @@ func (o *PKPass) UserInfo() *foundation.NSDictionary[objc.ID, objc.ID] {
 
 func (o *PKPass) PassURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPassSelPassURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -159,7 +185,8 @@ func (o *PKPass) IsRemotePass() bool {
 
 func (o *PKPass) DeviceName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPassSelDeviceName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

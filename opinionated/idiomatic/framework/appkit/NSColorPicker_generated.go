@@ -110,4 +110,3 @@ type ColorPickerable interface {
 }
 
 var _ ColorPickerable = (*ColorPicker)(nil)
-

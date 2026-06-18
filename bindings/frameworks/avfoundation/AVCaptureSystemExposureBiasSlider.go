@@ -15,8 +15,8 @@ type AVCaptureSystemExposureBiasSlider struct {
 }
 
 var (
-	_clsAVCaptureSystemExposureBiasSlider = _objcClass("AVCaptureSystemExposureBiasSlider")
-	_aVCaptureSystemExposureBiasSliderSelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsAVCaptureSystemExposureBiasSlider                     = _objcClass("AVCaptureSystemExposureBiasSlider")
+	_aVCaptureSystemExposureBiasSliderSelInitWithDevice       = objc.RegisterName("initWithDevice:")
 	_aVCaptureSystemExposureBiasSliderSelInitWithDeviceAction = objc.RegisterName("initWithDevice:action:")
 )
 
@@ -33,7 +33,9 @@ func AVCaptureSystemExposureBiasSliderFromID(id objc.ID) *AVCaptureSystemExposur
 // @method initWithDevice: @abstract Initializes an `AVCaptureSystemExposureBiasSlider` for controlling `device`. @param device The device to control. @discussion `AVCaptureSystemExposureBiasSlider` may only be initialized with `AVCaptureDevice` instances that support setting `exposureTargetBias`, otherwise an `NSInvalidArgumentException` is thrown.
 func (o *AVCaptureSystemExposureBiasSlider) InitWithDevice(device *AVCaptureDevice) *AVCaptureSystemExposureBiasSlider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureSystemExposureBiasSliderSelInitWithDevice, device.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureSystemExposureBiasSliderFromID(_ret)
 }
 
@@ -47,7 +49,8 @@ func (o *AVCaptureSystemExposureBiasSlider) InitWithDeviceAction(device *AVCaptu
 		defer __block_action.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureSystemExposureBiasSliderSelInitWithDeviceAction, device.Ptr(), __block_action)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureSystemExposureBiasSliderFromID(_ret)
 }
-

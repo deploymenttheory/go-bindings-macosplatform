@@ -20,32 +20,32 @@ type SCNView struct {
 }
 
 var (
-	_clsSCNView = _objcClass("SCNView")
-	_sCNViewSelInitWithFrameOptions = objc.RegisterName("initWithFrame:options:")
-	_sCNViewSelSnapshot = objc.RegisterName("snapshot")
-	_sCNViewSelPlay = objc.RegisterName("play:")
-	_sCNViewSelPause = objc.RegisterName("pause:")
-	_sCNViewSelStop = objc.RegisterName("stop:")
-	_sCNViewSelScene = objc.RegisterName("scene")
-	_sCNViewSelSetScene = objc.RegisterName("setScene:")
-	_sCNViewSelRendersContinuously = objc.RegisterName("rendersContinuously")
-	_sCNViewSelSetRendersContinuously = objc.RegisterName("setRendersContinuously:")
-	_sCNViewSelBackgroundColor = objc.RegisterName("backgroundColor")
-	_sCNViewSelSetBackgroundColor = objc.RegisterName("setBackgroundColor:")
-	_sCNViewSelAllowsCameraControl = objc.RegisterName("allowsCameraControl")
-	_sCNViewSelSetAllowsCameraControl = objc.RegisterName("setAllowsCameraControl:")
-	_sCNViewSelCameraControlConfiguration = objc.RegisterName("cameraControlConfiguration")
-	_sCNViewSelDefaultCameraController = objc.RegisterName("defaultCameraController")
-	_sCNViewSelPreferredFramesPerSecond = objc.RegisterName("preferredFramesPerSecond")
-	_sCNViewSelSetPreferredFramesPerSecond = objc.RegisterName("setPreferredFramesPerSecond:")
-	_sCNViewSelDrawableResizesAsynchronously = objc.RegisterName("drawableResizesAsynchronously")
+	_clsSCNView                                 = _objcClass("SCNView")
+	_sCNViewSelInitWithFrameOptions             = objc.RegisterName("initWithFrame:options:")
+	_sCNViewSelSnapshot                         = objc.RegisterName("snapshot")
+	_sCNViewSelPlay                             = objc.RegisterName("play:")
+	_sCNViewSelPause                            = objc.RegisterName("pause:")
+	_sCNViewSelStop                             = objc.RegisterName("stop:")
+	_sCNViewSelScene                            = objc.RegisterName("scene")
+	_sCNViewSelSetScene                         = objc.RegisterName("setScene:")
+	_sCNViewSelRendersContinuously              = objc.RegisterName("rendersContinuously")
+	_sCNViewSelSetRendersContinuously           = objc.RegisterName("setRendersContinuously:")
+	_sCNViewSelBackgroundColor                  = objc.RegisterName("backgroundColor")
+	_sCNViewSelSetBackgroundColor               = objc.RegisterName("setBackgroundColor:")
+	_sCNViewSelAllowsCameraControl              = objc.RegisterName("allowsCameraControl")
+	_sCNViewSelSetAllowsCameraControl           = objc.RegisterName("setAllowsCameraControl:")
+	_sCNViewSelCameraControlConfiguration       = objc.RegisterName("cameraControlConfiguration")
+	_sCNViewSelDefaultCameraController          = objc.RegisterName("defaultCameraController")
+	_sCNViewSelPreferredFramesPerSecond         = objc.RegisterName("preferredFramesPerSecond")
+	_sCNViewSelSetPreferredFramesPerSecond      = objc.RegisterName("setPreferredFramesPerSecond:")
+	_sCNViewSelDrawableResizesAsynchronously    = objc.RegisterName("drawableResizesAsynchronously")
 	_sCNViewSelSetDrawableResizesAsynchronously = objc.RegisterName("setDrawableResizesAsynchronously:")
-	_sCNViewSelOpenGLContext = objc.RegisterName("openGLContext")
-	_sCNViewSelSetOpenGLContext = objc.RegisterName("setOpenGLContext:")
-	_sCNViewSelAntialiasingMode = objc.RegisterName("antialiasingMode")
-	_sCNViewSelSetAntialiasingMode = objc.RegisterName("setAntialiasingMode:")
-	_sCNViewSelPixelFormat = objc.RegisterName("pixelFormat")
-	_sCNViewSelSetPixelFormat = objc.RegisterName("setPixelFormat:")
+	_sCNViewSelOpenGLContext                    = objc.RegisterName("openGLContext")
+	_sCNViewSelSetOpenGLContext                 = objc.RegisterName("setOpenGLContext:")
+	_sCNViewSelAntialiasingMode                 = objc.RegisterName("antialiasingMode")
+	_sCNViewSelSetAntialiasingMode              = objc.RegisterName("setAntialiasingMode:")
+	_sCNViewSelPixelFormat                      = objc.RegisterName("pixelFormat")
+	_sCNViewSelSetPixelFormat                   = objc.RegisterName("setPixelFormat:")
 )
 
 func SCNViewFromID(id objc.ID) *SCNView {
@@ -61,14 +61,18 @@ func SCNViewFromID(id objc.ID) *SCNView {
 // @method initWithFrame:options: @abstract Initializes and returns a newly allocated SCNView object with a specified frame rectangle. @param frame The frame rectangle for the created view object. @param options An optional dictionary. See "View initialization options" above.
 func (o *SCNView) InitWithFrameOptions(frame corefoundation.CGRect, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *SCNView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNViewSelInitWithFrameOptions, frame, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNViewFromID(_ret)
 }
 
 // @property snapshot @abstract Draws the contents of the view and returns them as a new image object @discussion This method is thread-safe and may be called at any time.
 func (o *SCNView) Snapshot() *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNViewSelSnapshot)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSImageFromID(_ret)
 }
 
@@ -90,7 +94,9 @@ func (o *SCNView) Stop(sender objc.ID) {
 // @property scene @abstract Specifies the scene of the receiver
 func (o *SCNView) Scene() *SCNScene {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNViewSelScene)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNSceneFromID(_ret)
 }
 
@@ -111,7 +117,9 @@ func (o *SCNView) SetRendersContinuously(rendersContinuously bool) {
 // @property backgroundColor @abstract Specifies the background color of the receiver. Defaults to opaque white.
 func (o *SCNView) BackgroundColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNViewSelBackgroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -138,7 +146,9 @@ func (o *SCNView) CameraControlConfiguration() SCNCameraControlConfiguration {
 // @property defaultCameraController @abstract Returns the default SCNCameraController used to drive the current point of view when allowCameraController is set to YES.
 func (o *SCNView) DefaultCameraController() *SCNCameraController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNViewSelDefaultCameraController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNCameraControllerFromID(_ret)
 }
 
@@ -191,4 +201,3 @@ func (o *SCNView) PixelFormat() unsafe.Pointer {
 func (o *SCNView) SetPixelFormat(pixelFormat unsafe.Pointer) {
 	o.Ptr().Send(_sCNViewSelSetPixelFormat, pixelFormat)
 }
-

@@ -18,7 +18,7 @@ type DDMatch struct {
 }
 
 var (
-	_clsDDMatch = _objcClass("DDMatch")
+	_clsDDMatch              = _objcClass("DDMatch")
 	_dDMatchSelMatchedString = objc.RegisterName("matchedString")
 )
 
@@ -35,7 +35,8 @@ func DDMatchFromID(id objc.ID) *DDMatch {
 // A substring that the data detection system identifies from an original string as a common type of data. Use `DDMatch` subclasses that the data detection system provides for a semantic interpretation of this string.
 func (o *DDMatch) MatchedString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDMatchSelMatchedString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

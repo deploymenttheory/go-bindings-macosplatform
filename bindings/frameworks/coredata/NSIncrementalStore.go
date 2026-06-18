@@ -18,16 +18,16 @@ type NSIncrementalStore struct {
 }
 
 var (
-	_clsNSIncrementalStore = _objcClass("NSIncrementalStore")
-	_nSIncrementalStoreSelExecuteRequestWithContextError = objc.RegisterName("executeRequest:withContext:error:")
-	_nSIncrementalStoreSelNewValuesForObjectWithIDWithContextError = objc.RegisterName("newValuesForObjectWithID:withContext:error:")
+	_clsNSIncrementalStore                                                       = _objcClass("NSIncrementalStore")
+	_nSIncrementalStoreSelExecuteRequestWithContextError                         = objc.RegisterName("executeRequest:withContext:error:")
+	_nSIncrementalStoreSelNewValuesForObjectWithIDWithContextError               = objc.RegisterName("newValuesForObjectWithID:withContext:error:")
 	_nSIncrementalStoreSelNewValueForRelationshipForObjectWithIDWithContextError = objc.RegisterName("newValueForRelationship:forObjectWithID:withContext:error:")
-	_nSIncrementalStoreSelIdentifierForNewStoreAtURL = objc.RegisterName("identifierForNewStoreAtURL:")
-	_nSIncrementalStoreSelObtainPermanentIDsForObjectsError = objc.RegisterName("obtainPermanentIDsForObjects:error:")
-	_nSIncrementalStoreSelManagedObjectContextDidRegisterObjectsWithIDs = objc.RegisterName("managedObjectContextDidRegisterObjectsWithIDs:")
-	_nSIncrementalStoreSelManagedObjectContextDidUnregisterObjectsWithIDs = objc.RegisterName("managedObjectContextDidUnregisterObjectsWithIDs:")
-	_nSIncrementalStoreSelNewObjectIDForEntityReferenceObject = objc.RegisterName("newObjectIDForEntity:referenceObject:")
-	_nSIncrementalStoreSelReferenceObjectForObjectID = objc.RegisterName("referenceObjectForObjectID:")
+	_nSIncrementalStoreSelIdentifierForNewStoreAtURL                             = objc.RegisterName("identifierForNewStoreAtURL:")
+	_nSIncrementalStoreSelObtainPermanentIDsForObjectsError                      = objc.RegisterName("obtainPermanentIDsForObjects:error:")
+	_nSIncrementalStoreSelManagedObjectContextDidRegisterObjectsWithIDs          = objc.RegisterName("managedObjectContextDidRegisterObjectsWithIDs:")
+	_nSIncrementalStoreSelManagedObjectContextDidUnregisterObjectsWithIDs        = objc.RegisterName("managedObjectContextDidUnregisterObjectsWithIDs:")
+	_nSIncrementalStoreSelNewObjectIDForEntityReferenceObject                    = objc.RegisterName("newObjectIDForEntity:referenceObject:")
+	_nSIncrementalStoreSelReferenceObjectForObjectID                             = objc.RegisterName("referenceObjectForObjectID:")
 )
 
 func NSIncrementalStoreFromID(id objc.ID) *NSIncrementalStore {
@@ -75,7 +75,9 @@ func NSIncrementalStoreIdentifierForNewStoreAtURL(storeURL *foundation.NSURL) ob
 func (o *NSIncrementalStore) ObtainPermanentIDsForObjectsError(array *foundation.NSArray[*NSManagedObject]) (*foundation.NSArray[*NSManagedObjectID], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIncrementalStoreSelObtainPermanentIDsForObjectsError, array.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -99,4 +101,3 @@ func (o *NSIncrementalStore) ReferenceObjectForObjectID(objectID *NSManagedObjec
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIncrementalStoreSelReferenceObjectForObjectID, objectID.Ptr())
 	return _ret
 }
-

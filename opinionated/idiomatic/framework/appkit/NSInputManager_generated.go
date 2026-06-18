@@ -120,4 +120,3 @@ type InputManagerable interface {
 }
 
 var _ InputManagerable = (*InputManager)(nil)
-

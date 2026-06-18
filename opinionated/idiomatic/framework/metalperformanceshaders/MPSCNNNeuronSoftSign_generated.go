@@ -100,11 +100,17 @@ func (x *CNNNeuronSoftSign) WithLabel(label string) *CNNNeuronSoftSign {
 	return x
 }
 
-func (x *CNNNeuronSoftSign) asCNNNeuron() *mpsneuralnetwork.MPSCNNNeuron { return &x.inner.MPSCNNNeuron }
+func (x *CNNNeuronSoftSign) asCNNNeuron() *mpsneuralnetwork.MPSCNNNeuron {
+	return &x.inner.MPSCNNNeuron
+}
 
-func (x *CNNNeuronSoftSign) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel }
+func (x *CNNNeuronSoftSign) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNNeuron.MPSCNNKernel
+}
 
-func (x *CNNNeuronSoftSign) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel }
+func (x *CNNNeuronSoftSign) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel
+}
 
 // CNNNeuronSoftSignable is the interface implemented by [CNNNeuronSoftSign], for mocking and DI.
 type CNNNeuronSoftSignable interface {
@@ -122,4 +128,3 @@ type CNNNeuronSoftSignable interface {
 }
 
 var _ CNNNeuronSoftSignable = (*CNNNeuronSoftSign)(nil)
-

@@ -14,8 +14,8 @@ import (
 
 var (
 	_videotoolboxLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce        sync.Once
+	_failedSymbols   = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -48,82 +48,226 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("VTCompressionSessionBeginPass", func() { purego.RegisterLibFunc(&_fnVTCompressionSessionBeginPass, _videotoolboxLib, "VTCompressionSessionBeginPass") })
-	_register("VTCompressionSessionCompleteFrames", func() { purego.RegisterLibFunc(&_fnVTCompressionSessionCompleteFrames, _videotoolboxLib, "VTCompressionSessionCompleteFrames") })
-	_register("VTCompressionSessionCreate", func() { purego.RegisterLibFunc(&_fnVTCompressionSessionCreate, _videotoolboxLib, "VTCompressionSessionCreate") })
-	_register("VTCompressionSessionEncodeFrame", func() { purego.RegisterLibFunc(&_fnVTCompressionSessionEncodeFrame, _videotoolboxLib, "VTCompressionSessionEncodeFrame") })
-	_register("VTCompressionSessionEncodeFrameWithOutputHandler", func() { purego.RegisterLibFunc(&_fnVTCompressionSessionEncodeFrameWithOutputHandler, _videotoolboxLib, "VTCompressionSessionEncodeFrameWithOutputHandler") })
-	_register("VTCompressionSessionEncodeMultiImageFrame", func() { purego.RegisterLibFunc(&_fnVTCompressionSessionEncodeMultiImageFrame, _videotoolboxLib, "VTCompressionSessionEncodeMultiImageFrame") })
-	_register("VTCompressionSessionEncodeMultiImageFrameWithOutputHandler", func() { purego.RegisterLibFunc(&_fnVTCompressionSessionEncodeMultiImageFrameWithOutputHandler, _videotoolboxLib, "VTCompressionSessionEncodeMultiImageFrameWithOutputHandler") })
-	_register("VTCompressionSessionEndPass", func() { purego.RegisterLibFunc(&_fnVTCompressionSessionEndPass, _videotoolboxLib, "VTCompressionSessionEndPass") })
-	_register("VTCompressionSessionGetPixelBufferPool", func() { purego.RegisterLibFunc(&_fnVTCompressionSessionGetPixelBufferPool, _videotoolboxLib, "VTCompressionSessionGetPixelBufferPool") })
-	_register("VTCompressionSessionGetTimeRangesForNextPass", func() { purego.RegisterLibFunc(&_fnVTCompressionSessionGetTimeRangesForNextPass, _videotoolboxLib, "VTCompressionSessionGetTimeRangesForNextPass") })
-	_register("VTCompressionSessionGetTypeID", func() { purego.RegisterLibFunc(&_fnVTCompressionSessionGetTypeID, _videotoolboxLib, "VTCompressionSessionGetTypeID") })
-	_register("VTCompressionSessionInvalidate", func() { purego.RegisterLibFunc(&_fnVTCompressionSessionInvalidate, _videotoolboxLib, "VTCompressionSessionInvalidate") })
-	_register("VTCompressionSessionPrepareToEncodeFrames", func() { purego.RegisterLibFunc(&_fnVTCompressionSessionPrepareToEncodeFrames, _videotoolboxLib, "VTCompressionSessionPrepareToEncodeFrames") })
-	_register("VTCopyRAWProcessorExtensionProperties", func() { purego.RegisterLibFunc(&_fnVTCopyRAWProcessorExtensionProperties, _videotoolboxLib, "VTCopyRAWProcessorExtensionProperties") })
-	_register("VTCopySupportedPropertyDictionaryForEncoder", func() { purego.RegisterLibFunc(&_fnVTCopySupportedPropertyDictionaryForEncoder, _videotoolboxLib, "VTCopySupportedPropertyDictionaryForEncoder") })
-	_register("VTCopyVideoDecoderExtensionProperties", func() { purego.RegisterLibFunc(&_fnVTCopyVideoDecoderExtensionProperties, _videotoolboxLib, "VTCopyVideoDecoderExtensionProperties") })
+	_register("VTCompressionSessionBeginPass", func() {
+		purego.RegisterLibFunc(&_fnVTCompressionSessionBeginPass, _videotoolboxLib, "VTCompressionSessionBeginPass")
+	})
+	_register("VTCompressionSessionCompleteFrames", func() {
+		purego.RegisterLibFunc(&_fnVTCompressionSessionCompleteFrames, _videotoolboxLib, "VTCompressionSessionCompleteFrames")
+	})
+	_register("VTCompressionSessionCreate", func() {
+		purego.RegisterLibFunc(&_fnVTCompressionSessionCreate, _videotoolboxLib, "VTCompressionSessionCreate")
+	})
+	_register("VTCompressionSessionEncodeFrame", func() {
+		purego.RegisterLibFunc(&_fnVTCompressionSessionEncodeFrame, _videotoolboxLib, "VTCompressionSessionEncodeFrame")
+	})
+	_register("VTCompressionSessionEncodeFrameWithOutputHandler", func() {
+		purego.RegisterLibFunc(&_fnVTCompressionSessionEncodeFrameWithOutputHandler, _videotoolboxLib, "VTCompressionSessionEncodeFrameWithOutputHandler")
+	})
+	_register("VTCompressionSessionEncodeMultiImageFrame", func() {
+		purego.RegisterLibFunc(&_fnVTCompressionSessionEncodeMultiImageFrame, _videotoolboxLib, "VTCompressionSessionEncodeMultiImageFrame")
+	})
+	_register("VTCompressionSessionEncodeMultiImageFrameWithOutputHandler", func() {
+		purego.RegisterLibFunc(&_fnVTCompressionSessionEncodeMultiImageFrameWithOutputHandler, _videotoolboxLib, "VTCompressionSessionEncodeMultiImageFrameWithOutputHandler")
+	})
+	_register("VTCompressionSessionEndPass", func() {
+		purego.RegisterLibFunc(&_fnVTCompressionSessionEndPass, _videotoolboxLib, "VTCompressionSessionEndPass")
+	})
+	_register("VTCompressionSessionGetPixelBufferPool", func() {
+		purego.RegisterLibFunc(&_fnVTCompressionSessionGetPixelBufferPool, _videotoolboxLib, "VTCompressionSessionGetPixelBufferPool")
+	})
+	_register("VTCompressionSessionGetTimeRangesForNextPass", func() {
+		purego.RegisterLibFunc(&_fnVTCompressionSessionGetTimeRangesForNextPass, _videotoolboxLib, "VTCompressionSessionGetTimeRangesForNextPass")
+	})
+	_register("VTCompressionSessionGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnVTCompressionSessionGetTypeID, _videotoolboxLib, "VTCompressionSessionGetTypeID")
+	})
+	_register("VTCompressionSessionInvalidate", func() {
+		purego.RegisterLibFunc(&_fnVTCompressionSessionInvalidate, _videotoolboxLib, "VTCompressionSessionInvalidate")
+	})
+	_register("VTCompressionSessionPrepareToEncodeFrames", func() {
+		purego.RegisterLibFunc(&_fnVTCompressionSessionPrepareToEncodeFrames, _videotoolboxLib, "VTCompressionSessionPrepareToEncodeFrames")
+	})
+	_register("VTCopyRAWProcessorExtensionProperties", func() {
+		purego.RegisterLibFunc(&_fnVTCopyRAWProcessorExtensionProperties, _videotoolboxLib, "VTCopyRAWProcessorExtensionProperties")
+	})
+	_register("VTCopySupportedPropertyDictionaryForEncoder", func() {
+		purego.RegisterLibFunc(&_fnVTCopySupportedPropertyDictionaryForEncoder, _videotoolboxLib, "VTCopySupportedPropertyDictionaryForEncoder")
+	})
+	_register("VTCopyVideoDecoderExtensionProperties", func() {
+		purego.RegisterLibFunc(&_fnVTCopyVideoDecoderExtensionProperties, _videotoolboxLib, "VTCopyVideoDecoderExtensionProperties")
+	})
 	_register("VTCopyVideoEncoderList", func() { purego.RegisterLibFunc(&_fnVTCopyVideoEncoderList, _videotoolboxLib, "VTCopyVideoEncoderList") })
-	_register("VTCreateCGImageFromCVPixelBuffer", func() { purego.RegisterLibFunc(&_fnVTCreateCGImageFromCVPixelBuffer, _videotoolboxLib, "VTCreateCGImageFromCVPixelBuffer") })
-	_register("VTDecompressionSessionCanAcceptFormatDescription", func() { purego.RegisterLibFunc(&_fnVTDecompressionSessionCanAcceptFormatDescription, _videotoolboxLib, "VTDecompressionSessionCanAcceptFormatDescription") })
-	_register("VTDecompressionSessionCopyBlackPixelBuffer", func() { purego.RegisterLibFunc(&_fnVTDecompressionSessionCopyBlackPixelBuffer, _videotoolboxLib, "VTDecompressionSessionCopyBlackPixelBuffer") })
-	_register("VTDecompressionSessionCreate", func() { purego.RegisterLibFunc(&_fnVTDecompressionSessionCreate, _videotoolboxLib, "VTDecompressionSessionCreate") })
-	_register("VTDecompressionSessionDecodeFrame", func() { purego.RegisterLibFunc(&_fnVTDecompressionSessionDecodeFrame, _videotoolboxLib, "VTDecompressionSessionDecodeFrame") })
-	_register("VTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler", func() { purego.RegisterLibFunc(&_fnVTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler, _videotoolboxLib, "VTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler") })
-	_register("VTDecompressionSessionDecodeFrameWithOptions", func() { purego.RegisterLibFunc(&_fnVTDecompressionSessionDecodeFrameWithOptions, _videotoolboxLib, "VTDecompressionSessionDecodeFrameWithOptions") })
-	_register("VTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler", func() { purego.RegisterLibFunc(&_fnVTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler, _videotoolboxLib, "VTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler") })
-	_register("VTDecompressionSessionDecodeFrameWithOutputHandler", func() { purego.RegisterLibFunc(&_fnVTDecompressionSessionDecodeFrameWithOutputHandler, _videotoolboxLib, "VTDecompressionSessionDecodeFrameWithOutputHandler") })
-	_register("VTDecompressionSessionFinishDelayedFrames", func() { purego.RegisterLibFunc(&_fnVTDecompressionSessionFinishDelayedFrames, _videotoolboxLib, "VTDecompressionSessionFinishDelayedFrames") })
-	_register("VTDecompressionSessionGetTypeID", func() { purego.RegisterLibFunc(&_fnVTDecompressionSessionGetTypeID, _videotoolboxLib, "VTDecompressionSessionGetTypeID") })
-	_register("VTDecompressionSessionInvalidate", func() { purego.RegisterLibFunc(&_fnVTDecompressionSessionInvalidate, _videotoolboxLib, "VTDecompressionSessionInvalidate") })
-	_register("VTDecompressionSessionSetMultiImageCallback", func() { purego.RegisterLibFunc(&_fnVTDecompressionSessionSetMultiImageCallback, _videotoolboxLib, "VTDecompressionSessionSetMultiImageCallback") })
-	_register("VTDecompressionSessionWaitForAsynchronousFrames", func() { purego.RegisterLibFunc(&_fnVTDecompressionSessionWaitForAsynchronousFrames, _videotoolboxLib, "VTDecompressionSessionWaitForAsynchronousFrames") })
-	_register("VTFrameSiloAddSampleBuffer", func() { purego.RegisterLibFunc(&_fnVTFrameSiloAddSampleBuffer, _videotoolboxLib, "VTFrameSiloAddSampleBuffer") })
-	_register("VTFrameSiloCallBlockForEachSampleBuffer", func() { purego.RegisterLibFunc(&_fnVTFrameSiloCallBlockForEachSampleBuffer, _videotoolboxLib, "VTFrameSiloCallBlockForEachSampleBuffer") })
-	_register("VTFrameSiloCallFunctionForEachSampleBuffer", func() { purego.RegisterLibFunc(&_fnVTFrameSiloCallFunctionForEachSampleBuffer, _videotoolboxLib, "VTFrameSiloCallFunctionForEachSampleBuffer") })
+	_register("VTCreateCGImageFromCVPixelBuffer", func() {
+		purego.RegisterLibFunc(&_fnVTCreateCGImageFromCVPixelBuffer, _videotoolboxLib, "VTCreateCGImageFromCVPixelBuffer")
+	})
+	_register("VTDecompressionSessionCanAcceptFormatDescription", func() {
+		purego.RegisterLibFunc(&_fnVTDecompressionSessionCanAcceptFormatDescription, _videotoolboxLib, "VTDecompressionSessionCanAcceptFormatDescription")
+	})
+	_register("VTDecompressionSessionCopyBlackPixelBuffer", func() {
+		purego.RegisterLibFunc(&_fnVTDecompressionSessionCopyBlackPixelBuffer, _videotoolboxLib, "VTDecompressionSessionCopyBlackPixelBuffer")
+	})
+	_register("VTDecompressionSessionCreate", func() {
+		purego.RegisterLibFunc(&_fnVTDecompressionSessionCreate, _videotoolboxLib, "VTDecompressionSessionCreate")
+	})
+	_register("VTDecompressionSessionDecodeFrame", func() {
+		purego.RegisterLibFunc(&_fnVTDecompressionSessionDecodeFrame, _videotoolboxLib, "VTDecompressionSessionDecodeFrame")
+	})
+	_register("VTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler", func() {
+		purego.RegisterLibFunc(&_fnVTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler, _videotoolboxLib, "VTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler")
+	})
+	_register("VTDecompressionSessionDecodeFrameWithOptions", func() {
+		purego.RegisterLibFunc(&_fnVTDecompressionSessionDecodeFrameWithOptions, _videotoolboxLib, "VTDecompressionSessionDecodeFrameWithOptions")
+	})
+	_register("VTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler", func() {
+		purego.RegisterLibFunc(&_fnVTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler, _videotoolboxLib, "VTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler")
+	})
+	_register("VTDecompressionSessionDecodeFrameWithOutputHandler", func() {
+		purego.RegisterLibFunc(&_fnVTDecompressionSessionDecodeFrameWithOutputHandler, _videotoolboxLib, "VTDecompressionSessionDecodeFrameWithOutputHandler")
+	})
+	_register("VTDecompressionSessionFinishDelayedFrames", func() {
+		purego.RegisterLibFunc(&_fnVTDecompressionSessionFinishDelayedFrames, _videotoolboxLib, "VTDecompressionSessionFinishDelayedFrames")
+	})
+	_register("VTDecompressionSessionGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnVTDecompressionSessionGetTypeID, _videotoolboxLib, "VTDecompressionSessionGetTypeID")
+	})
+	_register("VTDecompressionSessionInvalidate", func() {
+		purego.RegisterLibFunc(&_fnVTDecompressionSessionInvalidate, _videotoolboxLib, "VTDecompressionSessionInvalidate")
+	})
+	_register("VTDecompressionSessionSetMultiImageCallback", func() {
+		purego.RegisterLibFunc(&_fnVTDecompressionSessionSetMultiImageCallback, _videotoolboxLib, "VTDecompressionSessionSetMultiImageCallback")
+	})
+	_register("VTDecompressionSessionWaitForAsynchronousFrames", func() {
+		purego.RegisterLibFunc(&_fnVTDecompressionSessionWaitForAsynchronousFrames, _videotoolboxLib, "VTDecompressionSessionWaitForAsynchronousFrames")
+	})
+	_register("VTFrameSiloAddSampleBuffer", func() {
+		purego.RegisterLibFunc(&_fnVTFrameSiloAddSampleBuffer, _videotoolboxLib, "VTFrameSiloAddSampleBuffer")
+	})
+	_register("VTFrameSiloCallBlockForEachSampleBuffer", func() {
+		purego.RegisterLibFunc(&_fnVTFrameSiloCallBlockForEachSampleBuffer, _videotoolboxLib, "VTFrameSiloCallBlockForEachSampleBuffer")
+	})
+	_register("VTFrameSiloCallFunctionForEachSampleBuffer", func() {
+		purego.RegisterLibFunc(&_fnVTFrameSiloCallFunctionForEachSampleBuffer, _videotoolboxLib, "VTFrameSiloCallFunctionForEachSampleBuffer")
+	})
 	_register("VTFrameSiloCreate", func() { purego.RegisterLibFunc(&_fnVTFrameSiloCreate, _videotoolboxLib, "VTFrameSiloCreate") })
-	_register("VTFrameSiloGetProgressOfCurrentPass", func() { purego.RegisterLibFunc(&_fnVTFrameSiloGetProgressOfCurrentPass, _videotoolboxLib, "VTFrameSiloGetProgressOfCurrentPass") })
+	_register("VTFrameSiloGetProgressOfCurrentPass", func() {
+		purego.RegisterLibFunc(&_fnVTFrameSiloGetProgressOfCurrentPass, _videotoolboxLib, "VTFrameSiloGetProgressOfCurrentPass")
+	})
 	_register("VTFrameSiloGetTypeID", func() { purego.RegisterLibFunc(&_fnVTFrameSiloGetTypeID, _videotoolboxLib, "VTFrameSiloGetTypeID") })
-	_register("VTFrameSiloSetTimeRangesForNextPass", func() { purego.RegisterLibFunc(&_fnVTFrameSiloSetTimeRangesForNextPass, _videotoolboxLib, "VTFrameSiloSetTimeRangesForNextPass") })
-	_register("VTHDRPerFrameMetadataGenerationSessionAttachMetadata", func() { purego.RegisterLibFunc(&_fnVTHDRPerFrameMetadataGenerationSessionAttachMetadata, _videotoolboxLib, "VTHDRPerFrameMetadataGenerationSessionAttachMetadata") })
-	_register("VTHDRPerFrameMetadataGenerationSessionCreate", func() { purego.RegisterLibFunc(&_fnVTHDRPerFrameMetadataGenerationSessionCreate, _videotoolboxLib, "VTHDRPerFrameMetadataGenerationSessionCreate") })
-	_register("VTHDRPerFrameMetadataGenerationSessionGetTypeID", func() { purego.RegisterLibFunc(&_fnVTHDRPerFrameMetadataGenerationSessionGetTypeID, _videotoolboxLib, "VTHDRPerFrameMetadataGenerationSessionGetTypeID") })
-	_register("VTIsHardwareDecodeSupported", func() { purego.RegisterLibFunc(&_fnVTIsHardwareDecodeSupported, _videotoolboxLib, "VTIsHardwareDecodeSupported") })
-	_register("VTIsStereoMVHEVCDecodeSupported", func() { purego.RegisterLibFunc(&_fnVTIsStereoMVHEVCDecodeSupported, _videotoolboxLib, "VTIsStereoMVHEVCDecodeSupported") })
-	_register("VTIsStereoMVHEVCEncodeSupported", func() { purego.RegisterLibFunc(&_fnVTIsStereoMVHEVCEncodeSupported, _videotoolboxLib, "VTIsStereoMVHEVCEncodeSupported") })
-	_register("VTMotionEstimationSessionCompleteFrames", func() { purego.RegisterLibFunc(&_fnVTMotionEstimationSessionCompleteFrames, _videotoolboxLib, "VTMotionEstimationSessionCompleteFrames") })
-	_register("VTMotionEstimationSessionCopySourcePixelBufferAttributes", func() { purego.RegisterLibFunc(&_fnVTMotionEstimationSessionCopySourcePixelBufferAttributes, _videotoolboxLib, "VTMotionEstimationSessionCopySourcePixelBufferAttributes") })
-	_register("VTMotionEstimationSessionCreate", func() { purego.RegisterLibFunc(&_fnVTMotionEstimationSessionCreate, _videotoolboxLib, "VTMotionEstimationSessionCreate") })
-	_register("VTMotionEstimationSessionEstimateMotionVectors", func() { purego.RegisterLibFunc(&_fnVTMotionEstimationSessionEstimateMotionVectors, _videotoolboxLib, "VTMotionEstimationSessionEstimateMotionVectors") })
-	_register("VTMotionEstimationSessionGetTypeID", func() { purego.RegisterLibFunc(&_fnVTMotionEstimationSessionGetTypeID, _videotoolboxLib, "VTMotionEstimationSessionGetTypeID") })
-	_register("VTMotionEstimationSessionInvalidate", func() { purego.RegisterLibFunc(&_fnVTMotionEstimationSessionInvalidate, _videotoolboxLib, "VTMotionEstimationSessionInvalidate") })
-	_register("VTMultiPassStorageClose", func() { purego.RegisterLibFunc(&_fnVTMultiPassStorageClose, _videotoolboxLib, "VTMultiPassStorageClose") })
-	_register("VTMultiPassStorageCreate", func() { purego.RegisterLibFunc(&_fnVTMultiPassStorageCreate, _videotoolboxLib, "VTMultiPassStorageCreate") })
-	_register("VTMultiPassStorageGetTypeID", func() { purego.RegisterLibFunc(&_fnVTMultiPassStorageGetTypeID, _videotoolboxLib, "VTMultiPassStorageGetTypeID") })
-	_register("VTPixelRotationSessionCreate", func() { purego.RegisterLibFunc(&_fnVTPixelRotationSessionCreate, _videotoolboxLib, "VTPixelRotationSessionCreate") })
-	_register("VTPixelRotationSessionGetTypeID", func() { purego.RegisterLibFunc(&_fnVTPixelRotationSessionGetTypeID, _videotoolboxLib, "VTPixelRotationSessionGetTypeID") })
-	_register("VTPixelRotationSessionInvalidate", func() { purego.RegisterLibFunc(&_fnVTPixelRotationSessionInvalidate, _videotoolboxLib, "VTPixelRotationSessionInvalidate") })
-	_register("VTPixelRotationSessionRotateImage", func() { purego.RegisterLibFunc(&_fnVTPixelRotationSessionRotateImage, _videotoolboxLib, "VTPixelRotationSessionRotateImage") })
-	_register("VTPixelTransferSessionCreate", func() { purego.RegisterLibFunc(&_fnVTPixelTransferSessionCreate, _videotoolboxLib, "VTPixelTransferSessionCreate") })
-	_register("VTPixelTransferSessionGetTypeID", func() { purego.RegisterLibFunc(&_fnVTPixelTransferSessionGetTypeID, _videotoolboxLib, "VTPixelTransferSessionGetTypeID") })
-	_register("VTPixelTransferSessionInvalidate", func() { purego.RegisterLibFunc(&_fnVTPixelTransferSessionInvalidate, _videotoolboxLib, "VTPixelTransferSessionInvalidate") })
-	_register("VTPixelTransferSessionTransferImage", func() { purego.RegisterLibFunc(&_fnVTPixelTransferSessionTransferImage, _videotoolboxLib, "VTPixelTransferSessionTransferImage") })
-	_register("VTRAWProcessingSessionCompleteFrames", func() { purego.RegisterLibFunc(&_fnVTRAWProcessingSessionCompleteFrames, _videotoolboxLib, "VTRAWProcessingSessionCompleteFrames") })
-	_register("VTRAWProcessingSessionCopyProcessingParameters", func() { purego.RegisterLibFunc(&_fnVTRAWProcessingSessionCopyProcessingParameters, _videotoolboxLib, "VTRAWProcessingSessionCopyProcessingParameters") })
-	_register("VTRAWProcessingSessionCreate", func() { purego.RegisterLibFunc(&_fnVTRAWProcessingSessionCreate, _videotoolboxLib, "VTRAWProcessingSessionCreate") })
-	_register("VTRAWProcessingSessionGetTypeID", func() { purego.RegisterLibFunc(&_fnVTRAWProcessingSessionGetTypeID, _videotoolboxLib, "VTRAWProcessingSessionGetTypeID") })
-	_register("VTRAWProcessingSessionInvalidate", func() { purego.RegisterLibFunc(&_fnVTRAWProcessingSessionInvalidate, _videotoolboxLib, "VTRAWProcessingSessionInvalidate") })
-	_register("VTRAWProcessingSessionProcessFrame", func() { purego.RegisterLibFunc(&_fnVTRAWProcessingSessionProcessFrame, _videotoolboxLib, "VTRAWProcessingSessionProcessFrame") })
-	_register("VTRAWProcessingSessionSetParameterChangedHander", func() { purego.RegisterLibFunc(&_fnVTRAWProcessingSessionSetParameterChangedHander, _videotoolboxLib, "VTRAWProcessingSessionSetParameterChangedHander") })
-	_register("VTRAWProcessingSessionSetParameterChangedHandler", func() { purego.RegisterLibFunc(&_fnVTRAWProcessingSessionSetParameterChangedHandler, _videotoolboxLib, "VTRAWProcessingSessionSetParameterChangedHandler") })
-	_register("VTRAWProcessingSessionSetProcessingParameters", func() { purego.RegisterLibFunc(&_fnVTRAWProcessingSessionSetProcessingParameters, _videotoolboxLib, "VTRAWProcessingSessionSetProcessingParameters") })
-	_register("VTRegisterProfessionalVideoWorkflowVideoDecoders", func() { purego.RegisterLibFunc(&_fnVTRegisterProfessionalVideoWorkflowVideoDecoders, _videotoolboxLib, "VTRegisterProfessionalVideoWorkflowVideoDecoders") })
-	_register("VTRegisterProfessionalVideoWorkflowVideoEncoders", func() { purego.RegisterLibFunc(&_fnVTRegisterProfessionalVideoWorkflowVideoEncoders, _videotoolboxLib, "VTRegisterProfessionalVideoWorkflowVideoEncoders") })
-	_register("VTRegisterSupplementalVideoDecoderIfAvailable", func() { purego.RegisterLibFunc(&_fnVTRegisterSupplementalVideoDecoderIfAvailable, _videotoolboxLib, "VTRegisterSupplementalVideoDecoderIfAvailable") })
+	_register("VTFrameSiloSetTimeRangesForNextPass", func() {
+		purego.RegisterLibFunc(&_fnVTFrameSiloSetTimeRangesForNextPass, _videotoolboxLib, "VTFrameSiloSetTimeRangesForNextPass")
+	})
+	_register("VTHDRPerFrameMetadataGenerationSessionAttachMetadata", func() {
+		purego.RegisterLibFunc(&_fnVTHDRPerFrameMetadataGenerationSessionAttachMetadata, _videotoolboxLib, "VTHDRPerFrameMetadataGenerationSessionAttachMetadata")
+	})
+	_register("VTHDRPerFrameMetadataGenerationSessionCreate", func() {
+		purego.RegisterLibFunc(&_fnVTHDRPerFrameMetadataGenerationSessionCreate, _videotoolboxLib, "VTHDRPerFrameMetadataGenerationSessionCreate")
+	})
+	_register("VTHDRPerFrameMetadataGenerationSessionGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnVTHDRPerFrameMetadataGenerationSessionGetTypeID, _videotoolboxLib, "VTHDRPerFrameMetadataGenerationSessionGetTypeID")
+	})
+	_register("VTIsHardwareDecodeSupported", func() {
+		purego.RegisterLibFunc(&_fnVTIsHardwareDecodeSupported, _videotoolboxLib, "VTIsHardwareDecodeSupported")
+	})
+	_register("VTIsStereoMVHEVCDecodeSupported", func() {
+		purego.RegisterLibFunc(&_fnVTIsStereoMVHEVCDecodeSupported, _videotoolboxLib, "VTIsStereoMVHEVCDecodeSupported")
+	})
+	_register("VTIsStereoMVHEVCEncodeSupported", func() {
+		purego.RegisterLibFunc(&_fnVTIsStereoMVHEVCEncodeSupported, _videotoolboxLib, "VTIsStereoMVHEVCEncodeSupported")
+	})
+	_register("VTMotionEstimationSessionCompleteFrames", func() {
+		purego.RegisterLibFunc(&_fnVTMotionEstimationSessionCompleteFrames, _videotoolboxLib, "VTMotionEstimationSessionCompleteFrames")
+	})
+	_register("VTMotionEstimationSessionCopySourcePixelBufferAttributes", func() {
+		purego.RegisterLibFunc(&_fnVTMotionEstimationSessionCopySourcePixelBufferAttributes, _videotoolboxLib, "VTMotionEstimationSessionCopySourcePixelBufferAttributes")
+	})
+	_register("VTMotionEstimationSessionCreate", func() {
+		purego.RegisterLibFunc(&_fnVTMotionEstimationSessionCreate, _videotoolboxLib, "VTMotionEstimationSessionCreate")
+	})
+	_register("VTMotionEstimationSessionEstimateMotionVectors", func() {
+		purego.RegisterLibFunc(&_fnVTMotionEstimationSessionEstimateMotionVectors, _videotoolboxLib, "VTMotionEstimationSessionEstimateMotionVectors")
+	})
+	_register("VTMotionEstimationSessionGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnVTMotionEstimationSessionGetTypeID, _videotoolboxLib, "VTMotionEstimationSessionGetTypeID")
+	})
+	_register("VTMotionEstimationSessionInvalidate", func() {
+		purego.RegisterLibFunc(&_fnVTMotionEstimationSessionInvalidate, _videotoolboxLib, "VTMotionEstimationSessionInvalidate")
+	})
+	_register("VTMultiPassStorageClose", func() {
+		purego.RegisterLibFunc(&_fnVTMultiPassStorageClose, _videotoolboxLib, "VTMultiPassStorageClose")
+	})
+	_register("VTMultiPassStorageCreate", func() {
+		purego.RegisterLibFunc(&_fnVTMultiPassStorageCreate, _videotoolboxLib, "VTMultiPassStorageCreate")
+	})
+	_register("VTMultiPassStorageGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnVTMultiPassStorageGetTypeID, _videotoolboxLib, "VTMultiPassStorageGetTypeID")
+	})
+	_register("VTPixelRotationSessionCreate", func() {
+		purego.RegisterLibFunc(&_fnVTPixelRotationSessionCreate, _videotoolboxLib, "VTPixelRotationSessionCreate")
+	})
+	_register("VTPixelRotationSessionGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnVTPixelRotationSessionGetTypeID, _videotoolboxLib, "VTPixelRotationSessionGetTypeID")
+	})
+	_register("VTPixelRotationSessionInvalidate", func() {
+		purego.RegisterLibFunc(&_fnVTPixelRotationSessionInvalidate, _videotoolboxLib, "VTPixelRotationSessionInvalidate")
+	})
+	_register("VTPixelRotationSessionRotateImage", func() {
+		purego.RegisterLibFunc(&_fnVTPixelRotationSessionRotateImage, _videotoolboxLib, "VTPixelRotationSessionRotateImage")
+	})
+	_register("VTPixelTransferSessionCreate", func() {
+		purego.RegisterLibFunc(&_fnVTPixelTransferSessionCreate, _videotoolboxLib, "VTPixelTransferSessionCreate")
+	})
+	_register("VTPixelTransferSessionGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnVTPixelTransferSessionGetTypeID, _videotoolboxLib, "VTPixelTransferSessionGetTypeID")
+	})
+	_register("VTPixelTransferSessionInvalidate", func() {
+		purego.RegisterLibFunc(&_fnVTPixelTransferSessionInvalidate, _videotoolboxLib, "VTPixelTransferSessionInvalidate")
+	})
+	_register("VTPixelTransferSessionTransferImage", func() {
+		purego.RegisterLibFunc(&_fnVTPixelTransferSessionTransferImage, _videotoolboxLib, "VTPixelTransferSessionTransferImage")
+	})
+	_register("VTRAWProcessingSessionCompleteFrames", func() {
+		purego.RegisterLibFunc(&_fnVTRAWProcessingSessionCompleteFrames, _videotoolboxLib, "VTRAWProcessingSessionCompleteFrames")
+	})
+	_register("VTRAWProcessingSessionCopyProcessingParameters", func() {
+		purego.RegisterLibFunc(&_fnVTRAWProcessingSessionCopyProcessingParameters, _videotoolboxLib, "VTRAWProcessingSessionCopyProcessingParameters")
+	})
+	_register("VTRAWProcessingSessionCreate", func() {
+		purego.RegisterLibFunc(&_fnVTRAWProcessingSessionCreate, _videotoolboxLib, "VTRAWProcessingSessionCreate")
+	})
+	_register("VTRAWProcessingSessionGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnVTRAWProcessingSessionGetTypeID, _videotoolboxLib, "VTRAWProcessingSessionGetTypeID")
+	})
+	_register("VTRAWProcessingSessionInvalidate", func() {
+		purego.RegisterLibFunc(&_fnVTRAWProcessingSessionInvalidate, _videotoolboxLib, "VTRAWProcessingSessionInvalidate")
+	})
+	_register("VTRAWProcessingSessionProcessFrame", func() {
+		purego.RegisterLibFunc(&_fnVTRAWProcessingSessionProcessFrame, _videotoolboxLib, "VTRAWProcessingSessionProcessFrame")
+	})
+	_register("VTRAWProcessingSessionSetParameterChangedHander", func() {
+		purego.RegisterLibFunc(&_fnVTRAWProcessingSessionSetParameterChangedHander, _videotoolboxLib, "VTRAWProcessingSessionSetParameterChangedHander")
+	})
+	_register("VTRAWProcessingSessionSetParameterChangedHandler", func() {
+		purego.RegisterLibFunc(&_fnVTRAWProcessingSessionSetParameterChangedHandler, _videotoolboxLib, "VTRAWProcessingSessionSetParameterChangedHandler")
+	})
+	_register("VTRAWProcessingSessionSetProcessingParameters", func() {
+		purego.RegisterLibFunc(&_fnVTRAWProcessingSessionSetProcessingParameters, _videotoolboxLib, "VTRAWProcessingSessionSetProcessingParameters")
+	})
+	_register("VTRegisterProfessionalVideoWorkflowVideoDecoders", func() {
+		purego.RegisterLibFunc(&_fnVTRegisterProfessionalVideoWorkflowVideoDecoders, _videotoolboxLib, "VTRegisterProfessionalVideoWorkflowVideoDecoders")
+	})
+	_register("VTRegisterProfessionalVideoWorkflowVideoEncoders", func() {
+		purego.RegisterLibFunc(&_fnVTRegisterProfessionalVideoWorkflowVideoEncoders, _videotoolboxLib, "VTRegisterProfessionalVideoWorkflowVideoEncoders")
+	})
+	_register("VTRegisterSupplementalVideoDecoderIfAvailable", func() {
+		purego.RegisterLibFunc(&_fnVTRegisterSupplementalVideoDecoderIfAvailable, _videotoolboxLib, "VTRegisterSupplementalVideoDecoderIfAvailable")
+	})
 	_register("VTSessionCopyProperty", func() { purego.RegisterLibFunc(&_fnVTSessionCopyProperty, _videotoolboxLib, "VTSessionCopyProperty") })
-	_register("VTSessionCopySerializableProperties", func() { purego.RegisterLibFunc(&_fnVTSessionCopySerializableProperties, _videotoolboxLib, "VTSessionCopySerializableProperties") })
-	_register("VTSessionCopySupportedPropertyDictionary", func() { purego.RegisterLibFunc(&_fnVTSessionCopySupportedPropertyDictionary, _videotoolboxLib, "VTSessionCopySupportedPropertyDictionary") })
+	_register("VTSessionCopySerializableProperties", func() {
+		purego.RegisterLibFunc(&_fnVTSessionCopySerializableProperties, _videotoolboxLib, "VTSessionCopySerializableProperties")
+	})
+	_register("VTSessionCopySupportedPropertyDictionary", func() {
+		purego.RegisterLibFunc(&_fnVTSessionCopySupportedPropertyDictionary, _videotoolboxLib, "VTSessionCopySupportedPropertyDictionary")
+	})
 	_register("VTSessionSetProperties", func() { purego.RegisterLibFunc(&_fnVTSessionSetProperties, _videotoolboxLib, "VTSessionSetProperties") })
 	_register("VTSessionSetProperty", func() { purego.RegisterLibFunc(&_fnVTSessionSetProperty, _videotoolboxLib, "VTSessionSetProperty") })
 }

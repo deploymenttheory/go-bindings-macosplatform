@@ -15,35 +15,35 @@ type SCNPhysicsSliderJoint struct {
 }
 
 var (
-	_clsSCNPhysicsSliderJoint = _objcClass("SCNPhysicsSliderJoint")
+	_clsSCNPhysicsSliderJoint                                            = _objcClass("SCNPhysicsSliderJoint")
 	_sCNPhysicsSliderJointSelJointWithBodyAAxisAAnchorABodyBAxisBAnchorB = objc.RegisterName("jointWithBodyA:axisA:anchorA:bodyB:axisB:anchorB:")
-	_sCNPhysicsSliderJointSelJointWithBodyAxisAnchor = objc.RegisterName("jointWithBody:axis:anchor:")
-	_sCNPhysicsSliderJointSelBodyA = objc.RegisterName("bodyA")
-	_sCNPhysicsSliderJointSelAxisA = objc.RegisterName("axisA")
-	_sCNPhysicsSliderJointSelSetAxisA = objc.RegisterName("setAxisA:")
-	_sCNPhysicsSliderJointSelAnchorA = objc.RegisterName("anchorA")
-	_sCNPhysicsSliderJointSelSetAnchorA = objc.RegisterName("setAnchorA:")
-	_sCNPhysicsSliderJointSelBodyB = objc.RegisterName("bodyB")
-	_sCNPhysicsSliderJointSelAxisB = objc.RegisterName("axisB")
-	_sCNPhysicsSliderJointSelSetAxisB = objc.RegisterName("setAxisB:")
-	_sCNPhysicsSliderJointSelAnchorB = objc.RegisterName("anchorB")
-	_sCNPhysicsSliderJointSelSetAnchorB = objc.RegisterName("setAnchorB:")
-	_sCNPhysicsSliderJointSelMinimumLinearLimit = objc.RegisterName("minimumLinearLimit")
-	_sCNPhysicsSliderJointSelSetMinimumLinearLimit = objc.RegisterName("setMinimumLinearLimit:")
-	_sCNPhysicsSliderJointSelMaximumLinearLimit = objc.RegisterName("maximumLinearLimit")
-	_sCNPhysicsSliderJointSelSetMaximumLinearLimit = objc.RegisterName("setMaximumLinearLimit:")
-	_sCNPhysicsSliderJointSelMinimumAngularLimit = objc.RegisterName("minimumAngularLimit")
-	_sCNPhysicsSliderJointSelSetMinimumAngularLimit = objc.RegisterName("setMinimumAngularLimit:")
-	_sCNPhysicsSliderJointSelMaximumAngularLimit = objc.RegisterName("maximumAngularLimit")
-	_sCNPhysicsSliderJointSelSetMaximumAngularLimit = objc.RegisterName("setMaximumAngularLimit:")
-	_sCNPhysicsSliderJointSelMotorTargetLinearVelocity = objc.RegisterName("motorTargetLinearVelocity")
-	_sCNPhysicsSliderJointSelSetMotorTargetLinearVelocity = objc.RegisterName("setMotorTargetLinearVelocity:")
-	_sCNPhysicsSliderJointSelMotorMaximumForce = objc.RegisterName("motorMaximumForce")
-	_sCNPhysicsSliderJointSelSetMotorMaximumForce = objc.RegisterName("setMotorMaximumForce:")
-	_sCNPhysicsSliderJointSelMotorTargetAngularVelocity = objc.RegisterName("motorTargetAngularVelocity")
-	_sCNPhysicsSliderJointSelSetMotorTargetAngularVelocity = objc.RegisterName("setMotorTargetAngularVelocity:")
-	_sCNPhysicsSliderJointSelMotorMaximumTorque = objc.RegisterName("motorMaximumTorque")
-	_sCNPhysicsSliderJointSelSetMotorMaximumTorque = objc.RegisterName("setMotorMaximumTorque:")
+	_sCNPhysicsSliderJointSelJointWithBodyAxisAnchor                     = objc.RegisterName("jointWithBody:axis:anchor:")
+	_sCNPhysicsSliderJointSelBodyA                                       = objc.RegisterName("bodyA")
+	_sCNPhysicsSliderJointSelAxisA                                       = objc.RegisterName("axisA")
+	_sCNPhysicsSliderJointSelSetAxisA                                    = objc.RegisterName("setAxisA:")
+	_sCNPhysicsSliderJointSelAnchorA                                     = objc.RegisterName("anchorA")
+	_sCNPhysicsSliderJointSelSetAnchorA                                  = objc.RegisterName("setAnchorA:")
+	_sCNPhysicsSliderJointSelBodyB                                       = objc.RegisterName("bodyB")
+	_sCNPhysicsSliderJointSelAxisB                                       = objc.RegisterName("axisB")
+	_sCNPhysicsSliderJointSelSetAxisB                                    = objc.RegisterName("setAxisB:")
+	_sCNPhysicsSliderJointSelAnchorB                                     = objc.RegisterName("anchorB")
+	_sCNPhysicsSliderJointSelSetAnchorB                                  = objc.RegisterName("setAnchorB:")
+	_sCNPhysicsSliderJointSelMinimumLinearLimit                          = objc.RegisterName("minimumLinearLimit")
+	_sCNPhysicsSliderJointSelSetMinimumLinearLimit                       = objc.RegisterName("setMinimumLinearLimit:")
+	_sCNPhysicsSliderJointSelMaximumLinearLimit                          = objc.RegisterName("maximumLinearLimit")
+	_sCNPhysicsSliderJointSelSetMaximumLinearLimit                       = objc.RegisterName("setMaximumLinearLimit:")
+	_sCNPhysicsSliderJointSelMinimumAngularLimit                         = objc.RegisterName("minimumAngularLimit")
+	_sCNPhysicsSliderJointSelSetMinimumAngularLimit                      = objc.RegisterName("setMinimumAngularLimit:")
+	_sCNPhysicsSliderJointSelMaximumAngularLimit                         = objc.RegisterName("maximumAngularLimit")
+	_sCNPhysicsSliderJointSelSetMaximumAngularLimit                      = objc.RegisterName("setMaximumAngularLimit:")
+	_sCNPhysicsSliderJointSelMotorTargetLinearVelocity                   = objc.RegisterName("motorTargetLinearVelocity")
+	_sCNPhysicsSliderJointSelSetMotorTargetLinearVelocity                = objc.RegisterName("setMotorTargetLinearVelocity:")
+	_sCNPhysicsSliderJointSelMotorMaximumForce                           = objc.RegisterName("motorMaximumForce")
+	_sCNPhysicsSliderJointSelSetMotorMaximumForce                        = objc.RegisterName("setMotorMaximumForce:")
+	_sCNPhysicsSliderJointSelMotorTargetAngularVelocity                  = objc.RegisterName("motorTargetAngularVelocity")
+	_sCNPhysicsSliderJointSelSetMotorTargetAngularVelocity               = objc.RegisterName("setMotorTargetAngularVelocity:")
+	_sCNPhysicsSliderJointSelMotorMaximumTorque                          = objc.RegisterName("motorMaximumTorque")
+	_sCNPhysicsSliderJointSelSetMotorMaximumTorque                       = objc.RegisterName("setMotorMaximumTorque:")
 )
 
 func SCNPhysicsSliderJointFromID(id objc.ID) *SCNPhysicsSliderJoint {
@@ -58,19 +58,25 @@ func SCNPhysicsSliderJointFromID(id objc.ID) *SCNPhysicsSliderJoint {
 
 func SCNPhysicsSliderJointJointWithBodyAAxisAAnchorABodyBAxisBAnchorB(bodyA *SCNPhysicsBody, axisA SCNVector3, anchorA SCNVector3, bodyB *SCNPhysicsBody, axisB SCNVector3, anchorB SCNVector3) *SCNPhysicsSliderJoint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsSliderJoint), _sCNPhysicsSliderJointSelJointWithBodyAAxisAAnchorABodyBAxisBAnchorB, bodyA.Ptr(), axisA, anchorA, bodyB.Ptr(), axisB, anchorB)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsSliderJointFromID(_ret)
 }
 
 func SCNPhysicsSliderJointJointWithBodyAxisAnchor(body *SCNPhysicsBody, axis SCNVector3, anchor SCNVector3) *SCNPhysicsSliderJoint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsSliderJoint), _sCNPhysicsSliderJointSelJointWithBodyAxisAnchor, body.Ptr(), axis, anchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsSliderJointFromID(_ret)
 }
 
 func (o *SCNPhysicsSliderJoint) BodyA() *SCNPhysicsBody {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNPhysicsSliderJointSelBodyA)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsBodyFromID(_ret)
 }
 
@@ -94,7 +100,9 @@ func (o *SCNPhysicsSliderJoint) SetAnchorA(anchorA SCNVector3) {
 
 func (o *SCNPhysicsSliderJoint) BodyB() *SCNPhysicsBody {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNPhysicsSliderJointSelBodyB)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsBodyFromID(_ret)
 }
 
@@ -187,4 +195,3 @@ func (o *SCNPhysicsSliderJoint) MotorMaximumTorque() float64 {
 func (o *SCNPhysicsSliderJoint) SetMotorMaximumTorque(motorMaximumTorque float64) {
 	o.Ptr().Send(_sCNPhysicsSliderJointSelSetMotorMaximumTorque, motorMaximumTorque)
 }
-

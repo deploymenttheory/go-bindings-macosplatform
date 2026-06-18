@@ -67,7 +67,9 @@ func (x *ShareablePassMetadataPreview) ProvisioningTemplateIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
-func (x *ShareablePassMetadataPreview) asAddPassMetadataPreview() *raw.PKAddPassMetadataPreview { return &x.inner.PKAddPassMetadataPreview }
+func (x *ShareablePassMetadataPreview) asAddPassMetadataPreview() *raw.PKAddPassMetadataPreview {
+	return &x.inner.PKAddPassMetadataPreview
+}
 
 // ShareablePassMetadataPreviewable is the interface implemented by [ShareablePassMetadataPreview], for mocking and DI.
 type ShareablePassMetadataPreviewable interface {
@@ -79,4 +81,3 @@ type ShareablePassMetadataPreviewable interface {
 }
 
 var _ ShareablePassMetadataPreviewable = (*ShareablePassMetadataPreview)(nil)
-

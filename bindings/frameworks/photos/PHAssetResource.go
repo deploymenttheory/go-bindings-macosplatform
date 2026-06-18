@@ -17,16 +17,16 @@ type PHAssetResource struct {
 }
 
 var (
-	_clsPHAssetResource = _objcClass("PHAssetResource")
-	_pHAssetResourceSelAssetResourcesForAsset = objc.RegisterName("assetResourcesForAsset:")
+	_clsPHAssetResource                           = _objcClass("PHAssetResource")
+	_pHAssetResourceSelAssetResourcesForAsset     = objc.RegisterName("assetResourcesForAsset:")
 	_pHAssetResourceSelAssetResourcesForLivePhoto = objc.RegisterName("assetResourcesForLivePhoto:")
-	_pHAssetResourceSelType = objc.RegisterName("type")
-	_pHAssetResourceSelAssetLocalIdentifier = objc.RegisterName("assetLocalIdentifier")
-	_pHAssetResourceSelOriginalFilename = objc.RegisterName("originalFilename")
-	_pHAssetResourceSelContentType = objc.RegisterName("contentType")
-	_pHAssetResourceSelUniformTypeIdentifier = objc.RegisterName("uniformTypeIdentifier")
-	_pHAssetResourceSelPixelWidth = objc.RegisterName("pixelWidth")
-	_pHAssetResourceSelPixelHeight = objc.RegisterName("pixelHeight")
+	_pHAssetResourceSelType                       = objc.RegisterName("type")
+	_pHAssetResourceSelAssetLocalIdentifier       = objc.RegisterName("assetLocalIdentifier")
+	_pHAssetResourceSelOriginalFilename           = objc.RegisterName("originalFilename")
+	_pHAssetResourceSelContentType                = objc.RegisterName("contentType")
+	_pHAssetResourceSelUniformTypeIdentifier      = objc.RegisterName("uniformTypeIdentifier")
+	_pHAssetResourceSelPixelWidth                 = objc.RegisterName("pixelWidth")
+	_pHAssetResourceSelPixelHeight                = objc.RegisterName("pixelHeight")
 )
 
 func PHAssetResourceFromID(id objc.ID) *PHAssetResource {
@@ -41,13 +41,17 @@ func PHAssetResourceFromID(id objc.ID) *PHAssetResource {
 
 func PHAssetResourceAssetResourcesForAsset(asset *PHAsset) *foundation.NSArray[*PHAssetResource] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetResource), _pHAssetResourceSelAssetResourcesForAsset, asset.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PHAssetResource](_ret)
 }
 
 func PHAssetResourceAssetResourcesForLivePhoto(livePhoto *PHLivePhoto) *foundation.NSArray[*PHAssetResource] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetResource), _pHAssetResourceSelAssetResourcesForLivePhoto, livePhoto.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PHAssetResource](_ret)
 }
 
@@ -58,27 +62,35 @@ func (o *PHAssetResource) Type() PHAssetResourceType {
 
 func (o *PHAssetResource) AssetLocalIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHAssetResourceSelAssetLocalIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PHAssetResource) OriginalFilename() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHAssetResourceSelOriginalFilename)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The type of data associated with this asset resource (the data can be retrieved via PHAssetResourceManager)
 func (o *PHAssetResource) ContentType() *uniformtypeidentifiers.UTType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHAssetResourceSelContentType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return uniformtypeidentifiers.UTTypeFromID(_ret)
 }
 
 // Deprecated: Use contentType instead
 func (o *PHAssetResource) UniformTypeIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHAssetResourceSelUniformTypeIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -91,4 +103,3 @@ func (o *PHAssetResource) PixelHeight() int {
 	_ret := objc.Send[int](o.Ptr(), _pHAssetResourceSelPixelHeight)
 	return _ret
 }
-

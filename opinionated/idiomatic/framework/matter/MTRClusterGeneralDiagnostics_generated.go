@@ -210,9 +210,13 @@ func (x *MTRClusterGeneralDiagnostics) ReadAttributeBootReasonsWithParams(params
 	return x.inner.ReadAttributeBootReasonsWithParams(params)
 }
 
-func (x *MTRClusterGeneralDiagnostics) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterGeneralDiagnostics) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterGeneralDiagnostics) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterGeneralDiagnostics) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterGeneralDiagnosticsable is the interface implemented by [MTRClusterGeneralDiagnostics], for mocking and DI.
 type MTRClusterGeneralDiagnosticsable interface {
@@ -240,4 +244,3 @@ type MTRClusterGeneralDiagnosticsable interface {
 }
 
 var _ MTRClusterGeneralDiagnosticsable = (*MTRClusterGeneralDiagnostics)(nil)
-

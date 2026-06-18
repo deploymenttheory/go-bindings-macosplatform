@@ -16,13 +16,13 @@ type MTLCommandBufferDescriptor struct {
 }
 
 var (
-	_clsMTLCommandBufferDescriptor = _objcClass("MTLCommandBufferDescriptor")
-	_mTLCommandBufferDescriptorSelRetainedReferences = objc.RegisterName("retainedReferences")
+	_clsMTLCommandBufferDescriptor                      = _objcClass("MTLCommandBufferDescriptor")
+	_mTLCommandBufferDescriptorSelRetainedReferences    = objc.RegisterName("retainedReferences")
 	_mTLCommandBufferDescriptorSelSetRetainedReferences = objc.RegisterName("setRetainedReferences:")
-	_mTLCommandBufferDescriptorSelErrorOptions = objc.RegisterName("errorOptions")
-	_mTLCommandBufferDescriptorSelSetErrorOptions = objc.RegisterName("setErrorOptions:")
-	_mTLCommandBufferDescriptorSelLogState = objc.RegisterName("logState")
-	_mTLCommandBufferDescriptorSelSetLogState = objc.RegisterName("setLogState:")
+	_mTLCommandBufferDescriptorSelErrorOptions          = objc.RegisterName("errorOptions")
+	_mTLCommandBufferDescriptorSelSetErrorOptions       = objc.RegisterName("setErrorOptions:")
+	_mTLCommandBufferDescriptorSelLogState              = objc.RegisterName("logState")
+	_mTLCommandBufferDescriptorSelSetLogState           = objc.RegisterName("setLogState:")
 )
 
 func MTLCommandBufferDescriptorFromID(id objc.ID) *MTLCommandBufferDescriptor {
@@ -65,4 +65,3 @@ func (o *MTLCommandBufferDescriptor) LogState() MTLLogState {
 func (o *MTLCommandBufferDescriptor) SetLogState(logState MTLLogState) {
 	o.Ptr().Send(_mTLCommandBufferDescriptorSelSetLogState, logState)
 }
-

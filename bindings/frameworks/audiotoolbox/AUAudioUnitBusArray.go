@@ -18,18 +18,18 @@ type AUAudioUnitBusArray struct {
 }
 
 var (
-	_clsAUAudioUnitBusArray = _objcClass("AUAudioUnitBusArray")
-	_aUAudioUnitBusArraySelInitWithAudioUnitBusTypeBusses = objc.RegisterName("initWithAudioUnit:busType:busses:")
-	_aUAudioUnitBusArraySelInitWithAudioUnitBusType = objc.RegisterName("initWithAudioUnit:busType:")
-	_aUAudioUnitBusArraySelObjectAtIndexedSubscript = objc.RegisterName("objectAtIndexedSubscript:")
-	_aUAudioUnitBusArraySelSetBusCountError = objc.RegisterName("setBusCount:error:")
+	_clsAUAudioUnitBusArray                                               = _objcClass("AUAudioUnitBusArray")
+	_aUAudioUnitBusArraySelInitWithAudioUnitBusTypeBusses                 = objc.RegisterName("initWithAudioUnit:busType:busses:")
+	_aUAudioUnitBusArraySelInitWithAudioUnitBusType                       = objc.RegisterName("initWithAudioUnit:busType:")
+	_aUAudioUnitBusArraySelObjectAtIndexedSubscript                       = objc.RegisterName("objectAtIndexedSubscript:")
+	_aUAudioUnitBusArraySelSetBusCountError                               = objc.RegisterName("setBusCount:error:")
 	_aUAudioUnitBusArraySelAddObserverToAllBussesForKeyPathOptionsContext = objc.RegisterName("addObserverToAllBusses:forKeyPath:options:context:")
-	_aUAudioUnitBusArraySelRemoveObserverFromAllBussesForKeyPathContext = objc.RegisterName("removeObserverFromAllBusses:forKeyPath:context:")
-	_aUAudioUnitBusArraySelCount = objc.RegisterName("count")
-	_aUAudioUnitBusArraySelIsCountChangeable = objc.RegisterName("isCountChangeable")
-	_aUAudioUnitBusArraySelOwnerAudioUnit = objc.RegisterName("ownerAudioUnit")
-	_aUAudioUnitBusArraySelBusType = objc.RegisterName("busType")
-	_aUAudioUnitBusArraySelReplaceBusses = objc.RegisterName("replaceBusses:")
+	_aUAudioUnitBusArraySelRemoveObserverFromAllBussesForKeyPathContext   = objc.RegisterName("removeObserverFromAllBusses:forKeyPath:context:")
+	_aUAudioUnitBusArraySelCount                                          = objc.RegisterName("count")
+	_aUAudioUnitBusArraySelIsCountChangeable                              = objc.RegisterName("isCountChangeable")
+	_aUAudioUnitBusArraySelOwnerAudioUnit                                 = objc.RegisterName("ownerAudioUnit")
+	_aUAudioUnitBusArraySelBusType                                        = objc.RegisterName("busType")
+	_aUAudioUnitBusArraySelReplaceBusses                                  = objc.RegisterName("replaceBusses:")
 )
 
 func AUAudioUnitBusArrayFromID(id objc.ID) *AUAudioUnitBusArray {
@@ -45,21 +45,27 @@ func AUAudioUnitBusArrayFromID(id objc.ID) *AUAudioUnitBusArray {
 // @method		initWithAudioUnit:busType:busses: @brief		Initializes by making a copy of the supplied bus array.
 func (o *AUAudioUnitBusArray) InitWithAudioUnitBusTypeBusses(owner *AUAudioUnit, busType AUAudioUnitBusType, busArray *foundation.NSArray[*AUAudioUnitBus]) *AUAudioUnitBusArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitBusArraySelInitWithAudioUnitBusTypeBusses, owner.Ptr(), busType, busArray.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AUAudioUnitBusArrayFromID(_ret)
 }
 
 // @method		initWithAudioUnit:busType: @brief		Initializes an empty bus array.
 func (o *AUAudioUnitBusArray) InitWithAudioUnitBusType(owner *AUAudioUnit, busType AUAudioUnitBusType) *AUAudioUnitBusArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitBusArraySelInitWithAudioUnitBusType, owner.Ptr(), busType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AUAudioUnitBusArrayFromID(_ret)
 }
 
 // @method		objectAtIndexedSubscript:
 func (o *AUAudioUnitBusArray) ObjectAtIndexedSubscript(index uint) *AUAudioUnitBus {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitBusArraySelObjectAtIndexedSubscript, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AUAudioUnitBusFromID(_ret)
 }
 
@@ -98,7 +104,9 @@ func (o *AUAudioUnitBusArray) IsCountChangeable() bool {
 // The audio unit that owns the bus.
 func (o *AUAudioUnitBusArray) OwnerAudioUnit() *AUAudioUnit {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitBusArraySelOwnerAudioUnit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AUAudioUnitFromID(_ret)
 }
 
@@ -112,4 +120,3 @@ func (o *AUAudioUnitBusArray) BusType() AUAudioUnitBusType {
 func (o *AUAudioUnitBusArray) ReplaceBusses(busArray *foundation.NSArray[*AUAudioUnitBus]) {
 	o.Ptr().Send(_aUAudioUnitBusArraySelReplaceBusses, busArray.Ptr())
 }
-

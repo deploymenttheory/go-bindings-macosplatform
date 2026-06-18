@@ -25,4 +25,3 @@ func NSSimpleCStringFromID(id objc.ID) *NSSimpleCString {
 	purego.Track(o)
 	return o
 }
-

@@ -70,7 +70,9 @@ func (x *DeferredPaymentSummaryItem) SetDeferredDate(deferredDate *foundation.NS
 	x.inner.SetDeferredDate(deferredDate)
 }
 
-func (x *DeferredPaymentSummaryItem) asPaymentSummaryItem() *raw.PKPaymentSummaryItem { return &x.inner.PKPaymentSummaryItem }
+func (x *DeferredPaymentSummaryItem) asPaymentSummaryItem() *raw.PKPaymentSummaryItem {
+	return &x.inner.PKPaymentSummaryItem
+}
 
 // DeferredPaymentSummaryItemable is the interface implemented by [DeferredPaymentSummaryItem], for mocking and DI.
 type DeferredPaymentSummaryItemable interface {
@@ -84,4 +86,3 @@ type DeferredPaymentSummaryItemable interface {
 }
 
 var _ DeferredPaymentSummaryItemable = (*DeferredPaymentSummaryItem)(nil)
-

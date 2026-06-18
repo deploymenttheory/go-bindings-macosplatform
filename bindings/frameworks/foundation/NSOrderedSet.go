@@ -17,67 +17,67 @@ type NSOrderedSet[ObjectType purego.AnyObject] struct {
 }
 
 var (
-	_clsNSOrderedSet = _objcClass("NSOrderedSet")
-	_nSOrderedSetSelObjectAtIndex = objc.RegisterName("objectAtIndex:")
-	_nSOrderedSetSelIndexOfObject = objc.RegisterName("indexOfObject:")
-	_nSOrderedSetSelInit = objc.RegisterName("init")
-	_nSOrderedSetSelInitWithObjectsCount = objc.RegisterName("initWithObjects:count:")
-	_nSOrderedSetSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSOrderedSetSelCount = objc.RegisterName("count")
-	_nSOrderedSetSelGetObjectsRange = objc.RegisterName("getObjects:range:")
-	_nSOrderedSetSelObjectsAtIndexes = objc.RegisterName("objectsAtIndexes:")
-	_nSOrderedSetSelIsEqualToOrderedSet = objc.RegisterName("isEqualToOrderedSet:")
-	_nSOrderedSetSelContainsObject = objc.RegisterName("containsObject:")
-	_nSOrderedSetSelIntersectsOrderedSet = objc.RegisterName("intersectsOrderedSet:")
-	_nSOrderedSetSelIntersectsSet = objc.RegisterName("intersectsSet:")
-	_nSOrderedSetSelIsSubsetOfOrderedSet = objc.RegisterName("isSubsetOfOrderedSet:")
-	_nSOrderedSetSelIsSubsetOfSet = objc.RegisterName("isSubsetOfSet:")
-	_nSOrderedSetSelObjectAtIndexedSubscript = objc.RegisterName("objectAtIndexedSubscript:")
-	_nSOrderedSetSelObjectEnumerator = objc.RegisterName("objectEnumerator")
-	_nSOrderedSetSelReverseObjectEnumerator = objc.RegisterName("reverseObjectEnumerator")
-	_nSOrderedSetSelEnumerateObjectsUsing = objc.RegisterName("enumerateObjectsUsingBlock:")
-	_nSOrderedSetSelEnumerateObjectsWithOptionsUsing = objc.RegisterName("enumerateObjectsWithOptions:usingBlock:")
-	_nSOrderedSetSelEnumerateObjectsAtIndexesOptionsUsing = objc.RegisterName("enumerateObjectsAtIndexes:options:usingBlock:")
-	_nSOrderedSetSelIndexOfObjectPassingTest = objc.RegisterName("indexOfObjectPassingTest:")
-	_nSOrderedSetSelIndexOfObjectWithOptionsPassingTest = objc.RegisterName("indexOfObjectWithOptions:passingTest:")
-	_nSOrderedSetSelIndexOfObjectAtIndexesOptionsPassingTest = objc.RegisterName("indexOfObjectAtIndexes:options:passingTest:")
-	_nSOrderedSetSelIndexesOfObjectsPassingTest = objc.RegisterName("indexesOfObjectsPassingTest:")
-	_nSOrderedSetSelIndexesOfObjectsWithOptionsPassingTest = objc.RegisterName("indexesOfObjectsWithOptions:passingTest:")
-	_nSOrderedSetSelIndexesOfObjectsAtIndexesOptionsPassingTest = objc.RegisterName("indexesOfObjectsAtIndexes:options:passingTest:")
-	_nSOrderedSetSelIndexOfObjectInSortedRangeOptionsUsingComparator = objc.RegisterName("indexOfObject:inSortedRange:options:usingComparator:")
-	_nSOrderedSetSelSortedArrayUsingComparator = objc.RegisterName("sortedArrayUsingComparator:")
-	_nSOrderedSetSelSortedArrayWithOptionsUsingComparator = objc.RegisterName("sortedArrayWithOptions:usingComparator:")
-	_nSOrderedSetSelDescriptionWithLocale = objc.RegisterName("descriptionWithLocale:")
-	_nSOrderedSetSelDescriptionWithLocaleIndent = objc.RegisterName("descriptionWithLocale:indent:")
-	_nSOrderedSetSelFirstObject = objc.RegisterName("firstObject")
-	_nSOrderedSetSelLastObject = objc.RegisterName("lastObject")
-	_nSOrderedSetSelReversedOrderedSet = objc.RegisterName("reversedOrderedSet")
-	_nSOrderedSetSelArray = objc.RegisterName("array")
-	_nSOrderedSetSelSet = objc.RegisterName("set")
-	_nSOrderedSetSelOrderedSet = objc.RegisterName("orderedSet")
-	_nSOrderedSetSelOrderedSetWithObject = objc.RegisterName("orderedSetWithObject:")
-	_nSOrderedSetSelOrderedSetWithObjectsCount = objc.RegisterName("orderedSetWithObjects:count:")
-	_nSOrderedSetSelOrderedSetWithOrderedSet = objc.RegisterName("orderedSetWithOrderedSet:")
-	_nSOrderedSetSelOrderedSetWithOrderedSetRangeCopyItems = objc.RegisterName("orderedSetWithOrderedSet:range:copyItems:")
-	_nSOrderedSetSelOrderedSetWithArray = objc.RegisterName("orderedSetWithArray:")
-	_nSOrderedSetSelOrderedSetWithArrayRangeCopyItems = objc.RegisterName("orderedSetWithArray:range:copyItems:")
-	_nSOrderedSetSelOrderedSetWithSet = objc.RegisterName("orderedSetWithSet:")
-	_nSOrderedSetSelOrderedSetWithSetCopyItems = objc.RegisterName("orderedSetWithSet:copyItems:")
-	_nSOrderedSetSelInitWithObject = objc.RegisterName("initWithObject:")
-	_nSOrderedSetSelInitWithOrderedSet = objc.RegisterName("initWithOrderedSet:")
-	_nSOrderedSetSelInitWithOrderedSetCopyItems = objc.RegisterName("initWithOrderedSet:copyItems:")
-	_nSOrderedSetSelInitWithOrderedSetRangeCopyItems = objc.RegisterName("initWithOrderedSet:range:copyItems:")
-	_nSOrderedSetSelInitWithArray = objc.RegisterName("initWithArray:")
-	_nSOrderedSetSelInitWithArrayCopyItems = objc.RegisterName("initWithArray:copyItems:")
-	_nSOrderedSetSelInitWithArrayRangeCopyItems = objc.RegisterName("initWithArray:range:copyItems:")
-	_nSOrderedSetSelInitWithSet = objc.RegisterName("initWithSet:")
-	_nSOrderedSetSelInitWithSetCopyItems = objc.RegisterName("initWithSet:copyItems:")
+	_clsNSOrderedSet                                                        = _objcClass("NSOrderedSet")
+	_nSOrderedSetSelObjectAtIndex                                           = objc.RegisterName("objectAtIndex:")
+	_nSOrderedSetSelIndexOfObject                                           = objc.RegisterName("indexOfObject:")
+	_nSOrderedSetSelInit                                                    = objc.RegisterName("init")
+	_nSOrderedSetSelInitWithObjectsCount                                    = objc.RegisterName("initWithObjects:count:")
+	_nSOrderedSetSelInitWithCoder                                           = objc.RegisterName("initWithCoder:")
+	_nSOrderedSetSelCount                                                   = objc.RegisterName("count")
+	_nSOrderedSetSelGetObjectsRange                                         = objc.RegisterName("getObjects:range:")
+	_nSOrderedSetSelObjectsAtIndexes                                        = objc.RegisterName("objectsAtIndexes:")
+	_nSOrderedSetSelIsEqualToOrderedSet                                     = objc.RegisterName("isEqualToOrderedSet:")
+	_nSOrderedSetSelContainsObject                                          = objc.RegisterName("containsObject:")
+	_nSOrderedSetSelIntersectsOrderedSet                                    = objc.RegisterName("intersectsOrderedSet:")
+	_nSOrderedSetSelIntersectsSet                                           = objc.RegisterName("intersectsSet:")
+	_nSOrderedSetSelIsSubsetOfOrderedSet                                    = objc.RegisterName("isSubsetOfOrderedSet:")
+	_nSOrderedSetSelIsSubsetOfSet                                           = objc.RegisterName("isSubsetOfSet:")
+	_nSOrderedSetSelObjectAtIndexedSubscript                                = objc.RegisterName("objectAtIndexedSubscript:")
+	_nSOrderedSetSelObjectEnumerator                                        = objc.RegisterName("objectEnumerator")
+	_nSOrderedSetSelReverseObjectEnumerator                                 = objc.RegisterName("reverseObjectEnumerator")
+	_nSOrderedSetSelEnumerateObjectsUsing                                   = objc.RegisterName("enumerateObjectsUsingBlock:")
+	_nSOrderedSetSelEnumerateObjectsWithOptionsUsing                        = objc.RegisterName("enumerateObjectsWithOptions:usingBlock:")
+	_nSOrderedSetSelEnumerateObjectsAtIndexesOptionsUsing                   = objc.RegisterName("enumerateObjectsAtIndexes:options:usingBlock:")
+	_nSOrderedSetSelIndexOfObjectPassingTest                                = objc.RegisterName("indexOfObjectPassingTest:")
+	_nSOrderedSetSelIndexOfObjectWithOptionsPassingTest                     = objc.RegisterName("indexOfObjectWithOptions:passingTest:")
+	_nSOrderedSetSelIndexOfObjectAtIndexesOptionsPassingTest                = objc.RegisterName("indexOfObjectAtIndexes:options:passingTest:")
+	_nSOrderedSetSelIndexesOfObjectsPassingTest                             = objc.RegisterName("indexesOfObjectsPassingTest:")
+	_nSOrderedSetSelIndexesOfObjectsWithOptionsPassingTest                  = objc.RegisterName("indexesOfObjectsWithOptions:passingTest:")
+	_nSOrderedSetSelIndexesOfObjectsAtIndexesOptionsPassingTest             = objc.RegisterName("indexesOfObjectsAtIndexes:options:passingTest:")
+	_nSOrderedSetSelIndexOfObjectInSortedRangeOptionsUsingComparator        = objc.RegisterName("indexOfObject:inSortedRange:options:usingComparator:")
+	_nSOrderedSetSelSortedArrayUsingComparator                              = objc.RegisterName("sortedArrayUsingComparator:")
+	_nSOrderedSetSelSortedArrayWithOptionsUsingComparator                   = objc.RegisterName("sortedArrayWithOptions:usingComparator:")
+	_nSOrderedSetSelDescriptionWithLocale                                   = objc.RegisterName("descriptionWithLocale:")
+	_nSOrderedSetSelDescriptionWithLocaleIndent                             = objc.RegisterName("descriptionWithLocale:indent:")
+	_nSOrderedSetSelFirstObject                                             = objc.RegisterName("firstObject")
+	_nSOrderedSetSelLastObject                                              = objc.RegisterName("lastObject")
+	_nSOrderedSetSelReversedOrderedSet                                      = objc.RegisterName("reversedOrderedSet")
+	_nSOrderedSetSelArray                                                   = objc.RegisterName("array")
+	_nSOrderedSetSelSet                                                     = objc.RegisterName("set")
+	_nSOrderedSetSelOrderedSet                                              = objc.RegisterName("orderedSet")
+	_nSOrderedSetSelOrderedSetWithObject                                    = objc.RegisterName("orderedSetWithObject:")
+	_nSOrderedSetSelOrderedSetWithObjectsCount                              = objc.RegisterName("orderedSetWithObjects:count:")
+	_nSOrderedSetSelOrderedSetWithOrderedSet                                = objc.RegisterName("orderedSetWithOrderedSet:")
+	_nSOrderedSetSelOrderedSetWithOrderedSetRangeCopyItems                  = objc.RegisterName("orderedSetWithOrderedSet:range:copyItems:")
+	_nSOrderedSetSelOrderedSetWithArray                                     = objc.RegisterName("orderedSetWithArray:")
+	_nSOrderedSetSelOrderedSetWithArrayRangeCopyItems                       = objc.RegisterName("orderedSetWithArray:range:copyItems:")
+	_nSOrderedSetSelOrderedSetWithSet                                       = objc.RegisterName("orderedSetWithSet:")
+	_nSOrderedSetSelOrderedSetWithSetCopyItems                              = objc.RegisterName("orderedSetWithSet:copyItems:")
+	_nSOrderedSetSelInitWithObject                                          = objc.RegisterName("initWithObject:")
+	_nSOrderedSetSelInitWithOrderedSet                                      = objc.RegisterName("initWithOrderedSet:")
+	_nSOrderedSetSelInitWithOrderedSetCopyItems                             = objc.RegisterName("initWithOrderedSet:copyItems:")
+	_nSOrderedSetSelInitWithOrderedSetRangeCopyItems                        = objc.RegisterName("initWithOrderedSet:range:copyItems:")
+	_nSOrderedSetSelInitWithArray                                           = objc.RegisterName("initWithArray:")
+	_nSOrderedSetSelInitWithArrayCopyItems                                  = objc.RegisterName("initWithArray:copyItems:")
+	_nSOrderedSetSelInitWithArrayRangeCopyItems                             = objc.RegisterName("initWithArray:range:copyItems:")
+	_nSOrderedSetSelInitWithSet                                             = objc.RegisterName("initWithSet:")
+	_nSOrderedSetSelInitWithSetCopyItems                                    = objc.RegisterName("initWithSet:copyItems:")
 	_nSOrderedSetSelDifferenceFromOrderedSetWithOptionsUsingEquivalenceTest = objc.RegisterName("differenceFromOrderedSet:withOptions:usingEquivalenceTest:")
-	_nSOrderedSetSelDifferenceFromOrderedSetWithOptions = objc.RegisterName("differenceFromOrderedSet:withOptions:")
-	_nSOrderedSetSelDifferenceFromOrderedSet = objc.RegisterName("differenceFromOrderedSet:")
-	_nSOrderedSetSelOrderedSetByApplyingDifference = objc.RegisterName("orderedSetByApplyingDifference:")
-	_nSOrderedSetSelSortedArrayUsingDescriptors = objc.RegisterName("sortedArrayUsingDescriptors:")
-	_nSOrderedSetSelFilteredOrderedSetUsingPredicate = objc.RegisterName("filteredOrderedSetUsingPredicate:")
+	_nSOrderedSetSelDifferenceFromOrderedSetWithOptions                     = objc.RegisterName("differenceFromOrderedSet:withOptions:")
+	_nSOrderedSetSelDifferenceFromOrderedSet                                = objc.RegisterName("differenceFromOrderedSet:")
+	_nSOrderedSetSelOrderedSetByApplyingDifference                          = objc.RegisterName("orderedSetByApplyingDifference:")
+	_nSOrderedSetSelSortedArrayUsingDescriptors                             = objc.RegisterName("sortedArrayUsingDescriptors:")
+	_nSOrderedSetSelFilteredOrderedSetUsingPredicate                        = objc.RegisterName("filteredOrderedSetUsingPredicate:")
 )
 
 func NSOrderedSetFromID[ObjectType purego.AnyObject](id objc.ID) *NSOrderedSet[ObjectType] {
@@ -102,19 +102,25 @@ func (o *NSOrderedSet[ObjectType]) IndexOfObject(object ObjectType) uint {
 
 func (o *NSOrderedSet[ObjectType]) Init() *NSOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedSetFromID[ObjectType](_ret)
 }
 
 func (o *NSOrderedSet[ObjectType]) InitWithObjectsCount(objects unsafe.Pointer, cnt uint) *NSOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelInitWithObjectsCount, objects, cnt)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedSetFromID[ObjectType](_ret)
 }
 
 func (o *NSOrderedSet[ObjectType]) InitWithCoder(coder *NSCoder) *NSOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedSetFromID[ObjectType](_ret)
 }
 
@@ -129,7 +135,9 @@ func (o *NSOrderedSet[ObjectType]) GetObjectsRange(objects unsafe.Pointer, range
 
 func (o *NSOrderedSet[ObjectType]) ObjectsAtIndexes(indexes *NSIndexSet) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelObjectsAtIndexes, indexes.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[ObjectType](_ret)
 }
 
@@ -170,13 +178,17 @@ func (o *NSOrderedSet[ObjectType]) ObjectAtIndexedSubscript(idx uint) ObjectType
 
 func (o *NSOrderedSet[ObjectType]) ObjectEnumerator() *NSEnumerator[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelObjectEnumerator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEnumeratorFromID[ObjectType](_ret)
 }
 
 func (o *NSOrderedSet[ObjectType]) ReverseObjectEnumerator() *NSEnumerator[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelReverseObjectEnumerator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEnumeratorFromID[ObjectType](_ret)
 }
 
@@ -209,19 +221,25 @@ func (o *NSOrderedSet[ObjectType]) IndexOfObjectAtIndexesOptionsPassingTest(s *N
 
 func (o *NSOrderedSet[ObjectType]) IndexesOfObjectsPassingTest(predicate objc.Block) *NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelIndexesOfObjectsPassingTest, predicate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSIndexSetFromID(_ret)
 }
 
 func (o *NSOrderedSet[ObjectType]) IndexesOfObjectsWithOptionsPassingTest(opts NSEnumerationOptions, predicate objc.Block) *NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelIndexesOfObjectsWithOptionsPassingTest, opts, predicate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSIndexSetFromID(_ret)
 }
 
 func (o *NSOrderedSet[ObjectType]) IndexesOfObjectsAtIndexesOptionsPassingTest(s *NSIndexSet, opts NSEnumerationOptions, predicate objc.Block) *NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelIndexesOfObjectsAtIndexesOptionsPassingTest, s.Ptr(), opts, predicate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSIndexSetFromID(_ret)
 }
 
@@ -246,7 +264,9 @@ func (o *NSOrderedSet[ObjectType]) SortedArrayUsingComparator(cmptr func(objc.ID
 		defer __block_cmptr.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelSortedArrayUsingComparator, __block_cmptr)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[ObjectType](_ret)
 }
 
@@ -259,19 +279,25 @@ func (o *NSOrderedSet[ObjectType]) SortedArrayWithOptionsUsingComparator(opts NS
 		defer __block_cmptr.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelSortedArrayWithOptionsUsingComparator, opts, __block_cmptr)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[ObjectType](_ret)
 }
 
 func (o *NSOrderedSet[ObjectType]) DescriptionWithLocale(locale objc.ID) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelDescriptionWithLocale, locale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSOrderedSet[ObjectType]) DescriptionWithLocaleIndent(locale objc.ID, level uint) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelDescriptionWithLocaleIndent, locale, level)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -287,163 +313,216 @@ func (o *NSOrderedSet[ObjectType]) LastObject() ObjectType {
 
 func (o *NSOrderedSet[ObjectType]) ReversedOrderedSet() *NSOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelReversedOrderedSet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedSetFromID[ObjectType](_ret)
 }
 
 func (o *NSOrderedSet[ObjectType]) Array() *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelArray)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[ObjectType](_ret)
 }
 
 func (o *NSOrderedSet[ObjectType]) Set() *NSSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelSet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSetFromID[ObjectType](_ret)
 }
 
 func NSOrderedSetOrderedSet() *NSOrderedSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOrderedSet), _nSOrderedSetSelOrderedSet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedSetFromID[objc.ID](_ret)
 }
 
 func NSOrderedSetOrderedSetWithObject(object objc.ID) *NSOrderedSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOrderedSet), _nSOrderedSetSelOrderedSetWithObject, object)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedSetFromID[objc.ID](_ret)
 }
 
 func NSOrderedSetOrderedSetWithObjectsCount(objects unsafe.Pointer, cnt uint) *NSOrderedSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOrderedSet), _nSOrderedSetSelOrderedSetWithObjectsCount, objects, cnt)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedSetFromID[objc.ID](_ret)
 }
 
 func NSOrderedSetOrderedSetWithOrderedSet(set *NSOrderedSet[objc.ID]) *NSOrderedSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOrderedSet), _nSOrderedSetSelOrderedSetWithOrderedSet, set.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedSetFromID[objc.ID](_ret)
 }
 
 func NSOrderedSetOrderedSetWithOrderedSetRangeCopyItems(set *NSOrderedSet[objc.ID], range_ NSRange, flag bool) *NSOrderedSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOrderedSet), _nSOrderedSetSelOrderedSetWithOrderedSetRangeCopyItems, set.Ptr(), range_, flag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedSetFromID[objc.ID](_ret)
 }
 
 func NSOrderedSetOrderedSetWithArray(array *NSArray[objc.ID]) *NSOrderedSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOrderedSet), _nSOrderedSetSelOrderedSetWithArray, array.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedSetFromID[objc.ID](_ret)
 }
 
 func NSOrderedSetOrderedSetWithArrayRangeCopyItems(array *NSArray[objc.ID], range_ NSRange, flag bool) *NSOrderedSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOrderedSet), _nSOrderedSetSelOrderedSetWithArrayRangeCopyItems, array.Ptr(), range_, flag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedSetFromID[objc.ID](_ret)
 }
 
 func NSOrderedSetOrderedSetWithSet(set *NSSet[objc.ID]) *NSOrderedSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOrderedSet), _nSOrderedSetSelOrderedSetWithSet, set.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedSetFromID[objc.ID](_ret)
 }
 
 func NSOrderedSetOrderedSetWithSetCopyItems(set *NSSet[objc.ID], flag bool) *NSOrderedSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOrderedSet), _nSOrderedSetSelOrderedSetWithSetCopyItems, set.Ptr(), flag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedSetFromID[objc.ID](_ret)
 }
 
 func (o *NSOrderedSet[ObjectType]) InitWithObject(object ObjectType) *NSOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelInitWithObject, object)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedSetFromID[ObjectType](_ret)
 }
 
 func (o *NSOrderedSet[ObjectType]) InitWithOrderedSet(set *NSOrderedSet[ObjectType]) *NSOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelInitWithOrderedSet, set.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedSetFromID[ObjectType](_ret)
 }
 
 func (o *NSOrderedSet[ObjectType]) InitWithOrderedSetCopyItems(set *NSOrderedSet[ObjectType], flag bool) *NSOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelInitWithOrderedSetCopyItems, set.Ptr(), flag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedSetFromID[ObjectType](_ret)
 }
 
 func (o *NSOrderedSet[ObjectType]) InitWithOrderedSetRangeCopyItems(set *NSOrderedSet[ObjectType], range_ NSRange, flag bool) *NSOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelInitWithOrderedSetRangeCopyItems, set.Ptr(), range_, flag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedSetFromID[ObjectType](_ret)
 }
 
 func (o *NSOrderedSet[ObjectType]) InitWithArray(array *NSArray[ObjectType]) *NSOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelInitWithArray, array.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedSetFromID[ObjectType](_ret)
 }
 
 func (o *NSOrderedSet[ObjectType]) InitWithArrayCopyItems(set *NSArray[ObjectType], flag bool) *NSOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelInitWithArrayCopyItems, set.Ptr(), flag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedSetFromID[ObjectType](_ret)
 }
 
 func (o *NSOrderedSet[ObjectType]) InitWithArrayRangeCopyItems(set *NSArray[ObjectType], range_ NSRange, flag bool) *NSOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelInitWithArrayRangeCopyItems, set.Ptr(), range_, flag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedSetFromID[ObjectType](_ret)
 }
 
 func (o *NSOrderedSet[ObjectType]) InitWithSet(set *NSSet[ObjectType]) *NSOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelInitWithSet, set.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedSetFromID[ObjectType](_ret)
 }
 
 func (o *NSOrderedSet[ObjectType]) InitWithSetCopyItems(set *NSSet[ObjectType], flag bool) *NSOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelInitWithSetCopyItems, set.Ptr(), flag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedSetFromID[ObjectType](_ret)
 }
 
 func (o *NSOrderedSet[ObjectType]) DifferenceFromOrderedSetWithOptionsUsingEquivalenceTest(other *NSOrderedSet[ObjectType], options NSOrderedCollectionDifferenceCalculationOptions, block objc.Block) *NSOrderedCollectionDifference[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelDifferenceFromOrderedSetWithOptionsUsingEquivalenceTest, other.Ptr(), options, block)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedCollectionDifferenceFromID[ObjectType](_ret)
 }
 
 func (o *NSOrderedSet[ObjectType]) DifferenceFromOrderedSetWithOptions(other *NSOrderedSet[ObjectType], options NSOrderedCollectionDifferenceCalculationOptions) *NSOrderedCollectionDifference[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelDifferenceFromOrderedSetWithOptions, other.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedCollectionDifferenceFromID[ObjectType](_ret)
 }
 
 func (o *NSOrderedSet[ObjectType]) DifferenceFromOrderedSet(other *NSOrderedSet[ObjectType]) *NSOrderedCollectionDifference[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelDifferenceFromOrderedSet, other.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedCollectionDifferenceFromID[ObjectType](_ret)
 }
 
 func (o *NSOrderedSet[ObjectType]) OrderedSetByApplyingDifference(difference *NSOrderedCollectionDifference[ObjectType]) *NSOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelOrderedSetByApplyingDifference, difference.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedSetFromID[ObjectType](_ret)
 }
 
 func (o *NSOrderedSet[ObjectType]) SortedArrayUsingDescriptors(sortDescriptors *NSArray[*NSSortDescriptor]) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelSortedArrayUsingDescriptors, sortDescriptors.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[ObjectType](_ret)
 }
 
 func (o *NSOrderedSet[ObjectType]) FilteredOrderedSetUsingPredicate(p *NSPredicate) *NSOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelFilteredOrderedSetUsingPredicate, p.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedSetFromID[ObjectType](_ret)
 }
-

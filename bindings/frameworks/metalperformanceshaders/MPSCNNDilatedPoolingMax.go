@@ -18,11 +18,11 @@ type MPSCNNDilatedPoolingMax struct {
 }
 
 var (
-	_clsMPSCNNDilatedPoolingMax = _objcClass("MPSCNNDilatedPoolingMax")
+	_clsMPSCNNDilatedPoolingMax                                                                                              = _objcClass("MPSCNNDilatedPoolingMax")
 	_mPSCNNDilatedPoolingMaxSelInitWithDeviceKernelWidthKernelHeightDilationRateXDilationRateYStrideInPixelsXStrideInPixelsY = objc.RegisterName("initWithDevice:kernelWidth:kernelHeight:dilationRateX:dilationRateY:strideInPixelsX:strideInPixelsY:")
-	_mPSCNNDilatedPoolingMaxSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSCNNDilatedPoolingMaxSelDilationRateX = objc.RegisterName("dilationRateX")
-	_mPSCNNDilatedPoolingMaxSelDilationRateY = objc.RegisterName("dilationRateY")
+	_mPSCNNDilatedPoolingMaxSelInitWithCoderDevice                                                                           = objc.RegisterName("initWithCoder:device:")
+	_mPSCNNDilatedPoolingMaxSelDilationRateX                                                                                 = objc.RegisterName("dilationRateX")
+	_mPSCNNDilatedPoolingMaxSelDilationRateY                                                                                 = objc.RegisterName("dilationRateY")
 )
 
 func MPSCNNDilatedPoolingMaxFromID(id objc.ID) *MPSCNNDilatedPoolingMax {
@@ -38,14 +38,18 @@ func MPSCNNDilatedPoolingMaxFromID(id objc.ID) *MPSCNNDilatedPoolingMax {
 // @abstract   Initialize a MPSCNNDilatedPoolingMax pooling filter @param      device              The device the filter will run on @param      kernelWidth         The width of the kernel.  Can be an odd or even value. @param      kernelHeight        The height of the kernel.  Can be an odd or even value. @param      dilationRateX       The dilation rate in the x dimension. @param      dilationRateY       The dilation rate in the y dimension. @param      strideInPixelsX     The output stride (downsampling factor) in the x dimension. @param      strideInPixelsY     The output stride (downsampling factor) in the y dimension. @return     A valid MPSCNNDilatedPoolingMax object or nil, if failure.
 func (o *MPSCNNDilatedPoolingMax) InitWithDeviceKernelWidthKernelHeightDilationRateXDilationRateYStrideInPixelsXStrideInPixelsY(device metal.MTLDevice, kernelWidth uint, kernelHeight uint, dilationRateX uint, dilationRateY uint, strideInPixelsX uint, strideInPixelsY uint) *MPSCNNDilatedPoolingMax {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNDilatedPoolingMaxSelInitWithDeviceKernelWidthKernelHeightDilationRateXDilationRateYStrideInPixelsXStrideInPixelsY, device, kernelWidth, kernelHeight, dilationRateX, dilationRateY, strideInPixelsX, strideInPixelsY)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNDilatedPoolingMaxFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel.h initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSCNNDilatedPoolingMax @param      device      The MTLDevice on which to make the MPSCNNDilatedPoolingMax @return     A new MPSCNNDilatedPoolingMax object, or nil if failure.
 func (o *MPSCNNDilatedPoolingMax) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSCNNDilatedPoolingMax {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNDilatedPoolingMaxSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNDilatedPoolingMaxFromID(_ret)
 }
 
@@ -60,4 +64,3 @@ func (o *MPSCNNDilatedPoolingMax) DilationRateY() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mPSCNNDilatedPoolingMaxSelDilationRateY)
 	return _ret
 }
-

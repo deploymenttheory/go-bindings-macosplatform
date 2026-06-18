@@ -64,4 +64,3 @@ type RecordZoneIDable interface {
 }
 
 var _ RecordZoneIDable = (*RecordZoneID)(nil)
-

@@ -69,4 +69,3 @@ type MacAuxiliaryStorageable interface {
 }
 
 var _ MacAuxiliaryStorageable = (*MacAuxiliaryStorage)(nil)
-

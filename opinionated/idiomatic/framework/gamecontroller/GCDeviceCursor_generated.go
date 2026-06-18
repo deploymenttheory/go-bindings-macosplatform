@@ -72,9 +72,13 @@ func (x *DeviceCursor) WithUnmappedLocalizedName(unmappedLocalizedName string) *
 	return x
 }
 
-func (x *DeviceCursor) asControllerDirectionPad() *raw.GCControllerDirectionPad { return &x.inner.GCControllerDirectionPad }
+func (x *DeviceCursor) asControllerDirectionPad() *raw.GCControllerDirectionPad {
+	return &x.inner.GCControllerDirectionPad
+}
 
-func (x *DeviceCursor) asControllerElement() *raw.GCControllerElement { return &x.inner.GCControllerDirectionPad.GCControllerElement }
+func (x *DeviceCursor) asControllerElement() *raw.GCControllerElement {
+	return &x.inner.GCControllerDirectionPad.GCControllerElement
+}
 
 // DeviceCursorable is the interface implemented by [DeviceCursor], for mocking and DI.
 type DeviceCursorable interface {
@@ -88,4 +92,3 @@ type DeviceCursorable interface {
 }
 
 var _ DeviceCursorable = (*DeviceCursor)(nil)
-

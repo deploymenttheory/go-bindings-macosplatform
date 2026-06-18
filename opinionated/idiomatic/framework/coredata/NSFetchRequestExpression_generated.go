@@ -60,4 +60,3 @@ type FetchRequestExpressionable interface {
 }
 
 var _ FetchRequestExpressionable = (*FetchRequestExpression)(nil)
-

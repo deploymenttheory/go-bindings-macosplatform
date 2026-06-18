@@ -16,7 +16,7 @@ type MDLUtility struct {
 }
 
 var (
-	_clsMDLUtility = _objcClass("MDLUtility")
+	_clsMDLUtility                        = _objcClass("MDLUtility")
 	_mDLUtilitySelConvertToUSDZWriteToURL = objc.RegisterName("convertToUSDZ:writeToURL:")
 )
 
@@ -33,4 +33,3 @@ func MDLUtilityFromID(id objc.ID) *MDLUtility {
 func MDLUtilityConvertToUSDZWriteToURL(inputURL *foundation.NSURL, outputURL *foundation.NSURL) {
 	objc.ID(_clsMDLUtility).Send(_mDLUtilitySelConvertToUSDZWriteToURL, inputURL.Ptr(), outputURL.Ptr())
 }
-

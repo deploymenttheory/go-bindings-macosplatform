@@ -16,9 +16,9 @@ type INMassResolutionResult struct {
 }
 
 var (
-	_clsINMassResolutionResult = _objcClass("INMassResolutionResult")
-	_iNMassResolutionResultSelSuccessWithResolvedMass = objc.RegisterName("successWithResolvedMass:")
-	_iNMassResolutionResultSelDisambiguationWithMassToDisambiguate = objc.RegisterName("disambiguationWithMassToDisambiguate:")
+	_clsINMassResolutionResult                                      = _objcClass("INMassResolutionResult")
+	_iNMassResolutionResultSelSuccessWithResolvedMass               = objc.RegisterName("successWithResolvedMass:")
+	_iNMassResolutionResultSelDisambiguationWithMassToDisambiguate  = objc.RegisterName("disambiguationWithMassToDisambiguate:")
 	_iNMassResolutionResultSelConfirmationRequiredWithMassToConfirm = objc.RegisterName("confirmationRequiredWithMassToConfirm:")
 )
 
@@ -34,19 +34,24 @@ func INMassResolutionResultFromID(id objc.ID) *INMassResolutionResult {
 
 func INMassResolutionResultSuccessWithResolvedMass(resolvedMass *foundation.NSMeasurement[*foundation.NSUnitMass]) *INMassResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINMassResolutionResult), _iNMassResolutionResultSelSuccessWithResolvedMass, resolvedMass)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INMassResolutionResultFromID(_ret)
 }
 
 func INMassResolutionResultDisambiguationWithMassToDisambiguate(massToDisambiguate *foundation.NSArray[objc.ID]) *INMassResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINMassResolutionResult), _iNMassResolutionResultSelDisambiguationWithMassToDisambiguate, massToDisambiguate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INMassResolutionResultFromID(_ret)
 }
 
 func INMassResolutionResultConfirmationRequiredWithMassToConfirm(massToConfirm *foundation.NSMeasurement[*foundation.NSUnitMass]) *INMassResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINMassResolutionResult), _iNMassResolutionResultSelConfirmationRequiredWithMassToConfirm, massToConfirm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INMassResolutionResultFromID(_ret)
 }
-

@@ -12,13 +12,13 @@ import (
 type DDDeviceCategory int64
 
 const (
-	DDDeviceCategoryHiFiSpeaker DDDeviceCategory = 0
+	DDDeviceCategoryHiFiSpeaker         DDDeviceCategory = 0
 	DDDeviceCategoryHiFiSpeakerMultiple DDDeviceCategory = 1
-	DDDeviceCategoryTVWithMediaBox DDDeviceCategory = 2
-	DDDeviceCategoryTV DDDeviceCategory = 3
-	DDDeviceCategoryLaptopComputer DDDeviceCategory = 4
-	DDDeviceCategoryDesktopComputer DDDeviceCategory = 5
-	DDDeviceCategoryAccessorySetup DDDeviceCategory = 6
+	DDDeviceCategoryTVWithMediaBox      DDDeviceCategory = 2
+	DDDeviceCategoryTV                  DDDeviceCategory = 3
+	DDDeviceCategoryLaptopComputer      DDDeviceCategory = 4
+	DDDeviceCategoryDesktopComputer     DDDeviceCategory = 5
+	DDDeviceCategoryAccessorySetup      DDDeviceCategory = 6
 )
 
 func (e DDDeviceCategory) String() string {
@@ -46,8 +46,8 @@ type DDDeviceMediaPlaybackState int64
 
 const (
 	DDDeviceMediaPlaybackStateNoContent DDDeviceMediaPlaybackState = 0
-	DDDeviceMediaPlaybackStatePaused DDDeviceMediaPlaybackState = 1
-	DDDeviceMediaPlaybackStatePlaying DDDeviceMediaPlaybackState = 2
+	DDDeviceMediaPlaybackStatePaused    DDDeviceMediaPlaybackState = 1
+	DDDeviceMediaPlaybackStatePlaying   DDDeviceMediaPlaybackState = 2
 )
 
 func (e DDDeviceMediaPlaybackState) String() string {
@@ -67,7 +67,7 @@ type DDDeviceProtocol int64
 
 const (
 	DDDeviceProtocolInvalid DDDeviceProtocol = 0
-	DDDeviceProtocolDIAL DDDeviceProtocol = 1
+	DDDeviceProtocolDIAL    DDDeviceProtocol = 1
 )
 
 func (e DDDeviceProtocol) String() string {
@@ -84,10 +84,10 @@ func (e DDDeviceProtocol) String() string {
 type DDDeviceState int64
 
 const (
-	DDDeviceStateInvalid DDDeviceState = 0
-	DDDeviceStateActivating DDDeviceState = 10
-	DDDeviceStateActivated DDDeviceState = 20
-	DDDeviceStateAuthorized DDDeviceState = 25
+	DDDeviceStateInvalid      DDDeviceState = 0
+	DDDeviceStateActivating   DDDeviceState = 10
+	DDDeviceStateActivated    DDDeviceState = 20
+	DDDeviceStateAuthorized   DDDeviceState = 25
 	DDDeviceStateInvalidating DDDeviceState = 30
 )
 
@@ -112,9 +112,9 @@ func (e DDDeviceState) String() string {
 type DDDeviceSupports uint64
 
 const (
-	DDDeviceSupportsBluetoothPairingLE DDDeviceSupports = 2
+	DDDeviceSupportsBluetoothPairingLE         DDDeviceSupports = 2
 	DDDeviceSupportsBluetoothTransportBridging DDDeviceSupports = 4
-	DDDeviceSupportsBluetoothHID DDDeviceSupports = 8
+	DDDeviceSupportsBluetoothHID               DDDeviceSupports = 8
 )
 
 func (e DDDeviceSupports) String() string {
@@ -138,7 +138,7 @@ type DDDeviceWiFiAwareServiceRole int64
 
 const (
 	DDDeviceWiFiAwareServiceRoleSubscriber DDDeviceWiFiAwareServiceRole = 10
-	DDDeviceWiFiAwareServiceRolePublisher DDDeviceWiFiAwareServiceRole = 20
+	DDDeviceWiFiAwareServiceRolePublisher  DDDeviceWiFiAwareServiceRole = 20
 )
 
 func (e DDDeviceWiFiAwareServiceRole) String() string {
@@ -155,9 +155,9 @@ func (e DDDeviceWiFiAwareServiceRole) String() string {
 type DDEventType int64
 
 const (
-	DDEventTypeUnknown DDEventType = 0
-	DDEventTypeDeviceFound DDEventType = 40
-	DDEventTypeDeviceLost DDEventType = 41
+	DDEventTypeUnknown       DDEventType = 0
+	DDEventTypeDeviceFound   DDEventType = 40
+	DDEventTypeDeviceLost    DDEventType = 41
 	DDEventTypeDeviceChanged DDEventType = 42
 )
 
@@ -175,4 +175,3 @@ func (e DDEventType) String() string {
 		return fmt.Sprintf("DDEventType(%d)", int64(e))
 	}
 }
-

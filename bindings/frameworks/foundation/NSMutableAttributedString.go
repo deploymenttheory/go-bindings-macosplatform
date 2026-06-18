@@ -15,21 +15,21 @@ type NSMutableAttributedString struct {
 }
 
 var (
-	_clsNSMutableAttributedString = _objcClass("NSMutableAttributedString")
-	_nSMutableAttributedStringSelReplaceCharactersInRangeWithString = objc.RegisterName("replaceCharactersInRange:withString:")
-	_nSMutableAttributedStringSelSetAttributesRange = objc.RegisterName("setAttributes:range:")
-	_nSMutableAttributedStringSelAddAttributeValueRange = objc.RegisterName("addAttribute:value:range:")
-	_nSMutableAttributedStringSelAddAttributesRange = objc.RegisterName("addAttributes:range:")
-	_nSMutableAttributedStringSelRemoveAttributeRange = objc.RegisterName("removeAttribute:range:")
+	_clsNSMutableAttributedString                                             = _objcClass("NSMutableAttributedString")
+	_nSMutableAttributedStringSelReplaceCharactersInRangeWithString           = objc.RegisterName("replaceCharactersInRange:withString:")
+	_nSMutableAttributedStringSelSetAttributesRange                           = objc.RegisterName("setAttributes:range:")
+	_nSMutableAttributedStringSelAddAttributeValueRange                       = objc.RegisterName("addAttribute:value:range:")
+	_nSMutableAttributedStringSelAddAttributesRange                           = objc.RegisterName("addAttributes:range:")
+	_nSMutableAttributedStringSelRemoveAttributeRange                         = objc.RegisterName("removeAttribute:range:")
 	_nSMutableAttributedStringSelReplaceCharactersInRangeWithAttributedString = objc.RegisterName("replaceCharactersInRange:withAttributedString:")
-	_nSMutableAttributedStringSelInsertAttributedStringAtIndex = objc.RegisterName("insertAttributedString:atIndex:")
-	_nSMutableAttributedStringSelAppendAttributedString = objc.RegisterName("appendAttributedString:")
-	_nSMutableAttributedStringSelDeleteCharactersInRange = objc.RegisterName("deleteCharactersInRange:")
-	_nSMutableAttributedStringSelSetAttributedString = objc.RegisterName("setAttributedString:")
-	_nSMutableAttributedStringSelBeginEditing = objc.RegisterName("beginEditing")
-	_nSMutableAttributedStringSelEndEditing = objc.RegisterName("endEditing")
-	_nSMutableAttributedStringSelMutableString = objc.RegisterName("mutableString")
-	_nSMutableAttributedStringSelAppendLocalizedFormat = objc.RegisterName("appendLocalizedFormat:")
+	_nSMutableAttributedStringSelInsertAttributedStringAtIndex                = objc.RegisterName("insertAttributedString:atIndex:")
+	_nSMutableAttributedStringSelAppendAttributedString                       = objc.RegisterName("appendAttributedString:")
+	_nSMutableAttributedStringSelDeleteCharactersInRange                      = objc.RegisterName("deleteCharactersInRange:")
+	_nSMutableAttributedStringSelSetAttributedString                          = objc.RegisterName("setAttributedString:")
+	_nSMutableAttributedStringSelBeginEditing                                 = objc.RegisterName("beginEditing")
+	_nSMutableAttributedStringSelEndEditing                                   = objc.RegisterName("endEditing")
+	_nSMutableAttributedStringSelMutableString                                = objc.RegisterName("mutableString")
+	_nSMutableAttributedStringSelAppendLocalizedFormat                        = objc.RegisterName("appendLocalizedFormat:")
 )
 
 func NSMutableAttributedStringFromID(id objc.ID) *NSMutableAttributedString {
@@ -92,7 +92,9 @@ func (o *NSMutableAttributedString) EndEditing() {
 
 func (o *NSMutableAttributedString) MutableString() *NSMutableString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableAttributedStringSelMutableString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableStringFromID(_ret)
 }
 
@@ -100,4 +102,3 @@ func (o *NSMutableAttributedString) MutableString() *NSMutableString {
 func (o *NSMutableAttributedString) AppendLocalizedFormat(format *NSAttributedString) {
 	o.Ptr().Send(_nSMutableAttributedStringSelAppendLocalizedFormat, format.Ptr())
 }
-

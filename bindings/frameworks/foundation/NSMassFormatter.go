@@ -15,17 +15,17 @@ type NSMassFormatter struct {
 }
 
 var (
-	_clsNSMassFormatter = _objcClass("NSMassFormatter")
-	_nSMassFormatterSelStringFromValueUnit = objc.RegisterName("stringFromValue:unit:")
-	_nSMassFormatterSelStringFromKilograms = objc.RegisterName("stringFromKilograms:")
-	_nSMassFormatterSelUnitStringFromValueUnit = objc.RegisterName("unitStringFromValue:unit:")
+	_clsNSMassFormatter                                = _objcClass("NSMassFormatter")
+	_nSMassFormatterSelStringFromValueUnit             = objc.RegisterName("stringFromValue:unit:")
+	_nSMassFormatterSelStringFromKilograms             = objc.RegisterName("stringFromKilograms:")
+	_nSMassFormatterSelUnitStringFromValueUnit         = objc.RegisterName("unitStringFromValue:unit:")
 	_nSMassFormatterSelUnitStringFromKilogramsUsedUnit = objc.RegisterName("unitStringFromKilograms:usedUnit:")
-	_nSMassFormatterSelNumberFormatter = objc.RegisterName("numberFormatter")
-	_nSMassFormatterSelSetNumberFormatter = objc.RegisterName("setNumberFormatter:")
-	_nSMassFormatterSelUnitStyle = objc.RegisterName("unitStyle")
-	_nSMassFormatterSelSetUnitStyle = objc.RegisterName("setUnitStyle:")
-	_nSMassFormatterSelIsForPersonMassUse = objc.RegisterName("isForPersonMassUse")
-	_nSMassFormatterSelSetForPersonMassUse = objc.RegisterName("setForPersonMassUse:")
+	_nSMassFormatterSelNumberFormatter                 = objc.RegisterName("numberFormatter")
+	_nSMassFormatterSelSetNumberFormatter              = objc.RegisterName("setNumberFormatter:")
+	_nSMassFormatterSelUnitStyle                       = objc.RegisterName("unitStyle")
+	_nSMassFormatterSelSetUnitStyle                    = objc.RegisterName("setUnitStyle:")
+	_nSMassFormatterSelIsForPersonMassUse              = objc.RegisterName("isForPersonMassUse")
+	_nSMassFormatterSelSetForPersonMassUse             = objc.RegisterName("setForPersonMassUse:")
 )
 
 func NSMassFormatterFromID(id objc.ID) *NSMassFormatter {
@@ -40,31 +40,41 @@ func NSMassFormatterFromID(id objc.ID) *NSMassFormatter {
 
 func (o *NSMassFormatter) StringFromValueUnit(value float64, unit NSMassFormatterUnit) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMassFormatterSelStringFromValueUnit, value, unit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSMassFormatter) StringFromKilograms(numberInKilograms float64) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMassFormatterSelStringFromKilograms, numberInKilograms)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSMassFormatter) UnitStringFromValueUnit(value float64, unit NSMassFormatterUnit) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMassFormatterSelUnitStringFromValueUnit, value, unit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSMassFormatter) UnitStringFromKilogramsUsedUnit(numberInKilograms float64, unitp *NSMassFormatterUnit) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMassFormatterSelUnitStringFromKilogramsUsedUnit, numberInKilograms, unitp)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSMassFormatter) NumberFormatter() *NSNumberFormatter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMassFormatterSelNumberFormatter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFormatterFromID(_ret)
 }
 
@@ -89,4 +99,3 @@ func (o *NSMassFormatter) IsForPersonMassUse() bool {
 func (o *NSMassFormatter) SetForPersonMassUse(forPersonMassUse bool) {
 	o.Ptr().Send(_nSMassFormatterSelSetForPersonMassUse, forPersonMassUse)
 }
-

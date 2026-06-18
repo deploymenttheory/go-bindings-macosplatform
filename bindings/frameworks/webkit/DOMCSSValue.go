@@ -16,9 +16,9 @@ type DOMCSSValue struct {
 }
 
 var (
-	_clsDOMCSSValue = _objcClass("DOMCSSValue")
-	_dOMCSSValueSelCssText = objc.RegisterName("cssText")
-	_dOMCSSValueSelSetCssText = objc.RegisterName("setCssText:")
+	_clsDOMCSSValue             = _objcClass("DOMCSSValue")
+	_dOMCSSValueSelCssText      = objc.RegisterName("cssText")
+	_dOMCSSValueSelSetCssText   = objc.RegisterName("setCssText:")
 	_dOMCSSValueSelCssValueType = objc.RegisterName("cssValueType")
 )
 
@@ -34,7 +34,9 @@ func DOMCSSValueFromID(id objc.ID) *DOMCSSValue {
 
 func (o *DOMCSSValue) CssText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSValueSelCssText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -46,4 +48,3 @@ func (o *DOMCSSValue) CssValueType() uint16 {
 	_ret := objc.Send[uint16](o.Ptr(), _dOMCSSValueSelCssValueType)
 	return _ret
 }
-

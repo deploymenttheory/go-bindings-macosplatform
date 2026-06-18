@@ -54,4 +54,3 @@ type StateResourceListable interface {
 }
 
 var _ StateResourceListable = (*StateResourceList)(nil)
-

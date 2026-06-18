@@ -80,4 +80,3 @@ type MTRServerAttributeable interface {
 }
 
 var _ MTRServerAttributeable = (*MTRServerAttribute)(nil)
-

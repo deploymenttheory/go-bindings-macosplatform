@@ -345,4 +345,3 @@ type Uniformable interface {
 }
 
 var _ Uniformable = (*Uniform)(nil)
-

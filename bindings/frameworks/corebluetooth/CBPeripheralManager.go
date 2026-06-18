@@ -16,24 +16,24 @@ type CBPeripheralManager struct {
 }
 
 var (
-	_clsCBPeripheralManager = _objcClass("CBPeripheralManager")
-	_cBPeripheralManagerSelAuthorizationStatus = objc.RegisterName("authorizationStatus")
-	_cBPeripheralManagerSelInit = objc.RegisterName("init")
-	_cBPeripheralManagerSelInitWithDelegateQueue = objc.RegisterName("initWithDelegate:queue:")
-	_cBPeripheralManagerSelInitWithDelegateQueueOptions = objc.RegisterName("initWithDelegate:queue:options:")
-	_cBPeripheralManagerSelStartAdvertising = objc.RegisterName("startAdvertising:")
-	_cBPeripheralManagerSelStopAdvertising = objc.RegisterName("stopAdvertising")
-	_cBPeripheralManagerSelSetDesiredConnectionLatencyForCentral = objc.RegisterName("setDesiredConnectionLatency:forCentral:")
-	_cBPeripheralManagerSelAddService = objc.RegisterName("addService:")
-	_cBPeripheralManagerSelRemoveService = objc.RegisterName("removeService:")
-	_cBPeripheralManagerSelRemoveAllServices = objc.RegisterName("removeAllServices")
-	_cBPeripheralManagerSelRespondToRequestWithResult = objc.RegisterName("respondToRequest:withResult:")
+	_clsCBPeripheralManager                                                 = _objcClass("CBPeripheralManager")
+	_cBPeripheralManagerSelAuthorizationStatus                              = objc.RegisterName("authorizationStatus")
+	_cBPeripheralManagerSelInit                                             = objc.RegisterName("init")
+	_cBPeripheralManagerSelInitWithDelegateQueue                            = objc.RegisterName("initWithDelegate:queue:")
+	_cBPeripheralManagerSelInitWithDelegateQueueOptions                     = objc.RegisterName("initWithDelegate:queue:options:")
+	_cBPeripheralManagerSelStartAdvertising                                 = objc.RegisterName("startAdvertising:")
+	_cBPeripheralManagerSelStopAdvertising                                  = objc.RegisterName("stopAdvertising")
+	_cBPeripheralManagerSelSetDesiredConnectionLatencyForCentral            = objc.RegisterName("setDesiredConnectionLatency:forCentral:")
+	_cBPeripheralManagerSelAddService                                       = objc.RegisterName("addService:")
+	_cBPeripheralManagerSelRemoveService                                    = objc.RegisterName("removeService:")
+	_cBPeripheralManagerSelRemoveAllServices                                = objc.RegisterName("removeAllServices")
+	_cBPeripheralManagerSelRespondToRequestWithResult                       = objc.RegisterName("respondToRequest:withResult:")
 	_cBPeripheralManagerSelUpdateValueForCharacteristicOnSubscribedCentrals = objc.RegisterName("updateValue:forCharacteristic:onSubscribedCentrals:")
-	_cBPeripheralManagerSelPublishL2CAPChannelWithEncryption = objc.RegisterName("publishL2CAPChannelWithEncryption:")
-	_cBPeripheralManagerSelUnpublishL2CAPChannel = objc.RegisterName("unpublishL2CAPChannel:")
-	_cBPeripheralManagerSelDelegate = objc.RegisterName("delegate")
-	_cBPeripheralManagerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_cBPeripheralManagerSelIsAdvertising = objc.RegisterName("isAdvertising")
+	_cBPeripheralManagerSelPublishL2CAPChannelWithEncryption                = objc.RegisterName("publishL2CAPChannelWithEncryption:")
+	_cBPeripheralManagerSelUnpublishL2CAPChannel                            = objc.RegisterName("unpublishL2CAPChannel:")
+	_cBPeripheralManagerSelDelegate                                         = objc.RegisterName("delegate")
+	_cBPeripheralManagerSelSetDelegate                                      = objc.RegisterName("setDelegate:")
+	_cBPeripheralManagerSelIsAdvertising                                    = objc.RegisterName("isAdvertising")
 )
 
 func CBPeripheralManagerFromID(id objc.ID) *CBPeripheralManager {
@@ -56,19 +56,25 @@ func CBPeripheralManagerAuthorizationStatusClass() CBPeripheralManagerAuthorizat
 // Deprecated: since macOS 10.15.
 func (o *CBPeripheralManager) Init() *CBPeripheralManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBPeripheralManagerSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CBPeripheralManagerFromID(_ret)
 }
 
 func (o *CBPeripheralManager) InitWithDelegateQueue(delegate CBPeripheralManagerDelegate, queue *foundation.NSObject) *CBPeripheralManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBPeripheralManagerSelInitWithDelegateQueue, delegate, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CBPeripheralManagerFromID(_ret)
 }
 
 func (o *CBPeripheralManager) InitWithDelegateQueueOptions(delegate CBPeripheralManagerDelegate, queue *foundation.NSObject, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CBPeripheralManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBPeripheralManagerSelInitWithDelegateQueueOptions, delegate, queue.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CBPeripheralManagerFromID(_ret)
 }
 
@@ -138,4 +144,3 @@ func (o *CBPeripheralManager) IsAdvertising() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cBPeripheralManagerSelIsAdvertising)
 	return _ret
 }
-

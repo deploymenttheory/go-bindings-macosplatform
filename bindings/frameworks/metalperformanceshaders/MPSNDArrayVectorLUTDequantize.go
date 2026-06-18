@@ -17,10 +17,10 @@ type MPSNDArrayVectorLUTDequantize struct {
 }
 
 var (
-	_clsMPSNDArrayVectorLUTDequantize = _objcClass("MPSNDArrayVectorLUTDequantize")
+	_clsMPSNDArrayVectorLUTDequantize                   = _objcClass("MPSNDArrayVectorLUTDequantize")
 	_mPSNDArrayVectorLUTDequantizeSelInitWithDeviceAxis = objc.RegisterName("initWithDevice:axis:")
-	_mPSNDArrayVectorLUTDequantizeSelVectorAxis = objc.RegisterName("vectorAxis")
-	_mPSNDArrayVectorLUTDequantizeSelSetVectorAxis = objc.RegisterName("setVectorAxis:")
+	_mPSNDArrayVectorLUTDequantizeSelVectorAxis         = objc.RegisterName("vectorAxis")
+	_mPSNDArrayVectorLUTDequantizeSelSetVectorAxis      = objc.RegisterName("setVectorAxis:")
 )
 
 func MPSNDArrayVectorLUTDequantizeFromID(id objc.ID) *MPSNDArrayVectorLUTDequantize {
@@ -36,7 +36,9 @@ func MPSNDArrayVectorLUTDequantizeFromID(id objc.ID) *MPSNDArrayVectorLUTDequant
 // @abstract   Initializes a kernel for vector-based LUT dequantization. @param      device    The Metal device to be used with this kernel. @param      axis        The vector axis in the output. @result     A new vector LUT dequantization kernel.
 func (o *MPSNDArrayVectorLUTDequantize) InitWithDeviceAxis(device metal.MTLDevice, axis uint) *MPSNDArrayVectorLUTDequantize {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayVectorLUTDequantizeSelInitWithDeviceAxis, device, axis)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNDArrayVectorLUTDequantizeFromID(_ret)
 }
 
@@ -49,4 +51,3 @@ func (o *MPSNDArrayVectorLUTDequantize) VectorAxis() uint {
 func (o *MPSNDArrayVectorLUTDequantize) SetVectorAxis(vectorAxis uint) {
 	o.Ptr().Send(_mPSNDArrayVectorLUTDequantizeSelSetVectorAxis, vectorAxis)
 }
-

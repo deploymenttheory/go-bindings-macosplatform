@@ -65,4 +65,3 @@ type HostIOSourceable interface {
 }
 
 var _ HostIOSourceable = (*HostIOSource)(nil)
-

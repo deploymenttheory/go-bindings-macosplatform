@@ -55,4 +55,3 @@ type GenericMachineIdentifierable interface {
 }
 
 var _ GenericMachineIdentifierable = (*GenericMachineIdentifier)(nil)
-

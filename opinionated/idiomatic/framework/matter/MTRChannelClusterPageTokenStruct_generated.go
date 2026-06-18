@@ -17,7 +17,9 @@ type MTRChannelClusterPageTokenStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRChannelClusterPageTokenStruct].
-func (x *MTRChannelClusterPageTokenStruct) Unwrap() *raw.MTRChannelClusterPageTokenStruct { return x.inner }
+func (x *MTRChannelClusterPageTokenStruct) Unwrap() *raw.MTRChannelClusterPageTokenStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -108,4 +110,3 @@ type MTRChannelClusterPageTokenStructable interface {
 }
 
 var _ MTRChannelClusterPageTokenStructable = (*MTRChannelClusterPageTokenStruct)(nil)
-

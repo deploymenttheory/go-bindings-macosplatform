@@ -51,7 +51,9 @@ func (x *ScannerFeatureBoolean) SetValue(value bool) {
 	x.inner.SetValue(value)
 }
 
-func (x *ScannerFeatureBoolean) asScannerFeature() *raw.ICScannerFeature { return &x.inner.ICScannerFeature }
+func (x *ScannerFeatureBoolean) asScannerFeature() *raw.ICScannerFeature {
+	return &x.inner.ICScannerFeature
+}
 
 // ScannerFeatureBooleanable is the interface implemented by [ScannerFeatureBoolean], for mocking and DI.
 type ScannerFeatureBooleanable interface {
@@ -62,4 +64,3 @@ type ScannerFeatureBooleanable interface {
 }
 
 var _ ScannerFeatureBooleanable = (*ScannerFeatureBoolean)(nil)
-

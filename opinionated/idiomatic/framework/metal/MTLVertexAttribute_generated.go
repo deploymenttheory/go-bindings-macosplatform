@@ -82,4 +82,3 @@ type VertexAttributeable interface {
 }
 
 var _ VertexAttributeable = (*VertexAttribute)(nil)
-

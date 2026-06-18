@@ -61,4 +61,3 @@ type AddressFilterable interface {
 }
 
 var _ AddressFilterable = (*AddressFilter)(nil)
-

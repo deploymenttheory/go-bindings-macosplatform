@@ -127,4 +127,3 @@ type DockTileable interface {
 }
 
 var _ DockTileable = (*DockTile)(nil)
-

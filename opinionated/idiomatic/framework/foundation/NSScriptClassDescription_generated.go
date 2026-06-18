@@ -161,9 +161,13 @@ func (x *ScriptClassDescription) IsReadOnlyKey(key string) bool {
 	return x.inner.IsReadOnlyKey(foundation.NSStringStringWithUTF8String(key))
 }
 
-func (x *ScriptClassDescription) asClassDescription() *raw.NSClassDescription { return &x.inner.NSClassDescription }
+func (x *ScriptClassDescription) asClassDescription() *raw.NSClassDescription {
+	return &x.inner.NSClassDescription
+}
 
-func (x *ScriptClassDescription) asObject() *raw.NSObject { return &x.inner.NSClassDescription.NSObject }
+func (x *ScriptClassDescription) asObject() *raw.NSObject {
+	return &x.inner.NSClassDescription.NSObject
+}
 
 // ScriptClassDescriptionable is the interface implemented by [ScriptClassDescription], for mocking and DI.
 type ScriptClassDescriptionable interface {
@@ -190,4 +194,3 @@ type ScriptClassDescriptionable interface {
 }
 
 var _ ScriptClassDescriptionable = (*ScriptClassDescription)(nil)
-

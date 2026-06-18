@@ -119,7 +119,9 @@ func (x *Text) WithMaterials(items ...*raw.SCNMaterial) *Text {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.SCNMaterial](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -141,7 +143,9 @@ func (x *Text) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Text {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -354,4 +358,3 @@ type Textable interface {
 }
 
 var _ Textable = (*Text)(nil)
-

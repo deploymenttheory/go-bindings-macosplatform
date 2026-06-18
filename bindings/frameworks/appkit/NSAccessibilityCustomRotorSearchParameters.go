@@ -18,13 +18,13 @@ type NSAccessibilityCustomRotorSearchParameters struct {
 }
 
 var (
-	_clsNSAccessibilityCustomRotorSearchParameters = _objcClass("NSAccessibilityCustomRotorSearchParameters")
-	_nSAccessibilityCustomRotorSearchParametersSelCurrentItem = objc.RegisterName("currentItem")
-	_nSAccessibilityCustomRotorSearchParametersSelSetCurrentItem = objc.RegisterName("setCurrentItem:")
-	_nSAccessibilityCustomRotorSearchParametersSelSearchDirection = objc.RegisterName("searchDirection")
+	_clsNSAccessibilityCustomRotorSearchParameters                   = _objcClass("NSAccessibilityCustomRotorSearchParameters")
+	_nSAccessibilityCustomRotorSearchParametersSelCurrentItem        = objc.RegisterName("currentItem")
+	_nSAccessibilityCustomRotorSearchParametersSelSetCurrentItem     = objc.RegisterName("setCurrentItem:")
+	_nSAccessibilityCustomRotorSearchParametersSelSearchDirection    = objc.RegisterName("searchDirection")
 	_nSAccessibilityCustomRotorSearchParametersSelSetSearchDirection = objc.RegisterName("setSearchDirection:")
-	_nSAccessibilityCustomRotorSearchParametersSelFilterString = objc.RegisterName("filterString")
-	_nSAccessibilityCustomRotorSearchParametersSelSetFilterString = objc.RegisterName("setFilterString:")
+	_nSAccessibilityCustomRotorSearchParametersSelFilterString       = objc.RegisterName("filterString")
+	_nSAccessibilityCustomRotorSearchParametersSelSetFilterString    = objc.RegisterName("setFilterString:")
 )
 
 func NSAccessibilityCustomRotorSearchParametersFromID(id objc.ID) *NSAccessibilityCustomRotorSearchParameters {
@@ -40,7 +40,9 @@ func NSAccessibilityCustomRotorSearchParametersFromID(id objc.ID) *NSAccessibili
 // @brief The currentItem determines where the search will start from. If it is nil, the search should begin from, and include, the first or last item, depending on which search direction is used (e.g. search direction next will return the first item and previous will return the last item).
 func (o *NSAccessibilityCustomRotorSearchParameters) CurrentItem() *NSAccessibilityCustomRotorItemResult {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAccessibilityCustomRotorSearchParametersSelCurrentItem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAccessibilityCustomRotorItemResultFromID(_ret)
 }
 
@@ -63,7 +65,9 @@ func (o *NSAccessibilityCustomRotorSearchParameters) SetSearchDirection(searchDi
 // @brief A string of text to filter the results against. This is used to get type-ahead results. For example, given a list of primary colors and filter text "Re", color item "Red" would be returned as a result.
 func (o *NSAccessibilityCustomRotorSearchParameters) FilterString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAccessibilityCustomRotorSearchParametersSelFilterString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -71,4 +75,3 @@ func (o *NSAccessibilityCustomRotorSearchParameters) FilterString() *foundation.
 func (o *NSAccessibilityCustomRotorSearchParameters) SetFilterString(filterString *foundation.NSString) {
 	o.Ptr().Send(_nSAccessibilityCustomRotorSearchParametersSelSetFilterString, filterString.Ptr())
 }
-

@@ -15,9 +15,9 @@ type VZBridgedNetworkDeviceAttachment struct {
 }
 
 var (
-	_clsVZBridgedNetworkDeviceAttachment = _objcClass("VZBridgedNetworkDeviceAttachment")
+	_clsVZBridgedNetworkDeviceAttachment                  = _objcClass("VZBridgedNetworkDeviceAttachment")
 	_vZBridgedNetworkDeviceAttachmentSelInitWithInterface = objc.RegisterName("initWithInterface:")
-	_vZBridgedNetworkDeviceAttachmentSelInterface = objc.RegisterName("interface")
+	_vZBridgedNetworkDeviceAttachmentSelInterface         = objc.RegisterName("interface")
 )
 
 func VZBridgedNetworkDeviceAttachmentFromID(id objc.ID) *VZBridgedNetworkDeviceAttachment {
@@ -33,13 +33,16 @@ func VZBridgedNetworkDeviceAttachmentFromID(id objc.ID) *VZBridgedNetworkDeviceA
 // @abstract Initialize a VZBridgedNetworkDeviceAttachment with a host network interface. @param interface Host network interface controller.
 func (o *VZBridgedNetworkDeviceAttachment) InitWithInterface(interface_ *VZBridgedNetworkInterface) *VZBridgedNetworkDeviceAttachment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZBridgedNetworkDeviceAttachmentSelInitWithInterface, interface_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZBridgedNetworkDeviceAttachmentFromID(_ret)
 }
 
 func (o *VZBridgedNetworkDeviceAttachment) Interface() *VZBridgedNetworkInterface {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZBridgedNetworkDeviceAttachmentSelInterface)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZBridgedNetworkInterfaceFromID(_ret)
 }
-

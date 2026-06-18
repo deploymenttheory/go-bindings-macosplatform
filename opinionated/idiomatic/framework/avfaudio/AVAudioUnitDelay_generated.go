@@ -105,11 +105,17 @@ func (x *AudioUnitDelay) SetWetDryMix(wetDryMix float32) {
 	x.inner.SetWetDryMix(wetDryMix)
 }
 
-func (x *AudioUnitDelay) asAudioUnitEffect() *raw.AVAudioUnitEffect { return &x.inner.AVAudioUnitEffect }
+func (x *AudioUnitDelay) asAudioUnitEffect() *raw.AVAudioUnitEffect {
+	return &x.inner.AVAudioUnitEffect
+}
 
-func (x *AudioUnitDelay) asAudioUnit() *raw.AVAudioUnit { return &x.inner.AVAudioUnitEffect.AVAudioUnit }
+func (x *AudioUnitDelay) asAudioUnit() *raw.AVAudioUnit {
+	return &x.inner.AVAudioUnitEffect.AVAudioUnit
+}
 
-func (x *AudioUnitDelay) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAudioUnitEffect.AVAudioUnit.AVAudioNode }
+func (x *AudioUnitDelay) asAudioNode() *raw.AVAudioNode {
+	return &x.inner.AVAudioUnitEffect.AVAudioUnit.AVAudioNode
+}
 
 // AudioUnitDelayable is the interface implemented by [AudioUnitDelay], for mocking and DI.
 type AudioUnitDelayable interface {
@@ -130,4 +136,3 @@ type AudioUnitDelayable interface {
 }
 
 var _ AudioUnitDelayable = (*AudioUnitDelay)(nil)
-

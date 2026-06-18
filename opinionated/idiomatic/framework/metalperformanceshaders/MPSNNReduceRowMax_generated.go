@@ -113,11 +113,17 @@ func (x *NNReduceRowMax) WithLabel(label string) *NNReduceRowMax {
 	return x
 }
 
-func (x *NNReduceRowMax) asNNReduceUnary() *mpsneuralnetwork.MPSNNReduceUnary { return &x.inner.MPSNNReduceUnary }
+func (x *NNReduceRowMax) asNNReduceUnary() *mpsneuralnetwork.MPSNNReduceUnary {
+	return &x.inner.MPSNNReduceUnary
+}
 
-func (x *NNReduceRowMax) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
+func (x *NNReduceRowMax) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel
+}
 
-func (x *NNReduceRowMax) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel }
+func (x *NNReduceRowMax) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel
+}
 
 // NNReduceRowMaxable is the interface implemented by [NNReduceRowMax], for mocking and DI.
 type NNReduceRowMaxable interface {
@@ -136,4 +142,3 @@ type NNReduceRowMaxable interface {
 }
 
 var _ NNReduceRowMaxable = (*NNReduceRowMax)(nil)
-

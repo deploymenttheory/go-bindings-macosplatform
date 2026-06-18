@@ -16,11 +16,11 @@ type MTRApplicationLauncherClusterApplicationEPStruct struct {
 }
 
 var (
-	_clsMTRApplicationLauncherClusterApplicationEPStruct = _objcClass("MTRApplicationLauncherClusterApplicationEPStruct")
-	_mTRApplicationLauncherClusterApplicationEPStructSelApplication = objc.RegisterName("application")
+	_clsMTRApplicationLauncherClusterApplicationEPStruct               = _objcClass("MTRApplicationLauncherClusterApplicationEPStruct")
+	_mTRApplicationLauncherClusterApplicationEPStructSelApplication    = objc.RegisterName("application")
 	_mTRApplicationLauncherClusterApplicationEPStructSelSetApplication = objc.RegisterName("setApplication:")
-	_mTRApplicationLauncherClusterApplicationEPStructSelEndpoint = objc.RegisterName("endpoint")
-	_mTRApplicationLauncherClusterApplicationEPStructSelSetEndpoint = objc.RegisterName("setEndpoint:")
+	_mTRApplicationLauncherClusterApplicationEPStructSelEndpoint       = objc.RegisterName("endpoint")
+	_mTRApplicationLauncherClusterApplicationEPStructSelSetEndpoint    = objc.RegisterName("setEndpoint:")
 )
 
 func MTRApplicationLauncherClusterApplicationEPStructFromID(id objc.ID) *MTRApplicationLauncherClusterApplicationEPStruct {
@@ -35,7 +35,9 @@ func MTRApplicationLauncherClusterApplicationEPStructFromID(id objc.ID) *MTRAppl
 
 func (o *MTRApplicationLauncherClusterApplicationEPStruct) Application() *MTRApplicationLauncherClusterApplicationStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRApplicationLauncherClusterApplicationEPStructSelApplication)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRApplicationLauncherClusterApplicationStructFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRApplicationLauncherClusterApplicationEPStruct) SetApplication(applic
 
 func (o *MTRApplicationLauncherClusterApplicationEPStruct) Endpoint() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRApplicationLauncherClusterApplicationEPStructSelEndpoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRApplicationLauncherClusterApplicationEPStruct) SetEndpoint(endpoint *foundation.NSNumber) {
 	o.Ptr().Send(_mTRApplicationLauncherClusterApplicationEPStructSelSetEndpoint, endpoint.Ptr())
 }
-

@@ -16,14 +16,14 @@ type CATiledLayer struct {
 }
 
 var (
-	_clsCATiledLayer = _objcClass("CATiledLayer")
-	_cATiledLayerSelFadeDuration = objc.RegisterName("fadeDuration")
-	_cATiledLayerSelLevelsOfDetail = objc.RegisterName("levelsOfDetail")
-	_cATiledLayerSelSetLevelsOfDetail = objc.RegisterName("setLevelsOfDetail:")
-	_cATiledLayerSelLevelsOfDetailBias = objc.RegisterName("levelsOfDetailBias")
+	_clsCATiledLayer                      = _objcClass("CATiledLayer")
+	_cATiledLayerSelFadeDuration          = objc.RegisterName("fadeDuration")
+	_cATiledLayerSelLevelsOfDetail        = objc.RegisterName("levelsOfDetail")
+	_cATiledLayerSelSetLevelsOfDetail     = objc.RegisterName("setLevelsOfDetail:")
+	_cATiledLayerSelLevelsOfDetailBias    = objc.RegisterName("levelsOfDetailBias")
 	_cATiledLayerSelSetLevelsOfDetailBias = objc.RegisterName("setLevelsOfDetailBias:")
-	_cATiledLayerSelTileSize = objc.RegisterName("tileSize")
-	_cATiledLayerSelSetTileSize = objc.RegisterName("setTileSize:")
+	_cATiledLayerSelTileSize              = objc.RegisterName("tileSize")
+	_cATiledLayerSelSetTileSize           = objc.RegisterName("setTileSize:")
 )
 
 func CATiledLayerFromID(id objc.ID) *CATiledLayer {
@@ -67,4 +67,3 @@ func (o *CATiledLayer) TileSize() corefoundation.CGSize {
 func (o *CATiledLayer) SetTileSize(tileSize corefoundation.CGSize) {
 	o.Ptr().Send(_cATiledLayerSelSetTileSize, tileSize)
 }
-

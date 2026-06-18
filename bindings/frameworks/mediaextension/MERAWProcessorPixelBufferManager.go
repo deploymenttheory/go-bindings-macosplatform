@@ -18,10 +18,10 @@ type MERAWProcessorPixelBufferManager struct {
 }
 
 var (
-	_clsMERAWProcessorPixelBufferManager = _objcClass("MERAWProcessorPixelBufferManager")
+	_clsMERAWProcessorPixelBufferManager                                = _objcClass("MERAWProcessorPixelBufferManager")
 	_mERAWProcessorPixelBufferManagerSelCreatePixelBufferAndReturnError = objc.RegisterName("createPixelBufferAndReturnError:")
-	_mERAWProcessorPixelBufferManagerSelPixelBufferAttributes = objc.RegisterName("pixelBufferAttributes")
-	_mERAWProcessorPixelBufferManagerSelSetPixelBufferAttributes = objc.RegisterName("setPixelBufferAttributes:")
+	_mERAWProcessorPixelBufferManagerSelPixelBufferAttributes           = objc.RegisterName("pixelBufferAttributes")
+	_mERAWProcessorPixelBufferManagerSelSetPixelBufferAttributes        = objc.RegisterName("setPixelBufferAttributes:")
 )
 
 func MERAWProcessorPixelBufferManagerFromID(id objc.ID) *MERAWProcessorPixelBufferManager {
@@ -53,4 +53,3 @@ func (o *MERAWProcessorPixelBufferManager) PixelBufferAttributes() *foundation.N
 func (o *MERAWProcessorPixelBufferManager) SetPixelBufferAttributes(pixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	o.Ptr().Send(_mERAWProcessorPixelBufferManagerSelSetPixelBufferAttributes, pixelBufferAttributes)
 }
-

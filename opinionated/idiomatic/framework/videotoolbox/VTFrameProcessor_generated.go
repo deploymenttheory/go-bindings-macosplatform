@@ -79,4 +79,3 @@ type FrameProcessorable interface {
 }
 
 var _ FrameProcessorable = (*FrameProcessor)(nil)
-

@@ -18,11 +18,11 @@ type NSPersistentStoreAsynchronousResult struct {
 }
 
 var (
-	_clsNSPersistentStoreAsynchronousResult = _objcClass("NSPersistentStoreAsynchronousResult")
-	_nSPersistentStoreAsynchronousResultSelCancel = objc.RegisterName("cancel")
+	_clsNSPersistentStoreAsynchronousResult                     = _objcClass("NSPersistentStoreAsynchronousResult")
+	_nSPersistentStoreAsynchronousResultSelCancel               = objc.RegisterName("cancel")
 	_nSPersistentStoreAsynchronousResultSelManagedObjectContext = objc.RegisterName("managedObjectContext")
-	_nSPersistentStoreAsynchronousResultSelOperationError = objc.RegisterName("operationError")
-	_nSPersistentStoreAsynchronousResultSelProgress = objc.RegisterName("progress")
+	_nSPersistentStoreAsynchronousResultSelOperationError       = objc.RegisterName("operationError")
+	_nSPersistentStoreAsynchronousResultSelProgress             = objc.RegisterName("progress")
 )
 
 func NSPersistentStoreAsynchronousResultFromID(id objc.ID) *NSPersistentStoreAsynchronousResult {
@@ -41,7 +41,9 @@ func (o *NSPersistentStoreAsynchronousResult) Cancel() {
 
 func (o *NSPersistentStoreAsynchronousResult) ManagedObjectContext() *NSManagedObjectContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreAsynchronousResultSelManagedObjectContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectContextFromID(_ret)
 }
 
@@ -52,7 +54,8 @@ func (o *NSPersistentStoreAsynchronousResult) OperationError() unsafe.Pointer {
 
 func (o *NSPersistentStoreAsynchronousResult) Progress() *foundation.NSProgress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreAsynchronousResultSelProgress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSProgressFromID(_ret)
 }
-

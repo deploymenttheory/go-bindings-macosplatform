@@ -16,7 +16,9 @@ type MTRIdentifyClusterTriggerEffectParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRIdentifyClusterTriggerEffectParams].
-func (x *MTRIdentifyClusterTriggerEffectParams) Unwrap() *raw.MTRIdentifyClusterTriggerEffectParams { return x.inner }
+func (x *MTRIdentifyClusterTriggerEffectParams) Unwrap() *raw.MTRIdentifyClusterTriggerEffectParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -118,4 +120,3 @@ type MTRIdentifyClusterTriggerEffectParamsable interface {
 }
 
 var _ MTRIdentifyClusterTriggerEffectParamsable = (*MTRIdentifyClusterTriggerEffectParams)(nil)
-

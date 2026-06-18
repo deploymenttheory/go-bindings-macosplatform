@@ -25,4 +25,3 @@ func MTRTestClusterClusterTestFabricScopedEventEventFromID(id objc.ID) *MTRTestC
 	purego.Track(o)
 	return o
 }
-

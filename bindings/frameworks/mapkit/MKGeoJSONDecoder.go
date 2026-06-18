@@ -18,7 +18,7 @@ type MKGeoJSONDecoder struct {
 }
 
 var (
-	_clsMKGeoJSONDecoder = _objcClass("MKGeoJSONDecoder")
+	_clsMKGeoJSONDecoder                            = _objcClass("MKGeoJSONDecoder")
 	_mKGeoJSONDecoderSelGeoJSONObjectsWithDataError = objc.RegisterName("geoJSONObjectsWithData:error:")
 )
 
@@ -35,10 +35,11 @@ func MKGeoJSONDecoderFromID(id objc.ID) *MKGeoJSONDecoder {
 func (o *MKGeoJSONDecoder) GeoJSONObjectsWithDataError(data *foundation.NSData) (*foundation.NSArray[MKGeoJSONObject], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKGeoJSONDecoderSelGeoJSONObjectsWithDataError, data.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSArrayFromID[MKGeoJSONObject](_ret), nil
 }
-

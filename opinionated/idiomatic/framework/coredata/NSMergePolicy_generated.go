@@ -67,4 +67,3 @@ type MergePolicyable interface {
 }
 
 var _ MergePolicyable = (*MergePolicy)(nil)
-

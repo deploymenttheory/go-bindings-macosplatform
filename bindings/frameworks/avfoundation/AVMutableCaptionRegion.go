@@ -16,14 +16,14 @@ type AVMutableCaptionRegion struct {
 }
 
 var (
-	_clsAVMutableCaptionRegion = _objcClass("AVMutableCaptionRegion")
-	_aVMutableCaptionRegionSelInit = objc.RegisterName("init")
-	_aVMutableCaptionRegionSelInitWithIdentifier = objc.RegisterName("initWithIdentifier:")
-	_aVMutableCaptionRegionSelSetOrigin = objc.RegisterName("setOrigin:")
-	_aVMutableCaptionRegionSelSetSize = objc.RegisterName("setSize:")
-	_aVMutableCaptionRegionSelSetScroll = objc.RegisterName("setScroll:")
+	_clsAVMutableCaptionRegion                    = _objcClass("AVMutableCaptionRegion")
+	_aVMutableCaptionRegionSelInit                = objc.RegisterName("init")
+	_aVMutableCaptionRegionSelInitWithIdentifier  = objc.RegisterName("initWithIdentifier:")
+	_aVMutableCaptionRegionSelSetOrigin           = objc.RegisterName("setOrigin:")
+	_aVMutableCaptionRegionSelSetSize             = objc.RegisterName("setSize:")
+	_aVMutableCaptionRegionSelSetScroll           = objc.RegisterName("setScroll:")
 	_aVMutableCaptionRegionSelSetDisplayAlignment = objc.RegisterName("setDisplayAlignment:")
-	_aVMutableCaptionRegionSelSetWritingMode = objc.RegisterName("setWritingMode:")
+	_aVMutableCaptionRegionSelSetWritingMode      = objc.RegisterName("setWritingMode:")
 )
 
 func AVMutableCaptionRegionFromID(id objc.ID) *AVMutableCaptionRegion {
@@ -39,14 +39,18 @@ func AVMutableCaptionRegionFromID(id objc.ID) *AVMutableCaptionRegion {
 // @method init @abstract Create a region object without any properties.
 func (o *AVMutableCaptionRegion) Init() *AVMutableCaptionRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMutableCaptionRegionSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMutableCaptionRegionFromID(_ret)
 }
 
 // @method initWithIdentifier: @abstract Create a region object with the identifier.
 func (o *AVMutableCaptionRegion) InitWithIdentifier(identifier *foundation.NSString) *AVMutableCaptionRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMutableCaptionRegionSelInitWithIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMutableCaptionRegionFromID(_ret)
 }
 
@@ -69,4 +73,3 @@ func (o *AVMutableCaptionRegion) SetDisplayAlignment(displayAlignment AVCaptionR
 func (o *AVMutableCaptionRegion) SetWritingMode(writingMode AVCaptionRegionWritingMode) {
 	o.Ptr().Send(_aVMutableCaptionRegionSelSetWritingMode, writingMode)
 }
-

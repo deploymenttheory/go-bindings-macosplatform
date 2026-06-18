@@ -11,20 +11,20 @@ import (
 )
 
 var (
-	_fnDisposeURLNotifyUPP func(unsafe.Pointer)
-	_fnDisposeURLSystemEventUPP func(unsafe.Pointer)
-	_fnInvokeURLNotifyUPP func(unsafe.Pointer, uint, *URLCallbackInfo, unsafe.Pointer) int
-	_fnInvokeURLSystemEventUPP func(unsafe.Pointer, *hitoolbox.EventRecord, unsafe.Pointer) int
-	_fnKCAddAppleSharePassword func(*[16]uint8, *uint8, *uint8, *uint8, *uint8, uint, unsafe.Pointer, unsafe.Pointer) int
-	_fnKCAddGenericPassword func(*uint8, *uint8, uint, unsafe.Pointer, unsafe.Pointer) int
-	_fnKCAddInternetPassword func(*uint8, *uint8, *uint8, uint16, uint, uint, uint, unsafe.Pointer, unsafe.Pointer) int
+	_fnDisposeURLNotifyUPP           func(unsafe.Pointer)
+	_fnDisposeURLSystemEventUPP      func(unsafe.Pointer)
+	_fnInvokeURLNotifyUPP            func(unsafe.Pointer, uint, *URLCallbackInfo, unsafe.Pointer) int
+	_fnInvokeURLSystemEventUPP       func(unsafe.Pointer, *hitoolbox.EventRecord, unsafe.Pointer) int
+	_fnKCAddAppleSharePassword       func(*[16]uint8, *uint8, *uint8, *uint8, *uint8, uint, unsafe.Pointer, unsafe.Pointer) int
+	_fnKCAddGenericPassword          func(*uint8, *uint8, uint, unsafe.Pointer, unsafe.Pointer) int
+	_fnKCAddInternetPassword         func(*uint8, *uint8, *uint8, uint16, uint, uint, uint, unsafe.Pointer, unsafe.Pointer) int
 	_fnKCAddInternetPasswordWithPath func(*uint8, *uint8, *uint8, *uint8, uint16, uint, uint, uint, unsafe.Pointer, unsafe.Pointer) int
-	_fnKCAddItem func(unsafe.Pointer) int
-	_fnKCChangeSettings func(unsafe.Pointer) int
-	_fnKCCreateKeychain func(*uint8, unsafe.Pointer) int
-	_fnKCUnlock func(unsafe.Pointer, *uint8) int
-	_fnNewURLNotifyUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewURLSystemEventUPP func(unsafe.Pointer) unsafe.Pointer
+	_fnKCAddItem                     func(unsafe.Pointer) int
+	_fnKCChangeSettings              func(unsafe.Pointer) int
+	_fnKCCreateKeychain              func(*uint8, unsafe.Pointer) int
+	_fnKCUnlock                      func(unsafe.Pointer, *uint8) int
+	_fnNewURLNotifyUPP               func(unsafe.Pointer) unsafe.Pointer
+	_fnNewURLSystemEventUPP          func(unsafe.Pointer) unsafe.Pointer
 	// @function SecChooseIdentity @abstract Displays a list of identities in a panel and allows the user to pick one. @param displayInfo A reference to a string to display in the panel that the user sees. @param identities A reference to an array of identities to choose from. The identities are obtained by calling the SecCreateIdentitySearch and SecIdentitySearchNext functions. @param identityRef On return, a pointer to an identity reference that was chosen by the user. @result A result code.  See "Security Error Codes" (SecBase.h). @discussion This Carbon function is deprecated in OS X 10.9 and later; use SFChooseIdentityPanel (in the SecurityInterface framework) instead.
 	_fnSecChooseIdentity func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	// @function SecChooseIdentityAsSheet @abstract Displays a list of identities in a sheet and allows the user to pick one. You obtain the chosen identity from the event after the target event handler is called. @param parentWindow A reference to the window in which the sheet will appear. @param inTarget A reference to the event target to receive the event. @param displayInfo A reference to a string to display in the sheet that the user sees. @param identities A reference to an array of identities to choose from. You call the functions  SecCreateIdentitySearch and SecIdentitySearchNext to obtain the identities. @result A result code.  See "Security Error Codes" (SecBase.h). @discussion This Carbon function is deprecated in OS X 10.9 and later; use SFChooseIdentityPanel (in the SecurityInterface framework) instead.
@@ -36,13 +36,13 @@ var (
 	// @function SecEditTrust @abstract Edits the trust information of a SecTrust object in a panel. @param displayInfo A reference to a string to display in the edit trust panel that the user sees. Pass NULL for a default-provided string. @param trust The reference to a trust object in which to edit the trust. @result A result code.  See "Security Error Codes" (SecBase.h). @discussion  You must call the SecTrustEvaluate function prior to editing the trust information of the trust object. Pass in a string with arbitrary encoding for display purposes in the edit trust panel. For example, the user interface can show what went wrong during a verify or it can indicate that a certificate has expired. The user can edit the trust decisions at this time. If any certificate that is involved in the verification doesn't exist in a keychain, it can be added to a keychain by the user. @discussion This Carbon function is deprecated in OS X 10.9 and later; use SFCertificateTrustPanel (in the SecurityInterface framework) instead.
 	_fnSecEditTrust func(unsafe.Pointer, unsafe.Pointer) int
 	// @function SecEditTrustAsSheet @abstract Edits the trust information of a SecTrust object in a sheet. When the target event handler is called, you can see if the user clicked Cancel or OK. @param parentWindow A reference to the window in which the sheet appears. @param inTarget A reference to the event target to receive the event. @param displayInfo A reference to a string to display in the Edit Trust sheet that the user sees. Pass NULL for a default-provided string. @param trust A reference to the trust object in which to edit the trust. @result A result code.  See "Security Error Codes" (SecBase.h). @discussion This Carbon function is deprecated in OS X 10.9 and later; use SFCertificateTrustPanel (in the SecurityInterface framework) instead.
-	_fnSecEditTrustAsSheet func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_kcaddapplesharepassword func(*[16]uint8, string, string, string, string, uint, unsafe.Pointer, unsafe.Pointer) int
-	_kcaddgenericpassword func(string, string, uint, unsafe.Pointer, unsafe.Pointer) int
-	_kcaddinternetpassword func(string, string, string, uint16, uint, uint, uint, unsafe.Pointer, unsafe.Pointer) int
+	_fnSecEditTrustAsSheet         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_kcaddapplesharepassword       func(*[16]uint8, string, string, string, string, uint, unsafe.Pointer, unsafe.Pointer) int
+	_kcaddgenericpassword          func(string, string, uint, unsafe.Pointer, unsafe.Pointer) int
+	_kcaddinternetpassword         func(string, string, string, uint16, uint, uint, uint, unsafe.Pointer, unsafe.Pointer) int
 	_kcaddinternetpasswordwithpath func(string, string, string, string, uint16, uint, uint, uint, unsafe.Pointer, unsafe.Pointer) int
-	_kccreatekeychain func(string, unsafe.Pointer) int
-	_kcunlock func(unsafe.Pointer, string) int
+	_kccreatekeychain              func(string, unsafe.Pointer) int
+	_kcunlock                      func(unsafe.Pointer, string) int
 )
 
 func DisposeURLNotifyUPP(userUPP unsafe.Pointer) {
@@ -160,4 +160,3 @@ func Kccreatekeychain(password string, keychain unsafe.Pointer) int {
 func Kcunlock(keychain unsafe.Pointer, password string) int {
 	return _kcunlock(keychain, password)
 }
-

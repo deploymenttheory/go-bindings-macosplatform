@@ -16,8 +16,8 @@ type MTRSmokeCOAlarmClusterSmokeAlarmEvent struct {
 }
 
 var (
-	_clsMTRSmokeCOAlarmClusterSmokeAlarmEvent = _objcClass("MTRSmokeCOAlarmClusterSmokeAlarmEvent")
-	_mTRSmokeCOAlarmClusterSmokeAlarmEventSelAlarmSeverityLevel = objc.RegisterName("alarmSeverityLevel")
+	_clsMTRSmokeCOAlarmClusterSmokeAlarmEvent                      = _objcClass("MTRSmokeCOAlarmClusterSmokeAlarmEvent")
+	_mTRSmokeCOAlarmClusterSmokeAlarmEventSelAlarmSeverityLevel    = objc.RegisterName("alarmSeverityLevel")
 	_mTRSmokeCOAlarmClusterSmokeAlarmEventSelSetAlarmSeverityLevel = objc.RegisterName("setAlarmSeverityLevel:")
 )
 
@@ -33,11 +33,12 @@ func MTRSmokeCOAlarmClusterSmokeAlarmEventFromID(id objc.ID) *MTRSmokeCOAlarmClu
 
 func (o *MTRSmokeCOAlarmClusterSmokeAlarmEvent) AlarmSeverityLevel() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSmokeCOAlarmClusterSmokeAlarmEventSelAlarmSeverityLevel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRSmokeCOAlarmClusterSmokeAlarmEvent) SetAlarmSeverityLevel(alarmSeverityLevel *foundation.NSNumber) {
 	o.Ptr().Send(_mTRSmokeCOAlarmClusterSmokeAlarmEventSelSetAlarmSeverityLevel, alarmSeverityLevel.Ptr())
 }
-

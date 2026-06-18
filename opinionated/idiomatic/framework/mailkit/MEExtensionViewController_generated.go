@@ -41,4 +41,3 @@ type ExtensionViewControllerable interface {
 }
 
 var _ ExtensionViewControllerable = (*ExtensionViewController)(nil)
-

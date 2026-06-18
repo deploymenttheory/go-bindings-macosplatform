@@ -12,9 +12,9 @@ import (
 type MPSNDArrayQuantizationScheme uint64
 
 const (
-	MPSNDArrayQuantizationTypeNone MPSNDArrayQuantizationScheme = 0
+	MPSNDArrayQuantizationTypeNone   MPSNDArrayQuantizationScheme = 0
 	MPSNDArrayQuantizationTypeAffine MPSNDArrayQuantizationScheme = 1
-	MPSNDArrayQuantizationTypeLUT MPSNDArrayQuantizationScheme = 2
+	MPSNDArrayQuantizationTypeLUT    MPSNDArrayQuantizationScheme = 2
 )
 
 func (e MPSNDArrayQuantizationScheme) String() string {
@@ -30,4 +30,3 @@ func (e MPSNDArrayQuantizationScheme) String() string {
 	}
 	return strings.Join(parts, "|")
 }
-

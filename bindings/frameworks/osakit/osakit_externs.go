@@ -101,4 +101,3 @@ func OSAStorageTextType() uintptr {
 	ptr, _ := purego.Dlsym(_osakitLib, "OSAStorageTextType")
 	return ptr
 }
-

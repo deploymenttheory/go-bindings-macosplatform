@@ -84,9 +84,13 @@ func (x *MTRClusterSwitch) ReadAttributeClusterRevisionWithParams(params *raw.MT
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterSwitch) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterSwitch) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterSwitch) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterSwitch) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterSwitchable is the interface implemented by [MTRClusterSwitch], for mocking and DI.
 type MTRClusterSwitchable interface {
@@ -102,4 +106,3 @@ type MTRClusterSwitchable interface {
 }
 
 var _ MTRClusterSwitchable = (*MTRClusterSwitch)(nil)
-

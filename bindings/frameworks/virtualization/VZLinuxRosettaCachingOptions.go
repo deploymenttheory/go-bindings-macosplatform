@@ -26,4 +26,3 @@ func VZLinuxRosettaCachingOptionsFromID(id objc.ID) *VZLinuxRosettaCachingOption
 	purego.Track(o)
 	return o
 }
-

@@ -69,4 +69,3 @@ type ImageConstraintable interface {
 }
 
 var _ ImageConstraintable = (*ImageConstraint)(nil)
-

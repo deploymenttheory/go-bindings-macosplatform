@@ -16,10 +16,10 @@ type MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent struct {
 }
 
 var (
-	_clsMTRBooleanStateConfigurationClusterAlarmsStateChangedEvent = _objcClass("MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent")
-	_mTRBooleanStateConfigurationClusterAlarmsStateChangedEventSelAlarmsActive = objc.RegisterName("alarmsActive")
-	_mTRBooleanStateConfigurationClusterAlarmsStateChangedEventSelSetAlarmsActive = objc.RegisterName("setAlarmsActive:")
-	_mTRBooleanStateConfigurationClusterAlarmsStateChangedEventSelAlarmsSuppressed = objc.RegisterName("alarmsSuppressed")
+	_clsMTRBooleanStateConfigurationClusterAlarmsStateChangedEvent                    = _objcClass("MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent")
+	_mTRBooleanStateConfigurationClusterAlarmsStateChangedEventSelAlarmsActive        = objc.RegisterName("alarmsActive")
+	_mTRBooleanStateConfigurationClusterAlarmsStateChangedEventSelSetAlarmsActive     = objc.RegisterName("setAlarmsActive:")
+	_mTRBooleanStateConfigurationClusterAlarmsStateChangedEventSelAlarmsSuppressed    = objc.RegisterName("alarmsSuppressed")
 	_mTRBooleanStateConfigurationClusterAlarmsStateChangedEventSelSetAlarmsSuppressed = objc.RegisterName("setAlarmsSuppressed:")
 )
 
@@ -35,7 +35,9 @@ func MTRBooleanStateConfigurationClusterAlarmsStateChangedEventFromID(id objc.ID
 
 func (o *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) AlarmsActive() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBooleanStateConfigurationClusterAlarmsStateChangedEventSelAlarmsActive)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) SetAlarmsAc
 
 func (o *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) AlarmsSuppressed() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBooleanStateConfigurationClusterAlarmsStateChangedEventSelAlarmsSuppressed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) SetAlarmsSuppressed(alarmsSuppressed *foundation.NSNumber) {
 	o.Ptr().Send(_mTRBooleanStateConfigurationClusterAlarmsStateChangedEventSelSetAlarmsSuppressed, alarmsSuppressed.Ptr())
 }
-

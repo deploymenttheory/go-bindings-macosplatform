@@ -32,6 +32,11 @@ type Rule struct {
 	IsDisabled bool       `json:"isDisabled,omitempty"`
 	Creation   time.Time  `json:"creation"`
 	Expiration *time.Time `json:"expiration,omitempty"`
+
+	// Managed is set on rules created by declarative `lulu apply`. Only managed
+	// rules are pruned during reconciliation, so hand-added rules are never
+	// removed by an apply.
+	Managed bool `json:"managed,omitempty"`
 }
 
 // Matches reports whether the rule applies to a flow to remoteAddr:remotePort.

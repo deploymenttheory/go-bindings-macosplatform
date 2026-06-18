@@ -44,7 +44,9 @@ func (x *NEAppProxyProviderManager) WithSafariDomains(items ...*foundation.NSStr
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -60,7 +62,9 @@ func (x *NEAppProxyProviderManager) WithMailDomains(items ...*foundation.NSStrin
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -76,7 +80,9 @@ func (x *NEAppProxyProviderManager) WithCalendarDomains(items ...*foundation.NSS
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -92,7 +98,9 @@ func (x *NEAppProxyProviderManager) WithContactsDomains(items ...*foundation.NSS
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -108,7 +116,9 @@ func (x *NEAppProxyProviderManager) WithAppRules(items ...*raw.NEAppRule) *NEApp
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NEAppRule](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -124,7 +134,9 @@ func (x *NEAppProxyProviderManager) WithExcludedDomains(items ...*foundation.NSS
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -140,7 +152,9 @@ func (x *NEAppProxyProviderManager) WithAssociatedDomains(items ...*foundation.N
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -156,7 +170,9 @@ func (x *NEAppProxyProviderManager) WithOnDemandRules(items ...NEOnDemandRulePro
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asNEOnDemandRule().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asNEOnDemandRule().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NEOnDemandRule](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -195,9 +211,13 @@ func (x *NEAppProxyProviderManager) WithEnabled(enabled bool) *NEAppProxyProvide
 	return x
 }
 
-func (x *NEAppProxyProviderManager) asNETunnelProviderManager() *raw.NETunnelProviderManager { return &x.inner.NETunnelProviderManager }
+func (x *NEAppProxyProviderManager) asNETunnelProviderManager() *raw.NETunnelProviderManager {
+	return &x.inner.NETunnelProviderManager
+}
 
-func (x *NEAppProxyProviderManager) asNEVPNManager() *raw.NEVPNManager { return &x.inner.NETunnelProviderManager.NEVPNManager }
+func (x *NEAppProxyProviderManager) asNEVPNManager() *raw.NEVPNManager {
+	return &x.inner.NETunnelProviderManager.NEVPNManager
+}
 
 // NEAppProxyProviderManagerable is the interface implemented by [NEAppProxyProviderManager], for mocking and DI.
 type NEAppProxyProviderManagerable interface {
@@ -218,4 +238,3 @@ type NEAppProxyProviderManagerable interface {
 }
 
 var _ NEAppProxyProviderManagerable = (*NEAppProxyProviderManager)(nil)
-

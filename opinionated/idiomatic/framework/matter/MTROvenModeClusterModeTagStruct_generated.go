@@ -16,7 +16,9 @@ type MTROvenModeClusterModeTagStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTROvenModeClusterModeTagStruct].
-func (x *MTROvenModeClusterModeTagStruct) Unwrap() *raw.MTROvenModeClusterModeTagStruct { return x.inner }
+func (x *MTROvenModeClusterModeTagStruct) Unwrap() *raw.MTROvenModeClusterModeTagStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -80,4 +82,3 @@ type MTROvenModeClusterModeTagStructable interface {
 }
 
 var _ MTROvenModeClusterModeTagStructable = (*MTROvenModeClusterModeTagStruct)(nil)
-

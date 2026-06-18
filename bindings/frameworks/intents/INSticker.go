@@ -16,10 +16,10 @@ type INSticker struct {
 }
 
 var (
-	_clsINSticker = _objcClass("INSticker")
+	_clsINSticker                  = _objcClass("INSticker")
 	_iNStickerSelInitWithTypeEmoji = objc.RegisterName("initWithType:emoji:")
-	_iNStickerSelType = objc.RegisterName("type")
-	_iNStickerSelEmoji = objc.RegisterName("emoji")
+	_iNStickerSelType              = objc.RegisterName("type")
+	_iNStickerSelEmoji             = objc.RegisterName("emoji")
 )
 
 func INStickerFromID(id objc.ID) *INSticker {
@@ -35,7 +35,9 @@ func INStickerFromID(id objc.ID) *INSticker {
 // Creates an object that represents a sticker a person sends in a message. - Parameters: - type: The type of the sticker. - emoji: The single emoji character that the sticker represents.
 func (o *INSticker) InitWithTypeEmoji(type_ INStickerType, emoji *foundation.NSString) *INSticker {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNStickerSelInitWithTypeEmoji, type_, emoji.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INStickerFromID(_ret)
 }
 
@@ -46,7 +48,8 @@ func (o *INSticker) Type() INStickerType {
 
 func (o *INSticker) Emoji() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNStickerSelEmoji)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

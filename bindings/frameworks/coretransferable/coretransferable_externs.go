@@ -11,7 +11,8 @@ import (
 
 func CoreTransferableVersionNumber() float64 {
 	ptr, _ := purego.Dlsym(_coretransferableLib, "CoreTransferableVersionNumber")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
-

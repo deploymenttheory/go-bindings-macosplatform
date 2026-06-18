@@ -16,10 +16,10 @@ type ASAuthorizationSingleSignOnRequest struct {
 }
 
 var (
-	_clsASAuthorizationSingleSignOnRequest = _objcClass("ASAuthorizationSingleSignOnRequest")
-	_aSAuthorizationSingleSignOnRequestSelAuthorizationOptions = objc.RegisterName("authorizationOptions")
+	_clsASAuthorizationSingleSignOnRequest                        = _objcClass("ASAuthorizationSingleSignOnRequest")
+	_aSAuthorizationSingleSignOnRequestSelAuthorizationOptions    = objc.RegisterName("authorizationOptions")
 	_aSAuthorizationSingleSignOnRequestSelSetAuthorizationOptions = objc.RegisterName("setAuthorizationOptions:")
-	_aSAuthorizationSingleSignOnRequestSelIsUserInterfaceEnabled = objc.RegisterName("isUserInterfaceEnabled")
+	_aSAuthorizationSingleSignOnRequestSelIsUserInterfaceEnabled  = objc.RegisterName("isUserInterfaceEnabled")
 	_aSAuthorizationSingleSignOnRequestSelSetUserInterfaceEnabled = objc.RegisterName("setUserInterfaceEnabled:")
 )
 
@@ -52,4 +52,3 @@ func (o *ASAuthorizationSingleSignOnRequest) IsUserInterfaceEnabled() bool {
 func (o *ASAuthorizationSingleSignOnRequest) SetUserInterfaceEnabled(userInterfaceEnabled bool) {
 	o.Ptr().Send(_aSAuthorizationSingleSignOnRequestSelSetUserInterfaceEnabled, userInterfaceEnabled)
 }
-

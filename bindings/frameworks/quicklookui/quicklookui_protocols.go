@@ -25,4 +25,3 @@ type QLPreviewPanelDelegate interface {
 // QLPreviewingController wraps the ObjC protocol QLPreviewingController.
 type QLPreviewingController interface {
 }
-

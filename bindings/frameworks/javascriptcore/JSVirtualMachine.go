@@ -16,9 +16,9 @@ type JSVirtualMachine struct {
 }
 
 var (
-	_clsJSVirtualMachine = _objcClass("JSVirtualMachine")
-	_jSVirtualMachineSelInit = objc.RegisterName("init")
-	_jSVirtualMachineSelAddManagedReferenceWithOwner = objc.RegisterName("addManagedReference:withOwner:")
+	_clsJSVirtualMachine                                = _objcClass("JSVirtualMachine")
+	_jSVirtualMachineSelInit                            = objc.RegisterName("init")
+	_jSVirtualMachineSelAddManagedReferenceWithOwner    = objc.RegisterName("addManagedReference:withOwner:")
 	_jSVirtualMachineSelRemoveManagedReferenceWithOwner = objc.RegisterName("removeManagedReference:withOwner:")
 )
 
@@ -35,7 +35,9 @@ func JSVirtualMachineFromID(id objc.ID) *JSVirtualMachine {
 // @methodgroup Creating New Virtual Machines @method @abstract Create a new JSVirtualMachine.
 func (o *JSVirtualMachine) Init() *JSVirtualMachine {
 	_ret := objc.Send[objc.ID](o.Ptr(), _jSVirtualMachineSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSVirtualMachineFromID(_ret)
 }
 
@@ -48,4 +50,3 @@ func (o *JSVirtualMachine) AddManagedReferenceWithOwner(object objc.ID, owner ob
 func (o *JSVirtualMachine) RemoveManagedReferenceWithOwner(object objc.ID, owner objc.ID) {
 	o.Ptr().Send(_jSVirtualMachineSelRemoveManagedReferenceWithOwner, object, owner)
 }
-

@@ -19,43 +19,43 @@ type CWInterface struct {
 }
 
 var (
-	_clsCWInterface = _objcClass("CWInterface")
-	_cWInterfaceSelPowerOn = objc.RegisterName("powerOn")
-	_cWInterfaceSelSupportedWLANChannels = objc.RegisterName("supportedWLANChannels")
-	_cWInterfaceSelWlanChannel = objc.RegisterName("wlanChannel")
-	_cWInterfaceSelActivePHYMode = objc.RegisterName("activePHYMode")
-	_cWInterfaceSelSsid = objc.RegisterName("ssid")
-	_cWInterfaceSelSsidData = objc.RegisterName("ssidData")
-	_cWInterfaceSelBssid = objc.RegisterName("bssid")
-	_cWInterfaceSelRssiValue = objc.RegisterName("rssiValue")
-	_cWInterfaceSelNoiseMeasurement = objc.RegisterName("noiseMeasurement")
-	_cWInterfaceSelSecurity = objc.RegisterName("security")
-	_cWInterfaceSelTransmitRate = objc.RegisterName("transmitRate")
-	_cWInterfaceSelCountryCode = objc.RegisterName("countryCode")
-	_cWInterfaceSelInterfaceMode = objc.RegisterName("interfaceMode")
-	_cWInterfaceSelTransmitPower = objc.RegisterName("transmitPower")
-	_cWInterfaceSelHardwareAddress = objc.RegisterName("hardwareAddress")
-	_cWInterfaceSelServiceActive = objc.RegisterName("serviceActive")
-	_cWInterfaceSelCachedScanResults = objc.RegisterName("cachedScanResults")
-	_cWInterfaceSelConfiguration = objc.RegisterName("configuration")
-	_cWInterfaceSelInterfaceNames = objc.RegisterName("interfaceNames")
-	_cWInterfaceSelInterface = objc.RegisterName("interface")
-	_cWInterfaceSelInterfaceWithName = objc.RegisterName("interfaceWithName:")
-	_cWInterfaceSelInitWithInterfaceName = objc.RegisterName("initWithInterfaceName:")
-	_cWInterfaceSelSetPowerError = objc.RegisterName("setPower:error:")
-	_cWInterfaceSelSetWLANChannelError = objc.RegisterName("setWLANChannel:error:")
-	_cWInterfaceSelSetPairwiseMasterKeyError = objc.RegisterName("setPairwiseMasterKey:error:")
-	_cWInterfaceSelSetWEPKeyFlagsIndexError = objc.RegisterName("setWEPKey:flags:index:error:")
-	_cWInterfaceSelScanForNetworksWithSSIDError = objc.RegisterName("scanForNetworksWithSSID:error:")
-	_cWInterfaceSelScanForNetworksWithSSIDIncludeHiddenError = objc.RegisterName("scanForNetworksWithSSID:includeHidden:error:")
-	_cWInterfaceSelScanForNetworksWithNameError = objc.RegisterName("scanForNetworksWithName:error:")
-	_cWInterfaceSelScanForNetworksWithNameIncludeHiddenError = objc.RegisterName("scanForNetworksWithName:includeHidden:error:")
-	_cWInterfaceSelAssociateToNetworkPasswordError = objc.RegisterName("associateToNetwork:password:error:")
-	_cWInterfaceSelDisassociate = objc.RegisterName("disassociate")
+	_clsCWInterface                                                          = _objcClass("CWInterface")
+	_cWInterfaceSelPowerOn                                                   = objc.RegisterName("powerOn")
+	_cWInterfaceSelSupportedWLANChannels                                     = objc.RegisterName("supportedWLANChannels")
+	_cWInterfaceSelWlanChannel                                               = objc.RegisterName("wlanChannel")
+	_cWInterfaceSelActivePHYMode                                             = objc.RegisterName("activePHYMode")
+	_cWInterfaceSelSsid                                                      = objc.RegisterName("ssid")
+	_cWInterfaceSelSsidData                                                  = objc.RegisterName("ssidData")
+	_cWInterfaceSelBssid                                                     = objc.RegisterName("bssid")
+	_cWInterfaceSelRssiValue                                                 = objc.RegisterName("rssiValue")
+	_cWInterfaceSelNoiseMeasurement                                          = objc.RegisterName("noiseMeasurement")
+	_cWInterfaceSelSecurity                                                  = objc.RegisterName("security")
+	_cWInterfaceSelTransmitRate                                              = objc.RegisterName("transmitRate")
+	_cWInterfaceSelCountryCode                                               = objc.RegisterName("countryCode")
+	_cWInterfaceSelInterfaceMode                                             = objc.RegisterName("interfaceMode")
+	_cWInterfaceSelTransmitPower                                             = objc.RegisterName("transmitPower")
+	_cWInterfaceSelHardwareAddress                                           = objc.RegisterName("hardwareAddress")
+	_cWInterfaceSelServiceActive                                             = objc.RegisterName("serviceActive")
+	_cWInterfaceSelCachedScanResults                                         = objc.RegisterName("cachedScanResults")
+	_cWInterfaceSelConfiguration                                             = objc.RegisterName("configuration")
+	_cWInterfaceSelInterfaceNames                                            = objc.RegisterName("interfaceNames")
+	_cWInterfaceSelInterface                                                 = objc.RegisterName("interface")
+	_cWInterfaceSelInterfaceWithName                                         = objc.RegisterName("interfaceWithName:")
+	_cWInterfaceSelInitWithInterfaceName                                     = objc.RegisterName("initWithInterfaceName:")
+	_cWInterfaceSelSetPowerError                                             = objc.RegisterName("setPower:error:")
+	_cWInterfaceSelSetWLANChannelError                                       = objc.RegisterName("setWLANChannel:error:")
+	_cWInterfaceSelSetPairwiseMasterKeyError                                 = objc.RegisterName("setPairwiseMasterKey:error:")
+	_cWInterfaceSelSetWEPKeyFlagsIndexError                                  = objc.RegisterName("setWEPKey:flags:index:error:")
+	_cWInterfaceSelScanForNetworksWithSSIDError                              = objc.RegisterName("scanForNetworksWithSSID:error:")
+	_cWInterfaceSelScanForNetworksWithSSIDIncludeHiddenError                 = objc.RegisterName("scanForNetworksWithSSID:includeHidden:error:")
+	_cWInterfaceSelScanForNetworksWithNameError                              = objc.RegisterName("scanForNetworksWithName:error:")
+	_cWInterfaceSelScanForNetworksWithNameIncludeHiddenError                 = objc.RegisterName("scanForNetworksWithName:includeHidden:error:")
+	_cWInterfaceSelAssociateToNetworkPasswordError                           = objc.RegisterName("associateToNetwork:password:error:")
+	_cWInterfaceSelDisassociate                                              = objc.RegisterName("disassociate")
 	_cWInterfaceSelAssociateToEnterpriseNetworkIdentityUsernamePasswordError = objc.RegisterName("associateToEnterpriseNetwork:identity:username:password:error:")
-	_cWInterfaceSelStartIBSSModeWithSSIDSecurityChannelPasswordError = objc.RegisterName("startIBSSModeWithSSID:security:channel:password:error:")
-	_cWInterfaceSelCommitConfigurationAuthorizationError = objc.RegisterName("commitConfiguration:authorization:error:")
-	_cWInterfaceSelInterfaceName = objc.RegisterName("interfaceName")
+	_cWInterfaceSelStartIBSSModeWithSSIDSecurityChannelPasswordError         = objc.RegisterName("startIBSSModeWithSSID:security:channel:password:error:")
+	_cWInterfaceSelCommitConfigurationAuthorizationError                     = objc.RegisterName("commitConfiguration:authorization:error:")
+	_cWInterfaceSelInterfaceName                                             = objc.RegisterName("interfaceName")
 )
 
 func CWInterfaceFromID(id objc.ID) *CWInterface {
@@ -77,14 +77,18 @@ func (o *CWInterface) PowerOn() bool {
 // @method @result An NSSet of CWChannel objects. @abstract Returns the set of channels supported by the Wi-Fi interface for the currently adopted country code. @discussion Returns nil if an error occurs.
 func (o *CWInterface) SupportedWLANChannels() *foundation.NSSet[*CWChannel] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWInterfaceSelSupportedWLANChannels)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*CWChannel](_ret)
 }
 
 // @method @abstract Returns the current channel of the Wi-Fi interface. @discussion Returns nil if an error occurs.
 func (o *CWInterface) WlanChannel() *CWChannel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWInterfaceSelWlanChannel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CWChannelFromID(_ret)
 }
 
@@ -97,21 +101,27 @@ func (o *CWInterface) ActivePHYMode() CWPHYMode {
 // @method @abstract Returns the current service set identifier (SSID) of the Wi-Fi interface, encoded as a string. @discussion Returns nil if an error occurs, or if the interface is not participating in a Wi-Fi network, or if the SSID can not be encoded as a valid UTF-8 or WinLatin1 string. @note SSID information is not available unless Location Services is enabled and the user has authorized the calling app to use location services. @seealso CLLocationManager
 func (o *CWInterface) Ssid() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWInterfaceSelSsid)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @method @abstract Returns the current service set identifier (SSID) for the interface, encapsulated in an NSData object. @discussion Returns nil if an error occurs, or if the interface is not participating in a Wi-Fi network. @note SSID information is not available unless Location Services is enabled and the user has authorized the calling app to use location services. @seealso CLLocationManager
 func (o *CWInterface) SsidData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWInterfaceSelSsidData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @method @abstract Returns the current basic service set identifier (BSSID) of the Wi-Fi interface, returned as an UTF-8 string. @discussion Returns a UTF-8 string using hexadecimal characters formatted as XX:XX:XX:XX:XX:XX. Returns nil if an error occurred, or if the interface is not participating in a Wi-Fi network. @note BSSID information is not available unless Location Services is enabled and the user has authorized the calling app to use location services. @seealso CLLocationManager
 func (o *CWInterface) Bssid() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWInterfaceSelBssid)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -142,7 +152,9 @@ func (o *CWInterface) TransmitRate() float64 {
 // @method @abstract Returns the currently adopted country code (ISO/IEC 3166-1:1997) for the Wi-Fi interface. @discussion Returns nil if an error occurs, or if the Wi-Fi interface is off. @note Country code information is not available unless Location Services is enabled and the user has authorized the calling app to use location services. @seealso CLLocationManager
 func (o *CWInterface) CountryCode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWInterfaceSelCountryCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -161,7 +173,9 @@ func (o *CWInterface) TransmitPower() int {
 // @method @abstract Returns the hardware media access control (MAC) address for the Wi-Fi interface, returned as an UTF-8 string. @discussion The standard format for printing a MAC-48 address XX:XX:XX:XX:XX:XX is used to represent the MAC address as a string. Returns nil if an error occurs.
 func (o *CWInterface) HardwareAddress() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWInterfaceSelHardwareAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -174,14 +188,18 @@ func (o *CWInterface) ServiceActive() bool {
 // @method @result An NSSet of CWNetwork objects. @abstract Returns the scan results currently in the scan cache for the Wi-Fi interface. @discussion Returns nil if an error occurs.
 func (o *CWInterface) CachedScanResults() *foundation.NSSet[*CWNetwork] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWInterfaceSelCachedScanResults)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*CWNetwork](_ret)
 }
 
 // @method @abstract Returns the current configuration for the Wi-Fi interface. @discussion Returns nil if an error occurs.
 func (o *CWInterface) Configuration() *CWConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWInterfaceSelConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CWConfigurationFromID(_ret)
 }
 
@@ -196,7 +214,9 @@ func CWInterfaceInterfaceNames() *foundation.NSSet[*foundation.NSString] {
 // Deprecated: since macOS 10.10.
 func CWInterfaceInterface() *CWInterface {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCWInterface), _cWInterfaceSelInterface)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CWInterfaceFromID(_ret)
 }
 
@@ -204,7 +224,9 @@ func CWInterfaceInterface() *CWInterface {
 // Deprecated: since macOS 10.10.
 func CWInterfaceInterfaceWithName(name *foundation.NSString) *CWInterface {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCWInterface), _cWInterfaceSelInterfaceWithName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CWInterfaceFromID(_ret)
 }
 
@@ -212,7 +234,9 @@ func CWInterfaceInterfaceWithName(name *foundation.NSString) *CWInterface {
 // Deprecated: since macOS 10.10.
 func (o *CWInterface) InitWithInterfaceName(name *foundation.NSString) *CWInterface {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWInterfaceSelInitWithInterfaceName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CWInterfaceFromID(_ret)
 }
 
@@ -260,7 +284,9 @@ func (o *CWInterface) SetWEPKeyFlagsIndexError(key *foundation.NSData, flags CWC
 func (o *CWInterface) ScanForNetworksWithSSIDError(ssid *foundation.NSData) (*foundation.NSSet[*CWNetwork], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWInterfaceSelScanForNetworksWithSSIDError, ssid.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -271,7 +297,9 @@ func (o *CWInterface) ScanForNetworksWithSSIDError(ssid *foundation.NSData) (*fo
 func (o *CWInterface) ScanForNetworksWithSSIDIncludeHiddenError(ssid *foundation.NSData, includeHidden bool) (*foundation.NSSet[*CWNetwork], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWInterfaceSelScanForNetworksWithSSIDIncludeHiddenError, ssid.Ptr(), includeHidden, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -282,7 +310,9 @@ func (o *CWInterface) ScanForNetworksWithSSIDIncludeHiddenError(ssid *foundation
 func (o *CWInterface) ScanForNetworksWithNameError(networkName *foundation.NSString) (*foundation.NSSet[*CWNetwork], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWInterfaceSelScanForNetworksWithNameError, networkName.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -293,7 +323,9 @@ func (o *CWInterface) ScanForNetworksWithNameError(networkName *foundation.NSStr
 func (o *CWInterface) ScanForNetworksWithNameIncludeHiddenError(networkName *foundation.NSString, includeHidden bool) (*foundation.NSSet[*CWNetwork], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWInterfaceSelScanForNetworksWithNameIncludeHiddenError, networkName.Ptr(), includeHidden, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -349,7 +381,8 @@ func (o *CWInterface) CommitConfigurationAuthorizationError(configuration *CWCon
 // @property @abstract Returns the BSD name of the Wi-Fi interface (e.g. "en0").
 func (o *CWInterface) InterfaceName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWInterfaceSelInterfaceName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

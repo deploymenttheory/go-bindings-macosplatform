@@ -60,4 +60,3 @@ type MTRAccessGrantable interface {
 }
 
 var _ MTRAccessGrantable = (*MTRAccessGrant)(nil)
-

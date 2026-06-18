@@ -16,8 +16,8 @@ type HKDeletedObject struct {
 }
 
 var (
-	_clsHKDeletedObject = _objcClass("HKDeletedObject")
-	_hKDeletedObjectSelUUID = objc.RegisterName("UUID")
+	_clsHKDeletedObject         = _objcClass("HKDeletedObject")
+	_hKDeletedObjectSelUUID     = objc.RegisterName("UUID")
 	_hKDeletedObjectSelMetadata = objc.RegisterName("metadata")
 )
 
@@ -34,7 +34,9 @@ func HKDeletedObjectFromID(id objc.ID) *HKDeletedObject {
 // @property      UUID @abstract      The unique identifier of the HKObject that was deleted from the HealthKit database.
 func (o *HKDeletedObject) UUID() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKDeletedObjectSelUUID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
 
@@ -43,4 +45,3 @@ func (o *HKDeletedObject) Metadata() *foundation.NSDictionary[*foundation.NSStri
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _hKDeletedObjectSelMetadata)
 	return _ret
 }
-

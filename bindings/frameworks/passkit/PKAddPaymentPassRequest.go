@@ -16,16 +16,16 @@ type PKAddPaymentPassRequest struct {
 }
 
 var (
-	_clsPKAddPaymentPassRequest = _objcClass("PKAddPaymentPassRequest")
-	_pKAddPaymentPassRequestSelInit = objc.RegisterName("init")
-	_pKAddPaymentPassRequestSelEncryptedPassData = objc.RegisterName("encryptedPassData")
-	_pKAddPaymentPassRequestSelSetEncryptedPassData = objc.RegisterName("setEncryptedPassData:")
-	_pKAddPaymentPassRequestSelActivationData = objc.RegisterName("activationData")
-	_pKAddPaymentPassRequestSelSetActivationData = objc.RegisterName("setActivationData:")
-	_pKAddPaymentPassRequestSelEphemeralPublicKey = objc.RegisterName("ephemeralPublicKey")
+	_clsPKAddPaymentPassRequest                      = _objcClass("PKAddPaymentPassRequest")
+	_pKAddPaymentPassRequestSelInit                  = objc.RegisterName("init")
+	_pKAddPaymentPassRequestSelEncryptedPassData     = objc.RegisterName("encryptedPassData")
+	_pKAddPaymentPassRequestSelSetEncryptedPassData  = objc.RegisterName("setEncryptedPassData:")
+	_pKAddPaymentPassRequestSelActivationData        = objc.RegisterName("activationData")
+	_pKAddPaymentPassRequestSelSetActivationData     = objc.RegisterName("setActivationData:")
+	_pKAddPaymentPassRequestSelEphemeralPublicKey    = objc.RegisterName("ephemeralPublicKey")
 	_pKAddPaymentPassRequestSelSetEphemeralPublicKey = objc.RegisterName("setEphemeralPublicKey:")
-	_pKAddPaymentPassRequestSelWrappedKey = objc.RegisterName("wrappedKey")
-	_pKAddPaymentPassRequestSelSetWrappedKey = objc.RegisterName("setWrappedKey:")
+	_pKAddPaymentPassRequestSelWrappedKey            = objc.RegisterName("wrappedKey")
+	_pKAddPaymentPassRequestSelSetWrappedKey         = objc.RegisterName("setWrappedKey:")
 )
 
 func PKAddPaymentPassRequestFromID(id objc.ID) *PKAddPaymentPassRequest {
@@ -40,13 +40,17 @@ func PKAddPaymentPassRequestFromID(id objc.ID) *PKAddPaymentPassRequest {
 
 func (o *PKAddPaymentPassRequest) Init() *PKAddPaymentPassRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddPaymentPassRequestSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKAddPaymentPassRequestFromID(_ret)
 }
 
 func (o *PKAddPaymentPassRequest) EncryptedPassData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddPaymentPassRequestSelEncryptedPassData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -56,7 +60,9 @@ func (o *PKAddPaymentPassRequest) SetEncryptedPassData(encryptedPassData *founda
 
 func (o *PKAddPaymentPassRequest) ActivationData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddPaymentPassRequestSelActivationData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -66,7 +72,9 @@ func (o *PKAddPaymentPassRequest) SetActivationData(activationData *foundation.N
 
 func (o *PKAddPaymentPassRequest) EphemeralPublicKey() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddPaymentPassRequestSelEphemeralPublicKey)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -76,11 +84,12 @@ func (o *PKAddPaymentPassRequest) SetEphemeralPublicKey(ephemeralPublicKey *foun
 
 func (o *PKAddPaymentPassRequest) WrappedKey() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddPaymentPassRequestSelWrappedKey)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *PKAddPaymentPassRequest) SetWrappedKey(wrappedKey *foundation.NSData) {
 	o.Ptr().Send(_pKAddPaymentPassRequestSelSetWrappedKey, wrappedKey.Ptr())
 }
-

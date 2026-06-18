@@ -13,13 +13,17 @@ import (
 
 func NSAbortModalException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAbortModalException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAbortPrintingException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAbortPrintingException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -55,13 +59,17 @@ func NSAboutPanelOptionVersion() uintptr {
 
 func NSAccessibilityActivationPointAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityActivationPointAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityAllowedValuesAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityAllowedValuesAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -107,31 +115,41 @@ func NSAccessibilityAnyTypeSearchKey() uintptr {
 
 func NSAccessibilityApplicationActivatedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityApplicationActivatedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityApplicationDeactivatedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityApplicationDeactivatedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityApplicationHiddenNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityApplicationHiddenNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityApplicationRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityApplicationRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityApplicationShownNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityApplicationShownNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -142,25 +160,33 @@ func NSAccessibilityArticleSearchKey() uintptr {
 
 func NSAccessibilityAscendingSortDirectionValue() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityAscendingSortDirectionValue")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityAttachmentTextAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityAttachmentTextAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityAttributedStringForRangeParameterizedAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityAttributedStringForRangeParameterizedAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityAutoInteractableAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityAutoInteractableAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -176,7 +202,9 @@ func NSAccessibilityAutocorrectionOccurredNotification() uintptr {
 
 func NSAccessibilityBackgroundColorTextAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityBackgroundColorTextAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -202,25 +230,33 @@ func NSAccessibilityBoldFontSearchKey() uintptr {
 
 func NSAccessibilityBoundsForRangeParameterizedAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityBoundsForRangeParameterizedAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityBrowserRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityBrowserRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityBusyIndicatorRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityBusyIndicatorRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityButtonRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityButtonRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -231,13 +267,17 @@ func NSAccessibilityButtonSearchKey() uintptr {
 
 func NSAccessibilityCancelAction() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityCancelAction")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityCancelButtonAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityCancelButtonAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -253,19 +293,25 @@ func NSAccessibilityCellRole() uintptr {
 
 func NSAccessibilityCenterTabStopMarkerTypeValue() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityCenterTabStopMarkerTypeValue")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityCentimetersUnitValue() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityCentimetersUnitValue")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityCheckBoxRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityCheckBoxRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -276,7 +322,9 @@ func NSAccessibilityCheckBoxSearchKey() uintptr {
 
 func NSAccessibilityChildrenAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityChildrenAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -287,19 +335,25 @@ func NSAccessibilityChildrenInNavigationOrderAttribute() uintptr {
 
 func NSAccessibilityClearButtonAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityClearButtonAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityCloseButtonAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityCloseButtonAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityCloseButtonSubrole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityCloseButtonSubrole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -310,7 +364,9 @@ func NSAccessibilityCollectionListSubrole() uintptr {
 
 func NSAccessibilityColorWellRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityColorWellRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -331,31 +387,41 @@ func NSAccessibilityColumnIndexRangeAttribute() uintptr {
 
 func NSAccessibilityColumnRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityColumnRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityColumnTitlesAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityColumnTitlesAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityColumnsAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityColumnsAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityComboBoxRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityComboBoxRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityConfirmAction() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityConfirmAction")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -371,7 +437,9 @@ func NSAccessibilityContentListSubrole() uintptr {
 
 func NSAccessibilityContentsAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityContentsAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -382,7 +450,9 @@ func NSAccessibilityControlSearchKey() uintptr {
 
 func NSAccessibilityCreatedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityCreatedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -398,49 +468,65 @@ func NSAccessibilityCustomTextAttribute() uintptr {
 
 func NSAccessibilityDateTimeAreaRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityDateTimeAreaRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityDateTimeComponentsAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityDateTimeComponentsAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityDecimalTabStopMarkerTypeValue() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityDecimalTabStopMarkerTypeValue")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityDecrementAction() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityDecrementAction")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityDecrementArrowSubrole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityDecrementArrowSubrole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityDecrementButtonAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityDecrementButtonAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityDecrementPageSubrole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityDecrementPageSubrole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityDefaultButtonAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityDefaultButtonAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -451,19 +537,25 @@ func NSAccessibilityDefinitionListSubrole() uintptr {
 
 func NSAccessibilityDeleteAction() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityDeleteAction")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityDescendingSortDirectionValue() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityDescendingSortDirectionValue")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityDescriptionAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityDescriptionAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -474,7 +566,9 @@ func NSAccessibilityDescriptionListSubrole() uintptr {
 
 func NSAccessibilityDialogSubrole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityDialogSubrole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -485,25 +579,33 @@ func NSAccessibilityDifferentTypeSearchKey() uintptr {
 
 func NSAccessibilityDisclosedByRowAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityDisclosedByRowAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityDisclosedRowsAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityDisclosedRowsAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityDisclosingAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityDisclosingAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityDisclosureLevelAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityDisclosureLevelAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -514,7 +616,9 @@ func NSAccessibilityDisclosureTriangleRole() uintptr {
 
 func NSAccessibilityDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -550,19 +654,25 @@ func NSAccessibilityDraggingSourceDragEndedNotification() uintptr {
 
 func NSAccessibilityDrawerCreatedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityDrawerCreatedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityDrawerRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityDrawerRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityEditedAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityEditedAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -573,7 +683,9 @@ func NSAccessibilityEmbeddedImageDescriptionAttribute() uintptr {
 
 func NSAccessibilityEnabledAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityEnabledAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -590,7 +702,9 @@ func NSAccessibilityException() uintptr {
 
 func NSAccessibilityExpandedAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityExpandedAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -601,49 +715,65 @@ func NSAccessibilityExtrasMenuBarAttribute() uintptr {
 
 func NSAccessibilityFilenameAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityFilenameAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityFirstLineIndentMarkerTypeValue() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityFirstLineIndentMarkerTypeValue")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityFloatingWindowSubrole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityFloatingWindowSubrole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityFocusedAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityFocusedAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityFocusedUIElementAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityFocusedUIElementAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityFocusedUIElementChangedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityFocusedUIElementChangedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityFocusedWindowAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityFocusedWindowAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityFocusedWindowChangedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityFocusedWindowChangedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -664,7 +794,9 @@ func NSAccessibilityFontColorChangeSearchKey() uintptr {
 
 func NSAccessibilityFontFamilyKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityFontFamilyKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -675,25 +807,33 @@ func NSAccessibilityFontItalicAttribute() uintptr {
 
 func NSAccessibilityFontNameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityFontNameKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityFontSizeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityFontSizeKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityFontTextAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityFontTextAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityForegroundColorTextAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityForegroundColorTextAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -704,7 +844,9 @@ func NSAccessibilityFrameSearchKey() uintptr {
 
 func NSAccessibilityFrontmostAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityFrontmostAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -730,19 +872,25 @@ func NSAccessibilityGridRole() uintptr {
 
 func NSAccessibilityGroupRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityGroupRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityGrowAreaAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityGrowAreaAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityGrowAreaRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityGrowAreaRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -758,13 +906,17 @@ func NSAccessibilityHandlesAttribute() uintptr {
 
 func NSAccessibilityHeadIndentMarkerTypeValue() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityHeadIndentMarkerTypeValue")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityHeaderAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityHeaderAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -820,37 +972,49 @@ func NSAccessibilityHeadingSearchKey() uintptr {
 
 func NSAccessibilityHelpAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityHelpAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityHelpTagCreatedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityHelpTagCreatedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityHelpTagRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityHelpTagRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityHiddenAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityHiddenAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityHorizontalOrientationValue() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityHorizontalOrientationValue")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityHorizontalScrollBarAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityHorizontalScrollBarAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -871,49 +1035,65 @@ func NSAccessibilityIdentifierAttribute() uintptr {
 
 func NSAccessibilityImageRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityImageRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityInchesUnitValue() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityInchesUnitValue")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityIncrementAction() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityIncrementAction")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityIncrementArrowSubrole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityIncrementArrowSubrole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityIncrementButtonAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityIncrementButtonAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityIncrementPageSubrole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityIncrementPageSubrole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityIncrementorRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityIncrementorRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityIndexAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityIndexAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -929,7 +1109,9 @@ func NSAccessibilityIndexForChildUIElementInNavigationOrderAttribute() uintptr {
 
 func NSAccessibilityInsertionPointLineNumberAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityInsertionPointLineNumberAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -945,13 +1127,17 @@ func NSAccessibilityKeyboardFocusableSearchKey() uintptr {
 
 func NSAccessibilityLabelUIElementsAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityLabelUIElementsAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityLabelValueAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityLabelValueAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -997,7 +1183,9 @@ func NSAccessibilityLayoutSizeForScreenSizeParameterizedAttribute() uintptr {
 
 func NSAccessibilityLeftTabStopMarkerTypeValue() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityLeftTabStopMarkerTypeValue")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1008,13 +1196,17 @@ func NSAccessibilityLevelIndicatorRole() uintptr {
 
 func NSAccessibilityLineForIndexParameterizedAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityLineForIndexParameterizedAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityLinkRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityLinkRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1025,13 +1217,17 @@ func NSAccessibilityLinkSearchKey() uintptr {
 
 func NSAccessibilityLinkTextAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityLinkTextAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityLinkedUIElementsAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityLinkedUIElementsAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1057,7 +1253,9 @@ func NSAccessibilityListMarkerRole() uintptr {
 
 func NSAccessibilityListRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityListRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1073,19 +1271,25 @@ func NSAccessibilityLiveRegionSearchKey() uintptr {
 
 func NSAccessibilityMainAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityMainAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityMainWindowAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityMainWindowAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityMainWindowChangedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityMainWindowChangedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1096,32 +1300,42 @@ func NSAccessibilityMarkedMisspelledTextAttribute() uintptr {
 
 func NSAccessibilityMarkerGroupUIElementAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityMarkerGroupUIElementAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityMarkerTypeAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityMarkerTypeAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityMarkerTypeDescriptionAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityMarkerTypeDescriptionAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: since macOS 10.10.
 func NSAccessibilityMarkerUIElementsAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityMarkerUIElementsAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityMarkerValuesAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityMarkerValuesAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1139,19 +1353,25 @@ func NSAccessibilityMatteHoleAttribute() uintptr {
 
 func NSAccessibilityMatteRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityMatteRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityMaxValueAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityMaxValueAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityMenuBarAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityMenuBarAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1162,55 +1382,73 @@ func NSAccessibilityMenuBarItemRole() uintptr {
 
 func NSAccessibilityMenuBarRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityMenuBarRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityMenuButtonRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityMenuButtonRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityMenuItemRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityMenuItemRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityMenuRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityMenuRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityMinValueAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityMinValueAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityMinimizeButtonAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityMinimizeButtonAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityMinimizeButtonSubrole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityMinimizeButtonSubrole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityMinimizedAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityMinimizedAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityMisspelledTextAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityMisspelledTextAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1221,25 +1459,33 @@ func NSAccessibilityMisspelledWordSearchKey() uintptr {
 
 func NSAccessibilityModalAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityModalAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityMovedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityMovedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityNextContentsAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityNextContentsAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityNumberOfCharactersAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityNumberOfCharactersAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1250,19 +1496,25 @@ func NSAccessibilityOrderedByRowAttribute() uintptr {
 
 func NSAccessibilityOrientationAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityOrientationAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityOutlineRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityOutlineRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityOutlineRowSubrole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityOutlineRowSubrole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1273,7 +1525,9 @@ func NSAccessibilityOutlineSearchKey() uintptr {
 
 func NSAccessibilityOverflowButtonAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityOverflowButtonAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1284,7 +1538,9 @@ func NSAccessibilityPageRole() uintptr {
 
 func NSAccessibilityParentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityParentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1295,13 +1551,17 @@ func NSAccessibilityPathAttribute() uintptr {
 
 func NSAccessibilityPicasUnitValue() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityPicasUnitValue")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityPickAction() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityPickAction")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1317,13 +1577,17 @@ func NSAccessibilityPlainTextSearchKey() uintptr {
 
 func NSAccessibilityPointsUnitValue() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityPointsUnitValue")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityPopUpButtonRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityPopUpButtonRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1334,19 +1598,25 @@ func NSAccessibilityPopoverRole() uintptr {
 
 func NSAccessibilityPositionAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityPositionAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityPressAction() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityPressAction")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityPreviousContentsAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityPreviousContentsAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1357,31 +1627,41 @@ func NSAccessibilityPriorityKey() uintptr {
 
 func NSAccessibilityProgressIndicatorRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityProgressIndicatorRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityProxyAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityProxyAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityRTFForRangeParameterizedAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityRTFForRangeParameterizedAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityRadioButtonRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityRadioButtonRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityRadioGroupRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityRadioGroupRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1392,25 +1672,33 @@ func NSAccessibilityRadioGroupSearchKey() uintptr {
 
 func NSAccessibilityRaiseAction() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityRaiseAction")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityRangeForIndexParameterizedAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityRangeForIndexParameterizedAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityRangeForLineParameterizedAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityRangeForLineParameterizedAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityRangeForPositionParameterizedAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityRangeForPositionParameterizedAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1421,7 +1709,9 @@ func NSAccessibilityRatingIndicatorSubrole() uintptr {
 
 func NSAccessibilityRelevanceIndicatorRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityRelevanceIndicatorRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1432,7 +1722,9 @@ func NSAccessibilityRequiredAttribute() uintptr {
 
 func NSAccessibilityResizedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityResizedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1443,19 +1735,25 @@ func NSAccessibilityResultsForSearchPredicateParameterizedAttribute() uintptr {
 
 func NSAccessibilityRightTabStopMarkerTypeValue() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityRightTabStopMarkerTypeValue")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityRoleAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityRoleAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityRoleDescriptionAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityRoleDescriptionAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1471,7 +1769,9 @@ func NSAccessibilityRowCountAttribute() uintptr {
 
 func NSAccessibilityRowCountChangedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityRowCountChangedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1492,25 +1792,33 @@ func NSAccessibilityRowIndexRangeAttribute() uintptr {
 
 func NSAccessibilityRowRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityRowRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityRowsAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityRowsAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityRulerMarkerRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityRulerMarkerRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityRulerRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityRulerRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1531,13 +1839,17 @@ func NSAccessibilityScreenSizeForLayoutSizeParameterizedAttribute() uintptr {
 
 func NSAccessibilityScrollAreaRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityScrollAreaRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityScrollBarRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityScrollBarRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1548,7 +1860,9 @@ func NSAccessibilityScrollToVisibleAction() uintptr {
 
 func NSAccessibilitySearchButtonAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilitySearchButtonAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1579,7 +1893,9 @@ func NSAccessibilitySearchDirectionPrevious() uintptr {
 
 func NSAccessibilitySearchFieldSubrole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilitySearchFieldSubrole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1590,7 +1906,9 @@ func NSAccessibilitySearchIdentifiersKey() uintptr {
 
 func NSAccessibilitySearchMenuAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilitySearchMenuAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1631,13 +1949,17 @@ func NSAccessibilitySectionListSubrole() uintptr {
 
 func NSAccessibilitySecureTextFieldSubrole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilitySecureTextFieldSubrole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilitySelectedAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilitySelectedAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1653,13 +1975,17 @@ func NSAccessibilitySelectedCellsChangedNotification() uintptr {
 
 func NSAccessibilitySelectedChildrenAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilitySelectedChildrenAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilitySelectedChildrenChangedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilitySelectedChildrenChangedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1670,43 +1996,57 @@ func NSAccessibilitySelectedChildrenMovedNotification() uintptr {
 
 func NSAccessibilitySelectedColumnsAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilitySelectedColumnsAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilitySelectedColumnsChangedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilitySelectedColumnsChangedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilitySelectedRowsAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilitySelectedRowsAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilitySelectedRowsChangedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilitySelectedRowsChangedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilitySelectedTextAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilitySelectedTextAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilitySelectedTextChangedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilitySelectedTextChangedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilitySelectedTextRangeAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilitySelectedTextRangeAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1717,19 +2057,25 @@ func NSAccessibilitySelectedTextRangesAttribute() uintptr {
 
 func NSAccessibilityServesAsTitleForUIElementsAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityServesAsTitleForUIElementsAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityShadowTextAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityShadowTextAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilitySharedCharacterRangeAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilitySharedCharacterRangeAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1740,19 +2086,25 @@ func NSAccessibilitySharedFocusElementsAttribute() uintptr {
 
 func NSAccessibilitySharedTextUIElementsAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilitySharedTextUIElementsAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilitySheetCreatedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilitySheetCreatedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilitySheetRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilitySheetRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1768,25 +2120,33 @@ func NSAccessibilityShowDefaultUIAction() uintptr {
 
 func NSAccessibilityShowMenuAction() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityShowMenuAction")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityShownMenuAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityShownMenuAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilitySizeAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilitySizeAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilitySliderRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilitySliderRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1803,37 +2163,49 @@ func NSAccessibilitySortButtonSubrole() uintptr {
 
 func NSAccessibilitySortDirectionAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilitySortDirectionAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilitySplitGroupRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilitySplitGroupRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilitySplitterRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilitySplitterRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilitySplittersAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilitySplittersAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityStandardWindowSubrole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityStandardWindowSubrole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityStaticTextRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityStaticTextRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1844,19 +2216,25 @@ func NSAccessibilityStaticTextSearchKey() uintptr {
 
 func NSAccessibilityStrikethroughColorTextAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityStrikethroughColorTextAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityStrikethroughTextAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityStrikethroughTextAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityStringForRangeParameterizedAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityStringForRangeParameterizedAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1867,13 +2245,17 @@ func NSAccessibilityStyleChangeSearchKey() uintptr {
 
 func NSAccessibilityStyleRangeForIndexParameterizedAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityStyleRangeForIndexParameterizedAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilitySubroleAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilitySubroleAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1884,7 +2266,9 @@ func NSAccessibilitySuggestionSubrole() uintptr {
 
 func NSAccessibilitySuperscriptTextAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilitySuperscriptTextAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1895,19 +2279,25 @@ func NSAccessibilitySwitchSubrole() uintptr {
 
 func NSAccessibilitySystemDialogSubrole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilitySystemDialogSubrole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilitySystemFloatingWindowSubrole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilitySystemFloatingWindowSubrole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilitySystemWideRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilitySystemWideRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1918,19 +2308,25 @@ func NSAccessibilityTabButtonSubrole() uintptr {
 
 func NSAccessibilityTabGroupRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityTabGroupRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityTableRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityTableRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityTableRowSubrole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityTableRowSubrole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1946,13 +2342,17 @@ func NSAccessibilityTableSearchKey() uintptr {
 
 func NSAccessibilityTabsAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityTabsAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityTailIndentMarkerTypeValue() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityTailIndentMarkerTypeValue")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1963,13 +2363,17 @@ func NSAccessibilityTextAlignmentAttribute() uintptr {
 
 func NSAccessibilityTextAreaRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityTextAreaRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityTextAttachmentSubrole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityTextAttachmentSubrole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1980,7 +2384,9 @@ func NSAccessibilityTextCompletionAttribute() uintptr {
 
 func NSAccessibilityTextFieldRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityTextFieldRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2006,7 +2412,9 @@ func NSAccessibilityTextInputMarkingSessionEndedNotification() uintptr {
 
 func NSAccessibilityTextLinkSubrole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityTextLinkSubrole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2027,19 +2435,25 @@ func NSAccessibilityTimelineSubrole() uintptr {
 
 func NSAccessibilityTitleAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityTitleAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityTitleChangedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityTitleChangedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityTitleUIElementAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityTitleUIElementAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2050,31 +2464,41 @@ func NSAccessibilityToggleSubrole() uintptr {
 
 func NSAccessibilityToolbarButtonAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityToolbarButtonAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityToolbarButtonSubrole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityToolbarButtonSubrole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityToolbarRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityToolbarRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityTopLevelUIElementAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityTopLevelUIElementAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityUIElementDestroyedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityUIElementDestroyedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2090,13 +2514,17 @@ func NSAccessibilityUIElementsKey() uintptr {
 
 func NSAccessibilityURLAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityURLAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityUnderlineColorTextAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityUnderlineColorTextAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2107,19 +2535,25 @@ func NSAccessibilityUnderlineSearchKey() uintptr {
 
 func NSAccessibilityUnderlineTextAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityUnderlineTextAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityUnitDescriptionAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityUnitDescriptionAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityUnitsAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityUnitsAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2130,37 +2564,49 @@ func NSAccessibilityUnitsChangedNotification() uintptr {
 
 func NSAccessibilityUnknownMarkerTypeValue() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityUnknownMarkerTypeValue")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityUnknownOrientationValue() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityUnknownOrientationValue")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityUnknownRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityUnknownRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityUnknownSortDirectionValue() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityUnknownSortDirectionValue")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityUnknownSubrole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityUnknownSubrole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityUnknownUnitValue() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityUnknownUnitValue")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2171,13 +2617,17 @@ func NSAccessibilityUnvisitedLinkSearchKey() uintptr {
 
 func NSAccessibilityValueAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityValueAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityValueChangedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityValueChangedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2188,19 +2638,25 @@ func NSAccessibilityValueDescriptionAttribute() uintptr {
 
 func NSAccessibilityValueIndicatorRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityValueIndicatorRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityVerticalOrientationValue() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityVerticalOrientationValue")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityVerticalScrollBarAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityVerticalScrollBarAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2221,31 +2677,41 @@ func NSAccessibilityVisibleCellsAttribute() uintptr {
 
 func NSAccessibilityVisibleCharacterRangeAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityVisibleCharacterRangeAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityVisibleChildrenAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityVisibleChildrenAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityVisibleColumnsAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityVisibleColumnsAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityVisibleNameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityVisibleNameKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityVisibleRowsAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityVisibleRowsAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2271,73 +2737,97 @@ func NSAccessibilityWebAreaRole() uintptr {
 
 func NSAccessibilityWindowAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityWindowAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityWindowCreatedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityWindowCreatedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityWindowDeminiaturizedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityWindowDeminiaturizedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityWindowMiniaturizedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityWindowMiniaturizedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityWindowMovedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityWindowMovedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityWindowResizedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityWindowResizedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityWindowRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityWindowRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityWindowsAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityWindowsAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityZoomButtonAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityZoomButtonAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAccessibilityZoomButtonSubrole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityZoomButtonSubrole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAdaptiveImageGlyphAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAdaptiveImageGlyphAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAlignmentBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAlignmentBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2348,55 +2838,73 @@ func NSAllRomanInputSourcesLocaleIdentifier() uintptr {
 
 func NSAllowsEditingMultipleValuesSelectionBindingOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAllowsEditingMultipleValuesSelectionBindingOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAllowsNullArgumentBindingOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAllowsNullArgumentBindingOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAlternateImageBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAlternateImageBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAlternateTitleBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAlternateTitleBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAlwaysPresentsApplicationModalAlertsBindingOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAlwaysPresentsApplicationModalAlertsBindingOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAnimateBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAnimateBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAnimationDelayBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAnimationDelayBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAnimationProgressMark() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAnimationProgressMark")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAnimationProgressMarkNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAnimationProgressMarkNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2412,7 +2920,9 @@ func NSAnimationTriggerOrderOut() uintptr {
 
 func NSAntialiasThresholdChangedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAntialiasThresholdChangedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2423,19 +2933,25 @@ func NSApp() uintptr {
 
 func NSAppKitIgnoredException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAppKitIgnoredException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAppKitVersionNumber() float64 {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAppKitVersionNumber")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func NSAppKitVirtualMemoryException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAppKitVirtualMemoryException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2492,7 +3008,9 @@ func NSAppearanceNameVibrantLight() uintptr {
 
 func NSApplicationDidBecomeActiveNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSApplicationDidBecomeActiveNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2504,13 +3022,17 @@ func NSApplicationDidChangeOcclusionStateNotification() uintptr {
 
 func NSApplicationDidChangeScreenParametersNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSApplicationDidChangeScreenParametersNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSApplicationDidFinishLaunchingNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSApplicationDidFinishLaunchingNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2521,25 +3043,33 @@ func NSApplicationDidFinishRestoringWindowsNotification() uintptr {
 
 func NSApplicationDidHideNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSApplicationDidHideNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSApplicationDidResignActiveNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSApplicationDidResignActiveNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSApplicationDidUnhideNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSApplicationDidUnhideNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSApplicationDidUpdateNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSApplicationDidUpdateNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2590,79 +3120,105 @@ func NSApplicationShouldEndSuppressingHighDynamicRangeContentNotification() uint
 
 func NSApplicationWillBecomeActiveNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSApplicationWillBecomeActiveNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSApplicationWillFinishLaunchingNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSApplicationWillFinishLaunchingNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSApplicationWillHideNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSApplicationWillHideNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSApplicationWillResignActiveNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSApplicationWillResignActiveNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSApplicationWillTerminateNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSApplicationWillTerminateNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSApplicationWillUnhideNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSApplicationWillUnhideNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSApplicationWillUpdateNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSApplicationWillUpdateNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSArgumentBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSArgumentBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAttachmentAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAttachmentAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAttributedStringBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAttributedStringBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSAuthorDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAuthorDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSBackgroundColorAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSBackgroundColorAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSBackgroundColorDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSBackgroundColorDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2678,73 +3234,97 @@ func NSBackingPropertyOldScaleFactorKey() uintptr {
 
 func NSBadBitmapParametersException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSBadBitmapParametersException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSBadComparisonException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSBadComparisonException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSBadRTFColorTableException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSBadRTFColorTableException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSBadRTFDirectiveException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSBadRTFDirectiveException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSBadRTFFontTableException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSBadRTFFontTableException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSBadRTFStyleSheetException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSBadRTFStyleSheetException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSBaseURLDocumentOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSBaseURLDocumentOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSBaselineOffsetAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSBaselineOffsetAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSBlack() float64 {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSBlack")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func NSBottomMarginDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSBottomMarginDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSBrowserColumnConfigurationDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSBrowserColumnConfigurationDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSBrowserIllegalDelegateException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSBrowserIllegalDelegateException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2756,13 +3336,17 @@ func NSCalibratedBlackColorSpace() uintptr {
 
 func NSCalibratedRGBColorSpace() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSCalibratedRGBColorSpace")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCalibratedWhiteColorSpace() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSCalibratedWhiteColorSpace")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2773,13 +3357,17 @@ func NSCategoryDocumentAttribute() uintptr {
 
 func NSCharacterEncodingDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSCharacterEncodingDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCharacterEncodingDocumentOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSCharacterEncodingDocumentOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2791,7 +3379,9 @@ func NSCharacterShapeAttributeName() uintptr {
 
 func NSCocoaVersionDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSCocoaVersionDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2812,25 +3402,33 @@ func NSCollectionElementKindSectionHeader() uintptr {
 
 func NSColorListDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSColorListDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSColorListIOException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSColorListIOException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSColorListNotEditableException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSColorListNotEditableException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSColorPanelColorDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSColorPanelColorDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2842,73 +3440,97 @@ func NSColorPboardType() uintptr {
 
 func NSComboBoxSelectionDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSComboBoxSelectionDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSComboBoxSelectionIsChangingNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSComboBoxSelectionIsChangingNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSComboBoxWillDismissNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSComboBoxWillDismissNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSComboBoxWillPopUpNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSComboBoxWillPopUpNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCommentDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSCommentDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCompanyDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSCompanyDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSConditionallySetsEditableBindingOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSConditionallySetsEditableBindingOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSConditionallySetsEnabledBindingOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSConditionallySetsEnabledBindingOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSConditionallySetsHiddenBindingOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSConditionallySetsHiddenBindingOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSContentArrayBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSContentArrayBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSContentArrayForMultipleSelectionBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSContentArrayForMultipleSelectionBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSContentBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSContentBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2919,19 +3541,25 @@ func NSContentDictionaryBinding() uintptr {
 
 func NSContentHeightBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSContentHeightBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSContentObjectBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSContentObjectBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSContentObjectsBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSContentObjectsBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2942,55 +3570,73 @@ func NSContentPlacementTagBindingOption() uintptr {
 
 func NSContentSetBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSContentSetBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSContentValuesBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSContentValuesBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSContentWidthBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSContentWidthBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSContextHelpModeDidActivateNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSContextHelpModeDidActivateNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSContextHelpModeDidDeactivateNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSContextHelpModeDidDeactivateNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSContinuouslyUpdatesValueBindingOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSContinuouslyUpdatesValueBindingOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSControlTextDidBeginEditingNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSControlTextDidBeginEditingNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSControlTextDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSControlTextDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSControlTextDidEndEditingNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSControlTextDidEndEditingNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -3002,79 +3648,105 @@ func NSControlTintDidChangeNotification() uintptr {
 
 func NSConvertedDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSConvertedDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCopyrightDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSCopyrightDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCreatesSortDescriptorBindingOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSCreatesSortDescriptorBindingOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCreationTimeDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSCreationTimeDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCriticalValueBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSCriticalValueBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCursorAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSCursorAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCustomColorSpace() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSCustomColorSpace")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSDarkGray() float64 {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSDarkGray")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func NSDataBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSDataBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSDefaultAttributesDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSDefaultAttributesDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSDefaultAttributesDocumentOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSDefaultAttributesDocumentOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSDefaultFontExcludedDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSDefaultFontExcludedDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSDefaultTabIntervalDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSDefaultTabIntervalDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -3095,13 +3767,17 @@ func NSDefinitionPresentationTypeOverlay() uintptr {
 
 func NSDeletesObjectsOnRemoveBindingsOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSDeletesObjectsOnRemoveBindingsOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSDeviceBitsPerSample() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSDeviceBitsPerSample")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -3113,55 +3789,73 @@ func NSDeviceBlackColorSpace() uintptr {
 
 func NSDeviceCMYKColorSpace() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSDeviceCMYKColorSpace")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSDeviceColorSpaceName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSDeviceColorSpaceName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSDeviceIsPrinter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSDeviceIsPrinter")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSDeviceIsScreen() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSDeviceIsScreen")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSDeviceRGBColorSpace() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSDeviceRGBColorSpace")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSDeviceResolution() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSDeviceResolution")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSDeviceSize() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSDeviceSize")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSDeviceWhiteColorSpace() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSDeviceWhiteColorSpace")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSDirectionalEdgeInsetsZero() NSDirectionalEdgeInsets {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSDirectionalEdgeInsetsZero")
-	if ptr == 0 { return NSDirectionalEdgeInsets{} }
+	if ptr == 0 {
+		return NSDirectionalEdgeInsets{}
+	}
 	return *(*NSDirectionalEdgeInsets)(unsafe.Pointer(ptr))
 }
 
@@ -3173,61 +3867,81 @@ func NSDirectoryFileType() uintptr {
 
 func NSDisplayNameBindingOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSDisplayNameBindingOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSDisplayPatternBindingOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSDisplayPatternBindingOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSDisplayPatternTitleBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSDisplayPatternTitleBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSDisplayPatternValueBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSDisplayPatternValueBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSDocFormatTextDocumentType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSDocFormatTextDocumentType")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSDocumentEditedBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSDocumentEditedBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSDocumentTypeDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSDocumentTypeDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSDocumentTypeDocumentOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSDocumentTypeDocumentOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSDoubleClickArgumentBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSDoubleClickArgumentBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSDoubleClickTargetBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSDoubleClickTargetBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -3239,7 +3953,9 @@ func NSDragPboard() uintptr {
 
 func NSDraggingException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSDraggingException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -3279,31 +3995,41 @@ func NSDrawerWillOpenNotification() uintptr {
 
 func NSEditableBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSEditableBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSEditorDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSEditorDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSEnabledBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSEnabledBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSEventTrackingRunLoopMode() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSEventTrackingRunLoopMode")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSExcludedElementsDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSExcludedElementsDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -3315,13 +4041,17 @@ func NSExcludedKeysBinding() uintptr {
 // Deprecated: This attribute is not supported with TextKit 2
 func NSExpansionAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSExpansionAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileContentsPboardType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFileContentsPboardType")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -3355,7 +4085,9 @@ func NSFilesystemFileType() uintptr {
 
 func NSFilterPredicateBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFilterPredicateBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -3382,31 +4114,41 @@ func NSFindPboard() uintptr {
 
 func NSFontAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFontBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFontBoldBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontBoldBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFontCascadeListAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontCascadeListAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFontCharacterSetAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontCharacterSetAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -3513,19 +4255,25 @@ func NSFontDescriptorSystemDesignSerif() uintptr {
 
 func NSFontFaceAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontFaceAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFontFamilyAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontFamilyAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFontFamilyNameBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontFamilyNameBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -3546,37 +4294,49 @@ func NSFontFeatureTypeIdentifierKey() uintptr {
 
 func NSFontFixedAdvanceAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontFixedAdvanceAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFontIdentityMatrix() *float64 {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontIdentityMatrix")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**float64)(unsafe.Pointer(ptr))
 }
 
 func NSFontItalicBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontItalicBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFontMatrixAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontMatrixAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFontNameAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontNameAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFontNameBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontNameBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -3594,31 +4354,41 @@ func NSFontPboardType() uintptr {
 
 func NSFontSetChangedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontSetChangedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFontSizeAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontSizeAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFontSizeBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontSizeBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFontSlantTrait() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontSlantTrait")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFontSymbolicTrait() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontSymbolicTrait")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -3679,151 +4449,201 @@ func NSFontTextStyleTitle3() uintptr {
 
 func NSFontTraitsAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontTraitsAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFontUnavailableException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontUnavailableException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFontVariationAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontVariationAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFontVariationAxisDefaultValueKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontVariationAxisDefaultValueKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFontVariationAxisIdentifierKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontVariationAxisIdentifierKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFontVariationAxisMaximumValueKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontVariationAxisMaximumValueKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFontVariationAxisMinimumValueKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontVariationAxisMinimumValueKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFontVariationAxisNameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontVariationAxisNameKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFontVisibleNameAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontVisibleNameAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFontWeightBlack() float64 {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontWeightBlack")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func NSFontWeightBold() float64 {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontWeightBold")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func NSFontWeightHeavy() float64 {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontWeightHeavy")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func NSFontWeightLight() float64 {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontWeightLight")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func NSFontWeightMedium() float64 {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontWeightMedium")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func NSFontWeightRegular() float64 {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontWeightRegular")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func NSFontWeightSemibold() float64 {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontWeightSemibold")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func NSFontWeightThin() float64 {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontWeightThin")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func NSFontWeightTrait() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontWeightTrait")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFontWeightUltraLight() float64 {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontWeightUltraLight")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func NSFontWidthCompressed() float64 {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontWidthCompressed")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func NSFontWidthCondensed() float64 {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontWidthCondensed")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func NSFontWidthExpanded() float64 {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontWidthExpanded")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func NSFontWidthStandard() float64 {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontWidthStandard")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func NSFontWidthTrait() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSFontWidthTrait")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSForegroundColorAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSForegroundColorAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -3855,37 +4675,49 @@ func NSGeneralPboard() uintptr {
 
 func NSGlyphInfoAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSGlyphInfoAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSGraphicsContextDestinationAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSGraphicsContextDestinationAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSGraphicsContextPDFFormat() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSGraphicsContextPDFFormat")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSGraphicsContextPSFormat() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSGraphicsContextPSFormat")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSGraphicsContextRepresentationFormatAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSGraphicsContextRepresentationFormatAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSGridViewSizeForContent() float64 {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSGridViewSizeForContent")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
@@ -3897,91 +4729,121 @@ func NSHTMLPboardType() uintptr {
 
 func NSHTMLTextDocumentType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSHTMLTextDocumentType")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSHandlesContentAsCompoundValueBindingOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSHandlesContentAsCompoundValueBindingOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSHeaderTitleBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSHeaderTitleBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSHiddenBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSHiddenBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSHyphenationFactorDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSHyphenationFactorDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSIllegalSelectorException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSIllegalSelectorException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageCacheException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageCacheException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageColorSyncProfileData() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageColorSyncProfileData")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageCompressionFactor() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageCompressionFactor")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageCompressionMethod() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageCompressionMethod")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageCurrentFrame() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageCurrentFrame")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageCurrentFrameDuration() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageCurrentFrameDuration")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageDitherTransparency() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageDitherTransparency")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageEXIFData() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageEXIFData")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -3992,13 +4854,17 @@ func NSImageFallbackBackgroundColor() uintptr {
 
 func NSImageFrameCount() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageFrameCount")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageGamma() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageGamma")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -4019,31 +4885,41 @@ func NSImageHintUserInterfaceLayoutDirection() uintptr {
 
 func NSImageIPTCData() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageIPTCData")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageInterlaced() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageInterlaced")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageLoopCount() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageLoopCount")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameActionTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameActionTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameAddTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameAddTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -4059,7 +4935,9 @@ func NSImageNameApplicationIcon() uintptr {
 
 func NSImageNameBluetoothTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameBluetoothTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -4070,7 +4948,9 @@ func NSImageNameBonjour() uintptr {
 
 func NSImageNameBookmarksTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameBookmarksTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -4086,7 +4966,9 @@ func NSImageNameColorPanel() uintptr {
 
 func NSImageNameColumnViewTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameColumnViewTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -4148,31 +5030,41 @@ func NSImageNameFontPanel() uintptr {
 
 func NSImageNameGoBackTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameGoBackTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameGoForwardTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameGoForwardTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameGoLeftTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameGoLeftTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameGoRightTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameGoRightTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameHomeTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameHomeTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -4183,7 +5075,9 @@ func NSImageNameIChatTheaterTemplate() uintptr {
 
 func NSImageNameIconViewTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameIconViewTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -4204,19 +5098,25 @@ func NSImageNameLeftFacingTriangleTemplate() uintptr {
 
 func NSImageNameListViewTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameListViewTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameLockLockedTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameLockLockedTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameLockUnlockedTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameLockUnlockedTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -4247,7 +5147,9 @@ func NSImageNameNetwork() uintptr {
 
 func NSImageNamePathTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNamePathTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -4258,7 +5160,9 @@ func NSImageNamePreferencesGeneral() uintptr {
 
 func NSImageNameQuickLookTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameQuickLookTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -4269,13 +5173,17 @@ func NSImageNameRefreshFreestandingTemplate() uintptr {
 
 func NSImageNameRefreshTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameRefreshTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameRemoveTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameRemoveTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -4291,13 +5199,17 @@ func NSImageNameRightFacingTriangleTemplate() uintptr {
 
 func NSImageNameShareTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameShareTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameSlideshowTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameSlideshowTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -4333,247 +5245,329 @@ func NSImageNameStopProgressFreestandingTemplate() uintptr {
 
 func NSImageNameStopProgressTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameStopProgressTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarAddDetailTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarAddDetailTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarAddTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarAddTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarAlarmTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarAlarmTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarAudioInputMuteTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarAudioInputMuteTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarAudioInputTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarAudioInputTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarAudioOutputMuteTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarAudioOutputMuteTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarAudioOutputVolumeHighTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarAudioOutputVolumeHighTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarAudioOutputVolumeLowTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarAudioOutputVolumeLowTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarAudioOutputVolumeMediumTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarAudioOutputVolumeMediumTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarAudioOutputVolumeOffTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarAudioOutputVolumeOffTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarBookmarksTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarBookmarksTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarColorPickerFill() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarColorPickerFill")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarColorPickerFont() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarColorPickerFont")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarColorPickerStroke() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarColorPickerStroke")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarCommunicationAudioTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarCommunicationAudioTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarCommunicationVideoTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarCommunicationVideoTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarComposeTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarComposeTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarDeleteTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarDeleteTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarDownloadTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarDownloadTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarEnterFullScreenTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarEnterFullScreenTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarExitFullScreenTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarExitFullScreenTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarFastForwardTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarFastForwardTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarFolderCopyToTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarFolderCopyToTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarFolderMoveToTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarFolderMoveToTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarFolderTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarFolderTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarGetInfoTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarGetInfoTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarGoBackTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarGoBackTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarGoDownTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarGoDownTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarGoForwardTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarGoForwardTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarGoUpTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarGoUpTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarHistoryTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarHistoryTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarIconViewTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarIconViewTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarListViewTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarListViewTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarMailTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarMailTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarNewFolderTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarNewFolderTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarNewMessageTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarNewMessageTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarOpenInBrowserTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarOpenInBrowserTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarPauseTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarPauseTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarPlayPauseTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarPlayPauseTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarPlayTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarPlayTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -4584,217 +5578,289 @@ func NSImageNameTouchBarPlayheadTemplate() uintptr {
 
 func NSImageNameTouchBarQuickLookTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarQuickLookTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarRecordStartTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarRecordStartTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarRecordStopTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarRecordStopTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarRefreshTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarRefreshTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarRemoveTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarRemoveTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarRewindTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarRewindTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarRotateLeftTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarRotateLeftTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarRotateRightTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarRotateRightTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarSearchTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarSearchTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarShareTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarShareTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarSidebarTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarSidebarTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarSkipAhead15SecondsTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarSkipAhead15SecondsTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarSkipAhead30SecondsTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarSkipAhead30SecondsTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarSkipAheadTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarSkipAheadTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarSkipBack15SecondsTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarSkipBack15SecondsTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarSkipBack30SecondsTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarSkipBack30SecondsTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarSkipBackTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarSkipBackTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarSkipToEndTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarSkipToEndTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarSkipToStartTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarSkipToStartTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarSlideshowTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarSlideshowTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarTagIconTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarTagIconTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarTextBoldTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarTextBoldTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarTextBoxTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarTextBoxTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarTextCenterAlignTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarTextCenterAlignTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarTextItalicTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarTextItalicTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarTextJustifiedAlignTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarTextJustifiedAlignTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarTextLeftAlignTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarTextLeftAlignTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarTextListTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarTextListTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarTextRightAlignTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarTextRightAlignTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarTextStrikethroughTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarTextStrikethroughTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarTextUnderlineTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarTextUnderlineTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarUserAddTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarUserAddTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarUserGroupTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarUserGroupTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarUserTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarUserTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarVolumeDownTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarVolumeDownTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageNameTouchBarVolumeUpTemplate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageNameTouchBarVolumeUpTemplate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -4830,19 +5896,25 @@ func NSImageNameUserGuest() uintptr {
 
 func NSImageProgressive() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageProgressive")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageRGBColorTable() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageRGBColorTable")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSImageRepRegistryDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSImageRepRegistryDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -4869,68 +5941,90 @@ func NSInkTextPboardType() uintptr {
 
 func NSInsertsNullPlaceholderBindingOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSInsertsNullPlaceholderBindingOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: since macOS 10.8.
 func NSInterfaceStyleDefault() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSInterfaceStyleDefault")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSInvokesSeparatelyWithArrayObjectsBindingOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSInvokesSeparatelyWithArrayObjectsBindingOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSIsIndeterminateBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSIsIndeterminateBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSKernAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSKernAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSKeywordsDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSKeywordsDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSLabelBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSLabelBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSLeftMarginDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSLeftMarginDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSLigatureAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSLigatureAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSLightGray() float64 {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSLightGray")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func NSLinkAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSLinkAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -4941,13 +6035,17 @@ func NSLocalizedKeyDictionaryBinding() uintptr {
 
 func NSMacSimpleTextDocumentType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSMacSimpleTextDocumentType")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSManagedObjectContextBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSManagedObjectContextBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -4958,61 +6056,81 @@ func NSManagerDocumentAttribute() uintptr {
 
 func NSMarkedClauseSegmentAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSMarkedClauseSegmentAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSMaxValueBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSMaxValueBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSMaxWidthBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSMaxWidthBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSMaximumRecentsBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSMaximumRecentsBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSMenuDidAddItemNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSMenuDidAddItemNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSMenuDidBeginTrackingNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSMenuDidBeginTrackingNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSMenuDidChangeItemNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSMenuDidChangeItemNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSMenuDidEndTrackingNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSMenuDidEndTrackingNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSMenuDidRemoveItemNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSMenuDidRemoveItemNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSMenuDidSendActionNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSMenuDidSendActionNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5023,37 +6141,49 @@ func NSMenuItemImportFromDeviceIdentifier() uintptr {
 
 func NSMenuWillSendActionNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSMenuWillSendActionNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSMinValueBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSMinValueBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSMinWidthBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSMinWidthBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSMixedStateImageBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSMixedStateImageBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSModalPanelRunLoopMode() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSModalPanelRunLoopMode")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSModificationTimeDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSModificationTimeDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5071,19 +6201,25 @@ func NSMultipleValuesMarker() uintptr {
 
 func NSMultipleValuesPlaceholderBindingOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSMultipleValuesPlaceholderBindingOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSNamedColorSpace() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSNamedColorSpace")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSNibLoadingException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSNibLoadingException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5107,7 +6243,9 @@ func NSNoSelectionMarker() uintptr {
 
 func NSNoSelectionPlaceholderBindingOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSNoSelectionPlaceholderBindingOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5119,38 +6257,50 @@ func NSNotApplicableMarker() uintptr {
 
 func NSNotApplicablePlaceholderBindingOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSNotApplicablePlaceholderBindingOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSNullPlaceholderBindingOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSNullPlaceholderBindingOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: This attribute is not supported with TextKit 2
 func NSObliquenessAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSObliquenessAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSObservedKeyPathKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSObservedKeyPathKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSObservedObjectKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSObservedObjectKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSOffStateImageBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSOffStateImageBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5161,7 +6311,9 @@ func NSOfficeOpenXMLTextDocumentType() uintptr {
 
 func NSOnStateImageBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSOnStateImageBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5172,19 +6324,25 @@ func NSOpenDocumentTextDocumentType() uintptr {
 
 func NSOptionsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSOptionsKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSOutlineViewColumnDidMoveNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSOutlineViewColumnDidMoveNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSOutlineViewColumnDidResizeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSOutlineViewColumnDidResizeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5195,37 +6353,49 @@ func NSOutlineViewDisclosureButtonKey() uintptr {
 
 func NSOutlineViewItemDidCollapseNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSOutlineViewItemDidCollapseNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSOutlineViewItemDidExpandNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSOutlineViewItemDidExpandNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSOutlineViewItemWillCollapseNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSOutlineViewItemWillCollapseNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSOutlineViewItemWillExpandNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSOutlineViewItemWillExpandNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSOutlineViewSelectionDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSOutlineViewSelectionDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSOutlineViewSelectionIsChangingNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSOutlineViewSelectionIsChangingNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5248,43 +6418,57 @@ func NSPICTPboardType() uintptr {
 
 func NSPPDIncludeNotFoundException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPPDIncludeNotFoundException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPPDIncludeStackOverflowException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPPDIncludeStackOverflowException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPPDIncludeStackUnderflowException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPPDIncludeStackUnderflowException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPPDParseException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPPDParseException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPaperSizeDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPaperSizeDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSParagraphStyleAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSParagraphStyleAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPasteboardCommunicationException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPasteboardCommunicationException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5483,7 +6667,9 @@ func NSPasteboardURLReadingFileURLsOnlyKey() uintptr {
 
 func NSPatternColorSpace() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPatternColorSpace")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5495,19 +6681,25 @@ func NSPlainFileType() uintptr {
 
 func NSPlainTextDocumentType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPlainTextDocumentType")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPopUpButtonCellWillPopUpNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPopUpButtonCellWillPopUpNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPopUpButtonWillPopUpNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPopUpButtonWillPopUpNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5559,13 +6751,17 @@ func NSPostScriptPboardType() uintptr {
 
 func NSPredicateBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPredicateBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPredicateFormatBindingOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPredicateFormatBindingOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5576,13 +6772,17 @@ func NSPreferredScrollerStyleDidChangeNotification() uintptr {
 
 func NSPrefixSpacesDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrefixSpacesDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPrintAllPages() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintAllPages")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5593,37 +6793,49 @@ func NSPrintAllPresetsJobStyleHint() uintptr {
 
 func NSPrintBottomMargin() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintBottomMargin")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPrintCancelJob() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintCancelJob")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPrintCopies() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintCopies")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPrintDetailedErrorReporting() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintDetailedErrorReporting")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPrintFaxNumber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintFaxNumber")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPrintFirstPage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintFirstPage")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5635,25 +6847,33 @@ func NSPrintFormName() uintptr {
 
 func NSPrintHeaderAndFooter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintHeaderAndFooter")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPrintHorizontalPagination() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintHorizontalPagination")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPrintHorizontallyCentered() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintHorizontallyCentered")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPrintJobDisposition() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintJobDisposition")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5675,13 +6895,17 @@ func NSPrintJobSavingURL() uintptr {
 
 func NSPrintLastPage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintLastPage")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPrintLeftMargin() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintLeftMargin")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5693,7 +6917,9 @@ func NSPrintManualFeed() uintptr {
 
 func NSPrintMustCollate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintMustCollate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5704,31 +6930,41 @@ func NSPrintNoPresetsJobStyleHint() uintptr {
 
 func NSPrintOperationExistsException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintOperationExistsException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPrintOrientation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintOrientation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPrintPackageException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintPackageException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPrintPagesAcross() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintPagesAcross")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPrintPagesDown() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintPagesDown")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5756,55 +6992,73 @@ func NSPrintPaperFeed() uintptr {
 
 func NSPrintPaperName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintPaperName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPrintPaperSize() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintPaperSize")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPrintPhotoJobStyleHint() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintPhotoJobStyleHint")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPrintPreviewJob() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintPreviewJob")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPrintPrinter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintPrinter")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPrintPrinterName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintPrinterName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPrintReversePageOrder() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintReversePageOrder")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPrintRightMargin() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintRightMargin")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPrintSaveJob() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintSaveJob")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5816,7 +7070,9 @@ func NSPrintSavePath() uintptr {
 
 func NSPrintScalingFactor() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintScalingFactor")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5827,37 +7083,49 @@ func NSPrintSelectionOnly() uintptr {
 
 func NSPrintSpoolJob() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintSpoolJob")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPrintTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintTime")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPrintTopMargin() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintTopMargin")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPrintVerticalPagination() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintVerticalPagination")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPrintVerticallyCentered() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintVerticallyCentered")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPrintingCommunicationException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPrintingCommunicationException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5869,7 +7137,9 @@ func NSRTFDPboardType() uintptr {
 
 func NSRTFDTextDocumentType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSRTFDTextDocumentType")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5881,97 +7151,129 @@ func NSRTFPboardType() uintptr {
 
 func NSRTFPropertyStackOverflowException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSRTFPropertyStackOverflowException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSRTFTextDocumentType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSRTFTextDocumentType")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSRaisesForNotApplicableKeysBindingOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSRaisesForNotApplicableKeysBindingOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSReadOnlyDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSReadOnlyDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSRecentSearchesBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSRecentSearchesBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSRepresentedFilenameBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSRepresentedFilenameBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSRightMarginDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSRightMarginDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSRowHeightBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSRowHeightBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSRuleEditorPredicateComparisonModifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSRuleEditorPredicateComparisonModifier")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSRuleEditorPredicateCompoundType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSRuleEditorPredicateCompoundType")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSRuleEditorPredicateCustomSelector() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSRuleEditorPredicateCustomSelector")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSRuleEditorPredicateLeftExpression() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSRuleEditorPredicateLeftExpression")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSRuleEditorPredicateOperatorType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSRuleEditorPredicateOperatorType")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSRuleEditorPredicateOptions() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSRuleEditorPredicateOptions")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSRuleEditorPredicateRightExpression() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSRuleEditorPredicateRightExpression")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSRuleEditorRowsDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSRuleEditorRowsDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -6039,79 +7341,105 @@ func NSScrollViewWillStartLiveScrollNotification() uintptr {
 
 func NSSelectedIdentifierBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSSelectedIdentifierBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSSelectedIndexBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSSelectedIndexBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSSelectedLabelBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSSelectedLabelBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSSelectedObjectBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSSelectedObjectBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSSelectedObjectsBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSSelectedObjectsBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSSelectedTagBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSSelectedTagBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSSelectedValueBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSSelectedValueBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSSelectedValuesBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSSelectedValuesBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSSelectionIndexPathsBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSSelectionIndexPathsBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSSelectionIndexesBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSSelectionIndexesBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSSelectorNameBindingOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSSelectorNameBindingOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSSelectsAllWhenSettingContentBindingOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSSelectsAllWhenSettingContentBindingOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSShadowAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSShadowAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -6237,38 +7565,50 @@ func NSShellCommandFileType() uintptr {
 // The default width for slider accessories.
 func NSSliderAccessoryWidthDefault() float64 {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSSliderAccessoryWidthDefault")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 // The standard "wide" width for slider accessories.
 func NSSliderAccessoryWidthWide() float64 {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSSliderAccessoryWidthWide")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func NSSortDescriptorsBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSSortDescriptorsBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSSoundPboardType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSSoundPboardType")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSSourceTextScalingDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSSourceTextScalingDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSSourceTextScalingDocumentOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSSourceTextScalingDocumentOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -6534,45 +7874,59 @@ func NSSpellCheckerDidChangeAutomaticTextReplacementNotification() uintptr {
 
 func NSSpellingStateAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSSpellingStateAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // This constant can be used with any sizing related \c NSSplitViewController properties to get the default system behavior.
 func NSSplitViewControllerAutomaticDimension() float64 {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSSplitViewControllerAutomaticDimension")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func NSSplitViewDidResizeSubviewsNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSSplitViewDidResizeSubviewsNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // This constant can be used with any sizing related \c NSSplitViewItem properties to unset their values.
 func NSSplitViewItemUnspecifiedDimension() float64 {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSSplitViewItemUnspecifiedDimension")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func NSSplitViewWillResizeSubviewsNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSSplitViewWillResizeSubviewsNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStrikethroughColorAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSStrikethroughColorAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStrikethroughStyleAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSStrikethroughStyleAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -6584,38 +7938,50 @@ func NSStringPboardType() uintptr {
 
 func NSStrokeColorAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSStrokeColorAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStrokeWidthAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSStrokeWidthAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSSubjectDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSSubjectDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSSuperscriptAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSSuperscriptAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: since macOS 10.9.
 func NSSystemColorsDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSSystemColorsDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTIFFException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTIFFException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -6627,19 +7993,25 @@ func NSTIFFPboardType() uintptr {
 
 func NSTabColumnTerminatorsAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTabColumnTerminatorsAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTableViewColumnDidMoveNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTableViewColumnDidMoveNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTableViewColumnDidResizeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTableViewColumnDidResizeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -6650,13 +8022,17 @@ func NSTableViewRowViewKey() uintptr {
 
 func NSTableViewSelectionDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTableViewSelectionDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTableViewSelectionIsChangingNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTableViewSelectionIsChangingNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -6668,13 +8044,17 @@ func NSTabularTextPboardType() uintptr {
 
 func NSTargetBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTargetBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTargetTextScalingDocumentOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTargetTextScalingDocumentOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -6745,7 +8125,9 @@ func NSTextCheckingSelectedRangeKey() uintptr {
 
 func NSTextColorBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextColorBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -6756,301 +8138,401 @@ func NSTextContentStorageUnsupportedAttributeAddedNotification() uintptr {
 
 func NSTextContentTypeAddressCity() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeAddressCity")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeAddressCityAndState() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeAddressCityAndState")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeAddressState() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeAddressState")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeBirthdate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeBirthdate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeBirthdateDay() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeBirthdateDay")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeBirthdateMonth() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeBirthdateMonth")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeBirthdateYear() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeBirthdateYear")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeCountryName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeCountryName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeCreditCardExpiration() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeCreditCardExpiration")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeCreditCardExpirationMonth() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeCreditCardExpirationMonth")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeCreditCardExpirationYear() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeCreditCardExpirationYear")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeCreditCardFamilyName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeCreditCardFamilyName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeCreditCardGivenName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeCreditCardGivenName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeCreditCardMiddleName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeCreditCardMiddleName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeCreditCardName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeCreditCardName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeCreditCardNumber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeCreditCardNumber")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeCreditCardSecurityCode() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeCreditCardSecurityCode")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeCreditCardType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeCreditCardType")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeDateTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeDateTime")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeEmailAddress() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeEmailAddress")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeFamilyName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeFamilyName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeFlightNumber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeFlightNumber")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeFullStreetAddress() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeFullStreetAddress")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeGivenName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeGivenName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeJobTitle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeJobTitle")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeLocation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeLocation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeMiddleName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeMiddleName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeNamePrefix() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeNamePrefix")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeNameSuffix() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeNameSuffix")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeNewPassword() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeNewPassword")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeNickname() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeNickname")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeOneTimeCode() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeOneTimeCode")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeOrganizationName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeOrganizationName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypePassword() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypePassword")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypePostalCode() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypePostalCode")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeShipmentTrackingNumber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeShipmentTrackingNumber")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeStreetAddressLine1() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeStreetAddressLine1")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeStreetAddressLine2() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeStreetAddressLine2")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeSublocality() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeSublocality")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeTelephoneNumber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeTelephoneNumber")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeURL() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeURL")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextContentTypeUsername() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextContentTypeUsername")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextDidBeginEditingNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextDidBeginEditingNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextDidEndEditingNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextDidEndEditingNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextEffectAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextEffectAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextEffectLetterpressStyle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextEffectLetterpressStyle")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextEncodingNameDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextEncodingNameDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextEncodingNameDocumentOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextEncodingNameDocumentOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -7066,55 +8548,73 @@ func NSTextFinderMatchingTypeKey() uintptr {
 
 func NSTextHighlightColorSchemeAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextHighlightColorSchemeAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextHighlightColorSchemeBlue() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextHighlightColorSchemeBlue")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextHighlightColorSchemeDefault() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextHighlightColorSchemeDefault")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextHighlightColorSchemeMint() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextHighlightColorSchemeMint")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextHighlightColorSchemeOrange() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextHighlightColorSchemeOrange")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextHighlightColorSchemePink() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextHighlightColorSchemePink")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextHighlightColorSchemePurple() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextHighlightColorSchemePurple")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextHighlightStyleAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextHighlightStyleAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextHighlightStyleDefault() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextHighlightStyleDefault")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -7125,133 +8625,177 @@ func NSTextInputContextKeyboardSelectionDidChangeNotification() uintptr {
 
 func NSTextKit1ListMarkerFormatDocumentOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextKit1ListMarkerFormatDocumentOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextLayoutSectionOrientation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextLayoutSectionOrientation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextLayoutSectionRange() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextLayoutSectionRange")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextLayoutSectionsAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextLayoutSectionsAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextLineTooLongException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextLineTooLongException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextListMarkerBox() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextListMarkerBox")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextListMarkerCheck() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextListMarkerCheck")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextListMarkerCircle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextListMarkerCircle")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextListMarkerDecimal() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextListMarkerDecimal")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextListMarkerDiamond() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextListMarkerDiamond")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextListMarkerDisc() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextListMarkerDisc")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextListMarkerHyphen() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextListMarkerHyphen")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextListMarkerLowercaseAlpha() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextListMarkerLowercaseAlpha")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextListMarkerLowercaseHexadecimal() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextListMarkerLowercaseHexadecimal")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextListMarkerLowercaseLatin() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextListMarkerLowercaseLatin")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextListMarkerLowercaseRoman() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextListMarkerLowercaseRoman")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextListMarkerOctal() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextListMarkerOctal")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextListMarkerSquare() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextListMarkerSquare")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextListMarkerUppercaseAlpha() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextListMarkerUppercaseAlpha")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextListMarkerUppercaseHexadecimal() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextListMarkerUppercaseHexadecimal")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextListMarkerUppercaseLatin() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextListMarkerUppercaseLatin")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextListMarkerUppercaseRoman() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextListMarkerUppercaseRoman")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -7262,49 +8806,65 @@ func NSTextMovementUserInfoKey() uintptr {
 
 func NSTextNoSelectionException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextNoSelectionException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextReadException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextReadException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextScalingDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextScalingDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextSizeMultiplierDocumentOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextSizeMultiplierDocumentOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextStorageDidProcessEditingNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextStorageDidProcessEditingNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextStorageWillProcessEditingNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextStorageWillProcessEditingNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextViewDidChangeSelectionNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextViewDidChangeSelectionNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextViewDidChangeTypingAttributesNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextViewDidChangeTypingAttributesNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -7315,7 +8875,9 @@ func NSTextViewDidSwitchToNSLayoutManagerNotification() uintptr {
 
 func NSTextViewWillChangeNotifyingTextViewNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextViewWillChangeNotifyingTextViewNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -7326,37 +8888,49 @@ func NSTextViewWillSwitchToNSLayoutManagerNotification() uintptr {
 
 func NSTextWriteException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTextWriteException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTimeoutDocumentOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTimeoutDocumentOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTitleBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTitleBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTitleDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTitleDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSToolTipAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSToolTipAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSToolTipBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSToolTipBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -7439,14 +9013,18 @@ func NSToolbarSpaceItemIdentifier() uintptr {
 // A standard item that is configured to send -toggleInspector: to the firstResponder when invoked.
 func NSToolbarToggleInspectorItemIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSToolbarToggleInspectorItemIdentifier")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A standard item that is configured to send -toggleSidebar: to the firstResponder when invoked.
 func NSToolbarToggleSidebarItemIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSToolbarToggleSidebarItemIdentifier")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -7464,7 +9042,9 @@ func NSToolbarWritingToolsItemIdentifier() uintptr {
 
 func NSTopMarginDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTopMarginDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -7480,25 +9060,33 @@ func NSTouchBarItemIdentifierCharacterPicker() uintptr {
 
 func NSTouchBarItemIdentifierFixedSpaceLarge() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTouchBarItemIdentifierFixedSpaceLarge")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTouchBarItemIdentifierFixedSpaceSmall() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTouchBarItemIdentifierFixedSpaceSmall")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTouchBarItemIdentifierFlexibleSpace() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTouchBarItemIdentifierFlexibleSpace")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTouchBarItemIdentifierOtherItemsProxy() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTouchBarItemIdentifierOtherItemsProxy")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -7529,7 +9117,9 @@ func NSTouchBarItemIdentifierTextStyle() uintptr {
 
 func NSTrackingAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTrackingAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -7560,7 +9150,9 @@ func NSTypeIdentifierTransitInformationText() uintptr {
 
 func NSTypedStreamVersionException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSTypedStreamVersionException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -7573,26 +9165,34 @@ func NSURLPboardType() uintptr {
 // Deprecated: Use NSUnderlineByWord instead
 func NSUnderlineByWordMask() uint {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSUnderlineByWordMask")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*uint)(unsafe.Pointer(ptr))
 }
 
 func NSUnderlineColorAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSUnderlineColorAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: Use NSStrikethroughStyleAttributeName instead
 func NSUnderlineStrikethroughMask() uint {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSUnderlineStrikethroughMask")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*uint)(unsafe.Pointer(ptr))
 }
 
 func NSUnderlineStyleAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSUnderlineStyleAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -7615,87 +9215,115 @@ func NSVCardPboardType() uintptr {
 
 func NSValidatesImmediatelyBindingOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSValidatesImmediatelyBindingOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSValueBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSValueBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSValuePathBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSValuePathBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSValueTransformerBindingOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSValueTransformerBindingOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSValueTransformerNameBindingOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSValueTransformerNameBindingOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSValueURLBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSValueURLBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: This attribute is not supported with TextKit 2
 func NSVerticalGlyphFormAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSVerticalGlyphFormAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSViewAnimationEffectKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSViewAnimationEffectKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSViewAnimationEndFrameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSViewAnimationEndFrameKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSViewAnimationFadeInEffect() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSViewAnimationFadeInEffect")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSViewAnimationFadeOutEffect() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSViewAnimationFadeOutEffect")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSViewAnimationStartFrameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSViewAnimationStartFrameKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSViewAnimationTargetKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSViewAnimationTargetKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: since macOS 10.4.
 func NSViewBoundsDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSViewBoundsDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -7712,7 +9340,9 @@ func NSViewFocusDidChangeNotification() uintptr {
 
 func NSViewFrameDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSViewFrameDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -7724,74 +9354,98 @@ func NSViewGlobalFrameDidChangeNotification() uintptr {
 
 func NSViewModeDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSViewModeDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: since macOS 10.14.
 func NSViewNoInstrinsicMetric() float64 {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSViewNoInstrinsicMetric")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func NSViewNoIntrinsicMetric() float64 {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSViewNoIntrinsicMetric")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func NSViewSizeDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSViewSizeDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSViewZoomDocumentAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSViewZoomDocumentAttribute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSVisibleBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSVisibleBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSVoiceAge() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSVoiceAge")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSVoiceDemoText() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSVoiceDemoText")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSVoiceGender() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSVoiceGender")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSVoiceGenderFemale() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSVoiceGenderFemale")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSVoiceGenderMale() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSVoiceGenderMale")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSVoiceGenderNeuter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSVoiceGenderNeuter")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -7802,7 +9456,9 @@ func NSVoiceGenderNeutral() uintptr {
 
 func NSVoiceIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSVoiceIdentifier")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -7824,7 +9480,9 @@ func NSVoiceLocaleIdentifier() uintptr {
 
 func NSVoiceName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSVoiceName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -7835,49 +9493,65 @@ func NSVoiceSupportedCharacters() uintptr {
 
 func NSWarningValueBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWarningValueBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSWebArchiveTextDocumentType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWebArchiveTextDocumentType")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSWebPreferencesDocumentOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWebPreferencesDocumentOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSWebResourceLoadDelegateDocumentOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWebResourceLoadDelegateDocumentOption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSWhite() float64 {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWhite")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func NSWidthBinding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWidthBinding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSWindowDidBecomeKeyNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWindowDidBecomeKeyNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSWindowDidBecomeMainNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWindowDidBecomeMainNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -7895,20 +9569,26 @@ func NSWindowDidChangeOcclusionStateNotification() uintptr {
 
 func NSWindowDidChangeScreenNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWindowDidChangeScreenNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // \c NSWindowDidChangeScreenProfileNotification is posted when a window's display's color profile changes, or when the window moves to a display that has a different color profile.  When running on 10.7.3 or later, this notification is still posted for compatibility, but modern applications should instead watch for \c NSWindowDidChangeBackingPropertiesNotification, which is posted for both color space and resolution changes, and facilitates handling both in a single update and redisplay pass.
 func NSWindowDidChangeScreenProfileNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWindowDidChangeScreenProfileNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSWindowDidDeminiaturizeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWindowDidDeminiaturizeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -7920,7 +9600,9 @@ func NSWindowDidEndLiveResizeNotification() uintptr {
 
 func NSWindowDidEndSheetNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWindowDidEndSheetNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -7946,61 +9628,81 @@ func NSWindowDidExitVersionBrowserNotification() uintptr {
 
 func NSWindowDidExposeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWindowDidExposeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSWindowDidMiniaturizeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWindowDidMiniaturizeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSWindowDidMoveNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWindowDidMoveNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSWindowDidResignKeyNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWindowDidResignKeyNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSWindowDidResignMainNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWindowDidResignMainNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSWindowDidResizeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWindowDidResizeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSWindowDidUpdateNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWindowDidUpdateNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSWindowServerCommunicationException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWindowServerCommunicationException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSWindowWillBeginSheetNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWindowWillBeginSheetNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSWindowWillCloseNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWindowWillCloseNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -8026,13 +9728,17 @@ func NSWindowWillExitVersionBrowserNotification() uintptr {
 
 func NSWindowWillMiniaturizeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWindowWillMiniaturizeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSWindowWillMoveNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWindowWillMoveNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -8044,19 +9750,25 @@ func NSWindowWillStartLiveResizeNotification() uintptr {
 
 func NSWordMLTextDocumentType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWordMLTextDocumentType")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSWordTablesReadException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWordTablesReadException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSWordTablesWriteException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWordTablesWriteException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -8142,13 +9854,17 @@ func NSWorkspaceDidHideApplicationNotification() uintptr {
 
 func NSWorkspaceDidLaunchApplicationNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWorkspaceDidLaunchApplicationNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSWorkspaceDidMountNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWorkspaceDidMountNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -8165,7 +9881,9 @@ func NSWorkspaceDidRenameVolumeNotification() uintptr {
 
 func NSWorkspaceDidTerminateApplicationNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWorkspaceDidTerminateApplicationNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -8176,13 +9894,17 @@ func NSWorkspaceDidUnhideApplicationNotification() uintptr {
 
 func NSWorkspaceDidUnmountNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWorkspaceDidUnmountNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSWorkspaceDidWakeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWorkspaceDidWakeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -8252,13 +9974,17 @@ func NSWorkspaceScreensDidWakeNotification() uintptr {
 
 func NSWorkspaceSessionDidBecomeActiveNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWorkspaceSessionDidBecomeActiveNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSWorkspaceSessionDidResignActiveNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWorkspaceSessionDidResignActiveNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -8284,37 +10010,48 @@ func NSWorkspaceVolumeURLKey() uintptr {
 
 func NSWorkspaceWillLaunchApplicationNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWorkspaceWillLaunchApplicationNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSWorkspaceWillPowerOffNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWorkspaceWillPowerOffNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSWorkspaceWillSleepNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWorkspaceWillSleepNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSWorkspaceWillUnmountNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWorkspaceWillUnmountNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSWritingDirectionAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWritingDirectionAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSWritingToolsExclusionAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSWritingToolsExclusionAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
-

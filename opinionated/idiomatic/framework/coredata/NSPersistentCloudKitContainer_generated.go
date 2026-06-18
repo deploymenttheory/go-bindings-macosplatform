@@ -50,7 +50,9 @@ func (x *PersistentCloudKitContainer) WithPersistentStoreDescriptions(items ...*
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSPersistentStoreDescription](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -94,7 +96,9 @@ func (x *PersistentCloudKitContainer) CanModifyManagedObjectsInStore(store *raw.
 	return x.inner.CanModifyManagedObjectsInStore(store)
 }
 
-func (x *PersistentCloudKitContainer) asPersistentContainer() *raw.NSPersistentContainer { return &x.inner.NSPersistentContainer }
+func (x *PersistentCloudKitContainer) asPersistentContainer() *raw.NSPersistentContainer {
+	return &x.inner.NSPersistentContainer
+}
 
 // PersistentCloudKitContainerable is the interface implemented by [PersistentCloudKitContainer], for mocking and DI.
 type PersistentCloudKitContainerable interface {
@@ -110,4 +114,3 @@ type PersistentCloudKitContainerable interface {
 }
 
 var _ PersistentCloudKitContainerable = (*PersistentCloudKitContainer)(nil)
-

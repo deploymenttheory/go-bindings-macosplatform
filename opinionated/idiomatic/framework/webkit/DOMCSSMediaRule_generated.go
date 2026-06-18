@@ -79,7 +79,9 @@ func (x *DOMCSSMediaRule) asDOMCSSRule() *raw.DOMCSSRule { return &x.inner.DOMCS
 
 func (x *DOMCSSMediaRule) asDOMObject() *raw.DOMObject { return &x.inner.DOMCSSRule.DOMObject }
 
-func (x *DOMCSSMediaRule) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMCSSRule.DOMObject.WebScriptObject }
+func (x *DOMCSSMediaRule) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMCSSRule.DOMObject.WebScriptObject
+}
 
 // DOMCSSMediaRuleable is the interface implemented by [DOMCSSMediaRule], for mocking and DI.
 type DOMCSSMediaRuleable interface {
@@ -93,4 +95,3 @@ type DOMCSSMediaRuleable interface {
 }
 
 var _ DOMCSSMediaRuleable = (*DOMCSSMediaRule)(nil)
-

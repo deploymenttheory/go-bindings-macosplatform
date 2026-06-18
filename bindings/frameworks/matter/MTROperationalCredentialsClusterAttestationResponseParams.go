@@ -18,16 +18,16 @@ type MTROperationalCredentialsClusterAttestationResponseParams struct {
 }
 
 var (
-	_clsMTROperationalCredentialsClusterAttestationResponseParams = _objcClass("MTROperationalCredentialsClusterAttestationResponseParams")
+	_clsMTROperationalCredentialsClusterAttestationResponseParams                           = _objcClass("MTROperationalCredentialsClusterAttestationResponseParams")
 	_mTROperationalCredentialsClusterAttestationResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTROperationalCredentialsClusterAttestationResponseParamsSelAttestationElements = objc.RegisterName("attestationElements")
-	_mTROperationalCredentialsClusterAttestationResponseParamsSelSetAttestationElements = objc.RegisterName("setAttestationElements:")
-	_mTROperationalCredentialsClusterAttestationResponseParamsSelAttestationSignature = objc.RegisterName("attestationSignature")
-	_mTROperationalCredentialsClusterAttestationResponseParamsSelSetAttestationSignature = objc.RegisterName("setAttestationSignature:")
-	_mTROperationalCredentialsClusterAttestationResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTROperationalCredentialsClusterAttestationResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTROperationalCredentialsClusterAttestationResponseParamsSelSignature = objc.RegisterName("signature")
-	_mTROperationalCredentialsClusterAttestationResponseParamsSelSetSignature = objc.RegisterName("setSignature:")
+	_mTROperationalCredentialsClusterAttestationResponseParamsSelAttestationElements        = objc.RegisterName("attestationElements")
+	_mTROperationalCredentialsClusterAttestationResponseParamsSelSetAttestationElements     = objc.RegisterName("setAttestationElements:")
+	_mTROperationalCredentialsClusterAttestationResponseParamsSelAttestationSignature       = objc.RegisterName("attestationSignature")
+	_mTROperationalCredentialsClusterAttestationResponseParamsSelSetAttestationSignature    = objc.RegisterName("setAttestationSignature:")
+	_mTROperationalCredentialsClusterAttestationResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTROperationalCredentialsClusterAttestationResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTROperationalCredentialsClusterAttestationResponseParamsSelSignature                  = objc.RegisterName("signature")
+	_mTROperationalCredentialsClusterAttestationResponseParamsSelSetSignature               = objc.RegisterName("setSignature:")
 )
 
 func MTROperationalCredentialsClusterAttestationResponseParamsFromID(id objc.ID) *MTROperationalCredentialsClusterAttestationResponseParams {
@@ -44,7 +44,9 @@ func MTROperationalCredentialsClusterAttestationResponseParamsFromID(id objc.ID)
 func (o *MTROperationalCredentialsClusterAttestationResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTROperationalCredentialsClusterAttestationResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterAttestationResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -53,7 +55,9 @@ func (o *MTROperationalCredentialsClusterAttestationResponseParams) InitWithResp
 
 func (o *MTROperationalCredentialsClusterAttestationResponseParams) AttestationElements() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterAttestationResponseParamsSelAttestationElements)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -63,7 +67,9 @@ func (o *MTROperationalCredentialsClusterAttestationResponseParams) SetAttestati
 
 func (o *MTROperationalCredentialsClusterAttestationResponseParams) AttestationSignature() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterAttestationResponseParamsSelAttestationSignature)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -74,7 +80,9 @@ func (o *MTROperationalCredentialsClusterAttestationResponseParams) SetAttestati
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTROperationalCredentialsClusterAttestationResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterAttestationResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -84,11 +92,12 @@ func (o *MTROperationalCredentialsClusterAttestationResponseParams) SetTimedInvo
 
 func (o *MTROperationalCredentialsClusterAttestationResponseParams) Signature() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterAttestationResponseParamsSelSignature)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *MTROperationalCredentialsClusterAttestationResponseParams) SetSignature(signature *foundation.NSData) {
 	o.Ptr().Send(_mTROperationalCredentialsClusterAttestationResponseParamsSelSetSignature, signature.Ptr())
 }
-

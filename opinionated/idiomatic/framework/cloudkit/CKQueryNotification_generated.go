@@ -72,4 +72,3 @@ type QueryNotificationable interface {
 }
 
 var _ QueryNotificationable = (*QueryNotification)(nil)
-

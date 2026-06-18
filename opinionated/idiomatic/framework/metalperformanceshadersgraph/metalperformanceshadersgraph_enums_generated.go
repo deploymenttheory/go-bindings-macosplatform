@@ -123,9 +123,9 @@ type MPSGraphNonMaximumSuppressionCoordinateMode uint64
 
 const (
 	MPSGraphNonMaximumSuppressionCoordinateModeCornersHeightFirst MPSGraphNonMaximumSuppressionCoordinateMode = 0
-	MPSGraphNonMaximumSuppressionCoordinateModeCornersWidthFirst MPSGraphNonMaximumSuppressionCoordinateMode = 1
+	MPSGraphNonMaximumSuppressionCoordinateModeCornersWidthFirst  MPSGraphNonMaximumSuppressionCoordinateMode = 1
 	MPSGraphNonMaximumSuppressionCoordinateModeCentersHeightFirst MPSGraphNonMaximumSuppressionCoordinateMode = 2
-	MPSGraphNonMaximumSuppressionCoordinateModeCentersWidthFirst MPSGraphNonMaximumSuppressionCoordinateMode = 3
+	MPSGraphNonMaximumSuppressionCoordinateModeCentersWidthFirst  MPSGraphNonMaximumSuppressionCoordinateMode = 3
 )
 
 func (e MPSGraphNonMaximumSuppressionCoordinateMode) String() string {
@@ -649,4 +649,3 @@ func (e MPSGraphTensorNamedDataLayout) String() string {
 		return fmt.Sprintf("MPSGraphTensorNamedDataLayout(%d)", int64(e))
 	}
 }
-

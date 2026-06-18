@@ -64,4 +64,3 @@ type MIDIChannelEventable interface {
 }
 
 var _ MIDIChannelEventable = (*MIDIChannelEvent)(nil)
-

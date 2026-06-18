@@ -25,4 +25,3 @@ func (e Rb_io_wait_readwrite) String() string {
 		return fmt.Sprintf("Rb_io_wait_readwrite(%d)", int64(e))
 	}
 }
-

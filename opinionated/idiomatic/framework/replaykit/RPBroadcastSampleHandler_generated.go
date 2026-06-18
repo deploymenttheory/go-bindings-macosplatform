@@ -72,7 +72,9 @@ func (x *BroadcastSampleHandler) FinishBroadcastWithError(error_ unsafe.Pointer)
 	x.inner.FinishBroadcastWithError(error_)
 }
 
-func (x *BroadcastSampleHandler) asBroadcastHandler() *raw.RPBroadcastHandler { return &x.inner.RPBroadcastHandler }
+func (x *BroadcastSampleHandler) asBroadcastHandler() *raw.RPBroadcastHandler {
+	return &x.inner.RPBroadcastHandler
+}
 
 // BroadcastSampleHandlerable is the interface implemented by [BroadcastSampleHandler], for mocking and DI.
 type BroadcastSampleHandlerable interface {
@@ -87,4 +89,3 @@ type BroadcastSampleHandlerable interface {
 }
 
 var _ BroadcastSampleHandlerable = (*BroadcastSampleHandler)(nil)
-

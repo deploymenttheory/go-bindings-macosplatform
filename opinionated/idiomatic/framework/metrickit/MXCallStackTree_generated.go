@@ -48,4 +48,3 @@ type CallStackTreeable interface {
 }
 
 var _ CallStackTreeable = (*CallStackTree)(nil)
-

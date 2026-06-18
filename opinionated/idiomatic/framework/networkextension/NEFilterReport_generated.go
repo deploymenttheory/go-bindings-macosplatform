@@ -75,4 +75,3 @@ type NEFilterReportable interface {
 }
 
 var _ NEFilterReportable = (*NEFilterReport)(nil)
-

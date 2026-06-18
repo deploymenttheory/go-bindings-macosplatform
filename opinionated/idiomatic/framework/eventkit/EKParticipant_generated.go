@@ -98,4 +98,3 @@ type Participantable interface {
 }
 
 var _ Participantable = (*Participant)(nil)
-

@@ -57,4 +57,3 @@ type ColorKernelable interface {
 }
 
 var _ ColorKernelable = (*ColorKernel)(nil)
-

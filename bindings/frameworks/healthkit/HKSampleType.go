@@ -15,11 +15,11 @@ type HKSampleType struct {
 }
 
 var (
-	_clsHKSampleType = _objcClass("HKSampleType")
-	_hKSampleTypeSelIsMaximumDurationRestricted = objc.RegisterName("isMaximumDurationRestricted")
-	_hKSampleTypeSelMaximumAllowedDuration = objc.RegisterName("maximumAllowedDuration")
-	_hKSampleTypeSelIsMinimumDurationRestricted = objc.RegisterName("isMinimumDurationRestricted")
-	_hKSampleTypeSelMinimumAllowedDuration = objc.RegisterName("minimumAllowedDuration")
+	_clsHKSampleType                                = _objcClass("HKSampleType")
+	_hKSampleTypeSelIsMaximumDurationRestricted     = objc.RegisterName("isMaximumDurationRestricted")
+	_hKSampleTypeSelMaximumAllowedDuration          = objc.RegisterName("maximumAllowedDuration")
+	_hKSampleTypeSelIsMinimumDurationRestricted     = objc.RegisterName("isMinimumDurationRestricted")
+	_hKSampleTypeSelMinimumAllowedDuration          = objc.RegisterName("minimumAllowedDuration")
 	_hKSampleTypeSelAllowsRecalibrationForEstimates = objc.RegisterName("allowsRecalibrationForEstimates")
 )
 
@@ -62,4 +62,3 @@ func (o *HKSampleType) AllowsRecalibrationForEstimates() bool {
 	_ret := objc.Send[bool](o.Ptr(), _hKSampleTypeSelAllowsRecalibrationForEstimates)
 	return _ret
 }
-

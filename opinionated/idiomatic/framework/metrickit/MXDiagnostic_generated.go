@@ -89,4 +89,3 @@ type Diagnosticable interface {
 }
 
 var _ Diagnosticable = (*Diagnostic)(nil)
-

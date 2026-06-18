@@ -16,25 +16,25 @@ type NERelay struct {
 }
 
 var (
-	_clsNERelay = _objcClass("NERelay")
-	_nERelaySelHTTP3RelayURL = objc.RegisterName("HTTP3RelayURL")
-	_nERelaySelSetHTTP3RelayURL = objc.RegisterName("setHTTP3RelayURL:")
-	_nERelaySelHTTP2RelayURL = objc.RegisterName("HTTP2RelayURL")
-	_nERelaySelSetHTTP2RelayURL = objc.RegisterName("setHTTP2RelayURL:")
-	_nERelaySelDnsOverHTTPSURL = objc.RegisterName("dnsOverHTTPSURL")
-	_nERelaySelSetDnsOverHTTPSURL = objc.RegisterName("setDnsOverHTTPSURL:")
-	_nERelaySelSyntheticDNSAnswerIPv4Prefix = objc.RegisterName("syntheticDNSAnswerIPv4Prefix")
+	_clsNERelay                                = _objcClass("NERelay")
+	_nERelaySelHTTP3RelayURL                   = objc.RegisterName("HTTP3RelayURL")
+	_nERelaySelSetHTTP3RelayURL                = objc.RegisterName("setHTTP3RelayURL:")
+	_nERelaySelHTTP2RelayURL                   = objc.RegisterName("HTTP2RelayURL")
+	_nERelaySelSetHTTP2RelayURL                = objc.RegisterName("setHTTP2RelayURL:")
+	_nERelaySelDnsOverHTTPSURL                 = objc.RegisterName("dnsOverHTTPSURL")
+	_nERelaySelSetDnsOverHTTPSURL              = objc.RegisterName("setDnsOverHTTPSURL:")
+	_nERelaySelSyntheticDNSAnswerIPv4Prefix    = objc.RegisterName("syntheticDNSAnswerIPv4Prefix")
 	_nERelaySelSetSyntheticDNSAnswerIPv4Prefix = objc.RegisterName("setSyntheticDNSAnswerIPv4Prefix:")
-	_nERelaySelSyntheticDNSAnswerIPv6Prefix = objc.RegisterName("syntheticDNSAnswerIPv6Prefix")
+	_nERelaySelSyntheticDNSAnswerIPv6Prefix    = objc.RegisterName("syntheticDNSAnswerIPv6Prefix")
 	_nERelaySelSetSyntheticDNSAnswerIPv6Prefix = objc.RegisterName("setSyntheticDNSAnswerIPv6Prefix:")
-	_nERelaySelAdditionalHTTPHeaderFields = objc.RegisterName("additionalHTTPHeaderFields")
-	_nERelaySelSetAdditionalHTTPHeaderFields = objc.RegisterName("setAdditionalHTTPHeaderFields:")
-	_nERelaySelRawPublicKeys = objc.RegisterName("rawPublicKeys")
-	_nERelaySelSetRawPublicKeys = objc.RegisterName("setRawPublicKeys:")
-	_nERelaySelIdentityData = objc.RegisterName("identityData")
-	_nERelaySelSetIdentityData = objc.RegisterName("setIdentityData:")
-	_nERelaySelIdentityDataPassword = objc.RegisterName("identityDataPassword")
-	_nERelaySelSetIdentityDataPassword = objc.RegisterName("setIdentityDataPassword:")
+	_nERelaySelAdditionalHTTPHeaderFields      = objc.RegisterName("additionalHTTPHeaderFields")
+	_nERelaySelSetAdditionalHTTPHeaderFields   = objc.RegisterName("setAdditionalHTTPHeaderFields:")
+	_nERelaySelRawPublicKeys                   = objc.RegisterName("rawPublicKeys")
+	_nERelaySelSetRawPublicKeys                = objc.RegisterName("setRawPublicKeys:")
+	_nERelaySelIdentityData                    = objc.RegisterName("identityData")
+	_nERelaySelSetIdentityData                 = objc.RegisterName("setIdentityData:")
+	_nERelaySelIdentityDataPassword            = objc.RegisterName("identityDataPassword")
+	_nERelaySelSetIdentityDataPassword         = objc.RegisterName("setIdentityDataPassword:")
 )
 
 func NERelayFromID(id objc.ID) *NERelay {
@@ -50,7 +50,9 @@ func NERelayFromID(id objc.ID) *NERelay {
 // @property HTTP3RelayURL @discussion The URL of the relay accessible over HTTP/3.
 func (o *NERelay) HTTP3RelayURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nERelaySelHTTP3RelayURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -61,7 +63,9 @@ func (o *NERelay) SetHTTP3RelayURL(hTTP3RelayURL *foundation.NSURL) {
 // @property HTTP2RelayURL @discussion The URL of the relay accessible over HTTP/2.
 func (o *NERelay) HTTP2RelayURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nERelaySelHTTP2RelayURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -72,7 +76,9 @@ func (o *NERelay) SetHTTP2RelayURL(hTTP2RelayURL *foundation.NSURL) {
 // @property dnsOverHTTPSURL @discussion The URL of a DNS-over-HTTPS (DoH) resolver accessible via the relay.
 func (o *NERelay) DnsOverHTTPSURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nERelaySelDnsOverHTTPSURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -83,7 +89,9 @@ func (o *NERelay) SetDnsOverHTTPSURL(dnsOverHTTPSURL *foundation.NSURL) {
 // @property syntheticDNSAnswerIPv4Prefix @discussion An IPv4 address prefix (such as "192.0.2.0/24") that will be used to synthesize DNS answers for apps that use `getaddrinfo()` to resolve domains included in `matchDomains`
 func (o *NERelay) SyntheticDNSAnswerIPv4Prefix() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nERelaySelSyntheticDNSAnswerIPv4Prefix)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -94,7 +102,9 @@ func (o *NERelay) SetSyntheticDNSAnswerIPv4Prefix(syntheticDNSAnswerIPv4Prefix *
 // @property syntheticDNSAnswerIPv6Prefix @discussion An IPv6 address prefix (such as "2001:DB8::/32") that will be used to synthesize DNS answers for apps that use `getaddrinfo()` to resolve domains included in `matchDomains`
 func (o *NERelay) SyntheticDNSAnswerIPv6Prefix() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nERelaySelSyntheticDNSAnswerIPv6Prefix)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -125,7 +135,9 @@ func (o *NERelay) SetRawPublicKeys(rawPublicKeys *foundation.NSArray[*foundation
 // @property identityData @discussion The PKCS12 data for the relay client authentication. The value is a NSData in PKCS12 format.
 func (o *NERelay) IdentityData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nERelaySelIdentityData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -136,11 +148,12 @@ func (o *NERelay) SetIdentityData(identityData *foundation.NSData) {
 // @property identityDataPassword @discussion The password to be used to decrypt the PKCS12 identity data.
 func (o *NERelay) IdentityDataPassword() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nERelaySelIdentityDataPassword)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NERelay) SetIdentityDataPassword(identityDataPassword *foundation.NSString) {
 	o.Ptr().Send(_nERelaySelSetIdentityDataPassword, identityDataPassword.Ptr())
 }
-

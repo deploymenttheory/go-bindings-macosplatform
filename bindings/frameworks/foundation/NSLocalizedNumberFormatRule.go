@@ -15,7 +15,7 @@ type NSLocalizedNumberFormatRule struct {
 }
 
 var (
-	_clsNSLocalizedNumberFormatRule = _objcClass("NSLocalizedNumberFormatRule")
+	_clsNSLocalizedNumberFormatRule          = _objcClass("NSLocalizedNumberFormatRule")
 	_nSLocalizedNumberFormatRuleSelAutomatic = objc.RegisterName("automatic")
 )
 
@@ -31,7 +31,8 @@ func NSLocalizedNumberFormatRuleFromID(id objc.ID) *NSLocalizedNumberFormatRule 
 
 func NSLocalizedNumberFormatRuleAutomatic() *NSLocalizedNumberFormatRule {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSLocalizedNumberFormatRule), _nSLocalizedNumberFormatRuleSelAutomatic)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLocalizedNumberFormatRuleFromID(_ret)
 }
-

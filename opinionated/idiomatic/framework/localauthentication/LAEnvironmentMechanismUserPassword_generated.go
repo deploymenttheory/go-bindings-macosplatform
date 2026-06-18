@@ -15,7 +15,9 @@ type EnvironmentMechanismUserPassword struct {
 }
 
 // Unwrap returns the underlying [raw.LAEnvironmentMechanismUserPassword].
-func (x *EnvironmentMechanismUserPassword) Unwrap() *raw.LAEnvironmentMechanismUserPassword { return x.inner }
+func (x *EnvironmentMechanismUserPassword) Unwrap() *raw.LAEnvironmentMechanismUserPassword {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -40,7 +42,9 @@ func (x *EnvironmentMechanismUserPassword) IsSet() bool {
 	return x.inner.IsSet()
 }
 
-func (x *EnvironmentMechanismUserPassword) asEnvironmentMechanism() *raw.LAEnvironmentMechanism { return &x.inner.LAEnvironmentMechanism }
+func (x *EnvironmentMechanismUserPassword) asEnvironmentMechanism() *raw.LAEnvironmentMechanism {
+	return &x.inner.LAEnvironmentMechanism
+}
 
 // EnvironmentMechanismUserPasswordable is the interface implemented by [EnvironmentMechanismUserPassword], for mocking and DI.
 type EnvironmentMechanismUserPasswordable interface {
@@ -49,4 +53,3 @@ type EnvironmentMechanismUserPasswordable interface {
 }
 
 var _ EnvironmentMechanismUserPasswordable = (*EnvironmentMechanismUserPassword)(nil)
-

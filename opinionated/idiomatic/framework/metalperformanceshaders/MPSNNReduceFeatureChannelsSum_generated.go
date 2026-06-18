@@ -129,11 +129,17 @@ func (x *NNReduceFeatureChannelsSum) SetWeight(weight float32) {
 	x.inner.SetWeight(weight)
 }
 
-func (x *NNReduceFeatureChannelsSum) asNNReduceUnary() *mpsneuralnetwork.MPSNNReduceUnary { return &x.inner.MPSNNReduceUnary }
+func (x *NNReduceFeatureChannelsSum) asNNReduceUnary() *mpsneuralnetwork.MPSNNReduceUnary {
+	return &x.inner.MPSNNReduceUnary
+}
 
-func (x *NNReduceFeatureChannelsSum) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
+func (x *NNReduceFeatureChannelsSum) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel
+}
 
-func (x *NNReduceFeatureChannelsSum) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel }
+func (x *NNReduceFeatureChannelsSum) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel
+}
 
 // NNReduceFeatureChannelsSumable is the interface implemented by [NNReduceFeatureChannelsSum], for mocking and DI.
 type NNReduceFeatureChannelsSumable interface {
@@ -155,4 +161,3 @@ type NNReduceFeatureChannelsSumable interface {
 }
 
 var _ NNReduceFeatureChannelsSumable = (*NNReduceFeatureChannelsSum)(nil)
-

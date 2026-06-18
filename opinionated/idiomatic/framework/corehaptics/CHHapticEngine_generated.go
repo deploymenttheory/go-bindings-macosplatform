@@ -255,4 +255,3 @@ type HapticEngineable interface {
 }
 
 var _ HapticEngineable = (*HapticEngine)(nil)
-

@@ -15,7 +15,9 @@ type LowLatencySuperResolutionScalerParameters struct {
 }
 
 // Unwrap returns the underlying [raw.VTLowLatencySuperResolutionScalerParameters].
-func (x *LowLatencySuperResolutionScalerParameters) Unwrap() *raw.VTLowLatencySuperResolutionScalerParameters { return x.inner }
+func (x *LowLatencySuperResolutionScalerParameters) Unwrap() *raw.VTLowLatencySuperResolutionScalerParameters {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -62,4 +64,3 @@ type LowLatencySuperResolutionScalerParametersable interface {
 }
 
 var _ LowLatencySuperResolutionScalerParametersable = (*LowLatencySuperResolutionScalerParameters)(nil)
-

@@ -16,12 +16,12 @@ type SFUniversalLink struct {
 }
 
 var (
-	_clsSFUniversalLink = _objcClass("SFUniversalLink")
+	_clsSFUniversalLink                   = _objcClass("SFUniversalLink")
 	_sFUniversalLinkSelInitWithWebpageURL = objc.RegisterName("initWithWebpageURL:")
-	_sFUniversalLinkSelWebpageURL = objc.RegisterName("webpageURL")
-	_sFUniversalLinkSelApplicationURL = objc.RegisterName("applicationURL")
-	_sFUniversalLinkSelIsEnabled = objc.RegisterName("isEnabled")
-	_sFUniversalLinkSelSetEnabled = objc.RegisterName("setEnabled:")
+	_sFUniversalLinkSelWebpageURL         = objc.RegisterName("webpageURL")
+	_sFUniversalLinkSelApplicationURL     = objc.RegisterName("applicationURL")
+	_sFUniversalLinkSelIsEnabled          = objc.RegisterName("isEnabled")
+	_sFUniversalLinkSelSetEnabled         = objc.RegisterName("setEnabled:")
 )
 
 func SFUniversalLinkFromID(id objc.ID) *SFUniversalLink {
@@ -37,21 +37,27 @@ func SFUniversalLinkFromID(id objc.ID) *SFUniversalLink {
 // Initialize the receiver with a web URL that may or may not be a universal link.
 func (o *SFUniversalLink) InitWithWebpageURL(url *foundation.NSURL) *SFUniversalLink {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFUniversalLinkSelInitWithWebpageURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SFUniversalLinkFromID(_ret)
 }
 
 // The URL passed when initializing the receiver.
 func (o *SFUniversalLink) WebpageURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFUniversalLinkSelWebpageURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // The file URL to the application that can handle this universal link.
 func (o *SFUniversalLink) ApplicationURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFUniversalLinkSelApplicationURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -64,4 +70,3 @@ func (o *SFUniversalLink) IsEnabled() bool {
 func (o *SFUniversalLink) SetEnabled(enabled bool) {
 	o.Ptr().Send(_sFUniversalLinkSelSetEnabled, enabled)
 }
-

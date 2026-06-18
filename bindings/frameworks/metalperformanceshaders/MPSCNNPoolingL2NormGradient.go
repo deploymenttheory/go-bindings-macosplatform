@@ -18,9 +18,9 @@ type MPSCNNPoolingL2NormGradient struct {
 }
 
 var (
-	_clsMPSCNNPoolingL2NormGradient = _objcClass("MPSCNNPoolingL2NormGradient")
+	_clsMPSCNNPoolingL2NormGradient                                                                    = _objcClass("MPSCNNPoolingL2NormGradient")
 	_mPSCNNPoolingL2NormGradientSelInitWithDeviceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY = objc.RegisterName("initWithDevice:kernelWidth:kernelHeight:strideInPixelsX:strideInPixelsY:")
-	_mPSCNNPoolingL2NormGradientSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
+	_mPSCNNPoolingL2NormGradientSelInitWithCoderDevice                                                 = objc.RegisterName("initWithCoder:device:")
 )
 
 func MPSCNNPoolingL2NormGradientFromID(id objc.ID) *MPSCNNPoolingL2NormGradient {
@@ -36,14 +36,17 @@ func MPSCNNPoolingL2NormGradientFromID(id objc.ID) *MPSCNNPoolingL2NormGradient 
 // @abstract  Initialize a gradient L2-norm pooling filter @param      device              The device the filter will run on @param      kernelWidth         The width of the kernel.  Can be an odd or even value. @param      kernelHeight        The height of the kernel.  Can be an odd or even value. @param      strideInPixelsX     The input stride (upsampling factor) in the x dimension. @param      strideInPixelsY     The input stride (upsampling factor) in the y dimension. @return     A valid MPSCNNPoolingL2NormGradient object or nil, if failure.
 func (o *MPSCNNPoolingL2NormGradient) InitWithDeviceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY(device metal.MTLDevice, kernelWidth uint, kernelHeight uint, strideInPixelsX uint, strideInPixelsY uint) *MPSCNNPoolingL2NormGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNPoolingL2NormGradientSelInitWithDeviceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY, device, kernelWidth, kernelHeight, strideInPixelsX, strideInPixelsY)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNPoolingL2NormGradientFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSCNNPoolingL2NormGradient @param      device      The MTLDevice on which to make the MPSCNNPoolingL2NormGradient @return     A new MPSCNNPoolingL2NormGradient object, or nil if failure.
 func (o *MPSCNNPoolingL2NormGradient) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSCNNPoolingL2NormGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNPoolingL2NormGradientSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNPoolingL2NormGradientFromID(_ret)
 }
-

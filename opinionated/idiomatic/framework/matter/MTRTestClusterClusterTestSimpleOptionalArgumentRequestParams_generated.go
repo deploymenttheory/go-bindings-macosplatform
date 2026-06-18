@@ -16,11 +16,15 @@ type MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams].
-func (x *MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams) Unwrap() *raw.MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams { return x.inner }
+func (x *MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams) Unwrap() *raw.MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRTestClusterClusterTestSimpleOptionalArgumentRequestParamsFromID adopts an existing object pointer as a MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams (nil for 0).
 func MTRTestClusterClusterTestSimpleOptionalArgumentRequestParamsFromID(id objc.ID) *MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams {
@@ -54,7 +58,9 @@ func (x *MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams) WithServe
 	return x
 }
 
-func (x *MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams) asMTRUnitTestingClusterTestSimpleOptionalArgumentRequestParams() *raw.MTRUnitTestingClusterTestSimpleOptionalArgumentRequestParams { return &x.inner.MTRUnitTestingClusterTestSimpleOptionalArgumentRequestParams }
+func (x *MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams) asMTRUnitTestingClusterTestSimpleOptionalArgumentRequestParams() *raw.MTRUnitTestingClusterTestSimpleOptionalArgumentRequestParams {
+	return &x.inner.MTRUnitTestingClusterTestSimpleOptionalArgumentRequestParams
+}
 
 // MTRTestClusterClusterTestSimpleOptionalArgumentRequestParamsable is the interface implemented by [MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams], for mocking and DI.
 type MTRTestClusterClusterTestSimpleOptionalArgumentRequestParamsable interface {
@@ -65,4 +71,3 @@ type MTRTestClusterClusterTestSimpleOptionalArgumentRequestParamsable interface 
 }
 
 var _ MTRTestClusterClusterTestSimpleOptionalArgumentRequestParamsable = (*MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams)(nil)
-

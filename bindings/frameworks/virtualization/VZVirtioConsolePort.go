@@ -16,9 +16,9 @@ type VZVirtioConsolePort struct {
 }
 
 var (
-	_clsVZVirtioConsolePort = _objcClass("VZVirtioConsolePort")
-	_vZVirtioConsolePortSelName = objc.RegisterName("name")
-	_vZVirtioConsolePortSelAttachment = objc.RegisterName("attachment")
+	_clsVZVirtioConsolePort              = _objcClass("VZVirtioConsolePort")
+	_vZVirtioConsolePortSelName          = objc.RegisterName("name")
+	_vZVirtioConsolePortSelAttachment    = objc.RegisterName("attachment")
 	_vZVirtioConsolePortSelSetAttachment = objc.RegisterName("setAttachment:")
 )
 
@@ -35,18 +35,21 @@ func VZVirtioConsolePortFromID(id objc.ID) *VZVirtioConsolePort {
 // @abstract The console port name currently being used by this port. @discussion This property may not change while the VM is running. A null value indicates no name has been set.
 func (o *VZVirtioConsolePort) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioConsolePortSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract The console port attachment that's currently connected to this console port. @discussion This property may change at any time while the VM is running.
 func (o *VZVirtioConsolePort) Attachment() *VZSerialPortAttachment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioConsolePortSelAttachment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZSerialPortAttachmentFromID(_ret)
 }
 
 func (o *VZVirtioConsolePort) SetAttachment(attachment *VZSerialPortAttachment) {
 	o.Ptr().Send(_vZVirtioConsolePortSelSetAttachment, attachment.Ptr())
 }
-

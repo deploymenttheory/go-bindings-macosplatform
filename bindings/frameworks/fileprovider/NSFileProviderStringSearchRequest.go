@@ -16,8 +16,8 @@ type NSFileProviderStringSearchRequest struct {
 }
 
 var (
-	_clsNSFileProviderStringSearchRequest = _objcClass("NSFileProviderStringSearchRequest")
-	_nSFileProviderStringSearchRequestSelQuery = objc.RegisterName("query")
+	_clsNSFileProviderStringSearchRequest                       = _objcClass("NSFileProviderStringSearchRequest")
+	_nSFileProviderStringSearchRequestSelQuery                  = objc.RegisterName("query")
 	_nSFileProviderStringSearchRequestSelDesiredNumberOfResults = objc.RegisterName("desiredNumberOfResults")
 )
 
@@ -34,7 +34,9 @@ func NSFileProviderStringSearchRequestFromID(id objc.ID) *NSFileProviderStringSe
 // A plaintext string, representing the query the user entered into the system search UI.
 func (o *NSFileProviderStringSearchRequest) Query() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderStringSearchRequestSelQuery)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -43,4 +45,3 @@ func (o *NSFileProviderStringSearchRequest) DesiredNumberOfResults() int {
 	_ret := objc.Send[int](o.Ptr(), _nSFileProviderStringSearchRequestSelDesiredNumberOfResults)
 	return _ret
 }
-

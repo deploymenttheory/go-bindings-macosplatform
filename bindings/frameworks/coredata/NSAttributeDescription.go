@@ -16,21 +16,21 @@ type NSAttributeDescription struct {
 }
 
 var (
-	_clsNSAttributeDescription = _objcClass("NSAttributeDescription")
-	_nSAttributeDescriptionSelAttributeType = objc.RegisterName("attributeType")
-	_nSAttributeDescriptionSelSetAttributeType = objc.RegisterName("setAttributeType:")
-	_nSAttributeDescriptionSelAttributeValueClassName = objc.RegisterName("attributeValueClassName")
-	_nSAttributeDescriptionSelSetAttributeValueClassName = objc.RegisterName("setAttributeValueClassName:")
-	_nSAttributeDescriptionSelDefaultValue = objc.RegisterName("defaultValue")
-	_nSAttributeDescriptionSelSetDefaultValue = objc.RegisterName("setDefaultValue:")
-	_nSAttributeDescriptionSelValueTransformerName = objc.RegisterName("valueTransformerName")
-	_nSAttributeDescriptionSelSetValueTransformerName = objc.RegisterName("setValueTransformerName:")
-	_nSAttributeDescriptionSelAllowsExternalBinaryDataStorage = objc.RegisterName("allowsExternalBinaryDataStorage")
-	_nSAttributeDescriptionSelSetAllowsExternalBinaryDataStorage = objc.RegisterName("setAllowsExternalBinaryDataStorage:")
-	_nSAttributeDescriptionSelPreservesValueInHistoryOnDeletion = objc.RegisterName("preservesValueInHistoryOnDeletion")
+	_clsNSAttributeDescription                                     = _objcClass("NSAttributeDescription")
+	_nSAttributeDescriptionSelAttributeType                        = objc.RegisterName("attributeType")
+	_nSAttributeDescriptionSelSetAttributeType                     = objc.RegisterName("setAttributeType:")
+	_nSAttributeDescriptionSelAttributeValueClassName              = objc.RegisterName("attributeValueClassName")
+	_nSAttributeDescriptionSelSetAttributeValueClassName           = objc.RegisterName("setAttributeValueClassName:")
+	_nSAttributeDescriptionSelDefaultValue                         = objc.RegisterName("defaultValue")
+	_nSAttributeDescriptionSelSetDefaultValue                      = objc.RegisterName("setDefaultValue:")
+	_nSAttributeDescriptionSelValueTransformerName                 = objc.RegisterName("valueTransformerName")
+	_nSAttributeDescriptionSelSetValueTransformerName              = objc.RegisterName("setValueTransformerName:")
+	_nSAttributeDescriptionSelAllowsExternalBinaryDataStorage      = objc.RegisterName("allowsExternalBinaryDataStorage")
+	_nSAttributeDescriptionSelSetAllowsExternalBinaryDataStorage   = objc.RegisterName("setAllowsExternalBinaryDataStorage:")
+	_nSAttributeDescriptionSelPreservesValueInHistoryOnDeletion    = objc.RegisterName("preservesValueInHistoryOnDeletion")
 	_nSAttributeDescriptionSelSetPreservesValueInHistoryOnDeletion = objc.RegisterName("setPreservesValueInHistoryOnDeletion:")
-	_nSAttributeDescriptionSelAllowsCloudEncryption = objc.RegisterName("allowsCloudEncryption")
-	_nSAttributeDescriptionSelSetAllowsCloudEncryption = objc.RegisterName("setAllowsCloudEncryption:")
+	_nSAttributeDescriptionSelAllowsCloudEncryption                = objc.RegisterName("allowsCloudEncryption")
+	_nSAttributeDescriptionSelSetAllowsCloudEncryption             = objc.RegisterName("setAllowsCloudEncryption:")
 )
 
 func NSAttributeDescriptionFromID(id objc.ID) *NSAttributeDescription {
@@ -54,7 +54,9 @@ func (o *NSAttributeDescription) SetAttributeType(attributeType NSAttributeType)
 
 func (o *NSAttributeDescription) AttributeValueClassName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributeDescriptionSelAttributeValueClassName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -73,7 +75,9 @@ func (o *NSAttributeDescription) SetDefaultValue(defaultValue objc.ID) {
 
 func (o *NSAttributeDescription) ValueTransformerName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributeDescriptionSelValueTransformerName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -107,4 +111,3 @@ func (o *NSAttributeDescription) AllowsCloudEncryption() bool {
 func (o *NSAttributeDescription) SetAllowsCloudEncryption(allowsCloudEncryption bool) {
 	o.Ptr().Send(_nSAttributeDescriptionSelSetAllowsCloudEncryption, allowsCloudEncryption)
 }
-

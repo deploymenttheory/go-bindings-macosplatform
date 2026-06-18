@@ -17,27 +17,27 @@ type MPSGraphPooling4DOpDescriptor struct {
 }
 
 var (
-	_clsMPSGraphPooling4DOpDescriptor = _objcClass("MPSGraphPooling4DOpDescriptor")
+	_clsMPSGraphPooling4DOpDescriptor                                                                       = _objcClass("MPSGraphPooling4DOpDescriptor")
 	_mPSGraphPooling4DOpDescriptorSelDescriptorWithKernelSizesStridesDilationRatesPaddingValuesPaddingStyle = objc.RegisterName("descriptorWithKernelSizes:strides:dilationRates:paddingValues:paddingStyle:")
-	_mPSGraphPooling4DOpDescriptorSelDescriptorWithKernelSizesPaddingStyle = objc.RegisterName("descriptorWithKernelSizes:paddingStyle:")
-	_mPSGraphPooling4DOpDescriptorSelKernelSizes = objc.RegisterName("kernelSizes")
-	_mPSGraphPooling4DOpDescriptorSelSetKernelSizes = objc.RegisterName("setKernelSizes:")
-	_mPSGraphPooling4DOpDescriptorSelStrides = objc.RegisterName("strides")
-	_mPSGraphPooling4DOpDescriptorSelSetStrides = objc.RegisterName("setStrides:")
-	_mPSGraphPooling4DOpDescriptorSelDilationRates = objc.RegisterName("dilationRates")
-	_mPSGraphPooling4DOpDescriptorSelSetDilationRates = objc.RegisterName("setDilationRates:")
-	_mPSGraphPooling4DOpDescriptorSelPaddingValues = objc.RegisterName("paddingValues")
-	_mPSGraphPooling4DOpDescriptorSelSetPaddingValues = objc.RegisterName("setPaddingValues:")
-	_mPSGraphPooling4DOpDescriptorSelPaddingStyle = objc.RegisterName("paddingStyle")
-	_mPSGraphPooling4DOpDescriptorSelSetPaddingStyle = objc.RegisterName("setPaddingStyle:")
-	_mPSGraphPooling4DOpDescriptorSelCeilMode = objc.RegisterName("ceilMode")
-	_mPSGraphPooling4DOpDescriptorSelSetCeilMode = objc.RegisterName("setCeilMode:")
-	_mPSGraphPooling4DOpDescriptorSelIncludeZeroPadToAverage = objc.RegisterName("includeZeroPadToAverage")
-	_mPSGraphPooling4DOpDescriptorSelSetIncludeZeroPadToAverage = objc.RegisterName("setIncludeZeroPadToAverage:")
-	_mPSGraphPooling4DOpDescriptorSelReturnIndicesMode = objc.RegisterName("returnIndicesMode")
-	_mPSGraphPooling4DOpDescriptorSelSetReturnIndicesMode = objc.RegisterName("setReturnIndicesMode:")
-	_mPSGraphPooling4DOpDescriptorSelReturnIndicesDataType = objc.RegisterName("returnIndicesDataType")
-	_mPSGraphPooling4DOpDescriptorSelSetReturnIndicesDataType = objc.RegisterName("setReturnIndicesDataType:")
+	_mPSGraphPooling4DOpDescriptorSelDescriptorWithKernelSizesPaddingStyle                                  = objc.RegisterName("descriptorWithKernelSizes:paddingStyle:")
+	_mPSGraphPooling4DOpDescriptorSelKernelSizes                                                            = objc.RegisterName("kernelSizes")
+	_mPSGraphPooling4DOpDescriptorSelSetKernelSizes                                                         = objc.RegisterName("setKernelSizes:")
+	_mPSGraphPooling4DOpDescriptorSelStrides                                                                = objc.RegisterName("strides")
+	_mPSGraphPooling4DOpDescriptorSelSetStrides                                                             = objc.RegisterName("setStrides:")
+	_mPSGraphPooling4DOpDescriptorSelDilationRates                                                          = objc.RegisterName("dilationRates")
+	_mPSGraphPooling4DOpDescriptorSelSetDilationRates                                                       = objc.RegisterName("setDilationRates:")
+	_mPSGraphPooling4DOpDescriptorSelPaddingValues                                                          = objc.RegisterName("paddingValues")
+	_mPSGraphPooling4DOpDescriptorSelSetPaddingValues                                                       = objc.RegisterName("setPaddingValues:")
+	_mPSGraphPooling4DOpDescriptorSelPaddingStyle                                                           = objc.RegisterName("paddingStyle")
+	_mPSGraphPooling4DOpDescriptorSelSetPaddingStyle                                                        = objc.RegisterName("setPaddingStyle:")
+	_mPSGraphPooling4DOpDescriptorSelCeilMode                                                               = objc.RegisterName("ceilMode")
+	_mPSGraphPooling4DOpDescriptorSelSetCeilMode                                                            = objc.RegisterName("setCeilMode:")
+	_mPSGraphPooling4DOpDescriptorSelIncludeZeroPadToAverage                                                = objc.RegisterName("includeZeroPadToAverage")
+	_mPSGraphPooling4DOpDescriptorSelSetIncludeZeroPadToAverage                                             = objc.RegisterName("setIncludeZeroPadToAverage:")
+	_mPSGraphPooling4DOpDescriptorSelReturnIndicesMode                                                      = objc.RegisterName("returnIndicesMode")
+	_mPSGraphPooling4DOpDescriptorSelSetReturnIndicesMode                                                   = objc.RegisterName("setReturnIndicesMode:")
+	_mPSGraphPooling4DOpDescriptorSelReturnIndicesDataType                                                  = objc.RegisterName("returnIndicesDataType")
+	_mPSGraphPooling4DOpDescriptorSelSetReturnIndicesDataType                                               = objc.RegisterName("setReturnIndicesDataType:")
 )
 
 func MPSGraphPooling4DOpDescriptorFromID(id objc.ID) *MPSGraphPooling4DOpDescriptor {
@@ -53,14 +53,18 @@ func MPSGraphPooling4DOpDescriptorFromID(id objc.ID) *MPSGraphPooling4DOpDescrip
 // Creates a 4D pooling descriptor with given values. - Parameters: - kernelSizes: See `kernelSizes` property. - strides: See `strides` property. - dilationRates: See `dilationRates` property. - paddingValues: See `paddingValues` property. - paddingStyle: See `paddingStyle` property. - Returns: The descriptor on autoreleasepool.
 func MPSGraphPooling4DOpDescriptorDescriptorWithKernelSizesStridesDilationRatesPaddingValuesPaddingStyle(kernelSizes *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingValues *foundation.NSArray[*foundation.NSNumber], paddingStyle MPSGraphPaddingStyle) *MPSGraphPooling4DOpDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphPooling4DOpDescriptor), _mPSGraphPooling4DOpDescriptorSelDescriptorWithKernelSizesStridesDilationRatesPaddingValuesPaddingStyle, kernelSizes, strides, dilationRates, paddingValues, paddingStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSGraphPooling4DOpDescriptorFromID(_ret)
 }
 
 // Creates a 4D pooling descriptor with default values. - Parameters: - kernelSizes: See `kernelSizes` property. - paddingStyle: See `paddingStyle` property. - Returns: The descriptor on autoreleasepool.
 func MPSGraphPooling4DOpDescriptorDescriptorWithKernelSizesPaddingStyle(kernelSizes *foundation.NSArray[*foundation.NSNumber], paddingStyle MPSGraphPaddingStyle) *MPSGraphPooling4DOpDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphPooling4DOpDescriptor), _mPSGraphPooling4DOpDescriptorSelDescriptorWithKernelSizesPaddingStyle, kernelSizes, paddingStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSGraphPooling4DOpDescriptorFromID(_ret)
 }
 
@@ -134,25 +138,24 @@ func (o *MPSGraphPooling4DOpDescriptor) SetIncludeZeroPadToAverage(includeZeroPa
 	o.Ptr().Send(_mPSGraphPooling4DOpDescriptorSelSetIncludeZeroPadToAverage, includeZeroPadToAverage)
 }
 
-// Defines the mode for returned indices of maximum values within each pooling window. Use this in conjunction with ``MPSGraph/maxPooling4DReturnIndicesWithSourceTensor:descriptor:name:`` API. If `returnIndicesMode = MPSGraphPoolingReturnIndicesNone` then only the first result MPSGraph returns from ``MPSGraph/maxPooling4DReturnIndicesWithSourceTensor:descriptor:name:`` will be valid and using the second result will assert. Default value: `MPSGraphPoolingReturnIndicesNone`.
+// Defines the mode for returned indices of maximum values within each pooling window. Use this in conjunction with “MPSGraph/maxPooling4DReturnIndicesWithSourceTensor:descriptor:name:“ API. If `returnIndicesMode = MPSGraphPoolingReturnIndicesNone` then only the first result MPSGraph returns from “MPSGraph/maxPooling4DReturnIndicesWithSourceTensor:descriptor:name:“ will be valid and using the second result will assert. Default value: `MPSGraphPoolingReturnIndicesNone`.
 func (o *MPSGraphPooling4DOpDescriptor) ReturnIndicesMode() MPSGraphPoolingReturnIndicesMode {
 	_ret := objc.Send[MPSGraphPoolingReturnIndicesMode](o.Ptr(), _mPSGraphPooling4DOpDescriptorSelReturnIndicesMode)
 	return _ret
 }
 
-// Defines the mode for returned indices of maximum values within each pooling window. Use this in conjunction with ``MPSGraph/maxPooling4DReturnIndicesWithSourceTensor:descriptor:name:`` API. If `returnIndicesMode = MPSGraphPoolingReturnIndicesNone` then only the first result MPSGraph returns from ``MPSGraph/maxPooling4DReturnIndicesWithSourceTensor:descriptor:name:`` will be valid and using the second result will assert. Default value: `MPSGraphPoolingReturnIndicesNone`.
+// Defines the mode for returned indices of maximum values within each pooling window. Use this in conjunction with “MPSGraph/maxPooling4DReturnIndicesWithSourceTensor:descriptor:name:“ API. If `returnIndicesMode = MPSGraphPoolingReturnIndicesNone` then only the first result MPSGraph returns from “MPSGraph/maxPooling4DReturnIndicesWithSourceTensor:descriptor:name:“ will be valid and using the second result will assert. Default value: `MPSGraphPoolingReturnIndicesNone`.
 func (o *MPSGraphPooling4DOpDescriptor) SetReturnIndicesMode(returnIndicesMode MPSGraphPoolingReturnIndicesMode) {
 	o.Ptr().Send(_mPSGraphPooling4DOpDescriptorSelSetReturnIndicesMode, returnIndicesMode)
 }
 
-// Defines the data type for returned indices. Use this in conjunction with ``MPSGraph/maxPooling4DReturnIndicesWithSourceTensor:descriptor:name:`` API. Currently MPSGraph supports the following datatypes: `MPSDataTypeInt32`. Default value: `MPSDataTypeInt32`.
+// Defines the data type for returned indices. Use this in conjunction with “MPSGraph/maxPooling4DReturnIndicesWithSourceTensor:descriptor:name:“ API. Currently MPSGraph supports the following datatypes: `MPSDataTypeInt32`. Default value: `MPSDataTypeInt32`.
 func (o *MPSGraphPooling4DOpDescriptor) ReturnIndicesDataType() mpscore.MPSDataType {
 	_ret := objc.Send[mpscore.MPSDataType](o.Ptr(), _mPSGraphPooling4DOpDescriptorSelReturnIndicesDataType)
 	return _ret
 }
 
-// Defines the data type for returned indices. Use this in conjunction with ``MPSGraph/maxPooling4DReturnIndicesWithSourceTensor:descriptor:name:`` API. Currently MPSGraph supports the following datatypes: `MPSDataTypeInt32`. Default value: `MPSDataTypeInt32`.
+// Defines the data type for returned indices. Use this in conjunction with “MPSGraph/maxPooling4DReturnIndicesWithSourceTensor:descriptor:name:“ API. Currently MPSGraph supports the following datatypes: `MPSDataTypeInt32`. Default value: `MPSDataTypeInt32`.
 func (o *MPSGraphPooling4DOpDescriptor) SetReturnIndicesDataType(returnIndicesDataType mpscore.MPSDataType) {
 	o.Ptr().Send(_mPSGraphPooling4DOpDescriptorSelSetReturnIndicesDataType, returnIndicesDataType)
 }
-

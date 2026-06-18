@@ -73,4 +73,3 @@ type TokenSessionable interface {
 }
 
 var _ TokenSessionable = (*TokenSession)(nil)
-

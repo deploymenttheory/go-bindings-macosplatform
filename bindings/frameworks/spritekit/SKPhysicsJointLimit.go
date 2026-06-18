@@ -16,10 +16,10 @@ type SKPhysicsJointLimit struct {
 }
 
 var (
-	_clsSKPhysicsJointLimit = _objcClass("SKPhysicsJointLimit")
+	_clsSKPhysicsJointLimit                                  = _objcClass("SKPhysicsJointLimit")
 	_sKPhysicsJointLimitSelJointWithBodyABodyBAnchorAAnchorB = objc.RegisterName("jointWithBodyA:bodyB:anchorA:anchorB:")
-	_sKPhysicsJointLimitSelMaxLength = objc.RegisterName("maxLength")
-	_sKPhysicsJointLimitSelSetMaxLength = objc.RegisterName("setMaxLength:")
+	_sKPhysicsJointLimitSelMaxLength                         = objc.RegisterName("maxLength")
+	_sKPhysicsJointLimitSelSetMaxLength                      = objc.RegisterName("setMaxLength:")
 )
 
 func SKPhysicsJointLimitFromID(id objc.ID) *SKPhysicsJointLimit {
@@ -34,7 +34,9 @@ func SKPhysicsJointLimitFromID(id objc.ID) *SKPhysicsJointLimit {
 
 func SKPhysicsJointLimitJointWithBodyABodyBAnchorAAnchorB(bodyA *SKPhysicsBody, bodyB *SKPhysicsBody, anchorA corefoundation.CGPoint, anchorB corefoundation.CGPoint) *SKPhysicsJointLimit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsJointLimit), _sKPhysicsJointLimitSelJointWithBodyABodyBAnchorAAnchorB, bodyA.Ptr(), bodyB.Ptr(), anchorA, anchorB)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPhysicsJointLimitFromID(_ret)
 }
 
@@ -46,4 +48,3 @@ func (o *SKPhysicsJointLimit) MaxLength() float64 {
 func (o *SKPhysicsJointLimit) SetMaxLength(maxLength float64) {
 	o.Ptr().Send(_sKPhysicsJointLimitSelSetMaxLength, maxLength)
 }
-

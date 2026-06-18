@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_mlcomputeLib uintptr
-	_loadOnce sync.Once
+	_mlcomputeLib  uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -48,19 +48,45 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("MLCActivationTypeDebugDescription", func() { purego.RegisterLibFunc(&_fnMLCActivationTypeDebugDescription, _mlcomputeLib, "MLCActivationTypeDebugDescription") })
-	_register("MLCArithmeticOperationDebugDescription", func() { purego.RegisterLibFunc(&_fnMLCArithmeticOperationDebugDescription, _mlcomputeLib, "MLCArithmeticOperationDebugDescription") })
-	_register("MLCComparisonOperationDebugDescription", func() { purego.RegisterLibFunc(&_fnMLCComparisonOperationDebugDescription, _mlcomputeLib, "MLCComparisonOperationDebugDescription") })
-	_register("MLCConvolutionTypeDebugDescription", func() { purego.RegisterLibFunc(&_fnMLCConvolutionTypeDebugDescription, _mlcomputeLib, "MLCConvolutionTypeDebugDescription") })
-	_register("MLCGradientClippingTypeDebugDescription", func() { purego.RegisterLibFunc(&_fnMLCGradientClippingTypeDebugDescription, _mlcomputeLib, "MLCGradientClippingTypeDebugDescription") })
-	_register("MLCLSTMResultModeDebugDescription", func() { purego.RegisterLibFunc(&_fnMLCLSTMResultModeDebugDescription, _mlcomputeLib, "MLCLSTMResultModeDebugDescription") })
-	_register("MLCLossTypeDebugDescription", func() { purego.RegisterLibFunc(&_fnMLCLossTypeDebugDescription, _mlcomputeLib, "MLCLossTypeDebugDescription") })
-	_register("MLCPaddingPolicyDebugDescription", func() { purego.RegisterLibFunc(&_fnMLCPaddingPolicyDebugDescription, _mlcomputeLib, "MLCPaddingPolicyDebugDescription") })
-	_register("MLCPaddingTypeDebugDescription", func() { purego.RegisterLibFunc(&_fnMLCPaddingTypeDebugDescription, _mlcomputeLib, "MLCPaddingTypeDebugDescription") })
-	_register("MLCPoolingTypeDebugDescription", func() { purego.RegisterLibFunc(&_fnMLCPoolingTypeDebugDescription, _mlcomputeLib, "MLCPoolingTypeDebugDescription") })
-	_register("MLCReductionTypeDebugDescription", func() { purego.RegisterLibFunc(&_fnMLCReductionTypeDebugDescription, _mlcomputeLib, "MLCReductionTypeDebugDescription") })
-	_register("MLCSampleModeDebugDescription", func() { purego.RegisterLibFunc(&_fnMLCSampleModeDebugDescription, _mlcomputeLib, "MLCSampleModeDebugDescription") })
-	_register("MLCSoftmaxOperationDebugDescription", func() { purego.RegisterLibFunc(&_fnMLCSoftmaxOperationDebugDescription, _mlcomputeLib, "MLCSoftmaxOperationDebugDescription") })
+	_register("MLCActivationTypeDebugDescription", func() {
+		purego.RegisterLibFunc(&_fnMLCActivationTypeDebugDescription, _mlcomputeLib, "MLCActivationTypeDebugDescription")
+	})
+	_register("MLCArithmeticOperationDebugDescription", func() {
+		purego.RegisterLibFunc(&_fnMLCArithmeticOperationDebugDescription, _mlcomputeLib, "MLCArithmeticOperationDebugDescription")
+	})
+	_register("MLCComparisonOperationDebugDescription", func() {
+		purego.RegisterLibFunc(&_fnMLCComparisonOperationDebugDescription, _mlcomputeLib, "MLCComparisonOperationDebugDescription")
+	})
+	_register("MLCConvolutionTypeDebugDescription", func() {
+		purego.RegisterLibFunc(&_fnMLCConvolutionTypeDebugDescription, _mlcomputeLib, "MLCConvolutionTypeDebugDescription")
+	})
+	_register("MLCGradientClippingTypeDebugDescription", func() {
+		purego.RegisterLibFunc(&_fnMLCGradientClippingTypeDebugDescription, _mlcomputeLib, "MLCGradientClippingTypeDebugDescription")
+	})
+	_register("MLCLSTMResultModeDebugDescription", func() {
+		purego.RegisterLibFunc(&_fnMLCLSTMResultModeDebugDescription, _mlcomputeLib, "MLCLSTMResultModeDebugDescription")
+	})
+	_register("MLCLossTypeDebugDescription", func() {
+		purego.RegisterLibFunc(&_fnMLCLossTypeDebugDescription, _mlcomputeLib, "MLCLossTypeDebugDescription")
+	})
+	_register("MLCPaddingPolicyDebugDescription", func() {
+		purego.RegisterLibFunc(&_fnMLCPaddingPolicyDebugDescription, _mlcomputeLib, "MLCPaddingPolicyDebugDescription")
+	})
+	_register("MLCPaddingTypeDebugDescription", func() {
+		purego.RegisterLibFunc(&_fnMLCPaddingTypeDebugDescription, _mlcomputeLib, "MLCPaddingTypeDebugDescription")
+	})
+	_register("MLCPoolingTypeDebugDescription", func() {
+		purego.RegisterLibFunc(&_fnMLCPoolingTypeDebugDescription, _mlcomputeLib, "MLCPoolingTypeDebugDescription")
+	})
+	_register("MLCReductionTypeDebugDescription", func() {
+		purego.RegisterLibFunc(&_fnMLCReductionTypeDebugDescription, _mlcomputeLib, "MLCReductionTypeDebugDescription")
+	})
+	_register("MLCSampleModeDebugDescription", func() {
+		purego.RegisterLibFunc(&_fnMLCSampleModeDebugDescription, _mlcomputeLib, "MLCSampleModeDebugDescription")
+	})
+	_register("MLCSoftmaxOperationDebugDescription", func() {
+		purego.RegisterLibFunc(&_fnMLCSoftmaxOperationDebugDescription, _mlcomputeLib, "MLCSoftmaxOperationDebugDescription")
+	})
 }
 
 func init() {

@@ -590,9 +590,13 @@ func (x *MTRBaseClusterOperationalState) SubscribeAttributeClusterRevisionWithPa
 	}
 }
 
-func (x *MTRBaseClusterOperationalState) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterOperationalState) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterOperationalState) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterOperationalState) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterOperationalStateable is the interface implemented by [MTRBaseClusterOperationalState], for mocking and DI.
 type MTRBaseClusterOperationalStateable interface {
@@ -630,4 +634,3 @@ type MTRBaseClusterOperationalStateable interface {
 }
 
 var _ MTRBaseClusterOperationalStateable = (*MTRBaseClusterOperationalState)(nil)
-

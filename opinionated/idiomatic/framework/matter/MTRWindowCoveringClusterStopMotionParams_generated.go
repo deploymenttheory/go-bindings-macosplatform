@@ -16,7 +16,9 @@ type MTRWindowCoveringClusterStopMotionParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRWindowCoveringClusterStopMotionParams].
-func (x *MTRWindowCoveringClusterStopMotionParams) Unwrap() *raw.MTRWindowCoveringClusterStopMotionParams { return x.inner }
+func (x *MTRWindowCoveringClusterStopMotionParams) Unwrap() *raw.MTRWindowCoveringClusterStopMotionParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -80,4 +82,3 @@ type MTRWindowCoveringClusterStopMotionParamsable interface {
 }
 
 var _ MTRWindowCoveringClusterStopMotionParamsable = (*MTRWindowCoveringClusterStopMotionParams)(nil)
-

@@ -16,12 +16,12 @@ type NSNib struct {
 }
 
 var (
-	_clsNSNib = _objcClass("NSNib")
-	_nSNibSelInitWithNibNamedBundle = objc.RegisterName("initWithNibNamed:bundle:")
-	_nSNibSelInitWithNibDataBundle = objc.RegisterName("initWithNibData:bundle:")
-	_nSNibSelInstantiateWithOwnerTopLevelObjects = objc.RegisterName("instantiateWithOwner:topLevelObjects:")
-	_nSNibSelInitWithContentsOfURL = objc.RegisterName("initWithContentsOfURL:")
-	_nSNibSelInstantiateNibWithExternalNameTable = objc.RegisterName("instantiateNibWithExternalNameTable:")
+	_clsNSNib                                       = _objcClass("NSNib")
+	_nSNibSelInitWithNibNamedBundle                 = objc.RegisterName("initWithNibNamed:bundle:")
+	_nSNibSelInitWithNibDataBundle                  = objc.RegisterName("initWithNibData:bundle:")
+	_nSNibSelInstantiateWithOwnerTopLevelObjects    = objc.RegisterName("instantiateWithOwner:topLevelObjects:")
+	_nSNibSelInitWithContentsOfURL                  = objc.RegisterName("initWithContentsOfURL:")
+	_nSNibSelInstantiateNibWithExternalNameTable    = objc.RegisterName("instantiateNibWithExternalNameTable:")
 	_nSNibSelInstantiateNibWithOwnerTopLevelObjects = objc.RegisterName("instantiateNibWithOwner:topLevelObjects:")
 )
 
@@ -37,13 +37,17 @@ func NSNibFromID(id objc.ID) *NSNib {
 
 func (o *NSNib) InitWithNibNamedBundle(nibName *foundation.NSString, bundle *foundation.NSBundle) *NSNib {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNibSelInitWithNibNamedBundle, nibName.Ptr(), bundle.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNibFromID(_ret)
 }
 
 func (o *NSNib) InitWithNibDataBundle(nibData *foundation.NSData, bundle *foundation.NSBundle) *NSNib {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNibSelInitWithNibDataBundle, nibData.Ptr(), bundle.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNibFromID(_ret)
 }
 
@@ -69,4 +73,3 @@ func (o *NSNib) InstantiateNibWithOwnerTopLevelObjects(owner objc.ID, topLevelOb
 	_ret := objc.Send[bool](o.Ptr(), _nSNibSelInstantiateNibWithOwnerTopLevelObjects, owner, topLevelObjects)
 	return _ret
 }
-

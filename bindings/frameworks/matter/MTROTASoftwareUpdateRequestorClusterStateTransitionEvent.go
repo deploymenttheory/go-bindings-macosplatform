@@ -16,14 +16,14 @@ type MTROTASoftwareUpdateRequestorClusterStateTransitionEvent struct {
 }
 
 var (
-	_clsMTROTASoftwareUpdateRequestorClusterStateTransitionEvent = _objcClass("MTROTASoftwareUpdateRequestorClusterStateTransitionEvent")
-	_mTROTASoftwareUpdateRequestorClusterStateTransitionEventSelPreviousState = objc.RegisterName("previousState")
-	_mTROTASoftwareUpdateRequestorClusterStateTransitionEventSelSetPreviousState = objc.RegisterName("setPreviousState:")
-	_mTROTASoftwareUpdateRequestorClusterStateTransitionEventSelGetNewState = objc.RegisterName("getNewState")
-	_mTROTASoftwareUpdateRequestorClusterStateTransitionEventSelSetNewState = objc.RegisterName("setNewState:")
-	_mTROTASoftwareUpdateRequestorClusterStateTransitionEventSelReason = objc.RegisterName("reason")
-	_mTROTASoftwareUpdateRequestorClusterStateTransitionEventSelSetReason = objc.RegisterName("setReason:")
-	_mTROTASoftwareUpdateRequestorClusterStateTransitionEventSelTargetSoftwareVersion = objc.RegisterName("targetSoftwareVersion")
+	_clsMTROTASoftwareUpdateRequestorClusterStateTransitionEvent                         = _objcClass("MTROTASoftwareUpdateRequestorClusterStateTransitionEvent")
+	_mTROTASoftwareUpdateRequestorClusterStateTransitionEventSelPreviousState            = objc.RegisterName("previousState")
+	_mTROTASoftwareUpdateRequestorClusterStateTransitionEventSelSetPreviousState         = objc.RegisterName("setPreviousState:")
+	_mTROTASoftwareUpdateRequestorClusterStateTransitionEventSelGetNewState              = objc.RegisterName("getNewState")
+	_mTROTASoftwareUpdateRequestorClusterStateTransitionEventSelSetNewState              = objc.RegisterName("setNewState:")
+	_mTROTASoftwareUpdateRequestorClusterStateTransitionEventSelReason                   = objc.RegisterName("reason")
+	_mTROTASoftwareUpdateRequestorClusterStateTransitionEventSelSetReason                = objc.RegisterName("setReason:")
+	_mTROTASoftwareUpdateRequestorClusterStateTransitionEventSelTargetSoftwareVersion    = objc.RegisterName("targetSoftwareVersion")
 	_mTROTASoftwareUpdateRequestorClusterStateTransitionEventSelSetTargetSoftwareVersion = objc.RegisterName("setTargetSoftwareVersion:")
 )
 
@@ -39,7 +39,9 @@ func MTROTASoftwareUpdateRequestorClusterStateTransitionEventFromID(id objc.ID) 
 
 func (o *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) PreviousState() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateRequestorClusterStateTransitionEventSelPreviousState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) SetPreviousSt
 
 func (o *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) GetNewState() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateRequestorClusterStateTransitionEventSelGetNewState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,7 +63,9 @@ func (o *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) SetNewState(n
 
 func (o *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) Reason() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateRequestorClusterStateTransitionEventSelReason)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -69,11 +75,12 @@ func (o *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) SetReason(rea
 
 func (o *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) TargetSoftwareVersion() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateRequestorClusterStateTransitionEventSelTargetSoftwareVersion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) SetTargetSoftwareVersion(targetSoftwareVersion *foundation.NSNumber) {
 	o.Ptr().Send(_mTROTASoftwareUpdateRequestorClusterStateTransitionEventSelSetTargetSoftwareVersion, targetSoftwareVersion.Ptr())
 }
-

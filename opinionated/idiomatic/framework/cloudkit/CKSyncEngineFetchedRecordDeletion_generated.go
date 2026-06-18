@@ -16,7 +16,9 @@ type SyncEngineFetchedRecordDeletion struct {
 }
 
 // Unwrap returns the underlying [raw.CKSyncEngineFetchedRecordDeletion].
-func (x *SyncEngineFetchedRecordDeletion) Unwrap() *raw.CKSyncEngineFetchedRecordDeletion { return x.inner }
+func (x *SyncEngineFetchedRecordDeletion) Unwrap() *raw.CKSyncEngineFetchedRecordDeletion {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -62,4 +64,3 @@ type SyncEngineFetchedRecordDeletionable interface {
 }
 
 var _ SyncEngineFetchedRecordDeletionable = (*SyncEngineFetchedRecordDeletion)(nil)
-

@@ -16,7 +16,7 @@ type AVAudioMix struct {
 }
 
 var (
-	_clsAVAudioMix = _objcClass("AVAudioMix")
+	_clsAVAudioMix                = _objcClass("AVAudioMix")
 	_aVAudioMixSelInputParameters = objc.RegisterName("inputParameters")
 )
 
@@ -32,7 +32,8 @@ func AVAudioMixFromID(id objc.ID) *AVAudioMix {
 
 func (o *AVAudioMix) InputParameters() *foundation.NSArray[*AVAudioMixInputParameters] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioMixSelInputParameters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVAudioMixInputParameters](_ret)
 }
-

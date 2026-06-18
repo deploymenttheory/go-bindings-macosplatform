@@ -17,4 +17,3 @@ var _ cgo.Object = nil // suppress unused import
 type OS_os_log interface {
 	cgo.Object
 }
-

@@ -41,4 +41,3 @@ type RemoveParticipantAlertable interface {
 }
 
 var _ RemoveParticipantAlertable = (*RemoveParticipantAlert)(nil)
-

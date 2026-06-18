@@ -250,4 +250,3 @@ type WKWebExtensionControllerable interface {
 }
 
 var _ WKWebExtensionControllerable = (*WKWebExtensionController)(nil)
-

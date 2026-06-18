@@ -191,4 +191,3 @@ type CNNBatchNormalizationable interface {
 }
 
 var _ CNNBatchNormalizationable = (*CNNBatchNormalization)(nil)
-

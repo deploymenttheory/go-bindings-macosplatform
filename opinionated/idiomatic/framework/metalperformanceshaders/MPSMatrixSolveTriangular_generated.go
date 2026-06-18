@@ -87,9 +87,13 @@ func (x *MatrixSolveTriangular) EncodeToCommandBufferSourceMatrixRightHandSideMa
 	x.inner.EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix(commandBuffer, sourceMatrix, rightHandSideMatrix, solutionMatrix)
 }
 
-func (x *MatrixSolveTriangular) asMatrixBinaryKernel() *mpsmatrix.MPSMatrixBinaryKernel { return &x.inner.MPSMatrixBinaryKernel }
+func (x *MatrixSolveTriangular) asMatrixBinaryKernel() *mpsmatrix.MPSMatrixBinaryKernel {
+	return &x.inner.MPSMatrixBinaryKernel
+}
 
-func (x *MatrixSolveTriangular) asKernel() *mpscore.MPSKernel { return &x.inner.MPSMatrixBinaryKernel.MPSKernel }
+func (x *MatrixSolveTriangular) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSMatrixBinaryKernel.MPSKernel
+}
 
 // MatrixSolveTriangularable is the interface implemented by [MatrixSolveTriangular], for mocking and DI.
 type MatrixSolveTriangularable interface {
@@ -105,4 +109,3 @@ type MatrixSolveTriangularable interface {
 }
 
 var _ MatrixSolveTriangularable = (*MatrixSolveTriangular)(nil)
-

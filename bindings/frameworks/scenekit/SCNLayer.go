@@ -16,8 +16,8 @@ type SCNLayer struct {
 }
 
 var (
-	_clsSCNLayer = _objcClass("SCNLayer")
-	_sCNLayerSelScene = objc.RegisterName("scene")
+	_clsSCNLayer         = _objcClass("SCNLayer")
+	_sCNLayerSelScene    = objc.RegisterName("scene")
 	_sCNLayerSelSetScene = objc.RegisterName("setScene:")
 )
 
@@ -33,11 +33,12 @@ func SCNLayerFromID(id objc.ID) *SCNLayer {
 
 func (o *SCNLayer) Scene() *SCNScene {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNLayerSelScene)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNSceneFromID(_ret)
 }
 
 func (o *SCNLayer) SetScene(scene *SCNScene) {
 	o.Ptr().Send(_sCNLayerSelSetScene, scene.Ptr())
 }
-

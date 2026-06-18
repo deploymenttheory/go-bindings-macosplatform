@@ -17,4 +17,3 @@ type DiagnosticProvider interface {
 type MetricProvider interface {
 	asMetric() *raw.MXMetric
 }
-

@@ -16,9 +16,9 @@ type SWHighlightPersistenceEvent struct {
 }
 
 var (
-	_clsSWHighlightPersistenceEvent = _objcClass("SWHighlightPersistenceEvent")
+	_clsSWHighlightPersistenceEvent                         = _objcClass("SWHighlightPersistenceEvent")
 	_sWHighlightPersistenceEventSelInitWithHighlightTrigger = objc.RegisterName("initWithHighlight:trigger:")
-	_sWHighlightPersistenceEventSelPersistenceEventTrigger = objc.RegisterName("persistenceEventTrigger")
+	_sWHighlightPersistenceEventSelPersistenceEventTrigger  = objc.RegisterName("persistenceEventTrigger")
 )
 
 func SWHighlightPersistenceEventFromID(id objc.ID) *SWHighlightPersistenceEvent {
@@ -34,7 +34,9 @@ func SWHighlightPersistenceEventFromID(id objc.ID) *SWHighlightPersistenceEvent 
 // Initializes a highlight persistence event object when the highlight persistence is changed. @param highlight The object on which the event occurred. @param trigger The trigger persistence event for the highlight.
 func (o *SWHighlightPersistenceEvent) InitWithHighlightTrigger(highlight *SWHighlight, trigger SWHighlightPersistenceEventTrigger) *SWHighlightPersistenceEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWHighlightPersistenceEventSelInitWithHighlightTrigger, highlight.Ptr(), trigger)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SWHighlightPersistenceEventFromID(_ret)
 }
 
@@ -42,4 +44,3 @@ func (o *SWHighlightPersistenceEvent) PersistenceEventTrigger() SWHighlightPersi
 	_ret := objc.Send[SWHighlightPersistenceEventTrigger](o.Ptr(), _sWHighlightPersistenceEventSelPersistenceEventTrigger)
 	return _ret
 }
-

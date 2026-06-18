@@ -21,19 +21,19 @@ type AVCaptionPoint struct {
 
 // @typedef AVCaptionSize @abstract A two dimensional size made of width and height AVCaptionDimensions @field width An AVCaptionDimension holding the width @field height An AVCaptionDimension holding the height
 type AVCaptionSize struct {
-	Width AVCaptionDimension
+	Width  AVCaptionDimension
 	Height AVCaptionDimension
 }
 
 // This structure represents a timecode, adhering to SMPTE standards, which define precise time information and associated timestamps for video or audio synchronization. This structure corresponds to the SMPTE 12M-1 Linear Timecode (LTC) format, widely used for professional video and audio synchronization.
 type AVCaptureTimecode struct {
-	Hours uint8
-	Minutes uint8
-	Seconds uint8
-	Frames uint8
-	UserBits uint32
+	Hours         uint8
+	Minutes       uint8
+	Seconds       uint8
+	Frames        uint8
+	UserBits      uint32
 	FrameDuration coremedia.CMTime
-	SourceType AVCaptureTimecodeSourceType
+	SourceType    AVCaptureTimecodeSourceType
 }
 
 // @typedef AVCaptureWhiteBalanceChromaticityValues @abstract Structure containing CIE 1931 xy chromaticity values.
@@ -44,51 +44,51 @@ type AVCaptureWhiteBalanceChromaticityValues struct {
 
 // @typedef AVCaptureWhiteBalanceGains @abstract Structure containing RGB white balance gain values.
 type AVCaptureWhiteBalanceGains struct {
-	RedGain float32
+	RedGain   float32
 	GreenGain float32
-	BlueGain float32
+	BlueGain  float32
 }
 
 // @typedef AVCaptureWhiteBalanceTemperatureAndTintValues @abstract Structure containing a white balance color correlated temperature in kelvin, plus a tint value in the range of [-150 - +150].
 type AVCaptureWhiteBalanceTemperatureAndTintValues struct {
 	Temperature float32
-	Tint float32
+	Tint        float32
 }
 
 type AVEdgeWidths struct {
-	Left float64
-	Top float64
-	Right float64
+	Left   float64
+	Top    float64
+	Right  float64
 	Bottom float64
 }
 
 type AVPixelAspectRatio struct {
 	HorizontalSpacing int
-	VerticalSpacing int
+	VerticalSpacing   int
 }
 
 // @struct		AVSampleCursorAudioDependencyInfo @abstract   A struct for describing the independent decodability of audio samples @field      audioSampleIsIndependentlyDecodable Indicates whether the sample is independently decodable.  Will be YES for Immediate Playout Frames (IPFs) and Independent Frames (IFs). @field      audioSamplePacketRefreshCount If audioSampleIsIndependentlyDecodable is YES, indicates how many samples, starting at this sample, must be fed to the decoder to achieve full decoder refresh.  Will be zero for Immediate Playout Frames (IPFs).
 type AVSampleCursorAudioDependencyInfo struct {
 	AudioSampleIsIndependentlyDecodable bool
-	AudioSamplePacketRefreshCount int
+	AudioSamplePacketRefreshCount       int
 }
 
 // @struct		AVSampleCursorChunkInfo @abstract   Provides information about a chunk of media samples. @field      chunkSampleCount The count of media samples in the chunk. @field      chunkHasUniformSampleSizes YES if all of the samples in the chunk occupy the same number of bytes in storage. @field      currentChunkHasUniformSampleDurations YES if all of the samples in the chunk have the same duration. @field      currentChunkHasUniformFormatDescriptions YES if all of the samples in the chunk have the same format description.
 type AVSampleCursorChunkInfo struct {
-	ChunkSampleCount int64
-	ChunkHasUniformSampleSizes bool
-	ChunkHasUniformSampleDurations bool
+	ChunkSampleCount                  int64
+	ChunkHasUniformSampleSizes        bool
+	ChunkHasUniformSampleDurations    bool
 	ChunkHasUniformFormatDescriptions bool
 }
 
 // @struct		AVSampleCursorDependencyInfo @abstract   A struct for describing dependencies between a media sample and other media samples in the same sample sequence. @field      sampleIndicatesWhetherItHasDependentSamples Indicates whether the presence or absence of other samples that are dependent on the sample is known. @field      sampleHasDependentSamples If sampleIndicatesWhetherItHasDependentSamples is YES, indicates whether the sample has dependent samples. @field      sampleIndicatesWhetherItDependsOnOthers Indicates whether the sample's independency from other samples or dependency on other samples is known. @field      sampleDependsOnOthers If sampleIndicatesWhetherItDependsOnOthers is YES, indicates whether the sample depends on other media samples. @field      sampleIndicatesWhetherItHasRedundantCoding Indicates whether the presence of redundant coding of the sample is known. @field      sampleHasRedundantCoding If sampleIndicatesWhetherItHasRedundantCoding is YES, indicates whether the sample has redundant coding.
 type AVSampleCursorDependencyInfo struct {
 	SampleIndicatesWhetherItHasDependentSamples bool
-	SampleHasDependentSamples bool
-	SampleIndicatesWhetherItDependsOnOthers bool
-	SampleDependsOnOthers bool
-	SampleIndicatesWhetherItHasRedundantCoding bool
-	SampleHasRedundantCoding bool
+	SampleHasDependentSamples                   bool
+	SampleIndicatesWhetherItDependsOnOthers     bool
+	SampleDependsOnOthers                       bool
+	SampleIndicatesWhetherItHasRedundantCoding  bool
+	SampleHasRedundantCoding                    bool
 }
 
 // @struct		AVSampleCursorStorageRange @abstract   A struct for indicating the offset and length of storage occupied by a media sample or its chunk. @field      offset The offset of the first byte of storage occupied by a media sample or its chunk. @field      length The count of bytes of storage occupied by a media sample or its chunk. @discussion Like NSRange, but rangier.
@@ -99,8 +99,7 @@ type AVSampleCursorStorageRange struct {
 
 // @struct		AVSampleCursorSyncInfo @abstract   A struct for describing attributes of a media sample for consideration when resynchronizing a decoder. @field      sampleIsFullSync Indicates whether the sample is a full sync sample, also known as an Instantaneous Decoder Refresh sample, and is sufficient in itself to completely resynchronize a decoder. @field      sampleIsPartialSync Indicates whether the sample is a partial sync sample. @field      sampleIsDroppable Indicates whether the sample is droppable.
 type AVSampleCursorSyncInfo struct {
-	SampleIsFullSync bool
+	SampleIsFullSync    bool
 	SampleIsPartialSync bool
-	SampleIsDroppable bool
+	SampleIsDroppable   bool
 }
-

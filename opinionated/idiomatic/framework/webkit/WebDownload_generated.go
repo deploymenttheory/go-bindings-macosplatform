@@ -41,4 +41,3 @@ type WebDownloadable interface {
 }
 
 var _ WebDownloadable = (*WebDownload)(nil)
-

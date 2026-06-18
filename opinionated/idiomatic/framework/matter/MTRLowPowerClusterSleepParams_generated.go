@@ -80,4 +80,3 @@ type MTRLowPowerClusterSleepParamsable interface {
 }
 
 var _ MTRLowPowerClusterSleepParamsable = (*MTRLowPowerClusterSleepParams)(nil)
-

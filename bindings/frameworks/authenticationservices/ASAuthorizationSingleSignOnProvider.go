@@ -16,11 +16,11 @@ type ASAuthorizationSingleSignOnProvider struct {
 }
 
 var (
-	_clsASAuthorizationSingleSignOnProvider = _objcClass("ASAuthorizationSingleSignOnProvider")
+	_clsASAuthorizationSingleSignOnProvider                                             = _objcClass("ASAuthorizationSingleSignOnProvider")
 	_aSAuthorizationSingleSignOnProviderSelAuthorizationProviderWithIdentityProviderURL = objc.RegisterName("authorizationProviderWithIdentityProviderURL:")
-	_aSAuthorizationSingleSignOnProviderSelCreateRequest = objc.RegisterName("createRequest")
-	_aSAuthorizationSingleSignOnProviderSelUrl = objc.RegisterName("url")
-	_aSAuthorizationSingleSignOnProviderSelCanPerformAuthorization = objc.RegisterName("canPerformAuthorization")
+	_aSAuthorizationSingleSignOnProviderSelCreateRequest                                = objc.RegisterName("createRequest")
+	_aSAuthorizationSingleSignOnProviderSelUrl                                          = objc.RegisterName("url")
+	_aSAuthorizationSingleSignOnProviderSelCanPerformAuthorization                      = objc.RegisterName("canPerformAuthorization")
 )
 
 func ASAuthorizationSingleSignOnProviderFromID(id objc.ID) *ASAuthorizationSingleSignOnProvider {
@@ -36,19 +36,25 @@ func ASAuthorizationSingleSignOnProviderFromID(id objc.ID) *ASAuthorizationSingl
 // @abstract To get the right extension the identity provider main URL has to be provided. The URL is even part of the extension using assosiated domains mechanism or can be configured by MDM profile.
 func ASAuthorizationSingleSignOnProviderAuthorizationProviderWithIdentityProviderURL(url *foundation.NSURL) *ASAuthorizationSingleSignOnProvider {
 	_ret := objc.Send[objc.ID](objc.ID(_clsASAuthorizationSingleSignOnProvider), _aSAuthorizationSingleSignOnProviderSelAuthorizationProviderWithIdentityProviderURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationSingleSignOnProviderFromID(_ret)
 }
 
 func (o *ASAuthorizationSingleSignOnProvider) CreateRequest() *ASAuthorizationSingleSignOnRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationSingleSignOnProviderSelCreateRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationSingleSignOnRequestFromID(_ret)
 }
 
 func (o *ASAuthorizationSingleSignOnProvider) Url() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationSingleSignOnProviderSelUrl)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -57,4 +63,3 @@ func (o *ASAuthorizationSingleSignOnProvider) CanPerformAuthorization() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationSingleSignOnProviderSelCanPerformAuthorization)
 	return _ret
 }
-

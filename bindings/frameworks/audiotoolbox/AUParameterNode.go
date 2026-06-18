@@ -18,24 +18,24 @@ type AUParameterNode struct {
 }
 
 var (
-	_clsAUParameterNode = _objcClass("AUParameterNode")
-	_aUParameterNodeSelDisplayNameWithLength = objc.RegisterName("displayNameWithLength:")
-	_aUParameterNodeSelTokenByAddingParameterObserver = objc.RegisterName("tokenByAddingParameterObserver:")
-	_aUParameterNodeSelTokenByAddingParameterRecordingObserver = objc.RegisterName("tokenByAddingParameterRecordingObserver:")
-	_aUParameterNodeSelTokenByAddingParameterAutomationObserver = objc.RegisterName("tokenByAddingParameterAutomationObserver:")
-	_aUParameterNodeSelRemoveParameterObserver = objc.RegisterName("removeParameterObserver:")
-	_aUParameterNodeSelIdentifier = objc.RegisterName("identifier")
-	_aUParameterNodeSelKeyPath = objc.RegisterName("keyPath")
-	_aUParameterNodeSelDisplayName = objc.RegisterName("displayName")
-	_aUParameterNodeSelImplementorValueObserver = objc.RegisterName("implementorValueObserver")
-	_aUParameterNodeSelSetImplementorValueObserver = objc.RegisterName("setImplementorValueObserver:")
-	_aUParameterNodeSelImplementorValueProvider = objc.RegisterName("implementorValueProvider")
-	_aUParameterNodeSelSetImplementorValueProvider = objc.RegisterName("setImplementorValueProvider:")
-	_aUParameterNodeSelImplementorStringFromValueCallback = objc.RegisterName("implementorStringFromValueCallback")
-	_aUParameterNodeSelSetImplementorStringFromValueCallback = objc.RegisterName("setImplementorStringFromValueCallback:")
-	_aUParameterNodeSelImplementorValueFromStringCallback = objc.RegisterName("implementorValueFromStringCallback")
-	_aUParameterNodeSelSetImplementorValueFromStringCallback = objc.RegisterName("setImplementorValueFromStringCallback:")
-	_aUParameterNodeSelImplementorDisplayNameWithLengthCallback = objc.RegisterName("implementorDisplayNameWithLengthCallback")
+	_clsAUParameterNode                                            = _objcClass("AUParameterNode")
+	_aUParameterNodeSelDisplayNameWithLength                       = objc.RegisterName("displayNameWithLength:")
+	_aUParameterNodeSelTokenByAddingParameterObserver              = objc.RegisterName("tokenByAddingParameterObserver:")
+	_aUParameterNodeSelTokenByAddingParameterRecordingObserver     = objc.RegisterName("tokenByAddingParameterRecordingObserver:")
+	_aUParameterNodeSelTokenByAddingParameterAutomationObserver    = objc.RegisterName("tokenByAddingParameterAutomationObserver:")
+	_aUParameterNodeSelRemoveParameterObserver                     = objc.RegisterName("removeParameterObserver:")
+	_aUParameterNodeSelIdentifier                                  = objc.RegisterName("identifier")
+	_aUParameterNodeSelKeyPath                                     = objc.RegisterName("keyPath")
+	_aUParameterNodeSelDisplayName                                 = objc.RegisterName("displayName")
+	_aUParameterNodeSelImplementorValueObserver                    = objc.RegisterName("implementorValueObserver")
+	_aUParameterNodeSelSetImplementorValueObserver                 = objc.RegisterName("setImplementorValueObserver:")
+	_aUParameterNodeSelImplementorValueProvider                    = objc.RegisterName("implementorValueProvider")
+	_aUParameterNodeSelSetImplementorValueProvider                 = objc.RegisterName("setImplementorValueProvider:")
+	_aUParameterNodeSelImplementorStringFromValueCallback          = objc.RegisterName("implementorStringFromValueCallback")
+	_aUParameterNodeSelSetImplementorStringFromValueCallback       = objc.RegisterName("setImplementorStringFromValueCallback:")
+	_aUParameterNodeSelImplementorValueFromStringCallback          = objc.RegisterName("implementorValueFromStringCallback")
+	_aUParameterNodeSelSetImplementorValueFromStringCallback       = objc.RegisterName("setImplementorValueFromStringCallback:")
+	_aUParameterNodeSelImplementorDisplayNameWithLengthCallback    = objc.RegisterName("implementorDisplayNameWithLengthCallback")
 	_aUParameterNodeSelSetImplementorDisplayNameWithLengthCallback = objc.RegisterName("setImplementorDisplayNameWithLengthCallback:")
 )
 
@@ -52,7 +52,9 @@ func AUParameterNodeFromID(id objc.ID) *AUParameterNode {
 // @method		displayNameWithLength: @brief		A version of displayName possibly abbreviated to the given desired length, in characters. @discussion The default implementation simply returns displayName.
 func (o *AUParameterNode) DisplayNameWithLength(maximumLength int) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUParameterNodeSelDisplayNameWithLength, maximumLength)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -103,21 +105,27 @@ func (o *AUParameterNode) RemoveParameterObserver(token unsafe.Pointer) {
 // @property	identifier @brief		A non-localized, permanent name for a parameter or group. @discussion The identifier must be unique for all child nodes under any given parent. From release to release, an audio unit must not change its parameters' identifiers; this will invalidate any hosts' documents that refer to the parameters.
 func (o *AUParameterNode) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUParameterNodeSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property	keyPath @brief		Generated by concatenating the identifiers of a node's parents with its own. @discussion Unless an audio unit specifically documents that its parameter addresses are stable and persistent, hosts, when recording parameter values, should bind to the keyPath. The individual node identifiers in a key path are separated by periods. (".") Passing a node's keyPath to -[tree valueForKeyPath:] should return the same node.
 func (o *AUParameterNode) KeyPath() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUParameterNodeSelKeyPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property	displayName @brief		A localized name to display for the parameter.
 func (o *AUParameterNode) DisplayName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUParameterNodeSelDisplayName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -180,4 +188,3 @@ func (o *AUParameterNode) ImplementorDisplayNameWithLengthCallback() objc.Block 
 func (o *AUParameterNode) SetImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback objc.Block) {
 	o.Ptr().Send(_aUParameterNodeSelSetImplementorDisplayNameWithLengthCallback, implementorDisplayNameWithLengthCallback)
 }
-

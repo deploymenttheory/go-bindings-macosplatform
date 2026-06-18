@@ -16,21 +16,21 @@ type NSBrowserCell struct {
 }
 
 var (
-	_clsNSBrowserCell = _objcClass("NSBrowserCell")
-	_nSBrowserCellSelInitTextCell = objc.RegisterName("initTextCell:")
-	_nSBrowserCellSelInitImageCell = objc.RegisterName("initImageCell:")
-	_nSBrowserCellSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSBrowserCellSelHighlightColorInView = objc.RegisterName("highlightColorInView:")
-	_nSBrowserCellSelReset = objc.RegisterName("reset")
-	_nSBrowserCellSelSet = objc.RegisterName("set")
-	_nSBrowserCellSelBranchImage = objc.RegisterName("branchImage")
+	_clsNSBrowserCell                       = _objcClass("NSBrowserCell")
+	_nSBrowserCellSelInitTextCell           = objc.RegisterName("initTextCell:")
+	_nSBrowserCellSelInitImageCell          = objc.RegisterName("initImageCell:")
+	_nSBrowserCellSelInitWithCoder          = objc.RegisterName("initWithCoder:")
+	_nSBrowserCellSelHighlightColorInView   = objc.RegisterName("highlightColorInView:")
+	_nSBrowserCellSelReset                  = objc.RegisterName("reset")
+	_nSBrowserCellSelSet                    = objc.RegisterName("set")
+	_nSBrowserCellSelBranchImage            = objc.RegisterName("branchImage")
 	_nSBrowserCellSelHighlightedBranchImage = objc.RegisterName("highlightedBranchImage")
-	_nSBrowserCellSelIsLeaf = objc.RegisterName("isLeaf")
-	_nSBrowserCellSelSetLeaf = objc.RegisterName("setLeaf:")
-	_nSBrowserCellSelIsLoaded = objc.RegisterName("isLoaded")
-	_nSBrowserCellSelSetLoaded = objc.RegisterName("setLoaded:")
-	_nSBrowserCellSelAlternateImage = objc.RegisterName("alternateImage")
-	_nSBrowserCellSelSetAlternateImage = objc.RegisterName("setAlternateImage:")
+	_nSBrowserCellSelIsLeaf                 = objc.RegisterName("isLeaf")
+	_nSBrowserCellSelSetLeaf                = objc.RegisterName("setLeaf:")
+	_nSBrowserCellSelIsLoaded               = objc.RegisterName("isLoaded")
+	_nSBrowserCellSelSetLoaded              = objc.RegisterName("setLoaded:")
+	_nSBrowserCellSelAlternateImage         = objc.RegisterName("alternateImage")
+	_nSBrowserCellSelSetAlternateImage      = objc.RegisterName("setAlternateImage:")
 )
 
 func NSBrowserCellFromID(id objc.ID) *NSBrowserCell {
@@ -45,25 +45,33 @@ func NSBrowserCellFromID(id objc.ID) *NSBrowserCell {
 
 func (o *NSBrowserCell) InitTextCell(string_ *foundation.NSString) *NSBrowserCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserCellSelInitTextCell, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBrowserCellFromID(_ret)
 }
 
 func (o *NSBrowserCell) InitImageCell(image *NSImage) *NSBrowserCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserCellSelInitImageCell, image.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBrowserCellFromID(_ret)
 }
 
 func (o *NSBrowserCell) InitWithCoder(coder *foundation.NSCoder) *NSBrowserCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserCellSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBrowserCellFromID(_ret)
 }
 
 func (o *NSBrowserCell) HighlightColorInView(controlView *NSView) *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserCellSelHighlightColorInView, controlView.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -77,13 +85,17 @@ func (o *NSBrowserCell) Set() {
 
 func NSBrowserCellBranchImage() *NSImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBrowserCell), _nSBrowserCellSelBranchImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
 func NSBrowserCellHighlightedBranchImage() *NSImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBrowserCell), _nSBrowserCellSelHighlightedBranchImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -107,11 +119,12 @@ func (o *NSBrowserCell) SetLoaded(loaded bool) {
 
 func (o *NSBrowserCell) AlternateImage() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserCellSelAlternateImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
 func (o *NSBrowserCell) SetAlternateImage(alternateImage *NSImage) {
 	o.Ptr().Send(_nSBrowserCellSelSetAlternateImage, alternateImage.Ptr())
 }
-

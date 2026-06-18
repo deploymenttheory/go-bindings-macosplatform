@@ -41,7 +41,9 @@ func (x *ScannerFeatureTemplate) Targets() *foundation.NSArray[objc.ID] {
 	return x.inner.Targets()
 }
 
-func (x *ScannerFeatureTemplate) asScannerFeature() *raw.ICScannerFeature { return &x.inner.ICScannerFeature }
+func (x *ScannerFeatureTemplate) asScannerFeature() *raw.ICScannerFeature {
+	return &x.inner.ICScannerFeature
+}
 
 // ScannerFeatureTemplateable is the interface implemented by [ScannerFeatureTemplate], for mocking and DI.
 type ScannerFeatureTemplateable interface {
@@ -50,4 +52,3 @@ type ScannerFeatureTemplateable interface {
 }
 
 var _ ScannerFeatureTemplateable = (*ScannerFeatureTemplate)(nil)
-

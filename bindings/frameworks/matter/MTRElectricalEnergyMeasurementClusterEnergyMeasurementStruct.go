@@ -16,17 +16,17 @@ type MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct struct {
 }
 
 var (
-	_clsMTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct = _objcClass("MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct")
-	_mTRElectricalEnergyMeasurementClusterEnergyMeasurementStructSelEnergy = objc.RegisterName("energy")
-	_mTRElectricalEnergyMeasurementClusterEnergyMeasurementStructSelSetEnergy = objc.RegisterName("setEnergy:")
-	_mTRElectricalEnergyMeasurementClusterEnergyMeasurementStructSelStartTimestamp = objc.RegisterName("startTimestamp")
+	_clsMTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct                  = _objcClass("MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct")
+	_mTRElectricalEnergyMeasurementClusterEnergyMeasurementStructSelEnergy            = objc.RegisterName("energy")
+	_mTRElectricalEnergyMeasurementClusterEnergyMeasurementStructSelSetEnergy         = objc.RegisterName("setEnergy:")
+	_mTRElectricalEnergyMeasurementClusterEnergyMeasurementStructSelStartTimestamp    = objc.RegisterName("startTimestamp")
 	_mTRElectricalEnergyMeasurementClusterEnergyMeasurementStructSelSetStartTimestamp = objc.RegisterName("setStartTimestamp:")
-	_mTRElectricalEnergyMeasurementClusterEnergyMeasurementStructSelEndTimestamp = objc.RegisterName("endTimestamp")
-	_mTRElectricalEnergyMeasurementClusterEnergyMeasurementStructSelSetEndTimestamp = objc.RegisterName("setEndTimestamp:")
-	_mTRElectricalEnergyMeasurementClusterEnergyMeasurementStructSelStartSystime = objc.RegisterName("startSystime")
-	_mTRElectricalEnergyMeasurementClusterEnergyMeasurementStructSelSetStartSystime = objc.RegisterName("setStartSystime:")
-	_mTRElectricalEnergyMeasurementClusterEnergyMeasurementStructSelEndSystime = objc.RegisterName("endSystime")
-	_mTRElectricalEnergyMeasurementClusterEnergyMeasurementStructSelSetEndSystime = objc.RegisterName("setEndSystime:")
+	_mTRElectricalEnergyMeasurementClusterEnergyMeasurementStructSelEndTimestamp      = objc.RegisterName("endTimestamp")
+	_mTRElectricalEnergyMeasurementClusterEnergyMeasurementStructSelSetEndTimestamp   = objc.RegisterName("setEndTimestamp:")
+	_mTRElectricalEnergyMeasurementClusterEnergyMeasurementStructSelStartSystime      = objc.RegisterName("startSystime")
+	_mTRElectricalEnergyMeasurementClusterEnergyMeasurementStructSelSetStartSystime   = objc.RegisterName("setStartSystime:")
+	_mTRElectricalEnergyMeasurementClusterEnergyMeasurementStructSelEndSystime        = objc.RegisterName("endSystime")
+	_mTRElectricalEnergyMeasurementClusterEnergyMeasurementStructSelSetEndSystime     = objc.RegisterName("setEndSystime:")
 )
 
 func MTRElectricalEnergyMeasurementClusterEnergyMeasurementStructFromID(id objc.ID) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
@@ -41,7 +41,9 @@ func MTRElectricalEnergyMeasurementClusterEnergyMeasurementStructFromID(id objc.
 
 func (o *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) Energy() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalEnergyMeasurementClusterEnergyMeasurementStructSelEnergy)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -51,7 +53,9 @@ func (o *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) SetEnergy
 
 func (o *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) StartTimestamp() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalEnergyMeasurementClusterEnergyMeasurementStructSelStartTimestamp)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) SetStartT
 
 func (o *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) EndTimestamp() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalEnergyMeasurementClusterEnergyMeasurementStructSelEndTimestamp)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -71,7 +77,9 @@ func (o *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) SetEndTim
 
 func (o *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) StartSystime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalEnergyMeasurementClusterEnergyMeasurementStructSelStartSystime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -81,11 +89,12 @@ func (o *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) SetStartS
 
 func (o *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) EndSystime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalEnergyMeasurementClusterEnergyMeasurementStructSelEndSystime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) SetEndSystime(endSystime *foundation.NSNumber) {
 	o.Ptr().Send(_mTRElectricalEnergyMeasurementClusterEnergyMeasurementStructSelSetEndSystime, endSystime.Ptr())
 }
-

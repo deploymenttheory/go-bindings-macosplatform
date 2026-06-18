@@ -16,8 +16,8 @@ type NEOnDemandRuleEvaluateConnection struct {
 }
 
 var (
-	_clsNEOnDemandRuleEvaluateConnection = _objcClass("NEOnDemandRuleEvaluateConnection")
-	_nEOnDemandRuleEvaluateConnectionSelConnectionRules = objc.RegisterName("connectionRules")
+	_clsNEOnDemandRuleEvaluateConnection                   = _objcClass("NEOnDemandRuleEvaluateConnection")
+	_nEOnDemandRuleEvaluateConnectionSelConnectionRules    = objc.RegisterName("connectionRules")
 	_nEOnDemandRuleEvaluateConnectionSelSetConnectionRules = objc.RegisterName("setConnectionRules:")
 )
 
@@ -33,11 +33,12 @@ func NEOnDemandRuleEvaluateConnectionFromID(id objc.ID) *NEOnDemandRuleEvaluateC
 
 func (o *NEOnDemandRuleEvaluateConnection) ConnectionRules() *foundation.NSArray[*NEEvaluateConnectionRule] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEOnDemandRuleEvaluateConnectionSelConnectionRules)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NEEvaluateConnectionRule](_ret)
 }
 
 func (o *NEOnDemandRuleEvaluateConnection) SetConnectionRules(connectionRules *foundation.NSArray[*NEEvaluateConnectionRule]) {
 	o.Ptr().Send(_nEOnDemandRuleEvaluateConnectionSelSetConnectionRules, connectionRules.Ptr())
 }
-

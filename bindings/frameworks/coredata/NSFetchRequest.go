@@ -18,46 +18,46 @@ type NSFetchRequest[ResultType purego.AnyObject] struct {
 }
 
 var (
-	_clsNSFetchRequest = _objcClass("NSFetchRequest")
-	_nSFetchRequestSelFetchRequestWithEntityName = objc.RegisterName("fetchRequestWithEntityName:")
-	_nSFetchRequestSelInit = objc.RegisterName("init")
-	_nSFetchRequestSelInitWithEntityName = objc.RegisterName("initWithEntityName:")
-	_nSFetchRequestSelExecute = objc.RegisterName("execute:")
-	_nSFetchRequestSelEntity = objc.RegisterName("entity")
-	_nSFetchRequestSelSetEntity = objc.RegisterName("setEntity:")
-	_nSFetchRequestSelEntityName = objc.RegisterName("entityName")
-	_nSFetchRequestSelPredicate = objc.RegisterName("predicate")
-	_nSFetchRequestSelSetPredicate = objc.RegisterName("setPredicate:")
-	_nSFetchRequestSelSortDescriptors = objc.RegisterName("sortDescriptors")
-	_nSFetchRequestSelSetSortDescriptors = objc.RegisterName("setSortDescriptors:")
-	_nSFetchRequestSelFetchLimit = objc.RegisterName("fetchLimit")
-	_nSFetchRequestSelSetFetchLimit = objc.RegisterName("setFetchLimit:")
-	_nSFetchRequestSelResultType = objc.RegisterName("resultType")
-	_nSFetchRequestSelSetResultType = objc.RegisterName("setResultType:")
-	_nSFetchRequestSelIncludesSubentities = objc.RegisterName("includesSubentities")
-	_nSFetchRequestSelSetIncludesSubentities = objc.RegisterName("setIncludesSubentities:")
-	_nSFetchRequestSelIncludesPropertyValues = objc.RegisterName("includesPropertyValues")
-	_nSFetchRequestSelSetIncludesPropertyValues = objc.RegisterName("setIncludesPropertyValues:")
-	_nSFetchRequestSelReturnsObjectsAsFaults = objc.RegisterName("returnsObjectsAsFaults")
-	_nSFetchRequestSelSetReturnsObjectsAsFaults = objc.RegisterName("setReturnsObjectsAsFaults:")
-	_nSFetchRequestSelRelationshipKeyPathsForPrefetching = objc.RegisterName("relationshipKeyPathsForPrefetching")
+	_clsNSFetchRequest                                      = _objcClass("NSFetchRequest")
+	_nSFetchRequestSelFetchRequestWithEntityName            = objc.RegisterName("fetchRequestWithEntityName:")
+	_nSFetchRequestSelInit                                  = objc.RegisterName("init")
+	_nSFetchRequestSelInitWithEntityName                    = objc.RegisterName("initWithEntityName:")
+	_nSFetchRequestSelExecute                               = objc.RegisterName("execute:")
+	_nSFetchRequestSelEntity                                = objc.RegisterName("entity")
+	_nSFetchRequestSelSetEntity                             = objc.RegisterName("setEntity:")
+	_nSFetchRequestSelEntityName                            = objc.RegisterName("entityName")
+	_nSFetchRequestSelPredicate                             = objc.RegisterName("predicate")
+	_nSFetchRequestSelSetPredicate                          = objc.RegisterName("setPredicate:")
+	_nSFetchRequestSelSortDescriptors                       = objc.RegisterName("sortDescriptors")
+	_nSFetchRequestSelSetSortDescriptors                    = objc.RegisterName("setSortDescriptors:")
+	_nSFetchRequestSelFetchLimit                            = objc.RegisterName("fetchLimit")
+	_nSFetchRequestSelSetFetchLimit                         = objc.RegisterName("setFetchLimit:")
+	_nSFetchRequestSelResultType                            = objc.RegisterName("resultType")
+	_nSFetchRequestSelSetResultType                         = objc.RegisterName("setResultType:")
+	_nSFetchRequestSelIncludesSubentities                   = objc.RegisterName("includesSubentities")
+	_nSFetchRequestSelSetIncludesSubentities                = objc.RegisterName("setIncludesSubentities:")
+	_nSFetchRequestSelIncludesPropertyValues                = objc.RegisterName("includesPropertyValues")
+	_nSFetchRequestSelSetIncludesPropertyValues             = objc.RegisterName("setIncludesPropertyValues:")
+	_nSFetchRequestSelReturnsObjectsAsFaults                = objc.RegisterName("returnsObjectsAsFaults")
+	_nSFetchRequestSelSetReturnsObjectsAsFaults             = objc.RegisterName("setReturnsObjectsAsFaults:")
+	_nSFetchRequestSelRelationshipKeyPathsForPrefetching    = objc.RegisterName("relationshipKeyPathsForPrefetching")
 	_nSFetchRequestSelSetRelationshipKeyPathsForPrefetching = objc.RegisterName("setRelationshipKeyPathsForPrefetching:")
-	_nSFetchRequestSelIncludesPendingChanges = objc.RegisterName("includesPendingChanges")
-	_nSFetchRequestSelSetIncludesPendingChanges = objc.RegisterName("setIncludesPendingChanges:")
-	_nSFetchRequestSelReturnsDistinctResults = objc.RegisterName("returnsDistinctResults")
-	_nSFetchRequestSelSetReturnsDistinctResults = objc.RegisterName("setReturnsDistinctResults:")
-	_nSFetchRequestSelPropertiesToFetch = objc.RegisterName("propertiesToFetch")
-	_nSFetchRequestSelSetPropertiesToFetch = objc.RegisterName("setPropertiesToFetch:")
-	_nSFetchRequestSelFetchOffset = objc.RegisterName("fetchOffset")
-	_nSFetchRequestSelSetFetchOffset = objc.RegisterName("setFetchOffset:")
-	_nSFetchRequestSelFetchBatchSize = objc.RegisterName("fetchBatchSize")
-	_nSFetchRequestSelSetFetchBatchSize = objc.RegisterName("setFetchBatchSize:")
-	_nSFetchRequestSelShouldRefreshRefetchedObjects = objc.RegisterName("shouldRefreshRefetchedObjects")
-	_nSFetchRequestSelSetShouldRefreshRefetchedObjects = objc.RegisterName("setShouldRefreshRefetchedObjects:")
-	_nSFetchRequestSelPropertiesToGroupBy = objc.RegisterName("propertiesToGroupBy")
-	_nSFetchRequestSelSetPropertiesToGroupBy = objc.RegisterName("setPropertiesToGroupBy:")
-	_nSFetchRequestSelHavingPredicate = objc.RegisterName("havingPredicate")
-	_nSFetchRequestSelSetHavingPredicate = objc.RegisterName("setHavingPredicate:")
+	_nSFetchRequestSelIncludesPendingChanges                = objc.RegisterName("includesPendingChanges")
+	_nSFetchRequestSelSetIncludesPendingChanges             = objc.RegisterName("setIncludesPendingChanges:")
+	_nSFetchRequestSelReturnsDistinctResults                = objc.RegisterName("returnsDistinctResults")
+	_nSFetchRequestSelSetReturnsDistinctResults             = objc.RegisterName("setReturnsDistinctResults:")
+	_nSFetchRequestSelPropertiesToFetch                     = objc.RegisterName("propertiesToFetch")
+	_nSFetchRequestSelSetPropertiesToFetch                  = objc.RegisterName("setPropertiesToFetch:")
+	_nSFetchRequestSelFetchOffset                           = objc.RegisterName("fetchOffset")
+	_nSFetchRequestSelSetFetchOffset                        = objc.RegisterName("setFetchOffset:")
+	_nSFetchRequestSelFetchBatchSize                        = objc.RegisterName("fetchBatchSize")
+	_nSFetchRequestSelSetFetchBatchSize                     = objc.RegisterName("setFetchBatchSize:")
+	_nSFetchRequestSelShouldRefreshRefetchedObjects         = objc.RegisterName("shouldRefreshRefetchedObjects")
+	_nSFetchRequestSelSetShouldRefreshRefetchedObjects      = objc.RegisterName("setShouldRefreshRefetchedObjects:")
+	_nSFetchRequestSelPropertiesToGroupBy                   = objc.RegisterName("propertiesToGroupBy")
+	_nSFetchRequestSelSetPropertiesToGroupBy                = objc.RegisterName("setPropertiesToGroupBy:")
+	_nSFetchRequestSelHavingPredicate                       = objc.RegisterName("havingPredicate")
+	_nSFetchRequestSelSetHavingPredicate                    = objc.RegisterName("setHavingPredicate:")
 )
 
 func NSFetchRequestFromID[ResultType purego.AnyObject](id objc.ID) *NSFetchRequest[ResultType] {
@@ -72,26 +72,34 @@ func NSFetchRequestFromID[ResultType purego.AnyObject](id objc.ID) *NSFetchReque
 
 func NSFetchRequestFetchRequestWithEntityName(entityName *foundation.NSString) *NSFetchRequest[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFetchRequest), _nSFetchRequestSelFetchRequestWithEntityName, entityName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFetchRequestFromID[objc.ID](_ret)
 }
 
 func (o *NSFetchRequest[ResultType]) Init() *NSFetchRequest[ResultType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchRequestSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFetchRequestFromID[ResultType](_ret)
 }
 
 func (o *NSFetchRequest[ResultType]) InitWithEntityName(entityName *foundation.NSString) *NSFetchRequest[ResultType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchRequestSelInitWithEntityName, entityName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFetchRequestFromID[ResultType](_ret)
 }
 
 func (o *NSFetchRequest[ResultType]) Execute() (*foundation.NSArray[ResultType], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchRequestSelExecute, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -100,7 +108,9 @@ func (o *NSFetchRequest[ResultType]) Execute() (*foundation.NSArray[ResultType],
 
 func (o *NSFetchRequest[ResultType]) Entity() *NSEntityDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchRequestSelEntity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEntityDescriptionFromID(_ret)
 }
 
@@ -110,13 +120,17 @@ func (o *NSFetchRequest[ResultType]) SetEntity(entity *NSEntityDescription) {
 
 func (o *NSFetchRequest[ResultType]) EntityName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchRequestSelEntityName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSFetchRequest[ResultType]) Predicate() *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchRequestSelPredicate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
@@ -252,11 +266,12 @@ func (o *NSFetchRequest[ResultType]) SetPropertiesToGroupBy(propertiesToGroupBy 
 
 func (o *NSFetchRequest[ResultType]) HavingPredicate() *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchRequestSelHavingPredicate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
 func (o *NSFetchRequest[ResultType]) SetHavingPredicate(havingPredicate *foundation.NSPredicate) {
 	o.Ptr().Send(_nSFetchRequestSelSetHavingPredicate, havingPredicate.Ptr())
 }
-

@@ -69,7 +69,9 @@ func (x *MathExpressionMultiscript) PostscriptExpressions() []*MathExpressionSub
 	})
 }
 
-func (x *MathExpressionMultiscript) asMathExpression() *raw.AXMathExpression { return &x.inner.AXMathExpression }
+func (x *MathExpressionMultiscript) asMathExpression() *raw.AXMathExpression {
+	return &x.inner.AXMathExpression
+}
 
 // MathExpressionMultiscriptable is the interface implemented by [MathExpressionMultiscript], for mocking and DI.
 type MathExpressionMultiscriptable interface {
@@ -80,4 +82,3 @@ type MathExpressionMultiscriptable interface {
 }
 
 var _ MathExpressionMultiscriptable = (*MathExpressionMultiscript)(nil)
-

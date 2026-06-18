@@ -83,4 +83,3 @@ type SpatialPipelineEntryable interface {
 }
 
 var _ SpatialPipelineEntryable = (*SpatialPipelineEntry)(nil)
-

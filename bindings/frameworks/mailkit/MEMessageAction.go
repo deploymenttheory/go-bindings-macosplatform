@@ -16,14 +16,14 @@ type MEMessageAction struct {
 }
 
 var (
-	_clsMEMessageAction = _objcClass("MEMessageAction")
-	_mEMessageActionSelFlagActionWithFlag = objc.RegisterName("flagActionWithFlag:")
+	_clsMEMessageAction                                  = _objcClass("MEMessageAction")
+	_mEMessageActionSelFlagActionWithFlag                = objc.RegisterName("flagActionWithFlag:")
 	_mEMessageActionSelSetBackgroundColorActionWithColor = objc.RegisterName("setBackgroundColorActionWithColor:")
-	_mEMessageActionSelMoveToTrashAction = objc.RegisterName("moveToTrashAction")
-	_mEMessageActionSelMoveToArchiveAction = objc.RegisterName("moveToArchiveAction")
-	_mEMessageActionSelMoveToJunkAction = objc.RegisterName("moveToJunkAction")
-	_mEMessageActionSelMarkAsReadAction = objc.RegisterName("markAsReadAction")
-	_mEMessageActionSelMarkAsUnreadAction = objc.RegisterName("markAsUnreadAction")
+	_mEMessageActionSelMoveToTrashAction                 = objc.RegisterName("moveToTrashAction")
+	_mEMessageActionSelMoveToArchiveAction               = objc.RegisterName("moveToArchiveAction")
+	_mEMessageActionSelMoveToJunkAction                  = objc.RegisterName("moveToJunkAction")
+	_mEMessageActionSelMarkAsReadAction                  = objc.RegisterName("markAsReadAction")
+	_mEMessageActionSelMarkAsUnreadAction                = objc.RegisterName("markAsUnreadAction")
 )
 
 func MEMessageActionFromID(id objc.ID) *MEMessageAction {
@@ -39,49 +39,62 @@ func MEMessageActionFromID(id objc.ID) *MEMessageAction {
 // @brief Marks the message as flagged with the provided color.
 func MEMessageActionFlagActionWithFlag(flag MEMessageActionFlag) *MEMessageAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMEMessageAction), _mEMessageActionSelFlagActionWithFlag, flag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEMessageActionFromID(_ret)
 }
 
 // @brief Adds a color to the message when shown in the message list.
 func MEMessageActionSetBackgroundColorActionWithColor(color MEMessageActionMessageColor) *MEMessageAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMEMessageAction), _mEMessageActionSelSetBackgroundColorActionWithColor, color)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEMessageActionFromID(_ret)
 }
 
 // @brief Moves the mail message to the user's trash mailbox for the account.
 func MEMessageActionMoveToTrashAction() *MEMessageAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMEMessageAction), _mEMessageActionSelMoveToTrashAction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEMessageActionFromID(_ret)
 }
 
 // @brief Moves the mail message to the user's archive mailbox for the account.
 func MEMessageActionMoveToArchiveAction() *MEMessageAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMEMessageAction), _mEMessageActionSelMoveToArchiveAction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEMessageActionFromID(_ret)
 }
 
 // @brief Moves the mail message to the user's junk mailbox for the account.
 func MEMessageActionMoveToJunkAction() *MEMessageAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMEMessageAction), _mEMessageActionSelMoveToJunkAction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEMessageActionFromID(_ret)
 }
 
 // @brief Marks the mail message as read.
 func MEMessageActionMarkAsReadAction() *MEMessageAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMEMessageAction), _mEMessageActionSelMarkAsReadAction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEMessageActionFromID(_ret)
 }
 
 // @brief Marks the mail  message as unread.
 func MEMessageActionMarkAsUnreadAction() *MEMessageAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMEMessageAction), _mEMessageActionSelMarkAsUnreadAction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEMessageActionFromID(_ret)
 }
-

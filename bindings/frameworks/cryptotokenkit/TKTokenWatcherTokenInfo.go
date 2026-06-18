@@ -16,9 +16,9 @@ type TKTokenWatcherTokenInfo struct {
 }
 
 var (
-	_clsTKTokenWatcherTokenInfo = _objcClass("TKTokenWatcherTokenInfo")
-	_tKTokenWatcherTokenInfoSelTokenID = objc.RegisterName("tokenID")
-	_tKTokenWatcherTokenInfoSelSlotName = objc.RegisterName("slotName")
+	_clsTKTokenWatcherTokenInfo           = _objcClass("TKTokenWatcherTokenInfo")
+	_tKTokenWatcherTokenInfoSelTokenID    = objc.RegisterName("tokenID")
+	_tKTokenWatcherTokenInfoSelSlotName   = objc.RegisterName("slotName")
 	_tKTokenWatcherTokenInfoSelDriverName = objc.RegisterName("driverName")
 )
 
@@ -35,21 +35,26 @@ func TKTokenWatcherTokenInfoFromID(id objc.ID) *TKTokenWatcherTokenInfo {
 // TokenID
 func (o *TKTokenWatcherTokenInfo) TokenID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenWatcherTokenInfoSelTokenID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The slot name (if available)
 func (o *TKTokenWatcherTokenInfo) SlotName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenWatcherTokenInfoSelSlotName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Localized driver name (if available)
 func (o *TKTokenWatcherTokenInfo) DriverName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenWatcherTokenInfoSelDriverName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

@@ -16,9 +16,9 @@ type MTRAttributePath struct {
 }
 
 var (
-	_clsMTRAttributePath = _objcClass("MTRAttributePath")
+	_clsMTRAttributePath                                                = _objcClass("MTRAttributePath")
 	_mTRAttributePathSelAttributePathWithEndpointIDClusterIDAttributeID = objc.RegisterName("attributePathWithEndpointID:clusterID:attributeID:")
-	_mTRAttributePathSelAttribute = objc.RegisterName("attribute")
+	_mTRAttributePathSelAttribute                                       = objc.RegisterName("attribute")
 	_mTRAttributePathSelAttributePathWithEndpointIdClusterIdAttributeId = objc.RegisterName("attributePathWithEndpointId:clusterId:attributeId:")
 )
 
@@ -34,19 +34,24 @@ func MTRAttributePathFromID(id objc.ID) *MTRAttributePath {
 
 func MTRAttributePathAttributePathWithEndpointIDClusterIDAttributeID(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, attributeID *foundation.NSNumber) *MTRAttributePath {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRAttributePath), _mTRAttributePathSelAttributePathWithEndpointIDClusterIDAttributeID, endpointID.Ptr(), clusterID.Ptr(), attributeID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRAttributePathFromID(_ret)
 }
 
 func (o *MTRAttributePath) Attribute() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAttributePathSelAttribute)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func MTRAttributePathAttributePathWithEndpointIdClusterIdAttributeId(endpointId *foundation.NSNumber, clusterId *foundation.NSNumber, attributeId *foundation.NSNumber) *MTRAttributePath {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRAttributePath), _mTRAttributePathSelAttributePathWithEndpointIdClusterIdAttributeId, endpointId.Ptr(), clusterId.Ptr(), attributeId.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRAttributePathFromID(_ret)
 }
-

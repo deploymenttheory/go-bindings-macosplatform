@@ -16,10 +16,10 @@ type MTRGeneralDiagnosticsClusterRadioFaultChangeEvent struct {
 }
 
 var (
-	_clsMTRGeneralDiagnosticsClusterRadioFaultChangeEvent = _objcClass("MTRGeneralDiagnosticsClusterRadioFaultChangeEvent")
-	_mTRGeneralDiagnosticsClusterRadioFaultChangeEventSelCurrent = objc.RegisterName("current")
-	_mTRGeneralDiagnosticsClusterRadioFaultChangeEventSelSetCurrent = objc.RegisterName("setCurrent:")
-	_mTRGeneralDiagnosticsClusterRadioFaultChangeEventSelPrevious = objc.RegisterName("previous")
+	_clsMTRGeneralDiagnosticsClusterRadioFaultChangeEvent            = _objcClass("MTRGeneralDiagnosticsClusterRadioFaultChangeEvent")
+	_mTRGeneralDiagnosticsClusterRadioFaultChangeEventSelCurrent     = objc.RegisterName("current")
+	_mTRGeneralDiagnosticsClusterRadioFaultChangeEventSelSetCurrent  = objc.RegisterName("setCurrent:")
+	_mTRGeneralDiagnosticsClusterRadioFaultChangeEventSelPrevious    = objc.RegisterName("previous")
 	_mTRGeneralDiagnosticsClusterRadioFaultChangeEventSelSetPrevious = objc.RegisterName("setPrevious:")
 )
 
@@ -50,4 +50,3 @@ func (o *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) Previous() *foundati
 func (o *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) SetPrevious(previous *foundation.NSArray[objc.ID]) {
 	o.Ptr().Send(_mTRGeneralDiagnosticsClusterRadioFaultChangeEventSelSetPrevious, previous)
 }
-

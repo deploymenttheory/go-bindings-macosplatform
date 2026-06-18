@@ -83,4 +83,3 @@ type ReductionLayerable interface {
 }
 
 var _ ReductionLayerable = (*ReductionLayer)(nil)
-

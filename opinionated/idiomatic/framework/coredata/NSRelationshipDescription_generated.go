@@ -199,7 +199,9 @@ func (x *RelationshipDescription) SetOrdered(ordered bool) {
 	x.inner.SetOrdered(ordered)
 }
 
-func (x *RelationshipDescription) asPropertyDescription() *raw.NSPropertyDescription { return &x.inner.NSPropertyDescription }
+func (x *RelationshipDescription) asPropertyDescription() *raw.NSPropertyDescription {
+	return &x.inner.NSPropertyDescription
+}
 
 // RelationshipDescriptionable is the interface implemented by [RelationshipDescription], for mocking and DI.
 type RelationshipDescriptionable interface {
@@ -235,4 +237,3 @@ type RelationshipDescriptionable interface {
 }
 
 var _ RelationshipDescriptionable = (*RelationshipDescription)(nil)
-

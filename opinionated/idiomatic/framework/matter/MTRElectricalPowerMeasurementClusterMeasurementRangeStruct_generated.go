@@ -16,11 +16,15 @@ type MTRElectricalPowerMeasurementClusterMeasurementRangeStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRElectricalPowerMeasurementClusterMeasurementRangeStruct].
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) Unwrap() *raw.MTRElectricalPowerMeasurementClusterMeasurementRangeStruct { return x.inner }
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) Unwrap() *raw.MTRElectricalPowerMeasurementClusterMeasurementRangeStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRElectricalPowerMeasurementClusterMeasurementRangeStructFromID adopts an existing object pointer as a MTRElectricalPowerMeasurementClusterMeasurementRangeStruct (nil for 0).
 func MTRElectricalPowerMeasurementClusterMeasurementRangeStructFromID(id objc.ID) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct {
@@ -251,4 +255,3 @@ type MTRElectricalPowerMeasurementClusterMeasurementRangeStructable interface {
 }
 
 var _ MTRElectricalPowerMeasurementClusterMeasurementRangeStructable = (*MTRElectricalPowerMeasurementClusterMeasurementRangeStruct)(nil)
-

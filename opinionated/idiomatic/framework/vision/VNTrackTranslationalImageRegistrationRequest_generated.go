@@ -17,7 +17,9 @@ type TrackTranslationalImageRegistrationRequest struct {
 }
 
 // Unwrap returns the underlying [raw.VNTrackTranslationalImageRegistrationRequest].
-func (x *TrackTranslationalImageRegistrationRequest) Unwrap() *raw.VNTrackTranslationalImageRegistrationRequest { return x.inner }
+func (x *TrackTranslationalImageRegistrationRequest) Unwrap() *raw.VNTrackTranslationalImageRegistrationRequest {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -68,11 +70,17 @@ func (x *TrackTranslationalImageRegistrationRequest) WithRevision(revision uint)
 	return x
 }
 
-func (x *TrackTranslationalImageRegistrationRequest) asStatefulRequest() *raw.VNStatefulRequest { return &x.inner.VNStatefulRequest }
+func (x *TrackTranslationalImageRegistrationRequest) asStatefulRequest() *raw.VNStatefulRequest {
+	return &x.inner.VNStatefulRequest
+}
 
-func (x *TrackTranslationalImageRegistrationRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNStatefulRequest.VNImageBasedRequest }
+func (x *TrackTranslationalImageRegistrationRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNStatefulRequest.VNImageBasedRequest
+}
 
-func (x *TrackTranslationalImageRegistrationRequest) asRequest() *raw.VNRequest { return &x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest }
+func (x *TrackTranslationalImageRegistrationRequest) asRequest() *raw.VNRequest {
+	return &x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest
+}
 
 // TrackTranslationalImageRegistrationRequestable is the interface implemented by [TrackTranslationalImageRegistrationRequest], for mocking and DI.
 type TrackTranslationalImageRegistrationRequestable interface {
@@ -84,4 +92,3 @@ type TrackTranslationalImageRegistrationRequestable interface {
 }
 
 var _ TrackTranslationalImageRegistrationRequestable = (*TrackTranslationalImageRegistrationRequest)(nil)
-

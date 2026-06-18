@@ -16,24 +16,24 @@ type MTRMessagesClusterPresentMessagesRequestParams struct {
 }
 
 var (
-	_clsMTRMessagesClusterPresentMessagesRequestParams = _objcClass("MTRMessagesClusterPresentMessagesRequestParams")
-	_mTRMessagesClusterPresentMessagesRequestParamsSelMessageID = objc.RegisterName("messageID")
-	_mTRMessagesClusterPresentMessagesRequestParamsSelSetMessageID = objc.RegisterName("setMessageID:")
-	_mTRMessagesClusterPresentMessagesRequestParamsSelPriority = objc.RegisterName("priority")
-	_mTRMessagesClusterPresentMessagesRequestParamsSelSetPriority = objc.RegisterName("setPriority:")
-	_mTRMessagesClusterPresentMessagesRequestParamsSelMessageControl = objc.RegisterName("messageControl")
-	_mTRMessagesClusterPresentMessagesRequestParamsSelSetMessageControl = objc.RegisterName("setMessageControl:")
-	_mTRMessagesClusterPresentMessagesRequestParamsSelStartTime = objc.RegisterName("startTime")
-	_mTRMessagesClusterPresentMessagesRequestParamsSelSetStartTime = objc.RegisterName("setStartTime:")
-	_mTRMessagesClusterPresentMessagesRequestParamsSelDuration = objc.RegisterName("duration")
-	_mTRMessagesClusterPresentMessagesRequestParamsSelSetDuration = objc.RegisterName("setDuration:")
-	_mTRMessagesClusterPresentMessagesRequestParamsSelMessageText = objc.RegisterName("messageText")
-	_mTRMessagesClusterPresentMessagesRequestParamsSelSetMessageText = objc.RegisterName("setMessageText:")
-	_mTRMessagesClusterPresentMessagesRequestParamsSelResponses = objc.RegisterName("responses")
-	_mTRMessagesClusterPresentMessagesRequestParamsSelSetResponses = objc.RegisterName("setResponses:")
-	_mTRMessagesClusterPresentMessagesRequestParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRMessagesClusterPresentMessagesRequestParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRMessagesClusterPresentMessagesRequestParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRMessagesClusterPresentMessagesRequestParams                               = _objcClass("MTRMessagesClusterPresentMessagesRequestParams")
+	_mTRMessagesClusterPresentMessagesRequestParamsSelMessageID                      = objc.RegisterName("messageID")
+	_mTRMessagesClusterPresentMessagesRequestParamsSelSetMessageID                   = objc.RegisterName("setMessageID:")
+	_mTRMessagesClusterPresentMessagesRequestParamsSelPriority                       = objc.RegisterName("priority")
+	_mTRMessagesClusterPresentMessagesRequestParamsSelSetPriority                    = objc.RegisterName("setPriority:")
+	_mTRMessagesClusterPresentMessagesRequestParamsSelMessageControl                 = objc.RegisterName("messageControl")
+	_mTRMessagesClusterPresentMessagesRequestParamsSelSetMessageControl              = objc.RegisterName("setMessageControl:")
+	_mTRMessagesClusterPresentMessagesRequestParamsSelStartTime                      = objc.RegisterName("startTime")
+	_mTRMessagesClusterPresentMessagesRequestParamsSelSetStartTime                   = objc.RegisterName("setStartTime:")
+	_mTRMessagesClusterPresentMessagesRequestParamsSelDuration                       = objc.RegisterName("duration")
+	_mTRMessagesClusterPresentMessagesRequestParamsSelSetDuration                    = objc.RegisterName("setDuration:")
+	_mTRMessagesClusterPresentMessagesRequestParamsSelMessageText                    = objc.RegisterName("messageText")
+	_mTRMessagesClusterPresentMessagesRequestParamsSelSetMessageText                 = objc.RegisterName("setMessageText:")
+	_mTRMessagesClusterPresentMessagesRequestParamsSelResponses                      = objc.RegisterName("responses")
+	_mTRMessagesClusterPresentMessagesRequestParamsSelSetResponses                   = objc.RegisterName("setResponses:")
+	_mTRMessagesClusterPresentMessagesRequestParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRMessagesClusterPresentMessagesRequestParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRMessagesClusterPresentMessagesRequestParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRMessagesClusterPresentMessagesRequestParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -49,7 +49,9 @@ func MTRMessagesClusterPresentMessagesRequestParamsFromID(id objc.ID) *MTRMessag
 
 func (o *MTRMessagesClusterPresentMessagesRequestParams) MessageID() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMessagesClusterPresentMessagesRequestParamsSelMessageID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -59,7 +61,9 @@ func (o *MTRMessagesClusterPresentMessagesRequestParams) SetMessageID(messageID 
 
 func (o *MTRMessagesClusterPresentMessagesRequestParams) Priority() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMessagesClusterPresentMessagesRequestParamsSelPriority)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -69,7 +73,9 @@ func (o *MTRMessagesClusterPresentMessagesRequestParams) SetPriority(priority *f
 
 func (o *MTRMessagesClusterPresentMessagesRequestParams) MessageControl() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMessagesClusterPresentMessagesRequestParamsSelMessageControl)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -79,7 +85,9 @@ func (o *MTRMessagesClusterPresentMessagesRequestParams) SetMessageControl(messa
 
 func (o *MTRMessagesClusterPresentMessagesRequestParams) StartTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMessagesClusterPresentMessagesRequestParamsSelStartTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -89,7 +97,9 @@ func (o *MTRMessagesClusterPresentMessagesRequestParams) SetStartTime(startTime 
 
 func (o *MTRMessagesClusterPresentMessagesRequestParams) Duration() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMessagesClusterPresentMessagesRequestParamsSelDuration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -99,7 +109,9 @@ func (o *MTRMessagesClusterPresentMessagesRequestParams) SetDuration(duration *f
 
 func (o *MTRMessagesClusterPresentMessagesRequestParams) MessageText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMessagesClusterPresentMessagesRequestParamsSelMessageText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -119,7 +131,9 @@ func (o *MTRMessagesClusterPresentMessagesRequestParams) SetResponses(responses 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRMessagesClusterPresentMessagesRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMessagesClusterPresentMessagesRequestParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -130,11 +144,12 @@ func (o *MTRMessagesClusterPresentMessagesRequestParams) SetTimedInvokeTimeoutMs
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRMessagesClusterPresentMessagesRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMessagesClusterPresentMessagesRequestParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRMessagesClusterPresentMessagesRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRMessagesClusterPresentMessagesRequestParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

@@ -16,10 +16,10 @@ type HKSample struct {
 }
 
 var (
-	_clsHKSample = _objcClass("HKSample")
-	_hKSampleSelSampleType = objc.RegisterName("sampleType")
-	_hKSampleSelStartDate = objc.RegisterName("startDate")
-	_hKSampleSelEndDate = objc.RegisterName("endDate")
+	_clsHKSample                        = _objcClass("HKSample")
+	_hKSampleSelSampleType              = objc.RegisterName("sampleType")
+	_hKSampleSelStartDate               = objc.RegisterName("startDate")
+	_hKSampleSelEndDate                 = objc.RegisterName("endDate")
 	_hKSampleSelHasUndeterminedDuration = objc.RegisterName("hasUndeterminedDuration")
 )
 
@@ -35,19 +35,25 @@ func HKSampleFromID(id objc.ID) *HKSample {
 
 func (o *HKSample) SampleType() *HKSampleType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKSampleSelSampleType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKSampleTypeFromID(_ret)
 }
 
 func (o *HKSample) StartDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKSampleSelStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *HKSample) EndDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKSampleSelEndDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -56,4 +62,3 @@ func (o *HKSample) HasUndeterminedDuration() bool {
 	_ret := objc.Send[bool](o.Ptr(), _hKSampleSelHasUndeterminedDuration)
 	return _ret
 }
-

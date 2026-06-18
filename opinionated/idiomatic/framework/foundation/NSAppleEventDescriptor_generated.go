@@ -309,4 +309,3 @@ type AppleEventDescriptorable interface {
 }
 
 var _ AppleEventDescriptorable = (*AppleEventDescriptor)(nil)
-

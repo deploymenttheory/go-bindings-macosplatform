@@ -18,14 +18,14 @@ type MTRChannelClusterChangeChannelResponseParams struct {
 }
 
 var (
-	_clsMTRChannelClusterChangeChannelResponseParams = _objcClass("MTRChannelClusterChangeChannelResponseParams")
+	_clsMTRChannelClusterChangeChannelResponseParams                           = _objcClass("MTRChannelClusterChangeChannelResponseParams")
 	_mTRChannelClusterChangeChannelResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRChannelClusterChangeChannelResponseParamsSelStatus = objc.RegisterName("status")
-	_mTRChannelClusterChangeChannelResponseParamsSelSetStatus = objc.RegisterName("setStatus:")
-	_mTRChannelClusterChangeChannelResponseParamsSelData = objc.RegisterName("data")
-	_mTRChannelClusterChangeChannelResponseParamsSelSetData = objc.RegisterName("setData:")
-	_mTRChannelClusterChangeChannelResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRChannelClusterChangeChannelResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRChannelClusterChangeChannelResponseParamsSelStatus                     = objc.RegisterName("status")
+	_mTRChannelClusterChangeChannelResponseParamsSelSetStatus                  = objc.RegisterName("setStatus:")
+	_mTRChannelClusterChangeChannelResponseParamsSelData                       = objc.RegisterName("data")
+	_mTRChannelClusterChangeChannelResponseParamsSelSetData                    = objc.RegisterName("setData:")
+	_mTRChannelClusterChangeChannelResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRChannelClusterChangeChannelResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
 )
 
 func MTRChannelClusterChangeChannelResponseParamsFromID(id objc.ID) *MTRChannelClusterChangeChannelResponseParams {
@@ -42,7 +42,9 @@ func MTRChannelClusterChangeChannelResponseParamsFromID(id objc.ID) *MTRChannelC
 func (o *MTRChannelClusterChangeChannelResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRChannelClusterChangeChannelResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterChangeChannelResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -51,7 +53,9 @@ func (o *MTRChannelClusterChangeChannelResponseParams) InitWithResponseValueErro
 
 func (o *MTRChannelClusterChangeChannelResponseParams) Status() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterChangeChannelResponseParamsSelStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *MTRChannelClusterChangeChannelResponseParams) SetStatus(status *foundat
 
 func (o *MTRChannelClusterChangeChannelResponseParams) Data() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterChangeChannelResponseParamsSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -72,11 +78,12 @@ func (o *MTRChannelClusterChangeChannelResponseParams) SetData(data *foundation.
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRChannelClusterChangeChannelResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterChangeChannelResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRChannelClusterChangeChannelResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
 	o.Ptr().Send(_mTRChannelClusterChangeChannelResponseParamsSelSetTimedInvokeTimeoutMs, timedInvokeTimeoutMs.Ptr())
 }
-

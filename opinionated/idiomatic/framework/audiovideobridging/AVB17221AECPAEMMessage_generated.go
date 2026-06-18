@@ -136,7 +136,9 @@ func (x *AVB17221AECPAEMMessage) SetCommandSpecificData(commandSpecificData *fou
 	x.inner.SetCommandSpecificData(commandSpecificData)
 }
 
-func (x *AVB17221AECPAEMMessage) asAVB17221AECPMessage() *raw.AVB17221AECPMessage { return &x.inner.AVB17221AECPMessage }
+func (x *AVB17221AECPAEMMessage) asAVB17221AECPMessage() *raw.AVB17221AECPMessage {
+	return &x.inner.AVB17221AECPMessage
+}
 
 // AVB17221AECPAEMMessageable is the interface implemented by [AVB17221AECPAEMMessage], for mocking and DI.
 type AVB17221AECPAEMMessageable interface {
@@ -162,4 +164,3 @@ type AVB17221AECPAEMMessageable interface {
 }
 
 var _ AVB17221AECPAEMMessageable = (*AVB17221AECPAEMMessage)(nil)
-

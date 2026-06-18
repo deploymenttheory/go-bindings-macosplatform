@@ -1115,9 +1115,13 @@ func (x *MTRClusterMediaPlayback) SeekWithParamsExpectedValuesExpectedValueInter
 	}
 }
 
-func (x *MTRClusterMediaPlayback) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterMediaPlayback) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterMediaPlayback) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterMediaPlayback) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterMediaPlaybackable is the interface implemented by [MTRClusterMediaPlayback], for mocking and DI.
 type MTRClusterMediaPlaybackable interface {
@@ -1179,4 +1183,3 @@ type MTRClusterMediaPlaybackable interface {
 }
 
 var _ MTRClusterMediaPlaybackable = (*MTRClusterMediaPlayback)(nil)
-

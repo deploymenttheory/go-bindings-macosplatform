@@ -16,7 +16,7 @@ type MPSCNNNeuronLogarithm struct {
 }
 
 var (
-	_clsMPSCNNNeuronLogarithm = _objcClass("MPSCNNNeuronLogarithm")
+	_clsMPSCNNNeuronLogarithm                  = _objcClass("MPSCNNNeuronLogarithm")
 	_mPSCNNNeuronLogarithmSelInitWithDeviceABC = objc.RegisterName("initWithDevice:a:b:c:")
 )
 
@@ -33,7 +33,8 @@ func MPSCNNNeuronLogarithmFromID(id objc.ID) *MPSCNNNeuronLogarithm {
 // @abstract   Initialize a Logarithm neuron filter. @param      device          The device the filter will run on. @param      a               Filter property "a". See class discussion. @param      b               Filter property "b". See class discussion. @param      c               Filter property "c". See class discussion. @return     A valid MPSCNNNeuronLogarithm object or nil, if failure.
 func (o *MPSCNNNeuronLogarithm) InitWithDeviceABC(device metal.MTLDevice, a float32, b float32, c float32) *MPSCNNNeuronLogarithm {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronLogarithmSelInitWithDeviceABC, device, a, b, c)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronLogarithmFromID(_ret)
 }
-

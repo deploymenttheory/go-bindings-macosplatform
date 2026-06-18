@@ -16,7 +16,9 @@ type MTRApplicationLauncherClusterApplicationEP struct {
 }
 
 // Unwrap returns the underlying [raw.MTRApplicationLauncherClusterApplicationEP].
-func (x *MTRApplicationLauncherClusterApplicationEP) Unwrap() *raw.MTRApplicationLauncherClusterApplicationEP { return x.inner }
+func (x *MTRApplicationLauncherClusterApplicationEP) Unwrap() *raw.MTRApplicationLauncherClusterApplicationEP {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -48,7 +50,9 @@ func (x *MTRApplicationLauncherClusterApplicationEP) WithEndpoint(endpoint *foun
 	return x
 }
 
-func (x *MTRApplicationLauncherClusterApplicationEP) asMTRApplicationLauncherClusterApplicationEPStruct() *raw.MTRApplicationLauncherClusterApplicationEPStruct { return &x.inner.MTRApplicationLauncherClusterApplicationEPStruct }
+func (x *MTRApplicationLauncherClusterApplicationEP) asMTRApplicationLauncherClusterApplicationEPStruct() *raw.MTRApplicationLauncherClusterApplicationEPStruct {
+	return &x.inner.MTRApplicationLauncherClusterApplicationEPStruct
+}
 
 // MTRApplicationLauncherClusterApplicationEPable is the interface implemented by [MTRApplicationLauncherClusterApplicationEP], for mocking and DI.
 type MTRApplicationLauncherClusterApplicationEPable interface {
@@ -58,4 +62,3 @@ type MTRApplicationLauncherClusterApplicationEPable interface {
 }
 
 var _ MTRApplicationLauncherClusterApplicationEPable = (*MTRApplicationLauncherClusterApplicationEP)(nil)
-

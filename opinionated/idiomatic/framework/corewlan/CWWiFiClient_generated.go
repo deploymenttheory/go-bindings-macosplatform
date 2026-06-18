@@ -125,4 +125,3 @@ type WiFiClientable interface {
 }
 
 var _ WiFiClientable = (*WiFiClient)(nil)
-

@@ -91,4 +91,3 @@ type USBControllerable interface {
 }
 
 var _ USBControllerable = (*USBController)(nil)
-

@@ -43,4 +43,3 @@ type NoiseSourceable interface {
 }
 
 var _ NoiseSourceable = (*NoiseSource)(nil)
-

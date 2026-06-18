@@ -76,4 +76,3 @@ func AXTechnologyZoom() uintptr {
 	ptr, _ := purego.Dlsym(_accessibilityLib, "AXTechnologyZoom")
 	return ptr
 }
-

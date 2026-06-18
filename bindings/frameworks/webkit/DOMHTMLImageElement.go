@@ -16,38 +16,38 @@ type DOMHTMLImageElement struct {
 }
 
 var (
-	_clsDOMHTMLImageElement = _objcClass("DOMHTMLImageElement")
-	_dOMHTMLImageElementSelName = objc.RegisterName("name")
-	_dOMHTMLImageElementSelSetName = objc.RegisterName("setName:")
-	_dOMHTMLImageElementSelAlign = objc.RegisterName("align")
-	_dOMHTMLImageElementSelSetAlign = objc.RegisterName("setAlign:")
-	_dOMHTMLImageElementSelAlt = objc.RegisterName("alt")
-	_dOMHTMLImageElementSelSetAlt = objc.RegisterName("setAlt:")
-	_dOMHTMLImageElementSelBorder = objc.RegisterName("border")
-	_dOMHTMLImageElementSelSetBorder = objc.RegisterName("setBorder:")
-	_dOMHTMLImageElementSelHeight = objc.RegisterName("height")
-	_dOMHTMLImageElementSelSetHeight = objc.RegisterName("setHeight:")
-	_dOMHTMLImageElementSelHspace = objc.RegisterName("hspace")
-	_dOMHTMLImageElementSelSetHspace = objc.RegisterName("setHspace:")
-	_dOMHTMLImageElementSelIsMap = objc.RegisterName("isMap")
-	_dOMHTMLImageElementSelSetIsMap = objc.RegisterName("setIsMap:")
-	_dOMHTMLImageElementSelLongDesc = objc.RegisterName("longDesc")
-	_dOMHTMLImageElementSelSetLongDesc = objc.RegisterName("setLongDesc:")
-	_dOMHTMLImageElementSelSrc = objc.RegisterName("src")
-	_dOMHTMLImageElementSelSetSrc = objc.RegisterName("setSrc:")
-	_dOMHTMLImageElementSelUseMap = objc.RegisterName("useMap")
-	_dOMHTMLImageElementSelSetUseMap = objc.RegisterName("setUseMap:")
-	_dOMHTMLImageElementSelVspace = objc.RegisterName("vspace")
-	_dOMHTMLImageElementSelSetVspace = objc.RegisterName("setVspace:")
-	_dOMHTMLImageElementSelWidth = objc.RegisterName("width")
-	_dOMHTMLImageElementSelSetWidth = objc.RegisterName("setWidth:")
-	_dOMHTMLImageElementSelComplete = objc.RegisterName("complete")
-	_dOMHTMLImageElementSelLowsrc = objc.RegisterName("lowsrc")
-	_dOMHTMLImageElementSelSetLowsrc = objc.RegisterName("setLowsrc:")
-	_dOMHTMLImageElementSelNaturalHeight = objc.RegisterName("naturalHeight")
-	_dOMHTMLImageElementSelNaturalWidth = objc.RegisterName("naturalWidth")
-	_dOMHTMLImageElementSelX = objc.RegisterName("x")
-	_dOMHTMLImageElementSelY = objc.RegisterName("y")
+	_clsDOMHTMLImageElement                 = _objcClass("DOMHTMLImageElement")
+	_dOMHTMLImageElementSelName             = objc.RegisterName("name")
+	_dOMHTMLImageElementSelSetName          = objc.RegisterName("setName:")
+	_dOMHTMLImageElementSelAlign            = objc.RegisterName("align")
+	_dOMHTMLImageElementSelSetAlign         = objc.RegisterName("setAlign:")
+	_dOMHTMLImageElementSelAlt              = objc.RegisterName("alt")
+	_dOMHTMLImageElementSelSetAlt           = objc.RegisterName("setAlt:")
+	_dOMHTMLImageElementSelBorder           = objc.RegisterName("border")
+	_dOMHTMLImageElementSelSetBorder        = objc.RegisterName("setBorder:")
+	_dOMHTMLImageElementSelHeight           = objc.RegisterName("height")
+	_dOMHTMLImageElementSelSetHeight        = objc.RegisterName("setHeight:")
+	_dOMHTMLImageElementSelHspace           = objc.RegisterName("hspace")
+	_dOMHTMLImageElementSelSetHspace        = objc.RegisterName("setHspace:")
+	_dOMHTMLImageElementSelIsMap            = objc.RegisterName("isMap")
+	_dOMHTMLImageElementSelSetIsMap         = objc.RegisterName("setIsMap:")
+	_dOMHTMLImageElementSelLongDesc         = objc.RegisterName("longDesc")
+	_dOMHTMLImageElementSelSetLongDesc      = objc.RegisterName("setLongDesc:")
+	_dOMHTMLImageElementSelSrc              = objc.RegisterName("src")
+	_dOMHTMLImageElementSelSetSrc           = objc.RegisterName("setSrc:")
+	_dOMHTMLImageElementSelUseMap           = objc.RegisterName("useMap")
+	_dOMHTMLImageElementSelSetUseMap        = objc.RegisterName("setUseMap:")
+	_dOMHTMLImageElementSelVspace           = objc.RegisterName("vspace")
+	_dOMHTMLImageElementSelSetVspace        = objc.RegisterName("setVspace:")
+	_dOMHTMLImageElementSelWidth            = objc.RegisterName("width")
+	_dOMHTMLImageElementSelSetWidth         = objc.RegisterName("setWidth:")
+	_dOMHTMLImageElementSelComplete         = objc.RegisterName("complete")
+	_dOMHTMLImageElementSelLowsrc           = objc.RegisterName("lowsrc")
+	_dOMHTMLImageElementSelSetLowsrc        = objc.RegisterName("setLowsrc:")
+	_dOMHTMLImageElementSelNaturalHeight    = objc.RegisterName("naturalHeight")
+	_dOMHTMLImageElementSelNaturalWidth     = objc.RegisterName("naturalWidth")
+	_dOMHTMLImageElementSelX                = objc.RegisterName("x")
+	_dOMHTMLImageElementSelY                = objc.RegisterName("y")
 	_dOMHTMLImageElementSelAltDisplayString = objc.RegisterName("altDisplayString")
 	_dOMHTMLImageElementSelAbsoluteImageURL = objc.RegisterName("absoluteImageURL")
 )
@@ -64,7 +64,9 @@ func DOMHTMLImageElementFromID(id objc.ID) *DOMHTMLImageElement {
 
 func (o *DOMHTMLImageElement) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLImageElementSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -74,7 +76,9 @@ func (o *DOMHTMLImageElement) SetName(name *foundation.NSString) {
 
 func (o *DOMHTMLImageElement) Align() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLImageElementSelAlign)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -84,7 +88,9 @@ func (o *DOMHTMLImageElement) SetAlign(align *foundation.NSString) {
 
 func (o *DOMHTMLImageElement) Alt() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLImageElementSelAlt)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -94,7 +100,9 @@ func (o *DOMHTMLImageElement) SetAlt(alt *foundation.NSString) {
 
 func (o *DOMHTMLImageElement) Border() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLImageElementSelBorder)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -131,7 +139,9 @@ func (o *DOMHTMLImageElement) SetIsMap(isMap bool) {
 
 func (o *DOMHTMLImageElement) LongDesc() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLImageElementSelLongDesc)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -141,7 +151,9 @@ func (o *DOMHTMLImageElement) SetLongDesc(longDesc *foundation.NSString) {
 
 func (o *DOMHTMLImageElement) Src() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLImageElementSelSrc)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -151,7 +163,9 @@ func (o *DOMHTMLImageElement) SetSrc(src *foundation.NSString) {
 
 func (o *DOMHTMLImageElement) UseMap() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLImageElementSelUseMap)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -184,7 +198,9 @@ func (o *DOMHTMLImageElement) Complete() bool {
 
 func (o *DOMHTMLImageElement) Lowsrc() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLImageElementSelLowsrc)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -214,13 +230,16 @@ func (o *DOMHTMLImageElement) Y() int {
 
 func (o *DOMHTMLImageElement) AltDisplayString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLImageElementSelAltDisplayString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLImageElement) AbsoluteImageURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLImageElementSelAbsoluteImageURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
-

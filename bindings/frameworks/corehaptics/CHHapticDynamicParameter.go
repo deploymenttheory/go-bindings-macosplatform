@@ -16,13 +16,13 @@ type CHHapticDynamicParameter struct {
 }
 
 var (
-	_clsCHHapticDynamicParameter = _objcClass("CHHapticDynamicParameter")
+	_clsCHHapticDynamicParameter                                     = _objcClass("CHHapticDynamicParameter")
 	_cHHapticDynamicParameterSelInitWithParameterIDValueRelativeTime = objc.RegisterName("initWithParameterID:value:relativeTime:")
-	_cHHapticDynamicParameterSelParameterID = objc.RegisterName("parameterID")
-	_cHHapticDynamicParameterSelValue = objc.RegisterName("value")
-	_cHHapticDynamicParameterSelSetValue = objc.RegisterName("setValue:")
-	_cHHapticDynamicParameterSelRelativeTime = objc.RegisterName("relativeTime")
-	_cHHapticDynamicParameterSelSetRelativeTime = objc.RegisterName("setRelativeTime:")
+	_cHHapticDynamicParameterSelParameterID                          = objc.RegisterName("parameterID")
+	_cHHapticDynamicParameterSelValue                                = objc.RegisterName("value")
+	_cHHapticDynamicParameterSelSetValue                             = objc.RegisterName("setValue:")
+	_cHHapticDynamicParameterSelRelativeTime                         = objc.RegisterName("relativeTime")
+	_cHHapticDynamicParameterSelSetRelativeTime                      = objc.RegisterName("setRelativeTime:")
 )
 
 func CHHapticDynamicParameterFromID(id objc.ID) *CHHapticDynamicParameter {
@@ -38,14 +38,18 @@ func CHHapticDynamicParameterFromID(id objc.ID) *CHHapticDynamicParameter {
 // @method initWithParameterID:value:relativeTime @abstract Initialize a CHHapticDynamicParameter with a parameter ID, value, and relative time. @param parameterID The CHHapticDynamicParameterID for the desired parameter change. @param value The value for that parameter. @param time The time at which this parameter should be applied, relative to the start time of the pattern.
 func (o *CHHapticDynamicParameter) InitWithParameterIDValueRelativeTime(parameterID *foundation.NSString, value float32, time_ float64) *CHHapticDynamicParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticDynamicParameterSelInitWithParameterIDValueRelativeTime, parameterID.Ptr(), value, time_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CHHapticDynamicParameterFromID(_ret)
 }
 
 // @property parameterID The ID of the dynamic parameter to use.
 func (o *CHHapticDynamicParameter) ParameterID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticDynamicParameterSelParameterID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -68,4 +72,3 @@ func (o *CHHapticDynamicParameter) RelativeTime() float64 {
 func (o *CHHapticDynamicParameter) SetRelativeTime(relativeTime float64) {
 	o.Ptr().Send(_cHHapticDynamicParameterSelSetRelativeTime, relativeTime)
 }
-

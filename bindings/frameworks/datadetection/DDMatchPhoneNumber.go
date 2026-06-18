@@ -18,9 +18,9 @@ type DDMatchPhoneNumber struct {
 }
 
 var (
-	_clsDDMatchPhoneNumber = _objcClass("DDMatchPhoneNumber")
+	_clsDDMatchPhoneNumber            = _objcClass("DDMatchPhoneNumber")
 	_dDMatchPhoneNumberSelPhoneNumber = objc.RegisterName("phoneNumber")
-	_dDMatchPhoneNumberSelLabel = objc.RegisterName("label")
+	_dDMatchPhoneNumberSelLabel       = objc.RegisterName("label")
 )
 
 func DDMatchPhoneNumberFromID(id objc.ID) *DDMatchPhoneNumber {
@@ -36,14 +36,17 @@ func DDMatchPhoneNumberFromID(id objc.ID) *DDMatchPhoneNumber {
 // A string that represents a phone number.
 func (o *DDMatchPhoneNumber) PhoneNumber() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDMatchPhoneNumberSelPhoneNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // A string that categorizes a phone number, such as Home or Work.
 func (o *DDMatchPhoneNumber) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDMatchPhoneNumberSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

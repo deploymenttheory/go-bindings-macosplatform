@@ -16,9 +16,9 @@ type MTREventPath struct {
 }
 
 var (
-	_clsMTREventPath = _objcClass("MTREventPath")
+	_clsMTREventPath                                        = _objcClass("MTREventPath")
 	_mTREventPathSelEventPathWithEndpointIDClusterIDEventID = objc.RegisterName("eventPathWithEndpointID:clusterID:eventID:")
-	_mTREventPathSelEvent = objc.RegisterName("event")
+	_mTREventPathSelEvent                                   = objc.RegisterName("event")
 	_mTREventPathSelEventPathWithEndpointIdClusterIdEventId = objc.RegisterName("eventPathWithEndpointId:clusterId:eventId:")
 )
 
@@ -34,19 +34,24 @@ func MTREventPathFromID(id objc.ID) *MTREventPath {
 
 func MTREventPathEventPathWithEndpointIDClusterIDEventID(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, eventID *foundation.NSNumber) *MTREventPath {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTREventPath), _mTREventPathSelEventPathWithEndpointIDClusterIDEventID, endpointID.Ptr(), clusterID.Ptr(), eventID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTREventPathFromID(_ret)
 }
 
 func (o *MTREventPath) Event() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREventPathSelEvent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func MTREventPathEventPathWithEndpointIdClusterIdEventId(endpointId *foundation.NSNumber, clusterId *foundation.NSNumber, eventId *foundation.NSNumber) *MTREventPath {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTREventPath), _mTREventPathSelEventPathWithEndpointIdClusterIdEventId, endpointId.Ptr(), clusterId.Ptr(), eventId.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTREventPathFromID(_ret)
 }
-

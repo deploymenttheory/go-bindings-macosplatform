@@ -45,7 +45,9 @@ func (x *Morpher) WithTargets(items ...GeometryProvider) *Morpher {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asGeometry().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asGeometry().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.SCNGeometry](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -61,7 +63,9 @@ func (x *Morpher) WithWeights(items ...*foundation.NSNumber) *Morpher {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -176,4 +180,3 @@ type Morpherable interface {
 }
 
 var _ Morpherable = (*Morpher)(nil)
-

@@ -16,8 +16,8 @@ type MIDICIDeviceManager struct {
 }
 
 var (
-	_clsMIDICIDeviceManager = _objcClass("MIDICIDeviceManager")
-	_mIDICIDeviceManagerSelSharedInstance = objc.RegisterName("sharedInstance")
+	_clsMIDICIDeviceManager                    = _objcClass("MIDICIDeviceManager")
+	_mIDICIDeviceManagerSelSharedInstance      = objc.RegisterName("sharedInstance")
 	_mIDICIDeviceManagerSelDiscoveredCIDevices = objc.RegisterName("discoveredCIDevices")
 )
 
@@ -34,14 +34,17 @@ func MIDICIDeviceManagerFromID(id objc.ID) *MIDICIDeviceManager {
 // @property   sharedInstance @brief		Retrieve the shared MIDI-CI device manager for the client process. @discussion	After the first access of the property, the client process may observe notifications which are posted when the system-wide cache changes. In environments where virtual MIDI endpoint creation is not allowed, callbacks are only invoked when the process is not suspended. However, any suspended process will receive an updated copy of the cache when it resumes its running state.
 func MIDICIDeviceManagerSharedInstance() *MIDICIDeviceManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMIDICIDeviceManager), _mIDICIDeviceManagerSelSharedInstance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MIDICIDeviceManagerFromID(_ret)
 }
 
 // @property	discoveredCIDevices @brief		A list of MIDICIDevices that responded to the last MIDI-CI discovery request.
 func (o *MIDICIDeviceManager) DiscoveredCIDevices() *foundation.NSArray[*MIDICIDevice] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICIDeviceManagerSelDiscoveredCIDevices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MIDICIDevice](_ret)
 }
-

@@ -79,4 +79,3 @@ type MTL4PipelineOptionsable interface {
 }
 
 var _ MTL4PipelineOptionsable = (*MTL4PipelineOptions)(nil)
-

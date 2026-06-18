@@ -14,9 +14,13 @@ type NSDiffableDataSourceSnapshot[SectionIdentifierType purego.AnyObject, ItemId
 	ptr objc.ID
 }
 
-func (o *NSDiffableDataSourceSnapshot[SectionIdentifierType, ItemIdentifierType]) Ptr() objc.ID { return o.ptr }
+func (o *NSDiffableDataSourceSnapshot[SectionIdentifierType, ItemIdentifierType]) Ptr() objc.ID {
+	return o.ptr
+}
 
-func (o *NSDiffableDataSourceSnapshot[SectionIdentifierType, ItemIdentifierType]) InitPtr(id objc.ID) { o.ptr = id }
+func (o *NSDiffableDataSourceSnapshot[SectionIdentifierType, ItemIdentifierType]) InitPtr(id objc.ID) {
+	o.ptr = id
+}
 
 var _clsNSDiffableDataSourceSnapshot = _objcClass("NSDiffableDataSourceSnapshot")
 
@@ -29,4 +33,3 @@ func NSDiffableDataSourceSnapshotFromID[SectionIdentifierType purego.AnyObject, 
 	purego.Track(o)
 	return o
 }
-

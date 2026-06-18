@@ -16,12 +16,12 @@ type AVVideoPerformanceMetrics struct {
 }
 
 var (
-	_clsAVVideoPerformanceMetrics = _objcClass("AVVideoPerformanceMetrics")
-	_aVVideoPerformanceMetricsSelTotalNumberOfFrames = objc.RegisterName("totalNumberOfFrames")
-	_aVVideoPerformanceMetricsSelNumberOfDroppedFrames = objc.RegisterName("numberOfDroppedFrames")
-	_aVVideoPerformanceMetricsSelNumberOfCorruptedFrames = objc.RegisterName("numberOfCorruptedFrames")
+	_clsAVVideoPerformanceMetrics                                                 = _objcClass("AVVideoPerformanceMetrics")
+	_aVVideoPerformanceMetricsSelTotalNumberOfFrames                              = objc.RegisterName("totalNumberOfFrames")
+	_aVVideoPerformanceMetricsSelNumberOfDroppedFrames                            = objc.RegisterName("numberOfDroppedFrames")
+	_aVVideoPerformanceMetricsSelNumberOfCorruptedFrames                          = objc.RegisterName("numberOfCorruptedFrames")
 	_aVVideoPerformanceMetricsSelNumberOfFramesDisplayedUsingOptimizedCompositing = objc.RegisterName("numberOfFramesDisplayedUsingOptimizedCompositing")
-	_aVVideoPerformanceMetricsSelTotalAccumulatedFrameDelay = objc.RegisterName("totalAccumulatedFrameDelay")
+	_aVVideoPerformanceMetricsSelTotalAccumulatedFrameDelay                       = objc.RegisterName("totalAccumulatedFrameDelay")
 )
 
 func AVVideoPerformanceMetricsFromID(id objc.ID) *AVVideoPerformanceMetrics {
@@ -63,4 +63,3 @@ func (o *AVVideoPerformanceMetrics) TotalAccumulatedFrameDelay() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _aVVideoPerformanceMetricsSelTotalAccumulatedFrameDelay)
 	return _ret
 }
-

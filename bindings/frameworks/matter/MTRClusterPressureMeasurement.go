@@ -16,23 +16,23 @@ type MTRClusterPressureMeasurement struct {
 }
 
 var (
-	_clsMTRClusterPressureMeasurement = _objcClass("MTRClusterPressureMeasurement")
-	_mTRClusterPressureMeasurementSelReadAttributeMeasuredValueWithParams = objc.RegisterName("readAttributeMeasuredValueWithParams:")
-	_mTRClusterPressureMeasurementSelReadAttributeMinMeasuredValueWithParams = objc.RegisterName("readAttributeMinMeasuredValueWithParams:")
-	_mTRClusterPressureMeasurementSelReadAttributeMaxMeasuredValueWithParams = objc.RegisterName("readAttributeMaxMeasuredValueWithParams:")
-	_mTRClusterPressureMeasurementSelReadAttributeToleranceWithParams = objc.RegisterName("readAttributeToleranceWithParams:")
-	_mTRClusterPressureMeasurementSelReadAttributeScaledValueWithParams = objc.RegisterName("readAttributeScaledValueWithParams:")
-	_mTRClusterPressureMeasurementSelReadAttributeMinScaledValueWithParams = objc.RegisterName("readAttributeMinScaledValueWithParams:")
-	_mTRClusterPressureMeasurementSelReadAttributeMaxScaledValueWithParams = objc.RegisterName("readAttributeMaxScaledValueWithParams:")
-	_mTRClusterPressureMeasurementSelReadAttributeScaledToleranceWithParams = objc.RegisterName("readAttributeScaledToleranceWithParams:")
-	_mTRClusterPressureMeasurementSelReadAttributeScaleWithParams = objc.RegisterName("readAttributeScaleWithParams:")
+	_clsMTRClusterPressureMeasurement                                            = _objcClass("MTRClusterPressureMeasurement")
+	_mTRClusterPressureMeasurementSelReadAttributeMeasuredValueWithParams        = objc.RegisterName("readAttributeMeasuredValueWithParams:")
+	_mTRClusterPressureMeasurementSelReadAttributeMinMeasuredValueWithParams     = objc.RegisterName("readAttributeMinMeasuredValueWithParams:")
+	_mTRClusterPressureMeasurementSelReadAttributeMaxMeasuredValueWithParams     = objc.RegisterName("readAttributeMaxMeasuredValueWithParams:")
+	_mTRClusterPressureMeasurementSelReadAttributeToleranceWithParams            = objc.RegisterName("readAttributeToleranceWithParams:")
+	_mTRClusterPressureMeasurementSelReadAttributeScaledValueWithParams          = objc.RegisterName("readAttributeScaledValueWithParams:")
+	_mTRClusterPressureMeasurementSelReadAttributeMinScaledValueWithParams       = objc.RegisterName("readAttributeMinScaledValueWithParams:")
+	_mTRClusterPressureMeasurementSelReadAttributeMaxScaledValueWithParams       = objc.RegisterName("readAttributeMaxScaledValueWithParams:")
+	_mTRClusterPressureMeasurementSelReadAttributeScaledToleranceWithParams      = objc.RegisterName("readAttributeScaledToleranceWithParams:")
+	_mTRClusterPressureMeasurementSelReadAttributeScaleWithParams                = objc.RegisterName("readAttributeScaleWithParams:")
 	_mTRClusterPressureMeasurementSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterPressureMeasurementSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterPressureMeasurementSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterPressureMeasurementSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterPressureMeasurementSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterPressureMeasurementSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterPressureMeasurementSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterPressureMeasurementSelReadAttributeAcceptedCommandListWithParams  = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterPressureMeasurementSelReadAttributeAttributeListWithParams        = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterPressureMeasurementSelReadAttributeFeatureMapWithParams           = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterPressureMeasurementSelReadAttributeClusterRevisionWithParams      = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterPressureMeasurementSelInitWithDeviceEndpointIDQueue               = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterPressureMeasurementSelInitWithDeviceEndpointQueue                 = objc.RegisterName("initWithDevice:endpoint:queue:")
 )
 
 func MTRClusterPressureMeasurementFromID(id objc.ID) *MTRClusterPressureMeasurement {
@@ -118,13 +118,16 @@ func (o *MTRClusterPressureMeasurement) ReadAttributeClusterRevisionWithParams(p
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func (o *MTRClusterPressureMeasurement) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterPressureMeasurement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterPressureMeasurementSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterPressureMeasurementFromID(_ret)
 }
 
 func (o *MTRClusterPressureMeasurement) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterPressureMeasurement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterPressureMeasurementSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterPressureMeasurementFromID(_ret)
 }
-

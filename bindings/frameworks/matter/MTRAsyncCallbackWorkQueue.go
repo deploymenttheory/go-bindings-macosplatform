@@ -16,10 +16,10 @@ type MTRAsyncCallbackWorkQueue struct {
 }
 
 var (
-	_clsMTRAsyncCallbackWorkQueue = _objcClass("MTRAsyncCallbackWorkQueue")
+	_clsMTRAsyncCallbackWorkQueue                     = _objcClass("MTRAsyncCallbackWorkQueue")
 	_mTRAsyncCallbackWorkQueueSelInitWithContextQueue = objc.RegisterName("initWithContext:queue:")
-	_mTRAsyncCallbackWorkQueueSelInvalidate = objc.RegisterName("invalidate")
-	_mTRAsyncCallbackWorkQueueSelEnqueueWorkItem = objc.RegisterName("enqueueWorkItem:")
+	_mTRAsyncCallbackWorkQueueSelInvalidate           = objc.RegisterName("invalidate")
+	_mTRAsyncCallbackWorkQueueSelEnqueueWorkItem      = objc.RegisterName("enqueueWorkItem:")
 )
 
 func MTRAsyncCallbackWorkQueueFromID(id objc.ID) *MTRAsyncCallbackWorkQueue {
@@ -34,7 +34,9 @@ func MTRAsyncCallbackWorkQueueFromID(id objc.ID) *MTRAsyncCallbackWorkQueue {
 
 func (o *MTRAsyncCallbackWorkQueue) InitWithContextQueue(context_ objc.ID, queue *foundation.NSObject) *MTRAsyncCallbackWorkQueue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAsyncCallbackWorkQueueSelInitWithContextQueue, context_, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRAsyncCallbackWorkQueueFromID(_ret)
 }
 
@@ -45,4 +47,3 @@ func (o *MTRAsyncCallbackWorkQueue) Invalidate() {
 func (o *MTRAsyncCallbackWorkQueue) EnqueueWorkItem(item *MTRAsyncCallbackQueueWorkItem) {
 	o.Ptr().Send(_mTRAsyncCallbackWorkQueueSelEnqueueWorkItem, item.Ptr())
 }
-

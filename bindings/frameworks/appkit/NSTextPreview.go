@@ -19,12 +19,12 @@ type NSTextPreview struct {
 }
 
 var (
-	_clsNSTextPreview = _objcClass("NSTextPreview")
+	_clsNSTextPreview                                                     = _objcClass("NSTextPreview")
 	_nSTextPreviewSelInitWithSnapshotImagePresentationFrameCandidateRects = objc.RegisterName("initWithSnapshotImage:presentationFrame:candidateRects:")
-	_nSTextPreviewSelInitWithSnapshotImagePresentationFrame = objc.RegisterName("initWithSnapshotImage:presentationFrame:")
-	_nSTextPreviewSelPreviewImage = objc.RegisterName("previewImage")
-	_nSTextPreviewSelPresentationFrame = objc.RegisterName("presentationFrame")
-	_nSTextPreviewSelCandidateRects = objc.RegisterName("candidateRects")
+	_nSTextPreviewSelInitWithSnapshotImagePresentationFrame               = objc.RegisterName("initWithSnapshotImage:presentationFrame:")
+	_nSTextPreviewSelPreviewImage                                         = objc.RegisterName("previewImage")
+	_nSTextPreviewSelPresentationFrame                                    = objc.RegisterName("presentationFrame")
+	_nSTextPreviewSelCandidateRects                                       = objc.RegisterName("candidateRects")
 )
 
 func NSTextPreviewFromID(id objc.ID) *NSTextPreview {
@@ -40,14 +40,18 @@ func NSTextPreviewFromID(id objc.ID) *NSTextPreview {
 // Creates a text preview using the specified image and rectangles that indicate the portions of text to highlight. - Parameters: - snapshotImage: An image that contains the requested text from your view. Create the image using a transparent background and the current rendering attributes for your text. - presentationFrame: A rectangle in the coordinate space of your text view. The system uses this rectangle to place your image precisely over your view’s actual text. Set its size to the size of your snapshot image, and set its origin to the point that allows the system to place your image directly over the text. - candidateRects: An array of <doc://com.apple.documentation/documentation/foundation/nsvalue> objects, each of which contains an <doc://com.apple.documentation/documentation/foundation/nsrect> in the coordinate space of your text view. Each rectangle contains a bounding rectangle for text that is part of the preview. When applying visual effects, the system adds highlights only to the text in the specified rectangles.
 func (o *NSTextPreview) InitWithSnapshotImagePresentationFrameCandidateRects(snapshotImage unsafe.Pointer, presentationFrame corefoundation.CGRect, candidateRects *foundation.NSArray[*foundation.NSValue]) *NSTextPreview {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextPreviewSelInitWithSnapshotImagePresentationFrameCandidateRects, snapshotImage, presentationFrame, candidateRects)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextPreviewFromID(_ret)
 }
 
 // Creates a text preview using the specified image. - Parameters: - snapshotImage: An image that contains the requested text from your view. Create the image using a transparent background and the current rendering attributes for your text. - presentationFrame: A rectangle in your frame’s coordinate space. The system uses this rectangle to place your image precisely over your view’s actual text. Set its size to the size of your snapshot image, and set its origin to the point that allows the system to place your image directly over the text.
 func (o *NSTextPreview) InitWithSnapshotImagePresentationFrame(snapshotImage unsafe.Pointer, presentationFrame corefoundation.CGRect) *NSTextPreview {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextPreviewSelInitWithSnapshotImagePresentationFrame, snapshotImage, presentationFrame)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextPreviewFromID(_ret)
 }
 
@@ -68,4 +72,3 @@ func (o *NSTextPreview) CandidateRects() *foundation.NSArray[*foundation.NSValue
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _nSTextPreviewSelCandidateRects)
 	return _ret
 }
-

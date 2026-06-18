@@ -16,7 +16,9 @@ type MTRMediaPlaybackClusterStopParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRMediaPlaybackClusterStopParams].
-func (x *MTRMediaPlaybackClusterStopParams) Unwrap() *raw.MTRMediaPlaybackClusterStopParams { return x.inner }
+func (x *MTRMediaPlaybackClusterStopParams) Unwrap() *raw.MTRMediaPlaybackClusterStopParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -68,7 +70,9 @@ func (x *MTRMediaPlaybackClusterStopParams) SetServerSideProcessingTimeout(serve
 	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
 }
 
-func (x *MTRMediaPlaybackClusterStopParams) asMTRMediaPlaybackClusterStopParams() *raw.MTRMediaPlaybackClusterStopParams { return x.inner }
+func (x *MTRMediaPlaybackClusterStopParams) asMTRMediaPlaybackClusterStopParams() *raw.MTRMediaPlaybackClusterStopParams {
+	return x.inner
+}
 
 // MTRMediaPlaybackClusterStopParamsable is the interface implemented by [MTRMediaPlaybackClusterStopParams], for mocking and DI.
 type MTRMediaPlaybackClusterStopParamsable interface {
@@ -82,4 +86,3 @@ type MTRMediaPlaybackClusterStopParamsable interface {
 }
 
 var _ MTRMediaPlaybackClusterStopParamsable = (*MTRMediaPlaybackClusterStopParams)(nil)
-

@@ -41,4 +41,3 @@ type SafariExtensionable interface {
 }
 
 var _ SafariExtensionable = (*SafariExtension)(nil)
-

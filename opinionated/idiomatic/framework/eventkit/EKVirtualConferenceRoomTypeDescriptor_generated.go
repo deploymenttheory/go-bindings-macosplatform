@@ -17,7 +17,9 @@ type VirtualConferenceRoomTypeDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.EKVirtualConferenceRoomTypeDescriptor].
-func (x *VirtualConferenceRoomTypeDescriptor) Unwrap() *raw.EKVirtualConferenceRoomTypeDescriptor { return x.inner }
+func (x *VirtualConferenceRoomTypeDescriptor) Unwrap() *raw.EKVirtualConferenceRoomTypeDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -64,4 +66,3 @@ type VirtualConferenceRoomTypeDescriptorable interface {
 }
 
 var _ VirtualConferenceRoomTypeDescriptorable = (*VirtualConferenceRoomTypeDescriptor)(nil)
-

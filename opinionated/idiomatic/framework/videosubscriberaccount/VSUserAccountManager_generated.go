@@ -135,4 +135,3 @@ type VSUserAccountManagerable interface {
 }
 
 var _ VSUserAccountManagerable = (*VSUserAccountManager)(nil)
-

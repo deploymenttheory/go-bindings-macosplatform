@@ -16,17 +16,17 @@ type NSOpenGLView struct {
 }
 
 var (
-	_clsNSOpenGLView = _objcClass("NSOpenGLView")
-	_nSOpenGLViewSelDefaultPixelFormat = objc.RegisterName("defaultPixelFormat")
+	_clsNSOpenGLView                         = _objcClass("NSOpenGLView")
+	_nSOpenGLViewSelDefaultPixelFormat       = objc.RegisterName("defaultPixelFormat")
 	_nSOpenGLViewSelInitWithFramePixelFormat = objc.RegisterName("initWithFrame:pixelFormat:")
-	_nSOpenGLViewSelClearGLContext = objc.RegisterName("clearGLContext")
-	_nSOpenGLViewSelUpdate = objc.RegisterName("update")
-	_nSOpenGLViewSelReshape = objc.RegisterName("reshape")
-	_nSOpenGLViewSelPrepareOpenGL = objc.RegisterName("prepareOpenGL")
-	_nSOpenGLViewSelOpenGLContext = objc.RegisterName("openGLContext")
-	_nSOpenGLViewSelSetOpenGLContext = objc.RegisterName("setOpenGLContext:")
-	_nSOpenGLViewSelPixelFormat = objc.RegisterName("pixelFormat")
-	_nSOpenGLViewSelSetPixelFormat = objc.RegisterName("setPixelFormat:")
+	_nSOpenGLViewSelClearGLContext           = objc.RegisterName("clearGLContext")
+	_nSOpenGLViewSelUpdate                   = objc.RegisterName("update")
+	_nSOpenGLViewSelReshape                  = objc.RegisterName("reshape")
+	_nSOpenGLViewSelPrepareOpenGL            = objc.RegisterName("prepareOpenGL")
+	_nSOpenGLViewSelOpenGLContext            = objc.RegisterName("openGLContext")
+	_nSOpenGLViewSelSetOpenGLContext         = objc.RegisterName("setOpenGLContext:")
+	_nSOpenGLViewSelPixelFormat              = objc.RegisterName("pixelFormat")
+	_nSOpenGLViewSelSetPixelFormat           = objc.RegisterName("setPixelFormat:")
 )
 
 func NSOpenGLViewFromID(id objc.ID) *NSOpenGLView {
@@ -41,13 +41,17 @@ func NSOpenGLViewFromID(id objc.ID) *NSOpenGLView {
 
 func NSOpenGLViewDefaultPixelFormat() *NSOpenGLPixelFormat {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOpenGLView), _nSOpenGLViewSelDefaultPixelFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOpenGLPixelFormatFromID(_ret)
 }
 
 func (o *NSOpenGLView) InitWithFramePixelFormat(frameRect corefoundation.CGRect, format *NSOpenGLPixelFormat) *NSOpenGLView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLViewSelInitWithFramePixelFormat, frameRect, format.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOpenGLViewFromID(_ret)
 }
 
@@ -69,7 +73,9 @@ func (o *NSOpenGLView) PrepareOpenGL() {
 
 func (o *NSOpenGLView) OpenGLContext() *NSOpenGLContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLViewSelOpenGLContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOpenGLContextFromID(_ret)
 }
 
@@ -79,11 +85,12 @@ func (o *NSOpenGLView) SetOpenGLContext(openGLContext *NSOpenGLContext) {
 
 func (o *NSOpenGLView) PixelFormat() *NSOpenGLPixelFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLViewSelPixelFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOpenGLPixelFormatFromID(_ret)
 }
 
 func (o *NSOpenGLView) SetPixelFormat(pixelFormat *NSOpenGLPixelFormat) {
 	o.Ptr().Send(_nSOpenGLViewSelSetPixelFormat, pixelFormat.Ptr())
 }
-

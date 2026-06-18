@@ -71,4 +71,3 @@ type VideoPerformanceMetricsable interface {
 }
 
 var _ VideoPerformanceMetricsable = (*VideoPerformanceMetrics)(nil)
-

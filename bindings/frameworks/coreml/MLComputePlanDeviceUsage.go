@@ -16,9 +16,9 @@ type MLComputePlanDeviceUsage struct {
 }
 
 var (
-	_clsMLComputePlanDeviceUsage = _objcClass("MLComputePlanDeviceUsage")
+	_clsMLComputePlanDeviceUsage                        = _objcClass("MLComputePlanDeviceUsage")
 	_mLComputePlanDeviceUsageSelSupportedComputeDevices = objc.RegisterName("supportedComputeDevices")
-	_mLComputePlanDeviceUsageSelPreferredComputeDevice = objc.RegisterName("preferredComputeDevice")
+	_mLComputePlanDeviceUsageSelPreferredComputeDevice  = objc.RegisterName("preferredComputeDevice")
 )
 
 func MLComputePlanDeviceUsageFromID(id objc.ID) *MLComputePlanDeviceUsage {
@@ -34,7 +34,9 @@ func MLComputePlanDeviceUsageFromID(id objc.ID) *MLComputePlanDeviceUsage {
 // The compute devices that can execute the layer/operation.
 func (o *MLComputePlanDeviceUsage) SupportedComputeDevices() *foundation.NSArray[MLComputeDeviceProtocol] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLComputePlanDeviceUsageSelSupportedComputeDevices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MLComputeDeviceProtocol](_ret)
 }
 
@@ -43,4 +45,3 @@ func (o *MLComputePlanDeviceUsage) PreferredComputeDevice() MLComputeDeviceProto
 	_ret := objc.Send[MLComputeDeviceProtocol](o.Ptr(), _mLComputePlanDeviceUsageSelPreferredComputeDevice)
 	return _ret
 }
-

@@ -16,9 +16,9 @@ type DOMHTMLLegendElement struct {
 }
 
 var (
-	_clsDOMHTMLLegendElement = _objcClass("DOMHTMLLegendElement")
-	_dOMHTMLLegendElementSelForm = objc.RegisterName("form")
-	_dOMHTMLLegendElementSelAlign = objc.RegisterName("align")
+	_clsDOMHTMLLegendElement         = _objcClass("DOMHTMLLegendElement")
+	_dOMHTMLLegendElementSelForm     = objc.RegisterName("form")
+	_dOMHTMLLegendElementSelAlign    = objc.RegisterName("align")
 	_dOMHTMLLegendElementSelSetAlign = objc.RegisterName("setAlign:")
 )
 
@@ -34,17 +34,20 @@ func DOMHTMLLegendElementFromID(id objc.ID) *DOMHTMLLegendElement {
 
 func (o *DOMHTMLLegendElement) Form() *DOMHTMLFormElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLLegendElementSelForm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMHTMLFormElementFromID(_ret)
 }
 
 func (o *DOMHTMLLegendElement) Align() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLLegendElementSelAlign)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLLegendElement) SetAlign(align *foundation.NSString) {
 	o.Ptr().Send(_dOMHTMLLegendElementSelSetAlign, align.Ptr())
 }
-

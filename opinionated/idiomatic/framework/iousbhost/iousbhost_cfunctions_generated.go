@@ -228,4 +228,3 @@ func IOUSBHostCIPortStateToString(portState raw.IOUSBHostCIPortState) string {
 func IOUSBHostDeviceRequestType(direction unsafe.Pointer, type_ unsafe.Pointer, recipient unsafe.Pointer) uint8 {
 	return raw.IOUSBHostDeviceRequestType(direction, type_, recipient)
 }
-

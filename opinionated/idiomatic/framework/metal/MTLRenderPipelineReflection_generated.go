@@ -109,4 +109,3 @@ type RenderPipelineReflectionable interface {
 }
 
 var _ RenderPipelineReflectionable = (*RenderPipelineReflection)(nil)
-

@@ -15,7 +15,7 @@ type VZVirtioConsoleDeviceSerialPortConfiguration struct {
 }
 
 var (
-	_clsVZVirtioConsoleDeviceSerialPortConfiguration = _objcClass("VZVirtioConsoleDeviceSerialPortConfiguration")
+	_clsVZVirtioConsoleDeviceSerialPortConfiguration     = _objcClass("VZVirtioConsoleDeviceSerialPortConfiguration")
 	_vZVirtioConsoleDeviceSerialPortConfigurationSelInit = objc.RegisterName("init")
 )
 
@@ -31,7 +31,8 @@ func VZVirtioConsoleDeviceSerialPortConfigurationFromID(id objc.ID) *VZVirtioCon
 
 func (o *VZVirtioConsoleDeviceSerialPortConfiguration) Init() *VZVirtioConsoleDeviceSerialPortConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioConsoleDeviceSerialPortConfigurationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZVirtioConsoleDeviceSerialPortConfigurationFromID(_ret)
 }
-

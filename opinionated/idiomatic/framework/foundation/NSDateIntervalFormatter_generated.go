@@ -203,4 +203,3 @@ type DateIntervalFormatterable interface {
 }
 
 var _ DateIntervalFormatterable = (*DateIntervalFormatter)(nil)
-

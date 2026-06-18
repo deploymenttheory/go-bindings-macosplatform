@@ -18,12 +18,12 @@ type MTREnergyEVSEModeClusterChangeToModeResponseParams struct {
 }
 
 var (
-	_clsMTREnergyEVSEModeClusterChangeToModeResponseParams = _objcClass("MTREnergyEVSEModeClusterChangeToModeResponseParams")
+	_clsMTREnergyEVSEModeClusterChangeToModeResponseParams                           = _objcClass("MTREnergyEVSEModeClusterChangeToModeResponseParams")
 	_mTREnergyEVSEModeClusterChangeToModeResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTREnergyEVSEModeClusterChangeToModeResponseParamsSelStatus = objc.RegisterName("status")
-	_mTREnergyEVSEModeClusterChangeToModeResponseParamsSelSetStatus = objc.RegisterName("setStatus:")
-	_mTREnergyEVSEModeClusterChangeToModeResponseParamsSelStatusText = objc.RegisterName("statusText")
-	_mTREnergyEVSEModeClusterChangeToModeResponseParamsSelSetStatusText = objc.RegisterName("setStatusText:")
+	_mTREnergyEVSEModeClusterChangeToModeResponseParamsSelStatus                     = objc.RegisterName("status")
+	_mTREnergyEVSEModeClusterChangeToModeResponseParamsSelSetStatus                  = objc.RegisterName("setStatus:")
+	_mTREnergyEVSEModeClusterChangeToModeResponseParamsSelStatusText                 = objc.RegisterName("statusText")
+	_mTREnergyEVSEModeClusterChangeToModeResponseParamsSelSetStatusText              = objc.RegisterName("setStatusText:")
 )
 
 func MTREnergyEVSEModeClusterChangeToModeResponseParamsFromID(id objc.ID) *MTREnergyEVSEModeClusterChangeToModeResponseParams {
@@ -40,7 +40,9 @@ func MTREnergyEVSEModeClusterChangeToModeResponseParamsFromID(id objc.ID) *MTREn
 func (o *MTREnergyEVSEModeClusterChangeToModeResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTREnergyEVSEModeClusterChangeToModeResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREnergyEVSEModeClusterChangeToModeResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -49,7 +51,9 @@ func (o *MTREnergyEVSEModeClusterChangeToModeResponseParams) InitWithResponseVal
 
 func (o *MTREnergyEVSEModeClusterChangeToModeResponseParams) Status() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREnergyEVSEModeClusterChangeToModeResponseParamsSelStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,11 +63,12 @@ func (o *MTREnergyEVSEModeClusterChangeToModeResponseParams) SetStatus(status *f
 
 func (o *MTREnergyEVSEModeClusterChangeToModeResponseParams) StatusText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREnergyEVSEModeClusterChangeToModeResponseParamsSelStatusText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTREnergyEVSEModeClusterChangeToModeResponseParams) SetStatusText(statusText *foundation.NSString) {
 	o.Ptr().Send(_mTREnergyEVSEModeClusterChangeToModeResponseParamsSelSetStatusText, statusText.Ptr())
 }
-

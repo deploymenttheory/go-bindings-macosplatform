@@ -50,7 +50,9 @@ func (x *PlayerPlaybackCoordinator) WithSuspensionReasonsThatTriggerWaiting(item
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -98,7 +100,9 @@ func (x *PlayerPlaybackCoordinator) PlaybackCoordinationMedium() *PlaybackCoordi
 	return &PlaybackCoordinationMedium{inner: _r}
 }
 
-func (x *PlayerPlaybackCoordinator) asPlaybackCoordinator() *raw.AVPlaybackCoordinator { return &x.inner.AVPlaybackCoordinator }
+func (x *PlayerPlaybackCoordinator) asPlaybackCoordinator() *raw.AVPlaybackCoordinator {
+	return &x.inner.AVPlaybackCoordinator
+}
 
 // PlayerPlaybackCoordinatorable is the interface implemented by [PlayerPlaybackCoordinator], for mocking and DI.
 type PlayerPlaybackCoordinatorable interface {
@@ -114,4 +118,3 @@ type PlayerPlaybackCoordinatorable interface {
 }
 
 var _ PlayerPlaybackCoordinatorable = (*PlayerPlaybackCoordinator)(nil)
-

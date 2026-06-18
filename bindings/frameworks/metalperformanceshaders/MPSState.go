@@ -20,30 +20,30 @@ type MPSState struct {
 }
 
 var (
-	_clsMPSState = _objcClass("MPSState")
-	_mPSStateSelTemporaryStateWithCommandBufferBufferSize = objc.RegisterName("temporaryStateWithCommandBuffer:bufferSize:")
-	_mPSStateSelTemporaryStateWithCommandBufferTextureDescriptor = objc.RegisterName("temporaryStateWithCommandBuffer:textureDescriptor:")
-	_mPSStateSelTemporaryStateWithCommandBuffer = objc.RegisterName("temporaryStateWithCommandBuffer:")
-	_mPSStateSelInitWithDeviceBufferSize = objc.RegisterName("initWithDevice:bufferSize:")
-	_mPSStateSelInitWithDeviceTextureDescriptor = objc.RegisterName("initWithDevice:textureDescriptor:")
-	_mPSStateSelInitWithResource = objc.RegisterName("initWithResource:")
-	_mPSStateSelInitWithDeviceResourceList = objc.RegisterName("initWithDevice:resourceList:")
-	_mPSStateSelTemporaryStateWithCommandBufferResourceList = objc.RegisterName("temporaryStateWithCommandBuffer:resourceList:")
-	_mPSStateSelInitWithResources = objc.RegisterName("initWithResources:")
-	_mPSStateSelResourceAtIndexAllocateMemory = objc.RegisterName("resourceAtIndex:allocateMemory:")
-	_mPSStateSelBufferSizeAtIndex = objc.RegisterName("bufferSizeAtIndex:")
-	_mPSStateSelTextureInfoAtIndex = objc.RegisterName("textureInfoAtIndex:")
-	_mPSStateSelResourceTypeAtIndex = objc.RegisterName("resourceTypeAtIndex:")
-	_mPSStateSelSynchronizeOnCommandBuffer = objc.RegisterName("synchronizeOnCommandBuffer:")
-	_mPSStateSelResourceSize = objc.RegisterName("resourceSize")
+	_clsMPSState                                                                                  = _objcClass("MPSState")
+	_mPSStateSelTemporaryStateWithCommandBufferBufferSize                                         = objc.RegisterName("temporaryStateWithCommandBuffer:bufferSize:")
+	_mPSStateSelTemporaryStateWithCommandBufferTextureDescriptor                                  = objc.RegisterName("temporaryStateWithCommandBuffer:textureDescriptor:")
+	_mPSStateSelTemporaryStateWithCommandBuffer                                                   = objc.RegisterName("temporaryStateWithCommandBuffer:")
+	_mPSStateSelInitWithDeviceBufferSize                                                          = objc.RegisterName("initWithDevice:bufferSize:")
+	_mPSStateSelInitWithDeviceTextureDescriptor                                                   = objc.RegisterName("initWithDevice:textureDescriptor:")
+	_mPSStateSelInitWithResource                                                                  = objc.RegisterName("initWithResource:")
+	_mPSStateSelInitWithDeviceResourceList                                                        = objc.RegisterName("initWithDevice:resourceList:")
+	_mPSStateSelTemporaryStateWithCommandBufferResourceList                                       = objc.RegisterName("temporaryStateWithCommandBuffer:resourceList:")
+	_mPSStateSelInitWithResources                                                                 = objc.RegisterName("initWithResources:")
+	_mPSStateSelResourceAtIndexAllocateMemory                                                     = objc.RegisterName("resourceAtIndex:allocateMemory:")
+	_mPSStateSelBufferSizeAtIndex                                                                 = objc.RegisterName("bufferSizeAtIndex:")
+	_mPSStateSelTextureInfoAtIndex                                                                = objc.RegisterName("textureInfoAtIndex:")
+	_mPSStateSelResourceTypeAtIndex                                                               = objc.RegisterName("resourceTypeAtIndex:")
+	_mPSStateSelSynchronizeOnCommandBuffer                                                        = objc.RegisterName("synchronizeOnCommandBuffer:")
+	_mPSStateSelResourceSize                                                                      = objc.RegisterName("resourceSize")
 	_mPSStateSelDestinationImageDescriptorForSourceImagesSourceStatesForKernelSuggestedDescriptor = objc.RegisterName("destinationImageDescriptorForSourceImages:sourceStates:forKernel:suggestedDescriptor:")
-	_mPSStateSelResourceCount = objc.RegisterName("resourceCount")
-	_mPSStateSelReadCount = objc.RegisterName("readCount")
-	_mPSStateSelSetReadCount = objc.RegisterName("setReadCount:")
-	_mPSStateSelIsTemporary = objc.RegisterName("isTemporary")
-	_mPSStateSelLabel = objc.RegisterName("label")
-	_mPSStateSelSetLabel = objc.RegisterName("setLabel:")
-	_mPSStateSelResource = objc.RegisterName("resource")
+	_mPSStateSelResourceCount                                                                     = objc.RegisterName("resourceCount")
+	_mPSStateSelReadCount                                                                         = objc.RegisterName("readCount")
+	_mPSStateSelSetReadCount                                                                      = objc.RegisterName("setReadCount:")
+	_mPSStateSelIsTemporary                                                                       = objc.RegisterName("isTemporary")
+	_mPSStateSelLabel                                                                             = objc.RegisterName("label")
+	_mPSStateSelSetLabel                                                                          = objc.RegisterName("setLabel:")
+	_mPSStateSelResource                                                                          = objc.RegisterName("resource")
 )
 
 func MPSStateFromID(id objc.ID) *MPSState {
@@ -59,61 +59,79 @@ func MPSStateFromID(id objc.ID) *MPSState {
 // @abstract Create a MPSState holding a temporary MTLBuffer @param   cmdBuf     The command buffer against which the temporary resource is allocated @param   bufferSize The size of the buffer in bytes
 func MPSStateTemporaryStateWithCommandBufferBufferSize(cmdBuf metal.MTLCommandBuffer, bufferSize uint) *MPSState {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSState), _mPSStateSelTemporaryStateWithCommandBufferBufferSize, cmdBuf, bufferSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSStateFromID(_ret)
 }
 
 // @abstract Create a MPSState holding a temporary MTLTexture @param   cmdBuf     The command buffer against which the temporary resource is allocated @param   descriptor A descriptor for the new temporary texture
 func MPSStateTemporaryStateWithCommandBufferTextureDescriptor(cmdBuf metal.MTLCommandBuffer, descriptor *metal.MTLTextureDescriptor) *MPSState {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSState), _mPSStateSelTemporaryStateWithCommandBufferTextureDescriptor, cmdBuf, descriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSStateFromID(_ret)
 }
 
 // @abstract Create a new autoreleased temporary state object without underlying resource @param cmdBuf  The command buffer with which the temporary resource is associated
 func MPSStateTemporaryStateWithCommandBuffer(cmdBuf metal.MTLCommandBuffer) *MPSState {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSState), _mPSStateSelTemporaryStateWithCommandBuffer, cmdBuf)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSStateFromID(_ret)
 }
 
 func (o *MPSState) InitWithDeviceBufferSize(device metal.MTLDevice, bufferSize uint) *MPSState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSStateSelInitWithDeviceBufferSize, device, bufferSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSStateFromID(_ret)
 }
 
 func (o *MPSState) InitWithDeviceTextureDescriptor(device metal.MTLDevice, descriptor *metal.MTLTextureDescriptor) *MPSState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSStateSelInitWithDeviceTextureDescriptor, device, descriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSStateFromID(_ret)
 }
 
 // @abstract Create a MPSState with a non-temporary MTLResource @param      resource    A MTLBuffer or MTLTexture. May be nil.
 func (o *MPSState) InitWithResource(resource metal.MTLResource) *MPSState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSStateSelInitWithResource, resource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSStateFromID(_ret)
 }
 
 // @abstract       Initialize a non-temporary state to hold a number of textures and buffers @discussion     The allocation of each resource will be deferred  until it is needed. This occurs when -resource or -resourceAtIndex: is called. @param          resourceList The list of resources to create.
 func (o *MPSState) InitWithDeviceResourceList(device metal.MTLDevice, resourceList *mpscore.MPSStateResourceList) *MPSState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSStateSelInitWithDeviceResourceList, device, resourceList.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSStateFromID(_ret)
 }
 
 // @abstract       Initialize a temporary state to hold a number of textures and buffers @discussion     The textures occur first in sequence
 func MPSStateTemporaryStateWithCommandBufferResourceList(commandBuffer metal.MTLCommandBuffer, resourceList *mpscore.MPSStateResourceList) *MPSState {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSState), _mPSStateSelTemporaryStateWithCommandBufferResourceList, commandBuffer, resourceList.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSStateFromID(_ret)
 }
 
 // @abstract Create a state object with a list of MTLResources @discussion     Because MPS prefers deferred allocation of resources your application should use -initWithTextures:bufferSizes:bufferCount: whenever possible. This method is useful for cases when the MTLResources must be initialized by the CPU.
 func (o *MPSState) InitWithResources(resources *foundation.NSArray[metal.MTLResource]) *MPSState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSStateSelInitWithResources, resources)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSStateFromID(_ret)
 }
 
@@ -155,7 +173,9 @@ func (o *MPSState) ResourceSize() uint {
 // @abstract       Determine padding and sizing of result images @discussion     A MPSState has the opportunity to reconfigure the MPSImageDescriptor used to create the filter result state and set the MPSKernel.offset to the correct value.  By default, the MPSState does not modify the descriptor. There is a order of operations defined for who may update the descriptor: 1) Default padding code runs based on the MPSNNPaddingMethod in the MPSCNNKernel.padding. This creates the descriptor and picks a starting value for the MPSCNNKernel.offset. 2) MPSStates are called in order to apply this function and update the offset. 3) The MPSNNPadding custom padding method of the same name is called. 4) Some code that may prove helpful: @code const int centeringPolicy = 0;  // When kernelSize is even: 0 pad bottom right. 1 pad top left.    Centers the kernel for even sized kernels. typedef enum Style{ StyleValidOnly = -1, StyleSame = 0, StyleFull = 1 }Style; // Typical destination size in one dimension for forward filters (most filters) static int DestSize( int sourceSize, int stride, int filterWindowSize, Style style ){ sourceSize += style * (filterWindowSize - 1);       // adjust how many pixels we are allowed to read return (sourceSize + stride - 1) / stride;          // sourceSize / stride, round up } // Typical destination size in one dimension for reverse filters (e.g. convolution transpose) static int DestSizeReverse( int sourceSize, int stride, int filterWindowSize, Style style ){ return (sourceSize-1) * stride +        // center tap for the last N-1 results. Take stride into account 1 +                             // center tap for the first result style * (filterWindowSize-1);   // add or subtract (or ignore) the filter extent } // Find the MPSOffset in one dimension static int Offset( int sourceSize, int stride, int filterWindowSize, Style style ){ // The correction needed to adjust from position of left edge to center per MPSOffset definition int correction = filterWindowSize / 2; // exit if all we want is to start consuming pixels at the left edge of the image. if( 0 ) return correction; // Center the area consumed in the source image: // Calculate the size of the destination image int destSize = DestSize( sourceSize, stride, filterWindowSize, style ); // use DestSizeReverse here instead as appropriate // calculate extent of pixels we need to read in source to populate the destination int readSize = (destSize-1) * stride + filterWindowSize; // calculate number of missing pixels in source int extraSize = readSize - sourceSize; // number of missing pixels on left side int leftExtraPixels = (extraSize + centeringPolicy) / 2; // account for the fact that the offset is based on the center pixel, not the left edge return correction - leftExtraPixels; } @endcode @param          sourceImages        The list of source images to be used @param          sourceStates        The list of source states to be used @param          kernel              The MPSKernel the padding method will be applied to. Set the kernel.offset @param          inDescriptor        MPS will prepare a starting guess based on the padding policy (exclusive of MPSNNPaddingMethodCustom) set for the object. You should adjust the offset and image size accordingly. It is on an autoreleasepool. @return         The MPSImageDescriptor to use to make a MPSImage to capture the results from the filter. The MPSImageDescriptor is assumed to be on an autoreleasepool. Your method must also set the kernel.offset property.
 func (o *MPSState) DestinationImageDescriptorForSourceImagesSourceStatesForKernelSuggestedDescriptor(sourceImages *foundation.NSArray[*mpscore.MPSImage], sourceStates *foundation.NSArray[*mpscore.MPSState], kernel *mpscore.MPSKernel, inDescriptor *mpscore.MPSImageDescriptor) *mpscore.MPSImageDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSStateSelDestinationImageDescriptorForSourceImagesSourceStatesForKernelSuggestedDescriptor, sourceImages, sourceStates, kernel.Ptr(), inDescriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpscore.MPSImageDescriptorFromID(_ret)
 }
 
@@ -182,7 +202,9 @@ func (o *MPSState) IsTemporary() bool {
 // @property label @abstract A string to help identify this object.
 func (o *MPSState) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSStateSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -195,4 +217,3 @@ func (o *MPSState) Resource() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mPSStateSelResource)
 	return _ret
 }
-

@@ -15,17 +15,17 @@ type NSException struct {
 }
 
 var (
-	_clsNSException = _objcClass("NSException")
+	_clsNSException                                = _objcClass("NSException")
 	_nSExceptionSelExceptionWithNameReasonUserInfo = objc.RegisterName("exceptionWithName:reason:userInfo:")
-	_nSExceptionSelInitWithNameReasonUserInfo = objc.RegisterName("initWithName:reason:userInfo:")
-	_nSExceptionSelRaise = objc.RegisterName("raise")
-	_nSExceptionSelName = objc.RegisterName("name")
-	_nSExceptionSelReason = objc.RegisterName("reason")
-	_nSExceptionSelUserInfo = objc.RegisterName("userInfo")
-	_nSExceptionSelCallStackReturnAddresses = objc.RegisterName("callStackReturnAddresses")
-	_nSExceptionSelCallStackSymbols = objc.RegisterName("callStackSymbols")
-	_nSExceptionSelRaiseFormat = objc.RegisterName("raise:format:")
-	_nSExceptionSelRaiseFormatArguments = objc.RegisterName("raise:format:arguments:")
+	_nSExceptionSelInitWithNameReasonUserInfo      = objc.RegisterName("initWithName:reason:userInfo:")
+	_nSExceptionSelRaise                           = objc.RegisterName("raise")
+	_nSExceptionSelName                            = objc.RegisterName("name")
+	_nSExceptionSelReason                          = objc.RegisterName("reason")
+	_nSExceptionSelUserInfo                        = objc.RegisterName("userInfo")
+	_nSExceptionSelCallStackReturnAddresses        = objc.RegisterName("callStackReturnAddresses")
+	_nSExceptionSelCallStackSymbols                = objc.RegisterName("callStackSymbols")
+	_nSExceptionSelRaiseFormat                     = objc.RegisterName("raise:format:")
+	_nSExceptionSelRaiseFormatArguments            = objc.RegisterName("raise:format:arguments:")
 )
 
 func NSExceptionFromID(id objc.ID) *NSException {
@@ -40,13 +40,17 @@ func NSExceptionFromID(id objc.ID) *NSException {
 
 func NSExceptionExceptionWithNameReasonUserInfo(name *NSString, reason *NSString, userInfo *NSDictionary[objc.ID, objc.ID]) *NSException {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSException), _nSExceptionSelExceptionWithNameReasonUserInfo, name.Ptr(), reason.Ptr(), userInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSExceptionFromID(_ret)
 }
 
 func (o *NSException) InitWithNameReasonUserInfo(aName *NSString, aReason *NSString, aUserInfo *NSDictionary[objc.ID, objc.ID]) *NSException {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExceptionSelInitWithNameReasonUserInfo, aName.Ptr(), aReason.Ptr(), aUserInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSExceptionFromID(_ret)
 }
 
@@ -56,13 +60,17 @@ func (o *NSException) Raise() {
 
 func (o *NSException) Name() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExceptionSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSException) Reason() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExceptionSelReason)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -73,13 +81,17 @@ func (o *NSException) UserInfo() *NSDictionary[objc.ID, objc.ID] {
 
 func (o *NSException) CallStackReturnAddresses() *NSArray[*NSNumber] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExceptionSelCallStackReturnAddresses)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSNumber](_ret)
 }
 
 func (o *NSException) CallStackSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExceptionSelCallStackSymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -90,4 +102,3 @@ func NSExceptionRaiseFormat(name *NSString, format *NSString) {
 func NSExceptionRaiseFormatArguments(name *NSString, format *NSString, argList string) {
 	objc.ID(_clsNSException).Send(_nSExceptionSelRaiseFormatArguments, name.Ptr(), format.Ptr(), argList)
 }
-

@@ -15,19 +15,19 @@ type NSWhoseSpecifier struct {
 }
 
 var (
-	_clsNSWhoseSpecifier = _objcClass("NSWhoseSpecifier")
-	_nSWhoseSpecifierSelInitWithCoder = objc.RegisterName("initWithCoder:")
+	_clsNSWhoseSpecifier                                                           = _objcClass("NSWhoseSpecifier")
+	_nSWhoseSpecifierSelInitWithCoder                                              = objc.RegisterName("initWithCoder:")
 	_nSWhoseSpecifierSelInitWithContainerClassDescriptionContainerSpecifierKeyTest = objc.RegisterName("initWithContainerClassDescription:containerSpecifier:key:test:")
-	_nSWhoseSpecifierSelTest = objc.RegisterName("test")
-	_nSWhoseSpecifierSelSetTest = objc.RegisterName("setTest:")
-	_nSWhoseSpecifierSelStartSubelementIdentifier = objc.RegisterName("startSubelementIdentifier")
-	_nSWhoseSpecifierSelSetStartSubelementIdentifier = objc.RegisterName("setStartSubelementIdentifier:")
-	_nSWhoseSpecifierSelStartSubelementIndex = objc.RegisterName("startSubelementIndex")
-	_nSWhoseSpecifierSelSetStartSubelementIndex = objc.RegisterName("setStartSubelementIndex:")
-	_nSWhoseSpecifierSelEndSubelementIdentifier = objc.RegisterName("endSubelementIdentifier")
-	_nSWhoseSpecifierSelSetEndSubelementIdentifier = objc.RegisterName("setEndSubelementIdentifier:")
-	_nSWhoseSpecifierSelEndSubelementIndex = objc.RegisterName("endSubelementIndex")
-	_nSWhoseSpecifierSelSetEndSubelementIndex = objc.RegisterName("setEndSubelementIndex:")
+	_nSWhoseSpecifierSelTest                                                       = objc.RegisterName("test")
+	_nSWhoseSpecifierSelSetTest                                                    = objc.RegisterName("setTest:")
+	_nSWhoseSpecifierSelStartSubelementIdentifier                                  = objc.RegisterName("startSubelementIdentifier")
+	_nSWhoseSpecifierSelSetStartSubelementIdentifier                               = objc.RegisterName("setStartSubelementIdentifier:")
+	_nSWhoseSpecifierSelStartSubelementIndex                                       = objc.RegisterName("startSubelementIndex")
+	_nSWhoseSpecifierSelSetStartSubelementIndex                                    = objc.RegisterName("setStartSubelementIndex:")
+	_nSWhoseSpecifierSelEndSubelementIdentifier                                    = objc.RegisterName("endSubelementIdentifier")
+	_nSWhoseSpecifierSelSetEndSubelementIdentifier                                 = objc.RegisterName("setEndSubelementIdentifier:")
+	_nSWhoseSpecifierSelEndSubelementIndex                                         = objc.RegisterName("endSubelementIndex")
+	_nSWhoseSpecifierSelSetEndSubelementIndex                                      = objc.RegisterName("setEndSubelementIndex:")
 )
 
 func NSWhoseSpecifierFromID(id objc.ID) *NSWhoseSpecifier {
@@ -42,19 +42,25 @@ func NSWhoseSpecifierFromID(id objc.ID) *NSWhoseSpecifier {
 
 func (o *NSWhoseSpecifier) InitWithCoder(inCoder *NSCoder) *NSWhoseSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWhoseSpecifierSelInitWithCoder, inCoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWhoseSpecifierFromID(_ret)
 }
 
 func (o *NSWhoseSpecifier) InitWithContainerClassDescriptionContainerSpecifierKeyTest(classDesc *NSScriptClassDescription, container *NSScriptObjectSpecifier, property *NSString, test *NSScriptWhoseTest) *NSWhoseSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWhoseSpecifierSelInitWithContainerClassDescriptionContainerSpecifierKeyTest, classDesc.Ptr(), container.Ptr(), property.Ptr(), test.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWhoseSpecifierFromID(_ret)
 }
 
 func (o *NSWhoseSpecifier) Test() *NSScriptWhoseTest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWhoseSpecifierSelTest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptWhoseTestFromID(_ret)
 }
 
@@ -97,4 +103,3 @@ func (o *NSWhoseSpecifier) EndSubelementIndex() int {
 func (o *NSWhoseSpecifier) SetEndSubelementIndex(endSubelementIndex int) {
 	o.Ptr().Send(_nSWhoseSpecifierSelSetEndSubelementIndex, endSubelementIndex)
 }
-

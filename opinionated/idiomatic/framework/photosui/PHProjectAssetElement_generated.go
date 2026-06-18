@@ -78,7 +78,9 @@ func (x *ProjectAssetElement) VerticallyFlipped() bool {
 	return x.inner.VerticallyFlipped()
 }
 
-func (x *ProjectAssetElement) asProjectElement() *raw.PHProjectElement { return &x.inner.PHProjectElement }
+func (x *ProjectAssetElement) asProjectElement() *raw.PHProjectElement {
+	return &x.inner.PHProjectElement
+}
 
 // ProjectAssetElementable is the interface implemented by [ProjectAssetElement], for mocking and DI.
 type ProjectAssetElementable interface {
@@ -92,4 +94,3 @@ type ProjectAssetElementable interface {
 }
 
 var _ ProjectAssetElementable = (*ProjectAssetElement)(nil)
-

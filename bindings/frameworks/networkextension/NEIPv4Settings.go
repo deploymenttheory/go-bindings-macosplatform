@@ -16,16 +16,16 @@ type NEIPv4Settings struct {
 }
 
 var (
-	_clsNEIPv4Settings = _objcClass("NEIPv4Settings")
+	_clsNEIPv4Settings                             = _objcClass("NEIPv4Settings")
 	_nEIPv4SettingsSelInitWithAddressesSubnetMasks = objc.RegisterName("initWithAddresses:subnetMasks:")
-	_nEIPv4SettingsSelAddresses = objc.RegisterName("addresses")
-	_nEIPv4SettingsSelSubnetMasks = objc.RegisterName("subnetMasks")
-	_nEIPv4SettingsSelRouter = objc.RegisterName("router")
-	_nEIPv4SettingsSelSetRouter = objc.RegisterName("setRouter:")
-	_nEIPv4SettingsSelIncludedRoutes = objc.RegisterName("includedRoutes")
-	_nEIPv4SettingsSelSetIncludedRoutes = objc.RegisterName("setIncludedRoutes:")
-	_nEIPv4SettingsSelExcludedRoutes = objc.RegisterName("excludedRoutes")
-	_nEIPv4SettingsSelSetExcludedRoutes = objc.RegisterName("setExcludedRoutes:")
+	_nEIPv4SettingsSelAddresses                    = objc.RegisterName("addresses")
+	_nEIPv4SettingsSelSubnetMasks                  = objc.RegisterName("subnetMasks")
+	_nEIPv4SettingsSelRouter                       = objc.RegisterName("router")
+	_nEIPv4SettingsSelSetRouter                    = objc.RegisterName("setRouter:")
+	_nEIPv4SettingsSelIncludedRoutes               = objc.RegisterName("includedRoutes")
+	_nEIPv4SettingsSelSetIncludedRoutes            = objc.RegisterName("setIncludedRoutes:")
+	_nEIPv4SettingsSelExcludedRoutes               = objc.RegisterName("excludedRoutes")
+	_nEIPv4SettingsSelSetExcludedRoutes            = objc.RegisterName("setExcludedRoutes:")
 )
 
 func NEIPv4SettingsFromID(id objc.ID) *NEIPv4Settings {
@@ -41,7 +41,9 @@ func NEIPv4SettingsFromID(id objc.ID) *NEIPv4Settings {
 // @method initWithAddresses:subnetMasks: @discussion Initialize a newly-allocated NEIPv4Settings object. @param addresses An array of IPv4 addresses represented as dotted decimal strings. @param subnetMasks An array of IPv4 subnet masks represented as dotted decimal strings. @return The initialized object.
 func (o *NEIPv4Settings) InitWithAddressesSubnetMasks(addresses *foundation.NSArray[*foundation.NSString], subnetMasks *foundation.NSArray[*foundation.NSString]) *NEIPv4Settings {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEIPv4SettingsSelInitWithAddressesSubnetMasks, addresses, subnetMasks)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEIPv4SettingsFromID(_ret)
 }
 
@@ -60,7 +62,9 @@ func (o *NEIPv4Settings) SubnetMasks() *foundation.NSArray[*foundation.NSString]
 // @property router @discussion The address of the next-hop gateway router represented as a dotted decimal string. This property is ignored for TUN interfaces.
 func (o *NEIPv4Settings) Router() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEIPv4SettingsSelRouter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -71,7 +75,9 @@ func (o *NEIPv4Settings) SetRouter(router *foundation.NSString) {
 // @property includedRoutes @discussion An array of NEIPv4Route objects. Traffic matching these routes will be routed through the virtual interface used by the VPN tunnel.
 func (o *NEIPv4Settings) IncludedRoutes() *foundation.NSArray[*NEIPv4Route] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEIPv4SettingsSelIncludedRoutes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NEIPv4Route](_ret)
 }
 
@@ -82,11 +88,12 @@ func (o *NEIPv4Settings) SetIncludedRoutes(includedRoutes *foundation.NSArray[*N
 // @property excludedRoutes @discussion An array of NEIPv4Route objects. Traffic matching these routes will be routed through the current primary physical interface of the device.
 func (o *NEIPv4Settings) ExcludedRoutes() *foundation.NSArray[*NEIPv4Route] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEIPv4SettingsSelExcludedRoutes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NEIPv4Route](_ret)
 }
 
 func (o *NEIPv4Settings) SetExcludedRoutes(excludedRoutes *foundation.NSArray[*NEIPv4Route]) {
 	o.Ptr().Send(_nEIPv4SettingsSelSetExcludedRoutes, excludedRoutes.Ptr())
 }
-

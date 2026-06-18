@@ -17,4 +17,3 @@ type AuthorizationOpenIDRequestProvider interface {
 type AuthorizationRequestProvider interface {
 	asAuthorizationRequest() *raw.ASAuthorizationRequest
 }
-

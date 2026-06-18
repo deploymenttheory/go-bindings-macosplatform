@@ -18,22 +18,22 @@ type MTRClusterContentLauncher struct {
 }
 
 var (
-	_clsMTRClusterContentLauncher = _objcClass("MTRClusterContentLauncher")
-	_mTRClusterContentLauncherSelLaunchContentWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("launchContentWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterContentLauncherSelLaunchURLWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("launchURLWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterContentLauncherSelReadAttributeAcceptHeaderWithParams = objc.RegisterName("readAttributeAcceptHeaderWithParams:")
-	_mTRClusterContentLauncherSelReadAttributeSupportedStreamingProtocolsWithParams = objc.RegisterName("readAttributeSupportedStreamingProtocolsWithParams:")
-	_mTRClusterContentLauncherSelWriteAttributeSupportedStreamingProtocolsWithValueExpectedValueInterval = objc.RegisterName("writeAttributeSupportedStreamingProtocolsWithValue:expectedValueInterval:")
+	_clsMTRClusterContentLauncher                                                                              = _objcClass("MTRClusterContentLauncher")
+	_mTRClusterContentLauncherSelLaunchContentWithParamsExpectedValuesExpectedValueIntervalCompletion          = objc.RegisterName("launchContentWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterContentLauncherSelLaunchURLWithParamsExpectedValuesExpectedValueIntervalCompletion              = objc.RegisterName("launchURLWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterContentLauncherSelReadAttributeAcceptHeaderWithParams                                           = objc.RegisterName("readAttributeAcceptHeaderWithParams:")
+	_mTRClusterContentLauncherSelReadAttributeSupportedStreamingProtocolsWithParams                            = objc.RegisterName("readAttributeSupportedStreamingProtocolsWithParams:")
+	_mTRClusterContentLauncherSelWriteAttributeSupportedStreamingProtocolsWithValueExpectedValueInterval       = objc.RegisterName("writeAttributeSupportedStreamingProtocolsWithValue:expectedValueInterval:")
 	_mTRClusterContentLauncherSelWriteAttributeSupportedStreamingProtocolsWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeSupportedStreamingProtocolsWithValue:expectedValueInterval:params:")
-	_mTRClusterContentLauncherSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterContentLauncherSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterContentLauncherSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterContentLauncherSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterContentLauncherSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterContentLauncherSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterContentLauncherSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
-	_mTRClusterContentLauncherSelLaunchContentWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("launchContentWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterContentLauncherSelLaunchURLWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("launchURLWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterContentLauncherSelReadAttributeGeneratedCommandListWithParams                                   = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterContentLauncherSelReadAttributeAcceptedCommandListWithParams                                    = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterContentLauncherSelReadAttributeAttributeListWithParams                                          = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterContentLauncherSelReadAttributeFeatureMapWithParams                                             = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterContentLauncherSelReadAttributeClusterRevisionWithParams                                        = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterContentLauncherSelInitWithDeviceEndpointIDQueue                                                 = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterContentLauncherSelInitWithDeviceEndpointQueue                                                   = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterContentLauncherSelLaunchContentWithParamsExpectedValuesExpectedValueIntervalCompletionHandler   = objc.RegisterName("launchContentWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterContentLauncherSelLaunchURLWithParamsExpectedValuesExpectedValueIntervalCompletionHandler       = objc.RegisterName("launchURLWithParams:expectedValues:expectedValueInterval:completionHandler:")
 )
 
 func MTRClusterContentLauncherFromID(id objc.ID) *MTRClusterContentLauncher {
@@ -120,13 +120,17 @@ func (o *MTRClusterContentLauncher) ReadAttributeClusterRevisionWithParams(param
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterContentLauncher) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterContentLauncher {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterContentLauncherSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterContentLauncherFromID(_ret)
 }
 
 func (o *MTRClusterContentLauncher) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterContentLauncher {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterContentLauncherSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterContentLauncherFromID(_ret)
 }
 
@@ -157,4 +161,3 @@ func (o *MTRClusterContentLauncher) LaunchURLWithParamsExpectedValuesExpectedVal
 	}
 	o.Ptr().Send(_mTRClusterContentLauncherSelLaunchURLWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
-

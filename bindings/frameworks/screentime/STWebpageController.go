@@ -19,19 +19,19 @@ type STWebpageController struct {
 }
 
 var (
-	_clsSTWebpageController = _objcClass("STWebpageController")
-	_sTWebpageControllerSelSetBundleIdentifierError = objc.RegisterName("setBundleIdentifier:error:")
-	_sTWebpageControllerSelSuppressUsageRecording = objc.RegisterName("suppressUsageRecording")
+	_clsSTWebpageController                          = _objcClass("STWebpageController")
+	_sTWebpageControllerSelSetBundleIdentifierError  = objc.RegisterName("setBundleIdentifier:error:")
+	_sTWebpageControllerSelSuppressUsageRecording    = objc.RegisterName("suppressUsageRecording")
 	_sTWebpageControllerSelSetSuppressUsageRecording = objc.RegisterName("setSuppressUsageRecording:")
-	_sTWebpageControllerSelURL = objc.RegisterName("URL")
-	_sTWebpageControllerSelSetURL = objc.RegisterName("setURL:")
-	_sTWebpageControllerSelURLIsPlayingVideo = objc.RegisterName("URLIsPlayingVideo")
-	_sTWebpageControllerSelSetURLIsPlayingVideo = objc.RegisterName("setURLIsPlayingVideo:")
-	_sTWebpageControllerSelURLIsPictureInPicture = objc.RegisterName("URLIsPictureInPicture")
-	_sTWebpageControllerSelSetURLIsPictureInPicture = objc.RegisterName("setURLIsPictureInPicture:")
-	_sTWebpageControllerSelURLIsBlocked = objc.RegisterName("URLIsBlocked")
-	_sTWebpageControllerSelProfileIdentifier = objc.RegisterName("profileIdentifier")
-	_sTWebpageControllerSelSetProfileIdentifier = objc.RegisterName("setProfileIdentifier:")
+	_sTWebpageControllerSelURL                       = objc.RegisterName("URL")
+	_sTWebpageControllerSelSetURL                    = objc.RegisterName("setURL:")
+	_sTWebpageControllerSelURLIsPlayingVideo         = objc.RegisterName("URLIsPlayingVideo")
+	_sTWebpageControllerSelSetURLIsPlayingVideo      = objc.RegisterName("setURLIsPlayingVideo:")
+	_sTWebpageControllerSelURLIsPictureInPicture     = objc.RegisterName("URLIsPictureInPicture")
+	_sTWebpageControllerSelSetURLIsPictureInPicture  = objc.RegisterName("setURLIsPictureInPicture:")
+	_sTWebpageControllerSelURLIsBlocked              = objc.RegisterName("URLIsBlocked")
+	_sTWebpageControllerSelProfileIdentifier         = objc.RegisterName("profileIdentifier")
+	_sTWebpageControllerSelSetProfileIdentifier      = objc.RegisterName("setProfileIdentifier:")
 )
 
 func STWebpageControllerFromID(id objc.ID) *STWebpageController {
@@ -67,7 +67,9 @@ func (o *STWebpageController) SetSuppressUsageRecording(suppressUsageRecording b
 // The URL for the webpage. Set this value to the webpage’s URL when the user navigates to a new URL.
 func (o *STWebpageController) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sTWebpageControllerSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -75,7 +77,7 @@ func (o *STWebpageController) SetURL(uRL *foundation.NSURL) {
 	o.Ptr().Send(_sTWebpageControllerSelSetURL, uRL.Ptr())
 }
 
-// A Boolean that indicates whether there are one or more videos currently playing in the webpage. The default value is <doc://com.apple.documentation/documentation/objectivec/no>. Set this value when the webpage starts or stops playing video. - Important: Set this value to <doc://com.apple.documentation/documentation/objectivec/no> prior to changing ``ScreenTime/STWebpageController/URL`` if the new webpage at that URL stops currently playing media and won’t immediately start playing new media.
+// A Boolean that indicates whether there are one or more videos currently playing in the webpage. The default value is <doc://com.apple.documentation/documentation/objectivec/no>. Set this value when the webpage starts or stops playing video. - Important: Set this value to <doc://com.apple.documentation/documentation/objectivec/no> prior to changing “ScreenTime/STWebpageController/URL“ if the new webpage at that URL stops currently playing media and won’t immediately start playing new media.
 func (o *STWebpageController) URLIsPlayingVideo() bool {
 	_ret := objc.Send[bool](o.Ptr(), _sTWebpageControllerSelURLIsPlayingVideo)
 	return _ret
@@ -85,7 +87,7 @@ func (o *STWebpageController) SetURLIsPlayingVideo(uRLIsPlayingVideo bool) {
 	o.Ptr().Send(_sTWebpageControllerSelSetURLIsPlayingVideo, uRLIsPlayingVideo)
 }
 
-// A Boolean that indicates whether the webpage is currently displaying a floating picture in picture window. The default value is <doc://com.apple.documentation/documentation/objectivec/no>. Set this value when the webpage starts or stops displaying a Picture in Picture window. - Important: Set this value to <doc://com.apple.documentation/documentation/objectivec/no> prior to changing ``ScreenTime/STWebpageController/URL`` if the new webpage at that URL ends all currently displayed Picture in Picture windows, and won’t immediately display a new one.
+// A Boolean that indicates whether the webpage is currently displaying a floating picture in picture window. The default value is <doc://com.apple.documentation/documentation/objectivec/no>. Set this value when the webpage starts or stops displaying a Picture in Picture window. - Important: Set this value to <doc://com.apple.documentation/documentation/objectivec/no> prior to changing “ScreenTime/STWebpageController/URL“ if the new webpage at that URL ends all currently displayed Picture in Picture windows, and won’t immediately display a new one.
 func (o *STWebpageController) URLIsPictureInPicture() bool {
 	_ret := objc.Send[bool](o.Ptr(), _sTWebpageControllerSelURLIsPictureInPicture)
 	return _ret
@@ -104,11 +106,12 @@ func (o *STWebpageController) URLIsBlocked() bool {
 // An optional identifier for the current browsing profile. The default value is `nil`. This identifier represents a profile and allows you to keep your browsing separate for topics like work, personal, or school. Using `nil` will report web history without a profile identifier. Web browsers with a "default" profile may want to use `nil` in order to match any web history reported prior to this API.
 func (o *STWebpageController) ProfileIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sTWebpageControllerSelProfileIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *STWebpageController) SetProfileIdentifier(profileIdentifier *foundation.NSString) {
 	o.Ptr().Send(_sTWebpageControllerSelSetProfileIdentifier, profileIdentifier.Ptr())
 }
-

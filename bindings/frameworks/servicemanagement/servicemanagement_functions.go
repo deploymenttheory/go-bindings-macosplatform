@@ -9,11 +9,11 @@ import (
 
 var (
 	_fnSMCopyAllJobDictionaries func(unsafe.Pointer) unsafe.Pointer
-	_fnSMJobBless func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSMJobCopyDictionary func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSMJobRemove func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer) uint8
-	_fnSMJobSubmit func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSMLoginItemSetEnabled func(unsafe.Pointer, uint8) uint8
+	_fnSMJobBless               func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSMJobCopyDictionary      func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSMJobRemove              func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer) uint8
+	_fnSMJobSubmit              func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSMLoginItemSetEnabled    func(unsafe.Pointer, uint8) uint8
 )
 
 func SMCopyAllJobDictionaries(domain unsafe.Pointer) unsafe.Pointer {
@@ -39,4 +39,3 @@ func SMJobSubmit(domain unsafe.Pointer, job unsafe.Pointer, auth unsafe.Pointer,
 func SMLoginItemSetEnabled(identifier unsafe.Pointer, enabled uint8) uint8 {
 	return _fnSMLoginItemSetEnabled(identifier, enabled)
 }
-

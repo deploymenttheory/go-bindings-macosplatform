@@ -592,4 +592,3 @@ type MTRUnitTestingClusterTestUnknownCommandParamsProvider interface {
 type MTRUnitTestingClusterTimedInvokeRequestParamsProvider interface {
 	asMTRUnitTestingClusterTimedInvokeRequestParams() *raw.MTRUnitTestingClusterTimedInvokeRequestParams
 }
-

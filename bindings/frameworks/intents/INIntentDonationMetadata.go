@@ -26,4 +26,3 @@ func INIntentDonationMetadataFromID(id objc.ID) *INIntentDonationMetadata {
 	purego.Track(o)
 	return o
 }
-

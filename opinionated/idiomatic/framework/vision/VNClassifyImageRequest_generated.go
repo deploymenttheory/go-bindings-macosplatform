@@ -75,9 +75,13 @@ func (x *ClassifyImageRequest) SupportedIdentifiers() ([]string, error) {
 	}), nil
 }
 
-func (x *ClassifyImageRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
+func (x *ClassifyImageRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNImageBasedRequest
+}
 
-func (x *ClassifyImageRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+func (x *ClassifyImageRequest) asRequest() *raw.VNRequest {
+	return &x.inner.VNImageBasedRequest.VNRequest
+}
 
 // ClassifyImageRequestable is the interface implemented by [ClassifyImageRequest], for mocking and DI.
 type ClassifyImageRequestable interface {
@@ -90,4 +94,3 @@ type ClassifyImageRequestable interface {
 }
 
 var _ ClassifyImageRequestable = (*ClassifyImageRequest)(nil)
-

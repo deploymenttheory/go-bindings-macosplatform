@@ -16,25 +16,25 @@ type DOMHTMLFormElement struct {
 }
 
 var (
-	_clsDOMHTMLFormElement = _objcClass("DOMHTMLFormElement")
-	_dOMHTMLFormElementSelSubmit = objc.RegisterName("submit")
-	_dOMHTMLFormElementSelReset = objc.RegisterName("reset")
-	_dOMHTMLFormElementSelAcceptCharset = objc.RegisterName("acceptCharset")
+	_clsDOMHTMLFormElement                 = _objcClass("DOMHTMLFormElement")
+	_dOMHTMLFormElementSelSubmit           = objc.RegisterName("submit")
+	_dOMHTMLFormElementSelReset            = objc.RegisterName("reset")
+	_dOMHTMLFormElementSelAcceptCharset    = objc.RegisterName("acceptCharset")
 	_dOMHTMLFormElementSelSetAcceptCharset = objc.RegisterName("setAcceptCharset:")
-	_dOMHTMLFormElementSelAction = objc.RegisterName("action")
-	_dOMHTMLFormElementSelSetAction = objc.RegisterName("setAction:")
-	_dOMHTMLFormElementSelEnctype = objc.RegisterName("enctype")
-	_dOMHTMLFormElementSelSetEnctype = objc.RegisterName("setEnctype:")
-	_dOMHTMLFormElementSelEncoding = objc.RegisterName("encoding")
-	_dOMHTMLFormElementSelSetEncoding = objc.RegisterName("setEncoding:")
-	_dOMHTMLFormElementSelMethod = objc.RegisterName("method")
-	_dOMHTMLFormElementSelSetMethod = objc.RegisterName("setMethod:")
-	_dOMHTMLFormElementSelName = objc.RegisterName("name")
-	_dOMHTMLFormElementSelSetName = objc.RegisterName("setName:")
-	_dOMHTMLFormElementSelTarget = objc.RegisterName("target")
-	_dOMHTMLFormElementSelSetTarget = objc.RegisterName("setTarget:")
-	_dOMHTMLFormElementSelElements = objc.RegisterName("elements")
-	_dOMHTMLFormElementSelLength = objc.RegisterName("length")
+	_dOMHTMLFormElementSelAction           = objc.RegisterName("action")
+	_dOMHTMLFormElementSelSetAction        = objc.RegisterName("setAction:")
+	_dOMHTMLFormElementSelEnctype          = objc.RegisterName("enctype")
+	_dOMHTMLFormElementSelSetEnctype       = objc.RegisterName("setEnctype:")
+	_dOMHTMLFormElementSelEncoding         = objc.RegisterName("encoding")
+	_dOMHTMLFormElementSelSetEncoding      = objc.RegisterName("setEncoding:")
+	_dOMHTMLFormElementSelMethod           = objc.RegisterName("method")
+	_dOMHTMLFormElementSelSetMethod        = objc.RegisterName("setMethod:")
+	_dOMHTMLFormElementSelName             = objc.RegisterName("name")
+	_dOMHTMLFormElementSelSetName          = objc.RegisterName("setName:")
+	_dOMHTMLFormElementSelTarget           = objc.RegisterName("target")
+	_dOMHTMLFormElementSelSetTarget        = objc.RegisterName("setTarget:")
+	_dOMHTMLFormElementSelElements         = objc.RegisterName("elements")
+	_dOMHTMLFormElementSelLength           = objc.RegisterName("length")
 )
 
 func DOMHTMLFormElementFromID(id objc.ID) *DOMHTMLFormElement {
@@ -57,7 +57,9 @@ func (o *DOMHTMLFormElement) Reset() {
 
 func (o *DOMHTMLFormElement) AcceptCharset() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLFormElementSelAcceptCharset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -67,7 +69,9 @@ func (o *DOMHTMLFormElement) SetAcceptCharset(acceptCharset *foundation.NSString
 
 func (o *DOMHTMLFormElement) Action() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLFormElementSelAction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -77,7 +81,9 @@ func (o *DOMHTMLFormElement) SetAction(action *foundation.NSString) {
 
 func (o *DOMHTMLFormElement) Enctype() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLFormElementSelEnctype)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -87,7 +93,9 @@ func (o *DOMHTMLFormElement) SetEnctype(enctype *foundation.NSString) {
 
 func (o *DOMHTMLFormElement) Encoding() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLFormElementSelEncoding)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -97,7 +105,9 @@ func (o *DOMHTMLFormElement) SetEncoding(encoding *foundation.NSString) {
 
 func (o *DOMHTMLFormElement) Method() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLFormElementSelMethod)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -107,7 +117,9 @@ func (o *DOMHTMLFormElement) SetMethod(method *foundation.NSString) {
 
 func (o *DOMHTMLFormElement) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLFormElementSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -117,7 +129,9 @@ func (o *DOMHTMLFormElement) SetName(name *foundation.NSString) {
 
 func (o *DOMHTMLFormElement) Target() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLFormElementSelTarget)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -127,7 +141,9 @@ func (o *DOMHTMLFormElement) SetTarget(target *foundation.NSString) {
 
 func (o *DOMHTMLFormElement) Elements() *DOMHTMLCollection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLFormElementSelElements)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMHTMLCollectionFromID(_ret)
 }
 
@@ -135,4 +151,3 @@ func (o *DOMHTMLFormElement) Length() int {
 	_ret := objc.Send[int](o.Ptr(), _dOMHTMLFormElementSelLength)
 	return _ret
 }
-

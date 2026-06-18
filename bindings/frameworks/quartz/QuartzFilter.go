@@ -18,15 +18,15 @@ type QuartzFilter struct {
 }
 
 var (
-	_clsQuartzFilter = _objcClass("QuartzFilter")
-	_quartzFilterSelQuartzFilterWithURL = objc.RegisterName("quartzFilterWithURL:")
-	_quartzFilterSelQuartzFilterWithProperties = objc.RegisterName("quartzFilterWithProperties:")
+	_clsQuartzFilter                              = _objcClass("QuartzFilter")
+	_quartzFilterSelQuartzFilterWithURL           = objc.RegisterName("quartzFilterWithURL:")
+	_quartzFilterSelQuartzFilterWithProperties    = objc.RegisterName("quartzFilterWithProperties:")
 	_quartzFilterSelQuartzFilterWithOutputIntents = objc.RegisterName("quartzFilterWithOutputIntents:")
-	_quartzFilterSelProperties = objc.RegisterName("properties")
-	_quartzFilterSelUrl = objc.RegisterName("url")
-	_quartzFilterSelLocalizedName = objc.RegisterName("localizedName")
-	_quartzFilterSelApplyToContext = objc.RegisterName("applyToContext:")
-	_quartzFilterSelRemoveFromContext = objc.RegisterName("removeFromContext:")
+	_quartzFilterSelProperties                    = objc.RegisterName("properties")
+	_quartzFilterSelUrl                           = objc.RegisterName("url")
+	_quartzFilterSelLocalizedName                 = objc.RegisterName("localizedName")
+	_quartzFilterSelApplyToContext                = objc.RegisterName("applyToContext:")
+	_quartzFilterSelRemoveFromContext             = objc.RegisterName("removeFromContext:")
 )
 
 func QuartzFilterFromID(id objc.ID) *QuartzFilter {
@@ -41,19 +41,25 @@ func QuartzFilterFromID(id objc.ID) *QuartzFilter {
 
 func QuartzFilterQuartzFilterWithURL(aURL *foundation.NSURL) *QuartzFilter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsQuartzFilter), _quartzFilterSelQuartzFilterWithURL, aURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return QuartzFilterFromID(_ret)
 }
 
 func QuartzFilterQuartzFilterWithProperties(properties *foundation.NSDictionary[objc.ID, objc.ID]) *QuartzFilter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsQuartzFilter), _quartzFilterSelQuartzFilterWithProperties, properties)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return QuartzFilterFromID(_ret)
 }
 
 func QuartzFilterQuartzFilterWithOutputIntents(outputIntents *foundation.NSArray[objc.ID]) *QuartzFilter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsQuartzFilter), _quartzFilterSelQuartzFilterWithOutputIntents, outputIntents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return QuartzFilterFromID(_ret)
 }
 
@@ -64,13 +70,17 @@ func (o *QuartzFilter) Properties() *foundation.NSDictionary[objc.ID, objc.ID] {
 
 func (o *QuartzFilter) Url() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _quartzFilterSelUrl)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *QuartzFilter) LocalizedName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _quartzFilterSelLocalizedName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -82,4 +92,3 @@ func (o *QuartzFilter) ApplyToContext(aContext unsafe.Pointer) bool {
 func (o *QuartzFilter) RemoveFromContext(aContext unsafe.Pointer) {
 	o.Ptr().Send(_quartzFilterSelRemoveFromContext, aContext)
 }
-

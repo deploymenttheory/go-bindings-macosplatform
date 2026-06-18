@@ -89,4 +89,3 @@ type MultiheadAttentionDescriptorable interface {
 }
 
 var _ MultiheadAttentionDescriptorable = (*MultiheadAttentionDescriptor)(nil)
-

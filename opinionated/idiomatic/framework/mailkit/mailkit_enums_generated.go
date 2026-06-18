@@ -39,15 +39,15 @@ func (e MEComposeUserAction) String() string {
 type MEMessageActionFlag int64
 
 const (
-	MEMessageActionFlagNone MEMessageActionFlag = 0
+	MEMessageActionFlagNone         MEMessageActionFlag = 0
 	MEMessageActionFlagDefaultColor MEMessageActionFlag = 1
-	MEMessageActionFlagRed MEMessageActionFlag = 2
-	MEMessageActionFlagOrange MEMessageActionFlag = 3
-	MEMessageActionFlagYellow MEMessageActionFlag = 4
-	MEMessageActionFlagGreen MEMessageActionFlag = 5
-	MEMessageActionFlagBlue MEMessageActionFlag = 6
-	MEMessageActionFlagPurple MEMessageActionFlag = 7
-	MEMessageActionFlagGray MEMessageActionFlag = 8
+	MEMessageActionFlagRed          MEMessageActionFlag = 2
+	MEMessageActionFlagOrange       MEMessageActionFlag = 3
+	MEMessageActionFlagYellow       MEMessageActionFlag = 4
+	MEMessageActionFlagGreen        MEMessageActionFlag = 5
+	MEMessageActionFlagBlue         MEMessageActionFlag = 6
+	MEMessageActionFlagPurple       MEMessageActionFlag = 7
+	MEMessageActionFlagGray         MEMessageActionFlag = 8
 )
 
 func (e MEMessageActionFlag) String() string {
@@ -78,14 +78,14 @@ func (e MEMessageActionFlag) String() string {
 type MEMessageActionMessageColor int64
 
 const (
-	MEMessageActionMessageColorNone MEMessageActionMessageColor = 0
-	MEMessageActionMessageColorGreen MEMessageActionMessageColor = 1
+	MEMessageActionMessageColorNone   MEMessageActionMessageColor = 0
+	MEMessageActionMessageColorGreen  MEMessageActionMessageColor = 1
 	MEMessageActionMessageColorYellow MEMessageActionMessageColor = 2
 	MEMessageActionMessageColorOrange MEMessageActionMessageColor = 3
-	MEMessageActionMessageColorRed MEMessageActionMessageColor = 4
+	MEMessageActionMessageColorRed    MEMessageActionMessageColor = 4
 	MEMessageActionMessageColorPurple MEMessageActionMessageColor = 5
-	MEMessageActionMessageColorBlue MEMessageActionMessageColor = 6
-	MEMessageActionMessageColorGray MEMessageActionMessageColor = 7
+	MEMessageActionMessageColorBlue   MEMessageActionMessageColor = 6
+	MEMessageActionMessageColorGray   MEMessageActionMessageColor = 7
 )
 
 func (e MEMessageActionMessageColor) String() string {
@@ -114,9 +114,9 @@ func (e MEMessageActionMessageColor) String() string {
 type MEMessageEncryptionState int64
 
 const (
-	MEMessageEncryptionStateUnknown MEMessageEncryptionState = 0
+	MEMessageEncryptionStateUnknown      MEMessageEncryptionState = 0
 	MEMessageEncryptionStateNotEncrypted MEMessageEncryptionState = 1
-	MEMessageEncryptionStateEncrypted MEMessageEncryptionState = 2
+	MEMessageEncryptionStateEncrypted    MEMessageEncryptionState = 2
 )
 
 func (e MEMessageEncryptionState) String() string {
@@ -136,8 +136,8 @@ type MEMessageState int64
 
 const (
 	MEMessageStateReceived MEMessageState = 0
-	MEMessageStateDraft MEMessageState = 1
-	MEMessageStateSending MEMessageState = 2
+	MEMessageStateDraft    MEMessageState = 1
+	MEMessageStateSending  MEMessageState = 2
 )
 
 func (e MEMessageState) String() string {
@@ -152,4 +152,3 @@ func (e MEMessageState) String() string {
 		return fmt.Sprintf("MEMessageState(%d)", int64(e))
 	}
 }
-

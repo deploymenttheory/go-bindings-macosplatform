@@ -130,4 +130,3 @@ type Animationable interface {
 }
 
 var _ Animationable = (*Animation)(nil)
-

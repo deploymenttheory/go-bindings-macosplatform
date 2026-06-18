@@ -170,4 +170,3 @@ type SampleCursorable interface {
 }
 
 var _ SampleCursorable = (*SampleCursor)(nil)
-

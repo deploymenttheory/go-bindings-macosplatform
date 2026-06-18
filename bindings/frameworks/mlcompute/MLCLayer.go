@@ -16,14 +16,14 @@ type MLCLayer struct {
 }
 
 var (
-	_clsMLCLayer = _objcClass("MLCLayer")
+	_clsMLCLayer                         = _objcClass("MLCLayer")
 	_mLCLayerSelSupportsDataTypeOnDevice = objc.RegisterName("supportsDataType:onDevice:")
-	_mLCLayerSelLayerID = objc.RegisterName("layerID")
-	_mLCLayerSelLabel = objc.RegisterName("label")
-	_mLCLayerSelSetLabel = objc.RegisterName("setLabel:")
-	_mLCLayerSelIsDebuggingEnabled = objc.RegisterName("isDebuggingEnabled")
-	_mLCLayerSelSetIsDebuggingEnabled = objc.RegisterName("setIsDebuggingEnabled:")
-	_mLCLayerSelDeviceType = objc.RegisterName("deviceType")
+	_mLCLayerSelLayerID                  = objc.RegisterName("layerID")
+	_mLCLayerSelLabel                    = objc.RegisterName("label")
+	_mLCLayerSelSetLabel                 = objc.RegisterName("setLabel:")
+	_mLCLayerSelIsDebuggingEnabled       = objc.RegisterName("isDebuggingEnabled")
+	_mLCLayerSelSetIsDebuggingEnabled    = objc.RegisterName("setIsDebuggingEnabled:")
+	_mLCLayerSelDeviceType               = objc.RegisterName("deviceType")
 )
 
 func MLCLayerFromID(id objc.ID) *MLCLayer {
@@ -51,7 +51,9 @@ func (o *MLCLayer) LayerID() uint {
 // @property   label @abstract   A string to help identify this object.
 func (o *MLCLayer) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCLayerSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -74,4 +76,3 @@ func (o *MLCLayer) DeviceType() MLCDeviceType {
 	_ret := objc.Send[MLCDeviceType](o.Ptr(), _mLCLayerSelDeviceType)
 	return _ret
 }
-

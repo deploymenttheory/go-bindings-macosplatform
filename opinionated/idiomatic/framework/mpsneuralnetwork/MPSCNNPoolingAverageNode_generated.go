@@ -48,9 +48,13 @@ func (x *CNNPoolingAverageNode) WithLabel(label string) *CNNPoolingAverageNode {
 	return x
 }
 
-func (x *CNNPoolingAverageNode) asCNNPoolingNode() *raw.MPSCNNPoolingNode { return &x.inner.MPSCNNPoolingNode }
+func (x *CNNPoolingAverageNode) asCNNPoolingNode() *raw.MPSCNNPoolingNode {
+	return &x.inner.MPSCNNPoolingNode
+}
 
-func (x *CNNPoolingAverageNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSCNNPoolingNode.MPSNNFilterNode }
+func (x *CNNPoolingAverageNode) asNNFilterNode() *raw.MPSNNFilterNode {
+	return &x.inner.MPSCNNPoolingNode.MPSNNFilterNode
+}
 
 // CNNPoolingAverageNodeable is the interface implemented by [CNNPoolingAverageNode], for mocking and DI.
 type CNNPoolingAverageNodeable interface {
@@ -60,4 +64,3 @@ type CNNPoolingAverageNodeable interface {
 }
 
 var _ CNNPoolingAverageNodeable = (*CNNPoolingAverageNode)(nil)
-

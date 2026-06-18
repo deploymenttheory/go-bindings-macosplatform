@@ -16,42 +16,42 @@ type DOMRange struct {
 }
 
 var (
-	_clsDOMRange = _objcClass("DOMRange")
-	_dOMRangeSelSetStartOffset = objc.RegisterName("setStart:offset:")
-	_dOMRangeSelSetEndOffset = objc.RegisterName("setEnd:offset:")
-	_dOMRangeSelSetStartBefore = objc.RegisterName("setStartBefore:")
-	_dOMRangeSelSetStartAfter = objc.RegisterName("setStartAfter:")
-	_dOMRangeSelSetEndBefore = objc.RegisterName("setEndBefore:")
-	_dOMRangeSelSetEndAfter = objc.RegisterName("setEndAfter:")
-	_dOMRangeSelCollapse = objc.RegisterName("collapse:")
-	_dOMRangeSelSelectNode = objc.RegisterName("selectNode:")
-	_dOMRangeSelSelectNodeContents = objc.RegisterName("selectNodeContents:")
+	_clsDOMRange                                 = _objcClass("DOMRange")
+	_dOMRangeSelSetStartOffset                   = objc.RegisterName("setStart:offset:")
+	_dOMRangeSelSetEndOffset                     = objc.RegisterName("setEnd:offset:")
+	_dOMRangeSelSetStartBefore                   = objc.RegisterName("setStartBefore:")
+	_dOMRangeSelSetStartAfter                    = objc.RegisterName("setStartAfter:")
+	_dOMRangeSelSetEndBefore                     = objc.RegisterName("setEndBefore:")
+	_dOMRangeSelSetEndAfter                      = objc.RegisterName("setEndAfter:")
+	_dOMRangeSelCollapse                         = objc.RegisterName("collapse:")
+	_dOMRangeSelSelectNode                       = objc.RegisterName("selectNode:")
+	_dOMRangeSelSelectNodeContents               = objc.RegisterName("selectNodeContents:")
 	_dOMRangeSelCompareBoundaryPointsSourceRange = objc.RegisterName("compareBoundaryPoints:sourceRange:")
-	_dOMRangeSelDeleteContents = objc.RegisterName("deleteContents")
-	_dOMRangeSelExtractContents = objc.RegisterName("extractContents")
-	_dOMRangeSelCloneContents = objc.RegisterName("cloneContents")
-	_dOMRangeSelInsertNode = objc.RegisterName("insertNode:")
-	_dOMRangeSelSurroundContents = objc.RegisterName("surroundContents:")
-	_dOMRangeSelCloneRange = objc.RegisterName("cloneRange")
-	_dOMRangeSelToString = objc.RegisterName("toString")
-	_dOMRangeSelDetach = objc.RegisterName("detach")
-	_dOMRangeSelCreateContextualFragment = objc.RegisterName("createContextualFragment:")
-	_dOMRangeSelCompareNode = objc.RegisterName("compareNode:")
-	_dOMRangeSelIntersectsNode = objc.RegisterName("intersectsNode:")
-	_dOMRangeSelComparePointOffset = objc.RegisterName("comparePoint:offset:")
-	_dOMRangeSelIsPointInRangeOffset = objc.RegisterName("isPointInRange:offset:")
-	_dOMRangeSelStartContainer = objc.RegisterName("startContainer")
-	_dOMRangeSelStartOffset = objc.RegisterName("startOffset")
-	_dOMRangeSelEndContainer = objc.RegisterName("endContainer")
-	_dOMRangeSelEndOffset = objc.RegisterName("endOffset")
-	_dOMRangeSelCollapsed = objc.RegisterName("collapsed")
-	_dOMRangeSelCommonAncestorContainer = objc.RegisterName("commonAncestorContainer")
-	_dOMRangeSelText = objc.RegisterName("text")
-	_dOMRangeSelSetStart = objc.RegisterName("setStart::")
-	_dOMRangeSelSetEnd = objc.RegisterName("setEnd::")
-	_dOMRangeSelCompareBoundaryPoints = objc.RegisterName("compareBoundaryPoints::")
-	_dOMRangeSelWebArchive = objc.RegisterName("webArchive")
-	_dOMRangeSelMarkupString = objc.RegisterName("markupString")
+	_dOMRangeSelDeleteContents                   = objc.RegisterName("deleteContents")
+	_dOMRangeSelExtractContents                  = objc.RegisterName("extractContents")
+	_dOMRangeSelCloneContents                    = objc.RegisterName("cloneContents")
+	_dOMRangeSelInsertNode                       = objc.RegisterName("insertNode:")
+	_dOMRangeSelSurroundContents                 = objc.RegisterName("surroundContents:")
+	_dOMRangeSelCloneRange                       = objc.RegisterName("cloneRange")
+	_dOMRangeSelToString                         = objc.RegisterName("toString")
+	_dOMRangeSelDetach                           = objc.RegisterName("detach")
+	_dOMRangeSelCreateContextualFragment         = objc.RegisterName("createContextualFragment:")
+	_dOMRangeSelCompareNode                      = objc.RegisterName("compareNode:")
+	_dOMRangeSelIntersectsNode                   = objc.RegisterName("intersectsNode:")
+	_dOMRangeSelComparePointOffset               = objc.RegisterName("comparePoint:offset:")
+	_dOMRangeSelIsPointInRangeOffset             = objc.RegisterName("isPointInRange:offset:")
+	_dOMRangeSelStartContainer                   = objc.RegisterName("startContainer")
+	_dOMRangeSelStartOffset                      = objc.RegisterName("startOffset")
+	_dOMRangeSelEndContainer                     = objc.RegisterName("endContainer")
+	_dOMRangeSelEndOffset                        = objc.RegisterName("endOffset")
+	_dOMRangeSelCollapsed                        = objc.RegisterName("collapsed")
+	_dOMRangeSelCommonAncestorContainer          = objc.RegisterName("commonAncestorContainer")
+	_dOMRangeSelText                             = objc.RegisterName("text")
+	_dOMRangeSelSetStart                         = objc.RegisterName("setStart::")
+	_dOMRangeSelSetEnd                           = objc.RegisterName("setEnd::")
+	_dOMRangeSelCompareBoundaryPoints            = objc.RegisterName("compareBoundaryPoints::")
+	_dOMRangeSelWebArchive                       = objc.RegisterName("webArchive")
+	_dOMRangeSelMarkupString                     = objc.RegisterName("markupString")
 )
 
 func DOMRangeFromID(id objc.ID) *DOMRange {
@@ -111,13 +111,17 @@ func (o *DOMRange) DeleteContents() {
 
 func (o *DOMRange) ExtractContents() *DOMDocumentFragment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMRangeSelExtractContents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMDocumentFragmentFromID(_ret)
 }
 
 func (o *DOMRange) CloneContents() *DOMDocumentFragment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMRangeSelCloneContents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMDocumentFragmentFromID(_ret)
 }
 
@@ -131,13 +135,17 @@ func (o *DOMRange) SurroundContents(newParent *DOMNode) {
 
 func (o *DOMRange) CloneRange() *DOMRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMRangeSelCloneRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMRangeFromID(_ret)
 }
 
 func (o *DOMRange) ToString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMRangeSelToString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -147,7 +155,9 @@ func (o *DOMRange) Detach() {
 
 func (o *DOMRange) CreateContextualFragment(html *foundation.NSString) *DOMDocumentFragment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMRangeSelCreateContextualFragment, html.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMDocumentFragmentFromID(_ret)
 }
 
@@ -173,7 +183,9 @@ func (o *DOMRange) IsPointInRangeOffset(refNode *DOMNode, offset int) bool {
 
 func (o *DOMRange) StartContainer() *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMRangeSelStartContainer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
@@ -184,7 +196,9 @@ func (o *DOMRange) StartOffset() int {
 
 func (o *DOMRange) EndContainer() *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMRangeSelEndContainer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
@@ -200,13 +214,17 @@ func (o *DOMRange) Collapsed() bool {
 
 func (o *DOMRange) CommonAncestorContainer() *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMRangeSelCommonAncestorContainer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMRange) Text() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMRangeSelText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -226,14 +244,17 @@ func (o *DOMRange) CompareBoundaryPoints(how uint16, sourceRange *DOMRange) int1
 // @property webArchive @abstract A WebArchive representing the range.
 func (o *DOMRange) WebArchive() *WebArchive {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMRangeSelWebArchive)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebArchiveFromID(_ret)
 }
 
 // @property markupString @abstract A markup string representing the range.
 func (o *DOMRange) MarkupString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMRangeSelMarkupString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

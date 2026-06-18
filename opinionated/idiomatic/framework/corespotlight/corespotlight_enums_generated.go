@@ -13,7 +13,7 @@ import (
 type CSSearchQuerySourceOptions uint64
 
 const (
-	CSSearchQuerySourceOptionDefault CSSearchQuerySourceOptions = 0
+	CSSearchQuerySourceOptionDefault   CSSearchQuerySourceOptions = 0
 	CSSearchQuerySourceOptionAllowMail CSSearchQuerySourceOptions = 1
 )
 
@@ -32,9 +32,9 @@ func (e CSSearchQuerySourceOptions) String() string {
 type CSSearchableItemUpdateListenerOptions uint64
 
 const (
-	CSSearchableItemUpdateListenerOptionDefault CSSearchableItemUpdateListenerOptions = 0
+	CSSearchableItemUpdateListenerOptionDefault       CSSearchableItemUpdateListenerOptions = 0
 	CSSearchableItemUpdateListenerOptionSummarization CSSearchableItemUpdateListenerOptions = 2
-	CSSearchableItemUpdateListenerOptionPriority CSSearchableItemUpdateListenerOptions = 4
+	CSSearchableItemUpdateListenerOptionPriority      CSSearchableItemUpdateListenerOptions = 4
 )
 
 func (e CSSearchableItemUpdateListenerOptions) String() string {
@@ -54,8 +54,8 @@ func (e CSSearchableItemUpdateListenerOptions) String() string {
 type CSSuggestionKind int64
 
 const (
-	CSSuggestionKindNone CSSuggestionKind = 0
-	CSSuggestionKindCustom CSSuggestionKind = 1
+	CSSuggestionKindNone    CSSuggestionKind = 0
+	CSSuggestionKindCustom  CSSuggestionKind = 1
 	CSSuggestionKindDefault CSSuggestionKind = 2
 )
 
@@ -75,9 +75,9 @@ func (e CSSuggestionKind) String() string {
 type CSUserInteraction int64
 
 const (
-	CSUserInteractionSelect CSUserInteraction = 0
+	CSUserInteractionSelect  CSUserInteraction = 0
 	CSUserInteractionDefault CSUserInteraction = 0
-	CSUserInteractionFocus CSUserInteraction = 1
+	CSUserInteractionFocus   CSUserInteraction = 1
 )
 
 func (e CSUserInteraction) String() string {
@@ -90,4 +90,3 @@ func (e CSUserInteraction) String() string {
 		return fmt.Sprintf("CSUserInteraction(%d)", int64(e))
 	}
 }
-

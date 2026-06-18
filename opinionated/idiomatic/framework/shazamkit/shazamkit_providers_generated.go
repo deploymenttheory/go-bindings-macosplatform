@@ -17,4 +17,3 @@ type CatalogProvider interface {
 type MediaItemProvider interface {
 	asMediaItem() *raw.SHMediaItem
 }
-

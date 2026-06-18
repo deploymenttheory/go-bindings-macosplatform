@@ -92,4 +92,3 @@ type ScoreItemable interface {
 }
 
 var _ ScoreItemable = (*ScoreItem)(nil)
-

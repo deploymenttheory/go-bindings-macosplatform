@@ -182,4 +182,3 @@ type LinguisticTaggerable interface {
 }
 
 var _ LinguisticTaggerable = (*LinguisticTagger)(nil)
-

@@ -19,25 +19,25 @@ type IMKInputController struct {
 }
 
 var (
-	_clsIMKInputController = _objcClass("IMKInputController")
-	_iMKInputControllerSelInitWithServerDelegateClient = objc.RegisterName("initWithServer:delegate:client:")
-	_iMKInputControllerSelUpdateComposition = objc.RegisterName("updateComposition")
-	_iMKInputControllerSelCancelComposition = objc.RegisterName("cancelComposition")
-	_iMKInputControllerSelCompositionAttributesAtRange = objc.RegisterName("compositionAttributesAtRange:")
-	_iMKInputControllerSelSelectionRange = objc.RegisterName("selectionRange")
-	_iMKInputControllerSelReplacementRange = objc.RegisterName("replacementRange")
-	_iMKInputControllerSelMarkForStyleAtRange = objc.RegisterName("markForStyle:atRange:")
+	_clsIMKInputController                                     = _objcClass("IMKInputController")
+	_iMKInputControllerSelInitWithServerDelegateClient         = objc.RegisterName("initWithServer:delegate:client:")
+	_iMKInputControllerSelUpdateComposition                    = objc.RegisterName("updateComposition")
+	_iMKInputControllerSelCancelComposition                    = objc.RegisterName("cancelComposition")
+	_iMKInputControllerSelCompositionAttributesAtRange         = objc.RegisterName("compositionAttributesAtRange:")
+	_iMKInputControllerSelSelectionRange                       = objc.RegisterName("selectionRange")
+	_iMKInputControllerSelReplacementRange                     = objc.RegisterName("replacementRange")
+	_iMKInputControllerSelMarkForStyleAtRange                  = objc.RegisterName("markForStyle:atRange:")
 	_iMKInputControllerSelDoCommandBySelectorCommandDictionary = objc.RegisterName("doCommandBySelector:commandDictionary:")
-	_iMKInputControllerSelHidePalettes = objc.RegisterName("hidePalettes")
-	_iMKInputControllerSelMenu = objc.RegisterName("menu")
-	_iMKInputControllerSelDelegate = objc.RegisterName("delegate")
-	_iMKInputControllerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_iMKInputControllerSelServer = objc.RegisterName("server")
-	_iMKInputControllerSelClient = objc.RegisterName("client")
-	_iMKInputControllerSelInputControllerWillClose = objc.RegisterName("inputControllerWillClose")
-	_iMKInputControllerSelAnnotationSelectedForCandidate = objc.RegisterName("annotationSelected:forCandidate:")
-	_iMKInputControllerSelCandidateSelectionChanged = objc.RegisterName("candidateSelectionChanged:")
-	_iMKInputControllerSelCandidateSelected = objc.RegisterName("candidateSelected:")
+	_iMKInputControllerSelHidePalettes                         = objc.RegisterName("hidePalettes")
+	_iMKInputControllerSelMenu                                 = objc.RegisterName("menu")
+	_iMKInputControllerSelDelegate                             = objc.RegisterName("delegate")
+	_iMKInputControllerSelSetDelegate                          = objc.RegisterName("setDelegate:")
+	_iMKInputControllerSelServer                               = objc.RegisterName("server")
+	_iMKInputControllerSelClient                               = objc.RegisterName("client")
+	_iMKInputControllerSelInputControllerWillClose             = objc.RegisterName("inputControllerWillClose")
+	_iMKInputControllerSelAnnotationSelectedForCandidate       = objc.RegisterName("annotationSelected:forCandidate:")
+	_iMKInputControllerSelCandidateSelectionChanged            = objc.RegisterName("candidateSelectionChanged:")
+	_iMKInputControllerSelCandidateSelected                    = objc.RegisterName("candidateSelected:")
 )
 
 func IMKInputControllerFromID(id objc.ID) *IMKInputController {
@@ -103,7 +103,9 @@ func (o *IMKInputController) HidePalettes() {
 // @method @abstract   Returns a menu of input method specific commands. @discussion This method is called whenever the menu needs to be drawn so that input methods can update the menu to reflect their current state. The returned NSMenu is an autoreleased object.
 func (o *IMKInputController) Menu() *appkit.NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iMKInputControllerSelMenu)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSMenuFromID(_ret)
 }
 
@@ -121,7 +123,9 @@ func (o *IMKInputController) SetDelegate(newDelegate objc.ID) {
 // @method @abstract   Return the server object which is managing this input controller. The returned IMKServer is an autoreleased object.
 func (o *IMKInputController) Server() *IMKServer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iMKInputControllerSelServer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IMKServerFromID(_ret)
 }
 
@@ -150,4 +154,3 @@ func (o *IMKInputController) CandidateSelectionChanged(candidateString *foundati
 func (o *IMKInputController) CandidateSelected(candidateString *foundation.NSAttributedString) {
 	o.Ptr().Send(_iMKInputControllerSelCandidateSelected, candidateString.Ptr())
 }
-

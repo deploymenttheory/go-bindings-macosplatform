@@ -16,18 +16,18 @@ type MXMetaData struct {
 }
 
 var (
-	_clsMXMetaData = _objcClass("MXMetaData")
-	_mXMetaDataSelJSONRepresentation = objc.RegisterName("JSONRepresentation")
+	_clsMXMetaData                         = _objcClass("MXMetaData")
+	_mXMetaDataSelJSONRepresentation       = objc.RegisterName("JSONRepresentation")
 	_mXMetaDataSelDictionaryRepresentation = objc.RegisterName("dictionaryRepresentation")
-	_mXMetaDataSelRegionFormat = objc.RegisterName("regionFormat")
-	_mXMetaDataSelOsVersion = objc.RegisterName("osVersion")
-	_mXMetaDataSelDeviceType = objc.RegisterName("deviceType")
-	_mXMetaDataSelApplicationBuildVersion = objc.RegisterName("applicationBuildVersion")
-	_mXMetaDataSelPlatformArchitecture = objc.RegisterName("platformArchitecture")
-	_mXMetaDataSelLowPowerModeEnabled = objc.RegisterName("lowPowerModeEnabled")
-	_mXMetaDataSelIsTestFlightApp = objc.RegisterName("isTestFlightApp")
-	_mXMetaDataSelPid = objc.RegisterName("pid")
-	_mXMetaDataSelBundleIdentifier = objc.RegisterName("bundleIdentifier")
+	_mXMetaDataSelRegionFormat             = objc.RegisterName("regionFormat")
+	_mXMetaDataSelOsVersion                = objc.RegisterName("osVersion")
+	_mXMetaDataSelDeviceType               = objc.RegisterName("deviceType")
+	_mXMetaDataSelApplicationBuildVersion  = objc.RegisterName("applicationBuildVersion")
+	_mXMetaDataSelPlatformArchitecture     = objc.RegisterName("platformArchitecture")
+	_mXMetaDataSelLowPowerModeEnabled      = objc.RegisterName("lowPowerModeEnabled")
+	_mXMetaDataSelIsTestFlightApp          = objc.RegisterName("isTestFlightApp")
+	_mXMetaDataSelPid                      = objc.RegisterName("pid")
+	_mXMetaDataSelBundleIdentifier         = objc.RegisterName("bundleIdentifier")
 )
 
 func MXMetaDataFromID(id objc.ID) *MXMetaData {
@@ -43,7 +43,9 @@ func MXMetaDataFromID(id objc.ID) *MXMetaData {
 // @method        JSONRepresentation @abstract      Convenience method to return a JSON representation of this metadata. @result        An NSData object containing the JSON representation
 func (o *MXMetaData) JSONRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXMetaDataSelJSONRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -56,35 +58,45 @@ func (o *MXMetaData) DictionaryRepresentation() *foundation.NSDictionary[objc.ID
 // @property      regionFormat @abstract      An NSString designating the region format associated with the application.
 func (o *MXMetaData) RegionFormat() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXMetaDataSelRegionFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property      osVersion @abstract      An NSString designating the OS version associated with the device.
 func (o *MXMetaData) OsVersion() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXMetaDataSelOsVersion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property      deviceType @abstract      An NSString designating the device type associated with this device.
 func (o *MXMetaData) DeviceType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXMetaDataSelDeviceType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property      applicationBuildVersion @abstract      An NSString designating the app build version.
 func (o *MXMetaData) ApplicationBuildVersion() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXMetaDataSelApplicationBuildVersion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property      platformArchitecture @abstract      An NSString designating the current architecture.
 func (o *MXMetaData) PlatformArchitecture() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXMetaDataSelPlatformArchitecture)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -105,7 +117,8 @@ func (o *MXMetaData) Pid() int {
 
 func (o *MXMetaData) BundleIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXMetaDataSelBundleIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

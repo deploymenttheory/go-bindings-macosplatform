@@ -96,7 +96,9 @@ func (x *DOMText) asDOMNode() *raw.DOMNode { return &x.inner.DOMCharacterData.DO
 
 func (x *DOMText) asDOMObject() *raw.DOMObject { return &x.inner.DOMCharacterData.DOMNode.DOMObject }
 
-func (x *DOMText) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMCharacterData.DOMNode.DOMObject.WebScriptObject }
+func (x *DOMText) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMCharacterData.DOMNode.DOMObject.WebScriptObject
+}
 
 // DOMTextable is the interface implemented by [DOMText], for mocking and DI.
 type DOMTextable interface {
@@ -111,4 +113,3 @@ type DOMTextable interface {
 }
 
 var _ DOMTextable = (*DOMText)(nil)
-

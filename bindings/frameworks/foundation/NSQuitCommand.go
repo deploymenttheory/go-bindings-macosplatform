@@ -15,7 +15,7 @@ type NSQuitCommand struct {
 }
 
 var (
-	_clsNSQuitCommand = _objcClass("NSQuitCommand")
+	_clsNSQuitCommand            = _objcClass("NSQuitCommand")
 	_nSQuitCommandSelSaveOptions = objc.RegisterName("saveOptions")
 )
 
@@ -33,4 +33,3 @@ func (o *NSQuitCommand) SaveOptions() NSSaveOptions {
 	_ret := objc.Send[NSSaveOptions](o.Ptr(), _nSQuitCommandSelSaveOptions)
 	return _ret
 }
-

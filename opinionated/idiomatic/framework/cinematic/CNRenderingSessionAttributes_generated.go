@@ -47,4 +47,3 @@ type RenderingSessionAttributesable interface {
 }
 
 var _ RenderingSessionAttributesable = (*RenderingSessionAttributes)(nil)
-

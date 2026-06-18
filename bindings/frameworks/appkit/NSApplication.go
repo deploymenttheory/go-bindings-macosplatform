@@ -18,123 +18,123 @@ type NSApplication struct {
 }
 
 var (
-	_clsNSApplication = _objcClass("NSApplication")
-	_nSApplicationSelHide = objc.RegisterName("hide:")
-	_nSApplicationSelUnhide = objc.RegisterName("unhide:")
-	_nSApplicationSelUnhideWithoutActivation = objc.RegisterName("unhideWithoutActivation")
-	_nSApplicationSelWindowWithWindowNumber = objc.RegisterName("windowWithWindowNumber:")
-	_nSApplicationSelDeactivate = objc.RegisterName("deactivate")
-	_nSApplicationSelActivateIgnoringOtherApps = objc.RegisterName("activateIgnoringOtherApps:")
-	_nSApplicationSelActivate = objc.RegisterName("activate")
-	_nSApplicationSelYieldActivationToApplication = objc.RegisterName("yieldActivationToApplication:")
-	_nSApplicationSelYieldActivationToApplicationWithBundleIdentifier = objc.RegisterName("yieldActivationToApplicationWithBundleIdentifier:")
-	_nSApplicationSelHideOtherApplications = objc.RegisterName("hideOtherApplications:")
-	_nSApplicationSelUnhideAllApplications = objc.RegisterName("unhideAllApplications:")
-	_nSApplicationSelFinishLaunching = objc.RegisterName("finishLaunching")
-	_nSApplicationSelRun = objc.RegisterName("run")
-	_nSApplicationSelRunModalForWindow = objc.RegisterName("runModalForWindow:")
-	_nSApplicationSelStop = objc.RegisterName("stop:")
-	_nSApplicationSelStopModal = objc.RegisterName("stopModal")
-	_nSApplicationSelStopModalWithCode = objc.RegisterName("stopModalWithCode:")
-	_nSApplicationSelAbortModal = objc.RegisterName("abortModal")
-	_nSApplicationSelBeginModalSessionForWindow = objc.RegisterName("beginModalSessionForWindow:")
-	_nSApplicationSelRunModalSession = objc.RegisterName("runModalSession:")
-	_nSApplicationSelEndModalSession = objc.RegisterName("endModalSession:")
-	_nSApplicationSelTerminate = objc.RegisterName("terminate:")
-	_nSApplicationSelRequestUserAttention = objc.RegisterName("requestUserAttention:")
-	_nSApplicationSelCancelUserAttentionRequest = objc.RegisterName("cancelUserAttentionRequest:")
-	_nSApplicationSelEnumerateWindowsWithOptionsUsing = objc.RegisterName("enumerateWindowsWithOptions:usingBlock:")
-	_nSApplicationSelPreventWindowOrdering = objc.RegisterName("preventWindowOrdering")
-	_nSApplicationSelSetWindowsNeedUpdate = objc.RegisterName("setWindowsNeedUpdate:")
-	_nSApplicationSelUpdateWindows = objc.RegisterName("updateWindows")
-	_nSApplicationSelActivationPolicy = objc.RegisterName("activationPolicy")
-	_nSApplicationSelSetActivationPolicy = objc.RegisterName("setActivationPolicy:")
-	_nSApplicationSelReportException = objc.RegisterName("reportException:")
-	_nSApplicationSelDetachDrawingThreadToTargetWithObject = objc.RegisterName("detachDrawingThread:toTarget:withObject:")
-	_nSApplicationSelReplyToApplicationShouldTerminate = objc.RegisterName("replyToApplicationShouldTerminate:")
-	_nSApplicationSelReplyToOpenOrPrint = objc.RegisterName("replyToOpenOrPrint:")
-	_nSApplicationSelOrderFrontCharacterPalette = objc.RegisterName("orderFrontCharacterPalette:")
-	_nSApplicationSelSharedApplication = objc.RegisterName("sharedApplication")
-	_nSApplicationSelDelegate = objc.RegisterName("delegate")
-	_nSApplicationSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSApplicationSelMainWindow = objc.RegisterName("mainWindow")
-	_nSApplicationSelKeyWindow = objc.RegisterName("keyWindow")
-	_nSApplicationSelIsActive = objc.RegisterName("isActive")
-	_nSApplicationSelIsHidden = objc.RegisterName("isHidden")
-	_nSApplicationSelIsRunning = objc.RegisterName("isRunning")
-	_nSApplicationSelApplicationShouldSuppressHighDynamicRangeContent = objc.RegisterName("applicationShouldSuppressHighDynamicRangeContent")
-	_nSApplicationSelModalWindow = objc.RegisterName("modalWindow")
-	_nSApplicationSelWindows = objc.RegisterName("windows")
-	_nSApplicationSelMainMenu = objc.RegisterName("mainMenu")
-	_nSApplicationSelSetMainMenu = objc.RegisterName("setMainMenu:")
-	_nSApplicationSelHelpMenu = objc.RegisterName("helpMenu")
-	_nSApplicationSelSetHelpMenu = objc.RegisterName("setHelpMenu:")
-	_nSApplicationSelApplicationIconImage = objc.RegisterName("applicationIconImage")
-	_nSApplicationSelSetApplicationIconImage = objc.RegisterName("setApplicationIconImage:")
-	_nSApplicationSelDockTile = objc.RegisterName("dockTile")
-	_nSApplicationSelPresentationOptions = objc.RegisterName("presentationOptions")
-	_nSApplicationSelSetPresentationOptions = objc.RegisterName("setPresentationOptions:")
-	_nSApplicationSelCurrentSystemPresentationOptions = objc.RegisterName("currentSystemPresentationOptions")
-	_nSApplicationSelOcclusionState = objc.RegisterName("occlusionState")
-	_nSApplicationSelIsProtectedDataAvailable = objc.RegisterName("isProtectedDataAvailable")
-	_nSApplicationSelAppearance = objc.RegisterName("appearance")
-	_nSApplicationSelSetAppearance = objc.RegisterName("setAppearance:")
-	_nSApplicationSelEffectiveAppearance = objc.RegisterName("effectiveAppearance")
-	_nSApplicationSelSendEvent = objc.RegisterName("sendEvent:")
-	_nSApplicationSelPostEventAtStart = objc.RegisterName("postEvent:atStart:")
-	_nSApplicationSelNextEventMatchingMaskUntilDateInModeDequeue = objc.RegisterName("nextEventMatchingMask:untilDate:inMode:dequeue:")
-	_nSApplicationSelDiscardEventsMatchingMaskBeforeEvent = objc.RegisterName("discardEventsMatchingMask:beforeEvent:")
-	_nSApplicationSelCurrentEvent = objc.RegisterName("currentEvent")
-	_nSApplicationSelSendActionToFrom = objc.RegisterName("sendAction:to:from:")
-	_nSApplicationSelTargetForAction = objc.RegisterName("targetForAction:")
-	_nSApplicationSelTargetForActionToFrom = objc.RegisterName("targetForAction:to:from:")
-	_nSApplicationSelArrangeInFront = objc.RegisterName("arrangeInFront:")
-	_nSApplicationSelRemoveWindowsItem = objc.RegisterName("removeWindowsItem:")
-	_nSApplicationSelAddWindowsItemTitleFilename = objc.RegisterName("addWindowsItem:title:filename:")
-	_nSApplicationSelChangeWindowsItemTitleFilename = objc.RegisterName("changeWindowsItem:title:filename:")
-	_nSApplicationSelUpdateWindowsItem = objc.RegisterName("updateWindowsItem:")
-	_nSApplicationSelMiniaturizeAll = objc.RegisterName("miniaturizeAll:")
-	_nSApplicationSelWindowsMenu = objc.RegisterName("windowsMenu")
-	_nSApplicationSelSetWindowsMenu = objc.RegisterName("setWindowsMenu:")
-	_nSApplicationSelIsFullKeyboardAccessEnabled = objc.RegisterName("isFullKeyboardAccessEnabled")
-	_nSApplicationSelRegisterServicesMenuSendTypesReturnTypes = objc.RegisterName("registerServicesMenuSendTypes:returnTypes:")
-	_nSApplicationSelServicesMenu = objc.RegisterName("servicesMenu")
-	_nSApplicationSelSetServicesMenu = objc.RegisterName("setServicesMenu:")
-	_nSApplicationSelServicesProvider = objc.RegisterName("servicesProvider")
-	_nSApplicationSelSetServicesProvider = objc.RegisterName("setServicesProvider:")
-	_nSApplicationSelOrderFrontStandardAboutPanel = objc.RegisterName("orderFrontStandardAboutPanel:")
-	_nSApplicationSelOrderFrontStandardAboutPanelWithOptions = objc.RegisterName("orderFrontStandardAboutPanelWithOptions:")
-	_nSApplicationSelUserInterfaceLayoutDirection = objc.RegisterName("userInterfaceLayoutDirection")
-	_nSApplicationSelDisableRelaunchOnLogin = objc.RegisterName("disableRelaunchOnLogin")
-	_nSApplicationSelEnableRelaunchOnLogin = objc.RegisterName("enableRelaunchOnLogin")
-	_nSApplicationSelRegisterForRemoteNotifications = objc.RegisterName("registerForRemoteNotifications")
-	_nSApplicationSelUnregisterForRemoteNotifications = objc.RegisterName("unregisterForRemoteNotifications")
-	_nSApplicationSelRegisterForRemoteNotificationTypes = objc.RegisterName("registerForRemoteNotificationTypes:")
-	_nSApplicationSelIsRegisteredForRemoteNotifications = objc.RegisterName("isRegisteredForRemoteNotifications")
-	_nSApplicationSelEnabledRemoteNotificationTypes = objc.RegisterName("enabledRemoteNotificationTypes")
-	_nSApplicationSelRunModalForWindowRelativeToWindow = objc.RegisterName("runModalForWindow:relativeToWindow:")
-	_nSApplicationSelBeginModalSessionForWindowRelativeToWindow = objc.RegisterName("beginModalSessionForWindow:relativeToWindow:")
-	_nSApplicationSelApplicationPrintFiles = objc.RegisterName("application:printFiles:")
+	_clsNSApplication                                                               = _objcClass("NSApplication")
+	_nSApplicationSelHide                                                           = objc.RegisterName("hide:")
+	_nSApplicationSelUnhide                                                         = objc.RegisterName("unhide:")
+	_nSApplicationSelUnhideWithoutActivation                                        = objc.RegisterName("unhideWithoutActivation")
+	_nSApplicationSelWindowWithWindowNumber                                         = objc.RegisterName("windowWithWindowNumber:")
+	_nSApplicationSelDeactivate                                                     = objc.RegisterName("deactivate")
+	_nSApplicationSelActivateIgnoringOtherApps                                      = objc.RegisterName("activateIgnoringOtherApps:")
+	_nSApplicationSelActivate                                                       = objc.RegisterName("activate")
+	_nSApplicationSelYieldActivationToApplication                                   = objc.RegisterName("yieldActivationToApplication:")
+	_nSApplicationSelYieldActivationToApplicationWithBundleIdentifier               = objc.RegisterName("yieldActivationToApplicationWithBundleIdentifier:")
+	_nSApplicationSelHideOtherApplications                                          = objc.RegisterName("hideOtherApplications:")
+	_nSApplicationSelUnhideAllApplications                                          = objc.RegisterName("unhideAllApplications:")
+	_nSApplicationSelFinishLaunching                                                = objc.RegisterName("finishLaunching")
+	_nSApplicationSelRun                                                            = objc.RegisterName("run")
+	_nSApplicationSelRunModalForWindow                                              = objc.RegisterName("runModalForWindow:")
+	_nSApplicationSelStop                                                           = objc.RegisterName("stop:")
+	_nSApplicationSelStopModal                                                      = objc.RegisterName("stopModal")
+	_nSApplicationSelStopModalWithCode                                              = objc.RegisterName("stopModalWithCode:")
+	_nSApplicationSelAbortModal                                                     = objc.RegisterName("abortModal")
+	_nSApplicationSelBeginModalSessionForWindow                                     = objc.RegisterName("beginModalSessionForWindow:")
+	_nSApplicationSelRunModalSession                                                = objc.RegisterName("runModalSession:")
+	_nSApplicationSelEndModalSession                                                = objc.RegisterName("endModalSession:")
+	_nSApplicationSelTerminate                                                      = objc.RegisterName("terminate:")
+	_nSApplicationSelRequestUserAttention                                           = objc.RegisterName("requestUserAttention:")
+	_nSApplicationSelCancelUserAttentionRequest                                     = objc.RegisterName("cancelUserAttentionRequest:")
+	_nSApplicationSelEnumerateWindowsWithOptionsUsing                               = objc.RegisterName("enumerateWindowsWithOptions:usingBlock:")
+	_nSApplicationSelPreventWindowOrdering                                          = objc.RegisterName("preventWindowOrdering")
+	_nSApplicationSelSetWindowsNeedUpdate                                           = objc.RegisterName("setWindowsNeedUpdate:")
+	_nSApplicationSelUpdateWindows                                                  = objc.RegisterName("updateWindows")
+	_nSApplicationSelActivationPolicy                                               = objc.RegisterName("activationPolicy")
+	_nSApplicationSelSetActivationPolicy                                            = objc.RegisterName("setActivationPolicy:")
+	_nSApplicationSelReportException                                                = objc.RegisterName("reportException:")
+	_nSApplicationSelDetachDrawingThreadToTargetWithObject                          = objc.RegisterName("detachDrawingThread:toTarget:withObject:")
+	_nSApplicationSelReplyToApplicationShouldTerminate                              = objc.RegisterName("replyToApplicationShouldTerminate:")
+	_nSApplicationSelReplyToOpenOrPrint                                             = objc.RegisterName("replyToOpenOrPrint:")
+	_nSApplicationSelOrderFrontCharacterPalette                                     = objc.RegisterName("orderFrontCharacterPalette:")
+	_nSApplicationSelSharedApplication                                              = objc.RegisterName("sharedApplication")
+	_nSApplicationSelDelegate                                                       = objc.RegisterName("delegate")
+	_nSApplicationSelSetDelegate                                                    = objc.RegisterName("setDelegate:")
+	_nSApplicationSelMainWindow                                                     = objc.RegisterName("mainWindow")
+	_nSApplicationSelKeyWindow                                                      = objc.RegisterName("keyWindow")
+	_nSApplicationSelIsActive                                                       = objc.RegisterName("isActive")
+	_nSApplicationSelIsHidden                                                       = objc.RegisterName("isHidden")
+	_nSApplicationSelIsRunning                                                      = objc.RegisterName("isRunning")
+	_nSApplicationSelApplicationShouldSuppressHighDynamicRangeContent               = objc.RegisterName("applicationShouldSuppressHighDynamicRangeContent")
+	_nSApplicationSelModalWindow                                                    = objc.RegisterName("modalWindow")
+	_nSApplicationSelWindows                                                        = objc.RegisterName("windows")
+	_nSApplicationSelMainMenu                                                       = objc.RegisterName("mainMenu")
+	_nSApplicationSelSetMainMenu                                                    = objc.RegisterName("setMainMenu:")
+	_nSApplicationSelHelpMenu                                                       = objc.RegisterName("helpMenu")
+	_nSApplicationSelSetHelpMenu                                                    = objc.RegisterName("setHelpMenu:")
+	_nSApplicationSelApplicationIconImage                                           = objc.RegisterName("applicationIconImage")
+	_nSApplicationSelSetApplicationIconImage                                        = objc.RegisterName("setApplicationIconImage:")
+	_nSApplicationSelDockTile                                                       = objc.RegisterName("dockTile")
+	_nSApplicationSelPresentationOptions                                            = objc.RegisterName("presentationOptions")
+	_nSApplicationSelSetPresentationOptions                                         = objc.RegisterName("setPresentationOptions:")
+	_nSApplicationSelCurrentSystemPresentationOptions                               = objc.RegisterName("currentSystemPresentationOptions")
+	_nSApplicationSelOcclusionState                                                 = objc.RegisterName("occlusionState")
+	_nSApplicationSelIsProtectedDataAvailable                                       = objc.RegisterName("isProtectedDataAvailable")
+	_nSApplicationSelAppearance                                                     = objc.RegisterName("appearance")
+	_nSApplicationSelSetAppearance                                                  = objc.RegisterName("setAppearance:")
+	_nSApplicationSelEffectiveAppearance                                            = objc.RegisterName("effectiveAppearance")
+	_nSApplicationSelSendEvent                                                      = objc.RegisterName("sendEvent:")
+	_nSApplicationSelPostEventAtStart                                               = objc.RegisterName("postEvent:atStart:")
+	_nSApplicationSelNextEventMatchingMaskUntilDateInModeDequeue                    = objc.RegisterName("nextEventMatchingMask:untilDate:inMode:dequeue:")
+	_nSApplicationSelDiscardEventsMatchingMaskBeforeEvent                           = objc.RegisterName("discardEventsMatchingMask:beforeEvent:")
+	_nSApplicationSelCurrentEvent                                                   = objc.RegisterName("currentEvent")
+	_nSApplicationSelSendActionToFrom                                               = objc.RegisterName("sendAction:to:from:")
+	_nSApplicationSelTargetForAction                                                = objc.RegisterName("targetForAction:")
+	_nSApplicationSelTargetForActionToFrom                                          = objc.RegisterName("targetForAction:to:from:")
+	_nSApplicationSelArrangeInFront                                                 = objc.RegisterName("arrangeInFront:")
+	_nSApplicationSelRemoveWindowsItem                                              = objc.RegisterName("removeWindowsItem:")
+	_nSApplicationSelAddWindowsItemTitleFilename                                    = objc.RegisterName("addWindowsItem:title:filename:")
+	_nSApplicationSelChangeWindowsItemTitleFilename                                 = objc.RegisterName("changeWindowsItem:title:filename:")
+	_nSApplicationSelUpdateWindowsItem                                              = objc.RegisterName("updateWindowsItem:")
+	_nSApplicationSelMiniaturizeAll                                                 = objc.RegisterName("miniaturizeAll:")
+	_nSApplicationSelWindowsMenu                                                    = objc.RegisterName("windowsMenu")
+	_nSApplicationSelSetWindowsMenu                                                 = objc.RegisterName("setWindowsMenu:")
+	_nSApplicationSelIsFullKeyboardAccessEnabled                                    = objc.RegisterName("isFullKeyboardAccessEnabled")
+	_nSApplicationSelRegisterServicesMenuSendTypesReturnTypes                       = objc.RegisterName("registerServicesMenuSendTypes:returnTypes:")
+	_nSApplicationSelServicesMenu                                                   = objc.RegisterName("servicesMenu")
+	_nSApplicationSelSetServicesMenu                                                = objc.RegisterName("setServicesMenu:")
+	_nSApplicationSelServicesProvider                                               = objc.RegisterName("servicesProvider")
+	_nSApplicationSelSetServicesProvider                                            = objc.RegisterName("setServicesProvider:")
+	_nSApplicationSelOrderFrontStandardAboutPanel                                   = objc.RegisterName("orderFrontStandardAboutPanel:")
+	_nSApplicationSelOrderFrontStandardAboutPanelWithOptions                        = objc.RegisterName("orderFrontStandardAboutPanelWithOptions:")
+	_nSApplicationSelUserInterfaceLayoutDirection                                   = objc.RegisterName("userInterfaceLayoutDirection")
+	_nSApplicationSelDisableRelaunchOnLogin                                         = objc.RegisterName("disableRelaunchOnLogin")
+	_nSApplicationSelEnableRelaunchOnLogin                                          = objc.RegisterName("enableRelaunchOnLogin")
+	_nSApplicationSelRegisterForRemoteNotifications                                 = objc.RegisterName("registerForRemoteNotifications")
+	_nSApplicationSelUnregisterForRemoteNotifications                               = objc.RegisterName("unregisterForRemoteNotifications")
+	_nSApplicationSelRegisterForRemoteNotificationTypes                             = objc.RegisterName("registerForRemoteNotificationTypes:")
+	_nSApplicationSelIsRegisteredForRemoteNotifications                             = objc.RegisterName("isRegisteredForRemoteNotifications")
+	_nSApplicationSelEnabledRemoteNotificationTypes                                 = objc.RegisterName("enabledRemoteNotificationTypes")
+	_nSApplicationSelRunModalForWindowRelativeToWindow                              = objc.RegisterName("runModalForWindow:relativeToWindow:")
+	_nSApplicationSelBeginModalSessionForWindowRelativeToWindow                     = objc.RegisterName("beginModalSessionForWindow:relativeToWindow:")
+	_nSApplicationSelApplicationPrintFiles                                          = objc.RegisterName("application:printFiles:")
 	_nSApplicationSelBeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo = objc.RegisterName("beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo:")
-	_nSApplicationSelEndSheet = objc.RegisterName("endSheet:")
-	_nSApplicationSelEndSheetReturnCode = objc.RegisterName("endSheet:returnCode:")
-	_nSApplicationSelMakeWindowsPerformInOrder = objc.RegisterName("makeWindowsPerform:inOrder:")
-	_nSApplicationSelContext = objc.RegisterName("context")
-	_nSApplicationSelActivateContextHelpMode = objc.RegisterName("activateContextHelpMode:")
-	_nSApplicationSelShowHelp = objc.RegisterName("showHelp:")
-	_nSApplicationSelToggleTouchBarCustomizationPalette = objc.RegisterName("toggleTouchBarCustomizationPalette:")
-	_nSApplicationSelIsAutomaticCustomizeTouchBarMenuItemEnabled = objc.RegisterName("isAutomaticCustomizeTouchBarMenuItemEnabled")
-	_nSApplicationSelSetAutomaticCustomizeTouchBarMenuItemEnabled = objc.RegisterName("setAutomaticCustomizeTouchBarMenuItemEnabled:")
-	_nSApplicationSelOrderFrontColorPanel = objc.RegisterName("orderFrontColorPanel:")
-	_nSApplicationSelRunPageLayout = objc.RegisterName("runPageLayout:")
-	_nSApplicationSelOrderedDocuments = objc.RegisterName("orderedDocuments")
-	_nSApplicationSelOrderedWindows = objc.RegisterName("orderedWindows")
-	_nSApplicationSelRegisterUserInterfaceItemSearchHandler = objc.RegisterName("registerUserInterfaceItemSearchHandler:")
-	_nSApplicationSelUnregisterUserInterfaceItemSearchHandler = objc.RegisterName("unregisterUserInterfaceItemSearchHandler:")
-	_nSApplicationSelSearchStringInUserInterfaceItemStringSearchRangeFoundRange = objc.RegisterName("searchString:inUserInterfaceItemString:searchRange:foundRange:")
-	_nSApplicationSelRestoreWindowWithIdentifierStateCompletionHandler = objc.RegisterName("restoreWindowWithIdentifier:state:completionHandler:")
-	_nSApplicationSelExtendStateRestoration = objc.RegisterName("extendStateRestoration")
-	_nSApplicationSelCompleteStateRestoration = objc.RegisterName("completeStateRestoration")
+	_nSApplicationSelEndSheet                                                       = objc.RegisterName("endSheet:")
+	_nSApplicationSelEndSheetReturnCode                                             = objc.RegisterName("endSheet:returnCode:")
+	_nSApplicationSelMakeWindowsPerformInOrder                                      = objc.RegisterName("makeWindowsPerform:inOrder:")
+	_nSApplicationSelContext                                                        = objc.RegisterName("context")
+	_nSApplicationSelActivateContextHelpMode                                        = objc.RegisterName("activateContextHelpMode:")
+	_nSApplicationSelShowHelp                                                       = objc.RegisterName("showHelp:")
+	_nSApplicationSelToggleTouchBarCustomizationPalette                             = objc.RegisterName("toggleTouchBarCustomizationPalette:")
+	_nSApplicationSelIsAutomaticCustomizeTouchBarMenuItemEnabled                    = objc.RegisterName("isAutomaticCustomizeTouchBarMenuItemEnabled")
+	_nSApplicationSelSetAutomaticCustomizeTouchBarMenuItemEnabled                   = objc.RegisterName("setAutomaticCustomizeTouchBarMenuItemEnabled:")
+	_nSApplicationSelOrderFrontColorPanel                                           = objc.RegisterName("orderFrontColorPanel:")
+	_nSApplicationSelRunPageLayout                                                  = objc.RegisterName("runPageLayout:")
+	_nSApplicationSelOrderedDocuments                                               = objc.RegisterName("orderedDocuments")
+	_nSApplicationSelOrderedWindows                                                 = objc.RegisterName("orderedWindows")
+	_nSApplicationSelRegisterUserInterfaceItemSearchHandler                         = objc.RegisterName("registerUserInterfaceItemSearchHandler:")
+	_nSApplicationSelUnregisterUserInterfaceItemSearchHandler                       = objc.RegisterName("unregisterUserInterfaceItemSearchHandler:")
+	_nSApplicationSelSearchStringInUserInterfaceItemStringSearchRangeFoundRange     = objc.RegisterName("searchString:inUserInterfaceItemString:searchRange:foundRange:")
+	_nSApplicationSelRestoreWindowWithIdentifierStateCompletionHandler              = objc.RegisterName("restoreWindowWithIdentifier:state:completionHandler:")
+	_nSApplicationSelExtendStateRestoration                                         = objc.RegisterName("extendStateRestoration")
+	_nSApplicationSelCompleteStateRestoration                                       = objc.RegisterName("completeStateRestoration")
 )
 
 func NSApplicationFromID(id objc.ID) *NSApplication {
@@ -161,7 +161,9 @@ func (o *NSApplication) UnhideWithoutActivation() {
 
 func (o *NSApplication) WindowWithWindowNumber(windowNum int) *NSWindow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelWindowWithWindowNumber, windowNum)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWindowFromID(_ret)
 }
 
@@ -319,7 +321,9 @@ func (o *NSApplication) OrderFrontCharacterPalette(sender objc.ID) {
 
 func NSApplicationSharedApplication() *NSApplication {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSApplication), _nSApplicationSelSharedApplication)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSApplicationFromID(_ret)
 }
 
@@ -334,13 +338,17 @@ func (o *NSApplication) SetDelegate(delegate NSApplicationDelegate) {
 
 func (o *NSApplication) MainWindow() *NSWindow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelMainWindow)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWindowFromID(_ret)
 }
 
 func (o *NSApplication) KeyWindow() *NSWindow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelKeyWindow)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWindowFromID(_ret)
 }
 
@@ -367,19 +375,25 @@ func (o *NSApplication) ApplicationShouldSuppressHighDynamicRangeContent() bool 
 
 func (o *NSApplication) ModalWindow() *NSWindow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelModalWindow)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWindowFromID(_ret)
 }
 
 func (o *NSApplication) Windows() *foundation.NSArray[*NSWindow] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelWindows)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSWindow](_ret)
 }
 
 func (o *NSApplication) MainMenu() *NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelMainMenu)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuFromID(_ret)
 }
 
@@ -390,7 +404,9 @@ func (o *NSApplication) SetMainMenu(mainMenu *NSMenu) {
 // Set or get the Help menu for the app.  If a non-nil menu is set as the Help menu, Spotlight for Help will be installed in it; otherwise AppKit will install Spotlight for Help into a menu of its choosing (and that menu is not returned from `-helpMenu`).  If you wish to completely suppress Spotlight for Help, you can set a menu that does not appear in the menu bar.  @c NSApplication retains its Help menu and releases it when a different menu is set.
 func (o *NSApplication) HelpMenu() *NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelHelpMenu)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuFromID(_ret)
 }
 
@@ -401,7 +417,9 @@ func (o *NSApplication) SetHelpMenu(helpMenu *NSMenu) {
 
 func (o *NSApplication) ApplicationIconImage() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelApplicationIconImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -411,7 +429,9 @@ func (o *NSApplication) SetApplicationIconImage(applicationIconImage *NSImage) {
 
 func (o *NSApplication) DockTile() *NSDockTile {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelDockTile)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDockTileFromID(_ret)
 }
 
@@ -444,7 +464,9 @@ func (o *NSApplication) IsProtectedDataAvailable() bool {
 
 func (o *NSApplication) Appearance() *NSAppearance {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelAppearance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppearanceFromID(_ret)
 }
 
@@ -454,7 +476,9 @@ func (o *NSApplication) SetAppearance(appearance *NSAppearance) {
 
 func (o *NSApplication) EffectiveAppearance() *NSAppearance {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelEffectiveAppearance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppearanceFromID(_ret)
 }
 
@@ -468,7 +492,9 @@ func (o *NSApplication) PostEventAtStart(event *NSEvent, atStart bool) {
 
 func (o *NSApplication) NextEventMatchingMaskUntilDateInModeDequeue(mask NSEventMask, expiration *foundation.NSDate, mode *foundation.NSString, deqFlag bool) *NSEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelNextEventMatchingMaskUntilDateInModeDequeue, mask, expiration.Ptr(), mode.Ptr(), deqFlag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEventFromID(_ret)
 }
 
@@ -478,7 +504,9 @@ func (o *NSApplication) DiscardEventsMatchingMaskBeforeEvent(mask NSEventMask, l
 
 func (o *NSApplication) CurrentEvent() *NSEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelCurrentEvent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEventFromID(_ret)
 }
 
@@ -523,7 +551,9 @@ func (o *NSApplication) MiniaturizeAll(sender objc.ID) {
 
 func (o *NSApplication) WindowsMenu() *NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelWindowsMenu)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuFromID(_ret)
 }
 
@@ -543,7 +573,9 @@ func (o *NSApplication) RegisterServicesMenuSendTypesReturnTypes(sendTypes *foun
 
 func (o *NSApplication) ServicesMenu() *NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelServicesMenu)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuFromID(_ret)
 }
 
@@ -645,7 +677,9 @@ func (o *NSApplication) EndSheetReturnCode(sheet *NSWindow, returnCode int) {
 // Deprecated: Use -enumerateWindowsWithOptions:usingBlock: instead
 func (o *NSApplication) MakeWindowsPerformInOrder(selector objc.SEL, inOrder bool) *NSWindow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelMakeWindowsPerformInOrder, selector, inOrder)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWindowFromID(_ret)
 }
 
@@ -653,7 +687,9 @@ func (o *NSApplication) MakeWindowsPerformInOrder(selector objc.SEL, inOrder boo
 // Deprecated: This method always returns nil. If you need access to the current drawing context, use [NSGraphicsContext currentContext] inside of a draw operation.
 func (o *NSApplication) Context() *NSGraphicsContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGraphicsContextFromID(_ret)
 }
 
@@ -690,13 +726,17 @@ func (o *NSApplication) RunPageLayout(sender objc.ID) {
 
 func (o *NSApplication) OrderedDocuments() *foundation.NSArray[*NSDocument] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelOrderedDocuments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSDocument](_ret)
 }
 
 func (o *NSApplication) OrderedWindows() *foundation.NSArray[*NSWindow] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelOrderedWindows)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSWindow](_ret)
 }
 
@@ -735,4 +775,3 @@ func (o *NSApplication) ExtendStateRestoration() {
 func (o *NSApplication) CompleteStateRestoration() {
 	o.Ptr().Send(_nSApplicationSelCompleteStateRestoration)
 }
-

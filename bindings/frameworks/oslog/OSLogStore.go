@@ -18,16 +18,16 @@ type OSLogStore struct {
 }
 
 var (
-	_clsOSLogStore = _objcClass("OSLogStore")
-	_oSLogStoreSelLocalStoreAndReturnError = objc.RegisterName("localStoreAndReturnError:")
-	_oSLogStoreSelStoreWithScopeError = objc.RegisterName("storeWithScope:error:")
-	_oSLogStoreSelStoreWithURLError = objc.RegisterName("storeWithURL:error:")
-	_oSLogStoreSelInit = objc.RegisterName("init")
+	_clsOSLogStore                                                   = _objcClass("OSLogStore")
+	_oSLogStoreSelLocalStoreAndReturnError                           = objc.RegisterName("localStoreAndReturnError:")
+	_oSLogStoreSelStoreWithScopeError                                = objc.RegisterName("storeWithScope:error:")
+	_oSLogStoreSelStoreWithURLError                                  = objc.RegisterName("storeWithURL:error:")
+	_oSLogStoreSelInit                                               = objc.RegisterName("init")
 	_oSLogStoreSelEntriesEnumeratorWithOptionsPositionPredicateError = objc.RegisterName("entriesEnumeratorWithOptions:position:predicate:error:")
-	_oSLogStoreSelEntriesEnumeratorAndReturnError = objc.RegisterName("entriesEnumeratorAndReturnError:")
-	_oSLogStoreSelPositionWithDate = objc.RegisterName("positionWithDate:")
-	_oSLogStoreSelPositionWithTimeIntervalSinceEnd = objc.RegisterName("positionWithTimeIntervalSinceEnd:")
-	_oSLogStoreSelPositionWithTimeIntervalSinceLatestBoot = objc.RegisterName("positionWithTimeIntervalSinceLatestBoot:")
+	_oSLogStoreSelEntriesEnumeratorAndReturnError                    = objc.RegisterName("entriesEnumeratorAndReturnError:")
+	_oSLogStoreSelPositionWithDate                                   = objc.RegisterName("positionWithDate:")
+	_oSLogStoreSelPositionWithTimeIntervalSinceEnd                   = objc.RegisterName("positionWithTimeIntervalSinceEnd:")
+	_oSLogStoreSelPositionWithTimeIntervalSinceLatestBoot            = objc.RegisterName("positionWithTimeIntervalSinceLatestBoot:")
 )
 
 func OSLogStoreFromID(id objc.ID) *OSLogStore {
@@ -44,7 +44,9 @@ func OSLogStoreFromID(id objc.ID) *OSLogStore {
 func OSLogStoreLocalStoreAndReturnError() (*OSLogStore, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsOSLogStore), _oSLogStoreSelLocalStoreAndReturnError, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -55,7 +57,9 @@ func OSLogStoreLocalStoreAndReturnError() (*OSLogStore, error) {
 func OSLogStoreStoreWithScopeError(scope OSLogStoreScope) (*OSLogStore, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsOSLogStore), _oSLogStoreSelStoreWithScopeError, scope, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -66,7 +70,9 @@ func OSLogStoreStoreWithScopeError(scope OSLogStoreScope) (*OSLogStore, error) {
 func OSLogStoreStoreWithURLError(url *foundation.NSURL) (*OSLogStore, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsOSLogStore), _oSLogStoreSelStoreWithURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -76,7 +82,9 @@ func OSLogStoreStoreWithURLError(url *foundation.NSURL) (*OSLogStore, error) {
 // Deprecated: Use one of the factory methods
 func (o *OSLogStore) Init() *OSLogStore {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSLogStoreSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return OSLogStoreFromID(_ret)
 }
 
@@ -84,7 +92,9 @@ func (o *OSLogStore) Init() *OSLogStore {
 func (o *OSLogStore) EntriesEnumeratorWithOptionsPositionPredicateError(options OSLogEnumeratorOptions, position *OSLogPosition, predicate *foundation.NSPredicate) (*OSLogEnumerator, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSLogStoreSelEntriesEnumeratorWithOptionsPositionPredicateError, options, position.Ptr(), predicate.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -95,7 +105,9 @@ func (o *OSLogStore) EntriesEnumeratorWithOptionsPositionPredicateError(options 
 func (o *OSLogStore) EntriesEnumeratorAndReturnError() (*OSLogEnumerator, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSLogStoreSelEntriesEnumeratorAndReturnError, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -105,21 +117,26 @@ func (o *OSLogStore) EntriesEnumeratorAndReturnError() (*OSLogEnumerator, error)
 // @method positionWithDate @abstract Return a position representing the time specified. @param date The date to look for. @discussion If there are multiple occurences of the same time --- if, for example, there was a time change during the range of entries --- the earliest occurrence is used.
 func (o *OSLogStore) PositionWithDate(date *foundation.NSDate) *OSLogPosition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSLogStoreSelPositionWithDate, date.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return OSLogPositionFromID(_ret)
 }
 
 // @method positionWithTimeIntervalSinceEnd @abstract Return a position representing an offset since the end of the time range that the entries span. @param seconds The seconds to add to the last time point in the range of entries.
 func (o *OSLogStore) PositionWithTimeIntervalSinceEnd(seconds float64) *OSLogPosition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSLogStoreSelPositionWithTimeIntervalSinceEnd, seconds)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return OSLogPositionFromID(_ret)
 }
 
 // @method positionWithTimeIntervalSinceLatestBoot @abstract Return a position representing time since the last boot in the series of entries. @param seconds The seconds to add to the boot time point in the log time range. @discussion Negative seconds would create an ambiguous or imprecise position; this function asserts that the interval is positive.
 func (o *OSLogStore) PositionWithTimeIntervalSinceLatestBoot(seconds float64) *OSLogPosition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSLogStoreSelPositionWithTimeIntervalSinceLatestBoot, seconds)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return OSLogPositionFromID(_ret)
 }
-

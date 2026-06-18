@@ -70,4 +70,3 @@ type EnvironmentMechanismable interface {
 }
 
 var _ EnvironmentMechanismable = (*EnvironmentMechanism)(nil)
-

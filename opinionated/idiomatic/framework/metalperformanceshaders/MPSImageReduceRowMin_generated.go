@@ -76,11 +76,17 @@ func (x *ImageReduceRowMin) WithLabel(label string) *ImageReduceRowMin {
 	return x
 }
 
-func (x *ImageReduceRowMin) asImageReduceUnary() *mpsimage.MPSImageReduceUnary { return &x.inner.MPSImageReduceUnary }
+func (x *ImageReduceRowMin) asImageReduceUnary() *mpsimage.MPSImageReduceUnary {
+	return &x.inner.MPSImageReduceUnary
+}
 
-func (x *ImageReduceRowMin) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel }
+func (x *ImageReduceRowMin) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
+	return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel
+}
 
-func (x *ImageReduceRowMin) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel }
+func (x *ImageReduceRowMin) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel
+}
 
 // ImageReduceRowMinable is the interface implemented by [ImageReduceRowMin], for mocking and DI.
 type ImageReduceRowMinable interface {
@@ -94,4 +100,3 @@ type ImageReduceRowMinable interface {
 }
 
 var _ ImageReduceRowMinable = (*ImageReduceRowMin)(nil)
-

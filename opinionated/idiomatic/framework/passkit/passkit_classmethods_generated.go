@@ -315,4 +315,3 @@ func SessionForPassDelegateCompletion(ctx context.Context, pass *raw.PKSecureEle
 		return _zero, ctx.Err()
 	}
 }
-

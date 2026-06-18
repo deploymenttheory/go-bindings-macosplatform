@@ -22,10 +22,10 @@ type RPBroadcastActivityController struct {
 }
 
 var (
-	_clsRPBroadcastActivityController = _objcClass("RPBroadcastActivityController")
+	_clsRPBroadcastActivityController                                                                                  = _objcClass("RPBroadcastActivityController")
 	_rPBroadcastActivityControllerSelShowBroadcastPickerAtPointFromWindowPreferredExtensionIdentifierCompletionHandler = objc.RegisterName("showBroadcastPickerAtPoint:fromWindow:preferredExtensionIdentifier:completionHandler:")
-	_rPBroadcastActivityControllerSelDelegate = objc.RegisterName("delegate")
-	_rPBroadcastActivityControllerSelSetDelegate = objc.RegisterName("setDelegate:")
+	_rPBroadcastActivityControllerSelDelegate                                                                          = objc.RegisterName("delegate")
+	_rPBroadcastActivityControllerSelSetDelegate                                                                       = objc.RegisterName("setDelegate:")
 )
 
 func RPBroadcastActivityControllerFromID(id objc.ID) *RPBroadcastActivityController {
@@ -61,4 +61,3 @@ func (o *RPBroadcastActivityController) Delegate() RPBroadcastActivityController
 func (o *RPBroadcastActivityController) SetDelegate(delegate RPBroadcastActivityControllerDelegate) {
 	o.Ptr().Send(_rPBroadcastActivityControllerSelSetDelegate, delegate)
 }
-

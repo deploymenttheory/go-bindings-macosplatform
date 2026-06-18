@@ -16,9 +16,9 @@ type TKTokenKeyExchangeParameters struct {
 }
 
 var (
-	_clsTKTokenKeyExchangeParameters = _objcClass("TKTokenKeyExchangeParameters")
+	_clsTKTokenKeyExchangeParameters              = _objcClass("TKTokenKeyExchangeParameters")
 	_tKTokenKeyExchangeParametersSelRequestedSize = objc.RegisterName("requestedSize")
-	_tKTokenKeyExchangeParametersSelSharedInfo = objc.RegisterName("sharedInfo")
+	_tKTokenKeyExchangeParametersSelSharedInfo    = objc.RegisterName("sharedInfo")
 )
 
 func TKTokenKeyExchangeParametersFromID(id objc.ID) *TKTokenKeyExchangeParameters {
@@ -40,7 +40,8 @@ func (o *TKTokenKeyExchangeParameters) RequestedSize() int {
 // @discussion Additional shared information input, typically used for key derivation (KDF) step of key exchange algorithm.  Should be ignored if shared info is not used for specified key exchange algorithm.
 func (o *TKTokenKeyExchangeParameters) SharedInfo() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenKeyExchangeParametersSelSharedInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

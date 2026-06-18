@@ -241,4 +241,3 @@ type CNNYOLOLossable interface {
 }
 
 var _ CNNYOLOLossable = (*CNNYOLOLoss)(nil)
-

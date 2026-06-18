@@ -18,7 +18,9 @@ type MTRKeypadInputClusterSendKeyResponseParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRKeypadInputClusterSendKeyResponseParams].
-func (x *MTRKeypadInputClusterSendKeyResponseParams) Unwrap() *raw.MTRKeypadInputClusterSendKeyResponseParams { return x.inner }
+func (x *MTRKeypadInputClusterSendKeyResponseParams) Unwrap() *raw.MTRKeypadInputClusterSendKeyResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -87,4 +89,3 @@ type MTRKeypadInputClusterSendKeyResponseParamsable interface {
 }
 
 var _ MTRKeypadInputClusterSendKeyResponseParamsable = (*MTRKeypadInputClusterSendKeyResponseParams)(nil)
-

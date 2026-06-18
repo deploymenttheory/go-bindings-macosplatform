@@ -18,9 +18,9 @@ type IOUSBHostIOSource struct {
 }
 
 var (
-	_clsIOUSBHostIOSource = _objcClass("IOUSBHostIOSource")
-	_iOUSBHostIOSourceSelHostInterface = objc.RegisterName("hostInterface")
-	_iOUSBHostIOSourceSelDeviceAddress = objc.RegisterName("deviceAddress")
+	_clsIOUSBHostIOSource                = _objcClass("IOUSBHostIOSource")
+	_iOUSBHostIOSourceSelHostInterface   = objc.RegisterName("hostInterface")
+	_iOUSBHostIOSourceSelDeviceAddress   = objc.RegisterName("deviceAddress")
 	_iOUSBHostIOSourceSelEndpointAddress = objc.RegisterName("endpointAddress")
 )
 
@@ -37,7 +37,9 @@ func IOUSBHostIOSourceFromID(id objc.ID) *IOUSBHostIOSource {
 // @brief   Retrieve the source's IOUSBHostInterface @return  IOUSBHostInterface pointer that the IOSource was created from.
 func (o *IOUSBHostIOSource) HostInterface() *IOUSBHostInterface {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostIOSourceSelHostInterface)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOUSBHostInterfaceFromID(_ret)
 }
 
@@ -52,4 +54,3 @@ func (o *IOUSBHostIOSource) EndpointAddress() uint {
 	_ret := objc.Send[uint](o.Ptr(), _iOUSBHostIOSourceSelEndpointAddress)
 	return _ret
 }
-

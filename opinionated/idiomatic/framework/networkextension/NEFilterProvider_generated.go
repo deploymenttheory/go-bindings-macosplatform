@@ -98,4 +98,3 @@ type NEFilterProviderable interface {
 }
 
 var _ NEFilterProviderable = (*NEFilterProvider)(nil)
-

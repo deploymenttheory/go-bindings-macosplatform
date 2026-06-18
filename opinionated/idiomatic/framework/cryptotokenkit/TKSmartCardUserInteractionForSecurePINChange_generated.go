@@ -17,7 +17,9 @@ type SmartCardUserInteractionForSecurePINChange struct {
 }
 
 // Unwrap returns the underlying [raw.TKSmartCardUserInteractionForSecurePINChange].
-func (x *SmartCardUserInteractionForSecurePINChange) Unwrap() *raw.TKSmartCardUserInteractionForSecurePINChange { return x.inner }
+func (x *SmartCardUserInteractionForSecurePINChange) Unwrap() *raw.TKSmartCardUserInteractionForSecurePINChange {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -56,7 +58,9 @@ func (x *SmartCardUserInteractionForSecurePINChange) WithPINMessageIndices(items
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -111,9 +115,13 @@ func (x *SmartCardUserInteractionForSecurePINChange) SetPINConfirmation(pINConfi
 	x.inner.SetPINConfirmation(pINConfirmation)
 }
 
-func (x *SmartCardUserInteractionForSecurePINChange) asSmartCardUserInteractionForPINOperation() *raw.TKSmartCardUserInteractionForPINOperation { return &x.inner.TKSmartCardUserInteractionForPINOperation }
+func (x *SmartCardUserInteractionForSecurePINChange) asSmartCardUserInteractionForPINOperation() *raw.TKSmartCardUserInteractionForPINOperation {
+	return &x.inner.TKSmartCardUserInteractionForPINOperation
+}
 
-func (x *SmartCardUserInteractionForSecurePINChange) asSmartCardUserInteraction() *raw.TKSmartCardUserInteraction { return &x.inner.TKSmartCardUserInteractionForPINOperation.TKSmartCardUserInteraction }
+func (x *SmartCardUserInteractionForSecurePINChange) asSmartCardUserInteraction() *raw.TKSmartCardUserInteraction {
+	return &x.inner.TKSmartCardUserInteractionForPINOperation.TKSmartCardUserInteraction
+}
 
 // SmartCardUserInteractionForSecurePINChangeable is the interface implemented by [SmartCardUserInteractionForSecurePINChange], for mocking and DI.
 type SmartCardUserInteractionForSecurePINChangeable interface {
@@ -132,4 +140,3 @@ type SmartCardUserInteractionForSecurePINChangeable interface {
 }
 
 var _ SmartCardUserInteractionForSecurePINChangeable = (*SmartCardUserInteractionForSecurePINChange)(nil)
-

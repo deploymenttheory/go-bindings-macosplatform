@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_metalkitLib uintptr
-	_loadOnce sync.Once
+	_metalkitLib   uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -48,12 +48,24 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("MTKMetalVertexDescriptorFromModelIO", func() { purego.RegisterLibFunc(&_fnMTKMetalVertexDescriptorFromModelIO, _metalkitLib, "MTKMetalVertexDescriptorFromModelIO") })
-	_register("MTKMetalVertexDescriptorFromModelIOWithError", func() { purego.RegisterLibFunc(&_fnMTKMetalVertexDescriptorFromModelIOWithError, _metalkitLib, "MTKMetalVertexDescriptorFromModelIOWithError") })
-	_register("MTKMetalVertexFormatFromModelIO", func() { purego.RegisterLibFunc(&_fnMTKMetalVertexFormatFromModelIO, _metalkitLib, "MTKMetalVertexFormatFromModelIO") })
-	_register("MTKModelIOVertexDescriptorFromMetal", func() { purego.RegisterLibFunc(&_fnMTKModelIOVertexDescriptorFromMetal, _metalkitLib, "MTKModelIOVertexDescriptorFromMetal") })
-	_register("MTKModelIOVertexDescriptorFromMetalWithError", func() { purego.RegisterLibFunc(&_fnMTKModelIOVertexDescriptorFromMetalWithError, _metalkitLib, "MTKModelIOVertexDescriptorFromMetalWithError") })
-	_register("MTKModelIOVertexFormatFromMetal", func() { purego.RegisterLibFunc(&_fnMTKModelIOVertexFormatFromMetal, _metalkitLib, "MTKModelIOVertexFormatFromMetal") })
+	_register("MTKMetalVertexDescriptorFromModelIO", func() {
+		purego.RegisterLibFunc(&_fnMTKMetalVertexDescriptorFromModelIO, _metalkitLib, "MTKMetalVertexDescriptorFromModelIO")
+	})
+	_register("MTKMetalVertexDescriptorFromModelIOWithError", func() {
+		purego.RegisterLibFunc(&_fnMTKMetalVertexDescriptorFromModelIOWithError, _metalkitLib, "MTKMetalVertexDescriptorFromModelIOWithError")
+	})
+	_register("MTKMetalVertexFormatFromModelIO", func() {
+		purego.RegisterLibFunc(&_fnMTKMetalVertexFormatFromModelIO, _metalkitLib, "MTKMetalVertexFormatFromModelIO")
+	})
+	_register("MTKModelIOVertexDescriptorFromMetal", func() {
+		purego.RegisterLibFunc(&_fnMTKModelIOVertexDescriptorFromMetal, _metalkitLib, "MTKModelIOVertexDescriptorFromMetal")
+	})
+	_register("MTKModelIOVertexDescriptorFromMetalWithError", func() {
+		purego.RegisterLibFunc(&_fnMTKModelIOVertexDescriptorFromMetalWithError, _metalkitLib, "MTKModelIOVertexDescriptorFromMetalWithError")
+	})
+	_register("MTKModelIOVertexFormatFromMetal", func() {
+		purego.RegisterLibFunc(&_fnMTKModelIOVertexFormatFromMetal, _metalkitLib, "MTKModelIOVertexFormatFromMetal")
+	})
 }
 
 func init() {

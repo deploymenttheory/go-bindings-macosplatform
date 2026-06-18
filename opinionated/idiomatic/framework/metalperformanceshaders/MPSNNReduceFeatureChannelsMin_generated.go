@@ -113,11 +113,17 @@ func (x *NNReduceFeatureChannelsMin) WithLabel(label string) *NNReduceFeatureCha
 	return x
 }
 
-func (x *NNReduceFeatureChannelsMin) asNNReduceUnary() *mpsneuralnetwork.MPSNNReduceUnary { return &x.inner.MPSNNReduceUnary }
+func (x *NNReduceFeatureChannelsMin) asNNReduceUnary() *mpsneuralnetwork.MPSNNReduceUnary {
+	return &x.inner.MPSNNReduceUnary
+}
 
-func (x *NNReduceFeatureChannelsMin) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
+func (x *NNReduceFeatureChannelsMin) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel
+}
 
-func (x *NNReduceFeatureChannelsMin) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel }
+func (x *NNReduceFeatureChannelsMin) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel
+}
 
 // NNReduceFeatureChannelsMinable is the interface implemented by [NNReduceFeatureChannelsMin], for mocking and DI.
 type NNReduceFeatureChannelsMinable interface {
@@ -136,4 +142,3 @@ type NNReduceFeatureChannelsMinable interface {
 }
 
 var _ NNReduceFeatureChannelsMinable = (*NNReduceFeatureChannelsMin)(nil)
-

@@ -196,9 +196,13 @@ func (x *MTRClusterContentLauncher) LaunchURLWithParamsExpectedValuesExpectedVal
 	}
 }
 
-func (x *MTRClusterContentLauncher) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterContentLauncher) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterContentLauncher) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterContentLauncher) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterContentLauncherable is the interface implemented by [MTRClusterContentLauncher], for mocking and DI.
 type MTRClusterContentLauncherable interface {
@@ -219,4 +223,3 @@ type MTRClusterContentLauncherable interface {
 }
 
 var _ MTRClusterContentLauncherable = (*MTRClusterContentLauncher)(nil)
-

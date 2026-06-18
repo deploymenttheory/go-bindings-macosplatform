@@ -18,7 +18,9 @@ type AuthorizationSingleSignOnRequest struct {
 }
 
 // Unwrap returns the underlying [raw.ASAuthorizationSingleSignOnRequest].
-func (x *AuthorizationSingleSignOnRequest) Unwrap() *raw.ASAuthorizationSingleSignOnRequest { return x.inner }
+func (x *AuthorizationSingleSignOnRequest) Unwrap() *raw.ASAuthorizationSingleSignOnRequest {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -45,7 +47,9 @@ func (x *AuthorizationSingleSignOnRequest) WithAuthorizationOptions(items ...*fo
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSURLQueryItem](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -67,7 +71,9 @@ func (x *AuthorizationSingleSignOnRequest) WithRequestedScopes(items ...*foundat
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -120,9 +126,13 @@ func (x *AuthorizationSingleSignOnRequest) SetUserInterfaceEnabled(userInterface
 	x.inner.SetUserInterfaceEnabled(userInterfaceEnabled)
 }
 
-func (x *AuthorizationSingleSignOnRequest) asAuthorizationOpenIDRequest() *raw.ASAuthorizationOpenIDRequest { return &x.inner.ASAuthorizationOpenIDRequest }
+func (x *AuthorizationSingleSignOnRequest) asAuthorizationOpenIDRequest() *raw.ASAuthorizationOpenIDRequest {
+	return &x.inner.ASAuthorizationOpenIDRequest
+}
 
-func (x *AuthorizationSingleSignOnRequest) asAuthorizationRequest() *raw.ASAuthorizationRequest { return &x.inner.ASAuthorizationOpenIDRequest.ASAuthorizationRequest }
+func (x *AuthorizationSingleSignOnRequest) asAuthorizationRequest() *raw.ASAuthorizationRequest {
+	return &x.inner.ASAuthorizationOpenIDRequest.ASAuthorizationRequest
+}
 
 // AuthorizationSingleSignOnRequestable is the interface implemented by [AuthorizationSingleSignOnRequest], for mocking and DI.
 type AuthorizationSingleSignOnRequestable interface {
@@ -140,4 +150,3 @@ type AuthorizationSingleSignOnRequestable interface {
 }
 
 var _ AuthorizationSingleSignOnRequestable = (*AuthorizationSingleSignOnRequest)(nil)
-

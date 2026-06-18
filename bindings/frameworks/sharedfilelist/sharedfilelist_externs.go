@@ -96,4 +96,3 @@ func KLSSharedFileListVolumesNetworkVisible() uintptr {
 	ptr, _ := purego.Dlsym(_sharedfilelistLib, "kLSSharedFileListVolumesNetworkVisible")
 	return ptr
 }
-

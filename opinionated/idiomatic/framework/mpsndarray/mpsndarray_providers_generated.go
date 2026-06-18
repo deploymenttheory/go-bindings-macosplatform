@@ -57,4 +57,3 @@ type ArrayUnaryGradientKernelProvider interface {
 type ArrayUnaryKernelProvider interface {
 	asArrayUnaryKernel() *raw.MPSNDArrayUnaryKernel
 }
-

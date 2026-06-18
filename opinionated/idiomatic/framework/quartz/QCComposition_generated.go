@@ -66,4 +66,3 @@ type QCCompositionable interface {
 }
 
 var _ QCCompositionable = (*QCComposition)(nil)
-

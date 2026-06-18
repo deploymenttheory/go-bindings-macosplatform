@@ -100,11 +100,17 @@ func (x *CNNNeuronSoftPlus) WithLabel(label string) *CNNNeuronSoftPlus {
 	return x
 }
 
-func (x *CNNNeuronSoftPlus) asCNNNeuron() *mpsneuralnetwork.MPSCNNNeuron { return &x.inner.MPSCNNNeuron }
+func (x *CNNNeuronSoftPlus) asCNNNeuron() *mpsneuralnetwork.MPSCNNNeuron {
+	return &x.inner.MPSCNNNeuron
+}
 
-func (x *CNNNeuronSoftPlus) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel }
+func (x *CNNNeuronSoftPlus) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNNeuron.MPSCNNKernel
+}
 
-func (x *CNNNeuronSoftPlus) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel }
+func (x *CNNNeuronSoftPlus) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel
+}
 
 // CNNNeuronSoftPlusable is the interface implemented by [CNNNeuronSoftPlus], for mocking and DI.
 type CNNNeuronSoftPlusable interface {
@@ -122,4 +128,3 @@ type CNNNeuronSoftPlusable interface {
 }
 
 var _ CNNNeuronSoftPlusable = (*CNNNeuronSoftPlus)(nil)
-

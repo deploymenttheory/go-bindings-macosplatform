@@ -16,13 +16,13 @@ type IOBluetoothHandsFreeAudioGateway struct {
 }
 
 var (
-	_clsIOBluetoothHandsFreeAudioGateway = _objcClass("IOBluetoothHandsFreeAudioGateway")
-	_iOBluetoothHandsFreeAudioGatewaySelInitWithDeviceDelegate = objc.RegisterName("initWithDevice:delegate:")
+	_clsIOBluetoothHandsFreeAudioGateway                                  = _objcClass("IOBluetoothHandsFreeAudioGateway")
+	_iOBluetoothHandsFreeAudioGatewaySelInitWithDeviceDelegate            = objc.RegisterName("initWithDevice:delegate:")
 	_iOBluetoothHandsFreeAudioGatewaySelCreateIndicatorMinMaxCurrentValue = objc.RegisterName("createIndicator:min:max:currentValue:")
-	_iOBluetoothHandsFreeAudioGatewaySelProcessATCommand = objc.RegisterName("processATCommand:")
-	_iOBluetoothHandsFreeAudioGatewaySelSendOKResponse = objc.RegisterName("sendOKResponse")
-	_iOBluetoothHandsFreeAudioGatewaySelSendResponse = objc.RegisterName("sendResponse:")
-	_iOBluetoothHandsFreeAudioGatewaySelSendResponseWithOK = objc.RegisterName("sendResponse:withOK:")
+	_iOBluetoothHandsFreeAudioGatewaySelProcessATCommand                  = objc.RegisterName("processATCommand:")
+	_iOBluetoothHandsFreeAudioGatewaySelSendOKResponse                    = objc.RegisterName("sendOKResponse")
+	_iOBluetoothHandsFreeAudioGatewaySelSendResponse                      = objc.RegisterName("sendResponse:")
+	_iOBluetoothHandsFreeAudioGatewaySelSendResponseWithOK                = objc.RegisterName("sendResponse:withOK:")
 )
 
 func IOBluetoothHandsFreeAudioGatewayFromID(id objc.ID) *IOBluetoothHandsFreeAudioGateway {
@@ -38,7 +38,9 @@ func IOBluetoothHandsFreeAudioGatewayFromID(id objc.ID) *IOBluetoothHandsFreeAud
 // @method		initWithDevice:delegate: @abstract		Create a new IOBluetoothHandsFreeAudioGateway to act as a hands free gateway @discussion	This will register a listener for incoming connections. @param			device An IOBluetoothDevice @param			inDelegate An object to act as delegate @result		A newly created IOBluetoothHandsFreeAudioGateway object on success, nil on failure
 func (o *IOBluetoothHandsFreeAudioGateway) InitWithDeviceDelegate(device *IOBluetoothDevice, inDelegate objc.ID) *IOBluetoothHandsFreeAudioGateway {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothHandsFreeAudioGatewaySelInitWithDeviceDelegate, device.Ptr(), inDelegate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothHandsFreeAudioGatewayFromID(_ret)
 }
 
@@ -66,4 +68,3 @@ func (o *IOBluetoothHandsFreeAudioGateway) SendResponse(response *foundation.NSS
 func (o *IOBluetoothHandsFreeAudioGateway) SendResponseWithOK(response *foundation.NSString, withOK bool) {
 	o.Ptr().Send(_iOBluetoothHandsFreeAudioGatewaySelSendResponseWithOK, response.Ptr(), withOK)
 }
-

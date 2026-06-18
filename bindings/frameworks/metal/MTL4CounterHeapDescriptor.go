@@ -16,10 +16,10 @@ type MTL4CounterHeapDescriptor struct {
 }
 
 var (
-	_clsMTL4CounterHeapDescriptor = _objcClass("MTL4CounterHeapDescriptor")
-	_mTL4CounterHeapDescriptorSelType = objc.RegisterName("type")
-	_mTL4CounterHeapDescriptorSelSetType = objc.RegisterName("setType:")
-	_mTL4CounterHeapDescriptorSelCount = objc.RegisterName("count")
+	_clsMTL4CounterHeapDescriptor         = _objcClass("MTL4CounterHeapDescriptor")
+	_mTL4CounterHeapDescriptorSelType     = objc.RegisterName("type")
+	_mTL4CounterHeapDescriptorSelSetType  = objc.RegisterName("setType:")
+	_mTL4CounterHeapDescriptorSelCount    = objc.RegisterName("count")
 	_mTL4CounterHeapDescriptorSelSetCount = objc.RegisterName("setCount:")
 )
 
@@ -52,4 +52,3 @@ func (o *MTL4CounterHeapDescriptor) Count() uint {
 func (o *MTL4CounterHeapDescriptor) SetCount(count uint) {
 	o.Ptr().Send(_mTL4CounterHeapDescriptorSelSetCount, count)
 }
-

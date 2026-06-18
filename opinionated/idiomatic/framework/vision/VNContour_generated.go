@@ -118,4 +118,3 @@ type Contourable interface {
 }
 
 var _ Contourable = (*Contour)(nil)
-

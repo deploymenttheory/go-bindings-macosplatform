@@ -15,22 +15,22 @@ type MTL4ComputePipelineDescriptor struct {
 }
 
 var (
-	_clsMTL4ComputePipelineDescriptor = _objcClass("MTL4ComputePipelineDescriptor")
-	_mTL4ComputePipelineDescriptorSelReset = objc.RegisterName("reset")
-	_mTL4ComputePipelineDescriptorSelComputeFunctionDescriptor = objc.RegisterName("computeFunctionDescriptor")
-	_mTL4ComputePipelineDescriptorSelSetComputeFunctionDescriptor = objc.RegisterName("setComputeFunctionDescriptor:")
-	_mTL4ComputePipelineDescriptorSelThreadGroupSizeIsMultipleOfThreadExecutionWidth = objc.RegisterName("threadGroupSizeIsMultipleOfThreadExecutionWidth")
+	_clsMTL4ComputePipelineDescriptor                                                   = _objcClass("MTL4ComputePipelineDescriptor")
+	_mTL4ComputePipelineDescriptorSelReset                                              = objc.RegisterName("reset")
+	_mTL4ComputePipelineDescriptorSelComputeFunctionDescriptor                          = objc.RegisterName("computeFunctionDescriptor")
+	_mTL4ComputePipelineDescriptorSelSetComputeFunctionDescriptor                       = objc.RegisterName("setComputeFunctionDescriptor:")
+	_mTL4ComputePipelineDescriptorSelThreadGroupSizeIsMultipleOfThreadExecutionWidth    = objc.RegisterName("threadGroupSizeIsMultipleOfThreadExecutionWidth")
 	_mTL4ComputePipelineDescriptorSelSetThreadGroupSizeIsMultipleOfThreadExecutionWidth = objc.RegisterName("setThreadGroupSizeIsMultipleOfThreadExecutionWidth:")
-	_mTL4ComputePipelineDescriptorSelMaxTotalThreadsPerThreadgroup = objc.RegisterName("maxTotalThreadsPerThreadgroup")
-	_mTL4ComputePipelineDescriptorSelSetMaxTotalThreadsPerThreadgroup = objc.RegisterName("setMaxTotalThreadsPerThreadgroup:")
-	_mTL4ComputePipelineDescriptorSelRequiredThreadsPerThreadgroup = objc.RegisterName("requiredThreadsPerThreadgroup")
-	_mTL4ComputePipelineDescriptorSelSetRequiredThreadsPerThreadgroup = objc.RegisterName("setRequiredThreadsPerThreadgroup:")
-	_mTL4ComputePipelineDescriptorSelSupportBinaryLinking = objc.RegisterName("supportBinaryLinking")
-	_mTL4ComputePipelineDescriptorSelSetSupportBinaryLinking = objc.RegisterName("setSupportBinaryLinking:")
-	_mTL4ComputePipelineDescriptorSelStaticLinkingDescriptor = objc.RegisterName("staticLinkingDescriptor")
-	_mTL4ComputePipelineDescriptorSelSetStaticLinkingDescriptor = objc.RegisterName("setStaticLinkingDescriptor:")
-	_mTL4ComputePipelineDescriptorSelSupportIndirectCommandBuffers = objc.RegisterName("supportIndirectCommandBuffers")
-	_mTL4ComputePipelineDescriptorSelSetSupportIndirectCommandBuffers = objc.RegisterName("setSupportIndirectCommandBuffers:")
+	_mTL4ComputePipelineDescriptorSelMaxTotalThreadsPerThreadgroup                      = objc.RegisterName("maxTotalThreadsPerThreadgroup")
+	_mTL4ComputePipelineDescriptorSelSetMaxTotalThreadsPerThreadgroup                   = objc.RegisterName("setMaxTotalThreadsPerThreadgroup:")
+	_mTL4ComputePipelineDescriptorSelRequiredThreadsPerThreadgroup                      = objc.RegisterName("requiredThreadsPerThreadgroup")
+	_mTL4ComputePipelineDescriptorSelSetRequiredThreadsPerThreadgroup                   = objc.RegisterName("setRequiredThreadsPerThreadgroup:")
+	_mTL4ComputePipelineDescriptorSelSupportBinaryLinking                               = objc.RegisterName("supportBinaryLinking")
+	_mTL4ComputePipelineDescriptorSelSetSupportBinaryLinking                            = objc.RegisterName("setSupportBinaryLinking:")
+	_mTL4ComputePipelineDescriptorSelStaticLinkingDescriptor                            = objc.RegisterName("staticLinkingDescriptor")
+	_mTL4ComputePipelineDescriptorSelSetStaticLinkingDescriptor                         = objc.RegisterName("setStaticLinkingDescriptor:")
+	_mTL4ComputePipelineDescriptorSelSupportIndirectCommandBuffers                      = objc.RegisterName("supportIndirectCommandBuffers")
+	_mTL4ComputePipelineDescriptorSelSetSupportIndirectCommandBuffers                   = objc.RegisterName("setSupportIndirectCommandBuffers:")
 )
 
 func MTL4ComputePipelineDescriptorFromID(id objc.ID) *MTL4ComputePipelineDescriptor {
@@ -48,10 +48,12 @@ func (o *MTL4ComputePipelineDescriptor) Reset() {
 	o.Ptr().Send(_mTL4ComputePipelineDescriptorSelReset)
 }
 
-// A descriptor representing the compute pipeline's function. You don't assign instances of ``MTL4FunctionDescriptor`` to this property directly, instead assign an instance of one of its subclasses, such as ``MTL4LibraryFunctionDescriptor``, which represents a function from a Metal library.
+// A descriptor representing the compute pipeline's function. You don't assign instances of “MTL4FunctionDescriptor“ to this property directly, instead assign an instance of one of its subclasses, such as “MTL4LibraryFunctionDescriptor“, which represents a function from a Metal library.
 func (o *MTL4ComputePipelineDescriptor) ComputeFunctionDescriptor() *MTL4FunctionDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4ComputePipelineDescriptorSelComputeFunctionDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTL4FunctionDescriptorFromID(_ret)
 }
 
@@ -102,7 +104,9 @@ func (o *MTL4ComputePipelineDescriptor) SetSupportBinaryLinking(supportBinaryLin
 // An object that contains information about functions to link to the compute pipeline.
 func (o *MTL4ComputePipelineDescriptor) StaticLinkingDescriptor() *MTL4StaticLinkingDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4ComputePipelineDescriptorSelStaticLinkingDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTL4StaticLinkingDescriptorFromID(_ret)
 }
 
@@ -119,4 +123,3 @@ func (o *MTL4ComputePipelineDescriptor) SupportIndirectCommandBuffers() MTL4Indi
 func (o *MTL4ComputePipelineDescriptor) SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers MTL4IndirectCommandBufferSupportState) {
 	o.Ptr().Send(_mTL4ComputePipelineDescriptorSelSetSupportIndirectCommandBuffers, supportIndirectCommandBuffers)
 }
-

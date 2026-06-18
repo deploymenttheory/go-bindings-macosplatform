@@ -85,4 +85,3 @@ type RentalCarReservationable interface {
 }
 
 var _ RentalCarReservationable = (*RentalCarReservation)(nil)
-

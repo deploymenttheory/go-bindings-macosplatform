@@ -787,4 +787,3 @@ func MLiTunesiTunesUPlaylistTypeIdentifier() uintptr {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiTunesiTunesUPlaylistTypeIdentifier")
 	return ptr
 }
-

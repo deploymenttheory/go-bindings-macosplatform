@@ -15,19 +15,19 @@ type PHASEGeneratorNodeDefinition struct {
 }
 
 var (
-	_clsPHASEGeneratorNodeDefinition = _objcClass("PHASEGeneratorNodeDefinition")
-	_pHASEGeneratorNodeDefinitionSelSetCalibrationModeLevel = objc.RegisterName("setCalibrationMode:level:")
-	_pHASEGeneratorNodeDefinitionSelCalibrationMode = objc.RegisterName("calibrationMode")
-	_pHASEGeneratorNodeDefinitionSelLevel = objc.RegisterName("level")
-	_pHASEGeneratorNodeDefinitionSelRate = objc.RegisterName("rate")
-	_pHASEGeneratorNodeDefinitionSelSetRate = objc.RegisterName("setRate:")
-	_pHASEGeneratorNodeDefinitionSelGroup = objc.RegisterName("group")
-	_pHASEGeneratorNodeDefinitionSelSetGroup = objc.RegisterName("setGroup:")
-	_pHASEGeneratorNodeDefinitionSelGainMetaParameterDefinition = objc.RegisterName("gainMetaParameterDefinition")
+	_clsPHASEGeneratorNodeDefinition                               = _objcClass("PHASEGeneratorNodeDefinition")
+	_pHASEGeneratorNodeDefinitionSelSetCalibrationModeLevel        = objc.RegisterName("setCalibrationMode:level:")
+	_pHASEGeneratorNodeDefinitionSelCalibrationMode                = objc.RegisterName("calibrationMode")
+	_pHASEGeneratorNodeDefinitionSelLevel                          = objc.RegisterName("level")
+	_pHASEGeneratorNodeDefinitionSelRate                           = objc.RegisterName("rate")
+	_pHASEGeneratorNodeDefinitionSelSetRate                        = objc.RegisterName("setRate:")
+	_pHASEGeneratorNodeDefinitionSelGroup                          = objc.RegisterName("group")
+	_pHASEGeneratorNodeDefinitionSelSetGroup                       = objc.RegisterName("setGroup:")
+	_pHASEGeneratorNodeDefinitionSelGainMetaParameterDefinition    = objc.RegisterName("gainMetaParameterDefinition")
 	_pHASEGeneratorNodeDefinitionSelSetGainMetaParameterDefinition = objc.RegisterName("setGainMetaParameterDefinition:")
-	_pHASEGeneratorNodeDefinitionSelRateMetaParameterDefinition = objc.RegisterName("rateMetaParameterDefinition")
+	_pHASEGeneratorNodeDefinitionSelRateMetaParameterDefinition    = objc.RegisterName("rateMetaParameterDefinition")
 	_pHASEGeneratorNodeDefinitionSelSetRateMetaParameterDefinition = objc.RegisterName("setRateMetaParameterDefinition:")
-	_pHASEGeneratorNodeDefinitionSelMixerDefinition = objc.RegisterName("mixerDefinition")
+	_pHASEGeneratorNodeDefinitionSelMixerDefinition                = objc.RegisterName("mixerDefinition")
 )
 
 func PHASEGeneratorNodeDefinitionFromID(id objc.ID) *PHASEGeneratorNodeDefinition {
@@ -70,7 +70,9 @@ func (o *PHASEGeneratorNodeDefinition) SetRate(rate float64) {
 // @property group @abstract The PHASEGroup object this generator should be associated with for gain and rate control.
 func (o *PHASEGeneratorNodeDefinition) Group() *PHASEGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEGeneratorNodeDefinitionSelGroup)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEGroupFromID(_ret)
 }
 
@@ -81,7 +83,9 @@ func (o *PHASEGeneratorNodeDefinition) SetGroup(group *PHASEGroup) {
 // @property gainMetaParameterDefinition @abstract Optionally attach a metaparameter definition here to enable dynamic control of the gain during playback.
 func (o *PHASEGeneratorNodeDefinition) GainMetaParameterDefinition() *PHASENumberMetaParameterDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEGeneratorNodeDefinitionSelGainMetaParameterDefinition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASENumberMetaParameterDefinitionFromID(_ret)
 }
 
@@ -92,7 +96,9 @@ func (o *PHASEGeneratorNodeDefinition) SetGainMetaParameterDefinition(gainMetaPa
 // @property rateMetaParameterDefinition @abstract Optionally attach a metaparameter definition here to enable dynamic control of the rate during playback.
 func (o *PHASEGeneratorNodeDefinition) RateMetaParameterDefinition() *PHASENumberMetaParameterDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEGeneratorNodeDefinitionSelRateMetaParameterDefinition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASENumberMetaParameterDefinitionFromID(_ret)
 }
 
@@ -103,7 +109,8 @@ func (o *PHASEGeneratorNodeDefinition) SetRateMetaParameterDefinition(rateMetaPa
 // @property mixerDefinition @abstract The readonly property that returns the PHASEMixerDefinition this generator was created with and assigned to.
 func (o *PHASEGeneratorNodeDefinition) MixerDefinition() *PHASEMixerDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEGeneratorNodeDefinitionSelMixerDefinition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEMixerDefinitionFromID(_ret)
 }
-

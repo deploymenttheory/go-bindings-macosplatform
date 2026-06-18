@@ -17,13 +17,13 @@ type MPSSVGFDefaultTextureAllocator struct {
 }
 
 var (
-	_clsMPSSVGFDefaultTextureAllocator = _objcClass("MPSSVGFDefaultTextureAllocator")
-	_mPSSVGFDefaultTextureAllocatorSelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsMPSSVGFDefaultTextureAllocator                                  = _objcClass("MPSSVGFDefaultTextureAllocator")
+	_mPSSVGFDefaultTextureAllocatorSelInitWithDevice                    = objc.RegisterName("initWithDevice:")
 	_mPSSVGFDefaultTextureAllocatorSelTextureWithPixelFormatWidthHeight = objc.RegisterName("textureWithPixelFormat:width:height:")
-	_mPSSVGFDefaultTextureAllocatorSelReturnTexture = objc.RegisterName("returnTexture:")
-	_mPSSVGFDefaultTextureAllocatorSelReset = objc.RegisterName("reset")
-	_mPSSVGFDefaultTextureAllocatorSelDevice = objc.RegisterName("device")
-	_mPSSVGFDefaultTextureAllocatorSelAllocatedTextureCount = objc.RegisterName("allocatedTextureCount")
+	_mPSSVGFDefaultTextureAllocatorSelReturnTexture                     = objc.RegisterName("returnTexture:")
+	_mPSSVGFDefaultTextureAllocatorSelReset                             = objc.RegisterName("reset")
+	_mPSSVGFDefaultTextureAllocatorSelDevice                            = objc.RegisterName("device")
+	_mPSSVGFDefaultTextureAllocatorSelAllocatedTextureCount             = objc.RegisterName("allocatedTextureCount")
 )
 
 func MPSSVGFDefaultTextureAllocatorFromID(id objc.ID) *MPSSVGFDefaultTextureAllocator {
@@ -39,7 +39,9 @@ func MPSSVGFDefaultTextureAllocatorFromID(id objc.ID) *MPSSVGFDefaultTextureAllo
 // @brief Initialize the MPSSVGFDefaultTextureAllocator with a Metal device
 func (o *MPSSVGFDefaultTextureAllocator) InitWithDevice(device metal.MTLDevice) *MPSSVGFDefaultTextureAllocator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSSVGFDefaultTextureAllocatorSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSSVGFDefaultTextureAllocatorFromID(_ret)
 }
 
@@ -68,4 +70,3 @@ func (o *MPSSVGFDefaultTextureAllocator) AllocatedTextureCount() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mPSSVGFDefaultTextureAllocatorSelAllocatedTextureCount)
 	return _ret
 }
-

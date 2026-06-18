@@ -27,4 +27,3 @@ func (e SNTimeDurationConstraintType) String() string {
 		return fmt.Sprintf("SNTimeDurationConstraintType(%d)", int64(e))
 	}
 }
-

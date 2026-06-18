@@ -16,8 +16,8 @@ type MTL4CommandAllocatorDescriptor struct {
 }
 
 var (
-	_clsMTL4CommandAllocatorDescriptor = _objcClass("MTL4CommandAllocatorDescriptor")
-	_mTL4CommandAllocatorDescriptorSelLabel = objc.RegisterName("label")
+	_clsMTL4CommandAllocatorDescriptor         = _objcClass("MTL4CommandAllocatorDescriptor")
+	_mTL4CommandAllocatorDescriptorSelLabel    = objc.RegisterName("label")
 	_mTL4CommandAllocatorDescriptorSelSetLabel = objc.RegisterName("setLabel:")
 )
 
@@ -33,11 +33,12 @@ func MTL4CommandAllocatorDescriptorFromID(id objc.ID) *MTL4CommandAllocatorDescr
 
 func (o *MTL4CommandAllocatorDescriptor) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4CommandAllocatorDescriptorSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTL4CommandAllocatorDescriptor) SetLabel(label *foundation.NSString) {
 	o.Ptr().Send(_mTL4CommandAllocatorDescriptorSelSetLabel, label.Ptr())
 }
-

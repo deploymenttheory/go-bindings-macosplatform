@@ -16,13 +16,13 @@ type MTRTimeSynchronizationClusterTrustedTimeSourceStruct struct {
 }
 
 var (
-	_clsMTRTimeSynchronizationClusterTrustedTimeSourceStruct = _objcClass("MTRTimeSynchronizationClusterTrustedTimeSourceStruct")
-	_mTRTimeSynchronizationClusterTrustedTimeSourceStructSelFabricIndex = objc.RegisterName("fabricIndex")
+	_clsMTRTimeSynchronizationClusterTrustedTimeSourceStruct               = _objcClass("MTRTimeSynchronizationClusterTrustedTimeSourceStruct")
+	_mTRTimeSynchronizationClusterTrustedTimeSourceStructSelFabricIndex    = objc.RegisterName("fabricIndex")
 	_mTRTimeSynchronizationClusterTrustedTimeSourceStructSelSetFabricIndex = objc.RegisterName("setFabricIndex:")
-	_mTRTimeSynchronizationClusterTrustedTimeSourceStructSelNodeID = objc.RegisterName("nodeID")
-	_mTRTimeSynchronizationClusterTrustedTimeSourceStructSelSetNodeID = objc.RegisterName("setNodeID:")
-	_mTRTimeSynchronizationClusterTrustedTimeSourceStructSelEndpoint = objc.RegisterName("endpoint")
-	_mTRTimeSynchronizationClusterTrustedTimeSourceStructSelSetEndpoint = objc.RegisterName("setEndpoint:")
+	_mTRTimeSynchronizationClusterTrustedTimeSourceStructSelNodeID         = objc.RegisterName("nodeID")
+	_mTRTimeSynchronizationClusterTrustedTimeSourceStructSelSetNodeID      = objc.RegisterName("setNodeID:")
+	_mTRTimeSynchronizationClusterTrustedTimeSourceStructSelEndpoint       = objc.RegisterName("endpoint")
+	_mTRTimeSynchronizationClusterTrustedTimeSourceStructSelSetEndpoint    = objc.RegisterName("setEndpoint:")
 )
 
 func MTRTimeSynchronizationClusterTrustedTimeSourceStructFromID(id objc.ID) *MTRTimeSynchronizationClusterTrustedTimeSourceStruct {
@@ -37,7 +37,9 @@ func MTRTimeSynchronizationClusterTrustedTimeSourceStructFromID(id objc.ID) *MTR
 
 func (o *MTRTimeSynchronizationClusterTrustedTimeSourceStruct) FabricIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRTimeSynchronizationClusterTrustedTimeSourceStructSelFabricIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTRTimeSynchronizationClusterTrustedTimeSourceStruct) SetFabricIndex(fa
 
 func (o *MTRTimeSynchronizationClusterTrustedTimeSourceStruct) NodeID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRTimeSynchronizationClusterTrustedTimeSourceStructSelNodeID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *MTRTimeSynchronizationClusterTrustedTimeSourceStruct) SetNodeID(nodeID 
 
 func (o *MTRTimeSynchronizationClusterTrustedTimeSourceStruct) Endpoint() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRTimeSynchronizationClusterTrustedTimeSourceStructSelEndpoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRTimeSynchronizationClusterTrustedTimeSourceStruct) SetEndpoint(endpoint *foundation.NSNumber) {
 	o.Ptr().Send(_mTRTimeSynchronizationClusterTrustedTimeSourceStructSelSetEndpoint, endpoint.Ptr())
 }
-

@@ -13,8 +13,8 @@ type AVAudioApplicationRecordPermission int64
 
 const (
 	AVAudioApplicationRecordPermissionUndetermined AVAudioApplicationRecordPermission = 1970168948
-	AVAudioApplicationRecordPermissionDenied AVAudioApplicationRecordPermission = 1684369017
-	AVAudioApplicationRecordPermissionGranted AVAudioApplicationRecordPermission = 1735552628
+	AVAudioApplicationRecordPermissionDenied       AVAudioApplicationRecordPermission = 1684369017
+	AVAudioApplicationRecordPermissionGranted      AVAudioApplicationRecordPermission = 1735552628
 )
 
 func (e AVAudioApplicationRecordPermission) String() string {
@@ -33,11 +33,11 @@ func (e AVAudioApplicationRecordPermission) String() string {
 type AVAudioCommonFormat uint64
 
 const (
-	AVAudioOtherFormat AVAudioCommonFormat = 0
+	AVAudioOtherFormat      AVAudioCommonFormat = 0
 	AVAudioPCMFormatFloat32 AVAudioCommonFormat = 1
 	AVAudioPCMFormatFloat64 AVAudioCommonFormat = 2
-	AVAudioPCMFormatInt16 AVAudioCommonFormat = 3
-	AVAudioPCMFormatInt32 AVAudioCommonFormat = 4
+	AVAudioPCMFormatInt16   AVAudioCommonFormat = 3
+	AVAudioPCMFormatInt32   AVAudioCommonFormat = 4
 )
 
 func (e AVAudioCommonFormat) String() string {
@@ -60,28 +60,28 @@ func (e AVAudioCommonFormat) String() string {
 type AVAudioContentSource int64
 
 const (
-	AVAudioContentSource_Unspecified AVAudioContentSource = -1
-	AVAudioContentSource_Reserved AVAudioContentSource = 0
-	AVAudioContentSource_AppleCapture_Traditional AVAudioContentSource = 1
-	AVAudioContentSource_AppleCapture_Spatial AVAudioContentSource = 2
+	AVAudioContentSource_Unspecified                   AVAudioContentSource = -1
+	AVAudioContentSource_Reserved                      AVAudioContentSource = 0
+	AVAudioContentSource_AppleCapture_Traditional      AVAudioContentSource = 1
+	AVAudioContentSource_AppleCapture_Spatial          AVAudioContentSource = 2
 	AVAudioContentSource_AppleCapture_Spatial_Enhanced AVAudioContentSource = 3
-	AVAudioContentSource_AppleMusic_Traditional AVAudioContentSource = 4
-	AVAudioContentSource_AppleMusic_Spatial AVAudioContentSource = 5
-	AVAudioContentSource_AppleAV_Traditional_Offline AVAudioContentSource = 6
-	AVAudioContentSource_AppleAV_Spatial_Offline AVAudioContentSource = 7
-	AVAudioContentSource_AppleAV_Traditional_Live AVAudioContentSource = 8
-	AVAudioContentSource_AppleAV_Spatial_Live AVAudioContentSource = 9
-	AVAudioContentSource_ApplePassthrough AVAudioContentSource = 10
-	AVAudioContentSource_Capture_Traditional AVAudioContentSource = 33
-	AVAudioContentSource_Capture_Spatial AVAudioContentSource = 34
-	AVAudioContentSource_Capture_Spatial_Enhanced AVAudioContentSource = 35
-	AVAudioContentSource_Music_Traditional AVAudioContentSource = 36
-	AVAudioContentSource_Music_Spatial AVAudioContentSource = 37
-	AVAudioContentSource_AV_Traditional_Offline AVAudioContentSource = 38
-	AVAudioContentSource_AV_Spatial_Offline AVAudioContentSource = 39
-	AVAudioContentSource_AV_Traditional_Live AVAudioContentSource = 40
-	AVAudioContentSource_AV_Spatial_Live AVAudioContentSource = 41
-	AVAudioContentSource_Passthrough AVAudioContentSource = 42
+	AVAudioContentSource_AppleMusic_Traditional        AVAudioContentSource = 4
+	AVAudioContentSource_AppleMusic_Spatial            AVAudioContentSource = 5
+	AVAudioContentSource_AppleAV_Traditional_Offline   AVAudioContentSource = 6
+	AVAudioContentSource_AppleAV_Spatial_Offline       AVAudioContentSource = 7
+	AVAudioContentSource_AppleAV_Traditional_Live      AVAudioContentSource = 8
+	AVAudioContentSource_AppleAV_Spatial_Live          AVAudioContentSource = 9
+	AVAudioContentSource_ApplePassthrough              AVAudioContentSource = 10
+	AVAudioContentSource_Capture_Traditional           AVAudioContentSource = 33
+	AVAudioContentSource_Capture_Spatial               AVAudioContentSource = 34
+	AVAudioContentSource_Capture_Spatial_Enhanced      AVAudioContentSource = 35
+	AVAudioContentSource_Music_Traditional             AVAudioContentSource = 36
+	AVAudioContentSource_Music_Spatial                 AVAudioContentSource = 37
+	AVAudioContentSource_AV_Traditional_Offline        AVAudioContentSource = 38
+	AVAudioContentSource_AV_Spatial_Offline            AVAudioContentSource = 39
+	AVAudioContentSource_AV_Traditional_Live           AVAudioContentSource = 40
+	AVAudioContentSource_AV_Spatial_Live               AVAudioContentSource = 41
+	AVAudioContentSource_Passthrough                   AVAudioContentSource = 42
 )
 
 func (e AVAudioContentSource) String() string {
@@ -190,10 +190,10 @@ func (e AVAudioConverterPrimeMethod) String() string {
 type AVAudioDynamicRangeControlConfiguration int64
 
 const (
-	AVAudioDynamicRangeControlConfiguration_None AVAudioDynamicRangeControlConfiguration = 0
-	AVAudioDynamicRangeControlConfiguration_Music AVAudioDynamicRangeControlConfiguration = 1
-	AVAudioDynamicRangeControlConfiguration_Speech AVAudioDynamicRangeControlConfiguration = 2
-	AVAudioDynamicRangeControlConfiguration_Movie AVAudioDynamicRangeControlConfiguration = 3
+	AVAudioDynamicRangeControlConfiguration_None    AVAudioDynamicRangeControlConfiguration = 0
+	AVAudioDynamicRangeControlConfiguration_Music   AVAudioDynamicRangeControlConfiguration = 1
+	AVAudioDynamicRangeControlConfiguration_Speech  AVAudioDynamicRangeControlConfiguration = 2
+	AVAudioDynamicRangeControlConfiguration_Movie   AVAudioDynamicRangeControlConfiguration = 3
 	AVAudioDynamicRangeControlConfiguration_Capture AVAudioDynamicRangeControlConfiguration = 4
 )
 
@@ -217,7 +217,7 @@ func (e AVAudioDynamicRangeControlConfiguration) String() string {
 type AVAudioEngineManualRenderingMode int64
 
 const (
-	AVAudioEngineManualRenderingModeOffline AVAudioEngineManualRenderingMode = 0
+	AVAudioEngineManualRenderingModeOffline  AVAudioEngineManualRenderingMode = 0
 	AVAudioEngineManualRenderingModeRealtime AVAudioEngineManualRenderingMode = 1
 )
 
@@ -235,10 +235,10 @@ func (e AVAudioEngineManualRenderingMode) String() string {
 type AVAudioEngineManualRenderingStatus int64
 
 const (
-	AVAudioEngineManualRenderingStatusError AVAudioEngineManualRenderingStatus = -1
-	AVAudioEngineManualRenderingStatusSuccess AVAudioEngineManualRenderingStatus = 0
+	AVAudioEngineManualRenderingStatusError                         AVAudioEngineManualRenderingStatus = -1
+	AVAudioEngineManualRenderingStatusSuccess                       AVAudioEngineManualRenderingStatus = 0
 	AVAudioEngineManualRenderingStatusInsufficientDataFromInputNode AVAudioEngineManualRenderingStatus = 1
-	AVAudioEngineManualRenderingStatusCannotDoInCurrentContext AVAudioEngineManualRenderingStatus = 2
+	AVAudioEngineManualRenderingStatusCannotDoInCurrentContext      AVAudioEngineManualRenderingStatus = 2
 )
 
 func (e AVAudioEngineManualRenderingStatus) String() string {
@@ -260,8 +260,8 @@ type AVAudioEnvironmentDistanceAttenuationModel int64
 
 const (
 	AVAudioEnvironmentDistanceAttenuationModelExponential AVAudioEnvironmentDistanceAttenuationModel = 1
-	AVAudioEnvironmentDistanceAttenuationModelInverse AVAudioEnvironmentDistanceAttenuationModel = 2
-	AVAudioEnvironmentDistanceAttenuationModelLinear AVAudioEnvironmentDistanceAttenuationModel = 3
+	AVAudioEnvironmentDistanceAttenuationModelInverse     AVAudioEnvironmentDistanceAttenuationModel = 2
+	AVAudioEnvironmentDistanceAttenuationModelLinear      AVAudioEnvironmentDistanceAttenuationModel = 3
 )
 
 func (e AVAudioEnvironmentDistanceAttenuationModel) String() string {
@@ -280,9 +280,9 @@ func (e AVAudioEnvironmentDistanceAttenuationModel) String() string {
 type AVAudioEnvironmentOutputType int64
 
 const (
-	AVAudioEnvironmentOutputTypeAuto AVAudioEnvironmentOutputType = 0
-	AVAudioEnvironmentOutputTypeHeadphones AVAudioEnvironmentOutputType = 1
-	AVAudioEnvironmentOutputTypeBuiltInSpeakers AVAudioEnvironmentOutputType = 2
+	AVAudioEnvironmentOutputTypeAuto             AVAudioEnvironmentOutputType = 0
+	AVAudioEnvironmentOutputTypeHeadphones       AVAudioEnvironmentOutputType = 1
+	AVAudioEnvironmentOutputTypeBuiltInSpeakers  AVAudioEnvironmentOutputType = 2
 	AVAudioEnvironmentOutputTypeExternalSpeakers AVAudioEnvironmentOutputType = 3
 )
 
@@ -305,8 +305,8 @@ func (e AVAudioEnvironmentOutputType) String() string {
 type AVAudioPlayerNodeBufferOptions uint64
 
 const (
-	AVAudioPlayerNodeBufferLoops AVAudioPlayerNodeBufferOptions = 1
-	AVAudioPlayerNodeBufferInterrupts AVAudioPlayerNodeBufferOptions = 2
+	AVAudioPlayerNodeBufferLoops            AVAudioPlayerNodeBufferOptions = 1
+	AVAudioPlayerNodeBufferInterrupts       AVAudioPlayerNodeBufferOptions = 2
 	AVAudioPlayerNodeBufferInterruptsAtLoop AVAudioPlayerNodeBufferOptions = 4
 )
 
@@ -330,8 +330,8 @@ func (e AVAudioPlayerNodeBufferOptions) String() string {
 type AVAudioPlayerNodeCompletionCallbackType int64
 
 const (
-	AVAudioPlayerNodeCompletionDataConsumed AVAudioPlayerNodeCompletionCallbackType = 0
-	AVAudioPlayerNodeCompletionDataRendered AVAudioPlayerNodeCompletionCallbackType = 1
+	AVAudioPlayerNodeCompletionDataConsumed   AVAudioPlayerNodeCompletionCallbackType = 0
+	AVAudioPlayerNodeCompletionDataRendered   AVAudioPlayerNodeCompletionCallbackType = 1
 	AVAudioPlayerNodeCompletionDataPlayedBack AVAudioPlayerNodeCompletionCallbackType = 2
 )
 
@@ -351,8 +351,8 @@ func (e AVAudioPlayerNodeCompletionCallbackType) String() string {
 type AVAudioRoutingArbitrationCategory int64
 
 const (
-	AVAudioRoutingArbitrationCategoryPlayback AVAudioRoutingArbitrationCategory = 0
-	AVAudioRoutingArbitrationCategoryPlayAndRecord AVAudioRoutingArbitrationCategory = 1
+	AVAudioRoutingArbitrationCategoryPlayback           AVAudioRoutingArbitrationCategory = 0
+	AVAudioRoutingArbitrationCategoryPlayAndRecord      AVAudioRoutingArbitrationCategory = 1
 	AVAudioRoutingArbitrationCategoryPlayAndRecordVoice AVAudioRoutingArbitrationCategory = 2
 )
 
@@ -372,28 +372,28 @@ func (e AVAudioRoutingArbitrationCategory) String() string {
 type AVAudioUnitDistortionPreset int64
 
 const (
-	AVAudioUnitDistortionPresetDrumsBitBrush AVAudioUnitDistortionPreset = 0
-	AVAudioUnitDistortionPresetDrumsBufferBeats AVAudioUnitDistortionPreset = 1
-	AVAudioUnitDistortionPresetDrumsLoFi AVAudioUnitDistortionPreset = 2
-	AVAudioUnitDistortionPresetMultiBrokenSpeaker AVAudioUnitDistortionPreset = 3
-	AVAudioUnitDistortionPresetMultiCellphoneConcert AVAudioUnitDistortionPreset = 4
-	AVAudioUnitDistortionPresetMultiDecimated1 AVAudioUnitDistortionPreset = 5
-	AVAudioUnitDistortionPresetMultiDecimated2 AVAudioUnitDistortionPreset = 6
-	AVAudioUnitDistortionPresetMultiDecimated3 AVAudioUnitDistortionPreset = 7
-	AVAudioUnitDistortionPresetMultiDecimated4 AVAudioUnitDistortionPreset = 8
-	AVAudioUnitDistortionPresetMultiDistortedFunk AVAudioUnitDistortionPreset = 9
-	AVAudioUnitDistortionPresetMultiDistortedCubed AVAudioUnitDistortionPreset = 10
-	AVAudioUnitDistortionPresetMultiDistortedSquared AVAudioUnitDistortionPreset = 11
-	AVAudioUnitDistortionPresetMultiEcho1 AVAudioUnitDistortionPreset = 12
-	AVAudioUnitDistortionPresetMultiEcho2 AVAudioUnitDistortionPreset = 13
-	AVAudioUnitDistortionPresetMultiEchoTight1 AVAudioUnitDistortionPreset = 14
-	AVAudioUnitDistortionPresetMultiEchoTight2 AVAudioUnitDistortionPreset = 15
-	AVAudioUnitDistortionPresetMultiEverythingIsBroken AVAudioUnitDistortionPreset = 16
-	AVAudioUnitDistortionPresetSpeechAlienChatter AVAudioUnitDistortionPreset = 17
+	AVAudioUnitDistortionPresetDrumsBitBrush            AVAudioUnitDistortionPreset = 0
+	AVAudioUnitDistortionPresetDrumsBufferBeats         AVAudioUnitDistortionPreset = 1
+	AVAudioUnitDistortionPresetDrumsLoFi                AVAudioUnitDistortionPreset = 2
+	AVAudioUnitDistortionPresetMultiBrokenSpeaker       AVAudioUnitDistortionPreset = 3
+	AVAudioUnitDistortionPresetMultiCellphoneConcert    AVAudioUnitDistortionPreset = 4
+	AVAudioUnitDistortionPresetMultiDecimated1          AVAudioUnitDistortionPreset = 5
+	AVAudioUnitDistortionPresetMultiDecimated2          AVAudioUnitDistortionPreset = 6
+	AVAudioUnitDistortionPresetMultiDecimated3          AVAudioUnitDistortionPreset = 7
+	AVAudioUnitDistortionPresetMultiDecimated4          AVAudioUnitDistortionPreset = 8
+	AVAudioUnitDistortionPresetMultiDistortedFunk       AVAudioUnitDistortionPreset = 9
+	AVAudioUnitDistortionPresetMultiDistortedCubed      AVAudioUnitDistortionPreset = 10
+	AVAudioUnitDistortionPresetMultiDistortedSquared    AVAudioUnitDistortionPreset = 11
+	AVAudioUnitDistortionPresetMultiEcho1               AVAudioUnitDistortionPreset = 12
+	AVAudioUnitDistortionPresetMultiEcho2               AVAudioUnitDistortionPreset = 13
+	AVAudioUnitDistortionPresetMultiEchoTight1          AVAudioUnitDistortionPreset = 14
+	AVAudioUnitDistortionPresetMultiEchoTight2          AVAudioUnitDistortionPreset = 15
+	AVAudioUnitDistortionPresetMultiEverythingIsBroken  AVAudioUnitDistortionPreset = 16
+	AVAudioUnitDistortionPresetSpeechAlienChatter       AVAudioUnitDistortionPreset = 17
 	AVAudioUnitDistortionPresetSpeechCosmicInterference AVAudioUnitDistortionPreset = 18
-	AVAudioUnitDistortionPresetSpeechGoldenPi AVAudioUnitDistortionPreset = 19
-	AVAudioUnitDistortionPresetSpeechRadioTower AVAudioUnitDistortionPreset = 20
-	AVAudioUnitDistortionPresetSpeechWaves AVAudioUnitDistortionPreset = 21
+	AVAudioUnitDistortionPresetSpeechGoldenPi           AVAudioUnitDistortionPreset = 19
+	AVAudioUnitDistortionPresetSpeechRadioTower         AVAudioUnitDistortionPreset = 20
+	AVAudioUnitDistortionPresetSpeechWaves              AVAudioUnitDistortionPreset = 21
 )
 
 func (e AVAudioUnitDistortionPreset) String() string {
@@ -450,16 +450,16 @@ func (e AVAudioUnitDistortionPreset) String() string {
 type AVAudioUnitEQFilterType int64
 
 const (
-	AVAudioUnitEQFilterTypeParametric AVAudioUnitEQFilterType = 0
-	AVAudioUnitEQFilterTypeLowPass AVAudioUnitEQFilterType = 1
-	AVAudioUnitEQFilterTypeHighPass AVAudioUnitEQFilterType = 2
-	AVAudioUnitEQFilterTypeResonantLowPass AVAudioUnitEQFilterType = 3
-	AVAudioUnitEQFilterTypeResonantHighPass AVAudioUnitEQFilterType = 4
-	AVAudioUnitEQFilterTypeBandPass AVAudioUnitEQFilterType = 5
-	AVAudioUnitEQFilterTypeBandStop AVAudioUnitEQFilterType = 6
-	AVAudioUnitEQFilterTypeLowShelf AVAudioUnitEQFilterType = 7
-	AVAudioUnitEQFilterTypeHighShelf AVAudioUnitEQFilterType = 8
-	AVAudioUnitEQFilterTypeResonantLowShelf AVAudioUnitEQFilterType = 9
+	AVAudioUnitEQFilterTypeParametric        AVAudioUnitEQFilterType = 0
+	AVAudioUnitEQFilterTypeLowPass           AVAudioUnitEQFilterType = 1
+	AVAudioUnitEQFilterTypeHighPass          AVAudioUnitEQFilterType = 2
+	AVAudioUnitEQFilterTypeResonantLowPass   AVAudioUnitEQFilterType = 3
+	AVAudioUnitEQFilterTypeResonantHighPass  AVAudioUnitEQFilterType = 4
+	AVAudioUnitEQFilterTypeBandPass          AVAudioUnitEQFilterType = 5
+	AVAudioUnitEQFilterTypeBandStop          AVAudioUnitEQFilterType = 6
+	AVAudioUnitEQFilterTypeLowShelf          AVAudioUnitEQFilterType = 7
+	AVAudioUnitEQFilterTypeHighShelf         AVAudioUnitEQFilterType = 8
+	AVAudioUnitEQFilterTypeResonantLowShelf  AVAudioUnitEQFilterType = 9
 	AVAudioUnitEQFilterTypeResonantHighShelf AVAudioUnitEQFilterType = 10
 )
 
@@ -495,19 +495,19 @@ func (e AVAudioUnitEQFilterType) String() string {
 type AVAudioUnitReverbPreset int64
 
 const (
-	AVAudioUnitReverbPresetSmallRoom AVAudioUnitReverbPreset = 0
-	AVAudioUnitReverbPresetMediumRoom AVAudioUnitReverbPreset = 1
-	AVAudioUnitReverbPresetLargeRoom AVAudioUnitReverbPreset = 2
-	AVAudioUnitReverbPresetMediumHall AVAudioUnitReverbPreset = 3
-	AVAudioUnitReverbPresetLargeHall AVAudioUnitReverbPreset = 4
-	AVAudioUnitReverbPresetPlate AVAudioUnitReverbPreset = 5
+	AVAudioUnitReverbPresetSmallRoom     AVAudioUnitReverbPreset = 0
+	AVAudioUnitReverbPresetMediumRoom    AVAudioUnitReverbPreset = 1
+	AVAudioUnitReverbPresetLargeRoom     AVAudioUnitReverbPreset = 2
+	AVAudioUnitReverbPresetMediumHall    AVAudioUnitReverbPreset = 3
+	AVAudioUnitReverbPresetLargeHall     AVAudioUnitReverbPreset = 4
+	AVAudioUnitReverbPresetPlate         AVAudioUnitReverbPreset = 5
 	AVAudioUnitReverbPresetMediumChamber AVAudioUnitReverbPreset = 6
-	AVAudioUnitReverbPresetLargeChamber AVAudioUnitReverbPreset = 7
-	AVAudioUnitReverbPresetCathedral AVAudioUnitReverbPreset = 8
-	AVAudioUnitReverbPresetLargeRoom2 AVAudioUnitReverbPreset = 9
-	AVAudioUnitReverbPresetMediumHall2 AVAudioUnitReverbPreset = 10
-	AVAudioUnitReverbPresetMediumHall3 AVAudioUnitReverbPreset = 11
-	AVAudioUnitReverbPresetLargeHall2 AVAudioUnitReverbPreset = 12
+	AVAudioUnitReverbPresetLargeChamber  AVAudioUnitReverbPreset = 7
+	AVAudioUnitReverbPresetCathedral     AVAudioUnitReverbPreset = 8
+	AVAudioUnitReverbPresetLargeRoom2    AVAudioUnitReverbPreset = 9
+	AVAudioUnitReverbPresetMediumHall2   AVAudioUnitReverbPreset = 10
+	AVAudioUnitReverbPresetMediumHall3   AVAudioUnitReverbPreset = 11
+	AVAudioUnitReverbPresetLargeHall2    AVAudioUnitReverbPreset = 12
 )
 
 func (e AVAudioUnitReverbPreset) String() string {
@@ -547,7 +547,7 @@ type AVAudioVoiceProcessingSpeechActivityEvent int64
 
 const (
 	AVAudioVoiceProcessingSpeechActivityStarted AVAudioVoiceProcessingSpeechActivityEvent = 0
-	AVAudioVoiceProcessingSpeechActivityEnded AVAudioVoiceProcessingSpeechActivityEvent = 1
+	AVAudioVoiceProcessingSpeechActivityEnded   AVAudioVoiceProcessingSpeechActivityEvent = 1
 )
 
 func (e AVAudioVoiceProcessingSpeechActivityEvent) String() string {
@@ -564,41 +564,41 @@ func (e AVAudioVoiceProcessingSpeechActivityEvent) String() string {
 type AVMIDIControlChangeMessageType int64
 
 const (
-	AVMIDIControlChangeMessageTypeBankSelect AVMIDIControlChangeMessageType = 0
-	AVMIDIControlChangeMessageTypeModWheel AVMIDIControlChangeMessageType = 1
-	AVMIDIControlChangeMessageTypeBreath AVMIDIControlChangeMessageType = 2
-	AVMIDIControlChangeMessageTypeFoot AVMIDIControlChangeMessageType = 4
-	AVMIDIControlChangeMessageTypePortamentoTime AVMIDIControlChangeMessageType = 5
-	AVMIDIControlChangeMessageTypeDataEntry AVMIDIControlChangeMessageType = 6
-	AVMIDIControlChangeMessageTypeVolume AVMIDIControlChangeMessageType = 7
-	AVMIDIControlChangeMessageTypeBalance AVMIDIControlChangeMessageType = 8
-	AVMIDIControlChangeMessageTypePan AVMIDIControlChangeMessageType = 10
-	AVMIDIControlChangeMessageTypeExpression AVMIDIControlChangeMessageType = 11
-	AVMIDIControlChangeMessageTypeSustain AVMIDIControlChangeMessageType = 64
-	AVMIDIControlChangeMessageTypePortamento AVMIDIControlChangeMessageType = 65
-	AVMIDIControlChangeMessageTypeSostenuto AVMIDIControlChangeMessageType = 66
-	AVMIDIControlChangeMessageTypeSoft AVMIDIControlChangeMessageType = 67
-	AVMIDIControlChangeMessageTypeLegatoPedal AVMIDIControlChangeMessageType = 68
-	AVMIDIControlChangeMessageTypeHold2Pedal AVMIDIControlChangeMessageType = 69
-	AVMIDIControlChangeMessageTypeFilterResonance AVMIDIControlChangeMessageType = 71
-	AVMIDIControlChangeMessageTypeReleaseTime AVMIDIControlChangeMessageType = 72
-	AVMIDIControlChangeMessageTypeAttackTime AVMIDIControlChangeMessageType = 73
-	AVMIDIControlChangeMessageTypeBrightness AVMIDIControlChangeMessageType = 74
-	AVMIDIControlChangeMessageTypeDecayTime AVMIDIControlChangeMessageType = 75
-	AVMIDIControlChangeMessageTypeVibratoRate AVMIDIControlChangeMessageType = 76
-	AVMIDIControlChangeMessageTypeVibratoDepth AVMIDIControlChangeMessageType = 77
-	AVMIDIControlChangeMessageTypeVibratoDelay AVMIDIControlChangeMessageType = 78
-	AVMIDIControlChangeMessageTypeReverbLevel AVMIDIControlChangeMessageType = 91
-	AVMIDIControlChangeMessageTypeChorusLevel AVMIDIControlChangeMessageType = 93
-	AVMIDIControlChangeMessageTypeRPN_LSB AVMIDIControlChangeMessageType = 100
-	AVMIDIControlChangeMessageTypeRPN_MSB AVMIDIControlChangeMessageType = 101
-	AVMIDIControlChangeMessageTypeAllSoundOff AVMIDIControlChangeMessageType = 120
+	AVMIDIControlChangeMessageTypeBankSelect          AVMIDIControlChangeMessageType = 0
+	AVMIDIControlChangeMessageTypeModWheel            AVMIDIControlChangeMessageType = 1
+	AVMIDIControlChangeMessageTypeBreath              AVMIDIControlChangeMessageType = 2
+	AVMIDIControlChangeMessageTypeFoot                AVMIDIControlChangeMessageType = 4
+	AVMIDIControlChangeMessageTypePortamentoTime      AVMIDIControlChangeMessageType = 5
+	AVMIDIControlChangeMessageTypeDataEntry           AVMIDIControlChangeMessageType = 6
+	AVMIDIControlChangeMessageTypeVolume              AVMIDIControlChangeMessageType = 7
+	AVMIDIControlChangeMessageTypeBalance             AVMIDIControlChangeMessageType = 8
+	AVMIDIControlChangeMessageTypePan                 AVMIDIControlChangeMessageType = 10
+	AVMIDIControlChangeMessageTypeExpression          AVMIDIControlChangeMessageType = 11
+	AVMIDIControlChangeMessageTypeSustain             AVMIDIControlChangeMessageType = 64
+	AVMIDIControlChangeMessageTypePortamento          AVMIDIControlChangeMessageType = 65
+	AVMIDIControlChangeMessageTypeSostenuto           AVMIDIControlChangeMessageType = 66
+	AVMIDIControlChangeMessageTypeSoft                AVMIDIControlChangeMessageType = 67
+	AVMIDIControlChangeMessageTypeLegatoPedal         AVMIDIControlChangeMessageType = 68
+	AVMIDIControlChangeMessageTypeHold2Pedal          AVMIDIControlChangeMessageType = 69
+	AVMIDIControlChangeMessageTypeFilterResonance     AVMIDIControlChangeMessageType = 71
+	AVMIDIControlChangeMessageTypeReleaseTime         AVMIDIControlChangeMessageType = 72
+	AVMIDIControlChangeMessageTypeAttackTime          AVMIDIControlChangeMessageType = 73
+	AVMIDIControlChangeMessageTypeBrightness          AVMIDIControlChangeMessageType = 74
+	AVMIDIControlChangeMessageTypeDecayTime           AVMIDIControlChangeMessageType = 75
+	AVMIDIControlChangeMessageTypeVibratoRate         AVMIDIControlChangeMessageType = 76
+	AVMIDIControlChangeMessageTypeVibratoDepth        AVMIDIControlChangeMessageType = 77
+	AVMIDIControlChangeMessageTypeVibratoDelay        AVMIDIControlChangeMessageType = 78
+	AVMIDIControlChangeMessageTypeReverbLevel         AVMIDIControlChangeMessageType = 91
+	AVMIDIControlChangeMessageTypeChorusLevel         AVMIDIControlChangeMessageType = 93
+	AVMIDIControlChangeMessageTypeRPN_LSB             AVMIDIControlChangeMessageType = 100
+	AVMIDIControlChangeMessageTypeRPN_MSB             AVMIDIControlChangeMessageType = 101
+	AVMIDIControlChangeMessageTypeAllSoundOff         AVMIDIControlChangeMessageType = 120
 	AVMIDIControlChangeMessageTypeResetAllControllers AVMIDIControlChangeMessageType = 121
-	AVMIDIControlChangeMessageTypeAllNotesOff AVMIDIControlChangeMessageType = 123
-	AVMIDIControlChangeMessageTypeOmniModeOff AVMIDIControlChangeMessageType = 124
-	AVMIDIControlChangeMessageTypeOmniModeOn AVMIDIControlChangeMessageType = 125
-	AVMIDIControlChangeMessageTypeMonoModeOn AVMIDIControlChangeMessageType = 126
-	AVMIDIControlChangeMessageTypeMonoModeOff AVMIDIControlChangeMessageType = 127
+	AVMIDIControlChangeMessageTypeAllNotesOff         AVMIDIControlChangeMessageType = 123
+	AVMIDIControlChangeMessageTypeOmniModeOff         AVMIDIControlChangeMessageType = 124
+	AVMIDIControlChangeMessageTypeOmniModeOn          AVMIDIControlChangeMessageType = 125
+	AVMIDIControlChangeMessageTypeMonoModeOn          AVMIDIControlChangeMessageType = 126
+	AVMIDIControlChangeMessageTypeMonoModeOff         AVMIDIControlChangeMessageType = 127
 )
 
 func (e AVMIDIControlChangeMessageType) String() string {
@@ -681,21 +681,21 @@ func (e AVMIDIControlChangeMessageType) String() string {
 type AVMIDIMetaEventType int64
 
 const (
-	AVMIDIMetaEventTypeSequenceNumber AVMIDIMetaEventType = 0
-	AVMIDIMetaEventTypeText AVMIDIMetaEventType = 1
-	AVMIDIMetaEventTypeCopyright AVMIDIMetaEventType = 2
-	AVMIDIMetaEventTypeTrackName AVMIDIMetaEventType = 3
-	AVMIDIMetaEventTypeInstrument AVMIDIMetaEventType = 4
-	AVMIDIMetaEventTypeLyric AVMIDIMetaEventType = 5
-	AVMIDIMetaEventTypeMarker AVMIDIMetaEventType = 6
-	AVMIDIMetaEventTypeCuePoint AVMIDIMetaEventType = 7
-	AVMIDIMetaEventTypeMidiChannel AVMIDIMetaEventType = 32
-	AVMIDIMetaEventTypeMidiPort AVMIDIMetaEventType = 33
-	AVMIDIMetaEventTypeEndOfTrack AVMIDIMetaEventType = 47
-	AVMIDIMetaEventTypeTempo AVMIDIMetaEventType = 81
-	AVMIDIMetaEventTypeSmpteOffset AVMIDIMetaEventType = 84
-	AVMIDIMetaEventTypeTimeSignature AVMIDIMetaEventType = 88
-	AVMIDIMetaEventTypeKeySignature AVMIDIMetaEventType = 89
+	AVMIDIMetaEventTypeSequenceNumber   AVMIDIMetaEventType = 0
+	AVMIDIMetaEventTypeText             AVMIDIMetaEventType = 1
+	AVMIDIMetaEventTypeCopyright        AVMIDIMetaEventType = 2
+	AVMIDIMetaEventTypeTrackName        AVMIDIMetaEventType = 3
+	AVMIDIMetaEventTypeInstrument       AVMIDIMetaEventType = 4
+	AVMIDIMetaEventTypeLyric            AVMIDIMetaEventType = 5
+	AVMIDIMetaEventTypeMarker           AVMIDIMetaEventType = 6
+	AVMIDIMetaEventTypeCuePoint         AVMIDIMetaEventType = 7
+	AVMIDIMetaEventTypeMidiChannel      AVMIDIMetaEventType = 32
+	AVMIDIMetaEventTypeMidiPort         AVMIDIMetaEventType = 33
+	AVMIDIMetaEventTypeEndOfTrack       AVMIDIMetaEventType = 47
+	AVMIDIMetaEventTypeTempo            AVMIDIMetaEventType = 81
+	AVMIDIMetaEventTypeSmpteOffset      AVMIDIMetaEventType = 84
+	AVMIDIMetaEventTypeTimeSignature    AVMIDIMetaEventType = 88
+	AVMIDIMetaEventTypeKeySignature     AVMIDIMetaEventType = 89
 	AVMIDIMetaEventTypeProprietaryEvent AVMIDIMetaEventType = 127
 )
 
@@ -742,7 +742,7 @@ func (e AVMIDIMetaEventType) String() string {
 type AVMusicSequenceLoadOptions uint64
 
 const (
-	AVMusicSequenceLoadSMF_PreserveTracks AVMusicSequenceLoadOptions = 0
+	AVMusicSequenceLoadSMF_PreserveTracks   AVMusicSequenceLoadOptions = 0
 	AVMusicSequenceLoadSMF_ChannelsToTracks AVMusicSequenceLoadOptions = 1
 )
 
@@ -761,7 +761,7 @@ type AVSpeechBoundary int64
 
 const (
 	AVSpeechBoundaryImmediate AVSpeechBoundary = 0
-	AVSpeechBoundaryWord AVSpeechBoundary = 1
+	AVSpeechBoundaryWord      AVSpeechBoundary = 1
 )
 
 func (e AVSpeechBoundary) String() string {
@@ -778,11 +778,11 @@ func (e AVSpeechBoundary) String() string {
 type AVSpeechSynthesisMarkerMark int64
 
 const (
-	AVSpeechSynthesisMarkerMarkPhoneme AVSpeechSynthesisMarkerMark = 0
-	AVSpeechSynthesisMarkerMarkWord AVSpeechSynthesisMarkerMark = 1
-	AVSpeechSynthesisMarkerMarkSentence AVSpeechSynthesisMarkerMark = 2
+	AVSpeechSynthesisMarkerMarkPhoneme   AVSpeechSynthesisMarkerMark = 0
+	AVSpeechSynthesisMarkerMarkWord      AVSpeechSynthesisMarkerMark = 1
+	AVSpeechSynthesisMarkerMarkSentence  AVSpeechSynthesisMarkerMark = 2
 	AVSpeechSynthesisMarkerMarkParagraph AVSpeechSynthesisMarkerMark = 3
-	AVSpeechSynthesisMarkerMarkBookmark AVSpeechSynthesisMarkerMark = 4
+	AVSpeechSynthesisMarkerMarkBookmark  AVSpeechSynthesisMarkerMark = 4
 )
 
 func (e AVSpeechSynthesisMarkerMark) String() string {
@@ -834,8 +834,8 @@ type AVSpeechSynthesisVoiceGender int64
 
 const (
 	AVSpeechSynthesisVoiceGenderUnspecified AVSpeechSynthesisVoiceGender = 0
-	AVSpeechSynthesisVoiceGenderMale AVSpeechSynthesisVoiceGender = 1
-	AVSpeechSynthesisVoiceGenderFemale AVSpeechSynthesisVoiceGender = 2
+	AVSpeechSynthesisVoiceGenderMale        AVSpeechSynthesisVoiceGender = 1
+	AVSpeechSynthesisVoiceGenderFemale      AVSpeechSynthesisVoiceGender = 2
 )
 
 func (e AVSpeechSynthesisVoiceGender) String() string {
@@ -854,9 +854,9 @@ func (e AVSpeechSynthesisVoiceGender) String() string {
 type AVSpeechSynthesisVoiceQuality int64
 
 const (
-	AVSpeechSynthesisVoiceQualityDefault AVSpeechSynthesisVoiceQuality = 1
+	AVSpeechSynthesisVoiceQualityDefault  AVSpeechSynthesisVoiceQuality = 1
 	AVSpeechSynthesisVoiceQualityEnhanced AVSpeechSynthesisVoiceQuality = 2
-	AVSpeechSynthesisVoiceQualityPremium AVSpeechSynthesisVoiceQuality = 3
+	AVSpeechSynthesisVoiceQualityPremium  AVSpeechSynthesisVoiceQuality = 3
 )
 
 func (e AVSpeechSynthesisVoiceQuality) String() string {
@@ -896,4 +896,3 @@ func (e AVSpeechSynthesisVoiceTraits) String() string {
 	}
 	return strings.Join(parts, "|")
 }
-

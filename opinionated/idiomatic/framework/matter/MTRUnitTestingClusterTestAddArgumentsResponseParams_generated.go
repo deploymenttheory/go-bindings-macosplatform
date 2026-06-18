@@ -18,7 +18,9 @@ type MTRUnitTestingClusterTestAddArgumentsResponseParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRUnitTestingClusterTestAddArgumentsResponseParams].
-func (x *MTRUnitTestingClusterTestAddArgumentsResponseParams) Unwrap() *raw.MTRUnitTestingClusterTestAddArgumentsResponseParams { return x.inner }
+func (x *MTRUnitTestingClusterTestAddArgumentsResponseParams) Unwrap() *raw.MTRUnitTestingClusterTestAddArgumentsResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -75,7 +77,9 @@ func (x *MTRUnitTestingClusterTestAddArgumentsResponseParams) SetTimedInvokeTime
 	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
 }
 
-func (x *MTRUnitTestingClusterTestAddArgumentsResponseParams) asMTRUnitTestingClusterTestAddArgumentsResponseParams() *raw.MTRUnitTestingClusterTestAddArgumentsResponseParams { return x.inner }
+func (x *MTRUnitTestingClusterTestAddArgumentsResponseParams) asMTRUnitTestingClusterTestAddArgumentsResponseParams() *raw.MTRUnitTestingClusterTestAddArgumentsResponseParams {
+	return x.inner
+}
 
 // MTRUnitTestingClusterTestAddArgumentsResponseParamsable is the interface implemented by [MTRUnitTestingClusterTestAddArgumentsResponseParams], for mocking and DI.
 type MTRUnitTestingClusterTestAddArgumentsResponseParamsable interface {
@@ -89,4 +93,3 @@ type MTRUnitTestingClusterTestAddArgumentsResponseParamsable interface {
 }
 
 var _ MTRUnitTestingClusterTestAddArgumentsResponseParamsable = (*MTRUnitTestingClusterTestAddArgumentsResponseParams)(nil)
-

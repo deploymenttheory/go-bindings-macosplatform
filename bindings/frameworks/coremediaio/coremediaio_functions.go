@@ -13,29 +13,29 @@ import (
 )
 
 var (
-	_fnCMIODeviceProcessAVCCommand func(uint, *CMIODeviceAVCCommand) int
-	_fnCMIODeviceProcessRS422Command func(uint, *CMIODeviceRS422Command) int
-	_fnCMIODeviceStartStream func(uint, uint) int
-	_fnCMIODeviceStopStream func(uint, uint) int
-	_fnCMIOObjectAddPropertyListener func(uint, *CMIOObjectPropertyAddress, unsafe.Pointer, unsafe.Pointer) int
-	_fnCMIOObjectAddPropertyListenerBlock func(uint, *CMIOObjectPropertyAddress, objc.ID, objc.Block) int
-	_fnCMIOObjectGetPropertyData func(uint, *CMIOObjectPropertyAddress, uint, unsafe.Pointer, uint, *uint, unsafe.Pointer) int
-	_fnCMIOObjectGetPropertyDataSize func(uint, *CMIOObjectPropertyAddress, uint, unsafe.Pointer, *uint) int
-	_fnCMIOObjectHasProperty func(uint, *CMIOObjectPropertyAddress) uint8
-	_fnCMIOObjectIsPropertySettable func(uint, *CMIOObjectPropertyAddress, *uint8) int
-	_fnCMIOObjectRemovePropertyListener func(uint, *CMIOObjectPropertyAddress, unsafe.Pointer, unsafe.Pointer) int
-	_fnCMIOObjectRemovePropertyListenerBlock func(uint, *CMIOObjectPropertyAddress, objc.ID, objc.Block) int
-	_fnCMIOObjectSetPropertyData func(uint, *CMIOObjectPropertyAddress, uint, unsafe.Pointer, uint, unsafe.Pointer) int
-	_fnCMIOObjectShow func(uint)
+	_fnCMIODeviceProcessAVCCommand                func(uint, *CMIODeviceAVCCommand) int
+	_fnCMIODeviceProcessRS422Command              func(uint, *CMIODeviceRS422Command) int
+	_fnCMIODeviceStartStream                      func(uint, uint) int
+	_fnCMIODeviceStopStream                       func(uint, uint) int
+	_fnCMIOObjectAddPropertyListener              func(uint, *CMIOObjectPropertyAddress, unsafe.Pointer, unsafe.Pointer) int
+	_fnCMIOObjectAddPropertyListenerBlock         func(uint, *CMIOObjectPropertyAddress, objc.ID, objc.Block) int
+	_fnCMIOObjectGetPropertyData                  func(uint, *CMIOObjectPropertyAddress, uint, unsafe.Pointer, uint, *uint, unsafe.Pointer) int
+	_fnCMIOObjectGetPropertyDataSize              func(uint, *CMIOObjectPropertyAddress, uint, unsafe.Pointer, *uint) int
+	_fnCMIOObjectHasProperty                      func(uint, *CMIOObjectPropertyAddress) uint8
+	_fnCMIOObjectIsPropertySettable               func(uint, *CMIOObjectPropertyAddress, *uint8) int
+	_fnCMIOObjectRemovePropertyListener           func(uint, *CMIOObjectPropertyAddress, unsafe.Pointer, unsafe.Pointer) int
+	_fnCMIOObjectRemovePropertyListenerBlock      func(uint, *CMIOObjectPropertyAddress, objc.ID, objc.Block) int
+	_fnCMIOObjectSetPropertyData                  func(uint, *CMIOObjectPropertyAddress, uint, unsafe.Pointer, uint, unsafe.Pointer) int
+	_fnCMIOObjectShow                             func(uint)
 	_fnCMIOStreamClockConvertHostTimeToDeviceTime func(uint64, unsafe.Pointer) coremedia.CMTime
-	_fnCMIOStreamClockCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, coremedia.CMTime, uint, uint, unsafe.Pointer) int
-	_fnCMIOStreamClockInvalidate func(unsafe.Pointer) int
-	_fnCMIOStreamClockPostTimingEvent func(coremedia.CMTime, uint64, uint8, unsafe.Pointer) int
-	_fnCMIOStreamCopyBufferQueue func(uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnCMIOStreamDeckCueTo func(uint, uint64, uint8) int
-	_fnCMIOStreamDeckJog func(uint, int) int
-	_fnCMIOStreamDeckPlay func(uint) int
-	_fnCMIOStreamDeckStop func(uint) int
+	_fnCMIOStreamClockCreate                      func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, coremedia.CMTime, uint, uint, unsafe.Pointer) int
+	_fnCMIOStreamClockInvalidate                  func(unsafe.Pointer) int
+	_fnCMIOStreamClockPostTimingEvent             func(coremedia.CMTime, uint64, uint8, unsafe.Pointer) int
+	_fnCMIOStreamCopyBufferQueue                  func(uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnCMIOStreamDeckCueTo                        func(uint, uint64, uint8) int
+	_fnCMIOStreamDeckJog                          func(uint, int) int
+	_fnCMIOStreamDeckPlay                         func(uint) int
+	_fnCMIOStreamDeckStop                         func(uint) int
 )
 
 func CMIODeviceProcessAVCCommand(deviceID uint, ioAVCCommand *CMIODeviceAVCCommand) int {
@@ -143,4 +143,3 @@ func CMIOStreamDeckPlay(streamID uint) int {
 func CMIOStreamDeckStop(streamID uint) int {
 	return _fnCMIOStreamDeckStop(streamID)
 }
-

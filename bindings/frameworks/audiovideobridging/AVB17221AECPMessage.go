@@ -18,20 +18,20 @@ type AVB17221AECPMessage struct {
 }
 
 var (
-	_clsAVB17221AECPMessage = _objcClass("AVB17221AECPMessage")
-	_aVB17221AECPMessageSelErrorForStatusCode = objc.RegisterName("errorForStatusCode:")
-	_aVB17221AECPMessageSelMessageType = objc.RegisterName("messageType")
-	_aVB17221AECPMessageSelSetMessageType = objc.RegisterName("setMessageType:")
-	_aVB17221AECPMessageSelStatus = objc.RegisterName("status")
-	_aVB17221AECPMessageSelSetStatus = objc.RegisterName("setStatus:")
-	_aVB17221AECPMessageSelTargetEntityID = objc.RegisterName("targetEntityID")
-	_aVB17221AECPMessageSelSetTargetEntityID = objc.RegisterName("setTargetEntityID:")
-	_aVB17221AECPMessageSelControllerEntityID = objc.RegisterName("controllerEntityID")
+	_clsAVB17221AECPMessage                      = _objcClass("AVB17221AECPMessage")
+	_aVB17221AECPMessageSelErrorForStatusCode    = objc.RegisterName("errorForStatusCode:")
+	_aVB17221AECPMessageSelMessageType           = objc.RegisterName("messageType")
+	_aVB17221AECPMessageSelSetMessageType        = objc.RegisterName("setMessageType:")
+	_aVB17221AECPMessageSelStatus                = objc.RegisterName("status")
+	_aVB17221AECPMessageSelSetStatus             = objc.RegisterName("setStatus:")
+	_aVB17221AECPMessageSelTargetEntityID        = objc.RegisterName("targetEntityID")
+	_aVB17221AECPMessageSelSetTargetEntityID     = objc.RegisterName("setTargetEntityID:")
+	_aVB17221AECPMessageSelControllerEntityID    = objc.RegisterName("controllerEntityID")
 	_aVB17221AECPMessageSelSetControllerEntityID = objc.RegisterName("setControllerEntityID:")
-	_aVB17221AECPMessageSelSequenceID = objc.RegisterName("sequenceID")
-	_aVB17221AECPMessageSelSetSequenceID = objc.RegisterName("setSequenceID:")
-	_aVB17221AECPMessageSelSourceMAC = objc.RegisterName("sourceMAC")
-	_aVB17221AECPMessageSelSetSourceMAC = objc.RegisterName("setSourceMAC:")
+	_aVB17221AECPMessageSelSequenceID            = objc.RegisterName("sequenceID")
+	_aVB17221AECPMessageSelSetSequenceID         = objc.RegisterName("setSequenceID:")
+	_aVB17221AECPMessageSelSourceMAC             = objc.RegisterName("sourceMAC")
+	_aVB17221AECPMessageSelSetSourceMAC          = objc.RegisterName("setSourceMAC:")
 )
 
 func AVB17221AECPMessageFromID(id objc.ID) *AVB17221AECPMessage {
@@ -109,11 +109,12 @@ func (o *AVB17221AECPMessage) SetSequenceID(sequenceID uint16) {
 // @property	sourceMAC @abstract	The source_mac field of the AECP message.
 func (o *AVB17221AECPMessage) SourceMAC() *AVBMACAddress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVB17221AECPMessageSelSourceMAC)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVBMACAddressFromID(_ret)
 }
 
 func (o *AVB17221AECPMessage) SetSourceMAC(sourceMAC *AVBMACAddress) {
 	o.Ptr().Send(_aVB17221AECPMessageSelSetSourceMAC, sourceMAC.Ptr())
 }
-

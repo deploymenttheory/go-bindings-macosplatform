@@ -17,15 +17,15 @@ type AVPlayerItemIntegratedTimeline struct {
 }
 
 var (
-	_clsAVPlayerItemIntegratedTimeline = _objcClass("AVPlayerItemIntegratedTimeline")
-	_aVPlayerItemIntegratedTimelineSelCurrentSnapshot = objc.RegisterName("currentSnapshot")
-	_aVPlayerItemIntegratedTimelineSelCurrentTime = objc.RegisterName("currentTime")
-	_aVPlayerItemIntegratedTimelineSelCurrentDate = objc.RegisterName("currentDate")
-	_aVPlayerItemIntegratedTimelineSelSeekToTimeToleranceBeforeToleranceAfterCompletionHandler = objc.RegisterName("seekToTime:toleranceBefore:toleranceAfter:completionHandler:")
-	_aVPlayerItemIntegratedTimelineSelSeekToDateCompletionHandler = objc.RegisterName("seekToDate:completionHandler:")
-	_aVPlayerItemIntegratedTimelineSelAddPeriodicTimeObserverForIntervalQueueUsing = objc.RegisterName("addPeriodicTimeObserverForInterval:queue:usingBlock:")
+	_clsAVPlayerItemIntegratedTimeline                                                              = _objcClass("AVPlayerItemIntegratedTimeline")
+	_aVPlayerItemIntegratedTimelineSelCurrentSnapshot                                               = objc.RegisterName("currentSnapshot")
+	_aVPlayerItemIntegratedTimelineSelCurrentTime                                                   = objc.RegisterName("currentTime")
+	_aVPlayerItemIntegratedTimelineSelCurrentDate                                                   = objc.RegisterName("currentDate")
+	_aVPlayerItemIntegratedTimelineSelSeekToTimeToleranceBeforeToleranceAfterCompletionHandler      = objc.RegisterName("seekToTime:toleranceBefore:toleranceAfter:completionHandler:")
+	_aVPlayerItemIntegratedTimelineSelSeekToDateCompletionHandler                                   = objc.RegisterName("seekToDate:completionHandler:")
+	_aVPlayerItemIntegratedTimelineSelAddPeriodicTimeObserverForIntervalQueueUsing                  = objc.RegisterName("addPeriodicTimeObserverForInterval:queue:usingBlock:")
 	_aVPlayerItemIntegratedTimelineSelAddBoundaryTimeObserverForSegmentOffsetsIntoSegmentQueueUsing = objc.RegisterName("addBoundaryTimeObserverForSegment:offsetsIntoSegment:queue:usingBlock:")
-	_aVPlayerItemIntegratedTimelineSelRemoveTimeObserver = objc.RegisterName("removeTimeObserver:")
+	_aVPlayerItemIntegratedTimelineSelRemoveTimeObserver                                            = objc.RegisterName("removeTimeObserver:")
 )
 
 func AVPlayerItemIntegratedTimelineFromID(id objc.ID) *AVPlayerItemIntegratedTimeline {
@@ -41,7 +41,9 @@ func AVPlayerItemIntegratedTimelineFromID(id objc.ID) *AVPlayerItemIntegratedTim
 // @property	currentSnapshot @abstract	This property provides an immutable representation of the timeline state at time of request. @discussion Returns an immutable representation of the timeline state at time of request. A timeline snapshot provides accessors for obtaining inspectable details of the timeline.  Because a snapshot is immutable, the snapshot's properties will not update as playback continues.
 func (o *AVPlayerItemIntegratedTimeline) CurrentSnapshot() *AVPlayerItemIntegratedTimelineSnapshot {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemIntegratedTimelineSelCurrentSnapshot)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerItemIntegratedTimelineSnapshotFromID(_ret)
 }
 
@@ -54,7 +56,9 @@ func (o *AVPlayerItemIntegratedTimeline) CurrentTime() coremedia.CMTime {
 // @property	currentDate @abstract	Returns the date of current playback, or nil if playback is not mapped to any date.
 func (o *AVPlayerItemIntegratedTimeline) CurrentDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemIntegratedTimelineSelCurrentDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -105,4 +109,3 @@ func (o *AVPlayerItemIntegratedTimeline) AddBoundaryTimeObserverForSegmentOffset
 func (o *AVPlayerItemIntegratedTimeline) RemoveTimeObserver(observer AVPlayerItemIntegratedTimelineObserver) {
 	o.Ptr().Send(_aVPlayerItemIntegratedTimelineSelRemoveTimeObserver, observer)
 }
-

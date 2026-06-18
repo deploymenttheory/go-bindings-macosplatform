@@ -14,8 +14,8 @@ import (
 
 var (
 	_iobluetoothuiLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce         sync.Once
+	_failedSymbols    = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -48,9 +48,15 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("IOBluetoothGetDeviceSelectorController", func() { purego.RegisterLibFunc(&_fnIOBluetoothGetDeviceSelectorController, _iobluetoothuiLib, "IOBluetoothGetDeviceSelectorController") })
-	_register("IOBluetoothGetPairingController", func() { purego.RegisterLibFunc(&_fnIOBluetoothGetPairingController, _iobluetoothuiLib, "IOBluetoothGetPairingController") })
-	_register("IOBluetoothValidateHardwareWithDescription", func() { purego.RegisterLibFunc(&_fnIOBluetoothValidateHardwareWithDescription, _iobluetoothuiLib, "IOBluetoothValidateHardwareWithDescription") })
+	_register("IOBluetoothGetDeviceSelectorController", func() {
+		purego.RegisterLibFunc(&_fnIOBluetoothGetDeviceSelectorController, _iobluetoothuiLib, "IOBluetoothGetDeviceSelectorController")
+	})
+	_register("IOBluetoothGetPairingController", func() {
+		purego.RegisterLibFunc(&_fnIOBluetoothGetPairingController, _iobluetoothuiLib, "IOBluetoothGetPairingController")
+	})
+	_register("IOBluetoothValidateHardwareWithDescription", func() {
+		purego.RegisterLibFunc(&_fnIOBluetoothValidateHardwareWithDescription, _iobluetoothuiLib, "IOBluetoothValidateHardwareWithDescription")
+	})
 }
 
 func init() {

@@ -16,8 +16,8 @@ type MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent struct {
 }
 
 var (
-	_clsMTRWiFiNetworkDiagnosticsClusterDisconnectionEvent = _objcClass("MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent")
-	_mTRWiFiNetworkDiagnosticsClusterDisconnectionEventSelReasonCode = objc.RegisterName("reasonCode")
+	_clsMTRWiFiNetworkDiagnosticsClusterDisconnectionEvent              = _objcClass("MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent")
+	_mTRWiFiNetworkDiagnosticsClusterDisconnectionEventSelReasonCode    = objc.RegisterName("reasonCode")
 	_mTRWiFiNetworkDiagnosticsClusterDisconnectionEventSelSetReasonCode = objc.RegisterName("setReasonCode:")
 )
 
@@ -33,11 +33,12 @@ func MTRWiFiNetworkDiagnosticsClusterDisconnectionEventFromID(id objc.ID) *MTRWi
 
 func (o *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent) ReasonCode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRWiFiNetworkDiagnosticsClusterDisconnectionEventSelReasonCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent) SetReasonCode(reasonCode *foundation.NSNumber) {
 	o.Ptr().Send(_mTRWiFiNetworkDiagnosticsClusterDisconnectionEventSelSetReasonCode, reasonCode.Ptr())
 }
-

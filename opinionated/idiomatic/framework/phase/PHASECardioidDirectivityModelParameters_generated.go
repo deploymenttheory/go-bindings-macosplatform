@@ -17,7 +17,9 @@ type CardioidDirectivityModelParameters struct {
 }
 
 // Unwrap returns the underlying [raw.PHASECardioidDirectivityModelParameters].
-func (x *CardioidDirectivityModelParameters) Unwrap() *raw.PHASECardioidDirectivityModelParameters { return x.inner }
+func (x *CardioidDirectivityModelParameters) Unwrap() *raw.PHASECardioidDirectivityModelParameters {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -49,7 +51,9 @@ func (x *CardioidDirectivityModelParameters) SubbandParameters() []*CardioidDire
 	})
 }
 
-func (x *CardioidDirectivityModelParameters) asDirectivityModelParameters() *raw.PHASEDirectivityModelParameters { return &x.inner.PHASEDirectivityModelParameters }
+func (x *CardioidDirectivityModelParameters) asDirectivityModelParameters() *raw.PHASEDirectivityModelParameters {
+	return &x.inner.PHASEDirectivityModelParameters
+}
 
 // CardioidDirectivityModelParametersable is the interface implemented by [CardioidDirectivityModelParameters], for mocking and DI.
 type CardioidDirectivityModelParametersable interface {
@@ -58,4 +62,3 @@ type CardioidDirectivityModelParametersable interface {
 }
 
 var _ CardioidDirectivityModelParametersable = (*CardioidDirectivityModelParameters)(nil)
-

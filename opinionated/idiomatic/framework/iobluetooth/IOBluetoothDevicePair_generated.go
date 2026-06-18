@@ -100,4 +100,3 @@ type IOBluetoothDevicePairable interface {
 }
 
 var _ IOBluetoothDevicePairable = (*IOBluetoothDevicePair)(nil)
-

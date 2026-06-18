@@ -18,23 +18,23 @@ type INInteraction struct {
 }
 
 var (
-	_clsINInteraction = _objcClass("INInteraction")
-	_iNInteractionSelInitWithIntentResponse = objc.RegisterName("initWithIntent:response:")
-	_iNInteractionSelDonateInteractionWithCompletion = objc.RegisterName("donateInteractionWithCompletion:")
-	_iNInteractionSelDeleteAllInteractionsWithCompletion = objc.RegisterName("deleteAllInteractionsWithCompletion:")
-	_iNInteractionSelDeleteInteractionsWithIdentifiersCompletion = objc.RegisterName("deleteInteractionsWithIdentifiers:completion:")
+	_clsINInteraction                                                = _objcClass("INInteraction")
+	_iNInteractionSelInitWithIntentResponse                          = objc.RegisterName("initWithIntent:response:")
+	_iNInteractionSelDonateInteractionWithCompletion                 = objc.RegisterName("donateInteractionWithCompletion:")
+	_iNInteractionSelDeleteAllInteractionsWithCompletion             = objc.RegisterName("deleteAllInteractionsWithCompletion:")
+	_iNInteractionSelDeleteInteractionsWithIdentifiersCompletion     = objc.RegisterName("deleteInteractionsWithIdentifiers:completion:")
 	_iNInteractionSelDeleteInteractionsWithGroupIdentifierCompletion = objc.RegisterName("deleteInteractionsWithGroupIdentifier:completion:")
-	_iNInteractionSelIntent = objc.RegisterName("intent")
-	_iNInteractionSelIntentResponse = objc.RegisterName("intentResponse")
-	_iNInteractionSelIntentHandlingStatus = objc.RegisterName("intentHandlingStatus")
-	_iNInteractionSelDirection = objc.RegisterName("direction")
-	_iNInteractionSelSetDirection = objc.RegisterName("setDirection:")
-	_iNInteractionSelDateInterval = objc.RegisterName("dateInterval")
-	_iNInteractionSelSetDateInterval = objc.RegisterName("setDateInterval:")
-	_iNInteractionSelIdentifier = objc.RegisterName("identifier")
-	_iNInteractionSelSetIdentifier = objc.RegisterName("setIdentifier:")
-	_iNInteractionSelGroupIdentifier = objc.RegisterName("groupIdentifier")
-	_iNInteractionSelSetGroupIdentifier = objc.RegisterName("setGroupIdentifier:")
+	_iNInteractionSelIntent                                          = objc.RegisterName("intent")
+	_iNInteractionSelIntentResponse                                  = objc.RegisterName("intentResponse")
+	_iNInteractionSelIntentHandlingStatus                            = objc.RegisterName("intentHandlingStatus")
+	_iNInteractionSelDirection                                       = objc.RegisterName("direction")
+	_iNInteractionSelSetDirection                                    = objc.RegisterName("setDirection:")
+	_iNInteractionSelDateInterval                                    = objc.RegisterName("dateInterval")
+	_iNInteractionSelSetDateInterval                                 = objc.RegisterName("setDateInterval:")
+	_iNInteractionSelIdentifier                                      = objc.RegisterName("identifier")
+	_iNInteractionSelSetIdentifier                                   = objc.RegisterName("setIdentifier:")
+	_iNInteractionSelGroupIdentifier                                 = objc.RegisterName("groupIdentifier")
+	_iNInteractionSelSetGroupIdentifier                              = objc.RegisterName("setGroupIdentifier:")
 )
 
 func INInteractionFromID(id objc.ID) *INInteraction {
@@ -49,7 +49,9 @@ func INInteractionFromID(id objc.ID) *INInteraction {
 
 func (o *INInteraction) InitWithIntentResponse(intent *INIntent, response *INIntentResponse) *INInteraction {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNInteractionSelInitWithIntentResponse, intent.Ptr(), response.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INInteractionFromID(_ret)
 }
 
@@ -99,13 +101,17 @@ func INInteractionDeleteInteractionsWithGroupIdentifierCompletion(groupIdentifie
 
 func (o *INInteraction) Intent() *INIntent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNInteractionSelIntent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INIntentFromID(_ret)
 }
 
 func (o *INInteraction) IntentResponse() *INIntentResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNInteractionSelIntentResponse)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INIntentResponseFromID(_ret)
 }
 
@@ -125,7 +131,9 @@ func (o *INInteraction) SetDirection(direction INInteractionDirection) {
 
 func (o *INInteraction) DateInterval() *foundation.NSDateInterval {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNInteractionSelDateInterval)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateIntervalFromID(_ret)
 }
 
@@ -135,7 +143,9 @@ func (o *INInteraction) SetDateInterval(dateInterval *foundation.NSDateInterval)
 
 func (o *INInteraction) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNInteractionSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -145,11 +155,12 @@ func (o *INInteraction) SetIdentifier(identifier *foundation.NSString) {
 
 func (o *INInteraction) GroupIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNInteractionSelGroupIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INInteraction) SetGroupIdentifier(groupIdentifier *foundation.NSString) {
 	o.Ptr().Send(_iNInteractionSelSetGroupIdentifier, groupIdentifier.Ptr())
 }
-

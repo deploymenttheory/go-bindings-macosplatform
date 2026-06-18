@@ -10,4 +10,3 @@ type SACrashDetectionDelegate interface {
 // SAEmergencyResponseDelegate wraps the ObjC protocol SAEmergencyResponseDelegate.
 type SAEmergencyResponseDelegate interface {
 }
-

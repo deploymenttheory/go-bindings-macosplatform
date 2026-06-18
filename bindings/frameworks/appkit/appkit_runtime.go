@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_appkitLib uintptr
-	_loadOnce sync.Once
+	_appkitLib     uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -48,35 +48,71 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("NSAccessibilityActionDescription", func() { purego.RegisterLibFunc(&_fnNSAccessibilityActionDescription, _appkitLib, "NSAccessibilityActionDescription") })
-	_register("NSAccessibilityFrameInView", func() { purego.RegisterLibFunc(&_fnNSAccessibilityFrameInView, _appkitLib, "NSAccessibilityFrameInView") })
-	_register("NSAccessibilityPointInView", func() { purego.RegisterLibFunc(&_fnNSAccessibilityPointInView, _appkitLib, "NSAccessibilityPointInView") })
-	_register("NSAccessibilityPostNotification", func() { purego.RegisterLibFunc(&_fnNSAccessibilityPostNotification, _appkitLib, "NSAccessibilityPostNotification") })
-	_register("NSAccessibilityPostNotificationWithUserInfo", func() { purego.RegisterLibFunc(&_fnNSAccessibilityPostNotificationWithUserInfo, _appkitLib, "NSAccessibilityPostNotificationWithUserInfo") })
-	_register("NSAccessibilityRaiseBadArgumentException", func() { purego.RegisterLibFunc(&_fnNSAccessibilityRaiseBadArgumentException, _appkitLib, "NSAccessibilityRaiseBadArgumentException") })
-	_register("NSAccessibilityRoleDescription", func() { purego.RegisterLibFunc(&_fnNSAccessibilityRoleDescription, _appkitLib, "NSAccessibilityRoleDescription") })
-	_register("NSAccessibilityRoleDescriptionForUIElement", func() { purego.RegisterLibFunc(&_fnNSAccessibilityRoleDescriptionForUIElement, _appkitLib, "NSAccessibilityRoleDescriptionForUIElement") })
-	_register("NSAccessibilitySetMayContainProtectedContent", func() { purego.RegisterLibFunc(&_fnNSAccessibilitySetMayContainProtectedContent, _appkitLib, "NSAccessibilitySetMayContainProtectedContent") })
-	_register("NSAccessibilityUnignoredAncestor", func() { purego.RegisterLibFunc(&_fnNSAccessibilityUnignoredAncestor, _appkitLib, "NSAccessibilityUnignoredAncestor") })
-	_register("NSAccessibilityUnignoredChildren", func() { purego.RegisterLibFunc(&_fnNSAccessibilityUnignoredChildren, _appkitLib, "NSAccessibilityUnignoredChildren") })
-	_register("NSAccessibilityUnignoredChildrenForOnlyChild", func() { purego.RegisterLibFunc(&_fnNSAccessibilityUnignoredChildrenForOnlyChild, _appkitLib, "NSAccessibilityUnignoredChildrenForOnlyChild") })
-	_register("NSAccessibilityUnignoredDescendant", func() { purego.RegisterLibFunc(&_fnNSAccessibilityUnignoredDescendant, _appkitLib, "NSAccessibilityUnignoredDescendant") })
+	_register("NSAccessibilityActionDescription", func() {
+		purego.RegisterLibFunc(&_fnNSAccessibilityActionDescription, _appkitLib, "NSAccessibilityActionDescription")
+	})
+	_register("NSAccessibilityFrameInView", func() {
+		purego.RegisterLibFunc(&_fnNSAccessibilityFrameInView, _appkitLib, "NSAccessibilityFrameInView")
+	})
+	_register("NSAccessibilityPointInView", func() {
+		purego.RegisterLibFunc(&_fnNSAccessibilityPointInView, _appkitLib, "NSAccessibilityPointInView")
+	})
+	_register("NSAccessibilityPostNotification", func() {
+		purego.RegisterLibFunc(&_fnNSAccessibilityPostNotification, _appkitLib, "NSAccessibilityPostNotification")
+	})
+	_register("NSAccessibilityPostNotificationWithUserInfo", func() {
+		purego.RegisterLibFunc(&_fnNSAccessibilityPostNotificationWithUserInfo, _appkitLib, "NSAccessibilityPostNotificationWithUserInfo")
+	})
+	_register("NSAccessibilityRaiseBadArgumentException", func() {
+		purego.RegisterLibFunc(&_fnNSAccessibilityRaiseBadArgumentException, _appkitLib, "NSAccessibilityRaiseBadArgumentException")
+	})
+	_register("NSAccessibilityRoleDescription", func() {
+		purego.RegisterLibFunc(&_fnNSAccessibilityRoleDescription, _appkitLib, "NSAccessibilityRoleDescription")
+	})
+	_register("NSAccessibilityRoleDescriptionForUIElement", func() {
+		purego.RegisterLibFunc(&_fnNSAccessibilityRoleDescriptionForUIElement, _appkitLib, "NSAccessibilityRoleDescriptionForUIElement")
+	})
+	_register("NSAccessibilitySetMayContainProtectedContent", func() {
+		purego.RegisterLibFunc(&_fnNSAccessibilitySetMayContainProtectedContent, _appkitLib, "NSAccessibilitySetMayContainProtectedContent")
+	})
+	_register("NSAccessibilityUnignoredAncestor", func() {
+		purego.RegisterLibFunc(&_fnNSAccessibilityUnignoredAncestor, _appkitLib, "NSAccessibilityUnignoredAncestor")
+	})
+	_register("NSAccessibilityUnignoredChildren", func() {
+		purego.RegisterLibFunc(&_fnNSAccessibilityUnignoredChildren, _appkitLib, "NSAccessibilityUnignoredChildren")
+	})
+	_register("NSAccessibilityUnignoredChildrenForOnlyChild", func() {
+		purego.RegisterLibFunc(&_fnNSAccessibilityUnignoredChildrenForOnlyChild, _appkitLib, "NSAccessibilityUnignoredChildrenForOnlyChild")
+	})
+	_register("NSAccessibilityUnignoredDescendant", func() {
+		purego.RegisterLibFunc(&_fnNSAccessibilityUnignoredDescendant, _appkitLib, "NSAccessibilityUnignoredDescendant")
+	})
 	_register("NSApplicationLoad", func() { purego.RegisterLibFunc(&_fnNSApplicationLoad, _appkitLib, "NSApplicationLoad") })
 	_register("NSApplicationMain", func() { purego.RegisterLibFunc(&_fnNSApplicationMain, _appkitLib, "NSApplicationMain") })
 	_register("NSAvailableWindowDepths", func() { purego.RegisterLibFunc(&_fnNSAvailableWindowDepths, _appkitLib, "NSAvailableWindowDepths") })
 	_register("NSBeep", func() { purego.RegisterLibFunc(&_fnNSBeep, _appkitLib, "NSBeep") })
-	_register("NSBeginInformationalAlertSheet", func() { purego.RegisterLibFunc(&_fnNSBeginInformationalAlertSheet, _appkitLib, "NSBeginInformationalAlertSheet") })
+	_register("NSBeginInformationalAlertSheet", func() {
+		purego.RegisterLibFunc(&_fnNSBeginInformationalAlertSheet, _appkitLib, "NSBeginInformationalAlertSheet")
+	})
 	_register("NSBestDepth", func() { purego.RegisterLibFunc(&_fnNSBestDepth, _appkitLib, "NSBestDepth") })
 	_register("NSBitsPerPixelFromDepth", func() { purego.RegisterLibFunc(&_fnNSBitsPerPixelFromDepth, _appkitLib, "NSBitsPerPixelFromDepth") })
 	_register("NSBitsPerSampleFromDepth", func() { purego.RegisterLibFunc(&_fnNSBitsPerSampleFromDepth, _appkitLib, "NSBitsPerSampleFromDepth") })
 	_register("NSColorSpaceFromDepth", func() { purego.RegisterLibFunc(&_fnNSColorSpaceFromDepth, _appkitLib, "NSColorSpaceFromDepth") })
-	_register("NSConvertGlyphsToPackedGlyphs", func() { purego.RegisterLibFunc(&_fnNSConvertGlyphsToPackedGlyphs, _appkitLib, "NSConvertGlyphsToPackedGlyphs") })
+	_register("NSConvertGlyphsToPackedGlyphs", func() {
+		purego.RegisterLibFunc(&_fnNSConvertGlyphsToPackedGlyphs, _appkitLib, "NSConvertGlyphsToPackedGlyphs")
+	})
 	_register("NSCopyBits", func() { purego.RegisterLibFunc(&_fnNSCopyBits, _appkitLib, "NSCopyBits") })
 	_register("NSCountWindows", func() { purego.RegisterLibFunc(&_fnNSCountWindows, _appkitLib, "NSCountWindows") })
 	_register("NSCountWindowsForContext", func() { purego.RegisterLibFunc(&_fnNSCountWindowsForContext, _appkitLib, "NSCountWindowsForContext") })
-	_register("NSCreateFileContentsPboardType", func() { purego.RegisterLibFunc(&_fnNSCreateFileContentsPboardType, _appkitLib, "NSCreateFileContentsPboardType") })
-	_register("NSCreateFilenamePboardType", func() { purego.RegisterLibFunc(&_fnNSCreateFilenamePboardType, _appkitLib, "NSCreateFilenamePboardType") })
-	_register("NSDirectionalEdgeInsetsMake", func() { purego.RegisterLibFunc(&_fnNSDirectionalEdgeInsetsMake, _appkitLib, "NSDirectionalEdgeInsetsMake") })
+	_register("NSCreateFileContentsPboardType", func() {
+		purego.RegisterLibFunc(&_fnNSCreateFileContentsPboardType, _appkitLib, "NSCreateFileContentsPboardType")
+	})
+	_register("NSCreateFilenamePboardType", func() {
+		purego.RegisterLibFunc(&_fnNSCreateFilenamePboardType, _appkitLib, "NSCreateFilenamePboardType")
+	})
+	_register("NSDirectionalEdgeInsetsMake", func() {
+		purego.RegisterLibFunc(&_fnNSDirectionalEdgeInsetsMake, _appkitLib, "NSDirectionalEdgeInsetsMake")
+	})
 	_register("NSDisableScreenUpdates", func() { purego.RegisterLibFunc(&_fnNSDisableScreenUpdates, _appkitLib, "NSDisableScreenUpdates") })
 	_register("NSDottedFrameRect", func() { purego.RegisterLibFunc(&_fnNSDottedFrameRect, _appkitLib, "NSDottedFrameRect") })
 	_register("NSDrawBitmap", func() { purego.RegisterLibFunc(&_fnNSDrawBitmap, _appkitLib, "NSDrawBitmap") })
@@ -96,10 +132,14 @@ func _loadLibrary() {
 	_register("NSEventMaskFromType", func() { purego.RegisterLibFunc(&_fnNSEventMaskFromType, _appkitLib, "NSEventMaskFromType") })
 	_register("NSFrameRect", func() { purego.RegisterLibFunc(&_fnNSFrameRect, _appkitLib, "NSFrameRect") })
 	_register("NSFrameRectWithWidth", func() { purego.RegisterLibFunc(&_fnNSFrameRectWithWidth, _appkitLib, "NSFrameRectWithWidth") })
-	_register("NSFrameRectWithWidthUsingOperation", func() { purego.RegisterLibFunc(&_fnNSFrameRectWithWidthUsingOperation, _appkitLib, "NSFrameRectWithWidthUsingOperation") })
+	_register("NSFrameRectWithWidthUsingOperation", func() {
+		purego.RegisterLibFunc(&_fnNSFrameRectWithWidthUsingOperation, _appkitLib, "NSFrameRectWithWidthUsingOperation")
+	})
 	_register("NSGetFileType", func() { purego.RegisterLibFunc(&_fnNSGetFileType, _appkitLib, "NSGetFileType") })
 	_register("NSGetFileTypes", func() { purego.RegisterLibFunc(&_fnNSGetFileTypes, _appkitLib, "NSGetFileTypes") })
-	_register("NSGetInformationalAlertPanel", func() { purego.RegisterLibFunc(&_fnNSGetInformationalAlertPanel, _appkitLib, "NSGetInformationalAlertPanel") })
+	_register("NSGetInformationalAlertPanel", func() {
+		purego.RegisterLibFunc(&_fnNSGetInformationalAlertPanel, _appkitLib, "NSGetInformationalAlertPanel")
+	})
 	_register("NSGetWindowServerMemory", func() { purego.RegisterLibFunc(&_fnNSGetWindowServerMemory, _appkitLib, "NSGetWindowServerMemory") })
 	_register("NSHighlightRect", func() { purego.RegisterLibFunc(&_fnNSHighlightRect, _appkitLib, "NSHighlightRect") })
 	_register("NSInterfaceStyleForKey", func() { purego.RegisterLibFunc(&_fnNSInterfaceStyleForKey, _appkitLib, "NSInterfaceStyleForKey") })
@@ -115,21 +155,35 @@ func _loadLibrary() {
 	_register("NSRectClipList", func() { purego.RegisterLibFunc(&_fnNSRectClipList, _appkitLib, "NSRectClipList") })
 	_register("NSRectFill", func() { purego.RegisterLibFunc(&_fnNSRectFill, _appkitLib, "NSRectFill") })
 	_register("NSRectFillList", func() { purego.RegisterLibFunc(&_fnNSRectFillList, _appkitLib, "NSRectFillList") })
-	_register("NSRectFillListUsingOperation", func() { purego.RegisterLibFunc(&_fnNSRectFillListUsingOperation, _appkitLib, "NSRectFillListUsingOperation") })
+	_register("NSRectFillListUsingOperation", func() {
+		purego.RegisterLibFunc(&_fnNSRectFillListUsingOperation, _appkitLib, "NSRectFillListUsingOperation")
+	})
 	_register("NSRectFillListWithColors", func() { purego.RegisterLibFunc(&_fnNSRectFillListWithColors, _appkitLib, "NSRectFillListWithColors") })
-	_register("NSRectFillListWithColorsUsingOperation", func() { purego.RegisterLibFunc(&_fnNSRectFillListWithColorsUsingOperation, _appkitLib, "NSRectFillListWithColorsUsingOperation") })
+	_register("NSRectFillListWithColorsUsingOperation", func() {
+		purego.RegisterLibFunc(&_fnNSRectFillListWithColorsUsingOperation, _appkitLib, "NSRectFillListWithColorsUsingOperation")
+	})
 	_register("NSRectFillListWithGrays", func() { purego.RegisterLibFunc(&_fnNSRectFillListWithGrays, _appkitLib, "NSRectFillListWithGrays") })
 	_register("NSRectFillUsingOperation", func() { purego.RegisterLibFunc(&_fnNSRectFillUsingOperation, _appkitLib, "NSRectFillUsingOperation") })
-	_register("NSRegisterServicesProvider", func() { purego.RegisterLibFunc(&_fnNSRegisterServicesProvider, _appkitLib, "NSRegisterServicesProvider") })
+	_register("NSRegisterServicesProvider", func() {
+		purego.RegisterLibFunc(&_fnNSRegisterServicesProvider, _appkitLib, "NSRegisterServicesProvider")
+	})
 	_register("NSReleaseAlertPanel", func() { purego.RegisterLibFunc(&_fnNSReleaseAlertPanel, _appkitLib, "NSReleaseAlertPanel") })
-	_register("NSRunInformationalAlertPanel", func() { purego.RegisterLibFunc(&_fnNSRunInformationalAlertPanel, _appkitLib, "NSRunInformationalAlertPanel") })
-	_register("NSRunInformationalAlertPanelRelativeToWindow", func() { purego.RegisterLibFunc(&_fnNSRunInformationalAlertPanelRelativeToWindow, _appkitLib, "NSRunInformationalAlertPanelRelativeToWindow") })
+	_register("NSRunInformationalAlertPanel", func() {
+		purego.RegisterLibFunc(&_fnNSRunInformationalAlertPanel, _appkitLib, "NSRunInformationalAlertPanel")
+	})
+	_register("NSRunInformationalAlertPanelRelativeToWindow", func() {
+		purego.RegisterLibFunc(&_fnNSRunInformationalAlertPanelRelativeToWindow, _appkitLib, "NSRunInformationalAlertPanelRelativeToWindow")
+	})
 	_register("NSSetFocusRingStyle", func() { purego.RegisterLibFunc(&_fnNSSetFocusRingStyle, _appkitLib, "NSSetFocusRingStyle") })
-	_register("NSSetShowsServicesMenuItem", func() { purego.RegisterLibFunc(&_fnNSSetShowsServicesMenuItem, _appkitLib, "NSSetShowsServicesMenuItem") })
+	_register("NSSetShowsServicesMenuItem", func() {
+		purego.RegisterLibFunc(&_fnNSSetShowsServicesMenuItem, _appkitLib, "NSSetShowsServicesMenuItem")
+	})
 	_register("NSShowAnimationEffect", func() { purego.RegisterLibFunc(&_fnNSShowAnimationEffect, _appkitLib, "NSShowAnimationEffect") })
 	_register("NSShowsServicesMenuItem", func() { purego.RegisterLibFunc(&_fnNSShowsServicesMenuItem, _appkitLib, "NSShowsServicesMenuItem") })
 	_register("NSTouchTypeMaskFromType", func() { purego.RegisterLibFunc(&_fnNSTouchTypeMaskFromType, _appkitLib, "NSTouchTypeMaskFromType") })
-	_register("NSUnregisterServicesProvider", func() { purego.RegisterLibFunc(&_fnNSUnregisterServicesProvider, _appkitLib, "NSUnregisterServicesProvider") })
+	_register("NSUnregisterServicesProvider", func() {
+		purego.RegisterLibFunc(&_fnNSUnregisterServicesProvider, _appkitLib, "NSUnregisterServicesProvider")
+	})
 	_register("NSUpdateDynamicServices", func() { purego.RegisterLibFunc(&_fnNSUpdateDynamicServices, _appkitLib, "NSUpdateDynamicServices") })
 	_register("NSWindowList", func() { purego.RegisterLibFunc(&_fnNSWindowList, _appkitLib, "NSWindowList") })
 	_register("NSWindowListForContext", func() { purego.RegisterLibFunc(&_fnNSWindowListForContext, _appkitLib, "NSWindowListForContext") })

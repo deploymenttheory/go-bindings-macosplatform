@@ -18,13 +18,13 @@ type BERenderingProcess struct {
 }
 
 var (
-	_clsBERenderingProcess = _objcClass("BERenderingProcess")
-	_bERenderingProcessSelRenderingProcessWithInterruptionHandlerCompletion = objc.RegisterName("renderingProcessWithInterruptionHandler:completion:")
+	_clsBERenderingProcess                                                          = _objcClass("BERenderingProcess")
+	_bERenderingProcessSelRenderingProcessWithInterruptionHandlerCompletion         = objc.RegisterName("renderingProcessWithInterruptionHandler:completion:")
 	_bERenderingProcessSelRenderingProcessWithBundleIDInterruptionHandlerCompletion = objc.RegisterName("renderingProcessWithBundleID:interruptionHandler:completion:")
-	_bERenderingProcessSelInvalidate = objc.RegisterName("invalidate")
-	_bERenderingProcessSelMakeLibXPCConnectionError = objc.RegisterName("makeLibXPCConnectionError:")
-	_bERenderingProcessSelGrantCapabilityError = objc.RegisterName("grantCapability:error:")
-	_bERenderingProcessSelGrantCapabilityErrorInvalidationHandler = objc.RegisterName("grantCapability:error:invalidationHandler:")
+	_bERenderingProcessSelInvalidate                                                = objc.RegisterName("invalidate")
+	_bERenderingProcessSelMakeLibXPCConnectionError                                 = objc.RegisterName("makeLibXPCConnectionError:")
+	_bERenderingProcessSelGrantCapabilityError                                      = objc.RegisterName("grantCapability:error:")
+	_bERenderingProcessSelGrantCapabilityErrorInvalidationHandler                   = objc.RegisterName("grantCapability:error:invalidationHandler:")
 )
 
 func BERenderingProcessFromID(id objc.ID) *BERenderingProcess {
@@ -37,7 +37,7 @@ func BERenderingProcessFromID(id objc.ID) *BERenderingProcess {
 	return o
 }
 
-// Asynchronously finds an existing extension process or launches one. This initializer finds an existing extension rendering process. If it’s unable to find an existing process, it launches a new extension process. - Parameters: - `interruptionHandler` : A block that is called if the extension process terminates. - `completion` : A block called with a new ``BERenderingProcess`` when the extension process has launched or with an error.
+// Asynchronously finds an existing extension process or launches one. This initializer finds an existing extension rendering process. If it’s unable to find an existing process, it launches a new extension process. - Parameters: - `interruptionHandler` : A block that is called if the extension process terminates. - `completion` : A block called with a new “BERenderingProcess“ when the extension process has launched or with an error.
 func BERenderingProcessRenderingProcessWithInterruptionHandlerCompletion(interruptionHandler func(), completion func(*BERenderingProcess, unsafe.Pointer)) {
 	var __block_interruptionHandler objc.Block
 	if interruptionHandler != nil {
@@ -59,7 +59,7 @@ func BERenderingProcessRenderingProcessWithInterruptionHandlerCompletion(interru
 	objc.ID(_clsBERenderingProcess).Send(_bERenderingProcessSelRenderingProcessWithInterruptionHandlerCompletion, __block_interruptionHandler, __block_completion)
 }
 
-// Asynchronously launches a rendering extension process. This initializer launches a new rendering extension process with the provided bundle identifier. - Parameters: - `bundleID` : The bundle identifier of the rendering extension process to launch. - `interruptionHandler` : A block that is called if the extension process terminates. - `completion` : A block called with a new ``BERenderingProcess`` when the extension process has launched or with an error.
+// Asynchronously launches a rendering extension process. This initializer launches a new rendering extension process with the provided bundle identifier. - Parameters: - `bundleID` : The bundle identifier of the rendering extension process to launch. - `interruptionHandler` : A block that is called if the extension process terminates. - `completion` : A block called with a new “BERenderingProcess“ when the extension process has launched or with an error.
 func BERenderingProcessRenderingProcessWithBundleIDInterruptionHandlerCompletion(bundleID *foundation.NSString, interruptionHandler func(), completion func(*BERenderingProcess, unsafe.Pointer)) {
 	var __block_interruptionHandler objc.Block
 	if interruptionHandler != nil {
@@ -90,7 +90,9 @@ func (o *BERenderingProcess) Invalidate() {
 func (o *BERenderingProcess) MakeLibXPCConnectionError() (*foundation.NSObject, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _bERenderingProcessSelMakeLibXPCConnectionError, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -119,4 +121,3 @@ func (o *BERenderingProcess) GrantCapabilityErrorInvalidationHandler(capability 
 	_ret := objc.Send[BEProcessCapabilityGrant](o.Ptr(), _bERenderingProcessSelGrantCapabilityErrorInvalidationHandler, capability.Ptr(), error_, __block_invalidationHandler)
 	return _ret
 }
-

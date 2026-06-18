@@ -16,20 +16,20 @@ type MTROptionalQRCodeInfo struct {
 }
 
 var (
-	_clsMTROptionalQRCodeInfo = _objcClass("MTROptionalQRCodeInfo")
+	_clsMTROptionalQRCodeInfo                       = _objcClass("MTROptionalQRCodeInfo")
 	_mTROptionalQRCodeInfoSelInitWithTagStringValue = objc.RegisterName("initWithTag:stringValue:")
-	_mTROptionalQRCodeInfoSelInitWithTagInt32Value = objc.RegisterName("initWithTag:int32Value:")
-	_mTROptionalQRCodeInfoSelType = objc.RegisterName("type")
-	_mTROptionalQRCodeInfoSelTag = objc.RegisterName("tag")
-	_mTROptionalQRCodeInfoSelIntegerValue = objc.RegisterName("integerValue")
-	_mTROptionalQRCodeInfoSelStringValue = objc.RegisterName("stringValue")
-	_mTROptionalQRCodeInfoSelInit = objc.RegisterName("init")
-	_mTROptionalQRCodeInfoSelSetType = objc.RegisterName("setType:")
-	_mTROptionalQRCodeInfoSelSetTag = objc.RegisterName("setTag:")
-	_mTROptionalQRCodeInfoSelSetIntegerValue = objc.RegisterName("setIntegerValue:")
-	_mTROptionalQRCodeInfoSelSetStringValue = objc.RegisterName("setStringValue:")
-	_mTROptionalQRCodeInfoSelInfoType = objc.RegisterName("infoType")
-	_mTROptionalQRCodeInfoSelSetInfoType = objc.RegisterName("setInfoType:")
+	_mTROptionalQRCodeInfoSelInitWithTagInt32Value  = objc.RegisterName("initWithTag:int32Value:")
+	_mTROptionalQRCodeInfoSelType                   = objc.RegisterName("type")
+	_mTROptionalQRCodeInfoSelTag                    = objc.RegisterName("tag")
+	_mTROptionalQRCodeInfoSelIntegerValue           = objc.RegisterName("integerValue")
+	_mTROptionalQRCodeInfoSelStringValue            = objc.RegisterName("stringValue")
+	_mTROptionalQRCodeInfoSelInit                   = objc.RegisterName("init")
+	_mTROptionalQRCodeInfoSelSetType                = objc.RegisterName("setType:")
+	_mTROptionalQRCodeInfoSelSetTag                 = objc.RegisterName("setTag:")
+	_mTROptionalQRCodeInfoSelSetIntegerValue        = objc.RegisterName("setIntegerValue:")
+	_mTROptionalQRCodeInfoSelSetStringValue         = objc.RegisterName("setStringValue:")
+	_mTROptionalQRCodeInfoSelInfoType               = objc.RegisterName("infoType")
+	_mTROptionalQRCodeInfoSelSetInfoType            = objc.RegisterName("setInfoType:")
 )
 
 func MTROptionalQRCodeInfoFromID(id objc.ID) *MTROptionalQRCodeInfo {
@@ -45,14 +45,18 @@ func MTROptionalQRCodeInfoFromID(id objc.ID) *MTROptionalQRCodeInfo {
 // Initializes the object with a tag and string value. The tag must be in the range 0x80 - 0xFF.
 func (o *MTROptionalQRCodeInfo) InitWithTagStringValue(tag *foundation.NSNumber, value *foundation.NSString) *MTROptionalQRCodeInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROptionalQRCodeInfoSelInitWithTagStringValue, tag.Ptr(), value.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTROptionalQRCodeInfoFromID(_ret)
 }
 
 // Initializes the object with a tag and int32 value. The tag must be in the range 0x80 - 0xFF.
 func (o *MTROptionalQRCodeInfo) InitWithTagInt32Value(tag *foundation.NSNumber, value int32) *MTROptionalQRCodeInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROptionalQRCodeInfoSelInitWithTagInt32Value, tag.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTROptionalQRCodeInfoFromID(_ret)
 }
 
@@ -64,27 +68,35 @@ func (o *MTROptionalQRCodeInfo) Type() MTROptionalQRCodeInfoType {
 // The vendor-specific TLV tag number for this information item. Vendor-specific elements have tags in the range 0x80 - 0xFF.
 func (o *MTROptionalQRCodeInfo) Tag() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROptionalQRCodeInfoSelTag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // The value held in this extension element, if `type` is an integer type, or nil otherwise.
 func (o *MTROptionalQRCodeInfo) IntegerValue() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROptionalQRCodeInfoSelIntegerValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // The value held in this extension element, if `type` is `MTROptionalQRCodeInfoTypeString`, or nil otherwise.
 func (o *MTROptionalQRCodeInfo) StringValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROptionalQRCodeInfoSelStringValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTROptionalQRCodeInfo) Init() *MTROptionalQRCodeInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROptionalQRCodeInfoSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTROptionalQRCodeInfoFromID(_ret)
 }
 
@@ -106,11 +118,12 @@ func (o *MTROptionalQRCodeInfo) SetStringValue(stringValue *foundation.NSString)
 
 func (o *MTROptionalQRCodeInfo) InfoType() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROptionalQRCodeInfoSelInfoType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTROptionalQRCodeInfo) SetInfoType(infoType *foundation.NSNumber) {
 	o.Ptr().Send(_mTROptionalQRCodeInfoSelSetInfoType, infoType.Ptr())
 }
-

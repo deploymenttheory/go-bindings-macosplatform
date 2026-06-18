@@ -205,7 +205,9 @@ func (x *TrackingSeparatorToolbarItem) SetDividerIndex(dividerIndex int) {
 	x.inner.SetDividerIndex(dividerIndex)
 }
 
-func (x *TrackingSeparatorToolbarItem) asToolbarItem() *raw.NSToolbarItem { return &x.inner.NSToolbarItem }
+func (x *TrackingSeparatorToolbarItem) asToolbarItem() *raw.NSToolbarItem {
+	return &x.inner.NSToolbarItem
+}
 
 // TrackingSeparatorToolbarItemable is the interface implemented by [TrackingSeparatorToolbarItem], for mocking and DI.
 type TrackingSeparatorToolbarItemable interface {
@@ -241,4 +243,3 @@ type TrackingSeparatorToolbarItemable interface {
 }
 
 var _ TrackingSeparatorToolbarItemable = (*TrackingSeparatorToolbarItem)(nil)
-

@@ -92,4 +92,3 @@ func CurrentRequest() *Request {
 	}
 	return &Request{inner: _r}
 }
-

@@ -16,25 +16,25 @@ type DOMMouseEvent struct {
 }
 
 var (
-	_clsDOMMouseEvent = _objcClass("DOMMouseEvent")
+	_clsDOMMouseEvent                                                                                                                       = _objcClass("DOMMouseEvent")
 	_dOMMouseEventSelInitMouseEventCanBubbleCancelableViewDetailScreenXScreenYClientXClientYCtrlKeyAltKeyShiftKeyMetaKeyButtonRelatedTarget = objc.RegisterName("initMouseEvent:canBubble:cancelable:view:detail:screenX:screenY:clientX:clientY:ctrlKey:altKey:shiftKey:metaKey:button:relatedTarget:")
-	_dOMMouseEventSelScreenX = objc.RegisterName("screenX")
-	_dOMMouseEventSelScreenY = objc.RegisterName("screenY")
-	_dOMMouseEventSelClientX = objc.RegisterName("clientX")
-	_dOMMouseEventSelClientY = objc.RegisterName("clientY")
-	_dOMMouseEventSelCtrlKey = objc.RegisterName("ctrlKey")
-	_dOMMouseEventSelShiftKey = objc.RegisterName("shiftKey")
-	_dOMMouseEventSelAltKey = objc.RegisterName("altKey")
-	_dOMMouseEventSelMetaKey = objc.RegisterName("metaKey")
-	_dOMMouseEventSelButton = objc.RegisterName("button")
-	_dOMMouseEventSelRelatedTarget = objc.RegisterName("relatedTarget")
-	_dOMMouseEventSelOffsetX = objc.RegisterName("offsetX")
-	_dOMMouseEventSelOffsetY = objc.RegisterName("offsetY")
-	_dOMMouseEventSelX = objc.RegisterName("x")
-	_dOMMouseEventSelY = objc.RegisterName("y")
-	_dOMMouseEventSelFromElement = objc.RegisterName("fromElement")
-	_dOMMouseEventSelToElement = objc.RegisterName("toElement")
-	_dOMMouseEventSelInitMouseEvent = objc.RegisterName("initMouseEvent:::::::::::::::")
+	_dOMMouseEventSelScreenX                                                                                                                = objc.RegisterName("screenX")
+	_dOMMouseEventSelScreenY                                                                                                                = objc.RegisterName("screenY")
+	_dOMMouseEventSelClientX                                                                                                                = objc.RegisterName("clientX")
+	_dOMMouseEventSelClientY                                                                                                                = objc.RegisterName("clientY")
+	_dOMMouseEventSelCtrlKey                                                                                                                = objc.RegisterName("ctrlKey")
+	_dOMMouseEventSelShiftKey                                                                                                               = objc.RegisterName("shiftKey")
+	_dOMMouseEventSelAltKey                                                                                                                 = objc.RegisterName("altKey")
+	_dOMMouseEventSelMetaKey                                                                                                                = objc.RegisterName("metaKey")
+	_dOMMouseEventSelButton                                                                                                                 = objc.RegisterName("button")
+	_dOMMouseEventSelRelatedTarget                                                                                                          = objc.RegisterName("relatedTarget")
+	_dOMMouseEventSelOffsetX                                                                                                                = objc.RegisterName("offsetX")
+	_dOMMouseEventSelOffsetY                                                                                                                = objc.RegisterName("offsetY")
+	_dOMMouseEventSelX                                                                                                                      = objc.RegisterName("x")
+	_dOMMouseEventSelY                                                                                                                      = objc.RegisterName("y")
+	_dOMMouseEventSelFromElement                                                                                                            = objc.RegisterName("fromElement")
+	_dOMMouseEventSelToElement                                                                                                              = objc.RegisterName("toElement")
+	_dOMMouseEventSelInitMouseEvent                                                                                                         = objc.RegisterName("initMouseEvent:::::::::::::::")
 )
 
 func DOMMouseEventFromID(id objc.ID) *DOMMouseEvent {
@@ -123,17 +123,20 @@ func (o *DOMMouseEvent) Y() int {
 
 func (o *DOMMouseEvent) FromElement() *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMMouseEventSelFromElement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMMouseEvent) ToElement() *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMMouseEventSelToElement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMMouseEvent) InitMouseEvent(type_ *foundation.NSString, canBubble bool, cancelable bool, view *DOMAbstractView, detail int, screenX int, screenY int, clientX int, clientY int, ctrlKey bool, altKey bool, shiftKey bool, metaKey bool, button uint16, relatedTarget DOMEventTarget) {
 	o.Ptr().Send(_dOMMouseEventSelInitMouseEvent, type_.Ptr(), canBubble, cancelable, view.Ptr(), detail, screenX, screenY, clientX, clientY, ctrlKey, altKey, shiftKey, metaKey, button, relatedTarget)
 }
-

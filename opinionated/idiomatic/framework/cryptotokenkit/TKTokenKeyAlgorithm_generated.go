@@ -54,4 +54,3 @@ type TokenKeyAlgorithmable interface {
 }
 
 var _ TokenKeyAlgorithmable = (*TokenKeyAlgorithm)(nil)
-

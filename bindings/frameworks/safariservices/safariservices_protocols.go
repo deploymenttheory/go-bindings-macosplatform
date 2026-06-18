@@ -6,4 +6,3 @@ package safariservices
 // SFSafariExtensionHandling wraps the ObjC protocol SFSafariExtensionHandling.
 type SFSafariExtensionHandling interface {
 }
-

@@ -17,12 +17,12 @@ type NSJSONSerialization struct {
 }
 
 var (
-	_clsNSJSONSerialization = _objcClass("NSJSONSerialization")
-	_nSJSONSerializationSelIsValidJSONObject = objc.RegisterName("isValidJSONObject:")
-	_nSJSONSerializationSelDataWithJSONObjectOptionsError = objc.RegisterName("dataWithJSONObject:options:error:")
-	_nSJSONSerializationSelJSONObjectWithDataOptionsError = objc.RegisterName("JSONObjectWithData:options:error:")
+	_clsNSJSONSerialization                                    = _objcClass("NSJSONSerialization")
+	_nSJSONSerializationSelIsValidJSONObject                   = objc.RegisterName("isValidJSONObject:")
+	_nSJSONSerializationSelDataWithJSONObjectOptionsError      = objc.RegisterName("dataWithJSONObject:options:error:")
+	_nSJSONSerializationSelJSONObjectWithDataOptionsError      = objc.RegisterName("JSONObjectWithData:options:error:")
 	_nSJSONSerializationSelWriteJSONObjectToStreamOptionsError = objc.RegisterName("writeJSONObject:toStream:options:error:")
-	_nSJSONSerializationSelJSONObjectWithStreamOptionsError = objc.RegisterName("JSONObjectWithStream:options:error:")
+	_nSJSONSerializationSelJSONObjectWithStreamOptionsError    = objc.RegisterName("JSONObjectWithStream:options:error:")
 )
 
 func NSJSONSerializationFromID(id objc.ID) *NSJSONSerialization {
@@ -43,7 +43,9 @@ func NSJSONSerializationIsValidJSONObject(obj objc.ID) bool {
 func NSJSONSerializationDataWithJSONObjectOptionsError(obj objc.ID, opt NSJSONWritingOptions) (*NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSJSONSerialization), _nSJSONSerializationSelDataWithJSONObjectOptionsError, obj, opt, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -76,4 +78,3 @@ func NSJSONSerializationJSONObjectWithStreamOptionsError(stream *NSInputStream, 
 	}
 	return _ret, nil
 }
-

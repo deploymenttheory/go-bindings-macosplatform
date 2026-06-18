@@ -15,7 +15,9 @@ import (
 // Deprecated: since macOS 13.0.
 func BCParameterNameBody() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_businesschatLib, "BCParameterNameBody")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -23,7 +25,9 @@ func BCParameterNameBody() *foundation.NSString {
 // Deprecated: since macOS 13.0.
 func BCParameterNameGroup() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_businesschatLib, "BCParameterNameGroup")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -31,7 +35,8 @@ func BCParameterNameGroup() *foundation.NSString {
 // Deprecated: since macOS 13.0.
 func BCParameterNameIntent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_businesschatLib, "BCParameterNameIntent")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
-

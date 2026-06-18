@@ -15,11 +15,11 @@ type MTLTextureReferenceType struct {
 }
 
 var (
-	_clsMTLTextureReferenceType = _objcClass("MTLTextureReferenceType")
+	_clsMTLTextureReferenceType                = _objcClass("MTLTextureReferenceType")
 	_mTLTextureReferenceTypeSelTextureDataType = objc.RegisterName("textureDataType")
-	_mTLTextureReferenceTypeSelTextureType = objc.RegisterName("textureType")
-	_mTLTextureReferenceTypeSelAccess = objc.RegisterName("access")
-	_mTLTextureReferenceTypeSelIsDepthTexture = objc.RegisterName("isDepthTexture")
+	_mTLTextureReferenceTypeSelTextureType     = objc.RegisterName("textureType")
+	_mTLTextureReferenceTypeSelAccess          = objc.RegisterName("access")
+	_mTLTextureReferenceTypeSelIsDepthTexture  = objc.RegisterName("isDepthTexture")
 )
 
 func MTLTextureReferenceTypeFromID(id objc.ID) *MTLTextureReferenceType {
@@ -51,4 +51,3 @@ func (o *MTLTextureReferenceType) IsDepthTexture() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mTLTextureReferenceTypeSelIsDepthTexture)
 	return _ret
 }
-

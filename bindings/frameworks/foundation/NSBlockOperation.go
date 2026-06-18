@@ -17,10 +17,10 @@ type NSBlockOperation struct {
 }
 
 var (
-	_clsNSBlockOperation = _objcClass("NSBlockOperation")
+	_clsNSBlockOperation                   = _objcClass("NSBlockOperation")
 	_nSBlockOperationSelBlockOperationWith = objc.RegisterName("blockOperationWithBlock:")
-	_nSBlockOperationSelAddExecutionBlock = objc.RegisterName("addExecutionBlock:")
-	_nSBlockOperationSelExecutionBlocks = objc.RegisterName("executionBlocks")
+	_nSBlockOperationSelAddExecutionBlock  = objc.RegisterName("addExecutionBlock:")
+	_nSBlockOperationSelExecutionBlocks    = objc.RegisterName("executionBlocks")
 )
 
 func NSBlockOperationFromID(id objc.ID) *NSBlockOperation {
@@ -42,7 +42,9 @@ func NSBlockOperationBlockOperationWith(block func()) *NSBlockOperation {
 		defer __block_block.Release()
 	}
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBlockOperation), _nSBlockOperationSelBlockOperationWith, __block_block)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBlockOperationFromID(_ret)
 }
 
@@ -61,4 +63,3 @@ func (o *NSBlockOperation) ExecutionBlocks() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSBlockOperationSelExecutionBlocks)
 	return _ret
 }
-

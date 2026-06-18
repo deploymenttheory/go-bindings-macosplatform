@@ -16,16 +16,16 @@ type ASPasskeyCredentialIdentity struct {
 }
 
 var (
-	_clsASPasskeyCredentialIdentity = _objcClass("ASPasskeyCredentialIdentity")
-	_aSPasskeyCredentialIdentitySelInitWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier = objc.RegisterName("initWithRelyingPartyIdentifier:userName:credentialID:userHandle:recordIdentifier:")
+	_clsASPasskeyCredentialIdentity                                                                                 = _objcClass("ASPasskeyCredentialIdentity")
+	_aSPasskeyCredentialIdentitySelInitWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier     = objc.RegisterName("initWithRelyingPartyIdentifier:userName:credentialID:userHandle:recordIdentifier:")
 	_aSPasskeyCredentialIdentitySelIdentityWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier = objc.RegisterName("identityWithRelyingPartyIdentifier:userName:credentialID:userHandle:recordIdentifier:")
-	_aSPasskeyCredentialIdentitySelRelyingPartyIdentifier = objc.RegisterName("relyingPartyIdentifier")
-	_aSPasskeyCredentialIdentitySelUserName = objc.RegisterName("userName")
-	_aSPasskeyCredentialIdentitySelCredentialID = objc.RegisterName("credentialID")
-	_aSPasskeyCredentialIdentitySelUserHandle = objc.RegisterName("userHandle")
-	_aSPasskeyCredentialIdentitySelRecordIdentifier = objc.RegisterName("recordIdentifier")
-	_aSPasskeyCredentialIdentitySelRank = objc.RegisterName("rank")
-	_aSPasskeyCredentialIdentitySelSetRank = objc.RegisterName("setRank:")
+	_aSPasskeyCredentialIdentitySelRelyingPartyIdentifier                                                           = objc.RegisterName("relyingPartyIdentifier")
+	_aSPasskeyCredentialIdentitySelUserName                                                                         = objc.RegisterName("userName")
+	_aSPasskeyCredentialIdentitySelCredentialID                                                                     = objc.RegisterName("credentialID")
+	_aSPasskeyCredentialIdentitySelUserHandle                                                                       = objc.RegisterName("userHandle")
+	_aSPasskeyCredentialIdentitySelRecordIdentifier                                                                 = objc.RegisterName("recordIdentifier")
+	_aSPasskeyCredentialIdentitySelRank                                                                             = objc.RegisterName("rank")
+	_aSPasskeyCredentialIdentitySelSetRank                                                                          = objc.RegisterName("setRank:")
 )
 
 func ASPasskeyCredentialIdentityFromID(id objc.ID) *ASPasskeyCredentialIdentity {
@@ -41,49 +41,63 @@ func ASPasskeyCredentialIdentityFromID(id objc.ID) *ASPasskeyCredentialIdentity 
 // @abstract Initialize an instance of ASPasskeyCredentialIdentity. @param relyingPartyIdentifier relying party for this credential. @param userName user name associated with this credential. @param credentialID credential ID of this passkey credential. @param userHandle user handle data of this passkey credential. @param recordIdentifier identifier used by credential provider extension to identify this credential.
 func (o *ASPasskeyCredentialIdentity) InitWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier(relyingPartyIdentifier *foundation.NSString, userName *foundation.NSString, credentialID *foundation.NSData, userHandle *foundation.NSData, recordIdentifier *foundation.NSString) *ASPasskeyCredentialIdentity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyCredentialIdentitySelInitWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier, relyingPartyIdentifier.Ptr(), userName.Ptr(), credentialID.Ptr(), userHandle.Ptr(), recordIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASPasskeyCredentialIdentityFromID(_ret)
 }
 
 // @abstract Create and initialize an instance of ASPasskeyCredentialIdentity. @param relyingPartyIdentifier relying party for this credential. @param userName user name associated with this credential. @param credentialID credential ID of this passkey credential. @param userHandle user handle data of this passkey credential. @param recordIdentifier identifier used by credential provider extension to identify this credential.
 func ASPasskeyCredentialIdentityIdentityWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier(relyingPartyIdentifier *foundation.NSString, userName *foundation.NSString, credentialID *foundation.NSData, userHandle *foundation.NSData, recordIdentifier *foundation.NSString) *ASPasskeyCredentialIdentity {
 	_ret := objc.Send[objc.ID](objc.ID(_clsASPasskeyCredentialIdentity), _aSPasskeyCredentialIdentitySelIdentityWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier, relyingPartyIdentifier.Ptr(), userName.Ptr(), credentialID.Ptr(), userHandle.Ptr(), recordIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASPasskeyCredentialIdentityFromID(_ret)
 }
 
 // @abstract The relying party identifier of this passkey credential. @discussion This field is reported as the serviceIdentifier property of ASCredentialIdentity.
 func (o *ASPasskeyCredentialIdentity) RelyingPartyIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyCredentialIdentitySelRelyingPartyIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract The user name of this passkey credential. @discussion This field is reported as the user property of ASCredentialIdentity.
 func (o *ASPasskeyCredentialIdentity) UserName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyCredentialIdentitySelUserName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract The credential ID of this passkey credential. @discussion This field is used to identify the correct credential to use based on relying party request parameters.
 func (o *ASPasskeyCredentialIdentity) CredentialID() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyCredentialIdentitySelCredentialID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @abstract The user handle of this passkey credential. @discussion This field is used to identify the correct credential to use based on relying party request parameters.
 func (o *ASPasskeyCredentialIdentity) UserHandle() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyCredentialIdentitySelUserHandle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @abstract Get the record identifier. @result The record identifier. @discussion You can utilize the record identifier to uniquely identify the credential identity in your local database.
 func (o *ASPasskeyCredentialIdentity) RecordIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyCredentialIdentitySelRecordIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -96,4 +110,3 @@ func (o *ASPasskeyCredentialIdentity) Rank() int {
 func (o *ASPasskeyCredentialIdentity) SetRank(rank int) {
 	o.Ptr().Send(_aSPasskeyCredentialIdentitySelSetRank, rank)
 }
-

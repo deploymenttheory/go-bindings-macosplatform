@@ -19,14 +19,14 @@ type GLKMesh struct {
 }
 
 var (
-	_clsGLKMesh = _objcClass("GLKMesh")
-	_gLKMeshSelInitWithMeshError = objc.RegisterName("initWithMesh:error:")
+	_clsGLKMesh                                    = _objcClass("GLKMesh")
+	_gLKMeshSelInitWithMeshError                   = objc.RegisterName("initWithMesh:error:")
 	_gLKMeshSelNewMeshesFromAssetSourceMeshesError = objc.RegisterName("newMeshesFromAsset:sourceMeshes:error:")
-	_gLKMeshSelVertexCount = objc.RegisterName("vertexCount")
-	_gLKMeshSelVertexBuffers = objc.RegisterName("vertexBuffers")
-	_gLKMeshSelVertexDescriptor = objc.RegisterName("vertexDescriptor")
-	_gLKMeshSelSubmeshes = objc.RegisterName("submeshes")
-	_gLKMeshSelName = objc.RegisterName("name")
+	_gLKMeshSelVertexCount                         = objc.RegisterName("vertexCount")
+	_gLKMeshSelVertexBuffers                       = objc.RegisterName("vertexBuffers")
+	_gLKMeshSelVertexDescriptor                    = objc.RegisterName("vertexDescriptor")
+	_gLKMeshSelSubmeshes                           = objc.RegisterName("submeshes")
+	_gLKMeshSelName                                = objc.RegisterName("name")
 )
 
 func GLKMeshFromID(id objc.ID) *GLKMesh {
@@ -43,7 +43,9 @@ func GLKMeshFromID(id objc.ID) *GLKMesh {
 func (o *GLKMesh) InitWithMeshError(mesh *modelio.MDLMesh) (*GLKMesh, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _gLKMeshSelInitWithMeshError, mesh.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -69,28 +71,35 @@ func (o *GLKMesh) VertexCount() uint {
 // @property vertexBuffers @abstract Array of buffers in which mesh vertex data resides
 func (o *GLKMesh) VertexBuffers() *foundation.NSArray[*GLKMeshBuffer] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gLKMeshSelVertexBuffers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GLKMeshBuffer](_ret)
 }
 
 // @property vertexDescriptor @abstract Model I/O vertex descriptor specifying the layout of data in vertexBuffers @discussion This is not directly used by this object, but the application can use this information to determine rendering state or setup a vertex attribute object.
 func (o *GLKMesh) VertexDescriptor() *modelio.MDLVertexDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gLKMeshSelVertexDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return modelio.MDLVertexDescriptorFromID(_ret)
 }
 
 // @property submeshes @abstract Submeshes containing index buffers to rendering mesh verticies. @discussion Submeshes may also contain texture materials to apply when rendering this object
 func (o *GLKMesh) Submeshes() *foundation.NSArray[*GLKSubmesh] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gLKMeshSelSubmeshes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GLKSubmesh](_ret)
 }
 
 // @property name @abstract Name of the mesh copies from the originating Model I/O mesh @discussion Can be used by the app to identiry the mesh in it's scene/world/renderer etc.
 func (o *GLKMesh) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gLKMeshSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

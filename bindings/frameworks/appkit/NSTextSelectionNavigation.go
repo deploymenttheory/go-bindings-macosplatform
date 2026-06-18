@@ -17,20 +17,20 @@ type NSTextSelectionNavigation struct {
 }
 
 var (
-	_clsNSTextSelectionNavigation = _objcClass("NSTextSelectionNavigation")
-	_nSTextSelectionNavigationSelInitWithDataSource = objc.RegisterName("initWithDataSource:")
-	_nSTextSelectionNavigationSelFlushLayoutCache = objc.RegisterName("flushLayoutCache")
-	_nSTextSelectionNavigationSelDestinationSelectionForTextSelectionDirectionDestinationExtendingConfined = objc.RegisterName("destinationSelectionForTextSelection:direction:destination:extending:confined:")
+	_clsNSTextSelectionNavigation                                                                                     = _objcClass("NSTextSelectionNavigation")
+	_nSTextSelectionNavigationSelInitWithDataSource                                                                   = objc.RegisterName("initWithDataSource:")
+	_nSTextSelectionNavigationSelFlushLayoutCache                                                                     = objc.RegisterName("flushLayoutCache")
+	_nSTextSelectionNavigationSelDestinationSelectionForTextSelectionDirectionDestinationExtendingConfined            = objc.RegisterName("destinationSelectionForTextSelection:direction:destination:extending:confined:")
 	_nSTextSelectionNavigationSelTextSelectionsInteractingAtPointInContainerAtLocationAnchorsModifiersSelectingBounds = objc.RegisterName("textSelectionsInteractingAtPoint:inContainerAtLocation:anchors:modifiers:selecting:bounds:")
-	_nSTextSelectionNavigationSelTextSelectionForSelectionGranularityEnclosingTextSelection = objc.RegisterName("textSelectionForSelectionGranularity:enclosingTextSelection:")
-	_nSTextSelectionNavigationSelTextSelectionForSelectionGranularityEnclosingPointInContainerAtLocation = objc.RegisterName("textSelectionForSelectionGranularity:enclosingPoint:inContainerAtLocation:")
-	_nSTextSelectionNavigationSelResolvedInsertionLocationForTextSelectionWritingDirection = objc.RegisterName("resolvedInsertionLocationForTextSelection:writingDirection:")
-	_nSTextSelectionNavigationSelDeletionRangesForTextSelectionDirectionDestinationAllowsDecomposition = objc.RegisterName("deletionRangesForTextSelection:direction:destination:allowsDecomposition:")
-	_nSTextSelectionNavigationSelTextSelectionDataSource = objc.RegisterName("textSelectionDataSource")
-	_nSTextSelectionNavigationSelAllowsNonContiguousRanges = objc.RegisterName("allowsNonContiguousRanges")
-	_nSTextSelectionNavigationSelSetAllowsNonContiguousRanges = objc.RegisterName("setAllowsNonContiguousRanges:")
-	_nSTextSelectionNavigationSelRotatesCoordinateSystemForLayoutOrientation = objc.RegisterName("rotatesCoordinateSystemForLayoutOrientation")
-	_nSTextSelectionNavigationSelSetRotatesCoordinateSystemForLayoutOrientation = objc.RegisterName("setRotatesCoordinateSystemForLayoutOrientation:")
+	_nSTextSelectionNavigationSelTextSelectionForSelectionGranularityEnclosingTextSelection                           = objc.RegisterName("textSelectionForSelectionGranularity:enclosingTextSelection:")
+	_nSTextSelectionNavigationSelTextSelectionForSelectionGranularityEnclosingPointInContainerAtLocation              = objc.RegisterName("textSelectionForSelectionGranularity:enclosingPoint:inContainerAtLocation:")
+	_nSTextSelectionNavigationSelResolvedInsertionLocationForTextSelectionWritingDirection                            = objc.RegisterName("resolvedInsertionLocationForTextSelection:writingDirection:")
+	_nSTextSelectionNavigationSelDeletionRangesForTextSelectionDirectionDestinationAllowsDecomposition                = objc.RegisterName("deletionRangesForTextSelection:direction:destination:allowsDecomposition:")
+	_nSTextSelectionNavigationSelTextSelectionDataSource                                                              = objc.RegisterName("textSelectionDataSource")
+	_nSTextSelectionNavigationSelAllowsNonContiguousRanges                                                            = objc.RegisterName("allowsNonContiguousRanges")
+	_nSTextSelectionNavigationSelSetAllowsNonContiguousRanges                                                         = objc.RegisterName("setAllowsNonContiguousRanges:")
+	_nSTextSelectionNavigationSelRotatesCoordinateSystemForLayoutOrientation                                          = objc.RegisterName("rotatesCoordinateSystemForLayoutOrientation")
+	_nSTextSelectionNavigationSelSetRotatesCoordinateSystemForLayoutOrientation                                       = objc.RegisterName("setRotatesCoordinateSystemForLayoutOrientation:")
 )
 
 func NSTextSelectionNavigationFromID(id objc.ID) *NSTextSelectionNavigation {
@@ -45,7 +45,9 @@ func NSTextSelectionNavigationFromID(id objc.ID) *NSTextSelectionNavigation {
 
 func (o *NSTextSelectionNavigation) InitWithDataSource(dataSource NSTextSelectionDataSource) *NSTextSelectionNavigation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelectionNavigationSelInitWithDataSource, dataSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextSelectionNavigationFromID(_ret)
 }
 
@@ -55,25 +57,33 @@ func (o *NSTextSelectionNavigation) FlushLayoutCache() {
 
 func (o *NSTextSelectionNavigation) DestinationSelectionForTextSelectionDirectionDestinationExtendingConfined(textSelection *NSTextSelection, direction NSTextSelectionNavigationDirection, destination NSTextSelectionNavigationDestination, extending bool, confined bool) *NSTextSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelectionNavigationSelDestinationSelectionForTextSelectionDirectionDestinationExtendingConfined, textSelection.Ptr(), direction, destination, extending, confined)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextSelectionFromID(_ret)
 }
 
 func (o *NSTextSelectionNavigation) TextSelectionsInteractingAtPointInContainerAtLocationAnchorsModifiersSelectingBounds(point corefoundation.CGPoint, containerLocation NSTextLocation, anchors *foundation.NSArray[*NSTextSelection], modifiers NSTextSelectionNavigationModifier, selecting bool, bounds corefoundation.CGRect) *foundation.NSArray[*NSTextSelection] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelectionNavigationSelTextSelectionsInteractingAtPointInContainerAtLocationAnchorsModifiersSelectingBounds, point, containerLocation, anchors.Ptr(), modifiers, selecting, bounds)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSTextSelection](_ret)
 }
 
 func (o *NSTextSelectionNavigation) TextSelectionForSelectionGranularityEnclosingTextSelection(selectionGranularity NSTextSelectionGranularity, textSelection *NSTextSelection) *NSTextSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelectionNavigationSelTextSelectionForSelectionGranularityEnclosingTextSelection, selectionGranularity, textSelection.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextSelectionFromID(_ret)
 }
 
 func (o *NSTextSelectionNavigation) TextSelectionForSelectionGranularityEnclosingPointInContainerAtLocation(selectionGranularity NSTextSelectionGranularity, point corefoundation.CGPoint, location NSTextLocation) *NSTextSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelectionNavigationSelTextSelectionForSelectionGranularityEnclosingPointInContainerAtLocation, selectionGranularity, point, location)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextSelectionFromID(_ret)
 }
 
@@ -84,7 +94,9 @@ func (o *NSTextSelectionNavigation) ResolvedInsertionLocationForTextSelectionWri
 
 func (o *NSTextSelectionNavigation) DeletionRangesForTextSelectionDirectionDestinationAllowsDecomposition(textSelection *NSTextSelection, direction NSTextSelectionNavigationDirection, destination NSTextSelectionNavigationDestination, allowsDecomposition bool) *foundation.NSArray[*NSTextRange] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelectionNavigationSelDeletionRangesForTextSelectionDirectionDestinationAllowsDecomposition, textSelection.Ptr(), direction, destination, allowsDecomposition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSTextRange](_ret)
 }
 
@@ -110,4 +122,3 @@ func (o *NSTextSelectionNavigation) RotatesCoordinateSystemForLayoutOrientation(
 func (o *NSTextSelectionNavigation) SetRotatesCoordinateSystemForLayoutOrientation(rotatesCoordinateSystemForLayoutOrientation bool) {
 	o.Ptr().Send(_nSTextSelectionNavigationSelSetRotatesCoordinateSystemForLayoutOrientation, rotatesCoordinateSystemForLayoutOrientation)
 }
-

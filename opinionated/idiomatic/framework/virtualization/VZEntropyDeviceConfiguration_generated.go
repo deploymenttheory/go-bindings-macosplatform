@@ -35,7 +35,9 @@ func NewEntropyDeviceConfiguration() *EntropyDeviceConfiguration {
 	return &EntropyDeviceConfiguration{inner: raw.VZEntropyDeviceConfigurationFromID(_id)}
 }
 
-func (x *EntropyDeviceConfiguration) asEntropyDeviceConfiguration() *raw.VZEntropyDeviceConfiguration { return x.inner }
+func (x *EntropyDeviceConfiguration) asEntropyDeviceConfiguration() *raw.VZEntropyDeviceConfiguration {
+	return x.inner
+}
 
 // EntropyDeviceConfigurationable is the interface implemented by [EntropyDeviceConfiguration], for mocking and DI.
 type EntropyDeviceConfigurationable interface {
@@ -43,4 +45,3 @@ type EntropyDeviceConfigurationable interface {
 }
 
 var _ EntropyDeviceConfigurationable = (*EntropyDeviceConfiguration)(nil)
-

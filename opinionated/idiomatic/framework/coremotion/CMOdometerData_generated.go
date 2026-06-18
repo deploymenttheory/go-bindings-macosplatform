@@ -115,4 +115,3 @@ type OdometerDataable interface {
 }
 
 var _ OdometerDataable = (*OdometerData)(nil)
-

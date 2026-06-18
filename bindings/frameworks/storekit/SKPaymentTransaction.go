@@ -19,12 +19,12 @@ type SKPaymentTransaction struct {
 }
 
 var (
-	_clsSKPaymentTransaction = _objcClass("SKPaymentTransaction")
-	_sKPaymentTransactionSelError = objc.RegisterName("error")
-	_sKPaymentTransactionSelOriginalTransaction = objc.RegisterName("originalTransaction")
-	_sKPaymentTransactionSelPayment = objc.RegisterName("payment")
-	_sKPaymentTransactionSelDownloads = objc.RegisterName("downloads")
-	_sKPaymentTransactionSelTransactionDate = objc.RegisterName("transactionDate")
+	_clsSKPaymentTransaction                      = _objcClass("SKPaymentTransaction")
+	_sKPaymentTransactionSelError                 = objc.RegisterName("error")
+	_sKPaymentTransactionSelOriginalTransaction   = objc.RegisterName("originalTransaction")
+	_sKPaymentTransactionSelPayment               = objc.RegisterName("payment")
+	_sKPaymentTransactionSelDownloads             = objc.RegisterName("downloads")
+	_sKPaymentTransactionSelTransactionDate       = objc.RegisterName("transactionDate")
 	_sKPaymentTransactionSelTransactionIdentifier = objc.RegisterName("transactionIdentifier")
 )
 
@@ -45,33 +45,42 @@ func (o *SKPaymentTransaction) Error() unsafe.Pointer {
 
 func (o *SKPaymentTransaction) OriginalTransaction() *SKPaymentTransaction {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPaymentTransactionSelOriginalTransaction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPaymentTransactionFromID(_ret)
 }
 
 func (o *SKPaymentTransaction) Payment() *SKPayment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPaymentTransactionSelPayment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPaymentFromID(_ret)
 }
 
 // Deprecated: Hosted content is no longer supported.
 func (o *SKPaymentTransaction) Downloads() *foundation.NSArray[*SKDownload] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPaymentTransactionSelDownloads)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SKDownload](_ret)
 }
 
 // Deprecated: Hosted content is no longer supported.
 func (o *SKPaymentTransaction) TransactionDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPaymentTransactionSelTransactionDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *SKPaymentTransaction) TransactionIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPaymentTransactionSelTransactionIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

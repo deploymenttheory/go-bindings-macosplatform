@@ -8,56 +8,56 @@ import (
 )
 
 type AFPAlternateAddress struct {
-	FVersion uint8
+	FVersion      uint8
 	FAddressCount uint8
-	FAddressList [1]uint8
+	FAddressList  [1]uint8
 }
 
 type AFPTagData struct {
 	FLength uint8
-	FType uint8
-	FData [1]uint8
+	FType   uint8
+	FData   [1]uint8
 }
 
 type AFPVolMountInfo struct {
-	Length int16
-	Media uint
-	Flags int16
-	NbpInterval int8
-	NbpCount int8
-	UamType int16
-	ZoneNameOffset int16
-	ServerNameOffset int16
-	VolNameOffset int16
-	UserNameOffset int16
+	Length             int16
+	Media              uint
+	Flags              int16
+	NbpInterval        int8
+	NbpCount           int8
+	UamType            int16
+	ZoneNameOffset     int16
+	ServerNameOffset   int16
+	VolNameOffset      int16
+	UserNameOffset     int16
 	UserPasswordOffset int16
-	VolPasswordOffset int16
-	AFPData [144]int8
+	VolPasswordOffset  int16
+	AFPData            [144]int8
 }
 
 type AFPXVolMountInfo struct {
-	Length int16
-	Media uint
-	Flags int16
-	NbpInterval int8
-	NbpCount int8
-	UamType int16
-	ZoneNameOffset int16
-	ServerNameOffset int16
-	VolNameOffset int16
-	UserNameOffset int16
-	UserPasswordOffset int16
-	VolPasswordOffset int16
-	ExtendedFlags int16
-	UamNameOffset int16
+	Length                 int16
+	Media                  uint
+	Flags                  int16
+	NbpInterval            int8
+	NbpCount               int8
+	UamType                int16
+	ZoneNameOffset         int16
+	ServerNameOffset       int16
+	VolNameOffset          int16
+	UserNameOffset         int16
+	UserPasswordOffset     int16
+	VolPasswordOffset      int16
+	ExtendedFlags          int16
+	UamNameOffset          int16
 	AlternateAddressOffset int16
-	AFPData [176]int8
+	AFPData                [176]int8
 }
 
 type AIFFLoop struct {
-	PlayMode int16
+	PlayMode  int16
 	BeginLoop int16
-	EndLoop int16
+	EndLoop   int16
 }
 
 type AliasRecord struct {
@@ -65,15 +65,15 @@ type AliasRecord struct {
 }
 
 type ApplicationSpecificChunk struct {
-	CkID uint
-	CkSize int
+	CkID                 uint
+	CkSize               int
 	ApplicationSignature uint
-	Data [1]uint8
+	Data                 [1]uint8
 }
 
 type AudioRecordingChunk struct {
-	CkID uint
-	CkSize int
+	CkID             uint
+	CkSize           int
 	AESChannelStatus [24]uint8
 }
 
@@ -111,49 +111,49 @@ type BigEndianUnsignedShort struct {
 
 type CatPositionRec struct {
 	Initialize int
-	Priv [6]int16
+	Priv       [6]int16
 }
 
 type ChunkHeader struct {
-	CkID uint
+	CkID   uint
 	CkSize int
 }
 
 type Comment struct {
 	TimeStamp uint
-	Marker int16
-	Count uint16
-	Text [1]int8
+	Marker    int16
+	Count     uint16
+	Text      [1]int8
 }
 
 type CommentsChunk struct {
-	CkID uint
-	CkSize int
+	CkID        uint
+	CkSize      int
 	NumComments uint16
-	Comments [1]Comment
+	Comments    [1]Comment
 }
 
 type CommonChunk struct {
-	CkID uint
-	CkSize int
-	NumChannels int16
+	CkID            uint
+	CkSize          int
+	NumChannels     int16
 	NumSampleFrames uint
-	SampleSize int16
-	SampleRate unsafe.Pointer
+	SampleSize      int16
+	SampleRate      unsafe.Pointer
 }
 
 type ComponentAliasResource struct {
-	Cr ComponentResource
+	Cr      ComponentResource
 	AliasCD ComponentDescription
 }
 
 // Deprecated: Deprecated
 type ComponentDescription struct {
-	ComponentType uint
-	ComponentSubType uint
+	ComponentType         uint
+	ComponentSubType      uint
 	ComponentManufacturer uint
-	ComponentFlags uint
-	ComponentFlagsMask uint
+	ComponentFlags        uint
+	ComponentFlagsMask    uint
 }
 
 type ComponentInstanceRecord struct {
@@ -161,30 +161,30 @@ type ComponentInstanceRecord struct {
 }
 
 type ComponentMPWorkFunctionHeaderRecord struct {
-	HeaderSize uint
-	RecordSize uint
-	WorkFlags uint
+	HeaderSize     uint
+	RecordSize     uint
+	WorkFlags      uint
 	ProcessorCount uint16
-	Unused uint8
-	IsRunning uint8
+	Unused         uint8
+	IsRunning      uint8
 }
 
 type ComponentParameters struct {
-	Flags uint8
+	Flags     uint8
 	ParamSize uint8
-	What int16
-	Padding uint
-	Params [1]int
+	What      int16
+	Padding   uint
+	Params    [1]int
 }
 
 type ComponentPlatformInfo struct {
 	ComponentFlags int
-	Component ResourceSpec
-	PlatformType int16
+	Component      ResourceSpec
+	PlatformType   int16
 }
 
 type ComponentPlatformInfoArray struct {
-	Count int
+	Count         int
 	PlatformArray [1]ComponentPlatformInfo
 }
 
@@ -193,50 +193,50 @@ type ComponentRecord struct {
 }
 
 type ComponentResource struct {
-	Cd ComponentDescription
-	Component ResourceSpec
+	Cd            ComponentDescription
+	Component     ResourceSpec
 	ComponentName ResourceSpec
 	ComponentInfo ResourceSpec
 	ComponentIcon ResourceSpec
 }
 
 type ComponentResourceExtension struct {
-	ComponentVersion int
+	ComponentVersion       int
 	ComponentRegisterFlags int
-	ComponentIconFamily int16
+	ComponentIconFamily    int16
 }
 
 type ContainerChunk struct {
-	CkID uint
-	CkSize int
+	CkID     uint
+	CkSize   int
 	FormType uint
 }
 
 type CustomBadgeResource struct {
-	Version int16
+	Version               int16
 	CustomBadgeResourceID int16
-	CustomBadgeType uint
-	CustomBadgeCreator uint
-	WindowBadgeType uint
-	WindowBadgeCreator uint
-	OverrideType uint
-	OverrideCreator uint
+	CustomBadgeType       uint
+	CustomBadgeCreator    uint
+	WindowBadgeType       uint
+	WindowBadgeCreator    uint
+	OverrideType          uint
+	OverrideCreator       uint
 }
 
 type DInfo struct {
-	FrRect unsafe.Pointer
-	FrFlags uint16
+	FrRect     unsafe.Pointer
+	FrFlags    uint16
 	FrLocation unsafe.Pointer
-	FrView int16
+	FrView     int16
 }
 
 type DXInfo struct {
-	FrScroll unsafe.Pointer
+	FrScroll    unsafe.Pointer
 	FrOpenChain int
-	FrScript int8
-	FrXFlags int8
-	FrComment int16
-	FrPutAway int
+	FrScript    int8
+	FrXFlags    int8
+	FrComment   int16
+	FrPutAway   int
 }
 
 type DateCacheRecord struct {
@@ -244,87 +244,87 @@ type DateCacheRecord struct {
 }
 
 type DateTimeRec struct {
-	Year int16
-	Month int16
-	Day int16
-	Hour int16
-	Minute int16
-	Second int16
+	Year      int16
+	Month     int16
+	Day       int16
+	Hour      int16
+	Minute    int16
+	Second    int16
 	DayOfWeek int16
 }
 
 type DeferredTask struct {
-	QLink unsafe.Pointer
-	QType int16
-	DtFlags unsafe.Pointer
-	DtAddr unsafe.Pointer
-	DtParam int
+	QLink      unsafe.Pointer
+	QType      int16
+	DtFlags    unsafe.Pointer
+	DtAddr     unsafe.Pointer
+	DtParam    int
 	DtReserved int
 }
 
 type ExceptionInformation struct {
-	TheKind uint
-	MachineState *MachineInformation
+	TheKind       uint
+	MachineState  *MachineInformation
 	RegisterImage *RegisterInformation
-	FPUImage *FPUInformation
-	Info unsafe.Pointer
-	VectorImage *VectorInformation
+	FPUImage      *FPUInformation
+	Info          unsafe.Pointer
+	VectorImage   *VectorInformation
 }
 
 type ExceptionInformationPowerPC struct {
-	TheKind uint
-	MachineState *MachineInformationPowerPC
+	TheKind       uint
+	MachineState  *MachineInformationPowerPC
 	RegisterImage *RegisterInformationPowerPC
-	FPUImage *FPUInformationPowerPC
-	Info unsafe.Pointer
-	VectorImage *VectorInformationPowerPC
+	FPUImage      *FPUInformationPowerPC
+	Info          unsafe.Pointer
+	VectorImage   *VectorInformationPowerPC
 }
 
 type ExtCommonChunk struct {
-	CkID uint
-	CkSize int
-	NumChannels int16
+	CkID            uint
+	CkSize          int
+	NumChannels     int16
 	NumSampleFrames uint
-	SampleSize int16
-	SampleRate unsafe.Pointer
+	SampleSize      int16
+	SampleRate      unsafe.Pointer
 	CompressionType uint
 	CompressionName [1]int8
 }
 
 type ExtComponentResource struct {
-	Cd ComponentDescription
-	Component ResourceSpec
-	ComponentName ResourceSpec
-	ComponentInfo ResourceSpec
-	ComponentIcon ResourceSpec
-	ComponentVersion int
+	Cd                     ComponentDescription
+	Component              ResourceSpec
+	ComponentName          ResourceSpec
+	ComponentInfo          ResourceSpec
+	ComponentIcon          ResourceSpec
+	ComponentVersion       int
 	ComponentRegisterFlags int
-	ComponentIconFamily int16
-	Count int
-	PlatformArray [1]ComponentPlatformInfo
+	ComponentIconFamily    int16
+	Count                  int
+	PlatformArray          [1]ComponentPlatformInfo
 }
 
 type ExtendedFileInfo struct {
-	Reserved1 [4]int16
+	Reserved1           [4]int16
 	ExtendedFinderFlags uint16
-	Reserved2 int16
-	PutAwayFolderID int
+	Reserved2           int16
+	PutAwayFolderID     int
 }
 
 type ExtendedFolderInfo struct {
-	ScrollPosition unsafe.Pointer
-	Reserved1 int
+	ScrollPosition      unsafe.Pointer
+	Reserved1           int
 	ExtendedFinderFlags uint16
-	Reserved2 int16
-	PutAwayFolderID int
+	Reserved2           int16
+	PutAwayFolderID     int
 }
 
 type FInfo struct {
-	FdType uint
-	FdCreator uint
-	FdFlags uint16
+	FdType     uint
+	FdCreator  uint
+	FdFlags    uint16
 	FdLocation unsafe.Pointer
-	FdFldr int16
+	FdFldr     int16
 }
 
 type FPUInformation struct {
@@ -332,157 +332,157 @@ type FPUInformation struct {
 
 type FPUInformationPowerPC struct {
 	Registers [32]unsafe.Pointer
-	FPSCR uint
-	Reserved uint
+	FPSCR     uint
+	Reserved  uint
 }
 
 type FSAliasInfo struct {
-	VolumeCreateDate UTCDateTime
-	TargetCreateDate UTCDateTime
-	FileType uint
-	FileCreator uint
-	ParentDirID uint
-	NodeID uint
-	FilesystemID uint16
-	Signature uint16
-	VolumeIsBootVolume uint8
-	VolumeIsAutomounted uint8
-	VolumeIsEjectable uint8
+	VolumeCreateDate           UTCDateTime
+	TargetCreateDate           UTCDateTime
+	FileType                   uint
+	FileCreator                uint
+	ParentDirID                uint
+	NodeID                     uint
+	FilesystemID               uint16
+	Signature                  uint16
+	VolumeIsBootVolume         uint8
+	VolumeIsAutomounted        uint8
+	VolumeIsEjectable          uint8
 	VolumeHasPersistentFileIDs uint8
-	IsDirectory uint8
+	IsDirectory                uint8
 }
 
 type FSCatalogBulkParam struct {
-	QLink *QElem
-	QType int16
-	IoTrap int16
-	IoCmdAddr string
-	IoCompletion unsafe.Pointer
-	IoResult unsafe.Pointer
+	QLink            *QElem
+	QType            int16
+	IoTrap           int16
+	IoCmdAddr        string
+	IoCompletion     unsafe.Pointer
+	IoResult         unsafe.Pointer
 	ContainerChanged uint8
-	Reserved uint8
-	IteratorFlags uint
-	Iterator unsafe.Pointer
-	Container *FSRef
-	MaximumItems uint
-	ActualItems uint
-	WhichInfo uint
-	CatalogInfo *FSCatalogInfo
-	Refs *FSRef
-	Specs *FSSpec
-	Names unsafe.Pointer
-	SearchParams *FSSearchParams
+	Reserved         uint8
+	IteratorFlags    uint
+	Iterator         unsafe.Pointer
+	Container        *FSRef
+	MaximumItems     uint
+	ActualItems      uint
+	WhichInfo        uint
+	CatalogInfo      *FSCatalogInfo
+	Refs             *FSRef
+	Specs            *FSSpec
+	Names            unsafe.Pointer
+	SearchParams     *FSSearchParams
 }
 
 type FSCatalogInfo struct {
-	NodeFlags uint16
-	Volume int16
-	ParentDirID uint
-	NodeID uint
-	SharingFlags uint8
-	UserPrivileges uint8
-	Reserved1 uint8
-	Reserved2 uint8
-	CreateDate UTCDateTime
-	ContentModDate UTCDateTime
+	NodeFlags        uint16
+	Volume           int16
+	ParentDirID      uint
+	NodeID           uint
+	SharingFlags     uint8
+	UserPrivileges   uint8
+	Reserved1        uint8
+	Reserved2        uint8
+	CreateDate       UTCDateTime
+	ContentModDate   UTCDateTime
 	AttributeModDate UTCDateTime
-	AccessDate UTCDateTime
-	BackupDate UTCDateTime
-	Permissions FSPermissionInfo
-	FinderInfo [16]uint8
-	ExtFinderInfo [16]uint8
-	DataLogicalSize uint64
+	AccessDate       UTCDateTime
+	BackupDate       UTCDateTime
+	Permissions      FSPermissionInfo
+	FinderInfo       [16]uint8
+	ExtFinderInfo    [16]uint8
+	DataLogicalSize  uint64
 	DataPhysicalSize uint64
-	RsrcLogicalSize uint64
+	RsrcLogicalSize  uint64
 	RsrcPhysicalSize uint64
-	Valence uint
+	Valence          uint
 	TextEncodingHint uint
 }
 
 type FSFileOperationClientContext struct {
-	Version int
-	Info unsafe.Pointer
-	Retain unsafe.Pointer
-	Release unsafe.Pointer
+	Version         int
+	Info            unsafe.Pointer
+	Retain          unsafe.Pointer
+	Release         unsafe.Pointer
 	CopyDescription unsafe.Pointer
 }
 
 type FSForkCBInfoParam struct {
-	QLink *QElem
-	QType int16
-	IoTrap int16
-	IoCmdAddr string
-	IoCompletion unsafe.Pointer
-	IoResult unsafe.Pointer
+	QLink         *QElem
+	QType         int16
+	IoTrap        int16
+	IoCmdAddr     string
+	IoCompletion  unsafe.Pointer
+	IoResult      unsafe.Pointer
 	DesiredRefNum int
-	VolumeRefNum int16
-	Iterator int
-	ActualRefNum int16
-	Ref *FSRef
-	ForkInfo *FSForkInfo
-	ForkName unsafe.Pointer
+	VolumeRefNum  int16
+	Iterator      int
+	ActualRefNum  int16
+	Ref           *FSRef
+	ForkInfo      *FSForkInfo
+	ForkName      unsafe.Pointer
 }
 
 type FSForkIOParam struct {
-	QLink *QElem
-	QType int16
-	IoTrap int16
-	IoCmdAddr string
-	IoCompletion unsafe.Pointer
-	IoResult unsafe.Pointer
-	Reserved1 unsafe.Pointer
-	Reserved2 int16
-	ForkRefNum int
-	Reserved3 uint8
-	Permissions int8
-	Ref *FSRef
-	Buffer string
-	RequestCount uint
-	ActualCount uint
-	PositionMode uint16
-	PositionOffset int64
-	AllocationFlags uint16
+	QLink            *QElem
+	QType            int16
+	IoTrap           int16
+	IoCmdAddr        string
+	IoCompletion     unsafe.Pointer
+	IoResult         unsafe.Pointer
+	Reserved1        unsafe.Pointer
+	Reserved2        int16
+	ForkRefNum       int
+	Reserved3        uint8
+	Permissions      int8
+	Ref              *FSRef
+	Buffer           string
+	RequestCount     uint
+	ActualCount      uint
+	PositionMode     uint16
+	PositionOffset   int64
+	AllocationFlags  uint16
 	AllocationAmount uint64
-	ForkNameLength uint
-	ForkName *uint16
-	ForkIterator CatPositionRec
-	OutForkName unsafe.Pointer
+	ForkNameLength   uint
+	ForkName         *uint16
+	ForkIterator     CatPositionRec
+	OutForkName      unsafe.Pointer
 }
 
 type FSForkInfo struct {
-	Flags uint8
-	Permissions int8
-	Volume int16
-	Reserved2 uint
-	NodeID uint
-	ForkID uint
+	Flags           uint8
+	Permissions     int8
+	Volume          int16
+	Reserved2       uint
+	NodeID          uint
+	ForkID          uint
 	CurrentPosition uint64
-	LogicalEOF uint64
-	PhysicalEOF uint64
-	Process uint64
+	LogicalEOF      uint64
+	PhysicalEOF     uint64
+	Process         uint64
 }
 
 type FSPermissionInfo struct {
-	UserID uint
-	GroupID uint
-	Reserved1 uint8
+	UserID     uint
+	GroupID    uint
+	Reserved1  uint8
 	UserAccess uint8
-	Mode uint16
-	FileSec unsafe.Pointer
+	Mode       uint16
+	FileSec    unsafe.Pointer
 }
 
 type FSRangeLockParam struct {
-	QLink *QElem
-	QType int16
-	IoTrap int16
-	IoCmdAddr string
-	IoCompletion unsafe.Pointer
-	IoResult unsafe.Pointer
-	ForkRefNum int
-	RequestCount uint64
-	PositionMode uint16
+	QLink          *QElem
+	QType          int16
+	IoTrap         int16
+	IoCmdAddr      string
+	IoCompletion   unsafe.Pointer
+	IoResult       unsafe.Pointer
+	ForkRefNum     int
+	RequestCount   uint64
+	PositionMode   uint16
 	PositionOffset int64
-	RangeStart uint64
+	RangeStart     uint64
 }
 
 type FSRef struct {
@@ -490,57 +490,57 @@ type FSRef struct {
 }
 
 type FSRefForkIOParam struct {
-	QLink *QElem
-	QType int16
-	IoTrap int16
-	IoCmdAddr string
-	IoCompletion unsafe.Pointer
-	IoResult unsafe.Pointer
-	ParentRef *FSRef
-	NameLength uint
-	Name *uint16
-	WhichInfo uint
-	CatInfo *FSCatalogInfo
+	QLink          *QElem
+	QType          int16
+	IoTrap         int16
+	IoCmdAddr      string
+	IoCompletion   unsafe.Pointer
+	IoResult       unsafe.Pointer
+	ParentRef      *FSRef
+	NameLength     uint
+	Name           *uint16
+	WhichInfo      uint
+	CatInfo        *FSCatalogInfo
 	ForkNameLength uint
-	ForkName *uint16
-	Permissions int8
-	Reserved1 uint8
-	ForkRefNum int
-	NewRef *FSRef
+	ForkName       *uint16
+	Permissions    int8
+	Reserved1      uint8
+	ForkRefNum     int
+	NewRef         *FSRef
 }
 
 type FSRefParam struct {
-	QLink *QElem
-	QType int16
-	IoTrap int16
-	IoCmdAddr string
-	IoCompletion unsafe.Pointer
-	IoResult unsafe.Pointer
-	IoNamePtr *uint8
-	IoVRefNum int16
-	Reserved1 int16
-	Reserved2 uint8
-	Reserved3 uint8
-	Ref *FSRef
-	WhichInfo uint
-	CatInfo *FSCatalogInfo
-	NameLength uint
-	Name *uint16
-	IoDirID uint
-	Spec *FSSpec
-	ParentRef *FSRef
-	NewRef *FSRef
+	QLink            *QElem
+	QType            int16
+	IoTrap           int16
+	IoCmdAddr        string
+	IoCompletion     unsafe.Pointer
+	IoResult         unsafe.Pointer
+	IoNamePtr        *uint8
+	IoVRefNum        int16
+	Reserved1        int16
+	Reserved2        uint8
+	Reserved3        uint8
+	Ref              *FSRef
+	WhichInfo        uint
+	CatInfo          *FSCatalogInfo
+	NameLength       uint
+	Name             *uint16
+	IoDirID          uint
+	Spec             *FSSpec
+	ParentRef        *FSRef
+	NewRef           *FSRef
 	TextEncodingHint uint
-	OutName unsafe.Pointer
+	OutName          unsafe.Pointer
 }
 
 type FSSearchParams struct {
-	SearchTime int
-	SearchBits uint
+	SearchTime       int
+	SearchBits       uint
 	SearchNameLength uint
-	SearchName *uint16
-	SearchInfo1 *FSCatalogInfo
-	SearchInfo2 *FSCatalogInfo
+	SearchName       *uint16
+	SearchInfo1      *FSCatalogInfo
+	SearchInfo2      *FSCatalogInfo
 }
 
 type FSSpec struct {
@@ -548,424 +548,424 @@ type FSSpec struct {
 }
 
 type FSVolumeInfo struct {
-	CreateDate UTCDateTime
-	ModifyDate UTCDateTime
-	BackupDate UTCDateTime
-	CheckedDate UTCDateTime
-	FileCount uint
-	FolderCount uint
-	TotalBytes uint64
-	FreeBytes uint64
-	BlockSize uint
-	TotalBlocks uint
-	FreeBlocks uint
+	CreateDate     UTCDateTime
+	ModifyDate     UTCDateTime
+	BackupDate     UTCDateTime
+	CheckedDate    UTCDateTime
+	FileCount      uint
+	FolderCount    uint
+	TotalBytes     uint64
+	FreeBytes      uint64
+	BlockSize      uint
+	TotalBlocks    uint
+	FreeBlocks     uint
 	NextAllocation uint
-	RsrcClumpSize uint
-	DataClumpSize uint
-	NextCatalogID uint
-	FinderInfo [32]uint8
-	Flags uint16
-	FilesystemID uint16
-	Signature uint16
-	DriveNumber uint16
-	DriverRefNum int
+	RsrcClumpSize  uint
+	DataClumpSize  uint
+	NextCatalogID  uint
+	FinderInfo     [32]uint8
+	Flags          uint16
+	FilesystemID   uint16
+	Signature      uint16
+	DriveNumber    uint16
+	DriverRefNum   int
 }
 
 type FSVolumeInfoParam struct {
-	QLink *QElem
-	QType int16
-	IoTrap int16
-	IoCmdAddr string
+	QLink        *QElem
+	QType        int16
+	IoTrap       int16
+	IoCmdAddr    string
 	IoCompletion unsafe.Pointer
-	IoResult unsafe.Pointer
-	IoNamePtr *uint8
-	IoVRefNum int16
-	VolumeIndex uint
-	WhichInfo uint
-	VolumeInfo *FSVolumeInfo
-	VolumeName unsafe.Pointer
-	Ref *FSRef
+	IoResult     unsafe.Pointer
+	IoNamePtr    *uint8
+	IoVRefNum    int16
+	VolumeIndex  uint
+	WhichInfo    uint
+	VolumeInfo   *FSVolumeInfo
+	VolumeName   unsafe.Pointer
+	Ref          *FSRef
 }
 
 // Deprecated: Deprecated
 type FVector struct {
-	Start int16
+	Start  int16
 	Length int16
 }
 
 type FXInfo struct {
-	FdIconID int16
+	FdIconID   int16
 	FdReserved [3]int16
-	FdScript int8
-	FdXFlags int8
-	FdComment int16
-	FdPutAway int
+	FdScript   int8
+	FdXFlags   int8
+	FdComment  int16
+	FdPutAway  int
 }
 
 type FileInfo struct {
-	FileType uint
-	FileCreator uint
-	FinderFlags uint16
-	Location unsafe.Pointer
+	FileType      uint
+	FileCreator   uint
+	FinderFlags   uint16
+	Location      unsafe.Pointer
 	ReservedField uint16
 }
 
 type FolderDesc struct {
-	DescSize int
-	FoldType uint
-	Flags uint
-	FoldClass uint
-	FoldLocation uint
+	DescSize       int
+	FoldType       uint
+	Flags          uint
+	FoldClass      uint
+	FoldLocation   uint
 	BadgeSignature uint
-	BadgeType uint
-	Reserved uint
-	Name [64]uint8
+	BadgeType      uint
+	Reserved       uint
+	Name           [64]uint8
 }
 
 type FolderInfo struct {
-	WindowBounds unsafe.Pointer
-	FinderFlags uint16
-	Location unsafe.Pointer
+	WindowBounds  unsafe.Pointer
+	FinderFlags   uint16
+	Location      unsafe.Pointer
 	ReservedField uint16
 }
 
 type FolderRouting struct {
-	DescSize int
-	FileType uint
+	DescSize        int
+	FileType        uint
 	RouteFromFolder uint
-	RouteToFolder uint
-	Flags uint
+	RouteToFolder   uint
+	Flags           uint
 }
 
 type FormatVersionChunk struct {
-	CkID uint
-	CkSize int
+	CkID      uint
+	CkSize    int
 	Timestamp uint
 }
 
 type GetVolParmsInfoBuffer struct {
-	VMVersion int16
-	VMAttrib int
-	VMLocalHand *string
-	VMServerAdr int
-	VMVolumeGrade int
-	VMForeignPrivID int16
+	VMVersion            int16
+	VMAttrib             int
+	VMLocalHand          *string
+	VMServerAdr          int
+	VMVolumeGrade        int
+	VMForeignPrivID      int16
 	VMExtendedAttributes int
-	VMDeviceID unsafe.Pointer
-	VMMaxNameLength uint
+	VMDeviceID           unsafe.Pointer
+	VMMaxNameLength      uint
 }
 
 type InstrumentChunk struct {
-	CkID uint
-	CkSize int
+	CkID          uint
+	CkSize        int
 	BaseFrequency uint8
-	Detune uint8
-	LowFrequency uint8
+	Detune        uint8
+	LowFrequency  uint8
 	HighFrequency uint8
-	LowVelocity uint8
-	HighVelocity uint8
-	Gain int16
-	SustainLoop AIFFLoop
-	ReleaseLoop AIFFLoop
+	LowVelocity   uint8
+	HighVelocity  uint8
+	Gain          int16
+	SustainLoop   AIFFLoop
+	ReleaseLoop   AIFFLoop
 }
 
 type Intl0Rec struct {
-	DecimalPt int8
-	ThousSep int8
-	ListSep int8
-	CurrSym1 int8
-	CurrSym2 int8
-	CurrSym3 int8
-	CurrFmt uint8
-	DateOrder uint8
+	DecimalPt   int8
+	ThousSep    int8
+	ListSep     int8
+	CurrSym1    int8
+	CurrSym2    int8
+	CurrSym3    int8
+	CurrFmt     uint8
+	DateOrder   uint8
 	ShrtDateFmt uint8
-	DateSep int8
-	TimeCycle uint8
-	TimeFmt uint8
-	MornStr [4]int8
-	EveStr [4]int8
-	TimeSep int8
-	Time1Suff int8
-	Time2Suff int8
-	Time3Suff int8
-	Time4Suff int8
-	Time5Suff int8
-	Time6Suff int8
-	Time7Suff int8
-	Time8Suff int8
-	MetricSys uint8
-	Intl0Vers int16
+	DateSep     int8
+	TimeCycle   uint8
+	TimeFmt     uint8
+	MornStr     [4]int8
+	EveStr      [4]int8
+	TimeSep     int8
+	Time1Suff   int8
+	Time2Suff   int8
+	Time3Suff   int8
+	Time4Suff   int8
+	Time5Suff   int8
+	Time6Suff   int8
+	Time7Suff   int8
+	Time8Suff   int8
+	MetricSys   uint8
+	Intl0Vers   int16
 }
 
 type Intl1Rec struct {
-	Days [7][16]uint8
-	Months [12][16]uint8
+	Days        [7][16]uint8
+	Months      [12][16]uint8
 	SuppressDay uint8
-	LngDateFmt uint8
+	LngDateFmt  uint8
 	DayLeading0 uint8
-	AbbrLen uint8
-	St0 [4]int8
-	St1 [4]int8
-	St2 [4]int8
-	St3 [4]int8
-	St4 [4]int8
-	Intl1Vers int16
-	LocalRtn [1]int16
+	AbbrLen     uint8
+	St0         [4]int8
+	St1         [4]int8
+	St2         [4]int8
+	St3         [4]int8
+	St4         [4]int8
+	Intl1Vers   int16
+	LocalRtn    [1]int16
 }
 
 type Itl1ExtRec struct {
-	Base Intl1Rec
-	Version int16
-	Format int16
-	CalendarCode int16
-	ExtraDaysTableOffset int
-	ExtraDaysTableLength int
-	ExtraMonthsTableOffset int
-	ExtraMonthsTableLength int
-	AbbrevDaysTableOffset int
-	AbbrevDaysTableLength int
+	Base                    Intl1Rec
+	Version                 int16
+	Format                  int16
+	CalendarCode            int16
+	ExtraDaysTableOffset    int
+	ExtraDaysTableLength    int
+	ExtraMonthsTableOffset  int
+	ExtraMonthsTableLength  int
+	AbbrevDaysTableOffset   int
+	AbbrevDaysTableLength   int
 	AbbrevMonthsTableOffset int
 	AbbrevMonthsTableLength int
-	ExtraSepsTableOffset int
-	ExtraSepsTableLength int
-	Tables [1]int16
+	ExtraSepsTableOffset    int
+	ExtraSepsTableLength    int
+	Tables                  [1]int16
 }
 
 type Itl4Rec struct {
-	Flags int16
-	ResourceType int
-	ResourceNum int16
-	Version int16
-	ResHeader1 int
-	ResHeader2 int
-	NumTables int16
-	MapOffset int
-	StrOffset int
-	FetchOffset int
-	UnTokenOffset int
+	Flags          int16
+	ResourceType   int
+	ResourceNum    int16
+	Version        int16
+	ResHeader1     int
+	ResHeader2     int
+	NumTables      int16
+	MapOffset      int
+	StrOffset      int
+	FetchOffset    int
+	UnTokenOffset  int
 	DefPartsOffset int
-	ResOffset6 int
-	ResOffset7 int
-	ResOffset8 int
+	ResOffset6     int
+	ResOffset7     int
+	ResOffset8     int
 }
 
 type Itl5Record struct {
-	VersionNumber int
+	VersionNumber  int
 	NumberOfTables uint16
-	Reserved [3]uint16
+	Reserved       [3]uint16
 	TableDirectory [1]TableDirectoryRecord
 }
 
 type ItlbExtRecord struct {
-	Base ItlbRecord
-	ItlbLocalSize int
-	ItlbMonoFond int16
-	ItlbMonoSize int16
-	ItlbPrefFond int16
-	ItlbPrefSize int16
-	ItlbSmallFond int16
-	ItlbSmallSize int16
-	ItlbSysFond int16
-	ItlbSysSize int16
-	ItlbAppFond int16
-	ItlbAppSize int16
-	ItlbHelpFond int16
-	ItlbHelpSize int16
+	Base            ItlbRecord
+	ItlbLocalSize   int
+	ItlbMonoFond    int16
+	ItlbMonoSize    int16
+	ItlbPrefFond    int16
+	ItlbPrefSize    int16
+	ItlbSmallFond   int16
+	ItlbSmallSize   int16
+	ItlbSysFond     int16
+	ItlbSysSize     int16
+	ItlbAppFond     int16
+	ItlbAppSize     int16
+	ItlbHelpFond    int16
+	ItlbHelpSize    int16
 	ItlbValidStyles uint8
-	ItlbAliasStyle uint8
+	ItlbAliasStyle  uint8
 }
 
 type ItlbRecord struct {
-	ItlbNumber int16
-	ItlbDate int16
-	ItlbSort int16
-	ItlbFlags int16
-	ItlbToken int16
+	ItlbNumber   int16
+	ItlbDate     int16
+	ItlbSort     int16
+	ItlbFlags    int16
+	ItlbToken    int16
 	ItlbEncoding int16
-	ItlbLang int16
-	ItlbNumRep int8
-	ItlbDateRep int8
-	ItlbKeys int16
-	ItlbIcon int16
+	ItlbLang     int16
+	ItlbNumRep   int8
+	ItlbDateRep  int8
+	ItlbKeys     int16
+	ItlbIcon     int16
 }
 
 type ItlcRecord struct {
-	ItlcSystem int16
-	ItlcReserved int16
-	ItlcFontForce int8
-	ItlcIntlForce int8
-	ItlcOldKybd int8
-	ItlcFlags int8
+	ItlcSystem     int16
+	ItlcReserved   int16
+	ItlcFontForce  int8
+	ItlcIntlForce  int8
+	ItlcOldKybd    int8
+	ItlcFlags      int8
 	ItlcIconOffset int16
-	ItlcIconSide int8
-	ItlcIconRsvd int8
+	ItlcIconSide   int8
+	ItlcIconRsvd   int8
 	ItlcRegionCode int16
-	ItlcSysFlags int16
-	ItlcReserved4 [32]int8
+	ItlcSysFlags   int16
+	ItlcReserved4  [32]int8
 }
 
 type LocalDateTime struct {
 	HighSeconds uint16
-	LowSeconds uint
-	Fraction uint16
+	LowSeconds  uint
+	Fraction    uint16
 }
 
 type LocaleAndVariant struct {
-	Locale unsafe.Pointer
+	Locale    unsafe.Pointer
 	OpVariant uint
 }
 
 type MIDIDataChunk struct {
-	CkID uint
-	CkSize int
+	CkID     uint
+	CkSize   int
 	MIDIdata [1]uint8
 }
 
 type MPAddressSpaceInfo struct {
-	Version uint
+	Version   uint
 	ProcessID unsafe.Pointer
-	GroupID unsafe.Pointer
-	NTasks uint
-	Vsid [16]uint
+	GroupID   unsafe.Pointer
+	NTasks    uint
+	Vsid      [16]uint
 }
 
 type MPCriticalRegionInfo struct {
-	Version uint
-	ProcessID unsafe.Pointer
-	RegionName uint
-	NWaiting uint
+	Version       uint
+	ProcessID     unsafe.Pointer
+	RegionName    uint
+	NWaiting      uint
 	WaitingTaskID unsafe.Pointer
-	OwningTask unsafe.Pointer
-	Count uint
+	OwningTask    unsafe.Pointer
+	Count         uint
 }
 
 type MPEventInfo struct {
-	Version uint
-	ProcessID unsafe.Pointer
-	EventName uint
-	NWaiting uint
+	Version       uint
+	ProcessID     unsafe.Pointer
+	EventName     uint
+	NWaiting      uint
 	WaitingTaskID unsafe.Pointer
-	Events uint
+	Events        uint
 }
 
 type MPNotificationInfo struct {
-	Version uint
-	ProcessID unsafe.Pointer
+	Version          uint
+	ProcessID        unsafe.Pointer
 	NotificationName uint
-	QueueID unsafe.Pointer
-	P1 unsafe.Pointer
-	P2 unsafe.Pointer
-	P3 unsafe.Pointer
-	EventID unsafe.Pointer
-	Events uint
-	SemaphoreID unsafe.Pointer
+	QueueID          unsafe.Pointer
+	P1               unsafe.Pointer
+	P2               unsafe.Pointer
+	P3               unsafe.Pointer
+	EventID          unsafe.Pointer
+	Events           uint
+	SemaphoreID      unsafe.Pointer
 }
 
 // Deprecated: Deprecated
 type MPQueueInfo struct {
-	Version uint
-	ProcessID unsafe.Pointer
-	QueueName uint
-	NWaiting uint
+	Version       uint
+	ProcessID     unsafe.Pointer
+	QueueName     uint
+	NWaiting      uint
 	WaitingTaskID unsafe.Pointer
-	NMessages uint
-	NReserved uint
-	P1 unsafe.Pointer
-	P2 unsafe.Pointer
-	P3 unsafe.Pointer
+	NMessages     uint
+	NReserved     uint
+	P1            unsafe.Pointer
+	P2            unsafe.Pointer
+	P3            unsafe.Pointer
 }
 
 type MPSemaphoreInfo struct {
-	Version uint
-	ProcessID unsafe.Pointer
+	Version       uint
+	ProcessID     unsafe.Pointer
 	SemaphoreName uint
-	NWaiting uint
+	NWaiting      uint
 	WaitingTaskID unsafe.Pointer
-	Maximum uint
-	Count uint
+	Maximum       uint
+	Count         uint
 }
 
 type MPTaskInfo struct {
-	Version uint
-	Name uint
-	QueueName uint
-	RunState uint16
-	LastCPU uint16
-	Weight uint
-	ProcessID unsafe.Pointer
-	CpuTime unsafe.Pointer
-	SchedTime unsafe.Pointer
-	CreationTime unsafe.Pointer
+	Version        uint
+	Name           uint
+	QueueName      uint
+	RunState       uint16
+	LastCPU        uint16
+	Weight         uint
+	ProcessID      unsafe.Pointer
+	CpuTime        unsafe.Pointer
+	SchedTime      unsafe.Pointer
+	CreationTime   unsafe.Pointer
 	CodePageFaults uint
 	DataPageFaults uint
-	Preemptions uint
-	CpuID unsafe.Pointer
-	BlockedObject unsafe.Pointer
-	SpaceID unsafe.Pointer
-	StackBase unsafe.Pointer
-	StackLimit unsafe.Pointer
-	StackCurr unsafe.Pointer
+	Preemptions    uint
+	CpuID          unsafe.Pointer
+	BlockedObject  unsafe.Pointer
+	SpaceID        unsafe.Pointer
+	StackBase      unsafe.Pointer
+	StackLimit     unsafe.Pointer
+	StackCurr      unsafe.Pointer
 }
 
 // Deprecated: Deprecated
 type MPTaskInfoVersion2 struct {
-	Version uint
-	Name uint
-	QueueName uint
-	RunState uint16
-	LastCPU uint16
-	Weight uint
-	ProcessID unsafe.Pointer
-	CpuTime unsafe.Pointer
-	SchedTime unsafe.Pointer
-	CreationTime unsafe.Pointer
+	Version        uint
+	Name           uint
+	QueueName      uint
+	RunState       uint16
+	LastCPU        uint16
+	Weight         uint
+	ProcessID      unsafe.Pointer
+	CpuTime        unsafe.Pointer
+	SchedTime      unsafe.Pointer
+	CreationTime   unsafe.Pointer
 	CodePageFaults uint
 	DataPageFaults uint
-	Preemptions uint
-	CpuID unsafe.Pointer
+	Preemptions    uint
+	CpuID          unsafe.Pointer
 }
 
 type MachineInformation struct {
 }
 
 type MachineInformationPowerPC struct {
-	CTR unsafe.Pointer
-	LR unsafe.Pointer
-	PC unsafe.Pointer
+	CTR        unsafe.Pointer
+	LR         unsafe.Pointer
+	PC         unsafe.Pointer
 	CRRegister uint
-	XER uint
-	MSR uint
-	MQ uint
+	XER        uint
+	MSR        uint
+	MQ         uint
 	ExceptKind uint
-	DSISR uint
-	DAR unsafe.Pointer
-	Reserved unsafe.Pointer
+	DSISR      uint
+	DAR        unsafe.Pointer
+	Reserved   unsafe.Pointer
 }
 
 type MachineLocation struct {
-	Latitude int
+	Latitude  int
 	Longitude int
-	U unsafe.Pointer
+	U         unsafe.Pointer
 }
 
 type Marker struct {
-	Id int16
-	Position uint
+	Id         int16
+	Position   uint
 	MarkerName [256]uint8
 }
 
 type MarkerChunk struct {
-	CkID uint
-	CkSize int
+	CkID       uint
+	CkSize     int
 	NumMarkers uint16
-	Markers [1]Marker
+	Markers    [1]Marker
 }
 
 // Deprecated: Deprecated
 type MemoryExceptionInformation struct {
-	TheArea unsafe.Pointer
-	TheAddress unsafe.Pointer
-	TheError int
+	TheArea      unsafe.Pointer
+	TheAddress   unsafe.Pointer
+	TheError     int
 	TheReference uint
 }
 
@@ -977,50 +977,50 @@ type MixedModeStateRecord struct {
 }
 
 type NItl4Rec struct {
-	Flags int16
-	ResourceType int
-	ResourceNum int16
-	Version int16
-	Format int16
-	ResHeader int16
-	ResHeader2 int
-	NumTables int16
-	MapOffset int
-	StrOffset int
-	FetchOffset int
-	UnTokenOffset int
-	DefPartsOffset int
+	Flags           int16
+	ResourceType    int
+	ResourceNum     int16
+	Version         int16
+	Format          int16
+	ResHeader       int16
+	ResHeader2      int
+	NumTables       int16
+	MapOffset       int
+	StrOffset       int
+	FetchOffset     int
+	UnTokenOffset   int
+	DefPartsOffset  int
 	WhtSpListOffset int
-	ResOffset7 int
-	ResOffset8 int
-	ResLength1 int16
-	ResLength2 int16
-	ResLength3 int16
-	UnTokenLength int16
-	DefPartsLength int16
+	ResOffset7      int
+	ResOffset8      int
+	ResLength1      int16
+	ResLength2      int16
+	ResLength3      int16
+	UnTokenLength   int16
+	DefPartsLength  int16
 	WhtSpListLength int16
-	ResLength7 int16
-	ResLength8 int16
+	ResLength7      int16
+	ResLength8      int16
 }
 
 type NumFormatString struct {
-	FLength uint8
+	FLength  uint8
 	FVersion uint8
-	Data [254]int8
+	Data     [254]int8
 }
 
 type NumberParts struct {
-	Version int16
-	Data [31]unsafe.Pointer
-	PePlus WideCharArr
-	PeMinus WideCharArr
+	Version     int16
+	Data        [31]unsafe.Pointer
+	PePlus      WideCharArr
+	PeMinus     WideCharArr
 	PeMinusPlus WideCharArr
 	AltNumTable WideCharArr
-	Reserved [20]int8
+	Reserved    [20]int8
 }
 
 type OffPair struct {
-	OffFirst int16
+	OffFirst  int16
 	OffSecond int16
 }
 
@@ -1110,22 +1110,22 @@ type OpaqueUnicodeToTextInfo struct{}
 type OpaqueUnicodeToTextRunInfo struct{}
 
 type PEFContainerHeader struct {
-	Tag1 uint
-	Tag2 uint
-	Architecture uint
-	FormatVersion uint
-	DateTimeStamp uint
-	OldDefVersion uint
-	OldImpVersion uint
-	CurrentVersion uint
-	SectionCount uint16
+	Tag1             uint
+	Tag2             uint
+	Architecture     uint
+	FormatVersion    uint
+	DateTimeStamp    uint
+	OldDefVersion    uint
+	OldImpVersion    uint
+	CurrentVersion   uint
+	SectionCount     uint16
 	InstSectionCount uint16
-	ReservedA uint
+	ReservedA        uint
 }
 
 type PEFExportedSymbol struct {
 	ClassAndName uint
-	SymbolValue uint
+	SymbolValue  uint
 	SectionIndex int16
 }
 
@@ -1138,14 +1138,14 @@ type PEFExportedSymbolKey struct {
 }
 
 type PEFImportedLibrary struct {
-	NameOffset uint
-	OldImpVersion uint
-	CurrentVersion uint
+	NameOffset          uint
+	OldImpVersion       uint
+	CurrentVersion      uint
 	ImportedSymbolCount uint
 	FirstImportedSymbol uint
-	Options uint8
-	ReservedA uint8
-	ReservedB uint16
+	Options             uint8
+	ReservedA           uint8
+	ReservedB           uint16
 }
 
 type PEFImportedSymbol struct {
@@ -1153,45 +1153,45 @@ type PEFImportedSymbol struct {
 }
 
 type PEFLoaderInfoHeader struct {
-	MainSection int
-	MainOffset uint
-	InitSection int
-	InitOffset uint
-	TermSection int
-	TermOffset uint
-	ImportedLibraryCount uint
+	MainSection              int
+	MainOffset               uint
+	InitSection              int
+	InitOffset               uint
+	TermSection              int
+	TermOffset               uint
+	ImportedLibraryCount     uint
 	TotalImportedSymbolCount uint
-	RelocSectionCount uint
-	RelocInstrOffset uint
-	LoaderStringsOffset uint
-	ExportHashOffset uint
-	ExportHashTablePower uint
-	ExportedSymbolCount uint
+	RelocSectionCount        uint
+	RelocInstrOffset         uint
+	LoaderStringsOffset      uint
+	ExportHashOffset         uint
+	ExportHashTablePower     uint
+	ExportedSymbolCount      uint
 }
 
 type PEFLoaderRelocationHeader struct {
-	SectionIndex uint16
-	ReservedA uint16
-	RelocCount uint
+	SectionIndex     uint16
+	ReservedA        uint16
+	RelocCount       uint
 	FirstRelocOffset uint
 }
 
 type PEFSectionHeader struct {
-	NameOffset int
-	DefaultAddress uint
-	TotalLength uint
-	UnpackedLength uint
+	NameOffset      int
+	DefaultAddress  uint
+	TotalLength     uint
+	UnpackedLength  uint
 	ContainerLength uint
 	ContainerOffset uint
-	SectionKind uint8
-	ShareKind uint8
-	Alignment uint8
-	ReservedA uint8
+	SectionKind     uint8
+	ShareKind       uint8
+	Alignment       uint8
+	ReservedA       uint8
 }
 
 type PEFSplitHashWord struct {
 	NameLength uint16
-	HashValue uint16
+	HashValue  uint16
 }
 
 // Deprecated: Deprecated
@@ -1203,24 +1203,24 @@ type QElem struct {
 
 type QHdr struct {
 	QFlags unsafe.Pointer
-	QHead unsafe.Pointer
-	QTail unsafe.Pointer
+	QHead  unsafe.Pointer
+	QTail  unsafe.Pointer
 }
 
 type RegisterInformation struct {
 }
 
 type RegisterInformationPowerPC struct {
-	R0 unsafe.Pointer
-	R1 unsafe.Pointer
-	R2 unsafe.Pointer
-	R3 unsafe.Pointer
-	R4 unsafe.Pointer
-	R5 unsafe.Pointer
-	R6 unsafe.Pointer
-	R7 unsafe.Pointer
-	R8 unsafe.Pointer
-	R9 unsafe.Pointer
+	R0  unsafe.Pointer
+	R1  unsafe.Pointer
+	R2  unsafe.Pointer
+	R3  unsafe.Pointer
+	R4  unsafe.Pointer
+	R5  unsafe.Pointer
+	R6  unsafe.Pointer
+	R7  unsafe.Pointer
+	R8  unsafe.Pointer
+	R9  unsafe.Pointer
 	R10 unsafe.Pointer
 	R11 unsafe.Pointer
 	R12 unsafe.Pointer
@@ -1255,53 +1255,53 @@ type RegisteredComponentRecord struct {
 
 type ResourceSpec struct {
 	ResType uint
-	ResID int16
+	ResID   int16
 }
 
 // Deprecated: Deprecated
 type RoutineDescriptor struct {
-	GoMixedModeTrap uint16
-	Version int8
+	GoMixedModeTrap        uint16
+	Version                int8
 	RoutineDescriptorFlags uint8
-	Reserved1 uint
-	Reserved2 uint8
-	SelectorInfo uint8
-	RoutineCount uint16
-	RoutineRecords [1]RoutineRecord
+	Reserved1              uint
+	Reserved2              uint8
+	SelectorInfo           uint8
+	RoutineCount           uint16
+	RoutineRecords         [1]RoutineRecord
 }
 
 // Deprecated: Deprecated
 type RoutineRecord struct {
-	ProcInfo uint
-	Reserved1 int8
-	ISA int8
-	RoutineFlags uint16
+	ProcInfo       uint
+	Reserved1      int8
+	ISA            int8
+	RoutineFlags   uint16
 	ProcDescriptor unsafe.Pointer
-	Reserved2 uint
-	Selector uint
+	Reserved2      uint
+	Selector       uint
 }
 
 type RoutingResourceEntry struct {
-	Creator uint
-	FileType uint
-	TargetFolder uint
+	Creator           uint
+	FileType          uint
+	TargetFolder      uint
 	DestinationFolder uint
-	ReservedField uint
+	ReservedField     uint
 }
 
 type RuleBasedTrslRecord struct {
-	SourceType int16
-	TargetType int16
-	FormatNumber int16
-	PropertyFlag int16
+	SourceType    int16
+	TargetType    int16
+	FormatNumber  int16
+	PropertyFlag  int16
 	NumberOfRules int16
 }
 
 // Deprecated: Deprecated
 type SchedulerInfoRec struct {
-	InfoRecSize uint
-	CurrentThreadID uint
-	SuggestedThreadID uint
+	InfoRecSize             uint
+	CurrentThreadID         uint
+	SuggestedThreadID       uint
 	InterruptedCoopThreadID uint
 }
 
@@ -1311,131 +1311,131 @@ type ScriptCodeRun struct {
 }
 
 type SoundDataChunk struct {
-	CkID uint
-	CkSize int
-	Offset uint
+	CkID      uint
+	CkSize    int
+	Offset    uint
 	BlockSize uint
 }
 
 type TECBufferContextRec struct {
-	TextInputBuffer *uint8
-	TextInputBufferEnd *uint8
-	TextOutputBuffer *uint8
-	TextOutputBufferEnd *uint8
-	EncodingInputBuffer *TextEncodingRun
-	EncodingInputBufferEnd *TextEncodingRun
-	EncodingOutputBuffer *TextEncodingRun
+	TextInputBuffer         *uint8
+	TextInputBufferEnd      *uint8
+	TextOutputBuffer        *uint8
+	TextOutputBufferEnd     *uint8
+	EncodingInputBuffer     *TextEncodingRun
+	EncodingInputBufferEnd  *TextEncodingRun
+	EncodingOutputBuffer    *TextEncodingRun
 	EncodingOutputBufferEnd *TextEncodingRun
 }
 
 type TECConversionInfo struct {
-	SourceEncoding uint
+	SourceEncoding      uint
 	DestinationEncoding uint
-	Reserved1 uint16
-	Reserved2 uint16
+	Reserved1           uint16
+	Reserved2           uint16
 }
 
 type TECConverterContextRec struct {
-	PluginRec string
-	SourceEncoding uint
-	DestEncoding uint
-	Reserved1 uint
-	Reserved2 uint
-	BufferContext TECBufferContextRec
-	ContextRefCon unsafe.Pointer
-	ConversionProc unsafe.Pointer
-	FlushProc unsafe.Pointer
+	PluginRec            string
+	SourceEncoding       uint
+	DestEncoding         uint
+	Reserved1            uint
+	Reserved2            uint
+	BufferContext        TECBufferContextRec
+	ContextRefCon        unsafe.Pointer
+	ConversionProc       unsafe.Pointer
+	FlushProc            unsafe.Pointer
 	ClearContextInfoProc unsafe.Pointer
-	Options1 uint
-	Options2 uint
-	PluginState TECPluginStateRec
+	Options1             uint
+	Options2             uint
+	PluginState          TECPluginStateRec
 }
 
 type TECEncodingPairRec struct {
 	Source TextEncodingRec
-	Dest TextEncodingRec
+	Dest   TextEncodingRec
 }
 
 type TECEncodingPairs struct {
 	EncodingPair TECEncodingPairRec
-	Flags uint
-	Speed uint
+	Flags        uint
+	Speed        uint
 }
 
 type TECEncodingPairsRec struct {
-	Count uint
+	Count         uint
 	EncodingPairs TECEncodingPairs
 }
 
 type TECEncodingsListRec struct {
-	Count uint
+	Count     uint
 	Encodings TextEncodingRec
 }
 
 type TECInfo struct {
-	Format uint16
-	TecVersion uint16
-	TecTextConverterFeatures uint
+	Format                      uint16
+	TecVersion                  uint16
+	TecTextConverterFeatures    uint
 	TecUnicodeConverterFeatures uint
-	TecTextCommonFeatures uint
-	TecTextEncodingsFolderName [32]uint8
-	TecExtensionFileName [32]uint8
-	TecLowestTEFileVersion uint16
-	TecHighestTEFileVersion uint16
+	TecTextCommonFeatures       uint
+	TecTextEncodingsFolderName  [32]uint8
+	TecExtensionFileName        [32]uint8
+	TecLowestTEFileVersion      uint16
+	TecHighestTEFileVersion     uint16
 }
 
 type TECInternetNameRec struct {
-	Offset uint
-	SearchEncoding TextEncodingRec
+	Offset             uint
+	SearchEncoding     TextEncodingRec
 	EncodingNameLength uint8
-	EncodingName [1]uint8
+	EncodingName       [1]uint8
 }
 
 type TECInternetNamesRec struct {
-	Count uint
+	Count         uint
 	InternetNames TECInternetNameRec
 }
 
 type TECLocaleListToEncodingListRec struct {
-	Offset uint
-	Count uint
+	Offset  uint
+	Count   uint
 	Locales int16
 }
 
 type TECLocaleToEncodingsListRec struct {
-	Count uint
+	Count                    uint
 	LocaleListToEncodingList TECLocaleListToEncodingListRec
 }
 
 type TECPluginDispatchTable struct {
-	Version uint
-	CompatibleVersion uint
-	PluginID uint
-	PluginNewEncodingConverter unsafe.Pointer
-	PluginClearContextInfo unsafe.Pointer
-	PluginConvertTextEncoding unsafe.Pointer
-	PluginFlushConversion unsafe.Pointer
-	PluginDisposeEncodingConverter unsafe.Pointer
-	PluginNewEncodingSniffer unsafe.Pointer
-	PluginClearSnifferContextInfo unsafe.Pointer
-	PluginSniffTextEncoding unsafe.Pointer
-	PluginDisposeEncodingSniffer unsafe.Pointer
-	PluginGetCountAvailableTextEncodings unsafe.Pointer
+	Version                                  uint
+	CompatibleVersion                        uint
+	PluginID                                 uint
+	PluginNewEncodingConverter               unsafe.Pointer
+	PluginClearContextInfo                   unsafe.Pointer
+	PluginConvertTextEncoding                unsafe.Pointer
+	PluginFlushConversion                    unsafe.Pointer
+	PluginDisposeEncodingConverter           unsafe.Pointer
+	PluginNewEncodingSniffer                 unsafe.Pointer
+	PluginClearSnifferContextInfo            unsafe.Pointer
+	PluginSniffTextEncoding                  unsafe.Pointer
+	PluginDisposeEncodingSniffer             unsafe.Pointer
+	PluginGetCountAvailableTextEncodings     unsafe.Pointer
 	PluginGetCountAvailableTextEncodingPairs unsafe.Pointer
-	PluginGetCountDestinationTextEncodings unsafe.Pointer
-	PluginGetCountSubTextEncodings unsafe.Pointer
-	PluginGetCountAvailableSniffers unsafe.Pointer
-	PluginGetCountWebTextEncodings unsafe.Pointer
-	PluginGetCountMailTextEncodings unsafe.Pointer
-	PluginGetTextEncodingInternetName unsafe.Pointer
-	PluginGetTextEncodingFromInternetName unsafe.Pointer
+	PluginGetCountDestinationTextEncodings   unsafe.Pointer
+	PluginGetCountSubTextEncodings           unsafe.Pointer
+	PluginGetCountAvailableSniffers          unsafe.Pointer
+	PluginGetCountWebTextEncodings           unsafe.Pointer
+	PluginGetCountMailTextEncodings          unsafe.Pointer
+	PluginGetTextEncodingInternetName        unsafe.Pointer
+	PluginGetTextEncodingFromInternetName    unsafe.Pointer
 }
 
 type TECPluginStateRec struct {
-	State1 uint8
-	State2 uint8
-	State3 uint8
-	State4 uint8
+	State1     uint8
+	State2     uint8
+	State3     uint8
+	State4     uint8
 	LongState1 uint
 	LongState2 uint
 	LongState3 uint
@@ -1443,129 +1443,129 @@ type TECPluginStateRec struct {
 }
 
 type TECSnifferContextRec struct {
-	PluginRec string
-	Encoding uint
-	MaxErrors uint
-	MaxFeatures uint
-	TextInputBuffer *uint8
-	TextInputBufferEnd *uint8
-	NumFeatures uint
-	NumErrors uint
-	ContextRefCon unsafe.Pointer
-	SniffProc unsafe.Pointer
+	PluginRec            string
+	Encoding             uint
+	MaxErrors            uint
+	MaxFeatures          uint
+	TextInputBuffer      *uint8
+	TextInputBufferEnd   *uint8
+	NumFeatures          uint
+	NumErrors            uint
+	ContextRefCon        unsafe.Pointer
+	SniffProc            unsafe.Pointer
 	ClearContextInfoProc unsafe.Pointer
-	PluginState TECPluginStateRec
+	PluginState          TECPluginStateRec
 }
 
 type TECSubTextEncodingRec struct {
-	Offset uint
+	Offset         uint
 	SearchEncoding TextEncodingRec
-	Count uint
-	SubEncodings TextEncodingRec
+	Count          uint
+	SubEncodings   TextEncodingRec
 }
 
 type TECSubTextEncodingsRec struct {
-	Count uint
+	Count              uint
 	SubTextEncodingRec TECSubTextEncodingRec
 }
 
 type TMTask struct {
-	QLink *QElem
-	QType int16
-	TmAddr unsafe.Pointer
-	TmCount int
-	TmWakeUp int
+	QLink      *QElem
+	QType      int16
+	TmAddr     unsafe.Pointer
+	TmCount    int
+	TmWakeUp   int
 	TmReserved int
 }
 
 type TableDirectoryRecord struct {
-	TableSignature uint
-	Reserved uint
+	TableSignature   uint
+	Reserved         uint
 	TableStartOffset uint
-	TableSize uint
+	TableSize        uint
 }
 
 type TextChunk struct {
-	CkID uint
+	CkID   uint
 	CkSize int
-	Text [1]int8
+	Text   [1]int8
 }
 
 type TextEncodingRec struct {
-	Base uint
+	Base    uint
 	Variant uint
-	Format uint
+	Format  uint
 }
 
 type TextEncodingRun struct {
-	Offset uint
+	Offset       uint
 	TextEncoding uint
 }
 
 type TogglePB struct {
 	TogFlags int
-	AmChars uint
-	PmChars uint
+	AmChars  uint
+	PmChars  uint
 	Reserved [4]int
 }
 
 // Deprecated: Deprecated
 type TokenBlock struct {
-	Source string
-	SourceLength int
-	TokenList string
-	TokenLength int
-	TokenCount int
-	StringList string
-	StringLength int
-	StringCount int
-	DoString uint8
-	DoAppend uint8
+	Source         string
+	SourceLength   int
+	TokenList      string
+	TokenLength    int
+	TokenCount     int
+	StringList     string
+	StringLength   int
+	StringCount    int
+	DoString       uint8
+	DoAppend       uint8
 	DoAlphanumeric uint8
-	DoNest uint8
-	LeftDelims [2]int16
-	RightDelims [2]int16
-	LeftComment [4]int16
-	RightComment [4]int16
-	EscapeCode int16
-	DecimalCode int16
-	ItlResource *string
-	Reserved [8]int
+	DoNest         uint8
+	LeftDelims     [2]int16
+	RightDelims    [2]int16
+	LeftComment    [4]int16
+	RightComment   [4]int16
+	EscapeCode     int16
+	DecimalCode    int16
+	ItlResource    *string
+	Reserved       [8]int
 }
 
 // Deprecated: Deprecated
 type TokenRec struct {
-	TheToken int16
-	Position string
-	Length int
+	TheToken       int16
+	Position       string
+	Length         int
 	StringPosition *uint8
 }
 
 type UCKeyLayoutFeatureInfo struct {
 	KeyLayoutFeatureInfoFormat uint16
-	Reserved uint16
-	MaxOutputStringLength uint
+	Reserved                   uint16
+	MaxOutputStringLength      uint
 }
 
 type UCKeyModifiersToTableNum struct {
 	KeyModifiersToTableNumFormat uint16
-	DefaultTableNum uint16
-	ModifiersCount uint
-	TableNum [1]uint8
+	DefaultTableNum              uint16
+	ModifiersCount               uint
+	TableNum                     [1]uint8
 }
 
 type UCKeySequenceDataIndex struct {
 	KeySequenceDataIndexFormat uint16
-	CharSequenceCount uint16
-	CharSequenceOffsets [1]uint16
+	CharSequenceCount          uint16
+	CharSequenceOffsets        [1]uint16
 }
 
 type UCKeyStateEntryRange struct {
-	CurStateStart uint16
-	CurStateRange uint8
+	CurStateStart   uint16
+	CurStateRange   uint8
 	DeltaMultiplier uint8
-	CharData uint16
-	NextState uint16
+	CharData        uint16
+	NextState       uint16
 }
 
 type UCKeyStateEntryTerminal struct {
@@ -1574,67 +1574,67 @@ type UCKeyStateEntryTerminal struct {
 }
 
 type UCKeyStateRecord struct {
-	StateZeroCharData uint16
+	StateZeroCharData  uint16
 	StateZeroNextState uint16
-	StateEntryCount uint16
-	StateEntryFormat uint16
-	StateEntryData [1]uint
+	StateEntryCount    uint16
+	StateEntryFormat   uint16
+	StateEntryData     [1]uint
 }
 
 type UCKeyStateRecordsIndex struct {
 	KeyStateRecordsIndexFormat uint16
-	KeyStateRecordCount uint16
-	KeyStateRecordOffsets [1]uint
+	KeyStateRecordCount        uint16
+	KeyStateRecordOffsets      [1]uint
 }
 
 type UCKeyStateTerminators struct {
 	KeyStateTerminatorsFormat uint16
-	KeyStateTerminatorCount uint16
-	KeyStateTerminators [1]uint16
+	KeyStateTerminatorCount   uint16
+	KeyStateTerminators       [1]uint16
 }
 
 type UCKeyToCharTableIndex struct {
 	KeyToCharTableIndexFormat uint16
-	KeyToCharTableSize uint16
-	KeyToCharTableCount uint
-	KeyToCharTableOffsets [1]uint
+	KeyToCharTableSize        uint16
+	KeyToCharTableCount       uint
+	KeyToCharTableOffsets     [1]uint
 }
 
 type UCKeyboardLayout struct {
-	KeyLayoutHeaderFormat uint16
-	KeyLayoutDataVersion uint16
+	KeyLayoutHeaderFormat      uint16
+	KeyLayoutDataVersion       uint16
 	KeyLayoutFeatureInfoOffset uint
-	KeyboardTypeCount uint
-	KeyboardTypeList [1]UCKeyboardTypeHeader
+	KeyboardTypeCount          uint
+	KeyboardTypeList           [1]UCKeyboardTypeHeader
 }
 
 type UCKeyboardTypeHeader struct {
-	KeyboardTypeFirst uint
-	KeyboardTypeLast uint
+	KeyboardTypeFirst            uint
+	KeyboardTypeLast             uint
 	KeyModifiersToTableNumOffset uint
-	KeyToCharTableIndexOffset uint
-	KeyStateRecordsIndexOffset uint
-	KeyStateTerminatorsOffset uint
-	KeySequenceDataIndexOffset uint
+	KeyToCharTableIndexOffset    uint
+	KeyStateRecordsIndexOffset   uint
+	KeyStateTerminatorsOffset    uint
+	KeySequenceDataIndexOffset   uint
 }
 
 // Deprecated: Deprecated
 type UTCDateTime struct {
 	HighSeconds uint16
-	LowSeconds uint
-	Fraction uint16
+	LowSeconds  uint
+	Fraction    uint16
 }
 
 type UnicodeMapping struct {
 	UnicodeEncoding uint
-	OtherEncoding uint
-	MappingVersion int
+	OtherEncoding   uint
+	MappingVersion  int
 }
 
 type UntokenTable struct {
-	Len int16
+	Len       int16
 	LastToken int16
-	Index [256]int16
+	Index     [256]int16
 }
 
 type VectorInformation struct {
@@ -1642,19 +1642,19 @@ type VectorInformation struct {
 
 type VectorInformationPowerPC struct {
 	Registers [32]unsafe.Pointer
-	VSCR unsafe.Pointer
-	VRsave uint
+	VSCR      unsafe.Pointer
+	VRsave    uint
 }
 
 type VolMountInfoHeader struct {
 	Length int16
-	Media uint
+	Media  uint
 }
 
 type VolumeMountInfoHeader struct {
 	Length int16
-	Media uint
-	Flags int16
+	Media  uint
+	Flags  int16
 }
 
 type WideCharArr struct {
@@ -1663,31 +1663,31 @@ type WideCharArr struct {
 }
 
 type XLibContainerHeader struct {
-	Tag1 uint
-	Tag2 uint
-	CurrentFormat uint
+	Tag1                   uint
+	Tag2                   uint
+	CurrentFormat          uint
 	ContainerStringsOffset uint
-	ExportHashOffset uint
-	ExportKeyOffset uint
-	ExportSymbolOffset uint
-	ExportNamesOffset uint
-	ExportHashTablePower uint
-	ExportedSymbolCount uint
-	FragNameOffset uint
-	FragNameLength uint
-	DylibPathOffset uint
-	DylibPathLength uint
-	CpuFamily uint
-	CpuModel uint
-	DateTimeStamp uint
-	CurrentVersion uint
-	OldDefVersion uint
-	OldImpVersion uint
+	ExportHashOffset       uint
+	ExportKeyOffset        uint
+	ExportSymbolOffset     uint
+	ExportNamesOffset      uint
+	ExportHashTablePower   uint
+	ExportedSymbolCount    uint
+	FragNameOffset         uint
+	FragNameLength         uint
+	DylibPathOffset        uint
+	DylibPathLength        uint
+	CpuFamily              uint
+	CpuModel               uint
+	DateTimeStamp          uint
+	CurrentVersion         uint
+	OldDefVersion          uint
+	OldImpVersion          uint
 }
 
 type XLibExportedSymbol struct {
 	ClassAndName uint
-	BpOffset uint
+	BpOffset     uint
 }
 
 // C struct: __FSFileOperation
@@ -1700,16 +1700,15 @@ type FSFileSecurity struct{}
 
 // C struct: decform
 type Decform struct {
-	Style int8
+	Style  int8
 	Unused int8
 	Digits int16
 }
 
 // C struct: decimal
 type Decimal struct {
-	Sgn int8
+	Sgn    int8
 	Unused int8
-	Exp int16
-	Sig unsafe.Pointer
+	Exp    int16
+	Sig    unsafe.Pointer
 }
-

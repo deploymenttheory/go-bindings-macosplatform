@@ -140,10 +140,7 @@ func emitEnums(
 	writeImportBlock(&buf, imports)
 	buf.Write(body.Bytes())
 
-	if err := os.WriteFile(filepath.Join(outDir, enumsFile), buf.Bytes(), 0o600); err != nil {
-		return fmt.Errorf("write %s: %w", enumsFile, err)
-	}
-	return nil
+	return emit.WriteGoFile(filepath.Join(outDir, enumsFile), buf.Bytes())
 }
 
 // buildEnumView populates the template view-model from raw metadata, matching

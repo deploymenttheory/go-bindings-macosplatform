@@ -57,4 +57,3 @@ type CircularGeographicConditionable interface {
 }
 
 var _ CircularGeographicConditionable = (*CircularGeographicCondition)(nil)
-

@@ -17,7 +17,9 @@ type LowLatencyFrameInterpolationParameters struct {
 }
 
 // Unwrap returns the underlying [raw.VTLowLatencyFrameInterpolationParameters].
-func (x *LowLatencyFrameInterpolationParameters) Unwrap() *raw.VTLowLatencyFrameInterpolationParameters { return x.inner }
+func (x *LowLatencyFrameInterpolationParameters) Unwrap() *raw.VTLowLatencyFrameInterpolationParameters {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -88,4 +90,3 @@ type LowLatencyFrameInterpolationParametersable interface {
 }
 
 var _ LowLatencyFrameInterpolationParametersable = (*LowLatencyFrameInterpolationParameters)(nil)
-

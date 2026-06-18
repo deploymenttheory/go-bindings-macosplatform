@@ -17,13 +17,13 @@ type CISampler struct {
 }
 
 var (
-	_clsCISampler = _objcClass("CISampler")
-	_cISamplerSelSamplerWithImage = objc.RegisterName("samplerWithImage:")
+	_clsCISampler                        = _objcClass("CISampler")
+	_cISamplerSelSamplerWithImage        = objc.RegisterName("samplerWithImage:")
 	_cISamplerSelSamplerWithImageOptions = objc.RegisterName("samplerWithImage:options:")
-	_cISamplerSelInitWithImage = objc.RegisterName("initWithImage:")
-	_cISamplerSelInitWithImageOptions = objc.RegisterName("initWithImage:options:")
-	_cISamplerSelDefinition = objc.RegisterName("definition")
-	_cISamplerSelExtent = objc.RegisterName("extent")
+	_cISamplerSelInitWithImage           = objc.RegisterName("initWithImage:")
+	_cISamplerSelInitWithImageOptions    = objc.RegisterName("initWithImage:options:")
+	_cISamplerSelDefinition              = objc.RegisterName("definition")
+	_cISamplerSelExtent                  = objc.RegisterName("extent")
 )
 
 func CISamplerFromID(id objc.ID) *CISampler {
@@ -38,31 +38,41 @@ func CISamplerFromID(id objc.ID) *CISampler {
 
 func CISamplerSamplerWithImage(im *CIImage) *CISampler {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCISampler), _cISamplerSelSamplerWithImage, im.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CISamplerFromID(_ret)
 }
 
 func CISamplerSamplerWithImageOptions(im *CIImage, dict *foundation.NSDictionary[objc.ID, objc.ID]) *CISampler {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCISampler), _cISamplerSelSamplerWithImageOptions, im.Ptr(), dict)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CISamplerFromID(_ret)
 }
 
 func (o *CISampler) InitWithImage(im *CIImage) *CISampler {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cISamplerSelInitWithImage, im.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CISamplerFromID(_ret)
 }
 
 func (o *CISampler) InitWithImageOptions(im *CIImage, dict *foundation.NSDictionary[objc.ID, objc.ID]) *CISampler {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cISamplerSelInitWithImageOptions, im.Ptr(), dict)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CISamplerFromID(_ret)
 }
 
 func (o *CISampler) Definition() *CIFilterShape {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cISamplerSelDefinition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIFilterShapeFromID(_ret)
 }
 
@@ -70,4 +80,3 @@ func (o *CISampler) Extent() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _cISamplerSelExtent)
 	return _ret
 }
-

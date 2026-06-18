@@ -45,7 +45,9 @@ func (x *SingleDirectoryShare) Directory() *SharedDirectory {
 	return &SharedDirectory{inner: _r}
 }
 
-func (x *SingleDirectoryShare) asDirectoryShare() *raw.VZDirectoryShare { return &x.inner.VZDirectoryShare }
+func (x *SingleDirectoryShare) asDirectoryShare() *raw.VZDirectoryShare {
+	return &x.inner.VZDirectoryShare
+}
 
 // SingleDirectoryShareable is the interface implemented by [SingleDirectoryShare], for mocking and DI.
 type SingleDirectoryShareable interface {
@@ -54,4 +56,3 @@ type SingleDirectoryShareable interface {
 }
 
 var _ SingleDirectoryShareable = (*SingleDirectoryShare)(nil)
-

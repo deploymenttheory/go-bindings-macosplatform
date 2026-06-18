@@ -16,13 +16,13 @@ type MDLLightProbe struct {
 }
 
 var (
-	_clsMDLLightProbe = _objcClass("MDLLightProbe")
-	_mDLLightProbeSelInitWithReflectiveTextureIrradianceTexture = objc.RegisterName("initWithReflectiveTexture:irradianceTexture:")
-	_mDLLightProbeSelGenerateSphericalHarmonicsFromIrradiance = objc.RegisterName("generateSphericalHarmonicsFromIrradiance:")
-	_mDLLightProbeSelReflectiveTexture = objc.RegisterName("reflectiveTexture")
-	_mDLLightProbeSelIrradianceTexture = objc.RegisterName("irradianceTexture")
-	_mDLLightProbeSelSphericalHarmonicsLevel = objc.RegisterName("sphericalHarmonicsLevel")
-	_mDLLightProbeSelSphericalHarmonicsCoefficients = objc.RegisterName("sphericalHarmonicsCoefficients")
+	_clsMDLLightProbe                                                                                                        = _objcClass("MDLLightProbe")
+	_mDLLightProbeSelInitWithReflectiveTextureIrradianceTexture                                                              = objc.RegisterName("initWithReflectiveTexture:irradianceTexture:")
+	_mDLLightProbeSelGenerateSphericalHarmonicsFromIrradiance                                                                = objc.RegisterName("generateSphericalHarmonicsFromIrradiance:")
+	_mDLLightProbeSelReflectiveTexture                                                                                       = objc.RegisterName("reflectiveTexture")
+	_mDLLightProbeSelIrradianceTexture                                                                                       = objc.RegisterName("irradianceTexture")
+	_mDLLightProbeSelSphericalHarmonicsLevel                                                                                 = objc.RegisterName("sphericalHarmonicsLevel")
+	_mDLLightProbeSelSphericalHarmonicsCoefficients                                                                          = objc.RegisterName("sphericalHarmonicsCoefficients")
 	_mDLLightProbeSelLightProbeWithTextureSizeForLocationLightsToConsiderObjectsToConsiderReflectiveCubemapIrradianceCubemap = objc.RegisterName("lightProbeWithTextureSize:forLocation:lightsToConsider:objectsToConsider:reflectiveCubemap:irradianceCubemap:")
 )
 
@@ -38,7 +38,9 @@ func MDLLightProbeFromID(id objc.ID) *MDLLightProbe {
 
 func (o *MDLLightProbe) InitWithReflectiveTextureIrradianceTexture(reflectiveTexture *MDLTexture, irradianceTexture *MDLTexture) *MDLLightProbe {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLLightProbeSelInitWithReflectiveTextureIrradianceTexture, reflectiveTexture.Ptr(), irradianceTexture.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLLightProbeFromID(_ret)
 }
 
@@ -48,13 +50,17 @@ func (o *MDLLightProbe) GenerateSphericalHarmonicsFromIrradiance(sphericalHarmon
 
 func (o *MDLLightProbe) ReflectiveTexture() *MDLTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLLightProbeSelReflectiveTexture)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLTextureFromID(_ret)
 }
 
 func (o *MDLLightProbe) IrradianceTexture() *MDLTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLLightProbeSelIrradianceTexture)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLTextureFromID(_ret)
 }
 
@@ -65,13 +71,16 @@ func (o *MDLLightProbe) SphericalHarmonicsLevel() uint {
 
 func (o *MDLLightProbe) SphericalHarmonicsCoefficients() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLLightProbeSelSphericalHarmonicsCoefficients)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func MDLLightProbeLightProbeWithTextureSizeForLocationLightsToConsiderObjectsToConsiderReflectiveCubemapIrradianceCubemap(textureSize int, transform *MDLTransform, lightsToConsider *foundation.NSArray[*MDLLight], objectsToConsider *foundation.NSArray[*MDLObject], reflectiveCubemap *MDLTexture, irradianceCubemap *MDLTexture) *MDLLightProbe {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMDLLightProbe), _mDLLightProbeSelLightProbeWithTextureSizeForLocationLightsToConsiderObjectsToConsiderReflectiveCubemapIrradianceCubemap, textureSize, transform.Ptr(), lightsToConsider.Ptr(), objectsToConsider.Ptr(), reflectiveCubemap.Ptr(), irradianceCubemap.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLLightProbeFromID(_ret)
 }
-

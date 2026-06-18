@@ -24,4 +24,3 @@ func InstallerState_Choice_Installed() uintptr {
 	ptr, _ := purego.Dlsym(_installerpluginsLib, "InstallerState_Choice_Installed")
 	return ptr
 }
-

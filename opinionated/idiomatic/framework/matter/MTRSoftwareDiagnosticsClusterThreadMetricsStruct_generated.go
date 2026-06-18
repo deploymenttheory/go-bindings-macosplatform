@@ -17,7 +17,9 @@ type MTRSoftwareDiagnosticsClusterThreadMetricsStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRSoftwareDiagnosticsClusterThreadMetricsStruct].
-func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) Unwrap() *raw.MTRSoftwareDiagnosticsClusterThreadMetricsStruct { return x.inner }
+func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) Unwrap() *raw.MTRSoftwareDiagnosticsClusterThreadMetricsStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -121,7 +123,9 @@ func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) SetStackSize(stackSiz
 	x.inner.SetStackSize(stackSize)
 }
 
-func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) asMTRSoftwareDiagnosticsClusterThreadMetricsStruct() *raw.MTRSoftwareDiagnosticsClusterThreadMetricsStruct { return x.inner }
+func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) asMTRSoftwareDiagnosticsClusterThreadMetricsStruct() *raw.MTRSoftwareDiagnosticsClusterThreadMetricsStruct {
+	return x.inner
+}
 
 // MTRSoftwareDiagnosticsClusterThreadMetricsStructable is the interface implemented by [MTRSoftwareDiagnosticsClusterThreadMetricsStruct], for mocking and DI.
 type MTRSoftwareDiagnosticsClusterThreadMetricsStructable interface {
@@ -144,4 +148,3 @@ type MTRSoftwareDiagnosticsClusterThreadMetricsStructable interface {
 }
 
 var _ MTRSoftwareDiagnosticsClusterThreadMetricsStructable = (*MTRSoftwareDiagnosticsClusterThreadMetricsStruct)(nil)
-

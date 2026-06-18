@@ -16,16 +16,16 @@ type AVMetricMediaResourceRequestEvent struct {
 }
 
 var (
-	_clsAVMetricMediaResourceRequestEvent = _objcClass("AVMetricMediaResourceRequestEvent")
-	_aVMetricMediaResourceRequestEventSelUrl = objc.RegisterName("url")
-	_aVMetricMediaResourceRequestEventSelServerAddress = objc.RegisterName("serverAddress")
-	_aVMetricMediaResourceRequestEventSelRequestStartTime = objc.RegisterName("requestStartTime")
-	_aVMetricMediaResourceRequestEventSelRequestEndTime = objc.RegisterName("requestEndTime")
-	_aVMetricMediaResourceRequestEventSelResponseStartTime = objc.RegisterName("responseStartTime")
-	_aVMetricMediaResourceRequestEventSelResponseEndTime = objc.RegisterName("responseEndTime")
-	_aVMetricMediaResourceRequestEventSelByteRange = objc.RegisterName("byteRange")
-	_aVMetricMediaResourceRequestEventSelWasReadFromCache = objc.RegisterName("wasReadFromCache")
-	_aVMetricMediaResourceRequestEventSelErrorEvent = objc.RegisterName("errorEvent")
+	_clsAVMetricMediaResourceRequestEvent                          = _objcClass("AVMetricMediaResourceRequestEvent")
+	_aVMetricMediaResourceRequestEventSelUrl                       = objc.RegisterName("url")
+	_aVMetricMediaResourceRequestEventSelServerAddress             = objc.RegisterName("serverAddress")
+	_aVMetricMediaResourceRequestEventSelRequestStartTime          = objc.RegisterName("requestStartTime")
+	_aVMetricMediaResourceRequestEventSelRequestEndTime            = objc.RegisterName("requestEndTime")
+	_aVMetricMediaResourceRequestEventSelResponseStartTime         = objc.RegisterName("responseStartTime")
+	_aVMetricMediaResourceRequestEventSelResponseEndTime           = objc.RegisterName("responseEndTime")
+	_aVMetricMediaResourceRequestEventSelByteRange                 = objc.RegisterName("byteRange")
+	_aVMetricMediaResourceRequestEventSelWasReadFromCache          = objc.RegisterName("wasReadFromCache")
+	_aVMetricMediaResourceRequestEventSelErrorEvent                = objc.RegisterName("errorEvent")
 	_aVMetricMediaResourceRequestEventSelNetworkTransactionMetrics = objc.RegisterName("networkTransactionMetrics")
 )
 
@@ -42,42 +42,54 @@ func AVMetricMediaResourceRequestEventFromID(id objc.ID) *AVMetricMediaResourceR
 // Returns the URL of the resource request. If no value is available, returns nil.
 func (o *AVMetricMediaResourceRequestEvent) Url() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricMediaResourceRequestEventSelUrl)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // The IP address of the server. If not available, the value is nil.
 func (o *AVMetricMediaResourceRequestEvent) ServerAddress() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricMediaResourceRequestEventSelServerAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Returns the start time of the resource request.
 func (o *AVMetricMediaResourceRequestEvent) RequestStartTime() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricMediaResourceRequestEventSelRequestStartTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // Returns the end time of the resource request.
 func (o *AVMetricMediaResourceRequestEvent) RequestEndTime() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricMediaResourceRequestEventSelRequestEndTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // Returns the start time of the resource request response.
 func (o *AVMetricMediaResourceRequestEvent) ResponseStartTime() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricMediaResourceRequestEventSelResponseStartTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // Returns the end time of the resource request response.
 func (o *AVMetricMediaResourceRequestEvent) ResponseEndTime() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricMediaResourceRequestEventSelResponseEndTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -96,14 +108,17 @@ func (o *AVMetricMediaResourceRequestEvent) WasReadFromCache() bool {
 // Returns the error event, if any, encountered during the resource request. If no value is present, returns nil.
 func (o *AVMetricMediaResourceRequestEvent) ErrorEvent() *AVMetricErrorEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricMediaResourceRequestEventSelErrorEvent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMetricErrorEventFromID(_ret)
 }
 
 // Returns the NSURLSessionTaskMetrics associated with the resource request. If no value is present, returns nil
 func (o *AVMetricMediaResourceRequestEvent) NetworkTransactionMetrics() *foundation.NSURLSessionTaskMetrics {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricMediaResourceRequestEventSelNetworkTransactionMetrics)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLSessionTaskMetricsFromID(_ret)
 }
-

@@ -16,24 +16,24 @@ type NSTextFieldCell struct {
 }
 
 var (
-	_clsNSTextFieldCell = _objcClass("NSTextFieldCell")
-	_nSTextFieldCellSelInitTextCell = objc.RegisterName("initTextCell:")
-	_nSTextFieldCellSelInitWithCoder = objc.RegisterName("initWithCoder:")
+	_clsNSTextFieldCell                                  = _objcClass("NSTextFieldCell")
+	_nSTextFieldCellSelInitTextCell                      = objc.RegisterName("initTextCell:")
+	_nSTextFieldCellSelInitWithCoder                     = objc.RegisterName("initWithCoder:")
 	_nSTextFieldCellSelSetWantsNotificationForMarkedText = objc.RegisterName("setWantsNotificationForMarkedText:")
-	_nSTextFieldCellSelBackgroundColor = objc.RegisterName("backgroundColor")
-	_nSTextFieldCellSelSetBackgroundColor = objc.RegisterName("setBackgroundColor:")
-	_nSTextFieldCellSelDrawsBackground = objc.RegisterName("drawsBackground")
-	_nSTextFieldCellSelSetDrawsBackground = objc.RegisterName("setDrawsBackground:")
-	_nSTextFieldCellSelTextColor = objc.RegisterName("textColor")
-	_nSTextFieldCellSelSetTextColor = objc.RegisterName("setTextColor:")
-	_nSTextFieldCellSelBezelStyle = objc.RegisterName("bezelStyle")
-	_nSTextFieldCellSelSetBezelStyle = objc.RegisterName("setBezelStyle:")
-	_nSTextFieldCellSelPlaceholderString = objc.RegisterName("placeholderString")
-	_nSTextFieldCellSelSetPlaceholderString = objc.RegisterName("setPlaceholderString:")
-	_nSTextFieldCellSelPlaceholderAttributedString = objc.RegisterName("placeholderAttributedString")
-	_nSTextFieldCellSelSetPlaceholderAttributedString = objc.RegisterName("setPlaceholderAttributedString:")
-	_nSTextFieldCellSelAllowedInputSourceLocales = objc.RegisterName("allowedInputSourceLocales")
-	_nSTextFieldCellSelSetAllowedInputSourceLocales = objc.RegisterName("setAllowedInputSourceLocales:")
+	_nSTextFieldCellSelBackgroundColor                   = objc.RegisterName("backgroundColor")
+	_nSTextFieldCellSelSetBackgroundColor                = objc.RegisterName("setBackgroundColor:")
+	_nSTextFieldCellSelDrawsBackground                   = objc.RegisterName("drawsBackground")
+	_nSTextFieldCellSelSetDrawsBackground                = objc.RegisterName("setDrawsBackground:")
+	_nSTextFieldCellSelTextColor                         = objc.RegisterName("textColor")
+	_nSTextFieldCellSelSetTextColor                      = objc.RegisterName("setTextColor:")
+	_nSTextFieldCellSelBezelStyle                        = objc.RegisterName("bezelStyle")
+	_nSTextFieldCellSelSetBezelStyle                     = objc.RegisterName("setBezelStyle:")
+	_nSTextFieldCellSelPlaceholderString                 = objc.RegisterName("placeholderString")
+	_nSTextFieldCellSelSetPlaceholderString              = objc.RegisterName("setPlaceholderString:")
+	_nSTextFieldCellSelPlaceholderAttributedString       = objc.RegisterName("placeholderAttributedString")
+	_nSTextFieldCellSelSetPlaceholderAttributedString    = objc.RegisterName("setPlaceholderAttributedString:")
+	_nSTextFieldCellSelAllowedInputSourceLocales         = objc.RegisterName("allowedInputSourceLocales")
+	_nSTextFieldCellSelSetAllowedInputSourceLocales      = objc.RegisterName("setAllowedInputSourceLocales:")
 )
 
 func NSTextFieldCellFromID(id objc.ID) *NSTextFieldCell {
@@ -48,13 +48,17 @@ func NSTextFieldCellFromID(id objc.ID) *NSTextFieldCell {
 
 func (o *NSTextFieldCell) InitTextCell(string_ *foundation.NSString) *NSTextFieldCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldCellSelInitTextCell, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextFieldCellFromID(_ret)
 }
 
 func (o *NSTextFieldCell) InitWithCoder(coder *foundation.NSCoder) *NSTextFieldCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldCellSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextFieldCellFromID(_ret)
 }
 
@@ -64,7 +68,9 @@ func (o *NSTextFieldCell) SetWantsNotificationForMarkedText(flag bool) {
 
 func (o *NSTextFieldCell) BackgroundColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldCellSelBackgroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -83,7 +89,9 @@ func (o *NSTextFieldCell) SetDrawsBackground(drawsBackground bool) {
 
 func (o *NSTextFieldCell) TextColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldCellSelTextColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -102,7 +110,9 @@ func (o *NSTextFieldCell) SetBezelStyle(bezelStyle NSTextFieldBezelStyle) {
 
 func (o *NSTextFieldCell) PlaceholderString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldCellSelPlaceholderString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -112,7 +122,9 @@ func (o *NSTextFieldCell) SetPlaceholderString(placeholderString *foundation.NSS
 
 func (o *NSTextFieldCell) PlaceholderAttributedString() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldCellSelPlaceholderAttributedString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
@@ -128,4 +140,3 @@ func (o *NSTextFieldCell) AllowedInputSourceLocales() *foundation.NSArray[*found
 func (o *NSTextFieldCell) SetAllowedInputSourceLocales(allowedInputSourceLocales *foundation.NSArray[*foundation.NSString]) {
 	o.Ptr().Send(_nSTextFieldCellSelSetAllowedInputSourceLocales, allowedInputSourceLocales)
 }
-

@@ -16,7 +16,9 @@ type MTRTestClusterClusterTestNotHandledParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRTestClusterClusterTestNotHandledParams].
-func (x *MTRTestClusterClusterTestNotHandledParams) Unwrap() *raw.MTRTestClusterClusterTestNotHandledParams { return x.inner }
+func (x *MTRTestClusterClusterTestNotHandledParams) Unwrap() *raw.MTRTestClusterClusterTestNotHandledParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -48,7 +50,9 @@ func (x *MTRTestClusterClusterTestNotHandledParams) WithServerSideProcessingTime
 	return x
 }
 
-func (x *MTRTestClusterClusterTestNotHandledParams) asMTRUnitTestingClusterTestNotHandledParams() *raw.MTRUnitTestingClusterTestNotHandledParams { return &x.inner.MTRUnitTestingClusterTestNotHandledParams }
+func (x *MTRTestClusterClusterTestNotHandledParams) asMTRUnitTestingClusterTestNotHandledParams() *raw.MTRUnitTestingClusterTestNotHandledParams {
+	return &x.inner.MTRUnitTestingClusterTestNotHandledParams
+}
 
 // MTRTestClusterClusterTestNotHandledParamsable is the interface implemented by [MTRTestClusterClusterTestNotHandledParams], for mocking and DI.
 type MTRTestClusterClusterTestNotHandledParamsable interface {
@@ -58,4 +62,3 @@ type MTRTestClusterClusterTestNotHandledParamsable interface {
 }
 
 var _ MTRTestClusterClusterTestNotHandledParamsable = (*MTRTestClusterClusterTestNotHandledParams)(nil)
-

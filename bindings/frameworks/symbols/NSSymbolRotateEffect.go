@@ -15,12 +15,12 @@ type NSSymbolRotateEffect struct {
 }
 
 var (
-	_clsNSSymbolRotateEffect = _objcClass("NSSymbolRotateEffect")
-	_nSSymbolRotateEffectSelEffect = objc.RegisterName("effect")
-	_nSSymbolRotateEffectSelRotateClockwiseEffect = objc.RegisterName("rotateClockwiseEffect")
+	_clsNSSymbolRotateEffect                             = _objcClass("NSSymbolRotateEffect")
+	_nSSymbolRotateEffectSelEffect                       = objc.RegisterName("effect")
+	_nSSymbolRotateEffectSelRotateClockwiseEffect        = objc.RegisterName("rotateClockwiseEffect")
 	_nSSymbolRotateEffectSelRotateCounterClockwiseEffect = objc.RegisterName("rotateCounterClockwiseEffect")
-	_nSSymbolRotateEffectSelEffectWithByLayer = objc.RegisterName("effectWithByLayer")
-	_nSSymbolRotateEffectSelEffectWithWholeSymbol = objc.RegisterName("effectWithWholeSymbol")
+	_nSSymbolRotateEffectSelEffectWithByLayer            = objc.RegisterName("effectWithByLayer")
+	_nSSymbolRotateEffectSelEffectWithWholeSymbol        = objc.RegisterName("effectWithWholeSymbol")
 )
 
 func NSSymbolRotateEffectFromID(id objc.ID) *NSSymbolRotateEffect {
@@ -36,35 +36,44 @@ func NSSymbolRotateEffectFromID(id objc.ID) *NSSymbolRotateEffect {
 // The default rotate effect, determined by the system.
 func NSSymbolRotateEffectEffect() *NSSymbolRotateEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolRotateEffect), _nSSymbolRotateEffectSelEffect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolRotateEffectFromID(_ret)
 }
 
 // Convenience initializer for a rotate effect that rotates clockwise.
 func NSSymbolRotateEffectRotateClockwiseEffect() *NSSymbolRotateEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolRotateEffect), _nSSymbolRotateEffectSelRotateClockwiseEffect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolRotateEffectFromID(_ret)
 }
 
 // Convenience initializer for a rotate effect that rotates counter-clockwise.
 func NSSymbolRotateEffectRotateCounterClockwiseEffect() *NSSymbolRotateEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolRotateEffect), _nSSymbolRotateEffectSelRotateCounterClockwiseEffect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolRotateEffectFromID(_ret)
 }
 
 // Returns a copy of the effect that animates incrementally, by layer.
 func (o *NSSymbolRotateEffect) EffectWithByLayer() *NSSymbolRotateEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolRotateEffectSelEffectWithByLayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolRotateEffectFromID(_ret)
 }
 
 // Returns a copy of the effect that animates all layers of the symbol simultaneously.
 func (o *NSSymbolRotateEffect) EffectWithWholeSymbol() *NSSymbolRotateEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolRotateEffectSelEffectWithWholeSymbol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolRotateEffectFromID(_ret)
 }
-

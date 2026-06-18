@@ -62,9 +62,13 @@ func (x *ImageReduceColumnMax) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *
 	return x
 }
 
-func (x *ImageReduceColumnMax) asImageReduceUnary() *raw.MPSImageReduceUnary { return &x.inner.MPSImageReduceUnary }
+func (x *ImageReduceColumnMax) asImageReduceUnary() *raw.MPSImageReduceUnary {
+	return &x.inner.MPSImageReduceUnary
+}
 
-func (x *ImageReduceColumnMax) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel }
+func (x *ImageReduceColumnMax) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
+	return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel
+}
 
 // ImageReduceColumnMaxable is the interface implemented by [ImageReduceColumnMax], for mocking and DI.
 type ImageReduceColumnMaxable interface {
@@ -76,4 +80,3 @@ type ImageReduceColumnMaxable interface {
 }
 
 var _ ImageReduceColumnMaxable = (*ImageReduceColumnMax)(nil)
-

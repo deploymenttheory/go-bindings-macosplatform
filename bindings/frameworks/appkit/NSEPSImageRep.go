@@ -18,11 +18,11 @@ type NSEPSImageRep struct {
 }
 
 var (
-	_clsNSEPSImageRep = _objcClass("NSEPSImageRep")
-	_nSEPSImageRepSelImageRepWithData = objc.RegisterName("imageRepWithData:")
-	_nSEPSImageRepSelInitWithData = objc.RegisterName("initWithData:")
-	_nSEPSImageRepSelPrepareGState = objc.RegisterName("prepareGState")
-	_nSEPSImageRepSelBoundingBox = objc.RegisterName("boundingBox")
+	_clsNSEPSImageRep                  = _objcClass("NSEPSImageRep")
+	_nSEPSImageRepSelImageRepWithData  = objc.RegisterName("imageRepWithData:")
+	_nSEPSImageRepSelInitWithData      = objc.RegisterName("initWithData:")
+	_nSEPSImageRepSelPrepareGState     = objc.RegisterName("prepareGState")
+	_nSEPSImageRepSelBoundingBox       = objc.RegisterName("boundingBox")
 	_nSEPSImageRepSelEPSRepresentation = objc.RegisterName("EPSRepresentation")
 )
 
@@ -39,14 +39,18 @@ func NSEPSImageRepFromID(id objc.ID) *NSEPSImageRep {
 // Creates and returns a representation of an image initialized with the specified EPS data. Convenience of `-initWithData:`. - Note: This method always returns `nil` on macOS 14.0 and later.
 func NSEPSImageRepImageRepWithData(epsData *foundation.NSData) *NSEPSImageRep {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSEPSImageRep), _nSEPSImageRepSelImageRepWithData, epsData.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEPSImageRepFromID(_ret)
 }
 
 // Returns a representation of an image initialized with the specified EPS data. - Note: This method always returns `nil` on macOS 14.0 and later.
 func (o *NSEPSImageRep) InitWithData(epsData *foundation.NSData) *NSEPSImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEPSImageRepSelInitWithData, epsData.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEPSImageRepFromID(_ret)
 }
 
@@ -65,7 +69,8 @@ func (o *NSEPSImageRep) BoundingBox() corefoundation.CGRect {
 // The EPS representation of the image representation.
 func (o *NSEPSImageRep) EPSRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEPSImageRepSelEPSRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

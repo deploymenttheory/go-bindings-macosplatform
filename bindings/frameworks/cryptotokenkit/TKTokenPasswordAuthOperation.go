@@ -16,8 +16,8 @@ type TKTokenPasswordAuthOperation struct {
 }
 
 var (
-	_clsTKTokenPasswordAuthOperation = _objcClass("TKTokenPasswordAuthOperation")
-	_tKTokenPasswordAuthOperationSelPassword = objc.RegisterName("password")
+	_clsTKTokenPasswordAuthOperation            = _objcClass("TKTokenPasswordAuthOperation")
+	_tKTokenPasswordAuthOperationSelPassword    = objc.RegisterName("password")
 	_tKTokenPasswordAuthOperationSelSetPassword = objc.RegisterName("setPassword:")
 )
 
@@ -33,11 +33,12 @@ func TKTokenPasswordAuthOperationFromID(id objc.ID) *TKTokenPasswordAuthOperatio
 
 func (o *TKTokenPasswordAuthOperation) Password() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenPasswordAuthOperationSelPassword)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *TKTokenPasswordAuthOperation) SetPassword(password *foundation.NSString) {
 	o.Ptr().Send(_tKTokenPasswordAuthOperationSelSetPassword, password.Ptr())
 }
-

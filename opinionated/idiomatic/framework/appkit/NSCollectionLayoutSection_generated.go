@@ -63,7 +63,9 @@ func (x *CollectionLayoutSection) WithBoundarySupplementaryItems(items ...*raw.N
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSCollectionLayoutBoundarySupplementaryItem](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -91,7 +93,9 @@ func (x *CollectionLayoutSection) WithDecorationItems(items ...*raw.NSCollection
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSCollectionLayoutDecorationItem](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -209,4 +213,3 @@ type CollectionLayoutSectionable interface {
 }
 
 var _ CollectionLayoutSectionable = (*CollectionLayoutSection)(nil)
-

@@ -19,13 +19,13 @@ type AVPortraitEffectsMatte struct {
 }
 
 var (
-	_clsAVPortraitEffectsMatte = _objcClass("AVPortraitEffectsMatte")
-	_aVPortraitEffectsMatteSelPortraitEffectsMatteFromDictionaryRepresentationError = objc.RegisterName("portraitEffectsMatteFromDictionaryRepresentation:error:")
-	_aVPortraitEffectsMatteSelPortraitEffectsMatteByApplyingExifOrientation = objc.RegisterName("portraitEffectsMatteByApplyingExifOrientation:")
+	_clsAVPortraitEffectsMatte                                                                        = _objcClass("AVPortraitEffectsMatte")
+	_aVPortraitEffectsMatteSelPortraitEffectsMatteFromDictionaryRepresentationError                   = objc.RegisterName("portraitEffectsMatteFromDictionaryRepresentation:error:")
+	_aVPortraitEffectsMatteSelPortraitEffectsMatteByApplyingExifOrientation                           = objc.RegisterName("portraitEffectsMatteByApplyingExifOrientation:")
 	_aVPortraitEffectsMatteSelPortraitEffectsMatteByReplacingPortraitEffectsMatteWithPixelBufferError = objc.RegisterName("portraitEffectsMatteByReplacingPortraitEffectsMatteWithPixelBuffer:error:")
-	_aVPortraitEffectsMatteSelDictionaryRepresentationForAuxiliaryDataType = objc.RegisterName("dictionaryRepresentationForAuxiliaryDataType:")
-	_aVPortraitEffectsMatteSelPixelFormatType = objc.RegisterName("pixelFormatType")
-	_aVPortraitEffectsMatteSelMattingImage = objc.RegisterName("mattingImage")
+	_aVPortraitEffectsMatteSelDictionaryRepresentationForAuxiliaryDataType                            = objc.RegisterName("dictionaryRepresentationForAuxiliaryDataType:")
+	_aVPortraitEffectsMatteSelPixelFormatType                                                         = objc.RegisterName("pixelFormatType")
+	_aVPortraitEffectsMatteSelMattingImage                                                            = objc.RegisterName("mattingImage")
 )
 
 func AVPortraitEffectsMatteFromID(id objc.ID) *AVPortraitEffectsMatte {
@@ -42,7 +42,9 @@ func AVPortraitEffectsMatteFromID(id objc.ID) *AVPortraitEffectsMatte {
 func AVPortraitEffectsMattePortraitEffectsMatteFromDictionaryRepresentationError(imageSourceAuxDataInfoDictionary *foundation.NSDictionary[objc.ID, objc.ID]) (*AVPortraitEffectsMatte, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVPortraitEffectsMatte), _aVPortraitEffectsMatteSelPortraitEffectsMatteFromDictionaryRepresentationError, imageSourceAuxDataInfoDictionary, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -52,7 +54,9 @@ func AVPortraitEffectsMattePortraitEffectsMatteFromDictionaryRepresentationError
 // @method portraitEffectsMatteByApplyingExifOrientation: @abstract Returns a derivative AVPortraitEffectsMatte instance in which the specified Exif orientation has been applied. @param exifOrientation One of the 8 standard Exif orientation tags expressing how the portrait effects matte should be rotated / mirrored. @result An AVPortraitEffectsMatte instance. @discussion When applying simple 90 degree rotation or mirroring edits to media containing a portrait effects matte, you may use this initializer to create a derivative copy of the portrait effects matte in which the specified orientation is applied. This method throws an NSInvalidArgumentException if you pass an unrecognized exifOrientation.
 func (o *AVPortraitEffectsMatte) PortraitEffectsMatteByApplyingExifOrientation(exifOrientation imageio.CGImagePropertyOrientation) *AVPortraitEffectsMatte {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPortraitEffectsMatteSelPortraitEffectsMatteByApplyingExifOrientation, exifOrientation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPortraitEffectsMatteFromID(_ret)
 }
 
@@ -60,7 +64,9 @@ func (o *AVPortraitEffectsMatte) PortraitEffectsMatteByApplyingExifOrientation(e
 func (o *AVPortraitEffectsMatte) PortraitEffectsMatteByReplacingPortraitEffectsMatteWithPixelBufferError(pixelBuffer unsafe.Pointer) (*AVPortraitEffectsMatte, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPortraitEffectsMatteSelPortraitEffectsMatteByReplacingPortraitEffectsMatteWithPixelBufferError, pixelBuffer, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -84,4 +90,3 @@ func (o *AVPortraitEffectsMatte) MattingImage() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVPortraitEffectsMatteSelMattingImage)
 	return _ret
 }
-

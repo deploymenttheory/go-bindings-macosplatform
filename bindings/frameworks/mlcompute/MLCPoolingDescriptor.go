@@ -16,25 +16,25 @@ type MLCPoolingDescriptor struct {
 }
 
 var (
-	_clsMLCPoolingDescriptor = _objcClass("MLCPoolingDescriptor")
-	_mLCPoolingDescriptorSelPoolingDescriptorWithTypeKernelSizeStride = objc.RegisterName("poolingDescriptorWithType:kernelSize:stride:")
-	_mLCPoolingDescriptorSelMaxPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes = objc.RegisterName("maxPoolingDescriptorWithKernelSizes:strides:paddingPolicy:paddingSizes:")
-	_mLCPoolingDescriptorSelMaxPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes = objc.RegisterName("maxPoolingDescriptorWithKernelSizes:strides:dilationRates:paddingPolicy:paddingSizes:")
-	_mLCPoolingDescriptorSelAveragePoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizesCountIncludesPadding = objc.RegisterName("averagePoolingDescriptorWithKernelSizes:strides:paddingPolicy:paddingSizes:countIncludesPadding:")
+	_clsMLCPoolingDescriptor                                                                                                         = _objcClass("MLCPoolingDescriptor")
+	_mLCPoolingDescriptorSelPoolingDescriptorWithTypeKernelSizeStride                                                                = objc.RegisterName("poolingDescriptorWithType:kernelSize:stride:")
+	_mLCPoolingDescriptorSelMaxPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes                                      = objc.RegisterName("maxPoolingDescriptorWithKernelSizes:strides:paddingPolicy:paddingSizes:")
+	_mLCPoolingDescriptorSelMaxPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes                         = objc.RegisterName("maxPoolingDescriptorWithKernelSizes:strides:dilationRates:paddingPolicy:paddingSizes:")
+	_mLCPoolingDescriptorSelAveragePoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizesCountIncludesPadding              = objc.RegisterName("averagePoolingDescriptorWithKernelSizes:strides:paddingPolicy:paddingSizes:countIncludesPadding:")
 	_mLCPoolingDescriptorSelAveragePoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizesCountIncludesPadding = objc.RegisterName("averagePoolingDescriptorWithKernelSizes:strides:dilationRates:paddingPolicy:paddingSizes:countIncludesPadding:")
-	_mLCPoolingDescriptorSelL2NormPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes = objc.RegisterName("l2NormPoolingDescriptorWithKernelSizes:strides:paddingPolicy:paddingSizes:")
-	_mLCPoolingDescriptorSelL2NormPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes = objc.RegisterName("l2NormPoolingDescriptorWithKernelSizes:strides:dilationRates:paddingPolicy:paddingSizes:")
-	_mLCPoolingDescriptorSelPoolingType = objc.RegisterName("poolingType")
-	_mLCPoolingDescriptorSelKernelWidth = objc.RegisterName("kernelWidth")
-	_mLCPoolingDescriptorSelKernelHeight = objc.RegisterName("kernelHeight")
-	_mLCPoolingDescriptorSelStrideInX = objc.RegisterName("strideInX")
-	_mLCPoolingDescriptorSelStrideInY = objc.RegisterName("strideInY")
-	_mLCPoolingDescriptorSelDilationRateInX = objc.RegisterName("dilationRateInX")
-	_mLCPoolingDescriptorSelDilationRateInY = objc.RegisterName("dilationRateInY")
-	_mLCPoolingDescriptorSelPaddingPolicy = objc.RegisterName("paddingPolicy")
-	_mLCPoolingDescriptorSelPaddingSizeInX = objc.RegisterName("paddingSizeInX")
-	_mLCPoolingDescriptorSelPaddingSizeInY = objc.RegisterName("paddingSizeInY")
-	_mLCPoolingDescriptorSelCountIncludesPadding = objc.RegisterName("countIncludesPadding")
+	_mLCPoolingDescriptorSelL2NormPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes                                   = objc.RegisterName("l2NormPoolingDescriptorWithKernelSizes:strides:paddingPolicy:paddingSizes:")
+	_mLCPoolingDescriptorSelL2NormPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes                      = objc.RegisterName("l2NormPoolingDescriptorWithKernelSizes:strides:dilationRates:paddingPolicy:paddingSizes:")
+	_mLCPoolingDescriptorSelPoolingType                                                                                              = objc.RegisterName("poolingType")
+	_mLCPoolingDescriptorSelKernelWidth                                                                                              = objc.RegisterName("kernelWidth")
+	_mLCPoolingDescriptorSelKernelHeight                                                                                             = objc.RegisterName("kernelHeight")
+	_mLCPoolingDescriptorSelStrideInX                                                                                                = objc.RegisterName("strideInX")
+	_mLCPoolingDescriptorSelStrideInY                                                                                                = objc.RegisterName("strideInY")
+	_mLCPoolingDescriptorSelDilationRateInX                                                                                          = objc.RegisterName("dilationRateInX")
+	_mLCPoolingDescriptorSelDilationRateInY                                                                                          = objc.RegisterName("dilationRateInY")
+	_mLCPoolingDescriptorSelPaddingPolicy                                                                                            = objc.RegisterName("paddingPolicy")
+	_mLCPoolingDescriptorSelPaddingSizeInX                                                                                           = objc.RegisterName("paddingSizeInX")
+	_mLCPoolingDescriptorSelPaddingSizeInY                                                                                           = objc.RegisterName("paddingSizeInY")
+	_mLCPoolingDescriptorSelCountIncludesPadding                                                                                     = objc.RegisterName("countIncludesPadding")
 )
 
 func MLCPoolingDescriptorFromID(id objc.ID) *MLCPoolingDescriptor {
@@ -50,49 +50,63 @@ func MLCPoolingDescriptorFromID(id objc.ID) *MLCPoolingDescriptor {
 // @abstract   Create a MLCPoolingDescriptor object @param      poolingType    The pooling function @param      kernelSize      The kernel sizes in x and y @param      stride               The kernel strides in x and y @return     A new MLCPoolingDescriptor object.
 func MLCPoolingDescriptorPoolingDescriptorWithTypeKernelSizeStride(poolingType MLCPoolingType, kernelSize uint, stride uint) *MLCPoolingDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCPoolingDescriptor), _mLCPoolingDescriptorSelPoolingDescriptorWithTypeKernelSizeStride, poolingType, kernelSize, stride)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCPoolingDescriptorFromID(_ret)
 }
 
 // @abstract   Create a MLCPoolingDescriptor object for a max pooling function @param      kernelSizes        The kernel sizes in x and y @param      strides                 The kernel strides in x and y @param      paddingPolicy    The padding policy @param      paddingSizes      The padding sizes in x and y if padding policy is MLCPaddingPolicyUsePaddingSIze @return     A new MLCPoolingDescriptor object.
 func MLCPoolingDescriptorMaxPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *MLCPoolingDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCPoolingDescriptor), _mLCPoolingDescriptorSelMaxPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes, kernelSizes, strides, paddingPolicy, paddingSizes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCPoolingDescriptorFromID(_ret)
 }
 
 // @abstract   Create a MLCPoolingDescriptor object for a max pooling function @param      kernelSizes        The kernel sizes in x and y @param      strides                 The kernel strides in x and y @param      dilationRates    The kernel dilation rates in x and y @param      paddingPolicy    The padding policy @param      paddingSizes      The padding sizes in x and y if padding policy is MLCPaddingPolicyUsePaddingSIze @return     A new MLCPoolingDescriptor object.
 func MLCPoolingDescriptorMaxPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *MLCPoolingDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCPoolingDescriptor), _mLCPoolingDescriptorSelMaxPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes, kernelSizes, strides, dilationRates, paddingPolicy, paddingSizes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCPoolingDescriptorFromID(_ret)
 }
 
 // @abstract   Create a MLCPoolingDescriptor object for an average pooling function @param      kernelSizes                      The kernel sizes in x and y @param      strides                               The kernel strides in x and y @param      paddingPolicy                  The padding policy @param      paddingSizes                    The padding sizes in x and y if padding policy is MLCPaddingPolicyUsePaddingSIze @param      countIncludesPadding   Whether to include zero padding in the averaging calculation @return     A new MLCPoolingDescriptor object.
 func MLCPoolingDescriptorAveragePoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizesCountIncludesPadding(kernelSizes *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber], countIncludesPadding bool) *MLCPoolingDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCPoolingDescriptor), _mLCPoolingDescriptorSelAveragePoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizesCountIncludesPadding, kernelSizes, strides, paddingPolicy, paddingSizes, countIncludesPadding)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCPoolingDescriptorFromID(_ret)
 }
 
 // @abstract   Create a MLCPoolingDescriptor object for an average pooling function @param      kernelSizes                      The kernel sizes in x and y @param      strides                               The kernel strides in x and y @param      dilationRates                  The kernel dilation rates in x and y @param      paddingPolicy                  The padding policy @param      paddingSizes                    The padding sizes in x and y if padding policy is MLCPaddingPolicyUsePaddingSIze @param      countIncludesPadding   Whether to include zero padding in the averaging calculation @return     A new MLCPoolingDescriptor object.
 func MLCPoolingDescriptorAveragePoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizesCountIncludesPadding(kernelSizes *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber], countIncludesPadding bool) *MLCPoolingDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCPoolingDescriptor), _mLCPoolingDescriptorSelAveragePoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizesCountIncludesPadding, kernelSizes, strides, dilationRates, paddingPolicy, paddingSizes, countIncludesPadding)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCPoolingDescriptorFromID(_ret)
 }
 
 // @abstract   Create a MLCPoolingDescriptor object for a L2 norm pooling function @param      kernelSizes        The kernel sizes in x and y @param      strides                 The kernel strides in x and y @param      paddingPolicy    The padding policy @param      paddingSizes      The padding sizes in x and y if padding policy is MLCPaddingPolicyUsePaddingSIze @return     A new MLCPoolingDescriptor object.
 func MLCPoolingDescriptorL2NormPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *MLCPoolingDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCPoolingDescriptor), _mLCPoolingDescriptorSelL2NormPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes, kernelSizes, strides, paddingPolicy, paddingSizes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCPoolingDescriptorFromID(_ret)
 }
 
 // @abstract   Create a MLCPoolingDescriptor object for a L2 norm pooling function @param      kernelSizes        The kernel sizes in x and y @param      strides                 The kernel strides in x and y @param      dilationRates    The kernel dilation rates in x and y @param      paddingPolicy    The padding policy @param      paddingSizes      The padding sizes in x and y if padding policy is MLCPaddingPolicyUsePaddingSIze @return     A new MLCPoolingDescriptor object.
 func MLCPoolingDescriptorL2NormPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *MLCPoolingDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCPoolingDescriptor), _mLCPoolingDescriptorSelL2NormPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes, kernelSizes, strides, dilationRates, paddingPolicy, paddingSizes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCPoolingDescriptorFromID(_ret)
 }
 
@@ -161,4 +175,3 @@ func (o *MLCPoolingDescriptor) CountIncludesPadding() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mLCPoolingDescriptorSelCountIncludesPadding)
 	return _ret
 }
-

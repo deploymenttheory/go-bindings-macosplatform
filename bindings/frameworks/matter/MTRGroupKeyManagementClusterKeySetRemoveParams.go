@@ -16,12 +16,12 @@ type MTRGroupKeyManagementClusterKeySetRemoveParams struct {
 }
 
 var (
-	_clsMTRGroupKeyManagementClusterKeySetRemoveParams = _objcClass("MTRGroupKeyManagementClusterKeySetRemoveParams")
-	_mTRGroupKeyManagementClusterKeySetRemoveParamsSelGroupKeySetID = objc.RegisterName("groupKeySetID")
-	_mTRGroupKeyManagementClusterKeySetRemoveParamsSelSetGroupKeySetID = objc.RegisterName("setGroupKeySetID:")
-	_mTRGroupKeyManagementClusterKeySetRemoveParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRGroupKeyManagementClusterKeySetRemoveParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRGroupKeyManagementClusterKeySetRemoveParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRGroupKeyManagementClusterKeySetRemoveParams                               = _objcClass("MTRGroupKeyManagementClusterKeySetRemoveParams")
+	_mTRGroupKeyManagementClusterKeySetRemoveParamsSelGroupKeySetID                  = objc.RegisterName("groupKeySetID")
+	_mTRGroupKeyManagementClusterKeySetRemoveParamsSelSetGroupKeySetID               = objc.RegisterName("setGroupKeySetID:")
+	_mTRGroupKeyManagementClusterKeySetRemoveParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRGroupKeyManagementClusterKeySetRemoveParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRGroupKeyManagementClusterKeySetRemoveParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRGroupKeyManagementClusterKeySetRemoveParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -37,7 +37,9 @@ func MTRGroupKeyManagementClusterKeySetRemoveParamsFromID(id objc.ID) *MTRGroupK
 
 func (o *MTRGroupKeyManagementClusterKeySetRemoveParams) GroupKeySetID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupKeyManagementClusterKeySetRemoveParamsSelGroupKeySetID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -48,7 +50,9 @@ func (o *MTRGroupKeyManagementClusterKeySetRemoveParams) SetGroupKeySetID(groupK
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRGroupKeyManagementClusterKeySetRemoveParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupKeyManagementClusterKeySetRemoveParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,11 +63,12 @@ func (o *MTRGroupKeyManagementClusterKeySetRemoveParams) SetTimedInvokeTimeoutMs
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRGroupKeyManagementClusterKeySetRemoveParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupKeyManagementClusterKeySetRemoveParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRGroupKeyManagementClusterKeySetRemoveParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRGroupKeyManagementClusterKeySetRemoveParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

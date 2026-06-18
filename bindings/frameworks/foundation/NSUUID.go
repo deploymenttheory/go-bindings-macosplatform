@@ -15,14 +15,14 @@ type NSUUID struct {
 }
 
 var (
-	_clsNSUUID = _objcClass("NSUUID")
-	_nSUUIDSelUUID = objc.RegisterName("UUID")
-	_nSUUIDSelInit = objc.RegisterName("init")
+	_clsNSUUID                   = _objcClass("NSUUID")
+	_nSUUIDSelUUID               = objc.RegisterName("UUID")
+	_nSUUIDSelInit               = objc.RegisterName("init")
 	_nSUUIDSelInitWithUUIDString = objc.RegisterName("initWithUUIDString:")
-	_nSUUIDSelInitWithUUIDBytes = objc.RegisterName("initWithUUIDBytes:")
-	_nSUUIDSelGetUUIDBytes = objc.RegisterName("getUUIDBytes:")
-	_nSUUIDSelCompare = objc.RegisterName("compare:")
-	_nSUUIDSelUUIDString = objc.RegisterName("UUIDString")
+	_nSUUIDSelInitWithUUIDBytes  = objc.RegisterName("initWithUUIDBytes:")
+	_nSUUIDSelGetUUIDBytes       = objc.RegisterName("getUUIDBytes:")
+	_nSUUIDSelCompare            = objc.RegisterName("compare:")
+	_nSUUIDSelUUIDString         = objc.RegisterName("UUIDString")
 )
 
 func NSUUIDFromID(id objc.ID) *NSUUID {
@@ -37,25 +37,33 @@ func NSUUIDFromID(id objc.ID) *NSUUID {
 
 func NSUUIDUUID() *NSUUID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUUID), _nSUUIDSelUUID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUUIDFromID(_ret)
 }
 
 func (o *NSUUID) Init() *NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUUIDSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUUIDFromID(_ret)
 }
 
 func (o *NSUUID) InitWithUUIDString(string_ *NSString) *NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUUIDSelInitWithUUIDString, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUUIDFromID(_ret)
 }
 
 func (o *NSUUID) InitWithUUIDBytes(bytes_ *uint8) *NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUUIDSelInitWithUUIDBytes, bytes_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUUIDFromID(_ret)
 }
 
@@ -70,7 +78,8 @@ func (o *NSUUID) Compare(otherUUID *NSUUID) NSComparisonResult {
 
 func (o *NSUUID) UUIDString() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUUIDSelUUIDString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
-

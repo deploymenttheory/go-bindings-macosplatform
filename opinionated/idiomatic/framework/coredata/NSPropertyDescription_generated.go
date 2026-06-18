@@ -268,4 +268,3 @@ type PropertyDescriptionable interface {
 }
 
 var _ PropertyDescriptionable = (*PropertyDescription)(nil)
-

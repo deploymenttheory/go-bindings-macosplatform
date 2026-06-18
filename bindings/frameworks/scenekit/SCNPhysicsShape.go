@@ -16,13 +16,13 @@ type SCNPhysicsShape struct {
 }
 
 var (
-	_clsSCNPhysicsShape = _objcClass("SCNPhysicsShape")
-	_sCNPhysicsShapeSelShapeWithGeometryOptions = objc.RegisterName("shapeWithGeometry:options:")
-	_sCNPhysicsShapeSelShapeWithNodeOptions = objc.RegisterName("shapeWithNode:options:")
+	_clsSCNPhysicsShape                          = _objcClass("SCNPhysicsShape")
+	_sCNPhysicsShapeSelShapeWithGeometryOptions  = objc.RegisterName("shapeWithGeometry:options:")
+	_sCNPhysicsShapeSelShapeWithNodeOptions      = objc.RegisterName("shapeWithNode:options:")
 	_sCNPhysicsShapeSelShapeWithShapesTransforms = objc.RegisterName("shapeWithShapes:transforms:")
-	_sCNPhysicsShapeSelOptions = objc.RegisterName("options")
-	_sCNPhysicsShapeSelSourceObject = objc.RegisterName("sourceObject")
-	_sCNPhysicsShapeSelTransforms = objc.RegisterName("transforms")
+	_sCNPhysicsShapeSelOptions                   = objc.RegisterName("options")
+	_sCNPhysicsShapeSelSourceObject              = objc.RegisterName("sourceObject")
+	_sCNPhysicsShapeSelTransforms                = objc.RegisterName("transforms")
 )
 
 func SCNPhysicsShapeFromID(id objc.ID) *SCNPhysicsShape {
@@ -37,19 +37,25 @@ func SCNPhysicsShapeFromID(id objc.ID) *SCNPhysicsShape {
 
 func SCNPhysicsShapeShapeWithGeometryOptions(geometry *SCNGeometry, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *SCNPhysicsShape {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsShape), _sCNPhysicsShapeSelShapeWithGeometryOptions, geometry.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsShapeFromID(_ret)
 }
 
 func SCNPhysicsShapeShapeWithNodeOptions(node *SCNNode, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *SCNPhysicsShape {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsShape), _sCNPhysicsShapeSelShapeWithNodeOptions, node.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsShapeFromID(_ret)
 }
 
 func SCNPhysicsShapeShapeWithShapesTransforms(shapes *foundation.NSArray[*SCNPhysicsShape], transforms *foundation.NSArray[*foundation.NSValue]) *SCNPhysicsShape {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsShape), _sCNPhysicsShapeSelShapeWithShapesTransforms, shapes.Ptr(), transforms)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsShapeFromID(_ret)
 }
 
@@ -67,4 +73,3 @@ func (o *SCNPhysicsShape) Transforms() *foundation.NSArray[*foundation.NSValue] 
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _sCNPhysicsShapeSelTransforms)
 	return _ret
 }
-

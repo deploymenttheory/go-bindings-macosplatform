@@ -18,15 +18,15 @@ type CKFetchRecordZonesOperation struct {
 }
 
 var (
-	_clsCKFetchRecordZonesOperation = _objcClass("CKFetchRecordZonesOperation")
-	_cKFetchRecordZonesOperationSelFetchAllRecordZonesOperation = objc.RegisterName("fetchAllRecordZonesOperation")
-	_cKFetchRecordZonesOperationSelInit = objc.RegisterName("init")
-	_cKFetchRecordZonesOperationSelInitWithRecordZoneIDs = objc.RegisterName("initWithRecordZoneIDs:")
-	_cKFetchRecordZonesOperationSelRecordZoneIDs = objc.RegisterName("recordZoneIDs")
-	_cKFetchRecordZonesOperationSelSetRecordZoneIDs = objc.RegisterName("setRecordZoneIDs:")
-	_cKFetchRecordZonesOperationSelPerRecordZoneCompletionBlock = objc.RegisterName("perRecordZoneCompletionBlock")
-	_cKFetchRecordZonesOperationSelSetPerRecordZoneCompletionBlock = objc.RegisterName("setPerRecordZoneCompletionBlock:")
-	_cKFetchRecordZonesOperationSelFetchRecordZonesCompletionBlock = objc.RegisterName("fetchRecordZonesCompletionBlock")
+	_clsCKFetchRecordZonesOperation                                   = _objcClass("CKFetchRecordZonesOperation")
+	_cKFetchRecordZonesOperationSelFetchAllRecordZonesOperation       = objc.RegisterName("fetchAllRecordZonesOperation")
+	_cKFetchRecordZonesOperationSelInit                               = objc.RegisterName("init")
+	_cKFetchRecordZonesOperationSelInitWithRecordZoneIDs              = objc.RegisterName("initWithRecordZoneIDs:")
+	_cKFetchRecordZonesOperationSelRecordZoneIDs                      = objc.RegisterName("recordZoneIDs")
+	_cKFetchRecordZonesOperationSelSetRecordZoneIDs                   = objc.RegisterName("setRecordZoneIDs:")
+	_cKFetchRecordZonesOperationSelPerRecordZoneCompletionBlock       = objc.RegisterName("perRecordZoneCompletionBlock")
+	_cKFetchRecordZonesOperationSelSetPerRecordZoneCompletionBlock    = objc.RegisterName("setPerRecordZoneCompletionBlock:")
+	_cKFetchRecordZonesOperationSelFetchRecordZonesCompletionBlock    = objc.RegisterName("fetchRecordZonesCompletionBlock")
 	_cKFetchRecordZonesOperationSelSetFetchRecordZonesCompletionBlock = objc.RegisterName("setFetchRecordZonesCompletionBlock:")
 )
 
@@ -40,31 +40,39 @@ func CKFetchRecordZonesOperationFromID(id objc.ID) *CKFetchRecordZonesOperation 
 	return o
 }
 
-// Returns an operation for fetching all record zones in the current database. Assign a value to the ``CKFetchRecordZonesOperation/fetchRecordZonesCompletionBlock`` property of the operation that this method returns so that you can process the results.
+// Returns an operation for fetching all record zones in the current database. Assign a value to the “CKFetchRecordZonesOperation/fetchRecordZonesCompletionBlock“ property of the operation that this method returns so that you can process the results.
 func CKFetchRecordZonesOperationFetchAllRecordZonesOperation() *CKFetchRecordZonesOperation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCKFetchRecordZonesOperation), _cKFetchRecordZonesOperationSelFetchAllRecordZonesOperation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKFetchRecordZonesOperationFromID(_ret)
 }
 
-// Creates an empty fetch zones operation. You must set the ``CKFetchRecordZonesOperation/recordZoneIDs`` property before you execute the operation. After creating the operation, assign a value to the ``CKFetchRecordZonesOperation/fetchRecordZonesCompletionBlock`` property so you can process the results.
+// Creates an empty fetch zones operation. You must set the “CKFetchRecordZonesOperation/recordZoneIDs“ property before you execute the operation. After creating the operation, assign a value to the “CKFetchRecordZonesOperation/fetchRecordZonesCompletionBlock“ property so you can process the results.
 func (o *CKFetchRecordZonesOperation) Init() *CKFetchRecordZonesOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchRecordZonesOperationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKFetchRecordZonesOperationFromID(_ret)
 }
 
-// Creates an operation for fetching the specified record zones. - Parameters: - zoneIDs: An array of ``CKRecordZone/ID`` objects that represents the zones you want to retrieve. If you provide an empty array, you must set the ``CKFetchRecordZonesOperation/recordZoneIDs`` property before you execute the operation. After creating the operation, assign a value to the ``CKFetchRecordZonesOperation/fetchRecordZonesCompletionBlock`` property so you can process the results.
+// Creates an operation for fetching the specified record zones. - Parameters: - zoneIDs: An array of “CKRecordZone/ID“ objects that represents the zones you want to retrieve. If you provide an empty array, you must set the “CKFetchRecordZonesOperation/recordZoneIDs“ property before you execute the operation. After creating the operation, assign a value to the “CKFetchRecordZonesOperation/fetchRecordZonesCompletionBlock“ property so you can process the results.
 func (o *CKFetchRecordZonesOperation) InitWithRecordZoneIDs(zoneIDs *foundation.NSArray[*CKRecordZoneID]) *CKFetchRecordZonesOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchRecordZonesOperationSelInitWithRecordZoneIDs, zoneIDs.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKFetchRecordZonesOperationFromID(_ret)
 }
 
-// The IDs of the record zones to retrieve. Use this property to view or change the IDs of the record zones you want to retrieve. If you intend to change the value of this property, do so before you execute the operation or submit the operation to a queue. If you use the operation that ``CKFetchRecordZonesOperation/fetchAllRecordZonesOperation()`` returns, CloudKit ignores the contents of this property and sets its value to `nil`.
+// The IDs of the record zones to retrieve. Use this property to view or change the IDs of the record zones you want to retrieve. If you intend to change the value of this property, do so before you execute the operation or submit the operation to a queue. If you use the operation that “CKFetchRecordZonesOperation/fetchAllRecordZonesOperation()“ returns, CloudKit ignores the contents of this property and sets its value to `nil`.
 func (o *CKFetchRecordZonesOperation) RecordZoneIDs() *foundation.NSArray[*CKRecordZoneID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchRecordZonesOperationSelRecordZoneIDs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CKRecordZoneID](_ret)
 }
 
@@ -72,7 +80,7 @@ func (o *CKFetchRecordZonesOperation) SetRecordZoneIDs(recordZoneIDs *foundation
 	o.Ptr().Send(_cKFetchRecordZonesOperationSelSetRecordZoneIDs, recordZoneIDs.Ptr())
 }
 
-// The closure to execute as the operation fetches individual record zones. The closure returns no value and takes the following parameters: - The ID of the record zone. - The record zone, or `nil` if CloudKit can't fetch the record zone. - If CloudKit can't fetch the record zone, this parameter provides information about the failure; otherwise, it's `nil`. The operation executes this closure once for each record zone ID in the ``CKFetchRecordZonesOperation/recordZoneIDs`` property. Each time the closure executes, it executes serially with respect to the other closures of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+// The closure to execute as the operation fetches individual record zones. The closure returns no value and takes the following parameters: - The ID of the record zone. - The record zone, or `nil` if CloudKit can't fetch the record zone. - If CloudKit can't fetch the record zone, this parameter provides information about the failure; otherwise, it's `nil`. The operation executes this closure once for each record zone ID in the “CKFetchRecordZonesOperation/recordZoneIDs“ property. Each time the closure executes, it executes serially with respect to the other closures of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
 func (o *CKFetchRecordZonesOperation) PerRecordZoneCompletionBlock() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _cKFetchRecordZonesOperationSelPerRecordZoneCompletionBlock)
 	return _ret
@@ -95,7 +103,7 @@ func (o *CKFetchRecordZonesOperation) SetPerRecordZoneCompletionBlock(perRecordZ
 	o.Ptr().Send(_cKFetchRecordZonesOperationSelSetPerRecordZoneCompletionBlock, __block_perRecordZoneCompletionBlock)
 }
 
-// The closure to execute after CloudKit retrieves all of the record zones. This property is a closure that returns no value and has the following parameters: - A dictionary that maps the zone IDs you request to the results. The keys in the dictionary are ``CKRecordZone/ID`` objects, and the values are the corresponding ``CKRecordZone`` objects that CloudKit returns. - If CloudKit can't retrieve any of the record zones, an error that provides information about the failure; otherwise, `nil`. The operation executes the closure only once, and it's your only chance to process the results. You must provide a closure capable of executing on a background thread, so any tasks that require access to the main thread must redirect accordingly. The closure reports an error of type ``CKError/Code/partialFailure`` when it retrieves only some of the record zones successfully. The <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary of the error contains a ``CKPartialErrorsByItemIDKey`` key that has a dictionary as its value. The keys of the dictionary are the IDs of the record zones that the operation can't retrieve, and the corresponding values are errors that contain information about the failures. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+// The closure to execute after CloudKit retrieves all of the record zones. This property is a closure that returns no value and has the following parameters: - A dictionary that maps the zone IDs you request to the results. The keys in the dictionary are “CKRecordZone/ID“ objects, and the values are the corresponding “CKRecordZone“ objects that CloudKit returns. - If CloudKit can't retrieve any of the record zones, an error that provides information about the failure; otherwise, `nil`. The operation executes the closure only once, and it's your only chance to process the results. You must provide a closure capable of executing on a background thread, so any tasks that require access to the main thread must redirect accordingly. The closure reports an error of type “CKError/Code/partialFailure“ when it retrieves only some of the record zones successfully. The <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary of the error contains a “CKPartialErrorsByItemIDKey“ key that has a dictionary as its value. The keys of the dictionary are the IDs of the record zones that the operation can't retrieve, and the corresponding values are errors that contain information about the failures. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
 func (o *CKFetchRecordZonesOperation) FetchRecordZonesCompletionBlock() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _cKFetchRecordZonesOperationSelFetchRecordZonesCompletionBlock)
 	return _ret
@@ -114,4 +122,3 @@ func (o *CKFetchRecordZonesOperation) SetFetchRecordZonesCompletionBlock(fetchRe
 	}
 	o.Ptr().Send(_cKFetchRecordZonesOperationSelSetFetchRecordZonesCompletionBlock, __block_fetchRecordZonesCompletionBlock)
 }
-

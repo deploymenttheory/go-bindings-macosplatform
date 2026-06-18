@@ -18,8 +18,8 @@ type FPUIActionExtensionContext struct {
 }
 
 var (
-	_clsFPUIActionExtensionContext = _objcClass("FPUIActionExtensionContext")
-	_fPUIActionExtensionContextSelCompleteRequest = objc.RegisterName("completeRequest")
+	_clsFPUIActionExtensionContext                 = _objcClass("FPUIActionExtensionContext")
+	_fPUIActionExtensionContextSelCompleteRequest  = objc.RegisterName("completeRequest")
 	_fPUIActionExtensionContextSelDomainIdentifier = objc.RegisterName("domainIdentifier")
 )
 
@@ -41,7 +41,8 @@ func (o *FPUIActionExtensionContext) CompleteRequest() {
 // The identifier for the domain managed by the current file provider.
 func (o *FPUIActionExtensionContext) DomainIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fPUIActionExtensionContextSelDomainIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

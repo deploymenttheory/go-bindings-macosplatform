@@ -17,7 +17,7 @@ type MPSCNNNeuronAbsolute struct {
 }
 
 var (
-	_clsMPSCNNNeuronAbsolute = _objcClass("MPSCNNNeuronAbsolute")
+	_clsMPSCNNNeuronAbsolute               = _objcClass("MPSCNNNeuronAbsolute")
 	_mPSCNNNeuronAbsoluteSelInitWithDevice = objc.RegisterName("initWithDevice:")
 )
 
@@ -34,7 +34,8 @@ func MPSCNNNeuronAbsoluteFromID(id objc.ID) *MPSCNNNeuronAbsolute {
 // @abstract  Initialize a neuron filter @param      device          The device the filter will run on @return     A valid MPSCNNNeuronAbsolute object or nil, if failure.
 func (o *MPSCNNNeuronAbsolute) InitWithDevice(device metal.MTLDevice) *MPSCNNNeuronAbsolute {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronAbsoluteSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronAbsoluteFromID(_ret)
 }
-

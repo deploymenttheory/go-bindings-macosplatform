@@ -27,4 +27,3 @@ type GameCenterViewControllerProvider interface {
 type PlayerProvider interface {
 	asPlayer() *raw.GKPlayer
 }
-

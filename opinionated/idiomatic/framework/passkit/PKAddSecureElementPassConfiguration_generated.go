@@ -17,7 +17,9 @@ type AddSecureElementPassConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.PKAddSecureElementPassConfiguration].
-func (x *AddSecureElementPassConfiguration) Unwrap() *raw.PKAddSecureElementPassConfiguration { return x.inner }
+func (x *AddSecureElementPassConfiguration) Unwrap() *raw.PKAddSecureElementPassConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -77,7 +79,9 @@ func (x *AddSecureElementPassConfiguration) SetLocalizedDescription(localizedDes
 	x.inner.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
 }
 
-func (x *AddSecureElementPassConfiguration) asAddSecureElementPassConfiguration() *raw.PKAddSecureElementPassConfiguration { return x.inner }
+func (x *AddSecureElementPassConfiguration) asAddSecureElementPassConfiguration() *raw.PKAddSecureElementPassConfiguration {
+	return x.inner
+}
 
 // AddSecureElementPassConfigurationable is the interface implemented by [AddSecureElementPassConfiguration], for mocking and DI.
 type AddSecureElementPassConfigurationable interface {
@@ -91,4 +95,3 @@ type AddSecureElementPassConfigurationable interface {
 }
 
 var _ AddSecureElementPassConfigurationable = (*AddSecureElementPassConfiguration)(nil)
-

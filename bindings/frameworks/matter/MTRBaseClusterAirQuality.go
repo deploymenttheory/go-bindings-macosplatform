@@ -18,26 +18,26 @@ type MTRBaseClusterAirQuality struct {
 }
 
 var (
-	_clsMTRBaseClusterAirQuality = _objcClass("MTRBaseClusterAirQuality")
-	_mTRBaseClusterAirQualitySelReadAttributeAirQualityWithCompletion = objc.RegisterName("readAttributeAirQualityWithCompletion:")
-	_mTRBaseClusterAirQualitySelSubscribeAttributeAirQualityWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAirQualityWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterAirQualitySelReadAttributeAirQualityWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeAirQualityWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterAirQualitySelReadAttributeGeneratedCommandListWithCompletion = objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:")
+	_clsMTRBaseClusterAirQuality                                                                                     = _objcClass("MTRBaseClusterAirQuality")
+	_mTRBaseClusterAirQualitySelReadAttributeAirQualityWithCompletion                                                = objc.RegisterName("readAttributeAirQualityWithCompletion:")
+	_mTRBaseClusterAirQualitySelSubscribeAttributeAirQualityWithParamsSubscriptionEstablishedReportHandler           = objc.RegisterName("subscribeAttributeAirQualityWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterAirQualitySelReadAttributeAirQualityWithClusterStateCacheEndpointQueueCompletion                  = objc.RegisterName("readAttributeAirQualityWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterAirQualitySelReadAttributeGeneratedCommandListWithCompletion                                      = objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:")
 	_mTRBaseClusterAirQualitySelSubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterAirQualitySelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeGeneratedCommandListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterAirQualitySelReadAttributeAcceptedCommandListWithCompletion = objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:")
-	_mTRBaseClusterAirQualitySelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterAirQualitySelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeAcceptedCommandListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterAirQualitySelReadAttributeAttributeListWithCompletion = objc.RegisterName("readAttributeAttributeListWithCompletion:")
-	_mTRBaseClusterAirQualitySelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterAirQualitySelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeAttributeListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterAirQualitySelReadAttributeFeatureMapWithCompletion = objc.RegisterName("readAttributeFeatureMapWithCompletion:")
-	_mTRBaseClusterAirQualitySelSubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterAirQualitySelReadAttributeFeatureMapWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeFeatureMapWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterAirQualitySelReadAttributeClusterRevisionWithCompletion = objc.RegisterName("readAttributeClusterRevisionWithCompletion:")
-	_mTRBaseClusterAirQualitySelSubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterAirQualitySelReadAttributeClusterRevisionWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeClusterRevisionWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterAirQualitySelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRBaseClusterAirQualitySelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion        = objc.RegisterName("readAttributeGeneratedCommandListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterAirQualitySelReadAttributeAcceptedCommandListWithCompletion                                       = objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:")
+	_mTRBaseClusterAirQualitySelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler  = objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterAirQualitySelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion         = objc.RegisterName("readAttributeAcceptedCommandListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterAirQualitySelReadAttributeAttributeListWithCompletion                                             = objc.RegisterName("readAttributeAttributeListWithCompletion:")
+	_mTRBaseClusterAirQualitySelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler        = objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterAirQualitySelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion               = objc.RegisterName("readAttributeAttributeListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterAirQualitySelReadAttributeFeatureMapWithCompletion                                                = objc.RegisterName("readAttributeFeatureMapWithCompletion:")
+	_mTRBaseClusterAirQualitySelSubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler           = objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterAirQualitySelReadAttributeFeatureMapWithClusterStateCacheEndpointQueueCompletion                  = objc.RegisterName("readAttributeFeatureMapWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterAirQualitySelReadAttributeClusterRevisionWithCompletion                                           = objc.RegisterName("readAttributeClusterRevisionWithCompletion:")
+	_mTRBaseClusterAirQualitySelSubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler      = objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterAirQualitySelReadAttributeClusterRevisionWithClusterStateCacheEndpointQueueCompletion             = objc.RegisterName("readAttributeClusterRevisionWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterAirQualitySelInitWithDeviceEndpointIDQueue                                                        = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRBaseClusterAirQualityFromID(id objc.ID) *MTRBaseClusterAirQuality {
@@ -257,7 +257,8 @@ func MTRBaseClusterAirQualityReadAttributeClusterRevisionWithClusterStateCacheEn
 // For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func (o *MTRBaseClusterAirQuality) InitWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterAirQuality {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBaseClusterAirQualitySelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRBaseClusterAirQualityFromID(_ret)
 }
-

@@ -13,4 +13,3 @@ import (
 func ASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports() *foundation.NSArray[*foundation.NSString] {
 	return raw.ASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports()
 }
-

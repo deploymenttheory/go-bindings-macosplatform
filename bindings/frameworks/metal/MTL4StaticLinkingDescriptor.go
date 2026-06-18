@@ -16,13 +16,13 @@ type MTL4StaticLinkingDescriptor struct {
 }
 
 var (
-	_clsMTL4StaticLinkingDescriptor = _objcClass("MTL4StaticLinkingDescriptor")
-	_mTL4StaticLinkingDescriptorSelFunctionDescriptors = objc.RegisterName("functionDescriptors")
-	_mTL4StaticLinkingDescriptorSelSetFunctionDescriptors = objc.RegisterName("setFunctionDescriptors:")
-	_mTL4StaticLinkingDescriptorSelPrivateFunctionDescriptors = objc.RegisterName("privateFunctionDescriptors")
+	_clsMTL4StaticLinkingDescriptor                              = _objcClass("MTL4StaticLinkingDescriptor")
+	_mTL4StaticLinkingDescriptorSelFunctionDescriptors           = objc.RegisterName("functionDescriptors")
+	_mTL4StaticLinkingDescriptorSelSetFunctionDescriptors        = objc.RegisterName("setFunctionDescriptors:")
+	_mTL4StaticLinkingDescriptorSelPrivateFunctionDescriptors    = objc.RegisterName("privateFunctionDescriptors")
 	_mTL4StaticLinkingDescriptorSelSetPrivateFunctionDescriptors = objc.RegisterName("setPrivateFunctionDescriptors:")
-	_mTL4StaticLinkingDescriptorSelGroups = objc.RegisterName("groups")
-	_mTL4StaticLinkingDescriptorSelSetGroups = objc.RegisterName("setGroups:")
+	_mTL4StaticLinkingDescriptorSelGroups                        = objc.RegisterName("groups")
+	_mTL4StaticLinkingDescriptorSelSetGroups                     = objc.RegisterName("setGroups:")
 )
 
 func MTL4StaticLinkingDescriptorFromID(id objc.ID) *MTL4StaticLinkingDescriptor {
@@ -38,7 +38,9 @@ func MTL4StaticLinkingDescriptorFromID(id objc.ID) *MTL4StaticLinkingDescriptor 
 // Provides an array of functions to link at the Metal IR level.
 func (o *MTL4StaticLinkingDescriptor) FunctionDescriptors() *foundation.NSArray[*MTL4FunctionDescriptor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4StaticLinkingDescriptorSelFunctionDescriptors)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MTL4FunctionDescriptor](_ret)
 }
 
@@ -46,10 +48,12 @@ func (o *MTL4StaticLinkingDescriptor) SetFunctionDescriptors(functionDescriptors
 	o.Ptr().Send(_mTL4StaticLinkingDescriptorSelSetFunctionDescriptors, functionDescriptors.Ptr())
 }
 
-// Provides an array of private functions to link at the Metal IR level. You specify private functions to link separately from ``functionDescriptors`` because pipelines don't export private functions as ``MTLFunctionHandle`` instances. - Note: You can link private functions even when your ``MTLDevice`` doesn't support function pointers.
+// Provides an array of private functions to link at the Metal IR level. You specify private functions to link separately from “functionDescriptors“ because pipelines don't export private functions as “MTLFunctionHandle“ instances. - Note: You can link private functions even when your “MTLDevice“ doesn't support function pointers.
 func (o *MTL4StaticLinkingDescriptor) PrivateFunctionDescriptors() *foundation.NSArray[*MTL4FunctionDescriptor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4StaticLinkingDescriptorSelPrivateFunctionDescriptors)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MTL4FunctionDescriptor](_ret)
 }
 
@@ -66,4 +70,3 @@ func (o *MTL4StaticLinkingDescriptor) Groups() *foundation.NSDictionary[*foundat
 func (o *MTL4StaticLinkingDescriptor) SetGroups(groups *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	o.Ptr().Send(_mTL4StaticLinkingDescriptorSelSetGroups, groups)
 }
-

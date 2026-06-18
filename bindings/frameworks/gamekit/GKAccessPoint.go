@@ -18,30 +18,30 @@ type GKAccessPoint struct {
 }
 
 var (
-	_clsGKAccessPoint = _objcClass("GKAccessPoint")
-	_gKAccessPointSelTriggerAccessPointWithHandler = objc.RegisterName("triggerAccessPointWithHandler:")
-	_gKAccessPointSelTriggerAccessPointWithStateHandler = objc.RegisterName("triggerAccessPointWithState:handler:")
-	_gKAccessPointSelTriggerAccessPointWithAchievementIDHandler = objc.RegisterName("triggerAccessPointWithAchievementID:handler:")
-	_gKAccessPointSelTriggerAccessPointWithLeaderboardSetIDHandler = objc.RegisterName("triggerAccessPointWithLeaderboardSetID:handler:")
+	_clsGKAccessPoint                                                               = _objcClass("GKAccessPoint")
+	_gKAccessPointSelTriggerAccessPointWithHandler                                  = objc.RegisterName("triggerAccessPointWithHandler:")
+	_gKAccessPointSelTriggerAccessPointWithStateHandler                             = objc.RegisterName("triggerAccessPointWithState:handler:")
+	_gKAccessPointSelTriggerAccessPointWithAchievementIDHandler                     = objc.RegisterName("triggerAccessPointWithAchievementID:handler:")
+	_gKAccessPointSelTriggerAccessPointWithLeaderboardSetIDHandler                  = objc.RegisterName("triggerAccessPointWithLeaderboardSetID:handler:")
 	_gKAccessPointSelTriggerAccessPointWithLeaderboardIDPlayerScopeTimeScopeHandler = objc.RegisterName("triggerAccessPointWithLeaderboardID:playerScope:timeScope:handler:")
-	_gKAccessPointSelTriggerAccessPointWithPlayerHandler = objc.RegisterName("triggerAccessPointWithPlayer:handler:")
-	_gKAccessPointSelTriggerAccessPointForPlayTogetherWithHandler = objc.RegisterName("triggerAccessPointForPlayTogetherWithHandler:")
-	_gKAccessPointSelTriggerAccessPointForChallengesWithHandler = objc.RegisterName("triggerAccessPointForChallengesWithHandler:")
-	_gKAccessPointSelTriggerAccessPointWithChallengeDefinitionIDHandler = objc.RegisterName("triggerAccessPointWithChallengeDefinitionID:handler:")
-	_gKAccessPointSelTriggerAccessPointWithGameActivityDefinitionIDHandler = objc.RegisterName("triggerAccessPointWithGameActivityDefinitionID:handler:")
-	_gKAccessPointSelTriggerAccessPointWithGameActivityHandler = objc.RegisterName("triggerAccessPointWithGameActivity:handler:")
-	_gKAccessPointSelTriggerAccessPointForFriendingWithHandler = objc.RegisterName("triggerAccessPointForFriendingWithHandler:")
-	_gKAccessPointSelTriggerAccessPointForArcadeWithHandler = objc.RegisterName("triggerAccessPointForArcadeWithHandler:")
-	_gKAccessPointSelShared = objc.RegisterName("shared")
-	_gKAccessPointSelIsActive = objc.RegisterName("isActive")
-	_gKAccessPointSelSetActive = objc.RegisterName("setActive:")
-	_gKAccessPointSelShowHighlights = objc.RegisterName("showHighlights")
-	_gKAccessPointSelSetShowHighlights = objc.RegisterName("setShowHighlights:")
-	_gKAccessPointSelLocation = objc.RegisterName("location")
-	_gKAccessPointSelSetLocation = objc.RegisterName("setLocation:")
-	_gKAccessPointSelFrameInScreenCoordinates = objc.RegisterName("frameInScreenCoordinates")
-	_gKAccessPointSelParentWindow = objc.RegisterName("parentWindow")
-	_gKAccessPointSelSetParentWindow = objc.RegisterName("setParentWindow:")
+	_gKAccessPointSelTriggerAccessPointWithPlayerHandler                            = objc.RegisterName("triggerAccessPointWithPlayer:handler:")
+	_gKAccessPointSelTriggerAccessPointForPlayTogetherWithHandler                   = objc.RegisterName("triggerAccessPointForPlayTogetherWithHandler:")
+	_gKAccessPointSelTriggerAccessPointForChallengesWithHandler                     = objc.RegisterName("triggerAccessPointForChallengesWithHandler:")
+	_gKAccessPointSelTriggerAccessPointWithChallengeDefinitionIDHandler             = objc.RegisterName("triggerAccessPointWithChallengeDefinitionID:handler:")
+	_gKAccessPointSelTriggerAccessPointWithGameActivityDefinitionIDHandler          = objc.RegisterName("triggerAccessPointWithGameActivityDefinitionID:handler:")
+	_gKAccessPointSelTriggerAccessPointWithGameActivityHandler                      = objc.RegisterName("triggerAccessPointWithGameActivity:handler:")
+	_gKAccessPointSelTriggerAccessPointForFriendingWithHandler                      = objc.RegisterName("triggerAccessPointForFriendingWithHandler:")
+	_gKAccessPointSelTriggerAccessPointForArcadeWithHandler                         = objc.RegisterName("triggerAccessPointForArcadeWithHandler:")
+	_gKAccessPointSelShared                                                         = objc.RegisterName("shared")
+	_gKAccessPointSelIsActive                                                       = objc.RegisterName("isActive")
+	_gKAccessPointSelSetActive                                                      = objc.RegisterName("setActive:")
+	_gKAccessPointSelShowHighlights                                                 = objc.RegisterName("showHighlights")
+	_gKAccessPointSelSetShowHighlights                                              = objc.RegisterName("setShowHighlights:")
+	_gKAccessPointSelLocation                                                       = objc.RegisterName("location")
+	_gKAccessPointSelSetLocation                                                    = objc.RegisterName("setLocation:")
+	_gKAccessPointSelFrameInScreenCoordinates                                       = objc.RegisterName("frameInScreenCoordinates")
+	_gKAccessPointSelParentWindow                                                   = objc.RegisterName("parentWindow")
+	_gKAccessPointSelSetParentWindow                                                = objc.RegisterName("setParentWindow:")
 )
 
 func GKAccessPointFromID(id objc.ID) *GKAccessPoint {
@@ -207,7 +207,9 @@ func (o *GKAccessPoint) TriggerAccessPointForArcadeWithHandler(handler func()) {
 
 func GKAccessPointShared() *GKAccessPoint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKAccessPoint), _gKAccessPointSelShared)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKAccessPointFromID(_ret)
 }
 
@@ -253,11 +255,12 @@ func (o *GKAccessPoint) FrameInScreenCoordinates() corefoundation.CGRect {
 // the following is a platform specific window that you wish to have the access point in.  If not set then a best attempt will be made to choose the main window of the app.
 func (o *GKAccessPoint) ParentWindow() *appkit.NSWindow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKAccessPointSelParentWindow)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSWindowFromID(_ret)
 }
 
 func (o *GKAccessPoint) SetParentWindow(parentWindow *appkit.NSWindow) {
 	o.Ptr().Send(_gKAccessPointSelSetParentWindow, parentWindow.Ptr())
 }
-

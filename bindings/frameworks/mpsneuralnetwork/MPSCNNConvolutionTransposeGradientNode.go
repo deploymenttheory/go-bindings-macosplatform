@@ -15,7 +15,7 @@ type MPSCNNConvolutionTransposeGradientNode struct {
 }
 
 var (
-	_clsMPSCNNConvolutionTransposeGradientNode = _objcClass("MPSCNNConvolutionTransposeGradientNode")
+	_clsMPSCNNConvolutionTransposeGradientNode                                                                          = _objcClass("MPSCNNConvolutionTransposeGradientNode")
 	_mPSCNNConvolutionTransposeGradientNodeSelNodeWithSourceGradientSourceImageConvolutionTransposeGradientStateWeights = objc.RegisterName("nodeWithSourceGradient:sourceImage:convolutionTransposeGradientState:weights:")
 	_mPSCNNConvolutionTransposeGradientNodeSelInitWithSourceGradientSourceImageConvolutionTransposeGradientStateWeights = objc.RegisterName("initWithSourceGradient:sourceImage:convolutionTransposeGradientState:weights:")
 )
@@ -33,14 +33,17 @@ func MPSCNNConvolutionTransposeGradientNodeFromID(id objc.ID) *MPSCNNConvolution
 // @abstract   A node to represent the gradient calculation for convolution transpose training. @param sourceGradient   The input gradient from the 'downstream' gradient filter. Often that is a neuron gradient filter node. @param sourceImage      The input image from the forward convolution transpose node @param gradientState    The gradient state from the forward convolution transpose @param weights          The data source from the forward convolution transpose. It may not contain an integrated neuron. Similary, any normalization should be broken out into a separate node. Pass nil to use the weights from the forward convolution transpose pass. @return  A MPSCNNConvolutionTransposeGradientNode
 func MPSCNNConvolutionTransposeGradientNodeNodeWithSourceGradientSourceImageConvolutionTransposeGradientStateWeights(sourceGradient *MPSNNImageNode, sourceImage *MPSNNImageNode, gradientState *MPSCNNConvolutionTransposeGradientStateNode, weights MPSCNNConvolutionDataSource) *MPSCNNConvolutionTransposeGradientNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNConvolutionTransposeGradientNode), _mPSCNNConvolutionTransposeGradientNodeSelNodeWithSourceGradientSourceImageConvolutionTransposeGradientStateWeights, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr(), weights)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNConvolutionTransposeGradientNodeFromID(_ret)
 }
 
 // @abstract   A node to represent the gradient calculation for convolution transpose training. @param sourceGradient   The input gradient from the 'downstream' gradient filter. Often that is a neuron gradient filter node. @param sourceImage      The input image from the forward convolution transpose node @param gradientState    The gradient state from the forward convolution transpose @param weights          The data source from the forward convolution transpose. It may not contain an integrated neuron. Similary, any normalization should be broken out into a separate node. Pass nil to use the weights from the forward convolution transpose pass. @return  A MPSCNNConvolutionTransposeGradientNode
 func (o *MPSCNNConvolutionTransposeGradientNode) InitWithSourceGradientSourceImageConvolutionTransposeGradientStateWeights(sourceGradient *MPSNNImageNode, sourceImage *MPSNNImageNode, gradientState *MPSCNNConvolutionTransposeGradientStateNode, weights MPSCNNConvolutionDataSource) *MPSCNNConvolutionTransposeGradientNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionTransposeGradientNodeSelInitWithSourceGradientSourceImageConvolutionTransposeGradientStateWeights, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr(), weights)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNConvolutionTransposeGradientNodeFromID(_ret)
 }
-

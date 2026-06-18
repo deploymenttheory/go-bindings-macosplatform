@@ -25,4 +25,3 @@ func OSLogEntryBoundaryFromID(id objc.ID) *OSLogEntryBoundary {
 	purego.Track(o)
 	return o
 }
-

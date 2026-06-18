@@ -18,11 +18,11 @@ type TKTokenKeychainContents struct {
 }
 
 var (
-	_clsTKTokenKeychainContents = _objcClass("TKTokenKeychainContents")
-	_tKTokenKeychainContentsSelFillWithItems = objc.RegisterName("fillWithItems:")
-	_tKTokenKeychainContentsSelKeyForObjectIDError = objc.RegisterName("keyForObjectID:error:")
+	_clsTKTokenKeychainContents                            = _objcClass("TKTokenKeychainContents")
+	_tKTokenKeychainContentsSelFillWithItems               = objc.RegisterName("fillWithItems:")
+	_tKTokenKeychainContentsSelKeyForObjectIDError         = objc.RegisterName("keyForObjectID:error:")
 	_tKTokenKeychainContentsSelCertificateForObjectIDError = objc.RegisterName("certificateForObjectID:error:")
-	_tKTokenKeychainContentsSelItems = objc.RegisterName("items")
+	_tKTokenKeychainContentsSelItems                       = objc.RegisterName("items")
 )
 
 func TKTokenKeychainContentsFromID(id objc.ID) *TKTokenKeychainContents {
@@ -44,7 +44,9 @@ func (o *TKTokenKeychainContents) FillWithItems(items *foundation.NSArray[*TKTok
 func (o *TKTokenKeychainContents) KeyForObjectIDError(objectID objc.ID) (*TKTokenKeychainKey, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenKeychainContentsSelKeyForObjectIDError, objectID, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -55,7 +57,9 @@ func (o *TKTokenKeychainContents) KeyForObjectIDError(objectID objc.ID) (*TKToke
 func (o *TKTokenKeychainContents) CertificateForObjectIDError(objectID objc.ID) (*TKTokenKeychainCertificate, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenKeychainContentsSelCertificateForObjectIDError, objectID, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -65,7 +69,8 @@ func (o *TKTokenKeychainContents) CertificateForObjectIDError(objectID objc.ID) 
 // @brief All items related to this token in the keychain.
 func (o *TKTokenKeychainContents) Items() *foundation.NSArray[*TKTokenKeychainItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenKeychainContentsSelItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*TKTokenKeychainItem](_ret)
 }
-

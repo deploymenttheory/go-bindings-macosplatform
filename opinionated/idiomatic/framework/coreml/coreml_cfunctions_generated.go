@@ -13,4 +13,3 @@ import (
 func MLAllComputeDevices() *foundation.NSArray[raw.MLComputeDeviceProtocol] {
 	return raw.MLAllComputeDevices()
 }
-

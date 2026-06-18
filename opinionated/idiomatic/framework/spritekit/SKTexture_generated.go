@@ -148,4 +148,3 @@ type Textureable interface {
 }
 
 var _ Textureable = (*Texture)(nil)
-

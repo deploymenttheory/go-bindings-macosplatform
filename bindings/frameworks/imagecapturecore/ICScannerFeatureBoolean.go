@@ -15,8 +15,8 @@ type ICScannerFeatureBoolean struct {
 }
 
 var (
-	_clsICScannerFeatureBoolean = _objcClass("ICScannerFeatureBoolean")
-	_iCScannerFeatureBooleanSelValue = objc.RegisterName("value")
+	_clsICScannerFeatureBoolean         = _objcClass("ICScannerFeatureBoolean")
+	_iCScannerFeatureBooleanSelValue    = objc.RegisterName("value")
 	_iCScannerFeatureBooleanSelSetValue = objc.RegisterName("setValue:")
 )
 
@@ -38,4 +38,3 @@ func (o *ICScannerFeatureBoolean) Value() bool {
 func (o *ICScannerFeatureBoolean) SetValue(value bool) {
 	o.Ptr().Send(_iCScannerFeatureBooleanSelSetValue, value)
 }
-

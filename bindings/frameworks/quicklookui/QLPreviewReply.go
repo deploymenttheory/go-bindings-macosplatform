@@ -20,17 +20,17 @@ type QLPreviewReply struct {
 }
 
 var (
-	_clsQLPreviewReply = _objcClass("QLPreviewReply")
-	_qLPreviewReplySelInitWithContextSizeIsBitmapDrawingBlock = objc.RegisterName("initWithContextSize:isBitmap:drawingBlock:")
-	_qLPreviewReplySelInitWithFileURL = objc.RegisterName("initWithFileURL:")
+	_clsQLPreviewReply                                                      = _objcClass("QLPreviewReply")
+	_qLPreviewReplySelInitWithContextSizeIsBitmapDrawingBlock               = objc.RegisterName("initWithContextSize:isBitmap:drawingBlock:")
+	_qLPreviewReplySelInitWithFileURL                                       = objc.RegisterName("initWithFileURL:")
 	_qLPreviewReplySelInitWithDataOfContentTypeContentSizeDataCreationBlock = objc.RegisterName("initWithDataOfContentType:contentSize:dataCreationBlock:")
-	_qLPreviewReplySelStringEncoding = objc.RegisterName("stringEncoding")
-	_qLPreviewReplySelSetStringEncoding = objc.RegisterName("setStringEncoding:")
-	_qLPreviewReplySelAttachments = objc.RegisterName("attachments")
-	_qLPreviewReplySelSetAttachments = objc.RegisterName("setAttachments:")
-	_qLPreviewReplySelTitle = objc.RegisterName("title")
-	_qLPreviewReplySelSetTitle = objc.RegisterName("setTitle:")
-	_qLPreviewReplySelInitForPDFWithPageSizeDocumentCreationBlock = objc.RegisterName("initForPDFWithPageSize:documentCreationBlock:")
+	_qLPreviewReplySelStringEncoding                                        = objc.RegisterName("stringEncoding")
+	_qLPreviewReplySelSetStringEncoding                                     = objc.RegisterName("setStringEncoding:")
+	_qLPreviewReplySelAttachments                                           = objc.RegisterName("attachments")
+	_qLPreviewReplySelSetAttachments                                        = objc.RegisterName("setAttachments:")
+	_qLPreviewReplySelTitle                                                 = objc.RegisterName("title")
+	_qLPreviewReplySelSetTitle                                              = objc.RegisterName("setTitle:")
+	_qLPreviewReplySelInitForPDFWithPageSizeDocumentCreationBlock           = objc.RegisterName("initForPDFWithPageSize:documentCreationBlock:")
 )
 
 func QLPreviewReplyFromID(id objc.ID) *QLPreviewReply {
@@ -56,20 +56,26 @@ func (o *QLPreviewReply) InitWithContextSizeIsBitmapDrawingBlock(contextSize cor
 		defer __block_drawingBlock.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _qLPreviewReplySelInitWithContextSizeIsBitmapDrawingBlock, contextSize, isBitmap, __block_drawingBlock)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return QLPreviewReplyFromID(_ret)
 }
 
 // @abstract Use this method to provide a preview by providing a URL to a file of a supported type. @param fileURL  A file URL representing a preview of the previewed URL. Currently supported types include: UTTypeImage, UTTypePDF, UTTypeHTML, UTTypeXML, UTTypePlainText, UTTypeRTF, UTTypeRTFD, UTTypeMovie, UTTypeAudio
 func (o *QLPreviewReply) InitWithFileURL(fileURL *foundation.NSURL) *QLPreviewReply {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qLPreviewReplySelInitWithFileURL, fileURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return QLPreviewReplyFromID(_ret)
 }
 
 func (o *QLPreviewReply) InitWithDataOfContentTypeContentSizeDataCreationBlock(contentType *uniformtypeidentifiers.UTType, contentSize corefoundation.CGSize, dataCreationBlock objc.Block) *QLPreviewReply {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qLPreviewReplySelInitWithDataOfContentTypeContentSizeDataCreationBlock, contentType.Ptr(), contentSize, dataCreationBlock)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return QLPreviewReplyFromID(_ret)
 }
 
@@ -96,7 +102,9 @@ func (o *QLPreviewReply) SetAttachments(attachments *foundation.NSDictionary[*fo
 // Custom display title for the preview. If left as the empty string, QuickLook will use the file name.
 func (o *QLPreviewReply) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qLPreviewReplySelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -107,7 +115,8 @@ func (o *QLPreviewReply) SetTitle(title *foundation.NSString) {
 // @abstract Use this method to provide a preview with a PDFDocument @param defaultPageSize The size of your pages in the document. If the page size varies, use the first page's size. @param documentCreationBlock Create and return the PDFDocument. Heavy lifting should be done inside of the documentCreationBlock instead of when creating the QLPreviewReply. The QLPreviewReply passed into this block is the same as the one created by this method and is provided for convenience for any further updates to its properties during document creation. Return the PDFDocument if successfully created. Populate error if unsuccessful.
 func (o *QLPreviewReply) InitForPDFWithPageSizeDocumentCreationBlock(defaultPageSize corefoundation.CGSize, documentCreationBlock objc.Block) *QLPreviewReply {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qLPreviewReplySelInitForPDFWithPageSizeDocumentCreationBlock, defaultPageSize, documentCreationBlock)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return QLPreviewReplyFromID(_ret)
 }
-

@@ -16,9 +16,9 @@ type HKClinicalRecord struct {
 }
 
 var (
-	_clsHKClinicalRecord = _objcClass("HKClinicalRecord")
+	_clsHKClinicalRecord             = _objcClass("HKClinicalRecord")
 	_hKClinicalRecordSelClinicalType = objc.RegisterName("clinicalType")
-	_hKClinicalRecordSelDisplayName = objc.RegisterName("displayName")
+	_hKClinicalRecordSelDisplayName  = objc.RegisterName("displayName")
 	_hKClinicalRecordSelFHIRResource = objc.RegisterName("FHIRResource")
 )
 
@@ -34,21 +34,26 @@ func HKClinicalRecordFromID(id objc.ID) *HKClinicalRecord {
 
 func (o *HKClinicalRecord) ClinicalType() *HKClinicalType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKClinicalRecordSelClinicalType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKClinicalTypeFromID(_ret)
 }
 
 // @property     displayName @abstract     The primary display name used in Health. @discussion   The display name is not localized, and is generally expected to be US English.
 func (o *HKClinicalRecord) DisplayName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKClinicalRecordSelDisplayName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property     FHIRResource @abstract     The FHIR resource (where applicable) backing this sample.
 func (o *HKClinicalRecord) FHIRResource() *HKFHIRResource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKClinicalRecordSelFHIRResource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKFHIRResourceFromID(_ret)
 }
-

@@ -16,7 +16,9 @@ type MTRDoorLockClusterLockDoorParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRDoorLockClusterLockDoorParams].
-func (x *MTRDoorLockClusterLockDoorParams) Unwrap() *raw.MTRDoorLockClusterLockDoorParams { return x.inner }
+func (x *MTRDoorLockClusterLockDoorParams) Unwrap() *raw.MTRDoorLockClusterLockDoorParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -99,4 +101,3 @@ type MTRDoorLockClusterLockDoorParamsable interface {
 }
 
 var _ MTRDoorLockClusterLockDoorParamsable = (*MTRDoorLockClusterLockDoorParams)(nil)
-

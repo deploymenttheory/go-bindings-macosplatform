@@ -116,11 +116,17 @@ func (x *TrackOpticalFlowRequest) SetKeepNetworkOutput(keepNetworkOutput bool) {
 	x.inner.SetKeepNetworkOutput(keepNetworkOutput)
 }
 
-func (x *TrackOpticalFlowRequest) asStatefulRequest() *raw.VNStatefulRequest { return &x.inner.VNStatefulRequest }
+func (x *TrackOpticalFlowRequest) asStatefulRequest() *raw.VNStatefulRequest {
+	return &x.inner.VNStatefulRequest
+}
 
-func (x *TrackOpticalFlowRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNStatefulRequest.VNImageBasedRequest }
+func (x *TrackOpticalFlowRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNStatefulRequest.VNImageBasedRequest
+}
 
-func (x *TrackOpticalFlowRequest) asRequest() *raw.VNRequest { return &x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest }
+func (x *TrackOpticalFlowRequest) asRequest() *raw.VNRequest {
+	return &x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest
+}
 
 // TrackOpticalFlowRequestable is the interface implemented by [TrackOpticalFlowRequest], for mocking and DI.
 type TrackOpticalFlowRequestable interface {
@@ -141,4 +147,3 @@ type TrackOpticalFlowRequestable interface {
 }
 
 var _ TrackOpticalFlowRequestable = (*TrackOpticalFlowRequest)(nil)
-

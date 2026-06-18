@@ -50,4 +50,3 @@ type SmartCardTokenDriverable interface {
 }
 
 var _ SmartCardTokenDriverable = (*SmartCardTokenDriver)(nil)
-

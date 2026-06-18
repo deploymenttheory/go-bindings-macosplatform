@@ -17,9 +17,9 @@ type MTKMeshBufferAllocator struct {
 }
 
 var (
-	_clsMTKMeshBufferAllocator = _objcClass("MTKMeshBufferAllocator")
+	_clsMTKMeshBufferAllocator               = _objcClass("MTKMeshBufferAllocator")
 	_mTKMeshBufferAllocatorSelInitWithDevice = objc.RegisterName("initWithDevice:")
-	_mTKMeshBufferAllocatorSelDevice = objc.RegisterName("device")
+	_mTKMeshBufferAllocatorSelDevice         = objc.RegisterName("device")
 )
 
 func MTKMeshBufferAllocatorFromID(id objc.ID) *MTKMeshBufferAllocator {
@@ -35,7 +35,9 @@ func MTKMeshBufferAllocatorFromID(id objc.ID) *MTKMeshBufferAllocator {
 // @method initWithDevice @abstract Initialize the allocator with a device to be used to create buffers. @discussion The designated initializer for this class.
 func (o *MTKMeshBufferAllocator) InitWithDevice(device metal.MTLDevice) *MTKMeshBufferAllocator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTKMeshBufferAllocatorSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTKMeshBufferAllocatorFromID(_ret)
 }
 
@@ -43,4 +45,3 @@ func (o *MTKMeshBufferAllocator) Device() metal.MTLDevice {
 	_ret := objc.Send[metal.MTLDevice](o.Ptr(), _mTKMeshBufferAllocatorSelDevice)
 	return _ret
 }
-

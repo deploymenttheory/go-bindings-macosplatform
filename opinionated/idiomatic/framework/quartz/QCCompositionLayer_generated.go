@@ -60,4 +60,3 @@ type QCCompositionLayerable interface {
 }
 
 var _ QCCompositionLayerable = (*QCCompositionLayer)(nil)
-

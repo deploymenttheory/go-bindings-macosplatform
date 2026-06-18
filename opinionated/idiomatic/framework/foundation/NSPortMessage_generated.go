@@ -102,4 +102,3 @@ type PortMessageable interface {
 }
 
 var _ PortMessageable = (*PortMessage)(nil)
-

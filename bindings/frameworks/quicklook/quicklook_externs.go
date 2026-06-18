@@ -130,4 +130,3 @@ func KQLThumbnailPropertyExtensionKey() uintptr {
 	ptr, _ := purego.Dlsym(_quicklookLib, "kQLThumbnailPropertyExtensionKey")
 	return ptr
 }
-

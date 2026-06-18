@@ -61,4 +61,3 @@ type ContactViewControllerable interface {
 }
 
 var _ ContactViewControllerable = (*ContactViewController)(nil)
-

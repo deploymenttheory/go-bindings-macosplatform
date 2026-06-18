@@ -44,4 +44,3 @@ func MaximumWidthForInkType(inkType *foundation.NSString) float64 {
 func InvertColor(color unsafe.Pointer) unsafe.Pointer {
 	return raw.PKInkingToolInvertColor(color)
 }
-

@@ -15,11 +15,11 @@ type NSSymbolBreatheEffect struct {
 }
 
 var (
-	_clsNSSymbolBreatheEffect = _objcClass("NSSymbolBreatheEffect")
-	_nSSymbolBreatheEffectSelEffect = objc.RegisterName("effect")
-	_nSSymbolBreatheEffectSelBreathePulseEffect = objc.RegisterName("breathePulseEffect")
-	_nSSymbolBreatheEffectSelBreathePlainEffect = objc.RegisterName("breathePlainEffect")
-	_nSSymbolBreatheEffectSelEffectWithByLayer = objc.RegisterName("effectWithByLayer")
+	_clsNSSymbolBreatheEffect                      = _objcClass("NSSymbolBreatheEffect")
+	_nSSymbolBreatheEffectSelEffect                = objc.RegisterName("effect")
+	_nSSymbolBreatheEffectSelBreathePulseEffect    = objc.RegisterName("breathePulseEffect")
+	_nSSymbolBreatheEffectSelBreathePlainEffect    = objc.RegisterName("breathePlainEffect")
+	_nSSymbolBreatheEffectSelEffectWithByLayer     = objc.RegisterName("effectWithByLayer")
 	_nSSymbolBreatheEffectSelEffectWithWholeSymbol = objc.RegisterName("effectWithWholeSymbol")
 )
 
@@ -36,35 +36,44 @@ func NSSymbolBreatheEffectFromID(id objc.ID) *NSSymbolBreatheEffect {
 // The default breathe effect, determined by the system.
 func NSSymbolBreatheEffectEffect() *NSSymbolBreatheEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolBreatheEffect), _nSSymbolBreatheEffectSelEffect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolBreatheEffectFromID(_ret)
 }
 
 // Convenience initializer for a breathe effect that pulses layers as they breathe.
 func NSSymbolBreatheEffectBreathePulseEffect() *NSSymbolBreatheEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolBreatheEffect), _nSSymbolBreatheEffectSelBreathePulseEffect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolBreatheEffectFromID(_ret)
 }
 
 // Convenience initializer for a breathe effect that makes the symbol breathe with no other styling.
 func NSSymbolBreatheEffectBreathePlainEffect() *NSSymbolBreatheEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolBreatheEffect), _nSSymbolBreatheEffectSelBreathePlainEffect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolBreatheEffectFromID(_ret)
 }
 
 // Returns a copy of the effect that animates incrementally, by layer.
 func (o *NSSymbolBreatheEffect) EffectWithByLayer() *NSSymbolBreatheEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolBreatheEffectSelEffectWithByLayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolBreatheEffectFromID(_ret)
 }
 
 // Returns a copy of the effect that animates all layers of the symbol simultaneously.
 func (o *NSSymbolBreatheEffect) EffectWithWholeSymbol() *NSSymbolBreatheEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolBreatheEffectSelEffectWithWholeSymbol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolBreatheEffectFromID(_ret)
 }
-

@@ -16,7 +16,7 @@ type AVComposition struct {
 }
 
 var (
-	_clsAVComposition = _objcClass("AVComposition")
+	_clsAVComposition                              = _objcClass("AVComposition")
 	_aVCompositionSelURLAssetInitializationOptions = objc.RegisterName("URLAssetInitializationOptions")
 )
 
@@ -35,4 +35,3 @@ func (o *AVComposition) URLAssetInitializationOptions() *foundation.NSDictionary
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _aVCompositionSelURLAssetInitializationOptions)
 	return _ret
 }
-

@@ -74,7 +74,9 @@ func (x *ImageHistogramSpecification) HistogramInfo() raw.MPSImageHistogramInfo 
 	return x.inner.HistogramInfo()
 }
 
-func (x *ImageHistogramSpecification) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageHistogramSpecification) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
 // ImageHistogramSpecificationable is the interface implemented by [ImageHistogramSpecification], for mocking and DI.
 type ImageHistogramSpecificationable interface {
@@ -87,4 +89,3 @@ type ImageHistogramSpecificationable interface {
 }
 
 var _ ImageHistogramSpecificationable = (*ImageHistogramSpecification)(nil)
-

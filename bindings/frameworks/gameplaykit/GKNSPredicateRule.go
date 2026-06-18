@@ -18,9 +18,9 @@ type GKNSPredicateRule struct {
 }
 
 var (
-	_clsGKNSPredicateRule = _objcClass("GKNSPredicateRule")
+	_clsGKNSPredicateRule                  = _objcClass("GKNSPredicateRule")
 	_gKNSPredicateRuleSelInitWithPredicate = objc.RegisterName("initWithPredicate:")
-	_gKNSPredicateRuleSelPredicate = objc.RegisterName("predicate")
+	_gKNSPredicateRuleSelPredicate         = objc.RegisterName("predicate")
 )
 
 func GKNSPredicateRuleFromID(id objc.ID) *GKNSPredicateRule {
@@ -36,14 +36,17 @@ func GKNSPredicateRuleFromID(id objc.ID) *GKNSPredicateRule {
 // Initializes a new rule with the given NSPredicate
 func (o *GKNSPredicateRule) InitWithPredicate(predicate *foundation.NSPredicate) *GKNSPredicateRule {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKNSPredicateRuleSelInitWithPredicate, predicate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKNSPredicateRuleFromID(_ret)
 }
 
 // The NSPredicate that is used inside this subclass's implementation of evaluatePredicateWithSystem: In order to effectively use this class you must still override performActionWithSystem: @see GKRule.evaluatePredicateWithSystem:
 func (o *GKNSPredicateRule) Predicate() *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKNSPredicateRuleSelPredicate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
-

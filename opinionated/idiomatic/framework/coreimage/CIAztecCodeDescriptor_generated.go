@@ -57,7 +57,9 @@ func (x *AztecCodeDescriptor) DataCodewordCount() int {
 	return x.inner.DataCodewordCount()
 }
 
-func (x *AztecCodeDescriptor) asBarcodeDescriptor() *raw.CIBarcodeDescriptor { return &x.inner.CIBarcodeDescriptor }
+func (x *AztecCodeDescriptor) asBarcodeDescriptor() *raw.CIBarcodeDescriptor {
+	return &x.inner.CIBarcodeDescriptor
+}
 
 // AztecCodeDescriptorable is the interface implemented by [AztecCodeDescriptor], for mocking and DI.
 type AztecCodeDescriptorable interface {
@@ -69,4 +71,3 @@ type AztecCodeDescriptorable interface {
 }
 
 var _ AztecCodeDescriptorable = (*AztecCodeDescriptor)(nil)
-

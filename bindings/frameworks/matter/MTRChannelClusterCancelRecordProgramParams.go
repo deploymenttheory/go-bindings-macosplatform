@@ -16,16 +16,16 @@ type MTRChannelClusterCancelRecordProgramParams struct {
 }
 
 var (
-	_clsMTRChannelClusterCancelRecordProgramParams = _objcClass("MTRChannelClusterCancelRecordProgramParams")
-	_mTRChannelClusterCancelRecordProgramParamsSelProgramIdentifier = objc.RegisterName("programIdentifier")
-	_mTRChannelClusterCancelRecordProgramParamsSelSetProgramIdentifier = objc.RegisterName("setProgramIdentifier:")
-	_mTRChannelClusterCancelRecordProgramParamsSelShouldRecordSeries = objc.RegisterName("shouldRecordSeries")
-	_mTRChannelClusterCancelRecordProgramParamsSelSetShouldRecordSeries = objc.RegisterName("setShouldRecordSeries:")
-	_mTRChannelClusterCancelRecordProgramParamsSelData = objc.RegisterName("data")
-	_mTRChannelClusterCancelRecordProgramParamsSelSetData = objc.RegisterName("setData:")
-	_mTRChannelClusterCancelRecordProgramParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRChannelClusterCancelRecordProgramParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRChannelClusterCancelRecordProgramParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRChannelClusterCancelRecordProgramParams                               = _objcClass("MTRChannelClusterCancelRecordProgramParams")
+	_mTRChannelClusterCancelRecordProgramParamsSelProgramIdentifier              = objc.RegisterName("programIdentifier")
+	_mTRChannelClusterCancelRecordProgramParamsSelSetProgramIdentifier           = objc.RegisterName("setProgramIdentifier:")
+	_mTRChannelClusterCancelRecordProgramParamsSelShouldRecordSeries             = objc.RegisterName("shouldRecordSeries")
+	_mTRChannelClusterCancelRecordProgramParamsSelSetShouldRecordSeries          = objc.RegisterName("setShouldRecordSeries:")
+	_mTRChannelClusterCancelRecordProgramParamsSelData                           = objc.RegisterName("data")
+	_mTRChannelClusterCancelRecordProgramParamsSelSetData                        = objc.RegisterName("setData:")
+	_mTRChannelClusterCancelRecordProgramParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRChannelClusterCancelRecordProgramParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRChannelClusterCancelRecordProgramParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRChannelClusterCancelRecordProgramParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -41,7 +41,9 @@ func MTRChannelClusterCancelRecordProgramParamsFromID(id objc.ID) *MTRChannelClu
 
 func (o *MTRChannelClusterCancelRecordProgramParams) ProgramIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterCancelRecordProgramParamsSelProgramIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -51,7 +53,9 @@ func (o *MTRChannelClusterCancelRecordProgramParams) SetProgramIdentifier(progra
 
 func (o *MTRChannelClusterCancelRecordProgramParams) ShouldRecordSeries() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterCancelRecordProgramParamsSelShouldRecordSeries)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *MTRChannelClusterCancelRecordProgramParams) SetShouldRecordSeries(shoul
 
 func (o *MTRChannelClusterCancelRecordProgramParams) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterCancelRecordProgramParamsSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -72,7 +78,9 @@ func (o *MTRChannelClusterCancelRecordProgramParams) SetData(data *foundation.NS
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRChannelClusterCancelRecordProgramParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterCancelRecordProgramParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -83,11 +91,12 @@ func (o *MTRChannelClusterCancelRecordProgramParams) SetTimedInvokeTimeoutMs(tim
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRChannelClusterCancelRecordProgramParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterCancelRecordProgramParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRChannelClusterCancelRecordProgramParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRChannelClusterCancelRecordProgramParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

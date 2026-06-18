@@ -17,7 +17,9 @@ type MTRLaundryWasherModeClusterModeOptionStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRLaundryWasherModeClusterModeOptionStruct].
-func (x *MTRLaundryWasherModeClusterModeOptionStruct) Unwrap() *raw.MTRLaundryWasherModeClusterModeOptionStruct { return x.inner }
+func (x *MTRLaundryWasherModeClusterModeOptionStruct) Unwrap() *raw.MTRLaundryWasherModeClusterModeOptionStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -97,4 +99,3 @@ type MTRLaundryWasherModeClusterModeOptionStructable interface {
 }
 
 var _ MTRLaundryWasherModeClusterModeOptionStructable = (*MTRLaundryWasherModeClusterModeOptionStruct)(nil)
-

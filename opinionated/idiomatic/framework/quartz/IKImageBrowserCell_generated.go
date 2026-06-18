@@ -129,4 +129,3 @@ type IKImageBrowserCellable interface {
 }
 
 var _ IKImageBrowserCellable = (*IKImageBrowserCell)(nil)
-

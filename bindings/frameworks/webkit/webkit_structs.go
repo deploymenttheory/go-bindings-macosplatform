@@ -8,4 +8,3 @@ type DOMObjectInternal struct{}
 
 // WebPreferencesPrivate is an opaque type.
 type WebPreferencesPrivate struct{}
-

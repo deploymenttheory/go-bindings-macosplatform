@@ -41,4 +41,3 @@ type NotificationIDable interface {
 }
 
 var _ NotificationIDable = (*NotificationID)(nil)
-

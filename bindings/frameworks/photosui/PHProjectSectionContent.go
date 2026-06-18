@@ -18,12 +18,12 @@ type PHProjectSectionContent struct {
 }
 
 var (
-	_clsPHProjectSectionContent = _objcClass("PHProjectSectionContent")
-	_pHProjectSectionContentSelElements = objc.RegisterName("elements")
-	_pHProjectSectionContentSelNumberOfColumns = objc.RegisterName("numberOfColumns")
-	_pHProjectSectionContentSelAspectRatio = objc.RegisterName("aspectRatio")
+	_clsPHProjectSectionContent                      = _objcClass("PHProjectSectionContent")
+	_pHProjectSectionContentSelElements              = objc.RegisterName("elements")
+	_pHProjectSectionContentSelNumberOfColumns       = objc.RegisterName("numberOfColumns")
+	_pHProjectSectionContentSelAspectRatio           = objc.RegisterName("aspectRatio")
 	_pHProjectSectionContentSelCloudAssetIdentifiers = objc.RegisterName("cloudAssetIdentifiers")
-	_pHProjectSectionContentSelBackgroundColor = objc.RegisterName("backgroundColor")
+	_pHProjectSectionContentSelBackgroundColor       = objc.RegisterName("backgroundColor")
 )
 
 func PHProjectSectionContentFromID(id objc.ID) *PHProjectSectionContent {
@@ -39,7 +39,9 @@ func PHProjectSectionContentFromID(id objc.ID) *PHProjectSectionContent {
 // Array of asset, text, or journal entry elements contained in the content.
 func (o *PHProjectSectionContent) Elements() *foundation.NSArray[*PHProjectElement] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectSectionContentSelElements)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PHProjectElement](_ret)
 }
 
@@ -64,7 +66,8 @@ func (o *PHProjectSectionContent) CloudAssetIdentifiers() *foundation.NSArray[*p
 // Background color of the section content. This property is only used when the user creates a new project from an existing Apple Print Product
 func (o *PHProjectSectionContent) BackgroundColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectSectionContentSelBackgroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
-

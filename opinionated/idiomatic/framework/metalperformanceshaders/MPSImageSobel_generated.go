@@ -89,7 +89,9 @@ func (x *ImageSobel) ColorTransform() *float32 {
 	return x.inner.ColorTransform()
 }
 
-func (x *ImageSobel) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageSobel) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
 func (x *ImageSobel) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
 
@@ -105,4 +107,3 @@ type ImageSobelable interface {
 }
 
 var _ ImageSobelable = (*ImageSobel)(nil)
-

@@ -16,13 +16,13 @@ type CKDatabaseSubscription struct {
 }
 
 var (
-	_clsCKDatabaseSubscription = _objcClass("CKDatabaseSubscription")
-	_cKDatabaseSubscriptionSelInit = objc.RegisterName("init")
-	_cKDatabaseSubscriptionSelNew = objc.RegisterName("new")
+	_clsCKDatabaseSubscription                       = _objcClass("CKDatabaseSubscription")
+	_cKDatabaseSubscriptionSelInit                   = objc.RegisterName("init")
+	_cKDatabaseSubscriptionSelNew                    = objc.RegisterName("new")
 	_cKDatabaseSubscriptionSelInitWithSubscriptionID = objc.RegisterName("initWithSubscriptionID:")
-	_cKDatabaseSubscriptionSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_cKDatabaseSubscriptionSelRecordType = objc.RegisterName("recordType")
-	_cKDatabaseSubscriptionSelSetRecordType = objc.RegisterName("setRecordType:")
+	_cKDatabaseSubscriptionSelInitWithCoder          = objc.RegisterName("initWithCoder:")
+	_cKDatabaseSubscriptionSelRecordType             = objc.RegisterName("recordType")
+	_cKDatabaseSubscriptionSelSetRecordType          = objc.RegisterName("setRecordType:")
 )
 
 func CKDatabaseSubscriptionFromID(id objc.ID) *CKDatabaseSubscription {
@@ -39,7 +39,9 @@ func CKDatabaseSubscriptionFromID(id objc.ID) *CKDatabaseSubscription {
 // Deprecated: since macOS 10.12.
 func (o *CKDatabaseSubscription) Init() *CKDatabaseSubscription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKDatabaseSubscriptionSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKDatabaseSubscriptionFromID(_ret)
 }
 
@@ -53,24 +55,29 @@ func CKDatabaseSubscriptionNew() *CKDatabaseSubscription {
 // Creates a named subscription for all records in a database. - Parameters: - subscriptionID: The subscription's name. It must be unique in the container, and must not be `nil` or an empty string.
 func (o *CKDatabaseSubscription) InitWithSubscriptionID(subscriptionID *foundation.NSString) *CKDatabaseSubscription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKDatabaseSubscriptionSelInitWithSubscriptionID, subscriptionID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKDatabaseSubscriptionFromID(_ret)
 }
 
 // Creates a database subscription from a serialized instance. - Parameters: - aDecoder: The object that decodes the serialized database subscription.
 func (o *CKDatabaseSubscription) InitWithCoder(aDecoder *foundation.NSCoder) *CKDatabaseSubscription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKDatabaseSubscriptionSelInitWithCoder, aDecoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKDatabaseSubscriptionFromID(_ret)
 }
 
 func (o *CKDatabaseSubscription) RecordType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKDatabaseSubscriptionSelRecordType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CKDatabaseSubscription) SetRecordType(recordType *foundation.NSString) {
 	o.Ptr().Send(_cKDatabaseSubscriptionSelSetRecordType, recordType.Ptr())
 }
-

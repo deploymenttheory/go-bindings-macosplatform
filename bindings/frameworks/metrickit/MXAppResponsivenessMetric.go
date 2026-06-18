@@ -16,7 +16,7 @@ type MXAppResponsivenessMetric struct {
 }
 
 var (
-	_clsMXAppResponsivenessMetric = _objcClass("MXAppResponsivenessMetric")
+	_clsMXAppResponsivenessMetric                                = _objcClass("MXAppResponsivenessMetric")
 	_mXAppResponsivenessMetricSelHistogrammedApplicationHangTime = objc.RegisterName("histogrammedApplicationHangTime")
 )
 
@@ -34,4 +34,3 @@ func (o *MXAppResponsivenessMetric) HistogrammedApplicationHangTime() *MXHistogr
 	_ret := objc.Send[*MXHistogram[*foundation.NSUnitDuration]](o.Ptr(), _mXAppResponsivenessMetricSelHistogrammedApplicationHangTime)
 	return _ret
 }
-

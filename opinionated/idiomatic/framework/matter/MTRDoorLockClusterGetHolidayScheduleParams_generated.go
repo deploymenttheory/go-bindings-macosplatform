@@ -16,7 +16,9 @@ type MTRDoorLockClusterGetHolidayScheduleParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRDoorLockClusterGetHolidayScheduleParams].
-func (x *MTRDoorLockClusterGetHolidayScheduleParams) Unwrap() *raw.MTRDoorLockClusterGetHolidayScheduleParams { return x.inner }
+func (x *MTRDoorLockClusterGetHolidayScheduleParams) Unwrap() *raw.MTRDoorLockClusterGetHolidayScheduleParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -99,4 +101,3 @@ type MTRDoorLockClusterGetHolidayScheduleParamsable interface {
 }
 
 var _ MTRDoorLockClusterGetHolidayScheduleParamsable = (*MTRDoorLockClusterGetHolidayScheduleParams)(nil)
-

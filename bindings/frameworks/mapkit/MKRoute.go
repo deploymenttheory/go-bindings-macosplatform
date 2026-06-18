@@ -18,16 +18,16 @@ type MKRoute struct {
 }
 
 var (
-	_clsMKRoute = _objcClass("MKRoute")
-	_mKRouteSelName = objc.RegisterName("name")
-	_mKRouteSelAdvisoryNotices = objc.RegisterName("advisoryNotices")
-	_mKRouteSelDistance = objc.RegisterName("distance")
+	_clsMKRoute                   = _objcClass("MKRoute")
+	_mKRouteSelName               = objc.RegisterName("name")
+	_mKRouteSelAdvisoryNotices    = objc.RegisterName("advisoryNotices")
+	_mKRouteSelDistance           = objc.RegisterName("distance")
 	_mKRouteSelExpectedTravelTime = objc.RegisterName("expectedTravelTime")
-	_mKRouteSelTransportType = objc.RegisterName("transportType")
-	_mKRouteSelPolyline = objc.RegisterName("polyline")
-	_mKRouteSelSteps = objc.RegisterName("steps")
-	_mKRouteSelHasTolls = objc.RegisterName("hasTolls")
-	_mKRouteSelHasHighways = objc.RegisterName("hasHighways")
+	_mKRouteSelTransportType      = objc.RegisterName("transportType")
+	_mKRouteSelPolyline           = objc.RegisterName("polyline")
+	_mKRouteSelSteps              = objc.RegisterName("steps")
+	_mKRouteSelHasTolls           = objc.RegisterName("hasTolls")
+	_mKRouteSelHasHighways        = objc.RegisterName("hasHighways")
 )
 
 func MKRouteFromID(id objc.ID) *MKRoute {
@@ -42,7 +42,9 @@ func MKRouteFromID(id objc.ID) *MKRoute {
 
 func (o *MKRoute) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKRouteSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -68,13 +70,17 @@ func (o *MKRoute) TransportType() MKDirectionsTransportType {
 
 func (o *MKRoute) Polyline() *MKPolyline {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKRouteSelPolyline)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPolylineFromID(_ret)
 }
 
 func (o *MKRoute) Steps() *foundation.NSArray[*MKRouteStep] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKRouteSelSteps)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MKRouteStep](_ret)
 }
 
@@ -87,4 +93,3 @@ func (o *MKRoute) HasHighways() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mKRouteSelHasHighways)
 	return _ret
 }
-

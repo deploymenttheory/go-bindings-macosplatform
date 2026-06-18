@@ -17,14 +17,14 @@ type NSScrubberLayoutAttributes struct {
 }
 
 var (
-	_clsNSScrubberLayoutAttributes = _objcClass("NSScrubberLayoutAttributes")
+	_clsNSScrubberLayoutAttributes                               = _objcClass("NSScrubberLayoutAttributes")
 	_nSScrubberLayoutAttributesSelLayoutAttributesForItemAtIndex = objc.RegisterName("layoutAttributesForItemAtIndex:")
-	_nSScrubberLayoutAttributesSelItemIndex = objc.RegisterName("itemIndex")
-	_nSScrubberLayoutAttributesSelSetItemIndex = objc.RegisterName("setItemIndex:")
-	_nSScrubberLayoutAttributesSelFrame = objc.RegisterName("frame")
-	_nSScrubberLayoutAttributesSelSetFrame = objc.RegisterName("setFrame:")
-	_nSScrubberLayoutAttributesSelAlpha = objc.RegisterName("alpha")
-	_nSScrubberLayoutAttributesSelSetAlpha = objc.RegisterName("setAlpha:")
+	_nSScrubberLayoutAttributesSelItemIndex                      = objc.RegisterName("itemIndex")
+	_nSScrubberLayoutAttributesSelSetItemIndex                   = objc.RegisterName("setItemIndex:")
+	_nSScrubberLayoutAttributesSelFrame                          = objc.RegisterName("frame")
+	_nSScrubberLayoutAttributesSelSetFrame                       = objc.RegisterName("setFrame:")
+	_nSScrubberLayoutAttributesSelAlpha                          = objc.RegisterName("alpha")
+	_nSScrubberLayoutAttributesSelSetAlpha                       = objc.RegisterName("setAlpha:")
 )
 
 func NSScrubberLayoutAttributesFromID(id objc.ID) *NSScrubberLayoutAttributes {
@@ -39,7 +39,9 @@ func NSScrubberLayoutAttributesFromID(id objc.ID) *NSScrubberLayoutAttributes {
 
 func NSScrubberLayoutAttributesLayoutAttributesForItemAtIndex(index int) *NSScrubberLayoutAttributes {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSScrubberLayoutAttributes), _nSScrubberLayoutAttributesSelLayoutAttributesForItemAtIndex, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrubberLayoutAttributesFromID(_ret)
 }
 
@@ -69,4 +71,3 @@ func (o *NSScrubberLayoutAttributes) Alpha() float64 {
 func (o *NSScrubberLayoutAttributes) SetAlpha(alpha float64) {
 	o.Ptr().Send(_nSScrubberLayoutAttributesSelSetAlpha, alpha)
 }
-

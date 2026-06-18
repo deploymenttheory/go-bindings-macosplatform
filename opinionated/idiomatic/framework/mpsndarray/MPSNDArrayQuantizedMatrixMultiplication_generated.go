@@ -17,7 +17,9 @@ type ArrayQuantizedMatrixMultiplication struct {
 }
 
 // Unwrap returns the underlying [raw.MPSNDArrayQuantizedMatrixMultiplication].
-func (x *ArrayQuantizedMatrixMultiplication) Unwrap() *raw.MPSNDArrayQuantizedMatrixMultiplication { return x.inner }
+func (x *ArrayQuantizedMatrixMultiplication) Unwrap() *raw.MPSNDArrayQuantizedMatrixMultiplication {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -56,11 +58,17 @@ func (x *ArrayQuantizedMatrixMultiplication) WithDestinationArrayAllocator(desti
 	return x
 }
 
-func (x *ArrayQuantizedMatrixMultiplication) asArrayMatrixMultiplication() *raw.MPSNDArrayMatrixMultiplication { return &x.inner.MPSNDArrayMatrixMultiplication }
+func (x *ArrayQuantizedMatrixMultiplication) asArrayMatrixMultiplication() *raw.MPSNDArrayMatrixMultiplication {
+	return &x.inner.MPSNDArrayMatrixMultiplication
+}
 
-func (x *ArrayQuantizedMatrixMultiplication) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel { return &x.inner.MPSNDArrayMatrixMultiplication.MPSNDArrayMultiaryKernel }
+func (x *ArrayQuantizedMatrixMultiplication) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel {
+	return &x.inner.MPSNDArrayMatrixMultiplication.MPSNDArrayMultiaryKernel
+}
 
-func (x *ArrayQuantizedMatrixMultiplication) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMatrixMultiplication.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
+func (x *ArrayQuantizedMatrixMultiplication) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase {
+	return &x.inner.MPSNDArrayMatrixMultiplication.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase
+}
 
 // ArrayQuantizedMatrixMultiplicationable is the interface implemented by [ArrayQuantizedMatrixMultiplication], for mocking and DI.
 type ArrayQuantizedMatrixMultiplicationable interface {
@@ -71,4 +79,3 @@ type ArrayQuantizedMatrixMultiplicationable interface {
 }
 
 var _ ArrayQuantizedMatrixMultiplicationable = (*ArrayQuantizedMatrixMultiplication)(nil)
-

@@ -63,4 +63,3 @@ type AppExitMetricable interface {
 }
 
 var _ AppExitMetricable = (*AppExitMetric)(nil)
-

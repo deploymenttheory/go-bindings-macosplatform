@@ -317,4 +317,3 @@ type Deviceable interface {
 }
 
 var _ Deviceable = (*Device)(nil)
-

@@ -16,7 +16,9 @@ type MTRUnitTestingClusterNestedStructList struct {
 }
 
 // Unwrap returns the underlying [raw.MTRUnitTestingClusterNestedStructList].
-func (x *MTRUnitTestingClusterNestedStructList) Unwrap() *raw.MTRUnitTestingClusterNestedStructList { return x.inner }
+func (x *MTRUnitTestingClusterNestedStructList) Unwrap() *raw.MTRUnitTestingClusterNestedStructList {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -128,7 +130,9 @@ func (x *MTRUnitTestingClusterNestedStructList) SetG(g *foundation.NSArray[objc.
 	x.inner.SetG(g)
 }
 
-func (x *MTRUnitTestingClusterNestedStructList) asMTRUnitTestingClusterNestedStructList() *raw.MTRUnitTestingClusterNestedStructList { return x.inner }
+func (x *MTRUnitTestingClusterNestedStructList) asMTRUnitTestingClusterNestedStructList() *raw.MTRUnitTestingClusterNestedStructList {
+	return x.inner
+}
 
 // MTRUnitTestingClusterNestedStructListable is the interface implemented by [MTRUnitTestingClusterNestedStructList], for mocking and DI.
 type MTRUnitTestingClusterNestedStructListable interface {
@@ -153,4 +157,3 @@ type MTRUnitTestingClusterNestedStructListable interface {
 }
 
 var _ MTRUnitTestingClusterNestedStructListable = (*MTRUnitTestingClusterNestedStructList)(nil)
-

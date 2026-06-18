@@ -25,4 +25,3 @@ func MPChangePlaybackPositionCommandFromID(id objc.ID) *MPChangePlaybackPosition
 	purego.Track(o)
 	return o
 }
-

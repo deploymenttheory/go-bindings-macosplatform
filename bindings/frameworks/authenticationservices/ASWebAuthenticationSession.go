@@ -18,18 +18,18 @@ type ASWebAuthenticationSession struct {
 }
 
 var (
-	_clsASWebAuthenticationSession = _objcClass("ASWebAuthenticationSession")
+	_clsASWebAuthenticationSession                                              = _objcClass("ASWebAuthenticationSession")
 	_aSWebAuthenticationSessionSelInitWithURLCallbackURLSchemeCompletionHandler = objc.RegisterName("initWithURL:callbackURLScheme:completionHandler:")
-	_aSWebAuthenticationSessionSelInitWithURLCallbackCompletionHandler = objc.RegisterName("initWithURL:callback:completionHandler:")
-	_aSWebAuthenticationSessionSelStart = objc.RegisterName("start")
-	_aSWebAuthenticationSessionSelCancel = objc.RegisterName("cancel")
-	_aSWebAuthenticationSessionSelPresentationContextProvider = objc.RegisterName("presentationContextProvider")
-	_aSWebAuthenticationSessionSelSetPresentationContextProvider = objc.RegisterName("setPresentationContextProvider:")
-	_aSWebAuthenticationSessionSelPrefersEphemeralWebBrowserSession = objc.RegisterName("prefersEphemeralWebBrowserSession")
-	_aSWebAuthenticationSessionSelSetPrefersEphemeralWebBrowserSession = objc.RegisterName("setPrefersEphemeralWebBrowserSession:")
-	_aSWebAuthenticationSessionSelAdditionalHeaderFields = objc.RegisterName("additionalHeaderFields")
-	_aSWebAuthenticationSessionSelSetAdditionalHeaderFields = objc.RegisterName("setAdditionalHeaderFields:")
-	_aSWebAuthenticationSessionSelCanStart = objc.RegisterName("canStart")
+	_aSWebAuthenticationSessionSelInitWithURLCallbackCompletionHandler          = objc.RegisterName("initWithURL:callback:completionHandler:")
+	_aSWebAuthenticationSessionSelStart                                         = objc.RegisterName("start")
+	_aSWebAuthenticationSessionSelCancel                                        = objc.RegisterName("cancel")
+	_aSWebAuthenticationSessionSelPresentationContextProvider                   = objc.RegisterName("presentationContextProvider")
+	_aSWebAuthenticationSessionSelSetPresentationContextProvider                = objc.RegisterName("setPresentationContextProvider:")
+	_aSWebAuthenticationSessionSelPrefersEphemeralWebBrowserSession             = objc.RegisterName("prefersEphemeralWebBrowserSession")
+	_aSWebAuthenticationSessionSelSetPrefersEphemeralWebBrowserSession          = objc.RegisterName("setPrefersEphemeralWebBrowserSession:")
+	_aSWebAuthenticationSessionSelAdditionalHeaderFields                        = objc.RegisterName("additionalHeaderFields")
+	_aSWebAuthenticationSessionSelSetAdditionalHeaderFields                     = objc.RegisterName("setAdditionalHeaderFields:")
+	_aSWebAuthenticationSessionSelCanStart                                      = objc.RegisterName("canStart")
 )
 
 func ASWebAuthenticationSessionFromID(id objc.ID) *ASWebAuthenticationSession {
@@ -56,7 +56,9 @@ func (o *ASWebAuthenticationSession) InitWithURLCallbackURLSchemeCompletionHandl
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSWebAuthenticationSessionSelInitWithURLCallbackURLSchemeCompletionHandler, uRL.Ptr(), callbackURLScheme.Ptr(), __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASWebAuthenticationSessionFromID(_ret)
 }
 
@@ -72,7 +74,9 @@ func (o *ASWebAuthenticationSession) InitWithURLCallbackCompletionHandler(uRL *f
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSWebAuthenticationSessionSelInitWithURLCallbackCompletionHandler, uRL.Ptr(), callback.Ptr(), __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASWebAuthenticationSessionFromID(_ret)
 }
 
@@ -122,4 +126,3 @@ func (o *ASWebAuthenticationSession) CanStart() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aSWebAuthenticationSessionSelCanStart)
 	return _ret
 }
-

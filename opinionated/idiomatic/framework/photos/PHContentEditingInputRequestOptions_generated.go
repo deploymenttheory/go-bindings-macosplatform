@@ -15,7 +15,9 @@ type ContentEditingInputRequestOptions struct {
 }
 
 // Unwrap returns the underlying [raw.PHContentEditingInputRequestOptions].
-func (x *ContentEditingInputRequestOptions) Unwrap() *raw.PHContentEditingInputRequestOptions { return x.inner }
+func (x *ContentEditingInputRequestOptions) Unwrap() *raw.PHContentEditingInputRequestOptions {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -98,4 +100,3 @@ type ContentEditingInputRequestOptionsable interface {
 }
 
 var _ ContentEditingInputRequestOptionsable = (*ContentEditingInputRequestOptions)(nil)
-

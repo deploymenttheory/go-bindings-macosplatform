@@ -16,14 +16,14 @@ type GCMouseInput struct {
 }
 
 var (
-	_clsGCMouseInput = _objcClass("GCMouseInput")
-	_gCMouseInputSelMouseMovedHandler = objc.RegisterName("mouseMovedHandler")
+	_clsGCMouseInput                     = _objcClass("GCMouseInput")
+	_gCMouseInputSelMouseMovedHandler    = objc.RegisterName("mouseMovedHandler")
 	_gCMouseInputSelSetMouseMovedHandler = objc.RegisterName("setMouseMovedHandler:")
-	_gCMouseInputSelScroll = objc.RegisterName("scroll")
-	_gCMouseInputSelLeftButton = objc.RegisterName("leftButton")
-	_gCMouseInputSelRightButton = objc.RegisterName("rightButton")
-	_gCMouseInputSelMiddleButton = objc.RegisterName("middleButton")
-	_gCMouseInputSelAuxiliaryButtons = objc.RegisterName("auxiliaryButtons")
+	_gCMouseInputSelScroll               = objc.RegisterName("scroll")
+	_gCMouseInputSelLeftButton           = objc.RegisterName("leftButton")
+	_gCMouseInputSelRightButton          = objc.RegisterName("rightButton")
+	_gCMouseInputSelMiddleButton         = objc.RegisterName("middleButton")
+	_gCMouseInputSelAuxiliaryButtons     = objc.RegisterName("auxiliaryButtons")
 )
 
 func GCMouseInputFromID(id objc.ID) *GCMouseInput {
@@ -58,32 +58,41 @@ func (o *GCMouseInput) SetMouseMovedHandler(mouseMovedHandler func(*GCMouseInput
 // Scroll is a dpad with undefined range.
 func (o *GCMouseInput) Scroll() *GCDeviceCursor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCMouseInputSelScroll)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCDeviceCursorFromID(_ret)
 }
 
 // Mouse buttons that can be used only as digital inputs
 func (o *GCMouseInput) LeftButton() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCMouseInputSelLeftButton)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
 func (o *GCMouseInput) RightButton() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCMouseInputSelRightButton)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
 func (o *GCMouseInput) MiddleButton() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCMouseInputSelMiddleButton)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
 func (o *GCMouseInput) AuxiliaryButtons() *foundation.NSArray[*GCControllerButtonInput] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCMouseInputSelAuxiliaryButtons)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GCControllerButtonInput](_ret)
 }
-

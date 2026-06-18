@@ -18,14 +18,14 @@ type MTRClusterContentAppObserver struct {
 }
 
 var (
-	_clsMTRClusterContentAppObserver = _objcClass("MTRClusterContentAppObserver")
+	_clsMTRClusterContentAppObserver                                                                         = _objcClass("MTRClusterContentAppObserver")
 	_mTRClusterContentAppObserverSelContentAppMessageWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("contentAppMessageWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterContentAppObserverSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterContentAppObserverSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterContentAppObserverSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterContentAppObserverSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterContentAppObserverSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterContentAppObserverSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterContentAppObserverSelReadAttributeGeneratedCommandListWithParams                              = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterContentAppObserverSelReadAttributeAcceptedCommandListWithParams                               = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterContentAppObserverSelReadAttributeAttributeListWithParams                                     = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterContentAppObserverSelReadAttributeFeatureMapWithParams                                        = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterContentAppObserverSelReadAttributeClusterRevisionWithParams                                   = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterContentAppObserverSelInitWithDeviceEndpointIDQueue                                            = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterContentAppObserverFromID(id objc.ID) *MTRClusterContentAppObserver {
@@ -80,7 +80,8 @@ func (o *MTRClusterContentAppObserver) ReadAttributeClusterRevisionWithParams(pa
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterContentAppObserver) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterContentAppObserver {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterContentAppObserverSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterContentAppObserverFromID(_ret)
 }
-

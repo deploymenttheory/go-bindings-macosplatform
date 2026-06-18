@@ -35,7 +35,9 @@ func NewPlatformConfiguration() *PlatformConfiguration {
 	return &PlatformConfiguration{inner: raw.VZPlatformConfigurationFromID(_id)}
 }
 
-func (x *PlatformConfiguration) asPlatformConfiguration() *raw.VZPlatformConfiguration { return x.inner }
+func (x *PlatformConfiguration) asPlatformConfiguration() *raw.VZPlatformConfiguration {
+	return x.inner
+}
 
 // PlatformConfigurationable is the interface implemented by [PlatformConfiguration], for mocking and DI.
 type PlatformConfigurationable interface {
@@ -43,4 +45,3 @@ type PlatformConfigurationable interface {
 }
 
 var _ PlatformConfigurationable = (*PlatformConfiguration)(nil)
-

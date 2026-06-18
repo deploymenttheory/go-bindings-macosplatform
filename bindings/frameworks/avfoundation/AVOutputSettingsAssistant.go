@@ -19,20 +19,20 @@ type AVOutputSettingsAssistant struct {
 }
 
 var (
-	_clsAVOutputSettingsAssistant = _objcClass("AVOutputSettingsAssistant")
-	_aVOutputSettingsAssistantSelAvailableOutputSettingsPresets = objc.RegisterName("availableOutputSettingsPresets")
-	_aVOutputSettingsAssistantSelOutputSettingsAssistantWithPreset = objc.RegisterName("outputSettingsAssistantWithPreset:")
-	_aVOutputSettingsAssistantSelAudioSettings = objc.RegisterName("audioSettings")
-	_aVOutputSettingsAssistantSelVideoSettings = objc.RegisterName("videoSettings")
-	_aVOutputSettingsAssistantSelOutputFileType = objc.RegisterName("outputFileType")
-	_aVOutputSettingsAssistantSelSourceAudioFormat = objc.RegisterName("sourceAudioFormat")
-	_aVOutputSettingsAssistantSelSetSourceAudioFormat = objc.RegisterName("setSourceAudioFormat:")
-	_aVOutputSettingsAssistantSelSourceVideoFormat = objc.RegisterName("sourceVideoFormat")
-	_aVOutputSettingsAssistantSelSetSourceVideoFormat = objc.RegisterName("setSourceVideoFormat:")
-	_aVOutputSettingsAssistantSelSourceVideoAverageFrameDuration = objc.RegisterName("sourceVideoAverageFrameDuration")
+	_clsAVOutputSettingsAssistant                                   = _objcClass("AVOutputSettingsAssistant")
+	_aVOutputSettingsAssistantSelAvailableOutputSettingsPresets     = objc.RegisterName("availableOutputSettingsPresets")
+	_aVOutputSettingsAssistantSelOutputSettingsAssistantWithPreset  = objc.RegisterName("outputSettingsAssistantWithPreset:")
+	_aVOutputSettingsAssistantSelAudioSettings                      = objc.RegisterName("audioSettings")
+	_aVOutputSettingsAssistantSelVideoSettings                      = objc.RegisterName("videoSettings")
+	_aVOutputSettingsAssistantSelOutputFileType                     = objc.RegisterName("outputFileType")
+	_aVOutputSettingsAssistantSelSourceAudioFormat                  = objc.RegisterName("sourceAudioFormat")
+	_aVOutputSettingsAssistantSelSetSourceAudioFormat               = objc.RegisterName("setSourceAudioFormat:")
+	_aVOutputSettingsAssistantSelSourceVideoFormat                  = objc.RegisterName("sourceVideoFormat")
+	_aVOutputSettingsAssistantSelSetSourceVideoFormat               = objc.RegisterName("setSourceVideoFormat:")
+	_aVOutputSettingsAssistantSelSourceVideoAverageFrameDuration    = objc.RegisterName("sourceVideoAverageFrameDuration")
 	_aVOutputSettingsAssistantSelSetSourceVideoAverageFrameDuration = objc.RegisterName("setSourceVideoAverageFrameDuration:")
-	_aVOutputSettingsAssistantSelSourceVideoMinFrameDuration = objc.RegisterName("sourceVideoMinFrameDuration")
-	_aVOutputSettingsAssistantSelSetSourceVideoMinFrameDuration = objc.RegisterName("setSourceVideoMinFrameDuration:")
+	_aVOutputSettingsAssistantSelSourceVideoMinFrameDuration        = objc.RegisterName("sourceVideoMinFrameDuration")
+	_aVOutputSettingsAssistantSelSetSourceVideoMinFrameDuration     = objc.RegisterName("setSourceVideoMinFrameDuration:")
 )
 
 func AVOutputSettingsAssistantFromID(id objc.ID) *AVOutputSettingsAssistant {
@@ -54,7 +54,9 @@ func AVOutputSettingsAssistantAvailableOutputSettingsPresets() *foundation.NSArr
 // @method outputSettingsAssistantWithPreset: @abstract Returns an instance of AVOutputSettingsAssistant corresponding to the given preset @param presetIdentifier The string identifier, for example AVOutputSettingsPreset1280x720, for the desired preset @result An instance of AVOutputSettingsAssistant with properties corresponding to the given preset, or nil if there is no such available preset. @discussion The properties of the returned object can be used as a guide for creating and configuring an AVAssetWriter object and one or more AVAssetWriterInput objects.  If all the suggested properties are respected in creating the AVAssetWriter, the resulting media file will conform to the criteria implied by the preset. Use +availableOutputSettingsPresets to get a list of presets identifiers that can be used with this method.
 func AVOutputSettingsAssistantOutputSettingsAssistantWithPreset(presetIdentifier *foundation.NSString) *AVOutputSettingsAssistant {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVOutputSettingsAssistant), _aVOutputSettingsAssistantSelOutputSettingsAssistantWithPreset, presetIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVOutputSettingsAssistantFromID(_ret)
 }
 
@@ -73,7 +75,9 @@ func (o *AVOutputSettingsAssistant) VideoSettings() *foundation.NSDictionary[*fo
 // @property outputFileType @abstract A UTI indicating the type of file to be written, to be used when e.g. creating an instance of AVAssetWriter @discussion Use [[UTType typeWithIdentifier:outputFileType] preferredFilenameExtension] to get a suitable file extension for a given file type.
 func (o *AVOutputSettingsAssistant) OutputFileType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVOutputSettingsAssistantSelOutputFileType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -116,4 +120,3 @@ func (o *AVOutputSettingsAssistant) SourceVideoMinFrameDuration() coremedia.CMTi
 func (o *AVOutputSettingsAssistant) SetSourceVideoMinFrameDuration(sourceVideoMinFrameDuration coremedia.CMTime) {
 	o.Ptr().Send(_aVOutputSettingsAssistantSelSetSourceVideoMinFrameDuration, sourceVideoMinFrameDuration)
 }
-

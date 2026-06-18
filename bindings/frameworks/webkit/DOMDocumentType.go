@@ -16,12 +16,12 @@ type DOMDocumentType struct {
 }
 
 var (
-	_clsDOMDocumentType = _objcClass("DOMDocumentType")
-	_dOMDocumentTypeSelName = objc.RegisterName("name")
-	_dOMDocumentTypeSelEntities = objc.RegisterName("entities")
-	_dOMDocumentTypeSelNotations = objc.RegisterName("notations")
-	_dOMDocumentTypeSelPublicId = objc.RegisterName("publicId")
-	_dOMDocumentTypeSelSystemId = objc.RegisterName("systemId")
+	_clsDOMDocumentType               = _objcClass("DOMDocumentType")
+	_dOMDocumentTypeSelName           = objc.RegisterName("name")
+	_dOMDocumentTypeSelEntities       = objc.RegisterName("entities")
+	_dOMDocumentTypeSelNotations      = objc.RegisterName("notations")
+	_dOMDocumentTypeSelPublicId       = objc.RegisterName("publicId")
+	_dOMDocumentTypeSelSystemId       = objc.RegisterName("systemId")
 	_dOMDocumentTypeSelInternalSubset = objc.RegisterName("internalSubset")
 )
 
@@ -37,37 +37,48 @@ func DOMDocumentTypeFromID(id objc.ID) *DOMDocumentType {
 
 func (o *DOMDocumentType) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMDocumentTypeSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMDocumentType) Entities() *DOMNamedNodeMap {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMDocumentTypeSelEntities)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNamedNodeMapFromID(_ret)
 }
 
 func (o *DOMDocumentType) Notations() *DOMNamedNodeMap {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMDocumentTypeSelNotations)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNamedNodeMapFromID(_ret)
 }
 
 func (o *DOMDocumentType) PublicId() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMDocumentTypeSelPublicId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMDocumentType) SystemId() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMDocumentTypeSelSystemId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMDocumentType) InternalSubset() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMDocumentTypeSelInternalSubset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

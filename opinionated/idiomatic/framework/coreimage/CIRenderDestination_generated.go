@@ -241,4 +241,3 @@ type RenderDestinationable interface {
 }
 
 var _ RenderDestinationable = (*RenderDestination)(nil)
-

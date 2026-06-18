@@ -195,4 +195,3 @@ func JRSUIRendererCreate() unsafe.Pointer {
 func JRSUIRendererRelease(renderer unsafe.Pointer) {
 	raw.JRSUIRendererRelease(renderer)
 }
-

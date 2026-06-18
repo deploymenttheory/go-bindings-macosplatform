@@ -113,9 +113,13 @@ func (x *MatrixSoftMaxGradient) SetSourceColumns(sourceColumns uint) {
 	x.inner.SetSourceColumns(sourceColumns)
 }
 
-func (x *MatrixSoftMaxGradient) asMatrixSoftMaxGradient() *raw.MPSMatrixSoftMaxGradient { return x.inner }
+func (x *MatrixSoftMaxGradient) asMatrixSoftMaxGradient() *raw.MPSMatrixSoftMaxGradient {
+	return x.inner
+}
 
-func (x *MatrixSoftMaxGradient) asMatrixBinaryKernel() *raw.MPSMatrixBinaryKernel { return &x.inner.MPSMatrixBinaryKernel }
+func (x *MatrixSoftMaxGradient) asMatrixBinaryKernel() *raw.MPSMatrixBinaryKernel {
+	return &x.inner.MPSMatrixBinaryKernel
+}
 
 // MatrixSoftMaxGradientable is the interface implemented by [MatrixSoftMaxGradient], for mocking and DI.
 type MatrixSoftMaxGradientable interface {
@@ -135,4 +139,3 @@ type MatrixSoftMaxGradientable interface {
 }
 
 var _ MatrixSoftMaxGradientable = (*MatrixSoftMaxGradient)(nil)
-

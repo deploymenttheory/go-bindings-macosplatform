@@ -16,11 +16,11 @@ type NSItemBadge struct {
 }
 
 var (
-	_clsNSItemBadge = _objcClass("NSItemBadge")
+	_clsNSItemBadge               = _objcClass("NSItemBadge")
 	_nSItemBadgeSelBadgeWithCount = objc.RegisterName("badgeWithCount:")
-	_nSItemBadgeSelBadgeWithText = objc.RegisterName("badgeWithText:")
+	_nSItemBadgeSelBadgeWithText  = objc.RegisterName("badgeWithText:")
 	_nSItemBadgeSelIndicatorBadge = objc.RegisterName("indicatorBadge")
-	_nSItemBadgeSelText = objc.RegisterName("text")
+	_nSItemBadgeSelText           = objc.RegisterName("text")
 )
 
 func NSItemBadgeFromID(id objc.ID) *NSItemBadge {
@@ -36,27 +36,34 @@ func NSItemBadgeFromID(id objc.ID) *NSItemBadge {
 // Creates a badge displaying a localized numerical count. @param count The integer value to localize and display in the badge. @return A new NSItemBadge instance with the localized specified count.
 func NSItemBadgeBadgeWithCount(count int) *NSItemBadge {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSItemBadge), _nSItemBadgeSelBadgeWithCount, count)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSItemBadgeFromID(_ret)
 }
 
 // Creates a badge displaying a text. @param text The text to be displayed inside the badge. @return A new `NSItemBadge` instance with the specified text.
 func NSItemBadgeBadgeWithText(text *foundation.NSString) *NSItemBadge {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSItemBadge), _nSItemBadgeSelBadgeWithText, text.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSItemBadgeFromID(_ret)
 }
 
 // Creates a badge styled as an indicator. In this context, an indicator is simply a badge without any text. @return A new `NSItemBadge` instance styled as an indicator.
 func NSItemBadgeIndicatorBadge() *NSItemBadge {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSItemBadge), _nSItemBadgeSelIndicatorBadge)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSItemBadgeFromID(_ret)
 }
 
 func (o *NSItemBadge) Text() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSItemBadgeSelText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

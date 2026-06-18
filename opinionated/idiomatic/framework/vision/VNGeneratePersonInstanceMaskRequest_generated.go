@@ -16,7 +16,9 @@ type GeneratePersonInstanceMaskRequest struct {
 }
 
 // Unwrap returns the underlying [raw.VNGeneratePersonInstanceMaskRequest].
-func (x *GeneratePersonInstanceMaskRequest) Unwrap() *raw.VNGeneratePersonInstanceMaskRequest { return x.inner }
+func (x *GeneratePersonInstanceMaskRequest) Unwrap() *raw.VNGeneratePersonInstanceMaskRequest {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -60,9 +62,13 @@ func (x *GeneratePersonInstanceMaskRequest) WithRevision(revision uint) *Generat
 	return x
 }
 
-func (x *GeneratePersonInstanceMaskRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
+func (x *GeneratePersonInstanceMaskRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNImageBasedRequest
+}
 
-func (x *GeneratePersonInstanceMaskRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+func (x *GeneratePersonInstanceMaskRequest) asRequest() *raw.VNRequest {
+	return &x.inner.VNImageBasedRequest.VNRequest
+}
 
 // GeneratePersonInstanceMaskRequestable is the interface implemented by [GeneratePersonInstanceMaskRequest], for mocking and DI.
 type GeneratePersonInstanceMaskRequestable interface {
@@ -74,4 +80,3 @@ type GeneratePersonInstanceMaskRequestable interface {
 }
 
 var _ GeneratePersonInstanceMaskRequestable = (*GeneratePersonInstanceMaskRequest)(nil)
-

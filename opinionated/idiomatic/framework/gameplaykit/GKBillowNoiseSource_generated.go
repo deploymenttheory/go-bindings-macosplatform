@@ -76,9 +76,13 @@ func (x *BillowNoiseSource) SetPersistence(persistence float64) {
 	x.inner.SetPersistence(persistence)
 }
 
-func (x *BillowNoiseSource) asCoherentNoiseSource() *raw.GKCoherentNoiseSource { return &x.inner.GKCoherentNoiseSource }
+func (x *BillowNoiseSource) asCoherentNoiseSource() *raw.GKCoherentNoiseSource {
+	return &x.inner.GKCoherentNoiseSource
+}
 
-func (x *BillowNoiseSource) asNoiseSource() *raw.GKNoiseSource { return &x.inner.GKCoherentNoiseSource.GKNoiseSource }
+func (x *BillowNoiseSource) asNoiseSource() *raw.GKNoiseSource {
+	return &x.inner.GKCoherentNoiseSource.GKNoiseSource
+}
 
 // BillowNoiseSourceable is the interface implemented by [BillowNoiseSource], for mocking and DI.
 type BillowNoiseSourceable interface {
@@ -93,4 +97,3 @@ type BillowNoiseSourceable interface {
 }
 
 var _ BillowNoiseSourceable = (*BillowNoiseSource)(nil)
-

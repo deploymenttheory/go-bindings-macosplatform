@@ -76,9 +76,13 @@ func (x *DetectTextRectanglesRequest) SetReportCharacterBoxes(reportCharacterBox
 	x.inner.SetReportCharacterBoxes(reportCharacterBoxes)
 }
 
-func (x *DetectTextRectanglesRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
+func (x *DetectTextRectanglesRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNImageBasedRequest
+}
 
-func (x *DetectTextRectanglesRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+func (x *DetectTextRectanglesRequest) asRequest() *raw.VNRequest {
+	return &x.inner.VNImageBasedRequest.VNRequest
+}
 
 // DetectTextRectanglesRequestable is the interface implemented by [DetectTextRectanglesRequest], for mocking and DI.
 type DetectTextRectanglesRequestable interface {
@@ -93,4 +97,3 @@ type DetectTextRectanglesRequestable interface {
 }
 
 var _ DetectTextRectanglesRequestable = (*DetectTextRectanglesRequest)(nil)
-

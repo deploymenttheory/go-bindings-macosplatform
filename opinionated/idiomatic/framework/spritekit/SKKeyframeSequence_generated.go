@@ -155,4 +155,3 @@ type KeyframeSequenceable interface {
 }
 
 var _ KeyframeSequenceable = (*KeyframeSequence)(nil)
-

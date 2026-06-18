@@ -63,4 +63,3 @@ type SpheresNoiseSourceable interface {
 }
 
 var _ SpheresNoiseSourceable = (*SpheresNoiseSource)(nil)
-

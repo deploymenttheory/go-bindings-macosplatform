@@ -16,8 +16,8 @@ type PKDeferredPaymentSummaryItem struct {
 }
 
 var (
-	_clsPKDeferredPaymentSummaryItem = _objcClass("PKDeferredPaymentSummaryItem")
-	_pKDeferredPaymentSummaryItemSelDeferredDate = objc.RegisterName("deferredDate")
+	_clsPKDeferredPaymentSummaryItem                = _objcClass("PKDeferredPaymentSummaryItem")
+	_pKDeferredPaymentSummaryItemSelDeferredDate    = objc.RegisterName("deferredDate")
 	_pKDeferredPaymentSummaryItemSelSetDeferredDate = objc.RegisterName("setDeferredDate:")
 )
 
@@ -33,11 +33,12 @@ func PKDeferredPaymentSummaryItemFromID(id objc.ID) *PKDeferredPaymentSummaryIte
 
 func (o *PKDeferredPaymentSummaryItem) DeferredDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDeferredPaymentSummaryItemSelDeferredDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *PKDeferredPaymentSummaryItem) SetDeferredDate(deferredDate *foundation.NSDate) {
 	o.Ptr().Send(_pKDeferredPaymentSummaryItemSelSetDeferredDate, deferredDate.Ptr())
 }
-

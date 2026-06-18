@@ -18,25 +18,25 @@ type NEVPNManager struct {
 }
 
 var (
-	_clsNEVPNManager = _objcClass("NEVPNManager")
-	_nEVPNManagerSelSharedManager = objc.RegisterName("sharedManager")
-	_nEVPNManagerSelLoadFromPreferencesWithCompletionHandler = objc.RegisterName("loadFromPreferencesWithCompletionHandler:")
+	_clsNEVPNManager                                           = _objcClass("NEVPNManager")
+	_nEVPNManagerSelSharedManager                              = objc.RegisterName("sharedManager")
+	_nEVPNManagerSelLoadFromPreferencesWithCompletionHandler   = objc.RegisterName("loadFromPreferencesWithCompletionHandler:")
 	_nEVPNManagerSelRemoveFromPreferencesWithCompletionHandler = objc.RegisterName("removeFromPreferencesWithCompletionHandler:")
-	_nEVPNManagerSelSaveToPreferencesWithCompletionHandler = objc.RegisterName("saveToPreferencesWithCompletionHandler:")
-	_nEVPNManagerSelSetAuthorization = objc.RegisterName("setAuthorization:")
-	_nEVPNManagerSelOnDemandRules = objc.RegisterName("onDemandRules")
-	_nEVPNManagerSelSetOnDemandRules = objc.RegisterName("setOnDemandRules:")
-	_nEVPNManagerSelIsOnDemandEnabled = objc.RegisterName("isOnDemandEnabled")
-	_nEVPNManagerSelSetOnDemandEnabled = objc.RegisterName("setOnDemandEnabled:")
-	_nEVPNManagerSelLocalizedDescription = objc.RegisterName("localizedDescription")
-	_nEVPNManagerSelSetLocalizedDescription = objc.RegisterName("setLocalizedDescription:")
-	_nEVPNManagerSelProtocol = objc.RegisterName("protocol")
-	_nEVPNManagerSelSetProtocol = objc.RegisterName("setProtocol:")
-	_nEVPNManagerSelProtocolConfiguration = objc.RegisterName("protocolConfiguration")
-	_nEVPNManagerSelSetProtocolConfiguration = objc.RegisterName("setProtocolConfiguration:")
-	_nEVPNManagerSelConnection = objc.RegisterName("connection")
-	_nEVPNManagerSelIsEnabled = objc.RegisterName("isEnabled")
-	_nEVPNManagerSelSetEnabled = objc.RegisterName("setEnabled:")
+	_nEVPNManagerSelSaveToPreferencesWithCompletionHandler     = objc.RegisterName("saveToPreferencesWithCompletionHandler:")
+	_nEVPNManagerSelSetAuthorization                           = objc.RegisterName("setAuthorization:")
+	_nEVPNManagerSelOnDemandRules                              = objc.RegisterName("onDemandRules")
+	_nEVPNManagerSelSetOnDemandRules                           = objc.RegisterName("setOnDemandRules:")
+	_nEVPNManagerSelIsOnDemandEnabled                          = objc.RegisterName("isOnDemandEnabled")
+	_nEVPNManagerSelSetOnDemandEnabled                         = objc.RegisterName("setOnDemandEnabled:")
+	_nEVPNManagerSelLocalizedDescription                       = objc.RegisterName("localizedDescription")
+	_nEVPNManagerSelSetLocalizedDescription                    = objc.RegisterName("setLocalizedDescription:")
+	_nEVPNManagerSelProtocol                                   = objc.RegisterName("protocol")
+	_nEVPNManagerSelSetProtocol                                = objc.RegisterName("setProtocol:")
+	_nEVPNManagerSelProtocolConfiguration                      = objc.RegisterName("protocolConfiguration")
+	_nEVPNManagerSelSetProtocolConfiguration                   = objc.RegisterName("setProtocolConfiguration:")
+	_nEVPNManagerSelConnection                                 = objc.RegisterName("connection")
+	_nEVPNManagerSelIsEnabled                                  = objc.RegisterName("isEnabled")
+	_nEVPNManagerSelSetEnabled                                 = objc.RegisterName("setEnabled:")
 )
 
 func NEVPNManagerFromID(id objc.ID) *NEVPNManager {
@@ -52,7 +52,9 @@ func NEVPNManagerFromID(id objc.ID) *NEVPNManager {
 // @method sharedManager @return The singleton NEVPNManager object for the calling process.
 func NEVPNManagerSharedManager() *NEVPNManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNEVPNManager), _nEVPNManagerSelSharedManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEVPNManagerFromID(_ret)
 }
 
@@ -100,7 +102,9 @@ func (o *NEVPNManager) SetAuthorization(authorization unsafe.Pointer) {
 // @property onDemandRules @discussion An array of NEOnDemandRule objects.
 func (o *NEVPNManager) OnDemandRules() *foundation.NSArray[*NEOnDemandRule] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEVPNManagerSelOnDemandRules)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NEOnDemandRule](_ret)
 }
 
@@ -121,7 +125,9 @@ func (o *NEVPNManager) SetOnDemandEnabled(onDemandEnabled bool) {
 // @property localizedDescription @discussion A string containing a description of the VPN.
 func (o *NEVPNManager) LocalizedDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEVPNManagerSelLocalizedDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -133,7 +139,9 @@ func (o *NEVPNManager) SetLocalizedDescription(localizedDescription *foundation.
 // Deprecated: since macOS 10.11.
 func (o *NEVPNManager) Protocol() *NEVPNProtocol {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEVPNManagerSelProtocol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEVPNProtocolFromID(_ret)
 }
 
@@ -145,7 +153,9 @@ func (o *NEVPNManager) SetProtocol(protocol *NEVPNProtocol) {
 // @property protocolConfiguration @discussion An NEVPNProtocol object containing the protocol-specific portion of the VPN configuration.
 func (o *NEVPNManager) ProtocolConfiguration() *NEVPNProtocol {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEVPNManagerSelProtocolConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEVPNProtocolFromID(_ret)
 }
 
@@ -156,7 +166,9 @@ func (o *NEVPNManager) SetProtocolConfiguration(protocolConfiguration *NEVPNProt
 // @property connection @discussion The NEVPNConnection object used for controlling the VPN tunnel.
 func (o *NEVPNManager) Connection() *NEVPNConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEVPNManagerSelConnection)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEVPNConnectionFromID(_ret)
 }
 
@@ -169,4 +181,3 @@ func (o *NEVPNManager) IsEnabled() bool {
 func (o *NEVPNManager) SetEnabled(enabled bool) {
 	o.Ptr().Send(_nEVPNManagerSelSetEnabled, enabled)
 }
-

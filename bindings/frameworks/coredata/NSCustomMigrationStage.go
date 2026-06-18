@@ -17,14 +17,14 @@ type NSCustomMigrationStage struct {
 }
 
 var (
-	_clsNSCustomMigrationStage = _objcClass("NSCustomMigrationStage")
+	_clsNSCustomMigrationStage                                                = _objcClass("NSCustomMigrationStage")
 	_nSCustomMigrationStageSelInitWithCurrentModelReferenceNextModelReference = objc.RegisterName("initWithCurrentModelReference:nextModelReference:")
-	_nSCustomMigrationStageSelCurrentModel = objc.RegisterName("currentModel")
-	_nSCustomMigrationStageSelNextModel = objc.RegisterName("nextModel")
-	_nSCustomMigrationStageSelWillMigrateHandler = objc.RegisterName("willMigrateHandler")
-	_nSCustomMigrationStageSelSetWillMigrateHandler = objc.RegisterName("setWillMigrateHandler:")
-	_nSCustomMigrationStageSelDidMigrateHandler = objc.RegisterName("didMigrateHandler")
-	_nSCustomMigrationStageSelSetDidMigrateHandler = objc.RegisterName("setDidMigrateHandler:")
+	_nSCustomMigrationStageSelCurrentModel                                    = objc.RegisterName("currentModel")
+	_nSCustomMigrationStageSelNextModel                                       = objc.RegisterName("nextModel")
+	_nSCustomMigrationStageSelWillMigrateHandler                              = objc.RegisterName("willMigrateHandler")
+	_nSCustomMigrationStageSelSetWillMigrateHandler                           = objc.RegisterName("setWillMigrateHandler:")
+	_nSCustomMigrationStageSelDidMigrateHandler                               = objc.RegisterName("didMigrateHandler")
+	_nSCustomMigrationStageSelSetDidMigrateHandler                            = objc.RegisterName("setDidMigrateHandler:")
 )
 
 func NSCustomMigrationStageFromID(id objc.ID) *NSCustomMigrationStage {
@@ -39,19 +39,25 @@ func NSCustomMigrationStageFromID(id objc.ID) *NSCustomMigrationStage {
 
 func (o *NSCustomMigrationStage) InitWithCurrentModelReferenceNextModelReference(currentModel *NSManagedObjectModelReference, nextModel *NSManagedObjectModelReference) *NSCustomMigrationStage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCustomMigrationStageSelInitWithCurrentModelReferenceNextModelReference, currentModel.Ptr(), nextModel.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCustomMigrationStageFromID(_ret)
 }
 
 func (o *NSCustomMigrationStage) CurrentModel() *NSManagedObjectModelReference {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCustomMigrationStageSelCurrentModel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectModelReferenceFromID(_ret)
 }
 
 func (o *NSCustomMigrationStage) NextModel() *NSManagedObjectModelReference {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCustomMigrationStageSelNextModel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectModelReferenceFromID(_ret)
 }
 
@@ -98,4 +104,3 @@ func (o *NSCustomMigrationStage) SetDidMigrateHandler(didMigrateHandler func(*NS
 	}
 	o.Ptr().Send(_nSCustomMigrationStageSelSetDidMigrateHandler, __block_didMigrateHandler)
 }
-

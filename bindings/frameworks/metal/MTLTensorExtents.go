@@ -16,10 +16,10 @@ type MTLTensorExtents struct {
 }
 
 var (
-	_clsMTLTensorExtents = _objcClass("MTLTensorExtents")
-	_mTLTensorExtentsSelInitWithRankValues = objc.RegisterName("initWithRank:values:")
+	_clsMTLTensorExtents                       = _objcClass("MTLTensorExtents")
+	_mTLTensorExtentsSelInitWithRankValues     = objc.RegisterName("initWithRank:values:")
 	_mTLTensorExtentsSelExtentAtDimensionIndex = objc.RegisterName("extentAtDimensionIndex:")
-	_mTLTensorExtentsSelRank = objc.RegisterName("rank")
+	_mTLTensorExtentsSelRank                   = objc.RegisterName("rank")
 )
 
 func MTLTensorExtentsFromID(id objc.ID) *MTLTensorExtents {
@@ -32,10 +32,12 @@ func MTLTensorExtentsFromID(id objc.ID) *MTLTensorExtents {
 	return o
 }
 
-// Creates a new tensor extents with the rank and extent values you provide. Zero rank extents represent scalars. `values` can only be `nil`if `rank` is 0. - Parameters: - rank: the number of dimensions. - values: an array of length `rank` that specifies the size of each dimension. The first dimension is the innermost dimension. - Returns: Tensor extents with the rank and extent values you provide. Returns `nil` if `rank` exceeds 0 and `values` is nil or if `rank` exceeds ``MTL_TENSOR_MAX_RANK``.
+// Creates a new tensor extents with the rank and extent values you provide. Zero rank extents represent scalars. `values` can only be `nil`if `rank` is 0. - Parameters: - rank: the number of dimensions. - values: an array of length `rank` that specifies the size of each dimension. The first dimension is the innermost dimension. - Returns: Tensor extents with the rank and extent values you provide. Returns `nil` if `rank` exceeds 0 and `values` is nil or if `rank` exceeds “MTL_TENSOR_MAX_RANK“.
 func (o *MTLTensorExtents) InitWithRankValues(rank uint, values *int64) *MTLTensorExtents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLTensorExtentsSelInitWithRankValues, rank, values)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLTensorExtentsFromID(_ret)
 }
 
@@ -50,4 +52,3 @@ func (o *MTLTensorExtents) Rank() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mTLTensorExtentsSelRank)
 	return _ret
 }
-

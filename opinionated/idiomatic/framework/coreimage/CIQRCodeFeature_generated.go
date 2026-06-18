@@ -89,4 +89,3 @@ type QRCodeFeatureable interface {
 }
 
 var _ QRCodeFeatureable = (*QRCodeFeature)(nil)
-

@@ -17,9 +17,9 @@ type AVAssetVariantVideoLayoutAttributes struct {
 }
 
 var (
-	_clsAVAssetVariantVideoLayoutAttributes = _objcClass("AVAssetVariantVideoLayoutAttributes")
+	_clsAVAssetVariantVideoLayoutAttributes                     = _objcClass("AVAssetVariantVideoLayoutAttributes")
 	_aVAssetVariantVideoLayoutAttributesSelStereoViewComponents = objc.RegisterName("stereoViewComponents")
-	_aVAssetVariantVideoLayoutAttributesSelProjectionType = objc.RegisterName("projectionType")
+	_aVAssetVariantVideoLayoutAttributesSelProjectionType       = objc.RegisterName("projectionType")
 )
 
 func AVAssetVariantVideoLayoutAttributesFromID(id objc.ID) *AVAssetVariantVideoLayoutAttributes {
@@ -43,4 +43,3 @@ func (o *AVAssetVariantVideoLayoutAttributes) ProjectionType() coremedia.CMProje
 	_ret := objc.Send[coremedia.CMProjectionType](o.Ptr(), _aVAssetVariantVideoLayoutAttributesSelProjectionType)
 	return _ret
 }
-

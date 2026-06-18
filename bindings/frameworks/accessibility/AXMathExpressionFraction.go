@@ -15,10 +15,10 @@ type AXMathExpressionFraction struct {
 }
 
 var (
-	_clsAXMathExpressionFraction = _objcClass("AXMathExpressionFraction")
+	_clsAXMathExpressionFraction                                                 = _objcClass("AXMathExpressionFraction")
 	_aXMathExpressionFractionSelInitWithNumeratorExpressionDenimonatorExpression = objc.RegisterName("initWithNumeratorExpression:denimonatorExpression:")
-	_aXMathExpressionFractionSelNumeratorExpression = objc.RegisterName("numeratorExpression")
-	_aXMathExpressionFractionSelDenimonatorExpression = objc.RegisterName("denimonatorExpression")
+	_aXMathExpressionFractionSelNumeratorExpression                              = objc.RegisterName("numeratorExpression")
+	_aXMathExpressionFractionSelDenimonatorExpression                            = objc.RegisterName("denimonatorExpression")
 )
 
 func AXMathExpressionFractionFromID(id objc.ID) *AXMathExpressionFraction {
@@ -33,19 +33,24 @@ func AXMathExpressionFractionFromID(id objc.ID) *AXMathExpressionFraction {
 
 func (o *AXMathExpressionFraction) InitWithNumeratorExpressionDenimonatorExpression(numeratorExpression *AXMathExpression, denimonatorExpression *AXMathExpression) *AXMathExpressionFraction {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXMathExpressionFractionSelInitWithNumeratorExpressionDenimonatorExpression, numeratorExpression.Ptr(), denimonatorExpression.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXMathExpressionFractionFromID(_ret)
 }
 
 func (o *AXMathExpressionFraction) NumeratorExpression() *AXMathExpression {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXMathExpressionFractionSelNumeratorExpression)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXMathExpressionFromID(_ret)
 }
 
 func (o *AXMathExpressionFraction) DenimonatorExpression() *AXMathExpression {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXMathExpressionFractionSelDenimonatorExpression)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXMathExpressionFromID(_ret)
 }
-

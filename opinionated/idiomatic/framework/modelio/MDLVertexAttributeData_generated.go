@@ -134,4 +134,3 @@ type VertexAttributeDataable interface {
 }
 
 var _ VertexAttributeDataable = (*VertexAttributeData)(nil)
-

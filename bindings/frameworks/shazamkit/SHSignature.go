@@ -18,11 +18,11 @@ type SHSignature struct {
 }
 
 var (
-	_clsSHSignature = _objcClass("SHSignature")
+	_clsSHSignature                                     = _objcClass("SHSignature")
 	_sHSignatureSelSignatureWithDataRepresentationError = objc.RegisterName("signatureWithDataRepresentation:error:")
-	_sHSignatureSelInitWithDataRepresentationError = objc.RegisterName("initWithDataRepresentation:error:")
-	_sHSignatureSelDuration = objc.RegisterName("duration")
-	_sHSignatureSelDataRepresentation = objc.RegisterName("dataRepresentation")
+	_sHSignatureSelInitWithDataRepresentationError      = objc.RegisterName("initWithDataRepresentation:error:")
+	_sHSignatureSelDuration                             = objc.RegisterName("duration")
+	_sHSignatureSelDataRepresentation                   = objc.RegisterName("dataRepresentation")
 )
 
 func SHSignatureFromID(id objc.ID) *SHSignature {
@@ -39,7 +39,9 @@ func SHSignatureFromID(id objc.ID) *SHSignature {
 func SHSignatureSignatureWithDataRepresentationError(dataRepresentation *foundation.NSData) (*SHSignature, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsSHSignature), _sHSignatureSelSignatureWithDataRepresentationError, dataRepresentation.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -50,7 +52,9 @@ func SHSignatureSignatureWithDataRepresentationError(dataRepresentation *foundat
 func (o *SHSignature) InitWithDataRepresentationError(dataRepresentation *foundation.NSData) (*SHSignature, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _sHSignatureSelInitWithDataRepresentationError, dataRepresentation.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -66,7 +70,8 @@ func (o *SHSignature) Duration() float64 {
 // The raw data for the signature.
 func (o *SHSignature) DataRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sHSignatureSelDataRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

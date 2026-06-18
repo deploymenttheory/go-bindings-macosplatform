@@ -15,7 +15,7 @@ type LAEnvironmentMechanismUserPassword struct {
 }
 
 var (
-	_clsLAEnvironmentMechanismUserPassword = _objcClass("LAEnvironmentMechanismUserPassword")
+	_clsLAEnvironmentMechanismUserPassword      = _objcClass("LAEnvironmentMechanismUserPassword")
 	_lAEnvironmentMechanismUserPasswordSelIsSet = objc.RegisterName("isSet")
 )
 
@@ -33,4 +33,3 @@ func (o *LAEnvironmentMechanismUserPassword) IsSet() bool {
 	_ret := objc.Send[bool](o.Ptr(), _lAEnvironmentMechanismUserPasswordSelIsSet)
 	return _ret
 }
-

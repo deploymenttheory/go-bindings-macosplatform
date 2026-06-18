@@ -11,10 +11,10 @@ import (
 type SMAppServiceStatus int64
 
 const (
-	SMAppServiceStatusNotRegistered SMAppServiceStatus = 0
-	SMAppServiceStatusEnabled SMAppServiceStatus = 1
+	SMAppServiceStatusNotRegistered    SMAppServiceStatus = 0
+	SMAppServiceStatusEnabled          SMAppServiceStatus = 1
 	SMAppServiceStatusRequiresApproval SMAppServiceStatus = 2
-	SMAppServiceStatusNotFound SMAppServiceStatus = 3
+	SMAppServiceStatusNotFound         SMAppServiceStatus = 3
 )
 
 func (e SMAppServiceStatus) String() string {
@@ -31,4 +31,3 @@ func (e SMAppServiceStatus) String() string {
 		return fmt.Sprintf("SMAppServiceStatus(%d)", int64(e))
 	}
 }
-

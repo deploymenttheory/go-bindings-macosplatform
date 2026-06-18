@@ -19,23 +19,23 @@ type SKProduct struct {
 }
 
 var (
-	_clsSKProduct = _objcClass("SKProduct")
-	_sKProductSelLocalizedDescription = objc.RegisterName("localizedDescription")
-	_sKProductSelLocalizedTitle = objc.RegisterName("localizedTitle")
-	_sKProductSelPrice = objc.RegisterName("price")
-	_sKProductSelPriceLocale = objc.RegisterName("priceLocale")
-	_sKProductSelProductIdentifier = objc.RegisterName("productIdentifier")
-	_sKProductSelIsDownloadable = objc.RegisterName("isDownloadable")
-	_sKProductSelDownloadable = objc.RegisterName("downloadable")
-	_sKProductSelIsFamilyShareable = objc.RegisterName("isFamilyShareable")
-	_sKProductSelContentLengths = objc.RegisterName("contentLengths")
-	_sKProductSelDownloadContentLengths = objc.RegisterName("downloadContentLengths")
-	_sKProductSelContentVersion = objc.RegisterName("contentVersion")
-	_sKProductSelDownloadContentVersion = objc.RegisterName("downloadContentVersion")
-	_sKProductSelSubscriptionPeriod = objc.RegisterName("subscriptionPeriod")
-	_sKProductSelIntroductoryPrice = objc.RegisterName("introductoryPrice")
+	_clsSKProduct                            = _objcClass("SKProduct")
+	_sKProductSelLocalizedDescription        = objc.RegisterName("localizedDescription")
+	_sKProductSelLocalizedTitle              = objc.RegisterName("localizedTitle")
+	_sKProductSelPrice                       = objc.RegisterName("price")
+	_sKProductSelPriceLocale                 = objc.RegisterName("priceLocale")
+	_sKProductSelProductIdentifier           = objc.RegisterName("productIdentifier")
+	_sKProductSelIsDownloadable              = objc.RegisterName("isDownloadable")
+	_sKProductSelDownloadable                = objc.RegisterName("downloadable")
+	_sKProductSelIsFamilyShareable           = objc.RegisterName("isFamilyShareable")
+	_sKProductSelContentLengths              = objc.RegisterName("contentLengths")
+	_sKProductSelDownloadContentLengths      = objc.RegisterName("downloadContentLengths")
+	_sKProductSelContentVersion              = objc.RegisterName("contentVersion")
+	_sKProductSelDownloadContentVersion      = objc.RegisterName("downloadContentVersion")
+	_sKProductSelSubscriptionPeriod          = objc.RegisterName("subscriptionPeriod")
+	_sKProductSelIntroductoryPrice           = objc.RegisterName("introductoryPrice")
 	_sKProductSelSubscriptionGroupIdentifier = objc.RegisterName("subscriptionGroupIdentifier")
-	_sKProductSelDiscounts = objc.RegisterName("discounts")
+	_sKProductSelDiscounts                   = objc.RegisterName("discounts")
 )
 
 func SKProductFromID(id objc.ID) *SKProduct {
@@ -51,35 +51,45 @@ func SKProductFromID(id objc.ID) *SKProduct {
 // Deprecated: Use Product.description.
 func (o *SKProduct) LocalizedDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKProductSelLocalizedDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Deprecated: Use Product.displayName.
 func (o *SKProduct) LocalizedTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKProductSelLocalizedTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Deprecated: Use Product.displayPrice.
 func (o *SKProduct) Price() *foundation.NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKProductSelPrice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDecimalNumberFromID(_ret)
 }
 
 // Deprecated: Use Product.displayPrice.
 func (o *SKProduct) PriceLocale() *foundation.NSLocale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKProductSelPriceLocale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSLocaleFromID(_ret)
 }
 
 // Deprecated: Use Product.id.
 func (o *SKProduct) ProductIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKProductSelProductIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -122,35 +132,44 @@ func (o *SKProduct) ContentVersion() unsafe.Pointer {
 // Deprecated: Hosted content is no longer supported.
 func (o *SKProduct) DownloadContentVersion() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKProductSelDownloadContentVersion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Deprecated: Use Product.subscription.subscriptionPeriod.
 func (o *SKProduct) SubscriptionPeriod() *SKProductSubscriptionPeriod {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKProductSelSubscriptionPeriod)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKProductSubscriptionPeriodFromID(_ret)
 }
 
 // Deprecated: Use Product.subscription.introductionaryOffer.
 func (o *SKProduct) IntroductoryPrice() *SKProductDiscount {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKProductSelIntroductoryPrice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKProductDiscountFromID(_ret)
 }
 
 // Deprecated: Use Product.subscription.subscriptionGroupID.
 func (o *SKProduct) SubscriptionGroupIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKProductSelSubscriptionGroupIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Deprecated: Use Product.subscription.promotionalOffers.
 func (o *SKProduct) Discounts() *foundation.NSArray[*SKProductDiscount] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKProductSelDiscounts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SKProductDiscount](_ret)
 }
-

@@ -47,4 +47,3 @@ type ComputePlanCostable interface {
 }
 
 var _ ComputePlanCostable = (*ComputePlanCost)(nil)
-

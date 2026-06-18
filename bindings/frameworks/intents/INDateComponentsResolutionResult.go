@@ -16,9 +16,9 @@ type INDateComponentsResolutionResult struct {
 }
 
 var (
-	_clsINDateComponentsResolutionResult = _objcClass("INDateComponentsResolutionResult")
-	_iNDateComponentsResolutionResultSelSuccessWithResolvedDateComponents = objc.RegisterName("successWithResolvedDateComponents:")
-	_iNDateComponentsResolutionResultSelDisambiguationWithDateComponentsToDisambiguate = objc.RegisterName("disambiguationWithDateComponentsToDisambiguate:")
+	_clsINDateComponentsResolutionResult                                                = _objcClass("INDateComponentsResolutionResult")
+	_iNDateComponentsResolutionResultSelSuccessWithResolvedDateComponents               = objc.RegisterName("successWithResolvedDateComponents:")
+	_iNDateComponentsResolutionResultSelDisambiguationWithDateComponentsToDisambiguate  = objc.RegisterName("disambiguationWithDateComponentsToDisambiguate:")
 	_iNDateComponentsResolutionResultSelConfirmationRequiredWithDateComponentsToConfirm = objc.RegisterName("confirmationRequiredWithDateComponentsToConfirm:")
 )
 
@@ -34,19 +34,24 @@ func INDateComponentsResolutionResultFromID(id objc.ID) *INDateComponentsResolut
 
 func INDateComponentsResolutionResultSuccessWithResolvedDateComponents(resolvedDateComponents *foundation.NSDateComponents) *INDateComponentsResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINDateComponentsResolutionResult), _iNDateComponentsResolutionResultSelSuccessWithResolvedDateComponents, resolvedDateComponents.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INDateComponentsResolutionResultFromID(_ret)
 }
 
 func INDateComponentsResolutionResultDisambiguationWithDateComponentsToDisambiguate(dateComponentsToDisambiguate *foundation.NSArray[*foundation.NSDateComponents]) *INDateComponentsResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINDateComponentsResolutionResult), _iNDateComponentsResolutionResultSelDisambiguationWithDateComponentsToDisambiguate, dateComponentsToDisambiguate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INDateComponentsResolutionResultFromID(_ret)
 }
 
 func INDateComponentsResolutionResultConfirmationRequiredWithDateComponentsToConfirm(dateComponentsToConfirm *foundation.NSDateComponents) *INDateComponentsResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINDateComponentsResolutionResult), _iNDateComponentsResolutionResultSelConfirmationRequiredWithDateComponentsToConfirm, dateComponentsToConfirm.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INDateComponentsResolutionResultFromID(_ret)
 }
-

@@ -16,15 +16,15 @@ type MTROperationalCredentialsClusterAddTrustedRootCertificateParams struct {
 }
 
 var (
-	_clsMTROperationalCredentialsClusterAddTrustedRootCertificateParams = _objcClass("MTROperationalCredentialsClusterAddTrustedRootCertificateParams")
-	_mTROperationalCredentialsClusterAddTrustedRootCertificateParamsSelRootCACertificate = objc.RegisterName("rootCACertificate")
-	_mTROperationalCredentialsClusterAddTrustedRootCertificateParamsSelSetRootCACertificate = objc.RegisterName("setRootCACertificate:")
-	_mTROperationalCredentialsClusterAddTrustedRootCertificateParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTROperationalCredentialsClusterAddTrustedRootCertificateParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTROperationalCredentialsClusterAddTrustedRootCertificateParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTROperationalCredentialsClusterAddTrustedRootCertificateParams                               = _objcClass("MTROperationalCredentialsClusterAddTrustedRootCertificateParams")
+	_mTROperationalCredentialsClusterAddTrustedRootCertificateParamsSelRootCACertificate              = objc.RegisterName("rootCACertificate")
+	_mTROperationalCredentialsClusterAddTrustedRootCertificateParamsSelSetRootCACertificate           = objc.RegisterName("setRootCACertificate:")
+	_mTROperationalCredentialsClusterAddTrustedRootCertificateParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTROperationalCredentialsClusterAddTrustedRootCertificateParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTROperationalCredentialsClusterAddTrustedRootCertificateParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTROperationalCredentialsClusterAddTrustedRootCertificateParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
-	_mTROperationalCredentialsClusterAddTrustedRootCertificateParamsSelRootCertificate = objc.RegisterName("rootCertificate")
-	_mTROperationalCredentialsClusterAddTrustedRootCertificateParamsSelSetRootCertificate = objc.RegisterName("setRootCertificate:")
+	_mTROperationalCredentialsClusterAddTrustedRootCertificateParamsSelRootCertificate                = objc.RegisterName("rootCertificate")
+	_mTROperationalCredentialsClusterAddTrustedRootCertificateParamsSelSetRootCertificate             = objc.RegisterName("setRootCertificate:")
 )
 
 func MTROperationalCredentialsClusterAddTrustedRootCertificateParamsFromID(id objc.ID) *MTROperationalCredentialsClusterAddTrustedRootCertificateParams {
@@ -39,7 +39,9 @@ func MTROperationalCredentialsClusterAddTrustedRootCertificateParamsFromID(id ob
 
 func (o *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) RootCACertificate() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterAddTrustedRootCertificateParamsSelRootCACertificate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -50,7 +52,9 @@ func (o *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) SetRoo
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterAddTrustedRootCertificateParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) SetTim
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterAddTrustedRootCertificateParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -71,11 +77,12 @@ func (o *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) SetSer
 
 func (o *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) RootCertificate() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterAddTrustedRootCertificateParamsSelRootCertificate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) SetRootCertificate(rootCertificate *foundation.NSData) {
 	o.Ptr().Send(_mTROperationalCredentialsClusterAddTrustedRootCertificateParamsSelSetRootCertificate, rootCertificate.Ptr())
 }
-

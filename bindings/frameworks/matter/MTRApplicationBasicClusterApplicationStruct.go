@@ -16,15 +16,15 @@ type MTRApplicationBasicClusterApplicationStruct struct {
 }
 
 var (
-	_clsMTRApplicationBasicClusterApplicationStruct = _objcClass("MTRApplicationBasicClusterApplicationStruct")
-	_mTRApplicationBasicClusterApplicationStructSelCatalogVendorID = objc.RegisterName("catalogVendorID")
+	_clsMTRApplicationBasicClusterApplicationStruct                   = _objcClass("MTRApplicationBasicClusterApplicationStruct")
+	_mTRApplicationBasicClusterApplicationStructSelCatalogVendorID    = objc.RegisterName("catalogVendorID")
 	_mTRApplicationBasicClusterApplicationStructSelSetCatalogVendorID = objc.RegisterName("setCatalogVendorID:")
-	_mTRApplicationBasicClusterApplicationStructSelCatalogVendorId = objc.RegisterName("catalogVendorId")
+	_mTRApplicationBasicClusterApplicationStructSelCatalogVendorId    = objc.RegisterName("catalogVendorId")
 	_mTRApplicationBasicClusterApplicationStructSelSetCatalogVendorId = objc.RegisterName("setCatalogVendorId:")
-	_mTRApplicationBasicClusterApplicationStructSelApplicationID = objc.RegisterName("applicationID")
-	_mTRApplicationBasicClusterApplicationStructSelSetApplicationID = objc.RegisterName("setApplicationID:")
-	_mTRApplicationBasicClusterApplicationStructSelApplicationId = objc.RegisterName("applicationId")
-	_mTRApplicationBasicClusterApplicationStructSelSetApplicationId = objc.RegisterName("setApplicationId:")
+	_mTRApplicationBasicClusterApplicationStructSelApplicationID      = objc.RegisterName("applicationID")
+	_mTRApplicationBasicClusterApplicationStructSelSetApplicationID   = objc.RegisterName("setApplicationID:")
+	_mTRApplicationBasicClusterApplicationStructSelApplicationId      = objc.RegisterName("applicationId")
+	_mTRApplicationBasicClusterApplicationStructSelSetApplicationId   = objc.RegisterName("setApplicationId:")
 )
 
 func MTRApplicationBasicClusterApplicationStructFromID(id objc.ID) *MTRApplicationBasicClusterApplicationStruct {
@@ -39,7 +39,9 @@ func MTRApplicationBasicClusterApplicationStructFromID(id objc.ID) *MTRApplicati
 
 func (o *MTRApplicationBasicClusterApplicationStruct) CatalogVendorID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRApplicationBasicClusterApplicationStructSelCatalogVendorID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTRApplicationBasicClusterApplicationStruct) SetCatalogVendorID(catalog
 
 func (o *MTRApplicationBasicClusterApplicationStruct) CatalogVendorId() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRApplicationBasicClusterApplicationStructSelCatalogVendorId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,7 +63,9 @@ func (o *MTRApplicationBasicClusterApplicationStruct) SetCatalogVendorId(catalog
 
 func (o *MTRApplicationBasicClusterApplicationStruct) ApplicationID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRApplicationBasicClusterApplicationStructSelApplicationID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -69,11 +75,12 @@ func (o *MTRApplicationBasicClusterApplicationStruct) SetApplicationID(applicati
 
 func (o *MTRApplicationBasicClusterApplicationStruct) ApplicationId() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRApplicationBasicClusterApplicationStructSelApplicationId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTRApplicationBasicClusterApplicationStruct) SetApplicationId(applicationId *foundation.NSString) {
 	o.Ptr().Send(_mTRApplicationBasicClusterApplicationStructSelSetApplicationId, applicationId.Ptr())
 }
-

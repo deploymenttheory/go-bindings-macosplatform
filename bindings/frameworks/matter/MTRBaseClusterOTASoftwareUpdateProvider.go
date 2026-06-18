@@ -18,26 +18,26 @@ type MTRBaseClusterOTASoftwareUpdateProvider struct {
 }
 
 var (
-	_clsMTRBaseClusterOTASoftwareUpdateProvider = _objcClass("MTRBaseClusterOTASoftwareUpdateProvider")
-	_mTRBaseClusterOTASoftwareUpdateProviderSelQueryImageWithParamsCompletion = objc.RegisterName("queryImageWithParams:completion:")
-	_mTRBaseClusterOTASoftwareUpdateProviderSelApplyUpdateRequestWithParamsCompletion = objc.RegisterName("applyUpdateRequestWithParams:completion:")
-	_mTRBaseClusterOTASoftwareUpdateProviderSelNotifyUpdateAppliedWithParamsCompletion = objc.RegisterName("notifyUpdateAppliedWithParams:completion:")
-	_mTRBaseClusterOTASoftwareUpdateProviderSelReadAttributeGeneratedCommandListWithCompletion = objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:")
+	_clsMTRBaseClusterOTASoftwareUpdateProvider                                                                                     = _objcClass("MTRBaseClusterOTASoftwareUpdateProvider")
+	_mTRBaseClusterOTASoftwareUpdateProviderSelQueryImageWithParamsCompletion                                                       = objc.RegisterName("queryImageWithParams:completion:")
+	_mTRBaseClusterOTASoftwareUpdateProviderSelApplyUpdateRequestWithParamsCompletion                                               = objc.RegisterName("applyUpdateRequestWithParams:completion:")
+	_mTRBaseClusterOTASoftwareUpdateProviderSelNotifyUpdateAppliedWithParamsCompletion                                              = objc.RegisterName("notifyUpdateAppliedWithParams:completion:")
+	_mTRBaseClusterOTASoftwareUpdateProviderSelReadAttributeGeneratedCommandListWithCompletion                                      = objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:")
 	_mTRBaseClusterOTASoftwareUpdateProviderSelSubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterOTASoftwareUpdateProviderSelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeGeneratedCommandListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterOTASoftwareUpdateProviderSelReadAttributeAcceptedCommandListWithCompletion = objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:")
-	_mTRBaseClusterOTASoftwareUpdateProviderSelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterOTASoftwareUpdateProviderSelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeAcceptedCommandListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterOTASoftwareUpdateProviderSelReadAttributeAttributeListWithCompletion = objc.RegisterName("readAttributeAttributeListWithCompletion:")
-	_mTRBaseClusterOTASoftwareUpdateProviderSelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterOTASoftwareUpdateProviderSelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeAttributeListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterOTASoftwareUpdateProviderSelReadAttributeFeatureMapWithCompletion = objc.RegisterName("readAttributeFeatureMapWithCompletion:")
-	_mTRBaseClusterOTASoftwareUpdateProviderSelSubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterOTASoftwareUpdateProviderSelReadAttributeFeatureMapWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeFeatureMapWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterOTASoftwareUpdateProviderSelReadAttributeClusterRevisionWithCompletion = objc.RegisterName("readAttributeClusterRevisionWithCompletion:")
-	_mTRBaseClusterOTASoftwareUpdateProviderSelSubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterOTASoftwareUpdateProviderSelReadAttributeClusterRevisionWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeClusterRevisionWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterOTASoftwareUpdateProviderSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRBaseClusterOTASoftwareUpdateProviderSelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion        = objc.RegisterName("readAttributeGeneratedCommandListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterOTASoftwareUpdateProviderSelReadAttributeAcceptedCommandListWithCompletion                                       = objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:")
+	_mTRBaseClusterOTASoftwareUpdateProviderSelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler  = objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterOTASoftwareUpdateProviderSelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion         = objc.RegisterName("readAttributeAcceptedCommandListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterOTASoftwareUpdateProviderSelReadAttributeAttributeListWithCompletion                                             = objc.RegisterName("readAttributeAttributeListWithCompletion:")
+	_mTRBaseClusterOTASoftwareUpdateProviderSelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler        = objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterOTASoftwareUpdateProviderSelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion               = objc.RegisterName("readAttributeAttributeListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterOTASoftwareUpdateProviderSelReadAttributeFeatureMapWithCompletion                                                = objc.RegisterName("readAttributeFeatureMapWithCompletion:")
+	_mTRBaseClusterOTASoftwareUpdateProviderSelSubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler           = objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterOTASoftwareUpdateProviderSelReadAttributeFeatureMapWithClusterStateCacheEndpointQueueCompletion                  = objc.RegisterName("readAttributeFeatureMapWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterOTASoftwareUpdateProviderSelReadAttributeClusterRevisionWithCompletion                                           = objc.RegisterName("readAttributeClusterRevisionWithCompletion:")
+	_mTRBaseClusterOTASoftwareUpdateProviderSelSubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler      = objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterOTASoftwareUpdateProviderSelReadAttributeClusterRevisionWithClusterStateCacheEndpointQueueCompletion             = objc.RegisterName("readAttributeClusterRevisionWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterOTASoftwareUpdateProviderSelInitWithDeviceEndpointIDQueue                                                        = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRBaseClusterOTASoftwareUpdateProviderFromID(id objc.ID) *MTRBaseClusterOTASoftwareUpdateProvider {
@@ -250,7 +250,8 @@ func MTRBaseClusterOTASoftwareUpdateProviderReadAttributeClusterRevisionWithClus
 // For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func (o *MTRBaseClusterOTASoftwareUpdateProvider) InitWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterOTASoftwareUpdateProvider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBaseClusterOTASoftwareUpdateProviderSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRBaseClusterOTASoftwareUpdateProviderFromID(_ret)
 }
-

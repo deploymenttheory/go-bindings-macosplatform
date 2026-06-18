@@ -77,9 +77,13 @@ func (x *MTRClusterRefrigeratorAlarm) ReadAttributeClusterRevisionWithParams(par
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterRefrigeratorAlarm) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterRefrigeratorAlarm) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterRefrigeratorAlarm) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterRefrigeratorAlarm) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterRefrigeratorAlarmable is the interface implemented by [MTRClusterRefrigeratorAlarm], for mocking and DI.
 type MTRClusterRefrigeratorAlarmable interface {
@@ -95,4 +99,3 @@ type MTRClusterRefrigeratorAlarmable interface {
 }
 
 var _ MTRClusterRefrigeratorAlarmable = (*MTRClusterRefrigeratorAlarm)(nil)
-

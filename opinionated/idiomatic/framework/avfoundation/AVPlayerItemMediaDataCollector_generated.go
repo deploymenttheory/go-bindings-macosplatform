@@ -35,7 +35,9 @@ func NewPlayerItemMediaDataCollector() *PlayerItemMediaDataCollector {
 	return &PlayerItemMediaDataCollector{inner: raw.AVPlayerItemMediaDataCollectorFromID(_id)}
 }
 
-func (x *PlayerItemMediaDataCollector) asPlayerItemMediaDataCollector() *raw.AVPlayerItemMediaDataCollector { return x.inner }
+func (x *PlayerItemMediaDataCollector) asPlayerItemMediaDataCollector() *raw.AVPlayerItemMediaDataCollector {
+	return x.inner
+}
 
 // PlayerItemMediaDataCollectorable is the interface implemented by [PlayerItemMediaDataCollector], for mocking and DI.
 type PlayerItemMediaDataCollectorable interface {
@@ -43,4 +45,3 @@ type PlayerItemMediaDataCollectorable interface {
 }
 
 var _ PlayerItemMediaDataCollectorable = (*PlayerItemMediaDataCollector)(nil)
-

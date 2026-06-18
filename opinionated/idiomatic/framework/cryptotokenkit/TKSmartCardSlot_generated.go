@@ -90,4 +90,3 @@ type SmartCardSlotable interface {
 }
 
 var _ SmartCardSlotable = (*SmartCardSlot)(nil)
-

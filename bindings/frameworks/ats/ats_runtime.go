@@ -12,7 +12,7 @@ import (
 )
 
 var (
-	_atsLib uintptr
+	_atsLib   uintptr
 	_loadOnce sync.Once
 )
 

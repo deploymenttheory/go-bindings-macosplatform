@@ -17,4 +17,3 @@ type CalendarItemProvider interface {
 type ObjectProvider interface {
 	asObject() *raw.EKObject
 }
-

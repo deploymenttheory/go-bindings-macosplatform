@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_mpscoreLib uintptr
-	_loadOnce sync.Once
+	_mpscoreLib    uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -49,19 +49,37 @@ func _loadLibrary() {
 		return
 	}
 	_register("MPSDataTypeBitsCount", func() { purego.RegisterLibFunc(&_fnMPSDataTypeBitsCount, _mpscoreLib, "MPSDataTypeBitsCount") })
-	_register("MPSFindIntegerDivisionParams", func() { purego.RegisterLibFunc(&_fnMPSFindIntegerDivisionParams, _mpscoreLib, "MPSFindIntegerDivisionParams") })
-	_register("MPSGetCustomKernelBatchedDestinationIndex", func() { purego.RegisterLibFunc(&_fnMPSGetCustomKernelBatchedDestinationIndex, _mpscoreLib, "MPSGetCustomKernelBatchedDestinationIndex") })
-	_register("MPSGetCustomKernelBatchedSourceIndex", func() { purego.RegisterLibFunc(&_fnMPSGetCustomKernelBatchedSourceIndex, _mpscoreLib, "MPSGetCustomKernelBatchedSourceIndex") })
-	_register("MPSGetCustomKernelBroadcastSourceIndex", func() { purego.RegisterLibFunc(&_fnMPSGetCustomKernelBroadcastSourceIndex, _mpscoreLib, "MPSGetCustomKernelBroadcastSourceIndex") })
-	_register("MPSGetCustomKernelMaxBatchSize", func() { purego.RegisterLibFunc(&_fnMPSGetCustomKernelMaxBatchSize, _mpscoreLib, "MPSGetCustomKernelMaxBatchSize") })
+	_register("MPSFindIntegerDivisionParams", func() {
+		purego.RegisterLibFunc(&_fnMPSFindIntegerDivisionParams, _mpscoreLib, "MPSFindIntegerDivisionParams")
+	})
+	_register("MPSGetCustomKernelBatchedDestinationIndex", func() {
+		purego.RegisterLibFunc(&_fnMPSGetCustomKernelBatchedDestinationIndex, _mpscoreLib, "MPSGetCustomKernelBatchedDestinationIndex")
+	})
+	_register("MPSGetCustomKernelBatchedSourceIndex", func() {
+		purego.RegisterLibFunc(&_fnMPSGetCustomKernelBatchedSourceIndex, _mpscoreLib, "MPSGetCustomKernelBatchedSourceIndex")
+	})
+	_register("MPSGetCustomKernelBroadcastSourceIndex", func() {
+		purego.RegisterLibFunc(&_fnMPSGetCustomKernelBroadcastSourceIndex, _mpscoreLib, "MPSGetCustomKernelBroadcastSourceIndex")
+	})
+	_register("MPSGetCustomKernelMaxBatchSize", func() {
+		purego.RegisterLibFunc(&_fnMPSGetCustomKernelMaxBatchSize, _mpscoreLib, "MPSGetCustomKernelMaxBatchSize")
+	})
 	_register("MPSGetImageType", func() { purego.RegisterLibFunc(&_fnMPSGetImageType, _mpscoreLib, "MPSGetImageType") })
-	_register("MPSImageBatchIncrementReadCount", func() { purego.RegisterLibFunc(&_fnMPSImageBatchIncrementReadCount, _mpscoreLib, "MPSImageBatchIncrementReadCount") })
+	_register("MPSImageBatchIncrementReadCount", func() {
+		purego.RegisterLibFunc(&_fnMPSImageBatchIncrementReadCount, _mpscoreLib, "MPSImageBatchIncrementReadCount")
+	})
 	_register("MPSImageBatchIterate", func() { purego.RegisterLibFunc(&_fnMPSImageBatchIterate, _mpscoreLib, "MPSImageBatchIterate") })
-	_register("MPSImageBatchResourceSize", func() { purego.RegisterLibFunc(&_fnMPSImageBatchResourceSize, _mpscoreLib, "MPSImageBatchResourceSize") })
+	_register("MPSImageBatchResourceSize", func() {
+		purego.RegisterLibFunc(&_fnMPSImageBatchResourceSize, _mpscoreLib, "MPSImageBatchResourceSize")
+	})
 	_register("MPSImageBatchSynchronize", func() { purego.RegisterLibFunc(&_fnMPSImageBatchSynchronize, _mpscoreLib, "MPSImageBatchSynchronize") })
 	_register("MPSSizeofMPSDataType", func() { purego.RegisterLibFunc(&_fnMPSSizeofMPSDataType, _mpscoreLib, "MPSSizeofMPSDataType") })
-	_register("MPSStateBatchIncrementReadCount", func() { purego.RegisterLibFunc(&_fnMPSStateBatchIncrementReadCount, _mpscoreLib, "MPSStateBatchIncrementReadCount") })
-	_register("MPSStateBatchResourceSize", func() { purego.RegisterLibFunc(&_fnMPSStateBatchResourceSize, _mpscoreLib, "MPSStateBatchResourceSize") })
+	_register("MPSStateBatchIncrementReadCount", func() {
+		purego.RegisterLibFunc(&_fnMPSStateBatchIncrementReadCount, _mpscoreLib, "MPSStateBatchIncrementReadCount")
+	})
+	_register("MPSStateBatchResourceSize", func() {
+		purego.RegisterLibFunc(&_fnMPSStateBatchResourceSize, _mpscoreLib, "MPSStateBatchResourceSize")
+	})
 	_register("MPSStateBatchSynchronize", func() { purego.RegisterLibFunc(&_fnMPSStateBatchSynchronize, _mpscoreLib, "MPSStateBatchSynchronize") })
 	_register("__builtin_clz", func() { purego.RegisterLibFunc(&___builtin_clz, _mpscoreLib, "__builtin_clz") })
 }

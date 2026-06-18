@@ -15,7 +15,9 @@ type AuthorizationPublicKeyCredentialPRFRegistrationInput struct {
 }
 
 // Unwrap returns the underlying [raw.ASAuthorizationPublicKeyCredentialPRFRegistrationInput].
-func (x *AuthorizationPublicKeyCredentialPRFRegistrationInput) Unwrap() *raw.ASAuthorizationPublicKeyCredentialPRFRegistrationInput { return x.inner }
+func (x *AuthorizationPublicKeyCredentialPRFRegistrationInput) Unwrap() *raw.ASAuthorizationPublicKeyCredentialPRFRegistrationInput {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -58,4 +60,3 @@ type AuthorizationPublicKeyCredentialPRFRegistrationInputable interface {
 }
 
 var _ AuthorizationPublicKeyCredentialPRFRegistrationInputable = (*AuthorizationPublicKeyCredentialPRFRegistrationInput)(nil)
-

@@ -19,7 +19,9 @@ type NDArrayQuantizedMatrixMultiplication struct {
 }
 
 // Unwrap returns the underlying [raw.MPSNDArrayQuantizedMatrixMultiplication].
-func (x *NDArrayQuantizedMatrixMultiplication) Unwrap() *raw.MPSNDArrayQuantizedMatrixMultiplication { return x.inner }
+func (x *NDArrayQuantizedMatrixMultiplication) Unwrap() *raw.MPSNDArrayQuantizedMatrixMultiplication {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -70,13 +72,21 @@ func (x *NDArrayQuantizedMatrixMultiplication) WithLabel(label string) *NDArrayQ
 	return x
 }
 
-func (x *NDArrayQuantizedMatrixMultiplication) asNDArrayMatrixMultiplication() *mpsndarray.MPSNDArrayMatrixMultiplication { return &x.inner.MPSNDArrayMatrixMultiplication }
+func (x *NDArrayQuantizedMatrixMultiplication) asNDArrayMatrixMultiplication() *mpsndarray.MPSNDArrayMatrixMultiplication {
+	return &x.inner.MPSNDArrayMatrixMultiplication
+}
 
-func (x *NDArrayQuantizedMatrixMultiplication) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel { return &x.inner.MPSNDArrayMatrixMultiplication.MPSNDArrayMultiaryKernel }
+func (x *NDArrayQuantizedMatrixMultiplication) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel {
+	return &x.inner.MPSNDArrayMatrixMultiplication.MPSNDArrayMultiaryKernel
+}
 
-func (x *NDArrayQuantizedMatrixMultiplication) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMatrixMultiplication.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
+func (x *NDArrayQuantizedMatrixMultiplication) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase {
+	return &x.inner.MPSNDArrayMatrixMultiplication.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase
+}
 
-func (x *NDArrayQuantizedMatrixMultiplication) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNDArrayMatrixMultiplication.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel }
+func (x *NDArrayQuantizedMatrixMultiplication) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSNDArrayMatrixMultiplication.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel
+}
 
 // NDArrayQuantizedMatrixMultiplicationable is the interface implemented by [NDArrayQuantizedMatrixMultiplication], for mocking and DI.
 type NDArrayQuantizedMatrixMultiplicationable interface {
@@ -89,4 +99,3 @@ type NDArrayQuantizedMatrixMultiplicationable interface {
 }
 
 var _ NDArrayQuantizedMatrixMultiplicationable = (*NDArrayQuantizedMatrixMultiplication)(nil)
-

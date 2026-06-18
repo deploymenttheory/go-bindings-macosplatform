@@ -16,16 +16,16 @@ type NEProxyServer struct {
 }
 
 var (
-	_clsNEProxyServer = _objcClass("NEProxyServer")
-	_nEProxyServerSelInitWithAddressPort = objc.RegisterName("initWithAddress:port:")
-	_nEProxyServerSelAddress = objc.RegisterName("address")
-	_nEProxyServerSelPort = objc.RegisterName("port")
-	_nEProxyServerSelAuthenticationRequired = objc.RegisterName("authenticationRequired")
+	_clsNEProxyServer                          = _objcClass("NEProxyServer")
+	_nEProxyServerSelInitWithAddressPort       = objc.RegisterName("initWithAddress:port:")
+	_nEProxyServerSelAddress                   = objc.RegisterName("address")
+	_nEProxyServerSelPort                      = objc.RegisterName("port")
+	_nEProxyServerSelAuthenticationRequired    = objc.RegisterName("authenticationRequired")
 	_nEProxyServerSelSetAuthenticationRequired = objc.RegisterName("setAuthenticationRequired:")
-	_nEProxyServerSelUsername = objc.RegisterName("username")
-	_nEProxyServerSelSetUsername = objc.RegisterName("setUsername:")
-	_nEProxyServerSelPassword = objc.RegisterName("password")
-	_nEProxyServerSelSetPassword = objc.RegisterName("setPassword:")
+	_nEProxyServerSelUsername                  = objc.RegisterName("username")
+	_nEProxyServerSelSetUsername               = objc.RegisterName("setUsername:")
+	_nEProxyServerSelPassword                  = objc.RegisterName("password")
+	_nEProxyServerSelSetPassword               = objc.RegisterName("setPassword:")
 )
 
 func NEProxyServerFromID(id objc.ID) *NEProxyServer {
@@ -41,14 +41,18 @@ func NEProxyServerFromID(id objc.ID) *NEProxyServer {
 // @method initWithAddress:port: @discussion This function initializes a newly-allocated NEProxyServer object @param address The string representation of the proxy server IP address. @param port The TCP port of the proxy server.
 func (o *NEProxyServer) InitWithAddressPort(address *foundation.NSString, port int) *NEProxyServer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEProxyServerSelInitWithAddressPort, address.Ptr(), port)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEProxyServerFromID(_ret)
 }
 
 // @property address @discussion The string representation of the proxy server IP address.
 func (o *NEProxyServer) Address() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEProxyServerSelAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -71,7 +75,9 @@ func (o *NEProxyServer) SetAuthenticationRequired(authenticationRequired bool) {
 // @property username @discussion The username portion of the authentication credential to use when communicating with the proxy server.
 func (o *NEProxyServer) Username() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEProxyServerSelUsername)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -82,11 +88,12 @@ func (o *NEProxyServer) SetUsername(username *foundation.NSString) {
 // @property password @discussion The password portion of the authentication credential to use when communicating with the proxy server. This property is only saved persistently if the username property is non-nil and non-empty and if the authenticationRequired flag is set.
 func (o *NEProxyServer) Password() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEProxyServerSelPassword)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NEProxyServer) SetPassword(password *foundation.NSString) {
 	o.Ptr().Send(_nEProxyServerSelSetPassword, password.Ptr())
 }
-

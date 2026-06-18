@@ -94,7 +94,9 @@ func (x *CustomMigrationStage) SetDidMigrateHandler(didMigrateHandler func(*raw.
 	x.inner.SetDidMigrateHandler(didMigrateHandler)
 }
 
-func (x *CustomMigrationStage) asMigrationStage() *raw.NSMigrationStage { return &x.inner.NSMigrationStage }
+func (x *CustomMigrationStage) asMigrationStage() *raw.NSMigrationStage {
+	return &x.inner.NSMigrationStage
+}
 
 // CustomMigrationStageable is the interface implemented by [CustomMigrationStage], for mocking and DI.
 type CustomMigrationStageable interface {
@@ -111,4 +113,3 @@ type CustomMigrationStageable interface {
 }
 
 var _ CustomMigrationStageable = (*CustomMigrationStage)(nil)
-

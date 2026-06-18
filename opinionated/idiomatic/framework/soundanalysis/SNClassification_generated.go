@@ -58,4 +58,3 @@ type Classificationable interface {
 }
 
 var _ Classificationable = (*Classification)(nil)
-

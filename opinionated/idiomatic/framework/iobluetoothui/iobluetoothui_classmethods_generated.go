@@ -65,4 +65,3 @@ func WithServiceBrowserControllerRef(serviceBrowserControllerRef unsafe.Pointer)
 	}
 	return &BluetoothServiceBrowserController{inner: _r}
 }
-

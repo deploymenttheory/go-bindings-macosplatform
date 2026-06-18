@@ -18,22 +18,22 @@ type UNNotificationContent struct {
 }
 
 var (
-	_clsUNNotificationContent = _objcClass("UNNotificationContent")
+	_clsUNNotificationContent                                   = _objcClass("UNNotificationContent")
 	_uNNotificationContentSelContentByUpdatingWithProviderError = objc.RegisterName("contentByUpdatingWithProvider:error:")
-	_uNNotificationContentSelAttachments = objc.RegisterName("attachments")
-	_uNNotificationContentSelBadge = objc.RegisterName("badge")
-	_uNNotificationContentSelBody = objc.RegisterName("body")
-	_uNNotificationContentSelCategoryIdentifier = objc.RegisterName("categoryIdentifier")
-	_uNNotificationContentSelSubtitle = objc.RegisterName("subtitle")
-	_uNNotificationContentSelThreadIdentifier = objc.RegisterName("threadIdentifier")
-	_uNNotificationContentSelTitle = objc.RegisterName("title")
-	_uNNotificationContentSelUserInfo = objc.RegisterName("userInfo")
-	_uNNotificationContentSelSummaryArgument = objc.RegisterName("summaryArgument")
-	_uNNotificationContentSelSummaryArgumentCount = objc.RegisterName("summaryArgumentCount")
-	_uNNotificationContentSelTargetContentIdentifier = objc.RegisterName("targetContentIdentifier")
-	_uNNotificationContentSelInterruptionLevel = objc.RegisterName("interruptionLevel")
-	_uNNotificationContentSelRelevanceScore = objc.RegisterName("relevanceScore")
-	_uNNotificationContentSelFilterCriteria = objc.RegisterName("filterCriteria")
+	_uNNotificationContentSelAttachments                        = objc.RegisterName("attachments")
+	_uNNotificationContentSelBadge                              = objc.RegisterName("badge")
+	_uNNotificationContentSelBody                               = objc.RegisterName("body")
+	_uNNotificationContentSelCategoryIdentifier                 = objc.RegisterName("categoryIdentifier")
+	_uNNotificationContentSelSubtitle                           = objc.RegisterName("subtitle")
+	_uNNotificationContentSelThreadIdentifier                   = objc.RegisterName("threadIdentifier")
+	_uNNotificationContentSelTitle                              = objc.RegisterName("title")
+	_uNNotificationContentSelUserInfo                           = objc.RegisterName("userInfo")
+	_uNNotificationContentSelSummaryArgument                    = objc.RegisterName("summaryArgument")
+	_uNNotificationContentSelSummaryArgumentCount               = objc.RegisterName("summaryArgumentCount")
+	_uNNotificationContentSelTargetContentIdentifier            = objc.RegisterName("targetContentIdentifier")
+	_uNNotificationContentSelInterruptionLevel                  = objc.RegisterName("interruptionLevel")
+	_uNNotificationContentSelRelevanceScore                     = objc.RegisterName("relevanceScore")
+	_uNNotificationContentSelFilterCriteria                     = objc.RegisterName("filterCriteria")
 )
 
 func UNNotificationContentFromID(id objc.ID) *UNNotificationContent {
@@ -50,7 +50,9 @@ func UNNotificationContentFromID(id objc.ID) *UNNotificationContent {
 func (o *UNNotificationContent) ContentByUpdatingWithProviderError(provider UNNotificationContentProviding) (*UNNotificationContent, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNNotificationContentSelContentByUpdatingWithProviderError, provider, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -59,43 +61,57 @@ func (o *UNNotificationContent) ContentByUpdatingWithProviderError(provider UNNo
 
 func (o *UNNotificationContent) Attachments() *foundation.NSArray[*UNNotificationAttachment] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNNotificationContentSelAttachments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*UNNotificationAttachment](_ret)
 }
 
 func (o *UNNotificationContent) Badge() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNNotificationContentSelBadge)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *UNNotificationContent) Body() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNNotificationContentSelBody)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *UNNotificationContent) CategoryIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNNotificationContentSelCategoryIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *UNNotificationContent) Subtitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNNotificationContentSelSubtitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *UNNotificationContent) ThreadIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNNotificationContentSelThreadIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *UNNotificationContent) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNNotificationContentSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -107,7 +123,9 @@ func (o *UNNotificationContent) UserInfo() *foundation.NSDictionary[objc.ID, obj
 // The argument to be inserted in the summary for this notification.
 func (o *UNNotificationContent) SummaryArgument() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNNotificationContentSelSummaryArgument)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -119,7 +137,9 @@ func (o *UNNotificationContent) SummaryArgumentCount() uint {
 
 func (o *UNNotificationContent) TargetContentIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNNotificationContentSelTargetContentIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -135,7 +155,8 @@ func (o *UNNotificationContent) RelevanceScore() float64 {
 
 func (o *UNNotificationContent) FilterCriteria() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNNotificationContentSelFilterCriteria)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

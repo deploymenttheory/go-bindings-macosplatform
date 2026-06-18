@@ -16,11 +16,11 @@ type MEDecodedMessageBanner struct {
 }
 
 var (
-	_clsMEDecodedMessageBanner = _objcClass("MEDecodedMessageBanner")
+	_clsMEDecodedMessageBanner                                           = _objcClass("MEDecodedMessageBanner")
 	_mEDecodedMessageBannerSelInitWithTitlePrimaryActionTitleDismissable = objc.RegisterName("initWithTitle:primaryActionTitle:dismissable:")
-	_mEDecodedMessageBannerSelTitle = objc.RegisterName("title")
-	_mEDecodedMessageBannerSelPrimaryActionTitle = objc.RegisterName("primaryActionTitle")
-	_mEDecodedMessageBannerSelIsDismissable = objc.RegisterName("isDismissable")
+	_mEDecodedMessageBannerSelTitle                                      = objc.RegisterName("title")
+	_mEDecodedMessageBannerSelPrimaryActionTitle                         = objc.RegisterName("primaryActionTitle")
+	_mEDecodedMessageBannerSelIsDismissable                              = objc.RegisterName("isDismissable")
 )
 
 func MEDecodedMessageBannerFromID(id objc.ID) *MEDecodedMessageBanner {
@@ -35,19 +35,25 @@ func MEDecodedMessageBannerFromID(id objc.ID) *MEDecodedMessageBanner {
 
 func (o *MEDecodedMessageBanner) InitWithTitlePrimaryActionTitleDismissable(title *foundation.NSString, primaryActionTitle *foundation.NSString, dismissable bool) *MEDecodedMessageBanner {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEDecodedMessageBannerSelInitWithTitlePrimaryActionTitleDismissable, title.Ptr(), primaryActionTitle.Ptr(), dismissable)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEDecodedMessageBannerFromID(_ret)
 }
 
 func (o *MEDecodedMessageBanner) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEDecodedMessageBannerSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MEDecodedMessageBanner) PrimaryActionTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEDecodedMessageBannerSelPrimaryActionTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -55,4 +61,3 @@ func (o *MEDecodedMessageBanner) IsDismissable() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mEDecodedMessageBannerSelIsDismissable)
 	return _ret
 }
-

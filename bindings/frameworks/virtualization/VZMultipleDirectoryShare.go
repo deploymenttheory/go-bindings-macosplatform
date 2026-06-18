@@ -18,12 +18,12 @@ type VZMultipleDirectoryShare struct {
 }
 
 var (
-	_clsVZMultipleDirectoryShare = _objcClass("VZMultipleDirectoryShare")
-	_vZMultipleDirectoryShareSelInit = objc.RegisterName("init")
-	_vZMultipleDirectoryShareSelInitWithDirectories = objc.RegisterName("initWithDirectories:")
-	_vZMultipleDirectoryShareSelValidateNameError = objc.RegisterName("validateName:error:")
+	_clsVZMultipleDirectoryShare                          = _objcClass("VZMultipleDirectoryShare")
+	_vZMultipleDirectoryShareSelInit                      = objc.RegisterName("init")
+	_vZMultipleDirectoryShareSelInitWithDirectories       = objc.RegisterName("initWithDirectories:")
+	_vZMultipleDirectoryShareSelValidateNameError         = objc.RegisterName("validateName:error:")
 	_vZMultipleDirectoryShareSelCanonicalizedNameFromName = objc.RegisterName("canonicalizedNameFromName:")
-	_vZMultipleDirectoryShareSelDirectories = objc.RegisterName("directories")
+	_vZMultipleDirectoryShareSelDirectories               = objc.RegisterName("directories")
 )
 
 func VZMultipleDirectoryShareFromID(id objc.ID) *VZMultipleDirectoryShare {
@@ -39,14 +39,18 @@ func VZMultipleDirectoryShareFromID(id objc.ID) *VZMultipleDirectoryShare {
 // @abstract Initialize the directory share with an empty set of directories.
 func (o *VZMultipleDirectoryShare) Init() *VZMultipleDirectoryShare {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMultipleDirectoryShareSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZMultipleDirectoryShareFromID(_ret)
 }
 
 // @abstract Initialize the directory share with a set of directories on the host. @param directories Directories on the host to expose to the guest by name. @discussion The dictionary string keys will be the name for the directory. The keys must be valid names or an exception will be raised. @see +[VZMultipleDirectoryShare validateName:error:]
 func (o *VZMultipleDirectoryShare) InitWithDirectories(directories *foundation.NSDictionary[*foundation.NSString, *VZSharedDirectory]) *VZMultipleDirectoryShare {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMultipleDirectoryShareSelInitWithDirectories, directories)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZMultipleDirectoryShareFromID(_ret)
 }
 
@@ -63,7 +67,9 @@ func VZMultipleDirectoryShareValidateNameError(name *foundation.NSString) (bool,
 // @abstract Canonicalize a string to be a valid directory name. @param name The name to canonicalize. @discussion This returns nil when it cannot produce a valid name. When not nil, the result is a valid directory name. @see +[VZMultipleDirectoryShare validateName:error:]
 func VZMultipleDirectoryShareCanonicalizedNameFromName(name *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVZMultipleDirectoryShare), _vZMultipleDirectoryShareSelCanonicalizedNameFromName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -72,4 +78,3 @@ func (o *VZMultipleDirectoryShare) Directories() *foundation.NSDictionary[*found
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *VZSharedDirectory]](o.Ptr(), _vZMultipleDirectoryShareSelDirectories)
 	return _ret
 }
-

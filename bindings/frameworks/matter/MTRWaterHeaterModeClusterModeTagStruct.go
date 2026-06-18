@@ -16,11 +16,11 @@ type MTRWaterHeaterModeClusterModeTagStruct struct {
 }
 
 var (
-	_clsMTRWaterHeaterModeClusterModeTagStruct = _objcClass("MTRWaterHeaterModeClusterModeTagStruct")
-	_mTRWaterHeaterModeClusterModeTagStructSelMfgCode = objc.RegisterName("mfgCode")
+	_clsMTRWaterHeaterModeClusterModeTagStruct           = _objcClass("MTRWaterHeaterModeClusterModeTagStruct")
+	_mTRWaterHeaterModeClusterModeTagStructSelMfgCode    = objc.RegisterName("mfgCode")
 	_mTRWaterHeaterModeClusterModeTagStructSelSetMfgCode = objc.RegisterName("setMfgCode:")
-	_mTRWaterHeaterModeClusterModeTagStructSelValue = objc.RegisterName("value")
-	_mTRWaterHeaterModeClusterModeTagStructSelSetValue = objc.RegisterName("setValue:")
+	_mTRWaterHeaterModeClusterModeTagStructSelValue      = objc.RegisterName("value")
+	_mTRWaterHeaterModeClusterModeTagStructSelSetValue   = objc.RegisterName("setValue:")
 )
 
 func MTRWaterHeaterModeClusterModeTagStructFromID(id objc.ID) *MTRWaterHeaterModeClusterModeTagStruct {
@@ -35,7 +35,9 @@ func MTRWaterHeaterModeClusterModeTagStructFromID(id objc.ID) *MTRWaterHeaterMod
 
 func (o *MTRWaterHeaterModeClusterModeTagStruct) MfgCode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRWaterHeaterModeClusterModeTagStructSelMfgCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRWaterHeaterModeClusterModeTagStruct) SetMfgCode(mfgCode *foundation.
 
 func (o *MTRWaterHeaterModeClusterModeTagStruct) Value() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRWaterHeaterModeClusterModeTagStructSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRWaterHeaterModeClusterModeTagStruct) SetValue(value *foundation.NSNumber) {
 	o.Ptr().Send(_mTRWaterHeaterModeClusterModeTagStructSelSetValue, value.Ptr())
 }
-

@@ -25,4 +25,3 @@ func PDFAnnotationCircleFromID(id objc.ID) *PDFAnnotationCircle {
 	purego.Track(o)
 	return o
 }
-

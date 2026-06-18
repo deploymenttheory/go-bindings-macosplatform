@@ -17,7 +17,9 @@ type VirtualConferenceURLDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.EKVirtualConferenceURLDescriptor].
-func (x *VirtualConferenceURLDescriptor) Unwrap() *raw.EKVirtualConferenceURLDescriptor { return x.inner }
+func (x *VirtualConferenceURLDescriptor) Unwrap() *raw.EKVirtualConferenceURLDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -60,4 +62,3 @@ type VirtualConferenceURLDescriptorable interface {
 }
 
 var _ VirtualConferenceURLDescriptorable = (*VirtualConferenceURLDescriptor)(nil)
-

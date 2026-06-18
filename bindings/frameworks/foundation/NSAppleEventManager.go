@@ -18,18 +18,18 @@ type NSAppleEventManager struct {
 }
 
 var (
-	_clsNSAppleEventManager = _objcClass("NSAppleEventManager")
-	_nSAppleEventManagerSelSharedAppleEventManager = objc.RegisterName("sharedAppleEventManager")
+	_clsNSAppleEventManager                                                  = _objcClass("NSAppleEventManager")
+	_nSAppleEventManagerSelSharedAppleEventManager                           = objc.RegisterName("sharedAppleEventManager")
 	_nSAppleEventManagerSelSetEventHandlerAndSelectorForEventClassAndEventID = objc.RegisterName("setEventHandler:andSelector:forEventClass:andEventID:")
-	_nSAppleEventManagerSelRemoveEventHandlerForEventClassAndEventID = objc.RegisterName("removeEventHandlerForEventClass:andEventID:")
-	_nSAppleEventManagerSelDispatchRawAppleEventWithRawReplyHandlerRefCon = objc.RegisterName("dispatchRawAppleEvent:withRawReply:handlerRefCon:")
-	_nSAppleEventManagerSelSuspendCurrentAppleEvent = objc.RegisterName("suspendCurrentAppleEvent")
-	_nSAppleEventManagerSelAppleEventForSuspensionID = objc.RegisterName("appleEventForSuspensionID:")
-	_nSAppleEventManagerSelReplyAppleEventForSuspensionID = objc.RegisterName("replyAppleEventForSuspensionID:")
+	_nSAppleEventManagerSelRemoveEventHandlerForEventClassAndEventID         = objc.RegisterName("removeEventHandlerForEventClass:andEventID:")
+	_nSAppleEventManagerSelDispatchRawAppleEventWithRawReplyHandlerRefCon    = objc.RegisterName("dispatchRawAppleEvent:withRawReply:handlerRefCon:")
+	_nSAppleEventManagerSelSuspendCurrentAppleEvent                          = objc.RegisterName("suspendCurrentAppleEvent")
+	_nSAppleEventManagerSelAppleEventForSuspensionID                         = objc.RegisterName("appleEventForSuspensionID:")
+	_nSAppleEventManagerSelReplyAppleEventForSuspensionID                    = objc.RegisterName("replyAppleEventForSuspensionID:")
 	_nSAppleEventManagerSelSetCurrentAppleEventAndReplyEventWithSuspensionID = objc.RegisterName("setCurrentAppleEventAndReplyEventWithSuspensionID:")
-	_nSAppleEventManagerSelResumeWithSuspensionID = objc.RegisterName("resumeWithSuspensionID:")
-	_nSAppleEventManagerSelCurrentAppleEvent = objc.RegisterName("currentAppleEvent")
-	_nSAppleEventManagerSelCurrentReplyAppleEvent = objc.RegisterName("currentReplyAppleEvent")
+	_nSAppleEventManagerSelResumeWithSuspensionID                            = objc.RegisterName("resumeWithSuspensionID:")
+	_nSAppleEventManagerSelCurrentAppleEvent                                 = objc.RegisterName("currentAppleEvent")
+	_nSAppleEventManagerSelCurrentReplyAppleEvent                            = objc.RegisterName("currentReplyAppleEvent")
 )
 
 func NSAppleEventManagerFromID(id objc.ID) *NSAppleEventManager {
@@ -44,7 +44,9 @@ func NSAppleEventManagerFromID(id objc.ID) *NSAppleEventManager {
 
 func NSAppleEventManagerSharedAppleEventManager() *NSAppleEventManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventManager), _nSAppleEventManagerSelSharedAppleEventManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventManagerFromID(_ret)
 }
 
@@ -68,13 +70,17 @@ func (o *NSAppleEventManager) SuspendCurrentAppleEvent() unsafe.Pointer {
 
 func (o *NSAppleEventManager) AppleEventForSuspensionID(suspensionID unsafe.Pointer) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventManagerSelAppleEventForSuspensionID, suspensionID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
 func (o *NSAppleEventManager) ReplyAppleEventForSuspensionID(suspensionID unsafe.Pointer) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventManagerSelReplyAppleEventForSuspensionID, suspensionID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
@@ -88,13 +94,16 @@ func (o *NSAppleEventManager) ResumeWithSuspensionID(suspensionID unsafe.Pointer
 
 func (o *NSAppleEventManager) CurrentAppleEvent() *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventManagerSelCurrentAppleEvent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
 func (o *NSAppleEventManager) CurrentReplyAppleEvent() *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventManagerSelCurrentReplyAppleEvent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
-

@@ -82,4 +82,3 @@ type CaptureDeskViewApplicationable interface {
 }
 
 var _ CaptureDeskViewApplicationable = (*CaptureDeskViewApplication)(nil)
-

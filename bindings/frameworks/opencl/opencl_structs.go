@@ -18,7 +18,7 @@ type IOSurface struct{}
 // C struct: _cl_buffer_region
 type ClBufferRegion struct {
 	Origin uint
-	Size uint
+	Size   uint
 }
 
 // C struct: _cl_command_queue
@@ -43,21 +43,21 @@ type ClEvent struct{}
 
 // C struct: _cl_image_desc
 type ClImageDesc struct {
-	Image_type uint32
-	Image_width uint
-	Image_height uint
-	Image_depth uint
-	Image_array_size uint
-	Image_row_pitch uint
+	Image_type        uint32
+	Image_width       uint
+	Image_height      uint
+	Image_depth       uint
+	Image_array_size  uint
+	Image_row_pitch   uint
 	Image_slice_pitch uint
-	Num_mip_levels uint32
-	Num_samples uint32
-	Buffer unsafe.Pointer
+	Num_mip_levels    uint32
+	Num_samples       uint32
+	Buffer            unsafe.Pointer
 }
 
 // C struct: _cl_image_format
 type ClImageFormat struct {
-	Image_channel_order uint32
+	Image_channel_order     uint32
 	Image_channel_data_type uint32
 }
 
@@ -71,10 +71,10 @@ type ClMem struct{}
 
 // C struct: _cl_ndrange
 type ClNdrange struct {
-	Work_dim uint
+	Work_dim           uint
 	Global_work_offset [3]uint
-	Global_work_size [3]uint
-	Local_work_size [3]uint
+	Global_work_size   [3]uint
+	Local_work_size    [3]uint
 }
 
 // C struct: _cl_platform_id
@@ -88,4 +88,3 @@ type ClProgram struct{}
 // C struct: _cl_sampler
 // ClSampler is an opaque type.
 type ClSampler struct{}
-

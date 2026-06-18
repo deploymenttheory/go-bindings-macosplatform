@@ -106,4 +106,3 @@ type TextViewportLayoutControllerable interface {
 }
 
 var _ TextViewportLayoutControllerable = (*TextViewportLayoutController)(nil)
-

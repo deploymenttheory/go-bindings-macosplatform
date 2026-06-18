@@ -165,4 +165,3 @@ type Taggerable interface {
 }
 
 var _ Taggerable = (*Tagger)(nil)
-

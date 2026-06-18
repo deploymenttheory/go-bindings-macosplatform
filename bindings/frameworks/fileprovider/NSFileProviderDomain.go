@@ -16,29 +16,29 @@ type NSFileProviderDomain struct {
 }
 
 var (
-	_clsNSFileProviderDomain = _objcClass("NSFileProviderDomain")
-	_nSFileProviderDomainSelInitWithIdentifierDisplayName = objc.RegisterName("initWithIdentifier:displayName:")
+	_clsNSFileProviderDomain                                     = _objcClass("NSFileProviderDomain")
+	_nSFileProviderDomainSelInitWithIdentifierDisplayName        = objc.RegisterName("initWithIdentifier:displayName:")
 	_nSFileProviderDomainSelInitWithDisplayNameUserInfoVolumeURL = objc.RegisterName("initWithDisplayName:userInfo:volumeURL:")
-	_nSFileProviderDomainSelIdentifier = objc.RegisterName("identifier")
-	_nSFileProviderDomainSelDisplayName = objc.RegisterName("displayName")
-	_nSFileProviderDomainSelIsDisconnected = objc.RegisterName("isDisconnected")
-	_nSFileProviderDomainSelUserEnabled = objc.RegisterName("userEnabled")
-	_nSFileProviderDomainSelIsHidden = objc.RegisterName("isHidden")
-	_nSFileProviderDomainSelSetHidden = objc.RegisterName("setHidden:")
-	_nSFileProviderDomainSelIsReplicated = objc.RegisterName("isReplicated")
-	_nSFileProviderDomainSelTestingModes = objc.RegisterName("testingModes")
-	_nSFileProviderDomainSelSetTestingModes = objc.RegisterName("setTestingModes:")
-	_nSFileProviderDomainSelBackingStoreIdentity = objc.RegisterName("backingStoreIdentity")
-	_nSFileProviderDomainSelSupportsSyncingTrash = objc.RegisterName("supportsSyncingTrash")
-	_nSFileProviderDomainSelSetSupportsSyncingTrash = objc.RegisterName("setSupportsSyncingTrash:")
-	_nSFileProviderDomainSelVolumeUUID = objc.RegisterName("volumeUUID")
-	_nSFileProviderDomainSelUserInfo = objc.RegisterName("userInfo")
-	_nSFileProviderDomainSelSetUserInfo = objc.RegisterName("setUserInfo:")
-	_nSFileProviderDomainSelReplicatedKnownFolders = objc.RegisterName("replicatedKnownFolders")
-	_nSFileProviderDomainSelSupportedKnownFolders = objc.RegisterName("supportedKnownFolders")
-	_nSFileProviderDomainSelSetSupportedKnownFolders = objc.RegisterName("setSupportedKnownFolders:")
-	_nSFileProviderDomainSelSupportsStringSearchRequest = objc.RegisterName("supportsStringSearchRequest")
-	_nSFileProviderDomainSelSetSupportsStringSearchRequest = objc.RegisterName("setSupportsStringSearchRequest:")
+	_nSFileProviderDomainSelIdentifier                           = objc.RegisterName("identifier")
+	_nSFileProviderDomainSelDisplayName                          = objc.RegisterName("displayName")
+	_nSFileProviderDomainSelIsDisconnected                       = objc.RegisterName("isDisconnected")
+	_nSFileProviderDomainSelUserEnabled                          = objc.RegisterName("userEnabled")
+	_nSFileProviderDomainSelIsHidden                             = objc.RegisterName("isHidden")
+	_nSFileProviderDomainSelSetHidden                            = objc.RegisterName("setHidden:")
+	_nSFileProviderDomainSelIsReplicated                         = objc.RegisterName("isReplicated")
+	_nSFileProviderDomainSelTestingModes                         = objc.RegisterName("testingModes")
+	_nSFileProviderDomainSelSetTestingModes                      = objc.RegisterName("setTestingModes:")
+	_nSFileProviderDomainSelBackingStoreIdentity                 = objc.RegisterName("backingStoreIdentity")
+	_nSFileProviderDomainSelSupportsSyncingTrash                 = objc.RegisterName("supportsSyncingTrash")
+	_nSFileProviderDomainSelSetSupportsSyncingTrash              = objc.RegisterName("setSupportsSyncingTrash:")
+	_nSFileProviderDomainSelVolumeUUID                           = objc.RegisterName("volumeUUID")
+	_nSFileProviderDomainSelUserInfo                             = objc.RegisterName("userInfo")
+	_nSFileProviderDomainSelSetUserInfo                          = objc.RegisterName("setUserInfo:")
+	_nSFileProviderDomainSelReplicatedKnownFolders               = objc.RegisterName("replicatedKnownFolders")
+	_nSFileProviderDomainSelSupportedKnownFolders                = objc.RegisterName("supportedKnownFolders")
+	_nSFileProviderDomainSelSetSupportedKnownFolders             = objc.RegisterName("setSupportedKnownFolders:")
+	_nSFileProviderDomainSelSupportsStringSearchRequest          = objc.RegisterName("supportsStringSearchRequest")
+	_nSFileProviderDomainSelSetSupportsStringSearchRequest       = objc.RegisterName("setSupportsStringSearchRequest:")
 )
 
 func NSFileProviderDomainFromID(id objc.ID) *NSFileProviderDomain {
@@ -54,28 +54,36 @@ func NSFileProviderDomainFromID(id objc.ID) *NSFileProviderDomain {
 // Initialize a new replicated NSFileProviderDomain The extension will be implementing NSFileProviderReplicatedExtension. The file provider extension implementation can pick any @c identifier as it sees fit to identify the group of items. The identifier must not contain any characters from this set: [/:] In order to migrate a non-replicated domain to a replicated one, implementers have to make sure that they do not use the default domain, and then call +[NSFileProviderManager addDomain:completionHandler:] using the NSFileProviderDomain object returned by that init method. A domain with a specific identifier can be added multiple times; subsequent adds will update the properties of the existing domain. If a replicated domain is added "on top" of a non-replicated domain, the domain will be migrated to be replicated; existing bookmarks will remain valid, but the (externally visible) location of items will change to reflect the replicated location. It is not possible to migrate the default domain in this manner (since the default domain can not be added). It is recommended to migrate usage of the default domain to a domain with an explicit identifier instead. @param displayName a user visible string representing the group of items the file provider extension is using.
 func (o *NSFileProviderDomain) InitWithIdentifierDisplayName(identifier *foundation.NSString, displayName *foundation.NSString) *NSFileProviderDomain {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderDomainSelInitWithIdentifierDisplayName, identifier.Ptr(), displayName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileProviderDomainFromID(_ret)
 }
 
 // Initialize a new replicated NSFileProviderDomain on a specific volume. If a volumeURL is specified, and that volume is eligible, the domain will be located on this volume. The URL is used to designate a volume but doesn't influence where on this volume is the domain going to be stored. In order to avoid domainID collisions between volumes, the NSFileProviderDomainIdentifier of external domains are generated randomly by FileProvider. The provider should therefore use the userInfo to associate all necessary information to map the created object to the corresponding account. The userInfo will be persisted on the volume where the domain was created. If that is an external volume, the userInfo can be used on other devices to assist in setting up the domain on those devices. See the`NSFileProviderExternalVolumeHandling` protocol for more details.
 func (o *NSFileProviderDomain) InitWithDisplayNameUserInfoVolumeURL(displayName *foundation.NSString, userInfo *foundation.NSDictionary[objc.ID, objc.ID], volumeURL *foundation.NSURL) *NSFileProviderDomain {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderDomainSelInitWithDisplayNameUserInfoVolumeURL, displayName.Ptr(), userInfo, volumeURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileProviderDomainFromID(_ret)
 }
 
 // The identifier - as provided by the file provider extension.
 func (o *NSFileProviderDomain) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderDomainSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The display name shown by the system to represent this domain.
 func (o *NSFileProviderDomain) DisplayName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderDomainSelDisplayName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -120,7 +128,9 @@ func (o *NSFileProviderDomain) SetTestingModes(testingModes NSFileProviderDomain
 // Identity of the backing store of the domain on the system. This property only applies for extensions that implement NSFileProviderReplicatedExtension. This provides an identifier that uniquely identifies the backing store used by the system for the domain. When this identifier has changed, the system has dropped its backing store and is building a new one. The system may decide to rebuild its backing store if it got corrupted. The backing store can also be rebuilt as a response to the provider calling `-[NSFileProviderManager reimportItemsBelowItemWithIdentifier:completionHandler:]`. It is guaranteed that calling reimport on the root item will cause the backing store to be rebuilt, but the system can also decide to do so when reimport is called on other items. When rebuilding the backing store, the system will invalidate any extension instance associated to that domain. As a consequence, the identity of the backing store associated with that domain is guaranteed to be stable for the lifetime of the NSFileProviderReplicatedExtension instance.
 func (o *NSFileProviderDomain) BackingStoreIdentity() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderDomainSelBackingStoreIdentity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -136,7 +146,9 @@ func (o *NSFileProviderDomain) SetSupportsSyncingTrash(supportsSyncingTrash bool
 
 func (o *NSFileProviderDomain) VolumeUUID() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderDomainSelVolumeUUID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
 
@@ -175,4 +187,3 @@ func (o *NSFileProviderDomain) SupportsStringSearchRequest() bool {
 func (o *NSFileProviderDomain) SetSupportsStringSearchRequest(supportsStringSearchRequest bool) {
 	o.Ptr().Send(_nSFileProviderDomainSelSetSupportsStringSearchRequest, supportsStringSearchRequest)
 }
-

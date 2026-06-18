@@ -17,17 +17,17 @@ type NSHelpManager struct {
 }
 
 var (
-	_clsNSHelpManager = _objcClass("NSHelpManager")
-	_nSHelpManagerSelSetContextHelpForObject = objc.RegisterName("setContextHelp:forObject:")
-	_nSHelpManagerSelRemoveContextHelpForObject = objc.RegisterName("removeContextHelpForObject:")
-	_nSHelpManagerSelContextHelpForObject = objc.RegisterName("contextHelpForObject:")
+	_clsNSHelpManager                                     = _objcClass("NSHelpManager")
+	_nSHelpManagerSelSetContextHelpForObject              = objc.RegisterName("setContextHelp:forObject:")
+	_nSHelpManagerSelRemoveContextHelpForObject           = objc.RegisterName("removeContextHelpForObject:")
+	_nSHelpManagerSelContextHelpForObject                 = objc.RegisterName("contextHelpForObject:")
 	_nSHelpManagerSelShowContextHelpForObjectLocationHint = objc.RegisterName("showContextHelpForObject:locationHint:")
-	_nSHelpManagerSelOpenHelpAnchorInBook = objc.RegisterName("openHelpAnchor:inBook:")
-	_nSHelpManagerSelFindStringInBook = objc.RegisterName("findString:inBook:")
-	_nSHelpManagerSelRegisterBooksInBundle = objc.RegisterName("registerBooksInBundle:")
-	_nSHelpManagerSelSharedHelpManager = objc.RegisterName("sharedHelpManager")
-	_nSHelpManagerSelIsContextHelpModeActive = objc.RegisterName("isContextHelpModeActive")
-	_nSHelpManagerSelSetContextHelpModeActive = objc.RegisterName("setContextHelpModeActive:")
+	_nSHelpManagerSelOpenHelpAnchorInBook                 = objc.RegisterName("openHelpAnchor:inBook:")
+	_nSHelpManagerSelFindStringInBook                     = objc.RegisterName("findString:inBook:")
+	_nSHelpManagerSelRegisterBooksInBundle                = objc.RegisterName("registerBooksInBundle:")
+	_nSHelpManagerSelSharedHelpManager                    = objc.RegisterName("sharedHelpManager")
+	_nSHelpManagerSelIsContextHelpModeActive              = objc.RegisterName("isContextHelpModeActive")
+	_nSHelpManagerSelSetContextHelpModeActive             = objc.RegisterName("setContextHelpModeActive:")
 )
 
 func NSHelpManagerFromID(id objc.ID) *NSHelpManager {
@@ -50,7 +50,9 @@ func (o *NSHelpManager) RemoveContextHelpForObject(object objc.ID) {
 
 func (o *NSHelpManager) ContextHelpForObject(object objc.ID) *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSHelpManagerSelContextHelpForObject, object)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
@@ -74,7 +76,9 @@ func (o *NSHelpManager) RegisterBooksInBundle(bundle *foundation.NSBundle) bool 
 
 func NSHelpManagerSharedHelpManager() *NSHelpManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSHelpManager), _nSHelpManagerSelSharedHelpManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSHelpManagerFromID(_ret)
 }
 
@@ -86,4 +90,3 @@ func NSHelpManagerIsContextHelpModeActive() bool {
 func NSHelpManagerSetContextHelpModeActive(contextHelpModeActive bool) {
 	objc.ID(_clsNSHelpManager).Send(_nSHelpManagerSelSetContextHelpModeActive, contextHelpModeActive)
 }
-

@@ -43,4 +43,3 @@ type EthernetInterfaceable interface {
 }
 
 var _ EthernetInterfaceable = (*EthernetInterface)(nil)
-

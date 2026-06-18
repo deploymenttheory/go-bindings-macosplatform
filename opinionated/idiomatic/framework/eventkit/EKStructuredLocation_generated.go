@@ -100,4 +100,3 @@ type StructuredLocationable interface {
 }
 
 var _ StructuredLocationable = (*StructuredLocation)(nil)
-

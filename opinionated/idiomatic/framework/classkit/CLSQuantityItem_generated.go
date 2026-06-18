@@ -73,4 +73,3 @@ type QuantityItemable interface {
 }
 
 var _ QuantityItemable = (*QuantityItem)(nil)
-

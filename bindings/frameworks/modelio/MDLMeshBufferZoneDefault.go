@@ -16,8 +16,8 @@ type MDLMeshBufferZoneDefault struct {
 }
 
 var (
-	_clsMDLMeshBufferZoneDefault = _objcClass("MDLMeshBufferZoneDefault")
-	_mDLMeshBufferZoneDefaultSelCapacity = objc.RegisterName("capacity")
+	_clsMDLMeshBufferZoneDefault          = _objcClass("MDLMeshBufferZoneDefault")
+	_mDLMeshBufferZoneDefaultSelCapacity  = objc.RegisterName("capacity")
 	_mDLMeshBufferZoneDefaultSelAllocator = objc.RegisterName("allocator")
 )
 
@@ -40,4 +40,3 @@ func (o *MDLMeshBufferZoneDefault) Allocator() MDLMeshBufferAllocator {
 	_ret := objc.Send[MDLMeshBufferAllocator](o.Ptr(), _mDLMeshBufferZoneDefaultSelAllocator)
 	return _ret
 }
-

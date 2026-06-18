@@ -18,28 +18,28 @@ type MTRBaseDevice struct {
 }
 
 var (
-	_clsMTRBaseDevice = _objcClass("MTRBaseDevice")
-	_mTRBaseDeviceSelDeviceWithNodeIDController = objc.RegisterName("deviceWithNodeID:controller:")
-	_mTRBaseDeviceSelSubscribeWithQueueParamsClusterStateCacheContainerAttributeReportHandlerEventReportHandlerErrorHandlerSubscriptionEstablishedResubscriptionScheduled = objc.RegisterName("subscribeWithQueue:params:clusterStateCacheContainer:attributeReportHandler:eventReportHandler:errorHandler:subscriptionEstablished:resubscriptionScheduled:")
-	_mTRBaseDeviceSelReadAttributesWithEndpointIDClusterIDAttributeIDParamsQueueCompletion = objc.RegisterName("readAttributesWithEndpointID:clusterID:attributeID:params:queue:completion:")
-	_mTRBaseDeviceSelReadAttributePathsEventPathsParamsQueueCompletion = objc.RegisterName("readAttributePaths:eventPaths:params:queue:completion:")
-	_mTRBaseDeviceSelWriteAttributeWithEndpointIDClusterIDAttributeIDValueTimedWriteTimeoutQueueCompletion = objc.RegisterName("writeAttributeWithEndpointID:clusterID:attributeID:value:timedWriteTimeout:queue:completion:")
-	_mTRBaseDeviceSelInvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsTimedInvokeTimeoutQueueCompletion = objc.RegisterName("invokeCommandWithEndpointID:clusterID:commandID:commandFields:timedInvokeTimeout:queue:completion:")
-	_mTRBaseDeviceSelSubscribeToAttributesWithEndpointIDClusterIDAttributeIDParamsQueueReportHandlerSubscriptionEstablished = objc.RegisterName("subscribeToAttributesWithEndpointID:clusterID:attributeID:params:queue:reportHandler:subscriptionEstablished:")
-	_mTRBaseDeviceSelSubscribeToAttributePathsEventPathsParamsQueueReportHandlerSubscriptionEstablishedResubscriptionScheduled = objc.RegisterName("subscribeToAttributePaths:eventPaths:params:queue:reportHandler:subscriptionEstablished:resubscriptionScheduled:")
-	_mTRBaseDeviceSelDeregisterReportHandlersWithQueueCompletion = objc.RegisterName("deregisterReportHandlersWithQueue:completion:")
-	_mTRBaseDeviceSelOpenCommissioningWindowWithSetupPasscodeDiscriminatorDurationQueueCompletion = objc.RegisterName("openCommissioningWindowWithSetupPasscode:discriminator:duration:queue:completion:")
-	_mTRBaseDeviceSelOpenCommissioningWindowWithDiscriminatorDurationQueueCompletion = objc.RegisterName("openCommissioningWindowWithDiscriminator:duration:queue:completion:")
-	_mTRBaseDeviceSelReadEventsWithEndpointIDClusterIDEventIDParamsQueueCompletion = objc.RegisterName("readEventsWithEndpointID:clusterID:eventID:params:queue:completion:")
-	_mTRBaseDeviceSelSubscribeToEventsWithEndpointIDClusterIDEventIDParamsQueueReportHandlerSubscriptionEstablished = objc.RegisterName("subscribeToEventsWithEndpointID:clusterID:eventID:params:queue:reportHandler:subscriptionEstablished:")
-	_mTRBaseDeviceSelDownloadLogOfTypeTimeoutQueueCompletion = objc.RegisterName("downloadLogOfType:timeout:queue:completion:")
-	_mTRBaseDeviceSelSessionTransportType = objc.RegisterName("sessionTransportType")
+	_clsMTRBaseDevice                                                                                                                                                               = _objcClass("MTRBaseDevice")
+	_mTRBaseDeviceSelDeviceWithNodeIDController                                                                                                                                     = objc.RegisterName("deviceWithNodeID:controller:")
+	_mTRBaseDeviceSelSubscribeWithQueueParamsClusterStateCacheContainerAttributeReportHandlerEventReportHandlerErrorHandlerSubscriptionEstablishedResubscriptionScheduled           = objc.RegisterName("subscribeWithQueue:params:clusterStateCacheContainer:attributeReportHandler:eventReportHandler:errorHandler:subscriptionEstablished:resubscriptionScheduled:")
+	_mTRBaseDeviceSelReadAttributesWithEndpointIDClusterIDAttributeIDParamsQueueCompletion                                                                                          = objc.RegisterName("readAttributesWithEndpointID:clusterID:attributeID:params:queue:completion:")
+	_mTRBaseDeviceSelReadAttributePathsEventPathsParamsQueueCompletion                                                                                                              = objc.RegisterName("readAttributePaths:eventPaths:params:queue:completion:")
+	_mTRBaseDeviceSelWriteAttributeWithEndpointIDClusterIDAttributeIDValueTimedWriteTimeoutQueueCompletion                                                                          = objc.RegisterName("writeAttributeWithEndpointID:clusterID:attributeID:value:timedWriteTimeout:queue:completion:")
+	_mTRBaseDeviceSelInvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsTimedInvokeTimeoutQueueCompletion                                                                    = objc.RegisterName("invokeCommandWithEndpointID:clusterID:commandID:commandFields:timedInvokeTimeout:queue:completion:")
+	_mTRBaseDeviceSelSubscribeToAttributesWithEndpointIDClusterIDAttributeIDParamsQueueReportHandlerSubscriptionEstablished                                                         = objc.RegisterName("subscribeToAttributesWithEndpointID:clusterID:attributeID:params:queue:reportHandler:subscriptionEstablished:")
+	_mTRBaseDeviceSelSubscribeToAttributePathsEventPathsParamsQueueReportHandlerSubscriptionEstablishedResubscriptionScheduled                                                      = objc.RegisterName("subscribeToAttributePaths:eventPaths:params:queue:reportHandler:subscriptionEstablished:resubscriptionScheduled:")
+	_mTRBaseDeviceSelDeregisterReportHandlersWithQueueCompletion                                                                                                                    = objc.RegisterName("deregisterReportHandlersWithQueue:completion:")
+	_mTRBaseDeviceSelOpenCommissioningWindowWithSetupPasscodeDiscriminatorDurationQueueCompletion                                                                                   = objc.RegisterName("openCommissioningWindowWithSetupPasscode:discriminator:duration:queue:completion:")
+	_mTRBaseDeviceSelOpenCommissioningWindowWithDiscriminatorDurationQueueCompletion                                                                                                = objc.RegisterName("openCommissioningWindowWithDiscriminator:duration:queue:completion:")
+	_mTRBaseDeviceSelReadEventsWithEndpointIDClusterIDEventIDParamsQueueCompletion                                                                                                  = objc.RegisterName("readEventsWithEndpointID:clusterID:eventID:params:queue:completion:")
+	_mTRBaseDeviceSelSubscribeToEventsWithEndpointIDClusterIDEventIDParamsQueueReportHandlerSubscriptionEstablished                                                                 = objc.RegisterName("subscribeToEventsWithEndpointID:clusterID:eventID:params:queue:reportHandler:subscriptionEstablished:")
+	_mTRBaseDeviceSelDownloadLogOfTypeTimeoutQueueCompletion                                                                                                                        = objc.RegisterName("downloadLogOfType:timeout:queue:completion:")
+	_mTRBaseDeviceSelSessionTransportType                                                                                                                                           = objc.RegisterName("sessionTransportType")
 	_mTRBaseDeviceSelSubscribeWithQueueMinIntervalMaxIntervalParamsCacheContainerAttributeReportHandlerEventReportHandlerErrorHandlerSubscriptionEstablishedResubscriptionScheduled = objc.RegisterName("subscribeWithQueue:minInterval:maxInterval:params:cacheContainer:attributeReportHandler:eventReportHandler:errorHandler:subscriptionEstablished:resubscriptionScheduled:")
-	_mTRBaseDeviceSelReadAttributeWithEndpointIdClusterIdAttributeIdParamsClientQueueCompletion = objc.RegisterName("readAttributeWithEndpointId:clusterId:attributeId:params:clientQueue:completion:")
-	_mTRBaseDeviceSelWriteAttributeWithEndpointIdClusterIdAttributeIdValueTimedWriteTimeoutClientQueueCompletion = objc.RegisterName("writeAttributeWithEndpointId:clusterId:attributeId:value:timedWriteTimeout:clientQueue:completion:")
-	_mTRBaseDeviceSelInvokeCommandWithEndpointIdClusterIdCommandIdCommandFieldsTimedInvokeTimeoutClientQueueCompletion = objc.RegisterName("invokeCommandWithEndpointId:clusterId:commandId:commandFields:timedInvokeTimeout:clientQueue:completion:")
-	_mTRBaseDeviceSelSubscribeAttributeWithEndpointIdClusterIdAttributeIdMinIntervalMaxIntervalParamsClientQueueReportHandlerSubscriptionEstablished = objc.RegisterName("subscribeAttributeWithEndpointId:clusterId:attributeId:minInterval:maxInterval:params:clientQueue:reportHandler:subscriptionEstablished:")
-	_mTRBaseDeviceSelDeregisterReportHandlersWithClientQueueCompletion = objc.RegisterName("deregisterReportHandlersWithClientQueue:completion:")
+	_mTRBaseDeviceSelReadAttributeWithEndpointIdClusterIdAttributeIdParamsClientQueueCompletion                                                                                     = objc.RegisterName("readAttributeWithEndpointId:clusterId:attributeId:params:clientQueue:completion:")
+	_mTRBaseDeviceSelWriteAttributeWithEndpointIdClusterIdAttributeIdValueTimedWriteTimeoutClientQueueCompletion                                                                    = objc.RegisterName("writeAttributeWithEndpointId:clusterId:attributeId:value:timedWriteTimeout:clientQueue:completion:")
+	_mTRBaseDeviceSelInvokeCommandWithEndpointIdClusterIdCommandIdCommandFieldsTimedInvokeTimeoutClientQueueCompletion                                                              = objc.RegisterName("invokeCommandWithEndpointId:clusterId:commandId:commandFields:timedInvokeTimeout:clientQueue:completion:")
+	_mTRBaseDeviceSelSubscribeAttributeWithEndpointIdClusterIdAttributeIdMinIntervalMaxIntervalParamsClientQueueReportHandlerSubscriptionEstablished                                = objc.RegisterName("subscribeAttributeWithEndpointId:clusterId:attributeId:minInterval:maxInterval:params:clientQueue:reportHandler:subscriptionEstablished:")
+	_mTRBaseDeviceSelDeregisterReportHandlersWithClientQueueCompletion                                                                                                              = objc.RegisterName("deregisterReportHandlersWithClientQueue:completion:")
 )
 
 func MTRBaseDeviceFromID(id objc.ID) *MTRBaseDevice {
@@ -55,7 +55,9 @@ func MTRBaseDeviceFromID(id objc.ID) *MTRBaseDevice {
 // Create a device object with the given node id and controller.  This will always succeed, even if there is no such node id on the controller's fabric, but attempts to actually use the MTRBaseDevice will fail (asynchronously) in that case.
 func MTRBaseDeviceDeviceWithNodeIDController(nodeID *foundation.NSNumber, controller *MTRDeviceController) *MTRBaseDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRBaseDevice), _mTRBaseDeviceSelDeviceWithNodeIDController, nodeID.Ptr(), controller.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRBaseDeviceFromID(_ret)
 }
 
@@ -283,4 +285,3 @@ func (o *MTRBaseDevice) DeregisterReportHandlersWithClientQueueCompletion(queue 
 	}
 	o.Ptr().Send(_mTRBaseDeviceSelDeregisterReportHandlersWithClientQueueCompletion, queue.Ptr(), __block_completion)
 }
-

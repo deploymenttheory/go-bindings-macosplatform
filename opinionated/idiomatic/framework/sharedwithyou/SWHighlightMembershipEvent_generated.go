@@ -48,4 +48,3 @@ type HighlightMembershipEventable interface {
 }
 
 var _ HighlightMembershipEventable = (*HighlightMembershipEvent)(nil)
-

@@ -19,7 +19,9 @@ type MTRBaseClusterOvenCavityOperationalState struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterOvenCavityOperationalState].
-func (x *MTRBaseClusterOvenCavityOperationalState) Unwrap() *raw.MTRBaseClusterOvenCavityOperationalState { return x.inner }
+func (x *MTRBaseClusterOvenCavityOperationalState) Unwrap() *raw.MTRBaseClusterOvenCavityOperationalState {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -486,9 +488,13 @@ func (x *MTRBaseClusterOvenCavityOperationalState) SubscribeAttributeClusterRevi
 	}
 }
 
-func (x *MTRBaseClusterOvenCavityOperationalState) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterOvenCavityOperationalState) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterOvenCavityOperationalState) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterOvenCavityOperationalState) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterOvenCavityOperationalStateable is the interface implemented by [MTRBaseClusterOvenCavityOperationalState], for mocking and DI.
 type MTRBaseClusterOvenCavityOperationalStateable interface {
@@ -522,4 +528,3 @@ type MTRBaseClusterOvenCavityOperationalStateable interface {
 }
 
 var _ MTRBaseClusterOvenCavityOperationalStateable = (*MTRBaseClusterOvenCavityOperationalState)(nil)
-

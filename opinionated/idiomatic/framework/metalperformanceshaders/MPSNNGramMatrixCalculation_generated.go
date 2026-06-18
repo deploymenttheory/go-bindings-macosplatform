@@ -130,9 +130,13 @@ func (x *NNGramMatrixCalculation) SetAlpha(alpha float32) {
 	x.inner.SetAlpha(alpha)
 }
 
-func (x *NNGramMatrixCalculation) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNKernel }
+func (x *NNGramMatrixCalculation) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNKernel
+}
 
-func (x *NNGramMatrixCalculation) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
+func (x *NNGramMatrixCalculation) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNKernel.MPSKernel
+}
 
 // NNGramMatrixCalculationable is the interface implemented by [NNGramMatrixCalculation], for mocking and DI.
 type NNGramMatrixCalculationable interface {
@@ -153,4 +157,3 @@ type NNGramMatrixCalculationable interface {
 }
 
 var _ NNGramMatrixCalculationable = (*NNGramMatrixCalculation)(nil)
-

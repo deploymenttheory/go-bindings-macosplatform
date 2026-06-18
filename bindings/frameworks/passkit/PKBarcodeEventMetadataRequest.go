@@ -16,8 +16,8 @@ type PKBarcodeEventMetadataRequest struct {
 }
 
 var (
-	_clsPKBarcodeEventMetadataRequest = _objcClass("PKBarcodeEventMetadataRequest")
-	_pKBarcodeEventMetadataRequestSelDeviceAccountIdentifier = objc.RegisterName("deviceAccountIdentifier")
+	_clsPKBarcodeEventMetadataRequest                          = _objcClass("PKBarcodeEventMetadataRequest")
+	_pKBarcodeEventMetadataRequestSelDeviceAccountIdentifier   = objc.RegisterName("deviceAccountIdentifier")
 	_pKBarcodeEventMetadataRequestSelLastUsedBarcodeIdentifier = objc.RegisterName("lastUsedBarcodeIdentifier")
 )
 
@@ -33,13 +33,16 @@ func PKBarcodeEventMetadataRequestFromID(id objc.ID) *PKBarcodeEventMetadataRequ
 
 func (o *PKBarcodeEventMetadataRequest) DeviceAccountIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKBarcodeEventMetadataRequestSelDeviceAccountIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKBarcodeEventMetadataRequest) LastUsedBarcodeIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKBarcodeEventMetadataRequestSelLastUsedBarcodeIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

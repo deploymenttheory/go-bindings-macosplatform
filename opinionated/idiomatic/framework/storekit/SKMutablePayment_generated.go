@@ -133,4 +133,3 @@ type MutablePaymentable interface {
 }
 
 var _ MutablePaymentable = (*MutablePayment)(nil)
-

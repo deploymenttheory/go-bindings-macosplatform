@@ -18,7 +18,7 @@ type STScreenTimeConfiguration struct {
 }
 
 var (
-	_clsSTScreenTimeConfiguration = _objcClass("STScreenTimeConfiguration")
+	_clsSTScreenTimeConfiguration                          = _objcClass("STScreenTimeConfiguration")
 	_sTScreenTimeConfigurationSelEnforcesChildRestrictions = objc.RegisterName("enforcesChildRestrictions")
 )
 
@@ -37,4 +37,3 @@ func (o *STScreenTimeConfiguration) EnforcesChildRestrictions() bool {
 	_ret := objc.Send[bool](o.Ptr(), _sTScreenTimeConfigurationSelEnforcesChildRestrictions)
 	return _ret
 }
-

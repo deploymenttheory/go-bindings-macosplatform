@@ -15,8 +15,8 @@ type CKRecordZoneNotification struct {
 }
 
 var (
-	_clsCKRecordZoneNotification = _objcClass("CKRecordZoneNotification")
-	_cKRecordZoneNotificationSelRecordZoneID = objc.RegisterName("recordZoneID")
+	_clsCKRecordZoneNotification              = _objcClass("CKRecordZoneNotification")
+	_cKRecordZoneNotificationSelRecordZoneID  = objc.RegisterName("recordZoneID")
 	_cKRecordZoneNotificationSelDatabaseScope = objc.RegisterName("databaseScope")
 )
 
@@ -33,13 +33,14 @@ func CKRecordZoneNotificationFromID(id objc.ID) *CKRecordZoneNotification {
 // The ID of the record zone that has changes.
 func (o *CKRecordZoneNotification) RecordZoneID() *CKRecordZoneID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKRecordZoneNotificationSelRecordZoneID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKRecordZoneIDFromID(_ret)
 }
 
-// The type of database for the record zone. This property's value is one of the constants that ``CKDatabase/Scope`` defines.
+// The type of database for the record zone. This property's value is one of the constants that “CKDatabase/Scope“ defines.
 func (o *CKRecordZoneNotification) DatabaseScope() CKDatabaseScope {
 	_ret := objc.Send[CKDatabaseScope](o.Ptr(), _cKRecordZoneNotificationSelDatabaseScope)
 	return _ret
 }
-

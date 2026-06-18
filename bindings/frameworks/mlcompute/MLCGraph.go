@@ -16,27 +16,27 @@ type MLCGraph struct {
 }
 
 var (
-	_clsMLCGraph = _objcClass("MLCGraph")
-	_mLCGraphSelGraph = objc.RegisterName("graph")
-	_mLCGraphSelNodeWithLayerSource = objc.RegisterName("nodeWithLayer:source:")
-	_mLCGraphSelNodeWithLayerSources = objc.RegisterName("nodeWithLayer:sources:")
-	_mLCGraphSelNodeWithLayerSourcesDisableUpdate = objc.RegisterName("nodeWithLayer:sources:disableUpdate:")
-	_mLCGraphSelNodeWithLayerSourcesLossLabels = objc.RegisterName("nodeWithLayer:sources:lossLabels:")
-	_mLCGraphSelSplitWithSourceSplitCountDimension = objc.RegisterName("splitWithSource:splitCount:dimension:")
-	_mLCGraphSelSplitWithSourceSplitSectionLengthsDimension = objc.RegisterName("splitWithSource:splitSectionLengths:dimension:")
-	_mLCGraphSelConcatenateWithSourcesDimension = objc.RegisterName("concatenateWithSources:dimension:")
-	_mLCGraphSelReshapeWithShapeSource = objc.RegisterName("reshapeWithShape:source:")
-	_mLCGraphSelTransposeWithDimensionsSource = objc.RegisterName("transposeWithDimensions:source:")
-	_mLCGraphSelSelectWithSourcesCondition = objc.RegisterName("selectWithSources:condition:")
+	_clsMLCGraph                                                       = _objcClass("MLCGraph")
+	_mLCGraphSelGraph                                                  = objc.RegisterName("graph")
+	_mLCGraphSelNodeWithLayerSource                                    = objc.RegisterName("nodeWithLayer:source:")
+	_mLCGraphSelNodeWithLayerSources                                   = objc.RegisterName("nodeWithLayer:sources:")
+	_mLCGraphSelNodeWithLayerSourcesDisableUpdate                      = objc.RegisterName("nodeWithLayer:sources:disableUpdate:")
+	_mLCGraphSelNodeWithLayerSourcesLossLabels                         = objc.RegisterName("nodeWithLayer:sources:lossLabels:")
+	_mLCGraphSelSplitWithSourceSplitCountDimension                     = objc.RegisterName("splitWithSource:splitCount:dimension:")
+	_mLCGraphSelSplitWithSourceSplitSectionLengthsDimension            = objc.RegisterName("splitWithSource:splitSectionLengths:dimension:")
+	_mLCGraphSelConcatenateWithSourcesDimension                        = objc.RegisterName("concatenateWithSources:dimension:")
+	_mLCGraphSelReshapeWithShapeSource                                 = objc.RegisterName("reshapeWithShape:source:")
+	_mLCGraphSelTransposeWithDimensionsSource                          = objc.RegisterName("transposeWithDimensions:source:")
+	_mLCGraphSelSelectWithSourcesCondition                             = objc.RegisterName("selectWithSources:condition:")
 	_mLCGraphSelScatterWithDimensionSourceIndicesCopyFromReductionType = objc.RegisterName("scatterWithDimension:source:indices:copyFrom:reductionType:")
-	_mLCGraphSelGatherWithDimensionSourceIndices = objc.RegisterName("gatherWithDimension:source:indices:")
-	_mLCGraphSelBindAndWriteDataForInputsToDeviceBatchSizeSynchronous = objc.RegisterName("bindAndWriteData:forInputs:toDevice:batchSize:synchronous:")
-	_mLCGraphSelBindAndWriteDataForInputsToDeviceSynchronous = objc.RegisterName("bindAndWriteData:forInputs:toDevice:synchronous:")
-	_mLCGraphSelSourceTensorsForLayer = objc.RegisterName("sourceTensorsForLayer:")
-	_mLCGraphSelResultTensorsForLayer = objc.RegisterName("resultTensorsForLayer:")
-	_mLCGraphSelDevice = objc.RegisterName("device")
-	_mLCGraphSelLayers = objc.RegisterName("layers")
-	_mLCGraphSelSummarizedDOTDescription = objc.RegisterName("summarizedDOTDescription")
+	_mLCGraphSelGatherWithDimensionSourceIndices                       = objc.RegisterName("gatherWithDimension:source:indices:")
+	_mLCGraphSelBindAndWriteDataForInputsToDeviceBatchSizeSynchronous  = objc.RegisterName("bindAndWriteData:forInputs:toDevice:batchSize:synchronous:")
+	_mLCGraphSelBindAndWriteDataForInputsToDeviceSynchronous           = objc.RegisterName("bindAndWriteData:forInputs:toDevice:synchronous:")
+	_mLCGraphSelSourceTensorsForLayer                                  = objc.RegisterName("sourceTensorsForLayer:")
+	_mLCGraphSelResultTensorsForLayer                                  = objc.RegisterName("resultTensorsForLayer:")
+	_mLCGraphSelDevice                                                 = objc.RegisterName("device")
+	_mLCGraphSelLayers                                                 = objc.RegisterName("layers")
+	_mLCGraphSelSummarizedDOTDescription                               = objc.RegisterName("summarizedDOTDescription")
 )
 
 func MLCGraphFromID(id objc.ID) *MLCGraph {
@@ -52,91 +52,117 @@ func MLCGraphFromID(id objc.ID) *MLCGraph {
 // @abstract   Creates a new graph. @return     A new graph.
 func MLCGraphGraph() *MLCGraph {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCGraph), _mLCGraphSelGraph)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCGraphFromID(_ret)
 }
 
 // @abstract   Add a layer to the graph @param      layer        The layer @param      source      The source tensor @return     A result tensor
 func (o *MLCGraph) NodeWithLayerSource(layer *MLCLayer, source *MLCTensor) *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelNodeWithLayerSource, layer.Ptr(), source.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Add a layer to the graph @param      layer        The layer @param      sources    A list of source tensors @discussion For variable length sequences of LSTMs/RNNs layers, create an MLCTensor of sortedSequenceLengths and pass it as the last index (i.e. index 2 or 4) of sources. This tensor must of be type MLCDataTypeInt32. @return     A result tensor
 func (o *MLCGraph) NodeWithLayerSources(layer *MLCLayer, sources *foundation.NSArray[*MLCTensor]) *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelNodeWithLayerSources, layer.Ptr(), sources.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Add a layer to the graph @param      layer                       The layer @param      sources                   A list of source tensors @param      disableUpdate     A flag to indicate if optimizer update should be disabled for this layer @discussion For variable length sequences of LSTMs/RNNs layers, create an MLCTensor of sortedSequenceLengths and pass it as the last index (i.e. index 2 or 4) of sources. This tensor must of be type MLCDataTypeInt32. @return     A result tensor
 func (o *MLCGraph) NodeWithLayerSourcesDisableUpdate(layer *MLCLayer, sources *foundation.NSArray[*MLCTensor], disableUpdate bool) *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelNodeWithLayerSourcesDisableUpdate, layer.Ptr(), sources.Ptr(), disableUpdate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Add a loss layer to the graph @param      layer                      The loss layer @param      lossLabels           The loss labels tensor @discussion For variable length sequences of LSTMs/RNNs layers, create an MLCTensor of sortedSequenceLengths and pass it as the last index (i.e. index 2 or 4) of sources. This tensor must of be type MLCDataTypeInt32. @return     A result tensor
 func (o *MLCGraph) NodeWithLayerSourcesLossLabels(layer *MLCLayer, sources *foundation.NSArray[*MLCTensor], lossLabels *foundation.NSArray[*MLCTensor]) *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelNodeWithLayerSourcesLossLabels, layer.Ptr(), sources.Ptr(), lossLabels.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Add a split layer to the graph @param      source                         The source tensor @param      splitCount                The number of splits @param      dimension                  The dimension to split the source tensor @return     A result tensor
 func (o *MLCGraph) SplitWithSourceSplitCountDimension(source *MLCTensor, splitCount uint, dimension uint) *foundation.NSArray[*MLCTensor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelSplitWithSourceSplitCountDimension, source.Ptr(), splitCount, dimension)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MLCTensor](_ret)
 }
 
 // @abstract   Add a split layer to the graph @param      source                                     The source tensor @param      splitSectionLengths        The lengths of each split section @param      dimension                              The dimension to split the source tensor @return     A result tensor
 func (o *MLCGraph) SplitWithSourceSplitSectionLengthsDimension(source *MLCTensor, splitSectionLengths *foundation.NSArray[*foundation.NSNumber], dimension uint) *foundation.NSArray[*MLCTensor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelSplitWithSourceSplitSectionLengthsDimension, source.Ptr(), splitSectionLengths, dimension)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MLCTensor](_ret)
 }
 
 // @abstract   Add a concat layer to the graph @param      sources      The source tensors to concatenate @param      dimension  The concatenation dimension @return     A result tensor
 func (o *MLCGraph) ConcatenateWithSourcesDimension(sources *foundation.NSArray[*MLCTensor], dimension uint) *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelConcatenateWithSourcesDimension, sources.Ptr(), dimension)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Add a reshape layer to the graph @param      shape                     An array representing the shape of result tensor @param      source                   The source tensor @return     A result tensor
 func (o *MLCGraph) ReshapeWithShapeSource(shape *foundation.NSArray[*foundation.NSNumber], source *MLCTensor) *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelReshapeWithShapeSource, shape, source.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Add a transpose layer to the graph @param      dimensions NSArray<NSNumber *> representing the desired ordering of dimensions The dimensions array specifies the input axis source for each output axis, such that the K'th element in the dimensions array specifies the input axis source for the K'th axis in the output.  The batch dimension which is typically axis 0 cannot be transposed. @return     A result tensor
 func (o *MLCGraph) TransposeWithDimensionsSource(dimensions *foundation.NSArray[*foundation.NSNumber], source *MLCTensor) *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelTransposeWithDimensionsSource, dimensions, source.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Add a select layer to the graph @param      sources            The source tensors @param      condition        The condition mask @return     A result tensor
 func (o *MLCGraph) SelectWithSourcesCondition(sources *foundation.NSArray[*MLCTensor], condition *MLCTensor) *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelSelectWithSourcesCondition, sources.Ptr(), condition.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Add a scatter layer to the graph @param      dimension             The dimension along which to index @param      source                    The updates to use with scattering with index positions specified in indices to result tensor @param      indices                  The index of elements to scatter @param      copyFrom                The source tensor whose data is  to be first copied to the result tensor @param      reductionType     The reduction type applied for all values in source tensor that are scattered to a specific location in the result tensor. Must be: MLCReductionTypeNone or MLCReductionTypeSum. @return     A result tensor
 func (o *MLCGraph) ScatterWithDimensionSourceIndicesCopyFromReductionType(dimension uint, source *MLCTensor, indices *MLCTensor, copyFrom *MLCTensor, reductionType MLCReductionType) *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelScatterWithDimensionSourceIndicesCopyFromReductionType, dimension, source.Ptr(), indices.Ptr(), copyFrom.Ptr(), reductionType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Add a gather layer to the graph @param      dimension       The dimension along which to index @param      source              The source tensor @param      indices            The index of elements to gather @return     A result tensor
 func (o *MLCGraph) GatherWithDimensionSourceIndices(dimension uint, source *MLCTensor, indices *MLCTensor) *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelGatherWithDimensionSourceIndices, dimension, source.Ptr(), indices.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
@@ -155,35 +181,44 @@ func (o *MLCGraph) BindAndWriteDataForInputsToDeviceSynchronous(inputsData *foun
 // @abstract   Get the source tensors for a layer in the training graph @param      layer   A layer in the training graph @return     A list of tensors
 func (o *MLCGraph) SourceTensorsForLayer(layer *MLCLayer) *foundation.NSArray[*MLCTensor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelSourceTensorsForLayer, layer.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MLCTensor](_ret)
 }
 
 // @abstract   Get the result tensors for a layer in the training graph @param      layer   A layer in the training graph @return     A list of tensors
 func (o *MLCGraph) ResultTensorsForLayer(layer *MLCLayer) *foundation.NSArray[*MLCTensor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelResultTensorsForLayer, layer.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MLCTensor](_ret)
 }
 
 // @abstract   The device to be used when compiling and executing a graph
 func (o *MLCGraph) Device() *MLCDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCDeviceFromID(_ret)
 }
 
 // @abstract   Layers in the graph
 func (o *MLCGraph) Layers() *foundation.NSArray[*MLCLayer] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelLayers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MLCLayer](_ret)
 }
 
 // @abstract A DOT representation of the graph. @discussion For more info on the DOT language, refer to https://en.wikipedia.org/wiki/DOT_(graph_description_language). Edges that have a dashed lines are those that have stop gradients, while those with solid lines don't.
 func (o *MLCGraph) SummarizedDOTDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelSummarizedDOTDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

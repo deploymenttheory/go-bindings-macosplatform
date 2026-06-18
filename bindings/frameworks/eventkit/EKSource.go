@@ -16,12 +16,12 @@ type EKSource struct {
 }
 
 var (
-	_clsEKSource = _objcClass("EKSource")
+	_clsEKSource                       = _objcClass("EKSource")
 	_eKSourceSelCalendarsForEntityType = objc.RegisterName("calendarsForEntityType:")
-	_eKSourceSelSourceIdentifier = objc.RegisterName("sourceIdentifier")
-	_eKSourceSelSourceType = objc.RegisterName("sourceType")
-	_eKSourceSelTitle = objc.RegisterName("title")
-	_eKSourceSelIsDelegate = objc.RegisterName("isDelegate")
+	_eKSourceSelSourceIdentifier       = objc.RegisterName("sourceIdentifier")
+	_eKSourceSelSourceType             = objc.RegisterName("sourceType")
+	_eKSourceSelTitle                  = objc.RegisterName("title")
+	_eKSourceSelIsDelegate             = objc.RegisterName("isDelegate")
 )
 
 func EKSourceFromID(id objc.ID) *EKSource {
@@ -37,13 +37,17 @@ func EKSourceFromID(id objc.ID) *EKSource {
 // @method      calendarsForEntityType @abstract    Returns the calendars that belong to this source that support a given entity type (reminders, events)
 func (o *EKSource) CalendarsForEntityType(entityType EKEntityType) *foundation.NSSet[*EKCalendar] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKSourceSelCalendarsForEntityType, entityType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*EKCalendar](_ret)
 }
 
 func (o *EKSource) SourceIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKSourceSelSourceIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -54,7 +58,9 @@ func (o *EKSource) SourceType() EKSourceType {
 
 func (o *EKSource) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKSourceSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -63,4 +69,3 @@ func (o *EKSource) IsDelegate() bool {
 	_ret := objc.Send[bool](o.Ptr(), _eKSourceSelIsDelegate)
 	return _ret
 }
-

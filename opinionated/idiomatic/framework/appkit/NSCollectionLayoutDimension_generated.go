@@ -71,4 +71,3 @@ type CollectionLayoutDimensionable interface {
 }
 
 var _ CollectionLayoutDimensionable = (*CollectionLayoutDimension)(nil)
-

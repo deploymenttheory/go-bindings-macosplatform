@@ -71,4 +71,3 @@ type MTRAttributeReportable interface {
 }
 
 var _ MTRAttributeReportable = (*MTRAttributeReport)(nil)
-

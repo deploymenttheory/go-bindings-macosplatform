@@ -20,143 +20,143 @@ type SCNNode struct {
 }
 
 var (
-	_clsSCNNode = _objcClass("SCNNode")
-	_sCNNodeSelNode = objc.RegisterName("node")
-	_sCNNodeSelNodeWithGeometry = objc.RegisterName("nodeWithGeometry:")
-	_sCNNodeSelClone = objc.RegisterName("clone")
-	_sCNNodeSelFlattenedClone = objc.RegisterName("flattenedClone")
-	_sCNNodeSelSetWorldTransform = objc.RegisterName("setWorldTransform:")
-	_sCNNodeSelAddChildNode = objc.RegisterName("addChildNode:")
-	_sCNNodeSelInsertChildNodeAtIndex = objc.RegisterName("insertChildNode:atIndex:")
-	_sCNNodeSelRemoveFromParentNode = objc.RegisterName("removeFromParentNode")
-	_sCNNodeSelReplaceChildNodeWith = objc.RegisterName("replaceChildNode:with:")
-	_sCNNodeSelChildNodeWithNameRecursively = objc.RegisterName("childNodeWithName:recursively:")
-	_sCNNodeSelChildNodesPassingTest = objc.RegisterName("childNodesPassingTest:")
-	_sCNNodeSelEnumerateChildNodesUsing = objc.RegisterName("enumerateChildNodesUsingBlock:")
-	_sCNNodeSelEnumerateHierarchyUsing = objc.RegisterName("enumerateHierarchyUsingBlock:")
-	_sCNNodeSelConvertPositionToNode = objc.RegisterName("convertPosition:toNode:")
-	_sCNNodeSelConvertPositionFromNode = objc.RegisterName("convertPosition:fromNode:")
-	_sCNNodeSelConvertVectorToNode = objc.RegisterName("convertVector:toNode:")
-	_sCNNodeSelConvertVectorFromNode = objc.RegisterName("convertVector:fromNode:")
-	_sCNNodeSelConvertTransformToNode = objc.RegisterName("convertTransform:toNode:")
-	_sCNNodeSelConvertTransformFromNode = objc.RegisterName("convertTransform:fromNode:")
+	_clsSCNNode                                          = _objcClass("SCNNode")
+	_sCNNodeSelNode                                      = objc.RegisterName("node")
+	_sCNNodeSelNodeWithGeometry                          = objc.RegisterName("nodeWithGeometry:")
+	_sCNNodeSelClone                                     = objc.RegisterName("clone")
+	_sCNNodeSelFlattenedClone                            = objc.RegisterName("flattenedClone")
+	_sCNNodeSelSetWorldTransform                         = objc.RegisterName("setWorldTransform:")
+	_sCNNodeSelAddChildNode                              = objc.RegisterName("addChildNode:")
+	_sCNNodeSelInsertChildNodeAtIndex                    = objc.RegisterName("insertChildNode:atIndex:")
+	_sCNNodeSelRemoveFromParentNode                      = objc.RegisterName("removeFromParentNode")
+	_sCNNodeSelReplaceChildNodeWith                      = objc.RegisterName("replaceChildNode:with:")
+	_sCNNodeSelChildNodeWithNameRecursively              = objc.RegisterName("childNodeWithName:recursively:")
+	_sCNNodeSelChildNodesPassingTest                     = objc.RegisterName("childNodesPassingTest:")
+	_sCNNodeSelEnumerateChildNodesUsing                  = objc.RegisterName("enumerateChildNodesUsingBlock:")
+	_sCNNodeSelEnumerateHierarchyUsing                   = objc.RegisterName("enumerateHierarchyUsingBlock:")
+	_sCNNodeSelConvertPositionToNode                     = objc.RegisterName("convertPosition:toNode:")
+	_sCNNodeSelConvertPositionFromNode                   = objc.RegisterName("convertPosition:fromNode:")
+	_sCNNodeSelConvertVectorToNode                       = objc.RegisterName("convertVector:toNode:")
+	_sCNNodeSelConvertVectorFromNode                     = objc.RegisterName("convertVector:fromNode:")
+	_sCNNodeSelConvertTransformToNode                    = objc.RegisterName("convertTransform:toNode:")
+	_sCNNodeSelConvertTransformFromNode                  = objc.RegisterName("convertTransform:fromNode:")
 	_sCNNodeSelHitTestWithSegmentFromPointToPointOptions = objc.RegisterName("hitTestWithSegmentFromPoint:toPoint:options:")
-	_sCNNodeSelName = objc.RegisterName("name")
-	_sCNNodeSelSetName = objc.RegisterName("setName:")
-	_sCNNodeSelLight = objc.RegisterName("light")
-	_sCNNodeSelSetLight = objc.RegisterName("setLight:")
-	_sCNNodeSelCamera = objc.RegisterName("camera")
-	_sCNNodeSelSetCamera = objc.RegisterName("setCamera:")
-	_sCNNodeSelGeometry = objc.RegisterName("geometry")
-	_sCNNodeSelSetGeometry = objc.RegisterName("setGeometry:")
-	_sCNNodeSelSkinner = objc.RegisterName("skinner")
-	_sCNNodeSelSetSkinner = objc.RegisterName("setSkinner:")
-	_sCNNodeSelMorpher = objc.RegisterName("morpher")
-	_sCNNodeSelSetMorpher = objc.RegisterName("setMorpher:")
-	_sCNNodeSelTransform = objc.RegisterName("transform")
-	_sCNNodeSelSetTransform = objc.RegisterName("setTransform:")
-	_sCNNodeSelWorldTransform = objc.RegisterName("worldTransform")
-	_sCNNodeSelPosition = objc.RegisterName("position")
-	_sCNNodeSelSetPosition = objc.RegisterName("setPosition:")
-	_sCNNodeSelWorldPosition = objc.RegisterName("worldPosition")
-	_sCNNodeSelSetWorldPosition = objc.RegisterName("setWorldPosition:")
-	_sCNNodeSelRotation = objc.RegisterName("rotation")
-	_sCNNodeSelSetRotation = objc.RegisterName("setRotation:")
-	_sCNNodeSelOrientation = objc.RegisterName("orientation")
-	_sCNNodeSelSetOrientation = objc.RegisterName("setOrientation:")
-	_sCNNodeSelWorldOrientation = objc.RegisterName("worldOrientation")
-	_sCNNodeSelSetWorldOrientation = objc.RegisterName("setWorldOrientation:")
-	_sCNNodeSelEulerAngles = objc.RegisterName("eulerAngles")
-	_sCNNodeSelSetEulerAngles = objc.RegisterName("setEulerAngles:")
-	_sCNNodeSelScale = objc.RegisterName("scale")
-	_sCNNodeSelSetScale = objc.RegisterName("setScale:")
-	_sCNNodeSelPivot = objc.RegisterName("pivot")
-	_sCNNodeSelSetPivot = objc.RegisterName("setPivot:")
-	_sCNNodeSelIsHidden = objc.RegisterName("isHidden")
-	_sCNNodeSelSetHidden = objc.RegisterName("setHidden:")
-	_sCNNodeSelOpacity = objc.RegisterName("opacity")
-	_sCNNodeSelSetOpacity = objc.RegisterName("setOpacity:")
-	_sCNNodeSelRenderingOrder = objc.RegisterName("renderingOrder")
-	_sCNNodeSelSetRenderingOrder = objc.RegisterName("setRenderingOrder:")
-	_sCNNodeSelCastsShadow = objc.RegisterName("castsShadow")
-	_sCNNodeSelSetCastsShadow = objc.RegisterName("setCastsShadow:")
-	_sCNNodeSelMovabilityHint = objc.RegisterName("movabilityHint")
-	_sCNNodeSelSetMovabilityHint = objc.RegisterName("setMovabilityHint:")
-	_sCNNodeSelParentNode = objc.RegisterName("parentNode")
-	_sCNNodeSelChildNodes = objc.RegisterName("childNodes")
-	_sCNNodeSelPhysicsBody = objc.RegisterName("physicsBody")
-	_sCNNodeSelSetPhysicsBody = objc.RegisterName("setPhysicsBody:")
-	_sCNNodeSelPhysicsField = objc.RegisterName("physicsField")
-	_sCNNodeSelSetPhysicsField = objc.RegisterName("setPhysicsField:")
-	_sCNNodeSelConstraints = objc.RegisterName("constraints")
-	_sCNNodeSelSetConstraints = objc.RegisterName("setConstraints:")
-	_sCNNodeSelFilters = objc.RegisterName("filters")
-	_sCNNodeSelSetFilters = objc.RegisterName("setFilters:")
-	_sCNNodeSelPresentationNode = objc.RegisterName("presentationNode")
-	_sCNNodeSelIsPaused = objc.RegisterName("isPaused")
-	_sCNNodeSelSetPaused = objc.RegisterName("setPaused:")
-	_sCNNodeSelRendererDelegate = objc.RegisterName("rendererDelegate")
-	_sCNNodeSelSetRendererDelegate = objc.RegisterName("setRendererDelegate:")
-	_sCNNodeSelCategoryBitMask = objc.RegisterName("categoryBitMask")
-	_sCNNodeSelSetCategoryBitMask = objc.RegisterName("setCategoryBitMask:")
-	_sCNNodeSelLookAt = objc.RegisterName("lookAt:")
-	_sCNNodeSelLookAtUpLocalFront = objc.RegisterName("lookAt:up:localFront:")
-	_sCNNodeSelLocalTranslateBy = objc.RegisterName("localTranslateBy:")
-	_sCNNodeSelLocalRotateBy = objc.RegisterName("localRotateBy:")
-	_sCNNodeSelRotateByAroundTarget = objc.RegisterName("rotateBy:aroundTarget:")
-	_sCNNodeSelLocalUp = objc.RegisterName("localUp")
-	_sCNNodeSelLocalRight = objc.RegisterName("localRight")
-	_sCNNodeSelLocalFront = objc.RegisterName("localFront")
-	_sCNNodeSelWorldUp = objc.RegisterName("worldUp")
-	_sCNNodeSelWorldRight = objc.RegisterName("worldRight")
-	_sCNNodeSelWorldFront = objc.RegisterName("worldFront")
-	_sCNNodeSelSimdConvertPositionToNode = objc.RegisterName("simdConvertPosition:toNode:")
-	_sCNNodeSelSimdConvertPositionFromNode = objc.RegisterName("simdConvertPosition:fromNode:")
-	_sCNNodeSelSimdConvertVectorToNode = objc.RegisterName("simdConvertVector:toNode:")
-	_sCNNodeSelSimdConvertVectorFromNode = objc.RegisterName("simdConvertVector:fromNode:")
-	_sCNNodeSelSimdConvertTransformToNode = objc.RegisterName("simdConvertTransform:toNode:")
-	_sCNNodeSelSimdConvertTransformFromNode = objc.RegisterName("simdConvertTransform:fromNode:")
-	_sCNNodeSelSimdLookAt = objc.RegisterName("simdLookAt:")
-	_sCNNodeSelSimdLookAtUpLocalFront = objc.RegisterName("simdLookAt:up:localFront:")
-	_sCNNodeSelSimdLocalTranslateBy = objc.RegisterName("simdLocalTranslateBy:")
-	_sCNNodeSelSimdLocalRotateBy = objc.RegisterName("simdLocalRotateBy:")
-	_sCNNodeSelSimdRotateByAroundTarget = objc.RegisterName("simdRotateBy:aroundTarget:")
-	_sCNNodeSelSimdTransform = objc.RegisterName("simdTransform")
-	_sCNNodeSelSetSimdTransform = objc.RegisterName("setSimdTransform:")
-	_sCNNodeSelSimdPosition = objc.RegisterName("simdPosition")
-	_sCNNodeSelSetSimdPosition = objc.RegisterName("setSimdPosition:")
-	_sCNNodeSelSimdRotation = objc.RegisterName("simdRotation")
-	_sCNNodeSelSetSimdRotation = objc.RegisterName("setSimdRotation:")
-	_sCNNodeSelSimdOrientation = objc.RegisterName("simdOrientation")
-	_sCNNodeSelSetSimdOrientation = objc.RegisterName("setSimdOrientation:")
-	_sCNNodeSelSimdEulerAngles = objc.RegisterName("simdEulerAngles")
-	_sCNNodeSelSetSimdEulerAngles = objc.RegisterName("setSimdEulerAngles:")
-	_sCNNodeSelSimdScale = objc.RegisterName("simdScale")
-	_sCNNodeSelSetSimdScale = objc.RegisterName("setSimdScale:")
-	_sCNNodeSelSimdPivot = objc.RegisterName("simdPivot")
-	_sCNNodeSelSetSimdPivot = objc.RegisterName("setSimdPivot:")
-	_sCNNodeSelSimdWorldPosition = objc.RegisterName("simdWorldPosition")
-	_sCNNodeSelSetSimdWorldPosition = objc.RegisterName("setSimdWorldPosition:")
-	_sCNNodeSelSimdWorldOrientation = objc.RegisterName("simdWorldOrientation")
-	_sCNNodeSelSetSimdWorldOrientation = objc.RegisterName("setSimdWorldOrientation:")
-	_sCNNodeSelSimdWorldTransform = objc.RegisterName("simdWorldTransform")
-	_sCNNodeSelSetSimdWorldTransform = objc.RegisterName("setSimdWorldTransform:")
-	_sCNNodeSelSimdLocalUp = objc.RegisterName("simdLocalUp")
-	_sCNNodeSelSimdLocalRight = objc.RegisterName("simdLocalRight")
-	_sCNNodeSelSimdLocalFront = objc.RegisterName("simdLocalFront")
-	_sCNNodeSelSimdWorldUp = objc.RegisterName("simdWorldUp")
-	_sCNNodeSelSimdWorldRight = objc.RegisterName("simdWorldRight")
-	_sCNNodeSelSimdWorldFront = objc.RegisterName("simdWorldFront")
-	_sCNNodeSelFocusBehavior = objc.RegisterName("focusBehavior")
-	_sCNNodeSelSetFocusBehavior = objc.RegisterName("setFocusBehavior:")
-	_sCNNodeSelAddParticleSystem = objc.RegisterName("addParticleSystem:")
-	_sCNNodeSelRemoveAllParticleSystems = objc.RegisterName("removeAllParticleSystems")
-	_sCNNodeSelRemoveParticleSystem = objc.RegisterName("removeParticleSystem:")
-	_sCNNodeSelParticleSystems = objc.RegisterName("particleSystems")
-	_sCNNodeSelAddAudioPlayer = objc.RegisterName("addAudioPlayer:")
-	_sCNNodeSelRemoveAllAudioPlayers = objc.RegisterName("removeAllAudioPlayers")
-	_sCNNodeSelRemoveAudioPlayer = objc.RegisterName("removeAudioPlayer:")
-	_sCNNodeSelAudioPlayers = objc.RegisterName("audioPlayers")
+	_sCNNodeSelName                                      = objc.RegisterName("name")
+	_sCNNodeSelSetName                                   = objc.RegisterName("setName:")
+	_sCNNodeSelLight                                     = objc.RegisterName("light")
+	_sCNNodeSelSetLight                                  = objc.RegisterName("setLight:")
+	_sCNNodeSelCamera                                    = objc.RegisterName("camera")
+	_sCNNodeSelSetCamera                                 = objc.RegisterName("setCamera:")
+	_sCNNodeSelGeometry                                  = objc.RegisterName("geometry")
+	_sCNNodeSelSetGeometry                               = objc.RegisterName("setGeometry:")
+	_sCNNodeSelSkinner                                   = objc.RegisterName("skinner")
+	_sCNNodeSelSetSkinner                                = objc.RegisterName("setSkinner:")
+	_sCNNodeSelMorpher                                   = objc.RegisterName("morpher")
+	_sCNNodeSelSetMorpher                                = objc.RegisterName("setMorpher:")
+	_sCNNodeSelTransform                                 = objc.RegisterName("transform")
+	_sCNNodeSelSetTransform                              = objc.RegisterName("setTransform:")
+	_sCNNodeSelWorldTransform                            = objc.RegisterName("worldTransform")
+	_sCNNodeSelPosition                                  = objc.RegisterName("position")
+	_sCNNodeSelSetPosition                               = objc.RegisterName("setPosition:")
+	_sCNNodeSelWorldPosition                             = objc.RegisterName("worldPosition")
+	_sCNNodeSelSetWorldPosition                          = objc.RegisterName("setWorldPosition:")
+	_sCNNodeSelRotation                                  = objc.RegisterName("rotation")
+	_sCNNodeSelSetRotation                               = objc.RegisterName("setRotation:")
+	_sCNNodeSelOrientation                               = objc.RegisterName("orientation")
+	_sCNNodeSelSetOrientation                            = objc.RegisterName("setOrientation:")
+	_sCNNodeSelWorldOrientation                          = objc.RegisterName("worldOrientation")
+	_sCNNodeSelSetWorldOrientation                       = objc.RegisterName("setWorldOrientation:")
+	_sCNNodeSelEulerAngles                               = objc.RegisterName("eulerAngles")
+	_sCNNodeSelSetEulerAngles                            = objc.RegisterName("setEulerAngles:")
+	_sCNNodeSelScale                                     = objc.RegisterName("scale")
+	_sCNNodeSelSetScale                                  = objc.RegisterName("setScale:")
+	_sCNNodeSelPivot                                     = objc.RegisterName("pivot")
+	_sCNNodeSelSetPivot                                  = objc.RegisterName("setPivot:")
+	_sCNNodeSelIsHidden                                  = objc.RegisterName("isHidden")
+	_sCNNodeSelSetHidden                                 = objc.RegisterName("setHidden:")
+	_sCNNodeSelOpacity                                   = objc.RegisterName("opacity")
+	_sCNNodeSelSetOpacity                                = objc.RegisterName("setOpacity:")
+	_sCNNodeSelRenderingOrder                            = objc.RegisterName("renderingOrder")
+	_sCNNodeSelSetRenderingOrder                         = objc.RegisterName("setRenderingOrder:")
+	_sCNNodeSelCastsShadow                               = objc.RegisterName("castsShadow")
+	_sCNNodeSelSetCastsShadow                            = objc.RegisterName("setCastsShadow:")
+	_sCNNodeSelMovabilityHint                            = objc.RegisterName("movabilityHint")
+	_sCNNodeSelSetMovabilityHint                         = objc.RegisterName("setMovabilityHint:")
+	_sCNNodeSelParentNode                                = objc.RegisterName("parentNode")
+	_sCNNodeSelChildNodes                                = objc.RegisterName("childNodes")
+	_sCNNodeSelPhysicsBody                               = objc.RegisterName("physicsBody")
+	_sCNNodeSelSetPhysicsBody                            = objc.RegisterName("setPhysicsBody:")
+	_sCNNodeSelPhysicsField                              = objc.RegisterName("physicsField")
+	_sCNNodeSelSetPhysicsField                           = objc.RegisterName("setPhysicsField:")
+	_sCNNodeSelConstraints                               = objc.RegisterName("constraints")
+	_sCNNodeSelSetConstraints                            = objc.RegisterName("setConstraints:")
+	_sCNNodeSelFilters                                   = objc.RegisterName("filters")
+	_sCNNodeSelSetFilters                                = objc.RegisterName("setFilters:")
+	_sCNNodeSelPresentationNode                          = objc.RegisterName("presentationNode")
+	_sCNNodeSelIsPaused                                  = objc.RegisterName("isPaused")
+	_sCNNodeSelSetPaused                                 = objc.RegisterName("setPaused:")
+	_sCNNodeSelRendererDelegate                          = objc.RegisterName("rendererDelegate")
+	_sCNNodeSelSetRendererDelegate                       = objc.RegisterName("setRendererDelegate:")
+	_sCNNodeSelCategoryBitMask                           = objc.RegisterName("categoryBitMask")
+	_sCNNodeSelSetCategoryBitMask                        = objc.RegisterName("setCategoryBitMask:")
+	_sCNNodeSelLookAt                                    = objc.RegisterName("lookAt:")
+	_sCNNodeSelLookAtUpLocalFront                        = objc.RegisterName("lookAt:up:localFront:")
+	_sCNNodeSelLocalTranslateBy                          = objc.RegisterName("localTranslateBy:")
+	_sCNNodeSelLocalRotateBy                             = objc.RegisterName("localRotateBy:")
+	_sCNNodeSelRotateByAroundTarget                      = objc.RegisterName("rotateBy:aroundTarget:")
+	_sCNNodeSelLocalUp                                   = objc.RegisterName("localUp")
+	_sCNNodeSelLocalRight                                = objc.RegisterName("localRight")
+	_sCNNodeSelLocalFront                                = objc.RegisterName("localFront")
+	_sCNNodeSelWorldUp                                   = objc.RegisterName("worldUp")
+	_sCNNodeSelWorldRight                                = objc.RegisterName("worldRight")
+	_sCNNodeSelWorldFront                                = objc.RegisterName("worldFront")
+	_sCNNodeSelSimdConvertPositionToNode                 = objc.RegisterName("simdConvertPosition:toNode:")
+	_sCNNodeSelSimdConvertPositionFromNode               = objc.RegisterName("simdConvertPosition:fromNode:")
+	_sCNNodeSelSimdConvertVectorToNode                   = objc.RegisterName("simdConvertVector:toNode:")
+	_sCNNodeSelSimdConvertVectorFromNode                 = objc.RegisterName("simdConvertVector:fromNode:")
+	_sCNNodeSelSimdConvertTransformToNode                = objc.RegisterName("simdConvertTransform:toNode:")
+	_sCNNodeSelSimdConvertTransformFromNode              = objc.RegisterName("simdConvertTransform:fromNode:")
+	_sCNNodeSelSimdLookAt                                = objc.RegisterName("simdLookAt:")
+	_sCNNodeSelSimdLookAtUpLocalFront                    = objc.RegisterName("simdLookAt:up:localFront:")
+	_sCNNodeSelSimdLocalTranslateBy                      = objc.RegisterName("simdLocalTranslateBy:")
+	_sCNNodeSelSimdLocalRotateBy                         = objc.RegisterName("simdLocalRotateBy:")
+	_sCNNodeSelSimdRotateByAroundTarget                  = objc.RegisterName("simdRotateBy:aroundTarget:")
+	_sCNNodeSelSimdTransform                             = objc.RegisterName("simdTransform")
+	_sCNNodeSelSetSimdTransform                          = objc.RegisterName("setSimdTransform:")
+	_sCNNodeSelSimdPosition                              = objc.RegisterName("simdPosition")
+	_sCNNodeSelSetSimdPosition                           = objc.RegisterName("setSimdPosition:")
+	_sCNNodeSelSimdRotation                              = objc.RegisterName("simdRotation")
+	_sCNNodeSelSetSimdRotation                           = objc.RegisterName("setSimdRotation:")
+	_sCNNodeSelSimdOrientation                           = objc.RegisterName("simdOrientation")
+	_sCNNodeSelSetSimdOrientation                        = objc.RegisterName("setSimdOrientation:")
+	_sCNNodeSelSimdEulerAngles                           = objc.RegisterName("simdEulerAngles")
+	_sCNNodeSelSetSimdEulerAngles                        = objc.RegisterName("setSimdEulerAngles:")
+	_sCNNodeSelSimdScale                                 = objc.RegisterName("simdScale")
+	_sCNNodeSelSetSimdScale                              = objc.RegisterName("setSimdScale:")
+	_sCNNodeSelSimdPivot                                 = objc.RegisterName("simdPivot")
+	_sCNNodeSelSetSimdPivot                              = objc.RegisterName("setSimdPivot:")
+	_sCNNodeSelSimdWorldPosition                         = objc.RegisterName("simdWorldPosition")
+	_sCNNodeSelSetSimdWorldPosition                      = objc.RegisterName("setSimdWorldPosition:")
+	_sCNNodeSelSimdWorldOrientation                      = objc.RegisterName("simdWorldOrientation")
+	_sCNNodeSelSetSimdWorldOrientation                   = objc.RegisterName("setSimdWorldOrientation:")
+	_sCNNodeSelSimdWorldTransform                        = objc.RegisterName("simdWorldTransform")
+	_sCNNodeSelSetSimdWorldTransform                     = objc.RegisterName("setSimdWorldTransform:")
+	_sCNNodeSelSimdLocalUp                               = objc.RegisterName("simdLocalUp")
+	_sCNNodeSelSimdLocalRight                            = objc.RegisterName("simdLocalRight")
+	_sCNNodeSelSimdLocalFront                            = objc.RegisterName("simdLocalFront")
+	_sCNNodeSelSimdWorldUp                               = objc.RegisterName("simdWorldUp")
+	_sCNNodeSelSimdWorldRight                            = objc.RegisterName("simdWorldRight")
+	_sCNNodeSelSimdWorldFront                            = objc.RegisterName("simdWorldFront")
+	_sCNNodeSelFocusBehavior                             = objc.RegisterName("focusBehavior")
+	_sCNNodeSelSetFocusBehavior                          = objc.RegisterName("setFocusBehavior:")
+	_sCNNodeSelAddParticleSystem                         = objc.RegisterName("addParticleSystem:")
+	_sCNNodeSelRemoveAllParticleSystems                  = objc.RegisterName("removeAllParticleSystems")
+	_sCNNodeSelRemoveParticleSystem                      = objc.RegisterName("removeParticleSystem:")
+	_sCNNodeSelParticleSystems                           = objc.RegisterName("particleSystems")
+	_sCNNodeSelAddAudioPlayer                            = objc.RegisterName("addAudioPlayer:")
+	_sCNNodeSelRemoveAllAudioPlayers                     = objc.RegisterName("removeAllAudioPlayers")
+	_sCNNodeSelRemoveAudioPlayer                         = objc.RegisterName("removeAudioPlayer:")
+	_sCNNodeSelAudioPlayers                              = objc.RegisterName("audioPlayers")
 )
 
 func SCNNodeFromID(id objc.ID) *SCNNode {
@@ -172,27 +172,35 @@ func SCNNodeFromID(id objc.ID) *SCNNode {
 // @method node @abstract Creates and initializes a node instance.
 func SCNNodeNode() *SCNNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNNode), _sCNNodeSelNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNNodeFromID(_ret)
 }
 
 // @method nodeWithGeometry: @abstract Creates and initializes a node instance with the specified geometry attached. @param geometry The geometry to attach.
 func SCNNodeNodeWithGeometry(geometry *SCNGeometry) *SCNNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNNode), _sCNNodeSelNodeWithGeometry, geometry.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNNodeFromID(_ret)
 }
 
 // @method clone @abstract Returns a copy of the receiver. The returned instance is autoreleased. @discussion The copy is recursive: every child node will be cloned, too. For a non-recursive copy, use copy instead. The copied nodes will share their attached objects (light, geometry, camera, ...) with the original instances; if you want, for example, to change the materials of the copy independently of the original object, you'll have to copy the geometry of the node separately.
 func (o *SCNNode) Clone() *SCNNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNNodeSelClone)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNNodeFromID(_ret)
 }
 
 func (o *SCNNode) FlattenedClone() *SCNNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNNodeSelFlattenedClone)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNNodeFromID(_ret)
 }
 
@@ -223,7 +231,9 @@ func (o *SCNNode) ReplaceChildNodeWith(oldChild *SCNNode, newChild *SCNNode) {
 // @method childNodeWithName:recursively: @abstract Returns the first node found in the node tree with the specified name. @discussion The search uses a pre-order tree traversal. @param name The name of the node you are searching for. @param recursively Set to YES if you want the search to look through the sub-nodes recursively.
 func (o *SCNNode) ChildNodeWithNameRecursively(name *foundation.NSString, recursively bool) *SCNNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNNodeSelChildNodeWithNameRecursively, name.Ptr(), recursively)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNNodeFromID(_ret)
 }
 
@@ -240,7 +250,9 @@ func (o *SCNNode) ChildNodesPassingTest(predicate func(*SCNNode, *bool) bool) *f
 		defer __block_predicate.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNNodeSelChildNodesPassingTest, __block_predicate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SCNNode](_ret)
 }
 
@@ -313,14 +325,18 @@ func (o *SCNNode) ConvertTransformFromNode(transform quartzcore.CATransform3D, n
 // @method hitTestWithSegmentFromPoint:toPoint:options: @abstract Returns an array of SCNHitTestResult for each node in the receiver's sub tree that intersects the specified segment. @param pointA The first point of the segment relative to the receiver. @param pointB The second point of the segment relative to the receiver. @param options Optional parameters (see the "Hit test options" section in SCNSceneRenderer.h for the available options). @discussion See SCNSceneRenderer.h for a screen-space hit testing method.
 func (o *SCNNode) HitTestWithSegmentFromPointToPointOptions(pointA SCNVector3, pointB SCNVector3, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*SCNHitTestResult] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNNodeSelHitTestWithSegmentFromPointToPointOptions, pointA, pointB, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SCNHitTestResult](_ret)
 }
 
 // @property name @abstract Determines the name of the receiver.
 func (o *SCNNode) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNNodeSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -331,7 +347,9 @@ func (o *SCNNode) SetName(name *foundation.NSString) {
 // @property light @abstract Determines the light attached to the receiver.
 func (o *SCNNode) Light() *SCNLight {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNNodeSelLight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNLightFromID(_ret)
 }
 
@@ -341,7 +359,9 @@ func (o *SCNNode) SetLight(light *SCNLight) {
 
 func (o *SCNNode) Camera() *SCNCamera {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNNodeSelCamera)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNCameraFromID(_ret)
 }
 
@@ -352,7 +372,9 @@ func (o *SCNNode) SetCamera(camera *SCNCamera) {
 // @property geometry @abstract Returns the geometry attached to the receiver.
 func (o *SCNNode) Geometry() *SCNGeometry {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNNodeSelGeometry)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNGeometryFromID(_ret)
 }
 
@@ -363,7 +385,9 @@ func (o *SCNNode) SetGeometry(geometry *SCNGeometry) {
 // @property skinner @abstract Returns the skinner attached to the receiver.
 func (o *SCNNode) Skinner() *SCNSkinner {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNNodeSelSkinner)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNSkinnerFromID(_ret)
 }
 
@@ -374,7 +398,9 @@ func (o *SCNNode) SetSkinner(skinner *SCNSkinner) {
 // @property morpher @abstract Returns the morpher attached to the receiver.
 func (o *SCNNode) Morpher() *SCNMorpher {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNNodeSelMorpher)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNMorpherFromID(_ret)
 }
 
@@ -531,21 +557,27 @@ func (o *SCNNode) SetMovabilityHint(movabilityHint SCNMovabilityHint) {
 // @property parentNode @abstract Returns the parent node of the receiver.
 func (o *SCNNode) ParentNode() *SCNNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNNodeSelParentNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNNodeFromID(_ret)
 }
 
 // @property childNodes @abstract Returns the child node array of the receiver.
 func (o *SCNNode) ChildNodes() *foundation.NSArray[*SCNNode] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNNodeSelChildNodes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SCNNode](_ret)
 }
 
 // @property physicsBody @abstract The description of the physics body of the receiver. @discussion Default is nil.
 func (o *SCNNode) PhysicsBody() *SCNPhysicsBody {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNNodeSelPhysicsBody)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsBodyFromID(_ret)
 }
 
@@ -556,7 +588,9 @@ func (o *SCNNode) SetPhysicsBody(physicsBody *SCNPhysicsBody) {
 // @property physicsField @abstract The description of the physics field of the receiver. @discussion Default is nil.
 func (o *SCNNode) PhysicsField() *SCNPhysicsField {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNNodeSelPhysicsField)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsFieldFromID(_ret)
 }
 
@@ -567,7 +601,9 @@ func (o *SCNNode) SetPhysicsField(physicsField *SCNPhysicsField) {
 // @property constraints @abstract An array of SCNConstraint that are applied to the receiver. @discussion Adding or removing a constraint can be implicitly animated based on the current transaction.
 func (o *SCNNode) Constraints() *foundation.NSArray[*SCNConstraint] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNNodeSelConstraints)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SCNConstraint](_ret)
 }
 
@@ -588,7 +624,9 @@ func (o *SCNNode) SetFilters(filters *foundation.NSArray[*coreimage.CIFilter]) {
 // @property presentationNode @abstract Returns the presentation node. @discussion Returns a copy of the node containing all the properties as they were at the start of the current transaction, with any active animations applied. This gives a close approximation to the version of the node that is currently displayed. The effect of attempting to modify the returned node in any way is undefined. The returned node has no parent and no child nodes.
 func (o *SCNNode) PresentationNode() *SCNNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNNodeSelPresentationNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNNodeFromID(_ret)
 }
 
@@ -886,7 +924,9 @@ func (o *SCNNode) RemoveParticleSystem(system *SCNParticleSystem) {
 
 func (o *SCNNode) ParticleSystems() *foundation.NSArray[*SCNParticleSystem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNNodeSelParticleSystems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SCNParticleSystem](_ret)
 }
 
@@ -907,7 +947,8 @@ func (o *SCNNode) RemoveAudioPlayer(player *SCNAudioPlayer) {
 
 func (o *SCNNode) AudioPlayers() *foundation.NSArray[*SCNAudioPlayer] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNNodeSelAudioPlayers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SCNAudioPlayer](_ret)
 }
-

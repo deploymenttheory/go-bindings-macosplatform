@@ -53,4 +53,3 @@ type AudioSessionCapabilityable interface {
 }
 
 var _ AudioSessionCapabilityable = (*AudioSessionCapability)(nil)
-

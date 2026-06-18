@@ -50,4 +50,3 @@ type PropertyListSerializationable interface {
 }
 
 var _ PropertyListSerializationable = (*PropertyListSerialization)(nil)
-

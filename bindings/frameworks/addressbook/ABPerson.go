@@ -16,20 +16,20 @@ type ABPerson struct {
 }
 
 var (
-	_clsABPerson = _objcClass("ABPerson")
-	_aBPersonSelParentGroups = objc.RegisterName("parentGroups")
-	_aBPersonSelLinkedPeople = objc.RegisterName("linkedPeople")
-	_aBPersonSelAddPropertiesAndTypes = objc.RegisterName("addPropertiesAndTypes:")
-	_aBPersonSelRemoveProperties = objc.RegisterName("removeProperties:")
-	_aBPersonSelProperties = objc.RegisterName("properties")
-	_aBPersonSelTypeOfProperty = objc.RegisterName("typeOfProperty:")
+	_clsABPerson                                                = _objcClass("ABPerson")
+	_aBPersonSelParentGroups                                    = objc.RegisterName("parentGroups")
+	_aBPersonSelLinkedPeople                                    = objc.RegisterName("linkedPeople")
+	_aBPersonSelAddPropertiesAndTypes                           = objc.RegisterName("addPropertiesAndTypes:")
+	_aBPersonSelRemoveProperties                                = objc.RegisterName("removeProperties:")
+	_aBPersonSelProperties                                      = objc.RegisterName("properties")
+	_aBPersonSelTypeOfProperty                                  = objc.RegisterName("typeOfProperty:")
 	_aBPersonSelSearchElementForPropertyLabelKeyValueComparison = objc.RegisterName("searchElementForProperty:label:key:value:comparison:")
-	_aBPersonSelInitWithVCardRepresentation = objc.RegisterName("initWithVCardRepresentation:")
-	_aBPersonSelVCardRepresentation = objc.RegisterName("vCardRepresentation")
-	_aBPersonSelSetImageData = objc.RegisterName("setImageData:")
-	_aBPersonSelImageData = objc.RegisterName("imageData")
-	_aBPersonSelBeginLoadingImageDataForClient = objc.RegisterName("beginLoadingImageDataForClient:")
-	_aBPersonSelCancelLoadingImageDataForTag = objc.RegisterName("cancelLoadingImageDataForTag:")
+	_aBPersonSelInitWithVCardRepresentation                     = objc.RegisterName("initWithVCardRepresentation:")
+	_aBPersonSelVCardRepresentation                             = objc.RegisterName("vCardRepresentation")
+	_aBPersonSelSetImageData                                    = objc.RegisterName("setImageData:")
+	_aBPersonSelImageData                                       = objc.RegisterName("imageData")
+	_aBPersonSelBeginLoadingImageDataForClient                  = objc.RegisterName("beginLoadingImageDataForClient:")
+	_aBPersonSelCancelLoadingImageDataForTag                    = objc.RegisterName("cancelLoadingImageDataForTag:")
 )
 
 func ABPersonFromID(id objc.ID) *ABPerson {
@@ -74,7 +74,9 @@ func ABPersonTypeOfProperty(property *foundation.NSString) int {
 
 func ABPersonSearchElementForPropertyLabelKeyValueComparison(property *foundation.NSString, label *foundation.NSString, key *foundation.NSString, value objc.ID, comparison int) *ABSearchElement {
 	_ret := objc.Send[objc.ID](objc.ID(_clsABPerson), _aBPersonSelSearchElementForPropertyLabelKeyValueComparison, property.Ptr(), label.Ptr(), key.Ptr(), value, comparison)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ABSearchElementFromID(_ret)
 }
 
@@ -85,7 +87,9 @@ func (o *ABPerson) InitWithVCardRepresentation(vCardData *foundation.NSData) obj
 
 func (o *ABPerson) VCardRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aBPersonSelVCardRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -96,7 +100,9 @@ func (o *ABPerson) SetImageData(data *foundation.NSData) bool {
 
 func (o *ABPerson) ImageData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aBPersonSelImageData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -108,4 +114,3 @@ func (o *ABPerson) BeginLoadingImageDataForClient(client ABImageClient) int {
 func ABPersonCancelLoadingImageDataForTag(tag int) {
 	objc.ID(_clsABPerson).Send(_aBPersonSelCancelLoadingImageDataForTag, tag)
 }
-

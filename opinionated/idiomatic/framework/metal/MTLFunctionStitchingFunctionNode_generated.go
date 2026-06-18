@@ -18,7 +18,9 @@ type FunctionStitchingFunctionNode struct {
 }
 
 // Unwrap returns the underlying [raw.MTLFunctionStitchingFunctionNode].
-func (x *FunctionStitchingFunctionNode) Unwrap() *raw.MTLFunctionStitchingFunctionNode { return x.inner }
+func (x *FunctionStitchingFunctionNode) Unwrap() *raw.MTLFunctionStitchingFunctionNode {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -52,7 +54,9 @@ func (x *FunctionStitchingFunctionNode) WithControlDependencies(items ...*raw.MT
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.MTLFunctionStitchingFunctionNode](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -115,4 +119,3 @@ type FunctionStitchingFunctionNodeable interface {
 }
 
 var _ FunctionStitchingFunctionNodeable = (*FunctionStitchingFunctionNode)(nil)
-

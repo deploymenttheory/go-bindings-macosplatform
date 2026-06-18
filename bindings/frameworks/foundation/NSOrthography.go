@@ -15,17 +15,17 @@ type NSOrthography struct {
 }
 
 var (
-	_clsNSOrthography = _objcClass("NSOrthography")
-	_nSOrthographySelInitWithDominantScriptLanguageMap = objc.RegisterName("initWithDominantScript:languageMap:")
-	_nSOrthographySelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSOrthographySelDominantScript = objc.RegisterName("dominantScript")
-	_nSOrthographySelLanguageMap = objc.RegisterName("languageMap")
-	_nSOrthographySelLanguagesForScript = objc.RegisterName("languagesForScript:")
-	_nSOrthographySelDominantLanguageForScript = objc.RegisterName("dominantLanguageForScript:")
-	_nSOrthographySelDefaultOrthographyForLanguage = objc.RegisterName("defaultOrthographyForLanguage:")
-	_nSOrthographySelDominantLanguage = objc.RegisterName("dominantLanguage")
-	_nSOrthographySelAllScripts = objc.RegisterName("allScripts")
-	_nSOrthographySelAllLanguages = objc.RegisterName("allLanguages")
+	_clsNSOrthography                                         = _objcClass("NSOrthography")
+	_nSOrthographySelInitWithDominantScriptLanguageMap        = objc.RegisterName("initWithDominantScript:languageMap:")
+	_nSOrthographySelInitWithCoder                            = objc.RegisterName("initWithCoder:")
+	_nSOrthographySelDominantScript                           = objc.RegisterName("dominantScript")
+	_nSOrthographySelLanguageMap                              = objc.RegisterName("languageMap")
+	_nSOrthographySelLanguagesForScript                       = objc.RegisterName("languagesForScript:")
+	_nSOrthographySelDominantLanguageForScript                = objc.RegisterName("dominantLanguageForScript:")
+	_nSOrthographySelDefaultOrthographyForLanguage            = objc.RegisterName("defaultOrthographyForLanguage:")
+	_nSOrthographySelDominantLanguage                         = objc.RegisterName("dominantLanguage")
+	_nSOrthographySelAllScripts                               = objc.RegisterName("allScripts")
+	_nSOrthographySelAllLanguages                             = objc.RegisterName("allLanguages")
 	_nSOrthographySelOrthographyWithDominantScriptLanguageMap = objc.RegisterName("orthographyWithDominantScript:languageMap:")
 )
 
@@ -41,19 +41,25 @@ func NSOrthographyFromID(id objc.ID) *NSOrthography {
 
 func (o *NSOrthography) InitWithDominantScriptLanguageMap(script *NSString, map_ *NSDictionary[*NSString, objc.ID]) *NSOrthography {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrthographySelInitWithDominantScriptLanguageMap, script.Ptr(), map_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrthographyFromID(_ret)
 }
 
 func (o *NSOrthography) InitWithCoder(coder *NSCoder) *NSOrthography {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrthographySelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrthographyFromID(_ret)
 }
 
 func (o *NSOrthography) DominantScript() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrthographySelDominantScript)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -64,43 +70,56 @@ func (o *NSOrthography) LanguageMap() *NSDictionary[*NSString, objc.ID] {
 
 func (o *NSOrthography) LanguagesForScript(script *NSString) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrthographySelLanguagesForScript, script.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSOrthography) DominantLanguageForScript(script *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrthographySelDominantLanguageForScript, script.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func NSOrthographyDefaultOrthographyForLanguage(language *NSString) *NSOrthography {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOrthography), _nSOrthographySelDefaultOrthographyForLanguage, language.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrthographyFromID(_ret)
 }
 
 func (o *NSOrthography) DominantLanguage() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrthographySelDominantLanguage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSOrthography) AllScripts() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrthographySelAllScripts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSOrthography) AllLanguages() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrthographySelAllLanguages)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func NSOrthographyOrthographyWithDominantScriptLanguageMap(script *NSString, map_ *NSDictionary[*NSString, objc.ID]) *NSOrthography {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOrthography), _nSOrthographySelOrthographyWithDominantScriptLanguageMap, script.Ptr(), map_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrthographyFromID(_ret)
 }
-

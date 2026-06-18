@@ -58,7 +58,9 @@ func (x *NEDNSSettingsManager) WithOnDemandRules(items ...NEOnDemandRuleProvider
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asNEOnDemandRule().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asNEOnDemandRule().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NEOnDemandRule](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -189,4 +191,3 @@ type NEDNSSettingsManagerable interface {
 }
 
 var _ NEDNSSettingsManagerable = (*NEDNSSettingsManager)(nil)
-

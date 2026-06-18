@@ -19,11 +19,11 @@ type MPSImageScale struct {
 }
 
 var (
-	_clsMPSImageScale = _objcClass("MPSImageScale")
-	_mPSImageScaleSelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsMPSImageScale                    = _objcClass("MPSImageScale")
+	_mPSImageScaleSelInitWithDevice      = objc.RegisterName("initWithDevice:")
 	_mPSImageScaleSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSImageScaleSelScaleTransform = objc.RegisterName("scaleTransform")
-	_mPSImageScaleSelSetScaleTransform = objc.RegisterName("setScaleTransform:")
+	_mPSImageScaleSelScaleTransform      = objc.RegisterName("scaleTransform")
+	_mPSImageScaleSelSetScaleTransform   = objc.RegisterName("setScaleTransform:")
 )
 
 func MPSImageScaleFromID(id objc.ID) *MPSImageScale {
@@ -38,14 +38,18 @@ func MPSImageScaleFromID(id objc.ID) *MPSImageScale {
 
 func (o *MPSImageScale) InitWithDevice(device metal.MTLDevice) *MPSImageScale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageScaleSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageScaleFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSImageScale) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSImageScale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageScaleSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageScaleFromID(_ret)
 }
 
@@ -58,4 +62,3 @@ func (o *MPSImageScale) ScaleTransform() *mpscore.MPSScaleTransform {
 func (o *MPSImageScale) SetScaleTransform(scaleTransform *mpscore.MPSScaleTransform) {
 	o.Ptr().Send(_mPSImageScaleSelSetScaleTransform, scaleTransform)
 }
-

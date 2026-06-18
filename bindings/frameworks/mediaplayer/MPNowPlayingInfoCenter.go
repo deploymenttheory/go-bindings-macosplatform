@@ -16,12 +16,12 @@ type MPNowPlayingInfoCenter struct {
 }
 
 var (
-	_clsMPNowPlayingInfoCenter = _objcClass("MPNowPlayingInfoCenter")
-	_mPNowPlayingInfoCenterSelDefaultCenter = objc.RegisterName("defaultCenter")
-	_mPNowPlayingInfoCenterSelNowPlayingInfo = objc.RegisterName("nowPlayingInfo")
-	_mPNowPlayingInfoCenterSelSetNowPlayingInfo = objc.RegisterName("setNowPlayingInfo:")
-	_mPNowPlayingInfoCenterSelPlaybackState = objc.RegisterName("playbackState")
-	_mPNowPlayingInfoCenterSelSetPlaybackState = objc.RegisterName("setPlaybackState:")
+	_clsMPNowPlayingInfoCenter                             = _objcClass("MPNowPlayingInfoCenter")
+	_mPNowPlayingInfoCenterSelDefaultCenter                = objc.RegisterName("defaultCenter")
+	_mPNowPlayingInfoCenterSelNowPlayingInfo               = objc.RegisterName("nowPlayingInfo")
+	_mPNowPlayingInfoCenterSelSetNowPlayingInfo            = objc.RegisterName("setNowPlayingInfo:")
+	_mPNowPlayingInfoCenterSelPlaybackState                = objc.RegisterName("playbackState")
+	_mPNowPlayingInfoCenterSelSetPlaybackState             = objc.RegisterName("setPlaybackState:")
 	_mPNowPlayingInfoCenterSelSupportedAnimatedArtworkKeys = objc.RegisterName("supportedAnimatedArtworkKeys")
 )
 
@@ -38,7 +38,9 @@ func MPNowPlayingInfoCenterFromID(id objc.ID) *MPNowPlayingInfoCenter {
 // Returns the default now playing info center. The default center holds now playing info about the current application.
 func MPNowPlayingInfoCenterDefaultCenter() *MPNowPlayingInfoCenter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPNowPlayingInfoCenter), _mPNowPlayingInfoCenterSelDefaultCenter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPNowPlayingInfoCenterFromID(_ret)
 }
 
@@ -67,4 +69,3 @@ func MPNowPlayingInfoCenterSupportedAnimatedArtworkKeys() *foundation.NSArray[*f
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsMPNowPlayingInfoCenter), _mPNowPlayingInfoCenterSelSupportedAnimatedArtworkKeys)
 	return _ret
 }
-

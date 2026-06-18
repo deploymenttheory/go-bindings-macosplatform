@@ -18,7 +18,7 @@ type BCChatButton struct {
 }
 
 var (
-	_clsBCChatButton = _objcClass("BCChatButton")
+	_clsBCChatButton              = _objcClass("BCChatButton")
 	_bCChatButtonSelInitWithStyle = objc.RegisterName("initWithStyle:")
 	_bCChatButtonSelInitWithCoder = objc.RegisterName("initWithCoder:")
 )
@@ -37,14 +37,17 @@ func BCChatButtonFromID(id objc.ID) *BCChatButton {
 // Deprecated: since macOS 13.0.
 func (o *BCChatButton) InitWithStyle(style BCChatButtonStyle) *BCChatButton {
 	_ret := objc.Send[objc.ID](o.Ptr(), _bCChatButtonSelInitWithStyle, style)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return BCChatButtonFromID(_ret)
 }
 
 // Deprecated: since macOS 13.0.
 func (o *BCChatButton) InitWithCoder(coder *foundation.NSCoder) *BCChatButton {
 	_ret := objc.Send[objc.ID](o.Ptr(), _bCChatButtonSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return BCChatButtonFromID(_ret)
 }
-

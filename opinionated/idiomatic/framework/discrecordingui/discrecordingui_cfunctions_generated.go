@@ -68,4 +68,3 @@ func DREraseSessionSetErase(eraseSession unsafe.Pointer, erase unsafe.Pointer) {
 func DREraseSessionSetupDialog(eraseSession unsafe.Pointer, options *raw.DREraseSessionSetupDialogOptions, setupCallbacks *raw.DREraseSessionSetupCallbacks) int8 {
 	return raw.DREraseSessionSetupDialog(eraseSession, options, setupCallbacks)
 }
-

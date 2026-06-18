@@ -109,4 +109,3 @@ type IOBluetoothOBEXSessionable interface {
 }
 
 var _ IOBluetoothOBEXSessionable = (*IOBluetoothOBEXSession)(nil)
-

@@ -16,8 +16,8 @@ type HKWorkoutRouteQuery struct {
 }
 
 var (
-	_clsHKWorkoutRouteQuery = _objcClass("HKWorkoutRouteQuery")
-	_hKWorkoutRouteQuerySelInitWithRouteDataHandler = objc.RegisterName("initWithRoute:dataHandler:")
+	_clsHKWorkoutRouteQuery                                     = _objcClass("HKWorkoutRouteQuery")
+	_hKWorkoutRouteQuerySelInitWithRouteDataHandler             = objc.RegisterName("initWithRoute:dataHandler:")
 	_hKWorkoutRouteQuerySelInitWithRouteDateIntervalDataHandler = objc.RegisterName("initWithRoute:dateInterval:dataHandler:")
 )
 
@@ -34,14 +34,17 @@ func HKWorkoutRouteQueryFromID(id objc.ID) *HKWorkoutRouteQuery {
 // @method        initWithRoute:dataHandler: @abstract      Returns a query that will retrieve CLLocation objects for the specified workoutRoute. @param workoutRoute    The HKWorkoutRoute for which the location data will be returned. @param dataHandler     The block to invoke with results from the query. It is called repeatedly with an array of CLLocation objects until all data is returned and the done parameter is YES or if HKHealthStore stopQuery: is called. The stopQuery call can be made within the dataHandler block. The number of objects returned in routeData per dataHandler call is unspecified. Once done is YES, or stopQuery called, the query is complete and no more calls to the handler will be made.
 func (o *HKWorkoutRouteQuery) InitWithRouteDataHandler(workoutRoute *HKWorkoutRoute, dataHandler objc.Block) *HKWorkoutRouteQuery {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutRouteQuerySelInitWithRouteDataHandler, workoutRoute.Ptr(), dataHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKWorkoutRouteQueryFromID(_ret)
 }
 
 // @method        initWithRoute:dateInterval:dataHandler: @abstract      Returns a query that will retrieve CLLocation objects for the specified workoutRoute and dateInterval. @param workoutRoute    The HKWorkoutRoute for which the location data will be returned. @param dateInterval    The date interval for which the location data will be returned. If the requested interval does not overlap with the specified workout route sample, an empty array of results is returned. If the requested interval partially overlaps with the specified workout route sample, only location data from within that overlapping time period is returned. @param dataHandler     The block to invoke with results from the query. It is called repeatedly with an array of CLLocation objects until all data is returned and the done parameter is YES or if HKHealthStore stopQuery: is called. The stopQuery call can be made within the dataHandler block. The number of objects returned in routeData per dataHandler call is unspecified. Once done is YES, or stopQuery called, the query is complete and no more calls to the handler will be made.
 func (o *HKWorkoutRouteQuery) InitWithRouteDateIntervalDataHandler(workoutRoute *HKWorkoutRoute, dateInterval *foundation.NSDateInterval, dataHandler objc.Block) *HKWorkoutRouteQuery {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutRouteQuerySelInitWithRouteDateIntervalDataHandler, workoutRoute.Ptr(), dateInterval.Ptr(), dataHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKWorkoutRouteQueryFromID(_ret)
 }
-

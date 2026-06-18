@@ -17,24 +17,24 @@ type AVAudioTime struct {
 }
 
 var (
-	_clsAVAudioTime = _objcClass("AVAudioTime")
+	_clsAVAudioTime                                 = _objcClass("AVAudioTime")
 	_aVAudioTimeSelInitWithAudioTimeStampSampleRate = objc.RegisterName("initWithAudioTimeStamp:sampleRate:")
-	_aVAudioTimeSelInitWithHostTime = objc.RegisterName("initWithHostTime:")
-	_aVAudioTimeSelInitWithSampleTimeAtRate = objc.RegisterName("initWithSampleTime:atRate:")
+	_aVAudioTimeSelInitWithHostTime                 = objc.RegisterName("initWithHostTime:")
+	_aVAudioTimeSelInitWithSampleTimeAtRate         = objc.RegisterName("initWithSampleTime:atRate:")
 	_aVAudioTimeSelInitWithHostTimeSampleTimeAtRate = objc.RegisterName("initWithHostTime:sampleTime:atRate:")
 	_aVAudioTimeSelTimeWithAudioTimeStampSampleRate = objc.RegisterName("timeWithAudioTimeStamp:sampleRate:")
-	_aVAudioTimeSelTimeWithHostTime = objc.RegisterName("timeWithHostTime:")
-	_aVAudioTimeSelTimeWithSampleTimeAtRate = objc.RegisterName("timeWithSampleTime:atRate:")
+	_aVAudioTimeSelTimeWithHostTime                 = objc.RegisterName("timeWithHostTime:")
+	_aVAudioTimeSelTimeWithSampleTimeAtRate         = objc.RegisterName("timeWithSampleTime:atRate:")
 	_aVAudioTimeSelTimeWithHostTimeSampleTimeAtRate = objc.RegisterName("timeWithHostTime:sampleTime:atRate:")
-	_aVAudioTimeSelHostTimeForSeconds = objc.RegisterName("hostTimeForSeconds:")
-	_aVAudioTimeSelSecondsForHostTime = objc.RegisterName("secondsForHostTime:")
-	_aVAudioTimeSelExtrapolateTimeFromAnchor = objc.RegisterName("extrapolateTimeFromAnchor:")
-	_aVAudioTimeSelIsHostTimeValid = objc.RegisterName("isHostTimeValid")
-	_aVAudioTimeSelHostTime = objc.RegisterName("hostTime")
-	_aVAudioTimeSelIsSampleTimeValid = objc.RegisterName("isSampleTimeValid")
-	_aVAudioTimeSelSampleTime = objc.RegisterName("sampleTime")
-	_aVAudioTimeSelSampleRate = objc.RegisterName("sampleRate")
-	_aVAudioTimeSelAudioTimeStamp = objc.RegisterName("audioTimeStamp")
+	_aVAudioTimeSelHostTimeForSeconds               = objc.RegisterName("hostTimeForSeconds:")
+	_aVAudioTimeSelSecondsForHostTime               = objc.RegisterName("secondsForHostTime:")
+	_aVAudioTimeSelExtrapolateTimeFromAnchor        = objc.RegisterName("extrapolateTimeFromAnchor:")
+	_aVAudioTimeSelIsHostTimeValid                  = objc.RegisterName("isHostTimeValid")
+	_aVAudioTimeSelHostTime                         = objc.RegisterName("hostTime")
+	_aVAudioTimeSelIsSampleTimeValid                = objc.RegisterName("isSampleTimeValid")
+	_aVAudioTimeSelSampleTime                       = objc.RegisterName("sampleTime")
+	_aVAudioTimeSelSampleRate                       = objc.RegisterName("sampleRate")
+	_aVAudioTimeSelAudioTimeStamp                   = objc.RegisterName("audioTimeStamp")
 )
 
 func AVAudioTimeFromID(id objc.ID) *AVAudioTime {
@@ -50,56 +50,72 @@ func AVAudioTimeFromID(id objc.ID) *AVAudioTime {
 // @method initWithAudioTimeStamp:sampleRate:
 func (o *AVAudioTime) InitWithAudioTimeStampSampleRate(ts *coreaudiotypes.AudioTimeStamp, sampleRate float64) *AVAudioTime {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioTimeSelInitWithAudioTimeStampSampleRate, ts, sampleRate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioTimeFromID(_ret)
 }
 
 // @method initWithHostTime:
 func (o *AVAudioTime) InitWithHostTime(hostTime uint64) *AVAudioTime {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioTimeSelInitWithHostTime, hostTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioTimeFromID(_ret)
 }
 
 // @method initWithSampleTime:atRate:
 func (o *AVAudioTime) InitWithSampleTimeAtRate(sampleTime int64, sampleRate float64) *AVAudioTime {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioTimeSelInitWithSampleTimeAtRate, sampleTime, sampleRate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioTimeFromID(_ret)
 }
 
 // @method initWithHostTime:sampleTime:atRate:
 func (o *AVAudioTime) InitWithHostTimeSampleTimeAtRate(hostTime uint64, sampleTime int64, sampleRate float64) *AVAudioTime {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioTimeSelInitWithHostTimeSampleTimeAtRate, hostTime, sampleTime, sampleRate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioTimeFromID(_ret)
 }
 
 // @method timeWithAudioTimeStamp:sampleRate:
 func AVAudioTimeTimeWithAudioTimeStampSampleRate(ts *coreaudiotypes.AudioTimeStamp, sampleRate float64) *AVAudioTime {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAudioTime), _aVAudioTimeSelTimeWithAudioTimeStampSampleRate, ts, sampleRate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioTimeFromID(_ret)
 }
 
 // @method timeWithHostTime:
 func AVAudioTimeTimeWithHostTime(hostTime uint64) *AVAudioTime {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAudioTime), _aVAudioTimeSelTimeWithHostTime, hostTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioTimeFromID(_ret)
 }
 
 // @method timeWithSampleTime:atRate:
 func AVAudioTimeTimeWithSampleTimeAtRate(sampleTime int64, sampleRate float64) *AVAudioTime {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAudioTime), _aVAudioTimeSelTimeWithSampleTimeAtRate, sampleTime, sampleRate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioTimeFromID(_ret)
 }
 
 // @method timeWithHostTime:sampleTime:atRate:
 func AVAudioTimeTimeWithHostTimeSampleTimeAtRate(hostTime uint64, sampleTime int64, sampleRate float64) *AVAudioTime {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAudioTime), _aVAudioTimeSelTimeWithHostTimeSampleTimeAtRate, hostTime, sampleTime, sampleRate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioTimeFromID(_ret)
 }
 
@@ -118,7 +134,9 @@ func AVAudioTimeSecondsForHostTime(hostTime uint64) float64 {
 // @method extrapolateTimeFromAnchor: @abstract Converts between host and sample time. @param anchorTime An AVAudioTime with a more complete AudioTimeStamp than that of the receiver (self). @return the extrapolated time @discussion If anchorTime is an AVAudioTime where both host time and sample time are valid, and self is another timestamp where only one of the two is valid, this method returns a new AVAudioTime copied from self and where any additional valid fields provided by the anchor are also valid. Note that the anchorTime must have both host and sample time valid, and self must have sample rate and at least one of host or sample time valid. Otherwise this method returns nil. <pre> // time0 has a valid audio sample representation, but no host time representation. AVAudioTime *time0 = [AVAudioTime timeWithSampleTime: 0.0 atRate: 44100.0]; // anchor has a valid host time representation and sample time representation. AVAudioTime *anchor = [player playerTimeForNodeTime: player.lastRenderTime]; // fill in valid host time representation AVAudioTime *fullTime0 = [time0 extrapolateTimeFromAnchor: anchor]; </pre>
 func (o *AVAudioTime) ExtrapolateTimeFromAnchor(anchorTime *AVAudioTime) *AVAudioTime {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioTimeSelExtrapolateTimeFromAnchor, anchorTime.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioTimeFromID(_ret)
 }
 
@@ -157,4 +175,3 @@ func (o *AVAudioTime) AudioTimeStamp() coreaudiotypes.AudioTimeStamp {
 	_ret := objc.Send[coreaudiotypes.AudioTimeStamp](o.Ptr(), _aVAudioTimeSelAudioTimeStamp)
 	return _ret
 }
-

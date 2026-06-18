@@ -18,10 +18,10 @@ type PKPaymentRequestCouponCodeUpdate struct {
 }
 
 var (
-	_clsPKPaymentRequestCouponCodeUpdate = _objcClass("PKPaymentRequestCouponCodeUpdate")
+	_clsPKPaymentRequestCouponCodeUpdate                                                 = _objcClass("PKPaymentRequestCouponCodeUpdate")
 	_pKPaymentRequestCouponCodeUpdateSelInitWithErrorsPaymentSummaryItemsShippingMethods = objc.RegisterName("initWithErrors:paymentSummaryItems:shippingMethods:")
-	_pKPaymentRequestCouponCodeUpdateSelErrors = objc.RegisterName("errors")
-	_pKPaymentRequestCouponCodeUpdateSelSetErrors = objc.RegisterName("setErrors:")
+	_pKPaymentRequestCouponCodeUpdateSelErrors                                           = objc.RegisterName("errors")
+	_pKPaymentRequestCouponCodeUpdateSelSetErrors                                        = objc.RegisterName("setErrors:")
 )
 
 func PKPaymentRequestCouponCodeUpdateFromID(id objc.ID) *PKPaymentRequestCouponCodeUpdate {
@@ -36,7 +36,9 @@ func PKPaymentRequestCouponCodeUpdateFromID(id objc.ID) *PKPaymentRequestCouponC
 
 func (o *PKPaymentRequestCouponCodeUpdate) InitWithErrorsPaymentSummaryItemsShippingMethods(errors_ *foundation.NSArray[objc.ID], paymentSummaryItems *foundation.NSArray[*PKPaymentSummaryItem], shippingMethods *foundation.NSArray[*PKShippingMethod]) *PKPaymentRequestCouponCodeUpdate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestCouponCodeUpdateSelInitWithErrorsPaymentSummaryItemsShippingMethods, errors_, paymentSummaryItems.Ptr(), shippingMethods.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKPaymentRequestCouponCodeUpdateFromID(_ret)
 }
 
@@ -53,4 +55,3 @@ func (o *PKPaymentRequestCouponCodeUpdate) SetErrors() error {
 	}
 	return nil
 }
-

@@ -49,4 +49,3 @@ type MediaLibraryable interface {
 }
 
 var _ MediaLibraryable = (*MediaLibrary)(nil)
-

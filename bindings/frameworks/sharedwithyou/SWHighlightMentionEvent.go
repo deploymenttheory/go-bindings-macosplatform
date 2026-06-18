@@ -17,10 +17,10 @@ type SWHighlightMentionEvent struct {
 }
 
 var (
-	_clsSWHighlightMentionEvent = _objcClass("SWHighlightMentionEvent")
+	_clsSWHighlightMentionEvent                                                    = _objcClass("SWHighlightMentionEvent")
 	_sWHighlightMentionEventSelInitWithHighlightMentionedPersonCloudKitShareHandle = objc.RegisterName("initWithHighlight:mentionedPersonCloudKitShareHandle:")
-	_sWHighlightMentionEventSelInitWithHighlightMentionedPersonIdentity = objc.RegisterName("initWithHighlight:mentionedPersonIdentity:")
-	_sWHighlightMentionEventSelMentionedPersonHandle = objc.RegisterName("mentionedPersonHandle")
+	_sWHighlightMentionEventSelInitWithHighlightMentionedPersonIdentity            = objc.RegisterName("initWithHighlight:mentionedPersonIdentity:")
+	_sWHighlightMentionEventSelMentionedPersonHandle                               = objc.RegisterName("mentionedPersonHandle")
 )
 
 func SWHighlightMentionEventFromID(id objc.ID) *SWHighlightMentionEvent {
@@ -36,21 +36,26 @@ func SWHighlightMentionEventFromID(id objc.ID) *SWHighlightMentionEvent {
 // Initializes a highlight mention event object when the sender mentions another participant. @param highlight The object on which the event occurred. @param handle The CloudKit handle of the person being mentioned by the sender.
 func (o *SWHighlightMentionEvent) InitWithHighlightMentionedPersonCloudKitShareHandle(highlight *SWHighlight, handle *foundation.NSString) *SWHighlightMentionEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWHighlightMentionEventSelInitWithHighlightMentionedPersonCloudKitShareHandle, highlight.Ptr(), handle.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SWHighlightMentionEventFromID(_ret)
 }
 
 // Initializes a highlight mention event object when the sender mentions another participant. @param highlight The object on which the event occurred. @param identity The identity of the person being mentioned by the sender.
 func (o *SWHighlightMentionEvent) InitWithHighlightMentionedPersonIdentity(highlight *SWHighlight, identity *sharedwithyoucore.SWPersonIdentity) *SWHighlightMentionEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWHighlightMentionEventSelInitWithHighlightMentionedPersonIdentity, highlight.Ptr(), identity.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SWHighlightMentionEventFromID(_ret)
 }
 
 // The person being mentioned by the sender.
 func (o *SWHighlightMentionEvent) MentionedPersonHandle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWHighlightMentionEventSelMentionedPersonHandle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

@@ -14,8 +14,8 @@ import (
 
 var (
 	_servicemanagementLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce             sync.Once
+	_failedSymbols        = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -48,12 +48,16 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("SMCopyAllJobDictionaries", func() { purego.RegisterLibFunc(&_fnSMCopyAllJobDictionaries, _servicemanagementLib, "SMCopyAllJobDictionaries") })
+	_register("SMCopyAllJobDictionaries", func() {
+		purego.RegisterLibFunc(&_fnSMCopyAllJobDictionaries, _servicemanagementLib, "SMCopyAllJobDictionaries")
+	})
 	_register("SMJobBless", func() { purego.RegisterLibFunc(&_fnSMJobBless, _servicemanagementLib, "SMJobBless") })
 	_register("SMJobCopyDictionary", func() { purego.RegisterLibFunc(&_fnSMJobCopyDictionary, _servicemanagementLib, "SMJobCopyDictionary") })
 	_register("SMJobRemove", func() { purego.RegisterLibFunc(&_fnSMJobRemove, _servicemanagementLib, "SMJobRemove") })
 	_register("SMJobSubmit", func() { purego.RegisterLibFunc(&_fnSMJobSubmit, _servicemanagementLib, "SMJobSubmit") })
-	_register("SMLoginItemSetEnabled", func() { purego.RegisterLibFunc(&_fnSMLoginItemSetEnabled, _servicemanagementLib, "SMLoginItemSetEnabled") })
+	_register("SMLoginItemSetEnabled", func() {
+		purego.RegisterLibFunc(&_fnSMLoginItemSetEnabled, _servicemanagementLib, "SMLoginItemSetEnabled")
+	})
 }
 
 func init() {

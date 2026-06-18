@@ -16,11 +16,11 @@ type HKLiveWorkoutDataSource struct {
 }
 
 var (
-	_clsHKLiveWorkoutDataSource = _objcClass("HKLiveWorkoutDataSource")
+	_clsHKLiveWorkoutDataSource                                        = _objcClass("HKLiveWorkoutDataSource")
 	_hKLiveWorkoutDataSourceSelInitWithHealthStoreWorkoutConfiguration = objc.RegisterName("initWithHealthStore:workoutConfiguration:")
-	_hKLiveWorkoutDataSourceSelEnableCollectionForTypePredicate = objc.RegisterName("enableCollectionForType:predicate:")
-	_hKLiveWorkoutDataSourceSelDisableCollectionForType = objc.RegisterName("disableCollectionForType:")
-	_hKLiveWorkoutDataSourceSelTypesToCollect = objc.RegisterName("typesToCollect")
+	_hKLiveWorkoutDataSourceSelEnableCollectionForTypePredicate        = objc.RegisterName("enableCollectionForType:predicate:")
+	_hKLiveWorkoutDataSourceSelDisableCollectionForType                = objc.RegisterName("disableCollectionForType:")
+	_hKLiveWorkoutDataSourceSelTypesToCollect                          = objc.RegisterName("typesToCollect")
 )
 
 func HKLiveWorkoutDataSourceFromID(id objc.ID) *HKLiveWorkoutDataSource {
@@ -36,7 +36,9 @@ func HKLiveWorkoutDataSourceFromID(id objc.ID) *HKLiveWorkoutDataSource {
 // @method        initWithHealthStore:workoutConfiguration: @abstract      The designated initializer of HKLiveWorkoutDataSource. @param         healthStore     The HKHealthStore. This should match the one used to create the corresponding HKWorkoutBuilder. @param         configuration   An optional workout configuration. typesToCollect will be populated with default types for the workout configuration
 func (o *HKLiveWorkoutDataSource) InitWithHealthStoreWorkoutConfiguration(healthStore *HKHealthStore, configuration *HKWorkoutConfiguration) *HKLiveWorkoutDataSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKLiveWorkoutDataSourceSelInitWithHealthStoreWorkoutConfiguration, healthStore.Ptr(), configuration.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKLiveWorkoutDataSourceFromID(_ret)
 }
 
@@ -53,7 +55,8 @@ func (o *HKLiveWorkoutDataSource) DisableCollectionForType(quantityType *HKQuant
 // @property      typesToCollect @abstract      The quantity types the receiver is collecting.
 func (o *HKLiveWorkoutDataSource) TypesToCollect() *foundation.NSSet[*HKQuantityType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKLiveWorkoutDataSourceSelTypesToCollect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*HKQuantityType](_ret)
 }
-

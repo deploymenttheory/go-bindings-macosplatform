@@ -16,8 +16,8 @@ type MTREnergyEVSEClusterRFIDEvent struct {
 }
 
 var (
-	_clsMTREnergyEVSEClusterRFIDEvent = _objcClass("MTREnergyEVSEClusterRFIDEvent")
-	_mTREnergyEVSEClusterRFIDEventSelUid = objc.RegisterName("uid")
+	_clsMTREnergyEVSEClusterRFIDEvent       = _objcClass("MTREnergyEVSEClusterRFIDEvent")
+	_mTREnergyEVSEClusterRFIDEventSelUid    = objc.RegisterName("uid")
 	_mTREnergyEVSEClusterRFIDEventSelSetUid = objc.RegisterName("setUid:")
 )
 
@@ -33,11 +33,12 @@ func MTREnergyEVSEClusterRFIDEventFromID(id objc.ID) *MTREnergyEVSEClusterRFIDEv
 
 func (o *MTREnergyEVSEClusterRFIDEvent) Uid() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREnergyEVSEClusterRFIDEventSelUid)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *MTREnergyEVSEClusterRFIDEvent) SetUid(uid *foundation.NSData) {
 	o.Ptr().Send(_mTREnergyEVSEClusterRFIDEventSelSetUid, uid.Ptr())
 }
-

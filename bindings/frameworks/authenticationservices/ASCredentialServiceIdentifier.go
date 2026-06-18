@@ -16,12 +16,12 @@ type ASCredentialServiceIdentifier struct {
 }
 
 var (
-	_clsASCredentialServiceIdentifier = _objcClass("ASCredentialServiceIdentifier")
-	_aSCredentialServiceIdentifierSelInitWithIdentifierType = objc.RegisterName("initWithIdentifier:type:")
+	_clsASCredentialServiceIdentifier                                  = _objcClass("ASCredentialServiceIdentifier")
+	_aSCredentialServiceIdentifierSelInitWithIdentifierType            = objc.RegisterName("initWithIdentifier:type:")
 	_aSCredentialServiceIdentifierSelInitWithIdentifierTypeDisplayName = objc.RegisterName("initWithIdentifier:type:displayName:")
-	_aSCredentialServiceIdentifierSelDisplayName = objc.RegisterName("displayName")
-	_aSCredentialServiceIdentifierSelIdentifier = objc.RegisterName("identifier")
-	_aSCredentialServiceIdentifierSelType = objc.RegisterName("type")
+	_aSCredentialServiceIdentifierSelDisplayName                       = objc.RegisterName("displayName")
+	_aSCredentialServiceIdentifierSelIdentifier                        = objc.RegisterName("identifier")
+	_aSCredentialServiceIdentifierSelType                              = objc.RegisterName("type")
 )
 
 func ASCredentialServiceIdentifierFromID(id objc.ID) *ASCredentialServiceIdentifier {
@@ -37,28 +37,36 @@ func ASCredentialServiceIdentifierFromID(id objc.ID) *ASCredentialServiceIdentif
 // @abstract Initializes an ASCredentialServiceIdentifier object. @param identifier string value for the service identifier. @param type the type that the service identifier string represents.
 func (o *ASCredentialServiceIdentifier) InitWithIdentifierType(identifier *foundation.NSString, type_ ASCredentialServiceIdentifierType) *ASCredentialServiceIdentifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSCredentialServiceIdentifierSelInitWithIdentifierType, identifier.Ptr(), type_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASCredentialServiceIdentifierFromID(_ret)
 }
 
 // Initializes an ASCredentialServiceIdentifier object. - Parameters: - identifier: The string value for the service identifier. - type: The type that the service identifier string represents. - displayName: A user visible name that describes the service.
 func (o *ASCredentialServiceIdentifier) InitWithIdentifierTypeDisplayName(identifier *foundation.NSString, type_ ASCredentialServiceIdentifierType, displayName *foundation.NSString) *ASCredentialServiceIdentifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSCredentialServiceIdentifierSelInitWithIdentifierTypeDisplayName, identifier.Ptr(), type_, displayName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASCredentialServiceIdentifierFromID(_ret)
 }
 
 // A user visible name for the identifier. For `app` types it will contain the localized name of the app. For `URL` types it will contain the host name of the URL if it contains a valid host. For `URL` type identifiers that do not contain a valid host and for `domain` type identifiers, this will be equal to `identifier`. This property is meant only as a best effort suggestion for display purposes. It is not used by the system to identify the service or suggest a credential for AutoFill.
 func (o *ASCredentialServiceIdentifier) DisplayName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSCredentialServiceIdentifierSelDisplayName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract Get the identifier. @result The service identifier.
 func (o *ASCredentialServiceIdentifier) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSCredentialServiceIdentifierSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -67,4 +75,3 @@ func (o *ASCredentialServiceIdentifier) Type() ASCredentialServiceIdentifierType
 	_ret := objc.Send[ASCredentialServiceIdentifierType](o.Ptr(), _aSCredentialServiceIdentifierSelType)
 	return _ret
 }
-

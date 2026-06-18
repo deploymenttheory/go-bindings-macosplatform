@@ -17,9 +17,9 @@ type AVMetricErrorEvent struct {
 }
 
 var (
-	_clsAVMetricErrorEvent = _objcClass("AVMetricErrorEvent")
+	_clsAVMetricErrorEvent           = _objcClass("AVMetricErrorEvent")
 	_aVMetricErrorEventSelDidRecover = objc.RegisterName("didRecover")
-	_aVMetricErrorEventSelError = objc.RegisterName("error")
+	_aVMetricErrorEventSelError      = objc.RegisterName("error")
 )
 
 func AVMetricErrorEventFromID(id objc.ID) *AVMetricErrorEvent {
@@ -43,4 +43,3 @@ func (o *AVMetricErrorEvent) Error() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVMetricErrorEventSelError)
 	return _ret
 }
-

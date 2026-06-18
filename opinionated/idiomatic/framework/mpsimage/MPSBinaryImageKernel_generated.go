@@ -186,4 +186,3 @@ type BinaryImageKernelable interface {
 }
 
 var _ BinaryImageKernelable = (*BinaryImageKernel)(nil)
-

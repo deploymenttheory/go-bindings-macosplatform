@@ -29,4 +29,3 @@ type TKTokenDriverDelegate interface {
 // TKTokenSessionDelegate wraps the ObjC protocol TKTokenSessionDelegate.
 type TKTokenSessionDelegate interface {
 }
-

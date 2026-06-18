@@ -18,7 +18,9 @@ type MTRICDManagementClusterRegisterClientResponseParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRICDManagementClusterRegisterClientResponseParams].
-func (x *MTRICDManagementClusterRegisterClientResponseParams) Unwrap() *raw.MTRICDManagementClusterRegisterClientResponseParams { return x.inner }
+func (x *MTRICDManagementClusterRegisterClientResponseParams) Unwrap() *raw.MTRICDManagementClusterRegisterClientResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -68,4 +70,3 @@ type MTRICDManagementClusterRegisterClientResponseParamsable interface {
 }
 
 var _ MTRICDManagementClusterRegisterClientResponseParamsable = (*MTRICDManagementClusterRegisterClientResponseParams)(nil)
-

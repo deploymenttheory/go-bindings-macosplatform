@@ -130,4 +130,3 @@ type ChallengeDefinitionable interface {
 }
 
 var _ ChallengeDefinitionable = (*ChallengeDefinition)(nil)
-

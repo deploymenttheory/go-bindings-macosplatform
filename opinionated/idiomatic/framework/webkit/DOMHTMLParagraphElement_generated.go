@@ -159,15 +159,25 @@ func (x *DOMHTMLParagraphElement) SetAlign(align string) {
 	x.inner.SetAlign(foundation.NSStringStringWithUTF8String(align))
 }
 
-func (x *DOMHTMLParagraphElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
+func (x *DOMHTMLParagraphElement) asDOMHTMLElement() *raw.DOMHTMLElement {
+	return &x.inner.DOMHTMLElement
+}
 
-func (x *DOMHTMLParagraphElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
+func (x *DOMHTMLParagraphElement) asDOMElement() *raw.DOMElement {
+	return &x.inner.DOMHTMLElement.DOMElement
+}
 
-func (x *DOMHTMLParagraphElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTMLElement.DOMElement.DOMNode }
+func (x *DOMHTMLParagraphElement) asDOMNode() *raw.DOMNode {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode
+}
 
-func (x *DOMHTMLParagraphElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
+func (x *DOMHTMLParagraphElement) asDOMObject() *raw.DOMObject {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject
+}
 
-func (x *DOMHTMLParagraphElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+func (x *DOMHTMLParagraphElement) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject
+}
 
 // DOMHTMLParagraphElementable is the interface implemented by [DOMHTMLParagraphElement], for mocking and DI.
 type DOMHTMLParagraphElementable interface {
@@ -195,4 +205,3 @@ type DOMHTMLParagraphElementable interface {
 }
 
 var _ DOMHTMLParagraphElementable = (*DOMHTMLParagraphElement)(nil)
-

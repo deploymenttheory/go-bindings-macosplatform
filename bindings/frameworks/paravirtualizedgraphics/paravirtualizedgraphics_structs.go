@@ -12,7 +12,7 @@ type PGDisplayCoord_t struct {
 // @typedef PGPhysicalMemoryRange_t @abstract A struct for a guest physical memory range @field physicalAddress The starting physical address of the range @field physicalLength The length of the range
 type PGPhysicalMemoryRange_s struct {
 	PhysicalAddress uint64
-	PhysicalLength uint64
+	PhysicalLength  uint64
 }
 
 // @typedef PGTask_t @abstract Opaque type to represent a Task.  The ParavirtualizedGraphics framework will not access the contents of this type.
@@ -25,4 +25,3 @@ type PGTraceRange_s struct{}
 
 // PGPhysicalMemoryRange_t is an alias for PGPhysicalMemoryRange_s (C typedef PGPhysicalMemoryRange_t).
 type PGPhysicalMemoryRange_t = PGPhysicalMemoryRange_s
-

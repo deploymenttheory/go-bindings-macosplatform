@@ -16,13 +16,13 @@ type CSPerson struct {
 }
 
 var (
-	_clsCSPerson = _objcClass("CSPerson")
+	_clsCSPerson                                           = _objcClass("CSPerson")
 	_cSPersonSelInitWithDisplayNameHandlesHandleIdentifier = objc.RegisterName("initWithDisplayName:handles:handleIdentifier:")
-	_cSPersonSelDisplayName = objc.RegisterName("displayName")
-	_cSPersonSelHandles = objc.RegisterName("handles")
-	_cSPersonSelHandleIdentifier = objc.RegisterName("handleIdentifier")
-	_cSPersonSelContactIdentifier = objc.RegisterName("contactIdentifier")
-	_cSPersonSelSetContactIdentifier = objc.RegisterName("setContactIdentifier:")
+	_cSPersonSelDisplayName                                = objc.RegisterName("displayName")
+	_cSPersonSelHandles                                    = objc.RegisterName("handles")
+	_cSPersonSelHandleIdentifier                           = objc.RegisterName("handleIdentifier")
+	_cSPersonSelContactIdentifier                          = objc.RegisterName("contactIdentifier")
+	_cSPersonSelSetContactIdentifier                       = objc.RegisterName("setContactIdentifier:")
 )
 
 func CSPersonFromID(id objc.ID) *CSPerson {
@@ -37,13 +37,17 @@ func CSPersonFromID(id objc.ID) *CSPerson {
 
 func (o *CSPerson) InitWithDisplayNameHandlesHandleIdentifier(displayName *foundation.NSString, handles *foundation.NSArray[*foundation.NSString], handleIdentifier *foundation.NSString) *CSPerson {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSPersonSelInitWithDisplayNameHandlesHandleIdentifier, displayName.Ptr(), handles, handleIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CSPersonFromID(_ret)
 }
 
 func (o *CSPerson) DisplayName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSPersonSelDisplayName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -54,17 +58,20 @@ func (o *CSPerson) Handles() *foundation.NSArray[*foundation.NSString] {
 
 func (o *CSPerson) HandleIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSPersonSelHandleIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CSPerson) ContactIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSPersonSelContactIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CSPerson) SetContactIdentifier(contactIdentifier *foundation.NSString) {
 	o.Ptr().Send(_cSPersonSelSetContactIdentifier, contactIdentifier.Ptr())
 }
-

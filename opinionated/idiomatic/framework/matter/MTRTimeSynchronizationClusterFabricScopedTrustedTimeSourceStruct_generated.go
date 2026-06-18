@@ -16,11 +16,15 @@ type MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct].
-func (x *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) Unwrap() *raw.MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct { return x.inner }
+func (x *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) Unwrap() *raw.MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStructFromID adopts an existing object pointer as a MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct (nil for 0).
 func MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStructFromID(id objc.ID) *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct {
@@ -80,4 +84,3 @@ type MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStructable interf
 }
 
 var _ MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStructable = (*MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct)(nil)
-

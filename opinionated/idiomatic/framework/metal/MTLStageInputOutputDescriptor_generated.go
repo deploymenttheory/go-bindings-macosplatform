@@ -105,4 +105,3 @@ type StageInputOutputDescriptorable interface {
 }
 
 var _ StageInputOutputDescriptorable = (*StageInputOutputDescriptor)(nil)
-

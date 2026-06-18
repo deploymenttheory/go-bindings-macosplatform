@@ -118,7 +118,9 @@ func (x *DateFormatter) WithEraSymbols(items ...StringProvider) *DateFormatter {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asString().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
 	_arr := raw.NSArrayFromID[*raw.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -134,7 +136,9 @@ func (x *DateFormatter) WithMonthSymbols(items ...StringProvider) *DateFormatter
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asString().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
 	_arr := raw.NSArrayFromID[*raw.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -150,7 +154,9 @@ func (x *DateFormatter) WithShortMonthSymbols(items ...StringProvider) *DateForm
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asString().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
 	_arr := raw.NSArrayFromID[*raw.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -166,7 +172,9 @@ func (x *DateFormatter) WithWeekdaySymbols(items ...StringProvider) *DateFormatt
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asString().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
 	_arr := raw.NSArrayFromID[*raw.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -182,7 +190,9 @@ func (x *DateFormatter) WithShortWeekdaySymbols(items ...StringProvider) *DateFo
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asString().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
 	_arr := raw.NSArrayFromID[*raw.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -210,7 +220,9 @@ func (x *DateFormatter) WithLongEraSymbols(items ...StringProvider) *DateFormatt
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asString().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
 	_arr := raw.NSArrayFromID[*raw.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -226,7 +238,9 @@ func (x *DateFormatter) WithVeryShortMonthSymbols(items ...StringProvider) *Date
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asString().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
 	_arr := raw.NSArrayFromID[*raw.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -242,7 +256,9 @@ func (x *DateFormatter) WithStandaloneMonthSymbols(items ...StringProvider) *Dat
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asString().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
 	_arr := raw.NSArrayFromID[*raw.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -258,7 +274,9 @@ func (x *DateFormatter) WithShortStandaloneMonthSymbols(items ...StringProvider)
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asString().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
 	_arr := raw.NSArrayFromID[*raw.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -274,7 +292,9 @@ func (x *DateFormatter) WithVeryShortStandaloneMonthSymbols(items ...StringProvi
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asString().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
 	_arr := raw.NSArrayFromID[*raw.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -290,7 +310,9 @@ func (x *DateFormatter) WithVeryShortWeekdaySymbols(items ...StringProvider) *Da
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asString().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
 	_arr := raw.NSArrayFromID[*raw.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -306,7 +328,9 @@ func (x *DateFormatter) WithStandaloneWeekdaySymbols(items ...StringProvider) *D
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asString().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
 	_arr := raw.NSArrayFromID[*raw.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -322,7 +346,9 @@ func (x *DateFormatter) WithShortStandaloneWeekdaySymbols(items ...StringProvide
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asString().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
 	_arr := raw.NSArrayFromID[*raw.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -338,7 +364,9 @@ func (x *DateFormatter) WithVeryShortStandaloneWeekdaySymbols(items ...StringPro
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asString().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
 	_arr := raw.NSArrayFromID[*raw.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -354,7 +382,9 @@ func (x *DateFormatter) WithQuarterSymbols(items ...StringProvider) *DateFormatt
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asString().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
 	_arr := raw.NSArrayFromID[*raw.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -370,7 +400,9 @@ func (x *DateFormatter) WithShortQuarterSymbols(items ...StringProvider) *DateFo
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asString().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
 	_arr := raw.NSArrayFromID[*raw.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -386,7 +418,9 @@ func (x *DateFormatter) WithStandaloneQuarterSymbols(items ...StringProvider) *D
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asString().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
 	_arr := raw.NSArrayFromID[*raw.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -402,7 +436,9 @@ func (x *DateFormatter) WithShortStandaloneQuarterSymbols(items ...StringProvide
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asString().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
 	_arr := raw.NSArrayFromID[*raw.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -1064,4 +1100,3 @@ type DateFormatterable interface {
 }
 
 var _ DateFormatterable = (*DateFormatter)(nil)
-

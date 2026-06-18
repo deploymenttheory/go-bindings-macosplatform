@@ -18,62 +18,62 @@ type NSAppleEventDescriptor struct {
 }
 
 var (
-	_clsNSAppleEventDescriptor = _objcClass("NSAppleEventDescriptor")
-	_nSAppleEventDescriptorSelNullDescriptor = objc.RegisterName("nullDescriptor")
-	_nSAppleEventDescriptorSelDescriptorWithDescriptorTypeBytesLength = objc.RegisterName("descriptorWithDescriptorType:bytes:length:")
-	_nSAppleEventDescriptorSelDescriptorWithDescriptorTypeData = objc.RegisterName("descriptorWithDescriptorType:data:")
-	_nSAppleEventDescriptorSelDescriptorWithBoolean = objc.RegisterName("descriptorWithBoolean:")
-	_nSAppleEventDescriptorSelDescriptorWithEnumCode = objc.RegisterName("descriptorWithEnumCode:")
-	_nSAppleEventDescriptorSelDescriptorWithInt32 = objc.RegisterName("descriptorWithInt32:")
-	_nSAppleEventDescriptorSelDescriptorWithDouble = objc.RegisterName("descriptorWithDouble:")
-	_nSAppleEventDescriptorSelDescriptorWithTypeCode = objc.RegisterName("descriptorWithTypeCode:")
-	_nSAppleEventDescriptorSelDescriptorWithString = objc.RegisterName("descriptorWithString:")
-	_nSAppleEventDescriptorSelDescriptorWithDate = objc.RegisterName("descriptorWithDate:")
-	_nSAppleEventDescriptorSelDescriptorWithFileURL = objc.RegisterName("descriptorWithFileURL:")
+	_clsNSAppleEventDescriptor                                                                     = _objcClass("NSAppleEventDescriptor")
+	_nSAppleEventDescriptorSelNullDescriptor                                                       = objc.RegisterName("nullDescriptor")
+	_nSAppleEventDescriptorSelDescriptorWithDescriptorTypeBytesLength                              = objc.RegisterName("descriptorWithDescriptorType:bytes:length:")
+	_nSAppleEventDescriptorSelDescriptorWithDescriptorTypeData                                     = objc.RegisterName("descriptorWithDescriptorType:data:")
+	_nSAppleEventDescriptorSelDescriptorWithBoolean                                                = objc.RegisterName("descriptorWithBoolean:")
+	_nSAppleEventDescriptorSelDescriptorWithEnumCode                                               = objc.RegisterName("descriptorWithEnumCode:")
+	_nSAppleEventDescriptorSelDescriptorWithInt32                                                  = objc.RegisterName("descriptorWithInt32:")
+	_nSAppleEventDescriptorSelDescriptorWithDouble                                                 = objc.RegisterName("descriptorWithDouble:")
+	_nSAppleEventDescriptorSelDescriptorWithTypeCode                                               = objc.RegisterName("descriptorWithTypeCode:")
+	_nSAppleEventDescriptorSelDescriptorWithString                                                 = objc.RegisterName("descriptorWithString:")
+	_nSAppleEventDescriptorSelDescriptorWithDate                                                   = objc.RegisterName("descriptorWithDate:")
+	_nSAppleEventDescriptorSelDescriptorWithFileURL                                                = objc.RegisterName("descriptorWithFileURL:")
 	_nSAppleEventDescriptorSelAppleEventWithEventClassEventIDTargetDescriptorReturnIDTransactionID = objc.RegisterName("appleEventWithEventClass:eventID:targetDescriptor:returnID:transactionID:")
-	_nSAppleEventDescriptorSelListDescriptor = objc.RegisterName("listDescriptor")
-	_nSAppleEventDescriptorSelRecordDescriptor = objc.RegisterName("recordDescriptor")
-	_nSAppleEventDescriptorSelCurrentProcessDescriptor = objc.RegisterName("currentProcessDescriptor")
-	_nSAppleEventDescriptorSelDescriptorWithProcessIdentifier = objc.RegisterName("descriptorWithProcessIdentifier:")
-	_nSAppleEventDescriptorSelDescriptorWithBundleIdentifier = objc.RegisterName("descriptorWithBundleIdentifier:")
-	_nSAppleEventDescriptorSelDescriptorWithApplicationURL = objc.RegisterName("descriptorWithApplicationURL:")
-	_nSAppleEventDescriptorSelInitWithAEDescNoCopy = objc.RegisterName("initWithAEDescNoCopy:")
-	_nSAppleEventDescriptorSelInitWithDescriptorTypeBytesLength = objc.RegisterName("initWithDescriptorType:bytes:length:")
-	_nSAppleEventDescriptorSelInitWithDescriptorTypeData = objc.RegisterName("initWithDescriptorType:data:")
-	_nSAppleEventDescriptorSelInitWithEventClassEventIDTargetDescriptorReturnIDTransactionID = objc.RegisterName("initWithEventClass:eventID:targetDescriptor:returnID:transactionID:")
-	_nSAppleEventDescriptorSelInitListDescriptor = objc.RegisterName("initListDescriptor")
-	_nSAppleEventDescriptorSelInitRecordDescriptor = objc.RegisterName("initRecordDescriptor")
-	_nSAppleEventDescriptorSelSetParamDescriptorForKeyword = objc.RegisterName("setParamDescriptor:forKeyword:")
-	_nSAppleEventDescriptorSelParamDescriptorForKeyword = objc.RegisterName("paramDescriptorForKeyword:")
-	_nSAppleEventDescriptorSelRemoveParamDescriptorWithKeyword = objc.RegisterName("removeParamDescriptorWithKeyword:")
-	_nSAppleEventDescriptorSelSetAttributeDescriptorForKeyword = objc.RegisterName("setAttributeDescriptor:forKeyword:")
-	_nSAppleEventDescriptorSelAttributeDescriptorForKeyword = objc.RegisterName("attributeDescriptorForKeyword:")
-	_nSAppleEventDescriptorSelSendEventWithOptionsTimeoutError = objc.RegisterName("sendEventWithOptions:timeout:error:")
-	_nSAppleEventDescriptorSelInsertDescriptorAtIndex = objc.RegisterName("insertDescriptor:atIndex:")
-	_nSAppleEventDescriptorSelDescriptorAtIndex = objc.RegisterName("descriptorAtIndex:")
-	_nSAppleEventDescriptorSelRemoveDescriptorAtIndex = objc.RegisterName("removeDescriptorAtIndex:")
-	_nSAppleEventDescriptorSelSetDescriptorForKeyword = objc.RegisterName("setDescriptor:forKeyword:")
-	_nSAppleEventDescriptorSelDescriptorForKeyword = objc.RegisterName("descriptorForKeyword:")
-	_nSAppleEventDescriptorSelRemoveDescriptorWithKeyword = objc.RegisterName("removeDescriptorWithKeyword:")
-	_nSAppleEventDescriptorSelKeywordForDescriptorAtIndex = objc.RegisterName("keywordForDescriptorAtIndex:")
-	_nSAppleEventDescriptorSelCoerceToDescriptorType = objc.RegisterName("coerceToDescriptorType:")
-	_nSAppleEventDescriptorSelAeDesc = objc.RegisterName("aeDesc")
-	_nSAppleEventDescriptorSelDescriptorType = objc.RegisterName("descriptorType")
-	_nSAppleEventDescriptorSelData = objc.RegisterName("data")
-	_nSAppleEventDescriptorSelBooleanValue = objc.RegisterName("booleanValue")
-	_nSAppleEventDescriptorSelEnumCodeValue = objc.RegisterName("enumCodeValue")
-	_nSAppleEventDescriptorSelInt32Value = objc.RegisterName("int32Value")
-	_nSAppleEventDescriptorSelDoubleValue = objc.RegisterName("doubleValue")
-	_nSAppleEventDescriptorSelTypeCodeValue = objc.RegisterName("typeCodeValue")
-	_nSAppleEventDescriptorSelStringValue = objc.RegisterName("stringValue")
-	_nSAppleEventDescriptorSelDateValue = objc.RegisterName("dateValue")
-	_nSAppleEventDescriptorSelFileURLValue = objc.RegisterName("fileURLValue")
-	_nSAppleEventDescriptorSelEventClass = objc.RegisterName("eventClass")
-	_nSAppleEventDescriptorSelEventID = objc.RegisterName("eventID")
-	_nSAppleEventDescriptorSelReturnID = objc.RegisterName("returnID")
-	_nSAppleEventDescriptorSelTransactionID = objc.RegisterName("transactionID")
-	_nSAppleEventDescriptorSelIsRecordDescriptor = objc.RegisterName("isRecordDescriptor")
-	_nSAppleEventDescriptorSelNumberOfItems = objc.RegisterName("numberOfItems")
+	_nSAppleEventDescriptorSelListDescriptor                                                       = objc.RegisterName("listDescriptor")
+	_nSAppleEventDescriptorSelRecordDescriptor                                                     = objc.RegisterName("recordDescriptor")
+	_nSAppleEventDescriptorSelCurrentProcessDescriptor                                             = objc.RegisterName("currentProcessDescriptor")
+	_nSAppleEventDescriptorSelDescriptorWithProcessIdentifier                                      = objc.RegisterName("descriptorWithProcessIdentifier:")
+	_nSAppleEventDescriptorSelDescriptorWithBundleIdentifier                                       = objc.RegisterName("descriptorWithBundleIdentifier:")
+	_nSAppleEventDescriptorSelDescriptorWithApplicationURL                                         = objc.RegisterName("descriptorWithApplicationURL:")
+	_nSAppleEventDescriptorSelInitWithAEDescNoCopy                                                 = objc.RegisterName("initWithAEDescNoCopy:")
+	_nSAppleEventDescriptorSelInitWithDescriptorTypeBytesLength                                    = objc.RegisterName("initWithDescriptorType:bytes:length:")
+	_nSAppleEventDescriptorSelInitWithDescriptorTypeData                                           = objc.RegisterName("initWithDescriptorType:data:")
+	_nSAppleEventDescriptorSelInitWithEventClassEventIDTargetDescriptorReturnIDTransactionID       = objc.RegisterName("initWithEventClass:eventID:targetDescriptor:returnID:transactionID:")
+	_nSAppleEventDescriptorSelInitListDescriptor                                                   = objc.RegisterName("initListDescriptor")
+	_nSAppleEventDescriptorSelInitRecordDescriptor                                                 = objc.RegisterName("initRecordDescriptor")
+	_nSAppleEventDescriptorSelSetParamDescriptorForKeyword                                         = objc.RegisterName("setParamDescriptor:forKeyword:")
+	_nSAppleEventDescriptorSelParamDescriptorForKeyword                                            = objc.RegisterName("paramDescriptorForKeyword:")
+	_nSAppleEventDescriptorSelRemoveParamDescriptorWithKeyword                                     = objc.RegisterName("removeParamDescriptorWithKeyword:")
+	_nSAppleEventDescriptorSelSetAttributeDescriptorForKeyword                                     = objc.RegisterName("setAttributeDescriptor:forKeyword:")
+	_nSAppleEventDescriptorSelAttributeDescriptorForKeyword                                        = objc.RegisterName("attributeDescriptorForKeyword:")
+	_nSAppleEventDescriptorSelSendEventWithOptionsTimeoutError                                     = objc.RegisterName("sendEventWithOptions:timeout:error:")
+	_nSAppleEventDescriptorSelInsertDescriptorAtIndex                                              = objc.RegisterName("insertDescriptor:atIndex:")
+	_nSAppleEventDescriptorSelDescriptorAtIndex                                                    = objc.RegisterName("descriptorAtIndex:")
+	_nSAppleEventDescriptorSelRemoveDescriptorAtIndex                                              = objc.RegisterName("removeDescriptorAtIndex:")
+	_nSAppleEventDescriptorSelSetDescriptorForKeyword                                              = objc.RegisterName("setDescriptor:forKeyword:")
+	_nSAppleEventDescriptorSelDescriptorForKeyword                                                 = objc.RegisterName("descriptorForKeyword:")
+	_nSAppleEventDescriptorSelRemoveDescriptorWithKeyword                                          = objc.RegisterName("removeDescriptorWithKeyword:")
+	_nSAppleEventDescriptorSelKeywordForDescriptorAtIndex                                          = objc.RegisterName("keywordForDescriptorAtIndex:")
+	_nSAppleEventDescriptorSelCoerceToDescriptorType                                               = objc.RegisterName("coerceToDescriptorType:")
+	_nSAppleEventDescriptorSelAeDesc                                                               = objc.RegisterName("aeDesc")
+	_nSAppleEventDescriptorSelDescriptorType                                                       = objc.RegisterName("descriptorType")
+	_nSAppleEventDescriptorSelData                                                                 = objc.RegisterName("data")
+	_nSAppleEventDescriptorSelBooleanValue                                                         = objc.RegisterName("booleanValue")
+	_nSAppleEventDescriptorSelEnumCodeValue                                                        = objc.RegisterName("enumCodeValue")
+	_nSAppleEventDescriptorSelInt32Value                                                           = objc.RegisterName("int32Value")
+	_nSAppleEventDescriptorSelDoubleValue                                                          = objc.RegisterName("doubleValue")
+	_nSAppleEventDescriptorSelTypeCodeValue                                                        = objc.RegisterName("typeCodeValue")
+	_nSAppleEventDescriptorSelStringValue                                                          = objc.RegisterName("stringValue")
+	_nSAppleEventDescriptorSelDateValue                                                            = objc.RegisterName("dateValue")
+	_nSAppleEventDescriptorSelFileURLValue                                                         = objc.RegisterName("fileURLValue")
+	_nSAppleEventDescriptorSelEventClass                                                           = objc.RegisterName("eventClass")
+	_nSAppleEventDescriptorSelEventID                                                              = objc.RegisterName("eventID")
+	_nSAppleEventDescriptorSelReturnID                                                             = objc.RegisterName("returnID")
+	_nSAppleEventDescriptorSelTransactionID                                                        = objc.RegisterName("transactionID")
+	_nSAppleEventDescriptorSelIsRecordDescriptor                                                   = objc.RegisterName("isRecordDescriptor")
+	_nSAppleEventDescriptorSelNumberOfItems                                                        = objc.RegisterName("numberOfItems")
 )
 
 func NSAppleEventDescriptorFromID(id objc.ID) *NSAppleEventDescriptor {
@@ -88,145 +88,193 @@ func NSAppleEventDescriptorFromID(id objc.ID) *NSAppleEventDescriptor {
 
 func NSAppleEventDescriptorNullDescriptor() *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelNullDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
 func NSAppleEventDescriptorDescriptorWithDescriptorTypeBytesLength(descriptorType uint, bytes_ unsafe.Pointer, byteCount uint) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelDescriptorWithDescriptorTypeBytesLength, descriptorType, bytes_, byteCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
 func NSAppleEventDescriptorDescriptorWithDescriptorTypeData(descriptorType uint, data *NSData) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelDescriptorWithDescriptorTypeData, descriptorType, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
 func NSAppleEventDescriptorDescriptorWithBoolean(boolean uint8) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelDescriptorWithBoolean, boolean)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
 func NSAppleEventDescriptorDescriptorWithEnumCode(enumerator uint) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelDescriptorWithEnumCode, enumerator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
 func NSAppleEventDescriptorDescriptorWithInt32(signedInt int) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelDescriptorWithInt32, signedInt)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
 func NSAppleEventDescriptorDescriptorWithDouble(doubleValue float64) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelDescriptorWithDouble, doubleValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
 func NSAppleEventDescriptorDescriptorWithTypeCode(typeCode uint) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelDescriptorWithTypeCode, typeCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
 func NSAppleEventDescriptorDescriptorWithString(string_ *NSString) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelDescriptorWithString, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
 func NSAppleEventDescriptorDescriptorWithDate(date *NSDate) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelDescriptorWithDate, date.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
 func NSAppleEventDescriptorDescriptorWithFileURL(fileURL *NSURL) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelDescriptorWithFileURL, fileURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
 func NSAppleEventDescriptorAppleEventWithEventClassEventIDTargetDescriptorReturnIDTransactionID(eventClass uint, eventID uint, targetDescriptor *NSAppleEventDescriptor, returnID int16, transactionID int) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelAppleEventWithEventClassEventIDTargetDescriptorReturnIDTransactionID, eventClass, eventID, targetDescriptor.Ptr(), returnID, transactionID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
 func NSAppleEventDescriptorListDescriptor() *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelListDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
 func NSAppleEventDescriptorRecordDescriptor() *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelRecordDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
 func NSAppleEventDescriptorCurrentProcessDescriptor() *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelCurrentProcessDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
 func NSAppleEventDescriptorDescriptorWithProcessIdentifier(processIdentifier int) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelDescriptorWithProcessIdentifier, processIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
 func NSAppleEventDescriptorDescriptorWithBundleIdentifier(bundleIdentifier *NSString) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelDescriptorWithBundleIdentifier, bundleIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
 func NSAppleEventDescriptorDescriptorWithApplicationURL(applicationURL *NSURL) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelDescriptorWithApplicationURL, applicationURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
 func (o *NSAppleEventDescriptor) InitWithAEDescNoCopy(aeDesc *ae.AEDesc) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelInitWithAEDescNoCopy, aeDesc)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
 func (o *NSAppleEventDescriptor) InitWithDescriptorTypeBytesLength(descriptorType uint, bytes_ unsafe.Pointer, byteCount uint) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelInitWithDescriptorTypeBytesLength, descriptorType, bytes_, byteCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
 func (o *NSAppleEventDescriptor) InitWithDescriptorTypeData(descriptorType uint, data *NSData) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelInitWithDescriptorTypeData, descriptorType, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
 func (o *NSAppleEventDescriptor) InitWithEventClassEventIDTargetDescriptorReturnIDTransactionID(eventClass uint, eventID uint, targetDescriptor *NSAppleEventDescriptor, returnID int16, transactionID int) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelInitWithEventClassEventIDTargetDescriptorReturnIDTransactionID, eventClass, eventID, targetDescriptor.Ptr(), returnID, transactionID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
 func (o *NSAppleEventDescriptor) InitListDescriptor() *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelInitListDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
 func (o *NSAppleEventDescriptor) InitRecordDescriptor() *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelInitRecordDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
@@ -236,7 +284,9 @@ func (o *NSAppleEventDescriptor) SetParamDescriptorForKeyword(descriptor *NSAppl
 
 func (o *NSAppleEventDescriptor) ParamDescriptorForKeyword(keyword uint) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelParamDescriptorForKeyword, keyword)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
@@ -250,14 +300,18 @@ func (o *NSAppleEventDescriptor) SetAttributeDescriptorForKeyword(descriptor *NS
 
 func (o *NSAppleEventDescriptor) AttributeDescriptorForKeyword(keyword uint) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelAttributeDescriptorForKeyword, keyword)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
 func (o *NSAppleEventDescriptor) SendEventWithOptionsTimeoutError(sendOptions NSAppleEventSendOptions, timeoutInSeconds float64) (*NSAppleEventDescriptor, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelSendEventWithOptionsTimeoutError, sendOptions, timeoutInSeconds, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -270,7 +324,9 @@ func (o *NSAppleEventDescriptor) InsertDescriptorAtIndex(descriptor *NSAppleEven
 
 func (o *NSAppleEventDescriptor) DescriptorAtIndex(index int) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelDescriptorAtIndex, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
@@ -284,7 +340,9 @@ func (o *NSAppleEventDescriptor) SetDescriptorForKeyword(descriptor *NSAppleEven
 
 func (o *NSAppleEventDescriptor) DescriptorForKeyword(keyword uint) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelDescriptorForKeyword, keyword)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
@@ -299,7 +357,9 @@ func (o *NSAppleEventDescriptor) KeywordForDescriptorAtIndex(index int) uint {
 
 func (o *NSAppleEventDescriptor) CoerceToDescriptorType(descriptorType uint) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelCoerceToDescriptorType, descriptorType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
@@ -315,7 +375,9 @@ func (o *NSAppleEventDescriptor) DescriptorType() uint {
 
 func (o *NSAppleEventDescriptor) Data() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
@@ -346,19 +408,25 @@ func (o *NSAppleEventDescriptor) TypeCodeValue() uint {
 
 func (o *NSAppleEventDescriptor) StringValue() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelStringValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSAppleEventDescriptor) DateValue() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelDateValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func (o *NSAppleEventDescriptor) FileURLValue() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelFileURLValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
@@ -391,4 +459,3 @@ func (o *NSAppleEventDescriptor) NumberOfItems() int {
 	_ret := objc.Send[int](o.Ptr(), _nSAppleEventDescriptorSelNumberOfItems)
 	return _ret
 }
-

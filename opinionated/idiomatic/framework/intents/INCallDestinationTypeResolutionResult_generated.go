@@ -15,7 +15,9 @@ type CallDestinationTypeResolutionResult struct {
 }
 
 // Unwrap returns the underlying [raw.INCallDestinationTypeResolutionResult].
-func (x *CallDestinationTypeResolutionResult) Unwrap() *raw.INCallDestinationTypeResolutionResult { return x.inner }
+func (x *CallDestinationTypeResolutionResult) Unwrap() *raw.INCallDestinationTypeResolutionResult {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -35,7 +37,9 @@ func NewCallDestinationTypeResolutionResult() *CallDestinationTypeResolutionResu
 	return &CallDestinationTypeResolutionResult{inner: raw.INCallDestinationTypeResolutionResultFromID(_id)}
 }
 
-func (x *CallDestinationTypeResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
+func (x *CallDestinationTypeResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
+	return &x.inner.INIntentResolutionResult
+}
 
 // CallDestinationTypeResolutionResultable is the interface implemented by [CallDestinationTypeResolutionResult], for mocking and DI.
 type CallDestinationTypeResolutionResultable interface {
@@ -43,4 +47,3 @@ type CallDestinationTypeResolutionResultable interface {
 }
 
 var _ CallDestinationTypeResolutionResultable = (*CallDestinationTypeResolutionResult)(nil)
-

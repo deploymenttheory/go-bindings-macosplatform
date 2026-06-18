@@ -27,4 +27,3 @@ type NotificationResponseProvider interface {
 type NotificationTriggerProvider interface {
 	asNotificationTrigger() *raw.UNNotificationTrigger
 }
-

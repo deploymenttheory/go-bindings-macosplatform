@@ -61,4 +61,3 @@ type CompositionRepositoryable interface {
 }
 
 var _ CompositionRepositoryable = (*CompositionRepository)(nil)
-

@@ -162,4 +162,3 @@ type PointerFunctionsable interface {
 }
 
 var _ PointerFunctionsable = (*PointerFunctions)(nil)
-

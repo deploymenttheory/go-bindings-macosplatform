@@ -136,4 +136,3 @@ type DepthDataable interface {
 }
 
 var _ DepthDataable = (*DepthData)(nil)
-

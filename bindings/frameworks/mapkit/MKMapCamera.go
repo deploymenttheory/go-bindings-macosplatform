@@ -19,21 +19,21 @@ type MKMapCamera struct {
 }
 
 var (
-	_clsMKMapCamera = _objcClass("MKMapCamera")
-	_mKMapCameraSelCamera = objc.RegisterName("camera")
+	_clsMKMapCamera                                                            = _objcClass("MKMapCamera")
+	_mKMapCameraSelCamera                                                      = objc.RegisterName("camera")
 	_mKMapCameraSelCameraLookingAtCenterCoordinateFromEyeCoordinateEyeAltitude = objc.RegisterName("cameraLookingAtCenterCoordinate:fromEyeCoordinate:eyeAltitude:")
-	_mKMapCameraSelCameraLookingAtCenterCoordinateFromDistancePitchHeading = objc.RegisterName("cameraLookingAtCenterCoordinate:fromDistance:pitch:heading:")
-	_mKMapCameraSelCameraLookingAtMapItemForViewSizeAllowPitch = objc.RegisterName("cameraLookingAtMapItem:forViewSize:allowPitch:")
-	_mKMapCameraSelCenterCoordinate = objc.RegisterName("centerCoordinate")
-	_mKMapCameraSelSetCenterCoordinate = objc.RegisterName("setCenterCoordinate:")
-	_mKMapCameraSelCenterCoordinateDistance = objc.RegisterName("centerCoordinateDistance")
-	_mKMapCameraSelSetCenterCoordinateDistance = objc.RegisterName("setCenterCoordinateDistance:")
-	_mKMapCameraSelHeading = objc.RegisterName("heading")
-	_mKMapCameraSelSetHeading = objc.RegisterName("setHeading:")
-	_mKMapCameraSelPitch = objc.RegisterName("pitch")
-	_mKMapCameraSelSetPitch = objc.RegisterName("setPitch:")
-	_mKMapCameraSelAltitude = objc.RegisterName("altitude")
-	_mKMapCameraSelSetAltitude = objc.RegisterName("setAltitude:")
+	_mKMapCameraSelCameraLookingAtCenterCoordinateFromDistancePitchHeading     = objc.RegisterName("cameraLookingAtCenterCoordinate:fromDistance:pitch:heading:")
+	_mKMapCameraSelCameraLookingAtMapItemForViewSizeAllowPitch                 = objc.RegisterName("cameraLookingAtMapItem:forViewSize:allowPitch:")
+	_mKMapCameraSelCenterCoordinate                                            = objc.RegisterName("centerCoordinate")
+	_mKMapCameraSelSetCenterCoordinate                                         = objc.RegisterName("setCenterCoordinate:")
+	_mKMapCameraSelCenterCoordinateDistance                                    = objc.RegisterName("centerCoordinateDistance")
+	_mKMapCameraSelSetCenterCoordinateDistance                                 = objc.RegisterName("setCenterCoordinateDistance:")
+	_mKMapCameraSelHeading                                                     = objc.RegisterName("heading")
+	_mKMapCameraSelSetHeading                                                  = objc.RegisterName("setHeading:")
+	_mKMapCameraSelPitch                                                       = objc.RegisterName("pitch")
+	_mKMapCameraSelSetPitch                                                    = objc.RegisterName("setPitch:")
+	_mKMapCameraSelAltitude                                                    = objc.RegisterName("altitude")
+	_mKMapCameraSelSetAltitude                                                 = objc.RegisterName("setAltitude:")
 )
 
 func MKMapCameraFromID(id objc.ID) *MKMapCamera {
@@ -49,26 +49,34 @@ func MKMapCameraFromID(id objc.ID) *MKMapCamera {
 // Deprecated: Use centerCoordinateDistance
 func MKMapCameraCamera() *MKMapCamera {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKMapCamera), _mKMapCameraSelCamera)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapCameraFromID(_ret)
 }
 
 // Deprecated: Use centerCoordinateDistance
 func MKMapCameraCameraLookingAtCenterCoordinateFromEyeCoordinateEyeAltitude(centerCoordinate unsafe.Pointer, eyeCoordinate unsafe.Pointer, eyeAltitude unsafe.Pointer) *MKMapCamera {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKMapCamera), _mKMapCameraSelCameraLookingAtCenterCoordinateFromEyeCoordinateEyeAltitude, centerCoordinate, eyeCoordinate, eyeAltitude)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapCameraFromID(_ret)
 }
 
 func MKMapCameraCameraLookingAtCenterCoordinateFromDistancePitchHeading(centerCoordinate unsafe.Pointer, distance unsafe.Pointer, pitch float64, heading unsafe.Pointer) *MKMapCamera {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKMapCamera), _mKMapCameraSelCameraLookingAtCenterCoordinateFromDistancePitchHeading, centerCoordinate, distance, pitch, heading)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapCameraFromID(_ret)
 }
 
 func MKMapCameraCameraLookingAtMapItemForViewSizeAllowPitch(mapItem *MKMapItem, viewSize corefoundation.CGSize, allowPitch bool) *MKMapCamera {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKMapCamera), _mKMapCameraSelCameraLookingAtMapItemForViewSizeAllowPitch, mapItem.Ptr(), viewSize, allowPitch)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapCameraFromID(_ret)
 }
 
@@ -118,4 +126,3 @@ func (o *MKMapCamera) Altitude() unsafe.Pointer {
 func (o *MKMapCamera) SetAltitude(altitude unsafe.Pointer) {
 	o.Ptr().Send(_mKMapCameraSelSetAltitude, altitude)
 }
-

@@ -106,4 +106,3 @@ type DraggingItemable interface {
 }
 
 var _ DraggingItemable = (*DraggingItem)(nil)
-

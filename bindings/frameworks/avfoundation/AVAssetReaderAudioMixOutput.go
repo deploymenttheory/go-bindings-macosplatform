@@ -16,15 +16,15 @@ type AVAssetReaderAudioMixOutput struct {
 }
 
 var (
-	_clsAVAssetReaderAudioMixOutput = _objcClass("AVAssetReaderAudioMixOutput")
+	_clsAVAssetReaderAudioMixOutput                                                      = _objcClass("AVAssetReaderAudioMixOutput")
 	_aVAssetReaderAudioMixOutputSelAssetReaderAudioMixOutputWithAudioTracksAudioSettings = objc.RegisterName("assetReaderAudioMixOutputWithAudioTracks:audioSettings:")
-	_aVAssetReaderAudioMixOutputSelInitWithAudioTracksAudioSettings = objc.RegisterName("initWithAudioTracks:audioSettings:")
-	_aVAssetReaderAudioMixOutputSelAudioTracks = objc.RegisterName("audioTracks")
-	_aVAssetReaderAudioMixOutputSelAudioSettings = objc.RegisterName("audioSettings")
-	_aVAssetReaderAudioMixOutputSelAudioMix = objc.RegisterName("audioMix")
-	_aVAssetReaderAudioMixOutputSelSetAudioMix = objc.RegisterName("setAudioMix:")
-	_aVAssetReaderAudioMixOutputSelAudioTimePitchAlgorithm = objc.RegisterName("audioTimePitchAlgorithm")
-	_aVAssetReaderAudioMixOutputSelSetAudioTimePitchAlgorithm = objc.RegisterName("setAudioTimePitchAlgorithm:")
+	_aVAssetReaderAudioMixOutputSelInitWithAudioTracksAudioSettings                      = objc.RegisterName("initWithAudioTracks:audioSettings:")
+	_aVAssetReaderAudioMixOutputSelAudioTracks                                           = objc.RegisterName("audioTracks")
+	_aVAssetReaderAudioMixOutputSelAudioSettings                                         = objc.RegisterName("audioSettings")
+	_aVAssetReaderAudioMixOutputSelAudioMix                                              = objc.RegisterName("audioMix")
+	_aVAssetReaderAudioMixOutputSelSetAudioMix                                           = objc.RegisterName("setAudioMix:")
+	_aVAssetReaderAudioMixOutputSelAudioTimePitchAlgorithm                               = objc.RegisterName("audioTimePitchAlgorithm")
+	_aVAssetReaderAudioMixOutputSelSetAudioTimePitchAlgorithm                            = objc.RegisterName("setAudioTimePitchAlgorithm:")
 )
 
 func AVAssetReaderAudioMixOutputFromID(id objc.ID) *AVAssetReaderAudioMixOutput {
@@ -40,21 +40,27 @@ func AVAssetReaderAudioMixOutputFromID(id objc.ID) *AVAssetReaderAudioMixOutput 
 // @method assetReaderAudioMixOutputWithAudioTracks:audioSettings: @abstract Returns an instance of AVAssetReaderAudioMixOutput for reading mixed audio from the specified audio tracks, with optional audio settings. @param tracks An NSArray of AVAssetTrack objects from which the created object should read sample buffers to be mixed. @param audioSettings An NSDictionary of audio settings to be used for audio output. @result An instance of AVAssetReaderAudioMixOutput. @discussion Each track must be one of the tracks owned by the target AVAssetReader's asset and must be of media type AVMediaTypeAudio. For non-nil values of audioSettings, the audio settings dictionary must contain values for keys in AVAudioSettings.h (linear PCM only). Initialization will fail if the audio settings cannot be used with the specified tracks. AVSampleRateConverterAudioQualityKey is not supported. A value of nil for audioSettings configures the output to return samples in a convenient uncompressed format, with sample rate and other properties determined according to the properties of the specified audio tracks as well as other considerations that may vary according to device capabilities, operating system version, and other factors. Therefore if you wish to perform any processing on the output, you must examine the CMAudioFormatDescription of the CMSampleBuffers that are provided in order to ensure that your processing is appropriately configured for the output format.
 func AVAssetReaderAudioMixOutputAssetReaderAudioMixOutputWithAudioTracksAudioSettings(audioTracks *foundation.NSArray[*AVAssetTrack], audioSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVAssetReaderAudioMixOutput {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetReaderAudioMixOutput), _aVAssetReaderAudioMixOutputSelAssetReaderAudioMixOutputWithAudioTracksAudioSettings, audioTracks.Ptr(), audioSettings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetReaderAudioMixOutputFromID(_ret)
 }
 
 // @method initWithAudioTracks:audioSettings: @abstract Creates an instance of AVAssetReaderAudioMixOutput for reading mixed audio from the specified audio tracks, with optional audio settings. @param tracks An NSArray of AVAssetTrack objects from which the created object should read sample buffers to be mixed. @param audioSettings An NSDictionary of audio settings to be used for audio output. @result An instance of AVAssetReaderAudioMixOutput. @discussion Each track must be one of the tracks owned by the target AVAssetReader's asset and must be of media type AVMediaTypeAudio. For non-nil values of audioSettings, the audio settings dictionary must contain values for keys in AVAudioSettings.h (linear PCM only). Initialization will fail if the audio settings cannot be used with the specified tracks. AVSampleRateConverterAudioQualityKey is not supported. A value of nil for audioSettings configures the output to return samples in a convenient uncompressed format, with sample rate and other properties determined according to the properties of the specified audio tracks as well as other considerations that may vary according to device capabilities, operating system version, and other factors. Therefore if you wish to perform any processing on the output, you must examine the CMAudioFormatDescription of the CMSampleBuffers that are provided in order to ensure that your processing is appropriately configured for the output format. This method throws an exception for any of the following reasons: - an audio track does not have media type AVMediaTypeAudio - an audio track belongs to a different AVAsset - the audio settings contains an AVSampleRateConverterAudioQualityKey - the output would be compressed
 func (o *AVAssetReaderAudioMixOutput) InitWithAudioTracksAudioSettings(audioTracks *foundation.NSArray[*AVAssetTrack], audioSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVAssetReaderAudioMixOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetReaderAudioMixOutputSelInitWithAudioTracksAudioSettings, audioTracks.Ptr(), audioSettings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetReaderAudioMixOutputFromID(_ret)
 }
 
 // @property audioTracks @abstract The tracks from which the receiver reads mixed audio. @discussion The value of this property is an NSArray of AVAssetTracks owned by the target AVAssetReader's asset.
 func (o *AVAssetReaderAudioMixOutput) AudioTracks() *foundation.NSArray[*AVAssetTrack] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetReaderAudioMixOutputSelAudioTracks)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVAssetTrack](_ret)
 }
 
@@ -67,7 +73,9 @@ func (o *AVAssetReaderAudioMixOutput) AudioSettings() *foundation.NSDictionary[*
 // @property audioMix @abstract The audio mix used by the receiver. @discussion The value of this property is an AVAudioMix that can be used to specify how the volume of audio samples read from each source track will change over the timeline of the source asset. This property throws an exception for any of the following reasons: - an audio mix is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown) - setting an audio mix containing a track that was not used to create the receiver - an audio mix is set containing an invalid audio time pitch algorithm
 func (o *AVAssetReaderAudioMixOutput) AudioMix() *AVAudioMix {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetReaderAudioMixOutputSelAudioMix)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioMixFromID(_ret)
 }
 
@@ -78,11 +86,12 @@ func (o *AVAssetReaderAudioMixOutput) SetAudioMix(audioMix *AVAudioMix) {
 // @property audioTimePitchAlgorithm @abstract Indicates the processing algorithm used to manage audio pitch for scaled audio edits. @discussion Constants for various time pitch algorithms, e.g. AVAudioTimePitchAlgorithmSpectral, are defined in AVAudioProcessingSettings.h.  An NSInvalidArgumentException will be raised if this property is set to a value other than the constants defined in that file. The default value is AVAudioTimePitchAlgorithmSpectral.
 func (o *AVAssetReaderAudioMixOutput) AudioTimePitchAlgorithm() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetReaderAudioMixOutputSelAudioTimePitchAlgorithm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *AVAssetReaderAudioMixOutput) SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) {
 	o.Ptr().Send(_aVAssetReaderAudioMixOutputSelSetAudioTimePitchAlgorithm, audioTimePitchAlgorithm.Ptr())
 }
-

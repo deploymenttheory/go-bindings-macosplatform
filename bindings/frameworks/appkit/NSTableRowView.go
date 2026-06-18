@@ -16,36 +16,36 @@ type NSTableRowView struct {
 }
 
 var (
-	_clsNSTableRowView = _objcClass("NSTableRowView")
-	_nSTableRowViewSelDrawBackgroundInRect = objc.RegisterName("drawBackgroundInRect:")
-	_nSTableRowViewSelDrawSelectionInRect = objc.RegisterName("drawSelectionInRect:")
-	_nSTableRowViewSelDrawSeparatorInRect = objc.RegisterName("drawSeparatorInRect:")
+	_clsNSTableRowView                                      = _objcClass("NSTableRowView")
+	_nSTableRowViewSelDrawBackgroundInRect                  = objc.RegisterName("drawBackgroundInRect:")
+	_nSTableRowViewSelDrawSelectionInRect                   = objc.RegisterName("drawSelectionInRect:")
+	_nSTableRowViewSelDrawSeparatorInRect                   = objc.RegisterName("drawSeparatorInRect:")
 	_nSTableRowViewSelDrawDraggingDestinationFeedbackInRect = objc.RegisterName("drawDraggingDestinationFeedbackInRect:")
-	_nSTableRowViewSelViewAtColumn = objc.RegisterName("viewAtColumn:")
-	_nSTableRowViewSelSelectionHighlightStyle = objc.RegisterName("selectionHighlightStyle")
-	_nSTableRowViewSelSetSelectionHighlightStyle = objc.RegisterName("setSelectionHighlightStyle:")
-	_nSTableRowViewSelIsEmphasized = objc.RegisterName("isEmphasized")
-	_nSTableRowViewSelSetEmphasized = objc.RegisterName("setEmphasized:")
-	_nSTableRowViewSelIsGroupRowStyle = objc.RegisterName("isGroupRowStyle")
-	_nSTableRowViewSelSetGroupRowStyle = objc.RegisterName("setGroupRowStyle:")
-	_nSTableRowViewSelIsSelected = objc.RegisterName("isSelected")
-	_nSTableRowViewSelSetSelected = objc.RegisterName("setSelected:")
-	_nSTableRowViewSelIsPreviousRowSelected = objc.RegisterName("isPreviousRowSelected")
-	_nSTableRowViewSelSetPreviousRowSelected = objc.RegisterName("setPreviousRowSelected:")
-	_nSTableRowViewSelIsNextRowSelected = objc.RegisterName("isNextRowSelected")
-	_nSTableRowViewSelSetNextRowSelected = objc.RegisterName("setNextRowSelected:")
-	_nSTableRowViewSelIsFloating = objc.RegisterName("isFloating")
-	_nSTableRowViewSelSetFloating = objc.RegisterName("setFloating:")
-	_nSTableRowViewSelIsTargetForDropOperation = objc.RegisterName("isTargetForDropOperation")
-	_nSTableRowViewSelSetTargetForDropOperation = objc.RegisterName("setTargetForDropOperation:")
-	_nSTableRowViewSelDraggingDestinationFeedbackStyle = objc.RegisterName("draggingDestinationFeedbackStyle")
-	_nSTableRowViewSelSetDraggingDestinationFeedbackStyle = objc.RegisterName("setDraggingDestinationFeedbackStyle:")
-	_nSTableRowViewSelIndentationForDropOperation = objc.RegisterName("indentationForDropOperation")
-	_nSTableRowViewSelSetIndentationForDropOperation = objc.RegisterName("setIndentationForDropOperation:")
-	_nSTableRowViewSelInteriorBackgroundStyle = objc.RegisterName("interiorBackgroundStyle")
-	_nSTableRowViewSelBackgroundColor = objc.RegisterName("backgroundColor")
-	_nSTableRowViewSelSetBackgroundColor = objc.RegisterName("setBackgroundColor:")
-	_nSTableRowViewSelNumberOfColumns = objc.RegisterName("numberOfColumns")
+	_nSTableRowViewSelViewAtColumn                          = objc.RegisterName("viewAtColumn:")
+	_nSTableRowViewSelSelectionHighlightStyle               = objc.RegisterName("selectionHighlightStyle")
+	_nSTableRowViewSelSetSelectionHighlightStyle            = objc.RegisterName("setSelectionHighlightStyle:")
+	_nSTableRowViewSelIsEmphasized                          = objc.RegisterName("isEmphasized")
+	_nSTableRowViewSelSetEmphasized                         = objc.RegisterName("setEmphasized:")
+	_nSTableRowViewSelIsGroupRowStyle                       = objc.RegisterName("isGroupRowStyle")
+	_nSTableRowViewSelSetGroupRowStyle                      = objc.RegisterName("setGroupRowStyle:")
+	_nSTableRowViewSelIsSelected                            = objc.RegisterName("isSelected")
+	_nSTableRowViewSelSetSelected                           = objc.RegisterName("setSelected:")
+	_nSTableRowViewSelIsPreviousRowSelected                 = objc.RegisterName("isPreviousRowSelected")
+	_nSTableRowViewSelSetPreviousRowSelected                = objc.RegisterName("setPreviousRowSelected:")
+	_nSTableRowViewSelIsNextRowSelected                     = objc.RegisterName("isNextRowSelected")
+	_nSTableRowViewSelSetNextRowSelected                    = objc.RegisterName("setNextRowSelected:")
+	_nSTableRowViewSelIsFloating                            = objc.RegisterName("isFloating")
+	_nSTableRowViewSelSetFloating                           = objc.RegisterName("setFloating:")
+	_nSTableRowViewSelIsTargetForDropOperation              = objc.RegisterName("isTargetForDropOperation")
+	_nSTableRowViewSelSetTargetForDropOperation             = objc.RegisterName("setTargetForDropOperation:")
+	_nSTableRowViewSelDraggingDestinationFeedbackStyle      = objc.RegisterName("draggingDestinationFeedbackStyle")
+	_nSTableRowViewSelSetDraggingDestinationFeedbackStyle   = objc.RegisterName("setDraggingDestinationFeedbackStyle:")
+	_nSTableRowViewSelIndentationForDropOperation           = objc.RegisterName("indentationForDropOperation")
+	_nSTableRowViewSelSetIndentationForDropOperation        = objc.RegisterName("setIndentationForDropOperation:")
+	_nSTableRowViewSelInteriorBackgroundStyle               = objc.RegisterName("interiorBackgroundStyle")
+	_nSTableRowViewSelBackgroundColor                       = objc.RegisterName("backgroundColor")
+	_nSTableRowViewSelSetBackgroundColor                    = objc.RegisterName("setBackgroundColor:")
+	_nSTableRowViewSelNumberOfColumns                       = objc.RegisterName("numberOfColumns")
 )
 
 func NSTableRowViewFromID(id objc.ID) *NSTableRowView {
@@ -176,7 +176,9 @@ func (o *NSTableRowView) InteriorBackgroundStyle() NSBackgroundStyle {
 
 func (o *NSTableRowView) BackgroundColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableRowViewSelBackgroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -188,4 +190,3 @@ func (o *NSTableRowView) NumberOfColumns() int {
 	_ret := objc.Send[int](o.Ptr(), _nSTableRowViewSelNumberOfColumns)
 	return _ret
 }
-

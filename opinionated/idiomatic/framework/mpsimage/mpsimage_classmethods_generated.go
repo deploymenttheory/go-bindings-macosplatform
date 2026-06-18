@@ -17,4 +17,3 @@ func MaxKernelDiameter() uint {
 func MinKernelDiameter() uint {
 	return raw.MPSImageMedianMinKernelDiameter()
 }
-

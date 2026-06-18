@@ -16,11 +16,15 @@ type MTRAdministratorCommissioningClusterRevokeCommissioningParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRAdministratorCommissioningClusterRevokeCommissioningParams].
-func (x *MTRAdministratorCommissioningClusterRevokeCommissioningParams) Unwrap() *raw.MTRAdministratorCommissioningClusterRevokeCommissioningParams { return x.inner }
+func (x *MTRAdministratorCommissioningClusterRevokeCommissioningParams) Unwrap() *raw.MTRAdministratorCommissioningClusterRevokeCommissioningParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRAdministratorCommissioningClusterRevokeCommissioningParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRAdministratorCommissioningClusterRevokeCommissioningParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRAdministratorCommissioningClusterRevokeCommissioningParamsFromID adopts an existing object pointer as a MTRAdministratorCommissioningClusterRevokeCommissioningParams (nil for 0).
 func MTRAdministratorCommissioningClusterRevokeCommissioningParamsFromID(id objc.ID) *MTRAdministratorCommissioningClusterRevokeCommissioningParams {
@@ -80,4 +84,3 @@ type MTRAdministratorCommissioningClusterRevokeCommissioningParamsable interface
 }
 
 var _ MTRAdministratorCommissioningClusterRevokeCommissioningParamsable = (*MTRAdministratorCommissioningClusterRevokeCommissioningParams)(nil)
-

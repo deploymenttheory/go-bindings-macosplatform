@@ -18,29 +18,29 @@ type NSValue struct {
 }
 
 var (
-	_clsNSValue = _objcClass("NSValue")
-	_nSValueSelGetValueSize = objc.RegisterName("getValue:size:")
-	_nSValueSelInitWithBytesObjCType = objc.RegisterName("initWithBytes:objCType:")
-	_nSValueSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSValueSelObjCType = objc.RegisterName("objCType")
-	_nSValueSelValueWithBytesObjCType = objc.RegisterName("valueWithBytes:objCType:")
-	_nSValueSelValueWithObjCType = objc.RegisterName("value:withObjCType:")
+	_clsNSValue                           = _objcClass("NSValue")
+	_nSValueSelGetValueSize               = objc.RegisterName("getValue:size:")
+	_nSValueSelInitWithBytesObjCType      = objc.RegisterName("initWithBytes:objCType:")
+	_nSValueSelInitWithCoder              = objc.RegisterName("initWithCoder:")
+	_nSValueSelObjCType                   = objc.RegisterName("objCType")
+	_nSValueSelValueWithBytesObjCType     = objc.RegisterName("valueWithBytes:objCType:")
+	_nSValueSelValueWithObjCType          = objc.RegisterName("value:withObjCType:")
 	_nSValueSelValueWithNonretainedObject = objc.RegisterName("valueWithNonretainedObject:")
-	_nSValueSelValueWithPointer = objc.RegisterName("valueWithPointer:")
-	_nSValueSelIsEqualToValue = objc.RegisterName("isEqualToValue:")
-	_nSValueSelNonretainedObjectValue = objc.RegisterName("nonretainedObjectValue")
-	_nSValueSelPointerValue = objc.RegisterName("pointerValue")
-	_nSValueSelGetValue = objc.RegisterName("getValue:")
-	_nSValueSelValueWithRange = objc.RegisterName("valueWithRange:")
-	_nSValueSelRangeValue = objc.RegisterName("rangeValue")
-	_nSValueSelValueWithPoint = objc.RegisterName("valueWithPoint:")
-	_nSValueSelValueWithSize = objc.RegisterName("valueWithSize:")
-	_nSValueSelValueWithRect = objc.RegisterName("valueWithRect:")
-	_nSValueSelValueWithEdgeInsets = objc.RegisterName("valueWithEdgeInsets:")
-	_nSValueSelPointValue = objc.RegisterName("pointValue")
-	_nSValueSelSizeValue = objc.RegisterName("sizeValue")
-	_nSValueSelRectValue = objc.RegisterName("rectValue")
-	_nSValueSelEdgeInsetsValue = objc.RegisterName("edgeInsetsValue")
+	_nSValueSelValueWithPointer           = objc.RegisterName("valueWithPointer:")
+	_nSValueSelIsEqualToValue             = objc.RegisterName("isEqualToValue:")
+	_nSValueSelNonretainedObjectValue     = objc.RegisterName("nonretainedObjectValue")
+	_nSValueSelPointerValue               = objc.RegisterName("pointerValue")
+	_nSValueSelGetValue                   = objc.RegisterName("getValue:")
+	_nSValueSelValueWithRange             = objc.RegisterName("valueWithRange:")
+	_nSValueSelRangeValue                 = objc.RegisterName("rangeValue")
+	_nSValueSelValueWithPoint             = objc.RegisterName("valueWithPoint:")
+	_nSValueSelValueWithSize              = objc.RegisterName("valueWithSize:")
+	_nSValueSelValueWithRect              = objc.RegisterName("valueWithRect:")
+	_nSValueSelValueWithEdgeInsets        = objc.RegisterName("valueWithEdgeInsets:")
+	_nSValueSelPointValue                 = objc.RegisterName("pointValue")
+	_nSValueSelSizeValue                  = objc.RegisterName("sizeValue")
+	_nSValueSelRectValue                  = objc.RegisterName("rectValue")
+	_nSValueSelEdgeInsetsValue            = objc.RegisterName("edgeInsetsValue")
 )
 
 func NSValueFromID(id objc.ID) *NSValue {
@@ -59,13 +59,17 @@ func (o *NSValue) GetValueSize(value unsafe.Pointer, size uint) {
 
 func (o *NSValue) InitWithBytesObjCType(value unsafe.Pointer, type_ string) *NSValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSValueSelInitWithBytesObjCType, value, type_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSValueFromID(_ret)
 }
 
 func (o *NSValue) InitWithCoder(coder *NSCoder) *NSValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSValueSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSValueFromID(_ret)
 }
 
@@ -76,25 +80,33 @@ func (o *NSValue) ObjCType() unsafe.Pointer {
 
 func NSValueValueWithBytesObjCType(value unsafe.Pointer, type_ string) *NSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSValue), _nSValueSelValueWithBytesObjCType, value, type_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSValueFromID(_ret)
 }
 
 func NSValueValueWithObjCType(value unsafe.Pointer, type_ string) *NSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSValue), _nSValueSelValueWithObjCType, value, type_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSValueFromID(_ret)
 }
 
 func NSValueValueWithNonretainedObject(anObject objc.ID) *NSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSValue), _nSValueSelValueWithNonretainedObject, anObject)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSValueFromID(_ret)
 }
 
 func NSValueValueWithPointer(pointer unsafe.Pointer) *NSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSValue), _nSValueSelValueWithPointer, pointer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSValueFromID(_ret)
 }
 
@@ -120,7 +132,9 @@ func (o *NSValue) GetValue(value unsafe.Pointer) {
 
 func NSValueValueWithRange(range_ NSRange) *NSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSValue), _nSValueSelValueWithRange, range_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSValueFromID(_ret)
 }
 
@@ -131,25 +145,33 @@ func (o *NSValue) RangeValue() NSRange {
 
 func NSValueValueWithPoint(point corefoundation.CGPoint) *NSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSValue), _nSValueSelValueWithPoint, point)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSValueFromID(_ret)
 }
 
 func NSValueValueWithSize(size corefoundation.CGSize) *NSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSValue), _nSValueSelValueWithSize, size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSValueFromID(_ret)
 }
 
 func NSValueValueWithRect(rect corefoundation.CGRect) *NSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSValue), _nSValueSelValueWithRect, rect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSValueFromID(_ret)
 }
 
 func NSValueValueWithEdgeInsets(insets NSEdgeInsets) *NSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSValue), _nSValueSelValueWithEdgeInsets, insets)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSValueFromID(_ret)
 }
 
@@ -172,4 +194,3 @@ func (o *NSValue) EdgeInsetsValue() NSEdgeInsets {
 	_ret := objc.Send[NSEdgeInsets](o.Ptr(), _nSValueSelEdgeInsetsValue)
 	return _ret
 }
-

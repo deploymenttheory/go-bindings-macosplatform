@@ -20,7 +20,9 @@ type BluetoothDeviceSelectorController struct {
 }
 
 // Unwrap returns the underlying [raw.IOBluetoothDeviceSelectorController].
-func (x *BluetoothDeviceSelectorController) Unwrap() *raw.IOBluetoothDeviceSelectorController { return x.inner }
+func (x *BluetoothDeviceSelectorController) Unwrap() *raw.IOBluetoothDeviceSelectorController {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -186,4 +188,3 @@ type BluetoothDeviceSelectorControllerable interface {
 }
 
 var _ BluetoothDeviceSelectorControllerable = (*BluetoothDeviceSelectorController)(nil)
-

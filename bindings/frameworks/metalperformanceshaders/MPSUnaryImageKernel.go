@@ -20,19 +20,19 @@ type MPSUnaryImageKernel struct {
 }
 
 var (
-	_clsMPSUnaryImageKernel = _objcClass("MPSUnaryImageKernel")
-	_mPSUnaryImageKernelSelInitWithDevice = objc.RegisterName("initWithDevice:")
-	_mPSUnaryImageKernelSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
+	_clsMPSUnaryImageKernel                                                         = _objcClass("MPSUnaryImageKernel")
+	_mPSUnaryImageKernelSelInitWithDevice                                           = objc.RegisterName("initWithDevice:")
+	_mPSUnaryImageKernelSelInitWithCoderDevice                                      = objc.RegisterName("initWithCoder:device:")
 	_mPSUnaryImageKernelSelEncodeToCommandBufferInPlaceTextureFallbackCopyAllocator = objc.RegisterName("encodeToCommandBuffer:inPlaceTexture:fallbackCopyAllocator:")
-	_mPSUnaryImageKernelSelEncodeToCommandBufferSourceTextureDestinationTexture = objc.RegisterName("encodeToCommandBuffer:sourceTexture:destinationTexture:")
-	_mPSUnaryImageKernelSelEncodeToCommandBufferSourceImageDestinationImage = objc.RegisterName("encodeToCommandBuffer:sourceImage:destinationImage:")
-	_mPSUnaryImageKernelSelSourceRegionForDestinationSize = objc.RegisterName("sourceRegionForDestinationSize:")
-	_mPSUnaryImageKernelSelOffset = objc.RegisterName("offset")
-	_mPSUnaryImageKernelSelSetOffset = objc.RegisterName("setOffset:")
-	_mPSUnaryImageKernelSelClipRect = objc.RegisterName("clipRect")
-	_mPSUnaryImageKernelSelSetClipRect = objc.RegisterName("setClipRect:")
-	_mPSUnaryImageKernelSelEdgeMode = objc.RegisterName("edgeMode")
-	_mPSUnaryImageKernelSelSetEdgeMode = objc.RegisterName("setEdgeMode:")
+	_mPSUnaryImageKernelSelEncodeToCommandBufferSourceTextureDestinationTexture     = objc.RegisterName("encodeToCommandBuffer:sourceTexture:destinationTexture:")
+	_mPSUnaryImageKernelSelEncodeToCommandBufferSourceImageDestinationImage         = objc.RegisterName("encodeToCommandBuffer:sourceImage:destinationImage:")
+	_mPSUnaryImageKernelSelSourceRegionForDestinationSize                           = objc.RegisterName("sourceRegionForDestinationSize:")
+	_mPSUnaryImageKernelSelOffset                                                   = objc.RegisterName("offset")
+	_mPSUnaryImageKernelSelSetOffset                                                = objc.RegisterName("setOffset:")
+	_mPSUnaryImageKernelSelClipRect                                                 = objc.RegisterName("clipRect")
+	_mPSUnaryImageKernelSelSetClipRect                                              = objc.RegisterName("setClipRect:")
+	_mPSUnaryImageKernelSelEdgeMode                                                 = objc.RegisterName("edgeMode")
+	_mPSUnaryImageKernelSelSetEdgeMode                                              = objc.RegisterName("setEdgeMode:")
 )
 
 func MPSUnaryImageKernelFromID(id objc.ID) *MPSUnaryImageKernel {
@@ -48,14 +48,18 @@ func MPSUnaryImageKernelFromID(id objc.ID) *MPSUnaryImageKernel {
 // @abstract   Standard init with default properties per filter type @param      device      The device that the filter will be used on. May not be NULL. @result     a pointer to the newly initialized object. This will fail, returning nil if the device is not supported. Devices must be MTLFeatureSet_iOS_GPUFamily2_v1 or later.
 func (o *MPSUnaryImageKernel) InitWithDevice(device metal.MTLDevice) *MPSUnaryImageKernel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSUnaryImageKernelSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSUnaryImageKernelFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSUnaryImageKernel) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSUnaryImageKernel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSUnaryImageKernelSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSUnaryImageKernelFromID(_ret)
 }
 
@@ -117,4 +121,3 @@ func (o *MPSUnaryImageKernel) EdgeMode() mpscore.MPSImageEdgeMode {
 func (o *MPSUnaryImageKernel) SetEdgeMode(edgeMode mpscore.MPSImageEdgeMode) {
 	o.Ptr().Send(_mPSUnaryImageKernelSelSetEdgeMode, edgeMode)
 }
-

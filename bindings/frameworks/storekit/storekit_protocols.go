@@ -35,4 +35,3 @@ type SKRequestDelegate interface {
 // SKStoreProductViewControllerDelegate wraps the ObjC protocol SKStoreProductViewControllerDelegate.
 type SKStoreProductViewControllerDelegate interface {
 }
-

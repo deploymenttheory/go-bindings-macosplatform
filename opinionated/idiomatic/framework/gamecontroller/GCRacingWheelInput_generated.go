@@ -53,7 +53,9 @@ func (x *RacingWheelInput) NextInputState() *RacingWheelInputState {
 	return &RacingWheelInputState{inner: _r}
 }
 
-func (x *RacingWheelInput) asRacingWheelInputState() *raw.GCRacingWheelInputState { return &x.inner.GCRacingWheelInputState }
+func (x *RacingWheelInput) asRacingWheelInputState() *raw.GCRacingWheelInputState {
+	return &x.inner.GCRacingWheelInputState
+}
 
 // RacingWheelInputable is the interface implemented by [RacingWheelInput], for mocking and DI.
 type RacingWheelInputable interface {
@@ -63,4 +65,3 @@ type RacingWheelInputable interface {
 }
 
 var _ RacingWheelInputable = (*RacingWheelInput)(nil)
-

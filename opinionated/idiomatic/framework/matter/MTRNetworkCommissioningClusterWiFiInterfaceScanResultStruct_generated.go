@@ -16,11 +16,15 @@ type MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct].
-func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Unwrap() *raw.MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct { return x.inner }
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Unwrap() *raw.MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRNetworkCommissioningClusterWiFiInterfaceScanResultStructFromID adopts an existing object pointer as a MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct (nil for 0).
 func MTRNetworkCommissioningClusterWiFiInterfaceScanResultStructFromID(id objc.ID) *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct {
@@ -132,7 +136,9 @@ func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) SetRssi(rs
 	x.inner.SetRssi(rssi)
 }
 
-func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) asMTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct() *raw.MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct { return x.inner }
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) asMTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct() *raw.MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct {
+	return x.inner
+}
 
 // MTRNetworkCommissioningClusterWiFiInterfaceScanResultStructable is the interface implemented by [MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct], for mocking and DI.
 type MTRNetworkCommissioningClusterWiFiInterfaceScanResultStructable interface {
@@ -158,4 +164,3 @@ type MTRNetworkCommissioningClusterWiFiInterfaceScanResultStructable interface {
 }
 
 var _ MTRNetworkCommissioningClusterWiFiInterfaceScanResultStructable = (*MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct)(nil)
-

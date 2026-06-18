@@ -18,66 +18,66 @@ type NSDocumentController struct {
 }
 
 var (
-	_clsNSDocumentController = _objcClass("NSDocumentController")
-	_nSDocumentControllerSelInit = objc.RegisterName("init")
-	_nSDocumentControllerSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSDocumentControllerSelDocumentForURL = objc.RegisterName("documentForURL:")
-	_nSDocumentControllerSelDocumentForWindow = objc.RegisterName("documentForWindow:")
-	_nSDocumentControllerSelAddDocument = objc.RegisterName("addDocument:")
-	_nSDocumentControllerSelRemoveDocument = objc.RegisterName("removeDocument:")
-	_nSDocumentControllerSelNewDocument = objc.RegisterName("newDocument:")
-	_nSDocumentControllerSelOpenUntitledDocumentAndDisplayError = objc.RegisterName("openUntitledDocumentAndDisplay:error:")
-	_nSDocumentControllerSelMakeUntitledDocumentOfTypeError = objc.RegisterName("makeUntitledDocumentOfType:error:")
-	_nSDocumentControllerSelOpenDocument = objc.RegisterName("openDocument:")
-	_nSDocumentControllerSelURLsFromRunningOpenPanel = objc.RegisterName("URLsFromRunningOpenPanel")
-	_nSDocumentControllerSelRunModalOpenPanelForTypes = objc.RegisterName("runModalOpenPanel:forTypes:")
-	_nSDocumentControllerSelBeginOpenPanelWithCompletionHandler = objc.RegisterName("beginOpenPanelWithCompletionHandler:")
-	_nSDocumentControllerSelBeginOpenPanelForTypesCompletionHandler = objc.RegisterName("beginOpenPanel:forTypes:completionHandler:")
-	_nSDocumentControllerSelOpenDocumentWithContentsOfURLDisplayCompletionHandler = objc.RegisterName("openDocumentWithContentsOfURL:display:completionHandler:")
-	_nSDocumentControllerSelMakeDocumentWithContentsOfURLOfTypeError = objc.RegisterName("makeDocumentWithContentsOfURL:ofType:error:")
-	_nSDocumentControllerSelReopenDocumentForURLWithContentsOfURLDisplayCompletionHandler = objc.RegisterName("reopenDocumentForURL:withContentsOfURL:display:completionHandler:")
-	_nSDocumentControllerSelMakeDocumentForURLWithContentsOfURLOfTypeError = objc.RegisterName("makeDocumentForURL:withContentsOfURL:ofType:error:")
-	_nSDocumentControllerSelSaveAllDocuments = objc.RegisterName("saveAllDocuments:")
+	_clsNSDocumentController                                                                                       = _objcClass("NSDocumentController")
+	_nSDocumentControllerSelInit                                                                                   = objc.RegisterName("init")
+	_nSDocumentControllerSelInitWithCoder                                                                          = objc.RegisterName("initWithCoder:")
+	_nSDocumentControllerSelDocumentForURL                                                                         = objc.RegisterName("documentForURL:")
+	_nSDocumentControllerSelDocumentForWindow                                                                      = objc.RegisterName("documentForWindow:")
+	_nSDocumentControllerSelAddDocument                                                                            = objc.RegisterName("addDocument:")
+	_nSDocumentControllerSelRemoveDocument                                                                         = objc.RegisterName("removeDocument:")
+	_nSDocumentControllerSelNewDocument                                                                            = objc.RegisterName("newDocument:")
+	_nSDocumentControllerSelOpenUntitledDocumentAndDisplayError                                                    = objc.RegisterName("openUntitledDocumentAndDisplay:error:")
+	_nSDocumentControllerSelMakeUntitledDocumentOfTypeError                                                        = objc.RegisterName("makeUntitledDocumentOfType:error:")
+	_nSDocumentControllerSelOpenDocument                                                                           = objc.RegisterName("openDocument:")
+	_nSDocumentControllerSelURLsFromRunningOpenPanel                                                               = objc.RegisterName("URLsFromRunningOpenPanel")
+	_nSDocumentControllerSelRunModalOpenPanelForTypes                                                              = objc.RegisterName("runModalOpenPanel:forTypes:")
+	_nSDocumentControllerSelBeginOpenPanelWithCompletionHandler                                                    = objc.RegisterName("beginOpenPanelWithCompletionHandler:")
+	_nSDocumentControllerSelBeginOpenPanelForTypesCompletionHandler                                                = objc.RegisterName("beginOpenPanel:forTypes:completionHandler:")
+	_nSDocumentControllerSelOpenDocumentWithContentsOfURLDisplayCompletionHandler                                  = objc.RegisterName("openDocumentWithContentsOfURL:display:completionHandler:")
+	_nSDocumentControllerSelMakeDocumentWithContentsOfURLOfTypeError                                               = objc.RegisterName("makeDocumentWithContentsOfURL:ofType:error:")
+	_nSDocumentControllerSelReopenDocumentForURLWithContentsOfURLDisplayCompletionHandler                          = objc.RegisterName("reopenDocumentForURL:withContentsOfURL:display:completionHandler:")
+	_nSDocumentControllerSelMakeDocumentForURLWithContentsOfURLOfTypeError                                         = objc.RegisterName("makeDocumentForURL:withContentsOfURL:ofType:error:")
+	_nSDocumentControllerSelSaveAllDocuments                                                                       = objc.RegisterName("saveAllDocuments:")
 	_nSDocumentControllerSelReviewUnsavedDocumentsWithAlertTitleCancellableDelegateDidReviewAllSelectorContextInfo = objc.RegisterName("reviewUnsavedDocumentsWithAlertTitle:cancellable:delegate:didReviewAllSelector:contextInfo:")
-	_nSDocumentControllerSelCloseAllDocumentsWithDelegateDidCloseAllSelectorContextInfo = objc.RegisterName("closeAllDocumentsWithDelegate:didCloseAllSelector:contextInfo:")
-	_nSDocumentControllerSelDuplicateDocumentWithContentsOfURLCopyingDisplayNameError = objc.RegisterName("duplicateDocumentWithContentsOfURL:copying:displayName:error:")
-	_nSDocumentControllerSelStandardShareMenuItem = objc.RegisterName("standardShareMenuItem")
-	_nSDocumentControllerSelPresentErrorModalForWindowDelegateDidPresentSelectorContextInfo = objc.RegisterName("presentError:modalForWindow:delegate:didPresentSelector:contextInfo:")
-	_nSDocumentControllerSelPresentError = objc.RegisterName("presentError:")
-	_nSDocumentControllerSelWillPresentError = objc.RegisterName("willPresentError:")
-	_nSDocumentControllerSelClearRecentDocuments = objc.RegisterName("clearRecentDocuments:")
-	_nSDocumentControllerSelNoteNewRecentDocument = objc.RegisterName("noteNewRecentDocument:")
-	_nSDocumentControllerSelNoteNewRecentDocumentURL = objc.RegisterName("noteNewRecentDocumentURL:")
-	_nSDocumentControllerSelTypeForContentsOfURLError = objc.RegisterName("typeForContentsOfURL:error:")
-	_nSDocumentControllerSelDocumentClassForType = objc.RegisterName("documentClassForType:")
-	_nSDocumentControllerSelDisplayNameForType = objc.RegisterName("displayNameForType:")
-	_nSDocumentControllerSelValidateUserInterfaceItem = objc.RegisterName("validateUserInterfaceItem:")
-	_nSDocumentControllerSelSharedDocumentController = objc.RegisterName("sharedDocumentController")
-	_nSDocumentControllerSelDocuments = objc.RegisterName("documents")
-	_nSDocumentControllerSelCurrentDocument = objc.RegisterName("currentDocument")
-	_nSDocumentControllerSelCurrentDirectory = objc.RegisterName("currentDirectory")
-	_nSDocumentControllerSelAutosavingDelay = objc.RegisterName("autosavingDelay")
-	_nSDocumentControllerSelSetAutosavingDelay = objc.RegisterName("setAutosavingDelay:")
-	_nSDocumentControllerSelHasEditedDocuments = objc.RegisterName("hasEditedDocuments")
-	_nSDocumentControllerSelAllowsAutomaticShareMenu = objc.RegisterName("allowsAutomaticShareMenu")
-	_nSDocumentControllerSelMaximumRecentDocumentCount = objc.RegisterName("maximumRecentDocumentCount")
-	_nSDocumentControllerSelRecentDocumentURLs = objc.RegisterName("recentDocumentURLs")
-	_nSDocumentControllerSelDefaultType = objc.RegisterName("defaultType")
-	_nSDocumentControllerSelDocumentClassNames = objc.RegisterName("documentClassNames")
-	_nSDocumentControllerSelOpenDocumentWithContentsOfURLDisplayError = objc.RegisterName("openDocumentWithContentsOfURL:display:error:")
-	_nSDocumentControllerSelReopenDocumentForURLWithContentsOfURLError = objc.RegisterName("reopenDocumentForURL:withContentsOfURL:error:")
-	_nSDocumentControllerSelFileExtensionsFromType = objc.RegisterName("fileExtensionsFromType:")
-	_nSDocumentControllerSelTypeFromFileExtension = objc.RegisterName("typeFromFileExtension:")
-	_nSDocumentControllerSelDocumentForFileName = objc.RegisterName("documentForFileName:")
-	_nSDocumentControllerSelFileNamesFromRunningOpenPanel = objc.RegisterName("fileNamesFromRunningOpenPanel")
-	_nSDocumentControllerSelMakeDocumentWithContentsOfFileOfType = objc.RegisterName("makeDocumentWithContentsOfFile:ofType:")
-	_nSDocumentControllerSelMakeDocumentWithContentsOfURLOfType = objc.RegisterName("makeDocumentWithContentsOfURL:ofType:")
-	_nSDocumentControllerSelMakeUntitledDocumentOfType = objc.RegisterName("makeUntitledDocumentOfType:")
-	_nSDocumentControllerSelOpenDocumentWithContentsOfFileDisplay = objc.RegisterName("openDocumentWithContentsOfFile:display:")
-	_nSDocumentControllerSelOpenDocumentWithContentsOfURLDisplay = objc.RegisterName("openDocumentWithContentsOfURL:display:")
-	_nSDocumentControllerSelOpenUntitledDocumentOfTypeDisplay = objc.RegisterName("openUntitledDocumentOfType:display:")
-	_nSDocumentControllerSelSetShouldCreateUI = objc.RegisterName("setShouldCreateUI:")
-	_nSDocumentControllerSelShouldCreateUI = objc.RegisterName("shouldCreateUI")
+	_nSDocumentControllerSelCloseAllDocumentsWithDelegateDidCloseAllSelectorContextInfo                            = objc.RegisterName("closeAllDocumentsWithDelegate:didCloseAllSelector:contextInfo:")
+	_nSDocumentControllerSelDuplicateDocumentWithContentsOfURLCopyingDisplayNameError                              = objc.RegisterName("duplicateDocumentWithContentsOfURL:copying:displayName:error:")
+	_nSDocumentControllerSelStandardShareMenuItem                                                                  = objc.RegisterName("standardShareMenuItem")
+	_nSDocumentControllerSelPresentErrorModalForWindowDelegateDidPresentSelectorContextInfo                        = objc.RegisterName("presentError:modalForWindow:delegate:didPresentSelector:contextInfo:")
+	_nSDocumentControllerSelPresentError                                                                           = objc.RegisterName("presentError:")
+	_nSDocumentControllerSelWillPresentError                                                                       = objc.RegisterName("willPresentError:")
+	_nSDocumentControllerSelClearRecentDocuments                                                                   = objc.RegisterName("clearRecentDocuments:")
+	_nSDocumentControllerSelNoteNewRecentDocument                                                                  = objc.RegisterName("noteNewRecentDocument:")
+	_nSDocumentControllerSelNoteNewRecentDocumentURL                                                               = objc.RegisterName("noteNewRecentDocumentURL:")
+	_nSDocumentControllerSelTypeForContentsOfURLError                                                              = objc.RegisterName("typeForContentsOfURL:error:")
+	_nSDocumentControllerSelDocumentClassForType                                                                   = objc.RegisterName("documentClassForType:")
+	_nSDocumentControllerSelDisplayNameForType                                                                     = objc.RegisterName("displayNameForType:")
+	_nSDocumentControllerSelValidateUserInterfaceItem                                                              = objc.RegisterName("validateUserInterfaceItem:")
+	_nSDocumentControllerSelSharedDocumentController                                                               = objc.RegisterName("sharedDocumentController")
+	_nSDocumentControllerSelDocuments                                                                              = objc.RegisterName("documents")
+	_nSDocumentControllerSelCurrentDocument                                                                        = objc.RegisterName("currentDocument")
+	_nSDocumentControllerSelCurrentDirectory                                                                       = objc.RegisterName("currentDirectory")
+	_nSDocumentControllerSelAutosavingDelay                                                                        = objc.RegisterName("autosavingDelay")
+	_nSDocumentControllerSelSetAutosavingDelay                                                                     = objc.RegisterName("setAutosavingDelay:")
+	_nSDocumentControllerSelHasEditedDocuments                                                                     = objc.RegisterName("hasEditedDocuments")
+	_nSDocumentControllerSelAllowsAutomaticShareMenu                                                               = objc.RegisterName("allowsAutomaticShareMenu")
+	_nSDocumentControllerSelMaximumRecentDocumentCount                                                             = objc.RegisterName("maximumRecentDocumentCount")
+	_nSDocumentControllerSelRecentDocumentURLs                                                                     = objc.RegisterName("recentDocumentURLs")
+	_nSDocumentControllerSelDefaultType                                                                            = objc.RegisterName("defaultType")
+	_nSDocumentControllerSelDocumentClassNames                                                                     = objc.RegisterName("documentClassNames")
+	_nSDocumentControllerSelOpenDocumentWithContentsOfURLDisplayError                                              = objc.RegisterName("openDocumentWithContentsOfURL:display:error:")
+	_nSDocumentControllerSelReopenDocumentForURLWithContentsOfURLError                                             = objc.RegisterName("reopenDocumentForURL:withContentsOfURL:error:")
+	_nSDocumentControllerSelFileExtensionsFromType                                                                 = objc.RegisterName("fileExtensionsFromType:")
+	_nSDocumentControllerSelTypeFromFileExtension                                                                  = objc.RegisterName("typeFromFileExtension:")
+	_nSDocumentControllerSelDocumentForFileName                                                                    = objc.RegisterName("documentForFileName:")
+	_nSDocumentControllerSelFileNamesFromRunningOpenPanel                                                          = objc.RegisterName("fileNamesFromRunningOpenPanel")
+	_nSDocumentControllerSelMakeDocumentWithContentsOfFileOfType                                                   = objc.RegisterName("makeDocumentWithContentsOfFile:ofType:")
+	_nSDocumentControllerSelMakeDocumentWithContentsOfURLOfType                                                    = objc.RegisterName("makeDocumentWithContentsOfURL:ofType:")
+	_nSDocumentControllerSelMakeUntitledDocumentOfType                                                             = objc.RegisterName("makeUntitledDocumentOfType:")
+	_nSDocumentControllerSelOpenDocumentWithContentsOfFileDisplay                                                  = objc.RegisterName("openDocumentWithContentsOfFile:display:")
+	_nSDocumentControllerSelOpenDocumentWithContentsOfURLDisplay                                                   = objc.RegisterName("openDocumentWithContentsOfURL:display:")
+	_nSDocumentControllerSelOpenUntitledDocumentOfTypeDisplay                                                      = objc.RegisterName("openUntitledDocumentOfType:display:")
+	_nSDocumentControllerSelSetShouldCreateUI                                                                      = objc.RegisterName("setShouldCreateUI:")
+	_nSDocumentControllerSelShouldCreateUI                                                                         = objc.RegisterName("shouldCreateUI")
 )
 
 func NSDocumentControllerFromID(id objc.ID) *NSDocumentController {
@@ -92,25 +92,33 @@ func NSDocumentControllerFromID(id objc.ID) *NSDocumentController {
 
 func (o *NSDocumentController) Init() *NSDocumentController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentControllerSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDocumentControllerFromID(_ret)
 }
 
 func (o *NSDocumentController) InitWithCoder(coder *foundation.NSCoder) *NSDocumentController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentControllerSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDocumentControllerFromID(_ret)
 }
 
 func (o *NSDocumentController) DocumentForURL(url *foundation.NSURL) *NSDocument {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentControllerSelDocumentForURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDocumentFromID(_ret)
 }
 
 func (o *NSDocumentController) DocumentForWindow(window *NSWindow) *NSDocument {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentControllerSelDocumentForWindow, window.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDocumentFromID(_ret)
 }
 
@@ -129,7 +137,9 @@ func (o *NSDocumentController) NewDocument(sender objc.ID) {
 func (o *NSDocumentController) OpenUntitledDocumentAndDisplayError(displayDocument bool) (*NSDocument, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentControllerSelOpenUntitledDocumentAndDisplayError, displayDocument, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -139,7 +149,9 @@ func (o *NSDocumentController) OpenUntitledDocumentAndDisplayError(displayDocume
 func (o *NSDocumentController) MakeUntitledDocumentOfTypeError(typeName *foundation.NSString) (*NSDocument, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentControllerSelMakeUntitledDocumentOfTypeError, typeName.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -192,7 +204,9 @@ func (o *NSDocumentController) OpenDocumentWithContentsOfURLDisplayCompletionHan
 func (o *NSDocumentController) MakeDocumentWithContentsOfURLOfTypeError(url *foundation.NSURL, typeName *foundation.NSString) (*NSDocument, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentControllerSelMakeDocumentWithContentsOfURLOfTypeError, url.Ptr(), typeName.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -216,7 +230,9 @@ func (o *NSDocumentController) ReopenDocumentForURLWithContentsOfURLDisplayCompl
 func (o *NSDocumentController) MakeDocumentForURLWithContentsOfURLOfTypeError(urlOrNil *foundation.NSURL, contentsURL *foundation.NSURL, typeName *foundation.NSString) (*NSDocument, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentControllerSelMakeDocumentForURLWithContentsOfURLOfTypeError, urlOrNil.Ptr(), contentsURL.Ptr(), typeName.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -238,7 +254,9 @@ func (o *NSDocumentController) CloseAllDocumentsWithDelegateDidCloseAllSelectorC
 func (o *NSDocumentController) DuplicateDocumentWithContentsOfURLCopyingDisplayNameError(url *foundation.NSURL, duplicateByCopying bool, displayNameOrNil *foundation.NSString) (*NSDocument, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentControllerSelDuplicateDocumentWithContentsOfURLCopyingDisplayNameError, url.Ptr(), duplicateByCopying, displayNameOrNil.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -247,7 +265,9 @@ func (o *NSDocumentController) DuplicateDocumentWithContentsOfURLCopyingDisplayN
 
 func (o *NSDocumentController) StandardShareMenuItem() *NSMenuItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentControllerSelStandardShareMenuItem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuItemFromID(_ret)
 }
 
@@ -280,7 +300,9 @@ func (o *NSDocumentController) NoteNewRecentDocumentURL(url *foundation.NSURL) {
 func (o *NSDocumentController) TypeForContentsOfURLError(url *foundation.NSURL) (*foundation.NSString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentControllerSelTypeForContentsOfURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -294,7 +316,9 @@ func (o *NSDocumentController) DocumentClassForType(typeName *foundation.NSStrin
 
 func (o *NSDocumentController) DisplayNameForType(typeName *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentControllerSelDisplayNameForType, typeName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -305,25 +329,33 @@ func (o *NSDocumentController) ValidateUserInterfaceItem(item NSValidatedUserInt
 
 func NSDocumentControllerSharedDocumentController() *NSDocumentController {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDocumentController), _nSDocumentControllerSelSharedDocumentController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDocumentControllerFromID(_ret)
 }
 
 func (o *NSDocumentController) Documents() *foundation.NSArray[*NSDocument] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentControllerSelDocuments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSDocument](_ret)
 }
 
 func (o *NSDocumentController) CurrentDocument() *NSDocument {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentControllerSelCurrentDocument)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDocumentFromID(_ret)
 }
 
 func (o *NSDocumentController) CurrentDirectory() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentControllerSelCurrentDirectory)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -358,7 +390,9 @@ func (o *NSDocumentController) RecentDocumentURLs() *foundation.NSArray[*foundat
 
 func (o *NSDocumentController) DefaultType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentControllerSelDefaultType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -396,7 +430,9 @@ func (o *NSDocumentController) FileExtensionsFromType(typeName *foundation.NSStr
 // Deprecated: since macOS 10.5.
 func (o *NSDocumentController) TypeFromFileExtension(fileNameExtensionOrHFSFileType *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentControllerSelTypeFromFileExtension, fileNameExtensionOrHFSFileType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -458,4 +494,3 @@ func (o *NSDocumentController) ShouldCreateUI() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDocumentControllerSelShouldCreateUI)
 	return _ret
 }
-

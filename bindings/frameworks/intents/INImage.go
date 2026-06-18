@@ -16,7 +16,7 @@ type INImage struct {
 }
 
 var (
-	_clsINImage = _objcClass("INImage")
+	_clsINImage           = _objcClass("INImage")
 	_iNImageSelImageNamed = objc.RegisterName("imageNamed:")
 )
 
@@ -32,7 +32,8 @@ func INImageFromID(id objc.ID) *INImage {
 
 func INImageImageNamed(name *foundation.NSString) *INImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINImage), _iNImageSelImageNamed, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INImageFromID(_ret)
 }
-

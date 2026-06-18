@@ -15,7 +15,9 @@ type BluetoothAccessibilityIgnoredTextFieldCell struct {
 }
 
 // Unwrap returns the underlying [raw.IOBluetoothAccessibilityIgnoredTextFieldCell].
-func (x *BluetoothAccessibilityIgnoredTextFieldCell) Unwrap() *raw.IOBluetoothAccessibilityIgnoredTextFieldCell { return x.inner }
+func (x *BluetoothAccessibilityIgnoredTextFieldCell) Unwrap() *raw.IOBluetoothAccessibilityIgnoredTextFieldCell {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -41,4 +43,3 @@ type BluetoothAccessibilityIgnoredTextFieldCellable interface {
 }
 
 var _ BluetoothAccessibilityIgnoredTextFieldCellable = (*BluetoothAccessibilityIgnoredTextFieldCell)(nil)
-

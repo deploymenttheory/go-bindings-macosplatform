@@ -116,4 +116,3 @@ type GroupNormalizationLayerable interface {
 }
 
 var _ GroupNormalizationLayerable = (*GroupNormalizationLayer)(nil)
-

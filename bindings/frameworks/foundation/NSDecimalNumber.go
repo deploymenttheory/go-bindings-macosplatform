@@ -15,35 +15,35 @@ type NSDecimalNumber struct {
 }
 
 var (
-	_clsNSDecimalNumber = _objcClass("NSDecimalNumber")
-	_nSDecimalNumberSelInitWithMantissaExponentIsNegative = objc.RegisterName("initWithMantissa:exponent:isNegative:")
-	_nSDecimalNumberSelInitWithDecimal = objc.RegisterName("initWithDecimal:")
-	_nSDecimalNumberSelInitWithString = objc.RegisterName("initWithString:")
-	_nSDecimalNumberSelInitWithStringLocale = objc.RegisterName("initWithString:locale:")
-	_nSDecimalNumberSelDecimalNumberWithMantissaExponentIsNegative = objc.RegisterName("decimalNumberWithMantissa:exponent:isNegative:")
-	_nSDecimalNumberSelDecimalNumberWithDecimal = objc.RegisterName("decimalNumberWithDecimal:")
-	_nSDecimalNumberSelDecimalNumberWithString = objc.RegisterName("decimalNumberWithString:")
-	_nSDecimalNumberSelDecimalNumberWithStringLocale = objc.RegisterName("decimalNumberWithString:locale:")
-	_nSDecimalNumberSelDecimalNumberByAdding = objc.RegisterName("decimalNumberByAdding:")
-	_nSDecimalNumberSelDecimalNumberByAddingWithBehavior = objc.RegisterName("decimalNumberByAdding:withBehavior:")
-	_nSDecimalNumberSelDecimalNumberBySubtracting = objc.RegisterName("decimalNumberBySubtracting:")
-	_nSDecimalNumberSelDecimalNumberBySubtractingWithBehavior = objc.RegisterName("decimalNumberBySubtracting:withBehavior:")
-	_nSDecimalNumberSelDecimalNumberByMultiplyingBy = objc.RegisterName("decimalNumberByMultiplyingBy:")
-	_nSDecimalNumberSelDecimalNumberByMultiplyingByWithBehavior = objc.RegisterName("decimalNumberByMultiplyingBy:withBehavior:")
-	_nSDecimalNumberSelDecimalNumberByDividingBy = objc.RegisterName("decimalNumberByDividingBy:")
-	_nSDecimalNumberSelDecimalNumberByDividingByWithBehavior = objc.RegisterName("decimalNumberByDividingBy:withBehavior:")
-	_nSDecimalNumberSelDecimalNumberByRaisingToPower = objc.RegisterName("decimalNumberByRaisingToPower:")
-	_nSDecimalNumberSelDecimalNumberByRaisingToPowerWithBehavior = objc.RegisterName("decimalNumberByRaisingToPower:withBehavior:")
-	_nSDecimalNumberSelDecimalNumberByMultiplyingByPowerOf10 = objc.RegisterName("decimalNumberByMultiplyingByPowerOf10:")
+	_clsNSDecimalNumber                                                  = _objcClass("NSDecimalNumber")
+	_nSDecimalNumberSelInitWithMantissaExponentIsNegative                = objc.RegisterName("initWithMantissa:exponent:isNegative:")
+	_nSDecimalNumberSelInitWithDecimal                                   = objc.RegisterName("initWithDecimal:")
+	_nSDecimalNumberSelInitWithString                                    = objc.RegisterName("initWithString:")
+	_nSDecimalNumberSelInitWithStringLocale                              = objc.RegisterName("initWithString:locale:")
+	_nSDecimalNumberSelDecimalNumberWithMantissaExponentIsNegative       = objc.RegisterName("decimalNumberWithMantissa:exponent:isNegative:")
+	_nSDecimalNumberSelDecimalNumberWithDecimal                          = objc.RegisterName("decimalNumberWithDecimal:")
+	_nSDecimalNumberSelDecimalNumberWithString                           = objc.RegisterName("decimalNumberWithString:")
+	_nSDecimalNumberSelDecimalNumberWithStringLocale                     = objc.RegisterName("decimalNumberWithString:locale:")
+	_nSDecimalNumberSelDecimalNumberByAdding                             = objc.RegisterName("decimalNumberByAdding:")
+	_nSDecimalNumberSelDecimalNumberByAddingWithBehavior                 = objc.RegisterName("decimalNumberByAdding:withBehavior:")
+	_nSDecimalNumberSelDecimalNumberBySubtracting                        = objc.RegisterName("decimalNumberBySubtracting:")
+	_nSDecimalNumberSelDecimalNumberBySubtractingWithBehavior            = objc.RegisterName("decimalNumberBySubtracting:withBehavior:")
+	_nSDecimalNumberSelDecimalNumberByMultiplyingBy                      = objc.RegisterName("decimalNumberByMultiplyingBy:")
+	_nSDecimalNumberSelDecimalNumberByMultiplyingByWithBehavior          = objc.RegisterName("decimalNumberByMultiplyingBy:withBehavior:")
+	_nSDecimalNumberSelDecimalNumberByDividingBy                         = objc.RegisterName("decimalNumberByDividingBy:")
+	_nSDecimalNumberSelDecimalNumberByDividingByWithBehavior             = objc.RegisterName("decimalNumberByDividingBy:withBehavior:")
+	_nSDecimalNumberSelDecimalNumberByRaisingToPower                     = objc.RegisterName("decimalNumberByRaisingToPower:")
+	_nSDecimalNumberSelDecimalNumberByRaisingToPowerWithBehavior         = objc.RegisterName("decimalNumberByRaisingToPower:withBehavior:")
+	_nSDecimalNumberSelDecimalNumberByMultiplyingByPowerOf10             = objc.RegisterName("decimalNumberByMultiplyingByPowerOf10:")
 	_nSDecimalNumberSelDecimalNumberByMultiplyingByPowerOf10WithBehavior = objc.RegisterName("decimalNumberByMultiplyingByPowerOf10:withBehavior:")
-	_nSDecimalNumberSelDecimalNumberByRoundingAccordingToBehavior = objc.RegisterName("decimalNumberByRoundingAccordingToBehavior:")
-	_nSDecimalNumberSelZero = objc.RegisterName("zero")
-	_nSDecimalNumberSelOne = objc.RegisterName("one")
-	_nSDecimalNumberSelMinimumDecimalNumber = objc.RegisterName("minimumDecimalNumber")
-	_nSDecimalNumberSelMaximumDecimalNumber = objc.RegisterName("maximumDecimalNumber")
-	_nSDecimalNumberSelNotANumber = objc.RegisterName("notANumber")
-	_nSDecimalNumberSelDefaultBehavior = objc.RegisterName("defaultBehavior")
-	_nSDecimalNumberSelSetDefaultBehavior = objc.RegisterName("setDefaultBehavior:")
+	_nSDecimalNumberSelDecimalNumberByRoundingAccordingToBehavior        = objc.RegisterName("decimalNumberByRoundingAccordingToBehavior:")
+	_nSDecimalNumberSelZero                                              = objc.RegisterName("zero")
+	_nSDecimalNumberSelOne                                               = objc.RegisterName("one")
+	_nSDecimalNumberSelMinimumDecimalNumber                              = objc.RegisterName("minimumDecimalNumber")
+	_nSDecimalNumberSelMaximumDecimalNumber                              = objc.RegisterName("maximumDecimalNumber")
+	_nSDecimalNumberSelNotANumber                                        = objc.RegisterName("notANumber")
+	_nSDecimalNumberSelDefaultBehavior                                   = objc.RegisterName("defaultBehavior")
+	_nSDecimalNumberSelSetDefaultBehavior                                = objc.RegisterName("setDefaultBehavior:")
 )
 
 func NSDecimalNumberFromID(id objc.ID) *NSDecimalNumber {
@@ -58,157 +58,209 @@ func NSDecimalNumberFromID(id objc.ID) *NSDecimalNumber {
 
 func (o *NSDecimalNumber) InitWithMantissaExponentIsNegative(mantissa uint64, exponent int16, flag bool) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelInitWithMantissaExponentIsNegative, mantissa, exponent, flag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDecimalNumberFromID(_ret)
 }
 
 func (o *NSDecimalNumber) InitWithDecimal(dcm NSDecimal) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelInitWithDecimal, dcm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDecimalNumberFromID(_ret)
 }
 
 func (o *NSDecimalNumber) InitWithString(numberValue *NSString) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelInitWithString, numberValue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDecimalNumberFromID(_ret)
 }
 
 func (o *NSDecimalNumber) InitWithStringLocale(numberValue *NSString, locale objc.ID) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelInitWithStringLocale, numberValue.Ptr(), locale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDecimalNumberFromID(_ret)
 }
 
 func NSDecimalNumberDecimalNumberWithMantissaExponentIsNegative(mantissa uint64, exponent int16, flag bool) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDecimalNumber), _nSDecimalNumberSelDecimalNumberWithMantissaExponentIsNegative, mantissa, exponent, flag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDecimalNumberFromID(_ret)
 }
 
 func NSDecimalNumberDecimalNumberWithDecimal(dcm NSDecimal) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDecimalNumber), _nSDecimalNumberSelDecimalNumberWithDecimal, dcm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDecimalNumberFromID(_ret)
 }
 
 func NSDecimalNumberDecimalNumberWithString(numberValue *NSString) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDecimalNumber), _nSDecimalNumberSelDecimalNumberWithString, numberValue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDecimalNumberFromID(_ret)
 }
 
 func NSDecimalNumberDecimalNumberWithStringLocale(numberValue *NSString, locale objc.ID) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDecimalNumber), _nSDecimalNumberSelDecimalNumberWithStringLocale, numberValue.Ptr(), locale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDecimalNumberFromID(_ret)
 }
 
 func (o *NSDecimalNumber) DecimalNumberByAdding(decimalNumber *NSDecimalNumber) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelDecimalNumberByAdding, decimalNumber.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDecimalNumberFromID(_ret)
 }
 
 func (o *NSDecimalNumber) DecimalNumberByAddingWithBehavior(decimalNumber *NSDecimalNumber, behavior NSDecimalNumberBehaviors) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelDecimalNumberByAddingWithBehavior, decimalNumber.Ptr(), behavior)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDecimalNumberFromID(_ret)
 }
 
 func (o *NSDecimalNumber) DecimalNumberBySubtracting(decimalNumber *NSDecimalNumber) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelDecimalNumberBySubtracting, decimalNumber.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDecimalNumberFromID(_ret)
 }
 
 func (o *NSDecimalNumber) DecimalNumberBySubtractingWithBehavior(decimalNumber *NSDecimalNumber, behavior NSDecimalNumberBehaviors) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelDecimalNumberBySubtractingWithBehavior, decimalNumber.Ptr(), behavior)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDecimalNumberFromID(_ret)
 }
 
 func (o *NSDecimalNumber) DecimalNumberByMultiplyingBy(decimalNumber *NSDecimalNumber) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelDecimalNumberByMultiplyingBy, decimalNumber.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDecimalNumberFromID(_ret)
 }
 
 func (o *NSDecimalNumber) DecimalNumberByMultiplyingByWithBehavior(decimalNumber *NSDecimalNumber, behavior NSDecimalNumberBehaviors) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelDecimalNumberByMultiplyingByWithBehavior, decimalNumber.Ptr(), behavior)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDecimalNumberFromID(_ret)
 }
 
 func (o *NSDecimalNumber) DecimalNumberByDividingBy(decimalNumber *NSDecimalNumber) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelDecimalNumberByDividingBy, decimalNumber.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDecimalNumberFromID(_ret)
 }
 
 func (o *NSDecimalNumber) DecimalNumberByDividingByWithBehavior(decimalNumber *NSDecimalNumber, behavior NSDecimalNumberBehaviors) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelDecimalNumberByDividingByWithBehavior, decimalNumber.Ptr(), behavior)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDecimalNumberFromID(_ret)
 }
 
 func (o *NSDecimalNumber) DecimalNumberByRaisingToPower(power uint) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelDecimalNumberByRaisingToPower, power)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDecimalNumberFromID(_ret)
 }
 
 func (o *NSDecimalNumber) DecimalNumberByRaisingToPowerWithBehavior(power uint, behavior NSDecimalNumberBehaviors) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelDecimalNumberByRaisingToPowerWithBehavior, power, behavior)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDecimalNumberFromID(_ret)
 }
 
 func (o *NSDecimalNumber) DecimalNumberByMultiplyingByPowerOf10(power int16) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelDecimalNumberByMultiplyingByPowerOf10, power)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDecimalNumberFromID(_ret)
 }
 
 func (o *NSDecimalNumber) DecimalNumberByMultiplyingByPowerOf10WithBehavior(power int16, behavior NSDecimalNumberBehaviors) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelDecimalNumberByMultiplyingByPowerOf10WithBehavior, power, behavior)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDecimalNumberFromID(_ret)
 }
 
 func (o *NSDecimalNumber) DecimalNumberByRoundingAccordingToBehavior(behavior NSDecimalNumberBehaviors) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelDecimalNumberByRoundingAccordingToBehavior, behavior)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDecimalNumberFromID(_ret)
 }
 
 func NSDecimalNumberZero() *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDecimalNumber), _nSDecimalNumberSelZero)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDecimalNumberFromID(_ret)
 }
 
 func NSDecimalNumberOne() *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDecimalNumber), _nSDecimalNumberSelOne)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDecimalNumberFromID(_ret)
 }
 
 func NSDecimalNumberMinimumDecimalNumber() *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDecimalNumber), _nSDecimalNumberSelMinimumDecimalNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDecimalNumberFromID(_ret)
 }
 
 func NSDecimalNumberMaximumDecimalNumber() *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDecimalNumber), _nSDecimalNumberSelMaximumDecimalNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDecimalNumberFromID(_ret)
 }
 
 func NSDecimalNumberNotANumber() *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDecimalNumber), _nSDecimalNumberSelNotANumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDecimalNumberFromID(_ret)
 }
 
@@ -220,4 +272,3 @@ func NSDecimalNumberDefaultBehavior() NSDecimalNumberBehaviors {
 func NSDecimalNumberSetDefaultBehavior(defaultBehavior NSDecimalNumberBehaviors) {
 	objc.ID(_clsNSDecimalNumber).Send(_nSDecimalNumberSelSetDefaultBehavior, defaultBehavior)
 }
-

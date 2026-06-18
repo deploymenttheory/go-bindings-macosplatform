@@ -101,9 +101,13 @@ func (x *MTRClusterWaterHeaterMode) ReadAttributeClusterRevisionWithParams(param
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterWaterHeaterMode) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterWaterHeaterMode) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterWaterHeaterMode) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterWaterHeaterMode) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterWaterHeaterModeable is the interface implemented by [MTRClusterWaterHeaterMode], for mocking and DI.
 type MTRClusterWaterHeaterModeable interface {
@@ -119,4 +123,3 @@ type MTRClusterWaterHeaterModeable interface {
 }
 
 var _ MTRClusterWaterHeaterModeable = (*MTRClusterWaterHeaterMode)(nil)
-

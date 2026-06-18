@@ -191,4 +191,3 @@ type PersistentStoreable interface {
 }
 
 var _ PersistentStoreable = (*PersistentStore)(nil)
-

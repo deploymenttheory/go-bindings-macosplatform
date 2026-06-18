@@ -16,8 +16,8 @@ type MTRWaterHeaterManagementClusterBoostStartedEvent struct {
 }
 
 var (
-	_clsMTRWaterHeaterManagementClusterBoostStartedEvent = _objcClass("MTRWaterHeaterManagementClusterBoostStartedEvent")
-	_mTRWaterHeaterManagementClusterBoostStartedEventSelBoostInfo = objc.RegisterName("boostInfo")
+	_clsMTRWaterHeaterManagementClusterBoostStartedEvent             = _objcClass("MTRWaterHeaterManagementClusterBoostStartedEvent")
+	_mTRWaterHeaterManagementClusterBoostStartedEventSelBoostInfo    = objc.RegisterName("boostInfo")
 	_mTRWaterHeaterManagementClusterBoostStartedEventSelSetBoostInfo = objc.RegisterName("setBoostInfo:")
 )
 
@@ -33,11 +33,12 @@ func MTRWaterHeaterManagementClusterBoostStartedEventFromID(id objc.ID) *MTRWate
 
 func (o *MTRWaterHeaterManagementClusterBoostStartedEvent) BoostInfo() *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRWaterHeaterManagementClusterBoostStartedEventSelBoostInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructFromID(_ret)
 }
 
 func (o *MTRWaterHeaterManagementClusterBoostStartedEvent) SetBoostInfo(boostInfo *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) {
 	o.Ptr().Send(_mTRWaterHeaterManagementClusterBoostStartedEventSelSetBoostInfo, boostInfo.Ptr())
 }
-

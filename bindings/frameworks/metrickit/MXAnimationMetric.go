@@ -16,9 +16,9 @@ type MXAnimationMetric struct {
 }
 
 var (
-	_clsMXAnimationMetric = _objcClass("MXAnimationMetric")
+	_clsMXAnimationMetric                     = _objcClass("MXAnimationMetric")
 	_mXAnimationMetricSelScrollHitchTimeRatio = objc.RegisterName("scrollHitchTimeRatio")
-	_mXAnimationMetricSelHitchTimeRatio = objc.RegisterName("hitchTimeRatio")
+	_mXAnimationMetricSelHitchTimeRatio       = objc.RegisterName("hitchTimeRatio")
 )
 
 func MXAnimationMetricFromID(id objc.ID) *MXAnimationMetric {
@@ -42,4 +42,3 @@ func (o *MXAnimationMetric) HitchTimeRatio() *foundation.NSMeasurement[*foundati
 	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnit]](o.Ptr(), _mXAnimationMetricSelHitchTimeRatio)
 	return _ret
 }
-

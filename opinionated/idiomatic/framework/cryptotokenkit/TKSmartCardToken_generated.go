@@ -58,4 +58,3 @@ type SmartCardTokenable interface {
 }
 
 var _ SmartCardTokenable = (*SmartCardToken)(nil)
-

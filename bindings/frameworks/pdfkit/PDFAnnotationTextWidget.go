@@ -16,14 +16,14 @@ type PDFAnnotationTextWidget struct {
 }
 
 var (
-	_clsPDFAnnotationTextWidget = _objcClass("PDFAnnotationTextWidget")
-	_pDFAnnotationTextWidgetSelStringValue = objc.RegisterName("stringValue")
-	_pDFAnnotationTextWidgetSelSetStringValue = objc.RegisterName("setStringValue:")
-	_pDFAnnotationTextWidgetSelAttributedStringValue = objc.RegisterName("attributedStringValue")
+	_clsPDFAnnotationTextWidget                         = _objcClass("PDFAnnotationTextWidget")
+	_pDFAnnotationTextWidgetSelStringValue              = objc.RegisterName("stringValue")
+	_pDFAnnotationTextWidgetSelSetStringValue           = objc.RegisterName("setStringValue:")
+	_pDFAnnotationTextWidgetSelAttributedStringValue    = objc.RegisterName("attributedStringValue")
 	_pDFAnnotationTextWidgetSelSetAttributedStringValue = objc.RegisterName("setAttributedStringValue:")
-	_pDFAnnotationTextWidgetSelRotation = objc.RegisterName("rotation")
-	_pDFAnnotationTextWidgetSelSetRotation = objc.RegisterName("setRotation:")
-	_pDFAnnotationTextWidgetSelSetIsMultiline = objc.RegisterName("setIsMultiline:")
+	_pDFAnnotationTextWidgetSelRotation                 = objc.RegisterName("rotation")
+	_pDFAnnotationTextWidgetSelSetRotation              = objc.RegisterName("setRotation:")
+	_pDFAnnotationTextWidgetSelSetIsMultiline           = objc.RegisterName("setIsMultiline:")
 )
 
 func PDFAnnotationTextWidgetFromID(id objc.ID) *PDFAnnotationTextWidget {
@@ -38,7 +38,9 @@ func PDFAnnotationTextWidgetFromID(id objc.ID) *PDFAnnotationTextWidget {
 
 func (o *PDFAnnotationTextWidget) StringValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationTextWidgetSelStringValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -48,7 +50,9 @@ func (o *PDFAnnotationTextWidget) SetStringValue(value *foundation.NSString) {
 
 func (o *PDFAnnotationTextWidget) AttributedStringValue() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationTextWidgetSelAttributedStringValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
@@ -68,4 +72,3 @@ func (o *PDFAnnotationTextWidget) SetRotation(rotation int) {
 func (o *PDFAnnotationTextWidget) SetIsMultiline(multiline bool) {
 	o.Ptr().Send(_pDFAnnotationTextWidgetSelSetIsMultiline, multiline)
 }
-

@@ -16,9 +16,9 @@ type CKShareBlockedIdentity struct {
 }
 
 var (
-	_clsCKShareBlockedIdentity = _objcClass("CKShareBlockedIdentity")
+	_clsCKShareBlockedIdentity             = _objcClass("CKShareBlockedIdentity")
 	_cKShareBlockedIdentitySelUserIdentity = objc.RegisterName("userIdentity")
-	_cKShareBlockedIdentitySelContact = objc.RegisterName("contact")
+	_cKShareBlockedIdentitySelContact      = objc.RegisterName("contact")
 )
 
 func CKShareBlockedIdentityFromID(id objc.ID) *CKShareBlockedIdentity {
@@ -34,7 +34,9 @@ func CKShareBlockedIdentityFromID(id objc.ID) *CKShareBlockedIdentity {
 // The identity of the user who has been blocked from requesting access to the share.
 func (o *CKShareBlockedIdentity) UserIdentity() *CKUserIdentity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKShareBlockedIdentitySelUserIdentity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKUserIdentityFromID(_ret)
 }
 
@@ -43,4 +45,3 @@ func (o *CKShareBlockedIdentity) Contact() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKShareBlockedIdentitySelContact)
 	return _ret
 }
-

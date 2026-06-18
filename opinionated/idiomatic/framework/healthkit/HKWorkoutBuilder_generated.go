@@ -201,4 +201,3 @@ type WorkoutBuilderable interface {
 }
 
 var _ WorkoutBuilderable = (*WorkoutBuilder)(nil)
-

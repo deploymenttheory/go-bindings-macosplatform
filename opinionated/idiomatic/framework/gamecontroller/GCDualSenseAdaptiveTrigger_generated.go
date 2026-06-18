@@ -140,9 +140,13 @@ func (x *DualSenseAdaptiveTrigger) ArmPosition() float32 {
 	return x.inner.ArmPosition()
 }
 
-func (x *DualSenseAdaptiveTrigger) asControllerButtonInput() *raw.GCControllerButtonInput { return &x.inner.GCControllerButtonInput }
+func (x *DualSenseAdaptiveTrigger) asControllerButtonInput() *raw.GCControllerButtonInput {
+	return &x.inner.GCControllerButtonInput
+}
 
-func (x *DualSenseAdaptiveTrigger) asControllerElement() *raw.GCControllerElement { return &x.inner.GCControllerButtonInput.GCControllerElement }
+func (x *DualSenseAdaptiveTrigger) asControllerElement() *raw.GCControllerElement {
+	return &x.inner.GCControllerButtonInput.GCControllerElement
+}
 
 // DualSenseAdaptiveTriggerable is the interface implemented by [DualSenseAdaptiveTrigger], for mocking and DI.
 type DualSenseAdaptiveTriggerable interface {
@@ -169,4 +173,3 @@ type DualSenseAdaptiveTriggerable interface {
 }
 
 var _ DualSenseAdaptiveTriggerable = (*DualSenseAdaptiveTrigger)(nil)
-

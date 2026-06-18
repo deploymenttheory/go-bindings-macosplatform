@@ -72,4 +72,3 @@ type URLQueryItemable interface {
 }
 
 var _ URLQueryItemable = (*URLQueryItem)(nil)
-

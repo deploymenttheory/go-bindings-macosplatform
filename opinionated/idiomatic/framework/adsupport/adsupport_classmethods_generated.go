@@ -16,4 +16,3 @@ func SharedManager() *IdentifierManager {
 	}
 	return &IdentifierManager{inner: _r}
 }
-

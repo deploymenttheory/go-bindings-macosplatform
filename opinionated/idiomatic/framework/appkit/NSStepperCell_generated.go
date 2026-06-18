@@ -456,4 +456,3 @@ type StepperCellable interface {
 }
 
 var _ StepperCellable = (*StepperCell)(nil)
-

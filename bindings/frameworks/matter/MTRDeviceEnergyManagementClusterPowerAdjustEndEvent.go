@@ -16,12 +16,12 @@ type MTRDeviceEnergyManagementClusterPowerAdjustEndEvent struct {
 }
 
 var (
-	_clsMTRDeviceEnergyManagementClusterPowerAdjustEndEvent = _objcClass("MTRDeviceEnergyManagementClusterPowerAdjustEndEvent")
-	_mTRDeviceEnergyManagementClusterPowerAdjustEndEventSelCause = objc.RegisterName("cause")
-	_mTRDeviceEnergyManagementClusterPowerAdjustEndEventSelSetCause = objc.RegisterName("setCause:")
-	_mTRDeviceEnergyManagementClusterPowerAdjustEndEventSelDuration = objc.RegisterName("duration")
-	_mTRDeviceEnergyManagementClusterPowerAdjustEndEventSelSetDuration = objc.RegisterName("setDuration:")
-	_mTRDeviceEnergyManagementClusterPowerAdjustEndEventSelEnergyUse = objc.RegisterName("energyUse")
+	_clsMTRDeviceEnergyManagementClusterPowerAdjustEndEvent             = _objcClass("MTRDeviceEnergyManagementClusterPowerAdjustEndEvent")
+	_mTRDeviceEnergyManagementClusterPowerAdjustEndEventSelCause        = objc.RegisterName("cause")
+	_mTRDeviceEnergyManagementClusterPowerAdjustEndEventSelSetCause     = objc.RegisterName("setCause:")
+	_mTRDeviceEnergyManagementClusterPowerAdjustEndEventSelDuration     = objc.RegisterName("duration")
+	_mTRDeviceEnergyManagementClusterPowerAdjustEndEventSelSetDuration  = objc.RegisterName("setDuration:")
+	_mTRDeviceEnergyManagementClusterPowerAdjustEndEventSelEnergyUse    = objc.RegisterName("energyUse")
 	_mTRDeviceEnergyManagementClusterPowerAdjustEndEventSelSetEnergyUse = objc.RegisterName("setEnergyUse:")
 )
 
@@ -37,7 +37,9 @@ func MTRDeviceEnergyManagementClusterPowerAdjustEndEventFromID(id objc.ID) *MTRD
 
 func (o *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) Cause() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterPowerAdjustEndEventSelCause)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) SetCause(cause *fo
 
 func (o *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) Duration() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterPowerAdjustEndEventSelDuration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) SetDuration(durati
 
 func (o *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) EnergyUse() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterPowerAdjustEndEventSelEnergyUse)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) SetEnergyUse(energyUse *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDeviceEnergyManagementClusterPowerAdjustEndEventSelSetEnergyUse, energyUse.Ptr())
 }
-

@@ -16,10 +16,10 @@ type MDLURLTexture struct {
 }
 
 var (
-	_clsMDLURLTexture = _objcClass("MDLURLTexture")
+	_clsMDLURLTexture                = _objcClass("MDLURLTexture")
 	_mDLURLTextureSelInitWithURLName = objc.RegisterName("initWithURL:name:")
-	_mDLURLTextureSelURL = objc.RegisterName("URL")
-	_mDLURLTextureSelSetURL = objc.RegisterName("setURL:")
+	_mDLURLTextureSelURL             = objc.RegisterName("URL")
+	_mDLURLTextureSelSetURL          = objc.RegisterName("setURL:")
 )
 
 func MDLURLTextureFromID(id objc.ID) *MDLURLTexture {
@@ -34,17 +34,20 @@ func MDLURLTextureFromID(id objc.ID) *MDLURLTexture {
 
 func (o *MDLURLTexture) InitWithURLName(uRL *foundation.NSURL, name *foundation.NSString) *MDLURLTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLURLTextureSelInitWithURLName, uRL.Ptr(), name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLURLTextureFromID(_ret)
 }
 
 func (o *MDLURLTexture) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLURLTextureSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *MDLURLTexture) SetURL(uRL *foundation.NSURL) {
 	o.Ptr().Send(_mDLURLTextureSelSetURL, uRL.Ptr())
 }
-

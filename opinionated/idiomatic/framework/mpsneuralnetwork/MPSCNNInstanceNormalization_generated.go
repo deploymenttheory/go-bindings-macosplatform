@@ -153,4 +153,3 @@ type CNNInstanceNormalizationable interface {
 }
 
 var _ CNNInstanceNormalizationable = (*CNNInstanceNormalization)(nil)
-

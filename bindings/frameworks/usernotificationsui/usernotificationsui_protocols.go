@@ -11,4 +11,3 @@ import (
 type UNNotificationContentExtension interface {
 	DidReceiveNotification(notification *usernotifications.UNNotification)
 }
-

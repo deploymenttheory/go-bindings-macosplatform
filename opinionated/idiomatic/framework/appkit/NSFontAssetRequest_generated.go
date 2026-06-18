@@ -69,4 +69,3 @@ type FontAssetRequestable interface {
 }
 
 var _ FontAssetRequestable = (*FontAssetRequest)(nil)
-

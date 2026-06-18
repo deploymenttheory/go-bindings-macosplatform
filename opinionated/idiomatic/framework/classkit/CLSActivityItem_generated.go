@@ -80,4 +80,3 @@ type ActivityItemable interface {
 }
 
 var _ ActivityItemable = (*ActivityItem)(nil)
-

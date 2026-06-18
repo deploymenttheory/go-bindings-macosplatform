@@ -16,8 +16,8 @@ type PHChange struct {
 }
 
 var (
-	_clsPHChange = _objcClass("PHChange")
-	_pHChangeSelChangeDetailsForObject = objc.RegisterName("changeDetailsForObject:")
+	_clsPHChange                            = _objcClass("PHChange")
+	_pHChangeSelChangeDetailsForObject      = objc.RegisterName("changeDetailsForObject:")
 	_pHChangeSelChangeDetailsForFetchResult = objc.RegisterName("changeDetailsForFetchResult:")
 )
 
@@ -40,4 +40,3 @@ func (o *PHChange) ChangeDetailsForFetchResult(object *PHFetchResult[objc.ID]) *
 	_ret := objc.Send[*PHFetchResultChangeDetails[objc.ID]](o.Ptr(), _pHChangeSelChangeDetailsForFetchResult, object)
 	return _ret
 }
-

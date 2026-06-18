@@ -17,15 +17,15 @@ type GKCoherentNoiseSource struct {
 }
 
 var (
-	_clsGKCoherentNoiseSource = _objcClass("GKCoherentNoiseSource")
-	_gKCoherentNoiseSourceSelFrequency = objc.RegisterName("frequency")
-	_gKCoherentNoiseSourceSelSetFrequency = objc.RegisterName("setFrequency:")
-	_gKCoherentNoiseSourceSelOctaveCount = objc.RegisterName("octaveCount")
+	_clsGKCoherentNoiseSource               = _objcClass("GKCoherentNoiseSource")
+	_gKCoherentNoiseSourceSelFrequency      = objc.RegisterName("frequency")
+	_gKCoherentNoiseSourceSelSetFrequency   = objc.RegisterName("setFrequency:")
+	_gKCoherentNoiseSourceSelOctaveCount    = objc.RegisterName("octaveCount")
 	_gKCoherentNoiseSourceSelSetOctaveCount = objc.RegisterName("setOctaveCount:")
-	_gKCoherentNoiseSourceSelLacunarity = objc.RegisterName("lacunarity")
-	_gKCoherentNoiseSourceSelSetLacunarity = objc.RegisterName("setLacunarity:")
-	_gKCoherentNoiseSourceSelSeed = objc.RegisterName("seed")
-	_gKCoherentNoiseSourceSelSetSeed = objc.RegisterName("setSeed:")
+	_gKCoherentNoiseSourceSelLacunarity     = objc.RegisterName("lacunarity")
+	_gKCoherentNoiseSourceSelSetLacunarity  = objc.RegisterName("setLacunarity:")
+	_gKCoherentNoiseSourceSelSeed           = objc.RegisterName("seed")
+	_gKCoherentNoiseSourceSelSetSeed        = objc.RegisterName("setSeed:")
 )
 
 func GKCoherentNoiseSourceFromID(id objc.ID) *GKCoherentNoiseSource {
@@ -73,4 +73,3 @@ func (o *GKCoherentNoiseSource) Seed() int32 {
 func (o *GKCoherentNoiseSource) SetSeed(seed int32) {
 	o.Ptr().Send(_gKCoherentNoiseSourceSelSetSeed, seed)
 }
-

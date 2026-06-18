@@ -193,13 +193,21 @@ func (x *DOMHTMLOListElement) SetType(type_ string) {
 
 func (x *DOMHTMLOListElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
-func (x *DOMHTMLOListElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
+func (x *DOMHTMLOListElement) asDOMElement() *raw.DOMElement {
+	return &x.inner.DOMHTMLElement.DOMElement
+}
 
-func (x *DOMHTMLOListElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTMLElement.DOMElement.DOMNode }
+func (x *DOMHTMLOListElement) asDOMNode() *raw.DOMNode {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode
+}
 
-func (x *DOMHTMLOListElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
+func (x *DOMHTMLOListElement) asDOMObject() *raw.DOMObject {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject
+}
 
-func (x *DOMHTMLOListElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+func (x *DOMHTMLOListElement) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject
+}
 
 // DOMHTMLOListElementable is the interface implemented by [DOMHTMLOListElement], for mocking and DI.
 type DOMHTMLOListElementable interface {
@@ -233,4 +241,3 @@ type DOMHTMLOListElementable interface {
 }
 
 var _ DOMHTMLOListElementable = (*DOMHTMLOListElement)(nil)
-

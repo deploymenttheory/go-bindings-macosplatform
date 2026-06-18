@@ -54,7 +54,9 @@ func (x *MTRDescriptorClusterDeviceType) WithRevision(revision *foundation.NSNum
 	return x
 }
 
-func (x *MTRDescriptorClusterDeviceType) asMTRDescriptorClusterDeviceTypeStruct() *raw.MTRDescriptorClusterDeviceTypeStruct { return &x.inner.MTRDescriptorClusterDeviceTypeStruct }
+func (x *MTRDescriptorClusterDeviceType) asMTRDescriptorClusterDeviceTypeStruct() *raw.MTRDescriptorClusterDeviceTypeStruct {
+	return &x.inner.MTRDescriptorClusterDeviceTypeStruct
+}
 
 // MTRDescriptorClusterDeviceTypeable is the interface implemented by [MTRDescriptorClusterDeviceType], for mocking and DI.
 type MTRDescriptorClusterDeviceTypeable interface {
@@ -65,4 +67,3 @@ type MTRDescriptorClusterDeviceTypeable interface {
 }
 
 var _ MTRDescriptorClusterDeviceTypeable = (*MTRDescriptorClusterDeviceType)(nil)
-

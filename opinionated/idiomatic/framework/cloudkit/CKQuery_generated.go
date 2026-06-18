@@ -53,7 +53,9 @@ func (x *Query) WithSortDescriptors(items ...*foundation.NSSortDescriptor) *Quer
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSSortDescriptor](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -103,4 +105,3 @@ type Queryable interface {
 }
 
 var _ Queryable = (*Query)(nil)
-

@@ -17,4 +17,3 @@ type MultiValueProvider interface {
 type RecordProvider interface {
 	asRecord() *raw.ABRecord
 }
-

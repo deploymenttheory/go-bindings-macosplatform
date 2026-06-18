@@ -16,13 +16,13 @@ type VNRectangleObservation struct {
 }
 
 var (
-	_clsVNRectangleObservation = _objcClass("VNRectangleObservation")
+	_clsVNRectangleObservation                                                                            = _objcClass("VNRectangleObservation")
 	_vNRectangleObservationSelRectangleObservationWithRequestRevisionTopLeftBottomLeftBottomRightTopRight = objc.RegisterName("rectangleObservationWithRequestRevision:topLeft:bottomLeft:bottomRight:topRight:")
 	_vNRectangleObservationSelRectangleObservationWithRequestRevisionTopLeftTopRightBottomRightBottomLeft = objc.RegisterName("rectangleObservationWithRequestRevision:topLeft:topRight:bottomRight:bottomLeft:")
-	_vNRectangleObservationSelTopLeft = objc.RegisterName("topLeft")
-	_vNRectangleObservationSelTopRight = objc.RegisterName("topRight")
-	_vNRectangleObservationSelBottomLeft = objc.RegisterName("bottomLeft")
-	_vNRectangleObservationSelBottomRight = objc.RegisterName("bottomRight")
+	_vNRectangleObservationSelTopLeft                                                                     = objc.RegisterName("topLeft")
+	_vNRectangleObservationSelTopRight                                                                    = objc.RegisterName("topRight")
+	_vNRectangleObservationSelBottomLeft                                                                  = objc.RegisterName("bottomLeft")
+	_vNRectangleObservationSelBottomRight                                                                 = objc.RegisterName("bottomRight")
 )
 
 func VNRectangleObservationFromID(id objc.ID) *VNRectangleObservation {
@@ -39,14 +39,18 @@ func VNRectangleObservationFromID(id objc.ID) *VNRectangleObservation {
 // Deprecated: since macOS 14.0.
 func VNRectangleObservationRectangleObservationWithRequestRevisionTopLeftBottomLeftBottomRightTopRight(requestRevision uint, topLeft corefoundation.CGPoint, bottomLeft corefoundation.CGPoint, bottomRight corefoundation.CGPoint, topRight corefoundation.CGPoint) *VNRectangleObservation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVNRectangleObservation), _vNRectangleObservationSelRectangleObservationWithRequestRevisionTopLeftBottomLeftBottomRightTopRight, requestRevision, topLeft, bottomLeft, bottomRight, topRight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNRectangleObservationFromID(_ret)
 }
 
 // @brief Create a synthesized `VNRectangleObservation`. @param requestRevision The revision of the VNDetectRectanglesRequest that the observation is to be treated as originating from. @param topLeft The top-left corner of the rectangle in normalized coordinate space. @param topRight The top-right corner of the rectangle in normalized coordinate space. @param bottomRight The bottom-right corner of the rectangle in normalized coordinate space. @param bottomLeft The bottom-left corner of the rectangle in normalized coordinate space.
 func VNRectangleObservationRectangleObservationWithRequestRevisionTopLeftTopRightBottomRightBottomLeft(requestRevision uint, topLeft corefoundation.CGPoint, topRight corefoundation.CGPoint, bottomRight corefoundation.CGPoint, bottomLeft corefoundation.CGPoint) *VNRectangleObservation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVNRectangleObservation), _vNRectangleObservationSelRectangleObservationWithRequestRevisionTopLeftTopRightBottomRightBottomLeft, requestRevision, topLeft, topRight, bottomRight, bottomLeft)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNRectangleObservationFromID(_ret)
 }
 
@@ -69,4 +73,3 @@ func (o *VNRectangleObservation) BottomRight() corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _vNRectangleObservationSelBottomRight)
 	return _ret
 }
-

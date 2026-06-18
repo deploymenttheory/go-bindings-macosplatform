@@ -19,14 +19,14 @@ type AVCameraCalibrationData struct {
 }
 
 var (
-	_clsAVCameraCalibrationData = _objcClass("AVCameraCalibrationData")
-	_aVCameraCalibrationDataSelIntrinsicMatrix = objc.RegisterName("intrinsicMatrix")
+	_clsAVCameraCalibrationData                                   = _objcClass("AVCameraCalibrationData")
+	_aVCameraCalibrationDataSelIntrinsicMatrix                    = objc.RegisterName("intrinsicMatrix")
 	_aVCameraCalibrationDataSelIntrinsicMatrixReferenceDimensions = objc.RegisterName("intrinsicMatrixReferenceDimensions")
-	_aVCameraCalibrationDataSelExtrinsicMatrix = objc.RegisterName("extrinsicMatrix")
-	_aVCameraCalibrationDataSelPixelSize = objc.RegisterName("pixelSize")
-	_aVCameraCalibrationDataSelLensDistortionLookupTable = objc.RegisterName("lensDistortionLookupTable")
-	_aVCameraCalibrationDataSelInverseLensDistortionLookupTable = objc.RegisterName("inverseLensDistortionLookupTable")
-	_aVCameraCalibrationDataSelLensDistortionCenter = objc.RegisterName("lensDistortionCenter")
+	_aVCameraCalibrationDataSelExtrinsicMatrix                    = objc.RegisterName("extrinsicMatrix")
+	_aVCameraCalibrationDataSelPixelSize                          = objc.RegisterName("pixelSize")
+	_aVCameraCalibrationDataSelLensDistortionLookupTable          = objc.RegisterName("lensDistortionLookupTable")
+	_aVCameraCalibrationDataSelInverseLensDistortionLookupTable   = objc.RegisterName("inverseLensDistortionLookupTable")
+	_aVCameraCalibrationDataSelLensDistortionCenter               = objc.RegisterName("lensDistortionCenter")
 )
 
 func AVCameraCalibrationDataFromID(id objc.ID) *AVCameraCalibrationData {
@@ -66,14 +66,18 @@ func (o *AVCameraCalibrationData) PixelSize() float32 {
 // @property lensDistortionLookupTable @abstract An NSData of floats describing the camera lens' radial distortions. @discussion Images captured by a camera are geometrically warped by radial distortions in the lens. In order to project from the 2D image plane back into the 3D world, the images must be distortion corrected, or made rectilinear. Lens distortion is modeled using a one-dimensional lookup table of 32-bit float values evenly distributed along a radius from the center of the distortion to the farthest corner, with each value representing an elongation or compression of the radius (0.0 for any given point indicates no elongation). This model assumes radially symmetric lens distortion. When dealing with AVDepthData, the disparity / depth map representations are geometrically distorted to align with images produced by the camera. For more information, see the reference implementation below. If the camera lacks the calibration data needed to accurately characterize lens distortions, this property's value is nil.
 func (o *AVCameraCalibrationData) LensDistortionLookupTable() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCameraCalibrationDataSelLensDistortionLookupTable)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @property inverseLensDistortionLookupTable @abstract An NSData of floats describing the inverse lookup table required to reapply the camera lens' radial distortions to a rectified image. @discussion See lensDistortionLookupTable. If you've rectified an image by removing the distortions characterized by the lensDistortionLookupTable, and now wish to go back to geometrically distorted, you may use the inverseLensDistortionLookupTable. For more information, see the reference implementation below. If the camera lacks the calibration data needed to accurately characterize lens distortions, this property's value is nil.
 func (o *AVCameraCalibrationData) InverseLensDistortionLookupTable() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCameraCalibrationDataSelInverseLensDistortionLookupTable)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -82,4 +86,3 @@ func (o *AVCameraCalibrationData) LensDistortionCenter() corefoundation.CGPoint 
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _aVCameraCalibrationDataSelLensDistortionCenter)
 	return _ret
 }
-

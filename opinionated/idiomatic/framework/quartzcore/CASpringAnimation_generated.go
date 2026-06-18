@@ -201,9 +201,13 @@ func (x *SpringAnimation) Bounce() float64 {
 
 func (x *SpringAnimation) asBasicAnimation() *raw.CABasicAnimation { return &x.inner.CABasicAnimation }
 
-func (x *SpringAnimation) asPropertyAnimation() *raw.CAPropertyAnimation { return &x.inner.CABasicAnimation.CAPropertyAnimation }
+func (x *SpringAnimation) asPropertyAnimation() *raw.CAPropertyAnimation {
+	return &x.inner.CABasicAnimation.CAPropertyAnimation
+}
 
-func (x *SpringAnimation) asAnimation() *raw.CAAnimation { return &x.inner.CABasicAnimation.CAPropertyAnimation.CAAnimation }
+func (x *SpringAnimation) asAnimation() *raw.CAAnimation {
+	return &x.inner.CABasicAnimation.CAPropertyAnimation.CAAnimation
+}
 
 // SpringAnimationable is the interface implemented by [SpringAnimation], for mocking and DI.
 type SpringAnimationable interface {
@@ -239,4 +243,3 @@ type SpringAnimationable interface {
 }
 
 var _ SpringAnimationable = (*SpringAnimation)(nil)
-

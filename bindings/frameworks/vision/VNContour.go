@@ -18,16 +18,16 @@ type VNContour struct {
 }
 
 var (
-	_clsVNContour = _objcClass("VNContour")
-	_vNContourSelChildContourAtIndexError = objc.RegisterName("childContourAtIndex:error:")
+	_clsVNContour                                     = _objcClass("VNContour")
+	_vNContourSelChildContourAtIndexError             = objc.RegisterName("childContourAtIndex:error:")
 	_vNContourSelPolygonApproximationWithEpsilonError = objc.RegisterName("polygonApproximationWithEpsilon:error:")
-	_vNContourSelIndexPath = objc.RegisterName("indexPath")
-	_vNContourSelChildContourCount = objc.RegisterName("childContourCount")
-	_vNContourSelChildContours = objc.RegisterName("childContours")
-	_vNContourSelPointCount = objc.RegisterName("pointCount")
-	_vNContourSelNormalizedPoints = objc.RegisterName("normalizedPoints")
-	_vNContourSelNormalizedPath = objc.RegisterName("normalizedPath")
-	_vNContourSelAspectRatio = objc.RegisterName("aspectRatio")
+	_vNContourSelIndexPath                            = objc.RegisterName("indexPath")
+	_vNContourSelChildContourCount                    = objc.RegisterName("childContourCount")
+	_vNContourSelChildContours                        = objc.RegisterName("childContours")
+	_vNContourSelPointCount                           = objc.RegisterName("pointCount")
+	_vNContourSelNormalizedPoints                     = objc.RegisterName("normalizedPoints")
+	_vNContourSelNormalizedPath                       = objc.RegisterName("normalizedPath")
+	_vNContourSelAspectRatio                          = objc.RegisterName("aspectRatio")
 )
 
 func VNContourFromID(id objc.ID) *VNContour {
@@ -44,7 +44,9 @@ func VNContourFromID(id objc.ID) *VNContour {
 func (o *VNContour) ChildContourAtIndexError(childContourIndex uint) (*VNContour, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNContourSelChildContourAtIndexError, childContourIndex, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -55,7 +57,9 @@ func (o *VNContour) ChildContourAtIndexError(childContourIndex uint) (*VNContour
 func (o *VNContour) PolygonApproximationWithEpsilonError(epsilon float32) (*VNContour, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNContourSelPolygonApproximationWithEpsilonError, epsilon, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -65,7 +69,9 @@ func (o *VNContour) PolygonApproximationWithEpsilonError(epsilon float32) (*VNCo
 // @brief The path to the target VNContour as it is stored in the owning VNContoursObservation's hierarchy of contours.
 func (o *VNContour) IndexPath() *foundation.NSIndexPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNContourSelIndexPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexPathFromID(_ret)
 }
 
@@ -78,7 +84,9 @@ func (o *VNContour) ChildContourCount() int {
 // @brief The array of the contours enclosed by the target contour. @discussion This property may come with the cost of instantiating new VNContour objects; therefore, clients are strongly encouraged to hold the results in a local variable instead of repeatedly invoking it.
 func (o *VNContour) ChildContours() *foundation.NSArray[*VNContour] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNContourSelChildContours)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VNContour](_ret)
 }
 
@@ -105,4 +113,3 @@ func (o *VNContour) AspectRatio() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _vNContourSelAspectRatio)
 	return _ret
 }
-

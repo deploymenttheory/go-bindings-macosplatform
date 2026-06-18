@@ -16,26 +16,26 @@ type CBPeripheral struct {
 }
 
 var (
-	_clsCBPeripheral = _objcClass("CBPeripheral")
-	_cBPeripheralSelReadRSSI = objc.RegisterName("readRSSI")
-	_cBPeripheralSelDiscoverServices = objc.RegisterName("discoverServices:")
-	_cBPeripheralSelDiscoverIncludedServicesForService = objc.RegisterName("discoverIncludedServices:forService:")
-	_cBPeripheralSelDiscoverCharacteristicsForService = objc.RegisterName("discoverCharacteristics:forService:")
-	_cBPeripheralSelReadValueForCharacteristic = objc.RegisterName("readValueForCharacteristic:")
-	_cBPeripheralSelMaximumWriteValueLengthForType = objc.RegisterName("maximumWriteValueLengthForType:")
-	_cBPeripheralSelWriteValueForCharacteristicType = objc.RegisterName("writeValue:forCharacteristic:type:")
-	_cBPeripheralSelSetNotifyValueForCharacteristic = objc.RegisterName("setNotifyValue:forCharacteristic:")
+	_clsCBPeripheral                                     = _objcClass("CBPeripheral")
+	_cBPeripheralSelReadRSSI                             = objc.RegisterName("readRSSI")
+	_cBPeripheralSelDiscoverServices                     = objc.RegisterName("discoverServices:")
+	_cBPeripheralSelDiscoverIncludedServicesForService   = objc.RegisterName("discoverIncludedServices:forService:")
+	_cBPeripheralSelDiscoverCharacteristicsForService    = objc.RegisterName("discoverCharacteristics:forService:")
+	_cBPeripheralSelReadValueForCharacteristic           = objc.RegisterName("readValueForCharacteristic:")
+	_cBPeripheralSelMaximumWriteValueLengthForType       = objc.RegisterName("maximumWriteValueLengthForType:")
+	_cBPeripheralSelWriteValueForCharacteristicType      = objc.RegisterName("writeValue:forCharacteristic:type:")
+	_cBPeripheralSelSetNotifyValueForCharacteristic      = objc.RegisterName("setNotifyValue:forCharacteristic:")
 	_cBPeripheralSelDiscoverDescriptorsForCharacteristic = objc.RegisterName("discoverDescriptorsForCharacteristic:")
-	_cBPeripheralSelReadValueForDescriptor = objc.RegisterName("readValueForDescriptor:")
-	_cBPeripheralSelWriteValueForDescriptor = objc.RegisterName("writeValue:forDescriptor:")
-	_cBPeripheralSelOpenL2CAPChannel = objc.RegisterName("openL2CAPChannel:")
-	_cBPeripheralSelDelegate = objc.RegisterName("delegate")
-	_cBPeripheralSelSetDelegate = objc.RegisterName("setDelegate:")
-	_cBPeripheralSelName = objc.RegisterName("name")
-	_cBPeripheralSelRSSI = objc.RegisterName("RSSI")
-	_cBPeripheralSelState = objc.RegisterName("state")
-	_cBPeripheralSelServices = objc.RegisterName("services")
-	_cBPeripheralSelCanSendWriteWithoutResponse = objc.RegisterName("canSendWriteWithoutResponse")
+	_cBPeripheralSelReadValueForDescriptor               = objc.RegisterName("readValueForDescriptor:")
+	_cBPeripheralSelWriteValueForDescriptor              = objc.RegisterName("writeValue:forDescriptor:")
+	_cBPeripheralSelOpenL2CAPChannel                     = objc.RegisterName("openL2CAPChannel:")
+	_cBPeripheralSelDelegate                             = objc.RegisterName("delegate")
+	_cBPeripheralSelSetDelegate                          = objc.RegisterName("setDelegate:")
+	_cBPeripheralSelName                                 = objc.RegisterName("name")
+	_cBPeripheralSelRSSI                                 = objc.RegisterName("RSSI")
+	_cBPeripheralSelState                                = objc.RegisterName("state")
+	_cBPeripheralSelServices                             = objc.RegisterName("services")
+	_cBPeripheralSelCanSendWriteWithoutResponse          = objc.RegisterName("canSendWriteWithoutResponse")
 )
 
 func CBPeripheralFromID(id objc.ID) *CBPeripheral {
@@ -122,7 +122,9 @@ func (o *CBPeripheral) SetDelegate(delegate CBPeripheralDelegate) {
 // @property name @discussion The name of the peripheral.
 func (o *CBPeripheral) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBPeripheralSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -130,7 +132,9 @@ func (o *CBPeripheral) Name() *foundation.NSString {
 // Deprecated: since macOS 10.13.
 func (o *CBPeripheral) RSSI() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBPeripheralSelRSSI)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -143,7 +147,9 @@ func (o *CBPeripheral) State() CBPeripheralState {
 // @property services @discussion A list of <code>CBService</code> objects that have been discovered on the peripheral.
 func (o *CBPeripheral) Services() *foundation.NSArray[*CBService] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBPeripheralSelServices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CBService](_ret)
 }
 
@@ -152,4 +158,3 @@ func (o *CBPeripheral) CanSendWriteWithoutResponse() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cBPeripheralSelCanSendWriteWithoutResponse)
 	return _ret
 }
-

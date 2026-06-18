@@ -43,4 +43,3 @@ type SocketDeviceable interface {
 }
 
 var _ SocketDeviceable = (*SocketDevice)(nil)
-

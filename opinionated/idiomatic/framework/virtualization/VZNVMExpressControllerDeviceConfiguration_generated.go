@@ -15,7 +15,9 @@ type NVMExpressControllerDeviceConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.VZNVMExpressControllerDeviceConfiguration].
-func (x *NVMExpressControllerDeviceConfiguration) Unwrap() *raw.VZNVMExpressControllerDeviceConfiguration { return x.inner }
+func (x *NVMExpressControllerDeviceConfiguration) Unwrap() *raw.VZNVMExpressControllerDeviceConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -36,7 +38,9 @@ func NewNVMExpressControllerDeviceConfigurationWithAttachment(attachment *raw.VZ
 	return &NVMExpressControllerDeviceConfiguration{inner: raw.VZNVMExpressControllerDeviceConfigurationFromID(_id)}
 }
 
-func (x *NVMExpressControllerDeviceConfiguration) asStorageDeviceConfiguration() *raw.VZStorageDeviceConfiguration { return &x.inner.VZStorageDeviceConfiguration }
+func (x *NVMExpressControllerDeviceConfiguration) asStorageDeviceConfiguration() *raw.VZStorageDeviceConfiguration {
+	return &x.inner.VZStorageDeviceConfiguration
+}
 
 // NVMExpressControllerDeviceConfigurationable is the interface implemented by [NVMExpressControllerDeviceConfiguration], for mocking and DI.
 type NVMExpressControllerDeviceConfigurationable interface {
@@ -44,4 +48,3 @@ type NVMExpressControllerDeviceConfigurationable interface {
 }
 
 var _ NVMExpressControllerDeviceConfigurationable = (*NVMExpressControllerDeviceConfiguration)(nil)
-

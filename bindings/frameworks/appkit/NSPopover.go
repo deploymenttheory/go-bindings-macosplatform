@@ -17,32 +17,32 @@ type NSPopover struct {
 }
 
 var (
-	_clsNSPopover = _objcClass("NSPopover")
-	_nSPopoverSelInit = objc.RegisterName("init")
-	_nSPopoverSelInitWithCoder = objc.RegisterName("initWithCoder:")
+	_clsNSPopover                                      = _objcClass("NSPopover")
+	_nSPopoverSelInit                                  = objc.RegisterName("init")
+	_nSPopoverSelInitWithCoder                         = objc.RegisterName("initWithCoder:")
 	_nSPopoverSelShowRelativeToRectOfViewPreferredEdge = objc.RegisterName("showRelativeToRect:ofView:preferredEdge:")
-	_nSPopoverSelShowRelativeToToolbarItem = objc.RegisterName("showRelativeToToolbarItem:")
-	_nSPopoverSelPerformClose = objc.RegisterName("performClose:")
-	_nSPopoverSelClose = objc.RegisterName("close")
-	_nSPopoverSelDelegate = objc.RegisterName("delegate")
-	_nSPopoverSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSPopoverSelAppearance = objc.RegisterName("appearance")
-	_nSPopoverSelSetAppearance = objc.RegisterName("setAppearance:")
-	_nSPopoverSelEffectiveAppearance = objc.RegisterName("effectiveAppearance")
-	_nSPopoverSelBehavior = objc.RegisterName("behavior")
-	_nSPopoverSelSetBehavior = objc.RegisterName("setBehavior:")
-	_nSPopoverSelAnimates = objc.RegisterName("animates")
-	_nSPopoverSelSetAnimates = objc.RegisterName("setAnimates:")
-	_nSPopoverSelContentViewController = objc.RegisterName("contentViewController")
-	_nSPopoverSelSetContentViewController = objc.RegisterName("setContentViewController:")
-	_nSPopoverSelContentSize = objc.RegisterName("contentSize")
-	_nSPopoverSelSetContentSize = objc.RegisterName("setContentSize:")
-	_nSPopoverSelIsShown = objc.RegisterName("isShown")
-	_nSPopoverSelIsDetached = objc.RegisterName("isDetached")
-	_nSPopoverSelPositioningRect = objc.RegisterName("positioningRect")
-	_nSPopoverSelSetPositioningRect = objc.RegisterName("setPositioningRect:")
-	_nSPopoverSelHasFullSizeContent = objc.RegisterName("hasFullSizeContent")
-	_nSPopoverSelSetHasFullSizeContent = objc.RegisterName("setHasFullSizeContent:")
+	_nSPopoverSelShowRelativeToToolbarItem             = objc.RegisterName("showRelativeToToolbarItem:")
+	_nSPopoverSelPerformClose                          = objc.RegisterName("performClose:")
+	_nSPopoverSelClose                                 = objc.RegisterName("close")
+	_nSPopoverSelDelegate                              = objc.RegisterName("delegate")
+	_nSPopoverSelSetDelegate                           = objc.RegisterName("setDelegate:")
+	_nSPopoverSelAppearance                            = objc.RegisterName("appearance")
+	_nSPopoverSelSetAppearance                         = objc.RegisterName("setAppearance:")
+	_nSPopoverSelEffectiveAppearance                   = objc.RegisterName("effectiveAppearance")
+	_nSPopoverSelBehavior                              = objc.RegisterName("behavior")
+	_nSPopoverSelSetBehavior                           = objc.RegisterName("setBehavior:")
+	_nSPopoverSelAnimates                              = objc.RegisterName("animates")
+	_nSPopoverSelSetAnimates                           = objc.RegisterName("setAnimates:")
+	_nSPopoverSelContentViewController                 = objc.RegisterName("contentViewController")
+	_nSPopoverSelSetContentViewController              = objc.RegisterName("setContentViewController:")
+	_nSPopoverSelContentSize                           = objc.RegisterName("contentSize")
+	_nSPopoverSelSetContentSize                        = objc.RegisterName("setContentSize:")
+	_nSPopoverSelIsShown                               = objc.RegisterName("isShown")
+	_nSPopoverSelIsDetached                            = objc.RegisterName("isDetached")
+	_nSPopoverSelPositioningRect                       = objc.RegisterName("positioningRect")
+	_nSPopoverSelSetPositioningRect                    = objc.RegisterName("setPositioningRect:")
+	_nSPopoverSelHasFullSizeContent                    = objc.RegisterName("hasFullSizeContent")
+	_nSPopoverSelSetHasFullSizeContent                 = objc.RegisterName("setHasFullSizeContent:")
 )
 
 func NSPopoverFromID(id objc.ID) *NSPopover {
@@ -57,13 +57,17 @@ func NSPopoverFromID(id objc.ID) *NSPopover {
 
 func (o *NSPopover) Init() *NSPopover {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPopoverFromID(_ret)
 }
 
 func (o *NSPopover) InitWithCoder(coder *foundation.NSCoder) *NSPopover {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPopoverFromID(_ret)
 }
 
@@ -97,7 +101,9 @@ func (o *NSPopover) SetDelegate(delegate NSPopoverDelegate) {
 // The appearance of the popover. The popover's contentView will inherit this appearance. The default effective appearance is the NSAppearanceNameVibrantLight appearance. If nil is set, nil will be returned, and the effective appearance will return to the default. To prevent conflicts with the previous appearance property, this is only available for apps that target 10.10 and higher.
 func (o *NSPopover) Appearance() *NSAppearance {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverSelAppearance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppearanceFromID(_ret)
 }
 
@@ -108,7 +114,9 @@ func (o *NSPopover) SetAppearance(appearance *NSAppearance) {
 
 func (o *NSPopover) EffectiveAppearance() *NSAppearance {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverSelEffectiveAppearance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppearanceFromID(_ret)
 }
 
@@ -132,7 +140,9 @@ func (o *NSPopover) SetAnimates(animates bool) {
 
 func (o *NSPopover) ContentViewController() *NSViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverSelContentViewController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewControllerFromID(_ret)
 }
 
@@ -177,4 +187,3 @@ func (o *NSPopover) HasFullSizeContent() bool {
 func (o *NSPopover) SetHasFullSizeContent(hasFullSizeContent bool) {
 	o.Ptr().Send(_nSPopoverSelSetHasFullSizeContent, hasFullSizeContent)
 }
-

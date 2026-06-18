@@ -16,12 +16,12 @@ type AVContentKeySpecifier struct {
 }
 
 var (
-	_clsAVContentKeySpecifier = _objcClass("AVContentKeySpecifier")
+	_clsAVContentKeySpecifier                                                 = _objcClass("AVContentKeySpecifier")
 	_aVContentKeySpecifierSelContentKeySpecifierForKeySystemIdentifierOptions = objc.RegisterName("contentKeySpecifierForKeySystem:identifier:options:")
-	_aVContentKeySpecifierSelInitForKeySystemIdentifierOptions = objc.RegisterName("initForKeySystem:identifier:options:")
-	_aVContentKeySpecifierSelKeySystem = objc.RegisterName("keySystem")
-	_aVContentKeySpecifierSelIdentifier = objc.RegisterName("identifier")
-	_aVContentKeySpecifierSelOptions = objc.RegisterName("options")
+	_aVContentKeySpecifierSelInitForKeySystemIdentifierOptions                = objc.RegisterName("initForKeySystem:identifier:options:")
+	_aVContentKeySpecifierSelKeySystem                                        = objc.RegisterName("keySystem")
+	_aVContentKeySpecifierSelIdentifier                                       = objc.RegisterName("identifier")
+	_aVContentKeySpecifierSelOptions                                          = objc.RegisterName("options")
 )
 
 func AVContentKeySpecifierFromID(id objc.ID) *AVContentKeySpecifier {
@@ -37,21 +37,27 @@ func AVContentKeySpecifierFromID(id objc.ID) *AVContentKeySpecifier {
 // Creates a new instance of AVContentKeySpecifier. This method returns an AVContentKeySpecifier instance that represents a content key in a specific content key system. - Parameter keySystem: A valid key system for content keys. - Parameter contentKeyIdentifier: Container and protocol-specific key identifier. - Parameter options: Additional information necessary to obtain the key, can be empty if none needed. - Returns: A new AVContentKeySpecifier
 func AVContentKeySpecifierContentKeySpecifierForKeySystemIdentifierOptions(keySystem *foundation.NSString, contentKeyIdentifier objc.ID, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVContentKeySpecifier {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVContentKeySpecifier), _aVContentKeySpecifierSelContentKeySpecifierForKeySystemIdentifierOptions, keySystem.Ptr(), contentKeyIdentifier, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVContentKeySpecifierFromID(_ret)
 }
 
 // Initialize an instance of AVContentKeySpecifier. This method returns an AVContentKeySpecifier instance that represents a content key in a specific content key system. - Parameter keySystem: A valid key system for content keys. - Parameter contentKeyIdentifier: Container and protocol-specific key identifier. - Parameter options: Additional information necessary to obtain the key, can be empty if none needed. - Returns: An instance of AVContentKeySpecifier
 func (o *AVContentKeySpecifier) InitForKeySystemIdentifierOptions(keySystem *foundation.NSString, contentKeyIdentifier objc.ID, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVContentKeySpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVContentKeySpecifierSelInitForKeySystemIdentifierOptions, keySystem.Ptr(), contentKeyIdentifier, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVContentKeySpecifierFromID(_ret)
 }
 
 // A valid key system for content keys.
 func (o *AVContentKeySpecifier) KeySystem() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVContentKeySpecifierSelKeySystem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -66,4 +72,3 @@ func (o *AVContentKeySpecifier) Options() *foundation.NSDictionary[*foundation.N
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _aVContentKeySpecifierSelOptions)
 	return _ret
 }
-

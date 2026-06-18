@@ -20,95 +20,95 @@ type WKWebView struct {
 }
 
 var (
-	_clsWKWebView = _objcClass("WKWebView")
-	_wKWebViewSelInitWithFrameConfiguration = objc.RegisterName("initWithFrame:configuration:")
-	_wKWebViewSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_wKWebViewSelLoadRequest = objc.RegisterName("loadRequest:")
-	_wKWebViewSelLoadFileURLAllowingReadAccessToURL = objc.RegisterName("loadFileURL:allowingReadAccessToURL:")
-	_wKWebViewSelLoadHTMLStringBaseURL = objc.RegisterName("loadHTMLString:baseURL:")
-	_wKWebViewSelLoadDataMIMETypeCharacterEncodingNameBaseURL = objc.RegisterName("loadData:MIMEType:characterEncodingName:baseURL:")
-	_wKWebViewSelGoToBackForwardListItem = objc.RegisterName("goToBackForwardListItem:")
-	_wKWebViewSelGoBack = objc.RegisterName("goBack")
-	_wKWebViewSelGoForward = objc.RegisterName("goForward")
-	_wKWebViewSelReload = objc.RegisterName("reload")
-	_wKWebViewSelReloadFromOrigin = objc.RegisterName("reloadFromOrigin")
-	_wKWebViewSelStopLoading = objc.RegisterName("stopLoading")
-	_wKWebViewSelEvaluateJavaScriptCompletionHandler = objc.RegisterName("evaluateJavaScript:completionHandler:")
-	_wKWebViewSelEvaluateJavaScriptInFrameInContentWorldCompletionHandler = objc.RegisterName("evaluateJavaScript:inFrame:inContentWorld:completionHandler:")
+	_clsWKWebView                                                                   = _objcClass("WKWebView")
+	_wKWebViewSelInitWithFrameConfiguration                                         = objc.RegisterName("initWithFrame:configuration:")
+	_wKWebViewSelInitWithCoder                                                      = objc.RegisterName("initWithCoder:")
+	_wKWebViewSelLoadRequest                                                        = objc.RegisterName("loadRequest:")
+	_wKWebViewSelLoadFileURLAllowingReadAccessToURL                                 = objc.RegisterName("loadFileURL:allowingReadAccessToURL:")
+	_wKWebViewSelLoadHTMLStringBaseURL                                              = objc.RegisterName("loadHTMLString:baseURL:")
+	_wKWebViewSelLoadDataMIMETypeCharacterEncodingNameBaseURL                       = objc.RegisterName("loadData:MIMEType:characterEncodingName:baseURL:")
+	_wKWebViewSelGoToBackForwardListItem                                            = objc.RegisterName("goToBackForwardListItem:")
+	_wKWebViewSelGoBack                                                             = objc.RegisterName("goBack")
+	_wKWebViewSelGoForward                                                          = objc.RegisterName("goForward")
+	_wKWebViewSelReload                                                             = objc.RegisterName("reload")
+	_wKWebViewSelReloadFromOrigin                                                   = objc.RegisterName("reloadFromOrigin")
+	_wKWebViewSelStopLoading                                                        = objc.RegisterName("stopLoading")
+	_wKWebViewSelEvaluateJavaScriptCompletionHandler                                = objc.RegisterName("evaluateJavaScript:completionHandler:")
+	_wKWebViewSelEvaluateJavaScriptInFrameInContentWorldCompletionHandler           = objc.RegisterName("evaluateJavaScript:inFrame:inContentWorld:completionHandler:")
 	_wKWebViewSelCallAsyncJavaScriptArgumentsInFrameInContentWorldCompletionHandler = objc.RegisterName("callAsyncJavaScript:arguments:inFrame:inContentWorld:completionHandler:")
-	_wKWebViewSelCloseAllMediaPresentationsWithCompletionHandler = objc.RegisterName("closeAllMediaPresentationsWithCompletionHandler:")
-	_wKWebViewSelCloseAllMediaPresentations = objc.RegisterName("closeAllMediaPresentations")
-	_wKWebViewSelPauseAllMediaPlaybackWithCompletionHandler = objc.RegisterName("pauseAllMediaPlaybackWithCompletionHandler:")
-	_wKWebViewSelPauseAllMediaPlayback = objc.RegisterName("pauseAllMediaPlayback:")
-	_wKWebViewSelSetAllMediaPlaybackSuspendedCompletionHandler = objc.RegisterName("setAllMediaPlaybackSuspended:completionHandler:")
-	_wKWebViewSelResumeAllMediaPlayback = objc.RegisterName("resumeAllMediaPlayback:")
-	_wKWebViewSelSuspendAllMediaPlayback = objc.RegisterName("suspendAllMediaPlayback:")
-	_wKWebViewSelRequestMediaPlaybackStateWithCompletionHandler = objc.RegisterName("requestMediaPlaybackStateWithCompletionHandler:")
-	_wKWebViewSelRequestMediaPlaybackState = objc.RegisterName("requestMediaPlaybackState:")
-	_wKWebViewSelSetCameraCaptureStateCompletionHandler = objc.RegisterName("setCameraCaptureState:completionHandler:")
-	_wKWebViewSelSetMicrophoneCaptureStateCompletionHandler = objc.RegisterName("setMicrophoneCaptureState:completionHandler:")
-	_wKWebViewSelTakeSnapshotWithConfigurationCompletionHandler = objc.RegisterName("takeSnapshotWithConfiguration:completionHandler:")
-	_wKWebViewSelCreatePDFWithConfigurationCompletionHandler = objc.RegisterName("createPDFWithConfiguration:completionHandler:")
-	_wKWebViewSelCreateWebArchiveDataWithCompletionHandler = objc.RegisterName("createWebArchiveDataWithCompletionHandler:")
-	_wKWebViewSelSetMagnificationCenteredAtPoint = objc.RegisterName("setMagnification:centeredAtPoint:")
-	_wKWebViewSelFindStringWithConfigurationCompletionHandler = objc.RegisterName("findString:withConfiguration:completionHandler:")
-	_wKWebViewSelHandlesURLScheme = objc.RegisterName("handlesURLScheme:")
-	_wKWebViewSelStartDownloadUsingRequestCompletionHandler = objc.RegisterName("startDownloadUsingRequest:completionHandler:")
-	_wKWebViewSelResumeDownloadFromResumeDataCompletionHandler = objc.RegisterName("resumeDownloadFromResumeData:completionHandler:")
-	_wKWebViewSelLoadSimulatedRequestResponseResponseData = objc.RegisterName("loadSimulatedRequest:response:responseData:")
-	_wKWebViewSelLoadSimulatedRequestWithResponseResponseData = objc.RegisterName("loadSimulatedRequest:withResponse:responseData:")
-	_wKWebViewSelLoadFileRequestAllowingReadAccessToURL = objc.RegisterName("loadFileRequest:allowingReadAccessToURL:")
-	_wKWebViewSelLoadSimulatedRequestResponseHTMLString = objc.RegisterName("loadSimulatedRequest:responseHTMLString:")
-	_wKWebViewSelLoadSimulatedRequestWithResponseHTMLString = objc.RegisterName("loadSimulatedRequest:withResponseHTMLString:")
-	_wKWebViewSelPrintOperationWithPrintInfo = objc.RegisterName("printOperationWithPrintInfo:")
-	_wKWebViewSelSetMinimumViewportInsetMaximumViewportInset = objc.RegisterName("setMinimumViewportInset:maximumViewportInset:")
-	_wKWebViewSelFetchDataOfTypesCompletionHandler = objc.RegisterName("fetchDataOfTypes:completionHandler:")
-	_wKWebViewSelRestoreDataCompletionHandler = objc.RegisterName("restoreData:completionHandler:")
-	_wKWebViewSelConfiguration = objc.RegisterName("configuration")
-	_wKWebViewSelNavigationDelegate = objc.RegisterName("navigationDelegate")
-	_wKWebViewSelSetNavigationDelegate = objc.RegisterName("setNavigationDelegate:")
-	_wKWebViewSelUIDelegate = objc.RegisterName("UIDelegate")
-	_wKWebViewSelSetUIDelegate = objc.RegisterName("setUIDelegate:")
-	_wKWebViewSelBackForwardList = objc.RegisterName("backForwardList")
-	_wKWebViewSelTitle = objc.RegisterName("title")
-	_wKWebViewSelURL = objc.RegisterName("URL")
-	_wKWebViewSelIsLoading = objc.RegisterName("isLoading")
-	_wKWebViewSelEstimatedProgress = objc.RegisterName("estimatedProgress")
-	_wKWebViewSelHasOnlySecureContent = objc.RegisterName("hasOnlySecureContent")
-	_wKWebViewSelServerTrust = objc.RegisterName("serverTrust")
-	_wKWebViewSelCanGoBack = objc.RegisterName("canGoBack")
-	_wKWebViewSelCanGoForward = objc.RegisterName("canGoForward")
-	_wKWebViewSelCameraCaptureState = objc.RegisterName("cameraCaptureState")
-	_wKWebViewSelMicrophoneCaptureState = objc.RegisterName("microphoneCaptureState")
-	_wKWebViewSelAllowsBackForwardNavigationGestures = objc.RegisterName("allowsBackForwardNavigationGestures")
-	_wKWebViewSelSetAllowsBackForwardNavigationGestures = objc.RegisterName("setAllowsBackForwardNavigationGestures:")
-	_wKWebViewSelCustomUserAgent = objc.RegisterName("customUserAgent")
-	_wKWebViewSelSetCustomUserAgent = objc.RegisterName("setCustomUserAgent:")
-	_wKWebViewSelAllowsLinkPreview = objc.RegisterName("allowsLinkPreview")
-	_wKWebViewSelSetAllowsLinkPreview = objc.RegisterName("setAllowsLinkPreview:")
-	_wKWebViewSelAllowsMagnification = objc.RegisterName("allowsMagnification")
-	_wKWebViewSelSetAllowsMagnification = objc.RegisterName("setAllowsMagnification:")
-	_wKWebViewSelMagnification = objc.RegisterName("magnification")
-	_wKWebViewSelSetMagnification = objc.RegisterName("setMagnification:")
-	_wKWebViewSelPageZoom = objc.RegisterName("pageZoom")
-	_wKWebViewSelSetPageZoom = objc.RegisterName("setPageZoom:")
-	_wKWebViewSelMediaType = objc.RegisterName("mediaType")
-	_wKWebViewSelSetMediaType = objc.RegisterName("setMediaType:")
-	_wKWebViewSelInteractionState = objc.RegisterName("interactionState")
-	_wKWebViewSelSetInteractionState = objc.RegisterName("setInteractionState:")
-	_wKWebViewSelIsBlockedByScreenTime = objc.RegisterName("isBlockedByScreenTime")
-	_wKWebViewSelThemeColor = objc.RegisterName("themeColor")
-	_wKWebViewSelUnderPageBackgroundColor = objc.RegisterName("underPageBackgroundColor")
-	_wKWebViewSelSetUnderPageBackgroundColor = objc.RegisterName("setUnderPageBackgroundColor:")
-	_wKWebViewSelFullscreenState = objc.RegisterName("fullscreenState")
-	_wKWebViewSelMinimumViewportInset = objc.RegisterName("minimumViewportInset")
-	_wKWebViewSelMaximumViewportInset = objc.RegisterName("maximumViewportInset")
-	_wKWebViewSelIsInspectable = objc.RegisterName("isInspectable")
-	_wKWebViewSelSetInspectable = objc.RegisterName("setInspectable:")
-	_wKWebViewSelIsWritingToolsActive = objc.RegisterName("isWritingToolsActive")
-	_wKWebViewSelObscuredContentInsets = objc.RegisterName("obscuredContentInsets")
-	_wKWebViewSelSetObscuredContentInsets = objc.RegisterName("setObscuredContentInsets:")
-	_wKWebViewSelCertificateChain = objc.RegisterName("certificateChain")
+	_wKWebViewSelCloseAllMediaPresentationsWithCompletionHandler                    = objc.RegisterName("closeAllMediaPresentationsWithCompletionHandler:")
+	_wKWebViewSelCloseAllMediaPresentations                                         = objc.RegisterName("closeAllMediaPresentations")
+	_wKWebViewSelPauseAllMediaPlaybackWithCompletionHandler                         = objc.RegisterName("pauseAllMediaPlaybackWithCompletionHandler:")
+	_wKWebViewSelPauseAllMediaPlayback                                              = objc.RegisterName("pauseAllMediaPlayback:")
+	_wKWebViewSelSetAllMediaPlaybackSuspendedCompletionHandler                      = objc.RegisterName("setAllMediaPlaybackSuspended:completionHandler:")
+	_wKWebViewSelResumeAllMediaPlayback                                             = objc.RegisterName("resumeAllMediaPlayback:")
+	_wKWebViewSelSuspendAllMediaPlayback                                            = objc.RegisterName("suspendAllMediaPlayback:")
+	_wKWebViewSelRequestMediaPlaybackStateWithCompletionHandler                     = objc.RegisterName("requestMediaPlaybackStateWithCompletionHandler:")
+	_wKWebViewSelRequestMediaPlaybackState                                          = objc.RegisterName("requestMediaPlaybackState:")
+	_wKWebViewSelSetCameraCaptureStateCompletionHandler                             = objc.RegisterName("setCameraCaptureState:completionHandler:")
+	_wKWebViewSelSetMicrophoneCaptureStateCompletionHandler                         = objc.RegisterName("setMicrophoneCaptureState:completionHandler:")
+	_wKWebViewSelTakeSnapshotWithConfigurationCompletionHandler                     = objc.RegisterName("takeSnapshotWithConfiguration:completionHandler:")
+	_wKWebViewSelCreatePDFWithConfigurationCompletionHandler                        = objc.RegisterName("createPDFWithConfiguration:completionHandler:")
+	_wKWebViewSelCreateWebArchiveDataWithCompletionHandler                          = objc.RegisterName("createWebArchiveDataWithCompletionHandler:")
+	_wKWebViewSelSetMagnificationCenteredAtPoint                                    = objc.RegisterName("setMagnification:centeredAtPoint:")
+	_wKWebViewSelFindStringWithConfigurationCompletionHandler                       = objc.RegisterName("findString:withConfiguration:completionHandler:")
+	_wKWebViewSelHandlesURLScheme                                                   = objc.RegisterName("handlesURLScheme:")
+	_wKWebViewSelStartDownloadUsingRequestCompletionHandler                         = objc.RegisterName("startDownloadUsingRequest:completionHandler:")
+	_wKWebViewSelResumeDownloadFromResumeDataCompletionHandler                      = objc.RegisterName("resumeDownloadFromResumeData:completionHandler:")
+	_wKWebViewSelLoadSimulatedRequestResponseResponseData                           = objc.RegisterName("loadSimulatedRequest:response:responseData:")
+	_wKWebViewSelLoadSimulatedRequestWithResponseResponseData                       = objc.RegisterName("loadSimulatedRequest:withResponse:responseData:")
+	_wKWebViewSelLoadFileRequestAllowingReadAccessToURL                             = objc.RegisterName("loadFileRequest:allowingReadAccessToURL:")
+	_wKWebViewSelLoadSimulatedRequestResponseHTMLString                             = objc.RegisterName("loadSimulatedRequest:responseHTMLString:")
+	_wKWebViewSelLoadSimulatedRequestWithResponseHTMLString                         = objc.RegisterName("loadSimulatedRequest:withResponseHTMLString:")
+	_wKWebViewSelPrintOperationWithPrintInfo                                        = objc.RegisterName("printOperationWithPrintInfo:")
+	_wKWebViewSelSetMinimumViewportInsetMaximumViewportInset                        = objc.RegisterName("setMinimumViewportInset:maximumViewportInset:")
+	_wKWebViewSelFetchDataOfTypesCompletionHandler                                  = objc.RegisterName("fetchDataOfTypes:completionHandler:")
+	_wKWebViewSelRestoreDataCompletionHandler                                       = objc.RegisterName("restoreData:completionHandler:")
+	_wKWebViewSelConfiguration                                                      = objc.RegisterName("configuration")
+	_wKWebViewSelNavigationDelegate                                                 = objc.RegisterName("navigationDelegate")
+	_wKWebViewSelSetNavigationDelegate                                              = objc.RegisterName("setNavigationDelegate:")
+	_wKWebViewSelUIDelegate                                                         = objc.RegisterName("UIDelegate")
+	_wKWebViewSelSetUIDelegate                                                      = objc.RegisterName("setUIDelegate:")
+	_wKWebViewSelBackForwardList                                                    = objc.RegisterName("backForwardList")
+	_wKWebViewSelTitle                                                              = objc.RegisterName("title")
+	_wKWebViewSelURL                                                                = objc.RegisterName("URL")
+	_wKWebViewSelIsLoading                                                          = objc.RegisterName("isLoading")
+	_wKWebViewSelEstimatedProgress                                                  = objc.RegisterName("estimatedProgress")
+	_wKWebViewSelHasOnlySecureContent                                               = objc.RegisterName("hasOnlySecureContent")
+	_wKWebViewSelServerTrust                                                        = objc.RegisterName("serverTrust")
+	_wKWebViewSelCanGoBack                                                          = objc.RegisterName("canGoBack")
+	_wKWebViewSelCanGoForward                                                       = objc.RegisterName("canGoForward")
+	_wKWebViewSelCameraCaptureState                                                 = objc.RegisterName("cameraCaptureState")
+	_wKWebViewSelMicrophoneCaptureState                                             = objc.RegisterName("microphoneCaptureState")
+	_wKWebViewSelAllowsBackForwardNavigationGestures                                = objc.RegisterName("allowsBackForwardNavigationGestures")
+	_wKWebViewSelSetAllowsBackForwardNavigationGestures                             = objc.RegisterName("setAllowsBackForwardNavigationGestures:")
+	_wKWebViewSelCustomUserAgent                                                    = objc.RegisterName("customUserAgent")
+	_wKWebViewSelSetCustomUserAgent                                                 = objc.RegisterName("setCustomUserAgent:")
+	_wKWebViewSelAllowsLinkPreview                                                  = objc.RegisterName("allowsLinkPreview")
+	_wKWebViewSelSetAllowsLinkPreview                                               = objc.RegisterName("setAllowsLinkPreview:")
+	_wKWebViewSelAllowsMagnification                                                = objc.RegisterName("allowsMagnification")
+	_wKWebViewSelSetAllowsMagnification                                             = objc.RegisterName("setAllowsMagnification:")
+	_wKWebViewSelMagnification                                                      = objc.RegisterName("magnification")
+	_wKWebViewSelSetMagnification                                                   = objc.RegisterName("setMagnification:")
+	_wKWebViewSelPageZoom                                                           = objc.RegisterName("pageZoom")
+	_wKWebViewSelSetPageZoom                                                        = objc.RegisterName("setPageZoom:")
+	_wKWebViewSelMediaType                                                          = objc.RegisterName("mediaType")
+	_wKWebViewSelSetMediaType                                                       = objc.RegisterName("setMediaType:")
+	_wKWebViewSelInteractionState                                                   = objc.RegisterName("interactionState")
+	_wKWebViewSelSetInteractionState                                                = objc.RegisterName("setInteractionState:")
+	_wKWebViewSelIsBlockedByScreenTime                                              = objc.RegisterName("isBlockedByScreenTime")
+	_wKWebViewSelThemeColor                                                         = objc.RegisterName("themeColor")
+	_wKWebViewSelUnderPageBackgroundColor                                           = objc.RegisterName("underPageBackgroundColor")
+	_wKWebViewSelSetUnderPageBackgroundColor                                        = objc.RegisterName("setUnderPageBackgroundColor:")
+	_wKWebViewSelFullscreenState                                                    = objc.RegisterName("fullscreenState")
+	_wKWebViewSelMinimumViewportInset                                               = objc.RegisterName("minimumViewportInset")
+	_wKWebViewSelMaximumViewportInset                                               = objc.RegisterName("maximumViewportInset")
+	_wKWebViewSelIsInspectable                                                      = objc.RegisterName("isInspectable")
+	_wKWebViewSelSetInspectable                                                     = objc.RegisterName("setInspectable:")
+	_wKWebViewSelIsWritingToolsActive                                               = objc.RegisterName("isWritingToolsActive")
+	_wKWebViewSelObscuredContentInsets                                              = objc.RegisterName("obscuredContentInsets")
+	_wKWebViewSelSetObscuredContentInsets                                           = objc.RegisterName("setObscuredContentInsets:")
+	_wKWebViewSelCertificateChain                                                   = objc.RegisterName("certificateChain")
 )
 
 func WKWebViewFromID(id objc.ID) *WKWebView {
@@ -124,76 +124,98 @@ func WKWebViewFromID(id objc.ID) *WKWebView {
 // @abstract Returns a web view initialized with a specified frame and configuration. @param frame The frame for the new web view. @param configuration The configuration for the new web view. @result An initialized web view, or nil if the object could not be initialized. @discussion This is a designated initializer. You can use @link -initWithFrame: @/link to initialize an instance with the default configuration. The initializer copies the specified configuration, so mutating the configuration after invoking the initializer has no effect on the web view.
 func (o *WKWebView) InitWithFrameConfiguration(frame corefoundation.CGRect, configuration *WKWebViewConfiguration) *WKWebView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelInitWithFrameConfiguration, frame, configuration.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebViewFromID(_ret)
 }
 
 func (o *WKWebView) InitWithCoder(coder *foundation.NSCoder) *WKWebView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebViewFromID(_ret)
 }
 
 // @abstract Navigates to a requested URL. @param request The request specifying the URL to which to navigate. @result A new navigation for the given request.
 func (o *WKWebView) LoadRequest(request *foundation.NSURLRequest) *WKNavigation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelLoadRequest, request.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKNavigationFromID(_ret)
 }
 
 // @abstract Navigates to the requested file URL on the filesystem. @param URL The file URL to which to navigate. @param readAccessURL The URL to allow read access to. @discussion If readAccessURL references a single file, only that file may be loaded by WebKit. If readAccessURL references a directory, files inside that file may be loaded by WebKit. @result A new navigation for the given file URL.
 func (o *WKWebView) LoadFileURLAllowingReadAccessToURL(uRL *foundation.NSURL, readAccessURL *foundation.NSURL) *WKNavigation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelLoadFileURLAllowingReadAccessToURL, uRL.Ptr(), readAccessURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKNavigationFromID(_ret)
 }
 
 // @abstract Sets the webpage contents and base URL. @param string The string to use as the contents of the webpage. @param baseURL A URL that is used to resolve relative URLs within the document. @result A new navigation.
 func (o *WKWebView) LoadHTMLStringBaseURL(string_ *foundation.NSString, baseURL *foundation.NSURL) *WKNavigation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelLoadHTMLStringBaseURL, string_.Ptr(), baseURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKNavigationFromID(_ret)
 }
 
 // @abstract Sets the webpage contents and base URL. @param data The data to use as the contents of the webpage. @param MIMEType The MIME type of the data. @param characterEncodingName The data's character encoding name. @param baseURL A URL that is used to resolve relative URLs within the document. @result A new navigation.
 func (o *WKWebView) LoadDataMIMETypeCharacterEncodingNameBaseURL(data *foundation.NSData, mIMEType *foundation.NSString, characterEncodingName *foundation.NSString, baseURL *foundation.NSURL) *WKNavigation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelLoadDataMIMETypeCharacterEncodingNameBaseURL, data.Ptr(), mIMEType.Ptr(), characterEncodingName.Ptr(), baseURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKNavigationFromID(_ret)
 }
 
 // @abstract Navigates to an item from the back-forward list and sets it as the current item. @param item The item to which to navigate. Must be one of the items in the web view's back-forward list. @result A new navigation to the requested item, or nil if it is already the current item or is not part of the web view's back-forward list. @seealso backForwardList
 func (o *WKWebView) GoToBackForwardListItem(item *WKBackForwardListItem) *WKNavigation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelGoToBackForwardListItem, item.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKNavigationFromID(_ret)
 }
 
 // @abstract Navigates to the back item in the back-forward list. @result A new navigation to the requested item, or nil if there is no back item in the back-forward list.
 func (o *WKWebView) GoBack() *WKNavigation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelGoBack)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKNavigationFromID(_ret)
 }
 
 // @abstract Navigates to the forward item in the back-forward list. @result A new navigation to the requested item, or nil if there is no forward item in the back-forward list.
 func (o *WKWebView) GoForward() *WKNavigation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelGoForward)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKNavigationFromID(_ret)
 }
 
 // @abstract Reloads the current page. @result A new navigation representing the reload.
 func (o *WKWebView) Reload() *WKNavigation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelReload)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKNavigationFromID(_ret)
 }
 
 // @abstract Reloads the current page, performing end-to-end revalidation using cache-validating conditionals if possible. @result A new navigation representing the reload.
 func (o *WKWebView) ReloadFromOrigin() *WKNavigation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelReloadFromOrigin)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKNavigationFromID(_ret)
 }
 
@@ -457,41 +479,53 @@ func (o *WKWebView) ResumeDownloadFromResumeDataCompletionHandler(resumeData *fo
 // @abstract Sets the webpage contents from the passed data as if it was the response to the supplied request. The request is never actually sent to the supplied URL, though loads of resources defined in the NSData object would be performed. @param request The request specifying the base URL and other loading details to be used while interpreting the supplied data object. @param response A response that is used to interpret the supplied data object. @param data The data to use as the contents of the webpage. @result A new navigation.
 func (o *WKWebView) LoadSimulatedRequestResponseResponseData(request *foundation.NSURLRequest, response *foundation.NSURLResponse, data *foundation.NSData) *WKNavigation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelLoadSimulatedRequestResponseResponseData, request.Ptr(), response.Ptr(), data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKNavigationFromID(_ret)
 }
 
 // Deprecated: since macOS 12.0.
 func (o *WKWebView) LoadSimulatedRequestWithResponseResponseData(request *foundation.NSURLRequest, response *foundation.NSURLResponse, data *foundation.NSData) *WKNavigation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelLoadSimulatedRequestWithResponseResponseData, request.Ptr(), response.Ptr(), data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKNavigationFromID(_ret)
 }
 
 // @abstract Navigates to the requested file URL on the filesystem. @param request The request specifying the file URL to which to navigate. @param readAccessURL The URL to allow read access to. @discussion If readAccessURL references a single file, only that file may be loaded by WebKit. If readAccessURL references a directory, files inside that file may be loaded by WebKit. @result A new navigation for the given file URL.
 func (o *WKWebView) LoadFileRequestAllowingReadAccessToURL(request *foundation.NSURLRequest, readAccessURL *foundation.NSURL) *WKNavigation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelLoadFileRequestAllowingReadAccessToURL, request.Ptr(), readAccessURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKNavigationFromID(_ret)
 }
 
 // @abstract Sets the webpage contents from the passed HTML string as if it was the response to the supplied request. The request is never actually sent to the supplied URL, though loads of resources defined in the HTML string would be performed. @param request The request specifying the base URL and other loading details to be used while interpreting the supplied data object. @param string The data to use as the contents of the webpage. @result A new navigation.
 func (o *WKWebView) LoadSimulatedRequestResponseHTMLString(request *foundation.NSURLRequest, string_ *foundation.NSString) *WKNavigation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelLoadSimulatedRequestResponseHTMLString, request.Ptr(), string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKNavigationFromID(_ret)
 }
 
 // Deprecated: since macOS 12.0.
 func (o *WKWebView) LoadSimulatedRequestWithResponseHTMLString(request *foundation.NSURLRequest, string_ *foundation.NSString) *WKNavigation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelLoadSimulatedRequestWithResponseHTMLString, request.Ptr(), string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKNavigationFromID(_ret)
 }
 
 func (o *WKWebView) PrintOperationWithPrintInfo(printInfo *appkit.NSPrintInfo) *appkit.NSPrintOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelPrintOperationWithPrintInfo, printInfo.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSPrintOperationFromID(_ret)
 }
 
@@ -527,7 +561,9 @@ func (o *WKWebView) RestoreDataCompletionHandler(data *foundation.NSData, comple
 // @abstract A copy of the configuration with which the web view was initialized.
 func (o *WKWebView) Configuration() *WKWebViewConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebViewConfigurationFromID(_ret)
 }
 
@@ -554,21 +590,27 @@ func (o *WKWebView) SetUIDelegate(uIDelegate WKUIDelegate) {
 // @abstract The web view's back-forward list.
 func (o *WKWebView) BackForwardList() *WKBackForwardList {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelBackForwardList)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKBackForwardListFromID(_ret)
 }
 
 // @abstract The page title. @discussion @link WKWebView @/link is key-value observing (KVO) compliant for this property.
 func (o *WKWebView) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract The active URL. @discussion This is the URL that should be reflected in the user interface. @link WKWebView @/link is key-value observing (KVO) compliant for this property.
 func (o *WKWebView) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -633,7 +675,9 @@ func (o *WKWebView) SetAllowsBackForwardNavigationGestures(allowsBackForwardNavi
 // @abstract The custom user agent string or nil if no custom user agent string has been set.
 func (o *WKWebView) CustomUserAgent() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelCustomUserAgent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -680,7 +724,9 @@ func (o *WKWebView) SetPageZoom(pageZoom float64) {
 
 func (o *WKWebView) MediaType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelMediaType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -705,13 +751,17 @@ func (o *WKWebView) IsBlockedByScreenTime() bool {
 
 func (o *WKWebView) ThemeColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelThemeColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
 func (o *WKWebView) UnderPageBackgroundColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelUnderPageBackgroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -790,4 +840,3 @@ func (o *WKWebView) CertificateChain() *foundation.NSArray[objc.ID] {
 	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _wKWebViewSelCertificateChain)
 	return _ret
 }
-

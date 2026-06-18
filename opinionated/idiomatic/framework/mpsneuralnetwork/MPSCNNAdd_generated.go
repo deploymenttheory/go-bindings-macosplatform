@@ -178,7 +178,9 @@ func (x *CNNAdd) WithDestinationImageAllocator(destinationImageAllocator mpscore
 
 func (x *CNNAdd) asCNNArithmetic() *raw.MPSCNNArithmetic { return &x.inner.MPSCNNArithmetic }
 
-func (x *CNNAdd) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel }
+func (x *CNNAdd) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel
+}
 
 // CNNAddable is the interface implemented by [CNNAdd], for mocking and DI.
 type CNNAddable interface {
@@ -209,4 +211,3 @@ type CNNAddable interface {
 }
 
 var _ CNNAddable = (*CNNAdd)(nil)
-

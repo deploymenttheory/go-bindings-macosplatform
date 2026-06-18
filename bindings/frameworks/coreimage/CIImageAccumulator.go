@@ -19,17 +19,17 @@ type CIImageAccumulator struct {
 }
 
 var (
-	_clsCIImageAccumulator = _objcClass("CIImageAccumulator")
-	_cIImageAccumulatorSelImageAccumulatorWithExtentFormat = objc.RegisterName("imageAccumulatorWithExtent:format:")
+	_clsCIImageAccumulator                                           = _objcClass("CIImageAccumulator")
+	_cIImageAccumulatorSelImageAccumulatorWithExtentFormat           = objc.RegisterName("imageAccumulatorWithExtent:format:")
 	_cIImageAccumulatorSelImageAccumulatorWithExtentFormatColorSpace = objc.RegisterName("imageAccumulatorWithExtent:format:colorSpace:")
-	_cIImageAccumulatorSelInitWithExtentFormat = objc.RegisterName("initWithExtent:format:")
-	_cIImageAccumulatorSelInitWithExtentFormatColorSpace = objc.RegisterName("initWithExtent:format:colorSpace:")
-	_cIImageAccumulatorSelImage = objc.RegisterName("image")
-	_cIImageAccumulatorSelSetImage = objc.RegisterName("setImage:")
-	_cIImageAccumulatorSelSetImageDirtyRect = objc.RegisterName("setImage:dirtyRect:")
-	_cIImageAccumulatorSelClear = objc.RegisterName("clear")
-	_cIImageAccumulatorSelExtent = objc.RegisterName("extent")
-	_cIImageAccumulatorSelFormat = objc.RegisterName("format")
+	_cIImageAccumulatorSelInitWithExtentFormat                       = objc.RegisterName("initWithExtent:format:")
+	_cIImageAccumulatorSelInitWithExtentFormatColorSpace             = objc.RegisterName("initWithExtent:format:colorSpace:")
+	_cIImageAccumulatorSelImage                                      = objc.RegisterName("image")
+	_cIImageAccumulatorSelSetImage                                   = objc.RegisterName("setImage:")
+	_cIImageAccumulatorSelSetImageDirtyRect                          = objc.RegisterName("setImage:dirtyRect:")
+	_cIImageAccumulatorSelClear                                      = objc.RegisterName("clear")
+	_cIImageAccumulatorSelExtent                                     = objc.RegisterName("extent")
+	_cIImageAccumulatorSelFormat                                     = objc.RegisterName("format")
 )
 
 func CIImageAccumulatorFromID(id objc.ID) *CIImageAccumulator {
@@ -44,31 +44,41 @@ func CIImageAccumulatorFromID(id objc.ID) *CIImageAccumulator {
 
 func CIImageAccumulatorImageAccumulatorWithExtentFormat(extent corefoundation.CGRect, format int) *CIImageAccumulator {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIImageAccumulator), _cIImageAccumulatorSelImageAccumulatorWithExtentFormat, extent, format)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIImageAccumulatorFromID(_ret)
 }
 
 func CIImageAccumulatorImageAccumulatorWithExtentFormatColorSpace(extent corefoundation.CGRect, format int, colorSpace unsafe.Pointer) *CIImageAccumulator {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIImageAccumulator), _cIImageAccumulatorSelImageAccumulatorWithExtentFormatColorSpace, extent, format, colorSpace)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIImageAccumulatorFromID(_ret)
 }
 
 func (o *CIImageAccumulator) InitWithExtentFormat(extent corefoundation.CGRect, format int) *CIImageAccumulator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageAccumulatorSelInitWithExtentFormat, extent, format)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIImageAccumulatorFromID(_ret)
 }
 
 func (o *CIImageAccumulator) InitWithExtentFormatColorSpace(extent corefoundation.CGRect, format int, colorSpace unsafe.Pointer) *CIImageAccumulator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageAccumulatorSelInitWithExtentFormatColorSpace, extent, format, colorSpace)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIImageAccumulatorFromID(_ret)
 }
 
 func (o *CIImageAccumulator) Image() *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageAccumulatorSelImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIImageFromID(_ret)
 }
 
@@ -93,4 +103,3 @@ func (o *CIImageAccumulator) Format() int {
 	_ret := objc.Send[int](o.Ptr(), _cIImageAccumulatorSelFormat)
 	return _ret
 }
-

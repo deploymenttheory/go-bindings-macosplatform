@@ -77,4 +77,3 @@ type AdaptiveImageGlyphable interface {
 }
 
 var _ AdaptiveImageGlyphable = (*AdaptiveImageGlyph)(nil)
-

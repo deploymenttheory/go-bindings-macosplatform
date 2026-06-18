@@ -188,4 +188,3 @@ type MutableMetadataItemable interface {
 }
 
 var _ MutableMetadataItemable = (*MutableMetadataItem)(nil)
-

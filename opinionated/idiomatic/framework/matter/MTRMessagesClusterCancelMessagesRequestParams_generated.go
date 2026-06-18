@@ -16,7 +16,9 @@ type MTRMessagesClusterCancelMessagesRequestParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRMessagesClusterCancelMessagesRequestParams].
-func (x *MTRMessagesClusterCancelMessagesRequestParams) Unwrap() *raw.MTRMessagesClusterCancelMessagesRequestParams { return x.inner }
+func (x *MTRMessagesClusterCancelMessagesRequestParams) Unwrap() *raw.MTRMessagesClusterCancelMessagesRequestParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -92,4 +94,3 @@ type MTRMessagesClusterCancelMessagesRequestParamsable interface {
 }
 
 var _ MTRMessagesClusterCancelMessagesRequestParamsable = (*MTRMessagesClusterCancelMessagesRequestParams)(nil)
-

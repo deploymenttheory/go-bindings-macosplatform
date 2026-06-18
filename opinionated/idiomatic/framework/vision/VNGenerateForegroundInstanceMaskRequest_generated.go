@@ -16,7 +16,9 @@ type GenerateForegroundInstanceMaskRequest struct {
 }
 
 // Unwrap returns the underlying [raw.VNGenerateForegroundInstanceMaskRequest].
-func (x *GenerateForegroundInstanceMaskRequest) Unwrap() *raw.VNGenerateForegroundInstanceMaskRequest { return x.inner }
+func (x *GenerateForegroundInstanceMaskRequest) Unwrap() *raw.VNGenerateForegroundInstanceMaskRequest {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -60,9 +62,13 @@ func (x *GenerateForegroundInstanceMaskRequest) WithRevision(revision uint) *Gen
 	return x
 }
 
-func (x *GenerateForegroundInstanceMaskRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
+func (x *GenerateForegroundInstanceMaskRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNImageBasedRequest
+}
 
-func (x *GenerateForegroundInstanceMaskRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+func (x *GenerateForegroundInstanceMaskRequest) asRequest() *raw.VNRequest {
+	return &x.inner.VNImageBasedRequest.VNRequest
+}
 
 // GenerateForegroundInstanceMaskRequestable is the interface implemented by [GenerateForegroundInstanceMaskRequest], for mocking and DI.
 type GenerateForegroundInstanceMaskRequestable interface {
@@ -74,4 +80,3 @@ type GenerateForegroundInstanceMaskRequestable interface {
 }
 
 var _ GenerateForegroundInstanceMaskRequestable = (*GenerateForegroundInstanceMaskRequest)(nil)
-

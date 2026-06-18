@@ -21,33 +21,33 @@ type GKNoise struct {
 }
 
 var (
-	_clsGKNoise = _objcClass("GKNoise")
-	_gKNoiseSelInit = objc.RegisterName("init")
-	_gKNoiseSelNoiseWithNoiseSource = objc.RegisterName("noiseWithNoiseSource:")
-	_gKNoiseSelNoiseWithNoiseSourceGradientColors = objc.RegisterName("noiseWithNoiseSource:gradientColors:")
-	_gKNoiseSelInitWithNoiseSource = objc.RegisterName("initWithNoiseSource:")
-	_gKNoiseSelInitWithNoiseSourceGradientColors = objc.RegisterName("initWithNoiseSource:gradientColors:")
-	_gKNoiseSelNoiseWithComponentNoisesSelectionNoise = objc.RegisterName("noiseWithComponentNoises:selectionNoise:")
+	_clsGKNoise                                                                                = _objcClass("GKNoise")
+	_gKNoiseSelInit                                                                            = objc.RegisterName("init")
+	_gKNoiseSelNoiseWithNoiseSource                                                            = objc.RegisterName("noiseWithNoiseSource:")
+	_gKNoiseSelNoiseWithNoiseSourceGradientColors                                              = objc.RegisterName("noiseWithNoiseSource:gradientColors:")
+	_gKNoiseSelInitWithNoiseSource                                                             = objc.RegisterName("initWithNoiseSource:")
+	_gKNoiseSelInitWithNoiseSourceGradientColors                                               = objc.RegisterName("initWithNoiseSource:gradientColors:")
+	_gKNoiseSelNoiseWithComponentNoisesSelectionNoise                                          = objc.RegisterName("noiseWithComponentNoises:selectionNoise:")
 	_gKNoiseSelNoiseWithComponentNoisesSelectionNoiseComponentBoundariesBoundaryBlendDistances = objc.RegisterName("noiseWithComponentNoises:selectionNoise:componentBoundaries:boundaryBlendDistances:")
-	_gKNoiseSelValueAtPosition = objc.RegisterName("valueAtPosition:")
-	_gKNoiseSelApplyAbsoluteValue = objc.RegisterName("applyAbsoluteValue")
-	_gKNoiseSelClampWithLowerBoundUpperBound = objc.RegisterName("clampWithLowerBound:upperBound:")
-	_gKNoiseSelRaiseToPower = objc.RegisterName("raiseToPower:")
-	_gKNoiseSelInvert = objc.RegisterName("invert")
-	_gKNoiseSelApplyTurbulenceWithFrequencyPowerRoughnessSeed = objc.RegisterName("applyTurbulenceWithFrequency:power:roughness:seed:")
-	_gKNoiseSelRemapValuesToCurveWithControlPoints = objc.RegisterName("remapValuesToCurveWithControlPoints:")
-	_gKNoiseSelRemapValuesToTerracesWithPeaksTerracesInverted = objc.RegisterName("remapValuesToTerracesWithPeaks:terracesInverted:")
-	_gKNoiseSelMoveBy = objc.RegisterName("moveBy:")
-	_gKNoiseSelScaleBy = objc.RegisterName("scaleBy:")
-	_gKNoiseSelRotateBy = objc.RegisterName("rotateBy:")
-	_gKNoiseSelAddWithNoise = objc.RegisterName("addWithNoise:")
-	_gKNoiseSelMultiplyWithNoise = objc.RegisterName("multiplyWithNoise:")
-	_gKNoiseSelMinimumWithNoise = objc.RegisterName("minimumWithNoise:")
-	_gKNoiseSelMaximumWithNoise = objc.RegisterName("maximumWithNoise:")
-	_gKNoiseSelRaiseToPowerWithNoise = objc.RegisterName("raiseToPowerWithNoise:")
-	_gKNoiseSelDisplaceXWithNoiseYWithNoiseZWithNoise = objc.RegisterName("displaceXWithNoise:yWithNoise:zWithNoise:")
-	_gKNoiseSelGradientColors = objc.RegisterName("gradientColors")
-	_gKNoiseSelSetGradientColors = objc.RegisterName("setGradientColors:")
+	_gKNoiseSelValueAtPosition                                                                 = objc.RegisterName("valueAtPosition:")
+	_gKNoiseSelApplyAbsoluteValue                                                              = objc.RegisterName("applyAbsoluteValue")
+	_gKNoiseSelClampWithLowerBoundUpperBound                                                   = objc.RegisterName("clampWithLowerBound:upperBound:")
+	_gKNoiseSelRaiseToPower                                                                    = objc.RegisterName("raiseToPower:")
+	_gKNoiseSelInvert                                                                          = objc.RegisterName("invert")
+	_gKNoiseSelApplyTurbulenceWithFrequencyPowerRoughnessSeed                                  = objc.RegisterName("applyTurbulenceWithFrequency:power:roughness:seed:")
+	_gKNoiseSelRemapValuesToCurveWithControlPoints                                             = objc.RegisterName("remapValuesToCurveWithControlPoints:")
+	_gKNoiseSelRemapValuesToTerracesWithPeaksTerracesInverted                                  = objc.RegisterName("remapValuesToTerracesWithPeaks:terracesInverted:")
+	_gKNoiseSelMoveBy                                                                          = objc.RegisterName("moveBy:")
+	_gKNoiseSelScaleBy                                                                         = objc.RegisterName("scaleBy:")
+	_gKNoiseSelRotateBy                                                                        = objc.RegisterName("rotateBy:")
+	_gKNoiseSelAddWithNoise                                                                    = objc.RegisterName("addWithNoise:")
+	_gKNoiseSelMultiplyWithNoise                                                               = objc.RegisterName("multiplyWithNoise:")
+	_gKNoiseSelMinimumWithNoise                                                                = objc.RegisterName("minimumWithNoise:")
+	_gKNoiseSelMaximumWithNoise                                                                = objc.RegisterName("maximumWithNoise:")
+	_gKNoiseSelRaiseToPowerWithNoise                                                           = objc.RegisterName("raiseToPowerWithNoise:")
+	_gKNoiseSelDisplaceXWithNoiseYWithNoiseZWithNoise                                          = objc.RegisterName("displaceXWithNoise:yWithNoise:zWithNoise:")
+	_gKNoiseSelGradientColors                                                                  = objc.RegisterName("gradientColors")
+	_gKNoiseSelSetGradientColors                                                               = objc.RegisterName("setGradientColors:")
 )
 
 func GKNoiseFromID(id objc.ID) *GKNoise {
@@ -63,49 +63,63 @@ func GKNoiseFromID(id objc.ID) *GKNoise {
 // Initializes a constant noise of 0.0 at all positions.
 func (o *GKNoise) Init() *GKNoise {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKNoiseSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKNoiseFromID(_ret)
 }
 
 // Initializes a noise with the specified noise source. @param noiseSource The noise source to use to initially populate the 3D noise space.
 func GKNoiseNoiseWithNoiseSource(noiseSource *GKNoiseSource) *GKNoise {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKNoise), _gKNoiseSelNoiseWithNoiseSource, noiseSource.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKNoiseFromID(_ret)
 }
 
 // Initializes a noise with the specified noise source and parameters. @param noiseSource The noise source to use to initially populate the 3D noise space. @param gradientColors The color gradient to use for this noise in 'value : color' pairs.
 func GKNoiseNoiseWithNoiseSourceGradientColors(noiseSource *GKNoiseSource, gradientColors *foundation.NSDictionary[*foundation.NSNumber, *appkit.NSColor]) *GKNoise {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKNoise), _gKNoiseSelNoiseWithNoiseSourceGradientColors, noiseSource.Ptr(), gradientColors)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKNoiseFromID(_ret)
 }
 
 // Initializes a noise with the specified noise source. @param noiseSource The noise source to use to initially populate the 3D noise space.
 func (o *GKNoise) InitWithNoiseSource(noiseSource *GKNoiseSource) *GKNoise {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKNoiseSelInitWithNoiseSource, noiseSource.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKNoiseFromID(_ret)
 }
 
 // Initializes a noise with the specified noise source and parameters. @param noiseSource The noise source to use to initially populate the 3D noise space. @param gradientColors The color gradient to use for this noise in 'value : color' pairs.
 func (o *GKNoise) InitWithNoiseSourceGradientColors(noiseSource *GKNoiseSource, gradientColors *foundation.NSDictionary[*foundation.NSNumber, *appkit.NSColor]) *GKNoise {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKNoiseSelInitWithNoiseSourceGradientColors, noiseSource.Ptr(), gradientColors)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKNoiseFromID(_ret)
 }
 
 // Initializes a composite noise from one or more component noises.  Useful for combining and layering noises together. @param noises The component noises to combine. @param selectionNoise The noise that governs which component noise is chosen for each position of the resulting noise. The range of values is equally-subdivided for each component noise.
 func GKNoiseNoiseWithComponentNoisesSelectionNoise(noises *foundation.NSArray[*GKNoise], selectionNoise *GKNoise) *GKNoise {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKNoise), _gKNoiseSelNoiseWithComponentNoisesSelectionNoise, noises.Ptr(), selectionNoise.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKNoiseFromID(_ret)
 }
 
 // Initializes a composite noise from one or more component noises.  Useful for combining and layering noises together. @param noises The component noises to combine. @param selectionNoise The noise that governs which component noise is chosen for each position of the resulting noise. The range of values is equally-subdivided for each component noise. @param componentBoundaries The noise value boundaries of the selection noise to use for the component noises.  Specify one less boundary than the number of component noises.  This is a parallel array to blendDistances. @param blendDistances The size of smoothing that is applied to boundaries where two component noises meet.  Specify one less blend distance than the number of component noises.  This is a parallel array to componentBoundaries.
 func GKNoiseNoiseWithComponentNoisesSelectionNoiseComponentBoundariesBoundaryBlendDistances(noises *foundation.NSArray[*GKNoise], selectionNoise *GKNoise, componentBoundaries *foundation.NSArray[*foundation.NSNumber], blendDistances *foundation.NSArray[*foundation.NSNumber]) *GKNoise {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKNoise), _gKNoiseSelNoiseWithComponentNoisesSelectionNoiseComponentBoundariesBoundaryBlendDistances, noises.Ptr(), selectionNoise.Ptr(), componentBoundaries, blendDistances)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKNoiseFromID(_ret)
 }
 
@@ -204,4 +218,3 @@ func (o *GKNoise) GradientColors() *foundation.NSDictionary[*foundation.NSNumber
 func (o *GKNoise) SetGradientColors(gradientColors *foundation.NSDictionary[*foundation.NSNumber, *appkit.NSColor]) {
 	o.Ptr().Send(_gKNoiseSelSetGradientColors, gradientColors)
 }
-

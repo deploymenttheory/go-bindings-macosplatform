@@ -17,10 +17,10 @@ type AVCaptureDeviceRotationCoordinator struct {
 }
 
 var (
-	_clsAVCaptureDeviceRotationCoordinator = _objcClass("AVCaptureDeviceRotationCoordinator")
-	_aVCaptureDeviceRotationCoordinatorSelInitWithDevicePreviewLayer = objc.RegisterName("initWithDevice:previewLayer:")
-	_aVCaptureDeviceRotationCoordinatorSelDevice = objc.RegisterName("device")
-	_aVCaptureDeviceRotationCoordinatorSelPreviewLayer = objc.RegisterName("previewLayer")
+	_clsAVCaptureDeviceRotationCoordinator                                         = _objcClass("AVCaptureDeviceRotationCoordinator")
+	_aVCaptureDeviceRotationCoordinatorSelInitWithDevicePreviewLayer               = objc.RegisterName("initWithDevice:previewLayer:")
+	_aVCaptureDeviceRotationCoordinatorSelDevice                                   = objc.RegisterName("device")
+	_aVCaptureDeviceRotationCoordinatorSelPreviewLayer                             = objc.RegisterName("previewLayer")
 	_aVCaptureDeviceRotationCoordinatorSelVideoRotationAngleForHorizonLevelPreview = objc.RegisterName("videoRotationAngleForHorizonLevelPreview")
 	_aVCaptureDeviceRotationCoordinatorSelVideoRotationAngleForHorizonLevelCapture = objc.RegisterName("videoRotationAngleForHorizonLevelCapture")
 )
@@ -38,21 +38,27 @@ func AVCaptureDeviceRotationCoordinatorFromID(id objc.ID) *AVCaptureDeviceRotati
 // @method initWithDevice:previewLayer: @abstract Returns an AVCaptureDeviceRotationCoordinator instance that provides updates to the amount of rotation that should be applied for horizon-level preview and capture relative to gravity. @param device The device for which to monitor rotation. @param previewLayer A layer displaying the camera's video preview. If nil, the coordinator will return 0 degrees of rotation for horizon-level preview. @result An AVCaptureDeviceRotationCoordinator from which rotation angles for preview and capture can be obtained. @discussion An AVCaptureDeviceRotationCoordinator is only applicable to video devices. The given device and layer determine the amount of rotation that should be applied for horizon-level preview and capture.
 func (o *AVCaptureDeviceRotationCoordinator) InitWithDevicePreviewLayer(device *AVCaptureDevice, previewLayer *quartzcore.CALayer) *AVCaptureDeviceRotationCoordinator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceRotationCoordinatorSelInitWithDevicePreviewLayer, device.Ptr(), previewLayer.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureDeviceRotationCoordinatorFromID(_ret)
 }
 
 // @property device @abstract The the device for which the coordinator provides video rotation angles. @discussion The value of this property is the AVCaptureDevice instance that was used to create the coordinator. The coordinator holds a weak reference to the device.
 func (o *AVCaptureDeviceRotationCoordinator) Device() *AVCaptureDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceRotationCoordinatorSelDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureDeviceFromID(_ret)
 }
 
 // @property previewLayer @abstract The CALayer for which the coordinator calculates video rotation angles for horizon-level preview. @discussion The value of this property is the CALayer instance that was used to create the coordinator. Clients may specify an AVCaptureVideoPreviewLayer or other CALayer instance that displays a camera's video preview. The coordinator holds a weak reference to the layer. The coordinator will return 0 degrees of rotation from -videoRotationAngleForHorizonLevelPreview if a layer was not specified at initialization, the layer is not in a view hierarchy, or the layer has been deallocated.
 func (o *AVCaptureDeviceRotationCoordinator) PreviewLayer() *quartzcore.CALayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceRotationCoordinatorSelPreviewLayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return quartzcore.CALayerFromID(_ret)
 }
 
@@ -67,4 +73,3 @@ func (o *AVCaptureDeviceRotationCoordinator) VideoRotationAngleForHorizonLevelCa
 	_ret := objc.Send[float64](o.Ptr(), _aVCaptureDeviceRotationCoordinatorSelVideoRotationAngleForHorizonLevelCapture)
 	return _ret
 }
-

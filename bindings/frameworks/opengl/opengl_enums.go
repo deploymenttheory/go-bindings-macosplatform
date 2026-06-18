@@ -10,9 +10,9 @@ import (
 type CGLCPContextPriorityRequest int64
 
 const (
-	KCGLCPContextPriorityRequestHigh CGLCPContextPriorityRequest = 0
+	KCGLCPContextPriorityRequestHigh   CGLCPContextPriorityRequest = 0
 	KCGLCPContextPriorityRequestNormal CGLCPContextPriorityRequest = 1
-	KCGLCPContextPriorityRequestLow CGLCPContextPriorityRequest = 2
+	KCGLCPContextPriorityRequestLow    CGLCPContextPriorityRequest = 2
 )
 
 func (e CGLCPContextPriorityRequest) String() string {
@@ -31,13 +31,13 @@ func (e CGLCPContextPriorityRequest) String() string {
 type _CGLContextEnable int64
 
 const (
-	KCGLCESwapRectangle _CGLContextEnable = 201
-	KCGLCESwapLimit _CGLContextEnable = 203
-	KCGLCERasterization _CGLContextEnable = 221
-	KCGLCEStateValidation _CGLContextEnable = 301
-	KCGLCESurfaceBackingSize _CGLContextEnable = 305
+	KCGLCESwapRectangle           _CGLContextEnable = 201
+	KCGLCESwapLimit               _CGLContextEnable = 203
+	KCGLCERasterization           _CGLContextEnable = 221
+	KCGLCEStateValidation         _CGLContextEnable = 301
+	KCGLCESurfaceBackingSize      _CGLContextEnable = 305
 	KCGLCEDisplayListOptimization _CGLContextEnable = 307
-	KCGLCEMPEngine _CGLContextEnable = 313
+	KCGLCEMPEngine                _CGLContextEnable = 313
 	KCGLCECrashOnRemovedFunctions _CGLContextEnable = 316
 )
 
@@ -67,27 +67,27 @@ func (e _CGLContextEnable) String() string {
 type _CGLContextParameter int64
 
 const (
-	KCGLCPSwapRectangle _CGLContextParameter = 200
-	KCGLCPSwapInterval _CGLContextParameter = 222
-	KCGLCPDispatchTableSize _CGLContextParameter = 224
-	KCGLCPClientStorage _CGLContextParameter = 226
-	KCGLCPSurfaceTexture _CGLContextParameter = 228
-	KCGLCPSurfaceOrder _CGLContextParameter = 235
-	KCGLCPSurfaceOpacity _CGLContextParameter = 236
-	KCGLCPSurfaceBackingSize _CGLContextParameter = 304
-	KCGLCPSurfaceSurfaceVolatile _CGLContextParameter = 306
-	KCGLCPReclaimResources _CGLContextParameter = 308
-	KCGLCPCurrentRendererID _CGLContextParameter = 309
-	KCGLCPGPUVertexProcessing _CGLContextParameter = 310
-	KCGLCPGPUFragmentProcessing _CGLContextParameter = 311
-	KCGLCPHasDrawable _CGLContextParameter = 314
-	KCGLCPMPSwapsInFlight _CGLContextParameter = 315
-	KCGLCPGPURestartStatus _CGLContextParameter = 317
+	KCGLCPSwapRectangle                      _CGLContextParameter = 200
+	KCGLCPSwapInterval                       _CGLContextParameter = 222
+	KCGLCPDispatchTableSize                  _CGLContextParameter = 224
+	KCGLCPClientStorage                      _CGLContextParameter = 226
+	KCGLCPSurfaceTexture                     _CGLContextParameter = 228
+	KCGLCPSurfaceOrder                       _CGLContextParameter = 235
+	KCGLCPSurfaceOpacity                     _CGLContextParameter = 236
+	KCGLCPSurfaceBackingSize                 _CGLContextParameter = 304
+	KCGLCPSurfaceSurfaceVolatile             _CGLContextParameter = 306
+	KCGLCPReclaimResources                   _CGLContextParameter = 308
+	KCGLCPCurrentRendererID                  _CGLContextParameter = 309
+	KCGLCPGPUVertexProcessing                _CGLContextParameter = 310
+	KCGLCPGPUFragmentProcessing              _CGLContextParameter = 311
+	KCGLCPHasDrawable                        _CGLContextParameter = 314
+	KCGLCPMPSwapsInFlight                    _CGLContextParameter = 315
+	KCGLCPGPURestartStatus                   _CGLContextParameter = 317
 	KCGLCPAbortOnGPURestartStatusBlacklisted _CGLContextParameter = 318
-	KCGLCPAbortOnGPURestartStatusDenied _CGLContextParameter = 318
-	KCGLCPSupportGPURestart _CGLContextParameter = 319
-	KCGLCPSupportSeparateAddressSpace _CGLContextParameter = 320
-	KCGLCPContextPriorityRequest _CGLContextParameter = 608
+	KCGLCPAbortOnGPURestartStatusDenied      _CGLContextParameter = 318
+	KCGLCPSupportGPURestart                  _CGLContextParameter = 319
+	KCGLCPSupportSeparateAddressSpace        _CGLContextParameter = 320
+	KCGLCPContextPriorityRequest             _CGLContextParameter = 608
 )
 
 func (e _CGLContextParameter) String() string {
@@ -140,25 +140,25 @@ func (e _CGLContextParameter) String() string {
 type _CGLError int64
 
 const (
-	KCGLNoError _CGLError = 0
-	KCGLBadAttribute _CGLError = 10000
-	KCGLBadProperty _CGLError = 10001
-	KCGLBadPixelFormat _CGLError = 10002
+	KCGLNoError         _CGLError = 0
+	KCGLBadAttribute    _CGLError = 10000
+	KCGLBadProperty     _CGLError = 10001
+	KCGLBadPixelFormat  _CGLError = 10002
 	KCGLBadRendererInfo _CGLError = 10003
-	KCGLBadContext _CGLError = 10004
-	KCGLBadDrawable _CGLError = 10005
-	KCGLBadDisplay _CGLError = 10006
-	KCGLBadState _CGLError = 10007
-	KCGLBadValue _CGLError = 10008
-	KCGLBadMatch _CGLError = 10009
-	KCGLBadEnumeration _CGLError = 10010
-	KCGLBadOffScreen _CGLError = 10011
-	KCGLBadFullScreen _CGLError = 10012
-	KCGLBadWindow _CGLError = 10013
-	KCGLBadAddress _CGLError = 10014
-	KCGLBadCodeModule _CGLError = 10015
-	KCGLBadAlloc _CGLError = 10016
-	KCGLBadConnection _CGLError = 10017
+	KCGLBadContext      _CGLError = 10004
+	KCGLBadDrawable     _CGLError = 10005
+	KCGLBadDisplay      _CGLError = 10006
+	KCGLBadState        _CGLError = 10007
+	KCGLBadValue        _CGLError = 10008
+	KCGLBadMatch        _CGLError = 10009
+	KCGLBadEnumeration  _CGLError = 10010
+	KCGLBadOffScreen    _CGLError = 10011
+	KCGLBadFullScreen   _CGLError = 10012
+	KCGLBadWindow       _CGLError = 10013
+	KCGLBadAddress      _CGLError = 10014
+	KCGLBadCodeModule   _CGLError = 10015
+	KCGLBadAlloc        _CGLError = 10016
+	KCGLBadConnection   _CGLError = 10017
 )
 
 func (e _CGLError) String() string {
@@ -209,10 +209,10 @@ func (e _CGLError) String() string {
 type _CGLGPURestartStatus int64
 
 const (
-	KCGLCPGPURestartStatusNone _CGLGPURestartStatus = 0
-	KCGLCPGPURestartStatusCaused _CGLGPURestartStatus = 1
+	KCGLCPGPURestartStatusNone        _CGLGPURestartStatus = 0
+	KCGLCPGPURestartStatusCaused      _CGLGPURestartStatus = 1
 	KCGLCPGPURestartStatusBlacklisted _CGLGPURestartStatus = 2
-	KCGLCPGPURestartStatusDenied _CGLGPURestartStatus = 2
+	KCGLCPGPURestartStatusDenied      _CGLGPURestartStatus = 2
 )
 
 func (e _CGLGPURestartStatus) String() string {
@@ -231,12 +231,12 @@ func (e _CGLGPURestartStatus) String() string {
 type _CGLGlobalOption int64
 
 const (
-	KCGLGOFormatCacheSize _CGLGlobalOption = 501
+	KCGLGOFormatCacheSize  _CGLGlobalOption = 501
 	KCGLGOClearFormatCache _CGLGlobalOption = 502
-	KCGLGORetainRenderers _CGLGlobalOption = 503
-	KCGLGOUseBuildCache _CGLGlobalOption = 506
-	KCGLGOResetLibrary _CGLGlobalOption = 504
-	KCGLGOUseErrorHandler _CGLGlobalOption = 505
+	KCGLGORetainRenderers  _CGLGlobalOption = 503
+	KCGLGOUseBuildCache    _CGLGlobalOption = 506
+	KCGLGOResetLibrary     _CGLGlobalOption = 504
+	KCGLGOUseErrorHandler  _CGLGlobalOption = 505
 )
 
 func (e _CGLGlobalOption) String() string {
@@ -261,7 +261,7 @@ func (e _CGLGlobalOption) String() string {
 type _CGLOpenGLProfile int64
 
 const (
-	KCGLOGLPVersion_Legacy _CGLOpenGLProfile = 4096
+	KCGLOGLPVersion_Legacy   _CGLOpenGLProfile = 4096
 	KCGLOGLPVersion_3_2_Core _CGLOpenGLProfile = 12800
 	KCGLOGLPVersion_GL3_Core _CGLOpenGLProfile = 12800
 	KCGLOGLPVersion_GL4_Core _CGLOpenGLProfile = 16640
@@ -283,47 +283,47 @@ func (e _CGLOpenGLProfile) String() string {
 type _CGLPixelFormatAttribute int64
 
 const (
-	KCGLPFAAllRenderers _CGLPixelFormatAttribute = 1
-	KCGLPFATripleBuffer _CGLPixelFormatAttribute = 3
-	KCGLPFADoubleBuffer _CGLPixelFormatAttribute = 5
-	KCGLPFAColorSize _CGLPixelFormatAttribute = 8
-	KCGLPFAAlphaSize _CGLPixelFormatAttribute = 11
-	KCGLPFADepthSize _CGLPixelFormatAttribute = 12
-	KCGLPFAStencilSize _CGLPixelFormatAttribute = 13
-	KCGLPFAMinimumPolicy _CGLPixelFormatAttribute = 51
-	KCGLPFAMaximumPolicy _CGLPixelFormatAttribute = 52
-	KCGLPFASampleBuffers _CGLPixelFormatAttribute = 55
-	KCGLPFASamples _CGLPixelFormatAttribute = 56
-	KCGLPFAColorFloat _CGLPixelFormatAttribute = 58
-	KCGLPFAMultisample _CGLPixelFormatAttribute = 59
-	KCGLPFASupersample _CGLPixelFormatAttribute = 60
-	KCGLPFASampleAlpha _CGLPixelFormatAttribute = 61
-	KCGLPFARendererID _CGLPixelFormatAttribute = 70
-	KCGLPFANoRecovery _CGLPixelFormatAttribute = 72
-	KCGLPFAAccelerated _CGLPixelFormatAttribute = 73
-	KCGLPFAClosestPolicy _CGLPixelFormatAttribute = 74
-	KCGLPFABackingStore _CGLPixelFormatAttribute = 76
-	KCGLPFABackingVolatile _CGLPixelFormatAttribute = 77
-	KCGLPFADisplayMask _CGLPixelFormatAttribute = 84
-	KCGLPFAAllowOfflineRenderers _CGLPixelFormatAttribute = 96
-	KCGLPFAAcceleratedCompute _CGLPixelFormatAttribute = 97
-	KCGLPFAOpenGLProfile _CGLPixelFormatAttribute = 99
+	KCGLPFAAllRenderers                       _CGLPixelFormatAttribute = 1
+	KCGLPFATripleBuffer                       _CGLPixelFormatAttribute = 3
+	KCGLPFADoubleBuffer                       _CGLPixelFormatAttribute = 5
+	KCGLPFAColorSize                          _CGLPixelFormatAttribute = 8
+	KCGLPFAAlphaSize                          _CGLPixelFormatAttribute = 11
+	KCGLPFADepthSize                          _CGLPixelFormatAttribute = 12
+	KCGLPFAStencilSize                        _CGLPixelFormatAttribute = 13
+	KCGLPFAMinimumPolicy                      _CGLPixelFormatAttribute = 51
+	KCGLPFAMaximumPolicy                      _CGLPixelFormatAttribute = 52
+	KCGLPFASampleBuffers                      _CGLPixelFormatAttribute = 55
+	KCGLPFASamples                            _CGLPixelFormatAttribute = 56
+	KCGLPFAColorFloat                         _CGLPixelFormatAttribute = 58
+	KCGLPFAMultisample                        _CGLPixelFormatAttribute = 59
+	KCGLPFASupersample                        _CGLPixelFormatAttribute = 60
+	KCGLPFASampleAlpha                        _CGLPixelFormatAttribute = 61
+	KCGLPFARendererID                         _CGLPixelFormatAttribute = 70
+	KCGLPFANoRecovery                         _CGLPixelFormatAttribute = 72
+	KCGLPFAAccelerated                        _CGLPixelFormatAttribute = 73
+	KCGLPFAClosestPolicy                      _CGLPixelFormatAttribute = 74
+	KCGLPFABackingStore                       _CGLPixelFormatAttribute = 76
+	KCGLPFABackingVolatile                    _CGLPixelFormatAttribute = 77
+	KCGLPFADisplayMask                        _CGLPixelFormatAttribute = 84
+	KCGLPFAAllowOfflineRenderers              _CGLPixelFormatAttribute = 96
+	KCGLPFAAcceleratedCompute                 _CGLPixelFormatAttribute = 97
+	KCGLPFAOpenGLProfile                      _CGLPixelFormatAttribute = 99
 	KCGLPFASupportsAutomaticGraphicsSwitching _CGLPixelFormatAttribute = 101
-	KCGLPFAVirtualScreenCount _CGLPixelFormatAttribute = 128
-	KCGLPFAAuxBuffers _CGLPixelFormatAttribute = 7
-	KCGLPFAAccumSize _CGLPixelFormatAttribute = 14
-	KCGLPFAAuxDepthStencil _CGLPixelFormatAttribute = 57
-	KCGLPFAStereo _CGLPixelFormatAttribute = 6
-	KCGLPFAOffScreen _CGLPixelFormatAttribute = 53
-	KCGLPFAWindow _CGLPixelFormatAttribute = 80
-	KCGLPFACompliant _CGLPixelFormatAttribute = 83
-	KCGLPFAPBuffer _CGLPixelFormatAttribute = 90
-	KCGLPFARemotePBuffer _CGLPixelFormatAttribute = 91
-	KCGLPFASingleRenderer _CGLPixelFormatAttribute = 71
-	KCGLPFARobust _CGLPixelFormatAttribute = 75
-	KCGLPFAMPSafe _CGLPixelFormatAttribute = 78
-	KCGLPFAMultiScreen _CGLPixelFormatAttribute = 81
-	KCGLPFAFullScreen _CGLPixelFormatAttribute = 54
+	KCGLPFAVirtualScreenCount                 _CGLPixelFormatAttribute = 128
+	KCGLPFAAuxBuffers                         _CGLPixelFormatAttribute = 7
+	KCGLPFAAccumSize                          _CGLPixelFormatAttribute = 14
+	KCGLPFAAuxDepthStencil                    _CGLPixelFormatAttribute = 57
+	KCGLPFAStereo                             _CGLPixelFormatAttribute = 6
+	KCGLPFAOffScreen                          _CGLPixelFormatAttribute = 53
+	KCGLPFAWindow                             _CGLPixelFormatAttribute = 80
+	KCGLPFACompliant                          _CGLPixelFormatAttribute = 83
+	KCGLPFAPBuffer                            _CGLPixelFormatAttribute = 90
+	KCGLPFARemotePBuffer                      _CGLPixelFormatAttribute = 91
+	KCGLPFASingleRenderer                     _CGLPixelFormatAttribute = 71
+	KCGLPFARobust                             _CGLPixelFormatAttribute = 75
+	KCGLPFAMPSafe                             _CGLPixelFormatAttribute = 78
+	KCGLPFAMultiScreen                        _CGLPixelFormatAttribute = 81
+	KCGLPFAFullScreen                         _CGLPixelFormatAttribute = 54
 )
 
 func (e _CGLPixelFormatAttribute) String() string {
@@ -418,40 +418,40 @@ func (e _CGLPixelFormatAttribute) String() string {
 type _CGLRendererProperty int64
 
 const (
-	KCGLRPOffScreen _CGLRendererProperty = 53
-	KCGLRPRendererID _CGLRendererProperty = 70
-	KCGLRPAccelerated _CGLRendererProperty = 73
-	KCGLRPBackingStore _CGLRendererProperty = 76
-	KCGLRPWindow _CGLRendererProperty = 80
-	KCGLRPCompliant _CGLRendererProperty = 83
-	KCGLRPDisplayMask _CGLRendererProperty = 84
-	KCGLRPBufferModes _CGLRendererProperty = 100
-	KCGLRPColorModes _CGLRendererProperty = 103
-	KCGLRPAccumModes _CGLRendererProperty = 104
-	KCGLRPDepthModes _CGLRendererProperty = 105
-	KCGLRPStencilModes _CGLRendererProperty = 106
-	KCGLRPMaxAuxBuffers _CGLRendererProperty = 107
-	KCGLRPMaxSampleBuffers _CGLRendererProperty = 108
-	KCGLRPMaxSamples _CGLRendererProperty = 109
-	KCGLRPSampleModes _CGLRendererProperty = 110
-	KCGLRPSampleAlpha _CGLRendererProperty = 111
-	KCGLRPGPUVertProcCapable _CGLRendererProperty = 122
-	KCGLRPGPUFragProcCapable _CGLRendererProperty = 123
-	KCGLRPRendererCount _CGLRendererProperty = 128
-	KCGLRPOnline _CGLRendererProperty = 129
-	KCGLRPAcceleratedCompute _CGLRendererProperty = 130
-	KCGLRPVideoMemoryMegabytes _CGLRendererProperty = 131
+	KCGLRPOffScreen              _CGLRendererProperty = 53
+	KCGLRPRendererID             _CGLRendererProperty = 70
+	KCGLRPAccelerated            _CGLRendererProperty = 73
+	KCGLRPBackingStore           _CGLRendererProperty = 76
+	KCGLRPWindow                 _CGLRendererProperty = 80
+	KCGLRPCompliant              _CGLRendererProperty = 83
+	KCGLRPDisplayMask            _CGLRendererProperty = 84
+	KCGLRPBufferModes            _CGLRendererProperty = 100
+	KCGLRPColorModes             _CGLRendererProperty = 103
+	KCGLRPAccumModes             _CGLRendererProperty = 104
+	KCGLRPDepthModes             _CGLRendererProperty = 105
+	KCGLRPStencilModes           _CGLRendererProperty = 106
+	KCGLRPMaxAuxBuffers          _CGLRendererProperty = 107
+	KCGLRPMaxSampleBuffers       _CGLRendererProperty = 108
+	KCGLRPMaxSamples             _CGLRendererProperty = 109
+	KCGLRPSampleModes            _CGLRendererProperty = 110
+	KCGLRPSampleAlpha            _CGLRendererProperty = 111
+	KCGLRPGPUVertProcCapable     _CGLRendererProperty = 122
+	KCGLRPGPUFragProcCapable     _CGLRendererProperty = 123
+	KCGLRPRendererCount          _CGLRendererProperty = 128
+	KCGLRPOnline                 _CGLRendererProperty = 129
+	KCGLRPAcceleratedCompute     _CGLRendererProperty = 130
+	KCGLRPVideoMemoryMegabytes   _CGLRendererProperty = 131
 	KCGLRPTextureMemoryMegabytes _CGLRendererProperty = 132
-	KCGLRPMajorGLVersion _CGLRendererProperty = 133
-	KCGLRPRegistryIDLow _CGLRendererProperty = 140
-	KCGLRPRegistryIDHigh _CGLRendererProperty = 141
-	KCGLRPRemovable _CGLRendererProperty = 142
-	KCGLRPRobust _CGLRendererProperty = 75
-	KCGLRPMPSafe _CGLRendererProperty = 78
-	KCGLRPMultiScreen _CGLRendererProperty = 81
-	KCGLRPFullScreen _CGLRendererProperty = 54
-	KCGLRPVideoMemory _CGLRendererProperty = 120
-	KCGLRPTextureMemory _CGLRendererProperty = 121
+	KCGLRPMajorGLVersion         _CGLRendererProperty = 133
+	KCGLRPRegistryIDLow          _CGLRendererProperty = 140
+	KCGLRPRegistryIDHigh         _CGLRendererProperty = 141
+	KCGLRPRemovable              _CGLRendererProperty = 142
+	KCGLRPRobust                 _CGLRendererProperty = 75
+	KCGLRPMPSafe                 _CGLRendererProperty = 78
+	KCGLRPMultiScreen            _CGLRendererProperty = 81
+	KCGLRPFullScreen             _CGLRendererProperty = 54
+	KCGLRPVideoMemory            _CGLRendererProperty = 120
+	KCGLRPTextureMemory          _CGLRendererProperty = 121
 )
 
 func (e _CGLRendererProperty) String() string {
@@ -530,29 +530,28 @@ func (e _CGLRendererProperty) String() string {
 }
 
 const (
-	KCGLRendererATIRadeon8500ID = 136704
-	KCGLRendererATIRadeon9700ID = 137216
-	KCGLRendererATIRadeonID = 135680
+	KCGLRendererATIRadeon8500ID  = 136704
+	KCGLRendererATIRadeon9700ID  = 137216
+	KCGLRendererATIRadeonID      = 135680
 	KCGLRendererATIRadeonX1000ID = 137472
 	KCGLRendererATIRadeonX2000ID = 137728
 	KCGLRendererATIRadeonX3000ID = 137984
 	KCGLRendererATIRadeonX4000ID = 138240
-	KCGLRendererATIRage128ID = 135168
-	KCGLRendererATIRageProID = 136192
-	KCGLRendererAppleSWID = 132608
-	KCGLRendererGeForce2MXID = 139264
-	KCGLRendererGeForce3ID = 139776
-	KCGLRendererGeForce8xxxID = 140800
-	KCGLRendererGeForceFXID = 140288
-	KCGLRendererGeForceID = 141056
-	KCGLRendererGenericFloatID = 132096
-	KCGLRendererGenericID = 131584
-	KCGLRendererIntel900ID = 147456
-	KCGLRendererIntelHD4000ID = 148480
-	KCGLRendererIntelHD5000ID = 148736
-	KCGLRendererIntelHDID = 148224
-	KCGLRendererIntelX3100ID = 147968
-	KCGLRendererMesa3DFXID = 262144
-	KCGLRendererVTBladeXP2ID = 143360
+	KCGLRendererATIRage128ID     = 135168
+	KCGLRendererATIRageProID     = 136192
+	KCGLRendererAppleSWID        = 132608
+	KCGLRendererGeForce2MXID     = 139264
+	KCGLRendererGeForce3ID       = 139776
+	KCGLRendererGeForce8xxxID    = 140800
+	KCGLRendererGeForceFXID      = 140288
+	KCGLRendererGeForceID        = 141056
+	KCGLRendererGenericFloatID   = 132096
+	KCGLRendererGenericID        = 131584
+	KCGLRendererIntel900ID       = 147456
+	KCGLRendererIntelHD4000ID    = 148480
+	KCGLRendererIntelHD5000ID    = 148736
+	KCGLRendererIntelHDID        = 148224
+	KCGLRendererIntelX3100ID     = 147968
+	KCGLRendererMesa3DFXID       = 262144
+	KCGLRendererVTBladeXP2ID     = 143360
 )
-

@@ -73,4 +73,3 @@ func MLCSampleModeDebugDescription(mode raw.MLCSampleMode) *foundation.NSString 
 func MLCSoftmaxOperationDebugDescription(operation raw.MLCSoftmaxOperation) *foundation.NSString {
 	return raw.MLCSoftmaxOperationDebugDescription(operation)
 }
-

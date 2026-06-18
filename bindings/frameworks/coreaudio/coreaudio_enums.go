@@ -11,7 +11,7 @@ import (
 type AudioHardwarePowerHint int64
 
 const (
-	KAudioHardwarePowerHintNone AudioHardwarePowerHint = 0
+	KAudioHardwarePowerHintNone             AudioHardwarePowerHint = 0
 	KAudioHardwarePowerHintFavorSavingPower AudioHardwarePowerHint = 1
 )
 
@@ -29,19 +29,19 @@ func (e AudioHardwarePowerHint) String() string {
 type AudioLevelControlTransferFunction int64
 
 const (
-	KAudioLevelControlTranferFunctionLinear AudioLevelControlTransferFunction = 0
-	KAudioLevelControlTranferFunction1Over3 AudioLevelControlTransferFunction = 1
-	KAudioLevelControlTranferFunction1Over2 AudioLevelControlTransferFunction = 2
-	KAudioLevelControlTranferFunction3Over4 AudioLevelControlTransferFunction = 3
-	KAudioLevelControlTranferFunction3Over2 AudioLevelControlTransferFunction = 4
-	KAudioLevelControlTranferFunction2Over1 AudioLevelControlTransferFunction = 5
-	KAudioLevelControlTranferFunction3Over1 AudioLevelControlTransferFunction = 6
-	KAudioLevelControlTranferFunction4Over1 AudioLevelControlTransferFunction = 7
-	KAudioLevelControlTranferFunction5Over1 AudioLevelControlTransferFunction = 8
-	KAudioLevelControlTranferFunction6Over1 AudioLevelControlTransferFunction = 9
-	KAudioLevelControlTranferFunction7Over1 AudioLevelControlTransferFunction = 10
-	KAudioLevelControlTranferFunction8Over1 AudioLevelControlTransferFunction = 11
-	KAudioLevelControlTranferFunction9Over1 AudioLevelControlTransferFunction = 12
+	KAudioLevelControlTranferFunctionLinear  AudioLevelControlTransferFunction = 0
+	KAudioLevelControlTranferFunction1Over3  AudioLevelControlTransferFunction = 1
+	KAudioLevelControlTranferFunction1Over2  AudioLevelControlTransferFunction = 2
+	KAudioLevelControlTranferFunction3Over4  AudioLevelControlTransferFunction = 3
+	KAudioLevelControlTranferFunction3Over2  AudioLevelControlTransferFunction = 4
+	KAudioLevelControlTranferFunction2Over1  AudioLevelControlTransferFunction = 5
+	KAudioLevelControlTranferFunction3Over1  AudioLevelControlTransferFunction = 6
+	KAudioLevelControlTranferFunction4Over1  AudioLevelControlTransferFunction = 7
+	KAudioLevelControlTranferFunction5Over1  AudioLevelControlTransferFunction = 8
+	KAudioLevelControlTranferFunction6Over1  AudioLevelControlTransferFunction = 9
+	KAudioLevelControlTranferFunction7Over1  AudioLevelControlTransferFunction = 10
+	KAudioLevelControlTranferFunction8Over1  AudioLevelControlTransferFunction = 11
+	KAudioLevelControlTranferFunction9Over1  AudioLevelControlTransferFunction = 12
 	KAudioLevelControlTranferFunction10Over1 AudioLevelControlTransferFunction = 13
 	KAudioLevelControlTranferFunction11Over1 AudioLevelControlTransferFunction = 14
 	KAudioLevelControlTranferFunction12Over1 AudioLevelControlTransferFunction = 15
@@ -90,8 +90,8 @@ type Acl_entry_id_t int64
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
-	ACL_NEXT_ENTRY Acl_entry_id_t = -1
-	ACL_LAST_ENTRY Acl_entry_id_t = -2
+	ACL_NEXT_ENTRY  Acl_entry_id_t = -1
+	ACL_LAST_ENTRY  Acl_entry_id_t = -2
 )
 
 func (e Acl_entry_id_t) String() string {
@@ -110,13 +110,13 @@ func (e Acl_entry_id_t) String() string {
 type Acl_flag_t int64
 
 const (
-	ACL_FLAG_DEFER_INHERIT Acl_flag_t = 1
-	ACL_FLAG_NO_INHERIT Acl_flag_t = 131072
-	ACL_ENTRY_INHERITED Acl_flag_t = 16
-	ACL_ENTRY_FILE_INHERIT Acl_flag_t = 32
+	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
+	ACL_FLAG_NO_INHERIT         Acl_flag_t = 131072
+	ACL_ENTRY_INHERITED         Acl_flag_t = 16
+	ACL_ENTRY_FILE_INHERIT      Acl_flag_t = 32
 	ACL_ENTRY_DIRECTORY_INHERIT Acl_flag_t = 64
-	ACL_ENTRY_LIMIT_INHERIT Acl_flag_t = 128
-	ACL_ENTRY_ONLY_INHERIT Acl_flag_t = 256
+	ACL_ENTRY_LIMIT_INHERIT     Acl_flag_t = 128
+	ACL_ENTRY_ONLY_INHERIT      Acl_flag_t = 256
 )
 
 func (e Acl_flag_t) String() string {
@@ -143,24 +143,24 @@ func (e Acl_flag_t) String() string {
 type Acl_perm_t int64
 
 const (
-	ACL_READ_DATA Acl_perm_t = 2
-	ACL_LIST_DIRECTORY Acl_perm_t = 2
-	ACL_WRITE_DATA Acl_perm_t = 4
-	ACL_ADD_FILE Acl_perm_t = 4
-	ACL_EXECUTE Acl_perm_t = 8
-	ACL_SEARCH Acl_perm_t = 8
-	ACL_DELETE Acl_perm_t = 16
-	ACL_APPEND_DATA Acl_perm_t = 32
-	ACL_ADD_SUBDIRECTORY Acl_perm_t = 32
-	ACL_DELETE_CHILD Acl_perm_t = 64
-	ACL_READ_ATTRIBUTES Acl_perm_t = 128
-	ACL_WRITE_ATTRIBUTES Acl_perm_t = 256
-	ACL_READ_EXTATTRIBUTES Acl_perm_t = 512
+	ACL_READ_DATA           Acl_perm_t = 2
+	ACL_LIST_DIRECTORY      Acl_perm_t = 2
+	ACL_WRITE_DATA          Acl_perm_t = 4
+	ACL_ADD_FILE            Acl_perm_t = 4
+	ACL_EXECUTE             Acl_perm_t = 8
+	ACL_SEARCH              Acl_perm_t = 8
+	ACL_DELETE              Acl_perm_t = 16
+	ACL_APPEND_DATA         Acl_perm_t = 32
+	ACL_ADD_SUBDIRECTORY    Acl_perm_t = 32
+	ACL_DELETE_CHILD        Acl_perm_t = 64
+	ACL_READ_ATTRIBUTES     Acl_perm_t = 128
+	ACL_WRITE_ATTRIBUTES    Acl_perm_t = 256
+	ACL_READ_EXTATTRIBUTES  Acl_perm_t = 512
 	ACL_WRITE_EXTATTRIBUTES Acl_perm_t = 1024
-	ACL_READ_SECURITY Acl_perm_t = 2048
-	ACL_WRITE_SECURITY Acl_perm_t = 4096
-	ACL_CHANGE_OWNER Acl_perm_t = 8192
-	ACL_SYNCHRONIZE Acl_perm_t = 1048576
+	ACL_READ_SECURITY       Acl_perm_t = 2048
+	ACL_WRITE_SECURITY      Acl_perm_t = 4096
+	ACL_CHANGE_OWNER        Acl_perm_t = 8192
+	ACL_SYNCHRONIZE         Acl_perm_t = 1048576
 )
 
 func (e Acl_perm_t) String() string {
@@ -201,9 +201,9 @@ func (e Acl_perm_t) String() string {
 type Acl_tag_t int64
 
 const (
-	ACL_UNDEFINED_TAG Acl_tag_t = 0
+	ACL_UNDEFINED_TAG  Acl_tag_t = 0
 	ACL_EXTENDED_ALLOW Acl_tag_t = 1
-	ACL_EXTENDED_DENY Acl_tag_t = 2
+	ACL_EXTENDED_DENY  Acl_tag_t = 2
 )
 
 func (e Acl_tag_t) String() string {
@@ -223,12 +223,12 @@ type Acl_type_t int64
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
-	ACL_TYPE_ACCESS Acl_type_t = 0
-	ACL_TYPE_DEFAULT Acl_type_t = 1
-	ACL_TYPE_AFS Acl_type_t = 2
-	ACL_TYPE_CODA Acl_type_t = 3
-	ACL_TYPE_NTFS Acl_type_t = 4
-	ACL_TYPE_NWFS Acl_type_t = 5
+	ACL_TYPE_ACCESS   Acl_type_t = 0
+	ACL_TYPE_DEFAULT  Acl_type_t = 1
+	ACL_TYPE_AFS      Acl_type_t = 2
+	ACL_TYPE_CODA     Acl_type_t = 3
+	ACL_TYPE_NTFS     Acl_type_t = 4
+	ACL_TYPE_NWFS     Acl_type_t = 5
 )
 
 func (e Acl_type_t) String() string {
@@ -255,14 +255,14 @@ func (e Acl_type_t) String() string {
 type Clockid_t int64
 
 const (
-	_CLOCK_REALTIME Clockid_t = 0
-	_CLOCK_MONOTONIC Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW Clockid_t = 4
+	_CLOCK_REALTIME             Clockid_t = 0
+	_CLOCK_MONOTONIC            Clockid_t = 6
+	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
 	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID Clockid_t = 16
+	_CLOCK_UPTIME_RAW           Clockid_t = 8
+	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
+	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
+	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
 )
 
 func (e Clockid_t) String() string {
@@ -291,9 +291,9 @@ func (e Clockid_t) String() string {
 type Dispatch_autorelease_frequency_t uint64
 
 const (
-	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT Dispatch_autorelease_frequency_t = 0
+	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT   Dispatch_autorelease_frequency_t = 0
 	DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM Dispatch_autorelease_frequency_t = 1
-	DISPATCH_AUTORELEASE_FREQUENCY_NEVER Dispatch_autorelease_frequency_t = 2
+	DISPATCH_AUTORELEASE_FREQUENCY_NEVER     Dispatch_autorelease_frequency_t = 2
 )
 
 func (e Dispatch_autorelease_frequency_t) String() string {
@@ -312,36 +312,50 @@ func (e Dispatch_autorelease_frequency_t) String() string {
 type Dispatch_block_flags_t uint64
 
 const (
-	DISPATCH_BLOCK_BARRIER Dispatch_block_flags_t = 1
-	DISPATCH_BLOCK_DETACHED Dispatch_block_flags_t = 2
-	DISPATCH_BLOCK_ASSIGN_CURRENT Dispatch_block_flags_t = 4
-	DISPATCH_BLOCK_NO_QOS_CLASS Dispatch_block_flags_t = 8
+	DISPATCH_BLOCK_BARRIER           Dispatch_block_flags_t = 1
+	DISPATCH_BLOCK_DETACHED          Dispatch_block_flags_t = 2
+	DISPATCH_BLOCK_ASSIGN_CURRENT    Dispatch_block_flags_t = 4
+	DISPATCH_BLOCK_NO_QOS_CLASS      Dispatch_block_flags_t = 8
 	DISPATCH_BLOCK_INHERIT_QOS_CLASS Dispatch_block_flags_t = 16
 	DISPATCH_BLOCK_ENFORCE_QOS_CLASS Dispatch_block_flags_t = 32
 )
 
 func (e Dispatch_block_flags_t) String() string {
 	var parts []string
-	if e&DISPATCH_BLOCK_BARRIER != 0 { parts = append(parts, "DISPATCH_BLOCK_BARRIER") }
-	if e&DISPATCH_BLOCK_DETACHED != 0 { parts = append(parts, "DISPATCH_BLOCK_DETACHED") }
-	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 { parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT") }
-	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS") }
-	if len(parts) == 0 { return "0" }
+	if e&DISPATCH_BLOCK_BARRIER != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_BARRIER")
+	}
+	if e&DISPATCH_BLOCK_DETACHED != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_DETACHED")
+	}
+	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT")
+	}
+	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Filesec_property_t int64
 
 const (
-	FILESEC_OWNER Filesec_property_t = 1
-	FILESEC_GROUP Filesec_property_t = 2
-	FILESEC_UUID Filesec_property_t = 3
-	FILESEC_MODE Filesec_property_t = 4
-	FILESEC_ACL Filesec_property_t = 5
-	FILESEC_GRPUUID Filesec_property_t = 6
-	FILESEC_ACL_RAW Filesec_property_t = 100
+	FILESEC_OWNER         Filesec_property_t = 1
+	FILESEC_GROUP         Filesec_property_t = 2
+	FILESEC_UUID          Filesec_property_t = 3
+	FILESEC_MODE          Filesec_property_t = 4
+	FILESEC_ACL           Filesec_property_t = 5
+	FILESEC_GRPUUID       Filesec_property_t = 6
+	FILESEC_ACL_RAW       Filesec_property_t = 100
 	FILESEC_ACL_ALLOCSIZE Filesec_property_t = 101
 )
 
@@ -371,8 +385,8 @@ func (e Filesec_property_t) String() string {
 type Idtype_t int64
 
 const (
-	P_ALL Idtype_t = 0
-	P_PID Idtype_t = 1
+	P_ALL  Idtype_t = 0
+	P_PID  Idtype_t = 1
 	P_PGID Idtype_t = 2
 )
 
@@ -392,26 +406,42 @@ func (e Idtype_t) String() string {
 type Mpo_flags_t int64
 
 const (
-	MPO_PORT Mpo_flags_t = 0
-	MPO_SERVICE_PORT Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT Mpo_flags_t = 2048
-	MPO_REPLY_PORT Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT Mpo_flags_t = 32768
+	MPO_PORT                            Mpo_flags_t = 0
+	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
+	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
+	MPO_REPLY_PORT                      Mpo_flags_t = 4096
+	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
+	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
+	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
 	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
 )
 
 func (e Mpo_flags_t) String() string {
 	var parts []string
-	if e&MPO_SERVICE_PORT != 0 { parts = append(parts, "MPO_SERVICE_PORT") }
-	if e&MPO_CONNECTION_PORT != 0 { parts = append(parts, "MPO_CONNECTION_PORT") }
-	if e&MPO_REPLY_PORT != 0 { parts = append(parts, "MPO_REPLY_PORT") }
-	if e&MPO_WEAK_REPLY_PORT != 0 { parts = append(parts, "MPO_WEAK_REPLY_PORT") }
-	if e&MPO_NOTIFICATION_PORT != 0 { parts = append(parts, "MPO_NOTIFICATION_PORT") }
-	if e&MPO_EXCEPTION_PORT != 0 { parts = append(parts, "MPO_EXCEPTION_PORT") }
-	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 { parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY") }
-	if len(parts) == 0 { return "0" }
+	if e&MPO_SERVICE_PORT != 0 {
+		parts = append(parts, "MPO_SERVICE_PORT")
+	}
+	if e&MPO_CONNECTION_PORT != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT")
+	}
+	if e&MPO_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_REPLY_PORT")
+	}
+	if e&MPO_WEAK_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_WEAK_REPLY_PORT")
+	}
+	if e&MPO_NOTIFICATION_PORT != 0 {
+		parts = append(parts, "MPO_NOTIFICATION_PORT")
+	}
+	if e&MPO_EXCEPTION_PORT != 0 {
+		parts = append(parts, "MPO_EXCEPTION_PORT")
+	}
+	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -433,27 +463,27 @@ func (e Os_clockid_t) String() string {
 type Ptrauth_key int64
 
 const (
-	Ptrauth_key_none Ptrauth_key = -1
-	Ptrauth_key_asia Ptrauth_key = 0
-	Ptrauth_key_asib Ptrauth_key = 1
-	Ptrauth_key_asda Ptrauth_key = 2
-	Ptrauth_key_asdb Ptrauth_key = 3
+	Ptrauth_key_none                     Ptrauth_key = -1
+	Ptrauth_key_asia                     Ptrauth_key = 0
+	Ptrauth_key_asib                     Ptrauth_key = 1
+	Ptrauth_key_asda                     Ptrauth_key = 2
+	Ptrauth_key_asdb                     Ptrauth_key = 3
 	Ptrauth_key_process_independent_code Ptrauth_key = 0
-	Ptrauth_key_process_dependent_code Ptrauth_key = 1
+	Ptrauth_key_process_dependent_code   Ptrauth_key = 1
 	Ptrauth_key_process_independent_data Ptrauth_key = 2
-	Ptrauth_key_process_dependent_data Ptrauth_key = 3
-	Ptrauth_key_return_address Ptrauth_key = 1
-	Ptrauth_key_frame_pointer Ptrauth_key = 3
-	Ptrauth_key_function_pointer Ptrauth_key = 0
-	Ptrauth_key_block_function Ptrauth_key = 0
-	Ptrauth_key_cxx_vtable_pointer Ptrauth_key = 2
-	Ptrauth_key_method_list_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_isa_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_super_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_sel_pointer Ptrauth_key = 3
-	Ptrauth_key_objc_class_ro_pointer Ptrauth_key = 2
+	Ptrauth_key_process_dependent_data   Ptrauth_key = 3
+	Ptrauth_key_return_address           Ptrauth_key = 1
+	Ptrauth_key_frame_pointer            Ptrauth_key = 3
+	Ptrauth_key_function_pointer         Ptrauth_key = 0
+	Ptrauth_key_block_function           Ptrauth_key = 0
+	Ptrauth_key_cxx_vtable_pointer       Ptrauth_key = 2
+	Ptrauth_key_method_list_pointer      Ptrauth_key = 2
+	Ptrauth_key_objc_isa_pointer         Ptrauth_key = 2
+	Ptrauth_key_objc_super_pointer       Ptrauth_key = 2
+	Ptrauth_key_objc_sel_pointer         Ptrauth_key = 3
+	Ptrauth_key_objc_class_ro_pointer    Ptrauth_key = 2
 	Ptrauth_key_block_descriptor_pointer Ptrauth_key = 2
-	Ptrauth_key_init_fini_pointer Ptrauth_key = 0
+	Ptrauth_key_init_fini_pointer        Ptrauth_key = 0
 )
 
 func (e Ptrauth_key) String() string {
@@ -477,11 +507,11 @@ type Qos_class_t uint32
 
 const (
 	QOS_CLASS_USER_INTERACTIVE Qos_class_t = 33
-	QOS_CLASS_USER_INITIATED Qos_class_t = 25
-	QOS_CLASS_DEFAULT Qos_class_t = 21
-	QOS_CLASS_UTILITY Qos_class_t = 17
-	QOS_CLASS_BACKGROUND Qos_class_t = 9
-	QOS_CLASS_UNSPECIFIED Qos_class_t = 0
+	QOS_CLASS_USER_INITIATED   Qos_class_t = 25
+	QOS_CLASS_DEFAULT          Qos_class_t = 21
+	QOS_CLASS_UTILITY          Qos_class_t = 17
+	QOS_CLASS_BACKGROUND       Qos_class_t = 9
+	QOS_CLASS_UNSPECIFIED      Qos_class_t = 0
 )
 
 func (e Qos_class_t) String() string {
@@ -509,12 +539,12 @@ const (
 
 const (
 	KAudioAggregateDevicePropertyActiveSubDeviceList = 1634169456
-	KAudioAggregateDevicePropertyClockDevice = 1634755428
-	KAudioAggregateDevicePropertyComposition = 1633906541
-	KAudioAggregateDevicePropertyFullSubDeviceList = 1735554416
-	KAudioAggregateDevicePropertyMainSubDevice = 1634562932
-	KAudioAggregateDevicePropertySubTapList = 1635017072
-	KAudioAggregateDevicePropertyTapList = 1952542755
+	KAudioAggregateDevicePropertyClockDevice         = 1634755428
+	KAudioAggregateDevicePropertyComposition         = 1633906541
+	KAudioAggregateDevicePropertyFullSubDeviceList   = 1735554416
+	KAudioAggregateDevicePropertyMainSubDevice       = 1634562932
+	KAudioAggregateDevicePropertySubTapList          = 1635017072
+	KAudioAggregateDevicePropertyTapList             = 1952542755
 )
 
 const (
@@ -522,24 +552,24 @@ const (
 )
 
 const (
-	KAudioAggregateDriftCompensationHighQuality = 96
-	KAudioAggregateDriftCompensationLowQuality = 32
-	KAudioAggregateDriftCompensationMaxQuality = 127
+	KAudioAggregateDriftCompensationHighQuality   = 96
+	KAudioAggregateDriftCompensationLowQuality    = 32
+	KAudioAggregateDriftCompensationMaxQuality    = 127
 	KAudioAggregateDriftCompensationMediumQuality = 64
-	KAudioAggregateDriftCompensationMinQuality = 0
+	KAudioAggregateDriftCompensationMinQuality    = 0
 )
 
 const (
-	KAudioBooleanControlClassID = 1953458028
-	KAudioClipLightControlClassID = 1668049264
-	KAudioJackControlClassID = 1784767339
-	KAudioLFEMuteControlClassID = 1937072749
-	KAudioListenbackControlClassID = 1819504226
-	KAudioMuteControlClassID = 1836414053
+	KAudioBooleanControlClassID      = 1953458028
+	KAudioClipLightControlClassID    = 1668049264
+	KAudioJackControlClassID         = 1784767339
+	KAudioLFEMuteControlClassID      = 1937072749
+	KAudioListenbackControlClassID   = 1819504226
+	KAudioMuteControlClassID         = 1836414053
 	KAudioPhantomPowerControlClassID = 1885888878
-	KAudioPhaseInvertControlClassID = 1885893481
-	KAudioSoloControlClassID = 1936682095
-	KAudioTalkbackControlClassID = 1952541794
+	KAudioPhaseInvertControlClassID  = 1885893481
+	KAudioSoloControlClassID         = 1936682095
+	KAudioTalkbackControlClassID     = 1952541794
 )
 
 const (
@@ -555,16 +585,16 @@ const (
 )
 
 const (
-	KAudioBoxPropertyAcquired = 1652060014
+	KAudioBoxPropertyAcquired          = 1652060014
 	KAudioBoxPropertyAcquisitionFailed = 1652060006
-	KAudioBoxPropertyBoxUID = 1651861860
-	KAudioBoxPropertyClockDeviceList = 1650682915
-	KAudioBoxPropertyDeviceList = 1650751011
-	KAudioBoxPropertyHasAudio = 1651007861
-	KAudioBoxPropertyHasMIDI = 1651010921
-	KAudioBoxPropertyHasVideo = 1651013225
-	KAudioBoxPropertyIsProtected = 1651536495
-	KAudioBoxPropertyTransportType = 1953653102
+	KAudioBoxPropertyBoxUID            = 1651861860
+	KAudioBoxPropertyClockDeviceList   = 1650682915
+	KAudioBoxPropertyDeviceList        = 1650751011
+	KAudioBoxPropertyHasAudio          = 1651007861
+	KAudioBoxPropertyHasMIDI           = 1651010921
+	KAudioBoxPropertyHasVideo          = 1651013225
+	KAudioBoxPropertyIsProtected       = 1651536495
+	KAudioBoxPropertyTransportType     = 1953653102
 )
 
 const (
@@ -573,14 +603,14 @@ const (
 
 const (
 	KAudioClockDevicePropertyAvailableNominalSampleRates = 1853059619
-	KAudioClockDevicePropertyClockDomain = 1668049764
-	KAudioClockDevicePropertyControlList = 1668575852
-	KAudioClockDevicePropertyDeviceIsAlive = 1818850926
-	KAudioClockDevicePropertyDeviceIsRunning = 1735354734
-	KAudioClockDevicePropertyDeviceUID = 1668639076
-	KAudioClockDevicePropertyLatency = 1819569763
-	KAudioClockDevicePropertyNominalSampleRate = 1853059700
-	KAudioClockDevicePropertyTransportType = 1953653102
+	KAudioClockDevicePropertyClockDomain                 = 1668049764
+	KAudioClockDevicePropertyControlList                 = 1668575852
+	KAudioClockDevicePropertyDeviceIsAlive               = 1818850926
+	KAudioClockDevicePropertyDeviceIsRunning             = 1735354734
+	KAudioClockDevicePropertyDeviceUID                   = 1668639076
+	KAudioClockDevicePropertyLatency                     = 1819569763
+	KAudioClockDevicePropertyNominalSampleRate           = 1853059700
+	KAudioClockDevicePropertyTransportType               = 1953653102
 )
 
 const (
@@ -597,7 +627,7 @@ const (
 
 const (
 	KAudioControlPropertyElement = 1667591277
-	KAudioControlPropertyScope = 1668506480
+	KAudioControlPropertyScope   = 1668506480
 )
 
 const (
@@ -609,144 +639,144 @@ const (
 )
 
 const (
-	KAudioDevicePropertyAvailableNominalSampleRates = 1853059619
-	KAudioDevicePropertyClockDomain = 1668049764
-	KAudioDevicePropertyConfigurationApplication = 1667330160
-	KAudioDevicePropertyDeviceCanBeDefaultDevice = 1684434036
+	KAudioDevicePropertyAvailableNominalSampleRates    = 1853059619
+	KAudioDevicePropertyClockDomain                    = 1668049764
+	KAudioDevicePropertyConfigurationApplication       = 1667330160
+	KAudioDevicePropertyDeviceCanBeDefaultDevice       = 1684434036
 	KAudioDevicePropertyDeviceCanBeDefaultSystemDevice = 1936092276
-	KAudioDevicePropertyDeviceIsAlive = 1818850926
-	KAudioDevicePropertyDeviceIsRunning = 1735354734
-	KAudioDevicePropertyDeviceUID = 1969841184
-	KAudioDevicePropertyIcon = 1768124270
-	KAudioDevicePropertyIsHidden = 1751737454
-	KAudioDevicePropertyLatency = 1819569763
-	KAudioDevicePropertyModelUID = 1836411236
-	KAudioDevicePropertyNominalSampleRate = 1853059700
-	KAudioDevicePropertyPreferredChannelLayout = 1936879204
-	KAudioDevicePropertyPreferredChannelsForStereo = 1684236338
-	KAudioDevicePropertyRelatedDevices = 1634429294
-	KAudioDevicePropertySafetyOffset = 1935763060
-	KAudioDevicePropertyStreams = 1937009955
-	KAudioDevicePropertyTransportType = 1953653102
-	KAudioObjectPropertyControlList = 1668575852
+	KAudioDevicePropertyDeviceIsAlive                  = 1818850926
+	KAudioDevicePropertyDeviceIsRunning                = 1735354734
+	KAudioDevicePropertyDeviceUID                      = 1969841184
+	KAudioDevicePropertyIcon                           = 1768124270
+	KAudioDevicePropertyIsHidden                       = 1751737454
+	KAudioDevicePropertyLatency                        = 1819569763
+	KAudioDevicePropertyModelUID                       = 1836411236
+	KAudioDevicePropertyNominalSampleRate              = 1853059700
+	KAudioDevicePropertyPreferredChannelLayout         = 1936879204
+	KAudioDevicePropertyPreferredChannelsForStereo     = 1684236338
+	KAudioDevicePropertyRelatedDevices                 = 1634429294
+	KAudioDevicePropertySafetyOffset                   = 1935763060
+	KAudioDevicePropertyStreams                        = 1937009955
+	KAudioDevicePropertyTransportType                  = 1953653102
+	KAudioObjectPropertyControlList                    = 1668575852
 )
 
 const (
-	KAudioDevicePropertyBufferSize = 1651730810
-	KAudioDevicePropertyBufferSizeRange = 1651735075
-	KAudioDevicePropertyChannelCategoryName = 1667460717
-	KAudioDevicePropertyChannelCategoryNameCFString = 1818452846
-	KAudioDevicePropertyChannelName = 1667788397
-	KAudioDevicePropertyChannelNameCFString = 1818454126
+	KAudioDevicePropertyBufferSize                       = 1651730810
+	KAudioDevicePropertyBufferSizeRange                  = 1651735075
+	KAudioDevicePropertyChannelCategoryName              = 1667460717
+	KAudioDevicePropertyChannelCategoryNameCFString      = 1818452846
+	KAudioDevicePropertyChannelName                      = 1667788397
+	KAudioDevicePropertyChannelNameCFString              = 1818454126
 	KAudioDevicePropertyChannelNominalLineLevelNameForID = 1668181110
-	KAudioDevicePropertyChannelNumberName = 1668181613
-	KAudioDevicePropertyChannelNumberNameCFString = 1818455662
-	KAudioDevicePropertyClockSourceNameForID = 1668506478
-	KAudioDevicePropertyDataSourceNameForID = 1936941934
-	KAudioDevicePropertyDeviceManufacturer = 1835101042
-	KAudioDevicePropertyDeviceManufacturerCFString = 1819107691
-	KAudioDevicePropertyDeviceName = 1851878757
-	KAudioDevicePropertyDeviceNameCFString = 1819173229
-	KAudioDevicePropertyHighPassFilterSettingNameForID = 1667787120
-	KAudioDevicePropertyPlayThruDestinationNameForID = 1835295854
-	KAudioDevicePropertyRegisterBufferList = 1919055206
-	KAudioDevicePropertyStreamFormat = 1936092532
-	KAudioDevicePropertyStreamFormatMatch = 1936092525
-	KAudioDevicePropertyStreamFormatSupported = 1936092479
-	KAudioDevicePropertyStreamFormats = 1936092451
-	KAudioDevicePropertySupportsMixing = 1835628607
+	KAudioDevicePropertyChannelNumberName                = 1668181613
+	KAudioDevicePropertyChannelNumberNameCFString        = 1818455662
+	KAudioDevicePropertyClockSourceNameForID             = 1668506478
+	KAudioDevicePropertyDataSourceNameForID              = 1936941934
+	KAudioDevicePropertyDeviceManufacturer               = 1835101042
+	KAudioDevicePropertyDeviceManufacturerCFString       = 1819107691
+	KAudioDevicePropertyDeviceName                       = 1851878757
+	KAudioDevicePropertyDeviceNameCFString               = 1819173229
+	KAudioDevicePropertyHighPassFilterSettingNameForID   = 1667787120
+	KAudioDevicePropertyPlayThruDestinationNameForID     = 1835295854
+	KAudioDevicePropertyRegisterBufferList               = 1919055206
+	KAudioDevicePropertyStreamFormat                     = 1936092532
+	KAudioDevicePropertyStreamFormatMatch                = 1936092525
+	KAudioDevicePropertyStreamFormatSupported            = 1936092479
+	KAudioDevicePropertyStreamFormats                    = 1936092451
+	KAudioDevicePropertySupportsMixing                   = 1835628607
 )
 
 const (
-	KAudioDevicePropertyChannelNominalLineLevel = 1852601964
+	KAudioDevicePropertyChannelNominalLineLevel                  = 1852601964
 	KAudioDevicePropertyChannelNominalLineLevelNameForIDCFString = 1818455660
-	KAudioDevicePropertyChannelNominalLineLevels = 1852601891
-	KAudioDevicePropertyClipLight = 1668049264
-	KAudioDevicePropertyClockSource = 1668510307
-	KAudioDevicePropertyClockSourceKindForID = 1668506475
-	KAudioDevicePropertyClockSourceNameForIDCFString = 1818456942
-	KAudioDevicePropertyClockSources = 1668506403
-	KAudioDevicePropertyDataSource = 1936945763
-	KAudioDevicePropertyDataSourceKindForID = 1936941931
-	KAudioDevicePropertyDataSourceNameForIDCFString = 1819501422
-	KAudioDevicePropertyDataSources = 1936941859
-	KAudioDevicePropertyHighPassFilterSetting = 1751740518
-	KAudioDevicePropertyHighPassFilterSettingNameForIDCFString = 1751740524
-	KAudioDevicePropertyHighPassFilterSettings = 1751740451
-	KAudioDevicePropertyJackIsConnected = 1784767339
-	KAudioDevicePropertyListenback = 1819504226
-	KAudioDevicePropertyMute = 1836414053
-	KAudioDevicePropertyPhantomPower = 1885888878
-	KAudioDevicePropertyPhaseInvert = 1885893481
-	KAudioDevicePropertyPlayThru = 1953002101
-	KAudioDevicePropertyPlayThruDestination = 1835295859
-	KAudioDevicePropertyPlayThruDestinationNameForIDCFString = 1835295843
-	KAudioDevicePropertyPlayThruDestinations = 1835295779
-	KAudioDevicePropertyPlayThruSolo = 1953002099
-	KAudioDevicePropertyPlayThruStereoPan = 1836281966
-	KAudioDevicePropertyPlayThruStereoPanChannels = 1836281891
-	KAudioDevicePropertyPlayThruVolumeDecibels = 1836475490
-	KAudioDevicePropertyPlayThruVolumeDecibelsToScalar = 1836462707
-	KAudioDevicePropertyPlayThruVolumeRangeDecibels = 1836475427
-	KAudioDevicePropertyPlayThruVolumeScalar = 1836479331
-	KAudioDevicePropertyPlayThruVolumeScalarToDecibels = 1836462692
-	KAudioDevicePropertySolo = 1936682095
-	KAudioDevicePropertyStereoPan = 1936744814
-	KAudioDevicePropertyStereoPanChannels = 1936748067
-	KAudioDevicePropertySubMute = 1936553332
-	KAudioDevicePropertySubVolumeDecibels = 1937140836
-	KAudioDevicePropertySubVolumeDecibelsToScalar = 1935946358
-	KAudioDevicePropertySubVolumeRangeDecibels = 1937138723
-	KAudioDevicePropertySubVolumeScalar = 1937140845
-	KAudioDevicePropertySubVolumeScalarToDecibels = 1937125988
-	KAudioDevicePropertyTalkback = 1952541794
-	KAudioDevicePropertyVoiceActivityDetectionEnable = 1983996971
-	KAudioDevicePropertyVoiceActivityDetectionState = 1983997011
-	KAudioDevicePropertyVolumeDecibels = 1987013732
-	KAudioDevicePropertyVolumeDecibelsToScalar = 1684157046
-	KAudioDevicePropertyVolumeRangeDecibels = 1986290211
-	KAudioDevicePropertyVolumeScalar = 1987013741
-	KAudioDevicePropertyVolumeScalarToDecibels = 1983013986
-	KAudioDevicePropertyWantsControlsRestored = 1919251299
-	KAudioDevicePropertyWantsStreamFormatsRestored = 1919251302
+	KAudioDevicePropertyChannelNominalLineLevels                 = 1852601891
+	KAudioDevicePropertyClipLight                                = 1668049264
+	KAudioDevicePropertyClockSource                              = 1668510307
+	KAudioDevicePropertyClockSourceKindForID                     = 1668506475
+	KAudioDevicePropertyClockSourceNameForIDCFString             = 1818456942
+	KAudioDevicePropertyClockSources                             = 1668506403
+	KAudioDevicePropertyDataSource                               = 1936945763
+	KAudioDevicePropertyDataSourceKindForID                      = 1936941931
+	KAudioDevicePropertyDataSourceNameForIDCFString              = 1819501422
+	KAudioDevicePropertyDataSources                              = 1936941859
+	KAudioDevicePropertyHighPassFilterSetting                    = 1751740518
+	KAudioDevicePropertyHighPassFilterSettingNameForIDCFString   = 1751740524
+	KAudioDevicePropertyHighPassFilterSettings                   = 1751740451
+	KAudioDevicePropertyJackIsConnected                          = 1784767339
+	KAudioDevicePropertyListenback                               = 1819504226
+	KAudioDevicePropertyMute                                     = 1836414053
+	KAudioDevicePropertyPhantomPower                             = 1885888878
+	KAudioDevicePropertyPhaseInvert                              = 1885893481
+	KAudioDevicePropertyPlayThru                                 = 1953002101
+	KAudioDevicePropertyPlayThruDestination                      = 1835295859
+	KAudioDevicePropertyPlayThruDestinationNameForIDCFString     = 1835295843
+	KAudioDevicePropertyPlayThruDestinations                     = 1835295779
+	KAudioDevicePropertyPlayThruSolo                             = 1953002099
+	KAudioDevicePropertyPlayThruStereoPan                        = 1836281966
+	KAudioDevicePropertyPlayThruStereoPanChannels                = 1836281891
+	KAudioDevicePropertyPlayThruVolumeDecibels                   = 1836475490
+	KAudioDevicePropertyPlayThruVolumeDecibelsToScalar           = 1836462707
+	KAudioDevicePropertyPlayThruVolumeRangeDecibels              = 1836475427
+	KAudioDevicePropertyPlayThruVolumeScalar                     = 1836479331
+	KAudioDevicePropertyPlayThruVolumeScalarToDecibels           = 1836462692
+	KAudioDevicePropertySolo                                     = 1936682095
+	KAudioDevicePropertyStereoPan                                = 1936744814
+	KAudioDevicePropertyStereoPanChannels                        = 1936748067
+	KAudioDevicePropertySubMute                                  = 1936553332
+	KAudioDevicePropertySubVolumeDecibels                        = 1937140836
+	KAudioDevicePropertySubVolumeDecibelsToScalar                = 1935946358
+	KAudioDevicePropertySubVolumeRangeDecibels                   = 1937138723
+	KAudioDevicePropertySubVolumeScalar                          = 1937140845
+	KAudioDevicePropertySubVolumeScalarToDecibels                = 1937125988
+	KAudioDevicePropertyTalkback                                 = 1952541794
+	KAudioDevicePropertyVoiceActivityDetectionEnable             = 1983996971
+	KAudioDevicePropertyVoiceActivityDetectionState              = 1983997011
+	KAudioDevicePropertyVolumeDecibels                           = 1987013732
+	KAudioDevicePropertyVolumeDecibelsToScalar                   = 1684157046
+	KAudioDevicePropertyVolumeRangeDecibels                      = 1986290211
+	KAudioDevicePropertyVolumeScalar                             = 1987013741
+	KAudioDevicePropertyVolumeScalarToDecibels                   = 1983013986
+	KAudioDevicePropertyWantsControlsRestored                    = 1919251299
+	KAudioDevicePropertyWantsStreamFormatsRestored               = 1919251302
 )
 
 const (
-	KAudioDeviceProcessorOverload = 1870030194
-	KAudioDevicePropertyActualSampleRate = 1634955892
-	KAudioDevicePropertyBufferFrameSize = 1718839674
-	KAudioDevicePropertyBufferFrameSizeRange = 1718843939
-	KAudioDevicePropertyClockDevice = 1634755428
-	KAudioDevicePropertyDeviceHasChanged = 1684629094
-	KAudioDevicePropertyDeviceIsRunningSomewhere = 1735356005
-	KAudioDevicePropertyHogMode = 1869180523
-	KAudioDevicePropertyIOCycleUsage = 1852012899
-	KAudioDevicePropertyIOProcStreamUsage = 1937077093
-	KAudioDevicePropertyIOStoppedAbnormally = 1937010788
-	KAudioDevicePropertyIOThreadOSWorkgroup = 1869838183
-	KAudioDevicePropertyPlugIn = 1886156135
-	KAudioDevicePropertyProcessMute = 1634758765
-	KAudioDevicePropertyStreamConfiguration = 1936482681
+	KAudioDeviceProcessorOverload                    = 1870030194
+	KAudioDevicePropertyActualSampleRate             = 1634955892
+	KAudioDevicePropertyBufferFrameSize              = 1718839674
+	KAudioDevicePropertyBufferFrameSizeRange         = 1718843939
+	KAudioDevicePropertyClockDevice                  = 1634755428
+	KAudioDevicePropertyDeviceHasChanged             = 1684629094
+	KAudioDevicePropertyDeviceIsRunningSomewhere     = 1735356005
+	KAudioDevicePropertyHogMode                      = 1869180523
+	KAudioDevicePropertyIOCycleUsage                 = 1852012899
+	KAudioDevicePropertyIOProcStreamUsage            = 1937077093
+	KAudioDevicePropertyIOStoppedAbnormally          = 1937010788
+	KAudioDevicePropertyIOThreadOSWorkgroup          = 1869838183
+	KAudioDevicePropertyPlugIn                       = 1886156135
+	KAudioDevicePropertyProcessMute                  = 1634758765
+	KAudioDevicePropertyStreamConfiguration          = 1936482681
 	KAudioDevicePropertyUsesVariableBufferFrameSizes = 1986425722
 )
 
 const (
-	KAudioDevicePropertyScopeInput = 1768845428
-	KAudioDevicePropertyScopeOutput = 1869968496
+	KAudioDevicePropertyScopeInput       = 1768845428
+	KAudioDevicePropertyScopeOutput      = 1869968496
 	KAudioDevicePropertyScopePlayThrough = 1886679669
 )
 
 const (
-	KAudioDevicePropertyDriverShouldOwniSub = 1769174370
+	KAudioDevicePropertyDriverShouldOwniSub                            = 1769174370
 	KAudioDevicePropertyPlayThruVolumeDecibelsToScalarTransferFunction = 1836479590
-	KAudioDevicePropertySubVolumeDecibelsToScalarTransferFunction = 1937142886
-	KAudioDevicePropertyVolumeDecibelsToScalarTransferFunction = 1986229350
+	KAudioDevicePropertySubVolumeDecibelsToScalarTransferFunction      = 1937142886
+	KAudioDevicePropertyVolumeDecibelsToScalarTransferFunction         = 1986229350
 )
 
 const (
 	KAudioDeviceStartTimeDontConsultDeviceFlag = 2
-	KAudioDeviceStartTimeDontConsultHALFlag = 4
-	KAudioDeviceStartTimeIsInputFlag = 1
+	KAudioDeviceStartTimeDontConsultHALFlag    = 4
+	KAudioDeviceStartTimeIsInputFlag           = 1
 )
 
 const (
@@ -754,23 +784,23 @@ const (
 )
 
 const (
-	KAudioDeviceTransportTypeAVB = 1700886114
-	KAudioDeviceTransportTypeAggregate = 1735554416
-	KAudioDeviceTransportTypeAirPlay = 1634300528
-	KAudioDeviceTransportTypeBluetooth = 1651275109
-	KAudioDeviceTransportTypeBluetoothLE = 1651271009
-	KAudioDeviceTransportTypeBuiltIn = 1651274862
-	KAudioDeviceTransportTypeContinuityCapture = 1667457392
-	KAudioDeviceTransportTypeContinuityCaptureWired = 1667463012
+	KAudioDeviceTransportTypeAVB                       = 1700886114
+	KAudioDeviceTransportTypeAggregate                 = 1735554416
+	KAudioDeviceTransportTypeAirPlay                   = 1634300528
+	KAudioDeviceTransportTypeBluetooth                 = 1651275109
+	KAudioDeviceTransportTypeBluetoothLE               = 1651271009
+	KAudioDeviceTransportTypeBuiltIn                   = 1651274862
+	KAudioDeviceTransportTypeContinuityCapture         = 1667457392
+	KAudioDeviceTransportTypeContinuityCaptureWired    = 1667463012
 	KAudioDeviceTransportTypeContinuityCaptureWireless = 1667463020
-	KAudioDeviceTransportTypeDisplayPort = 1685090932
-	KAudioDeviceTransportTypeFireWire = 825440564
-	KAudioDeviceTransportTypeHDMI = 1751412073
-	KAudioDeviceTransportTypePCI = 1885563168
-	KAudioDeviceTransportTypeThunderbolt = 1953002862
-	KAudioDeviceTransportTypeUSB = 1970496032
-	KAudioDeviceTransportTypeUnknown = 0
-	KAudioDeviceTransportTypeVirtual = 1986622068
+	KAudioDeviceTransportTypeDisplayPort               = 1685090932
+	KAudioDeviceTransportTypeFireWire                  = 825440564
+	KAudioDeviceTransportTypeHDMI                      = 1751412073
+	KAudioDeviceTransportTypePCI                       = 1885563168
+	KAudioDeviceTransportTypeThunderbolt               = 1953002862
+	KAudioDeviceTransportTypeUSB                       = 1970496032
+	KAudioDeviceTransportTypeUnknown                   = 0
+	KAudioDeviceTransportTypeVirtual                   = 1986622068
 )
 
 const (
@@ -786,73 +816,73 @@ const (
 )
 
 const (
-	KAudioEndPointDevicePropertyComposition = 1633906541
+	KAudioEndPointDevicePropertyComposition  = 1633906541
 	KAudioEndPointDevicePropertyEndPointList = 1634169456
-	KAudioEndPointDevicePropertyIsPrivate = 1886546294
+	KAudioEndPointDevicePropertyIsPrivate    = 1886546294
 )
 
 const (
-	KAudioDevicePermissionsError = 560492391
-	KAudioDeviceUnsupportedFormatError = 560226676
-	KAudioHardwareBadDeviceError = 560227702
-	KAudioHardwareBadObjectError = 560947818
-	KAudioHardwareBadPropertySizeError = 561211770
-	KAudioHardwareBadStreamError = 561214578
-	KAudioHardwareIllegalOperationError = 1852797029
-	KAudioHardwareNoError = 0
-	KAudioHardwareNotReadyError = 1852990585
-	KAudioHardwareNotRunningError = 1937010544
-	KAudioHardwareUnknownPropertyError = 2003332927
-	KAudioHardwareUnspecifiedError = 2003329396
+	KAudioDevicePermissionsError            = 560492391
+	KAudioDeviceUnsupportedFormatError      = 560226676
+	KAudioHardwareBadDeviceError            = 560227702
+	KAudioHardwareBadObjectError            = 560947818
+	KAudioHardwareBadPropertySizeError      = 561211770
+	KAudioHardwareBadStreamError            = 561214578
+	KAudioHardwareIllegalOperationError     = 1852797029
+	KAudioHardwareNoError                   = 0
+	KAudioHardwareNotReadyError             = 1852990585
+	KAudioHardwareNotRunningError           = 1937010544
+	KAudioHardwareUnknownPropertyError      = 2003332927
+	KAudioHardwareUnspecifiedError          = 2003329396
 	KAudioHardwareUnsupportedOperationError = 1970171760
 )
 
 const (
-	KAudioHardwarePropertyBootChimeVolumeDecibels = 1650620004
-	KAudioHardwarePropertyBootChimeVolumeDecibelsToScalar = 1650733686
+	KAudioHardwarePropertyBootChimeVolumeDecibels                         = 1650620004
+	KAudioHardwarePropertyBootChimeVolumeDecibelsToScalar                 = 1650733686
 	KAudioHardwarePropertyBootChimeVolumeDecibelsToScalarTransferFunction = 1651930214
-	KAudioHardwarePropertyBootChimeVolumeRangeDecibels = 1650615331
-	KAudioHardwarePropertyBootChimeVolumeScalar = 1650620019
-	KAudioHardwarePropertyBootChimeVolumeScalarToDecibels = 1651913316
+	KAudioHardwarePropertyBootChimeVolumeRangeDecibels                    = 1650615331
+	KAudioHardwarePropertyBootChimeVolumeScalar                           = 1650620019
+	KAudioHardwarePropertyBootChimeVolumeScalarToDecibels                 = 1651913316
 )
 
 const (
-	KAudioHardwarePropertyBoxList = 1651472419
-	KAudioHardwarePropertyClockDeviceList = 1668049699
-	KAudioHardwarePropertyDefaultInputDevice = 1682533920
-	KAudioHardwarePropertyDefaultOutputDevice = 1682929012
-	KAudioHardwarePropertyDefaultSystemOutputDevice = 1934587252
-	KAudioHardwarePropertyDevices = 1684370979
-	KAudioHardwarePropertyHogModeIsAllowed = 1752131442
-	KAudioHardwarePropertyIsInitingOrExiting = 1768845172
-	KAudioHardwarePropertyMixStereoToMono = 1937010031
-	KAudioHardwarePropertyPlugInList = 1886152483
-	KAudioHardwarePropertyPowerHint = 1886353256
-	KAudioHardwarePropertyProcessInputMute = 1886218606
-	KAudioHardwarePropertyProcessIsAudible = 1886221684
-	KAudioHardwarePropertyProcessIsMain = 1835100526
-	KAudioHardwarePropertyProcessObjectList = 1886548771
-	KAudioHardwarePropertyServiceRestarted = 1936880500
-	KAudioHardwarePropertySleepingIsAllowed = 1936483696
-	KAudioHardwarePropertyTapList = 1953526563
-	KAudioHardwarePropertyTranslateBundleIDToPlugIn = 1651074160
+	KAudioHardwarePropertyBoxList                             = 1651472419
+	KAudioHardwarePropertyClockDeviceList                     = 1668049699
+	KAudioHardwarePropertyDefaultInputDevice                  = 1682533920
+	KAudioHardwarePropertyDefaultOutputDevice                 = 1682929012
+	KAudioHardwarePropertyDefaultSystemOutputDevice           = 1934587252
+	KAudioHardwarePropertyDevices                             = 1684370979
+	KAudioHardwarePropertyHogModeIsAllowed                    = 1752131442
+	KAudioHardwarePropertyIsInitingOrExiting                  = 1768845172
+	KAudioHardwarePropertyMixStereoToMono                     = 1937010031
+	KAudioHardwarePropertyPlugInList                          = 1886152483
+	KAudioHardwarePropertyPowerHint                           = 1886353256
+	KAudioHardwarePropertyProcessInputMute                    = 1886218606
+	KAudioHardwarePropertyProcessIsAudible                    = 1886221684
+	KAudioHardwarePropertyProcessIsMain                       = 1835100526
+	KAudioHardwarePropertyProcessObjectList                   = 1886548771
+	KAudioHardwarePropertyServiceRestarted                    = 1936880500
+	KAudioHardwarePropertySleepingIsAllowed                   = 1936483696
+	KAudioHardwarePropertyTapList                             = 1953526563
+	KAudioHardwarePropertyTranslateBundleIDToPlugIn           = 1651074160
 	KAudioHardwarePropertyTranslateBundleIDToTransportManager = 1953325673
-	KAudioHardwarePropertyTranslatePIDToProcessObject = 1768174192
-	KAudioHardwarePropertyTranslateUIDToBox = 1969841250
-	KAudioHardwarePropertyTranslateUIDToClockDevice = 1969841251
-	KAudioHardwarePropertyTranslateUIDToDevice = 1969841252
-	KAudioHardwarePropertyTranslateUIDToTap = 1969841268
-	KAudioHardwarePropertyTransportManagerList = 1953326883
-	KAudioHardwarePropertyUnloadingIsAllowed = 1970170980
-	KAudioHardwarePropertyUserIDChanged = 1702193508
-	KAudioHardwarePropertyUserSessionIsActiveOrHeadless = 1970496882
+	KAudioHardwarePropertyTranslatePIDToProcessObject         = 1768174192
+	KAudioHardwarePropertyTranslateUIDToBox                   = 1969841250
+	KAudioHardwarePropertyTranslateUIDToClockDevice           = 1969841251
+	KAudioHardwarePropertyTranslateUIDToDevice                = 1969841252
+	KAudioHardwarePropertyTranslateUIDToTap                   = 1969841268
+	KAudioHardwarePropertyTransportManagerList                = 1953326883
+	KAudioHardwarePropertyUnloadingIsAllowed                  = 1970170980
+	KAudioHardwarePropertyUserIDChanged                       = 1702193508
+	KAudioHardwarePropertyUserSessionIsActiveOrHeadless       = 1970496882
 )
 
 const (
-	KAudioHardwarePropertyDeviceForUID = 1685416292
+	KAudioHardwarePropertyDeviceForUID      = 1685416292
 	KAudioHardwarePropertyPlugInForBundleID = 1885954665
-	KAudioHardwarePropertyProcessIsMaster = 1835103092
-	KAudioHardwarePropertyRunLoop = 1919839344
+	KAudioHardwarePropertyProcessIsMaster   = 1835103092
+	KAudioHardwarePropertyRunLoop           = 1919839344
 )
 
 const (
@@ -861,8 +891,8 @@ const (
 
 const (
 	KAudioLFEVolumeControlClassID = 1937072758
-	KAudioLevelControlClassID = 1818588780
-	KAudioVolumeControlClassID = 1986817381
+	KAudioLevelControlClassID     = 1818588780
+	KAudioVolumeControlClassID    = 1986817381
 )
 
 const (
@@ -872,9 +902,9 @@ const (
 const (
 	KAudioLevelControlPropertyConvertDecibelsToScalar = 1818453107
 	KAudioLevelControlPropertyConvertScalarToDecibels = 1818456932
-	KAudioLevelControlPropertyDecibelRange = 1818453106
-	KAudioLevelControlPropertyDecibelValue = 1818453110
-	KAudioLevelControlPropertyScalarValue = 1818456950
+	KAudioLevelControlPropertyDecibelRange            = 1818453106
+	KAudioLevelControlPropertyDecibelValue            = 1818453110
+	KAudioLevelControlPropertyScalarValue             = 1818456950
 )
 
 const (
@@ -886,24 +916,24 @@ const (
 )
 
 const (
-	KAudioObjectPropertyBaseClass = 1650682995
-	KAudioObjectPropertyClass = 1668047219
+	KAudioObjectPropertyBaseClass           = 1650682995
+	KAudioObjectPropertyClass               = 1668047219
 	KAudioObjectPropertyElementCategoryName = 1818452846
-	KAudioObjectPropertyElementName = 1818454126
-	KAudioObjectPropertyElementNumberName = 1818455662
-	KAudioObjectPropertyFirmwareVersion = 1719105134
-	KAudioObjectPropertyIdentify = 1768187246
-	KAudioObjectPropertyManufacturer = 1819107691
-	KAudioObjectPropertyModelName = 1819111268
-	KAudioObjectPropertyName = 1819173229
-	KAudioObjectPropertyOwnedObjects = 1870098020
-	KAudioObjectPropertyOwner = 1937007734
-	KAudioObjectPropertySerialNumber = 1936618861
+	KAudioObjectPropertyElementName         = 1818454126
+	KAudioObjectPropertyElementNumberName   = 1818455662
+	KAudioObjectPropertyFirmwareVersion     = 1719105134
+	KAudioObjectPropertyIdentify            = 1768187246
+	KAudioObjectPropertyManufacturer        = 1819107691
+	KAudioObjectPropertyModelName           = 1819111268
+	KAudioObjectPropertyName                = 1819173229
+	KAudioObjectPropertyOwnedObjects        = 1870098020
+	KAudioObjectPropertyOwner               = 1937007734
+	KAudioObjectPropertySerialNumber        = 1936618861
 )
 
 const (
-	KAudioObjectPropertyCreator = 1869638759
-	KAudioObjectPropertyListenerAdded = 1818850145
+	KAudioObjectPropertyCreator         = 1869638759
+	KAudioObjectPropertyListenerAdded   = 1818850145
 	KAudioObjectPropertyListenerRemoved = 1818850162
 )
 
@@ -912,11 +942,11 @@ const (
 )
 
 const (
-	KAudioObjectPropertyElementMain = 0
-	KAudioObjectPropertyElementMaster = 0
-	KAudioObjectPropertyScopeGlobal = 1735159650
-	KAudioObjectPropertyScopeInput = 1768845428
-	KAudioObjectPropertyScopeOutput = 1869968496
+	KAudioObjectPropertyElementMain      = 0
+	KAudioObjectPropertyElementMaster    = 0
+	KAudioObjectPropertyScopeGlobal      = 1735159650
+	KAudioObjectPropertyScopeInput       = 1768845428
+	KAudioObjectPropertyScopeOutput      = 1869968496
 	KAudioObjectPropertyScopePlayThrough = 1886679669
 )
 
@@ -941,18 +971,18 @@ const (
 )
 
 const (
-	KAudioPlugInCreateAggregateDevice = 1667327847
+	KAudioPlugInCreateAggregateDevice  = 1667327847
 	KAudioPlugInDestroyAggregateDevice = 1684105063
 )
 
 const (
-	KAudioPlugInPropertyBoxList = 1651472419
-	KAudioPlugInPropertyBundleID = 1885956452
-	KAudioPlugInPropertyClockDeviceList = 1668049699
-	KAudioPlugInPropertyDeviceList = 1684370979
-	KAudioPlugInPropertyTranslateUIDToBox = 1969841250
+	KAudioPlugInPropertyBoxList                   = 1651472419
+	KAudioPlugInPropertyBundleID                  = 1885956452
+	KAudioPlugInPropertyClockDeviceList           = 1668049699
+	KAudioPlugInPropertyDeviceList                = 1684370979
+	KAudioPlugInPropertyTranslateUIDToBox         = 1969841250
 	KAudioPlugInPropertyTranslateUIDToClockDevice = 1969841251
-	KAudioPlugInPropertyTranslateUIDToDevice = 1969841252
+	KAudioPlugInPropertyTranslateUIDToDevice      = 1969841252
 )
 
 const (
@@ -960,12 +990,12 @@ const (
 )
 
 const (
-	KAudioProcessPropertyBundleID = 1885497700
-	KAudioProcessPropertyDevices = 1885632035
-	KAudioProcessPropertyIsRunning = 1885958719
-	KAudioProcessPropertyIsRunningInput = 1885958761
+	KAudioProcessPropertyBundleID        = 1885497700
+	KAudioProcessPropertyDevices         = 1885632035
+	KAudioProcessPropertyIsRunning       = 1885958719
+	KAudioProcessPropertyIsRunningInput  = 1885958761
 	KAudioProcessPropertyIsRunningOutput = 1885958767
-	KAudioProcessPropertyPID = 1886415204
+	KAudioProcessPropertyPID             = 1886415204
 )
 
 const (
@@ -981,12 +1011,12 @@ const (
 )
 
 const (
-	KAudioClockSourceControlClassID = 1668047723
+	KAudioClockSourceControlClassID     = 1668047723
 	KAudioDataDestinationControlClassID = 1684370292
-	KAudioDataSourceControlClassID = 1685287523
-	KAudioHighPassFilterControlClassID = 1751740518
-	KAudioLineLevelControlClassID = 1852601964
-	KAudioSelectorControlClassID = 1936483188
+	KAudioDataSourceControlClassID      = 1685287523
+	KAudioHighPassFilterControlClassID  = 1751740518
+	KAudioLineLevelControlClassID       = 1852601964
+	KAudioSelectorControlClassID        = 1936483188
 )
 
 const (
@@ -995,9 +1025,9 @@ const (
 
 const (
 	KAudioSelectorControlPropertyAvailableItems = 1935892841
-	KAudioSelectorControlPropertyCurrentItem = 1935893353
-	KAudioSelectorControlPropertyItemKind = 1668049771
-	KAudioSelectorControlPropertyItemName = 1935894894
+	KAudioSelectorControlPropertyCurrentItem    = 1935893353
+	KAudioSelectorControlPropertyItemKind       = 1668049771
+	KAudioSelectorControlPropertyItemName       = 1935894894
 )
 
 const (
@@ -1015,7 +1045,7 @@ const (
 
 const (
 	KAudioStereoPanControlPropertyPanningChannels = 1936745315
-	KAudioStereoPanControlPropertyValue = 1936745334
+	KAudioStereoPanControlPropertyValue           = 1936745334
 )
 
 const (
@@ -1024,37 +1054,37 @@ const (
 
 const (
 	KAudioStreamPropertyAvailablePhysicalFormats = 1885762657
-	KAudioStreamPropertyAvailableVirtualFormats = 1936092513
-	KAudioStreamPropertyDirection = 1935960434
-	KAudioStreamPropertyIsActive = 1935762292
-	KAudioStreamPropertyLatency = 1819569763
-	KAudioStreamPropertyPhysicalFormat = 1885762592
-	KAudioStreamPropertyStartingChannel = 1935894638
-	KAudioStreamPropertyTerminalType = 1952805485
-	KAudioStreamPropertyVirtualFormat = 1936092532
+	KAudioStreamPropertyAvailableVirtualFormats  = 1936092513
+	KAudioStreamPropertyDirection                = 1935960434
+	KAudioStreamPropertyIsActive                 = 1935762292
+	KAudioStreamPropertyLatency                  = 1819569763
+	KAudioStreamPropertyPhysicalFormat           = 1885762592
+	KAudioStreamPropertyStartingChannel          = 1935894638
+	KAudioStreamPropertyTerminalType             = 1952805485
+	KAudioStreamPropertyVirtualFormat            = 1936092532
 )
 
 const (
-	KAudioStreamPropertyOwningDevice = 1937007734
-	KAudioStreamPropertyPhysicalFormatMatch = 1885762669
+	KAudioStreamPropertyOwningDevice            = 1937007734
+	KAudioStreamPropertyPhysicalFormatMatch     = 1885762669
 	KAudioStreamPropertyPhysicalFormatSupported = 1885762623
-	KAudioStreamPropertyPhysicalFormats = 1885762595
+	KAudioStreamPropertyPhysicalFormats         = 1885762595
 )
 
 const (
 	KAudioStreamTerminalTypeDigitalAudioInterface = 1936745574
-	KAudioStreamTerminalTypeDisplayPort = 1685090932
-	KAudioStreamTerminalTypeHDMI = 1751412073
-	KAudioStreamTerminalTypeHeadphones = 1751412840
-	KAudioStreamTerminalTypeHeadsetMicrophone = 1752000867
-	KAudioStreamTerminalTypeLFESpeaker = 1818649971
-	KAudioStreamTerminalTypeLine = 1818848869
-	KAudioStreamTerminalTypeMicrophone = 1835623282
-	KAudioStreamTerminalTypeReceiverMicrophone = 1919773027
-	KAudioStreamTerminalTypeReceiverSpeaker = 1920168043
-	KAudioStreamTerminalTypeSpeaker = 1936747378
-	KAudioStreamTerminalTypeTTY = 1953790303
-	KAudioStreamTerminalTypeUnknown = 0
+	KAudioStreamTerminalTypeDisplayPort           = 1685090932
+	KAudioStreamTerminalTypeHDMI                  = 1751412073
+	KAudioStreamTerminalTypeHeadphones            = 1751412840
+	KAudioStreamTerminalTypeHeadsetMicrophone     = 1752000867
+	KAudioStreamTerminalTypeLFESpeaker            = 1818649971
+	KAudioStreamTerminalTypeLine                  = 1818848869
+	KAudioStreamTerminalTypeMicrophone            = 1835623282
+	KAudioStreamTerminalTypeReceiverMicrophone    = 1919773027
+	KAudioStreamTerminalTypeReceiverSpeaker       = 1920168043
+	KAudioStreamTerminalTypeSpeaker               = 1936747378
+	KAudioStreamTerminalTypeTTY                   = 1953790303
+	KAudioStreamTerminalTypeUnknown               = 0
 )
 
 const (
@@ -1066,17 +1096,17 @@ const (
 )
 
 const (
-	KAudioSubDeviceDriftCompensationHighQuality = 96
-	KAudioSubDeviceDriftCompensationLowQuality = 32
-	KAudioSubDeviceDriftCompensationMaxQuality = 127
+	KAudioSubDeviceDriftCompensationHighQuality   = 96
+	KAudioSubDeviceDriftCompensationLowQuality    = 32
+	KAudioSubDeviceDriftCompensationMaxQuality    = 127
 	KAudioSubDeviceDriftCompensationMediumQuality = 64
-	KAudioSubDeviceDriftCompensationMinQuality = 0
+	KAudioSubDeviceDriftCompensationMinQuality    = 0
 )
 
 const (
-	KAudioSubDevicePropertyDriftCompensation = 1685218932
+	KAudioSubDevicePropertyDriftCompensation        = 1685218932
 	KAudioSubDevicePropertyDriftCompensationQuality = 1685218929
-	KAudioSubDevicePropertyExtraLatency = 2020373603
+	KAudioSubDevicePropertyExtraLatency             = 2020373603
 )
 
 const (
@@ -1084,9 +1114,9 @@ const (
 )
 
 const (
-	KAudioSubTapPropertyDriftCompensation = 1685218932
+	KAudioSubTapPropertyDriftCompensation        = 1685218932
 	KAudioSubTapPropertyDriftCompensationQuality = 1685218929
-	KAudioSubTapPropertyExtraLatency = 2020373603
+	KAudioSubTapPropertyExtraLatency             = 2020373603
 )
 
 const (
@@ -1099,8 +1129,8 @@ const (
 
 const (
 	KAudioTapPropertyDescription = 1952740195
-	KAudioTapPropertyFormat = 1952869748
-	KAudioTapPropertyUID = 1953851748
+	KAudioTapPropertyFormat      = 1952869748
+	KAudioTapPropertyUID         = 1953851748
 )
 
 const (
@@ -1108,13 +1138,12 @@ const (
 )
 
 const (
-	KAudioTransportManagerCreateEndPointDevice = 1667523958
+	KAudioTransportManagerCreateEndPointDevice  = 1667523958
 	KAudioTransportManagerDestroyEndPointDevice = 1684301174
 )
 
 const (
-	KAudioTransportManagerPropertyEndPointList = 1701733411
+	KAudioTransportManagerPropertyEndPointList           = 1701733411
 	KAudioTransportManagerPropertyTranslateUIDToEndPoint = 1969841253
-	KAudioTransportManagerPropertyTransportType = 1953653102
+	KAudioTransportManagerPropertyTransportType          = 1953653102
 )
-

@@ -16,17 +16,17 @@ type AVBInterface struct {
 }
 
 var (
-	_clsAVBInterface = _objcClass("AVBInterface")
-	_aVBInterfaceSelMacAddressForInterfaceNamed = objc.RegisterName("macAddressForInterfaceNamed:")
-	_aVBInterfaceSelSupportedInterfaces = objc.RegisterName("supportedInterfaces")
+	_clsAVBInterface                             = _objcClass("AVBInterface")
+	_aVBInterfaceSelMacAddressForInterfaceNamed  = objc.RegisterName("macAddressForInterfaceNamed:")
+	_aVBInterfaceSelSupportedInterfaces          = objc.RegisterName("supportedInterfaces")
 	_aVBInterfaceSelIsAVBEnabledOnInterfaceNamed = objc.RegisterName("isAVBEnabledOnInterfaceNamed:")
-	_aVBInterfaceSelIsAVBCapableInterfaceNamed = objc.RegisterName("isAVBCapableInterfaceNamed:")
-	_aVBInterfaceSelInitWithInterfaceName = objc.RegisterName("initWithInterfaceName:")
-	_aVBInterfaceSelMyEntityID = objc.RegisterName("myEntityID")
-	_aVBInterfaceSelInterfaceName = objc.RegisterName("interfaceName")
-	_aVBInterfaceSelEntityDiscovery = objc.RegisterName("entityDiscovery")
-	_aVBInterfaceSelAecp = objc.RegisterName("aecp")
-	_aVBInterfaceSelAcmp = objc.RegisterName("acmp")
+	_aVBInterfaceSelIsAVBCapableInterfaceNamed   = objc.RegisterName("isAVBCapableInterfaceNamed:")
+	_aVBInterfaceSelInitWithInterfaceName        = objc.RegisterName("initWithInterfaceName:")
+	_aVBInterfaceSelMyEntityID                   = objc.RegisterName("myEntityID")
+	_aVBInterfaceSelInterfaceName                = objc.RegisterName("interfaceName")
+	_aVBInterfaceSelEntityDiscovery              = objc.RegisterName("entityDiscovery")
+	_aVBInterfaceSelAecp                         = objc.RegisterName("aecp")
+	_aVBInterfaceSelAcmp                         = objc.RegisterName("acmp")
 )
 
 func AVBInterfaceFromID(id objc.ID) *AVBInterface {
@@ -42,7 +42,9 @@ func AVBInterfaceFromID(id objc.ID) *AVBInterface {
 // @method		macAddressForInterfaceNamed: @abstract	This method looks up the MAC address for an interface with a given BSD name. @param		anInterfaceName	The BSD name of the interface to get the address for. @result		An instance of AVBMACAddress if the lookup was successful, nil otherwise.
 func AVBInterfaceMacAddressForInterfaceNamed(anInterfaceName *foundation.NSString) *AVBMACAddress {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVBInterface), _aVBInterfaceSelMacAddressForInterfaceNamed, anInterfaceName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVBMACAddressFromID(_ret)
 }
 
@@ -67,7 +69,9 @@ func AVBInterfaceIsAVBCapableInterfaceNamed(anInterfaceName *foundation.NSString
 // @method		initWithInterfaceName: @abstract	This method initializes the receiver to work on the specified interface. @param		anInterfaceName	The BSD name of the interface. @result		The initialized receiver.
 func (o *AVBInterface) InitWithInterfaceName(anInterfaceName *foundation.NSString) *AVBInterface {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVBInterfaceSelInitWithInterfaceName, anInterfaceName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVBInterfaceFromID(_ret)
 }
 
@@ -80,28 +84,35 @@ func AVBInterfaceMyEntityID() uint64 {
 // @property	interfaceName @abstract	The BSD interface name.
 func (o *AVBInterface) InterfaceName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVBInterfaceSelInterfaceName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property	entityDiscovery @abstract	The IEEE Std 1722.1™-2013 entity discovery for the interface.
 func (o *AVBInterface) EntityDiscovery() *AVB17221EntityDiscovery {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVBInterfaceSelEntityDiscovery)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVB17221EntityDiscoveryFromID(_ret)
 }
 
 // @property	aecp @abstract	The IEEE Std 1722.1™-2013 AECP interface for the interface.
 func (o *AVBInterface) Aecp() *AVB17221AECPInterface {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVBInterfaceSelAecp)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVB17221AECPInterfaceFromID(_ret)
 }
 
 // @property	acmp @abstract	The IEEE Std 1722.1™-2013 ACMP interface for the interface.
 func (o *AVBInterface) Acmp() *AVB17221ACMPInterface {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVBInterfaceSelAcmp)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVB17221ACMPInterfaceFromID(_ret)
 }
-

@@ -129,7 +129,9 @@ func (x *SplitViewItem) WithTopAlignedAccessoryViewControllers(items ...*raw.NSS
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSSplitViewItemAccessoryViewController](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -145,7 +147,9 @@ func (x *SplitViewItem) WithBottomAlignedAccessoryViewControllers(items ...*raw.
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSSplitViewItemAccessoryViewController](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -426,4 +430,3 @@ type SplitViewItemable interface {
 }
 
 var _ SplitViewItemable = (*SplitViewItem)(nil)
-

@@ -83,4 +83,3 @@ type Paymentable interface {
 }
 
 var _ Paymentable = (*Payment)(nil)
-

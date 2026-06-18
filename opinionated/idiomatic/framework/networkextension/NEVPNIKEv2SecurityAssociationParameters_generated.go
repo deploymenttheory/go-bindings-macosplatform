@@ -18,7 +18,9 @@ type NEVPNIKEv2SecurityAssociationParameters struct {
 }
 
 // Unwrap returns the underlying [raw.NEVPNIKEv2SecurityAssociationParameters].
-func (x *NEVPNIKEv2SecurityAssociationParameters) Unwrap() *raw.NEVPNIKEv2SecurityAssociationParameters { return x.inner }
+func (x *NEVPNIKEv2SecurityAssociationParameters) Unwrap() *raw.NEVPNIKEv2SecurityAssociationParameters {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -63,7 +65,9 @@ func (x *NEVPNIKEv2SecurityAssociationParameters) WithPostQuantumKeyExchangeMeth
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -155,4 +159,3 @@ type NEVPNIKEv2SecurityAssociationParametersable interface {
 }
 
 var _ NEVPNIKEv2SecurityAssociationParametersable = (*NEVPNIKEv2SecurityAssociationParameters)(nil)
-

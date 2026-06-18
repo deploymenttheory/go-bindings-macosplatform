@@ -25,4 +25,3 @@ func NEEthernetTunnelProviderFromID(id objc.ID) *NEEthernetTunnelProvider {
 	purego.Track(o)
 	return o
 }
-

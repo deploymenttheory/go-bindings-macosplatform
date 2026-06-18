@@ -17,38 +17,38 @@ type NSGridView struct {
 }
 
 var (
-	_clsNSGridView = _objcClass("NSGridView")
-	_nSGridViewSelInitWithFrame = objc.RegisterName("initWithFrame:")
-	_nSGridViewSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSGridViewSelGridViewWithNumberOfColumnsRows = objc.RegisterName("gridViewWithNumberOfColumns:rows:")
-	_nSGridViewSelGridViewWithViews = objc.RegisterName("gridViewWithViews:")
-	_nSGridViewSelRowAtIndex = objc.RegisterName("rowAtIndex:")
-	_nSGridViewSelIndexOfRow = objc.RegisterName("indexOfRow:")
-	_nSGridViewSelColumnAtIndex = objc.RegisterName("columnAtIndex:")
-	_nSGridViewSelIndexOfColumn = objc.RegisterName("indexOfColumn:")
-	_nSGridViewSelCellAtColumnIndexRowIndex = objc.RegisterName("cellAtColumnIndex:rowIndex:")
-	_nSGridViewSelCellForView = objc.RegisterName("cellForView:")
-	_nSGridViewSelAddRowWithViews = objc.RegisterName("addRowWithViews:")
-	_nSGridViewSelInsertRowAtIndexWithViews = objc.RegisterName("insertRowAtIndex:withViews:")
-	_nSGridViewSelMoveRowAtIndexToIndex = objc.RegisterName("moveRowAtIndex:toIndex:")
-	_nSGridViewSelRemoveRowAtIndex = objc.RegisterName("removeRowAtIndex:")
-	_nSGridViewSelAddColumnWithViews = objc.RegisterName("addColumnWithViews:")
-	_nSGridViewSelInsertColumnAtIndexWithViews = objc.RegisterName("insertColumnAtIndex:withViews:")
-	_nSGridViewSelMoveColumnAtIndexToIndex = objc.RegisterName("moveColumnAtIndex:toIndex:")
-	_nSGridViewSelRemoveColumnAtIndex = objc.RegisterName("removeColumnAtIndex:")
+	_clsNSGridView                                         = _objcClass("NSGridView")
+	_nSGridViewSelInitWithFrame                            = objc.RegisterName("initWithFrame:")
+	_nSGridViewSelInitWithCoder                            = objc.RegisterName("initWithCoder:")
+	_nSGridViewSelGridViewWithNumberOfColumnsRows          = objc.RegisterName("gridViewWithNumberOfColumns:rows:")
+	_nSGridViewSelGridViewWithViews                        = objc.RegisterName("gridViewWithViews:")
+	_nSGridViewSelRowAtIndex                               = objc.RegisterName("rowAtIndex:")
+	_nSGridViewSelIndexOfRow                               = objc.RegisterName("indexOfRow:")
+	_nSGridViewSelColumnAtIndex                            = objc.RegisterName("columnAtIndex:")
+	_nSGridViewSelIndexOfColumn                            = objc.RegisterName("indexOfColumn:")
+	_nSGridViewSelCellAtColumnIndexRowIndex                = objc.RegisterName("cellAtColumnIndex:rowIndex:")
+	_nSGridViewSelCellForView                              = objc.RegisterName("cellForView:")
+	_nSGridViewSelAddRowWithViews                          = objc.RegisterName("addRowWithViews:")
+	_nSGridViewSelInsertRowAtIndexWithViews                = objc.RegisterName("insertRowAtIndex:withViews:")
+	_nSGridViewSelMoveRowAtIndexToIndex                    = objc.RegisterName("moveRowAtIndex:toIndex:")
+	_nSGridViewSelRemoveRowAtIndex                         = objc.RegisterName("removeRowAtIndex:")
+	_nSGridViewSelAddColumnWithViews                       = objc.RegisterName("addColumnWithViews:")
+	_nSGridViewSelInsertColumnAtIndexWithViews             = objc.RegisterName("insertColumnAtIndex:withViews:")
+	_nSGridViewSelMoveColumnAtIndexToIndex                 = objc.RegisterName("moveColumnAtIndex:toIndex:")
+	_nSGridViewSelRemoveColumnAtIndex                      = objc.RegisterName("removeColumnAtIndex:")
 	_nSGridViewSelMergeCellsInHorizontalRangeVerticalRange = objc.RegisterName("mergeCellsInHorizontalRange:verticalRange:")
-	_nSGridViewSelNumberOfRows = objc.RegisterName("numberOfRows")
-	_nSGridViewSelNumberOfColumns = objc.RegisterName("numberOfColumns")
-	_nSGridViewSelXPlacement = objc.RegisterName("xPlacement")
-	_nSGridViewSelSetXPlacement = objc.RegisterName("setXPlacement:")
-	_nSGridViewSelYPlacement = objc.RegisterName("yPlacement")
-	_nSGridViewSelSetYPlacement = objc.RegisterName("setYPlacement:")
-	_nSGridViewSelRowAlignment = objc.RegisterName("rowAlignment")
-	_nSGridViewSelSetRowAlignment = objc.RegisterName("setRowAlignment:")
-	_nSGridViewSelRowSpacing = objc.RegisterName("rowSpacing")
-	_nSGridViewSelSetRowSpacing = objc.RegisterName("setRowSpacing:")
-	_nSGridViewSelColumnSpacing = objc.RegisterName("columnSpacing")
-	_nSGridViewSelSetColumnSpacing = objc.RegisterName("setColumnSpacing:")
+	_nSGridViewSelNumberOfRows                             = objc.RegisterName("numberOfRows")
+	_nSGridViewSelNumberOfColumns                          = objc.RegisterName("numberOfColumns")
+	_nSGridViewSelXPlacement                               = objc.RegisterName("xPlacement")
+	_nSGridViewSelSetXPlacement                            = objc.RegisterName("setXPlacement:")
+	_nSGridViewSelYPlacement                               = objc.RegisterName("yPlacement")
+	_nSGridViewSelSetYPlacement                            = objc.RegisterName("setYPlacement:")
+	_nSGridViewSelRowAlignment                             = objc.RegisterName("rowAlignment")
+	_nSGridViewSelSetRowAlignment                          = objc.RegisterName("setRowAlignment:")
+	_nSGridViewSelRowSpacing                               = objc.RegisterName("rowSpacing")
+	_nSGridViewSelSetRowSpacing                            = objc.RegisterName("setRowSpacing:")
+	_nSGridViewSelColumnSpacing                            = objc.RegisterName("columnSpacing")
+	_nSGridViewSelSetColumnSpacing                         = objc.RegisterName("setColumnSpacing:")
 )
 
 func NSGridViewFromID(id objc.ID) *NSGridView {
@@ -63,31 +63,41 @@ func NSGridViewFromID(id objc.ID) *NSGridView {
 
 func (o *NSGridView) InitWithFrame(frameRect corefoundation.CGRect) *NSGridView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelInitWithFrame, frameRect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGridViewFromID(_ret)
 }
 
 func (o *NSGridView) InitWithCoder(coder *foundation.NSCoder) *NSGridView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGridViewFromID(_ret)
 }
 
 func NSGridViewGridViewWithNumberOfColumnsRows(columnCount int, rowCount int) *NSGridView {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSGridView), _nSGridViewSelGridViewWithNumberOfColumnsRows, columnCount, rowCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGridViewFromID(_ret)
 }
 
 func NSGridViewGridViewWithViews(rows *foundation.NSArray[objc.ID]) *NSGridView {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSGridView), _nSGridViewSelGridViewWithViews, rows)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGridViewFromID(_ret)
 }
 
 func (o *NSGridView) RowAtIndex(index int) *NSGridRow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelRowAtIndex, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGridRowFromID(_ret)
 }
 
@@ -98,7 +108,9 @@ func (o *NSGridView) IndexOfRow(row *NSGridRow) int {
 
 func (o *NSGridView) ColumnAtIndex(index int) *NSGridColumn {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelColumnAtIndex, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGridColumnFromID(_ret)
 }
 
@@ -109,25 +121,33 @@ func (o *NSGridView) IndexOfColumn(column *NSGridColumn) int {
 
 func (o *NSGridView) CellAtColumnIndexRowIndex(columnIndex int, rowIndex int) *NSGridCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelCellAtColumnIndexRowIndex, columnIndex, rowIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGridCellFromID(_ret)
 }
 
 func (o *NSGridView) CellForView(view *NSView) *NSGridCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelCellForView, view.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGridCellFromID(_ret)
 }
 
 func (o *NSGridView) AddRowWithViews(views *foundation.NSArray[*NSView]) *NSGridRow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelAddRowWithViews, views.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGridRowFromID(_ret)
 }
 
 func (o *NSGridView) InsertRowAtIndexWithViews(index int, views *foundation.NSArray[*NSView]) *NSGridRow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelInsertRowAtIndexWithViews, index, views.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGridRowFromID(_ret)
 }
 
@@ -141,13 +161,17 @@ func (o *NSGridView) RemoveRowAtIndex(index int) {
 
 func (o *NSGridView) AddColumnWithViews(views *foundation.NSArray[*NSView]) *NSGridColumn {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelAddColumnWithViews, views.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGridColumnFromID(_ret)
 }
 
 func (o *NSGridView) InsertColumnAtIndexWithViews(index int, views *foundation.NSArray[*NSView]) *NSGridColumn {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelInsertColumnAtIndexWithViews, index, views.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGridColumnFromID(_ret)
 }
 
@@ -217,4 +241,3 @@ func (o *NSGridView) ColumnSpacing() float64 {
 func (o *NSGridView) SetColumnSpacing(columnSpacing float64) {
 	o.Ptr().Send(_nSGridViewSelSetColumnSpacing, columnSpacing)
 }
-

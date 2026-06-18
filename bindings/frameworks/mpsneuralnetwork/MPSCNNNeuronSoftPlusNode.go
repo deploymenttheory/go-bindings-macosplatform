@@ -17,11 +17,11 @@ type MPSCNNNeuronSoftPlusNode struct {
 }
 
 var (
-	_clsMPSCNNNeuronSoftPlusNode = _objcClass("MPSCNNNeuronSoftPlusNode")
+	_clsMPSCNNNeuronSoftPlusNode                 = _objcClass("MPSCNNNeuronSoftPlusNode")
 	_mPSCNNNeuronSoftPlusNodeSelNodeWithSourceAB = objc.RegisterName("nodeWithSource:a:b:")
 	_mPSCNNNeuronSoftPlusNodeSelInitWithSourceAB = objc.RegisterName("initWithSource:a:b:")
-	_mPSCNNNeuronSoftPlusNodeSelNodeWithSource = objc.RegisterName("nodeWithSource:")
-	_mPSCNNNeuronSoftPlusNodeSelInitWithSource = objc.RegisterName("initWithSource:")
+	_mPSCNNNeuronSoftPlusNodeSelNodeWithSource   = objc.RegisterName("nodeWithSource:")
+	_mPSCNNNeuronSoftPlusNodeSelInitWithSource   = objc.RegisterName("initWithSource:")
 )
 
 func MPSCNNNeuronSoftPlusNodeFromID(id objc.ID) *MPSCNNNeuronSoftPlusNode {
@@ -36,28 +36,35 @@ func MPSCNNNeuronSoftPlusNodeFromID(id objc.ID) *MPSCNNNeuronSoftPlusNode {
 
 func MPSCNNNeuronSoftPlusNodeNodeWithSourceAB(sourceNode *MPSNNImageNode, a float32, b float32) *MPSCNNNeuronSoftPlusNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNNeuronSoftPlusNode), _mPSCNNNeuronSoftPlusNodeSelNodeWithSourceAB, sourceNode.Ptr(), a, b)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronSoftPlusNodeFromID(_ret)
 }
 
 // @abstract   Init a node representing a MPSCNNNeuronSoftPlus kernel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      a                       See discussion above. @param      b                       See discussion above. @return     A new MPSNNFilter node for a MPSCNNNeuronSoftPlus kernel.
 func (o *MPSCNNNeuronSoftPlusNode) InitWithSourceAB(sourceNode *MPSNNImageNode, a float32, b float32) *MPSCNNNeuronSoftPlusNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronSoftPlusNodeSelInitWithSourceAB, sourceNode.Ptr(), a, b)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronSoftPlusNodeFromID(_ret)
 }
 
 // @abstract Create an autoreleased node with default values for parameters a & b
 func MPSCNNNeuronSoftPlusNodeNodeWithSource(sourceNode *MPSNNImageNode) *MPSCNNNeuronSoftPlusNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNNeuronSoftPlusNode), _mPSCNNNeuronSoftPlusNodeSelNodeWithSource, sourceNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronSoftPlusNodeFromID(_ret)
 }
 
 // @abstract Init a node with default values for parameters a & b
 func (o *MPSCNNNeuronSoftPlusNode) InitWithSource(sourceNode *MPSNNImageNode) *MPSCNNNeuronSoftPlusNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronSoftPlusNodeSelInitWithSource, sourceNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronSoftPlusNodeFromID(_ret)
 }
-

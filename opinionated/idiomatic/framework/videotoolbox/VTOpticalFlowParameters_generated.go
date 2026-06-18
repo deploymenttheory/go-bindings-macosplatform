@@ -78,4 +78,3 @@ type OpticalFlowParametersable interface {
 }
 
 var _ OpticalFlowParametersable = (*OpticalFlowParameters)(nil)
-

@@ -15,14 +15,14 @@ type MLCAdamWOptimizer struct {
 }
 
 var (
-	_clsMLCAdamWOptimizer = _objcClass("MLCAdamWOptimizer")
-	_mLCAdamWOptimizerSelOptimizerWithDescriptor = objc.RegisterName("optimizerWithDescriptor:")
+	_clsMLCAdamWOptimizer                                                            = _objcClass("MLCAdamWOptimizer")
+	_mLCAdamWOptimizerSelOptimizerWithDescriptor                                     = objc.RegisterName("optimizerWithDescriptor:")
 	_mLCAdamWOptimizerSelOptimizerWithDescriptorBeta1Beta2EpsilonUsesAMSGradTimeStep = objc.RegisterName("optimizerWithDescriptor:beta1:beta2:epsilon:usesAMSGrad:timeStep:")
-	_mLCAdamWOptimizerSelBeta1 = objc.RegisterName("beta1")
-	_mLCAdamWOptimizerSelBeta2 = objc.RegisterName("beta2")
-	_mLCAdamWOptimizerSelEpsilon = objc.RegisterName("epsilon")
-	_mLCAdamWOptimizerSelUsesAMSGrad = objc.RegisterName("usesAMSGrad")
-	_mLCAdamWOptimizerSelTimeStep = objc.RegisterName("timeStep")
+	_mLCAdamWOptimizerSelBeta1                                                       = objc.RegisterName("beta1")
+	_mLCAdamWOptimizerSelBeta2                                                       = objc.RegisterName("beta2")
+	_mLCAdamWOptimizerSelEpsilon                                                     = objc.RegisterName("epsilon")
+	_mLCAdamWOptimizerSelUsesAMSGrad                                                 = objc.RegisterName("usesAMSGrad")
+	_mLCAdamWOptimizerSelTimeStep                                                    = objc.RegisterName("timeStep")
 )
 
 func MLCAdamWOptimizerFromID(id objc.ID) *MLCAdamWOptimizer {
@@ -38,14 +38,18 @@ func MLCAdamWOptimizerFromID(id objc.ID) *MLCAdamWOptimizer {
 // @abstract   Create an MLCAdamWOptimizer object with defaults @return     A new MLCAdamWOptimizer object.
 func MLCAdamWOptimizerOptimizerWithDescriptor(optimizerDescriptor *MLCOptimizerDescriptor) *MLCAdamWOptimizer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCAdamWOptimizer), _mLCAdamWOptimizerSelOptimizerWithDescriptor, optimizerDescriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCAdamWOptimizerFromID(_ret)
 }
 
 // @abstract   Create an MLCAdamWOptimizer object @param      optimizerDescriptor    The optimizer descriptor object @param      beta1                  The beta1 value @param      beta2                  The beta2 value @param      epsilon              The epsilon value to use to improve numerical stability @param      usesAMSGrad     Whether to use the AMSGrad variant of this algorithm from the paper (https://arxiv.org/abs/1904.09237) @param      timeStep            The initial timestep to use for the update @return     A new MLCAdamWOptimizer object.
 func MLCAdamWOptimizerOptimizerWithDescriptorBeta1Beta2EpsilonUsesAMSGradTimeStep(optimizerDescriptor *MLCOptimizerDescriptor, beta1 float32, beta2 float32, epsilon float32, usesAMSGrad bool, timeStep uint) *MLCAdamWOptimizer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCAdamWOptimizer), _mLCAdamWOptimizerSelOptimizerWithDescriptorBeta1Beta2EpsilonUsesAMSGradTimeStep, optimizerDescriptor.Ptr(), beta1, beta2, epsilon, usesAMSGrad, timeStep)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCAdamWOptimizerFromID(_ret)
 }
 
@@ -78,4 +82,3 @@ func (o *MLCAdamWOptimizer) TimeStep() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mLCAdamWOptimizerSelTimeStep)
 	return _ret
 }
-

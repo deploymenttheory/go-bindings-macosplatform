@@ -16,16 +16,16 @@ type MTRActionsClusterStartActionWithDurationParams struct {
 }
 
 var (
-	_clsMTRActionsClusterStartActionWithDurationParams = _objcClass("MTRActionsClusterStartActionWithDurationParams")
-	_mTRActionsClusterStartActionWithDurationParamsSelActionID = objc.RegisterName("actionID")
-	_mTRActionsClusterStartActionWithDurationParamsSelSetActionID = objc.RegisterName("setActionID:")
-	_mTRActionsClusterStartActionWithDurationParamsSelInvokeID = objc.RegisterName("invokeID")
-	_mTRActionsClusterStartActionWithDurationParamsSelSetInvokeID = objc.RegisterName("setInvokeID:")
-	_mTRActionsClusterStartActionWithDurationParamsSelDuration = objc.RegisterName("duration")
-	_mTRActionsClusterStartActionWithDurationParamsSelSetDuration = objc.RegisterName("setDuration:")
-	_mTRActionsClusterStartActionWithDurationParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRActionsClusterStartActionWithDurationParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRActionsClusterStartActionWithDurationParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRActionsClusterStartActionWithDurationParams                               = _objcClass("MTRActionsClusterStartActionWithDurationParams")
+	_mTRActionsClusterStartActionWithDurationParamsSelActionID                       = objc.RegisterName("actionID")
+	_mTRActionsClusterStartActionWithDurationParamsSelSetActionID                    = objc.RegisterName("setActionID:")
+	_mTRActionsClusterStartActionWithDurationParamsSelInvokeID                       = objc.RegisterName("invokeID")
+	_mTRActionsClusterStartActionWithDurationParamsSelSetInvokeID                    = objc.RegisterName("setInvokeID:")
+	_mTRActionsClusterStartActionWithDurationParamsSelDuration                       = objc.RegisterName("duration")
+	_mTRActionsClusterStartActionWithDurationParamsSelSetDuration                    = objc.RegisterName("setDuration:")
+	_mTRActionsClusterStartActionWithDurationParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRActionsClusterStartActionWithDurationParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRActionsClusterStartActionWithDurationParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRActionsClusterStartActionWithDurationParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -41,7 +41,9 @@ func MTRActionsClusterStartActionWithDurationParamsFromID(id objc.ID) *MTRAction
 
 func (o *MTRActionsClusterStartActionWithDurationParams) ActionID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRActionsClusterStartActionWithDurationParamsSelActionID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -51,7 +53,9 @@ func (o *MTRActionsClusterStartActionWithDurationParams) SetActionID(actionID *f
 
 func (o *MTRActionsClusterStartActionWithDurationParams) InvokeID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRActionsClusterStartActionWithDurationParamsSelInvokeID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *MTRActionsClusterStartActionWithDurationParams) SetInvokeID(invokeID *f
 
 func (o *MTRActionsClusterStartActionWithDurationParams) Duration() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRActionsClusterStartActionWithDurationParamsSelDuration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -72,7 +78,9 @@ func (o *MTRActionsClusterStartActionWithDurationParams) SetDuration(duration *f
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRActionsClusterStartActionWithDurationParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRActionsClusterStartActionWithDurationParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -83,11 +91,12 @@ func (o *MTRActionsClusterStartActionWithDurationParams) SetTimedInvokeTimeoutMs
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRActionsClusterStartActionWithDurationParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRActionsClusterStartActionWithDurationParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRActionsClusterStartActionWithDurationParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRActionsClusterStartActionWithDurationParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

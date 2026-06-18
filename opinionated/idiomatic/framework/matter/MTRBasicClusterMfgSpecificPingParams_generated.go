@@ -16,7 +16,9 @@ type MTRBasicClusterMfgSpecificPingParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBasicClusterMfgSpecificPingParams].
-func (x *MTRBasicClusterMfgSpecificPingParams) Unwrap() *raw.MTRBasicClusterMfgSpecificPingParams { return x.inner }
+func (x *MTRBasicClusterMfgSpecificPingParams) Unwrap() *raw.MTRBasicClusterMfgSpecificPingParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -80,4 +82,3 @@ type MTRBasicClusterMfgSpecificPingParamsable interface {
 }
 
 var _ MTRBasicClusterMfgSpecificPingParamsable = (*MTRBasicClusterMfgSpecificPingParams)(nil)
-

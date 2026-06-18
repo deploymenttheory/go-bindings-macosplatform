@@ -16,11 +16,11 @@ type AVAssetVariantAudioRenditionSpecificAttributes struct {
 }
 
 var (
-	_clsAVAssetVariantAudioRenditionSpecificAttributes = _objcClass("AVAssetVariantAudioRenditionSpecificAttributes")
+	_clsAVAssetVariantAudioRenditionSpecificAttributes             = _objcClass("AVAssetVariantAudioRenditionSpecificAttributes")
 	_aVAssetVariantAudioRenditionSpecificAttributesSelChannelCount = objc.RegisterName("channelCount")
-	_aVAssetVariantAudioRenditionSpecificAttributesSelIsBinaural = objc.RegisterName("isBinaural")
-	_aVAssetVariantAudioRenditionSpecificAttributesSelIsImmersive = objc.RegisterName("isImmersive")
-	_aVAssetVariantAudioRenditionSpecificAttributesSelIsDownmix = objc.RegisterName("isDownmix")
+	_aVAssetVariantAudioRenditionSpecificAttributesSelIsBinaural   = objc.RegisterName("isBinaural")
+	_aVAssetVariantAudioRenditionSpecificAttributesSelIsImmersive  = objc.RegisterName("isImmersive")
+	_aVAssetVariantAudioRenditionSpecificAttributesSelIsDownmix    = objc.RegisterName("isDownmix")
 )
 
 func AVAssetVariantAudioRenditionSpecificAttributesFromID(id objc.ID) *AVAssetVariantAudioRenditionSpecificAttributes {
@@ -56,4 +56,3 @@ func (o *AVAssetVariantAudioRenditionSpecificAttributes) IsDownmix() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVAssetVariantAudioRenditionSpecificAttributesSelIsDownmix)
 	return _ret
 }
-

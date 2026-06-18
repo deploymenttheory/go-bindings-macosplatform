@@ -222,11 +222,17 @@ func (x *NNCompare) SetThreshold(threshold float32) {
 	x.inner.SetThreshold(threshold)
 }
 
-func (x *NNCompare) asCNNArithmetic() *mpsneuralnetwork.MPSCNNArithmetic { return &x.inner.MPSCNNArithmetic }
+func (x *NNCompare) asCNNArithmetic() *mpsneuralnetwork.MPSCNNArithmetic {
+	return &x.inner.MPSCNNArithmetic
+}
 
-func (x *NNCompare) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel }
+func (x *NNCompare) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel
+}
 
-func (x *NNCompare) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.MPSKernel }
+func (x *NNCompare) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.MPSKernel
+}
 
 // NNCompareable is the interface implemented by [NNCompare], for mocking and DI.
 type NNCompareable interface {
@@ -265,4 +271,3 @@ type NNCompareable interface {
 }
 
 var _ NNCompareable = (*NNCompare)(nil)
-

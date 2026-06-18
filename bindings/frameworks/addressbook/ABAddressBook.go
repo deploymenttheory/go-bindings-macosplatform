@@ -18,26 +18,26 @@ type ABAddressBook struct {
 }
 
 var (
-	_clsABAddressBook = _objcClass("ABAddressBook")
-	_aBAddressBookSelSharedAddressBook = objc.RegisterName("sharedAddressBook")
-	_aBAddressBookSelAddressBook = objc.RegisterName("addressBook")
-	_aBAddressBookSelRecordsMatchingSearchElement = objc.RegisterName("recordsMatchingSearchElement:")
-	_aBAddressBookSelSave = objc.RegisterName("save")
-	_aBAddressBookSelSaveAndReturnError = objc.RegisterName("saveAndReturnError:")
-	_aBAddressBookSelHasUnsavedChanges = objc.RegisterName("hasUnsavedChanges")
-	_aBAddressBookSelMe = objc.RegisterName("me")
-	_aBAddressBookSelSetMe = objc.RegisterName("setMe:")
-	_aBAddressBookSelRecordForUniqueId = objc.RegisterName("recordForUniqueId:")
-	_aBAddressBookSelAddRecordError = objc.RegisterName("addRecord:error:")
-	_aBAddressBookSelAddRecord = objc.RegisterName("addRecord:")
-	_aBAddressBookSelRemoveRecordError = objc.RegisterName("removeRecord:error:")
-	_aBAddressBookSelRemoveRecord = objc.RegisterName("removeRecord:")
-	_aBAddressBookSelPeople = objc.RegisterName("people")
-	_aBAddressBookSelGroups = objc.RegisterName("groups")
-	_aBAddressBookSelRecordClassFromUniqueId = objc.RegisterName("recordClassFromUniqueId:")
+	_clsABAddressBook                               = _objcClass("ABAddressBook")
+	_aBAddressBookSelSharedAddressBook              = objc.RegisterName("sharedAddressBook")
+	_aBAddressBookSelAddressBook                    = objc.RegisterName("addressBook")
+	_aBAddressBookSelRecordsMatchingSearchElement   = objc.RegisterName("recordsMatchingSearchElement:")
+	_aBAddressBookSelSave                           = objc.RegisterName("save")
+	_aBAddressBookSelSaveAndReturnError             = objc.RegisterName("saveAndReturnError:")
+	_aBAddressBookSelHasUnsavedChanges              = objc.RegisterName("hasUnsavedChanges")
+	_aBAddressBookSelMe                             = objc.RegisterName("me")
+	_aBAddressBookSelSetMe                          = objc.RegisterName("setMe:")
+	_aBAddressBookSelRecordForUniqueId              = objc.RegisterName("recordForUniqueId:")
+	_aBAddressBookSelAddRecordError                 = objc.RegisterName("addRecord:error:")
+	_aBAddressBookSelAddRecord                      = objc.RegisterName("addRecord:")
+	_aBAddressBookSelRemoveRecordError              = objc.RegisterName("removeRecord:error:")
+	_aBAddressBookSelRemoveRecord                   = objc.RegisterName("removeRecord:")
+	_aBAddressBookSelPeople                         = objc.RegisterName("people")
+	_aBAddressBookSelGroups                         = objc.RegisterName("groups")
+	_aBAddressBookSelRecordClassFromUniqueId        = objc.RegisterName("recordClassFromUniqueId:")
 	_aBAddressBookSelFormattedAddressFromDictionary = objc.RegisterName("formattedAddressFromDictionary:")
-	_aBAddressBookSelDefaultCountryCode = objc.RegisterName("defaultCountryCode")
-	_aBAddressBookSelDefaultNameOrdering = objc.RegisterName("defaultNameOrdering")
+	_aBAddressBookSelDefaultCountryCode             = objc.RegisterName("defaultCountryCode")
+	_aBAddressBookSelDefaultNameOrdering            = objc.RegisterName("defaultNameOrdering")
 )
 
 func ABAddressBookFromID(id objc.ID) *ABAddressBook {
@@ -52,13 +52,17 @@ func ABAddressBookFromID(id objc.ID) *ABAddressBook {
 
 func ABAddressBookSharedAddressBook() *ABAddressBook {
 	_ret := objc.Send[objc.ID](objc.ID(_clsABAddressBook), _aBAddressBookSelSharedAddressBook)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ABAddressBookFromID(_ret)
 }
 
 func ABAddressBookAddressBook() *ABAddressBook {
 	_ret := objc.Send[objc.ID](objc.ID(_clsABAddressBook), _aBAddressBookSelAddressBook)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ABAddressBookFromID(_ret)
 }
 
@@ -88,7 +92,9 @@ func (o *ABAddressBook) HasUnsavedChanges() bool {
 
 func (o *ABAddressBook) Me() *ABPerson {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aBAddressBookSelMe)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ABPersonFromID(_ret)
 }
 
@@ -98,7 +104,9 @@ func (o *ABAddressBook) SetMe(moi *ABPerson) {
 
 func (o *ABAddressBook) RecordForUniqueId(uniqueId *foundation.NSString) *ABRecord {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aBAddressBookSelRecordForUniqueId, uniqueId.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ABRecordFromID(_ret)
 }
 
@@ -142,19 +150,25 @@ func (o *ABAddressBook) Groups() *foundation.NSArray[objc.ID] {
 
 func (o *ABAddressBook) RecordClassFromUniqueId(uniqueId *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aBAddressBookSelRecordClassFromUniqueId, uniqueId.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *ABAddressBook) FormattedAddressFromDictionary(address *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aBAddressBookSelFormattedAddressFromDictionary, address)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
 func (o *ABAddressBook) DefaultCountryCode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aBAddressBookSelDefaultCountryCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -162,4 +176,3 @@ func (o *ABAddressBook) DefaultNameOrdering() int {
 	_ret := objc.Send[int](o.Ptr(), _aBAddressBookSelDefaultNameOrdering)
 	return _ret
 }
-

@@ -25,4 +25,3 @@ func DOMEntityReferenceFromID(id objc.ID) *DOMEntityReference {
 	purego.Track(o)
 	return o
 }
-

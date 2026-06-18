@@ -13,227 +13,227 @@ import (
 )
 
 var (
-	_fnGLKMathDegreesToRadians func(float32) float32
-	_fnGLKMathProject func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *int32) unsafe.Pointer
-	_fnGLKMathRadiansToDegrees func(float32) float32
-	_fnGLKMathUnproject func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *int32, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix3Add func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix3GetColumn func(unsafe.Pointer, int) unsafe.Pointer
-	_fnGLKMatrix3GetMatrix2 func(unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix3GetRow func(unsafe.Pointer, int) unsafe.Pointer
-	_fnGLKMatrix3Invert func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix3InvertAndTranspose func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix3Make func(float32, float32, float32, float32, float32, float32, float32, float32, float32) unsafe.Pointer
-	_fnGLKMatrix3MakeAndTranspose func(float32, float32, float32, float32, float32, float32, float32, float32, float32) unsafe.Pointer
-	_fnGLKMatrix3MakeRotation func(float32, float32, float32, float32) unsafe.Pointer
-	_fnGLKMatrix3MakeScale func(float32, float32, float32) unsafe.Pointer
-	_fnGLKMatrix3MakeWithArray func(*float32) unsafe.Pointer
-	_fnGLKMatrix3MakeWithArrayAndTranspose func(*float32) unsafe.Pointer
-	_fnGLKMatrix3MakeWithColumns func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix3MakeWithQuaternion func(unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix3MakeWithRows func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix3MakeXRotation func(float32) unsafe.Pointer
-	_fnGLKMatrix3MakeYRotation func(float32) unsafe.Pointer
-	_fnGLKMatrix3MakeZRotation func(float32) unsafe.Pointer
-	_fnGLKMatrix3Multiply func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix3MultiplyVector3 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix3MultiplyVector3Array func(unsafe.Pointer, unsafe.Pointer, uint)
-	_fnGLKMatrix3Rotate func(unsafe.Pointer, float32, float32, float32, float32) unsafe.Pointer
-	_fnGLKMatrix3RotateWithVector3 func(unsafe.Pointer, float32, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix3RotateWithVector4 func(unsafe.Pointer, float32, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix3RotateX func(unsafe.Pointer, float32) unsafe.Pointer
-	_fnGLKMatrix3RotateY func(unsafe.Pointer, float32) unsafe.Pointer
-	_fnGLKMatrix3RotateZ func(unsafe.Pointer, float32) unsafe.Pointer
-	_fnGLKMatrix3Scale func(unsafe.Pointer, float32, float32, float32) unsafe.Pointer
-	_fnGLKMatrix3ScaleWithVector3 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix3ScaleWithVector4 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix3SetColumn func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix3SetRow func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix3Subtract func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix3Transpose func(unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix4Add func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix4GetColumn func(unsafe.Pointer, int) unsafe.Pointer
-	_fnGLKMatrix4GetMatrix2 func(unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix4GetMatrix3 func(unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix4GetRow func(unsafe.Pointer, int) unsafe.Pointer
-	_fnGLKMatrix4Invert func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix4InvertAndTranspose func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix4Make func(float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32) unsafe.Pointer
-	_fnGLKMatrix4MakeAndTranspose func(float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32) unsafe.Pointer
-	_fnGLKMatrix4MakeFrustum func(float32, float32, float32, float32, float32, float32) unsafe.Pointer
-	_fnGLKMatrix4MakeLookAt func(float32, float32, float32, float32, float32, float32, float32, float32, float32) unsafe.Pointer
-	_fnGLKMatrix4MakeOrtho func(float32, float32, float32, float32, float32, float32) unsafe.Pointer
-	_fnGLKMatrix4MakePerspective func(float32, float32, float32, float32) unsafe.Pointer
-	_fnGLKMatrix4MakeRotation func(float32, float32, float32, float32) unsafe.Pointer
-	_fnGLKMatrix4MakeScale func(float32, float32, float32) unsafe.Pointer
-	_fnGLKMatrix4MakeTranslation func(float32, float32, float32) unsafe.Pointer
-	_fnGLKMatrix4MakeWithArray func(*float32) unsafe.Pointer
-	_fnGLKMatrix4MakeWithArrayAndTranspose func(*float32) unsafe.Pointer
-	_fnGLKMatrix4MakeWithColumns func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix4MakeWithQuaternion func(unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix4MakeWithRows func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix4MakeXRotation func(float32) unsafe.Pointer
-	_fnGLKMatrix4MakeYRotation func(float32) unsafe.Pointer
-	_fnGLKMatrix4MakeZRotation func(float32) unsafe.Pointer
-	_fnGLKMatrix4Multiply func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix4MultiplyAndProjectVector3 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix4MultiplyAndProjectVector3Array func(unsafe.Pointer, unsafe.Pointer, uint)
-	_fnGLKMatrix4MultiplyVector3 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix4MultiplyVector3Array func(unsafe.Pointer, unsafe.Pointer, uint)
+	_fnGLKMathDegreesToRadians                       func(float32) float32
+	_fnGLKMathProject                                func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *int32) unsafe.Pointer
+	_fnGLKMathRadiansToDegrees                       func(float32) float32
+	_fnGLKMathUnproject                              func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *int32, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix3Add                                 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix3GetColumn                           func(unsafe.Pointer, int) unsafe.Pointer
+	_fnGLKMatrix3GetMatrix2                          func(unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix3GetRow                              func(unsafe.Pointer, int) unsafe.Pointer
+	_fnGLKMatrix3Invert                              func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix3InvertAndTranspose                  func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix3Make                                func(float32, float32, float32, float32, float32, float32, float32, float32, float32) unsafe.Pointer
+	_fnGLKMatrix3MakeAndTranspose                    func(float32, float32, float32, float32, float32, float32, float32, float32, float32) unsafe.Pointer
+	_fnGLKMatrix3MakeRotation                        func(float32, float32, float32, float32) unsafe.Pointer
+	_fnGLKMatrix3MakeScale                           func(float32, float32, float32) unsafe.Pointer
+	_fnGLKMatrix3MakeWithArray                       func(*float32) unsafe.Pointer
+	_fnGLKMatrix3MakeWithArrayAndTranspose           func(*float32) unsafe.Pointer
+	_fnGLKMatrix3MakeWithColumns                     func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix3MakeWithQuaternion                  func(unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix3MakeWithRows                        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix3MakeXRotation                       func(float32) unsafe.Pointer
+	_fnGLKMatrix3MakeYRotation                       func(float32) unsafe.Pointer
+	_fnGLKMatrix3MakeZRotation                       func(float32) unsafe.Pointer
+	_fnGLKMatrix3Multiply                            func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix3MultiplyVector3                     func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix3MultiplyVector3Array                func(unsafe.Pointer, unsafe.Pointer, uint)
+	_fnGLKMatrix3Rotate                              func(unsafe.Pointer, float32, float32, float32, float32) unsafe.Pointer
+	_fnGLKMatrix3RotateWithVector3                   func(unsafe.Pointer, float32, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix3RotateWithVector4                   func(unsafe.Pointer, float32, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix3RotateX                             func(unsafe.Pointer, float32) unsafe.Pointer
+	_fnGLKMatrix3RotateY                             func(unsafe.Pointer, float32) unsafe.Pointer
+	_fnGLKMatrix3RotateZ                             func(unsafe.Pointer, float32) unsafe.Pointer
+	_fnGLKMatrix3Scale                               func(unsafe.Pointer, float32, float32, float32) unsafe.Pointer
+	_fnGLKMatrix3ScaleWithVector3                    func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix3ScaleWithVector4                    func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix3SetColumn                           func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix3SetRow                              func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix3Subtract                            func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix3Transpose                           func(unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix4Add                                 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix4GetColumn                           func(unsafe.Pointer, int) unsafe.Pointer
+	_fnGLKMatrix4GetMatrix2                          func(unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix4GetMatrix3                          func(unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix4GetRow                              func(unsafe.Pointer, int) unsafe.Pointer
+	_fnGLKMatrix4Invert                              func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix4InvertAndTranspose                  func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix4Make                                func(float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32) unsafe.Pointer
+	_fnGLKMatrix4MakeAndTranspose                    func(float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32) unsafe.Pointer
+	_fnGLKMatrix4MakeFrustum                         func(float32, float32, float32, float32, float32, float32) unsafe.Pointer
+	_fnGLKMatrix4MakeLookAt                          func(float32, float32, float32, float32, float32, float32, float32, float32, float32) unsafe.Pointer
+	_fnGLKMatrix4MakeOrtho                           func(float32, float32, float32, float32, float32, float32) unsafe.Pointer
+	_fnGLKMatrix4MakePerspective                     func(float32, float32, float32, float32) unsafe.Pointer
+	_fnGLKMatrix4MakeRotation                        func(float32, float32, float32, float32) unsafe.Pointer
+	_fnGLKMatrix4MakeScale                           func(float32, float32, float32) unsafe.Pointer
+	_fnGLKMatrix4MakeTranslation                     func(float32, float32, float32) unsafe.Pointer
+	_fnGLKMatrix4MakeWithArray                       func(*float32) unsafe.Pointer
+	_fnGLKMatrix4MakeWithArrayAndTranspose           func(*float32) unsafe.Pointer
+	_fnGLKMatrix4MakeWithColumns                     func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix4MakeWithQuaternion                  func(unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix4MakeWithRows                        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix4MakeXRotation                       func(float32) unsafe.Pointer
+	_fnGLKMatrix4MakeYRotation                       func(float32) unsafe.Pointer
+	_fnGLKMatrix4MakeZRotation                       func(float32) unsafe.Pointer
+	_fnGLKMatrix4Multiply                            func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix4MultiplyAndProjectVector3           func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix4MultiplyAndProjectVector3Array      func(unsafe.Pointer, unsafe.Pointer, uint)
+	_fnGLKMatrix4MultiplyVector3                     func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix4MultiplyVector3Array                func(unsafe.Pointer, unsafe.Pointer, uint)
 	_fnGLKMatrix4MultiplyVector3ArrayWithTranslation func(unsafe.Pointer, unsafe.Pointer, uint)
-	_fnGLKMatrix4MultiplyVector3WithTranslation func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix4MultiplyVector4 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix4MultiplyVector4Array func(unsafe.Pointer, unsafe.Pointer, uint)
-	_fnGLKMatrix4Rotate func(unsafe.Pointer, float32, float32, float32, float32) unsafe.Pointer
-	_fnGLKMatrix4RotateWithVector3 func(unsafe.Pointer, float32, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix4RotateWithVector4 func(unsafe.Pointer, float32, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix4RotateX func(unsafe.Pointer, float32) unsafe.Pointer
-	_fnGLKMatrix4RotateY func(unsafe.Pointer, float32) unsafe.Pointer
-	_fnGLKMatrix4RotateZ func(unsafe.Pointer, float32) unsafe.Pointer
-	_fnGLKMatrix4Scale func(unsafe.Pointer, float32, float32, float32) unsafe.Pointer
-	_fnGLKMatrix4ScaleWithVector3 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix4ScaleWithVector4 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix4SetColumn func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix4SetRow func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix4Subtract func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix4Translate func(unsafe.Pointer, float32, float32, float32) unsafe.Pointer
-	_fnGLKMatrix4TranslateWithVector3 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix4TranslateWithVector4 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix4Transpose func(unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrixStackCreate func(unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrixStackGetMatrix2 func(unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrixStackGetMatrix3 func(unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrixStackGetMatrix3Inverse func(unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrixStackGetMatrix3InverseTranspose func(unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrixStackGetMatrix4 func(unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrixStackGetMatrix4Inverse func(unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrixStackGetMatrix4InverseTranspose func(unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrixStackGetTypeID func() uint
-	_fnGLKMatrixStackLoadMatrix4 func(unsafe.Pointer, unsafe.Pointer)
-	_fnGLKMatrixStackMultiplyMatrix4 func(unsafe.Pointer, unsafe.Pointer)
-	_fnGLKMatrixStackMultiplyMatrixStack func(unsafe.Pointer, unsafe.Pointer)
-	_fnGLKMatrixStackPop func(unsafe.Pointer)
-	_fnGLKMatrixStackPush func(unsafe.Pointer)
-	_fnGLKMatrixStackRotate func(unsafe.Pointer, float32, float32, float32, float32)
-	_fnGLKMatrixStackRotateWithVector3 func(unsafe.Pointer, float32, unsafe.Pointer)
-	_fnGLKMatrixStackRotateWithVector4 func(unsafe.Pointer, float32, unsafe.Pointer)
-	_fnGLKMatrixStackRotateX func(unsafe.Pointer, float32)
-	_fnGLKMatrixStackRotateY func(unsafe.Pointer, float32)
-	_fnGLKMatrixStackRotateZ func(unsafe.Pointer, float32)
-	_fnGLKMatrixStackScale func(unsafe.Pointer, float32, float32, float32)
-	_fnGLKMatrixStackScaleWithVector3 func(unsafe.Pointer, unsafe.Pointer)
-	_fnGLKMatrixStackScaleWithVector4 func(unsafe.Pointer, unsafe.Pointer)
-	_fnGLKMatrixStackSize func(unsafe.Pointer) int
-	_fnGLKMatrixStackTranslate func(unsafe.Pointer, float32, float32, float32)
-	_fnGLKMatrixStackTranslateWithVector3 func(unsafe.Pointer, unsafe.Pointer)
-	_fnGLKMatrixStackTranslateWithVector4 func(unsafe.Pointer, unsafe.Pointer)
-	_fnGLKQuaternionAdd func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKQuaternionAngle func(unsafe.Pointer) float32
-	_fnGLKQuaternionAxis func(unsafe.Pointer) unsafe.Pointer
-	_fnGLKQuaternionConjugate func(unsafe.Pointer) unsafe.Pointer
-	_fnGLKQuaternionInvert func(unsafe.Pointer) unsafe.Pointer
-	_fnGLKQuaternionLength func(unsafe.Pointer) float32
-	_fnGLKQuaternionMake func(float32, float32, float32, float32) unsafe.Pointer
-	_fnGLKQuaternionMakeWithAngleAndAxis func(float32, float32, float32, float32) unsafe.Pointer
-	_fnGLKQuaternionMakeWithAngleAndVector3Axis func(float32, unsafe.Pointer) unsafe.Pointer
-	_fnGLKQuaternionMakeWithArray func(*float32) unsafe.Pointer
-	_fnGLKQuaternionMakeWithMatrix3 func(unsafe.Pointer) unsafe.Pointer
-	_fnGLKQuaternionMakeWithMatrix4 func(unsafe.Pointer) unsafe.Pointer
-	_fnGLKQuaternionMakeWithVector3 func(unsafe.Pointer, float32) unsafe.Pointer
-	_fnGLKQuaternionMultiply func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKQuaternionNormalize func(unsafe.Pointer) unsafe.Pointer
-	_fnGLKQuaternionRotateVector3 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKQuaternionRotateVector3Array func(unsafe.Pointer, unsafe.Pointer, uint)
-	_fnGLKQuaternionRotateVector4 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKQuaternionRotateVector4Array func(unsafe.Pointer, unsafe.Pointer, uint)
-	_fnGLKQuaternionSlerp func(unsafe.Pointer, unsafe.Pointer, float32) unsafe.Pointer
-	_fnGLKQuaternionSubtract func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKVector2Add func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKVector2AddScalar func(unsafe.Pointer, float32) unsafe.Pointer
-	_fnGLKVector2AllEqualToScalar func(unsafe.Pointer, float32) bool
-	_fnGLKVector2AllEqualToVector2 func(unsafe.Pointer, unsafe.Pointer) bool
-	_fnGLKVector2AllGreaterThanOrEqualToScalar func(unsafe.Pointer, float32) bool
-	_fnGLKVector2AllGreaterThanOrEqualToVector2 func(unsafe.Pointer, unsafe.Pointer) bool
-	_fnGLKVector2AllGreaterThanScalar func(unsafe.Pointer, float32) bool
-	_fnGLKVector2AllGreaterThanVector2 func(unsafe.Pointer, unsafe.Pointer) bool
-	_fnGLKVector2Distance func(unsafe.Pointer, unsafe.Pointer) float32
-	_fnGLKVector2Divide func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKVector2DivideScalar func(unsafe.Pointer, float32) unsafe.Pointer
-	_fnGLKVector2DotProduct func(unsafe.Pointer, unsafe.Pointer) float32
-	_fnGLKVector2Length func(unsafe.Pointer) float32
-	_fnGLKVector2Lerp func(unsafe.Pointer, unsafe.Pointer, float32) unsafe.Pointer
-	_fnGLKVector2Make func(float32, float32) unsafe.Pointer
-	_fnGLKVector2MakeWithArray func(*float32) unsafe.Pointer
-	_fnGLKVector2Maximum func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKVector2Minimum func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKVector2Multiply func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKVector2MultiplyScalar func(unsafe.Pointer, float32) unsafe.Pointer
-	_fnGLKVector2Negate func(unsafe.Pointer) unsafe.Pointer
-	_fnGLKVector2Normalize func(unsafe.Pointer) unsafe.Pointer
-	_fnGLKVector2Project func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKVector2Subtract func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKVector2SubtractScalar func(unsafe.Pointer, float32) unsafe.Pointer
-	_fnGLKVector3Add func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKVector3AddScalar func(unsafe.Pointer, float32) unsafe.Pointer
-	_fnGLKVector3AllEqualToScalar func(unsafe.Pointer, float32) bool
-	_fnGLKVector3AllEqualToVector3 func(unsafe.Pointer, unsafe.Pointer) bool
-	_fnGLKVector3AllGreaterThanOrEqualToScalar func(unsafe.Pointer, float32) bool
-	_fnGLKVector3AllGreaterThanOrEqualToVector3 func(unsafe.Pointer, unsafe.Pointer) bool
-	_fnGLKVector3AllGreaterThanScalar func(unsafe.Pointer, float32) bool
-	_fnGLKVector3AllGreaterThanVector3 func(unsafe.Pointer, unsafe.Pointer) bool
-	_fnGLKVector3CrossProduct func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKVector3Distance func(unsafe.Pointer, unsafe.Pointer) float32
-	_fnGLKVector3Divide func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKVector3DivideScalar func(unsafe.Pointer, float32) unsafe.Pointer
-	_fnGLKVector3DotProduct func(unsafe.Pointer, unsafe.Pointer) float32
-	_fnGLKVector3Length func(unsafe.Pointer) float32
-	_fnGLKVector3Lerp func(unsafe.Pointer, unsafe.Pointer, float32) unsafe.Pointer
-	_fnGLKVector3Make func(float32, float32, float32) unsafe.Pointer
-	_fnGLKVector3MakeWithArray func(*float32) unsafe.Pointer
-	_fnGLKVector3Maximum func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKVector3Minimum func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKVector3Multiply func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKVector3MultiplyScalar func(unsafe.Pointer, float32) unsafe.Pointer
-	_fnGLKVector3Negate func(unsafe.Pointer) unsafe.Pointer
-	_fnGLKVector3Normalize func(unsafe.Pointer) unsafe.Pointer
-	_fnGLKVector3Project func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKVector3Subtract func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKVector3SubtractScalar func(unsafe.Pointer, float32) unsafe.Pointer
-	_fnGLKVector4Add func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKVector4AddScalar func(unsafe.Pointer, float32) unsafe.Pointer
-	_fnGLKVector4AllEqualToScalar func(unsafe.Pointer, float32) bool
-	_fnGLKVector4AllEqualToVector4 func(unsafe.Pointer, unsafe.Pointer) bool
-	_fnGLKVector4AllGreaterThanOrEqualToScalar func(unsafe.Pointer, float32) bool
-	_fnGLKVector4AllGreaterThanOrEqualToVector4 func(unsafe.Pointer, unsafe.Pointer) bool
-	_fnGLKVector4AllGreaterThanScalar func(unsafe.Pointer, float32) bool
-	_fnGLKVector4AllGreaterThanVector4 func(unsafe.Pointer, unsafe.Pointer) bool
-	_fnGLKVector4CrossProduct func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKVector4Distance func(unsafe.Pointer, unsafe.Pointer) float32
-	_fnGLKVector4Divide func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKVector4DivideScalar func(unsafe.Pointer, float32) unsafe.Pointer
-	_fnGLKVector4DotProduct func(unsafe.Pointer, unsafe.Pointer) float32
-	_fnGLKVector4Length func(unsafe.Pointer) float32
-	_fnGLKVector4Lerp func(unsafe.Pointer, unsafe.Pointer, float32) unsafe.Pointer
-	_fnGLKVector4Make func(float32, float32, float32, float32) unsafe.Pointer
-	_fnGLKVector4MakeWithArray func(*float32) unsafe.Pointer
-	_fnGLKVector4MakeWithVector3 func(unsafe.Pointer, float32) unsafe.Pointer
-	_fnGLKVector4Maximum func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKVector4Minimum func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKVector4Multiply func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKVector4MultiplyScalar func(unsafe.Pointer, float32) unsafe.Pointer
-	_fnGLKVector4Negate func(unsafe.Pointer) unsafe.Pointer
-	_fnGLKVector4Normalize func(unsafe.Pointer) unsafe.Pointer
-	_fnGLKVector4Project func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKVector4Subtract func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKVector4SubtractScalar func(unsafe.Pointer, float32) unsafe.Pointer
-	_fnGLKVertexAttributeParametersFromModelIO func(modelio.MDLVertexFormat) GLKVertexAttributeParameters
-	_fnNSStringFromGLKMatrix2 func(unsafe.Pointer) objc.ID
-	_fnNSStringFromGLKMatrix3 func(unsafe.Pointer) objc.ID
-	_fnNSStringFromGLKMatrix4 func(unsafe.Pointer) objc.ID
-	_fnNSStringFromGLKQuaternion func(unsafe.Pointer) objc.ID
-	_fnNSStringFromGLKVector2 func(unsafe.Pointer) objc.ID
-	_fnNSStringFromGLKVector3 func(unsafe.Pointer) objc.ID
-	_fnNSStringFromGLKVector4 func(unsafe.Pointer) objc.ID
+	_fnGLKMatrix4MultiplyVector3WithTranslation      func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix4MultiplyVector4                     func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix4MultiplyVector4Array                func(unsafe.Pointer, unsafe.Pointer, uint)
+	_fnGLKMatrix4Rotate                              func(unsafe.Pointer, float32, float32, float32, float32) unsafe.Pointer
+	_fnGLKMatrix4RotateWithVector3                   func(unsafe.Pointer, float32, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix4RotateWithVector4                   func(unsafe.Pointer, float32, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix4RotateX                             func(unsafe.Pointer, float32) unsafe.Pointer
+	_fnGLKMatrix4RotateY                             func(unsafe.Pointer, float32) unsafe.Pointer
+	_fnGLKMatrix4RotateZ                             func(unsafe.Pointer, float32) unsafe.Pointer
+	_fnGLKMatrix4Scale                               func(unsafe.Pointer, float32, float32, float32) unsafe.Pointer
+	_fnGLKMatrix4ScaleWithVector3                    func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix4ScaleWithVector4                    func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix4SetColumn                           func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix4SetRow                              func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix4Subtract                            func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix4Translate                           func(unsafe.Pointer, float32, float32, float32) unsafe.Pointer
+	_fnGLKMatrix4TranslateWithVector3                func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix4TranslateWithVector4                func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix4Transpose                           func(unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrixStackCreate                          func(unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrixStackGetMatrix2                      func(unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrixStackGetMatrix3                      func(unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrixStackGetMatrix3Inverse               func(unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrixStackGetMatrix3InverseTranspose      func(unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrixStackGetMatrix4                      func(unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrixStackGetMatrix4Inverse               func(unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrixStackGetMatrix4InverseTranspose      func(unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrixStackGetTypeID                       func() uint
+	_fnGLKMatrixStackLoadMatrix4                     func(unsafe.Pointer, unsafe.Pointer)
+	_fnGLKMatrixStackMultiplyMatrix4                 func(unsafe.Pointer, unsafe.Pointer)
+	_fnGLKMatrixStackMultiplyMatrixStack             func(unsafe.Pointer, unsafe.Pointer)
+	_fnGLKMatrixStackPop                             func(unsafe.Pointer)
+	_fnGLKMatrixStackPush                            func(unsafe.Pointer)
+	_fnGLKMatrixStackRotate                          func(unsafe.Pointer, float32, float32, float32, float32)
+	_fnGLKMatrixStackRotateWithVector3               func(unsafe.Pointer, float32, unsafe.Pointer)
+	_fnGLKMatrixStackRotateWithVector4               func(unsafe.Pointer, float32, unsafe.Pointer)
+	_fnGLKMatrixStackRotateX                         func(unsafe.Pointer, float32)
+	_fnGLKMatrixStackRotateY                         func(unsafe.Pointer, float32)
+	_fnGLKMatrixStackRotateZ                         func(unsafe.Pointer, float32)
+	_fnGLKMatrixStackScale                           func(unsafe.Pointer, float32, float32, float32)
+	_fnGLKMatrixStackScaleWithVector3                func(unsafe.Pointer, unsafe.Pointer)
+	_fnGLKMatrixStackScaleWithVector4                func(unsafe.Pointer, unsafe.Pointer)
+	_fnGLKMatrixStackSize                            func(unsafe.Pointer) int
+	_fnGLKMatrixStackTranslate                       func(unsafe.Pointer, float32, float32, float32)
+	_fnGLKMatrixStackTranslateWithVector3            func(unsafe.Pointer, unsafe.Pointer)
+	_fnGLKMatrixStackTranslateWithVector4            func(unsafe.Pointer, unsafe.Pointer)
+	_fnGLKQuaternionAdd                              func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKQuaternionAngle                            func(unsafe.Pointer) float32
+	_fnGLKQuaternionAxis                             func(unsafe.Pointer) unsafe.Pointer
+	_fnGLKQuaternionConjugate                        func(unsafe.Pointer) unsafe.Pointer
+	_fnGLKQuaternionInvert                           func(unsafe.Pointer) unsafe.Pointer
+	_fnGLKQuaternionLength                           func(unsafe.Pointer) float32
+	_fnGLKQuaternionMake                             func(float32, float32, float32, float32) unsafe.Pointer
+	_fnGLKQuaternionMakeWithAngleAndAxis             func(float32, float32, float32, float32) unsafe.Pointer
+	_fnGLKQuaternionMakeWithAngleAndVector3Axis      func(float32, unsafe.Pointer) unsafe.Pointer
+	_fnGLKQuaternionMakeWithArray                    func(*float32) unsafe.Pointer
+	_fnGLKQuaternionMakeWithMatrix3                  func(unsafe.Pointer) unsafe.Pointer
+	_fnGLKQuaternionMakeWithMatrix4                  func(unsafe.Pointer) unsafe.Pointer
+	_fnGLKQuaternionMakeWithVector3                  func(unsafe.Pointer, float32) unsafe.Pointer
+	_fnGLKQuaternionMultiply                         func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKQuaternionNormalize                        func(unsafe.Pointer) unsafe.Pointer
+	_fnGLKQuaternionRotateVector3                    func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKQuaternionRotateVector3Array               func(unsafe.Pointer, unsafe.Pointer, uint)
+	_fnGLKQuaternionRotateVector4                    func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKQuaternionRotateVector4Array               func(unsafe.Pointer, unsafe.Pointer, uint)
+	_fnGLKQuaternionSlerp                            func(unsafe.Pointer, unsafe.Pointer, float32) unsafe.Pointer
+	_fnGLKQuaternionSubtract                         func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKVector2Add                                 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKVector2AddScalar                           func(unsafe.Pointer, float32) unsafe.Pointer
+	_fnGLKVector2AllEqualToScalar                    func(unsafe.Pointer, float32) bool
+	_fnGLKVector2AllEqualToVector2                   func(unsafe.Pointer, unsafe.Pointer) bool
+	_fnGLKVector2AllGreaterThanOrEqualToScalar       func(unsafe.Pointer, float32) bool
+	_fnGLKVector2AllGreaterThanOrEqualToVector2      func(unsafe.Pointer, unsafe.Pointer) bool
+	_fnGLKVector2AllGreaterThanScalar                func(unsafe.Pointer, float32) bool
+	_fnGLKVector2AllGreaterThanVector2               func(unsafe.Pointer, unsafe.Pointer) bool
+	_fnGLKVector2Distance                            func(unsafe.Pointer, unsafe.Pointer) float32
+	_fnGLKVector2Divide                              func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKVector2DivideScalar                        func(unsafe.Pointer, float32) unsafe.Pointer
+	_fnGLKVector2DotProduct                          func(unsafe.Pointer, unsafe.Pointer) float32
+	_fnGLKVector2Length                              func(unsafe.Pointer) float32
+	_fnGLKVector2Lerp                                func(unsafe.Pointer, unsafe.Pointer, float32) unsafe.Pointer
+	_fnGLKVector2Make                                func(float32, float32) unsafe.Pointer
+	_fnGLKVector2MakeWithArray                       func(*float32) unsafe.Pointer
+	_fnGLKVector2Maximum                             func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKVector2Minimum                             func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKVector2Multiply                            func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKVector2MultiplyScalar                      func(unsafe.Pointer, float32) unsafe.Pointer
+	_fnGLKVector2Negate                              func(unsafe.Pointer) unsafe.Pointer
+	_fnGLKVector2Normalize                           func(unsafe.Pointer) unsafe.Pointer
+	_fnGLKVector2Project                             func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKVector2Subtract                            func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKVector2SubtractScalar                      func(unsafe.Pointer, float32) unsafe.Pointer
+	_fnGLKVector3Add                                 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKVector3AddScalar                           func(unsafe.Pointer, float32) unsafe.Pointer
+	_fnGLKVector3AllEqualToScalar                    func(unsafe.Pointer, float32) bool
+	_fnGLKVector3AllEqualToVector3                   func(unsafe.Pointer, unsafe.Pointer) bool
+	_fnGLKVector3AllGreaterThanOrEqualToScalar       func(unsafe.Pointer, float32) bool
+	_fnGLKVector3AllGreaterThanOrEqualToVector3      func(unsafe.Pointer, unsafe.Pointer) bool
+	_fnGLKVector3AllGreaterThanScalar                func(unsafe.Pointer, float32) bool
+	_fnGLKVector3AllGreaterThanVector3               func(unsafe.Pointer, unsafe.Pointer) bool
+	_fnGLKVector3CrossProduct                        func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKVector3Distance                            func(unsafe.Pointer, unsafe.Pointer) float32
+	_fnGLKVector3Divide                              func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKVector3DivideScalar                        func(unsafe.Pointer, float32) unsafe.Pointer
+	_fnGLKVector3DotProduct                          func(unsafe.Pointer, unsafe.Pointer) float32
+	_fnGLKVector3Length                              func(unsafe.Pointer) float32
+	_fnGLKVector3Lerp                                func(unsafe.Pointer, unsafe.Pointer, float32) unsafe.Pointer
+	_fnGLKVector3Make                                func(float32, float32, float32) unsafe.Pointer
+	_fnGLKVector3MakeWithArray                       func(*float32) unsafe.Pointer
+	_fnGLKVector3Maximum                             func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKVector3Minimum                             func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKVector3Multiply                            func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKVector3MultiplyScalar                      func(unsafe.Pointer, float32) unsafe.Pointer
+	_fnGLKVector3Negate                              func(unsafe.Pointer) unsafe.Pointer
+	_fnGLKVector3Normalize                           func(unsafe.Pointer) unsafe.Pointer
+	_fnGLKVector3Project                             func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKVector3Subtract                            func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKVector3SubtractScalar                      func(unsafe.Pointer, float32) unsafe.Pointer
+	_fnGLKVector4Add                                 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKVector4AddScalar                           func(unsafe.Pointer, float32) unsafe.Pointer
+	_fnGLKVector4AllEqualToScalar                    func(unsafe.Pointer, float32) bool
+	_fnGLKVector4AllEqualToVector4                   func(unsafe.Pointer, unsafe.Pointer) bool
+	_fnGLKVector4AllGreaterThanOrEqualToScalar       func(unsafe.Pointer, float32) bool
+	_fnGLKVector4AllGreaterThanOrEqualToVector4      func(unsafe.Pointer, unsafe.Pointer) bool
+	_fnGLKVector4AllGreaterThanScalar                func(unsafe.Pointer, float32) bool
+	_fnGLKVector4AllGreaterThanVector4               func(unsafe.Pointer, unsafe.Pointer) bool
+	_fnGLKVector4CrossProduct                        func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKVector4Distance                            func(unsafe.Pointer, unsafe.Pointer) float32
+	_fnGLKVector4Divide                              func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKVector4DivideScalar                        func(unsafe.Pointer, float32) unsafe.Pointer
+	_fnGLKVector4DotProduct                          func(unsafe.Pointer, unsafe.Pointer) float32
+	_fnGLKVector4Length                              func(unsafe.Pointer) float32
+	_fnGLKVector4Lerp                                func(unsafe.Pointer, unsafe.Pointer, float32) unsafe.Pointer
+	_fnGLKVector4Make                                func(float32, float32, float32, float32) unsafe.Pointer
+	_fnGLKVector4MakeWithArray                       func(*float32) unsafe.Pointer
+	_fnGLKVector4MakeWithVector3                     func(unsafe.Pointer, float32) unsafe.Pointer
+	_fnGLKVector4Maximum                             func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKVector4Minimum                             func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKVector4Multiply                            func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKVector4MultiplyScalar                      func(unsafe.Pointer, float32) unsafe.Pointer
+	_fnGLKVector4Negate                              func(unsafe.Pointer) unsafe.Pointer
+	_fnGLKVector4Normalize                           func(unsafe.Pointer) unsafe.Pointer
+	_fnGLKVector4Project                             func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKVector4Subtract                            func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKVector4SubtractScalar                      func(unsafe.Pointer, float32) unsafe.Pointer
+	_fnGLKVertexAttributeParametersFromModelIO       func(modelio.MDLVertexFormat) GLKVertexAttributeParameters
+	_fnNSStringFromGLKMatrix2                        func(unsafe.Pointer) objc.ID
+	_fnNSStringFromGLKMatrix3                        func(unsafe.Pointer) objc.ID
+	_fnNSStringFromGLKMatrix4                        func(unsafe.Pointer) objc.ID
+	_fnNSStringFromGLKQuaternion                     func(unsafe.Pointer) objc.ID
+	_fnNSStringFromGLKVector2                        func(unsafe.Pointer) objc.ID
+	_fnNSStringFromGLKVector3                        func(unsafe.Pointer) objc.ID
+	_fnNSStringFromGLKVector4                        func(unsafe.Pointer) objc.ID
 )
 
 func GLKMathDegreesToRadians(degrees float32) float32 {
@@ -1094,43 +1094,56 @@ func GLKVertexAttributeParametersFromModelIO(vertexFormat modelio.MDLVertexForma
 
 func NSStringFromGLKMatrix2(matrix unsafe.Pointer) *foundation.NSString {
 	_ret := _fnNSStringFromGLKMatrix2(matrix)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func NSStringFromGLKMatrix3(matrix unsafe.Pointer) *foundation.NSString {
 	_ret := _fnNSStringFromGLKMatrix3(matrix)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func NSStringFromGLKMatrix4(matrix unsafe.Pointer) *foundation.NSString {
 	_ret := _fnNSStringFromGLKMatrix4(matrix)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func NSStringFromGLKQuaternion(quaternion unsafe.Pointer) *foundation.NSString {
 	_ret := _fnNSStringFromGLKQuaternion(quaternion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func NSStringFromGLKVector2(vector unsafe.Pointer) *foundation.NSString {
 	_ret := _fnNSStringFromGLKVector2(vector)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func NSStringFromGLKVector3(vector unsafe.Pointer) *foundation.NSString {
 	_ret := _fnNSStringFromGLKVector3(vector)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func NSStringFromGLKVector4(vector unsafe.Pointer) *foundation.NSString {
 	_ret := _fnNSStringFromGLKVector4(vector)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

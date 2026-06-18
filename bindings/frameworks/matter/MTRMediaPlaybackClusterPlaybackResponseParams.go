@@ -18,14 +18,14 @@ type MTRMediaPlaybackClusterPlaybackResponseParams struct {
 }
 
 var (
-	_clsMTRMediaPlaybackClusterPlaybackResponseParams = _objcClass("MTRMediaPlaybackClusterPlaybackResponseParams")
+	_clsMTRMediaPlaybackClusterPlaybackResponseParams                           = _objcClass("MTRMediaPlaybackClusterPlaybackResponseParams")
 	_mTRMediaPlaybackClusterPlaybackResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRMediaPlaybackClusterPlaybackResponseParamsSelStatus = objc.RegisterName("status")
-	_mTRMediaPlaybackClusterPlaybackResponseParamsSelSetStatus = objc.RegisterName("setStatus:")
-	_mTRMediaPlaybackClusterPlaybackResponseParamsSelData = objc.RegisterName("data")
-	_mTRMediaPlaybackClusterPlaybackResponseParamsSelSetData = objc.RegisterName("setData:")
-	_mTRMediaPlaybackClusterPlaybackResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRMediaPlaybackClusterPlaybackResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRMediaPlaybackClusterPlaybackResponseParamsSelStatus                     = objc.RegisterName("status")
+	_mTRMediaPlaybackClusterPlaybackResponseParamsSelSetStatus                  = objc.RegisterName("setStatus:")
+	_mTRMediaPlaybackClusterPlaybackResponseParamsSelData                       = objc.RegisterName("data")
+	_mTRMediaPlaybackClusterPlaybackResponseParamsSelSetData                    = objc.RegisterName("setData:")
+	_mTRMediaPlaybackClusterPlaybackResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRMediaPlaybackClusterPlaybackResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
 )
 
 func MTRMediaPlaybackClusterPlaybackResponseParamsFromID(id objc.ID) *MTRMediaPlaybackClusterPlaybackResponseParams {
@@ -42,7 +42,9 @@ func MTRMediaPlaybackClusterPlaybackResponseParamsFromID(id objc.ID) *MTRMediaPl
 func (o *MTRMediaPlaybackClusterPlaybackResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMediaPlaybackClusterPlaybackResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -51,7 +53,9 @@ func (o *MTRMediaPlaybackClusterPlaybackResponseParams) InitWithResponseValueErr
 
 func (o *MTRMediaPlaybackClusterPlaybackResponseParams) Status() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMediaPlaybackClusterPlaybackResponseParamsSelStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *MTRMediaPlaybackClusterPlaybackResponseParams) SetStatus(status *founda
 
 func (o *MTRMediaPlaybackClusterPlaybackResponseParams) Data() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMediaPlaybackClusterPlaybackResponseParamsSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -72,11 +78,12 @@ func (o *MTRMediaPlaybackClusterPlaybackResponseParams) SetData(data *foundation
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRMediaPlaybackClusterPlaybackResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMediaPlaybackClusterPlaybackResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRMediaPlaybackClusterPlaybackResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
 	o.Ptr().Send(_mTRMediaPlaybackClusterPlaybackResponseParamsSelSetTimedInvokeTimeoutMs, timedInvokeTimeoutMs.Ptr())
 }
-

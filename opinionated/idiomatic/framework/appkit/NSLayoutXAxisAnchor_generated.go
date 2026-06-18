@@ -71,7 +71,9 @@ func (x *LayoutXAxisAnchor) ConstraintLessThanOrEqualToSystemSpacingAfterAnchorM
 	return &LayoutConstraint{inner: _r}
 }
 
-func (x *LayoutXAxisAnchor) asLayoutAnchor() *raw.NSLayoutAnchor[objc.ID] { return &x.inner.NSLayoutAnchor }
+func (x *LayoutXAxisAnchor) asLayoutAnchor() *raw.NSLayoutAnchor[objc.ID] {
+	return &x.inner.NSLayoutAnchor
+}
 
 // LayoutXAxisAnchorable is the interface implemented by [LayoutXAxisAnchor], for mocking and DI.
 type LayoutXAxisAnchorable interface {
@@ -83,4 +85,3 @@ type LayoutXAxisAnchorable interface {
 }
 
 var _ LayoutXAxisAnchorable = (*LayoutXAxisAnchor)(nil)
-

@@ -126,4 +126,3 @@ type TemporalNoiseFilterParametersable interface {
 }
 
 var _ TemporalNoiseFilterParametersable = (*TemporalNoiseFilterParameters)(nil)
-

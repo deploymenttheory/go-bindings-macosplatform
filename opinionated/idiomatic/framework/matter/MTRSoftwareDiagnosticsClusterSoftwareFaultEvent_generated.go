@@ -17,7 +17,9 @@ type MTRSoftwareDiagnosticsClusterSoftwareFaultEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRSoftwareDiagnosticsClusterSoftwareFaultEvent].
-func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) Unwrap() *raw.MTRSoftwareDiagnosticsClusterSoftwareFaultEvent { return x.inner }
+func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) Unwrap() *raw.MTRSoftwareDiagnosticsClusterSoftwareFaultEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -104,4 +106,3 @@ type MTRSoftwareDiagnosticsClusterSoftwareFaultEventable interface {
 }
 
 var _ MTRSoftwareDiagnosticsClusterSoftwareFaultEventable = (*MTRSoftwareDiagnosticsClusterSoftwareFaultEvent)(nil)
-

@@ -111,4 +111,3 @@ type URLCredentialable interface {
 }
 
 var _ URLCredentialable = (*URLCredential)(nil)
-

@@ -250,4 +250,3 @@ type PhysicsFieldable interface {
 }
 
 var _ PhysicsFieldable = (*PhysicsField)(nil)
-

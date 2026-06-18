@@ -18,7 +18,9 @@ type GetReservationDetailsIntentResponse struct {
 }
 
 // Unwrap returns the underlying [raw.INGetReservationDetailsIntentResponse].
-func (x *GetReservationDetailsIntentResponse) Unwrap() *raw.INGetReservationDetailsIntentResponse { return x.inner }
+func (x *GetReservationDetailsIntentResponse) Unwrap() *raw.INGetReservationDetailsIntentResponse {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -46,7 +48,9 @@ func (x *GetReservationDetailsIntentResponse) WithReservations(items ...Reservat
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asReservation().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asReservation().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.INReservation](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -82,7 +86,9 @@ func (x *GetReservationDetailsIntentResponse) SetReservations(reservations *foun
 	x.inner.SetReservations(reservations)
 }
 
-func (x *GetReservationDetailsIntentResponse) asIntentResponse() *raw.INIntentResponse { return &x.inner.INIntentResponse }
+func (x *GetReservationDetailsIntentResponse) asIntentResponse() *raw.INIntentResponse {
+	return &x.inner.INIntentResponse
+}
 
 // GetReservationDetailsIntentResponseable is the interface implemented by [GetReservationDetailsIntentResponse], for mocking and DI.
 type GetReservationDetailsIntentResponseable interface {
@@ -95,4 +101,3 @@ type GetReservationDetailsIntentResponseable interface {
 }
 
 var _ GetReservationDetailsIntentResponseable = (*GetReservationDetailsIntentResponse)(nil)
-

@@ -47,4 +47,3 @@ type NeuralEngineComputeDeviceable interface {
 }
 
 var _ NeuralEngineComputeDeviceable = (*NeuralEngineComputeDevice)(nil)
-

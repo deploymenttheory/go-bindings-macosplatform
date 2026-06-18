@@ -16,13 +16,13 @@ type NSManagedObjectModelReference struct {
 }
 
 var (
-	_clsNSManagedObjectModelReference = _objcClass("NSManagedObjectModelReference")
-	_nSManagedObjectModelReferenceSelInitWithModelVersionChecksum = objc.RegisterName("initWithModel:versionChecksum:")
-	_nSManagedObjectModelReferenceSelInitWithFileURLVersionChecksum = objc.RegisterName("initWithFileURL:versionChecksum:")
+	_clsNSManagedObjectModelReference                                                   = _objcClass("NSManagedObjectModelReference")
+	_nSManagedObjectModelReferenceSelInitWithModelVersionChecksum                       = objc.RegisterName("initWithModel:versionChecksum:")
+	_nSManagedObjectModelReferenceSelInitWithFileURLVersionChecksum                     = objc.RegisterName("initWithFileURL:versionChecksum:")
 	_nSManagedObjectModelReferenceSelInitWithEntityVersionHashesInBundleVersionChecksum = objc.RegisterName("initWithEntityVersionHashes:inBundle:versionChecksum:")
-	_nSManagedObjectModelReferenceSelInitWithNameInBundleVersionChecksum = objc.RegisterName("initWithName:inBundle:versionChecksum:")
-	_nSManagedObjectModelReferenceSelResolvedModel = objc.RegisterName("resolvedModel")
-	_nSManagedObjectModelReferenceSelVersionChecksum = objc.RegisterName("versionChecksum")
+	_nSManagedObjectModelReferenceSelInitWithNameInBundleVersionChecksum                = objc.RegisterName("initWithName:inBundle:versionChecksum:")
+	_nSManagedObjectModelReferenceSelResolvedModel                                      = objc.RegisterName("resolvedModel")
+	_nSManagedObjectModelReferenceSelVersionChecksum                                    = objc.RegisterName("versionChecksum")
 )
 
 func NSManagedObjectModelReferenceFromID(id objc.ID) *NSManagedObjectModelReference {
@@ -37,37 +37,48 @@ func NSManagedObjectModelReferenceFromID(id objc.ID) *NSManagedObjectModelRefere
 
 func (o *NSManagedObjectModelReference) InitWithModelVersionChecksum(model *NSManagedObjectModel, versionChecksum *foundation.NSString) *NSManagedObjectModelReference {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectModelReferenceSelInitWithModelVersionChecksum, model.Ptr(), versionChecksum.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectModelReferenceFromID(_ret)
 }
 
 func (o *NSManagedObjectModelReference) InitWithFileURLVersionChecksum(fileURL *foundation.NSURL, versionChecksum *foundation.NSString) *NSManagedObjectModelReference {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectModelReferenceSelInitWithFileURLVersionChecksum, fileURL.Ptr(), versionChecksum.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectModelReferenceFromID(_ret)
 }
 
 func (o *NSManagedObjectModelReference) InitWithEntityVersionHashesInBundleVersionChecksum(versionHash *foundation.NSDictionary[objc.ID, objc.ID], bundle *foundation.NSBundle, versionChecksum *foundation.NSString) *NSManagedObjectModelReference {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectModelReferenceSelInitWithEntityVersionHashesInBundleVersionChecksum, versionHash, bundle.Ptr(), versionChecksum.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectModelReferenceFromID(_ret)
 }
 
 func (o *NSManagedObjectModelReference) InitWithNameInBundleVersionChecksum(modelName *foundation.NSString, bundle *foundation.NSBundle, versionChecksum *foundation.NSString) *NSManagedObjectModelReference {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectModelReferenceSelInitWithNameInBundleVersionChecksum, modelName.Ptr(), bundle.Ptr(), versionChecksum.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectModelReferenceFromID(_ret)
 }
 
 func (o *NSManagedObjectModelReference) ResolvedModel() *NSManagedObjectModel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectModelReferenceSelResolvedModel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectModelFromID(_ret)
 }
 
 func (o *NSManagedObjectModelReference) VersionChecksum() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectModelReferenceSelVersionChecksum)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

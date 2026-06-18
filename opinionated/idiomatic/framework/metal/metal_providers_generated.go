@@ -52,4 +52,3 @@ type RenderPassAttachmentDescriptorProvider interface {
 type TypeProvider interface {
 	asType() *raw.MTLType
 }
-

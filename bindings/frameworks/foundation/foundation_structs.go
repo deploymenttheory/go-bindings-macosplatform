@@ -12,35 +12,35 @@ type NSAffineTransformStruct struct {
 	M12 float64
 	M21 float64
 	M22 float64
-	TX float64
-	TY float64
+	TX  float64
+	TY  float64
 }
 
 type NSDecimal struct {
 }
 
 type NSEdgeInsets struct {
-	Top float64
-	Left float64
+	Top    float64
+	Left   float64
 	Bottom float64
-	Right float64
+	Right  float64
 }
 
 type NSFastEnumerationState struct {
-	State uint
-	ItemsPtr **ObjcObject
+	State        uint
+	ItemsPtr     **ObjcObject
 	MutationsPtr unsafe.Pointer
-	Extra [5]uint
+	Extra        [5]uint
 }
 
 type NSHashEnumerator struct {
 }
 
 type NSHashTableCallBacks struct {
-	Hash unsafe.Pointer
-	IsEqual unsafe.Pointer
-	Retain unsafe.Pointer
-	Release unsafe.Pointer
+	Hash     unsafe.Pointer
+	IsEqual  unsafe.Pointer
+	Retain   unsafe.Pointer
+	Release  unsafe.Pointer
 	Describe unsafe.Pointer
 }
 
@@ -48,17 +48,17 @@ type NSMapEnumerator struct {
 }
 
 type NSMapTableKeyCallBacks struct {
-	Hash unsafe.Pointer
-	IsEqual unsafe.Pointer
-	Retain unsafe.Pointer
-	Release unsafe.Pointer
-	Describe unsafe.Pointer
+	Hash          unsafe.Pointer
+	IsEqual       unsafe.Pointer
+	Retain        unsafe.Pointer
+	Release       unsafe.Pointer
+	Describe      unsafe.Pointer
 	NotAKeyMarker unsafe.Pointer
 }
 
 type NSMapTableValueCallBacks struct {
-	Retain unsafe.Pointer
-	Release unsafe.Pointer
+	Retain   unsafe.Pointer
+	Release  unsafe.Pointer
 	Describe unsafe.Pointer
 }
 
@@ -80,7 +80,7 @@ type NSSwappedFloat struct {
 // C struct: _NSRange
 type NSRange struct {
 	Location uint
-	Length uint
+	Length   uint
 }
 
 // C struct: _NSZone
@@ -109,4 +109,3 @@ type ObjcSelector struct{}
 
 // Id is an opaque pointer to objc_object (C typedef id).
 type Id = *ObjcObject
-

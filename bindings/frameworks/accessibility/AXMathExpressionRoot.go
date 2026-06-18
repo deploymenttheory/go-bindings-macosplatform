@@ -16,10 +16,10 @@ type AXMathExpressionRoot struct {
 }
 
 var (
-	_clsAXMathExpressionRoot = _objcClass("AXMathExpressionRoot")
+	_clsAXMathExpressionRoot                                               = _objcClass("AXMathExpressionRoot")
 	_aXMathExpressionRootSelInitWithRadicandExpressionsRootIndexExpression = objc.RegisterName("initWithRadicandExpressions:rootIndexExpression:")
-	_aXMathExpressionRootSelRadicandExpressions = objc.RegisterName("radicandExpressions")
-	_aXMathExpressionRootSelRootIndexExpression = objc.RegisterName("rootIndexExpression")
+	_aXMathExpressionRootSelRadicandExpressions                            = objc.RegisterName("radicandExpressions")
+	_aXMathExpressionRootSelRootIndexExpression                            = objc.RegisterName("rootIndexExpression")
 )
 
 func AXMathExpressionRootFromID(id objc.ID) *AXMathExpressionRoot {
@@ -34,19 +34,24 @@ func AXMathExpressionRootFromID(id objc.ID) *AXMathExpressionRoot {
 
 func (o *AXMathExpressionRoot) InitWithRadicandExpressionsRootIndexExpression(radicandExpressions *foundation.NSArray[*AXMathExpression], rootIndexExpression *AXMathExpression) *AXMathExpressionRoot {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXMathExpressionRootSelInitWithRadicandExpressionsRootIndexExpression, radicandExpressions.Ptr(), rootIndexExpression.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXMathExpressionRootFromID(_ret)
 }
 
 func (o *AXMathExpressionRoot) RadicandExpressions() *foundation.NSArray[*AXMathExpression] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXMathExpressionRootSelRadicandExpressions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AXMathExpression](_ret)
 }
 
 func (o *AXMathExpressionRoot) RootIndexExpression() *AXMathExpression {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXMathExpressionRootSelRootIndexExpression)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXMathExpressionFromID(_ret)
 }
-

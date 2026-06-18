@@ -124,7 +124,9 @@ func (x *CNNBinaryConvolution) OutputFeatureChannels() uint {
 	return x.inner.OutputFeatureChannels()
 }
 
-func (x *CNNBinaryConvolution) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNKernel }
+func (x *CNNBinaryConvolution) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNKernel
+}
 
 func (x *CNNBinaryConvolution) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
 
@@ -146,4 +148,3 @@ type CNNBinaryConvolutionable interface {
 }
 
 var _ CNNBinaryConvolutionable = (*CNNBinaryConvolution)(nil)
-

@@ -17,22 +17,22 @@ type NSKeyedArchiver struct {
 }
 
 var (
-	_clsNSKeyedArchiver = _objcClass("NSKeyedArchiver")
-	_nSKeyedArchiverSelInitRequiringSecureCoding = objc.RegisterName("initRequiringSecureCoding:")
+	_clsNSKeyedArchiver                                                     = _objcClass("NSKeyedArchiver")
+	_nSKeyedArchiverSelInitRequiringSecureCoding                            = objc.RegisterName("initRequiringSecureCoding:")
 	_nSKeyedArchiverSelArchivedDataWithRootObjectRequiringSecureCodingError = objc.RegisterName("archivedDataWithRootObject:requiringSecureCoding:error:")
-	_nSKeyedArchiverSelInit = objc.RegisterName("init")
-	_nSKeyedArchiverSelInitForWritingWithMutableData = objc.RegisterName("initForWritingWithMutableData:")
-	_nSKeyedArchiverSelArchivedDataWithRootObject = objc.RegisterName("archivedDataWithRootObject:")
-	_nSKeyedArchiverSelArchiveRootObjectToFile = objc.RegisterName("archiveRootObject:toFile:")
-	_nSKeyedArchiverSelFinishEncoding = objc.RegisterName("finishEncoding")
-	_nSKeyedArchiverSelSetClassNameForClass = objc.RegisterName("setClassName:forClass:")
-	_nSKeyedArchiverSelClassNameForClass = objc.RegisterName("classNameForClass:")
-	_nSKeyedArchiverSelDelegate = objc.RegisterName("delegate")
-	_nSKeyedArchiverSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSKeyedArchiverSelOutputFormat = objc.RegisterName("outputFormat")
-	_nSKeyedArchiverSelSetOutputFormat = objc.RegisterName("setOutputFormat:")
-	_nSKeyedArchiverSelEncodedData = objc.RegisterName("encodedData")
-	_nSKeyedArchiverSelSetRequiresSecureCoding = objc.RegisterName("setRequiresSecureCoding:")
+	_nSKeyedArchiverSelInit                                                 = objc.RegisterName("init")
+	_nSKeyedArchiverSelInitForWritingWithMutableData                        = objc.RegisterName("initForWritingWithMutableData:")
+	_nSKeyedArchiverSelArchivedDataWithRootObject                           = objc.RegisterName("archivedDataWithRootObject:")
+	_nSKeyedArchiverSelArchiveRootObjectToFile                              = objc.RegisterName("archiveRootObject:toFile:")
+	_nSKeyedArchiverSelFinishEncoding                                       = objc.RegisterName("finishEncoding")
+	_nSKeyedArchiverSelSetClassNameForClass                                 = objc.RegisterName("setClassName:forClass:")
+	_nSKeyedArchiverSelClassNameForClass                                    = objc.RegisterName("classNameForClass:")
+	_nSKeyedArchiverSelDelegate                                             = objc.RegisterName("delegate")
+	_nSKeyedArchiverSelSetDelegate                                          = objc.RegisterName("setDelegate:")
+	_nSKeyedArchiverSelOutputFormat                                         = objc.RegisterName("outputFormat")
+	_nSKeyedArchiverSelSetOutputFormat                                      = objc.RegisterName("setOutputFormat:")
+	_nSKeyedArchiverSelEncodedData                                          = objc.RegisterName("encodedData")
+	_nSKeyedArchiverSelSetRequiresSecureCoding                              = objc.RegisterName("setRequiresSecureCoding:")
 )
 
 func NSKeyedArchiverFromID(id objc.ID) *NSKeyedArchiver {
@@ -48,7 +48,9 @@ func NSKeyedArchiverFromID(id objc.ID) *NSKeyedArchiver {
 // Initializes the receiver for encoding an archive, optionally disabling secure coding. If \c NSSecureCoding cannot be used, \c requiresSecureCoding may be turned off here; for improved security, however, \c requiresSecureCoding should be left enabled whenever possible. \c requiresSecureCoding ensures that all encoded objects conform to \c NSSecureCoding, preventing the possibility of encoding objects which cannot be decoded later. To produce archives whose structure matches those previously encoded using \c +archivedDataWithRootObject, encode the top-level object in your archive for the \c NSKeyedArchiveRootObjectKey.
 func (o *NSKeyedArchiver) InitRequiringSecureCoding(requiresSecureCoding bool) *NSKeyedArchiver {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSKeyedArchiverSelInitRequiringSecureCoding, requiresSecureCoding)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSKeyedArchiverFromID(_ret)
 }
 
@@ -56,7 +58,9 @@ func (o *NSKeyedArchiver) InitRequiringSecureCoding(requiresSecureCoding bool) *
 func NSKeyedArchiverArchivedDataWithRootObjectRequiringSecureCodingError(object objc.ID, requiresSecureCoding bool) (*NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSKeyedArchiver), _nSKeyedArchiverSelArchivedDataWithRootObjectRequiringSecureCodingError, object, requiresSecureCoding, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -67,21 +71,27 @@ func NSKeyedArchiverArchivedDataWithRootObjectRequiringSecureCodingError(object 
 // Deprecated: Use -initRequiringSecureCoding: instead
 func (o *NSKeyedArchiver) Init() *NSKeyedArchiver {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSKeyedArchiverSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSKeyedArchiverFromID(_ret)
 }
 
 // Deprecated: Use -initRequiringSecureCoding: instead
 func (o *NSKeyedArchiver) InitForWritingWithMutableData(data *NSMutableData) *NSKeyedArchiver {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSKeyedArchiverSelInitForWritingWithMutableData, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSKeyedArchiverFromID(_ret)
 }
 
 // Deprecated: Use +archivedDataWithRootObject:requiringSecureCoding:error: instead
 func NSKeyedArchiverArchivedDataWithRootObject(rootObject objc.ID) *NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSKeyedArchiver), _nSKeyedArchiverSelArchivedDataWithRootObject, rootObject)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
@@ -105,13 +115,17 @@ func (o *NSKeyedArchiver) SetClassNameForClass(codedName *NSString, cls objc.Cla
 
 func NSKeyedArchiverClassNameForClass(cls objc.Class) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSKeyedArchiver), _nSKeyedArchiverSelClassNameForClass, cls)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSKeyedArchiver) ClassNameForClass(cls objc.Class) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSKeyedArchiverSelClassNameForClass, cls)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -137,11 +151,12 @@ func (o *NSKeyedArchiver) SetOutputFormat(outputFormat NSPropertyListFormat) {
 // If encoding has not yet finished, then invoking this property will call finishEncoding and return the data. If you initialized the keyed archiver with a specific mutable data instance, then it will be returned from this property after finishEncoding is called.
 func (o *NSKeyedArchiver) EncodedData() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSKeyedArchiverSelEncodedData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
 func (o *NSKeyedArchiver) SetRequiresSecureCoding(requiresSecureCoding bool) {
 	o.Ptr().Send(_nSKeyedArchiverSelSetRequiresSecureCoding, requiresSecureCoding)
 }
-

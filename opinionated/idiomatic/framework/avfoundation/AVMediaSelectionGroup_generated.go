@@ -92,4 +92,3 @@ type MediaSelectionGroupable interface {
 }
 
 var _ MediaSelectionGroupable = (*MediaSelectionGroup)(nil)
-

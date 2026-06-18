@@ -59,4 +59,3 @@ type NNMultiaryGradientStateable interface {
 }
 
 var _ NNMultiaryGradientStateable = (*NNMultiaryGradientState)(nil)
-

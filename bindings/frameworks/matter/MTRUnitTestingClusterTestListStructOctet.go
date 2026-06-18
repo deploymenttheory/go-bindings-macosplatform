@@ -16,10 +16,10 @@ type MTRUnitTestingClusterTestListStructOctet struct {
 }
 
 var (
-	_clsMTRUnitTestingClusterTestListStructOctet = _objcClass("MTRUnitTestingClusterTestListStructOctet")
-	_mTRUnitTestingClusterTestListStructOctetSelMember1 = objc.RegisterName("member1")
+	_clsMTRUnitTestingClusterTestListStructOctet           = _objcClass("MTRUnitTestingClusterTestListStructOctet")
+	_mTRUnitTestingClusterTestListStructOctetSelMember1    = objc.RegisterName("member1")
 	_mTRUnitTestingClusterTestListStructOctetSelSetMember1 = objc.RegisterName("setMember1:")
-	_mTRUnitTestingClusterTestListStructOctetSelMember2 = objc.RegisterName("member2")
+	_mTRUnitTestingClusterTestListStructOctetSelMember2    = objc.RegisterName("member2")
 	_mTRUnitTestingClusterTestListStructOctetSelSetMember2 = objc.RegisterName("setMember2:")
 )
 
@@ -35,7 +35,9 @@ func MTRUnitTestingClusterTestListStructOctetFromID(id objc.ID) *MTRUnitTestingC
 
 func (o *MTRUnitTestingClusterTestListStructOctet) Member1() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestListStructOctetSelMember1)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRUnitTestingClusterTestListStructOctet) SetMember1(member1 *foundatio
 
 func (o *MTRUnitTestingClusterTestListStructOctet) Member2() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestListStructOctetSelMember2)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *MTRUnitTestingClusterTestListStructOctet) SetMember2(member2 *foundation.NSData) {
 	o.Ptr().Send(_mTRUnitTestingClusterTestListStructOctetSelSetMember2, member2.Ptr())
 }
-

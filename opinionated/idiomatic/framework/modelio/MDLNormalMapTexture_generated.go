@@ -59,4 +59,3 @@ type NormalMapTextureable interface {
 }
 
 var _ NormalMapTextureable = (*NormalMapTexture)(nil)
-

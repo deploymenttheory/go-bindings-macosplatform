@@ -160,11 +160,17 @@ func (x *CNNPoolingL2NormGradient) WithDestinationImageAllocator(destinationImag
 	return x
 }
 
-func (x *CNNPoolingL2NormGradient) asCNNPoolingGradient() *raw.MPSCNNPoolingGradient { return &x.inner.MPSCNNPoolingGradient }
+func (x *CNNPoolingL2NormGradient) asCNNPoolingGradient() *raw.MPSCNNPoolingGradient {
+	return &x.inner.MPSCNNPoolingGradient
+}
 
-func (x *CNNPoolingL2NormGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel { return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel }
+func (x *CNNPoolingL2NormGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel
+}
 
-func (x *CNNPoolingL2NormGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *CNNPoolingL2NormGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
 // CNNPoolingL2NormGradientable is the interface implemented by [CNNPoolingL2NormGradient], for mocking and DI.
 type CNNPoolingL2NormGradientable interface {
@@ -191,4 +197,3 @@ type CNNPoolingL2NormGradientable interface {
 }
 
 var _ CNNPoolingL2NormGradientable = (*CNNPoolingL2NormGradient)(nil)
-

@@ -10,7 +10,7 @@ import (
 type CHHapticEngineFinishedAction int64
 
 const (
-	CHHapticEngineFinishedActionStopEngine CHHapticEngineFinishedAction = 1
+	CHHapticEngineFinishedActionStopEngine         CHHapticEngineFinishedAction = 1
 	CHHapticEngineFinishedActionLeaveEngineRunning CHHapticEngineFinishedAction = 2
 )
 
@@ -28,13 +28,13 @@ func (e CHHapticEngineFinishedAction) String() string {
 type CHHapticEngineStoppedReason int64
 
 const (
-	CHHapticEngineStoppedReasonAudioSessionInterrupt CHHapticEngineStoppedReason = 1
-	CHHapticEngineStoppedReasonApplicationSuspended CHHapticEngineStoppedReason = 2
-	CHHapticEngineStoppedReasonIdleTimeout CHHapticEngineStoppedReason = 3
-	CHHapticEngineStoppedReasonNotifyWhenFinished CHHapticEngineStoppedReason = 4
-	CHHapticEngineStoppedReasonEngineDestroyed CHHapticEngineStoppedReason = 5
+	CHHapticEngineStoppedReasonAudioSessionInterrupt    CHHapticEngineStoppedReason = 1
+	CHHapticEngineStoppedReasonApplicationSuspended     CHHapticEngineStoppedReason = 2
+	CHHapticEngineStoppedReasonIdleTimeout              CHHapticEngineStoppedReason = 3
+	CHHapticEngineStoppedReasonNotifyWhenFinished       CHHapticEngineStoppedReason = 4
+	CHHapticEngineStoppedReasonEngineDestroyed          CHHapticEngineStoppedReason = 5
 	CHHapticEngineStoppedReasonGameControllerDisconnect CHHapticEngineStoppedReason = 6
-	CHHapticEngineStoppedReasonSystemError CHHapticEngineStoppedReason = -1
+	CHHapticEngineStoppedReasonSystemError              CHHapticEngineStoppedReason = -1
 )
 
 func (e CHHapticEngineStoppedReason) String() string {
@@ -61,30 +61,30 @@ func (e CHHapticEngineStoppedReason) String() string {
 type CHHapticErrorCode int64
 
 const (
-	CHHapticErrorCodeEngineNotRunning CHHapticErrorCode = -4805
-	CHHapticErrorCodeOperationNotPermitted CHHapticErrorCode = -4806
-	CHHapticErrorCodeEngineStartTimeout CHHapticErrorCode = -4808
-	CHHapticErrorCodeNotSupported CHHapticErrorCode = -4809
-	CHHapticErrorCodeServerInitFailed CHHapticErrorCode = -4810
-	CHHapticErrorCodeServerInterrupted CHHapticErrorCode = -4811
-	CHHapticErrorCodeInvalidPatternPlayer CHHapticErrorCode = -4812
-	CHHapticErrorCodeInvalidPatternData CHHapticErrorCode = -4813
+	CHHapticErrorCodeEngineNotRunning         CHHapticErrorCode = -4805
+	CHHapticErrorCodeOperationNotPermitted    CHHapticErrorCode = -4806
+	CHHapticErrorCodeEngineStartTimeout       CHHapticErrorCode = -4808
+	CHHapticErrorCodeNotSupported             CHHapticErrorCode = -4809
+	CHHapticErrorCodeServerInitFailed         CHHapticErrorCode = -4810
+	CHHapticErrorCodeServerInterrupted        CHHapticErrorCode = -4811
+	CHHapticErrorCodeInvalidPatternPlayer     CHHapticErrorCode = -4812
+	CHHapticErrorCodeInvalidPatternData       CHHapticErrorCode = -4813
 	CHHapticErrorCodeInvalidPatternDictionary CHHapticErrorCode = -4814
-	CHHapticErrorCodeInvalidAudioSession CHHapticErrorCode = -4815
-	CHHapticErrorCodeInvalidEngineParameter CHHapticErrorCode = -4816
-	CHHapticErrorCodeInvalidParameterType CHHapticErrorCode = -4820
-	CHHapticErrorCodeInvalidEventType CHHapticErrorCode = -4821
-	CHHapticErrorCodeInvalidEventTime CHHapticErrorCode = -4822
-	CHHapticErrorCodeInvalidEventDuration CHHapticErrorCode = -4823
-	CHHapticErrorCodeInvalidAudioResource CHHapticErrorCode = -4824
-	CHHapticErrorCodeResourceNotAvailable CHHapticErrorCode = -4825
-	CHHapticErrorCodeBadEventEntry CHHapticErrorCode = -4830
-	CHHapticErrorCodeBadParameterEntry CHHapticErrorCode = -4831
-	CHHapticErrorCodeInvalidTime CHHapticErrorCode = -4840
-	CHHapticErrorCodeFileNotFound CHHapticErrorCode = -4851
-	CHHapticErrorCodeInsufficientPower CHHapticErrorCode = -4897
-	CHHapticErrorCodeUnknownError CHHapticErrorCode = -4898
-	CHHapticErrorCodeMemoryError CHHapticErrorCode = -4899
+	CHHapticErrorCodeInvalidAudioSession      CHHapticErrorCode = -4815
+	CHHapticErrorCodeInvalidEngineParameter   CHHapticErrorCode = -4816
+	CHHapticErrorCodeInvalidParameterType     CHHapticErrorCode = -4820
+	CHHapticErrorCodeInvalidEventType         CHHapticErrorCode = -4821
+	CHHapticErrorCodeInvalidEventTime         CHHapticErrorCode = -4822
+	CHHapticErrorCodeInvalidEventDuration     CHHapticErrorCode = -4823
+	CHHapticErrorCodeInvalidAudioResource     CHHapticErrorCode = -4824
+	CHHapticErrorCodeResourceNotAvailable     CHHapticErrorCode = -4825
+	CHHapticErrorCodeBadEventEntry            CHHapticErrorCode = -4830
+	CHHapticErrorCodeBadParameterEntry        CHHapticErrorCode = -4831
+	CHHapticErrorCodeInvalidTime              CHHapticErrorCode = -4840
+	CHHapticErrorCodeFileNotFound             CHHapticErrorCode = -4851
+	CHHapticErrorCodeInsufficientPower        CHHapticErrorCode = -4897
+	CHHapticErrorCodeUnknownError             CHHapticErrorCode = -4898
+	CHHapticErrorCodeMemoryError              CHHapticErrorCode = -4899
 )
 
 func (e CHHapticErrorCode) String() string {
@@ -145,8 +145,8 @@ func (e CHHapticErrorCode) String() string {
 type Idtype_t int64
 
 const (
-	P_ALL Idtype_t = 0
-	P_PID Idtype_t = 1
+	P_ALL  Idtype_t = 0
+	P_PID  Idtype_t = 1
 	P_PGID Idtype_t = 2
 )
 
@@ -166,27 +166,27 @@ func (e Idtype_t) String() string {
 type Ptrauth_key int64
 
 const (
-	Ptrauth_key_none Ptrauth_key = -1
-	Ptrauth_key_asia Ptrauth_key = 0
-	Ptrauth_key_asib Ptrauth_key = 1
-	Ptrauth_key_asda Ptrauth_key = 2
-	Ptrauth_key_asdb Ptrauth_key = 3
+	Ptrauth_key_none                     Ptrauth_key = -1
+	Ptrauth_key_asia                     Ptrauth_key = 0
+	Ptrauth_key_asib                     Ptrauth_key = 1
+	Ptrauth_key_asda                     Ptrauth_key = 2
+	Ptrauth_key_asdb                     Ptrauth_key = 3
 	Ptrauth_key_process_independent_code Ptrauth_key = 0
-	Ptrauth_key_process_dependent_code Ptrauth_key = 1
+	Ptrauth_key_process_dependent_code   Ptrauth_key = 1
 	Ptrauth_key_process_independent_data Ptrauth_key = 2
-	Ptrauth_key_process_dependent_data Ptrauth_key = 3
-	Ptrauth_key_return_address Ptrauth_key = 1
-	Ptrauth_key_frame_pointer Ptrauth_key = 3
-	Ptrauth_key_function_pointer Ptrauth_key = 0
-	Ptrauth_key_block_function Ptrauth_key = 0
-	Ptrauth_key_cxx_vtable_pointer Ptrauth_key = 2
-	Ptrauth_key_method_list_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_isa_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_super_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_sel_pointer Ptrauth_key = 3
-	Ptrauth_key_objc_class_ro_pointer Ptrauth_key = 2
+	Ptrauth_key_process_dependent_data   Ptrauth_key = 3
+	Ptrauth_key_return_address           Ptrauth_key = 1
+	Ptrauth_key_frame_pointer            Ptrauth_key = 3
+	Ptrauth_key_function_pointer         Ptrauth_key = 0
+	Ptrauth_key_block_function           Ptrauth_key = 0
+	Ptrauth_key_cxx_vtable_pointer       Ptrauth_key = 2
+	Ptrauth_key_method_list_pointer      Ptrauth_key = 2
+	Ptrauth_key_objc_isa_pointer         Ptrauth_key = 2
+	Ptrauth_key_objc_super_pointer       Ptrauth_key = 2
+	Ptrauth_key_objc_sel_pointer         Ptrauth_key = 3
+	Ptrauth_key_objc_class_ro_pointer    Ptrauth_key = 2
 	Ptrauth_key_block_descriptor_pointer Ptrauth_key = 2
-	Ptrauth_key_init_fini_pointer Ptrauth_key = 0
+	Ptrauth_key_init_fini_pointer        Ptrauth_key = 0
 )
 
 func (e Ptrauth_key) String() string {
@@ -205,4 +205,3 @@ func (e Ptrauth_key) String() string {
 		return fmt.Sprintf("Ptrauth_key(%d)", int64(e))
 	}
 }
-

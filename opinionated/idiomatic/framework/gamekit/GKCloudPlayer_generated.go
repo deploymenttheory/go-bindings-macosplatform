@@ -43,4 +43,3 @@ type CloudPlayerable interface {
 }
 
 var _ CloudPlayerable = (*CloudPlayer)(nil)
-

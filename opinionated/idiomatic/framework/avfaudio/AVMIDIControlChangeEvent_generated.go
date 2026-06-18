@@ -52,9 +52,13 @@ func (x *MIDIControlChangeEvent) Value() uint {
 	return x.inner.Value()
 }
 
-func (x *MIDIControlChangeEvent) asMIDIChannelEvent() *raw.AVMIDIChannelEvent { return &x.inner.AVMIDIChannelEvent }
+func (x *MIDIControlChangeEvent) asMIDIChannelEvent() *raw.AVMIDIChannelEvent {
+	return &x.inner.AVMIDIChannelEvent
+}
 
-func (x *MIDIControlChangeEvent) asMusicEvent() *raw.AVMusicEvent { return &x.inner.AVMIDIChannelEvent.AVMusicEvent }
+func (x *MIDIControlChangeEvent) asMusicEvent() *raw.AVMusicEvent {
+	return &x.inner.AVMIDIChannelEvent.AVMusicEvent
+}
 
 // MIDIControlChangeEventable is the interface implemented by [MIDIControlChangeEvent], for mocking and DI.
 type MIDIControlChangeEventable interface {
@@ -65,4 +69,3 @@ type MIDIControlChangeEventable interface {
 }
 
 var _ MIDIControlChangeEventable = (*MIDIControlChangeEvent)(nil)
-

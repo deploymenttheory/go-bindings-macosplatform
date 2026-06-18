@@ -26,4 +26,3 @@ func CNFetchRequestFromID(id objc.ID) *CNFetchRequest {
 	purego.Track(o)
 	return o
 }
-

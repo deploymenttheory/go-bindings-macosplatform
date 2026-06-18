@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_twainLib uintptr
-	_loadOnce sync.Once
+	_twainLib      uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 

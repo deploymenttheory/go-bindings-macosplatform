@@ -58,4 +58,3 @@ type VSAutoSignInTokenable interface {
 }
 
 var _ VSAutoSignInTokenable = (*VSAutoSignInToken)(nil)
-

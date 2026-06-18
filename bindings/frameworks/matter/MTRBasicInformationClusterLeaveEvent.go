@@ -16,8 +16,8 @@ type MTRBasicInformationClusterLeaveEvent struct {
 }
 
 var (
-	_clsMTRBasicInformationClusterLeaveEvent = _objcClass("MTRBasicInformationClusterLeaveEvent")
-	_mTRBasicInformationClusterLeaveEventSelFabricIndex = objc.RegisterName("fabricIndex")
+	_clsMTRBasicInformationClusterLeaveEvent               = _objcClass("MTRBasicInformationClusterLeaveEvent")
+	_mTRBasicInformationClusterLeaveEventSelFabricIndex    = objc.RegisterName("fabricIndex")
 	_mTRBasicInformationClusterLeaveEventSelSetFabricIndex = objc.RegisterName("setFabricIndex:")
 )
 
@@ -33,11 +33,12 @@ func MTRBasicInformationClusterLeaveEventFromID(id objc.ID) *MTRBasicInformation
 
 func (o *MTRBasicInformationClusterLeaveEvent) FabricIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBasicInformationClusterLeaveEventSelFabricIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRBasicInformationClusterLeaveEvent) SetFabricIndex(fabricIndex *foundation.NSNumber) {
 	o.Ptr().Send(_mTRBasicInformationClusterLeaveEventSelSetFabricIndex, fabricIndex.Ptr())
 }
-

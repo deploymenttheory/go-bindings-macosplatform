@@ -315,9 +315,13 @@ func (x *MTRClusterGeneralCommissioning) CommissioningCompleteWithExpectedValues
 	}
 }
 
-func (x *MTRClusterGeneralCommissioning) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterGeneralCommissioning) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterGeneralCommissioning) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterGeneralCommissioning) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterGeneralCommissioningable is the interface implemented by [MTRClusterGeneralCommissioning], for mocking and DI.
 type MTRClusterGeneralCommissioningable interface {
@@ -345,4 +349,3 @@ type MTRClusterGeneralCommissioningable interface {
 }
 
 var _ MTRClusterGeneralCommissioningable = (*MTRClusterGeneralCommissioning)(nil)
-

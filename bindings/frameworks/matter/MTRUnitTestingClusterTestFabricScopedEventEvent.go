@@ -16,8 +16,8 @@ type MTRUnitTestingClusterTestFabricScopedEventEvent struct {
 }
 
 var (
-	_clsMTRUnitTestingClusterTestFabricScopedEventEvent = _objcClass("MTRUnitTestingClusterTestFabricScopedEventEvent")
-	_mTRUnitTestingClusterTestFabricScopedEventEventSelFabricIndex = objc.RegisterName("fabricIndex")
+	_clsMTRUnitTestingClusterTestFabricScopedEventEvent               = _objcClass("MTRUnitTestingClusterTestFabricScopedEventEvent")
+	_mTRUnitTestingClusterTestFabricScopedEventEventSelFabricIndex    = objc.RegisterName("fabricIndex")
 	_mTRUnitTestingClusterTestFabricScopedEventEventSelSetFabricIndex = objc.RegisterName("setFabricIndex:")
 )
 
@@ -33,11 +33,12 @@ func MTRUnitTestingClusterTestFabricScopedEventEventFromID(id objc.ID) *MTRUnitT
 
 func (o *MTRUnitTestingClusterTestFabricScopedEventEvent) FabricIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestFabricScopedEventEventSelFabricIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRUnitTestingClusterTestFabricScopedEventEvent) SetFabricIndex(fabricIndex *foundation.NSNumber) {
 	o.Ptr().Send(_mTRUnitTestingClusterTestFabricScopedEventEventSelSetFabricIndex, fabricIndex.Ptr())
 }
-

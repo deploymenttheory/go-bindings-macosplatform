@@ -16,14 +16,14 @@ type MTRServerAttribute struct {
 }
 
 var (
-	_clsMTRServerAttribute = _objcClass("MTRServerAttribute")
+	_clsMTRServerAttribute                                                         = _objcClass("MTRServerAttribute")
 	_mTRServerAttributeSelInitReadonlyAttributeWithIDInitialValueRequiredPrivilege = objc.RegisterName("initReadonlyAttributeWithID:initialValue:requiredPrivilege:")
-	_mTRServerAttributeSelSetValue = objc.RegisterName("setValue:")
-	_mTRServerAttributeSelNewFeatureMapAttributeWithInitialValue = objc.RegisterName("newFeatureMapAttributeWithInitialValue:")
-	_mTRServerAttributeSelAttributeID = objc.RegisterName("attributeID")
-	_mTRServerAttributeSelValue = objc.RegisterName("value")
-	_mTRServerAttributeSelRequiredReadPrivilege = objc.RegisterName("requiredReadPrivilege")
-	_mTRServerAttributeSelIsWritable = objc.RegisterName("isWritable")
+	_mTRServerAttributeSelSetValue                                                 = objc.RegisterName("setValue:")
+	_mTRServerAttributeSelNewFeatureMapAttributeWithInitialValue                   = objc.RegisterName("newFeatureMapAttributeWithInitialValue:")
+	_mTRServerAttributeSelAttributeID                                              = objc.RegisterName("attributeID")
+	_mTRServerAttributeSelValue                                                    = objc.RegisterName("value")
+	_mTRServerAttributeSelRequiredReadPrivilege                                    = objc.RegisterName("requiredReadPrivilege")
+	_mTRServerAttributeSelIsWritable                                               = objc.RegisterName("isWritable")
 )
 
 func MTRServerAttributeFromID(id objc.ID) *MTRServerAttribute {
@@ -39,7 +39,9 @@ func MTRServerAttributeFromID(id objc.ID) *MTRServerAttribute {
 // Initialize as a readonly attribute.  The value is a data-value as documented in MTRBaseDevice.h. Will fail if the attribute ID is not valid per the Matter specification or the attribute value is not a valid data-value. requiredPrivilege is the privilege required to read the attribute. This initializer may fail if the provided attributeID is a global attribute and the provided requiredPrivilege value is not correct for that attribute ID.
 func (o *MTRServerAttribute) InitReadonlyAttributeWithIDInitialValueRequiredPrivilege(attributeID *foundation.NSNumber, value *foundation.NSDictionary[*foundation.NSString, objc.ID], requiredPrivilege MTRAccessControlEntryPrivilege) *MTRServerAttribute {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRServerAttributeSelInitReadonlyAttributeWithIDInitialValueRequiredPrivilege, attributeID.Ptr(), value, requiredPrivilege)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRServerAttributeFromID(_ret)
 }
 
@@ -57,7 +59,9 @@ func MTRServerAttributeNewFeatureMapAttributeWithInitialValue(value *foundation.
 
 func (o *MTRServerAttribute) AttributeID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRServerAttributeSelAttributeID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -76,4 +80,3 @@ func (o *MTRServerAttribute) IsWritable() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mTRServerAttributeSelIsWritable)
 	return _ret
 }
-

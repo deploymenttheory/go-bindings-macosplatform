@@ -76,4 +76,3 @@ type AssetResourceManagerable interface {
 }
 
 var _ AssetResourceManagerable = (*AssetResourceManager)(nil)
-

@@ -16,7 +16,9 @@ type CollectionLayoutBoundarySupplementaryItem struct {
 }
 
 // Unwrap returns the underlying [raw.NSCollectionLayoutBoundarySupplementaryItem].
-func (x *CollectionLayoutBoundarySupplementaryItem) Unwrap() *raw.NSCollectionLayoutBoundarySupplementaryItem { return x.inner }
+func (x *CollectionLayoutBoundarySupplementaryItem) Unwrap() *raw.NSCollectionLayoutBoundarySupplementaryItem {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -96,9 +98,13 @@ func (x *CollectionLayoutBoundarySupplementaryItem) Offset() corefoundation.CGPo
 	return x.inner.Offset()
 }
 
-func (x *CollectionLayoutBoundarySupplementaryItem) asCollectionLayoutSupplementaryItem() *raw.NSCollectionLayoutSupplementaryItem { return &x.inner.NSCollectionLayoutSupplementaryItem }
+func (x *CollectionLayoutBoundarySupplementaryItem) asCollectionLayoutSupplementaryItem() *raw.NSCollectionLayoutSupplementaryItem {
+	return &x.inner.NSCollectionLayoutSupplementaryItem
+}
 
-func (x *CollectionLayoutBoundarySupplementaryItem) asCollectionLayoutItem() *raw.NSCollectionLayoutItem { return &x.inner.NSCollectionLayoutSupplementaryItem.NSCollectionLayoutItem }
+func (x *CollectionLayoutBoundarySupplementaryItem) asCollectionLayoutItem() *raw.NSCollectionLayoutItem {
+	return &x.inner.NSCollectionLayoutSupplementaryItem.NSCollectionLayoutItem
+}
 
 // CollectionLayoutBoundarySupplementaryItemable is the interface implemented by [CollectionLayoutBoundarySupplementaryItem], for mocking and DI.
 type CollectionLayoutBoundarySupplementaryItemable interface {
@@ -117,4 +123,3 @@ type CollectionLayoutBoundarySupplementaryItemable interface {
 }
 
 var _ CollectionLayoutBoundarySupplementaryItemable = (*CollectionLayoutBoundarySupplementaryItem)(nil)
-

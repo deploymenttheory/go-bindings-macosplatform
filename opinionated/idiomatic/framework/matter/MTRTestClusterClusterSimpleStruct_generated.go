@@ -16,7 +16,9 @@ type MTRTestClusterClusterSimpleStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRTestClusterClusterSimpleStruct].
-func (x *MTRTestClusterClusterSimpleStruct) Unwrap() *raw.MTRTestClusterClusterSimpleStruct { return x.inner }
+func (x *MTRTestClusterClusterSimpleStruct) Unwrap() *raw.MTRTestClusterClusterSimpleStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -84,7 +86,9 @@ func (x *MTRTestClusterClusterSimpleStruct) WithH(h *foundation.NSNumber) *MTRTe
 	return x
 }
 
-func (x *MTRTestClusterClusterSimpleStruct) asMTRUnitTestingClusterSimpleStruct() *raw.MTRUnitTestingClusterSimpleStruct { return &x.inner.MTRUnitTestingClusterSimpleStruct }
+func (x *MTRTestClusterClusterSimpleStruct) asMTRUnitTestingClusterSimpleStruct() *raw.MTRUnitTestingClusterSimpleStruct {
+	return &x.inner.MTRUnitTestingClusterSimpleStruct
+}
 
 // MTRTestClusterClusterSimpleStructable is the interface implemented by [MTRTestClusterClusterSimpleStruct], for mocking and DI.
 type MTRTestClusterClusterSimpleStructable interface {
@@ -100,4 +104,3 @@ type MTRTestClusterClusterSimpleStructable interface {
 }
 
 var _ MTRTestClusterClusterSimpleStructable = (*MTRTestClusterClusterSimpleStruct)(nil)
-

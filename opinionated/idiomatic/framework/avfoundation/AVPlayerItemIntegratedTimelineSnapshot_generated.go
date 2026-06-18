@@ -18,7 +18,9 @@ type PlayerItemIntegratedTimelineSnapshot struct {
 }
 
 // Unwrap returns the underlying [raw.AVPlayerItemIntegratedTimelineSnapshot].
-func (x *PlayerItemIntegratedTimelineSnapshot) Unwrap() *raw.AVPlayerItemIntegratedTimelineSnapshot { return x.inner }
+func (x *PlayerItemIntegratedTimelineSnapshot) Unwrap() *raw.AVPlayerItemIntegratedTimelineSnapshot {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -90,4 +92,3 @@ type PlayerItemIntegratedTimelineSnapshotable interface {
 }
 
 var _ PlayerItemIntegratedTimelineSnapshotable = (*PlayerItemIntegratedTimelineSnapshot)(nil)
-

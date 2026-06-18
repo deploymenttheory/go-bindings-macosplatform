@@ -16,7 +16,9 @@ type MTRTestClusterClusterTestFabricScopedEventEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRTestClusterClusterTestFabricScopedEventEvent].
-func (x *MTRTestClusterClusterTestFabricScopedEventEvent) Unwrap() *raw.MTRTestClusterClusterTestFabricScopedEventEvent { return x.inner }
+func (x *MTRTestClusterClusterTestFabricScopedEventEvent) Unwrap() *raw.MTRTestClusterClusterTestFabricScopedEventEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -42,7 +44,9 @@ func (x *MTRTestClusterClusterTestFabricScopedEventEvent) WithFabricIndex(fabric
 	return x
 }
 
-func (x *MTRTestClusterClusterTestFabricScopedEventEvent) asMTRUnitTestingClusterTestFabricScopedEventEvent() *raw.MTRUnitTestingClusterTestFabricScopedEventEvent { return &x.inner.MTRUnitTestingClusterTestFabricScopedEventEvent }
+func (x *MTRTestClusterClusterTestFabricScopedEventEvent) asMTRUnitTestingClusterTestFabricScopedEventEvent() *raw.MTRUnitTestingClusterTestFabricScopedEventEvent {
+	return &x.inner.MTRUnitTestingClusterTestFabricScopedEventEvent
+}
 
 // MTRTestClusterClusterTestFabricScopedEventEventable is the interface implemented by [MTRTestClusterClusterTestFabricScopedEventEvent], for mocking and DI.
 type MTRTestClusterClusterTestFabricScopedEventEventable interface {
@@ -51,4 +55,3 @@ type MTRTestClusterClusterTestFabricScopedEventEventable interface {
 }
 
 var _ MTRTestClusterClusterTestFabricScopedEventEventable = (*MTRTestClusterClusterTestFabricScopedEventEvent)(nil)
-

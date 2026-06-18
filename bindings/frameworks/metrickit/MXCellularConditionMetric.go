@@ -15,7 +15,7 @@ type MXCellularConditionMetric struct {
 }
 
 var (
-	_clsMXCellularConditionMetric = _objcClass("MXCellularConditionMetric")
+	_clsMXCellularConditionMetric                                  = _objcClass("MXCellularConditionMetric")
 	_mXCellularConditionMetricSelHistogrammedCellularConditionTime = objc.RegisterName("histogrammedCellularConditionTime")
 )
 
@@ -31,7 +31,8 @@ func MXCellularConditionMetricFromID(id objc.ID) *MXCellularConditionMetric {
 
 func (o *MXCellularConditionMetric) HistogrammedCellularConditionTime() *MXHistogram[*MXUnitSignalBars] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXCellularConditionMetricSelHistogrammedCellularConditionTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MXHistogramFromID[*MXUnitSignalBars](_ret)
 }
-

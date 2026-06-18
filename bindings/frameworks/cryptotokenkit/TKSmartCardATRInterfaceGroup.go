@@ -16,10 +16,10 @@ type TKSmartCardATRInterfaceGroup struct {
 }
 
 var (
-	_clsTKSmartCardATRInterfaceGroup = _objcClass("TKSmartCardATRInterfaceGroup")
-	_tKSmartCardATRInterfaceGroupSelTA = objc.RegisterName("TA")
-	_tKSmartCardATRInterfaceGroupSelTB = objc.RegisterName("TB")
-	_tKSmartCardATRInterfaceGroupSelTC = objc.RegisterName("TC")
+	_clsTKSmartCardATRInterfaceGroup         = _objcClass("TKSmartCardATRInterfaceGroup")
+	_tKSmartCardATRInterfaceGroupSelTA       = objc.RegisterName("TA")
+	_tKSmartCardATRInterfaceGroupSelTB       = objc.RegisterName("TB")
+	_tKSmartCardATRInterfaceGroupSelTC       = objc.RegisterName("TC")
 	_tKSmartCardATRInterfaceGroupSelProtocol = objc.RegisterName("protocol")
 )
 
@@ -36,28 +36,35 @@ func TKSmartCardATRInterfaceGroupFromID(id objc.ID) *TKSmartCardATRInterfaceGrou
 // TA interface byte of ATR group, or nil if TA is not present.
 func (o *TKSmartCardATRInterfaceGroup) TA() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardATRInterfaceGroupSelTA)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // TB interface byte of ATR group, or nil if TB is not present.
 func (o *TKSmartCardATRInterfaceGroup) TB() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardATRInterfaceGroupSelTB)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // TC interface byte of ATR group, or nil if TC is not present.
 func (o *TKSmartCardATRInterfaceGroup) TC() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardATRInterfaceGroupSelTC)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // Protocol number for this group.  First group (global) has protocol unassigned, contains nil.
 func (o *TKSmartCardATRInterfaceGroup) Protocol() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardATRInterfaceGroupSelProtocol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
-

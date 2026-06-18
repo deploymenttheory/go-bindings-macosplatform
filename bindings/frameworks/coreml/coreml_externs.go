@@ -14,35 +14,45 @@ import (
 // Key for VNImageCropAndScaleOption describing how to crop and scale the image (or region of interest) to the desired size
 func MLFeatureValueImageOptionCropAndScale() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coremlLib, "MLFeatureValueImageOptionCropAndScale")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Key for CGRect describing a crop region of interest of image source in normalized coordinates
 func MLFeatureValueImageOptionCropRect() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coremlLib, "MLFeatureValueImageOptionCropRect")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // The author of this model
 func MLModelAuthorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coremlLib, "MLModelAuthorKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Any additional pertinent information specified by the model creator
 func MLModelCreatorDefinedKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coremlLib, "MLModelCreatorDefinedKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A short description of what the model does and/or its purpose
 func MLModelDescriptionKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coremlLib, "MLModelDescriptionKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -54,14 +64,17 @@ func MLModelErrorDomain() uintptr {
 // License information for the model
 func MLModelLicenseKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coremlLib, "MLModelLicenseKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A version number encoded as a string
 func MLModelVersionStringKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coremlLib, "MLModelVersionStringKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
-

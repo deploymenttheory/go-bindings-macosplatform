@@ -103,4 +103,3 @@ type DecisionTreeable interface {
 }
 
 var _ DecisionTreeable = (*DecisionTree)(nil)
-

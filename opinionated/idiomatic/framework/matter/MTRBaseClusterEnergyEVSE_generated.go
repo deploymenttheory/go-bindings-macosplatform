@@ -1104,9 +1104,13 @@ func (x *MTRBaseClusterEnergyEVSE) SubscribeAttributeClusterRevisionWithParamsSu
 	}
 }
 
-func (x *MTRBaseClusterEnergyEVSE) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterEnergyEVSE) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterEnergyEVSE) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterEnergyEVSE) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterEnergyEVSEable is the interface implemented by [MTRBaseClusterEnergyEVSE], for mocking and DI.
 type MTRBaseClusterEnergyEVSEable interface {
@@ -1174,4 +1178,3 @@ type MTRBaseClusterEnergyEVSEable interface {
 }
 
 var _ MTRBaseClusterEnergyEVSEable = (*MTRBaseClusterEnergyEVSE)(nil)
-

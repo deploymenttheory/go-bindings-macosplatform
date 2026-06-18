@@ -18,17 +18,17 @@ type MTRClusterMessages struct {
 }
 
 var (
-	_clsMTRClusterMessages = _objcClass("MTRClusterMessages")
+	_clsMTRClusterMessages                                                                              = _objcClass("MTRClusterMessages")
 	_mTRClusterMessagesSelPresentMessagesRequestWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("presentMessagesRequestWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterMessagesSelCancelMessagesRequestWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("cancelMessagesRequestWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterMessagesSelReadAttributeMessagesWithParams = objc.RegisterName("readAttributeMessagesWithParams:")
-	_mTRClusterMessagesSelReadAttributeActiveMessageIDsWithParams = objc.RegisterName("readAttributeActiveMessageIDsWithParams:")
-	_mTRClusterMessagesSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterMessagesSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterMessagesSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterMessagesSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterMessagesSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterMessagesSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterMessagesSelCancelMessagesRequestWithParamsExpectedValuesExpectedValueIntervalCompletion  = objc.RegisterName("cancelMessagesRequestWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterMessagesSelReadAttributeMessagesWithParams                                               = objc.RegisterName("readAttributeMessagesWithParams:")
+	_mTRClusterMessagesSelReadAttributeActiveMessageIDsWithParams                                       = objc.RegisterName("readAttributeActiveMessageIDsWithParams:")
+	_mTRClusterMessagesSelReadAttributeGeneratedCommandListWithParams                                   = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterMessagesSelReadAttributeAcceptedCommandListWithParams                                    = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterMessagesSelReadAttributeAttributeListWithParams                                          = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterMessagesSelReadAttributeFeatureMapWithParams                                             = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterMessagesSelReadAttributeClusterRevisionWithParams                                        = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterMessagesSelInitWithDeviceEndpointIDQueue                                                 = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterMessagesFromID(id objc.ID) *MTRClusterMessages {
@@ -101,7 +101,8 @@ func (o *MTRClusterMessages) ReadAttributeClusterRevisionWithParams(params *MTRR
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterMessages) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterMessages {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterMessagesSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterMessagesFromID(_ret)
 }
-

@@ -41,4 +41,3 @@ type PickerFilterable interface {
 }
 
 var _ PickerFilterable = (*PickerFilter)(nil)
-

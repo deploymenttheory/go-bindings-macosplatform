@@ -16,11 +16,11 @@ type INGetReservationDetailsIntentResponse struct {
 }
 
 var (
-	_clsINGetReservationDetailsIntentResponse = _objcClass("INGetReservationDetailsIntentResponse")
+	_clsINGetReservationDetailsIntentResponse                         = _objcClass("INGetReservationDetailsIntentResponse")
 	_iNGetReservationDetailsIntentResponseSelInitWithCodeUserActivity = objc.RegisterName("initWithCode:userActivity:")
-	_iNGetReservationDetailsIntentResponseSelCode = objc.RegisterName("code")
-	_iNGetReservationDetailsIntentResponseSelReservations = objc.RegisterName("reservations")
-	_iNGetReservationDetailsIntentResponseSelSetReservations = objc.RegisterName("setReservations:")
+	_iNGetReservationDetailsIntentResponseSelCode                     = objc.RegisterName("code")
+	_iNGetReservationDetailsIntentResponseSelReservations             = objc.RegisterName("reservations")
+	_iNGetReservationDetailsIntentResponseSelSetReservations          = objc.RegisterName("setReservations:")
 )
 
 func INGetReservationDetailsIntentResponseFromID(id objc.ID) *INGetReservationDetailsIntentResponse {
@@ -35,7 +35,9 @@ func INGetReservationDetailsIntentResponseFromID(id objc.ID) *INGetReservationDe
 
 func (o *INGetReservationDetailsIntentResponse) InitWithCodeUserActivity(code INGetReservationDetailsIntentResponseCode, userActivity *foundation.NSUserActivity) *INGetReservationDetailsIntentResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNGetReservationDetailsIntentResponseSelInitWithCodeUserActivity, code, userActivity.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INGetReservationDetailsIntentResponseFromID(_ret)
 }
 
@@ -46,11 +48,12 @@ func (o *INGetReservationDetailsIntentResponse) Code() INGetReservationDetailsIn
 
 func (o *INGetReservationDetailsIntentResponse) Reservations() *foundation.NSArray[*INReservation] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNGetReservationDetailsIntentResponseSelReservations)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*INReservation](_ret)
 }
 
 func (o *INGetReservationDetailsIntentResponse) SetReservations(reservations *foundation.NSArray[*INReservation]) {
 	o.Ptr().Send(_iNGetReservationDetailsIntentResponseSelSetReservations, reservations.Ptr())
 }
-

@@ -18,10 +18,10 @@ type AVAudioRoutingArbiter struct {
 }
 
 var (
-	_clsAVAudioRoutingArbiter = _objcClass("AVAudioRoutingArbiter")
+	_clsAVAudioRoutingArbiter                                              = _objcClass("AVAudioRoutingArbiter")
 	_aVAudioRoutingArbiterSelBeginArbitrationWithCategoryCompletionHandler = objc.RegisterName("beginArbitrationWithCategory:completionHandler:")
-	_aVAudioRoutingArbiterSelLeaveArbitration = objc.RegisterName("leaveArbitration")
-	_aVAudioRoutingArbiterSelSharedRoutingArbiter = objc.RegisterName("sharedRoutingArbiter")
+	_aVAudioRoutingArbiterSelLeaveArbitration                              = objc.RegisterName("leaveArbitration")
+	_aVAudioRoutingArbiterSelSharedRoutingArbiter                          = objc.RegisterName("sharedRoutingArbiter")
 )
 
 func AVAudioRoutingArbiterFromID(id objc.ID) *AVAudioRoutingArbiter {
@@ -54,7 +54,8 @@ func (o *AVAudioRoutingArbiter) LeaveArbitration() {
 // @property sharedRoutingArbiter @abstract Returns the singleton AVAudioRoutingArbiter instance.
 func AVAudioRoutingArbiterSharedRoutingArbiter() *AVAudioRoutingArbiter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAudioRoutingArbiter), _aVAudioRoutingArbiterSelSharedRoutingArbiter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioRoutingArbiterFromID(_ret)
 }
-

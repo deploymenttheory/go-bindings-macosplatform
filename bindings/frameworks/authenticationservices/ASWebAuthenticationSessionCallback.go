@@ -16,10 +16,10 @@ type ASWebAuthenticationSessionCallback struct {
 }
 
 var (
-	_clsASWebAuthenticationSessionCallback = _objcClass("ASWebAuthenticationSessionCallback")
-	_aSWebAuthenticationSessionCallbackSelCallbackWithCustomScheme = objc.RegisterName("callbackWithCustomScheme:")
+	_clsASWebAuthenticationSessionCallback                          = _objcClass("ASWebAuthenticationSessionCallback")
+	_aSWebAuthenticationSessionCallbackSelCallbackWithCustomScheme  = objc.RegisterName("callbackWithCustomScheme:")
 	_aSWebAuthenticationSessionCallbackSelCallbackWithHTTPSHostPath = objc.RegisterName("callbackWithHTTPSHost:path:")
-	_aSWebAuthenticationSessionCallbackSelMatchesURL = objc.RegisterName("matchesURL:")
+	_aSWebAuthenticationSessionCallbackSelMatchesURL                = objc.RegisterName("matchesURL:")
 )
 
 func ASWebAuthenticationSessionCallbackFromID(id objc.ID) *ASWebAuthenticationSessionCallback {
@@ -35,14 +35,18 @@ func ASWebAuthenticationSessionCallbackFromID(id objc.ID) *ASWebAuthenticationSe
 // Creates a callback object that matches against URLs with the given custom scheme. @param customScheme The custom scheme that the app expects in the callback URL.
 func ASWebAuthenticationSessionCallbackCallbackWithCustomScheme(customScheme *foundation.NSString) *ASWebAuthenticationSessionCallback {
 	_ret := objc.Send[objc.ID](objc.ID(_clsASWebAuthenticationSessionCallback), _aSWebAuthenticationSessionCallbackSelCallbackWithCustomScheme, customScheme.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASWebAuthenticationSessionCallbackFromID(_ret)
 }
 
 // Creates a callback object that matches against HTTPS URLs with the given host and path. @param host The host that the app expects in the callback URL. The host must be associated with the app using associated web credentials domains. @param path The path that the app expects in the callback URL.
 func ASWebAuthenticationSessionCallbackCallbackWithHTTPSHostPath(host *foundation.NSString, path *foundation.NSString) *ASWebAuthenticationSessionCallback {
 	_ret := objc.Send[objc.ID](objc.ID(_clsASWebAuthenticationSessionCallback), _aSWebAuthenticationSessionCallbackSelCallbackWithHTTPSHostPath, host.Ptr(), path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASWebAuthenticationSessionCallbackFromID(_ret)
 }
 
@@ -51,4 +55,3 @@ func (o *ASWebAuthenticationSessionCallback) MatchesURL(url *foundation.NSURL) b
 	_ret := objc.Send[bool](o.Ptr(), _aSWebAuthenticationSessionCallbackSelMatchesURL, url.Ptr())
 	return _ret
 }
-

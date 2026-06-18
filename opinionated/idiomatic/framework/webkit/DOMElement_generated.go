@@ -497,7 +497,9 @@ func (x *DOMElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMNode }
 
 func (x *DOMElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMNode.DOMObject }
 
-func (x *DOMElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMNode.DOMObject.WebScriptObject }
+func (x *DOMElement) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMNode.DOMObject.WebScriptObject
+}
 
 // DOMElementable is the interface implemented by [DOMElement], for mocking and DI.
 type DOMElementable interface {
@@ -574,4 +576,3 @@ type DOMElementable interface {
 }
 
 var _ DOMElementable = (*DOMElement)(nil)
-

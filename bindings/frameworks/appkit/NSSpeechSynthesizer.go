@@ -18,33 +18,33 @@ type NSSpeechSynthesizer struct {
 }
 
 var (
-	_clsNSSpeechSynthesizer = _objcClass("NSSpeechSynthesizer")
-	_nSSpeechSynthesizerSelInitWithVoice = objc.RegisterName("initWithVoice:")
-	_nSSpeechSynthesizerSelStartSpeakingString = objc.RegisterName("startSpeakingString:")
-	_nSSpeechSynthesizerSelStartSpeakingStringToURL = objc.RegisterName("startSpeakingString:toURL:")
-	_nSSpeechSynthesizerSelStopSpeaking = objc.RegisterName("stopSpeaking")
-	_nSSpeechSynthesizerSelStopSpeakingAtBoundary = objc.RegisterName("stopSpeakingAtBoundary:")
-	_nSSpeechSynthesizerSelPauseSpeakingAtBoundary = objc.RegisterName("pauseSpeakingAtBoundary:")
-	_nSSpeechSynthesizerSelContinueSpeaking = objc.RegisterName("continueSpeaking")
-	_nSSpeechSynthesizerSelVoice = objc.RegisterName("voice")
-	_nSSpeechSynthesizerSelSetVoice = objc.RegisterName("setVoice:")
-	_nSSpeechSynthesizerSelAddSpeechDictionary = objc.RegisterName("addSpeechDictionary:")
-	_nSSpeechSynthesizerSelPhonemesFromText = objc.RegisterName("phonemesFromText:")
-	_nSSpeechSynthesizerSelObjectForPropertyError = objc.RegisterName("objectForProperty:error:")
+	_clsNSSpeechSynthesizer                          = _objcClass("NSSpeechSynthesizer")
+	_nSSpeechSynthesizerSelInitWithVoice             = objc.RegisterName("initWithVoice:")
+	_nSSpeechSynthesizerSelStartSpeakingString       = objc.RegisterName("startSpeakingString:")
+	_nSSpeechSynthesizerSelStartSpeakingStringToURL  = objc.RegisterName("startSpeakingString:toURL:")
+	_nSSpeechSynthesizerSelStopSpeaking              = objc.RegisterName("stopSpeaking")
+	_nSSpeechSynthesizerSelStopSpeakingAtBoundary    = objc.RegisterName("stopSpeakingAtBoundary:")
+	_nSSpeechSynthesizerSelPauseSpeakingAtBoundary   = objc.RegisterName("pauseSpeakingAtBoundary:")
+	_nSSpeechSynthesizerSelContinueSpeaking          = objc.RegisterName("continueSpeaking")
+	_nSSpeechSynthesizerSelVoice                     = objc.RegisterName("voice")
+	_nSSpeechSynthesizerSelSetVoice                  = objc.RegisterName("setVoice:")
+	_nSSpeechSynthesizerSelAddSpeechDictionary       = objc.RegisterName("addSpeechDictionary:")
+	_nSSpeechSynthesizerSelPhonemesFromText          = objc.RegisterName("phonemesFromText:")
+	_nSSpeechSynthesizerSelObjectForPropertyError    = objc.RegisterName("objectForProperty:error:")
 	_nSSpeechSynthesizerSelSetObjectForPropertyError = objc.RegisterName("setObject:forProperty:error:")
-	_nSSpeechSynthesizerSelAttributesForVoice = objc.RegisterName("attributesForVoice:")
-	_nSSpeechSynthesizerSelIsSpeaking = objc.RegisterName("isSpeaking")
-	_nSSpeechSynthesizerSelDelegate = objc.RegisterName("delegate")
-	_nSSpeechSynthesizerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSSpeechSynthesizerSelRate = objc.RegisterName("rate")
-	_nSSpeechSynthesizerSelSetRate = objc.RegisterName("setRate:")
-	_nSSpeechSynthesizerSelVolume = objc.RegisterName("volume")
-	_nSSpeechSynthesizerSelSetVolume = objc.RegisterName("setVolume:")
-	_nSSpeechSynthesizerSelUsesFeedbackWindow = objc.RegisterName("usesFeedbackWindow")
-	_nSSpeechSynthesizerSelSetUsesFeedbackWindow = objc.RegisterName("setUsesFeedbackWindow:")
-	_nSSpeechSynthesizerSelIsAnyApplicationSpeaking = objc.RegisterName("isAnyApplicationSpeaking")
-	_nSSpeechSynthesizerSelDefaultVoice = objc.RegisterName("defaultVoice")
-	_nSSpeechSynthesizerSelAvailableVoices = objc.RegisterName("availableVoices")
+	_nSSpeechSynthesizerSelAttributesForVoice        = objc.RegisterName("attributesForVoice:")
+	_nSSpeechSynthesizerSelIsSpeaking                = objc.RegisterName("isSpeaking")
+	_nSSpeechSynthesizerSelDelegate                  = objc.RegisterName("delegate")
+	_nSSpeechSynthesizerSelSetDelegate               = objc.RegisterName("setDelegate:")
+	_nSSpeechSynthesizerSelRate                      = objc.RegisterName("rate")
+	_nSSpeechSynthesizerSelSetRate                   = objc.RegisterName("setRate:")
+	_nSSpeechSynthesizerSelVolume                    = objc.RegisterName("volume")
+	_nSSpeechSynthesizerSelSetVolume                 = objc.RegisterName("setVolume:")
+	_nSSpeechSynthesizerSelUsesFeedbackWindow        = objc.RegisterName("usesFeedbackWindow")
+	_nSSpeechSynthesizerSelSetUsesFeedbackWindow     = objc.RegisterName("setUsesFeedbackWindow:")
+	_nSSpeechSynthesizerSelIsAnyApplicationSpeaking  = objc.RegisterName("isAnyApplicationSpeaking")
+	_nSSpeechSynthesizerSelDefaultVoice              = objc.RegisterName("defaultVoice")
+	_nSSpeechSynthesizerSelAvailableVoices           = objc.RegisterName("availableVoices")
 )
 
 func NSSpeechSynthesizerFromID(id objc.ID) *NSSpeechSynthesizer {
@@ -59,7 +59,9 @@ func NSSpeechSynthesizerFromID(id objc.ID) *NSSpeechSynthesizer {
 
 func (o *NSSpeechSynthesizer) InitWithVoice(voice *foundation.NSString) *NSSpeechSynthesizer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSpeechSynthesizerSelInitWithVoice, voice.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSpeechSynthesizerFromID(_ret)
 }
 
@@ -91,7 +93,9 @@ func (o *NSSpeechSynthesizer) ContinueSpeaking() {
 
 func (o *NSSpeechSynthesizer) Voice() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSpeechSynthesizerSelVoice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -106,7 +110,9 @@ func (o *NSSpeechSynthesizer) AddSpeechDictionary(speechDictionary *foundation.N
 
 func (o *NSSpeechSynthesizer) PhonemesFromText(text *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSpeechSynthesizerSelPhonemesFromText, text.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -181,7 +187,9 @@ func NSSpeechSynthesizerIsAnyApplicationSpeaking() bool {
 
 func NSSpeechSynthesizerDefaultVoice() *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSpeechSynthesizer), _nSSpeechSynthesizerSelDefaultVoice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -189,4 +197,3 @@ func NSSpeechSynthesizerAvailableVoices() *foundation.NSArray[*foundation.NSStri
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsNSSpeechSynthesizer), _nSSpeechSynthesizerSelAvailableVoices)
 	return _ret
 }
-

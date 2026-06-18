@@ -128,4 +128,3 @@ type MIDIPlayerable interface {
 }
 
 var _ MIDIPlayerable = (*MIDIPlayer)(nil)
-

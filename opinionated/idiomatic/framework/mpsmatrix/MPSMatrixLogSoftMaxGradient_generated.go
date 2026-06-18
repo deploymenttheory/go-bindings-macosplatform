@@ -78,9 +78,13 @@ func (x *MatrixLogSoftMaxGradient) WithBatchSize(batchSize uint) *MatrixLogSoftM
 	return x
 }
 
-func (x *MatrixLogSoftMaxGradient) asMatrixSoftMaxGradient() *raw.MPSMatrixSoftMaxGradient { return &x.inner.MPSMatrixSoftMaxGradient }
+func (x *MatrixLogSoftMaxGradient) asMatrixSoftMaxGradient() *raw.MPSMatrixSoftMaxGradient {
+	return &x.inner.MPSMatrixSoftMaxGradient
+}
 
-func (x *MatrixLogSoftMaxGradient) asMatrixBinaryKernel() *raw.MPSMatrixBinaryKernel { return &x.inner.MPSMatrixSoftMaxGradient.MPSMatrixBinaryKernel }
+func (x *MatrixLogSoftMaxGradient) asMatrixBinaryKernel() *raw.MPSMatrixBinaryKernel {
+	return &x.inner.MPSMatrixSoftMaxGradient.MPSMatrixBinaryKernel
+}
 
 // MatrixLogSoftMaxGradientable is the interface implemented by [MatrixLogSoftMaxGradient], for mocking and DI.
 type MatrixLogSoftMaxGradientable interface {
@@ -95,4 +99,3 @@ type MatrixLogSoftMaxGradientable interface {
 }
 
 var _ MatrixLogSoftMaxGradientable = (*MatrixLogSoftMaxGradient)(nil)
-

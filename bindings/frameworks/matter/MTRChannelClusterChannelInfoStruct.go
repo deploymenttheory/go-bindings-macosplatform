@@ -16,21 +16,21 @@ type MTRChannelClusterChannelInfoStruct struct {
 }
 
 var (
-	_clsMTRChannelClusterChannelInfoStruct = _objcClass("MTRChannelClusterChannelInfoStruct")
-	_mTRChannelClusterChannelInfoStructSelMajorNumber = objc.RegisterName("majorNumber")
-	_mTRChannelClusterChannelInfoStructSelSetMajorNumber = objc.RegisterName("setMajorNumber:")
-	_mTRChannelClusterChannelInfoStructSelMinorNumber = objc.RegisterName("minorNumber")
-	_mTRChannelClusterChannelInfoStructSelSetMinorNumber = objc.RegisterName("setMinorNumber:")
-	_mTRChannelClusterChannelInfoStructSelName = objc.RegisterName("name")
-	_mTRChannelClusterChannelInfoStructSelSetName = objc.RegisterName("setName:")
-	_mTRChannelClusterChannelInfoStructSelCallSign = objc.RegisterName("callSign")
-	_mTRChannelClusterChannelInfoStructSelSetCallSign = objc.RegisterName("setCallSign:")
-	_mTRChannelClusterChannelInfoStructSelAffiliateCallSign = objc.RegisterName("affiliateCallSign")
+	_clsMTRChannelClusterChannelInfoStruct                     = _objcClass("MTRChannelClusterChannelInfoStruct")
+	_mTRChannelClusterChannelInfoStructSelMajorNumber          = objc.RegisterName("majorNumber")
+	_mTRChannelClusterChannelInfoStructSelSetMajorNumber       = objc.RegisterName("setMajorNumber:")
+	_mTRChannelClusterChannelInfoStructSelMinorNumber          = objc.RegisterName("minorNumber")
+	_mTRChannelClusterChannelInfoStructSelSetMinorNumber       = objc.RegisterName("setMinorNumber:")
+	_mTRChannelClusterChannelInfoStructSelName                 = objc.RegisterName("name")
+	_mTRChannelClusterChannelInfoStructSelSetName              = objc.RegisterName("setName:")
+	_mTRChannelClusterChannelInfoStructSelCallSign             = objc.RegisterName("callSign")
+	_mTRChannelClusterChannelInfoStructSelSetCallSign          = objc.RegisterName("setCallSign:")
+	_mTRChannelClusterChannelInfoStructSelAffiliateCallSign    = objc.RegisterName("affiliateCallSign")
 	_mTRChannelClusterChannelInfoStructSelSetAffiliateCallSign = objc.RegisterName("setAffiliateCallSign:")
-	_mTRChannelClusterChannelInfoStructSelIdentifier = objc.RegisterName("identifier")
-	_mTRChannelClusterChannelInfoStructSelSetIdentifier = objc.RegisterName("setIdentifier:")
-	_mTRChannelClusterChannelInfoStructSelType = objc.RegisterName("type")
-	_mTRChannelClusterChannelInfoStructSelSetType = objc.RegisterName("setType:")
+	_mTRChannelClusterChannelInfoStructSelIdentifier           = objc.RegisterName("identifier")
+	_mTRChannelClusterChannelInfoStructSelSetIdentifier        = objc.RegisterName("setIdentifier:")
+	_mTRChannelClusterChannelInfoStructSelType                 = objc.RegisterName("type")
+	_mTRChannelClusterChannelInfoStructSelSetType              = objc.RegisterName("setType:")
 )
 
 func MTRChannelClusterChannelInfoStructFromID(id objc.ID) *MTRChannelClusterChannelInfoStruct {
@@ -45,7 +45,9 @@ func MTRChannelClusterChannelInfoStructFromID(id objc.ID) *MTRChannelClusterChan
 
 func (o *MTRChannelClusterChannelInfoStruct) MajorNumber() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterChannelInfoStructSelMajorNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -55,7 +57,9 @@ func (o *MTRChannelClusterChannelInfoStruct) SetMajorNumber(majorNumber *foundat
 
 func (o *MTRChannelClusterChannelInfoStruct) MinorNumber() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterChannelInfoStructSelMinorNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -65,7 +69,9 @@ func (o *MTRChannelClusterChannelInfoStruct) SetMinorNumber(minorNumber *foundat
 
 func (o *MTRChannelClusterChannelInfoStruct) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterChannelInfoStructSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -75,7 +81,9 @@ func (o *MTRChannelClusterChannelInfoStruct) SetName(name *foundation.NSString) 
 
 func (o *MTRChannelClusterChannelInfoStruct) CallSign() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterChannelInfoStructSelCallSign)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -85,7 +93,9 @@ func (o *MTRChannelClusterChannelInfoStruct) SetCallSign(callSign *foundation.NS
 
 func (o *MTRChannelClusterChannelInfoStruct) AffiliateCallSign() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterChannelInfoStructSelAffiliateCallSign)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -95,7 +105,9 @@ func (o *MTRChannelClusterChannelInfoStruct) SetAffiliateCallSign(affiliateCallS
 
 func (o *MTRChannelClusterChannelInfoStruct) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterChannelInfoStructSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -105,11 +117,12 @@ func (o *MTRChannelClusterChannelInfoStruct) SetIdentifier(identifier *foundatio
 
 func (o *MTRChannelClusterChannelInfoStruct) Type() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterChannelInfoStructSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRChannelClusterChannelInfoStruct) SetType(type_ *foundation.NSNumber) {
 	o.Ptr().Send(_mTRChannelClusterChannelInfoStructSelSetType, type_.Ptr())
 }
-

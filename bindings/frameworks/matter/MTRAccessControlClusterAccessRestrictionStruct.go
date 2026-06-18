@@ -16,11 +16,11 @@ type MTRAccessControlClusterAccessRestrictionStruct struct {
 }
 
 var (
-	_clsMTRAccessControlClusterAccessRestrictionStruct = _objcClass("MTRAccessControlClusterAccessRestrictionStruct")
-	_mTRAccessControlClusterAccessRestrictionStructSelType = objc.RegisterName("type")
+	_clsMTRAccessControlClusterAccessRestrictionStruct        = _objcClass("MTRAccessControlClusterAccessRestrictionStruct")
+	_mTRAccessControlClusterAccessRestrictionStructSelType    = objc.RegisterName("type")
 	_mTRAccessControlClusterAccessRestrictionStructSelSetType = objc.RegisterName("setType:")
-	_mTRAccessControlClusterAccessRestrictionStructSelId = objc.RegisterName("id")
-	_mTRAccessControlClusterAccessRestrictionStructSelSetId = objc.RegisterName("setId:")
+	_mTRAccessControlClusterAccessRestrictionStructSelId      = objc.RegisterName("id")
+	_mTRAccessControlClusterAccessRestrictionStructSelSetId   = objc.RegisterName("setId:")
 )
 
 func MTRAccessControlClusterAccessRestrictionStructFromID(id objc.ID) *MTRAccessControlClusterAccessRestrictionStruct {
@@ -35,7 +35,9 @@ func MTRAccessControlClusterAccessRestrictionStructFromID(id objc.ID) *MTRAccess
 
 func (o *MTRAccessControlClusterAccessRestrictionStruct) Type() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAccessControlClusterAccessRestrictionStructSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRAccessControlClusterAccessRestrictionStruct) SetType(type_ *foundati
 
 func (o *MTRAccessControlClusterAccessRestrictionStruct) Id() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAccessControlClusterAccessRestrictionStructSelId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRAccessControlClusterAccessRestrictionStruct) SetId(id_ *foundation.NSNumber) {
 	o.Ptr().Send(_mTRAccessControlClusterAccessRestrictionStructSelSetId, id_.Ptr())
 }
-

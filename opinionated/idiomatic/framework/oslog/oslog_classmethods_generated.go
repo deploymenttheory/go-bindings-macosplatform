@@ -44,4 +44,3 @@ func StoreWithURLError(url string) (*LogStore, error) {
 	}
 	return &LogStore{inner: _r}, nil
 }
-

@@ -21,7 +21,9 @@ var _ unsafe.Pointer // suppress unused import
 func AAByteStreamWrite(s *AAByteStream, buf unsafe.Pointer, nbyte uint64) int64 {
 	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
-	if s != nil { _objcPtr_s = s.Ptr() }
+	if s != nil {
+		_objcPtr_s = s.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int64(C.applearchive_fn_AAByteStreamWrite(_objcPtr_s, buf, C.uint64_t(nbyte), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -34,7 +36,9 @@ func AAByteStreamWrite(s *AAByteStream, buf unsafe.Pointer, nbyte uint64) int64 
 func AAByteStreamPWrite(s *AAByteStream, buf unsafe.Pointer, nbyte uint64, offset int64) int64 {
 	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
-	if s != nil { _objcPtr_s = s.Ptr() }
+	if s != nil {
+		_objcPtr_s = s.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int64(C.applearchive_fn_AAByteStreamPWrite(_objcPtr_s, buf, C.uint64_t(nbyte), C.int64_t(offset), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -47,7 +51,9 @@ func AAByteStreamPWrite(s *AAByteStream, buf unsafe.Pointer, nbyte uint64, offse
 func AAByteStreamRead(s *AAByteStream, buf unsafe.Pointer, nbyte uint64) int64 {
 	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
-	if s != nil { _objcPtr_s = s.Ptr() }
+	if s != nil {
+		_objcPtr_s = s.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int64(C.applearchive_fn_AAByteStreamRead(_objcPtr_s, buf, C.uint64_t(nbyte), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -60,7 +66,9 @@ func AAByteStreamRead(s *AAByteStream, buf unsafe.Pointer, nbyte uint64) int64 {
 func AAByteStreamPRead(s *AAByteStream, buf unsafe.Pointer, nbyte uint64, offset int64) int64 {
 	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
-	if s != nil { _objcPtr_s = s.Ptr() }
+	if s != nil {
+		_objcPtr_s = s.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int64(C.applearchive_fn_AAByteStreamPRead(_objcPtr_s, buf, C.uint64_t(nbyte), C.int64_t(offset), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -73,7 +81,9 @@ func AAByteStreamPRead(s *AAByteStream, buf unsafe.Pointer, nbyte uint64, offset
 func AAByteStreamSeek(s *AAByteStream, offset int64, whence int32) int64 {
 	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
-	if s != nil { _objcPtr_s = s.Ptr() }
+	if s != nil {
+		_objcPtr_s = s.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int64(C.applearchive_fn_AAByteStreamSeek(_objcPtr_s, C.int64_t(offset), C.int32_t(whence), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -86,7 +96,9 @@ func AAByteStreamSeek(s *AAByteStream, offset int64, whence int32) int64 {
 func AAByteStreamCancel(s *AAByteStream) {
 	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
-	if s != nil { _objcPtr_s = s.Ptr() }
+	if s != nil {
+		_objcPtr_s = s.Ptr()
+	}
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AAByteStreamCancel(_objcPtr_s, &_exc)
 	cgo.RaiseIfException(_exc)
@@ -98,7 +110,9 @@ func AAByteStreamCancel(s *AAByteStream) {
 func AAByteStreamClose(s *AAByteStream) int32 {
 	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
-	if s != nil { _objcPtr_s = s.Ptr() }
+	if s != nil {
+		_objcPtr_s = s.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAByteStreamClose(_objcPtr_s, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -154,9 +168,13 @@ func AAByteStreamProcess(istream *AAByteStream, ostream *AAByteStream) int64 {
 	defer cgo.KeepAlive(istream)
 	defer cgo.KeepAlive(ostream)
 	var _objcPtr_istream unsafe.Pointer
-	if istream != nil { _objcPtr_istream = istream.Ptr() }
+	if istream != nil {
+		_objcPtr_istream = istream.Ptr()
+	}
 	var _objcPtr_ostream unsafe.Pointer
-	if ostream != nil { _objcPtr_ostream = ostream.Ptr() }
+	if ostream != nil {
+		_objcPtr_ostream = ostream.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int64(C.applearchive_fn_AAByteStreamProcess(_objcPtr_istream, _objcPtr_ostream, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -179,7 +197,9 @@ func AACustomByteStreamOpen() *AAByteStream {
 func AACustomByteStreamSetData(s *AAByteStream, data unsafe.Pointer) {
 	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
-	if s != nil { _objcPtr_s = s.Ptr() }
+	if s != nil {
+		_objcPtr_s = s.Ptr()
+	}
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AACustomByteStreamSetData(_objcPtr_s, data, &_exc)
 	cgo.RaiseIfException(_exc)
@@ -191,7 +211,9 @@ func AACustomByteStreamSetData(s *AAByteStream, data unsafe.Pointer) {
 func AACustomByteStreamSetCloseProc(s *AAByteStream, proc unsafe.Pointer) {
 	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
-	if s != nil { _objcPtr_s = s.Ptr() }
+	if s != nil {
+		_objcPtr_s = s.Ptr()
+	}
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AACustomByteStreamSetCloseProc(_objcPtr_s, proc, &_exc)
 	cgo.RaiseIfException(_exc)
@@ -203,7 +225,9 @@ func AACustomByteStreamSetCloseProc(s *AAByteStream, proc unsafe.Pointer) {
 func AACustomByteStreamSetReadProc(s *AAByteStream, proc unsafe.Pointer) {
 	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
-	if s != nil { _objcPtr_s = s.Ptr() }
+	if s != nil {
+		_objcPtr_s = s.Ptr()
+	}
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AACustomByteStreamSetReadProc(_objcPtr_s, proc, &_exc)
 	cgo.RaiseIfException(_exc)
@@ -215,7 +239,9 @@ func AACustomByteStreamSetReadProc(s *AAByteStream, proc unsafe.Pointer) {
 func AACustomByteStreamSetPReadProc(s *AAByteStream, proc unsafe.Pointer) {
 	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
-	if s != nil { _objcPtr_s = s.Ptr() }
+	if s != nil {
+		_objcPtr_s = s.Ptr()
+	}
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AACustomByteStreamSetPReadProc(_objcPtr_s, proc, &_exc)
 	cgo.RaiseIfException(_exc)
@@ -227,7 +253,9 @@ func AACustomByteStreamSetPReadProc(s *AAByteStream, proc unsafe.Pointer) {
 func AACustomByteStreamSetWriteProc(s *AAByteStream, proc unsafe.Pointer) {
 	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
-	if s != nil { _objcPtr_s = s.Ptr() }
+	if s != nil {
+		_objcPtr_s = s.Ptr()
+	}
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AACustomByteStreamSetWriteProc(_objcPtr_s, proc, &_exc)
 	cgo.RaiseIfException(_exc)
@@ -239,7 +267,9 @@ func AACustomByteStreamSetWriteProc(s *AAByteStream, proc unsafe.Pointer) {
 func AACustomByteStreamSetPWriteProc(s *AAByteStream, proc unsafe.Pointer) {
 	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
-	if s != nil { _objcPtr_s = s.Ptr() }
+	if s != nil {
+		_objcPtr_s = s.Ptr()
+	}
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AACustomByteStreamSetPWriteProc(_objcPtr_s, proc, &_exc)
 	cgo.RaiseIfException(_exc)
@@ -251,7 +281,9 @@ func AACustomByteStreamSetPWriteProc(s *AAByteStream, proc unsafe.Pointer) {
 func AACustomByteStreamSetSeekProc(s *AAByteStream, proc unsafe.Pointer) {
 	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
-	if s != nil { _objcPtr_s = s.Ptr() }
+	if s != nil {
+		_objcPtr_s = s.Ptr()
+	}
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AACustomByteStreamSetSeekProc(_objcPtr_s, proc, &_exc)
 	cgo.RaiseIfException(_exc)
@@ -263,7 +295,9 @@ func AACustomByteStreamSetSeekProc(s *AAByteStream, proc unsafe.Pointer) {
 func AACustomByteStreamSetCancelProc(s *AAByteStream, proc unsafe.Pointer) {
 	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
-	if s != nil { _objcPtr_s = s.Ptr() }
+	if s != nil {
+		_objcPtr_s = s.Ptr()
+	}
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AACustomByteStreamSetCancelProc(_objcPtr_s, proc, &_exc)
 	cgo.RaiseIfException(_exc)
@@ -297,7 +331,9 @@ func AAFieldKeySetCreateWithString(s string) *AAFieldKeySet {
 func AAFieldKeySetClone(key_set *AAFieldKeySet) *AAFieldKeySet {
 	defer cgo.KeepAlive(key_set)
 	var _objcPtr_key_set unsafe.Pointer
-	if key_set != nil { _objcPtr_key_set = key_set.Ptr() }
+	if key_set != nil {
+		_objcPtr_key_set = key_set.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_ptr := unsafe.Pointer(C.applearchive_fn_AAFieldKeySetClone(_objcPtr_key_set, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -310,7 +346,9 @@ func AAFieldKeySetClone(key_set *AAFieldKeySet) *AAFieldKeySet {
 func AAFieldKeySetDestroy(key_set *AAFieldKeySet) {
 	defer cgo.KeepAlive(key_set)
 	var _objcPtr_key_set unsafe.Pointer
-	if key_set != nil { _objcPtr_key_set = key_set.Ptr() }
+	if key_set != nil {
+		_objcPtr_key_set = key_set.Ptr()
+	}
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AAFieldKeySetDestroy(_objcPtr_key_set, &_exc)
 	cgo.RaiseIfException(_exc)
@@ -322,7 +360,9 @@ func AAFieldKeySetDestroy(key_set *AAFieldKeySet) {
 func AAFieldKeySetClear(key_set *AAFieldKeySet) int32 {
 	defer cgo.KeepAlive(key_set)
 	var _objcPtr_key_set unsafe.Pointer
-	if key_set != nil { _objcPtr_key_set = key_set.Ptr() }
+	if key_set != nil {
+		_objcPtr_key_set = key_set.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAFieldKeySetClear(_objcPtr_key_set, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -336,9 +376,13 @@ func AAFieldKeySetInsertKeySet(key_set *AAFieldKeySet, s *AAFieldKeySet) int32 {
 	defer cgo.KeepAlive(key_set)
 	defer cgo.KeepAlive(s)
 	var _objcPtr_key_set unsafe.Pointer
-	if key_set != nil { _objcPtr_key_set = key_set.Ptr() }
+	if key_set != nil {
+		_objcPtr_key_set = key_set.Ptr()
+	}
 	var _objcPtr_s unsafe.Pointer
-	if s != nil { _objcPtr_s = s.Ptr() }
+	if s != nil {
+		_objcPtr_s = s.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAFieldKeySetInsertKeySet(_objcPtr_key_set, _objcPtr_s, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -352,9 +396,13 @@ func AAFieldKeySetRemoveKeySet(key_set *AAFieldKeySet, s *AAFieldKeySet) int32 {
 	defer cgo.KeepAlive(key_set)
 	defer cgo.KeepAlive(s)
 	var _objcPtr_key_set unsafe.Pointer
-	if key_set != nil { _objcPtr_key_set = key_set.Ptr() }
+	if key_set != nil {
+		_objcPtr_key_set = key_set.Ptr()
+	}
 	var _objcPtr_s unsafe.Pointer
-	if s != nil { _objcPtr_s = s.Ptr() }
+	if s != nil {
+		_objcPtr_s = s.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAFieldKeySetRemoveKeySet(_objcPtr_key_set, _objcPtr_s, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -368,9 +416,13 @@ func AAFieldKeySetSelectKeySet(key_set *AAFieldKeySet, s *AAFieldKeySet) int32 {
 	defer cgo.KeepAlive(key_set)
 	defer cgo.KeepAlive(s)
 	var _objcPtr_key_set unsafe.Pointer
-	if key_set != nil { _objcPtr_key_set = key_set.Ptr() }
+	if key_set != nil {
+		_objcPtr_key_set = key_set.Ptr()
+	}
 	var _objcPtr_s unsafe.Pointer
-	if s != nil { _objcPtr_s = s.Ptr() }
+	if s != nil {
+		_objcPtr_s = s.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAFieldKeySetSelectKeySet(_objcPtr_key_set, _objcPtr_s, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -383,7 +435,9 @@ func AAFieldKeySetSelectKeySet(key_set *AAFieldKeySet, s *AAFieldKeySet) int32 {
 func AAFieldKeySetGetKeyCount(key_set *AAFieldKeySet) uint32 {
 	defer cgo.KeepAlive(key_set)
 	var _objcPtr_key_set unsafe.Pointer
-	if key_set != nil { _objcPtr_key_set = key_set.Ptr() }
+	if key_set != nil {
+		_objcPtr_key_set = key_set.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := uint32(C.applearchive_fn_AAFieldKeySetGetKeyCount(_objcPtr_key_set, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -396,7 +450,9 @@ func AAFieldKeySetGetKeyCount(key_set *AAFieldKeySet) uint32 {
 func AAFieldKeySetSerialize(key_set *AAFieldKeySet, capacity uint64, s string) int32 {
 	defer cgo.KeepAlive(key_set)
 	var _objcPtr_key_set unsafe.Pointer
-	if key_set != nil { _objcPtr_key_set = key_set.Ptr() }
+	if key_set != nil {
+		_objcPtr_key_set = key_set.Ptr()
+	}
 	_cstr_s := C.CString(s)
 	defer C.free(unsafe.Pointer(_cstr_s))
 	var _exc unsafe.Pointer
@@ -421,7 +477,9 @@ func AAHeaderCreate() *AAHeader {
 func AAHeaderDestroy(header *AAHeader) {
 	defer cgo.KeepAlive(header)
 	var _objcPtr_header unsafe.Pointer
-	if header != nil { _objcPtr_header = header.Ptr() }
+	if header != nil {
+		_objcPtr_header = header.Ptr()
+	}
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AAHeaderDestroy(_objcPtr_header, &_exc)
 	cgo.RaiseIfException(_exc)
@@ -442,7 +500,9 @@ func AAHeaderCreateWithEncodedData(data_size uint64, data *uint8) *AAHeader {
 func AAHeaderClone(header *AAHeader) *AAHeader {
 	defer cgo.KeepAlive(header)
 	var _objcPtr_header unsafe.Pointer
-	if header != nil { _objcPtr_header = header.Ptr() }
+	if header != nil {
+		_objcPtr_header = header.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_ptr := unsafe.Pointer(C.applearchive_fn_AAHeaderClone(_objcPtr_header, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -456,9 +516,13 @@ func AAHeaderAssign(header *AAHeader, from_header *AAHeader) int32 {
 	defer cgo.KeepAlive(header)
 	defer cgo.KeepAlive(from_header)
 	var _objcPtr_header unsafe.Pointer
-	if header != nil { _objcPtr_header = header.Ptr() }
+	if header != nil {
+		_objcPtr_header = header.Ptr()
+	}
 	var _objcPtr_from_header unsafe.Pointer
-	if from_header != nil { _objcPtr_from_header = from_header.Ptr() }
+	if from_header != nil {
+		_objcPtr_from_header = from_header.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAHeaderAssign(_objcPtr_header, _objcPtr_from_header, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -471,7 +535,9 @@ func AAHeaderAssign(header *AAHeader, from_header *AAHeader) int32 {
 func AAHeaderGetFieldCount(header *AAHeader) uint32 {
 	defer cgo.KeepAlive(header)
 	var _objcPtr_header unsafe.Pointer
-	if header != nil { _objcPtr_header = header.Ptr() }
+	if header != nil {
+		_objcPtr_header = header.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := uint32(C.applearchive_fn_AAHeaderGetFieldCount(_objcPtr_header, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -484,7 +550,9 @@ func AAHeaderGetFieldCount(header *AAHeader) uint32 {
 func AAHeaderGetFieldType(header *AAHeader, i uint32) int32 {
 	defer cgo.KeepAlive(header)
 	var _objcPtr_header unsafe.Pointer
-	if header != nil { _objcPtr_header = header.Ptr() }
+	if header != nil {
+		_objcPtr_header = header.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAHeaderGetFieldType(_objcPtr_header, C.uint32_t(i), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -497,7 +565,9 @@ func AAHeaderGetFieldType(header *AAHeader, i uint32) int32 {
 func AAHeaderGetPayloadSize(header *AAHeader) uint64 {
 	defer cgo.KeepAlive(header)
 	var _objcPtr_header unsafe.Pointer
-	if header != nil { _objcPtr_header = header.Ptr() }
+	if header != nil {
+		_objcPtr_header = header.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := uint64(C.applearchive_fn_AAHeaderGetPayloadSize(_objcPtr_header, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -510,7 +580,9 @@ func AAHeaderGetPayloadSize(header *AAHeader) uint64 {
 func AAHeaderRemoveField(header *AAHeader, i uint32) int32 {
 	defer cgo.KeepAlive(header)
 	var _objcPtr_header unsafe.Pointer
-	if header != nil { _objcPtr_header = header.Ptr() }
+	if header != nil {
+		_objcPtr_header = header.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAHeaderRemoveField(_objcPtr_header, C.uint32_t(i), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -523,7 +595,9 @@ func AAHeaderRemoveField(header *AAHeader, i uint32) int32 {
 func AAHeaderClear(header *AAHeader) int32 {
 	defer cgo.KeepAlive(header)
 	var _objcPtr_header unsafe.Pointer
-	if header != nil { _objcPtr_header = header.Ptr() }
+	if header != nil {
+		_objcPtr_header = header.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAHeaderClear(_objcPtr_header, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -536,7 +610,9 @@ func AAHeaderClear(header *AAHeader) int32 {
 func AAHeaderGetFieldUInt(header *AAHeader, i uint32, value *uint64) int32 {
 	defer cgo.KeepAlive(header)
 	var _objcPtr_header unsafe.Pointer
-	if header != nil { _objcPtr_header = header.Ptr() }
+	if header != nil {
+		_objcPtr_header = header.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAHeaderGetFieldUInt(_objcPtr_header, C.uint32_t(i), unsafe.Pointer(value), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -549,7 +625,9 @@ func AAHeaderGetFieldUInt(header *AAHeader, i uint32, value *uint64) int32 {
 func AAHeaderGetFieldString(header *AAHeader, i uint32, capacity uint64, value string, length *uint64) int32 {
 	defer cgo.KeepAlive(header)
 	var _objcPtr_header unsafe.Pointer
-	if header != nil { _objcPtr_header = header.Ptr() }
+	if header != nil {
+		_objcPtr_header = header.Ptr()
+	}
 	_cstr_value := C.CString(value)
 	defer C.free(unsafe.Pointer(_cstr_value))
 	var _exc unsafe.Pointer
@@ -564,7 +642,9 @@ func AAHeaderGetFieldString(header *AAHeader, i uint32, capacity uint64, value s
 func AAHeaderGetFieldHash(header *AAHeader, i uint32, capacity uint64, hash_function *uint32, value *uint8) int32 {
 	defer cgo.KeepAlive(header)
 	var _objcPtr_header unsafe.Pointer
-	if header != nil { _objcPtr_header = header.Ptr() }
+	if header != nil {
+		_objcPtr_header = header.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAHeaderGetFieldHash(_objcPtr_header, C.uint32_t(i), C.uint64_t(capacity), unsafe.Pointer(hash_function), unsafe.Pointer(value), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -577,7 +657,9 @@ func AAHeaderGetFieldHash(header *AAHeader, i uint32, capacity uint64, hash_func
 func AAHeaderGetFieldTimespec(header *AAHeader, i uint32, value *bsd.Timespec) int32 {
 	defer cgo.KeepAlive(header)
 	var _objcPtr_header unsafe.Pointer
-	if header != nil { _objcPtr_header = header.Ptr() }
+	if header != nil {
+		_objcPtr_header = header.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAHeaderGetFieldTimespec(_objcPtr_header, C.uint32_t(i), unsafe.Pointer(value), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -590,7 +672,9 @@ func AAHeaderGetFieldTimespec(header *AAHeader, i uint32, value *bsd.Timespec) i
 func AAHeaderGetFieldBlob(header *AAHeader, i uint32, size *uint64, offset *uint64) int32 {
 	defer cgo.KeepAlive(header)
 	var _objcPtr_header unsafe.Pointer
-	if header != nil { _objcPtr_header = header.Ptr() }
+	if header != nil {
+		_objcPtr_header = header.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAHeaderGetFieldBlob(_objcPtr_header, C.uint32_t(i), unsafe.Pointer(size), unsafe.Pointer(offset), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -603,7 +687,9 @@ func AAHeaderGetFieldBlob(header *AAHeader, i uint32, size *uint64, offset *uint
 func AAHeaderGetEncodedSize(header *AAHeader) uint64 {
 	defer cgo.KeepAlive(header)
 	var _objcPtr_header unsafe.Pointer
-	if header != nil { _objcPtr_header = header.Ptr() }
+	if header != nil {
+		_objcPtr_header = header.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := uint64(C.applearchive_fn_AAHeaderGetEncodedSize(_objcPtr_header, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -616,7 +702,9 @@ func AAHeaderGetEncodedSize(header *AAHeader) uint64 {
 func AAHeaderGetEncodedData(header *AAHeader) unsafe.Pointer {
 	defer cgo.KeepAlive(header)
 	var _objcPtr_header unsafe.Pointer
-	if header != nil { _objcPtr_header = header.Ptr() }
+	if header != nil {
+		_objcPtr_header = header.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.applearchive_fn_AAHeaderGetEncodedData(_objcPtr_header, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -639,7 +727,9 @@ func AAEntryACLBlobCreate() *AAEntryACLBlob {
 func AAEntryACLBlobDestroy(acl *AAEntryACLBlob) {
 	defer cgo.KeepAlive(acl)
 	var _objcPtr_acl unsafe.Pointer
-	if acl != nil { _objcPtr_acl = acl.Ptr() }
+	if acl != nil {
+		_objcPtr_acl = acl.Ptr()
+	}
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AAEntryACLBlobDestroy(_objcPtr_acl, &_exc)
 	cgo.RaiseIfException(_exc)
@@ -661,7 +751,9 @@ func AAEntryACLBlobCreateWithEncodedData(data *uint8, data_size uint64) *AAEntry
 func AAEntryACLBlobGetEntryCount(acl *AAEntryACLBlob) uint32 {
 	defer cgo.KeepAlive(acl)
 	var _objcPtr_acl unsafe.Pointer
-	if acl != nil { _objcPtr_acl = acl.Ptr() }
+	if acl != nil {
+		_objcPtr_acl = acl.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := uint32(C.applearchive_fn_AAEntryACLBlobGetEntryCount(_objcPtr_acl, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -674,7 +766,9 @@ func AAEntryACLBlobGetEntryCount(acl *AAEntryACLBlob) uint32 {
 func AAEntryACLBlobGetEntry(acl *AAEntryACLBlob, i uint32, ace *AAAccessControlEntry, qualifier_capacity uint64, qualifier_value *uint8, qualifier_size *uint64) int32 {
 	defer cgo.KeepAlive(acl)
 	var _objcPtr_acl unsafe.Pointer
-	if acl != nil { _objcPtr_acl = acl.Ptr() }
+	if acl != nil {
+		_objcPtr_acl = acl.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAEntryACLBlobGetEntry(_objcPtr_acl, C.uint32_t(i), unsafe.Pointer(ace), C.uint64_t(qualifier_capacity), unsafe.Pointer(qualifier_value), unsafe.Pointer(qualifier_size), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -687,7 +781,9 @@ func AAEntryACLBlobGetEntry(acl *AAEntryACLBlob, i uint32, ace *AAAccessControlE
 func AAEntryACLBlobAppendEntry(acl *AAEntryACLBlob, ace *AAAccessControlEntry, qualifier_value *uint8, qualifier_size uint64) int32 {
 	defer cgo.KeepAlive(acl)
 	var _objcPtr_acl unsafe.Pointer
-	if acl != nil { _objcPtr_acl = acl.Ptr() }
+	if acl != nil {
+		_objcPtr_acl = acl.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAEntryACLBlobAppendEntry(_objcPtr_acl, unsafe.Pointer(ace), unsafe.Pointer(qualifier_value), C.uint64_t(qualifier_size), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -700,7 +796,9 @@ func AAEntryACLBlobAppendEntry(acl *AAEntryACLBlob, ace *AAAccessControlEntry, q
 func AAEntryACLBlobSetEntry(acl *AAEntryACLBlob, i uint32, ace *AAAccessControlEntry, qualifier_value *uint8, qualifier_size uint64) int32 {
 	defer cgo.KeepAlive(acl)
 	var _objcPtr_acl unsafe.Pointer
-	if acl != nil { _objcPtr_acl = acl.Ptr() }
+	if acl != nil {
+		_objcPtr_acl = acl.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAEntryACLBlobSetEntry(_objcPtr_acl, C.uint32_t(i), unsafe.Pointer(ace), unsafe.Pointer(qualifier_value), C.uint64_t(qualifier_size), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -713,7 +811,9 @@ func AAEntryACLBlobSetEntry(acl *AAEntryACLBlob, i uint32, ace *AAAccessControlE
 func AAEntryACLBlobClear(acl *AAEntryACLBlob) int32 {
 	defer cgo.KeepAlive(acl)
 	var _objcPtr_acl unsafe.Pointer
-	if acl != nil { _objcPtr_acl = acl.Ptr() }
+	if acl != nil {
+		_objcPtr_acl = acl.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAEntryACLBlobClear(_objcPtr_acl, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -726,7 +826,9 @@ func AAEntryACLBlobClear(acl *AAEntryACLBlob) int32 {
 func AAEntryACLBlobRemoveEntry(acl *AAEntryACLBlob, i uint32) int32 {
 	defer cgo.KeepAlive(acl)
 	var _objcPtr_acl unsafe.Pointer
-	if acl != nil { _objcPtr_acl = acl.Ptr() }
+	if acl != nil {
+		_objcPtr_acl = acl.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAEntryACLBlobRemoveEntry(_objcPtr_acl, C.uint32_t(i), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -739,7 +841,9 @@ func AAEntryACLBlobRemoveEntry(acl *AAEntryACLBlob, i uint32) int32 {
 func AAEntryACLBlobGetEncodedSize(acl *AAEntryACLBlob) uint64 {
 	defer cgo.KeepAlive(acl)
 	var _objcPtr_acl unsafe.Pointer
-	if acl != nil { _objcPtr_acl = acl.Ptr() }
+	if acl != nil {
+		_objcPtr_acl = acl.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := uint64(C.applearchive_fn_AAEntryACLBlobGetEncodedSize(_objcPtr_acl, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -752,7 +856,9 @@ func AAEntryACLBlobGetEncodedSize(acl *AAEntryACLBlob) uint64 {
 func AAEntryACLBlobGetEncodedData(acl *AAEntryACLBlob) unsafe.Pointer {
 	defer cgo.KeepAlive(acl)
 	var _objcPtr_acl unsafe.Pointer
-	if acl != nil { _objcPtr_acl = acl.Ptr() }
+	if acl != nil {
+		_objcPtr_acl = acl.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.applearchive_fn_AAEntryACLBlobGetEncodedData(_objcPtr_acl, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -775,7 +881,9 @@ func AAEntryXATBlobCreate() *AAEntryXATBlob {
 func AAEntryXATBlobDestroy(xat *AAEntryXATBlob) {
 	defer cgo.KeepAlive(xat)
 	var _objcPtr_xat unsafe.Pointer
-	if xat != nil { _objcPtr_xat = xat.Ptr() }
+	if xat != nil {
+		_objcPtr_xat = xat.Ptr()
+	}
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AAEntryXATBlobDestroy(_objcPtr_xat, &_exc)
 	cgo.RaiseIfException(_exc)
@@ -797,7 +905,9 @@ func AAEntryXATBlobCreateWithEncodedData(data *uint8, data_size uint64) *AAEntry
 func AAEntryXATBlobGetEntryCount(xat *AAEntryXATBlob) uint32 {
 	defer cgo.KeepAlive(xat)
 	var _objcPtr_xat unsafe.Pointer
-	if xat != nil { _objcPtr_xat = xat.Ptr() }
+	if xat != nil {
+		_objcPtr_xat = xat.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := uint32(C.applearchive_fn_AAEntryXATBlobGetEntryCount(_objcPtr_xat, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -810,7 +920,9 @@ func AAEntryXATBlobGetEntryCount(xat *AAEntryXATBlob) uint32 {
 func AAEntryXATBlobGetEntry(xat *AAEntryXATBlob, i uint32, key_capacity uint64, key string, key_length *uint64, data_capacity uint64, data *uint8, data_size *uint64) int32 {
 	defer cgo.KeepAlive(xat)
 	var _objcPtr_xat unsafe.Pointer
-	if xat != nil { _objcPtr_xat = xat.Ptr() }
+	if xat != nil {
+		_objcPtr_xat = xat.Ptr()
+	}
 	_cstr_key := C.CString(key)
 	defer C.free(unsafe.Pointer(_cstr_key))
 	var _exc unsafe.Pointer
@@ -825,7 +937,9 @@ func AAEntryXATBlobGetEntry(xat *AAEntryXATBlob, i uint32, key_capacity uint64, 
 func AAEntryXATBlobAppendEntry(xat *AAEntryXATBlob, key string, data *uint8, data_size uint64) int32 {
 	defer cgo.KeepAlive(xat)
 	var _objcPtr_xat unsafe.Pointer
-	if xat != nil { _objcPtr_xat = xat.Ptr() }
+	if xat != nil {
+		_objcPtr_xat = xat.Ptr()
+	}
 	_cstr_key := C.CString(key)
 	defer C.free(unsafe.Pointer(_cstr_key))
 	var _exc unsafe.Pointer
@@ -840,7 +954,9 @@ func AAEntryXATBlobAppendEntry(xat *AAEntryXATBlob, key string, data *uint8, dat
 func AAEntryXATBlobSetEntry(xat *AAEntryXATBlob, i uint32, key string, data *uint8, data_size uint64) int32 {
 	defer cgo.KeepAlive(xat)
 	var _objcPtr_xat unsafe.Pointer
-	if xat != nil { _objcPtr_xat = xat.Ptr() }
+	if xat != nil {
+		_objcPtr_xat = xat.Ptr()
+	}
 	_cstr_key := C.CString(key)
 	defer C.free(unsafe.Pointer(_cstr_key))
 	var _exc unsafe.Pointer
@@ -855,7 +971,9 @@ func AAEntryXATBlobSetEntry(xat *AAEntryXATBlob, i uint32, key string, data *uin
 func AAEntryXATBlobClear(xat *AAEntryXATBlob) int32 {
 	defer cgo.KeepAlive(xat)
 	var _objcPtr_xat unsafe.Pointer
-	if xat != nil { _objcPtr_xat = xat.Ptr() }
+	if xat != nil {
+		_objcPtr_xat = xat.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAEntryXATBlobClear(_objcPtr_xat, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -868,7 +986,9 @@ func AAEntryXATBlobClear(xat *AAEntryXATBlob) int32 {
 func AAEntryXATBlobRemoveEntry(xat *AAEntryXATBlob, i uint32) int32 {
 	defer cgo.KeepAlive(xat)
 	var _objcPtr_xat unsafe.Pointer
-	if xat != nil { _objcPtr_xat = xat.Ptr() }
+	if xat != nil {
+		_objcPtr_xat = xat.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAEntryXATBlobRemoveEntry(_objcPtr_xat, C.uint32_t(i), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -881,7 +1001,9 @@ func AAEntryXATBlobRemoveEntry(xat *AAEntryXATBlob, i uint32) int32 {
 func AAEntryXATBlobGetEncodedSize(xat *AAEntryXATBlob) uint64 {
 	defer cgo.KeepAlive(xat)
 	var _objcPtr_xat unsafe.Pointer
-	if xat != nil { _objcPtr_xat = xat.Ptr() }
+	if xat != nil {
+		_objcPtr_xat = xat.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := uint64(C.applearchive_fn_AAEntryXATBlobGetEncodedSize(_objcPtr_xat, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -894,7 +1016,9 @@ func AAEntryXATBlobGetEncodedSize(xat *AAEntryXATBlob) uint64 {
 func AAEntryXATBlobGetEncodedData(xat *AAEntryXATBlob) unsafe.Pointer {
 	defer cgo.KeepAlive(xat)
 	var _objcPtr_xat unsafe.Pointer
-	if xat != nil { _objcPtr_xat = xat.Ptr() }
+	if xat != nil {
+		_objcPtr_xat = xat.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.applearchive_fn_AAEntryXATBlobGetEncodedData(_objcPtr_xat, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -921,7 +1045,9 @@ func AAPathListCreateWithPath(dir string, path string) *AAPathList {
 func AAPathListDestroy(path_list *AAPathList) {
 	defer cgo.KeepAlive(path_list)
 	var _objcPtr_path_list unsafe.Pointer
-	if path_list != nil { _objcPtr_path_list = path_list.Ptr() }
+	if path_list != nil {
+		_objcPtr_path_list = path_list.Ptr()
+	}
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AAPathListDestroy(_objcPtr_path_list, &_exc)
 	cgo.RaiseIfException(_exc)
@@ -933,7 +1059,9 @@ func AAPathListDestroy(path_list *AAPathList) {
 func AAPathListNodeGetPath(path_list *AAPathList, node uint64, path_capacity uint64, path string, path_length *uint64) int32 {
 	defer cgo.KeepAlive(path_list)
 	var _objcPtr_path_list unsafe.Pointer
-	if path_list != nil { _objcPtr_path_list = path_list.Ptr() }
+	if path_list != nil {
+		_objcPtr_path_list = path_list.Ptr()
+	}
 	_cstr_path := C.CString(path)
 	defer C.free(unsafe.Pointer(_cstr_path))
 	var _exc unsafe.Pointer
@@ -948,7 +1076,9 @@ func AAPathListNodeGetPath(path_list *AAPathList, node uint64, path_capacity uin
 func AAPathListNodeFirst(path_list *AAPathList) uint64 {
 	defer cgo.KeepAlive(path_list)
 	var _objcPtr_path_list unsafe.Pointer
-	if path_list != nil { _objcPtr_path_list = path_list.Ptr() }
+	if path_list != nil {
+		_objcPtr_path_list = path_list.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := uint64(C.applearchive_fn_AAPathListNodeFirst(_objcPtr_path_list, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -961,7 +1091,9 @@ func AAPathListNodeFirst(path_list *AAPathList) uint64 {
 func AAPathListNodeNext(path_list *AAPathList, node uint64) uint64 {
 	defer cgo.KeepAlive(path_list)
 	var _objcPtr_path_list unsafe.Pointer
-	if path_list != nil { _objcPtr_path_list = path_list.Ptr() }
+	if path_list != nil {
+		_objcPtr_path_list = path_list.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := uint64(C.applearchive_fn_AAPathListNodeNext(_objcPtr_path_list, C.uint64_t(node), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -975,9 +1107,13 @@ func AAArchiveStreamWriteHeader(s *AAArchiveStream, header *AAHeader) int32 {
 	defer cgo.KeepAlive(s)
 	defer cgo.KeepAlive(header)
 	var _objcPtr_s unsafe.Pointer
-	if s != nil { _objcPtr_s = s.Ptr() }
+	if s != nil {
+		_objcPtr_s = s.Ptr()
+	}
 	var _objcPtr_header unsafe.Pointer
-	if header != nil { _objcPtr_header = header.Ptr() }
+	if header != nil {
+		_objcPtr_header = header.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAArchiveStreamWriteHeader(_objcPtr_s, _objcPtr_header, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -990,7 +1126,9 @@ func AAArchiveStreamWriteHeader(s *AAArchiveStream, header *AAHeader) int32 {
 func AAArchiveStreamReadHeader(s *AAArchiveStream, header unsafe.Pointer) int32 {
 	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
-	if s != nil { _objcPtr_s = s.Ptr() }
+	if s != nil {
+		_objcPtr_s = s.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAArchiveStreamReadHeader(_objcPtr_s, header, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1003,7 +1141,9 @@ func AAArchiveStreamReadHeader(s *AAArchiveStream, header unsafe.Pointer) int32 
 func AAArchiveStreamCancel(s *AAArchiveStream) {
 	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
-	if s != nil { _objcPtr_s = s.Ptr() }
+	if s != nil {
+		_objcPtr_s = s.Ptr()
+	}
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AAArchiveStreamCancel(_objcPtr_s, &_exc)
 	cgo.RaiseIfException(_exc)
@@ -1015,7 +1155,9 @@ func AAArchiveStreamCancel(s *AAArchiveStream) {
 func AAArchiveStreamClose(s *AAArchiveStream) int32 {
 	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
-	if s != nil { _objcPtr_s = s.Ptr() }
+	if s != nil {
+		_objcPtr_s = s.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAArchiveStreamClose(_objcPtr_s, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1038,7 +1180,9 @@ func AACustomArchiveStreamOpen() *AAArchiveStream {
 func AACustomArchiveStreamSetData(s *AAArchiveStream, data unsafe.Pointer) {
 	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
-	if s != nil { _objcPtr_s = s.Ptr() }
+	if s != nil {
+		_objcPtr_s = s.Ptr()
+	}
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AACustomArchiveStreamSetData(_objcPtr_s, data, &_exc)
 	cgo.RaiseIfException(_exc)
@@ -1050,7 +1194,9 @@ func AACustomArchiveStreamSetData(s *AAArchiveStream, data unsafe.Pointer) {
 func AACustomArchiveStreamSetCloseProc(s *AAArchiveStream, proc unsafe.Pointer) {
 	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
-	if s != nil { _objcPtr_s = s.Ptr() }
+	if s != nil {
+		_objcPtr_s = s.Ptr()
+	}
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AACustomArchiveStreamSetCloseProc(_objcPtr_s, proc, &_exc)
 	cgo.RaiseIfException(_exc)
@@ -1062,7 +1208,9 @@ func AACustomArchiveStreamSetCloseProc(s *AAArchiveStream, proc unsafe.Pointer) 
 func AACustomArchiveStreamSetCancelProc(s *AAArchiveStream, proc unsafe.Pointer) {
 	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
-	if s != nil { _objcPtr_s = s.Ptr() }
+	if s != nil {
+		_objcPtr_s = s.Ptr()
+	}
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AACustomArchiveStreamSetCancelProc(_objcPtr_s, proc, &_exc)
 	cgo.RaiseIfException(_exc)
@@ -1074,7 +1222,9 @@ func AACustomArchiveStreamSetCancelProc(s *AAArchiveStream, proc unsafe.Pointer)
 func AACustomArchiveStreamSetWriteHeaderProc(s *AAArchiveStream, proc unsafe.Pointer) {
 	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
-	if s != nil { _objcPtr_s = s.Ptr() }
+	if s != nil {
+		_objcPtr_s = s.Ptr()
+	}
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AACustomArchiveStreamSetWriteHeaderProc(_objcPtr_s, proc, &_exc)
 	cgo.RaiseIfException(_exc)
@@ -1086,7 +1236,9 @@ func AACustomArchiveStreamSetWriteHeaderProc(s *AAArchiveStream, proc unsafe.Poi
 func AACustomArchiveStreamSetWriteBlobProc(s *AAArchiveStream, proc unsafe.Pointer) {
 	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
-	if s != nil { _objcPtr_s = s.Ptr() }
+	if s != nil {
+		_objcPtr_s = s.Ptr()
+	}
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AACustomArchiveStreamSetWriteBlobProc(_objcPtr_s, proc, &_exc)
 	cgo.RaiseIfException(_exc)
@@ -1098,7 +1250,9 @@ func AACustomArchiveStreamSetWriteBlobProc(s *AAArchiveStream, proc unsafe.Point
 func AACustomArchiveStreamSetReadHeaderProc(s *AAArchiveStream, proc unsafe.Pointer) {
 	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
-	if s != nil { _objcPtr_s = s.Ptr() }
+	if s != nil {
+		_objcPtr_s = s.Ptr()
+	}
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AACustomArchiveStreamSetReadHeaderProc(_objcPtr_s, proc, &_exc)
 	cgo.RaiseIfException(_exc)
@@ -1110,7 +1264,9 @@ func AACustomArchiveStreamSetReadHeaderProc(s *AAArchiveStream, proc unsafe.Poin
 func AACustomArchiveStreamSetReadBlobProc(s *AAArchiveStream, proc unsafe.Pointer) {
 	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
-	if s != nil { _objcPtr_s = s.Ptr() }
+	if s != nil {
+		_objcPtr_s = s.Ptr()
+	}
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AACustomArchiveStreamSetReadBlobProc(_objcPtr_s, proc, &_exc)
 	cgo.RaiseIfException(_exc)
@@ -1132,7 +1288,9 @@ func AEAAuthDataCreate() *AEAAuthData {
 func AEAAuthDataDestroy(auth_data *AEAAuthData) {
 	defer cgo.KeepAlive(auth_data)
 	var _objcPtr_auth_data unsafe.Pointer
-	if auth_data != nil { _objcPtr_auth_data = auth_data.Ptr() }
+	if auth_data != nil {
+		_objcPtr_auth_data = auth_data.Ptr()
+	}
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AEAAuthDataDestroy(_objcPtr_auth_data, &_exc)
 	cgo.RaiseIfException(_exc)
@@ -1144,7 +1302,9 @@ func AEAAuthDataDestroy(auth_data *AEAAuthData) {
 func AEAAuthDataCreateWithContext(context_ *AEAContext) *AEAAuthData {
 	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
-	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
+	if context_ != nil {
+		_objcPtr_context_ = context_.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_ptr := unsafe.Pointer(C.applearchive_fn_AEAAuthDataCreateWithContext(_objcPtr_context_, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1157,7 +1317,9 @@ func AEAAuthDataCreateWithContext(context_ *AEAContext) *AEAAuthData {
 func AEAAuthDataGetEntryCount(auth_data *AEAAuthData) uint32 {
 	defer cgo.KeepAlive(auth_data)
 	var _objcPtr_auth_data unsafe.Pointer
-	if auth_data != nil { _objcPtr_auth_data = auth_data.Ptr() }
+	if auth_data != nil {
+		_objcPtr_auth_data = auth_data.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := uint32(C.applearchive_fn_AEAAuthDataGetEntryCount(_objcPtr_auth_data, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1170,7 +1332,9 @@ func AEAAuthDataGetEntryCount(auth_data *AEAAuthData) uint32 {
 func AEAAuthDataGetEntry(auth_data *AEAAuthData, i uint32, key_capacity uint64, key string, key_length *uint64, data_capacity uint64, data *uint8, data_size *uint64) int32 {
 	defer cgo.KeepAlive(auth_data)
 	var _objcPtr_auth_data unsafe.Pointer
-	if auth_data != nil { _objcPtr_auth_data = auth_data.Ptr() }
+	if auth_data != nil {
+		_objcPtr_auth_data = auth_data.Ptr()
+	}
 	_cstr_key := C.CString(key)
 	defer C.free(unsafe.Pointer(_cstr_key))
 	var _exc unsafe.Pointer
@@ -1185,7 +1349,9 @@ func AEAAuthDataGetEntry(auth_data *AEAAuthData, i uint32, key_capacity uint64, 
 func AEAAuthDataAppendEntry(auth_data *AEAAuthData, key string, data *uint8, data_size uint64) int32 {
 	defer cgo.KeepAlive(auth_data)
 	var _objcPtr_auth_data unsafe.Pointer
-	if auth_data != nil { _objcPtr_auth_data = auth_data.Ptr() }
+	if auth_data != nil {
+		_objcPtr_auth_data = auth_data.Ptr()
+	}
 	_cstr_key := C.CString(key)
 	defer C.free(unsafe.Pointer(_cstr_key))
 	var _exc unsafe.Pointer
@@ -1200,7 +1366,9 @@ func AEAAuthDataAppendEntry(auth_data *AEAAuthData, key string, data *uint8, dat
 func AEAAuthDataSetEntry(auth_data *AEAAuthData, i uint32, key string, data *uint8, data_size uint64) int32 {
 	defer cgo.KeepAlive(auth_data)
 	var _objcPtr_auth_data unsafe.Pointer
-	if auth_data != nil { _objcPtr_auth_data = auth_data.Ptr() }
+	if auth_data != nil {
+		_objcPtr_auth_data = auth_data.Ptr()
+	}
 	_cstr_key := C.CString(key)
 	defer C.free(unsafe.Pointer(_cstr_key))
 	var _exc unsafe.Pointer
@@ -1215,7 +1383,9 @@ func AEAAuthDataSetEntry(auth_data *AEAAuthData, i uint32, key string, data *uin
 func AEAAuthDataClear(auth_data *AEAAuthData) int32 {
 	defer cgo.KeepAlive(auth_data)
 	var _objcPtr_auth_data unsafe.Pointer
-	if auth_data != nil { _objcPtr_auth_data = auth_data.Ptr() }
+	if auth_data != nil {
+		_objcPtr_auth_data = auth_data.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAAuthDataClear(_objcPtr_auth_data, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1228,7 +1398,9 @@ func AEAAuthDataClear(auth_data *AEAAuthData) int32 {
 func AEAAuthDataRemoveEntry(auth_data *AEAAuthData, i uint32) int32 {
 	defer cgo.KeepAlive(auth_data)
 	var _objcPtr_auth_data unsafe.Pointer
-	if auth_data != nil { _objcPtr_auth_data = auth_data.Ptr() }
+	if auth_data != nil {
+		_objcPtr_auth_data = auth_data.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAAuthDataRemoveEntry(_objcPtr_auth_data, C.uint32_t(i), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1241,7 +1413,9 @@ func AEAAuthDataRemoveEntry(auth_data *AEAAuthData, i uint32) int32 {
 func AEAAuthDataGetEncodedSize(auth_data *AEAAuthData) uint64 {
 	defer cgo.KeepAlive(auth_data)
 	var _objcPtr_auth_data unsafe.Pointer
-	if auth_data != nil { _objcPtr_auth_data = auth_data.Ptr() }
+	if auth_data != nil {
+		_objcPtr_auth_data = auth_data.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := uint64(C.applearchive_fn_AEAAuthDataGetEncodedSize(_objcPtr_auth_data, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1254,7 +1428,9 @@ func AEAAuthDataGetEncodedSize(auth_data *AEAAuthData) uint64 {
 func AEAAuthDataGetEncodedData(auth_data *AEAAuthData) unsafe.Pointer {
 	defer cgo.KeepAlive(auth_data)
 	var _objcPtr_auth_data unsafe.Pointer
-	if auth_data != nil { _objcPtr_auth_data = auth_data.Ptr() }
+	if auth_data != nil {
+		_objcPtr_auth_data = auth_data.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.applearchive_fn_AEAAuthDataGetEncodedData(_objcPtr_auth_data, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1267,7 +1443,9 @@ func AEAAuthDataGetEncodedData(auth_data *AEAAuthData) unsafe.Pointer {
 func AEAContextCreateWithEncryptedStream(encrypted_stream *AAByteStream) *AEAContext {
 	defer cgo.KeepAlive(encrypted_stream)
 	var _objcPtr_encrypted_stream unsafe.Pointer
-	if encrypted_stream != nil { _objcPtr_encrypted_stream = encrypted_stream.Ptr() }
+	if encrypted_stream != nil {
+		_objcPtr_encrypted_stream = encrypted_stream.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_ptr := unsafe.Pointer(C.applearchive_fn_AEAContextCreateWithEncryptedStream(_objcPtr_encrypted_stream, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1280,7 +1458,9 @@ func AEAContextCreateWithEncryptedStream(encrypted_stream *AAByteStream) *AEACon
 func AEAContextDestroy(context_ *AEAContext) {
 	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
-	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
+	if context_ != nil {
+		_objcPtr_context_ = context_.Ptr()
+	}
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AEAContextDestroy(_objcPtr_context_, &_exc)
 	cgo.RaiseIfException(_exc)
@@ -1292,7 +1472,9 @@ func AEAContextDestroy(context_ *AEAContext) {
 func AEAContextGetProfile(context_ *AEAContext) uint32 {
 	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
-	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
+	if context_ != nil {
+		_objcPtr_context_ = context_.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := uint32(C.applearchive_fn_AEAContextGetProfile(_objcPtr_context_, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1335,7 +1517,9 @@ func AEAProfileGetEncryptionMode(profile uint32) uint32 {
 func AEAContextGetPaddingSize(context_ *AEAContext) uint64 {
 	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
-	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
+	if context_ != nil {
+		_objcPtr_context_ = context_.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := uint64(C.applearchive_fn_AEAContextGetPaddingSize(_objcPtr_context_, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1348,7 +1532,9 @@ func AEAContextGetPaddingSize(context_ *AEAContext) uint64 {
 func AEAContextGetChecksumMode(context_ *AEAContext) uint32 {
 	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
-	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
+	if context_ != nil {
+		_objcPtr_context_ = context_.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := uint32(C.applearchive_fn_AEAContextGetChecksumMode(_objcPtr_context_, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1361,7 +1547,9 @@ func AEAContextGetChecksumMode(context_ *AEAContext) uint32 {
 func AEAContextGetCompressionBlockSize(context_ *AEAContext) uint64 {
 	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
-	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
+	if context_ != nil {
+		_objcPtr_context_ = context_.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := uint64(C.applearchive_fn_AEAContextGetCompressionBlockSize(_objcPtr_context_, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1374,7 +1562,9 @@ func AEAContextGetCompressionBlockSize(context_ *AEAContext) uint64 {
 func AEAContextGetRawSize(context_ *AEAContext) uint64 {
 	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
-	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
+	if context_ != nil {
+		_objcPtr_context_ = context_.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := uint64(C.applearchive_fn_AEAContextGetRawSize(_objcPtr_context_, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1387,7 +1577,9 @@ func AEAContextGetRawSize(context_ *AEAContext) uint64 {
 func AEAContextGetContainerSize(context_ *AEAContext) uint64 {
 	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
-	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
+	if context_ != nil {
+		_objcPtr_context_ = context_.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := uint64(C.applearchive_fn_AEAContextGetContainerSize(_objcPtr_context_, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1400,7 +1592,9 @@ func AEAContextGetContainerSize(context_ *AEAContext) uint64 {
 func AEAContextGetAuthData(context_ *AEAContext, auth_data_capacity uint64, auth_data *uint8, auth_data_size *uint64) int32 {
 	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
-	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
+	if context_ != nil {
+		_objcPtr_context_ = context_.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextGetAuthData(_objcPtr_context_, C.uint64_t(auth_data_capacity), unsafe.Pointer(auth_data), unsafe.Pointer(auth_data_size), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1413,7 +1607,9 @@ func AEAContextGetAuthData(context_ *AEAContext, auth_data_capacity uint64, auth
 func AEAContextGetSignatureEncryptionKey(context_ *AEAContext, key_capacity uint64, key *uint8, key_size *uint64) int32 {
 	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
-	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
+	if context_ != nil {
+		_objcPtr_context_ = context_.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextGetSignatureEncryptionKey(_objcPtr_context_, C.uint64_t(key_capacity), unsafe.Pointer(key), unsafe.Pointer(key_size), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1426,7 +1622,9 @@ func AEAContextGetSignatureEncryptionKey(context_ *AEAContext, key_capacity uint
 func AEAContextGetArchiveIdentifier(context_ *AEAContext, identifier_capacity uint64, identifier *uint8, identifier_size *uint64) int32 {
 	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
-	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
+	if context_ != nil {
+		_objcPtr_context_ = context_.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextGetArchiveIdentifier(_objcPtr_context_, C.uint64_t(identifier_capacity), unsafe.Pointer(identifier), unsafe.Pointer(identifier_size), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1439,7 +1637,9 @@ func AEAContextGetArchiveIdentifier(context_ *AEAContext, identifier_capacity ui
 func AEAContextGetMainKey(context_ *AEAContext, key_capacity uint64, key *uint8, key_size *uint64) int32 {
 	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
-	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
+	if context_ != nil {
+		_objcPtr_context_ = context_.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextGetMainKey(_objcPtr_context_, C.uint64_t(key_capacity), unsafe.Pointer(key), unsafe.Pointer(key_size), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1452,7 +1652,9 @@ func AEAContextGetMainKey(context_ *AEAContext, key_capacity uint64, key *uint8,
 func AEAContextSetCompressionBlockSize(context_ *AEAContext, compression_block_size uint64) int32 {
 	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
-	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
+	if context_ != nil {
+		_objcPtr_context_ = context_.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextSetCompressionBlockSize(_objcPtr_context_, C.uint64_t(compression_block_size), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1465,7 +1667,9 @@ func AEAContextSetCompressionBlockSize(context_ *AEAContext, compression_block_s
 func AEAContextSetChecksumMode(context_ *AEAContext, checksum_mode uint32) int32 {
 	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
-	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
+	if context_ != nil {
+		_objcPtr_context_ = context_.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextSetChecksumMode(_objcPtr_context_, C.uint32_t(checksum_mode), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1478,7 +1682,9 @@ func AEAContextSetChecksumMode(context_ *AEAContext, checksum_mode uint32) int32
 func AEAContextSetPaddingSize(context_ *AEAContext, padding_size uint64) int32 {
 	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
-	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
+	if context_ != nil {
+		_objcPtr_context_ = context_.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextSetPaddingSize(_objcPtr_context_, C.uint64_t(padding_size), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1491,7 +1697,9 @@ func AEAContextSetPaddingSize(context_ *AEAContext, padding_size uint64) int32 {
 func AEAContextSetAuthData(context_ *AEAContext, auth_data *uint8, auth_data_size uint64) int32 {
 	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
-	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
+	if context_ != nil {
+		_objcPtr_context_ = context_.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextSetAuthData(_objcPtr_context_, unsafe.Pointer(auth_data), C.uint64_t(auth_data_size), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1504,7 +1712,9 @@ func AEAContextSetAuthData(context_ *AEAContext, auth_data *uint8, auth_data_siz
 func AEAContextSetSignatureEncryptionKey(context_ *AEAContext, key *uint8, key_size uint64) int32 {
 	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
-	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
+	if context_ != nil {
+		_objcPtr_context_ = context_.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextSetSignatureEncryptionKey(_objcPtr_context_, unsafe.Pointer(key), C.uint64_t(key_size), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1517,7 +1727,9 @@ func AEAContextSetSignatureEncryptionKey(context_ *AEAContext, key *uint8, key_s
 func AEAContextSetSymmetricKey(context_ *AEAContext, key *uint8, key_size uint64) int32 {
 	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
-	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
+	if context_ != nil {
+		_objcPtr_context_ = context_.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextSetSymmetricKey(_objcPtr_context_, unsafe.Pointer(key), C.uint64_t(key_size), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1530,7 +1742,9 @@ func AEAContextSetSymmetricKey(context_ *AEAContext, key *uint8, key_size uint64
 func AEAContextSetPassword(context_ *AEAContext, password *uint8, password_size uint64) int32 {
 	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
-	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
+	if context_ != nil {
+		_objcPtr_context_ = context_.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextSetPassword(_objcPtr_context_, unsafe.Pointer(password), C.uint64_t(password_size), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1543,7 +1757,9 @@ func AEAContextSetPassword(context_ *AEAContext, password *uint8, password_size 
 func AEAContextSetSigningPublicKey(context_ *AEAContext, key *uint8, key_size uint64) int32 {
 	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
-	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
+	if context_ != nil {
+		_objcPtr_context_ = context_.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextSetSigningPublicKey(_objcPtr_context_, unsafe.Pointer(key), C.uint64_t(key_size), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1556,7 +1772,9 @@ func AEAContextSetSigningPublicKey(context_ *AEAContext, key *uint8, key_size ui
 func AEAContextSetSigningPrivateKey(context_ *AEAContext, key *uint8, key_size uint64) int32 {
 	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
-	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
+	if context_ != nil {
+		_objcPtr_context_ = context_.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextSetSigningPrivateKey(_objcPtr_context_, unsafe.Pointer(key), C.uint64_t(key_size), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1569,7 +1787,9 @@ func AEAContextSetSigningPrivateKey(context_ *AEAContext, key *uint8, key_size u
 func AEAContextSetRecipientPublicKey(context_ *AEAContext, key *uint8, key_size uint64) int32 {
 	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
-	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
+	if context_ != nil {
+		_objcPtr_context_ = context_.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextSetRecipientPublicKey(_objcPtr_context_, unsafe.Pointer(key), C.uint64_t(key_size), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1582,7 +1802,9 @@ func AEAContextSetRecipientPublicKey(context_ *AEAContext, key *uint8, key_size 
 func AEAContextSetRecipientPrivateKey(context_ *AEAContext, key *uint8, key_size uint64) int32 {
 	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
-	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
+	if context_ != nil {
+		_objcPtr_context_ = context_.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextSetRecipientPrivateKey(_objcPtr_context_, unsafe.Pointer(key), C.uint64_t(key_size), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1595,7 +1817,9 @@ func AEAContextSetRecipientPrivateKey(context_ *AEAContext, key *uint8, key_size
 func AEAContextSetMainKey(context_ *AEAContext, key *uint8, key_size uint64) int32 {
 	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
-	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
+	if context_ != nil {
+		_objcPtr_context_ = context_.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextSetMainKey(_objcPtr_context_, unsafe.Pointer(key), C.uint64_t(key_size), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1609,9 +1833,13 @@ func AEAEncryptionOutputStreamCloseAndUpdateContext(stream *AAByteStream, contex
 	defer cgo.KeepAlive(stream)
 	defer cgo.KeepAlive(context_)
 	var _objcPtr_stream unsafe.Pointer
-	if stream != nil { _objcPtr_stream = stream.Ptr() }
+	if stream != nil {
+		_objcPtr_stream = stream.Ptr()
+	}
 	var _objcPtr_context_ unsafe.Pointer
-	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
+	if context_ != nil {
+		_objcPtr_context_ = context_.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAEncryptionOutputStreamCloseAndUpdateContext(_objcPtr_stream, _objcPtr_context_, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1624,7 +1852,9 @@ func AEAEncryptionOutputStreamCloseAndUpdateContext(stream *AAByteStream, contex
 func AEAContextDecryptAttributes(context_ *AEAContext) int32 {
 	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
-	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
+	if context_ != nil {
+		_objcPtr_context_ = context_.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextDecryptAttributes(_objcPtr_context_, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1638,12 +1868,15 @@ func AEAStreamSign(encrypted_stream *AAByteStream, context_ *AEAContext) int32 {
 	defer cgo.KeepAlive(encrypted_stream)
 	defer cgo.KeepAlive(context_)
 	var _objcPtr_encrypted_stream unsafe.Pointer
-	if encrypted_stream != nil { _objcPtr_encrypted_stream = encrypted_stream.Ptr() }
+	if encrypted_stream != nil {
+		_objcPtr_encrypted_stream = encrypted_stream.Ptr()
+	}
 	var _objcPtr_context_ unsafe.Pointer
-	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
+	if context_ != nil {
+		_objcPtr_context_ = context_.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAStreamSign(_objcPtr_encrypted_stream, _objcPtr_context_, &_exc))
 	cgo.RaiseIfException(_exc)
 	return _result
 }
-

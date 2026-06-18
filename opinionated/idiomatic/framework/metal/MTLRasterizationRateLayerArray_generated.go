@@ -57,4 +57,3 @@ type RasterizationRateLayerArrayable interface {
 }
 
 var _ RasterizationRateLayerArrayable = (*RasterizationRateLayerArray)(nil)
-

@@ -18,12 +18,12 @@ type MPSCNNBinaryConvolution struct {
 }
 
 var (
-	_clsMPSCNNBinaryConvolution = _objcClass("MPSCNNBinaryConvolution")
-	_mPSCNNBinaryConvolutionSelInitWithDeviceConvolutionDataScaleValueTypeFlags = objc.RegisterName("initWithDevice:convolutionData:scaleValue:type:flags:")
+	_clsMPSCNNBinaryConvolution                                                                                                   = _objcClass("MPSCNNBinaryConvolution")
+	_mPSCNNBinaryConvolutionSelInitWithDeviceConvolutionDataScaleValueTypeFlags                                                   = objc.RegisterName("initWithDevice:convolutionData:scaleValue:type:flags:")
 	_mPSCNNBinaryConvolutionSelInitWithDeviceConvolutionDataOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags = objc.RegisterName("initWithDevice:convolutionData:outputBiasTerms:outputScaleTerms:inputBiasTerms:inputScaleTerms:type:flags:")
-	_mPSCNNBinaryConvolutionSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSCNNBinaryConvolutionSelInputFeatureChannels = objc.RegisterName("inputFeatureChannels")
-	_mPSCNNBinaryConvolutionSelOutputFeatureChannels = objc.RegisterName("outputFeatureChannels")
+	_mPSCNNBinaryConvolutionSelInitWithCoderDevice                                                                                = objc.RegisterName("initWithCoder:device:")
+	_mPSCNNBinaryConvolutionSelInputFeatureChannels                                                                               = objc.RegisterName("inputFeatureChannels")
+	_mPSCNNBinaryConvolutionSelOutputFeatureChannels                                                                              = objc.RegisterName("outputFeatureChannels")
 )
 
 func MPSCNNBinaryConvolutionFromID(id objc.ID) *MPSCNNBinaryConvolution {
@@ -39,21 +39,27 @@ func MPSCNNBinaryConvolutionFromID(id objc.ID) *MPSCNNBinaryConvolution {
 // @abstract   Initializes a binary convolution kernel with binary weights and a single scaling term. @param      device                          The MTLDevice on which this MPSCNNBinaryConvolution filter will be used @param      convolutionData                 A pointer to a object that conforms to the MPSCNNConvolutionDataSource protocol. The MPSCNNConvolutionDataSource protocol declares the methods that an instance of MPSCNNBinaryConvolution uses to obtain the weights and bias terms as well as the convolution descriptor. Each entry in the convolutionData:weights array is a 32-bit unsigned integer value and each bit represents one filter weight (given in machine byte order). The featurechannel indices increase from the least significant bit within the 32-bits. The number of entries is = ceil( inputFeatureChannels/32.0 ) * outputFeatureChannels * kernelHeight * kernelWidth The layout of filter weight is so that it can be reinterpreted as a 4D tensor (array) weight[ outputChannels ][ kernelHeight ][ kernelWidth ][ ceil( inputChannels / 32.0 ) ] (The ordering of the reduction from 4D tensor to 1D is per C convention. The index based on inputchannels varies most rapidly, followed by kernelWidth, then kernelHeight and finally outputChannels varies least rapidly.) @param      scaleValue                      A floating point value used to scale the entire convolution. @param      type                            What kind of binarization strategy is to be used. @param      flags                           See documentation above and documentation of MPSCNNBinaryConvolutionFlags. @return     A valid MPSCNNBinaryConvolution object or nil, if failure.
 func (o *MPSCNNBinaryConvolution) InitWithDeviceConvolutionDataScaleValueTypeFlags(device metal.MTLDevice, convolutionData mpsneuralnetwork.MPSCNNConvolutionDataSource, scaleValue float32, type_ mpsneuralnetwork.MPSCNNBinaryConvolutionType, flags mpsneuralnetwork.MPSCNNBinaryConvolutionFlags) *MPSCNNBinaryConvolution {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNBinaryConvolutionSelInitWithDeviceConvolutionDataScaleValueTypeFlags, device, convolutionData, scaleValue, type_, flags)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNBinaryConvolutionFromID(_ret)
 }
 
 // @abstract   Initializes a binary convolution kernel with binary weights as well as both pre and post scaling terms. @param      device                          The MTLDevice on which this MPSCNNBinaryConvolution filter will be used @param      convolutionData                 A pointer to a object that conforms to the MPSCNNConvolutionDataSource protocol. The MPSCNNConvolutionDataSource protocol declares the methods that an instance of MPSCNNBinaryConvolution uses to obtain the weights and the convolution descriptor. Each entry in the convolutionData:weights array is a 32-bit unsigned integer value and each bit represents one filter weight (given in machine byte order). The featurechannel indices increase from the least significant bit within the 32-bits. The number of entries is = ceil( inputFeatureChannels/32.0 ) * outputFeatureChannels * kernelHeight * kernelWidth The layout of filter weight is so that it can be reinterpreted as a 4D tensor (array) weight[ outputChannels ][ kernelHeight ][ kernelWidth ][ ceil( inputChannels / 32.0 ) ] (The ordering of the reduction from 4D tensor to 1D is per C convention. The index based on inputchannels varies most rapidly, followed by kernelWidth, then kernelHeight and finally outputChannels varies least rapidly.) @param      outputBiasTerms                 A pointer to bias terms to be applied to the convolution output.  Each entry is a float value. The number of entries is = numberOfOutputFeatureMaps. If nil then 0.0 is used for bias. The values stored in the pointer are copied in and the array can be freed after this function returns. @param      outputScaleTerms                A pointer to scale terms to be applied to binary convolution results per output feature channel. Each entry is a float value. The number of entries is = numberOfOutputFeatureMaps. If nil then 1.0 is used. The values stored in the pointer are copied in and the array can be freed after this function returns. @param      inputBiasTerms                  A pointer to offset terms to be applied to the input before convolution and before input scaling. Each entry is a float value. The number of entries is 'inputFeatureChannels'. If NULL then 0.0 is used for bias. The values stored in the pointer are copied in and the array can be freed after this function returns. @param      inputScaleTerms                 A pointer to scale terms to be applied to the input before convolution, but after input biasing. Each entry is a float value. The number of entries is 'inputFeatureChannels'. If nil then 1.0 is used. The values stored in the pointer are copied in and the array can be freed after this function returns. @param      type                            What kind of binarization strategy is to be used. @param      flags                           See documentation above and documentation of MPSCNNBinaryConvolutionFlags. @return     A valid MPSCNNBinaryConvolution object or nil, if failure.
 func (o *MPSCNNBinaryConvolution) InitWithDeviceConvolutionDataOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags(device metal.MTLDevice, convolutionData mpsneuralnetwork.MPSCNNConvolutionDataSource, outputBiasTerms *float32, outputScaleTerms *float32, inputBiasTerms *float32, inputScaleTerms *float32, type_ mpsneuralnetwork.MPSCNNBinaryConvolutionType, flags mpsneuralnetwork.MPSCNNBinaryConvolutionFlags) *MPSCNNBinaryConvolution {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNBinaryConvolutionSelInitWithDeviceConvolutionDataOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags, device, convolutionData, outputBiasTerms, outputScaleTerms, inputBiasTerms, inputScaleTerms, type_, flags)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNBinaryConvolutionFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSCNNBinaryConvolution) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSCNNBinaryConvolution {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNBinaryConvolutionSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNBinaryConvolutionFromID(_ret)
 }
 
@@ -67,4 +73,3 @@ func (o *MPSCNNBinaryConvolution) OutputFeatureChannels() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mPSCNNBinaryConvolutionSelOutputFeatureChannels)
 	return _ret
 }
-

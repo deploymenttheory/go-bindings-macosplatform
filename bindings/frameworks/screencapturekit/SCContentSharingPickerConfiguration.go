@@ -16,14 +16,14 @@ type SCContentSharingPickerConfiguration[NSCopying purego.AnyObject] struct {
 }
 
 var (
-	_clsSCContentSharingPickerConfiguration = _objcClass("SCContentSharingPickerConfiguration")
-	_sCContentSharingPickerConfigurationSelAllowedPickerModes = objc.RegisterName("allowedPickerModes")
-	_sCContentSharingPickerConfigurationSelSetAllowedPickerModes = objc.RegisterName("setAllowedPickerModes:")
-	_sCContentSharingPickerConfigurationSelExcludedWindowIDs = objc.RegisterName("excludedWindowIDs")
-	_sCContentSharingPickerConfigurationSelSetExcludedWindowIDs = objc.RegisterName("setExcludedWindowIDs:")
-	_sCContentSharingPickerConfigurationSelExcludedBundleIDs = objc.RegisterName("excludedBundleIDs")
-	_sCContentSharingPickerConfigurationSelSetExcludedBundleIDs = objc.RegisterName("setExcludedBundleIDs:")
-	_sCContentSharingPickerConfigurationSelAllowsChangingSelectedContent = objc.RegisterName("allowsChangingSelectedContent")
+	_clsSCContentSharingPickerConfiguration                                 = _objcClass("SCContentSharingPickerConfiguration")
+	_sCContentSharingPickerConfigurationSelAllowedPickerModes               = objc.RegisterName("allowedPickerModes")
+	_sCContentSharingPickerConfigurationSelSetAllowedPickerModes            = objc.RegisterName("setAllowedPickerModes:")
+	_sCContentSharingPickerConfigurationSelExcludedWindowIDs                = objc.RegisterName("excludedWindowIDs")
+	_sCContentSharingPickerConfigurationSelSetExcludedWindowIDs             = objc.RegisterName("setExcludedWindowIDs:")
+	_sCContentSharingPickerConfigurationSelExcludedBundleIDs                = objc.RegisterName("excludedBundleIDs")
+	_sCContentSharingPickerConfigurationSelSetExcludedBundleIDs             = objc.RegisterName("setExcludedBundleIDs:")
+	_sCContentSharingPickerConfigurationSelAllowsChangingSelectedContent    = objc.RegisterName("allowsChangingSelectedContent")
 	_sCContentSharingPickerConfigurationSelSetAllowsChangingSelectedContent = objc.RegisterName("setAllowsChangingSelectedContent:")
 )
 
@@ -76,4 +76,3 @@ func (o *SCContentSharingPickerConfiguration[NSCopying]) AllowsChangingSelectedC
 func (o *SCContentSharingPickerConfiguration[NSCopying]) SetAllowsChangingSelectedContent(allowsChangingSelectedContent bool) {
 	o.Ptr().Send(_sCContentSharingPickerConfigurationSelSetAllowsChangingSelectedContent, allowsChangingSelectedContent)
 }
-

@@ -101,4 +101,3 @@ type CNNLogSoftMaxable interface {
 }
 
 var _ CNNLogSoftMaxable = (*CNNLogSoftMax)(nil)
-

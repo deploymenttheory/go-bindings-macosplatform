@@ -126,4 +126,3 @@ func _os_log_sensitive_deprecated() {
 	C.oslog_fn__os_log_sensitive_deprecated(&_exc)
 	cgo.RaiseIfException(_exc)
 }
-

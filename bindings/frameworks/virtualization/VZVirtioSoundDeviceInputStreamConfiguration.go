@@ -15,9 +15,9 @@ type VZVirtioSoundDeviceInputStreamConfiguration struct {
 }
 
 var (
-	_clsVZVirtioSoundDeviceInputStreamConfiguration = _objcClass("VZVirtioSoundDeviceInputStreamConfiguration")
-	_vZVirtioSoundDeviceInputStreamConfigurationSelInit = objc.RegisterName("init")
-	_vZVirtioSoundDeviceInputStreamConfigurationSelSource = objc.RegisterName("source")
+	_clsVZVirtioSoundDeviceInputStreamConfiguration          = _objcClass("VZVirtioSoundDeviceInputStreamConfiguration")
+	_vZVirtioSoundDeviceInputStreamConfigurationSelInit      = objc.RegisterName("init")
+	_vZVirtioSoundDeviceInputStreamConfigurationSelSource    = objc.RegisterName("source")
 	_vZVirtioSoundDeviceInputStreamConfigurationSelSetSource = objc.RegisterName("setSource:")
 )
 
@@ -34,17 +34,20 @@ func VZVirtioSoundDeviceInputStreamConfigurationFromID(id objc.ID) *VZVirtioSoun
 // @abstract Initialize the input stream configuration.
 func (o *VZVirtioSoundDeviceInputStreamConfiguration) Init() *VZVirtioSoundDeviceInputStreamConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioSoundDeviceInputStreamConfigurationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZVirtioSoundDeviceInputStreamConfigurationFromID(_ret)
 }
 
 func (o *VZVirtioSoundDeviceInputStreamConfiguration) Source() *VZAudioInputStreamSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioSoundDeviceInputStreamConfigurationSelSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZAudioInputStreamSourceFromID(_ret)
 }
 
 func (o *VZVirtioSoundDeviceInputStreamConfiguration) SetSource(source *VZAudioInputStreamSource) {
 	o.Ptr().Send(_vZVirtioSoundDeviceInputStreamConfigurationSelSetSource, source.Ptr())
 }
-

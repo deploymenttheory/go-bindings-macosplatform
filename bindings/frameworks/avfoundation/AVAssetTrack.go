@@ -20,46 +20,46 @@ type AVAssetTrack struct {
 }
 
 var (
-	_clsAVAssetTrack = _objcClass("AVAssetTrack")
-	_aVAssetTrackSelAsset = objc.RegisterName("asset")
-	_aVAssetTrackSelTrackID = objc.RegisterName("trackID")
-	_aVAssetTrackSelHasMediaCharacteristic = objc.RegisterName("hasMediaCharacteristic:")
-	_aVAssetTrackSelMediaType = objc.RegisterName("mediaType")
-	_aVAssetTrackSelFormatDescriptions = objc.RegisterName("formatDescriptions")
-	_aVAssetTrackSelIsPlayable = objc.RegisterName("isPlayable")
-	_aVAssetTrackSelIsDecodable = objc.RegisterName("isDecodable")
-	_aVAssetTrackSelIsEnabled = objc.RegisterName("isEnabled")
-	_aVAssetTrackSelIsSelfContained = objc.RegisterName("isSelfContained")
-	_aVAssetTrackSelTotalSampleDataLength = objc.RegisterName("totalSampleDataLength")
-	_aVAssetTrackSelTimeRange = objc.RegisterName("timeRange")
-	_aVAssetTrackSelNaturalTimeScale = objc.RegisterName("naturalTimeScale")
-	_aVAssetTrackSelEstimatedDataRate = objc.RegisterName("estimatedDataRate")
-	_aVAssetTrackSelLanguageCode = objc.RegisterName("languageCode")
-	_aVAssetTrackSelExtendedLanguageTag = objc.RegisterName("extendedLanguageTag")
-	_aVAssetTrackSelNaturalSize = objc.RegisterName("naturalSize")
-	_aVAssetTrackSelPreferredTransform = objc.RegisterName("preferredTransform")
-	_aVAssetTrackSelPreferredVolume = objc.RegisterName("preferredVolume")
-	_aVAssetTrackSelHasAudioSampleDependencies = objc.RegisterName("hasAudioSampleDependencies")
-	_aVAssetTrackSelNominalFrameRate = objc.RegisterName("nominalFrameRate")
-	_aVAssetTrackSelMinFrameDuration = objc.RegisterName("minFrameDuration")
-	_aVAssetTrackSelRequiresFrameReordering = objc.RegisterName("requiresFrameReordering")
-	_aVAssetTrackSelSegmentForTrackTime = objc.RegisterName("segmentForTrackTime:")
-	_aVAssetTrackSelLoadSegmentForTrackTimeCompletionHandler = objc.RegisterName("loadSegmentForTrackTime:completionHandler:")
-	_aVAssetTrackSelSamplePresentationTimeForTrackTime = objc.RegisterName("samplePresentationTimeForTrackTime:")
+	_clsAVAssetTrack                                                        = _objcClass("AVAssetTrack")
+	_aVAssetTrackSelAsset                                                   = objc.RegisterName("asset")
+	_aVAssetTrackSelTrackID                                                 = objc.RegisterName("trackID")
+	_aVAssetTrackSelHasMediaCharacteristic                                  = objc.RegisterName("hasMediaCharacteristic:")
+	_aVAssetTrackSelMediaType                                               = objc.RegisterName("mediaType")
+	_aVAssetTrackSelFormatDescriptions                                      = objc.RegisterName("formatDescriptions")
+	_aVAssetTrackSelIsPlayable                                              = objc.RegisterName("isPlayable")
+	_aVAssetTrackSelIsDecodable                                             = objc.RegisterName("isDecodable")
+	_aVAssetTrackSelIsEnabled                                               = objc.RegisterName("isEnabled")
+	_aVAssetTrackSelIsSelfContained                                         = objc.RegisterName("isSelfContained")
+	_aVAssetTrackSelTotalSampleDataLength                                   = objc.RegisterName("totalSampleDataLength")
+	_aVAssetTrackSelTimeRange                                               = objc.RegisterName("timeRange")
+	_aVAssetTrackSelNaturalTimeScale                                        = objc.RegisterName("naturalTimeScale")
+	_aVAssetTrackSelEstimatedDataRate                                       = objc.RegisterName("estimatedDataRate")
+	_aVAssetTrackSelLanguageCode                                            = objc.RegisterName("languageCode")
+	_aVAssetTrackSelExtendedLanguageTag                                     = objc.RegisterName("extendedLanguageTag")
+	_aVAssetTrackSelNaturalSize                                             = objc.RegisterName("naturalSize")
+	_aVAssetTrackSelPreferredTransform                                      = objc.RegisterName("preferredTransform")
+	_aVAssetTrackSelPreferredVolume                                         = objc.RegisterName("preferredVolume")
+	_aVAssetTrackSelHasAudioSampleDependencies                              = objc.RegisterName("hasAudioSampleDependencies")
+	_aVAssetTrackSelNominalFrameRate                                        = objc.RegisterName("nominalFrameRate")
+	_aVAssetTrackSelMinFrameDuration                                        = objc.RegisterName("minFrameDuration")
+	_aVAssetTrackSelRequiresFrameReordering                                 = objc.RegisterName("requiresFrameReordering")
+	_aVAssetTrackSelSegmentForTrackTime                                     = objc.RegisterName("segmentForTrackTime:")
+	_aVAssetTrackSelLoadSegmentForTrackTimeCompletionHandler                = objc.RegisterName("loadSegmentForTrackTime:completionHandler:")
+	_aVAssetTrackSelSamplePresentationTimeForTrackTime                      = objc.RegisterName("samplePresentationTimeForTrackTime:")
 	_aVAssetTrackSelLoadSamplePresentationTimeForTrackTimeCompletionHandler = objc.RegisterName("loadSamplePresentationTimeForTrackTime:completionHandler:")
-	_aVAssetTrackSelSegments = objc.RegisterName("segments")
-	_aVAssetTrackSelMetadataForFormat = objc.RegisterName("metadataForFormat:")
-	_aVAssetTrackSelLoadMetadataForFormatCompletionHandler = objc.RegisterName("loadMetadataForFormat:completionHandler:")
-	_aVAssetTrackSelCommonMetadata = objc.RegisterName("commonMetadata")
-	_aVAssetTrackSelMetadata = objc.RegisterName("metadata")
-	_aVAssetTrackSelAvailableMetadataFormats = objc.RegisterName("availableMetadataFormats")
-	_aVAssetTrackSelAssociatedTracksOfType = objc.RegisterName("associatedTracksOfType:")
-	_aVAssetTrackSelLoadAssociatedTracksOfTypeCompletionHandler = objc.RegisterName("loadAssociatedTracksOfType:completionHandler:")
-	_aVAssetTrackSelAvailableTrackAssociationTypes = objc.RegisterName("availableTrackAssociationTypes")
-	_aVAssetTrackSelMakeSampleCursorWithPresentationTimeStamp = objc.RegisterName("makeSampleCursorWithPresentationTimeStamp:")
-	_aVAssetTrackSelMakeSampleCursorAtFirstSampleInDecodeOrder = objc.RegisterName("makeSampleCursorAtFirstSampleInDecodeOrder")
-	_aVAssetTrackSelMakeSampleCursorAtLastSampleInDecodeOrder = objc.RegisterName("makeSampleCursorAtLastSampleInDecodeOrder")
-	_aVAssetTrackSelCanProvideSampleCursors = objc.RegisterName("canProvideSampleCursors")
+	_aVAssetTrackSelSegments                                                = objc.RegisterName("segments")
+	_aVAssetTrackSelMetadataForFormat                                       = objc.RegisterName("metadataForFormat:")
+	_aVAssetTrackSelLoadMetadataForFormatCompletionHandler                  = objc.RegisterName("loadMetadataForFormat:completionHandler:")
+	_aVAssetTrackSelCommonMetadata                                          = objc.RegisterName("commonMetadata")
+	_aVAssetTrackSelMetadata                                                = objc.RegisterName("metadata")
+	_aVAssetTrackSelAvailableMetadataFormats                                = objc.RegisterName("availableMetadataFormats")
+	_aVAssetTrackSelAssociatedTracksOfType                                  = objc.RegisterName("associatedTracksOfType:")
+	_aVAssetTrackSelLoadAssociatedTracksOfTypeCompletionHandler             = objc.RegisterName("loadAssociatedTracksOfType:completionHandler:")
+	_aVAssetTrackSelAvailableTrackAssociationTypes                          = objc.RegisterName("availableTrackAssociationTypes")
+	_aVAssetTrackSelMakeSampleCursorWithPresentationTimeStamp               = objc.RegisterName("makeSampleCursorWithPresentationTimeStamp:")
+	_aVAssetTrackSelMakeSampleCursorAtFirstSampleInDecodeOrder              = objc.RegisterName("makeSampleCursorAtFirstSampleInDecodeOrder")
+	_aVAssetTrackSelMakeSampleCursorAtLastSampleInDecodeOrder               = objc.RegisterName("makeSampleCursorAtLastSampleInDecodeOrder")
+	_aVAssetTrackSelCanProvideSampleCursors                                 = objc.RegisterName("canProvideSampleCursors")
 )
 
 func AVAssetTrackFromID(id objc.ID) *AVAssetTrack {
@@ -75,7 +75,9 @@ func AVAssetTrackFromID(id objc.ID) *AVAssetTrack {
 // Provides a reference to the AVAsset of which the AVAssetTrack is a part
 func (o *AVAssetTrack) Asset() *AVAsset {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetTrackSelAsset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetFromID(_ret)
 }
 
@@ -94,7 +96,9 @@ func (o *AVAssetTrack) HasMediaCharacteristic(mediaCharacteristic *foundation.NS
 // Indicates the media type for this track, e.g. AVMediaTypeVideo, AVMediaTypeAudio, etc., as defined in AVMediaFormat.h.
 func (o *AVAssetTrack) MediaType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetTrackSelMediaType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -155,14 +159,18 @@ func (o *AVAssetTrack) EstimatedDataRate() float32 {
 // Indicates the language associated with the track, as an ISO 639-2/T language code; may be nil if no language is indicated
 func (o *AVAssetTrack) LanguageCode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetTrackSelLanguageCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Indicates the language tag associated with the track, as an IETF BCP 47 (RFC 4646) language identifier; may be nil if no language tag is indicated
 func (o *AVAssetTrack) ExtendedLanguageTag() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetTrackSelExtendedLanguageTag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -212,7 +220,9 @@ func (o *AVAssetTrack) RequiresFrameReordering() bool {
 // Deprecated: Use loadSegmentForTrackTime:completionHandler: instead
 func (o *AVAssetTrack) SegmentForTrackTime(trackTime coremedia.CMTime) *AVAssetTrackSegment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetTrackSelSegmentForTrackTime, trackTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetTrackSegmentFromID(_ret)
 }
 
@@ -243,7 +253,9 @@ func (o *AVAssetTrack) LoadSamplePresentationTimeForTrackTimeCompletionHandler(t
 // Provides an array of AVAssetTrackSegments with time mappings from the timeline of the track's media samples to the timeline of the track. Empty edits, i.e. timeRanges for which no media data is available to be presented, have a value of AVAssetTrackSegment.empty equal to YES.
 func (o *AVAssetTrack) Segments() *foundation.NSArray[*AVAssetTrackSegment] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetTrackSelSegments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVAssetTrackSegment](_ret)
 }
 
@@ -251,7 +263,9 @@ func (o *AVAssetTrack) Segments() *foundation.NSArray[*AVAssetTrackSegment] {
 // Deprecated: Use loadMetadataForFormat:completionHandler: instead
 func (o *AVAssetTrack) MetadataForFormat(format *foundation.NSString) *foundation.NSArray[*AVMetadataItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetTrackSelMetadataForFormat, format.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVMetadataItem](_ret)
 }
 
@@ -273,14 +287,18 @@ func (o *AVAssetTrack) LoadMetadataForFormatCompletionHandler(format *foundation
 // Provides access to an array of AVMetadataItems for each common metadata key for which a value is available
 func (o *AVAssetTrack) CommonMetadata() *foundation.NSArray[*AVMetadataItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetTrackSelCommonMetadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVMetadataItem](_ret)
 }
 
 // Provides access to an array of AVMetadataItems for all metadata identifiers for which a value is available; items can be filtered according to language via +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:] and according to identifier via +[AVMetadataItem metadataItemsFromArray:filteredByIdentifier:].
 func (o *AVAssetTrack) Metadata() *foundation.NSArray[*AVMetadataItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetTrackSelMetadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVMetadataItem](_ret)
 }
 
@@ -294,7 +312,9 @@ func (o *AVAssetTrack) AvailableMetadataFormats() *foundation.NSArray[*foundatio
 // Deprecated: Use loadAssociatedTracksOfType:completionHandler: instead
 func (o *AVAssetTrack) AssociatedTracksOfType(trackAssociationType *foundation.NSString) *foundation.NSArray[*AVAssetTrack] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetTrackSelAssociatedTracksOfType, trackAssociationType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVAssetTrack](_ret)
 }
 
@@ -322,21 +342,27 @@ func (o *AVAssetTrack) AvailableTrackAssociationTypes() *foundation.NSArray[*fou
 // Creates an instance of AVSampleCursor and positions it at or near the specified presentation timestamp. If the receiver's asset has a value of YES for providesPreciseDurationAndTiming, the sample cursor will be accurately positioned at the receiver's last media sample with presentation timestamp less than or equal to the desired timestamp, or, if there are no such samples, the first sample in presentation order. If the receiver's asset has a value of NO for providesPreciseDurationAndTiming, and it is prohibitively expensive to locate the precise sample at the desired timestamp, the sample cursor may be approximately positioned. This method will return nil if there are no samples in the track. - Parameter presentationTimeStamp: The desired initial presentation timestamp of the returned AVSampleCursor. - Returns: An instance of AVSampleCursor.
 func (o *AVAssetTrack) MakeSampleCursorWithPresentationTimeStamp(presentationTimeStamp coremedia.CMTime) *AVSampleCursor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetTrackSelMakeSampleCursorWithPresentationTimeStamp, presentationTimeStamp)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVSampleCursorFromID(_ret)
 }
 
 // Creates an instance of AVSampleCursor and positions it at the receiver's first media sample in decode order. This method will return nil if there are no samples in the track. - Returns: An instance of AVSampleCursor.
 func (o *AVAssetTrack) MakeSampleCursorAtFirstSampleInDecodeOrder() *AVSampleCursor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetTrackSelMakeSampleCursorAtFirstSampleInDecodeOrder)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVSampleCursorFromID(_ret)
 }
 
 // Creates an instance of AVSampleCursor and positions it at the receiver's last media sample in decode order. This method will return nil if there are no samples in the track. - Returns: An instance of AVSampleCursor.
 func (o *AVAssetTrack) MakeSampleCursorAtLastSampleInDecodeOrder() *AVSampleCursor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetTrackSelMakeSampleCursorAtLastSampleInDecodeOrder)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVSampleCursorFromID(_ret)
 }
 
@@ -345,4 +371,3 @@ func (o *AVAssetTrack) CanProvideSampleCursors() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVAssetTrackSelCanProvideSampleCursors)
 	return _ret
 }
-

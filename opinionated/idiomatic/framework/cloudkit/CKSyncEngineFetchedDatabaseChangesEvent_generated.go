@@ -16,7 +16,9 @@ type SyncEngineFetchedDatabaseChangesEvent struct {
 }
 
 // Unwrap returns the underlying [raw.CKSyncEngineFetchedDatabaseChangesEvent].
-func (x *SyncEngineFetchedDatabaseChangesEvent) Unwrap() *raw.CKSyncEngineFetchedDatabaseChangesEvent { return x.inner }
+func (x *SyncEngineFetchedDatabaseChangesEvent) Unwrap() *raw.CKSyncEngineFetchedDatabaseChangesEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -58,7 +60,9 @@ func (x *SyncEngineFetchedDatabaseChangesEvent) Deletions() []*SyncEngineFetched
 	})
 }
 
-func (x *SyncEngineFetchedDatabaseChangesEvent) asSyncEngineEvent() *raw.CKSyncEngineEvent { return &x.inner.CKSyncEngineEvent }
+func (x *SyncEngineFetchedDatabaseChangesEvent) asSyncEngineEvent() *raw.CKSyncEngineEvent {
+	return &x.inner.CKSyncEngineEvent
+}
 
 // SyncEngineFetchedDatabaseChangesEventable is the interface implemented by [SyncEngineFetchedDatabaseChangesEvent], for mocking and DI.
 type SyncEngineFetchedDatabaseChangesEventable interface {
@@ -68,4 +72,3 @@ type SyncEngineFetchedDatabaseChangesEventable interface {
 }
 
 var _ SyncEngineFetchedDatabaseChangesEventable = (*SyncEngineFetchedDatabaseChangesEvent)(nil)
-

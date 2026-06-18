@@ -42,4 +42,3 @@ type OneTimeCodeCredentialRequestable interface {
 }
 
 var _ OneTimeCodeCredentialRequestable = (*OneTimeCodeCredentialRequest)(nil)
-

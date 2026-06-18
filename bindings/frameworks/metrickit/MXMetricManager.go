@@ -18,15 +18,15 @@ type MXMetricManager struct {
 }
 
 var (
-	_clsMXMetricManager = _objcClass("MXMetricManager")
-	_mXMetricManagerSelMakeLogHandleWithCategory = objc.RegisterName("makeLogHandleWithCategory:")
-	_mXMetricManagerSelAddSubscriber = objc.RegisterName("addSubscriber:")
-	_mXMetricManagerSelRemoveSubscriber = objc.RegisterName("removeSubscriber:")
-	_mXMetricManagerSelExtendLaunchMeasurementForTaskIDError = objc.RegisterName("extendLaunchMeasurementForTaskID:error:")
+	_clsMXMetricManager                                              = _objcClass("MXMetricManager")
+	_mXMetricManagerSelMakeLogHandleWithCategory                     = objc.RegisterName("makeLogHandleWithCategory:")
+	_mXMetricManagerSelAddSubscriber                                 = objc.RegisterName("addSubscriber:")
+	_mXMetricManagerSelRemoveSubscriber                              = objc.RegisterName("removeSubscriber:")
+	_mXMetricManagerSelExtendLaunchMeasurementForTaskIDError         = objc.RegisterName("extendLaunchMeasurementForTaskID:error:")
 	_mXMetricManagerSelFinishExtendedLaunchMeasurementForTaskIDError = objc.RegisterName("finishExtendedLaunchMeasurementForTaskID:error:")
-	_mXMetricManagerSelPastPayloads = objc.RegisterName("pastPayloads")
-	_mXMetricManagerSelPastDiagnosticPayloads = objc.RegisterName("pastDiagnosticPayloads")
-	_mXMetricManagerSelSharedManager = objc.RegisterName("sharedManager")
+	_mXMetricManagerSelPastPayloads                                  = objc.RegisterName("pastPayloads")
+	_mXMetricManagerSelPastDiagnosticPayloads                        = objc.RegisterName("pastDiagnosticPayloads")
+	_mXMetricManagerSelSharedManager                                 = objc.RegisterName("sharedManager")
 )
 
 func MXMetricManagerFromID(id objc.ID) *MXMetricManager {
@@ -42,7 +42,9 @@ func MXMetricManagerFromID(id objc.ID) *MXMetricManager {
 // @method        makeLogHandleWithCategory:category @abstract      Retrieve a log handle for flagging critical sections with os_signpost(). @param         category A string used to define a log category @discussion    The log handle configures persistence for any signposts emit while using the log handle. @result        A log handle that can be used with the logging framework.
 func MXMetricManagerMakeLogHandleWithCategory(category *foundation.NSString) *foundation.NSObject {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMXMetricManager), _mXMetricManagerSelMakeLogHandleWithCategory, category.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
@@ -77,21 +79,26 @@ func MXMetricManagerFinishExtendedLaunchMeasurementForTaskIDError(taskID unsafe.
 // @property      pastPayloads @abstract      A list of past metric payloads received.
 func (o *MXMetricManager) PastPayloads() *foundation.NSArray[*MXMetricPayload] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXMetricManagerSelPastPayloads)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MXMetricPayload](_ret)
 }
 
 // @property      pastDiagnosticPayloads @abstract      A list of past diagnostic payloads received.
 func (o *MXMetricManager) PastDiagnosticPayloads() *foundation.NSArray[*MXDiagnosticPayload] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXMetricManagerSelPastDiagnosticPayloads)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MXDiagnosticPayload](_ret)
 }
 
 // @property      sharedManager @abstract      Singleton instance of MXMetricManager.
 func MXMetricManagerSharedManager() *MXMetricManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMXMetricManager), _mXMetricManagerSelSharedManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MXMetricManagerFromID(_ret)
 }
-

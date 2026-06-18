@@ -170,13 +170,21 @@ func (x *DOMHTMLLegendElement) SetAlign(align string) {
 
 func (x *DOMHTMLLegendElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
-func (x *DOMHTMLLegendElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
+func (x *DOMHTMLLegendElement) asDOMElement() *raw.DOMElement {
+	return &x.inner.DOMHTMLElement.DOMElement
+}
 
-func (x *DOMHTMLLegendElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTMLElement.DOMElement.DOMNode }
+func (x *DOMHTMLLegendElement) asDOMNode() *raw.DOMNode {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode
+}
 
-func (x *DOMHTMLLegendElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
+func (x *DOMHTMLLegendElement) asDOMObject() *raw.DOMObject {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject
+}
 
-func (x *DOMHTMLLegendElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+func (x *DOMHTMLLegendElement) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject
+}
 
 // DOMHTMLLegendElementable is the interface implemented by [DOMHTMLLegendElement], for mocking and DI.
 type DOMHTMLLegendElementable interface {
@@ -205,4 +213,3 @@ type DOMHTMLLegendElementable interface {
 }
 
 var _ DOMHTMLLegendElementable = (*DOMHTMLLegendElement)(nil)
-

@@ -16,9 +16,9 @@ type ABSearchElement struct {
 }
 
 var (
-	_clsABSearchElement = _objcClass("ABSearchElement")
+	_clsABSearchElement                                    = _objcClass("ABSearchElement")
 	_aBSearchElementSelSearchElementForConjunctionChildren = objc.RegisterName("searchElementForConjunction:children:")
-	_aBSearchElementSelMatchesRecord = objc.RegisterName("matchesRecord:")
+	_aBSearchElementSelMatchesRecord                       = objc.RegisterName("matchesRecord:")
 )
 
 func ABSearchElementFromID(id objc.ID) *ABSearchElement {
@@ -33,7 +33,9 @@ func ABSearchElementFromID(id objc.ID) *ABSearchElement {
 
 func ABSearchElementSearchElementForConjunctionChildren(conjuction int, children *foundation.NSArray[objc.ID]) *ABSearchElement {
 	_ret := objc.Send[objc.ID](objc.ID(_clsABSearchElement), _aBSearchElementSelSearchElementForConjunctionChildren, conjuction, children)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ABSearchElementFromID(_ret)
 }
 
@@ -41,4 +43,3 @@ func (o *ABSearchElement) MatchesRecord(record *ABRecord) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aBSearchElementSelMatchesRecord, record.Ptr())
 	return _ret
 }
-

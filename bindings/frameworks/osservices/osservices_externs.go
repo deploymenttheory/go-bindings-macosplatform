@@ -202,4 +202,3 @@ func KWSXMLRPCProtocol() uintptr {
 	ptr, _ := purego.Dlsym(_osservicesLib, "kWSXMLRPCProtocol")
 	return ptr
 }
-

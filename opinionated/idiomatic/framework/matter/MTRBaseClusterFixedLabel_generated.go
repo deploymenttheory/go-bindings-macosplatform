@@ -319,9 +319,13 @@ func (x *MTRBaseClusterFixedLabel) SubscribeAttributeClusterRevisionWithMinInter
 	}
 }
 
-func (x *MTRBaseClusterFixedLabel) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterFixedLabel) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterFixedLabel) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterFixedLabel) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterFixedLabelable is the interface implemented by [MTRBaseClusterFixedLabel], for mocking and DI.
 type MTRBaseClusterFixedLabelable interface {
@@ -353,4 +357,3 @@ type MTRBaseClusterFixedLabelable interface {
 }
 
 var _ MTRBaseClusterFixedLabelable = (*MTRBaseClusterFixedLabel)(nil)
-

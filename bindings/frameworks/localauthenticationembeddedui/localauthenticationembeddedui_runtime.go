@@ -13,7 +13,7 @@ import (
 
 var (
 	_localauthenticationembeddeduiLib uintptr
-	_loadOnce sync.Once
+	_loadOnce                         sync.Once
 )
 
 func _loadLibrary() {

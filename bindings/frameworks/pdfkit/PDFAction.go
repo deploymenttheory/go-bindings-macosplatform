@@ -16,7 +16,7 @@ type PDFAction struct {
 }
 
 var (
-	_clsPDFAction = _objcClass("PDFAction")
+	_clsPDFAction     = _objcClass("PDFAction")
 	_pDFActionSelType = objc.RegisterName("type")
 )
 
@@ -32,7 +32,8 @@ func PDFActionFromID(id objc.ID) *PDFAction {
 
 func (o *PDFAction) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFActionSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

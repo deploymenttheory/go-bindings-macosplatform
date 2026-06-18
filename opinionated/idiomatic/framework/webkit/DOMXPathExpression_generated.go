@@ -55,7 +55,9 @@ func (x *DOMXPathExpression) Evaluate(contextNode *raw.DOMNode, type_ uint16, in
 
 func (x *DOMXPathExpression) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
-func (x *DOMXPathExpression) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+func (x *DOMXPathExpression) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMObject.WebScriptObject
+}
 
 // DOMXPathExpressionable is the interface implemented by [DOMXPathExpression], for mocking and DI.
 type DOMXPathExpressionable interface {
@@ -65,4 +67,3 @@ type DOMXPathExpressionable interface {
 }
 
 var _ DOMXPathExpressionable = (*DOMXPathExpression)(nil)
-

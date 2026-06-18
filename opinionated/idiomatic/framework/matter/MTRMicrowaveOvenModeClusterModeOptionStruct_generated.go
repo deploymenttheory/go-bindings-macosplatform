@@ -17,7 +17,9 @@ type MTRMicrowaveOvenModeClusterModeOptionStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRMicrowaveOvenModeClusterModeOptionStruct].
-func (x *MTRMicrowaveOvenModeClusterModeOptionStruct) Unwrap() *raw.MTRMicrowaveOvenModeClusterModeOptionStruct { return x.inner }
+func (x *MTRMicrowaveOvenModeClusterModeOptionStruct) Unwrap() *raw.MTRMicrowaveOvenModeClusterModeOptionStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -97,4 +99,3 @@ type MTRMicrowaveOvenModeClusterModeOptionStructable interface {
 }
 
 var _ MTRMicrowaveOvenModeClusterModeOptionStructable = (*MTRMicrowaveOvenModeClusterModeOptionStruct)(nil)
-

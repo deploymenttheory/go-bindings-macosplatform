@@ -14,7 +14,7 @@ import (
 var (
 	// @brief Create a buffer range from a buffer's GPU address (given by the gpuAddress property) and length. A length of (uint64_t)-1 represents the the range from the given address to the end of the buffer.
 	_fnMTL4BufferRangeMake func(uint64, uint64) MTL4BufferRange
-	_fnMTLClearColorMake func(float64, float64, float64, float64) MTLClearColor
+	_fnMTLClearColorMake   func(float64, float64, float64, float64) MTLClearColor
 	// @function MTLCoordinate2DMake @abstract Convenience function to create a 2D coordinate from 2 values.
 	_fnMTLCoordinate2DMake func(float32, float32) MTLSamplePosition
 	// @brief Returns all Metal devices in the system. @discussion On macOS and macCatalyst, this API will not cause the system to switch devices and leaves the decision about which GPU to use up to the application based on whatever criteria it deems appropriate. On iOS, tvOS and visionOS, this API returns an array containing the same device that MTLCreateSystemDefaultDevice would have returned, or an empty array if it would have failed.
@@ -22,22 +22,22 @@ var (
 	// @brief Returns an NSArray of the current set of available Metal devices and installs a notification handler to be notified of any further changes (additions, removals, etc.).  The observer return value is retained by Metal and may be passed to MTLRemoveDeviceObserver() if the application no longer wishes to receive notifications. @note The observer out parameter is returned with a +1 retain count in addition to the retain mentioned above.
 	_fnMTLCopyAllDevicesWithObserver func(foundation.NSObjectProtocol, objc.Block) unsafe.Pointer
 	// @brief Returns a reference to the preferred system default Metal device. @discussion On Mac OS X systems that support automatic graphics switching, calling this API to get a Metal device will cause the system to switch to the high power GPU.  On other systems that support more than one GPU it will return the GPU that is associated with the main display.
-	_fnMTLCreateSystemDefaultDevice func() unsafe.Pointer
-	_fnMTLIOCompressionContextAppendData func(unsafe.Pointer, unsafe.Pointer, uint)
-	_fnMTLIOCompressionContextDefaultChunkSize func() uint
-	_fnMTLIOCreateCompressionContext func(string, MTLIOCompressionMethod, uint) unsafe.Pointer
-	_fnMTLIOFlushAndDestroyCompressionContext func(unsafe.Pointer) MTLIOCompressionStatus
+	_fnMTLCreateSystemDefaultDevice               func() unsafe.Pointer
+	_fnMTLIOCompressionContextAppendData          func(unsafe.Pointer, unsafe.Pointer, uint)
+	_fnMTLIOCompressionContextDefaultChunkSize    func() uint
+	_fnMTLIOCreateCompressionContext              func(string, MTLIOCompressionMethod, uint) unsafe.Pointer
+	_fnMTLIOFlushAndDestroyCompressionContext     func(unsafe.Pointer) MTLIOCompressionStatus
 	_fnMTLIndirectCommandBufferExecutionRangeMake func(uint32, uint32) MTLIndirectCommandBufferExecutionRange
-	_fnMTLOriginMake func(uint, uint, uint) MTLOrigin
-	_fnMTLPackedFloat3Make func(float32, float32, float32) MTLPackedFloat3
-	_fnMTLPackedFloatQuaternionMake func(float32, float32, float32, float32) MTLPackedFloatQuaternion
-	_fnMTLRegionMake1D func(uint, uint) MTLRegion
-	_fnMTLRegionMake2D func(uint, uint, uint, uint) MTLRegion
-	_fnMTLRegionMake3D func(uint, uint, uint, uint, uint, uint) MTLRegion
+	_fnMTLOriginMake                              func(uint, uint, uint) MTLOrigin
+	_fnMTLPackedFloat3Make                        func(float32, float32, float32) MTLPackedFloat3
+	_fnMTLPackedFloatQuaternionMake               func(float32, float32, float32, float32) MTLPackedFloatQuaternion
+	_fnMTLRegionMake1D                            func(uint, uint) MTLRegion
+	_fnMTLRegionMake2D                            func(uint, uint, uint, uint) MTLRegion
+	_fnMTLRegionMake3D                            func(uint, uint, uint, uint, uint, uint) MTLRegion
 	// @brief Removes a previously installed observer for device change notifications.
-	_fnMTLRemoveDeviceObserver func(foundation.NSObjectProtocol)
-	_fnMTLSamplePositionMake func(float32, float32) MTLSamplePosition
-	_fnMTLSizeMake func(uint, uint, uint) MTLSize
+	_fnMTLRemoveDeviceObserver       func(foundation.NSObjectProtocol)
+	_fnMTLSamplePositionMake         func(float32, float32) MTLSamplePosition
+	_fnMTLSizeMake                   func(uint, uint, uint) MTLSize
 	_fnMTLTextureSwizzleChannelsMake func(MTLTextureSwizzle, MTLTextureSwizzle, MTLTextureSwizzle, MTLTextureSwizzle) MTLTextureSwizzleChannels
 )
 
@@ -140,4 +140,3 @@ func MTLSizeMake(width uint, height uint, depth uint) MTLSize {
 func MTLTextureSwizzleChannelsMake(r MTLTextureSwizzle, g MTLTextureSwizzle, b MTLTextureSwizzle, a MTLTextureSwizzle) MTLTextureSwizzleChannels {
 	return _fnMTLTextureSwizzleChannelsMake(r, g, b, a)
 }
-

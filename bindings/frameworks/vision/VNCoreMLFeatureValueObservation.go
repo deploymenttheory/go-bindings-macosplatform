@@ -17,9 +17,9 @@ type VNCoreMLFeatureValueObservation struct {
 }
 
 var (
-	_clsVNCoreMLFeatureValueObservation = _objcClass("VNCoreMLFeatureValueObservation")
+	_clsVNCoreMLFeatureValueObservation             = _objcClass("VNCoreMLFeatureValueObservation")
 	_vNCoreMLFeatureValueObservationSelFeatureValue = objc.RegisterName("featureValue")
-	_vNCoreMLFeatureValueObservationSelFeatureName = objc.RegisterName("featureName")
+	_vNCoreMLFeatureValueObservationSelFeatureName  = objc.RegisterName("featureName")
 )
 
 func VNCoreMLFeatureValueObservationFromID(id objc.ID) *VNCoreMLFeatureValueObservation {
@@ -35,14 +35,17 @@ func VNCoreMLFeatureValueObservationFromID(id objc.ID) *VNCoreMLFeatureValueObse
 // @brief The result VNCoreMLRequest where the model produces an MLFeatureValue that is neither a classification or image. Refer to the Core ML documentation and the model itself for the handling of the content of the featureValue.
 func (o *VNCoreMLFeatureValueObservation) FeatureValue() *coreml.MLFeatureValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNCoreMLFeatureValueObservationSelFeatureValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return coreml.MLFeatureValueFromID(_ret)
 }
 
 // @brief The name used in the model description of the CoreML model that produced this observation allowing to correlate the observation back to the output of the model.
 func (o *VNCoreMLFeatureValueObservation) FeatureName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNCoreMLFeatureValueObservationSelFeatureName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

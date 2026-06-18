@@ -60,4 +60,3 @@ type DomainStateCompanionable interface {
 }
 
 var _ DomainStateCompanionable = (*DomainStateCompanion)(nil)
-

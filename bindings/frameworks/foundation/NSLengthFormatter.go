@@ -15,17 +15,17 @@ type NSLengthFormatter struct {
 }
 
 var (
-	_clsNSLengthFormatter = _objcClass("NSLengthFormatter")
-	_nSLengthFormatterSelStringFromValueUnit = objc.RegisterName("stringFromValue:unit:")
-	_nSLengthFormatterSelStringFromMeters = objc.RegisterName("stringFromMeters:")
-	_nSLengthFormatterSelUnitStringFromValueUnit = objc.RegisterName("unitStringFromValue:unit:")
+	_clsNSLengthFormatter                             = _objcClass("NSLengthFormatter")
+	_nSLengthFormatterSelStringFromValueUnit          = objc.RegisterName("stringFromValue:unit:")
+	_nSLengthFormatterSelStringFromMeters             = objc.RegisterName("stringFromMeters:")
+	_nSLengthFormatterSelUnitStringFromValueUnit      = objc.RegisterName("unitStringFromValue:unit:")
 	_nSLengthFormatterSelUnitStringFromMetersUsedUnit = objc.RegisterName("unitStringFromMeters:usedUnit:")
-	_nSLengthFormatterSelNumberFormatter = objc.RegisterName("numberFormatter")
-	_nSLengthFormatterSelSetNumberFormatter = objc.RegisterName("setNumberFormatter:")
-	_nSLengthFormatterSelUnitStyle = objc.RegisterName("unitStyle")
-	_nSLengthFormatterSelSetUnitStyle = objc.RegisterName("setUnitStyle:")
-	_nSLengthFormatterSelIsForPersonHeightUse = objc.RegisterName("isForPersonHeightUse")
-	_nSLengthFormatterSelSetForPersonHeightUse = objc.RegisterName("setForPersonHeightUse:")
+	_nSLengthFormatterSelNumberFormatter              = objc.RegisterName("numberFormatter")
+	_nSLengthFormatterSelSetNumberFormatter           = objc.RegisterName("setNumberFormatter:")
+	_nSLengthFormatterSelUnitStyle                    = objc.RegisterName("unitStyle")
+	_nSLengthFormatterSelSetUnitStyle                 = objc.RegisterName("setUnitStyle:")
+	_nSLengthFormatterSelIsForPersonHeightUse         = objc.RegisterName("isForPersonHeightUse")
+	_nSLengthFormatterSelSetForPersonHeightUse        = objc.RegisterName("setForPersonHeightUse:")
 )
 
 func NSLengthFormatterFromID(id objc.ID) *NSLengthFormatter {
@@ -40,31 +40,41 @@ func NSLengthFormatterFromID(id objc.ID) *NSLengthFormatter {
 
 func (o *NSLengthFormatter) StringFromValueUnit(value float64, unit NSLengthFormatterUnit) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLengthFormatterSelStringFromValueUnit, value, unit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSLengthFormatter) StringFromMeters(numberInMeters float64) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLengthFormatterSelStringFromMeters, numberInMeters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSLengthFormatter) UnitStringFromValueUnit(value float64, unit NSLengthFormatterUnit) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLengthFormatterSelUnitStringFromValueUnit, value, unit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSLengthFormatter) UnitStringFromMetersUsedUnit(numberInMeters float64, unitp *NSLengthFormatterUnit) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLengthFormatterSelUnitStringFromMetersUsedUnit, numberInMeters, unitp)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSLengthFormatter) NumberFormatter() *NSNumberFormatter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLengthFormatterSelNumberFormatter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFormatterFromID(_ret)
 }
 
@@ -89,4 +99,3 @@ func (o *NSLengthFormatter) IsForPersonHeightUse() bool {
 func (o *NSLengthFormatter) SetForPersonHeightUse(forPersonHeightUse bool) {
 	o.Ptr().Send(_nSLengthFormatterSelSetForPersonHeightUse, forPersonHeightUse)
 }
-

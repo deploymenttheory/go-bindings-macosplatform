@@ -18,20 +18,20 @@ type AVMovie struct {
 }
 
 var (
-	_clsAVMovie = _objcClass("AVMovie")
-	_aVMovieSelMovieTypes = objc.RegisterName("movieTypes")
-	_aVMovieSelMovieWithURLOptions = objc.RegisterName("movieWithURL:options:")
-	_aVMovieSelInitWithURLOptions = objc.RegisterName("initWithURL:options:")
-	_aVMovieSelMovieWithDataOptions = objc.RegisterName("movieWithData:options:")
-	_aVMovieSelInitWithDataOptions = objc.RegisterName("initWithData:options:")
-	_aVMovieSelURL = objc.RegisterName("URL")
-	_aVMovieSelData = objc.RegisterName("data")
-	_aVMovieSelDefaultMediaDataStorage = objc.RegisterName("defaultMediaDataStorage")
-	_aVMovieSelCanContainMovieFragments = objc.RegisterName("canContainMovieFragments")
-	_aVMovieSelContainsMovieFragments = objc.RegisterName("containsMovieFragments")
-	_aVMovieSelMovieHeaderWithFileTypeError = objc.RegisterName("movieHeaderWithFileType:error:")
+	_clsAVMovie                                          = _objcClass("AVMovie")
+	_aVMovieSelMovieTypes                                = objc.RegisterName("movieTypes")
+	_aVMovieSelMovieWithURLOptions                       = objc.RegisterName("movieWithURL:options:")
+	_aVMovieSelInitWithURLOptions                        = objc.RegisterName("initWithURL:options:")
+	_aVMovieSelMovieWithDataOptions                      = objc.RegisterName("movieWithData:options:")
+	_aVMovieSelInitWithDataOptions                       = objc.RegisterName("initWithData:options:")
+	_aVMovieSelURL                                       = objc.RegisterName("URL")
+	_aVMovieSelData                                      = objc.RegisterName("data")
+	_aVMovieSelDefaultMediaDataStorage                   = objc.RegisterName("defaultMediaDataStorage")
+	_aVMovieSelCanContainMovieFragments                  = objc.RegisterName("canContainMovieFragments")
+	_aVMovieSelContainsMovieFragments                    = objc.RegisterName("containsMovieFragments")
+	_aVMovieSelMovieHeaderWithFileTypeError              = objc.RegisterName("movieHeaderWithFileType:error:")
 	_aVMovieSelWriteMovieHeaderToURLFileTypeOptionsError = objc.RegisterName("writeMovieHeaderToURL:fileType:options:error:")
-	_aVMovieSelIsCompatibleWithFileType = objc.RegisterName("isCompatibleWithFileType:")
+	_aVMovieSelIsCompatibleWithFileType                  = objc.RegisterName("isCompatibleWithFileType:")
 )
 
 func AVMovieFromID(id objc.ID) *AVMovie {
@@ -53,49 +53,63 @@ func AVMovieMovieTypes() *foundation.NSArray[*foundation.NSString] {
 // @method			movieWithURL:options: @abstract		Creates an AVMovie object from a movie header stored in a QuickTime movie file or ISO base media file. @param			URL An NSURL object that specifies a file containing a movie header. @param			options An NSDictionary object that contains keys for specifying options for the initialization of the AVMovie object. @result			An AVMovie object @discussion     By default, the defaultMediaDataStorage property will be nil and each associated AVMovieTrack's mediaDataStorage property will be nil. If you want to create an AVMutableMovie from a file and then append sample buffers to any of its tracks, you must first set one of these properties to indicate where the sample data should be written.
 func AVMovieMovieWithURLOptions(uRL *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVMovie {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMovie), _aVMovieSelMovieWithURLOptions, uRL.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMovieFromID(_ret)
 }
 
 // @method			initWithURL:options: @abstract		Creates an AVMovie object from a movie header stored in a QuickTime movie file or ISO base media file. @param			URL An NSURL object that specifies a file containing a movie header. @param			options An NSDictionary object that contains keys for specifying options for the initialization of the AVMovie object. @result			An AVMovie object @discussion     By default, the defaultMediaDataStorage property will be nil and each associated AVMovieTrack's mediaDataStorage property will be nil. If you want to create an AVMutableMovie from a file and then append sample buffers to any of its tracks, you must first set one of these properties to indicate where the sample data should be written.
 func (o *AVMovie) InitWithURLOptions(uRL *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVMovie {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMovieSelInitWithURLOptions, uRL.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMovieFromID(_ret)
 }
 
 // @method			movieWithData:options: @abstract		Creates an AVMovie object from a movie header stored in an NSData object. @param			data An NSData object containing a movie header. @param			options An NSDictionary object that contains keys for specifying options for the initialization of the AVMovie object. @result			An AVMovie object @discussion     You can use this method to operate on movie headers that are not stored in files; this might include movie headers on the pasteboard (which do not contain media data). In general you should avoid loading an entire movie file with its media data into an instance of NSData! By default, the defaultMediaDataStorage property will be nil and each associated AVMovieTrack's mediaDataStorage property will be nil. If you want to create an AVMutableMovie from an NSData object and then append sample buffers to any of its tracks, you must first set one of these properties to indicate where the sample data should be written.
 func AVMovieMovieWithDataOptions(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVMovie {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMovie), _aVMovieSelMovieWithDataOptions, data.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMovieFromID(_ret)
 }
 
 // @method			initWithData:options: @abstract		Creates an AVMovie object from a movie header stored in an NSData object. @param			data An NSData object containing a movie header. @param			options An NSDictionary object that contains keys for specifying options for the initialization of the AVMovie object. @result			An AVMovie object @discussion     You can use this method to operate on movie headers that are not stored in files. In general you should avoid loading an entire movie file with its media data into an instance of NSData! By default, the defaultMediaDataStorage property will be nil and each associated AVMovieTrack's mediaDataStorage property will be nil. If you want to create an AVMutableMovie from an NSData object and then append sample buffers to any of its tracks, you must first set one of these properties to indicate where the sample data should be written.
 func (o *AVMovie) InitWithDataOptions(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVMovie {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMovieSelInitWithDataOptions, data.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMovieFromID(_ret)
 }
 
 // @property       URL @abstract       The URL with which the instance of AVMovie was initialized; may be nil.
 func (o *AVMovie) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMovieSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // @property       data @abstract       The data block with which the instance of AVMovie was initialized; may be nil.
 func (o *AVMovie) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMovieSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @property       defaultMediaDataStorage @abstract       The default storage container for media data added to a movie. @discussion     The value of this property is an AVMediaDataStorage object that indicates where sample data that is added to a movie should be written by default.
 func (o *AVMovie) DefaultMediaDataStorage() *AVMediaDataStorage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMovieSelDefaultMediaDataStorage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMediaDataStorageFromID(_ret)
 }
 
@@ -115,7 +129,9 @@ func (o *AVMovie) ContainsMovieFragments() bool {
 func (o *AVMovie) MovieHeaderWithFileTypeError(fileType *foundation.NSString) (*foundation.NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMovieSelMovieHeaderWithFileTypeError, fileType.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -137,4 +153,3 @@ func (o *AVMovie) IsCompatibleWithFileType(fileType *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVMovieSelIsCompatibleWithFileType, fileType.Ptr())
 	return _ret
 }
-

@@ -17,21 +17,21 @@ type GKAgent struct {
 }
 
 var (
-	_clsGKAgent = _objcClass("GKAgent")
-	_gKAgentSelDelegate = objc.RegisterName("delegate")
-	_gKAgentSelSetDelegate = objc.RegisterName("setDelegate:")
-	_gKAgentSelBehavior = objc.RegisterName("behavior")
-	_gKAgentSelSetBehavior = objc.RegisterName("setBehavior:")
-	_gKAgentSelMass = objc.RegisterName("mass")
-	_gKAgentSelSetMass = objc.RegisterName("setMass:")
-	_gKAgentSelRadius = objc.RegisterName("radius")
-	_gKAgentSelSetRadius = objc.RegisterName("setRadius:")
-	_gKAgentSelSpeed = objc.RegisterName("speed")
-	_gKAgentSelSetSpeed = objc.RegisterName("setSpeed:")
-	_gKAgentSelMaxAcceleration = objc.RegisterName("maxAcceleration")
+	_clsGKAgent                   = _objcClass("GKAgent")
+	_gKAgentSelDelegate           = objc.RegisterName("delegate")
+	_gKAgentSelSetDelegate        = objc.RegisterName("setDelegate:")
+	_gKAgentSelBehavior           = objc.RegisterName("behavior")
+	_gKAgentSelSetBehavior        = objc.RegisterName("setBehavior:")
+	_gKAgentSelMass               = objc.RegisterName("mass")
+	_gKAgentSelSetMass            = objc.RegisterName("setMass:")
+	_gKAgentSelRadius             = objc.RegisterName("radius")
+	_gKAgentSelSetRadius          = objc.RegisterName("setRadius:")
+	_gKAgentSelSpeed              = objc.RegisterName("speed")
+	_gKAgentSelSetSpeed           = objc.RegisterName("setSpeed:")
+	_gKAgentSelMaxAcceleration    = objc.RegisterName("maxAcceleration")
 	_gKAgentSelSetMaxAcceleration = objc.RegisterName("setMaxAcceleration:")
-	_gKAgentSelMaxSpeed = objc.RegisterName("maxSpeed")
-	_gKAgentSelSetMaxSpeed = objc.RegisterName("setMaxSpeed:")
+	_gKAgentSelMaxSpeed           = objc.RegisterName("maxSpeed")
+	_gKAgentSelSetMaxSpeed        = objc.RegisterName("setMaxSpeed:")
 )
 
 func GKAgentFromID(id objc.ID) *GKAgent {
@@ -57,7 +57,9 @@ func (o *GKAgent) SetDelegate(delegate GKAgentDelegate) {
 // The behavior to apply when updateWithDeltaTime is called. All forces from the goals in the behavior are summed and then applied.
 func (o *GKAgent) Behavior() *GKBehavior {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKAgentSelBehavior)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKBehaviorFromID(_ret)
 }
 
@@ -114,4 +116,3 @@ func (o *GKAgent) MaxSpeed() float32 {
 func (o *GKAgent) SetMaxSpeed(maxSpeed float32) {
 	o.Ptr().Send(_gKAgentSelSetMaxSpeed, maxSpeed)
 }
-

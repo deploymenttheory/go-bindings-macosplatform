@@ -16,7 +16,9 @@ type MappedMetaParameterDefinition struct {
 }
 
 // Unwrap returns the underlying [raw.PHASEMappedMetaParameterDefinition].
-func (x *MappedMetaParameterDefinition) Unwrap() *raw.PHASEMappedMetaParameterDefinition { return x.inner }
+func (x *MappedMetaParameterDefinition) Unwrap() *raw.PHASEMappedMetaParameterDefinition {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -62,11 +64,17 @@ func (x *MappedMetaParameterDefinition) InputMetaParameterDefinition() *NumberMe
 	return &NumberMetaParameterDefinition{inner: _r}
 }
 
-func (x *MappedMetaParameterDefinition) asNumberMetaParameterDefinition() *raw.PHASENumberMetaParameterDefinition { return &x.inner.PHASENumberMetaParameterDefinition }
+func (x *MappedMetaParameterDefinition) asNumberMetaParameterDefinition() *raw.PHASENumberMetaParameterDefinition {
+	return &x.inner.PHASENumberMetaParameterDefinition
+}
 
-func (x *MappedMetaParameterDefinition) asMetaParameterDefinition() *raw.PHASEMetaParameterDefinition { return &x.inner.PHASENumberMetaParameterDefinition.PHASEMetaParameterDefinition }
+func (x *MappedMetaParameterDefinition) asMetaParameterDefinition() *raw.PHASEMetaParameterDefinition {
+	return &x.inner.PHASENumberMetaParameterDefinition.PHASEMetaParameterDefinition
+}
 
-func (x *MappedMetaParameterDefinition) asDefinition() *raw.PHASEDefinition { return &x.inner.PHASENumberMetaParameterDefinition.PHASEMetaParameterDefinition.PHASEDefinition }
+func (x *MappedMetaParameterDefinition) asDefinition() *raw.PHASEDefinition {
+	return &x.inner.PHASENumberMetaParameterDefinition.PHASEMetaParameterDefinition.PHASEDefinition
+}
 
 // MappedMetaParameterDefinitionable is the interface implemented by [MappedMetaParameterDefinition], for mocking and DI.
 type MappedMetaParameterDefinitionable interface {
@@ -76,4 +84,3 @@ type MappedMetaParameterDefinitionable interface {
 }
 
 var _ MappedMetaParameterDefinitionable = (*MappedMetaParameterDefinition)(nil)
-

@@ -16,13 +16,13 @@ type SCRecordingOutputConfiguration struct {
 }
 
 var (
-	_clsSCRecordingOutputConfiguration = _objcClass("SCRecordingOutputConfiguration")
-	_sCRecordingOutputConfigurationSelOutputURL = objc.RegisterName("outputURL")
-	_sCRecordingOutputConfigurationSelSetOutputURL = objc.RegisterName("setOutputURL:")
-	_sCRecordingOutputConfigurationSelVideoCodecType = objc.RegisterName("videoCodecType")
-	_sCRecordingOutputConfigurationSelSetVideoCodecType = objc.RegisterName("setVideoCodecType:")
-	_sCRecordingOutputConfigurationSelOutputFileType = objc.RegisterName("outputFileType")
-	_sCRecordingOutputConfigurationSelSetOutputFileType = objc.RegisterName("setOutputFileType:")
+	_clsSCRecordingOutputConfiguration                         = _objcClass("SCRecordingOutputConfiguration")
+	_sCRecordingOutputConfigurationSelOutputURL                = objc.RegisterName("outputURL")
+	_sCRecordingOutputConfigurationSelSetOutputURL             = objc.RegisterName("setOutputURL:")
+	_sCRecordingOutputConfigurationSelVideoCodecType           = objc.RegisterName("videoCodecType")
+	_sCRecordingOutputConfigurationSelSetVideoCodecType        = objc.RegisterName("setVideoCodecType:")
+	_sCRecordingOutputConfigurationSelOutputFileType           = objc.RegisterName("outputFileType")
+	_sCRecordingOutputConfigurationSelSetOutputFileType        = objc.RegisterName("setOutputFileType:")
 	_sCRecordingOutputConfigurationSelAvailableVideoCodecTypes = objc.RegisterName("availableVideoCodecTypes")
 	_sCRecordingOutputConfigurationSelAvailableOutputFileTypes = objc.RegisterName("availableOutputFileTypes")
 )
@@ -40,7 +40,9 @@ func SCRecordingOutputConfigurationFromID(id objc.ID) *SCRecordingOutputConfigur
 // @abstract Specifies output URL to save the recording.
 func (o *SCRecordingOutputConfiguration) OutputURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCRecordingOutputConfigurationSelOutputURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -51,7 +53,9 @@ func (o *SCRecordingOutputConfiguration) SetOutputURL(outputURL *foundation.NSUR
 // @abstract Specifies video codec for the recording output, default is AVVideoCodecTypeH264, supported values can be obtained using availableVideoCodecTypes
 func (o *SCRecordingOutputConfiguration) VideoCodecType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCRecordingOutputConfigurationSelVideoCodecType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -62,7 +66,9 @@ func (o *SCRecordingOutputConfiguration) SetVideoCodecType(videoCodecType *found
 // @abstract Specifies file type for the recording output, default is AVFileTypeMPEG4, supported values can be obtained using availableOutputFileTypes
 func (o *SCRecordingOutputConfiguration) OutputFileType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCRecordingOutputConfigurationSelOutputFileType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -81,4 +87,3 @@ func (o *SCRecordingOutputConfiguration) AvailableOutputFileTypes() *foundation.
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _sCRecordingOutputConfigurationSelAvailableOutputFileTypes)
 	return _ret
 }
-

@@ -65,4 +65,3 @@ type RelativeAssetResolverable interface {
 }
 
 var _ RelativeAssetResolverable = (*RelativeAssetResolver)(nil)
-

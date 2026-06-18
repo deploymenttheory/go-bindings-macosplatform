@@ -16,10 +16,10 @@ type MTL4RenderPipelineColorAttachmentDescriptorArray struct {
 }
 
 var (
-	_clsMTL4RenderPipelineColorAttachmentDescriptorArray = _objcClass("MTL4RenderPipelineColorAttachmentDescriptorArray")
-	_mTL4RenderPipelineColorAttachmentDescriptorArraySelObjectAtIndexedSubscript = objc.RegisterName("objectAtIndexedSubscript:")
+	_clsMTL4RenderPipelineColorAttachmentDescriptorArray                            = _objcClass("MTL4RenderPipelineColorAttachmentDescriptorArray")
+	_mTL4RenderPipelineColorAttachmentDescriptorArraySelObjectAtIndexedSubscript    = objc.RegisterName("objectAtIndexedSubscript:")
 	_mTL4RenderPipelineColorAttachmentDescriptorArraySelSetObjectAtIndexedSubscript = objc.RegisterName("setObject:atIndexedSubscript:")
-	_mTL4RenderPipelineColorAttachmentDescriptorArraySelReset = objc.RegisterName("reset")
+	_mTL4RenderPipelineColorAttachmentDescriptorArraySelReset                       = objc.RegisterName("reset")
 )
 
 func MTL4RenderPipelineColorAttachmentDescriptorArrayFromID(id objc.ID) *MTL4RenderPipelineColorAttachmentDescriptorArray {
@@ -35,7 +35,9 @@ func MTL4RenderPipelineColorAttachmentDescriptorArrayFromID(id objc.ID) *MTL4Ren
 // Accesses a color attachment at a specific index. - Parameter attachmentIndex: Index of the attachment to access.
 func (o *MTL4RenderPipelineColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *MTL4RenderPipelineColorAttachmentDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4RenderPipelineColorAttachmentDescriptorArraySelObjectAtIndexedSubscript, attachmentIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTL4RenderPipelineColorAttachmentDescriptorFromID(_ret)
 }
 
@@ -48,4 +50,3 @@ func (o *MTL4RenderPipelineColorAttachmentDescriptorArray) SetObjectAtIndexedSub
 func (o *MTL4RenderPipelineColorAttachmentDescriptorArray) Reset() {
 	o.Ptr().Send(_mTL4RenderPipelineColorAttachmentDescriptorArraySelReset)
 }
-

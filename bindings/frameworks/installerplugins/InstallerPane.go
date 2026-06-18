@@ -17,31 +17,31 @@ type InstallerPane struct {
 }
 
 var (
-	_clsInstallerPane = _objcClass("InstallerPane")
-	_installerPaneSelInitWithSection = objc.RegisterName("initWithSection:")
-	_installerPaneSelContentView = objc.RegisterName("contentView")
-	_installerPaneSelInitialKeyView = objc.RegisterName("initialKeyView")
-	_installerPaneSelFirstKeyView = objc.RegisterName("firstKeyView")
-	_installerPaneSelLastKeyView = objc.RegisterName("lastKeyView")
-	_installerPaneSelNextPane = objc.RegisterName("nextPane")
-	_installerPaneSelWillEnterPane = objc.RegisterName("willEnterPane:")
-	_installerPaneSelDidEnterPane = objc.RegisterName("didEnterPane:")
-	_installerPaneSelShouldExitPane = objc.RegisterName("shouldExitPane:")
-	_installerPaneSelWillExitPane = objc.RegisterName("willExitPane:")
-	_installerPaneSelDidExitPane = objc.RegisterName("didExitPane:")
-	_installerPaneSelSetContentView = objc.RegisterName("setContentView:")
-	_installerPaneSelSetInitialKeyView = objc.RegisterName("setInitialKeyView:")
-	_installerPaneSelSetFirstKeyView = objc.RegisterName("setFirstKeyView:")
-	_installerPaneSelSetLastKeyView = objc.RegisterName("setLastKeyView:")
-	_installerPaneSelSetNextPane = objc.RegisterName("setNextPane:")
-	_installerPaneSelTitle = objc.RegisterName("title")
-	_installerPaneSelSection = objc.RegisterName("section")
-	_installerPaneSelNextEnabled = objc.RegisterName("nextEnabled")
-	_installerPaneSelSetNextEnabled = objc.RegisterName("setNextEnabled:")
-	_installerPaneSelPreviousEnabled = objc.RegisterName("previousEnabled")
+	_clsInstallerPane                   = _objcClass("InstallerPane")
+	_installerPaneSelInitWithSection    = objc.RegisterName("initWithSection:")
+	_installerPaneSelContentView        = objc.RegisterName("contentView")
+	_installerPaneSelInitialKeyView     = objc.RegisterName("initialKeyView")
+	_installerPaneSelFirstKeyView       = objc.RegisterName("firstKeyView")
+	_installerPaneSelLastKeyView        = objc.RegisterName("lastKeyView")
+	_installerPaneSelNextPane           = objc.RegisterName("nextPane")
+	_installerPaneSelWillEnterPane      = objc.RegisterName("willEnterPane:")
+	_installerPaneSelDidEnterPane       = objc.RegisterName("didEnterPane:")
+	_installerPaneSelShouldExitPane     = objc.RegisterName("shouldExitPane:")
+	_installerPaneSelWillExitPane       = objc.RegisterName("willExitPane:")
+	_installerPaneSelDidExitPane        = objc.RegisterName("didExitPane:")
+	_installerPaneSelSetContentView     = objc.RegisterName("setContentView:")
+	_installerPaneSelSetInitialKeyView  = objc.RegisterName("setInitialKeyView:")
+	_installerPaneSelSetFirstKeyView    = objc.RegisterName("setFirstKeyView:")
+	_installerPaneSelSetLastKeyView     = objc.RegisterName("setLastKeyView:")
+	_installerPaneSelSetNextPane        = objc.RegisterName("setNextPane:")
+	_installerPaneSelTitle              = objc.RegisterName("title")
+	_installerPaneSelSection            = objc.RegisterName("section")
+	_installerPaneSelNextEnabled        = objc.RegisterName("nextEnabled")
+	_installerPaneSelSetNextEnabled     = objc.RegisterName("setNextEnabled:")
+	_installerPaneSelPreviousEnabled    = objc.RegisterName("previousEnabled")
 	_installerPaneSelSetPreviousEnabled = objc.RegisterName("setPreviousEnabled:")
-	_installerPaneSelGotoNextPane = objc.RegisterName("gotoNextPane")
-	_installerPaneSelGotoPreviousPane = objc.RegisterName("gotoPreviousPane")
+	_installerPaneSelGotoNextPane       = objc.RegisterName("gotoNextPane")
+	_installerPaneSelGotoPreviousPane   = objc.RegisterName("gotoPreviousPane")
 )
 
 func InstallerPaneFromID(id objc.ID) *InstallerPane {
@@ -57,42 +57,54 @@ func InstallerPaneFromID(id objc.ID) *InstallerPane {
 // @method     initWithSection @discussion Init method for InstallerPane.  This method takes it's parent section as an argument.
 func (o *InstallerPane) InitWithSection(parent objc.ID) *InstallerPane {
 	_ret := objc.Send[objc.ID](o.Ptr(), _installerPaneSelInitWithSection, parent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return InstallerPaneFromID(_ret)
 }
 
 // @method     contentView @discussion Returns the contentView outlet.  ContentView is used to determine what is to be displayed on screen when this pane is active.  The contentView must be the same view when the pane is exited, as when the pane is first entered. Subclasses can override this method to return dynamic views which are not loaded from a nib.
 func (o *InstallerPane) ContentView() *appkit.NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _installerPaneSelContentView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSViewFromID(_ret)
 }
 
 // @method     initialKeyView @discussion Returns the view that should have the keyboard focus when the pane is entered. This method returns the initialKeyView outlet.  This outlet should be connected in the nib containing the pane. A subclass can override this method to return a dynamically defined initialKeyView.
 func (o *InstallerPane) InitialKeyView() *appkit.NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _installerPaneSelInitialKeyView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSViewFromID(_ret)
 }
 
 // @method     firstKeyView @discussion Returns the view that should first have keyboard focus when the content view of the pane first becomes key.  This method returns the firstKeyView outlet.  This outlet should be connected in the nib containing the pane. A subclass can override this method to return a dynamically defined firstKeyView.
 func (o *InstallerPane) FirstKeyView() *appkit.NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _installerPaneSelFirstKeyView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSViewFromID(_ret)
 }
 
 // @method     lastKeyView @discussion Returns the lastKeyView which has focus before the contentView of the pane is no longer the key view. A subclass can override this method to return a dynamically defined lastKeyView.
 func (o *InstallerPane) LastKeyView() *appkit.NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _installerPaneSelLastKeyView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSViewFromID(_ret)
 }
 
 // @method     nextPane @discussion Returns the next InstallerPane to follow this one.  Set the nextPane outlet in a nib to define a default nextPane. A subclass may want to override nextPane if the pane determines it's nextPane dynamically.
 func (o *InstallerPane) NextPane() *InstallerPane {
 	_ret := objc.Send[objc.ID](o.Ptr(), _installerPaneSelNextPane)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return InstallerPaneFromID(_ret)
 }
 
@@ -145,14 +157,18 @@ func (o *InstallerPane) SetNextPane(nextPane *InstallerPane) {
 // @method     title @discussion Title text for the pane while being displayed.  The title is retrieved and displayed every time a pane is entered.  The title must be vaild after the willEnter method is called. You must override this method if you would like a title for a custom pane.
 func (o *InstallerPane) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _installerPaneSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @method     section @discussion The parent section for this pane.
 func (o *InstallerPane) Section() *InstallerSection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _installerPaneSelSection)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return InstallerSectionFromID(_ret)
 }
 
@@ -187,4 +203,3 @@ func (o *InstallerPane) GotoPreviousPane() bool {
 	_ret := objc.Send[bool](o.Ptr(), _installerPaneSelGotoPreviousPane)
 	return _ret
 }
-

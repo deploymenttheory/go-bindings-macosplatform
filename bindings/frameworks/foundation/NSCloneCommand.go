@@ -15,7 +15,7 @@ type NSCloneCommand struct {
 }
 
 var (
-	_clsNSCloneCommand = _objcClass("NSCloneCommand")
+	_clsNSCloneCommand             = _objcClass("NSCloneCommand")
 	_nSCloneCommandSelKeySpecifier = objc.RegisterName("keySpecifier")
 )
 
@@ -31,7 +31,8 @@ func NSCloneCommandFromID(id objc.ID) *NSCloneCommand {
 
 func (o *NSCloneCommand) KeySpecifier() *NSScriptObjectSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCloneCommandSelKeySpecifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptObjectSpecifierFromID(_ret)
 }
-

@@ -87,9 +87,13 @@ func (x *MatrixSolveLU) EncodeToCommandBufferSourceMatrixRightHandSideMatrixPivo
 	x.inner.EncodeToCommandBufferSourceMatrixRightHandSideMatrixPivotIndicesSolutionMatrix(commandBuffer, sourceMatrix, rightHandSideMatrix, pivotIndices, solutionMatrix)
 }
 
-func (x *MatrixSolveLU) asMatrixBinaryKernel() *mpsmatrix.MPSMatrixBinaryKernel { return &x.inner.MPSMatrixBinaryKernel }
+func (x *MatrixSolveLU) asMatrixBinaryKernel() *mpsmatrix.MPSMatrixBinaryKernel {
+	return &x.inner.MPSMatrixBinaryKernel
+}
 
-func (x *MatrixSolveLU) asKernel() *mpscore.MPSKernel { return &x.inner.MPSMatrixBinaryKernel.MPSKernel }
+func (x *MatrixSolveLU) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSMatrixBinaryKernel.MPSKernel
+}
 
 // MatrixSolveLUable is the interface implemented by [MatrixSolveLU], for mocking and DI.
 type MatrixSolveLUable interface {
@@ -105,4 +109,3 @@ type MatrixSolveLUable interface {
 }
 
 var _ MatrixSolveLUable = (*MatrixSolveLU)(nil)
-

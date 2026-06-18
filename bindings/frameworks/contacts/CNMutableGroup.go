@@ -16,7 +16,7 @@ type CNMutableGroup struct {
 }
 
 var (
-	_clsCNMutableGroup = _objcClass("CNMutableGroup")
+	_clsCNMutableGroup        = _objcClass("CNMutableGroup")
 	_cNMutableGroupSelSetName = objc.RegisterName("setName:")
 )
 
@@ -33,4 +33,3 @@ func CNMutableGroupFromID(id objc.ID) *CNMutableGroup {
 func (o *CNMutableGroup) SetName(name *foundation.NSString) {
 	o.Ptr().Send(_cNMutableGroupSelSetName, name.Ptr())
 }
-

@@ -67,4 +67,3 @@ type ProjectExtensionContextable interface {
 }
 
 var _ ProjectExtensionContextable = (*ProjectExtensionContext)(nil)
-

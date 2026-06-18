@@ -1306,4 +1306,3 @@ type Cellable interface {
 }
 
 var _ Cellable = (*Cell)(nil)
-

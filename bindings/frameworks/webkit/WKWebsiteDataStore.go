@@ -18,23 +18,23 @@ type WKWebsiteDataStore struct {
 }
 
 var (
-	_clsWKWebsiteDataStore = _objcClass("WKWebsiteDataStore")
-	_wKWebsiteDataStoreSelDefaultDataStore = objc.RegisterName("defaultDataStore")
-	_wKWebsiteDataStoreSelNonPersistentDataStore = objc.RegisterName("nonPersistentDataStore")
-	_wKWebsiteDataStoreSelAllWebsiteDataTypes = objc.RegisterName("allWebsiteDataTypes")
-	_wKWebsiteDataStoreSelFetchDataRecordsOfTypesCompletionHandler = objc.RegisterName("fetchDataRecordsOfTypes:completionHandler:")
+	_clsWKWebsiteDataStore                                                 = _objcClass("WKWebsiteDataStore")
+	_wKWebsiteDataStoreSelDefaultDataStore                                 = objc.RegisterName("defaultDataStore")
+	_wKWebsiteDataStoreSelNonPersistentDataStore                           = objc.RegisterName("nonPersistentDataStore")
+	_wKWebsiteDataStoreSelAllWebsiteDataTypes                              = objc.RegisterName("allWebsiteDataTypes")
+	_wKWebsiteDataStoreSelFetchDataRecordsOfTypesCompletionHandler         = objc.RegisterName("fetchDataRecordsOfTypes:completionHandler:")
 	_wKWebsiteDataStoreSelRemoveDataOfTypesForDataRecordsCompletionHandler = objc.RegisterName("removeDataOfTypes:forDataRecords:completionHandler:")
-	_wKWebsiteDataStoreSelRemoveDataOfTypesModifiedSinceCompletionHandler = objc.RegisterName("removeDataOfTypes:modifiedSince:completionHandler:")
-	_wKWebsiteDataStoreSelFetchDataOfTypesCompletionHandler = objc.RegisterName("fetchDataOfTypes:completionHandler:")
-	_wKWebsiteDataStoreSelRestoreDataCompletionHandler = objc.RegisterName("restoreData:completionHandler:")
-	_wKWebsiteDataStoreSelDataStoreForIdentifier = objc.RegisterName("dataStoreForIdentifier:")
-	_wKWebsiteDataStoreSelRemoveDataStoreForIdentifierCompletionHandler = objc.RegisterName("removeDataStoreForIdentifier:completionHandler:")
-	_wKWebsiteDataStoreSelFetchAllDataStoreIdentifiers = objc.RegisterName("fetchAllDataStoreIdentifiers:")
-	_wKWebsiteDataStoreSelIsPersistent = objc.RegisterName("isPersistent")
-	_wKWebsiteDataStoreSelHttpCookieStore = objc.RegisterName("httpCookieStore")
-	_wKWebsiteDataStoreSelIdentifier = objc.RegisterName("identifier")
-	_wKWebsiteDataStoreSelProxyConfigurations = objc.RegisterName("proxyConfigurations")
-	_wKWebsiteDataStoreSelSetProxyConfigurations = objc.RegisterName("setProxyConfigurations:")
+	_wKWebsiteDataStoreSelRemoveDataOfTypesModifiedSinceCompletionHandler  = objc.RegisterName("removeDataOfTypes:modifiedSince:completionHandler:")
+	_wKWebsiteDataStoreSelFetchDataOfTypesCompletionHandler                = objc.RegisterName("fetchDataOfTypes:completionHandler:")
+	_wKWebsiteDataStoreSelRestoreDataCompletionHandler                     = objc.RegisterName("restoreData:completionHandler:")
+	_wKWebsiteDataStoreSelDataStoreForIdentifier                           = objc.RegisterName("dataStoreForIdentifier:")
+	_wKWebsiteDataStoreSelRemoveDataStoreForIdentifierCompletionHandler    = objc.RegisterName("removeDataStoreForIdentifier:completionHandler:")
+	_wKWebsiteDataStoreSelFetchAllDataStoreIdentifiers                     = objc.RegisterName("fetchAllDataStoreIdentifiers:")
+	_wKWebsiteDataStoreSelIsPersistent                                     = objc.RegisterName("isPersistent")
+	_wKWebsiteDataStoreSelHttpCookieStore                                  = objc.RegisterName("httpCookieStore")
+	_wKWebsiteDataStoreSelIdentifier                                       = objc.RegisterName("identifier")
+	_wKWebsiteDataStoreSelProxyConfigurations                              = objc.RegisterName("proxyConfigurations")
+	_wKWebsiteDataStoreSelSetProxyConfigurations                           = objc.RegisterName("setProxyConfigurations:")
 )
 
 func WKWebsiteDataStoreFromID(id objc.ID) *WKWebsiteDataStore {
@@ -49,14 +49,18 @@ func WKWebsiteDataStoreFromID(id objc.ID) *WKWebsiteDataStore {
 
 func WKWebsiteDataStoreDefaultDataStore() *WKWebsiteDataStore {
 	_ret := objc.Send[objc.ID](objc.ID(_clsWKWebsiteDataStore), _wKWebsiteDataStoreSelDefaultDataStore)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebsiteDataStoreFromID(_ret)
 }
 
 // @abstract Returns a new non-persistent data store. @discussion If a WKWebView is associated with a non-persistent data store, no data will be written to the file system. This is useful for implementing "private browsing" in a web view.
 func WKWebsiteDataStoreNonPersistentDataStore() *WKWebsiteDataStore {
 	_ret := objc.Send[objc.ID](objc.ID(_clsWKWebsiteDataStore), _wKWebsiteDataStoreSelNonPersistentDataStore)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebsiteDataStoreFromID(_ret)
 }
 
@@ -133,7 +137,9 @@ func (o *WKWebsiteDataStore) RestoreDataCompletionHandler(data *foundation.NSDat
 // @abstract Get a persistent data store. @param identifier An identifier that is used to uniquely identify the data store. @discussion If a data store with this identifier does not exist yet, it will be created. Throws exception if identifier is 0.
 func WKWebsiteDataStoreDataStoreForIdentifier(identifier *foundation.NSUUID) *WKWebsiteDataStore {
 	_ret := objc.Send[objc.ID](objc.ID(_clsWKWebsiteDataStore), _wKWebsiteDataStoreSelDataStoreForIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebsiteDataStoreFromID(_ret)
 }
 
@@ -163,14 +169,18 @@ func (o *WKWebsiteDataStore) IsPersistent() bool {
 // @abstract Returns the cookie store representing HTTP cookies in this website data store.
 func (o *WKWebsiteDataStore) HttpCookieStore() *WKHTTPCookieStore {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebsiteDataStoreSelHttpCookieStore)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKHTTPCookieStoreFromID(_ret)
 }
 
 // @abstract Get identifier for a data store. @discussion Returns nil for default and non-persistent data store .
 func (o *WKWebsiteDataStore) Identifier() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebsiteDataStoreSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
 
@@ -182,4 +192,3 @@ func (o *WKWebsiteDataStore) ProxyConfigurations() *foundation.NSArray[*foundati
 func (o *WKWebsiteDataStore) SetProxyConfigurations(proxyConfigurations *foundation.NSArray[*foundation.NSObject]) {
 	o.Ptr().Send(_wKWebsiteDataStoreSelSetProxyConfigurations, proxyConfigurations)
 }
-

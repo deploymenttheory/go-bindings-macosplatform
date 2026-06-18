@@ -498,4 +498,3 @@ func AlutLoadWAVMemory(memory *int8, format *int, data unsafe.Pointer, size *int
 func AlutUnloadWAV(format int, data unsafe.Pointer, size int, freq int) unsafe.Pointer {
 	return raw.AlutUnloadWAV(format, data, size, freq)
 }
-

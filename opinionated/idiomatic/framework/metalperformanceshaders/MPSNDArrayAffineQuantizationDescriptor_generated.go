@@ -17,7 +17,9 @@ type NDArrayAffineQuantizationDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MPSNDArrayAffineQuantizationDescriptor].
-func (x *NDArrayAffineQuantizationDescriptor) Unwrap() *raw.MPSNDArrayAffineQuantizationDescriptor { return x.inner }
+func (x *NDArrayAffineQuantizationDescriptor) Unwrap() *raw.MPSNDArrayAffineQuantizationDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -92,7 +94,9 @@ func (x *NDArrayAffineQuantizationDescriptor) SetImplicitZeroPoint(implicitZeroP
 	x.inner.SetImplicitZeroPoint(implicitZeroPoint)
 }
 
-func (x *NDArrayAffineQuantizationDescriptor) asNDArrayQuantizationDescriptor() *mpsndarray.MPSNDArrayQuantizationDescriptor { return &x.inner.MPSNDArrayQuantizationDescriptor }
+func (x *NDArrayAffineQuantizationDescriptor) asNDArrayQuantizationDescriptor() *mpsndarray.MPSNDArrayQuantizationDescriptor {
+	return &x.inner.MPSNDArrayQuantizationDescriptor
+}
 
 // NDArrayAffineQuantizationDescriptorable is the interface implemented by [NDArrayAffineQuantizationDescriptor], for mocking and DI.
 type NDArrayAffineQuantizationDescriptorable interface {
@@ -109,4 +113,3 @@ type NDArrayAffineQuantizationDescriptorable interface {
 }
 
 var _ NDArrayAffineQuantizationDescriptorable = (*NDArrayAffineQuantizationDescriptor)(nil)
-

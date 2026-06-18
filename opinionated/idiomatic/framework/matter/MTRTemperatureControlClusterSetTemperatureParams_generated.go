@@ -16,7 +16,9 @@ type MTRTemperatureControlClusterSetTemperatureParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRTemperatureControlClusterSetTemperatureParams].
-func (x *MTRTemperatureControlClusterSetTemperatureParams) Unwrap() *raw.MTRTemperatureControlClusterSetTemperatureParams { return x.inner }
+func (x *MTRTemperatureControlClusterSetTemperatureParams) Unwrap() *raw.MTRTemperatureControlClusterSetTemperatureParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -118,4 +120,3 @@ type MTRTemperatureControlClusterSetTemperatureParamsable interface {
 }
 
 var _ MTRTemperatureControlClusterSetTemperatureParamsable = (*MTRTemperatureControlClusterSetTemperatureParams)(nil)
-

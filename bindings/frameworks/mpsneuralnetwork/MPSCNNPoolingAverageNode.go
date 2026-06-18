@@ -27,4 +27,3 @@ func MPSCNNPoolingAverageNodeFromID(id objc.ID) *MPSCNNPoolingAverageNode {
 	purego.Track(o)
 	return o
 }
-

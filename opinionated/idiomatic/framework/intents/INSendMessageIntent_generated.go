@@ -171,4 +171,3 @@ type SendMessageIntentable interface {
 }
 
 var _ SendMessageIntentable = (*SendMessageIntent)(nil)
-

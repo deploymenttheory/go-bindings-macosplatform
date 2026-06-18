@@ -16,13 +16,13 @@ type CKSyncEngineRecordZoneChangeBatch struct {
 }
 
 var (
-	_clsCKSyncEngineRecordZoneChangeBatch = _objcClass("CKSyncEngineRecordZoneChangeBatch")
-	_cKSyncEngineRecordZoneChangeBatchSelInitWithPendingChangesRecordProvider = objc.RegisterName("initWithPendingChanges:recordProvider:")
+	_clsCKSyncEngineRecordZoneChangeBatch                                                   = _objcClass("CKSyncEngineRecordZoneChangeBatch")
+	_cKSyncEngineRecordZoneChangeBatchSelInitWithPendingChangesRecordProvider               = objc.RegisterName("initWithPendingChanges:recordProvider:")
 	_cKSyncEngineRecordZoneChangeBatchSelInitWithRecordsToSaveRecordIDsToDeleteAtomicByZone = objc.RegisterName("initWithRecordsToSave:recordIDsToDelete:atomicByZone:")
-	_cKSyncEngineRecordZoneChangeBatchSelRecordsToSave = objc.RegisterName("recordsToSave")
-	_cKSyncEngineRecordZoneChangeBatchSelRecordIDsToDelete = objc.RegisterName("recordIDsToDelete")
-	_cKSyncEngineRecordZoneChangeBatchSelAtomicByZone = objc.RegisterName("atomicByZone")
-	_cKSyncEngineRecordZoneChangeBatchSelSetAtomicByZone = objc.RegisterName("setAtomicByZone:")
+	_cKSyncEngineRecordZoneChangeBatchSelRecordsToSave                                      = objc.RegisterName("recordsToSave")
+	_cKSyncEngineRecordZoneChangeBatchSelRecordIDsToDelete                                  = objc.RegisterName("recordIDsToDelete")
+	_cKSyncEngineRecordZoneChangeBatchSelAtomicByZone                                       = objc.RegisterName("atomicByZone")
+	_cKSyncEngineRecordZoneChangeBatchSelSetAtomicByZone                                    = objc.RegisterName("setAtomicByZone:")
 )
 
 func CKSyncEngineRecordZoneChangeBatchFromID(id objc.ID) *CKSyncEngineRecordZoneChangeBatch {
@@ -38,32 +38,40 @@ func CKSyncEngineRecordZoneChangeBatchFromID(id objc.ID) *CKSyncEngineRecordZone
 // Creates a batch of records to modify using the provided record zone changes. - Parameters: - pendingChanges: The record zone changes to process. - recordProvider: A block that returns the record for the specified record identifier. - Returns: The batch of records to modify, or `nil` if there are no pending changes. This method iterates over `pendingChanges` and adds the necessary information to the new batch, until there are no more changes or the size of the batch reaches the maximum limit. If the type of change is a record save, the method asks the specified `recordProvider` block for that record. If the closure returns `nil`, the method skips that change.
 func (o *CKSyncEngineRecordZoneChangeBatch) InitWithPendingChangesRecordProvider(pendingChanges *foundation.NSArray[*CKSyncEnginePendingRecordZoneChange], recordProvider objc.Block) *CKSyncEngineRecordZoneChangeBatch {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineRecordZoneChangeBatchSelInitWithPendingChangesRecordProvider, pendingChanges.Ptr(), recordProvider)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKSyncEngineRecordZoneChangeBatchFromID(_ret)
 }
 
-// Creates a batch of records to modify. - Parameters: - recordsToSave: The records to save. - recordIDsToDelete: The identifiers of the records to delete. - atomicByZone: A Boolean value that determines whether CloudKit modifies the specified records atomically by record zone. - Returns: An initialized change batch. - Important: When using this initializer to create batches, consider the number of records you specify and their combined size. If you specify too many records, or their combined size is too large, the send operation may fail with an error of type ``CKError/Code/limitExceeded``.
+// Creates a batch of records to modify. - Parameters: - recordsToSave: The records to save. - recordIDsToDelete: The identifiers of the records to delete. - atomicByZone: A Boolean value that determines whether CloudKit modifies the specified records atomically by record zone. - Returns: An initialized change batch. - Important: When using this initializer to create batches, consider the number of records you specify and their combined size. If you specify too many records, or their combined size is too large, the send operation may fail with an error of type “CKError/Code/limitExceeded“.
 func (o *CKSyncEngineRecordZoneChangeBatch) InitWithRecordsToSaveRecordIDsToDeleteAtomicByZone(recordsToSave *foundation.NSArray[*CKRecord], recordIDsToDelete *foundation.NSArray[*CKRecordID], atomicByZone bool) *CKSyncEngineRecordZoneChangeBatch {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineRecordZoneChangeBatchSelInitWithRecordsToSaveRecordIDsToDeleteAtomicByZone, recordsToSave.Ptr(), recordIDsToDelete.Ptr(), atomicByZone)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKSyncEngineRecordZoneChangeBatchFromID(_ret)
 }
 
 // The records to save.
 func (o *CKSyncEngineRecordZoneChangeBatch) RecordsToSave() *foundation.NSArray[*CKRecord] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineRecordZoneChangeBatchSelRecordsToSave)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CKRecord](_ret)
 }
 
 // The unique identifiers of the records to delete.
 func (o *CKSyncEngineRecordZoneChangeBatch) RecordIDsToDelete() *foundation.NSArray[*CKRecordID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineRecordZoneChangeBatchSelRecordIDsToDelete)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CKRecordID](_ret)
 }
 
-// A Boolean value that determines whether CloudKit modifies records atomically by record zone. When <doc://com.apple.documentation/documentation/swift/true>, CloudKit processes record changes atomically by record zone, and if any individual change fails, all other changes in that record's record zone fail and return an error of type ``CKError/Code/batchRequestFailed``. The default value is <doc://com.apple.documentation/documentation/swift/false>.
+// A Boolean value that determines whether CloudKit modifies records atomically by record zone. When <doc://com.apple.documentation/documentation/swift/true>, CloudKit processes record changes atomically by record zone, and if any individual change fails, all other changes in that record's record zone fail and return an error of type “CKError/Code/batchRequestFailed“. The default value is <doc://com.apple.documentation/documentation/swift/false>.
 func (o *CKSyncEngineRecordZoneChangeBatch) AtomicByZone() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cKSyncEngineRecordZoneChangeBatchSelAtomicByZone)
 	return _ret
@@ -72,4 +80,3 @@ func (o *CKSyncEngineRecordZoneChangeBatch) AtomicByZone() bool {
 func (o *CKSyncEngineRecordZoneChangeBatch) SetAtomicByZone(atomicByZone bool) {
 	o.Ptr().Send(_cKSyncEngineRecordZoneChangeBatchSelSetAtomicByZone, atomicByZone)
 }
-

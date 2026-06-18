@@ -60,4 +60,3 @@ type ChallengesViewControllerable interface {
 }
 
 var _ ChallengesViewControllerable = (*ChallengesViewController)(nil)
-

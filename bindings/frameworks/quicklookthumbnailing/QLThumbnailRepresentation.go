@@ -19,9 +19,9 @@ type QLThumbnailRepresentation struct {
 }
 
 var (
-	_clsQLThumbnailRepresentation = _objcClass("QLThumbnailRepresentation")
-	_qLThumbnailRepresentationSelType = objc.RegisterName("type")
-	_qLThumbnailRepresentationSelCGImage = objc.RegisterName("CGImage")
+	_clsQLThumbnailRepresentation            = _objcClass("QLThumbnailRepresentation")
+	_qLThumbnailRepresentationSelType        = objc.RegisterName("type")
+	_qLThumbnailRepresentationSelCGImage     = objc.RegisterName("CGImage")
 	_qLThumbnailRepresentationSelContentRect = objc.RegisterName("contentRect")
 )
 
@@ -51,4 +51,3 @@ func (o *QLThumbnailRepresentation) ContentRect() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _qLThumbnailRepresentationSelContentRect)
 	return _ret
 }
-

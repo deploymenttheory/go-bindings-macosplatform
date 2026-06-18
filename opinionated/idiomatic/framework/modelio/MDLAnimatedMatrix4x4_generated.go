@@ -99,4 +99,3 @@ type AnimatedMatrix4x4able interface {
 }
 
 var _ AnimatedMatrix4x4able = (*AnimatedMatrix4x4)(nil)
-

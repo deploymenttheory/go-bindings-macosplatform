@@ -15,16 +15,16 @@ type SCNAvoidOccluderConstraint struct {
 }
 
 var (
-	_clsSCNAvoidOccluderConstraint = _objcClass("SCNAvoidOccluderConstraint")
+	_clsSCNAvoidOccluderConstraint                                  = _objcClass("SCNAvoidOccluderConstraint")
 	_sCNAvoidOccluderConstraintSelAvoidOccluderConstraintWithTarget = objc.RegisterName("avoidOccluderConstraintWithTarget:")
-	_sCNAvoidOccluderConstraintSelDelegate = objc.RegisterName("delegate")
-	_sCNAvoidOccluderConstraintSelSetDelegate = objc.RegisterName("setDelegate:")
-	_sCNAvoidOccluderConstraintSelTarget = objc.RegisterName("target")
-	_sCNAvoidOccluderConstraintSelSetTarget = objc.RegisterName("setTarget:")
-	_sCNAvoidOccluderConstraintSelOccluderCategoryBitMask = objc.RegisterName("occluderCategoryBitMask")
-	_sCNAvoidOccluderConstraintSelSetOccluderCategoryBitMask = objc.RegisterName("setOccluderCategoryBitMask:")
-	_sCNAvoidOccluderConstraintSelBias = objc.RegisterName("bias")
-	_sCNAvoidOccluderConstraintSelSetBias = objc.RegisterName("setBias:")
+	_sCNAvoidOccluderConstraintSelDelegate                          = objc.RegisterName("delegate")
+	_sCNAvoidOccluderConstraintSelSetDelegate                       = objc.RegisterName("setDelegate:")
+	_sCNAvoidOccluderConstraintSelTarget                            = objc.RegisterName("target")
+	_sCNAvoidOccluderConstraintSelSetTarget                         = objc.RegisterName("setTarget:")
+	_sCNAvoidOccluderConstraintSelOccluderCategoryBitMask           = objc.RegisterName("occluderCategoryBitMask")
+	_sCNAvoidOccluderConstraintSelSetOccluderCategoryBitMask        = objc.RegisterName("setOccluderCategoryBitMask:")
+	_sCNAvoidOccluderConstraintSelBias                              = objc.RegisterName("bias")
+	_sCNAvoidOccluderConstraintSelSetBias                           = objc.RegisterName("setBias:")
 )
 
 func SCNAvoidOccluderConstraintFromID(id objc.ID) *SCNAvoidOccluderConstraint {
@@ -40,7 +40,9 @@ func SCNAvoidOccluderConstraintFromID(id objc.ID) *SCNAvoidOccluderConstraint {
 // @method avoidOccluderConstraintWithTarget @abstract Creates and returns a SCNAvoidOccluderConstraint object.
 func SCNAvoidOccluderConstraintAvoidOccluderConstraintWithTarget(target *SCNNode) *SCNAvoidOccluderConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAvoidOccluderConstraint), _sCNAvoidOccluderConstraintSelAvoidOccluderConstraintWithTarget, target.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNAvoidOccluderConstraintFromID(_ret)
 }
 
@@ -57,7 +59,9 @@ func (o *SCNAvoidOccluderConstraint) SetDelegate(delegate SCNAvoidOccluderConstr
 // @property target @abstract Defines the target node
 func (o *SCNAvoidOccluderConstraint) Target() *SCNNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNAvoidOccluderConstraintSelTarget)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNNodeFromID(_ret)
 }
 
@@ -84,4 +88,3 @@ func (o *SCNAvoidOccluderConstraint) Bias() float64 {
 func (o *SCNAvoidOccluderConstraint) SetBias(bias float64) {
 	o.Ptr().Send(_sCNAvoidOccluderConstraintSelSetBias, bias)
 }
-

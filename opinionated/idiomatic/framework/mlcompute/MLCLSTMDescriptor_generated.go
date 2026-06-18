@@ -95,4 +95,3 @@ type LSTMDescriptorable interface {
 }
 
 var _ LSTMDescriptorable = (*LSTMDescriptor)(nil)
-

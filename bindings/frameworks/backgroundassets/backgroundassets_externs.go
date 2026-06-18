@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego"
 )
 
-// The `-[NSError userInfo]` key for an asset pack’s identifier. This key is relevant when the error code is ``BAManagedErrorCode/BAManagedErrorCodeAssetPackNotFound``.
+// The `-[NSError userInfo]` key for an asset pack’s identifier. This key is relevant when the error code is “BAManagedErrorCode/BAManagedErrorCodeAssetPackNotFound“.
 func BAAssetPackIdentifierErrorKey() uintptr {
 	ptr, _ := purego.Dlsym(_backgroundassetsLib, "BAAssetPackIdentifierErrorKey")
 	return ptr
@@ -18,21 +18,27 @@ func BAAssetPackIdentifierErrorKey() uintptr {
 // @brief A value that represents average priority for a download.
 func BADownloaderPriorityDefault() int {
 	ptr, _ := purego.Dlsym(_backgroundassetsLib, "BADownloaderPriorityDefault")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 // @brief A value that represents the highest priority for a download.
 func BADownloaderPriorityMax() int {
 	ptr, _ := purego.Dlsym(_backgroundassetsLib, "BADownloaderPriorityMax")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 // @brief A value that represents the lowest priority for a download.
 func BADownloaderPriorityMin() int {
 	ptr, _ := purego.Dlsym(_backgroundassetsLib, "BADownloaderPriorityMin")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
@@ -46,4 +52,3 @@ func BAManagedErrorDomain() uintptr {
 	ptr, _ := purego.Dlsym(_backgroundassetsLib, "BAManagedErrorDomain")
 	return ptr
 }
-

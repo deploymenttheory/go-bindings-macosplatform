@@ -86,7 +86,9 @@ func (x *VideoCompositionInstruction) RequiredSourceSampleDataTrackIDs() []*foun
 	})
 }
 
-func (x *VideoCompositionInstruction) asVideoCompositionInstruction() *raw.AVVideoCompositionInstruction { return x.inner }
+func (x *VideoCompositionInstruction) asVideoCompositionInstruction() *raw.AVVideoCompositionInstruction {
+	return x.inner
+}
 
 // VideoCompositionInstructionable is the interface implemented by [VideoCompositionInstruction], for mocking and DI.
 type VideoCompositionInstructionable interface {
@@ -100,4 +102,3 @@ type VideoCompositionInstructionable interface {
 }
 
 var _ VideoCompositionInstructionable = (*VideoCompositionInstruction)(nil)
-

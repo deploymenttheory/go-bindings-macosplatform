@@ -45,4 +45,3 @@ func MTCopyLocalizedNameForMediaType(mediaType uint) unsafe.Pointer {
 func MTRegisterProfessionalVideoWorkflowFormatReaders() {
 	raw.MTRegisterProfessionalVideoWorkflowFormatReaders()
 }
-

@@ -15,11 +15,11 @@ type NSMorphologyPronoun struct {
 }
 
 var (
-	_clsNSMorphologyPronoun = _objcClass("NSMorphologyPronoun")
+	_clsNSMorphologyPronoun                                             = _objcClass("NSMorphologyPronoun")
 	_nSMorphologyPronounSelInitWithPronounMorphologyDependentMorphology = objc.RegisterName("initWithPronoun:morphology:dependentMorphology:")
-	_nSMorphologyPronounSelPronoun = objc.RegisterName("pronoun")
-	_nSMorphologyPronounSelMorphology = objc.RegisterName("morphology")
-	_nSMorphologyPronounSelDependentMorphology = objc.RegisterName("dependentMorphology")
+	_nSMorphologyPronounSelPronoun                                      = objc.RegisterName("pronoun")
+	_nSMorphologyPronounSelMorphology                                   = objc.RegisterName("morphology")
+	_nSMorphologyPronounSelDependentMorphology                          = objc.RegisterName("dependentMorphology")
 )
 
 func NSMorphologyPronounFromID(id objc.ID) *NSMorphologyPronoun {
@@ -34,25 +34,32 @@ func NSMorphologyPronounFromID(id objc.ID) *NSMorphologyPronoun {
 
 func (o *NSMorphologyPronoun) InitWithPronounMorphologyDependentMorphology(pronoun *NSString, morphology *NSMorphology, dependentMorphology *NSMorphology) *NSMorphologyPronoun {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMorphologyPronounSelInitWithPronounMorphologyDependentMorphology, pronoun.Ptr(), morphology.Ptr(), dependentMorphology.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMorphologyPronounFromID(_ret)
 }
 
 func (o *NSMorphologyPronoun) Pronoun() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMorphologyPronounSelPronoun)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSMorphologyPronoun) Morphology() *NSMorphology {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMorphologyPronounSelMorphology)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMorphologyFromID(_ret)
 }
 
 func (o *NSMorphologyPronoun) DependentMorphology() *NSMorphology {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMorphologyPronounSelDependentMorphology)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMorphologyFromID(_ret)
 }
-

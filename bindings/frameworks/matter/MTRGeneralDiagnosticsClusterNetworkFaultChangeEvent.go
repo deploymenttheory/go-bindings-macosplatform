@@ -16,10 +16,10 @@ type MTRGeneralDiagnosticsClusterNetworkFaultChangeEvent struct {
 }
 
 var (
-	_clsMTRGeneralDiagnosticsClusterNetworkFaultChangeEvent = _objcClass("MTRGeneralDiagnosticsClusterNetworkFaultChangeEvent")
-	_mTRGeneralDiagnosticsClusterNetworkFaultChangeEventSelCurrent = objc.RegisterName("current")
-	_mTRGeneralDiagnosticsClusterNetworkFaultChangeEventSelSetCurrent = objc.RegisterName("setCurrent:")
-	_mTRGeneralDiagnosticsClusterNetworkFaultChangeEventSelPrevious = objc.RegisterName("previous")
+	_clsMTRGeneralDiagnosticsClusterNetworkFaultChangeEvent            = _objcClass("MTRGeneralDiagnosticsClusterNetworkFaultChangeEvent")
+	_mTRGeneralDiagnosticsClusterNetworkFaultChangeEventSelCurrent     = objc.RegisterName("current")
+	_mTRGeneralDiagnosticsClusterNetworkFaultChangeEventSelSetCurrent  = objc.RegisterName("setCurrent:")
+	_mTRGeneralDiagnosticsClusterNetworkFaultChangeEventSelPrevious    = objc.RegisterName("previous")
 	_mTRGeneralDiagnosticsClusterNetworkFaultChangeEventSelSetPrevious = objc.RegisterName("setPrevious:")
 )
 
@@ -50,4 +50,3 @@ func (o *MTRGeneralDiagnosticsClusterNetworkFaultChangeEvent) Previous() *founda
 func (o *MTRGeneralDiagnosticsClusterNetworkFaultChangeEvent) SetPrevious(previous *foundation.NSArray[objc.ID]) {
 	o.Ptr().Send(_mTRGeneralDiagnosticsClusterNetworkFaultChangeEventSelSetPrevious, previous)
 }
-

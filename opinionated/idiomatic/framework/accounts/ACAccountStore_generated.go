@@ -99,4 +99,3 @@ type AccountStoreable interface {
 }
 
 var _ AccountStoreable = (*AccountStore)(nil)
-

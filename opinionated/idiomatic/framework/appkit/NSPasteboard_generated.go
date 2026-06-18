@@ -245,4 +245,3 @@ type Pasteboardable interface {
 }
 
 var _ Pasteboardable = (*Pasteboard)(nil)
-

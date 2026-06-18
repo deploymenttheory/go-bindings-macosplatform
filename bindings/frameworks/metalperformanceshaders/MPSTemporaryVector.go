@@ -18,11 +18,11 @@ type MPSTemporaryVector struct {
 }
 
 var (
-	_clsMPSTemporaryVector = _objcClass("MPSTemporaryVector")
-	_mPSTemporaryVectorSelTemporaryVectorWithCommandBufferDescriptor = objc.RegisterName("temporaryVectorWithCommandBuffer:descriptor:")
+	_clsMPSTemporaryVector                                               = _objcClass("MPSTemporaryVector")
+	_mPSTemporaryVectorSelTemporaryVectorWithCommandBufferDescriptor     = objc.RegisterName("temporaryVectorWithCommandBuffer:descriptor:")
 	_mPSTemporaryVectorSelPrefetchStorageWithCommandBufferDescriptorList = objc.RegisterName("prefetchStorageWithCommandBuffer:descriptorList:")
-	_mPSTemporaryVectorSelReadCount = objc.RegisterName("readCount")
-	_mPSTemporaryVectorSelSetReadCount = objc.RegisterName("setReadCount:")
+	_mPSTemporaryVectorSelReadCount                                      = objc.RegisterName("readCount")
+	_mPSTemporaryVectorSelSetReadCount                                   = objc.RegisterName("setReadCount:")
 )
 
 func MPSTemporaryVectorFromID(id objc.ID) *MPSTemporaryVector {
@@ -38,7 +38,9 @@ func MPSTemporaryVectorFromID(id objc.ID) *MPSTemporaryVector {
 // @abstract   Initialize a MPSTemporaryVector for use on a MTLCommandBuffer @param      commandBuffer       The MTLCommandBuffer on which the MPSTemporaryMatrix will be exclusively used @param      descriptor    A valid MPSVectorDescriptor describing the MPSVector format to create @return     A valid MPSTemporaryVector.  The object is not managed by a NSAutoreleasePool. The object will be released when the command buffer is committed. The underlying buffer will become invalid before this time due to the action of the readCount property.  Please read and understand the use of the readCount property before using this object.
 func MPSTemporaryVectorTemporaryVectorWithCommandBufferDescriptor(commandBuffer metal.MTLCommandBuffer, descriptor *mpscore.MPSVectorDescriptor) *MPSTemporaryVector {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSTemporaryVector), _mPSTemporaryVectorSelTemporaryVectorWithCommandBufferDescriptor, commandBuffer, descriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSTemporaryVectorFromID(_ret)
 }
 
@@ -56,4 +58,3 @@ func (o *MPSTemporaryVector) ReadCount() uint {
 func (o *MPSTemporaryVector) SetReadCount(readCount uint) {
 	o.Ptr().Send(_mPSTemporaryVectorSelSetReadCount, readCount)
 }
-

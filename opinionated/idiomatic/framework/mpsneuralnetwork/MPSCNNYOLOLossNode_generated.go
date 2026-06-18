@@ -69,4 +69,3 @@ type CNNYOLOLossNodeable interface {
 }
 
 var _ CNNYOLOLossNodeable = (*CNNYOLOLossNode)(nil)
-

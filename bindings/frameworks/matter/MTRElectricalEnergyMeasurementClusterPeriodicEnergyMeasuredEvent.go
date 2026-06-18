@@ -16,10 +16,10 @@ type MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent struct {
 }
 
 var (
-	_clsMTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent = _objcClass("MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent")
-	_mTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEventSelEnergyImported = objc.RegisterName("energyImported")
+	_clsMTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent                  = _objcClass("MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent")
+	_mTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEventSelEnergyImported    = objc.RegisterName("energyImported")
 	_mTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEventSelSetEnergyImported = objc.RegisterName("setEnergyImported:")
-	_mTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEventSelEnergyExported = objc.RegisterName("energyExported")
+	_mTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEventSelEnergyExported    = objc.RegisterName("energyExported")
 	_mTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEventSelSetEnergyExported = objc.RegisterName("setEnergyExported:")
 )
 
@@ -35,7 +35,9 @@ func MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEventFromID(id o
 
 func (o *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent) EnergyImported() *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEventSelEnergyImported)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRElectricalEnergyMeasurementClusterEnergyMeasurementStructFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent) SetEn
 
 func (o *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent) EnergyExported() *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEventSelEnergyExported)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRElectricalEnergyMeasurementClusterEnergyMeasurementStructFromID(_ret)
 }
 
 func (o *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent) SetEnergyExported(energyExported *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) {
 	o.Ptr().Send(_mTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEventSelSetEnergyExported, energyExported.Ptr())
 }
-

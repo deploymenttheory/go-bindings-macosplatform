@@ -17,22 +17,22 @@ type SCNTransaction struct {
 }
 
 var (
-	_clsSCNTransaction = _objcClass("SCNTransaction")
-	_sCNTransactionSelBegin = objc.RegisterName("begin")
-	_sCNTransactionSelCommit = objc.RegisterName("commit")
-	_sCNTransactionSelFlush = objc.RegisterName("flush")
-	_sCNTransactionSelLock = objc.RegisterName("lock")
-	_sCNTransactionSelUnlock = objc.RegisterName("unlock")
-	_sCNTransactionSelValueForKey = objc.RegisterName("valueForKey:")
-	_sCNTransactionSelSetValueForKey = objc.RegisterName("setValue:forKey:")
-	_sCNTransactionSelAnimationDuration = objc.RegisterName("animationDuration")
-	_sCNTransactionSelSetAnimationDuration = objc.RegisterName("setAnimationDuration:")
-	_sCNTransactionSelAnimationTimingFunction = objc.RegisterName("animationTimingFunction")
+	_clsSCNTransaction                           = _objcClass("SCNTransaction")
+	_sCNTransactionSelBegin                      = objc.RegisterName("begin")
+	_sCNTransactionSelCommit                     = objc.RegisterName("commit")
+	_sCNTransactionSelFlush                      = objc.RegisterName("flush")
+	_sCNTransactionSelLock                       = objc.RegisterName("lock")
+	_sCNTransactionSelUnlock                     = objc.RegisterName("unlock")
+	_sCNTransactionSelValueForKey                = objc.RegisterName("valueForKey:")
+	_sCNTransactionSelSetValueForKey             = objc.RegisterName("setValue:forKey:")
+	_sCNTransactionSelAnimationDuration          = objc.RegisterName("animationDuration")
+	_sCNTransactionSelSetAnimationDuration       = objc.RegisterName("setAnimationDuration:")
+	_sCNTransactionSelAnimationTimingFunction    = objc.RegisterName("animationTimingFunction")
 	_sCNTransactionSelSetAnimationTimingFunction = objc.RegisterName("setAnimationTimingFunction:")
-	_sCNTransactionSelDisableActions = objc.RegisterName("disableActions")
-	_sCNTransactionSelSetDisableActions = objc.RegisterName("setDisableActions:")
-	_sCNTransactionSelCompletionBlock = objc.RegisterName("completionBlock")
-	_sCNTransactionSelSetCompletionBlock = objc.RegisterName("setCompletionBlock:")
+	_sCNTransactionSelDisableActions             = objc.RegisterName("disableActions")
+	_sCNTransactionSelSetDisableActions          = objc.RegisterName("setDisableActions:")
+	_sCNTransactionSelCompletionBlock            = objc.RegisterName("completionBlock")
+	_sCNTransactionSelSetCompletionBlock         = objc.RegisterName("setCompletionBlock:")
 )
 
 func SCNTransactionFromID(id objc.ID) *SCNTransaction {
@@ -85,7 +85,9 @@ func SCNTransactionSetAnimationDuration(animationDuration float64) {
 
 func SCNTransactionAnimationTimingFunction() *quartzcore.CAMediaTimingFunction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNTransaction), _sCNTransactionSelAnimationTimingFunction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return quartzcore.CAMediaTimingFunctionFromID(_ret)
 }
 
@@ -117,4 +119,3 @@ func SCNTransactionSetCompletionBlock(completionBlock func()) {
 	}
 	objc.ID(_clsSCNTransaction).Send(_sCNTransactionSelSetCompletionBlock, __block_completionBlock)
 }
-

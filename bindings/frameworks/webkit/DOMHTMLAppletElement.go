@@ -16,29 +16,29 @@ type DOMHTMLAppletElement struct {
 }
 
 var (
-	_clsDOMHTMLAppletElement = _objcClass("DOMHTMLAppletElement")
-	_dOMHTMLAppletElementSelAlign = objc.RegisterName("align")
-	_dOMHTMLAppletElementSelSetAlign = objc.RegisterName("setAlign:")
-	_dOMHTMLAppletElementSelAlt = objc.RegisterName("alt")
-	_dOMHTMLAppletElementSelSetAlt = objc.RegisterName("setAlt:")
-	_dOMHTMLAppletElementSelArchive = objc.RegisterName("archive")
-	_dOMHTMLAppletElementSelSetArchive = objc.RegisterName("setArchive:")
-	_dOMHTMLAppletElementSelCode = objc.RegisterName("code")
-	_dOMHTMLAppletElementSelSetCode = objc.RegisterName("setCode:")
-	_dOMHTMLAppletElementSelCodeBase = objc.RegisterName("codeBase")
+	_clsDOMHTMLAppletElement            = _objcClass("DOMHTMLAppletElement")
+	_dOMHTMLAppletElementSelAlign       = objc.RegisterName("align")
+	_dOMHTMLAppletElementSelSetAlign    = objc.RegisterName("setAlign:")
+	_dOMHTMLAppletElementSelAlt         = objc.RegisterName("alt")
+	_dOMHTMLAppletElementSelSetAlt      = objc.RegisterName("setAlt:")
+	_dOMHTMLAppletElementSelArchive     = objc.RegisterName("archive")
+	_dOMHTMLAppletElementSelSetArchive  = objc.RegisterName("setArchive:")
+	_dOMHTMLAppletElementSelCode        = objc.RegisterName("code")
+	_dOMHTMLAppletElementSelSetCode     = objc.RegisterName("setCode:")
+	_dOMHTMLAppletElementSelCodeBase    = objc.RegisterName("codeBase")
 	_dOMHTMLAppletElementSelSetCodeBase = objc.RegisterName("setCodeBase:")
-	_dOMHTMLAppletElementSelHeight = objc.RegisterName("height")
-	_dOMHTMLAppletElementSelSetHeight = objc.RegisterName("setHeight:")
-	_dOMHTMLAppletElementSelHspace = objc.RegisterName("hspace")
-	_dOMHTMLAppletElementSelSetHspace = objc.RegisterName("setHspace:")
-	_dOMHTMLAppletElementSelName = objc.RegisterName("name")
-	_dOMHTMLAppletElementSelSetName = objc.RegisterName("setName:")
-	_dOMHTMLAppletElementSelObject = objc.RegisterName("object")
-	_dOMHTMLAppletElementSelSetObject = objc.RegisterName("setObject:")
-	_dOMHTMLAppletElementSelVspace = objc.RegisterName("vspace")
-	_dOMHTMLAppletElementSelSetVspace = objc.RegisterName("setVspace:")
-	_dOMHTMLAppletElementSelWidth = objc.RegisterName("width")
-	_dOMHTMLAppletElementSelSetWidth = objc.RegisterName("setWidth:")
+	_dOMHTMLAppletElementSelHeight      = objc.RegisterName("height")
+	_dOMHTMLAppletElementSelSetHeight   = objc.RegisterName("setHeight:")
+	_dOMHTMLAppletElementSelHspace      = objc.RegisterName("hspace")
+	_dOMHTMLAppletElementSelSetHspace   = objc.RegisterName("setHspace:")
+	_dOMHTMLAppletElementSelName        = objc.RegisterName("name")
+	_dOMHTMLAppletElementSelSetName     = objc.RegisterName("setName:")
+	_dOMHTMLAppletElementSelObject      = objc.RegisterName("object")
+	_dOMHTMLAppletElementSelSetObject   = objc.RegisterName("setObject:")
+	_dOMHTMLAppletElementSelVspace      = objc.RegisterName("vspace")
+	_dOMHTMLAppletElementSelSetVspace   = objc.RegisterName("setVspace:")
+	_dOMHTMLAppletElementSelWidth       = objc.RegisterName("width")
+	_dOMHTMLAppletElementSelSetWidth    = objc.RegisterName("setWidth:")
 )
 
 func DOMHTMLAppletElementFromID(id objc.ID) *DOMHTMLAppletElement {
@@ -53,7 +53,9 @@ func DOMHTMLAppletElementFromID(id objc.ID) *DOMHTMLAppletElement {
 
 func (o *DOMHTMLAppletElement) Align() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAppletElementSelAlign)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -63,7 +65,9 @@ func (o *DOMHTMLAppletElement) SetAlign(align *foundation.NSString) {
 
 func (o *DOMHTMLAppletElement) Alt() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAppletElementSelAlt)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -73,7 +77,9 @@ func (o *DOMHTMLAppletElement) SetAlt(alt *foundation.NSString) {
 
 func (o *DOMHTMLAppletElement) Archive() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAppletElementSelArchive)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -83,7 +89,9 @@ func (o *DOMHTMLAppletElement) SetArchive(archive *foundation.NSString) {
 
 func (o *DOMHTMLAppletElement) Code() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAppletElementSelCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -93,7 +101,9 @@ func (o *DOMHTMLAppletElement) SetCode(code *foundation.NSString) {
 
 func (o *DOMHTMLAppletElement) CodeBase() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAppletElementSelCodeBase)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -103,7 +113,9 @@ func (o *DOMHTMLAppletElement) SetCodeBase(codeBase *foundation.NSString) {
 
 func (o *DOMHTMLAppletElement) Height() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAppletElementSelHeight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -122,7 +134,9 @@ func (o *DOMHTMLAppletElement) SetHspace(hspace int) {
 
 func (o *DOMHTMLAppletElement) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAppletElementSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -132,7 +146,9 @@ func (o *DOMHTMLAppletElement) SetName(name *foundation.NSString) {
 
 func (o *DOMHTMLAppletElement) Object() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAppletElementSelObject)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -151,11 +167,12 @@ func (o *DOMHTMLAppletElement) SetVspace(vspace int) {
 
 func (o *DOMHTMLAppletElement) Width() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAppletElementSelWidth)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLAppletElement) SetWidth(width *foundation.NSString) {
 	o.Ptr().Send(_dOMHTMLAppletElementSelSetWidth, width.Ptr())
 }
-

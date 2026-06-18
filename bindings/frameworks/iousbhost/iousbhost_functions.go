@@ -70,18 +70,18 @@ var (
 	_fnIOUSBGetSuperSpeedPlusDeviceCapabilityDescriptor func(unsafe.Pointer) unsafe.Pointer
 	// @brief       Find the first USB20ExtensionCapabilityDescriptor in a BOS descriptor @discussion  This method uses getNextCapabilityDescriptorWithType to fetch the first USB20ExtensionCapabilityDescriptor @param       bosDescriptor BOS descriptor that contains the descriptors to iterate through @return      USB20ExtensionCapabilityDescriptor pointer, or NULL if no matching descriptor can be found
 	_fnIOUSBGetUSB20ExtensionDeviceCapabilityDescriptor func(unsafe.Pointer) unsafe.Pointer
-	_fnIOUSBHostCIControllerStateToString func(IOUSBHostCIControllerState) string
-	_fnIOUSBHostCIDeviceSpeedToString func(IOUSBHostCIDeviceSpeed) string
-	_fnIOUSBHostCIDeviceStateToString func(IOUSBHostCIDeviceState) string
-	_fnIOUSBHostCIEndpointStateToString func(IOUSBHostCIEndpointState) string
-	_fnIOUSBHostCIExceptionTypeToString func(IOUSBHostCIExceptionType) string
-	_fnIOUSBHostCILinkStateEnabled func(IOUSBHostCILinkState) bool
-	_fnIOUSBHostCILinkStateToString func(IOUSBHostCILinkState) string
-	_fnIOUSBHostCIMessageStatusFromIOReturn func(int) IOUSBHostCIMessageStatus
-	_fnIOUSBHostCIMessageStatusToIOReturn func(IOUSBHostCIMessageStatus) int
-	_fnIOUSBHostCIMessageStatusToString func(IOUSBHostCIMessageStatus) string
-	_fnIOUSBHostCIMessageTypeToString func(IOUSBHostCIMessageType) string
-	_fnIOUSBHostCIPortStateToString func(IOUSBHostCIPortState) string
+	_fnIOUSBHostCIControllerStateToString               func(IOUSBHostCIControllerState) string
+	_fnIOUSBHostCIDeviceSpeedToString                   func(IOUSBHostCIDeviceSpeed) string
+	_fnIOUSBHostCIDeviceStateToString                   func(IOUSBHostCIDeviceState) string
+	_fnIOUSBHostCIEndpointStateToString                 func(IOUSBHostCIEndpointState) string
+	_fnIOUSBHostCIExceptionTypeToString                 func(IOUSBHostCIExceptionType) string
+	_fnIOUSBHostCILinkStateEnabled                      func(IOUSBHostCILinkState) bool
+	_fnIOUSBHostCILinkStateToString                     func(IOUSBHostCILinkState) string
+	_fnIOUSBHostCIMessageStatusFromIOReturn             func(int) IOUSBHostCIMessageStatus
+	_fnIOUSBHostCIMessageStatusToIOReturn               func(IOUSBHostCIMessageStatus) int
+	_fnIOUSBHostCIMessageStatusToString                 func(IOUSBHostCIMessageStatus) string
+	_fnIOUSBHostCIMessageTypeToString                   func(IOUSBHostCIMessageType) string
+	_fnIOUSBHostCIPortStateToString                     func(IOUSBHostCIPortState) string
 	// @brief Helper method for creating the <code>bmRequestType</code> field of a device request. @param direction The direction of the request. @param type the type of device request. @param recipient the recipient of the device request. @return uint8_t bmRequestType
 	_fnIOUSBHostDeviceRequestType func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
 )
@@ -293,4 +293,3 @@ func IOUSBHostCIPortStateToString(portState IOUSBHostCIPortState) string {
 func IOUSBHostDeviceRequestType(direction unsafe.Pointer, type_ unsafe.Pointer, recipient unsafe.Pointer) uint8 {
 	return _fnIOUSBHostDeviceRequestType(direction, type_, recipient)
 }
-

@@ -151,4 +151,3 @@ type SyncEngineConfigurationable interface {
 }
 
 var _ SyncEngineConfigurationable = (*SyncEngineConfiguration)(nil)
-

@@ -16,33 +16,33 @@ type NSNetService struct {
 }
 
 var (
-	_clsNSNetService = _objcClass("NSNetService")
-	_nSNetServiceSelInitWithDomainTypeNamePort = objc.RegisterName("initWithDomain:type:name:port:")
-	_nSNetServiceSelInitWithDomainTypeName = objc.RegisterName("initWithDomain:type:name:")
-	_nSNetServiceSelScheduleInRunLoopForMode = objc.RegisterName("scheduleInRunLoop:forMode:")
-	_nSNetServiceSelRemoveFromRunLoopForMode = objc.RegisterName("removeFromRunLoop:forMode:")
-	_nSNetServiceSelPublish = objc.RegisterName("publish")
-	_nSNetServiceSelPublishWithOptions = objc.RegisterName("publishWithOptions:")
-	_nSNetServiceSelResolve = objc.RegisterName("resolve")
-	_nSNetServiceSelStop = objc.RegisterName("stop")
+	_clsNSNetService                            = _objcClass("NSNetService")
+	_nSNetServiceSelInitWithDomainTypeNamePort  = objc.RegisterName("initWithDomain:type:name:port:")
+	_nSNetServiceSelInitWithDomainTypeName      = objc.RegisterName("initWithDomain:type:name:")
+	_nSNetServiceSelScheduleInRunLoopForMode    = objc.RegisterName("scheduleInRunLoop:forMode:")
+	_nSNetServiceSelRemoveFromRunLoopForMode    = objc.RegisterName("removeFromRunLoop:forMode:")
+	_nSNetServiceSelPublish                     = objc.RegisterName("publish")
+	_nSNetServiceSelPublishWithOptions          = objc.RegisterName("publishWithOptions:")
+	_nSNetServiceSelResolve                     = objc.RegisterName("resolve")
+	_nSNetServiceSelStop                        = objc.RegisterName("stop")
 	_nSNetServiceSelDictionaryFromTXTRecordData = objc.RegisterName("dictionaryFromTXTRecordData:")
 	_nSNetServiceSelDataFromTXTRecordDictionary = objc.RegisterName("dataFromTXTRecordDictionary:")
-	_nSNetServiceSelResolveWithTimeout = objc.RegisterName("resolveWithTimeout:")
-	_nSNetServiceSelGetInputStreamOutputStream = objc.RegisterName("getInputStream:outputStream:")
-	_nSNetServiceSelSetTXTRecordData = objc.RegisterName("setTXTRecordData:")
-	_nSNetServiceSelTXTRecordData = objc.RegisterName("TXTRecordData")
-	_nSNetServiceSelStartMonitoring = objc.RegisterName("startMonitoring")
-	_nSNetServiceSelStopMonitoring = objc.RegisterName("stopMonitoring")
-	_nSNetServiceSelDelegate = objc.RegisterName("delegate")
-	_nSNetServiceSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSNetServiceSelIncludesPeerToPeer = objc.RegisterName("includesPeerToPeer")
-	_nSNetServiceSelSetIncludesPeerToPeer = objc.RegisterName("setIncludesPeerToPeer:")
-	_nSNetServiceSelName = objc.RegisterName("name")
-	_nSNetServiceSelType = objc.RegisterName("type")
-	_nSNetServiceSelDomain = objc.RegisterName("domain")
-	_nSNetServiceSelHostName = objc.RegisterName("hostName")
-	_nSNetServiceSelAddresses = objc.RegisterName("addresses")
-	_nSNetServiceSelPort = objc.RegisterName("port")
+	_nSNetServiceSelResolveWithTimeout          = objc.RegisterName("resolveWithTimeout:")
+	_nSNetServiceSelGetInputStreamOutputStream  = objc.RegisterName("getInputStream:outputStream:")
+	_nSNetServiceSelSetTXTRecordData            = objc.RegisterName("setTXTRecordData:")
+	_nSNetServiceSelTXTRecordData               = objc.RegisterName("TXTRecordData")
+	_nSNetServiceSelStartMonitoring             = objc.RegisterName("startMonitoring")
+	_nSNetServiceSelStopMonitoring              = objc.RegisterName("stopMonitoring")
+	_nSNetServiceSelDelegate                    = objc.RegisterName("delegate")
+	_nSNetServiceSelSetDelegate                 = objc.RegisterName("setDelegate:")
+	_nSNetServiceSelIncludesPeerToPeer          = objc.RegisterName("includesPeerToPeer")
+	_nSNetServiceSelSetIncludesPeerToPeer       = objc.RegisterName("setIncludesPeerToPeer:")
+	_nSNetServiceSelName                        = objc.RegisterName("name")
+	_nSNetServiceSelType                        = objc.RegisterName("type")
+	_nSNetServiceSelDomain                      = objc.RegisterName("domain")
+	_nSNetServiceSelHostName                    = objc.RegisterName("hostName")
+	_nSNetServiceSelAddresses                   = objc.RegisterName("addresses")
+	_nSNetServiceSelPort                        = objc.RegisterName("port")
 )
 
 func NSNetServiceFromID(id objc.ID) *NSNetService {
@@ -57,13 +57,17 @@ func NSNetServiceFromID(id objc.ID) *NSNetService {
 
 func (o *NSNetService) InitWithDomainTypeNamePort(domain *NSString, type_ *NSString, name *NSString, port int) *NSNetService {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNetServiceSelInitWithDomainTypeNamePort, domain.Ptr(), type_.Ptr(), name.Ptr(), port)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNetServiceFromID(_ret)
 }
 
 func (o *NSNetService) InitWithDomainTypeName(domain *NSString, type_ *NSString, name *NSString) *NSNetService {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNetServiceSelInitWithDomainTypeName, domain.Ptr(), type_.Ptr(), name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNetServiceFromID(_ret)
 }
 
@@ -95,13 +99,17 @@ func (o *NSNetService) Stop() {
 
 func NSNetServiceDictionaryFromTXTRecordData(txtData *NSData) *NSDictionary[*NSString, *NSData] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNetService), _nSNetServiceSelDictionaryFromTXTRecordData, txtData.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDictionaryFromID[*NSString, *NSData](_ret)
 }
 
 func NSNetServiceDataFromTXTRecordDictionary(txtDictionary *NSDictionary[*NSString, *NSData]) *NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNetService), _nSNetServiceSelDataFromTXTRecordDictionary, txtDictionary.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
@@ -121,7 +129,9 @@ func (o *NSNetService) SetTXTRecordData(recordData *NSData) bool {
 
 func (o *NSNetService) TXTRecordData() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNetServiceSelTXTRecordData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
@@ -153,31 +163,41 @@ func (o *NSNetService) SetIncludesPeerToPeer(includesPeerToPeer bool) {
 
 func (o *NSNetService) Name() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNetServiceSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSNetService) Type() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNetServiceSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSNetService) Domain() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNetServiceSelDomain)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSNetService) HostName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNetServiceSelHostName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSNetService) Addresses() *NSArray[*NSData] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNetServiceSelAddresses)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSData](_ret)
 }
 
@@ -185,4 +205,3 @@ func (o *NSNetService) Port() int {
 	_ret := objc.Send[int](o.Ptr(), _nSNetServiceSelPort)
 	return _ret
 }
-

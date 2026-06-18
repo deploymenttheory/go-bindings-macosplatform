@@ -89,11 +89,17 @@ func (x *AudioUnitTimePitch) SetOverlap(overlap float32) {
 	x.inner.SetOverlap(overlap)
 }
 
-func (x *AudioUnitTimePitch) asAudioUnitTimeEffect() *raw.AVAudioUnitTimeEffect { return &x.inner.AVAudioUnitTimeEffect }
+func (x *AudioUnitTimePitch) asAudioUnitTimeEffect() *raw.AVAudioUnitTimeEffect {
+	return &x.inner.AVAudioUnitTimeEffect
+}
 
-func (x *AudioUnitTimePitch) asAudioUnit() *raw.AVAudioUnit { return &x.inner.AVAudioUnitTimeEffect.AVAudioUnit }
+func (x *AudioUnitTimePitch) asAudioUnit() *raw.AVAudioUnit {
+	return &x.inner.AVAudioUnitTimeEffect.AVAudioUnit
+}
 
-func (x *AudioUnitTimePitch) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAudioUnitTimeEffect.AVAudioUnit.AVAudioNode }
+func (x *AudioUnitTimePitch) asAudioNode() *raw.AVAudioNode {
+	return &x.inner.AVAudioUnitTimeEffect.AVAudioUnit.AVAudioNode
+}
 
 // AudioUnitTimePitchable is the interface implemented by [AudioUnitTimePitch], for mocking and DI.
 type AudioUnitTimePitchable interface {
@@ -111,4 +117,3 @@ type AudioUnitTimePitchable interface {
 }
 
 var _ AudioUnitTimePitchable = (*AudioUnitTimePitch)(nil)
-

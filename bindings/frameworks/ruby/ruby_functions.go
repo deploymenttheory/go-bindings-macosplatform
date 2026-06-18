@@ -8,920 +8,920 @@ import (
 )
 
 var (
-	___builtin_expect func(int, int) int
-	_eaccess func(string, int) int
-	_explicit_bzero func(unsafe.Pointer, uint)
-	_finite func(float64) int
-	_rb_Array func(uint) uint
-	_rb_Complex func(uint, uint) uint
-	_rb_Float func(uint) uint
-	_rb_Integer func(uint) uint
-	_rb_Rational func(uint, uint) uint
-	_rb_String func(uint) uint
-	_rb_absint_numwords func(uint, uint, *uint) uint
-	_rb_absint_singlebit_p func(uint) int
-	_rb_absint_size func(uint, *int32) uint
-	_rb_add_event_hook func(unsafe.Pointer, uint32, uint)
-	_rb_alias func(uint, uint, uint)
-	_rb_alias_variable func(uint, uint)
-	_rb_alloc_tmp_buffer func(unsafe.Pointer, int) unsafe.Pointer
-	_rb_alloc_tmp_buffer2 func(unsafe.Pointer, int, uint) unsafe.Pointer
-	_rb_alloc_tmp_buffer_with_count func(unsafe.Pointer, uint, uint) unsafe.Pointer
-	_rb_any_to_s func(uint) uint
-	_rb_apply func(uint, uint, uint) uint
-	_rb_arithmetic_sequence_extract func(uint, *RbArithmeticSequenceComponentsT) int
-	_rb_array_const_ptr func(uint) *uint
-	_rb_array_const_ptr_transient func(uint) *uint
-	_rb_array_len func(uint) int
-	_rb_array_ptr_use_end func(uint, int)
-	_rb_array_ptr_use_start func(uint, int) *uint
-	_rb_ary_aref func(int, *uint, uint) uint
-	_rb_ary_assoc func(uint, uint) uint
-	_rb_ary_cat func(uint, *uint, int) uint
-	_rb_ary_clear func(uint) uint
-	_rb_ary_cmp func(uint, uint) uint
-	_rb_ary_concat func(uint, uint) uint
-	_rb_ary_delete func(uint, uint) uint
-	_rb_ary_delete_at func(uint, int) uint
-	_rb_ary_dup func(uint) uint
-	_rb_ary_each func(uint) uint
-	_rb_ary_entry func(uint, int) uint
-	_rb_ary_free func(uint)
-	_rb_ary_freeze func(uint) uint
-	_rb_ary_includes func(uint, uint) uint
-	_rb_ary_join func(uint, uint) uint
-	_rb_ary_modify func(uint)
-	_rb_ary_new func() uint
-	_rb_ary_new_capa func(int) uint
-	_rb_ary_new_from_values func(int, *uint) uint
-	_rb_ary_plus func(uint, uint) uint
-	_rb_ary_pop func(uint) uint
-	_rb_ary_push func(uint, uint) uint
-	_rb_ary_rassoc func(uint, uint) uint
-	_rb_ary_replace func(uint, uint) uint
-	_rb_ary_resize func(uint, int) uint
-	_rb_ary_resurrect func(uint) uint
-	_rb_ary_reverse func(uint) uint
-	_rb_ary_rotate func(uint, int) uint
-	_rb_ary_shared_with_p func(uint, uint) uint
-	_rb_ary_shift func(uint) uint
-	_rb_ary_sort func(uint) uint
-	_rb_ary_sort_bang func(uint) uint
-	_rb_ary_store func(uint, int, uint)
-	_rb_ary_subseq func(uint, int, int) uint
-	_rb_ary_tmp_new func(int) uint
-	_rb_ary_to_ary func(uint) uint
-	_rb_ary_to_s func(uint) uint
-	_rb_ary_unshift func(uint, uint) uint
-	_rb_assoc_new func(uint, uint) uint
-	_rb_attr func(uint, uint, int, int, int)
-	_rb_attr_get func(uint, uint) uint
-	_rb_autoload func(uint, uint, string)
-	_rb_autoload_load func(uint, uint) uint
-	_rb_autoload_p func(uint, uint) uint
-	_rb_backref_get func() uint
-	_rb_backref_set func(uint)
-	_rb_backtrace func()
-	_rb_big2dbl func(uint) float64
-	_rb_big2ll func(uint) int64
-	_rb_big2long func(uint) int
-	_rb_big2str func(uint, int) uint
-	_rb_big2ull func(uint) uint64
-	_rb_big2ulong func(uint) uint
-	_rb_big_2comp func(uint)
-	_rb_big_and func(uint, uint) uint
-	_rb_big_clone func(uint) uint
-	_rb_big_cmp func(uint, uint) uint
-	_rb_big_div func(uint, uint) uint
-	_rb_big_divmod func(uint, uint) uint
-	_rb_big_eq func(uint, uint) uint
-	_rb_big_eql func(uint, uint) uint
-	_rb_big_idiv func(uint, uint) uint
-	_rb_big_lshift func(uint, uint) uint
-	_rb_big_minus func(uint, uint) uint
-	_rb_big_modulo func(uint, uint) uint
-	_rb_big_mul func(uint, uint) uint
-	_rb_big_new func(uint, int) uint
-	_rb_big_norm func(uint) uint
-	_rb_big_or func(uint, uint) uint
-	_rb_big_pack func(uint, unsafe.Pointer, int)
-	_rb_big_plus func(uint, uint) uint
-	_rb_big_pow func(uint, uint) uint
-	_rb_big_resize func(uint, uint)
-	_rb_big_rshift func(uint, uint) uint
-	_rb_big_sign func(uint) int
-	_rb_big_unpack func(unsafe.Pointer, int) uint
-	_rb_big_xor func(uint, uint) uint
-	_rb_bigzero_p func(uint) int
-	_rb_binding_new func() uint
-	_rb_block_call func(uint, uint, int, *uint, unsafe.Pointer, uint) uint
-	_rb_block_given_p func() int
-	_rb_block_lambda func() uint
-	_rb_block_proc func() uint
-	_rb_bug_errno func(string, int)
-	_rb_call_super func(int, *uint) uint
-	_rb_catch func(string, unsafe.Pointer, uint) uint
-	_rb_catch_obj func(uint, unsafe.Pointer, uint) uint
-	_rb_check_arity func(int, int, int) int
-	_rb_check_array_type func(uint) uint
-	_rb_check_convert_type func(uint, int, string, string) uint
-	_rb_check_copyable func(uint, uint)
-	_rb_check_frozen func(uint)
-	_rb_check_funcall func(uint, uint, int, *uint) uint
-	_rb_check_hash_type func(uint) uint
-	_rb_check_id func(unsafe.Pointer) uint
-	_rb_check_inheritable func(uint)
-	_rb_check_safe_obj func(uint)
-	_rb_check_string_type func(uint) uint
-	_rb_check_symbol func(unsafe.Pointer) uint
-	_rb_check_to_float func(uint) uint
-	_rb_check_to_int func(uint) uint
-	_rb_check_to_integer func(uint, string) uint
-	_rb_check_trusted func(uint)
-	_rb_check_type func(uint, int)
-	_rb_check_typeddata func(uint, *RbDataTypeStruct) unsafe.Pointer
-	_rb_class2name func(uint) string
-	_rb_class_get_superclass func(uint) uint
-	_rb_class_inherited_p func(uint, uint) uint
-	_rb_class_instance_methods func(int, *uint, uint) uint
-	_rb_class_name func(uint) uint
-	_rb_class_new func(uint) uint
-	_rb_class_new_instance func(int, *uint, uint) uint
-	_rb_class_of func(uint) uint
-	_rb_class_path func(uint) uint
-	_rb_class_path_cached func(uint) uint
-	_rb_class_private_instance_methods func(int, *uint, uint) uint
+	___builtin_expect                    func(int, int) int
+	_eaccess                             func(string, int) int
+	_explicit_bzero                      func(unsafe.Pointer, uint)
+	_finite                              func(float64) int
+	_rb_Array                            func(uint) uint
+	_rb_Complex                          func(uint, uint) uint
+	_rb_Float                            func(uint) uint
+	_rb_Integer                          func(uint) uint
+	_rb_Rational                         func(uint, uint) uint
+	_rb_String                           func(uint) uint
+	_rb_absint_numwords                  func(uint, uint, *uint) uint
+	_rb_absint_singlebit_p               func(uint) int
+	_rb_absint_size                      func(uint, *int32) uint
+	_rb_add_event_hook                   func(unsafe.Pointer, uint32, uint)
+	_rb_alias                            func(uint, uint, uint)
+	_rb_alias_variable                   func(uint, uint)
+	_rb_alloc_tmp_buffer                 func(unsafe.Pointer, int) unsafe.Pointer
+	_rb_alloc_tmp_buffer2                func(unsafe.Pointer, int, uint) unsafe.Pointer
+	_rb_alloc_tmp_buffer_with_count      func(unsafe.Pointer, uint, uint) unsafe.Pointer
+	_rb_any_to_s                         func(uint) uint
+	_rb_apply                            func(uint, uint, uint) uint
+	_rb_arithmetic_sequence_extract      func(uint, *RbArithmeticSequenceComponentsT) int
+	_rb_array_const_ptr                  func(uint) *uint
+	_rb_array_const_ptr_transient        func(uint) *uint
+	_rb_array_len                        func(uint) int
+	_rb_array_ptr_use_end                func(uint, int)
+	_rb_array_ptr_use_start              func(uint, int) *uint
+	_rb_ary_aref                         func(int, *uint, uint) uint
+	_rb_ary_assoc                        func(uint, uint) uint
+	_rb_ary_cat                          func(uint, *uint, int) uint
+	_rb_ary_clear                        func(uint) uint
+	_rb_ary_cmp                          func(uint, uint) uint
+	_rb_ary_concat                       func(uint, uint) uint
+	_rb_ary_delete                       func(uint, uint) uint
+	_rb_ary_delete_at                    func(uint, int) uint
+	_rb_ary_dup                          func(uint) uint
+	_rb_ary_each                         func(uint) uint
+	_rb_ary_entry                        func(uint, int) uint
+	_rb_ary_free                         func(uint)
+	_rb_ary_freeze                       func(uint) uint
+	_rb_ary_includes                     func(uint, uint) uint
+	_rb_ary_join                         func(uint, uint) uint
+	_rb_ary_modify                       func(uint)
+	_rb_ary_new                          func() uint
+	_rb_ary_new_capa                     func(int) uint
+	_rb_ary_new_from_values              func(int, *uint) uint
+	_rb_ary_plus                         func(uint, uint) uint
+	_rb_ary_pop                          func(uint) uint
+	_rb_ary_push                         func(uint, uint) uint
+	_rb_ary_rassoc                       func(uint, uint) uint
+	_rb_ary_replace                      func(uint, uint) uint
+	_rb_ary_resize                       func(uint, int) uint
+	_rb_ary_resurrect                    func(uint) uint
+	_rb_ary_reverse                      func(uint) uint
+	_rb_ary_rotate                       func(uint, int) uint
+	_rb_ary_shared_with_p                func(uint, uint) uint
+	_rb_ary_shift                        func(uint) uint
+	_rb_ary_sort                         func(uint) uint
+	_rb_ary_sort_bang                    func(uint) uint
+	_rb_ary_store                        func(uint, int, uint)
+	_rb_ary_subseq                       func(uint, int, int) uint
+	_rb_ary_tmp_new                      func(int) uint
+	_rb_ary_to_ary                       func(uint) uint
+	_rb_ary_to_s                         func(uint) uint
+	_rb_ary_unshift                      func(uint, uint) uint
+	_rb_assoc_new                        func(uint, uint) uint
+	_rb_attr                             func(uint, uint, int, int, int)
+	_rb_attr_get                         func(uint, uint) uint
+	_rb_autoload                         func(uint, uint, string)
+	_rb_autoload_load                    func(uint, uint) uint
+	_rb_autoload_p                       func(uint, uint) uint
+	_rb_backref_get                      func() uint
+	_rb_backref_set                      func(uint)
+	_rb_backtrace                        func()
+	_rb_big2dbl                          func(uint) float64
+	_rb_big2ll                           func(uint) int64
+	_rb_big2long                         func(uint) int
+	_rb_big2str                          func(uint, int) uint
+	_rb_big2ull                          func(uint) uint64
+	_rb_big2ulong                        func(uint) uint
+	_rb_big_2comp                        func(uint)
+	_rb_big_and                          func(uint, uint) uint
+	_rb_big_clone                        func(uint) uint
+	_rb_big_cmp                          func(uint, uint) uint
+	_rb_big_div                          func(uint, uint) uint
+	_rb_big_divmod                       func(uint, uint) uint
+	_rb_big_eq                           func(uint, uint) uint
+	_rb_big_eql                          func(uint, uint) uint
+	_rb_big_idiv                         func(uint, uint) uint
+	_rb_big_lshift                       func(uint, uint) uint
+	_rb_big_minus                        func(uint, uint) uint
+	_rb_big_modulo                       func(uint, uint) uint
+	_rb_big_mul                          func(uint, uint) uint
+	_rb_big_new                          func(uint, int) uint
+	_rb_big_norm                         func(uint) uint
+	_rb_big_or                           func(uint, uint) uint
+	_rb_big_pack                         func(uint, unsafe.Pointer, int)
+	_rb_big_plus                         func(uint, uint) uint
+	_rb_big_pow                          func(uint, uint) uint
+	_rb_big_resize                       func(uint, uint)
+	_rb_big_rshift                       func(uint, uint) uint
+	_rb_big_sign                         func(uint) int
+	_rb_big_unpack                       func(unsafe.Pointer, int) uint
+	_rb_big_xor                          func(uint, uint) uint
+	_rb_bigzero_p                        func(uint) int
+	_rb_binding_new                      func() uint
+	_rb_block_call                       func(uint, uint, int, *uint, unsafe.Pointer, uint) uint
+	_rb_block_given_p                    func() int
+	_rb_block_lambda                     func() uint
+	_rb_block_proc                       func() uint
+	_rb_bug_errno                        func(string, int)
+	_rb_call_super                       func(int, *uint) uint
+	_rb_catch                            func(string, unsafe.Pointer, uint) uint
+	_rb_catch_obj                        func(uint, unsafe.Pointer, uint) uint
+	_rb_check_arity                      func(int, int, int) int
+	_rb_check_array_type                 func(uint) uint
+	_rb_check_convert_type               func(uint, int, string, string) uint
+	_rb_check_copyable                   func(uint, uint)
+	_rb_check_frozen                     func(uint)
+	_rb_check_funcall                    func(uint, uint, int, *uint) uint
+	_rb_check_hash_type                  func(uint) uint
+	_rb_check_id                         func(unsafe.Pointer) uint
+	_rb_check_inheritable                func(uint)
+	_rb_check_safe_obj                   func(uint)
+	_rb_check_string_type                func(uint) uint
+	_rb_check_symbol                     func(unsafe.Pointer) uint
+	_rb_check_to_float                   func(uint) uint
+	_rb_check_to_int                     func(uint) uint
+	_rb_check_to_integer                 func(uint, string) uint
+	_rb_check_trusted                    func(uint)
+	_rb_check_type                       func(uint, int)
+	_rb_check_typeddata                  func(uint, *RbDataTypeStruct) unsafe.Pointer
+	_rb_class2name                       func(uint) string
+	_rb_class_get_superclass             func(uint) uint
+	_rb_class_inherited_p                func(uint, uint) uint
+	_rb_class_instance_methods           func(int, *uint, uint) uint
+	_rb_class_name                       func(uint) uint
+	_rb_class_new                        func(uint) uint
+	_rb_class_new_instance               func(int, *uint, uint) uint
+	_rb_class_of                         func(uint) uint
+	_rb_class_path                       func(uint) uint
+	_rb_class_path_cached                func(uint) uint
+	_rb_class_private_instance_methods   func(int, *uint, uint) uint
 	_rb_class_protected_instance_methods func(int, *uint, uint) uint
-	_rb_class_public_instance_methods func(int, *uint, uint) uint
-	_rb_class_real func(uint) uint
-	_rb_class_superclass func(uint) uint
-	_rb_clear_cache func()
-	_rb_clear_constant_cache func()
-	_rb_clear_method_cache_by_class func(uint)
-	_rb_cloexec_dup func(int) int
-	_rb_cloexec_dup2 func(int, int) int
-	_rb_cloexec_fcntl_dupfd func(int, int) int
-	_rb_cloexec_open func(string, int, uint16) int
-	_rb_cloexec_pipe func(*int32) int
-	_rb_clone_setup func(uint, uint)
-	_rb_close_before_exec func(int, int, uint)
-	_rb_cmperr func(uint, uint)
-	_rb_cmpint func(uint, uint, uint) int
-	_rb_compile_error func()
-	_rb_compile_error_append func()
-	_rb_compile_error_with_enc func()
-	_rb_complex_abs func(uint) uint
-	_rb_complex_arg func(uint) uint
-	_rb_complex_conjugate func(uint) uint
-	_rb_complex_div func(uint, uint) uint
-	_rb_complex_imag func(uint) uint
-	_rb_complex_minus func(uint, uint) uint
-	_rb_complex_mul func(uint, uint) uint
-	_rb_complex_new func(uint, uint) uint
-	_rb_complex_new_polar func(uint, uint) uint
-	_rb_complex_plus func(uint, uint) uint
-	_rb_complex_polar func(uint, uint) uint
-	_rb_complex_pow func(uint, uint) uint
-	_rb_complex_raw func(uint, uint) uint
-	_rb_complex_real func(uint) uint
-	_rb_complex_uminus func(uint) uint
-	_rb_const_defined func(uint, uint) int
-	_rb_const_defined_at func(uint, uint) int
-	_rb_const_defined_from func(uint, uint) int
-	_rb_const_get func(uint, uint) uint
-	_rb_const_get_at func(uint, uint) uint
-	_rb_const_get_from func(uint, uint) uint
-	_rb_const_list func(unsafe.Pointer) uint
-	_rb_const_remove func(uint, uint) uint
-	_rb_const_set func(uint, uint, uint)
-	_rb_convert_type func(uint, int, string, string) uint
-	_rb_copy_generic_ivar func(uint, uint)
-	_rb_cstr2inum func(string, int) uint
-	_rb_cstr_to_dbl func(string, int) float64
-	_rb_cstr_to_inum func(string, int, int) uint
-	_rb_current_receiver func() uint
-	_rb_cv_get func(uint, string) uint
-	_rb_cv_set func(uint, string, uint)
-	_rb_cvar_defined func(uint, uint) uint
-	_rb_cvar_get func(uint, uint) uint
-	_rb_cvar_set func(uint, uint, uint)
-	_rb_data_object_alloc func(uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint
-	_rb_data_object_get func(uint) unsafe.Pointer
-	_rb_data_object_make func(uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint) uint
-	_rb_data_object_wrap func(uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint
-	_rb_data_object_zalloc func(uint, uint, unsafe.Pointer, unsafe.Pointer) uint
-	_rb_data_typed_object_alloc func(uint, unsafe.Pointer, *RbDataTypeStruct) uint
-	_rb_data_typed_object_make func(uint, *RbDataTypeStruct, unsafe.Pointer, uint) uint
-	_rb_data_typed_object_wrap func(uint, unsafe.Pointer, *RbDataTypeStruct) uint
-	_rb_data_typed_object_zalloc func(uint, uint, *RbDataTypeStruct) uint
-	_rb_dbl2big func(float64) uint
-	_rb_dbl_cmp func(float64, float64) uint
-	_rb_dbl_complex_new func(float64, float64) uint
-	_rb_define_alias func(uint, string, string)
-	_rb_define_alloc_func func(uint, unsafe.Pointer)
-	_rb_define_attr func(uint, string, int, int)
-	_rb_define_class func(string, uint) uint
-	_rb_define_class_id func(uint, uint) uint
-	_rb_define_class_id_under func(uint, uint, uint) uint
-	_rb_define_class_under func(uint, string, uint) uint
-	_rb_define_class_variable func(uint, string, uint)
-	_rb_define_const func(uint, string, uint)
-	_rb_define_finalizer func(uint, uint) uint
-	_rb_define_global_const func(string, uint)
-	_rb_define_global_function func(string, unsafe.Pointer, int)
-	_rb_define_hooked_variable func(string, *uint, unsafe.Pointer, unsafe.Pointer)
-	_rb_define_method func(uint, string, unsafe.Pointer, int)
-	_rb_define_method_id func(uint, uint, unsafe.Pointer, int)
-	_rb_define_module func(string) uint
-	_rb_define_module_function func(uint, string, unsafe.Pointer, int)
-	_rb_define_module_id func(uint) uint
-	_rb_define_module_id_under func(uint, uint) uint
-	_rb_define_module_under func(uint, string) uint
-	_rb_define_private_method func(uint, string, unsafe.Pointer, int)
-	_rb_define_protected_method func(uint, string, unsafe.Pointer, int)
-	_rb_define_readonly_variable func(string, *uint)
-	_rb_define_singleton_method func(uint, string, unsafe.Pointer, int)
-	_rb_define_variable func(string, *uint)
-	_rb_define_virtual_variable func(string, unsafe.Pointer, unsafe.Pointer)
-	_rb_detach_process func(int) uint
-	_rb_dir_getwd func() uint
-	_rb_disable_super func()
-	_rb_dup_setup func(uint, uint)
-	_rb_during_gc func() int
-	_rb_each func(uint) uint
-	_rb_enable_super func()
-	_rb_ensure func(unsafe.Pointer, uint, unsafe.Pointer, uint) uint
-	_rb_enum_values_pack func(int, *uint) uint
-	_rb_enumeratorize func(uint, uint, int, *uint) uint
-	_rb_enumeratorize_with_size func(uint, uint, int, *uint, unsafe.Pointer) uint
-	_rb_env_clear func() uint
-	_rb_env_path_tainted func() int
-	_rb_eql func(uint, uint) int
-	_rb_equal func(uint, uint) uint
-	_rb_errinfo func() uint
-	_rb_error_arity func(int, int, int)
-	_rb_error_frozen func(string)
-	_rb_error_frozen_object func(uint)
-	_rb_error_untrusted func(uint)
-	_rb_eval_cmd func(uint, uint, int) uint
-	_rb_eval_string func(string) uint
-	_rb_eval_string_protect func(string, *int32) uint
-	_rb_eval_string_wrap func(string, *int32) uint
-	_rb_exc_fatal func(uint)
-	_rb_exc_new func(uint, string, int) uint
-	_rb_exc_new_cstr func(uint, string) uint
-	_rb_exc_new_str func(uint, uint) uint
-	_rb_exc_raise func(uint)
-	_rb_exec_end_proc func()
-	_rb_exec_recursive func(unsafe.Pointer, uint, uint) uint
-	_rb_exec_recursive_outer func(unsafe.Pointer, uint, uint) uint
-	_rb_exec_recursive_paired func(unsafe.Pointer, uint, uint, uint) uint
-	_rb_exec_recursive_paired_outer func(unsafe.Pointer, uint, uint, uint) uint
-	_rb_exit func(int)
-	_rb_extend_object func(uint, uint)
-	_rb_external_str_new func(string, int) uint
-	_rb_external_str_new_cstr func(string) uint
-	_rb_extract_keywords func(*uint) uint
-	_rb_f_abort func(int, *uint) uint
-	_rb_f_exec func(int, *uint) uint
-	_rb_f_exit func(int, *uint) uint
-	_rb_f_global_variables func() uint
-	_rb_f_kill func(int, *uint) uint
-	_rb_f_notimplement func(int, *uint, uint) uint
-	_rb_f_require func(uint, uint) uint
-	_rb_f_sprintf func(int, *uint) uint
-	_rb_f_trace_var func(int, *uint) uint
-	_rb_f_untrace_var func(int, *uint) uint
-	_rb_fd_clr func(int, *RbFdsetT)
-	_rb_fd_copy func(*RbFdsetT, unsafe.Pointer, int)
-	_rb_fd_dup func(*RbFdsetT, *RbFdsetT)
-	_rb_fd_fix_cloexec func(int)
-	_rb_fd_init func(*RbFdsetT)
-	_rb_fd_isset func(int, *RbFdsetT) int
-	_rb_fd_select func(int, *RbFdsetT, *RbFdsetT, *RbFdsetT, unsafe.Pointer) int
-	_rb_fd_set func(int, *RbFdsetT)
-	_rb_fd_term func(*RbFdsetT)
-	_rb_fd_zero func(*RbFdsetT)
-	_rb_feature_provided func(string, string) int
-	_rb_fiber_alive_p func(uint) uint
-	_rb_fiber_current func() uint
-	_rb_fiber_new func(unsafe.Pointer, uint) uint
-	_rb_fiber_resume func(uint, int, *uint) uint
-	_rb_fiber_yield func(int, *uint) uint
-	_rb_file_absolute_path func(uint, uint) uint
-	_rb_file_directory_p func(uint, uint) uint
-	_rb_file_dirname func(uint) uint
-	_rb_file_expand_path func(uint, uint) uint
-	_rb_file_open func(string, string) uint
-	_rb_file_open_str func(uint, string) uint
-	_rb_file_s_absolute_path func(int, *uint) uint
-	_rb_file_s_expand_path func(int, *uint) uint
-	_rb_filesystem_str_new func(string, int) uint
-	_rb_filesystem_str_new_cstr func(string) uint
-	_rb_find_file func(uint) uint
-	_rb_find_file_ext func(*uint, unsafe.Pointer) int
-	_rb_find_file_ext_safe func(*uint, unsafe.Pointer, int) int
-	_rb_find_file_safe func(uint, int) uint
-	_rb_fix2int func(uint) int
-	_rb_fix2long func(uint) int
-	_rb_fix2short func(uint) int16
-	_rb_fix2str func(uint, int) uint
-	_rb_fix2uint func(uint) uint
-	_rb_fix2ulong func(uint) uint
-	_rb_fix2ushort func(uint) uint16
-	_rb_float_new func(float64) uint
-	_rb_float_new_in_heap func(float64) uint
-	_rb_float_value func(uint) float64
-	_rb_flt_rationalize func(uint) uint
-	_rb_flt_rationalize_with_prec func(uint, uint) uint
-	_rb_frame_callee func() uint
-	_rb_frame_method_id_and_class func(*uint, *uint) int
-	_rb_frame_pop func()
-	_rb_frame_this_func func() uint
-	_rb_free_generic_ivar func(uint)
-	_rb_free_tmp_buffer func(unsafe.Pointer)
-	_rb_freeze_singleton_class func(uint)
-	_rb_frozen_class_p func(uint)
-	_rb_funcall_passing_block func(uint, uint, int, *uint) uint
-	_rb_funcall_with_block func(uint, uint, int, *uint, uint) uint
-	_rb_funcallv func(uint, uint, int, *uint) uint
-	_rb_funcallv_public func(uint, uint, int, *uint) uint
-	_rb_gc func()
-	_rb_gc_adjust_memory_usage func(int)
-	_rb_gc_call_finalizer_at_exit func()
-	_rb_gc_copy_finalizer func(uint, uint)
-	_rb_gc_count func() uint
-	_rb_gc_disable func() uint
-	_rb_gc_enable func() uint
-	_rb_gc_finalize_deferred func()
-	_rb_gc_force_recycle func(uint)
-	_rb_gc_latest_gc_info func(uint) uint
-	_rb_gc_mark func(uint)
-	_rb_gc_mark_locations func(*uint, *uint)
-	_rb_gc_mark_maybe func(uint)
-	_rb_gc_register_address func(*uint)
-	_rb_gc_register_mark_object func(uint)
-	_rb_gc_start func() uint
-	_rb_gc_stat func(uint) uint
-	_rb_gc_unregister_address func(*uint)
-	_rb_gc_writebarrier func(uint, uint)
-	_rb_gc_writebarrier_unprotect func(uint)
-	_rb_generic_ivar_table func()
-	_rb_genrand_int32 func() uint
-	_rb_genrand_real func() float64
-	_rb_genrand_ulong_limited func(uint) uint
-	_rb_get_alloc_func func(uint) unsafe.Pointer
-	_rb_get_argv func() uint
-	_rb_get_kwargs func(uint, *uint, int, int, *uint) int
-	_rb_get_path func(uint) uint
-	_rb_get_path_no_checksafe func(uint) uint
-	_rb_get_values_at func(uint, int, int, *uint, unsafe.Pointer) uint
-	_rb_gets func() uint
-	_rb_glob func(string, unsafe.Pointer, uint)
-	_rb_gv_get func(string) uint
-	_rb_gv_set func(string, uint) uint
-	_rb_gvar_readonly_setter func(uint, uint, unsafe.Pointer, unsafe.Pointer)
-	_rb_gvar_undef_getter func(uint, unsafe.Pointer, unsafe.Pointer) uint
-	_rb_gvar_undef_marker func(*uint)
-	_rb_gvar_undef_setter func(uint, uint, unsafe.Pointer, unsafe.Pointer)
-	_rb_gvar_val_getter func(uint, unsafe.Pointer, unsafe.Pointer) uint
-	_rb_gvar_val_marker func(*uint)
-	_rb_gvar_val_setter func(uint, uint, unsafe.Pointer, unsafe.Pointer)
-	_rb_gvar_var_getter func(uint, unsafe.Pointer, unsafe.Pointer) uint
-	_rb_gvar_var_marker func(*uint)
-	_rb_gvar_var_setter func(uint, uint, unsafe.Pointer, unsafe.Pointer)
-	_rb_hash func(uint) uint
-	_rb_hash_aref func(uint, uint) uint
-	_rb_hash_aset func(uint, uint, uint) uint
-	_rb_hash_bulk_insert_into_st_table func(int, *uint, uint)
-	_rb_hash_clear func(uint) uint
-	_rb_hash_delete func(uint, uint) uint
-	_rb_hash_delete_if func(uint) uint
-	_rb_hash_dup func(uint) uint
-	_rb_hash_end func(uint) uint
-	_rb_hash_fetch func(uint, uint) uint
-	_rb_hash_foreach func(uint, unsafe.Pointer, uint)
-	_rb_hash_free func(uint)
-	_rb_hash_freeze func(uint) uint
-	_rb_hash_ifnone func()
-	_rb_hash_iter_lev func()
-	_rb_hash_lookup func(uint, uint) uint
-	_rb_hash_lookup2 func(uint, uint, uint) uint
-	_rb_hash_new func() uint
-	_rb_hash_set_ifnone func(uint, uint) uint
-	_rb_hash_size func(uint) uint
-	_rb_hash_size_num func(uint) uint
-	_rb_hash_start func(uint) uint
-	_rb_hash_tbl func(uint, string, int) *StTable
-	_rb_hash_uint func(uint, uint) uint
-	_rb_hash_uint32 func(uint, uint32) uint
-	_rb_hash_update_by func(uint, uint, unsafe.Pointer) uint
-	_rb_id2name func(uint) string
-	_rb_id2str func(uint) uint
-	_rb_id2sym func(uint) uint
-	_rb_id_attrset func(uint) uint
-	_rb_include_module func(uint, uint)
-	_rb_insecure_operation func()
-	_rb_inspect func(uint) uint
-	_rb_int2big func(int) uint
-	_rb_int2inum func(int) uint
-	_rb_integer_pack func(uint, unsafe.Pointer, uint, uint, uint, int) int
-	_rb_integer_unpack func(unsafe.Pointer, uint, uint, uint, int) uint
-	_rb_intern func(string) uint
-	_rb_intern2 func(string, int) uint
-	_rb_intern_str func(uint) uint
-	_rb_interrupt func()
-	_rb_invalid_str func(string, string)
-	_rb_io_addstr func(uint, uint) uint
-	_rb_io_ascii8bit_binmode func(uint) uint
-	_rb_io_binmode func(uint) uint
-	_rb_io_close func(uint) uint
-	_rb_io_eof func(uint) uint
-	_rb_io_fdopen func(int, int, string) uint
-	_rb_io_flush func(uint) uint
-	_rb_io_get_io func(uint) uint
-	_rb_io_getbyte func(uint) uint
-	_rb_io_gets func(uint) uint
-	_rb_io_print func(int, *uint, uint) uint
-	_rb_io_printf func(int, *uint, uint) uint
-	_rb_io_puts func(int, *uint, uint) uint
-	_rb_io_ungetbyte func(uint, uint) uint
-	_rb_io_ungetc func(uint, uint) uint
-	_rb_io_write func(uint, uint) uint
-	_rb_is_absolute_path func(string) int
-	_rb_is_attrset_id func(uint) int
-	_rb_is_class_id func(uint) int
-	_rb_is_const_id func(uint) int
-	_rb_is_global_id func(uint) int
-	_rb_is_instance_id func(uint) int
-	_rb_is_junk_id func(uint) int
-	_rb_is_local_id func(uint) int
-	_rb_isalnum func(int) int
-	_rb_isalpha func(int) int
-	_rb_isascii func(int) int
-	_rb_isblank func(int) int
-	_rb_iscntrl func(int) int
-	_rb_isdigit func(int) int
-	_rb_isgraph func(int) int
-	_rb_islower func(int) int
-	_rb_isprint func(int) int
-	_rb_ispunct func(int) int
-	_rb_isspace func(int) int
-	_rb_isupper func(int) int
-	_rb_isxdigit func(int) int
-	_rb_iter_break func()
-	_rb_iter_break_value func(uint)
-	_rb_iterate func(unsafe.Pointer, uint, unsafe.Pointer, uint) uint
-	_rb_iv_get func(uint, string) uint
-	_rb_iv_set func(uint, string, uint) uint
-	_rb_ivar_count func(uint) uint
-	_rb_ivar_defined func(uint, uint) uint
-	_rb_ivar_foreach func(uint, unsafe.Pointer, uint)
-	_rb_ivar_get func(uint, uint) uint
-	_rb_ivar_set func(uint, uint, uint) uint
-	_rb_jump_tag func(int)
-	_rb_last_status_get func() uint
-	_rb_last_status_set func(int, int)
-	_rb_lastline_get func() uint
-	_rb_lastline_set func(uint)
-	_rb_ll2inum func(int64) uint
-	_rb_load func(uint, int)
-	_rb_load_file func(string) unsafe.Pointer
-	_rb_load_file_str func(uint) unsafe.Pointer
-	_rb_load_protect func(uint, int, *int32)
-	_rb_locale_str_new func(string, int) uint
-	_rb_locale_str_new_cstr func(string) uint
-	_rb_long2int_inline func(int) int
-	_rb_long2num_inline func(int) uint
-	_rb_make_backtrace func() uint
-	_rb_make_exception func(int, *uint) uint
-	_rb_mark_hash func(*StTable)
-	_rb_mark_set func(*StTable)
-	_rb_mark_tbl func(*StTable)
-	_rb_marshal_define_compat func(uint, uint, unsafe.Pointer, unsafe.Pointer)
-	_rb_marshal_dump func(uint, uint) uint
-	_rb_marshal_load func(uint) uint
-	_rb_match_busy func(uint)
-	_rb_mem_clear func(*uint, int)
-	_rb_memcicmp func(unsafe.Pointer, unsafe.Pointer, int) int
-	_rb_memerror func()
-	_rb_memhash func(unsafe.Pointer, int) uint
-	_rb_method_basic_definition_p func(uint, uint) int
-	_rb_method_boundp func(uint, uint, int) int
-	_rb_method_call func(int, *uint, uint) uint
-	_rb_method_call_with_block func(int, *uint, uint, uint) uint
-	_rb_mod_ancestors func(uint) uint
-	_rb_mod_class_variables func(int, *uint, uint) uint
-	_rb_mod_const_at func(uint, unsafe.Pointer) unsafe.Pointer
-	_rb_mod_const_missing func(uint, uint) uint
-	_rb_mod_const_of func(uint, unsafe.Pointer) unsafe.Pointer
-	_rb_mod_constants func(int, *uint, uint) uint
-	_rb_mod_include_p func(uint, uint) uint
-	_rb_mod_included_modules func(uint) uint
-	_rb_mod_init_copy func(uint, uint) uint
-	_rb_mod_method_arity func(uint, uint) int
-	_rb_mod_module_eval func(int, *uint, uint) uint
-	_rb_mod_module_exec func(int, *uint, uint) uint
-	_rb_mod_name func(uint) uint
-	_rb_mod_remove_const func(uint, uint) uint
-	_rb_mod_remove_cvar func(uint, uint) uint
-	_rb_mod_sys_fail func(uint, string)
-	_rb_mod_sys_fail_str func(uint, uint)
-	_rb_mod_syserr_fail func(uint, int, string)
-	_rb_mod_syserr_fail_str func(uint, int, uint)
-	_rb_module_new func() uint
-	_rb_mul_size_overflow func(uint, uint, uint, *uint) int
-	_rb_must_asciicompat func(uint)
-	_rb_mutex_lock func(uint) uint
-	_rb_mutex_locked_p func(uint) uint
-	_rb_mutex_new func() uint
-	_rb_mutex_sleep func(uint, uint) uint
-	_rb_mutex_synchronize func(uint, unsafe.Pointer, uint) uint
-	_rb_mutex_trylock func(uint) uint
-	_rb_mutex_unlock func(uint) uint
-	_rb_name_class func(uint, uint)
-	_rb_need_block func()
-	_rb_newobj func() uint
-	_rb_newobj_of func(uint, uint) uint
-	_rb_notimplement func()
-	_rb_num2char_inline func(uint) int8
-	_rb_num2dbl func(uint) float64
-	_rb_num2fix func(uint) uint
-	_rb_num2int func(uint) int
-	_rb_num2int_inline func(uint) int
-	_rb_num2ll func(uint) int64
-	_rb_num2ll_inline func(uint) int64
-	_rb_num2long func(uint) int
-	_rb_num2long_inline func(uint) int
-	_rb_num2short func(uint) int16
-	_rb_num2short_inline func(uint) int16
-	_rb_num2uint func(uint) uint
-	_rb_num2ull func(uint) uint64
-	_rb_num2ulong func(uint) uint
-	_rb_num2ulong_inline func(uint) uint
-	_rb_num2ushort func(uint) uint16
-	_rb_num_coerce_bin func(uint, uint, uint) uint
-	_rb_num_coerce_bit func(uint, uint, uint) uint
-	_rb_num_coerce_cmp func(uint, uint, uint) uint
-	_rb_num_coerce_relop func(uint, uint, uint) uint
-	_rb_num_zerodiv func()
-	_rb_obj_alloc func(uint) uint
-	_rb_obj_as_string func(uint) uint
-	_rb_obj_call_init func(uint, int, *uint)
-	_rb_obj_class func(uint) uint
-	_rb_obj_classname func(uint) string
-	_rb_obj_clone func(uint) uint
-	_rb_obj_dup func(uint) uint
-	_rb_obj_freeze func(uint) uint
-	_rb_obj_freeze_inline func(uint)
-	_rb_obj_frozen_p func(uint) uint
-	_rb_obj_hide func(uint) uint
-	_rb_obj_id func(uint) uint
-	_rb_obj_infect func(uint, uint)
-	_rb_obj_init_copy func(uint, uint) uint
-	_rb_obj_instance_eval func(int, *uint, uint) uint
-	_rb_obj_instance_exec func(int, *uint, uint) uint
-	_rb_obj_instance_variables func(uint) uint
-	_rb_obj_is_instance_of func(uint, uint) uint
-	_rb_obj_is_kind_of func(uint, uint) uint
-	_rb_obj_is_method func(uint) uint
-	_rb_obj_is_proc func(uint) uint
-	_rb_obj_method func(uint, uint) uint
-	_rb_obj_method_arity func(uint, uint) int
-	_rb_obj_remove_instance_variable func(uint, uint) uint
-	_rb_obj_respond_to func(uint, uint, int) int
-	_rb_obj_reveal func(uint, uint) uint
-	_rb_obj_setup func(uint, uint, uint) uint
-	_rb_obj_singleton_methods func(int, *uint, uint) uint
-	_rb_obj_taint func(uint) uint
-	_rb_obj_tainted func(uint) uint
-	_rb_obj_trust func(uint) uint
-	_rb_obj_untaint func(uint) uint
-	_rb_obj_untrust func(uint) uint
-	_rb_obj_untrusted func(uint) uint
-	_rb_obj_wb_unprotect func(uint, string, int) uint
-	_rb_obj_write func(uint, *uint, uint, string, int) uint
-	_rb_obj_written func(uint, uint, uint, string, int) uint
-	_rb_out_of_int func(int)
-	_rb_p func(uint)
-	_rb_path2class func(string) uint
-	_rb_path_check func(string) int
-	_rb_path_to_class func(uint) uint
-	_rb_pipe func(*int32) int
-	_rb_prepend_module func(uint, uint)
-	_rb_proc_arity func(uint) int
-	_rb_proc_call func(uint, uint) uint
-	_rb_proc_call_with_block func(uint, int, *uint, uint) uint
-	_rb_proc_exec func(string) int
-	_rb_proc_lambda_p func(uint) uint
-	_rb_proc_new func(unsafe.Pointer, uint) uint
-	_rb_proc_times func(uint) uint
-	_rb_protect func(unsafe.Pointer, uint, *int32) uint
-	_rb_provide func(string)
-	_rb_provided func(string) int
-	_rb_random_bytes func(uint, int) uint
-	_rb_random_int func(uint, uint) uint
-	_rb_random_int32 func(uint) uint
-	_rb_random_real func(uint) float64
-	_rb_random_ulong_limited func(uint, uint) uint
-	_rb_range_beg_len func(uint, *int64, *int64, int, int) uint
-	_rb_range_new func(uint, uint, int) uint
-	_rb_range_values func(uint, *uint, *uint, *int32) int
-	_rb_rational_den func(uint) uint
-	_rb_rational_new func(uint, uint) uint
-	_rb_rational_num func(uint) uint
-	_rb_rational_raw func(uint, uint) uint
-	_rb_readwrite_sys_fail func(Rb_io_wait_readwrite, string)
-	_rb_readwrite_syserr_fail func(Rb_io_wait_readwrite, int, string)
-	_rb_reg_alloc func() uint
-	_rb_reg_backref_number func(uint, uint) int
-	_rb_reg_init_str func(uint, uint, int) uint
-	_rb_reg_last_match func(uint) uint
-	_rb_reg_match func(uint, uint) uint
-	_rb_reg_match2 func(uint) uint
-	_rb_reg_match_last func(uint) uint
-	_rb_reg_match_post func(uint) uint
-	_rb_reg_match_pre func(uint) uint
-	_rb_reg_new func(string, int, int) uint
-	_rb_reg_new_str func(uint, int) uint
-	_rb_reg_nth_defined func(int, uint) uint
-	_rb_reg_nth_match func(int, uint) uint
-	_rb_reg_options func(uint) int
-	_rb_remove_event_hook func(unsafe.Pointer) int
-	_rb_remove_method func(uint, string)
-	_rb_remove_method_id func(uint, uint)
-	_rb_require func(string) uint
-	_rb_require_safe func(uint, int) uint
-	_rb_rescue func(unsafe.Pointer, uint, unsafe.Pointer, uint) uint
-	_rb_reserved_fd_p func(int) int
-	_rb_reset_random_seed func()
-	_rb_respond_to func(uint, uint) int
-	_rb_ruby_debug_ptr func() *uint
-	_rb_ruby_verbose_ptr func() *uint
-	_rb_safe_level func() int
-	_rb_secure func(int)
-	_rb_secure_update func(uint)
-	_rb_set_class_path func(uint, uint, string)
-	_rb_set_class_path_string func(uint, uint, uint)
-	_rb_set_end_proc func(unsafe.Pointer, uint)
-	_rb_set_errinfo func(uint)
-	_rb_set_safe_level func(int)
-	_rb_set_safe_level_force func(int)
-	_rb_singleton_class func(uint) uint
-	_rb_singleton_class_attached func(uint, uint)
-	_rb_singleton_class_clone func(uint) uint
-	_rb_sourcefile func() string
-	_rb_sourceline func() int
-	_rb_spawn func(int, *uint) int
-	_rb_spawn_err func(int, *uint, string, uint) int
-	_rb_sprintf func(string) uint
-	_rb_str2inum func(uint, int) uint
-	_rb_str_append func(uint, uint) uint
-	_rb_str_associate func()
-	_rb_str_associated func()
-	_rb_str_buf_append func(uint, uint) uint
-	_rb_str_buf_cat func(uint, string, int) uint
-	_rb_str_buf_cat2 func(uint, string) uint
-	_rb_str_buf_cat_ascii func(uint, string) uint
-	_rb_str_buf_new func(int) uint
-	_rb_str_buf_new2 func(string) uint
-	_rb_str_buf_new_cstr func(string) uint
-	_rb_str_capacity func(uint) uint
-	_rb_str_cat func(uint, string, int) uint
-	_rb_str_cat2 func(uint, string) uint
-	_rb_str_cat_cstr func(uint, string) uint
-	_rb_str_cmp func(uint, uint) int
-	_rb_str_comparable func(uint, uint) int
-	_rb_str_concat func(uint, uint) uint
-	_rb_str_drop_bytes func(uint, int) uint
-	_rb_str_dump func(uint) uint
-	_rb_str_dup func(uint) uint
-	_rb_str_dup_frozen func(uint) uint
-	_rb_str_ellipsize func(uint, int) uint
-	_rb_str_encode_ospath func(uint) uint
-	_rb_str_equal func(uint, uint) uint
-	_rb_str_export func(uint) uint
-	_rb_str_export_locale func(uint) uint
-	_rb_str_format func(int, *uint, uint) uint
-	_rb_str_free func(uint)
-	_rb_str_freeze func(uint) uint
-	_rb_str_hash func(uint) uint
-	_rb_str_hash_cmp func(uint, uint) int
-	_rb_str_inspect func(uint) uint
-	_rb_str_intern func(uint) uint
-	_rb_str_length func(uint) uint
-	_rb_str_locktmp func(uint) uint
-	_rb_str_modify func(uint)
-	_rb_str_modify_expand func(uint, int)
-	_rb_str_new func(string, int) uint
-	_rb_str_new_cstr func(string) uint
-	_rb_str_new_frozen func(uint) uint
-	_rb_str_new_shared func(uint) uint
-	_rb_str_new_static func(string, int) uint
-	_rb_str_new_with_class func(uint, string, int) uint
-	_rb_str_offset func(uint, int) int
-	_rb_str_plus func(uint, uint) uint
-	_rb_str_replace func(uint, uint) uint
-	_rb_str_resize func(uint, int) uint
-	_rb_str_resurrect func(uint) uint
-	_rb_str_scrub func(uint, uint) uint
-	_rb_str_set_len func(uint, int)
-	_rb_str_setter func(uint, uint, *uint)
-	_rb_str_shared_replace func(uint, uint)
-	_rb_str_split func(uint, string) uint
-	_rb_str_strlen func(uint) int
-	_rb_str_sublen func(uint, int) int
-	_rb_str_subpos func(uint, int, *int64) string
-	_rb_str_subseq func(uint, int, int) uint
-	_rb_str_substr func(uint, int, int) uint
-	_rb_str_succ func(uint) uint
-	_rb_str_times func(uint, uint) uint
-	_rb_str_tmp_new func(int) uint
-	_rb_str_to_dbl func(uint, int) float64
-	_rb_str_to_inum func(uint, int, int) uint
-	_rb_str_to_str func(uint) uint
-	_rb_str_unlocktmp func(uint) uint
-	_rb_str_update func(uint, int, int, uint)
-	_rb_str_vcatf func(uint, string, string) uint
-	_rb_string_value func(unsafe.Pointer) uint
-	_rb_string_value_cstr func(unsafe.Pointer) string
-	_rb_string_value_ptr func(unsafe.Pointer) string
-	_rb_struct_alloc func(uint, uint) uint
-	_rb_struct_alloc_noinit func(uint) uint
-	_rb_struct_aref func(uint, uint) uint
-	_rb_struct_aset func(uint, uint, uint) uint
-	_rb_struct_getmember func(uint, uint) uint
-	_rb_struct_initialize func(uint, uint) uint
-	_rb_struct_members func(uint) uint
-	_rb_struct_ptr func()
-	_rb_struct_s_members func(uint) uint
-	_rb_struct_size func(uint) uint
-	_rb_sym2id func(uint) uint
-	_rb_sym2str func(uint) uint
-	_rb_sym_all_symbols func() uint
-	_rb_sym_interned_p func(uint) int
-	_rb_sym_to_s func(uint) uint
-	_rb_symname_p func(string) int
-	_rb_sys_fail func(string)
-	_rb_sys_fail_str func(uint)
-	_rb_syserr_fail func(int, string)
-	_rb_syserr_fail_str func(int, uint)
-	_rb_syserr_new func(int, string) uint
-	_rb_syserr_new_str func(int, uint) uint
-	_rb_syswait func(int)
-	_rb_tainted_str_new func(string, int) uint
-	_rb_tainted_str_new_cstr func(string) uint
-	_rb_thread_alone func() int
-	_rb_thread_atfork func()
-	_rb_thread_atfork_before_exec func()
-	_rb_thread_check_ints func()
-	_rb_thread_create func(unsafe.Pointer, unsafe.Pointer) uint
-	_rb_thread_current func() uint
-	_rb_thread_fd_close func(int)
-	_rb_thread_fd_select func(int, *RbFdsetT, *RbFdsetT, *RbFdsetT, unsafe.Pointer) int
-	_rb_thread_fd_writable func(int) int
-	_rb_thread_interrupted func(uint) int
-	_rb_thread_kill func(uint) uint
-	_rb_thread_local_aref func(uint, uint) uint
-	_rb_thread_local_aset func(uint, uint, uint) uint
-	_rb_thread_main func() uint
-	_rb_thread_run func(uint) uint
-	_rb_thread_schedule func()
-	_rb_thread_sleep func(int)
-	_rb_thread_sleep_deadly func()
-	_rb_thread_sleep_forever func()
-	_rb_thread_stop func() uint
-	_rb_thread_wait_fd func(int)
-	_rb_thread_wait_for func(unsafe.Pointer)
-	_rb_thread_wakeup func(uint) uint
-	_rb_thread_wakeup_alive func(uint) uint
-	_rb_throw func(string, uint)
-	_rb_throw_obj func(uint, uint)
-	_rb_time_interval func(uint) unsafe.Pointer
-	_rb_time_nano_new func(int, int) uint
-	_rb_time_new func(int, int) uint
-	_rb_time_num_new func(uint, uint) uint
-	_rb_time_succ func(uint) uint
-	_rb_time_timespec func(uint) unsafe.Pointer
-	_rb_time_timespec_new func(unsafe.Pointer, int) uint
-	_rb_time_timeval func(uint) unsafe.Pointer
-	_rb_time_utc_offset func(uint) uint
-	_rb_timespec_now func(unsafe.Pointer)
-	_rb_to_float func(uint) uint
-	_rb_to_id func(uint) uint
-	_rb_to_int func(uint) uint
-	_rb_to_symbol func(uint) uint
-	_rb_tolower func(int) int
-	_rb_toupper func(int) int
-	_rb_trap_exec func()
-	_rb_trap_exit func()
-	_rb_type func(uint) int
-	_rb_typeddata_inherited_p func(*RbDataTypeStruct, *RbDataTypeStruct) int
-	_rb_typeddata_is_kind_of func(uint, *RbDataTypeStruct) int
-	_rb_uint2big func(uint) uint
-	_rb_uint2inum func(uint) uint
-	_rb_ull2inum func(uint64) uint
-	_rb_ulong2num_inline func(uint) uint
-	_rb_undef func(uint, uint)
-	_rb_undef_alloc_func func(uint)
-	_rb_undef_method func(uint, string)
-	_rb_undefine_finalizer func(uint) uint
-	_rb_update_max_fd func(int)
-	_rb_usascii_str_new func(string, int) uint
-	_rb_usascii_str_new_cstr func(string) uint
-	_rb_usascii_str_new_static func(string, int) uint
-	_rb_utf8_str_new func(string, int) uint
-	_rb_utf8_str_new_cstr func(string) uint
-	_rb_utf8_str_new_static func(string, int) uint
-	_rb_uv_to_utf8 func(string, uint) int
-	_rb_varargs_bad_length func(int, int) int
-	_rb_vsprintf func(string, string) uint
-	_rb_waitpid func(int, *int32, int) int
-	_rb_write_error func(string)
-	_rb_write_error2 func(string, int)
-	_rb_yield func(uint) uint
-	_rb_yield_block func(uint, uint, int, *uint, uint) uint
-	_rb_yield_splat func(uint) uint
-	_rb_yield_values2 func(int, *uint) uint
-	_ruby_brace_glob func(string, int, unsafe.Pointer, uint) int
-	_ruby_cleanup func(unsafe.Pointer) int
-	_ruby_default_signal func(int)
-	_ruby_exec_node func(unsafe.Pointer) int
-	_ruby_executable_node func(unsafe.Pointer, *int32) int
-	_ruby_finalize func()
-	_ruby_glob func(string, int, unsafe.Pointer, uint) int
-	_ruby_incpush func(string)
-	_ruby_init func()
-	_ruby_init_loadpath func()
-	_ruby_init_stack func(unsafe.Pointer)
-	_ruby_malloc_size_overflow func(uint, uint)
-	_ruby_native_thread_p func() int
-	_ruby_options func(int, string) unsafe.Pointer
-	_ruby_posix_signal func(int, unsafe.Pointer)
-	_ruby_process_options func(int, string) unsafe.Pointer
-	_ruby_prog_init func()
-	_ruby_run_node func(unsafe.Pointer) int
-	_ruby_script func(string)
-	_ruby_set_argv func(int, string)
-	_ruby_set_script_name func(uint)
-	_ruby_set_stack_size func(uint)
-	_ruby_setup func() int
-	_ruby_show_copyright func()
-	_ruby_show_copyright_to_die func(int) int
-	_ruby_show_version func()
-	_ruby_sig_finalize func()
-	_ruby_signal_name func(int) string
-	_ruby_snprintf func(string, uint, string) int
-	_ruby_stack_check func() int
-	_ruby_stack_length func(*uint) uint
-	_ruby_stop func(int)
-	_ruby_strtoul func(string, string, int) uint
-	_ruby_sysinit func(*int32, string)
-	_ruby_vsnprintf func(string, uint, string, string) int
-	_ruby_xcalloc func(uint, uint) unsafe.Pointer
-	_ruby_xfree func(unsafe.Pointer)
-	_ruby_xmalloc func(uint) unsafe.Pointer
-	_ruby_xmalloc2 func(uint, uint) unsafe.Pointer
-	_ruby_xrealloc func(unsafe.Pointer, uint) unsafe.Pointer
-	_ruby_xrealloc2 func(unsafe.Pointer, uint, uint) unsafe.Pointer
-	_st_add_direct func(*StTable, uint, uint)
-	_st_cleanup_safe func(*StTable, uint)
-	_st_clear func(*StTable)
-	_st_copy func(*StTable) *StTable
-	_st_delete func(*StTable, *uint, *uint) int
-	_st_delete_safe func(*StTable, *uint, *uint, uint) int
-	_st_foreach func(*StTable, unsafe.Pointer, uint) int
-	_st_foreach_check func(*StTable, unsafe.Pointer, uint, uint) int
-	_st_foreach_safe func(*StTable, unsafe.Pointer, uint)
-	_st_free_table func(*StTable)
-	_st_get_key func(*StTable, uint, *uint) int
-	_st_hash func(unsafe.Pointer, uint, uint) uint
-	_st_hash_end func(uint) uint
-	_st_hash_start func(uint) uint
-	_st_hash_uint func(uint, uint) uint
-	_st_hash_uint32 func(uint, uint32) uint
-	_st_init_numtable func() *StTable
-	_st_init_numtable_with_size func(uint) *StTable
-	_st_init_strcasetable func() *StTable
-	_st_init_strcasetable_with_size func(uint) *StTable
-	_st_init_strtable func() *StTable
-	_st_init_strtable_with_size func(uint) *StTable
-	_st_init_table func(*StHashType) *StTable
-	_st_init_table_with_size func(*StHashType, uint) *StTable
-	_st_insert func(*StTable, uint, uint) int
-	_st_insert2 func(*StTable, uint, uint, unsafe.Pointer) int
-	_st_keys func(*StTable, *uint, uint) uint
-	_st_keys_check func(*StTable, *uint, uint, uint) uint
-	_st_locale_insensitive_strcasecmp func(string, string) int
-	_st_locale_insensitive_strncasecmp func(string, string, uint) int
-	_st_lookup func(*StTable, uint, *uint) int
-	_st_memsize func(*StTable) uint
-	_st_numcmp func(uint, uint) int
-	_st_numhash func(uint) uint
-	_st_shift func(*StTable, *uint, *uint) int
-	_st_update func(*StTable, uint, unsafe.Pointer, uint) int
-	_st_values func(*StTable, *uint, uint) uint
-	_st_values_check func(*StTable, *uint, uint, uint) uint
+	_rb_class_public_instance_methods    func(int, *uint, uint) uint
+	_rb_class_real                       func(uint) uint
+	_rb_class_superclass                 func(uint) uint
+	_rb_clear_cache                      func()
+	_rb_clear_constant_cache             func()
+	_rb_clear_method_cache_by_class      func(uint)
+	_rb_cloexec_dup                      func(int) int
+	_rb_cloexec_dup2                     func(int, int) int
+	_rb_cloexec_fcntl_dupfd              func(int, int) int
+	_rb_cloexec_open                     func(string, int, uint16) int
+	_rb_cloexec_pipe                     func(*int32) int
+	_rb_clone_setup                      func(uint, uint)
+	_rb_close_before_exec                func(int, int, uint)
+	_rb_cmperr                           func(uint, uint)
+	_rb_cmpint                           func(uint, uint, uint) int
+	_rb_compile_error                    func()
+	_rb_compile_error_append             func()
+	_rb_compile_error_with_enc           func()
+	_rb_complex_abs                      func(uint) uint
+	_rb_complex_arg                      func(uint) uint
+	_rb_complex_conjugate                func(uint) uint
+	_rb_complex_div                      func(uint, uint) uint
+	_rb_complex_imag                     func(uint) uint
+	_rb_complex_minus                    func(uint, uint) uint
+	_rb_complex_mul                      func(uint, uint) uint
+	_rb_complex_new                      func(uint, uint) uint
+	_rb_complex_new_polar                func(uint, uint) uint
+	_rb_complex_plus                     func(uint, uint) uint
+	_rb_complex_polar                    func(uint, uint) uint
+	_rb_complex_pow                      func(uint, uint) uint
+	_rb_complex_raw                      func(uint, uint) uint
+	_rb_complex_real                     func(uint) uint
+	_rb_complex_uminus                   func(uint) uint
+	_rb_const_defined                    func(uint, uint) int
+	_rb_const_defined_at                 func(uint, uint) int
+	_rb_const_defined_from               func(uint, uint) int
+	_rb_const_get                        func(uint, uint) uint
+	_rb_const_get_at                     func(uint, uint) uint
+	_rb_const_get_from                   func(uint, uint) uint
+	_rb_const_list                       func(unsafe.Pointer) uint
+	_rb_const_remove                     func(uint, uint) uint
+	_rb_const_set                        func(uint, uint, uint)
+	_rb_convert_type                     func(uint, int, string, string) uint
+	_rb_copy_generic_ivar                func(uint, uint)
+	_rb_cstr2inum                        func(string, int) uint
+	_rb_cstr_to_dbl                      func(string, int) float64
+	_rb_cstr_to_inum                     func(string, int, int) uint
+	_rb_current_receiver                 func() uint
+	_rb_cv_get                           func(uint, string) uint
+	_rb_cv_set                           func(uint, string, uint)
+	_rb_cvar_defined                     func(uint, uint) uint
+	_rb_cvar_get                         func(uint, uint) uint
+	_rb_cvar_set                         func(uint, uint, uint)
+	_rb_data_object_alloc                func(uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint
+	_rb_data_object_get                  func(uint) unsafe.Pointer
+	_rb_data_object_make                 func(uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint) uint
+	_rb_data_object_wrap                 func(uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint
+	_rb_data_object_zalloc               func(uint, uint, unsafe.Pointer, unsafe.Pointer) uint
+	_rb_data_typed_object_alloc          func(uint, unsafe.Pointer, *RbDataTypeStruct) uint
+	_rb_data_typed_object_make           func(uint, *RbDataTypeStruct, unsafe.Pointer, uint) uint
+	_rb_data_typed_object_wrap           func(uint, unsafe.Pointer, *RbDataTypeStruct) uint
+	_rb_data_typed_object_zalloc         func(uint, uint, *RbDataTypeStruct) uint
+	_rb_dbl2big                          func(float64) uint
+	_rb_dbl_cmp                          func(float64, float64) uint
+	_rb_dbl_complex_new                  func(float64, float64) uint
+	_rb_define_alias                     func(uint, string, string)
+	_rb_define_alloc_func                func(uint, unsafe.Pointer)
+	_rb_define_attr                      func(uint, string, int, int)
+	_rb_define_class                     func(string, uint) uint
+	_rb_define_class_id                  func(uint, uint) uint
+	_rb_define_class_id_under            func(uint, uint, uint) uint
+	_rb_define_class_under               func(uint, string, uint) uint
+	_rb_define_class_variable            func(uint, string, uint)
+	_rb_define_const                     func(uint, string, uint)
+	_rb_define_finalizer                 func(uint, uint) uint
+	_rb_define_global_const              func(string, uint)
+	_rb_define_global_function           func(string, unsafe.Pointer, int)
+	_rb_define_hooked_variable           func(string, *uint, unsafe.Pointer, unsafe.Pointer)
+	_rb_define_method                    func(uint, string, unsafe.Pointer, int)
+	_rb_define_method_id                 func(uint, uint, unsafe.Pointer, int)
+	_rb_define_module                    func(string) uint
+	_rb_define_module_function           func(uint, string, unsafe.Pointer, int)
+	_rb_define_module_id                 func(uint) uint
+	_rb_define_module_id_under           func(uint, uint) uint
+	_rb_define_module_under              func(uint, string) uint
+	_rb_define_private_method            func(uint, string, unsafe.Pointer, int)
+	_rb_define_protected_method          func(uint, string, unsafe.Pointer, int)
+	_rb_define_readonly_variable         func(string, *uint)
+	_rb_define_singleton_method          func(uint, string, unsafe.Pointer, int)
+	_rb_define_variable                  func(string, *uint)
+	_rb_define_virtual_variable          func(string, unsafe.Pointer, unsafe.Pointer)
+	_rb_detach_process                   func(int) uint
+	_rb_dir_getwd                        func() uint
+	_rb_disable_super                    func()
+	_rb_dup_setup                        func(uint, uint)
+	_rb_during_gc                        func() int
+	_rb_each                             func(uint) uint
+	_rb_enable_super                     func()
+	_rb_ensure                           func(unsafe.Pointer, uint, unsafe.Pointer, uint) uint
+	_rb_enum_values_pack                 func(int, *uint) uint
+	_rb_enumeratorize                    func(uint, uint, int, *uint) uint
+	_rb_enumeratorize_with_size          func(uint, uint, int, *uint, unsafe.Pointer) uint
+	_rb_env_clear                        func() uint
+	_rb_env_path_tainted                 func() int
+	_rb_eql                              func(uint, uint) int
+	_rb_equal                            func(uint, uint) uint
+	_rb_errinfo                          func() uint
+	_rb_error_arity                      func(int, int, int)
+	_rb_error_frozen                     func(string)
+	_rb_error_frozen_object              func(uint)
+	_rb_error_untrusted                  func(uint)
+	_rb_eval_cmd                         func(uint, uint, int) uint
+	_rb_eval_string                      func(string) uint
+	_rb_eval_string_protect              func(string, *int32) uint
+	_rb_eval_string_wrap                 func(string, *int32) uint
+	_rb_exc_fatal                        func(uint)
+	_rb_exc_new                          func(uint, string, int) uint
+	_rb_exc_new_cstr                     func(uint, string) uint
+	_rb_exc_new_str                      func(uint, uint) uint
+	_rb_exc_raise                        func(uint)
+	_rb_exec_end_proc                    func()
+	_rb_exec_recursive                   func(unsafe.Pointer, uint, uint) uint
+	_rb_exec_recursive_outer             func(unsafe.Pointer, uint, uint) uint
+	_rb_exec_recursive_paired            func(unsafe.Pointer, uint, uint, uint) uint
+	_rb_exec_recursive_paired_outer      func(unsafe.Pointer, uint, uint, uint) uint
+	_rb_exit                             func(int)
+	_rb_extend_object                    func(uint, uint)
+	_rb_external_str_new                 func(string, int) uint
+	_rb_external_str_new_cstr            func(string) uint
+	_rb_extract_keywords                 func(*uint) uint
+	_rb_f_abort                          func(int, *uint) uint
+	_rb_f_exec                           func(int, *uint) uint
+	_rb_f_exit                           func(int, *uint) uint
+	_rb_f_global_variables               func() uint
+	_rb_f_kill                           func(int, *uint) uint
+	_rb_f_notimplement                   func(int, *uint, uint) uint
+	_rb_f_require                        func(uint, uint) uint
+	_rb_f_sprintf                        func(int, *uint) uint
+	_rb_f_trace_var                      func(int, *uint) uint
+	_rb_f_untrace_var                    func(int, *uint) uint
+	_rb_fd_clr                           func(int, *RbFdsetT)
+	_rb_fd_copy                          func(*RbFdsetT, unsafe.Pointer, int)
+	_rb_fd_dup                           func(*RbFdsetT, *RbFdsetT)
+	_rb_fd_fix_cloexec                   func(int)
+	_rb_fd_init                          func(*RbFdsetT)
+	_rb_fd_isset                         func(int, *RbFdsetT) int
+	_rb_fd_select                        func(int, *RbFdsetT, *RbFdsetT, *RbFdsetT, unsafe.Pointer) int
+	_rb_fd_set                           func(int, *RbFdsetT)
+	_rb_fd_term                          func(*RbFdsetT)
+	_rb_fd_zero                          func(*RbFdsetT)
+	_rb_feature_provided                 func(string, string) int
+	_rb_fiber_alive_p                    func(uint) uint
+	_rb_fiber_current                    func() uint
+	_rb_fiber_new                        func(unsafe.Pointer, uint) uint
+	_rb_fiber_resume                     func(uint, int, *uint) uint
+	_rb_fiber_yield                      func(int, *uint) uint
+	_rb_file_absolute_path               func(uint, uint) uint
+	_rb_file_directory_p                 func(uint, uint) uint
+	_rb_file_dirname                     func(uint) uint
+	_rb_file_expand_path                 func(uint, uint) uint
+	_rb_file_open                        func(string, string) uint
+	_rb_file_open_str                    func(uint, string) uint
+	_rb_file_s_absolute_path             func(int, *uint) uint
+	_rb_file_s_expand_path               func(int, *uint) uint
+	_rb_filesystem_str_new               func(string, int) uint
+	_rb_filesystem_str_new_cstr          func(string) uint
+	_rb_find_file                        func(uint) uint
+	_rb_find_file_ext                    func(*uint, unsafe.Pointer) int
+	_rb_find_file_ext_safe               func(*uint, unsafe.Pointer, int) int
+	_rb_find_file_safe                   func(uint, int) uint
+	_rb_fix2int                          func(uint) int
+	_rb_fix2long                         func(uint) int
+	_rb_fix2short                        func(uint) int16
+	_rb_fix2str                          func(uint, int) uint
+	_rb_fix2uint                         func(uint) uint
+	_rb_fix2ulong                        func(uint) uint
+	_rb_fix2ushort                       func(uint) uint16
+	_rb_float_new                        func(float64) uint
+	_rb_float_new_in_heap                func(float64) uint
+	_rb_float_value                      func(uint) float64
+	_rb_flt_rationalize                  func(uint) uint
+	_rb_flt_rationalize_with_prec        func(uint, uint) uint
+	_rb_frame_callee                     func() uint
+	_rb_frame_method_id_and_class        func(*uint, *uint) int
+	_rb_frame_pop                        func()
+	_rb_frame_this_func                  func() uint
+	_rb_free_generic_ivar                func(uint)
+	_rb_free_tmp_buffer                  func(unsafe.Pointer)
+	_rb_freeze_singleton_class           func(uint)
+	_rb_frozen_class_p                   func(uint)
+	_rb_funcall_passing_block            func(uint, uint, int, *uint) uint
+	_rb_funcall_with_block               func(uint, uint, int, *uint, uint) uint
+	_rb_funcallv                         func(uint, uint, int, *uint) uint
+	_rb_funcallv_public                  func(uint, uint, int, *uint) uint
+	_rb_gc                               func()
+	_rb_gc_adjust_memory_usage           func(int)
+	_rb_gc_call_finalizer_at_exit        func()
+	_rb_gc_copy_finalizer                func(uint, uint)
+	_rb_gc_count                         func() uint
+	_rb_gc_disable                       func() uint
+	_rb_gc_enable                        func() uint
+	_rb_gc_finalize_deferred             func()
+	_rb_gc_force_recycle                 func(uint)
+	_rb_gc_latest_gc_info                func(uint) uint
+	_rb_gc_mark                          func(uint)
+	_rb_gc_mark_locations                func(*uint, *uint)
+	_rb_gc_mark_maybe                    func(uint)
+	_rb_gc_register_address              func(*uint)
+	_rb_gc_register_mark_object          func(uint)
+	_rb_gc_start                         func() uint
+	_rb_gc_stat                          func(uint) uint
+	_rb_gc_unregister_address            func(*uint)
+	_rb_gc_writebarrier                  func(uint, uint)
+	_rb_gc_writebarrier_unprotect        func(uint)
+	_rb_generic_ivar_table               func()
+	_rb_genrand_int32                    func() uint
+	_rb_genrand_real                     func() float64
+	_rb_genrand_ulong_limited            func(uint) uint
+	_rb_get_alloc_func                   func(uint) unsafe.Pointer
+	_rb_get_argv                         func() uint
+	_rb_get_kwargs                       func(uint, *uint, int, int, *uint) int
+	_rb_get_path                         func(uint) uint
+	_rb_get_path_no_checksafe            func(uint) uint
+	_rb_get_values_at                    func(uint, int, int, *uint, unsafe.Pointer) uint
+	_rb_gets                             func() uint
+	_rb_glob                             func(string, unsafe.Pointer, uint)
+	_rb_gv_get                           func(string) uint
+	_rb_gv_set                           func(string, uint) uint
+	_rb_gvar_readonly_setter             func(uint, uint, unsafe.Pointer, unsafe.Pointer)
+	_rb_gvar_undef_getter                func(uint, unsafe.Pointer, unsafe.Pointer) uint
+	_rb_gvar_undef_marker                func(*uint)
+	_rb_gvar_undef_setter                func(uint, uint, unsafe.Pointer, unsafe.Pointer)
+	_rb_gvar_val_getter                  func(uint, unsafe.Pointer, unsafe.Pointer) uint
+	_rb_gvar_val_marker                  func(*uint)
+	_rb_gvar_val_setter                  func(uint, uint, unsafe.Pointer, unsafe.Pointer)
+	_rb_gvar_var_getter                  func(uint, unsafe.Pointer, unsafe.Pointer) uint
+	_rb_gvar_var_marker                  func(*uint)
+	_rb_gvar_var_setter                  func(uint, uint, unsafe.Pointer, unsafe.Pointer)
+	_rb_hash                             func(uint) uint
+	_rb_hash_aref                        func(uint, uint) uint
+	_rb_hash_aset                        func(uint, uint, uint) uint
+	_rb_hash_bulk_insert_into_st_table   func(int, *uint, uint)
+	_rb_hash_clear                       func(uint) uint
+	_rb_hash_delete                      func(uint, uint) uint
+	_rb_hash_delete_if                   func(uint) uint
+	_rb_hash_dup                         func(uint) uint
+	_rb_hash_end                         func(uint) uint
+	_rb_hash_fetch                       func(uint, uint) uint
+	_rb_hash_foreach                     func(uint, unsafe.Pointer, uint)
+	_rb_hash_free                        func(uint)
+	_rb_hash_freeze                      func(uint) uint
+	_rb_hash_ifnone                      func()
+	_rb_hash_iter_lev                    func()
+	_rb_hash_lookup                      func(uint, uint) uint
+	_rb_hash_lookup2                     func(uint, uint, uint) uint
+	_rb_hash_new                         func() uint
+	_rb_hash_set_ifnone                  func(uint, uint) uint
+	_rb_hash_size                        func(uint) uint
+	_rb_hash_size_num                    func(uint) uint
+	_rb_hash_start                       func(uint) uint
+	_rb_hash_tbl                         func(uint, string, int) *StTable
+	_rb_hash_uint                        func(uint, uint) uint
+	_rb_hash_uint32                      func(uint, uint32) uint
+	_rb_hash_update_by                   func(uint, uint, unsafe.Pointer) uint
+	_rb_id2name                          func(uint) string
+	_rb_id2str                           func(uint) uint
+	_rb_id2sym                           func(uint) uint
+	_rb_id_attrset                       func(uint) uint
+	_rb_include_module                   func(uint, uint)
+	_rb_insecure_operation               func()
+	_rb_inspect                          func(uint) uint
+	_rb_int2big                          func(int) uint
+	_rb_int2inum                         func(int) uint
+	_rb_integer_pack                     func(uint, unsafe.Pointer, uint, uint, uint, int) int
+	_rb_integer_unpack                   func(unsafe.Pointer, uint, uint, uint, int) uint
+	_rb_intern                           func(string) uint
+	_rb_intern2                          func(string, int) uint
+	_rb_intern_str                       func(uint) uint
+	_rb_interrupt                        func()
+	_rb_invalid_str                      func(string, string)
+	_rb_io_addstr                        func(uint, uint) uint
+	_rb_io_ascii8bit_binmode             func(uint) uint
+	_rb_io_binmode                       func(uint) uint
+	_rb_io_close                         func(uint) uint
+	_rb_io_eof                           func(uint) uint
+	_rb_io_fdopen                        func(int, int, string) uint
+	_rb_io_flush                         func(uint) uint
+	_rb_io_get_io                        func(uint) uint
+	_rb_io_getbyte                       func(uint) uint
+	_rb_io_gets                          func(uint) uint
+	_rb_io_print                         func(int, *uint, uint) uint
+	_rb_io_printf                        func(int, *uint, uint) uint
+	_rb_io_puts                          func(int, *uint, uint) uint
+	_rb_io_ungetbyte                     func(uint, uint) uint
+	_rb_io_ungetc                        func(uint, uint) uint
+	_rb_io_write                         func(uint, uint) uint
+	_rb_is_absolute_path                 func(string) int
+	_rb_is_attrset_id                    func(uint) int
+	_rb_is_class_id                      func(uint) int
+	_rb_is_const_id                      func(uint) int
+	_rb_is_global_id                     func(uint) int
+	_rb_is_instance_id                   func(uint) int
+	_rb_is_junk_id                       func(uint) int
+	_rb_is_local_id                      func(uint) int
+	_rb_isalnum                          func(int) int
+	_rb_isalpha                          func(int) int
+	_rb_isascii                          func(int) int
+	_rb_isblank                          func(int) int
+	_rb_iscntrl                          func(int) int
+	_rb_isdigit                          func(int) int
+	_rb_isgraph                          func(int) int
+	_rb_islower                          func(int) int
+	_rb_isprint                          func(int) int
+	_rb_ispunct                          func(int) int
+	_rb_isspace                          func(int) int
+	_rb_isupper                          func(int) int
+	_rb_isxdigit                         func(int) int
+	_rb_iter_break                       func()
+	_rb_iter_break_value                 func(uint)
+	_rb_iterate                          func(unsafe.Pointer, uint, unsafe.Pointer, uint) uint
+	_rb_iv_get                           func(uint, string) uint
+	_rb_iv_set                           func(uint, string, uint) uint
+	_rb_ivar_count                       func(uint) uint
+	_rb_ivar_defined                     func(uint, uint) uint
+	_rb_ivar_foreach                     func(uint, unsafe.Pointer, uint)
+	_rb_ivar_get                         func(uint, uint) uint
+	_rb_ivar_set                         func(uint, uint, uint) uint
+	_rb_jump_tag                         func(int)
+	_rb_last_status_get                  func() uint
+	_rb_last_status_set                  func(int, int)
+	_rb_lastline_get                     func() uint
+	_rb_lastline_set                     func(uint)
+	_rb_ll2inum                          func(int64) uint
+	_rb_load                             func(uint, int)
+	_rb_load_file                        func(string) unsafe.Pointer
+	_rb_load_file_str                    func(uint) unsafe.Pointer
+	_rb_load_protect                     func(uint, int, *int32)
+	_rb_locale_str_new                   func(string, int) uint
+	_rb_locale_str_new_cstr              func(string) uint
+	_rb_long2int_inline                  func(int) int
+	_rb_long2num_inline                  func(int) uint
+	_rb_make_backtrace                   func() uint
+	_rb_make_exception                   func(int, *uint) uint
+	_rb_mark_hash                        func(*StTable)
+	_rb_mark_set                         func(*StTable)
+	_rb_mark_tbl                         func(*StTable)
+	_rb_marshal_define_compat            func(uint, uint, unsafe.Pointer, unsafe.Pointer)
+	_rb_marshal_dump                     func(uint, uint) uint
+	_rb_marshal_load                     func(uint) uint
+	_rb_match_busy                       func(uint)
+	_rb_mem_clear                        func(*uint, int)
+	_rb_memcicmp                         func(unsafe.Pointer, unsafe.Pointer, int) int
+	_rb_memerror                         func()
+	_rb_memhash                          func(unsafe.Pointer, int) uint
+	_rb_method_basic_definition_p        func(uint, uint) int
+	_rb_method_boundp                    func(uint, uint, int) int
+	_rb_method_call                      func(int, *uint, uint) uint
+	_rb_method_call_with_block           func(int, *uint, uint, uint) uint
+	_rb_mod_ancestors                    func(uint) uint
+	_rb_mod_class_variables              func(int, *uint, uint) uint
+	_rb_mod_const_at                     func(uint, unsafe.Pointer) unsafe.Pointer
+	_rb_mod_const_missing                func(uint, uint) uint
+	_rb_mod_const_of                     func(uint, unsafe.Pointer) unsafe.Pointer
+	_rb_mod_constants                    func(int, *uint, uint) uint
+	_rb_mod_include_p                    func(uint, uint) uint
+	_rb_mod_included_modules             func(uint) uint
+	_rb_mod_init_copy                    func(uint, uint) uint
+	_rb_mod_method_arity                 func(uint, uint) int
+	_rb_mod_module_eval                  func(int, *uint, uint) uint
+	_rb_mod_module_exec                  func(int, *uint, uint) uint
+	_rb_mod_name                         func(uint) uint
+	_rb_mod_remove_const                 func(uint, uint) uint
+	_rb_mod_remove_cvar                  func(uint, uint) uint
+	_rb_mod_sys_fail                     func(uint, string)
+	_rb_mod_sys_fail_str                 func(uint, uint)
+	_rb_mod_syserr_fail                  func(uint, int, string)
+	_rb_mod_syserr_fail_str              func(uint, int, uint)
+	_rb_module_new                       func() uint
+	_rb_mul_size_overflow                func(uint, uint, uint, *uint) int
+	_rb_must_asciicompat                 func(uint)
+	_rb_mutex_lock                       func(uint) uint
+	_rb_mutex_locked_p                   func(uint) uint
+	_rb_mutex_new                        func() uint
+	_rb_mutex_sleep                      func(uint, uint) uint
+	_rb_mutex_synchronize                func(uint, unsafe.Pointer, uint) uint
+	_rb_mutex_trylock                    func(uint) uint
+	_rb_mutex_unlock                     func(uint) uint
+	_rb_name_class                       func(uint, uint)
+	_rb_need_block                       func()
+	_rb_newobj                           func() uint
+	_rb_newobj_of                        func(uint, uint) uint
+	_rb_notimplement                     func()
+	_rb_num2char_inline                  func(uint) int8
+	_rb_num2dbl                          func(uint) float64
+	_rb_num2fix                          func(uint) uint
+	_rb_num2int                          func(uint) int
+	_rb_num2int_inline                   func(uint) int
+	_rb_num2ll                           func(uint) int64
+	_rb_num2ll_inline                    func(uint) int64
+	_rb_num2long                         func(uint) int
+	_rb_num2long_inline                  func(uint) int
+	_rb_num2short                        func(uint) int16
+	_rb_num2short_inline                 func(uint) int16
+	_rb_num2uint                         func(uint) uint
+	_rb_num2ull                          func(uint) uint64
+	_rb_num2ulong                        func(uint) uint
+	_rb_num2ulong_inline                 func(uint) uint
+	_rb_num2ushort                       func(uint) uint16
+	_rb_num_coerce_bin                   func(uint, uint, uint) uint
+	_rb_num_coerce_bit                   func(uint, uint, uint) uint
+	_rb_num_coerce_cmp                   func(uint, uint, uint) uint
+	_rb_num_coerce_relop                 func(uint, uint, uint) uint
+	_rb_num_zerodiv                      func()
+	_rb_obj_alloc                        func(uint) uint
+	_rb_obj_as_string                    func(uint) uint
+	_rb_obj_call_init                    func(uint, int, *uint)
+	_rb_obj_class                        func(uint) uint
+	_rb_obj_classname                    func(uint) string
+	_rb_obj_clone                        func(uint) uint
+	_rb_obj_dup                          func(uint) uint
+	_rb_obj_freeze                       func(uint) uint
+	_rb_obj_freeze_inline                func(uint)
+	_rb_obj_frozen_p                     func(uint) uint
+	_rb_obj_hide                         func(uint) uint
+	_rb_obj_id                           func(uint) uint
+	_rb_obj_infect                       func(uint, uint)
+	_rb_obj_init_copy                    func(uint, uint) uint
+	_rb_obj_instance_eval                func(int, *uint, uint) uint
+	_rb_obj_instance_exec                func(int, *uint, uint) uint
+	_rb_obj_instance_variables           func(uint) uint
+	_rb_obj_is_instance_of               func(uint, uint) uint
+	_rb_obj_is_kind_of                   func(uint, uint) uint
+	_rb_obj_is_method                    func(uint) uint
+	_rb_obj_is_proc                      func(uint) uint
+	_rb_obj_method                       func(uint, uint) uint
+	_rb_obj_method_arity                 func(uint, uint) int
+	_rb_obj_remove_instance_variable     func(uint, uint) uint
+	_rb_obj_respond_to                   func(uint, uint, int) int
+	_rb_obj_reveal                       func(uint, uint) uint
+	_rb_obj_setup                        func(uint, uint, uint) uint
+	_rb_obj_singleton_methods            func(int, *uint, uint) uint
+	_rb_obj_taint                        func(uint) uint
+	_rb_obj_tainted                      func(uint) uint
+	_rb_obj_trust                        func(uint) uint
+	_rb_obj_untaint                      func(uint) uint
+	_rb_obj_untrust                      func(uint) uint
+	_rb_obj_untrusted                    func(uint) uint
+	_rb_obj_wb_unprotect                 func(uint, string, int) uint
+	_rb_obj_write                        func(uint, *uint, uint, string, int) uint
+	_rb_obj_written                      func(uint, uint, uint, string, int) uint
+	_rb_out_of_int                       func(int)
+	_rb_p                                func(uint)
+	_rb_path2class                       func(string) uint
+	_rb_path_check                       func(string) int
+	_rb_path_to_class                    func(uint) uint
+	_rb_pipe                             func(*int32) int
+	_rb_prepend_module                   func(uint, uint)
+	_rb_proc_arity                       func(uint) int
+	_rb_proc_call                        func(uint, uint) uint
+	_rb_proc_call_with_block             func(uint, int, *uint, uint) uint
+	_rb_proc_exec                        func(string) int
+	_rb_proc_lambda_p                    func(uint) uint
+	_rb_proc_new                         func(unsafe.Pointer, uint) uint
+	_rb_proc_times                       func(uint) uint
+	_rb_protect                          func(unsafe.Pointer, uint, *int32) uint
+	_rb_provide                          func(string)
+	_rb_provided                         func(string) int
+	_rb_random_bytes                     func(uint, int) uint
+	_rb_random_int                       func(uint, uint) uint
+	_rb_random_int32                     func(uint) uint
+	_rb_random_real                      func(uint) float64
+	_rb_random_ulong_limited             func(uint, uint) uint
+	_rb_range_beg_len                    func(uint, *int64, *int64, int, int) uint
+	_rb_range_new                        func(uint, uint, int) uint
+	_rb_range_values                     func(uint, *uint, *uint, *int32) int
+	_rb_rational_den                     func(uint) uint
+	_rb_rational_new                     func(uint, uint) uint
+	_rb_rational_num                     func(uint) uint
+	_rb_rational_raw                     func(uint, uint) uint
+	_rb_readwrite_sys_fail               func(Rb_io_wait_readwrite, string)
+	_rb_readwrite_syserr_fail            func(Rb_io_wait_readwrite, int, string)
+	_rb_reg_alloc                        func() uint
+	_rb_reg_backref_number               func(uint, uint) int
+	_rb_reg_init_str                     func(uint, uint, int) uint
+	_rb_reg_last_match                   func(uint) uint
+	_rb_reg_match                        func(uint, uint) uint
+	_rb_reg_match2                       func(uint) uint
+	_rb_reg_match_last                   func(uint) uint
+	_rb_reg_match_post                   func(uint) uint
+	_rb_reg_match_pre                    func(uint) uint
+	_rb_reg_new                          func(string, int, int) uint
+	_rb_reg_new_str                      func(uint, int) uint
+	_rb_reg_nth_defined                  func(int, uint) uint
+	_rb_reg_nth_match                    func(int, uint) uint
+	_rb_reg_options                      func(uint) int
+	_rb_remove_event_hook                func(unsafe.Pointer) int
+	_rb_remove_method                    func(uint, string)
+	_rb_remove_method_id                 func(uint, uint)
+	_rb_require                          func(string) uint
+	_rb_require_safe                     func(uint, int) uint
+	_rb_rescue                           func(unsafe.Pointer, uint, unsafe.Pointer, uint) uint
+	_rb_reserved_fd_p                    func(int) int
+	_rb_reset_random_seed                func()
+	_rb_respond_to                       func(uint, uint) int
+	_rb_ruby_debug_ptr                   func() *uint
+	_rb_ruby_verbose_ptr                 func() *uint
+	_rb_safe_level                       func() int
+	_rb_secure                           func(int)
+	_rb_secure_update                    func(uint)
+	_rb_set_class_path                   func(uint, uint, string)
+	_rb_set_class_path_string            func(uint, uint, uint)
+	_rb_set_end_proc                     func(unsafe.Pointer, uint)
+	_rb_set_errinfo                      func(uint)
+	_rb_set_safe_level                   func(int)
+	_rb_set_safe_level_force             func(int)
+	_rb_singleton_class                  func(uint) uint
+	_rb_singleton_class_attached         func(uint, uint)
+	_rb_singleton_class_clone            func(uint) uint
+	_rb_sourcefile                       func() string
+	_rb_sourceline                       func() int
+	_rb_spawn                            func(int, *uint) int
+	_rb_spawn_err                        func(int, *uint, string, uint) int
+	_rb_sprintf                          func(string) uint
+	_rb_str2inum                         func(uint, int) uint
+	_rb_str_append                       func(uint, uint) uint
+	_rb_str_associate                    func()
+	_rb_str_associated                   func()
+	_rb_str_buf_append                   func(uint, uint) uint
+	_rb_str_buf_cat                      func(uint, string, int) uint
+	_rb_str_buf_cat2                     func(uint, string) uint
+	_rb_str_buf_cat_ascii                func(uint, string) uint
+	_rb_str_buf_new                      func(int) uint
+	_rb_str_buf_new2                     func(string) uint
+	_rb_str_buf_new_cstr                 func(string) uint
+	_rb_str_capacity                     func(uint) uint
+	_rb_str_cat                          func(uint, string, int) uint
+	_rb_str_cat2                         func(uint, string) uint
+	_rb_str_cat_cstr                     func(uint, string) uint
+	_rb_str_cmp                          func(uint, uint) int
+	_rb_str_comparable                   func(uint, uint) int
+	_rb_str_concat                       func(uint, uint) uint
+	_rb_str_drop_bytes                   func(uint, int) uint
+	_rb_str_dump                         func(uint) uint
+	_rb_str_dup                          func(uint) uint
+	_rb_str_dup_frozen                   func(uint) uint
+	_rb_str_ellipsize                    func(uint, int) uint
+	_rb_str_encode_ospath                func(uint) uint
+	_rb_str_equal                        func(uint, uint) uint
+	_rb_str_export                       func(uint) uint
+	_rb_str_export_locale                func(uint) uint
+	_rb_str_format                       func(int, *uint, uint) uint
+	_rb_str_free                         func(uint)
+	_rb_str_freeze                       func(uint) uint
+	_rb_str_hash                         func(uint) uint
+	_rb_str_hash_cmp                     func(uint, uint) int
+	_rb_str_inspect                      func(uint) uint
+	_rb_str_intern                       func(uint) uint
+	_rb_str_length                       func(uint) uint
+	_rb_str_locktmp                      func(uint) uint
+	_rb_str_modify                       func(uint)
+	_rb_str_modify_expand                func(uint, int)
+	_rb_str_new                          func(string, int) uint
+	_rb_str_new_cstr                     func(string) uint
+	_rb_str_new_frozen                   func(uint) uint
+	_rb_str_new_shared                   func(uint) uint
+	_rb_str_new_static                   func(string, int) uint
+	_rb_str_new_with_class               func(uint, string, int) uint
+	_rb_str_offset                       func(uint, int) int
+	_rb_str_plus                         func(uint, uint) uint
+	_rb_str_replace                      func(uint, uint) uint
+	_rb_str_resize                       func(uint, int) uint
+	_rb_str_resurrect                    func(uint) uint
+	_rb_str_scrub                        func(uint, uint) uint
+	_rb_str_set_len                      func(uint, int)
+	_rb_str_setter                       func(uint, uint, *uint)
+	_rb_str_shared_replace               func(uint, uint)
+	_rb_str_split                        func(uint, string) uint
+	_rb_str_strlen                       func(uint) int
+	_rb_str_sublen                       func(uint, int) int
+	_rb_str_subpos                       func(uint, int, *int64) string
+	_rb_str_subseq                       func(uint, int, int) uint
+	_rb_str_substr                       func(uint, int, int) uint
+	_rb_str_succ                         func(uint) uint
+	_rb_str_times                        func(uint, uint) uint
+	_rb_str_tmp_new                      func(int) uint
+	_rb_str_to_dbl                       func(uint, int) float64
+	_rb_str_to_inum                      func(uint, int, int) uint
+	_rb_str_to_str                       func(uint) uint
+	_rb_str_unlocktmp                    func(uint) uint
+	_rb_str_update                       func(uint, int, int, uint)
+	_rb_str_vcatf                        func(uint, string, string) uint
+	_rb_string_value                     func(unsafe.Pointer) uint
+	_rb_string_value_cstr                func(unsafe.Pointer) string
+	_rb_string_value_ptr                 func(unsafe.Pointer) string
+	_rb_struct_alloc                     func(uint, uint) uint
+	_rb_struct_alloc_noinit              func(uint) uint
+	_rb_struct_aref                      func(uint, uint) uint
+	_rb_struct_aset                      func(uint, uint, uint) uint
+	_rb_struct_getmember                 func(uint, uint) uint
+	_rb_struct_initialize                func(uint, uint) uint
+	_rb_struct_members                   func(uint) uint
+	_rb_struct_ptr                       func()
+	_rb_struct_s_members                 func(uint) uint
+	_rb_struct_size                      func(uint) uint
+	_rb_sym2id                           func(uint) uint
+	_rb_sym2str                          func(uint) uint
+	_rb_sym_all_symbols                  func() uint
+	_rb_sym_interned_p                   func(uint) int
+	_rb_sym_to_s                         func(uint) uint
+	_rb_symname_p                        func(string) int
+	_rb_sys_fail                         func(string)
+	_rb_sys_fail_str                     func(uint)
+	_rb_syserr_fail                      func(int, string)
+	_rb_syserr_fail_str                  func(int, uint)
+	_rb_syserr_new                       func(int, string) uint
+	_rb_syserr_new_str                   func(int, uint) uint
+	_rb_syswait                          func(int)
+	_rb_tainted_str_new                  func(string, int) uint
+	_rb_tainted_str_new_cstr             func(string) uint
+	_rb_thread_alone                     func() int
+	_rb_thread_atfork                    func()
+	_rb_thread_atfork_before_exec        func()
+	_rb_thread_check_ints                func()
+	_rb_thread_create                    func(unsafe.Pointer, unsafe.Pointer) uint
+	_rb_thread_current                   func() uint
+	_rb_thread_fd_close                  func(int)
+	_rb_thread_fd_select                 func(int, *RbFdsetT, *RbFdsetT, *RbFdsetT, unsafe.Pointer) int
+	_rb_thread_fd_writable               func(int) int
+	_rb_thread_interrupted               func(uint) int
+	_rb_thread_kill                      func(uint) uint
+	_rb_thread_local_aref                func(uint, uint) uint
+	_rb_thread_local_aset                func(uint, uint, uint) uint
+	_rb_thread_main                      func() uint
+	_rb_thread_run                       func(uint) uint
+	_rb_thread_schedule                  func()
+	_rb_thread_sleep                     func(int)
+	_rb_thread_sleep_deadly              func()
+	_rb_thread_sleep_forever             func()
+	_rb_thread_stop                      func() uint
+	_rb_thread_wait_fd                   func(int)
+	_rb_thread_wait_for                  func(unsafe.Pointer)
+	_rb_thread_wakeup                    func(uint) uint
+	_rb_thread_wakeup_alive              func(uint) uint
+	_rb_throw                            func(string, uint)
+	_rb_throw_obj                        func(uint, uint)
+	_rb_time_interval                    func(uint) unsafe.Pointer
+	_rb_time_nano_new                    func(int, int) uint
+	_rb_time_new                         func(int, int) uint
+	_rb_time_num_new                     func(uint, uint) uint
+	_rb_time_succ                        func(uint) uint
+	_rb_time_timespec                    func(uint) unsafe.Pointer
+	_rb_time_timespec_new                func(unsafe.Pointer, int) uint
+	_rb_time_timeval                     func(uint) unsafe.Pointer
+	_rb_time_utc_offset                  func(uint) uint
+	_rb_timespec_now                     func(unsafe.Pointer)
+	_rb_to_float                         func(uint) uint
+	_rb_to_id                            func(uint) uint
+	_rb_to_int                           func(uint) uint
+	_rb_to_symbol                        func(uint) uint
+	_rb_tolower                          func(int) int
+	_rb_toupper                          func(int) int
+	_rb_trap_exec                        func()
+	_rb_trap_exit                        func()
+	_rb_type                             func(uint) int
+	_rb_typeddata_inherited_p            func(*RbDataTypeStruct, *RbDataTypeStruct) int
+	_rb_typeddata_is_kind_of             func(uint, *RbDataTypeStruct) int
+	_rb_uint2big                         func(uint) uint
+	_rb_uint2inum                        func(uint) uint
+	_rb_ull2inum                         func(uint64) uint
+	_rb_ulong2num_inline                 func(uint) uint
+	_rb_undef                            func(uint, uint)
+	_rb_undef_alloc_func                 func(uint)
+	_rb_undef_method                     func(uint, string)
+	_rb_undefine_finalizer               func(uint) uint
+	_rb_update_max_fd                    func(int)
+	_rb_usascii_str_new                  func(string, int) uint
+	_rb_usascii_str_new_cstr             func(string) uint
+	_rb_usascii_str_new_static           func(string, int) uint
+	_rb_utf8_str_new                     func(string, int) uint
+	_rb_utf8_str_new_cstr                func(string) uint
+	_rb_utf8_str_new_static              func(string, int) uint
+	_rb_uv_to_utf8                       func(string, uint) int
+	_rb_varargs_bad_length               func(int, int) int
+	_rb_vsprintf                         func(string, string) uint
+	_rb_waitpid                          func(int, *int32, int) int
+	_rb_write_error                      func(string)
+	_rb_write_error2                     func(string, int)
+	_rb_yield                            func(uint) uint
+	_rb_yield_block                      func(uint, uint, int, *uint, uint) uint
+	_rb_yield_splat                      func(uint) uint
+	_rb_yield_values2                    func(int, *uint) uint
+	_ruby_brace_glob                     func(string, int, unsafe.Pointer, uint) int
+	_ruby_cleanup                        func(unsafe.Pointer) int
+	_ruby_default_signal                 func(int)
+	_ruby_exec_node                      func(unsafe.Pointer) int
+	_ruby_executable_node                func(unsafe.Pointer, *int32) int
+	_ruby_finalize                       func()
+	_ruby_glob                           func(string, int, unsafe.Pointer, uint) int
+	_ruby_incpush                        func(string)
+	_ruby_init                           func()
+	_ruby_init_loadpath                  func()
+	_ruby_init_stack                     func(unsafe.Pointer)
+	_ruby_malloc_size_overflow           func(uint, uint)
+	_ruby_native_thread_p                func() int
+	_ruby_options                        func(int, string) unsafe.Pointer
+	_ruby_posix_signal                   func(int, unsafe.Pointer)
+	_ruby_process_options                func(int, string) unsafe.Pointer
+	_ruby_prog_init                      func()
+	_ruby_run_node                       func(unsafe.Pointer) int
+	_ruby_script                         func(string)
+	_ruby_set_argv                       func(int, string)
+	_ruby_set_script_name                func(uint)
+	_ruby_set_stack_size                 func(uint)
+	_ruby_setup                          func() int
+	_ruby_show_copyright                 func()
+	_ruby_show_copyright_to_die          func(int) int
+	_ruby_show_version                   func()
+	_ruby_sig_finalize                   func()
+	_ruby_signal_name                    func(int) string
+	_ruby_snprintf                       func(string, uint, string) int
+	_ruby_stack_check                    func() int
+	_ruby_stack_length                   func(*uint) uint
+	_ruby_stop                           func(int)
+	_ruby_strtoul                        func(string, string, int) uint
+	_ruby_sysinit                        func(*int32, string)
+	_ruby_vsnprintf                      func(string, uint, string, string) int
+	_ruby_xcalloc                        func(uint, uint) unsafe.Pointer
+	_ruby_xfree                          func(unsafe.Pointer)
+	_ruby_xmalloc                        func(uint) unsafe.Pointer
+	_ruby_xmalloc2                       func(uint, uint) unsafe.Pointer
+	_ruby_xrealloc                       func(unsafe.Pointer, uint) unsafe.Pointer
+	_ruby_xrealloc2                      func(unsafe.Pointer, uint, uint) unsafe.Pointer
+	_st_add_direct                       func(*StTable, uint, uint)
+	_st_cleanup_safe                     func(*StTable, uint)
+	_st_clear                            func(*StTable)
+	_st_copy                             func(*StTable) *StTable
+	_st_delete                           func(*StTable, *uint, *uint) int
+	_st_delete_safe                      func(*StTable, *uint, *uint, uint) int
+	_st_foreach                          func(*StTable, unsafe.Pointer, uint) int
+	_st_foreach_check                    func(*StTable, unsafe.Pointer, uint, uint) int
+	_st_foreach_safe                     func(*StTable, unsafe.Pointer, uint)
+	_st_free_table                       func(*StTable)
+	_st_get_key                          func(*StTable, uint, *uint) int
+	_st_hash                             func(unsafe.Pointer, uint, uint) uint
+	_st_hash_end                         func(uint) uint
+	_st_hash_start                       func(uint) uint
+	_st_hash_uint                        func(uint, uint) uint
+	_st_hash_uint32                      func(uint, uint32) uint
+	_st_init_numtable                    func() *StTable
+	_st_init_numtable_with_size          func(uint) *StTable
+	_st_init_strcasetable                func() *StTable
+	_st_init_strcasetable_with_size      func(uint) *StTable
+	_st_init_strtable                    func() *StTable
+	_st_init_strtable_with_size          func(uint) *StTable
+	_st_init_table                       func(*StHashType) *StTable
+	_st_init_table_with_size             func(*StHashType, uint) *StTable
+	_st_insert                           func(*StTable, uint, uint) int
+	_st_insert2                          func(*StTable, uint, uint, unsafe.Pointer) int
+	_st_keys                             func(*StTable, *uint, uint) uint
+	_st_keys_check                       func(*StTable, *uint, uint, uint) uint
+	_st_locale_insensitive_strcasecmp    func(string, string) int
+	_st_locale_insensitive_strncasecmp   func(string, string, uint) int
+	_st_lookup                           func(*StTable, uint, *uint) int
+	_st_memsize                          func(*StTable) uint
+	_st_numcmp                           func(uint, uint) int
+	_st_numhash                          func(uint) uint
+	_st_shift                            func(*StTable, *uint, *uint) int
+	_st_update                           func(*StTable, uint, unsafe.Pointer, uint) int
+	_st_values                           func(*StTable, *uint, uint) uint
+	_st_values_check                     func(*StTable, *uint, uint, uint) uint
 )
 
 // C function: __builtin_expect
@@ -5493,4 +5493,3 @@ func StValues(table *StTable, values *uint, size uint) uint {
 func StValuesCheck(table *StTable, values *uint, size uint, never uint) uint {
 	return _st_values_check(table, values, size, never)
 }
-

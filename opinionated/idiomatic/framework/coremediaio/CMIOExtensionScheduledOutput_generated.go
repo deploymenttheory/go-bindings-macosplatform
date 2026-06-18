@@ -54,4 +54,3 @@ type ExtensionScheduledOutputable interface {
 }
 
 var _ ExtensionScheduledOutputable = (*ExtensionScheduledOutput)(nil)
-

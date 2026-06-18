@@ -25,4 +25,3 @@ func HKElectrocardiogramTypeFromID(id objc.ID) *HKElectrocardiogramType {
 	purego.Track(o)
 	return o
 }
-

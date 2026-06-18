@@ -212,4 +212,3 @@ type ImageDescriptorable interface {
 }
 
 var _ ImageDescriptorable = (*ImageDescriptor)(nil)
-

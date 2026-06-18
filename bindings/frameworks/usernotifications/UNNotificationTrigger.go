@@ -16,7 +16,7 @@ type UNNotificationTrigger struct {
 }
 
 var (
-	_clsUNNotificationTrigger = _objcClass("UNNotificationTrigger")
+	_clsUNNotificationTrigger        = _objcClass("UNNotificationTrigger")
 	_uNNotificationTriggerSelRepeats = objc.RegisterName("repeats")
 )
 
@@ -34,4 +34,3 @@ func (o *UNNotificationTrigger) Repeats() bool {
 	_ret := objc.Send[bool](o.Ptr(), _uNNotificationTriggerSelRepeats)
 	return _ret
 }
-

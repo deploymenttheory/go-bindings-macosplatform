@@ -44,9 +44,13 @@ func (x *ArrayAffineInt4Dequantize) WithDestinationArrayAllocator(destinationArr
 	return x
 }
 
-func (x *ArrayAffineInt4Dequantize) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel { return &x.inner.MPSNDArrayMultiaryKernel }
+func (x *ArrayAffineInt4Dequantize) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel {
+	return &x.inner.MPSNDArrayMultiaryKernel
+}
 
-func (x *ArrayAffineInt4Dequantize) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
+func (x *ArrayAffineInt4Dequantize) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase {
+	return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase
+}
 
 // ArrayAffineInt4Dequantizeable is the interface implemented by [ArrayAffineInt4Dequantize], for mocking and DI.
 type ArrayAffineInt4Dequantizeable interface {
@@ -55,4 +59,3 @@ type ArrayAffineInt4Dequantizeable interface {
 }
 
 var _ ArrayAffineInt4Dequantizeable = (*ArrayAffineInt4Dequantize)(nil)
-

@@ -17,7 +17,7 @@ type MPSImageReduceRowMin struct {
 }
 
 var (
-	_clsMPSImageReduceRowMin = _objcClass("MPSImageReduceRowMin")
+	_clsMPSImageReduceRowMin               = _objcClass("MPSImageReduceRowMin")
 	_mPSImageReduceRowMinSelInitWithDevice = objc.RegisterName("initWithDevice:")
 )
 
@@ -33,7 +33,8 @@ func MPSImageReduceRowMinFromID(id objc.ID) *MPSImageReduceRowMin {
 
 func (o *MPSImageReduceRowMin) InitWithDevice(device metal.MTLDevice) *MPSImageReduceRowMin {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageReduceRowMinSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageReduceRowMinFromID(_ret)
 }
-

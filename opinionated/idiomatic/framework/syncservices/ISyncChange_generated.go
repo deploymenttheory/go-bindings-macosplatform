@@ -72,4 +72,3 @@ type ISyncChangeable interface {
 }
 
 var _ ISyncChangeable = (*ISyncChange)(nil)
-

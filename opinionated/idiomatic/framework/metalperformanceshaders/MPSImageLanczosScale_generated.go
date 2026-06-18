@@ -85,9 +85,13 @@ func (x *ImageLanczosScale) WithLabel(label string) *ImageLanczosScale {
 
 func (x *ImageLanczosScale) asImageScale() *mpsimage.MPSImageScale { return &x.inner.MPSImageScale }
 
-func (x *ImageLanczosScale) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSImageScale.MPSUnaryImageKernel }
+func (x *ImageLanczosScale) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
+	return &x.inner.MPSImageScale.MPSUnaryImageKernel
+}
 
-func (x *ImageLanczosScale) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImageScale.MPSUnaryImageKernel.MPSKernel }
+func (x *ImageLanczosScale) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSImageScale.MPSUnaryImageKernel.MPSKernel
+}
 
 // ImageLanczosScaleable is the interface implemented by [ImageLanczosScale], for mocking and DI.
 type ImageLanczosScaleable interface {
@@ -101,4 +105,3 @@ type ImageLanczosScaleable interface {
 }
 
 var _ ImageLanczosScaleable = (*ImageLanczosScale)(nil)
-

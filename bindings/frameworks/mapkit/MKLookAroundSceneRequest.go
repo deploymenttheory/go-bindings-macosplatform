@@ -18,15 +18,15 @@ type MKLookAroundSceneRequest struct {
 }
 
 var (
-	_clsMKLookAroundSceneRequest = _objcClass("MKLookAroundSceneRequest")
-	_mKLookAroundSceneRequestSelInitWithCoordinate = objc.RegisterName("initWithCoordinate:")
-	_mKLookAroundSceneRequestSelInitWithMapItem = objc.RegisterName("initWithMapItem:")
+	_clsMKLookAroundSceneRequest                              = _objcClass("MKLookAroundSceneRequest")
+	_mKLookAroundSceneRequestSelInitWithCoordinate            = objc.RegisterName("initWithCoordinate:")
+	_mKLookAroundSceneRequestSelInitWithMapItem               = objc.RegisterName("initWithMapItem:")
 	_mKLookAroundSceneRequestSelGetSceneWithCompletionHandler = objc.RegisterName("getSceneWithCompletionHandler:")
-	_mKLookAroundSceneRequestSelCancel = objc.RegisterName("cancel")
-	_mKLookAroundSceneRequestSelCoordinate = objc.RegisterName("coordinate")
-	_mKLookAroundSceneRequestSelMapItem = objc.RegisterName("mapItem")
-	_mKLookAroundSceneRequestSelIsCancelled = objc.RegisterName("isCancelled")
-	_mKLookAroundSceneRequestSelIsLoading = objc.RegisterName("isLoading")
+	_mKLookAroundSceneRequestSelCancel                        = objc.RegisterName("cancel")
+	_mKLookAroundSceneRequestSelCoordinate                    = objc.RegisterName("coordinate")
+	_mKLookAroundSceneRequestSelMapItem                       = objc.RegisterName("mapItem")
+	_mKLookAroundSceneRequestSelIsCancelled                   = objc.RegisterName("isCancelled")
+	_mKLookAroundSceneRequestSelIsLoading                     = objc.RegisterName("isLoading")
 )
 
 func MKLookAroundSceneRequestFromID(id objc.ID) *MKLookAroundSceneRequest {
@@ -41,13 +41,17 @@ func MKLookAroundSceneRequestFromID(id objc.ID) *MKLookAroundSceneRequest {
 
 func (o *MKLookAroundSceneRequest) InitWithCoordinate(coordinate unsafe.Pointer) *MKLookAroundSceneRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLookAroundSceneRequestSelInitWithCoordinate, coordinate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKLookAroundSceneRequestFromID(_ret)
 }
 
 func (o *MKLookAroundSceneRequest) InitWithMapItem(mapItem *MKMapItem) *MKLookAroundSceneRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLookAroundSceneRequestSelInitWithMapItem, mapItem.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKLookAroundSceneRequestFromID(_ret)
 }
 
@@ -73,7 +77,9 @@ func (o *MKLookAroundSceneRequest) Coordinate() unsafe.Pointer {
 
 func (o *MKLookAroundSceneRequest) MapItem() *MKMapItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLookAroundSceneRequestSelMapItem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapItemFromID(_ret)
 }
 
@@ -86,4 +92,3 @@ func (o *MKLookAroundSceneRequest) IsLoading() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mKLookAroundSceneRequestSelIsLoading)
 	return _ret
 }
-

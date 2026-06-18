@@ -15,38 +15,38 @@ type MTLIndirectInstanceAccelerationStructureDescriptor struct {
 }
 
 var (
-	_clsMTLIndirectInstanceAccelerationStructureDescriptor = _objcClass("MTLIndirectInstanceAccelerationStructureDescriptor")
-	_mTLIndirectInstanceAccelerationStructureDescriptorSelDescriptor = objc.RegisterName("descriptor")
-	_mTLIndirectInstanceAccelerationStructureDescriptorSelInstanceDescriptorBuffer = objc.RegisterName("instanceDescriptorBuffer")
-	_mTLIndirectInstanceAccelerationStructureDescriptorSelSetInstanceDescriptorBuffer = objc.RegisterName("setInstanceDescriptorBuffer:")
-	_mTLIndirectInstanceAccelerationStructureDescriptorSelInstanceDescriptorBufferOffset = objc.RegisterName("instanceDescriptorBufferOffset")
-	_mTLIndirectInstanceAccelerationStructureDescriptorSelSetInstanceDescriptorBufferOffset = objc.RegisterName("setInstanceDescriptorBufferOffset:")
-	_mTLIndirectInstanceAccelerationStructureDescriptorSelInstanceDescriptorStride = objc.RegisterName("instanceDescriptorStride")
-	_mTLIndirectInstanceAccelerationStructureDescriptorSelSetInstanceDescriptorStride = objc.RegisterName("setInstanceDescriptorStride:")
-	_mTLIndirectInstanceAccelerationStructureDescriptorSelMaxInstanceCount = objc.RegisterName("maxInstanceCount")
-	_mTLIndirectInstanceAccelerationStructureDescriptorSelSetMaxInstanceCount = objc.RegisterName("setMaxInstanceCount:")
-	_mTLIndirectInstanceAccelerationStructureDescriptorSelInstanceCountBuffer = objc.RegisterName("instanceCountBuffer")
-	_mTLIndirectInstanceAccelerationStructureDescriptorSelSetInstanceCountBuffer = objc.RegisterName("setInstanceCountBuffer:")
-	_mTLIndirectInstanceAccelerationStructureDescriptorSelInstanceCountBufferOffset = objc.RegisterName("instanceCountBufferOffset")
-	_mTLIndirectInstanceAccelerationStructureDescriptorSelSetInstanceCountBufferOffset = objc.RegisterName("setInstanceCountBufferOffset:")
-	_mTLIndirectInstanceAccelerationStructureDescriptorSelInstanceDescriptorType = objc.RegisterName("instanceDescriptorType")
-	_mTLIndirectInstanceAccelerationStructureDescriptorSelSetInstanceDescriptorType = objc.RegisterName("setInstanceDescriptorType:")
-	_mTLIndirectInstanceAccelerationStructureDescriptorSelMotionTransformBuffer = objc.RegisterName("motionTransformBuffer")
-	_mTLIndirectInstanceAccelerationStructureDescriptorSelSetMotionTransformBuffer = objc.RegisterName("setMotionTransformBuffer:")
-	_mTLIndirectInstanceAccelerationStructureDescriptorSelMotionTransformBufferOffset = objc.RegisterName("motionTransformBufferOffset")
-	_mTLIndirectInstanceAccelerationStructureDescriptorSelSetMotionTransformBufferOffset = objc.RegisterName("setMotionTransformBufferOffset:")
-	_mTLIndirectInstanceAccelerationStructureDescriptorSelMaxMotionTransformCount = objc.RegisterName("maxMotionTransformCount")
-	_mTLIndirectInstanceAccelerationStructureDescriptorSelSetMaxMotionTransformCount = objc.RegisterName("setMaxMotionTransformCount:")
-	_mTLIndirectInstanceAccelerationStructureDescriptorSelMotionTransformCountBuffer = objc.RegisterName("motionTransformCountBuffer")
-	_mTLIndirectInstanceAccelerationStructureDescriptorSelSetMotionTransformCountBuffer = objc.RegisterName("setMotionTransformCountBuffer:")
-	_mTLIndirectInstanceAccelerationStructureDescriptorSelMotionTransformCountBufferOffset = objc.RegisterName("motionTransformCountBufferOffset")
-	_mTLIndirectInstanceAccelerationStructureDescriptorSelSetMotionTransformCountBufferOffset = objc.RegisterName("setMotionTransformCountBufferOffset:")
-	_mTLIndirectInstanceAccelerationStructureDescriptorSelInstanceTransformationMatrixLayout = objc.RegisterName("instanceTransformationMatrixLayout")
+	_clsMTLIndirectInstanceAccelerationStructureDescriptor                                      = _objcClass("MTLIndirectInstanceAccelerationStructureDescriptor")
+	_mTLIndirectInstanceAccelerationStructureDescriptorSelDescriptor                            = objc.RegisterName("descriptor")
+	_mTLIndirectInstanceAccelerationStructureDescriptorSelInstanceDescriptorBuffer              = objc.RegisterName("instanceDescriptorBuffer")
+	_mTLIndirectInstanceAccelerationStructureDescriptorSelSetInstanceDescriptorBuffer           = objc.RegisterName("setInstanceDescriptorBuffer:")
+	_mTLIndirectInstanceAccelerationStructureDescriptorSelInstanceDescriptorBufferOffset        = objc.RegisterName("instanceDescriptorBufferOffset")
+	_mTLIndirectInstanceAccelerationStructureDescriptorSelSetInstanceDescriptorBufferOffset     = objc.RegisterName("setInstanceDescriptorBufferOffset:")
+	_mTLIndirectInstanceAccelerationStructureDescriptorSelInstanceDescriptorStride              = objc.RegisterName("instanceDescriptorStride")
+	_mTLIndirectInstanceAccelerationStructureDescriptorSelSetInstanceDescriptorStride           = objc.RegisterName("setInstanceDescriptorStride:")
+	_mTLIndirectInstanceAccelerationStructureDescriptorSelMaxInstanceCount                      = objc.RegisterName("maxInstanceCount")
+	_mTLIndirectInstanceAccelerationStructureDescriptorSelSetMaxInstanceCount                   = objc.RegisterName("setMaxInstanceCount:")
+	_mTLIndirectInstanceAccelerationStructureDescriptorSelInstanceCountBuffer                   = objc.RegisterName("instanceCountBuffer")
+	_mTLIndirectInstanceAccelerationStructureDescriptorSelSetInstanceCountBuffer                = objc.RegisterName("setInstanceCountBuffer:")
+	_mTLIndirectInstanceAccelerationStructureDescriptorSelInstanceCountBufferOffset             = objc.RegisterName("instanceCountBufferOffset")
+	_mTLIndirectInstanceAccelerationStructureDescriptorSelSetInstanceCountBufferOffset          = objc.RegisterName("setInstanceCountBufferOffset:")
+	_mTLIndirectInstanceAccelerationStructureDescriptorSelInstanceDescriptorType                = objc.RegisterName("instanceDescriptorType")
+	_mTLIndirectInstanceAccelerationStructureDescriptorSelSetInstanceDescriptorType             = objc.RegisterName("setInstanceDescriptorType:")
+	_mTLIndirectInstanceAccelerationStructureDescriptorSelMotionTransformBuffer                 = objc.RegisterName("motionTransformBuffer")
+	_mTLIndirectInstanceAccelerationStructureDescriptorSelSetMotionTransformBuffer              = objc.RegisterName("setMotionTransformBuffer:")
+	_mTLIndirectInstanceAccelerationStructureDescriptorSelMotionTransformBufferOffset           = objc.RegisterName("motionTransformBufferOffset")
+	_mTLIndirectInstanceAccelerationStructureDescriptorSelSetMotionTransformBufferOffset        = objc.RegisterName("setMotionTransformBufferOffset:")
+	_mTLIndirectInstanceAccelerationStructureDescriptorSelMaxMotionTransformCount               = objc.RegisterName("maxMotionTransformCount")
+	_mTLIndirectInstanceAccelerationStructureDescriptorSelSetMaxMotionTransformCount            = objc.RegisterName("setMaxMotionTransformCount:")
+	_mTLIndirectInstanceAccelerationStructureDescriptorSelMotionTransformCountBuffer            = objc.RegisterName("motionTransformCountBuffer")
+	_mTLIndirectInstanceAccelerationStructureDescriptorSelSetMotionTransformCountBuffer         = objc.RegisterName("setMotionTransformCountBuffer:")
+	_mTLIndirectInstanceAccelerationStructureDescriptorSelMotionTransformCountBufferOffset      = objc.RegisterName("motionTransformCountBufferOffset")
+	_mTLIndirectInstanceAccelerationStructureDescriptorSelSetMotionTransformCountBufferOffset   = objc.RegisterName("setMotionTransformCountBufferOffset:")
+	_mTLIndirectInstanceAccelerationStructureDescriptorSelInstanceTransformationMatrixLayout    = objc.RegisterName("instanceTransformationMatrixLayout")
 	_mTLIndirectInstanceAccelerationStructureDescriptorSelSetInstanceTransformationMatrixLayout = objc.RegisterName("setInstanceTransformationMatrixLayout:")
-	_mTLIndirectInstanceAccelerationStructureDescriptorSelMotionTransformType = objc.RegisterName("motionTransformType")
-	_mTLIndirectInstanceAccelerationStructureDescriptorSelSetMotionTransformType = objc.RegisterName("setMotionTransformType:")
-	_mTLIndirectInstanceAccelerationStructureDescriptorSelMotionTransformStride = objc.RegisterName("motionTransformStride")
-	_mTLIndirectInstanceAccelerationStructureDescriptorSelSetMotionTransformStride = objc.RegisterName("setMotionTransformStride:")
+	_mTLIndirectInstanceAccelerationStructureDescriptorSelMotionTransformType                   = objc.RegisterName("motionTransformType")
+	_mTLIndirectInstanceAccelerationStructureDescriptorSelSetMotionTransformType                = objc.RegisterName("setMotionTransformType:")
+	_mTLIndirectInstanceAccelerationStructureDescriptorSelMotionTransformStride                 = objc.RegisterName("motionTransformStride")
+	_mTLIndirectInstanceAccelerationStructureDescriptorSelSetMotionTransformStride              = objc.RegisterName("setMotionTransformStride:")
 )
 
 func MTLIndirectInstanceAccelerationStructureDescriptorFromID(id objc.ID) *MTLIndirectInstanceAccelerationStructureDescriptor {
@@ -61,7 +61,9 @@ func MTLIndirectInstanceAccelerationStructureDescriptorFromID(id objc.ID) *MTLIn
 
 func MTLIndirectInstanceAccelerationStructureDescriptorDescriptor() *MTLIndirectInstanceAccelerationStructureDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLIndirectInstanceAccelerationStructureDescriptor), _mTLIndirectInstanceAccelerationStructureDescriptorSelDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLIndirectInstanceAccelerationStructureDescriptorFromID(_ret)
 }
 
@@ -214,4 +216,3 @@ func (o *MTLIndirectInstanceAccelerationStructureDescriptor) MotionTransformStri
 func (o *MTLIndirectInstanceAccelerationStructureDescriptor) SetMotionTransformStride(motionTransformStride uint) {
 	o.Ptr().Send(_mTLIndirectInstanceAccelerationStructureDescriptorSelSetMotionTransformStride, motionTransformStride)
 }
-

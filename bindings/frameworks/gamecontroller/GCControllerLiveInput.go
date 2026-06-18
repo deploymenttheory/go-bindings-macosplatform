@@ -15,10 +15,10 @@ type GCControllerLiveInput struct {
 }
 
 var (
-	_clsGCControllerLiveInput = _objcClass("GCControllerLiveInput")
-	_gCControllerLiveInputSelCapture = objc.RegisterName("capture")
+	_clsGCControllerLiveInput               = _objcClass("GCControllerLiveInput")
+	_gCControllerLiveInputSelCapture        = objc.RegisterName("capture")
 	_gCControllerLiveInputSelNextInputState = objc.RegisterName("nextInputState")
-	_gCControllerLiveInputSelUnmappedInput = objc.RegisterName("unmappedInput")
+	_gCControllerLiveInputSelUnmappedInput  = objc.RegisterName("unmappedInput")
 )
 
 func GCControllerLiveInputFromID(id objc.ID) *GCControllerLiveInput {
@@ -33,20 +33,25 @@ func GCControllerLiveInputFromID(id objc.ID) *GCControllerLiveInput {
 
 func (o *GCControllerLiveInput) Capture() *GCControllerInputState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCControllerLiveInputSelCapture)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerInputStateFromID(_ret)
 }
 
 func (o *GCControllerLiveInput) NextInputState() *GCControllerInputState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCControllerLiveInputSelNextInputState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerInputStateFromID(_ret)
 }
 
 // Get a view of the controller's input without any system-level control remapping applied. Developers should avoid implementing their own control remapping functionality and to instead direct users to the system game controller settings to remap controls.  If you choose to implement your own control remapping functionality, or if your app streams controller input to a remote device that implements control remapping functionality, you should access controller physical input through this interface.
 func (o *GCControllerLiveInput) UnmappedInput() *GCControllerLiveInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCControllerLiveInputSelUnmappedInput)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerLiveInputFromID(_ret)
 }
-

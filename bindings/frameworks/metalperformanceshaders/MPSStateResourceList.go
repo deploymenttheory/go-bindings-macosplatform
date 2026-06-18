@@ -17,11 +17,11 @@ type MPSStateResourceList struct {
 }
 
 var (
-	_clsMPSStateResourceList = _objcClass("MPSStateResourceList")
-	_mPSStateResourceListSelResourceList = objc.RegisterName("resourceList")
-	_mPSStateResourceListSelInit = objc.RegisterName("init")
+	_clsMPSStateResourceList              = _objcClass("MPSStateResourceList")
+	_mPSStateResourceListSelResourceList  = objc.RegisterName("resourceList")
+	_mPSStateResourceListSelInit          = objc.RegisterName("init")
 	_mPSStateResourceListSelAppendTexture = objc.RegisterName("appendTexture:")
-	_mPSStateResourceListSelAppendBuffer = objc.RegisterName("appendBuffer:")
+	_mPSStateResourceListSelAppendBuffer  = objc.RegisterName("appendBuffer:")
 )
 
 func MPSStateResourceListFromID(id objc.ID) *MPSStateResourceList {
@@ -37,14 +37,18 @@ func MPSStateResourceListFromID(id objc.ID) *MPSStateResourceList {
 // @abstract Init an empty autoreleased resource list
 func MPSStateResourceListResourceList() *MPSStateResourceList {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSStateResourceList), _mPSStateResourceListSelResourceList)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSStateResourceListFromID(_ret)
 }
 
 // @abstract Init an empty list
 func (o *MPSStateResourceList) Init() *MPSStateResourceList {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSStateResourceListSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSStateResourceListFromID(_ret)
 }
 
@@ -57,4 +61,3 @@ func (o *MPSStateResourceList) AppendTexture(descriptor *metal.MTLTextureDescrip
 func (o *MPSStateResourceList) AppendBuffer(size uint) {
 	o.Ptr().Send(_mPSStateResourceListSelAppendBuffer, size)
 }
-

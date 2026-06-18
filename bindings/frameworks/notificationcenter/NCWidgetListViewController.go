@@ -18,21 +18,21 @@ type NCWidgetListViewController struct {
 }
 
 var (
-	_clsNCWidgetListViewController = _objcClass("NCWidgetListViewController")
+	_clsNCWidgetListViewController                                   = _objcClass("NCWidgetListViewController")
 	_nCWidgetListViewControllerSelViewControllerAtRowMakeIfNecessary = objc.RegisterName("viewControllerAtRow:makeIfNecessary:")
-	_nCWidgetListViewControllerSelRowForViewController = objc.RegisterName("rowForViewController:")
-	_nCWidgetListViewControllerSelDelegate = objc.RegisterName("delegate")
-	_nCWidgetListViewControllerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nCWidgetListViewControllerSelContents = objc.RegisterName("contents")
-	_nCWidgetListViewControllerSelSetContents = objc.RegisterName("setContents:")
-	_nCWidgetListViewControllerSelMinimumVisibleRowCount = objc.RegisterName("minimumVisibleRowCount")
-	_nCWidgetListViewControllerSelSetMinimumVisibleRowCount = objc.RegisterName("setMinimumVisibleRowCount:")
-	_nCWidgetListViewControllerSelHasDividerLines = objc.RegisterName("hasDividerLines")
-	_nCWidgetListViewControllerSelSetHasDividerLines = objc.RegisterName("setHasDividerLines:")
-	_nCWidgetListViewControllerSelEditing = objc.RegisterName("editing")
-	_nCWidgetListViewControllerSelSetEditing = objc.RegisterName("setEditing:")
-	_nCWidgetListViewControllerSelShowsAddButtonWhenEditing = objc.RegisterName("showsAddButtonWhenEditing")
-	_nCWidgetListViewControllerSelSetShowsAddButtonWhenEditing = objc.RegisterName("setShowsAddButtonWhenEditing:")
+	_nCWidgetListViewControllerSelRowForViewController               = objc.RegisterName("rowForViewController:")
+	_nCWidgetListViewControllerSelDelegate                           = objc.RegisterName("delegate")
+	_nCWidgetListViewControllerSelSetDelegate                        = objc.RegisterName("setDelegate:")
+	_nCWidgetListViewControllerSelContents                           = objc.RegisterName("contents")
+	_nCWidgetListViewControllerSelSetContents                        = objc.RegisterName("setContents:")
+	_nCWidgetListViewControllerSelMinimumVisibleRowCount             = objc.RegisterName("minimumVisibleRowCount")
+	_nCWidgetListViewControllerSelSetMinimumVisibleRowCount          = objc.RegisterName("setMinimumVisibleRowCount:")
+	_nCWidgetListViewControllerSelHasDividerLines                    = objc.RegisterName("hasDividerLines")
+	_nCWidgetListViewControllerSelSetHasDividerLines                 = objc.RegisterName("setHasDividerLines:")
+	_nCWidgetListViewControllerSelEditing                            = objc.RegisterName("editing")
+	_nCWidgetListViewControllerSelSetEditing                         = objc.RegisterName("setEditing:")
+	_nCWidgetListViewControllerSelShowsAddButtonWhenEditing          = objc.RegisterName("showsAddButtonWhenEditing")
+	_nCWidgetListViewControllerSelSetShowsAddButtonWhenEditing       = objc.RegisterName("setShowsAddButtonWhenEditing:")
 )
 
 func NCWidgetListViewControllerFromID(id objc.ID) *NCWidgetListViewController {
@@ -47,7 +47,9 @@ func NCWidgetListViewControllerFromID(id objc.ID) *NCWidgetListViewController {
 
 func (o *NCWidgetListViewController) ViewControllerAtRowMakeIfNecessary(row uint, makeIfNecesary bool) *appkit.NSViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nCWidgetListViewControllerSelViewControllerAtRowMakeIfNecessary, row, makeIfNecesary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSViewControllerFromID(_ret)
 }
 
@@ -111,4 +113,3 @@ func (o *NCWidgetListViewController) ShowsAddButtonWhenEditing() bool {
 func (o *NCWidgetListViewController) SetShowsAddButtonWhenEditing(showsAddButtonWhenEditing bool) {
 	o.Ptr().Send(_nCWidgetListViewControllerSelSetShowsAddButtonWhenEditing, showsAddButtonWhenEditing)
 }
-

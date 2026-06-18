@@ -20,15 +20,15 @@ type GKOctree[ElementType purego.AnyObject] struct {
 }
 
 var (
-	_clsGKOctree = _objcClass("GKOctree")
+	_clsGKOctree                                     = _objcClass("GKOctree")
 	_gKOctreeSelOctreeWithBoundingBoxMinimumCellSize = objc.RegisterName("octreeWithBoundingBox:minimumCellSize:")
-	_gKOctreeSelInitWithBoundingBoxMinimumCellSize = objc.RegisterName("initWithBoundingBox:minimumCellSize:")
-	_gKOctreeSelAddElementWithPoint = objc.RegisterName("addElement:withPoint:")
-	_gKOctreeSelAddElementWithBox = objc.RegisterName("addElement:withBox:")
-	_gKOctreeSelElementsAtPoint = objc.RegisterName("elementsAtPoint:")
-	_gKOctreeSelElementsInBox = objc.RegisterName("elementsInBox:")
-	_gKOctreeSelRemoveElement = objc.RegisterName("removeElement:")
-	_gKOctreeSelRemoveElementWithNode = objc.RegisterName("removeElement:withNode:")
+	_gKOctreeSelInitWithBoundingBoxMinimumCellSize   = objc.RegisterName("initWithBoundingBox:minimumCellSize:")
+	_gKOctreeSelAddElementWithPoint                  = objc.RegisterName("addElement:withPoint:")
+	_gKOctreeSelAddElementWithBox                    = objc.RegisterName("addElement:withBox:")
+	_gKOctreeSelElementsAtPoint                      = objc.RegisterName("elementsAtPoint:")
+	_gKOctreeSelElementsInBox                        = objc.RegisterName("elementsInBox:")
+	_gKOctreeSelRemoveElement                        = objc.RegisterName("removeElement:")
+	_gKOctreeSelRemoveElementWithNode                = objc.RegisterName("removeElement:withNode:")
 )
 
 func GKOctreeFromID[ElementType purego.AnyObject](id objc.ID) *GKOctree[ElementType] {
@@ -44,41 +44,53 @@ func GKOctreeFromID[ElementType purego.AnyObject](id objc.ID) *GKOctree[ElementT
 // Creates a octree with a given bounding box and minimum allowed cell size @param box the bounding box of this octree.  all elements bounding boxes must be within this space. @param minCellSize the minimum allowed cell size.  The octree will not create octants that have a width,height or depth smaller than this size.
 func GKOctreeOctreeWithBoundingBoxMinimumCellSize(box GKBox, minCellSize float32) *GKOctree[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKOctree), _gKOctreeSelOctreeWithBoundingBoxMinimumCellSize, box, minCellSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKOctreeFromID[objc.ID](_ret)
 }
 
 func (o *GKOctree[ElementType]) InitWithBoundingBoxMinimumCellSize(box GKBox, minCellSize float32) *GKOctree[ElementType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKOctreeSelInitWithBoundingBoxMinimumCellSize, box, minCellSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKOctreeFromID[ElementType](_ret)
 }
 
 // Adds an NSObject to this octree with a given point. This element will always reside in the leaf node its point is in. @param element the element to be stored @param point the point associated with the element you want to store @return the node the element was added to
 func (o *GKOctree[ElementType]) AddElementWithPoint(element ElementType, point unsafe.Pointer) *GKOctreeNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKOctreeSelAddElementWithPoint, element, point)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKOctreeNodeFromID(_ret)
 }
 
 // Adds an NSObject to this octtree with a given axis-aligned box This element will reside in the lowest node that it's box fits in completely. @param element the element to be stored @param box the box associated with the element to be stored @return the node that the element was added to
 func (o *GKOctree[ElementType]) AddElementWithBox(element ElementType, box GKBox) *GKOctreeNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKOctreeSelAddElementWithBox, element, box)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKOctreeNodeFromID(_ret)
 }
 
 // Returns all of the elements in the node this point would be placed in @param point the point to query @return an NSArray of all the element found at the node this point would be placed in
 func (o *GKOctree[ElementType]) ElementsAtPoint(point unsafe.Pointer) *foundation.NSArray[ElementType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKOctreeSelElementsAtPoint, point)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[ElementType](_ret)
 }
 
 // Returns all of the elements that resides in nodes which intersect the given box @param box the box tha specifies which elements you would like to retrieve @return an NSArray of all the elements in all of the nodes that intersect the given box
 func (o *GKOctree[ElementType]) ElementsInBox(box GKBox) *foundation.NSArray[ElementType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKOctreeSelElementsInBox, box)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[ElementType](_ret)
 }
 
@@ -93,4 +105,3 @@ func (o *GKOctree[ElementType]) RemoveElementWithNode(element ElementType, node 
 	_ret := objc.Send[bool](o.Ptr(), _gKOctreeSelRemoveElementWithNode, element, node.Ptr())
 	return _ret
 }
-

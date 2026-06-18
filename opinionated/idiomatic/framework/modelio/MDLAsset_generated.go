@@ -321,4 +321,3 @@ type Assetable interface {
 }
 
 var _ Assetable = (*Asset)(nil)
-

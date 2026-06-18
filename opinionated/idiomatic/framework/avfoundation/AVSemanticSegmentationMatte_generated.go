@@ -96,4 +96,3 @@ type SemanticSegmentationMatteable interface {
 }
 
 var _ SemanticSegmentationMatteable = (*SemanticSegmentationMatte)(nil)
-

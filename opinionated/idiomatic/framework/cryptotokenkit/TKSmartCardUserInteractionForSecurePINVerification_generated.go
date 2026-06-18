@@ -17,7 +17,9 @@ type SmartCardUserInteractionForSecurePINVerification struct {
 }
 
 // Unwrap returns the underlying [raw.TKSmartCardUserInteractionForSecurePINVerification].
-func (x *SmartCardUserInteractionForSecurePINVerification) Unwrap() *raw.TKSmartCardUserInteractionForSecurePINVerification { return x.inner }
+func (x *SmartCardUserInteractionForSecurePINVerification) Unwrap() *raw.TKSmartCardUserInteractionForSecurePINVerification {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -50,7 +52,9 @@ func (x *SmartCardUserInteractionForSecurePINVerification) WithPINMessageIndices
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -95,9 +99,13 @@ func (x *SmartCardUserInteractionForSecurePINVerification) WithInteractionTimeou
 	return x
 }
 
-func (x *SmartCardUserInteractionForSecurePINVerification) asSmartCardUserInteractionForPINOperation() *raw.TKSmartCardUserInteractionForPINOperation { return &x.inner.TKSmartCardUserInteractionForPINOperation }
+func (x *SmartCardUserInteractionForSecurePINVerification) asSmartCardUserInteractionForPINOperation() *raw.TKSmartCardUserInteractionForPINOperation {
+	return &x.inner.TKSmartCardUserInteractionForPINOperation
+}
 
-func (x *SmartCardUserInteractionForSecurePINVerification) asSmartCardUserInteraction() *raw.TKSmartCardUserInteraction { return &x.inner.TKSmartCardUserInteractionForPINOperation.TKSmartCardUserInteraction }
+func (x *SmartCardUserInteractionForSecurePINVerification) asSmartCardUserInteraction() *raw.TKSmartCardUserInteraction {
+	return &x.inner.TKSmartCardUserInteractionForPINOperation.TKSmartCardUserInteraction
+}
 
 // SmartCardUserInteractionForSecurePINVerificationable is the interface implemented by [SmartCardUserInteractionForSecurePINVerification], for mocking and DI.
 type SmartCardUserInteractionForSecurePINVerificationable interface {
@@ -113,4 +121,3 @@ type SmartCardUserInteractionForSecurePINVerificationable interface {
 }
 
 var _ SmartCardUserInteractionForSecurePINVerificationable = (*SmartCardUserInteractionForSecurePINVerification)(nil)
-

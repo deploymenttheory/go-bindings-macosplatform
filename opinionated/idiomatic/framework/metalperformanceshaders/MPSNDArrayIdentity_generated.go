@@ -79,13 +79,21 @@ func (x *NDArrayIdentity) ReshapeWithCommandEncoderCommandBufferSourceArrayDimen
 	return x.inner.ReshapeWithCommandEncoderCommandBufferSourceArrayDimensionCountDimensionSizesDestinationArray(encoder, cmdBuf, sourceArray, numberOfDimensions, dimensionSizes, destinationArray)
 }
 
-func (x *NDArrayIdentity) asNDArrayUnaryKernel() *mpsndarray.MPSNDArrayUnaryKernel { return &x.inner.MPSNDArrayUnaryKernel }
+func (x *NDArrayIdentity) asNDArrayUnaryKernel() *mpsndarray.MPSNDArrayUnaryKernel {
+	return &x.inner.MPSNDArrayUnaryKernel
+}
 
-func (x *NDArrayIdentity) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel { return &x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel }
+func (x *NDArrayIdentity) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel {
+	return &x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel
+}
 
-func (x *NDArrayIdentity) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
+func (x *NDArrayIdentity) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase {
+	return &x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase
+}
 
-func (x *NDArrayIdentity) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel }
+func (x *NDArrayIdentity) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel
+}
 
 // NDArrayIdentityable is the interface implemented by [NDArrayIdentity], for mocking and DI.
 type NDArrayIdentityable interface {
@@ -100,4 +108,3 @@ type NDArrayIdentityable interface {
 }
 
 var _ NDArrayIdentityable = (*NDArrayIdentity)(nil)
-

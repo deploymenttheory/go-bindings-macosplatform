@@ -16,8 +16,8 @@ type MLKey struct {
 }
 
 var (
-	_clsMLKey = _objcClass("MLKey")
-	_mLKeySelName = objc.RegisterName("name")
+	_clsMLKey      = _objcClass("MLKey")
+	_mLKeySelName  = objc.RegisterName("name")
 	_mLKeySelScope = objc.RegisterName("scope")
 )
 
@@ -33,13 +33,16 @@ func MLKeyFromID(id objc.ID) *MLKey {
 
 func (o *MLKey) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLKeySelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MLKey) Scope() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLKeySelScope)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

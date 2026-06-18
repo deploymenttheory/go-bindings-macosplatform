@@ -12,4 +12,3 @@ func Cp_layer_renderer_configuration_error_domain() uintptr {
 	ptr, _ := purego.Dlsym(_compositorservicesLib, "cp_layer_renderer_configuration_error_domain")
 	return ptr
 }
-

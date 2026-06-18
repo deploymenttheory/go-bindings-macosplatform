@@ -51,4 +51,3 @@ type BlitPassDescriptorable interface {
 }
 
 var _ BlitPassDescriptorable = (*BlitPassDescriptor)(nil)
-

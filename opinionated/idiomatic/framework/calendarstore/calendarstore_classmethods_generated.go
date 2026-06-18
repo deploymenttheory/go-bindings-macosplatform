@@ -78,4 +78,3 @@ func RecurrenceEndWithOccurrenceCount(occurrenceCount uint) objc.ID {
 func Task() objc.ID {
 	return raw.CalTaskTask()
 }
-

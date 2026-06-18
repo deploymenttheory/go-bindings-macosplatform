@@ -18,8 +18,8 @@ type EPExecutionPolicy struct {
 }
 
 var (
-	_clsEPExecutionPolicy = _objcClass("EPExecutionPolicy")
-	_ePExecutionPolicySelInit = objc.RegisterName("init")
+	_clsEPExecutionPolicy                              = _objcClass("EPExecutionPolicy")
+	_ePExecutionPolicySelInit                          = objc.RegisterName("init")
 	_ePExecutionPolicySelAddPolicyExceptionForURLError = objc.RegisterName("addPolicyExceptionForURL:error:")
 )
 
@@ -35,7 +35,9 @@ func EPExecutionPolicyFromID(id objc.ID) *EPExecutionPolicy {
 
 func (o *EPExecutionPolicy) Init() *EPExecutionPolicy {
 	_ret := objc.Send[objc.ID](o.Ptr(), _ePExecutionPolicySelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EPExecutionPolicyFromID(_ret)
 }
 
@@ -47,4 +49,3 @@ func (o *EPExecutionPolicy) AddPolicyExceptionForURLError(url *foundation.NSURL)
 	}
 	return _ret, nil
 }
-

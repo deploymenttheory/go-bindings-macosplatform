@@ -14,8 +14,8 @@ import (
 
 var (
 	_coregraphicsLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce        sync.Once
+	_failedSymbols   = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -48,128 +48,300 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("CGAcquireDisplayFadeReservation", func() { purego.RegisterLibFunc(&_fnCGAcquireDisplayFadeReservation, _coregraphicsLib, "CGAcquireDisplayFadeReservation") })
-	_register("CGAffineTransformConcat", func() { purego.RegisterLibFunc(&_fnCGAffineTransformConcat, _coregraphicsLib, "CGAffineTransformConcat") })
-	_register("CGAffineTransformDecompose", func() { purego.RegisterLibFunc(&_fnCGAffineTransformDecompose, _coregraphicsLib, "CGAffineTransformDecompose") })
-	_register("CGAffineTransformEqualToTransform", func() { purego.RegisterLibFunc(&_fnCGAffineTransformEqualToTransform, _coregraphicsLib, "CGAffineTransformEqualToTransform") })
-	_register("CGAffineTransformInvert", func() { purego.RegisterLibFunc(&_fnCGAffineTransformInvert, _coregraphicsLib, "CGAffineTransformInvert") })
-	_register("CGAffineTransformIsIdentity", func() { purego.RegisterLibFunc(&_fnCGAffineTransformIsIdentity, _coregraphicsLib, "CGAffineTransformIsIdentity") })
+	_register("CGAcquireDisplayFadeReservation", func() {
+		purego.RegisterLibFunc(&_fnCGAcquireDisplayFadeReservation, _coregraphicsLib, "CGAcquireDisplayFadeReservation")
+	})
+	_register("CGAffineTransformConcat", func() {
+		purego.RegisterLibFunc(&_fnCGAffineTransformConcat, _coregraphicsLib, "CGAffineTransformConcat")
+	})
+	_register("CGAffineTransformDecompose", func() {
+		purego.RegisterLibFunc(&_fnCGAffineTransformDecompose, _coregraphicsLib, "CGAffineTransformDecompose")
+	})
+	_register("CGAffineTransformEqualToTransform", func() {
+		purego.RegisterLibFunc(&_fnCGAffineTransformEqualToTransform, _coregraphicsLib, "CGAffineTransformEqualToTransform")
+	})
+	_register("CGAffineTransformInvert", func() {
+		purego.RegisterLibFunc(&_fnCGAffineTransformInvert, _coregraphicsLib, "CGAffineTransformInvert")
+	})
+	_register("CGAffineTransformIsIdentity", func() {
+		purego.RegisterLibFunc(&_fnCGAffineTransformIsIdentity, _coregraphicsLib, "CGAffineTransformIsIdentity")
+	})
 	_register("CGAffineTransformMake", func() { purego.RegisterLibFunc(&_fnCGAffineTransformMake, _coregraphicsLib, "CGAffineTransformMake") })
-	_register("CGAffineTransformMakeRotation", func() { purego.RegisterLibFunc(&_fnCGAffineTransformMakeRotation, _coregraphicsLib, "CGAffineTransformMakeRotation") })
-	_register("CGAffineTransformMakeScale", func() { purego.RegisterLibFunc(&_fnCGAffineTransformMakeScale, _coregraphicsLib, "CGAffineTransformMakeScale") })
-	_register("CGAffineTransformMakeTranslation", func() { purego.RegisterLibFunc(&_fnCGAffineTransformMakeTranslation, _coregraphicsLib, "CGAffineTransformMakeTranslation") })
-	_register("CGAffineTransformMakeWithComponents", func() { purego.RegisterLibFunc(&_fnCGAffineTransformMakeWithComponents, _coregraphicsLib, "CGAffineTransformMakeWithComponents") })
-	_register("CGAffineTransformRotate", func() { purego.RegisterLibFunc(&_fnCGAffineTransformRotate, _coregraphicsLib, "CGAffineTransformRotate") })
+	_register("CGAffineTransformMakeRotation", func() {
+		purego.RegisterLibFunc(&_fnCGAffineTransformMakeRotation, _coregraphicsLib, "CGAffineTransformMakeRotation")
+	})
+	_register("CGAffineTransformMakeScale", func() {
+		purego.RegisterLibFunc(&_fnCGAffineTransformMakeScale, _coregraphicsLib, "CGAffineTransformMakeScale")
+	})
+	_register("CGAffineTransformMakeTranslation", func() {
+		purego.RegisterLibFunc(&_fnCGAffineTransformMakeTranslation, _coregraphicsLib, "CGAffineTransformMakeTranslation")
+	})
+	_register("CGAffineTransformMakeWithComponents", func() {
+		purego.RegisterLibFunc(&_fnCGAffineTransformMakeWithComponents, _coregraphicsLib, "CGAffineTransformMakeWithComponents")
+	})
+	_register("CGAffineTransformRotate", func() {
+		purego.RegisterLibFunc(&_fnCGAffineTransformRotate, _coregraphicsLib, "CGAffineTransformRotate")
+	})
 	_register("CGAffineTransformScale", func() { purego.RegisterLibFunc(&_fnCGAffineTransformScale, _coregraphicsLib, "CGAffineTransformScale") })
-	_register("CGAffineTransformTranslate", func() { purego.RegisterLibFunc(&_fnCGAffineTransformTranslate, _coregraphicsLib, "CGAffineTransformTranslate") })
-	_register("CGAssociateMouseAndMouseCursorPosition", func() { purego.RegisterLibFunc(&_fnCGAssociateMouseAndMouseCursorPosition, _coregraphicsLib, "CGAssociateMouseAndMouseCursorPosition") })
-	_register("CGBeginDisplayConfiguration", func() { purego.RegisterLibFunc(&_fnCGBeginDisplayConfiguration, _coregraphicsLib, "CGBeginDisplayConfiguration") })
+	_register("CGAffineTransformTranslate", func() {
+		purego.RegisterLibFunc(&_fnCGAffineTransformTranslate, _coregraphicsLib, "CGAffineTransformTranslate")
+	})
+	_register("CGAssociateMouseAndMouseCursorPosition", func() {
+		purego.RegisterLibFunc(&_fnCGAssociateMouseAndMouseCursorPosition, _coregraphicsLib, "CGAssociateMouseAndMouseCursorPosition")
+	})
+	_register("CGBeginDisplayConfiguration", func() {
+		purego.RegisterLibFunc(&_fnCGBeginDisplayConfiguration, _coregraphicsLib, "CGBeginDisplayConfiguration")
+	})
 	_register("CGBitmapContextCreate", func() { purego.RegisterLibFunc(&_fnCGBitmapContextCreate, _coregraphicsLib, "CGBitmapContextCreate") })
-	_register("CGBitmapContextCreateAdaptive", func() { purego.RegisterLibFunc(&_fnCGBitmapContextCreateAdaptive, _coregraphicsLib, "CGBitmapContextCreateAdaptive") })
-	_register("CGBitmapContextCreateImage", func() { purego.RegisterLibFunc(&_fnCGBitmapContextCreateImage, _coregraphicsLib, "CGBitmapContextCreateImage") })
-	_register("CGBitmapContextCreateWithData", func() { purego.RegisterLibFunc(&_fnCGBitmapContextCreateWithData, _coregraphicsLib, "CGBitmapContextCreateWithData") })
-	_register("CGBitmapContextGetAlphaInfo", func() { purego.RegisterLibFunc(&_fnCGBitmapContextGetAlphaInfo, _coregraphicsLib, "CGBitmapContextGetAlphaInfo") })
-	_register("CGBitmapContextGetBitmapInfo", func() { purego.RegisterLibFunc(&_fnCGBitmapContextGetBitmapInfo, _coregraphicsLib, "CGBitmapContextGetBitmapInfo") })
-	_register("CGBitmapContextGetBitsPerComponent", func() { purego.RegisterLibFunc(&_fnCGBitmapContextGetBitsPerComponent, _coregraphicsLib, "CGBitmapContextGetBitsPerComponent") })
-	_register("CGBitmapContextGetBitsPerPixel", func() { purego.RegisterLibFunc(&_fnCGBitmapContextGetBitsPerPixel, _coregraphicsLib, "CGBitmapContextGetBitsPerPixel") })
-	_register("CGBitmapContextGetBytesPerRow", func() { purego.RegisterLibFunc(&_fnCGBitmapContextGetBytesPerRow, _coregraphicsLib, "CGBitmapContextGetBytesPerRow") })
-	_register("CGBitmapContextGetColorSpace", func() { purego.RegisterLibFunc(&_fnCGBitmapContextGetColorSpace, _coregraphicsLib, "CGBitmapContextGetColorSpace") })
+	_register("CGBitmapContextCreateAdaptive", func() {
+		purego.RegisterLibFunc(&_fnCGBitmapContextCreateAdaptive, _coregraphicsLib, "CGBitmapContextCreateAdaptive")
+	})
+	_register("CGBitmapContextCreateImage", func() {
+		purego.RegisterLibFunc(&_fnCGBitmapContextCreateImage, _coregraphicsLib, "CGBitmapContextCreateImage")
+	})
+	_register("CGBitmapContextCreateWithData", func() {
+		purego.RegisterLibFunc(&_fnCGBitmapContextCreateWithData, _coregraphicsLib, "CGBitmapContextCreateWithData")
+	})
+	_register("CGBitmapContextGetAlphaInfo", func() {
+		purego.RegisterLibFunc(&_fnCGBitmapContextGetAlphaInfo, _coregraphicsLib, "CGBitmapContextGetAlphaInfo")
+	})
+	_register("CGBitmapContextGetBitmapInfo", func() {
+		purego.RegisterLibFunc(&_fnCGBitmapContextGetBitmapInfo, _coregraphicsLib, "CGBitmapContextGetBitmapInfo")
+	})
+	_register("CGBitmapContextGetBitsPerComponent", func() {
+		purego.RegisterLibFunc(&_fnCGBitmapContextGetBitsPerComponent, _coregraphicsLib, "CGBitmapContextGetBitsPerComponent")
+	})
+	_register("CGBitmapContextGetBitsPerPixel", func() {
+		purego.RegisterLibFunc(&_fnCGBitmapContextGetBitsPerPixel, _coregraphicsLib, "CGBitmapContextGetBitsPerPixel")
+	})
+	_register("CGBitmapContextGetBytesPerRow", func() {
+		purego.RegisterLibFunc(&_fnCGBitmapContextGetBytesPerRow, _coregraphicsLib, "CGBitmapContextGetBytesPerRow")
+	})
+	_register("CGBitmapContextGetColorSpace", func() {
+		purego.RegisterLibFunc(&_fnCGBitmapContextGetColorSpace, _coregraphicsLib, "CGBitmapContextGetColorSpace")
+	})
 	_register("CGBitmapContextGetData", func() { purego.RegisterLibFunc(&_fnCGBitmapContextGetData, _coregraphicsLib, "CGBitmapContextGetData") })
-	_register("CGBitmapContextGetHeight", func() { purego.RegisterLibFunc(&_fnCGBitmapContextGetHeight, _coregraphicsLib, "CGBitmapContextGetHeight") })
-	_register("CGBitmapContextGetWidth", func() { purego.RegisterLibFunc(&_fnCGBitmapContextGetWidth, _coregraphicsLib, "CGBitmapContextGetWidth") })
+	_register("CGBitmapContextGetHeight", func() {
+		purego.RegisterLibFunc(&_fnCGBitmapContextGetHeight, _coregraphicsLib, "CGBitmapContextGetHeight")
+	})
+	_register("CGBitmapContextGetWidth", func() {
+		purego.RegisterLibFunc(&_fnCGBitmapContextGetWidth, _coregraphicsLib, "CGBitmapContextGetWidth")
+	})
 	_register("CGBitmapInfoMake", func() { purego.RegisterLibFunc(&_fnCGBitmapInfoMake, _coregraphicsLib, "CGBitmapInfoMake") })
-	_register("CGCancelDisplayConfiguration", func() { purego.RegisterLibFunc(&_fnCGCancelDisplayConfiguration, _coregraphicsLib, "CGCancelDisplayConfiguration") })
+	_register("CGCancelDisplayConfiguration", func() {
+		purego.RegisterLibFunc(&_fnCGCancelDisplayConfiguration, _coregraphicsLib, "CGCancelDisplayConfiguration")
+	})
 	_register("CGCaptureAllDisplays", func() { purego.RegisterLibFunc(&_fnCGCaptureAllDisplays, _coregraphicsLib, "CGCaptureAllDisplays") })
-	_register("CGCaptureAllDisplaysWithOptions", func() { purego.RegisterLibFunc(&_fnCGCaptureAllDisplaysWithOptions, _coregraphicsLib, "CGCaptureAllDisplaysWithOptions") })
-	_register("CGColorConversionInfoConvertData", func() { purego.RegisterLibFunc(&_fnCGColorConversionInfoConvertData, _coregraphicsLib, "CGColorConversionInfoConvertData") })
-	_register("CGColorConversionInfoCreate", func() { purego.RegisterLibFunc(&_fnCGColorConversionInfoCreate, _coregraphicsLib, "CGColorConversionInfoCreate") })
-	_register("CGColorConversionInfoCreateForToneMapping", func() { purego.RegisterLibFunc(&_fnCGColorConversionInfoCreateForToneMapping, _coregraphicsLib, "CGColorConversionInfoCreateForToneMapping") })
-	_register("CGColorConversionInfoCreateFromListWithArguments", func() { purego.RegisterLibFunc(&_fnCGColorConversionInfoCreateFromListWithArguments, _coregraphicsLib, "CGColorConversionInfoCreateFromListWithArguments") })
-	_register("CGColorConversionInfoCreateWithOptions", func() { purego.RegisterLibFunc(&_fnCGColorConversionInfoCreateWithOptions, _coregraphicsLib, "CGColorConversionInfoCreateWithOptions") })
-	_register("CGColorConversionInfoGetTypeID", func() { purego.RegisterLibFunc(&_fnCGColorConversionInfoGetTypeID, _coregraphicsLib, "CGColorConversionInfoGetTypeID") })
+	_register("CGCaptureAllDisplaysWithOptions", func() {
+		purego.RegisterLibFunc(&_fnCGCaptureAllDisplaysWithOptions, _coregraphicsLib, "CGCaptureAllDisplaysWithOptions")
+	})
+	_register("CGColorConversionInfoConvertData", func() {
+		purego.RegisterLibFunc(&_fnCGColorConversionInfoConvertData, _coregraphicsLib, "CGColorConversionInfoConvertData")
+	})
+	_register("CGColorConversionInfoCreate", func() {
+		purego.RegisterLibFunc(&_fnCGColorConversionInfoCreate, _coregraphicsLib, "CGColorConversionInfoCreate")
+	})
+	_register("CGColorConversionInfoCreateForToneMapping", func() {
+		purego.RegisterLibFunc(&_fnCGColorConversionInfoCreateForToneMapping, _coregraphicsLib, "CGColorConversionInfoCreateForToneMapping")
+	})
+	_register("CGColorConversionInfoCreateFromListWithArguments", func() {
+		purego.RegisterLibFunc(&_fnCGColorConversionInfoCreateFromListWithArguments, _coregraphicsLib, "CGColorConversionInfoCreateFromListWithArguments")
+	})
+	_register("CGColorConversionInfoCreateWithOptions", func() {
+		purego.RegisterLibFunc(&_fnCGColorConversionInfoCreateWithOptions, _coregraphicsLib, "CGColorConversionInfoCreateWithOptions")
+	})
+	_register("CGColorConversionInfoGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnCGColorConversionInfoGetTypeID, _coregraphicsLib, "CGColorConversionInfoGetTypeID")
+	})
 	_register("CGColorCreate", func() { purego.RegisterLibFunc(&_fnCGColorCreate, _coregraphicsLib, "CGColorCreate") })
 	_register("CGColorCreateCopy", func() { purego.RegisterLibFunc(&_fnCGColorCreateCopy, _coregraphicsLib, "CGColorCreateCopy") })
-	_register("CGColorCreateCopyByMatchingToColorSpace", func() { purego.RegisterLibFunc(&_fnCGColorCreateCopyByMatchingToColorSpace, _coregraphicsLib, "CGColorCreateCopyByMatchingToColorSpace") })
-	_register("CGColorCreateCopyWithAlpha", func() { purego.RegisterLibFunc(&_fnCGColorCreateCopyWithAlpha, _coregraphicsLib, "CGColorCreateCopyWithAlpha") })
-	_register("CGColorCreateGenericCMYK", func() { purego.RegisterLibFunc(&_fnCGColorCreateGenericCMYK, _coregraphicsLib, "CGColorCreateGenericCMYK") })
-	_register("CGColorCreateGenericGray", func() { purego.RegisterLibFunc(&_fnCGColorCreateGenericGray, _coregraphicsLib, "CGColorCreateGenericGray") })
-	_register("CGColorCreateGenericGrayGamma2_2", func() { purego.RegisterLibFunc(&_fnCGColorCreateGenericGrayGamma2_2, _coregraphicsLib, "CGColorCreateGenericGrayGamma2_2") })
-	_register("CGColorCreateGenericRGB", func() { purego.RegisterLibFunc(&_fnCGColorCreateGenericRGB, _coregraphicsLib, "CGColorCreateGenericRGB") })
+	_register("CGColorCreateCopyByMatchingToColorSpace", func() {
+		purego.RegisterLibFunc(&_fnCGColorCreateCopyByMatchingToColorSpace, _coregraphicsLib, "CGColorCreateCopyByMatchingToColorSpace")
+	})
+	_register("CGColorCreateCopyWithAlpha", func() {
+		purego.RegisterLibFunc(&_fnCGColorCreateCopyWithAlpha, _coregraphicsLib, "CGColorCreateCopyWithAlpha")
+	})
+	_register("CGColorCreateGenericCMYK", func() {
+		purego.RegisterLibFunc(&_fnCGColorCreateGenericCMYK, _coregraphicsLib, "CGColorCreateGenericCMYK")
+	})
+	_register("CGColorCreateGenericGray", func() {
+		purego.RegisterLibFunc(&_fnCGColorCreateGenericGray, _coregraphicsLib, "CGColorCreateGenericGray")
+	})
+	_register("CGColorCreateGenericGrayGamma2_2", func() {
+		purego.RegisterLibFunc(&_fnCGColorCreateGenericGrayGamma2_2, _coregraphicsLib, "CGColorCreateGenericGrayGamma2_2")
+	})
+	_register("CGColorCreateGenericRGB", func() {
+		purego.RegisterLibFunc(&_fnCGColorCreateGenericRGB, _coregraphicsLib, "CGColorCreateGenericRGB")
+	})
 	_register("CGColorCreateSRGB", func() { purego.RegisterLibFunc(&_fnCGColorCreateSRGB, _coregraphicsLib, "CGColorCreateSRGB") })
-	_register("CGColorCreateWithContentHeadroom", func() { purego.RegisterLibFunc(&_fnCGColorCreateWithContentHeadroom, _coregraphicsLib, "CGColorCreateWithContentHeadroom") })
-	_register("CGColorCreateWithPattern", func() { purego.RegisterLibFunc(&_fnCGColorCreateWithPattern, _coregraphicsLib, "CGColorCreateWithPattern") })
+	_register("CGColorCreateWithContentHeadroom", func() {
+		purego.RegisterLibFunc(&_fnCGColorCreateWithContentHeadroom, _coregraphicsLib, "CGColorCreateWithContentHeadroom")
+	})
+	_register("CGColorCreateWithPattern", func() {
+		purego.RegisterLibFunc(&_fnCGColorCreateWithPattern, _coregraphicsLib, "CGColorCreateWithPattern")
+	})
 	_register("CGColorEqualToColor", func() { purego.RegisterLibFunc(&_fnCGColorEqualToColor, _coregraphicsLib, "CGColorEqualToColor") })
 	_register("CGColorGetAlpha", func() { purego.RegisterLibFunc(&_fnCGColorGetAlpha, _coregraphicsLib, "CGColorGetAlpha") })
 	_register("CGColorGetColorSpace", func() { purego.RegisterLibFunc(&_fnCGColorGetColorSpace, _coregraphicsLib, "CGColorGetColorSpace") })
 	_register("CGColorGetComponents", func() { purego.RegisterLibFunc(&_fnCGColorGetComponents, _coregraphicsLib, "CGColorGetComponents") })
-	_register("CGColorGetConstantColor", func() { purego.RegisterLibFunc(&_fnCGColorGetConstantColor, _coregraphicsLib, "CGColorGetConstantColor") })
-	_register("CGColorGetContentHeadroom", func() { purego.RegisterLibFunc(&_fnCGColorGetContentHeadroom, _coregraphicsLib, "CGColorGetContentHeadroom") })
-	_register("CGColorGetNumberOfComponents", func() { purego.RegisterLibFunc(&_fnCGColorGetNumberOfComponents, _coregraphicsLib, "CGColorGetNumberOfComponents") })
+	_register("CGColorGetConstantColor", func() {
+		purego.RegisterLibFunc(&_fnCGColorGetConstantColor, _coregraphicsLib, "CGColorGetConstantColor")
+	})
+	_register("CGColorGetContentHeadroom", func() {
+		purego.RegisterLibFunc(&_fnCGColorGetContentHeadroom, _coregraphicsLib, "CGColorGetContentHeadroom")
+	})
+	_register("CGColorGetNumberOfComponents", func() {
+		purego.RegisterLibFunc(&_fnCGColorGetNumberOfComponents, _coregraphicsLib, "CGColorGetNumberOfComponents")
+	})
 	_register("CGColorGetPattern", func() { purego.RegisterLibFunc(&_fnCGColorGetPattern, _coregraphicsLib, "CGColorGetPattern") })
 	_register("CGColorGetTypeID", func() { purego.RegisterLibFunc(&_fnCGColorGetTypeID, _coregraphicsLib, "CGColorGetTypeID") })
 	_register("CGColorRelease", func() { purego.RegisterLibFunc(&_fnCGColorRelease, _coregraphicsLib, "CGColorRelease") })
 	_register("CGColorRetain", func() { purego.RegisterLibFunc(&_fnCGColorRetain, _coregraphicsLib, "CGColorRetain") })
-	_register("CGColorSpaceCopyBaseColorSpace", func() { purego.RegisterLibFunc(&_fnCGColorSpaceCopyBaseColorSpace, _coregraphicsLib, "CGColorSpaceCopyBaseColorSpace") })
-	_register("CGColorSpaceCopyICCData", func() { purego.RegisterLibFunc(&_fnCGColorSpaceCopyICCData, _coregraphicsLib, "CGColorSpaceCopyICCData") })
-	_register("CGColorSpaceCopyICCProfile", func() { purego.RegisterLibFunc(&_fnCGColorSpaceCopyICCProfile, _coregraphicsLib, "CGColorSpaceCopyICCProfile") })
+	_register("CGColorSpaceCopyBaseColorSpace", func() {
+		purego.RegisterLibFunc(&_fnCGColorSpaceCopyBaseColorSpace, _coregraphicsLib, "CGColorSpaceCopyBaseColorSpace")
+	})
+	_register("CGColorSpaceCopyICCData", func() {
+		purego.RegisterLibFunc(&_fnCGColorSpaceCopyICCData, _coregraphicsLib, "CGColorSpaceCopyICCData")
+	})
+	_register("CGColorSpaceCopyICCProfile", func() {
+		purego.RegisterLibFunc(&_fnCGColorSpaceCopyICCProfile, _coregraphicsLib, "CGColorSpaceCopyICCProfile")
+	})
 	_register("CGColorSpaceCopyName", func() { purego.RegisterLibFunc(&_fnCGColorSpaceCopyName, _coregraphicsLib, "CGColorSpaceCopyName") })
-	_register("CGColorSpaceCopyPropertyList", func() { purego.RegisterLibFunc(&_fnCGColorSpaceCopyPropertyList, _coregraphicsLib, "CGColorSpaceCopyPropertyList") })
-	_register("CGColorSpaceCreateCalibratedGray", func() { purego.RegisterLibFunc(&_fnCGColorSpaceCreateCalibratedGray, _coregraphicsLib, "CGColorSpaceCreateCalibratedGray") })
-	_register("CGColorSpaceCreateCalibratedRGB", func() { purego.RegisterLibFunc(&_fnCGColorSpaceCreateCalibratedRGB, _coregraphicsLib, "CGColorSpaceCreateCalibratedRGB") })
-	_register("CGColorSpaceCreateCopyWithStandardRange", func() { purego.RegisterLibFunc(&_fnCGColorSpaceCreateCopyWithStandardRange, _coregraphicsLib, "CGColorSpaceCreateCopyWithStandardRange") })
-	_register("CGColorSpaceCreateDeviceCMYK", func() { purego.RegisterLibFunc(&_fnCGColorSpaceCreateDeviceCMYK, _coregraphicsLib, "CGColorSpaceCreateDeviceCMYK") })
-	_register("CGColorSpaceCreateDeviceGray", func() { purego.RegisterLibFunc(&_fnCGColorSpaceCreateDeviceGray, _coregraphicsLib, "CGColorSpaceCreateDeviceGray") })
-	_register("CGColorSpaceCreateDeviceRGB", func() { purego.RegisterLibFunc(&_fnCGColorSpaceCreateDeviceRGB, _coregraphicsLib, "CGColorSpaceCreateDeviceRGB") })
-	_register("CGColorSpaceCreateExtended", func() { purego.RegisterLibFunc(&_fnCGColorSpaceCreateExtended, _coregraphicsLib, "CGColorSpaceCreateExtended") })
-	_register("CGColorSpaceCreateExtendedLinearized", func() { purego.RegisterLibFunc(&_fnCGColorSpaceCreateExtendedLinearized, _coregraphicsLib, "CGColorSpaceCreateExtendedLinearized") })
-	_register("CGColorSpaceCreateICCBased", func() { purego.RegisterLibFunc(&_fnCGColorSpaceCreateICCBased, _coregraphicsLib, "CGColorSpaceCreateICCBased") })
-	_register("CGColorSpaceCreateIndexed", func() { purego.RegisterLibFunc(&_fnCGColorSpaceCreateIndexed, _coregraphicsLib, "CGColorSpaceCreateIndexed") })
+	_register("CGColorSpaceCopyPropertyList", func() {
+		purego.RegisterLibFunc(&_fnCGColorSpaceCopyPropertyList, _coregraphicsLib, "CGColorSpaceCopyPropertyList")
+	})
+	_register("CGColorSpaceCreateCalibratedGray", func() {
+		purego.RegisterLibFunc(&_fnCGColorSpaceCreateCalibratedGray, _coregraphicsLib, "CGColorSpaceCreateCalibratedGray")
+	})
+	_register("CGColorSpaceCreateCalibratedRGB", func() {
+		purego.RegisterLibFunc(&_fnCGColorSpaceCreateCalibratedRGB, _coregraphicsLib, "CGColorSpaceCreateCalibratedRGB")
+	})
+	_register("CGColorSpaceCreateCopyWithStandardRange", func() {
+		purego.RegisterLibFunc(&_fnCGColorSpaceCreateCopyWithStandardRange, _coregraphicsLib, "CGColorSpaceCreateCopyWithStandardRange")
+	})
+	_register("CGColorSpaceCreateDeviceCMYK", func() {
+		purego.RegisterLibFunc(&_fnCGColorSpaceCreateDeviceCMYK, _coregraphicsLib, "CGColorSpaceCreateDeviceCMYK")
+	})
+	_register("CGColorSpaceCreateDeviceGray", func() {
+		purego.RegisterLibFunc(&_fnCGColorSpaceCreateDeviceGray, _coregraphicsLib, "CGColorSpaceCreateDeviceGray")
+	})
+	_register("CGColorSpaceCreateDeviceRGB", func() {
+		purego.RegisterLibFunc(&_fnCGColorSpaceCreateDeviceRGB, _coregraphicsLib, "CGColorSpaceCreateDeviceRGB")
+	})
+	_register("CGColorSpaceCreateExtended", func() {
+		purego.RegisterLibFunc(&_fnCGColorSpaceCreateExtended, _coregraphicsLib, "CGColorSpaceCreateExtended")
+	})
+	_register("CGColorSpaceCreateExtendedLinearized", func() {
+		purego.RegisterLibFunc(&_fnCGColorSpaceCreateExtendedLinearized, _coregraphicsLib, "CGColorSpaceCreateExtendedLinearized")
+	})
+	_register("CGColorSpaceCreateICCBased", func() {
+		purego.RegisterLibFunc(&_fnCGColorSpaceCreateICCBased, _coregraphicsLib, "CGColorSpaceCreateICCBased")
+	})
+	_register("CGColorSpaceCreateIndexed", func() {
+		purego.RegisterLibFunc(&_fnCGColorSpaceCreateIndexed, _coregraphicsLib, "CGColorSpaceCreateIndexed")
+	})
 	_register("CGColorSpaceCreateLab", func() { purego.RegisterLibFunc(&_fnCGColorSpaceCreateLab, _coregraphicsLib, "CGColorSpaceCreateLab") })
-	_register("CGColorSpaceCreateLinearized", func() { purego.RegisterLibFunc(&_fnCGColorSpaceCreateLinearized, _coregraphicsLib, "CGColorSpaceCreateLinearized") })
-	_register("CGColorSpaceCreatePattern", func() { purego.RegisterLibFunc(&_fnCGColorSpaceCreatePattern, _coregraphicsLib, "CGColorSpaceCreatePattern") })
-	_register("CGColorSpaceCreateWithColorSyncProfile", func() { purego.RegisterLibFunc(&_fnCGColorSpaceCreateWithColorSyncProfile, _coregraphicsLib, "CGColorSpaceCreateWithColorSyncProfile") })
-	_register("CGColorSpaceCreateWithICCData", func() { purego.RegisterLibFunc(&_fnCGColorSpaceCreateWithICCData, _coregraphicsLib, "CGColorSpaceCreateWithICCData") })
-	_register("CGColorSpaceCreateWithICCProfile", func() { purego.RegisterLibFunc(&_fnCGColorSpaceCreateWithICCProfile, _coregraphicsLib, "CGColorSpaceCreateWithICCProfile") })
-	_register("CGColorSpaceCreateWithName", func() { purego.RegisterLibFunc(&_fnCGColorSpaceCreateWithName, _coregraphicsLib, "CGColorSpaceCreateWithName") })
-	_register("CGColorSpaceCreateWithPlatformColorSpace", func() { purego.RegisterLibFunc(&_fnCGColorSpaceCreateWithPlatformColorSpace, _coregraphicsLib, "CGColorSpaceCreateWithPlatformColorSpace") })
-	_register("CGColorSpaceCreateWithPropertyList", func() { purego.RegisterLibFunc(&_fnCGColorSpaceCreateWithPropertyList, _coregraphicsLib, "CGColorSpaceCreateWithPropertyList") })
-	_register("CGColorSpaceGetBaseColorSpace", func() { purego.RegisterLibFunc(&_fnCGColorSpaceGetBaseColorSpace, _coregraphicsLib, "CGColorSpaceGetBaseColorSpace") })
-	_register("CGColorSpaceGetColorTable", func() { purego.RegisterLibFunc(&_fnCGColorSpaceGetColorTable, _coregraphicsLib, "CGColorSpaceGetColorTable") })
-	_register("CGColorSpaceGetColorTableCount", func() { purego.RegisterLibFunc(&_fnCGColorSpaceGetColorTableCount, _coregraphicsLib, "CGColorSpaceGetColorTableCount") })
+	_register("CGColorSpaceCreateLinearized", func() {
+		purego.RegisterLibFunc(&_fnCGColorSpaceCreateLinearized, _coregraphicsLib, "CGColorSpaceCreateLinearized")
+	})
+	_register("CGColorSpaceCreatePattern", func() {
+		purego.RegisterLibFunc(&_fnCGColorSpaceCreatePattern, _coregraphicsLib, "CGColorSpaceCreatePattern")
+	})
+	_register("CGColorSpaceCreateWithColorSyncProfile", func() {
+		purego.RegisterLibFunc(&_fnCGColorSpaceCreateWithColorSyncProfile, _coregraphicsLib, "CGColorSpaceCreateWithColorSyncProfile")
+	})
+	_register("CGColorSpaceCreateWithICCData", func() {
+		purego.RegisterLibFunc(&_fnCGColorSpaceCreateWithICCData, _coregraphicsLib, "CGColorSpaceCreateWithICCData")
+	})
+	_register("CGColorSpaceCreateWithICCProfile", func() {
+		purego.RegisterLibFunc(&_fnCGColorSpaceCreateWithICCProfile, _coregraphicsLib, "CGColorSpaceCreateWithICCProfile")
+	})
+	_register("CGColorSpaceCreateWithName", func() {
+		purego.RegisterLibFunc(&_fnCGColorSpaceCreateWithName, _coregraphicsLib, "CGColorSpaceCreateWithName")
+	})
+	_register("CGColorSpaceCreateWithPlatformColorSpace", func() {
+		purego.RegisterLibFunc(&_fnCGColorSpaceCreateWithPlatformColorSpace, _coregraphicsLib, "CGColorSpaceCreateWithPlatformColorSpace")
+	})
+	_register("CGColorSpaceCreateWithPropertyList", func() {
+		purego.RegisterLibFunc(&_fnCGColorSpaceCreateWithPropertyList, _coregraphicsLib, "CGColorSpaceCreateWithPropertyList")
+	})
+	_register("CGColorSpaceGetBaseColorSpace", func() {
+		purego.RegisterLibFunc(&_fnCGColorSpaceGetBaseColorSpace, _coregraphicsLib, "CGColorSpaceGetBaseColorSpace")
+	})
+	_register("CGColorSpaceGetColorTable", func() {
+		purego.RegisterLibFunc(&_fnCGColorSpaceGetColorTable, _coregraphicsLib, "CGColorSpaceGetColorTable")
+	})
+	_register("CGColorSpaceGetColorTableCount", func() {
+		purego.RegisterLibFunc(&_fnCGColorSpaceGetColorTableCount, _coregraphicsLib, "CGColorSpaceGetColorTableCount")
+	})
 	_register("CGColorSpaceGetModel", func() { purego.RegisterLibFunc(&_fnCGColorSpaceGetModel, _coregraphicsLib, "CGColorSpaceGetModel") })
 	_register("CGColorSpaceGetName", func() { purego.RegisterLibFunc(&_fnCGColorSpaceGetName, _coregraphicsLib, "CGColorSpaceGetName") })
-	_register("CGColorSpaceGetNumberOfComponents", func() { purego.RegisterLibFunc(&_fnCGColorSpaceGetNumberOfComponents, _coregraphicsLib, "CGColorSpaceGetNumberOfComponents") })
+	_register("CGColorSpaceGetNumberOfComponents", func() {
+		purego.RegisterLibFunc(&_fnCGColorSpaceGetNumberOfComponents, _coregraphicsLib, "CGColorSpaceGetNumberOfComponents")
+	})
 	_register("CGColorSpaceGetTypeID", func() { purego.RegisterLibFunc(&_fnCGColorSpaceGetTypeID, _coregraphicsLib, "CGColorSpaceGetTypeID") })
 	_register("CGColorSpaceIsHDR", func() { purego.RegisterLibFunc(&_fnCGColorSpaceIsHDR, _coregraphicsLib, "CGColorSpaceIsHDR") })
 	_register("CGColorSpaceIsHLGBased", func() { purego.RegisterLibFunc(&_fnCGColorSpaceIsHLGBased, _coregraphicsLib, "CGColorSpaceIsHLGBased") })
 	_register("CGColorSpaceIsPQBased", func() { purego.RegisterLibFunc(&_fnCGColorSpaceIsPQBased, _coregraphicsLib, "CGColorSpaceIsPQBased") })
-	_register("CGColorSpaceIsWideGamutRGB", func() { purego.RegisterLibFunc(&_fnCGColorSpaceIsWideGamutRGB, _coregraphicsLib, "CGColorSpaceIsWideGamutRGB") })
+	_register("CGColorSpaceIsWideGamutRGB", func() {
+		purego.RegisterLibFunc(&_fnCGColorSpaceIsWideGamutRGB, _coregraphicsLib, "CGColorSpaceIsWideGamutRGB")
+	})
 	_register("CGColorSpaceRelease", func() { purego.RegisterLibFunc(&_fnCGColorSpaceRelease, _coregraphicsLib, "CGColorSpaceRelease") })
 	_register("CGColorSpaceRetain", func() { purego.RegisterLibFunc(&_fnCGColorSpaceRetain, _coregraphicsLib, "CGColorSpaceRetain") })
-	_register("CGColorSpaceSupportsOutput", func() { purego.RegisterLibFunc(&_fnCGColorSpaceSupportsOutput, _coregraphicsLib, "CGColorSpaceSupportsOutput") })
-	_register("CGColorSpaceUsesExtendedRange", func() { purego.RegisterLibFunc(&_fnCGColorSpaceUsesExtendedRange, _coregraphicsLib, "CGColorSpaceUsesExtendedRange") })
-	_register("CGColorSpaceUsesITUR_2100TF", func() { purego.RegisterLibFunc(&_fnCGColorSpaceUsesITUR_2100TF, _coregraphicsLib, "CGColorSpaceUsesITUR_2100TF") })
-	_register("CGCompleteDisplayConfiguration", func() { purego.RegisterLibFunc(&_fnCGCompleteDisplayConfiguration, _coregraphicsLib, "CGCompleteDisplayConfiguration") })
-	_register("CGConfigureDisplayFadeEffect", func() { purego.RegisterLibFunc(&_fnCGConfigureDisplayFadeEffect, _coregraphicsLib, "CGConfigureDisplayFadeEffect") })
-	_register("CGConfigureDisplayMirrorOfDisplay", func() { purego.RegisterLibFunc(&_fnCGConfigureDisplayMirrorOfDisplay, _coregraphicsLib, "CGConfigureDisplayMirrorOfDisplay") })
+	_register("CGColorSpaceSupportsOutput", func() {
+		purego.RegisterLibFunc(&_fnCGColorSpaceSupportsOutput, _coregraphicsLib, "CGColorSpaceSupportsOutput")
+	})
+	_register("CGColorSpaceUsesExtendedRange", func() {
+		purego.RegisterLibFunc(&_fnCGColorSpaceUsesExtendedRange, _coregraphicsLib, "CGColorSpaceUsesExtendedRange")
+	})
+	_register("CGColorSpaceUsesITUR_2100TF", func() {
+		purego.RegisterLibFunc(&_fnCGColorSpaceUsesITUR_2100TF, _coregraphicsLib, "CGColorSpaceUsesITUR_2100TF")
+	})
+	_register("CGCompleteDisplayConfiguration", func() {
+		purego.RegisterLibFunc(&_fnCGCompleteDisplayConfiguration, _coregraphicsLib, "CGCompleteDisplayConfiguration")
+	})
+	_register("CGConfigureDisplayFadeEffect", func() {
+		purego.RegisterLibFunc(&_fnCGConfigureDisplayFadeEffect, _coregraphicsLib, "CGConfigureDisplayFadeEffect")
+	})
+	_register("CGConfigureDisplayMirrorOfDisplay", func() {
+		purego.RegisterLibFunc(&_fnCGConfigureDisplayMirrorOfDisplay, _coregraphicsLib, "CGConfigureDisplayMirrorOfDisplay")
+	})
 	_register("CGConfigureDisplayMode", func() { purego.RegisterLibFunc(&_fnCGConfigureDisplayMode, _coregraphicsLib, "CGConfigureDisplayMode") })
-	_register("CGConfigureDisplayOrigin", func() { purego.RegisterLibFunc(&_fnCGConfigureDisplayOrigin, _coregraphicsLib, "CGConfigureDisplayOrigin") })
-	_register("CGConfigureDisplayStereoOperation", func() { purego.RegisterLibFunc(&_fnCGConfigureDisplayStereoOperation, _coregraphicsLib, "CGConfigureDisplayStereoOperation") })
-	_register("CGConfigureDisplayWithDisplayMode", func() { purego.RegisterLibFunc(&_fnCGConfigureDisplayWithDisplayMode, _coregraphicsLib, "CGConfigureDisplayWithDisplayMode") })
+	_register("CGConfigureDisplayOrigin", func() {
+		purego.RegisterLibFunc(&_fnCGConfigureDisplayOrigin, _coregraphicsLib, "CGConfigureDisplayOrigin")
+	})
+	_register("CGConfigureDisplayStereoOperation", func() {
+		purego.RegisterLibFunc(&_fnCGConfigureDisplayStereoOperation, _coregraphicsLib, "CGConfigureDisplayStereoOperation")
+	})
+	_register("CGConfigureDisplayWithDisplayMode", func() {
+		purego.RegisterLibFunc(&_fnCGConfigureDisplayWithDisplayMode, _coregraphicsLib, "CGConfigureDisplayWithDisplayMode")
+	})
 	_register("CGContextAddArc", func() { purego.RegisterLibFunc(&_fnCGContextAddArc, _coregraphicsLib, "CGContextAddArc") })
 	_register("CGContextAddArcToPoint", func() { purego.RegisterLibFunc(&_fnCGContextAddArcToPoint, _coregraphicsLib, "CGContextAddArcToPoint") })
-	_register("CGContextAddCurveToPoint", func() { purego.RegisterLibFunc(&_fnCGContextAddCurveToPoint, _coregraphicsLib, "CGContextAddCurveToPoint") })
-	_register("CGContextAddEllipseInRect", func() { purego.RegisterLibFunc(&_fnCGContextAddEllipseInRect, _coregraphicsLib, "CGContextAddEllipseInRect") })
-	_register("CGContextAddLineToPoint", func() { purego.RegisterLibFunc(&_fnCGContextAddLineToPoint, _coregraphicsLib, "CGContextAddLineToPoint") })
+	_register("CGContextAddCurveToPoint", func() {
+		purego.RegisterLibFunc(&_fnCGContextAddCurveToPoint, _coregraphicsLib, "CGContextAddCurveToPoint")
+	})
+	_register("CGContextAddEllipseInRect", func() {
+		purego.RegisterLibFunc(&_fnCGContextAddEllipseInRect, _coregraphicsLib, "CGContextAddEllipseInRect")
+	})
+	_register("CGContextAddLineToPoint", func() {
+		purego.RegisterLibFunc(&_fnCGContextAddLineToPoint, _coregraphicsLib, "CGContextAddLineToPoint")
+	})
 	_register("CGContextAddLines", func() { purego.RegisterLibFunc(&_fnCGContextAddLines, _coregraphicsLib, "CGContextAddLines") })
 	_register("CGContextAddPath", func() { purego.RegisterLibFunc(&_fnCGContextAddPath, _coregraphicsLib, "CGContextAddPath") })
-	_register("CGContextAddQuadCurveToPoint", func() { purego.RegisterLibFunc(&_fnCGContextAddQuadCurveToPoint, _coregraphicsLib, "CGContextAddQuadCurveToPoint") })
+	_register("CGContextAddQuadCurveToPoint", func() {
+		purego.RegisterLibFunc(&_fnCGContextAddQuadCurveToPoint, _coregraphicsLib, "CGContextAddQuadCurveToPoint")
+	})
 	_register("CGContextAddRect", func() { purego.RegisterLibFunc(&_fnCGContextAddRect, _coregraphicsLib, "CGContextAddRect") })
 	_register("CGContextAddRects", func() { purego.RegisterLibFunc(&_fnCGContextAddRects, _coregraphicsLib, "CGContextAddRects") })
 	_register("CGContextBeginPage", func() { purego.RegisterLibFunc(&_fnCGContextBeginPage, _coregraphicsLib, "CGContextBeginPage") })
 	_register("CGContextBeginPath", func() { purego.RegisterLibFunc(&_fnCGContextBeginPath, _coregraphicsLib, "CGContextBeginPath") })
-	_register("CGContextBeginTransparencyLayer", func() { purego.RegisterLibFunc(&_fnCGContextBeginTransparencyLayer, _coregraphicsLib, "CGContextBeginTransparencyLayer") })
-	_register("CGContextBeginTransparencyLayerWithRect", func() { purego.RegisterLibFunc(&_fnCGContextBeginTransparencyLayerWithRect, _coregraphicsLib, "CGContextBeginTransparencyLayerWithRect") })
+	_register("CGContextBeginTransparencyLayer", func() {
+		purego.RegisterLibFunc(&_fnCGContextBeginTransparencyLayer, _coregraphicsLib, "CGContextBeginTransparencyLayer")
+	})
+	_register("CGContextBeginTransparencyLayerWithRect", func() {
+		purego.RegisterLibFunc(&_fnCGContextBeginTransparencyLayerWithRect, _coregraphicsLib, "CGContextBeginTransparencyLayerWithRect")
+	})
 	_register("CGContextClearRect", func() { purego.RegisterLibFunc(&_fnCGContextClearRect, _coregraphicsLib, "CGContextClearRect") })
 	_register("CGContextClip", func() { purego.RegisterLibFunc(&_fnCGContextClip, _coregraphicsLib, "CGContextClip") })
 	_register("CGContextClipToMask", func() { purego.RegisterLibFunc(&_fnCGContextClipToMask, _coregraphicsLib, "CGContextClipToMask") })
@@ -177,50 +349,102 @@ func _loadLibrary() {
 	_register("CGContextClipToRects", func() { purego.RegisterLibFunc(&_fnCGContextClipToRects, _coregraphicsLib, "CGContextClipToRects") })
 	_register("CGContextClosePath", func() { purego.RegisterLibFunc(&_fnCGContextClosePath, _coregraphicsLib, "CGContextClosePath") })
 	_register("CGContextConcatCTM", func() { purego.RegisterLibFunc(&_fnCGContextConcatCTM, _coregraphicsLib, "CGContextConcatCTM") })
-	_register("CGContextConvertPointToDeviceSpace", func() { purego.RegisterLibFunc(&_fnCGContextConvertPointToDeviceSpace, _coregraphicsLib, "CGContextConvertPointToDeviceSpace") })
-	_register("CGContextConvertPointToUserSpace", func() { purego.RegisterLibFunc(&_fnCGContextConvertPointToUserSpace, _coregraphicsLib, "CGContextConvertPointToUserSpace") })
-	_register("CGContextConvertRectToDeviceSpace", func() { purego.RegisterLibFunc(&_fnCGContextConvertRectToDeviceSpace, _coregraphicsLib, "CGContextConvertRectToDeviceSpace") })
-	_register("CGContextConvertRectToUserSpace", func() { purego.RegisterLibFunc(&_fnCGContextConvertRectToUserSpace, _coregraphicsLib, "CGContextConvertRectToUserSpace") })
-	_register("CGContextConvertSizeToDeviceSpace", func() { purego.RegisterLibFunc(&_fnCGContextConvertSizeToDeviceSpace, _coregraphicsLib, "CGContextConvertSizeToDeviceSpace") })
-	_register("CGContextConvertSizeToUserSpace", func() { purego.RegisterLibFunc(&_fnCGContextConvertSizeToUserSpace, _coregraphicsLib, "CGContextConvertSizeToUserSpace") })
+	_register("CGContextConvertPointToDeviceSpace", func() {
+		purego.RegisterLibFunc(&_fnCGContextConvertPointToDeviceSpace, _coregraphicsLib, "CGContextConvertPointToDeviceSpace")
+	})
+	_register("CGContextConvertPointToUserSpace", func() {
+		purego.RegisterLibFunc(&_fnCGContextConvertPointToUserSpace, _coregraphicsLib, "CGContextConvertPointToUserSpace")
+	})
+	_register("CGContextConvertRectToDeviceSpace", func() {
+		purego.RegisterLibFunc(&_fnCGContextConvertRectToDeviceSpace, _coregraphicsLib, "CGContextConvertRectToDeviceSpace")
+	})
+	_register("CGContextConvertRectToUserSpace", func() {
+		purego.RegisterLibFunc(&_fnCGContextConvertRectToUserSpace, _coregraphicsLib, "CGContextConvertRectToUserSpace")
+	})
+	_register("CGContextConvertSizeToDeviceSpace", func() {
+		purego.RegisterLibFunc(&_fnCGContextConvertSizeToDeviceSpace, _coregraphicsLib, "CGContextConvertSizeToDeviceSpace")
+	})
+	_register("CGContextConvertSizeToUserSpace", func() {
+		purego.RegisterLibFunc(&_fnCGContextConvertSizeToUserSpace, _coregraphicsLib, "CGContextConvertSizeToUserSpace")
+	})
 	_register("CGContextCopyPath", func() { purego.RegisterLibFunc(&_fnCGContextCopyPath, _coregraphicsLib, "CGContextCopyPath") })
-	_register("CGContextDrawConicGradient", func() { purego.RegisterLibFunc(&_fnCGContextDrawConicGradient, _coregraphicsLib, "CGContextDrawConicGradient") })
+	_register("CGContextDrawConicGradient", func() {
+		purego.RegisterLibFunc(&_fnCGContextDrawConicGradient, _coregraphicsLib, "CGContextDrawConicGradient")
+	})
 	_register("CGContextDrawImage", func() { purego.RegisterLibFunc(&_fnCGContextDrawImage, _coregraphicsLib, "CGContextDrawImage") })
-	_register("CGContextDrawImageApplyingToneMapping", func() { purego.RegisterLibFunc(&_fnCGContextDrawImageApplyingToneMapping, _coregraphicsLib, "CGContextDrawImageApplyingToneMapping") })
-	_register("CGContextDrawLayerAtPoint", func() { purego.RegisterLibFunc(&_fnCGContextDrawLayerAtPoint, _coregraphicsLib, "CGContextDrawLayerAtPoint") })
-	_register("CGContextDrawLayerInRect", func() { purego.RegisterLibFunc(&_fnCGContextDrawLayerInRect, _coregraphicsLib, "CGContextDrawLayerInRect") })
-	_register("CGContextDrawLinearGradient", func() { purego.RegisterLibFunc(&_fnCGContextDrawLinearGradient, _coregraphicsLib, "CGContextDrawLinearGradient") })
-	_register("CGContextDrawPDFDocument", func() { purego.RegisterLibFunc(&_fnCGContextDrawPDFDocument, _coregraphicsLib, "CGContextDrawPDFDocument") })
+	_register("CGContextDrawImageApplyingToneMapping", func() {
+		purego.RegisterLibFunc(&_fnCGContextDrawImageApplyingToneMapping, _coregraphicsLib, "CGContextDrawImageApplyingToneMapping")
+	})
+	_register("CGContextDrawLayerAtPoint", func() {
+		purego.RegisterLibFunc(&_fnCGContextDrawLayerAtPoint, _coregraphicsLib, "CGContextDrawLayerAtPoint")
+	})
+	_register("CGContextDrawLayerInRect", func() {
+		purego.RegisterLibFunc(&_fnCGContextDrawLayerInRect, _coregraphicsLib, "CGContextDrawLayerInRect")
+	})
+	_register("CGContextDrawLinearGradient", func() {
+		purego.RegisterLibFunc(&_fnCGContextDrawLinearGradient, _coregraphicsLib, "CGContextDrawLinearGradient")
+	})
+	_register("CGContextDrawPDFDocument", func() {
+		purego.RegisterLibFunc(&_fnCGContextDrawPDFDocument, _coregraphicsLib, "CGContextDrawPDFDocument")
+	})
 	_register("CGContextDrawPDFPage", func() { purego.RegisterLibFunc(&_fnCGContextDrawPDFPage, _coregraphicsLib, "CGContextDrawPDFPage") })
 	_register("CGContextDrawPath", func() { purego.RegisterLibFunc(&_fnCGContextDrawPath, _coregraphicsLib, "CGContextDrawPath") })
-	_register("CGContextDrawRadialGradient", func() { purego.RegisterLibFunc(&_fnCGContextDrawRadialGradient, _coregraphicsLib, "CGContextDrawRadialGradient") })
+	_register("CGContextDrawRadialGradient", func() {
+		purego.RegisterLibFunc(&_fnCGContextDrawRadialGradient, _coregraphicsLib, "CGContextDrawRadialGradient")
+	})
 	_register("CGContextDrawShading", func() { purego.RegisterLibFunc(&_fnCGContextDrawShading, _coregraphicsLib, "CGContextDrawShading") })
-	_register("CGContextDrawTiledImage", func() { purego.RegisterLibFunc(&_fnCGContextDrawTiledImage, _coregraphicsLib, "CGContextDrawTiledImage") })
+	_register("CGContextDrawTiledImage", func() {
+		purego.RegisterLibFunc(&_fnCGContextDrawTiledImage, _coregraphicsLib, "CGContextDrawTiledImage")
+	})
 	_register("CGContextEOClip", func() { purego.RegisterLibFunc(&_fnCGContextEOClip, _coregraphicsLib, "CGContextEOClip") })
 	_register("CGContextEOFillPath", func() { purego.RegisterLibFunc(&_fnCGContextEOFillPath, _coregraphicsLib, "CGContextEOFillPath") })
 	_register("CGContextEndPage", func() { purego.RegisterLibFunc(&_fnCGContextEndPage, _coregraphicsLib, "CGContextEndPage") })
-	_register("CGContextEndTransparencyLayer", func() { purego.RegisterLibFunc(&_fnCGContextEndTransparencyLayer, _coregraphicsLib, "CGContextEndTransparencyLayer") })
-	_register("CGContextFillEllipseInRect", func() { purego.RegisterLibFunc(&_fnCGContextFillEllipseInRect, _coregraphicsLib, "CGContextFillEllipseInRect") })
+	_register("CGContextEndTransparencyLayer", func() {
+		purego.RegisterLibFunc(&_fnCGContextEndTransparencyLayer, _coregraphicsLib, "CGContextEndTransparencyLayer")
+	})
+	_register("CGContextFillEllipseInRect", func() {
+		purego.RegisterLibFunc(&_fnCGContextFillEllipseInRect, _coregraphicsLib, "CGContextFillEllipseInRect")
+	})
 	_register("CGContextFillPath", func() { purego.RegisterLibFunc(&_fnCGContextFillPath, _coregraphicsLib, "CGContextFillPath") })
 	_register("CGContextFillRect", func() { purego.RegisterLibFunc(&_fnCGContextFillRect, _coregraphicsLib, "CGContextFillRect") })
 	_register("CGContextFillRects", func() { purego.RegisterLibFunc(&_fnCGContextFillRects, _coregraphicsLib, "CGContextFillRects") })
 	_register("CGContextFlush", func() { purego.RegisterLibFunc(&_fnCGContextFlush, _coregraphicsLib, "CGContextFlush") })
 	_register("CGContextGetCTM", func() { purego.RegisterLibFunc(&_fnCGContextGetCTM, _coregraphicsLib, "CGContextGetCTM") })
-	_register("CGContextGetClipBoundingBox", func() { purego.RegisterLibFunc(&_fnCGContextGetClipBoundingBox, _coregraphicsLib, "CGContextGetClipBoundingBox") })
-	_register("CGContextGetContentToneMappingInfo", func() { purego.RegisterLibFunc(&_fnCGContextGetContentToneMappingInfo, _coregraphicsLib, "CGContextGetContentToneMappingInfo") })
-	_register("CGContextGetEDRTargetHeadroom", func() { purego.RegisterLibFunc(&_fnCGContextGetEDRTargetHeadroom, _coregraphicsLib, "CGContextGetEDRTargetHeadroom") })
-	_register("CGContextGetInterpolationQuality", func() { purego.RegisterLibFunc(&_fnCGContextGetInterpolationQuality, _coregraphicsLib, "CGContextGetInterpolationQuality") })
-	_register("CGContextGetPathBoundingBox", func() { purego.RegisterLibFunc(&_fnCGContextGetPathBoundingBox, _coregraphicsLib, "CGContextGetPathBoundingBox") })
-	_register("CGContextGetPathCurrentPoint", func() { purego.RegisterLibFunc(&_fnCGContextGetPathCurrentPoint, _coregraphicsLib, "CGContextGetPathCurrentPoint") })
+	_register("CGContextGetClipBoundingBox", func() {
+		purego.RegisterLibFunc(&_fnCGContextGetClipBoundingBox, _coregraphicsLib, "CGContextGetClipBoundingBox")
+	})
+	_register("CGContextGetContentToneMappingInfo", func() {
+		purego.RegisterLibFunc(&_fnCGContextGetContentToneMappingInfo, _coregraphicsLib, "CGContextGetContentToneMappingInfo")
+	})
+	_register("CGContextGetEDRTargetHeadroom", func() {
+		purego.RegisterLibFunc(&_fnCGContextGetEDRTargetHeadroom, _coregraphicsLib, "CGContextGetEDRTargetHeadroom")
+	})
+	_register("CGContextGetInterpolationQuality", func() {
+		purego.RegisterLibFunc(&_fnCGContextGetInterpolationQuality, _coregraphicsLib, "CGContextGetInterpolationQuality")
+	})
+	_register("CGContextGetPathBoundingBox", func() {
+		purego.RegisterLibFunc(&_fnCGContextGetPathBoundingBox, _coregraphicsLib, "CGContextGetPathBoundingBox")
+	})
+	_register("CGContextGetPathCurrentPoint", func() {
+		purego.RegisterLibFunc(&_fnCGContextGetPathCurrentPoint, _coregraphicsLib, "CGContextGetPathCurrentPoint")
+	})
 	_register("CGContextGetTextMatrix", func() { purego.RegisterLibFunc(&_fnCGContextGetTextMatrix, _coregraphicsLib, "CGContextGetTextMatrix") })
-	_register("CGContextGetTextPosition", func() { purego.RegisterLibFunc(&_fnCGContextGetTextPosition, _coregraphicsLib, "CGContextGetTextPosition") })
+	_register("CGContextGetTextPosition", func() {
+		purego.RegisterLibFunc(&_fnCGContextGetTextPosition, _coregraphicsLib, "CGContextGetTextPosition")
+	})
 	_register("CGContextGetTypeID", func() { purego.RegisterLibFunc(&_fnCGContextGetTypeID, _coregraphicsLib, "CGContextGetTypeID") })
-	_register("CGContextGetUserSpaceToDeviceSpaceTransform", func() { purego.RegisterLibFunc(&_fnCGContextGetUserSpaceToDeviceSpaceTransform, _coregraphicsLib, "CGContextGetUserSpaceToDeviceSpaceTransform") })
+	_register("CGContextGetUserSpaceToDeviceSpaceTransform", func() {
+		purego.RegisterLibFunc(&_fnCGContextGetUserSpaceToDeviceSpaceTransform, _coregraphicsLib, "CGContextGetUserSpaceToDeviceSpaceTransform")
+	})
 	_register("CGContextIsPathEmpty", func() { purego.RegisterLibFunc(&_fnCGContextIsPathEmpty, _coregraphicsLib, "CGContextIsPathEmpty") })
 	_register("CGContextMoveToPoint", func() { purego.RegisterLibFunc(&_fnCGContextMoveToPoint, _coregraphicsLib, "CGContextMoveToPoint") })
-	_register("CGContextPathContainsPoint", func() { purego.RegisterLibFunc(&_fnCGContextPathContainsPoint, _coregraphicsLib, "CGContextPathContainsPoint") })
+	_register("CGContextPathContainsPoint", func() {
+		purego.RegisterLibFunc(&_fnCGContextPathContainsPoint, _coregraphicsLib, "CGContextPathContainsPoint")
+	})
 	_register("CGContextRelease", func() { purego.RegisterLibFunc(&_fnCGContextRelease, _coregraphicsLib, "CGContextRelease") })
-	_register("CGContextReplacePathWithStrokedPath", func() { purego.RegisterLibFunc(&_fnCGContextReplacePathWithStrokedPath, _coregraphicsLib, "CGContextReplacePathWithStrokedPath") })
+	_register("CGContextReplacePathWithStrokedPath", func() {
+		purego.RegisterLibFunc(&_fnCGContextReplacePathWithStrokedPath, _coregraphicsLib, "CGContextReplacePathWithStrokedPath")
+	})
 	_register("CGContextResetClip", func() { purego.RegisterLibFunc(&_fnCGContextResetClip, _coregraphicsLib, "CGContextResetClip") })
 	_register("CGContextRestoreGState", func() { purego.RegisterLibFunc(&_fnCGContextRestoreGState, _coregraphicsLib, "CGContextRestoreGState") })
 	_register("CGContextRetain", func() { purego.RegisterLibFunc(&_fnCGContextRetain, _coregraphicsLib, "CGContextRetain") })
@@ -228,222 +452,462 @@ func _loadLibrary() {
 	_register("CGContextSaveGState", func() { purego.RegisterLibFunc(&_fnCGContextSaveGState, _coregraphicsLib, "CGContextSaveGState") })
 	_register("CGContextScaleCTM", func() { purego.RegisterLibFunc(&_fnCGContextScaleCTM, _coregraphicsLib, "CGContextScaleCTM") })
 	_register("CGContextSelectFont", func() { purego.RegisterLibFunc(&_fnCGContextSelectFont, _coregraphicsLib, "CGContextSelectFont") })
-	_register("CGContextSetAllowsAntialiasing", func() { purego.RegisterLibFunc(&_fnCGContextSetAllowsAntialiasing, _coregraphicsLib, "CGContextSetAllowsAntialiasing") })
-	_register("CGContextSetAllowsFontSmoothing", func() { purego.RegisterLibFunc(&_fnCGContextSetAllowsFontSmoothing, _coregraphicsLib, "CGContextSetAllowsFontSmoothing") })
-	_register("CGContextSetAllowsFontSubpixelPositioning", func() { purego.RegisterLibFunc(&_fnCGContextSetAllowsFontSubpixelPositioning, _coregraphicsLib, "CGContextSetAllowsFontSubpixelPositioning") })
-	_register("CGContextSetAllowsFontSubpixelQuantization", func() { purego.RegisterLibFunc(&_fnCGContextSetAllowsFontSubpixelQuantization, _coregraphicsLib, "CGContextSetAllowsFontSubpixelQuantization") })
+	_register("CGContextSetAllowsAntialiasing", func() {
+		purego.RegisterLibFunc(&_fnCGContextSetAllowsAntialiasing, _coregraphicsLib, "CGContextSetAllowsAntialiasing")
+	})
+	_register("CGContextSetAllowsFontSmoothing", func() {
+		purego.RegisterLibFunc(&_fnCGContextSetAllowsFontSmoothing, _coregraphicsLib, "CGContextSetAllowsFontSmoothing")
+	})
+	_register("CGContextSetAllowsFontSubpixelPositioning", func() {
+		purego.RegisterLibFunc(&_fnCGContextSetAllowsFontSubpixelPositioning, _coregraphicsLib, "CGContextSetAllowsFontSubpixelPositioning")
+	})
+	_register("CGContextSetAllowsFontSubpixelQuantization", func() {
+		purego.RegisterLibFunc(&_fnCGContextSetAllowsFontSubpixelQuantization, _coregraphicsLib, "CGContextSetAllowsFontSubpixelQuantization")
+	})
 	_register("CGContextSetAlpha", func() { purego.RegisterLibFunc(&_fnCGContextSetAlpha, _coregraphicsLib, "CGContextSetAlpha") })
 	_register("CGContextSetBlendMode", func() { purego.RegisterLibFunc(&_fnCGContextSetBlendMode, _coregraphicsLib, "CGContextSetBlendMode") })
-	_register("CGContextSetCMYKFillColor", func() { purego.RegisterLibFunc(&_fnCGContextSetCMYKFillColor, _coregraphicsLib, "CGContextSetCMYKFillColor") })
-	_register("CGContextSetCMYKStrokeColor", func() { purego.RegisterLibFunc(&_fnCGContextSetCMYKStrokeColor, _coregraphicsLib, "CGContextSetCMYKStrokeColor") })
-	_register("CGContextSetCharacterSpacing", func() { purego.RegisterLibFunc(&_fnCGContextSetCharacterSpacing, _coregraphicsLib, "CGContextSetCharacterSpacing") })
-	_register("CGContextSetContentToneMappingInfo", func() { purego.RegisterLibFunc(&_fnCGContextSetContentToneMappingInfo, _coregraphicsLib, "CGContextSetContentToneMappingInfo") })
-	_register("CGContextSetEDRTargetHeadroom", func() { purego.RegisterLibFunc(&_fnCGContextSetEDRTargetHeadroom, _coregraphicsLib, "CGContextSetEDRTargetHeadroom") })
+	_register("CGContextSetCMYKFillColor", func() {
+		purego.RegisterLibFunc(&_fnCGContextSetCMYKFillColor, _coregraphicsLib, "CGContextSetCMYKFillColor")
+	})
+	_register("CGContextSetCMYKStrokeColor", func() {
+		purego.RegisterLibFunc(&_fnCGContextSetCMYKStrokeColor, _coregraphicsLib, "CGContextSetCMYKStrokeColor")
+	})
+	_register("CGContextSetCharacterSpacing", func() {
+		purego.RegisterLibFunc(&_fnCGContextSetCharacterSpacing, _coregraphicsLib, "CGContextSetCharacterSpacing")
+	})
+	_register("CGContextSetContentToneMappingInfo", func() {
+		purego.RegisterLibFunc(&_fnCGContextSetContentToneMappingInfo, _coregraphicsLib, "CGContextSetContentToneMappingInfo")
+	})
+	_register("CGContextSetEDRTargetHeadroom", func() {
+		purego.RegisterLibFunc(&_fnCGContextSetEDRTargetHeadroom, _coregraphicsLib, "CGContextSetEDRTargetHeadroom")
+	})
 	_register("CGContextSetFillColor", func() { purego.RegisterLibFunc(&_fnCGContextSetFillColor, _coregraphicsLib, "CGContextSetFillColor") })
-	_register("CGContextSetFillColorSpace", func() { purego.RegisterLibFunc(&_fnCGContextSetFillColorSpace, _coregraphicsLib, "CGContextSetFillColorSpace") })
-	_register("CGContextSetFillColorWithColor", func() { purego.RegisterLibFunc(&_fnCGContextSetFillColorWithColor, _coregraphicsLib, "CGContextSetFillColorWithColor") })
-	_register("CGContextSetFillPattern", func() { purego.RegisterLibFunc(&_fnCGContextSetFillPattern, _coregraphicsLib, "CGContextSetFillPattern") })
+	_register("CGContextSetFillColorSpace", func() {
+		purego.RegisterLibFunc(&_fnCGContextSetFillColorSpace, _coregraphicsLib, "CGContextSetFillColorSpace")
+	})
+	_register("CGContextSetFillColorWithColor", func() {
+		purego.RegisterLibFunc(&_fnCGContextSetFillColorWithColor, _coregraphicsLib, "CGContextSetFillColorWithColor")
+	})
+	_register("CGContextSetFillPattern", func() {
+		purego.RegisterLibFunc(&_fnCGContextSetFillPattern, _coregraphicsLib, "CGContextSetFillPattern")
+	})
 	_register("CGContextSetFlatness", func() { purego.RegisterLibFunc(&_fnCGContextSetFlatness, _coregraphicsLib, "CGContextSetFlatness") })
 	_register("CGContextSetFont", func() { purego.RegisterLibFunc(&_fnCGContextSetFont, _coregraphicsLib, "CGContextSetFont") })
 	_register("CGContextSetFontSize", func() { purego.RegisterLibFunc(&_fnCGContextSetFontSize, _coregraphicsLib, "CGContextSetFontSize") })
-	_register("CGContextSetGrayFillColor", func() { purego.RegisterLibFunc(&_fnCGContextSetGrayFillColor, _coregraphicsLib, "CGContextSetGrayFillColor") })
-	_register("CGContextSetGrayStrokeColor", func() { purego.RegisterLibFunc(&_fnCGContextSetGrayStrokeColor, _coregraphicsLib, "CGContextSetGrayStrokeColor") })
-	_register("CGContextSetInterpolationQuality", func() { purego.RegisterLibFunc(&_fnCGContextSetInterpolationQuality, _coregraphicsLib, "CGContextSetInterpolationQuality") })
+	_register("CGContextSetGrayFillColor", func() {
+		purego.RegisterLibFunc(&_fnCGContextSetGrayFillColor, _coregraphicsLib, "CGContextSetGrayFillColor")
+	})
+	_register("CGContextSetGrayStrokeColor", func() {
+		purego.RegisterLibFunc(&_fnCGContextSetGrayStrokeColor, _coregraphicsLib, "CGContextSetGrayStrokeColor")
+	})
+	_register("CGContextSetInterpolationQuality", func() {
+		purego.RegisterLibFunc(&_fnCGContextSetInterpolationQuality, _coregraphicsLib, "CGContextSetInterpolationQuality")
+	})
 	_register("CGContextSetLineCap", func() { purego.RegisterLibFunc(&_fnCGContextSetLineCap, _coregraphicsLib, "CGContextSetLineCap") })
 	_register("CGContextSetLineDash", func() { purego.RegisterLibFunc(&_fnCGContextSetLineDash, _coregraphicsLib, "CGContextSetLineDash") })
 	_register("CGContextSetLineJoin", func() { purego.RegisterLibFunc(&_fnCGContextSetLineJoin, _coregraphicsLib, "CGContextSetLineJoin") })
 	_register("CGContextSetLineWidth", func() { purego.RegisterLibFunc(&_fnCGContextSetLineWidth, _coregraphicsLib, "CGContextSetLineWidth") })
 	_register("CGContextSetMiterLimit", func() { purego.RegisterLibFunc(&_fnCGContextSetMiterLimit, _coregraphicsLib, "CGContextSetMiterLimit") })
-	_register("CGContextSetPatternPhase", func() { purego.RegisterLibFunc(&_fnCGContextSetPatternPhase, _coregraphicsLib, "CGContextSetPatternPhase") })
-	_register("CGContextSetRGBFillColor", func() { purego.RegisterLibFunc(&_fnCGContextSetRGBFillColor, _coregraphicsLib, "CGContextSetRGBFillColor") })
-	_register("CGContextSetRGBStrokeColor", func() { purego.RegisterLibFunc(&_fnCGContextSetRGBStrokeColor, _coregraphicsLib, "CGContextSetRGBStrokeColor") })
-	_register("CGContextSetRenderingIntent", func() { purego.RegisterLibFunc(&_fnCGContextSetRenderingIntent, _coregraphicsLib, "CGContextSetRenderingIntent") })
+	_register("CGContextSetPatternPhase", func() {
+		purego.RegisterLibFunc(&_fnCGContextSetPatternPhase, _coregraphicsLib, "CGContextSetPatternPhase")
+	})
+	_register("CGContextSetRGBFillColor", func() {
+		purego.RegisterLibFunc(&_fnCGContextSetRGBFillColor, _coregraphicsLib, "CGContextSetRGBFillColor")
+	})
+	_register("CGContextSetRGBStrokeColor", func() {
+		purego.RegisterLibFunc(&_fnCGContextSetRGBStrokeColor, _coregraphicsLib, "CGContextSetRGBStrokeColor")
+	})
+	_register("CGContextSetRenderingIntent", func() {
+		purego.RegisterLibFunc(&_fnCGContextSetRenderingIntent, _coregraphicsLib, "CGContextSetRenderingIntent")
+	})
 	_register("CGContextSetShadow", func() { purego.RegisterLibFunc(&_fnCGContextSetShadow, _coregraphicsLib, "CGContextSetShadow") })
-	_register("CGContextSetShadowWithColor", func() { purego.RegisterLibFunc(&_fnCGContextSetShadowWithColor, _coregraphicsLib, "CGContextSetShadowWithColor") })
-	_register("CGContextSetShouldAntialias", func() { purego.RegisterLibFunc(&_fnCGContextSetShouldAntialias, _coregraphicsLib, "CGContextSetShouldAntialias") })
-	_register("CGContextSetShouldSmoothFonts", func() { purego.RegisterLibFunc(&_fnCGContextSetShouldSmoothFonts, _coregraphicsLib, "CGContextSetShouldSmoothFonts") })
-	_register("CGContextSetShouldSubpixelPositionFonts", func() { purego.RegisterLibFunc(&_fnCGContextSetShouldSubpixelPositionFonts, _coregraphicsLib, "CGContextSetShouldSubpixelPositionFonts") })
-	_register("CGContextSetShouldSubpixelQuantizeFonts", func() { purego.RegisterLibFunc(&_fnCGContextSetShouldSubpixelQuantizeFonts, _coregraphicsLib, "CGContextSetShouldSubpixelQuantizeFonts") })
-	_register("CGContextSetStrokeColor", func() { purego.RegisterLibFunc(&_fnCGContextSetStrokeColor, _coregraphicsLib, "CGContextSetStrokeColor") })
-	_register("CGContextSetStrokeColorSpace", func() { purego.RegisterLibFunc(&_fnCGContextSetStrokeColorSpace, _coregraphicsLib, "CGContextSetStrokeColorSpace") })
-	_register("CGContextSetStrokeColorWithColor", func() { purego.RegisterLibFunc(&_fnCGContextSetStrokeColorWithColor, _coregraphicsLib, "CGContextSetStrokeColorWithColor") })
-	_register("CGContextSetStrokePattern", func() { purego.RegisterLibFunc(&_fnCGContextSetStrokePattern, _coregraphicsLib, "CGContextSetStrokePattern") })
-	_register("CGContextSetTextDrawingMode", func() { purego.RegisterLibFunc(&_fnCGContextSetTextDrawingMode, _coregraphicsLib, "CGContextSetTextDrawingMode") })
+	_register("CGContextSetShadowWithColor", func() {
+		purego.RegisterLibFunc(&_fnCGContextSetShadowWithColor, _coregraphicsLib, "CGContextSetShadowWithColor")
+	})
+	_register("CGContextSetShouldAntialias", func() {
+		purego.RegisterLibFunc(&_fnCGContextSetShouldAntialias, _coregraphicsLib, "CGContextSetShouldAntialias")
+	})
+	_register("CGContextSetShouldSmoothFonts", func() {
+		purego.RegisterLibFunc(&_fnCGContextSetShouldSmoothFonts, _coregraphicsLib, "CGContextSetShouldSmoothFonts")
+	})
+	_register("CGContextSetShouldSubpixelPositionFonts", func() {
+		purego.RegisterLibFunc(&_fnCGContextSetShouldSubpixelPositionFonts, _coregraphicsLib, "CGContextSetShouldSubpixelPositionFonts")
+	})
+	_register("CGContextSetShouldSubpixelQuantizeFonts", func() {
+		purego.RegisterLibFunc(&_fnCGContextSetShouldSubpixelQuantizeFonts, _coregraphicsLib, "CGContextSetShouldSubpixelQuantizeFonts")
+	})
+	_register("CGContextSetStrokeColor", func() {
+		purego.RegisterLibFunc(&_fnCGContextSetStrokeColor, _coregraphicsLib, "CGContextSetStrokeColor")
+	})
+	_register("CGContextSetStrokeColorSpace", func() {
+		purego.RegisterLibFunc(&_fnCGContextSetStrokeColorSpace, _coregraphicsLib, "CGContextSetStrokeColorSpace")
+	})
+	_register("CGContextSetStrokeColorWithColor", func() {
+		purego.RegisterLibFunc(&_fnCGContextSetStrokeColorWithColor, _coregraphicsLib, "CGContextSetStrokeColorWithColor")
+	})
+	_register("CGContextSetStrokePattern", func() {
+		purego.RegisterLibFunc(&_fnCGContextSetStrokePattern, _coregraphicsLib, "CGContextSetStrokePattern")
+	})
+	_register("CGContextSetTextDrawingMode", func() {
+		purego.RegisterLibFunc(&_fnCGContextSetTextDrawingMode, _coregraphicsLib, "CGContextSetTextDrawingMode")
+	})
 	_register("CGContextSetTextMatrix", func() { purego.RegisterLibFunc(&_fnCGContextSetTextMatrix, _coregraphicsLib, "CGContextSetTextMatrix") })
-	_register("CGContextSetTextPosition", func() { purego.RegisterLibFunc(&_fnCGContextSetTextPosition, _coregraphicsLib, "CGContextSetTextPosition") })
+	_register("CGContextSetTextPosition", func() {
+		purego.RegisterLibFunc(&_fnCGContextSetTextPosition, _coregraphicsLib, "CGContextSetTextPosition")
+	})
 	_register("CGContextShowGlyphs", func() { purego.RegisterLibFunc(&_fnCGContextShowGlyphs, _coregraphicsLib, "CGContextShowGlyphs") })
-	_register("CGContextShowGlyphsAtPoint", func() { purego.RegisterLibFunc(&_fnCGContextShowGlyphsAtPoint, _coregraphicsLib, "CGContextShowGlyphsAtPoint") })
-	_register("CGContextShowGlyphsAtPositions", func() { purego.RegisterLibFunc(&_fnCGContextShowGlyphsAtPositions, _coregraphicsLib, "CGContextShowGlyphsAtPositions") })
-	_register("CGContextShowGlyphsWithAdvances", func() { purego.RegisterLibFunc(&_fnCGContextShowGlyphsWithAdvances, _coregraphicsLib, "CGContextShowGlyphsWithAdvances") })
+	_register("CGContextShowGlyphsAtPoint", func() {
+		purego.RegisterLibFunc(&_fnCGContextShowGlyphsAtPoint, _coregraphicsLib, "CGContextShowGlyphsAtPoint")
+	})
+	_register("CGContextShowGlyphsAtPositions", func() {
+		purego.RegisterLibFunc(&_fnCGContextShowGlyphsAtPositions, _coregraphicsLib, "CGContextShowGlyphsAtPositions")
+	})
+	_register("CGContextShowGlyphsWithAdvances", func() {
+		purego.RegisterLibFunc(&_fnCGContextShowGlyphsWithAdvances, _coregraphicsLib, "CGContextShowGlyphsWithAdvances")
+	})
 	_register("CGContextShowText", func() { purego.RegisterLibFunc(&_fnCGContextShowText, _coregraphicsLib, "CGContextShowText") })
-	_register("CGContextShowTextAtPoint", func() { purego.RegisterLibFunc(&_fnCGContextShowTextAtPoint, _coregraphicsLib, "CGContextShowTextAtPoint") })
-	_register("CGContextStrokeEllipseInRect", func() { purego.RegisterLibFunc(&_fnCGContextStrokeEllipseInRect, _coregraphicsLib, "CGContextStrokeEllipseInRect") })
-	_register("CGContextStrokeLineSegments", func() { purego.RegisterLibFunc(&_fnCGContextStrokeLineSegments, _coregraphicsLib, "CGContextStrokeLineSegments") })
+	_register("CGContextShowTextAtPoint", func() {
+		purego.RegisterLibFunc(&_fnCGContextShowTextAtPoint, _coregraphicsLib, "CGContextShowTextAtPoint")
+	})
+	_register("CGContextStrokeEllipseInRect", func() {
+		purego.RegisterLibFunc(&_fnCGContextStrokeEllipseInRect, _coregraphicsLib, "CGContextStrokeEllipseInRect")
+	})
+	_register("CGContextStrokeLineSegments", func() {
+		purego.RegisterLibFunc(&_fnCGContextStrokeLineSegments, _coregraphicsLib, "CGContextStrokeLineSegments")
+	})
 	_register("CGContextStrokePath", func() { purego.RegisterLibFunc(&_fnCGContextStrokePath, _coregraphicsLib, "CGContextStrokePath") })
 	_register("CGContextStrokeRect", func() { purego.RegisterLibFunc(&_fnCGContextStrokeRect, _coregraphicsLib, "CGContextStrokeRect") })
-	_register("CGContextStrokeRectWithWidth", func() { purego.RegisterLibFunc(&_fnCGContextStrokeRectWithWidth, _coregraphicsLib, "CGContextStrokeRectWithWidth") })
+	_register("CGContextStrokeRectWithWidth", func() {
+		purego.RegisterLibFunc(&_fnCGContextStrokeRectWithWidth, _coregraphicsLib, "CGContextStrokeRectWithWidth")
+	})
 	_register("CGContextSynchronize", func() { purego.RegisterLibFunc(&_fnCGContextSynchronize, _coregraphicsLib, "CGContextSynchronize") })
-	_register("CGContextSynchronizeAttributes", func() { purego.RegisterLibFunc(&_fnCGContextSynchronizeAttributes, _coregraphicsLib, "CGContextSynchronizeAttributes") })
+	_register("CGContextSynchronizeAttributes", func() {
+		purego.RegisterLibFunc(&_fnCGContextSynchronizeAttributes, _coregraphicsLib, "CGContextSynchronizeAttributes")
+	})
 	_register("CGContextTranslateCTM", func() { purego.RegisterLibFunc(&_fnCGContextTranslateCTM, _coregraphicsLib, "CGContextTranslateCTM") })
-	_register("CGConvertColorDataWithFormat", func() { purego.RegisterLibFunc(&_fnCGConvertColorDataWithFormat, _coregraphicsLib, "CGConvertColorDataWithFormat") })
-	_register("CGCursorIsDrawnInFramebuffer", func() { purego.RegisterLibFunc(&_fnCGCursorIsDrawnInFramebuffer, _coregraphicsLib, "CGCursorIsDrawnInFramebuffer") })
+	_register("CGConvertColorDataWithFormat", func() {
+		purego.RegisterLibFunc(&_fnCGConvertColorDataWithFormat, _coregraphicsLib, "CGConvertColorDataWithFormat")
+	})
+	_register("CGCursorIsDrawnInFramebuffer", func() {
+		purego.RegisterLibFunc(&_fnCGCursorIsDrawnInFramebuffer, _coregraphicsLib, "CGCursorIsDrawnInFramebuffer")
+	})
 	_register("CGCursorIsVisible", func() { purego.RegisterLibFunc(&_fnCGCursorIsVisible, _coregraphicsLib, "CGCursorIsVisible") })
 	_register("CGDataConsumerCreate", func() { purego.RegisterLibFunc(&_fnCGDataConsumerCreate, _coregraphicsLib, "CGDataConsumerCreate") })
-	_register("CGDataConsumerCreateWithCFData", func() { purego.RegisterLibFunc(&_fnCGDataConsumerCreateWithCFData, _coregraphicsLib, "CGDataConsumerCreateWithCFData") })
-	_register("CGDataConsumerCreateWithURL", func() { purego.RegisterLibFunc(&_fnCGDataConsumerCreateWithURL, _coregraphicsLib, "CGDataConsumerCreateWithURL") })
-	_register("CGDataConsumerGetTypeID", func() { purego.RegisterLibFunc(&_fnCGDataConsumerGetTypeID, _coregraphicsLib, "CGDataConsumerGetTypeID") })
+	_register("CGDataConsumerCreateWithCFData", func() {
+		purego.RegisterLibFunc(&_fnCGDataConsumerCreateWithCFData, _coregraphicsLib, "CGDataConsumerCreateWithCFData")
+	})
+	_register("CGDataConsumerCreateWithURL", func() {
+		purego.RegisterLibFunc(&_fnCGDataConsumerCreateWithURL, _coregraphicsLib, "CGDataConsumerCreateWithURL")
+	})
+	_register("CGDataConsumerGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnCGDataConsumerGetTypeID, _coregraphicsLib, "CGDataConsumerGetTypeID")
+	})
 	_register("CGDataConsumerRelease", func() { purego.RegisterLibFunc(&_fnCGDataConsumerRelease, _coregraphicsLib, "CGDataConsumerRelease") })
 	_register("CGDataConsumerRetain", func() { purego.RegisterLibFunc(&_fnCGDataConsumerRetain, _coregraphicsLib, "CGDataConsumerRetain") })
 	_register("CGDataProviderCopyData", func() { purego.RegisterLibFunc(&_fnCGDataProviderCopyData, _coregraphicsLib, "CGDataProviderCopyData") })
-	_register("CGDataProviderCreateDirect", func() { purego.RegisterLibFunc(&_fnCGDataProviderCreateDirect, _coregraphicsLib, "CGDataProviderCreateDirect") })
-	_register("CGDataProviderCreateSequential", func() { purego.RegisterLibFunc(&_fnCGDataProviderCreateSequential, _coregraphicsLib, "CGDataProviderCreateSequential") })
-	_register("CGDataProviderCreateWithCFData", func() { purego.RegisterLibFunc(&_fnCGDataProviderCreateWithCFData, _coregraphicsLib, "CGDataProviderCreateWithCFData") })
-	_register("CGDataProviderCreateWithData", func() { purego.RegisterLibFunc(&_fnCGDataProviderCreateWithData, _coregraphicsLib, "CGDataProviderCreateWithData") })
-	_register("CGDataProviderCreateWithFilename", func() { purego.RegisterLibFunc(&_fnCGDataProviderCreateWithFilename, _coregraphicsLib, "CGDataProviderCreateWithFilename") })
-	_register("CGDataProviderCreateWithURL", func() { purego.RegisterLibFunc(&_fnCGDataProviderCreateWithURL, _coregraphicsLib, "CGDataProviderCreateWithURL") })
+	_register("CGDataProviderCreateDirect", func() {
+		purego.RegisterLibFunc(&_fnCGDataProviderCreateDirect, _coregraphicsLib, "CGDataProviderCreateDirect")
+	})
+	_register("CGDataProviderCreateSequential", func() {
+		purego.RegisterLibFunc(&_fnCGDataProviderCreateSequential, _coregraphicsLib, "CGDataProviderCreateSequential")
+	})
+	_register("CGDataProviderCreateWithCFData", func() {
+		purego.RegisterLibFunc(&_fnCGDataProviderCreateWithCFData, _coregraphicsLib, "CGDataProviderCreateWithCFData")
+	})
+	_register("CGDataProviderCreateWithData", func() {
+		purego.RegisterLibFunc(&_fnCGDataProviderCreateWithData, _coregraphicsLib, "CGDataProviderCreateWithData")
+	})
+	_register("CGDataProviderCreateWithFilename", func() {
+		purego.RegisterLibFunc(&_fnCGDataProviderCreateWithFilename, _coregraphicsLib, "CGDataProviderCreateWithFilename")
+	})
+	_register("CGDataProviderCreateWithURL", func() {
+		purego.RegisterLibFunc(&_fnCGDataProviderCreateWithURL, _coregraphicsLib, "CGDataProviderCreateWithURL")
+	})
 	_register("CGDataProviderGetInfo", func() { purego.RegisterLibFunc(&_fnCGDataProviderGetInfo, _coregraphicsLib, "CGDataProviderGetInfo") })
-	_register("CGDataProviderGetTypeID", func() { purego.RegisterLibFunc(&_fnCGDataProviderGetTypeID, _coregraphicsLib, "CGDataProviderGetTypeID") })
+	_register("CGDataProviderGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnCGDataProviderGetTypeID, _coregraphicsLib, "CGDataProviderGetTypeID")
+	})
 	_register("CGDataProviderRelease", func() { purego.RegisterLibFunc(&_fnCGDataProviderRelease, _coregraphicsLib, "CGDataProviderRelease") })
 	_register("CGDataProviderRetain", func() { purego.RegisterLibFunc(&_fnCGDataProviderRetain, _coregraphicsLib, "CGDataProviderRetain") })
-	_register("CGDirectDisplayCopyCurrentMetalDevice", func() { purego.RegisterLibFunc(&_fnCGDirectDisplayCopyCurrentMetalDevice, _coregraphicsLib, "CGDirectDisplayCopyCurrentMetalDevice") })
-	_register("CGDisplayAvailableModes", func() { purego.RegisterLibFunc(&_fnCGDisplayAvailableModes, _coregraphicsLib, "CGDisplayAvailableModes") })
-	_register("CGDisplayBestModeForParameters", func() { purego.RegisterLibFunc(&_fnCGDisplayBestModeForParameters, _coregraphicsLib, "CGDisplayBestModeForParameters") })
-	_register("CGDisplayBestModeForParametersAndRefreshRate", func() { purego.RegisterLibFunc(&_fnCGDisplayBestModeForParametersAndRefreshRate, _coregraphicsLib, "CGDisplayBestModeForParametersAndRefreshRate") })
+	_register("CGDirectDisplayCopyCurrentMetalDevice", func() {
+		purego.RegisterLibFunc(&_fnCGDirectDisplayCopyCurrentMetalDevice, _coregraphicsLib, "CGDirectDisplayCopyCurrentMetalDevice")
+	})
+	_register("CGDisplayAvailableModes", func() {
+		purego.RegisterLibFunc(&_fnCGDisplayAvailableModes, _coregraphicsLib, "CGDisplayAvailableModes")
+	})
+	_register("CGDisplayBestModeForParameters", func() {
+		purego.RegisterLibFunc(&_fnCGDisplayBestModeForParameters, _coregraphicsLib, "CGDisplayBestModeForParameters")
+	})
+	_register("CGDisplayBestModeForParametersAndRefreshRate", func() {
+		purego.RegisterLibFunc(&_fnCGDisplayBestModeForParametersAndRefreshRate, _coregraphicsLib, "CGDisplayBestModeForParametersAndRefreshRate")
+	})
 	_register("CGDisplayBounds", func() { purego.RegisterLibFunc(&_fnCGDisplayBounds, _coregraphicsLib, "CGDisplayBounds") })
 	_register("CGDisplayCapture", func() { purego.RegisterLibFunc(&_fnCGDisplayCapture, _coregraphicsLib, "CGDisplayCapture") })
-	_register("CGDisplayCaptureWithOptions", func() { purego.RegisterLibFunc(&_fnCGDisplayCaptureWithOptions, _coregraphicsLib, "CGDisplayCaptureWithOptions") })
-	_register("CGDisplayCopyAllDisplayModes", func() { purego.RegisterLibFunc(&_fnCGDisplayCopyAllDisplayModes, _coregraphicsLib, "CGDisplayCopyAllDisplayModes") })
-	_register("CGDisplayCopyColorSpace", func() { purego.RegisterLibFunc(&_fnCGDisplayCopyColorSpace, _coregraphicsLib, "CGDisplayCopyColorSpace") })
-	_register("CGDisplayCopyDisplayMode", func() { purego.RegisterLibFunc(&_fnCGDisplayCopyDisplayMode, _coregraphicsLib, "CGDisplayCopyDisplayMode") })
+	_register("CGDisplayCaptureWithOptions", func() {
+		purego.RegisterLibFunc(&_fnCGDisplayCaptureWithOptions, _coregraphicsLib, "CGDisplayCaptureWithOptions")
+	})
+	_register("CGDisplayCopyAllDisplayModes", func() {
+		purego.RegisterLibFunc(&_fnCGDisplayCopyAllDisplayModes, _coregraphicsLib, "CGDisplayCopyAllDisplayModes")
+	})
+	_register("CGDisplayCopyColorSpace", func() {
+		purego.RegisterLibFunc(&_fnCGDisplayCopyColorSpace, _coregraphicsLib, "CGDisplayCopyColorSpace")
+	})
+	_register("CGDisplayCopyDisplayMode", func() {
+		purego.RegisterLibFunc(&_fnCGDisplayCopyDisplayMode, _coregraphicsLib, "CGDisplayCopyDisplayMode")
+	})
 	_register("CGDisplayCurrentMode", func() { purego.RegisterLibFunc(&_fnCGDisplayCurrentMode, _coregraphicsLib, "CGDisplayCurrentMode") })
 	_register("CGDisplayFade", func() { purego.RegisterLibFunc(&_fnCGDisplayFade, _coregraphicsLib, "CGDisplayFade") })
-	_register("CGDisplayFadeOperationInProgress", func() { purego.RegisterLibFunc(&_fnCGDisplayFadeOperationInProgress, _coregraphicsLib, "CGDisplayFadeOperationInProgress") })
-	_register("CGDisplayGammaTableCapacity", func() { purego.RegisterLibFunc(&_fnCGDisplayGammaTableCapacity, _coregraphicsLib, "CGDisplayGammaTableCapacity") })
-	_register("CGDisplayGetDrawingContext", func() { purego.RegisterLibFunc(&_fnCGDisplayGetDrawingContext, _coregraphicsLib, "CGDisplayGetDrawingContext") })
+	_register("CGDisplayFadeOperationInProgress", func() {
+		purego.RegisterLibFunc(&_fnCGDisplayFadeOperationInProgress, _coregraphicsLib, "CGDisplayFadeOperationInProgress")
+	})
+	_register("CGDisplayGammaTableCapacity", func() {
+		purego.RegisterLibFunc(&_fnCGDisplayGammaTableCapacity, _coregraphicsLib, "CGDisplayGammaTableCapacity")
+	})
+	_register("CGDisplayGetDrawingContext", func() {
+		purego.RegisterLibFunc(&_fnCGDisplayGetDrawingContext, _coregraphicsLib, "CGDisplayGetDrawingContext")
+	})
 	_register("CGDisplayHideCursor", func() { purego.RegisterLibFunc(&_fnCGDisplayHideCursor, _coregraphicsLib, "CGDisplayHideCursor") })
-	_register("CGDisplayIDToOpenGLDisplayMask", func() { purego.RegisterLibFunc(&_fnCGDisplayIDToOpenGLDisplayMask, _coregraphicsLib, "CGDisplayIDToOpenGLDisplayMask") })
+	_register("CGDisplayIDToOpenGLDisplayMask", func() {
+		purego.RegisterLibFunc(&_fnCGDisplayIDToOpenGLDisplayMask, _coregraphicsLib, "CGDisplayIDToOpenGLDisplayMask")
+	})
 	_register("CGDisplayIOServicePort", func() { purego.RegisterLibFunc(&_fnCGDisplayIOServicePort, _coregraphicsLib, "CGDisplayIOServicePort") })
 	_register("CGDisplayIsActive", func() { purego.RegisterLibFunc(&_fnCGDisplayIsActive, _coregraphicsLib, "CGDisplayIsActive") })
-	_register("CGDisplayIsAlwaysInMirrorSet", func() { purego.RegisterLibFunc(&_fnCGDisplayIsAlwaysInMirrorSet, _coregraphicsLib, "CGDisplayIsAlwaysInMirrorSet") })
+	_register("CGDisplayIsAlwaysInMirrorSet", func() {
+		purego.RegisterLibFunc(&_fnCGDisplayIsAlwaysInMirrorSet, _coregraphicsLib, "CGDisplayIsAlwaysInMirrorSet")
+	})
 	_register("CGDisplayIsAsleep", func() { purego.RegisterLibFunc(&_fnCGDisplayIsAsleep, _coregraphicsLib, "CGDisplayIsAsleep") })
 	_register("CGDisplayIsBuiltin", func() { purego.RegisterLibFunc(&_fnCGDisplayIsBuiltin, _coregraphicsLib, "CGDisplayIsBuiltin") })
 	_register("CGDisplayIsCaptured", func() { purego.RegisterLibFunc(&_fnCGDisplayIsCaptured, _coregraphicsLib, "CGDisplayIsCaptured") })
-	_register("CGDisplayIsInHWMirrorSet", func() { purego.RegisterLibFunc(&_fnCGDisplayIsInHWMirrorSet, _coregraphicsLib, "CGDisplayIsInHWMirrorSet") })
+	_register("CGDisplayIsInHWMirrorSet", func() {
+		purego.RegisterLibFunc(&_fnCGDisplayIsInHWMirrorSet, _coregraphicsLib, "CGDisplayIsInHWMirrorSet")
+	})
 	_register("CGDisplayIsInMirrorSet", func() { purego.RegisterLibFunc(&_fnCGDisplayIsInMirrorSet, _coregraphicsLib, "CGDisplayIsInMirrorSet") })
 	_register("CGDisplayIsMain", func() { purego.RegisterLibFunc(&_fnCGDisplayIsMain, _coregraphicsLib, "CGDisplayIsMain") })
 	_register("CGDisplayIsOnline", func() { purego.RegisterLibFunc(&_fnCGDisplayIsOnline, _coregraphicsLib, "CGDisplayIsOnline") })
 	_register("CGDisplayIsStereo", func() { purego.RegisterLibFunc(&_fnCGDisplayIsStereo, _coregraphicsLib, "CGDisplayIsStereo") })
-	_register("CGDisplayMirrorsDisplay", func() { purego.RegisterLibFunc(&_fnCGDisplayMirrorsDisplay, _coregraphicsLib, "CGDisplayMirrorsDisplay") })
-	_register("CGDisplayModeCopyPixelEncoding", func() { purego.RegisterLibFunc(&_fnCGDisplayModeCopyPixelEncoding, _coregraphicsLib, "CGDisplayModeCopyPixelEncoding") })
+	_register("CGDisplayMirrorsDisplay", func() {
+		purego.RegisterLibFunc(&_fnCGDisplayMirrorsDisplay, _coregraphicsLib, "CGDisplayMirrorsDisplay")
+	})
+	_register("CGDisplayModeCopyPixelEncoding", func() {
+		purego.RegisterLibFunc(&_fnCGDisplayModeCopyPixelEncoding, _coregraphicsLib, "CGDisplayModeCopyPixelEncoding")
+	})
 	_register("CGDisplayModeGetHeight", func() { purego.RegisterLibFunc(&_fnCGDisplayModeGetHeight, _coregraphicsLib, "CGDisplayModeGetHeight") })
-	_register("CGDisplayModeGetIODisplayModeID", func() { purego.RegisterLibFunc(&_fnCGDisplayModeGetIODisplayModeID, _coregraphicsLib, "CGDisplayModeGetIODisplayModeID") })
-	_register("CGDisplayModeGetIOFlags", func() { purego.RegisterLibFunc(&_fnCGDisplayModeGetIOFlags, _coregraphicsLib, "CGDisplayModeGetIOFlags") })
-	_register("CGDisplayModeGetPixelHeight", func() { purego.RegisterLibFunc(&_fnCGDisplayModeGetPixelHeight, _coregraphicsLib, "CGDisplayModeGetPixelHeight") })
-	_register("CGDisplayModeGetPixelWidth", func() { purego.RegisterLibFunc(&_fnCGDisplayModeGetPixelWidth, _coregraphicsLib, "CGDisplayModeGetPixelWidth") })
-	_register("CGDisplayModeGetRefreshRate", func() { purego.RegisterLibFunc(&_fnCGDisplayModeGetRefreshRate, _coregraphicsLib, "CGDisplayModeGetRefreshRate") })
+	_register("CGDisplayModeGetIODisplayModeID", func() {
+		purego.RegisterLibFunc(&_fnCGDisplayModeGetIODisplayModeID, _coregraphicsLib, "CGDisplayModeGetIODisplayModeID")
+	})
+	_register("CGDisplayModeGetIOFlags", func() {
+		purego.RegisterLibFunc(&_fnCGDisplayModeGetIOFlags, _coregraphicsLib, "CGDisplayModeGetIOFlags")
+	})
+	_register("CGDisplayModeGetPixelHeight", func() {
+		purego.RegisterLibFunc(&_fnCGDisplayModeGetPixelHeight, _coregraphicsLib, "CGDisplayModeGetPixelHeight")
+	})
+	_register("CGDisplayModeGetPixelWidth", func() {
+		purego.RegisterLibFunc(&_fnCGDisplayModeGetPixelWidth, _coregraphicsLib, "CGDisplayModeGetPixelWidth")
+	})
+	_register("CGDisplayModeGetRefreshRate", func() {
+		purego.RegisterLibFunc(&_fnCGDisplayModeGetRefreshRate, _coregraphicsLib, "CGDisplayModeGetRefreshRate")
+	})
 	_register("CGDisplayModeGetTypeID", func() { purego.RegisterLibFunc(&_fnCGDisplayModeGetTypeID, _coregraphicsLib, "CGDisplayModeGetTypeID") })
 	_register("CGDisplayModeGetWidth", func() { purego.RegisterLibFunc(&_fnCGDisplayModeGetWidth, _coregraphicsLib, "CGDisplayModeGetWidth") })
-	_register("CGDisplayModeIsUsableForDesktopGUI", func() { purego.RegisterLibFunc(&_fnCGDisplayModeIsUsableForDesktopGUI, _coregraphicsLib, "CGDisplayModeIsUsableForDesktopGUI") })
+	_register("CGDisplayModeIsUsableForDesktopGUI", func() {
+		purego.RegisterLibFunc(&_fnCGDisplayModeIsUsableForDesktopGUI, _coregraphicsLib, "CGDisplayModeIsUsableForDesktopGUI")
+	})
 	_register("CGDisplayModeRelease", func() { purego.RegisterLibFunc(&_fnCGDisplayModeRelease, _coregraphicsLib, "CGDisplayModeRelease") })
 	_register("CGDisplayModeRetain", func() { purego.RegisterLibFunc(&_fnCGDisplayModeRetain, _coregraphicsLib, "CGDisplayModeRetain") })
 	_register("CGDisplayModelNumber", func() { purego.RegisterLibFunc(&_fnCGDisplayModelNumber, _coregraphicsLib, "CGDisplayModelNumber") })
-	_register("CGDisplayMoveCursorToPoint", func() { purego.RegisterLibFunc(&_fnCGDisplayMoveCursorToPoint, _coregraphicsLib, "CGDisplayMoveCursorToPoint") })
+	_register("CGDisplayMoveCursorToPoint", func() {
+		purego.RegisterLibFunc(&_fnCGDisplayMoveCursorToPoint, _coregraphicsLib, "CGDisplayMoveCursorToPoint")
+	})
 	_register("CGDisplayPixelsHigh", func() { purego.RegisterLibFunc(&_fnCGDisplayPixelsHigh, _coregraphicsLib, "CGDisplayPixelsHigh") })
 	_register("CGDisplayPixelsWide", func() { purego.RegisterLibFunc(&_fnCGDisplayPixelsWide, _coregraphicsLib, "CGDisplayPixelsWide") })
-	_register("CGDisplayPrimaryDisplay", func() { purego.RegisterLibFunc(&_fnCGDisplayPrimaryDisplay, _coregraphicsLib, "CGDisplayPrimaryDisplay") })
-	_register("CGDisplayRegisterReconfigurationCallback", func() { purego.RegisterLibFunc(&_fnCGDisplayRegisterReconfigurationCallback, _coregraphicsLib, "CGDisplayRegisterReconfigurationCallback") })
+	_register("CGDisplayPrimaryDisplay", func() {
+		purego.RegisterLibFunc(&_fnCGDisplayPrimaryDisplay, _coregraphicsLib, "CGDisplayPrimaryDisplay")
+	})
+	_register("CGDisplayRegisterReconfigurationCallback", func() {
+		purego.RegisterLibFunc(&_fnCGDisplayRegisterReconfigurationCallback, _coregraphicsLib, "CGDisplayRegisterReconfigurationCallback")
+	})
 	_register("CGDisplayRelease", func() { purego.RegisterLibFunc(&_fnCGDisplayRelease, _coregraphicsLib, "CGDisplayRelease") })
-	_register("CGDisplayRemoveReconfigurationCallback", func() { purego.RegisterLibFunc(&_fnCGDisplayRemoveReconfigurationCallback, _coregraphicsLib, "CGDisplayRemoveReconfigurationCallback") })
-	_register("CGDisplayRestoreColorSyncSettings", func() { purego.RegisterLibFunc(&_fnCGDisplayRestoreColorSyncSettings, _coregraphicsLib, "CGDisplayRestoreColorSyncSettings") })
+	_register("CGDisplayRemoveReconfigurationCallback", func() {
+		purego.RegisterLibFunc(&_fnCGDisplayRemoveReconfigurationCallback, _coregraphicsLib, "CGDisplayRemoveReconfigurationCallback")
+	})
+	_register("CGDisplayRestoreColorSyncSettings", func() {
+		purego.RegisterLibFunc(&_fnCGDisplayRestoreColorSyncSettings, _coregraphicsLib, "CGDisplayRestoreColorSyncSettings")
+	})
 	_register("CGDisplayRotation", func() { purego.RegisterLibFunc(&_fnCGDisplayRotation, _coregraphicsLib, "CGDisplayRotation") })
 	_register("CGDisplayScreenSize", func() { purego.RegisterLibFunc(&_fnCGDisplayScreenSize, _coregraphicsLib, "CGDisplayScreenSize") })
 	_register("CGDisplaySerialNumber", func() { purego.RegisterLibFunc(&_fnCGDisplaySerialNumber, _coregraphicsLib, "CGDisplaySerialNumber") })
-	_register("CGDisplaySetDisplayMode", func() { purego.RegisterLibFunc(&_fnCGDisplaySetDisplayMode, _coregraphicsLib, "CGDisplaySetDisplayMode") })
-	_register("CGDisplaySetStereoOperation", func() { purego.RegisterLibFunc(&_fnCGDisplaySetStereoOperation, _coregraphicsLib, "CGDisplaySetStereoOperation") })
+	_register("CGDisplaySetDisplayMode", func() {
+		purego.RegisterLibFunc(&_fnCGDisplaySetDisplayMode, _coregraphicsLib, "CGDisplaySetDisplayMode")
+	})
+	_register("CGDisplaySetStereoOperation", func() {
+		purego.RegisterLibFunc(&_fnCGDisplaySetStereoOperation, _coregraphicsLib, "CGDisplaySetStereoOperation")
+	})
 	_register("CGDisplayShowCursor", func() { purego.RegisterLibFunc(&_fnCGDisplayShowCursor, _coregraphicsLib, "CGDisplayShowCursor") })
 	_register("CGDisplaySwitchToMode", func() { purego.RegisterLibFunc(&_fnCGDisplaySwitchToMode, _coregraphicsLib, "CGDisplaySwitchToMode") })
 	_register("CGDisplayUnitNumber", func() { purego.RegisterLibFunc(&_fnCGDisplayUnitNumber, _coregraphicsLib, "CGDisplayUnitNumber") })
-	_register("CGDisplayUsesOpenGLAcceleration", func() { purego.RegisterLibFunc(&_fnCGDisplayUsesOpenGLAcceleration, _coregraphicsLib, "CGDisplayUsesOpenGLAcceleration") })
+	_register("CGDisplayUsesOpenGLAcceleration", func() {
+		purego.RegisterLibFunc(&_fnCGDisplayUsesOpenGLAcceleration, _coregraphicsLib, "CGDisplayUsesOpenGLAcceleration")
+	})
 	_register("CGDisplayVendorNumber", func() { purego.RegisterLibFunc(&_fnCGDisplayVendorNumber, _coregraphicsLib, "CGDisplayVendorNumber") })
-	_register("CGEXRToneMappingGammaGetDefaultOptions", func() { purego.RegisterLibFunc(&_fnCGEXRToneMappingGammaGetDefaultOptions, _coregraphicsLib, "CGEXRToneMappingGammaGetDefaultOptions") })
-	_register("CGEnableEventStateCombining", func() { purego.RegisterLibFunc(&_fnCGEnableEventStateCombining, _coregraphicsLib, "CGEnableEventStateCombining") })
+	_register("CGEXRToneMappingGammaGetDefaultOptions", func() {
+		purego.RegisterLibFunc(&_fnCGEXRToneMappingGammaGetDefaultOptions, _coregraphicsLib, "CGEXRToneMappingGammaGetDefaultOptions")
+	})
+	_register("CGEnableEventStateCombining", func() {
+		purego.RegisterLibFunc(&_fnCGEnableEventStateCombining, _coregraphicsLib, "CGEnableEventStateCombining")
+	})
 	_register("CGErrorSetCallback", func() { purego.RegisterLibFunc(&_fnCGErrorSetCallback, _coregraphicsLib, "CGErrorSetCallback") })
 	_register("CGEventCreate", func() { purego.RegisterLibFunc(&_fnCGEventCreate, _coregraphicsLib, "CGEventCreate") })
 	_register("CGEventCreateCopy", func() { purego.RegisterLibFunc(&_fnCGEventCreateCopy, _coregraphicsLib, "CGEventCreateCopy") })
 	_register("CGEventCreateData", func() { purego.RegisterLibFunc(&_fnCGEventCreateData, _coregraphicsLib, "CGEventCreateData") })
 	_register("CGEventCreateFromData", func() { purego.RegisterLibFunc(&_fnCGEventCreateFromData, _coregraphicsLib, "CGEventCreateFromData") })
-	_register("CGEventCreateKeyboardEvent", func() { purego.RegisterLibFunc(&_fnCGEventCreateKeyboardEvent, _coregraphicsLib, "CGEventCreateKeyboardEvent") })
-	_register("CGEventCreateMouseEvent", func() { purego.RegisterLibFunc(&_fnCGEventCreateMouseEvent, _coregraphicsLib, "CGEventCreateMouseEvent") })
-	_register("CGEventCreateScrollWheelEvent2", func() { purego.RegisterLibFunc(&_fnCGEventCreateScrollWheelEvent2, _coregraphicsLib, "CGEventCreateScrollWheelEvent2") })
-	_register("CGEventCreateSourceFromEvent", func() { purego.RegisterLibFunc(&_fnCGEventCreateSourceFromEvent, _coregraphicsLib, "CGEventCreateSourceFromEvent") })
-	_register("CGEventGetDoubleValueField", func() { purego.RegisterLibFunc(&_fnCGEventGetDoubleValueField, _coregraphicsLib, "CGEventGetDoubleValueField") })
+	_register("CGEventCreateKeyboardEvent", func() {
+		purego.RegisterLibFunc(&_fnCGEventCreateKeyboardEvent, _coregraphicsLib, "CGEventCreateKeyboardEvent")
+	})
+	_register("CGEventCreateMouseEvent", func() {
+		purego.RegisterLibFunc(&_fnCGEventCreateMouseEvent, _coregraphicsLib, "CGEventCreateMouseEvent")
+	})
+	_register("CGEventCreateScrollWheelEvent2", func() {
+		purego.RegisterLibFunc(&_fnCGEventCreateScrollWheelEvent2, _coregraphicsLib, "CGEventCreateScrollWheelEvent2")
+	})
+	_register("CGEventCreateSourceFromEvent", func() {
+		purego.RegisterLibFunc(&_fnCGEventCreateSourceFromEvent, _coregraphicsLib, "CGEventCreateSourceFromEvent")
+	})
+	_register("CGEventGetDoubleValueField", func() {
+		purego.RegisterLibFunc(&_fnCGEventGetDoubleValueField, _coregraphicsLib, "CGEventGetDoubleValueField")
+	})
 	_register("CGEventGetFlags", func() { purego.RegisterLibFunc(&_fnCGEventGetFlags, _coregraphicsLib, "CGEventGetFlags") })
-	_register("CGEventGetIntegerValueField", func() { purego.RegisterLibFunc(&_fnCGEventGetIntegerValueField, _coregraphicsLib, "CGEventGetIntegerValueField") })
+	_register("CGEventGetIntegerValueField", func() {
+		purego.RegisterLibFunc(&_fnCGEventGetIntegerValueField, _coregraphicsLib, "CGEventGetIntegerValueField")
+	})
 	_register("CGEventGetLocation", func() { purego.RegisterLibFunc(&_fnCGEventGetLocation, _coregraphicsLib, "CGEventGetLocation") })
 	_register("CGEventGetTimestamp", func() { purego.RegisterLibFunc(&_fnCGEventGetTimestamp, _coregraphicsLib, "CGEventGetTimestamp") })
 	_register("CGEventGetType", func() { purego.RegisterLibFunc(&_fnCGEventGetType, _coregraphicsLib, "CGEventGetType") })
 	_register("CGEventGetTypeID", func() { purego.RegisterLibFunc(&_fnCGEventGetTypeID, _coregraphicsLib, "CGEventGetTypeID") })
-	_register("CGEventGetUnflippedLocation", func() { purego.RegisterLibFunc(&_fnCGEventGetUnflippedLocation, _coregraphicsLib, "CGEventGetUnflippedLocation") })
-	_register("CGEventKeyboardGetUnicodeString", func() { purego.RegisterLibFunc(&_fnCGEventKeyboardGetUnicodeString, _coregraphicsLib, "CGEventKeyboardGetUnicodeString") })
-	_register("CGEventKeyboardSetUnicodeString", func() { purego.RegisterLibFunc(&_fnCGEventKeyboardSetUnicodeString, _coregraphicsLib, "CGEventKeyboardSetUnicodeString") })
+	_register("CGEventGetUnflippedLocation", func() {
+		purego.RegisterLibFunc(&_fnCGEventGetUnflippedLocation, _coregraphicsLib, "CGEventGetUnflippedLocation")
+	})
+	_register("CGEventKeyboardGetUnicodeString", func() {
+		purego.RegisterLibFunc(&_fnCGEventKeyboardGetUnicodeString, _coregraphicsLib, "CGEventKeyboardGetUnicodeString")
+	})
+	_register("CGEventKeyboardSetUnicodeString", func() {
+		purego.RegisterLibFunc(&_fnCGEventKeyboardSetUnicodeString, _coregraphicsLib, "CGEventKeyboardSetUnicodeString")
+	})
 	_register("CGEventPost", func() { purego.RegisterLibFunc(&_fnCGEventPost, _coregraphicsLib, "CGEventPost") })
 	_register("CGEventPostToPSN", func() { purego.RegisterLibFunc(&_fnCGEventPostToPSN, _coregraphicsLib, "CGEventPostToPSN") })
 	_register("CGEventPostToPid", func() { purego.RegisterLibFunc(&_fnCGEventPostToPid, _coregraphicsLib, "CGEventPostToPid") })
-	_register("CGEventSetDoubleValueField", func() { purego.RegisterLibFunc(&_fnCGEventSetDoubleValueField, _coregraphicsLib, "CGEventSetDoubleValueField") })
+	_register("CGEventSetDoubleValueField", func() {
+		purego.RegisterLibFunc(&_fnCGEventSetDoubleValueField, _coregraphicsLib, "CGEventSetDoubleValueField")
+	})
 	_register("CGEventSetFlags", func() { purego.RegisterLibFunc(&_fnCGEventSetFlags, _coregraphicsLib, "CGEventSetFlags") })
-	_register("CGEventSetIntegerValueField", func() { purego.RegisterLibFunc(&_fnCGEventSetIntegerValueField, _coregraphicsLib, "CGEventSetIntegerValueField") })
+	_register("CGEventSetIntegerValueField", func() {
+		purego.RegisterLibFunc(&_fnCGEventSetIntegerValueField, _coregraphicsLib, "CGEventSetIntegerValueField")
+	})
 	_register("CGEventSetLocation", func() { purego.RegisterLibFunc(&_fnCGEventSetLocation, _coregraphicsLib, "CGEventSetLocation") })
 	_register("CGEventSetSource", func() { purego.RegisterLibFunc(&_fnCGEventSetSource, _coregraphicsLib, "CGEventSetSource") })
 	_register("CGEventSetTimestamp", func() { purego.RegisterLibFunc(&_fnCGEventSetTimestamp, _coregraphicsLib, "CGEventSetTimestamp") })
 	_register("CGEventSetType", func() { purego.RegisterLibFunc(&_fnCGEventSetType, _coregraphicsLib, "CGEventSetType") })
-	_register("CGEventSourceButtonState", func() { purego.RegisterLibFunc(&_fnCGEventSourceButtonState, _coregraphicsLib, "CGEventSourceButtonState") })
-	_register("CGEventSourceCounterForEventType", func() { purego.RegisterLibFunc(&_fnCGEventSourceCounterForEventType, _coregraphicsLib, "CGEventSourceCounterForEventType") })
+	_register("CGEventSourceButtonState", func() {
+		purego.RegisterLibFunc(&_fnCGEventSourceButtonState, _coregraphicsLib, "CGEventSourceButtonState")
+	})
+	_register("CGEventSourceCounterForEventType", func() {
+		purego.RegisterLibFunc(&_fnCGEventSourceCounterForEventType, _coregraphicsLib, "CGEventSourceCounterForEventType")
+	})
 	_register("CGEventSourceCreate", func() { purego.RegisterLibFunc(&_fnCGEventSourceCreate, _coregraphicsLib, "CGEventSourceCreate") })
-	_register("CGEventSourceFlagsState", func() { purego.RegisterLibFunc(&_fnCGEventSourceFlagsState, _coregraphicsLib, "CGEventSourceFlagsState") })
-	_register("CGEventSourceGetKeyboardType", func() { purego.RegisterLibFunc(&_fnCGEventSourceGetKeyboardType, _coregraphicsLib, "CGEventSourceGetKeyboardType") })
-	_register("CGEventSourceGetLocalEventsFilterDuringSuppressionState", func() { purego.RegisterLibFunc(&_fnCGEventSourceGetLocalEventsFilterDuringSuppressionState, _coregraphicsLib, "CGEventSourceGetLocalEventsFilterDuringSuppressionState") })
-	_register("CGEventSourceGetLocalEventsSuppressionInterval", func() { purego.RegisterLibFunc(&_fnCGEventSourceGetLocalEventsSuppressionInterval, _coregraphicsLib, "CGEventSourceGetLocalEventsSuppressionInterval") })
-	_register("CGEventSourceGetPixelsPerLine", func() { purego.RegisterLibFunc(&_fnCGEventSourceGetPixelsPerLine, _coregraphicsLib, "CGEventSourceGetPixelsPerLine") })
-	_register("CGEventSourceGetSourceStateID", func() { purego.RegisterLibFunc(&_fnCGEventSourceGetSourceStateID, _coregraphicsLib, "CGEventSourceGetSourceStateID") })
+	_register("CGEventSourceFlagsState", func() {
+		purego.RegisterLibFunc(&_fnCGEventSourceFlagsState, _coregraphicsLib, "CGEventSourceFlagsState")
+	})
+	_register("CGEventSourceGetKeyboardType", func() {
+		purego.RegisterLibFunc(&_fnCGEventSourceGetKeyboardType, _coregraphicsLib, "CGEventSourceGetKeyboardType")
+	})
+	_register("CGEventSourceGetLocalEventsFilterDuringSuppressionState", func() {
+		purego.RegisterLibFunc(&_fnCGEventSourceGetLocalEventsFilterDuringSuppressionState, _coregraphicsLib, "CGEventSourceGetLocalEventsFilterDuringSuppressionState")
+	})
+	_register("CGEventSourceGetLocalEventsSuppressionInterval", func() {
+		purego.RegisterLibFunc(&_fnCGEventSourceGetLocalEventsSuppressionInterval, _coregraphicsLib, "CGEventSourceGetLocalEventsSuppressionInterval")
+	})
+	_register("CGEventSourceGetPixelsPerLine", func() {
+		purego.RegisterLibFunc(&_fnCGEventSourceGetPixelsPerLine, _coregraphicsLib, "CGEventSourceGetPixelsPerLine")
+	})
+	_register("CGEventSourceGetSourceStateID", func() {
+		purego.RegisterLibFunc(&_fnCGEventSourceGetSourceStateID, _coregraphicsLib, "CGEventSourceGetSourceStateID")
+	})
 	_register("CGEventSourceGetTypeID", func() { purego.RegisterLibFunc(&_fnCGEventSourceGetTypeID, _coregraphicsLib, "CGEventSourceGetTypeID") })
-	_register("CGEventSourceGetUserData", func() { purego.RegisterLibFunc(&_fnCGEventSourceGetUserData, _coregraphicsLib, "CGEventSourceGetUserData") })
+	_register("CGEventSourceGetUserData", func() {
+		purego.RegisterLibFunc(&_fnCGEventSourceGetUserData, _coregraphicsLib, "CGEventSourceGetUserData")
+	})
 	_register("CGEventSourceKeyState", func() { purego.RegisterLibFunc(&_fnCGEventSourceKeyState, _coregraphicsLib, "CGEventSourceKeyState") })
-	_register("CGEventSourceSecondsSinceLastEventType", func() { purego.RegisterLibFunc(&_fnCGEventSourceSecondsSinceLastEventType, _coregraphicsLib, "CGEventSourceSecondsSinceLastEventType") })
-	_register("CGEventSourceSetKeyboardType", func() { purego.RegisterLibFunc(&_fnCGEventSourceSetKeyboardType, _coregraphicsLib, "CGEventSourceSetKeyboardType") })
-	_register("CGEventSourceSetLocalEventsFilterDuringSuppressionState", func() { purego.RegisterLibFunc(&_fnCGEventSourceSetLocalEventsFilterDuringSuppressionState, _coregraphicsLib, "CGEventSourceSetLocalEventsFilterDuringSuppressionState") })
-	_register("CGEventSourceSetLocalEventsSuppressionInterval", func() { purego.RegisterLibFunc(&_fnCGEventSourceSetLocalEventsSuppressionInterval, _coregraphicsLib, "CGEventSourceSetLocalEventsSuppressionInterval") })
-	_register("CGEventSourceSetPixelsPerLine", func() { purego.RegisterLibFunc(&_fnCGEventSourceSetPixelsPerLine, _coregraphicsLib, "CGEventSourceSetPixelsPerLine") })
-	_register("CGEventSourceSetUserData", func() { purego.RegisterLibFunc(&_fnCGEventSourceSetUserData, _coregraphicsLib, "CGEventSourceSetUserData") })
+	_register("CGEventSourceSecondsSinceLastEventType", func() {
+		purego.RegisterLibFunc(&_fnCGEventSourceSecondsSinceLastEventType, _coregraphicsLib, "CGEventSourceSecondsSinceLastEventType")
+	})
+	_register("CGEventSourceSetKeyboardType", func() {
+		purego.RegisterLibFunc(&_fnCGEventSourceSetKeyboardType, _coregraphicsLib, "CGEventSourceSetKeyboardType")
+	})
+	_register("CGEventSourceSetLocalEventsFilterDuringSuppressionState", func() {
+		purego.RegisterLibFunc(&_fnCGEventSourceSetLocalEventsFilterDuringSuppressionState, _coregraphicsLib, "CGEventSourceSetLocalEventsFilterDuringSuppressionState")
+	})
+	_register("CGEventSourceSetLocalEventsSuppressionInterval", func() {
+		purego.RegisterLibFunc(&_fnCGEventSourceSetLocalEventsSuppressionInterval, _coregraphicsLib, "CGEventSourceSetLocalEventsSuppressionInterval")
+	})
+	_register("CGEventSourceSetPixelsPerLine", func() {
+		purego.RegisterLibFunc(&_fnCGEventSourceSetPixelsPerLine, _coregraphicsLib, "CGEventSourceSetPixelsPerLine")
+	})
+	_register("CGEventSourceSetUserData", func() {
+		purego.RegisterLibFunc(&_fnCGEventSourceSetUserData, _coregraphicsLib, "CGEventSourceSetUserData")
+	})
 	_register("CGEventTapCreate", func() { purego.RegisterLibFunc(&_fnCGEventTapCreate, _coregraphicsLib, "CGEventTapCreate") })
 	_register("CGEventTapCreateForPSN", func() { purego.RegisterLibFunc(&_fnCGEventTapCreateForPSN, _coregraphicsLib, "CGEventTapCreateForPSN") })
 	_register("CGEventTapCreateForPid", func() { purego.RegisterLibFunc(&_fnCGEventTapCreateForPid, _coregraphicsLib, "CGEventTapCreateForPid") })
 	_register("CGEventTapEnable", func() { purego.RegisterLibFunc(&_fnCGEventTapEnable, _coregraphicsLib, "CGEventTapEnable") })
 	_register("CGEventTapIsEnabled", func() { purego.RegisterLibFunc(&_fnCGEventTapIsEnabled, _coregraphicsLib, "CGEventTapIsEnabled") })
 	_register("CGEventTapPostEvent", func() { purego.RegisterLibFunc(&_fnCGEventTapPostEvent, _coregraphicsLib, "CGEventTapPostEvent") })
-	_register("CGFontCanCreatePostScriptSubset", func() { purego.RegisterLibFunc(&_fnCGFontCanCreatePostScriptSubset, _coregraphicsLib, "CGFontCanCreatePostScriptSubset") })
+	_register("CGFontCanCreatePostScriptSubset", func() {
+		purego.RegisterLibFunc(&_fnCGFontCanCreatePostScriptSubset, _coregraphicsLib, "CGFontCanCreatePostScriptSubset")
+	})
 	_register("CGFontCopyFullName", func() { purego.RegisterLibFunc(&_fnCGFontCopyFullName, _coregraphicsLib, "CGFontCopyFullName") })
-	_register("CGFontCopyGlyphNameForGlyph", func() { purego.RegisterLibFunc(&_fnCGFontCopyGlyphNameForGlyph, _coregraphicsLib, "CGFontCopyGlyphNameForGlyph") })
-	_register("CGFontCopyPostScriptName", func() { purego.RegisterLibFunc(&_fnCGFontCopyPostScriptName, _coregraphicsLib, "CGFontCopyPostScriptName") })
+	_register("CGFontCopyGlyphNameForGlyph", func() {
+		purego.RegisterLibFunc(&_fnCGFontCopyGlyphNameForGlyph, _coregraphicsLib, "CGFontCopyGlyphNameForGlyph")
+	})
+	_register("CGFontCopyPostScriptName", func() {
+		purego.RegisterLibFunc(&_fnCGFontCopyPostScriptName, _coregraphicsLib, "CGFontCopyPostScriptName")
+	})
 	_register("CGFontCopyTableForTag", func() { purego.RegisterLibFunc(&_fnCGFontCopyTableForTag, _coregraphicsLib, "CGFontCopyTableForTag") })
 	_register("CGFontCopyTableTags", func() { purego.RegisterLibFunc(&_fnCGFontCopyTableTags, _coregraphicsLib, "CGFontCopyTableTags") })
-	_register("CGFontCopyVariationAxes", func() { purego.RegisterLibFunc(&_fnCGFontCopyVariationAxes, _coregraphicsLib, "CGFontCopyVariationAxes") })
+	_register("CGFontCopyVariationAxes", func() {
+		purego.RegisterLibFunc(&_fnCGFontCopyVariationAxes, _coregraphicsLib, "CGFontCopyVariationAxes")
+	})
 	_register("CGFontCopyVariations", func() { purego.RegisterLibFunc(&_fnCGFontCopyVariations, _coregraphicsLib, "CGFontCopyVariations") })
-	_register("CGFontCreateCopyWithVariations", func() { purego.RegisterLibFunc(&_fnCGFontCreateCopyWithVariations, _coregraphicsLib, "CGFontCreateCopyWithVariations") })
-	_register("CGFontCreatePostScriptEncoding", func() { purego.RegisterLibFunc(&_fnCGFontCreatePostScriptEncoding, _coregraphicsLib, "CGFontCreatePostScriptEncoding") })
-	_register("CGFontCreatePostScriptSubset", func() { purego.RegisterLibFunc(&_fnCGFontCreatePostScriptSubset, _coregraphicsLib, "CGFontCreatePostScriptSubset") })
-	_register("CGFontCreateWithDataProvider", func() { purego.RegisterLibFunc(&_fnCGFontCreateWithDataProvider, _coregraphicsLib, "CGFontCreateWithDataProvider") })
-	_register("CGFontCreateWithFontName", func() { purego.RegisterLibFunc(&_fnCGFontCreateWithFontName, _coregraphicsLib, "CGFontCreateWithFontName") })
-	_register("CGFontCreateWithPlatformFont", func() { purego.RegisterLibFunc(&_fnCGFontCreateWithPlatformFont, _coregraphicsLib, "CGFontCreateWithPlatformFont") })
+	_register("CGFontCreateCopyWithVariations", func() {
+		purego.RegisterLibFunc(&_fnCGFontCreateCopyWithVariations, _coregraphicsLib, "CGFontCreateCopyWithVariations")
+	})
+	_register("CGFontCreatePostScriptEncoding", func() {
+		purego.RegisterLibFunc(&_fnCGFontCreatePostScriptEncoding, _coregraphicsLib, "CGFontCreatePostScriptEncoding")
+	})
+	_register("CGFontCreatePostScriptSubset", func() {
+		purego.RegisterLibFunc(&_fnCGFontCreatePostScriptSubset, _coregraphicsLib, "CGFontCreatePostScriptSubset")
+	})
+	_register("CGFontCreateWithDataProvider", func() {
+		purego.RegisterLibFunc(&_fnCGFontCreateWithDataProvider, _coregraphicsLib, "CGFontCreateWithDataProvider")
+	})
+	_register("CGFontCreateWithFontName", func() {
+		purego.RegisterLibFunc(&_fnCGFontCreateWithFontName, _coregraphicsLib, "CGFontCreateWithFontName")
+	})
+	_register("CGFontCreateWithPlatformFont", func() {
+		purego.RegisterLibFunc(&_fnCGFontCreateWithPlatformFont, _coregraphicsLib, "CGFontCreateWithPlatformFont")
+	})
 	_register("CGFontGetAscent", func() { purego.RegisterLibFunc(&_fnCGFontGetAscent, _coregraphicsLib, "CGFontGetAscent") })
 	_register("CGFontGetCapHeight", func() { purego.RegisterLibFunc(&_fnCGFontGetCapHeight, _coregraphicsLib, "CGFontGetCapHeight") })
 	_register("CGFontGetDescent", func() { purego.RegisterLibFunc(&_fnCGFontGetDescent, _coregraphicsLib, "CGFontGetDescent") })
 	_register("CGFontGetFontBBox", func() { purego.RegisterLibFunc(&_fnCGFontGetFontBBox, _coregraphicsLib, "CGFontGetFontBBox") })
 	_register("CGFontGetGlyphAdvances", func() { purego.RegisterLibFunc(&_fnCGFontGetGlyphAdvances, _coregraphicsLib, "CGFontGetGlyphAdvances") })
 	_register("CGFontGetGlyphBBoxes", func() { purego.RegisterLibFunc(&_fnCGFontGetGlyphBBoxes, _coregraphicsLib, "CGFontGetGlyphBBoxes") })
-	_register("CGFontGetGlyphWithGlyphName", func() { purego.RegisterLibFunc(&_fnCGFontGetGlyphWithGlyphName, _coregraphicsLib, "CGFontGetGlyphWithGlyphName") })
+	_register("CGFontGetGlyphWithGlyphName", func() {
+		purego.RegisterLibFunc(&_fnCGFontGetGlyphWithGlyphName, _coregraphicsLib, "CGFontGetGlyphWithGlyphName")
+	})
 	_register("CGFontGetItalicAngle", func() { purego.RegisterLibFunc(&_fnCGFontGetItalicAngle, _coregraphicsLib, "CGFontGetItalicAngle") })
 	_register("CGFontGetLeading", func() { purego.RegisterLibFunc(&_fnCGFontGetLeading, _coregraphicsLib, "CGFontGetLeading") })
-	_register("CGFontGetNumberOfGlyphs", func() { purego.RegisterLibFunc(&_fnCGFontGetNumberOfGlyphs, _coregraphicsLib, "CGFontGetNumberOfGlyphs") })
+	_register("CGFontGetNumberOfGlyphs", func() {
+		purego.RegisterLibFunc(&_fnCGFontGetNumberOfGlyphs, _coregraphicsLib, "CGFontGetNumberOfGlyphs")
+	})
 	_register("CGFontGetStemV", func() { purego.RegisterLibFunc(&_fnCGFontGetStemV, _coregraphicsLib, "CGFontGetStemV") })
 	_register("CGFontGetTypeID", func() { purego.RegisterLibFunc(&_fnCGFontGetTypeID, _coregraphicsLib, "CGFontGetTypeID") })
 	_register("CGFontGetUnitsPerEm", func() { purego.RegisterLibFunc(&_fnCGFontGetUnitsPerEm, _coregraphicsLib, "CGFontGetUnitsPerEm") })
@@ -455,51 +919,103 @@ func _loadLibrary() {
 	_register("CGFunctionRelease", func() { purego.RegisterLibFunc(&_fnCGFunctionRelease, _coregraphicsLib, "CGFunctionRelease") })
 	_register("CGFunctionRetain", func() { purego.RegisterLibFunc(&_fnCGFunctionRetain, _coregraphicsLib, "CGFunctionRetain") })
 	_register("CGGetActiveDisplayList", func() { purego.RegisterLibFunc(&_fnCGGetActiveDisplayList, _coregraphicsLib, "CGGetActiveDisplayList") })
-	_register("CGGetDisplayTransferByFormula", func() { purego.RegisterLibFunc(&_fnCGGetDisplayTransferByFormula, _coregraphicsLib, "CGGetDisplayTransferByFormula") })
-	_register("CGGetDisplayTransferByTable", func() { purego.RegisterLibFunc(&_fnCGGetDisplayTransferByTable, _coregraphicsLib, "CGGetDisplayTransferByTable") })
-	_register("CGGetDisplaysWithOpenGLDisplayMask", func() { purego.RegisterLibFunc(&_fnCGGetDisplaysWithOpenGLDisplayMask, _coregraphicsLib, "CGGetDisplaysWithOpenGLDisplayMask") })
+	_register("CGGetDisplayTransferByFormula", func() {
+		purego.RegisterLibFunc(&_fnCGGetDisplayTransferByFormula, _coregraphicsLib, "CGGetDisplayTransferByFormula")
+	})
+	_register("CGGetDisplayTransferByTable", func() {
+		purego.RegisterLibFunc(&_fnCGGetDisplayTransferByTable, _coregraphicsLib, "CGGetDisplayTransferByTable")
+	})
+	_register("CGGetDisplaysWithOpenGLDisplayMask", func() {
+		purego.RegisterLibFunc(&_fnCGGetDisplaysWithOpenGLDisplayMask, _coregraphicsLib, "CGGetDisplaysWithOpenGLDisplayMask")
+	})
 	_register("CGGetDisplaysWithPoint", func() { purego.RegisterLibFunc(&_fnCGGetDisplaysWithPoint, _coregraphicsLib, "CGGetDisplaysWithPoint") })
 	_register("CGGetDisplaysWithRect", func() { purego.RegisterLibFunc(&_fnCGGetDisplaysWithRect, _coregraphicsLib, "CGGetDisplaysWithRect") })
 	_register("CGGetEventTapList", func() { purego.RegisterLibFunc(&_fnCGGetEventTapList, _coregraphicsLib, "CGGetEventTapList") })
 	_register("CGGetLastMouseDelta", func() { purego.RegisterLibFunc(&_fnCGGetLastMouseDelta, _coregraphicsLib, "CGGetLastMouseDelta") })
 	_register("CGGetOnlineDisplayList", func() { purego.RegisterLibFunc(&_fnCGGetOnlineDisplayList, _coregraphicsLib, "CGGetOnlineDisplayList") })
-	_register("CGGradientCreateWithColorComponents", func() { purego.RegisterLibFunc(&_fnCGGradientCreateWithColorComponents, _coregraphicsLib, "CGGradientCreateWithColorComponents") })
-	_register("CGGradientCreateWithColors", func() { purego.RegisterLibFunc(&_fnCGGradientCreateWithColors, _coregraphicsLib, "CGGradientCreateWithColors") })
-	_register("CGGradientCreateWithContentHeadroom", func() { purego.RegisterLibFunc(&_fnCGGradientCreateWithContentHeadroom, _coregraphicsLib, "CGGradientCreateWithContentHeadroom") })
-	_register("CGGradientGetContentHeadroom", func() { purego.RegisterLibFunc(&_fnCGGradientGetContentHeadroom, _coregraphicsLib, "CGGradientGetContentHeadroom") })
+	_register("CGGradientCreateWithColorComponents", func() {
+		purego.RegisterLibFunc(&_fnCGGradientCreateWithColorComponents, _coregraphicsLib, "CGGradientCreateWithColorComponents")
+	})
+	_register("CGGradientCreateWithColors", func() {
+		purego.RegisterLibFunc(&_fnCGGradientCreateWithColors, _coregraphicsLib, "CGGradientCreateWithColors")
+	})
+	_register("CGGradientCreateWithContentHeadroom", func() {
+		purego.RegisterLibFunc(&_fnCGGradientCreateWithContentHeadroom, _coregraphicsLib, "CGGradientCreateWithContentHeadroom")
+	})
+	_register("CGGradientGetContentHeadroom", func() {
+		purego.RegisterLibFunc(&_fnCGGradientGetContentHeadroom, _coregraphicsLib, "CGGradientGetContentHeadroom")
+	})
 	_register("CGGradientGetTypeID", func() { purego.RegisterLibFunc(&_fnCGGradientGetTypeID, _coregraphicsLib, "CGGradientGetTypeID") })
 	_register("CGGradientRelease", func() { purego.RegisterLibFunc(&_fnCGGradientRelease, _coregraphicsLib, "CGGradientRelease") })
 	_register("CGGradientRetain", func() { purego.RegisterLibFunc(&_fnCGGradientRetain, _coregraphicsLib, "CGGradientRetain") })
-	_register("CGImageCalculateContentAverageLightLevel", func() { purego.RegisterLibFunc(&_fnCGImageCalculateContentAverageLightLevel, _coregraphicsLib, "CGImageCalculateContentAverageLightLevel") })
-	_register("CGImageCalculateContentHeadroom", func() { purego.RegisterLibFunc(&_fnCGImageCalculateContentHeadroom, _coregraphicsLib, "CGImageCalculateContentHeadroom") })
-	_register("CGImageContainsImageSpecificToneMappingMetadata", func() { purego.RegisterLibFunc(&_fnCGImageContainsImageSpecificToneMappingMetadata, _coregraphicsLib, "CGImageContainsImageSpecificToneMappingMetadata") })
+	_register("CGImageCalculateContentAverageLightLevel", func() {
+		purego.RegisterLibFunc(&_fnCGImageCalculateContentAverageLightLevel, _coregraphicsLib, "CGImageCalculateContentAverageLightLevel")
+	})
+	_register("CGImageCalculateContentHeadroom", func() {
+		purego.RegisterLibFunc(&_fnCGImageCalculateContentHeadroom, _coregraphicsLib, "CGImageCalculateContentHeadroom")
+	})
+	_register("CGImageContainsImageSpecificToneMappingMetadata", func() {
+		purego.RegisterLibFunc(&_fnCGImageContainsImageSpecificToneMappingMetadata, _coregraphicsLib, "CGImageContainsImageSpecificToneMappingMetadata")
+	})
 	_register("CGImageCreate", func() { purego.RegisterLibFunc(&_fnCGImageCreate, _coregraphicsLib, "CGImageCreate") })
 	_register("CGImageCreateCopy", func() { purego.RegisterLibFunc(&_fnCGImageCreateCopy, _coregraphicsLib, "CGImageCreateCopy") })
-	_register("CGImageCreateCopyWithCalculatedHDRStats", func() { purego.RegisterLibFunc(&_fnCGImageCreateCopyWithCalculatedHDRStats, _coregraphicsLib, "CGImageCreateCopyWithCalculatedHDRStats") })
-	_register("CGImageCreateCopyWithColorSpace", func() { purego.RegisterLibFunc(&_fnCGImageCreateCopyWithColorSpace, _coregraphicsLib, "CGImageCreateCopyWithColorSpace") })
-	_register("CGImageCreateCopyWithContentAverageLightLevel", func() { purego.RegisterLibFunc(&_fnCGImageCreateCopyWithContentAverageLightLevel, _coregraphicsLib, "CGImageCreateCopyWithContentAverageLightLevel") })
-	_register("CGImageCreateCopyWithContentHeadroom", func() { purego.RegisterLibFunc(&_fnCGImageCreateCopyWithContentHeadroom, _coregraphicsLib, "CGImageCreateCopyWithContentHeadroom") })
-	_register("CGImageCreateWithContentHeadroom", func() { purego.RegisterLibFunc(&_fnCGImageCreateWithContentHeadroom, _coregraphicsLib, "CGImageCreateWithContentHeadroom") })
-	_register("CGImageCreateWithImageInRect", func() { purego.RegisterLibFunc(&_fnCGImageCreateWithImageInRect, _coregraphicsLib, "CGImageCreateWithImageInRect") })
-	_register("CGImageCreateWithJPEGDataProvider", func() { purego.RegisterLibFunc(&_fnCGImageCreateWithJPEGDataProvider, _coregraphicsLib, "CGImageCreateWithJPEGDataProvider") })
+	_register("CGImageCreateCopyWithCalculatedHDRStats", func() {
+		purego.RegisterLibFunc(&_fnCGImageCreateCopyWithCalculatedHDRStats, _coregraphicsLib, "CGImageCreateCopyWithCalculatedHDRStats")
+	})
+	_register("CGImageCreateCopyWithColorSpace", func() {
+		purego.RegisterLibFunc(&_fnCGImageCreateCopyWithColorSpace, _coregraphicsLib, "CGImageCreateCopyWithColorSpace")
+	})
+	_register("CGImageCreateCopyWithContentAverageLightLevel", func() {
+		purego.RegisterLibFunc(&_fnCGImageCreateCopyWithContentAverageLightLevel, _coregraphicsLib, "CGImageCreateCopyWithContentAverageLightLevel")
+	})
+	_register("CGImageCreateCopyWithContentHeadroom", func() {
+		purego.RegisterLibFunc(&_fnCGImageCreateCopyWithContentHeadroom, _coregraphicsLib, "CGImageCreateCopyWithContentHeadroom")
+	})
+	_register("CGImageCreateWithContentHeadroom", func() {
+		purego.RegisterLibFunc(&_fnCGImageCreateWithContentHeadroom, _coregraphicsLib, "CGImageCreateWithContentHeadroom")
+	})
+	_register("CGImageCreateWithImageInRect", func() {
+		purego.RegisterLibFunc(&_fnCGImageCreateWithImageInRect, _coregraphicsLib, "CGImageCreateWithImageInRect")
+	})
+	_register("CGImageCreateWithJPEGDataProvider", func() {
+		purego.RegisterLibFunc(&_fnCGImageCreateWithJPEGDataProvider, _coregraphicsLib, "CGImageCreateWithJPEGDataProvider")
+	})
 	_register("CGImageCreateWithMask", func() { purego.RegisterLibFunc(&_fnCGImageCreateWithMask, _coregraphicsLib, "CGImageCreateWithMask") })
-	_register("CGImageCreateWithMaskingColors", func() { purego.RegisterLibFunc(&_fnCGImageCreateWithMaskingColors, _coregraphicsLib, "CGImageCreateWithMaskingColors") })
-	_register("CGImageCreateWithPNGDataProvider", func() { purego.RegisterLibFunc(&_fnCGImageCreateWithPNGDataProvider, _coregraphicsLib, "CGImageCreateWithPNGDataProvider") })
+	_register("CGImageCreateWithMaskingColors", func() {
+		purego.RegisterLibFunc(&_fnCGImageCreateWithMaskingColors, _coregraphicsLib, "CGImageCreateWithMaskingColors")
+	})
+	_register("CGImageCreateWithPNGDataProvider", func() {
+		purego.RegisterLibFunc(&_fnCGImageCreateWithPNGDataProvider, _coregraphicsLib, "CGImageCreateWithPNGDataProvider")
+	})
 	_register("CGImageGetAlphaInfo", func() { purego.RegisterLibFunc(&_fnCGImageGetAlphaInfo, _coregraphicsLib, "CGImageGetAlphaInfo") })
 	_register("CGImageGetBitmapInfo", func() { purego.RegisterLibFunc(&_fnCGImageGetBitmapInfo, _coregraphicsLib, "CGImageGetBitmapInfo") })
-	_register("CGImageGetBitsPerComponent", func() { purego.RegisterLibFunc(&_fnCGImageGetBitsPerComponent, _coregraphicsLib, "CGImageGetBitsPerComponent") })
+	_register("CGImageGetBitsPerComponent", func() {
+		purego.RegisterLibFunc(&_fnCGImageGetBitsPerComponent, _coregraphicsLib, "CGImageGetBitsPerComponent")
+	})
 	_register("CGImageGetBitsPerPixel", func() { purego.RegisterLibFunc(&_fnCGImageGetBitsPerPixel, _coregraphicsLib, "CGImageGetBitsPerPixel") })
-	_register("CGImageGetByteOrderInfo", func() { purego.RegisterLibFunc(&_fnCGImageGetByteOrderInfo, _coregraphicsLib, "CGImageGetByteOrderInfo") })
+	_register("CGImageGetByteOrderInfo", func() {
+		purego.RegisterLibFunc(&_fnCGImageGetByteOrderInfo, _coregraphicsLib, "CGImageGetByteOrderInfo")
+	})
 	_register("CGImageGetBytesPerRow", func() { purego.RegisterLibFunc(&_fnCGImageGetBytesPerRow, _coregraphicsLib, "CGImageGetBytesPerRow") })
 	_register("CGImageGetColorSpace", func() { purego.RegisterLibFunc(&_fnCGImageGetColorSpace, _coregraphicsLib, "CGImageGetColorSpace") })
-	_register("CGImageGetContentAverageLightLevel", func() { purego.RegisterLibFunc(&_fnCGImageGetContentAverageLightLevel, _coregraphicsLib, "CGImageGetContentAverageLightLevel") })
-	_register("CGImageGetContentHeadroom", func() { purego.RegisterLibFunc(&_fnCGImageGetContentHeadroom, _coregraphicsLib, "CGImageGetContentHeadroom") })
+	_register("CGImageGetContentAverageLightLevel", func() {
+		purego.RegisterLibFunc(&_fnCGImageGetContentAverageLightLevel, _coregraphicsLib, "CGImageGetContentAverageLightLevel")
+	})
+	_register("CGImageGetContentHeadroom", func() {
+		purego.RegisterLibFunc(&_fnCGImageGetContentHeadroom, _coregraphicsLib, "CGImageGetContentHeadroom")
+	})
 	_register("CGImageGetDataProvider", func() { purego.RegisterLibFunc(&_fnCGImageGetDataProvider, _coregraphicsLib, "CGImageGetDataProvider") })
 	_register("CGImageGetDecode", func() { purego.RegisterLibFunc(&_fnCGImageGetDecode, _coregraphicsLib, "CGImageGetDecode") })
 	_register("CGImageGetHeight", func() { purego.RegisterLibFunc(&_fnCGImageGetHeight, _coregraphicsLib, "CGImageGetHeight") })
-	_register("CGImageGetPixelFormatInfo", func() { purego.RegisterLibFunc(&_fnCGImageGetPixelFormatInfo, _coregraphicsLib, "CGImageGetPixelFormatInfo") })
-	_register("CGImageGetRenderingIntent", func() { purego.RegisterLibFunc(&_fnCGImageGetRenderingIntent, _coregraphicsLib, "CGImageGetRenderingIntent") })
-	_register("CGImageGetShouldInterpolate", func() { purego.RegisterLibFunc(&_fnCGImageGetShouldInterpolate, _coregraphicsLib, "CGImageGetShouldInterpolate") })
+	_register("CGImageGetPixelFormatInfo", func() {
+		purego.RegisterLibFunc(&_fnCGImageGetPixelFormatInfo, _coregraphicsLib, "CGImageGetPixelFormatInfo")
+	})
+	_register("CGImageGetRenderingIntent", func() {
+		purego.RegisterLibFunc(&_fnCGImageGetRenderingIntent, _coregraphicsLib, "CGImageGetRenderingIntent")
+	})
+	_register("CGImageGetShouldInterpolate", func() {
+		purego.RegisterLibFunc(&_fnCGImageGetShouldInterpolate, _coregraphicsLib, "CGImageGetShouldInterpolate")
+	})
 	_register("CGImageGetTypeID", func() { purego.RegisterLibFunc(&_fnCGImageGetTypeID, _coregraphicsLib, "CGImageGetTypeID") })
 	_register("CGImageGetUTType", func() { purego.RegisterLibFunc(&_fnCGImageGetUTType, _coregraphicsLib, "CGImageGetUTType") })
 	_register("CGImageGetWidth", func() { purego.RegisterLibFunc(&_fnCGImageGetWidth, _coregraphicsLib, "CGImageGetWidth") })
@@ -509,19 +1025,25 @@ func _loadLibrary() {
 	_register("CGImageRetain", func() { purego.RegisterLibFunc(&_fnCGImageRetain, _coregraphicsLib, "CGImageRetain") })
 	_register("CGImageShouldToneMap", func() { purego.RegisterLibFunc(&_fnCGImageShouldToneMap, _coregraphicsLib, "CGImageShouldToneMap") })
 	_register("CGInhibitLocalEvents", func() { purego.RegisterLibFunc(&_fnCGInhibitLocalEvents, _coregraphicsLib, "CGInhibitLocalEvents") })
-	_register("CGLayerCreateWithContext", func() { purego.RegisterLibFunc(&_fnCGLayerCreateWithContext, _coregraphicsLib, "CGLayerCreateWithContext") })
+	_register("CGLayerCreateWithContext", func() {
+		purego.RegisterLibFunc(&_fnCGLayerCreateWithContext, _coregraphicsLib, "CGLayerCreateWithContext")
+	})
 	_register("CGLayerGetContext", func() { purego.RegisterLibFunc(&_fnCGLayerGetContext, _coregraphicsLib, "CGLayerGetContext") })
 	_register("CGLayerGetSize", func() { purego.RegisterLibFunc(&_fnCGLayerGetSize, _coregraphicsLib, "CGLayerGetSize") })
 	_register("CGLayerGetTypeID", func() { purego.RegisterLibFunc(&_fnCGLayerGetTypeID, _coregraphicsLib, "CGLayerGetTypeID") })
 	_register("CGLayerRelease", func() { purego.RegisterLibFunc(&_fnCGLayerRelease, _coregraphicsLib, "CGLayerRelease") })
 	_register("CGLayerRetain", func() { purego.RegisterLibFunc(&_fnCGLayerRetain, _coregraphicsLib, "CGLayerRetain") })
 	_register("CGMainDisplayID", func() { purego.RegisterLibFunc(&_fnCGMainDisplayID, _coregraphicsLib, "CGMainDisplayID") })
-	_register("CGOpenGLDisplayMaskToDisplayID", func() { purego.RegisterLibFunc(&_fnCGOpenGLDisplayMaskToDisplayID, _coregraphicsLib, "CGOpenGLDisplayMaskToDisplayID") })
+	_register("CGOpenGLDisplayMaskToDisplayID", func() {
+		purego.RegisterLibFunc(&_fnCGOpenGLDisplayMaskToDisplayID, _coregraphicsLib, "CGOpenGLDisplayMaskToDisplayID")
+	})
 	_register("CGPDFArrayApplyBlock", func() { purego.RegisterLibFunc(&_fnCGPDFArrayApplyBlock, _coregraphicsLib, "CGPDFArrayApplyBlock") })
 	_register("CGPDFArrayGetArray", func() { purego.RegisterLibFunc(&_fnCGPDFArrayGetArray, _coregraphicsLib, "CGPDFArrayGetArray") })
 	_register("CGPDFArrayGetBoolean", func() { purego.RegisterLibFunc(&_fnCGPDFArrayGetBoolean, _coregraphicsLib, "CGPDFArrayGetBoolean") })
 	_register("CGPDFArrayGetCount", func() { purego.RegisterLibFunc(&_fnCGPDFArrayGetCount, _coregraphicsLib, "CGPDFArrayGetCount") })
-	_register("CGPDFArrayGetDictionary", func() { purego.RegisterLibFunc(&_fnCGPDFArrayGetDictionary, _coregraphicsLib, "CGPDFArrayGetDictionary") })
+	_register("CGPDFArrayGetDictionary", func() {
+		purego.RegisterLibFunc(&_fnCGPDFArrayGetDictionary, _coregraphicsLib, "CGPDFArrayGetDictionary")
+	})
 	_register("CGPDFArrayGetInteger", func() { purego.RegisterLibFunc(&_fnCGPDFArrayGetInteger, _coregraphicsLib, "CGPDFArrayGetInteger") })
 	_register("CGPDFArrayGetName", func() { purego.RegisterLibFunc(&_fnCGPDFArrayGetName, _coregraphicsLib, "CGPDFArrayGetName") })
 	_register("CGPDFArrayGetNull", func() { purego.RegisterLibFunc(&_fnCGPDFArrayGetNull, _coregraphicsLib, "CGPDFArrayGetNull") })
@@ -529,83 +1051,181 @@ func _loadLibrary() {
 	_register("CGPDFArrayGetObject", func() { purego.RegisterLibFunc(&_fnCGPDFArrayGetObject, _coregraphicsLib, "CGPDFArrayGetObject") })
 	_register("CGPDFArrayGetStream", func() { purego.RegisterLibFunc(&_fnCGPDFArrayGetStream, _coregraphicsLib, "CGPDFArrayGetStream") })
 	_register("CGPDFArrayGetString", func() { purego.RegisterLibFunc(&_fnCGPDFArrayGetString, _coregraphicsLib, "CGPDFArrayGetString") })
-	_register("CGPDFContentStreamCreateWithPage", func() { purego.RegisterLibFunc(&_fnCGPDFContentStreamCreateWithPage, _coregraphicsLib, "CGPDFContentStreamCreateWithPage") })
-	_register("CGPDFContentStreamCreateWithStream", func() { purego.RegisterLibFunc(&_fnCGPDFContentStreamCreateWithStream, _coregraphicsLib, "CGPDFContentStreamCreateWithStream") })
-	_register("CGPDFContentStreamGetResource", func() { purego.RegisterLibFunc(&_fnCGPDFContentStreamGetResource, _coregraphicsLib, "CGPDFContentStreamGetResource") })
-	_register("CGPDFContentStreamGetStreams", func() { purego.RegisterLibFunc(&_fnCGPDFContentStreamGetStreams, _coregraphicsLib, "CGPDFContentStreamGetStreams") })
-	_register("CGPDFContentStreamRelease", func() { purego.RegisterLibFunc(&_fnCGPDFContentStreamRelease, _coregraphicsLib, "CGPDFContentStreamRelease") })
-	_register("CGPDFContentStreamRetain", func() { purego.RegisterLibFunc(&_fnCGPDFContentStreamRetain, _coregraphicsLib, "CGPDFContentStreamRetain") })
-	_register("CGPDFContextAddDestinationAtPoint", func() { purego.RegisterLibFunc(&_fnCGPDFContextAddDestinationAtPoint, _coregraphicsLib, "CGPDFContextAddDestinationAtPoint") })
-	_register("CGPDFContextAddDocumentMetadata", func() { purego.RegisterLibFunc(&_fnCGPDFContextAddDocumentMetadata, _coregraphicsLib, "CGPDFContextAddDocumentMetadata") })
+	_register("CGPDFContentStreamCreateWithPage", func() {
+		purego.RegisterLibFunc(&_fnCGPDFContentStreamCreateWithPage, _coregraphicsLib, "CGPDFContentStreamCreateWithPage")
+	})
+	_register("CGPDFContentStreamCreateWithStream", func() {
+		purego.RegisterLibFunc(&_fnCGPDFContentStreamCreateWithStream, _coregraphicsLib, "CGPDFContentStreamCreateWithStream")
+	})
+	_register("CGPDFContentStreamGetResource", func() {
+		purego.RegisterLibFunc(&_fnCGPDFContentStreamGetResource, _coregraphicsLib, "CGPDFContentStreamGetResource")
+	})
+	_register("CGPDFContentStreamGetStreams", func() {
+		purego.RegisterLibFunc(&_fnCGPDFContentStreamGetStreams, _coregraphicsLib, "CGPDFContentStreamGetStreams")
+	})
+	_register("CGPDFContentStreamRelease", func() {
+		purego.RegisterLibFunc(&_fnCGPDFContentStreamRelease, _coregraphicsLib, "CGPDFContentStreamRelease")
+	})
+	_register("CGPDFContentStreamRetain", func() {
+		purego.RegisterLibFunc(&_fnCGPDFContentStreamRetain, _coregraphicsLib, "CGPDFContentStreamRetain")
+	})
+	_register("CGPDFContextAddDestinationAtPoint", func() {
+		purego.RegisterLibFunc(&_fnCGPDFContextAddDestinationAtPoint, _coregraphicsLib, "CGPDFContextAddDestinationAtPoint")
+	})
+	_register("CGPDFContextAddDocumentMetadata", func() {
+		purego.RegisterLibFunc(&_fnCGPDFContextAddDocumentMetadata, _coregraphicsLib, "CGPDFContextAddDocumentMetadata")
+	})
 	_register("CGPDFContextBeginPage", func() { purego.RegisterLibFunc(&_fnCGPDFContextBeginPage, _coregraphicsLib, "CGPDFContextBeginPage") })
 	_register("CGPDFContextBeginTag", func() { purego.RegisterLibFunc(&_fnCGPDFContextBeginTag, _coregraphicsLib, "CGPDFContextBeginTag") })
 	_register("CGPDFContextClose", func() { purego.RegisterLibFunc(&_fnCGPDFContextClose, _coregraphicsLib, "CGPDFContextClose") })
 	_register("CGPDFContextCreate", func() { purego.RegisterLibFunc(&_fnCGPDFContextCreate, _coregraphicsLib, "CGPDFContextCreate") })
-	_register("CGPDFContextCreateWithURL", func() { purego.RegisterLibFunc(&_fnCGPDFContextCreateWithURL, _coregraphicsLib, "CGPDFContextCreateWithURL") })
+	_register("CGPDFContextCreateWithURL", func() {
+		purego.RegisterLibFunc(&_fnCGPDFContextCreateWithURL, _coregraphicsLib, "CGPDFContextCreateWithURL")
+	})
 	_register("CGPDFContextEndPage", func() { purego.RegisterLibFunc(&_fnCGPDFContextEndPage, _coregraphicsLib, "CGPDFContextEndPage") })
 	_register("CGPDFContextEndTag", func() { purego.RegisterLibFunc(&_fnCGPDFContextEndTag, _coregraphicsLib, "CGPDFContextEndTag") })
-	_register("CGPDFContextSetDestinationForRect", func() { purego.RegisterLibFunc(&_fnCGPDFContextSetDestinationForRect, _coregraphicsLib, "CGPDFContextSetDestinationForRect") })
+	_register("CGPDFContextSetDestinationForRect", func() {
+		purego.RegisterLibFunc(&_fnCGPDFContextSetDestinationForRect, _coregraphicsLib, "CGPDFContextSetDestinationForRect")
+	})
 	_register("CGPDFContextSetIDTree", func() { purego.RegisterLibFunc(&_fnCGPDFContextSetIDTree, _coregraphicsLib, "CGPDFContextSetIDTree") })
 	_register("CGPDFContextSetOutline", func() { purego.RegisterLibFunc(&_fnCGPDFContextSetOutline, _coregraphicsLib, "CGPDFContextSetOutline") })
-	_register("CGPDFContextSetPageTagStructureTree", func() { purego.RegisterLibFunc(&_fnCGPDFContextSetPageTagStructureTree, _coregraphicsLib, "CGPDFContextSetPageTagStructureTree") })
-	_register("CGPDFContextSetParentTree", func() { purego.RegisterLibFunc(&_fnCGPDFContextSetParentTree, _coregraphicsLib, "CGPDFContextSetParentTree") })
-	_register("CGPDFContextSetURLForRect", func() { purego.RegisterLibFunc(&_fnCGPDFContextSetURLForRect, _coregraphicsLib, "CGPDFContextSetURLForRect") })
-	_register("CGPDFDictionaryApplyBlock", func() { purego.RegisterLibFunc(&_fnCGPDFDictionaryApplyBlock, _coregraphicsLib, "CGPDFDictionaryApplyBlock") })
-	_register("CGPDFDictionaryApplyFunction", func() { purego.RegisterLibFunc(&_fnCGPDFDictionaryApplyFunction, _coregraphicsLib, "CGPDFDictionaryApplyFunction") })
-	_register("CGPDFDictionaryGetArray", func() { purego.RegisterLibFunc(&_fnCGPDFDictionaryGetArray, _coregraphicsLib, "CGPDFDictionaryGetArray") })
-	_register("CGPDFDictionaryGetBoolean", func() { purego.RegisterLibFunc(&_fnCGPDFDictionaryGetBoolean, _coregraphicsLib, "CGPDFDictionaryGetBoolean") })
-	_register("CGPDFDictionaryGetCount", func() { purego.RegisterLibFunc(&_fnCGPDFDictionaryGetCount, _coregraphicsLib, "CGPDFDictionaryGetCount") })
-	_register("CGPDFDictionaryGetDictionary", func() { purego.RegisterLibFunc(&_fnCGPDFDictionaryGetDictionary, _coregraphicsLib, "CGPDFDictionaryGetDictionary") })
-	_register("CGPDFDictionaryGetInteger", func() { purego.RegisterLibFunc(&_fnCGPDFDictionaryGetInteger, _coregraphicsLib, "CGPDFDictionaryGetInteger") })
+	_register("CGPDFContextSetPageTagStructureTree", func() {
+		purego.RegisterLibFunc(&_fnCGPDFContextSetPageTagStructureTree, _coregraphicsLib, "CGPDFContextSetPageTagStructureTree")
+	})
+	_register("CGPDFContextSetParentTree", func() {
+		purego.RegisterLibFunc(&_fnCGPDFContextSetParentTree, _coregraphicsLib, "CGPDFContextSetParentTree")
+	})
+	_register("CGPDFContextSetURLForRect", func() {
+		purego.RegisterLibFunc(&_fnCGPDFContextSetURLForRect, _coregraphicsLib, "CGPDFContextSetURLForRect")
+	})
+	_register("CGPDFDictionaryApplyBlock", func() {
+		purego.RegisterLibFunc(&_fnCGPDFDictionaryApplyBlock, _coregraphicsLib, "CGPDFDictionaryApplyBlock")
+	})
+	_register("CGPDFDictionaryApplyFunction", func() {
+		purego.RegisterLibFunc(&_fnCGPDFDictionaryApplyFunction, _coregraphicsLib, "CGPDFDictionaryApplyFunction")
+	})
+	_register("CGPDFDictionaryGetArray", func() {
+		purego.RegisterLibFunc(&_fnCGPDFDictionaryGetArray, _coregraphicsLib, "CGPDFDictionaryGetArray")
+	})
+	_register("CGPDFDictionaryGetBoolean", func() {
+		purego.RegisterLibFunc(&_fnCGPDFDictionaryGetBoolean, _coregraphicsLib, "CGPDFDictionaryGetBoolean")
+	})
+	_register("CGPDFDictionaryGetCount", func() {
+		purego.RegisterLibFunc(&_fnCGPDFDictionaryGetCount, _coregraphicsLib, "CGPDFDictionaryGetCount")
+	})
+	_register("CGPDFDictionaryGetDictionary", func() {
+		purego.RegisterLibFunc(&_fnCGPDFDictionaryGetDictionary, _coregraphicsLib, "CGPDFDictionaryGetDictionary")
+	})
+	_register("CGPDFDictionaryGetInteger", func() {
+		purego.RegisterLibFunc(&_fnCGPDFDictionaryGetInteger, _coregraphicsLib, "CGPDFDictionaryGetInteger")
+	})
 	_register("CGPDFDictionaryGetName", func() { purego.RegisterLibFunc(&_fnCGPDFDictionaryGetName, _coregraphicsLib, "CGPDFDictionaryGetName") })
-	_register("CGPDFDictionaryGetNumber", func() { purego.RegisterLibFunc(&_fnCGPDFDictionaryGetNumber, _coregraphicsLib, "CGPDFDictionaryGetNumber") })
-	_register("CGPDFDictionaryGetObject", func() { purego.RegisterLibFunc(&_fnCGPDFDictionaryGetObject, _coregraphicsLib, "CGPDFDictionaryGetObject") })
-	_register("CGPDFDictionaryGetStream", func() { purego.RegisterLibFunc(&_fnCGPDFDictionaryGetStream, _coregraphicsLib, "CGPDFDictionaryGetStream") })
-	_register("CGPDFDictionaryGetString", func() { purego.RegisterLibFunc(&_fnCGPDFDictionaryGetString, _coregraphicsLib, "CGPDFDictionaryGetString") })
-	_register("CGPDFDocumentAllowsCopying", func() { purego.RegisterLibFunc(&_fnCGPDFDocumentAllowsCopying, _coregraphicsLib, "CGPDFDocumentAllowsCopying") })
-	_register("CGPDFDocumentAllowsPrinting", func() { purego.RegisterLibFunc(&_fnCGPDFDocumentAllowsPrinting, _coregraphicsLib, "CGPDFDocumentAllowsPrinting") })
-	_register("CGPDFDocumentCreateWithProvider", func() { purego.RegisterLibFunc(&_fnCGPDFDocumentCreateWithProvider, _coregraphicsLib, "CGPDFDocumentCreateWithProvider") })
-	_register("CGPDFDocumentCreateWithURL", func() { purego.RegisterLibFunc(&_fnCGPDFDocumentCreateWithURL, _coregraphicsLib, "CGPDFDocumentCreateWithURL") })
-	_register("CGPDFDocumentGetAccessPermissions", func() { purego.RegisterLibFunc(&_fnCGPDFDocumentGetAccessPermissions, _coregraphicsLib, "CGPDFDocumentGetAccessPermissions") })
+	_register("CGPDFDictionaryGetNumber", func() {
+		purego.RegisterLibFunc(&_fnCGPDFDictionaryGetNumber, _coregraphicsLib, "CGPDFDictionaryGetNumber")
+	})
+	_register("CGPDFDictionaryGetObject", func() {
+		purego.RegisterLibFunc(&_fnCGPDFDictionaryGetObject, _coregraphicsLib, "CGPDFDictionaryGetObject")
+	})
+	_register("CGPDFDictionaryGetStream", func() {
+		purego.RegisterLibFunc(&_fnCGPDFDictionaryGetStream, _coregraphicsLib, "CGPDFDictionaryGetStream")
+	})
+	_register("CGPDFDictionaryGetString", func() {
+		purego.RegisterLibFunc(&_fnCGPDFDictionaryGetString, _coregraphicsLib, "CGPDFDictionaryGetString")
+	})
+	_register("CGPDFDocumentAllowsCopying", func() {
+		purego.RegisterLibFunc(&_fnCGPDFDocumentAllowsCopying, _coregraphicsLib, "CGPDFDocumentAllowsCopying")
+	})
+	_register("CGPDFDocumentAllowsPrinting", func() {
+		purego.RegisterLibFunc(&_fnCGPDFDocumentAllowsPrinting, _coregraphicsLib, "CGPDFDocumentAllowsPrinting")
+	})
+	_register("CGPDFDocumentCreateWithProvider", func() {
+		purego.RegisterLibFunc(&_fnCGPDFDocumentCreateWithProvider, _coregraphicsLib, "CGPDFDocumentCreateWithProvider")
+	})
+	_register("CGPDFDocumentCreateWithURL", func() {
+		purego.RegisterLibFunc(&_fnCGPDFDocumentCreateWithURL, _coregraphicsLib, "CGPDFDocumentCreateWithURL")
+	})
+	_register("CGPDFDocumentGetAccessPermissions", func() {
+		purego.RegisterLibFunc(&_fnCGPDFDocumentGetAccessPermissions, _coregraphicsLib, "CGPDFDocumentGetAccessPermissions")
+	})
 	_register("CGPDFDocumentGetArtBox", func() { purego.RegisterLibFunc(&_fnCGPDFDocumentGetArtBox, _coregraphicsLib, "CGPDFDocumentGetArtBox") })
-	_register("CGPDFDocumentGetBleedBox", func() { purego.RegisterLibFunc(&_fnCGPDFDocumentGetBleedBox, _coregraphicsLib, "CGPDFDocumentGetBleedBox") })
-	_register("CGPDFDocumentGetCatalog", func() { purego.RegisterLibFunc(&_fnCGPDFDocumentGetCatalog, _coregraphicsLib, "CGPDFDocumentGetCatalog") })
-	_register("CGPDFDocumentGetCropBox", func() { purego.RegisterLibFunc(&_fnCGPDFDocumentGetCropBox, _coregraphicsLib, "CGPDFDocumentGetCropBox") })
+	_register("CGPDFDocumentGetBleedBox", func() {
+		purego.RegisterLibFunc(&_fnCGPDFDocumentGetBleedBox, _coregraphicsLib, "CGPDFDocumentGetBleedBox")
+	})
+	_register("CGPDFDocumentGetCatalog", func() {
+		purego.RegisterLibFunc(&_fnCGPDFDocumentGetCatalog, _coregraphicsLib, "CGPDFDocumentGetCatalog")
+	})
+	_register("CGPDFDocumentGetCropBox", func() {
+		purego.RegisterLibFunc(&_fnCGPDFDocumentGetCropBox, _coregraphicsLib, "CGPDFDocumentGetCropBox")
+	})
 	_register("CGPDFDocumentGetID", func() { purego.RegisterLibFunc(&_fnCGPDFDocumentGetID, _coregraphicsLib, "CGPDFDocumentGetID") })
 	_register("CGPDFDocumentGetInfo", func() { purego.RegisterLibFunc(&_fnCGPDFDocumentGetInfo, _coregraphicsLib, "CGPDFDocumentGetInfo") })
-	_register("CGPDFDocumentGetMediaBox", func() { purego.RegisterLibFunc(&_fnCGPDFDocumentGetMediaBox, _coregraphicsLib, "CGPDFDocumentGetMediaBox") })
-	_register("CGPDFDocumentGetNumberOfPages", func() { purego.RegisterLibFunc(&_fnCGPDFDocumentGetNumberOfPages, _coregraphicsLib, "CGPDFDocumentGetNumberOfPages") })
-	_register("CGPDFDocumentGetOutline", func() { purego.RegisterLibFunc(&_fnCGPDFDocumentGetOutline, _coregraphicsLib, "CGPDFDocumentGetOutline") })
+	_register("CGPDFDocumentGetMediaBox", func() {
+		purego.RegisterLibFunc(&_fnCGPDFDocumentGetMediaBox, _coregraphicsLib, "CGPDFDocumentGetMediaBox")
+	})
+	_register("CGPDFDocumentGetNumberOfPages", func() {
+		purego.RegisterLibFunc(&_fnCGPDFDocumentGetNumberOfPages, _coregraphicsLib, "CGPDFDocumentGetNumberOfPages")
+	})
+	_register("CGPDFDocumentGetOutline", func() {
+		purego.RegisterLibFunc(&_fnCGPDFDocumentGetOutline, _coregraphicsLib, "CGPDFDocumentGetOutline")
+	})
 	_register("CGPDFDocumentGetPage", func() { purego.RegisterLibFunc(&_fnCGPDFDocumentGetPage, _coregraphicsLib, "CGPDFDocumentGetPage") })
-	_register("CGPDFDocumentGetRotationAngle", func() { purego.RegisterLibFunc(&_fnCGPDFDocumentGetRotationAngle, _coregraphicsLib, "CGPDFDocumentGetRotationAngle") })
-	_register("CGPDFDocumentGetTrimBox", func() { purego.RegisterLibFunc(&_fnCGPDFDocumentGetTrimBox, _coregraphicsLib, "CGPDFDocumentGetTrimBox") })
+	_register("CGPDFDocumentGetRotationAngle", func() {
+		purego.RegisterLibFunc(&_fnCGPDFDocumentGetRotationAngle, _coregraphicsLib, "CGPDFDocumentGetRotationAngle")
+	})
+	_register("CGPDFDocumentGetTrimBox", func() {
+		purego.RegisterLibFunc(&_fnCGPDFDocumentGetTrimBox, _coregraphicsLib, "CGPDFDocumentGetTrimBox")
+	})
 	_register("CGPDFDocumentGetTypeID", func() { purego.RegisterLibFunc(&_fnCGPDFDocumentGetTypeID, _coregraphicsLib, "CGPDFDocumentGetTypeID") })
-	_register("CGPDFDocumentGetVersion", func() { purego.RegisterLibFunc(&_fnCGPDFDocumentGetVersion, _coregraphicsLib, "CGPDFDocumentGetVersion") })
-	_register("CGPDFDocumentIsEncrypted", func() { purego.RegisterLibFunc(&_fnCGPDFDocumentIsEncrypted, _coregraphicsLib, "CGPDFDocumentIsEncrypted") })
-	_register("CGPDFDocumentIsUnlocked", func() { purego.RegisterLibFunc(&_fnCGPDFDocumentIsUnlocked, _coregraphicsLib, "CGPDFDocumentIsUnlocked") })
+	_register("CGPDFDocumentGetVersion", func() {
+		purego.RegisterLibFunc(&_fnCGPDFDocumentGetVersion, _coregraphicsLib, "CGPDFDocumentGetVersion")
+	})
+	_register("CGPDFDocumentIsEncrypted", func() {
+		purego.RegisterLibFunc(&_fnCGPDFDocumentIsEncrypted, _coregraphicsLib, "CGPDFDocumentIsEncrypted")
+	})
+	_register("CGPDFDocumentIsUnlocked", func() {
+		purego.RegisterLibFunc(&_fnCGPDFDocumentIsUnlocked, _coregraphicsLib, "CGPDFDocumentIsUnlocked")
+	})
 	_register("CGPDFDocumentRelease", func() { purego.RegisterLibFunc(&_fnCGPDFDocumentRelease, _coregraphicsLib, "CGPDFDocumentRelease") })
 	_register("CGPDFDocumentRetain", func() { purego.RegisterLibFunc(&_fnCGPDFDocumentRetain, _coregraphicsLib, "CGPDFDocumentRetain") })
-	_register("CGPDFDocumentUnlockWithPassword", func() { purego.RegisterLibFunc(&_fnCGPDFDocumentUnlockWithPassword, _coregraphicsLib, "CGPDFDocumentUnlockWithPassword") })
+	_register("CGPDFDocumentUnlockWithPassword", func() {
+		purego.RegisterLibFunc(&_fnCGPDFDocumentUnlockWithPassword, _coregraphicsLib, "CGPDFDocumentUnlockWithPassword")
+	})
 	_register("CGPDFObjectGetType", func() { purego.RegisterLibFunc(&_fnCGPDFObjectGetType, _coregraphicsLib, "CGPDFObjectGetType") })
 	_register("CGPDFObjectGetValue", func() { purego.RegisterLibFunc(&_fnCGPDFObjectGetValue, _coregraphicsLib, "CGPDFObjectGetValue") })
-	_register("CGPDFOperatorTableCreate", func() { purego.RegisterLibFunc(&_fnCGPDFOperatorTableCreate, _coregraphicsLib, "CGPDFOperatorTableCreate") })
-	_register("CGPDFOperatorTableRelease", func() { purego.RegisterLibFunc(&_fnCGPDFOperatorTableRelease, _coregraphicsLib, "CGPDFOperatorTableRelease") })
-	_register("CGPDFOperatorTableRetain", func() { purego.RegisterLibFunc(&_fnCGPDFOperatorTableRetain, _coregraphicsLib, "CGPDFOperatorTableRetain") })
-	_register("CGPDFOperatorTableSetCallback", func() { purego.RegisterLibFunc(&_fnCGPDFOperatorTableSetCallback, _coregraphicsLib, "CGPDFOperatorTableSetCallback") })
+	_register("CGPDFOperatorTableCreate", func() {
+		purego.RegisterLibFunc(&_fnCGPDFOperatorTableCreate, _coregraphicsLib, "CGPDFOperatorTableCreate")
+	})
+	_register("CGPDFOperatorTableRelease", func() {
+		purego.RegisterLibFunc(&_fnCGPDFOperatorTableRelease, _coregraphicsLib, "CGPDFOperatorTableRelease")
+	})
+	_register("CGPDFOperatorTableRetain", func() {
+		purego.RegisterLibFunc(&_fnCGPDFOperatorTableRetain, _coregraphicsLib, "CGPDFOperatorTableRetain")
+	})
+	_register("CGPDFOperatorTableSetCallback", func() {
+		purego.RegisterLibFunc(&_fnCGPDFOperatorTableSetCallback, _coregraphicsLib, "CGPDFOperatorTableSetCallback")
+	})
 	_register("CGPDFPageGetBoxRect", func() { purego.RegisterLibFunc(&_fnCGPDFPageGetBoxRect, _coregraphicsLib, "CGPDFPageGetBoxRect") })
 	_register("CGPDFPageGetDictionary", func() { purego.RegisterLibFunc(&_fnCGPDFPageGetDictionary, _coregraphicsLib, "CGPDFPageGetDictionary") })
 	_register("CGPDFPageGetDocument", func() { purego.RegisterLibFunc(&_fnCGPDFPageGetDocument, _coregraphicsLib, "CGPDFPageGetDocument") })
-	_register("CGPDFPageGetDrawingTransform", func() { purego.RegisterLibFunc(&_fnCGPDFPageGetDrawingTransform, _coregraphicsLib, "CGPDFPageGetDrawingTransform") })
+	_register("CGPDFPageGetDrawingTransform", func() {
+		purego.RegisterLibFunc(&_fnCGPDFPageGetDrawingTransform, _coregraphicsLib, "CGPDFPageGetDrawingTransform")
+	})
 	_register("CGPDFPageGetPageNumber", func() { purego.RegisterLibFunc(&_fnCGPDFPageGetPageNumber, _coregraphicsLib, "CGPDFPageGetPageNumber") })
-	_register("CGPDFPageGetRotationAngle", func() { purego.RegisterLibFunc(&_fnCGPDFPageGetRotationAngle, _coregraphicsLib, "CGPDFPageGetRotationAngle") })
+	_register("CGPDFPageGetRotationAngle", func() {
+		purego.RegisterLibFunc(&_fnCGPDFPageGetRotationAngle, _coregraphicsLib, "CGPDFPageGetRotationAngle")
+	})
 	_register("CGPDFPageGetTypeID", func() { purego.RegisterLibFunc(&_fnCGPDFPageGetTypeID, _coregraphicsLib, "CGPDFPageGetTypeID") })
 	_register("CGPDFPageRelease", func() { purego.RegisterLibFunc(&_fnCGPDFPageRelease, _coregraphicsLib, "CGPDFPageRelease") })
 	_register("CGPDFPageRetain", func() { purego.RegisterLibFunc(&_fnCGPDFPageRetain, _coregraphicsLib, "CGPDFPageRetain") })
 	_register("CGPDFScannerCreate", func() { purego.RegisterLibFunc(&_fnCGPDFScannerCreate, _coregraphicsLib, "CGPDFScannerCreate") })
-	_register("CGPDFScannerGetContentStream", func() { purego.RegisterLibFunc(&_fnCGPDFScannerGetContentStream, _coregraphicsLib, "CGPDFScannerGetContentStream") })
+	_register("CGPDFScannerGetContentStream", func() {
+		purego.RegisterLibFunc(&_fnCGPDFScannerGetContentStream, _coregraphicsLib, "CGPDFScannerGetContentStream")
+	})
 	_register("CGPDFScannerPopArray", func() { purego.RegisterLibFunc(&_fnCGPDFScannerPopArray, _coregraphicsLib, "CGPDFScannerPopArray") })
 	_register("CGPDFScannerPopBoolean", func() { purego.RegisterLibFunc(&_fnCGPDFScannerPopBoolean, _coregraphicsLib, "CGPDFScannerPopBoolean") })
-	_register("CGPDFScannerPopDictionary", func() { purego.RegisterLibFunc(&_fnCGPDFScannerPopDictionary, _coregraphicsLib, "CGPDFScannerPopDictionary") })
+	_register("CGPDFScannerPopDictionary", func() {
+		purego.RegisterLibFunc(&_fnCGPDFScannerPopDictionary, _coregraphicsLib, "CGPDFScannerPopDictionary")
+	})
 	_register("CGPDFScannerPopInteger", func() { purego.RegisterLibFunc(&_fnCGPDFScannerPopInteger, _coregraphicsLib, "CGPDFScannerPopInteger") })
 	_register("CGPDFScannerPopName", func() { purego.RegisterLibFunc(&_fnCGPDFScannerPopName, _coregraphicsLib, "CGPDFScannerPopName") })
 	_register("CGPDFScannerPopNumber", func() { purego.RegisterLibFunc(&_fnCGPDFScannerPopNumber, _coregraphicsLib, "CGPDFScannerPopNumber") })
@@ -617,9 +1237,13 @@ func _loadLibrary() {
 	_register("CGPDFScannerScan", func() { purego.RegisterLibFunc(&_fnCGPDFScannerScan, _coregraphicsLib, "CGPDFScannerScan") })
 	_register("CGPDFScannerStop", func() { purego.RegisterLibFunc(&_fnCGPDFScannerStop, _coregraphicsLib, "CGPDFScannerStop") })
 	_register("CGPDFStreamCopyData", func() { purego.RegisterLibFunc(&_fnCGPDFStreamCopyData, _coregraphicsLib, "CGPDFStreamCopyData") })
-	_register("CGPDFStreamGetDictionary", func() { purego.RegisterLibFunc(&_fnCGPDFStreamGetDictionary, _coregraphicsLib, "CGPDFStreamGetDictionary") })
+	_register("CGPDFStreamGetDictionary", func() {
+		purego.RegisterLibFunc(&_fnCGPDFStreamGetDictionary, _coregraphicsLib, "CGPDFStreamGetDictionary")
+	})
 	_register("CGPDFStringCopyDate", func() { purego.RegisterLibFunc(&_fnCGPDFStringCopyDate, _coregraphicsLib, "CGPDFStringCopyDate") })
-	_register("CGPDFStringCopyTextString", func() { purego.RegisterLibFunc(&_fnCGPDFStringCopyTextString, _coregraphicsLib, "CGPDFStringCopyTextString") })
+	_register("CGPDFStringCopyTextString", func() {
+		purego.RegisterLibFunc(&_fnCGPDFStringCopyTextString, _coregraphicsLib, "CGPDFStringCopyTextString")
+	})
 	_register("CGPDFStringGetBytePtr", func() { purego.RegisterLibFunc(&_fnCGPDFStringGetBytePtr, _coregraphicsLib, "CGPDFStringGetBytePtr") })
 	_register("CGPDFStringGetLength", func() { purego.RegisterLibFunc(&_fnCGPDFStringGetLength, _coregraphicsLib, "CGPDFStringGetLength") })
 	_register("CGPDFTagTypeGetName", func() { purego.RegisterLibFunc(&_fnCGPDFTagTypeGetName, _coregraphicsLib, "CGPDFTagTypeGetName") })
@@ -627,7 +1251,9 @@ func _loadLibrary() {
 	_register("CGPSConverterConvert", func() { purego.RegisterLibFunc(&_fnCGPSConverterConvert, _coregraphicsLib, "CGPSConverterConvert") })
 	_register("CGPSConverterCreate", func() { purego.RegisterLibFunc(&_fnCGPSConverterCreate, _coregraphicsLib, "CGPSConverterCreate") })
 	_register("CGPSConverterGetTypeID", func() { purego.RegisterLibFunc(&_fnCGPSConverterGetTypeID, _coregraphicsLib, "CGPSConverterGetTypeID") })
-	_register("CGPSConverterIsConverting", func() { purego.RegisterLibFunc(&_fnCGPSConverterIsConverting, _coregraphicsLib, "CGPSConverterIsConverting") })
+	_register("CGPSConverterIsConverting", func() {
+		purego.RegisterLibFunc(&_fnCGPSConverterIsConverting, _coregraphicsLib, "CGPSConverterIsConverting")
+	})
 	_register("CGPathAddArc", func() { purego.RegisterLibFunc(&_fnCGPathAddArc, _coregraphicsLib, "CGPathAddArc") })
 	_register("CGPathAddArcToPoint", func() { purego.RegisterLibFunc(&_fnCGPathAddArcToPoint, _coregraphicsLib, "CGPathAddArcToPoint") })
 	_register("CGPathAddCurveToPoint", func() { purego.RegisterLibFunc(&_fnCGPathAddCurveToPoint, _coregraphicsLib, "CGPathAddCurveToPoint") })
@@ -635,7 +1261,9 @@ func _loadLibrary() {
 	_register("CGPathAddLineToPoint", func() { purego.RegisterLibFunc(&_fnCGPathAddLineToPoint, _coregraphicsLib, "CGPathAddLineToPoint") })
 	_register("CGPathAddLines", func() { purego.RegisterLibFunc(&_fnCGPathAddLines, _coregraphicsLib, "CGPathAddLines") })
 	_register("CGPathAddPath", func() { purego.RegisterLibFunc(&_fnCGPathAddPath, _coregraphicsLib, "CGPathAddPath") })
-	_register("CGPathAddQuadCurveToPoint", func() { purego.RegisterLibFunc(&_fnCGPathAddQuadCurveToPoint, _coregraphicsLib, "CGPathAddQuadCurveToPoint") })
+	_register("CGPathAddQuadCurveToPoint", func() {
+		purego.RegisterLibFunc(&_fnCGPathAddQuadCurveToPoint, _coregraphicsLib, "CGPathAddQuadCurveToPoint")
+	})
 	_register("CGPathAddRect", func() { purego.RegisterLibFunc(&_fnCGPathAddRect, _coregraphicsLib, "CGPathAddRect") })
 	_register("CGPathAddRects", func() { purego.RegisterLibFunc(&_fnCGPathAddRects, _coregraphicsLib, "CGPathAddRects") })
 	_register("CGPathAddRelativeArc", func() { purego.RegisterLibFunc(&_fnCGPathAddRelativeArc, _coregraphicsLib, "CGPathAddRelativeArc") })
@@ -645,28 +1273,62 @@ func _loadLibrary() {
 	_register("CGPathCloseSubpath", func() { purego.RegisterLibFunc(&_fnCGPathCloseSubpath, _coregraphicsLib, "CGPathCloseSubpath") })
 	_register("CGPathContainsPoint", func() { purego.RegisterLibFunc(&_fnCGPathContainsPoint, _coregraphicsLib, "CGPathContainsPoint") })
 	_register("CGPathCreateCopy", func() { purego.RegisterLibFunc(&_fnCGPathCreateCopy, _coregraphicsLib, "CGPathCreateCopy") })
-	_register("CGPathCreateCopyByDashingPath", func() { purego.RegisterLibFunc(&_fnCGPathCreateCopyByDashingPath, _coregraphicsLib, "CGPathCreateCopyByDashingPath") })
-	_register("CGPathCreateCopyByFlattening", func() { purego.RegisterLibFunc(&_fnCGPathCreateCopyByFlattening, _coregraphicsLib, "CGPathCreateCopyByFlattening") })
-	_register("CGPathCreateCopyByIntersectingPath", func() { purego.RegisterLibFunc(&_fnCGPathCreateCopyByIntersectingPath, _coregraphicsLib, "CGPathCreateCopyByIntersectingPath") })
-	_register("CGPathCreateCopyByNormalizing", func() { purego.RegisterLibFunc(&_fnCGPathCreateCopyByNormalizing, _coregraphicsLib, "CGPathCreateCopyByNormalizing") })
-	_register("CGPathCreateCopyByStrokingPath", func() { purego.RegisterLibFunc(&_fnCGPathCreateCopyByStrokingPath, _coregraphicsLib, "CGPathCreateCopyByStrokingPath") })
-	_register("CGPathCreateCopyBySubtractingPath", func() { purego.RegisterLibFunc(&_fnCGPathCreateCopyBySubtractingPath, _coregraphicsLib, "CGPathCreateCopyBySubtractingPath") })
-	_register("CGPathCreateCopyBySymmetricDifferenceOfPath", func() { purego.RegisterLibFunc(&_fnCGPathCreateCopyBySymmetricDifferenceOfPath, _coregraphicsLib, "CGPathCreateCopyBySymmetricDifferenceOfPath") })
-	_register("CGPathCreateCopyByTransformingPath", func() { purego.RegisterLibFunc(&_fnCGPathCreateCopyByTransformingPath, _coregraphicsLib, "CGPathCreateCopyByTransformingPath") })
-	_register("CGPathCreateCopyByUnioningPath", func() { purego.RegisterLibFunc(&_fnCGPathCreateCopyByUnioningPath, _coregraphicsLib, "CGPathCreateCopyByUnioningPath") })
-	_register("CGPathCreateCopyOfLineByIntersectingPath", func() { purego.RegisterLibFunc(&_fnCGPathCreateCopyOfLineByIntersectingPath, _coregraphicsLib, "CGPathCreateCopyOfLineByIntersectingPath") })
-	_register("CGPathCreateCopyOfLineBySubtractingPath", func() { purego.RegisterLibFunc(&_fnCGPathCreateCopyOfLineBySubtractingPath, _coregraphicsLib, "CGPathCreateCopyOfLineBySubtractingPath") })
+	_register("CGPathCreateCopyByDashingPath", func() {
+		purego.RegisterLibFunc(&_fnCGPathCreateCopyByDashingPath, _coregraphicsLib, "CGPathCreateCopyByDashingPath")
+	})
+	_register("CGPathCreateCopyByFlattening", func() {
+		purego.RegisterLibFunc(&_fnCGPathCreateCopyByFlattening, _coregraphicsLib, "CGPathCreateCopyByFlattening")
+	})
+	_register("CGPathCreateCopyByIntersectingPath", func() {
+		purego.RegisterLibFunc(&_fnCGPathCreateCopyByIntersectingPath, _coregraphicsLib, "CGPathCreateCopyByIntersectingPath")
+	})
+	_register("CGPathCreateCopyByNormalizing", func() {
+		purego.RegisterLibFunc(&_fnCGPathCreateCopyByNormalizing, _coregraphicsLib, "CGPathCreateCopyByNormalizing")
+	})
+	_register("CGPathCreateCopyByStrokingPath", func() {
+		purego.RegisterLibFunc(&_fnCGPathCreateCopyByStrokingPath, _coregraphicsLib, "CGPathCreateCopyByStrokingPath")
+	})
+	_register("CGPathCreateCopyBySubtractingPath", func() {
+		purego.RegisterLibFunc(&_fnCGPathCreateCopyBySubtractingPath, _coregraphicsLib, "CGPathCreateCopyBySubtractingPath")
+	})
+	_register("CGPathCreateCopyBySymmetricDifferenceOfPath", func() {
+		purego.RegisterLibFunc(&_fnCGPathCreateCopyBySymmetricDifferenceOfPath, _coregraphicsLib, "CGPathCreateCopyBySymmetricDifferenceOfPath")
+	})
+	_register("CGPathCreateCopyByTransformingPath", func() {
+		purego.RegisterLibFunc(&_fnCGPathCreateCopyByTransformingPath, _coregraphicsLib, "CGPathCreateCopyByTransformingPath")
+	})
+	_register("CGPathCreateCopyByUnioningPath", func() {
+		purego.RegisterLibFunc(&_fnCGPathCreateCopyByUnioningPath, _coregraphicsLib, "CGPathCreateCopyByUnioningPath")
+	})
+	_register("CGPathCreateCopyOfLineByIntersectingPath", func() {
+		purego.RegisterLibFunc(&_fnCGPathCreateCopyOfLineByIntersectingPath, _coregraphicsLib, "CGPathCreateCopyOfLineByIntersectingPath")
+	})
+	_register("CGPathCreateCopyOfLineBySubtractingPath", func() {
+		purego.RegisterLibFunc(&_fnCGPathCreateCopyOfLineBySubtractingPath, _coregraphicsLib, "CGPathCreateCopyOfLineBySubtractingPath")
+	})
 	_register("CGPathCreateMutable", func() { purego.RegisterLibFunc(&_fnCGPathCreateMutable, _coregraphicsLib, "CGPathCreateMutable") })
-	_register("CGPathCreateMutableCopy", func() { purego.RegisterLibFunc(&_fnCGPathCreateMutableCopy, _coregraphicsLib, "CGPathCreateMutableCopy") })
-	_register("CGPathCreateMutableCopyByTransformingPath", func() { purego.RegisterLibFunc(&_fnCGPathCreateMutableCopyByTransformingPath, _coregraphicsLib, "CGPathCreateMutableCopyByTransformingPath") })
-	_register("CGPathCreateSeparateComponents", func() { purego.RegisterLibFunc(&_fnCGPathCreateSeparateComponents, _coregraphicsLib, "CGPathCreateSeparateComponents") })
-	_register("CGPathCreateWithEllipseInRect", func() { purego.RegisterLibFunc(&_fnCGPathCreateWithEllipseInRect, _coregraphicsLib, "CGPathCreateWithEllipseInRect") })
+	_register("CGPathCreateMutableCopy", func() {
+		purego.RegisterLibFunc(&_fnCGPathCreateMutableCopy, _coregraphicsLib, "CGPathCreateMutableCopy")
+	})
+	_register("CGPathCreateMutableCopyByTransformingPath", func() {
+		purego.RegisterLibFunc(&_fnCGPathCreateMutableCopyByTransformingPath, _coregraphicsLib, "CGPathCreateMutableCopyByTransformingPath")
+	})
+	_register("CGPathCreateSeparateComponents", func() {
+		purego.RegisterLibFunc(&_fnCGPathCreateSeparateComponents, _coregraphicsLib, "CGPathCreateSeparateComponents")
+	})
+	_register("CGPathCreateWithEllipseInRect", func() {
+		purego.RegisterLibFunc(&_fnCGPathCreateWithEllipseInRect, _coregraphicsLib, "CGPathCreateWithEllipseInRect")
+	})
 	_register("CGPathCreateWithRect", func() { purego.RegisterLibFunc(&_fnCGPathCreateWithRect, _coregraphicsLib, "CGPathCreateWithRect") })
-	_register("CGPathCreateWithRoundedRect", func() { purego.RegisterLibFunc(&_fnCGPathCreateWithRoundedRect, _coregraphicsLib, "CGPathCreateWithRoundedRect") })
+	_register("CGPathCreateWithRoundedRect", func() {
+		purego.RegisterLibFunc(&_fnCGPathCreateWithRoundedRect, _coregraphicsLib, "CGPathCreateWithRoundedRect")
+	})
 	_register("CGPathEqualToPath", func() { purego.RegisterLibFunc(&_fnCGPathEqualToPath, _coregraphicsLib, "CGPathEqualToPath") })
 	_register("CGPathGetBoundingBox", func() { purego.RegisterLibFunc(&_fnCGPathGetBoundingBox, _coregraphicsLib, "CGPathGetBoundingBox") })
 	_register("CGPathGetCurrentPoint", func() { purego.RegisterLibFunc(&_fnCGPathGetCurrentPoint, _coregraphicsLib, "CGPathGetCurrentPoint") })
-	_register("CGPathGetPathBoundingBox", func() { purego.RegisterLibFunc(&_fnCGPathGetPathBoundingBox, _coregraphicsLib, "CGPathGetPathBoundingBox") })
+	_register("CGPathGetPathBoundingBox", func() {
+		purego.RegisterLibFunc(&_fnCGPathGetPathBoundingBox, _coregraphicsLib, "CGPathGetPathBoundingBox")
+	})
 	_register("CGPathGetTypeID", func() { purego.RegisterLibFunc(&_fnCGPathGetTypeID, _coregraphicsLib, "CGPathGetTypeID") })
 	_register("CGPathIntersectsPath", func() { purego.RegisterLibFunc(&_fnCGPathIntersectsPath, _coregraphicsLib, "CGPathIntersectsPath") })
 	_register("CGPathIsEmpty", func() { purego.RegisterLibFunc(&_fnCGPathIsEmpty, _coregraphicsLib, "CGPathIsEmpty") })
@@ -678,19 +1340,35 @@ func _loadLibrary() {
 	_register("CGPatternGetTypeID", func() { purego.RegisterLibFunc(&_fnCGPatternGetTypeID, _coregraphicsLib, "CGPatternGetTypeID") })
 	_register("CGPatternRelease", func() { purego.RegisterLibFunc(&_fnCGPatternRelease, _coregraphicsLib, "CGPatternRelease") })
 	_register("CGPatternRetain", func() { purego.RegisterLibFunc(&_fnCGPatternRetain, _coregraphicsLib, "CGPatternRetain") })
-	_register("CGPointApplyAffineTransform", func() { purego.RegisterLibFunc(&_fnCGPointApplyAffineTransform, _coregraphicsLib, "CGPointApplyAffineTransform") })
-	_register("CGPointCreateDictionaryRepresentation", func() { purego.RegisterLibFunc(&_fnCGPointCreateDictionaryRepresentation, _coregraphicsLib, "CGPointCreateDictionaryRepresentation") })
+	_register("CGPointApplyAffineTransform", func() {
+		purego.RegisterLibFunc(&_fnCGPointApplyAffineTransform, _coregraphicsLib, "CGPointApplyAffineTransform")
+	})
+	_register("CGPointCreateDictionaryRepresentation", func() {
+		purego.RegisterLibFunc(&_fnCGPointCreateDictionaryRepresentation, _coregraphicsLib, "CGPointCreateDictionaryRepresentation")
+	})
 	_register("CGPointEqualToPoint", func() { purego.RegisterLibFunc(&_fnCGPointEqualToPoint, _coregraphicsLib, "CGPointEqualToPoint") })
 	_register("CGPointMake", func() { purego.RegisterLibFunc(&_fnCGPointMake, _coregraphicsLib, "CGPointMake") })
-	_register("CGPointMakeWithDictionaryRepresentation", func() { purego.RegisterLibFunc(&_fnCGPointMakeWithDictionaryRepresentation, _coregraphicsLib, "CGPointMakeWithDictionaryRepresentation") })
+	_register("CGPointMakeWithDictionaryRepresentation", func() {
+		purego.RegisterLibFunc(&_fnCGPointMakeWithDictionaryRepresentation, _coregraphicsLib, "CGPointMakeWithDictionaryRepresentation")
+	})
 	_register("CGPostKeyboardEvent", func() { purego.RegisterLibFunc(&_fnCGPostKeyboardEvent, _coregraphicsLib, "CGPostKeyboardEvent") })
-	_register("CGPreflightListenEventAccess", func() { purego.RegisterLibFunc(&_fnCGPreflightListenEventAccess, _coregraphicsLib, "CGPreflightListenEventAccess") })
-	_register("CGPreflightPostEventAccess", func() { purego.RegisterLibFunc(&_fnCGPreflightPostEventAccess, _coregraphicsLib, "CGPreflightPostEventAccess") })
-	_register("CGPreflightScreenCaptureAccess", func() { purego.RegisterLibFunc(&_fnCGPreflightScreenCaptureAccess, _coregraphicsLib, "CGPreflightScreenCaptureAccess") })
-	_register("CGRectApplyAffineTransform", func() { purego.RegisterLibFunc(&_fnCGRectApplyAffineTransform, _coregraphicsLib, "CGRectApplyAffineTransform") })
+	_register("CGPreflightListenEventAccess", func() {
+		purego.RegisterLibFunc(&_fnCGPreflightListenEventAccess, _coregraphicsLib, "CGPreflightListenEventAccess")
+	})
+	_register("CGPreflightPostEventAccess", func() {
+		purego.RegisterLibFunc(&_fnCGPreflightPostEventAccess, _coregraphicsLib, "CGPreflightPostEventAccess")
+	})
+	_register("CGPreflightScreenCaptureAccess", func() {
+		purego.RegisterLibFunc(&_fnCGPreflightScreenCaptureAccess, _coregraphicsLib, "CGPreflightScreenCaptureAccess")
+	})
+	_register("CGRectApplyAffineTransform", func() {
+		purego.RegisterLibFunc(&_fnCGRectApplyAffineTransform, _coregraphicsLib, "CGRectApplyAffineTransform")
+	})
 	_register("CGRectContainsPoint", func() { purego.RegisterLibFunc(&_fnCGRectContainsPoint, _coregraphicsLib, "CGRectContainsPoint") })
 	_register("CGRectContainsRect", func() { purego.RegisterLibFunc(&_fnCGRectContainsRect, _coregraphicsLib, "CGRectContainsRect") })
-	_register("CGRectCreateDictionaryRepresentation", func() { purego.RegisterLibFunc(&_fnCGRectCreateDictionaryRepresentation, _coregraphicsLib, "CGRectCreateDictionaryRepresentation") })
+	_register("CGRectCreateDictionaryRepresentation", func() {
+		purego.RegisterLibFunc(&_fnCGRectCreateDictionaryRepresentation, _coregraphicsLib, "CGRectCreateDictionaryRepresentation")
+	})
 	_register("CGRectDivide", func() { purego.RegisterLibFunc(&_fnCGRectDivide, _coregraphicsLib, "CGRectDivide") })
 	_register("CGRectEqualToRect", func() { purego.RegisterLibFunc(&_fnCGRectEqualToRect, _coregraphicsLib, "CGRectEqualToRect") })
 	_register("CGRectGetHeight", func() { purego.RegisterLibFunc(&_fnCGRectGetHeight, _coregraphicsLib, "CGRectGetHeight") })
@@ -709,60 +1387,136 @@ func _loadLibrary() {
 	_register("CGRectIsInfinite", func() { purego.RegisterLibFunc(&_fnCGRectIsInfinite, _coregraphicsLib, "CGRectIsInfinite") })
 	_register("CGRectIsNull", func() { purego.RegisterLibFunc(&_fnCGRectIsNull, _coregraphicsLib, "CGRectIsNull") })
 	_register("CGRectMake", func() { purego.RegisterLibFunc(&_fnCGRectMake, _coregraphicsLib, "CGRectMake") })
-	_register("CGRectMakeWithDictionaryRepresentation", func() { purego.RegisterLibFunc(&_fnCGRectMakeWithDictionaryRepresentation, _coregraphicsLib, "CGRectMakeWithDictionaryRepresentation") })
+	_register("CGRectMakeWithDictionaryRepresentation", func() {
+		purego.RegisterLibFunc(&_fnCGRectMakeWithDictionaryRepresentation, _coregraphicsLib, "CGRectMakeWithDictionaryRepresentation")
+	})
 	_register("CGRectOffset", func() { purego.RegisterLibFunc(&_fnCGRectOffset, _coregraphicsLib, "CGRectOffset") })
 	_register("CGRectStandardize", func() { purego.RegisterLibFunc(&_fnCGRectStandardize, _coregraphicsLib, "CGRectStandardize") })
 	_register("CGRectUnion", func() { purego.RegisterLibFunc(&_fnCGRectUnion, _coregraphicsLib, "CGRectUnion") })
-	_register("CGRegisterScreenRefreshCallback", func() { purego.RegisterLibFunc(&_fnCGRegisterScreenRefreshCallback, _coregraphicsLib, "CGRegisterScreenRefreshCallback") })
+	_register("CGRegisterScreenRefreshCallback", func() {
+		purego.RegisterLibFunc(&_fnCGRegisterScreenRefreshCallback, _coregraphicsLib, "CGRegisterScreenRefreshCallback")
+	})
 	_register("CGReleaseAllDisplays", func() { purego.RegisterLibFunc(&_fnCGReleaseAllDisplays, _coregraphicsLib, "CGReleaseAllDisplays") })
-	_register("CGReleaseDisplayFadeReservation", func() { purego.RegisterLibFunc(&_fnCGReleaseDisplayFadeReservation, _coregraphicsLib, "CGReleaseDisplayFadeReservation") })
-	_register("CGReleaseScreenRefreshRects", func() { purego.RegisterLibFunc(&_fnCGReleaseScreenRefreshRects, _coregraphicsLib, "CGReleaseScreenRefreshRects") })
-	_register("CGRenderingBufferLockBytePtr", func() { purego.RegisterLibFunc(&_fnCGRenderingBufferLockBytePtr, _coregraphicsLib, "CGRenderingBufferLockBytePtr") })
-	_register("CGRenderingBufferProviderCreate", func() { purego.RegisterLibFunc(&_fnCGRenderingBufferProviderCreate, _coregraphicsLib, "CGRenderingBufferProviderCreate") })
-	_register("CGRenderingBufferProviderCreateWithCFData", func() { purego.RegisterLibFunc(&_fnCGRenderingBufferProviderCreateWithCFData, _coregraphicsLib, "CGRenderingBufferProviderCreateWithCFData") })
-	_register("CGRenderingBufferProviderGetSize", func() { purego.RegisterLibFunc(&_fnCGRenderingBufferProviderGetSize, _coregraphicsLib, "CGRenderingBufferProviderGetSize") })
-	_register("CGRenderingBufferProviderGetTypeID", func() { purego.RegisterLibFunc(&_fnCGRenderingBufferProviderGetTypeID, _coregraphicsLib, "CGRenderingBufferProviderGetTypeID") })
-	_register("CGRenderingBufferUnlockBytePtr", func() { purego.RegisterLibFunc(&_fnCGRenderingBufferUnlockBytePtr, _coregraphicsLib, "CGRenderingBufferUnlockBytePtr") })
-	_register("CGRequestListenEventAccess", func() { purego.RegisterLibFunc(&_fnCGRequestListenEventAccess, _coregraphicsLib, "CGRequestListenEventAccess") })
-	_register("CGRequestPostEventAccess", func() { purego.RegisterLibFunc(&_fnCGRequestPostEventAccess, _coregraphicsLib, "CGRequestPostEventAccess") })
-	_register("CGRequestScreenCaptureAccess", func() { purego.RegisterLibFunc(&_fnCGRequestScreenCaptureAccess, _coregraphicsLib, "CGRequestScreenCaptureAccess") })
-	_register("CGRestorePermanentDisplayConfiguration", func() { purego.RegisterLibFunc(&_fnCGRestorePermanentDisplayConfiguration, _coregraphicsLib, "CGRestorePermanentDisplayConfiguration") })
-	_register("CGScreenRegisterMoveCallback", func() { purego.RegisterLibFunc(&_fnCGScreenRegisterMoveCallback, _coregraphicsLib, "CGScreenRegisterMoveCallback") })
-	_register("CGScreenUnregisterMoveCallback", func() { purego.RegisterLibFunc(&_fnCGScreenUnregisterMoveCallback, _coregraphicsLib, "CGScreenUnregisterMoveCallback") })
-	_register("CGSessionCopyCurrentDictionary", func() { purego.RegisterLibFunc(&_fnCGSessionCopyCurrentDictionary, _coregraphicsLib, "CGSessionCopyCurrentDictionary") })
-	_register("CGSetDisplayTransferByByteTable", func() { purego.RegisterLibFunc(&_fnCGSetDisplayTransferByByteTable, _coregraphicsLib, "CGSetDisplayTransferByByteTable") })
-	_register("CGSetDisplayTransferByFormula", func() { purego.RegisterLibFunc(&_fnCGSetDisplayTransferByFormula, _coregraphicsLib, "CGSetDisplayTransferByFormula") })
-	_register("CGSetDisplayTransferByTable", func() { purego.RegisterLibFunc(&_fnCGSetDisplayTransferByTable, _coregraphicsLib, "CGSetDisplayTransferByTable") })
-	_register("CGSetLocalEventsFilterDuringSuppressionState", func() { purego.RegisterLibFunc(&_fnCGSetLocalEventsFilterDuringSuppressionState, _coregraphicsLib, "CGSetLocalEventsFilterDuringSuppressionState") })
-	_register("CGSetLocalEventsSuppressionInterval", func() { purego.RegisterLibFunc(&_fnCGSetLocalEventsSuppressionInterval, _coregraphicsLib, "CGSetLocalEventsSuppressionInterval") })
+	_register("CGReleaseDisplayFadeReservation", func() {
+		purego.RegisterLibFunc(&_fnCGReleaseDisplayFadeReservation, _coregraphicsLib, "CGReleaseDisplayFadeReservation")
+	})
+	_register("CGReleaseScreenRefreshRects", func() {
+		purego.RegisterLibFunc(&_fnCGReleaseScreenRefreshRects, _coregraphicsLib, "CGReleaseScreenRefreshRects")
+	})
+	_register("CGRenderingBufferLockBytePtr", func() {
+		purego.RegisterLibFunc(&_fnCGRenderingBufferLockBytePtr, _coregraphicsLib, "CGRenderingBufferLockBytePtr")
+	})
+	_register("CGRenderingBufferProviderCreate", func() {
+		purego.RegisterLibFunc(&_fnCGRenderingBufferProviderCreate, _coregraphicsLib, "CGRenderingBufferProviderCreate")
+	})
+	_register("CGRenderingBufferProviderCreateWithCFData", func() {
+		purego.RegisterLibFunc(&_fnCGRenderingBufferProviderCreateWithCFData, _coregraphicsLib, "CGRenderingBufferProviderCreateWithCFData")
+	})
+	_register("CGRenderingBufferProviderGetSize", func() {
+		purego.RegisterLibFunc(&_fnCGRenderingBufferProviderGetSize, _coregraphicsLib, "CGRenderingBufferProviderGetSize")
+	})
+	_register("CGRenderingBufferProviderGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnCGRenderingBufferProviderGetTypeID, _coregraphicsLib, "CGRenderingBufferProviderGetTypeID")
+	})
+	_register("CGRenderingBufferUnlockBytePtr", func() {
+		purego.RegisterLibFunc(&_fnCGRenderingBufferUnlockBytePtr, _coregraphicsLib, "CGRenderingBufferUnlockBytePtr")
+	})
+	_register("CGRequestListenEventAccess", func() {
+		purego.RegisterLibFunc(&_fnCGRequestListenEventAccess, _coregraphicsLib, "CGRequestListenEventAccess")
+	})
+	_register("CGRequestPostEventAccess", func() {
+		purego.RegisterLibFunc(&_fnCGRequestPostEventAccess, _coregraphicsLib, "CGRequestPostEventAccess")
+	})
+	_register("CGRequestScreenCaptureAccess", func() {
+		purego.RegisterLibFunc(&_fnCGRequestScreenCaptureAccess, _coregraphicsLib, "CGRequestScreenCaptureAccess")
+	})
+	_register("CGRestorePermanentDisplayConfiguration", func() {
+		purego.RegisterLibFunc(&_fnCGRestorePermanentDisplayConfiguration, _coregraphicsLib, "CGRestorePermanentDisplayConfiguration")
+	})
+	_register("CGScreenRegisterMoveCallback", func() {
+		purego.RegisterLibFunc(&_fnCGScreenRegisterMoveCallback, _coregraphicsLib, "CGScreenRegisterMoveCallback")
+	})
+	_register("CGScreenUnregisterMoveCallback", func() {
+		purego.RegisterLibFunc(&_fnCGScreenUnregisterMoveCallback, _coregraphicsLib, "CGScreenUnregisterMoveCallback")
+	})
+	_register("CGSessionCopyCurrentDictionary", func() {
+		purego.RegisterLibFunc(&_fnCGSessionCopyCurrentDictionary, _coregraphicsLib, "CGSessionCopyCurrentDictionary")
+	})
+	_register("CGSetDisplayTransferByByteTable", func() {
+		purego.RegisterLibFunc(&_fnCGSetDisplayTransferByByteTable, _coregraphicsLib, "CGSetDisplayTransferByByteTable")
+	})
+	_register("CGSetDisplayTransferByFormula", func() {
+		purego.RegisterLibFunc(&_fnCGSetDisplayTransferByFormula, _coregraphicsLib, "CGSetDisplayTransferByFormula")
+	})
+	_register("CGSetDisplayTransferByTable", func() {
+		purego.RegisterLibFunc(&_fnCGSetDisplayTransferByTable, _coregraphicsLib, "CGSetDisplayTransferByTable")
+	})
+	_register("CGSetLocalEventsFilterDuringSuppressionState", func() {
+		purego.RegisterLibFunc(&_fnCGSetLocalEventsFilterDuringSuppressionState, _coregraphicsLib, "CGSetLocalEventsFilterDuringSuppressionState")
+	})
+	_register("CGSetLocalEventsSuppressionInterval", func() {
+		purego.RegisterLibFunc(&_fnCGSetLocalEventsSuppressionInterval, _coregraphicsLib, "CGSetLocalEventsSuppressionInterval")
+	})
 	_register("CGShadingCreateAxial", func() { purego.RegisterLibFunc(&_fnCGShadingCreateAxial, _coregraphicsLib, "CGShadingCreateAxial") })
-	_register("CGShadingCreateAxialWithContentHeadroom", func() { purego.RegisterLibFunc(&_fnCGShadingCreateAxialWithContentHeadroom, _coregraphicsLib, "CGShadingCreateAxialWithContentHeadroom") })
+	_register("CGShadingCreateAxialWithContentHeadroom", func() {
+		purego.RegisterLibFunc(&_fnCGShadingCreateAxialWithContentHeadroom, _coregraphicsLib, "CGShadingCreateAxialWithContentHeadroom")
+	})
 	_register("CGShadingCreateRadial", func() { purego.RegisterLibFunc(&_fnCGShadingCreateRadial, _coregraphicsLib, "CGShadingCreateRadial") })
-	_register("CGShadingCreateRadialWithContentHeadroom", func() { purego.RegisterLibFunc(&_fnCGShadingCreateRadialWithContentHeadroom, _coregraphicsLib, "CGShadingCreateRadialWithContentHeadroom") })
-	_register("CGShadingGetContentHeadroom", func() { purego.RegisterLibFunc(&_fnCGShadingGetContentHeadroom, _coregraphicsLib, "CGShadingGetContentHeadroom") })
+	_register("CGShadingCreateRadialWithContentHeadroom", func() {
+		purego.RegisterLibFunc(&_fnCGShadingCreateRadialWithContentHeadroom, _coregraphicsLib, "CGShadingCreateRadialWithContentHeadroom")
+	})
+	_register("CGShadingGetContentHeadroom", func() {
+		purego.RegisterLibFunc(&_fnCGShadingGetContentHeadroom, _coregraphicsLib, "CGShadingGetContentHeadroom")
+	})
 	_register("CGShadingGetTypeID", func() { purego.RegisterLibFunc(&_fnCGShadingGetTypeID, _coregraphicsLib, "CGShadingGetTypeID") })
 	_register("CGShadingRelease", func() { purego.RegisterLibFunc(&_fnCGShadingRelease, _coregraphicsLib, "CGShadingRelease") })
 	_register("CGShadingRetain", func() { purego.RegisterLibFunc(&_fnCGShadingRetain, _coregraphicsLib, "CGShadingRetain") })
 	_register("CGShieldingWindowID", func() { purego.RegisterLibFunc(&_fnCGShieldingWindowID, _coregraphicsLib, "CGShieldingWindowID") })
 	_register("CGShieldingWindowLevel", func() { purego.RegisterLibFunc(&_fnCGShieldingWindowLevel, _coregraphicsLib, "CGShieldingWindowLevel") })
-	_register("CGSizeApplyAffineTransform", func() { purego.RegisterLibFunc(&_fnCGSizeApplyAffineTransform, _coregraphicsLib, "CGSizeApplyAffineTransform") })
-	_register("CGSizeCreateDictionaryRepresentation", func() { purego.RegisterLibFunc(&_fnCGSizeCreateDictionaryRepresentation, _coregraphicsLib, "CGSizeCreateDictionaryRepresentation") })
+	_register("CGSizeApplyAffineTransform", func() {
+		purego.RegisterLibFunc(&_fnCGSizeApplyAffineTransform, _coregraphicsLib, "CGSizeApplyAffineTransform")
+	})
+	_register("CGSizeCreateDictionaryRepresentation", func() {
+		purego.RegisterLibFunc(&_fnCGSizeCreateDictionaryRepresentation, _coregraphicsLib, "CGSizeCreateDictionaryRepresentation")
+	})
 	_register("CGSizeEqualToSize", func() { purego.RegisterLibFunc(&_fnCGSizeEqualToSize, _coregraphicsLib, "CGSizeEqualToSize") })
 	_register("CGSizeMake", func() { purego.RegisterLibFunc(&_fnCGSizeMake, _coregraphicsLib, "CGSizeMake") })
-	_register("CGSizeMakeWithDictionaryRepresentation", func() { purego.RegisterLibFunc(&_fnCGSizeMakeWithDictionaryRepresentation, _coregraphicsLib, "CGSizeMakeWithDictionaryRepresentation") })
-	_register("CGUnregisterScreenRefreshCallback", func() { purego.RegisterLibFunc(&_fnCGUnregisterScreenRefreshCallback, _coregraphicsLib, "CGUnregisterScreenRefreshCallback") })
+	_register("CGSizeMakeWithDictionaryRepresentation", func() {
+		purego.RegisterLibFunc(&_fnCGSizeMakeWithDictionaryRepresentation, _coregraphicsLib, "CGSizeMakeWithDictionaryRepresentation")
+	})
+	_register("CGUnregisterScreenRefreshCallback", func() {
+		purego.RegisterLibFunc(&_fnCGUnregisterScreenRefreshCallback, _coregraphicsLib, "CGUnregisterScreenRefreshCallback")
+	})
 	_register("CGVectorMake", func() { purego.RegisterLibFunc(&_fnCGVectorMake, _coregraphicsLib, "CGVectorMake") })
-	_register("CGWaitForScreenRefreshRects", func() { purego.RegisterLibFunc(&_fnCGWaitForScreenRefreshRects, _coregraphicsLib, "CGWaitForScreenRefreshRects") })
-	_register("CGWaitForScreenUpdateRects", func() { purego.RegisterLibFunc(&_fnCGWaitForScreenUpdateRects, _coregraphicsLib, "CGWaitForScreenUpdateRects") })
-	_register("CGWarpMouseCursorPosition", func() { purego.RegisterLibFunc(&_fnCGWarpMouseCursorPosition, _coregraphicsLib, "CGWarpMouseCursorPosition") })
+	_register("CGWaitForScreenRefreshRects", func() {
+		purego.RegisterLibFunc(&_fnCGWaitForScreenRefreshRects, _coregraphicsLib, "CGWaitForScreenRefreshRects")
+	})
+	_register("CGWaitForScreenUpdateRects", func() {
+		purego.RegisterLibFunc(&_fnCGWaitForScreenUpdateRects, _coregraphicsLib, "CGWaitForScreenUpdateRects")
+	})
+	_register("CGWarpMouseCursorPosition", func() {
+		purego.RegisterLibFunc(&_fnCGWarpMouseCursorPosition, _coregraphicsLib, "CGWarpMouseCursorPosition")
+	})
 	_register("CGWindowLevelForKey", func() { purego.RegisterLibFunc(&_fnCGWindowLevelForKey, _coregraphicsLib, "CGWindowLevelForKey") })
-	_register("CGWindowListCopyWindowInfo", func() { purego.RegisterLibFunc(&_fnCGWindowListCopyWindowInfo, _coregraphicsLib, "CGWindowListCopyWindowInfo") })
+	_register("CGWindowListCopyWindowInfo", func() {
+		purego.RegisterLibFunc(&_fnCGWindowListCopyWindowInfo, _coregraphicsLib, "CGWindowListCopyWindowInfo")
+	})
 	_register("CGWindowListCreate", func() { purego.RegisterLibFunc(&_fnCGWindowListCreate, _coregraphicsLib, "CGWindowListCreate") })
-	_register("CGWindowListCreateDescriptionFromArray", func() { purego.RegisterLibFunc(&_fnCGWindowListCreateDescriptionFromArray, _coregraphicsLib, "CGWindowListCreateDescriptionFromArray") })
-	_register("CGWindowListCreateImage", func() { purego.RegisterLibFunc(&_fnCGWindowListCreateImage, _coregraphicsLib, "CGWindowListCreateImage") })
-	_register("CGWindowListCreateImageFromArray", func() { purego.RegisterLibFunc(&_fnCGWindowListCreateImageFromArray, _coregraphicsLib, "CGWindowListCreateImageFromArray") })
-	_register("CGWindowServerCFMachPort", func() { purego.RegisterLibFunc(&_fnCGWindowServerCFMachPort, _coregraphicsLib, "CGWindowServerCFMachPort") })
-	_register("CGWindowServerCreateServerPort", func() { purego.RegisterLibFunc(&_fnCGWindowServerCreateServerPort, _coregraphicsLib, "CGWindowServerCreateServerPort") })
+	_register("CGWindowListCreateDescriptionFromArray", func() {
+		purego.RegisterLibFunc(&_fnCGWindowListCreateDescriptionFromArray, _coregraphicsLib, "CGWindowListCreateDescriptionFromArray")
+	})
+	_register("CGWindowListCreateImage", func() {
+		purego.RegisterLibFunc(&_fnCGWindowListCreateImage, _coregraphicsLib, "CGWindowListCreateImage")
+	})
+	_register("CGWindowListCreateImageFromArray", func() {
+		purego.RegisterLibFunc(&_fnCGWindowListCreateImageFromArray, _coregraphicsLib, "CGWindowListCreateImageFromArray")
+	})
+	_register("CGWindowServerCFMachPort", func() {
+		purego.RegisterLibFunc(&_fnCGWindowServerCFMachPort, _coregraphicsLib, "CGWindowServerCFMachPort")
+	})
+	_register("CGWindowServerCreateServerPort", func() {
+		purego.RegisterLibFunc(&_fnCGWindowServerCreateServerPort, _coregraphicsLib, "CGWindowServerCreateServerPort")
+	})
 }
 
 func init() {

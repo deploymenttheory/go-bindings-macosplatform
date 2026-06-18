@@ -41,4 +41,3 @@ type AddressAnnotationable interface {
 }
 
 var _ AddressAnnotationable = (*AddressAnnotation)(nil)
-

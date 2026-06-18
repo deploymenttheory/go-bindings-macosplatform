@@ -64,4 +64,3 @@ func VAEBuildParameters(event *raw.AEDesc, error_ *raw.AEBuildError, format stri
 	}
 	return nil
 }
-

@@ -16,12 +16,12 @@ type MTRSwitchClusterMultiPressCompleteEvent struct {
 }
 
 var (
-	_clsMTRSwitchClusterMultiPressCompleteEvent = _objcClass("MTRSwitchClusterMultiPressCompleteEvent")
-	_mTRSwitchClusterMultiPressCompleteEventSelPreviousPosition = objc.RegisterName("previousPosition")
-	_mTRSwitchClusterMultiPressCompleteEventSelSetPreviousPosition = objc.RegisterName("setPreviousPosition:")
-	_mTRSwitchClusterMultiPressCompleteEventSelGetNewPosition = objc.RegisterName("getNewPosition")
-	_mTRSwitchClusterMultiPressCompleteEventSelSetNewPosition = objc.RegisterName("setNewPosition:")
-	_mTRSwitchClusterMultiPressCompleteEventSelTotalNumberOfPressesCounted = objc.RegisterName("totalNumberOfPressesCounted")
+	_clsMTRSwitchClusterMultiPressCompleteEvent                               = _objcClass("MTRSwitchClusterMultiPressCompleteEvent")
+	_mTRSwitchClusterMultiPressCompleteEventSelPreviousPosition               = objc.RegisterName("previousPosition")
+	_mTRSwitchClusterMultiPressCompleteEventSelSetPreviousPosition            = objc.RegisterName("setPreviousPosition:")
+	_mTRSwitchClusterMultiPressCompleteEventSelGetNewPosition                 = objc.RegisterName("getNewPosition")
+	_mTRSwitchClusterMultiPressCompleteEventSelSetNewPosition                 = objc.RegisterName("setNewPosition:")
+	_mTRSwitchClusterMultiPressCompleteEventSelTotalNumberOfPressesCounted    = objc.RegisterName("totalNumberOfPressesCounted")
 	_mTRSwitchClusterMultiPressCompleteEventSelSetTotalNumberOfPressesCounted = objc.RegisterName("setTotalNumberOfPressesCounted:")
 )
 
@@ -37,7 +37,9 @@ func MTRSwitchClusterMultiPressCompleteEventFromID(id objc.ID) *MTRSwitchCluster
 
 func (o *MTRSwitchClusterMultiPressCompleteEvent) PreviousPosition() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSwitchClusterMultiPressCompleteEventSelPreviousPosition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTRSwitchClusterMultiPressCompleteEvent) SetPreviousPosition(previousPo
 
 func (o *MTRSwitchClusterMultiPressCompleteEvent) GetNewPosition() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSwitchClusterMultiPressCompleteEventSelGetNewPosition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *MTRSwitchClusterMultiPressCompleteEvent) SetNewPosition(newPosition *fo
 
 func (o *MTRSwitchClusterMultiPressCompleteEvent) TotalNumberOfPressesCounted() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSwitchClusterMultiPressCompleteEventSelTotalNumberOfPressesCounted)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRSwitchClusterMultiPressCompleteEvent) SetTotalNumberOfPressesCounted(totalNumberOfPressesCounted *foundation.NSNumber) {
 	o.Ptr().Send(_mTRSwitchClusterMultiPressCompleteEventSelSetTotalNumberOfPressesCounted, totalNumberOfPressesCounted.Ptr())
 }
-

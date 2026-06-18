@@ -35,7 +35,9 @@ func NewVirtualMachineStartOptions() *VirtualMachineStartOptions {
 	return &VirtualMachineStartOptions{inner: raw.VZVirtualMachineStartOptionsFromID(_id)}
 }
 
-func (x *VirtualMachineStartOptions) asVirtualMachineStartOptions() *raw.VZVirtualMachineStartOptions { return x.inner }
+func (x *VirtualMachineStartOptions) asVirtualMachineStartOptions() *raw.VZVirtualMachineStartOptions {
+	return x.inner
+}
 
 // VirtualMachineStartOptionsable is the interface implemented by [VirtualMachineStartOptions], for mocking and DI.
 type VirtualMachineStartOptionsable interface {
@@ -43,4 +45,3 @@ type VirtualMachineStartOptionsable interface {
 }
 
 var _ VirtualMachineStartOptionsable = (*VirtualMachineStartOptions)(nil)
-

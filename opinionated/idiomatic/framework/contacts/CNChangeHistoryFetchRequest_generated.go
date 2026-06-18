@@ -69,7 +69,9 @@ func (x *ChangeHistoryFetchRequest) WithExcludedTransactionAuthors(items ...*fou
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -144,7 +146,9 @@ func (x *ChangeHistoryFetchRequest) SetExcludedTransactionAuthors(excludedTransa
 	x.inner.SetExcludedTransactionAuthors(excludedTransactionAuthors)
 }
 
-func (x *ChangeHistoryFetchRequest) asFetchRequest() *raw.CNFetchRequest { return &x.inner.CNFetchRequest }
+func (x *ChangeHistoryFetchRequest) asFetchRequest() *raw.CNFetchRequest {
+	return &x.inner.CNFetchRequest
+}
 
 // ChangeHistoryFetchRequestable is the interface implemented by [ChangeHistoryFetchRequest], for mocking and DI.
 type ChangeHistoryFetchRequestable interface {
@@ -169,4 +173,3 @@ type ChangeHistoryFetchRequestable interface {
 }
 
 var _ ChangeHistoryFetchRequestable = (*ChangeHistoryFetchRequest)(nil)
-

@@ -60,4 +60,3 @@ type Quantityable interface {
 }
 
 var _ Quantityable = (*Quantity)(nil)
-

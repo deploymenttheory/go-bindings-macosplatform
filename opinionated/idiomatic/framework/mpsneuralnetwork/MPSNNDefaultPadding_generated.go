@@ -52,4 +52,3 @@ type NNDefaultPaddingable interface {
 }
 
 var _ NNDefaultPaddingable = (*NNDefaultPadding)(nil)
-

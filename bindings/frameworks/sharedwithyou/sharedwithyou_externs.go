@@ -13,7 +13,9 @@ import (
 
 func NSPasteboardTypeCollaborationMetadata() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_sharedwithyouLib, "NSPasteboardTypeCollaborationMetadata")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -21,4 +23,3 @@ func SWCollaborationMetadataTypeIdentifier() uintptr {
 	ptr, _ := purego.Dlsym(_sharedwithyouLib, "SWCollaborationMetadataTypeIdentifier")
 	return ptr
 }
-

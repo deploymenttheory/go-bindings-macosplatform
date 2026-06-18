@@ -18,10 +18,10 @@ type VZUSBController struct {
 }
 
 var (
-	_clsVZUSBController = _objcClass("VZUSBController")
+	_clsVZUSBController                              = _objcClass("VZUSBController")
 	_vZUSBControllerSelAttachDeviceCompletionHandler = objc.RegisterName("attachDevice:completionHandler:")
 	_vZUSBControllerSelDetachDeviceCompletionHandler = objc.RegisterName("detachDevice:completionHandler:")
-	_vZUSBControllerSelUsbDevices = objc.RegisterName("usbDevices")
+	_vZUSBControllerSelUsbDevices                    = objc.RegisterName("usbDevices")
 )
 
 func VZUSBControllerFromID(id objc.ID) *VZUSBController {
@@ -60,7 +60,8 @@ func (o *VZUSBController) DetachDeviceCompletionHandler(device VZUSBDevice, comp
 
 func (o *VZUSBController) UsbDevices() *foundation.NSArray[VZUSBDevice] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZUSBControllerSelUsbDevices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[VZUSBDevice](_ret)
 }
-

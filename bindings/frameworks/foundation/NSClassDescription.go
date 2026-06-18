@@ -15,10 +15,10 @@ type NSClassDescription struct {
 }
 
 var (
-	_clsNSClassDescription = _objcClass("NSClassDescription")
+	_clsNSClassDescription                                 = _objcClass("NSClassDescription")
 	_nSClassDescriptionSelRegisterClassDescriptionForClass = objc.RegisterName("registerClassDescription:forClass:")
-	_nSClassDescriptionSelInvalidateClassDescriptionCache = objc.RegisterName("invalidateClassDescriptionCache")
-	_nSClassDescriptionSelClassDescriptionForClass = objc.RegisterName("classDescriptionForClass:")
+	_nSClassDescriptionSelInvalidateClassDescriptionCache  = objc.RegisterName("invalidateClassDescriptionCache")
+	_nSClassDescriptionSelClassDescriptionForClass         = objc.RegisterName("classDescriptionForClass:")
 )
 
 func NSClassDescriptionFromID(id objc.ID) *NSClassDescription {
@@ -41,7 +41,8 @@ func NSClassDescriptionInvalidateClassDescriptionCache() {
 
 func NSClassDescriptionClassDescriptionForClass(aClass objc.Class) *NSClassDescription {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSClassDescription), _nSClassDescriptionSelClassDescriptionForClass, aClass)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSClassDescriptionFromID(_ret)
 }
-

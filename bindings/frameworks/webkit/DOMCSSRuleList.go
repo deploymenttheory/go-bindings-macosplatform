@@ -15,8 +15,8 @@ type DOMCSSRuleList struct {
 }
 
 var (
-	_clsDOMCSSRuleList = _objcClass("DOMCSSRuleList")
-	_dOMCSSRuleListSelItem = objc.RegisterName("item:")
+	_clsDOMCSSRuleList       = _objcClass("DOMCSSRuleList")
+	_dOMCSSRuleListSelItem   = objc.RegisterName("item:")
 	_dOMCSSRuleListSelLength = objc.RegisterName("length")
 )
 
@@ -32,7 +32,9 @@ func DOMCSSRuleListFromID(id objc.ID) *DOMCSSRuleList {
 
 func (o *DOMCSSRuleList) Item(index uint) *DOMCSSRule {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSRuleListSelItem, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMCSSRuleFromID(_ret)
 }
 
@@ -40,4 +42,3 @@ func (o *DOMCSSRuleList) Length() uint {
 	_ret := objc.Send[uint](o.Ptr(), _dOMCSSRuleListSelLength)
 	return _ret
 }
-

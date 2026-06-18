@@ -17,7 +17,9 @@ type MTRChannelClusterProgramCastStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRChannelClusterProgramCastStruct].
-func (x *MTRChannelClusterProgramCastStruct) Unwrap() *raw.MTRChannelClusterProgramCastStruct { return x.inner }
+func (x *MTRChannelClusterProgramCastStruct) Unwrap() *raw.MTRChannelClusterProgramCastStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -89,4 +91,3 @@ type MTRChannelClusterProgramCastStructable interface {
 }
 
 var _ MTRChannelClusterProgramCastStructable = (*MTRChannelClusterProgramCastStruct)(nil)
-

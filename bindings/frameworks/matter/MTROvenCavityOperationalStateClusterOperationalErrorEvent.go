@@ -16,8 +16,8 @@ type MTROvenCavityOperationalStateClusterOperationalErrorEvent struct {
 }
 
 var (
-	_clsMTROvenCavityOperationalStateClusterOperationalErrorEvent = _objcClass("MTROvenCavityOperationalStateClusterOperationalErrorEvent")
-	_mTROvenCavityOperationalStateClusterOperationalErrorEventSelErrorState = objc.RegisterName("errorState")
+	_clsMTROvenCavityOperationalStateClusterOperationalErrorEvent              = _objcClass("MTROvenCavityOperationalStateClusterOperationalErrorEvent")
+	_mTROvenCavityOperationalStateClusterOperationalErrorEventSelErrorState    = objc.RegisterName("errorState")
 	_mTROvenCavityOperationalStateClusterOperationalErrorEventSelSetErrorState = objc.RegisterName("setErrorState:")
 )
 
@@ -33,11 +33,12 @@ func MTROvenCavityOperationalStateClusterOperationalErrorEventFromID(id objc.ID)
 
 func (o *MTROvenCavityOperationalStateClusterOperationalErrorEvent) ErrorState() *MTROvenCavityOperationalStateClusterErrorStateStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROvenCavityOperationalStateClusterOperationalErrorEventSelErrorState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTROvenCavityOperationalStateClusterErrorStateStructFromID(_ret)
 }
 
 func (o *MTROvenCavityOperationalStateClusterOperationalErrorEvent) SetErrorState(errorState *MTROvenCavityOperationalStateClusterErrorStateStruct) {
 	o.Ptr().Send(_mTROvenCavityOperationalStateClusterOperationalErrorEventSelSetErrorState, errorState.Ptr())
 }
-

@@ -56,7 +56,9 @@ func KMDItemLastUsedDate() objc.ID { return purego.CFConstant(raw.KMDItemLastUse
 func KMDItemContentCreationDate() objc.ID { return purego.CFConstant(raw.KMDItemContentCreationDate()) }
 
 // KMDItemContentModificationDate returns the value of the CoreFoundation reference constant kMDItemContentModificationDate as an objc.ID.
-func KMDItemContentModificationDate() objc.ID { return purego.CFConstant(raw.KMDItemContentModificationDate()) }
+func KMDItemContentModificationDate() objc.ID {
+	return purego.CFConstant(raw.KMDItemContentModificationDate())
+}
 
 // KMDItemDateAdded returns the value of the CoreFoundation reference constant kMDItemDateAdded as an objc.ID.
 func KMDItemDateAdded() objc.ID { return purego.CFConstant(raw.KMDItemDateAdded()) }
@@ -77,7 +79,9 @@ func KMDItemPixelHeight() objc.ID { return purego.CFConstant(raw.KMDItemPixelHei
 func KMDItemXMPCredit() objc.ID { return purego.CFConstant(raw.KMDItemXMPCredit()) }
 
 // KMDItemXMPDigitalSourceType returns the value of the CoreFoundation reference constant kMDItemXMPDigitalSourceType as an objc.ID.
-func KMDItemXMPDigitalSourceType() objc.ID { return purego.CFConstant(raw.KMDItemXMPDigitalSourceType()) }
+func KMDItemXMPDigitalSourceType() objc.ID {
+	return purego.CFConstant(raw.KMDItemXMPDigitalSourceType())
+}
 
 // KMDItemPixelWidth returns the value of the CoreFoundation reference constant kMDItemPixelWidth as an objc.ID.
 func KMDItemPixelWidth() objc.ID { return purego.CFConstant(raw.KMDItemPixelWidth()) }
@@ -344,7 +348,9 @@ func KMDItemKeySignature() objc.ID { return purego.CFConstant(raw.KMDItemKeySign
 func KMDItemTimeSignature() objc.ID { return purego.CFConstant(raw.KMDItemTimeSignature()) }
 
 // KMDItemAudioEncodingApplication returns the value of the CoreFoundation reference constant kMDItemAudioEncodingApplication as an objc.ID.
-func KMDItemAudioEncodingApplication() objc.ID { return purego.CFConstant(raw.KMDItemAudioEncodingApplication()) }
+func KMDItemAudioEncodingApplication() objc.ID {
+	return purego.CFConstant(raw.KMDItemAudioEncodingApplication())
+}
 
 // KMDItemComposer returns the value of the CoreFoundation reference constant kMDItemComposer as an objc.ID.
 func KMDItemComposer() objc.ID { return purego.CFConstant(raw.KMDItemComposer()) }
@@ -362,7 +368,9 @@ func KMDItemRecordingDate() objc.ID { return purego.CFConstant(raw.KMDItemRecord
 func KMDItemMusicalGenre() objc.ID { return purego.CFConstant(raw.KMDItemMusicalGenre()) }
 
 // KMDItemIsGeneralMIDISequence returns the value of the CoreFoundation reference constant kMDItemIsGeneralMIDISequence as an objc.ID.
-func KMDItemIsGeneralMIDISequence() objc.ID { return purego.CFConstant(raw.KMDItemIsGeneralMIDISequence()) }
+func KMDItemIsGeneralMIDISequence() objc.ID {
+	return purego.CFConstant(raw.KMDItemIsGeneralMIDISequence())
+}
 
 // KMDItemRecordingYear returns the value of the CoreFoundation reference constant kMDItemRecordingYear as an objc.ID.
 func KMDItemRecordingYear() objc.ID { return purego.CFConstant(raw.KMDItemRecordingYear()) }
@@ -416,7 +424,9 @@ func KMDItemSecurityMethod() objc.ID { return purego.CFConstant(raw.KMDItemSecur
 func KMDItemCreator() objc.ID { return purego.CFConstant(raw.KMDItemCreator()) }
 
 // KMDItemEncodingApplications returns the value of the CoreFoundation reference constant kMDItemEncodingApplications as an objc.ID.
-func KMDItemEncodingApplications() objc.ID { return purego.CFConstant(raw.KMDItemEncodingApplications()) }
+func KMDItemEncodingApplications() objc.ID {
+	return purego.CFConstant(raw.KMDItemEncodingApplications())
+}
 
 // KMDItemDueDate returns the value of the CoreFoundation reference constant kMDItemDueDate as an objc.ID.
 func KMDItemDueDate() objc.ID { return purego.CFConstant(raw.KMDItemDueDate()) }
@@ -431,7 +441,9 @@ func KMDItemPhoneNumbers() objc.ID { return purego.CFConstant(raw.KMDItemPhoneNu
 func KMDItemEmailAddresses() objc.ID { return purego.CFConstant(raw.KMDItemEmailAddresses()) }
 
 // KMDItemInstantMessageAddresses returns the value of the CoreFoundation reference constant kMDItemInstantMessageAddresses as an objc.ID.
-func KMDItemInstantMessageAddresses() objc.ID { return purego.CFConstant(raw.KMDItemInstantMessageAddresses()) }
+func KMDItemInstantMessageAddresses() objc.ID {
+	return purego.CFConstant(raw.KMDItemInstantMessageAddresses())
+}
 
 // KMDItemKind returns the value of the CoreFoundation reference constant kMDItemKind as an objc.ID.
 func KMDItemKind() objc.ID { return purego.CFConstant(raw.KMDItemKind()) }
@@ -449,19 +461,27 @@ func KMDItemFonts() objc.ID { return purego.CFConstant(raw.KMDItemFonts()) }
 func KMDItemAppleLoopsRootKey() objc.ID { return purego.CFConstant(raw.KMDItemAppleLoopsRootKey()) }
 
 // KMDItemAppleLoopsKeyFilterType returns the value of the CoreFoundation reference constant kMDItemAppleLoopsKeyFilterType as an objc.ID.
-func KMDItemAppleLoopsKeyFilterType() objc.ID { return purego.CFConstant(raw.KMDItemAppleLoopsKeyFilterType()) }
+func KMDItemAppleLoopsKeyFilterType() objc.ID {
+	return purego.CFConstant(raw.KMDItemAppleLoopsKeyFilterType())
+}
 
 // KMDItemAppleLoopsLoopMode returns the value of the CoreFoundation reference constant kMDItemAppleLoopsLoopMode as an objc.ID.
 func KMDItemAppleLoopsLoopMode() objc.ID { return purego.CFConstant(raw.KMDItemAppleLoopsLoopMode()) }
 
 // KMDItemAppleLoopDescriptors returns the value of the CoreFoundation reference constant kMDItemAppleLoopDescriptors as an objc.ID.
-func KMDItemAppleLoopDescriptors() objc.ID { return purego.CFConstant(raw.KMDItemAppleLoopDescriptors()) }
+func KMDItemAppleLoopDescriptors() objc.ID {
+	return purego.CFConstant(raw.KMDItemAppleLoopDescriptors())
+}
 
 // KMDItemMusicalInstrumentCategory returns the value of the CoreFoundation reference constant kMDItemMusicalInstrumentCategory as an objc.ID.
-func KMDItemMusicalInstrumentCategory() objc.ID { return purego.CFConstant(raw.KMDItemMusicalInstrumentCategory()) }
+func KMDItemMusicalInstrumentCategory() objc.ID {
+	return purego.CFConstant(raw.KMDItemMusicalInstrumentCategory())
+}
 
 // KMDItemMusicalInstrumentName returns the value of the CoreFoundation reference constant kMDItemMusicalInstrumentName as an objc.ID.
-func KMDItemMusicalInstrumentName() objc.ID { return purego.CFConstant(raw.KMDItemMusicalInstrumentName()) }
+func KMDItemMusicalInstrumentName() objc.ID {
+	return purego.CFConstant(raw.KMDItemMusicalInstrumentName())
+}
 
 // KMDItemCFBundleIdentifier returns the value of the CoreFoundation reference constant kMDItemCFBundleIdentifier as an objc.ID.
 func KMDItemCFBundleIdentifier() objc.ID { return purego.CFConstant(raw.KMDItemCFBundleIdentifier()) }
@@ -492,10 +512,14 @@ func KMDItemOriginalFormat() objc.ID { return purego.CFConstant(raw.KMDItemOrigi
 func KMDItemOriginalSource() objc.ID { return purego.CFConstant(raw.KMDItemOriginalSource()) }
 
 // KMDItemAuthorEmailAddresses returns the value of the CoreFoundation reference constant kMDItemAuthorEmailAddresses as an objc.ID.
-func KMDItemAuthorEmailAddresses() objc.ID { return purego.CFConstant(raw.KMDItemAuthorEmailAddresses()) }
+func KMDItemAuthorEmailAddresses() objc.ID {
+	return purego.CFConstant(raw.KMDItemAuthorEmailAddresses())
+}
 
 // KMDItemRecipientEmailAddresses returns the value of the CoreFoundation reference constant kMDItemRecipientEmailAddresses as an objc.ID.
-func KMDItemRecipientEmailAddresses() objc.ID { return purego.CFConstant(raw.KMDItemRecipientEmailAddresses()) }
+func KMDItemRecipientEmailAddresses() objc.ID {
+	return purego.CFConstant(raw.KMDItemRecipientEmailAddresses())
+}
 
 // KMDItemAuthorAddresses returns the value of the CoreFoundation reference constant kMDItemAuthorAddresses as an objc.ID.
 func KMDItemAuthorAddresses() objc.ID { return purego.CFConstant(raw.KMDItemAuthorAddresses()) }
@@ -522,28 +546,40 @@ func KMDItemLabelUUID() objc.ID { return purego.CFConstant(raw.KMDItemLabelUUID(
 func KMDItemIsLikelyJunk() objc.ID { return purego.CFConstant(raw.KMDItemIsLikelyJunk()) }
 
 // KMDItemExecutableArchitectures returns the value of the CoreFoundation reference constant kMDItemExecutableArchitectures as an objc.ID.
-func KMDItemExecutableArchitectures() objc.ID { return purego.CFConstant(raw.KMDItemExecutableArchitectures()) }
+func KMDItemExecutableArchitectures() objc.ID {
+	return purego.CFConstant(raw.KMDItemExecutableArchitectures())
+}
 
 // KMDItemExecutablePlatform returns the value of the CoreFoundation reference constant kMDItemExecutablePlatform as an objc.ID.
 func KMDItemExecutablePlatform() objc.ID { return purego.CFConstant(raw.KMDItemExecutablePlatform()) }
 
 // KMDItemApplicationCategories returns the value of the CoreFoundation reference constant kMDItemApplicationCategories as an objc.ID.
-func KMDItemApplicationCategories() objc.ID { return purego.CFConstant(raw.KMDItemApplicationCategories()) }
+func KMDItemApplicationCategories() objc.ID {
+	return purego.CFConstant(raw.KMDItemApplicationCategories())
+}
 
 // KMDItemIsApplicationManaged returns the value of the CoreFoundation reference constant kMDItemIsApplicationManaged as an objc.ID.
-func KMDItemIsApplicationManaged() objc.ID { return purego.CFConstant(raw.KMDItemIsApplicationManaged()) }
+func KMDItemIsApplicationManaged() objc.ID {
+	return purego.CFConstant(raw.KMDItemIsApplicationManaged())
+}
 
 // @constant kMDQueryProgressNotification The name of the notification sent to indicate changes to the query's results list during the initial gathering phase of a query's execution. Mostly adds will occur during this phase, but removals and changes can also occur, as in any update. This info dictionary parameter of the notification can carry the kMDQueryUpdateChangedItems and kMDQueryUpdateRemovedItems keys. Note that these keys may be have empty arrays for values, or be missing, if there are no changes of that particular type. For performance reasons, added results are not indicated in progress notifications (to avoid the cost of creating the result objects). These notifications are sent out by a query before the kMDQueryDidFinishNotification.
 // KMDQueryProgressNotification returns the value of the CoreFoundation reference constant kMDQueryProgressNotification as an objc.ID.
-func KMDQueryProgressNotification() objc.ID { return purego.CFConstant(raw.KMDQueryProgressNotification()) }
+func KMDQueryProgressNotification() objc.ID {
+	return purego.CFConstant(raw.KMDQueryProgressNotification())
+}
 
 // @constant kMDQueryDidFinishNotification The name of the notification sent to indicate that the query has finished with the initial result-gathering phase, and may now proceed into the live-update phase (if that option was chosen when the query was executed). This notification often shortly follows after the last progress notification. It is usually not necessary to update any displayed UI in response to this notification, since it doesn't indicate any change in the result list of a query.
 // KMDQueryDidFinishNotification returns the value of the CoreFoundation reference constant kMDQueryDidFinishNotification as an objc.ID.
-func KMDQueryDidFinishNotification() objc.ID { return purego.CFConstant(raw.KMDQueryDidFinishNotification()) }
+func KMDQueryDidFinishNotification() objc.ID {
+	return purego.CFConstant(raw.KMDQueryDidFinishNotification())
+}
 
 // @constant kMDQueryDidUpdateNotification The name of the notification sent to indicate changes to the query's results list during the second, live-update, phase of a query's execution. This notification can carry the kMDQueryUpdateAddedItems, kMDQueryUpdateChangedItems, and kMDQueryUpdateRemovedItems keys in the info dictionary parameter of the notification. Note that these keys may be have empty arrays for values, or be missing, if there are no changes of that particular type. These notifications are sent out by a query after the kMDQueryDidUpdateNotification.
 // KMDQueryDidUpdateNotification returns the value of the CoreFoundation reference constant kMDQueryDidUpdateNotification as an objc.ID.
-func KMDQueryDidUpdateNotification() objc.ID { return purego.CFConstant(raw.KMDQueryDidUpdateNotification()) }
+func KMDQueryDidUpdateNotification() objc.ID {
+	return purego.CFConstant(raw.KMDQueryDidUpdateNotification())
+}
 
 // @constant kMDQueryUpdateAddedItems The name of the key in a query notification's info dictionary which identifies the list of added results. A result is added if the file contents or some metadata attribute of it is changed, and it now matches the query. Result objects are created for the newly added results, to be put in the list.
 // KMDQueryUpdateAddedItems returns the value of the CoreFoundation reference constant kMDQueryUpdateAddedItems as an objc.ID.
@@ -559,7 +595,9 @@ func KMDQueryUpdateRemovedItems() objc.ID { return purego.CFConstant(raw.KMDQuer
 
 // @constant kMDQueryResultContentRelevance The name of a query-specific attribute for use in sorting. The relevance of an item is a CFNumberRef with a floating point value. This is the relevance for content searches. The maximum and minimum values for a particular search cannot be determined until all of the results have been returned.  If there are multiple kMDItemTextContent predicates in the query, no relevance is returned. This is an attribute of a result item that is specific to the item in the context of the query. Also, the relevance does not compare the result relative to the other results of a query, but is computed just on the result item itself. Finally, this is only the relevance value for content, not a relevance for the item as a whole. The relevance attribute may not even be computed for an item if the item is found to match the query through evaluation of other attributes of the item than its contents. If the value is not computed, it is treated as an attribute on the item which does not exist (for sorting purposes, for example).
 // KMDQueryResultContentRelevance returns the value of the CoreFoundation reference constant kMDQueryResultContentRelevance as an objc.ID.
-func KMDQueryResultContentRelevance() objc.ID { return purego.CFConstant(raw.KMDQueryResultContentRelevance()) }
+func KMDQueryResultContentRelevance() objc.ID {
+	return purego.CFConstant(raw.KMDQueryResultContentRelevance())
+}
 
 // @constant kMDQueryScopeHome A constant, which can be passed in the scopeDirectories array, to specify that the search should be restricted to the volume and directory that contains the current user's home directory
 // KMDQueryScopeHome returns the value of the CoreFoundation reference constant kMDQueryScopeHome as an objc.ID.
@@ -579,11 +617,15 @@ func KMDQueryScopeAllIndexed() objc.ID { return purego.CFConstant(raw.KMDQuerySc
 
 // @constant kMDQueryScopeComputerIndexed A constant, which can be passed in the scopeDirectories array, to specify that the search should be restricted to indexed, locally mounted volumes, plus the user's home directory (which may be on a remote volume).
 // KMDQueryScopeComputerIndexed returns the value of the CoreFoundation reference constant kMDQueryScopeComputerIndexed as an objc.ID.
-func KMDQueryScopeComputerIndexed() objc.ID { return purego.CFConstant(raw.KMDQueryScopeComputerIndexed()) }
+func KMDQueryScopeComputerIndexed() objc.ID {
+	return purego.CFConstant(raw.KMDQueryScopeComputerIndexed())
+}
 
 // @constant kMDQueryScopeNetworkIndexed A constant, which can be passed in the scopeDirectories array, to specify that the search should include indexed user mounted remote volumes.
 // KMDQueryScopeNetworkIndexed returns the value of the CoreFoundation reference constant kMDQueryScopeNetworkIndexed as an objc.ID.
-func KMDQueryScopeNetworkIndexed() objc.ID { return purego.CFConstant(raw.KMDQueryScopeNetworkIndexed()) }
+func KMDQueryScopeNetworkIndexed() objc.ID {
+	return purego.CFConstant(raw.KMDQueryScopeNetworkIndexed())
+}
 
 // @constant kMDLabelBundleURL @abstract This is the bundle URL for the label. Type is a CFURL. This attribute is read-only. @constant kMDLabelContentChangeDate @abstract This is the date the the label content last changed. Type is a CFDate. This attribute is read-only, but its value will be altered by setting any of the writable attributes described below. @constant kMDLabelDisplayName @abstract This is the localized name of the label. Type is a CFString. @constant kMDLabelIconData @abstract This is the data that should be used to create an icon image source for the label. Pass this data to the ImageIO framework to create a CGImageSourceRef. To reset a label's icon to its default image, set kMDLabelIconData to kCFNull. Type is a CFData. @constant kMDLabelIconUUID @abstract This is the UUID of the icon image source for the label. Labels that share the same icon image source will have the same icon UUID. Type is a CFUUID. This attribute is read-only, but its value may be altered by setting the kMDLabelIconData attribute described above. @constant kMDLabelIsMutuallyExclusiveSetMember @abstract This attribute is true if the label kind specifies a mutually-exclusive set of labels. Type is a CFBoolean. This attribute is read-only. @constant kMDLabelKind @abstract This is the kind string for the label. The label kind is the name of the bundle the label is defined in. Type is a CFString. This attribute is read-only. @constant kMDLabelSetsFinderColor @abstract This attribute is optional and applicable only to labels with "Public" visibility. If it is present, then when the label is set on a file the file's Finder color will be set to the specified value (0 - 7). If the label is later removed, the file's Finder color will be reverted either to the color specified by the most-recently-set label with this attribute that remains set on the file, or to 0 (none). Type is a CFNumber. This attribute is ignored for unless the label's visibility is "Public". @constant kMDLabelUUID @abstract This is the UUID of the label. Type is a CFUUID. This attribute is read-only. @constant kMDLabelVisibility @abstract This is a constant describing the label's visibility, either "Public" (kMDPublicVisibility) or "Private" (kMDPrivateVisibility). Type is a CFString. This attribute is read-only.
 // KMDLabelBundleURL returns the value of the CoreFoundation reference constant kMDLabelBundleURL as an objc.ID.
@@ -602,7 +644,9 @@ func KMDLabelIconData() objc.ID { return purego.CFConstant(raw.KMDLabelIconData(
 func KMDLabelIconUUID() objc.ID { return purego.CFConstant(raw.KMDLabelIconUUID()) }
 
 // KMDLabelIsMutuallyExclusiveSetMember returns the value of the CoreFoundation reference constant kMDLabelIsMutuallyExclusiveSetMember as an objc.ID.
-func KMDLabelIsMutuallyExclusiveSetMember() objc.ID { return purego.CFConstant(raw.KMDLabelIsMutuallyExclusiveSetMember()) }
+func KMDLabelIsMutuallyExclusiveSetMember() objc.ID {
+	return purego.CFConstant(raw.KMDLabelIsMutuallyExclusiveSetMember())
+}
 
 // KMDLabelKind returns the value of the CoreFoundation reference constant kMDLabelKind as an objc.ID.
 func KMDLabelKind() objc.ID { return purego.CFConstant(raw.KMDLabelKind()) }
@@ -618,7 +662,9 @@ func KMDLabelVisibility() objc.ID { return purego.CFConstant(raw.KMDLabelVisibil
 
 // @constant kMDLabelKindIsMutuallyExclusiveSetKey @abstract This key is used in the Info.plist file of a label bundle to specify that the label kind constitutes a mutually exclusive set. The value is a CFBoolean. @constant kMDLabelKindVisibilityKey @abstract This key is used in the Info.plist file of a label bundle to specify the visibility of the labels defined by the bundle. The value is a CFString constant, either "Public" (kMDPublicVisibility) or "Private" (kMDPrivateVisibility).
 // KMDLabelKindIsMutuallyExclusiveSetKey returns the value of the CoreFoundation reference constant kMDLabelKindIsMutuallyExclusiveSetKey as an objc.ID.
-func KMDLabelKindIsMutuallyExclusiveSetKey() objc.ID { return purego.CFConstant(raw.KMDLabelKindIsMutuallyExclusiveSetKey()) }
+func KMDLabelKindIsMutuallyExclusiveSetKey() objc.ID {
+	return purego.CFConstant(raw.KMDLabelKindIsMutuallyExclusiveSetKey())
+}
 
 // KMDLabelKindVisibilityKey returns the value of the CoreFoundation reference constant kMDLabelKindVisibilityKey as an objc.ID.
 func KMDLabelKindVisibilityKey() objc.ID { return purego.CFConstant(raw.KMDLabelKindVisibilityKey()) }
@@ -635,11 +681,15 @@ func KMDLabelAddedNotification() objc.ID { return purego.CFConstant(raw.KMDLabel
 
 // @constant kMDLabelChangedNotification @abstract The name of the notification sent when a label has been changed. The notification object is the subject MDLabelRef. The label's new attributes can be retrieved using MDLabelCopyAttribute().
 // KMDLabelChangedNotification returns the value of the CoreFoundation reference constant kMDLabelChangedNotification as an objc.ID.
-func KMDLabelChangedNotification() objc.ID { return purego.CFConstant(raw.KMDLabelChangedNotification()) }
+func KMDLabelChangedNotification() objc.ID {
+	return purego.CFConstant(raw.KMDLabelChangedNotification())
+}
 
 // @constant kMDLabelRemovedNotification @abstract The name of the notification sent when a label has been deleted. The notification object is the subject MDLabelRef. The label's kMDLabelIconUUID, kMDLabelKind, kMDLabelKindBundleURL and kMDLabelUUID attributes can still be retrieved using MDLabelCopyAttribute(), and the label may still be passed to MDLabelCopyAttributeName().
 // KMDLabelRemovedNotification returns the value of the CoreFoundation reference constant kMDLabelRemovedNotification as an objc.ID.
-func KMDLabelRemovedNotification() objc.ID { return purego.CFConstant(raw.KMDLabelRemovedNotification()) }
+func KMDLabelRemovedNotification() objc.ID {
+	return purego.CFConstant(raw.KMDLabelRemovedNotification())
+}
 
 // KMDAttributeDisplayValues returns the value of the CoreFoundation reference constant kMDAttributeDisplayValues as an objc.ID.
 func KMDAttributeDisplayValues() objc.ID { return purego.CFConstant(raw.KMDAttributeDisplayValues()) }
@@ -661,4 +711,3 @@ func KMDAttributeType() objc.ID { return purego.CFConstant(raw.KMDAttributeType(
 
 // KMDAttributeMultiValued returns the value of the CoreFoundation reference constant kMDAttributeMultiValued as an objc.ID.
 func KMDAttributeMultiValued() objc.ID { return purego.CFConstant(raw.KMDAttributeMultiValued()) }
-

@@ -16,9 +16,9 @@ type AVAssetDownloadTask struct {
 }
 
 var (
-	_clsAVAssetDownloadTask = _objcClass("AVAssetDownloadTask")
-	_aVAssetDownloadTaskSelURLAsset = objc.RegisterName("URLAsset")
-	_aVAssetDownloadTaskSelOptions = objc.RegisterName("options")
+	_clsAVAssetDownloadTask                 = _objcClass("AVAssetDownloadTask")
+	_aVAssetDownloadTaskSelURLAsset         = objc.RegisterName("URLAsset")
+	_aVAssetDownloadTaskSelOptions          = objc.RegisterName("options")
 	_aVAssetDownloadTaskSelLoadedTimeRanges = objc.RegisterName("loadedTimeRanges")
 )
 
@@ -35,7 +35,9 @@ func AVAssetDownloadTaskFromID(id objc.ID) *AVAssetDownloadTask {
 // The asset supplied to the download task upon initialization.
 func (o *AVAssetDownloadTask) URLAsset() *AVURLAsset {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetDownloadTaskSelURLAsset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVURLAssetFromID(_ret)
 }
 
@@ -52,4 +54,3 @@ func (o *AVAssetDownloadTask) LoadedTimeRanges() *foundation.NSArray[*foundation
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _aVAssetDownloadTaskSelLoadedTimeRanges)
 	return _ret
 }
-

@@ -18,19 +18,19 @@ type MPSVector struct {
 }
 
 var (
-	_clsMPSVector = _objcClass("MPSVector")
-	_mPSVectorSelInitWithBufferDescriptor = objc.RegisterName("initWithBuffer:descriptor:")
+	_clsMPSVector                               = _objcClass("MPSVector")
+	_mPSVectorSelInitWithBufferDescriptor       = objc.RegisterName("initWithBuffer:descriptor:")
 	_mPSVectorSelInitWithBufferOffsetDescriptor = objc.RegisterName("initWithBuffer:offset:descriptor:")
-	_mPSVectorSelInitWithDeviceDescriptor = objc.RegisterName("initWithDevice:descriptor:")
-	_mPSVectorSelSynchronizeOnCommandBuffer = objc.RegisterName("synchronizeOnCommandBuffer:")
-	_mPSVectorSelResourceSize = objc.RegisterName("resourceSize")
-	_mPSVectorSelDevice = objc.RegisterName("device")
-	_mPSVectorSelLength = objc.RegisterName("length")
-	_mPSVectorSelVectors = objc.RegisterName("vectors")
-	_mPSVectorSelDataType = objc.RegisterName("dataType")
-	_mPSVectorSelVectorBytes = objc.RegisterName("vectorBytes")
-	_mPSVectorSelOffset = objc.RegisterName("offset")
-	_mPSVectorSelData = objc.RegisterName("data")
+	_mPSVectorSelInitWithDeviceDescriptor       = objc.RegisterName("initWithDevice:descriptor:")
+	_mPSVectorSelSynchronizeOnCommandBuffer     = objc.RegisterName("synchronizeOnCommandBuffer:")
+	_mPSVectorSelResourceSize                   = objc.RegisterName("resourceSize")
+	_mPSVectorSelDevice                         = objc.RegisterName("device")
+	_mPSVectorSelLength                         = objc.RegisterName("length")
+	_mPSVectorSelVectors                        = objc.RegisterName("vectors")
+	_mPSVectorSelDataType                       = objc.RegisterName("dataType")
+	_mPSVectorSelVectorBytes                    = objc.RegisterName("vectorBytes")
+	_mPSVectorSelOffset                         = objc.RegisterName("offset")
+	_mPSVectorSelData                           = objc.RegisterName("data")
 )
 
 func MPSVectorFromID(id objc.ID) *MPSVector {
@@ -46,21 +46,27 @@ func MPSVectorFromID(id objc.ID) *MPSVector {
 // @abstract   Initialize a MPSVector object with a MTLBuffer. @param      buffer          The MTLBuffer object which contains the data to use for the MPSVector. May not be NULL. @param      descriptor      The MPSVectorDescriptor. May not be NULL. @return     A valid MPSVector object or nil, if failure. @discussion This function returns a MPSVector object which uses the supplied MTLBuffer.  The length, number of vectors, and stride between vectors are specified by the MPSVectorDescriptor object. The provided MTLBuffer must have enough storage to hold (descriptor.vectors-1) * descriptor.vectorBytes + descriptor.length * (element size) bytes.
 func (o *MPSVector) InitWithBufferDescriptor(buffer metal.MTLBuffer, descriptor *mpscore.MPSVectorDescriptor) *MPSVector {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSVectorSelInitWithBufferDescriptor, buffer, descriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSVectorFromID(_ret)
 }
 
 // @abstract   Initialize a MPSVector object with a MTLBuffer and an offset. @param      buffer  The MTLBuffer containing the data. @param      offset  The offset, in bytes, into the buffer at which data begins. @param      descriptor  The MPSVectorDescriptor.
 func (o *MPSVector) InitWithBufferOffsetDescriptor(buffer metal.MTLBuffer, offset uint, descriptor *mpscore.MPSVectorDescriptor) *MPSVector {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSVectorSelInitWithBufferOffsetDescriptor, buffer, offset, descriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSVectorFromID(_ret)
 }
 
 // @abstract   Initialize a lazily backed MPSVector object with a descriptor @param      device      The device with which it will be used @param      descriptor  The shape and style of the matrix @return     A valid MPSVector object or nil @discussion The vector object will be created, but the storage to hold the vector data will only be allocated when it is needed, typically when the data property is invoked.  In conjunction with -resourceSize, this will allow you to estimate storage needs without actually creating the backing store for the vector.
 func (o *MPSVector) InitWithDeviceDescriptor(device metal.MTLDevice, descriptor *mpscore.MPSVectorDescriptor) *MPSVector {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSVectorSelInitWithDeviceDescriptor, device, descriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSVectorFromID(_ret)
 }
 
@@ -116,4 +122,3 @@ func (o *MPSVector) Data() metal.MTLBuffer {
 	_ret := objc.Send[metal.MTLBuffer](o.Ptr(), _mPSVectorSelData)
 	return _ret
 }
-

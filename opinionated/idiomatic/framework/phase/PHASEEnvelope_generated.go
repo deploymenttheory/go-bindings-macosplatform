@@ -89,4 +89,3 @@ type Envelopeable interface {
 }
 
 var _ Envelopeable = (*Envelope)(nil)
-

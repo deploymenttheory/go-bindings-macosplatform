@@ -17,11 +17,11 @@ type GKMersenneTwisterRandomSource struct {
 }
 
 var (
-	_clsGKMersenneTwisterRandomSource = _objcClass("GKMersenneTwisterRandomSource")
-	_gKMersenneTwisterRandomSourceSelInit = objc.RegisterName("init")
+	_clsGKMersenneTwisterRandomSource             = _objcClass("GKMersenneTwisterRandomSource")
+	_gKMersenneTwisterRandomSourceSelInit         = objc.RegisterName("init")
 	_gKMersenneTwisterRandomSourceSelInitWithSeed = objc.RegisterName("initWithSeed:")
-	_gKMersenneTwisterRandomSourceSelSeed = objc.RegisterName("seed")
-	_gKMersenneTwisterRandomSourceSelSetSeed = objc.RegisterName("setSeed:")
+	_gKMersenneTwisterRandomSourceSelSeed         = objc.RegisterName("seed")
+	_gKMersenneTwisterRandomSourceSelSetSeed      = objc.RegisterName("setSeed:")
 )
 
 func GKMersenneTwisterRandomSourceFromID(id objc.ID) *GKMersenneTwisterRandomSource {
@@ -37,14 +37,18 @@ func GKMersenneTwisterRandomSourceFromID(id objc.ID) *GKMersenneTwisterRandomSou
 // Initializes a linear congruential random source with bits from a high entropy system resource like SecRandomCopyBytes.
 func (o *GKMersenneTwisterRandomSource) Init() *GKMersenneTwisterRandomSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKMersenneTwisterRandomSourceSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKMersenneTwisterRandomSourceFromID(_ret)
 }
 
 // Initializes a linear congruential random source with bits the given 64 bit seed.
 func (o *GKMersenneTwisterRandomSource) InitWithSeed(seed uint64) *GKMersenneTwisterRandomSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKMersenneTwisterRandomSourceSelInitWithSeed, seed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKMersenneTwisterRandomSourceFromID(_ret)
 }
 
@@ -57,4 +61,3 @@ func (o *GKMersenneTwisterRandomSource) Seed() uint64 {
 func (o *GKMersenneTwisterRandomSource) SetSeed(seed uint64) {
 	o.Ptr().Send(_gKMersenneTwisterRandomSourceSelSetSeed, seed)
 }
-

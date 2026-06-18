@@ -18,7 +18,9 @@ type NetworkBlockDeviceStorageDeviceAttachment struct {
 }
 
 // Unwrap returns the underlying [raw.VZNetworkBlockDeviceStorageDeviceAttachment].
-func (x *NetworkBlockDeviceStorageDeviceAttachment) Unwrap() *raw.VZNetworkBlockDeviceStorageDeviceAttachment { return x.inner }
+func (x *NetworkBlockDeviceStorageDeviceAttachment) Unwrap() *raw.VZNetworkBlockDeviceStorageDeviceAttachment {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -90,7 +92,9 @@ func (x *NetworkBlockDeviceStorageDeviceAttachment) SetDelegate(delegate raw.VZN
 	x.inner.SetDelegate(delegate)
 }
 
-func (x *NetworkBlockDeviceStorageDeviceAttachment) asStorageDeviceAttachment() *raw.VZStorageDeviceAttachment { return &x.inner.VZStorageDeviceAttachment }
+func (x *NetworkBlockDeviceStorageDeviceAttachment) asStorageDeviceAttachment() *raw.VZStorageDeviceAttachment {
+	return &x.inner.VZStorageDeviceAttachment
+}
 
 // NetworkBlockDeviceStorageDeviceAttachmentable is the interface implemented by [NetworkBlockDeviceStorageDeviceAttachment], for mocking and DI.
 type NetworkBlockDeviceStorageDeviceAttachmentable interface {
@@ -105,4 +109,3 @@ type NetworkBlockDeviceStorageDeviceAttachmentable interface {
 }
 
 var _ NetworkBlockDeviceStorageDeviceAttachmentable = (*NetworkBlockDeviceStorageDeviceAttachment)(nil)
-

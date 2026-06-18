@@ -16,10 +16,10 @@ type MTRAccessControlClusterAccessControlExtensionStruct struct {
 }
 
 var (
-	_clsMTRAccessControlClusterAccessControlExtensionStruct = _objcClass("MTRAccessControlClusterAccessControlExtensionStruct")
-	_mTRAccessControlClusterAccessControlExtensionStructSelData = objc.RegisterName("data")
-	_mTRAccessControlClusterAccessControlExtensionStructSelSetData = objc.RegisterName("setData:")
-	_mTRAccessControlClusterAccessControlExtensionStructSelFabricIndex = objc.RegisterName("fabricIndex")
+	_clsMTRAccessControlClusterAccessControlExtensionStruct               = _objcClass("MTRAccessControlClusterAccessControlExtensionStruct")
+	_mTRAccessControlClusterAccessControlExtensionStructSelData           = objc.RegisterName("data")
+	_mTRAccessControlClusterAccessControlExtensionStructSelSetData        = objc.RegisterName("setData:")
+	_mTRAccessControlClusterAccessControlExtensionStructSelFabricIndex    = objc.RegisterName("fabricIndex")
 	_mTRAccessControlClusterAccessControlExtensionStructSelSetFabricIndex = objc.RegisterName("setFabricIndex:")
 )
 
@@ -35,7 +35,9 @@ func MTRAccessControlClusterAccessControlExtensionStructFromID(id objc.ID) *MTRA
 
 func (o *MTRAccessControlClusterAccessControlExtensionStruct) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAccessControlClusterAccessControlExtensionStructSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRAccessControlClusterAccessControlExtensionStruct) SetData(data *foun
 
 func (o *MTRAccessControlClusterAccessControlExtensionStruct) FabricIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAccessControlClusterAccessControlExtensionStructSelFabricIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRAccessControlClusterAccessControlExtensionStruct) SetFabricIndex(fabricIndex *foundation.NSNumber) {
 	o.Ptr().Send(_mTRAccessControlClusterAccessControlExtensionStructSelSetFabricIndex, fabricIndex.Ptr())
 }
-

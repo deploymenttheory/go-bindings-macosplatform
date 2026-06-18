@@ -11,7 +11,7 @@ import (
 type IOLockAssertState int64
 
 const (
-	KIOLockAssertOwned IOLockAssertState = 1
+	KIOLockAssertOwned    IOLockAssertState = 1
 	KIOLockAssertNotOwned IOLockAssertState = 2
 )
 
@@ -25,4 +25,3 @@ func (e IOLockAssertState) String() string {
 		return fmt.Sprintf("IOLockAssertState(%d)", int64(e))
 	}
 }
-

@@ -16,8 +16,8 @@ type TKTokenDriver struct {
 }
 
 var (
-	_clsTKTokenDriver = _objcClass("TKTokenDriver")
-	_tKTokenDriverSelDelegate = objc.RegisterName("delegate")
+	_clsTKTokenDriver            = _objcClass("TKTokenDriver")
+	_tKTokenDriverSelDelegate    = objc.RegisterName("delegate")
 	_tKTokenDriverSelSetDelegate = objc.RegisterName("setDelegate:")
 )
 
@@ -39,4 +39,3 @@ func (o *TKTokenDriver) Delegate() TKTokenDriverDelegate {
 func (o *TKTokenDriver) SetDelegate(delegate TKTokenDriverDelegate) {
 	o.Ptr().Send(_tKTokenDriverSelSetDelegate, delegate)
 }
-

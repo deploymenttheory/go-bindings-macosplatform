@@ -15,20 +15,20 @@ type NSRelativeDateTimeFormatter struct {
 }
 
 var (
-	_clsNSRelativeDateTimeFormatter = _objcClass("NSRelativeDateTimeFormatter")
-	_nSRelativeDateTimeFormatterSelLocalizedStringFromDateComponents = objc.RegisterName("localizedStringFromDateComponents:")
-	_nSRelativeDateTimeFormatterSelLocalizedStringFromTimeInterval = objc.RegisterName("localizedStringFromTimeInterval:")
+	_clsNSRelativeDateTimeFormatter                                     = _objcClass("NSRelativeDateTimeFormatter")
+	_nSRelativeDateTimeFormatterSelLocalizedStringFromDateComponents    = objc.RegisterName("localizedStringFromDateComponents:")
+	_nSRelativeDateTimeFormatterSelLocalizedStringFromTimeInterval      = objc.RegisterName("localizedStringFromTimeInterval:")
 	_nSRelativeDateTimeFormatterSelLocalizedStringForDateRelativeToDate = objc.RegisterName("localizedStringForDate:relativeToDate:")
-	_nSRelativeDateTimeFormatterSelDateTimeStyle = objc.RegisterName("dateTimeStyle")
-	_nSRelativeDateTimeFormatterSelSetDateTimeStyle = objc.RegisterName("setDateTimeStyle:")
-	_nSRelativeDateTimeFormatterSelUnitsStyle = objc.RegisterName("unitsStyle")
-	_nSRelativeDateTimeFormatterSelSetUnitsStyle = objc.RegisterName("setUnitsStyle:")
-	_nSRelativeDateTimeFormatterSelFormattingContext = objc.RegisterName("formattingContext")
-	_nSRelativeDateTimeFormatterSelSetFormattingContext = objc.RegisterName("setFormattingContext:")
-	_nSRelativeDateTimeFormatterSelCalendar = objc.RegisterName("calendar")
-	_nSRelativeDateTimeFormatterSelSetCalendar = objc.RegisterName("setCalendar:")
-	_nSRelativeDateTimeFormatterSelLocale = objc.RegisterName("locale")
-	_nSRelativeDateTimeFormatterSelSetLocale = objc.RegisterName("setLocale:")
+	_nSRelativeDateTimeFormatterSelDateTimeStyle                        = objc.RegisterName("dateTimeStyle")
+	_nSRelativeDateTimeFormatterSelSetDateTimeStyle                     = objc.RegisterName("setDateTimeStyle:")
+	_nSRelativeDateTimeFormatterSelUnitsStyle                           = objc.RegisterName("unitsStyle")
+	_nSRelativeDateTimeFormatterSelSetUnitsStyle                        = objc.RegisterName("setUnitsStyle:")
+	_nSRelativeDateTimeFormatterSelFormattingContext                    = objc.RegisterName("formattingContext")
+	_nSRelativeDateTimeFormatterSelSetFormattingContext                 = objc.RegisterName("setFormattingContext:")
+	_nSRelativeDateTimeFormatterSelCalendar                             = objc.RegisterName("calendar")
+	_nSRelativeDateTimeFormatterSelSetCalendar                          = objc.RegisterName("setCalendar:")
+	_nSRelativeDateTimeFormatterSelLocale                               = objc.RegisterName("locale")
+	_nSRelativeDateTimeFormatterSelSetLocale                            = objc.RegisterName("setLocale:")
 )
 
 func NSRelativeDateTimeFormatterFromID(id objc.ID) *NSRelativeDateTimeFormatter {
@@ -43,19 +43,25 @@ func NSRelativeDateTimeFormatterFromID(id objc.ID) *NSRelativeDateTimeFormatter 
 
 func (o *NSRelativeDateTimeFormatter) LocalizedStringFromDateComponents(dateComponents *NSDateComponents) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRelativeDateTimeFormatterSelLocalizedStringFromDateComponents, dateComponents.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSRelativeDateTimeFormatter) LocalizedStringFromTimeInterval(timeInterval float64) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRelativeDateTimeFormatterSelLocalizedStringFromTimeInterval, timeInterval)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSRelativeDateTimeFormatter) LocalizedStringForDateRelativeToDate(date *NSDate, referenceDate *NSDate) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRelativeDateTimeFormatterSelLocalizedStringForDateRelativeToDate, date.Ptr(), referenceDate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -88,7 +94,9 @@ func (o *NSRelativeDateTimeFormatter) SetFormattingContext(formattingContext NSF
 
 func (o *NSRelativeDateTimeFormatter) Calendar() *NSCalendar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRelativeDateTimeFormatterSelCalendar)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCalendarFromID(_ret)
 }
 
@@ -98,11 +106,12 @@ func (o *NSRelativeDateTimeFormatter) SetCalendar(calendar *NSCalendar) {
 
 func (o *NSRelativeDateTimeFormatter) Locale() *NSLocale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRelativeDateTimeFormatterSelLocale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLocaleFromID(_ret)
 }
 
 func (o *NSRelativeDateTimeFormatter) SetLocale(locale *NSLocale) {
 	o.Ptr().Send(_nSRelativeDateTimeFormatterSelSetLocale, locale.Ptr())
 }
-

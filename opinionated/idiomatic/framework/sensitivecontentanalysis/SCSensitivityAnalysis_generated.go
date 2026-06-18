@@ -59,4 +59,3 @@ type SensitivityAnalysisable interface {
 }
 
 var _ SensitivityAnalysisable = (*SensitivityAnalysis)(nil)
-

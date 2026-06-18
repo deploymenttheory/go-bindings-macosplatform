@@ -16,10 +16,10 @@ type CKSubscription struct {
 }
 
 var (
-	_clsCKSubscription = _objcClass("CKSubscription")
-	_cKSubscriptionSelSubscriptionID = objc.RegisterName("subscriptionID")
-	_cKSubscriptionSelSubscriptionType = objc.RegisterName("subscriptionType")
-	_cKSubscriptionSelNotificationInfo = objc.RegisterName("notificationInfo")
+	_clsCKSubscription                    = _objcClass("CKSubscription")
+	_cKSubscriptionSelSubscriptionID      = objc.RegisterName("subscriptionID")
+	_cKSubscriptionSelSubscriptionType    = objc.RegisterName("subscriptionType")
+	_cKSubscriptionSelNotificationInfo    = objc.RegisterName("notificationInfo")
 	_cKSubscriptionSelSetNotificationInfo = objc.RegisterName("setNotificationInfo:")
 )
 
@@ -36,7 +36,9 @@ func CKSubscriptionFromID(id objc.ID) *CKSubscription {
 // The subscription's unique identifier. This property's value is the subscription ID that you provide to the `initWithRecordType:predicate:subscriptionID:options:` or `initWithZoneID:subscriptionID:options:` methods when you create the subscription. If you use a different method to create the subscription, CloudKit automatically assigns a UUID as the subscription ID.
 func (o *CKSubscription) SubscriptionID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSubscriptionSelSubscriptionID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -49,11 +51,12 @@ func (o *CKSubscription) SubscriptionType() CKSubscriptionType {
 // The configuration for a subscription's push notifications. If you want the system to display your subscription's push notifications, assign a value to this property. The server uses the configuration you provide to determine the delivery options for notifications. For example, you can specify the text to display to the user, and the sound to play. You can also specify which fields of the record to include in the notification's payload. If you don't assign a value to this property, CloudKit still sends push notifications, but the system doesn't display them to the user. The default value of this property is `nil`.
 func (o *CKSubscription) NotificationInfo() *CKNotificationInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSubscriptionSelNotificationInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKNotificationInfoFromID(_ret)
 }
 
 func (o *CKSubscription) SetNotificationInfo(notificationInfo *CKNotificationInfo) {
 	o.Ptr().Send(_cKSubscriptionSelSetNotificationInfo, notificationInfo.Ptr())
 }
-

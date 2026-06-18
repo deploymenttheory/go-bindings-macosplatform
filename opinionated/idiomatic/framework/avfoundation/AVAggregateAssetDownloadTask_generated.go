@@ -51,4 +51,3 @@ type AggregateAssetDownloadTaskable interface {
 }
 
 var _ AggregateAssetDownloadTaskable = (*AggregateAssetDownloadTask)(nil)
-

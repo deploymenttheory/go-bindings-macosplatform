@@ -19,21 +19,21 @@ type MKTileOverlay struct {
 }
 
 var (
-	_clsMKTileOverlay = _objcClass("MKTileOverlay")
-	_mKTileOverlaySelInitWithURLTemplate = objc.RegisterName("initWithURLTemplate:")
-	_mKTileOverlaySelTileSize = objc.RegisterName("tileSize")
-	_mKTileOverlaySelSetTileSize = objc.RegisterName("setTileSize:")
-	_mKTileOverlaySelIsGeometryFlipped = objc.RegisterName("isGeometryFlipped")
-	_mKTileOverlaySelSetGeometryFlipped = objc.RegisterName("setGeometryFlipped:")
-	_mKTileOverlaySelMinimumZ = objc.RegisterName("minimumZ")
-	_mKTileOverlaySelSetMinimumZ = objc.RegisterName("setMinimumZ:")
-	_mKTileOverlaySelMaximumZ = objc.RegisterName("maximumZ")
-	_mKTileOverlaySelSetMaximumZ = objc.RegisterName("setMaximumZ:")
-	_mKTileOverlaySelURLTemplate = objc.RegisterName("URLTemplate")
-	_mKTileOverlaySelCanReplaceMapContent = objc.RegisterName("canReplaceMapContent")
+	_clsMKTileOverlay                        = _objcClass("MKTileOverlay")
+	_mKTileOverlaySelInitWithURLTemplate     = objc.RegisterName("initWithURLTemplate:")
+	_mKTileOverlaySelTileSize                = objc.RegisterName("tileSize")
+	_mKTileOverlaySelSetTileSize             = objc.RegisterName("setTileSize:")
+	_mKTileOverlaySelIsGeometryFlipped       = objc.RegisterName("isGeometryFlipped")
+	_mKTileOverlaySelSetGeometryFlipped      = objc.RegisterName("setGeometryFlipped:")
+	_mKTileOverlaySelMinimumZ                = objc.RegisterName("minimumZ")
+	_mKTileOverlaySelSetMinimumZ             = objc.RegisterName("setMinimumZ:")
+	_mKTileOverlaySelMaximumZ                = objc.RegisterName("maximumZ")
+	_mKTileOverlaySelSetMaximumZ             = objc.RegisterName("setMaximumZ:")
+	_mKTileOverlaySelURLTemplate             = objc.RegisterName("URLTemplate")
+	_mKTileOverlaySelCanReplaceMapContent    = objc.RegisterName("canReplaceMapContent")
 	_mKTileOverlaySelSetCanReplaceMapContent = objc.RegisterName("setCanReplaceMapContent:")
-	_mKTileOverlaySelURLForTilePath = objc.RegisterName("URLForTilePath:")
-	_mKTileOverlaySelLoadTileAtPathResult = objc.RegisterName("loadTileAtPath:result:")
+	_mKTileOverlaySelURLForTilePath          = objc.RegisterName("URLForTilePath:")
+	_mKTileOverlaySelLoadTileAtPathResult    = objc.RegisterName("loadTileAtPath:result:")
 )
 
 func MKTileOverlayFromID(id objc.ID) *MKTileOverlay {
@@ -48,7 +48,9 @@ func MKTileOverlayFromID(id objc.ID) *MKTileOverlay {
 
 func (o *MKTileOverlay) InitWithURLTemplate(uRLTemplate *foundation.NSString) *MKTileOverlay {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKTileOverlaySelInitWithURLTemplate, uRLTemplate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKTileOverlayFromID(_ret)
 }
 
@@ -90,7 +92,9 @@ func (o *MKTileOverlay) SetMaximumZ(maximumZ int) {
 
 func (o *MKTileOverlay) URLTemplate() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKTileOverlaySelURLTemplate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -105,7 +109,9 @@ func (o *MKTileOverlay) SetCanReplaceMapContent(canReplaceMapContent bool) {
 
 func (o *MKTileOverlay) URLForTilePath(path MKTileOverlayPath) *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKTileOverlaySelURLForTilePath, path)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -122,4 +128,3 @@ func (o *MKTileOverlay) LoadTileAtPathResult(path MKTileOverlayPath, result func
 	}
 	o.Ptr().Send(_mKTileOverlaySelLoadTileAtPathResult, path, __block_result)
 }
-

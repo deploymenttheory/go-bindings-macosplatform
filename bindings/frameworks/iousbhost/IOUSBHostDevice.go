@@ -20,12 +20,12 @@ type IOUSBHostDevice struct {
 }
 
 var (
-	_clsIOUSBHostDevice = _objcClass("IOUSBHostDevice")
+	_clsIOUSBHostDevice                                                                                                                 = _objcClass("IOUSBHostDevice")
 	_iOUSBHostDeviceSelCreateMatchingDictionaryWithVendorIDProductIDBcdDeviceDeviceClassDeviceSubclassDeviceProtocolSpeedProductIDArray = objc.RegisterName("createMatchingDictionaryWithVendorID:productID:bcdDevice:deviceClass:deviceSubclass:deviceProtocol:speed:productIDArray:")
-	_iOUSBHostDeviceSelConfigureWithValueMatchInterfacesError = objc.RegisterName("configureWithValue:matchInterfaces:error:")
-	_iOUSBHostDeviceSelConfigureWithValueError = objc.RegisterName("configureWithValue:error:")
-	_iOUSBHostDeviceSelResetWithError = objc.RegisterName("resetWithError:")
-	_iOUSBHostDeviceSelConfigurationDescriptor = objc.RegisterName("configurationDescriptor")
+	_iOUSBHostDeviceSelConfigureWithValueMatchInterfacesError                                                                           = objc.RegisterName("configureWithValue:matchInterfaces:error:")
+	_iOUSBHostDeviceSelConfigureWithValueError                                                                                          = objc.RegisterName("configureWithValue:error:")
+	_iOUSBHostDeviceSelResetWithError                                                                                                   = objc.RegisterName("resetWithError:")
+	_iOUSBHostDeviceSelConfigurationDescriptor                                                                                          = objc.RegisterName("configurationDescriptor")
 )
 
 func IOUSBHostDeviceFromID(id objc.ID) *IOUSBHostDevice {
@@ -79,4 +79,3 @@ func (o *IOUSBHostDevice) ConfigurationDescriptor() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _iOUSBHostDeviceSelConfigurationDescriptor)
 	return _ret
 }
-

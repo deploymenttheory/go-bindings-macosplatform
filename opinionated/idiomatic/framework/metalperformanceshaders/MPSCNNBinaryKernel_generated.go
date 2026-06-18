@@ -524,4 +524,3 @@ type CNNBinaryKernelable interface {
 }
 
 var _ CNNBinaryKernelable = (*CNNBinaryKernel)(nil)
-

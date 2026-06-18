@@ -17,12 +17,12 @@ type WKSnapshotConfiguration struct {
 }
 
 var (
-	_clsWKSnapshotConfiguration = _objcClass("WKSnapshotConfiguration")
-	_wKSnapshotConfigurationSelRect = objc.RegisterName("rect")
-	_wKSnapshotConfigurationSelSetRect = objc.RegisterName("setRect:")
-	_wKSnapshotConfigurationSelSnapshotWidth = objc.RegisterName("snapshotWidth")
-	_wKSnapshotConfigurationSelSetSnapshotWidth = objc.RegisterName("setSnapshotWidth:")
-	_wKSnapshotConfigurationSelAfterScreenUpdates = objc.RegisterName("afterScreenUpdates")
+	_clsWKSnapshotConfiguration                      = _objcClass("WKSnapshotConfiguration")
+	_wKSnapshotConfigurationSelRect                  = objc.RegisterName("rect")
+	_wKSnapshotConfigurationSelSetRect               = objc.RegisterName("setRect:")
+	_wKSnapshotConfigurationSelSnapshotWidth         = objc.RegisterName("snapshotWidth")
+	_wKSnapshotConfigurationSelSetSnapshotWidth      = objc.RegisterName("setSnapshotWidth:")
+	_wKSnapshotConfigurationSelAfterScreenUpdates    = objc.RegisterName("afterScreenUpdates")
 	_wKSnapshotConfigurationSelSetAfterScreenUpdates = objc.RegisterName("setAfterScreenUpdates:")
 )
 
@@ -49,7 +49,9 @@ func (o *WKSnapshotConfiguration) SetRect(rect corefoundation.CGRect) {
 // @abstract Specify a custom width to control the size of image you get back. The height will be computed to maintain the aspect ratio established by rect. @discussion snapshotWidth represents the width in points. If the snapshotWidth is nil, rect's width will be used.
 func (o *WKSnapshotConfiguration) SnapshotWidth() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKSnapshotConfigurationSelSnapshotWidth)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -66,4 +68,3 @@ func (o *WKSnapshotConfiguration) AfterScreenUpdates() bool {
 func (o *WKSnapshotConfiguration) SetAfterScreenUpdates(afterScreenUpdates bool) {
 	o.Ptr().Send(_wKSnapshotConfigurationSelSetAfterScreenUpdates, afterScreenUpdates)
 }
-

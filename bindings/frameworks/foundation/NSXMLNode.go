@@ -17,57 +17,57 @@ type NSXMLNode struct {
 }
 
 var (
-	_clsNSXMLNode = _objcClass("NSXMLNode")
-	_nSXMLNodeSelInit = objc.RegisterName("init")
-	_nSXMLNodeSelInitWithKind = objc.RegisterName("initWithKind:")
-	_nSXMLNodeSelInitWithKindOptions = objc.RegisterName("initWithKind:options:")
-	_nSXMLNodeSelDocument = objc.RegisterName("document")
-	_nSXMLNodeSelDocumentWithRootElement = objc.RegisterName("documentWithRootElement:")
-	_nSXMLNodeSelElementWithName = objc.RegisterName("elementWithName:")
-	_nSXMLNodeSelElementWithNameURI = objc.RegisterName("elementWithName:URI:")
-	_nSXMLNodeSelElementWithNameStringValue = objc.RegisterName("elementWithName:stringValue:")
-	_nSXMLNodeSelElementWithNameChildrenAttributes = objc.RegisterName("elementWithName:children:attributes:")
-	_nSXMLNodeSelAttributeWithNameStringValue = objc.RegisterName("attributeWithName:stringValue:")
-	_nSXMLNodeSelAttributeWithNameURIStringValue = objc.RegisterName("attributeWithName:URI:stringValue:")
-	_nSXMLNodeSelNamespaceWithNameStringValue = objc.RegisterName("namespaceWithName:stringValue:")
+	_clsNSXMLNode                                         = _objcClass("NSXMLNode")
+	_nSXMLNodeSelInit                                     = objc.RegisterName("init")
+	_nSXMLNodeSelInitWithKind                             = objc.RegisterName("initWithKind:")
+	_nSXMLNodeSelInitWithKindOptions                      = objc.RegisterName("initWithKind:options:")
+	_nSXMLNodeSelDocument                                 = objc.RegisterName("document")
+	_nSXMLNodeSelDocumentWithRootElement                  = objc.RegisterName("documentWithRootElement:")
+	_nSXMLNodeSelElementWithName                          = objc.RegisterName("elementWithName:")
+	_nSXMLNodeSelElementWithNameURI                       = objc.RegisterName("elementWithName:URI:")
+	_nSXMLNodeSelElementWithNameStringValue               = objc.RegisterName("elementWithName:stringValue:")
+	_nSXMLNodeSelElementWithNameChildrenAttributes        = objc.RegisterName("elementWithName:children:attributes:")
+	_nSXMLNodeSelAttributeWithNameStringValue             = objc.RegisterName("attributeWithName:stringValue:")
+	_nSXMLNodeSelAttributeWithNameURIStringValue          = objc.RegisterName("attributeWithName:URI:stringValue:")
+	_nSXMLNodeSelNamespaceWithNameStringValue             = objc.RegisterName("namespaceWithName:stringValue:")
 	_nSXMLNodeSelProcessingInstructionWithNameStringValue = objc.RegisterName("processingInstructionWithName:stringValue:")
-	_nSXMLNodeSelCommentWithStringValue = objc.RegisterName("commentWithStringValue:")
-	_nSXMLNodeSelTextWithStringValue = objc.RegisterName("textWithStringValue:")
-	_nSXMLNodeSelDTDNodeWithXMLString = objc.RegisterName("DTDNodeWithXMLString:")
-	_nSXMLNodeSelSetStringValueResolvingEntities = objc.RegisterName("setStringValue:resolvingEntities:")
-	_nSXMLNodeSelChildAtIndex = objc.RegisterName("childAtIndex:")
-	_nSXMLNodeSelDetach = objc.RegisterName("detach")
-	_nSXMLNodeSelLocalNameForName = objc.RegisterName("localNameForName:")
-	_nSXMLNodeSelPrefixForName = objc.RegisterName("prefixForName:")
-	_nSXMLNodeSelPredefinedNamespaceForPrefix = objc.RegisterName("predefinedNamespaceForPrefix:")
-	_nSXMLNodeSelXMLStringWithOptions = objc.RegisterName("XMLStringWithOptions:")
-	_nSXMLNodeSelCanonicalXMLStringPreservingComments = objc.RegisterName("canonicalXMLStringPreservingComments:")
-	_nSXMLNodeSelNodesForXPathError = objc.RegisterName("nodesForXPath:error:")
-	_nSXMLNodeSelObjectsForXQueryConstantsError = objc.RegisterName("objectsForXQuery:constants:error:")
-	_nSXMLNodeSelObjectsForXQueryError = objc.RegisterName("objectsForXQuery:error:")
-	_nSXMLNodeSelKind = objc.RegisterName("kind")
-	_nSXMLNodeSelName = objc.RegisterName("name")
-	_nSXMLNodeSelSetName = objc.RegisterName("setName:")
-	_nSXMLNodeSelObjectValue = objc.RegisterName("objectValue")
-	_nSXMLNodeSelSetObjectValue = objc.RegisterName("setObjectValue:")
-	_nSXMLNodeSelStringValue = objc.RegisterName("stringValue")
-	_nSXMLNodeSelSetStringValue = objc.RegisterName("setStringValue:")
-	_nSXMLNodeSelIndex = objc.RegisterName("index")
-	_nSXMLNodeSelLevel = objc.RegisterName("level")
-	_nSXMLNodeSelRootDocument = objc.RegisterName("rootDocument")
-	_nSXMLNodeSelParent = objc.RegisterName("parent")
-	_nSXMLNodeSelChildCount = objc.RegisterName("childCount")
-	_nSXMLNodeSelChildren = objc.RegisterName("children")
-	_nSXMLNodeSelPreviousSibling = objc.RegisterName("previousSibling")
-	_nSXMLNodeSelNextSibling = objc.RegisterName("nextSibling")
-	_nSXMLNodeSelPreviousNode = objc.RegisterName("previousNode")
-	_nSXMLNodeSelNextNode = objc.RegisterName("nextNode")
-	_nSXMLNodeSelXPath = objc.RegisterName("XPath")
-	_nSXMLNodeSelLocalName = objc.RegisterName("localName")
-	_nSXMLNodeSelPrefix = objc.RegisterName("prefix")
-	_nSXMLNodeSelURI = objc.RegisterName("URI")
-	_nSXMLNodeSelSetURI = objc.RegisterName("setURI:")
-	_nSXMLNodeSelXMLString = objc.RegisterName("XMLString")
+	_nSXMLNodeSelCommentWithStringValue                   = objc.RegisterName("commentWithStringValue:")
+	_nSXMLNodeSelTextWithStringValue                      = objc.RegisterName("textWithStringValue:")
+	_nSXMLNodeSelDTDNodeWithXMLString                     = objc.RegisterName("DTDNodeWithXMLString:")
+	_nSXMLNodeSelSetStringValueResolvingEntities          = objc.RegisterName("setStringValue:resolvingEntities:")
+	_nSXMLNodeSelChildAtIndex                             = objc.RegisterName("childAtIndex:")
+	_nSXMLNodeSelDetach                                   = objc.RegisterName("detach")
+	_nSXMLNodeSelLocalNameForName                         = objc.RegisterName("localNameForName:")
+	_nSXMLNodeSelPrefixForName                            = objc.RegisterName("prefixForName:")
+	_nSXMLNodeSelPredefinedNamespaceForPrefix             = objc.RegisterName("predefinedNamespaceForPrefix:")
+	_nSXMLNodeSelXMLStringWithOptions                     = objc.RegisterName("XMLStringWithOptions:")
+	_nSXMLNodeSelCanonicalXMLStringPreservingComments     = objc.RegisterName("canonicalXMLStringPreservingComments:")
+	_nSXMLNodeSelNodesForXPathError                       = objc.RegisterName("nodesForXPath:error:")
+	_nSXMLNodeSelObjectsForXQueryConstantsError           = objc.RegisterName("objectsForXQuery:constants:error:")
+	_nSXMLNodeSelObjectsForXQueryError                    = objc.RegisterName("objectsForXQuery:error:")
+	_nSXMLNodeSelKind                                     = objc.RegisterName("kind")
+	_nSXMLNodeSelName                                     = objc.RegisterName("name")
+	_nSXMLNodeSelSetName                                  = objc.RegisterName("setName:")
+	_nSXMLNodeSelObjectValue                              = objc.RegisterName("objectValue")
+	_nSXMLNodeSelSetObjectValue                           = objc.RegisterName("setObjectValue:")
+	_nSXMLNodeSelStringValue                              = objc.RegisterName("stringValue")
+	_nSXMLNodeSelSetStringValue                           = objc.RegisterName("setStringValue:")
+	_nSXMLNodeSelIndex                                    = objc.RegisterName("index")
+	_nSXMLNodeSelLevel                                    = objc.RegisterName("level")
+	_nSXMLNodeSelRootDocument                             = objc.RegisterName("rootDocument")
+	_nSXMLNodeSelParent                                   = objc.RegisterName("parent")
+	_nSXMLNodeSelChildCount                               = objc.RegisterName("childCount")
+	_nSXMLNodeSelChildren                                 = objc.RegisterName("children")
+	_nSXMLNodeSelPreviousSibling                          = objc.RegisterName("previousSibling")
+	_nSXMLNodeSelNextSibling                              = objc.RegisterName("nextSibling")
+	_nSXMLNodeSelPreviousNode                             = objc.RegisterName("previousNode")
+	_nSXMLNodeSelNextNode                                 = objc.RegisterName("nextNode")
+	_nSXMLNodeSelXPath                                    = objc.RegisterName("XPath")
+	_nSXMLNodeSelLocalName                                = objc.RegisterName("localName")
+	_nSXMLNodeSelPrefix                                   = objc.RegisterName("prefix")
+	_nSXMLNodeSelURI                                      = objc.RegisterName("URI")
+	_nSXMLNodeSelSetURI                                   = objc.RegisterName("setURI:")
+	_nSXMLNodeSelXMLString                                = objc.RegisterName("XMLString")
 )
 
 func NSXMLNodeFromID(id objc.ID) *NSXMLNode {
@@ -82,21 +82,27 @@ func NSXMLNodeFromID(id objc.ID) *NSXMLNode {
 
 func (o *NSXMLNode) Init() *NSXMLNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLNodeSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLNodeFromID(_ret)
 }
 
 // @method initWithKind: @abstract Invokes @link initWithKind:options: @/link with options set to NSXMLNodeOptionsNone
 func (o *NSXMLNode) InitWithKind(kind NSXMLNodeKind) *NSXMLNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLNodeSelInitWithKind, kind)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLNodeFromID(_ret)
 }
 
 // @method initWithKind:options: @abstract Inits a node with fidelity options as description NSXMLNodeOptions.h
 func (o *NSXMLNode) InitWithKindOptions(kind NSXMLNodeKind, options NSXMLNodeOptions) *NSXMLNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLNodeSelInitWithKindOptions, kind, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLNodeFromID(_ret)
 }
 
@@ -186,7 +192,9 @@ func (o *NSXMLNode) SetStringValueResolvingEntities(string_ *NSString, resolve b
 // @method childAtIndex: @abstract Returns the child node at a particular index.
 func (o *NSXMLNode) ChildAtIndex(index uint) *NSXMLNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLNodeSelChildAtIndex, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLNodeFromID(_ret)
 }
 
@@ -198,35 +206,45 @@ func (o *NSXMLNode) Detach() {
 // @method localNameForName: @abstract Returns the local name bar in foo:bar.
 func NSXMLNodeLocalNameForName(name *NSString) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSXMLNode), _nSXMLNodeSelLocalNameForName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // @method localNameForName: @abstract Returns the prefix foo in the name foo:bar.
 func NSXMLNodePrefixForName(name *NSString) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSXMLNode), _nSXMLNodeSelPrefixForName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // @method predefinedNamespaceForPrefix: @abstract Returns the namespace belonging to one of the predefined namespaces xml, xs, or xsi
 func NSXMLNodePredefinedNamespaceForPrefix(name *NSString) *NSXMLNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSXMLNode), _nSXMLNodeSelPredefinedNamespaceForPrefix, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLNodeFromID(_ret)
 }
 
 // @method XMLStringWithOptions: @abstract The representation of this node as it would appear in an XML document, with various output options available.
 func (o *NSXMLNode) XMLStringWithOptions(options NSXMLNodeOptions) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLNodeSelXMLStringWithOptions, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // @method canonicalXMLStringPreservingComments: @abstract W3 canonical form (http://www.w3.org/TR/xml-c14n). The input option NSXMLNodePreserveWhitespace should be set for true canonical form.
 func (o *NSXMLNode) CanonicalXMLStringPreservingComments(comments bool) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLNodeSelCanonicalXMLStringPreservingComments, comments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -234,7 +252,9 @@ func (o *NSXMLNode) CanonicalXMLStringPreservingComments(comments bool) *NSStrin
 func (o *NSXMLNode) NodesForXPathError(xpath *NSString) (*NSArray[*NSXMLNode], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLNodeSelNodesForXPathError, xpath.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -269,7 +289,9 @@ func (o *NSXMLNode) Kind() NSXMLNodeKind {
 // @abstract Sets the nodes name. Applicable for element, attribute, namespace, processing-instruction, document type declaration, element declaration, attribute declaration, entity declaration, and notation declaration.
 func (o *NSXMLNode) Name() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLNodeSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -290,7 +312,9 @@ func (o *NSXMLNode) SetObjectValue(objectValue objc.ID) {
 // @abstract Sets the content of the node. Setting the stringValue removes all existing children including processing instructions and comments. Setting the string value on an element creates a single text node child. The getter returns the string value of the node, which may be either its content or child text nodes, depending on the type of node. Elements are recursed and text nodes concatenated in document order with no intervening spaces.
 func (o *NSXMLNode) StringValue() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLNodeSelStringValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -313,14 +337,18 @@ func (o *NSXMLNode) Level() uint {
 // @abstract The encompassing document or nil.
 func (o *NSXMLNode) RootDocument() *NSXMLDocument {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLNodeSelRootDocument)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLDocumentFromID(_ret)
 }
 
 // @abstract The parent of this node. Documents and standalone Nodes have a nil parent; there is not a 1-to-1 relationship between parent and children, eg a namespace cannot be a child but has a parent element.
 func (o *NSXMLNode) Parent() *NSXMLNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLNodeSelParent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLNodeFromID(_ret)
 }
 
@@ -333,63 +361,81 @@ func (o *NSXMLNode) ChildCount() uint {
 // @abstract An immutable array of child nodes. Relevant for documents, elements, and document type declarations.
 func (o *NSXMLNode) Children() *NSArray[*NSXMLNode] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLNodeSelChildren)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSXMLNode](_ret)
 }
 
 // @abstract Returns the previous sibling, or nil if there isn't one.
 func (o *NSXMLNode) PreviousSibling() *NSXMLNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLNodeSelPreviousSibling)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLNodeFromID(_ret)
 }
 
 // @abstract Returns the next sibling, or nil if there isn't one.
 func (o *NSXMLNode) NextSibling() *NSXMLNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLNodeSelNextSibling)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLNodeFromID(_ret)
 }
 
 // @abstract Returns the previous node in document order. This can be used to walk the tree backwards.
 func (o *NSXMLNode) PreviousNode() *NSXMLNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLNodeSelPreviousNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLNodeFromID(_ret)
 }
 
 // @abstract Returns the next node in document order. This can be used to walk the tree forwards.
 func (o *NSXMLNode) NextNode() *NSXMLNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLNodeSelNextNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLNodeFromID(_ret)
 }
 
 // @abstract Returns the XPath to this node, for example foo/bar[2]/baz.
 func (o *NSXMLNode) XPath() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLNodeSelXPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // @abstract Returns the local name bar if this attribute or element's name is foo:bar
 func (o *NSXMLNode) LocalName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLNodeSelLocalName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // @abstract Returns the prefix foo if this attribute or element's name if foo:bar
 func (o *NSXMLNode) Prefix() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLNodeSelPrefix)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // @abstract Set the URI of this element, attribute, or document. For documents it is the URI of document origin. Getter returns the URI of this element, attribute, or document. For documents it is the URI of document origin and is automatically set when using initWithContentsOfURL.
 func (o *NSXMLNode) URI() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLNodeSelURI)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -400,7 +446,8 @@ func (o *NSXMLNode) SetURI(uRI *NSString) {
 // @abstract The representation of this node as it would appear in an XML document.
 func (o *NSXMLNode) XMLString() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLNodeSelXMLString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
-

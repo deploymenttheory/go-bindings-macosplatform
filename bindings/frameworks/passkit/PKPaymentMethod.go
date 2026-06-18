@@ -17,13 +17,13 @@ type PKPaymentMethod struct {
 }
 
 var (
-	_clsPKPaymentMethod = _objcClass("PKPaymentMethod")
-	_pKPaymentMethodSelDisplayName = objc.RegisterName("displayName")
-	_pKPaymentMethodSelNetwork = objc.RegisterName("network")
-	_pKPaymentMethodSelType = objc.RegisterName("type")
-	_pKPaymentMethodSelPaymentPass = objc.RegisterName("paymentPass")
+	_clsPKPaymentMethod                  = _objcClass("PKPaymentMethod")
+	_pKPaymentMethodSelDisplayName       = objc.RegisterName("displayName")
+	_pKPaymentMethodSelNetwork           = objc.RegisterName("network")
+	_pKPaymentMethodSelType              = objc.RegisterName("type")
+	_pKPaymentMethodSelPaymentPass       = objc.RegisterName("paymentPass")
 	_pKPaymentMethodSelSecureElementPass = objc.RegisterName("secureElementPass")
-	_pKPaymentMethodSelBillingAddress = objc.RegisterName("billingAddress")
+	_pKPaymentMethodSelBillingAddress    = objc.RegisterName("billingAddress")
 )
 
 func PKPaymentMethodFromID(id objc.ID) *PKPaymentMethod {
@@ -38,13 +38,17 @@ func PKPaymentMethodFromID(id objc.ID) *PKPaymentMethod {
 
 func (o *PKPaymentMethod) DisplayName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentMethodSelDisplayName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKPaymentMethod) Network() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentMethodSelNetwork)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -56,19 +60,24 @@ func (o *PKPaymentMethod) Type() PKPaymentMethodType {
 // Deprecated: Use -[PKPass secureElementPass] instead
 func (o *PKPaymentMethod) PaymentPass() *PKPaymentPass {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentMethodSelPaymentPass)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKPaymentPassFromID(_ret)
 }
 
 func (o *PKPaymentMethod) SecureElementPass() *PKSecureElementPass {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentMethodSelSecureElementPass)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKSecureElementPassFromID(_ret)
 }
 
 func (o *PKPaymentMethod) BillingAddress() *contacts.CNContact {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentMethodSelBillingAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return contacts.CNContactFromID(_ret)
 }
-

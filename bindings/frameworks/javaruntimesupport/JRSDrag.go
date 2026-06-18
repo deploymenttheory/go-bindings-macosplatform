@@ -17,9 +17,9 @@ type JRSDrag struct {
 }
 
 var (
-	_clsJRSDrag = _objcClass("JRSDrag")
+	_clsJRSDrag                        = _objcClass("JRSDrag")
 	_jRSDragSelCurrentAllowableActions = objc.RegisterName("currentAllowableActions")
-	_jRSDragSelCurrentModifiers = objc.RegisterName("currentModifiers")
+	_jRSDragSelCurrentModifiers        = objc.RegisterName("currentModifiers")
 )
 
 func JRSDragFromID(id objc.ID) *JRSDrag {
@@ -41,4 +41,3 @@ func JRSDragCurrentModifiers() uint {
 	_ret := objc.Send[uint](objc.ID(_clsJRSDrag), _jRSDragSelCurrentModifiers)
 	return _ret
 }
-

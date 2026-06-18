@@ -63,7 +63,9 @@ func (x *MathExpressionUnderOver) OverExpression() *MathExpression {
 	return &MathExpression{inner: _r}
 }
 
-func (x *MathExpressionUnderOver) asMathExpression() *raw.AXMathExpression { return &x.inner.AXMathExpression }
+func (x *MathExpressionUnderOver) asMathExpression() *raw.AXMathExpression {
+	return &x.inner.AXMathExpression
+}
 
 // MathExpressionUnderOverable is the interface implemented by [MathExpressionUnderOver], for mocking and DI.
 type MathExpressionUnderOverable interface {
@@ -74,4 +76,3 @@ type MathExpressionUnderOverable interface {
 }
 
 var _ MathExpressionUnderOverable = (*MathExpressionUnderOver)(nil)
-

@@ -63,4 +63,3 @@ type Observationable interface {
 }
 
 var _ Observationable = (*Observation)(nil)
-

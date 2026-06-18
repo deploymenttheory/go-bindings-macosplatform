@@ -58,7 +58,9 @@ func (x *NNScaleNode) WithLabel(label string) *NNScaleNode {
 	return x
 }
 
-func (x *NNScaleNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+func (x *NNScaleNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNFilterNode
+}
 
 // NNScaleNodeable is the interface implemented by [NNScaleNode], for mocking and DI.
 type NNScaleNodeable interface {
@@ -68,4 +70,3 @@ type NNScaleNodeable interface {
 }
 
 var _ NNScaleNodeable = (*NNScaleNode)(nil)
-

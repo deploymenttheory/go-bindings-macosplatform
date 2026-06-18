@@ -17,23 +17,23 @@ type NSCollectionViewGridLayout struct {
 }
 
 var (
-	_clsNSCollectionViewGridLayout = _objcClass("NSCollectionViewGridLayout")
-	_nSCollectionViewGridLayoutSelMargins = objc.RegisterName("margins")
-	_nSCollectionViewGridLayoutSelSetMargins = objc.RegisterName("setMargins:")
-	_nSCollectionViewGridLayoutSelMinimumInteritemSpacing = objc.RegisterName("minimumInteritemSpacing")
+	_clsNSCollectionViewGridLayout                           = _objcClass("NSCollectionViewGridLayout")
+	_nSCollectionViewGridLayoutSelMargins                    = objc.RegisterName("margins")
+	_nSCollectionViewGridLayoutSelSetMargins                 = objc.RegisterName("setMargins:")
+	_nSCollectionViewGridLayoutSelMinimumInteritemSpacing    = objc.RegisterName("minimumInteritemSpacing")
 	_nSCollectionViewGridLayoutSelSetMinimumInteritemSpacing = objc.RegisterName("setMinimumInteritemSpacing:")
-	_nSCollectionViewGridLayoutSelMinimumLineSpacing = objc.RegisterName("minimumLineSpacing")
-	_nSCollectionViewGridLayoutSelSetMinimumLineSpacing = objc.RegisterName("setMinimumLineSpacing:")
-	_nSCollectionViewGridLayoutSelMaximumNumberOfRows = objc.RegisterName("maximumNumberOfRows")
-	_nSCollectionViewGridLayoutSelSetMaximumNumberOfRows = objc.RegisterName("setMaximumNumberOfRows:")
-	_nSCollectionViewGridLayoutSelMaximumNumberOfColumns = objc.RegisterName("maximumNumberOfColumns")
-	_nSCollectionViewGridLayoutSelSetMaximumNumberOfColumns = objc.RegisterName("setMaximumNumberOfColumns:")
-	_nSCollectionViewGridLayoutSelMinimumItemSize = objc.RegisterName("minimumItemSize")
-	_nSCollectionViewGridLayoutSelSetMinimumItemSize = objc.RegisterName("setMinimumItemSize:")
-	_nSCollectionViewGridLayoutSelMaximumItemSize = objc.RegisterName("maximumItemSize")
-	_nSCollectionViewGridLayoutSelSetMaximumItemSize = objc.RegisterName("setMaximumItemSize:")
-	_nSCollectionViewGridLayoutSelBackgroundColors = objc.RegisterName("backgroundColors")
-	_nSCollectionViewGridLayoutSelSetBackgroundColors = objc.RegisterName("setBackgroundColors:")
+	_nSCollectionViewGridLayoutSelMinimumLineSpacing         = objc.RegisterName("minimumLineSpacing")
+	_nSCollectionViewGridLayoutSelSetMinimumLineSpacing      = objc.RegisterName("setMinimumLineSpacing:")
+	_nSCollectionViewGridLayoutSelMaximumNumberOfRows        = objc.RegisterName("maximumNumberOfRows")
+	_nSCollectionViewGridLayoutSelSetMaximumNumberOfRows     = objc.RegisterName("setMaximumNumberOfRows:")
+	_nSCollectionViewGridLayoutSelMaximumNumberOfColumns     = objc.RegisterName("maximumNumberOfColumns")
+	_nSCollectionViewGridLayoutSelSetMaximumNumberOfColumns  = objc.RegisterName("setMaximumNumberOfColumns:")
+	_nSCollectionViewGridLayoutSelMinimumItemSize            = objc.RegisterName("minimumItemSize")
+	_nSCollectionViewGridLayoutSelSetMinimumItemSize         = objc.RegisterName("setMinimumItemSize:")
+	_nSCollectionViewGridLayoutSelMaximumItemSize            = objc.RegisterName("maximumItemSize")
+	_nSCollectionViewGridLayoutSelSetMaximumItemSize         = objc.RegisterName("setMaximumItemSize:")
+	_nSCollectionViewGridLayoutSelBackgroundColors           = objc.RegisterName("backgroundColors")
+	_nSCollectionViewGridLayoutSelSetBackgroundColors        = objc.RegisterName("setBackgroundColors:")
 )
 
 func NSCollectionViewGridLayoutFromID(id objc.ID) *NSCollectionViewGridLayout {
@@ -111,11 +111,12 @@ func (o *NSCollectionViewGridLayout) SetMaximumItemSize(maximumItemSize corefoun
 
 func (o *NSCollectionViewGridLayout) BackgroundColors() *foundation.NSArray[*NSColor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewGridLayoutSelBackgroundColors)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSColor](_ret)
 }
 
 func (o *NSCollectionViewGridLayout) SetBackgroundColors(backgroundColors *foundation.NSArray[*NSColor]) {
 	o.Ptr().Send(_nSCollectionViewGridLayoutSelSetBackgroundColors, backgroundColors.Ptr())
 }
-

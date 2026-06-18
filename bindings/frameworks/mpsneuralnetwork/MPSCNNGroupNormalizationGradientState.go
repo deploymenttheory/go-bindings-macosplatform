@@ -16,12 +16,12 @@ type MPSCNNGroupNormalizationGradientState struct {
 }
 
 var (
-	_clsMPSCNNGroupNormalizationGradientState = _objcClass("MPSCNNGroupNormalizationGradientState")
+	_clsMPSCNNGroupNormalizationGradientState                   = _objcClass("MPSCNNGroupNormalizationGradientState")
 	_mPSCNNGroupNormalizationGradientStateSelGroupNormalization = objc.RegisterName("groupNormalization")
-	_mPSCNNGroupNormalizationGradientStateSelGamma = objc.RegisterName("gamma")
-	_mPSCNNGroupNormalizationGradientStateSelBeta = objc.RegisterName("beta")
-	_mPSCNNGroupNormalizationGradientStateSelGradientForGamma = objc.RegisterName("gradientForGamma")
-	_mPSCNNGroupNormalizationGradientStateSelGradientForBeta = objc.RegisterName("gradientForBeta")
+	_mPSCNNGroupNormalizationGradientStateSelGamma              = objc.RegisterName("gamma")
+	_mPSCNNGroupNormalizationGradientStateSelBeta               = objc.RegisterName("beta")
+	_mPSCNNGroupNormalizationGradientStateSelGradientForGamma   = objc.RegisterName("gradientForGamma")
+	_mPSCNNGroupNormalizationGradientStateSelGradientForBeta    = objc.RegisterName("gradientForBeta")
 )
 
 func MPSCNNGroupNormalizationGradientStateFromID(id objc.ID) *MPSCNNGroupNormalizationGradientState {
@@ -37,7 +37,9 @@ func MPSCNNGroupNormalizationGradientStateFromID(id objc.ID) *MPSCNNGroupNormali
 // @abstract The MPSCNNGroupNormalization object that created this state object.
 func (o *MPSCNNGroupNormalizationGradientState) GroupNormalization() *MPSCNNGroupNormalization {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNGroupNormalizationGradientStateSelGroupNormalization)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNGroupNormalizationFromID(_ret)
 }
 
@@ -64,4 +66,3 @@ func (o *MPSCNNGroupNormalizationGradientState) GradientForBeta() metal.MTLBuffe
 	_ret := objc.Send[metal.MTLBuffer](o.Ptr(), _mPSCNNGroupNormalizationGradientStateSelGradientForBeta)
 	return _ret
 }
-

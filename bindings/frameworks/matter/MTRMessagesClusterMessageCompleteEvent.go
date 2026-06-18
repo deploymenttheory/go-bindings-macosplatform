@@ -16,14 +16,14 @@ type MTRMessagesClusterMessageCompleteEvent struct {
 }
 
 var (
-	_clsMTRMessagesClusterMessageCompleteEvent = _objcClass("MTRMessagesClusterMessageCompleteEvent")
-	_mTRMessagesClusterMessageCompleteEventSelMessageID = objc.RegisterName("messageID")
-	_mTRMessagesClusterMessageCompleteEventSelSetMessageID = objc.RegisterName("setMessageID:")
-	_mTRMessagesClusterMessageCompleteEventSelResponseID = objc.RegisterName("responseID")
-	_mTRMessagesClusterMessageCompleteEventSelSetResponseID = objc.RegisterName("setResponseID:")
-	_mTRMessagesClusterMessageCompleteEventSelReply = objc.RegisterName("reply")
-	_mTRMessagesClusterMessageCompleteEventSelSetReply = objc.RegisterName("setReply:")
-	_mTRMessagesClusterMessageCompleteEventSelFutureMessagesPreference = objc.RegisterName("futureMessagesPreference")
+	_clsMTRMessagesClusterMessageCompleteEvent                            = _objcClass("MTRMessagesClusterMessageCompleteEvent")
+	_mTRMessagesClusterMessageCompleteEventSelMessageID                   = objc.RegisterName("messageID")
+	_mTRMessagesClusterMessageCompleteEventSelSetMessageID                = objc.RegisterName("setMessageID:")
+	_mTRMessagesClusterMessageCompleteEventSelResponseID                  = objc.RegisterName("responseID")
+	_mTRMessagesClusterMessageCompleteEventSelSetResponseID               = objc.RegisterName("setResponseID:")
+	_mTRMessagesClusterMessageCompleteEventSelReply                       = objc.RegisterName("reply")
+	_mTRMessagesClusterMessageCompleteEventSelSetReply                    = objc.RegisterName("setReply:")
+	_mTRMessagesClusterMessageCompleteEventSelFutureMessagesPreference    = objc.RegisterName("futureMessagesPreference")
 	_mTRMessagesClusterMessageCompleteEventSelSetFutureMessagesPreference = objc.RegisterName("setFutureMessagesPreference:")
 )
 
@@ -39,7 +39,9 @@ func MTRMessagesClusterMessageCompleteEventFromID(id objc.ID) *MTRMessagesCluste
 
 func (o *MTRMessagesClusterMessageCompleteEvent) MessageID() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMessagesClusterMessageCompleteEventSelMessageID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTRMessagesClusterMessageCompleteEvent) SetMessageID(messageID *foundat
 
 func (o *MTRMessagesClusterMessageCompleteEvent) ResponseID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMessagesClusterMessageCompleteEventSelResponseID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,7 +63,9 @@ func (o *MTRMessagesClusterMessageCompleteEvent) SetResponseID(responseID *found
 
 func (o *MTRMessagesClusterMessageCompleteEvent) Reply() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMessagesClusterMessageCompleteEventSelReply)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -69,11 +75,12 @@ func (o *MTRMessagesClusterMessageCompleteEvent) SetReply(reply *foundation.NSSt
 
 func (o *MTRMessagesClusterMessageCompleteEvent) FutureMessagesPreference() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMessagesClusterMessageCompleteEventSelFutureMessagesPreference)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRMessagesClusterMessageCompleteEvent) SetFutureMessagesPreference(futureMessagesPreference *foundation.NSNumber) {
 	o.Ptr().Send(_mTRMessagesClusterMessageCompleteEventSelSetFutureMessagesPreference, futureMessagesPreference.Ptr())
 }
-

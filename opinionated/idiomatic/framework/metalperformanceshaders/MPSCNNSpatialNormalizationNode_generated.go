@@ -107,9 +107,13 @@ func (x *CNNSpatialNormalizationNode) SetKernelHeight(kernelHeight uint) {
 	x.inner.SetKernelHeight(kernelHeight)
 }
 
-func (x *CNNSpatialNormalizationNode) asCNNNormalizationNode() *mpsneuralnetwork.MPSCNNNormalizationNode { return &x.inner.MPSCNNNormalizationNode }
+func (x *CNNSpatialNormalizationNode) asCNNNormalizationNode() *mpsneuralnetwork.MPSCNNNormalizationNode {
+	return &x.inner.MPSCNNNormalizationNode
+}
 
-func (x *CNNSpatialNormalizationNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSCNNNormalizationNode.MPSNNFilterNode }
+func (x *CNNSpatialNormalizationNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSCNNNormalizationNode.MPSNNFilterNode
+}
 
 // CNNSpatialNormalizationNodeable is the interface implemented by [CNNSpatialNormalizationNode], for mocking and DI.
 type CNNSpatialNormalizationNodeable interface {
@@ -128,4 +132,3 @@ type CNNSpatialNormalizationNodeable interface {
 }
 
 var _ CNNSpatialNormalizationNodeable = (*CNNSpatialNormalizationNode)(nil)
-

@@ -19,47 +19,47 @@ type ICScannerFunctionalUnit struct {
 }
 
 var (
-	_clsICScannerFunctionalUnit = _objcClass("ICScannerFunctionalUnit")
-	_iCScannerFunctionalUnitSelType = objc.RegisterName("type")
-	_iCScannerFunctionalUnitSelPixelDataType = objc.RegisterName("pixelDataType")
-	_iCScannerFunctionalUnitSelSetPixelDataType = objc.RegisterName("setPixelDataType:")
-	_iCScannerFunctionalUnitSelSupportedBitDepths = objc.RegisterName("supportedBitDepths")
-	_iCScannerFunctionalUnitSelBitDepth = objc.RegisterName("bitDepth")
-	_iCScannerFunctionalUnitSelSetBitDepth = objc.RegisterName("setBitDepth:")
-	_iCScannerFunctionalUnitSelSupportedMeasurementUnits = objc.RegisterName("supportedMeasurementUnits")
-	_iCScannerFunctionalUnitSelMeasurementUnit = objc.RegisterName("measurementUnit")
-	_iCScannerFunctionalUnitSelSetMeasurementUnit = objc.RegisterName("setMeasurementUnit:")
-	_iCScannerFunctionalUnitSelSupportedResolutions = objc.RegisterName("supportedResolutions")
-	_iCScannerFunctionalUnitSelPreferredResolutions = objc.RegisterName("preferredResolutions")
-	_iCScannerFunctionalUnitSelResolution = objc.RegisterName("resolution")
-	_iCScannerFunctionalUnitSelSetResolution = objc.RegisterName("setResolution:")
-	_iCScannerFunctionalUnitSelNativeXResolution = objc.RegisterName("nativeXResolution")
-	_iCScannerFunctionalUnitSelNativeYResolution = objc.RegisterName("nativeYResolution")
-	_iCScannerFunctionalUnitSelSupportedScaleFactors = objc.RegisterName("supportedScaleFactors")
-	_iCScannerFunctionalUnitSelPreferredScaleFactors = objc.RegisterName("preferredScaleFactors")
-	_iCScannerFunctionalUnitSelScaleFactor = objc.RegisterName("scaleFactor")
-	_iCScannerFunctionalUnitSelSetScaleFactor = objc.RegisterName("setScaleFactor:")
-	_iCScannerFunctionalUnitSelTemplates = objc.RegisterName("templates")
-	_iCScannerFunctionalUnitSelVendorFeatures = objc.RegisterName("vendorFeatures")
-	_iCScannerFunctionalUnitSelPhysicalSize = objc.RegisterName("physicalSize")
-	_iCScannerFunctionalUnitSelScanArea = objc.RegisterName("scanArea")
-	_iCScannerFunctionalUnitSelSetScanArea = objc.RegisterName("setScanArea:")
-	_iCScannerFunctionalUnitSelScanAreaOrientation = objc.RegisterName("scanAreaOrientation")
-	_iCScannerFunctionalUnitSelSetScanAreaOrientation = objc.RegisterName("setScanAreaOrientation:")
+	_clsICScannerFunctionalUnit                                         = _objcClass("ICScannerFunctionalUnit")
+	_iCScannerFunctionalUnitSelType                                     = objc.RegisterName("type")
+	_iCScannerFunctionalUnitSelPixelDataType                            = objc.RegisterName("pixelDataType")
+	_iCScannerFunctionalUnitSelSetPixelDataType                         = objc.RegisterName("setPixelDataType:")
+	_iCScannerFunctionalUnitSelSupportedBitDepths                       = objc.RegisterName("supportedBitDepths")
+	_iCScannerFunctionalUnitSelBitDepth                                 = objc.RegisterName("bitDepth")
+	_iCScannerFunctionalUnitSelSetBitDepth                              = objc.RegisterName("setBitDepth:")
+	_iCScannerFunctionalUnitSelSupportedMeasurementUnits                = objc.RegisterName("supportedMeasurementUnits")
+	_iCScannerFunctionalUnitSelMeasurementUnit                          = objc.RegisterName("measurementUnit")
+	_iCScannerFunctionalUnitSelSetMeasurementUnit                       = objc.RegisterName("setMeasurementUnit:")
+	_iCScannerFunctionalUnitSelSupportedResolutions                     = objc.RegisterName("supportedResolutions")
+	_iCScannerFunctionalUnitSelPreferredResolutions                     = objc.RegisterName("preferredResolutions")
+	_iCScannerFunctionalUnitSelResolution                               = objc.RegisterName("resolution")
+	_iCScannerFunctionalUnitSelSetResolution                            = objc.RegisterName("setResolution:")
+	_iCScannerFunctionalUnitSelNativeXResolution                        = objc.RegisterName("nativeXResolution")
+	_iCScannerFunctionalUnitSelNativeYResolution                        = objc.RegisterName("nativeYResolution")
+	_iCScannerFunctionalUnitSelSupportedScaleFactors                    = objc.RegisterName("supportedScaleFactors")
+	_iCScannerFunctionalUnitSelPreferredScaleFactors                    = objc.RegisterName("preferredScaleFactors")
+	_iCScannerFunctionalUnitSelScaleFactor                              = objc.RegisterName("scaleFactor")
+	_iCScannerFunctionalUnitSelSetScaleFactor                           = objc.RegisterName("setScaleFactor:")
+	_iCScannerFunctionalUnitSelTemplates                                = objc.RegisterName("templates")
+	_iCScannerFunctionalUnitSelVendorFeatures                           = objc.RegisterName("vendorFeatures")
+	_iCScannerFunctionalUnitSelPhysicalSize                             = objc.RegisterName("physicalSize")
+	_iCScannerFunctionalUnitSelScanArea                                 = objc.RegisterName("scanArea")
+	_iCScannerFunctionalUnitSelSetScanArea                              = objc.RegisterName("setScanArea:")
+	_iCScannerFunctionalUnitSelScanAreaOrientation                      = objc.RegisterName("scanAreaOrientation")
+	_iCScannerFunctionalUnitSelSetScanAreaOrientation                   = objc.RegisterName("setScanAreaOrientation:")
 	_iCScannerFunctionalUnitSelAcceptsThresholdForBlackAndWhiteScanning = objc.RegisterName("acceptsThresholdForBlackAndWhiteScanning")
-	_iCScannerFunctionalUnitSelUsesThresholdForBlackAndWhiteScanning = objc.RegisterName("usesThresholdForBlackAndWhiteScanning")
+	_iCScannerFunctionalUnitSelUsesThresholdForBlackAndWhiteScanning    = objc.RegisterName("usesThresholdForBlackAndWhiteScanning")
 	_iCScannerFunctionalUnitSelSetUsesThresholdForBlackAndWhiteScanning = objc.RegisterName("setUsesThresholdForBlackAndWhiteScanning:")
 	_iCScannerFunctionalUnitSelDefaultThresholdForBlackAndWhiteScanning = objc.RegisterName("defaultThresholdForBlackAndWhiteScanning")
-	_iCScannerFunctionalUnitSelThresholdForBlackAndWhiteScanning = objc.RegisterName("thresholdForBlackAndWhiteScanning")
-	_iCScannerFunctionalUnitSelSetThresholdForBlackAndWhiteScanning = objc.RegisterName("setThresholdForBlackAndWhiteScanning:")
-	_iCScannerFunctionalUnitSelState = objc.RegisterName("state")
-	_iCScannerFunctionalUnitSelScanInProgress = objc.RegisterName("scanInProgress")
-	_iCScannerFunctionalUnitSelScanProgressPercentDone = objc.RegisterName("scanProgressPercentDone")
-	_iCScannerFunctionalUnitSelCanPerformOverviewScan = objc.RegisterName("canPerformOverviewScan")
-	_iCScannerFunctionalUnitSelOverviewScanInProgress = objc.RegisterName("overviewScanInProgress")
-	_iCScannerFunctionalUnitSelOverviewImage = objc.RegisterName("overviewImage")
-	_iCScannerFunctionalUnitSelOverviewResolution = objc.RegisterName("overviewResolution")
-	_iCScannerFunctionalUnitSelSetOverviewResolution = objc.RegisterName("setOverviewResolution:")
+	_iCScannerFunctionalUnitSelThresholdForBlackAndWhiteScanning        = objc.RegisterName("thresholdForBlackAndWhiteScanning")
+	_iCScannerFunctionalUnitSelSetThresholdForBlackAndWhiteScanning     = objc.RegisterName("setThresholdForBlackAndWhiteScanning:")
+	_iCScannerFunctionalUnitSelState                                    = objc.RegisterName("state")
+	_iCScannerFunctionalUnitSelScanInProgress                           = objc.RegisterName("scanInProgress")
+	_iCScannerFunctionalUnitSelScanProgressPercentDone                  = objc.RegisterName("scanProgressPercentDone")
+	_iCScannerFunctionalUnitSelCanPerformOverviewScan                   = objc.RegisterName("canPerformOverviewScan")
+	_iCScannerFunctionalUnitSelOverviewScanInProgress                   = objc.RegisterName("overviewScanInProgress")
+	_iCScannerFunctionalUnitSelOverviewImage                            = objc.RegisterName("overviewImage")
+	_iCScannerFunctionalUnitSelOverviewResolution                       = objc.RegisterName("overviewResolution")
+	_iCScannerFunctionalUnitSelSetOverviewResolution                    = objc.RegisterName("setOverviewResolution:")
 )
 
 func ICScannerFunctionalUnitFromID(id objc.ID) *ICScannerFunctionalUnit {
@@ -91,7 +91,9 @@ func (o *ICScannerFunctionalUnit) SetPixelDataType(pixelDataType ICScannerPixelD
 // @property supportedBitDepths @abstract ￼Supported bit depths. The values in this set are valid values defined by ICScannerBitDepth.
 func (o *ICScannerFunctionalUnit) SupportedBitDepths() *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCScannerFunctionalUnitSelSupportedBitDepths)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
@@ -108,7 +110,9 @@ func (o *ICScannerFunctionalUnit) SetBitDepth(bitDepth ICScannerBitDepth) {
 // @property supportedMeasurementUnits @abstract ￼Supported measurement units. The values in this set are valid values defined by ICScannerMeasurementUnit.
 func (o *ICScannerFunctionalUnit) SupportedMeasurementUnits() *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCScannerFunctionalUnitSelSupportedMeasurementUnits)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
@@ -125,14 +129,18 @@ func (o *ICScannerFunctionalUnit) SetMeasurementUnit(measurementUnit ICScannerMe
 // @property supportedResolutions @abstract ￼Supported scan resolutions in DPI.
 func (o *ICScannerFunctionalUnit) SupportedResolutions() *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCScannerFunctionalUnitSelSupportedResolutions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
 // @property preferredResolutions @abstract ￼Preferred scan resolutions in DPI.
 func (o *ICScannerFunctionalUnit) PreferredResolutions() *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCScannerFunctionalUnitSelPreferredResolutions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
@@ -161,14 +169,18 @@ func (o *ICScannerFunctionalUnit) NativeYResolution() uint {
 // @property supportedScaleFactors @abstract ￼Supported scale factors in percentage.
 func (o *ICScannerFunctionalUnit) SupportedScaleFactors() *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCScannerFunctionalUnitSelSupportedScaleFactors)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
 // @property preferredScaleFactors @abstract ￼Preferred scale factors in percentage.
 func (o *ICScannerFunctionalUnit) PreferredScaleFactors() *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCScannerFunctionalUnitSelPreferredScaleFactors)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
@@ -185,14 +197,18 @@ func (o *ICScannerFunctionalUnit) SetScaleFactor(scaleFactor uint) {
 // @property templates @abstract An array of objects of type ICScannerFeatureTemplate.
 func (o *ICScannerFunctionalUnit) Templates() *foundation.NSArray[*ICScannerFeatureTemplate] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCScannerFunctionalUnitSelTemplates)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*ICScannerFeatureTemplate](_ret)
 }
 
 // @property vendorFeatures @abstract An array of objects of type ICScannerFeature.
 func (o *ICScannerFunctionalUnit) VendorFeatures() *foundation.NSArray[*ICScannerFeature] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCScannerFunctionalUnitSelVendorFeatures)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*ICScannerFeature](_ret)
 }
 
@@ -299,4 +315,3 @@ func (o *ICScannerFunctionalUnit) OverviewResolution() uint {
 func (o *ICScannerFunctionalUnit) SetOverviewResolution(overviewResolution uint) {
 	o.Ptr().Send(_iCScannerFunctionalUnitSelSetOverviewResolution, overviewResolution)
 }
-

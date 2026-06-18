@@ -15,9 +15,9 @@ type NSUnitTemperature struct {
 }
 
 var (
-	_clsNSUnitTemperature = _objcClass("NSUnitTemperature")
-	_nSUnitTemperatureSelKelvin = objc.RegisterName("kelvin")
-	_nSUnitTemperatureSelCelsius = objc.RegisterName("celsius")
+	_clsNSUnitTemperature           = _objcClass("NSUnitTemperature")
+	_nSUnitTemperatureSelKelvin     = objc.RegisterName("kelvin")
+	_nSUnitTemperatureSelCelsius    = objc.RegisterName("celsius")
 	_nSUnitTemperatureSelFahrenheit = objc.RegisterName("fahrenheit")
 )
 
@@ -33,19 +33,24 @@ func NSUnitTemperatureFromID(id objc.ID) *NSUnitTemperature {
 
 func NSUnitTemperatureKelvin() *NSUnitTemperature {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitTemperature), _nSUnitTemperatureSelKelvin)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitTemperatureFromID(_ret)
 }
 
 func NSUnitTemperatureCelsius() *NSUnitTemperature {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitTemperature), _nSUnitTemperatureSelCelsius)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitTemperatureFromID(_ret)
 }
 
 func NSUnitTemperatureFahrenheit() *NSUnitTemperature {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitTemperature), _nSUnitTemperatureSelFahrenheit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitTemperatureFromID(_ret)
 }
-

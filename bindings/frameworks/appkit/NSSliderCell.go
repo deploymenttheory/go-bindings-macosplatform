@@ -16,42 +16,42 @@ type NSSliderCell struct {
 }
 
 var (
-	_clsNSSliderCell = _objcClass("NSSliderCell")
-	_nSSliderCellSelKnobRectFlipped = objc.RegisterName("knobRectFlipped:")
-	_nSSliderCellSelBarRectFlipped = objc.RegisterName("barRectFlipped:")
-	_nSSliderCellSelDrawKnob = objc.RegisterName("drawKnob:")
-	_nSSliderCellSelDrawBarInsideFlipped = objc.RegisterName("drawBarInside:flipped:")
+	_clsNSSliderCell                            = _objcClass("NSSliderCell")
+	_nSSliderCellSelKnobRectFlipped             = objc.RegisterName("knobRectFlipped:")
+	_nSSliderCellSelBarRectFlipped              = objc.RegisterName("barRectFlipped:")
+	_nSSliderCellSelDrawKnob                    = objc.RegisterName("drawKnob:")
+	_nSSliderCellSelDrawBarInsideFlipped        = objc.RegisterName("drawBarInside:flipped:")
 	_nSSliderCellSelPrefersTrackingUntilMouseUp = objc.RegisterName("prefersTrackingUntilMouseUp")
-	_nSSliderCellSelMinValue = objc.RegisterName("minValue")
-	_nSSliderCellSelSetMinValue = objc.RegisterName("setMinValue:")
-	_nSSliderCellSelMaxValue = objc.RegisterName("maxValue")
-	_nSSliderCellSelSetMaxValue = objc.RegisterName("setMaxValue:")
-	_nSSliderCellSelAltIncrementValue = objc.RegisterName("altIncrementValue")
-	_nSSliderCellSelSetAltIncrementValue = objc.RegisterName("setAltIncrementValue:")
-	_nSSliderCellSelSliderType = objc.RegisterName("sliderType")
-	_nSSliderCellSelSetSliderType = objc.RegisterName("setSliderType:")
-	_nSSliderCellSelIsVertical = objc.RegisterName("isVertical")
-	_nSSliderCellSelSetVertical = objc.RegisterName("setVertical:")
-	_nSSliderCellSelTrackRect = objc.RegisterName("trackRect")
-	_nSSliderCellSelKnobThickness = objc.RegisterName("knobThickness")
-	_nSSliderCellSelTickMarkValueAtIndex = objc.RegisterName("tickMarkValueAtIndex:")
-	_nSSliderCellSelRectOfTickMarkAtIndex = objc.RegisterName("rectOfTickMarkAtIndex:")
-	_nSSliderCellSelIndexOfTickMarkAtPoint = objc.RegisterName("indexOfTickMarkAtPoint:")
+	_nSSliderCellSelMinValue                    = objc.RegisterName("minValue")
+	_nSSliderCellSelSetMinValue                 = objc.RegisterName("setMinValue:")
+	_nSSliderCellSelMaxValue                    = objc.RegisterName("maxValue")
+	_nSSliderCellSelSetMaxValue                 = objc.RegisterName("setMaxValue:")
+	_nSSliderCellSelAltIncrementValue           = objc.RegisterName("altIncrementValue")
+	_nSSliderCellSelSetAltIncrementValue        = objc.RegisterName("setAltIncrementValue:")
+	_nSSliderCellSelSliderType                  = objc.RegisterName("sliderType")
+	_nSSliderCellSelSetSliderType               = objc.RegisterName("setSliderType:")
+	_nSSliderCellSelIsVertical                  = objc.RegisterName("isVertical")
+	_nSSliderCellSelSetVertical                 = objc.RegisterName("setVertical:")
+	_nSSliderCellSelTrackRect                   = objc.RegisterName("trackRect")
+	_nSSliderCellSelKnobThickness               = objc.RegisterName("knobThickness")
+	_nSSliderCellSelTickMarkValueAtIndex        = objc.RegisterName("tickMarkValueAtIndex:")
+	_nSSliderCellSelRectOfTickMarkAtIndex       = objc.RegisterName("rectOfTickMarkAtIndex:")
+	_nSSliderCellSelIndexOfTickMarkAtPoint      = objc.RegisterName("indexOfTickMarkAtPoint:")
 	_nSSliderCellSelClosestTickMarkValueToValue = objc.RegisterName("closestTickMarkValueToValue:")
-	_nSSliderCellSelDrawTickMarks = objc.RegisterName("drawTickMarks")
-	_nSSliderCellSelNumberOfTickMarks = objc.RegisterName("numberOfTickMarks")
-	_nSSliderCellSelSetNumberOfTickMarks = objc.RegisterName("setNumberOfTickMarks:")
-	_nSSliderCellSelTickMarkPosition = objc.RegisterName("tickMarkPosition")
-	_nSSliderCellSelSetTickMarkPosition = objc.RegisterName("setTickMarkPosition:")
-	_nSSliderCellSelAllowsTickMarkValuesOnly = objc.RegisterName("allowsTickMarkValuesOnly")
+	_nSSliderCellSelDrawTickMarks               = objc.RegisterName("drawTickMarks")
+	_nSSliderCellSelNumberOfTickMarks           = objc.RegisterName("numberOfTickMarks")
+	_nSSliderCellSelSetNumberOfTickMarks        = objc.RegisterName("setNumberOfTickMarks:")
+	_nSSliderCellSelTickMarkPosition            = objc.RegisterName("tickMarkPosition")
+	_nSSliderCellSelSetTickMarkPosition         = objc.RegisterName("setTickMarkPosition:")
+	_nSSliderCellSelAllowsTickMarkValuesOnly    = objc.RegisterName("allowsTickMarkValuesOnly")
 	_nSSliderCellSelSetAllowsTickMarkValuesOnly = objc.RegisterName("setAllowsTickMarkValuesOnly:")
-	_nSSliderCellSelSetTitleCell = objc.RegisterName("setTitleCell:")
-	_nSSliderCellSelTitleCell = objc.RegisterName("titleCell")
-	_nSSliderCellSelSetTitleColor = objc.RegisterName("setTitleColor:")
-	_nSSliderCellSelTitleColor = objc.RegisterName("titleColor")
-	_nSSliderCellSelSetTitleFont = objc.RegisterName("setTitleFont:")
-	_nSSliderCellSelTitleFont = objc.RegisterName("titleFont")
-	_nSSliderCellSelSetKnobThickness = objc.RegisterName("setKnobThickness:")
+	_nSSliderCellSelSetTitleCell                = objc.RegisterName("setTitleCell:")
+	_nSSliderCellSelTitleCell                   = objc.RegisterName("titleCell")
+	_nSSliderCellSelSetTitleColor               = objc.RegisterName("setTitleColor:")
+	_nSSliderCellSelTitleColor                  = objc.RegisterName("titleColor")
+	_nSSliderCellSelSetTitleFont                = objc.RegisterName("setTitleFont:")
+	_nSSliderCellSelTitleFont                   = objc.RegisterName("titleFont")
+	_nSSliderCellSelSetKnobThickness            = objc.RegisterName("setKnobThickness:")
 )
 
 func NSSliderCellFromID(id objc.ID) *NSSliderCell {
@@ -216,7 +216,9 @@ func (o *NSSliderCell) SetTitleColor(newColor *NSColor) {
 // Deprecated: -titleColor has returned nil since 10.0
 func (o *NSSliderCell) TitleColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderCellSelTitleColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -228,7 +230,9 @@ func (o *NSSliderCell) SetTitleFont(fontObj *NSFont) {
 // Deprecated: -titleFont has returned nil since 10.0
 func (o *NSSliderCell) TitleFont() *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderCellSelTitleFont)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
@@ -236,4 +240,3 @@ func (o *NSSliderCell) TitleFont() *NSFont {
 func (o *NSSliderCell) SetKnobThickness(thickness float64) {
 	o.Ptr().Send(_nSSliderCellSelSetKnobThickness, thickness)
 }
-

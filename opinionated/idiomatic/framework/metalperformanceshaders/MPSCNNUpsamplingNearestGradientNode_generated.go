@@ -17,7 +17,9 @@ type CNNUpsamplingNearestGradientNode struct {
 }
 
 // Unwrap returns the underlying [raw.MPSCNNUpsamplingNearestGradientNode].
-func (x *CNNUpsamplingNearestGradientNode) Unwrap() *raw.MPSCNNUpsamplingNearestGradientNode { return x.inner }
+func (x *CNNUpsamplingNearestGradientNode) Unwrap() *raw.MPSCNNUpsamplingNearestGradientNode {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -60,9 +62,13 @@ func (x *CNNUpsamplingNearestGradientNode) ScaleFactorY() float64 {
 	return x.inner.ScaleFactorY()
 }
 
-func (x *CNNUpsamplingNearestGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
+func (x *CNNUpsamplingNearestGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode {
+	return &x.inner.MPSNNGradientFilterNode
+}
 
-func (x *CNNUpsamplingNearestGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
+func (x *CNNUpsamplingNearestGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode
+}
 
 // CNNUpsamplingNearestGradientNodeable is the interface implemented by [CNNUpsamplingNearestGradientNode], for mocking and DI.
 type CNNUpsamplingNearestGradientNodeable interface {
@@ -74,4 +80,3 @@ type CNNUpsamplingNearestGradientNodeable interface {
 }
 
 var _ CNNUpsamplingNearestGradientNodeable = (*CNNUpsamplingNearestGradientNode)(nil)
-

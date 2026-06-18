@@ -26,4 +26,3 @@ func PHPersistentChangeTokenFromID(id objc.ID) *PHPersistentChangeToken {
 	purego.Track(o)
 	return o
 }
-

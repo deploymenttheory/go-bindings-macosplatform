@@ -46,4 +46,3 @@ func NSPreferencePrefPaneIsAvailableNotification() uintptr {
 	ptr, _ := purego.Dlsym(_preferencepanesLib, "NSPreferencePrefPaneIsAvailableNotification")
 	return ptr
 }
-

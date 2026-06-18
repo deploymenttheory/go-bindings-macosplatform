@@ -17,10 +17,10 @@ type WKPDFConfiguration struct {
 }
 
 var (
-	_clsWKPDFConfiguration = _objcClass("WKPDFConfiguration")
-	_wKPDFConfigurationSelRect = objc.RegisterName("rect")
-	_wKPDFConfigurationSelSetRect = objc.RegisterName("setRect:")
-	_wKPDFConfigurationSelAllowTransparentBackground = objc.RegisterName("allowTransparentBackground")
+	_clsWKPDFConfiguration                              = _objcClass("WKPDFConfiguration")
+	_wKPDFConfigurationSelRect                          = objc.RegisterName("rect")
+	_wKPDFConfigurationSelSetRect                       = objc.RegisterName("setRect:")
+	_wKPDFConfigurationSelAllowTransparentBackground    = objc.RegisterName("allowTransparentBackground")
 	_wKPDFConfigurationSelSetAllowTransparentBackground = objc.RegisterName("setAllowTransparentBackground:")
 )
 
@@ -53,4 +53,3 @@ func (o *WKPDFConfiguration) AllowTransparentBackground() bool {
 func (o *WKPDFConfiguration) SetAllowTransparentBackground(allowTransparentBackground bool) {
 	o.Ptr().Send(_wKPDFConfigurationSelSetAllowTransparentBackground, allowTransparentBackground)
 }
-

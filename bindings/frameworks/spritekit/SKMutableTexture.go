@@ -18,11 +18,11 @@ type SKMutableTexture struct {
 }
 
 var (
-	_clsSKMutableTexture = _objcClass("SKMutableTexture")
-	_sKMutableTextureSelInitWithSize = objc.RegisterName("initWithSize:")
-	_sKMutableTextureSelMutableTextureWithSize = objc.RegisterName("mutableTextureWithSize:")
+	_clsSKMutableTexture                        = _objcClass("SKMutableTexture")
+	_sKMutableTextureSelInitWithSize            = objc.RegisterName("initWithSize:")
+	_sKMutableTextureSelMutableTextureWithSize  = objc.RegisterName("mutableTextureWithSize:")
 	_sKMutableTextureSelInitWithSizePixelFormat = objc.RegisterName("initWithSize:pixelFormat:")
-	_sKMutableTextureSelModifyPixelDataWith = objc.RegisterName("modifyPixelDataWithBlock:")
+	_sKMutableTextureSelModifyPixelDataWith     = objc.RegisterName("modifyPixelDataWithBlock:")
 )
 
 func SKMutableTextureFromID(id objc.ID) *SKMutableTexture {
@@ -38,20 +38,26 @@ func SKMutableTextureFromID(id objc.ID) *SKMutableTexture {
 // Create a mutable texture with a specfic size. @param size the dimension to use when creating the given texture.
 func (o *SKMutableTexture) InitWithSize(size corefoundation.CGSize) *SKMutableTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKMutableTextureSelInitWithSize, size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKMutableTextureFromID(_ret)
 }
 
 func SKMutableTextureMutableTextureWithSize(size corefoundation.CGSize) *SKMutableTexture {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKMutableTexture), _sKMutableTextureSelMutableTextureWithSize, size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKMutableTextureFromID(_ret)
 }
 
 // Create a mutable texture with a specfic size and type. @param size the dimension to use when creating the given texture. @param format the CoreVideo format type.  supported types include 'RGBA', 'RGhA', and 'RGfA' for byte, half-float, and float components.
 func (o *SKMutableTexture) InitWithSizePixelFormat(size corefoundation.CGSize, format int) *SKMutableTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKMutableTextureSelInitWithSizePixelFormat, size, format)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKMutableTextureFromID(_ret)
 }
 
@@ -66,4 +72,3 @@ func (o *SKMutableTexture) ModifyPixelDataWith(block func(unsafe.Pointer, uint))
 	}
 	o.Ptr().Send(_sKMutableTextureSelModifyPixelDataWith, __block_block)
 }
-

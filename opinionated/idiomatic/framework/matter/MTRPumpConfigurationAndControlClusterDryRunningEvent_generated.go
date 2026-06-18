@@ -15,7 +15,9 @@ type MTRPumpConfigurationAndControlClusterDryRunningEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRPumpConfigurationAndControlClusterDryRunningEvent].
-func (x *MTRPumpConfigurationAndControlClusterDryRunningEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterDryRunningEvent { return x.inner }
+func (x *MTRPumpConfigurationAndControlClusterDryRunningEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterDryRunningEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -41,4 +43,3 @@ type MTRPumpConfigurationAndControlClusterDryRunningEventable interface {
 }
 
 var _ MTRPumpConfigurationAndControlClusterDryRunningEventable = (*MTRPumpConfigurationAndControlClusterDryRunningEvent)(nil)
-

@@ -47,9 +47,13 @@ func (x *SaliencyImageObservation) SalientObjects() []*RectangleObservation {
 	})
 }
 
-func (x *SaliencyImageObservation) asPixelBufferObservation() *raw.VNPixelBufferObservation { return &x.inner.VNPixelBufferObservation }
+func (x *SaliencyImageObservation) asPixelBufferObservation() *raw.VNPixelBufferObservation {
+	return &x.inner.VNPixelBufferObservation
+}
 
-func (x *SaliencyImageObservation) asObservation() *raw.VNObservation { return &x.inner.VNPixelBufferObservation.VNObservation }
+func (x *SaliencyImageObservation) asObservation() *raw.VNObservation {
+	return &x.inner.VNPixelBufferObservation.VNObservation
+}
 
 // SaliencyImageObservationable is the interface implemented by [SaliencyImageObservation], for mocking and DI.
 type SaliencyImageObservationable interface {
@@ -58,4 +62,3 @@ type SaliencyImageObservationable interface {
 }
 
 var _ SaliencyImageObservationable = (*SaliencyImageObservation)(nil)
-

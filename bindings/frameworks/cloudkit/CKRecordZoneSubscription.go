@@ -16,13 +16,13 @@ type CKRecordZoneSubscription struct {
 }
 
 var (
-	_clsCKRecordZoneSubscription = _objcClass("CKRecordZoneSubscription")
-	_cKRecordZoneSubscriptionSelInitWithZoneID = objc.RegisterName("initWithZoneID:")
+	_clsCKRecordZoneSubscription                             = _objcClass("CKRecordZoneSubscription")
+	_cKRecordZoneSubscriptionSelInitWithZoneID               = objc.RegisterName("initWithZoneID:")
 	_cKRecordZoneSubscriptionSelInitWithZoneIDSubscriptionID = objc.RegisterName("initWithZoneID:subscriptionID:")
-	_cKRecordZoneSubscriptionSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_cKRecordZoneSubscriptionSelZoneID = objc.RegisterName("zoneID")
-	_cKRecordZoneSubscriptionSelRecordType = objc.RegisterName("recordType")
-	_cKRecordZoneSubscriptionSelSetRecordType = objc.RegisterName("setRecordType:")
+	_cKRecordZoneSubscriptionSelInitWithCoder                = objc.RegisterName("initWithCoder:")
+	_cKRecordZoneSubscriptionSelZoneID                       = objc.RegisterName("zoneID")
+	_cKRecordZoneSubscriptionSelRecordType                   = objc.RegisterName("recordType")
+	_cKRecordZoneSubscriptionSelSetRecordType                = objc.RegisterName("setRecordType:")
 )
 
 func CKRecordZoneSubscriptionFromID(id objc.ID) *CKRecordZoneSubscription {
@@ -39,39 +39,48 @@ func CKRecordZoneSubscriptionFromID(id objc.ID) *CKRecordZoneSubscription {
 // Deprecated: since macOS 10.12.
 func (o *CKRecordZoneSubscription) InitWithZoneID(zoneID *CKRecordZoneID) *CKRecordZoneSubscription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKRecordZoneSubscriptionSelInitWithZoneID, zoneID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKRecordZoneSubscriptionFromID(_ret)
 }
 
 // Creates a named subscription for all records in the specified record zone. - Parameters: - zoneID: The ID of the record zone that contains the records you want to monitor. This parameter must not be `nil`. - subscriptionID: The subscription's name. It must be unique in the container, and must not be `nil` or an empty string. The subscription that this method returns is a zone-based subscription that generates push notifications when CloudKit changes any of the specified record zone's records.
 func (o *CKRecordZoneSubscription) InitWithZoneIDSubscriptionID(zoneID *CKRecordZoneID, subscriptionID *foundation.NSString) *CKRecordZoneSubscription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKRecordZoneSubscriptionSelInitWithZoneIDSubscriptionID, zoneID.Ptr(), subscriptionID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKRecordZoneSubscriptionFromID(_ret)
 }
 
 // Creates a zone-based subscription from a serialized instance. - Parameters: - aDecoder: The coder for decoding the serialized record zone subscription.
 func (o *CKRecordZoneSubscription) InitWithCoder(aDecoder *foundation.NSCoder) *CKRecordZoneSubscription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKRecordZoneSubscriptionSelInitWithCoder, aDecoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKRecordZoneSubscriptionFromID(_ret)
 }
 
 // The ID of the record zone that the subscription queries. This property applies to query-based subscriptions and zone-based subscriptions. Specifying a record zone ID limits the scope of the query to only the records in that zone. For zone-based subscriptions, the query includes all records in the specified record zone. For a query-based subscription, the query includes only records of a specific type in the specified record zone. For zone-based subscriptions, CloudKit sets this property's value automatically. For all other subscription types, the default value is `nil`. If you want to scope your query-based subscription to a specific record zone, you must assign a value explicitly.
 func (o *CKRecordZoneSubscription) ZoneID() *CKRecordZoneID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKRecordZoneSubscriptionSelZoneID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKRecordZoneIDFromID(_ret)
 }
 
 // The type of record that the subscription queries.
 func (o *CKRecordZoneSubscription) RecordType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKRecordZoneSubscriptionSelRecordType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CKRecordZoneSubscription) SetRecordType(recordType *foundation.NSString) {
 	o.Ptr().Send(_cKRecordZoneSubscriptionSelSetRecordType, recordType.Ptr())
 }
-

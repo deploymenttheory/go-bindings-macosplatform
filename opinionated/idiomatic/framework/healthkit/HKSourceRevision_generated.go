@@ -77,4 +77,3 @@ type SourceRevisionable interface {
 }
 
 var _ SourceRevisionable = (*SourceRevision)(nil)
-

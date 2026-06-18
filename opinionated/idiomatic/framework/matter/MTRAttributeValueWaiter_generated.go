@@ -54,4 +54,3 @@ type MTRAttributeValueWaiterable interface {
 }
 
 var _ MTRAttributeValueWaiterable = (*MTRAttributeValueWaiter)(nil)
-

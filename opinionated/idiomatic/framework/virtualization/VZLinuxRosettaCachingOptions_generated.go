@@ -35,7 +35,9 @@ func NewLinuxRosettaCachingOptions() *LinuxRosettaCachingOptions {
 	return &LinuxRosettaCachingOptions{inner: raw.VZLinuxRosettaCachingOptionsFromID(_id)}
 }
 
-func (x *LinuxRosettaCachingOptions) asLinuxRosettaCachingOptions() *raw.VZLinuxRosettaCachingOptions { return x.inner }
+func (x *LinuxRosettaCachingOptions) asLinuxRosettaCachingOptions() *raw.VZLinuxRosettaCachingOptions {
+	return x.inner
+}
 
 // LinuxRosettaCachingOptionsable is the interface implemented by [LinuxRosettaCachingOptions], for mocking and DI.
 type LinuxRosettaCachingOptionsable interface {
@@ -43,4 +45,3 @@ type LinuxRosettaCachingOptionsable interface {
 }
 
 var _ LinuxRosettaCachingOptionsable = (*LinuxRosettaCachingOptions)(nil)
-

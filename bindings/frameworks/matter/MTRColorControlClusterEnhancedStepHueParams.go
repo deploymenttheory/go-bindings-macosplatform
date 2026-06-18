@@ -16,20 +16,20 @@ type MTRColorControlClusterEnhancedStepHueParams struct {
 }
 
 var (
-	_clsMTRColorControlClusterEnhancedStepHueParams = _objcClass("MTRColorControlClusterEnhancedStepHueParams")
-	_mTRColorControlClusterEnhancedStepHueParamsSelStepMode = objc.RegisterName("stepMode")
-	_mTRColorControlClusterEnhancedStepHueParamsSelSetStepMode = objc.RegisterName("setStepMode:")
-	_mTRColorControlClusterEnhancedStepHueParamsSelStepSize = objc.RegisterName("stepSize")
-	_mTRColorControlClusterEnhancedStepHueParamsSelSetStepSize = objc.RegisterName("setStepSize:")
-	_mTRColorControlClusterEnhancedStepHueParamsSelTransitionTime = objc.RegisterName("transitionTime")
-	_mTRColorControlClusterEnhancedStepHueParamsSelSetTransitionTime = objc.RegisterName("setTransitionTime:")
-	_mTRColorControlClusterEnhancedStepHueParamsSelOptionsMask = objc.RegisterName("optionsMask")
-	_mTRColorControlClusterEnhancedStepHueParamsSelSetOptionsMask = objc.RegisterName("setOptionsMask:")
-	_mTRColorControlClusterEnhancedStepHueParamsSelOptionsOverride = objc.RegisterName("optionsOverride")
-	_mTRColorControlClusterEnhancedStepHueParamsSelSetOptionsOverride = objc.RegisterName("setOptionsOverride:")
-	_mTRColorControlClusterEnhancedStepHueParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRColorControlClusterEnhancedStepHueParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRColorControlClusterEnhancedStepHueParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRColorControlClusterEnhancedStepHueParams                               = _objcClass("MTRColorControlClusterEnhancedStepHueParams")
+	_mTRColorControlClusterEnhancedStepHueParamsSelStepMode                       = objc.RegisterName("stepMode")
+	_mTRColorControlClusterEnhancedStepHueParamsSelSetStepMode                    = objc.RegisterName("setStepMode:")
+	_mTRColorControlClusterEnhancedStepHueParamsSelStepSize                       = objc.RegisterName("stepSize")
+	_mTRColorControlClusterEnhancedStepHueParamsSelSetStepSize                    = objc.RegisterName("setStepSize:")
+	_mTRColorControlClusterEnhancedStepHueParamsSelTransitionTime                 = objc.RegisterName("transitionTime")
+	_mTRColorControlClusterEnhancedStepHueParamsSelSetTransitionTime              = objc.RegisterName("setTransitionTime:")
+	_mTRColorControlClusterEnhancedStepHueParamsSelOptionsMask                    = objc.RegisterName("optionsMask")
+	_mTRColorControlClusterEnhancedStepHueParamsSelSetOptionsMask                 = objc.RegisterName("setOptionsMask:")
+	_mTRColorControlClusterEnhancedStepHueParamsSelOptionsOverride                = objc.RegisterName("optionsOverride")
+	_mTRColorControlClusterEnhancedStepHueParamsSelSetOptionsOverride             = objc.RegisterName("setOptionsOverride:")
+	_mTRColorControlClusterEnhancedStepHueParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRColorControlClusterEnhancedStepHueParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRColorControlClusterEnhancedStepHueParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRColorControlClusterEnhancedStepHueParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -45,7 +45,9 @@ func MTRColorControlClusterEnhancedStepHueParamsFromID(id objc.ID) *MTRColorCont
 
 func (o *MTRColorControlClusterEnhancedStepHueParams) StepMode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRColorControlClusterEnhancedStepHueParamsSelStepMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -55,7 +57,9 @@ func (o *MTRColorControlClusterEnhancedStepHueParams) SetStepMode(stepMode *foun
 
 func (o *MTRColorControlClusterEnhancedStepHueParams) StepSize() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRColorControlClusterEnhancedStepHueParamsSelStepSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -65,7 +69,9 @@ func (o *MTRColorControlClusterEnhancedStepHueParams) SetStepSize(stepSize *foun
 
 func (o *MTRColorControlClusterEnhancedStepHueParams) TransitionTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRColorControlClusterEnhancedStepHueParamsSelTransitionTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -75,7 +81,9 @@ func (o *MTRColorControlClusterEnhancedStepHueParams) SetTransitionTime(transiti
 
 func (o *MTRColorControlClusterEnhancedStepHueParams) OptionsMask() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRColorControlClusterEnhancedStepHueParamsSelOptionsMask)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -85,7 +93,9 @@ func (o *MTRColorControlClusterEnhancedStepHueParams) SetOptionsMask(optionsMask
 
 func (o *MTRColorControlClusterEnhancedStepHueParams) OptionsOverride() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRColorControlClusterEnhancedStepHueParamsSelOptionsOverride)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -96,7 +106,9 @@ func (o *MTRColorControlClusterEnhancedStepHueParams) SetOptionsOverride(options
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRColorControlClusterEnhancedStepHueParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRColorControlClusterEnhancedStepHueParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -107,11 +119,12 @@ func (o *MTRColorControlClusterEnhancedStepHueParams) SetTimedInvokeTimeoutMs(ti
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRColorControlClusterEnhancedStepHueParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRColorControlClusterEnhancedStepHueParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRColorControlClusterEnhancedStepHueParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRColorControlClusterEnhancedStepHueParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

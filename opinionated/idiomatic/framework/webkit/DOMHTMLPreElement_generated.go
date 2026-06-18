@@ -174,11 +174,17 @@ func (x *DOMHTMLPreElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.i
 
 func (x *DOMHTMLPreElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
 
-func (x *DOMHTMLPreElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTMLElement.DOMElement.DOMNode }
+func (x *DOMHTMLPreElement) asDOMNode() *raw.DOMNode {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode
+}
 
-func (x *DOMHTMLPreElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
+func (x *DOMHTMLPreElement) asDOMObject() *raw.DOMObject {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject
+}
 
-func (x *DOMHTMLPreElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+func (x *DOMHTMLPreElement) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject
+}
 
 // DOMHTMLPreElementable is the interface implemented by [DOMHTMLPreElement], for mocking and DI.
 type DOMHTMLPreElementable interface {
@@ -209,4 +215,3 @@ type DOMHTMLPreElementable interface {
 }
 
 var _ DOMHTMLPreElementable = (*DOMHTMLPreElement)(nil)
-

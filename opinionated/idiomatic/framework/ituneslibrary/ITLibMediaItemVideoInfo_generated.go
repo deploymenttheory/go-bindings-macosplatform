@@ -102,4 +102,3 @@ type LibMediaItemVideoInfoable interface {
 }
 
 var _ LibMediaItemVideoInfoable = (*LibMediaItemVideoInfo)(nil)
-

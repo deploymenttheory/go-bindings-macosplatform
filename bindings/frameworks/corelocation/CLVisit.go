@@ -18,10 +18,10 @@ type CLVisit struct {
 }
 
 var (
-	_clsCLVisit = _objcClass("CLVisit")
-	_cLVisitSelArrivalDate = objc.RegisterName("arrivalDate")
-	_cLVisitSelDepartureDate = objc.RegisterName("departureDate")
-	_cLVisitSelCoordinate = objc.RegisterName("coordinate")
+	_clsCLVisit                   = _objcClass("CLVisit")
+	_cLVisitSelArrivalDate        = objc.RegisterName("arrivalDate")
+	_cLVisitSelDepartureDate      = objc.RegisterName("departureDate")
+	_cLVisitSelCoordinate         = objc.RegisterName("coordinate")
 	_cLVisitSelHorizontalAccuracy = objc.RegisterName("horizontalAccuracy")
 )
 
@@ -37,13 +37,17 @@ func CLVisitFromID(id objc.ID) *CLVisit {
 
 func (o *CLVisit) ArrivalDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLVisitSelArrivalDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *CLVisit) DepartureDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLVisitSelDepartureDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -56,4 +60,3 @@ func (o *CLVisit) HorizontalAccuracy() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cLVisitSelHorizontalAccuracy)
 	return _ret
 }
-

@@ -124,4 +124,3 @@ type PostalAddressable interface {
 }
 
 var _ PostalAddressable = (*PostalAddress)(nil)
-

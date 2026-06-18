@@ -180,7 +180,9 @@ func (x *SK3DNode) WithConstraints(items ...*raw.SKConstraint) *SK3DNode {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.SKConstraint](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -391,4 +393,3 @@ type SK3DNodeable interface {
 }
 
 var _ SK3DNodeable = (*SK3DNode)(nil)
-

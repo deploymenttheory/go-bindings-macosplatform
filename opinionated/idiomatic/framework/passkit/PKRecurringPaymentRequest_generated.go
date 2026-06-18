@@ -174,4 +174,3 @@ type RecurringPaymentRequestable interface {
 }
 
 var _ RecurringPaymentRequestable = (*RecurringPaymentRequest)(nil)
-

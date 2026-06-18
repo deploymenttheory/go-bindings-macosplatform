@@ -17,8 +17,8 @@ type MPSMatrixSolveLU struct {
 }
 
 var (
-	_clsMPSMatrixSolveLU = _objcClass("MPSMatrixSolveLU")
-	_mPSMatrixSolveLUSelInitWithDeviceTransposeOrderNumberOfRightHandSides = objc.RegisterName("initWithDevice:transpose:order:numberOfRightHandSides:")
+	_clsMPSMatrixSolveLU                                                                               = _objcClass("MPSMatrixSolveLU")
+	_mPSMatrixSolveLUSelInitWithDeviceTransposeOrderNumberOfRightHandSides                             = objc.RegisterName("initWithDevice:transpose:order:numberOfRightHandSides:")
 	_mPSMatrixSolveLUSelEncodeToCommandBufferSourceMatrixRightHandSideMatrixPivotIndicesSolutionMatrix = objc.RegisterName("encodeToCommandBuffer:sourceMatrix:rightHandSideMatrix:pivotIndices:solutionMatrix:")
 )
 
@@ -35,7 +35,9 @@ func MPSMatrixSolveLUFromID(id objc.ID) *MPSMatrixSolveLU {
 // @abstract   Initialize an MPSMatrixSolveLU object on a device @param      device          The device on which the kernel will execute. @param      transpose       A boolean value which indicates if the source matrix should be used in transposed form. @param      order           The order of the source matrix and the number of rows in the solution and right hand side matrices. @param      numberOfRightHandSides  The number of columns in the solution and right hand side matrices. @return     A valid MPSMatrixSolveLU object or nil, if failure.
 func (o *MPSMatrixSolveLU) InitWithDeviceTransposeOrderNumberOfRightHandSides(device metal.MTLDevice, transpose bool, order uint, numberOfRightHandSides uint) *MPSMatrixSolveLU {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixSolveLUSelInitWithDeviceTransposeOrderNumberOfRightHandSides, device, transpose, order, numberOfRightHandSides)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixSolveLUFromID(_ret)
 }
 
@@ -43,4 +45,3 @@ func (o *MPSMatrixSolveLU) InitWithDeviceTransposeOrderNumberOfRightHandSides(de
 func (o *MPSMatrixSolveLU) EncodeToCommandBufferSourceMatrixRightHandSideMatrixPivotIndicesSolutionMatrix(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, rightHandSideMatrix *mpscore.MPSMatrix, pivotIndices *mpscore.MPSMatrix, solutionMatrix *mpscore.MPSMatrix) {
 	o.Ptr().Send(_mPSMatrixSolveLUSelEncodeToCommandBufferSourceMatrixRightHandSideMatrixPivotIndicesSolutionMatrix, commandBuffer, sourceMatrix.Ptr(), rightHandSideMatrix.Ptr(), pivotIndices.Ptr(), solutionMatrix.Ptr())
 }
-

@@ -65,4 +65,3 @@ type CaptureTimecodeSourceable interface {
 }
 
 var _ CaptureTimecodeSourceable = (*CaptureTimecodeSource)(nil)
-

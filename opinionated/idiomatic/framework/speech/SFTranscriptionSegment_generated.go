@@ -99,4 +99,3 @@ type TranscriptionSegmentable interface {
 }
 
 var _ TranscriptionSegmentable = (*TranscriptionSegment)(nil)
-

@@ -71,9 +71,13 @@ func (x *ImageAreaMin) WithLabel(label string) *ImageAreaMin {
 
 func (x *ImageAreaMin) asImageAreaMax() *mpsimage.MPSImageAreaMax { return &x.inner.MPSImageAreaMax }
 
-func (x *ImageAreaMin) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSImageAreaMax.MPSUnaryImageKernel }
+func (x *ImageAreaMin) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
+	return &x.inner.MPSImageAreaMax.MPSUnaryImageKernel
+}
 
-func (x *ImageAreaMin) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImageAreaMax.MPSUnaryImageKernel.MPSKernel }
+func (x *ImageAreaMin) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSImageAreaMax.MPSUnaryImageKernel.MPSKernel
+}
 
 // ImageAreaMinable is the interface implemented by [ImageAreaMin], for mocking and DI.
 type ImageAreaMinable interface {
@@ -86,4 +90,3 @@ type ImageAreaMinable interface {
 }
 
 var _ ImageAreaMinable = (*ImageAreaMin)(nil)
-

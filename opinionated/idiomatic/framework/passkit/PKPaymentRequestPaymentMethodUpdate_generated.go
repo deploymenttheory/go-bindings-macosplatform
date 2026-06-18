@@ -17,7 +17,9 @@ type PaymentRequestPaymentMethodUpdate struct {
 }
 
 // Unwrap returns the underlying [raw.PKPaymentRequestPaymentMethodUpdate].
-func (x *PaymentRequestPaymentMethodUpdate) Unwrap() *raw.PKPaymentRequestPaymentMethodUpdate { return x.inner }
+func (x *PaymentRequestPaymentMethodUpdate) Unwrap() *raw.PKPaymentRequestPaymentMethodUpdate {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -51,7 +53,9 @@ func (x *PaymentRequestPaymentMethodUpdate) WithPaymentSummaryItems(items ...Pay
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asPaymentSummaryItem().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asPaymentSummaryItem().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.PKPaymentSummaryItem](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -67,7 +71,9 @@ func (x *PaymentRequestPaymentMethodUpdate) WithShippingMethods(items ...*raw.PK
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.PKShippingMethod](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -83,7 +89,9 @@ func (x *PaymentRequestPaymentMethodUpdate) WithMultiTokenContexts(items ...*raw
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.PKPaymentTokenContext](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -120,7 +128,9 @@ func (x *PaymentRequestPaymentMethodUpdate) SetErrors() error {
 	return x.inner.SetErrors()
 }
 
-func (x *PaymentRequestPaymentMethodUpdate) asPaymentRequestUpdate() *raw.PKPaymentRequestUpdate { return &x.inner.PKPaymentRequestUpdate }
+func (x *PaymentRequestPaymentMethodUpdate) asPaymentRequestUpdate() *raw.PKPaymentRequestUpdate {
+	return &x.inner.PKPaymentRequestUpdate
+}
 
 // PaymentRequestPaymentMethodUpdateable is the interface implemented by [PaymentRequestPaymentMethodUpdate], for mocking and DI.
 type PaymentRequestPaymentMethodUpdateable interface {
@@ -137,4 +147,3 @@ type PaymentRequestPaymentMethodUpdateable interface {
 }
 
 var _ PaymentRequestPaymentMethodUpdateable = (*PaymentRequestPaymentMethodUpdate)(nil)
-

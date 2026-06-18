@@ -16,9 +16,9 @@ type VZVirtioGraphicsDeviceConfiguration struct {
 }
 
 var (
-	_clsVZVirtioGraphicsDeviceConfiguration = _objcClass("VZVirtioGraphicsDeviceConfiguration")
-	_vZVirtioGraphicsDeviceConfigurationSelInit = objc.RegisterName("init")
-	_vZVirtioGraphicsDeviceConfigurationSelScanouts = objc.RegisterName("scanouts")
+	_clsVZVirtioGraphicsDeviceConfiguration            = _objcClass("VZVirtioGraphicsDeviceConfiguration")
+	_vZVirtioGraphicsDeviceConfigurationSelInit        = objc.RegisterName("init")
+	_vZVirtioGraphicsDeviceConfigurationSelScanouts    = objc.RegisterName("scanouts")
 	_vZVirtioGraphicsDeviceConfigurationSelSetScanouts = objc.RegisterName("setScanouts:")
 )
 
@@ -34,17 +34,20 @@ func VZVirtioGraphicsDeviceConfigurationFromID(id objc.ID) *VZVirtioGraphicsDevi
 
 func (o *VZVirtioGraphicsDeviceConfiguration) Init() *VZVirtioGraphicsDeviceConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioGraphicsDeviceConfigurationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZVirtioGraphicsDeviceConfigurationFromID(_ret)
 }
 
 func (o *VZVirtioGraphicsDeviceConfiguration) Scanouts() *foundation.NSArray[*VZVirtioGraphicsScanoutConfiguration] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioGraphicsDeviceConfigurationSelScanouts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VZVirtioGraphicsScanoutConfiguration](_ret)
 }
 
 func (o *VZVirtioGraphicsDeviceConfiguration) SetScanouts(scanouts *foundation.NSArray[*VZVirtioGraphicsScanoutConfiguration]) {
 	o.Ptr().Send(_vZVirtioGraphicsDeviceConfigurationSelSetScanouts, scanouts.Ptr())
 }
-

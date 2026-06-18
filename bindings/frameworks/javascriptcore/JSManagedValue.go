@@ -16,11 +16,11 @@ type JSManagedValue struct {
 }
 
 var (
-	_clsJSManagedValue = _objcClass("JSManagedValue")
-	_jSManagedValueSelManagedValueWithValue = objc.RegisterName("managedValueWithValue:")
+	_clsJSManagedValue                              = _objcClass("JSManagedValue")
+	_jSManagedValueSelManagedValueWithValue         = objc.RegisterName("managedValueWithValue:")
 	_jSManagedValueSelManagedValueWithValueAndOwner = objc.RegisterName("managedValueWithValue:andOwner:")
-	_jSManagedValueSelInitWithValue = objc.RegisterName("initWithValue:")
-	_jSManagedValueSelValue = objc.RegisterName("value")
+	_jSManagedValueSelInitWithValue                 = objc.RegisterName("initWithValue:")
+	_jSManagedValueSelValue                         = objc.RegisterName("value")
 )
 
 func JSManagedValueFromID(id objc.ID) *JSManagedValue {
@@ -36,26 +36,33 @@ func JSManagedValueFromID(id objc.ID) *JSManagedValue {
 // @method @abstract Create a JSManagedValue from a JSValue. @result The new JSManagedValue.
 func JSManagedValueManagedValueWithValue(value *JSValue) *JSManagedValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSManagedValue), _jSManagedValueSelManagedValueWithValue, value.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSManagedValueFromID(_ret)
 }
 
 func JSManagedValueManagedValueWithValueAndOwner(value *JSValue, owner objc.ID) *JSManagedValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSManagedValue), _jSManagedValueSelManagedValueWithValueAndOwner, value.Ptr(), owner)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSManagedValueFromID(_ret)
 }
 
 // @method @abstract Create a JSManagedValue. @result The new JSManagedValue.
 func (o *JSManagedValue) InitWithValue(value *JSValue) *JSManagedValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _jSManagedValueSelInitWithValue, value.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSManagedValueFromID(_ret)
 }
 
 func (o *JSManagedValue) Value() *JSValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _jSManagedValueSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
-

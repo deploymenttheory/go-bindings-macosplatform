@@ -75,7 +75,9 @@ func (x *TileDefinition) WithTextures(items ...TextureProvider) *TileDefinition 
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asTexture().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asTexture().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.SKTexture](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -91,7 +93,9 @@ func (x *TileDefinition) WithNormalTextures(items ...TextureProvider) *TileDefin
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asTexture().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asTexture().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.SKTexture](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -300,4 +304,3 @@ type TileDefinitionable interface {
 }
 
 var _ TileDefinitionable = (*TileDefinition)(nil)
-

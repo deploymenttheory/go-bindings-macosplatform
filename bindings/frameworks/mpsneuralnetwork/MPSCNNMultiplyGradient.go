@@ -16,7 +16,7 @@ type MPSCNNMultiplyGradient struct {
 }
 
 var (
-	_clsMPSCNNMultiplyGradient = _objcClass("MPSCNNMultiplyGradient")
+	_clsMPSCNNMultiplyGradient                                      = _objcClass("MPSCNNMultiplyGradient")
 	_mPSCNNMultiplyGradientSelInitWithDeviceIsSecondarySourceFilter = objc.RegisterName("initWithDevice:isSecondarySourceFilter:")
 )
 
@@ -33,7 +33,8 @@ func MPSCNNMultiplyGradientFromID(id objc.ID) *MPSCNNMultiplyGradient {
 // @abstract  Initialize the multiplication gradient operator. @param     device                   The device the filter will run on. @param     isSecondarySourceFilter  A boolean indicating whether the arithmetic gradient filter is operating on the primary or secondary source image from the forward pass. @return    A valid MPSCNNMultiplyGradient object or nil, if failure.
 func (o *MPSCNNMultiplyGradient) InitWithDeviceIsSecondarySourceFilter(device metal.MTLDevice, isSecondarySourceFilter bool) *MPSCNNMultiplyGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNMultiplyGradientSelInitWithDeviceIsSecondarySourceFilter, device, isSecondarySourceFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNMultiplyGradientFromID(_ret)
 }
-

@@ -16,12 +16,12 @@ type PKPaymentToken struct {
 }
 
 var (
-	_clsPKPaymentToken = _objcClass("PKPaymentToken")
-	_pKPaymentTokenSelPaymentMethod = objc.RegisterName("paymentMethod")
+	_clsPKPaymentToken                      = _objcClass("PKPaymentToken")
+	_pKPaymentTokenSelPaymentMethod         = objc.RegisterName("paymentMethod")
 	_pKPaymentTokenSelPaymentInstrumentName = objc.RegisterName("paymentInstrumentName")
-	_pKPaymentTokenSelPaymentNetwork = objc.RegisterName("paymentNetwork")
+	_pKPaymentTokenSelPaymentNetwork        = objc.RegisterName("paymentNetwork")
 	_pKPaymentTokenSelTransactionIdentifier = objc.RegisterName("transactionIdentifier")
-	_pKPaymentTokenSelPaymentData = objc.RegisterName("paymentData")
+	_pKPaymentTokenSelPaymentData           = objc.RegisterName("paymentData")
 )
 
 func PKPaymentTokenFromID(id objc.ID) *PKPaymentToken {
@@ -36,31 +36,40 @@ func PKPaymentTokenFromID(id objc.ID) *PKPaymentToken {
 
 func (o *PKPaymentToken) PaymentMethod() *PKPaymentMethod {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentTokenSelPaymentMethod)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKPaymentMethodFromID(_ret)
 }
 
 func (o *PKPaymentToken) PaymentInstrumentName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentTokenSelPaymentInstrumentName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKPaymentToken) PaymentNetwork() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentTokenSelPaymentNetwork)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKPaymentToken) TransactionIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentTokenSelTransactionIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKPaymentToken) PaymentData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentTokenSelPaymentData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

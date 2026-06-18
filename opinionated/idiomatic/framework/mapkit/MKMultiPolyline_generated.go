@@ -72,4 +72,3 @@ type MultiPolylineable interface {
 }
 
 var _ MultiPolylineable = (*MultiPolyline)(nil)
-

@@ -19,74 +19,74 @@ type NSFont struct {
 }
 
 var (
-	_clsNSFont = _objcClass("NSFont")
-	_nSFontSelFontWithNameSize = objc.RegisterName("fontWithName:size:")
-	_nSFontSelFontWithNameMatrix = objc.RegisterName("fontWithName:matrix:")
-	_nSFontSelFontWithDescriptorSize = objc.RegisterName("fontWithDescriptor:size:")
-	_nSFontSelFontWithDescriptorTextTransform = objc.RegisterName("fontWithDescriptor:textTransform:")
-	_nSFontSelUserFontOfSize = objc.RegisterName("userFontOfSize:")
-	_nSFontSelUserFixedPitchFontOfSize = objc.RegisterName("userFixedPitchFontOfSize:")
-	_nSFontSelSetUserFont = objc.RegisterName("setUserFont:")
-	_nSFontSelSetUserFixedPitchFont = objc.RegisterName("setUserFixedPitchFont:")
-	_nSFontSelSystemFontOfSize = objc.RegisterName("systemFontOfSize:")
-	_nSFontSelBoldSystemFontOfSize = objc.RegisterName("boldSystemFontOfSize:")
-	_nSFontSelLabelFontOfSize = objc.RegisterName("labelFontOfSize:")
-	_nSFontSelTitleBarFontOfSize = objc.RegisterName("titleBarFontOfSize:")
-	_nSFontSelMenuFontOfSize = objc.RegisterName("menuFontOfSize:")
-	_nSFontSelMenuBarFontOfSize = objc.RegisterName("menuBarFontOfSize:")
-	_nSFontSelMessageFontOfSize = objc.RegisterName("messageFontOfSize:")
-	_nSFontSelPaletteFontOfSize = objc.RegisterName("paletteFontOfSize:")
-	_nSFontSelToolTipsFontOfSize = objc.RegisterName("toolTipsFontOfSize:")
-	_nSFontSelControlContentFontOfSize = objc.RegisterName("controlContentFontOfSize:")
-	_nSFontSelSystemFontOfSizeWeight = objc.RegisterName("systemFontOfSize:weight:")
+	_clsNSFont                                      = _objcClass("NSFont")
+	_nSFontSelFontWithNameSize                      = objc.RegisterName("fontWithName:size:")
+	_nSFontSelFontWithNameMatrix                    = objc.RegisterName("fontWithName:matrix:")
+	_nSFontSelFontWithDescriptorSize                = objc.RegisterName("fontWithDescriptor:size:")
+	_nSFontSelFontWithDescriptorTextTransform       = objc.RegisterName("fontWithDescriptor:textTransform:")
+	_nSFontSelUserFontOfSize                        = objc.RegisterName("userFontOfSize:")
+	_nSFontSelUserFixedPitchFontOfSize              = objc.RegisterName("userFixedPitchFontOfSize:")
+	_nSFontSelSetUserFont                           = objc.RegisterName("setUserFont:")
+	_nSFontSelSetUserFixedPitchFont                 = objc.RegisterName("setUserFixedPitchFont:")
+	_nSFontSelSystemFontOfSize                      = objc.RegisterName("systemFontOfSize:")
+	_nSFontSelBoldSystemFontOfSize                  = objc.RegisterName("boldSystemFontOfSize:")
+	_nSFontSelLabelFontOfSize                       = objc.RegisterName("labelFontOfSize:")
+	_nSFontSelTitleBarFontOfSize                    = objc.RegisterName("titleBarFontOfSize:")
+	_nSFontSelMenuFontOfSize                        = objc.RegisterName("menuFontOfSize:")
+	_nSFontSelMenuBarFontOfSize                     = objc.RegisterName("menuBarFontOfSize:")
+	_nSFontSelMessageFontOfSize                     = objc.RegisterName("messageFontOfSize:")
+	_nSFontSelPaletteFontOfSize                     = objc.RegisterName("paletteFontOfSize:")
+	_nSFontSelToolTipsFontOfSize                    = objc.RegisterName("toolTipsFontOfSize:")
+	_nSFontSelControlContentFontOfSize              = objc.RegisterName("controlContentFontOfSize:")
+	_nSFontSelSystemFontOfSizeWeight                = objc.RegisterName("systemFontOfSize:weight:")
 	_nSFontSelMonospacedDigitSystemFontOfSizeWeight = objc.RegisterName("monospacedDigitSystemFontOfSize:weight:")
-	_nSFontSelSystemFontOfSizeWeightWidth = objc.RegisterName("systemFontOfSize:weight:width:")
-	_nSFontSelMonospacedSystemFontOfSizeWeight = objc.RegisterName("monospacedSystemFontOfSize:weight:")
-	_nSFontSelFontWithSize = objc.RegisterName("fontWithSize:")
-	_nSFontSelSystemFontSizeForControlSize = objc.RegisterName("systemFontSizeForControlSize:")
-	_nSFontSelBoundingRectForCGGlyph = objc.RegisterName("boundingRectForCGGlyph:")
-	_nSFontSelAdvancementForCGGlyph = objc.RegisterName("advancementForCGGlyph:")
-	_nSFontSelGetBoundingRectsForCGGlyphsCount = objc.RegisterName("getBoundingRects:forCGGlyphs:count:")
-	_nSFontSelGetAdvancementsForCGGlyphsCount = objc.RegisterName("getAdvancements:forCGGlyphs:count:")
-	_nSFontSelSet = objc.RegisterName("set")
-	_nSFontSelSetInContext = objc.RegisterName("setInContext:")
-	_nSFontSelSystemFontSize = objc.RegisterName("systemFontSize")
-	_nSFontSelSmallSystemFontSize = objc.RegisterName("smallSystemFontSize")
-	_nSFontSelLabelFontSize = objc.RegisterName("labelFontSize")
-	_nSFontSelFontName = objc.RegisterName("fontName")
-	_nSFontSelPointSize = objc.RegisterName("pointSize")
-	_nSFontSelMatrix = objc.RegisterName("matrix")
-	_nSFontSelFamilyName = objc.RegisterName("familyName")
-	_nSFontSelDisplayName = objc.RegisterName("displayName")
-	_nSFontSelFontDescriptor = objc.RegisterName("fontDescriptor")
-	_nSFontSelTextTransform = objc.RegisterName("textTransform")
-	_nSFontSelNumberOfGlyphs = objc.RegisterName("numberOfGlyphs")
-	_nSFontSelMostCompatibleStringEncoding = objc.RegisterName("mostCompatibleStringEncoding")
-	_nSFontSelCoveredCharacterSet = objc.RegisterName("coveredCharacterSet")
-	_nSFontSelBoundingRectForFont = objc.RegisterName("boundingRectForFont")
-	_nSFontSelMaximumAdvancement = objc.RegisterName("maximumAdvancement")
-	_nSFontSelAscender = objc.RegisterName("ascender")
-	_nSFontSelDescender = objc.RegisterName("descender")
-	_nSFontSelLeading = objc.RegisterName("leading")
-	_nSFontSelUnderlinePosition = objc.RegisterName("underlinePosition")
-	_nSFontSelUnderlineThickness = objc.RegisterName("underlineThickness")
-	_nSFontSelItalicAngle = objc.RegisterName("italicAngle")
-	_nSFontSelCapHeight = objc.RegisterName("capHeight")
-	_nSFontSelXHeight = objc.RegisterName("xHeight")
-	_nSFontSelIsFixedPitch = objc.RegisterName("isFixedPitch")
-	_nSFontSelVerticalFont = objc.RegisterName("verticalFont")
-	_nSFontSelIsVertical = objc.RegisterName("isVertical")
-	_nSFontSelGlyphWithName = objc.RegisterName("glyphWithName:")
-	_nSFontSelBoundingRectForGlyph = objc.RegisterName("boundingRectForGlyph:")
-	_nSFontSelAdvancementForGlyph = objc.RegisterName("advancementForGlyph:")
-	_nSFontSelGetBoundingRectsForGlyphsCount = objc.RegisterName("getBoundingRects:forGlyphs:count:")
-	_nSFontSelGetAdvancementsForGlyphsCount = objc.RegisterName("getAdvancements:forGlyphs:count:")
-	_nSFontSelGetAdvancementsForPackedGlyphsLength = objc.RegisterName("getAdvancements:forPackedGlyphs:length:")
-	_nSFontSelScreenFontWithRenderingMode = objc.RegisterName("screenFontWithRenderingMode:")
-	_nSFontSelPrinterFont = objc.RegisterName("printerFont")
-	_nSFontSelScreenFont = objc.RegisterName("screenFont")
-	_nSFontSelRenderingMode = objc.RegisterName("renderingMode")
-	_nSFontSelPreferredFontForTextStyleOptions = objc.RegisterName("preferredFontForTextStyle:options:")
+	_nSFontSelSystemFontOfSizeWeightWidth           = objc.RegisterName("systemFontOfSize:weight:width:")
+	_nSFontSelMonospacedSystemFontOfSizeWeight      = objc.RegisterName("monospacedSystemFontOfSize:weight:")
+	_nSFontSelFontWithSize                          = objc.RegisterName("fontWithSize:")
+	_nSFontSelSystemFontSizeForControlSize          = objc.RegisterName("systemFontSizeForControlSize:")
+	_nSFontSelBoundingRectForCGGlyph                = objc.RegisterName("boundingRectForCGGlyph:")
+	_nSFontSelAdvancementForCGGlyph                 = objc.RegisterName("advancementForCGGlyph:")
+	_nSFontSelGetBoundingRectsForCGGlyphsCount      = objc.RegisterName("getBoundingRects:forCGGlyphs:count:")
+	_nSFontSelGetAdvancementsForCGGlyphsCount       = objc.RegisterName("getAdvancements:forCGGlyphs:count:")
+	_nSFontSelSet                                   = objc.RegisterName("set")
+	_nSFontSelSetInContext                          = objc.RegisterName("setInContext:")
+	_nSFontSelSystemFontSize                        = objc.RegisterName("systemFontSize")
+	_nSFontSelSmallSystemFontSize                   = objc.RegisterName("smallSystemFontSize")
+	_nSFontSelLabelFontSize                         = objc.RegisterName("labelFontSize")
+	_nSFontSelFontName                              = objc.RegisterName("fontName")
+	_nSFontSelPointSize                             = objc.RegisterName("pointSize")
+	_nSFontSelMatrix                                = objc.RegisterName("matrix")
+	_nSFontSelFamilyName                            = objc.RegisterName("familyName")
+	_nSFontSelDisplayName                           = objc.RegisterName("displayName")
+	_nSFontSelFontDescriptor                        = objc.RegisterName("fontDescriptor")
+	_nSFontSelTextTransform                         = objc.RegisterName("textTransform")
+	_nSFontSelNumberOfGlyphs                        = objc.RegisterName("numberOfGlyphs")
+	_nSFontSelMostCompatibleStringEncoding          = objc.RegisterName("mostCompatibleStringEncoding")
+	_nSFontSelCoveredCharacterSet                   = objc.RegisterName("coveredCharacterSet")
+	_nSFontSelBoundingRectForFont                   = objc.RegisterName("boundingRectForFont")
+	_nSFontSelMaximumAdvancement                    = objc.RegisterName("maximumAdvancement")
+	_nSFontSelAscender                              = objc.RegisterName("ascender")
+	_nSFontSelDescender                             = objc.RegisterName("descender")
+	_nSFontSelLeading                               = objc.RegisterName("leading")
+	_nSFontSelUnderlinePosition                     = objc.RegisterName("underlinePosition")
+	_nSFontSelUnderlineThickness                    = objc.RegisterName("underlineThickness")
+	_nSFontSelItalicAngle                           = objc.RegisterName("italicAngle")
+	_nSFontSelCapHeight                             = objc.RegisterName("capHeight")
+	_nSFontSelXHeight                               = objc.RegisterName("xHeight")
+	_nSFontSelIsFixedPitch                          = objc.RegisterName("isFixedPitch")
+	_nSFontSelVerticalFont                          = objc.RegisterName("verticalFont")
+	_nSFontSelIsVertical                            = objc.RegisterName("isVertical")
+	_nSFontSelGlyphWithName                         = objc.RegisterName("glyphWithName:")
+	_nSFontSelBoundingRectForGlyph                  = objc.RegisterName("boundingRectForGlyph:")
+	_nSFontSelAdvancementForGlyph                   = objc.RegisterName("advancementForGlyph:")
+	_nSFontSelGetBoundingRectsForGlyphsCount        = objc.RegisterName("getBoundingRects:forGlyphs:count:")
+	_nSFontSelGetAdvancementsForGlyphsCount         = objc.RegisterName("getAdvancements:forGlyphs:count:")
+	_nSFontSelGetAdvancementsForPackedGlyphsLength  = objc.RegisterName("getAdvancements:forPackedGlyphs:length:")
+	_nSFontSelScreenFontWithRenderingMode           = objc.RegisterName("screenFontWithRenderingMode:")
+	_nSFontSelPrinterFont                           = objc.RegisterName("printerFont")
+	_nSFontSelScreenFont                            = objc.RegisterName("screenFont")
+	_nSFontSelRenderingMode                         = objc.RegisterName("renderingMode")
+	_nSFontSelPreferredFontForTextStyleOptions      = objc.RegisterName("preferredFontForTextStyle:options:")
 )
 
 func NSFontFromID(id objc.ID) *NSFont {
@@ -102,37 +102,49 @@ func NSFontFromID(id objc.ID) *NSFont {
 // ******* Factory ********
 func NSFontFontWithNameSize(fontName *foundation.NSString, fontSize float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelFontWithNameSize, fontName.Ptr(), fontSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
 func NSFontFontWithNameMatrix(fontName *foundation.NSString, fontMatrix *float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelFontWithNameMatrix, fontName.Ptr(), fontMatrix)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
 func NSFontFontWithDescriptorSize(fontDescriptor *NSFontDescriptor, fontSize float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelFontWithDescriptorSize, fontDescriptor.Ptr(), fontSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
 func NSFontFontWithDescriptorTextTransform(fontDescriptor *NSFontDescriptor, textTransform *foundation.NSAffineTransform) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelFontWithDescriptorTextTransform, fontDescriptor.Ptr(), textTransform.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
 func NSFontUserFontOfSize(fontSize float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelUserFontOfSize, fontSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
 func NSFontUserFixedPitchFontOfSize(fontSize float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelUserFixedPitchFontOfSize, fontSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
@@ -146,91 +158,121 @@ func NSFontSetUserFixedPitchFont(font *NSFont) {
 
 func NSFontSystemFontOfSize(fontSize float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelSystemFontOfSize, fontSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
 func NSFontBoldSystemFontOfSize(fontSize float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelBoldSystemFontOfSize, fontSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
 func NSFontLabelFontOfSize(fontSize float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelLabelFontOfSize, fontSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
 func NSFontTitleBarFontOfSize(fontSize float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelTitleBarFontOfSize, fontSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
 func NSFontMenuFontOfSize(fontSize float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelMenuFontOfSize, fontSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
 func NSFontMenuBarFontOfSize(fontSize float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelMenuBarFontOfSize, fontSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
 func NSFontMessageFontOfSize(fontSize float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelMessageFontOfSize, fontSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
 func NSFontPaletteFontOfSize(fontSize float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelPaletteFontOfSize, fontSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
 func NSFontToolTipsFontOfSize(fontSize float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelToolTipsFontOfSize, fontSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
 func NSFontControlContentFontOfSize(fontSize float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelControlContentFontOfSize, fontSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
 func NSFontSystemFontOfSizeWeight(fontSize float64, weight float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelSystemFontOfSizeWeight, fontSize, weight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
 func NSFontMonospacedDigitSystemFontOfSizeWeight(fontSize float64, weight float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelMonospacedDigitSystemFontOfSizeWeight, fontSize, weight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
 func NSFontSystemFontOfSizeWeightWidth(fontSize float64, weight float64, width float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelSystemFontOfSizeWeightWidth, fontSize, weight, width)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
 func NSFontMonospacedSystemFontOfSizeWeight(fontSize float64, weight float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelMonospacedSystemFontOfSizeWeight, fontSize, weight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
 func (o *NSFont) FontWithSize(fontSize float64) *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontSelFontWithSize, fontSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
@@ -285,7 +327,9 @@ func NSFontLabelFontSize() float64 {
 // ******* Core font attribute ********
 func (o *NSFont) FontName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontSelFontName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -301,25 +345,33 @@ func (o *NSFont) Matrix() unsafe.Pointer {
 
 func (o *NSFont) FamilyName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontSelFamilyName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSFont) DisplayName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontSelDisplayName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSFont) FontDescriptor() *NSFontDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontSelFontDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontDescriptorFromID(_ret)
 }
 
 func (o *NSFont) TextTransform() *foundation.NSAffineTransform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontSelTextTransform)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAffineTransformFromID(_ret)
 }
 
@@ -336,7 +388,9 @@ func (o *NSFont) MostCompatibleStringEncoding() uint {
 
 func (o *NSFont) CoveredCharacterSet() *foundation.NSCharacterSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontSelCoveredCharacterSet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSCharacterSetFromID(_ret)
 }
 
@@ -397,7 +451,9 @@ func (o *NSFont) IsFixedPitch() bool {
 
 func (o *NSFont) VerticalFont() *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontSelVerticalFont)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
@@ -437,20 +493,26 @@ func (o *NSFont) GetAdvancementsForPackedGlyphsLength(advancements *corefoundati
 
 func (o *NSFont) ScreenFontWithRenderingMode(renderingMode NSFontRenderingMode) *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontSelScreenFontWithRenderingMode, renderingMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
 // ******* Rendering mode ********
 func (o *NSFont) PrinterFont() *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontSelPrinterFont)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
 func (o *NSFont) ScreenFont() *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontSelScreenFont)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
@@ -461,7 +523,8 @@ func (o *NSFont) RenderingMode() NSFontRenderingMode {
 
 func NSFontPreferredFontForTextStyleOptions(style *foundation.NSString, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelPreferredFontForTextStyleOptions, style.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
-

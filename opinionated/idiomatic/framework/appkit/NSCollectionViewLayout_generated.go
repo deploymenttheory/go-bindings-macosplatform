@@ -302,4 +302,3 @@ type CollectionViewLayoutable interface {
 }
 
 var _ CollectionViewLayoutable = (*CollectionViewLayout)(nil)
-

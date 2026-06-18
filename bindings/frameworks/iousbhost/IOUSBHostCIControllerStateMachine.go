@@ -20,14 +20,14 @@ type IOUSBHostCIControllerStateMachine struct {
 }
 
 var (
-	_clsIOUSBHostCIControllerStateMachine = _objcClass("IOUSBHostCIControllerStateMachine")
-	_iOUSBHostCIControllerStateMachineSelInitWithInterfaceError = objc.RegisterName("initWithInterface:error:")
-	_iOUSBHostCIControllerStateMachineSelInspectCommandError = objc.RegisterName("inspectCommand:error:")
-	_iOUSBHostCIControllerStateMachineSelRespondToCommandStatusError = objc.RegisterName("respondToCommand:status:error:")
+	_clsIOUSBHostCIControllerStateMachine                                          = _objcClass("IOUSBHostCIControllerStateMachine")
+	_iOUSBHostCIControllerStateMachineSelInitWithInterfaceError                    = objc.RegisterName("initWithInterface:error:")
+	_iOUSBHostCIControllerStateMachineSelInspectCommandError                       = objc.RegisterName("inspectCommand:error:")
+	_iOUSBHostCIControllerStateMachineSelRespondToCommandStatusError               = objc.RegisterName("respondToCommand:status:error:")
 	_iOUSBHostCIControllerStateMachineSelRespondToCommandStatusFrameTimestampError = objc.RegisterName("respondToCommand:status:frame:timestamp:error:")
-	_iOUSBHostCIControllerStateMachineSelEnqueueUpdatedFrameTimestampError = objc.RegisterName("enqueueUpdatedFrame:timestamp:error:")
-	_iOUSBHostCIControllerStateMachineSelControllerState = objc.RegisterName("controllerState")
-	_iOUSBHostCIControllerStateMachineSelControllerInterface = objc.RegisterName("controllerInterface")
+	_iOUSBHostCIControllerStateMachineSelEnqueueUpdatedFrameTimestampError         = objc.RegisterName("enqueueUpdatedFrame:timestamp:error:")
+	_iOUSBHostCIControllerStateMachineSelControllerState                           = objc.RegisterName("controllerState")
+	_iOUSBHostCIControllerStateMachineSelControllerInterface                       = objc.RegisterName("controllerInterface")
 )
 
 func IOUSBHostCIControllerStateMachineFromID(id objc.ID) *IOUSBHostCIControllerStateMachine {
@@ -44,7 +44,9 @@ func IOUSBHostCIControllerStateMachineFromID(id objc.ID) *IOUSBHostCIControllerS
 func (o *IOUSBHostCIControllerStateMachine) InitWithInterfaceError(interface_ *IOUSBHostControllerInterface) (*IOUSBHostCIControllerStateMachine, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostCIControllerStateMachineSelInitWithInterfaceError, interface_.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -98,7 +100,8 @@ func (o *IOUSBHostCIControllerStateMachine) ControllerState() IOUSBHostCIControl
 
 func (o *IOUSBHostCIControllerStateMachine) ControllerInterface() *IOUSBHostControllerInterface {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostCIControllerStateMachineSelControllerInterface)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOUSBHostControllerInterfaceFromID(_ret)
 }
-

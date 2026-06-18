@@ -17,17 +17,17 @@ type GKVoronoiNoiseSource struct {
 }
 
 var (
-	_clsGKVoronoiNoiseSource = _objcClass("GKVoronoiNoiseSource")
+	_clsGKVoronoiNoiseSource                                                         = _objcClass("GKVoronoiNoiseSource")
 	_gKVoronoiNoiseSourceSelVoronoiNoiseWithFrequencyDisplacementDistanceEnabledSeed = objc.RegisterName("voronoiNoiseWithFrequency:displacement:distanceEnabled:seed:")
-	_gKVoronoiNoiseSourceSelInitWithFrequencyDisplacementDistanceEnabledSeed = objc.RegisterName("initWithFrequency:displacement:distanceEnabled:seed:")
-	_gKVoronoiNoiseSourceSelFrequency = objc.RegisterName("frequency")
-	_gKVoronoiNoiseSourceSelSetFrequency = objc.RegisterName("setFrequency:")
-	_gKVoronoiNoiseSourceSelDisplacement = objc.RegisterName("displacement")
-	_gKVoronoiNoiseSourceSelSetDisplacement = objc.RegisterName("setDisplacement:")
-	_gKVoronoiNoiseSourceSelIsDistanceEnabled = objc.RegisterName("isDistanceEnabled")
-	_gKVoronoiNoiseSourceSelSetDistanceEnabled = objc.RegisterName("setDistanceEnabled:")
-	_gKVoronoiNoiseSourceSelSeed = objc.RegisterName("seed")
-	_gKVoronoiNoiseSourceSelSetSeed = objc.RegisterName("setSeed:")
+	_gKVoronoiNoiseSourceSelInitWithFrequencyDisplacementDistanceEnabledSeed         = objc.RegisterName("initWithFrequency:displacement:distanceEnabled:seed:")
+	_gKVoronoiNoiseSourceSelFrequency                                                = objc.RegisterName("frequency")
+	_gKVoronoiNoiseSourceSelSetFrequency                                             = objc.RegisterName("setFrequency:")
+	_gKVoronoiNoiseSourceSelDisplacement                                             = objc.RegisterName("displacement")
+	_gKVoronoiNoiseSourceSelSetDisplacement                                          = objc.RegisterName("setDisplacement:")
+	_gKVoronoiNoiseSourceSelIsDistanceEnabled                                        = objc.RegisterName("isDistanceEnabled")
+	_gKVoronoiNoiseSourceSelSetDistanceEnabled                                       = objc.RegisterName("setDistanceEnabled:")
+	_gKVoronoiNoiseSourceSelSeed                                                     = objc.RegisterName("seed")
+	_gKVoronoiNoiseSourceSelSetSeed                                                  = objc.RegisterName("setSeed:")
 )
 
 func GKVoronoiNoiseSourceFromID(id objc.ID) *GKVoronoiNoiseSource {
@@ -42,13 +42,17 @@ func GKVoronoiNoiseSourceFromID(id objc.ID) *GKVoronoiNoiseSource {
 
 func GKVoronoiNoiseSourceVoronoiNoiseWithFrequencyDisplacementDistanceEnabledSeed(frequency float64, displacement float64, distanceEnabled bool, seed int32) *GKVoronoiNoiseSource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKVoronoiNoiseSource), _gKVoronoiNoiseSourceSelVoronoiNoiseWithFrequencyDisplacementDistanceEnabledSeed, frequency, displacement, distanceEnabled, seed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKVoronoiNoiseSourceFromID(_ret)
 }
 
 func (o *GKVoronoiNoiseSource) InitWithFrequencyDisplacementDistanceEnabledSeed(frequency float64, displacement float64, distanceEnabled bool, seed int32) *GKVoronoiNoiseSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKVoronoiNoiseSourceSelInitWithFrequencyDisplacementDistanceEnabledSeed, frequency, displacement, distanceEnabled, seed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKVoronoiNoiseSourceFromID(_ret)
 }
 
@@ -87,4 +91,3 @@ func (o *GKVoronoiNoiseSource) Seed() int32 {
 func (o *GKVoronoiNoiseSource) SetSeed(seed int32) {
 	o.Ptr().Send(_gKVoronoiNoiseSourceSelSetSeed, seed)
 }
-

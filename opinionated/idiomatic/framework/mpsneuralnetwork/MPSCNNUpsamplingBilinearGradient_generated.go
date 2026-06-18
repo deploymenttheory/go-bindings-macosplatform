@@ -17,7 +17,9 @@ type CNNUpsamplingBilinearGradient struct {
 }
 
 // Unwrap returns the underlying [raw.MPSCNNUpsamplingBilinearGradient].
-func (x *CNNUpsamplingBilinearGradient) Unwrap() *raw.MPSCNNUpsamplingBilinearGradient { return x.inner }
+func (x *CNNUpsamplingBilinearGradient) Unwrap() *raw.MPSCNNUpsamplingBilinearGradient {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -146,11 +148,17 @@ func (x *CNNUpsamplingBilinearGradient) WithDestinationImageAllocator(destinatio
 	return x
 }
 
-func (x *CNNUpsamplingBilinearGradient) asCNNUpsamplingGradient() *raw.MPSCNNUpsamplingGradient { return &x.inner.MPSCNNUpsamplingGradient }
+func (x *CNNUpsamplingBilinearGradient) asCNNUpsamplingGradient() *raw.MPSCNNUpsamplingGradient {
+	return &x.inner.MPSCNNUpsamplingGradient
+}
 
-func (x *CNNUpsamplingBilinearGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel { return &x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel }
+func (x *CNNUpsamplingBilinearGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel
+}
 
-func (x *CNNUpsamplingBilinearGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *CNNUpsamplingBilinearGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
 // CNNUpsamplingBilinearGradientable is the interface implemented by [CNNUpsamplingBilinearGradient], for mocking and DI.
 type CNNUpsamplingBilinearGradientable interface {
@@ -176,4 +184,3 @@ type CNNUpsamplingBilinearGradientable interface {
 }
 
 var _ CNNUpsamplingBilinearGradientable = (*CNNUpsamplingBilinearGradient)(nil)
-

@@ -17,8 +17,8 @@ type AUGenericViewController struct {
 }
 
 var (
-	_clsAUGenericViewController = _objcClass("AUGenericViewController")
-	_aUGenericViewControllerSelAuAudioUnit = objc.RegisterName("auAudioUnit")
+	_clsAUGenericViewController               = _objcClass("AUGenericViewController")
+	_aUGenericViewControllerSelAuAudioUnit    = objc.RegisterName("auAudioUnit")
 	_aUGenericViewControllerSelSetAuAudioUnit = objc.RegisterName("setAuAudioUnit:")
 )
 
@@ -34,11 +34,12 @@ func AUGenericViewControllerFromID(id objc.ID) *AUGenericViewController {
 
 func (o *AUGenericViewController) AuAudioUnit() *audiotoolbox.AUAudioUnit {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUGenericViewControllerSelAuAudioUnit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return audiotoolbox.AUAudioUnitFromID(_ret)
 }
 
 func (o *AUGenericViewController) SetAuAudioUnit(auAudioUnit *audiotoolbox.AUAudioUnit) {
 	o.Ptr().Send(_aUGenericViewControllerSelSetAuAudioUnit, auAudioUnit.Ptr())
 }
-

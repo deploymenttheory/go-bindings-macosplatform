@@ -16,20 +16,20 @@ type NEDNSSettings struct {
 }
 
 var (
-	_clsNEDNSSettings = _objcClass("NEDNSSettings")
-	_nEDNSSettingsSelInitWithServers = objc.RegisterName("initWithServers:")
-	_nEDNSSettingsSelDnsProtocol = objc.RegisterName("dnsProtocol")
-	_nEDNSSettingsSelServers = objc.RegisterName("servers")
-	_nEDNSSettingsSelSearchDomains = objc.RegisterName("searchDomains")
-	_nEDNSSettingsSelSetSearchDomains = objc.RegisterName("setSearchDomains:")
-	_nEDNSSettingsSelDomainName = objc.RegisterName("domainName")
-	_nEDNSSettingsSelSetDomainName = objc.RegisterName("setDomainName:")
-	_nEDNSSettingsSelMatchDomains = objc.RegisterName("matchDomains")
-	_nEDNSSettingsSelSetMatchDomains = objc.RegisterName("setMatchDomains:")
-	_nEDNSSettingsSelMatchDomainsNoSearch = objc.RegisterName("matchDomainsNoSearch")
+	_clsNEDNSSettings                        = _objcClass("NEDNSSettings")
+	_nEDNSSettingsSelInitWithServers         = objc.RegisterName("initWithServers:")
+	_nEDNSSettingsSelDnsProtocol             = objc.RegisterName("dnsProtocol")
+	_nEDNSSettingsSelServers                 = objc.RegisterName("servers")
+	_nEDNSSettingsSelSearchDomains           = objc.RegisterName("searchDomains")
+	_nEDNSSettingsSelSetSearchDomains        = objc.RegisterName("setSearchDomains:")
+	_nEDNSSettingsSelDomainName              = objc.RegisterName("domainName")
+	_nEDNSSettingsSelSetDomainName           = objc.RegisterName("setDomainName:")
+	_nEDNSSettingsSelMatchDomains            = objc.RegisterName("matchDomains")
+	_nEDNSSettingsSelSetMatchDomains         = objc.RegisterName("setMatchDomains:")
+	_nEDNSSettingsSelMatchDomainsNoSearch    = objc.RegisterName("matchDomainsNoSearch")
 	_nEDNSSettingsSelSetMatchDomainsNoSearch = objc.RegisterName("setMatchDomainsNoSearch:")
-	_nEDNSSettingsSelAllowFailover = objc.RegisterName("allowFailover")
-	_nEDNSSettingsSelSetAllowFailover = objc.RegisterName("setAllowFailover:")
+	_nEDNSSettingsSelAllowFailover           = objc.RegisterName("allowFailover")
+	_nEDNSSettingsSelSetAllowFailover        = objc.RegisterName("setAllowFailover:")
 )
 
 func NEDNSSettingsFromID(id objc.ID) *NEDNSSettings {
@@ -45,7 +45,9 @@ func NEDNSSettingsFromID(id objc.ID) *NEDNSSettings {
 // @method initWithServers: @discussion Initialize a newly-allocated NEDNSSettings object. @param servers An array of DNS server IP address strings.
 func (o *NEDNSSettings) InitWithServers(servers *foundation.NSArray[*foundation.NSString]) *NEDNSSettings {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEDNSSettingsSelInitWithServers, servers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEDNSSettingsFromID(_ret)
 }
 
@@ -74,7 +76,9 @@ func (o *NEDNSSettings) SetSearchDomains(searchDomains *foundation.NSArray[*foun
 // @property domainName @discussion A string containing the DNS domain.
 func (o *NEDNSSettings) DomainName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEDNSSettingsSelDomainName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -111,4 +115,3 @@ func (o *NEDNSSettings) AllowFailover() bool {
 func (o *NEDNSSettings) SetAllowFailover(allowFailover bool) {
 	o.Ptr().Send(_nEDNSSettingsSelSetAllowFailover, allowFailover)
 }
-

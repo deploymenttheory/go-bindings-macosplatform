@@ -137,4 +137,3 @@ type MTRFanControlClusterStepParamsable interface {
 }
 
 var _ MTRFanControlClusterStepParamsable = (*MTRFanControlClusterStepParams)(nil)
-

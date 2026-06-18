@@ -944,9 +944,13 @@ func (x *MTRClusterDoorLock) ClearCredentialWithParamsExpectedValuesExpectedValu
 	x.inner.ClearCredentialWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
 }
 
-func (x *MTRClusterDoorLock) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterDoorLock) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterDoorLock) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterDoorLock) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterDoorLockable is the interface implemented by [MTRClusterDoorLock], for mocking and DI.
 type MTRClusterDoorLockable interface {
@@ -1083,4 +1087,3 @@ type MTRClusterDoorLockable interface {
 }
 
 var _ MTRClusterDoorLockable = (*MTRClusterDoorLock)(nil)
-

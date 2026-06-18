@@ -16,24 +16,24 @@ type DRBurn struct {
 }
 
 var (
-	_clsDRBurn = _objcClass("DRBurn")
-	_dRBurnSelBurnForDevice = objc.RegisterName("burnForDevice:")
-	_dRBurnSelInitWithDevice = objc.RegisterName("initWithDevice:")
-	_dRBurnSelWriteLayout = objc.RegisterName("writeLayout:")
-	_dRBurnSelStatus = objc.RegisterName("status")
-	_dRBurnSelAbort = objc.RegisterName("abort")
-	_dRBurnSelProperties = objc.RegisterName("properties")
-	_dRBurnSelSetProperties = objc.RegisterName("setProperties:")
-	_dRBurnSelDevice = objc.RegisterName("device")
-	_dRBurnSelRequestedBurnSpeed = objc.RegisterName("requestedBurnSpeed")
+	_clsDRBurn                      = _objcClass("DRBurn")
+	_dRBurnSelBurnForDevice         = objc.RegisterName("burnForDevice:")
+	_dRBurnSelInitWithDevice        = objc.RegisterName("initWithDevice:")
+	_dRBurnSelWriteLayout           = objc.RegisterName("writeLayout:")
+	_dRBurnSelStatus                = objc.RegisterName("status")
+	_dRBurnSelAbort                 = objc.RegisterName("abort")
+	_dRBurnSelProperties            = objc.RegisterName("properties")
+	_dRBurnSelSetProperties         = objc.RegisterName("setProperties:")
+	_dRBurnSelDevice                = objc.RegisterName("device")
+	_dRBurnSelRequestedBurnSpeed    = objc.RegisterName("requestedBurnSpeed")
 	_dRBurnSelSetRequestedBurnSpeed = objc.RegisterName("setRequestedBurnSpeed:")
-	_dRBurnSelAppendable = objc.RegisterName("appendable")
-	_dRBurnSelSetAppendable = objc.RegisterName("setAppendable:")
-	_dRBurnSelVerifyDisc = objc.RegisterName("verifyDisc")
-	_dRBurnSelSetVerifyDisc = objc.RegisterName("setVerifyDisc:")
-	_dRBurnSelCompletionAction = objc.RegisterName("completionAction")
-	_dRBurnSelSetCompletionAction = objc.RegisterName("setCompletionAction:")
-	_dRBurnSelLayoutForImageFile = objc.RegisterName("layoutForImageFile:")
+	_dRBurnSelAppendable            = objc.RegisterName("appendable")
+	_dRBurnSelSetAppendable         = objc.RegisterName("setAppendable:")
+	_dRBurnSelVerifyDisc            = objc.RegisterName("verifyDisc")
+	_dRBurnSelSetVerifyDisc         = objc.RegisterName("setVerifyDisc:")
+	_dRBurnSelCompletionAction      = objc.RegisterName("completionAction")
+	_dRBurnSelSetCompletionAction   = objc.RegisterName("setCompletionAction:")
+	_dRBurnSelLayoutForImageFile    = objc.RegisterName("layoutForImageFile:")
 )
 
 func DRBurnFromID(id objc.ID) *DRBurn {
@@ -49,7 +49,9 @@ func DRBurnFromID(id objc.ID) *DRBurn {
 // @method 		burnForDevice: @abstract		Creates an autoreleased burn object. @discussion		Once a burn is created with this method, the object is ready to write data to the disc. @param 			device	Device to use for the burn @result  		An autoreleased DRBurn object.
 func DRBurnBurnForDevice(device *DRDevice) *DRBurn {
 	_ret := objc.Send[objc.ID](objc.ID(_clsDRBurn), _dRBurnSelBurnForDevice, device.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DRBurnFromID(_ret)
 }
 
@@ -89,7 +91,9 @@ func (o *DRBurn) SetProperties(properties *foundation.NSDictionary[objc.ID, objc
 // @method 		device @abstract		Returns the device being used for the burn. @result  		The DRDevice the burn will use.
 func (o *DRBurn) Device() *DRDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dRBurnSelDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DRDeviceFromID(_ret)
 }
 
@@ -129,7 +133,9 @@ func (o *DRBurn) SetVerifyDisc(verify bool) {
 // @method 		completionAction @abstract		Returns the action to be performed at the end of the burn. @result  		An NSString
 func (o *DRBurn) CompletionAction() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dRBurnSelCompletionAction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -143,4 +149,3 @@ func DRBurnLayoutForImageFile(path *foundation.NSString) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsDRBurn), _dRBurnSelLayoutForImageFile, path.Ptr())
 	return _ret
 }
-

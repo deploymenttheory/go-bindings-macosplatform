@@ -161,4 +161,3 @@ type MTRActionsClusterActionStructable interface {
 }
 
 var _ MTRActionsClusterActionStructable = (*MTRActionsClusterActionStruct)(nil)
-

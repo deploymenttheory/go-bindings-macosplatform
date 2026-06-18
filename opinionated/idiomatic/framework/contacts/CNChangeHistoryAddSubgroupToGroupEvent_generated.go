@@ -15,7 +15,9 @@ type ChangeHistoryAddSubgroupToGroupEvent struct {
 }
 
 // Unwrap returns the underlying [raw.CNChangeHistoryAddSubgroupToGroupEvent].
-func (x *ChangeHistoryAddSubgroupToGroupEvent) Unwrap() *raw.CNChangeHistoryAddSubgroupToGroupEvent { return x.inner }
+func (x *ChangeHistoryAddSubgroupToGroupEvent) Unwrap() *raw.CNChangeHistoryAddSubgroupToGroupEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -53,7 +55,9 @@ func (x *ChangeHistoryAddSubgroupToGroupEvent) Group() *Group {
 	return &Group{inner: _r}
 }
 
-func (x *ChangeHistoryAddSubgroupToGroupEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent { return &x.inner.CNChangeHistoryEvent }
+func (x *ChangeHistoryAddSubgroupToGroupEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent {
+	return &x.inner.CNChangeHistoryEvent
+}
 
 // ChangeHistoryAddSubgroupToGroupEventable is the interface implemented by [ChangeHistoryAddSubgroupToGroupEvent], for mocking and DI.
 type ChangeHistoryAddSubgroupToGroupEventable interface {
@@ -63,4 +67,3 @@ type ChangeHistoryAddSubgroupToGroupEventable interface {
 }
 
 var _ ChangeHistoryAddSubgroupToGroupEventable = (*ChangeHistoryAddSubgroupToGroupEvent)(nil)
-

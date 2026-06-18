@@ -16,10 +16,10 @@ type ASAuthorizationPublicKeyCredentialPRFAssertionInputValues struct {
 }
 
 var (
-	_clsASAuthorizationPublicKeyCredentialPRFAssertionInputValues = _objcClass("ASAuthorizationPublicKeyCredentialPRFAssertionInputValues")
+	_clsASAuthorizationPublicKeyCredentialPRFAssertionInputValues                             = _objcClass("ASAuthorizationPublicKeyCredentialPRFAssertionInputValues")
 	_aSAuthorizationPublicKeyCredentialPRFAssertionInputValuesSelInitWithSaltInput1SaltInput2 = objc.RegisterName("initWithSaltInput1:saltInput2:")
-	_aSAuthorizationPublicKeyCredentialPRFAssertionInputValuesSelSaltInput1 = objc.RegisterName("saltInput1")
-	_aSAuthorizationPublicKeyCredentialPRFAssertionInputValuesSelSaltInput2 = objc.RegisterName("saltInput2")
+	_aSAuthorizationPublicKeyCredentialPRFAssertionInputValuesSelSaltInput1                   = objc.RegisterName("saltInput1")
+	_aSAuthorizationPublicKeyCredentialPRFAssertionInputValuesSelSaltInput2                   = objc.RegisterName("saltInput2")
 )
 
 func ASAuthorizationPublicKeyCredentialPRFAssertionInputValuesFromID(id objc.ID) *ASAuthorizationPublicKeyCredentialPRFAssertionInputValues {
@@ -34,19 +34,24 @@ func ASAuthorizationPublicKeyCredentialPRFAssertionInputValuesFromID(id objc.ID)
 
 func (o *ASAuthorizationPublicKeyCredentialPRFAssertionInputValues) InitWithSaltInput1SaltInput2(saltInput1 *foundation.NSData, saltInput2 *foundation.NSData) *ASAuthorizationPublicKeyCredentialPRFAssertionInputValues {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPublicKeyCredentialPRFAssertionInputValuesSelInitWithSaltInput1SaltInput2, saltInput1.Ptr(), saltInput2.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationPublicKeyCredentialPRFAssertionInputValuesFromID(_ret)
 }
 
 func (o *ASAuthorizationPublicKeyCredentialPRFAssertionInputValues) SaltInput1() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPublicKeyCredentialPRFAssertionInputValuesSelSaltInput1)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *ASAuthorizationPublicKeyCredentialPRFAssertionInputValues) SaltInput2() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPublicKeyCredentialPRFAssertionInputValuesSelSaltInput2)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

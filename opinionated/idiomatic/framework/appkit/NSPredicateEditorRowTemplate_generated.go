@@ -161,4 +161,3 @@ type PredicateEditorRowTemplateable interface {
 }
 
 var _ PredicateEditorRowTemplateable = (*PredicateEditorRowTemplate)(nil)
-

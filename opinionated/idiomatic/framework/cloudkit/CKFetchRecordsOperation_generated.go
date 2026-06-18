@@ -52,7 +52,9 @@ func (x *FetchRecordsOperation) WithRecordIDs(items ...*raw.CKRecordID) *FetchRe
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.CKRecordID](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -68,7 +70,9 @@ func (x *FetchRecordsOperation) WithDesiredKeys(items ...*foundation.NSString) *
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -211,9 +215,13 @@ func (x *FetchRecordsOperation) SetFetchRecordsCompletionBlock(fetchRecordsCompl
 	x.inner.SetFetchRecordsCompletionBlock(fetchRecordsCompletionBlock)
 }
 
-func (x *FetchRecordsOperation) asDatabaseOperation() *raw.CKDatabaseOperation { return &x.inner.CKDatabaseOperation }
+func (x *FetchRecordsOperation) asDatabaseOperation() *raw.CKDatabaseOperation {
+	return &x.inner.CKDatabaseOperation
+}
 
-func (x *FetchRecordsOperation) asOperation() *raw.CKOperation { return &x.inner.CKDatabaseOperation.CKOperation }
+func (x *FetchRecordsOperation) asOperation() *raw.CKOperation {
+	return &x.inner.CKDatabaseOperation.CKOperation
+}
 
 // FetchRecordsOperationable is the interface implemented by [FetchRecordsOperation], for mocking and DI.
 type FetchRecordsOperationable interface {
@@ -245,4 +253,3 @@ type FetchRecordsOperationable interface {
 }
 
 var _ FetchRecordsOperationable = (*FetchRecordsOperation)(nil)
-

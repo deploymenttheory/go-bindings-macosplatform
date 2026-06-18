@@ -12,7 +12,7 @@ import (
 type PHLivePhotoViewContentMode int64
 
 const (
-	PHLivePhotoViewContentModeAspectFit PHLivePhotoViewContentMode = 0
+	PHLivePhotoViewContentModeAspectFit  PHLivePhotoViewContentMode = 0
 	PHLivePhotoViewContentModeAspectFill PHLivePhotoViewContentMode = 1
 )
 
@@ -31,8 +31,8 @@ type PHLivePhotoViewPlaybackStyle int64
 
 const (
 	PHLivePhotoViewPlaybackStyleUndefined PHLivePhotoViewPlaybackStyle = 0
-	PHLivePhotoViewPlaybackStyleFull PHLivePhotoViewPlaybackStyle = 1
-	PHLivePhotoViewPlaybackStyleHint PHLivePhotoViewPlaybackStyle = 2
+	PHLivePhotoViewPlaybackStyleFull      PHLivePhotoViewPlaybackStyle = 1
+	PHLivePhotoViewPlaybackStyleHint      PHLivePhotoViewPlaybackStyle = 2
 )
 
 func (e PHLivePhotoViewPlaybackStyle) String() string {
@@ -165,18 +165,18 @@ func (e PHPickerMode) String() string {
 type PHProjectCreationSource int64
 
 const (
-	PHProjectCreationSourceUndefined PHProjectCreationSource = 0
-	PHProjectCreationSourceUserSelection PHProjectCreationSource = 1
-	PHProjectCreationSourceAlbum PHProjectCreationSource = 2
-	PHProjectCreationSourceMemory PHProjectCreationSource = 3
-	PHProjectCreationSourceMoment PHProjectCreationSource = 4
-	PHProjectCreationSourceProject PHProjectCreationSource = 20
-	PHProjectCreationSourceProjectBook PHProjectCreationSource = 21
-	PHProjectCreationSourceProjectCalendar PHProjectCreationSource = 22
-	PHProjectCreationSourceProjectCard PHProjectCreationSource = 23
+	PHProjectCreationSourceUndefined         PHProjectCreationSource = 0
+	PHProjectCreationSourceUserSelection     PHProjectCreationSource = 1
+	PHProjectCreationSourceAlbum             PHProjectCreationSource = 2
+	PHProjectCreationSourceMemory            PHProjectCreationSource = 3
+	PHProjectCreationSourceMoment            PHProjectCreationSource = 4
+	PHProjectCreationSourceProject           PHProjectCreationSource = 20
+	PHProjectCreationSourceProjectBook       PHProjectCreationSource = 21
+	PHProjectCreationSourceProjectCalendar   PHProjectCreationSource = 22
+	PHProjectCreationSourceProjectCard       PHProjectCreationSource = 23
 	PHProjectCreationSourceProjectPrintOrder PHProjectCreationSource = 24
-	PHProjectCreationSourceProjectSlideshow PHProjectCreationSource = 25
-	PHProjectCreationSourceProjectExtension PHProjectCreationSource = 26
+	PHProjectCreationSourceProjectSlideshow  PHProjectCreationSource = 25
+	PHProjectCreationSourceProjectExtension  PHProjectCreationSource = 26
 )
 
 func (e PHProjectCreationSource) String() string {
@@ -215,8 +215,8 @@ type PHProjectSectionType int64
 
 const (
 	PHProjectSectionTypeUndefined PHProjectSectionType = 0
-	PHProjectSectionTypeCover PHProjectSectionType = 1
-	PHProjectSectionTypeContent PHProjectSectionType = 2
+	PHProjectSectionTypeCover     PHProjectSectionType = 1
+	PHProjectSectionTypeContent   PHProjectSectionType = 2
 	PHProjectSectionTypeAuxiliary PHProjectSectionType = 3
 )
 
@@ -239,8 +239,8 @@ func (e PHProjectSectionType) String() string {
 type PHProjectTextElementType int64
 
 const (
-	PHProjectTextElementTypeBody PHProjectTextElementType = 0
-	PHProjectTextElementTypeTitle PHProjectTextElementType = 1
+	PHProjectTextElementTypeBody     PHProjectTextElementType = 0
+	PHProjectTextElementTypeTitle    PHProjectTextElementType = 1
 	PHProjectTextElementTypeSubtitle PHProjectTextElementType = 2
 )
 
@@ -256,4 +256,3 @@ func (e PHProjectTextElementType) String() string {
 		return fmt.Sprintf("PHProjectTextElementType(%d)", int64(e))
 	}
 }
-

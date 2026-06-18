@@ -16,7 +16,9 @@ type ExternalSyncDeviceDiscoverySession struct {
 }
 
 // Unwrap returns the underlying [raw.AVExternalSyncDeviceDiscoverySession].
-func (x *ExternalSyncDeviceDiscoverySession) Unwrap() *raw.AVExternalSyncDeviceDiscoverySession { return x.inner }
+func (x *ExternalSyncDeviceDiscoverySession) Unwrap() *raw.AVExternalSyncDeviceDiscoverySession {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -54,4 +56,3 @@ type ExternalSyncDeviceDiscoverySessionable interface {
 }
 
 var _ ExternalSyncDeviceDiscoverySessionable = (*ExternalSyncDeviceDiscoverySession)(nil)
-

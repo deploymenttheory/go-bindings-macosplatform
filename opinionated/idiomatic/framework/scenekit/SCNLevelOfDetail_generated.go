@@ -63,4 +63,3 @@ type LevelOfDetailable interface {
 }
 
 var _ LevelOfDetailable = (*LevelOfDetail)(nil)
-

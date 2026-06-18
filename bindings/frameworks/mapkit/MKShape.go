@@ -16,10 +16,10 @@ type MKShape struct {
 }
 
 var (
-	_clsMKShape = _objcClass("MKShape")
-	_mKShapeSelTitle = objc.RegisterName("title")
-	_mKShapeSelSetTitle = objc.RegisterName("setTitle:")
-	_mKShapeSelSubtitle = objc.RegisterName("subtitle")
+	_clsMKShape            = _objcClass("MKShape")
+	_mKShapeSelTitle       = objc.RegisterName("title")
+	_mKShapeSelSetTitle    = objc.RegisterName("setTitle:")
+	_mKShapeSelSubtitle    = objc.RegisterName("subtitle")
 	_mKShapeSelSetSubtitle = objc.RegisterName("setSubtitle:")
 )
 
@@ -35,7 +35,9 @@ func MKShapeFromID(id objc.ID) *MKShape {
 
 func (o *MKShape) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKShapeSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MKShape) SetTitle(title *foundation.NSString) {
 
 func (o *MKShape) Subtitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKShapeSelSubtitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MKShape) SetSubtitle(subtitle *foundation.NSString) {
 	o.Ptr().Send(_mKShapeSelSetSubtitle, subtitle.Ptr())
 }
-

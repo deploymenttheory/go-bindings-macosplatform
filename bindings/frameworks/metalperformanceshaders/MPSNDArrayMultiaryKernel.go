@@ -19,14 +19,14 @@ type MPSNDArrayMultiaryKernel struct {
 }
 
 var (
-	_clsMPSNDArrayMultiaryKernel = _objcClass("MPSNDArrayMultiaryKernel")
-	_mPSNDArrayMultiaryKernelSelInitWithDeviceSourceCount = objc.RegisterName("initWithDevice:sourceCount:")
-	_mPSNDArrayMultiaryKernelSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSNDArrayMultiaryKernelSelEncodeToCommandBufferSourceArrays = objc.RegisterName("encodeToCommandBuffer:sourceArrays:")
-	_mPSNDArrayMultiaryKernelSelEncodeToCommandBufferSourceArraysDestinationArray = objc.RegisterName("encodeToCommandBuffer:sourceArrays:destinationArray:")
+	_clsMPSNDArrayMultiaryKernel                                                                   = _objcClass("MPSNDArrayMultiaryKernel")
+	_mPSNDArrayMultiaryKernelSelInitWithDeviceSourceCount                                          = objc.RegisterName("initWithDevice:sourceCount:")
+	_mPSNDArrayMultiaryKernelSelInitWithCoderDevice                                                = objc.RegisterName("initWithCoder:device:")
+	_mPSNDArrayMultiaryKernelSelEncodeToCommandBufferSourceArrays                                  = objc.RegisterName("encodeToCommandBuffer:sourceArrays:")
+	_mPSNDArrayMultiaryKernelSelEncodeToCommandBufferSourceArraysDestinationArray                  = objc.RegisterName("encodeToCommandBuffer:sourceArrays:destinationArray:")
 	_mPSNDArrayMultiaryKernelSelEncodeToCommandBufferSourceArraysResultStateOutputStateIsTemporary = objc.RegisterName("encodeToCommandBuffer:sourceArrays:resultState:outputStateIsTemporary:")
-	_mPSNDArrayMultiaryKernelSelEncodeToCommandBufferSourceArraysResultStateDestinationArray = objc.RegisterName("encodeToCommandBuffer:sourceArrays:resultState:destinationArray:")
-	_mPSNDArrayMultiaryKernelSelEncodeToCommandEncoderCommandBufferSourceArraysDestinationArray = objc.RegisterName("encodeToCommandEncoder:commandBuffer:sourceArrays:destinationArray:")
+	_mPSNDArrayMultiaryKernelSelEncodeToCommandBufferSourceArraysResultStateDestinationArray       = objc.RegisterName("encodeToCommandBuffer:sourceArrays:resultState:destinationArray:")
+	_mPSNDArrayMultiaryKernelSelEncodeToCommandEncoderCommandBufferSourceArraysDestinationArray    = objc.RegisterName("encodeToCommandEncoder:commandBuffer:sourceArrays:destinationArray:")
 )
 
 func MPSNDArrayMultiaryKernelFromID(id objc.ID) *MPSNDArrayMultiaryKernel {
@@ -41,20 +41,26 @@ func MPSNDArrayMultiaryKernelFromID(id objc.ID) *MPSNDArrayMultiaryKernel {
 
 func (o *MPSNDArrayMultiaryKernel) InitWithDeviceSourceCount(device metal.MTLDevice, count uint) *MPSNDArrayMultiaryKernel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayMultiaryKernelSelInitWithDeviceSourceCount, device, count)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNDArrayMultiaryKernelFromID(_ret)
 }
 
 func (o *MPSNDArrayMultiaryKernel) InitWithCoderDevice(coder *foundation.NSCoder, device metal.MTLDevice) *MPSNDArrayMultiaryKernel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayMultiaryKernelSelInitWithCoderDevice, coder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNDArrayMultiaryKernelFromID(_ret)
 }
 
 // @abstract   Encode a simple inference NDArray kernel and return a NDArray to hold the result @param      cmdBuf          The command buffer into which to encode the kernel @param      sourceArrays    The list of sources for the filter in a NSArray. Ordering to be defined by subclass @result     A newly allocated MPSNDArray that will contain the result of the calculation when the command buffer completes successfully.
 func (o *MPSNDArrayMultiaryKernel) EncodeToCommandBufferSourceArrays(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray]) *mpscore.MPSNDArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayMultiaryKernelSelEncodeToCommandBufferSourceArrays, cmdBuf, sourceArrays)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpscore.MPSNDArrayFromID(_ret)
 }
 
@@ -66,7 +72,9 @@ func (o *MPSNDArrayMultiaryKernel) EncodeToCommandBufferSourceArraysDestinationA
 // @abstract   Encode a simple inference NDArray kernel and return a NDArray to hold the result @param      cmdBuf          The command buffer into which to encode the kernel @param      sourceArrays    The list of sources for the filter in a NSArray. Ordering to be defined by subclass @param      outGradientState If non-nil, the address output gradient state is written to this address @param      outputStateIsTemporary  If YES, the state if any will be allocated to contain temporary textures and buffers as needed @result     A newly allocated MPSNDArray that will contain the result of the calculation when the command buffer completes successfully.
 func (o *MPSNDArrayMultiaryKernel) EncodeToCommandBufferSourceArraysResultStateOutputStateIsTemporary(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], outGradientState *mpscore.MPSState, outputStateIsTemporary bool) *mpscore.MPSNDArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayMultiaryKernelSelEncodeToCommandBufferSourceArraysResultStateOutputStateIsTemporary, cmdBuf, sourceArrays, outGradientState.Ptr(), outputStateIsTemporary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpscore.MPSNDArrayFromID(_ret)
 }
 
@@ -79,4 +87,3 @@ func (o *MPSNDArrayMultiaryKernel) EncodeToCommandBufferSourceArraysResultStateD
 func (o *MPSNDArrayMultiaryKernel) EncodeToCommandEncoderCommandBufferSourceArraysDestinationArray(encoder metal.MTLComputeCommandEncoder, commandBuffer metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], destination *mpscore.MPSNDArray) {
 	o.Ptr().Send(_mPSNDArrayMultiaryKernelSelEncodeToCommandEncoderCommandBufferSourceArraysDestinationArray, encoder, commandBuffer, sourceArrays, destination.Ptr())
 }
-

@@ -16,14 +16,14 @@ type INFlight struct {
 }
 
 var (
-	_clsINFlight = _objcClass("INFlight")
+	_clsINFlight                                                                                            = _objcClass("INFlight")
 	_iNFlightSelInitWithAirlineFlightNumberBoardingTimeFlightDurationDepartureAirportGateArrivalAirportGate = objc.RegisterName("initWithAirline:flightNumber:boardingTime:flightDuration:departureAirportGate:arrivalAirportGate:")
-	_iNFlightSelAirline = objc.RegisterName("airline")
-	_iNFlightSelFlightNumber = objc.RegisterName("flightNumber")
-	_iNFlightSelBoardingTime = objc.RegisterName("boardingTime")
-	_iNFlightSelFlightDuration = objc.RegisterName("flightDuration")
-	_iNFlightSelDepartureAirportGate = objc.RegisterName("departureAirportGate")
-	_iNFlightSelArrivalAirportGate = objc.RegisterName("arrivalAirportGate")
+	_iNFlightSelAirline                                                                                     = objc.RegisterName("airline")
+	_iNFlightSelFlightNumber                                                                                = objc.RegisterName("flightNumber")
+	_iNFlightSelBoardingTime                                                                                = objc.RegisterName("boardingTime")
+	_iNFlightSelFlightDuration                                                                              = objc.RegisterName("flightDuration")
+	_iNFlightSelDepartureAirportGate                                                                        = objc.RegisterName("departureAirportGate")
+	_iNFlightSelArrivalAirportGate                                                                          = objc.RegisterName("arrivalAirportGate")
 )
 
 func INFlightFromID(id objc.ID) *INFlight {
@@ -38,43 +38,56 @@ func INFlightFromID(id objc.ID) *INFlight {
 
 func (o *INFlight) InitWithAirlineFlightNumberBoardingTimeFlightDurationDepartureAirportGateArrivalAirportGate(airline *INAirline, flightNumber *foundation.NSString, boardingTime *INDateComponentsRange, flightDuration *INDateComponentsRange, departureAirportGate *INAirportGate, arrivalAirportGate *INAirportGate) *INFlight {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNFlightSelInitWithAirlineFlightNumberBoardingTimeFlightDurationDepartureAirportGateArrivalAirportGate, airline.Ptr(), flightNumber.Ptr(), boardingTime.Ptr(), flightDuration.Ptr(), departureAirportGate.Ptr(), arrivalAirportGate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INFlightFromID(_ret)
 }
 
 func (o *INFlight) Airline() *INAirline {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNFlightSelAirline)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INAirlineFromID(_ret)
 }
 
 func (o *INFlight) FlightNumber() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNFlightSelFlightNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INFlight) BoardingTime() *INDateComponentsRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNFlightSelBoardingTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INDateComponentsRangeFromID(_ret)
 }
 
 func (o *INFlight) FlightDuration() *INDateComponentsRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNFlightSelFlightDuration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INDateComponentsRangeFromID(_ret)
 }
 
 func (o *INFlight) DepartureAirportGate() *INAirportGate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNFlightSelDepartureAirportGate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INAirportGateFromID(_ret)
 }
 
 func (o *INFlight) ArrivalAirportGate() *INAirportGate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNFlightSelArrivalAirportGate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INAirportGateFromID(_ret)
 }
-

@@ -790,9 +790,13 @@ func (x *MTRClusterThermostat) ClearWeeklyScheduleWithExpectedValuesExpectedValu
 	x.inner.ClearWeeklyScheduleWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, completionHandler)
 }
 
-func (x *MTRClusterThermostat) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterThermostat) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterThermostat) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterThermostat) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterThermostatable is the interface implemented by [MTRClusterThermostat], for mocking and DI.
 type MTRClusterThermostatable interface {
@@ -936,4 +940,3 @@ type MTRClusterThermostatable interface {
 }
 
 var _ MTRClusterThermostatable = (*MTRClusterThermostat)(nil)
-

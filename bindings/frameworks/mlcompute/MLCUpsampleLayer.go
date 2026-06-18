@@ -16,12 +16,12 @@ type MLCUpsampleLayer struct {
 }
 
 var (
-	_clsMLCUpsampleLayer = _objcClass("MLCUpsampleLayer")
-	_mLCUpsampleLayerSelLayerWithShape = objc.RegisterName("layerWithShape:")
+	_clsMLCUpsampleLayer                                      = _objcClass("MLCUpsampleLayer")
+	_mLCUpsampleLayerSelLayerWithShape                        = objc.RegisterName("layerWithShape:")
 	_mLCUpsampleLayerSelLayerWithShapeSampleModeAlignsCorners = objc.RegisterName("layerWithShape:sampleMode:alignsCorners:")
-	_mLCUpsampleLayerSelShape = objc.RegisterName("shape")
-	_mLCUpsampleLayerSelSampleMode = objc.RegisterName("sampleMode")
-	_mLCUpsampleLayerSelAlignsCorners = objc.RegisterName("alignsCorners")
+	_mLCUpsampleLayerSelShape                                 = objc.RegisterName("shape")
+	_mLCUpsampleLayerSelSampleMode                            = objc.RegisterName("sampleMode")
+	_mLCUpsampleLayerSelAlignsCorners                         = objc.RegisterName("alignsCorners")
 )
 
 func MLCUpsampleLayerFromID(id objc.ID) *MLCUpsampleLayer {
@@ -37,14 +37,18 @@ func MLCUpsampleLayerFromID(id objc.ID) *MLCUpsampleLayer {
 // @abstract   Create an upsample layer @param      shape                   A NSArray<NSNumber *> representing the dimensions of the result tensor @return     A new upsample layer.
 func MLCUpsampleLayerLayerWithShape(shape *foundation.NSArray[*foundation.NSNumber]) *MLCUpsampleLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCUpsampleLayer), _mLCUpsampleLayerSelLayerWithShape, shape)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCUpsampleLayerFromID(_ret)
 }
 
 // @abstract   Create an upsample layer @param      shape                   A NSArray<NSNumber *> representing the dimensions of the result tensor @param      sampleMode        The upsampling algorithm to use.  Default is nearest. @param      alignsCorners    Whether the corner pixels of the input and output tensors are aligned or not. @return     A new upsample layer.
 func MLCUpsampleLayerLayerWithShapeSampleModeAlignsCorners(shape *foundation.NSArray[*foundation.NSNumber], sampleMode MLCSampleMode, alignsCorners bool) *MLCUpsampleLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCUpsampleLayer), _mLCUpsampleLayerSelLayerWithShapeSampleModeAlignsCorners, shape, sampleMode, alignsCorners)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCUpsampleLayerFromID(_ret)
 }
 
@@ -65,4 +69,3 @@ func (o *MLCUpsampleLayer) AlignsCorners() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mLCUpsampleLayerSelAlignsCorners)
 	return _ret
 }
-

@@ -186,9 +186,13 @@ func (x *MTRBaseClusterPowerTopology) SubscribeAttributeClusterRevisionWithParam
 	}
 }
 
-func (x *MTRBaseClusterPowerTopology) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterPowerTopology) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterPowerTopology) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterPowerTopology) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterPowerTopologyable is the interface implemented by [MTRBaseClusterPowerTopology], for mocking and DI.
 type MTRBaseClusterPowerTopologyable interface {
@@ -210,4 +214,3 @@ type MTRBaseClusterPowerTopologyable interface {
 }
 
 var _ MTRBaseClusterPowerTopologyable = (*MTRBaseClusterPowerTopology)(nil)
-

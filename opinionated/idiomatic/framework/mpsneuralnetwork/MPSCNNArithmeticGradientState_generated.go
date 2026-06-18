@@ -35,7 +35,9 @@ func NewCNNArithmeticGradientState() *CNNArithmeticGradientState {
 	return &CNNArithmeticGradientState{inner: raw.MPSCNNArithmeticGradientStateFromID(_id)}
 }
 
-func (x *CNNArithmeticGradientState) asNNBinaryGradientState() *raw.MPSNNBinaryGradientState { return &x.inner.MPSNNBinaryGradientState }
+func (x *CNNArithmeticGradientState) asNNBinaryGradientState() *raw.MPSNNBinaryGradientState {
+	return &x.inner.MPSNNBinaryGradientState
+}
 
 // CNNArithmeticGradientStateable is the interface implemented by [CNNArithmeticGradientState], for mocking and DI.
 type CNNArithmeticGradientStateable interface {
@@ -43,4 +45,3 @@ type CNNArithmeticGradientStateable interface {
 }
 
 var _ CNNArithmeticGradientStateable = (*CNNArithmeticGradientState)(nil)
-

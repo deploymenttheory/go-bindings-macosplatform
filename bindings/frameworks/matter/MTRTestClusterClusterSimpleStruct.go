@@ -25,4 +25,3 @@ func MTRTestClusterClusterSimpleStructFromID(id objc.ID) *MTRTestClusterClusterS
 	purego.Track(o)
 	return o
 }
-

@@ -287,4 +287,3 @@ func VectorDescriptorWithLengthVectorsVectorBytesDataType(length uint, vectors u
 func VectorBytesForLengthDataType(length uint, dataType raw.MPSDataType) uint {
 	return raw.MPSVectorDescriptorVectorBytesForLengthDataType(length, dataType)
 }
-

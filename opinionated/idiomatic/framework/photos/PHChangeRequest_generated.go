@@ -43,4 +43,3 @@ type ChangeRequestable interface {
 }
 
 var _ ChangeRequestable = (*ChangeRequest)(nil)
-

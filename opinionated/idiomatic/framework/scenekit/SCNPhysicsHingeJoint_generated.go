@@ -117,7 +117,9 @@ func (x *PhysicsHingeJoint) SetAnchorB(anchorB raw.SCNVector3) {
 	x.inner.SetAnchorB(anchorB)
 }
 
-func (x *PhysicsHingeJoint) asPhysicsBehavior() *raw.SCNPhysicsBehavior { return &x.inner.SCNPhysicsBehavior }
+func (x *PhysicsHingeJoint) asPhysicsBehavior() *raw.SCNPhysicsBehavior {
+	return &x.inner.SCNPhysicsBehavior
+}
 
 // PhysicsHingeJointable is the interface implemented by [PhysicsHingeJoint], for mocking and DI.
 type PhysicsHingeJointable interface {
@@ -139,4 +141,3 @@ type PhysicsHingeJointable interface {
 }
 
 var _ PhysicsHingeJointable = (*PhysicsHingeJoint)(nil)
-

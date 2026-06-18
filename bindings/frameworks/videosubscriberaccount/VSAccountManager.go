@@ -16,8 +16,8 @@ type VSAccountManager struct {
 }
 
 var (
-	_clsVSAccountManager = _objcClass("VSAccountManager")
-	_vSAccountManagerSelDelegate = objc.RegisterName("delegate")
+	_clsVSAccountManager            = _objcClass("VSAccountManager")
+	_vSAccountManagerSelDelegate    = objc.RegisterName("delegate")
 	_vSAccountManagerSelSetDelegate = objc.RegisterName("setDelegate:")
 )
 
@@ -40,4 +40,3 @@ func (o *VSAccountManager) Delegate() VSAccountManagerDelegate {
 func (o *VSAccountManager) SetDelegate(delegate VSAccountManagerDelegate) {
 	o.Ptr().Send(_vSAccountManagerSelSetDelegate, delegate)
 }
-

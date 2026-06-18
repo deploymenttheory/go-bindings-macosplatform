@@ -18,45 +18,45 @@ type MTRSetupPayload struct {
 }
 
 var (
-	_clsMTRSetupPayload = _objcClass("MTRSetupPayload")
-	_mTRSetupPayloadSelInitWithPayload = objc.RegisterName("initWithPayload:")
-	_mTRSetupPayloadSelVendorElementWithTag = objc.RegisterName("vendorElementWithTag:")
-	_mTRSetupPayloadSelRemoveVendorElementWithTag = objc.RegisterName("removeVendorElementWithTag:")
-	_mTRSetupPayloadSelAddOrReplaceVendorElement = objc.RegisterName("addOrReplaceVendorElement:")
-	_mTRSetupPayloadSelGenerateRandomPIN = objc.RegisterName("generateRandomPIN")
-	_mTRSetupPayloadSelGenerateRandomSetupPasscode = objc.RegisterName("generateRandomSetupPasscode")
-	_mTRSetupPayloadSelInitWithSetupPasscodeDiscriminator = objc.RegisterName("initWithSetupPasscode:discriminator:")
-	_mTRSetupPayloadSelManualEntryCode = objc.RegisterName("manualEntryCode")
-	_mTRSetupPayloadSelQrCodeString = objc.RegisterName("qrCodeString")
-	_mTRSetupPayloadSelIsValidSetupPasscode = objc.RegisterName("isValidSetupPasscode:")
-	_mTRSetupPayloadSelIsConcatenated = objc.RegisterName("isConcatenated")
-	_mTRSetupPayloadSelSubPayloads = objc.RegisterName("subPayloads")
-	_mTRSetupPayloadSelSetSubPayloads = objc.RegisterName("setSubPayloads:")
-	_mTRSetupPayloadSelVendorID = objc.RegisterName("vendorID")
-	_mTRSetupPayloadSelSetVendorID = objc.RegisterName("setVendorID:")
-	_mTRSetupPayloadSelProductID = objc.RegisterName("productID")
-	_mTRSetupPayloadSelSetProductID = objc.RegisterName("setProductID:")
-	_mTRSetupPayloadSelCommissioningFlow = objc.RegisterName("commissioningFlow")
-	_mTRSetupPayloadSelSetCommissioningFlow = objc.RegisterName("setCommissioningFlow:")
-	_mTRSetupPayloadSelDiscoveryCapabilities = objc.RegisterName("discoveryCapabilities")
-	_mTRSetupPayloadSelSetDiscoveryCapabilities = objc.RegisterName("setDiscoveryCapabilities:")
-	_mTRSetupPayloadSelDiscriminator = objc.RegisterName("discriminator")
-	_mTRSetupPayloadSelSetDiscriminator = objc.RegisterName("setDiscriminator:")
-	_mTRSetupPayloadSelHasShortDiscriminator = objc.RegisterName("hasShortDiscriminator")
-	_mTRSetupPayloadSelSetHasShortDiscriminator = objc.RegisterName("setHasShortDiscriminator:")
-	_mTRSetupPayloadSelSetupPasscode = objc.RegisterName("setupPasscode")
-	_mTRSetupPayloadSelSetSetupPasscode = objc.RegisterName("setSetupPasscode:")
-	_mTRSetupPayloadSelSerialNumber = objc.RegisterName("serialNumber")
-	_mTRSetupPayloadSelSetSerialNumber = objc.RegisterName("setSerialNumber:")
-	_mTRSetupPayloadSelVendorElements = objc.RegisterName("vendorElements")
-	_mTRSetupPayloadSelInit = objc.RegisterName("init")
-	_mTRSetupPayloadSelNew = objc.RegisterName("new")
+	_clsMTRSetupPayload                                       = _objcClass("MTRSetupPayload")
+	_mTRSetupPayloadSelInitWithPayload                        = objc.RegisterName("initWithPayload:")
+	_mTRSetupPayloadSelVendorElementWithTag                   = objc.RegisterName("vendorElementWithTag:")
+	_mTRSetupPayloadSelRemoveVendorElementWithTag             = objc.RegisterName("removeVendorElementWithTag:")
+	_mTRSetupPayloadSelAddOrReplaceVendorElement              = objc.RegisterName("addOrReplaceVendorElement:")
+	_mTRSetupPayloadSelGenerateRandomPIN                      = objc.RegisterName("generateRandomPIN")
+	_mTRSetupPayloadSelGenerateRandomSetupPasscode            = objc.RegisterName("generateRandomSetupPasscode")
+	_mTRSetupPayloadSelInitWithSetupPasscodeDiscriminator     = objc.RegisterName("initWithSetupPasscode:discriminator:")
+	_mTRSetupPayloadSelManualEntryCode                        = objc.RegisterName("manualEntryCode")
+	_mTRSetupPayloadSelQrCodeString                           = objc.RegisterName("qrCodeString")
+	_mTRSetupPayloadSelIsValidSetupPasscode                   = objc.RegisterName("isValidSetupPasscode:")
+	_mTRSetupPayloadSelIsConcatenated                         = objc.RegisterName("isConcatenated")
+	_mTRSetupPayloadSelSubPayloads                            = objc.RegisterName("subPayloads")
+	_mTRSetupPayloadSelSetSubPayloads                         = objc.RegisterName("setSubPayloads:")
+	_mTRSetupPayloadSelVendorID                               = objc.RegisterName("vendorID")
+	_mTRSetupPayloadSelSetVendorID                            = objc.RegisterName("setVendorID:")
+	_mTRSetupPayloadSelProductID                              = objc.RegisterName("productID")
+	_mTRSetupPayloadSelSetProductID                           = objc.RegisterName("setProductID:")
+	_mTRSetupPayloadSelCommissioningFlow                      = objc.RegisterName("commissioningFlow")
+	_mTRSetupPayloadSelSetCommissioningFlow                   = objc.RegisterName("setCommissioningFlow:")
+	_mTRSetupPayloadSelDiscoveryCapabilities                  = objc.RegisterName("discoveryCapabilities")
+	_mTRSetupPayloadSelSetDiscoveryCapabilities               = objc.RegisterName("setDiscoveryCapabilities:")
+	_mTRSetupPayloadSelDiscriminator                          = objc.RegisterName("discriminator")
+	_mTRSetupPayloadSelSetDiscriminator                       = objc.RegisterName("setDiscriminator:")
+	_mTRSetupPayloadSelHasShortDiscriminator                  = objc.RegisterName("hasShortDiscriminator")
+	_mTRSetupPayloadSelSetHasShortDiscriminator               = objc.RegisterName("setHasShortDiscriminator:")
+	_mTRSetupPayloadSelSetupPasscode                          = objc.RegisterName("setupPasscode")
+	_mTRSetupPayloadSelSetSetupPasscode                       = objc.RegisterName("setSetupPasscode:")
+	_mTRSetupPayloadSelSerialNumber                           = objc.RegisterName("serialNumber")
+	_mTRSetupPayloadSelSetSerialNumber                        = objc.RegisterName("setSerialNumber:")
+	_mTRSetupPayloadSelVendorElements                         = objc.RegisterName("vendorElements")
+	_mTRSetupPayloadSelInit                                   = objc.RegisterName("init")
+	_mTRSetupPayloadSelNew                                    = objc.RegisterName("new")
 	_mTRSetupPayloadSelSetupPayloadWithOnboardingPayloadError = objc.RegisterName("setupPayloadWithOnboardingPayload:error:")
-	_mTRSetupPayloadSelGetAllOptionalVendorData = objc.RegisterName("getAllOptionalVendorData:")
-	_mTRSetupPayloadSelRendezvousInformation = objc.RegisterName("rendezvousInformation")
-	_mTRSetupPayloadSelSetRendezvousInformation = objc.RegisterName("setRendezvousInformation:")
-	_mTRSetupPayloadSelSetUpPINCode = objc.RegisterName("setUpPINCode")
-	_mTRSetupPayloadSelSetSetUpPINCode = objc.RegisterName("setSetUpPINCode:")
+	_mTRSetupPayloadSelGetAllOptionalVendorData               = objc.RegisterName("getAllOptionalVendorData:")
+	_mTRSetupPayloadSelRendezvousInformation                  = objc.RegisterName("rendezvousInformation")
+	_mTRSetupPayloadSelSetRendezvousInformation               = objc.RegisterName("setRendezvousInformation:")
+	_mTRSetupPayloadSelSetUpPINCode                           = objc.RegisterName("setUpPINCode")
+	_mTRSetupPayloadSelSetSetUpPINCode                        = objc.RegisterName("setSetUpPINCode:")
 )
 
 func MTRSetupPayloadFromID(id objc.ID) *MTRSetupPayload {
@@ -72,14 +72,18 @@ func MTRSetupPayloadFromID(id objc.ID) *MTRSetupPayload {
 // Initializes the payload object from the provide QR Code or Manual Pairing Code string. Returns nil if the payload is not valid.
 func (o *MTRSetupPayload) InitWithPayload(payload *foundation.NSString) *MTRSetupPayload {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSetupPayloadSelInitWithPayload, payload.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRSetupPayloadFromID(_ret)
 }
 
 // Returns the Manufacturer-specific extension element with the specified tag, if any. The tag must be in the range 0x80 - 0xFF.
 func (o *MTRSetupPayload) VendorElementWithTag(tag *foundation.NSNumber) *MTROptionalQRCodeInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSetupPayloadSelVendorElementWithTag, tag.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTROptionalQRCodeInfoFromID(_ret)
 }
 
@@ -102,28 +106,36 @@ func MTRSetupPayloadGenerateRandomPIN() uint {
 // Generate a random Matter-valid setup passcode.
 func MTRSetupPayloadGenerateRandomSetupPasscode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRSetupPayload), _mTRSetupPayloadSelGenerateRandomSetupPasscode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // Initialize an MTRSetupPayload with the given passcode and discriminator. This will pre-set version, product id, and vendor id to 0.
 func (o *MTRSetupPayload) InitWithSetupPasscodeDiscriminator(setupPasscode *foundation.NSNumber, discriminator *foundation.NSNumber) *MTRSetupPayload {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSetupPayloadSelInitWithSetupPasscodeDiscriminator, setupPasscode.Ptr(), discriminator.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRSetupPayloadFromID(_ret)
 }
 
 // Creates a Manual Pairing Code from this setup payload. Returns nil if this payload cannot be represented as a valid Manual Pairing Code. The following properties must be populated for a valid Manual Pairing Code: - setupPasscode - discriminator (short or long) In most cases the pairing code will be 11 digits long. If the payload indicates a `commissioningFlow` other than `MTRCommissioningFlowStandard`, a 21 digit code will be produced that includes the vendorID and productID values.
 func (o *MTRSetupPayload) ManualEntryCode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSetupPayloadSelManualEntryCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Creates a QR Code payload from this setup payload. Returns nil if this payload cannot be represented as a valid QR Code. The following properties must be populated for a valid QR Code: - setupPasscode - discriminator (must be long) - discoveryCapabilities (not MTRDiscoveryCapabilitiesUnknown) If this object represents a `concatenated` payload, then this property will include the QR Code strings of all the underlying `subPayloads.`
 func (o *MTRSetupPayload) QrCodeString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSetupPayloadSelQrCodeString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -142,7 +154,9 @@ func (o *MTRSetupPayload) IsConcatenated() bool {
 // The individual constituent payloads, if the receiver represents a concatenated payload. @see concatenated
 func (o *MTRSetupPayload) SubPayloads() *foundation.NSArray[*MTRSetupPayload] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSetupPayloadSelSubPayloads)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MTRSetupPayload](_ret)
 }
 
@@ -152,7 +166,9 @@ func (o *MTRSetupPayload) SetSubPayloads(subPayloads *foundation.NSArray[*MTRSet
 
 func (o *MTRSetupPayload) VendorID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSetupPayloadSelVendorID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -162,7 +178,9 @@ func (o *MTRSetupPayload) SetVendorID(vendorID *foundation.NSNumber) {
 
 func (o *MTRSetupPayload) ProductID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSetupPayloadSelProductID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -190,7 +208,9 @@ func (o *MTRSetupPayload) SetDiscoveryCapabilities(discoveryCapabilities MTRDisc
 
 func (o *MTRSetupPayload) Discriminator() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSetupPayloadSelDiscriminator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -210,7 +230,9 @@ func (o *MTRSetupPayload) SetHasShortDiscriminator(hasShortDiscriminator bool) {
 
 func (o *MTRSetupPayload) SetupPasscode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSetupPayloadSelSetupPasscode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -221,7 +243,9 @@ func (o *MTRSetupPayload) SetSetupPasscode(setupPasscode *foundation.NSNumber) {
 // The value of the Serial Number extension element, if any.
 func (o *MTRSetupPayload) SerialNumber() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSetupPayloadSelSerialNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -232,13 +256,17 @@ func (o *MTRSetupPayload) SetSerialNumber(serialNumber *foundation.NSString) {
 // The list of Manufacturer-specific extension elements contained in the setup code. May be empty.
 func (o *MTRSetupPayload) VendorElements() *foundation.NSArray[*MTROptionalQRCodeInfo] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSetupPayloadSelVendorElements)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MTROptionalQRCodeInfo](_ret)
 }
 
 func (o *MTRSetupPayload) Init() *MTRSetupPayload {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSetupPayloadSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRSetupPayloadFromID(_ret)
 }
 
@@ -250,7 +278,9 @@ func MTRSetupPayloadNew() *MTRSetupPayload {
 func MTRSetupPayloadSetupPayloadWithOnboardingPayloadError(onboardingPayload *foundation.NSString) (*MTRSetupPayload, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRSetupPayload), _mTRSetupPayloadSelSetupPayloadWithOnboardingPayloadError, onboardingPayload.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -260,7 +290,9 @@ func MTRSetupPayloadSetupPayloadWithOnboardingPayloadError(onboardingPayload *fo
 func (o *MTRSetupPayload) QrCodeString2() (*foundation.NSString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSetupPayloadSelQrCodeString, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -270,7 +302,9 @@ func (o *MTRSetupPayload) QrCodeString2() (*foundation.NSString, error) {
 func (o *MTRSetupPayload) GetAllOptionalVendorData() (*foundation.NSArray[*MTROptionalQRCodeInfo], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSetupPayloadSelGetAllOptionalVendorData, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -279,7 +313,9 @@ func (o *MTRSetupPayload) GetAllOptionalVendorData() (*foundation.NSArray[*MTROp
 
 func (o *MTRSetupPayload) RendezvousInformation() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSetupPayloadSelRendezvousInformation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -289,11 +325,12 @@ func (o *MTRSetupPayload) SetRendezvousInformation(rendezvousInformation *founda
 
 func (o *MTRSetupPayload) SetUpPINCode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSetupPayloadSelSetUpPINCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRSetupPayload) SetSetUpPINCode(setUpPINCode *foundation.NSNumber) {
 	o.Ptr().Send(_mTRSetupPayloadSelSetSetUpPINCode, setUpPINCode.Ptr())
 }
-

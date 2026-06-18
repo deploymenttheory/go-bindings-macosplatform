@@ -197,4 +197,3 @@ type Expressionable interface {
 }
 
 var _ Expressionable = (*Expression)(nil)
-

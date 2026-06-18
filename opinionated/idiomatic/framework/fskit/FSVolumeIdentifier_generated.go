@@ -48,7 +48,9 @@ func (x *VolumeIdentifier) WithQualifier(qualifier *foundation.NSData) *VolumeId
 	return x
 }
 
-func (x *VolumeIdentifier) asEntityIdentifier() *raw.FSEntityIdentifier { return &x.inner.FSEntityIdentifier }
+func (x *VolumeIdentifier) asEntityIdentifier() *raw.FSEntityIdentifier {
+	return &x.inner.FSEntityIdentifier
+}
 
 // VolumeIdentifierable is the interface implemented by [VolumeIdentifier], for mocking and DI.
 type VolumeIdentifierable interface {
@@ -58,4 +60,3 @@ type VolumeIdentifierable interface {
 }
 
 var _ VolumeIdentifierable = (*VolumeIdentifier)(nil)
-

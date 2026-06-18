@@ -17,21 +17,21 @@ type OSAScriptView struct {
 }
 
 var (
-	_clsOSAScriptView = _objcClass("OSAScriptView")
-	_oSAScriptViewSelSource = objc.RegisterName("source")
-	_oSAScriptViewSelSetSource = objc.RegisterName("setSource:")
-	_oSAScriptViewSelUsesScriptAssistant = objc.RegisterName("usesScriptAssistant")
+	_clsOSAScriptView                       = _objcClass("OSAScriptView")
+	_oSAScriptViewSelSource                 = objc.RegisterName("source")
+	_oSAScriptViewSelSetSource              = objc.RegisterName("setSource:")
+	_oSAScriptViewSelUsesScriptAssistant    = objc.RegisterName("usesScriptAssistant")
 	_oSAScriptViewSelSetUsesScriptAssistant = objc.RegisterName("setUsesScriptAssistant:")
-	_oSAScriptViewSelUsesTabs = objc.RegisterName("usesTabs")
-	_oSAScriptViewSelSetUsesTabs = objc.RegisterName("setUsesTabs:")
-	_oSAScriptViewSelTabWidth = objc.RegisterName("tabWidth")
-	_oSAScriptViewSelSetTabWidth = objc.RegisterName("setTabWidth:")
-	_oSAScriptViewSelWrapsLines = objc.RegisterName("wrapsLines")
-	_oSAScriptViewSelSetWrapsLines = objc.RegisterName("setWrapsLines:")
-	_oSAScriptViewSelIndentsWrappedLines = objc.RegisterName("indentsWrappedLines")
+	_oSAScriptViewSelUsesTabs               = objc.RegisterName("usesTabs")
+	_oSAScriptViewSelSetUsesTabs            = objc.RegisterName("setUsesTabs:")
+	_oSAScriptViewSelTabWidth               = objc.RegisterName("tabWidth")
+	_oSAScriptViewSelSetTabWidth            = objc.RegisterName("setTabWidth:")
+	_oSAScriptViewSelWrapsLines             = objc.RegisterName("wrapsLines")
+	_oSAScriptViewSelSetWrapsLines          = objc.RegisterName("setWrapsLines:")
+	_oSAScriptViewSelIndentsWrappedLines    = objc.RegisterName("indentsWrappedLines")
 	_oSAScriptViewSelSetIndentsWrappedLines = objc.RegisterName("setIndentsWrappedLines:")
-	_oSAScriptViewSelIndentWidth = objc.RegisterName("indentWidth")
-	_oSAScriptViewSelSetIndentWidth = objc.RegisterName("setIndentWidth:")
+	_oSAScriptViewSelIndentWidth            = objc.RegisterName("indentWidth")
+	_oSAScriptViewSelSetIndentWidth         = objc.RegisterName("setIndentWidth:")
 )
 
 func OSAScriptViewFromID(id objc.ID) *OSAScriptView {
@@ -46,7 +46,9 @@ func OSAScriptViewFromID(id objc.ID) *OSAScriptView {
 
 func (o *OSAScriptView) Source() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptViewSelSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -107,4 +109,3 @@ func (o *OSAScriptView) IndentWidth() uint {
 func (o *OSAScriptView) SetIndentWidth(indentWidth uint) {
 	o.Ptr().Send(_oSAScriptViewSelSetIndentWidth, indentWidth)
 }
-

@@ -243,4 +243,3 @@ type CollaborationViewable interface {
 }
 
 var _ CollaborationViewable = (*CollaborationView)(nil)
-

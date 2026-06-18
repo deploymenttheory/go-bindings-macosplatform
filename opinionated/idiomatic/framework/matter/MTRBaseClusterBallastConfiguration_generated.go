@@ -19,7 +19,9 @@ type MTRBaseClusterBallastConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterBallastConfiguration].
-func (x *MTRBaseClusterBallastConfiguration) Unwrap() *raw.MTRBaseClusterBallastConfiguration { return x.inner }
+func (x *MTRBaseClusterBallastConfiguration) Unwrap() *raw.MTRBaseClusterBallastConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -1859,9 +1861,13 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeClusterRevisionWi
 	}
 }
 
-func (x *MTRBaseClusterBallastConfiguration) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterBallastConfiguration) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterBallastConfiguration) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterBallastConfiguration) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterBallastConfigurationable is the interface implemented by [MTRBaseClusterBallastConfiguration], for mocking and DI.
 type MTRBaseClusterBallastConfigurationable interface {
@@ -1985,4 +1991,3 @@ type MTRBaseClusterBallastConfigurationable interface {
 }
 
 var _ MTRBaseClusterBallastConfigurationable = (*MTRBaseClusterBallastConfiguration)(nil)
-

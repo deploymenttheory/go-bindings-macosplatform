@@ -16,17 +16,17 @@ type NEVPNIKEv2SecurityAssociationParameters struct {
 }
 
 var (
-	_clsNEVPNIKEv2SecurityAssociationParameters = _objcClass("NEVPNIKEv2SecurityAssociationParameters")
-	_nEVPNIKEv2SecurityAssociationParametersSelEncryptionAlgorithm = objc.RegisterName("encryptionAlgorithm")
-	_nEVPNIKEv2SecurityAssociationParametersSelSetEncryptionAlgorithm = objc.RegisterName("setEncryptionAlgorithm:")
-	_nEVPNIKEv2SecurityAssociationParametersSelIntegrityAlgorithm = objc.RegisterName("integrityAlgorithm")
-	_nEVPNIKEv2SecurityAssociationParametersSelSetIntegrityAlgorithm = objc.RegisterName("setIntegrityAlgorithm:")
-	_nEVPNIKEv2SecurityAssociationParametersSelDiffieHellmanGroup = objc.RegisterName("diffieHellmanGroup")
-	_nEVPNIKEv2SecurityAssociationParametersSelSetDiffieHellmanGroup = objc.RegisterName("setDiffieHellmanGroup:")
-	_nEVPNIKEv2SecurityAssociationParametersSelPostQuantumKeyExchangeMethods = objc.RegisterName("postQuantumKeyExchangeMethods")
+	_clsNEVPNIKEv2SecurityAssociationParameters                                 = _objcClass("NEVPNIKEv2SecurityAssociationParameters")
+	_nEVPNIKEv2SecurityAssociationParametersSelEncryptionAlgorithm              = objc.RegisterName("encryptionAlgorithm")
+	_nEVPNIKEv2SecurityAssociationParametersSelSetEncryptionAlgorithm           = objc.RegisterName("setEncryptionAlgorithm:")
+	_nEVPNIKEv2SecurityAssociationParametersSelIntegrityAlgorithm               = objc.RegisterName("integrityAlgorithm")
+	_nEVPNIKEv2SecurityAssociationParametersSelSetIntegrityAlgorithm            = objc.RegisterName("setIntegrityAlgorithm:")
+	_nEVPNIKEv2SecurityAssociationParametersSelDiffieHellmanGroup               = objc.RegisterName("diffieHellmanGroup")
+	_nEVPNIKEv2SecurityAssociationParametersSelSetDiffieHellmanGroup            = objc.RegisterName("setDiffieHellmanGroup:")
+	_nEVPNIKEv2SecurityAssociationParametersSelPostQuantumKeyExchangeMethods    = objc.RegisterName("postQuantumKeyExchangeMethods")
 	_nEVPNIKEv2SecurityAssociationParametersSelSetPostQuantumKeyExchangeMethods = objc.RegisterName("setPostQuantumKeyExchangeMethods:")
-	_nEVPNIKEv2SecurityAssociationParametersSelLifetimeMinutes = objc.RegisterName("lifetimeMinutes")
-	_nEVPNIKEv2SecurityAssociationParametersSelSetLifetimeMinutes = objc.RegisterName("setLifetimeMinutes:")
+	_nEVPNIKEv2SecurityAssociationParametersSelLifetimeMinutes                  = objc.RegisterName("lifetimeMinutes")
+	_nEVPNIKEv2SecurityAssociationParametersSelSetLifetimeMinutes               = objc.RegisterName("setLifetimeMinutes:")
 )
 
 func NEVPNIKEv2SecurityAssociationParametersFromID(id objc.ID) *NEVPNIKEv2SecurityAssociationParameters {
@@ -88,4 +88,3 @@ func (o *NEVPNIKEv2SecurityAssociationParameters) LifetimeMinutes() int32 {
 func (o *NEVPNIKEv2SecurityAssociationParameters) SetLifetimeMinutes(lifetimeMinutes int32) {
 	o.Ptr().Send(_nEVPNIKEv2SecurityAssociationParametersSelSetLifetimeMinutes, lifetimeMinutes)
 }
-

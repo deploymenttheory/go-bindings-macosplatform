@@ -66,4 +66,3 @@ type BlendKernelable interface {
 }
 
 var _ BlendKernelable = (*BlendKernel)(nil)
-

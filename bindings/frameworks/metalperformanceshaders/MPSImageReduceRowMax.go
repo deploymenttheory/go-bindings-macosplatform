@@ -17,7 +17,7 @@ type MPSImageReduceRowMax struct {
 }
 
 var (
-	_clsMPSImageReduceRowMax = _objcClass("MPSImageReduceRowMax")
+	_clsMPSImageReduceRowMax               = _objcClass("MPSImageReduceRowMax")
 	_mPSImageReduceRowMaxSelInitWithDevice = objc.RegisterName("initWithDevice:")
 )
 
@@ -33,7 +33,8 @@ func MPSImageReduceRowMaxFromID(id objc.ID) *MPSImageReduceRowMax {
 
 func (o *MPSImageReduceRowMax) InitWithDevice(device metal.MTLDevice) *MPSImageReduceRowMax {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageReduceRowMaxSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageReduceRowMaxFromID(_ret)
 }
-

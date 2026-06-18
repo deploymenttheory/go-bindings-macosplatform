@@ -16,28 +16,28 @@ type NSColorWell struct {
 }
 
 var (
-	_clsNSColorWell = _objcClass("NSColorWell")
-	_nSColorWellSelColorWellWithStyle = objc.RegisterName("colorWellWithStyle:")
-	_nSColorWellSelDeactivate = objc.RegisterName("deactivate")
-	_nSColorWellSelActivate = objc.RegisterName("activate:")
-	_nSColorWellSelDrawWellInside = objc.RegisterName("drawWellInside:")
-	_nSColorWellSelTakeColorFrom = objc.RegisterName("takeColorFrom:")
-	_nSColorWellSelIsActive = objc.RegisterName("isActive")
-	_nSColorWellSelIsBordered = objc.RegisterName("isBordered")
-	_nSColorWellSelSetBordered = objc.RegisterName("setBordered:")
-	_nSColorWellSelColor = objc.RegisterName("color")
-	_nSColorWellSelSetColor = objc.RegisterName("setColor:")
-	_nSColorWellSelColorWellStyle = objc.RegisterName("colorWellStyle")
-	_nSColorWellSelSetColorWellStyle = objc.RegisterName("setColorWellStyle:")
-	_nSColorWellSelImage = objc.RegisterName("image")
-	_nSColorWellSelSetImage = objc.RegisterName("setImage:")
-	_nSColorWellSelPulldownTarget = objc.RegisterName("pulldownTarget")
-	_nSColorWellSelSetPulldownTarget = objc.RegisterName("setPulldownTarget:")
-	_nSColorWellSelPulldownAction = objc.RegisterName("pulldownAction")
-	_nSColorWellSelSetPulldownAction = objc.RegisterName("setPulldownAction:")
-	_nSColorWellSelSupportsAlpha = objc.RegisterName("supportsAlpha")
-	_nSColorWellSelSetSupportsAlpha = objc.RegisterName("setSupportsAlpha:")
-	_nSColorWellSelMaximumLinearExposure = objc.RegisterName("maximumLinearExposure")
+	_clsNSColorWell                         = _objcClass("NSColorWell")
+	_nSColorWellSelColorWellWithStyle       = objc.RegisterName("colorWellWithStyle:")
+	_nSColorWellSelDeactivate               = objc.RegisterName("deactivate")
+	_nSColorWellSelActivate                 = objc.RegisterName("activate:")
+	_nSColorWellSelDrawWellInside           = objc.RegisterName("drawWellInside:")
+	_nSColorWellSelTakeColorFrom            = objc.RegisterName("takeColorFrom:")
+	_nSColorWellSelIsActive                 = objc.RegisterName("isActive")
+	_nSColorWellSelIsBordered               = objc.RegisterName("isBordered")
+	_nSColorWellSelSetBordered              = objc.RegisterName("setBordered:")
+	_nSColorWellSelColor                    = objc.RegisterName("color")
+	_nSColorWellSelSetColor                 = objc.RegisterName("setColor:")
+	_nSColorWellSelColorWellStyle           = objc.RegisterName("colorWellStyle")
+	_nSColorWellSelSetColorWellStyle        = objc.RegisterName("setColorWellStyle:")
+	_nSColorWellSelImage                    = objc.RegisterName("image")
+	_nSColorWellSelSetImage                 = objc.RegisterName("setImage:")
+	_nSColorWellSelPulldownTarget           = objc.RegisterName("pulldownTarget")
+	_nSColorWellSelSetPulldownTarget        = objc.RegisterName("setPulldownTarget:")
+	_nSColorWellSelPulldownAction           = objc.RegisterName("pulldownAction")
+	_nSColorWellSelSetPulldownAction        = objc.RegisterName("setPulldownAction:")
+	_nSColorWellSelSupportsAlpha            = objc.RegisterName("supportsAlpha")
+	_nSColorWellSelSetSupportsAlpha         = objc.RegisterName("setSupportsAlpha:")
+	_nSColorWellSelMaximumLinearExposure    = objc.RegisterName("maximumLinearExposure")
 	_nSColorWellSelSetMaximumLinearExposure = objc.RegisterName("setMaximumLinearExposure:")
 )
 
@@ -53,7 +53,9 @@ func NSColorWellFromID(id objc.ID) *NSColorWell {
 
 func NSColorWellColorWellWithStyle(style NSColorWellStyle) *NSColorWell {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorWell), _nSColorWellSelColorWellWithStyle, style)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorWellFromID(_ret)
 }
 
@@ -93,7 +95,9 @@ func (o *NSColorWell) SetBordered(bordered bool) {
 // Deprecated: This property will be deprecated in a future release.
 func (o *NSColorWell) Color() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorWellSelColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -113,7 +117,9 @@ func (o *NSColorWell) SetColorWellStyle(colorWellStyle NSColorWellStyle) {
 
 func (o *NSColorWell) Image() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorWellSelImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -160,4 +166,3 @@ func (o *NSColorWell) MaximumLinearExposure() float64 {
 func (o *NSColorWell) SetMaximumLinearExposure(maximumLinearExposure float64) {
 	o.Ptr().Send(_nSColorWellSelSetMaximumLinearExposure, maximumLinearExposure)
 }
-

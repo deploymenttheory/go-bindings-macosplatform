@@ -100,4 +100,3 @@ type WKSnapshotConfigurationable interface {
 }
 
 var _ WKSnapshotConfigurationable = (*WKSnapshotConfiguration)(nil)
-

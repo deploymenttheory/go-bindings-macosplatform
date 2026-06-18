@@ -15,20 +15,20 @@ type NSBackgroundActivityScheduler struct {
 }
 
 var (
-	_clsNSBackgroundActivityScheduler = _objcClass("NSBackgroundActivityScheduler")
-	_nSBackgroundActivitySchedulerSelInitWithIdentifier = objc.RegisterName("initWithIdentifier:")
-	_nSBackgroundActivitySchedulerSelScheduleWith = objc.RegisterName("scheduleWithBlock:")
-	_nSBackgroundActivitySchedulerSelInvalidate = objc.RegisterName("invalidate")
-	_nSBackgroundActivitySchedulerSelIdentifier = objc.RegisterName("identifier")
-	_nSBackgroundActivitySchedulerSelQualityOfService = objc.RegisterName("qualityOfService")
+	_clsNSBackgroundActivityScheduler                    = _objcClass("NSBackgroundActivityScheduler")
+	_nSBackgroundActivitySchedulerSelInitWithIdentifier  = objc.RegisterName("initWithIdentifier:")
+	_nSBackgroundActivitySchedulerSelScheduleWith        = objc.RegisterName("scheduleWithBlock:")
+	_nSBackgroundActivitySchedulerSelInvalidate          = objc.RegisterName("invalidate")
+	_nSBackgroundActivitySchedulerSelIdentifier          = objc.RegisterName("identifier")
+	_nSBackgroundActivitySchedulerSelQualityOfService    = objc.RegisterName("qualityOfService")
 	_nSBackgroundActivitySchedulerSelSetQualityOfService = objc.RegisterName("setQualityOfService:")
-	_nSBackgroundActivitySchedulerSelRepeats = objc.RegisterName("repeats")
-	_nSBackgroundActivitySchedulerSelSetRepeats = objc.RegisterName("setRepeats:")
-	_nSBackgroundActivitySchedulerSelInterval = objc.RegisterName("interval")
-	_nSBackgroundActivitySchedulerSelSetInterval = objc.RegisterName("setInterval:")
-	_nSBackgroundActivitySchedulerSelTolerance = objc.RegisterName("tolerance")
-	_nSBackgroundActivitySchedulerSelSetTolerance = objc.RegisterName("setTolerance:")
-	_nSBackgroundActivitySchedulerSelShouldDefer = objc.RegisterName("shouldDefer")
+	_nSBackgroundActivitySchedulerSelRepeats             = objc.RegisterName("repeats")
+	_nSBackgroundActivitySchedulerSelSetRepeats          = objc.RegisterName("setRepeats:")
+	_nSBackgroundActivitySchedulerSelInterval            = objc.RegisterName("interval")
+	_nSBackgroundActivitySchedulerSelSetInterval         = objc.RegisterName("setInterval:")
+	_nSBackgroundActivitySchedulerSelTolerance           = objc.RegisterName("tolerance")
+	_nSBackgroundActivitySchedulerSelSetTolerance        = objc.RegisterName("setTolerance:")
+	_nSBackgroundActivitySchedulerSelShouldDefer         = objc.RegisterName("shouldDefer")
 )
 
 func NSBackgroundActivitySchedulerFromID(id objc.ID) *NSBackgroundActivityScheduler {
@@ -43,7 +43,9 @@ func NSBackgroundActivitySchedulerFromID(id objc.ID) *NSBackgroundActivitySchedu
 
 func (o *NSBackgroundActivityScheduler) InitWithIdentifier(identifier *NSString) *NSBackgroundActivityScheduler {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBackgroundActivitySchedulerSelInitWithIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBackgroundActivitySchedulerFromID(_ret)
 }
 
@@ -64,7 +66,9 @@ func (o *NSBackgroundActivityScheduler) Invalidate() {
 
 func (o *NSBackgroundActivityScheduler) Identifier() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBackgroundActivitySchedulerSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -108,4 +112,3 @@ func (o *NSBackgroundActivityScheduler) ShouldDefer() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSBackgroundActivitySchedulerSelShouldDefer)
 	return _ret
 }
-

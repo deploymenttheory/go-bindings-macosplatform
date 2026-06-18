@@ -16,15 +16,15 @@ type NSFetchIndexElementDescription struct {
 }
 
 var (
-	_clsNSFetchIndexElementDescription = _objcClass("NSFetchIndexElementDescription")
+	_clsNSFetchIndexElementDescription                              = _objcClass("NSFetchIndexElementDescription")
 	_nSFetchIndexElementDescriptionSelInitWithPropertyCollationType = objc.RegisterName("initWithProperty:collationType:")
-	_nSFetchIndexElementDescriptionSelProperty = objc.RegisterName("property")
-	_nSFetchIndexElementDescriptionSelPropertyName = objc.RegisterName("propertyName")
-	_nSFetchIndexElementDescriptionSelCollationType = objc.RegisterName("collationType")
-	_nSFetchIndexElementDescriptionSelSetCollationType = objc.RegisterName("setCollationType:")
-	_nSFetchIndexElementDescriptionSelIsAscending = objc.RegisterName("isAscending")
-	_nSFetchIndexElementDescriptionSelSetAscending = objc.RegisterName("setAscending:")
-	_nSFetchIndexElementDescriptionSelIndexDescription = objc.RegisterName("indexDescription")
+	_nSFetchIndexElementDescriptionSelProperty                      = objc.RegisterName("property")
+	_nSFetchIndexElementDescriptionSelPropertyName                  = objc.RegisterName("propertyName")
+	_nSFetchIndexElementDescriptionSelCollationType                 = objc.RegisterName("collationType")
+	_nSFetchIndexElementDescriptionSelSetCollationType              = objc.RegisterName("setCollationType:")
+	_nSFetchIndexElementDescriptionSelIsAscending                   = objc.RegisterName("isAscending")
+	_nSFetchIndexElementDescriptionSelSetAscending                  = objc.RegisterName("setAscending:")
+	_nSFetchIndexElementDescriptionSelIndexDescription              = objc.RegisterName("indexDescription")
 )
 
 func NSFetchIndexElementDescriptionFromID(id objc.ID) *NSFetchIndexElementDescription {
@@ -39,19 +39,25 @@ func NSFetchIndexElementDescriptionFromID(id objc.ID) *NSFetchIndexElementDescri
 
 func (o *NSFetchIndexElementDescription) InitWithPropertyCollationType(property *NSPropertyDescription, collationType NSFetchIndexElementType) *NSFetchIndexElementDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchIndexElementDescriptionSelInitWithPropertyCollationType, property.Ptr(), collationType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFetchIndexElementDescriptionFromID(_ret)
 }
 
 func (o *NSFetchIndexElementDescription) Property() *NSPropertyDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchIndexElementDescriptionSelProperty)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPropertyDescriptionFromID(_ret)
 }
 
 func (o *NSFetchIndexElementDescription) PropertyName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchIndexElementDescriptionSelPropertyName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -75,7 +81,8 @@ func (o *NSFetchIndexElementDescription) SetAscending(ascending bool) {
 
 func (o *NSFetchIndexElementDescription) IndexDescription() *NSFetchIndexDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchIndexElementDescriptionSelIndexDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFetchIndexDescriptionFromID(_ret)
 }
-

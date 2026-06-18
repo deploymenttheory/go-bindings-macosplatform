@@ -19,9 +19,9 @@ type SFKeychainSettingsPanel struct {
 }
 
 var (
-	_clsSFKeychainSettingsPanel = _objcClass("SFKeychainSettingsPanel")
-	_sFKeychainSettingsPanelSelSharedKeychainSettingsPanel = objc.RegisterName("sharedKeychainSettingsPanel")
-	_sFKeychainSettingsPanelSelRunModalForSettingsKeychain = objc.RegisterName("runModalForSettings:keychain:")
+	_clsSFKeychainSettingsPanel                                                                          = _objcClass("SFKeychainSettingsPanel")
+	_sFKeychainSettingsPanelSelSharedKeychainSettingsPanel                                               = objc.RegisterName("sharedKeychainSettingsPanel")
+	_sFKeychainSettingsPanelSelRunModalForSettingsKeychain                                               = objc.RegisterName("runModalForSettings:keychain:")
 	_sFKeychainSettingsPanelSelBeginSheetForWindowModalDelegateDidEndSelectorContextInfoSettingsKeychain = objc.RegisterName("beginSheetForWindow:modalDelegate:didEndSelector:contextInfo:settings:keychain:")
 )
 
@@ -38,7 +38,9 @@ func SFKeychainSettingsPanelFromID(id objc.ID) *SFKeychainSettingsPanel {
 // @method sharedKeychainSettingsPanel @abstract Returns a global instance of SFKeychainSettingsPanel object.
 func SFKeychainSettingsPanelSharedKeychainSettingsPanel() *SFKeychainSettingsPanel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSFKeychainSettingsPanel), _sFKeychainSettingsPanelSelSharedKeychainSettingsPanel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SFKeychainSettingsPanelFromID(_ret)
 }
 
@@ -52,4 +54,3 @@ func (o *SFKeychainSettingsPanel) RunModalForSettingsKeychain(settings *security
 func (o *SFKeychainSettingsPanel) BeginSheetForWindowModalDelegateDidEndSelectorContextInfoSettingsKeychain(docWindow *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer, settings *security.SecKeychainSettings, keychain unsafe.Pointer) {
 	o.Ptr().Send(_sFKeychainSettingsPanelSelBeginSheetForWindowModalDelegateDidEndSelectorContextInfoSettingsKeychain, docWindow.Ptr(), delegate, didEndSelector, contextInfo, settings, keychain)
 }
-

@@ -101,7 +101,9 @@ func (x *OpenPanel) WithAllowedContentTypes(items ...*uniformtypeidentifiers.UTT
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*uniformtypeidentifiers.UTType](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -195,7 +197,9 @@ func (x *OpenPanel) WithTagNames(items ...*foundation.NSString) *OpenPanel {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -217,7 +221,9 @@ func (x *OpenPanel) WithAllowedFileTypes(items ...*foundation.NSString) *OpenPan
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -281,7 +287,9 @@ func (x *OpenPanel) WithTitlebarAccessoryViewControllers(items ...*raw.NSTitleba
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSTitlebarAccessoryViewController](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -804,7 +812,9 @@ func (x *OpenPanel) asPanel() *raw.NSPanel { return &x.inner.NSSavePanel.NSPanel
 
 func (x *OpenPanel) asWindow() *raw.NSWindow { return &x.inner.NSSavePanel.NSPanel.NSWindow }
 
-func (x *OpenPanel) asResponder() *raw.NSResponder { return &x.inner.NSSavePanel.NSPanel.NSWindow.NSResponder }
+func (x *OpenPanel) asResponder() *raw.NSResponder {
+	return &x.inner.NSSavePanel.NSPanel.NSWindow.NSResponder
+}
 
 // OpenPanelable is the interface implemented by [OpenPanel], for mocking and DI.
 type OpenPanelable interface {
@@ -934,4 +944,3 @@ type OpenPanelable interface {
 }
 
 var _ OpenPanelable = (*OpenPanel)(nil)
-

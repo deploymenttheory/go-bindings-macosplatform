@@ -16,12 +16,12 @@ type AVFragmentedMovieMinder struct {
 }
 
 var (
-	_clsAVFragmentedMovieMinder = _objcClass("AVFragmentedMovieMinder")
+	_clsAVFragmentedMovieMinder                                              = _objcClass("AVFragmentedMovieMinder")
 	_aVFragmentedMovieMinderSelFragmentedMovieMinderWithMovieMindingInterval = objc.RegisterName("fragmentedMovieMinderWithMovie:mindingInterval:")
-	_aVFragmentedMovieMinderSelInitWithMovieMindingInterval = objc.RegisterName("initWithMovie:mindingInterval:")
-	_aVFragmentedMovieMinderSelAddFragmentedMovie = objc.RegisterName("addFragmentedMovie:")
-	_aVFragmentedMovieMinderSelRemoveFragmentedMovie = objc.RegisterName("removeFragmentedMovie:")
-	_aVFragmentedMovieMinderSelMovies = objc.RegisterName("movies")
+	_aVFragmentedMovieMinderSelInitWithMovieMindingInterval                  = objc.RegisterName("initWithMovie:mindingInterval:")
+	_aVFragmentedMovieMinderSelAddFragmentedMovie                            = objc.RegisterName("addFragmentedMovie:")
+	_aVFragmentedMovieMinderSelRemoveFragmentedMovie                         = objc.RegisterName("removeFragmentedMovie:")
+	_aVFragmentedMovieMinderSelMovies                                        = objc.RegisterName("movies")
 )
 
 func AVFragmentedMovieMinderFromID(id objc.ID) *AVFragmentedMovieMinder {
@@ -37,14 +37,18 @@ func AVFragmentedMovieMinderFromID(id objc.ID) *AVFragmentedMovieMinder {
 // @method			fragmentedMovieMinderWithMovie:mindingInterval: @abstract       Creates an AVFragmentedMovieMinder, adds the specified movie to it, and sets the mindingInterval to the specified value. @param			movie An instance of AVFragmentedMovie to add to the AVFragmentedMovieMinder @param			mindingInterval The initial minding interval of the AVFragmentedMovieMinder. @result			A new instance of AVFragmentedMovieMinder.
 func AVFragmentedMovieMinderFragmentedMovieMinderWithMovieMindingInterval(movie *AVFragmentedMovie, mindingInterval float64) *AVFragmentedMovieMinder {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVFragmentedMovieMinder), _aVFragmentedMovieMinderSelFragmentedMovieMinderWithMovieMindingInterval, movie.Ptr(), mindingInterval)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVFragmentedMovieMinderFromID(_ret)
 }
 
 // @method			initWithMovie:mindingInterval: @abstract       Creates an AVFragmentedMovieMinder, adds the specified movie to it, and sets the mindingInterval to the specified value. @param			movie An instance of AVFragmentedMovie to add to the AVFragmentedMovieMinder @param			mindingInterval The initial minding interval of the AVFragmentedMovieMinder. @result			A new instance of AVFragmentedMovieMinder.
 func (o *AVFragmentedMovieMinder) InitWithMovieMindingInterval(movie *AVFragmentedMovie, mindingInterval float64) *AVFragmentedMovieMinder {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVFragmentedMovieMinderSelInitWithMovieMindingInterval, movie.Ptr(), mindingInterval)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVFragmentedMovieMinderFromID(_ret)
 }
 
@@ -61,7 +65,8 @@ func (o *AVFragmentedMovieMinder) RemoveFragmentedMovie(movie *AVFragmentedMovie
 // @property       movies @abstract       An NSArray of the AVFragmentedMovie objects being minded.
 func (o *AVFragmentedMovieMinder) Movies() *foundation.NSArray[*AVFragmentedMovie] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVFragmentedMovieMinderSelMovies)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVFragmentedMovie](_ret)
 }
-

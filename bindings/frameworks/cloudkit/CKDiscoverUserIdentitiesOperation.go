@@ -19,14 +19,14 @@ type CKDiscoverUserIdentitiesOperation struct {
 }
 
 var (
-	_clsCKDiscoverUserIdentitiesOperation = _objcClass("CKDiscoverUserIdentitiesOperation")
-	_cKDiscoverUserIdentitiesOperationSelInit = objc.RegisterName("init")
-	_cKDiscoverUserIdentitiesOperationSelInitWithUserIdentityLookupInfos = objc.RegisterName("initWithUserIdentityLookupInfos:")
-	_cKDiscoverUserIdentitiesOperationSelUserIdentityLookupInfos = objc.RegisterName("userIdentityLookupInfos")
-	_cKDiscoverUserIdentitiesOperationSelSetUserIdentityLookupInfos = objc.RegisterName("setUserIdentityLookupInfos:")
-	_cKDiscoverUserIdentitiesOperationSelUserIdentityDiscoveredBlock = objc.RegisterName("userIdentityDiscoveredBlock")
-	_cKDiscoverUserIdentitiesOperationSelSetUserIdentityDiscoveredBlock = objc.RegisterName("setUserIdentityDiscoveredBlock:")
-	_cKDiscoverUserIdentitiesOperationSelDiscoverUserIdentitiesCompletionBlock = objc.RegisterName("discoverUserIdentitiesCompletionBlock")
+	_clsCKDiscoverUserIdentitiesOperation                                         = _objcClass("CKDiscoverUserIdentitiesOperation")
+	_cKDiscoverUserIdentitiesOperationSelInit                                     = objc.RegisterName("init")
+	_cKDiscoverUserIdentitiesOperationSelInitWithUserIdentityLookupInfos          = objc.RegisterName("initWithUserIdentityLookupInfos:")
+	_cKDiscoverUserIdentitiesOperationSelUserIdentityLookupInfos                  = objc.RegisterName("userIdentityLookupInfos")
+	_cKDiscoverUserIdentitiesOperationSelSetUserIdentityLookupInfos               = objc.RegisterName("setUserIdentityLookupInfos:")
+	_cKDiscoverUserIdentitiesOperationSelUserIdentityDiscoveredBlock              = objc.RegisterName("userIdentityDiscoveredBlock")
+	_cKDiscoverUserIdentitiesOperationSelSetUserIdentityDiscoveredBlock           = objc.RegisterName("setUserIdentityDiscoveredBlock:")
+	_cKDiscoverUserIdentitiesOperationSelDiscoverUserIdentitiesCompletionBlock    = objc.RegisterName("discoverUserIdentitiesCompletionBlock")
 	_cKDiscoverUserIdentitiesOperationSelSetDiscoverUserIdentitiesCompletionBlock = objc.RegisterName("setDiscoverUserIdentitiesCompletionBlock:")
 )
 
@@ -43,21 +43,27 @@ func CKDiscoverUserIdentitiesOperationFromID(id objc.ID) *CKDiscoverUserIdentiti
 // Creates an operation for discovering user identities. You can use the operation only once. Create a new operation for each subsequent search.
 func (o *CKDiscoverUserIdentitiesOperation) Init() *CKDiscoverUserIdentitiesOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKDiscoverUserIdentitiesOperationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKDiscoverUserIdentitiesOperationFromID(_ret)
 }
 
-// Creates an operation for discovering the user identities of the specified lookup infos. - Parameters: - userIdentityLookupInfos: An array that contains instances of ``CKUserIdentity/LookupInfo``. CloudKit uses this parameter as the default value for the ``CKDiscoverUserIdentitiesOperation/userIdentityLookupInfos`` property. If you specify `nil`, you must assign a value to that property before you execute the operation. After you create the operation, assign a handler to ``CKDiscoverUserIdentitiesOperation/discoverUserIdentitiesCompletionBlock`` so that you can process the search results.
+// Creates an operation for discovering the user identities of the specified lookup infos. - Parameters: - userIdentityLookupInfos: An array that contains instances of “CKUserIdentity/LookupInfo“. CloudKit uses this parameter as the default value for the “CKDiscoverUserIdentitiesOperation/userIdentityLookupInfos“ property. If you specify `nil`, you must assign a value to that property before you execute the operation. After you create the operation, assign a handler to “CKDiscoverUserIdentitiesOperation/discoverUserIdentitiesCompletionBlock“ so that you can process the search results.
 func (o *CKDiscoverUserIdentitiesOperation) InitWithUserIdentityLookupInfos(userIdentityLookupInfos *foundation.NSArray[*CKUserIdentityLookupInfo]) *CKDiscoverUserIdentitiesOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKDiscoverUserIdentitiesOperationSelInitWithUserIdentityLookupInfos, userIdentityLookupInfos.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKDiscoverUserIdentitiesOperationFromID(_ret)
 }
 
 // The lookup info for discovering user identities. Use this property to view or change the lookup info that CloudKit uses to discover user identities. If you intend to modify this property's value, do so before you execute the operation or submit it to a queue.
 func (o *CKDiscoverUserIdentitiesOperation) UserIdentityLookupInfos() *foundation.NSArray[*CKUserIdentityLookupInfo] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKDiscoverUserIdentitiesOperationSelUserIdentityLookupInfos)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CKUserIdentityLookupInfo](_ret)
 }
 
@@ -104,4 +110,3 @@ func (o *CKDiscoverUserIdentitiesOperation) SetDiscoverUserIdentitiesCompletionB
 	}
 	o.Ptr().Send(_cKDiscoverUserIdentitiesOperationSelSetDiscoverUserIdentitiesCompletionBlock, __block_discoverUserIdentitiesCompletionBlock)
 }
-

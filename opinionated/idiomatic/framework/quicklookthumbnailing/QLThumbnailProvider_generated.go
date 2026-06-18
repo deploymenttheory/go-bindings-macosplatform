@@ -71,4 +71,3 @@ type ThumbnailProviderable interface {
 }
 
 var _ ThumbnailProviderable = (*ThumbnailProvider)(nil)
-

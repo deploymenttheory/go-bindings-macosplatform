@@ -11,9 +11,9 @@ import (
 type BLAS_THREADING uint32
 
 const (
-	BLAS_THREADING_MULTI_THREADED BLAS_THREADING = 0
+	BLAS_THREADING_MULTI_THREADED  BLAS_THREADING = 0
 	BLAS_THREADING_SINGLE_THREADED BLAS_THREADING = 1
-	BLAS_THREADING_MAX_OPTIONS BLAS_THREADING = 2
+	BLAS_THREADING_MAX_OPTIONS     BLAS_THREADING = 2
 )
 
 func (e BLAS_THREADING) String() string {
@@ -50,10 +50,10 @@ func (e CBLAS_ORDER) String() string {
 type CBLAS_TRANSPOSE int64
 
 const (
-	CblasNoTrans CBLAS_TRANSPOSE = 111
-	CblasTrans CBLAS_TRANSPOSE = 112
+	CblasNoTrans   CBLAS_TRANSPOSE = 111
+	CblasTrans     CBLAS_TRANSPOSE = 112
 	CblasConjTrans CBLAS_TRANSPOSE = 113
-	AtlasConj CBLAS_TRANSPOSE = 114
+	AtlasConj      CBLAS_TRANSPOSE = 114
 )
 
 func (e CBLAS_TRANSPOSE) String() string {
@@ -74,9 +74,9 @@ func (e CBLAS_TRANSPOSE) String() string {
 type VDSP_DCT_Type int32
 
 const (
-	VDSP_DCT_II VDSP_DCT_Type = 2
+	VDSP_DCT_II  VDSP_DCT_Type = 2
 	VDSP_DCT_III VDSP_DCT_Type = 3
-	VDSP_DCT_IV VDSP_DCT_Type = 4
+	VDSP_DCT_IV  VDSP_DCT_Type = 4
 )
 
 func (e VDSP_DCT_Type) String() string {
@@ -114,7 +114,7 @@ type VDSP_DFT_RealtoComplex int64
 
 const (
 	VDSP_DFT_Interleaved_ComplextoComplex VDSP_DFT_RealtoComplex = 0
-	VDSP_DFT_Interleaved_RealtoComplex VDSP_DFT_RealtoComplex = 1
+	VDSP_DFT_Interleaved_RealtoComplex    VDSP_DFT_RealtoComplex = 1
 )
 
 func (e VDSP_DFT_RealtoComplex) String() string {
@@ -127,4 +127,3 @@ func (e VDSP_DFT_RealtoComplex) String() string {
 		return fmt.Sprintf("VDSP_DFT_RealtoComplex(%d)", int64(e))
 	}
 }
-

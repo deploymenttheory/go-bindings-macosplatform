@@ -18,9 +18,9 @@ type AVVideoCompositionLayerInstruction struct {
 }
 
 var (
-	_clsAVVideoCompositionLayerInstruction = _objcClass("AVVideoCompositionLayerInstruction")
-	_aVVideoCompositionLayerInstructionSelGetTransformRampForTimeStartTransformEndTransformTimeRange = objc.RegisterName("getTransformRampForTime:startTransform:endTransform:timeRange:")
-	_aVVideoCompositionLayerInstructionSelGetOpacityRampForTimeStartOpacityEndOpacityTimeRange = objc.RegisterName("getOpacityRampForTime:startOpacity:endOpacity:timeRange:")
+	_clsAVVideoCompositionLayerInstruction                                                                       = _objcClass("AVVideoCompositionLayerInstruction")
+	_aVVideoCompositionLayerInstructionSelGetTransformRampForTimeStartTransformEndTransformTimeRange             = objc.RegisterName("getTransformRampForTime:startTransform:endTransform:timeRange:")
+	_aVVideoCompositionLayerInstructionSelGetOpacityRampForTimeStartOpacityEndOpacityTimeRange                   = objc.RegisterName("getOpacityRampForTime:startOpacity:endOpacity:timeRange:")
 	_aVVideoCompositionLayerInstructionSelGetCropRectangleRampForTimeStartCropRectangleEndCropRectangleTimeRange = objc.RegisterName("getCropRectangleRampForTime:startCropRectangle:endCropRectangle:timeRange:")
 )
 
@@ -51,4 +51,3 @@ func (o *AVVideoCompositionLayerInstruction) GetCropRectangleRampForTimeStartCro
 	_ret := objc.Send[bool](o.Ptr(), _aVVideoCompositionLayerInstructionSelGetCropRectangleRampForTimeStartCropRectangleEndCropRectangleTimeRange, time_, startCropRectangle, endCropRectangle, timeRange)
 	return _ret
 }
-

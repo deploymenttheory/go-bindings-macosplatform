@@ -85,4 +85,3 @@ type Headingable interface {
 }
 
 var _ Headingable = (*Heading)(nil)
-

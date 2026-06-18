@@ -19,7 +19,9 @@ type MTRBaseClusterOnOffSwitchConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterOnOffSwitchConfiguration].
-func (x *MTRBaseClusterOnOffSwitchConfiguration) Unwrap() *raw.MTRBaseClusterOnOffSwitchConfiguration { return x.inner }
+func (x *MTRBaseClusterOnOffSwitchConfiguration) Unwrap() *raw.MTRBaseClusterOnOffSwitchConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -511,9 +513,13 @@ func (x *MTRBaseClusterOnOffSwitchConfiguration) SubscribeAttributeClusterRevisi
 	}
 }
 
-func (x *MTRBaseClusterOnOffSwitchConfiguration) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterOnOffSwitchConfiguration) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterOnOffSwitchConfiguration) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterOnOffSwitchConfiguration) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterOnOffSwitchConfigurationable is the interface implemented by [MTRBaseClusterOnOffSwitchConfiguration], for mocking and DI.
 type MTRBaseClusterOnOffSwitchConfigurationable interface {
@@ -553,4 +559,3 @@ type MTRBaseClusterOnOffSwitchConfigurationable interface {
 }
 
 var _ MTRBaseClusterOnOffSwitchConfigurationable = (*MTRBaseClusterOnOffSwitchConfiguration)(nil)
-

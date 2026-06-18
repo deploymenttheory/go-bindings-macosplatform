@@ -65,7 +65,9 @@ func (x *FaceLandmarkRegion2D) PointsClassification() raw.VNPointsClassification
 	return x.inner.PointsClassification()
 }
 
-func (x *FaceLandmarkRegion2D) asFaceLandmarkRegion() *raw.VNFaceLandmarkRegion { return &x.inner.VNFaceLandmarkRegion }
+func (x *FaceLandmarkRegion2D) asFaceLandmarkRegion() *raw.VNFaceLandmarkRegion {
+	return &x.inner.VNFaceLandmarkRegion
+}
 
 // FaceLandmarkRegion2Dable is the interface implemented by [FaceLandmarkRegion2D], for mocking and DI.
 type FaceLandmarkRegion2Dable interface {
@@ -77,4 +79,3 @@ type FaceLandmarkRegion2Dable interface {
 }
 
 var _ FaceLandmarkRegion2Dable = (*FaceLandmarkRegion2D)(nil)
-

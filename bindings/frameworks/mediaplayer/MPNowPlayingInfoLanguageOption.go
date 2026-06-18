@@ -16,15 +16,15 @@ type MPNowPlayingInfoLanguageOption struct {
 }
 
 var (
-	_clsMPNowPlayingInfoLanguageOption = _objcClass("MPNowPlayingInfoLanguageOption")
+	_clsMPNowPlayingInfoLanguageOption                                                            = _objcClass("MPNowPlayingInfoLanguageOption")
 	_mPNowPlayingInfoLanguageOptionSelInitWithTypeLanguageTagCharacteristicsDisplayNameIdentifier = objc.RegisterName("initWithType:languageTag:characteristics:displayName:identifier:")
-	_mPNowPlayingInfoLanguageOptionSelIsAutomaticLegibleLanguageOption = objc.RegisterName("isAutomaticLegibleLanguageOption")
-	_mPNowPlayingInfoLanguageOptionSelIsAutomaticAudibleLanguageOption = objc.RegisterName("isAutomaticAudibleLanguageOption")
-	_mPNowPlayingInfoLanguageOptionSelLanguageOptionType = objc.RegisterName("languageOptionType")
-	_mPNowPlayingInfoLanguageOptionSelLanguageTag = objc.RegisterName("languageTag")
-	_mPNowPlayingInfoLanguageOptionSelLanguageOptionCharacteristics = objc.RegisterName("languageOptionCharacteristics")
-	_mPNowPlayingInfoLanguageOptionSelDisplayName = objc.RegisterName("displayName")
-	_mPNowPlayingInfoLanguageOptionSelIdentifier = objc.RegisterName("identifier")
+	_mPNowPlayingInfoLanguageOptionSelIsAutomaticLegibleLanguageOption                            = objc.RegisterName("isAutomaticLegibleLanguageOption")
+	_mPNowPlayingInfoLanguageOptionSelIsAutomaticAudibleLanguageOption                            = objc.RegisterName("isAutomaticAudibleLanguageOption")
+	_mPNowPlayingInfoLanguageOptionSelLanguageOptionType                                          = objc.RegisterName("languageOptionType")
+	_mPNowPlayingInfoLanguageOptionSelLanguageTag                                                 = objc.RegisterName("languageTag")
+	_mPNowPlayingInfoLanguageOptionSelLanguageOptionCharacteristics                               = objc.RegisterName("languageOptionCharacteristics")
+	_mPNowPlayingInfoLanguageOptionSelDisplayName                                                 = objc.RegisterName("displayName")
+	_mPNowPlayingInfoLanguageOptionSelIdentifier                                                  = objc.RegisterName("identifier")
 )
 
 func MPNowPlayingInfoLanguageOptionFromID(id objc.ID) *MPNowPlayingInfoLanguageOption {
@@ -39,7 +39,9 @@ func MPNowPlayingInfoLanguageOptionFromID(id objc.ID) *MPNowPlayingInfoLanguageO
 
 func (o *MPNowPlayingInfoLanguageOption) InitWithTypeLanguageTagCharacteristicsDisplayNameIdentifier(languageOptionType MPNowPlayingInfoLanguageOptionType, languageTag *foundation.NSString, languageOptionCharacteristics *foundation.NSArray[*foundation.NSString], displayName *foundation.NSString, identifier *foundation.NSString) *MPNowPlayingInfoLanguageOption {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPNowPlayingInfoLanguageOptionSelInitWithTypeLanguageTagCharacteristicsDisplayNameIdentifier, languageOptionType, languageTag.Ptr(), languageOptionCharacteristics, displayName.Ptr(), identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPNowPlayingInfoLanguageOptionFromID(_ret)
 }
 
@@ -64,7 +66,9 @@ func (o *MPNowPlayingInfoLanguageOption) LanguageOptionType() MPNowPlayingInfoLa
 // The IETF BCP 47 language tag. A nil languageTag reprsents that this option should be disabled. A languageTag with the value of MPLangaugeOptionAutoLangaugeTag represents that the best langauge based on the system preferences should be used.
 func (o *MPNowPlayingInfoLanguageOption) LanguageTag() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPNowPlayingInfoLanguageOptionSelLanguageTag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -77,14 +81,17 @@ func (o *MPNowPlayingInfoLanguageOption) LanguageOptionCharacteristics() *founda
 // A user presentable display name for this option.
 func (o *MPNowPlayingInfoLanguageOption) DisplayName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPNowPlayingInfoLanguageOptionSelDisplayName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // A unique identifier representing this option.
 func (o *MPNowPlayingInfoLanguageOption) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPNowPlayingInfoLanguageOptionSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

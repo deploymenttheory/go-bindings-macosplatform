@@ -17,30 +17,30 @@ type NSPreferencePane struct {
 }
 
 var (
-	_clsNSPreferencePane = _objcClass("NSPreferencePane")
-	_nSPreferencePaneSelInitWithBundle = objc.RegisterName("initWithBundle:")
-	_nSPreferencePaneSelLoadMainView = objc.RegisterName("loadMainView")
-	_nSPreferencePaneSelMainViewDidLoad = objc.RegisterName("mainViewDidLoad")
-	_nSPreferencePaneSelAssignMainView = objc.RegisterName("assignMainView")
-	_nSPreferencePaneSelWillSelect = objc.RegisterName("willSelect")
-	_nSPreferencePaneSelDidSelect = objc.RegisterName("didSelect")
-	_nSPreferencePaneSelReplyToShouldUnselect = objc.RegisterName("replyToShouldUnselect:")
-	_nSPreferencePaneSelWillUnselect = objc.RegisterName("willUnselect")
-	_nSPreferencePaneSelDidUnselect = objc.RegisterName("didUnselect")
+	_clsNSPreferencePane                        = _objcClass("NSPreferencePane")
+	_nSPreferencePaneSelInitWithBundle          = objc.RegisterName("initWithBundle:")
+	_nSPreferencePaneSelLoadMainView            = objc.RegisterName("loadMainView")
+	_nSPreferencePaneSelMainViewDidLoad         = objc.RegisterName("mainViewDidLoad")
+	_nSPreferencePaneSelAssignMainView          = objc.RegisterName("assignMainView")
+	_nSPreferencePaneSelWillSelect              = objc.RegisterName("willSelect")
+	_nSPreferencePaneSelDidSelect               = objc.RegisterName("didSelect")
+	_nSPreferencePaneSelReplyToShouldUnselect   = objc.RegisterName("replyToShouldUnselect:")
+	_nSPreferencePaneSelWillUnselect            = objc.RegisterName("willUnselect")
+	_nSPreferencePaneSelDidUnselect             = objc.RegisterName("didUnselect")
 	_nSPreferencePaneSelUpdateHelpMenuWithArray = objc.RegisterName("updateHelpMenuWithArray:")
-	_nSPreferencePaneSelBundle = objc.RegisterName("bundle")
-	_nSPreferencePaneSelMainNibName = objc.RegisterName("mainNibName")
-	_nSPreferencePaneSelShouldUnselect = objc.RegisterName("shouldUnselect")
-	_nSPreferencePaneSelMainView = objc.RegisterName("mainView")
-	_nSPreferencePaneSelSetMainView = objc.RegisterName("setMainView:")
-	_nSPreferencePaneSelInitialKeyView = objc.RegisterName("initialKeyView")
-	_nSPreferencePaneSelSetInitialKeyView = objc.RegisterName("setInitialKeyView:")
-	_nSPreferencePaneSelFirstKeyView = objc.RegisterName("firstKeyView")
-	_nSPreferencePaneSelSetFirstKeyView = objc.RegisterName("setFirstKeyView:")
-	_nSPreferencePaneSelLastKeyView = objc.RegisterName("lastKeyView")
-	_nSPreferencePaneSelSetLastKeyView = objc.RegisterName("setLastKeyView:")
-	_nSPreferencePaneSelAutoSaveTextFields = objc.RegisterName("autoSaveTextFields")
-	_nSPreferencePaneSelIsSelected = objc.RegisterName("isSelected")
+	_nSPreferencePaneSelBundle                  = objc.RegisterName("bundle")
+	_nSPreferencePaneSelMainNibName             = objc.RegisterName("mainNibName")
+	_nSPreferencePaneSelShouldUnselect          = objc.RegisterName("shouldUnselect")
+	_nSPreferencePaneSelMainView                = objc.RegisterName("mainView")
+	_nSPreferencePaneSelSetMainView             = objc.RegisterName("setMainView:")
+	_nSPreferencePaneSelInitialKeyView          = objc.RegisterName("initialKeyView")
+	_nSPreferencePaneSelSetInitialKeyView       = objc.RegisterName("setInitialKeyView:")
+	_nSPreferencePaneSelFirstKeyView            = objc.RegisterName("firstKeyView")
+	_nSPreferencePaneSelSetFirstKeyView         = objc.RegisterName("setFirstKeyView:")
+	_nSPreferencePaneSelLastKeyView             = objc.RegisterName("lastKeyView")
+	_nSPreferencePaneSelSetLastKeyView          = objc.RegisterName("setLastKeyView:")
+	_nSPreferencePaneSelAutoSaveTextFields      = objc.RegisterName("autoSaveTextFields")
+	_nSPreferencePaneSelIsSelected              = objc.RegisterName("isSelected")
 )
 
 func NSPreferencePaneFromID(id objc.ID) *NSPreferencePane {
@@ -55,13 +55,17 @@ func NSPreferencePaneFromID(id objc.ID) *NSPreferencePane {
 
 func (o *NSPreferencePane) InitWithBundle(bundle *foundation.NSBundle) *NSPreferencePane {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPreferencePaneSelInitWithBundle, bundle.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPreferencePaneFromID(_ret)
 }
 
 func (o *NSPreferencePane) LoadMainView() *appkit.NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPreferencePaneSelLoadMainView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSViewFromID(_ret)
 }
 
@@ -99,13 +103,17 @@ func (o *NSPreferencePane) UpdateHelpMenuWithArray(inArrayOfMenuItems *foundatio
 
 func (o *NSPreferencePane) Bundle() *foundation.NSBundle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPreferencePaneSelBundle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSBundleFromID(_ret)
 }
 
 func (o *NSPreferencePane) MainNibName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPreferencePaneSelMainNibName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -116,7 +124,9 @@ func (o *NSPreferencePane) ShouldUnselect() NSPreferencePaneUnselectReply {
 
 func (o *NSPreferencePane) MainView() *appkit.NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPreferencePaneSelMainView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSViewFromID(_ret)
 }
 
@@ -126,7 +136,9 @@ func (o *NSPreferencePane) SetMainView(mainView *appkit.NSView) {
 
 func (o *NSPreferencePane) InitialKeyView() *appkit.NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPreferencePaneSelInitialKeyView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSViewFromID(_ret)
 }
 
@@ -136,7 +148,9 @@ func (o *NSPreferencePane) SetInitialKeyView(initialKeyView *appkit.NSView) {
 
 func (o *NSPreferencePane) FirstKeyView() *appkit.NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPreferencePaneSelFirstKeyView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSViewFromID(_ret)
 }
 
@@ -146,7 +160,9 @@ func (o *NSPreferencePane) SetFirstKeyView(firstKeyView *appkit.NSView) {
 
 func (o *NSPreferencePane) LastKeyView() *appkit.NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPreferencePaneSelLastKeyView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSViewFromID(_ret)
 }
 
@@ -163,4 +179,3 @@ func (o *NSPreferencePane) IsSelected() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPreferencePaneSelIsSelected)
 	return _ret
 }
-

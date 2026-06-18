@@ -16,11 +16,11 @@ type MLCSliceLayer struct {
 }
 
 var (
-	_clsMLCSliceLayer = _objcClass("MLCSliceLayer")
+	_clsMLCSliceLayer                             = _objcClass("MLCSliceLayer")
 	_mLCSliceLayerSelSliceLayerWithStartEndStride = objc.RegisterName("sliceLayerWithStart:end:stride:")
-	_mLCSliceLayerSelStart = objc.RegisterName("start")
-	_mLCSliceLayerSelEnd = objc.RegisterName("end")
-	_mLCSliceLayerSelStride = objc.RegisterName("stride")
+	_mLCSliceLayerSelStart                        = objc.RegisterName("start")
+	_mLCSliceLayerSelEnd                          = objc.RegisterName("end")
+	_mLCSliceLayerSelStride                       = objc.RegisterName("stride")
 )
 
 func MLCSliceLayerFromID(id objc.ID) *MLCSliceLayer {
@@ -36,7 +36,9 @@ func MLCSliceLayerFromID(id objc.ID) *MLCSliceLayer {
 // @abstract Create a slice layer @param    stride If set to nil, it will be set to 1. @return   A new layer for slicing tensors.
 func MLCSliceLayerSliceLayerWithStartEndStride(start *foundation.NSArray[*foundation.NSNumber], end *foundation.NSArray[*foundation.NSNumber], stride *foundation.NSArray[*foundation.NSNumber]) *MLCSliceLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCSliceLayer), _mLCSliceLayerSelSliceLayerWithStartEndStride, start, end, stride)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCSliceLayerFromID(_ret)
 }
 
@@ -57,4 +59,3 @@ func (o *MLCSliceLayer) Stride() *foundation.NSArray[*foundation.NSNumber] {
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mLCSliceLayerSelStride)
 	return _ret
 }
-

@@ -20,17 +20,17 @@ type IOBluetoothObjectPushUIController struct {
 }
 
 var (
-	_clsIOBluetoothObjectPushUIController = _objcClass("IOBluetoothObjectPushUIController")
-	_iOBluetoothObjectPushUIControllerSelInitObjectPushWithBluetoothDeviceWithFilesDelegate = objc.RegisterName("initObjectPushWithBluetoothDevice:withFiles:delegate:")
-	_iOBluetoothObjectPushUIControllerSelRunModal = objc.RegisterName("runModal")
-	_iOBluetoothObjectPushUIControllerSelRunPanel = objc.RegisterName("runPanel")
+	_clsIOBluetoothObjectPushUIController                                                               = _objcClass("IOBluetoothObjectPushUIController")
+	_iOBluetoothObjectPushUIControllerSelInitObjectPushWithBluetoothDeviceWithFilesDelegate             = objc.RegisterName("initObjectPushWithBluetoothDevice:withFiles:delegate:")
+	_iOBluetoothObjectPushUIControllerSelRunModal                                                       = objc.RegisterName("runModal")
+	_iOBluetoothObjectPushUIControllerSelRunPanel                                                       = objc.RegisterName("runPanel")
 	_iOBluetoothObjectPushUIControllerSelBeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo = objc.RegisterName("beginSheetModalForWindow:modalDelegate:didEndSelector:contextInfo:")
-	_iOBluetoothObjectPushUIControllerSelStop = objc.RegisterName("stop")
-	_iOBluetoothObjectPushUIControllerSelSetTitle = objc.RegisterName("setTitle:")
-	_iOBluetoothObjectPushUIControllerSelGetTitle = objc.RegisterName("getTitle")
-	_iOBluetoothObjectPushUIControllerSelSetIconImage = objc.RegisterName("setIconImage:")
-	_iOBluetoothObjectPushUIControllerSelGetDevice = objc.RegisterName("getDevice")
-	_iOBluetoothObjectPushUIControllerSelIsTransferInProgress = objc.RegisterName("isTransferInProgress")
+	_iOBluetoothObjectPushUIControllerSelStop                                                           = objc.RegisterName("stop")
+	_iOBluetoothObjectPushUIControllerSelSetTitle                                                       = objc.RegisterName("setTitle:")
+	_iOBluetoothObjectPushUIControllerSelGetTitle                                                       = objc.RegisterName("getTitle")
+	_iOBluetoothObjectPushUIControllerSelSetIconImage                                                   = objc.RegisterName("setIconImage:")
+	_iOBluetoothObjectPushUIControllerSelGetDevice                                                      = objc.RegisterName("getDevice")
+	_iOBluetoothObjectPushUIControllerSelIsTransferInProgress                                           = objc.RegisterName("isTransferInProgress")
 )
 
 func IOBluetoothObjectPushUIControllerFromID(id objc.ID) *IOBluetoothObjectPushUIController {
@@ -46,7 +46,9 @@ func IOBluetoothObjectPushUIControllerFromID(id objc.ID) *IOBluetoothObjectPushU
 // @method		initObjectPushWithBluetoothDevice: withFiles: delegate: @abstract	Creates and returns a new IOBluetoothObjectPush object @discussion	The event delegate should implement a single delegate method: - (void) objectPushComplete: (IOBluetoothObjectPushUIController*) inPusher The method will be called when the transaction is complete and should be used to release the push object by the delegate. If no delegate is set the object will release itself when the transfer is finished. @param		inDevice	The remote device to send the files to @param		inFiles		An array of file paths to send @param		inDelegate  A delegate object that implements the single method above.  If no delegate is specified this object will release itself when the transaction is complete. @result		An IOBluetoothObjectPushUIController object on success, nil on fail.
 func (o *IOBluetoothObjectPushUIController) InitObjectPushWithBluetoothDeviceWithFilesDelegate(inDevice *iobluetooth.IOBluetoothDevice, inFiles *foundation.NSArray[objc.ID], inDelegate objc.ID) *IOBluetoothObjectPushUIController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothObjectPushUIControllerSelInitObjectPushWithBluetoothDeviceWithFilesDelegate, inDevice.Ptr(), inFiles, inDelegate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothObjectPushUIControllerFromID(_ret)
 }
 
@@ -78,7 +80,9 @@ func (o *IOBluetoothObjectPushUIController) SetTitle(windowTitle *foundation.NSS
 // @method		getTitle @abstract	Returns the title of the transfer panel (i.e. what was set in -setTitle:). @discussion @result		Returns the title of the transfer panel.
 func (o *IOBluetoothObjectPushUIController) GetTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothObjectPushUIControllerSelGetTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -90,7 +94,9 @@ func (o *IOBluetoothObjectPushUIController) SetIconImage(image *appkit.NSImage) 
 // @method		getDevice: @abstract	Gets the object representing the remote target device in the transfer. @discussion @result		The remote device of the transfer.
 func (o *IOBluetoothObjectPushUIController) GetDevice() *iobluetooth.IOBluetoothDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothObjectPushUIControllerSelGetDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return iobluetooth.IOBluetoothDeviceFromID(_ret)
 }
 
@@ -99,4 +105,3 @@ func (o *IOBluetoothObjectPushUIController) IsTransferInProgress() bool {
 	_ret := objc.Send[bool](o.Ptr(), _iOBluetoothObjectPushUIControllerSelIsTransferInProgress)
 	return _ret
 }
-

@@ -11,11 +11,11 @@ import (
 type AXChartDescriptorContentDirection int64
 
 const (
-	AXChartContentDirectionLeftToRight AXChartDescriptorContentDirection = 0
-	AXChartContentDirectionRightToLeft AXChartDescriptorContentDirection = 1
-	AXChartContentDirectionTopToBottom AXChartDescriptorContentDirection = 2
-	AXChartContentDirectionBottomToTop AXChartDescriptorContentDirection = 3
-	AXChartContentDirectionRadialClockwise AXChartDescriptorContentDirection = 4
+	AXChartContentDirectionLeftToRight            AXChartDescriptorContentDirection = 0
+	AXChartContentDirectionRightToLeft            AXChartDescriptorContentDirection = 1
+	AXChartContentDirectionTopToBottom            AXChartDescriptorContentDirection = 2
+	AXChartContentDirectionBottomToTop            AXChartDescriptorContentDirection = 3
+	AXChartContentDirectionRadialClockwise        AXChartDescriptorContentDirection = 4
 	AXChartContentDirectionRadialCounterClockwise AXChartDescriptorContentDirection = 5
 )
 
@@ -42,7 +42,7 @@ type AXCustomContentImportance uint64
 
 const (
 	AXCustomContentImportanceDefault AXCustomContentImportance = 0
-	AXCustomContentImportanceHigh AXCustomContentImportance = 1
+	AXCustomContentImportanceHigh    AXCustomContentImportance = 1
 )
 
 func (e AXCustomContentImportance) String() string {
@@ -60,8 +60,8 @@ type AXNumericDataAxisDescriptorScale int64
 
 const (
 	AXScaleTypeLinear AXNumericDataAxisDescriptorScale = 0
-	AXScaleTypeLog10 AXNumericDataAxisDescriptorScale = 1
-	AXScaleTypeLn AXNumericDataAxisDescriptorScale = 2
+	AXScaleTypeLog10  AXNumericDataAxisDescriptorScale = 1
+	AXScaleTypeLn     AXNumericDataAxisDescriptorScale = 2
 )
 
 func (e AXNumericDataAxisDescriptorScale) String() string {
@@ -81,11 +81,11 @@ type AXSettingsFeature int64
 
 const (
 	AXSettingsFeaturePersonalVoiceAllowAppsToRequestToUse AXSettingsFeature = 1
-	AXSettingsFeatureAllowAppsToAddAudioToCalls AXSettingsFeature = 2
-	AXSettingsFeatureAssistiveTouch AXSettingsFeature = 3
-	AXSettingsFeatureAssistiveTouchDevices AXSettingsFeature = 4
-	AXSettingsFeatureDwellControl AXSettingsFeature = 5
-	AXSettingsFeatureCaptionStyles AXSettingsFeature = 6
+	AXSettingsFeatureAllowAppsToAddAudioToCalls           AXSettingsFeature = 2
+	AXSettingsFeatureAssistiveTouch                       AXSettingsFeature = 3
+	AXSettingsFeatureAssistiveTouchDevices                AXSettingsFeature = 4
+	AXSettingsFeatureDwellControl                         AXSettingsFeature = 5
+	AXSettingsFeatureCaptionStyles                        AXSettingsFeature = 6
 )
 
 func (e AXSettingsFeature) String() string {
@@ -106,4 +106,3 @@ func (e AXSettingsFeature) String() string {
 		return fmt.Sprintf("AXSettingsFeature(%d)", int64(e))
 	}
 }
-

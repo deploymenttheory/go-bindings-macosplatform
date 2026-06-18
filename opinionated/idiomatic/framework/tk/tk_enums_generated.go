@@ -11,14 +11,14 @@ import (
 type Tk_Anchor int64
 
 const (
-	TK_ANCHOR_N Tk_Anchor = 0
-	TK_ANCHOR_NE Tk_Anchor = 1
-	TK_ANCHOR_E Tk_Anchor = 2
-	TK_ANCHOR_SE Tk_Anchor = 3
-	TK_ANCHOR_S Tk_Anchor = 4
-	TK_ANCHOR_SW Tk_Anchor = 5
-	TK_ANCHOR_W Tk_Anchor = 6
-	TK_ANCHOR_NW Tk_Anchor = 7
+	TK_ANCHOR_N      Tk_Anchor = 0
+	TK_ANCHOR_NE     Tk_Anchor = 1
+	TK_ANCHOR_E      Tk_Anchor = 2
+	TK_ANCHOR_SE     Tk_Anchor = 3
+	TK_ANCHOR_S      Tk_Anchor = 4
+	TK_ANCHOR_SW     Tk_Anchor = 5
+	TK_ANCHOR_W      Tk_Anchor = 6
+	TK_ANCHOR_NW     Tk_Anchor = 7
 	TK_ANCHOR_CENTER Tk_Anchor = 8
 )
 
@@ -50,8 +50,8 @@ func (e Tk_Anchor) String() string {
 type Tk_Justify int64
 
 const (
-	TK_JUSTIFY_LEFT Tk_Justify = 0
-	TK_JUSTIFY_RIGHT Tk_Justify = 1
+	TK_JUSTIFY_LEFT   Tk_Justify = 0
+	TK_JUSTIFY_RIGHT  Tk_Justify = 1
 	TK_JUSTIFY_CENTER Tk_Justify = 2
 )
 
@@ -67,4 +67,3 @@ func (e Tk_Justify) String() string {
 		return fmt.Sprintf("Tk_Justify(%d)", int64(e))
 	}
 }
-

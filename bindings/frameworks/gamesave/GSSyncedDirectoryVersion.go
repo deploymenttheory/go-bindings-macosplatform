@@ -16,11 +16,11 @@ type GSSyncedDirectoryVersion struct {
 }
 
 var (
-	_clsGSSyncedDirectoryVersion = _objcClass("GSSyncedDirectoryVersion")
-	_gSSyncedDirectoryVersionSelIsLocal = objc.RegisterName("isLocal")
+	_clsGSSyncedDirectoryVersion                              = _objcClass("GSSyncedDirectoryVersion")
+	_gSSyncedDirectoryVersionSelIsLocal                       = objc.RegisterName("isLocal")
 	_gSSyncedDirectoryVersionSelLocalizedNameOfSavingComputer = objc.RegisterName("localizedNameOfSavingComputer")
-	_gSSyncedDirectoryVersionSelModifiedDate = objc.RegisterName("modifiedDate")
-	_gSSyncedDirectoryVersionSelUrl = objc.RegisterName("url")
+	_gSSyncedDirectoryVersionSelModifiedDate                  = objc.RegisterName("modifiedDate")
+	_gSSyncedDirectoryVersionSelUrl                           = objc.RegisterName("url")
 )
 
 func GSSyncedDirectoryVersionFromID(id objc.ID) *GSSyncedDirectoryVersion {
@@ -42,21 +42,26 @@ func (o *GSSyncedDirectoryVersion) IsLocal() bool {
 // The localized name of the device that saved this version.
 func (o *GSSyncedDirectoryVersion) LocalizedNameOfSavingComputer() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gSSyncedDirectoryVersionSelLocalizedNameOfSavingComputer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The date that this version was last modified.
 func (o *GSSyncedDirectoryVersion) ModifiedDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gSSyncedDirectoryVersionSelModifiedDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // The URL of a directory where you read and write game-save data. You define the format and structure of files you write in this directory.
 func (o *GSSyncedDirectoryVersion) Url() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gSSyncedDirectoryVersionSelUrl)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
-

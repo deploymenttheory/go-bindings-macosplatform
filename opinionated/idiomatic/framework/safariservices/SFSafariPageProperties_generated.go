@@ -71,4 +71,3 @@ type SafariPagePropertiesable interface {
 }
 
 var _ SafariPagePropertiesable = (*SafariPageProperties)(nil)
-

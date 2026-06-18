@@ -25,4 +25,3 @@ func VNGeneratePersonInstanceMaskRequestFromID(id objc.ID) *VNGeneratePersonInst
 	purego.Track(o)
 	return o
 }
-

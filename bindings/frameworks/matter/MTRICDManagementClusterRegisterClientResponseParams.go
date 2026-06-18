@@ -18,10 +18,10 @@ type MTRICDManagementClusterRegisterClientResponseParams struct {
 }
 
 var (
-	_clsMTRICDManagementClusterRegisterClientResponseParams = _objcClass("MTRICDManagementClusterRegisterClientResponseParams")
+	_clsMTRICDManagementClusterRegisterClientResponseParams                           = _objcClass("MTRICDManagementClusterRegisterClientResponseParams")
 	_mTRICDManagementClusterRegisterClientResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRICDManagementClusterRegisterClientResponseParamsSelIcdCounter = objc.RegisterName("icdCounter")
-	_mTRICDManagementClusterRegisterClientResponseParamsSelSetIcdCounter = objc.RegisterName("setIcdCounter:")
+	_mTRICDManagementClusterRegisterClientResponseParamsSelIcdCounter                 = objc.RegisterName("icdCounter")
+	_mTRICDManagementClusterRegisterClientResponseParamsSelSetIcdCounter              = objc.RegisterName("setIcdCounter:")
 )
 
 func MTRICDManagementClusterRegisterClientResponseParamsFromID(id objc.ID) *MTRICDManagementClusterRegisterClientResponseParams {
@@ -38,7 +38,9 @@ func MTRICDManagementClusterRegisterClientResponseParamsFromID(id objc.ID) *MTRI
 func (o *MTRICDManagementClusterRegisterClientResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRICDManagementClusterRegisterClientResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRICDManagementClusterRegisterClientResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -47,11 +49,12 @@ func (o *MTRICDManagementClusterRegisterClientResponseParams) InitWithResponseVa
 
 func (o *MTRICDManagementClusterRegisterClientResponseParams) IcdCounter() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRICDManagementClusterRegisterClientResponseParamsSelIcdCounter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRICDManagementClusterRegisterClientResponseParams) SetIcdCounter(icdCounter *foundation.NSNumber) {
 	o.Ptr().Send(_mTRICDManagementClusterRegisterClientResponseParamsSelSetIcdCounter, icdCounter.Ptr())
 }
-

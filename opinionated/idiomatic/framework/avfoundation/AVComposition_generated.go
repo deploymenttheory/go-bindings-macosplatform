@@ -52,4 +52,3 @@ type Compositionable interface {
 }
 
 var _ Compositionable = (*Composition)(nil)
-

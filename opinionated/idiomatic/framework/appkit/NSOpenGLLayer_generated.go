@@ -143,4 +143,3 @@ type OpenGLLayerable interface {
 }
 
 var _ OpenGLLayerable = (*OpenGLLayer)(nil)
-

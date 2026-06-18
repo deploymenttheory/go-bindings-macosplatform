@@ -16,7 +16,9 @@ type MTREnergyEVSEClusterEnableChargingParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTREnergyEVSEClusterEnableChargingParams].
-func (x *MTREnergyEVSEClusterEnableChargingParams) Unwrap() *raw.MTREnergyEVSEClusterEnableChargingParams { return x.inner }
+func (x *MTREnergyEVSEClusterEnableChargingParams) Unwrap() *raw.MTREnergyEVSEClusterEnableChargingParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -137,4 +139,3 @@ type MTREnergyEVSEClusterEnableChargingParamsable interface {
 }
 
 var _ MTREnergyEVSEClusterEnableChargingParamsable = (*MTREnergyEVSEClusterEnableChargingParams)(nil)
-

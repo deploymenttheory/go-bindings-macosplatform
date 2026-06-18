@@ -66,4 +66,3 @@ type WorkoutEventable interface {
 }
 
 var _ WorkoutEventable = (*WorkoutEvent)(nil)
-

@@ -16,9 +16,9 @@ type AVMIDISysexEvent struct {
 }
 
 var (
-	_clsAVMIDISysexEvent = _objcClass("AVMIDISysexEvent")
+	_clsAVMIDISysexEvent             = _objcClass("AVMIDISysexEvent")
 	_aVMIDISysexEventSelInitWithData = objc.RegisterName("initWithData:")
-	_aVMIDISysexEventSelSizeInBytes = objc.RegisterName("sizeInBytes")
+	_aVMIDISysexEventSelSizeInBytes  = objc.RegisterName("sizeInBytes")
 )
 
 func AVMIDISysexEventFromID(id objc.ID) *AVMIDISysexEvent {
@@ -34,7 +34,9 @@ func AVMIDISysexEventFromID(id objc.ID) *AVMIDISysexEvent {
 // @method initWithData: @abstract Initialize the event with an NSData. @param data An NSData object containing the raw contents of the system exclusive event.
 func (o *AVMIDISysexEvent) InitWithData(data *foundation.NSData) *AVMIDISysexEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMIDISysexEventSelInitWithData, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMIDISysexEventFromID(_ret)
 }
 
@@ -42,4 +44,3 @@ func (o *AVMIDISysexEvent) SizeInBytes() uint {
 	_ret := objc.Send[uint](o.Ptr(), _aVMIDISysexEventSelSizeInBytes)
 	return _ret
 }
-

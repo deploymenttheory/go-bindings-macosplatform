@@ -18,14 +18,14 @@ type NEVPNConnection struct {
 }
 
 var (
-	_clsNEVPNConnection = _objcClass("NEVPNConnection")
-	_nEVPNConnectionSelStartVPNTunnelAndReturnError = objc.RegisterName("startVPNTunnelAndReturnError:")
-	_nEVPNConnectionSelStartVPNTunnelWithOptionsAndReturnError = objc.RegisterName("startVPNTunnelWithOptions:andReturnError:")
-	_nEVPNConnectionSelStopVPNTunnel = objc.RegisterName("stopVPNTunnel")
+	_clsNEVPNConnection                                              = _objcClass("NEVPNConnection")
+	_nEVPNConnectionSelStartVPNTunnelAndReturnError                  = objc.RegisterName("startVPNTunnelAndReturnError:")
+	_nEVPNConnectionSelStartVPNTunnelWithOptionsAndReturnError       = objc.RegisterName("startVPNTunnelWithOptions:andReturnError:")
+	_nEVPNConnectionSelStopVPNTunnel                                 = objc.RegisterName("stopVPNTunnel")
 	_nEVPNConnectionSelFetchLastDisconnectErrorWithCompletionHandler = objc.RegisterName("fetchLastDisconnectErrorWithCompletionHandler:")
-	_nEVPNConnectionSelStatus = objc.RegisterName("status")
-	_nEVPNConnectionSelConnectedDate = objc.RegisterName("connectedDate")
-	_nEVPNConnectionSelManager = objc.RegisterName("manager")
+	_nEVPNConnectionSelStatus                                        = objc.RegisterName("status")
+	_nEVPNConnectionSelConnectedDate                                 = objc.RegisterName("connectedDate")
+	_nEVPNConnectionSelManager                                       = objc.RegisterName("manager")
 )
 
 func NEVPNConnectionFromID(id objc.ID) *NEVPNConnection {
@@ -84,14 +84,17 @@ func (o *NEVPNConnection) Status() NEVPNStatus {
 // @property connectedDate @discussion The date and time when the connection status changed to NEVPNStatusConnected. This property is nil if the connection is not fully established.
 func (o *NEVPNConnection) ConnectedDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEVPNConnectionSelConnectedDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // @property manager @discussion The NEVPNManager associated with this NEVPNConnection.
 func (o *NEVPNConnection) Manager() *NEVPNManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEVPNConnectionSelManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEVPNManagerFromID(_ret)
 }
-

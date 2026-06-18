@@ -16,9 +16,9 @@ type PDFAnnotationChoiceWidget struct {
 }
 
 var (
-	_clsPDFAnnotationChoiceWidget = _objcClass("PDFAnnotationChoiceWidget")
-	_pDFAnnotationChoiceWidgetSelStringValue = objc.RegisterName("stringValue")
-	_pDFAnnotationChoiceWidgetSelSetStringValue = objc.RegisterName("setStringValue:")
+	_clsPDFAnnotationChoiceWidget                = _objcClass("PDFAnnotationChoiceWidget")
+	_pDFAnnotationChoiceWidgetSelStringValue     = objc.RegisterName("stringValue")
+	_pDFAnnotationChoiceWidgetSelSetStringValue  = objc.RegisterName("setStringValue:")
 	_pDFAnnotationChoiceWidgetSelSetIsListChoice = objc.RegisterName("setIsListChoice:")
 )
 
@@ -34,7 +34,9 @@ func PDFAnnotationChoiceWidgetFromID(id objc.ID) *PDFAnnotationChoiceWidget {
 
 func (o *PDFAnnotationChoiceWidget) StringValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationChoiceWidgetSelStringValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -45,4 +47,3 @@ func (o *PDFAnnotationChoiceWidget) SetStringValue(value *foundation.NSString) {
 func (o *PDFAnnotationChoiceWidget) SetIsListChoice(isList bool) {
 	o.Ptr().Send(_pDFAnnotationChoiceWidgetSelSetIsListChoice, isList)
 }
-

@@ -15,30 +15,30 @@ type NSOperation struct {
 }
 
 var (
-	_clsNSOperation = _objcClass("NSOperation")
-	_nSOperationSelStart = objc.RegisterName("start")
-	_nSOperationSelMain = objc.RegisterName("main")
-	_nSOperationSelCancel = objc.RegisterName("cancel")
-	_nSOperationSelAddDependency = objc.RegisterName("addDependency:")
-	_nSOperationSelRemoveDependency = objc.RegisterName("removeDependency:")
-	_nSOperationSelWaitUntilFinished = objc.RegisterName("waitUntilFinished")
-	_nSOperationSelIsCancelled = objc.RegisterName("isCancelled")
-	_nSOperationSelIsExecuting = objc.RegisterName("isExecuting")
-	_nSOperationSelIsFinished = objc.RegisterName("isFinished")
-	_nSOperationSelIsConcurrent = objc.RegisterName("isConcurrent")
-	_nSOperationSelIsAsynchronous = objc.RegisterName("isAsynchronous")
-	_nSOperationSelIsReady = objc.RegisterName("isReady")
-	_nSOperationSelDependencies = objc.RegisterName("dependencies")
-	_nSOperationSelQueuePriority = objc.RegisterName("queuePriority")
-	_nSOperationSelSetQueuePriority = objc.RegisterName("setQueuePriority:")
-	_nSOperationSelCompletionBlock = objc.RegisterName("completionBlock")
-	_nSOperationSelSetCompletionBlock = objc.RegisterName("setCompletionBlock:")
-	_nSOperationSelThreadPriority = objc.RegisterName("threadPriority")
-	_nSOperationSelSetThreadPriority = objc.RegisterName("setThreadPriority:")
-	_nSOperationSelQualityOfService = objc.RegisterName("qualityOfService")
+	_clsNSOperation                    = _objcClass("NSOperation")
+	_nSOperationSelStart               = objc.RegisterName("start")
+	_nSOperationSelMain                = objc.RegisterName("main")
+	_nSOperationSelCancel              = objc.RegisterName("cancel")
+	_nSOperationSelAddDependency       = objc.RegisterName("addDependency:")
+	_nSOperationSelRemoveDependency    = objc.RegisterName("removeDependency:")
+	_nSOperationSelWaitUntilFinished   = objc.RegisterName("waitUntilFinished")
+	_nSOperationSelIsCancelled         = objc.RegisterName("isCancelled")
+	_nSOperationSelIsExecuting         = objc.RegisterName("isExecuting")
+	_nSOperationSelIsFinished          = objc.RegisterName("isFinished")
+	_nSOperationSelIsConcurrent        = objc.RegisterName("isConcurrent")
+	_nSOperationSelIsAsynchronous      = objc.RegisterName("isAsynchronous")
+	_nSOperationSelIsReady             = objc.RegisterName("isReady")
+	_nSOperationSelDependencies        = objc.RegisterName("dependencies")
+	_nSOperationSelQueuePriority       = objc.RegisterName("queuePriority")
+	_nSOperationSelSetQueuePriority    = objc.RegisterName("setQueuePriority:")
+	_nSOperationSelCompletionBlock     = objc.RegisterName("completionBlock")
+	_nSOperationSelSetCompletionBlock  = objc.RegisterName("setCompletionBlock:")
+	_nSOperationSelThreadPriority      = objc.RegisterName("threadPriority")
+	_nSOperationSelSetThreadPriority   = objc.RegisterName("setThreadPriority:")
+	_nSOperationSelQualityOfService    = objc.RegisterName("qualityOfService")
 	_nSOperationSelSetQualityOfService = objc.RegisterName("setQualityOfService:")
-	_nSOperationSelName = objc.RegisterName("name")
-	_nSOperationSelSetName = objc.RegisterName("setName:")
+	_nSOperationSelName                = objc.RegisterName("name")
+	_nSOperationSelSetName             = objc.RegisterName("setName:")
 )
 
 func NSOperationFromID(id objc.ID) *NSOperation {
@@ -107,7 +107,9 @@ func (o *NSOperation) IsReady() bool {
 
 func (o *NSOperation) Dependencies() *NSArray[*NSOperation] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOperationSelDependencies)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSOperation](_ret)
 }
 
@@ -158,11 +160,12 @@ func (o *NSOperation) SetQualityOfService(qualityOfService NSQualityOfService) {
 
 func (o *NSOperation) Name() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOperationSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSOperation) SetName(name *NSString) {
 	o.Ptr().Send(_nSOperationSelSetName, name.Ptr())
 }
-

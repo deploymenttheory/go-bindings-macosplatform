@@ -17,8 +17,8 @@ type SCNTimingFunction struct {
 }
 
 var (
-	_clsSCNTimingFunction = _objcClass("SCNTimingFunction")
-	_sCNTimingFunctionSelFunctionWithTimingMode = objc.RegisterName("functionWithTimingMode:")
+	_clsSCNTimingFunction                                  = _objcClass("SCNTimingFunction")
+	_sCNTimingFunctionSelFunctionWithTimingMode            = objc.RegisterName("functionWithTimingMode:")
 	_sCNTimingFunctionSelFunctionWithCAMediaTimingFunction = objc.RegisterName("functionWithCAMediaTimingFunction:")
 )
 
@@ -34,13 +34,16 @@ func SCNTimingFunctionFromID(id objc.ID) *SCNTimingFunction {
 
 func SCNTimingFunctionFunctionWithTimingMode(timingMode SCNActionTimingMode) *SCNTimingFunction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNTimingFunction), _sCNTimingFunctionSelFunctionWithTimingMode, timingMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNTimingFunctionFromID(_ret)
 }
 
 func SCNTimingFunctionFunctionWithCAMediaTimingFunction(caTimingFunction *quartzcore.CAMediaTimingFunction) *SCNTimingFunction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNTimingFunction), _sCNTimingFunctionSelFunctionWithCAMediaTimingFunction, caTimingFunction.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNTimingFunctionFromID(_ret)
 }
-

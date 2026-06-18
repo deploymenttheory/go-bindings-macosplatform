@@ -16,9 +16,9 @@ type QCCompositionPickerPanel struct {
 }
 
 var (
-	_clsQCCompositionPickerPanel = _objcClass("QCCompositionPickerPanel")
+	_clsQCCompositionPickerPanel                             = _objcClass("QCCompositionPickerPanel")
 	_qCCompositionPickerPanelSelSharedCompositionPickerPanel = objc.RegisterName("sharedCompositionPickerPanel")
-	_qCCompositionPickerPanelSelCompositionPickerView = objc.RegisterName("compositionPickerView")
+	_qCCompositionPickerPanelSelCompositionPickerView        = objc.RegisterName("compositionPickerView")
 )
 
 func QCCompositionPickerPanelFromID(id objc.ID) *QCCompositionPickerPanel {
@@ -33,13 +33,16 @@ func QCCompositionPickerPanelFromID(id objc.ID) *QCCompositionPickerPanel {
 
 func QCCompositionPickerPanelSharedCompositionPickerPanel() *QCCompositionPickerPanel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsQCCompositionPickerPanel), _qCCompositionPickerPanelSelSharedCompositionPickerPanel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return QCCompositionPickerPanelFromID(_ret)
 }
 
 func (o *QCCompositionPickerPanel) CompositionPickerView() *QCCompositionPickerView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionPickerPanelSelCompositionPickerView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return QCCompositionPickerViewFromID(_ret)
 }
-

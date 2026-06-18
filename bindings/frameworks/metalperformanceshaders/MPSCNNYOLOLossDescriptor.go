@@ -17,40 +17,40 @@ type MPSCNNYOLOLossDescriptor struct {
 }
 
 var (
-	_clsMPSCNNYOLOLossDescriptor = _objcClass("MPSCNNYOLOLossDescriptor")
+	_clsMPSCNNYOLOLossDescriptor                                                                                                                      = _objcClass("MPSCNNYOLOLossDescriptor")
 	_mPSCNNYOLOLossDescriptorSelCnnLossDescriptorWithXYLossTypeWHLossTypeConfidenceLossTypeClassesLossTypeReductionTypeAnchorBoxesNumberOfAnchorBoxes = objc.RegisterName("cnnLossDescriptorWithXYLossType:WHLossType:confidenceLossType:classesLossType:reductionType:anchorBoxes:numberOfAnchorBoxes:")
-	_mPSCNNYOLOLossDescriptorSelXYLossDescriptor = objc.RegisterName("XYLossDescriptor")
-	_mPSCNNYOLOLossDescriptorSelSetXYLossDescriptor = objc.RegisterName("setXYLossDescriptor:")
-	_mPSCNNYOLOLossDescriptorSelWHLossDescriptor = objc.RegisterName("WHLossDescriptor")
-	_mPSCNNYOLOLossDescriptorSelSetWHLossDescriptor = objc.RegisterName("setWHLossDescriptor:")
-	_mPSCNNYOLOLossDescriptorSelConfidenceLossDescriptor = objc.RegisterName("confidenceLossDescriptor")
-	_mPSCNNYOLOLossDescriptorSelSetConfidenceLossDescriptor = objc.RegisterName("setConfidenceLossDescriptor:")
-	_mPSCNNYOLOLossDescriptorSelClassesLossDescriptor = objc.RegisterName("classesLossDescriptor")
-	_mPSCNNYOLOLossDescriptorSelSetClassesLossDescriptor = objc.RegisterName("setClassesLossDescriptor:")
-	_mPSCNNYOLOLossDescriptorSelReductionType = objc.RegisterName("reductionType")
-	_mPSCNNYOLOLossDescriptorSelSetReductionType = objc.RegisterName("setReductionType:")
-	_mPSCNNYOLOLossDescriptorSelReduceAcrossBatch = objc.RegisterName("reduceAcrossBatch")
-	_mPSCNNYOLOLossDescriptorSelSetReduceAcrossBatch = objc.RegisterName("setReduceAcrossBatch:")
-	_mPSCNNYOLOLossDescriptorSelRescore = objc.RegisterName("rescore")
-	_mPSCNNYOLOLossDescriptorSelSetRescore = objc.RegisterName("setRescore:")
-	_mPSCNNYOLOLossDescriptorSelScaleXY = objc.RegisterName("scaleXY")
-	_mPSCNNYOLOLossDescriptorSelSetScaleXY = objc.RegisterName("setScaleXY:")
-	_mPSCNNYOLOLossDescriptorSelScaleWH = objc.RegisterName("scaleWH")
-	_mPSCNNYOLOLossDescriptorSelSetScaleWH = objc.RegisterName("setScaleWH:")
-	_mPSCNNYOLOLossDescriptorSelScaleNoObject = objc.RegisterName("scaleNoObject")
-	_mPSCNNYOLOLossDescriptorSelSetScaleNoObject = objc.RegisterName("setScaleNoObject:")
-	_mPSCNNYOLOLossDescriptorSelScaleObject = objc.RegisterName("scaleObject")
-	_mPSCNNYOLOLossDescriptorSelSetScaleObject = objc.RegisterName("setScaleObject:")
-	_mPSCNNYOLOLossDescriptorSelScaleClass = objc.RegisterName("scaleClass")
-	_mPSCNNYOLOLossDescriptorSelSetScaleClass = objc.RegisterName("setScaleClass:")
-	_mPSCNNYOLOLossDescriptorSelMinIOUForObjectPresence = objc.RegisterName("minIOUForObjectPresence")
-	_mPSCNNYOLOLossDescriptorSelSetMinIOUForObjectPresence = objc.RegisterName("setMinIOUForObjectPresence:")
-	_mPSCNNYOLOLossDescriptorSelMaxIOUForObjectAbsence = objc.RegisterName("maxIOUForObjectAbsence")
-	_mPSCNNYOLOLossDescriptorSelSetMaxIOUForObjectAbsence = objc.RegisterName("setMaxIOUForObjectAbsence:")
-	_mPSCNNYOLOLossDescriptorSelNumberOfAnchorBoxes = objc.RegisterName("numberOfAnchorBoxes")
-	_mPSCNNYOLOLossDescriptorSelSetNumberOfAnchorBoxes = objc.RegisterName("setNumberOfAnchorBoxes:")
-	_mPSCNNYOLOLossDescriptorSelAnchorBoxes = objc.RegisterName("anchorBoxes")
-	_mPSCNNYOLOLossDescriptorSelSetAnchorBoxes = objc.RegisterName("setAnchorBoxes:")
+	_mPSCNNYOLOLossDescriptorSelXYLossDescriptor                                                                                                      = objc.RegisterName("XYLossDescriptor")
+	_mPSCNNYOLOLossDescriptorSelSetXYLossDescriptor                                                                                                   = objc.RegisterName("setXYLossDescriptor:")
+	_mPSCNNYOLOLossDescriptorSelWHLossDescriptor                                                                                                      = objc.RegisterName("WHLossDescriptor")
+	_mPSCNNYOLOLossDescriptorSelSetWHLossDescriptor                                                                                                   = objc.RegisterName("setWHLossDescriptor:")
+	_mPSCNNYOLOLossDescriptorSelConfidenceLossDescriptor                                                                                              = objc.RegisterName("confidenceLossDescriptor")
+	_mPSCNNYOLOLossDescriptorSelSetConfidenceLossDescriptor                                                                                           = objc.RegisterName("setConfidenceLossDescriptor:")
+	_mPSCNNYOLOLossDescriptorSelClassesLossDescriptor                                                                                                 = objc.RegisterName("classesLossDescriptor")
+	_mPSCNNYOLOLossDescriptorSelSetClassesLossDescriptor                                                                                              = objc.RegisterName("setClassesLossDescriptor:")
+	_mPSCNNYOLOLossDescriptorSelReductionType                                                                                                         = objc.RegisterName("reductionType")
+	_mPSCNNYOLOLossDescriptorSelSetReductionType                                                                                                      = objc.RegisterName("setReductionType:")
+	_mPSCNNYOLOLossDescriptorSelReduceAcrossBatch                                                                                                     = objc.RegisterName("reduceAcrossBatch")
+	_mPSCNNYOLOLossDescriptorSelSetReduceAcrossBatch                                                                                                  = objc.RegisterName("setReduceAcrossBatch:")
+	_mPSCNNYOLOLossDescriptorSelRescore                                                                                                               = objc.RegisterName("rescore")
+	_mPSCNNYOLOLossDescriptorSelSetRescore                                                                                                            = objc.RegisterName("setRescore:")
+	_mPSCNNYOLOLossDescriptorSelScaleXY                                                                                                               = objc.RegisterName("scaleXY")
+	_mPSCNNYOLOLossDescriptorSelSetScaleXY                                                                                                            = objc.RegisterName("setScaleXY:")
+	_mPSCNNYOLOLossDescriptorSelScaleWH                                                                                                               = objc.RegisterName("scaleWH")
+	_mPSCNNYOLOLossDescriptorSelSetScaleWH                                                                                                            = objc.RegisterName("setScaleWH:")
+	_mPSCNNYOLOLossDescriptorSelScaleNoObject                                                                                                         = objc.RegisterName("scaleNoObject")
+	_mPSCNNYOLOLossDescriptorSelSetScaleNoObject                                                                                                      = objc.RegisterName("setScaleNoObject:")
+	_mPSCNNYOLOLossDescriptorSelScaleObject                                                                                                           = objc.RegisterName("scaleObject")
+	_mPSCNNYOLOLossDescriptorSelSetScaleObject                                                                                                        = objc.RegisterName("setScaleObject:")
+	_mPSCNNYOLOLossDescriptorSelScaleClass                                                                                                            = objc.RegisterName("scaleClass")
+	_mPSCNNYOLOLossDescriptorSelSetScaleClass                                                                                                         = objc.RegisterName("setScaleClass:")
+	_mPSCNNYOLOLossDescriptorSelMinIOUForObjectPresence                                                                                               = objc.RegisterName("minIOUForObjectPresence")
+	_mPSCNNYOLOLossDescriptorSelSetMinIOUForObjectPresence                                                                                            = objc.RegisterName("setMinIOUForObjectPresence:")
+	_mPSCNNYOLOLossDescriptorSelMaxIOUForObjectAbsence                                                                                                = objc.RegisterName("maxIOUForObjectAbsence")
+	_mPSCNNYOLOLossDescriptorSelSetMaxIOUForObjectAbsence                                                                                             = objc.RegisterName("setMaxIOUForObjectAbsence:")
+	_mPSCNNYOLOLossDescriptorSelNumberOfAnchorBoxes                                                                                                   = objc.RegisterName("numberOfAnchorBoxes")
+	_mPSCNNYOLOLossDescriptorSelSetNumberOfAnchorBoxes                                                                                                = objc.RegisterName("setNumberOfAnchorBoxes:")
+	_mPSCNNYOLOLossDescriptorSelAnchorBoxes                                                                                                           = objc.RegisterName("anchorBoxes")
+	_mPSCNNYOLOLossDescriptorSelSetAnchorBoxes                                                                                                        = objc.RegisterName("setAnchorBoxes:")
 )
 
 func MPSCNNYOLOLossDescriptorFromID(id objc.ID) *MPSCNNYOLOLossDescriptor {
@@ -66,14 +66,18 @@ func MPSCNNYOLOLossDescriptorFromID(id objc.ID) *MPSCNNYOLOLossDescriptor {
 // @abstract   Make a descriptor for a MPSCNNYOLOLoss object. @param      XYLossType                  The type of spatial position loss filter. @param      WHLossType                  The type of spatial size loss filter. @param      confidenceLossType          The type of confidence filter. @param      classesLossType             The type of classes filter. @param      reductionType               The type of a reduction operation to apply. @param      anchorBoxes                 This is an NSData which has an array of anchorBoxes defined as a struct{ float width; float height; }; @return     A valid MPSCNNYOLOLossDescriptor object or nil, if failure.
 func MPSCNNYOLOLossDescriptorCnnLossDescriptorWithXYLossTypeWHLossTypeConfidenceLossTypeClassesLossTypeReductionTypeAnchorBoxesNumberOfAnchorBoxes(xYLossType mpsneuralnetwork.MPSCNNLossType, wHLossType mpsneuralnetwork.MPSCNNLossType, confidenceLossType mpsneuralnetwork.MPSCNNLossType, classesLossType mpsneuralnetwork.MPSCNNLossType, reductionType mpsneuralnetwork.MPSCNNReductionType, anchorBoxes *foundation.NSData, numberOfAnchorBoxes uint) *mpsneuralnetwork.MPSCNNYOLOLossDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNYOLOLossDescriptor), _mPSCNNYOLOLossDescriptorSelCnnLossDescriptorWithXYLossTypeWHLossTypeConfidenceLossTypeClassesLossTypeReductionTypeAnchorBoxesNumberOfAnchorBoxes, xYLossType, wHLossType, confidenceLossType, classesLossType, reductionType, anchorBoxes.Ptr(), numberOfAnchorBoxes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsneuralnetwork.MPSCNNYOLOLossDescriptorFromID(_ret)
 }
 
 // @property   XYLossDescriptor @abstract   The type of a loss filter. @discussion This parameter specifies the type of a loss filter.
 func (o *MPSCNNYOLOLossDescriptor) XYLossDescriptor() *mpsneuralnetwork.MPSCNNLossDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNYOLOLossDescriptorSelXYLossDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsneuralnetwork.MPSCNNLossDescriptorFromID(_ret)
 }
 
@@ -84,7 +88,9 @@ func (o *MPSCNNYOLOLossDescriptor) SetXYLossDescriptor(xYLossDescriptor *mpsneur
 // @property   WHLossDescriptor @abstract   The type of a loss filter. @discussion This parameter specifies the type of a loss filter.
 func (o *MPSCNNYOLOLossDescriptor) WHLossDescriptor() *mpsneuralnetwork.MPSCNNLossDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNYOLOLossDescriptorSelWHLossDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsneuralnetwork.MPSCNNLossDescriptorFromID(_ret)
 }
 
@@ -95,7 +101,9 @@ func (o *MPSCNNYOLOLossDescriptor) SetWHLossDescriptor(wHLossDescriptor *mpsneur
 // @property   confidenceLossDescriptor @abstract   The type of a loss filter. @discussion This parameter specifies the type of a loss filter.
 func (o *MPSCNNYOLOLossDescriptor) ConfidenceLossDescriptor() *mpsneuralnetwork.MPSCNNLossDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNYOLOLossDescriptorSelConfidenceLossDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsneuralnetwork.MPSCNNLossDescriptorFromID(_ret)
 }
 
@@ -106,7 +114,9 @@ func (o *MPSCNNYOLOLossDescriptor) SetConfidenceLossDescriptor(confidenceLossDes
 // @property   classesLossDescriptor @abstract   The type of a loss filter. @discussion This parameter specifies the type of a loss filter.
 func (o *MPSCNNYOLOLossDescriptor) ClassesLossDescriptor() *mpsneuralnetwork.MPSCNNLossDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNYOLOLossDescriptorSelClassesLossDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsneuralnetwork.MPSCNNLossDescriptorFromID(_ret)
 }
 
@@ -227,11 +237,12 @@ func (o *MPSCNNYOLOLossDescriptor) SetNumberOfAnchorBoxes(numberOfAnchorBoxes ui
 // @property   anchorBoxes @abstract   NSData containing the width and height for numberOfAnchorBoxes anchor boxes This NSData should have 2 float values per anchor box which represent the width and height of the anchor box. @code typedef struct anchorBox{ float width; float height; }anchorBox; anchorBox_t gAnchorBoxes[MAX_NUM_ANCHOR_BOXES] = { {.width = 1.f, .height = 2.f}, {.width = 1.f, .height = 1.f}, {.width = 2.f, .height = 1.f}, }; NSData* labelsInputData = [NSData dataWithBytes: gAnchorBoxes length: MAX_NUM_ANCHOR_BOXES * sizeof(anchorBox)]; @endcode
 func (o *MPSCNNYOLOLossDescriptor) AnchorBoxes() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNYOLOLossDescriptorSelAnchorBoxes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *MPSCNNYOLOLossDescriptor) SetAnchorBoxes(anchorBoxes *foundation.NSData) {
 	o.Ptr().Send(_mPSCNNYOLOLossDescriptorSelSetAnchorBoxes, anchorBoxes.Ptr())
 }
-

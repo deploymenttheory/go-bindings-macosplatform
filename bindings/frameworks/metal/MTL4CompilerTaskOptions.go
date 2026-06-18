@@ -16,8 +16,8 @@ type MTL4CompilerTaskOptions struct {
 }
 
 var (
-	_clsMTL4CompilerTaskOptions = _objcClass("MTL4CompilerTaskOptions")
-	_mTL4CompilerTaskOptionsSelLookupArchives = objc.RegisterName("lookupArchives")
+	_clsMTL4CompilerTaskOptions                  = _objcClass("MTL4CompilerTaskOptions")
+	_mTL4CompilerTaskOptionsSelLookupArchives    = objc.RegisterName("lookupArchives")
 	_mTL4CompilerTaskOptionsSelSetLookupArchives = objc.RegisterName("setLookupArchives:")
 )
 
@@ -33,11 +33,12 @@ func MTL4CompilerTaskOptionsFromID(id objc.ID) *MTL4CompilerTaskOptions {
 
 func (o *MTL4CompilerTaskOptions) LookupArchives() *foundation.NSArray[MTL4Archive] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4CompilerTaskOptionsSelLookupArchives)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTL4Archive](_ret)
 }
 
 func (o *MTL4CompilerTaskOptions) SetLookupArchives(lookupArchives *foundation.NSArray[MTL4Archive]) {
 	o.Ptr().Send(_mTL4CompilerTaskOptionsSelSetLookupArchives, lookupArchives.Ptr())
 }
-

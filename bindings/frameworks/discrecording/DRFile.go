@@ -18,16 +18,16 @@ type DRFile struct {
 }
 
 var (
-	_clsDRFile = _objcClass("DRFile")
-	_dRFileSelFileWithPath = objc.RegisterName("fileWithPath:")
-	_dRFileSelInitWithPath = objc.RegisterName("initWithPath:")
-	_dRFileSelVirtualFileWithNameData = objc.RegisterName("virtualFileWithName:data:")
-	_dRFileSelVirtualFileWithNameDataProducer = objc.RegisterName("virtualFileWithName:dataProducer:")
-	_dRFileSelInitWithNameData = objc.RegisterName("initWithName:data:")
-	_dRFileSelInitWithNameDataProducer = objc.RegisterName("initWithName:dataProducer:")
-	_dRFileSelHardLinkPointingToInFilesystem = objc.RegisterName("hardLinkPointingTo:inFilesystem:")
-	_dRFileSelSymLinkPointingToInFilesystem = objc.RegisterName("symLinkPointingTo:inFilesystem:")
-	_dRFileSelFinderAliasPointingToInFilesystem = objc.RegisterName("finderAliasPointingTo:inFilesystem:")
+	_clsDRFile                                       = _objcClass("DRFile")
+	_dRFileSelFileWithPath                           = objc.RegisterName("fileWithPath:")
+	_dRFileSelInitWithPath                           = objc.RegisterName("initWithPath:")
+	_dRFileSelVirtualFileWithNameData                = objc.RegisterName("virtualFileWithName:data:")
+	_dRFileSelVirtualFileWithNameDataProducer        = objc.RegisterName("virtualFileWithName:dataProducer:")
+	_dRFileSelInitWithNameData                       = objc.RegisterName("initWithName:data:")
+	_dRFileSelInitWithNameDataProducer               = objc.RegisterName("initWithName:dataProducer:")
+	_dRFileSelHardLinkPointingToInFilesystem         = objc.RegisterName("hardLinkPointingTo:inFilesystem:")
+	_dRFileSelSymLinkPointingToInFilesystem          = objc.RegisterName("symLinkPointingTo:inFilesystem:")
+	_dRFileSelFinderAliasPointingToInFilesystem      = objc.RegisterName("finderAliasPointingTo:inFilesystem:")
 	_dRFileSelInitWithLinkTypePointingToInFilesystem = objc.RegisterName("initWithLinkType:pointingTo:inFilesystem:")
 )
 
@@ -44,7 +44,9 @@ func DRFileFromID(id objc.ID) *DRFile {
 // @method 		fileWithPath: @abstract		Creates a real file object @discussion		This type of DRFile reads in data from an existing file located at path and burns that data to disc. @param 			path	The path to an existing file. @result  		An autoreleased DRFile object.
 func DRFileFileWithPath(path *foundation.NSString) *DRFile {
 	_ret := objc.Send[objc.ID](objc.ID(_clsDRFile), _dRFileSelFileWithPath, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DRFileFromID(_ret)
 }
 
@@ -57,14 +59,18 @@ func (o *DRFile) InitWithPath(path *foundation.NSString) objc.ID {
 // @method 		virtualFileWithName:data: @abstract		Creates a virtual file object @discussion		This type of DRFile burns the data passed in to disc, creating a file with the passed in name. @param 			name	The name of the file on disc. @param			data	The data that will become the contents of the file on the disc. @result  		An autoreleased DRFile object.
 func DRFileVirtualFileWithNameData(name *foundation.NSString, data *foundation.NSData) *DRFile {
 	_ret := objc.Send[objc.ID](objc.ID(_clsDRFile), _dRFileSelVirtualFileWithNameData, name.Ptr(), data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DRFileFromID(_ret)
 }
 
 // @method 		virtualFileWithName:dataProducer: @abstract		Creates a virtual file object @discussion		This type of DRFile burns the data produced to the output disc, creating a file with the passed in name. @param 			name	The name of the file on disc. @param			data	The data that will become the contents of the file on the disc. @result  		An autoreleased DRFile object.
 func DRFileVirtualFileWithNameDataProducer(name *foundation.NSString, producer objc.ID) *DRFile {
 	_ret := objc.Send[objc.ID](objc.ID(_clsDRFile), _dRFileSelVirtualFileWithNameDataProducer, name.Ptr(), producer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DRFileFromID(_ret)
 }
 
@@ -83,21 +89,27 @@ func (o *DRFile) InitWithNameDataProducer(name *foundation.NSString, producer ob
 // @method 		hardLinkPointingTo:inFilesystem: @abstract		Creates a hard link to another file on the output disc. @param 			original	The file to point he hard link to @param			filesystem	The filesystem this link will exist on. @result  		An autoreleased DRFile object.
 func DRFileHardLinkPointingToInFilesystem(original *DRFile, filesystem *foundation.NSString) *DRFile {
 	_ret := objc.Send[objc.ID](objc.ID(_clsDRFile), _dRFileSelHardLinkPointingToInFilesystem, original.Ptr(), filesystem.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DRFileFromID(_ret)
 }
 
 // @method 		symLinkPointingTo:inFilesystem: @abstract		Creates a symbolic link to another file on the output disc. @param 			original	The file to point he hard link to @param			filesystem	The filesystem this link will exist on. @result  		An autoreleased DRFile object.
 func DRFileSymLinkPointingToInFilesystem(original *DRFSObject, filesystem *foundation.NSString) *DRFile {
 	_ret := objc.Send[objc.ID](objc.ID(_clsDRFile), _dRFileSelSymLinkPointingToInFilesystem, original.Ptr(), filesystem.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DRFileFromID(_ret)
 }
 
 // @method 		finderAliasPointingTo:inFilesystem: @abstract		Creates a Finder alias to another file on the output disc. @param 			original	The file to point he hard link to @param			filesystem	The filesystem this link will exist on. @result  		An autoreleased DRFile object.
 func DRFileFinderAliasPointingToInFilesystem(original *DRFSObject, filesystem *foundation.NSString) *DRFile {
 	_ret := objc.Send[objc.ID](objc.ID(_clsDRFile), _dRFileSelFinderAliasPointingToInFilesystem, original.Ptr(), filesystem.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DRFileFromID(_ret)
 }
 
@@ -106,4 +118,3 @@ func (o *DRFile) InitWithLinkTypePointingToInFilesystem(linkType *foundation.NSS
 	_ret := objc.Send[objc.ID](o.Ptr(), _dRFileSelInitWithLinkTypePointingToInFilesystem, linkType.Ptr(), original.Ptr(), filesystem.Ptr())
 	return _ret
 }
-

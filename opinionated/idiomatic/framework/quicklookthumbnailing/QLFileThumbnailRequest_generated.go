@@ -67,4 +67,3 @@ type FileThumbnailRequestable interface {
 }
 
 var _ FileThumbnailRequestable = (*FileThumbnailRequest)(nil)
-

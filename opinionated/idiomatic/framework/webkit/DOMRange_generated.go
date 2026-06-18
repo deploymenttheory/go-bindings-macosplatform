@@ -258,7 +258,9 @@ func (x *DOMRange) MarkupString() string {
 
 func (x *DOMRange) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
-func (x *DOMRange) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+func (x *DOMRange) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMObject.WebScriptObject
+}
 
 // DOMRangeable is the interface implemented by [DOMRange], for mocking and DI.
 type DOMRangeable interface {
@@ -301,4 +303,3 @@ type DOMRangeable interface {
 }
 
 var _ DOMRangeable = (*DOMRange)(nil)
-

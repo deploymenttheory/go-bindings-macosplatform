@@ -103,7 +103,9 @@ func (x *TextContainer) WithExclusionPaths(items ...*raw.NSBezierPath) *TextCont
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSBezierPath](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -314,4 +316,3 @@ type TextContainerable interface {
 }
 
 var _ TextContainerable = (*TextContainer)(nil)
-

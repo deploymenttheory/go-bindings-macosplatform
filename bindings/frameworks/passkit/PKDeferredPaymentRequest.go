@@ -16,22 +16,22 @@ type PKDeferredPaymentRequest struct {
 }
 
 var (
-	_clsPKDeferredPaymentRequest = _objcClass("PKDeferredPaymentRequest")
+	_clsPKDeferredPaymentRequest                                                       = _objcClass("PKDeferredPaymentRequest")
 	_pKDeferredPaymentRequestSelInitWithPaymentDescriptionDeferredBillingManagementURL = objc.RegisterName("initWithPaymentDescription:deferredBilling:managementURL:")
-	_pKDeferredPaymentRequestSelPaymentDescription = objc.RegisterName("paymentDescription")
-	_pKDeferredPaymentRequestSelSetPaymentDescription = objc.RegisterName("setPaymentDescription:")
-	_pKDeferredPaymentRequestSelDeferredBilling = objc.RegisterName("deferredBilling")
-	_pKDeferredPaymentRequestSelSetDeferredBilling = objc.RegisterName("setDeferredBilling:")
-	_pKDeferredPaymentRequestSelBillingAgreement = objc.RegisterName("billingAgreement")
-	_pKDeferredPaymentRequestSelSetBillingAgreement = objc.RegisterName("setBillingAgreement:")
-	_pKDeferredPaymentRequestSelManagementURL = objc.RegisterName("managementURL")
-	_pKDeferredPaymentRequestSelSetManagementURL = objc.RegisterName("setManagementURL:")
-	_pKDeferredPaymentRequestSelTokenNotificationURL = objc.RegisterName("tokenNotificationURL")
-	_pKDeferredPaymentRequestSelSetTokenNotificationURL = objc.RegisterName("setTokenNotificationURL:")
-	_pKDeferredPaymentRequestSelFreeCancellationDate = objc.RegisterName("freeCancellationDate")
-	_pKDeferredPaymentRequestSelSetFreeCancellationDate = objc.RegisterName("setFreeCancellationDate:")
-	_pKDeferredPaymentRequestSelFreeCancellationDateTimeZone = objc.RegisterName("freeCancellationDateTimeZone")
-	_pKDeferredPaymentRequestSelSetFreeCancellationDateTimeZone = objc.RegisterName("setFreeCancellationDateTimeZone:")
+	_pKDeferredPaymentRequestSelPaymentDescription                                     = objc.RegisterName("paymentDescription")
+	_pKDeferredPaymentRequestSelSetPaymentDescription                                  = objc.RegisterName("setPaymentDescription:")
+	_pKDeferredPaymentRequestSelDeferredBilling                                        = objc.RegisterName("deferredBilling")
+	_pKDeferredPaymentRequestSelSetDeferredBilling                                     = objc.RegisterName("setDeferredBilling:")
+	_pKDeferredPaymentRequestSelBillingAgreement                                       = objc.RegisterName("billingAgreement")
+	_pKDeferredPaymentRequestSelSetBillingAgreement                                    = objc.RegisterName("setBillingAgreement:")
+	_pKDeferredPaymentRequestSelManagementURL                                          = objc.RegisterName("managementURL")
+	_pKDeferredPaymentRequestSelSetManagementURL                                       = objc.RegisterName("setManagementURL:")
+	_pKDeferredPaymentRequestSelTokenNotificationURL                                   = objc.RegisterName("tokenNotificationURL")
+	_pKDeferredPaymentRequestSelSetTokenNotificationURL                                = objc.RegisterName("setTokenNotificationURL:")
+	_pKDeferredPaymentRequestSelFreeCancellationDate                                   = objc.RegisterName("freeCancellationDate")
+	_pKDeferredPaymentRequestSelSetFreeCancellationDate                                = objc.RegisterName("setFreeCancellationDate:")
+	_pKDeferredPaymentRequestSelFreeCancellationDateTimeZone                           = objc.RegisterName("freeCancellationDateTimeZone")
+	_pKDeferredPaymentRequestSelSetFreeCancellationDateTimeZone                        = objc.RegisterName("setFreeCancellationDateTimeZone:")
 )
 
 func PKDeferredPaymentRequestFromID(id objc.ID) *PKDeferredPaymentRequest {
@@ -46,13 +46,17 @@ func PKDeferredPaymentRequestFromID(id objc.ID) *PKDeferredPaymentRequest {
 
 func (o *PKDeferredPaymentRequest) InitWithPaymentDescriptionDeferredBillingManagementURL(paymentDescription *foundation.NSString, deferredBilling *PKDeferredPaymentSummaryItem, managementURL *foundation.NSURL) *PKDeferredPaymentRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDeferredPaymentRequestSelInitWithPaymentDescriptionDeferredBillingManagementURL, paymentDescription.Ptr(), deferredBilling.Ptr(), managementURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKDeferredPaymentRequestFromID(_ret)
 }
 
 func (o *PKDeferredPaymentRequest) PaymentDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDeferredPaymentRequestSelPaymentDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -62,7 +66,9 @@ func (o *PKDeferredPaymentRequest) SetPaymentDescription(paymentDescription *fou
 
 func (o *PKDeferredPaymentRequest) DeferredBilling() *PKDeferredPaymentSummaryItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDeferredPaymentRequestSelDeferredBilling)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKDeferredPaymentSummaryItemFromID(_ret)
 }
 
@@ -72,7 +78,9 @@ func (o *PKDeferredPaymentRequest) SetDeferredBilling(deferredBilling *PKDeferre
 
 func (o *PKDeferredPaymentRequest) BillingAgreement() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDeferredPaymentRequestSelBillingAgreement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -82,7 +90,9 @@ func (o *PKDeferredPaymentRequest) SetBillingAgreement(billingAgreement *foundat
 
 func (o *PKDeferredPaymentRequest) ManagementURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDeferredPaymentRequestSelManagementURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -92,7 +102,9 @@ func (o *PKDeferredPaymentRequest) SetManagementURL(managementURL *foundation.NS
 
 func (o *PKDeferredPaymentRequest) TokenNotificationURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDeferredPaymentRequestSelTokenNotificationURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -102,7 +114,9 @@ func (o *PKDeferredPaymentRequest) SetTokenNotificationURL(tokenNotificationURL 
 
 func (o *PKDeferredPaymentRequest) FreeCancellationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDeferredPaymentRequestSelFreeCancellationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -112,11 +126,12 @@ func (o *PKDeferredPaymentRequest) SetFreeCancellationDate(freeCancellationDate 
 
 func (o *PKDeferredPaymentRequest) FreeCancellationDateTimeZone() *foundation.NSTimeZone {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDeferredPaymentRequestSelFreeCancellationDateTimeZone)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSTimeZoneFromID(_ret)
 }
 
 func (o *PKDeferredPaymentRequest) SetFreeCancellationDateTimeZone(freeCancellationDateTimeZone *foundation.NSTimeZone) {
 	o.Ptr().Send(_pKDeferredPaymentRequestSelSetFreeCancellationDateTimeZone, freeCancellationDateTimeZone.Ptr())
 }
-

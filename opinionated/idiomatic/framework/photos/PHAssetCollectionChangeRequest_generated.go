@@ -96,7 +96,9 @@ func (x *AssetCollectionChangeRequest) SetTitle(title string) {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 }
 
-func (x *AssetCollectionChangeRequest) asChangeRequest() *raw.PHChangeRequest { return &x.inner.PHChangeRequest }
+func (x *AssetCollectionChangeRequest) asChangeRequest() *raw.PHChangeRequest {
+	return &x.inner.PHChangeRequest
+}
 
 // AssetCollectionChangeRequestable is the interface implemented by [AssetCollectionChangeRequest], for mocking and DI.
 type AssetCollectionChangeRequestable interface {
@@ -114,4 +116,3 @@ type AssetCollectionChangeRequestable interface {
 }
 
 var _ AssetCollectionChangeRequestable = (*AssetCollectionChangeRequest)(nil)
-

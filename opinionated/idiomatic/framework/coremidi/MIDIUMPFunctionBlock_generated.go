@@ -122,4 +122,3 @@ type UMPFunctionBlockable interface {
 }
 
 var _ UMPFunctionBlockable = (*UMPFunctionBlock)(nil)
-

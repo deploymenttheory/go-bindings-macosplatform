@@ -54,4 +54,3 @@ func VSErrorInfoKeyUnsupportedProviderIdentifier() uintptr {
 	ptr, _ := purego.Dlsym(_videosubscriberaccountLib, "VSErrorInfoKeyUnsupportedProviderIdentifier")
 	return ptr
 }
-

@@ -15,12 +15,12 @@ type AVMetadataFaceObject struct {
 }
 
 var (
-	_clsAVMetadataFaceObject = _objcClass("AVMetadataFaceObject")
-	_aVMetadataFaceObjectSelFaceID = objc.RegisterName("faceID")
+	_clsAVMetadataFaceObject             = _objcClass("AVMetadataFaceObject")
+	_aVMetadataFaceObjectSelFaceID       = objc.RegisterName("faceID")
 	_aVMetadataFaceObjectSelHasRollAngle = objc.RegisterName("hasRollAngle")
-	_aVMetadataFaceObjectSelRollAngle = objc.RegisterName("rollAngle")
-	_aVMetadataFaceObjectSelHasYawAngle = objc.RegisterName("hasYawAngle")
-	_aVMetadataFaceObjectSelYawAngle = objc.RegisterName("yawAngle")
+	_aVMetadataFaceObjectSelRollAngle    = objc.RegisterName("rollAngle")
+	_aVMetadataFaceObjectSelHasYawAngle  = objc.RegisterName("hasYawAngle")
+	_aVMetadataFaceObjectSelYawAngle     = objc.RegisterName("yawAngle")
 )
 
 func AVMetadataFaceObjectFromID(id objc.ID) *AVMetadataFaceObject {
@@ -62,4 +62,3 @@ func (o *AVMetadataFaceObject) YawAngle() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _aVMetadataFaceObjectSelYawAngle)
 	return _ret
 }
-

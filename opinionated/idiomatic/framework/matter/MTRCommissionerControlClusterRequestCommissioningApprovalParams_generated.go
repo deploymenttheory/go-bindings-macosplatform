@@ -17,11 +17,15 @@ type MTRCommissionerControlClusterRequestCommissioningApprovalParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRCommissionerControlClusterRequestCommissioningApprovalParams].
-func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) Unwrap() *raw.MTRCommissionerControlClusterRequestCommissioningApprovalParams { return x.inner }
+func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) Unwrap() *raw.MTRCommissionerControlClusterRequestCommissioningApprovalParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRCommissionerControlClusterRequestCommissioningApprovalParamsFromID adopts an existing object pointer as a MTRCommissionerControlClusterRequestCommissioningApprovalParams (nil for 0).
 func MTRCommissionerControlClusterRequestCommissioningApprovalParamsFromID(id objc.ID) *MTRCommissionerControlClusterRequestCommissioningApprovalParams {
@@ -161,4 +165,3 @@ type MTRCommissionerControlClusterRequestCommissioningApprovalParamsable interfa
 }
 
 var _ MTRCommissionerControlClusterRequestCommissioningApprovalParamsable = (*MTRCommissionerControlClusterRequestCommissioningApprovalParams)(nil)
-

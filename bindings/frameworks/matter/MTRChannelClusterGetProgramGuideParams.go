@@ -16,22 +16,22 @@ type MTRChannelClusterGetProgramGuideParams struct {
 }
 
 var (
-	_clsMTRChannelClusterGetProgramGuideParams = _objcClass("MTRChannelClusterGetProgramGuideParams")
-	_mTRChannelClusterGetProgramGuideParamsSelStartTime = objc.RegisterName("startTime")
-	_mTRChannelClusterGetProgramGuideParamsSelSetStartTime = objc.RegisterName("setStartTime:")
-	_mTRChannelClusterGetProgramGuideParamsSelEndTime = objc.RegisterName("endTime")
-	_mTRChannelClusterGetProgramGuideParamsSelSetEndTime = objc.RegisterName("setEndTime:")
-	_mTRChannelClusterGetProgramGuideParamsSelChannelList = objc.RegisterName("channelList")
-	_mTRChannelClusterGetProgramGuideParamsSelSetChannelList = objc.RegisterName("setChannelList:")
-	_mTRChannelClusterGetProgramGuideParamsSelPageToken = objc.RegisterName("pageToken")
-	_mTRChannelClusterGetProgramGuideParamsSelSetPageToken = objc.RegisterName("setPageToken:")
-	_mTRChannelClusterGetProgramGuideParamsSelRecordingFlag = objc.RegisterName("recordingFlag")
-	_mTRChannelClusterGetProgramGuideParamsSelSetRecordingFlag = objc.RegisterName("setRecordingFlag:")
-	_mTRChannelClusterGetProgramGuideParamsSelData = objc.RegisterName("data")
-	_mTRChannelClusterGetProgramGuideParamsSelSetData = objc.RegisterName("setData:")
-	_mTRChannelClusterGetProgramGuideParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRChannelClusterGetProgramGuideParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRChannelClusterGetProgramGuideParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRChannelClusterGetProgramGuideParams                               = _objcClass("MTRChannelClusterGetProgramGuideParams")
+	_mTRChannelClusterGetProgramGuideParamsSelStartTime                      = objc.RegisterName("startTime")
+	_mTRChannelClusterGetProgramGuideParamsSelSetStartTime                   = objc.RegisterName("setStartTime:")
+	_mTRChannelClusterGetProgramGuideParamsSelEndTime                        = objc.RegisterName("endTime")
+	_mTRChannelClusterGetProgramGuideParamsSelSetEndTime                     = objc.RegisterName("setEndTime:")
+	_mTRChannelClusterGetProgramGuideParamsSelChannelList                    = objc.RegisterName("channelList")
+	_mTRChannelClusterGetProgramGuideParamsSelSetChannelList                 = objc.RegisterName("setChannelList:")
+	_mTRChannelClusterGetProgramGuideParamsSelPageToken                      = objc.RegisterName("pageToken")
+	_mTRChannelClusterGetProgramGuideParamsSelSetPageToken                   = objc.RegisterName("setPageToken:")
+	_mTRChannelClusterGetProgramGuideParamsSelRecordingFlag                  = objc.RegisterName("recordingFlag")
+	_mTRChannelClusterGetProgramGuideParamsSelSetRecordingFlag               = objc.RegisterName("setRecordingFlag:")
+	_mTRChannelClusterGetProgramGuideParamsSelData                           = objc.RegisterName("data")
+	_mTRChannelClusterGetProgramGuideParamsSelSetData                        = objc.RegisterName("setData:")
+	_mTRChannelClusterGetProgramGuideParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRChannelClusterGetProgramGuideParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRChannelClusterGetProgramGuideParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRChannelClusterGetProgramGuideParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -47,7 +47,9 @@ func MTRChannelClusterGetProgramGuideParamsFromID(id objc.ID) *MTRChannelCluster
 
 func (o *MTRChannelClusterGetProgramGuideParams) StartTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterGetProgramGuideParamsSelStartTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -57,7 +59,9 @@ func (o *MTRChannelClusterGetProgramGuideParams) SetStartTime(startTime *foundat
 
 func (o *MTRChannelClusterGetProgramGuideParams) EndTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterGetProgramGuideParamsSelEndTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -76,7 +80,9 @@ func (o *MTRChannelClusterGetProgramGuideParams) SetChannelList(channelList *fou
 
 func (o *MTRChannelClusterGetProgramGuideParams) PageToken() *MTRChannelClusterPageTokenStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterGetProgramGuideParamsSelPageToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRChannelClusterPageTokenStructFromID(_ret)
 }
 
@@ -86,7 +92,9 @@ func (o *MTRChannelClusterGetProgramGuideParams) SetPageToken(pageToken *MTRChan
 
 func (o *MTRChannelClusterGetProgramGuideParams) RecordingFlag() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterGetProgramGuideParamsSelRecordingFlag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -96,7 +104,9 @@ func (o *MTRChannelClusterGetProgramGuideParams) SetRecordingFlag(recordingFlag 
 
 func (o *MTRChannelClusterGetProgramGuideParams) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterGetProgramGuideParamsSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -107,7 +117,9 @@ func (o *MTRChannelClusterGetProgramGuideParams) SetData(data *foundation.NSData
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRChannelClusterGetProgramGuideParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterGetProgramGuideParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -118,11 +130,12 @@ func (o *MTRChannelClusterGetProgramGuideParams) SetTimedInvokeTimeoutMs(timedIn
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRChannelClusterGetProgramGuideParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterGetProgramGuideParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRChannelClusterGetProgramGuideParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRChannelClusterGetProgramGuideParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

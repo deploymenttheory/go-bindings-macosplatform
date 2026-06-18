@@ -16,7 +16,9 @@ type MTRTestClusterClusterTestSimpleArgumentRequestParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRTestClusterClusterTestSimpleArgumentRequestParams].
-func (x *MTRTestClusterClusterTestSimpleArgumentRequestParams) Unwrap() *raw.MTRTestClusterClusterTestSimpleArgumentRequestParams { return x.inner }
+func (x *MTRTestClusterClusterTestSimpleArgumentRequestParams) Unwrap() *raw.MTRTestClusterClusterTestSimpleArgumentRequestParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -54,7 +56,9 @@ func (x *MTRTestClusterClusterTestSimpleArgumentRequestParams) WithServerSidePro
 	return x
 }
 
-func (x *MTRTestClusterClusterTestSimpleArgumentRequestParams) asMTRUnitTestingClusterTestSimpleArgumentRequestParams() *raw.MTRUnitTestingClusterTestSimpleArgumentRequestParams { return &x.inner.MTRUnitTestingClusterTestSimpleArgumentRequestParams }
+func (x *MTRTestClusterClusterTestSimpleArgumentRequestParams) asMTRUnitTestingClusterTestSimpleArgumentRequestParams() *raw.MTRUnitTestingClusterTestSimpleArgumentRequestParams {
+	return &x.inner.MTRUnitTestingClusterTestSimpleArgumentRequestParams
+}
 
 // MTRTestClusterClusterTestSimpleArgumentRequestParamsable is the interface implemented by [MTRTestClusterClusterTestSimpleArgumentRequestParams], for mocking and DI.
 type MTRTestClusterClusterTestSimpleArgumentRequestParamsable interface {
@@ -65,4 +69,3 @@ type MTRTestClusterClusterTestSimpleArgumentRequestParamsable interface {
 }
 
 var _ MTRTestClusterClusterTestSimpleArgumentRequestParamsable = (*MTRTestClusterClusterTestSimpleArgumentRequestParams)(nil)
-

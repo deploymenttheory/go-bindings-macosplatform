@@ -6,4 +6,3 @@ package networkextension
 // NWTCPConnectionAuthenticationDelegate wraps the ObjC protocol NWTCPConnectionAuthenticationDelegate.
 type NWTCPConnectionAuthenticationDelegate interface {
 }
-

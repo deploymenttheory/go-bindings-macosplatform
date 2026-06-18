@@ -18,42 +18,42 @@ type MTRClusterBarrierControl struct {
 }
 
 var (
-	_clsMTRClusterBarrierControl = _objcClass("MTRClusterBarrierControl")
-	_mTRClusterBarrierControlSelBarrierControlGoToPercentWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("barrierControlGoToPercentWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterBarrierControlSelBarrierControlStopWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("barrierControlStopWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterBarrierControlSelBarrierControlStopWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("barrierControlStopWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterBarrierControlSelReadAttributeBarrierMovingStateWithParams = objc.RegisterName("readAttributeBarrierMovingStateWithParams:")
-	_mTRClusterBarrierControlSelReadAttributeBarrierSafetyStatusWithParams = objc.RegisterName("readAttributeBarrierSafetyStatusWithParams:")
-	_mTRClusterBarrierControlSelReadAttributeBarrierCapabilitiesWithParams = objc.RegisterName("readAttributeBarrierCapabilitiesWithParams:")
-	_mTRClusterBarrierControlSelReadAttributeBarrierOpenEventsWithParams = objc.RegisterName("readAttributeBarrierOpenEventsWithParams:")
-	_mTRClusterBarrierControlSelWriteAttributeBarrierOpenEventsWithValueExpectedValueInterval = objc.RegisterName("writeAttributeBarrierOpenEventsWithValue:expectedValueInterval:")
-	_mTRClusterBarrierControlSelWriteAttributeBarrierOpenEventsWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeBarrierOpenEventsWithValue:expectedValueInterval:params:")
-	_mTRClusterBarrierControlSelReadAttributeBarrierCloseEventsWithParams = objc.RegisterName("readAttributeBarrierCloseEventsWithParams:")
-	_mTRClusterBarrierControlSelWriteAttributeBarrierCloseEventsWithValueExpectedValueInterval = objc.RegisterName("writeAttributeBarrierCloseEventsWithValue:expectedValueInterval:")
-	_mTRClusterBarrierControlSelWriteAttributeBarrierCloseEventsWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeBarrierCloseEventsWithValue:expectedValueInterval:params:")
-	_mTRClusterBarrierControlSelReadAttributeBarrierCommandOpenEventsWithParams = objc.RegisterName("readAttributeBarrierCommandOpenEventsWithParams:")
-	_mTRClusterBarrierControlSelWriteAttributeBarrierCommandOpenEventsWithValueExpectedValueInterval = objc.RegisterName("writeAttributeBarrierCommandOpenEventsWithValue:expectedValueInterval:")
-	_mTRClusterBarrierControlSelWriteAttributeBarrierCommandOpenEventsWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeBarrierCommandOpenEventsWithValue:expectedValueInterval:params:")
-	_mTRClusterBarrierControlSelReadAttributeBarrierCommandCloseEventsWithParams = objc.RegisterName("readAttributeBarrierCommandCloseEventsWithParams:")
-	_mTRClusterBarrierControlSelWriteAttributeBarrierCommandCloseEventsWithValueExpectedValueInterval = objc.RegisterName("writeAttributeBarrierCommandCloseEventsWithValue:expectedValueInterval:")
-	_mTRClusterBarrierControlSelWriteAttributeBarrierCommandCloseEventsWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeBarrierCommandCloseEventsWithValue:expectedValueInterval:params:")
-	_mTRClusterBarrierControlSelReadAttributeBarrierOpenPeriodWithParams = objc.RegisterName("readAttributeBarrierOpenPeriodWithParams:")
-	_mTRClusterBarrierControlSelWriteAttributeBarrierOpenPeriodWithValueExpectedValueInterval = objc.RegisterName("writeAttributeBarrierOpenPeriodWithValue:expectedValueInterval:")
-	_mTRClusterBarrierControlSelWriteAttributeBarrierOpenPeriodWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeBarrierOpenPeriodWithValue:expectedValueInterval:params:")
-	_mTRClusterBarrierControlSelReadAttributeBarrierClosePeriodWithParams = objc.RegisterName("readAttributeBarrierClosePeriodWithParams:")
-	_mTRClusterBarrierControlSelWriteAttributeBarrierClosePeriodWithValueExpectedValueInterval = objc.RegisterName("writeAttributeBarrierClosePeriodWithValue:expectedValueInterval:")
-	_mTRClusterBarrierControlSelWriteAttributeBarrierClosePeriodWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeBarrierClosePeriodWithValue:expectedValueInterval:params:")
-	_mTRClusterBarrierControlSelReadAttributeBarrierPositionWithParams = objc.RegisterName("readAttributeBarrierPositionWithParams:")
-	_mTRClusterBarrierControlSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterBarrierControlSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterBarrierControlSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterBarrierControlSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterBarrierControlSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterBarrierControlSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterBarrierControlSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_clsMTRClusterBarrierControl                                                                                        = _objcClass("MTRClusterBarrierControl")
+	_mTRClusterBarrierControlSelBarrierControlGoToPercentWithParamsExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("barrierControlGoToPercentWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterBarrierControlSelBarrierControlStopWithParamsExpectedValuesExpectedValueIntervalCompletion               = objc.RegisterName("barrierControlStopWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterBarrierControlSelBarrierControlStopWithExpectedValuesExpectedValueIntervalCompletion                     = objc.RegisterName("barrierControlStopWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterBarrierControlSelReadAttributeBarrierMovingStateWithParams                                               = objc.RegisterName("readAttributeBarrierMovingStateWithParams:")
+	_mTRClusterBarrierControlSelReadAttributeBarrierSafetyStatusWithParams                                              = objc.RegisterName("readAttributeBarrierSafetyStatusWithParams:")
+	_mTRClusterBarrierControlSelReadAttributeBarrierCapabilitiesWithParams                                              = objc.RegisterName("readAttributeBarrierCapabilitiesWithParams:")
+	_mTRClusterBarrierControlSelReadAttributeBarrierOpenEventsWithParams                                                = objc.RegisterName("readAttributeBarrierOpenEventsWithParams:")
+	_mTRClusterBarrierControlSelWriteAttributeBarrierOpenEventsWithValueExpectedValueInterval                           = objc.RegisterName("writeAttributeBarrierOpenEventsWithValue:expectedValueInterval:")
+	_mTRClusterBarrierControlSelWriteAttributeBarrierOpenEventsWithValueExpectedValueIntervalParams                     = objc.RegisterName("writeAttributeBarrierOpenEventsWithValue:expectedValueInterval:params:")
+	_mTRClusterBarrierControlSelReadAttributeBarrierCloseEventsWithParams                                               = objc.RegisterName("readAttributeBarrierCloseEventsWithParams:")
+	_mTRClusterBarrierControlSelWriteAttributeBarrierCloseEventsWithValueExpectedValueInterval                          = objc.RegisterName("writeAttributeBarrierCloseEventsWithValue:expectedValueInterval:")
+	_mTRClusterBarrierControlSelWriteAttributeBarrierCloseEventsWithValueExpectedValueIntervalParams                    = objc.RegisterName("writeAttributeBarrierCloseEventsWithValue:expectedValueInterval:params:")
+	_mTRClusterBarrierControlSelReadAttributeBarrierCommandOpenEventsWithParams                                         = objc.RegisterName("readAttributeBarrierCommandOpenEventsWithParams:")
+	_mTRClusterBarrierControlSelWriteAttributeBarrierCommandOpenEventsWithValueExpectedValueInterval                    = objc.RegisterName("writeAttributeBarrierCommandOpenEventsWithValue:expectedValueInterval:")
+	_mTRClusterBarrierControlSelWriteAttributeBarrierCommandOpenEventsWithValueExpectedValueIntervalParams              = objc.RegisterName("writeAttributeBarrierCommandOpenEventsWithValue:expectedValueInterval:params:")
+	_mTRClusterBarrierControlSelReadAttributeBarrierCommandCloseEventsWithParams                                        = objc.RegisterName("readAttributeBarrierCommandCloseEventsWithParams:")
+	_mTRClusterBarrierControlSelWriteAttributeBarrierCommandCloseEventsWithValueExpectedValueInterval                   = objc.RegisterName("writeAttributeBarrierCommandCloseEventsWithValue:expectedValueInterval:")
+	_mTRClusterBarrierControlSelWriteAttributeBarrierCommandCloseEventsWithValueExpectedValueIntervalParams             = objc.RegisterName("writeAttributeBarrierCommandCloseEventsWithValue:expectedValueInterval:params:")
+	_mTRClusterBarrierControlSelReadAttributeBarrierOpenPeriodWithParams                                                = objc.RegisterName("readAttributeBarrierOpenPeriodWithParams:")
+	_mTRClusterBarrierControlSelWriteAttributeBarrierOpenPeriodWithValueExpectedValueInterval                           = objc.RegisterName("writeAttributeBarrierOpenPeriodWithValue:expectedValueInterval:")
+	_mTRClusterBarrierControlSelWriteAttributeBarrierOpenPeriodWithValueExpectedValueIntervalParams                     = objc.RegisterName("writeAttributeBarrierOpenPeriodWithValue:expectedValueInterval:params:")
+	_mTRClusterBarrierControlSelReadAttributeBarrierClosePeriodWithParams                                               = objc.RegisterName("readAttributeBarrierClosePeriodWithParams:")
+	_mTRClusterBarrierControlSelWriteAttributeBarrierClosePeriodWithValueExpectedValueInterval                          = objc.RegisterName("writeAttributeBarrierClosePeriodWithValue:expectedValueInterval:")
+	_mTRClusterBarrierControlSelWriteAttributeBarrierClosePeriodWithValueExpectedValueIntervalParams                    = objc.RegisterName("writeAttributeBarrierClosePeriodWithValue:expectedValueInterval:params:")
+	_mTRClusterBarrierControlSelReadAttributeBarrierPositionWithParams                                                  = objc.RegisterName("readAttributeBarrierPositionWithParams:")
+	_mTRClusterBarrierControlSelReadAttributeGeneratedCommandListWithParams                                             = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterBarrierControlSelReadAttributeAcceptedCommandListWithParams                                              = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterBarrierControlSelReadAttributeAttributeListWithParams                                                    = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterBarrierControlSelReadAttributeFeatureMapWithParams                                                       = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterBarrierControlSelReadAttributeClusterRevisionWithParams                                                  = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterBarrierControlSelInitWithDeviceEndpointIDQueue                                                           = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterBarrierControlSelInitWithDeviceEndpointQueue                                                             = objc.RegisterName("initWithDevice:endpoint:queue:")
 	_mTRClusterBarrierControlSelBarrierControlGoToPercentWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("barrierControlGoToPercentWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterBarrierControlSelBarrierControlStopWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("barrierControlStopWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterBarrierControlSelBarrierControlStopWithExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("barrierControlStopWithExpectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterBarrierControlSelBarrierControlStopWithParamsExpectedValuesExpectedValueIntervalCompletionHandler        = objc.RegisterName("barrierControlStopWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterBarrierControlSelBarrierControlStopWithExpectedValuesExpectedValueIntervalCompletionHandler              = objc.RegisterName("barrierControlStopWithExpectedValues:expectedValueInterval:completionHandler:")
 )
 
 func MTRClusterBarrierControlFromID(id objc.ID) *MTRClusterBarrierControl {
@@ -225,13 +225,17 @@ func (o *MTRClusterBarrierControl) ReadAttributeClusterRevisionWithParams(params
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterBarrierControl) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterBarrierControl {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterBarrierControlSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterBarrierControlFromID(_ret)
 }
 
 func (o *MTRClusterBarrierControl) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterBarrierControl {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterBarrierControlSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterBarrierControlFromID(_ret)
 }
 
@@ -267,4 +271,3 @@ func (o *MTRClusterBarrierControl) BarrierControlStopWithExpectedValuesExpectedV
 	}
 	o.Ptr().Send(_mTRClusterBarrierControlSelBarrierControlStopWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues, expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
-

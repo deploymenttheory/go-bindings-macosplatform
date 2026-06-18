@@ -85,4 +85,3 @@ type MediaExtensionPropertiesable interface {
 }
 
 var _ MediaExtensionPropertiesable = (*MediaExtensionProperties)(nil)
-

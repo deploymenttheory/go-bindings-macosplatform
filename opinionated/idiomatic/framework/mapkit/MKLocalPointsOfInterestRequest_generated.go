@@ -91,4 +91,3 @@ type LocalPointsOfInterestRequestable interface {
 }
 
 var _ LocalPointsOfInterestRequestable = (*LocalPointsOfInterestRequest)(nil)
-

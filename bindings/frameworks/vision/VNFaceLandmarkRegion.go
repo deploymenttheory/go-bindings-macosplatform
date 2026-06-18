@@ -16,7 +16,7 @@ type VNFaceLandmarkRegion struct {
 }
 
 var (
-	_clsVNFaceLandmarkRegion = _objcClass("VNFaceLandmarkRegion")
+	_clsVNFaceLandmarkRegion           = _objcClass("VNFaceLandmarkRegion")
 	_vNFaceLandmarkRegionSelPointCount = objc.RegisterName("pointCount")
 )
 
@@ -34,4 +34,3 @@ func (o *VNFaceLandmarkRegion) PointCount() uint {
 	_ret := objc.Send[uint](o.Ptr(), _vNFaceLandmarkRegionSelPointCount)
 	return _ret
 }
-

@@ -16,12 +16,12 @@ type MTRDeviceTypeRevision struct {
 }
 
 var (
-	_clsMTRDeviceTypeRevision = _objcClass("MTRDeviceTypeRevision")
+	_clsMTRDeviceTypeRevision                             = _objcClass("MTRDeviceTypeRevision")
 	_mTRDeviceTypeRevisionSelInitWithDeviceTypeIDRevision = objc.RegisterName("initWithDeviceTypeID:revision:")
-	_mTRDeviceTypeRevisionSelInitWithDeviceTypeStruct = objc.RegisterName("initWithDeviceTypeStruct:")
-	_mTRDeviceTypeRevisionSelDeviceTypeID = objc.RegisterName("deviceTypeID")
-	_mTRDeviceTypeRevisionSelDeviceTypeRevision = objc.RegisterName("deviceTypeRevision")
-	_mTRDeviceTypeRevisionSelTypeInformation = objc.RegisterName("typeInformation")
+	_mTRDeviceTypeRevisionSelInitWithDeviceTypeStruct     = objc.RegisterName("initWithDeviceTypeStruct:")
+	_mTRDeviceTypeRevisionSelDeviceTypeID                 = objc.RegisterName("deviceTypeID")
+	_mTRDeviceTypeRevisionSelDeviceTypeRevision           = objc.RegisterName("deviceTypeRevision")
+	_mTRDeviceTypeRevisionSelTypeInformation              = objc.RegisterName("typeInformation")
 )
 
 func MTRDeviceTypeRevisionFromID(id objc.ID) *MTRDeviceTypeRevision {
@@ -37,33 +37,42 @@ func MTRDeviceTypeRevisionFromID(id objc.ID) *MTRDeviceTypeRevision {
 // The provided deviceTypeID must be in the range 0xVVVV0000-0xVVVVBFFF, where VVVV is the vendor identifier (0 for standard device types). The provided deviceTypeRevision must be in the range 1-65535.
 func (o *MTRDeviceTypeRevision) InitWithDeviceTypeIDRevision(deviceTypeID *foundation.NSNumber, revision *foundation.NSNumber) *MTRDeviceTypeRevision {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceTypeRevisionSelInitWithDeviceTypeIDRevision, deviceTypeID.Ptr(), revision.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRDeviceTypeRevisionFromID(_ret)
 }
 
 // Initializes the receiver based on the values in the specified struct.
 func (o *MTRDeviceTypeRevision) InitWithDeviceTypeStruct(deviceTypeStruct *MTRDescriptorClusterDeviceTypeStruct) *MTRDeviceTypeRevision {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceTypeRevisionSelInitWithDeviceTypeStruct, deviceTypeStruct.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRDeviceTypeRevisionFromID(_ret)
 }
 
 func (o *MTRDeviceTypeRevision) DeviceTypeID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceTypeRevisionSelDeviceTypeID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDeviceTypeRevision) DeviceTypeRevision() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceTypeRevisionSelDeviceTypeRevision)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // Returns the MTRDeviceType corresponding to deviceTypeID, or nil if deviceTypeID does not represent a known device type.
 func (o *MTRDeviceTypeRevision) TypeInformation() *MTRDeviceType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceTypeRevisionSelTypeInformation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRDeviceTypeFromID(_ret)
 }
-

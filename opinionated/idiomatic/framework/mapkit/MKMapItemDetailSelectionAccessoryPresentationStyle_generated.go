@@ -15,7 +15,9 @@ type MapItemDetailSelectionAccessoryPresentationStyle struct {
 }
 
 // Unwrap returns the underlying [raw.MKMapItemDetailSelectionAccessoryPresentationStyle].
-func (x *MapItemDetailSelectionAccessoryPresentationStyle) Unwrap() *raw.MKMapItemDetailSelectionAccessoryPresentationStyle { return x.inner }
+func (x *MapItemDetailSelectionAccessoryPresentationStyle) Unwrap() *raw.MKMapItemDetailSelectionAccessoryPresentationStyle {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -41,4 +43,3 @@ type MapItemDetailSelectionAccessoryPresentationStyleable interface {
 }
 
 var _ MapItemDetailSelectionAccessoryPresentationStyleable = (*MapItemDetailSelectionAccessoryPresentationStyle)(nil)
-

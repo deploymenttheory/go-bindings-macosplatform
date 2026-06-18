@@ -15,7 +15,9 @@ type MetricPlayerItemRateChangeEvent struct {
 }
 
 // Unwrap returns the underlying [raw.AVMetricPlayerItemRateChangeEvent].
-func (x *MetricPlayerItemRateChangeEvent) Unwrap() *raw.AVMetricPlayerItemRateChangeEvent { return x.inner }
+func (x *MetricPlayerItemRateChangeEvent) Unwrap() *raw.AVMetricPlayerItemRateChangeEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -54,9 +56,13 @@ func (x *MetricPlayerItemRateChangeEvent) Variant() *AssetVariant {
 	return &AssetVariant{inner: _r}
 }
 
-func (x *MetricPlayerItemRateChangeEvent) asMetricPlayerItemRateChangeEvent() *raw.AVMetricPlayerItemRateChangeEvent { return x.inner }
+func (x *MetricPlayerItemRateChangeEvent) asMetricPlayerItemRateChangeEvent() *raw.AVMetricPlayerItemRateChangeEvent {
+	return x.inner
+}
 
-func (x *MetricPlayerItemRateChangeEvent) asMetricEvent() *raw.AVMetricEvent { return &x.inner.AVMetricEvent }
+func (x *MetricPlayerItemRateChangeEvent) asMetricEvent() *raw.AVMetricEvent {
+	return &x.inner.AVMetricEvent
+}
 
 // MetricPlayerItemRateChangeEventable is the interface implemented by [MetricPlayerItemRateChangeEvent], for mocking and DI.
 type MetricPlayerItemRateChangeEventable interface {
@@ -67,4 +73,3 @@ type MetricPlayerItemRateChangeEventable interface {
 }
 
 var _ MetricPlayerItemRateChangeEventable = (*MetricPlayerItemRateChangeEvent)(nil)
-

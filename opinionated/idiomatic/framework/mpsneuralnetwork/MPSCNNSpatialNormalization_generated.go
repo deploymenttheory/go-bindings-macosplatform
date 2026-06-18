@@ -167,4 +167,3 @@ type CNNSpatialNormalizationable interface {
 }
 
 var _ CNNSpatialNormalizationable = (*CNNSpatialNormalization)(nil)
-

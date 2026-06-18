@@ -17,8 +17,8 @@ type VNTrackObjectRequest struct {
 }
 
 var (
-	_clsVNTrackObjectRequest = _objcClass("VNTrackObjectRequest")
-	_vNTrackObjectRequestSelInitWithDetectedObjectObservation = objc.RegisterName("initWithDetectedObjectObservation:")
+	_clsVNTrackObjectRequest                                                   = _objcClass("VNTrackObjectRequest")
+	_vNTrackObjectRequestSelInitWithDetectedObjectObservation                  = objc.RegisterName("initWithDetectedObjectObservation:")
 	_vNTrackObjectRequestSelInitWithDetectedObjectObservationCompletionHandler = objc.RegisterName("initWithDetectedObjectObservation:completionHandler:")
 )
 
@@ -35,7 +35,9 @@ func VNTrackObjectRequestFromID(id objc.ID) *VNTrackObjectRequest {
 // @brief Create a new request with detected object observation. @param    observation          Detected object observation with bounding box info.
 func (o *VNTrackObjectRequest) InitWithDetectedObjectObservation(observation *VNDetectedObjectObservation) *VNTrackObjectRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTrackObjectRequestSelInitWithDetectedObjectObservation, observation.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTrackObjectRequestFromID(_ret)
 }
 
@@ -52,7 +54,8 @@ func (o *VNTrackObjectRequest) InitWithDetectedObjectObservationCompletionHandle
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTrackObjectRequestSelInitWithDetectedObjectObservationCompletionHandler, observation.Ptr(), __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTrackObjectRequestFromID(_ret)
 }
-

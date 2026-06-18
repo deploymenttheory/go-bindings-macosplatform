@@ -18,26 +18,26 @@ type MTRBaseClusterWakeOnLan struct {
 }
 
 var (
-	_clsMTRBaseClusterWakeOnLan = _objcClass("MTRBaseClusterWakeOnLan")
-	_mTRBaseClusterWakeOnLanSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
-	_mTRBaseClusterWakeOnLanSelReadAttributeMACAddressWithCompletionHandler = objc.RegisterName("readAttributeMACAddressWithCompletionHandler:")
-	_mTRBaseClusterWakeOnLanSelSubscribeAttributeMACAddressWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeMACAddressWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterWakeOnLanSelReadAttributeMACAddressWithAttributeCacheEndpointQueueCompletionHandler = objc.RegisterName("readAttributeMACAddressWithAttributeCache:endpoint:queue:completionHandler:")
-	_mTRBaseClusterWakeOnLanSelReadAttributeGeneratedCommandListWithCompletionHandler = objc.RegisterName("readAttributeGeneratedCommandListWithCompletionHandler:")
+	_clsMTRBaseClusterWakeOnLan                                                                                                           = _objcClass("MTRBaseClusterWakeOnLan")
+	_mTRBaseClusterWakeOnLanSelInitWithDeviceEndpointQueue                                                                                = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRBaseClusterWakeOnLanSelReadAttributeMACAddressWithCompletionHandler                                                               = objc.RegisterName("readAttributeMACAddressWithCompletionHandler:")
+	_mTRBaseClusterWakeOnLanSelSubscribeAttributeMACAddressWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler           = objc.RegisterName("subscribeAttributeMACAddressWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterWakeOnLanSelReadAttributeMACAddressWithAttributeCacheEndpointQueueCompletionHandler                                    = objc.RegisterName("readAttributeMACAddressWithAttributeCache:endpoint:queue:completionHandler:")
+	_mTRBaseClusterWakeOnLanSelReadAttributeGeneratedCommandListWithCompletionHandler                                                     = objc.RegisterName("readAttributeGeneratedCommandListWithCompletionHandler:")
 	_mTRBaseClusterWakeOnLanSelSubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterWakeOnLanSelReadAttributeGeneratedCommandListWithAttributeCacheEndpointQueueCompletionHandler = objc.RegisterName("readAttributeGeneratedCommandListWithAttributeCache:endpoint:queue:completionHandler:")
-	_mTRBaseClusterWakeOnLanSelReadAttributeAcceptedCommandListWithCompletionHandler = objc.RegisterName("readAttributeAcceptedCommandListWithCompletionHandler:")
-	_mTRBaseClusterWakeOnLanSelSubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterWakeOnLanSelReadAttributeAcceptedCommandListWithAttributeCacheEndpointQueueCompletionHandler = objc.RegisterName("readAttributeAcceptedCommandListWithAttributeCache:endpoint:queue:completionHandler:")
-	_mTRBaseClusterWakeOnLanSelReadAttributeAttributeListWithCompletionHandler = objc.RegisterName("readAttributeAttributeListWithCompletionHandler:")
-	_mTRBaseClusterWakeOnLanSelSubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterWakeOnLanSelReadAttributeAttributeListWithAttributeCacheEndpointQueueCompletionHandler = objc.RegisterName("readAttributeAttributeListWithAttributeCache:endpoint:queue:completionHandler:")
-	_mTRBaseClusterWakeOnLanSelReadAttributeFeatureMapWithCompletionHandler = objc.RegisterName("readAttributeFeatureMapWithCompletionHandler:")
-	_mTRBaseClusterWakeOnLanSelSubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterWakeOnLanSelReadAttributeFeatureMapWithAttributeCacheEndpointQueueCompletionHandler = objc.RegisterName("readAttributeFeatureMapWithAttributeCache:endpoint:queue:completionHandler:")
-	_mTRBaseClusterWakeOnLanSelReadAttributeClusterRevisionWithCompletionHandler = objc.RegisterName("readAttributeClusterRevisionWithCompletionHandler:")
-	_mTRBaseClusterWakeOnLanSelSubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterWakeOnLanSelReadAttributeClusterRevisionWithAttributeCacheEndpointQueueCompletionHandler = objc.RegisterName("readAttributeClusterRevisionWithAttributeCache:endpoint:queue:completionHandler:")
+	_mTRBaseClusterWakeOnLanSelReadAttributeGeneratedCommandListWithAttributeCacheEndpointQueueCompletionHandler                          = objc.RegisterName("readAttributeGeneratedCommandListWithAttributeCache:endpoint:queue:completionHandler:")
+	_mTRBaseClusterWakeOnLanSelReadAttributeAcceptedCommandListWithCompletionHandler                                                      = objc.RegisterName("readAttributeAcceptedCommandListWithCompletionHandler:")
+	_mTRBaseClusterWakeOnLanSelSubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler  = objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterWakeOnLanSelReadAttributeAcceptedCommandListWithAttributeCacheEndpointQueueCompletionHandler                           = objc.RegisterName("readAttributeAcceptedCommandListWithAttributeCache:endpoint:queue:completionHandler:")
+	_mTRBaseClusterWakeOnLanSelReadAttributeAttributeListWithCompletionHandler                                                            = objc.RegisterName("readAttributeAttributeListWithCompletionHandler:")
+	_mTRBaseClusterWakeOnLanSelSubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler        = objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterWakeOnLanSelReadAttributeAttributeListWithAttributeCacheEndpointQueueCompletionHandler                                 = objc.RegisterName("readAttributeAttributeListWithAttributeCache:endpoint:queue:completionHandler:")
+	_mTRBaseClusterWakeOnLanSelReadAttributeFeatureMapWithCompletionHandler                                                               = objc.RegisterName("readAttributeFeatureMapWithCompletionHandler:")
+	_mTRBaseClusterWakeOnLanSelSubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler           = objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterWakeOnLanSelReadAttributeFeatureMapWithAttributeCacheEndpointQueueCompletionHandler                                    = objc.RegisterName("readAttributeFeatureMapWithAttributeCache:endpoint:queue:completionHandler:")
+	_mTRBaseClusterWakeOnLanSelReadAttributeClusterRevisionWithCompletionHandler                                                          = objc.RegisterName("readAttributeClusterRevisionWithCompletionHandler:")
+	_mTRBaseClusterWakeOnLanSelSubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler      = objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterWakeOnLanSelReadAttributeClusterRevisionWithAttributeCacheEndpointQueueCompletionHandler                               = objc.RegisterName("readAttributeClusterRevisionWithAttributeCache:endpoint:queue:completionHandler:")
 )
 
 func MTRBaseClusterWakeOnLanFromID(id objc.ID) *MTRBaseClusterWakeOnLan {
@@ -52,7 +52,9 @@ func MTRBaseClusterWakeOnLanFromID(id objc.ID) *MTRBaseClusterWakeOnLan {
 
 func (o *MTRBaseClusterWakeOnLan) InitWithDeviceEndpointQueue(device *MTRBaseDevice, endpoint uint16, queue *foundation.NSObject) *MTRBaseClusterWakeOnLan {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBaseClusterWakeOnLanSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRBaseClusterWakeOnLanFromID(_ret)
 }
 
@@ -259,4 +261,3 @@ func MTRBaseClusterWakeOnLanReadAttributeClusterRevisionWithAttributeCacheEndpoi
 	}
 	objc.ID(_clsMTRBaseClusterWakeOnLan).Send(_mTRBaseClusterWakeOnLanSelReadAttributeClusterRevisionWithAttributeCacheEndpointQueueCompletionHandler, attributeCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), __block_completionHandler)
 }
-

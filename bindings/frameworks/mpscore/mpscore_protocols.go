@@ -30,4 +30,3 @@ type MPSNDArrayAllocator interface {
 	foundation.NSCopying
 	ArrayForCommandBufferArrayDescriptorKernel(cmdBuf metal.MTLCommandBuffer, descriptor *MPSNDArrayDescriptor, kernel *MPSKernel) *MPSNDArray
 }
-

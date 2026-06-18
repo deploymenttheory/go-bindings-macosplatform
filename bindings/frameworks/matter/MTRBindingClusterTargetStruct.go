@@ -16,16 +16,16 @@ type MTRBindingClusterTargetStruct struct {
 }
 
 var (
-	_clsMTRBindingClusterTargetStruct = _objcClass("MTRBindingClusterTargetStruct")
-	_mTRBindingClusterTargetStructSelNode = objc.RegisterName("node")
-	_mTRBindingClusterTargetStructSelSetNode = objc.RegisterName("setNode:")
-	_mTRBindingClusterTargetStructSelGroup = objc.RegisterName("group")
-	_mTRBindingClusterTargetStructSelSetGroup = objc.RegisterName("setGroup:")
-	_mTRBindingClusterTargetStructSelEndpoint = objc.RegisterName("endpoint")
-	_mTRBindingClusterTargetStructSelSetEndpoint = objc.RegisterName("setEndpoint:")
-	_mTRBindingClusterTargetStructSelCluster = objc.RegisterName("cluster")
-	_mTRBindingClusterTargetStructSelSetCluster = objc.RegisterName("setCluster:")
-	_mTRBindingClusterTargetStructSelFabricIndex = objc.RegisterName("fabricIndex")
+	_clsMTRBindingClusterTargetStruct               = _objcClass("MTRBindingClusterTargetStruct")
+	_mTRBindingClusterTargetStructSelNode           = objc.RegisterName("node")
+	_mTRBindingClusterTargetStructSelSetNode        = objc.RegisterName("setNode:")
+	_mTRBindingClusterTargetStructSelGroup          = objc.RegisterName("group")
+	_mTRBindingClusterTargetStructSelSetGroup       = objc.RegisterName("setGroup:")
+	_mTRBindingClusterTargetStructSelEndpoint       = objc.RegisterName("endpoint")
+	_mTRBindingClusterTargetStructSelSetEndpoint    = objc.RegisterName("setEndpoint:")
+	_mTRBindingClusterTargetStructSelCluster        = objc.RegisterName("cluster")
+	_mTRBindingClusterTargetStructSelSetCluster     = objc.RegisterName("setCluster:")
+	_mTRBindingClusterTargetStructSelFabricIndex    = objc.RegisterName("fabricIndex")
 	_mTRBindingClusterTargetStructSelSetFabricIndex = objc.RegisterName("setFabricIndex:")
 )
 
@@ -41,7 +41,9 @@ func MTRBindingClusterTargetStructFromID(id objc.ID) *MTRBindingClusterTargetStr
 
 func (o *MTRBindingClusterTargetStruct) Node() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBindingClusterTargetStructSelNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -51,7 +53,9 @@ func (o *MTRBindingClusterTargetStruct) SetNode(node *foundation.NSNumber) {
 
 func (o *MTRBindingClusterTargetStruct) Group() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBindingClusterTargetStructSelGroup)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *MTRBindingClusterTargetStruct) SetGroup(group *foundation.NSNumber) {
 
 func (o *MTRBindingClusterTargetStruct) Endpoint() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBindingClusterTargetStructSelEndpoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -71,7 +77,9 @@ func (o *MTRBindingClusterTargetStruct) SetEndpoint(endpoint *foundation.NSNumbe
 
 func (o *MTRBindingClusterTargetStruct) Cluster() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBindingClusterTargetStructSelCluster)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -81,11 +89,12 @@ func (o *MTRBindingClusterTargetStruct) SetCluster(cluster *foundation.NSNumber)
 
 func (o *MTRBindingClusterTargetStruct) FabricIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBindingClusterTargetStructSelFabricIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRBindingClusterTargetStruct) SetFabricIndex(fabricIndex *foundation.NSNumber) {
 	o.Ptr().Send(_mTRBindingClusterTargetStructSelSetFabricIndex, fabricIndex.Ptr())
 }
-

@@ -19,37 +19,37 @@ type NSXMLDocument struct {
 }
 
 var (
-	_clsNSXMLDocument = _objcClass("NSXMLDocument")
-	_nSXMLDocumentSelInit = objc.RegisterName("init")
-	_nSXMLDocumentSelInitWithXMLStringOptionsError = objc.RegisterName("initWithXMLString:options:error:")
-	_nSXMLDocumentSelInitWithContentsOfURLOptionsError = objc.RegisterName("initWithContentsOfURL:options:error:")
-	_nSXMLDocumentSelInitWithDataOptionsError = objc.RegisterName("initWithData:options:error:")
-	_nSXMLDocumentSelInitWithRootElement = objc.RegisterName("initWithRootElement:")
-	_nSXMLDocumentSelReplacementClassForClass = objc.RegisterName("replacementClassForClass:")
-	_nSXMLDocumentSelSetRootElement = objc.RegisterName("setRootElement:")
-	_nSXMLDocumentSelRootElement = objc.RegisterName("rootElement")
-	_nSXMLDocumentSelInsertChildAtIndex = objc.RegisterName("insertChild:atIndex:")
-	_nSXMLDocumentSelInsertChildrenAtIndex = objc.RegisterName("insertChildren:atIndex:")
-	_nSXMLDocumentSelRemoveChildAtIndex = objc.RegisterName("removeChildAtIndex:")
-	_nSXMLDocumentSelSetChildren = objc.RegisterName("setChildren:")
-	_nSXMLDocumentSelAddChild = objc.RegisterName("addChild:")
-	_nSXMLDocumentSelReplaceChildAtIndexWithNode = objc.RegisterName("replaceChildAtIndex:withNode:")
-	_nSXMLDocumentSelXMLDataWithOptions = objc.RegisterName("XMLDataWithOptions:")
-	_nSXMLDocumentSelObjectByApplyingXSLTArgumentsError = objc.RegisterName("objectByApplyingXSLT:arguments:error:")
+	_clsNSXMLDocument                                         = _objcClass("NSXMLDocument")
+	_nSXMLDocumentSelInit                                     = objc.RegisterName("init")
+	_nSXMLDocumentSelInitWithXMLStringOptionsError            = objc.RegisterName("initWithXMLString:options:error:")
+	_nSXMLDocumentSelInitWithContentsOfURLOptionsError        = objc.RegisterName("initWithContentsOfURL:options:error:")
+	_nSXMLDocumentSelInitWithDataOptionsError                 = objc.RegisterName("initWithData:options:error:")
+	_nSXMLDocumentSelInitWithRootElement                      = objc.RegisterName("initWithRootElement:")
+	_nSXMLDocumentSelReplacementClassForClass                 = objc.RegisterName("replacementClassForClass:")
+	_nSXMLDocumentSelSetRootElement                           = objc.RegisterName("setRootElement:")
+	_nSXMLDocumentSelRootElement                              = objc.RegisterName("rootElement")
+	_nSXMLDocumentSelInsertChildAtIndex                       = objc.RegisterName("insertChild:atIndex:")
+	_nSXMLDocumentSelInsertChildrenAtIndex                    = objc.RegisterName("insertChildren:atIndex:")
+	_nSXMLDocumentSelRemoveChildAtIndex                       = objc.RegisterName("removeChildAtIndex:")
+	_nSXMLDocumentSelSetChildren                              = objc.RegisterName("setChildren:")
+	_nSXMLDocumentSelAddChild                                 = objc.RegisterName("addChild:")
+	_nSXMLDocumentSelReplaceChildAtIndexWithNode              = objc.RegisterName("replaceChildAtIndex:withNode:")
+	_nSXMLDocumentSelXMLDataWithOptions                       = objc.RegisterName("XMLDataWithOptions:")
+	_nSXMLDocumentSelObjectByApplyingXSLTArgumentsError       = objc.RegisterName("objectByApplyingXSLT:arguments:error:")
 	_nSXMLDocumentSelObjectByApplyingXSLTStringArgumentsError = objc.RegisterName("objectByApplyingXSLTString:arguments:error:")
-	_nSXMLDocumentSelObjectByApplyingXSLTAtURLArgumentsError = objc.RegisterName("objectByApplyingXSLTAtURL:arguments:error:")
-	_nSXMLDocumentSelValidateAndReturnError = objc.RegisterName("validateAndReturnError:")
-	_nSXMLDocumentSelCharacterEncoding = objc.RegisterName("characterEncoding")
-	_nSXMLDocumentSelSetCharacterEncoding = objc.RegisterName("setCharacterEncoding:")
-	_nSXMLDocumentSelIsStandalone = objc.RegisterName("isStandalone")
-	_nSXMLDocumentSelSetStandalone = objc.RegisterName("setStandalone:")
-	_nSXMLDocumentSelDocumentContentKind = objc.RegisterName("documentContentKind")
-	_nSXMLDocumentSelSetDocumentContentKind = objc.RegisterName("setDocumentContentKind:")
-	_nSXMLDocumentSelMIMEType = objc.RegisterName("MIMEType")
-	_nSXMLDocumentSelSetMIMEType = objc.RegisterName("setMIMEType:")
-	_nSXMLDocumentSelDTD = objc.RegisterName("DTD")
-	_nSXMLDocumentSelSetDTD = objc.RegisterName("setDTD:")
-	_nSXMLDocumentSelXMLData = objc.RegisterName("XMLData")
+	_nSXMLDocumentSelObjectByApplyingXSLTAtURLArgumentsError  = objc.RegisterName("objectByApplyingXSLTAtURL:arguments:error:")
+	_nSXMLDocumentSelValidateAndReturnError                   = objc.RegisterName("validateAndReturnError:")
+	_nSXMLDocumentSelCharacterEncoding                        = objc.RegisterName("characterEncoding")
+	_nSXMLDocumentSelSetCharacterEncoding                     = objc.RegisterName("setCharacterEncoding:")
+	_nSXMLDocumentSelIsStandalone                             = objc.RegisterName("isStandalone")
+	_nSXMLDocumentSelSetStandalone                            = objc.RegisterName("setStandalone:")
+	_nSXMLDocumentSelDocumentContentKind                      = objc.RegisterName("documentContentKind")
+	_nSXMLDocumentSelSetDocumentContentKind                   = objc.RegisterName("setDocumentContentKind:")
+	_nSXMLDocumentSelMIMEType                                 = objc.RegisterName("MIMEType")
+	_nSXMLDocumentSelSetMIMEType                              = objc.RegisterName("setMIMEType:")
+	_nSXMLDocumentSelDTD                                      = objc.RegisterName("DTD")
+	_nSXMLDocumentSelSetDTD                                   = objc.RegisterName("setDTD:")
+	_nSXMLDocumentSelXMLData                                  = objc.RegisterName("XMLData")
 )
 
 func NSXMLDocumentFromID(id objc.ID) *NSXMLDocument {
@@ -64,7 +64,9 @@ func NSXMLDocumentFromID(id objc.ID) *NSXMLDocument {
 
 func (o *NSXMLDocument) Init() *NSXMLDocument {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDocumentSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLDocumentFromID(_ret)
 }
 
@@ -72,7 +74,9 @@ func (o *NSXMLDocument) Init() *NSXMLDocument {
 func (o *NSXMLDocument) InitWithXMLStringOptionsError(string_ *NSString, mask NSXMLNodeOptions) (*NSXMLDocument, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDocumentSelInitWithXMLStringOptionsError, string_.Ptr(), mask, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -83,7 +87,9 @@ func (o *NSXMLDocument) InitWithXMLStringOptionsError(string_ *NSString, mask NS
 func (o *NSXMLDocument) InitWithContentsOfURLOptionsError(url *NSURL, mask NSXMLNodeOptions) (*NSXMLDocument, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDocumentSelInitWithContentsOfURLOptionsError, url.Ptr(), mask, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -94,7 +100,9 @@ func (o *NSXMLDocument) InitWithContentsOfURLOptionsError(url *NSURL, mask NSXML
 func (o *NSXMLDocument) InitWithDataOptionsError(data *NSData, mask NSXMLNodeOptions) (*NSXMLDocument, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDocumentSelInitWithDataOptionsError, data.Ptr(), mask, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -104,7 +112,9 @@ func (o *NSXMLDocument) InitWithDataOptionsError(data *NSData, mask NSXMLNodeOpt
 // @method initWithRootElement: @abstract Returns a document with a single child, the root element.
 func (o *NSXMLDocument) InitWithRootElement(element *NSXMLElement) *NSXMLDocument {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDocumentSelInitWithRootElement, element.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLDocumentFromID(_ret)
 }
 
@@ -121,7 +131,9 @@ func (o *NSXMLDocument) SetRootElement(root *NSXMLElement) {
 // @method rootElement @abstract The root element.
 func (o *NSXMLDocument) RootElement() *NSXMLElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDocumentSelRootElement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLElementFromID(_ret)
 }
 
@@ -158,7 +170,9 @@ func (o *NSXMLDocument) ReplaceChildAtIndexWithNode(index uint, node *NSXMLNode)
 // @method XMLDataWithOptions: @abstract The representation of this node as it would appear in an XML document, encoded based on characterEncoding.
 func (o *NSXMLDocument) XMLDataWithOptions(options NSXMLNodeOptions) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDocumentSelXMLDataWithOptions, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
@@ -204,7 +218,9 @@ func (o *NSXMLDocument) ValidateAndReturnError() (bool, error) {
 // @abstract Sets the character encoding to an IANA type.
 func (o *NSXMLDocument) CharacterEncoding() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDocumentSelCharacterEncoding)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -235,7 +251,9 @@ func (o *NSXMLDocument) SetDocumentContentKind(documentContentKind NSXMLDocument
 // @abstract Set the MIME type, eg text/xml.
 func (o *NSXMLDocument) MIMEType() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDocumentSelMIMEType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -246,7 +264,9 @@ func (o *NSXMLDocument) SetMIMEType(mIMEType *NSString) {
 // @abstract Set the associated DTD. This DTD will be output with the document.
 func (o *NSXMLDocument) DTD() *NSXMLDTD {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDocumentSelDTD)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLDTDFromID(_ret)
 }
 
@@ -257,7 +277,8 @@ func (o *NSXMLDocument) SetDTD(dTD *NSXMLDTD) {
 // @abstract Invokes XMLDataWithOptions with NSXMLNodeOptionsNone.
 func (o *NSXMLDocument) XMLData() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDocumentSelXMLData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
-

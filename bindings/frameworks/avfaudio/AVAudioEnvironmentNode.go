@@ -16,23 +16,23 @@ type AVAudioEnvironmentNode struct {
 }
 
 var (
-	_clsAVAudioEnvironmentNode = _objcClass("AVAudioEnvironmentNode")
-	_aVAudioEnvironmentNodeSelInit = objc.RegisterName("init")
-	_aVAudioEnvironmentNodeSelOutputType = objc.RegisterName("outputType")
-	_aVAudioEnvironmentNodeSelSetOutputType = objc.RegisterName("setOutputType:")
-	_aVAudioEnvironmentNodeSelOutputVolume = objc.RegisterName("outputVolume")
-	_aVAudioEnvironmentNodeSelSetOutputVolume = objc.RegisterName("setOutputVolume:")
-	_aVAudioEnvironmentNodeSelNextAvailableInputBus = objc.RegisterName("nextAvailableInputBus")
-	_aVAudioEnvironmentNodeSelListenerPosition = objc.RegisterName("listenerPosition")
-	_aVAudioEnvironmentNodeSelSetListenerPosition = objc.RegisterName("setListenerPosition:")
-	_aVAudioEnvironmentNodeSelListenerVectorOrientation = objc.RegisterName("listenerVectorOrientation")
-	_aVAudioEnvironmentNodeSelSetListenerVectorOrientation = objc.RegisterName("setListenerVectorOrientation:")
-	_aVAudioEnvironmentNodeSelListenerAngularOrientation = objc.RegisterName("listenerAngularOrientation")
-	_aVAudioEnvironmentNodeSelSetListenerAngularOrientation = objc.RegisterName("setListenerAngularOrientation:")
-	_aVAudioEnvironmentNodeSelDistanceAttenuationParameters = objc.RegisterName("distanceAttenuationParameters")
-	_aVAudioEnvironmentNodeSelReverbParameters = objc.RegisterName("reverbParameters")
-	_aVAudioEnvironmentNodeSelApplicableRenderingAlgorithms = objc.RegisterName("applicableRenderingAlgorithms")
-	_aVAudioEnvironmentNodeSelIsListenerHeadTrackingEnabled = objc.RegisterName("isListenerHeadTrackingEnabled")
+	_clsAVAudioEnvironmentNode                               = _objcClass("AVAudioEnvironmentNode")
+	_aVAudioEnvironmentNodeSelInit                           = objc.RegisterName("init")
+	_aVAudioEnvironmentNodeSelOutputType                     = objc.RegisterName("outputType")
+	_aVAudioEnvironmentNodeSelSetOutputType                  = objc.RegisterName("setOutputType:")
+	_aVAudioEnvironmentNodeSelOutputVolume                   = objc.RegisterName("outputVolume")
+	_aVAudioEnvironmentNodeSelSetOutputVolume                = objc.RegisterName("setOutputVolume:")
+	_aVAudioEnvironmentNodeSelNextAvailableInputBus          = objc.RegisterName("nextAvailableInputBus")
+	_aVAudioEnvironmentNodeSelListenerPosition               = objc.RegisterName("listenerPosition")
+	_aVAudioEnvironmentNodeSelSetListenerPosition            = objc.RegisterName("setListenerPosition:")
+	_aVAudioEnvironmentNodeSelListenerVectorOrientation      = objc.RegisterName("listenerVectorOrientation")
+	_aVAudioEnvironmentNodeSelSetListenerVectorOrientation   = objc.RegisterName("setListenerVectorOrientation:")
+	_aVAudioEnvironmentNodeSelListenerAngularOrientation     = objc.RegisterName("listenerAngularOrientation")
+	_aVAudioEnvironmentNodeSelSetListenerAngularOrientation  = objc.RegisterName("setListenerAngularOrientation:")
+	_aVAudioEnvironmentNodeSelDistanceAttenuationParameters  = objc.RegisterName("distanceAttenuationParameters")
+	_aVAudioEnvironmentNodeSelReverbParameters               = objc.RegisterName("reverbParameters")
+	_aVAudioEnvironmentNodeSelApplicableRenderingAlgorithms  = objc.RegisterName("applicableRenderingAlgorithms")
+	_aVAudioEnvironmentNodeSelIsListenerHeadTrackingEnabled  = objc.RegisterName("isListenerHeadTrackingEnabled")
 	_aVAudioEnvironmentNodeSelSetListenerHeadTrackingEnabled = objc.RegisterName("setListenerHeadTrackingEnabled:")
 )
 
@@ -48,7 +48,9 @@ func AVAudioEnvironmentNodeFromID(id objc.ID) *AVAudioEnvironmentNode {
 
 func (o *AVAudioEnvironmentNode) Init() *AVAudioEnvironmentNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioEnvironmentNodeSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioEnvironmentNodeFromID(_ret)
 }
 
@@ -111,14 +113,18 @@ func (o *AVAudioEnvironmentNode) SetListenerAngularOrientation(listenerAngularOr
 // @property distanceAttenuationParameters @abstract The distance attenuation parameters for the environment
 func (o *AVAudioEnvironmentNode) DistanceAttenuationParameters() *AVAudioEnvironmentDistanceAttenuationParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioEnvironmentNodeSelDistanceAttenuationParameters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioEnvironmentDistanceAttenuationParametersFromID(_ret)
 }
 
 // @property reverbParameters @abstract The reverb parameters for the environment
 func (o *AVAudioEnvironmentNode) ReverbParameters() *AVAudioEnvironmentReverbParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioEnvironmentNodeSelReverbParameters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioEnvironmentReverbParametersFromID(_ret)
 }
 
@@ -137,4 +143,3 @@ func (o *AVAudioEnvironmentNode) IsListenerHeadTrackingEnabled() bool {
 func (o *AVAudioEnvironmentNode) SetListenerHeadTrackingEnabled(listenerHeadTrackingEnabled bool) {
 	o.Ptr().Send(_aVAudioEnvironmentNodeSelSetListenerHeadTrackingEnabled, listenerHeadTrackingEnabled)
 }
-

@@ -108,4 +108,3 @@ type ConvolutionLayerable interface {
 }
 
 var _ ConvolutionLayerable = (*ConvolutionLayer)(nil)
-

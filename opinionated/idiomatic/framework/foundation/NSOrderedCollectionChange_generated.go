@@ -82,4 +82,3 @@ type OrderedCollectionChangeable interface {
 }
 
 var _ OrderedCollectionChangeable = (*OrderedCollectionChange)(nil)
-

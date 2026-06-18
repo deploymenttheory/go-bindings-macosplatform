@@ -16,7 +16,9 @@ type MTRActionsClusterDisableActionParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRActionsClusterDisableActionParams].
-func (x *MTRActionsClusterDisableActionParams) Unwrap() *raw.MTRActionsClusterDisableActionParams { return x.inner }
+func (x *MTRActionsClusterDisableActionParams) Unwrap() *raw.MTRActionsClusterDisableActionParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -118,4 +120,3 @@ type MTRActionsClusterDisableActionParamsable interface {
 }
 
 var _ MTRActionsClusterDisableActionParamsable = (*MTRActionsClusterDisableActionParams)(nil)
-

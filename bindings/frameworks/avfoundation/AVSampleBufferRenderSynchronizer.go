@@ -19,23 +19,23 @@ type AVSampleBufferRenderSynchronizer struct {
 }
 
 var (
-	_clsAVSampleBufferRenderSynchronizer = _objcClass("AVSampleBufferRenderSynchronizer")
-	_aVSampleBufferRenderSynchronizerSelCurrentTime = objc.RegisterName("currentTime")
-	_aVSampleBufferRenderSynchronizerSelSetRateTime = objc.RegisterName("setRate:time:")
-	_aVSampleBufferRenderSynchronizerSelSetRateTimeAtHostTime = objc.RegisterName("setRate:time:atHostTime:")
-	_aVSampleBufferRenderSynchronizerSelTimebase = objc.RegisterName("timebase")
-	_aVSampleBufferRenderSynchronizerSelRate = objc.RegisterName("rate")
-	_aVSampleBufferRenderSynchronizerSelSetRate = objc.RegisterName("setRate:")
-	_aVSampleBufferRenderSynchronizerSelDelaysRateChangeUntilHasSufficientMediaData = objc.RegisterName("delaysRateChangeUntilHasSufficientMediaData")
+	_clsAVSampleBufferRenderSynchronizer                                               = _objcClass("AVSampleBufferRenderSynchronizer")
+	_aVSampleBufferRenderSynchronizerSelCurrentTime                                    = objc.RegisterName("currentTime")
+	_aVSampleBufferRenderSynchronizerSelSetRateTime                                    = objc.RegisterName("setRate:time:")
+	_aVSampleBufferRenderSynchronizerSelSetRateTimeAtHostTime                          = objc.RegisterName("setRate:time:atHostTime:")
+	_aVSampleBufferRenderSynchronizerSelTimebase                                       = objc.RegisterName("timebase")
+	_aVSampleBufferRenderSynchronizerSelRate                                           = objc.RegisterName("rate")
+	_aVSampleBufferRenderSynchronizerSelSetRate                                        = objc.RegisterName("setRate:")
+	_aVSampleBufferRenderSynchronizerSelDelaysRateChangeUntilHasSufficientMediaData    = objc.RegisterName("delaysRateChangeUntilHasSufficientMediaData")
 	_aVSampleBufferRenderSynchronizerSelSetDelaysRateChangeUntilHasSufficientMediaData = objc.RegisterName("setDelaysRateChangeUntilHasSufficientMediaData:")
-	_aVSampleBufferRenderSynchronizerSelAddRenderer = objc.RegisterName("addRenderer:")
-	_aVSampleBufferRenderSynchronizerSelRemoveRendererAtTimeCompletionHandler = objc.RegisterName("removeRenderer:atTime:completionHandler:")
-	_aVSampleBufferRenderSynchronizerSelRenderers = objc.RegisterName("renderers")
-	_aVSampleBufferRenderSynchronizerSelAddPeriodicTimeObserverForIntervalQueueUsing = objc.RegisterName("addPeriodicTimeObserverForInterval:queue:usingBlock:")
-	_aVSampleBufferRenderSynchronizerSelAddBoundaryTimeObserverForTimesQueueUsing = objc.RegisterName("addBoundaryTimeObserverForTimes:queue:usingBlock:")
-	_aVSampleBufferRenderSynchronizerSelRemoveTimeObserver = objc.RegisterName("removeTimeObserver:")
-	_aVSampleBufferRenderSynchronizerSelIntendedSpatialAudioExperience = objc.RegisterName("intendedSpatialAudioExperience")
-	_aVSampleBufferRenderSynchronizerSelSetIntendedSpatialAudioExperience = objc.RegisterName("setIntendedSpatialAudioExperience:")
+	_aVSampleBufferRenderSynchronizerSelAddRenderer                                    = objc.RegisterName("addRenderer:")
+	_aVSampleBufferRenderSynchronizerSelRemoveRendererAtTimeCompletionHandler          = objc.RegisterName("removeRenderer:atTime:completionHandler:")
+	_aVSampleBufferRenderSynchronizerSelRenderers                                      = objc.RegisterName("renderers")
+	_aVSampleBufferRenderSynchronizerSelAddPeriodicTimeObserverForIntervalQueueUsing   = objc.RegisterName("addPeriodicTimeObserverForInterval:queue:usingBlock:")
+	_aVSampleBufferRenderSynchronizerSelAddBoundaryTimeObserverForTimesQueueUsing      = objc.RegisterName("addBoundaryTimeObserverForTimes:queue:usingBlock:")
+	_aVSampleBufferRenderSynchronizerSelRemoveTimeObserver                             = objc.RegisterName("removeTimeObserver:")
+	_aVSampleBufferRenderSynchronizerSelIntendedSpatialAudioExperience                 = objc.RegisterName("intendedSpatialAudioExperience")
+	_aVSampleBufferRenderSynchronizerSelSetIntendedSpatialAudioExperience              = objc.RegisterName("setIntendedSpatialAudioExperience:")
 )
 
 func AVSampleBufferRenderSynchronizerFromID(id objc.ID) *AVSampleBufferRenderSynchronizer {
@@ -110,7 +110,9 @@ func (o *AVSampleBufferRenderSynchronizer) RemoveRendererAtTimeCompletionHandler
 // Array of id<AVQueuedSampleBufferRendering> currently attached to the synchronizer. A list of renderers added to and not removed from the synchronizer. The list also includes renderers that have been scheduled to be removed but have not yet been removed. This property is not KVO observable.
 func (o *AVSampleBufferRenderSynchronizer) Renderers() *foundation.NSArray[AVQueuedSampleBufferRendering] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSampleBufferRenderSynchronizerSelRenderers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[AVQueuedSampleBufferRendering](_ret)
 }
 
@@ -146,4 +148,3 @@ func (o *AVSampleBufferRenderSynchronizer) IntendedSpatialAudioExperience() unsa
 func (o *AVSampleBufferRenderSynchronizer) SetIntendedSpatialAudioExperience(intendedSpatialAudioExperience unsafe.Pointer) {
 	o.Ptr().Send(_aVSampleBufferRenderSynchronizerSelSetIntendedSpatialAudioExperience, intendedSpatialAudioExperience)
 }
-

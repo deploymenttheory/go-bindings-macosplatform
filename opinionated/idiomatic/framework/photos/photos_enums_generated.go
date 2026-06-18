@@ -12,7 +12,7 @@ import (
 type PHAccessLevel int64
 
 const (
-	PHAccessLevelAddOnly PHAccessLevel = 1
+	PHAccessLevelAddOnly   PHAccessLevel = 1
 	PHAccessLevelReadWrite PHAccessLevel = 2
 )
 
@@ -31,7 +31,7 @@ func (e PHAccessLevel) String() string {
 type PHAssetBurstSelectionType uint64
 
 const (
-	PHAssetBurstSelectionTypeNone PHAssetBurstSelectionType = 0
+	PHAssetBurstSelectionTypeNone     PHAssetBurstSelectionType = 0
 	PHAssetBurstSelectionTypeAutoPick PHAssetBurstSelectionType = 1
 	PHAssetBurstSelectionTypeUserPick PHAssetBurstSelectionType = 2
 )
@@ -53,7 +53,7 @@ func (e PHAssetBurstSelectionType) String() string {
 type PHAssetCollectionType int64
 
 const (
-	PHAssetCollectionTypeAlbum PHAssetCollectionType = 1
+	PHAssetCollectionTypeAlbum      PHAssetCollectionType = 1
 	PHAssetCollectionTypeSmartAlbum PHAssetCollectionType = 2
 )
 
@@ -71,8 +71,8 @@ func (e PHAssetCollectionType) String() string {
 type PHAssetEditOperation int64
 
 const (
-	PHAssetEditOperationDelete PHAssetEditOperation = 1
-	PHAssetEditOperationContent PHAssetEditOperation = 2
+	PHAssetEditOperationDelete     PHAssetEditOperation = 1
+	PHAssetEditOperationContent    PHAssetEditOperation = 2
 	PHAssetEditOperationProperties PHAssetEditOperation = 3
 )
 
@@ -93,18 +93,18 @@ func (e PHAssetEditOperation) String() string {
 type PHAssetMediaSubtype uint64
 
 const (
-	PHAssetMediaSubtypeNone PHAssetMediaSubtype = 0
-	PHAssetMediaSubtypePhotoPanorama PHAssetMediaSubtype = 1
-	PHAssetMediaSubtypePhotoHDR PHAssetMediaSubtype = 2
-	PHAssetMediaSubtypePhotoScreenshot PHAssetMediaSubtype = 4
-	PHAssetMediaSubtypePhotoLive PHAssetMediaSubtype = 8
-	PHAssetMediaSubtypePhotoDepthEffect PHAssetMediaSubtype = 16
-	PHAssetMediaSubtypeSpatialMedia PHAssetMediaSubtype = 1024
-	PHAssetMediaSubtypeVideoStreamed PHAssetMediaSubtype = 65536
-	PHAssetMediaSubtypeVideoHighFrameRate PHAssetMediaSubtype = 131072
-	PHAssetMediaSubtypeVideoTimelapse PHAssetMediaSubtype = 262144
+	PHAssetMediaSubtypeNone                 PHAssetMediaSubtype = 0
+	PHAssetMediaSubtypePhotoPanorama        PHAssetMediaSubtype = 1
+	PHAssetMediaSubtypePhotoHDR             PHAssetMediaSubtype = 2
+	PHAssetMediaSubtypePhotoScreenshot      PHAssetMediaSubtype = 4
+	PHAssetMediaSubtypePhotoLive            PHAssetMediaSubtype = 8
+	PHAssetMediaSubtypePhotoDepthEffect     PHAssetMediaSubtype = 16
+	PHAssetMediaSubtypeSpatialMedia         PHAssetMediaSubtype = 1024
+	PHAssetMediaSubtypeVideoStreamed        PHAssetMediaSubtype = 65536
+	PHAssetMediaSubtypeVideoHighFrameRate   PHAssetMediaSubtype = 131072
+	PHAssetMediaSubtypeVideoTimelapse       PHAssetMediaSubtype = 262144
 	PHAssetMediaSubtypeVideoScreenRecording PHAssetMediaSubtype = 524288
-	PHAssetMediaSubtypeVideoCinematic PHAssetMediaSubtype = 2097152
+	PHAssetMediaSubtypeVideoCinematic       PHAssetMediaSubtype = 2097152
 )
 
 func (e PHAssetMediaSubtype) String() string {
@@ -152,9 +152,9 @@ type PHAssetMediaType int64
 
 const (
 	PHAssetMediaTypeUnknown PHAssetMediaType = 0
-	PHAssetMediaTypeImage PHAssetMediaType = 1
-	PHAssetMediaTypeVideo PHAssetMediaType = 2
-	PHAssetMediaTypeAudio PHAssetMediaType = 3
+	PHAssetMediaTypeImage   PHAssetMediaType = 1
+	PHAssetMediaTypeVideo   PHAssetMediaType = 2
+	PHAssetMediaTypeAudio   PHAssetMediaType = 3
 )
 
 func (e PHAssetMediaType) String() string {
@@ -175,12 +175,12 @@ func (e PHAssetMediaType) String() string {
 type PHAssetPlaybackStyle int64
 
 const (
-	PHAssetPlaybackStyleUnsupported PHAssetPlaybackStyle = 0
-	PHAssetPlaybackStyleImage PHAssetPlaybackStyle = 1
+	PHAssetPlaybackStyleUnsupported   PHAssetPlaybackStyle = 0
+	PHAssetPlaybackStyleImage         PHAssetPlaybackStyle = 1
 	PHAssetPlaybackStyleImageAnimated PHAssetPlaybackStyle = 2
-	PHAssetPlaybackStyleLivePhoto PHAssetPlaybackStyle = 3
-	PHAssetPlaybackStyleVideo PHAssetPlaybackStyle = 4
-	PHAssetPlaybackStyleVideoLooping PHAssetPlaybackStyle = 5
+	PHAssetPlaybackStyleLivePhoto     PHAssetPlaybackStyle = 3
+	PHAssetPlaybackStyleVideo         PHAssetPlaybackStyle = 4
+	PHAssetPlaybackStyleVideoLooping  PHAssetPlaybackStyle = 5
 )
 
 func (e PHAssetPlaybackStyle) String() string {
@@ -205,19 +205,19 @@ func (e PHAssetPlaybackStyle) String() string {
 type PHAssetResourceType int64
 
 const (
-	PHAssetResourceTypePhoto PHAssetResourceType = 1
-	PHAssetResourceTypeVideo PHAssetResourceType = 2
-	PHAssetResourceTypeAudio PHAssetResourceType = 3
-	PHAssetResourceTypeAlternatePhoto PHAssetResourceType = 4
-	PHAssetResourceTypeFullSizePhoto PHAssetResourceType = 5
-	PHAssetResourceTypeFullSizeVideo PHAssetResourceType = 6
-	PHAssetResourceTypeAdjustmentData PHAssetResourceType = 7
-	PHAssetResourceTypeAdjustmentBasePhoto PHAssetResourceType = 8
-	PHAssetResourceTypePairedVideo PHAssetResourceType = 9
-	PHAssetResourceTypeFullSizePairedVideo PHAssetResourceType = 10
+	PHAssetResourceTypePhoto                     PHAssetResourceType = 1
+	PHAssetResourceTypeVideo                     PHAssetResourceType = 2
+	PHAssetResourceTypeAudio                     PHAssetResourceType = 3
+	PHAssetResourceTypeAlternatePhoto            PHAssetResourceType = 4
+	PHAssetResourceTypeFullSizePhoto             PHAssetResourceType = 5
+	PHAssetResourceTypeFullSizeVideo             PHAssetResourceType = 6
+	PHAssetResourceTypeAdjustmentData            PHAssetResourceType = 7
+	PHAssetResourceTypeAdjustmentBasePhoto       PHAssetResourceType = 8
+	PHAssetResourceTypePairedVideo               PHAssetResourceType = 9
+	PHAssetResourceTypeFullSizePairedVideo       PHAssetResourceType = 10
 	PHAssetResourceTypeAdjustmentBasePairedVideo PHAssetResourceType = 11
-	PHAssetResourceTypeAdjustmentBaseVideo PHAssetResourceType = 12
-	PHAssetResourceTypePhotoProxy PHAssetResourceType = 19
+	PHAssetResourceTypeAdjustmentBaseVideo       PHAssetResourceType = 12
+	PHAssetResourceTypePhotoProxy                PHAssetResourceType = 19
 )
 
 func (e PHAssetResourceType) String() string {
@@ -257,9 +257,9 @@ func (e PHAssetResourceType) String() string {
 type PHAssetSourceType uint64
 
 const (
-	PHAssetSourceTypeNone PHAssetSourceType = 0
-	PHAssetSourceTypeUserLibrary PHAssetSourceType = 1
-	PHAssetSourceTypeCloudShared PHAssetSourceType = 2
+	PHAssetSourceTypeNone         PHAssetSourceType = 0
+	PHAssetSourceTypeUserLibrary  PHAssetSourceType = 1
+	PHAssetSourceTypeCloudShared  PHAssetSourceType = 2
 	PHAssetSourceTypeiTunesSynced PHAssetSourceType = 4
 )
 
@@ -284,10 +284,10 @@ type PHAuthorizationStatus int64
 
 const (
 	PHAuthorizationStatusNotDetermined PHAuthorizationStatus = 0
-	PHAuthorizationStatusRestricted PHAuthorizationStatus = 1
-	PHAuthorizationStatusDenied PHAuthorizationStatus = 2
-	PHAuthorizationStatusAuthorized PHAuthorizationStatus = 3
-	PHAuthorizationStatusLimited PHAuthorizationStatus = 4
+	PHAuthorizationStatusRestricted    PHAuthorizationStatus = 1
+	PHAuthorizationStatusDenied        PHAuthorizationStatus = 2
+	PHAuthorizationStatusAuthorized    PHAuthorizationStatus = 3
+	PHAuthorizationStatusLimited       PHAuthorizationStatus = 4
 )
 
 func (e PHAuthorizationStatus) String() string {
@@ -310,13 +310,13 @@ func (e PHAuthorizationStatus) String() string {
 type PHCollectionEditOperation int64
 
 const (
-	PHCollectionEditOperationDeleteContent PHCollectionEditOperation = 1
-	PHCollectionEditOperationRemoveContent PHCollectionEditOperation = 2
-	PHCollectionEditOperationAddContent PHCollectionEditOperation = 3
-	PHCollectionEditOperationCreateContent PHCollectionEditOperation = 4
+	PHCollectionEditOperationDeleteContent    PHCollectionEditOperation = 1
+	PHCollectionEditOperationRemoveContent    PHCollectionEditOperation = 2
+	PHCollectionEditOperationAddContent       PHCollectionEditOperation = 3
+	PHCollectionEditOperationCreateContent    PHCollectionEditOperation = 4
 	PHCollectionEditOperationRearrangeContent PHCollectionEditOperation = 5
-	PHCollectionEditOperationDelete PHCollectionEditOperation = 6
-	PHCollectionEditOperationRename PHCollectionEditOperation = 7
+	PHCollectionEditOperationDelete           PHCollectionEditOperation = 6
+	PHCollectionEditOperationRename           PHCollectionEditOperation = 7
 )
 
 func (e PHCollectionEditOperation) String() string {
@@ -344,8 +344,8 @@ type PHCollectionListSubtype uint64
 
 const (
 	PHCollectionListSubtypeSmartFolderEvents PHCollectionListSubtype = 200
-	PHCollectionListSubtypeSmartFolderFaces PHCollectionListSubtype = 201
-	PHCollectionListSubtypeAny PHCollectionListSubtype = 9223372036854775807
+	PHCollectionListSubtypeSmartFolderFaces  PHCollectionListSubtype = 201
+	PHCollectionListSubtypeAny               PHCollectionListSubtype = 9223372036854775807
 )
 
 func (e PHCollectionListSubtype) String() string {
@@ -364,9 +364,9 @@ func (e PHCollectionListSubtype) String() string {
 type PHImageContentMode int64
 
 const (
-	PHImageContentModeAspectFit PHImageContentMode = 0
+	PHImageContentModeAspectFit  PHImageContentMode = 0
 	PHImageContentModeAspectFill PHImageContentMode = 1
-	PHImageContentModeDefault PHImageContentMode = 0
+	PHImageContentModeDefault    PHImageContentMode = 0
 )
 
 func (e PHImageContentMode) String() string {
@@ -383,9 +383,9 @@ func (e PHImageContentMode) String() string {
 type PHImageRequestOptionsDeliveryMode int64
 
 const (
-	PHImageRequestOptionsDeliveryModeOpportunistic PHImageRequestOptionsDeliveryMode = 0
+	PHImageRequestOptionsDeliveryModeOpportunistic     PHImageRequestOptionsDeliveryMode = 0
 	PHImageRequestOptionsDeliveryModeHighQualityFormat PHImageRequestOptionsDeliveryMode = 1
-	PHImageRequestOptionsDeliveryModeFastFormat PHImageRequestOptionsDeliveryMode = 2
+	PHImageRequestOptionsDeliveryModeFastFormat        PHImageRequestOptionsDeliveryMode = 2
 )
 
 func (e PHImageRequestOptionsDeliveryMode) String() string {
@@ -404,8 +404,8 @@ func (e PHImageRequestOptionsDeliveryMode) String() string {
 type PHImageRequestOptionsResizeMode int64
 
 const (
-	PHImageRequestOptionsResizeModeNone PHImageRequestOptionsResizeMode = 0
-	PHImageRequestOptionsResizeModeFast PHImageRequestOptionsResizeMode = 1
+	PHImageRequestOptionsResizeModeNone  PHImageRequestOptionsResizeMode = 0
+	PHImageRequestOptionsResizeModeFast  PHImageRequestOptionsResizeMode = 1
 	PHImageRequestOptionsResizeModeExact PHImageRequestOptionsResizeMode = 2
 )
 
@@ -425,9 +425,9 @@ func (e PHImageRequestOptionsResizeMode) String() string {
 type PHObjectType int64
 
 const (
-	PHObjectTypeAsset PHObjectType = 1
+	PHObjectTypeAsset           PHObjectType = 1
 	PHObjectTypeAssetCollection PHObjectType = 2
-	PHObjectTypeCollectionList PHObjectType = 3
+	PHObjectTypeCollectionList  PHObjectType = 3
 )
 
 func (e PHObjectType) String() string {
@@ -446,10 +446,10 @@ func (e PHObjectType) String() string {
 type PHVideoRequestOptionsDeliveryMode int64
 
 const (
-	PHVideoRequestOptionsDeliveryModeAutomatic PHVideoRequestOptionsDeliveryMode = 0
-	PHVideoRequestOptionsDeliveryModeHighQualityFormat PHVideoRequestOptionsDeliveryMode = 1
+	PHVideoRequestOptionsDeliveryModeAutomatic           PHVideoRequestOptionsDeliveryMode = 0
+	PHVideoRequestOptionsDeliveryModeHighQualityFormat   PHVideoRequestOptionsDeliveryMode = 1
 	PHVideoRequestOptionsDeliveryModeMediumQualityFormat PHVideoRequestOptionsDeliveryMode = 2
-	PHVideoRequestOptionsDeliveryModeFastFormat PHVideoRequestOptionsDeliveryMode = 3
+	PHVideoRequestOptionsDeliveryModeFastFormat          PHVideoRequestOptionsDeliveryMode = 3
 )
 
 func (e PHVideoRequestOptionsDeliveryMode) String() string {
@@ -466,4 +466,3 @@ func (e PHVideoRequestOptionsDeliveryMode) String() string {
 		return fmt.Sprintf("PHVideoRequestOptionsDeliveryMode(%d)", int64(e))
 	}
 }
-

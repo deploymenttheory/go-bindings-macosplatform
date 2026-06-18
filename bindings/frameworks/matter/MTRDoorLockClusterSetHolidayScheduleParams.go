@@ -16,18 +16,18 @@ type MTRDoorLockClusterSetHolidayScheduleParams struct {
 }
 
 var (
-	_clsMTRDoorLockClusterSetHolidayScheduleParams = _objcClass("MTRDoorLockClusterSetHolidayScheduleParams")
-	_mTRDoorLockClusterSetHolidayScheduleParamsSelHolidayIndex = objc.RegisterName("holidayIndex")
-	_mTRDoorLockClusterSetHolidayScheduleParamsSelSetHolidayIndex = objc.RegisterName("setHolidayIndex:")
-	_mTRDoorLockClusterSetHolidayScheduleParamsSelLocalStartTime = objc.RegisterName("localStartTime")
-	_mTRDoorLockClusterSetHolidayScheduleParamsSelSetLocalStartTime = objc.RegisterName("setLocalStartTime:")
-	_mTRDoorLockClusterSetHolidayScheduleParamsSelLocalEndTime = objc.RegisterName("localEndTime")
-	_mTRDoorLockClusterSetHolidayScheduleParamsSelSetLocalEndTime = objc.RegisterName("setLocalEndTime:")
-	_mTRDoorLockClusterSetHolidayScheduleParamsSelOperatingMode = objc.RegisterName("operatingMode")
-	_mTRDoorLockClusterSetHolidayScheduleParamsSelSetOperatingMode = objc.RegisterName("setOperatingMode:")
-	_mTRDoorLockClusterSetHolidayScheduleParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRDoorLockClusterSetHolidayScheduleParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRDoorLockClusterSetHolidayScheduleParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRDoorLockClusterSetHolidayScheduleParams                               = _objcClass("MTRDoorLockClusterSetHolidayScheduleParams")
+	_mTRDoorLockClusterSetHolidayScheduleParamsSelHolidayIndex                   = objc.RegisterName("holidayIndex")
+	_mTRDoorLockClusterSetHolidayScheduleParamsSelSetHolidayIndex                = objc.RegisterName("setHolidayIndex:")
+	_mTRDoorLockClusterSetHolidayScheduleParamsSelLocalStartTime                 = objc.RegisterName("localStartTime")
+	_mTRDoorLockClusterSetHolidayScheduleParamsSelSetLocalStartTime              = objc.RegisterName("setLocalStartTime:")
+	_mTRDoorLockClusterSetHolidayScheduleParamsSelLocalEndTime                   = objc.RegisterName("localEndTime")
+	_mTRDoorLockClusterSetHolidayScheduleParamsSelSetLocalEndTime                = objc.RegisterName("setLocalEndTime:")
+	_mTRDoorLockClusterSetHolidayScheduleParamsSelOperatingMode                  = objc.RegisterName("operatingMode")
+	_mTRDoorLockClusterSetHolidayScheduleParamsSelSetOperatingMode               = objc.RegisterName("setOperatingMode:")
+	_mTRDoorLockClusterSetHolidayScheduleParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRDoorLockClusterSetHolidayScheduleParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRDoorLockClusterSetHolidayScheduleParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRDoorLockClusterSetHolidayScheduleParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -43,7 +43,9 @@ func MTRDoorLockClusterSetHolidayScheduleParamsFromID(id objc.ID) *MTRDoorLockCl
 
 func (o *MTRDoorLockClusterSetHolidayScheduleParams) HolidayIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterSetHolidayScheduleParamsSelHolidayIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -53,7 +55,9 @@ func (o *MTRDoorLockClusterSetHolidayScheduleParams) SetHolidayIndex(holidayInde
 
 func (o *MTRDoorLockClusterSetHolidayScheduleParams) LocalStartTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterSetHolidayScheduleParamsSelLocalStartTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -63,7 +67,9 @@ func (o *MTRDoorLockClusterSetHolidayScheduleParams) SetLocalStartTime(localStar
 
 func (o *MTRDoorLockClusterSetHolidayScheduleParams) LocalEndTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterSetHolidayScheduleParamsSelLocalEndTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -73,7 +79,9 @@ func (o *MTRDoorLockClusterSetHolidayScheduleParams) SetLocalEndTime(localEndTim
 
 func (o *MTRDoorLockClusterSetHolidayScheduleParams) OperatingMode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterSetHolidayScheduleParamsSelOperatingMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -84,7 +92,9 @@ func (o *MTRDoorLockClusterSetHolidayScheduleParams) SetOperatingMode(operatingM
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRDoorLockClusterSetHolidayScheduleParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterSetHolidayScheduleParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -95,11 +105,12 @@ func (o *MTRDoorLockClusterSetHolidayScheduleParams) SetTimedInvokeTimeoutMs(tim
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRDoorLockClusterSetHolidayScheduleParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterSetHolidayScheduleParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDoorLockClusterSetHolidayScheduleParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDoorLockClusterSetHolidayScheduleParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

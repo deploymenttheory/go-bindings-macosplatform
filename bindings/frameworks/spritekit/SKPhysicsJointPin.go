@@ -16,18 +16,18 @@ type SKPhysicsJointPin struct {
 }
 
 var (
-	_clsSKPhysicsJointPin = _objcClass("SKPhysicsJointPin")
+	_clsSKPhysicsJointPin                          = _objcClass("SKPhysicsJointPin")
 	_sKPhysicsJointPinSelJointWithBodyABodyBAnchor = objc.RegisterName("jointWithBodyA:bodyB:anchor:")
-	_sKPhysicsJointPinSelShouldEnableLimits = objc.RegisterName("shouldEnableLimits")
-	_sKPhysicsJointPinSelSetShouldEnableLimits = objc.RegisterName("setShouldEnableLimits:")
-	_sKPhysicsJointPinSelLowerAngleLimit = objc.RegisterName("lowerAngleLimit")
-	_sKPhysicsJointPinSelSetLowerAngleLimit = objc.RegisterName("setLowerAngleLimit:")
-	_sKPhysicsJointPinSelUpperAngleLimit = objc.RegisterName("upperAngleLimit")
-	_sKPhysicsJointPinSelSetUpperAngleLimit = objc.RegisterName("setUpperAngleLimit:")
-	_sKPhysicsJointPinSelFrictionTorque = objc.RegisterName("frictionTorque")
-	_sKPhysicsJointPinSelSetFrictionTorque = objc.RegisterName("setFrictionTorque:")
-	_sKPhysicsJointPinSelRotationSpeed = objc.RegisterName("rotationSpeed")
-	_sKPhysicsJointPinSelSetRotationSpeed = objc.RegisterName("setRotationSpeed:")
+	_sKPhysicsJointPinSelShouldEnableLimits        = objc.RegisterName("shouldEnableLimits")
+	_sKPhysicsJointPinSelSetShouldEnableLimits     = objc.RegisterName("setShouldEnableLimits:")
+	_sKPhysicsJointPinSelLowerAngleLimit           = objc.RegisterName("lowerAngleLimit")
+	_sKPhysicsJointPinSelSetLowerAngleLimit        = objc.RegisterName("setLowerAngleLimit:")
+	_sKPhysicsJointPinSelUpperAngleLimit           = objc.RegisterName("upperAngleLimit")
+	_sKPhysicsJointPinSelSetUpperAngleLimit        = objc.RegisterName("setUpperAngleLimit:")
+	_sKPhysicsJointPinSelFrictionTorque            = objc.RegisterName("frictionTorque")
+	_sKPhysicsJointPinSelSetFrictionTorque         = objc.RegisterName("setFrictionTorque:")
+	_sKPhysicsJointPinSelRotationSpeed             = objc.RegisterName("rotationSpeed")
+	_sKPhysicsJointPinSelSetRotationSpeed          = objc.RegisterName("setRotationSpeed:")
 )
 
 func SKPhysicsJointPinFromID(id objc.ID) *SKPhysicsJointPin {
@@ -42,7 +42,9 @@ func SKPhysicsJointPinFromID(id objc.ID) *SKPhysicsJointPin {
 
 func SKPhysicsJointPinJointWithBodyABodyBAnchor(bodyA *SKPhysicsBody, bodyB *SKPhysicsBody, anchor corefoundation.CGPoint) *SKPhysicsJointPin {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsJointPin), _sKPhysicsJointPinSelJointWithBodyABodyBAnchor, bodyA.Ptr(), bodyB.Ptr(), anchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPhysicsJointPinFromID(_ret)
 }
 
@@ -90,4 +92,3 @@ func (o *SKPhysicsJointPin) RotationSpeed() float64 {
 func (o *SKPhysicsJointPin) SetRotationSpeed(rotationSpeed float64) {
 	o.Ptr().Send(_sKPhysicsJointPinSelSetRotationSpeed, rotationSpeed)
 }
-

@@ -1841,9 +1841,13 @@ func (x *MTRClusterUnitTesting) ReadAttributeClusterRevisionWithParams(params *r
 
 func (x *MTRClusterUnitTesting) asMTRClusterUnitTesting() *raw.MTRClusterUnitTesting { return x.inner }
 
-func (x *MTRClusterUnitTesting) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterUnitTesting) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterUnitTesting) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterUnitTesting) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterUnitTestingable is the interface implemented by [MTRClusterUnitTesting], for mocking and DI.
 type MTRClusterUnitTestingable interface {
@@ -2131,4 +2135,3 @@ type MTRClusterUnitTestingable interface {
 }
 
 var _ MTRClusterUnitTestingable = (*MTRClusterUnitTesting)(nil)
-

@@ -18,11 +18,15 @@ type MTRGeneralCommissioningClusterCommissioningCompleteResponseParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRGeneralCommissioningClusterCommissioningCompleteResponseParams].
-func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) Unwrap() *raw.MTRGeneralCommissioningClusterCommissioningCompleteResponseParams { return x.inner }
+func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) Unwrap() *raw.MTRGeneralCommissioningClusterCommissioningCompleteResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRGeneralCommissioningClusterCommissioningCompleteResponseParamsFromID adopts an existing object pointer as a MTRGeneralCommissioningClusterCommissioningCompleteResponseParams (nil for 0).
 func MTRGeneralCommissioningClusterCommissioningCompleteResponseParamsFromID(id objc.ID) *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams {
@@ -110,4 +114,3 @@ type MTRGeneralCommissioningClusterCommissioningCompleteResponseParamsable inter
 }
 
 var _ MTRGeneralCommissioningClusterCommissioningCompleteResponseParamsable = (*MTRGeneralCommissioningClusterCommissioningCompleteResponseParams)(nil)
-

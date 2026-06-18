@@ -35,7 +35,9 @@ func NewPlacemarkResolutionResult() *PlacemarkResolutionResult {
 	return &PlacemarkResolutionResult{inner: raw.INPlacemarkResolutionResultFromID(_id)}
 }
 
-func (x *PlacemarkResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
+func (x *PlacemarkResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
+	return &x.inner.INIntentResolutionResult
+}
 
 // PlacemarkResolutionResultable is the interface implemented by [PlacemarkResolutionResult], for mocking and DI.
 type PlacemarkResolutionResultable interface {
@@ -43,4 +45,3 @@ type PlacemarkResolutionResultable interface {
 }
 
 var _ PlacemarkResolutionResultable = (*PlacemarkResolutionResult)(nil)
-

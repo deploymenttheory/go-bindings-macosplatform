@@ -16,11 +16,11 @@ type AXCategoricalDataAxisDescriptor struct {
 }
 
 var (
-	_clsAXCategoricalDataAxisDescriptor = _objcClass("AXCategoricalDataAxisDescriptor")
-	_aXCategoricalDataAxisDescriptorSelInitWithTitleCategoryOrder = objc.RegisterName("initWithTitle:categoryOrder:")
+	_clsAXCategoricalDataAxisDescriptor                                     = _objcClass("AXCategoricalDataAxisDescriptor")
+	_aXCategoricalDataAxisDescriptorSelInitWithTitleCategoryOrder           = objc.RegisterName("initWithTitle:categoryOrder:")
 	_aXCategoricalDataAxisDescriptorSelInitWithAttributedTitleCategoryOrder = objc.RegisterName("initWithAttributedTitle:categoryOrder:")
-	_aXCategoricalDataAxisDescriptorSelCategoryOrder = objc.RegisterName("categoryOrder")
-	_aXCategoricalDataAxisDescriptorSelSetCategoryOrder = objc.RegisterName("setCategoryOrder:")
+	_aXCategoricalDataAxisDescriptorSelCategoryOrder                        = objc.RegisterName("categoryOrder")
+	_aXCategoricalDataAxisDescriptorSelSetCategoryOrder                     = objc.RegisterName("setCategoryOrder:")
 )
 
 func AXCategoricalDataAxisDescriptorFromID(id objc.ID) *AXCategoricalDataAxisDescriptor {
@@ -35,13 +35,17 @@ func AXCategoricalDataAxisDescriptorFromID(id objc.ID) *AXCategoricalDataAxisDes
 
 func (o *AXCategoricalDataAxisDescriptor) InitWithTitleCategoryOrder(title *foundation.NSString, categoryOrder *foundation.NSArray[*foundation.NSString]) *AXCategoricalDataAxisDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXCategoricalDataAxisDescriptorSelInitWithTitleCategoryOrder, title.Ptr(), categoryOrder)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXCategoricalDataAxisDescriptorFromID(_ret)
 }
 
 func (o *AXCategoricalDataAxisDescriptor) InitWithAttributedTitleCategoryOrder(attributedTitle *foundation.NSAttributedString, categoryOrder *foundation.NSArray[*foundation.NSString]) *AXCategoricalDataAxisDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXCategoricalDataAxisDescriptorSelInitWithAttributedTitleCategoryOrder, attributedTitle.Ptr(), categoryOrder)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXCategoricalDataAxisDescriptorFromID(_ret)
 }
 
@@ -54,4 +58,3 @@ func (o *AXCategoricalDataAxisDescriptor) CategoryOrder() *foundation.NSArray[*f
 func (o *AXCategoricalDataAxisDescriptor) SetCategoryOrder(categoryOrder *foundation.NSArray[*foundation.NSString]) {
 	o.Ptr().Send(_aXCategoricalDataAxisDescriptorSelSetCategoryOrder, categoryOrder)
 }
-

@@ -84,4 +84,3 @@ type LookAroundSnapshotterable interface {
 }
 
 var _ LookAroundSnapshotterable = (*LookAroundSnapshotter)(nil)
-

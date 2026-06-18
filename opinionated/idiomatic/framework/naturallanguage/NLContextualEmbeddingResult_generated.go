@@ -81,4 +81,3 @@ type ContextualEmbeddingResultable interface {
 }
 
 var _ ContextualEmbeddingResultable = (*ContextualEmbeddingResult)(nil)
-

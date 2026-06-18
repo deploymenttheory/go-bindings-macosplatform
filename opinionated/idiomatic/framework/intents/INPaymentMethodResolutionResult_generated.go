@@ -35,7 +35,9 @@ func NewPaymentMethodResolutionResult() *PaymentMethodResolutionResult {
 	return &PaymentMethodResolutionResult{inner: raw.INPaymentMethodResolutionResultFromID(_id)}
 }
 
-func (x *PaymentMethodResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
+func (x *PaymentMethodResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
+	return &x.inner.INIntentResolutionResult
+}
 
 // PaymentMethodResolutionResultable is the interface implemented by [PaymentMethodResolutionResult], for mocking and DI.
 type PaymentMethodResolutionResultable interface {
@@ -43,4 +45,3 @@ type PaymentMethodResolutionResultable interface {
 }
 
 var _ PaymentMethodResolutionResultable = (*PaymentMethodResolutionResult)(nil)
-

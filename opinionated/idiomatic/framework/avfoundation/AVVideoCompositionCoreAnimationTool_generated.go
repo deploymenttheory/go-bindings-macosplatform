@@ -15,7 +15,9 @@ type VideoCompositionCoreAnimationTool struct {
 }
 
 // Unwrap returns the underlying [raw.AVVideoCompositionCoreAnimationTool].
-func (x *VideoCompositionCoreAnimationTool) Unwrap() *raw.AVVideoCompositionCoreAnimationTool { return x.inner }
+func (x *VideoCompositionCoreAnimationTool) Unwrap() *raw.AVVideoCompositionCoreAnimationTool {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -41,4 +43,3 @@ type VideoCompositionCoreAnimationToolable interface {
 }
 
 var _ VideoCompositionCoreAnimationToolable = (*VideoCompositionCoreAnimationTool)(nil)
-

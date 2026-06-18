@@ -68,4 +68,3 @@ type LocalSearchable interface {
 }
 
 var _ LocalSearchable = (*LocalSearch)(nil)
-

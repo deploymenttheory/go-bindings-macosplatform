@@ -14,8 +14,8 @@ import (
 
 var (
 	_browserenginecoreLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce             sync.Once
+	_failedSymbols        = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -48,11 +48,21 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("be_memory_inline_jit_restrict_rwx_to_rw_with_witness", func() { purego.RegisterLibFunc(&_be_memory_inline_jit_restrict_rwx_to_rw_with_witness, _browserenginecoreLib, "be_memory_inline_jit_restrict_rwx_to_rw_with_witness") })
-	_register("be_memory_inline_jit_restrict_rwx_to_rw_with_witness_impl", func() { purego.RegisterLibFunc(&_be_memory_inline_jit_restrict_rwx_to_rw_with_witness_impl, _browserenginecoreLib, "be_memory_inline_jit_restrict_rwx_to_rw_with_witness_impl") })
-	_register("be_memory_inline_jit_restrict_rwx_to_rx_with_witness", func() { purego.RegisterLibFunc(&_be_memory_inline_jit_restrict_rwx_to_rx_with_witness, _browserenginecoreLib, "be_memory_inline_jit_restrict_rwx_to_rx_with_witness") })
-	_register("be_memory_inline_jit_restrict_rwx_to_rx_with_witness_impl", func() { purego.RegisterLibFunc(&_be_memory_inline_jit_restrict_rwx_to_rx_with_witness_impl, _browserenginecoreLib, "be_memory_inline_jit_restrict_rwx_to_rx_with_witness_impl") })
-	_register("be_memory_inline_jit_restrict_with_witness_supported", func() { purego.RegisterLibFunc(&_be_memory_inline_jit_restrict_with_witness_supported, _browserenginecoreLib, "be_memory_inline_jit_restrict_with_witness_supported") })
+	_register("be_memory_inline_jit_restrict_rwx_to_rw_with_witness", func() {
+		purego.RegisterLibFunc(&_be_memory_inline_jit_restrict_rwx_to_rw_with_witness, _browserenginecoreLib, "be_memory_inline_jit_restrict_rwx_to_rw_with_witness")
+	})
+	_register("be_memory_inline_jit_restrict_rwx_to_rw_with_witness_impl", func() {
+		purego.RegisterLibFunc(&_be_memory_inline_jit_restrict_rwx_to_rw_with_witness_impl, _browserenginecoreLib, "be_memory_inline_jit_restrict_rwx_to_rw_with_witness_impl")
+	})
+	_register("be_memory_inline_jit_restrict_rwx_to_rx_with_witness", func() {
+		purego.RegisterLibFunc(&_be_memory_inline_jit_restrict_rwx_to_rx_with_witness, _browserenginecoreLib, "be_memory_inline_jit_restrict_rwx_to_rx_with_witness")
+	})
+	_register("be_memory_inline_jit_restrict_rwx_to_rx_with_witness_impl", func() {
+		purego.RegisterLibFunc(&_be_memory_inline_jit_restrict_rwx_to_rx_with_witness_impl, _browserenginecoreLib, "be_memory_inline_jit_restrict_rwx_to_rx_with_witness_impl")
+	})
+	_register("be_memory_inline_jit_restrict_with_witness_supported", func() {
+		purego.RegisterLibFunc(&_be_memory_inline_jit_restrict_with_witness_supported, _browserenginecoreLib, "be_memory_inline_jit_restrict_with_witness_supported")
+	})
 }
 
 func init() {

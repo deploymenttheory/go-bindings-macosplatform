@@ -124,9 +124,13 @@ func (x *MTRClusterKeypadInput) SendKeyWithParamsExpectedValuesExpectedValueInte
 	}
 }
 
-func (x *MTRClusterKeypadInput) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterKeypadInput) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterKeypadInput) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterKeypadInput) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterKeypadInputable is the interface implemented by [MTRClusterKeypadInput], for mocking and DI.
 type MTRClusterKeypadInputable interface {
@@ -141,4 +145,3 @@ type MTRClusterKeypadInputable interface {
 }
 
 var _ MTRClusterKeypadInputable = (*MTRClusterKeypadInput)(nil)
-

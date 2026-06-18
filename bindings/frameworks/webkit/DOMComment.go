@@ -25,4 +25,3 @@ func DOMCommentFromID(id objc.ID) *DOMComment {
 	purego.Track(o)
 	return o
 }
-

@@ -18,11 +18,11 @@ type VNDetectHumanBodyPoseRequest struct {
 }
 
 var (
-	_clsVNDetectHumanBodyPoseRequest = _objcClass("VNDetectHumanBodyPoseRequest")
-	_vNDetectHumanBodyPoseRequestSelSupportedJointNamesForRevisionError = objc.RegisterName("supportedJointNamesForRevision:error:")
-	_vNDetectHumanBodyPoseRequestSelSupportedJointNamesAndReturnError = objc.RegisterName("supportedJointNamesAndReturnError:")
+	_clsVNDetectHumanBodyPoseRequest                                          = _objcClass("VNDetectHumanBodyPoseRequest")
+	_vNDetectHumanBodyPoseRequestSelSupportedJointNamesForRevisionError       = objc.RegisterName("supportedJointNamesForRevision:error:")
+	_vNDetectHumanBodyPoseRequestSelSupportedJointNamesAndReturnError         = objc.RegisterName("supportedJointNamesAndReturnError:")
 	_vNDetectHumanBodyPoseRequestSelSupportedJointsGroupNamesForRevisionError = objc.RegisterName("supportedJointsGroupNamesForRevision:error:")
-	_vNDetectHumanBodyPoseRequestSelSupportedJointsGroupNamesAndReturnError = objc.RegisterName("supportedJointsGroupNamesAndReturnError:")
+	_vNDetectHumanBodyPoseRequestSelSupportedJointsGroupNamesAndReturnError   = objc.RegisterName("supportedJointsGroupNamesAndReturnError:")
 )
 
 func VNDetectHumanBodyPoseRequestFromID(id objc.ID) *VNDetectHumanBodyPoseRequest {
@@ -76,4 +76,3 @@ func (o *VNDetectHumanBodyPoseRequest) SupportedJointsGroupNamesAndReturnError()
 	}
 	return _ret, nil
 }
-

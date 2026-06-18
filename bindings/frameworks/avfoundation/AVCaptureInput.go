@@ -16,7 +16,7 @@ type AVCaptureInput struct {
 }
 
 var (
-	_clsAVCaptureInput = _objcClass("AVCaptureInput")
+	_clsAVCaptureInput      = _objcClass("AVCaptureInput")
 	_aVCaptureInputSelPorts = objc.RegisterName("ports")
 )
 
@@ -32,7 +32,8 @@ func AVCaptureInputFromID(id objc.ID) *AVCaptureInput {
 
 func (o *AVCaptureInput) Ports() *foundation.NSArray[*AVCaptureInputPort] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureInputSelPorts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVCaptureInputPort](_ret)
 }
-

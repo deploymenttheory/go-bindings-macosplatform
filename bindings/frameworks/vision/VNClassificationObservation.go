@@ -16,11 +16,11 @@ type VNClassificationObservation struct {
 }
 
 var (
-	_clsVNClassificationObservation = _objcClass("VNClassificationObservation")
-	_vNClassificationObservationSelIdentifier = objc.RegisterName("identifier")
+	_clsVNClassificationObservation                             = _objcClass("VNClassificationObservation")
+	_vNClassificationObservationSelIdentifier                   = objc.RegisterName("identifier")
 	_vNClassificationObservationSelHasMinimumRecallForPrecision = objc.RegisterName("hasMinimumRecall:forPrecision:")
 	_vNClassificationObservationSelHasMinimumPrecisionForRecall = objc.RegisterName("hasMinimumPrecision:forRecall:")
-	_vNClassificationObservationSelHasPrecisionRecallCurve = objc.RegisterName("hasPrecisionRecallCurve")
+	_vNClassificationObservationSelHasPrecisionRecallCurve      = objc.RegisterName("hasPrecisionRecallCurve")
 )
 
 func VNClassificationObservationFromID(id objc.ID) *VNClassificationObservation {
@@ -35,7 +35,9 @@ func VNClassificationObservationFromID(id objc.ID) *VNClassificationObservation 
 
 func (o *VNClassificationObservation) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNClassificationObservationSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -56,4 +58,3 @@ func (o *VNClassificationObservation) HasPrecisionRecallCurve() bool {
 	_ret := objc.Send[bool](o.Ptr(), _vNClassificationObservationSelHasPrecisionRecallCurve)
 	return _ret
 }
-

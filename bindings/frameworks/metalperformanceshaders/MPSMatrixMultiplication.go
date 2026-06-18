@@ -17,20 +17,20 @@ type MPSMatrixMultiplication struct {
 }
 
 var (
-	_clsMPSMatrixMultiplication = _objcClass("MPSMatrixMultiplication")
+	_clsMPSMatrixMultiplication                                                                                         = _objcClass("MPSMatrixMultiplication")
 	_mPSMatrixMultiplicationSelInitWithDeviceTransposeLeftTransposeRightResultRowsResultColumnsInteriorColumnsAlphaBeta = objc.RegisterName("initWithDevice:transposeLeft:transposeRight:resultRows:resultColumns:interiorColumns:alpha:beta:")
-	_mPSMatrixMultiplicationSelInitWithDeviceResultRowsResultColumnsInteriorColumns = objc.RegisterName("initWithDevice:resultRows:resultColumns:interiorColumns:")
-	_mPSMatrixMultiplicationSelEncodeToCommandBufferLeftMatrixRightMatrixResultMatrix = objc.RegisterName("encodeToCommandBuffer:leftMatrix:rightMatrix:resultMatrix:")
-	_mPSMatrixMultiplicationSelResultMatrixOrigin = objc.RegisterName("resultMatrixOrigin")
-	_mPSMatrixMultiplicationSelSetResultMatrixOrigin = objc.RegisterName("setResultMatrixOrigin:")
-	_mPSMatrixMultiplicationSelLeftMatrixOrigin = objc.RegisterName("leftMatrixOrigin")
-	_mPSMatrixMultiplicationSelSetLeftMatrixOrigin = objc.RegisterName("setLeftMatrixOrigin:")
-	_mPSMatrixMultiplicationSelRightMatrixOrigin = objc.RegisterName("rightMatrixOrigin")
-	_mPSMatrixMultiplicationSelSetRightMatrixOrigin = objc.RegisterName("setRightMatrixOrigin:")
-	_mPSMatrixMultiplicationSelBatchStart = objc.RegisterName("batchStart")
-	_mPSMatrixMultiplicationSelSetBatchStart = objc.RegisterName("setBatchStart:")
-	_mPSMatrixMultiplicationSelBatchSize = objc.RegisterName("batchSize")
-	_mPSMatrixMultiplicationSelSetBatchSize = objc.RegisterName("setBatchSize:")
+	_mPSMatrixMultiplicationSelInitWithDeviceResultRowsResultColumnsInteriorColumns                                     = objc.RegisterName("initWithDevice:resultRows:resultColumns:interiorColumns:")
+	_mPSMatrixMultiplicationSelEncodeToCommandBufferLeftMatrixRightMatrixResultMatrix                                   = objc.RegisterName("encodeToCommandBuffer:leftMatrix:rightMatrix:resultMatrix:")
+	_mPSMatrixMultiplicationSelResultMatrixOrigin                                                                       = objc.RegisterName("resultMatrixOrigin")
+	_mPSMatrixMultiplicationSelSetResultMatrixOrigin                                                                    = objc.RegisterName("setResultMatrixOrigin:")
+	_mPSMatrixMultiplicationSelLeftMatrixOrigin                                                                         = objc.RegisterName("leftMatrixOrigin")
+	_mPSMatrixMultiplicationSelSetLeftMatrixOrigin                                                                      = objc.RegisterName("setLeftMatrixOrigin:")
+	_mPSMatrixMultiplicationSelRightMatrixOrigin                                                                        = objc.RegisterName("rightMatrixOrigin")
+	_mPSMatrixMultiplicationSelSetRightMatrixOrigin                                                                     = objc.RegisterName("setRightMatrixOrigin:")
+	_mPSMatrixMultiplicationSelBatchStart                                                                               = objc.RegisterName("batchStart")
+	_mPSMatrixMultiplicationSelSetBatchStart                                                                            = objc.RegisterName("setBatchStart:")
+	_mPSMatrixMultiplicationSelBatchSize                                                                                = objc.RegisterName("batchSize")
+	_mPSMatrixMultiplicationSelSetBatchSize                                                                             = objc.RegisterName("setBatchSize:")
 )
 
 func MPSMatrixMultiplicationFromID(id objc.ID) *MPSMatrixMultiplication {
@@ -46,14 +46,18 @@ func MPSMatrixMultiplicationFromID(id objc.ID) *MPSMatrixMultiplication {
 // @abstract   Initialize an MPSMatrixMultiplication object on a device for a given size and desired transpose and scale values. @param      device          The device on which the kernel will execute. @param      transposeLeft   A boolean value which indicates if the left input matrix should be used in transposed form.  If 'YES' then op(A) = A**T, otherwise op(A) = A. @param      transposeRight  A boolean value which indicates if the right input matrix should be used in transposed form.  If 'YES' then op(B) = B**T, otherwise op(B) = B. @param      resultRows      The number of rows in the result matrix, M in BLAS GEMM description. @param      resultColumns   The number of columns in the result matrix, N in BLAS GEMM description. @param      interiorColumns The number of columns of the left input matrix after the appropriate transpose operation has been applied. K in BLAS GEMM description. @param      alpha           The scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. @param      beta            The scale factor to apply to the initial values of C.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. @return     A valid MPSMatrixMultiplication object or nil, if failure.
 func (o *MPSMatrixMultiplication) InitWithDeviceTransposeLeftTransposeRightResultRowsResultColumnsInteriorColumnsAlphaBeta(device metal.MTLDevice, transposeLeft bool, transposeRight bool, resultRows uint, resultColumns uint, interiorColumns uint, alpha float64, beta float64) *MPSMatrixMultiplication {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixMultiplicationSelInitWithDeviceTransposeLeftTransposeRightResultRowsResultColumnsInteriorColumnsAlphaBeta, device, transposeLeft, transposeRight, resultRows, resultColumns, interiorColumns, alpha, beta)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixMultiplicationFromID(_ret)
 }
 
 // @abstract   Convenience initialization for a matrix-matrix multiplication with no transpositions, unit scaling of the product, and no accumulation of the result.  The scaling factors alpha and beta are taken to be 1.0 and 0.0 respectively. @param      device          The device on which the kernel will execute. @param      resultRows      The number of rows in the result matrix, M in BLAS GEMM description. @param      resultColumns   The number of columns in the result matrix, N in BLAS GEMM description. @param      interiorColumns The number of columns of the left input matrix. K in BLAS GEMM description. @return     A valid MPSMatrixMultiplication object or nil, if failure.
 func (o *MPSMatrixMultiplication) InitWithDeviceResultRowsResultColumnsInteriorColumns(device metal.MTLDevice, resultRows uint, resultColumns uint, interiorColumns uint) *MPSMatrixMultiplication {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixMultiplicationSelInitWithDeviceResultRowsResultColumnsInteriorColumns, device, resultRows, resultColumns, interiorColumns)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixMultiplicationFromID(_ret)
 }
 
@@ -111,4 +115,3 @@ func (o *MPSMatrixMultiplication) BatchSize() uint {
 func (o *MPSMatrixMultiplication) SetBatchSize(batchSize uint) {
 	o.Ptr().Send(_mPSMatrixMultiplicationSelSetBatchSize, batchSize)
 }
-

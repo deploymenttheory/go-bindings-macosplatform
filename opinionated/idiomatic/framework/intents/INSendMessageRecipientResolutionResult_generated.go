@@ -15,7 +15,9 @@ type SendMessageRecipientResolutionResult struct {
 }
 
 // Unwrap returns the underlying [raw.INSendMessageRecipientResolutionResult].
-func (x *SendMessageRecipientResolutionResult) Unwrap() *raw.INSendMessageRecipientResolutionResult { return x.inner }
+func (x *SendMessageRecipientResolutionResult) Unwrap() *raw.INSendMessageRecipientResolutionResult {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -36,9 +38,13 @@ func NewSendMessageRecipientResolutionResultWithPersonResolutionResult(personRes
 	return &SendMessageRecipientResolutionResult{inner: raw.INSendMessageRecipientResolutionResultFromID(_id)}
 }
 
-func (x *SendMessageRecipientResolutionResult) asPersonResolutionResult() *raw.INPersonResolutionResult { return &x.inner.INPersonResolutionResult }
+func (x *SendMessageRecipientResolutionResult) asPersonResolutionResult() *raw.INPersonResolutionResult {
+	return &x.inner.INPersonResolutionResult
+}
 
-func (x *SendMessageRecipientResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INPersonResolutionResult.INIntentResolutionResult }
+func (x *SendMessageRecipientResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
+	return &x.inner.INPersonResolutionResult.INIntentResolutionResult
+}
 
 // SendMessageRecipientResolutionResultable is the interface implemented by [SendMessageRecipientResolutionResult], for mocking and DI.
 type SendMessageRecipientResolutionResultable interface {
@@ -46,4 +52,3 @@ type SendMessageRecipientResolutionResultable interface {
 }
 
 var _ SendMessageRecipientResolutionResultable = (*SendMessageRecipientResolutionResult)(nil)
-

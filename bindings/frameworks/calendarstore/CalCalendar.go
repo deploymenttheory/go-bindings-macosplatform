@@ -18,16 +18,16 @@ type CalCalendar struct {
 }
 
 var (
-	_clsCalCalendar = _objcClass("CalCalendar")
-	_calCalendarSelCalendar = objc.RegisterName("calendar")
-	_calCalendarSelColor = objc.RegisterName("color")
-	_calCalendarSelSetColor = objc.RegisterName("setColor:")
-	_calCalendarSelNotes = objc.RegisterName("notes")
-	_calCalendarSelSetNotes = objc.RegisterName("setNotes:")
-	_calCalendarSelTitle = objc.RegisterName("title")
-	_calCalendarSelSetTitle = objc.RegisterName("setTitle:")
-	_calCalendarSelType = objc.RegisterName("type")
-	_calCalendarSelUid = objc.RegisterName("uid")
+	_clsCalCalendar           = _objcClass("CalCalendar")
+	_calCalendarSelCalendar   = objc.RegisterName("calendar")
+	_calCalendarSelColor      = objc.RegisterName("color")
+	_calCalendarSelSetColor   = objc.RegisterName("setColor:")
+	_calCalendarSelNotes      = objc.RegisterName("notes")
+	_calCalendarSelSetNotes   = objc.RegisterName("setNotes:")
+	_calCalendarSelTitle      = objc.RegisterName("title")
+	_calCalendarSelSetTitle   = objc.RegisterName("setTitle:")
+	_calCalendarSelType       = objc.RegisterName("type")
+	_calCalendarSelUid        = objc.RegisterName("uid")
 	_calCalendarSelIsEditable = objc.RegisterName("isEditable")
 )
 
@@ -50,7 +50,9 @@ func CalCalendarCalendar() objc.ID {
 // Deprecated: since macOS 10.8.
 func (o *CalCalendar) Color() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calCalendarSelColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -62,7 +64,9 @@ func (o *CalCalendar) SetColor(color *appkit.NSColor) {
 // Deprecated: since macOS 10.8.
 func (o *CalCalendar) Notes() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calCalendarSelNotes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -74,7 +78,9 @@ func (o *CalCalendar) SetNotes(notes *foundation.NSString) {
 // Deprecated: since macOS 10.8.
 func (o *CalCalendar) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calCalendarSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -86,14 +92,18 @@ func (o *CalCalendar) SetTitle(title *foundation.NSString) {
 // Deprecated: since macOS 10.8.
 func (o *CalCalendar) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calCalendarSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Deprecated: since macOS 10.8.
 func (o *CalCalendar) Uid() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calCalendarSelUid)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -102,4 +112,3 @@ func (o *CalCalendar) IsEditable() bool {
 	_ret := objc.Send[bool](o.Ptr(), _calCalendarSelIsEditable)
 	return _ret
 }
-

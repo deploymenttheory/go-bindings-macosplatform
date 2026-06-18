@@ -17,12 +17,12 @@ type AVAssetSegmentTrackReport struct {
 }
 
 var (
-	_clsAVAssetSegmentTrackReport = _objcClass("AVAssetSegmentTrackReport")
-	_aVAssetSegmentTrackReportSelTrackID = objc.RegisterName("trackID")
-	_aVAssetSegmentTrackReportSelMediaType = objc.RegisterName("mediaType")
+	_clsAVAssetSegmentTrackReport                              = _objcClass("AVAssetSegmentTrackReport")
+	_aVAssetSegmentTrackReportSelTrackID                       = objc.RegisterName("trackID")
+	_aVAssetSegmentTrackReportSelMediaType                     = objc.RegisterName("mediaType")
 	_aVAssetSegmentTrackReportSelEarliestPresentationTimeStamp = objc.RegisterName("earliestPresentationTimeStamp")
-	_aVAssetSegmentTrackReportSelDuration = objc.RegisterName("duration")
-	_aVAssetSegmentTrackReportSelFirstVideoSampleInformation = objc.RegisterName("firstVideoSampleInformation")
+	_aVAssetSegmentTrackReportSelDuration                      = objc.RegisterName("duration")
+	_aVAssetSegmentTrackReportSelFirstVideoSampleInformation   = objc.RegisterName("firstVideoSampleInformation")
 )
 
 func AVAssetSegmentTrackReportFromID(id objc.ID) *AVAssetSegmentTrackReport {
@@ -44,7 +44,9 @@ func (o *AVAssetSegmentTrackReport) TrackID() int32 {
 // @property	mediaType @abstract	Indicates the media type for this track. Media types are declared in AVMediaFormat.h.
 func (o *AVAssetSegmentTrackReport) MediaType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetSegmentTrackReportSelMediaType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -63,7 +65,8 @@ func (o *AVAssetSegmentTrackReport) Duration() coremedia.CMTime {
 // @property	firstVideoSampleInformation @abstract	Provides information on the first video sample in this track. The value is nil if this track is not video track or no information available.
 func (o *AVAssetSegmentTrackReport) FirstVideoSampleInformation() *AVAssetSegmentReportSampleInformation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetSegmentTrackReportSelFirstVideoSampleInformation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetSegmentReportSampleInformationFromID(_ret)
 }
-

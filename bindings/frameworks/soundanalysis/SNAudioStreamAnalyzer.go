@@ -19,13 +19,13 @@ type SNAudioStreamAnalyzer struct {
 }
 
 var (
-	_clsSNAudioStreamAnalyzer = _objcClass("SNAudioStreamAnalyzer")
-	_sNAudioStreamAnalyzerSelInitWithFormat = objc.RegisterName("initWithFormat:")
-	_sNAudioStreamAnalyzerSelAddRequestWithObserverError = objc.RegisterName("addRequest:withObserver:error:")
-	_sNAudioStreamAnalyzerSelRemoveRequest = objc.RegisterName("removeRequest:")
-	_sNAudioStreamAnalyzerSelRemoveAllRequests = objc.RegisterName("removeAllRequests")
+	_clsSNAudioStreamAnalyzer                                       = _objcClass("SNAudioStreamAnalyzer")
+	_sNAudioStreamAnalyzerSelInitWithFormat                         = objc.RegisterName("initWithFormat:")
+	_sNAudioStreamAnalyzerSelAddRequestWithObserverError            = objc.RegisterName("addRequest:withObserver:error:")
+	_sNAudioStreamAnalyzerSelRemoveRequest                          = objc.RegisterName("removeRequest:")
+	_sNAudioStreamAnalyzerSelRemoveAllRequests                      = objc.RegisterName("removeAllRequests")
 	_sNAudioStreamAnalyzerSelAnalyzeAudioBufferAtAudioFramePosition = objc.RegisterName("analyzeAudioBuffer:atAudioFramePosition:")
-	_sNAudioStreamAnalyzerSelCompleteAnalysis = objc.RegisterName("completeAnalysis")
+	_sNAudioStreamAnalyzerSelCompleteAnalysis                       = objc.RegisterName("completeAnalysis")
 )
 
 func SNAudioStreamAnalyzerFromID(id objc.ID) *SNAudioStreamAnalyzer {
@@ -41,7 +41,9 @@ func SNAudioStreamAnalyzerFromID(id objc.ID) *SNAudioStreamAnalyzer {
 // Creates a new analyzer - Parameter format: The format of the audio stream to be analyzed. Only PCM formats are supported.
 func (o *SNAudioStreamAnalyzer) InitWithFormat(format *avfaudio.AVAudioFormat) *SNAudioStreamAnalyzer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sNAudioStreamAnalyzerSelInitWithFormat, format.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SNAudioStreamAnalyzerFromID(_ret)
 }
 
@@ -74,4 +76,3 @@ func (o *SNAudioStreamAnalyzer) AnalyzeAudioBufferAtAudioFramePosition(audioBuff
 func (o *SNAudioStreamAnalyzer) CompleteAnalysis() {
 	o.Ptr().Send(_sNAudioStreamAnalyzerSelCompleteAnalysis)
 }
-

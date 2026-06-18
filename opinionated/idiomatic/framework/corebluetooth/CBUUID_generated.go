@@ -59,4 +59,3 @@ type UUIDable interface {
 }
 
 var _ UUIDable = (*UUID)(nil)
-

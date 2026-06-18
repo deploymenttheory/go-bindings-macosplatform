@@ -41,4 +41,3 @@ type StoreReviewControllerable interface {
 }
 
 var _ StoreReviewControllerable = (*StoreReviewController)(nil)
-

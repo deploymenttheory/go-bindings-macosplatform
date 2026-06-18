@@ -16,7 +16,9 @@ type ScreenTimeConfigurationObserver struct {
 }
 
 // Unwrap returns the underlying [raw.STScreenTimeConfigurationObserver].
-func (x *ScreenTimeConfigurationObserver) Unwrap() *raw.STScreenTimeConfigurationObserver { return x.inner }
+func (x *ScreenTimeConfigurationObserver) Unwrap() *raw.STScreenTimeConfigurationObserver {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -65,4 +67,3 @@ type ScreenTimeConfigurationObserverable interface {
 }
 
 var _ ScreenTimeConfigurationObserverable = (*ScreenTimeConfigurationObserver)(nil)
-

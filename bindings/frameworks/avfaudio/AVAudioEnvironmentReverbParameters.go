@@ -16,13 +16,13 @@ type AVAudioEnvironmentReverbParameters struct {
 }
 
 var (
-	_clsAVAudioEnvironmentReverbParameters = _objcClass("AVAudioEnvironmentReverbParameters")
+	_clsAVAudioEnvironmentReverbParameters                        = _objcClass("AVAudioEnvironmentReverbParameters")
 	_aVAudioEnvironmentReverbParametersSelLoadFactoryReverbPreset = objc.RegisterName("loadFactoryReverbPreset:")
-	_aVAudioEnvironmentReverbParametersSelEnable = objc.RegisterName("enable")
-	_aVAudioEnvironmentReverbParametersSelSetEnable = objc.RegisterName("setEnable:")
-	_aVAudioEnvironmentReverbParametersSelLevel = objc.RegisterName("level")
-	_aVAudioEnvironmentReverbParametersSelSetLevel = objc.RegisterName("setLevel:")
-	_aVAudioEnvironmentReverbParametersSelFilterParameters = objc.RegisterName("filterParameters")
+	_aVAudioEnvironmentReverbParametersSelEnable                  = objc.RegisterName("enable")
+	_aVAudioEnvironmentReverbParametersSelSetEnable               = objc.RegisterName("setEnable:")
+	_aVAudioEnvironmentReverbParametersSelLevel                   = objc.RegisterName("level")
+	_aVAudioEnvironmentReverbParametersSelSetLevel                = objc.RegisterName("setLevel:")
+	_aVAudioEnvironmentReverbParametersSelFilterParameters        = objc.RegisterName("filterParameters")
 )
 
 func AVAudioEnvironmentReverbParametersFromID(id objc.ID) *AVAudioEnvironmentReverbParameters {
@@ -63,7 +63,8 @@ func (o *AVAudioEnvironmentReverbParameters) SetLevel(level float32) {
 // @property filterParameters @abstract filter that applies to the output of the reverb
 func (o *AVAudioEnvironmentReverbParameters) FilterParameters() *AVAudioUnitEQFilterParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioEnvironmentReverbParametersSelFilterParameters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioUnitEQFilterParametersFromID(_ret)
 }
-

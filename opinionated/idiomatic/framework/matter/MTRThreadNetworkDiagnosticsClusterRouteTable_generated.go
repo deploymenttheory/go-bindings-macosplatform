@@ -16,7 +16,9 @@ type MTRThreadNetworkDiagnosticsClusterRouteTable struct {
 }
 
 // Unwrap returns the underlying [raw.MTRThreadNetworkDiagnosticsClusterRouteTable].
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTable) Unwrap() *raw.MTRThreadNetworkDiagnosticsClusterRouteTable { return x.inner }
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTable) Unwrap() *raw.MTRThreadNetworkDiagnosticsClusterRouteTable {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -96,7 +98,9 @@ func (x *MTRThreadNetworkDiagnosticsClusterRouteTable) WithLinkEstablished(linkE
 	return x
 }
 
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTable) asMTRThreadNetworkDiagnosticsClusterRouteTableStruct() *raw.MTRThreadNetworkDiagnosticsClusterRouteTableStruct { return &x.inner.MTRThreadNetworkDiagnosticsClusterRouteTableStruct }
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTable) asMTRThreadNetworkDiagnosticsClusterRouteTableStruct() *raw.MTRThreadNetworkDiagnosticsClusterRouteTableStruct {
+	return &x.inner.MTRThreadNetworkDiagnosticsClusterRouteTableStruct
+}
 
 // MTRThreadNetworkDiagnosticsClusterRouteTableable is the interface implemented by [MTRThreadNetworkDiagnosticsClusterRouteTable], for mocking and DI.
 type MTRThreadNetworkDiagnosticsClusterRouteTableable interface {
@@ -114,4 +118,3 @@ type MTRThreadNetworkDiagnosticsClusterRouteTableable interface {
 }
 
 var _ MTRThreadNetworkDiagnosticsClusterRouteTableable = (*MTRThreadNetworkDiagnosticsClusterRouteTable)(nil)
-

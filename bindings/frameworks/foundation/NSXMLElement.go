@@ -19,36 +19,36 @@ type NSXMLElement struct {
 }
 
 var (
-	_clsNSXMLElement = _objcClass("NSXMLElement")
-	_nSXMLElementSelInitWithName = objc.RegisterName("initWithName:")
-	_nSXMLElementSelInitWithNameURI = objc.RegisterName("initWithName:URI:")
-	_nSXMLElementSelInitWithNameStringValue = objc.RegisterName("initWithName:stringValue:")
-	_nSXMLElementSelInitWithXMLStringError = objc.RegisterName("initWithXMLString:error:")
-	_nSXMLElementSelInitWithKindOptions = objc.RegisterName("initWithKind:options:")
-	_nSXMLElementSelElementsForName = objc.RegisterName("elementsForName:")
-	_nSXMLElementSelElementsForLocalNameURI = objc.RegisterName("elementsForLocalName:URI:")
-	_nSXMLElementSelAddAttribute = objc.RegisterName("addAttribute:")
-	_nSXMLElementSelRemoveAttributeForName = objc.RegisterName("removeAttributeForName:")
-	_nSXMLElementSelSetAttributesWithDictionary = objc.RegisterName("setAttributesWithDictionary:")
-	_nSXMLElementSelAttributeForName = objc.RegisterName("attributeForName:")
-	_nSXMLElementSelAttributeForLocalNameURI = objc.RegisterName("attributeForLocalName:URI:")
-	_nSXMLElementSelAddNamespace = objc.RegisterName("addNamespace:")
-	_nSXMLElementSelRemoveNamespaceForPrefix = objc.RegisterName("removeNamespaceForPrefix:")
-	_nSXMLElementSelNamespaceForPrefix = objc.RegisterName("namespaceForPrefix:")
-	_nSXMLElementSelResolveNamespaceForName = objc.RegisterName("resolveNamespaceForName:")
-	_nSXMLElementSelResolvePrefixForNamespaceURI = objc.RegisterName("resolvePrefixForNamespaceURI:")
-	_nSXMLElementSelInsertChildAtIndex = objc.RegisterName("insertChild:atIndex:")
-	_nSXMLElementSelInsertChildrenAtIndex = objc.RegisterName("insertChildren:atIndex:")
-	_nSXMLElementSelRemoveChildAtIndex = objc.RegisterName("removeChildAtIndex:")
-	_nSXMLElementSelSetChildren = objc.RegisterName("setChildren:")
-	_nSXMLElementSelAddChild = objc.RegisterName("addChild:")
-	_nSXMLElementSelReplaceChildAtIndexWithNode = objc.RegisterName("replaceChildAtIndex:withNode:")
+	_clsNSXMLElement                                          = _objcClass("NSXMLElement")
+	_nSXMLElementSelInitWithName                              = objc.RegisterName("initWithName:")
+	_nSXMLElementSelInitWithNameURI                           = objc.RegisterName("initWithName:URI:")
+	_nSXMLElementSelInitWithNameStringValue                   = objc.RegisterName("initWithName:stringValue:")
+	_nSXMLElementSelInitWithXMLStringError                    = objc.RegisterName("initWithXMLString:error:")
+	_nSXMLElementSelInitWithKindOptions                       = objc.RegisterName("initWithKind:options:")
+	_nSXMLElementSelElementsForName                           = objc.RegisterName("elementsForName:")
+	_nSXMLElementSelElementsForLocalNameURI                   = objc.RegisterName("elementsForLocalName:URI:")
+	_nSXMLElementSelAddAttribute                              = objc.RegisterName("addAttribute:")
+	_nSXMLElementSelRemoveAttributeForName                    = objc.RegisterName("removeAttributeForName:")
+	_nSXMLElementSelSetAttributesWithDictionary               = objc.RegisterName("setAttributesWithDictionary:")
+	_nSXMLElementSelAttributeForName                          = objc.RegisterName("attributeForName:")
+	_nSXMLElementSelAttributeForLocalNameURI                  = objc.RegisterName("attributeForLocalName:URI:")
+	_nSXMLElementSelAddNamespace                              = objc.RegisterName("addNamespace:")
+	_nSXMLElementSelRemoveNamespaceForPrefix                  = objc.RegisterName("removeNamespaceForPrefix:")
+	_nSXMLElementSelNamespaceForPrefix                        = objc.RegisterName("namespaceForPrefix:")
+	_nSXMLElementSelResolveNamespaceForName                   = objc.RegisterName("resolveNamespaceForName:")
+	_nSXMLElementSelResolvePrefixForNamespaceURI              = objc.RegisterName("resolvePrefixForNamespaceURI:")
+	_nSXMLElementSelInsertChildAtIndex                        = objc.RegisterName("insertChild:atIndex:")
+	_nSXMLElementSelInsertChildrenAtIndex                     = objc.RegisterName("insertChildren:atIndex:")
+	_nSXMLElementSelRemoveChildAtIndex                        = objc.RegisterName("removeChildAtIndex:")
+	_nSXMLElementSelSetChildren                               = objc.RegisterName("setChildren:")
+	_nSXMLElementSelAddChild                                  = objc.RegisterName("addChild:")
+	_nSXMLElementSelReplaceChildAtIndexWithNode               = objc.RegisterName("replaceChildAtIndex:withNode:")
 	_nSXMLElementSelNormalizeAdjacentTextNodesPreservingCDATA = objc.RegisterName("normalizeAdjacentTextNodesPreservingCDATA:")
-	_nSXMLElementSelAttributes = objc.RegisterName("attributes")
-	_nSXMLElementSelSetAttributes = objc.RegisterName("setAttributes:")
-	_nSXMLElementSelNamespaces = objc.RegisterName("namespaces")
-	_nSXMLElementSelSetNamespaces = objc.RegisterName("setNamespaces:")
-	_nSXMLElementSelSetAttributesAsDictionary = objc.RegisterName("setAttributesAsDictionary:")
+	_nSXMLElementSelAttributes                                = objc.RegisterName("attributes")
+	_nSXMLElementSelSetAttributes                             = objc.RegisterName("setAttributes:")
+	_nSXMLElementSelNamespaces                                = objc.RegisterName("namespaces")
+	_nSXMLElementSelSetNamespaces                             = objc.RegisterName("setNamespaces:")
+	_nSXMLElementSelSetAttributesAsDictionary                 = objc.RegisterName("setAttributesAsDictionary:")
 )
 
 func NSXMLElementFromID(id objc.ID) *NSXMLElement {
@@ -64,21 +64,27 @@ func NSXMLElementFromID(id objc.ID) *NSXMLElement {
 // @method initWithName: @abstract Returns an element <tt>&lt;name>&lt;/name></tt>.
 func (o *NSXMLElement) InitWithName(name *NSString) *NSXMLElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLElementSelInitWithName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLElementFromID(_ret)
 }
 
 // @method initWithName:URI: @abstract Returns an element whose full QName is specified.
 func (o *NSXMLElement) InitWithNameURI(name *NSString, uRI *NSString) *NSXMLElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLElementSelInitWithNameURI, name.Ptr(), uRI.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLElementFromID(_ret)
 }
 
 // @method initWithName:stringValue: @abstract Returns an element with a single text node child <tt>&lt;name>string&lt;/name></tt>.
 func (o *NSXMLElement) InitWithNameStringValue(name *NSString, string_ *NSString) *NSXMLElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLElementSelInitWithNameStringValue, name.Ptr(), string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLElementFromID(_ret)
 }
 
@@ -86,7 +92,9 @@ func (o *NSXMLElement) InitWithNameStringValue(name *NSString, string_ *NSString
 func (o *NSXMLElement) InitWithXMLStringError(string_ *NSString) (*NSXMLElement, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLElementSelInitWithXMLStringError, string_.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -95,21 +103,27 @@ func (o *NSXMLElement) InitWithXMLStringError(string_ *NSString) (*NSXMLElement,
 
 func (o *NSXMLElement) InitWithKindOptions(kind NSXMLNodeKind, options NSXMLNodeOptions) *NSXMLElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLElementSelInitWithKindOptions, kind, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLElementFromID(_ret)
 }
 
 // @method elementsForName: @abstract Returns all of the child elements that match this name.
 func (o *NSXMLElement) ElementsForName(name *NSString) *NSArray[*NSXMLElement] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLElementSelElementsForName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSXMLElement](_ret)
 }
 
 // @method elementsForLocalName:URI @abstract Returns all of the child elements that match this localname URI pair.
 func (o *NSXMLElement) ElementsForLocalNameURI(localName *NSString, uRI *NSString) *NSArray[*NSXMLElement] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLElementSelElementsForLocalNameURI, localName.Ptr(), uRI.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSXMLElement](_ret)
 }
 
@@ -131,14 +145,18 @@ func (o *NSXMLElement) SetAttributesWithDictionary(attributes *NSDictionary[*NSS
 // @method attributeForName: @abstract Returns an attribute matching this name.
 func (o *NSXMLElement) AttributeForName(name *NSString) *NSXMLNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLElementSelAttributeForName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLNodeFromID(_ret)
 }
 
 // @method attributeForLocalName:URI: @abstract Returns an attribute matching this localname URI pair.
 func (o *NSXMLElement) AttributeForLocalNameURI(localName *NSString, uRI *NSString) *NSXMLNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLElementSelAttributeForLocalNameURI, localName.Ptr(), uRI.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLNodeFromID(_ret)
 }
 
@@ -155,21 +173,27 @@ func (o *NSXMLElement) RemoveNamespaceForPrefix(name *NSString) {
 // @method namespaceForPrefix: @abstract Returns the namespace matching this prefix.
 func (o *NSXMLElement) NamespaceForPrefix(name *NSString) *NSXMLNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLElementSelNamespaceForPrefix, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLNodeFromID(_ret)
 }
 
 // @method resolveNamespaceForName: @abstract Returns the namespace who matches the prefix of the name given. Looks in the entire namespace chain.
 func (o *NSXMLElement) ResolveNamespaceForName(name *NSString) *NSXMLNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLElementSelResolveNamespaceForName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLNodeFromID(_ret)
 }
 
 // @method resolvePrefixForNamespaceURI: @abstract Returns the URI of this prefix. Looks in the entire namespace chain.
 func (o *NSXMLElement) ResolvePrefixForNamespaceURI(namespaceURI *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLElementSelResolvePrefixForNamespaceURI, namespaceURI.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -211,7 +235,9 @@ func (o *NSXMLElement) NormalizeAdjacentTextNodesPreservingCDATA(preserve bool) 
 // @abstract Set the attributes. In the case of duplicate names, the first attribute with the name is used.
 func (o *NSXMLElement) Attributes() *NSArray[*NSXMLNode] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLElementSelAttributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSXMLNode](_ret)
 }
 
@@ -222,7 +248,9 @@ func (o *NSXMLElement) SetAttributes(attributes *NSArray[*NSXMLNode]) {
 // @abstract Set the namespaces. In the case of duplicate names, the first namespace with the name is used.
 func (o *NSXMLElement) Namespaces() *NSArray[*NSXMLNode] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLElementSelNamespaces)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSXMLNode](_ret)
 }
 
@@ -235,4 +263,3 @@ func (o *NSXMLElement) SetNamespaces(namespaces *NSArray[*NSXMLNode]) {
 func (o *NSXMLElement) SetAttributesAsDictionary(attributes *NSDictionary[objc.ID, objc.ID]) {
 	o.Ptr().Send(_nSXMLElementSelSetAttributesAsDictionary, attributes)
 }
-

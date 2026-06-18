@@ -18,18 +18,18 @@ type MPSCommandBuffer struct {
 }
 
 var (
-	_clsMPSCommandBuffer = _objcClass("MPSCommandBuffer")
+	_clsMPSCommandBuffer                               = _objcClass("MPSCommandBuffer")
 	_mPSCommandBufferSelCommandBufferWithCommandBuffer = objc.RegisterName("commandBufferWithCommandBuffer:")
-	_mPSCommandBufferSelCommandBufferFromCommandQueue = objc.RegisterName("commandBufferFromCommandQueue:")
-	_mPSCommandBufferSelInitWithCommandBuffer = objc.RegisterName("initWithCommandBuffer:")
-	_mPSCommandBufferSelCommitAndContinue = objc.RegisterName("commitAndContinue")
-	_mPSCommandBufferSelPrefetchHeapForWorkloadSize = objc.RegisterName("prefetchHeapForWorkloadSize:")
-	_mPSCommandBufferSelCommandBuffer = objc.RegisterName("commandBuffer")
-	_mPSCommandBufferSelRootCommandBuffer = objc.RegisterName("rootCommandBuffer")
-	_mPSCommandBufferSelPredicate = objc.RegisterName("predicate")
-	_mPSCommandBufferSelSetPredicate = objc.RegisterName("setPredicate:")
-	_mPSCommandBufferSelHeapProvider = objc.RegisterName("heapProvider")
-	_mPSCommandBufferSelSetHeapProvider = objc.RegisterName("setHeapProvider:")
+	_mPSCommandBufferSelCommandBufferFromCommandQueue  = objc.RegisterName("commandBufferFromCommandQueue:")
+	_mPSCommandBufferSelInitWithCommandBuffer          = objc.RegisterName("initWithCommandBuffer:")
+	_mPSCommandBufferSelCommitAndContinue              = objc.RegisterName("commitAndContinue")
+	_mPSCommandBufferSelPrefetchHeapForWorkloadSize    = objc.RegisterName("prefetchHeapForWorkloadSize:")
+	_mPSCommandBufferSelCommandBuffer                  = objc.RegisterName("commandBuffer")
+	_mPSCommandBufferSelRootCommandBuffer              = objc.RegisterName("rootCommandBuffer")
+	_mPSCommandBufferSelPredicate                      = objc.RegisterName("predicate")
+	_mPSCommandBufferSelSetPredicate                   = objc.RegisterName("setPredicate:")
+	_mPSCommandBufferSelHeapProvider                   = objc.RegisterName("heapProvider")
+	_mPSCommandBufferSelSetHeapProvider                = objc.RegisterName("setHeapProvider:")
 )
 
 func MPSCommandBufferFromID(id objc.ID) *MPSCommandBuffer {
@@ -45,21 +45,27 @@ func MPSCommandBufferFromID(id objc.ID) *MPSCommandBuffer {
 // @abstract   Initializes a MPSCommandBuffer object with given MTLCommandBuffer. Once we create this MPSCommandBuffer, any methods utilizing it could call commitAndContinue and so the users original commandBuffer may have been committed. Please use the rootCommandBuffer method to get the current alive underlying MTLCommandBuffer. @result     A pointer to the newly initialized MPSCommandBuffer object.
 func MPSCommandBufferCommandBufferWithCommandBuffer(commandBuffer metal.MTLCommandBuffer) *MPSCommandBuffer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCommandBuffer), _mPSCommandBufferSelCommandBufferWithCommandBuffer, commandBuffer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCommandBufferFromID(_ret)
 }
 
 // @abstract   Initializes a MPSCommandBuffer object from a given command queue. @result     A pointer to the newly initialized MPSCommandBuffer object.
 func MPSCommandBufferCommandBufferFromCommandQueue(commandQueue metal.MTLCommandQueue) *MPSCommandBuffer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCommandBuffer), _mPSCommandBufferSelCommandBufferFromCommandQueue, commandQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCommandBufferFromID(_ret)
 }
 
 // @abstract   Initializes an empty MPSCommandBuffer object with given MTLCommandBuffer. Once we create this MPSCommandBuffer, any methods utilizing it could call commitAndContinue and so the users original commandBuffer may have been committed. Please use the rootCommandBuffer method to get the current alive underlying MTLCommandBuffer. @result     A pointer to the newly initialized MPSCommandBuffer object.
 func (o *MPSCommandBuffer) InitWithCommandBuffer(commandBuffer metal.MTLCommandBuffer) *MPSCommandBuffer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCommandBufferSelInitWithCommandBuffer, commandBuffer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCommandBufferFromID(_ret)
 }
 
@@ -88,7 +94,9 @@ func (o *MPSCommandBuffer) RootCommandBuffer() metal.MTLCommandBuffer {
 // @property   predicate @abstract   A GPU predicate object. Default: nil.
 func (o *MPSCommandBuffer) Predicate() *mpscore.MPSPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCommandBufferSelPredicate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpscore.MPSPredicateFromID(_ret)
 }
 
@@ -105,4 +113,3 @@ func (o *MPSCommandBuffer) HeapProvider() mpscore.MPSHeapProvider {
 func (o *MPSCommandBuffer) SetHeapProvider(heapProvider mpscore.MPSHeapProvider) {
 	o.Ptr().Send(_mPSCommandBufferSelSetHeapProvider, heapProvider)
 }
-

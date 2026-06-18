@@ -15,7 +15,7 @@ type CMMagnetometerData struct {
 }
 
 var (
-	_clsCMMagnetometerData = _objcClass("CMMagnetometerData")
+	_clsCMMagnetometerData              = _objcClass("CMMagnetometerData")
 	_cMMagnetometerDataSelMagneticField = objc.RegisterName("magneticField")
 )
 
@@ -33,4 +33,3 @@ func (o *CMMagnetometerData) MagneticField() CMMagneticField {
 	_ret := objc.Send[CMMagneticField](o.Ptr(), _cMMagnetometerDataSelMagneticField)
 	return _ret
 }
-

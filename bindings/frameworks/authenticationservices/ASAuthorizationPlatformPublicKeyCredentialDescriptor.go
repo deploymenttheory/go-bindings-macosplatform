@@ -16,7 +16,7 @@ type ASAuthorizationPlatformPublicKeyCredentialDescriptor struct {
 }
 
 var (
-	_clsASAuthorizationPlatformPublicKeyCredentialDescriptor = _objcClass("ASAuthorizationPlatformPublicKeyCredentialDescriptor")
+	_clsASAuthorizationPlatformPublicKeyCredentialDescriptor                     = _objcClass("ASAuthorizationPlatformPublicKeyCredentialDescriptor")
 	_aSAuthorizationPlatformPublicKeyCredentialDescriptorSelInitWithCredentialID = objc.RegisterName("initWithCredentialID:")
 )
 
@@ -32,7 +32,8 @@ func ASAuthorizationPlatformPublicKeyCredentialDescriptorFromID(id objc.ID) *ASA
 
 func (o *ASAuthorizationPlatformPublicKeyCredentialDescriptor) InitWithCredentialID(credentialID *foundation.NSData) *ASAuthorizationPlatformPublicKeyCredentialDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPlatformPublicKeyCredentialDescriptorSelInitWithCredentialID, credentialID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationPlatformPublicKeyCredentialDescriptorFromID(_ret)
 }
-

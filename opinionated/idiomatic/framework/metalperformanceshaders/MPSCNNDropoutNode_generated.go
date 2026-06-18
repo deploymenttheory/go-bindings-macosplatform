@@ -80,7 +80,9 @@ func (x *CNNDropoutNode) MaskStrideInPixels() metal.MTLSize {
 	return x.inner.MaskStrideInPixels()
 }
 
-func (x *CNNDropoutNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+func (x *CNNDropoutNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNFilterNode
+}
 
 // CNNDropoutNodeable is the interface implemented by [CNNDropoutNode], for mocking and DI.
 type CNNDropoutNodeable interface {
@@ -93,4 +95,3 @@ type CNNDropoutNodeable interface {
 }
 
 var _ CNNDropoutNodeable = (*CNNDropoutNode)(nil)
-

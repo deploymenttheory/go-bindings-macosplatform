@@ -79,4 +79,3 @@ type OptimizationHintsable interface {
 }
 
 var _ OptimizationHintsable = (*OptimizationHints)(nil)
-

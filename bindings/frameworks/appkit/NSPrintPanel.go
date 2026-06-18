@@ -18,28 +18,28 @@ type NSPrintPanel struct {
 }
 
 var (
-	_clsNSPrintPanel = _objcClass("NSPrintPanel")
-	_nSPrintPanelSelPrintPanel = objc.RegisterName("printPanel")
-	_nSPrintPanelSelAddAccessoryController = objc.RegisterName("addAccessoryController:")
-	_nSPrintPanelSelRemoveAccessoryController = objc.RegisterName("removeAccessoryController:")
-	_nSPrintPanelSelSetDefaultButtonTitle = objc.RegisterName("setDefaultButtonTitle:")
-	_nSPrintPanelSelDefaultButtonTitle = objc.RegisterName("defaultButtonTitle")
-	_nSPrintPanelSelBeginSheetUsingPrintInfoOnWindowCompletionHandler = objc.RegisterName("beginSheetUsingPrintInfo:onWindow:completionHandler:")
+	_clsNSPrintPanel                                                                       = _objcClass("NSPrintPanel")
+	_nSPrintPanelSelPrintPanel                                                             = objc.RegisterName("printPanel")
+	_nSPrintPanelSelAddAccessoryController                                                 = objc.RegisterName("addAccessoryController:")
+	_nSPrintPanelSelRemoveAccessoryController                                              = objc.RegisterName("removeAccessoryController:")
+	_nSPrintPanelSelSetDefaultButtonTitle                                                  = objc.RegisterName("setDefaultButtonTitle:")
+	_nSPrintPanelSelDefaultButtonTitle                                                     = objc.RegisterName("defaultButtonTitle")
+	_nSPrintPanelSelBeginSheetUsingPrintInfoOnWindowCompletionHandler                      = objc.RegisterName("beginSheetUsingPrintInfo:onWindow:completionHandler:")
 	_nSPrintPanelSelBeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo = objc.RegisterName("beginSheetWithPrintInfo:modalForWindow:delegate:didEndSelector:contextInfo:")
-	_nSPrintPanelSelRunModalWithPrintInfo = objc.RegisterName("runModalWithPrintInfo:")
-	_nSPrintPanelSelRunModal = objc.RegisterName("runModal")
-	_nSPrintPanelSelAccessoryControllers = objc.RegisterName("accessoryControllers")
-	_nSPrintPanelSelOptions = objc.RegisterName("options")
-	_nSPrintPanelSelSetOptions = objc.RegisterName("setOptions:")
-	_nSPrintPanelSelHelpAnchor = objc.RegisterName("helpAnchor")
-	_nSPrintPanelSelSetHelpAnchor = objc.RegisterName("setHelpAnchor:")
-	_nSPrintPanelSelJobStyleHint = objc.RegisterName("jobStyleHint")
-	_nSPrintPanelSelSetJobStyleHint = objc.RegisterName("setJobStyleHint:")
-	_nSPrintPanelSelPrintInfo = objc.RegisterName("printInfo")
-	_nSPrintPanelSelSetAccessoryView = objc.RegisterName("setAccessoryView:")
-	_nSPrintPanelSelAccessoryView = objc.RegisterName("accessoryView")
-	_nSPrintPanelSelUpdateFromPrintInfo = objc.RegisterName("updateFromPrintInfo")
-	_nSPrintPanelSelFinalWritePrintInfo = objc.RegisterName("finalWritePrintInfo")
+	_nSPrintPanelSelRunModalWithPrintInfo                                                  = objc.RegisterName("runModalWithPrintInfo:")
+	_nSPrintPanelSelRunModal                                                               = objc.RegisterName("runModal")
+	_nSPrintPanelSelAccessoryControllers                                                   = objc.RegisterName("accessoryControllers")
+	_nSPrintPanelSelOptions                                                                = objc.RegisterName("options")
+	_nSPrintPanelSelSetOptions                                                             = objc.RegisterName("setOptions:")
+	_nSPrintPanelSelHelpAnchor                                                             = objc.RegisterName("helpAnchor")
+	_nSPrintPanelSelSetHelpAnchor                                                          = objc.RegisterName("setHelpAnchor:")
+	_nSPrintPanelSelJobStyleHint                                                           = objc.RegisterName("jobStyleHint")
+	_nSPrintPanelSelSetJobStyleHint                                                        = objc.RegisterName("setJobStyleHint:")
+	_nSPrintPanelSelPrintInfo                                                              = objc.RegisterName("printInfo")
+	_nSPrintPanelSelSetAccessoryView                                                       = objc.RegisterName("setAccessoryView:")
+	_nSPrintPanelSelAccessoryView                                                          = objc.RegisterName("accessoryView")
+	_nSPrintPanelSelUpdateFromPrintInfo                                                    = objc.RegisterName("updateFromPrintInfo")
+	_nSPrintPanelSelFinalWritePrintInfo                                                    = objc.RegisterName("finalWritePrintInfo")
 )
 
 func NSPrintPanelFromID(id objc.ID) *NSPrintPanel {
@@ -54,7 +54,9 @@ func NSPrintPanelFromID(id objc.ID) *NSPrintPanel {
 
 func NSPrintPanelPrintPanel() *NSPrintPanel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPrintPanel), _nSPrintPanelSelPrintPanel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPrintPanelFromID(_ret)
 }
 
@@ -72,7 +74,9 @@ func (o *NSPrintPanel) SetDefaultButtonTitle(defaultButtonTitle *foundation.NSSt
 
 func (o *NSPrintPanel) DefaultButtonTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintPanelSelDefaultButtonTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -104,7 +108,9 @@ func (o *NSPrintPanel) RunModal() int {
 
 func (o *NSPrintPanel) AccessoryControllers() *foundation.NSArray[*NSViewController] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintPanelSelAccessoryControllers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSViewController](_ret)
 }
 
@@ -119,7 +125,9 @@ func (o *NSPrintPanel) SetOptions(options NSPrintPanelOptions) {
 
 func (o *NSPrintPanel) HelpAnchor() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintPanelSelHelpAnchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -129,7 +137,9 @@ func (o *NSPrintPanel) SetHelpAnchor(helpAnchor *foundation.NSString) {
 
 func (o *NSPrintPanel) JobStyleHint() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintPanelSelJobStyleHint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -139,7 +149,9 @@ func (o *NSPrintPanel) SetJobStyleHint(jobStyleHint *foundation.NSString) {
 
 func (o *NSPrintPanel) PrintInfo() *NSPrintInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintPanelSelPrintInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPrintInfoFromID(_ret)
 }
 
@@ -151,7 +163,9 @@ func (o *NSPrintPanel) SetAccessoryView(accessoryView *NSView) {
 // Deprecated: Use -accessoryControllers instead. For compatibility this returns the view of the first accessory controller, or nil
 func (o *NSPrintPanel) AccessoryView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintPanelSelAccessoryView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -164,4 +178,3 @@ func (o *NSPrintPanel) UpdateFromPrintInfo() {
 func (o *NSPrintPanel) FinalWritePrintInfo() {
 	o.Ptr().Send(_nSPrintPanelSelFinalWritePrintInfo)
 }
-

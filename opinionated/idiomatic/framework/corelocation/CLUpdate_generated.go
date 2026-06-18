@@ -108,4 +108,3 @@ type Updateable interface {
 }
 
 var _ Updateable = (*Update)(nil)
-

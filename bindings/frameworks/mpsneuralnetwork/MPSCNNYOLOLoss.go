@@ -20,28 +20,28 @@ type MPSCNNYOLOLoss struct {
 }
 
 var (
-	_clsMPSCNNYOLOLoss = _objcClass("MPSCNNYOLOLoss")
-	_mPSCNNYOLOLossSelInitWithDeviceLossDescriptor = objc.RegisterName("initWithDevice:lossDescriptor:")
-	_mPSCNNYOLOLossSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSCNNYOLOLossSelEncodeToCommandBufferSourceImageLabelsDestinationImage = objc.RegisterName("encodeToCommandBuffer:sourceImage:labels:destinationImage:")
-	_mPSCNNYOLOLossSelEncodeToCommandBufferSourceImageLabels = objc.RegisterName("encodeToCommandBuffer:sourceImage:labels:")
+	_clsMPSCNNYOLOLoss                                                              = _objcClass("MPSCNNYOLOLoss")
+	_mPSCNNYOLOLossSelInitWithDeviceLossDescriptor                                  = objc.RegisterName("initWithDevice:lossDescriptor:")
+	_mPSCNNYOLOLossSelInitWithCoderDevice                                           = objc.RegisterName("initWithCoder:device:")
+	_mPSCNNYOLOLossSelEncodeToCommandBufferSourceImageLabelsDestinationImage        = objc.RegisterName("encodeToCommandBuffer:sourceImage:labels:destinationImage:")
+	_mPSCNNYOLOLossSelEncodeToCommandBufferSourceImageLabels                        = objc.RegisterName("encodeToCommandBuffer:sourceImage:labels:")
 	_mPSCNNYOLOLossSelEncodeBatchToCommandBufferSourceImagesLabelsDestinationImages = objc.RegisterName("encodeBatchToCommandBuffer:sourceImages:labels:destinationImages:")
-	_mPSCNNYOLOLossSelEncodeBatchToCommandBufferSourceImagesLabels = objc.RegisterName("encodeBatchToCommandBuffer:sourceImages:labels:")
-	_mPSCNNYOLOLossSelLossXY = objc.RegisterName("lossXY")
-	_mPSCNNYOLOLossSelLossWH = objc.RegisterName("lossWH")
-	_mPSCNNYOLOLossSelLossConfidence = objc.RegisterName("lossConfidence")
-	_mPSCNNYOLOLossSelLossClasses = objc.RegisterName("lossClasses")
-	_mPSCNNYOLOLossSelScaleXY = objc.RegisterName("scaleXY")
-	_mPSCNNYOLOLossSelScaleWH = objc.RegisterName("scaleWH")
-	_mPSCNNYOLOLossSelScaleNoObject = objc.RegisterName("scaleNoObject")
-	_mPSCNNYOLOLossSelScaleObject = objc.RegisterName("scaleObject")
-	_mPSCNNYOLOLossSelScaleClass = objc.RegisterName("scaleClass")
-	_mPSCNNYOLOLossSelMinIOUForObjectPresence = objc.RegisterName("minIOUForObjectPresence")
-	_mPSCNNYOLOLossSelMaxIOUForObjectAbsence = objc.RegisterName("maxIOUForObjectAbsence")
-	_mPSCNNYOLOLossSelReductionType = objc.RegisterName("reductionType")
-	_mPSCNNYOLOLossSelNumberOfAnchorBoxes = objc.RegisterName("numberOfAnchorBoxes")
-	_mPSCNNYOLOLossSelAnchorBoxes = objc.RegisterName("anchorBoxes")
-	_mPSCNNYOLOLossSelReduceAcrossBatch = objc.RegisterName("reduceAcrossBatch")
+	_mPSCNNYOLOLossSelEncodeBatchToCommandBufferSourceImagesLabels                  = objc.RegisterName("encodeBatchToCommandBuffer:sourceImages:labels:")
+	_mPSCNNYOLOLossSelLossXY                                                        = objc.RegisterName("lossXY")
+	_mPSCNNYOLOLossSelLossWH                                                        = objc.RegisterName("lossWH")
+	_mPSCNNYOLOLossSelLossConfidence                                                = objc.RegisterName("lossConfidence")
+	_mPSCNNYOLOLossSelLossClasses                                                   = objc.RegisterName("lossClasses")
+	_mPSCNNYOLOLossSelScaleXY                                                       = objc.RegisterName("scaleXY")
+	_mPSCNNYOLOLossSelScaleWH                                                       = objc.RegisterName("scaleWH")
+	_mPSCNNYOLOLossSelScaleNoObject                                                 = objc.RegisterName("scaleNoObject")
+	_mPSCNNYOLOLossSelScaleObject                                                   = objc.RegisterName("scaleObject")
+	_mPSCNNYOLOLossSelScaleClass                                                    = objc.RegisterName("scaleClass")
+	_mPSCNNYOLOLossSelMinIOUForObjectPresence                                       = objc.RegisterName("minIOUForObjectPresence")
+	_mPSCNNYOLOLossSelMaxIOUForObjectAbsence                                        = objc.RegisterName("maxIOUForObjectAbsence")
+	_mPSCNNYOLOLossSelReductionType                                                 = objc.RegisterName("reductionType")
+	_mPSCNNYOLOLossSelNumberOfAnchorBoxes                                           = objc.RegisterName("numberOfAnchorBoxes")
+	_mPSCNNYOLOLossSelAnchorBoxes                                                   = objc.RegisterName("anchorBoxes")
+	_mPSCNNYOLOLossSelReduceAcrossBatch                                             = objc.RegisterName("reduceAcrossBatch")
 )
 
 func MPSCNNYOLOLossFromID(id objc.ID) *MPSCNNYOLOLoss {
@@ -57,14 +57,18 @@ func MPSCNNYOLOLossFromID(id objc.ID) *MPSCNNYOLOLoss {
 // @abstract   Initialize the loss filter with a loss descriptor. @param      device                   The device the filter will run on. @param      lossDescriptor           The loss descriptor. @return     A valid MPSCNNLoss object or nil, if failure.
 func (o *MPSCNNYOLOLoss) InitWithDeviceLossDescriptor(device metal.MTLDevice, lossDescriptor *MPSCNNYOLOLossDescriptor) *MPSCNNYOLOLoss {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNYOLOLossSelInitWithDeviceLossDescriptor, device, lossDescriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNYOLOLossFromID(_ret)
 }
 
 // @abstract <NSSecureCoding> support
 func (o *MPSCNNYOLOLoss) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSCNNYOLOLoss {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNYOLOLossSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNYOLOLossFromID(_ret)
 }
 
@@ -76,7 +80,9 @@ func (o *MPSCNNYOLOLoss) EncodeToCommandBufferSourceImageLabelsDestinationImage(
 // @abstract   Encode a MPSCNNLoss filter and return a gradient. @discussion This -encode call is similar to the encodeToCommandBuffer:sourceImage:labels:destinationImage: above, except that it creates and returns the MPSImage with the loss gradient result. @param      commandBuffer       The MTLCommandBuffer on which to encode. @param      sourceImage         The source image from the previous filter in the graph (in the inference direction). @param      labels              The object containing the target data (labels) and optionally, weights for the labels. @return     The MPSImage containing the gradient result.
 func (o *MPSCNNYOLOLoss) EncodeToCommandBufferSourceImageLabels(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, labels *MPSCNNLossLabels) *mpscore.MPSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNYOLOLossSelEncodeToCommandBufferSourceImageLabels, commandBuffer, sourceImage.Ptr(), labels.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpscore.MPSImageFromID(_ret)
 }
 
@@ -92,28 +98,36 @@ func (o *MPSCNNYOLOLoss) EncodeBatchToCommandBufferSourceImagesLabels(commandBuf
 // @property   lossXY @abstract   loss filter for prediction of bounding box position
 func (o *MPSCNNYOLOLoss) LossXY() *MPSCNNLoss {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNYOLOLossSelLossXY)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNLossFromID(_ret)
 }
 
 // @property   lossWH @abstract   loss filter for prediction of bounding box size
 func (o *MPSCNNYOLOLoss) LossWH() *MPSCNNLoss {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNYOLOLossSelLossWH)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNLossFromID(_ret)
 }
 
 // @property   lossConfidence @abstract   loss filter for prediction of bounding box probability of presence of object
 func (o *MPSCNNYOLOLoss) LossConfidence() *MPSCNNLoss {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNYOLOLossSelLossConfidence)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNLossFromID(_ret)
 }
 
 // @property   lossClasses @abstract   loss filter for prediction of bounding box predicted class of the detected object
 func (o *MPSCNNYOLOLoss) LossClasses() *MPSCNNLoss {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNYOLOLossSelLossClasses)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNLossFromID(_ret)
 }
 
@@ -165,7 +179,9 @@ func (o *MPSCNNYOLOLoss) NumberOfAnchorBoxes() uint {
 
 func (o *MPSCNNYOLOLoss) AnchorBoxes() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNYOLOLossSelAnchorBoxes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -173,4 +189,3 @@ func (o *MPSCNNYOLOLoss) ReduceAcrossBatch() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mPSCNNYOLOLossSelReduceAcrossBatch)
 	return _ret
 }
-

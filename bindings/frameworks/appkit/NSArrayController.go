@@ -16,49 +16,49 @@ type NSArrayController struct {
 }
 
 var (
-	_clsNSArrayController = _objcClass("NSArrayController")
-	_nSArrayControllerSelRearrangeObjects = objc.RegisterName("rearrangeObjects")
-	_nSArrayControllerSelDidChangeArrangementCriteria = objc.RegisterName("didChangeArrangementCriteria")
-	_nSArrayControllerSelArrangeObjects = objc.RegisterName("arrangeObjects:")
-	_nSArrayControllerSelSetSelectionIndexes = objc.RegisterName("setSelectionIndexes:")
-	_nSArrayControllerSelSetSelectionIndex = objc.RegisterName("setSelectionIndex:")
-	_nSArrayControllerSelAddSelectionIndexes = objc.RegisterName("addSelectionIndexes:")
-	_nSArrayControllerSelRemoveSelectionIndexes = objc.RegisterName("removeSelectionIndexes:")
-	_nSArrayControllerSelSetSelectedObjects = objc.RegisterName("setSelectedObjects:")
-	_nSArrayControllerSelAddSelectedObjects = objc.RegisterName("addSelectedObjects:")
-	_nSArrayControllerSelRemoveSelectedObjects = objc.RegisterName("removeSelectedObjects:")
-	_nSArrayControllerSelInsert = objc.RegisterName("insert:")
-	_nSArrayControllerSelSelectNext = objc.RegisterName("selectNext:")
-	_nSArrayControllerSelSelectPrevious = objc.RegisterName("selectPrevious:")
-	_nSArrayControllerSelAddObjects = objc.RegisterName("addObjects:")
-	_nSArrayControllerSelInsertObjectAtArrangedObjectIndex = objc.RegisterName("insertObject:atArrangedObjectIndex:")
+	_clsNSArrayController                                     = _objcClass("NSArrayController")
+	_nSArrayControllerSelRearrangeObjects                     = objc.RegisterName("rearrangeObjects")
+	_nSArrayControllerSelDidChangeArrangementCriteria         = objc.RegisterName("didChangeArrangementCriteria")
+	_nSArrayControllerSelArrangeObjects                       = objc.RegisterName("arrangeObjects:")
+	_nSArrayControllerSelSetSelectionIndexes                  = objc.RegisterName("setSelectionIndexes:")
+	_nSArrayControllerSelSetSelectionIndex                    = objc.RegisterName("setSelectionIndex:")
+	_nSArrayControllerSelAddSelectionIndexes                  = objc.RegisterName("addSelectionIndexes:")
+	_nSArrayControllerSelRemoveSelectionIndexes               = objc.RegisterName("removeSelectionIndexes:")
+	_nSArrayControllerSelSetSelectedObjects                   = objc.RegisterName("setSelectedObjects:")
+	_nSArrayControllerSelAddSelectedObjects                   = objc.RegisterName("addSelectedObjects:")
+	_nSArrayControllerSelRemoveSelectedObjects                = objc.RegisterName("removeSelectedObjects:")
+	_nSArrayControllerSelInsert                               = objc.RegisterName("insert:")
+	_nSArrayControllerSelSelectNext                           = objc.RegisterName("selectNext:")
+	_nSArrayControllerSelSelectPrevious                       = objc.RegisterName("selectPrevious:")
+	_nSArrayControllerSelAddObjects                           = objc.RegisterName("addObjects:")
+	_nSArrayControllerSelInsertObjectAtArrangedObjectIndex    = objc.RegisterName("insertObject:atArrangedObjectIndex:")
 	_nSArrayControllerSelInsertObjectsAtArrangedObjectIndexes = objc.RegisterName("insertObjects:atArrangedObjectIndexes:")
-	_nSArrayControllerSelRemoveObjectAtArrangedObjectIndex = objc.RegisterName("removeObjectAtArrangedObjectIndex:")
+	_nSArrayControllerSelRemoveObjectAtArrangedObjectIndex    = objc.RegisterName("removeObjectAtArrangedObjectIndex:")
 	_nSArrayControllerSelRemoveObjectsAtArrangedObjectIndexes = objc.RegisterName("removeObjectsAtArrangedObjectIndexes:")
-	_nSArrayControllerSelRemoveObjects = objc.RegisterName("removeObjects:")
-	_nSArrayControllerSelAutomaticallyRearrangesObjects = objc.RegisterName("automaticallyRearrangesObjects")
-	_nSArrayControllerSelSetAutomaticallyRearrangesObjects = objc.RegisterName("setAutomaticallyRearrangesObjects:")
-	_nSArrayControllerSelAutomaticRearrangementKeyPaths = objc.RegisterName("automaticRearrangementKeyPaths")
-	_nSArrayControllerSelSortDescriptors = objc.RegisterName("sortDescriptors")
-	_nSArrayControllerSelSetSortDescriptors = objc.RegisterName("setSortDescriptors:")
-	_nSArrayControllerSelFilterPredicate = objc.RegisterName("filterPredicate")
-	_nSArrayControllerSelSetFilterPredicate = objc.RegisterName("setFilterPredicate:")
-	_nSArrayControllerSelClearsFilterPredicateOnInsertion = objc.RegisterName("clearsFilterPredicateOnInsertion")
-	_nSArrayControllerSelSetClearsFilterPredicateOnInsertion = objc.RegisterName("setClearsFilterPredicateOnInsertion:")
-	_nSArrayControllerSelArrangedObjects = objc.RegisterName("arrangedObjects")
-	_nSArrayControllerSelAvoidsEmptySelection = objc.RegisterName("avoidsEmptySelection")
-	_nSArrayControllerSelSetAvoidsEmptySelection = objc.RegisterName("setAvoidsEmptySelection:")
-	_nSArrayControllerSelPreservesSelection = objc.RegisterName("preservesSelection")
-	_nSArrayControllerSelSetPreservesSelection = objc.RegisterName("setPreservesSelection:")
-	_nSArrayControllerSelSelectsInsertedObjects = objc.RegisterName("selectsInsertedObjects")
-	_nSArrayControllerSelSetSelectsInsertedObjects = objc.RegisterName("setSelectsInsertedObjects:")
-	_nSArrayControllerSelAlwaysUsesMultipleValuesMarker = objc.RegisterName("alwaysUsesMultipleValuesMarker")
-	_nSArrayControllerSelSetAlwaysUsesMultipleValuesMarker = objc.RegisterName("setAlwaysUsesMultipleValuesMarker:")
-	_nSArrayControllerSelSelectionIndexes = objc.RegisterName("selectionIndexes")
-	_nSArrayControllerSelSelectionIndex = objc.RegisterName("selectionIndex")
-	_nSArrayControllerSelCanInsert = objc.RegisterName("canInsert")
-	_nSArrayControllerSelCanSelectNext = objc.RegisterName("canSelectNext")
-	_nSArrayControllerSelCanSelectPrevious = objc.RegisterName("canSelectPrevious")
+	_nSArrayControllerSelRemoveObjects                        = objc.RegisterName("removeObjects:")
+	_nSArrayControllerSelAutomaticallyRearrangesObjects       = objc.RegisterName("automaticallyRearrangesObjects")
+	_nSArrayControllerSelSetAutomaticallyRearrangesObjects    = objc.RegisterName("setAutomaticallyRearrangesObjects:")
+	_nSArrayControllerSelAutomaticRearrangementKeyPaths       = objc.RegisterName("automaticRearrangementKeyPaths")
+	_nSArrayControllerSelSortDescriptors                      = objc.RegisterName("sortDescriptors")
+	_nSArrayControllerSelSetSortDescriptors                   = objc.RegisterName("setSortDescriptors:")
+	_nSArrayControllerSelFilterPredicate                      = objc.RegisterName("filterPredicate")
+	_nSArrayControllerSelSetFilterPredicate                   = objc.RegisterName("setFilterPredicate:")
+	_nSArrayControllerSelClearsFilterPredicateOnInsertion     = objc.RegisterName("clearsFilterPredicateOnInsertion")
+	_nSArrayControllerSelSetClearsFilterPredicateOnInsertion  = objc.RegisterName("setClearsFilterPredicateOnInsertion:")
+	_nSArrayControllerSelArrangedObjects                      = objc.RegisterName("arrangedObjects")
+	_nSArrayControllerSelAvoidsEmptySelection                 = objc.RegisterName("avoidsEmptySelection")
+	_nSArrayControllerSelSetAvoidsEmptySelection              = objc.RegisterName("setAvoidsEmptySelection:")
+	_nSArrayControllerSelPreservesSelection                   = objc.RegisterName("preservesSelection")
+	_nSArrayControllerSelSetPreservesSelection                = objc.RegisterName("setPreservesSelection:")
+	_nSArrayControllerSelSelectsInsertedObjects               = objc.RegisterName("selectsInsertedObjects")
+	_nSArrayControllerSelSetSelectsInsertedObjects            = objc.RegisterName("setSelectsInsertedObjects:")
+	_nSArrayControllerSelAlwaysUsesMultipleValuesMarker       = objc.RegisterName("alwaysUsesMultipleValuesMarker")
+	_nSArrayControllerSelSetAlwaysUsesMultipleValuesMarker    = objc.RegisterName("setAlwaysUsesMultipleValuesMarker:")
+	_nSArrayControllerSelSelectionIndexes                     = objc.RegisterName("selectionIndexes")
+	_nSArrayControllerSelSelectionIndex                       = objc.RegisterName("selectionIndex")
+	_nSArrayControllerSelCanInsert                            = objc.RegisterName("canInsert")
+	_nSArrayControllerSelCanSelectNext                        = objc.RegisterName("canSelectNext")
+	_nSArrayControllerSelCanSelectPrevious                    = objc.RegisterName("canSelectPrevious")
 )
 
 func NSArrayControllerFromID(id objc.ID) *NSArrayController {
@@ -180,7 +180,9 @@ func (o *NSArrayController) SetSortDescriptors(sortDescriptors *foundation.NSArr
 
 func (o *NSArrayController) FilterPredicate() *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArrayControllerSelFilterPredicate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
@@ -240,7 +242,9 @@ func (o *NSArrayController) SetAlwaysUsesMultipleValuesMarker(alwaysUsesMultiple
 
 func (o *NSArrayController) SelectionIndexes() *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArrayControllerSelSelectionIndexes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
@@ -263,4 +267,3 @@ func (o *NSArrayController) CanSelectPrevious() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSArrayControllerSelCanSelectPrevious)
 	return _ret
 }
-

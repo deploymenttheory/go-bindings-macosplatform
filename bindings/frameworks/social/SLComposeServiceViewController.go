@@ -17,19 +17,19 @@ type SLComposeServiceViewController struct {
 }
 
 var (
-	_clsSLComposeServiceViewController = _objcClass("SLComposeServiceViewController")
+	_clsSLComposeServiceViewController                               = _objcClass("SLComposeServiceViewController")
 	_sLComposeServiceViewControllerSelPresentationAnimationDidFinish = objc.RegisterName("presentationAnimationDidFinish")
-	_sLComposeServiceViewControllerSelDidSelectPost = objc.RegisterName("didSelectPost")
-	_sLComposeServiceViewControllerSelDidSelectCancel = objc.RegisterName("didSelectCancel")
-	_sLComposeServiceViewControllerSelCancel = objc.RegisterName("cancel")
-	_sLComposeServiceViewControllerSelIsContentValid = objc.RegisterName("isContentValid")
-	_sLComposeServiceViewControllerSelValidateContent = objc.RegisterName("validateContent")
-	_sLComposeServiceViewControllerSelTextView = objc.RegisterName("textView")
-	_sLComposeServiceViewControllerSelContentText = objc.RegisterName("contentText")
-	_sLComposeServiceViewControllerSelPlaceholder = objc.RegisterName("placeholder")
-	_sLComposeServiceViewControllerSelSetPlaceholder = objc.RegisterName("setPlaceholder:")
-	_sLComposeServiceViewControllerSelCharactersRemaining = objc.RegisterName("charactersRemaining")
-	_sLComposeServiceViewControllerSelSetCharactersRemaining = objc.RegisterName("setCharactersRemaining:")
+	_sLComposeServiceViewControllerSelDidSelectPost                  = objc.RegisterName("didSelectPost")
+	_sLComposeServiceViewControllerSelDidSelectCancel                = objc.RegisterName("didSelectCancel")
+	_sLComposeServiceViewControllerSelCancel                         = objc.RegisterName("cancel")
+	_sLComposeServiceViewControllerSelIsContentValid                 = objc.RegisterName("isContentValid")
+	_sLComposeServiceViewControllerSelValidateContent                = objc.RegisterName("validateContent")
+	_sLComposeServiceViewControllerSelTextView                       = objc.RegisterName("textView")
+	_sLComposeServiceViewControllerSelContentText                    = objc.RegisterName("contentText")
+	_sLComposeServiceViewControllerSelPlaceholder                    = objc.RegisterName("placeholder")
+	_sLComposeServiceViewControllerSelSetPlaceholder                 = objc.RegisterName("setPlaceholder:")
+	_sLComposeServiceViewControllerSelCharactersRemaining            = objc.RegisterName("charactersRemaining")
+	_sLComposeServiceViewControllerSelSetCharactersRemaining         = objc.RegisterName("setCharactersRemaining:")
 )
 
 func SLComposeServiceViewControllerFromID(id objc.ID) *SLComposeServiceViewController {
@@ -69,19 +69,25 @@ func (o *SLComposeServiceViewController) ValidateContent() {
 
 func (o *SLComposeServiceViewController) TextView() *appkit.NSTextView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sLComposeServiceViewControllerSelTextView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSTextViewFromID(_ret)
 }
 
 func (o *SLComposeServiceViewController) ContentText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sLComposeServiceViewControllerSelContentText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *SLComposeServiceViewController) Placeholder() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sLComposeServiceViewControllerSelPlaceholder)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -91,11 +97,12 @@ func (o *SLComposeServiceViewController) SetPlaceholder(placeholder *foundation.
 
 func (o *SLComposeServiceViewController) CharactersRemaining() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sLComposeServiceViewControllerSelCharactersRemaining)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *SLComposeServiceViewController) SetCharactersRemaining(charactersRemaining *foundation.NSNumber) {
 	o.Ptr().Send(_sLComposeServiceViewControllerSelSetCharactersRemaining, charactersRemaining.Ptr())
 }
-

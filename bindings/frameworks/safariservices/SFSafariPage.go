@@ -17,11 +17,11 @@ type SFSafariPage struct {
 }
 
 var (
-	_clsSFSafariPage = _objcClass("SFSafariPage")
-	_sFSafariPageSelDispatchMessageToScriptWithNameUserInfo = objc.RegisterName("dispatchMessageToScriptWithName:userInfo:")
-	_sFSafariPageSelReload = objc.RegisterName("reload")
-	_sFSafariPageSelGetPagePropertiesWithCompletionHandler = objc.RegisterName("getPagePropertiesWithCompletionHandler:")
-	_sFSafariPageSelGetContainingTabWithCompletionHandler = objc.RegisterName("getContainingTabWithCompletionHandler:")
+	_clsSFSafariPage                                                = _objcClass("SFSafariPage")
+	_sFSafariPageSelDispatchMessageToScriptWithNameUserInfo         = objc.RegisterName("dispatchMessageToScriptWithName:userInfo:")
+	_sFSafariPageSelReload                                          = objc.RegisterName("reload")
+	_sFSafariPageSelGetPagePropertiesWithCompletionHandler          = objc.RegisterName("getPagePropertiesWithCompletionHandler:")
+	_sFSafariPageSelGetContainingTabWithCompletionHandler           = objc.RegisterName("getContainingTabWithCompletionHandler:")
 	_sFSafariPageSelGetScreenshotOfVisibleAreaWithCompletionHandler = objc.RegisterName("getScreenshotOfVisibleAreaWithCompletionHandler:")
 )
 
@@ -89,4 +89,3 @@ func (o *SFSafariPage) GetScreenshotOfVisibleAreaWithCompletionHandler(completio
 	}
 	o.Ptr().Send(_sFSafariPageSelGetScreenshotOfVisibleAreaWithCompletionHandler, __block_completionHandler)
 }
-

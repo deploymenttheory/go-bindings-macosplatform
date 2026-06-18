@@ -16,30 +16,30 @@ type NSLinguisticTagger struct {
 }
 
 var (
-	_clsNSLinguisticTagger = _objcClass("NSLinguisticTagger")
-	_nSLinguisticTaggerSelInitWithTagSchemesOptions = objc.RegisterName("initWithTagSchemes:options:")
-	_nSLinguisticTaggerSelAvailableTagSchemesForUnitLanguage = objc.RegisterName("availableTagSchemesForUnit:language:")
-	_nSLinguisticTaggerSelAvailableTagSchemesForLanguage = objc.RegisterName("availableTagSchemesForLanguage:")
-	_nSLinguisticTaggerSelSetOrthographyRange = objc.RegisterName("setOrthography:range:")
-	_nSLinguisticTaggerSelOrthographyAtIndexEffectiveRange = objc.RegisterName("orthographyAtIndex:effectiveRange:")
-	_nSLinguisticTaggerSelStringEditedInRangeChangeInLength = objc.RegisterName("stringEditedInRange:changeInLength:")
-	_nSLinguisticTaggerSelTokenRangeAtIndexUnit = objc.RegisterName("tokenRangeAtIndex:unit:")
-	_nSLinguisticTaggerSelSentenceRangeForRange = objc.RegisterName("sentenceRangeForRange:")
-	_nSLinguisticTaggerSelEnumerateTagsInRangeUnitSchemeOptionsUsing = objc.RegisterName("enumerateTagsInRange:unit:scheme:options:usingBlock:")
-	_nSLinguisticTaggerSelTagAtIndexUnitSchemeTokenRange = objc.RegisterName("tagAtIndex:unit:scheme:tokenRange:")
-	_nSLinguisticTaggerSelTagsInRangeUnitSchemeOptionsTokenRanges = objc.RegisterName("tagsInRange:unit:scheme:options:tokenRanges:")
-	_nSLinguisticTaggerSelEnumerateTagsInRangeSchemeOptionsUsing = objc.RegisterName("enumerateTagsInRange:scheme:options:usingBlock:")
-	_nSLinguisticTaggerSelTagAtIndexSchemeTokenRangeSentenceRange = objc.RegisterName("tagAtIndex:scheme:tokenRange:sentenceRange:")
-	_nSLinguisticTaggerSelTagsInRangeSchemeOptionsTokenRanges = objc.RegisterName("tagsInRange:scheme:options:tokenRanges:")
-	_nSLinguisticTaggerSelDominantLanguageForString = objc.RegisterName("dominantLanguageForString:")
-	_nSLinguisticTaggerSelTagForStringAtIndexUnitSchemeOrthographyTokenRange = objc.RegisterName("tagForString:atIndex:unit:scheme:orthography:tokenRange:")
-	_nSLinguisticTaggerSelTagsForStringRangeUnitSchemeOptionsOrthographyTokenRanges = objc.RegisterName("tagsForString:range:unit:scheme:options:orthography:tokenRanges:")
+	_clsNSLinguisticTagger                                                             = _objcClass("NSLinguisticTagger")
+	_nSLinguisticTaggerSelInitWithTagSchemesOptions                                    = objc.RegisterName("initWithTagSchemes:options:")
+	_nSLinguisticTaggerSelAvailableTagSchemesForUnitLanguage                           = objc.RegisterName("availableTagSchemesForUnit:language:")
+	_nSLinguisticTaggerSelAvailableTagSchemesForLanguage                               = objc.RegisterName("availableTagSchemesForLanguage:")
+	_nSLinguisticTaggerSelSetOrthographyRange                                          = objc.RegisterName("setOrthography:range:")
+	_nSLinguisticTaggerSelOrthographyAtIndexEffectiveRange                             = objc.RegisterName("orthographyAtIndex:effectiveRange:")
+	_nSLinguisticTaggerSelStringEditedInRangeChangeInLength                            = objc.RegisterName("stringEditedInRange:changeInLength:")
+	_nSLinguisticTaggerSelTokenRangeAtIndexUnit                                        = objc.RegisterName("tokenRangeAtIndex:unit:")
+	_nSLinguisticTaggerSelSentenceRangeForRange                                        = objc.RegisterName("sentenceRangeForRange:")
+	_nSLinguisticTaggerSelEnumerateTagsInRangeUnitSchemeOptionsUsing                   = objc.RegisterName("enumerateTagsInRange:unit:scheme:options:usingBlock:")
+	_nSLinguisticTaggerSelTagAtIndexUnitSchemeTokenRange                               = objc.RegisterName("tagAtIndex:unit:scheme:tokenRange:")
+	_nSLinguisticTaggerSelTagsInRangeUnitSchemeOptionsTokenRanges                      = objc.RegisterName("tagsInRange:unit:scheme:options:tokenRanges:")
+	_nSLinguisticTaggerSelEnumerateTagsInRangeSchemeOptionsUsing                       = objc.RegisterName("enumerateTagsInRange:scheme:options:usingBlock:")
+	_nSLinguisticTaggerSelTagAtIndexSchemeTokenRangeSentenceRange                      = objc.RegisterName("tagAtIndex:scheme:tokenRange:sentenceRange:")
+	_nSLinguisticTaggerSelTagsInRangeSchemeOptionsTokenRanges                          = objc.RegisterName("tagsInRange:scheme:options:tokenRanges:")
+	_nSLinguisticTaggerSelDominantLanguageForString                                    = objc.RegisterName("dominantLanguageForString:")
+	_nSLinguisticTaggerSelTagForStringAtIndexUnitSchemeOrthographyTokenRange           = objc.RegisterName("tagForString:atIndex:unit:scheme:orthography:tokenRange:")
+	_nSLinguisticTaggerSelTagsForStringRangeUnitSchemeOptionsOrthographyTokenRanges    = objc.RegisterName("tagsForString:range:unit:scheme:options:orthography:tokenRanges:")
 	_nSLinguisticTaggerSelEnumerateTagsForStringRangeUnitSchemeOptionsOrthographyUsing = objc.RegisterName("enumerateTagsForString:range:unit:scheme:options:orthography:usingBlock:")
-	_nSLinguisticTaggerSelPossibleTagsAtIndexSchemeTokenRangeSentenceRangeScores = objc.RegisterName("possibleTagsAtIndex:scheme:tokenRange:sentenceRange:scores:")
-	_nSLinguisticTaggerSelTagSchemes = objc.RegisterName("tagSchemes")
-	_nSLinguisticTaggerSelString = objc.RegisterName("string")
-	_nSLinguisticTaggerSelSetString = objc.RegisterName("setString:")
-	_nSLinguisticTaggerSelDominantLanguage = objc.RegisterName("dominantLanguage")
+	_nSLinguisticTaggerSelPossibleTagsAtIndexSchemeTokenRangeSentenceRangeScores       = objc.RegisterName("possibleTagsAtIndex:scheme:tokenRange:sentenceRange:scores:")
+	_nSLinguisticTaggerSelTagSchemes                                                   = objc.RegisterName("tagSchemes")
+	_nSLinguisticTaggerSelString                                                       = objc.RegisterName("string")
+	_nSLinguisticTaggerSelSetString                                                    = objc.RegisterName("setString:")
+	_nSLinguisticTaggerSelDominantLanguage                                             = objc.RegisterName("dominantLanguage")
 )
 
 func NSLinguisticTaggerFromID(id objc.ID) *NSLinguisticTagger {
@@ -55,21 +55,27 @@ func NSLinguisticTaggerFromID(id objc.ID) *NSLinguisticTagger {
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func (o *NSLinguisticTagger) InitWithTagSchemesOptions(tagSchemes *NSArray[*NSString], opts uint) *NSLinguisticTagger {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLinguisticTaggerSelInitWithTagSchemesOptions, tagSchemes.Ptr(), opts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLinguisticTaggerFromID(_ret)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTaggerAvailableTagSchemesForUnitLanguage(unit NSLinguisticTaggerUnit, language *NSString) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSLinguisticTagger), _nSLinguisticTaggerSelAvailableTagSchemesForUnitLanguage, unit, language.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTaggerAvailableTagSchemesForLanguage(language *NSString) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSLinguisticTagger), _nSLinguisticTaggerSelAvailableTagSchemesForLanguage, language.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -81,7 +87,9 @@ func (o *NSLinguisticTagger) SetOrthographyRange(orthography *NSOrthography, ran
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func (o *NSLinguisticTagger) OrthographyAtIndexEffectiveRange(charIndex uint, effectiveRange *NSRange) *NSOrthography {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLinguisticTaggerSelOrthographyAtIndexEffectiveRange, charIndex, effectiveRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrthographyFromID(_ret)
 }
 
@@ -110,14 +118,18 @@ func (o *NSLinguisticTagger) EnumerateTagsInRangeUnitSchemeOptionsUsing(range_ N
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func (o *NSLinguisticTagger) TagAtIndexUnitSchemeTokenRange(charIndex uint, unit NSLinguisticTaggerUnit, scheme *NSString, tokenRange *NSRange) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLinguisticTaggerSelTagAtIndexUnitSchemeTokenRange, charIndex, unit, scheme.Ptr(), tokenRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func (o *NSLinguisticTagger) TagsInRangeUnitSchemeOptionsTokenRanges(range_ NSRange, unit NSLinguisticTaggerUnit, scheme *NSString, options NSLinguisticTaggerOptions, tokenRanges *NSArray[*NSValue]) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLinguisticTaggerSelTagsInRangeUnitSchemeOptionsTokenRanges, range_, unit, scheme.Ptr(), options, tokenRanges.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -129,35 +141,45 @@ func (o *NSLinguisticTagger) EnumerateTagsInRangeSchemeOptionsUsing(range_ NSRan
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func (o *NSLinguisticTagger) TagAtIndexSchemeTokenRangeSentenceRange(charIndex uint, scheme *NSString, tokenRange *NSRange, sentenceRange *NSRange) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLinguisticTaggerSelTagAtIndexSchemeTokenRangeSentenceRange, charIndex, scheme.Ptr(), tokenRange, sentenceRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func (o *NSLinguisticTagger) TagsInRangeSchemeOptionsTokenRanges(range_ NSRange, tagScheme *NSString, opts NSLinguisticTaggerOptions, tokenRanges *NSArray[*NSValue]) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLinguisticTaggerSelTagsInRangeSchemeOptionsTokenRanges, range_, tagScheme.Ptr(), opts, tokenRanges.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTaggerDominantLanguageForString(string_ *NSString) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSLinguisticTagger), _nSLinguisticTaggerSelDominantLanguageForString, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTaggerTagForStringAtIndexUnitSchemeOrthographyTokenRange(string_ *NSString, charIndex uint, unit NSLinguisticTaggerUnit, scheme *NSString, orthography *NSOrthography, tokenRange *NSRange) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSLinguisticTagger), _nSLinguisticTaggerSelTagForStringAtIndexUnitSchemeOrthographyTokenRange, string_.Ptr(), charIndex, unit, scheme.Ptr(), orthography.Ptr(), tokenRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTaggerTagsForStringRangeUnitSchemeOptionsOrthographyTokenRanges(string_ *NSString, range_ NSRange, unit NSLinguisticTaggerUnit, scheme *NSString, options NSLinguisticTaggerOptions, orthography *NSOrthography, tokenRanges *NSArray[*NSValue]) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSLinguisticTagger), _nSLinguisticTaggerSelTagsForStringRangeUnitSchemeOptionsOrthographyTokenRanges, string_.Ptr(), range_, unit, scheme.Ptr(), options, orthography.Ptr(), tokenRanges.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -169,21 +191,27 @@ func NSLinguisticTaggerEnumerateTagsForStringRangeUnitSchemeOptionsOrthographyUs
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func (o *NSLinguisticTagger) PossibleTagsAtIndexSchemeTokenRangeSentenceRangeScores(charIndex uint, tagScheme *NSString, tokenRange *NSRange, sentenceRange *NSRange, scores *NSArray[*NSValue]) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLinguisticTaggerSelPossibleTagsAtIndexSchemeTokenRangeSentenceRangeScores, charIndex, tagScheme.Ptr(), tokenRange, sentenceRange, scores.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func (o *NSLinguisticTagger) TagSchemes() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLinguisticTaggerSelTagSchemes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func (o *NSLinguisticTagger) String() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLinguisticTaggerSelString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -195,7 +223,8 @@ func (o *NSLinguisticTagger) SetString(string_ *NSString) {
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func (o *NSLinguisticTagger) DominantLanguage() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLinguisticTaggerSelDominantLanguage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
-

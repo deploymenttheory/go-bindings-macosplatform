@@ -16,7 +16,9 @@ type StringMetaParameterDefinition struct {
 }
 
 // Unwrap returns the underlying [raw.PHASEStringMetaParameterDefinition].
-func (x *StringMetaParameterDefinition) Unwrap() *raw.PHASEStringMetaParameterDefinition { return x.inner }
+func (x *StringMetaParameterDefinition) Unwrap() *raw.PHASEStringMetaParameterDefinition {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -44,9 +46,13 @@ func NewStringMetaParameterDefinitionWithValue(value string) *StringMetaParamete
 	return &StringMetaParameterDefinition{inner: raw.PHASEStringMetaParameterDefinitionFromID(_id)}
 }
 
-func (x *StringMetaParameterDefinition) asMetaParameterDefinition() *raw.PHASEMetaParameterDefinition { return &x.inner.PHASEMetaParameterDefinition }
+func (x *StringMetaParameterDefinition) asMetaParameterDefinition() *raw.PHASEMetaParameterDefinition {
+	return &x.inner.PHASEMetaParameterDefinition
+}
 
-func (x *StringMetaParameterDefinition) asDefinition() *raw.PHASEDefinition { return &x.inner.PHASEMetaParameterDefinition.PHASEDefinition }
+func (x *StringMetaParameterDefinition) asDefinition() *raw.PHASEDefinition {
+	return &x.inner.PHASEMetaParameterDefinition.PHASEDefinition
+}
 
 // StringMetaParameterDefinitionable is the interface implemented by [StringMetaParameterDefinition], for mocking and DI.
 type StringMetaParameterDefinitionable interface {
@@ -54,4 +60,3 @@ type StringMetaParameterDefinitionable interface {
 }
 
 var _ StringMetaParameterDefinitionable = (*StringMetaParameterDefinition)(nil)
-

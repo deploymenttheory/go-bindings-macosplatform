@@ -210,7 +210,9 @@ func (x *GRUDescriptor) SetFlipOutputGates(flipOutputGates bool) {
 	x.inner.SetFlipOutputGates(flipOutputGates)
 }
 
-func (x *GRUDescriptor) asRNNDescriptor() *mpsneuralnetwork.MPSRNNDescriptor { return &x.inner.MPSRNNDescriptor }
+func (x *GRUDescriptor) asRNNDescriptor() *mpsneuralnetwork.MPSRNNDescriptor {
+	return &x.inner.MPSRNNDescriptor
+}
 
 // GRUDescriptorable is the interface implemented by [GRUDescriptor], for mocking and DI.
 type GRUDescriptorable interface {
@@ -250,4 +252,3 @@ type GRUDescriptorable interface {
 }
 
 var _ GRUDescriptorable = (*GRUDescriptor)(nil)
-

@@ -18,12 +18,12 @@ type MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams struct {
 }
 
 var (
-	_clsMTRGeneralDiagnosticsClusterTimeSnapshotResponseParams = _objcClass("MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams")
+	_clsMTRGeneralDiagnosticsClusterTimeSnapshotResponseParams                           = _objcClass("MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams")
 	_mTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsSelSystemTimeMs = objc.RegisterName("systemTimeMs")
-	_mTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsSelSetSystemTimeMs = objc.RegisterName("setSystemTimeMs:")
-	_mTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsSelPosixTimeMs = objc.RegisterName("posixTimeMs")
-	_mTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsSelSetPosixTimeMs = objc.RegisterName("setPosixTimeMs:")
+	_mTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsSelSystemTimeMs               = objc.RegisterName("systemTimeMs")
+	_mTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsSelSetSystemTimeMs            = objc.RegisterName("setSystemTimeMs:")
+	_mTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsSelPosixTimeMs                = objc.RegisterName("posixTimeMs")
+	_mTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsSelSetPosixTimeMs             = objc.RegisterName("setPosixTimeMs:")
 )
 
 func MTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsFromID(id objc.ID) *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams {
@@ -40,7 +40,9 @@ func MTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsFromID(id objc.ID) *M
 func (o *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -49,7 +51,9 @@ func (o *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) InitWithRespons
 
 func (o *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) SystemTimeMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsSelSystemTimeMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,11 +63,12 @@ func (o *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) SetSystemTimeMs
 
 func (o *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) PosixTimeMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsSelPosixTimeMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) SetPosixTimeMs(posixTimeMs *foundation.NSNumber) {
 	o.Ptr().Send(_mTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsSelSetPosixTimeMs, posixTimeMs.Ptr())
 }
-

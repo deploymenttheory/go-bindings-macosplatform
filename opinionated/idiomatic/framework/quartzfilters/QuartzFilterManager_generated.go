@@ -86,4 +86,3 @@ type QuartzFilterManagerable interface {
 }
 
 var _ QuartzFilterManagerable = (*QuartzFilterManager)(nil)
-

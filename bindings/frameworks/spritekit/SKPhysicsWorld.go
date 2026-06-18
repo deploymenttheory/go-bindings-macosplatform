@@ -19,23 +19,23 @@ type SKPhysicsWorld struct {
 }
 
 var (
-	_clsSKPhysicsWorld = _objcClass("SKPhysicsWorld")
-	_sKPhysicsWorldSelAddJoint = objc.RegisterName("addJoint:")
-	_sKPhysicsWorldSelRemoveJoint = objc.RegisterName("removeJoint:")
-	_sKPhysicsWorldSelRemoveAllJoints = objc.RegisterName("removeAllJoints")
-	_sKPhysicsWorldSelSampleFieldsAt = objc.RegisterName("sampleFieldsAt:")
-	_sKPhysicsWorldSelBodyAtPoint = objc.RegisterName("bodyAtPoint:")
-	_sKPhysicsWorldSelBodyInRect = objc.RegisterName("bodyInRect:")
-	_sKPhysicsWorldSelBodyAlongRayStartEnd = objc.RegisterName("bodyAlongRayStart:end:")
-	_sKPhysicsWorldSelEnumerateBodiesAtPointUsing = objc.RegisterName("enumerateBodiesAtPoint:usingBlock:")
-	_sKPhysicsWorldSelEnumerateBodiesInRectUsing = objc.RegisterName("enumerateBodiesInRect:usingBlock:")
+	_clsSKPhysicsWorld                                     = _objcClass("SKPhysicsWorld")
+	_sKPhysicsWorldSelAddJoint                             = objc.RegisterName("addJoint:")
+	_sKPhysicsWorldSelRemoveJoint                          = objc.RegisterName("removeJoint:")
+	_sKPhysicsWorldSelRemoveAllJoints                      = objc.RegisterName("removeAllJoints")
+	_sKPhysicsWorldSelSampleFieldsAt                       = objc.RegisterName("sampleFieldsAt:")
+	_sKPhysicsWorldSelBodyAtPoint                          = objc.RegisterName("bodyAtPoint:")
+	_sKPhysicsWorldSelBodyInRect                           = objc.RegisterName("bodyInRect:")
+	_sKPhysicsWorldSelBodyAlongRayStartEnd                 = objc.RegisterName("bodyAlongRayStart:end:")
+	_sKPhysicsWorldSelEnumerateBodiesAtPointUsing          = objc.RegisterName("enumerateBodiesAtPoint:usingBlock:")
+	_sKPhysicsWorldSelEnumerateBodiesInRectUsing           = objc.RegisterName("enumerateBodiesInRect:usingBlock:")
 	_sKPhysicsWorldSelEnumerateBodiesAlongRayStartEndUsing = objc.RegisterName("enumerateBodiesAlongRayStart:end:usingBlock:")
-	_sKPhysicsWorldSelGravity = objc.RegisterName("gravity")
-	_sKPhysicsWorldSelSetGravity = objc.RegisterName("setGravity:")
-	_sKPhysicsWorldSelSpeed = objc.RegisterName("speed")
-	_sKPhysicsWorldSelSetSpeed = objc.RegisterName("setSpeed:")
-	_sKPhysicsWorldSelContactDelegate = objc.RegisterName("contactDelegate")
-	_sKPhysicsWorldSelSetContactDelegate = objc.RegisterName("setContactDelegate:")
+	_sKPhysicsWorldSelGravity                              = objc.RegisterName("gravity")
+	_sKPhysicsWorldSelSetGravity                           = objc.RegisterName("setGravity:")
+	_sKPhysicsWorldSelSpeed                                = objc.RegisterName("speed")
+	_sKPhysicsWorldSelSetSpeed                             = objc.RegisterName("setSpeed:")
+	_sKPhysicsWorldSelContactDelegate                      = objc.RegisterName("contactDelegate")
+	_sKPhysicsWorldSelSetContactDelegate                   = objc.RegisterName("setContactDelegate:")
 )
 
 func SKPhysicsWorldFromID(id objc.ID) *SKPhysicsWorld {
@@ -67,19 +67,25 @@ func (o *SKPhysicsWorld) SampleFieldsAt(position unsafe.Pointer) unsafe.Pointer 
 
 func (o *SKPhysicsWorld) BodyAtPoint(point corefoundation.CGPoint) *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPhysicsWorldSelBodyAtPoint, point)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPhysicsBodyFromID(_ret)
 }
 
 func (o *SKPhysicsWorld) BodyInRect(rect corefoundation.CGRect) *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPhysicsWorldSelBodyInRect, rect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPhysicsBodyFromID(_ret)
 }
 
 func (o *SKPhysicsWorld) BodyAlongRayStartEnd(start corefoundation.CGPoint, end corefoundation.CGPoint) *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPhysicsWorldSelBodyAlongRayStartEnd, start, end)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPhysicsBodyFromID(_ret)
 }
 
@@ -142,4 +148,3 @@ func (o *SKPhysicsWorld) ContactDelegate() SKPhysicsContactDelegate {
 func (o *SKPhysicsWorld) SetContactDelegate(contactDelegate SKPhysicsContactDelegate) {
 	o.Ptr().Send(_sKPhysicsWorldSelSetContactDelegate, contactDelegate)
 }
-

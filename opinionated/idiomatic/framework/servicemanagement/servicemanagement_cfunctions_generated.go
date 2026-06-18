@@ -23,4 +23,3 @@ func SMJobCopyDictionary(domain unsafe.Pointer, jobLabel unsafe.Pointer) unsafe.
 func SMLoginItemSetEnabled(identifier unsafe.Pointer, enabled uint8) uint8 {
 	return raw.SMLoginItemSetEnabled(identifier, enabled)
 }
-

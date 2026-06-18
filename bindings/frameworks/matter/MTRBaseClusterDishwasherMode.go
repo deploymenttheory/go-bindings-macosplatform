@@ -18,30 +18,30 @@ type MTRBaseClusterDishwasherMode struct {
 }
 
 var (
-	_clsMTRBaseClusterDishwasherMode = _objcClass("MTRBaseClusterDishwasherMode")
-	_mTRBaseClusterDishwasherModeSelChangeToModeWithParamsCompletion = objc.RegisterName("changeToModeWithParams:completion:")
-	_mTRBaseClusterDishwasherModeSelReadAttributeSupportedModesWithCompletion = objc.RegisterName("readAttributeSupportedModesWithCompletion:")
-	_mTRBaseClusterDishwasherModeSelSubscribeAttributeSupportedModesWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeSupportedModesWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterDishwasherModeSelReadAttributeSupportedModesWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeSupportedModesWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterDishwasherModeSelReadAttributeCurrentModeWithCompletion = objc.RegisterName("readAttributeCurrentModeWithCompletion:")
-	_mTRBaseClusterDishwasherModeSelSubscribeAttributeCurrentModeWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeCurrentModeWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterDishwasherModeSelReadAttributeCurrentModeWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeCurrentModeWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterDishwasherModeSelReadAttributeGeneratedCommandListWithCompletion = objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:")
+	_clsMTRBaseClusterDishwasherMode                                                                                     = _objcClass("MTRBaseClusterDishwasherMode")
+	_mTRBaseClusterDishwasherModeSelChangeToModeWithParamsCompletion                                                     = objc.RegisterName("changeToModeWithParams:completion:")
+	_mTRBaseClusterDishwasherModeSelReadAttributeSupportedModesWithCompletion                                            = objc.RegisterName("readAttributeSupportedModesWithCompletion:")
+	_mTRBaseClusterDishwasherModeSelSubscribeAttributeSupportedModesWithParamsSubscriptionEstablishedReportHandler       = objc.RegisterName("subscribeAttributeSupportedModesWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterDishwasherModeSelReadAttributeSupportedModesWithClusterStateCacheEndpointQueueCompletion              = objc.RegisterName("readAttributeSupportedModesWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterDishwasherModeSelReadAttributeCurrentModeWithCompletion                                               = objc.RegisterName("readAttributeCurrentModeWithCompletion:")
+	_mTRBaseClusterDishwasherModeSelSubscribeAttributeCurrentModeWithParamsSubscriptionEstablishedReportHandler          = objc.RegisterName("subscribeAttributeCurrentModeWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterDishwasherModeSelReadAttributeCurrentModeWithClusterStateCacheEndpointQueueCompletion                 = objc.RegisterName("readAttributeCurrentModeWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterDishwasherModeSelReadAttributeGeneratedCommandListWithCompletion                                      = objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:")
 	_mTRBaseClusterDishwasherModeSelSubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterDishwasherModeSelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeGeneratedCommandListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterDishwasherModeSelReadAttributeAcceptedCommandListWithCompletion = objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:")
-	_mTRBaseClusterDishwasherModeSelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterDishwasherModeSelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeAcceptedCommandListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterDishwasherModeSelReadAttributeAttributeListWithCompletion = objc.RegisterName("readAttributeAttributeListWithCompletion:")
-	_mTRBaseClusterDishwasherModeSelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterDishwasherModeSelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeAttributeListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterDishwasherModeSelReadAttributeFeatureMapWithCompletion = objc.RegisterName("readAttributeFeatureMapWithCompletion:")
-	_mTRBaseClusterDishwasherModeSelSubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterDishwasherModeSelReadAttributeFeatureMapWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeFeatureMapWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterDishwasherModeSelReadAttributeClusterRevisionWithCompletion = objc.RegisterName("readAttributeClusterRevisionWithCompletion:")
-	_mTRBaseClusterDishwasherModeSelSubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterDishwasherModeSelReadAttributeClusterRevisionWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeClusterRevisionWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterDishwasherModeSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRBaseClusterDishwasherModeSelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion        = objc.RegisterName("readAttributeGeneratedCommandListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterDishwasherModeSelReadAttributeAcceptedCommandListWithCompletion                                       = objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:")
+	_mTRBaseClusterDishwasherModeSelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler  = objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterDishwasherModeSelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion         = objc.RegisterName("readAttributeAcceptedCommandListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterDishwasherModeSelReadAttributeAttributeListWithCompletion                                             = objc.RegisterName("readAttributeAttributeListWithCompletion:")
+	_mTRBaseClusterDishwasherModeSelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler        = objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterDishwasherModeSelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion               = objc.RegisterName("readAttributeAttributeListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterDishwasherModeSelReadAttributeFeatureMapWithCompletion                                                = objc.RegisterName("readAttributeFeatureMapWithCompletion:")
+	_mTRBaseClusterDishwasherModeSelSubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler           = objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterDishwasherModeSelReadAttributeFeatureMapWithClusterStateCacheEndpointQueueCompletion                  = objc.RegisterName("readAttributeFeatureMapWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterDishwasherModeSelReadAttributeClusterRevisionWithCompletion                                           = objc.RegisterName("readAttributeClusterRevisionWithCompletion:")
+	_mTRBaseClusterDishwasherModeSelSubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler      = objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterDishwasherModeSelReadAttributeClusterRevisionWithClusterStateCacheEndpointQueueCompletion             = objc.RegisterName("readAttributeClusterRevisionWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterDishwasherModeSelInitWithDeviceEndpointIDQueue                                                        = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRBaseClusterDishwasherModeFromID(id objc.ID) *MTRBaseClusterDishwasherMode {
@@ -295,7 +295,8 @@ func MTRBaseClusterDishwasherModeReadAttributeClusterRevisionWithClusterStateCac
 // For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func (o *MTRBaseClusterDishwasherMode) InitWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterDishwasherMode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBaseClusterDishwasherModeSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRBaseClusterDishwasherModeFromID(_ret)
 }
-

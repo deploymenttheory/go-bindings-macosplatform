@@ -9,13 +9,13 @@ import (
 
 // C struct: gss_OID_desc_struct
 type GssOIDDescStruct struct {
-	Length uint32
+	Length   uint32
 	Elements unsafe.Pointer
 }
 
 // C struct: gss_OID_set_desc_struct
 type GssOIDSetDescStruct struct {
-	Count uint
+	Count    uint
 	Elements *GssOIDDescStruct
 }
 
@@ -26,22 +26,22 @@ type GssAuthIdentity struct{}
 // C struct: gss_buffer_desc_struct
 type GssBufferDescStruct struct {
 	Length uint
-	Value unsafe.Pointer
+	Value  unsafe.Pointer
 }
 
 // C struct: gss_buffer_set_desc_struct
 type GssBufferSetDescStruct struct {
-	Count uint
+	Count    uint
 	Elements *GssBufferDescStruct
 }
 
 // C struct: gss_channel_bindings_struct
 type GssChannelBindingsStruct struct {
 	Initiator_addrtype uint32
-	Initiator_address GssBufferDescStruct
-	Acceptor_addrtype uint32
-	Acceptor_address GssBufferDescStruct
-	Application_data GssBufferDescStruct
+	Initiator_address  GssBufferDescStruct
+	Acceptor_addrtype  uint32
+	Acceptor_address   GssBufferDescStruct
+	Application_data   GssBufferDescStruct
 }
 
 // C struct: gss_cred_id_t_desc_struct
@@ -54,27 +54,27 @@ type GssCtxIdTDescStruct struct{}
 
 // C struct: gss_iov_buffer_desc_struct
 type GssIovBufferDescStruct struct {
-	Type uint32
+	Type   uint32
 	Buffer GssBufferDescStruct
 }
 
 // C struct: gss_krb5_cfx_keydata
 type GssKrb5CfxKeydata struct {
 	Have_acceptor_subkey uint32
-	Ctx_key GssKrb5LucidKey
-	Acceptor_subkey GssKrb5LucidKey
+	Ctx_key              GssKrb5LucidKey
+	Acceptor_subkey      GssKrb5LucidKey
 }
 
 // C struct: gss_krb5_lucid_context_v1
 type GssKrb5LucidContextV1 struct {
-	Version uint32
-	Initiate uint32
-	Endtime uint32
-	Send_seq uint64
-	Recv_seq uint64
-	Protocol uint32
+	Version    uint32
+	Initiate   uint32
+	Endtime    uint32
+	Send_seq   uint64
+	Recv_seq   uint64
+	Protocol   uint32
 	Rfc1964_kd GssKrb5Rfc1964Keydata
-	Cfx_kd GssKrb5CfxKeydata
+	Cfx_kd     GssKrb5CfxKeydata
 }
 
 // C struct: gss_krb5_lucid_context_version
@@ -84,16 +84,16 @@ type GssKrb5LucidContextVersion struct {
 
 // C struct: gss_krb5_lucid_key
 type GssKrb5LucidKey struct {
-	Type uint32
+	Type   uint32
 	Length uint32
-	Data unsafe.Pointer
+	Data   unsafe.Pointer
 }
 
 // C struct: gss_krb5_rfc1964_keydata
 type GssKrb5Rfc1964Keydata struct {
 	Sign_alg uint32
 	Seal_alg uint32
-	Ctx_key GssKrb5LucidKey
+	Ctx_key  GssKrb5LucidKey
 }
 
 // C struct: gss_name_t_desc_struct
@@ -154,4 +154,3 @@ type GssKrb5LucidKeyT = GssKrb5LucidKey
 
 // GssKrb5Rfc1964KeydataT is an alias for gss_krb5_rfc1964_keydata (C typedef gss_krb5_rfc1964_keydata_t).
 type GssKrb5Rfc1964KeydataT = GssKrb5Rfc1964Keydata
-

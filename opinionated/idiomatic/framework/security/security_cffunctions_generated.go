@@ -277,4 +277,3 @@ func SessionGetInfo(session uint, sessionId *uint, attributes *raw.SessionAttrib
 	}
 	return nil
 }
-

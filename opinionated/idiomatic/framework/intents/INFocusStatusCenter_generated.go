@@ -63,4 +63,3 @@ type FocusStatusCenterable interface {
 }
 
 var _ FocusStatusCenterable = (*FocusStatusCenter)(nil)
-

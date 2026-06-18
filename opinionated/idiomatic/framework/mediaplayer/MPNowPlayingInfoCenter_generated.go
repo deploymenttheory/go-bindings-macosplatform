@@ -80,4 +80,3 @@ type NowPlayingInfoCenterable interface {
 }
 
 var _ NowPlayingInfoCenterable = (*NowPlayingInfoCenter)(nil)
-

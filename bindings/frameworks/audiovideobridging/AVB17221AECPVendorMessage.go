@@ -16,10 +16,10 @@ type AVB17221AECPVendorMessage struct {
 }
 
 var (
-	_clsAVB17221AECPVendorMessage = _objcClass("AVB17221AECPVendorMessage")
-	_aVB17221AECPVendorMessageSelProtocolID = objc.RegisterName("protocolID")
-	_aVB17221AECPVendorMessageSelSetProtocolID = objc.RegisterName("setProtocolID:")
-	_aVB17221AECPVendorMessageSelProtocolSpecificData = objc.RegisterName("protocolSpecificData")
+	_clsAVB17221AECPVendorMessage                        = _objcClass("AVB17221AECPVendorMessage")
+	_aVB17221AECPVendorMessageSelProtocolID              = objc.RegisterName("protocolID")
+	_aVB17221AECPVendorMessageSelSetProtocolID           = objc.RegisterName("setProtocolID:")
+	_aVB17221AECPVendorMessageSelProtocolSpecificData    = objc.RegisterName("protocolSpecificData")
 	_aVB17221AECPVendorMessageSelSetProtocolSpecificData = objc.RegisterName("setProtocolSpecificData:")
 )
 
@@ -46,11 +46,12 @@ func (o *AVB17221AECPVendorMessage) SetProtocolID(protocolID uint64) {
 // @property	protocolSpecificData @abstract	The protocol_specific_data field of the AECP Vendor Unique message.
 func (o *AVB17221AECPVendorMessage) ProtocolSpecificData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVB17221AECPVendorMessageSelProtocolSpecificData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *AVB17221AECPVendorMessage) SetProtocolSpecificData(protocolSpecificData *foundation.NSData) {
 	o.Ptr().Send(_aVB17221AECPVendorMessageSelSetProtocolSpecificData, protocolSpecificData.Ptr())
 }
-

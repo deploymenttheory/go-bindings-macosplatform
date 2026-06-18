@@ -19,7 +19,9 @@ type MTRBaseClusterWiFiNetworkDiagnostics struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterWiFiNetworkDiagnostics].
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) Unwrap() *raw.MTRBaseClusterWiFiNetworkDiagnostics { return x.inner }
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) Unwrap() *raw.MTRBaseClusterWiFiNetworkDiagnostics {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -1567,9 +1569,13 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeClusterRevision
 	}
 }
 
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterWiFiNetworkDiagnosticsable is the interface implemented by [MTRBaseClusterWiFiNetworkDiagnostics], for mocking and DI.
 type MTRBaseClusterWiFiNetworkDiagnosticsable interface {
@@ -1653,4 +1659,3 @@ type MTRBaseClusterWiFiNetworkDiagnosticsable interface {
 }
 
 var _ MTRBaseClusterWiFiNetworkDiagnosticsable = (*MTRBaseClusterWiFiNetworkDiagnostics)(nil)
-

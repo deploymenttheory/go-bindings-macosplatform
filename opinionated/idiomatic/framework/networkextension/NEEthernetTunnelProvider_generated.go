@@ -41,11 +41,17 @@ func (x *NEEthernetTunnelProvider) WithReasserting(reasserting bool) *NEEthernet
 	return x
 }
 
-func (x *NEEthernetTunnelProvider) asNEPacketTunnelProvider() *raw.NEPacketTunnelProvider { return &x.inner.NEPacketTunnelProvider }
+func (x *NEEthernetTunnelProvider) asNEPacketTunnelProvider() *raw.NEPacketTunnelProvider {
+	return &x.inner.NEPacketTunnelProvider
+}
 
-func (x *NEEthernetTunnelProvider) asNETunnelProvider() *raw.NETunnelProvider { return &x.inner.NEPacketTunnelProvider.NETunnelProvider }
+func (x *NEEthernetTunnelProvider) asNETunnelProvider() *raw.NETunnelProvider {
+	return &x.inner.NEPacketTunnelProvider.NETunnelProvider
+}
 
-func (x *NEEthernetTunnelProvider) asNEProvider() *raw.NEProvider { return &x.inner.NEPacketTunnelProvider.NETunnelProvider.NEProvider }
+func (x *NEEthernetTunnelProvider) asNEProvider() *raw.NEProvider {
+	return &x.inner.NEPacketTunnelProvider.NETunnelProvider.NEProvider
+}
 
 // NEEthernetTunnelProviderable is the interface implemented by [NEEthernetTunnelProvider], for mocking and DI.
 type NEEthernetTunnelProviderable interface {
@@ -54,4 +60,3 @@ type NEEthernetTunnelProviderable interface {
 }
 
 var _ NEEthernetTunnelProviderable = (*NEEthernetTunnelProvider)(nil)
-

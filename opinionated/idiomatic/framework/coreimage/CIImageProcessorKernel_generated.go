@@ -41,4 +41,3 @@ type ImageProcessorKernelable interface {
 }
 
 var _ ImageProcessorKernelable = (*ImageProcessorKernel)(nil)
-

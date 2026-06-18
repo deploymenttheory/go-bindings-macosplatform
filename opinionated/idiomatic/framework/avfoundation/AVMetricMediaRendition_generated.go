@@ -59,4 +59,3 @@ type MetricMediaRenditionable interface {
 }
 
 var _ MetricMediaRenditionable = (*MetricMediaRendition)(nil)
-

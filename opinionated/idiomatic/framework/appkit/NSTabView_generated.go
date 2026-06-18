@@ -72,7 +72,9 @@ func (x *TabView) WithTabViewItems(items ...*raw.NSTabViewItem) *TabView {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSTabViewItem](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -118,7 +120,9 @@ func (x *TabView) WithSubviews(items ...ViewProvider) *TabView {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asView().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSView](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -260,7 +264,9 @@ func (x *TabView) WithBackgroundFilters(items ...*coreimage.CIFilter) *TabView {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -282,7 +288,9 @@ func (x *TabView) WithContentFilters(items ...*coreimage.CIFilter) *TabView {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -346,7 +354,9 @@ func (x *TabView) WithGestureRecognizers(items ...GestureRecognizerProvider) *Ta
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -770,4 +780,3 @@ type TabViewable interface {
 }
 
 var _ TabViewable = (*TabView)(nil)
-

@@ -17,27 +17,27 @@ type METrackInfo struct {
 }
 
 var (
-	_clsMETrackInfo = _objcClass("METrackInfo")
+	_clsMETrackInfo                                           = _objcClass("METrackInfo")
 	_mETrackInfoSelInitWithMediaTypeTrackIDFormatDescriptions = objc.RegisterName("initWithMediaType:trackID:formatDescriptions:")
-	_mETrackInfoSelMediaType = objc.RegisterName("mediaType")
-	_mETrackInfoSelTrackID = objc.RegisterName("trackID")
-	_mETrackInfoSelIsEnabled = objc.RegisterName("isEnabled")
-	_mETrackInfoSelSetEnabled = objc.RegisterName("setEnabled:")
-	_mETrackInfoSelFormatDescriptions = objc.RegisterName("formatDescriptions")
-	_mETrackInfoSelNaturalTimescale = objc.RegisterName("naturalTimescale")
-	_mETrackInfoSelSetNaturalTimescale = objc.RegisterName("setNaturalTimescale:")
-	_mETrackInfoSelTrackEdits = objc.RegisterName("trackEdits")
-	_mETrackInfoSelSetTrackEdits = objc.RegisterName("setTrackEdits:")
-	_mETrackInfoSelExtendedLanguageTag = objc.RegisterName("extendedLanguageTag")
-	_mETrackInfoSelSetExtendedLanguageTag = objc.RegisterName("setExtendedLanguageTag:")
-	_mETrackInfoSelNaturalSize = objc.RegisterName("naturalSize")
-	_mETrackInfoSelSetNaturalSize = objc.RegisterName("setNaturalSize:")
-	_mETrackInfoSelPreferredTransform = objc.RegisterName("preferredTransform")
-	_mETrackInfoSelSetPreferredTransform = objc.RegisterName("setPreferredTransform:")
-	_mETrackInfoSelNominalFrameRate = objc.RegisterName("nominalFrameRate")
-	_mETrackInfoSelSetNominalFrameRate = objc.RegisterName("setNominalFrameRate:")
-	_mETrackInfoSelRequiresFrameReordering = objc.RegisterName("requiresFrameReordering")
-	_mETrackInfoSelSetRequiresFrameReordering = objc.RegisterName("setRequiresFrameReordering:")
+	_mETrackInfoSelMediaType                                  = objc.RegisterName("mediaType")
+	_mETrackInfoSelTrackID                                    = objc.RegisterName("trackID")
+	_mETrackInfoSelIsEnabled                                  = objc.RegisterName("isEnabled")
+	_mETrackInfoSelSetEnabled                                 = objc.RegisterName("setEnabled:")
+	_mETrackInfoSelFormatDescriptions                         = objc.RegisterName("formatDescriptions")
+	_mETrackInfoSelNaturalTimescale                           = objc.RegisterName("naturalTimescale")
+	_mETrackInfoSelSetNaturalTimescale                        = objc.RegisterName("setNaturalTimescale:")
+	_mETrackInfoSelTrackEdits                                 = objc.RegisterName("trackEdits")
+	_mETrackInfoSelSetTrackEdits                              = objc.RegisterName("setTrackEdits:")
+	_mETrackInfoSelExtendedLanguageTag                        = objc.RegisterName("extendedLanguageTag")
+	_mETrackInfoSelSetExtendedLanguageTag                     = objc.RegisterName("setExtendedLanguageTag:")
+	_mETrackInfoSelNaturalSize                                = objc.RegisterName("naturalSize")
+	_mETrackInfoSelSetNaturalSize                             = objc.RegisterName("setNaturalSize:")
+	_mETrackInfoSelPreferredTransform                         = objc.RegisterName("preferredTransform")
+	_mETrackInfoSelSetPreferredTransform                      = objc.RegisterName("setPreferredTransform:")
+	_mETrackInfoSelNominalFrameRate                           = objc.RegisterName("nominalFrameRate")
+	_mETrackInfoSelSetNominalFrameRate                        = objc.RegisterName("setNominalFrameRate:")
+	_mETrackInfoSelRequiresFrameReordering                    = objc.RegisterName("requiresFrameReordering")
+	_mETrackInfoSelSetRequiresFrameReordering                 = objc.RegisterName("setRequiresFrameReordering:")
 )
 
 func METrackInfoFromID(id objc.ID) *METrackInfo {
@@ -53,7 +53,9 @@ func METrackInfoFromID(id objc.ID) *METrackInfo {
 // @method			initWithMediaType @abstract		Initializes a new METrackInfo instance. @discussion		The main initializer for the METrackInfo class. After creating the class, the METrackReader should fill in all the relevant properties with the values read in from the media track. @param			mediaType The media type of the track. @param			trackID An integer identifying the track within the media asset. @param			formatDescriptions The format descriptions for the track, as an NSArray. @result			A new instance of METrackInfo.
 func (o *METrackInfo) InitWithMediaTypeTrackIDFormatDescriptions(mediaType uint, trackID int32, formatDescriptions *foundation.NSArray[objc.ID]) *METrackInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mETrackInfoSelInitWithMediaTypeTrackIDFormatDescriptions, mediaType, trackID, formatDescriptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return METrackInfoFromID(_ret)
 }
 
@@ -107,7 +109,9 @@ func (o *METrackInfo) SetTrackEdits(trackEdits *foundation.NSArray[*foundation.N
 
 func (o *METrackInfo) ExtendedLanguageTag() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mETrackInfoSelExtendedLanguageTag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -154,4 +158,3 @@ func (o *METrackInfo) RequiresFrameReordering() bool {
 func (o *METrackInfo) SetRequiresFrameReordering(requiresFrameReordering bool) {
 	o.Ptr().Send(_mETrackInfoSelSetRequiresFrameReordering, requiresFrameReordering)
 }
-

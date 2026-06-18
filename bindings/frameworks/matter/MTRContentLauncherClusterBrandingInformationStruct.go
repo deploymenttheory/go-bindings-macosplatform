@@ -16,19 +16,19 @@ type MTRContentLauncherClusterBrandingInformationStruct struct {
 }
 
 var (
-	_clsMTRContentLauncherClusterBrandingInformationStruct = _objcClass("MTRContentLauncherClusterBrandingInformationStruct")
-	_mTRContentLauncherClusterBrandingInformationStructSelProviderName = objc.RegisterName("providerName")
+	_clsMTRContentLauncherClusterBrandingInformationStruct                = _objcClass("MTRContentLauncherClusterBrandingInformationStruct")
+	_mTRContentLauncherClusterBrandingInformationStructSelProviderName    = objc.RegisterName("providerName")
 	_mTRContentLauncherClusterBrandingInformationStructSelSetProviderName = objc.RegisterName("setProviderName:")
-	_mTRContentLauncherClusterBrandingInformationStructSelBackground = objc.RegisterName("background")
-	_mTRContentLauncherClusterBrandingInformationStructSelSetBackground = objc.RegisterName("setBackground:")
-	_mTRContentLauncherClusterBrandingInformationStructSelLogo = objc.RegisterName("logo")
-	_mTRContentLauncherClusterBrandingInformationStructSelSetLogo = objc.RegisterName("setLogo:")
-	_mTRContentLauncherClusterBrandingInformationStructSelProgressBar = objc.RegisterName("progressBar")
-	_mTRContentLauncherClusterBrandingInformationStructSelSetProgressBar = objc.RegisterName("setProgressBar:")
-	_mTRContentLauncherClusterBrandingInformationStructSelSplash = objc.RegisterName("splash")
-	_mTRContentLauncherClusterBrandingInformationStructSelSetSplash = objc.RegisterName("setSplash:")
-	_mTRContentLauncherClusterBrandingInformationStructSelWaterMark = objc.RegisterName("waterMark")
-	_mTRContentLauncherClusterBrandingInformationStructSelSetWaterMark = objc.RegisterName("setWaterMark:")
+	_mTRContentLauncherClusterBrandingInformationStructSelBackground      = objc.RegisterName("background")
+	_mTRContentLauncherClusterBrandingInformationStructSelSetBackground   = objc.RegisterName("setBackground:")
+	_mTRContentLauncherClusterBrandingInformationStructSelLogo            = objc.RegisterName("logo")
+	_mTRContentLauncherClusterBrandingInformationStructSelSetLogo         = objc.RegisterName("setLogo:")
+	_mTRContentLauncherClusterBrandingInformationStructSelProgressBar     = objc.RegisterName("progressBar")
+	_mTRContentLauncherClusterBrandingInformationStructSelSetProgressBar  = objc.RegisterName("setProgressBar:")
+	_mTRContentLauncherClusterBrandingInformationStructSelSplash          = objc.RegisterName("splash")
+	_mTRContentLauncherClusterBrandingInformationStructSelSetSplash       = objc.RegisterName("setSplash:")
+	_mTRContentLauncherClusterBrandingInformationStructSelWaterMark       = objc.RegisterName("waterMark")
+	_mTRContentLauncherClusterBrandingInformationStructSelSetWaterMark    = objc.RegisterName("setWaterMark:")
 )
 
 func MTRContentLauncherClusterBrandingInformationStructFromID(id objc.ID) *MTRContentLauncherClusterBrandingInformationStruct {
@@ -43,7 +43,9 @@ func MTRContentLauncherClusterBrandingInformationStructFromID(id objc.ID) *MTRCo
 
 func (o *MTRContentLauncherClusterBrandingInformationStruct) ProviderName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentLauncherClusterBrandingInformationStructSelProviderName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -53,7 +55,9 @@ func (o *MTRContentLauncherClusterBrandingInformationStruct) SetProviderName(pro
 
 func (o *MTRContentLauncherClusterBrandingInformationStruct) Background() *MTRContentLauncherClusterStyleInformationStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentLauncherClusterBrandingInformationStructSelBackground)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRContentLauncherClusterStyleInformationStructFromID(_ret)
 }
 
@@ -63,7 +67,9 @@ func (o *MTRContentLauncherClusterBrandingInformationStruct) SetBackground(backg
 
 func (o *MTRContentLauncherClusterBrandingInformationStruct) Logo() *MTRContentLauncherClusterStyleInformationStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentLauncherClusterBrandingInformationStructSelLogo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRContentLauncherClusterStyleInformationStructFromID(_ret)
 }
 
@@ -73,7 +79,9 @@ func (o *MTRContentLauncherClusterBrandingInformationStruct) SetLogo(logo *MTRCo
 
 func (o *MTRContentLauncherClusterBrandingInformationStruct) ProgressBar() *MTRContentLauncherClusterStyleInformationStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentLauncherClusterBrandingInformationStructSelProgressBar)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRContentLauncherClusterStyleInformationStructFromID(_ret)
 }
 
@@ -83,7 +91,9 @@ func (o *MTRContentLauncherClusterBrandingInformationStruct) SetProgressBar(prog
 
 func (o *MTRContentLauncherClusterBrandingInformationStruct) Splash() *MTRContentLauncherClusterStyleInformationStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentLauncherClusterBrandingInformationStructSelSplash)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRContentLauncherClusterStyleInformationStructFromID(_ret)
 }
 
@@ -93,11 +103,12 @@ func (o *MTRContentLauncherClusterBrandingInformationStruct) SetSplash(splash *M
 
 func (o *MTRContentLauncherClusterBrandingInformationStruct) WaterMark() *MTRContentLauncherClusterStyleInformationStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentLauncherClusterBrandingInformationStructSelWaterMark)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRContentLauncherClusterStyleInformationStructFromID(_ret)
 }
 
 func (o *MTRContentLauncherClusterBrandingInformationStruct) SetWaterMark(waterMark *MTRContentLauncherClusterStyleInformationStruct) {
 	o.Ptr().Send(_mTRContentLauncherClusterBrandingInformationStructSelSetWaterMark, waterMark.Ptr())
 }
-

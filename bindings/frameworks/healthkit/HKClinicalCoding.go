@@ -16,10 +16,10 @@ type HKClinicalCoding struct {
 }
 
 var (
-	_clsHKClinicalCoding = _objcClass("HKClinicalCoding")
+	_clsHKClinicalCoding                          = _objcClass("HKClinicalCoding")
 	_hKClinicalCodingSelInitWithSystemVersionCode = objc.RegisterName("initWithSystem:version:code:")
-	_hKClinicalCodingSelSystem = objc.RegisterName("system")
-	_hKClinicalCodingSelCode = objc.RegisterName("code")
+	_hKClinicalCodingSelSystem                    = objc.RegisterName("system")
+	_hKClinicalCodingSelCode                      = objc.RegisterName("code")
 )
 
 func HKClinicalCodingFromID(id objc.ID) *HKClinicalCoding {
@@ -35,21 +35,26 @@ func HKClinicalCodingFromID(id objc.ID) *HKClinicalCoding {
 // Creates a clinical coding with the specified system, version, and code. @param system  The string that identifies the coding system, typically a HL7 URL. @param version The version of the system, if applicable. @param code    The clinical code string that represents the medical concept. Use when you need to explicitly construct a coding object to associate a HealthKit concept with a standardized medical code.
 func (o *HKClinicalCoding) InitWithSystemVersionCode(system *foundation.NSString, version *foundation.NSString, code *foundation.NSString) *HKClinicalCoding {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKClinicalCodingSelInitWithSystemVersionCode, system.Ptr(), version.Ptr(), code.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKClinicalCodingFromID(_ret)
 }
 
 // The string that identifies the coding system that defines this clinical code. The system is usually expressed as a URL from the [HL7 Terminology](https://terminology.hl7.org/). For example, the RxNorm, a coding system for medications uses: `http://www.nlm.nih.gov/research/umls/rxnorm`.
 func (o *HKClinicalCoding) System() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKClinicalCodingSelSystem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The clinical code that represents a medical concept inside the coding system. The format depends on the coding system. For example, RxNorm codes are numeric.
 func (o *HKClinicalCoding) Code() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKClinicalCodingSelCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

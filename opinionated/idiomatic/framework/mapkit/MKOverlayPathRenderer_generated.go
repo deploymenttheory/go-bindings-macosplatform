@@ -89,7 +89,9 @@ func (x *OverlayPathRenderer) WithLineDashPattern(items ...*foundation.NSNumber)
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -248,7 +250,9 @@ func (x *OverlayPathRenderer) SetPath(path unsafe.Pointer) {
 
 func (x *OverlayPathRenderer) asOverlayPathRenderer() *raw.MKOverlayPathRenderer { return x.inner }
 
-func (x *OverlayPathRenderer) asOverlayRenderer() *raw.MKOverlayRenderer { return &x.inner.MKOverlayRenderer }
+func (x *OverlayPathRenderer) asOverlayRenderer() *raw.MKOverlayRenderer {
+	return &x.inner.MKOverlayRenderer
+}
 
 // OverlayPathRendererable is the interface implemented by [OverlayPathRenderer], for mocking and DI.
 type OverlayPathRendererable interface {
@@ -292,4 +296,3 @@ type OverlayPathRendererable interface {
 }
 
 var _ OverlayPathRendererable = (*OverlayPathRenderer)(nil)
-

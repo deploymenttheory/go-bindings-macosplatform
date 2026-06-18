@@ -15,7 +15,7 @@ type OSLogEntryActivity struct {
 }
 
 var (
-	_clsOSLogEntryActivity = _objcClass("OSLogEntryActivity")
+	_clsOSLogEntryActivity                         = _objcClass("OSLogEntryActivity")
 	_oSLogEntryActivitySelParentActivityIdentifier = objc.RegisterName("parentActivityIdentifier")
 )
 
@@ -34,4 +34,3 @@ func (o *OSLogEntryActivity) ParentActivityIdentifier() uint64 {
 	_ret := objc.Send[uint64](o.Ptr(), _oSLogEntryActivitySelParentActivityIdentifier)
 	return _ret
 }
-

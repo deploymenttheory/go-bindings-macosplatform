@@ -47,4 +47,3 @@ type BloodTypeObjectable interface {
 }
 
 var _ BloodTypeObjectable = (*BloodTypeObject)(nil)
-

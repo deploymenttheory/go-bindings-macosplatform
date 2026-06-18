@@ -17,7 +17,9 @@ type PersistentHistoryChangeRequest struct {
 }
 
 // Unwrap returns the underlying [raw.NSPersistentHistoryChangeRequest].
-func (x *PersistentHistoryChangeRequest) Unwrap() *raw.NSPersistentHistoryChangeRequest { return x.inner }
+func (x *PersistentHistoryChangeRequest) Unwrap() *raw.NSPersistentHistoryChangeRequest {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -56,7 +58,9 @@ func (x *PersistentHistoryChangeRequest) WithAffectedStores(items ...PersistentS
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asPersistentStore().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asPersistentStore().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSPersistentStore](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -94,7 +98,9 @@ func (x *PersistentHistoryChangeRequest) SetFetchRequest(fetchRequest *raw.NSFet
 	x.inner.SetFetchRequest(fetchRequest)
 }
 
-func (x *PersistentHistoryChangeRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest { return &x.inner.NSPersistentStoreRequest }
+func (x *PersistentHistoryChangeRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest {
+	return &x.inner.NSPersistentStoreRequest
+}
 
 // PersistentHistoryChangeRequestable is the interface implemented by [PersistentHistoryChangeRequest], for mocking and DI.
 type PersistentHistoryChangeRequestable interface {
@@ -110,4 +116,3 @@ type PersistentHistoryChangeRequestable interface {
 }
 
 var _ PersistentHistoryChangeRequestable = (*PersistentHistoryChangeRequest)(nil)
-

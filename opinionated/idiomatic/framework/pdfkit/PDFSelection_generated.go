@@ -158,4 +158,3 @@ type Selectionable interface {
 }
 
 var _ Selectionable = (*Selection)(nil)
-

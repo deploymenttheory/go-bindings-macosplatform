@@ -15,14 +15,14 @@ type SCNSliderConstraint struct {
 }
 
 var (
-	_clsSCNSliderConstraint = _objcClass("SCNSliderConstraint")
-	_sCNSliderConstraintSelSliderConstraint = objc.RegisterName("sliderConstraint")
-	_sCNSliderConstraintSelCollisionCategoryBitMask = objc.RegisterName("collisionCategoryBitMask")
+	_clsSCNSliderConstraint                            = _objcClass("SCNSliderConstraint")
+	_sCNSliderConstraintSelSliderConstraint            = objc.RegisterName("sliderConstraint")
+	_sCNSliderConstraintSelCollisionCategoryBitMask    = objc.RegisterName("collisionCategoryBitMask")
 	_sCNSliderConstraintSelSetCollisionCategoryBitMask = objc.RegisterName("setCollisionCategoryBitMask:")
-	_sCNSliderConstraintSelRadius = objc.RegisterName("radius")
-	_sCNSliderConstraintSelSetRadius = objc.RegisterName("setRadius:")
-	_sCNSliderConstraintSelOffset = objc.RegisterName("offset")
-	_sCNSliderConstraintSelSetOffset = objc.RegisterName("setOffset:")
+	_sCNSliderConstraintSelRadius                      = objc.RegisterName("radius")
+	_sCNSliderConstraintSelSetRadius                   = objc.RegisterName("setRadius:")
+	_sCNSliderConstraintSelOffset                      = objc.RegisterName("offset")
+	_sCNSliderConstraintSelSetOffset                   = objc.RegisterName("setOffset:")
 )
 
 func SCNSliderConstraintFromID(id objc.ID) *SCNSliderConstraint {
@@ -38,7 +38,9 @@ func SCNSliderConstraintFromID(id objc.ID) *SCNSliderConstraint {
 // @method accelerationConstraint @abstract Creates and returns a SCNSliderConstraint object.
 func SCNSliderConstraintSliderConstraint() *SCNSliderConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNSliderConstraint), _sCNSliderConstraintSelSliderConstraint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNSliderConstraintFromID(_ret)
 }
 
@@ -71,4 +73,3 @@ func (o *SCNSliderConstraint) Offset() SCNVector3 {
 func (o *SCNSliderConstraint) SetOffset(offset SCNVector3) {
 	o.Ptr().Send(_sCNSliderConstraintSelSetOffset, offset)
 }
-

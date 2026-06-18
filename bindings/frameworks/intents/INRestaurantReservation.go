@@ -17,12 +17,12 @@ type INRestaurantReservation struct {
 }
 
 var (
-	_clsINRestaurantReservation = _objcClass("INRestaurantReservation")
+	_clsINRestaurantReservation                                                                                                                                                = _objcClass("INRestaurantReservation")
 	_iNRestaurantReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservationDurationPartySizeRestaurantLocation = objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:reservationDuration:partySize:restaurantLocation:")
-	_iNRestaurantReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservationDurationPartySizeRestaurantLocation = objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:reservationDuration:partySize:restaurantLocation:")
-	_iNRestaurantReservationSelReservationDuration = objc.RegisterName("reservationDuration")
-	_iNRestaurantReservationSelPartySize = objc.RegisterName("partySize")
-	_iNRestaurantReservationSelRestaurantLocation = objc.RegisterName("restaurantLocation")
+	_iNRestaurantReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservationDurationPartySizeRestaurantLocation    = objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:reservationDuration:partySize:restaurantLocation:")
+	_iNRestaurantReservationSelReservationDuration                                                                                                                             = objc.RegisterName("reservationDuration")
+	_iNRestaurantReservationSelPartySize                                                                                                                                       = objc.RegisterName("partySize")
+	_iNRestaurantReservationSelRestaurantLocation                                                                                                                              = objc.RegisterName("restaurantLocation")
 )
 
 func INRestaurantReservationFromID(id objc.ID) *INRestaurantReservation {
@@ -37,31 +37,40 @@ func INRestaurantReservationFromID(id objc.ID) *INRestaurantReservation {
 
 func (o *INRestaurantReservation) InitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservationDurationPartySizeRestaurantLocation(itemReference *INSpeakableString, reservationNumber *foundation.NSString, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName *foundation.NSString, actions *foundation.NSArray[*INReservationAction], uRL *foundation.NSURL, reservationDuration *INDateComponentsRange, partySize *foundation.NSNumber, restaurantLocation *corelocation.CLPlacemark) *INRestaurantReservation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNRestaurantReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservationDurationPartySizeRestaurantLocation, itemReference.Ptr(), reservationNumber.Ptr(), bookingTime.Ptr(), reservationStatus, reservationHolderName.Ptr(), actions.Ptr(), uRL.Ptr(), reservationDuration.Ptr(), partySize.Ptr(), restaurantLocation.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INRestaurantReservationFromID(_ret)
 }
 
 func (o *INRestaurantReservation) InitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservationDurationPartySizeRestaurantLocation(itemReference *INSpeakableString, reservationNumber *foundation.NSString, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName *foundation.NSString, actions *foundation.NSArray[*INReservationAction], reservationDuration *INDateComponentsRange, partySize *foundation.NSNumber, restaurantLocation *corelocation.CLPlacemark) *INRestaurantReservation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNRestaurantReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservationDurationPartySizeRestaurantLocation, itemReference.Ptr(), reservationNumber.Ptr(), bookingTime.Ptr(), reservationStatus, reservationHolderName.Ptr(), actions.Ptr(), reservationDuration.Ptr(), partySize.Ptr(), restaurantLocation.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INRestaurantReservationFromID(_ret)
 }
 
 func (o *INRestaurantReservation) ReservationDuration() *INDateComponentsRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNRestaurantReservationSelReservationDuration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INDateComponentsRangeFromID(_ret)
 }
 
 func (o *INRestaurantReservation) PartySize() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNRestaurantReservationSelPartySize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *INRestaurantReservation) RestaurantLocation() *corelocation.CLPlacemark {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNRestaurantReservationSelRestaurantLocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return corelocation.CLPlacemarkFromID(_ret)
 }
-

@@ -16,7 +16,9 @@ type MTRClusterPumpConfigurationAndControl struct {
 }
 
 // Unwrap returns the underlying [raw.MTRClusterPumpConfigurationAndControl].
-func (x *MTRClusterPumpConfigurationAndControl) Unwrap() *raw.MTRClusterPumpConfigurationAndControl { return x.inner }
+func (x *MTRClusterPumpConfigurationAndControl) Unwrap() *raw.MTRClusterPumpConfigurationAndControl {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -224,9 +226,13 @@ func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeClusterRevisionWith
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterPumpConfigurationAndControl) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterPumpConfigurationAndControl) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterPumpConfigurationAndControl) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterPumpConfigurationAndControl) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterPumpConfigurationAndControlable is the interface implemented by [MTRClusterPumpConfigurationAndControl], for mocking and DI.
 type MTRClusterPumpConfigurationAndControlable interface {
@@ -270,4 +276,3 @@ type MTRClusterPumpConfigurationAndControlable interface {
 }
 
 var _ MTRClusterPumpConfigurationAndControlable = (*MTRClusterPumpConfigurationAndControl)(nil)
-

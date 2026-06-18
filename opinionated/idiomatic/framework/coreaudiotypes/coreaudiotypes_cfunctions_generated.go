@@ -12,4 +12,3 @@ import (
 func AudioChannelLayoutTag_GetNumberOfChannels(inLayoutTag uint) uint {
 	return raw.AudioChannelLayoutTag_GetNumberOfChannels(inLayoutTag)
 }
-

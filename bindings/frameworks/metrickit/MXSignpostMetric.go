@@ -16,11 +16,11 @@ type MXSignpostMetric struct {
 }
 
 var (
-	_clsMXSignpostMetric = _objcClass("MXSignpostMetric")
-	_mXSignpostMetricSelSignpostName = objc.RegisterName("signpostName")
-	_mXSignpostMetricSelSignpostCategory = objc.RegisterName("signpostCategory")
+	_clsMXSignpostMetric                     = _objcClass("MXSignpostMetric")
+	_mXSignpostMetricSelSignpostName         = objc.RegisterName("signpostName")
+	_mXSignpostMetricSelSignpostCategory     = objc.RegisterName("signpostCategory")
 	_mXSignpostMetricSelSignpostIntervalData = objc.RegisterName("signpostIntervalData")
-	_mXSignpostMetricSelTotalCount = objc.RegisterName("totalCount")
+	_mXSignpostMetricSelTotalCount           = objc.RegisterName("totalCount")
 )
 
 func MXSignpostMetricFromID(id objc.ID) *MXSignpostMetric {
@@ -36,21 +36,27 @@ func MXSignpostMetricFromID(id objc.ID) *MXSignpostMetric {
 // @property      signpostName @abstract      The name associated with this aggregated signpost.
 func (o *MXSignpostMetric) SignpostName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXSignpostMetricSelSignpostName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property      signpostCategory @abstract      The category associated with this aggregated signpost.
 func (o *MXSignpostMetric) SignpostCategory() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXSignpostMetricSelSignpostCategory)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property      signpostIntervalData @abstract      A class that encapsulates metrics associated with app specific signpost intervals. @discussion    This property is null when signposts with the associated signpostName and signpostCategory contain no intervals.
 func (o *MXSignpostMetric) SignpostIntervalData() *MXSignpostIntervalData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXSignpostMetricSelSignpostIntervalData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MXSignpostIntervalDataFromID(_ret)
 }
 
@@ -59,4 +65,3 @@ func (o *MXSignpostMetric) TotalCount() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mXSignpostMetricSelTotalCount)
 	return _ret
 }
-

@@ -179,9 +179,13 @@ func (x *CNNPoolingGradient) SetSourceSize(sourceSize metal.MTLSize) {
 
 func (x *CNNPoolingGradient) asCNNPoolingGradient() *raw.MPSCNNPoolingGradient { return x.inner }
 
-func (x *CNNPoolingGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
+func (x *CNNPoolingGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNGradientKernel
+}
 
-func (x *CNNPoolingGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *CNNPoolingGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
 // CNNPoolingGradientable is the interface implemented by [CNNPoolingGradient], for mocking and DI.
 type CNNPoolingGradientable interface {
@@ -210,4 +214,3 @@ type CNNPoolingGradientable interface {
 }
 
 var _ CNNPoolingGradientable = (*CNNPoolingGradient)(nil)
-

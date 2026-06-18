@@ -78,4 +78,3 @@ type ContactFormatterable interface {
 }
 
 var _ ContactFormatterable = (*ContactFormatter)(nil)
-

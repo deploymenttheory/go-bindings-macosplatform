@@ -15,4 +15,3 @@ import (
 func NewMeshesFromAssetDeviceSourceMeshesError(asset *modelio.MDLAsset, device metal.MTLDevice, sourceMeshes *foundation.NSArray[*modelio.MDLMesh]) (*foundation.NSArray[*raw.MTKMesh], error) {
 	return raw.MTKMeshNewMeshesFromAssetDeviceSourceMeshesError(asset, device, sourceMeshes)
 }
-

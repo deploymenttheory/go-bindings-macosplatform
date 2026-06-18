@@ -81,4 +81,3 @@ type AssetSegmentTrackReportable interface {
 }
 
 var _ AssetSegmentTrackReportable = (*AssetSegmentTrackReport)(nil)
-

@@ -56,4 +56,3 @@ type Highlightable interface {
 }
 
 var _ Highlightable = (*Highlight)(nil)
-

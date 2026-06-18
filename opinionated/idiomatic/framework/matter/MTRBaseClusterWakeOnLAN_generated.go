@@ -218,11 +218,17 @@ func (x *MTRBaseClusterWakeOnLan) SubscribeAttributeClusterRevisionWithMinInterv
 	}
 }
 
-func (x *MTRBaseClusterWakeOnLan) asMTRBaseClusterWakeOnLAN() *raw.MTRBaseClusterWakeOnLAN { return &x.inner.MTRBaseClusterWakeOnLAN }
+func (x *MTRBaseClusterWakeOnLan) asMTRBaseClusterWakeOnLAN() *raw.MTRBaseClusterWakeOnLAN {
+	return &x.inner.MTRBaseClusterWakeOnLAN
+}
 
-func (x *MTRBaseClusterWakeOnLan) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRBaseClusterWakeOnLAN.MTRGenericBaseCluster }
+func (x *MTRBaseClusterWakeOnLan) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRBaseClusterWakeOnLAN.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterWakeOnLan) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRBaseClusterWakeOnLAN.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterWakeOnLan) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRBaseClusterWakeOnLAN.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterWakeOnLanable is the interface implemented by [MTRBaseClusterWakeOnLan], for mocking and DI.
 type MTRBaseClusterWakeOnLanable interface {
@@ -242,4 +248,3 @@ type MTRBaseClusterWakeOnLanable interface {
 }
 
 var _ MTRBaseClusterWakeOnLanable = (*MTRBaseClusterWakeOnLan)(nil)
-

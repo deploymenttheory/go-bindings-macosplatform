@@ -12,8 +12,8 @@ import (
 type SCCaptureDynamicRange int64
 
 const (
-	SCCaptureDynamicRangeSDR SCCaptureDynamicRange = 0
-	SCCaptureDynamicRangeHDRLocalDisplay SCCaptureDynamicRange = 1
+	SCCaptureDynamicRangeSDR                 SCCaptureDynamicRange = 0
+	SCCaptureDynamicRangeHDRLocalDisplay     SCCaptureDynamicRange = 1
 	SCCaptureDynamicRangeHDRCanonicalDisplay SCCaptureDynamicRange = 2
 )
 
@@ -36,7 +36,7 @@ const (
 	// Deprecated: Use SCShareableContentStyle instead
 	SCCaptureResolutionAutomatic SCCaptureResolutionType = 0
 	// Deprecated: Use SCShareableContentStyle instead
-	SCCaptureResolutionBest SCCaptureResolutionType = 1
+	SCCaptureResolutionBest    SCCaptureResolutionType = 1
 	SCCaptureResolutionNominal SCCaptureResolutionType = 2
 )
 
@@ -57,11 +57,11 @@ func (e SCCaptureResolutionType) String() string {
 type SCContentSharingPickerMode uint64
 
 const (
-	SCContentSharingPickerModeSingleWindow SCContentSharingPickerMode = 1
-	SCContentSharingPickerModeMultipleWindows SCContentSharingPickerMode = 2
-	SCContentSharingPickerModeSingleApplication SCContentSharingPickerMode = 4
+	SCContentSharingPickerModeSingleWindow         SCContentSharingPickerMode = 1
+	SCContentSharingPickerModeMultipleWindows      SCContentSharingPickerMode = 2
+	SCContentSharingPickerModeSingleApplication    SCContentSharingPickerMode = 4
 	SCContentSharingPickerModeMultipleApplications SCContentSharingPickerMode = 8
-	SCContentSharingPickerModeSingleDisplay SCContentSharingPickerMode = 16
+	SCContentSharingPickerModeSingleDisplay        SCContentSharingPickerMode = 16
 )
 
 func (e SCContentSharingPickerMode) String() string {
@@ -91,7 +91,7 @@ type SCPresenterOverlayAlertSetting int64
 
 const (
 	SCPresenterOverlayAlertSettingSystem SCPresenterOverlayAlertSetting = 0
-	SCPresenterOverlayAlertSettingNever SCPresenterOverlayAlertSetting = 1
+	SCPresenterOverlayAlertSettingNever  SCPresenterOverlayAlertSetting = 1
 	SCPresenterOverlayAlertSettingAlways SCPresenterOverlayAlertSetting = 2
 )
 
@@ -112,7 +112,7 @@ type SCScreenshotDisplayIntent int64
 
 const (
 	SCScreenshotDisplayIntentCanonical SCScreenshotDisplayIntent = 0
-	SCScreenshotDisplayIntentLocal SCScreenshotDisplayIntent = 1
+	SCScreenshotDisplayIntentLocal     SCScreenshotDisplayIntent = 1
 )
 
 func (e SCScreenshotDisplayIntent) String() string {
@@ -129,8 +129,8 @@ func (e SCScreenshotDisplayIntent) String() string {
 type SCScreenshotDynamicRange int64
 
 const (
-	SCScreenshotDynamicRangeSDR SCScreenshotDynamicRange = 0
-	SCScreenshotDynamicRangeHDR SCScreenshotDynamicRange = 1
+	SCScreenshotDynamicRangeSDR       SCScreenshotDynamicRange = 0
+	SCScreenshotDynamicRangeHDR       SCScreenshotDynamicRange = 1
 	SCScreenshotDynamicRangeSDRAndHDR SCScreenshotDynamicRange = 2
 )
 
@@ -150,9 +150,9 @@ func (e SCScreenshotDynamicRange) String() string {
 type SCShareableContentStyle int64
 
 const (
-	SCShareableContentStyleNone SCShareableContentStyle = 0
-	SCShareableContentStyleWindow SCShareableContentStyle = 1
-	SCShareableContentStyleDisplay SCShareableContentStyle = 2
+	SCShareableContentStyleNone        SCShareableContentStyle = 0
+	SCShareableContentStyleWindow      SCShareableContentStyle = 1
+	SCShareableContentStyleDisplay     SCShareableContentStyle = 2
 	SCShareableContentStyleApplication SCShareableContentStyle = 3
 )
 
@@ -174,9 +174,9 @@ func (e SCShareableContentStyle) String() string {
 type SCStreamConfigurationPreset int64
 
 const (
-	SCStreamConfigurationPresetCaptureHDRStreamLocalDisplay SCStreamConfigurationPreset = 0
-	SCStreamConfigurationPresetCaptureHDRStreamCanonicalDisplay SCStreamConfigurationPreset = 1
-	SCStreamConfigurationPresetCaptureHDRScreenshotLocalDisplay SCStreamConfigurationPreset = 2
+	SCStreamConfigurationPresetCaptureHDRStreamLocalDisplay         SCStreamConfigurationPreset = 0
+	SCStreamConfigurationPresetCaptureHDRStreamCanonicalDisplay     SCStreamConfigurationPreset = 1
+	SCStreamConfigurationPresetCaptureHDRScreenshotLocalDisplay     SCStreamConfigurationPreset = 2
 	SCStreamConfigurationPresetCaptureHDRScreenshotCanonicalDisplay SCStreamConfigurationPreset = 3
 	SCStreamConfigurationPresetCaptureHDRRecordingPreservedSDRHDR10 SCStreamConfigurationPreset = 4
 )
@@ -201,8 +201,8 @@ func (e SCStreamConfigurationPreset) String() string {
 type SCStreamOutputType int64
 
 const (
-	SCStreamOutputTypeScreen SCStreamOutputType = 0
-	SCStreamOutputTypeAudio SCStreamOutputType = 1
+	SCStreamOutputTypeScreen     SCStreamOutputType = 0
+	SCStreamOutputTypeAudio      SCStreamOutputType = 1
 	SCStreamOutputTypeMicrophone SCStreamOutputType = 2
 )
 
@@ -223,7 +223,7 @@ func (e SCStreamOutputType) String() string {
 type SCStreamType int64
 
 const (
-	SCStreamTypeWindow SCStreamType = 0
+	SCStreamTypeWindow  SCStreamType = 0
 	SCStreamTypeDisplay SCStreamType = 1
 )
 
@@ -237,4 +237,3 @@ func (e SCStreamType) String() string {
 		return fmt.Sprintf("SCStreamType(%d)", int64(e))
 	}
 }
-

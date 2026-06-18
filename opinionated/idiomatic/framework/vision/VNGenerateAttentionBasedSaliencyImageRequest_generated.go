@@ -16,7 +16,9 @@ type GenerateAttentionBasedSaliencyImageRequest struct {
 }
 
 // Unwrap returns the underlying [raw.VNGenerateAttentionBasedSaliencyImageRequest].
-func (x *GenerateAttentionBasedSaliencyImageRequest) Unwrap() *raw.VNGenerateAttentionBasedSaliencyImageRequest { return x.inner }
+func (x *GenerateAttentionBasedSaliencyImageRequest) Unwrap() *raw.VNGenerateAttentionBasedSaliencyImageRequest {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -60,9 +62,13 @@ func (x *GenerateAttentionBasedSaliencyImageRequest) WithRevision(revision uint)
 	return x
 }
 
-func (x *GenerateAttentionBasedSaliencyImageRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
+func (x *GenerateAttentionBasedSaliencyImageRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNImageBasedRequest
+}
 
-func (x *GenerateAttentionBasedSaliencyImageRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+func (x *GenerateAttentionBasedSaliencyImageRequest) asRequest() *raw.VNRequest {
+	return &x.inner.VNImageBasedRequest.VNRequest
+}
 
 // GenerateAttentionBasedSaliencyImageRequestable is the interface implemented by [GenerateAttentionBasedSaliencyImageRequest], for mocking and DI.
 type GenerateAttentionBasedSaliencyImageRequestable interface {
@@ -74,4 +80,3 @@ type GenerateAttentionBasedSaliencyImageRequestable interface {
 }
 
 var _ GenerateAttentionBasedSaliencyImageRequestable = (*GenerateAttentionBasedSaliencyImageRequest)(nil)
-

@@ -17,7 +17,7 @@ type MPSCNNMultiply struct {
 }
 
 var (
-	_clsMPSCNNMultiply = _objcClass("MPSCNNMultiply")
+	_clsMPSCNNMultiply               = _objcClass("MPSCNNMultiply")
 	_mPSCNNMultiplySelInitWithDevice = objc.RegisterName("initWithDevice:")
 )
 
@@ -34,7 +34,8 @@ func MPSCNNMultiplyFromID(id objc.ID) *MPSCNNMultiply {
 // @abstract  Initialize the multiplication operator @param     device           The device the filter will run on. @return    A valid MPSCNNMultiply object or nil, if failure.
 func (o *MPSCNNMultiply) InitWithDevice(device metal.MTLDevice) *MPSCNNMultiply {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNMultiplySelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNMultiplyFromID(_ret)
 }
-

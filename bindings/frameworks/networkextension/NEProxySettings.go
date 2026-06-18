@@ -16,27 +16,27 @@ type NEProxySettings struct {
 }
 
 var (
-	_clsNEProxySettings = _objcClass("NEProxySettings")
-	_nEProxySettingsSelAutoProxyConfigurationEnabled = objc.RegisterName("autoProxyConfigurationEnabled")
-	_nEProxySettingsSelSetAutoProxyConfigurationEnabled = objc.RegisterName("setAutoProxyConfigurationEnabled:")
-	_nEProxySettingsSelProxyAutoConfigurationURL = objc.RegisterName("proxyAutoConfigurationURL")
-	_nEProxySettingsSelSetProxyAutoConfigurationURL = objc.RegisterName("setProxyAutoConfigurationURL:")
-	_nEProxySettingsSelProxyAutoConfigurationJavaScript = objc.RegisterName("proxyAutoConfigurationJavaScript")
+	_clsNEProxySettings                                    = _objcClass("NEProxySettings")
+	_nEProxySettingsSelAutoProxyConfigurationEnabled       = objc.RegisterName("autoProxyConfigurationEnabled")
+	_nEProxySettingsSelSetAutoProxyConfigurationEnabled    = objc.RegisterName("setAutoProxyConfigurationEnabled:")
+	_nEProxySettingsSelProxyAutoConfigurationURL           = objc.RegisterName("proxyAutoConfigurationURL")
+	_nEProxySettingsSelSetProxyAutoConfigurationURL        = objc.RegisterName("setProxyAutoConfigurationURL:")
+	_nEProxySettingsSelProxyAutoConfigurationJavaScript    = objc.RegisterName("proxyAutoConfigurationJavaScript")
 	_nEProxySettingsSelSetProxyAutoConfigurationJavaScript = objc.RegisterName("setProxyAutoConfigurationJavaScript:")
-	_nEProxySettingsSelHTTPEnabled = objc.RegisterName("HTTPEnabled")
-	_nEProxySettingsSelSetHTTPEnabled = objc.RegisterName("setHTTPEnabled:")
-	_nEProxySettingsSelHTTPServer = objc.RegisterName("HTTPServer")
-	_nEProxySettingsSelSetHTTPServer = objc.RegisterName("setHTTPServer:")
-	_nEProxySettingsSelHTTPSEnabled = objc.RegisterName("HTTPSEnabled")
-	_nEProxySettingsSelSetHTTPSEnabled = objc.RegisterName("setHTTPSEnabled:")
-	_nEProxySettingsSelHTTPSServer = objc.RegisterName("HTTPSServer")
-	_nEProxySettingsSelSetHTTPSServer = objc.RegisterName("setHTTPSServer:")
-	_nEProxySettingsSelExcludeSimpleHostnames = objc.RegisterName("excludeSimpleHostnames")
-	_nEProxySettingsSelSetExcludeSimpleHostnames = objc.RegisterName("setExcludeSimpleHostnames:")
-	_nEProxySettingsSelExceptionList = objc.RegisterName("exceptionList")
-	_nEProxySettingsSelSetExceptionList = objc.RegisterName("setExceptionList:")
-	_nEProxySettingsSelMatchDomains = objc.RegisterName("matchDomains")
-	_nEProxySettingsSelSetMatchDomains = objc.RegisterName("setMatchDomains:")
+	_nEProxySettingsSelHTTPEnabled                         = objc.RegisterName("HTTPEnabled")
+	_nEProxySettingsSelSetHTTPEnabled                      = objc.RegisterName("setHTTPEnabled:")
+	_nEProxySettingsSelHTTPServer                          = objc.RegisterName("HTTPServer")
+	_nEProxySettingsSelSetHTTPServer                       = objc.RegisterName("setHTTPServer:")
+	_nEProxySettingsSelHTTPSEnabled                        = objc.RegisterName("HTTPSEnabled")
+	_nEProxySettingsSelSetHTTPSEnabled                     = objc.RegisterName("setHTTPSEnabled:")
+	_nEProxySettingsSelHTTPSServer                         = objc.RegisterName("HTTPSServer")
+	_nEProxySettingsSelSetHTTPSServer                      = objc.RegisterName("setHTTPSServer:")
+	_nEProxySettingsSelExcludeSimpleHostnames              = objc.RegisterName("excludeSimpleHostnames")
+	_nEProxySettingsSelSetExcludeSimpleHostnames           = objc.RegisterName("setExcludeSimpleHostnames:")
+	_nEProxySettingsSelExceptionList                       = objc.RegisterName("exceptionList")
+	_nEProxySettingsSelSetExceptionList                    = objc.RegisterName("setExceptionList:")
+	_nEProxySettingsSelMatchDomains                        = objc.RegisterName("matchDomains")
+	_nEProxySettingsSelSetMatchDomains                     = objc.RegisterName("setMatchDomains:")
 )
 
 func NEProxySettingsFromID(id objc.ID) *NEProxySettings {
@@ -62,7 +62,9 @@ func (o *NEProxySettings) SetAutoProxyConfigurationEnabled(autoProxyConfiguratio
 // @property proxyAutoConfigurationURL @discussion A URL specifying where the PAC script is located.
 func (o *NEProxySettings) ProxyAutoConfigurationURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEProxySettingsSelProxyAutoConfigurationURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -73,7 +75,9 @@ func (o *NEProxySettings) SetProxyAutoConfigurationURL(proxyAutoConfigurationURL
 // @property proxyAutoConfigurationJavaScript @discussion A string containing the PAC JavaScript source code.
 func (o *NEProxySettings) ProxyAutoConfigurationJavaScript() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEProxySettingsSelProxyAutoConfigurationJavaScript)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -94,7 +98,9 @@ func (o *NEProxySettings) SetHTTPEnabled(hTTPEnabled bool) {
 // @property HTTPServer @discussion A NEProxyServer object containing the HTTP proxy server settings.
 func (o *NEProxySettings) HTTPServer() *NEProxyServer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEProxySettingsSelHTTPServer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEProxyServerFromID(_ret)
 }
 
@@ -115,7 +121,9 @@ func (o *NEProxySettings) SetHTTPSEnabled(hTTPSEnabled bool) {
 // @property HTTPSServer @discussion A NEProxyServer object containing the HTTPS proxy server settings.
 func (o *NEProxySettings) HTTPSServer() *NEProxyServer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEProxySettingsSelHTTPSServer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEProxyServerFromID(_ret)
 }
 
@@ -152,4 +160,3 @@ func (o *NEProxySettings) MatchDomains() *foundation.NSArray[*foundation.NSStrin
 func (o *NEProxySettings) SetMatchDomains(matchDomains *foundation.NSArray[*foundation.NSString]) {
 	o.Ptr().Send(_nEProxySettingsSelSetMatchDomains, matchDomains)
 }
-

@@ -16,16 +16,16 @@ type PKPaymentOrderDetails struct {
 }
 
 var (
-	_clsPKPaymentOrderDetails = _objcClass("PKPaymentOrderDetails")
+	_clsPKPaymentOrderDetails                                                                           = _objcClass("PKPaymentOrderDetails")
 	_pKPaymentOrderDetailsSelInitWithOrderTypeIdentifierOrderIdentifierWebServiceURLAuthenticationToken = objc.RegisterName("initWithOrderTypeIdentifier:orderIdentifier:webServiceURL:authenticationToken:")
-	_pKPaymentOrderDetailsSelOrderTypeIdentifier = objc.RegisterName("orderTypeIdentifier")
-	_pKPaymentOrderDetailsSelSetOrderTypeIdentifier = objc.RegisterName("setOrderTypeIdentifier:")
-	_pKPaymentOrderDetailsSelOrderIdentifier = objc.RegisterName("orderIdentifier")
-	_pKPaymentOrderDetailsSelSetOrderIdentifier = objc.RegisterName("setOrderIdentifier:")
-	_pKPaymentOrderDetailsSelWebServiceURL = objc.RegisterName("webServiceURL")
-	_pKPaymentOrderDetailsSelSetWebServiceURL = objc.RegisterName("setWebServiceURL:")
-	_pKPaymentOrderDetailsSelAuthenticationToken = objc.RegisterName("authenticationToken")
-	_pKPaymentOrderDetailsSelSetAuthenticationToken = objc.RegisterName("setAuthenticationToken:")
+	_pKPaymentOrderDetailsSelOrderTypeIdentifier                                                        = objc.RegisterName("orderTypeIdentifier")
+	_pKPaymentOrderDetailsSelSetOrderTypeIdentifier                                                     = objc.RegisterName("setOrderTypeIdentifier:")
+	_pKPaymentOrderDetailsSelOrderIdentifier                                                            = objc.RegisterName("orderIdentifier")
+	_pKPaymentOrderDetailsSelSetOrderIdentifier                                                         = objc.RegisterName("setOrderIdentifier:")
+	_pKPaymentOrderDetailsSelWebServiceURL                                                              = objc.RegisterName("webServiceURL")
+	_pKPaymentOrderDetailsSelSetWebServiceURL                                                           = objc.RegisterName("setWebServiceURL:")
+	_pKPaymentOrderDetailsSelAuthenticationToken                                                        = objc.RegisterName("authenticationToken")
+	_pKPaymentOrderDetailsSelSetAuthenticationToken                                                     = objc.RegisterName("setAuthenticationToken:")
 )
 
 func PKPaymentOrderDetailsFromID(id objc.ID) *PKPaymentOrderDetails {
@@ -40,13 +40,17 @@ func PKPaymentOrderDetailsFromID(id objc.ID) *PKPaymentOrderDetails {
 
 func (o *PKPaymentOrderDetails) InitWithOrderTypeIdentifierOrderIdentifierWebServiceURLAuthenticationToken(orderTypeIdentifier *foundation.NSString, orderIdentifier *foundation.NSString, webServiceURL *foundation.NSURL, authenticationToken *foundation.NSString) *PKPaymentOrderDetails {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentOrderDetailsSelInitWithOrderTypeIdentifierOrderIdentifierWebServiceURLAuthenticationToken, orderTypeIdentifier.Ptr(), orderIdentifier.Ptr(), webServiceURL.Ptr(), authenticationToken.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKPaymentOrderDetailsFromID(_ret)
 }
 
 func (o *PKPaymentOrderDetails) OrderTypeIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentOrderDetailsSelOrderTypeIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -56,7 +60,9 @@ func (o *PKPaymentOrderDetails) SetOrderTypeIdentifier(orderTypeIdentifier *foun
 
 func (o *PKPaymentOrderDetails) OrderIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentOrderDetailsSelOrderIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -66,7 +72,9 @@ func (o *PKPaymentOrderDetails) SetOrderIdentifier(orderIdentifier *foundation.N
 
 func (o *PKPaymentOrderDetails) WebServiceURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentOrderDetailsSelWebServiceURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -76,11 +84,12 @@ func (o *PKPaymentOrderDetails) SetWebServiceURL(webServiceURL *foundation.NSURL
 
 func (o *PKPaymentOrderDetails) AuthenticationToken() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentOrderDetailsSelAuthenticationToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKPaymentOrderDetails) SetAuthenticationToken(authenticationToken *foundation.NSString) {
 	o.Ptr().Send(_pKPaymentOrderDetailsSelSetAuthenticationToken, authenticationToken.Ptr())
 }
-

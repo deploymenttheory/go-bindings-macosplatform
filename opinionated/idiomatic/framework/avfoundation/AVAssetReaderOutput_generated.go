@@ -112,4 +112,3 @@ type AssetReaderOutputable interface {
 }
 
 var _ AssetReaderOutputable = (*AssetReaderOutput)(nil)
-

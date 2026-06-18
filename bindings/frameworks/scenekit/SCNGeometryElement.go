@@ -17,25 +17,25 @@ type SCNGeometryElement struct {
 }
 
 var (
-	_clsSCNGeometryElement = _objcClass("SCNGeometryElement")
-	_sCNGeometryElementSelGeometryElementWithDataPrimitiveTypePrimitiveCountBytesPerIndex = objc.RegisterName("geometryElementWithData:primitiveType:primitiveCount:bytesPerIndex:")
-	_sCNGeometryElementSelGeometryElementWithDataPrimitiveTypePrimitiveCountIndicesChannelCountInterleavedIndicesChannelsBytesPerIndex = objc.RegisterName("geometryElementWithData:primitiveType:primitiveCount:indicesChannelCount:interleavedIndicesChannels:bytesPerIndex:")
-	_sCNGeometryElementSelGeometryElementWithBufferPrimitiveTypePrimitiveCountBytesPerIndex = objc.RegisterName("geometryElementWithBuffer:primitiveType:primitiveCount:bytesPerIndex:")
+	_clsSCNGeometryElement                                                                                                               = _objcClass("SCNGeometryElement")
+	_sCNGeometryElementSelGeometryElementWithDataPrimitiveTypePrimitiveCountBytesPerIndex                                                = objc.RegisterName("geometryElementWithData:primitiveType:primitiveCount:bytesPerIndex:")
+	_sCNGeometryElementSelGeometryElementWithDataPrimitiveTypePrimitiveCountIndicesChannelCountInterleavedIndicesChannelsBytesPerIndex   = objc.RegisterName("geometryElementWithData:primitiveType:primitiveCount:indicesChannelCount:interleavedIndicesChannels:bytesPerIndex:")
+	_sCNGeometryElementSelGeometryElementWithBufferPrimitiveTypePrimitiveCountBytesPerIndex                                              = objc.RegisterName("geometryElementWithBuffer:primitiveType:primitiveCount:bytesPerIndex:")
 	_sCNGeometryElementSelGeometryElementWithBufferPrimitiveTypePrimitiveCountIndicesChannelCountInterleavedIndicesChannelsBytesPerIndex = objc.RegisterName("geometryElementWithBuffer:primitiveType:primitiveCount:indicesChannelCount:interleavedIndicesChannels:bytesPerIndex:")
-	_sCNGeometryElementSelData = objc.RegisterName("data")
-	_sCNGeometryElementSelPrimitiveType = objc.RegisterName("primitiveType")
-	_sCNGeometryElementSelPrimitiveCount = objc.RegisterName("primitiveCount")
-	_sCNGeometryElementSelHasInterleavedIndicesChannels = objc.RegisterName("hasInterleavedIndicesChannels")
-	_sCNGeometryElementSelIndicesChannelCount = objc.RegisterName("indicesChannelCount")
-	_sCNGeometryElementSelBytesPerIndex = objc.RegisterName("bytesPerIndex")
-	_sCNGeometryElementSelPrimitiveRange = objc.RegisterName("primitiveRange")
-	_sCNGeometryElementSelSetPrimitiveRange = objc.RegisterName("setPrimitiveRange:")
-	_sCNGeometryElementSelPointSize = objc.RegisterName("pointSize")
-	_sCNGeometryElementSelSetPointSize = objc.RegisterName("setPointSize:")
-	_sCNGeometryElementSelMinimumPointScreenSpaceRadius = objc.RegisterName("minimumPointScreenSpaceRadius")
-	_sCNGeometryElementSelSetMinimumPointScreenSpaceRadius = objc.RegisterName("setMinimumPointScreenSpaceRadius:")
-	_sCNGeometryElementSelMaximumPointScreenSpaceRadius = objc.RegisterName("maximumPointScreenSpaceRadius")
-	_sCNGeometryElementSelSetMaximumPointScreenSpaceRadius = objc.RegisterName("setMaximumPointScreenSpaceRadius:")
+	_sCNGeometryElementSelData                                                                                                           = objc.RegisterName("data")
+	_sCNGeometryElementSelPrimitiveType                                                                                                  = objc.RegisterName("primitiveType")
+	_sCNGeometryElementSelPrimitiveCount                                                                                                 = objc.RegisterName("primitiveCount")
+	_sCNGeometryElementSelHasInterleavedIndicesChannels                                                                                  = objc.RegisterName("hasInterleavedIndicesChannels")
+	_sCNGeometryElementSelIndicesChannelCount                                                                                            = objc.RegisterName("indicesChannelCount")
+	_sCNGeometryElementSelBytesPerIndex                                                                                                  = objc.RegisterName("bytesPerIndex")
+	_sCNGeometryElementSelPrimitiveRange                                                                                                 = objc.RegisterName("primitiveRange")
+	_sCNGeometryElementSelSetPrimitiveRange                                                                                              = objc.RegisterName("setPrimitiveRange:")
+	_sCNGeometryElementSelPointSize                                                                                                      = objc.RegisterName("pointSize")
+	_sCNGeometryElementSelSetPointSize                                                                                                   = objc.RegisterName("setPointSize:")
+	_sCNGeometryElementSelMinimumPointScreenSpaceRadius                                                                                  = objc.RegisterName("minimumPointScreenSpaceRadius")
+	_sCNGeometryElementSelSetMinimumPointScreenSpaceRadius                                                                               = objc.RegisterName("setMinimumPointScreenSpaceRadius:")
+	_sCNGeometryElementSelMaximumPointScreenSpaceRadius                                                                                  = objc.RegisterName("maximumPointScreenSpaceRadius")
+	_sCNGeometryElementSelSetMaximumPointScreenSpaceRadius                                                                               = objc.RegisterName("setMaximumPointScreenSpaceRadius:")
 )
 
 func SCNGeometryElementFromID(id objc.ID) *SCNGeometryElement {
@@ -51,34 +51,44 @@ func SCNGeometryElementFromID(id objc.ID) *SCNGeometryElement {
 // @method geometryElementWithData:primitiveType:primitiveCount:bytesPerIndex: @abstract Creates and returns a geometry element from the given data and data format info. @param data The data that contains element indices. You can pass nil to use an implicit vertex ordering (0,1,2,…). @param primitiveType The primitive type, as listed in the SCNGeometryPrimitiveType enumeration. @param primitiveCount The number of primitives in the data. @param bytesPerIndex The number of bytes that represent a single index value in the data.
 func SCNGeometryElementGeometryElementWithDataPrimitiveTypePrimitiveCountBytesPerIndex(data *foundation.NSData, primitiveType SCNGeometryPrimitiveType, primitiveCount int, bytesPerIndex int) *SCNGeometryElement {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNGeometryElement), _sCNGeometryElementSelGeometryElementWithDataPrimitiveTypePrimitiveCountBytesPerIndex, data.Ptr(), primitiveType, primitiveCount, bytesPerIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNGeometryElementFromID(_ret)
 }
 
 // @method geometryElementWithData:primitiveType:primitiveCount:indicesChannelCount:interleavedIndicesChannels:bytesPerIndex: @param data The data that contains element indices. You can pass nil to use an implicit vertex ordering (0,1,2,…). @param primitiveType The primitive type, as listed in the SCNGeometryPrimitiveType enumeration. @param primitiveCount The number of primitives in the data. @param indicesChannelCount The number of channels for the vertex indices. @param interleavedIndicesChannels Whether the channels are interleaved. @param bytesPerIndex The number of bytes that represent a single index value in the data.
 func SCNGeometryElementGeometryElementWithDataPrimitiveTypePrimitiveCountIndicesChannelCountInterleavedIndicesChannelsBytesPerIndex(data *foundation.NSData, primitiveType SCNGeometryPrimitiveType, primitiveCount int, indicesChannelCount int, interleavedIndicesChannels bool, bytesPerIndex int) *SCNGeometryElement {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNGeometryElement), _sCNGeometryElementSelGeometryElementWithDataPrimitiveTypePrimitiveCountIndicesChannelCountInterleavedIndicesChannelsBytesPerIndex, data.Ptr(), primitiveType, primitiveCount, indicesChannelCount, interleavedIndicesChannels, bytesPerIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNGeometryElementFromID(_ret)
 }
 
 // @method geometryElementWithBuffer:primitiveType:primitiveCount:bytesPerIndex: @abstract Creates and returns a geometry element from the given Metal buffer and parameters. @param buffer The buffer that contains element indices. @param primitiveType The primitive type, as listed in the SCNGeometryPrimitiveType enumeration. @param primitiveCount The number of primitives in the data. @param bytesPerIndex The number of bytes that represent a single index value in the data.
 func SCNGeometryElementGeometryElementWithBufferPrimitiveTypePrimitiveCountBytesPerIndex(buffer metal.MTLBuffer, primitiveType SCNGeometryPrimitiveType, primitiveCount int, bytesPerIndex int) *SCNGeometryElement {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNGeometryElement), _sCNGeometryElementSelGeometryElementWithBufferPrimitiveTypePrimitiveCountBytesPerIndex, buffer, primitiveType, primitiveCount, bytesPerIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNGeometryElementFromID(_ret)
 }
 
 func SCNGeometryElementGeometryElementWithBufferPrimitiveTypePrimitiveCountIndicesChannelCountInterleavedIndicesChannelsBytesPerIndex(buffer metal.MTLBuffer, primitiveType SCNGeometryPrimitiveType, primitiveCount int, indicesChannelCount int, interleavedIndicesChannels bool, bytesPerIndex int) *SCNGeometryElement {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNGeometryElement), _sCNGeometryElementSelGeometryElementWithBufferPrimitiveTypePrimitiveCountIndicesChannelCountInterleavedIndicesChannelsBytesPerIndex, buffer, primitiveType, primitiveCount, indicesChannelCount, interleavedIndicesChannels, bytesPerIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNGeometryElementFromID(_ret)
 }
 
 // @property data @abstract The data for the geometry element
 func (o *SCNGeometryElement) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNGeometryElementSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -151,4 +161,3 @@ func (o *SCNGeometryElement) MaximumPointScreenSpaceRadius() float64 {
 func (o *SCNGeometryElement) SetMaximumPointScreenSpaceRadius(maximumPointScreenSpaceRadius float64) {
 	o.Ptr().Send(_sCNGeometryElementSelSetMaximumPointScreenSpaceRadius, maximumPointScreenSpaceRadius)
 }
-

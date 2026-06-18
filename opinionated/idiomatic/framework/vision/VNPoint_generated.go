@@ -76,4 +76,3 @@ type Pointable interface {
 }
 
 var _ Pointable = (*Point)(nil)
-

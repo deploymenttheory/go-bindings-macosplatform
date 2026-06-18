@@ -31,14 +31,18 @@ var (
 // @abstract  Determines the Breathing Disturbances classification for the provided BD value. @param     value Breathing Disturbances quantity @return    A Breathing Disturbances classification if one can be created, otherwise nil.
 func HKAppleSleepingBreathingDisturbancesClassificationForQuantity(value *HKQuantity) *foundation.NSNumber {
 	_ret := _fnHKAppleSleepingBreathingDisturbancesClassificationForQuantity(value.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // @abstract  Retrieves the minimum quantity for a Breathing Disturbances classification. @param     classification Breathing Disturbances classification for desired minimum value.
 func HKAppleSleepingBreathingDisturbancesMinimumQuantityForClassification(classification HKAppleSleepingBreathingDisturbancesClassification) *HKQuantity {
 	_ret := _fnHKAppleSleepingBreathingDisturbancesMinimumQuantityForClassification(classification)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
@@ -50,14 +54,18 @@ func HKAppleWalkingSteadinessClassificationForQuantity(value *HKQuantity, classi
 // @abstract Retrieves the maximum quantity in percent unit for an Apple Walking Steadiness classification. @param classification Apple Walking Steadiness classification for desired maximum value.
 func HKAppleWalkingSteadinessMaximumQuantityForClassification(classification HKAppleWalkingSteadinessClassification) *HKQuantity {
 	_ret := _fnHKAppleWalkingSteadinessMaximumQuantityForClassification(classification)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
 // @abstract Retrieves the minimum quantity in percent unit for an Apple Walking Steadiness classification. @param classification Apple Walking Steadiness classification for desired minimum value.
 func HKAppleWalkingSteadinessMinimumQuantityForClassification(classification HKAppleWalkingSteadinessClassification) *HKQuantity {
 	_ret := _fnHKAppleWalkingSteadinessMinimumQuantityForClassification(classification)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
@@ -69,7 +77,8 @@ func HKCategoryValueSleepAnalysisAsleepValues() *foundation.NSSet[*foundation.NS
 // Returns the valence classification appropriate for a valence value. If the given valence is outside the supported range of values, this function returns @c nil.
 func HKStateOfMindValenceClassificationForValence(valence float64) *foundation.NSNumber {
 	_ret := _fnHKStateOfMindValenceClassificationForValence(valence)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
-

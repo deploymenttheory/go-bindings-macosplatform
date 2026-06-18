@@ -26,4 +26,3 @@ func PKPaymentInformationEventExtensionFromID(id objc.ID) *PKPaymentInformationE
 	purego.Track(o)
 	return o
 }
-

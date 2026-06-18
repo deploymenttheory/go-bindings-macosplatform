@@ -16,9 +16,9 @@ type INSendMessageAttachment struct {
 }
 
 var (
-	_clsINSendMessageAttachment = _objcClass("INSendMessageAttachment")
+	_clsINSendMessageAttachment                               = _objcClass("INSendMessageAttachment")
 	_iNSendMessageAttachmentSelAttachmentWithAudioMessageFile = objc.RegisterName("attachmentWithAudioMessageFile:")
-	_iNSendMessageAttachmentSelAudioMessageFile = objc.RegisterName("audioMessageFile")
+	_iNSendMessageAttachmentSelAudioMessageFile               = objc.RegisterName("audioMessageFile")
 )
 
 func INSendMessageAttachmentFromID(id objc.ID) *INSendMessageAttachment {
@@ -33,13 +33,16 @@ func INSendMessageAttachmentFromID(id objc.ID) *INSendMessageAttachment {
 
 func INSendMessageAttachmentAttachmentWithAudioMessageFile(audioMessageFile *INFile) *INSendMessageAttachment {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINSendMessageAttachment), _iNSendMessageAttachmentSelAttachmentWithAudioMessageFile, audioMessageFile.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INSendMessageAttachmentFromID(_ret)
 }
 
 func (o *INSendMessageAttachment) AudioMessageFile() *INFile {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNSendMessageAttachmentSelAudioMessageFile)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INFileFromID(_ret)
 }
-

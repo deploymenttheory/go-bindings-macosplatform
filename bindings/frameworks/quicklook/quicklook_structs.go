@@ -16,4 +16,3 @@ type QLThumbnail struct{}
 // C struct: __QLThumbnailRequest
 // QLThumbnailRequest is an opaque type.
 type QLThumbnailRequest struct{}
-

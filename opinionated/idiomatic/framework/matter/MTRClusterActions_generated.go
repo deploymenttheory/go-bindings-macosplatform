@@ -205,9 +205,13 @@ func (x *MTRClusterActions) DisableActionWithDurationWithParamsExpectedValuesExp
 	x.inner.DisableActionWithDurationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
 }
 
-func (x *MTRClusterActions) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterActions) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterActions) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterActions) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterActionsable is the interface implemented by [MTRClusterActions], for mocking and DI.
 type MTRClusterActionsable interface {
@@ -247,4 +251,3 @@ type MTRClusterActionsable interface {
 }
 
 var _ MTRClusterActionsable = (*MTRClusterActions)(nil)
-

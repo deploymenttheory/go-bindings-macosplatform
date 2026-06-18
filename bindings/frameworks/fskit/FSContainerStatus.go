@@ -12,7 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A type that represents a container's status. This type contains two properties: * The ``state`` value that indicates the state of the container, such as ``FSContainerState/ready`` or ``FSContainerState/blocked``. * The ``status`` is an error (optional in Swift, nullable in Objective-C) that provides further information about the state, such as why the container is blocked. Examples of statuses that require intervention include errors that indicate the container isn't ready (POSIX `EAGAIN` or `ENOTCONN`), the container needs authentication (`ENEEDAUTH`), or that authentication failed (`EAUTH`). The status can also be an informative error, such as the FSKit error ``FSError/Code/statusOperationInProgress``.
+// A type that represents a container's status. This type contains two properties: * The “state“ value that indicates the state of the container, such as “FSContainerState/ready“ or “FSContainerState/blocked“. * The “status“ is an error (optional in Swift, nullable in Objective-C) that provides further information about the state, such as why the container is blocked. Examples of statuses that require intervention include errors that indicate the container isn't ready (POSIX `EAGAIN` or `ENOTCONN`), the container needs authentication (`ENEEDAUTH`), or that authentication failed (`EAUTH`). The status can also be an informative error, such as the FSKit error “FSError/Code/statusOperationInProgress“.
 //
 // Apple documentation: https://developer.apple.com/documentation/fskit/fscontainerstatus
 type FSContainerStatus struct {
@@ -20,15 +20,15 @@ type FSContainerStatus struct {
 }
 
 var (
-	_clsFSContainerStatus = _objcClass("FSContainerStatus")
-	_fSContainerStatusSelActiveWithStatus = objc.RegisterName("activeWithStatus:")
-	_fSContainerStatusSelBlockedWithStatus = objc.RegisterName("blockedWithStatus:")
+	_clsFSContainerStatus                   = _objcClass("FSContainerStatus")
+	_fSContainerStatusSelActiveWithStatus   = objc.RegisterName("activeWithStatus:")
+	_fSContainerStatusSelBlockedWithStatus  = objc.RegisterName("blockedWithStatus:")
 	_fSContainerStatusSelNotReadyWithStatus = objc.RegisterName("notReadyWithStatus:")
-	_fSContainerStatusSelReadyWithStatus = objc.RegisterName("readyWithStatus:")
-	_fSContainerStatusSelState = objc.RegisterName("state")
-	_fSContainerStatusSelStatus = objc.RegisterName("status")
-	_fSContainerStatusSelActive = objc.RegisterName("active")
-	_fSContainerStatusSelReady = objc.RegisterName("ready")
+	_fSContainerStatusSelReadyWithStatus    = objc.RegisterName("readyWithStatus:")
+	_fSContainerStatusSelState              = objc.RegisterName("state")
+	_fSContainerStatusSelStatus             = objc.RegisterName("status")
+	_fSContainerStatusSelActive             = objc.RegisterName("active")
+	_fSContainerStatusSelReady              = objc.RegisterName("ready")
 )
 
 func FSContainerStatusFromID(id objc.ID) *FSContainerStatus {
@@ -44,28 +44,36 @@ func FSContainerStatusFromID(id objc.ID) *FSContainerStatus {
 // Returns a active container status instance with the provided error status. - Parameter errorStatus: The error status, if any, for the new instance.
 func FSContainerStatusActiveWithStatus(errorStatus unsafe.Pointer) *FSContainerStatus {
 	_ret := objc.Send[objc.ID](objc.ID(_clsFSContainerStatus), _fSContainerStatusSelActiveWithStatus, errorStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return FSContainerStatusFromID(_ret)
 }
 
 // Returns a blocked container status instance with the provided error status. - Parameter errorStatus: The error status, if any, for the new instance.
 func FSContainerStatusBlockedWithStatus(errorStatus unsafe.Pointer) *FSContainerStatus {
 	_ret := objc.Send[objc.ID](objc.ID(_clsFSContainerStatus), _fSContainerStatusSelBlockedWithStatus, errorStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return FSContainerStatusFromID(_ret)
 }
 
 // Returns a not-ready container status instance with the provided error status. - Parameter errorStatus: The error status, if any, for the new instance.
 func FSContainerStatusNotReadyWithStatus(errorStatus unsafe.Pointer) *FSContainerStatus {
 	_ret := objc.Send[objc.ID](objc.ID(_clsFSContainerStatus), _fSContainerStatusSelNotReadyWithStatus, errorStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return FSContainerStatusFromID(_ret)
 }
 
 // Returns a ready container status instance with the provided error status. - Parameter errorStatus: The error status, if any, for the new instance.
 func FSContainerStatusReadyWithStatus(errorStatus unsafe.Pointer) *FSContainerStatus {
 	_ret := objc.Send[objc.ID](objc.ID(_clsFSContainerStatus), _fSContainerStatusSelReadyWithStatus, errorStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return FSContainerStatusFromID(_ret)
 }
 
@@ -81,17 +89,20 @@ func (o *FSContainerStatus) Status() unsafe.Pointer {
 	return _ret
 }
 
-// A status that represents an active container with no error. This value is a ``FSContainerStatus`` with a ``state`` that is ``active``, and has a ``status`` that is `nil`.
+// A status that represents an active container with no error. This value is a “FSContainerStatus“ with a “state“ that is “active“, and has a “status“ that is `nil`.
 func FSContainerStatusActive() *FSContainerStatus {
 	_ret := objc.Send[objc.ID](objc.ID(_clsFSContainerStatus), _fSContainerStatusSelActive)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return FSContainerStatusFromID(_ret)
 }
 
-// A status that represents a ready container with no error. This value is a ``FSContainerStatus`` with a ``state`` that is ``ready``, and a ``status`` that is `nil`.
+// A status that represents a ready container with no error. This value is a “FSContainerStatus“ with a “state“ that is “ready“, and a “status“ that is `nil`.
 func FSContainerStatusReady() *FSContainerStatus {
 	_ret := objc.Send[objc.ID](objc.ID(_clsFSContainerStatus), _fSContainerStatusSelReady)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return FSContainerStatusFromID(_ret)
 }
-

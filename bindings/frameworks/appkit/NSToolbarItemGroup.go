@@ -16,19 +16,19 @@ type NSToolbarItemGroup struct {
 }
 
 var (
-	_clsNSToolbarItemGroup = _objcClass("NSToolbarItemGroup")
+	_clsNSToolbarItemGroup                                                             = _objcClass("NSToolbarItemGroup")
 	_nSToolbarItemGroupSelGroupWithItemIdentifierTitlesSelectionModeLabelsTargetAction = objc.RegisterName("groupWithItemIdentifier:titles:selectionMode:labels:target:action:")
 	_nSToolbarItemGroupSelGroupWithItemIdentifierImagesSelectionModeLabelsTargetAction = objc.RegisterName("groupWithItemIdentifier:images:selectionMode:labels:target:action:")
-	_nSToolbarItemGroupSelSetSelectedAtIndex = objc.RegisterName("setSelected:atIndex:")
-	_nSToolbarItemGroupSelIsSelectedAtIndex = objc.RegisterName("isSelectedAtIndex:")
-	_nSToolbarItemGroupSelSubitems = objc.RegisterName("subitems")
-	_nSToolbarItemGroupSelSetSubitems = objc.RegisterName("setSubitems:")
-	_nSToolbarItemGroupSelControlRepresentation = objc.RegisterName("controlRepresentation")
-	_nSToolbarItemGroupSelSetControlRepresentation = objc.RegisterName("setControlRepresentation:")
-	_nSToolbarItemGroupSelSelectionMode = objc.RegisterName("selectionMode")
-	_nSToolbarItemGroupSelSetSelectionMode = objc.RegisterName("setSelectionMode:")
-	_nSToolbarItemGroupSelSelectedIndex = objc.RegisterName("selectedIndex")
-	_nSToolbarItemGroupSelSetSelectedIndex = objc.RegisterName("setSelectedIndex:")
+	_nSToolbarItemGroupSelSetSelectedAtIndex                                           = objc.RegisterName("setSelected:atIndex:")
+	_nSToolbarItemGroupSelIsSelectedAtIndex                                            = objc.RegisterName("isSelectedAtIndex:")
+	_nSToolbarItemGroupSelSubitems                                                     = objc.RegisterName("subitems")
+	_nSToolbarItemGroupSelSetSubitems                                                  = objc.RegisterName("setSubitems:")
+	_nSToolbarItemGroupSelControlRepresentation                                        = objc.RegisterName("controlRepresentation")
+	_nSToolbarItemGroupSelSetControlRepresentation                                     = objc.RegisterName("setControlRepresentation:")
+	_nSToolbarItemGroupSelSelectionMode                                                = objc.RegisterName("selectionMode")
+	_nSToolbarItemGroupSelSetSelectionMode                                             = objc.RegisterName("setSelectionMode:")
+	_nSToolbarItemGroupSelSelectedIndex                                                = objc.RegisterName("selectedIndex")
+	_nSToolbarItemGroupSelSetSelectedIndex                                             = objc.RegisterName("setSelectedIndex:")
 )
 
 func NSToolbarItemGroupFromID(id objc.ID) *NSToolbarItemGroup {
@@ -44,13 +44,17 @@ func NSToolbarItemGroupFromID(id objc.ID) *NSToolbarItemGroup {
 // Convenience constructors for creating segmented control based toolbar items with images or text. The item returned will have a custom view for representing the control and automatically create subitems for the group. The labels array, if not nil, will be used to provide individual labels under the item for each segment of the control. When space in the toolbar is tight, the control may switch to a smaller alternate representation as necessary to remain in the toolbar.
 func NSToolbarItemGroupGroupWithItemIdentifierTitlesSelectionModeLabelsTargetAction(itemIdentifier *foundation.NSString, titles *foundation.NSArray[*foundation.NSString], selectionMode NSToolbarItemGroupSelectionMode, labels *foundation.NSArray[*foundation.NSString], target objc.ID, action objc.SEL) *NSToolbarItemGroup {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSToolbarItemGroup), _nSToolbarItemGroupSelGroupWithItemIdentifierTitlesSelectionModeLabelsTargetAction, itemIdentifier.Ptr(), titles, selectionMode, labels, target, action)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSToolbarItemGroupFromID(_ret)
 }
 
 func NSToolbarItemGroupGroupWithItemIdentifierImagesSelectionModeLabelsTargetAction(itemIdentifier *foundation.NSString, images *foundation.NSArray[*NSImage], selectionMode NSToolbarItemGroupSelectionMode, labels *foundation.NSArray[*foundation.NSString], target objc.ID, action objc.SEL) *NSToolbarItemGroup {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSToolbarItemGroup), _nSToolbarItemGroupSelGroupWithItemIdentifierImagesSelectionModeLabelsTargetAction, itemIdentifier.Ptr(), images.Ptr(), selectionMode, labels, target, action)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSToolbarItemGroupFromID(_ret)
 }
 
@@ -67,7 +71,9 @@ func (o *NSToolbarItemGroup) IsSelectedAtIndex(index int) bool {
 // Set or get the array of subitems for the toolbar item. By default, a `NSToolbarItemGroup` has an empty array of subitems. You should call this to set the subitems before returning the item to the toolbar. `NSToolbarItemGroups` may not contain other `NSToolbarItemGroups` as subitems.
 func (o *NSToolbarItemGroup) Subitems() *foundation.NSArray[*NSToolbarItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemGroupSelSubitems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSToolbarItem](_ret)
 }
 
@@ -104,4 +110,3 @@ func (o *NSToolbarItemGroup) SelectedIndex() int {
 func (o *NSToolbarItemGroup) SetSelectedIndex(selectedIndex int) {
 	o.Ptr().Send(_nSToolbarItemGroupSelSetSelectedIndex, selectedIndex)
 }
-

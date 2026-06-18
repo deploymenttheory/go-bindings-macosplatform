@@ -18,21 +18,21 @@ type MPSMatrixSum struct {
 }
 
 var (
-	_clsMPSMatrixSum = _objcClass("MPSMatrixSum")
-	_mPSMatrixSumSelInitWithDeviceCountRowsColumnsTranspose = objc.RegisterName("initWithDevice:count:rows:columns:transpose:")
-	_mPSMatrixSumSelSetNeuronTypeParameterAParameterBParameterC = objc.RegisterName("setNeuronType:parameterA:parameterB:parameterC:")
-	_mPSMatrixSumSelNeuronType = objc.RegisterName("neuronType")
+	_clsMPSMatrixSum                                                                                           = _objcClass("MPSMatrixSum")
+	_mPSMatrixSumSelInitWithDeviceCountRowsColumnsTranspose                                                    = objc.RegisterName("initWithDevice:count:rows:columns:transpose:")
+	_mPSMatrixSumSelSetNeuronTypeParameterAParameterBParameterC                                                = objc.RegisterName("setNeuronType:parameterA:parameterB:parameterC:")
+	_mPSMatrixSumSelNeuronType                                                                                 = objc.RegisterName("neuronType")
 	_mPSMatrixSumSelEncodeToCommandBufferSourceMatricesResultMatrixScaleVectorOffsetVectorBiasVectorStartIndex = objc.RegisterName("encodeToCommandBuffer:sourceMatrices:resultMatrix:scaleVector:offsetVector:biasVector:startIndex:")
-	_mPSMatrixSumSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSMatrixSumSelRows = objc.RegisterName("rows")
-	_mPSMatrixSumSelColumns = objc.RegisterName("columns")
-	_mPSMatrixSumSelCount = objc.RegisterName("count")
-	_mPSMatrixSumSelTranspose = objc.RegisterName("transpose")
-	_mPSMatrixSumSelResultMatrixOrigin = objc.RegisterName("resultMatrixOrigin")
-	_mPSMatrixSumSelSetResultMatrixOrigin = objc.RegisterName("setResultMatrixOrigin:")
-	_mPSMatrixSumSelNeuronParameterA = objc.RegisterName("neuronParameterA")
-	_mPSMatrixSumSelNeuronParameterB = objc.RegisterName("neuronParameterB")
-	_mPSMatrixSumSelNeuronParameterC = objc.RegisterName("neuronParameterC")
+	_mPSMatrixSumSelInitWithCoderDevice                                                                        = objc.RegisterName("initWithCoder:device:")
+	_mPSMatrixSumSelRows                                                                                       = objc.RegisterName("rows")
+	_mPSMatrixSumSelColumns                                                                                    = objc.RegisterName("columns")
+	_mPSMatrixSumSelCount                                                                                      = objc.RegisterName("count")
+	_mPSMatrixSumSelTranspose                                                                                  = objc.RegisterName("transpose")
+	_mPSMatrixSumSelResultMatrixOrigin                                                                         = objc.RegisterName("resultMatrixOrigin")
+	_mPSMatrixSumSelSetResultMatrixOrigin                                                                      = objc.RegisterName("setResultMatrixOrigin:")
+	_mPSMatrixSumSelNeuronParameterA                                                                           = objc.RegisterName("neuronParameterA")
+	_mPSMatrixSumSelNeuronParameterB                                                                           = objc.RegisterName("neuronParameterB")
+	_mPSMatrixSumSelNeuronParameterC                                                                           = objc.RegisterName("neuronParameterC")
 )
 
 func MPSMatrixSumFromID(id objc.ID) *MPSMatrixSum {
@@ -48,7 +48,9 @@ func MPSMatrixSumFromID(id objc.ID) *MPSMatrixSum {
 // @abstract   Initialize a MPSMatrixSum kernel. @param      device                      The device on which to initialize the kernel. @param      count                       The number of matrices to be summed. @param      rows                        The number of rows to use in the input matrices. @param      columns                     The number of columns to use in the input matrices. @param      transpose                   If YES the result of the summation is to be transposed prior to applying the bias and activation.
 func (o *MPSMatrixSum) InitWithDeviceCountRowsColumnsTranspose(device metal.MTLDevice, count uint, rows uint, columns uint, transpose bool) *MPSMatrixSum {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixSumSelInitWithDeviceCountRowsColumnsTranspose, device, count, rows, columns, transpose)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixSumFromID(_ret)
 }
 
@@ -71,7 +73,9 @@ func (o *MPSMatrixSum) EncodeToCommandBufferSourceMatricesResultMatrixScaleVecto
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSMatrixSum kernel. @param      device      The MTLDevice on which to make the MPSMatrixSum object. @return     A new MPSMatrixSum object, or nil if failure.
 func (o *MPSMatrixSum) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSMatrixSum {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixSumSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixSumFromID(_ret)
 }
 
@@ -126,4 +130,3 @@ func (o *MPSMatrixSum) NeuronParameterC() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _mPSMatrixSumSelNeuronParameterC)
 	return _ret
 }
-

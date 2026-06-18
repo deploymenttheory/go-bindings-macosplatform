@@ -19,23 +19,23 @@ type SFChooseIdentityPanel struct {
 }
 
 var (
-	_clsSFChooseIdentityPanel = _objcClass("SFChooseIdentityPanel")
-	_sFChooseIdentityPanelSelSharedChooseIdentityPanel = objc.RegisterName("sharedChooseIdentityPanel")
-	_sFChooseIdentityPanelSelRunModalForIdentitiesMessage = objc.RegisterName("runModalForIdentities:message:")
+	_clsSFChooseIdentityPanel                                                                           = _objcClass("SFChooseIdentityPanel")
+	_sFChooseIdentityPanelSelSharedChooseIdentityPanel                                                  = objc.RegisterName("sharedChooseIdentityPanel")
+	_sFChooseIdentityPanelSelRunModalForIdentitiesMessage                                               = objc.RegisterName("runModalForIdentities:message:")
 	_sFChooseIdentityPanelSelBeginSheetForWindowModalDelegateDidEndSelectorContextInfoIdentitiesMessage = objc.RegisterName("beginSheetForWindow:modalDelegate:didEndSelector:contextInfo:identities:message:")
-	_sFChooseIdentityPanelSelIdentity = objc.RegisterName("identity")
-	_sFChooseIdentityPanelSelSetPolicies = objc.RegisterName("setPolicies:")
-	_sFChooseIdentityPanelSelPolicies = objc.RegisterName("policies")
-	_sFChooseIdentityPanelSelSetDefaultButtonTitle = objc.RegisterName("setDefaultButtonTitle:")
-	_sFChooseIdentityPanelSelSetAlternateButtonTitle = objc.RegisterName("setAlternateButtonTitle:")
-	_sFChooseIdentityPanelSelSetShowsHelp = objc.RegisterName("setShowsHelp:")
-	_sFChooseIdentityPanelSelShowsHelp = objc.RegisterName("showsHelp")
-	_sFChooseIdentityPanelSelSetHelpAnchor = objc.RegisterName("setHelpAnchor:")
-	_sFChooseIdentityPanelSelHelpAnchor = objc.RegisterName("helpAnchor")
-	_sFChooseIdentityPanelSelSetInformativeText = objc.RegisterName("setInformativeText:")
-	_sFChooseIdentityPanelSelInformativeText = objc.RegisterName("informativeText")
-	_sFChooseIdentityPanelSelSetDomain = objc.RegisterName("setDomain:")
-	_sFChooseIdentityPanelSelDomain = objc.RegisterName("domain")
+	_sFChooseIdentityPanelSelIdentity                                                                   = objc.RegisterName("identity")
+	_sFChooseIdentityPanelSelSetPolicies                                                                = objc.RegisterName("setPolicies:")
+	_sFChooseIdentityPanelSelPolicies                                                                   = objc.RegisterName("policies")
+	_sFChooseIdentityPanelSelSetDefaultButtonTitle                                                      = objc.RegisterName("setDefaultButtonTitle:")
+	_sFChooseIdentityPanelSelSetAlternateButtonTitle                                                    = objc.RegisterName("setAlternateButtonTitle:")
+	_sFChooseIdentityPanelSelSetShowsHelp                                                               = objc.RegisterName("setShowsHelp:")
+	_sFChooseIdentityPanelSelShowsHelp                                                                  = objc.RegisterName("showsHelp")
+	_sFChooseIdentityPanelSelSetHelpAnchor                                                              = objc.RegisterName("setHelpAnchor:")
+	_sFChooseIdentityPanelSelHelpAnchor                                                                 = objc.RegisterName("helpAnchor")
+	_sFChooseIdentityPanelSelSetInformativeText                                                         = objc.RegisterName("setInformativeText:")
+	_sFChooseIdentityPanelSelInformativeText                                                            = objc.RegisterName("informativeText")
+	_sFChooseIdentityPanelSelSetDomain                                                                  = objc.RegisterName("setDomain:")
+	_sFChooseIdentityPanelSelDomain                                                                     = objc.RegisterName("domain")
 )
 
 func SFChooseIdentityPanelFromID(id objc.ID) *SFChooseIdentityPanel {
@@ -51,7 +51,9 @@ func SFChooseIdentityPanelFromID(id objc.ID) *SFChooseIdentityPanel {
 // @method sharedChooseIdentityPanel @abstract Returns a shared instance of SFChooseIdentityPanel. @discussion If your application can display multiple SFChooseIdentityPanels at once, you should allocate (alloc) and initialize (init) separate object instances instead of using this class method.
 func SFChooseIdentityPanelSharedChooseIdentityPanel() *SFChooseIdentityPanel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSFChooseIdentityPanel), _sFChooseIdentityPanelSelSharedChooseIdentityPanel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SFChooseIdentityPanelFromID(_ret)
 }
 
@@ -108,7 +110,9 @@ func (o *SFChooseIdentityPanel) SetHelpAnchor(anchor *foundation.NSString) {
 
 func (o *SFChooseIdentityPanel) HelpAnchor() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFChooseIdentityPanelSelHelpAnchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -120,7 +124,9 @@ func (o *SFChooseIdentityPanel) SetInformativeText(informativeText *foundation.N
 // @method informativeText @abstract Returns the informative text currently displayed in the SFChooseIdentityPanel.
 func (o *SFChooseIdentityPanel) InformativeText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFChooseIdentityPanelSelInformativeText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -132,7 +138,8 @@ func (o *SFChooseIdentityPanel) SetDomain(domainString *foundation.NSString) {
 // @method domain @abstract Returns the domain which will be associated with the chosen identity.
 func (o *SFChooseIdentityPanel) Domain() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFChooseIdentityPanelSelDomain)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

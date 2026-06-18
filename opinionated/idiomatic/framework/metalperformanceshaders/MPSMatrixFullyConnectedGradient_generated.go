@@ -173,9 +173,13 @@ func (x *MatrixFullyConnectedGradient) SetAlpha(alpha float64) {
 	x.inner.SetAlpha(alpha)
 }
 
-func (x *MatrixFullyConnectedGradient) asMatrixBinaryKernel() *mpsmatrix.MPSMatrixBinaryKernel { return &x.inner.MPSMatrixBinaryKernel }
+func (x *MatrixFullyConnectedGradient) asMatrixBinaryKernel() *mpsmatrix.MPSMatrixBinaryKernel {
+	return &x.inner.MPSMatrixBinaryKernel
+}
 
-func (x *MatrixFullyConnectedGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSMatrixBinaryKernel.MPSKernel }
+func (x *MatrixFullyConnectedGradient) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSMatrixBinaryKernel.MPSKernel
+}
 
 // MatrixFullyConnectedGradientable is the interface implemented by [MatrixFullyConnectedGradient], for mocking and DI.
 type MatrixFullyConnectedGradientable interface {
@@ -205,4 +209,3 @@ type MatrixFullyConnectedGradientable interface {
 }
 
 var _ MatrixFullyConnectedGradientable = (*MatrixFullyConnectedGradient)(nil)
-

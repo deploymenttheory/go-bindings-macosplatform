@@ -45,4 +45,3 @@ type SimpleTLVRecordable interface {
 }
 
 var _ SimpleTLVRecordable = (*SimpleTLVRecord)(nil)
-

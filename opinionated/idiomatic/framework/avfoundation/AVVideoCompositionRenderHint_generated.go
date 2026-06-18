@@ -54,4 +54,3 @@ type VideoCompositionRenderHintable interface {
 }
 
 var _ VideoCompositionRenderHintable = (*VideoCompositionRenderHint)(nil)
-

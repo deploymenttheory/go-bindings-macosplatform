@@ -16,21 +16,21 @@ type DOMHTMLScriptElement struct {
 }
 
 var (
-	_clsDOMHTMLScriptElement = _objcClass("DOMHTMLScriptElement")
-	_dOMHTMLScriptElementSelText = objc.RegisterName("text")
-	_dOMHTMLScriptElementSelSetText = objc.RegisterName("setText:")
-	_dOMHTMLScriptElementSelHtmlFor = objc.RegisterName("htmlFor")
+	_clsDOMHTMLScriptElement           = _objcClass("DOMHTMLScriptElement")
+	_dOMHTMLScriptElementSelText       = objc.RegisterName("text")
+	_dOMHTMLScriptElementSelSetText    = objc.RegisterName("setText:")
+	_dOMHTMLScriptElementSelHtmlFor    = objc.RegisterName("htmlFor")
 	_dOMHTMLScriptElementSelSetHtmlFor = objc.RegisterName("setHtmlFor:")
-	_dOMHTMLScriptElementSelEvent = objc.RegisterName("event")
-	_dOMHTMLScriptElementSelSetEvent = objc.RegisterName("setEvent:")
-	_dOMHTMLScriptElementSelCharset = objc.RegisterName("charset")
+	_dOMHTMLScriptElementSelEvent      = objc.RegisterName("event")
+	_dOMHTMLScriptElementSelSetEvent   = objc.RegisterName("setEvent:")
+	_dOMHTMLScriptElementSelCharset    = objc.RegisterName("charset")
 	_dOMHTMLScriptElementSelSetCharset = objc.RegisterName("setCharset:")
-	_dOMHTMLScriptElementSelDefer = objc.RegisterName("defer")
-	_dOMHTMLScriptElementSelSetDefer = objc.RegisterName("setDefer:")
-	_dOMHTMLScriptElementSelSrc = objc.RegisterName("src")
-	_dOMHTMLScriptElementSelSetSrc = objc.RegisterName("setSrc:")
-	_dOMHTMLScriptElementSelType = objc.RegisterName("type")
-	_dOMHTMLScriptElementSelSetType = objc.RegisterName("setType:")
+	_dOMHTMLScriptElementSelDefer      = objc.RegisterName("defer")
+	_dOMHTMLScriptElementSelSetDefer   = objc.RegisterName("setDefer:")
+	_dOMHTMLScriptElementSelSrc        = objc.RegisterName("src")
+	_dOMHTMLScriptElementSelSetSrc     = objc.RegisterName("setSrc:")
+	_dOMHTMLScriptElementSelType       = objc.RegisterName("type")
+	_dOMHTMLScriptElementSelSetType    = objc.RegisterName("setType:")
 )
 
 func DOMHTMLScriptElementFromID(id objc.ID) *DOMHTMLScriptElement {
@@ -45,7 +45,9 @@ func DOMHTMLScriptElementFromID(id objc.ID) *DOMHTMLScriptElement {
 
 func (o *DOMHTMLScriptElement) Text() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLScriptElementSelText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -55,7 +57,9 @@ func (o *DOMHTMLScriptElement) SetText(text *foundation.NSString) {
 
 func (o *DOMHTMLScriptElement) HtmlFor() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLScriptElementSelHtmlFor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -65,7 +69,9 @@ func (o *DOMHTMLScriptElement) SetHtmlFor(htmlFor *foundation.NSString) {
 
 func (o *DOMHTMLScriptElement) Event() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLScriptElementSelEvent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -75,7 +81,9 @@ func (o *DOMHTMLScriptElement) SetEvent(event *foundation.NSString) {
 
 func (o *DOMHTMLScriptElement) Charset() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLScriptElementSelCharset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -94,7 +102,9 @@ func (o *DOMHTMLScriptElement) SetDefer(defer_ bool) {
 
 func (o *DOMHTMLScriptElement) Src() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLScriptElementSelSrc)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -104,11 +114,12 @@ func (o *DOMHTMLScriptElement) SetSrc(src *foundation.NSString) {
 
 func (o *DOMHTMLScriptElement) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLScriptElementSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLScriptElement) SetType(type_ *foundation.NSString) {
 	o.Ptr().Send(_dOMHTMLScriptElementSelSetType, type_.Ptr())
 }
-

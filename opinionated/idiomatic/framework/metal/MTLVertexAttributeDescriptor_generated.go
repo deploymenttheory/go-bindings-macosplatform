@@ -98,4 +98,3 @@ type VertexAttributeDescriptorable interface {
 }
 
 var _ VertexAttributeDescriptorable = (*VertexAttributeDescriptor)(nil)
-

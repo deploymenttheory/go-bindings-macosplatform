@@ -41,4 +41,3 @@ type Extensionable interface {
 }
 
 var _ Extensionable = (*Extension)(nil)
-

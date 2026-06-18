@@ -173,7 +173,9 @@ func (x *OutlineView) WithSortDescriptors(items ...*foundation.NSSortDescriptor)
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSSortDescriptor](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -423,7 +425,9 @@ func (x *OutlineView) WithSubviews(items ...ViewProvider) *OutlineView {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asView().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSView](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -565,7 +569,9 @@ func (x *OutlineView) WithBackgroundFilters(items ...*coreimage.CIFilter) *Outli
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -587,7 +593,9 @@ func (x *OutlineView) WithContentFilters(items ...*coreimage.CIFilter) *OutlineV
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -651,7 +659,9 @@ func (x *OutlineView) WithGestureRecognizers(items ...GestureRecognizerProvider)
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -930,7 +940,9 @@ func (x *OutlineView) asControl() *raw.NSControl { return &x.inner.NSTableView.N
 
 func (x *OutlineView) asView() *raw.NSView { return &x.inner.NSTableView.NSControl.NSView }
 
-func (x *OutlineView) asResponder() *raw.NSResponder { return &x.inner.NSTableView.NSControl.NSView.NSResponder }
+func (x *OutlineView) asResponder() *raw.NSResponder {
+	return &x.inner.NSTableView.NSControl.NSView.NSResponder
+}
 
 // OutlineViewable is the interface implemented by [OutlineView], for mocking and DI.
 type OutlineViewable interface {
@@ -1082,4 +1094,3 @@ type OutlineViewable interface {
 }
 
 var _ OutlineViewable = (*OutlineView)(nil)
-

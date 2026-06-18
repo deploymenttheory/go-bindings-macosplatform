@@ -87,4 +87,3 @@ type NEIPv4Routeable interface {
 }
 
 var _ NEIPv4Routeable = (*NEIPv4Route)(nil)
-

@@ -47,4 +47,3 @@ type SafariExtensionViewControllerable interface {
 }
 
 var _ SafariExtensionViewControllerable = (*SafariExtensionViewController)(nil)
-

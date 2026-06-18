@@ -16,26 +16,26 @@ type MLCYOLOLossDescriptor struct {
 }
 
 var (
-	_clsMLCYOLOLossDescriptor = _objcClass("MLCYOLOLossDescriptor")
+	_clsMLCYOLOLossDescriptor                                        = _objcClass("MLCYOLOLossDescriptor")
 	_mLCYOLOLossDescriptorSelDescriptorWithAnchorBoxesAnchorBoxCount = objc.RegisterName("descriptorWithAnchorBoxes:anchorBoxCount:")
-	_mLCYOLOLossDescriptorSelAnchorBoxCount = objc.RegisterName("anchorBoxCount")
-	_mLCYOLOLossDescriptorSelAnchorBoxes = objc.RegisterName("anchorBoxes")
-	_mLCYOLOLossDescriptorSelShouldRescore = objc.RegisterName("shouldRescore")
-	_mLCYOLOLossDescriptorSelSetShouldRescore = objc.RegisterName("setShouldRescore:")
-	_mLCYOLOLossDescriptorSelScaleSpatialPositionLoss = objc.RegisterName("scaleSpatialPositionLoss")
-	_mLCYOLOLossDescriptorSelSetScaleSpatialPositionLoss = objc.RegisterName("setScaleSpatialPositionLoss:")
-	_mLCYOLOLossDescriptorSelScaleSpatialSizeLoss = objc.RegisterName("scaleSpatialSizeLoss")
-	_mLCYOLOLossDescriptorSelSetScaleSpatialSizeLoss = objc.RegisterName("setScaleSpatialSizeLoss:")
-	_mLCYOLOLossDescriptorSelScaleNoObjectConfidenceLoss = objc.RegisterName("scaleNoObjectConfidenceLoss")
-	_mLCYOLOLossDescriptorSelSetScaleNoObjectConfidenceLoss = objc.RegisterName("setScaleNoObjectConfidenceLoss:")
-	_mLCYOLOLossDescriptorSelScaleObjectConfidenceLoss = objc.RegisterName("scaleObjectConfidenceLoss")
-	_mLCYOLOLossDescriptorSelSetScaleObjectConfidenceLoss = objc.RegisterName("setScaleObjectConfidenceLoss:")
-	_mLCYOLOLossDescriptorSelScaleClassLoss = objc.RegisterName("scaleClassLoss")
-	_mLCYOLOLossDescriptorSelSetScaleClassLoss = objc.RegisterName("setScaleClassLoss:")
-	_mLCYOLOLossDescriptorSelMinimumIOUForObjectPresence = objc.RegisterName("minimumIOUForObjectPresence")
-	_mLCYOLOLossDescriptorSelSetMinimumIOUForObjectPresence = objc.RegisterName("setMinimumIOUForObjectPresence:")
-	_mLCYOLOLossDescriptorSelMaximumIOUForObjectAbsence = objc.RegisterName("maximumIOUForObjectAbsence")
-	_mLCYOLOLossDescriptorSelSetMaximumIOUForObjectAbsence = objc.RegisterName("setMaximumIOUForObjectAbsence:")
+	_mLCYOLOLossDescriptorSelAnchorBoxCount                          = objc.RegisterName("anchorBoxCount")
+	_mLCYOLOLossDescriptorSelAnchorBoxes                             = objc.RegisterName("anchorBoxes")
+	_mLCYOLOLossDescriptorSelShouldRescore                           = objc.RegisterName("shouldRescore")
+	_mLCYOLOLossDescriptorSelSetShouldRescore                        = objc.RegisterName("setShouldRescore:")
+	_mLCYOLOLossDescriptorSelScaleSpatialPositionLoss                = objc.RegisterName("scaleSpatialPositionLoss")
+	_mLCYOLOLossDescriptorSelSetScaleSpatialPositionLoss             = objc.RegisterName("setScaleSpatialPositionLoss:")
+	_mLCYOLOLossDescriptorSelScaleSpatialSizeLoss                    = objc.RegisterName("scaleSpatialSizeLoss")
+	_mLCYOLOLossDescriptorSelSetScaleSpatialSizeLoss                 = objc.RegisterName("setScaleSpatialSizeLoss:")
+	_mLCYOLOLossDescriptorSelScaleNoObjectConfidenceLoss             = objc.RegisterName("scaleNoObjectConfidenceLoss")
+	_mLCYOLOLossDescriptorSelSetScaleNoObjectConfidenceLoss          = objc.RegisterName("setScaleNoObjectConfidenceLoss:")
+	_mLCYOLOLossDescriptorSelScaleObjectConfidenceLoss               = objc.RegisterName("scaleObjectConfidenceLoss")
+	_mLCYOLOLossDescriptorSelSetScaleObjectConfidenceLoss            = objc.RegisterName("setScaleObjectConfidenceLoss:")
+	_mLCYOLOLossDescriptorSelScaleClassLoss                          = objc.RegisterName("scaleClassLoss")
+	_mLCYOLOLossDescriptorSelSetScaleClassLoss                       = objc.RegisterName("setScaleClassLoss:")
+	_mLCYOLOLossDescriptorSelMinimumIOUForObjectPresence             = objc.RegisterName("minimumIOUForObjectPresence")
+	_mLCYOLOLossDescriptorSelSetMinimumIOUForObjectPresence          = objc.RegisterName("setMinimumIOUForObjectPresence:")
+	_mLCYOLOLossDescriptorSelMaximumIOUForObjectAbsence              = objc.RegisterName("maximumIOUForObjectAbsence")
+	_mLCYOLOLossDescriptorSelSetMaximumIOUForObjectAbsence           = objc.RegisterName("setMaximumIOUForObjectAbsence:")
 )
 
 func MLCYOLOLossDescriptorFromID(id objc.ID) *MLCYOLOLossDescriptor {
@@ -51,7 +51,9 @@ func MLCYOLOLossDescriptorFromID(id objc.ID) *MLCYOLOLossDescriptor {
 // @abstract  Create a YOLO loss descriptor object @param     anchorBoxes       The anchor box data @param     anchorBoxCount    The number of anchor boxes @return    A new MLCYOLOLossDescriptor object.
 func MLCYOLOLossDescriptorDescriptorWithAnchorBoxesAnchorBoxCount(anchorBoxes *foundation.NSData, anchorBoxCount uint) *MLCYOLOLossDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCYOLOLossDescriptor), _mLCYOLOLossDescriptorSelDescriptorWithAnchorBoxesAnchorBoxCount, anchorBoxes.Ptr(), anchorBoxCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCYOLOLossDescriptorFromID(_ret)
 }
 
@@ -64,7 +66,9 @@ func (o *MLCYOLOLossDescriptor) AnchorBoxCount() uint {
 // @property   anchorBoxes @abstract   \p NSData containing the width and height for \p anchorBoxCount anchor boxes This \p NSData should have 2 floating-point values per anchor box which represent the width and height of the anchor box.
 func (o *MLCYOLOLossDescriptor) AnchorBoxes() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCYOLOLossDescriptorSelAnchorBoxes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -147,4 +151,3 @@ func (o *MLCYOLOLossDescriptor) MaximumIOUForObjectAbsence() float32 {
 func (o *MLCYOLOLossDescriptor) SetMaximumIOUForObjectAbsence(maximumIOUForObjectAbsence float32) {
 	o.Ptr().Send(_mLCYOLOLossDescriptorSelSetMaximumIOUForObjectAbsence, maximumIOUForObjectAbsence)
 }
-

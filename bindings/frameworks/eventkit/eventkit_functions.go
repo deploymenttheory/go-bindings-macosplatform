@@ -4,11 +4,11 @@
 package eventkit
 
 var (
-// Deprecated: since macOS 10.10.
+	// Deprecated: since macOS 10.10.
 	_fnDATETIME_COMPONENTS_DO_NOT_USE func()
-// Deprecated: since macOS 10.10.
+	// Deprecated: since macOS 10.10.
 	_fnDATE_COMPONENTS_DO_NOT_USE func()
-// Deprecated: since macOS 10.10.
+	// Deprecated: since macOS 10.10.
 	_fnEK_LOSE_FRACTIONAL_SECONDS_DO_NOT_USE func()
 )
 
@@ -26,4 +26,3 @@ func DATE_COMPONENTS_DO_NOT_USE() {
 func EK_LOSE_FRACTIONAL_SECONDS_DO_NOT_USE() {
 	_fnEK_LOSE_FRACTIONAL_SECONDS_DO_NOT_USE()
 }
-

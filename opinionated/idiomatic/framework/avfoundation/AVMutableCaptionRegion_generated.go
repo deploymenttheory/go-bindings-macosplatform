@@ -98,7 +98,9 @@ func (x *MutableCaptionRegion) SetWritingMode(writingMode raw.AVCaptionRegionWri
 	x.inner.SetWritingMode(writingMode)
 }
 
-func (x *MutableCaptionRegion) asCaptionRegion() *raw.AVCaptionRegion { return &x.inner.AVCaptionRegion }
+func (x *MutableCaptionRegion) asCaptionRegion() *raw.AVCaptionRegion {
+	return &x.inner.AVCaptionRegion
+}
 
 // MutableCaptionRegionable is the interface implemented by [MutableCaptionRegion], for mocking and DI.
 type MutableCaptionRegionable interface {
@@ -116,4 +118,3 @@ type MutableCaptionRegionable interface {
 }
 
 var _ MutableCaptionRegionable = (*MutableCaptionRegion)(nil)
-

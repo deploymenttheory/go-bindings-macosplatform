@@ -120,4 +120,3 @@ type FetchResultable interface {
 }
 
 var _ FetchResultable = (*FetchResult)(nil)
-

@@ -78,4 +78,3 @@ type ShareableContentable interface {
 }
 
 var _ ShareableContentable = (*ShareableContent)(nil)
-

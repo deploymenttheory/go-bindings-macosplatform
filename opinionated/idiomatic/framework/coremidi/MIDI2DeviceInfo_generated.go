@@ -66,4 +66,3 @@ type MIDI2DeviceInfoable interface {
 }
 
 var _ MIDI2DeviceInfoable = (*MIDI2DeviceInfo)(nil)
-

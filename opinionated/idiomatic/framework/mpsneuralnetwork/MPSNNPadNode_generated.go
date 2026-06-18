@@ -79,4 +79,3 @@ type NNPadNodeable interface {
 }
 
 var _ NNPadNodeable = (*NNPadNode)(nil)
-

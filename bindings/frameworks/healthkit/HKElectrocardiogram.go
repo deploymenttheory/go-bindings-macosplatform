@@ -15,12 +15,12 @@ type HKElectrocardiogram struct {
 }
 
 var (
-	_clsHKElectrocardiogram = _objcClass("HKElectrocardiogram")
+	_clsHKElectrocardiogram                            = _objcClass("HKElectrocardiogram")
 	_hKElectrocardiogramSelNumberOfVoltageMeasurements = objc.RegisterName("numberOfVoltageMeasurements")
-	_hKElectrocardiogramSelSamplingFrequency = objc.RegisterName("samplingFrequency")
-	_hKElectrocardiogramSelClassification = objc.RegisterName("classification")
-	_hKElectrocardiogramSelAverageHeartRate = objc.RegisterName("averageHeartRate")
-	_hKElectrocardiogramSelSymptomsStatus = objc.RegisterName("symptomsStatus")
+	_hKElectrocardiogramSelSamplingFrequency           = objc.RegisterName("samplingFrequency")
+	_hKElectrocardiogramSelClassification              = objc.RegisterName("classification")
+	_hKElectrocardiogramSelAverageHeartRate            = objc.RegisterName("averageHeartRate")
+	_hKElectrocardiogramSelSymptomsStatus              = objc.RegisterName("symptomsStatus")
 )
 
 func HKElectrocardiogramFromID(id objc.ID) *HKElectrocardiogram {
@@ -42,7 +42,9 @@ func (o *HKElectrocardiogram) NumberOfVoltageMeasurements() int {
 // The frequency at which the data was sampled. This is reported in [HKUnit hertzUnit].
 func (o *HKElectrocardiogram) SamplingFrequency() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKElectrocardiogramSelSamplingFrequency)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
@@ -55,7 +57,9 @@ func (o *HKElectrocardiogram) Classification() HKElectrocardiogramClassification
 // The average heart rate of the user while the electrocardiogram was recorded.
 func (o *HKElectrocardiogram) AverageHeartRate() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKElectrocardiogramSelAverageHeartRate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
@@ -64,4 +68,3 @@ func (o *HKElectrocardiogram) SymptomsStatus() HKElectrocardiogramSymptomsStatus
 	_ret := objc.Send[HKElectrocardiogramSymptomsStatus](o.Ptr(), _hKElectrocardiogramSelSymptomsStatus)
 	return _ret
 }
-

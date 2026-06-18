@@ -721,11 +721,17 @@ func (x *PopUpButtonCell) SetArrowPosition(arrowPosition raw.NSPopUpArrowPositio
 
 func (x *PopUpButtonCell) asMenuItemCell() *raw.NSMenuItemCell { return &x.inner.NSMenuItemCell }
 
-func (x *PopUpButtonCell) asButtonCell() *raw.NSButtonCell { return &x.inner.NSMenuItemCell.NSButtonCell }
+func (x *PopUpButtonCell) asButtonCell() *raw.NSButtonCell {
+	return &x.inner.NSMenuItemCell.NSButtonCell
+}
 
-func (x *PopUpButtonCell) asActionCell() *raw.NSActionCell { return &x.inner.NSMenuItemCell.NSButtonCell.NSActionCell }
+func (x *PopUpButtonCell) asActionCell() *raw.NSActionCell {
+	return &x.inner.NSMenuItemCell.NSButtonCell.NSActionCell
+}
 
-func (x *PopUpButtonCell) asCell() *raw.NSCell { return &x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell }
+func (x *PopUpButtonCell) asCell() *raw.NSCell {
+	return &x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell
+}
 
 // PopUpButtonCellable is the interface implemented by [PopUpButtonCell], for mocking and DI.
 type PopUpButtonCellable interface {
@@ -846,4 +852,3 @@ type PopUpButtonCellable interface {
 }
 
 var _ PopUpButtonCellable = (*PopUpButtonCell)(nil)
-

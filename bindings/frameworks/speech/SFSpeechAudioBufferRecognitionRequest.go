@@ -18,11 +18,11 @@ type SFSpeechAudioBufferRecognitionRequest struct {
 }
 
 var (
-	_clsSFSpeechAudioBufferRecognitionRequest = _objcClass("SFSpeechAudioBufferRecognitionRequest")
-	_sFSpeechAudioBufferRecognitionRequestSelAppendAudioPCMBuffer = objc.RegisterName("appendAudioPCMBuffer:")
+	_clsSFSpeechAudioBufferRecognitionRequest                        = _objcClass("SFSpeechAudioBufferRecognitionRequest")
+	_sFSpeechAudioBufferRecognitionRequestSelAppendAudioPCMBuffer    = objc.RegisterName("appendAudioPCMBuffer:")
 	_sFSpeechAudioBufferRecognitionRequestSelAppendAudioSampleBuffer = objc.RegisterName("appendAudioSampleBuffer:")
-	_sFSpeechAudioBufferRecognitionRequestSelEndAudio = objc.RegisterName("endAudio")
-	_sFSpeechAudioBufferRecognitionRequestSelNativeAudioFormat = objc.RegisterName("nativeAudioFormat")
+	_sFSpeechAudioBufferRecognitionRequestSelEndAudio                = objc.RegisterName("endAudio")
+	_sFSpeechAudioBufferRecognitionRequestSelNativeAudioFormat       = objc.RegisterName("nativeAudioFormat")
 )
 
 func SFSpeechAudioBufferRecognitionRequestFromID(id objc.ID) *SFSpeechAudioBufferRecognitionRequest {
@@ -53,7 +53,8 @@ func (o *SFSpeechAudioBufferRecognitionRequest) EndAudio() {
 // The preferred audio format for optimal speech recognition. Use the audio format in this property as a hint for optimal recording, but don't depend on the value remaining unchanged.
 func (o *SFSpeechAudioBufferRecognitionRequest) NativeAudioFormat() *avfaudio.AVAudioFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFSpeechAudioBufferRecognitionRequestSelNativeAudioFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return avfaudio.AVAudioFormatFromID(_ret)
 }
-

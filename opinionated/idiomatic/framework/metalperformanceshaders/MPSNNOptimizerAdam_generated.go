@@ -152,7 +152,9 @@ func (x *NNOptimizerAdam) SetTimeStep(timeStep uint) {
 	x.inner.SetTimeStep(timeStep)
 }
 
-func (x *NNOptimizerAdam) asNNOptimizer() *mpsneuralnetwork.MPSNNOptimizer { return &x.inner.MPSNNOptimizer }
+func (x *NNOptimizerAdam) asNNOptimizer() *mpsneuralnetwork.MPSNNOptimizer {
+	return &x.inner.MPSNNOptimizer
+}
 
 func (x *NNOptimizerAdam) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNNOptimizer.MPSKernel }
 
@@ -182,4 +184,3 @@ type NNOptimizerAdamable interface {
 }
 
 var _ NNOptimizerAdamable = (*NNOptimizerAdam)(nil)
-

@@ -83,4 +83,3 @@ type Electrocardiogramable interface {
 }
 
 var _ Electrocardiogramable = (*Electrocardiogram)(nil)
-

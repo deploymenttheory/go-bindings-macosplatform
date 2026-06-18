@@ -90,4 +90,3 @@ type AssessmentApplicationable interface {
 }
 
 var _ AssessmentApplicationable = (*AssessmentApplication)(nil)
-

@@ -16,11 +16,11 @@ type MTRMessagesClusterMessageResponseOptionStruct struct {
 }
 
 var (
-	_clsMTRMessagesClusterMessageResponseOptionStruct = _objcClass("MTRMessagesClusterMessageResponseOptionStruct")
-	_mTRMessagesClusterMessageResponseOptionStructSelMessageResponseID = objc.RegisterName("messageResponseID")
+	_clsMTRMessagesClusterMessageResponseOptionStruct                     = _objcClass("MTRMessagesClusterMessageResponseOptionStruct")
+	_mTRMessagesClusterMessageResponseOptionStructSelMessageResponseID    = objc.RegisterName("messageResponseID")
 	_mTRMessagesClusterMessageResponseOptionStructSelSetMessageResponseID = objc.RegisterName("setMessageResponseID:")
-	_mTRMessagesClusterMessageResponseOptionStructSelLabel = objc.RegisterName("label")
-	_mTRMessagesClusterMessageResponseOptionStructSelSetLabel = objc.RegisterName("setLabel:")
+	_mTRMessagesClusterMessageResponseOptionStructSelLabel                = objc.RegisterName("label")
+	_mTRMessagesClusterMessageResponseOptionStructSelSetLabel             = objc.RegisterName("setLabel:")
 )
 
 func MTRMessagesClusterMessageResponseOptionStructFromID(id objc.ID) *MTRMessagesClusterMessageResponseOptionStruct {
@@ -35,7 +35,9 @@ func MTRMessagesClusterMessageResponseOptionStructFromID(id objc.ID) *MTRMessage
 
 func (o *MTRMessagesClusterMessageResponseOptionStruct) MessageResponseID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMessagesClusterMessageResponseOptionStructSelMessageResponseID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRMessagesClusterMessageResponseOptionStruct) SetMessageResponseID(mes
 
 func (o *MTRMessagesClusterMessageResponseOptionStruct) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMessagesClusterMessageResponseOptionStructSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTRMessagesClusterMessageResponseOptionStruct) SetLabel(label *foundation.NSString) {
 	o.Ptr().Send(_mTRMessagesClusterMessageResponseOptionStructSelSetLabel, label.Ptr())
 }
-

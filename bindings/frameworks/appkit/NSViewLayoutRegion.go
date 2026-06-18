@@ -16,9 +16,9 @@ type NSViewLayoutRegion struct {
 }
 
 var (
-	_clsNSViewLayoutRegion = _objcClass("NSViewLayoutRegion")
+	_clsNSViewLayoutRegion                                         = _objcClass("NSViewLayoutRegion")
 	_nSViewLayoutRegionSelSafeAreaLayoutRegionWithCornerAdaptation = objc.RegisterName("safeAreaLayoutRegionWithCornerAdaptation:")
-	_nSViewLayoutRegionSelMarginsLayoutRegionWithCornerAdaptation = objc.RegisterName("marginsLayoutRegionWithCornerAdaptation:")
+	_nSViewLayoutRegionSelMarginsLayoutRegionWithCornerAdaptation  = objc.RegisterName("marginsLayoutRegionWithCornerAdaptation:")
 )
 
 func NSViewLayoutRegionFromID(id objc.ID) *NSViewLayoutRegion {
@@ -33,13 +33,16 @@ func NSViewLayoutRegionFromID(id objc.ID) *NSViewLayoutRegion {
 
 func NSViewLayoutRegionSafeAreaLayoutRegionWithCornerAdaptation(adaptivityAxis NSViewLayoutRegionAdaptivityAxis) *NSViewLayoutRegion {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSViewLayoutRegion), _nSViewLayoutRegionSelSafeAreaLayoutRegionWithCornerAdaptation, adaptivityAxis)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewLayoutRegionFromID(_ret)
 }
 
 func NSViewLayoutRegionMarginsLayoutRegionWithCornerAdaptation(adaptivityAxis NSViewLayoutRegionAdaptivityAxis) *NSViewLayoutRegion {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSViewLayoutRegion), _nSViewLayoutRegionSelMarginsLayoutRegionWithCornerAdaptation, adaptivityAxis)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewLayoutRegionFromID(_ret)
 }
-

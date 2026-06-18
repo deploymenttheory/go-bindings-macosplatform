@@ -35,7 +35,9 @@ func NewNetworkDeviceAttachment() *NetworkDeviceAttachment {
 	return &NetworkDeviceAttachment{inner: raw.VZNetworkDeviceAttachmentFromID(_id)}
 }
 
-func (x *NetworkDeviceAttachment) asNetworkDeviceAttachment() *raw.VZNetworkDeviceAttachment { return x.inner }
+func (x *NetworkDeviceAttachment) asNetworkDeviceAttachment() *raw.VZNetworkDeviceAttachment {
+	return x.inner
+}
 
 // NetworkDeviceAttachmentable is the interface implemented by [NetworkDeviceAttachment], for mocking and DI.
 type NetworkDeviceAttachmentable interface {
@@ -43,4 +45,3 @@ type NetworkDeviceAttachmentable interface {
 }
 
 var _ NetworkDeviceAttachmentable = (*NetworkDeviceAttachment)(nil)
-

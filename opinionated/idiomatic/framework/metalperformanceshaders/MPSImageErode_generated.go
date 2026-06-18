@@ -71,9 +71,13 @@ func (x *ImageErode) WithLabel(label string) *ImageErode {
 
 func (x *ImageErode) asImageDilate() *mpsimage.MPSImageDilate { return &x.inner.MPSImageDilate }
 
-func (x *ImageErode) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSImageDilate.MPSUnaryImageKernel }
+func (x *ImageErode) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
+	return &x.inner.MPSImageDilate.MPSUnaryImageKernel
+}
 
-func (x *ImageErode) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImageDilate.MPSUnaryImageKernel.MPSKernel }
+func (x *ImageErode) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSImageDilate.MPSUnaryImageKernel.MPSKernel
+}
 
 // ImageErodeable is the interface implemented by [ImageErode], for mocking and DI.
 type ImageErodeable interface {
@@ -86,4 +90,3 @@ type ImageErodeable interface {
 }
 
 var _ ImageErodeable = (*ImageErode)(nil)
-

@@ -67,4 +67,3 @@ type MultiArrayShapeConstraintable interface {
 }
 
 var _ MultiArrayShapeConstraintable = (*MultiArrayShapeConstraint)(nil)
-

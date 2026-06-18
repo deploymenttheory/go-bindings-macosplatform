@@ -136,4 +136,3 @@ type IOCommandQueueDescriptorable interface {
 }
 
 var _ IOCommandQueueDescriptorable = (*IOCommandQueueDescriptor)(nil)
-

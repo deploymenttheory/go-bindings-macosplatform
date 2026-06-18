@@ -69,7 +69,9 @@ func (x *VirtualMachineConfiguration) WithAudioDevices(items ...AudioDeviceConfi
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asAudioDeviceConfiguration().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asAudioDeviceConfiguration().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.VZAudioDeviceConfiguration](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -85,7 +87,9 @@ func (x *VirtualMachineConfiguration) WithConsoleDevices(items ...ConsoleDeviceC
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asConsoleDeviceConfiguration().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asConsoleDeviceConfiguration().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.VZConsoleDeviceConfiguration](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -101,7 +105,9 @@ func (x *VirtualMachineConfiguration) WithDirectorySharingDevices(items ...Direc
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asDirectorySharingDeviceConfiguration().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asDirectorySharingDeviceConfiguration().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.VZDirectorySharingDeviceConfiguration](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -117,7 +123,9 @@ func (x *VirtualMachineConfiguration) WithEntropyDevices(items ...EntropyDeviceC
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asEntropyDeviceConfiguration().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asEntropyDeviceConfiguration().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.VZEntropyDeviceConfiguration](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -133,7 +141,9 @@ func (x *VirtualMachineConfiguration) WithMemoryBalloonDevices(items ...MemoryBa
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asMemoryBalloonDeviceConfiguration().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asMemoryBalloonDeviceConfiguration().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.VZMemoryBalloonDeviceConfiguration](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -149,7 +159,9 @@ func (x *VirtualMachineConfiguration) WithNetworkDevices(items ...NetworkDeviceC
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asNetworkDeviceConfiguration().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asNetworkDeviceConfiguration().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.VZNetworkDeviceConfiguration](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -165,7 +177,9 @@ func (x *VirtualMachineConfiguration) WithSerialPorts(items ...SerialPortConfigu
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asSerialPortConfiguration().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asSerialPortConfiguration().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.VZSerialPortConfiguration](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -181,7 +195,9 @@ func (x *VirtualMachineConfiguration) WithSocketDevices(items ...SocketDeviceCon
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asSocketDeviceConfiguration().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asSocketDeviceConfiguration().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.VZSocketDeviceConfiguration](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -197,7 +213,9 @@ func (x *VirtualMachineConfiguration) WithStorageDevices(items ...StorageDeviceC
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asStorageDeviceConfiguration().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asStorageDeviceConfiguration().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.VZStorageDeviceConfiguration](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -213,7 +231,9 @@ func (x *VirtualMachineConfiguration) WithKeyboards(items ...KeyboardConfigurati
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asKeyboardConfiguration().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asKeyboardConfiguration().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.VZKeyboardConfiguration](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -229,7 +249,9 @@ func (x *VirtualMachineConfiguration) WithPointingDevices(items ...PointingDevic
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asPointingDeviceConfiguration().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asPointingDeviceConfiguration().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.VZPointingDeviceConfiguration](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -245,7 +267,9 @@ func (x *VirtualMachineConfiguration) WithGraphicsDevices(items ...GraphicsDevic
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asGraphicsDeviceConfiguration().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asGraphicsDeviceConfiguration().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.VZGraphicsDeviceConfiguration](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -261,7 +285,9 @@ func (x *VirtualMachineConfiguration) WithUsbControllers(items ...USBControllerC
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asUSBControllerConfiguration().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asUSBControllerConfiguration().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.VZUSBControllerConfiguration](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -597,4 +623,3 @@ type VirtualMachineConfigurationable interface {
 }
 
 var _ VirtualMachineConfigurationable = (*VirtualMachineConfiguration)(nil)
-

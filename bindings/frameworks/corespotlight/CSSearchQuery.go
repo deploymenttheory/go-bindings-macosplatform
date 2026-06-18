@@ -18,19 +18,19 @@ type CSSearchQuery struct {
 }
 
 var (
-	_clsCSSearchQuery = _objcClass("CSSearchQuery")
+	_clsCSSearchQuery                                = _objcClass("CSSearchQuery")
 	_cSSearchQuerySelInitWithQueryStringQueryContext = objc.RegisterName("initWithQueryString:queryContext:")
-	_cSSearchQuerySelInitWithQueryStringAttributes = objc.RegisterName("initWithQueryString:attributes:")
-	_cSSearchQuerySelStart = objc.RegisterName("start")
-	_cSSearchQuerySelCancel = objc.RegisterName("cancel")
-	_cSSearchQuerySelIsCancelled = objc.RegisterName("isCancelled")
-	_cSSearchQuerySelFoundItemCount = objc.RegisterName("foundItemCount")
-	_cSSearchQuerySelFoundItemsHandler = objc.RegisterName("foundItemsHandler")
-	_cSSearchQuerySelSetFoundItemsHandler = objc.RegisterName("setFoundItemsHandler:")
-	_cSSearchQuerySelCompletionHandler = objc.RegisterName("completionHandler")
-	_cSSearchQuerySelSetCompletionHandler = objc.RegisterName("setCompletionHandler:")
-	_cSSearchQuerySelProtectionClasses = objc.RegisterName("protectionClasses")
-	_cSSearchQuerySelSetProtectionClasses = objc.RegisterName("setProtectionClasses:")
+	_cSSearchQuerySelInitWithQueryStringAttributes   = objc.RegisterName("initWithQueryString:attributes:")
+	_cSSearchQuerySelStart                           = objc.RegisterName("start")
+	_cSSearchQuerySelCancel                          = objc.RegisterName("cancel")
+	_cSSearchQuerySelIsCancelled                     = objc.RegisterName("isCancelled")
+	_cSSearchQuerySelFoundItemCount                  = objc.RegisterName("foundItemCount")
+	_cSSearchQuerySelFoundItemsHandler               = objc.RegisterName("foundItemsHandler")
+	_cSSearchQuerySelSetFoundItemsHandler            = objc.RegisterName("setFoundItemsHandler:")
+	_cSSearchQuerySelCompletionHandler               = objc.RegisterName("completionHandler")
+	_cSSearchQuerySelSetCompletionHandler            = objc.RegisterName("setCompletionHandler:")
+	_cSSearchQuerySelProtectionClasses               = objc.RegisterName("protectionClasses")
+	_cSSearchQuerySelSetProtectionClasses            = objc.RegisterName("setProtectionClasses:")
 )
 
 func CSSearchQueryFromID(id objc.ID) *CSSearchQuery {
@@ -45,14 +45,18 @@ func CSSearchQueryFromID(id objc.ID) *CSSearchQuery {
 
 func (o *CSSearchQuery) InitWithQueryStringQueryContext(queryString *foundation.NSString, queryContext *CSSearchQueryContext) *CSSearchQuery {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchQuerySelInitWithQueryStringQueryContext, queryString.Ptr(), queryContext.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CSSearchQueryFromID(_ret)
 }
 
 // Deprecated: since macOS 13.0.
 func (o *CSSearchQuery) InitWithQueryStringAttributes(queryString *foundation.NSString, attributes *foundation.NSArray[*foundation.NSString]) *CSSearchQuery {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchQuerySelInitWithQueryStringAttributes, queryString.Ptr(), attributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CSSearchQueryFromID(_ret)
 }
 
@@ -118,4 +122,3 @@ func (o *CSSearchQuery) ProtectionClasses() *foundation.NSArray[*foundation.NSSt
 func (o *CSSearchQuery) SetProtectionClasses(protectionClasses *foundation.NSArray[*foundation.NSString]) {
 	o.Ptr().Send(_cSSearchQuerySelSetProtectionClasses, protectionClasses)
 }
-

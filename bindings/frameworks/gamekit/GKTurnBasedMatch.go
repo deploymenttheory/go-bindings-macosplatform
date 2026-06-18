@@ -18,42 +18,42 @@ type GKTurnBasedMatch struct {
 }
 
 var (
-	_clsGKTurnBasedMatch = _objcClass("GKTurnBasedMatch")
-	_gKTurnBasedMatchSelSetLocalizableMessageWithKeyArguments = objc.RegisterName("setLocalizableMessageWithKey:arguments:")
-	_gKTurnBasedMatchSelFindMatchForRequestWithCompletionHandler = objc.RegisterName("findMatchForRequest:withCompletionHandler:")
-	_gKTurnBasedMatchSelLoadMatchesWithCompletionHandler = objc.RegisterName("loadMatchesWithCompletionHandler:")
-	_gKTurnBasedMatchSelLoadMatchWithIDWithCompletionHandler = objc.RegisterName("loadMatchWithID:withCompletionHandler:")
-	_gKTurnBasedMatchSelRematchWithCompletionHandler = objc.RegisterName("rematchWithCompletionHandler:")
-	_gKTurnBasedMatchSelAcceptInviteWithCompletionHandler = objc.RegisterName("acceptInviteWithCompletionHandler:")
-	_gKTurnBasedMatchSelDeclineInviteWithCompletionHandler = objc.RegisterName("declineInviteWithCompletionHandler:")
-	_gKTurnBasedMatchSelRemoveWithCompletionHandler = objc.RegisterName("removeWithCompletionHandler:")
-	_gKTurnBasedMatchSelLoadMatchDataWithCompletionHandler = objc.RegisterName("loadMatchDataWithCompletionHandler:")
-	_gKTurnBasedMatchSelEndTurnWithNextParticipantsTurnTimeoutMatchDataCompletionHandler = objc.RegisterName("endTurnWithNextParticipants:turnTimeout:matchData:completionHandler:")
+	_clsGKTurnBasedMatch                                                                                      = _objcClass("GKTurnBasedMatch")
+	_gKTurnBasedMatchSelSetLocalizableMessageWithKeyArguments                                                 = objc.RegisterName("setLocalizableMessageWithKey:arguments:")
+	_gKTurnBasedMatchSelFindMatchForRequestWithCompletionHandler                                              = objc.RegisterName("findMatchForRequest:withCompletionHandler:")
+	_gKTurnBasedMatchSelLoadMatchesWithCompletionHandler                                                      = objc.RegisterName("loadMatchesWithCompletionHandler:")
+	_gKTurnBasedMatchSelLoadMatchWithIDWithCompletionHandler                                                  = objc.RegisterName("loadMatchWithID:withCompletionHandler:")
+	_gKTurnBasedMatchSelRematchWithCompletionHandler                                                          = objc.RegisterName("rematchWithCompletionHandler:")
+	_gKTurnBasedMatchSelAcceptInviteWithCompletionHandler                                                     = objc.RegisterName("acceptInviteWithCompletionHandler:")
+	_gKTurnBasedMatchSelDeclineInviteWithCompletionHandler                                                    = objc.RegisterName("declineInviteWithCompletionHandler:")
+	_gKTurnBasedMatchSelRemoveWithCompletionHandler                                                           = objc.RegisterName("removeWithCompletionHandler:")
+	_gKTurnBasedMatchSelLoadMatchDataWithCompletionHandler                                                    = objc.RegisterName("loadMatchDataWithCompletionHandler:")
+	_gKTurnBasedMatchSelEndTurnWithNextParticipantsTurnTimeoutMatchDataCompletionHandler                      = objc.RegisterName("endTurnWithNextParticipants:turnTimeout:matchData:completionHandler:")
 	_gKTurnBasedMatchSelParticipantQuitInTurnWithOutcomeNextParticipantsTurnTimeoutMatchDataCompletionHandler = objc.RegisterName("participantQuitInTurnWithOutcome:nextParticipants:turnTimeout:matchData:completionHandler:")
-	_gKTurnBasedMatchSelParticipantQuitOutOfTurnWithOutcomeWithCompletionHandler = objc.RegisterName("participantQuitOutOfTurnWithOutcome:withCompletionHandler:")
-	_gKTurnBasedMatchSelEndMatchInTurnWithMatchDataCompletionHandler = objc.RegisterName("endMatchInTurnWithMatchData:completionHandler:")
-	_gKTurnBasedMatchSelEndMatchInTurnWithMatchDataScoresAchievementsCompletionHandler = objc.RegisterName("endMatchInTurnWithMatchData:scores:achievements:completionHandler:")
-	_gKTurnBasedMatchSelEndMatchInTurnWithMatchDataLeaderboardScoresAchievementsCompletionHandler = objc.RegisterName("endMatchInTurnWithMatchData:leaderboardScores:achievements:completionHandler:")
-	_gKTurnBasedMatchSelSaveCurrentTurnWithMatchDataCompletionHandler = objc.RegisterName("saveCurrentTurnWithMatchData:completionHandler:")
-	_gKTurnBasedMatchSelSaveMergedMatchDataWithResolvedExchangesCompletionHandler = objc.RegisterName("saveMergedMatchData:withResolvedExchanges:completionHandler:")
-	_gKTurnBasedMatchSelSendExchangeToParticipantsDataLocalizableMessageKeyArgumentsTimeoutCompletionHandler = objc.RegisterName("sendExchangeToParticipants:data:localizableMessageKey:arguments:timeout:completionHandler:")
-	_gKTurnBasedMatchSelSendReminderToParticipantsLocalizableMessageKeyArgumentsCompletionHandler = objc.RegisterName("sendReminderToParticipants:localizableMessageKey:arguments:completionHandler:")
-	_gKTurnBasedMatchSelEndTurnWithNextParticipantMatchDataCompletionHandler = objc.RegisterName("endTurnWithNextParticipant:matchData:completionHandler:")
-	_gKTurnBasedMatchSelParticipantQuitInTurnWithOutcomeNextParticipantMatchDataCompletionHandler = objc.RegisterName("participantQuitInTurnWithOutcome:nextParticipant:matchData:completionHandler:")
-	_gKTurnBasedMatchSelMatchID = objc.RegisterName("matchID")
-	_gKTurnBasedMatchSelCreationDate = objc.RegisterName("creationDate")
-	_gKTurnBasedMatchSelParticipants = objc.RegisterName("participants")
-	_gKTurnBasedMatchSelStatus = objc.RegisterName("status")
-	_gKTurnBasedMatchSelCurrentParticipant = objc.RegisterName("currentParticipant")
-	_gKTurnBasedMatchSelMatchData = objc.RegisterName("matchData")
-	_gKTurnBasedMatchSelMessage = objc.RegisterName("message")
-	_gKTurnBasedMatchSelSetMessage = objc.RegisterName("setMessage:")
-	_gKTurnBasedMatchSelMatchDataMaximumSize = objc.RegisterName("matchDataMaximumSize")
-	_gKTurnBasedMatchSelExchanges = objc.RegisterName("exchanges")
-	_gKTurnBasedMatchSelActiveExchanges = objc.RegisterName("activeExchanges")
-	_gKTurnBasedMatchSelCompletedExchanges = objc.RegisterName("completedExchanges")
-	_gKTurnBasedMatchSelExchangeDataMaximumSize = objc.RegisterName("exchangeDataMaximumSize")
-	_gKTurnBasedMatchSelExchangeMaxInitiatedExchangesPerPlayer = objc.RegisterName("exchangeMaxInitiatedExchangesPerPlayer")
+	_gKTurnBasedMatchSelParticipantQuitOutOfTurnWithOutcomeWithCompletionHandler                              = objc.RegisterName("participantQuitOutOfTurnWithOutcome:withCompletionHandler:")
+	_gKTurnBasedMatchSelEndMatchInTurnWithMatchDataCompletionHandler                                          = objc.RegisterName("endMatchInTurnWithMatchData:completionHandler:")
+	_gKTurnBasedMatchSelEndMatchInTurnWithMatchDataScoresAchievementsCompletionHandler                        = objc.RegisterName("endMatchInTurnWithMatchData:scores:achievements:completionHandler:")
+	_gKTurnBasedMatchSelEndMatchInTurnWithMatchDataLeaderboardScoresAchievementsCompletionHandler             = objc.RegisterName("endMatchInTurnWithMatchData:leaderboardScores:achievements:completionHandler:")
+	_gKTurnBasedMatchSelSaveCurrentTurnWithMatchDataCompletionHandler                                         = objc.RegisterName("saveCurrentTurnWithMatchData:completionHandler:")
+	_gKTurnBasedMatchSelSaveMergedMatchDataWithResolvedExchangesCompletionHandler                             = objc.RegisterName("saveMergedMatchData:withResolvedExchanges:completionHandler:")
+	_gKTurnBasedMatchSelSendExchangeToParticipantsDataLocalizableMessageKeyArgumentsTimeoutCompletionHandler  = objc.RegisterName("sendExchangeToParticipants:data:localizableMessageKey:arguments:timeout:completionHandler:")
+	_gKTurnBasedMatchSelSendReminderToParticipantsLocalizableMessageKeyArgumentsCompletionHandler             = objc.RegisterName("sendReminderToParticipants:localizableMessageKey:arguments:completionHandler:")
+	_gKTurnBasedMatchSelEndTurnWithNextParticipantMatchDataCompletionHandler                                  = objc.RegisterName("endTurnWithNextParticipant:matchData:completionHandler:")
+	_gKTurnBasedMatchSelParticipantQuitInTurnWithOutcomeNextParticipantMatchDataCompletionHandler             = objc.RegisterName("participantQuitInTurnWithOutcome:nextParticipant:matchData:completionHandler:")
+	_gKTurnBasedMatchSelMatchID                                                                               = objc.RegisterName("matchID")
+	_gKTurnBasedMatchSelCreationDate                                                                          = objc.RegisterName("creationDate")
+	_gKTurnBasedMatchSelParticipants                                                                          = objc.RegisterName("participants")
+	_gKTurnBasedMatchSelStatus                                                                                = objc.RegisterName("status")
+	_gKTurnBasedMatchSelCurrentParticipant                                                                    = objc.RegisterName("currentParticipant")
+	_gKTurnBasedMatchSelMatchData                                                                             = objc.RegisterName("matchData")
+	_gKTurnBasedMatchSelMessage                                                                               = objc.RegisterName("message")
+	_gKTurnBasedMatchSelSetMessage                                                                            = objc.RegisterName("setMessage:")
+	_gKTurnBasedMatchSelMatchDataMaximumSize                                                                  = objc.RegisterName("matchDataMaximumSize")
+	_gKTurnBasedMatchSelExchanges                                                                             = objc.RegisterName("exchanges")
+	_gKTurnBasedMatchSelActiveExchanges                                                                       = objc.RegisterName("activeExchanges")
+	_gKTurnBasedMatchSelCompletedExchanges                                                                    = objc.RegisterName("completedExchanges")
+	_gKTurnBasedMatchSelExchangeDataMaximumSize                                                               = objc.RegisterName("exchangeDataMaximumSize")
+	_gKTurnBasedMatchSelExchangeMaxInitiatedExchangesPerPlayer                                                = objc.RegisterName("exchangeMaxInitiatedExchangesPerPlayer")
 )
 
 func GKTurnBasedMatchFromID(id objc.ID) *GKTurnBasedMatch {
@@ -313,19 +313,25 @@ func (o *GKTurnBasedMatch) ParticipantQuitInTurnWithOutcomeNextParticipantMatchD
 
 func (o *GKTurnBasedMatch) MatchID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKTurnBasedMatchSelMatchID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *GKTurnBasedMatch) CreationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKTurnBasedMatchSelCreationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *GKTurnBasedMatch) Participants() *foundation.NSArray[*GKTurnBasedParticipant] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKTurnBasedMatchSelParticipants)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GKTurnBasedParticipant](_ret)
 }
 
@@ -336,19 +342,25 @@ func (o *GKTurnBasedMatch) Status() GKTurnBasedMatchStatus {
 
 func (o *GKTurnBasedMatch) CurrentParticipant() *GKTurnBasedParticipant {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKTurnBasedMatchSelCurrentParticipant)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKTurnBasedParticipantFromID(_ret)
 }
 
 func (o *GKTurnBasedMatch) MatchData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKTurnBasedMatchSelMatchData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *GKTurnBasedMatch) Message() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKTurnBasedMatchSelMessage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -363,19 +375,25 @@ func (o *GKTurnBasedMatch) MatchDataMaximumSize() uint {
 
 func (o *GKTurnBasedMatch) Exchanges() *foundation.NSArray[*GKTurnBasedExchange] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKTurnBasedMatchSelExchanges)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GKTurnBasedExchange](_ret)
 }
 
 func (o *GKTurnBasedMatch) ActiveExchanges() *foundation.NSArray[*GKTurnBasedExchange] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKTurnBasedMatchSelActiveExchanges)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GKTurnBasedExchange](_ret)
 }
 
 func (o *GKTurnBasedMatch) CompletedExchanges() *foundation.NSArray[*GKTurnBasedExchange] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKTurnBasedMatchSelCompletedExchanges)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GKTurnBasedExchange](_ret)
 }
 
@@ -388,4 +406,3 @@ func (o *GKTurnBasedMatch) ExchangeMaxInitiatedExchangesPerPlayer() uint {
 	_ret := objc.Send[uint](o.Ptr(), _gKTurnBasedMatchSelExchangeMaxInitiatedExchangesPerPlayer)
 	return _ret
 }
-

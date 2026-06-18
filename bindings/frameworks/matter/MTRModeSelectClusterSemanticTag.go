@@ -25,4 +25,3 @@ func MTRModeSelectClusterSemanticTagFromID(id objc.ID) *MTRModeSelectClusterSema
 	purego.Track(o)
 	return o
 }
-

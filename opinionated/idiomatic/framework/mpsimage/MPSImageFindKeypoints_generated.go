@@ -63,4 +63,3 @@ type ImageFindKeypointsable interface {
 }
 
 var _ ImageFindKeypointsable = (*ImageFindKeypoints)(nil)
-

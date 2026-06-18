@@ -41,4 +41,3 @@ type ISyncFilterable interface {
 }
 
 var _ ISyncFilterable = (*ISyncFilter)(nil)
-

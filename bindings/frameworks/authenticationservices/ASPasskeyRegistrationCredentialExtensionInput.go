@@ -16,7 +16,7 @@ type ASPasskeyRegistrationCredentialExtensionInput struct {
 }
 
 var (
-	_clsASPasskeyRegistrationCredentialExtensionInput = _objcClass("ASPasskeyRegistrationCredentialExtensionInput")
+	_clsASPasskeyRegistrationCredentialExtensionInput          = _objcClass("ASPasskeyRegistrationCredentialExtensionInput")
 	_aSPasskeyRegistrationCredentialExtensionInputSelLargeBlob = objc.RegisterName("largeBlob")
 )
 
@@ -32,7 +32,8 @@ func ASPasskeyRegistrationCredentialExtensionInputFromID(id objc.ID) *ASPasskeyR
 
 func (o *ASPasskeyRegistrationCredentialExtensionInput) LargeBlob() *ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyRegistrationCredentialExtensionInputSelLargeBlob)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInputFromID(_ret)
 }
-

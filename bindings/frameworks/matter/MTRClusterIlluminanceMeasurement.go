@@ -16,19 +16,19 @@ type MTRClusterIlluminanceMeasurement struct {
 }
 
 var (
-	_clsMTRClusterIlluminanceMeasurement = _objcClass("MTRClusterIlluminanceMeasurement")
-	_mTRClusterIlluminanceMeasurementSelReadAttributeMeasuredValueWithParams = objc.RegisterName("readAttributeMeasuredValueWithParams:")
-	_mTRClusterIlluminanceMeasurementSelReadAttributeMinMeasuredValueWithParams = objc.RegisterName("readAttributeMinMeasuredValueWithParams:")
-	_mTRClusterIlluminanceMeasurementSelReadAttributeMaxMeasuredValueWithParams = objc.RegisterName("readAttributeMaxMeasuredValueWithParams:")
-	_mTRClusterIlluminanceMeasurementSelReadAttributeToleranceWithParams = objc.RegisterName("readAttributeToleranceWithParams:")
-	_mTRClusterIlluminanceMeasurementSelReadAttributeLightSensorTypeWithParams = objc.RegisterName("readAttributeLightSensorTypeWithParams:")
+	_clsMTRClusterIlluminanceMeasurement                                            = _objcClass("MTRClusterIlluminanceMeasurement")
+	_mTRClusterIlluminanceMeasurementSelReadAttributeMeasuredValueWithParams        = objc.RegisterName("readAttributeMeasuredValueWithParams:")
+	_mTRClusterIlluminanceMeasurementSelReadAttributeMinMeasuredValueWithParams     = objc.RegisterName("readAttributeMinMeasuredValueWithParams:")
+	_mTRClusterIlluminanceMeasurementSelReadAttributeMaxMeasuredValueWithParams     = objc.RegisterName("readAttributeMaxMeasuredValueWithParams:")
+	_mTRClusterIlluminanceMeasurementSelReadAttributeToleranceWithParams            = objc.RegisterName("readAttributeToleranceWithParams:")
+	_mTRClusterIlluminanceMeasurementSelReadAttributeLightSensorTypeWithParams      = objc.RegisterName("readAttributeLightSensorTypeWithParams:")
 	_mTRClusterIlluminanceMeasurementSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterIlluminanceMeasurementSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterIlluminanceMeasurementSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterIlluminanceMeasurementSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterIlluminanceMeasurementSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterIlluminanceMeasurementSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterIlluminanceMeasurementSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterIlluminanceMeasurementSelReadAttributeAcceptedCommandListWithParams  = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterIlluminanceMeasurementSelReadAttributeAttributeListWithParams        = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterIlluminanceMeasurementSelReadAttributeFeatureMapWithParams           = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterIlluminanceMeasurementSelReadAttributeClusterRevisionWithParams      = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterIlluminanceMeasurementSelInitWithDeviceEndpointIDQueue               = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterIlluminanceMeasurementSelInitWithDeviceEndpointQueue                 = objc.RegisterName("initWithDevice:endpoint:queue:")
 )
 
 func MTRClusterIlluminanceMeasurementFromID(id objc.ID) *MTRClusterIlluminanceMeasurement {
@@ -94,13 +94,16 @@ func (o *MTRClusterIlluminanceMeasurement) ReadAttributeClusterRevisionWithParam
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func (o *MTRClusterIlluminanceMeasurement) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterIlluminanceMeasurement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterIlluminanceMeasurementSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterIlluminanceMeasurementFromID(_ret)
 }
 
 func (o *MTRClusterIlluminanceMeasurement) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterIlluminanceMeasurement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterIlluminanceMeasurementSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterIlluminanceMeasurementFromID(_ret)
 }
-

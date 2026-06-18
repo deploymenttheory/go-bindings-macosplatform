@@ -11,8 +11,8 @@ import (
 type CFHostInfoType int32
 
 const (
-	KCFHostAddresses CFHostInfoType = 0
-	KCFHostNames CFHostInfoType = 1
+	KCFHostAddresses    CFHostInfoType = 0
+	KCFHostNames        CFHostInfoType = 1
 	KCFHostReachability CFHostInfoType = 2
 )
 
@@ -32,11 +32,11 @@ func (e CFHostInfoType) String() string {
 type CFNetDiagnosticStatusValues int32
 
 const (
-	KCFNetDiagnosticNoErr CFNetDiagnosticStatusValues = 0
-	KCFNetDiagnosticErr CFNetDiagnosticStatusValues = -66560
-	KCFNetDiagnosticConnectionUp CFNetDiagnosticStatusValues = -66559
+	KCFNetDiagnosticNoErr                   CFNetDiagnosticStatusValues = 0
+	KCFNetDiagnosticErr                     CFNetDiagnosticStatusValues = -66560
+	KCFNetDiagnosticConnectionUp            CFNetDiagnosticStatusValues = -66559
 	KCFNetDiagnosticConnectionIndeterminate CFNetDiagnosticStatusValues = -66558
-	KCFNetDiagnosticConnectionDown CFNetDiagnosticStatusValues = -66557
+	KCFNetDiagnosticConnectionDown          CFNetDiagnosticStatusValues = -66557
 )
 
 func (e CFNetDiagnosticStatusValues) String() string {
@@ -59,21 +59,33 @@ func (e CFNetDiagnosticStatusValues) String() string {
 type CFNetServiceBrowserFlags int64
 
 const (
-	KCFNetServiceFlagMoreComing CFNetServiceBrowserFlags = 1
-	KCFNetServiceFlagIsDomain CFNetServiceBrowserFlags = 2
-	KCFNetServiceFlagIsDefault CFNetServiceBrowserFlags = 4
+	KCFNetServiceFlagMoreComing           CFNetServiceBrowserFlags = 1
+	KCFNetServiceFlagIsDomain             CFNetServiceBrowserFlags = 2
+	KCFNetServiceFlagIsDefault            CFNetServiceBrowserFlags = 4
 	KCFNetServiceFlagIsRegistrationDomain CFNetServiceBrowserFlags = 4
-	KCFNetServiceFlagRemove CFNetServiceBrowserFlags = 8
+	KCFNetServiceFlagRemove               CFNetServiceBrowserFlags = 8
 )
 
 func (e CFNetServiceBrowserFlags) String() string {
 	var parts []string
-	if e&KCFNetServiceFlagMoreComing != 0 { parts = append(parts, "KCFNetServiceFlagMoreComing") }
-	if e&KCFNetServiceFlagIsDomain != 0 { parts = append(parts, "KCFNetServiceFlagIsDomain") }
-	if e&KCFNetServiceFlagIsDefault != 0 { parts = append(parts, "KCFNetServiceFlagIsDefault") }
-	if e&KCFNetServiceFlagIsRegistrationDomain != 0 { parts = append(parts, "KCFNetServiceFlagIsRegistrationDomain") }
-	if e&KCFNetServiceFlagRemove != 0 { parts = append(parts, "KCFNetServiceFlagRemove") }
-	if len(parts) == 0 { return "0" }
+	if e&KCFNetServiceFlagMoreComing != 0 {
+		parts = append(parts, "KCFNetServiceFlagMoreComing")
+	}
+	if e&KCFNetServiceFlagIsDomain != 0 {
+		parts = append(parts, "KCFNetServiceFlagIsDomain")
+	}
+	if e&KCFNetServiceFlagIsDefault != 0 {
+		parts = append(parts, "KCFNetServiceFlagIsDefault")
+	}
+	if e&KCFNetServiceFlagIsRegistrationDomain != 0 {
+		parts = append(parts, "KCFNetServiceFlagIsRegistrationDomain")
+	}
+	if e&KCFNetServiceFlagRemove != 0 {
+		parts = append(parts, "KCFNetServiceFlagRemove")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -100,22 +112,26 @@ const (
 
 func (e CFNetServiceRegisterFlags) String() string {
 	var parts []string
-	if e&KCFNetServiceFlagNoAutoRename != 0 { parts = append(parts, "KCFNetServiceFlagNoAutoRename") }
-	if len(parts) == 0 { return "0" }
+	if e&KCFNetServiceFlagNoAutoRename != 0 {
+		parts = append(parts, "KCFNetServiceFlagNoAutoRename")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type CFNetServicesError int32
 
 const (
-	KCFNetServicesErrorUnknown CFNetServicesError = -72000
-	KCFNetServicesErrorCollision CFNetServicesError = -72001
-	KCFNetServicesErrorNotFound CFNetServicesError = -72002
-	KCFNetServicesErrorInProgress CFNetServicesError = -72003
-	KCFNetServicesErrorBadArgument CFNetServicesError = -72004
-	KCFNetServicesErrorCancel CFNetServicesError = -72005
-	KCFNetServicesErrorInvalid CFNetServicesError = -72006
-	KCFNetServicesErrorTimeout CFNetServicesError = -72007
+	KCFNetServicesErrorUnknown                      CFNetServicesError = -72000
+	KCFNetServicesErrorCollision                    CFNetServicesError = -72001
+	KCFNetServicesErrorNotFound                     CFNetServicesError = -72002
+	KCFNetServicesErrorInProgress                   CFNetServicesError = -72003
+	KCFNetServicesErrorBadArgument                  CFNetServicesError = -72004
+	KCFNetServicesErrorCancel                       CFNetServicesError = -72005
+	KCFNetServicesErrorInvalid                      CFNetServicesError = -72006
+	KCFNetServicesErrorTimeout                      CFNetServicesError = -72007
 	KCFNetServicesErrorMissingRequiredConfiguration CFNetServicesError = -72008
 )
 
@@ -147,90 +163,90 @@ func (e CFNetServicesError) String() string {
 type CFNetworkErrors int32
 
 const (
-	KCFHostErrorHostNotFound CFNetworkErrors = 1
-	KCFHostErrorUnknown CFNetworkErrors = 2
-	KCFSOCKSErrorUnknownClientVersion CFNetworkErrors = 100
-	KCFSOCKSErrorUnsupportedServerVersion CFNetworkErrors = 101
-	KCFSOCKS4ErrorRequestFailed CFNetworkErrors = 110
-	KCFSOCKS4ErrorIdentdFailed CFNetworkErrors = 111
-	KCFSOCKS4ErrorIdConflict CFNetworkErrors = 112
-	KCFSOCKS4ErrorUnknownStatusCode CFNetworkErrors = 113
-	KCFSOCKS5ErrorBadState CFNetworkErrors = 120
-	KCFSOCKS5ErrorBadResponseAddr CFNetworkErrors = 121
-	KCFSOCKS5ErrorBadCredentials CFNetworkErrors = 122
-	KCFSOCKS5ErrorUnsupportedNegotiationMethod CFNetworkErrors = 123
-	KCFSOCKS5ErrorNoAcceptableMethod CFNetworkErrors = 124
-	KCFFTPErrorUnexpectedStatusCode CFNetworkErrors = 200
-	KCFErrorHTTPAuthenticationTypeUnsupported CFNetworkErrors = 300
-	KCFErrorHTTPBadCredentials CFNetworkErrors = 301
-	KCFErrorHTTPConnectionLost CFNetworkErrors = 302
-	KCFErrorHTTPParseFailure CFNetworkErrors = 303
-	KCFErrorHTTPRedirectionLoopDetected CFNetworkErrors = 304
-	KCFErrorHTTPBadURL CFNetworkErrors = 305
-	KCFErrorHTTPProxyConnectionFailure CFNetworkErrors = 306
-	KCFErrorHTTPBadProxyCredentials CFNetworkErrors = 307
-	KCFErrorPACFileError CFNetworkErrors = 308
-	KCFErrorPACFileAuth CFNetworkErrors = 309
-	KCFErrorHTTPSProxyConnectionFailure CFNetworkErrors = 310
+	KCFHostErrorHostNotFound                                         CFNetworkErrors = 1
+	KCFHostErrorUnknown                                              CFNetworkErrors = 2
+	KCFSOCKSErrorUnknownClientVersion                                CFNetworkErrors = 100
+	KCFSOCKSErrorUnsupportedServerVersion                            CFNetworkErrors = 101
+	KCFSOCKS4ErrorRequestFailed                                      CFNetworkErrors = 110
+	KCFSOCKS4ErrorIdentdFailed                                       CFNetworkErrors = 111
+	KCFSOCKS4ErrorIdConflict                                         CFNetworkErrors = 112
+	KCFSOCKS4ErrorUnknownStatusCode                                  CFNetworkErrors = 113
+	KCFSOCKS5ErrorBadState                                           CFNetworkErrors = 120
+	KCFSOCKS5ErrorBadResponseAddr                                    CFNetworkErrors = 121
+	KCFSOCKS5ErrorBadCredentials                                     CFNetworkErrors = 122
+	KCFSOCKS5ErrorUnsupportedNegotiationMethod                       CFNetworkErrors = 123
+	KCFSOCKS5ErrorNoAcceptableMethod                                 CFNetworkErrors = 124
+	KCFFTPErrorUnexpectedStatusCode                                  CFNetworkErrors = 200
+	KCFErrorHTTPAuthenticationTypeUnsupported                        CFNetworkErrors = 300
+	KCFErrorHTTPBadCredentials                                       CFNetworkErrors = 301
+	KCFErrorHTTPConnectionLost                                       CFNetworkErrors = 302
+	KCFErrorHTTPParseFailure                                         CFNetworkErrors = 303
+	KCFErrorHTTPRedirectionLoopDetected                              CFNetworkErrors = 304
+	KCFErrorHTTPBadURL                                               CFNetworkErrors = 305
+	KCFErrorHTTPProxyConnectionFailure                               CFNetworkErrors = 306
+	KCFErrorHTTPBadProxyCredentials                                  CFNetworkErrors = 307
+	KCFErrorPACFileError                                             CFNetworkErrors = 308
+	KCFErrorPACFileAuth                                              CFNetworkErrors = 309
+	KCFErrorHTTPSProxyConnectionFailure                              CFNetworkErrors = 310
 	KCFStreamErrorHTTPSProxyFailureUnexpectedResponseToCONNECTMethod CFNetworkErrors = 311
-	KCFURLErrorBackgroundSessionInUseByAnotherProcess CFNetworkErrors = -996
-	KCFURLErrorBackgroundSessionWasDisconnected CFNetworkErrors = -997
-	KCFURLErrorUnknown CFNetworkErrors = -998
-	KCFURLErrorCancelled CFNetworkErrors = -999
-	KCFURLErrorBadURL CFNetworkErrors = -1000
-	KCFURLErrorTimedOut CFNetworkErrors = -1001
-	KCFURLErrorUnsupportedURL CFNetworkErrors = -1002
-	KCFURLErrorCannotFindHost CFNetworkErrors = -1003
-	KCFURLErrorCannotConnectToHost CFNetworkErrors = -1004
-	KCFURLErrorNetworkConnectionLost CFNetworkErrors = -1005
-	KCFURLErrorDNSLookupFailed CFNetworkErrors = -1006
-	KCFURLErrorHTTPTooManyRedirects CFNetworkErrors = -1007
-	KCFURLErrorResourceUnavailable CFNetworkErrors = -1008
-	KCFURLErrorNotConnectedToInternet CFNetworkErrors = -1009
-	KCFURLErrorRedirectToNonExistentLocation CFNetworkErrors = -1010
-	KCFURLErrorBadServerResponse CFNetworkErrors = -1011
-	KCFURLErrorUserCancelledAuthentication CFNetworkErrors = -1012
-	KCFURLErrorUserAuthenticationRequired CFNetworkErrors = -1013
-	KCFURLErrorZeroByteResource CFNetworkErrors = -1014
-	KCFURLErrorCannotDecodeRawData CFNetworkErrors = -1015
-	KCFURLErrorCannotDecodeContentData CFNetworkErrors = -1016
-	KCFURLErrorCannotParseResponse CFNetworkErrors = -1017
-	KCFURLErrorInternationalRoamingOff CFNetworkErrors = -1018
-	KCFURLErrorCallIsActive CFNetworkErrors = -1019
-	KCFURLErrorDataNotAllowed CFNetworkErrors = -1020
-	KCFURLErrorRequestBodyStreamExhausted CFNetworkErrors = -1021
-	KCFURLErrorAppTransportSecurityRequiresSecureConnection CFNetworkErrors = -1022
-	KCFURLErrorFileDoesNotExist CFNetworkErrors = -1100
-	KCFURLErrorFileIsDirectory CFNetworkErrors = -1101
-	KCFURLErrorNoPermissionsToReadFile CFNetworkErrors = -1102
-	KCFURLErrorDataLengthExceedsMaximum CFNetworkErrors = -1103
-	KCFURLErrorFileOutsideSafeArea CFNetworkErrors = -1104
-	KCFURLErrorSecureConnectionFailed CFNetworkErrors = -1200
-	KCFURLErrorServerCertificateHasBadDate CFNetworkErrors = -1201
-	KCFURLErrorServerCertificateUntrusted CFNetworkErrors = -1202
-	KCFURLErrorServerCertificateHasUnknownRoot CFNetworkErrors = -1203
-	KCFURLErrorServerCertificateNotYetValid CFNetworkErrors = -1204
-	KCFURLErrorClientCertificateRejected CFNetworkErrors = -1205
-	KCFURLErrorClientCertificateRequired CFNetworkErrors = -1206
-	KCFURLErrorCannotLoadFromNetwork CFNetworkErrors = -2000
-	KCFURLErrorCannotCreateFile CFNetworkErrors = -3000
-	KCFURLErrorCannotOpenFile CFNetworkErrors = -3001
-	KCFURLErrorCannotCloseFile CFNetworkErrors = -3002
-	KCFURLErrorCannotWriteToFile CFNetworkErrors = -3003
-	KCFURLErrorCannotRemoveFile CFNetworkErrors = -3004
-	KCFURLErrorCannotMoveFile CFNetworkErrors = -3005
-	KCFURLErrorDownloadDecodingFailedMidStream CFNetworkErrors = -3006
-	KCFURLErrorDownloadDecodingFailedToComplete CFNetworkErrors = -3007
-	KCFHTTPCookieCannotParseCookieFile CFNetworkErrors = -4000
-	KCFNetServiceErrorUnknown CFNetworkErrors = -72000
-	KCFNetServiceErrorCollision CFNetworkErrors = -72001
-	KCFNetServiceErrorNotFound CFNetworkErrors = -72002
-	KCFNetServiceErrorInProgress CFNetworkErrors = -72003
-	KCFNetServiceErrorBadArgument CFNetworkErrors = -72004
-	KCFNetServiceErrorCancel CFNetworkErrors = -72005
-	KCFNetServiceErrorInvalid CFNetworkErrors = -72006
-	KCFNetServiceErrorTimeout CFNetworkErrors = -72007
-	KCFNetServiceErrorDNSServiceFailure CFNetworkErrors = -73000
+	KCFURLErrorBackgroundSessionInUseByAnotherProcess                CFNetworkErrors = -996
+	KCFURLErrorBackgroundSessionWasDisconnected                      CFNetworkErrors = -997
+	KCFURLErrorUnknown                                               CFNetworkErrors = -998
+	KCFURLErrorCancelled                                             CFNetworkErrors = -999
+	KCFURLErrorBadURL                                                CFNetworkErrors = -1000
+	KCFURLErrorTimedOut                                              CFNetworkErrors = -1001
+	KCFURLErrorUnsupportedURL                                        CFNetworkErrors = -1002
+	KCFURLErrorCannotFindHost                                        CFNetworkErrors = -1003
+	KCFURLErrorCannotConnectToHost                                   CFNetworkErrors = -1004
+	KCFURLErrorNetworkConnectionLost                                 CFNetworkErrors = -1005
+	KCFURLErrorDNSLookupFailed                                       CFNetworkErrors = -1006
+	KCFURLErrorHTTPTooManyRedirects                                  CFNetworkErrors = -1007
+	KCFURLErrorResourceUnavailable                                   CFNetworkErrors = -1008
+	KCFURLErrorNotConnectedToInternet                                CFNetworkErrors = -1009
+	KCFURLErrorRedirectToNonExistentLocation                         CFNetworkErrors = -1010
+	KCFURLErrorBadServerResponse                                     CFNetworkErrors = -1011
+	KCFURLErrorUserCancelledAuthentication                           CFNetworkErrors = -1012
+	KCFURLErrorUserAuthenticationRequired                            CFNetworkErrors = -1013
+	KCFURLErrorZeroByteResource                                      CFNetworkErrors = -1014
+	KCFURLErrorCannotDecodeRawData                                   CFNetworkErrors = -1015
+	KCFURLErrorCannotDecodeContentData                               CFNetworkErrors = -1016
+	KCFURLErrorCannotParseResponse                                   CFNetworkErrors = -1017
+	KCFURLErrorInternationalRoamingOff                               CFNetworkErrors = -1018
+	KCFURLErrorCallIsActive                                          CFNetworkErrors = -1019
+	KCFURLErrorDataNotAllowed                                        CFNetworkErrors = -1020
+	KCFURLErrorRequestBodyStreamExhausted                            CFNetworkErrors = -1021
+	KCFURLErrorAppTransportSecurityRequiresSecureConnection          CFNetworkErrors = -1022
+	KCFURLErrorFileDoesNotExist                                      CFNetworkErrors = -1100
+	KCFURLErrorFileIsDirectory                                       CFNetworkErrors = -1101
+	KCFURLErrorNoPermissionsToReadFile                               CFNetworkErrors = -1102
+	KCFURLErrorDataLengthExceedsMaximum                              CFNetworkErrors = -1103
+	KCFURLErrorFileOutsideSafeArea                                   CFNetworkErrors = -1104
+	KCFURLErrorSecureConnectionFailed                                CFNetworkErrors = -1200
+	KCFURLErrorServerCertificateHasBadDate                           CFNetworkErrors = -1201
+	KCFURLErrorServerCertificateUntrusted                            CFNetworkErrors = -1202
+	KCFURLErrorServerCertificateHasUnknownRoot                       CFNetworkErrors = -1203
+	KCFURLErrorServerCertificateNotYetValid                          CFNetworkErrors = -1204
+	KCFURLErrorClientCertificateRejected                             CFNetworkErrors = -1205
+	KCFURLErrorClientCertificateRequired                             CFNetworkErrors = -1206
+	KCFURLErrorCannotLoadFromNetwork                                 CFNetworkErrors = -2000
+	KCFURLErrorCannotCreateFile                                      CFNetworkErrors = -3000
+	KCFURLErrorCannotOpenFile                                        CFNetworkErrors = -3001
+	KCFURLErrorCannotCloseFile                                       CFNetworkErrors = -3002
+	KCFURLErrorCannotWriteToFile                                     CFNetworkErrors = -3003
+	KCFURLErrorCannotRemoveFile                                      CFNetworkErrors = -3004
+	KCFURLErrorCannotMoveFile                                        CFNetworkErrors = -3005
+	KCFURLErrorDownloadDecodingFailedMidStream                       CFNetworkErrors = -3006
+	KCFURLErrorDownloadDecodingFailedToComplete                      CFNetworkErrors = -3007
+	KCFHTTPCookieCannotParseCookieFile                               CFNetworkErrors = -4000
+	KCFNetServiceErrorUnknown                                        CFNetworkErrors = -72000
+	KCFNetServiceErrorCollision                                      CFNetworkErrors = -72001
+	KCFNetServiceErrorNotFound                                       CFNetworkErrors = -72002
+	KCFNetServiceErrorInProgress                                     CFNetworkErrors = -72003
+	KCFNetServiceErrorBadArgument                                    CFNetworkErrors = -72004
+	KCFNetServiceErrorCancel                                         CFNetworkErrors = -72005
+	KCFNetServiceErrorInvalid                                        CFNetworkErrors = -72006
+	KCFNetServiceErrorTimeout                                        CFNetworkErrors = -72007
+	KCFNetServiceErrorDNSServiceFailure                              CFNetworkErrors = -73000
 )
 
 func (e CFNetworkErrors) String() string {
@@ -411,9 +427,9 @@ func (e CFNetworkErrors) String() string {
 type CFStreamErrorHTTP int32
 
 const (
-	KCFStreamErrorHTTPParseFailure CFStreamErrorHTTP = -1
+	KCFStreamErrorHTTPParseFailure    CFStreamErrorHTTP = -1
 	KCFStreamErrorHTTPRedirectionLoop CFStreamErrorHTTP = -2
-	KCFStreamErrorHTTPBadURL CFStreamErrorHTTP = -3
+	KCFStreamErrorHTTPBadURL          CFStreamErrorHTTP = -3
 )
 
 func (e CFStreamErrorHTTP) String() string {
@@ -433,8 +449,8 @@ type CFStreamErrorHTTPAuthentication int32
 
 const (
 	KCFStreamErrorHTTPAuthenticationTypeUnsupported CFStreamErrorHTTPAuthentication = -1000
-	KCFStreamErrorHTTPAuthenticationBadUserName CFStreamErrorHTTPAuthentication = -1001
-	KCFStreamErrorHTTPAuthenticationBadPassword CFStreamErrorHTTPAuthentication = -1002
+	KCFStreamErrorHTTPAuthenticationBadUserName     CFStreamErrorHTTPAuthentication = -1001
+	KCFStreamErrorHTTPAuthenticationBadPassword     CFStreamErrorHTTPAuthentication = -1002
 )
 
 func (e CFStreamErrorHTTPAuthentication) String() string {
@@ -454,8 +470,8 @@ type Acl_entry_id_t int64
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
-	ACL_NEXT_ENTRY Acl_entry_id_t = -1
-	ACL_LAST_ENTRY Acl_entry_id_t = -2
+	ACL_NEXT_ENTRY  Acl_entry_id_t = -1
+	ACL_LAST_ENTRY  Acl_entry_id_t = -2
 )
 
 func (e Acl_entry_id_t) String() string {
@@ -474,13 +490,13 @@ func (e Acl_entry_id_t) String() string {
 type Acl_flag_t int64
 
 const (
-	ACL_FLAG_DEFER_INHERIT Acl_flag_t = 1
-	ACL_FLAG_NO_INHERIT Acl_flag_t = 131072
-	ACL_ENTRY_INHERITED Acl_flag_t = 16
-	ACL_ENTRY_FILE_INHERIT Acl_flag_t = 32
+	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
+	ACL_FLAG_NO_INHERIT         Acl_flag_t = 131072
+	ACL_ENTRY_INHERITED         Acl_flag_t = 16
+	ACL_ENTRY_FILE_INHERIT      Acl_flag_t = 32
 	ACL_ENTRY_DIRECTORY_INHERIT Acl_flag_t = 64
-	ACL_ENTRY_LIMIT_INHERIT Acl_flag_t = 128
-	ACL_ENTRY_ONLY_INHERIT Acl_flag_t = 256
+	ACL_ENTRY_LIMIT_INHERIT     Acl_flag_t = 128
+	ACL_ENTRY_ONLY_INHERIT      Acl_flag_t = 256
 )
 
 func (e Acl_flag_t) String() string {
@@ -507,24 +523,24 @@ func (e Acl_flag_t) String() string {
 type Acl_perm_t int64
 
 const (
-	ACL_READ_DATA Acl_perm_t = 2
-	ACL_LIST_DIRECTORY Acl_perm_t = 2
-	ACL_WRITE_DATA Acl_perm_t = 4
-	ACL_ADD_FILE Acl_perm_t = 4
-	ACL_EXECUTE Acl_perm_t = 8
-	ACL_SEARCH Acl_perm_t = 8
-	ACL_DELETE Acl_perm_t = 16
-	ACL_APPEND_DATA Acl_perm_t = 32
-	ACL_ADD_SUBDIRECTORY Acl_perm_t = 32
-	ACL_DELETE_CHILD Acl_perm_t = 64
-	ACL_READ_ATTRIBUTES Acl_perm_t = 128
-	ACL_WRITE_ATTRIBUTES Acl_perm_t = 256
-	ACL_READ_EXTATTRIBUTES Acl_perm_t = 512
+	ACL_READ_DATA           Acl_perm_t = 2
+	ACL_LIST_DIRECTORY      Acl_perm_t = 2
+	ACL_WRITE_DATA          Acl_perm_t = 4
+	ACL_ADD_FILE            Acl_perm_t = 4
+	ACL_EXECUTE             Acl_perm_t = 8
+	ACL_SEARCH              Acl_perm_t = 8
+	ACL_DELETE              Acl_perm_t = 16
+	ACL_APPEND_DATA         Acl_perm_t = 32
+	ACL_ADD_SUBDIRECTORY    Acl_perm_t = 32
+	ACL_DELETE_CHILD        Acl_perm_t = 64
+	ACL_READ_ATTRIBUTES     Acl_perm_t = 128
+	ACL_WRITE_ATTRIBUTES    Acl_perm_t = 256
+	ACL_READ_EXTATTRIBUTES  Acl_perm_t = 512
 	ACL_WRITE_EXTATTRIBUTES Acl_perm_t = 1024
-	ACL_READ_SECURITY Acl_perm_t = 2048
-	ACL_WRITE_SECURITY Acl_perm_t = 4096
-	ACL_CHANGE_OWNER Acl_perm_t = 8192
-	ACL_SYNCHRONIZE Acl_perm_t = 1048576
+	ACL_READ_SECURITY       Acl_perm_t = 2048
+	ACL_WRITE_SECURITY      Acl_perm_t = 4096
+	ACL_CHANGE_OWNER        Acl_perm_t = 8192
+	ACL_SYNCHRONIZE         Acl_perm_t = 1048576
 )
 
 func (e Acl_perm_t) String() string {
@@ -565,9 +581,9 @@ func (e Acl_perm_t) String() string {
 type Acl_tag_t int64
 
 const (
-	ACL_UNDEFINED_TAG Acl_tag_t = 0
+	ACL_UNDEFINED_TAG  Acl_tag_t = 0
 	ACL_EXTENDED_ALLOW Acl_tag_t = 1
-	ACL_EXTENDED_DENY Acl_tag_t = 2
+	ACL_EXTENDED_DENY  Acl_tag_t = 2
 )
 
 func (e Acl_tag_t) String() string {
@@ -587,12 +603,12 @@ type Acl_type_t int64
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
-	ACL_TYPE_ACCESS Acl_type_t = 0
-	ACL_TYPE_DEFAULT Acl_type_t = 1
-	ACL_TYPE_AFS Acl_type_t = 2
-	ACL_TYPE_CODA Acl_type_t = 3
-	ACL_TYPE_NTFS Acl_type_t = 4
-	ACL_TYPE_NWFS Acl_type_t = 5
+	ACL_TYPE_ACCESS   Acl_type_t = 0
+	ACL_TYPE_DEFAULT  Acl_type_t = 1
+	ACL_TYPE_AFS      Acl_type_t = 2
+	ACL_TYPE_CODA     Acl_type_t = 3
+	ACL_TYPE_NTFS     Acl_type_t = 4
+	ACL_TYPE_NWFS     Acl_type_t = 5
 )
 
 func (e Acl_type_t) String() string {
@@ -619,14 +635,14 @@ func (e Acl_type_t) String() string {
 type Clockid_t int64
 
 const (
-	_CLOCK_REALTIME Clockid_t = 0
-	_CLOCK_MONOTONIC Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW Clockid_t = 4
+	_CLOCK_REALTIME             Clockid_t = 0
+	_CLOCK_MONOTONIC            Clockid_t = 6
+	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
 	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID Clockid_t = 16
+	_CLOCK_UPTIME_RAW           Clockid_t = 8
+	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
+	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
+	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
 )
 
 func (e Clockid_t) String() string {
@@ -655,9 +671,9 @@ func (e Clockid_t) String() string {
 type Dispatch_autorelease_frequency_t uint64
 
 const (
-	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT Dispatch_autorelease_frequency_t = 0
+	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT   Dispatch_autorelease_frequency_t = 0
 	DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM Dispatch_autorelease_frequency_t = 1
-	DISPATCH_AUTORELEASE_FREQUENCY_NEVER Dispatch_autorelease_frequency_t = 2
+	DISPATCH_AUTORELEASE_FREQUENCY_NEVER     Dispatch_autorelease_frequency_t = 2
 )
 
 func (e Dispatch_autorelease_frequency_t) String() string {
@@ -676,36 +692,50 @@ func (e Dispatch_autorelease_frequency_t) String() string {
 type Dispatch_block_flags_t uint64
 
 const (
-	DISPATCH_BLOCK_BARRIER Dispatch_block_flags_t = 1
-	DISPATCH_BLOCK_DETACHED Dispatch_block_flags_t = 2
-	DISPATCH_BLOCK_ASSIGN_CURRENT Dispatch_block_flags_t = 4
-	DISPATCH_BLOCK_NO_QOS_CLASS Dispatch_block_flags_t = 8
+	DISPATCH_BLOCK_BARRIER           Dispatch_block_flags_t = 1
+	DISPATCH_BLOCK_DETACHED          Dispatch_block_flags_t = 2
+	DISPATCH_BLOCK_ASSIGN_CURRENT    Dispatch_block_flags_t = 4
+	DISPATCH_BLOCK_NO_QOS_CLASS      Dispatch_block_flags_t = 8
 	DISPATCH_BLOCK_INHERIT_QOS_CLASS Dispatch_block_flags_t = 16
 	DISPATCH_BLOCK_ENFORCE_QOS_CLASS Dispatch_block_flags_t = 32
 )
 
 func (e Dispatch_block_flags_t) String() string {
 	var parts []string
-	if e&DISPATCH_BLOCK_BARRIER != 0 { parts = append(parts, "DISPATCH_BLOCK_BARRIER") }
-	if e&DISPATCH_BLOCK_DETACHED != 0 { parts = append(parts, "DISPATCH_BLOCK_DETACHED") }
-	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 { parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT") }
-	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS") }
-	if len(parts) == 0 { return "0" }
+	if e&DISPATCH_BLOCK_BARRIER != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_BARRIER")
+	}
+	if e&DISPATCH_BLOCK_DETACHED != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_DETACHED")
+	}
+	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT")
+	}
+	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Filesec_property_t int64
 
 const (
-	FILESEC_OWNER Filesec_property_t = 1
-	FILESEC_GROUP Filesec_property_t = 2
-	FILESEC_UUID Filesec_property_t = 3
-	FILESEC_MODE Filesec_property_t = 4
-	FILESEC_ACL Filesec_property_t = 5
-	FILESEC_GRPUUID Filesec_property_t = 6
-	FILESEC_ACL_RAW Filesec_property_t = 100
+	FILESEC_OWNER         Filesec_property_t = 1
+	FILESEC_GROUP         Filesec_property_t = 2
+	FILESEC_UUID          Filesec_property_t = 3
+	FILESEC_MODE          Filesec_property_t = 4
+	FILESEC_ACL           Filesec_property_t = 5
+	FILESEC_GRPUUID       Filesec_property_t = 6
+	FILESEC_ACL_RAW       Filesec_property_t = 100
 	FILESEC_ACL_ALLOCSIZE Filesec_property_t = 101
 )
 
@@ -735,8 +765,8 @@ func (e Filesec_property_t) String() string {
 type Idtype_t int64
 
 const (
-	P_ALL Idtype_t = 0
-	P_PID Idtype_t = 1
+	P_ALL  Idtype_t = 0
+	P_PID  Idtype_t = 1
 	P_PGID Idtype_t = 2
 )
 
@@ -756,26 +786,42 @@ func (e Idtype_t) String() string {
 type Mpo_flags_t int64
 
 const (
-	MPO_PORT Mpo_flags_t = 0
-	MPO_SERVICE_PORT Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT Mpo_flags_t = 2048
-	MPO_REPLY_PORT Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT Mpo_flags_t = 32768
+	MPO_PORT                            Mpo_flags_t = 0
+	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
+	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
+	MPO_REPLY_PORT                      Mpo_flags_t = 4096
+	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
+	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
+	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
 	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
 )
 
 func (e Mpo_flags_t) String() string {
 	var parts []string
-	if e&MPO_SERVICE_PORT != 0 { parts = append(parts, "MPO_SERVICE_PORT") }
-	if e&MPO_CONNECTION_PORT != 0 { parts = append(parts, "MPO_CONNECTION_PORT") }
-	if e&MPO_REPLY_PORT != 0 { parts = append(parts, "MPO_REPLY_PORT") }
-	if e&MPO_WEAK_REPLY_PORT != 0 { parts = append(parts, "MPO_WEAK_REPLY_PORT") }
-	if e&MPO_NOTIFICATION_PORT != 0 { parts = append(parts, "MPO_NOTIFICATION_PORT") }
-	if e&MPO_EXCEPTION_PORT != 0 { parts = append(parts, "MPO_EXCEPTION_PORT") }
-	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 { parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY") }
-	if len(parts) == 0 { return "0" }
+	if e&MPO_SERVICE_PORT != 0 {
+		parts = append(parts, "MPO_SERVICE_PORT")
+	}
+	if e&MPO_CONNECTION_PORT != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT")
+	}
+	if e&MPO_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_REPLY_PORT")
+	}
+	if e&MPO_WEAK_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_WEAK_REPLY_PORT")
+	}
+	if e&MPO_NOTIFICATION_PORT != 0 {
+		parts = append(parts, "MPO_NOTIFICATION_PORT")
+	}
+	if e&MPO_EXCEPTION_PORT != 0 {
+		parts = append(parts, "MPO_EXCEPTION_PORT")
+	}
+	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -797,27 +843,27 @@ func (e Os_clockid_t) String() string {
 type Ptrauth_key int64
 
 const (
-	Ptrauth_key_none Ptrauth_key = -1
-	Ptrauth_key_asia Ptrauth_key = 0
-	Ptrauth_key_asib Ptrauth_key = 1
-	Ptrauth_key_asda Ptrauth_key = 2
-	Ptrauth_key_asdb Ptrauth_key = 3
+	Ptrauth_key_none                     Ptrauth_key = -1
+	Ptrauth_key_asia                     Ptrauth_key = 0
+	Ptrauth_key_asib                     Ptrauth_key = 1
+	Ptrauth_key_asda                     Ptrauth_key = 2
+	Ptrauth_key_asdb                     Ptrauth_key = 3
 	Ptrauth_key_process_independent_code Ptrauth_key = 0
-	Ptrauth_key_process_dependent_code Ptrauth_key = 1
+	Ptrauth_key_process_dependent_code   Ptrauth_key = 1
 	Ptrauth_key_process_independent_data Ptrauth_key = 2
-	Ptrauth_key_process_dependent_data Ptrauth_key = 3
-	Ptrauth_key_return_address Ptrauth_key = 1
-	Ptrauth_key_frame_pointer Ptrauth_key = 3
-	Ptrauth_key_function_pointer Ptrauth_key = 0
-	Ptrauth_key_block_function Ptrauth_key = 0
-	Ptrauth_key_cxx_vtable_pointer Ptrauth_key = 2
-	Ptrauth_key_method_list_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_isa_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_super_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_sel_pointer Ptrauth_key = 3
-	Ptrauth_key_objc_class_ro_pointer Ptrauth_key = 2
+	Ptrauth_key_process_dependent_data   Ptrauth_key = 3
+	Ptrauth_key_return_address           Ptrauth_key = 1
+	Ptrauth_key_frame_pointer            Ptrauth_key = 3
+	Ptrauth_key_function_pointer         Ptrauth_key = 0
+	Ptrauth_key_block_function           Ptrauth_key = 0
+	Ptrauth_key_cxx_vtable_pointer       Ptrauth_key = 2
+	Ptrauth_key_method_list_pointer      Ptrauth_key = 2
+	Ptrauth_key_objc_isa_pointer         Ptrauth_key = 2
+	Ptrauth_key_objc_super_pointer       Ptrauth_key = 2
+	Ptrauth_key_objc_sel_pointer         Ptrauth_key = 3
+	Ptrauth_key_objc_class_ro_pointer    Ptrauth_key = 2
 	Ptrauth_key_block_descriptor_pointer Ptrauth_key = 2
-	Ptrauth_key_init_fini_pointer Ptrauth_key = 0
+	Ptrauth_key_init_fini_pointer        Ptrauth_key = 0
 )
 
 func (e Ptrauth_key) String() string {
@@ -841,11 +887,11 @@ type Qos_class_t uint32
 
 const (
 	QOS_CLASS_USER_INTERACTIVE Qos_class_t = 33
-	QOS_CLASS_USER_INITIATED Qos_class_t = 25
-	QOS_CLASS_DEFAULT Qos_class_t = 21
-	QOS_CLASS_UTILITY Qos_class_t = 17
-	QOS_CLASS_BACKGROUND Qos_class_t = 9
-	QOS_CLASS_UNSPECIFIED Qos_class_t = 0
+	QOS_CLASS_USER_INITIATED   Qos_class_t = 25
+	QOS_CLASS_DEFAULT          Qos_class_t = 21
+	QOS_CLASS_UTILITY          Qos_class_t = 17
+	QOS_CLASS_BACKGROUND       Qos_class_t = 9
+	QOS_CLASS_UNSPECIFIED      Qos_class_t = 0
 )
 
 func (e Qos_class_t) String() string {
@@ -868,27 +914,26 @@ func (e Qos_class_t) String() string {
 }
 
 const (
-	KCFStreamErrorSOCKS4IdConflict = 93
-	KCFStreamErrorSOCKS4IdentdFailed = 92
+	KCFStreamErrorSOCKS4IdConflict    = 93
+	KCFStreamErrorSOCKS4IdentdFailed  = 92
 	KCFStreamErrorSOCKS4RequestFailed = 91
 )
 
 const (
-	KCFStreamErrorSOCKS5BadResponseAddr = 1
-	KCFStreamErrorSOCKS5BadState = 2
+	KCFStreamErrorSOCKS5BadResponseAddr     = 1
+	KCFStreamErrorSOCKS5BadState            = 2
 	KCFStreamErrorSOCKSUnknownClientVersion = 3
 )
 
 const (
-	KCFStreamErrorSOCKS4SubDomainResponse = 2
-	KCFStreamErrorSOCKS5SubDomainMethod = 4
-	KCFStreamErrorSOCKS5SubDomainResponse = 5
-	KCFStreamErrorSOCKS5SubDomainUserPass = 3
-	KCFStreamErrorSOCKSSubDomainNone = 0
+	KCFStreamErrorSOCKS4SubDomainResponse   = 2
+	KCFStreamErrorSOCKS5SubDomainMethod     = 4
+	KCFStreamErrorSOCKS5SubDomainResponse   = 5
+	KCFStreamErrorSOCKS5SubDomainUserPass   = 3
+	KCFStreamErrorSOCKSSubDomainNone        = 0
 	KCFStreamErrorSOCKSSubDomainVersionCode = 1
 )
 
 const (
 	KSOCKS5NoAcceptableMethod = 255
 )
-

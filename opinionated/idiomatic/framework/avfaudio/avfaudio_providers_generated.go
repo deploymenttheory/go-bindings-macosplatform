@@ -52,4 +52,3 @@ type MIDIChannelEventProvider interface {
 type MusicEventProvider interface {
 	asMusicEvent() *raw.AVMusicEvent
 }
-

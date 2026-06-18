@@ -13,10 +13,10 @@ import (
 type QLThumbnailGenerationRequestRepresentationTypes uint64
 
 const (
-	QLThumbnailGenerationRequestRepresentationTypeIcon QLThumbnailGenerationRequestRepresentationTypes = 1
+	QLThumbnailGenerationRequestRepresentationTypeIcon                QLThumbnailGenerationRequestRepresentationTypes = 1
 	QLThumbnailGenerationRequestRepresentationTypeLowQualityThumbnail QLThumbnailGenerationRequestRepresentationTypes = 2
-	QLThumbnailGenerationRequestRepresentationTypeThumbnail QLThumbnailGenerationRequestRepresentationTypes = 4
-	QLThumbnailGenerationRequestRepresentationTypeAll QLThumbnailGenerationRequestRepresentationTypes = 18446744073709551615
+	QLThumbnailGenerationRequestRepresentationTypeThumbnail           QLThumbnailGenerationRequestRepresentationTypes = 4
+	QLThumbnailGenerationRequestRepresentationTypeAll                 QLThumbnailGenerationRequestRepresentationTypes = 18446744073709551615
 )
 
 func (e QLThumbnailGenerationRequestRepresentationTypes) String() string {
@@ -42,9 +42,9 @@ func (e QLThumbnailGenerationRequestRepresentationTypes) String() string {
 type QLThumbnailRepresentationType int64
 
 const (
-	QLThumbnailRepresentationTypeIcon QLThumbnailRepresentationType = 0
+	QLThumbnailRepresentationTypeIcon                QLThumbnailRepresentationType = 0
 	QLThumbnailRepresentationTypeLowQualityThumbnail QLThumbnailRepresentationType = 1
-	QLThumbnailRepresentationTypeThumbnail QLThumbnailRepresentationType = 2
+	QLThumbnailRepresentationTypeThumbnail           QLThumbnailRepresentationType = 2
 )
 
 func (e QLThumbnailRepresentationType) String() string {
@@ -59,4 +59,3 @@ func (e QLThumbnailRepresentationType) String() string {
 		return fmt.Sprintf("QLThumbnailRepresentationType(%d)", int64(e))
 	}
 }
-

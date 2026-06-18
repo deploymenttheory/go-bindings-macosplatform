@@ -16,9 +16,9 @@ type INEnergyResolutionResult struct {
 }
 
 var (
-	_clsINEnergyResolutionResult = _objcClass("INEnergyResolutionResult")
-	_iNEnergyResolutionResultSelSuccessWithResolvedEnergy = objc.RegisterName("successWithResolvedEnergy:")
-	_iNEnergyResolutionResultSelDisambiguationWithEnergyToDisambiguate = objc.RegisterName("disambiguationWithEnergyToDisambiguate:")
+	_clsINEnergyResolutionResult                                        = _objcClass("INEnergyResolutionResult")
+	_iNEnergyResolutionResultSelSuccessWithResolvedEnergy               = objc.RegisterName("successWithResolvedEnergy:")
+	_iNEnergyResolutionResultSelDisambiguationWithEnergyToDisambiguate  = objc.RegisterName("disambiguationWithEnergyToDisambiguate:")
 	_iNEnergyResolutionResultSelConfirmationRequiredWithEnergyToConfirm = objc.RegisterName("confirmationRequiredWithEnergyToConfirm:")
 )
 
@@ -34,19 +34,24 @@ func INEnergyResolutionResultFromID(id objc.ID) *INEnergyResolutionResult {
 
 func INEnergyResolutionResultSuccessWithResolvedEnergy(resolvedEnergy *foundation.NSMeasurement[*foundation.NSUnitEnergy]) *INEnergyResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINEnergyResolutionResult), _iNEnergyResolutionResultSelSuccessWithResolvedEnergy, resolvedEnergy)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INEnergyResolutionResultFromID(_ret)
 }
 
 func INEnergyResolutionResultDisambiguationWithEnergyToDisambiguate(energyToDisambiguate *foundation.NSArray[objc.ID]) *INEnergyResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINEnergyResolutionResult), _iNEnergyResolutionResultSelDisambiguationWithEnergyToDisambiguate, energyToDisambiguate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INEnergyResolutionResultFromID(_ret)
 }
 
 func INEnergyResolutionResultConfirmationRequiredWithEnergyToConfirm(energyToConfirm *foundation.NSMeasurement[*foundation.NSUnitEnergy]) *INEnergyResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINEnergyResolutionResult), _iNEnergyResolutionResultSelConfirmationRequiredWithEnergyToConfirm, energyToConfirm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INEnergyResolutionResultFromID(_ret)
 }
-

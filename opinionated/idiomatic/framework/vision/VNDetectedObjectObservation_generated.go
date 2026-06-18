@@ -50,7 +50,9 @@ func (x *DetectedObjectObservation) GlobalSegmentationMask() *PixelBufferObserva
 	return &PixelBufferObservation{inner: _r}
 }
 
-func (x *DetectedObjectObservation) asDetectedObjectObservation() *raw.VNDetectedObjectObservation { return x.inner }
+func (x *DetectedObjectObservation) asDetectedObjectObservation() *raw.VNDetectedObjectObservation {
+	return x.inner
+}
 
 func (x *DetectedObjectObservation) asObservation() *raw.VNObservation { return &x.inner.VNObservation }
 
@@ -62,4 +64,3 @@ type DetectedObjectObservationable interface {
 }
 
 var _ DetectedObjectObservationable = (*DetectedObjectObservation)(nil)
-

@@ -12,4 +12,3 @@ import (
 type IdentityProvider interface {
 	asIdentity() *raw.CBIdentity
 }
-

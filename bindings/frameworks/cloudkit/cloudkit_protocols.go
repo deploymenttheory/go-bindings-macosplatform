@@ -24,4 +24,3 @@ type CKRecordValue interface {
 // CKSyncEngineDelegate wraps the ObjC protocol CKSyncEngineDelegate.
 type CKSyncEngineDelegate interface {
 }
-

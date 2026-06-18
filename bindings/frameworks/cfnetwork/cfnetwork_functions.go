@@ -10,153 +10,153 @@ import (
 )
 
 var (
-	_fnCFFTPCreateParsedResourceListing func(unsafe.Pointer, *uint8, int, unsafe.Pointer) int
-	_fnCFHTTPAuthenticationAppliesToRequest func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFHTTPAuthenticationCopyDomains func(unsafe.Pointer) unsafe.Pointer
-	_fnCFHTTPAuthenticationCopyMethod func(unsafe.Pointer) unsafe.Pointer
-	_fnCFHTTPAuthenticationCopyRealm func(unsafe.Pointer) unsafe.Pointer
-	_fnCFHTTPAuthenticationCreateFromResponse func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFHTTPAuthenticationGetTypeID func() uint
-	_fnCFHTTPAuthenticationIsValid func(unsafe.Pointer, *corefoundation.CFStreamError) uint8
-	_fnCFHTTPAuthenticationRequiresAccountDomain func(unsafe.Pointer) uint8
-	_fnCFHTTPAuthenticationRequiresOrderedRequests func(unsafe.Pointer) uint8
+	_fnCFFTPCreateParsedResourceListing                func(unsafe.Pointer, *uint8, int, unsafe.Pointer) int
+	_fnCFHTTPAuthenticationAppliesToRequest            func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFHTTPAuthenticationCopyDomains                 func(unsafe.Pointer) unsafe.Pointer
+	_fnCFHTTPAuthenticationCopyMethod                  func(unsafe.Pointer) unsafe.Pointer
+	_fnCFHTTPAuthenticationCopyRealm                   func(unsafe.Pointer) unsafe.Pointer
+	_fnCFHTTPAuthenticationCreateFromResponse          func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFHTTPAuthenticationGetTypeID                   func() uint
+	_fnCFHTTPAuthenticationIsValid                     func(unsafe.Pointer, *corefoundation.CFStreamError) uint8
+	_fnCFHTTPAuthenticationRequiresAccountDomain       func(unsafe.Pointer) uint8
+	_fnCFHTTPAuthenticationRequiresOrderedRequests     func(unsafe.Pointer) uint8
 	_fnCFHTTPAuthenticationRequiresUserNameAndPassword func(unsafe.Pointer) uint8
-	_fnCFHTTPMessageAddAuthentication func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8) uint8
-	_fnCFHTTPMessageAppendBytes func(unsafe.Pointer, *uint8, int) uint8
-	_fnCFHTTPMessageApplyCredentialDictionary func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *corefoundation.CFStreamError) uint8
-	_fnCFHTTPMessageApplyCredentials func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *corefoundation.CFStreamError) uint8
-	_fnCFHTTPMessageCopyAllHeaderFields func(unsafe.Pointer) unsafe.Pointer
-	_fnCFHTTPMessageCopyBody func(unsafe.Pointer) unsafe.Pointer
-	_fnCFHTTPMessageCopyHeaderFieldValue func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFHTTPMessageCopyRequestMethod func(unsafe.Pointer) unsafe.Pointer
-	_fnCFHTTPMessageCopyRequestURL func(unsafe.Pointer) unsafe.Pointer
-	_fnCFHTTPMessageCopyResponseStatusLine func(unsafe.Pointer) unsafe.Pointer
-	_fnCFHTTPMessageCopySerializedMessage func(unsafe.Pointer) unsafe.Pointer
-	_fnCFHTTPMessageCopyVersion func(unsafe.Pointer) unsafe.Pointer
-	_fnCFHTTPMessageCreateCopy func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFHTTPMessageCreateEmpty func(unsafe.Pointer, uint8) unsafe.Pointer
-	_fnCFHTTPMessageCreateRequest func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFHTTPMessageCreateResponse func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFHTTPMessageGetResponseStatusCode func(unsafe.Pointer) int
-	_fnCFHTTPMessageGetTypeID func() uint
-	_fnCFHTTPMessageIsHeaderComplete func(unsafe.Pointer) uint8
-	_fnCFHTTPMessageIsRequest func(unsafe.Pointer) uint8
-	_fnCFHTTPMessageSetBody func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFHTTPMessageSetHeaderFieldValue func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-// Deprecated: Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>
+	_fnCFHTTPMessageAddAuthentication                  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8) uint8
+	_fnCFHTTPMessageAppendBytes                        func(unsafe.Pointer, *uint8, int) uint8
+	_fnCFHTTPMessageApplyCredentialDictionary          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *corefoundation.CFStreamError) uint8
+	_fnCFHTTPMessageApplyCredentials                   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *corefoundation.CFStreamError) uint8
+	_fnCFHTTPMessageCopyAllHeaderFields                func(unsafe.Pointer) unsafe.Pointer
+	_fnCFHTTPMessageCopyBody                           func(unsafe.Pointer) unsafe.Pointer
+	_fnCFHTTPMessageCopyHeaderFieldValue               func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFHTTPMessageCopyRequestMethod                  func(unsafe.Pointer) unsafe.Pointer
+	_fnCFHTTPMessageCopyRequestURL                     func(unsafe.Pointer) unsafe.Pointer
+	_fnCFHTTPMessageCopyResponseStatusLine             func(unsafe.Pointer) unsafe.Pointer
+	_fnCFHTTPMessageCopySerializedMessage              func(unsafe.Pointer) unsafe.Pointer
+	_fnCFHTTPMessageCopyVersion                        func(unsafe.Pointer) unsafe.Pointer
+	_fnCFHTTPMessageCreateCopy                         func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFHTTPMessageCreateEmpty                        func(unsafe.Pointer, uint8) unsafe.Pointer
+	_fnCFHTTPMessageCreateRequest                      func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFHTTPMessageCreateResponse                     func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFHTTPMessageGetResponseStatusCode              func(unsafe.Pointer) int
+	_fnCFHTTPMessageGetTypeID                          func() uint
+	_fnCFHTTPMessageIsHeaderComplete                   func(unsafe.Pointer) uint8
+	_fnCFHTTPMessageIsRequest                          func(unsafe.Pointer) uint8
+	_fnCFHTTPMessageSetBody                            func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFHTTPMessageSetHeaderFieldValue                func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	// Deprecated: Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>
 	_fnCFHostCancelInfoResolution func(unsafe.Pointer, CFHostInfoType)
-// Deprecated: Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>
+	// Deprecated: Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>
 	_fnCFHostCreateCopy func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>
+	// Deprecated: Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>
 	_fnCFHostCreateWithAddress func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>
+	// Deprecated: Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>
 	_fnCFHostCreateWithName func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>
+	// Deprecated: Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>
 	_fnCFHostGetAddressing func(unsafe.Pointer, *uint8) unsafe.Pointer
-// Deprecated: Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>
+	// Deprecated: Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>
 	_fnCFHostGetNames func(unsafe.Pointer, *uint8) unsafe.Pointer
-// Deprecated: Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>
+	// Deprecated: Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>
 	_fnCFHostGetReachability func(unsafe.Pointer, *uint8) unsafe.Pointer
-// Deprecated: Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>
+	// Deprecated: Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>
 	_fnCFHostGetTypeID func() uint
-// Deprecated: Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>
+	// Deprecated: Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>
 	_fnCFHostScheduleWithRunLoop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-// Deprecated: Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>
+	// Deprecated: Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>
 	_fnCFHostSetClient func(unsafe.Pointer, unsafe.Pointer, *CFHostClientContext) uint8
-// Deprecated: Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>
+	// Deprecated: Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>
 	_fnCFHostStartInfoResolution func(unsafe.Pointer, CFHostInfoType, *corefoundation.CFStreamError) uint8
-// Deprecated: Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>
-	_fnCFHostUnscheduleFromRunLoop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCFNetDiagnosticCopyNetworkStatusPassively func(unsafe.Pointer, unsafe.Pointer) int
-	_fnCFNetDiagnosticCreateWithStreams func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFNetDiagnosticCreateWithURL func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	// Deprecated: Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>
+	_fnCFHostUnscheduleFromRunLoop                 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCFNetDiagnosticCopyNetworkStatusPassively   func(unsafe.Pointer, unsafe.Pointer) int
+	_fnCFNetDiagnosticCreateWithStreams            func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFNetDiagnosticCreateWithURL                func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_fnCFNetDiagnosticDiagnoseProblemInteractively func(unsafe.Pointer) int
-	_fnCFNetDiagnosticSetName func(unsafe.Pointer, unsafe.Pointer)
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	_fnCFNetDiagnosticSetName                      func(unsafe.Pointer, unsafe.Pointer)
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceBrowserCreate func(unsafe.Pointer, unsafe.Pointer, *CFNetServiceClientContext) unsafe.Pointer
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceBrowserGetTypeID func() uint
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceBrowserInvalidate func(unsafe.Pointer)
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceBrowserScheduleWithRunLoop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceBrowserSearchForDomains func(unsafe.Pointer, uint8, *corefoundation.CFStreamError) uint8
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceBrowserSearchForServices func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *corefoundation.CFStreamError) uint8
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceBrowserStopSearch func(unsafe.Pointer, *corefoundation.CFStreamError)
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceBrowserUnscheduleFromRunLoop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceCancel func(unsafe.Pointer)
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int) unsafe.Pointer
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceCreateCopy func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceCreateDictionaryWithTXTData func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceCreateTXTDataWithDictionary func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceGetAddressing func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceGetDomain func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceGetName func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceGetPortNumber func(unsafe.Pointer) int
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceGetTXTData func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceGetTargetHost func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceGetType func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceGetTypeID func() uint
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceMonitorCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *CFNetServiceClientContext) unsafe.Pointer
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceMonitorGetTypeID func() uint
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceMonitorInvalidate func(unsafe.Pointer)
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceMonitorScheduleWithRunLoop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceMonitorStart func(unsafe.Pointer, CFNetServiceMonitorType, *corefoundation.CFStreamError) uint8
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceMonitorStop func(unsafe.Pointer, *corefoundation.CFStreamError)
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceMonitorUnscheduleFromRunLoop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCFNetServiceRegister func(unsafe.Pointer, *corefoundation.CFStreamError) uint8
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	_fnCFNetServiceRegister                     func(unsafe.Pointer, *corefoundation.CFStreamError) uint8
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceRegisterWithOptions func(unsafe.Pointer, uint, *corefoundation.CFStreamError) uint8
-	_fnCFNetServiceResolve func(unsafe.Pointer, *corefoundation.CFStreamError) uint8
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	_fnCFNetServiceResolve             func(unsafe.Pointer, *corefoundation.CFStreamError) uint8
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceResolveWithTimeout func(unsafe.Pointer, float64, *corefoundation.CFStreamError) uint8
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceScheduleWithRunLoop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceSetClient func(unsafe.Pointer, unsafe.Pointer, *CFNetServiceClientContext) uint8
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
 	_fnCFNetServiceSetTXTData func(unsafe.Pointer, unsafe.Pointer) uint8
-// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
-	_fnCFNetServiceUnscheduleFromRunLoop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	// Deprecated: Use nw_browser_t or nw_listener_t in Network framework instead
+	_fnCFNetServiceUnscheduleFromRunLoop              func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 	_fnCFNetworkCopyProxiesForAutoConfigurationScript func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFNetworkCopyProxiesForURL func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFNetworkCopySystemProxySettings func() unsafe.Pointer
-	_fnCFNetworkExecuteProxyAutoConfigurationScript func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *corefoundation.CFStreamClientContext) unsafe.Pointer
-	_fnCFNetworkExecuteProxyAutoConfigurationURL func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *corefoundation.CFStreamClientContext) unsafe.Pointer
-	_fnCFReadStreamCreateForHTTPRequest func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFReadStreamCreateForStreamedHTTPRequest func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFReadStreamCreateWithFTPURL func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFSocketStreamSOCKSGetError func(*corefoundation.CFStreamError) int
-	_fnCFSocketStreamSOCKSGetErrorSubdomain func(*corefoundation.CFStreamError) int
-// Deprecated: Use Network framework instead
+	_fnCFNetworkCopyProxiesForURL                     func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFNetworkCopySystemProxySettings               func() unsafe.Pointer
+	_fnCFNetworkExecuteProxyAutoConfigurationScript   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *corefoundation.CFStreamClientContext) unsafe.Pointer
+	_fnCFNetworkExecuteProxyAutoConfigurationURL      func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *corefoundation.CFStreamClientContext) unsafe.Pointer
+	_fnCFReadStreamCreateForHTTPRequest               func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFReadStreamCreateForStreamedHTTPRequest       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFReadStreamCreateWithFTPURL                   func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFSocketStreamSOCKSGetError                    func(*corefoundation.CFStreamError) int
+	_fnCFSocketStreamSOCKSGetErrorSubdomain           func(*corefoundation.CFStreamError) int
+	// Deprecated: Use Network framework instead
 	_fnCFStreamCreatePairWithSocketToCFHost func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer)
-// Deprecated: Use Network framework instead
+	// Deprecated: Use Network framework instead
 	_fnCFStreamCreatePairWithSocketToNetService func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCFWriteStreamCreateWithFTPURL func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFWriteStreamCreateWithFTPURL            func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 )
 
 func CFFTPCreateParsedResourceListing(alloc unsafe.Pointer, buffer *uint8, bufferLength int, parsed unsafe.Pointer) int {
@@ -602,4 +602,3 @@ func CFStreamCreatePairWithSocketToNetService(alloc unsafe.Pointer, service unsa
 func CFWriteStreamCreateWithFTPURL(alloc unsafe.Pointer, ftpURL unsafe.Pointer) unsafe.Pointer {
 	return _fnCFWriteStreamCreateWithFTPURL(alloc, ftpURL)
 }
-

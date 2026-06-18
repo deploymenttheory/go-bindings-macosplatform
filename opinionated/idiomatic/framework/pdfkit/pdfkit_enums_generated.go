@@ -12,14 +12,14 @@ import (
 type PDFAccessPermissions uint64
 
 const (
-	PDFAllowsLowQualityPrinting PDFAccessPermissions = 1
-	PDFAllowsHighQualityPrinting PDFAccessPermissions = 2
-	PDFAllowsDocumentChanges PDFAccessPermissions = 4
-	PDFAllowsDocumentAssembly PDFAccessPermissions = 8
-	PDFAllowsContentCopying PDFAccessPermissions = 16
+	PDFAllowsLowQualityPrinting   PDFAccessPermissions = 1
+	PDFAllowsHighQualityPrinting  PDFAccessPermissions = 2
+	PDFAllowsDocumentChanges      PDFAccessPermissions = 4
+	PDFAllowsDocumentAssembly     PDFAccessPermissions = 8
+	PDFAllowsContentCopying       PDFAccessPermissions = 16
 	PDFAllowsContentAccessibility PDFAccessPermissions = 32
-	PDFAllowsCommenting PDFAccessPermissions = 64
-	PDFAllowsFormFieldEntry PDFAccessPermissions = 128
+	PDFAllowsCommenting           PDFAccessPermissions = 64
+	PDFAllowsFormFieldEntry       PDFAccessPermissions = 128
 )
 
 func (e PDFAccessPermissions) String() string {
@@ -48,18 +48,18 @@ func (e PDFAccessPermissions) String() string {
 type PDFActionNamedName int64
 
 const (
-	KPDFActionNamedNone PDFActionNamedName = 0
-	KPDFActionNamedNextPage PDFActionNamedName = 1
+	KPDFActionNamedNone         PDFActionNamedName = 0
+	KPDFActionNamedNextPage     PDFActionNamedName = 1
 	KPDFActionNamedPreviousPage PDFActionNamedName = 2
-	KPDFActionNamedFirstPage PDFActionNamedName = 3
-	KPDFActionNamedLastPage PDFActionNamedName = 4
-	KPDFActionNamedGoBack PDFActionNamedName = 5
-	KPDFActionNamedGoForward PDFActionNamedName = 6
-	KPDFActionNamedGoToPage PDFActionNamedName = 7
-	KPDFActionNamedFind PDFActionNamedName = 8
-	KPDFActionNamedPrint PDFActionNamedName = 9
-	KPDFActionNamedZoomIn PDFActionNamedName = 10
-	KPDFActionNamedZoomOut PDFActionNamedName = 11
+	KPDFActionNamedFirstPage    PDFActionNamedName = 3
+	KPDFActionNamedLastPage     PDFActionNamedName = 4
+	KPDFActionNamedGoBack       PDFActionNamedName = 5
+	KPDFActionNamedGoForward    PDFActionNamedName = 6
+	KPDFActionNamedGoToPage     PDFActionNamedName = 7
+	KPDFActionNamedFind         PDFActionNamedName = 8
+	KPDFActionNamedPrint        PDFActionNamedName = 9
+	KPDFActionNamedZoomIn       PDFActionNamedName = 10
+	KPDFActionNamedZoomOut      PDFActionNamedName = 11
 )
 
 func (e PDFActionNamedName) String() string {
@@ -97,17 +97,17 @@ func (e PDFActionNamedName) String() string {
 type PDFAreaOfInterest uint64
 
 const (
-	KPDFNoArea PDFAreaOfInterest = 0
-	KPDFPageArea PDFAreaOfInterest = 1
-	KPDFTextArea PDFAreaOfInterest = 2
+	KPDFNoArea         PDFAreaOfInterest = 0
+	KPDFPageArea       PDFAreaOfInterest = 1
+	KPDFTextArea       PDFAreaOfInterest = 2
 	KPDFAnnotationArea PDFAreaOfInterest = 4
-	KPDFLinkArea PDFAreaOfInterest = 8
-	KPDFControlArea PDFAreaOfInterest = 16
-	KPDFTextFieldArea PDFAreaOfInterest = 32
-	KPDFIconArea PDFAreaOfInterest = 64
-	KPDFPopupArea PDFAreaOfInterest = 128
-	KPDFImageArea PDFAreaOfInterest = 256
-	KPDFAnyArea PDFAreaOfInterest = 9223372036854775807
+	KPDFLinkArea       PDFAreaOfInterest = 8
+	KPDFControlArea    PDFAreaOfInterest = 16
+	KPDFTextFieldArea  PDFAreaOfInterest = 32
+	KPDFIconArea       PDFAreaOfInterest = 64
+	KPDFPopupArea      PDFAreaOfInterest = 128
+	KPDFImageArea      PDFAreaOfInterest = 256
+	KPDFAnyArea        PDFAreaOfInterest = 9223372036854775807
 )
 
 func (e PDFAreaOfInterest) String() string {
@@ -151,10 +151,10 @@ func (e PDFAreaOfInterest) String() string {
 type PDFBorderStyle int64
 
 const (
-	KPDFBorderStyleSolid PDFBorderStyle = 0
-	KPDFBorderStyleDashed PDFBorderStyle = 1
-	KPDFBorderStyleBeveled PDFBorderStyle = 2
-	KPDFBorderStyleInset PDFBorderStyle = 3
+	KPDFBorderStyleSolid     PDFBorderStyle = 0
+	KPDFBorderStyleDashed    PDFBorderStyle = 1
+	KPDFBorderStyleBeveled   PDFBorderStyle = 2
+	KPDFBorderStyleInset     PDFBorderStyle = 3
 	KPDFBorderStyleUnderline PDFBorderStyle = 4
 )
 
@@ -179,10 +179,10 @@ type PDFDisplayBox int64
 
 const (
 	KPDFDisplayBoxMediaBox PDFDisplayBox = 0
-	KPDFDisplayBoxCropBox PDFDisplayBox = 1
+	KPDFDisplayBoxCropBox  PDFDisplayBox = 1
 	KPDFDisplayBoxBleedBox PDFDisplayBox = 2
-	KPDFDisplayBoxTrimBox PDFDisplayBox = 3
-	KPDFDisplayBoxArtBox PDFDisplayBox = 4
+	KPDFDisplayBoxTrimBox  PDFDisplayBox = 3
+	KPDFDisplayBoxArtBox   PDFDisplayBox = 4
 )
 
 func (e PDFDisplayBox) String() string {
@@ -205,7 +205,7 @@ func (e PDFDisplayBox) String() string {
 type PDFDisplayDirection int64
 
 const (
-	KPDFDisplayDirectionVertical PDFDisplayDirection = 0
+	KPDFDisplayDirectionVertical   PDFDisplayDirection = 0
 	KPDFDisplayDirectionHorizontal PDFDisplayDirection = 1
 )
 
@@ -223,10 +223,10 @@ func (e PDFDisplayDirection) String() string {
 type PDFDisplayMode int64
 
 const (
-	KPDFDisplaySinglePage PDFDisplayMode = 0
+	KPDFDisplaySinglePage           PDFDisplayMode = 0
 	KPDFDisplaySinglePageContinuous PDFDisplayMode = 1
-	KPDFDisplayTwoUp PDFDisplayMode = 2
-	KPDFDisplayTwoUpContinuous PDFDisplayMode = 3
+	KPDFDisplayTwoUp                PDFDisplayMode = 2
+	KPDFDisplayTwoUpContinuous      PDFDisplayMode = 3
 )
 
 func (e PDFDisplayMode) String() string {
@@ -247,8 +247,8 @@ func (e PDFDisplayMode) String() string {
 type PDFDocumentPermissions int64
 
 const (
-	KPDFDocumentPermissionsNone PDFDocumentPermissions = 0
-	KPDFDocumentPermissionsUser PDFDocumentPermissions = 1
+	KPDFDocumentPermissionsNone  PDFDocumentPermissions = 0
+	KPDFDocumentPermissionsUser  PDFDocumentPermissions = 1
 	KPDFDocumentPermissionsOwner PDFDocumentPermissions = 2
 )
 
@@ -269,7 +269,7 @@ type PDFInterpolationQuality int64
 
 const (
 	KPDFInterpolationQualityNone PDFInterpolationQuality = 0
-	KPDFInterpolationQualityLow PDFInterpolationQuality = 1
+	KPDFInterpolationQualityLow  PDFInterpolationQuality = 1
 	KPDFInterpolationQualityHigh PDFInterpolationQuality = 2
 )
 
@@ -289,11 +289,11 @@ func (e PDFInterpolationQuality) String() string {
 type PDFLineStyle int64
 
 const (
-	KPDFLineStyleNone PDFLineStyle = 0
-	KPDFLineStyleSquare PDFLineStyle = 1
-	KPDFLineStyleCircle PDFLineStyle = 2
-	KPDFLineStyleDiamond PDFLineStyle = 3
-	KPDFLineStyleOpenArrow PDFLineStyle = 4
+	KPDFLineStyleNone        PDFLineStyle = 0
+	KPDFLineStyleSquare      PDFLineStyle = 1
+	KPDFLineStyleCircle      PDFLineStyle = 2
+	KPDFLineStyleDiamond     PDFLineStyle = 3
+	KPDFLineStyleOpenArrow   PDFLineStyle = 4
 	KPDFLineStyleClosedArrow PDFLineStyle = 5
 )
 
@@ -322,7 +322,7 @@ const (
 	KPDFMarkupTypeHighlight PDFMarkupType = 0
 	KPDFMarkupTypeStrikeOut PDFMarkupType = 1
 	KPDFMarkupTypeUnderline PDFMarkupType = 2
-	KPDFMarkupTypeRedact PDFMarkupType = 3
+	KPDFMarkupTypeRedact    PDFMarkupType = 3
 )
 
 func (e PDFMarkupType) String() string {
@@ -343,8 +343,8 @@ func (e PDFMarkupType) String() string {
 type PDFPrintScalingMode int64
 
 const (
-	KPDFPrintPageScaleNone PDFPrintScalingMode = 0
-	KPDFPrintPageScaleToFit PDFPrintScalingMode = 1
+	KPDFPrintPageScaleNone      PDFPrintScalingMode = 0
+	KPDFPrintPageScaleToFit     PDFPrintScalingMode = 1
 	KPDFPrintPageScaleDownToFit PDFPrintScalingMode = 2
 )
 
@@ -365,8 +365,8 @@ type PDFSelectionGranularity uint64
 
 const (
 	PDFSelectionGranularityCharacter PDFSelectionGranularity = 0
-	PDFSelectionGranularityWord PDFSelectionGranularity = 1
-	PDFSelectionGranularityLine PDFSelectionGranularity = 2
+	PDFSelectionGranularityWord      PDFSelectionGranularity = 1
+	PDFSelectionGranularityLine      PDFSelectionGranularity = 2
 )
 
 func (e PDFSelectionGranularity) String() string {
@@ -385,13 +385,13 @@ func (e PDFSelectionGranularity) String() string {
 type PDFTextAnnotationIconType int64
 
 const (
-	KPDFTextAnnotationIconComment PDFTextAnnotationIconType = 0
-	KPDFTextAnnotationIconKey PDFTextAnnotationIconType = 1
-	KPDFTextAnnotationIconNote PDFTextAnnotationIconType = 2
-	KPDFTextAnnotationIconHelp PDFTextAnnotationIconType = 3
+	KPDFTextAnnotationIconComment      PDFTextAnnotationIconType = 0
+	KPDFTextAnnotationIconKey          PDFTextAnnotationIconType = 1
+	KPDFTextAnnotationIconNote         PDFTextAnnotationIconType = 2
+	KPDFTextAnnotationIconHelp         PDFTextAnnotationIconType = 3
 	KPDFTextAnnotationIconNewParagraph PDFTextAnnotationIconType = 4
-	KPDFTextAnnotationIconParagraph PDFTextAnnotationIconType = 5
-	KPDFTextAnnotationIconInsert PDFTextAnnotationIconType = 6
+	KPDFTextAnnotationIconParagraph    PDFTextAnnotationIconType = 5
+	KPDFTextAnnotationIconInsert       PDFTextAnnotationIconType = 6
 )
 
 func (e PDFTextAnnotationIconType) String() string {
@@ -419,8 +419,8 @@ type PDFWidgetCellState int64
 
 const (
 	KPDFWidgetMixedState PDFWidgetCellState = -1
-	KPDFWidgetOffState PDFWidgetCellState = 0
-	KPDFWidgetOnState PDFWidgetCellState = 1
+	KPDFWidgetOffState   PDFWidgetCellState = 0
+	KPDFWidgetOnState    PDFWidgetCellState = 1
 )
 
 func (e PDFWidgetCellState) String() string {
@@ -439,10 +439,10 @@ func (e PDFWidgetCellState) String() string {
 type PDFWidgetControlType int64
 
 const (
-	KPDFWidgetUnknownControl PDFWidgetControlType = -1
-	KPDFWidgetPushButtonControl PDFWidgetControlType = 0
+	KPDFWidgetUnknownControl     PDFWidgetControlType = -1
+	KPDFWidgetPushButtonControl  PDFWidgetControlType = 0
 	KPDFWidgetRadioButtonControl PDFWidgetControlType = 1
-	KPDFWidgetCheckBoxControl PDFWidgetControlType = 2
+	KPDFWidgetCheckBoxControl    PDFWidgetControlType = 2
 )
 
 func (e PDFWidgetControlType) String() string {
@@ -459,4 +459,3 @@ func (e PDFWidgetControlType) String() string {
 		return fmt.Sprintf("PDFWidgetControlType(%d)", int64(e))
 	}
 }
-

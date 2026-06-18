@@ -16,7 +16,7 @@ type ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput struct {
 }
 
 var (
-	_clsASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput = _objcClass("ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput")
+	_clsASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput         = _objcClass("ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput")
 	_aSAuthorizationPublicKeyCredentialLargeBlobAssertionOutputSelReadData = objc.RegisterName("readData")
 	_aSAuthorizationPublicKeyCredentialLargeBlobAssertionOutputSelDidWrite = objc.RegisterName("didWrite")
 )
@@ -33,7 +33,9 @@ func ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutputFromID(id objc.ID
 
 func (o *ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput) ReadData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPublicKeyCredentialLargeBlobAssertionOutputSelReadData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -41,4 +43,3 @@ func (o *ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput) DidWrite() 
 	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationPublicKeyCredentialLargeBlobAssertionOutputSelDidWrite)
 	return _ret
 }
-

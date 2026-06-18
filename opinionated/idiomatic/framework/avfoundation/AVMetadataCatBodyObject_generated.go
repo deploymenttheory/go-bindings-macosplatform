@@ -35,9 +35,13 @@ func NewMetadataCatBodyObject() *MetadataCatBodyObject {
 	return &MetadataCatBodyObject{inner: raw.AVMetadataCatBodyObjectFromID(_id)}
 }
 
-func (x *MetadataCatBodyObject) asMetadataBodyObject() *raw.AVMetadataBodyObject { return &x.inner.AVMetadataBodyObject }
+func (x *MetadataCatBodyObject) asMetadataBodyObject() *raw.AVMetadataBodyObject {
+	return &x.inner.AVMetadataBodyObject
+}
 
-func (x *MetadataCatBodyObject) asMetadataObject() *raw.AVMetadataObject { return &x.inner.AVMetadataBodyObject.AVMetadataObject }
+func (x *MetadataCatBodyObject) asMetadataObject() *raw.AVMetadataObject {
+	return &x.inner.AVMetadataBodyObject.AVMetadataObject
+}
 
 // MetadataCatBodyObjectable is the interface implemented by [MetadataCatBodyObject], for mocking and DI.
 type MetadataCatBodyObjectable interface {
@@ -45,4 +49,3 @@ type MetadataCatBodyObjectable interface {
 }
 
 var _ MetadataCatBodyObjectable = (*MetadataCatBodyObject)(nil)
-

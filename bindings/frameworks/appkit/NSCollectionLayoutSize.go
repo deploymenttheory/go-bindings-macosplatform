@@ -16,10 +16,10 @@ type NSCollectionLayoutSize struct {
 }
 
 var (
-	_clsNSCollectionLayoutSize = _objcClass("NSCollectionLayoutSize")
+	_clsNSCollectionLayoutSize                                      = _objcClass("NSCollectionLayoutSize")
 	_nSCollectionLayoutSizeSelSizeWithWidthDimensionHeightDimension = objc.RegisterName("sizeWithWidthDimension:heightDimension:")
-	_nSCollectionLayoutSizeSelWidthDimension = objc.RegisterName("widthDimension")
-	_nSCollectionLayoutSizeSelHeightDimension = objc.RegisterName("heightDimension")
+	_nSCollectionLayoutSizeSelWidthDimension                        = objc.RegisterName("widthDimension")
+	_nSCollectionLayoutSizeSelHeightDimension                       = objc.RegisterName("heightDimension")
 )
 
 func NSCollectionLayoutSizeFromID(id objc.ID) *NSCollectionLayoutSize {
@@ -34,19 +34,24 @@ func NSCollectionLayoutSizeFromID(id objc.ID) *NSCollectionLayoutSize {
 
 func NSCollectionLayoutSizeSizeWithWidthDimensionHeightDimension(width *NSCollectionLayoutDimension, height *NSCollectionLayoutDimension) *NSCollectionLayoutSize {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutSize), _nSCollectionLayoutSizeSelSizeWithWidthDimensionHeightDimension, width.Ptr(), height.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutSizeFromID(_ret)
 }
 
 func (o *NSCollectionLayoutSize) WidthDimension() *NSCollectionLayoutDimension {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutSizeSelWidthDimension)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutDimensionFromID(_ret)
 }
 
 func (o *NSCollectionLayoutSize) HeightDimension() *NSCollectionLayoutDimension {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutSizeSelHeightDimension)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutDimensionFromID(_ret)
 }
-

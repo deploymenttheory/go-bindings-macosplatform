@@ -17,7 +17,9 @@ type NDArrayQuantizationDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MPSNDArrayQuantizationDescriptor].
-func (x *NDArrayQuantizationDescriptor) Unwrap() *raw.MPSNDArrayQuantizationDescriptor { return x.inner }
+func (x *NDArrayQuantizationDescriptor) Unwrap() *raw.MPSNDArrayQuantizationDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -55,4 +57,3 @@ type NDArrayQuantizationDescriptorable interface {
 }
 
 var _ NDArrayQuantizationDescriptorable = (*NDArrayQuantizationDescriptor)(nil)
-

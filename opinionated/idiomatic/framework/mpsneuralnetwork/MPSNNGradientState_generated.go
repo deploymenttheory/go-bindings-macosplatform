@@ -43,4 +43,3 @@ type NNGradientStateable interface {
 }
 
 var _ NNGradientStateable = (*NNGradientState)(nil)
-

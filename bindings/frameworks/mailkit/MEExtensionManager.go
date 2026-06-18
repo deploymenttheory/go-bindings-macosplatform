@@ -18,9 +18,9 @@ type MEExtensionManager struct {
 }
 
 var (
-	_clsMEExtensionManager = _objcClass("MEExtensionManager")
+	_clsMEExtensionManager                                                    = _objcClass("MEExtensionManager")
 	_mEExtensionManagerSelReloadContentBlockerWithIdentifierCompletionHandler = objc.RegisterName("reloadContentBlockerWithIdentifier:completionHandler:")
-	_mEExtensionManagerSelReloadVisibleMessagesWithCompletionHandler = objc.RegisterName("reloadVisibleMessagesWithCompletionHandler:")
+	_mEExtensionManagerSelReloadVisibleMessagesWithCompletionHandler          = objc.RegisterName("reloadVisibleMessagesWithCompletionHandler:")
 )
 
 func MEExtensionManagerFromID(id objc.ID) *MEExtensionManager {
@@ -56,4 +56,3 @@ func MEExtensionManagerReloadVisibleMessagesWithCompletionHandler(completionHand
 	}
 	objc.ID(_clsMEExtensionManager).Send(_mEExtensionManagerSelReloadVisibleMessagesWithCompletionHandler, __block_completionHandler)
 }
-

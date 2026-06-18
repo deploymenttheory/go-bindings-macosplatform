@@ -16,22 +16,22 @@ type NSGroupTouchBarItem struct {
 }
 
 var (
-	_clsNSGroupTouchBarItem = _objcClass("NSGroupTouchBarItem")
-	_nSGroupTouchBarItemSelGroupItemWithIdentifierItems = objc.RegisterName("groupItemWithIdentifier:items:")
+	_clsNSGroupTouchBarItem                                                      = _objcClass("NSGroupTouchBarItem")
+	_nSGroupTouchBarItemSelGroupItemWithIdentifierItems                          = objc.RegisterName("groupItemWithIdentifier:items:")
 	_nSGroupTouchBarItemSelGroupItemWithIdentifierItemsAllowedCompressionOptions = objc.RegisterName("groupItemWithIdentifier:items:allowedCompressionOptions:")
-	_nSGroupTouchBarItemSelAlertStyleGroupItemWithIdentifier = objc.RegisterName("alertStyleGroupItemWithIdentifier:")
-	_nSGroupTouchBarItemSelGroupTouchBar = objc.RegisterName("groupTouchBar")
-	_nSGroupTouchBarItemSelSetGroupTouchBar = objc.RegisterName("setGroupTouchBar:")
-	_nSGroupTouchBarItemSelSetCustomizationLabel = objc.RegisterName("setCustomizationLabel:")
-	_nSGroupTouchBarItemSelGroupUserInterfaceLayoutDirection = objc.RegisterName("groupUserInterfaceLayoutDirection")
-	_nSGroupTouchBarItemSelSetGroupUserInterfaceLayoutDirection = objc.RegisterName("setGroupUserInterfaceLayoutDirection:")
-	_nSGroupTouchBarItemSelPrefersEqualWidths = objc.RegisterName("prefersEqualWidths")
-	_nSGroupTouchBarItemSelSetPrefersEqualWidths = objc.RegisterName("setPrefersEqualWidths:")
-	_nSGroupTouchBarItemSelPreferredItemWidth = objc.RegisterName("preferredItemWidth")
-	_nSGroupTouchBarItemSelSetPreferredItemWidth = objc.RegisterName("setPreferredItemWidth:")
-	_nSGroupTouchBarItemSelEffectiveCompressionOptions = objc.RegisterName("effectiveCompressionOptions")
-	_nSGroupTouchBarItemSelPrioritizedCompressionOptions = objc.RegisterName("prioritizedCompressionOptions")
-	_nSGroupTouchBarItemSelSetPrioritizedCompressionOptions = objc.RegisterName("setPrioritizedCompressionOptions:")
+	_nSGroupTouchBarItemSelAlertStyleGroupItemWithIdentifier                     = objc.RegisterName("alertStyleGroupItemWithIdentifier:")
+	_nSGroupTouchBarItemSelGroupTouchBar                                         = objc.RegisterName("groupTouchBar")
+	_nSGroupTouchBarItemSelSetGroupTouchBar                                      = objc.RegisterName("setGroupTouchBar:")
+	_nSGroupTouchBarItemSelSetCustomizationLabel                                 = objc.RegisterName("setCustomizationLabel:")
+	_nSGroupTouchBarItemSelGroupUserInterfaceLayoutDirection                     = objc.RegisterName("groupUserInterfaceLayoutDirection")
+	_nSGroupTouchBarItemSelSetGroupUserInterfaceLayoutDirection                  = objc.RegisterName("setGroupUserInterfaceLayoutDirection:")
+	_nSGroupTouchBarItemSelPrefersEqualWidths                                    = objc.RegisterName("prefersEqualWidths")
+	_nSGroupTouchBarItemSelSetPrefersEqualWidths                                 = objc.RegisterName("setPrefersEqualWidths:")
+	_nSGroupTouchBarItemSelPreferredItemWidth                                    = objc.RegisterName("preferredItemWidth")
+	_nSGroupTouchBarItemSelSetPreferredItemWidth                                 = objc.RegisterName("setPreferredItemWidth:")
+	_nSGroupTouchBarItemSelEffectiveCompressionOptions                           = objc.RegisterName("effectiveCompressionOptions")
+	_nSGroupTouchBarItemSelPrioritizedCompressionOptions                         = objc.RegisterName("prioritizedCompressionOptions")
+	_nSGroupTouchBarItemSelSetPrioritizedCompressionOptions                      = objc.RegisterName("setPrioritizedCompressionOptions:")
 )
 
 func NSGroupTouchBarItemFromID(id objc.ID) *NSGroupTouchBarItem {
@@ -46,25 +46,33 @@ func NSGroupTouchBarItemFromID(id objc.ID) *NSGroupTouchBarItem {
 
 func NSGroupTouchBarItemGroupItemWithIdentifierItems(identifier *foundation.NSString, items *foundation.NSArray[*NSTouchBarItem]) *NSGroupTouchBarItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSGroupTouchBarItem), _nSGroupTouchBarItemSelGroupItemWithIdentifierItems, identifier.Ptr(), items.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGroupTouchBarItemFromID(_ret)
 }
 
 func NSGroupTouchBarItemGroupItemWithIdentifierItemsAllowedCompressionOptions(identifier *foundation.NSString, items *foundation.NSArray[*NSTouchBarItem], allowedCompressionOptions *NSUserInterfaceCompressionOptions) *NSGroupTouchBarItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSGroupTouchBarItem), _nSGroupTouchBarItemSelGroupItemWithIdentifierItemsAllowedCompressionOptions, identifier.Ptr(), items.Ptr(), allowedCompressionOptions.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGroupTouchBarItemFromID(_ret)
 }
 
 func NSGroupTouchBarItemAlertStyleGroupItemWithIdentifier(identifier *foundation.NSString) *NSGroupTouchBarItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSGroupTouchBarItem), _nSGroupTouchBarItemSelAlertStyleGroupItemWithIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGroupTouchBarItemFromID(_ret)
 }
 
 func (o *NSGroupTouchBarItem) GroupTouchBar() *NSTouchBar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGroupTouchBarItemSelGroupTouchBar)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTouchBarFromID(_ret)
 }
 
@@ -105,17 +113,20 @@ func (o *NSGroupTouchBarItem) SetPreferredItemWidth(preferredItemWidth float64) 
 
 func (o *NSGroupTouchBarItem) EffectiveCompressionOptions() *NSUserInterfaceCompressionOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGroupTouchBarItemSelEffectiveCompressionOptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUserInterfaceCompressionOptionsFromID(_ret)
 }
 
 func (o *NSGroupTouchBarItem) PrioritizedCompressionOptions() *foundation.NSArray[*NSUserInterfaceCompressionOptions] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGroupTouchBarItemSelPrioritizedCompressionOptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSUserInterfaceCompressionOptions](_ret)
 }
 
 func (o *NSGroupTouchBarItem) SetPrioritizedCompressionOptions(prioritizedCompressionOptions *foundation.NSArray[*NSUserInterfaceCompressionOptions]) {
 	o.Ptr().Send(_nSGroupTouchBarItemSelSetPrioritizedCompressionOptions, prioritizedCompressionOptions.Ptr())
 }
-

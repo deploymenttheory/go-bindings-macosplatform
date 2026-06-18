@@ -18,45 +18,45 @@ type MLCTensor struct {
 }
 
 var (
-	_clsMLCTensor = _objcClass("MLCTensor")
-	_mLCTensorSelTensorWithDescriptor = objc.RegisterName("tensorWithDescriptor:")
-	_mLCTensorSelTensorWithDescriptorRandomInitializerType = objc.RegisterName("tensorWithDescriptor:randomInitializerType:")
-	_mLCTensorSelTensorWithDescriptorFillWithData = objc.RegisterName("tensorWithDescriptor:fillWithData:")
-	_mLCTensorSelTensorWithDescriptorData = objc.RegisterName("tensorWithDescriptor:data:")
-	_mLCTensorSelTensorWithShape = objc.RegisterName("tensorWithShape:")
-	_mLCTensorSelTensorWithShapeRandomInitializerType = objc.RegisterName("tensorWithShape:randomInitializerType:")
-	_mLCTensorSelTensorWithShapeRandomInitializerTypeDataType = objc.RegisterName("tensorWithShape:randomInitializerType:dataType:")
-	_mLCTensorSelTensorWithShapeDataType = objc.RegisterName("tensorWithShape:dataType:")
-	_mLCTensorSelTensorWithShapeDataDataType = objc.RegisterName("tensorWithShape:data:dataType:")
-	_mLCTensorSelTensorWithShapeFillWithDataDataType = objc.RegisterName("tensorWithShape:fillWithData:dataType:")
-	_mLCTensorSelTensorWithWidthHeightFeatureChannelCountBatchSize = objc.RegisterName("tensorWithWidth:height:featureChannelCount:batchSize:")
-	_mLCTensorSelTensorWithWidthHeightFeatureChannelCountBatchSizeFillWithDataDataType = objc.RegisterName("tensorWithWidth:height:featureChannelCount:batchSize:fillWithData:dataType:")
-	_mLCTensorSelTensorWithWidthHeightFeatureChannelCountBatchSizeRandomInitializerType = objc.RegisterName("tensorWithWidth:height:featureChannelCount:batchSize:randomInitializerType:")
-	_mLCTensorSelTensorWithWidthHeightFeatureChannelCountBatchSizeData = objc.RegisterName("tensorWithWidth:height:featureChannelCount:batchSize:data:")
-	_mLCTensorSelTensorWithWidthHeightFeatureChannelCountBatchSizeDataDataType = objc.RegisterName("tensorWithWidth:height:featureChannelCount:batchSize:data:dataType:")
-	_mLCTensorSelTensorWithSequenceLengthFeatureChannelCountBatchSize = objc.RegisterName("tensorWithSequenceLength:featureChannelCount:batchSize:")
-	_mLCTensorSelTensorWithSequenceLengthFeatureChannelCountBatchSizeRandomInitializerType = objc.RegisterName("tensorWithSequenceLength:featureChannelCount:batchSize:randomInitializerType:")
-	_mLCTensorSelTensorWithSequenceLengthFeatureChannelCountBatchSizeData = objc.RegisterName("tensorWithSequenceLength:featureChannelCount:batchSize:data:")
+	_clsMLCTensor                                                                                          = _objcClass("MLCTensor")
+	_mLCTensorSelTensorWithDescriptor                                                                      = objc.RegisterName("tensorWithDescriptor:")
+	_mLCTensorSelTensorWithDescriptorRandomInitializerType                                                 = objc.RegisterName("tensorWithDescriptor:randomInitializerType:")
+	_mLCTensorSelTensorWithDescriptorFillWithData                                                          = objc.RegisterName("tensorWithDescriptor:fillWithData:")
+	_mLCTensorSelTensorWithDescriptorData                                                                  = objc.RegisterName("tensorWithDescriptor:data:")
+	_mLCTensorSelTensorWithShape                                                                           = objc.RegisterName("tensorWithShape:")
+	_mLCTensorSelTensorWithShapeRandomInitializerType                                                      = objc.RegisterName("tensorWithShape:randomInitializerType:")
+	_mLCTensorSelTensorWithShapeRandomInitializerTypeDataType                                              = objc.RegisterName("tensorWithShape:randomInitializerType:dataType:")
+	_mLCTensorSelTensorWithShapeDataType                                                                   = objc.RegisterName("tensorWithShape:dataType:")
+	_mLCTensorSelTensorWithShapeDataDataType                                                               = objc.RegisterName("tensorWithShape:data:dataType:")
+	_mLCTensorSelTensorWithShapeFillWithDataDataType                                                       = objc.RegisterName("tensorWithShape:fillWithData:dataType:")
+	_mLCTensorSelTensorWithWidthHeightFeatureChannelCountBatchSize                                         = objc.RegisterName("tensorWithWidth:height:featureChannelCount:batchSize:")
+	_mLCTensorSelTensorWithWidthHeightFeatureChannelCountBatchSizeFillWithDataDataType                     = objc.RegisterName("tensorWithWidth:height:featureChannelCount:batchSize:fillWithData:dataType:")
+	_mLCTensorSelTensorWithWidthHeightFeatureChannelCountBatchSizeRandomInitializerType                    = objc.RegisterName("tensorWithWidth:height:featureChannelCount:batchSize:randomInitializerType:")
+	_mLCTensorSelTensorWithWidthHeightFeatureChannelCountBatchSizeData                                     = objc.RegisterName("tensorWithWidth:height:featureChannelCount:batchSize:data:")
+	_mLCTensorSelTensorWithWidthHeightFeatureChannelCountBatchSizeDataDataType                             = objc.RegisterName("tensorWithWidth:height:featureChannelCount:batchSize:data:dataType:")
+	_mLCTensorSelTensorWithSequenceLengthFeatureChannelCountBatchSize                                      = objc.RegisterName("tensorWithSequenceLength:featureChannelCount:batchSize:")
+	_mLCTensorSelTensorWithSequenceLengthFeatureChannelCountBatchSizeRandomInitializerType                 = objc.RegisterName("tensorWithSequenceLength:featureChannelCount:batchSize:randomInitializerType:")
+	_mLCTensorSelTensorWithSequenceLengthFeatureChannelCountBatchSizeData                                  = objc.RegisterName("tensorWithSequenceLength:featureChannelCount:batchSize:data:")
 	_mLCTensorSelTensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeRandomInitializerType = objc.RegisterName("tensorWithSequenceLengths:sortedSequences:featureChannelCount:batchSize:randomInitializerType:")
-	_mLCTensorSelTensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeData = objc.RegisterName("tensorWithSequenceLengths:sortedSequences:featureChannelCount:batchSize:data:")
-	_mLCTensorSelSynchronizeData = objc.RegisterName("synchronizeData")
-	_mLCTensorSelSynchronizeOptimizerData = objc.RegisterName("synchronizeOptimizerData")
-	_mLCTensorSelCopyDataFromDeviceMemoryToBytesLengthSynchronizeWithDevice = objc.RegisterName("copyDataFromDeviceMemoryToBytes:length:synchronizeWithDevice:")
-	_mLCTensorSelBindAndWriteDataToDevice = objc.RegisterName("bindAndWriteData:toDevice:")
-	_mLCTensorSelBindOptimizerDataDeviceData = objc.RegisterName("bindOptimizerData:deviceData:")
-	_mLCTensorSelTensorByQuantizingToTypeScaleBias = objc.RegisterName("tensorByQuantizingToType:scale:bias:")
-	_mLCTensorSelTensorByQuantizingToTypeScaleBiasAxis = objc.RegisterName("tensorByQuantizingToType:scale:bias:axis:")
-	_mLCTensorSelTensorByDequantizingToTypeScaleBias = objc.RegisterName("tensorByDequantizingToType:scale:bias:")
-	_mLCTensorSelTensorByDequantizingToTypeScaleBiasAxis = objc.RegisterName("tensorByDequantizingToType:scale:bias:axis:")
-	_mLCTensorSelTensorID = objc.RegisterName("tensorID")
-	_mLCTensorSelDescriptor = objc.RegisterName("descriptor")
-	_mLCTensorSelData = objc.RegisterName("data")
-	_mLCTensorSelLabel = objc.RegisterName("label")
-	_mLCTensorSelSetLabel = objc.RegisterName("setLabel:")
-	_mLCTensorSelDevice = objc.RegisterName("device")
-	_mLCTensorSelOptimizerData = objc.RegisterName("optimizerData")
-	_mLCTensorSelOptimizerDeviceData = objc.RegisterName("optimizerDeviceData")
-	_mLCTensorSelHasValidNumerics = objc.RegisterName("hasValidNumerics")
+	_mLCTensorSelTensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeData                  = objc.RegisterName("tensorWithSequenceLengths:sortedSequences:featureChannelCount:batchSize:data:")
+	_mLCTensorSelSynchronizeData                                                                           = objc.RegisterName("synchronizeData")
+	_mLCTensorSelSynchronizeOptimizerData                                                                  = objc.RegisterName("synchronizeOptimizerData")
+	_mLCTensorSelCopyDataFromDeviceMemoryToBytesLengthSynchronizeWithDevice                                = objc.RegisterName("copyDataFromDeviceMemoryToBytes:length:synchronizeWithDevice:")
+	_mLCTensorSelBindAndWriteDataToDevice                                                                  = objc.RegisterName("bindAndWriteData:toDevice:")
+	_mLCTensorSelBindOptimizerDataDeviceData                                                               = objc.RegisterName("bindOptimizerData:deviceData:")
+	_mLCTensorSelTensorByQuantizingToTypeScaleBias                                                         = objc.RegisterName("tensorByQuantizingToType:scale:bias:")
+	_mLCTensorSelTensorByQuantizingToTypeScaleBiasAxis                                                     = objc.RegisterName("tensorByQuantizingToType:scale:bias:axis:")
+	_mLCTensorSelTensorByDequantizingToTypeScaleBias                                                       = objc.RegisterName("tensorByDequantizingToType:scale:bias:")
+	_mLCTensorSelTensorByDequantizingToTypeScaleBiasAxis                                                   = objc.RegisterName("tensorByDequantizingToType:scale:bias:axis:")
+	_mLCTensorSelTensorID                                                                                  = objc.RegisterName("tensorID")
+	_mLCTensorSelDescriptor                                                                                = objc.RegisterName("descriptor")
+	_mLCTensorSelData                                                                                      = objc.RegisterName("data")
+	_mLCTensorSelLabel                                                                                     = objc.RegisterName("label")
+	_mLCTensorSelSetLabel                                                                                  = objc.RegisterName("setLabel:")
+	_mLCTensorSelDevice                                                                                    = objc.RegisterName("device")
+	_mLCTensorSelOptimizerData                                                                             = objc.RegisterName("optimizerData")
+	_mLCTensorSelOptimizerDeviceData                                                                       = objc.RegisterName("optimizerDeviceData")
+	_mLCTensorSelHasValidNumerics                                                                          = objc.RegisterName("hasValidNumerics")
 )
 
 func MLCTensorFromID(id objc.ID) *MLCTensor {
@@ -72,140 +72,180 @@ func MLCTensorFromID(id objc.ID) *MLCTensor {
 // @abstract   Create a MLCTensor object @discussion Create a tensor object without any data @return     A new MLCTensor object
 func MLCTensorTensorWithDescriptor(tensorDescriptor *MLCTensorDescriptor) *MLCTensor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensor), _mLCTensorSelTensorWithDescriptor, tensorDescriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Create a MLCTensor object @discussion Create a tensor object initialized with a random initializer such as Glorot Uniform. @param      tensorDescriptor              The tensor descriptor @param      randomInitializerType   The random initializer type @return     A new MLCTensor object
 func MLCTensorTensorWithDescriptorRandomInitializerType(tensorDescriptor *MLCTensorDescriptor, randomInitializerType MLCRandomInitializerType) *MLCTensor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensor), _mLCTensorSelTensorWithDescriptorRandomInitializerType, tensorDescriptor.Ptr(), randomInitializerType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Create a MLCTensor object @discussion Create a tensor object with a MLCTensorData object that specifies the tensor data buffer @param      tensorDescriptor              The tensor descriptor @param      fillData                      The scalar data to fill to tensor with @return     A new MLCTensor object
 func MLCTensorTensorWithDescriptorFillWithData(tensorDescriptor *MLCTensorDescriptor, fillData *foundation.NSNumber) *MLCTensor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensor), _mLCTensorSelTensorWithDescriptorFillWithData, tensorDescriptor.Ptr(), fillData.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Create a MLCTensor object @discussion Create a tensor object with a MLCTensorData object that specifies the tensor data buffer @param      tensorDescriptor              The tensor descriptor @param      data                                         The random initializer type @return     A new MLCTensor object
 func MLCTensorTensorWithDescriptorData(tensorDescriptor *MLCTensorDescriptor, data *MLCTensorData) *MLCTensor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensor), _mLCTensorSelTensorWithDescriptorData, tensorDescriptor.Ptr(), data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Create a MLCTensor object @discussion Create a tensor object without any data.  The tensor data type is MLCDataTypeFloat32. @param      shape                           The tensor shape @return     A new MLCTensor object
 func MLCTensorTensorWithShape(shape *foundation.NSArray[*foundation.NSNumber]) *MLCTensor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensor), _mLCTensorSelTensorWithShape, shape)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Create a MLCTensor object @discussion Create a tensor object initialized with a random initializer such as Glorot Uniform. The tensor data type is MLCDataTypeFloat32 @param      shape                                       The tensor shape @param      randomInitializerType   The random initializer type @return     A new MLCTensor object
 func MLCTensorTensorWithShapeRandomInitializerType(shape *foundation.NSArray[*foundation.NSNumber], randomInitializerType MLCRandomInitializerType) *MLCTensor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensor), _mLCTensorSelTensorWithShapeRandomInitializerType, shape, randomInitializerType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Create a MLCTensor object @discussion Create a tensor object initialized with a random initializer such as Glorot Uniform. The tensor data type is MLCDataTypeFloat32 @param      shape                                       The tensor shape @param      randomInitializerType   The random initializer type @param      dataType                    The tensor data type @return     A new MLCTensor object
 func MLCTensorTensorWithShapeRandomInitializerTypeDataType(shape *foundation.NSArray[*foundation.NSNumber], randomInitializerType MLCRandomInitializerType, dataType MLCDataType) *MLCTensor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensor), _mLCTensorSelTensorWithShapeRandomInitializerTypeDataType, shape, randomInitializerType, dataType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Create a MLCTensor object @discussion Create a tensor object without any data @param      shape                           The tensor shape @param      dataType                    The tensor data type @return     A new MLCTensor object
 func MLCTensorTensorWithShapeDataType(shape *foundation.NSArray[*foundation.NSNumber], dataType MLCDataType) *MLCTensor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensor), _mLCTensorSelTensorWithShapeDataType, shape, dataType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Create a MLCTensor object @discussion Create a tensor object with data @param      shape                           The tensor shape @param      data                             The tensor data @param      dataType                    The tensor data type @return     A new MLCTensor object
 func MLCTensorTensorWithShapeDataDataType(shape *foundation.NSArray[*foundation.NSNumber], data *MLCTensorData, dataType MLCDataType) *MLCTensor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensor), _mLCTensorSelTensorWithShapeDataDataType, shape, data.Ptr(), dataType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Create a MLCTensor object @discussion Create a tensor object with data @param      shape                  The tensor shape @param      fillData               The scalar value to initialize the tensor data with @param      dataType               The tensor data type @return     A new MLCTensor object
 func MLCTensorTensorWithShapeFillWithDataDataType(shape *foundation.NSArray[*foundation.NSNumber], fillData *foundation.NSNumber, dataType MLCDataType) *MLCTensor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensor), _mLCTensorSelTensorWithShapeFillWithDataDataType, shape, fillData.Ptr(), dataType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Create a MLCTensor  object @discussion Create a NCHW tensor object with tensor data type = MLCDataTypeFloat32 @param      width                           The tensor width @param      height                         The tensor height @param      featureChannelCount     Number of feature channels @param      batchSize                  The tensor batch size @return     A new MLCTensor object
 func MLCTensorTensorWithWidthHeightFeatureChannelCountBatchSize(width uint, height uint, featureChannelCount uint, batchSize uint) *MLCTensor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensor), _mLCTensorSelTensorWithWidthHeightFeatureChannelCountBatchSize, width, height, featureChannelCount, batchSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Create a MLCTensor  object @discussion Create a NCHW tensor object initialized with a scalar value @param      width                           The tensor width @param      height                         The tensor height @param      featureChannelCount     Number of feature channels @param      batchSize                  The tensor batch size @param      fillData           The scalar value to initialize the tensor data with @param      dataType                    The tensor data type @return     A new MLCTensorData object
 func MLCTensorTensorWithWidthHeightFeatureChannelCountBatchSizeFillWithDataDataType(width uint, height uint, featureChannelCount uint, batchSize uint, fillData float32, dataType MLCDataType) *MLCTensor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensor), _mLCTensorSelTensorWithWidthHeightFeatureChannelCountBatchSizeFillWithDataDataType, width, height, featureChannelCount, batchSize, fillData, dataType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Create a MLCTensor  object @discussion Create a NCHW tensor object initialized with a random initializer type. The tensor data type is MLCDataTypeFloat32 @param      width                                      The tensor width @param      height                                    The tensor height @param      featureChannelCount                Number of feature channels @param      batchSize                              The tensor batch size @param      randomInitializerType   The random initializer type @return     A new MLCTensor object
 func MLCTensorTensorWithWidthHeightFeatureChannelCountBatchSizeRandomInitializerType(width uint, height uint, featureChannelCount uint, batchSize uint, randomInitializerType MLCRandomInitializerType) *MLCTensor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensor), _mLCTensorSelTensorWithWidthHeightFeatureChannelCountBatchSizeRandomInitializerType, width, height, featureChannelCount, batchSize, randomInitializerType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Create a MLCTensor  object @discussion Create a NCHW tensor object with a tensor data object The tensor data type is MLCDataTypeFloat32. @param      width                           The tensor width @param      height                         The tensor height @param      featureChannelCount     Number of feature channels @param      batchSize                  The tensor batch size @param      data                             The tensor data @return     A new MLCTensor object
 func MLCTensorTensorWithWidthHeightFeatureChannelCountBatchSizeData(width uint, height uint, featureChannelCount uint, batchSize uint, data *MLCTensorData) *MLCTensor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensor), _mLCTensorSelTensorWithWidthHeightFeatureChannelCountBatchSizeData, width, height, featureChannelCount, batchSize, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Create a MLCTensor  object @discussion Create a NCHW tensor object with a tensor data object The tensor data type is MLCDataTypeFloat32. @param      width                           The tensor width @param      height                         The tensor height @param      featureChannelCount     Number of feature channels @param      batchSize                  The tensor batch size @param      data                             The tensor data @param      dataType                    The tensor data type @return     A new MLCTensor object
 func MLCTensorTensorWithWidthHeightFeatureChannelCountBatchSizeDataDataType(width uint, height uint, featureChannelCount uint, batchSize uint, data *MLCTensorData, dataType MLCDataType) *MLCTensor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensor), _mLCTensorSelTensorWithWidthHeightFeatureChannelCountBatchSizeDataDataType, width, height, featureChannelCount, batchSize, data.Ptr(), dataType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Create a MLCTensor  object @discussion Create a tensor typically used by a recurrent layer The tensor data type is MLCDataTypeFloat32. @param      sequenceLength       The length of sequences stored in the tensor @param      featureChannelCount     Number of feature channels @param      batchSize                  The tensor batch size @return     A new MLCTensor object
 func MLCTensorTensorWithSequenceLengthFeatureChannelCountBatchSize(sequenceLength uint, featureChannelCount uint, batchSize uint) *MLCTensor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensor), _mLCTensorSelTensorWithSequenceLengthFeatureChannelCountBatchSize, sequenceLength, featureChannelCount, batchSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Create a MLCTensor  object @discussion Create a tensor typically used by a recurrent layer The tensor data type is MLCDataTypeFloat32. @param      sequenceLength                   The length of sequences stored in the tensor @param      featureChannelCount                 Number of feature channels @param      batchSize                              The tensor batch size @param      randomInitializerType   The random initializer type @return     A new MLCTensor object
 func MLCTensorTensorWithSequenceLengthFeatureChannelCountBatchSizeRandomInitializerType(sequenceLength uint, featureChannelCount uint, batchSize uint, randomInitializerType MLCRandomInitializerType) *MLCTensor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensor), _mLCTensorSelTensorWithSequenceLengthFeatureChannelCountBatchSizeRandomInitializerType, sequenceLength, featureChannelCount, batchSize, randomInitializerType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Create a MLCTensor  object @discussion Create a tensor typically used by a recurrent layer The tensor data type is MLCDataTypeFloat32. @param      sequenceLength       The length of sequences stored in the tensor @param      featureChannelCount     Number of feature channels @param      batchSize                  The tensor batch size @param      data                             The tensor data @return     A new MLCTensor object
 func MLCTensorTensorWithSequenceLengthFeatureChannelCountBatchSizeData(sequenceLength uint, featureChannelCount uint, batchSize uint, data *MLCTensorData) *MLCTensor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensor), _mLCTensorSelTensorWithSequenceLengthFeatureChannelCountBatchSizeData, sequenceLength, featureChannelCount, batchSize, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Create a MLCTensor  object @discussion Create a tensor of variable length sequences typically used by a recurrent layer The tensor data type is MLCDataTypeFloat32. @param      sequenceLengths                 An array of sequence lengths @param      sortedSequences                 A flag to indicate if the sequence lengths are sorted.  If yes, they must be sorted in descending order @param      featureChannelCount                 Number of feature channels @param      batchSize                              The tensor batch size @param      randomInitializerType   The random initializer type @return     A new MLCTensor object
 func MLCTensorTensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeRandomInitializerType(sequenceLengths *foundation.NSArray[*foundation.NSNumber], sortedSequences bool, featureChannelCount uint, batchSize uint, randomInitializerType MLCRandomInitializerType) *MLCTensor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensor), _mLCTensorSelTensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeRandomInitializerType, sequenceLengths, sortedSequences, featureChannelCount, batchSize, randomInitializerType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Create a MLCTensor  object @discussion Create a tensor of variable length sequences typically used by a recurrent layer The tensor data type is MLCDataTypeFloat32. @param      sequenceLengths     An array of sequence lengths @param      sortedSequences     A flag to indicate if the sequence lengths are sorted.  If yes, they must be sorted in descending order @param      featureChannelCount     Number of feature channels @param      batchSize                  The tensor batch size @param      data                             The tensor data @return     A new MLCTensor object
 func MLCTensorTensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeData(sequenceLengths *foundation.NSArray[*foundation.NSNumber], sortedSequences bool, featureChannelCount uint, batchSize uint, data *MLCTensorData) *MLCTensor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensor), _mLCTensorSelTensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeData, sequenceLengths, sortedSequences, featureChannelCount, batchSize, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
@@ -242,28 +282,36 @@ func (o *MLCTensor) BindOptimizerDataDeviceData(data *foundation.NSArray[*MLCTen
 // @abstract   Converts a 32-bit floating-point tensor with given scale and a zero point Returns a quantized tensor @param      type  The quantized data type.  Must be MLCDataTypeInt8, MLCDataTypeUInt8 or MLCDataTypeInt32 @param      scale  The scale to apply in quantization @param      bias The offset value that maps to float zero @return     A quantized tensor
 func (o *MLCTensor) TensorByQuantizingToTypeScaleBias(type_ MLCDataType, scale float32, bias int) *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCTensorSelTensorByQuantizingToTypeScaleBias, type_, scale, bias)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Converts a 32-bit floating-point tensor with given scale and a zero point Returns a quantized tensor @param      type  The quantized data type.  Must be MLCDataTypeInt8, MLCDataTypeUInt8 or MLCDataTypeInt32 @param      scale  The scale to apply in quantization @param      bias The offset value that maps to float zero @param      axis The dimension on which to apply per-channel quantization @return     A quantized tensor
 func (o *MLCTensor) TensorByQuantizingToTypeScaleBiasAxis(type_ MLCDataType, scale *MLCTensor, bias *MLCTensor, axis int) *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCTensorSelTensorByQuantizingToTypeScaleBiasAxis, type_, scale.Ptr(), bias.Ptr(), axis)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Converts a quantized tensor to a 32-bit floating-point tensor Returns a de-quantized tensor @param      type  The de-quantized data type.  Must be MLCFloat32 @param      scale  The scale thst was used for the quantized data @param      bias The offset value that maps to float zero used for the quantized data @return     A quantized tensor
 func (o *MLCTensor) TensorByDequantizingToTypeScaleBias(type_ MLCDataType, scale *MLCTensor, bias *MLCTensor) *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCTensorSelTensorByDequantizingToTypeScaleBias, type_, scale.Ptr(), bias.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Converts a quantized tensor to a 32-bit floating-point tensor Returns a de-quantized tensor @param      type  The de-quantized data type.  Must be MLCFloat32 @param      scale  The scale thst was used for the quantized data @param      bias The offset value that maps to float zero used for the quantized data @param      axis The dimension on which to apply per-channel quantization @return     A quantized tensor
 func (o *MLCTensor) TensorByDequantizingToTypeScaleBiasAxis(type_ MLCDataType, scale *MLCTensor, bias *MLCTensor, axis int) *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCTensorSelTensorByDequantizingToTypeScaleBiasAxis, type_, scale.Ptr(), bias.Ptr(), axis)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
@@ -276,21 +324,27 @@ func (o *MLCTensor) TensorID() uint {
 // @property   descriptor @abstract   The tensor descriptor
 func (o *MLCTensor) Descriptor() *MLCTensorDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCTensorSelDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorDescriptorFromID(_ret)
 }
 
 // @property   data @abstract   The tensor data
 func (o *MLCTensor) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCTensorSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @property   label @abstract   A string to help identify this object.
 func (o *MLCTensor) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCTensorSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -301,21 +355,27 @@ func (o *MLCTensor) SetLabel(label *foundation.NSString) {
 // @property   device @abstract   The device associated with this tensor.
 func (o *MLCTensor) Device() *MLCDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCTensorSelDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCDeviceFromID(_ret)
 }
 
 // @property   optimizer buffers to use if tensor is used as a parameter @abstract   These are the host side optimizer (momentum and velocity) buffers which developers can query and initialize @discussion When customizing optimizer data, the contents of these buffers must be initialized before executing optimizer update for a graph.
 func (o *MLCTensor) OptimizerData() *foundation.NSArray[*MLCTensorData] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCTensorSelOptimizerData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MLCTensorData](_ret)
 }
 
 // @property   optimizer device buffers to use if tensor is used as a parameter @abstract   These are the device side optimizer (momentum and velocity) buffers which developers can query
 func (o *MLCTensor) OptimizerDeviceData() *foundation.NSArray[*MLCTensorOptimizerDeviceData] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCTensorSelOptimizerDeviceData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MLCTensorOptimizerDeviceData](_ret)
 }
 
@@ -324,4 +384,3 @@ func (o *MLCTensor) HasValidNumerics() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mLCTensorSelHasValidNumerics)
 	return _ret
 }
-

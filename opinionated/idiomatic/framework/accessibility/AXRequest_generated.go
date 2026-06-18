@@ -52,4 +52,3 @@ type Requestable interface {
 }
 
 var _ Requestable = (*Request)(nil)
-

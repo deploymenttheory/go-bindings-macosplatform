@@ -63,4 +63,3 @@ type TemporaryVectorable interface {
 }
 
 var _ TemporaryVectorable = (*TemporaryVector)(nil)
-

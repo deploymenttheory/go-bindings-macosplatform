@@ -57,7 +57,9 @@ func (x *TokenPasswordAuthOperation) SetPassword(password string) {
 	x.inner.SetPassword(foundation.NSStringStringWithUTF8String(password))
 }
 
-func (x *TokenPasswordAuthOperation) asTokenAuthOperation() *raw.TKTokenAuthOperation { return &x.inner.TKTokenAuthOperation }
+func (x *TokenPasswordAuthOperation) asTokenAuthOperation() *raw.TKTokenAuthOperation {
+	return &x.inner.TKTokenAuthOperation
+}
 
 // TokenPasswordAuthOperationable is the interface implemented by [TokenPasswordAuthOperation], for mocking and DI.
 type TokenPasswordAuthOperationable interface {
@@ -68,4 +70,3 @@ type TokenPasswordAuthOperationable interface {
 }
 
 var _ TokenPasswordAuthOperationable = (*TokenPasswordAuthOperation)(nil)
-

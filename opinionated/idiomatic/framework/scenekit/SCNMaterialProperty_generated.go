@@ -270,4 +270,3 @@ type MaterialPropertyable interface {
 }
 
 var _ MaterialPropertyable = (*MaterialProperty)(nil)
-

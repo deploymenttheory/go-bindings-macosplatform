@@ -54,7 +54,9 @@ func (x *PersistentContainer) WithPersistentStoreDescriptions(items ...*raw.NSPe
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSPersistentStoreDescription](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -191,4 +193,3 @@ type PersistentContainerable interface {
 }
 
 var _ PersistentContainerable = (*PersistentContainer)(nil)
-

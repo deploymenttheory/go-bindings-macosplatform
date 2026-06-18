@@ -16,7 +16,9 @@ type MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent].
-func (x *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent) Unwrap() *raw.MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent { return x.inner }
+func (x *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent) Unwrap() *raw.MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -60,7 +62,9 @@ func (x *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent) WithTargetSof
 	return x
 }
 
-func (x *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent) asMTROTASoftwareUpdateRequestorClusterStateTransitionEvent() *raw.MTROTASoftwareUpdateRequestorClusterStateTransitionEvent { return &x.inner.MTROTASoftwareUpdateRequestorClusterStateTransitionEvent }
+func (x *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent) asMTROTASoftwareUpdateRequestorClusterStateTransitionEvent() *raw.MTROTASoftwareUpdateRequestorClusterStateTransitionEvent {
+	return &x.inner.MTROTASoftwareUpdateRequestorClusterStateTransitionEvent
+}
 
 // MTROtaSoftwareUpdateRequestorClusterStateTransitionEventable is the interface implemented by [MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent], for mocking and DI.
 type MTROtaSoftwareUpdateRequestorClusterStateTransitionEventable interface {
@@ -72,4 +76,3 @@ type MTROtaSoftwareUpdateRequestorClusterStateTransitionEventable interface {
 }
 
 var _ MTROtaSoftwareUpdateRequestorClusterStateTransitionEventable = (*MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent)(nil)
-

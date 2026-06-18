@@ -45,4 +45,3 @@ type WorkoutTypeable interface {
 }
 
 var _ WorkoutTypeable = (*WorkoutType)(nil)
-

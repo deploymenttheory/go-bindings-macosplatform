@@ -187,4 +187,3 @@ type LSTMLayerable interface {
 }
 
 var _ LSTMLayerable = (*LSTMLayer)(nil)
-

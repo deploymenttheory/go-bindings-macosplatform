@@ -18,10 +18,10 @@ type DREraseSetupPanel struct {
 }
 
 var (
-	_clsDREraseSetupPanel = _objcClass("DREraseSetupPanel")
-	_dREraseSetupPanelSelSetupPanel = objc.RegisterName("setupPanel")
+	_clsDREraseSetupPanel            = _objcClass("DREraseSetupPanel")
+	_dREraseSetupPanelSelSetupPanel  = objc.RegisterName("setupPanel")
 	_dREraseSetupPanelSelEraseObject = objc.RegisterName("eraseObject")
-	_dREraseSetupPanelSelEraseType = objc.RegisterName("eraseType:")
+	_dREraseSetupPanelSelEraseType   = objc.RegisterName("eraseType:")
 )
 
 func DREraseSetupPanelFromID(id objc.ID) *DREraseSetupPanel {
@@ -37,14 +37,18 @@ func DREraseSetupPanelFromID(id objc.ID) *DREraseSetupPanel {
 // @method 			setupPanel @abstract 		Returns an instance of a erase setup panel. @result  		An erase setup panel.
 func DREraseSetupPanelSetupPanel() *DREraseSetupPanel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsDREraseSetupPanel), _dREraseSetupPanelSelSetupPanel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DREraseSetupPanelFromID(_ret)
 }
 
 // @method 	eraseObject @abstract	Creates and returns a new DRErase object that's configured to erase the disc in the currently selected device. @discussion	The new DRErase object is configured based on the settings in the setup panel when the user clicks the OK button. Do not invoke this method within a modal session (@link //apple_ref/occ/instm/DRSetupPanel/runSetupPanel runSetupPanel @/link or @link //apple_ref/occ/instm/DRSetupPanel/beginSetupSheetForWindow:modalDelegate:didEndSelector:contextInfo: beginSetupSheetForWindow:modalDelegate:didEndSelector:contextInfo: @/link) because the erase object information is only updated just before the modal session ends. @result  	A new DRErase object.
 func (o *DREraseSetupPanel) EraseObject() *discrecording.DRErase {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dREraseSetupPanelSelEraseObject)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return discrecording.DREraseFromID(_ret)
 }
 
@@ -52,4 +56,3 @@ func (o *DREraseSetupPanel) EraseObject() *discrecording.DRErase {
 func (o *DREraseSetupPanel) EraseType(sender objc.ID) {
 	o.Ptr().Send(_dREraseSetupPanelSelEraseType, sender)
 }
-

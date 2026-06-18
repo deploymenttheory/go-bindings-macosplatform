@@ -167,4 +167,3 @@ type WebBackForwardListable interface {
 }
 
 var _ WebBackForwardListable = (*WebBackForwardList)(nil)
-

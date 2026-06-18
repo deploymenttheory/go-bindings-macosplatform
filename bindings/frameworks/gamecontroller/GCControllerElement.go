@@ -16,21 +16,21 @@ type GCControllerElement struct {
 }
 
 var (
-	_clsGCControllerElement = _objcClass("GCControllerElement")
-	_gCControllerElementSelCollection = objc.RegisterName("collection")
-	_gCControllerElementSelIsAnalog = objc.RegisterName("isAnalog")
-	_gCControllerElementSelIsBoundToSystemGesture = objc.RegisterName("isBoundToSystemGesture")
-	_gCControllerElementSelPreferredSystemGestureState = objc.RegisterName("preferredSystemGestureState")
+	_clsGCControllerElement                               = _objcClass("GCControllerElement")
+	_gCControllerElementSelCollection                     = objc.RegisterName("collection")
+	_gCControllerElementSelIsAnalog                       = objc.RegisterName("isAnalog")
+	_gCControllerElementSelIsBoundToSystemGesture         = objc.RegisterName("isBoundToSystemGesture")
+	_gCControllerElementSelPreferredSystemGestureState    = objc.RegisterName("preferredSystemGestureState")
 	_gCControllerElementSelSetPreferredSystemGestureState = objc.RegisterName("setPreferredSystemGestureState:")
-	_gCControllerElementSelSfSymbolsName = objc.RegisterName("sfSymbolsName")
-	_gCControllerElementSelSetSfSymbolsName = objc.RegisterName("setSfSymbolsName:")
-	_gCControllerElementSelLocalizedName = objc.RegisterName("localizedName")
-	_gCControllerElementSelSetLocalizedName = objc.RegisterName("setLocalizedName:")
-	_gCControllerElementSelUnmappedSfSymbolsName = objc.RegisterName("unmappedSfSymbolsName")
-	_gCControllerElementSelSetUnmappedSfSymbolsName = objc.RegisterName("setUnmappedSfSymbolsName:")
-	_gCControllerElementSelUnmappedLocalizedName = objc.RegisterName("unmappedLocalizedName")
-	_gCControllerElementSelSetUnmappedLocalizedName = objc.RegisterName("setUnmappedLocalizedName:")
-	_gCControllerElementSelAliases = objc.RegisterName("aliases")
+	_gCControllerElementSelSfSymbolsName                  = objc.RegisterName("sfSymbolsName")
+	_gCControllerElementSelSetSfSymbolsName               = objc.RegisterName("setSfSymbolsName:")
+	_gCControllerElementSelLocalizedName                  = objc.RegisterName("localizedName")
+	_gCControllerElementSelSetLocalizedName               = objc.RegisterName("setLocalizedName:")
+	_gCControllerElementSelUnmappedSfSymbolsName          = objc.RegisterName("unmappedSfSymbolsName")
+	_gCControllerElementSelSetUnmappedSfSymbolsName       = objc.RegisterName("setUnmappedSfSymbolsName:")
+	_gCControllerElementSelUnmappedLocalizedName          = objc.RegisterName("unmappedLocalizedName")
+	_gCControllerElementSelSetUnmappedLocalizedName       = objc.RegisterName("setUnmappedLocalizedName:")
+	_gCControllerElementSelAliases                        = objc.RegisterName("aliases")
 )
 
 func GCControllerElementFromID(id objc.ID) *GCControllerElement {
@@ -46,7 +46,9 @@ func GCControllerElementFromID(id objc.ID) *GCControllerElement {
 // Each element can be part of a wider collection of inputs that map to a single logical element. A directional pad (dpad) is a logical collection of two axis inputs and thus each axis belongs to the same collection element - the dpad.
 func (o *GCControllerElement) Collection() *GCControllerElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCControllerElementSelCollection)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerElementFromID(_ret)
 }
 
@@ -75,7 +77,9 @@ func (o *GCControllerElement) SetPreferredSystemGestureState(preferredSystemGest
 // The element's SF Symbols name, taking input remapping into account. @note In almost all instances, you should use this over unmappedSfSymbolsName in your UI.
 func (o *GCControllerElement) SfSymbolsName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCControllerElementSelSfSymbolsName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -86,7 +90,9 @@ func (o *GCControllerElement) SetSfSymbolsName(sfSymbolsName *foundation.NSStrin
 // The element's localized name, taking input remapping into account. @note In almost all instances, you should use this over unmappedLocalizedName in your UI.
 func (o *GCControllerElement) LocalizedName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCControllerElementSelLocalizedName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -97,7 +103,9 @@ func (o *GCControllerElement) SetLocalizedName(localizedName *foundation.NSStrin
 // The element's SF Symbols name, not taking any input remapping into account. @note Use this in your games own remapping UI, or when you need to prompt a user that a given button has no mapping (sfSymbolsName is nil).
 func (o *GCControllerElement) UnmappedSfSymbolsName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCControllerElementSelUnmappedSfSymbolsName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -108,7 +116,9 @@ func (o *GCControllerElement) SetUnmappedSfSymbolsName(unmappedSfSymbolsName *fo
 // The element's localized name, not taking any input remapping into account. @note Use this in your games own remapping UI, or when you need to prompt a user that a given button has no mapping (localizedName is nil).
 func (o *GCControllerElement) UnmappedLocalizedName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCControllerElementSelUnmappedLocalizedName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -121,4 +131,3 @@ func (o *GCControllerElement) Aliases() *foundation.NSSet[*foundation.NSString] 
 	_ret := objc.Send[*foundation.NSSet[*foundation.NSString]](o.Ptr(), _gCControllerElementSelAliases)
 	return _ret
 }
-

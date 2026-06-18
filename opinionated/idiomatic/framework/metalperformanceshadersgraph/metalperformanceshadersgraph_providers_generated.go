@@ -22,4 +22,3 @@ type GraphOperationProvider interface {
 type GraphTypeProvider interface {
 	asGraphType() *raw.MPSGraphType
 }
-

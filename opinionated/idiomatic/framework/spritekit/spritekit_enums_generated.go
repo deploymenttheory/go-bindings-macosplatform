@@ -12,9 +12,9 @@ import (
 type SKActionTimingMode int64
 
 const (
-	SKActionTimingLinear SKActionTimingMode = 0
-	SKActionTimingEaseIn SKActionTimingMode = 1
-	SKActionTimingEaseOut SKActionTimingMode = 2
+	SKActionTimingLinear        SKActionTimingMode = 0
+	SKActionTimingEaseIn        SKActionTimingMode = 1
+	SKActionTimingEaseOut       SKActionTimingMode = 2
 	SKActionTimingEaseInEaseOut SKActionTimingMode = 3
 )
 
@@ -36,12 +36,12 @@ func (e SKActionTimingMode) String() string {
 type SKAttributeType int64
 
 const (
-	SKAttributeTypeNone SKAttributeType = 0
-	SKAttributeTypeFloat SKAttributeType = 1
-	SKAttributeTypeVectorFloat2 SKAttributeType = 2
-	SKAttributeTypeVectorFloat3 SKAttributeType = 3
-	SKAttributeTypeVectorFloat4 SKAttributeType = 4
-	SKAttributeTypeHalfFloat SKAttributeType = 5
+	SKAttributeTypeNone             SKAttributeType = 0
+	SKAttributeTypeFloat            SKAttributeType = 1
+	SKAttributeTypeVectorFloat2     SKAttributeType = 2
+	SKAttributeTypeVectorFloat3     SKAttributeType = 3
+	SKAttributeTypeVectorFloat4     SKAttributeType = 4
+	SKAttributeTypeHalfFloat        SKAttributeType = 5
 	SKAttributeTypeVectorHalfFloat2 SKAttributeType = 6
 	SKAttributeTypeVectorHalfFloat3 SKAttributeType = 7
 	SKAttributeTypeVectorHalfFloat4 SKAttributeType = 8
@@ -75,13 +75,13 @@ func (e SKAttributeType) String() string {
 type SKBlendMode int64
 
 const (
-	SKBlendModeAlpha SKBlendMode = 0
-	SKBlendModeAdd SKBlendMode = 1
-	SKBlendModeSubtract SKBlendMode = 2
-	SKBlendModeMultiply SKBlendMode = 3
-	SKBlendModeMultiplyX2 SKBlendMode = 4
-	SKBlendModeScreen SKBlendMode = 5
-	SKBlendModeReplace SKBlendMode = 6
+	SKBlendModeAlpha         SKBlendMode = 0
+	SKBlendModeAdd           SKBlendMode = 1
+	SKBlendModeSubtract      SKBlendMode = 2
+	SKBlendModeMultiply      SKBlendMode = 3
+	SKBlendModeMultiplyX2    SKBlendMode = 4
+	SKBlendModeScreen        SKBlendMode = 5
+	SKBlendModeReplace       SKBlendMode = 6
 	SKBlendModeMultiplyAlpha SKBlendMode = 7
 )
 
@@ -113,7 +113,7 @@ type SKInterpolationMode int64
 const (
 	SKInterpolationModeLinear SKInterpolationMode = 1
 	SKInterpolationModeSpline SKInterpolationMode = 2
-	SKInterpolationModeStep SKInterpolationMode = 3
+	SKInterpolationModeStep   SKInterpolationMode = 3
 )
 
 func (e SKInterpolationMode) String() string {
@@ -133,8 +133,8 @@ type SKLabelHorizontalAlignmentMode int64
 
 const (
 	SKLabelHorizontalAlignmentModeCenter SKLabelHorizontalAlignmentMode = 0
-	SKLabelHorizontalAlignmentModeLeft SKLabelHorizontalAlignmentMode = 1
-	SKLabelHorizontalAlignmentModeRight SKLabelHorizontalAlignmentMode = 2
+	SKLabelHorizontalAlignmentModeLeft   SKLabelHorizontalAlignmentMode = 1
+	SKLabelHorizontalAlignmentModeRight  SKLabelHorizontalAlignmentMode = 2
 )
 
 func (e SKLabelHorizontalAlignmentMode) String() string {
@@ -154,9 +154,9 @@ type SKLabelVerticalAlignmentMode int64
 
 const (
 	SKLabelVerticalAlignmentModeBaseline SKLabelVerticalAlignmentMode = 0
-	SKLabelVerticalAlignmentModeCenter SKLabelVerticalAlignmentMode = 1
-	SKLabelVerticalAlignmentModeTop SKLabelVerticalAlignmentMode = 2
-	SKLabelVerticalAlignmentModeBottom SKLabelVerticalAlignmentMode = 3
+	SKLabelVerticalAlignmentModeCenter   SKLabelVerticalAlignmentMode = 1
+	SKLabelVerticalAlignmentModeTop      SKLabelVerticalAlignmentMode = 2
+	SKLabelVerticalAlignmentModeBottom   SKLabelVerticalAlignmentMode = 3
 )
 
 func (e SKLabelVerticalAlignmentMode) String() string {
@@ -177,9 +177,9 @@ func (e SKLabelVerticalAlignmentMode) String() string {
 type SKParticleRenderOrder uint64
 
 const (
-	SKParticleRenderOrderOldestLast SKParticleRenderOrder = 0
+	SKParticleRenderOrderOldestLast  SKParticleRenderOrder = 0
 	SKParticleRenderOrderOldestFirst SKParticleRenderOrder = 1
-	SKParticleRenderOrderDontCare SKParticleRenderOrder = 2
+	SKParticleRenderOrderDontCare    SKParticleRenderOrder = 2
 )
 
 func (e SKParticleRenderOrder) String() string {
@@ -199,7 +199,7 @@ type SKRepeatMode int64
 
 const (
 	SKRepeatModeClamp SKRepeatMode = 1
-	SKRepeatModeLoop SKRepeatMode = 2
+	SKRepeatModeLoop  SKRepeatMode = 2
 )
 
 func (e SKRepeatMode) String() string {
@@ -216,9 +216,9 @@ func (e SKRepeatMode) String() string {
 type SKSceneScaleMode int64
 
 const (
-	SKSceneScaleModeFill SKSceneScaleMode = 0
+	SKSceneScaleModeFill       SKSceneScaleMode = 0
 	SKSceneScaleModeAspectFill SKSceneScaleMode = 1
-	SKSceneScaleModeAspectFit SKSceneScaleMode = 2
+	SKSceneScaleModeAspectFit  SKSceneScaleMode = 2
 	SKSceneScaleModeResizeFill SKSceneScaleMode = 3
 )
 
@@ -241,7 +241,7 @@ type SKTextureFilteringMode int64
 
 const (
 	SKTextureFilteringNearest SKTextureFilteringMode = 0
-	SKTextureFilteringLinear SKTextureFilteringMode = 1
+	SKTextureFilteringLinear  SKTextureFilteringMode = 1
 )
 
 func (e SKTextureFilteringMode) String() string {
@@ -259,41 +259,41 @@ func (e SKTextureFilteringMode) String() string {
 type SKTileAdjacencyMask uint64
 
 const (
-	SKTileAdjacencyUp SKTileAdjacencyMask = 1
-	SKTileAdjacencyUpperRight SKTileAdjacencyMask = 2
-	SKTileAdjacencyRight SKTileAdjacencyMask = 4
-	SKTileAdjacencyLowerRight SKTileAdjacencyMask = 8
-	SKTileAdjacencyDown SKTileAdjacencyMask = 16
-	SKTileAdjacencyLowerLeft SKTileAdjacencyMask = 32
-	SKTileAdjacencyLeft SKTileAdjacencyMask = 64
-	SKTileAdjacencyUpperLeft SKTileAdjacencyMask = 128
-	SKTileAdjacencyAll SKTileAdjacencyMask = 255
-	SKTileHexFlatAdjacencyUp SKTileAdjacencyMask = 1
-	SKTileHexFlatAdjacencyUpperRight SKTileAdjacencyMask = 2
-	SKTileHexFlatAdjacencyLowerRight SKTileAdjacencyMask = 4
-	SKTileHexFlatAdjacencyDown SKTileAdjacencyMask = 8
-	SKTileHexFlatAdjacencyLowerLeft SKTileAdjacencyMask = 16
-	SKTileHexFlatAdjacencyUpperLeft SKTileAdjacencyMask = 32
-	SKTileHexFlatAdjacencyAll SKTileAdjacencyMask = 63
-	SKTileHexPointyAdjacencyUpperLeft SKTileAdjacencyMask = 1
+	SKTileAdjacencyUp                  SKTileAdjacencyMask = 1
+	SKTileAdjacencyUpperRight          SKTileAdjacencyMask = 2
+	SKTileAdjacencyRight               SKTileAdjacencyMask = 4
+	SKTileAdjacencyLowerRight          SKTileAdjacencyMask = 8
+	SKTileAdjacencyDown                SKTileAdjacencyMask = 16
+	SKTileAdjacencyLowerLeft           SKTileAdjacencyMask = 32
+	SKTileAdjacencyLeft                SKTileAdjacencyMask = 64
+	SKTileAdjacencyUpperLeft           SKTileAdjacencyMask = 128
+	SKTileAdjacencyAll                 SKTileAdjacencyMask = 255
+	SKTileHexFlatAdjacencyUp           SKTileAdjacencyMask = 1
+	SKTileHexFlatAdjacencyUpperRight   SKTileAdjacencyMask = 2
+	SKTileHexFlatAdjacencyLowerRight   SKTileAdjacencyMask = 4
+	SKTileHexFlatAdjacencyDown         SKTileAdjacencyMask = 8
+	SKTileHexFlatAdjacencyLowerLeft    SKTileAdjacencyMask = 16
+	SKTileHexFlatAdjacencyUpperLeft    SKTileAdjacencyMask = 32
+	SKTileHexFlatAdjacencyAll          SKTileAdjacencyMask = 63
+	SKTileHexPointyAdjacencyUpperLeft  SKTileAdjacencyMask = 1
 	SKTileHexPointyAdjacencyUpperRight SKTileAdjacencyMask = 2
-	SKTileHexPointyAdjacencyRight SKTileAdjacencyMask = 4
+	SKTileHexPointyAdjacencyRight      SKTileAdjacencyMask = 4
 	SKTileHexPointyAdjacencyLowerRight SKTileAdjacencyMask = 8
-	SKTileHexPointyAdjacencyLowerLeft SKTileAdjacencyMask = 16
-	SKTileHexPointyAdjacencyLeft SKTileAdjacencyMask = 32
-	SKTileHexPointyAdjacencyAdd SKTileAdjacencyMask = 63
-	SKTileAdjacencyUpEdge SKTileAdjacencyMask = 124
-	SKTileAdjacencyUpperRightEdge SKTileAdjacencyMask = 112
-	SKTileAdjacencyRightEdge SKTileAdjacencyMask = 241
-	SKTileAdjacencyLowerRightEdge SKTileAdjacencyMask = 193
-	SKTileAdjacencyDownEdge SKTileAdjacencyMask = 199
-	SKTileAdjacencyLowerLeftEdge SKTileAdjacencyMask = 7
-	SKTileAdjacencyLeftEdge SKTileAdjacencyMask = 31
-	SKTileAdjacencyUpperLeftEdge SKTileAdjacencyMask = 28
-	SKTileAdjacencyUpperRightCorner SKTileAdjacencyMask = 223
-	SKTileAdjacencyLowerRightCorner SKTileAdjacencyMask = 127
-	SKTileAdjacencyLowerLeftCorner SKTileAdjacencyMask = 253
-	SKTileAdjacencyUpperLeftCorner SKTileAdjacencyMask = 247
+	SKTileHexPointyAdjacencyLowerLeft  SKTileAdjacencyMask = 16
+	SKTileHexPointyAdjacencyLeft       SKTileAdjacencyMask = 32
+	SKTileHexPointyAdjacencyAdd        SKTileAdjacencyMask = 63
+	SKTileAdjacencyUpEdge              SKTileAdjacencyMask = 124
+	SKTileAdjacencyUpperRightEdge      SKTileAdjacencyMask = 112
+	SKTileAdjacencyRightEdge           SKTileAdjacencyMask = 241
+	SKTileAdjacencyLowerRightEdge      SKTileAdjacencyMask = 193
+	SKTileAdjacencyDownEdge            SKTileAdjacencyMask = 199
+	SKTileAdjacencyLowerLeftEdge       SKTileAdjacencyMask = 7
+	SKTileAdjacencyLeftEdge            SKTileAdjacencyMask = 31
+	SKTileAdjacencyUpperLeftEdge       SKTileAdjacencyMask = 28
+	SKTileAdjacencyUpperRightCorner    SKTileAdjacencyMask = 223
+	SKTileAdjacencyLowerRightCorner    SKTileAdjacencyMask = 127
+	SKTileAdjacencyLowerLeftCorner     SKTileAdjacencyMask = 253
+	SKTileAdjacencyUpperLeftCorner     SKTileAdjacencyMask = 247
 )
 
 func (e SKTileAdjacencyMask) String() string {
@@ -412,8 +412,8 @@ func (e SKTileAdjacencyMask) String() string {
 type SKTileDefinitionRotation uint64
 
 const (
-	SKTileDefinitionRotation0 SKTileDefinitionRotation = 0
-	SKTileDefinitionRotation90 SKTileDefinitionRotation = 1
+	SKTileDefinitionRotation0   SKTileDefinitionRotation = 0
+	SKTileDefinitionRotation90  SKTileDefinitionRotation = 1
 	SKTileDefinitionRotation180 SKTileDefinitionRotation = 2
 	SKTileDefinitionRotation270 SKTileDefinitionRotation = 3
 )
@@ -436,9 +436,9 @@ func (e SKTileDefinitionRotation) String() string {
 type SKTileSetType uint64
 
 const (
-	SKTileSetTypeGrid SKTileSetType = 0
-	SKTileSetTypeIsometric SKTileSetType = 1
-	SKTileSetTypeHexagonalFlat SKTileSetType = 2
+	SKTileSetTypeGrid            SKTileSetType = 0
+	SKTileSetTypeIsometric       SKTileSetType = 1
+	SKTileSetTypeHexagonalFlat   SKTileSetType = 2
 	SKTileSetTypeHexagonalPointy SKTileSetType = 3
 )
 
@@ -460,10 +460,10 @@ func (e SKTileSetType) String() string {
 type SKTransitionDirection int64
 
 const (
-	SKTransitionDirectionUp SKTransitionDirection = 0
-	SKTransitionDirectionDown SKTransitionDirection = 1
+	SKTransitionDirectionUp    SKTransitionDirection = 0
+	SKTransitionDirectionDown  SKTransitionDirection = 1
 	SKTransitionDirectionRight SKTransitionDirection = 2
-	SKTransitionDirectionLeft SKTransitionDirection = 3
+	SKTransitionDirectionLeft  SKTransitionDirection = 3
 )
 
 func (e SKTransitionDirection) String() string {
@@ -484,15 +484,15 @@ func (e SKTransitionDirection) String() string {
 type SKUniformType int64
 
 const (
-	SKUniformTypeNone SKUniformType = 0
-	SKUniformTypeFloat SKUniformType = 1
+	SKUniformTypeNone         SKUniformType = 0
+	SKUniformTypeFloat        SKUniformType = 1
 	SKUniformTypeFloatVector2 SKUniformType = 2
 	SKUniformTypeFloatVector3 SKUniformType = 3
 	SKUniformTypeFloatVector4 SKUniformType = 4
 	SKUniformTypeFloatMatrix2 SKUniformType = 5
 	SKUniformTypeFloatMatrix3 SKUniformType = 6
 	SKUniformTypeFloatMatrix4 SKUniformType = 7
-	SKUniformTypeTexture SKUniformType = 8
+	SKUniformTypeTexture      SKUniformType = 8
 )
 
 func (e SKUniformType) String() string {
@@ -519,4 +519,3 @@ func (e SKUniformType) String() string {
 		return fmt.Sprintf("SKUniformType(%d)", int64(e))
 	}
 }
-

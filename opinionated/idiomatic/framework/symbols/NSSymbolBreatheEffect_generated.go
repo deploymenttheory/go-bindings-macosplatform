@@ -63,4 +63,3 @@ type SymbolBreatheEffectable interface {
 }
 
 var _ SymbolBreatheEffectable = (*SymbolBreatheEffect)(nil)
-

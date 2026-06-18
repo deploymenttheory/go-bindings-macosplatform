@@ -16,12 +16,12 @@ type NSWritingToolsCoordinatorAnimationParameters struct {
 }
 
 var (
-	_clsNSWritingToolsCoordinatorAnimationParameters = _objcClass("NSWritingToolsCoordinatorAnimationParameters")
-	_nSWritingToolsCoordinatorAnimationParametersSelDuration = objc.RegisterName("duration")
-	_nSWritingToolsCoordinatorAnimationParametersSelDelay = objc.RegisterName("delay")
-	_nSWritingToolsCoordinatorAnimationParametersSelProgressHandler = objc.RegisterName("progressHandler")
-	_nSWritingToolsCoordinatorAnimationParametersSelSetProgressHandler = objc.RegisterName("setProgressHandler:")
-	_nSWritingToolsCoordinatorAnimationParametersSelCompletionHandler = objc.RegisterName("completionHandler")
+	_clsNSWritingToolsCoordinatorAnimationParameters                     = _objcClass("NSWritingToolsCoordinatorAnimationParameters")
+	_nSWritingToolsCoordinatorAnimationParametersSelDuration             = objc.RegisterName("duration")
+	_nSWritingToolsCoordinatorAnimationParametersSelDelay                = objc.RegisterName("delay")
+	_nSWritingToolsCoordinatorAnimationParametersSelProgressHandler      = objc.RegisterName("progressHandler")
+	_nSWritingToolsCoordinatorAnimationParametersSelSetProgressHandler   = objc.RegisterName("setProgressHandler:")
+	_nSWritingToolsCoordinatorAnimationParametersSelCompletionHandler    = objc.RegisterName("completionHandler")
 	_nSWritingToolsCoordinatorAnimationParametersSelSetCompletionHandler = objc.RegisterName("setCompletionHandler:")
 )
 
@@ -80,4 +80,3 @@ func (o *NSWritingToolsCoordinatorAnimationParameters) SetCompletionHandler(comp
 	}
 	o.Ptr().Send(_nSWritingToolsCoordinatorAnimationParametersSelSetCompletionHandler, __block_completionHandler)
 }
-

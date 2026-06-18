@@ -63,4 +63,3 @@ type SymbolScaleEffectable interface {
 }
 
 var _ SymbolScaleEffectable = (*SymbolScaleEffect)(nil)
-

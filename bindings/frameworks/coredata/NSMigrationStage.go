@@ -16,8 +16,8 @@ type NSMigrationStage struct {
 }
 
 var (
-	_clsNSMigrationStage = _objcClass("NSMigrationStage")
-	_nSMigrationStageSelLabel = objc.RegisterName("label")
+	_clsNSMigrationStage         = _objcClass("NSMigrationStage")
+	_nSMigrationStageSelLabel    = objc.RegisterName("label")
 	_nSMigrationStageSelSetLabel = objc.RegisterName("setLabel:")
 )
 
@@ -33,11 +33,12 @@ func NSMigrationStageFromID(id objc.ID) *NSMigrationStage {
 
 func (o *NSMigrationStage) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMigrationStageSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSMigrationStage) SetLabel(label *foundation.NSString) {
 	o.Ptr().Send(_nSMigrationStageSelSetLabel, label.Ptr())
 }
-

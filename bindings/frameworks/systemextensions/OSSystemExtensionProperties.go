@@ -16,14 +16,14 @@ type OSSystemExtensionProperties struct {
 }
 
 var (
-	_clsOSSystemExtensionProperties = _objcClass("OSSystemExtensionProperties")
-	_oSSystemExtensionPropertiesSelURL = objc.RegisterName("URL")
-	_oSSystemExtensionPropertiesSelBundleIdentifier = objc.RegisterName("bundleIdentifier")
-	_oSSystemExtensionPropertiesSelBundleVersion = objc.RegisterName("bundleVersion")
-	_oSSystemExtensionPropertiesSelBundleShortVersion = objc.RegisterName("bundleShortVersion")
-	_oSSystemExtensionPropertiesSelIsEnabled = objc.RegisterName("isEnabled")
+	_clsOSSystemExtensionProperties                       = _objcClass("OSSystemExtensionProperties")
+	_oSSystemExtensionPropertiesSelURL                    = objc.RegisterName("URL")
+	_oSSystemExtensionPropertiesSelBundleIdentifier       = objc.RegisterName("bundleIdentifier")
+	_oSSystemExtensionPropertiesSelBundleVersion          = objc.RegisterName("bundleVersion")
+	_oSSystemExtensionPropertiesSelBundleShortVersion     = objc.RegisterName("bundleShortVersion")
+	_oSSystemExtensionPropertiesSelIsEnabled              = objc.RegisterName("isEnabled")
 	_oSSystemExtensionPropertiesSelIsAwaitingUserApproval = objc.RegisterName("isAwaitingUserApproval")
-	_oSSystemExtensionPropertiesSelIsUninstalling = objc.RegisterName("isUninstalling")
+	_oSSystemExtensionPropertiesSelIsUninstalling         = objc.RegisterName("isUninstalling")
 )
 
 func OSSystemExtensionPropertiesFromID(id objc.ID) *OSSystemExtensionProperties {
@@ -39,28 +39,36 @@ func OSSystemExtensionPropertiesFromID(id objc.ID) *OSSystemExtensionProperties 
 // @brief The file URL locating an indicating the extension bundle these properties were retreived from.
 func (o *OSSystemExtensionProperties) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSSystemExtensionPropertiesSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // @brief The bundle identifier of the extension (CFBundleIdentifier)
 func (o *OSSystemExtensionProperties) BundleIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSSystemExtensionPropertiesSelBundleIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @brief The bundle version of the extension (CFBundleVersion)
 func (o *OSSystemExtensionProperties) BundleVersion() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSSystemExtensionPropertiesSelBundleVersion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @brief The bundle short version string of the extension (CFBundleShortVersionString)
 func (o *OSSystemExtensionProperties) BundleShortVersion() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSSystemExtensionPropertiesSelBundleShortVersion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -81,4 +89,3 @@ func (o *OSSystemExtensionProperties) IsUninstalling() bool {
 	_ret := objc.Send[bool](o.Ptr(), _oSSystemExtensionPropertiesSelIsUninstalling)
 	return _ret
 }
-

@@ -16,11 +16,11 @@ type NSScrubberSelectionStyle struct {
 }
 
 var (
-	_clsNSScrubberSelectionStyle = _objcClass("NSScrubberSelectionStyle")
-	_nSScrubberSelectionStyleSelInit = objc.RegisterName("init")
-	_nSScrubberSelectionStyleSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSScrubberSelectionStyleSelMakeSelectionView = objc.RegisterName("makeSelectionView")
-	_nSScrubberSelectionStyleSelOutlineOverlayStyle = objc.RegisterName("outlineOverlayStyle")
+	_clsNSScrubberSelectionStyle                       = _objcClass("NSScrubberSelectionStyle")
+	_nSScrubberSelectionStyleSelInit                   = objc.RegisterName("init")
+	_nSScrubberSelectionStyleSelInitWithCoder          = objc.RegisterName("initWithCoder:")
+	_nSScrubberSelectionStyleSelMakeSelectionView      = objc.RegisterName("makeSelectionView")
+	_nSScrubberSelectionStyleSelOutlineOverlayStyle    = objc.RegisterName("outlineOverlayStyle")
 	_nSScrubberSelectionStyleSelRoundedBackgroundStyle = objc.RegisterName("roundedBackgroundStyle")
 )
 
@@ -36,31 +36,40 @@ func NSScrubberSelectionStyleFromID(id objc.ID) *NSScrubberSelectionStyle {
 
 func (o *NSScrubberSelectionStyle) Init() *NSScrubberSelectionStyle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelectionStyleSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrubberSelectionStyleFromID(_ret)
 }
 
 func (o *NSScrubberSelectionStyle) InitWithCoder(coder *foundation.NSCoder) *NSScrubberSelectionStyle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelectionStyleSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrubberSelectionStyleFromID(_ret)
 }
 
 func (o *NSScrubberSelectionStyle) MakeSelectionView() *NSScrubberSelectionView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelectionStyleSelMakeSelectionView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrubberSelectionViewFromID(_ret)
 }
 
 func NSScrubberSelectionStyleOutlineOverlayStyle() *NSScrubberSelectionStyle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSScrubberSelectionStyle), _nSScrubberSelectionStyleSelOutlineOverlayStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrubberSelectionStyleFromID(_ret)
 }
 
 func NSScrubberSelectionStyleRoundedBackgroundStyle() *NSScrubberSelectionStyle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSScrubberSelectionStyle), _nSScrubberSelectionStyleSelRoundedBackgroundStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrubberSelectionStyleFromID(_ret)
 }
-

@@ -36,7 +36,9 @@ func KCTFontNameAttribute() objc.ID { return purego.CFConstant(raw.KCTFontNameAt
 
 // @defined    kCTFontDisplayNameAttribute @abstract   The display name. @discussion This is the key for accessing the name used to display the font. Most commonly this is the full name. The value associated with this key is a CFStringRef.
 // KCTFontDisplayNameAttribute returns the value of the CoreFoundation reference constant kCTFontDisplayNameAttribute as an objc.ID.
-func KCTFontDisplayNameAttribute() objc.ID { return purego.CFConstant(raw.KCTFontDisplayNameAttribute()) }
+func KCTFontDisplayNameAttribute() objc.ID {
+	return purego.CFConstant(raw.KCTFontDisplayNameAttribute())
+}
 
 // @defined    kCTFontFamilyNameAttribute @abstract   The family name. @discussion This is the key for accessing the family name from the font descriptor. The value associated with this key is a CFStringRef.
 // KCTFontFamilyNameAttribute returns the value of the CoreFoundation reference constant kCTFontFamilyNameAttribute as an objc.ID.
@@ -56,7 +58,9 @@ func KCTFontVariationAttribute() objc.ID { return purego.CFConstant(raw.KCTFontV
 
 // @defined    kCTFontVariationAxesAttribute @discussion An array of variation axis dictionaries or null if the font does not support variations. Each variation axis dictionary contains the five kCTFontVariationAxis-prefixed keys. Unlike the result of CTFontCopyVariationAxes(), kCTFontVariationAxisNameKey values for this attribute are not localized. Before macOS 13.0 and iOS 16.0 this attribute is not accurate and CTFontCopyVariationAxes() should be used instead. @seealso    CTFontCopyVariationAxes
 // KCTFontVariationAxesAttribute returns the value of the CoreFoundation reference constant kCTFontVariationAxesAttribute as an objc.ID.
-func KCTFontVariationAxesAttribute() objc.ID { return purego.CFConstant(raw.KCTFontVariationAxesAttribute()) }
+func KCTFontVariationAxesAttribute() objc.ID {
+	return purego.CFConstant(raw.KCTFontVariationAxesAttribute())
+}
 
 // @defined    kCTFontSizeAttribute @abstract   The font point size. @discussion This key is used to obtain or specify the font point size. Creating a font with this unspecified will default to a point size of 12.0. The value for this key is represented as a CFNumberRef.
 // KCTFontSizeAttribute returns the value of the CoreFoundation reference constant kCTFontSizeAttribute as an objc.ID.
@@ -68,11 +72,15 @@ func KCTFontMatrixAttribute() objc.ID { return purego.CFConstant(raw.KCTFontMatr
 
 // @defined    kCTFontCascadeListAttribute @abstract   The font cascade list. @discussion This key is used to specify or obtain the cascade list used for a font reference. The cascade list is a CFArrayRef containing CTFontDescriptorRefs. If unspecified, the global cascade list is used. This list is not consulted for private-use characters on OS X 10.10, iOS 8, or earlier.
 // KCTFontCascadeListAttribute returns the value of the CoreFoundation reference constant kCTFontCascadeListAttribute as an objc.ID.
-func KCTFontCascadeListAttribute() objc.ID { return purego.CFConstant(raw.KCTFontCascadeListAttribute()) }
+func KCTFontCascadeListAttribute() objc.ID {
+	return purego.CFConstant(raw.KCTFontCascadeListAttribute())
+}
 
 // @defined    kCTFontCharacterSetAttribute @abstract   The font Unicode character coverage set. @discussion The value for this key is a CFCharacterSetRef. Creating a font with this attribute will restrict the font to a subset of its actual character set.
 // KCTFontCharacterSetAttribute returns the value of the CoreFoundation reference constant kCTFontCharacterSetAttribute as an objc.ID.
-func KCTFontCharacterSetAttribute() objc.ID { return purego.CFConstant(raw.KCTFontCharacterSetAttribute()) }
+func KCTFontCharacterSetAttribute() objc.ID {
+	return purego.CFConstant(raw.KCTFontCharacterSetAttribute())
+}
 
 // @defined    kCTFontLanguagesAttribute @abstract   The list of supported languages. @discussion The value for this key is a CFArrayRef of CFStringRef language identifiers conforming to UTS #35. It can be requested from any font. If present in a descriptor used for matching, only fonts supporting the specified languages will be returned.
 // KCTFontLanguagesAttribute returns the value of the CoreFoundation reference constant kCTFontLanguagesAttribute as an objc.ID.
@@ -80,11 +88,15 @@ func KCTFontLanguagesAttribute() objc.ID { return purego.CFConstant(raw.KCTFontL
 
 // @defined    kCTFontBaselineAdjustAttribute @abstract   The baseline adjustment to apply to font metrics. @discussion The value for this key is a floating-point CFNumberRef. This is primarily used when defining font descriptors for a cascade list to keep the baseline of all fonts even.
 // KCTFontBaselineAdjustAttribute returns the value of the CoreFoundation reference constant kCTFontBaselineAdjustAttribute as an objc.ID.
-func KCTFontBaselineAdjustAttribute() objc.ID { return purego.CFConstant(raw.KCTFontBaselineAdjustAttribute()) }
+func KCTFontBaselineAdjustAttribute() objc.ID {
+	return purego.CFConstant(raw.KCTFontBaselineAdjustAttribute())
+}
 
 // @defined    kCTFontMacintoshEncodingsAttribute @abstract   The Macintosh encodings (legacy script codes). @discussion The value associated with this key is a CFNumberRef containing a bitfield of the script codes in <CoreText/SFNTTypes.h>; bit 0 corresponds to kFontRomanScript, and so on. This attribute is provided for legacy compatibility.
 // KCTFontMacintoshEncodingsAttribute returns the value of the CoreFoundation reference constant kCTFontMacintoshEncodingsAttribute as an objc.ID.
-func KCTFontMacintoshEncodingsAttribute() objc.ID { return purego.CFConstant(raw.KCTFontMacintoshEncodingsAttribute()) }
+func KCTFontMacintoshEncodingsAttribute() objc.ID {
+	return purego.CFConstant(raw.KCTFontMacintoshEncodingsAttribute())
+}
 
 // @defined    kCTFontFeaturesAttribute @abstract   The array of font features. @discussion This key is used to specify or obtain the font features for a font reference. The value associated with this key is a CFArrayRef of font feature dictionaries as documented for CTFontCopyFeatures() in <CoreText/CTFont.h>. Unlike the result of CTFontCopyFeatures(), this attribute does not contain localized names. @seealso    CTFontCopyFeatures
 // KCTFontFeaturesAttribute returns the value of the CoreFoundation reference constant kCTFontFeaturesAttribute as an objc.ID.
@@ -92,15 +104,21 @@ func KCTFontFeaturesAttribute() objc.ID { return purego.CFConstant(raw.KCTFontFe
 
 // @defined    kCTFontFeatureSettingsAttribute @abstract   The array of typographic feature settings. @discussion This key is used to specify an array of zero or more feature settings. Each setting dictionary indicates which setting should be applied. In the case of duplicate or conflicting settings the last setting in the list will take precedence. In the case of AAT settings, it is the caller's responsibility to handle exclusive and non-exclusive settings as necessary. An AAT setting dictionary contains a tuple of a kCTFontFeatureTypeIdentifierKey key-value pair and a kCTFontFeatureSelectorIdentifierKey key-value pair. An OpenType setting dictionary contains a tuple of a kCTFontOpenTypeFeatureTag key-value pair and a kCTFontOpenTypeFeatureValue key-value pair. Starting with OS X 10.10 and iOS 8.0, settings are also accepted (but not returned) in the following simplified forms: An OpenType setting can be either an array pair of tag string and value number, or a tag string on its own. For example: @[ @"c2sc", @1 ] or simply @"c2sc". An unspecified value enables the feature and a value of zero disables it. An AAT setting can be specified as an array pair of type and selector numbers. For example: @[ @(kUpperCaseType), @(kUpperCaseSmallCapsSelector) ].
 // KCTFontFeatureSettingsAttribute returns the value of the CoreFoundation reference constant kCTFontFeatureSettingsAttribute as an objc.ID.
-func KCTFontFeatureSettingsAttribute() objc.ID { return purego.CFConstant(raw.KCTFontFeatureSettingsAttribute()) }
+func KCTFontFeatureSettingsAttribute() objc.ID {
+	return purego.CFConstant(raw.KCTFontFeatureSettingsAttribute())
+}
 
 // @defined    kCTFontFixedAdvanceAttribute @abstract   Specifies advance width. @discussion This key is used to specify a constant advance width, which affects the glyph metrics of any font instance created with this key; it overrides font values and the font transformation matrix, if any. The value associated with this key must be a CFNumberRef. Starting with macOS 10.14 and iOS 12.0, this only affects glyph advances that have non-zero width when this attribute is not present.
 // KCTFontFixedAdvanceAttribute returns the value of the CoreFoundation reference constant kCTFontFixedAdvanceAttribute as an objc.ID.
-func KCTFontFixedAdvanceAttribute() objc.ID { return purego.CFConstant(raw.KCTFontFixedAdvanceAttribute()) }
+func KCTFontFixedAdvanceAttribute() objc.ID {
+	return purego.CFConstant(raw.KCTFontFixedAdvanceAttribute())
+}
 
 // @defined    kCTFontOrientationAttribute @abstract   The orientation attribute. @discussion This key is used to specify a particular orientation for the glyphs of the font. The value associated with this key is a int as a CFNumberRef. If you want to receive vertical metrics from a font for vertical rendering, specify kCTFontVerticalOrientation. If unspecified, the font will use its native orientation.
 // KCTFontOrientationAttribute returns the value of the CoreFoundation reference constant kCTFontOrientationAttribute as an objc.ID.
-func KCTFontOrientationAttribute() objc.ID { return purego.CFConstant(raw.KCTFontOrientationAttribute()) }
+func KCTFontOrientationAttribute() objc.ID {
+	return purego.CFConstant(raw.KCTFontOrientationAttribute())
+}
 
 // @defined    kCTFontFormatAttribute @abstract   Specifies the recognized format of the font. @discussion The attribute is used to specify or obtain the format of the font. The returned value is a CFNumber containing one of the constants defined below.
 // KCTFontFormatAttribute returns the value of the CoreFoundation reference constant kCTFontFormatAttribute as an objc.ID.
@@ -108,7 +126,9 @@ func KCTFontFormatAttribute() objc.ID { return purego.CFConstant(raw.KCTFontForm
 
 // @defined    kCTFontRegistrationScopeAttribute @abstract   Specifies the font descriptor's registration scope. @discussion The attribute is used to specify or obtain the font registration scope. The value returned is a CFNumberRef containing one of the CTFontManagerScope enumerated values. A value of NULL can be returned for font descriptors that are not registered.
 // KCTFontRegistrationScopeAttribute returns the value of the CoreFoundation reference constant kCTFontRegistrationScopeAttribute as an objc.ID.
-func KCTFontRegistrationScopeAttribute() objc.ID { return purego.CFConstant(raw.KCTFontRegistrationScopeAttribute()) }
+func KCTFontRegistrationScopeAttribute() objc.ID {
+	return purego.CFConstant(raw.KCTFontRegistrationScopeAttribute())
+}
 
 // @defined    kCTFontPriorityAttribute @abstract   The font descriptors priority when resolving duplicates and sorting match results. @discussion This key is used to obtain or specify the font priority. The value returned is a CFNumberRef containing an integer value as defined below. The higher the value, the higher the priority of the font. Only registered fonts will have a priority. Unregistered font descriptors will return NULL.
 // KCTFontPriorityAttribute returns the value of the CoreFoundation reference constant kCTFontPriorityAttribute as an objc.ID.
@@ -120,7 +140,9 @@ func KCTFontEnabledAttribute() objc.ID { return purego.CFConstant(raw.KCTFontEna
 
 // @defined    kCTFontDownloadableAttribute @abstract   The font downloadable state. @discussion The value associated with this key is a CFBoolean. If it is true, CoreText attempts to download a font if necessary when matching a descriptor.
 // KCTFontDownloadableAttribute returns the value of the CoreFoundation reference constant kCTFontDownloadableAttribute as an objc.ID.
-func KCTFontDownloadableAttribute() objc.ID { return purego.CFConstant(raw.KCTFontDownloadableAttribute()) }
+func KCTFontDownloadableAttribute() objc.ID {
+	return purego.CFConstant(raw.KCTFontDownloadableAttribute())
+}
 
 // @defined    kCTFontDownloadedAttribute @abstract   The download state. @discussion The value associated with this key is a CFBoolean. If it is true, corresponding FontAsset has been downloaded. (but still it may be necessary to call appropriate API in order to use the font in the FontAsset.)
 // KCTFontDownloadedAttribute returns the value of the CoreFoundation reference constant kCTFontDownloadedAttribute as an objc.ID.
@@ -128,35 +150,55 @@ func KCTFontDownloadedAttribute() objc.ID { return purego.CFConstant(raw.KCTFont
 
 // @defined    kCTFontOpticalSizeAttribute @abstract   The point size at which this font is intended to be used. @discussion The value is a CFNumber used to activate size-specific (not linearly scaled) metrics. Starting with macOS 10.14 and iOS 12.0, the CFString "auto" can be used instead to request an optical size matching the point size. Starting with macOS 10.15 and iOS 13.0, the CFString "none" can be used instead to explicitly disable automatic optical sizing enabled by the font.
 // KCTFontOpticalSizeAttribute returns the value of the CoreFoundation reference constant kCTFontOpticalSizeAttribute as an objc.ID.
-func KCTFontOpticalSizeAttribute() objc.ID { return purego.CFConstant(raw.KCTFontOpticalSizeAttribute()) }
+func KCTFontOpticalSizeAttribute() objc.ID {
+	return purego.CFConstant(raw.KCTFontOpticalSizeAttribute())
+}
 
 // @defined    kCTFontDescriptorLanguageAttribute @abstract   The language identifier for font fallback selection. @discussion The value associated with this key is a CFStringRef. If specified in a font descriptor, it is used to select the appropriate font fallback list for the language. This key should not be confused with kCTLanguageAttributeName, which is defined in CTStringAttributes.h.
 // KCTFontDescriptorLanguageAttribute returns the value of the CoreFoundation reference constant kCTFontDescriptorLanguageAttribute as an objc.ID.
-func KCTFontDescriptorLanguageAttribute() objc.ID { return purego.CFConstant(raw.KCTFontDescriptorLanguageAttribute()) }
+func KCTFontDescriptorLanguageAttribute() objc.ID {
+	return purego.CFConstant(raw.KCTFontDescriptorLanguageAttribute())
+}
 
 // KCTFontDescriptorMatchingSourceDescriptor returns the value of the CoreFoundation reference constant kCTFontDescriptorMatchingSourceDescriptor as an objc.ID.
-func KCTFontDescriptorMatchingSourceDescriptor() objc.ID { return purego.CFConstant(raw.KCTFontDescriptorMatchingSourceDescriptor()) }
+func KCTFontDescriptorMatchingSourceDescriptor() objc.ID {
+	return purego.CFConstant(raw.KCTFontDescriptorMatchingSourceDescriptor())
+}
 
 // KCTFontDescriptorMatchingDescriptors returns the value of the CoreFoundation reference constant kCTFontDescriptorMatchingDescriptors as an objc.ID.
-func KCTFontDescriptorMatchingDescriptors() objc.ID { return purego.CFConstant(raw.KCTFontDescriptorMatchingDescriptors()) }
+func KCTFontDescriptorMatchingDescriptors() objc.ID {
+	return purego.CFConstant(raw.KCTFontDescriptorMatchingDescriptors())
+}
 
 // KCTFontDescriptorMatchingResult returns the value of the CoreFoundation reference constant kCTFontDescriptorMatchingResult as an objc.ID.
-func KCTFontDescriptorMatchingResult() objc.ID { return purego.CFConstant(raw.KCTFontDescriptorMatchingResult()) }
+func KCTFontDescriptorMatchingResult() objc.ID {
+	return purego.CFConstant(raw.KCTFontDescriptorMatchingResult())
+}
 
 // KCTFontDescriptorMatchingPercentage returns the value of the CoreFoundation reference constant kCTFontDescriptorMatchingPercentage as an objc.ID.
-func KCTFontDescriptorMatchingPercentage() objc.ID { return purego.CFConstant(raw.KCTFontDescriptorMatchingPercentage()) }
+func KCTFontDescriptorMatchingPercentage() objc.ID {
+	return purego.CFConstant(raw.KCTFontDescriptorMatchingPercentage())
+}
 
 // KCTFontDescriptorMatchingCurrentAssetSize returns the value of the CoreFoundation reference constant kCTFontDescriptorMatchingCurrentAssetSize as an objc.ID.
-func KCTFontDescriptorMatchingCurrentAssetSize() objc.ID { return purego.CFConstant(raw.KCTFontDescriptorMatchingCurrentAssetSize()) }
+func KCTFontDescriptorMatchingCurrentAssetSize() objc.ID {
+	return purego.CFConstant(raw.KCTFontDescriptorMatchingCurrentAssetSize())
+}
 
 // KCTFontDescriptorMatchingTotalDownloadedSize returns the value of the CoreFoundation reference constant kCTFontDescriptorMatchingTotalDownloadedSize as an objc.ID.
-func KCTFontDescriptorMatchingTotalDownloadedSize() objc.ID { return purego.CFConstant(raw.KCTFontDescriptorMatchingTotalDownloadedSize()) }
+func KCTFontDescriptorMatchingTotalDownloadedSize() objc.ID {
+	return purego.CFConstant(raw.KCTFontDescriptorMatchingTotalDownloadedSize())
+}
 
 // KCTFontDescriptorMatchingTotalAssetSize returns the value of the CoreFoundation reference constant kCTFontDescriptorMatchingTotalAssetSize as an objc.ID.
-func KCTFontDescriptorMatchingTotalAssetSize() objc.ID { return purego.CFConstant(raw.KCTFontDescriptorMatchingTotalAssetSize()) }
+func KCTFontDescriptorMatchingTotalAssetSize() objc.ID {
+	return purego.CFConstant(raw.KCTFontDescriptorMatchingTotalAssetSize())
+}
 
 // KCTFontDescriptorMatchingError returns the value of the CoreFoundation reference constant kCTFontDescriptorMatchingError as an objc.ID.
-func KCTFontDescriptorMatchingError() objc.ID { return purego.CFConstant(raw.KCTFontDescriptorMatchingError()) }
+func KCTFontDescriptorMatchingError() objc.ID {
+	return purego.CFConstant(raw.KCTFontDescriptorMatchingError())
+}
 
 // @defined    kCTFontCopyrightNameKey @abstract   The name specifier for the copyright name.
 // KCTFontCopyrightNameKey returns the value of the CoreFoundation reference constant kCTFontCopyrightNameKey as an objc.ID.
@@ -228,31 +270,45 @@ func KCTFontSampleTextNameKey() objc.ID { return purego.CFConstant(raw.KCTFontSa
 
 // @defined    kCTFontPostScriptCIDNameKey @abstract   The name specifier for the PostScript CID name.
 // KCTFontPostScriptCIDNameKey returns the value of the CoreFoundation reference constant kCTFontPostScriptCIDNameKey as an objc.ID.
-func KCTFontPostScriptCIDNameKey() objc.ID { return purego.CFConstant(raw.KCTFontPostScriptCIDNameKey()) }
+func KCTFontPostScriptCIDNameKey() objc.ID {
+	return purego.CFConstant(raw.KCTFontPostScriptCIDNameKey())
+}
 
 // @defined    kCTFontVariationAxisIdentifierKey @abstract   Key to get the variation axis identifier. @discussion This key is used with a variation axis dictionary to get the axis identifier value as a CFNumberRef.
 // KCTFontVariationAxisIdentifierKey returns the value of the CoreFoundation reference constant kCTFontVariationAxisIdentifierKey as an objc.ID.
-func KCTFontVariationAxisIdentifierKey() objc.ID { return purego.CFConstant(raw.KCTFontVariationAxisIdentifierKey()) }
+func KCTFontVariationAxisIdentifierKey() objc.ID {
+	return purego.CFConstant(raw.KCTFontVariationAxisIdentifierKey())
+}
 
 // @defined    kCTFontVariationAxisMinimumValueKey @abstract   Key to get the variation axis minimum value. @discussion This key is used with a variation axis dictionary to get the minimum axis value as a CFNumberRef.
 // KCTFontVariationAxisMinimumValueKey returns the value of the CoreFoundation reference constant kCTFontVariationAxisMinimumValueKey as an objc.ID.
-func KCTFontVariationAxisMinimumValueKey() objc.ID { return purego.CFConstant(raw.KCTFontVariationAxisMinimumValueKey()) }
+func KCTFontVariationAxisMinimumValueKey() objc.ID {
+	return purego.CFConstant(raw.KCTFontVariationAxisMinimumValueKey())
+}
 
 // @defined    kCTFontVariationAxisMaximumValueKey @abstract   Key to get the variation axis maximum value. @discussion This key is used with a variation axis dictionary to get the maximum axis value as a CFNumberRef.
 // KCTFontVariationAxisMaximumValueKey returns the value of the CoreFoundation reference constant kCTFontVariationAxisMaximumValueKey as an objc.ID.
-func KCTFontVariationAxisMaximumValueKey() objc.ID { return purego.CFConstant(raw.KCTFontVariationAxisMaximumValueKey()) }
+func KCTFontVariationAxisMaximumValueKey() objc.ID {
+	return purego.CFConstant(raw.KCTFontVariationAxisMaximumValueKey())
+}
 
 // @defined    kCTFontVariationAxisDefaultValueKey @abstract   Key to get the variation axis default value. @discussion This key is used with a variation axis dictionary to get the default axis value as a CFNumberRef.
 // KCTFontVariationAxisDefaultValueKey returns the value of the CoreFoundation reference constant kCTFontVariationAxisDefaultValueKey as an objc.ID.
-func KCTFontVariationAxisDefaultValueKey() objc.ID { return purego.CFConstant(raw.KCTFontVariationAxisDefaultValueKey()) }
+func KCTFontVariationAxisDefaultValueKey() objc.ID {
+	return purego.CFConstant(raw.KCTFontVariationAxisDefaultValueKey())
+}
 
 // @defined    kCTFontVariationAxisNameKey @abstract   Key to get the variation axis name string. @discussion This key is used with a variation axis dictionary to get the variation axis name.
 // KCTFontVariationAxisNameKey returns the value of the CoreFoundation reference constant kCTFontVariationAxisNameKey as an objc.ID.
-func KCTFontVariationAxisNameKey() objc.ID { return purego.CFConstant(raw.KCTFontVariationAxisNameKey()) }
+func KCTFontVariationAxisNameKey() objc.ID {
+	return purego.CFConstant(raw.KCTFontVariationAxisNameKey())
+}
 
 // @defined    kCTFontVariationAxisHiddenKey @abstract   Key to get the hidden axis flag. @discussion This key contains a CFBoolean value that is true when the font designer recommends the axis not be exposed directly to end users in application interfaces.
 // KCTFontVariationAxisHiddenKey returns the value of the CoreFoundation reference constant kCTFontVariationAxisHiddenKey as an objc.ID.
-func KCTFontVariationAxisHiddenKey() objc.ID { return purego.CFConstant(raw.KCTFontVariationAxisHiddenKey()) }
+func KCTFontVariationAxisHiddenKey() objc.ID {
+	return purego.CFConstant(raw.KCTFontVariationAxisHiddenKey())
+}
 
 // @defined    kCTFontOpenTypeFeatureTag @abstract   Key to get the OpenType feature tag. @discussion This key can be used with a font feature dictionary to get the tag as a CFStringRef.
 // KCTFontOpenTypeFeatureTag returns the value of the CoreFoundation reference constant kCTFontOpenTypeFeatureTag as an objc.ID.
@@ -260,11 +316,15 @@ func KCTFontOpenTypeFeatureTag() objc.ID { return purego.CFConstant(raw.KCTFontO
 
 // @defined    kCTFontOpenTypeFeatureValue @abstract   Key to get the OpenType feature value. @discussion This key can be used with a font feature dictionary to get the value as a CFNumberRef.
 // KCTFontOpenTypeFeatureValue returns the value of the CoreFoundation reference constant kCTFontOpenTypeFeatureValue as an objc.ID.
-func KCTFontOpenTypeFeatureValue() objc.ID { return purego.CFConstant(raw.KCTFontOpenTypeFeatureValue()) }
+func KCTFontOpenTypeFeatureValue() objc.ID {
+	return purego.CFConstant(raw.KCTFontOpenTypeFeatureValue())
+}
 
 // @defined    kCTFontFeatureTypeIdentifierKey @abstract   Key to get the font feature type value. @discussion This key can be used with a font feature dictionary to get the type identifier as a CFNumberRef.
 // KCTFontFeatureTypeIdentifierKey returns the value of the CoreFoundation reference constant kCTFontFeatureTypeIdentifierKey as an objc.ID.
-func KCTFontFeatureTypeIdentifierKey() objc.ID { return purego.CFConstant(raw.KCTFontFeatureTypeIdentifierKey()) }
+func KCTFontFeatureTypeIdentifierKey() objc.ID {
+	return purego.CFConstant(raw.KCTFontFeatureTypeIdentifierKey())
+}
 
 // @defined    kCTFontFeatureTypeNameKey @abstract   Key to get the font feature name. @discussion This key can be used with a font feature dictionary to get the localized type name string as a CFString.
 // KCTFontFeatureTypeNameKey returns the value of the CoreFoundation reference constant kCTFontFeatureTypeNameKey as an objc.ID.
@@ -272,35 +332,51 @@ func KCTFontFeatureTypeNameKey() objc.ID { return purego.CFConstant(raw.KCTFontF
 
 // @defined    kCTFontFeatureTypeExclusiveKey @abstract   Key to get the font feature exclusive setting. @discussion This key can be used with a font feature dictionary to get the the exclusive setting of the feature as a CFBoolean. The value associated with this key indicates whether the feature selectors associated with this type should be mutually exclusive.
 // KCTFontFeatureTypeExclusiveKey returns the value of the CoreFoundation reference constant kCTFontFeatureTypeExclusiveKey as an objc.ID.
-func KCTFontFeatureTypeExclusiveKey() objc.ID { return purego.CFConstant(raw.KCTFontFeatureTypeExclusiveKey()) }
+func KCTFontFeatureTypeExclusiveKey() objc.ID {
+	return purego.CFConstant(raw.KCTFontFeatureTypeExclusiveKey())
+}
 
 // @defined    kCTFontFeatureTypeSelectorsKey @abstract   Key to get the font feature selectors. @discussion This key can be used with a font feature dictionary to get the array of font feature selectors as a CFArrayRef. This is an array of selector dictionaries that contain the values for the following selector keys.
 // KCTFontFeatureTypeSelectorsKey returns the value of the CoreFoundation reference constant kCTFontFeatureTypeSelectorsKey as an objc.ID.
-func KCTFontFeatureTypeSelectorsKey() objc.ID { return purego.CFConstant(raw.KCTFontFeatureTypeSelectorsKey()) }
+func KCTFontFeatureTypeSelectorsKey() objc.ID {
+	return purego.CFConstant(raw.KCTFontFeatureTypeSelectorsKey())
+}
 
 // @defined    kCTFontFeatureSelectorIdentifierKey @abstract   Key to get the font feature selector identifier. @discussion This key can be used with a selector dictionary corresponding to a feature type to obtain the selector identifier value as a CFNumberRef.
 // KCTFontFeatureSelectorIdentifierKey returns the value of the CoreFoundation reference constant kCTFontFeatureSelectorIdentifierKey as an objc.ID.
-func KCTFontFeatureSelectorIdentifierKey() objc.ID { return purego.CFConstant(raw.KCTFontFeatureSelectorIdentifierKey()) }
+func KCTFontFeatureSelectorIdentifierKey() objc.ID {
+	return purego.CFConstant(raw.KCTFontFeatureSelectorIdentifierKey())
+}
 
 // @defined    kCTFontFeatureSelectorNameKey @abstract   Key to get the font feature selector name. @discussion This key is used with a selector dictionary to get the localized name string for the selector as a CFStringRef.
 // KCTFontFeatureSelectorNameKey returns the value of the CoreFoundation reference constant kCTFontFeatureSelectorNameKey as an objc.ID.
-func KCTFontFeatureSelectorNameKey() objc.ID { return purego.CFConstant(raw.KCTFontFeatureSelectorNameKey()) }
+func KCTFontFeatureSelectorNameKey() objc.ID {
+	return purego.CFConstant(raw.KCTFontFeatureSelectorNameKey())
+}
 
 // @defined    kCTFontFeatureSelectorDefaultKey @abstract   Key to get the font feature selector default setting value. @discussion This key is used with a selector dictionary to get the default indicator for the selector. This value is a CFBooleanRef which if present and true indicates that this selector is the default setting for the current feature type.
 // KCTFontFeatureSelectorDefaultKey returns the value of the CoreFoundation reference constant kCTFontFeatureSelectorDefaultKey as an objc.ID.
-func KCTFontFeatureSelectorDefaultKey() objc.ID { return purego.CFConstant(raw.KCTFontFeatureSelectorDefaultKey()) }
+func KCTFontFeatureSelectorDefaultKey() objc.ID {
+	return purego.CFConstant(raw.KCTFontFeatureSelectorDefaultKey())
+}
 
 // @defined    kCTFontFeatureSelectorSettingKey @abstract   Key to get or specify the current feature setting. @discussion This key is used with a selector dictionary to get or specify the current setting for the selector. This value is a CFBooleanRef to indicate whether this selector is on or off. If this key is not present, the default setting is used.
 // KCTFontFeatureSelectorSettingKey returns the value of the CoreFoundation reference constant kCTFontFeatureSelectorSettingKey as an objc.ID.
-func KCTFontFeatureSelectorSettingKey() objc.ID { return purego.CFConstant(raw.KCTFontFeatureSelectorSettingKey()) }
+func KCTFontFeatureSelectorSettingKey() objc.ID {
+	return purego.CFConstant(raw.KCTFontFeatureSelectorSettingKey())
+}
 
 // @defined    kCTFontFeatureSampleTextKey @abstract   Key to get the font feature sample text. @discussion This key can be used with a font feature dictionary to get the localized sample text as a CFStringRef.
 // KCTFontFeatureSampleTextKey returns the value of the CoreFoundation reference constant kCTFontFeatureSampleTextKey as an objc.ID.
-func KCTFontFeatureSampleTextKey() objc.ID { return purego.CFConstant(raw.KCTFontFeatureSampleTextKey()) }
+func KCTFontFeatureSampleTextKey() objc.ID {
+	return purego.CFConstant(raw.KCTFontFeatureSampleTextKey())
+}
 
 // @defined    kCTFontFeatureTooltipTextKey @abstract   Key to get the font feature tooltip text. @discussion This key can be used with a font feature dictionary to get the localized tooltip text as a CFStringRef.
 // KCTFontFeatureTooltipTextKey returns the value of the CoreFoundation reference constant kCTFontFeatureTooltipTextKey as an objc.ID.
-func KCTFontFeatureTooltipTextKey() objc.ID { return purego.CFConstant(raw.KCTFontFeatureTooltipTextKey()) }
+func KCTFontFeatureTooltipTextKey() objc.ID {
+	return purego.CFConstant(raw.KCTFontFeatureTooltipTextKey())
+}
 
 // @defined    kCTBaselineClassRoman @abstract   Key to reference the Roman baseline class. @discussion This key can be used with a baseline info dictionary to offset to the Roman baseline as a CFNumberRef float. It can also be used as the value for kCTBaselineClassAttributeName.
 // KCTBaselineClassRoman returns the value of the CoreFoundation reference constant kCTBaselineClassRoman as an objc.ID.
@@ -308,15 +384,21 @@ func KCTBaselineClassRoman() objc.ID { return purego.CFConstant(raw.KCTBaselineC
 
 // @defined    kCTBaselineClassIdeographicCentered @abstract   Key to reference the Ideographic Centered baseline class. @discussion This key can be used with a baseline info dictionary to offset to the Ideographic Centered baseline as a CFNumberRef float. It can also be used as the value for kCTBaselineClassAttributeName.
 // KCTBaselineClassIdeographicCentered returns the value of the CoreFoundation reference constant kCTBaselineClassIdeographicCentered as an objc.ID.
-func KCTBaselineClassIdeographicCentered() objc.ID { return purego.CFConstant(raw.KCTBaselineClassIdeographicCentered()) }
+func KCTBaselineClassIdeographicCentered() objc.ID {
+	return purego.CFConstant(raw.KCTBaselineClassIdeographicCentered())
+}
 
 // @defined    kCTBaselineClassIdeographicLow @abstract   Key to reference the Ideographic Low baseline class. @discussion This key can be used with a baseline info dictionary to offset to the Ideographic Low baseline as a CFNumberRef float. It can also be used as the value for kCTBaselineClassAttributeName.
 // KCTBaselineClassIdeographicLow returns the value of the CoreFoundation reference constant kCTBaselineClassIdeographicLow as an objc.ID.
-func KCTBaselineClassIdeographicLow() objc.ID { return purego.CFConstant(raw.KCTBaselineClassIdeographicLow()) }
+func KCTBaselineClassIdeographicLow() objc.ID {
+	return purego.CFConstant(raw.KCTBaselineClassIdeographicLow())
+}
 
 // @defined    kCTBaselineClassIdeographicHigh @abstract   Key to reference the Ideographic High baseline class. @discussion This key can be used with a baseline info dictionary to offset to the Ideographic High baseline as a CFNumberRef float. It can also be used as the value for kCTBaselineClassAttributeName.
 // KCTBaselineClassIdeographicHigh returns the value of the CoreFoundation reference constant kCTBaselineClassIdeographicHigh as an objc.ID.
-func KCTBaselineClassIdeographicHigh() objc.ID { return purego.CFConstant(raw.KCTBaselineClassIdeographicHigh()) }
+func KCTBaselineClassIdeographicHigh() objc.ID {
+	return purego.CFConstant(raw.KCTBaselineClassIdeographicHigh())
+}
 
 // @defined    kCTBaselineClassHanging @abstract   Key to reference the Hanging baseline class. @discussion This key can be used with a baseline info dictionary to offset to the Hanging baseline as a CFNumberRef float. It can also be used as the value for kCTBaselineClassAttributeName.
 // KCTBaselineClassHanging returns the value of the CoreFoundation reference constant kCTBaselineClassHanging as an objc.ID.
@@ -336,15 +418,21 @@ func KCTBaselineOriginalFont() objc.ID { return purego.CFConstant(raw.KCTBaselin
 
 // @defined    kCTFontCollectionRemoveDuplicatesOption @abstract   Option key to specify filtering of duplicates. @discussion Specify this option key in the options dictionary with a non- zero value to enable automatic filtering of duplicate font descriptors.
 // KCTFontCollectionRemoveDuplicatesOption returns the value of the CoreFoundation reference constant kCTFontCollectionRemoveDuplicatesOption as an objc.ID.
-func KCTFontCollectionRemoveDuplicatesOption() objc.ID { return purego.CFConstant(raw.KCTFontCollectionRemoveDuplicatesOption()) }
+func KCTFontCollectionRemoveDuplicatesOption() objc.ID {
+	return purego.CFConstant(raw.KCTFontCollectionRemoveDuplicatesOption())
+}
 
 // @defined    kCTFontCollectionIncludeDisabledFontsOption @abstract   Option key to include disabled fonts in the matching results. @discussion Specify this option key in the options dictionary with a non-zero value to enable matching of disabled fonts. You can pass font descriptors specifying disabled fonts to CTFontManagerEnableFontDescriptors, but you cannot use such a font descriptor to query font attributes from the system database or create a CTFontRef.
 // KCTFontCollectionIncludeDisabledFontsOption returns the value of the CoreFoundation reference constant kCTFontCollectionIncludeDisabledFontsOption as an objc.ID.
-func KCTFontCollectionIncludeDisabledFontsOption() objc.ID { return purego.CFConstant(raw.KCTFontCollectionIncludeDisabledFontsOption()) }
+func KCTFontCollectionIncludeDisabledFontsOption() objc.ID {
+	return purego.CFConstant(raw.KCTFontCollectionIncludeDisabledFontsOption())
+}
 
 // @defined    kCTFontCollectionDisallowAutoActivationOption @abstract   Option key to avoid auto-activating fonts. @discussion Specify this option key in the options dictionary with a non-zero value to disallow searches for missing fonts (font descriptors returning no results).
 // KCTFontCollectionDisallowAutoActivationOption returns the value of the CoreFoundation reference constant kCTFontCollectionDisallowAutoActivationOption as an objc.ID.
-func KCTFontCollectionDisallowAutoActivationOption() objc.ID { return purego.CFConstant(raw.KCTFontCollectionDisallowAutoActivationOption()) }
+func KCTFontCollectionDisallowAutoActivationOption() objc.ID {
+	return purego.CFConstant(raw.KCTFontCollectionDisallowAutoActivationOption())
+}
 
 // @const      kCTFontManagerErrorDomain @abstract   CFError domain for CTFontManager errors @discussion CFErrors with this domain will have error codes corresponding to one of the CTFontManagerErrors above.
 // KCTFontManagerErrorDomain returns the value of the CoreFoundation reference constant kCTFontManagerErrorDomain as an objc.ID.
@@ -352,51 +440,79 @@ func KCTFontManagerErrorDomain() objc.ID { return purego.CFConstant(raw.KCTFontM
 
 // @constant   kCTFontManagerErrorFontURLsKey @abstract   User info key to be used with CFError references returned from registration functions. @discussion The value associated with this key in the user info dictionary of a CFError is a CFArray of font URLs that failed with given error.
 // KCTFontManagerErrorFontURLsKey returns the value of the CoreFoundation reference constant kCTFontManagerErrorFontURLsKey as an objc.ID.
-func KCTFontManagerErrorFontURLsKey() objc.ID { return purego.CFConstant(raw.KCTFontManagerErrorFontURLsKey()) }
+func KCTFontManagerErrorFontURLsKey() objc.ID {
+	return purego.CFConstant(raw.KCTFontManagerErrorFontURLsKey())
+}
 
 // @const      kCTFontManagerBundleIdentifier @abstract   CTFontManage bundle identifier @discussion The CTFontManager bundle identifier to be used with get or set global auto-activation settings.
 // KCTFontManagerBundleIdentifier returns the value of the CoreFoundation reference constant kCTFontManagerBundleIdentifier as an objc.ID.
-func KCTFontManagerBundleIdentifier() objc.ID { return purego.CFConstant(raw.KCTFontManagerBundleIdentifier()) }
+func KCTFontManagerBundleIdentifier() objc.ID {
+	return purego.CFConstant(raw.KCTFontManagerBundleIdentifier())
+}
 
 // @constant   kCTFontManagerRegisteredFontsChangedNotification @abstract   Notification name for font registry changes. @discussion This is the string to use as the notification name when subscribing to CTFontManager notifications.  This notification will be posted when fonts are added or removed. OS X clients should register as an observer of the notification with the distributed notification center for changes in session or persistent scopes and with the local notification center for changes in process scope. iOS clients should register as an observer of the notification with the local notification center for all changes.
 // KCTFontManagerRegisteredFontsChangedNotification returns the value of the CoreFoundation reference constant kCTFontManagerRegisteredFontsChangedNotification as an objc.ID.
-func KCTFontManagerRegisteredFontsChangedNotification() objc.ID { return purego.CFConstant(raw.KCTFontManagerRegisteredFontsChangedNotification()) }
+func KCTFontManagerRegisteredFontsChangedNotification() objc.ID {
+	return purego.CFConstant(raw.KCTFontManagerRegisteredFontsChangedNotification())
+}
 
 // KCTFrameProgressionAttributeName returns the value of the CoreFoundation reference constant kCTFrameProgressionAttributeName as an objc.ID.
-func KCTFrameProgressionAttributeName() objc.ID { return purego.CFConstant(raw.KCTFrameProgressionAttributeName()) }
+func KCTFrameProgressionAttributeName() objc.ID {
+	return purego.CFConstant(raw.KCTFrameProgressionAttributeName())
+}
 
 // KCTFramePathFillRuleAttributeName returns the value of the CoreFoundation reference constant kCTFramePathFillRuleAttributeName as an objc.ID.
-func KCTFramePathFillRuleAttributeName() objc.ID { return purego.CFConstant(raw.KCTFramePathFillRuleAttributeName()) }
+func KCTFramePathFillRuleAttributeName() objc.ID {
+	return purego.CFConstant(raw.KCTFramePathFillRuleAttributeName())
+}
 
 // KCTFramePathWidthAttributeName returns the value of the CoreFoundation reference constant kCTFramePathWidthAttributeName as an objc.ID.
-func KCTFramePathWidthAttributeName() objc.ID { return purego.CFConstant(raw.KCTFramePathWidthAttributeName()) }
+func KCTFramePathWidthAttributeName() objc.ID {
+	return purego.CFConstant(raw.KCTFramePathWidthAttributeName())
+}
 
 // KCTFrameClippingPathsAttributeName returns the value of the CoreFoundation reference constant kCTFrameClippingPathsAttributeName as an objc.ID.
-func KCTFrameClippingPathsAttributeName() objc.ID { return purego.CFConstant(raw.KCTFrameClippingPathsAttributeName()) }
+func KCTFrameClippingPathsAttributeName() objc.ID {
+	return purego.CFConstant(raw.KCTFrameClippingPathsAttributeName())
+}
 
 // KCTFramePathClippingPathAttributeName returns the value of the CoreFoundation reference constant kCTFramePathClippingPathAttributeName as an objc.ID.
-func KCTFramePathClippingPathAttributeName() objc.ID { return purego.CFConstant(raw.KCTFramePathClippingPathAttributeName()) }
+func KCTFramePathClippingPathAttributeName() objc.ID {
+	return purego.CFConstant(raw.KCTFramePathClippingPathAttributeName())
+}
 
 // KCTTypesetterOptionAllowUnboundedLayout returns the value of the CoreFoundation reference constant kCTTypesetterOptionAllowUnboundedLayout as an objc.ID.
-func KCTTypesetterOptionAllowUnboundedLayout() objc.ID { return purego.CFConstant(raw.KCTTypesetterOptionAllowUnboundedLayout()) }
+func KCTTypesetterOptionAllowUnboundedLayout() objc.ID {
+	return purego.CFConstant(raw.KCTTypesetterOptionAllowUnboundedLayout())
+}
 
 // KCTTypesetterOptionDisableBidiProcessing returns the value of the CoreFoundation reference constant kCTTypesetterOptionDisableBidiProcessing as an objc.ID.
-func KCTTypesetterOptionDisableBidiProcessing() objc.ID { return purego.CFConstant(raw.KCTTypesetterOptionDisableBidiProcessing()) }
+func KCTTypesetterOptionDisableBidiProcessing() objc.ID {
+	return purego.CFConstant(raw.KCTTypesetterOptionDisableBidiProcessing())
+}
 
 // KCTTypesetterOptionForcedEmbeddingLevel returns the value of the CoreFoundation reference constant kCTTypesetterOptionForcedEmbeddingLevel as an objc.ID.
-func KCTTypesetterOptionForcedEmbeddingLevel() objc.ID { return purego.CFConstant(raw.KCTTypesetterOptionForcedEmbeddingLevel()) }
+func KCTTypesetterOptionForcedEmbeddingLevel() objc.ID {
+	return purego.CFConstant(raw.KCTTypesetterOptionForcedEmbeddingLevel())
+}
 
 // KCTRubyAnnotationSizeFactorAttributeName returns the value of the CoreFoundation reference constant kCTRubyAnnotationSizeFactorAttributeName as an objc.ID.
-func KCTRubyAnnotationSizeFactorAttributeName() objc.ID { return purego.CFConstant(raw.KCTRubyAnnotationSizeFactorAttributeName()) }
+func KCTRubyAnnotationSizeFactorAttributeName() objc.ID {
+	return purego.CFConstant(raw.KCTRubyAnnotationSizeFactorAttributeName())
+}
 
 // KCTRubyAnnotationScaleToFitAttributeName returns the value of the CoreFoundation reference constant kCTRubyAnnotationScaleToFitAttributeName as an objc.ID.
-func KCTRubyAnnotationScaleToFitAttributeName() objc.ID { return purego.CFConstant(raw.KCTRubyAnnotationScaleToFitAttributeName()) }
+func KCTRubyAnnotationScaleToFitAttributeName() objc.ID {
+	return purego.CFConstant(raw.KCTRubyAnnotationScaleToFitAttributeName())
+}
 
 // KCTFontAttributeName returns the value of the CoreFoundation reference constant kCTFontAttributeName as an objc.ID.
 func KCTFontAttributeName() objc.ID { return purego.CFConstant(raw.KCTFontAttributeName()) }
 
 // KCTForegroundColorFromContextAttributeName returns the value of the CoreFoundation reference constant kCTForegroundColorFromContextAttributeName as an objc.ID.
-func KCTForegroundColorFromContextAttributeName() objc.ID { return purego.CFConstant(raw.KCTForegroundColorFromContextAttributeName()) }
+func KCTForegroundColorFromContextAttributeName() objc.ID {
+	return purego.CFConstant(raw.KCTForegroundColorFromContextAttributeName())
+}
 
 // KCTKernAttributeName returns the value of the CoreFoundation reference constant kCTKernAttributeName as an objc.ID.
 func KCTKernAttributeName() objc.ID { return purego.CFConstant(raw.KCTKernAttributeName()) }
@@ -408,69 +524,108 @@ func KCTTrackingAttributeName() objc.ID { return purego.CFConstant(raw.KCTTracki
 func KCTLigatureAttributeName() objc.ID { return purego.CFConstant(raw.KCTLigatureAttributeName()) }
 
 // KCTForegroundColorAttributeName returns the value of the CoreFoundation reference constant kCTForegroundColorAttributeName as an objc.ID.
-func KCTForegroundColorAttributeName() objc.ID { return purego.CFConstant(raw.KCTForegroundColorAttributeName()) }
+func KCTForegroundColorAttributeName() objc.ID {
+	return purego.CFConstant(raw.KCTForegroundColorAttributeName())
+}
 
 // KCTBackgroundColorAttributeName returns the value of the CoreFoundation reference constant kCTBackgroundColorAttributeName as an objc.ID.
-func KCTBackgroundColorAttributeName() objc.ID { return purego.CFConstant(raw.KCTBackgroundColorAttributeName()) }
+func KCTBackgroundColorAttributeName() objc.ID {
+	return purego.CFConstant(raw.KCTBackgroundColorAttributeName())
+}
 
 // KCTParagraphStyleAttributeName returns the value of the CoreFoundation reference constant kCTParagraphStyleAttributeName as an objc.ID.
-func KCTParagraphStyleAttributeName() objc.ID { return purego.CFConstant(raw.KCTParagraphStyleAttributeName()) }
+func KCTParagraphStyleAttributeName() objc.ID {
+	return purego.CFConstant(raw.KCTParagraphStyleAttributeName())
+}
 
 // KCTStrokeWidthAttributeName returns the value of the CoreFoundation reference constant kCTStrokeWidthAttributeName as an objc.ID.
-func KCTStrokeWidthAttributeName() objc.ID { return purego.CFConstant(raw.KCTStrokeWidthAttributeName()) }
+func KCTStrokeWidthAttributeName() objc.ID {
+	return purego.CFConstant(raw.KCTStrokeWidthAttributeName())
+}
 
 // KCTStrokeColorAttributeName returns the value of the CoreFoundation reference constant kCTStrokeColorAttributeName as an objc.ID.
-func KCTStrokeColorAttributeName() objc.ID { return purego.CFConstant(raw.KCTStrokeColorAttributeName()) }
+func KCTStrokeColorAttributeName() objc.ID {
+	return purego.CFConstant(raw.KCTStrokeColorAttributeName())
+}
 
 // KCTUnderlineStyleAttributeName returns the value of the CoreFoundation reference constant kCTUnderlineStyleAttributeName as an objc.ID.
-func KCTUnderlineStyleAttributeName() objc.ID { return purego.CFConstant(raw.KCTUnderlineStyleAttributeName()) }
+func KCTUnderlineStyleAttributeName() objc.ID {
+	return purego.CFConstant(raw.KCTUnderlineStyleAttributeName())
+}
 
 // KCTSuperscriptAttributeName returns the value of the CoreFoundation reference constant kCTSuperscriptAttributeName as an objc.ID.
-func KCTSuperscriptAttributeName() objc.ID { return purego.CFConstant(raw.KCTSuperscriptAttributeName()) }
+func KCTSuperscriptAttributeName() objc.ID {
+	return purego.CFConstant(raw.KCTSuperscriptAttributeName())
+}
 
 // KCTUnderlineColorAttributeName returns the value of the CoreFoundation reference constant kCTUnderlineColorAttributeName as an objc.ID.
-func KCTUnderlineColorAttributeName() objc.ID { return purego.CFConstant(raw.KCTUnderlineColorAttributeName()) }
+func KCTUnderlineColorAttributeName() objc.ID {
+	return purego.CFConstant(raw.KCTUnderlineColorAttributeName())
+}
 
 // KCTVerticalFormsAttributeName returns the value of the CoreFoundation reference constant kCTVerticalFormsAttributeName as an objc.ID.
-func KCTVerticalFormsAttributeName() objc.ID { return purego.CFConstant(raw.KCTVerticalFormsAttributeName()) }
+func KCTVerticalFormsAttributeName() objc.ID {
+	return purego.CFConstant(raw.KCTVerticalFormsAttributeName())
+}
 
 // KCTHorizontalInVerticalFormsAttributeName returns the value of the CoreFoundation reference constant kCTHorizontalInVerticalFormsAttributeName as an objc.ID.
-func KCTHorizontalInVerticalFormsAttributeName() objc.ID { return purego.CFConstant(raw.KCTHorizontalInVerticalFormsAttributeName()) }
+func KCTHorizontalInVerticalFormsAttributeName() objc.ID {
+	return purego.CFConstant(raw.KCTHorizontalInVerticalFormsAttributeName())
+}
 
 // KCTGlyphInfoAttributeName returns the value of the CoreFoundation reference constant kCTGlyphInfoAttributeName as an objc.ID.
 func KCTGlyphInfoAttributeName() objc.ID { return purego.CFConstant(raw.KCTGlyphInfoAttributeName()) }
 
 // KCTCharacterShapeAttributeName returns the value of the CoreFoundation reference constant kCTCharacterShapeAttributeName as an objc.ID.
-func KCTCharacterShapeAttributeName() objc.ID { return purego.CFConstant(raw.KCTCharacterShapeAttributeName()) }
+func KCTCharacterShapeAttributeName() objc.ID {
+	return purego.CFConstant(raw.KCTCharacterShapeAttributeName())
+}
 
 // KCTLanguageAttributeName returns the value of the CoreFoundation reference constant kCTLanguageAttributeName as an objc.ID.
 func KCTLanguageAttributeName() objc.ID { return purego.CFConstant(raw.KCTLanguageAttributeName()) }
 
 // KCTRunDelegateAttributeName returns the value of the CoreFoundation reference constant kCTRunDelegateAttributeName as an objc.ID.
-func KCTRunDelegateAttributeName() objc.ID { return purego.CFConstant(raw.KCTRunDelegateAttributeName()) }
+func KCTRunDelegateAttributeName() objc.ID {
+	return purego.CFConstant(raw.KCTRunDelegateAttributeName())
+}
 
 // KCTBaselineClassAttributeName returns the value of the CoreFoundation reference constant kCTBaselineClassAttributeName as an objc.ID.
-func KCTBaselineClassAttributeName() objc.ID { return purego.CFConstant(raw.KCTBaselineClassAttributeName()) }
+func KCTBaselineClassAttributeName() objc.ID {
+	return purego.CFConstant(raw.KCTBaselineClassAttributeName())
+}
 
 // KCTBaselineInfoAttributeName returns the value of the CoreFoundation reference constant kCTBaselineInfoAttributeName as an objc.ID.
-func KCTBaselineInfoAttributeName() objc.ID { return purego.CFConstant(raw.KCTBaselineInfoAttributeName()) }
+func KCTBaselineInfoAttributeName() objc.ID {
+	return purego.CFConstant(raw.KCTBaselineInfoAttributeName())
+}
 
 // KCTBaselineReferenceInfoAttributeName returns the value of the CoreFoundation reference constant kCTBaselineReferenceInfoAttributeName as an objc.ID.
-func KCTBaselineReferenceInfoAttributeName() objc.ID { return purego.CFConstant(raw.KCTBaselineReferenceInfoAttributeName()) }
+func KCTBaselineReferenceInfoAttributeName() objc.ID {
+	return purego.CFConstant(raw.KCTBaselineReferenceInfoAttributeName())
+}
 
 // KCTBaselineOffsetAttributeName returns the value of the CoreFoundation reference constant kCTBaselineOffsetAttributeName as an objc.ID.
-func KCTBaselineOffsetAttributeName() objc.ID { return purego.CFConstant(raw.KCTBaselineOffsetAttributeName()) }
+func KCTBaselineOffsetAttributeName() objc.ID {
+	return purego.CFConstant(raw.KCTBaselineOffsetAttributeName())
+}
 
 // KCTWritingDirectionAttributeName returns the value of the CoreFoundation reference constant kCTWritingDirectionAttributeName as an objc.ID.
-func KCTWritingDirectionAttributeName() objc.ID { return purego.CFConstant(raw.KCTWritingDirectionAttributeName()) }
+func KCTWritingDirectionAttributeName() objc.ID {
+	return purego.CFConstant(raw.KCTWritingDirectionAttributeName())
+}
 
 // KCTRubyAnnotationAttributeName returns the value of the CoreFoundation reference constant kCTRubyAnnotationAttributeName as an objc.ID.
-func KCTRubyAnnotationAttributeName() objc.ID { return purego.CFConstant(raw.KCTRubyAnnotationAttributeName()) }
+func KCTRubyAnnotationAttributeName() objc.ID {
+	return purego.CFConstant(raw.KCTRubyAnnotationAttributeName())
+}
 
 // @const      kCTAdaptiveImageProviderAttributeName @abstract   Provide the image for an emoji-like text attachment. @discussion The attribute value must be an object conforming to the CTAdaptiveImageProviding protocol. The range this attribute is applied to should be one or more U+FFFC characters, each of which will be drawn as the provided image, and the font attribute applied to that range will be used to determine properties such as point size.
 // KCTAdaptiveImageProviderAttributeName returns the value of the CoreFoundation reference constant kCTAdaptiveImageProviderAttributeName as an objc.ID.
-func KCTAdaptiveImageProviderAttributeName() objc.ID { return purego.CFConstant(raw.KCTAdaptiveImageProviderAttributeName()) }
+func KCTAdaptiveImageProviderAttributeName() objc.ID {
+	return purego.CFConstant(raw.KCTAdaptiveImageProviderAttributeName())
+}
 
 // KCTTabColumnTerminatorsAttributeName returns the value of the CoreFoundation reference constant kCTTabColumnTerminatorsAttributeName as an objc.ID.
-func KCTTabColumnTerminatorsAttributeName() objc.ID { return purego.CFConstant(raw.KCTTabColumnTerminatorsAttributeName()) }
-
+func KCTTabColumnTerminatorsAttributeName() objc.ID {
+	return purego.CFConstant(raw.KCTTabColumnTerminatorsAttributeName())
+}

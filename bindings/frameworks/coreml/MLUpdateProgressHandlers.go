@@ -16,7 +16,7 @@ type MLUpdateProgressHandlers struct {
 }
 
 var (
-	_clsMLUpdateProgressHandlers = _objcClass("MLUpdateProgressHandlers")
+	_clsMLUpdateProgressHandlers                                              = _objcClass("MLUpdateProgressHandlers")
 	_mLUpdateProgressHandlersSelInitForEventsProgressHandlerCompletionHandler = objc.RegisterName("initForEvents:progressHandler:completionHandler:")
 )
 
@@ -52,7 +52,8 @@ func (o *MLUpdateProgressHandlers) InitForEventsProgressHandlerCompletionHandler
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLUpdateProgressHandlersSelInitForEventsProgressHandlerCompletionHandler, interestedEvents, __block_progressHandler, __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLUpdateProgressHandlersFromID(_ret)
 }
-

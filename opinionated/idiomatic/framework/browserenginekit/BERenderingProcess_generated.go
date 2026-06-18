@@ -67,4 +67,3 @@ type RenderingProcessable interface {
 }
 
 var _ RenderingProcessable = (*RenderingProcess)(nil)
-

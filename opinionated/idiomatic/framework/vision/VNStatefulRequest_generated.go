@@ -75,7 +75,9 @@ func (x *StatefulRequest) FrameAnalysisSpacing() coremedia.CMTime {
 
 func (x *StatefulRequest) asStatefulRequest() *raw.VNStatefulRequest { return x.inner }
 
-func (x *StatefulRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
+func (x *StatefulRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNImageBasedRequest
+}
 
 func (x *StatefulRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
 
@@ -91,4 +93,3 @@ type StatefulRequestable interface {
 }
 
 var _ StatefulRequestable = (*StatefulRequest)(nil)
-

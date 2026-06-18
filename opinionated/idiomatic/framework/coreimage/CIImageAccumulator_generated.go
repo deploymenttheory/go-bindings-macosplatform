@@ -91,4 +91,3 @@ type ImageAccumulatorable interface {
 }
 
 var _ ImageAccumulatorable = (*ImageAccumulator)(nil)
-

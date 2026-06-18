@@ -134,9 +134,13 @@ func (x *BasicAnimation) SetByValue(byValue objc.ID) {
 
 func (x *BasicAnimation) asBasicAnimation() *raw.CABasicAnimation { return x.inner }
 
-func (x *BasicAnimation) asPropertyAnimation() *raw.CAPropertyAnimation { return &x.inner.CAPropertyAnimation }
+func (x *BasicAnimation) asPropertyAnimation() *raw.CAPropertyAnimation {
+	return &x.inner.CAPropertyAnimation
+}
 
-func (x *BasicAnimation) asAnimation() *raw.CAAnimation { return &x.inner.CAPropertyAnimation.CAAnimation }
+func (x *BasicAnimation) asAnimation() *raw.CAAnimation {
+	return &x.inner.CAPropertyAnimation.CAAnimation
+}
 
 // BasicAnimationable is the interface implemented by [BasicAnimation], for mocking and DI.
 type BasicAnimationable interface {
@@ -161,4 +165,3 @@ type BasicAnimationable interface {
 }
 
 var _ BasicAnimationable = (*BasicAnimation)(nil)
-

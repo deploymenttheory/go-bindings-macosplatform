@@ -16,7 +16,7 @@ type MTLSharedEventHandle struct {
 }
 
 var (
-	_clsMTLSharedEventHandle = _objcClass("MTLSharedEventHandle")
+	_clsMTLSharedEventHandle      = _objcClass("MTLSharedEventHandle")
 	_mTLSharedEventHandleSelLabel = objc.RegisterName("label")
 )
 
@@ -32,7 +32,8 @@ func MTLSharedEventHandleFromID(id objc.ID) *MTLSharedEventHandle {
 
 func (o *MTLSharedEventHandle) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLSharedEventHandleSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

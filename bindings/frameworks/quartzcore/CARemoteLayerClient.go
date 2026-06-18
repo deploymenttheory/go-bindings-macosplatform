@@ -16,12 +16,12 @@ type CARemoteLayerClient struct {
 }
 
 var (
-	_clsCARemoteLayerClient = _objcClass("CARemoteLayerClient")
+	_clsCARemoteLayerClient                   = _objcClass("CARemoteLayerClient")
 	_cARemoteLayerClientSelInitWithServerPort = objc.RegisterName("initWithServerPort:")
-	_cARemoteLayerClientSelInvalidate = objc.RegisterName("invalidate")
-	_cARemoteLayerClientSelClientId = objc.RegisterName("clientId")
-	_cARemoteLayerClientSelLayer = objc.RegisterName("layer")
-	_cARemoteLayerClientSelSetLayer = objc.RegisterName("setLayer:")
+	_cARemoteLayerClientSelInvalidate         = objc.RegisterName("invalidate")
+	_cARemoteLayerClientSelClientId           = objc.RegisterName("clientId")
+	_cARemoteLayerClientSelLayer              = objc.RegisterName("layer")
+	_cARemoteLayerClientSelSetLayer           = objc.RegisterName("setLayer:")
 )
 
 func CARemoteLayerClientFromID(id objc.ID) *CARemoteLayerClient {
@@ -36,7 +36,9 @@ func CARemoteLayerClientFromID(id objc.ID) *CARemoteLayerClient {
 
 func (o *CARemoteLayerClient) InitWithServerPort(port uint) *CARemoteLayerClient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cARemoteLayerClientSelInitWithServerPort, port)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CARemoteLayerClientFromID(_ret)
 }
 
@@ -51,11 +53,12 @@ func (o *CARemoteLayerClient) ClientId() uint32 {
 
 func (o *CARemoteLayerClient) Layer() *CALayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cARemoteLayerClientSelLayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CALayerFromID(_ret)
 }
 
 func (o *CARemoteLayerClient) SetLayer(layer *CALayer) {
 	o.Ptr().Send(_cARemoteLayerClientSelSetLayer, layer.Ptr())
 }
-

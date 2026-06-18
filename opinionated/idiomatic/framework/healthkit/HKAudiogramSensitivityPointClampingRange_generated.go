@@ -15,7 +15,9 @@ type AudiogramSensitivityPointClampingRange struct {
 }
 
 // Unwrap returns the underlying [raw.HKAudiogramSensitivityPointClampingRange].
-func (x *AudiogramSensitivityPointClampingRange) Unwrap() *raw.HKAudiogramSensitivityPointClampingRange { return x.inner }
+func (x *AudiogramSensitivityPointClampingRange) Unwrap() *raw.HKAudiogramSensitivityPointClampingRange {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -61,4 +63,3 @@ type AudiogramSensitivityPointClampingRangeable interface {
 }
 
 var _ AudiogramSensitivityPointClampingRangeable = (*AudiogramSensitivityPointClampingRange)(nil)
-

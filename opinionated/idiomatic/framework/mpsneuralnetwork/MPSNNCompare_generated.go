@@ -210,7 +210,9 @@ func (x *NNCompare) SetThreshold(threshold float32) {
 
 func (x *NNCompare) asCNNArithmetic() *raw.MPSCNNArithmetic { return &x.inner.MPSCNNArithmetic }
 
-func (x *NNCompare) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel }
+func (x *NNCompare) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel
+}
 
 // NNCompareable is the interface implemented by [NNCompare], for mocking and DI.
 type NNCompareable interface {
@@ -247,4 +249,3 @@ type NNCompareable interface {
 }
 
 var _ NNCompareable = (*NNCompare)(nil)
-

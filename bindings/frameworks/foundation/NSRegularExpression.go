@@ -17,22 +17,22 @@ type NSRegularExpression struct {
 }
 
 var (
-	_clsNSRegularExpression = _objcClass("NSRegularExpression")
-	_nSRegularExpressionSelRegularExpressionWithPatternOptionsError = objc.RegisterName("regularExpressionWithPattern:options:error:")
-	_nSRegularExpressionSelInitWithPatternOptionsError = objc.RegisterName("initWithPattern:options:error:")
-	_nSRegularExpressionSelEscapedPatternForString = objc.RegisterName("escapedPatternForString:")
-	_nSRegularExpressionSelPattern = objc.RegisterName("pattern")
-	_nSRegularExpressionSelOptions = objc.RegisterName("options")
-	_nSRegularExpressionSelNumberOfCaptureGroups = objc.RegisterName("numberOfCaptureGroups")
-	_nSRegularExpressionSelEnumerateMatchesInStringOptionsRangeUsing = objc.RegisterName("enumerateMatchesInString:options:range:usingBlock:")
-	_nSRegularExpressionSelMatchesInStringOptionsRange = objc.RegisterName("matchesInString:options:range:")
-	_nSRegularExpressionSelNumberOfMatchesInStringOptionsRange = objc.RegisterName("numberOfMatchesInString:options:range:")
-	_nSRegularExpressionSelFirstMatchInStringOptionsRange = objc.RegisterName("firstMatchInString:options:range:")
-	_nSRegularExpressionSelRangeOfFirstMatchInStringOptionsRange = objc.RegisterName("rangeOfFirstMatchInString:options:range:")
+	_clsNSRegularExpression                                                         = _objcClass("NSRegularExpression")
+	_nSRegularExpressionSelRegularExpressionWithPatternOptionsError                 = objc.RegisterName("regularExpressionWithPattern:options:error:")
+	_nSRegularExpressionSelInitWithPatternOptionsError                              = objc.RegisterName("initWithPattern:options:error:")
+	_nSRegularExpressionSelEscapedPatternForString                                  = objc.RegisterName("escapedPatternForString:")
+	_nSRegularExpressionSelPattern                                                  = objc.RegisterName("pattern")
+	_nSRegularExpressionSelOptions                                                  = objc.RegisterName("options")
+	_nSRegularExpressionSelNumberOfCaptureGroups                                    = objc.RegisterName("numberOfCaptureGroups")
+	_nSRegularExpressionSelEnumerateMatchesInStringOptionsRangeUsing                = objc.RegisterName("enumerateMatchesInString:options:range:usingBlock:")
+	_nSRegularExpressionSelMatchesInStringOptionsRange                              = objc.RegisterName("matchesInString:options:range:")
+	_nSRegularExpressionSelNumberOfMatchesInStringOptionsRange                      = objc.RegisterName("numberOfMatchesInString:options:range:")
+	_nSRegularExpressionSelFirstMatchInStringOptionsRange                           = objc.RegisterName("firstMatchInString:options:range:")
+	_nSRegularExpressionSelRangeOfFirstMatchInStringOptionsRange                    = objc.RegisterName("rangeOfFirstMatchInString:options:range:")
 	_nSRegularExpressionSelStringByReplacingMatchesInStringOptionsRangeWithTemplate = objc.RegisterName("stringByReplacingMatchesInString:options:range:withTemplate:")
-	_nSRegularExpressionSelReplaceMatchesInStringOptionsRangeWithTemplate = objc.RegisterName("replaceMatchesInString:options:range:withTemplate:")
-	_nSRegularExpressionSelReplacementStringForResultInStringOffsetTemplate = objc.RegisterName("replacementStringForResult:inString:offset:template:")
-	_nSRegularExpressionSelEscapedTemplateForString = objc.RegisterName("escapedTemplateForString:")
+	_nSRegularExpressionSelReplaceMatchesInStringOptionsRangeWithTemplate           = objc.RegisterName("replaceMatchesInString:options:range:withTemplate:")
+	_nSRegularExpressionSelReplacementStringForResultInStringOffsetTemplate         = objc.RegisterName("replacementStringForResult:inString:offset:template:")
+	_nSRegularExpressionSelEscapedTemplateForString                                 = objc.RegisterName("escapedTemplateForString:")
 )
 
 func NSRegularExpressionFromID(id objc.ID) *NSRegularExpression {
@@ -48,7 +48,9 @@ func NSRegularExpressionFromID(id objc.ID) *NSRegularExpression {
 func NSRegularExpressionRegularExpressionWithPatternOptionsError(pattern *NSString, options NSRegularExpressionOptions) (*NSRegularExpression, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSRegularExpression), _nSRegularExpressionSelRegularExpressionWithPatternOptionsError, pattern.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -58,7 +60,9 @@ func NSRegularExpressionRegularExpressionWithPatternOptionsError(pattern *NSStri
 func (o *NSRegularExpression) InitWithPatternOptionsError(pattern *NSString, options NSRegularExpressionOptions) (*NSRegularExpression, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRegularExpressionSelInitWithPatternOptionsError, pattern.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -67,13 +71,17 @@ func (o *NSRegularExpression) InitWithPatternOptionsError(pattern *NSString, opt
 
 func NSRegularExpressionEscapedPatternForString(string_ *NSString) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSRegularExpression), _nSRegularExpressionSelEscapedPatternForString, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSRegularExpression) Pattern() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRegularExpressionSelPattern)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -103,7 +111,9 @@ func (o *NSRegularExpression) EnumerateMatchesInStringOptionsRangeUsing(string_ 
 
 func (o *NSRegularExpression) MatchesInStringOptionsRange(string_ *NSString, options NSMatchingOptions, range_ NSRange) *NSArray[*NSTextCheckingResult] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRegularExpressionSelMatchesInStringOptionsRange, string_.Ptr(), options, range_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSTextCheckingResult](_ret)
 }
 
@@ -114,7 +124,9 @@ func (o *NSRegularExpression) NumberOfMatchesInStringOptionsRange(string_ *NSStr
 
 func (o *NSRegularExpression) FirstMatchInStringOptionsRange(string_ *NSString, options NSMatchingOptions, range_ NSRange) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRegularExpressionSelFirstMatchInStringOptionsRange, string_.Ptr(), options, range_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextCheckingResultFromID(_ret)
 }
 
@@ -125,7 +137,9 @@ func (o *NSRegularExpression) RangeOfFirstMatchInStringOptionsRange(string_ *NSS
 
 func (o *NSRegularExpression) StringByReplacingMatchesInStringOptionsRangeWithTemplate(string_ *NSString, options NSMatchingOptions, range_ NSRange, templ *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRegularExpressionSelStringByReplacingMatchesInStringOptionsRangeWithTemplate, string_.Ptr(), options, range_, templ.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -136,13 +150,16 @@ func (o *NSRegularExpression) ReplaceMatchesInStringOptionsRangeWithTemplate(str
 
 func (o *NSRegularExpression) ReplacementStringForResultInStringOffsetTemplate(result *NSTextCheckingResult, string_ *NSString, offset int, templ *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRegularExpressionSelReplacementStringForResultInStringOffsetTemplate, result.Ptr(), string_.Ptr(), offset, templ.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func NSRegularExpressionEscapedTemplateForString(string_ *NSString) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSRegularExpression), _nSRegularExpressionSelEscapedTemplateForString, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
-

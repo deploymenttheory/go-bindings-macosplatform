@@ -58,4 +58,3 @@ type DDDeviceEventable interface {
 }
 
 var _ DDDeviceEventable = (*DDDeviceEvent)(nil)
-

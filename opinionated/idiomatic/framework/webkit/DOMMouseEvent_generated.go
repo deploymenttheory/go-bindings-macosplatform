@@ -152,7 +152,9 @@ func (x *DOMMouseEvent) asDOMEvent() *raw.DOMEvent { return &x.inner.DOMUIEvent.
 
 func (x *DOMMouseEvent) asDOMObject() *raw.DOMObject { return &x.inner.DOMUIEvent.DOMEvent.DOMObject }
 
-func (x *DOMMouseEvent) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMUIEvent.DOMEvent.DOMObject.WebScriptObject }
+func (x *DOMMouseEvent) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMUIEvent.DOMEvent.DOMObject.WebScriptObject
+}
 
 // DOMMouseEventable is the interface implemented by [DOMMouseEvent], for mocking and DI.
 type DOMMouseEventable interface {
@@ -178,4 +180,3 @@ type DOMMouseEventable interface {
 }
 
 var _ DOMMouseEventable = (*DOMMouseEvent)(nil)
-

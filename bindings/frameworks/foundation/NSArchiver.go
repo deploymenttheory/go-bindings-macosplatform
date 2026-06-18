@@ -16,14 +16,14 @@ type NSArchiver struct {
 }
 
 var (
-	_clsNSArchiver = _objcClass("NSArchiver")
-	_nSArchiverSelInitForWritingWithMutableData = objc.RegisterName("initForWritingWithMutableData:")
-	_nSArchiverSelArchivedDataWithRootObject = objc.RegisterName("archivedDataWithRootObject:")
-	_nSArchiverSelArchiveRootObjectToFile = objc.RegisterName("archiveRootObject:toFile:")
-	_nSArchiverSelEncodeClassNameIntoClassName = objc.RegisterName("encodeClassName:intoClassName:")
+	_clsNSArchiver                                 = _objcClass("NSArchiver")
+	_nSArchiverSelInitForWritingWithMutableData    = objc.RegisterName("initForWritingWithMutableData:")
+	_nSArchiverSelArchivedDataWithRootObject       = objc.RegisterName("archivedDataWithRootObject:")
+	_nSArchiverSelArchiveRootObjectToFile          = objc.RegisterName("archiveRootObject:toFile:")
+	_nSArchiverSelEncodeClassNameIntoClassName     = objc.RegisterName("encodeClassName:intoClassName:")
 	_nSArchiverSelClassNameEncodedForTrueClassName = objc.RegisterName("classNameEncodedForTrueClassName:")
-	_nSArchiverSelReplaceObjectWithObject = objc.RegisterName("replaceObject:withObject:")
-	_nSArchiverSelArchiverData = objc.RegisterName("archiverData")
+	_nSArchiverSelReplaceObjectWithObject          = objc.RegisterName("replaceObject:withObject:")
+	_nSArchiverSelArchiverData                     = objc.RegisterName("archiverData")
 )
 
 func NSArchiverFromID(id objc.ID) *NSArchiver {
@@ -38,13 +38,17 @@ func NSArchiverFromID(id objc.ID) *NSArchiver {
 
 func (o *NSArchiver) InitForWritingWithMutableData(mdata *NSMutableData) *NSArchiver {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArchiverSelInitForWritingWithMutableData, mdata.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArchiverFromID(_ret)
 }
 
 func NSArchiverArchivedDataWithRootObject(rootObject objc.ID) *NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSArchiver), _nSArchiverSelArchivedDataWithRootObject, rootObject)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
@@ -59,7 +63,9 @@ func (o *NSArchiver) EncodeClassNameIntoClassName(trueName *NSString, inArchiveN
 
 func (o *NSArchiver) ClassNameEncodedForTrueClassName(trueName *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArchiverSelClassNameEncodedForTrueClassName, trueName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -69,7 +75,8 @@ func (o *NSArchiver) ReplaceObjectWithObject(object objc.ID, newObject objc.ID) 
 
 func (o *NSArchiver) ArchiverData() *NSMutableData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArchiverSelArchiverData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableDataFromID(_ret)
 }
-

@@ -20,33 +20,33 @@ type WKWebExtension struct {
 }
 
 var (
-	_clsWKWebExtension = _objcClass("WKWebExtension")
+	_clsWKWebExtension                                                 = _objcClass("WKWebExtension")
 	_wKWebExtensionSelExtensionWithAppExtensionBundleCompletionHandler = objc.RegisterName("extensionWithAppExtensionBundle:completionHandler:")
-	_wKWebExtensionSelExtensionWithResourceBaseURLCompletionHandler = objc.RegisterName("extensionWithResourceBaseURL:completionHandler:")
-	_wKWebExtensionSelSupportsManifestVersion = objc.RegisterName("supportsManifestVersion:")
-	_wKWebExtensionSelIconForSize = objc.RegisterName("iconForSize:")
-	_wKWebExtensionSelActionIconForSize = objc.RegisterName("actionIconForSize:")
-	_wKWebExtensionSelErrors = objc.RegisterName("errors")
-	_wKWebExtensionSelManifest = objc.RegisterName("manifest")
-	_wKWebExtensionSelManifestVersion = objc.RegisterName("manifestVersion")
-	_wKWebExtensionSelDefaultLocale = objc.RegisterName("defaultLocale")
-	_wKWebExtensionSelDisplayName = objc.RegisterName("displayName")
-	_wKWebExtensionSelDisplayShortName = objc.RegisterName("displayShortName")
-	_wKWebExtensionSelDisplayVersion = objc.RegisterName("displayVersion")
-	_wKWebExtensionSelDisplayDescription = objc.RegisterName("displayDescription")
-	_wKWebExtensionSelDisplayActionLabel = objc.RegisterName("displayActionLabel")
-	_wKWebExtensionSelRequestedPermissions = objc.RegisterName("requestedPermissions")
-	_wKWebExtensionSelOptionalPermissions = objc.RegisterName("optionalPermissions")
-	_wKWebExtensionSelRequestedPermissionMatchPatterns = objc.RegisterName("requestedPermissionMatchPatterns")
-	_wKWebExtensionSelOptionalPermissionMatchPatterns = objc.RegisterName("optionalPermissionMatchPatterns")
-	_wKWebExtensionSelAllRequestedMatchPatterns = objc.RegisterName("allRequestedMatchPatterns")
-	_wKWebExtensionSelHasBackgroundContent = objc.RegisterName("hasBackgroundContent")
-	_wKWebExtensionSelHasPersistentBackgroundContent = objc.RegisterName("hasPersistentBackgroundContent")
-	_wKWebExtensionSelHasInjectedContent = objc.RegisterName("hasInjectedContent")
-	_wKWebExtensionSelHasOptionsPage = objc.RegisterName("hasOptionsPage")
-	_wKWebExtensionSelHasOverrideNewTabPage = objc.RegisterName("hasOverrideNewTabPage")
-	_wKWebExtensionSelHasCommands = objc.RegisterName("hasCommands")
-	_wKWebExtensionSelHasContentModificationRules = objc.RegisterName("hasContentModificationRules")
+	_wKWebExtensionSelExtensionWithResourceBaseURLCompletionHandler    = objc.RegisterName("extensionWithResourceBaseURL:completionHandler:")
+	_wKWebExtensionSelSupportsManifestVersion                          = objc.RegisterName("supportsManifestVersion:")
+	_wKWebExtensionSelIconForSize                                      = objc.RegisterName("iconForSize:")
+	_wKWebExtensionSelActionIconForSize                                = objc.RegisterName("actionIconForSize:")
+	_wKWebExtensionSelErrors                                           = objc.RegisterName("errors")
+	_wKWebExtensionSelManifest                                         = objc.RegisterName("manifest")
+	_wKWebExtensionSelManifestVersion                                  = objc.RegisterName("manifestVersion")
+	_wKWebExtensionSelDefaultLocale                                    = objc.RegisterName("defaultLocale")
+	_wKWebExtensionSelDisplayName                                      = objc.RegisterName("displayName")
+	_wKWebExtensionSelDisplayShortName                                 = objc.RegisterName("displayShortName")
+	_wKWebExtensionSelDisplayVersion                                   = objc.RegisterName("displayVersion")
+	_wKWebExtensionSelDisplayDescription                               = objc.RegisterName("displayDescription")
+	_wKWebExtensionSelDisplayActionLabel                               = objc.RegisterName("displayActionLabel")
+	_wKWebExtensionSelRequestedPermissions                             = objc.RegisterName("requestedPermissions")
+	_wKWebExtensionSelOptionalPermissions                              = objc.RegisterName("optionalPermissions")
+	_wKWebExtensionSelRequestedPermissionMatchPatterns                 = objc.RegisterName("requestedPermissionMatchPatterns")
+	_wKWebExtensionSelOptionalPermissionMatchPatterns                  = objc.RegisterName("optionalPermissionMatchPatterns")
+	_wKWebExtensionSelAllRequestedMatchPatterns                        = objc.RegisterName("allRequestedMatchPatterns")
+	_wKWebExtensionSelHasBackgroundContent                             = objc.RegisterName("hasBackgroundContent")
+	_wKWebExtensionSelHasPersistentBackgroundContent                   = objc.RegisterName("hasPersistentBackgroundContent")
+	_wKWebExtensionSelHasInjectedContent                               = objc.RegisterName("hasInjectedContent")
+	_wKWebExtensionSelHasOptionsPage                                   = objc.RegisterName("hasOptionsPage")
+	_wKWebExtensionSelHasOverrideNewTabPage                            = objc.RegisterName("hasOverrideNewTabPage")
+	_wKWebExtensionSelHasCommands                                      = objc.RegisterName("hasCommands")
+	_wKWebExtensionSelHasContentModificationRules                      = objc.RegisterName("hasContentModificationRules")
 )
 
 func WKWebExtensionFromID(id objc.ID) *WKWebExtension {
@@ -97,17 +97,21 @@ func (o *WKWebExtension) SupportsManifestVersion(manifestVersion float64) bool {
 
 func (o *WKWebExtension) IconForSize(size corefoundation.CGSize) *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionSelIconForSize, size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSImageFromID(_ret)
 }
 
 func (o *WKWebExtension) ActionIconForSize(size corefoundation.CGSize) *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionSelActionIconForSize, size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSImageFromID(_ret)
 }
 
-// @abstract An array of all errors that occurred during the processing of the extension. @discussion Provides an array of all parse-time errors for the extension, with repeat errors consolidated into a single entry for the original occurrence only. If no errors occurred, an empty array is returned. @note Once the extension is loaded, use the ``errors`` property on an extension context to monitor any runtime errors, as they can occur after the extension is loaded.
+// @abstract An array of all errors that occurred during the processing of the extension. @discussion Provides an array of all parse-time errors for the extension, with repeat errors consolidated into a single entry for the original occurrence only. If no errors occurred, an empty array is returned. @note Once the extension is loaded, use the “errors“ property on an extension context to monitor any runtime errors, as they can occur after the extension is loaded.
 func (o *WKWebExtension) Errors() *foundation.NSArray[objc.ID] {
 	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _wKWebExtensionSelErrors)
 	return _ret
@@ -119,7 +123,7 @@ func (o *WKWebExtension) Manifest() *foundation.NSDictionary[*foundation.NSStrin
 	return _ret
 }
 
-// @abstract The parsed manifest version, or `0` if there is no version specified in the manifest. @note An ``WKWebExtensionErrorUnsupportedManifestVersion`` error will be reported if the manifest version isn't specified.
+// @abstract The parsed manifest version, or `0` if there is no version specified in the manifest. @note An “WKWebExtensionErrorUnsupportedManifestVersion“ error will be reported if the manifest version isn't specified.
 func (o *WKWebExtension) ManifestVersion() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _wKWebExtensionSelManifestVersion)
 	return _ret
@@ -128,42 +132,54 @@ func (o *WKWebExtension) ManifestVersion() float64 {
 // @abstract The default locale for the extension. Returns `nil` if there was no default locale specified.
 func (o *WKWebExtension) DefaultLocale() *foundation.NSLocale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionSelDefaultLocale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSLocaleFromID(_ret)
 }
 
 // @abstract The localized extension name. Returns `nil` if there was no name specified.
 func (o *WKWebExtension) DisplayName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionSelDisplayName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract The localized extension short name. Returns `nil` if there was no short name specified.
 func (o *WKWebExtension) DisplayShortName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionSelDisplayShortName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract The localized extension display version. Returns `nil` if there was no display version specified.
 func (o *WKWebExtension) DisplayVersion() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionSelDisplayVersion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract The localized extension description. Returns `nil` if there was no description specified.
 func (o *WKWebExtension) DisplayDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionSelDisplayDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
-// @abstract The default localized extension action label. Returns `nil` if there was no default action label specified. @discussion This label serves as a default and should be used to represent the extension in contexts like action sheets or toolbars prior to the extension being loaded into an extension context. Once the extension is loaded, use the ``actionForTab:`` API to get the tab-specific label.
+// @abstract The default localized extension action label. Returns `nil` if there was no default action label specified. @discussion This label serves as a default and should be used to represent the extension in contexts like action sheets or toolbars prior to the extension being loaded into an extension context. Once the extension is loaded, use the “actionForTab:“ API to get the tab-specific label.
 func (o *WKWebExtension) DisplayActionLabel() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionSelDisplayActionLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -182,21 +198,27 @@ func (o *WKWebExtension) OptionalPermissions() *foundation.NSSet[*foundation.NSS
 // @abstract The set of websites that the extension requires access to for its base functionality.
 func (o *WKWebExtension) RequestedPermissionMatchPatterns() *foundation.NSSet[*WKWebExtensionMatchPattern] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionSelRequestedPermissionMatchPatterns)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*WKWebExtensionMatchPattern](_ret)
 }
 
 // @abstract The set of websites that the extension may need access to for optional functionality. These match patterns can be requested by the extension at a later time.
 func (o *WKWebExtension) OptionalPermissionMatchPatterns() *foundation.NSSet[*WKWebExtensionMatchPattern] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionSelOptionalPermissionMatchPatterns)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*WKWebExtensionMatchPattern](_ret)
 }
 
 // @abstract The set of websites that the extension requires access to for injected content and for receiving messages from websites.
 func (o *WKWebExtension) AllRequestedMatchPatterns() *foundation.NSSet[*WKWebExtensionMatchPattern] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionSelAllRequestedMatchPatterns)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*WKWebExtensionMatchPattern](_ret)
 }
 
@@ -206,31 +228,31 @@ func (o *WKWebExtension) HasBackgroundContent() bool {
 	return _ret
 }
 
-// @abstract A Boolean value indicating whether the extension has background content that stays in memory as long as the extension is loaded. @note Note that extensions are only allowed to have persistent background content on macOS. An ``WKWebExtensionErrorInvalidBackgroundPersistence`` error will be reported on iOS, iPadOS, and visionOS if an attempt is made to load a persistent extension.
+// @abstract A Boolean value indicating whether the extension has background content that stays in memory as long as the extension is loaded. @note Note that extensions are only allowed to have persistent background content on macOS. An “WKWebExtensionErrorInvalidBackgroundPersistence“ error will be reported on iOS, iPadOS, and visionOS if an attempt is made to load a persistent extension.
 func (o *WKWebExtension) HasPersistentBackgroundContent() bool {
 	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionSelHasPersistentBackgroundContent)
 	return _ret
 }
 
-// @abstract A Boolean value indicating whether the extension has script or stylesheet content that can be injected into webpages. @discussion If this property is `YES`, the extension has content that can be injected by matching against the extension's requested match patterns. @note Once the extension is loaded, use the ``hasInjectedContent`` property on an extension context, as the injectable content can change after the extension is loaded.
+// @abstract A Boolean value indicating whether the extension has script or stylesheet content that can be injected into webpages. @discussion If this property is `YES`, the extension has content that can be injected by matching against the extension's requested match patterns. @note Once the extension is loaded, use the “hasInjectedContent“ property on an extension context, as the injectable content can change after the extension is loaded.
 func (o *WKWebExtension) HasInjectedContent() bool {
 	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionSelHasInjectedContent)
 	return _ret
 }
 
-// @abstract A Boolean value indicating whether the extension has an options page. @discussion If this property is `YES`, the extension includes a dedicated options page where users can customize settings. The app should provide access to this page through a user interface element, which can be accessed via ``optionsPageURL`` on an extension context.
+// @abstract A Boolean value indicating whether the extension has an options page. @discussion If this property is `YES`, the extension includes a dedicated options page where users can customize settings. The app should provide access to this page through a user interface element, which can be accessed via “optionsPageURL“ on an extension context.
 func (o *WKWebExtension) HasOptionsPage() bool {
 	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionSelHasOptionsPage)
 	return _ret
 }
 
-// @abstract A Boolean value indicating whether the extension provides an alternative to the default new tab page. @discussion If this property is `YES`, the extension can specify a custom page that can be displayed when a new tab is opened in the app, instead of the default new tab page. The app should prompt the user for permission to use the extension's new tab page as the default, which can be accessed via ``overrideNewTabPageURL`` on an extension context.
+// @abstract A Boolean value indicating whether the extension provides an alternative to the default new tab page. @discussion If this property is `YES`, the extension can specify a custom page that can be displayed when a new tab is opened in the app, instead of the default new tab page. The app should prompt the user for permission to use the extension's new tab page as the default, which can be accessed via “overrideNewTabPageURL“ on an extension context.
 func (o *WKWebExtension) HasOverrideNewTabPage() bool {
 	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionSelHasOverrideNewTabPage)
 	return _ret
 }
 
-// @abstract A Boolean value indicating whether the extension includes commands that users can invoke. @discussion If this property is `YES`, the extension contains one or more commands that can be performed by the user. These commands should be accessible via keyboard shortcuts, menu items, or other user interface elements provided by the app. The list of commands can be accessed via ``commands`` on an extension context, and invoked via ``performCommand:``.
+// @abstract A Boolean value indicating whether the extension includes commands that users can invoke. @discussion If this property is `YES`, the extension contains one or more commands that can be performed by the user. These commands should be accessible via keyboard shortcuts, menu items, or other user interface elements provided by the app. The list of commands can be accessed via “commands“ on an extension context, and invoked via “performCommand:“.
 func (o *WKWebExtension) HasCommands() bool {
 	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionSelHasCommands)
 	return _ret
@@ -241,4 +263,3 @@ func (o *WKWebExtension) HasContentModificationRules() bool {
 	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionSelHasContentModificationRules)
 	return _ret
 }
-

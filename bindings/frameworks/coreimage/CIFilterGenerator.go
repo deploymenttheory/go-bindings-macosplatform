@@ -16,21 +16,21 @@ type CIFilterGenerator struct {
 }
 
 var (
-	_clsCIFilterGenerator = _objcClass("CIFilterGenerator")
-	_cIFilterGeneratorSelFilterGenerator = objc.RegisterName("filterGenerator")
-	_cIFilterGeneratorSelFilterGeneratorWithContentsOfURL = objc.RegisterName("filterGeneratorWithContentsOfURL:")
-	_cIFilterGeneratorSelInitWithContentsOfURL = objc.RegisterName("initWithContentsOfURL:")
-	_cIFilterGeneratorSelConnectObjectWithKeyToObjectWithKey = objc.RegisterName("connectObject:withKey:toObject:withKey:")
+	_clsCIFilterGenerator                                       = _objcClass("CIFilterGenerator")
+	_cIFilterGeneratorSelFilterGenerator                        = objc.RegisterName("filterGenerator")
+	_cIFilterGeneratorSelFilterGeneratorWithContentsOfURL       = objc.RegisterName("filterGeneratorWithContentsOfURL:")
+	_cIFilterGeneratorSelInitWithContentsOfURL                  = objc.RegisterName("initWithContentsOfURL:")
+	_cIFilterGeneratorSelConnectObjectWithKeyToObjectWithKey    = objc.RegisterName("connectObject:withKey:toObject:withKey:")
 	_cIFilterGeneratorSelDisconnectObjectWithKeyToObjectWithKey = objc.RegisterName("disconnectObject:withKey:toObject:withKey:")
-	_cIFilterGeneratorSelExportKeyFromObjectWithName = objc.RegisterName("exportKey:fromObject:withName:")
-	_cIFilterGeneratorSelRemoveExportedKey = objc.RegisterName("removeExportedKey:")
-	_cIFilterGeneratorSelSetAttributesForExportedKey = objc.RegisterName("setAttributes:forExportedKey:")
-	_cIFilterGeneratorSelFilter = objc.RegisterName("filter")
-	_cIFilterGeneratorSelRegisterFilterName = objc.RegisterName("registerFilterName:")
-	_cIFilterGeneratorSelWriteToURLAtomically = objc.RegisterName("writeToURL:atomically:")
-	_cIFilterGeneratorSelExportedKeys = objc.RegisterName("exportedKeys")
-	_cIFilterGeneratorSelClassAttributes = objc.RegisterName("classAttributes")
-	_cIFilterGeneratorSelSetClassAttributes = objc.RegisterName("setClassAttributes:")
+	_cIFilterGeneratorSelExportKeyFromObjectWithName            = objc.RegisterName("exportKey:fromObject:withName:")
+	_cIFilterGeneratorSelRemoveExportedKey                      = objc.RegisterName("removeExportedKey:")
+	_cIFilterGeneratorSelSetAttributesForExportedKey            = objc.RegisterName("setAttributes:forExportedKey:")
+	_cIFilterGeneratorSelFilter                                 = objc.RegisterName("filter")
+	_cIFilterGeneratorSelRegisterFilterName                     = objc.RegisterName("registerFilterName:")
+	_cIFilterGeneratorSelWriteToURLAtomically                   = objc.RegisterName("writeToURL:atomically:")
+	_cIFilterGeneratorSelExportedKeys                           = objc.RegisterName("exportedKeys")
+	_cIFilterGeneratorSelClassAttributes                        = objc.RegisterName("classAttributes")
+	_cIFilterGeneratorSelSetClassAttributes                     = objc.RegisterName("setClassAttributes:")
 )
 
 func CIFilterGeneratorFromID(id objc.ID) *CIFilterGenerator {
@@ -46,14 +46,18 @@ func CIFilterGeneratorFromID(id objc.ID) *CIFilterGenerator {
 // This creates an empty CIFilterGenerator in which you connect filters and images.
 func CIFilterGeneratorFilterGenerator() *CIFilterGenerator {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIFilterGenerator), _cIFilterGeneratorSelFilterGenerator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIFilterGeneratorFromID(_ret)
 }
 
 // Create a CIFilterGenerator with the contents of the file. @result   CIFilterGenerator object. If the file could not be read it returns nil.
 func CIFilterGeneratorFilterGeneratorWithContentsOfURL(aURL *foundation.NSURL) *CIFilterGenerator {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIFilterGenerator), _cIFilterGeneratorSelFilterGeneratorWithContentsOfURL, aURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIFilterGeneratorFromID(_ret)
 }
 
@@ -91,7 +95,9 @@ func (o *CIFilterGenerator) SetAttributesForExportedKey(attributes *foundation.N
 // Create a CIFilter object based on this filter chain. This method creates a CIFilter from the filter chain where the topology of the chain is immutable, meaning that changes to the filter chain will not be reflected in the filter. The filter will have the input and output keys that were exported as described above.
 func (o *CIFilterGenerator) Filter() *CIFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIFilterGeneratorSelFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIFilterFromID(_ret)
 }
 
@@ -121,4 +127,3 @@ func (o *CIFilterGenerator) ClassAttributes() *foundation.NSDictionary[objc.ID, 
 func (o *CIFilterGenerator) SetClassAttributes(classAttributes *foundation.NSDictionary[objc.ID, objc.ID]) {
 	o.Ptr().Send(_cIFilterGeneratorSelSetClassAttributes, classAttributes)
 }
-

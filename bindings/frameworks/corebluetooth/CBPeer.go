@@ -16,7 +16,7 @@ type CBPeer struct {
 }
 
 var (
-	_clsCBPeer = _objcClass("CBPeer")
+	_clsCBPeer           = _objcClass("CBPeer")
 	_cBPeerSelIdentifier = objc.RegisterName("identifier")
 )
 
@@ -32,7 +32,8 @@ func CBPeerFromID(id objc.ID) *CBPeer {
 
 func (o *CBPeer) Identifier() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBPeerSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
-

@@ -98,4 +98,3 @@ type AnimatedScalarable interface {
 }
 
 var _ AnimatedScalarable = (*AnimatedScalar)(nil)
-

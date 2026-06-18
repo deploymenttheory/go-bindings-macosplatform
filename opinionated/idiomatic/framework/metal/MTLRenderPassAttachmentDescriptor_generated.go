@@ -15,7 +15,9 @@ type RenderPassAttachmentDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTLRenderPassAttachmentDescriptor].
-func (x *RenderPassAttachmentDescriptor) Unwrap() *raw.MTLRenderPassAttachmentDescriptor { return x.inner }
+func (x *RenderPassAttachmentDescriptor) Unwrap() *raw.MTLRenderPassAttachmentDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -211,7 +213,9 @@ func (x *RenderPassAttachmentDescriptor) SetStoreActionOptions(storeActionOption
 	x.inner.SetStoreActionOptions(storeActionOptions)
 }
 
-func (x *RenderPassAttachmentDescriptor) asRenderPassAttachmentDescriptor() *raw.MTLRenderPassAttachmentDescriptor { return x.inner }
+func (x *RenderPassAttachmentDescriptor) asRenderPassAttachmentDescriptor() *raw.MTLRenderPassAttachmentDescriptor {
+	return x.inner
+}
 
 // RenderPassAttachmentDescriptorable is the interface implemented by [RenderPassAttachmentDescriptor], for mocking and DI.
 type RenderPassAttachmentDescriptorable interface {
@@ -252,4 +256,3 @@ type RenderPassAttachmentDescriptorable interface {
 }
 
 var _ RenderPassAttachmentDescriptorable = (*RenderPassAttachmentDescriptor)(nil)
-

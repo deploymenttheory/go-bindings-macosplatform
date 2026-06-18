@@ -17,11 +17,11 @@ type MKLookAroundSnapshotOptions struct {
 }
 
 var (
-	_clsMKLookAroundSnapshotOptions = _objcClass("MKLookAroundSnapshotOptions")
-	_mKLookAroundSnapshotOptionsSelPointOfInterestFilter = objc.RegisterName("pointOfInterestFilter")
+	_clsMKLookAroundSnapshotOptions                         = _objcClass("MKLookAroundSnapshotOptions")
+	_mKLookAroundSnapshotOptionsSelPointOfInterestFilter    = objc.RegisterName("pointOfInterestFilter")
 	_mKLookAroundSnapshotOptionsSelSetPointOfInterestFilter = objc.RegisterName("setPointOfInterestFilter:")
-	_mKLookAroundSnapshotOptionsSelSize = objc.RegisterName("size")
-	_mKLookAroundSnapshotOptionsSelSetSize = objc.RegisterName("setSize:")
+	_mKLookAroundSnapshotOptionsSelSize                     = objc.RegisterName("size")
+	_mKLookAroundSnapshotOptionsSelSetSize                  = objc.RegisterName("setSize:")
 )
 
 func MKLookAroundSnapshotOptionsFromID(id objc.ID) *MKLookAroundSnapshotOptions {
@@ -36,7 +36,9 @@ func MKLookAroundSnapshotOptionsFromID(id objc.ID) *MKLookAroundSnapshotOptions 
 
 func (o *MKLookAroundSnapshotOptions) PointOfInterestFilter() *MKPointOfInterestFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLookAroundSnapshotOptionsSelPointOfInterestFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPointOfInterestFilterFromID(_ret)
 }
 
@@ -52,4 +54,3 @@ func (o *MKLookAroundSnapshotOptions) Size() corefoundation.CGSize {
 func (o *MKLookAroundSnapshotOptions) SetSize(size corefoundation.CGSize) {
 	o.Ptr().Send(_mKLookAroundSnapshotOptionsSelSetSize, size)
 }
-

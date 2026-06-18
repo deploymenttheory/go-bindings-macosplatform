@@ -16,7 +16,7 @@ type AVAudioMixingDestination struct {
 }
 
 var (
-	_clsAVAudioMixingDestination = _objcClass("AVAudioMixingDestination")
+	_clsAVAudioMixingDestination                = _objcClass("AVAudioMixingDestination")
 	_aVAudioMixingDestinationSelConnectionPoint = objc.RegisterName("connectionPoint")
 )
 
@@ -32,7 +32,8 @@ func AVAudioMixingDestinationFromID(id objc.ID) *AVAudioMixingDestination {
 
 func (o *AVAudioMixingDestination) ConnectionPoint() *AVAudioConnectionPoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioMixingDestinationSelConnectionPoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioConnectionPointFromID(_ret)
 }
-

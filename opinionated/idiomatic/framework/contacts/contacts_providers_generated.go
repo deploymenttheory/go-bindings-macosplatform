@@ -32,4 +32,3 @@ type GroupProvider interface {
 type PostalAddressProvider interface {
 	asPostalAddress() *raw.CNPostalAddress
 }
-

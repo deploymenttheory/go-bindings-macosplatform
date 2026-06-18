@@ -19,24 +19,24 @@ type PHAssetChangeRequest struct {
 }
 
 var (
-	_clsPHAssetChangeRequest = _objcClass("PHAssetChangeRequest")
-	_pHAssetChangeRequestSelCreationRequestForAssetFromImage = objc.RegisterName("creationRequestForAssetFromImage:")
+	_clsPHAssetChangeRequest                                          = _objcClass("PHAssetChangeRequest")
+	_pHAssetChangeRequestSelCreationRequestForAssetFromImage          = objc.RegisterName("creationRequestForAssetFromImage:")
 	_pHAssetChangeRequestSelCreationRequestForAssetFromImageAtFileURL = objc.RegisterName("creationRequestForAssetFromImageAtFileURL:")
 	_pHAssetChangeRequestSelCreationRequestForAssetFromVideoAtFileURL = objc.RegisterName("creationRequestForAssetFromVideoAtFileURL:")
-	_pHAssetChangeRequestSelDeleteAssets = objc.RegisterName("deleteAssets:")
-	_pHAssetChangeRequestSelChangeRequestForAsset = objc.RegisterName("changeRequestForAsset:")
-	_pHAssetChangeRequestSelRevertAssetContentToOriginal = objc.RegisterName("revertAssetContentToOriginal")
-	_pHAssetChangeRequestSelPlaceholderForCreatedAsset = objc.RegisterName("placeholderForCreatedAsset")
-	_pHAssetChangeRequestSelCreationDate = objc.RegisterName("creationDate")
-	_pHAssetChangeRequestSelSetCreationDate = objc.RegisterName("setCreationDate:")
-	_pHAssetChangeRequestSelLocation = objc.RegisterName("location")
-	_pHAssetChangeRequestSelSetLocation = objc.RegisterName("setLocation:")
-	_pHAssetChangeRequestSelIsFavorite = objc.RegisterName("isFavorite")
-	_pHAssetChangeRequestSelSetFavorite = objc.RegisterName("setFavorite:")
-	_pHAssetChangeRequestSelIsHidden = objc.RegisterName("isHidden")
-	_pHAssetChangeRequestSelSetHidden = objc.RegisterName("setHidden:")
-	_pHAssetChangeRequestSelContentEditingOutput = objc.RegisterName("contentEditingOutput")
-	_pHAssetChangeRequestSelSetContentEditingOutput = objc.RegisterName("setContentEditingOutput:")
+	_pHAssetChangeRequestSelDeleteAssets                              = objc.RegisterName("deleteAssets:")
+	_pHAssetChangeRequestSelChangeRequestForAsset                     = objc.RegisterName("changeRequestForAsset:")
+	_pHAssetChangeRequestSelRevertAssetContentToOriginal              = objc.RegisterName("revertAssetContentToOriginal")
+	_pHAssetChangeRequestSelPlaceholderForCreatedAsset                = objc.RegisterName("placeholderForCreatedAsset")
+	_pHAssetChangeRequestSelCreationDate                              = objc.RegisterName("creationDate")
+	_pHAssetChangeRequestSelSetCreationDate                           = objc.RegisterName("setCreationDate:")
+	_pHAssetChangeRequestSelLocation                                  = objc.RegisterName("location")
+	_pHAssetChangeRequestSelSetLocation                               = objc.RegisterName("setLocation:")
+	_pHAssetChangeRequestSelIsFavorite                                = objc.RegisterName("isFavorite")
+	_pHAssetChangeRequestSelSetFavorite                               = objc.RegisterName("setFavorite:")
+	_pHAssetChangeRequestSelIsHidden                                  = objc.RegisterName("isHidden")
+	_pHAssetChangeRequestSelSetHidden                                 = objc.RegisterName("setHidden:")
+	_pHAssetChangeRequestSelContentEditingOutput                      = objc.RegisterName("contentEditingOutput")
+	_pHAssetChangeRequestSelSetContentEditingOutput                   = objc.RegisterName("setContentEditingOutput:")
 )
 
 func PHAssetChangeRequestFromID(id objc.ID) *PHAssetChangeRequest {
@@ -51,19 +51,25 @@ func PHAssetChangeRequestFromID(id objc.ID) *PHAssetChangeRequest {
 
 func PHAssetChangeRequestCreationRequestForAssetFromImage(image *appkit.NSImage) *PHAssetChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetChangeRequest), _pHAssetChangeRequestSelCreationRequestForAssetFromImage, image.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHAssetChangeRequestFromID(_ret)
 }
 
 func PHAssetChangeRequestCreationRequestForAssetFromImageAtFileURL(fileURL *foundation.NSURL) *PHAssetChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetChangeRequest), _pHAssetChangeRequestSelCreationRequestForAssetFromImageAtFileURL, fileURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHAssetChangeRequestFromID(_ret)
 }
 
 func PHAssetChangeRequestCreationRequestForAssetFromVideoAtFileURL(fileURL *foundation.NSURL) *PHAssetChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetChangeRequest), _pHAssetChangeRequestSelCreationRequestForAssetFromVideoAtFileURL, fileURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHAssetChangeRequestFromID(_ret)
 }
 
@@ -73,7 +79,9 @@ func PHAssetChangeRequestDeleteAssets(assets foundation.NSFastEnumeration) {
 
 func PHAssetChangeRequestChangeRequestForAsset(asset *PHAsset) *PHAssetChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetChangeRequest), _pHAssetChangeRequestSelChangeRequestForAsset, asset.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHAssetChangeRequestFromID(_ret)
 }
 
@@ -83,13 +91,17 @@ func (o *PHAssetChangeRequest) RevertAssetContentToOriginal() {
 
 func (o *PHAssetChangeRequest) PlaceholderForCreatedAsset() *PHObjectPlaceholder {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHAssetChangeRequestSelPlaceholderForCreatedAsset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHObjectPlaceholderFromID(_ret)
 }
 
 func (o *PHAssetChangeRequest) CreationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHAssetChangeRequestSelCreationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -126,11 +138,12 @@ func (o *PHAssetChangeRequest) SetHidden(hidden bool) {
 
 func (o *PHAssetChangeRequest) ContentEditingOutput() *PHContentEditingOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHAssetChangeRequestSelContentEditingOutput)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHContentEditingOutputFromID(_ret)
 }
 
 func (o *PHAssetChangeRequest) SetContentEditingOutput(contentEditingOutput *PHContentEditingOutput) {
 	o.Ptr().Send(_pHAssetChangeRequestSelSetContentEditingOutput, contentEditingOutput.Ptr())
 }
-

@@ -16,7 +16,7 @@ type NSColorSampler struct {
 }
 
 var (
-	_clsNSColorSampler = _objcClass("NSColorSampler")
+	_clsNSColorSampler                                = _objcClass("NSColorSampler")
 	_nSColorSamplerSelShowSamplerWithSelectionHandler = objc.RegisterName("showSamplerWithSelectionHandler:")
 )
 
@@ -44,4 +44,3 @@ func (o *NSColorSampler) ShowSamplerWithSelectionHandler(selectionHandler func(*
 	}
 	o.Ptr().Send(_nSColorSamplerSelShowSamplerWithSelectionHandler, __block_selectionHandler)
 }
-

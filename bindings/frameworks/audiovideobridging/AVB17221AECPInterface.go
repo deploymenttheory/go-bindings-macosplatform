@@ -18,15 +18,15 @@ type AVB17221AECPInterface struct {
 }
 
 var (
-	_clsAVB17221AECPInterface = _objcClass("AVB17221AECPInterface")
-	_aVB17221AECPInterfaceSelAECPInterfaceWithInterface = objc.RegisterName("AECPInterfaceWithInterface:")
-	_aVB17221AECPInterfaceSelAECPInterfaceWithInterfaceNamed = objc.RegisterName("AECPInterfaceWithInterfaceNamed:")
-	_aVB17221AECPInterfaceSelSetCommandHandlerForEntityID = objc.RegisterName("setCommandHandler:forEntityID:")
-	_aVB17221AECPInterfaceSelRemoveCommandHandlerForEntityID = objc.RegisterName("removeCommandHandlerForEntityID:")
-	_aVB17221AECPInterfaceSelSetResponseHandlerForControllerEntityID = objc.RegisterName("setResponseHandler:forControllerEntityID:")
-	_aVB17221AECPInterfaceSelRemoveResponseHandlerForControllerEntityID = objc.RegisterName("removeResponseHandlerForControllerEntityID:")
-	_aVB17221AECPInterfaceSelSendCommandToMACAddressCompletionHandler = objc.RegisterName("sendCommand:toMACAddress:completionHandler:")
-	_aVB17221AECPInterfaceSelSendResponseToMACAddressError = objc.RegisterName("sendResponse:toMACAddress:error:")
+	_clsAVB17221AECPInterface                                                                                = _objcClass("AVB17221AECPInterface")
+	_aVB17221AECPInterfaceSelAECPInterfaceWithInterface                                                      = objc.RegisterName("AECPInterfaceWithInterface:")
+	_aVB17221AECPInterfaceSelAECPInterfaceWithInterfaceNamed                                                 = objc.RegisterName("AECPInterfaceWithInterfaceNamed:")
+	_aVB17221AECPInterfaceSelSetCommandHandlerForEntityID                                                    = objc.RegisterName("setCommandHandler:forEntityID:")
+	_aVB17221AECPInterfaceSelRemoveCommandHandlerForEntityID                                                 = objc.RegisterName("removeCommandHandlerForEntityID:")
+	_aVB17221AECPInterfaceSelSetResponseHandlerForControllerEntityID                                         = objc.RegisterName("setResponseHandler:forControllerEntityID:")
+	_aVB17221AECPInterfaceSelRemoveResponseHandlerForControllerEntityID                                      = objc.RegisterName("removeResponseHandlerForControllerEntityID:")
+	_aVB17221AECPInterfaceSelSendCommandToMACAddressCompletionHandler                                        = objc.RegisterName("sendCommand:toMACAddress:completionHandler:")
+	_aVB17221AECPInterfaceSelSendResponseToMACAddressError                                                   = objc.RegisterName("sendResponse:toMACAddress:error:")
 	_aVB17221AECPInterfaceSelSendVendorUniqueCommandToMACAddressExpectResponseWithinTimeoutCompletionHandler = objc.RegisterName("sendVendorUniqueCommand:toMACAddress:expectResponseWithinTimeout:completionHandler:")
 )
 
@@ -43,14 +43,18 @@ func AVB17221AECPInterfaceFromID(id objc.ID) *AVB17221AECPInterface {
 // @method		AECPInterfaceWithInterface: @abstract	Creates an autoreleased instance of AVB17221AECPInterface for the specified AVBInterface @param		anInterface	The interface on which to create the instance. @result		An autoreleased instance of the control service class.
 func AVB17221AECPInterfaceAECPInterfaceWithInterface(anInterface *AVBInterface) *AVB17221AECPInterface {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVB17221AECPInterface), _aVB17221AECPInterfaceSelAECPInterfaceWithInterface, anInterface.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVB17221AECPInterfaceFromID(_ret)
 }
 
 // @method		AECPInterfaceWithInterfaceNamed: @abstract	Creates an autoreleased instance of AVB17221AECPInterfaceWithInterfaceNamed for the specified network interface with the specified BSD name. @param		anInterfaceName	The BSD name of the interface. @result		An autoreleased instance of the control service class.
 func AVB17221AECPInterfaceAECPInterfaceWithInterfaceNamed(anInterfaceName *foundation.NSString) *AVB17221AECPInterface {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVB17221AECPInterface), _aVB17221AECPInterfaceSelAECPInterfaceWithInterfaceNamed, anInterfaceName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVB17221AECPInterfaceFromID(_ret)
 }
 
@@ -117,4 +121,3 @@ func (o *AVB17221AECPInterface) SendVendorUniqueCommandToMACAddressExpectRespons
 	_ret := objc.Send[bool](o.Ptr(), _aVB17221AECPInterfaceSelSendVendorUniqueCommandToMACAddressExpectResponseWithinTimeoutCompletionHandler, message.Ptr(), destMAC.Ptr(), timeout, __block_completionHandler)
 	return _ret
 }
-

@@ -15,7 +15,9 @@ type BlitPassSampleBufferAttachmentDescriptorArray struct {
 }
 
 // Unwrap returns the underlying [raw.MTLBlitPassSampleBufferAttachmentDescriptorArray].
-func (x *BlitPassSampleBufferAttachmentDescriptorArray) Unwrap() *raw.MTLBlitPassSampleBufferAttachmentDescriptorArray { return x.inner }
+func (x *BlitPassSampleBufferAttachmentDescriptorArray) Unwrap() *raw.MTLBlitPassSampleBufferAttachmentDescriptorArray {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -57,4 +59,3 @@ type BlitPassSampleBufferAttachmentDescriptorArrayable interface {
 }
 
 var _ BlitPassSampleBufferAttachmentDescriptorArrayable = (*BlitPassSampleBufferAttachmentDescriptorArray)(nil)
-

@@ -320,4 +320,3 @@ type CapturePhotoOutputable interface {
 }
 
 var _ CapturePhotoOutputable = (*CapturePhotoOutput)(nil)
-

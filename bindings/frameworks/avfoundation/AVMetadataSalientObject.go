@@ -25,4 +25,3 @@ func AVMetadataSalientObjectFromID(id objc.ID) *AVMetadataSalientObject {
 	purego.Track(o)
 	return o
 }
-

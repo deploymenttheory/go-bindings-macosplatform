@@ -15,7 +15,7 @@ type NSFileSecurity struct {
 }
 
 var (
-	_clsNSFileSecurity = _objcClass("NSFileSecurity")
+	_clsNSFileSecurity              = _objcClass("NSFileSecurity")
 	_nSFileSecuritySelInitWithCoder = objc.RegisterName("initWithCoder:")
 )
 
@@ -31,7 +31,8 @@ func NSFileSecurityFromID(id objc.ID) *NSFileSecurity {
 
 func (o *NSFileSecurity) InitWithCoder(coder *NSCoder) *NSFileSecurity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileSecuritySelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileSecurityFromID(_ret)
 }
-

@@ -115,7 +115,9 @@ func (x *ShippingMethod) SetDateComponentsRange(dateComponentsRange *raw.PKDateC
 	x.inner.SetDateComponentsRange(dateComponentsRange)
 }
 
-func (x *ShippingMethod) asPaymentSummaryItem() *raw.PKPaymentSummaryItem { return &x.inner.PKPaymentSummaryItem }
+func (x *ShippingMethod) asPaymentSummaryItem() *raw.PKPaymentSummaryItem {
+	return &x.inner.PKPaymentSummaryItem
+}
 
 // ShippingMethodable is the interface implemented by [ShippingMethod], for mocking and DI.
 type ShippingMethodable interface {
@@ -135,4 +137,3 @@ type ShippingMethodable interface {
 }
 
 var _ ShippingMethodable = (*ShippingMethod)(nil)
-

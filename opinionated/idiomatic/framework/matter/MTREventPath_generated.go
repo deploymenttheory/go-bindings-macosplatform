@@ -50,4 +50,3 @@ type MTREventPathable interface {
 }
 
 var _ MTREventPathable = (*MTREventPath)(nil)
-

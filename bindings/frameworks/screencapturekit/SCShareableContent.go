@@ -18,16 +18,16 @@ type SCShareableContent struct {
 }
 
 var (
-	_clsSCShareableContent = _objcClass("SCShareableContent")
-	_sCShareableContentSelGetShareableContentWithCompletionHandler = objc.RegisterName("getShareableContentWithCompletionHandler:")
-	_sCShareableContentSelGetCurrentProcessShareableContentWithCompletionHandler = objc.RegisterName("getCurrentProcessShareableContentWithCompletionHandler:")
-	_sCShareableContentSelGetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyCompletionHandler = objc.RegisterName("getShareableContentExcludingDesktopWindows:onScreenWindowsOnly:completionHandler:")
+	_clsSCShareableContent                                                                                          = _objcClass("SCShareableContent")
+	_sCShareableContentSelGetShareableContentWithCompletionHandler                                                  = objc.RegisterName("getShareableContentWithCompletionHandler:")
+	_sCShareableContentSelGetCurrentProcessShareableContentWithCompletionHandler                                    = objc.RegisterName("getCurrentProcessShareableContentWithCompletionHandler:")
+	_sCShareableContentSelGetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyCompletionHandler            = objc.RegisterName("getShareableContentExcludingDesktopWindows:onScreenWindowsOnly:completionHandler:")
 	_sCShareableContentSelGetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyBelowWindowCompletionHandler = objc.RegisterName("getShareableContentExcludingDesktopWindows:onScreenWindowsOnlyBelowWindow:completionHandler:")
 	_sCShareableContentSelGetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyAboveWindowCompletionHandler = objc.RegisterName("getShareableContentExcludingDesktopWindows:onScreenWindowsOnlyAboveWindow:completionHandler:")
-	_sCShareableContentSelInfoForFilter = objc.RegisterName("infoForFilter:")
-	_sCShareableContentSelWindows = objc.RegisterName("windows")
-	_sCShareableContentSelDisplays = objc.RegisterName("displays")
-	_sCShareableContentSelApplications = objc.RegisterName("applications")
+	_sCShareableContentSelInfoForFilter                                                                             = objc.RegisterName("infoForFilter:")
+	_sCShareableContentSelWindows                                                                                   = objc.RegisterName("windows")
+	_sCShareableContentSelDisplays                                                                                  = objc.RegisterName("displays")
+	_sCShareableContentSelApplications                                                                              = objc.RegisterName("applications")
 )
 
 func SCShareableContentFromID(id objc.ID) *SCShareableContent {
@@ -118,28 +118,35 @@ func SCShareableContentGetShareableContentExcludingDesktopWindowsOnScreenWindows
 // @abstract infoForFilter: @param filter content filter to translate to content details @discussion this method will create a SCShareableContentInformation object given a filter
 func SCShareableContentInfoForFilter(filter *SCContentFilter) *SCShareableContentInfo {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCShareableContent), _sCShareableContentSelInfoForFilter, filter.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCShareableContentInfoFromID(_ret)
 }
 
 // @abstract windows SCShareableContent property that contains all the sharable SCWindows
 func (o *SCShareableContent) Windows() *foundation.NSArray[*SCWindow] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCShareableContentSelWindows)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SCWindow](_ret)
 }
 
 // @abstract displays SCShareableContent property that contains all the sharable SCDisplays
 func (o *SCShareableContent) Displays() *foundation.NSArray[*SCDisplay] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCShareableContentSelDisplays)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SCDisplay](_ret)
 }
 
 // @abstract applications SCShareableContent property that contains all the sharable SCRunningApplications
 func (o *SCShareableContent) Applications() *foundation.NSArray[*SCRunningApplication] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCShareableContentSelApplications)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SCRunningApplication](_ret)
 }
-

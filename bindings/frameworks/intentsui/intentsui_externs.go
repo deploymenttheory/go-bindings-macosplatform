@@ -11,13 +11,16 @@ import (
 
 func IntentsUIVersionNumber() float64 {
 	ptr, _ := purego.Dlsym(_intentsuiLib, "IntentsUIVersionNumber")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func IntentsUIVersionString() []unsafe.Pointer {
 	ptr, _ := purego.Dlsym(_intentsuiLib, "IntentsUIVersionString")
-	if ptr == 0 { return []unsafe.Pointer{} }
+	if ptr == 0 {
+		return []unsafe.Pointer{}
+	}
 	return *(*[]unsafe.Pointer)(unsafe.Pointer(ptr))
 }
-

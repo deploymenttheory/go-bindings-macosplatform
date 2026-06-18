@@ -16,8 +16,8 @@ type AVB17221AECPAVCMessage struct {
 }
 
 var (
-	_clsAVB17221AECPAVCMessage = _objcClass("AVB17221AECPAVCMessage")
-	_aVB17221AECPAVCMessageSelCommandResponse = objc.RegisterName("commandResponse")
+	_clsAVB17221AECPAVCMessage                   = _objcClass("AVB17221AECPAVCMessage")
+	_aVB17221AECPAVCMessageSelCommandResponse    = objc.RegisterName("commandResponse")
 	_aVB17221AECPAVCMessageSelSetCommandResponse = objc.RegisterName("setCommandResponse:")
 )
 
@@ -33,11 +33,12 @@ func AVB17221AECPAVCMessageFromID(id objc.ID) *AVB17221AECPAVCMessage {
 
 func (o *AVB17221AECPAVCMessage) CommandResponse() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVB17221AECPAVCMessageSelCommandResponse)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *AVB17221AECPAVCMessage) SetCommandResponse(commandResponse *foundation.NSData) {
 	o.Ptr().Send(_aVB17221AECPAVCMessageSelSetCommandResponse, commandResponse.Ptr())
 }
-

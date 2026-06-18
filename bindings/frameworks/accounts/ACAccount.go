@@ -17,17 +17,17 @@ type ACAccount struct {
 }
 
 var (
-	_clsACAccount = _objcClass("ACAccount")
-	_aCAccountSelInitWithAccountType = objc.RegisterName("initWithAccountType:")
-	_aCAccountSelIdentifier = objc.RegisterName("identifier")
-	_aCAccountSelAccountType = objc.RegisterName("accountType")
-	_aCAccountSelSetAccountType = objc.RegisterName("setAccountType:")
-	_aCAccountSelAccountDescription = objc.RegisterName("accountDescription")
+	_clsACAccount                      = _objcClass("ACAccount")
+	_aCAccountSelInitWithAccountType   = objc.RegisterName("initWithAccountType:")
+	_aCAccountSelIdentifier            = objc.RegisterName("identifier")
+	_aCAccountSelAccountType           = objc.RegisterName("accountType")
+	_aCAccountSelSetAccountType        = objc.RegisterName("setAccountType:")
+	_aCAccountSelAccountDescription    = objc.RegisterName("accountDescription")
 	_aCAccountSelSetAccountDescription = objc.RegisterName("setAccountDescription:")
-	_aCAccountSelUsername = objc.RegisterName("username")
-	_aCAccountSelSetUsername = objc.RegisterName("setUsername:")
-	_aCAccountSelCredential = objc.RegisterName("credential")
-	_aCAccountSelSetCredential = objc.RegisterName("setCredential:")
+	_aCAccountSelUsername              = objc.RegisterName("username")
+	_aCAccountSelSetUsername           = objc.RegisterName("setUsername:")
+	_aCAccountSelCredential            = objc.RegisterName("credential")
+	_aCAccountSelSetCredential         = objc.RegisterName("setCredential:")
 )
 
 func ACAccountFromID(id objc.ID) *ACAccount {
@@ -42,19 +42,25 @@ func ACAccountFromID(id objc.ID) *ACAccount {
 
 func (o *ACAccount) InitWithAccountType(type_ *ACAccountType) *ACAccount {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aCAccountSelInitWithAccountType, type_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ACAccountFromID(_ret)
 }
 
 func (o *ACAccount) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aCAccountSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *ACAccount) AccountType() *ACAccountType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aCAccountSelAccountType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ACAccountTypeFromID(_ret)
 }
 
@@ -64,7 +70,9 @@ func (o *ACAccount) SetAccountType(accountType *ACAccountType) {
 
 func (o *ACAccount) AccountDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aCAccountSelAccountDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -74,7 +82,9 @@ func (o *ACAccount) SetAccountDescription(accountDescription *foundation.NSStrin
 
 func (o *ACAccount) Username() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aCAccountSelUsername)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -84,11 +94,12 @@ func (o *ACAccount) SetUsername(username *foundation.NSString) {
 
 func (o *ACAccount) Credential() *ACAccountCredential {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aCAccountSelCredential)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ACAccountCredentialFromID(_ret)
 }
 
 func (o *ACAccount) SetCredential(credential *ACAccountCredential) {
 	o.Ptr().Send(_aCAccountSelSetCredential, credential.Ptr())
 }
-

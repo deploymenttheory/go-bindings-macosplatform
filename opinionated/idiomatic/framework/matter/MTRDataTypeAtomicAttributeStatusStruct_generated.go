@@ -16,7 +16,9 @@ type MTRDataTypeAtomicAttributeStatusStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRDataTypeAtomicAttributeStatusStruct].
-func (x *MTRDataTypeAtomicAttributeStatusStruct) Unwrap() *raw.MTRDataTypeAtomicAttributeStatusStruct { return x.inner }
+func (x *MTRDataTypeAtomicAttributeStatusStruct) Unwrap() *raw.MTRDataTypeAtomicAttributeStatusStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -80,4 +82,3 @@ type MTRDataTypeAtomicAttributeStatusStructable interface {
 }
 
 var _ MTRDataTypeAtomicAttributeStatusStructable = (*MTRDataTypeAtomicAttributeStatusStruct)(nil)
-

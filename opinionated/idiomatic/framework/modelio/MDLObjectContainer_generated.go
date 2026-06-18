@@ -41,4 +41,3 @@ type ObjectContainerable interface {
 }
 
 var _ ObjectContainerable = (*ObjectContainer)(nil)
-

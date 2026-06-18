@@ -16,28 +16,28 @@ type MPRemoteCommandCenter struct {
 }
 
 var (
-	_clsMPRemoteCommandCenter = _objcClass("MPRemoteCommandCenter")
-	_mPRemoteCommandCenterSelSharedCommandCenter = objc.RegisterName("sharedCommandCenter")
-	_mPRemoteCommandCenterSelPauseCommand = objc.RegisterName("pauseCommand")
-	_mPRemoteCommandCenterSelPlayCommand = objc.RegisterName("playCommand")
-	_mPRemoteCommandCenterSelStopCommand = objc.RegisterName("stopCommand")
-	_mPRemoteCommandCenterSelTogglePlayPauseCommand = objc.RegisterName("togglePlayPauseCommand")
-	_mPRemoteCommandCenterSelEnableLanguageOptionCommand = objc.RegisterName("enableLanguageOptionCommand")
-	_mPRemoteCommandCenterSelDisableLanguageOptionCommand = objc.RegisterName("disableLanguageOptionCommand")
-	_mPRemoteCommandCenterSelChangePlaybackRateCommand = objc.RegisterName("changePlaybackRateCommand")
-	_mPRemoteCommandCenterSelChangeRepeatModeCommand = objc.RegisterName("changeRepeatModeCommand")
-	_mPRemoteCommandCenterSelChangeShuffleModeCommand = objc.RegisterName("changeShuffleModeCommand")
-	_mPRemoteCommandCenterSelNextTrackCommand = objc.RegisterName("nextTrackCommand")
-	_mPRemoteCommandCenterSelPreviousTrackCommand = objc.RegisterName("previousTrackCommand")
-	_mPRemoteCommandCenterSelSkipForwardCommand = objc.RegisterName("skipForwardCommand")
-	_mPRemoteCommandCenterSelSkipBackwardCommand = objc.RegisterName("skipBackwardCommand")
-	_mPRemoteCommandCenterSelSeekForwardCommand = objc.RegisterName("seekForwardCommand")
-	_mPRemoteCommandCenterSelSeekBackwardCommand = objc.RegisterName("seekBackwardCommand")
+	_clsMPRemoteCommandCenter                              = _objcClass("MPRemoteCommandCenter")
+	_mPRemoteCommandCenterSelSharedCommandCenter           = objc.RegisterName("sharedCommandCenter")
+	_mPRemoteCommandCenterSelPauseCommand                  = objc.RegisterName("pauseCommand")
+	_mPRemoteCommandCenterSelPlayCommand                   = objc.RegisterName("playCommand")
+	_mPRemoteCommandCenterSelStopCommand                   = objc.RegisterName("stopCommand")
+	_mPRemoteCommandCenterSelTogglePlayPauseCommand        = objc.RegisterName("togglePlayPauseCommand")
+	_mPRemoteCommandCenterSelEnableLanguageOptionCommand   = objc.RegisterName("enableLanguageOptionCommand")
+	_mPRemoteCommandCenterSelDisableLanguageOptionCommand  = objc.RegisterName("disableLanguageOptionCommand")
+	_mPRemoteCommandCenterSelChangePlaybackRateCommand     = objc.RegisterName("changePlaybackRateCommand")
+	_mPRemoteCommandCenterSelChangeRepeatModeCommand       = objc.RegisterName("changeRepeatModeCommand")
+	_mPRemoteCommandCenterSelChangeShuffleModeCommand      = objc.RegisterName("changeShuffleModeCommand")
+	_mPRemoteCommandCenterSelNextTrackCommand              = objc.RegisterName("nextTrackCommand")
+	_mPRemoteCommandCenterSelPreviousTrackCommand          = objc.RegisterName("previousTrackCommand")
+	_mPRemoteCommandCenterSelSkipForwardCommand            = objc.RegisterName("skipForwardCommand")
+	_mPRemoteCommandCenterSelSkipBackwardCommand           = objc.RegisterName("skipBackwardCommand")
+	_mPRemoteCommandCenterSelSeekForwardCommand            = objc.RegisterName("seekForwardCommand")
+	_mPRemoteCommandCenterSelSeekBackwardCommand           = objc.RegisterName("seekBackwardCommand")
 	_mPRemoteCommandCenterSelChangePlaybackPositionCommand = objc.RegisterName("changePlaybackPositionCommand")
-	_mPRemoteCommandCenterSelRatingCommand = objc.RegisterName("ratingCommand")
-	_mPRemoteCommandCenterSelLikeCommand = objc.RegisterName("likeCommand")
-	_mPRemoteCommandCenterSelDislikeCommand = objc.RegisterName("dislikeCommand")
-	_mPRemoteCommandCenterSelBookmarkCommand = objc.RegisterName("bookmarkCommand")
+	_mPRemoteCommandCenterSelRatingCommand                 = objc.RegisterName("ratingCommand")
+	_mPRemoteCommandCenterSelLikeCommand                   = objc.RegisterName("likeCommand")
+	_mPRemoteCommandCenterSelDislikeCommand                = objc.RegisterName("dislikeCommand")
+	_mPRemoteCommandCenterSelBookmarkCommand               = objc.RegisterName("bookmarkCommand")
 )
 
 func MPRemoteCommandCenterFromID(id objc.ID) *MPRemoteCommandCenter {
@@ -52,127 +52,168 @@ func MPRemoteCommandCenterFromID(id objc.ID) *MPRemoteCommandCenter {
 
 func MPRemoteCommandCenterSharedCommandCenter() *MPRemoteCommandCenter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPRemoteCommandCenter), _mPRemoteCommandCenterSelSharedCommandCenter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPRemoteCommandCenterFromID(_ret)
 }
 
 func (o *MPRemoteCommandCenter) PauseCommand() *MPRemoteCommand {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPRemoteCommandCenterSelPauseCommand)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPRemoteCommandFromID(_ret)
 }
 
 func (o *MPRemoteCommandCenter) PlayCommand() *MPRemoteCommand {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPRemoteCommandCenterSelPlayCommand)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPRemoteCommandFromID(_ret)
 }
 
 func (o *MPRemoteCommandCenter) StopCommand() *MPRemoteCommand {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPRemoteCommandCenterSelStopCommand)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPRemoteCommandFromID(_ret)
 }
 
 func (o *MPRemoteCommandCenter) TogglePlayPauseCommand() *MPRemoteCommand {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPRemoteCommandCenterSelTogglePlayPauseCommand)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPRemoteCommandFromID(_ret)
 }
 
 func (o *MPRemoteCommandCenter) EnableLanguageOptionCommand() *MPRemoteCommand {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPRemoteCommandCenterSelEnableLanguageOptionCommand)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPRemoteCommandFromID(_ret)
 }
 
 func (o *MPRemoteCommandCenter) DisableLanguageOptionCommand() *MPRemoteCommand {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPRemoteCommandCenterSelDisableLanguageOptionCommand)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPRemoteCommandFromID(_ret)
 }
 
 func (o *MPRemoteCommandCenter) ChangePlaybackRateCommand() *MPChangePlaybackRateCommand {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPRemoteCommandCenterSelChangePlaybackRateCommand)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPChangePlaybackRateCommandFromID(_ret)
 }
 
 func (o *MPRemoteCommandCenter) ChangeRepeatModeCommand() *MPChangeRepeatModeCommand {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPRemoteCommandCenterSelChangeRepeatModeCommand)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPChangeRepeatModeCommandFromID(_ret)
 }
 
 func (o *MPRemoteCommandCenter) ChangeShuffleModeCommand() *MPChangeShuffleModeCommand {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPRemoteCommandCenterSelChangeShuffleModeCommand)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPChangeShuffleModeCommandFromID(_ret)
 }
 
 func (o *MPRemoteCommandCenter) NextTrackCommand() *MPRemoteCommand {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPRemoteCommandCenterSelNextTrackCommand)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPRemoteCommandFromID(_ret)
 }
 
 func (o *MPRemoteCommandCenter) PreviousTrackCommand() *MPRemoteCommand {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPRemoteCommandCenterSelPreviousTrackCommand)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPRemoteCommandFromID(_ret)
 }
 
 func (o *MPRemoteCommandCenter) SkipForwardCommand() *MPSkipIntervalCommand {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPRemoteCommandCenterSelSkipForwardCommand)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSkipIntervalCommandFromID(_ret)
 }
 
 func (o *MPRemoteCommandCenter) SkipBackwardCommand() *MPSkipIntervalCommand {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPRemoteCommandCenterSelSkipBackwardCommand)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSkipIntervalCommandFromID(_ret)
 }
 
 func (o *MPRemoteCommandCenter) SeekForwardCommand() *MPRemoteCommand {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPRemoteCommandCenterSelSeekForwardCommand)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPRemoteCommandFromID(_ret)
 }
 
 func (o *MPRemoteCommandCenter) SeekBackwardCommand() *MPRemoteCommand {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPRemoteCommandCenterSelSeekBackwardCommand)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPRemoteCommandFromID(_ret)
 }
 
 func (o *MPRemoteCommandCenter) ChangePlaybackPositionCommand() *MPChangePlaybackPositionCommand {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPRemoteCommandCenterSelChangePlaybackPositionCommand)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPChangePlaybackPositionCommandFromID(_ret)
 }
 
 func (o *MPRemoteCommandCenter) RatingCommand() *MPRatingCommand {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPRemoteCommandCenterSelRatingCommand)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPRatingCommandFromID(_ret)
 }
 
 func (o *MPRemoteCommandCenter) LikeCommand() *MPFeedbackCommand {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPRemoteCommandCenterSelLikeCommand)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPFeedbackCommandFromID(_ret)
 }
 
 func (o *MPRemoteCommandCenter) DislikeCommand() *MPFeedbackCommand {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPRemoteCommandCenterSelDislikeCommand)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPFeedbackCommandFromID(_ret)
 }
 
 func (o *MPRemoteCommandCenter) BookmarkCommand() *MPFeedbackCommand {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPRemoteCommandCenterSelBookmarkCommand)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPFeedbackCommandFromID(_ret)
 }
-

@@ -79,7 +79,9 @@ func (x *ImageThresholdBinaryInverse) Transform() *float32 {
 	return x.inner.Transform()
 }
 
-func (x *ImageThresholdBinaryInverse) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageThresholdBinaryInverse) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
 // ImageThresholdBinaryInverseable is the interface implemented by [ImageThresholdBinaryInverse], for mocking and DI.
 type ImageThresholdBinaryInverseable interface {
@@ -93,4 +95,3 @@ type ImageThresholdBinaryInverseable interface {
 }
 
 var _ ImageThresholdBinaryInverseable = (*ImageThresholdBinaryInverse)(nil)
-

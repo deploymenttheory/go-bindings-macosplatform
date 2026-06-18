@@ -17,9 +17,9 @@ type MPSCNNPoolingL2Norm struct {
 }
 
 var (
-	_clsMPSCNNPoolingL2Norm = _objcClass("MPSCNNPoolingL2Norm")
+	_clsMPSCNNPoolingL2Norm                                                                    = _objcClass("MPSCNNPoolingL2Norm")
 	_mPSCNNPoolingL2NormSelInitWithDeviceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY = objc.RegisterName("initWithDevice:kernelWidth:kernelHeight:strideInPixelsX:strideInPixelsY:")
-	_mPSCNNPoolingL2NormSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
+	_mPSCNNPoolingL2NormSelInitWithCoderDevice                                                 = objc.RegisterName("initWithCoder:device:")
 )
 
 func MPSCNNPoolingL2NormFromID(id objc.ID) *MPSCNNPoolingL2Norm {
@@ -35,14 +35,17 @@ func MPSCNNPoolingL2NormFromID(id objc.ID) *MPSCNNPoolingL2Norm {
 // @abstract   Initialize a MPSCNNPoolingL2Norm pooling filter @param      device              The device the filter will run on @param      kernelWidth         The width of the kernel.  Can be an odd or even value. @param      kernelHeight        The height of the kernel.  Can be an odd or even value. @param      strideInPixelsX     The output stride (downsampling factor) in the x dimension. @param      strideInPixelsY     The output stride (downsampling factor) in the y dimension. @return     A valid MPSCNNPooling object or nil, if failure.
 func (o *MPSCNNPoolingL2Norm) InitWithDeviceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY(device metal.MTLDevice, kernelWidth uint, kernelHeight uint, strideInPixelsX uint, strideInPixelsY uint) *MPSCNNPoolingL2Norm {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNPoolingL2NormSelInitWithDeviceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY, device, kernelWidth, kernelHeight, strideInPixelsX, strideInPixelsY)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNPoolingL2NormFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSCNNPooling @param      device      The MTLDevice on which to make the MPSCNNPooling @return     A new MPSCNNPooling object, or nil if failure.
 func (o *MPSCNNPoolingL2Norm) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSCNNPoolingL2Norm {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNPoolingL2NormSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNPoolingL2NormFromID(_ret)
 }
-

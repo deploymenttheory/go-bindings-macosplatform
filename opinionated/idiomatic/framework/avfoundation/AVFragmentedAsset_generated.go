@@ -45,4 +45,3 @@ type FragmentedAssetable interface {
 }
 
 var _ FragmentedAssetable = (*FragmentedAsset)(nil)
-

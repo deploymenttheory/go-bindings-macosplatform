@@ -15,7 +15,9 @@ type AssetWriterInputCaptionAdaptor struct {
 }
 
 // Unwrap returns the underlying [raw.AVAssetWriterInputCaptionAdaptor].
-func (x *AssetWriterInputCaptionAdaptor) Unwrap() *raw.AVAssetWriterInputCaptionAdaptor { return x.inner }
+func (x *AssetWriterInputCaptionAdaptor) Unwrap() *raw.AVAssetWriterInputCaptionAdaptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -64,4 +66,3 @@ type AssetWriterInputCaptionAdaptorable interface {
 }
 
 var _ AssetWriterInputCaptionAdaptorable = (*AssetWriterInputCaptionAdaptor)(nil)
-

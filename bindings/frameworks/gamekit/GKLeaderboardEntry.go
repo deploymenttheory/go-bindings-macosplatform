@@ -17,15 +17,15 @@ type GKLeaderboardEntry struct {
 }
 
 var (
-	_clsGKLeaderboardEntry = _objcClass("GKLeaderboardEntry")
-	_gKLeaderboardEntrySelPlayer = objc.RegisterName("player")
-	_gKLeaderboardEntrySelRank = objc.RegisterName("rank")
-	_gKLeaderboardEntrySelScore = objc.RegisterName("score")
-	_gKLeaderboardEntrySelFormattedScore = objc.RegisterName("formattedScore")
-	_gKLeaderboardEntrySelContext = objc.RegisterName("context")
-	_gKLeaderboardEntrySelDate = objc.RegisterName("date")
+	_clsGKLeaderboardEntry                                                              = _objcClass("GKLeaderboardEntry")
+	_gKLeaderboardEntrySelPlayer                                                        = objc.RegisterName("player")
+	_gKLeaderboardEntrySelRank                                                          = objc.RegisterName("rank")
+	_gKLeaderboardEntrySelScore                                                         = objc.RegisterName("score")
+	_gKLeaderboardEntrySelFormattedScore                                                = objc.RegisterName("formattedScore")
+	_gKLeaderboardEntrySelContext                                                       = objc.RegisterName("context")
+	_gKLeaderboardEntrySelDate                                                          = objc.RegisterName("date")
 	_gKLeaderboardEntrySelChallengeComposeControllerWithMessagePlayersCompletionHandler = objc.RegisterName("challengeComposeControllerWithMessage:players:completionHandler:")
-	_gKLeaderboardEntrySelChallengeComposeControllerWithMessagePlayersCompletion = objc.RegisterName("challengeComposeControllerWithMessage:players:completion:")
+	_gKLeaderboardEntrySelChallengeComposeControllerWithMessagePlayersCompletion        = objc.RegisterName("challengeComposeControllerWithMessage:players:completion:")
 )
 
 func GKLeaderboardEntryFromID(id objc.ID) *GKLeaderboardEntry {
@@ -40,7 +40,9 @@ func GKLeaderboardEntryFromID(id objc.ID) *GKLeaderboardEntry {
 
 func (o *GKLeaderboardEntry) Player() *GKPlayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardEntrySelPlayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKPlayerFromID(_ret)
 }
 
@@ -56,7 +58,9 @@ func (o *GKLeaderboardEntry) Score() int {
 
 func (o *GKLeaderboardEntry) FormattedScore() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardEntrySelFormattedScore)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -67,14 +71,18 @@ func (o *GKLeaderboardEntry) Context() uint {
 
 func (o *GKLeaderboardEntry) Date() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardEntrySelDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // Deprecated: since macOS 14.0.
 func (o *GKLeaderboardEntry) ChallengeComposeControllerWithMessagePlayersCompletionHandler(message *foundation.NSString, players *foundation.NSArray[*GKPlayer], completionHandler objc.Block) *appkit.NSViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardEntrySelChallengeComposeControllerWithMessagePlayersCompletionHandler, message.Ptr(), players.Ptr(), completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSViewControllerFromID(_ret)
 }
 
@@ -94,7 +102,8 @@ func (o *GKLeaderboardEntry) ChallengeComposeControllerWithMessagePlayersComplet
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardEntrySelChallengeComposeControllerWithMessagePlayersCompletion, message.Ptr(), players.Ptr(), __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSViewControllerFromID(_ret)
 }
-

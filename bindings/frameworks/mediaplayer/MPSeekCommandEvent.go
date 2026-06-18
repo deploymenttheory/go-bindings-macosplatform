@@ -15,7 +15,7 @@ type MPSeekCommandEvent struct {
 }
 
 var (
-	_clsMPSeekCommandEvent = _objcClass("MPSeekCommandEvent")
+	_clsMPSeekCommandEvent     = _objcClass("MPSeekCommandEvent")
 	_mPSeekCommandEventSelType = objc.RegisterName("type")
 )
 
@@ -33,4 +33,3 @@ func (o *MPSeekCommandEvent) Type() MPSeekCommandEventType {
 	_ret := objc.Send[MPSeekCommandEventType](o.Ptr(), _mPSeekCommandEventSelType)
 	return _ret
 }
-

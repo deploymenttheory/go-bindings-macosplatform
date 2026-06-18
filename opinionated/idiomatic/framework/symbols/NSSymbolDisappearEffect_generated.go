@@ -63,4 +63,3 @@ type SymbolDisappearEffectable interface {
 }
 
 var _ SymbolDisappearEffectable = (*SymbolDisappearEffect)(nil)
-

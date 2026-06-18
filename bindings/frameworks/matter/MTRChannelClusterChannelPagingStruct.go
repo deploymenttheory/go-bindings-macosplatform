@@ -16,11 +16,11 @@ type MTRChannelClusterChannelPagingStruct struct {
 }
 
 var (
-	_clsMTRChannelClusterChannelPagingStruct = _objcClass("MTRChannelClusterChannelPagingStruct")
-	_mTRChannelClusterChannelPagingStructSelPreviousToken = objc.RegisterName("previousToken")
+	_clsMTRChannelClusterChannelPagingStruct                 = _objcClass("MTRChannelClusterChannelPagingStruct")
+	_mTRChannelClusterChannelPagingStructSelPreviousToken    = objc.RegisterName("previousToken")
 	_mTRChannelClusterChannelPagingStructSelSetPreviousToken = objc.RegisterName("setPreviousToken:")
-	_mTRChannelClusterChannelPagingStructSelNextToken = objc.RegisterName("nextToken")
-	_mTRChannelClusterChannelPagingStructSelSetNextToken = objc.RegisterName("setNextToken:")
+	_mTRChannelClusterChannelPagingStructSelNextToken        = objc.RegisterName("nextToken")
+	_mTRChannelClusterChannelPagingStructSelSetNextToken     = objc.RegisterName("setNextToken:")
 )
 
 func MTRChannelClusterChannelPagingStructFromID(id objc.ID) *MTRChannelClusterChannelPagingStruct {
@@ -35,7 +35,9 @@ func MTRChannelClusterChannelPagingStructFromID(id objc.ID) *MTRChannelClusterCh
 
 func (o *MTRChannelClusterChannelPagingStruct) PreviousToken() *MTRChannelClusterPageTokenStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterChannelPagingStructSelPreviousToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRChannelClusterPageTokenStructFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRChannelClusterChannelPagingStruct) SetPreviousToken(previousToken *M
 
 func (o *MTRChannelClusterChannelPagingStruct) NextToken() *MTRChannelClusterPageTokenStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterChannelPagingStructSelNextToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRChannelClusterPageTokenStructFromID(_ret)
 }
 
 func (o *MTRChannelClusterChannelPagingStruct) SetNextToken(nextToken *MTRChannelClusterPageTokenStruct) {
 	o.Ptr().Send(_mTRChannelClusterChannelPagingStructSelSetNextToken, nextToken.Ptr())
 }
-

@@ -15,9 +15,9 @@ type AVDelegatingPlaybackCoordinatorPauseCommand struct {
 }
 
 var (
-	_clsAVDelegatingPlaybackCoordinatorPauseCommand = _objcClass("AVDelegatingPlaybackCoordinatorPauseCommand")
+	_clsAVDelegatingPlaybackCoordinatorPauseCommand                                     = _objcClass("AVDelegatingPlaybackCoordinatorPauseCommand")
 	_aVDelegatingPlaybackCoordinatorPauseCommandSelShouldBufferInAnticipationOfPlayback = objc.RegisterName("shouldBufferInAnticipationOfPlayback")
-	_aVDelegatingPlaybackCoordinatorPauseCommandSelAnticipatedPlaybackRate = objc.RegisterName("anticipatedPlaybackRate")
+	_aVDelegatingPlaybackCoordinatorPauseCommandSelAnticipatedPlaybackRate              = objc.RegisterName("anticipatedPlaybackRate")
 )
 
 func AVDelegatingPlaybackCoordinatorPauseCommandFromID(id objc.ID) *AVDelegatingPlaybackCoordinatorPauseCommand {
@@ -41,4 +41,3 @@ func (o *AVDelegatingPlaybackCoordinatorPauseCommand) AnticipatedPlaybackRate() 
 	_ret := objc.Send[float32](o.Ptr(), _aVDelegatingPlaybackCoordinatorPauseCommandSelAnticipatedPlaybackRate)
 	return _ret
 }
-

@@ -15,7 +15,9 @@ type KeyValueSharedObserversSnapshot struct {
 }
 
 // Unwrap returns the underlying [raw.NSKeyValueSharedObserversSnapshot].
-func (x *KeyValueSharedObserversSnapshot) Unwrap() *raw.NSKeyValueSharedObserversSnapshot { return x.inner }
+func (x *KeyValueSharedObserversSnapshot) Unwrap() *raw.NSKeyValueSharedObserversSnapshot {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -50,4 +52,3 @@ type KeyValueSharedObserversSnapshotable interface {
 }
 
 var _ KeyValueSharedObserversSnapshotable = (*KeyValueSharedObserversSnapshot)(nil)
-

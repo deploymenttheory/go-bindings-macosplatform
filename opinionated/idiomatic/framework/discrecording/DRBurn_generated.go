@@ -136,4 +136,3 @@ type Burnable interface {
 }
 
 var _ Burnable = (*Burn)(nil)
-

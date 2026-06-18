@@ -200,4 +200,3 @@ type QueuePlayerable interface {
 }
 
 var _ QueuePlayerable = (*QueuePlayer)(nil)
-

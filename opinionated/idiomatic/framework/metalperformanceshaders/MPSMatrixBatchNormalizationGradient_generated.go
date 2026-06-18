@@ -21,7 +21,9 @@ type MatrixBatchNormalizationGradient struct {
 }
 
 // Unwrap returns the underlying [raw.MPSMatrixBatchNormalizationGradient].
-func (x *MatrixBatchNormalizationGradient) Unwrap() *raw.MPSMatrixBatchNormalizationGradient { return x.inner }
+func (x *MatrixBatchNormalizationGradient) Unwrap() *raw.MPSMatrixBatchNormalizationGradient {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -178,9 +180,13 @@ func (x *MatrixBatchNormalizationGradient) SetEpsilon(epsilon float32) {
 	x.inner.SetEpsilon(epsilon)
 }
 
-func (x *MatrixBatchNormalizationGradient) asMatrixBinaryKernel() *mpsmatrix.MPSMatrixBinaryKernel { return &x.inner.MPSMatrixBinaryKernel }
+func (x *MatrixBatchNormalizationGradient) asMatrixBinaryKernel() *mpsmatrix.MPSMatrixBinaryKernel {
+	return &x.inner.MPSMatrixBinaryKernel
+}
 
-func (x *MatrixBatchNormalizationGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSMatrixBinaryKernel.MPSKernel }
+func (x *MatrixBatchNormalizationGradient) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSMatrixBinaryKernel.MPSKernel
+}
 
 // MatrixBatchNormalizationGradientable is the interface implemented by [MatrixBatchNormalizationGradient], for mocking and DI.
 type MatrixBatchNormalizationGradientable interface {
@@ -211,4 +217,3 @@ type MatrixBatchNormalizationGradientable interface {
 }
 
 var _ MatrixBatchNormalizationGradientable = (*MatrixBatchNormalizationGradient)(nil)
-

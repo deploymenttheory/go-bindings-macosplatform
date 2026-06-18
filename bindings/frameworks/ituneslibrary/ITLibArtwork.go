@@ -17,9 +17,9 @@ type ITLibArtwork struct {
 }
 
 var (
-	_clsITLibArtwork = _objcClass("ITLibArtwork")
-	_iTLibArtworkSelImage = objc.RegisterName("image")
-	_iTLibArtworkSelImageData = objc.RegisterName("imageData")
+	_clsITLibArtwork                = _objcClass("ITLibArtwork")
+	_iTLibArtworkSelImage           = objc.RegisterName("image")
+	_iTLibArtworkSelImageData       = objc.RegisterName("imageData")
 	_iTLibArtworkSelImageDataFormat = objc.RegisterName("imageDataFormat")
 )
 
@@ -36,14 +36,18 @@ func ITLibArtworkFromID(id objc.ID) *ITLibArtwork {
 // @abstract The NSImage formed by calling [[NSImage alloc] initWithData:self.imageData].
 func (o *ITLibArtwork) Image() *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibArtworkSelImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSImageFromID(_ret)
 }
 
 // @abstract The data (bytes) of this artwork image.
 func (o *ITLibArtwork) ImageData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibArtworkSelImageData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -52,4 +56,3 @@ func (o *ITLibArtwork) ImageDataFormat() ITLibArtworkFormat {
 	_ret := objc.Send[ITLibArtworkFormat](o.Ptr(), _iTLibArtworkSelImageDataFormat)
 	return _ret
 }
-

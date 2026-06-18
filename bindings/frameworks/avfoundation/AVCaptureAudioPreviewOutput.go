@@ -16,13 +16,13 @@ type AVCaptureAudioPreviewOutput struct {
 }
 
 var (
-	_clsAVCaptureAudioPreviewOutput = _objcClass("AVCaptureAudioPreviewOutput")
-	_aVCaptureAudioPreviewOutputSelInit = objc.RegisterName("init")
-	_aVCaptureAudioPreviewOutputSelNew = objc.RegisterName("new")
-	_aVCaptureAudioPreviewOutputSelOutputDeviceUniqueID = objc.RegisterName("outputDeviceUniqueID")
+	_clsAVCaptureAudioPreviewOutput                        = _objcClass("AVCaptureAudioPreviewOutput")
+	_aVCaptureAudioPreviewOutputSelInit                    = objc.RegisterName("init")
+	_aVCaptureAudioPreviewOutputSelNew                     = objc.RegisterName("new")
+	_aVCaptureAudioPreviewOutputSelOutputDeviceUniqueID    = objc.RegisterName("outputDeviceUniqueID")
 	_aVCaptureAudioPreviewOutputSelSetOutputDeviceUniqueID = objc.RegisterName("setOutputDeviceUniqueID:")
-	_aVCaptureAudioPreviewOutputSelVolume = objc.RegisterName("volume")
-	_aVCaptureAudioPreviewOutputSelSetVolume = objc.RegisterName("setVolume:")
+	_aVCaptureAudioPreviewOutputSelVolume                  = objc.RegisterName("volume")
+	_aVCaptureAudioPreviewOutputSelSetVolume               = objc.RegisterName("setVolume:")
 )
 
 func AVCaptureAudioPreviewOutputFromID(id objc.ID) *AVCaptureAudioPreviewOutput {
@@ -37,7 +37,9 @@ func AVCaptureAudioPreviewOutputFromID(id objc.ID) *AVCaptureAudioPreviewOutput 
 
 func (o *AVCaptureAudioPreviewOutput) Init() *AVCaptureAudioPreviewOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureAudioPreviewOutputSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureAudioPreviewOutputFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func AVCaptureAudioPreviewOutputNew() *AVCaptureAudioPreviewOutput {
 // @property outputDeviceUniqueID @abstract Specifies the unique ID of the Core Audio output device being used to play preview audio. @discussion The value of this property is an NSString containing the unique ID of the Core Audio device to be used for output, or nil if the default system output should be used.
 func (o *AVCaptureAudioPreviewOutput) OutputDeviceUniqueID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureAudioPreviewOutputSelOutputDeviceUniqueID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -66,4 +70,3 @@ func (o *AVCaptureAudioPreviewOutput) Volume() float32 {
 func (o *AVCaptureAudioPreviewOutput) SetVolume(volume float32) {
 	o.Ptr().Send(_aVCaptureAudioPreviewOutputSelSetVolume, volume)
 }
-

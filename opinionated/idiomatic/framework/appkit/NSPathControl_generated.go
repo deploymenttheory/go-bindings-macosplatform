@@ -54,7 +54,9 @@ func (x *PathControl) WithAllowedTypes(items ...*foundation.NSString) *PathContr
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -100,7 +102,9 @@ func (x *PathControl) WithPathItems(items ...*raw.NSPathControlItem) *PathContro
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSPathControlItem](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -272,7 +276,9 @@ func (x *PathControl) WithSubviews(items ...ViewProvider) *PathControl {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asView().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSView](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -414,7 +420,9 @@ func (x *PathControl) WithBackgroundFilters(items ...*coreimage.CIFilter) *PathC
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -436,7 +444,9 @@ func (x *PathControl) WithContentFilters(items ...*coreimage.CIFilter) *PathCont
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -500,7 +510,9 @@ func (x *PathControl) WithGestureRecognizers(items ...GestureRecognizerProvider)
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -878,4 +890,3 @@ type PathControlable interface {
 }
 
 var _ PathControlable = (*PathControl)(nil)
-

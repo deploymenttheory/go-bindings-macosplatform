@@ -29,7 +29,9 @@ func KLSItemDisplayName() objc.ID { return purego.CFConstant(raw.KLSItemDisplayN
 func KLSItemDisplayKind() objc.ID { return purego.CFConstant(raw.KLSItemDisplayKind()) }
 
 // KLSItemRoleHandlerDisplayName returns the value of the CoreFoundation reference constant kLSItemRoleHandlerDisplayName as an objc.ID.
-func KLSItemRoleHandlerDisplayName() objc.ID { return purego.CFConstant(raw.KLSItemRoleHandlerDisplayName()) }
+func KLSItemRoleHandlerDisplayName() objc.ID {
+	return purego.CFConstant(raw.KLSItemRoleHandlerDisplayName())
+}
 
 // KLSItemIsInvisible returns the value of the CoreFoundation reference constant kLSItemIsInvisible as an objc.ID.
 func KLSItemIsInvisible() objc.ID { return purego.CFConstant(raw.KLSItemIsInvisible()) }
@@ -38,13 +40,17 @@ func KLSItemIsInvisible() objc.ID { return purego.CFConstant(raw.KLSItemIsInvisi
 func KLSItemExtensionIsHidden() objc.ID { return purego.CFConstant(raw.KLSItemExtensionIsHidden()) }
 
 // KLSItemQuarantineProperties returns the value of the CoreFoundation reference constant kLSItemQuarantineProperties as an objc.ID.
-func KLSItemQuarantineProperties() objc.ID { return purego.CFConstant(raw.KLSItemQuarantineProperties()) }
+func KLSItemQuarantineProperties() objc.ID {
+	return purego.CFConstant(raw.KLSItemQuarantineProperties())
+}
 
 // KLSQuarantineAgentNameKey returns the value of the CoreFoundation reference constant kLSQuarantineAgentNameKey as an objc.ID.
 func KLSQuarantineAgentNameKey() objc.ID { return purego.CFConstant(raw.KLSQuarantineAgentNameKey()) }
 
 // KLSQuarantineAgentBundleIdentifierKey returns the value of the CoreFoundation reference constant kLSQuarantineAgentBundleIdentifierKey as an objc.ID.
-func KLSQuarantineAgentBundleIdentifierKey() objc.ID { return purego.CFConstant(raw.KLSQuarantineAgentBundleIdentifierKey()) }
+func KLSQuarantineAgentBundleIdentifierKey() objc.ID {
+	return purego.CFConstant(raw.KLSQuarantineAgentBundleIdentifierKey())
+}
 
 // KLSQuarantineTimeStampKey returns the value of the CoreFoundation reference constant kLSQuarantineTimeStampKey as an objc.ID.
 func KLSQuarantineTimeStampKey() objc.ID { return purego.CFConstant(raw.KLSQuarantineTimeStampKey()) }
@@ -53,22 +59,34 @@ func KLSQuarantineTimeStampKey() objc.ID { return purego.CFConstant(raw.KLSQuara
 func KLSQuarantineTypeKey() objc.ID { return purego.CFConstant(raw.KLSQuarantineTypeKey()) }
 
 // KLSQuarantineTypeWebDownload returns the value of the CoreFoundation reference constant kLSQuarantineTypeWebDownload as an objc.ID.
-func KLSQuarantineTypeWebDownload() objc.ID { return purego.CFConstant(raw.KLSQuarantineTypeWebDownload()) }
+func KLSQuarantineTypeWebDownload() objc.ID {
+	return purego.CFConstant(raw.KLSQuarantineTypeWebDownload())
+}
 
 // KLSQuarantineTypeOtherDownload returns the value of the CoreFoundation reference constant kLSQuarantineTypeOtherDownload as an objc.ID.
-func KLSQuarantineTypeOtherDownload() objc.ID { return purego.CFConstant(raw.KLSQuarantineTypeOtherDownload()) }
+func KLSQuarantineTypeOtherDownload() objc.ID {
+	return purego.CFConstant(raw.KLSQuarantineTypeOtherDownload())
+}
 
 // KLSQuarantineTypeEmailAttachment returns the value of the CoreFoundation reference constant kLSQuarantineTypeEmailAttachment as an objc.ID.
-func KLSQuarantineTypeEmailAttachment() objc.ID { return purego.CFConstant(raw.KLSQuarantineTypeEmailAttachment()) }
+func KLSQuarantineTypeEmailAttachment() objc.ID {
+	return purego.CFConstant(raw.KLSQuarantineTypeEmailAttachment())
+}
 
 // KLSQuarantineTypeInstantMessageAttachment returns the value of the CoreFoundation reference constant kLSQuarantineTypeInstantMessageAttachment as an objc.ID.
-func KLSQuarantineTypeInstantMessageAttachment() objc.ID { return purego.CFConstant(raw.KLSQuarantineTypeInstantMessageAttachment()) }
+func KLSQuarantineTypeInstantMessageAttachment() objc.ID {
+	return purego.CFConstant(raw.KLSQuarantineTypeInstantMessageAttachment())
+}
 
 // KLSQuarantineTypeCalendarEventAttachment returns the value of the CoreFoundation reference constant kLSQuarantineTypeCalendarEventAttachment as an objc.ID.
-func KLSQuarantineTypeCalendarEventAttachment() objc.ID { return purego.CFConstant(raw.KLSQuarantineTypeCalendarEventAttachment()) }
+func KLSQuarantineTypeCalendarEventAttachment() objc.ID {
+	return purego.CFConstant(raw.KLSQuarantineTypeCalendarEventAttachment())
+}
 
 // KLSQuarantineTypeOtherAttachment returns the value of the CoreFoundation reference constant kLSQuarantineTypeOtherAttachment as an objc.ID.
-func KLSQuarantineTypeOtherAttachment() objc.ID { return purego.CFConstant(raw.KLSQuarantineTypeOtherAttachment()) }
+func KLSQuarantineTypeOtherAttachment() objc.ID {
+	return purego.CFConstant(raw.KLSQuarantineTypeOtherAttachment())
+}
 
 // KLSQuarantineOriginURLKey returns the value of the CoreFoundation reference constant kLSQuarantineOriginURLKey as an objc.ID.
 func KLSQuarantineOriginURLKey() objc.ID { return purego.CFConstant(raw.KLSQuarantineOriginURLKey()) }
@@ -140,7 +158,9 @@ func KUTTypePlainText() objc.ID { return purego.CFConstant(raw.KUTTypePlainText(
 func KUTTypeUTF8PlainText() objc.ID { return purego.CFConstant(raw.KUTTypeUTF8PlainText()) }
 
 // KUTTypeUTF16ExternalPlainText returns the value of the CoreFoundation reference constant kUTTypeUTF16ExternalPlainText as an objc.ID.
-func KUTTypeUTF16ExternalPlainText() objc.ID { return purego.CFConstant(raw.KUTTypeUTF16ExternalPlainText()) }
+func KUTTypeUTF16ExternalPlainText() objc.ID {
+	return purego.CFConstant(raw.KUTTypeUTF16ExternalPlainText())
+}
 
 // KUTTypeUTF16PlainText returns the value of the CoreFoundation reference constant kUTTypeUTF16PlainText as an objc.ID.
 func KUTTypeUTF16PlainText() objc.ID { return purego.CFConstant(raw.KUTTypeUTF16PlainText()) }
@@ -155,7 +175,9 @@ func KUTTypeCommaSeparatedText() objc.ID { return purego.CFConstant(raw.KUTTypeC
 func KUTTypeTabSeparatedText() objc.ID { return purego.CFConstant(raw.KUTTypeTabSeparatedText()) }
 
 // KUTTypeUTF8TabSeparatedText returns the value of the CoreFoundation reference constant kUTTypeUTF8TabSeparatedText as an objc.ID.
-func KUTTypeUTF8TabSeparatedText() objc.ID { return purego.CFConstant(raw.KUTTypeUTF8TabSeparatedText()) }
+func KUTTypeUTF8TabSeparatedText() objc.ID {
+	return purego.CFConstant(raw.KUTTypeUTF8TabSeparatedText())
+}
 
 // KUTTypeRTF returns the value of the CoreFoundation reference constant kUTTypeRTF as an objc.ID.
 func KUTTypeRTF() objc.ID { return purego.CFConstant(raw.KUTTypeRTF()) }
@@ -173,7 +195,9 @@ func KUTTypeJavaSource() objc.ID { return purego.CFConstant(raw.KUTTypeJavaSourc
 func KUTTypeSourceCode() objc.ID { return purego.CFConstant(raw.KUTTypeSourceCode()) }
 
 // KUTTypeAssemblyLanguageSource returns the value of the CoreFoundation reference constant kUTTypeAssemblyLanguageSource as an objc.ID.
-func KUTTypeAssemblyLanguageSource() objc.ID { return purego.CFConstant(raw.KUTTypeAssemblyLanguageSource()) }
+func KUTTypeAssemblyLanguageSource() objc.ID {
+	return purego.CFConstant(raw.KUTTypeAssemblyLanguageSource())
+}
 
 // KUTTypeCSource returns the value of the CoreFoundation reference constant kUTTypeCSource as an objc.ID.
 func KUTTypeCSource() objc.ID { return purego.CFConstant(raw.KUTTypeCSource()) }
@@ -188,7 +212,9 @@ func KUTTypeSwiftSource() objc.ID { return purego.CFConstant(raw.KUTTypeSwiftSou
 func KUTTypeCPlusPlusSource() objc.ID { return purego.CFConstant(raw.KUTTypeCPlusPlusSource()) }
 
 // KUTTypeObjectiveCPlusPlusSource returns the value of the CoreFoundation reference constant kUTTypeObjectiveCPlusPlusSource as an objc.ID.
-func KUTTypeObjectiveCPlusPlusSource() objc.ID { return purego.CFConstant(raw.KUTTypeObjectiveCPlusPlusSource()) }
+func KUTTypeObjectiveCPlusPlusSource() objc.ID {
+	return purego.CFConstant(raw.KUTTypeObjectiveCPlusPlusSource())
+}
 
 // KUTTypeCHeader returns the value of the CoreFoundation reference constant kUTTypeCHeader as an objc.ID.
 func KUTTypeCHeader() objc.ID { return purego.CFConstant(raw.KUTTypeCHeader()) }
@@ -239,7 +265,9 @@ func KUTTypeXMLPropertyList() objc.ID { return purego.CFConstant(raw.KUTTypeXMLP
 func KUTTypeBinaryPropertyList() objc.ID { return purego.CFConstant(raw.KUTTypeBinaryPropertyList()) }
 
 // KUTTypeTXNTextAndMultimediaData returns the value of the CoreFoundation reference constant kUTTypeTXNTextAndMultimediaData as an objc.ID.
-func KUTTypeTXNTextAndMultimediaData() objc.ID { return purego.CFConstant(raw.KUTTypeTXNTextAndMultimediaData()) }
+func KUTTypeTXNTextAndMultimediaData() objc.ID {
+	return purego.CFConstant(raw.KUTTypeTXNTextAndMultimediaData())
+}
 
 // KUTTypePDF returns the value of the CoreFoundation reference constant kUTTypePDF as an objc.ID.
 func KUTTypePDF() objc.ID { return purego.CFConstant(raw.KUTTypePDF()) }
@@ -290,7 +318,9 @@ func KUTTypeICO() objc.ID { return purego.CFConstant(raw.KUTTypeICO()) }
 func KUTTypeRawImage() objc.ID { return purego.CFConstant(raw.KUTTypeRawImage()) }
 
 // KUTTypeScalableVectorGraphics returns the value of the CoreFoundation reference constant kUTTypeScalableVectorGraphics as an objc.ID.
-func KUTTypeScalableVectorGraphics() objc.ID { return purego.CFConstant(raw.KUTTypeScalableVectorGraphics()) }
+func KUTTypeScalableVectorGraphics() objc.ID {
+	return purego.CFConstant(raw.KUTTypeScalableVectorGraphics())
+}
 
 // KUTTypeLivePhoto returns the value of the CoreFoundation reference constant kUTTypeLivePhoto as an objc.ID.
 func KUTTypeLivePhoto() objc.ID { return purego.CFConstant(raw.KUTTypeLivePhoto()) }
@@ -317,7 +347,9 @@ func KUTTypeMPEG() objc.ID { return purego.CFConstant(raw.KUTTypeMPEG()) }
 func KUTTypeMPEG2Video() objc.ID { return purego.CFConstant(raw.KUTTypeMPEG2Video()) }
 
 // KUTTypeMPEG2TransportStream returns the value of the CoreFoundation reference constant kUTTypeMPEG2TransportStream as an objc.ID.
-func KUTTypeMPEG2TransportStream() objc.ID { return purego.CFConstant(raw.KUTTypeMPEG2TransportStream()) }
+func KUTTypeMPEG2TransportStream() objc.ID {
+	return purego.CFConstant(raw.KUTTypeMPEG2TransportStream())
+}
 
 // KUTTypeMP3 returns the value of the CoreFoundation reference constant kUTTypeMP3 as an objc.ID.
 func KUTTypeMP3() objc.ID { return purego.CFConstant(raw.KUTTypeMP3()) }
@@ -329,16 +361,22 @@ func KUTTypeMPEG4() objc.ID { return purego.CFConstant(raw.KUTTypeMPEG4()) }
 func KUTTypeMPEG4Audio() objc.ID { return purego.CFConstant(raw.KUTTypeMPEG4Audio()) }
 
 // KUTTypeAppleProtectedMPEG4Audio returns the value of the CoreFoundation reference constant kUTTypeAppleProtectedMPEG4Audio as an objc.ID.
-func KUTTypeAppleProtectedMPEG4Audio() objc.ID { return purego.CFConstant(raw.KUTTypeAppleProtectedMPEG4Audio()) }
+func KUTTypeAppleProtectedMPEG4Audio() objc.ID {
+	return purego.CFConstant(raw.KUTTypeAppleProtectedMPEG4Audio())
+}
 
 // KUTTypeAppleProtectedMPEG4Video returns the value of the CoreFoundation reference constant kUTTypeAppleProtectedMPEG4Video as an objc.ID.
-func KUTTypeAppleProtectedMPEG4Video() objc.ID { return purego.CFConstant(raw.KUTTypeAppleProtectedMPEG4Video()) }
+func KUTTypeAppleProtectedMPEG4Video() objc.ID {
+	return purego.CFConstant(raw.KUTTypeAppleProtectedMPEG4Video())
+}
 
 // KUTTypeAVIMovie returns the value of the CoreFoundation reference constant kUTTypeAVIMovie as an objc.ID.
 func KUTTypeAVIMovie() objc.ID { return purego.CFConstant(raw.KUTTypeAVIMovie()) }
 
 // KUTTypeAudioInterchangeFileFormat returns the value of the CoreFoundation reference constant kUTTypeAudioInterchangeFileFormat as an objc.ID.
-func KUTTypeAudioInterchangeFileFormat() objc.ID { return purego.CFConstant(raw.KUTTypeAudioInterchangeFileFormat()) }
+func KUTTypeAudioInterchangeFileFormat() objc.ID {
+	return purego.CFConstant(raw.KUTTypeAudioInterchangeFileFormat())
+}
 
 // KUTTypeWaveformAudio returns the value of the CoreFoundation reference constant kUTTypeWaveformAudio as an objc.ID.
 func KUTTypeWaveformAudio() objc.ID { return purego.CFConstant(raw.KUTTypeWaveformAudio()) }
@@ -401,7 +439,9 @@ func KUTTypeJavaArchive() objc.ID { return purego.CFConstant(raw.KUTTypeJavaArch
 func KUTTypeWindowsExecutable() objc.ID { return purego.CFConstant(raw.KUTTypeWindowsExecutable()) }
 
 // KUTTypeSystemPreferencesPane returns the value of the CoreFoundation reference constant kUTTypeSystemPreferencesPane as an objc.ID.
-func KUTTypeSystemPreferencesPane() objc.ID { return purego.CFConstant(raw.KUTTypeSystemPreferencesPane()) }
+func KUTTypeSystemPreferencesPane() objc.ID {
+	return purego.CFConstant(raw.KUTTypeSystemPreferencesPane())
+}
 
 // KUTTypeGNUZipArchive returns the value of the CoreFoundation reference constant kUTTypeGNUZipArchive as an objc.ID.
 func KUTTypeGNUZipArchive() objc.ID { return purego.CFConstant(raw.KUTTypeGNUZipArchive()) }
@@ -455,16 +495,22 @@ func KUTTypePKCS12() objc.ID { return purego.CFConstant(raw.KUTTypePKCS12()) }
 func KUTTypeX509Certificate() objc.ID { return purego.CFConstant(raw.KUTTypeX509Certificate()) }
 
 // KUTTypeElectronicPublication returns the value of the CoreFoundation reference constant kUTTypeElectronicPublication as an objc.ID.
-func KUTTypeElectronicPublication() objc.ID { return purego.CFConstant(raw.KUTTypeElectronicPublication()) }
+func KUTTypeElectronicPublication() objc.ID {
+	return purego.CFConstant(raw.KUTTypeElectronicPublication())
+}
 
 // KUTTypeLog returns the value of the CoreFoundation reference constant kUTTypeLog as an objc.ID.
 func KUTTypeLog() objc.ID { return purego.CFConstant(raw.KUTTypeLog()) }
 
 // KUTExportedTypeDeclarationsKey returns the value of the CoreFoundation reference constant kUTExportedTypeDeclarationsKey as an objc.ID.
-func KUTExportedTypeDeclarationsKey() objc.ID { return purego.CFConstant(raw.KUTExportedTypeDeclarationsKey()) }
+func KUTExportedTypeDeclarationsKey() objc.ID {
+	return purego.CFConstant(raw.KUTExportedTypeDeclarationsKey())
+}
 
 // KUTImportedTypeDeclarationsKey returns the value of the CoreFoundation reference constant kUTImportedTypeDeclarationsKey as an objc.ID.
-func KUTImportedTypeDeclarationsKey() objc.ID { return purego.CFConstant(raw.KUTImportedTypeDeclarationsKey()) }
+func KUTImportedTypeDeclarationsKey() objc.ID {
+	return purego.CFConstant(raw.KUTImportedTypeDeclarationsKey())
+}
 
 // KUTTypeIdentifierKey returns the value of the CoreFoundation reference constant kUTTypeIdentifierKey as an objc.ID.
 func KUTTypeIdentifierKey() objc.ID { return purego.CFConstant(raw.KUTTypeIdentifierKey()) }
@@ -488,7 +534,9 @@ func KUTTypeReferenceURLKey() objc.ID { return purego.CFConstant(raw.KUTTypeRefe
 func KUTTypeVersionKey() objc.ID { return purego.CFConstant(raw.KUTTypeVersionKey()) }
 
 // KUTTagClassFilenameExtension returns the value of the CoreFoundation reference constant kUTTagClassFilenameExtension as an objc.ID.
-func KUTTagClassFilenameExtension() objc.ID { return purego.CFConstant(raw.KUTTagClassFilenameExtension()) }
+func KUTTagClassFilenameExtension() objc.ID {
+	return purego.CFConstant(raw.KUTTagClassFilenameExtension())
+}
 
 // KUTTagClassMIMEType returns the value of the CoreFoundation reference constant kUTTagClassMIMEType as an objc.ID.
 func KUTTagClassMIMEType() objc.ID { return purego.CFConstant(raw.KUTTagClassMIMEType()) }
@@ -498,4 +546,3 @@ func KUTTagClassNSPboardType() objc.ID { return purego.CFConstant(raw.KUTTagClas
 
 // KUTTagClassOSType returns the value of the CoreFoundation reference constant kUTTagClassOSType as an objc.ID.
 func KUTTagClassOSType() objc.ID { return purego.CFConstant(raw.KUTTagClassOSType()) }
-

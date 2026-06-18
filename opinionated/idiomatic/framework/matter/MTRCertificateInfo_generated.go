@@ -81,4 +81,3 @@ type MTRCertificateInfoable interface {
 }
 
 var _ MTRCertificateInfoable = (*MTRCertificateInfo)(nil)
-

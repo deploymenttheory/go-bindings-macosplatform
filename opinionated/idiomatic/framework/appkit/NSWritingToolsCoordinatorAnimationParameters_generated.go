@@ -16,7 +16,9 @@ type WritingToolsCoordinatorAnimationParameters struct {
 }
 
 // Unwrap returns the underlying [raw.NSWritingToolsCoordinatorAnimationParameters].
-func (x *WritingToolsCoordinatorAnimationParameters) Unwrap() *raw.NSWritingToolsCoordinatorAnimationParameters { return x.inner }
+func (x *WritingToolsCoordinatorAnimationParameters) Unwrap() *raw.NSWritingToolsCoordinatorAnimationParameters {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -101,4 +103,3 @@ type WritingToolsCoordinatorAnimationParametersable interface {
 }
 
 var _ WritingToolsCoordinatorAnimationParametersable = (*WritingToolsCoordinatorAnimationParameters)(nil)
-

@@ -66,4 +66,3 @@ type CPUExceptionDiagnosticable interface {
 }
 
 var _ CPUExceptionDiagnosticable = (*CPUExceptionDiagnostic)(nil)
-

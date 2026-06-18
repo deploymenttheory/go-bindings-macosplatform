@@ -43,4 +43,3 @@ type MetricKeyable interface {
 }
 
 var _ MetricKeyable = (*MetricKey)(nil)
-

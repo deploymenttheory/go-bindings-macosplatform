@@ -11,10 +11,10 @@ import (
 type EvCmd int64
 
 const (
-	EVNOP EvCmd = 0
-	EVHIDE EvCmd = 1
-	EVSHOW EvCmd = 2
-	EVMOVE EvCmd = 3
+	EVNOP   EvCmd = 0
+	EVHIDE  EvCmd = 1
+	EVSHOW  EvCmd = 2
+	EVMOVE  EvCmd = 3
 	EVLEVEL EvCmd = 4
 )
 
@@ -39,7 +39,7 @@ func (e EvCmd) String() string {
 type MDLabelDomain int64
 
 const (
-	KMDLabelUserDomain MDLabelDomain = 0
+	KMDLabelUserDomain  MDLabelDomain = 0
 	KMDLabelLocalDomain MDLabelDomain = 1
 )
 
@@ -57,8 +57,8 @@ func (e MDLabelDomain) String() string {
 type MDQueryOptionFlags int64
 
 const (
-	KMDQuerySynchronous MDQueryOptionFlags = 1
-	KMDQueryWantsUpdates MDQueryOptionFlags = 4
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
 	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
 )
 
@@ -94,8 +94,8 @@ func (e MDQuerySortOptionFlags) String() string {
 type NXMouseButton int64
 
 const (
-	NX_OneButton NXMouseButton = 0
-	NX_LeftButton NXMouseButton = 1
+	NX_OneButton   NXMouseButton = 0
+	NX_LeftButton  NXMouseButton = 1
 	NX_RightButton NXMouseButton = 2
 )
 
@@ -115,7 +115,7 @@ func (e NXMouseButton) String() string {
 type PMPageToPaperMappingType int64
 
 const (
-	KPMPageToPaperMappingNone PMPageToPaperMappingType = 1
+	KPMPageToPaperMappingNone       PMPageToPaperMappingType = 1
 	KPMPageToPaperMappingScaleToFit PMPageToPaperMappingType = 2
 )
 
@@ -134,8 +134,8 @@ type Acl_entry_id_t int64
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
-	ACL_NEXT_ENTRY Acl_entry_id_t = -1
-	ACL_LAST_ENTRY Acl_entry_id_t = -2
+	ACL_NEXT_ENTRY  Acl_entry_id_t = -1
+	ACL_LAST_ENTRY  Acl_entry_id_t = -2
 )
 
 func (e Acl_entry_id_t) String() string {
@@ -154,13 +154,13 @@ func (e Acl_entry_id_t) String() string {
 type Acl_flag_t int64
 
 const (
-	ACL_FLAG_DEFER_INHERIT Acl_flag_t = 1
-	ACL_FLAG_NO_INHERIT Acl_flag_t = 131072
-	ACL_ENTRY_INHERITED Acl_flag_t = 16
-	ACL_ENTRY_FILE_INHERIT Acl_flag_t = 32
+	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
+	ACL_FLAG_NO_INHERIT         Acl_flag_t = 131072
+	ACL_ENTRY_INHERITED         Acl_flag_t = 16
+	ACL_ENTRY_FILE_INHERIT      Acl_flag_t = 32
 	ACL_ENTRY_DIRECTORY_INHERIT Acl_flag_t = 64
-	ACL_ENTRY_LIMIT_INHERIT Acl_flag_t = 128
-	ACL_ENTRY_ONLY_INHERIT Acl_flag_t = 256
+	ACL_ENTRY_LIMIT_INHERIT     Acl_flag_t = 128
+	ACL_ENTRY_ONLY_INHERIT      Acl_flag_t = 256
 )
 
 func (e Acl_flag_t) String() string {
@@ -187,24 +187,24 @@ func (e Acl_flag_t) String() string {
 type Acl_perm_t int64
 
 const (
-	ACL_READ_DATA Acl_perm_t = 2
-	ACL_LIST_DIRECTORY Acl_perm_t = 2
-	ACL_WRITE_DATA Acl_perm_t = 4
-	ACL_ADD_FILE Acl_perm_t = 4
-	ACL_EXECUTE Acl_perm_t = 8
-	ACL_SEARCH Acl_perm_t = 8
-	ACL_DELETE Acl_perm_t = 16
-	ACL_APPEND_DATA Acl_perm_t = 32
-	ACL_ADD_SUBDIRECTORY Acl_perm_t = 32
-	ACL_DELETE_CHILD Acl_perm_t = 64
-	ACL_READ_ATTRIBUTES Acl_perm_t = 128
-	ACL_WRITE_ATTRIBUTES Acl_perm_t = 256
-	ACL_READ_EXTATTRIBUTES Acl_perm_t = 512
+	ACL_READ_DATA           Acl_perm_t = 2
+	ACL_LIST_DIRECTORY      Acl_perm_t = 2
+	ACL_WRITE_DATA          Acl_perm_t = 4
+	ACL_ADD_FILE            Acl_perm_t = 4
+	ACL_EXECUTE             Acl_perm_t = 8
+	ACL_SEARCH              Acl_perm_t = 8
+	ACL_DELETE              Acl_perm_t = 16
+	ACL_APPEND_DATA         Acl_perm_t = 32
+	ACL_ADD_SUBDIRECTORY    Acl_perm_t = 32
+	ACL_DELETE_CHILD        Acl_perm_t = 64
+	ACL_READ_ATTRIBUTES     Acl_perm_t = 128
+	ACL_WRITE_ATTRIBUTES    Acl_perm_t = 256
+	ACL_READ_EXTATTRIBUTES  Acl_perm_t = 512
 	ACL_WRITE_EXTATTRIBUTES Acl_perm_t = 1024
-	ACL_READ_SECURITY Acl_perm_t = 2048
-	ACL_WRITE_SECURITY Acl_perm_t = 4096
-	ACL_CHANGE_OWNER Acl_perm_t = 8192
-	ACL_SYNCHRONIZE Acl_perm_t = 1048576
+	ACL_READ_SECURITY       Acl_perm_t = 2048
+	ACL_WRITE_SECURITY      Acl_perm_t = 4096
+	ACL_CHANGE_OWNER        Acl_perm_t = 8192
+	ACL_SYNCHRONIZE         Acl_perm_t = 1048576
 )
 
 func (e Acl_perm_t) String() string {
@@ -245,9 +245,9 @@ func (e Acl_perm_t) String() string {
 type Acl_tag_t int64
 
 const (
-	ACL_UNDEFINED_TAG Acl_tag_t = 0
+	ACL_UNDEFINED_TAG  Acl_tag_t = 0
 	ACL_EXTENDED_ALLOW Acl_tag_t = 1
-	ACL_EXTENDED_DENY Acl_tag_t = 2
+	ACL_EXTENDED_DENY  Acl_tag_t = 2
 )
 
 func (e Acl_tag_t) String() string {
@@ -267,12 +267,12 @@ type Acl_type_t int64
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
-	ACL_TYPE_ACCESS Acl_type_t = 0
-	ACL_TYPE_DEFAULT Acl_type_t = 1
-	ACL_TYPE_AFS Acl_type_t = 2
-	ACL_TYPE_CODA Acl_type_t = 3
-	ACL_TYPE_NTFS Acl_type_t = 4
-	ACL_TYPE_NWFS Acl_type_t = 5
+	ACL_TYPE_ACCESS   Acl_type_t = 0
+	ACL_TYPE_DEFAULT  Acl_type_t = 1
+	ACL_TYPE_AFS      Acl_type_t = 2
+	ACL_TYPE_CODA     Acl_type_t = 3
+	ACL_TYPE_NTFS     Acl_type_t = 4
+	ACL_TYPE_NWFS     Acl_type_t = 5
 )
 
 func (e Acl_type_t) String() string {
@@ -299,14 +299,14 @@ func (e Acl_type_t) String() string {
 type Clockid_t int64
 
 const (
-	_CLOCK_REALTIME Clockid_t = 0
-	_CLOCK_MONOTONIC Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW Clockid_t = 4
+	_CLOCK_REALTIME             Clockid_t = 0
+	_CLOCK_MONOTONIC            Clockid_t = 6
+	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
 	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID Clockid_t = 16
+	_CLOCK_UPTIME_RAW           Clockid_t = 8
+	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
+	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
+	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
 )
 
 func (e Clockid_t) String() string {
@@ -335,9 +335,9 @@ func (e Clockid_t) String() string {
 type Dispatch_autorelease_frequency_t uint64
 
 const (
-	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT Dispatch_autorelease_frequency_t = 0
+	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT   Dispatch_autorelease_frequency_t = 0
 	DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM Dispatch_autorelease_frequency_t = 1
-	DISPATCH_AUTORELEASE_FREQUENCY_NEVER Dispatch_autorelease_frequency_t = 2
+	DISPATCH_AUTORELEASE_FREQUENCY_NEVER     Dispatch_autorelease_frequency_t = 2
 )
 
 func (e Dispatch_autorelease_frequency_t) String() string {
@@ -356,36 +356,50 @@ func (e Dispatch_autorelease_frequency_t) String() string {
 type Dispatch_block_flags_t uint64
 
 const (
-	DISPATCH_BLOCK_BARRIER Dispatch_block_flags_t = 1
-	DISPATCH_BLOCK_DETACHED Dispatch_block_flags_t = 2
-	DISPATCH_BLOCK_ASSIGN_CURRENT Dispatch_block_flags_t = 4
-	DISPATCH_BLOCK_NO_QOS_CLASS Dispatch_block_flags_t = 8
+	DISPATCH_BLOCK_BARRIER           Dispatch_block_flags_t = 1
+	DISPATCH_BLOCK_DETACHED          Dispatch_block_flags_t = 2
+	DISPATCH_BLOCK_ASSIGN_CURRENT    Dispatch_block_flags_t = 4
+	DISPATCH_BLOCK_NO_QOS_CLASS      Dispatch_block_flags_t = 8
 	DISPATCH_BLOCK_INHERIT_QOS_CLASS Dispatch_block_flags_t = 16
 	DISPATCH_BLOCK_ENFORCE_QOS_CLASS Dispatch_block_flags_t = 32
 )
 
 func (e Dispatch_block_flags_t) String() string {
 	var parts []string
-	if e&DISPATCH_BLOCK_BARRIER != 0 { parts = append(parts, "DISPATCH_BLOCK_BARRIER") }
-	if e&DISPATCH_BLOCK_DETACHED != 0 { parts = append(parts, "DISPATCH_BLOCK_DETACHED") }
-	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 { parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT") }
-	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS") }
-	if len(parts) == 0 { return "0" }
+	if e&DISPATCH_BLOCK_BARRIER != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_BARRIER")
+	}
+	if e&DISPATCH_BLOCK_DETACHED != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_DETACHED")
+	}
+	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT")
+	}
+	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Filesec_property_t int64
 
 const (
-	FILESEC_OWNER Filesec_property_t = 1
-	FILESEC_GROUP Filesec_property_t = 2
-	FILESEC_UUID Filesec_property_t = 3
-	FILESEC_MODE Filesec_property_t = 4
-	FILESEC_ACL Filesec_property_t = 5
-	FILESEC_GRPUUID Filesec_property_t = 6
-	FILESEC_ACL_RAW Filesec_property_t = 100
+	FILESEC_OWNER         Filesec_property_t = 1
+	FILESEC_GROUP         Filesec_property_t = 2
+	FILESEC_UUID          Filesec_property_t = 3
+	FILESEC_MODE          Filesec_property_t = 4
+	FILESEC_ACL           Filesec_property_t = 5
+	FILESEC_GRPUUID       Filesec_property_t = 6
+	FILESEC_ACL_RAW       Filesec_property_t = 100
 	FILESEC_ACL_ALLOCSIZE Filesec_property_t = 101
 )
 
@@ -415,8 +429,8 @@ func (e Filesec_property_t) String() string {
 type Idtype_t int64
 
 const (
-	P_ALL Idtype_t = 0
-	P_PID Idtype_t = 1
+	P_ALL  Idtype_t = 0
+	P_PID  Idtype_t = 1
 	P_PGID Idtype_t = 2
 )
 
@@ -436,62 +450,62 @@ func (e Idtype_t) String() string {
 type Ipc_info_object_type_t int64
 
 const (
-	IPC_OTYPE_NONE Ipc_info_object_type_t = 0
-	IPC_OTYPE_THREAD_CONTROL Ipc_info_object_type_t = 1
-	IPC_OTYPE_TASK_CONTROL Ipc_info_object_type_t = 2
-	IPC_OTYPE_HOST Ipc_info_object_type_t = 3
-	IPC_OTYPE_HOST_PRIV Ipc_info_object_type_t = 4
-	IPC_OTYPE_PROCESSOR Ipc_info_object_type_t = 5
-	IPC_OTYPE_PROCESSOR_SET Ipc_info_object_type_t = 6
-	IPC_OTYPE_PROCESSOR_SET_NAME Ipc_info_object_type_t = 7
-	IPC_OTYPE_TIMER Ipc_info_object_type_t = 8
-	IPC_OTYPE_PORT_SUBST_ONCE Ipc_info_object_type_t = 9
-	IPC_OTYPE_MIG Ipc_info_object_type_t = 10
-	IPC_OTYPE_MEMORY_OBJECT Ipc_info_object_type_t = 11
-	IPC_OTYPE_XMM_PAGER Ipc_info_object_type_t = 12
-	IPC_OTYPE_XMM_KERNEL Ipc_info_object_type_t = 13
-	IPC_OTYPE_XMM_REPLY Ipc_info_object_type_t = 14
-	IPC_OTYPE_UND_REPLY Ipc_info_object_type_t = 15
-	IPC_OTYPE_HOST_NOTIFY Ipc_info_object_type_t = 16
-	IPC_OTYPE_HOST_SECURITY Ipc_info_object_type_t = 17
-	IPC_OTYPE_LEDGER Ipc_info_object_type_t = 18
-	IPC_OTYPE_MAIN_DEVICE Ipc_info_object_type_t = 19
-	IPC_OTYPE_TASK_NAME Ipc_info_object_type_t = 20
-	IPC_OTYPE_SUBSYSTEM Ipc_info_object_type_t = 21
-	IPC_OTYPE_IO_DONE_QUEUE Ipc_info_object_type_t = 22
-	IPC_OTYPE_SEMAPHORE Ipc_info_object_type_t = 23
-	IPC_OTYPE_LOCK_SET Ipc_info_object_type_t = 24
-	IPC_OTYPE_CLOCK Ipc_info_object_type_t = 25
-	IPC_OTYPE_CLOCK_CTRL Ipc_info_object_type_t = 26
-	IPC_OTYPE_IOKIT_IDENT Ipc_info_object_type_t = 27
-	IPC_OTYPE_NAMED_ENTRY Ipc_info_object_type_t = 28
-	IPC_OTYPE_IOKIT_CONNECT Ipc_info_object_type_t = 29
-	IPC_OTYPE_IOKIT_OBJECT Ipc_info_object_type_t = 30
-	IPC_OTYPE_UPL Ipc_info_object_type_t = 31
-	IPC_OTYPE_MEM_OBJ_CONTROL Ipc_info_object_type_t = 32
-	IPC_OTYPE_AU_SESSIONPORT Ipc_info_object_type_t = 33
-	IPC_OTYPE_FILEPORT Ipc_info_object_type_t = 34
-	IPC_OTYPE_LABELH Ipc_info_object_type_t = 35
-	IPC_OTYPE_TASK_RESUME Ipc_info_object_type_t = 36
-	IPC_OTYPE_VOUCHER Ipc_info_object_type_t = 37
+	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
+	IPC_OTYPE_THREAD_CONTROL       Ipc_info_object_type_t = 1
+	IPC_OTYPE_TASK_CONTROL         Ipc_info_object_type_t = 2
+	IPC_OTYPE_HOST                 Ipc_info_object_type_t = 3
+	IPC_OTYPE_HOST_PRIV            Ipc_info_object_type_t = 4
+	IPC_OTYPE_PROCESSOR            Ipc_info_object_type_t = 5
+	IPC_OTYPE_PROCESSOR_SET        Ipc_info_object_type_t = 6
+	IPC_OTYPE_PROCESSOR_SET_NAME   Ipc_info_object_type_t = 7
+	IPC_OTYPE_TIMER                Ipc_info_object_type_t = 8
+	IPC_OTYPE_PORT_SUBST_ONCE      Ipc_info_object_type_t = 9
+	IPC_OTYPE_MIG                  Ipc_info_object_type_t = 10
+	IPC_OTYPE_MEMORY_OBJECT        Ipc_info_object_type_t = 11
+	IPC_OTYPE_XMM_PAGER            Ipc_info_object_type_t = 12
+	IPC_OTYPE_XMM_KERNEL           Ipc_info_object_type_t = 13
+	IPC_OTYPE_XMM_REPLY            Ipc_info_object_type_t = 14
+	IPC_OTYPE_UND_REPLY            Ipc_info_object_type_t = 15
+	IPC_OTYPE_HOST_NOTIFY          Ipc_info_object_type_t = 16
+	IPC_OTYPE_HOST_SECURITY        Ipc_info_object_type_t = 17
+	IPC_OTYPE_LEDGER               Ipc_info_object_type_t = 18
+	IPC_OTYPE_MAIN_DEVICE          Ipc_info_object_type_t = 19
+	IPC_OTYPE_TASK_NAME            Ipc_info_object_type_t = 20
+	IPC_OTYPE_SUBSYSTEM            Ipc_info_object_type_t = 21
+	IPC_OTYPE_IO_DONE_QUEUE        Ipc_info_object_type_t = 22
+	IPC_OTYPE_SEMAPHORE            Ipc_info_object_type_t = 23
+	IPC_OTYPE_LOCK_SET             Ipc_info_object_type_t = 24
+	IPC_OTYPE_CLOCK                Ipc_info_object_type_t = 25
+	IPC_OTYPE_CLOCK_CTRL           Ipc_info_object_type_t = 26
+	IPC_OTYPE_IOKIT_IDENT          Ipc_info_object_type_t = 27
+	IPC_OTYPE_NAMED_ENTRY          Ipc_info_object_type_t = 28
+	IPC_OTYPE_IOKIT_CONNECT        Ipc_info_object_type_t = 29
+	IPC_OTYPE_IOKIT_OBJECT         Ipc_info_object_type_t = 30
+	IPC_OTYPE_UPL                  Ipc_info_object_type_t = 31
+	IPC_OTYPE_MEM_OBJ_CONTROL      Ipc_info_object_type_t = 32
+	IPC_OTYPE_AU_SESSIONPORT       Ipc_info_object_type_t = 33
+	IPC_OTYPE_FILEPORT             Ipc_info_object_type_t = 34
+	IPC_OTYPE_LABELH               Ipc_info_object_type_t = 35
+	IPC_OTYPE_TASK_RESUME          Ipc_info_object_type_t = 36
+	IPC_OTYPE_VOUCHER              Ipc_info_object_type_t = 37
 	IPC_OTYPE_VOUCHER_ATTR_CONTROL Ipc_info_object_type_t = 38
-	IPC_OTYPE_WORK_INTERVAL Ipc_info_object_type_t = 39
-	IPC_OTYPE_UX_HANDLER Ipc_info_object_type_t = 40
-	IPC_OTYPE_UEXT_OBJECT Ipc_info_object_type_t = 41
-	IPC_OTYPE_ARCADE_REG Ipc_info_object_type_t = 42
-	IPC_OTYPE_EVENTLINK Ipc_info_object_type_t = 43
-	IPC_OTYPE_TASK_INSPECT Ipc_info_object_type_t = 44
-	IPC_OTYPE_TASK_READ Ipc_info_object_type_t = 45
-	IPC_OTYPE_THREAD_INSPECT Ipc_info_object_type_t = 46
-	IPC_OTYPE_THREAD_READ Ipc_info_object_type_t = 47
-	IPC_OTYPE_SUID_CRED Ipc_info_object_type_t = 48
-	IPC_OTYPE_HYPERVISOR Ipc_info_object_type_t = 49
-	IPC_OTYPE_TASK_ID_TOKEN Ipc_info_object_type_t = 50
-	IPC_OTYPE_TASK_FATAL Ipc_info_object_type_t = 51
-	IPC_OTYPE_KCDATA Ipc_info_object_type_t = 52
-	IPC_OTYPE_EXCLAVES_RESOURCE Ipc_info_object_type_t = 53
-	IPC_OTYPE_THREAD_RESUME Ipc_info_object_type_t = 54
-	IPC_OTYPE_UNKNOWN Ipc_info_object_type_t = 4294967295
+	IPC_OTYPE_WORK_INTERVAL        Ipc_info_object_type_t = 39
+	IPC_OTYPE_UX_HANDLER           Ipc_info_object_type_t = 40
+	IPC_OTYPE_UEXT_OBJECT          Ipc_info_object_type_t = 41
+	IPC_OTYPE_ARCADE_REG           Ipc_info_object_type_t = 42
+	IPC_OTYPE_EVENTLINK            Ipc_info_object_type_t = 43
+	IPC_OTYPE_TASK_INSPECT         Ipc_info_object_type_t = 44
+	IPC_OTYPE_TASK_READ            Ipc_info_object_type_t = 45
+	IPC_OTYPE_THREAD_INSPECT       Ipc_info_object_type_t = 46
+	IPC_OTYPE_THREAD_READ          Ipc_info_object_type_t = 47
+	IPC_OTYPE_SUID_CRED            Ipc_info_object_type_t = 48
+	IPC_OTYPE_HYPERVISOR           Ipc_info_object_type_t = 49
+	IPC_OTYPE_TASK_ID_TOKEN        Ipc_info_object_type_t = 50
+	IPC_OTYPE_TASK_FATAL           Ipc_info_object_type_t = 51
+	IPC_OTYPE_KCDATA               Ipc_info_object_type_t = 52
+	IPC_OTYPE_EXCLAVES_RESOURCE    Ipc_info_object_type_t = 53
+	IPC_OTYPE_THREAD_RESUME        Ipc_info_object_type_t = 54
+	IPC_OTYPE_UNKNOWN              Ipc_info_object_type_t = 4294967295
 )
 
 func (e Ipc_info_object_type_t) String() string {
@@ -617,15 +631,15 @@ type Launch_data_type_t int64
 
 const (
 	LAUNCH_DATA_DICTIONARY Launch_data_type_t = 1
-	LAUNCH_DATA_ARRAY Launch_data_type_t = 2
-	LAUNCH_DATA_FD Launch_data_type_t = 3
-	LAUNCH_DATA_INTEGER Launch_data_type_t = 4
-	LAUNCH_DATA_REAL Launch_data_type_t = 5
-	LAUNCH_DATA_BOOL Launch_data_type_t = 6
-	LAUNCH_DATA_STRING Launch_data_type_t = 7
-	LAUNCH_DATA_OPAQUE Launch_data_type_t = 8
-	LAUNCH_DATA_ERRNO Launch_data_type_t = 9
-	LAUNCH_DATA_MACHPORT Launch_data_type_t = 10
+	LAUNCH_DATA_ARRAY      Launch_data_type_t = 2
+	LAUNCH_DATA_FD         Launch_data_type_t = 3
+	LAUNCH_DATA_INTEGER    Launch_data_type_t = 4
+	LAUNCH_DATA_REAL       Launch_data_type_t = 5
+	LAUNCH_DATA_BOOL       Launch_data_type_t = 6
+	LAUNCH_DATA_STRING     Launch_data_type_t = 7
+	LAUNCH_DATA_OPAQUE     Launch_data_type_t = 8
+	LAUNCH_DATA_ERRNO      Launch_data_type_t = 9
+	LAUNCH_DATA_MACHPORT   Launch_data_type_t = 10
 )
 
 func (e Launch_data_type_t) String() string {
@@ -663,7 +677,9 @@ const (
 
 func (e Mach_vm_range_flags_t) String() string {
 	var parts []string
-	if len(parts) == 0 { return "0" }
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -671,7 +687,7 @@ type Mach_vm_range_flavor_t int64
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
-	MACH_VM_RANGE_FLAVOR_V1 Mach_vm_range_flavor_t = 1
+	MACH_VM_RANGE_FLAVOR_V1      Mach_vm_range_flavor_t = 1
 )
 
 func (e Mach_vm_range_flavor_t) String() string {
@@ -689,8 +705,8 @@ type Mach_vm_range_tag_t int64
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
-	MACH_VM_RANGE_DATA Mach_vm_range_tag_t = 1
-	MACH_VM_RANGE_FIXED Mach_vm_range_tag_t = 2
+	MACH_VM_RANGE_DATA    Mach_vm_range_tag_t = 1
+	MACH_VM_RANGE_FIXED   Mach_vm_range_tag_t = 2
 )
 
 func (e Mach_vm_range_tag_t) String() string {
@@ -709,26 +725,42 @@ func (e Mach_vm_range_tag_t) String() string {
 type Mpo_flags_t int64
 
 const (
-	MPO_PORT Mpo_flags_t = 0
-	MPO_SERVICE_PORT Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT Mpo_flags_t = 2048
-	MPO_REPLY_PORT Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT Mpo_flags_t = 32768
+	MPO_PORT                            Mpo_flags_t = 0
+	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
+	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
+	MPO_REPLY_PORT                      Mpo_flags_t = 4096
+	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
+	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
+	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
 	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
 )
 
 func (e Mpo_flags_t) String() string {
 	var parts []string
-	if e&MPO_SERVICE_PORT != 0 { parts = append(parts, "MPO_SERVICE_PORT") }
-	if e&MPO_CONNECTION_PORT != 0 { parts = append(parts, "MPO_CONNECTION_PORT") }
-	if e&MPO_REPLY_PORT != 0 { parts = append(parts, "MPO_REPLY_PORT") }
-	if e&MPO_WEAK_REPLY_PORT != 0 { parts = append(parts, "MPO_WEAK_REPLY_PORT") }
-	if e&MPO_NOTIFICATION_PORT != 0 { parts = append(parts, "MPO_NOTIFICATION_PORT") }
-	if e&MPO_EXCEPTION_PORT != 0 { parts = append(parts, "MPO_EXCEPTION_PORT") }
-	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 { parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY") }
-	if len(parts) == 0 { return "0" }
+	if e&MPO_SERVICE_PORT != 0 {
+		parts = append(parts, "MPO_SERVICE_PORT")
+	}
+	if e&MPO_CONNECTION_PORT != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT")
+	}
+	if e&MPO_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_REPLY_PORT")
+	}
+	if e&MPO_WEAK_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_WEAK_REPLY_PORT")
+	}
+	if e&MPO_NOTIFICATION_PORT != 0 {
+		parts = append(parts, "MPO_NOTIFICATION_PORT")
+	}
+	if e&MPO_EXCEPTION_PORT != 0 {
+		parts = append(parts, "MPO_EXCEPTION_PORT")
+	}
+	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -750,27 +782,27 @@ func (e Os_clockid_t) String() string {
 type Ptrauth_key int64
 
 const (
-	Ptrauth_key_none Ptrauth_key = -1
-	Ptrauth_key_asia Ptrauth_key = 0
-	Ptrauth_key_asib Ptrauth_key = 1
-	Ptrauth_key_asda Ptrauth_key = 2
-	Ptrauth_key_asdb Ptrauth_key = 3
+	Ptrauth_key_none                     Ptrauth_key = -1
+	Ptrauth_key_asia                     Ptrauth_key = 0
+	Ptrauth_key_asib                     Ptrauth_key = 1
+	Ptrauth_key_asda                     Ptrauth_key = 2
+	Ptrauth_key_asdb                     Ptrauth_key = 3
 	Ptrauth_key_process_independent_code Ptrauth_key = 0
-	Ptrauth_key_process_dependent_code Ptrauth_key = 1
+	Ptrauth_key_process_dependent_code   Ptrauth_key = 1
 	Ptrauth_key_process_independent_data Ptrauth_key = 2
-	Ptrauth_key_process_dependent_data Ptrauth_key = 3
-	Ptrauth_key_return_address Ptrauth_key = 1
-	Ptrauth_key_frame_pointer Ptrauth_key = 3
-	Ptrauth_key_function_pointer Ptrauth_key = 0
-	Ptrauth_key_block_function Ptrauth_key = 0
-	Ptrauth_key_cxx_vtable_pointer Ptrauth_key = 2
-	Ptrauth_key_method_list_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_isa_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_super_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_sel_pointer Ptrauth_key = 3
-	Ptrauth_key_objc_class_ro_pointer Ptrauth_key = 2
+	Ptrauth_key_process_dependent_data   Ptrauth_key = 3
+	Ptrauth_key_return_address           Ptrauth_key = 1
+	Ptrauth_key_frame_pointer            Ptrauth_key = 3
+	Ptrauth_key_function_pointer         Ptrauth_key = 0
+	Ptrauth_key_block_function           Ptrauth_key = 0
+	Ptrauth_key_cxx_vtable_pointer       Ptrauth_key = 2
+	Ptrauth_key_method_list_pointer      Ptrauth_key = 2
+	Ptrauth_key_objc_isa_pointer         Ptrauth_key = 2
+	Ptrauth_key_objc_super_pointer       Ptrauth_key = 2
+	Ptrauth_key_objc_sel_pointer         Ptrauth_key = 3
+	Ptrauth_key_objc_class_ro_pointer    Ptrauth_key = 2
 	Ptrauth_key_block_descriptor_pointer Ptrauth_key = 2
-	Ptrauth_key_init_fini_pointer Ptrauth_key = 0
+	Ptrauth_key_init_fini_pointer        Ptrauth_key = 0
 )
 
 func (e Ptrauth_key) String() string {
@@ -794,11 +826,11 @@ type Qos_class_t uint32
 
 const (
 	QOS_CLASS_USER_INTERACTIVE Qos_class_t = 33
-	QOS_CLASS_USER_INITIATED Qos_class_t = 25
-	QOS_CLASS_DEFAULT Qos_class_t = 21
-	QOS_CLASS_UTILITY Qos_class_t = 17
-	QOS_CLASS_BACKGROUND Qos_class_t = 9
-	QOS_CLASS_UNSPECIFIED Qos_class_t = 0
+	QOS_CLASS_USER_INITIATED   Qos_class_t = 25
+	QOS_CLASS_DEFAULT          Qos_class_t = 21
+	QOS_CLASS_UTILITY          Qos_class_t = 17
+	QOS_CLASS_BACKGROUND       Qos_class_t = 9
+	QOS_CLASS_UNSPECIFIED      Qos_class_t = 0
 )
 
 func (e Qos_class_t) String() string {
@@ -823,22 +855,22 @@ func (e Qos_class_t) String() string {
 type Virtual_memory_guard_exception_code_t int64
 
 const (
-	KGUARD_EXC_DEALLOC_GAP Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
 )
@@ -889,123 +921,137 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 type Xpc_listener_create_flags_t int64
 
 const (
-	XPC_LISTENER_CREATE_NONE Xpc_listener_create_flags_t = 0
-	XPC_LISTENER_CREATE_INACTIVE Xpc_listener_create_flags_t = 1
-	XPC_LISTENER_CREATE_FORCE_MACH Xpc_listener_create_flags_t = 2
+	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
+	XPC_LISTENER_CREATE_INACTIVE         Xpc_listener_create_flags_t = 1
+	XPC_LISTENER_CREATE_FORCE_MACH       Xpc_listener_create_flags_t = 2
 	XPC_LISTENER_CREATE_FORCE_XPCSERVICE Xpc_listener_create_flags_t = 4
 )
 
 func (e Xpc_listener_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_LISTENER_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE") }
-	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH") }
-	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_LISTENER_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Xpc_session_create_flags_t int64
 
 const (
-	XPC_SESSION_CREATE_NONE Xpc_session_create_flags_t = 0
-	XPC_SESSION_CREATE_INACTIVE Xpc_session_create_flags_t = 1
+	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0
+	XPC_SESSION_CREATE_INACTIVE        Xpc_session_create_flags_t = 1
 	XPC_SESSION_CREATE_MACH_PRIVILEGED Xpc_session_create_flags_t = 2
 )
 
 func (e Xpc_session_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_SESSION_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_SESSION_CREATE_INACTIVE") }
-	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 { parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_SESSION_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_INACTIVE")
+	}
+	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 const (
-	CAccessoryProcess = 1885561953
-	CAccessorySuitcase = 1685288308
-	CAliasFile = 1634494817
-	CAliasList = 1634497396
-	CApplicationFile = 1634758758
+	CAccessoryProcess   = 1885561953
+	CAccessorySuitcase  = 1685288308
+	CAliasFile          = 1634494817
+	CAliasList          = 1634497396
+	CApplicationFile    = 1634758758
 	CApplicationProcess = 1885561200
-	CClippingFile = 1668051046
-	CClippingWindow = 1819766372
-	CContainer = 1668574834
-	CContainerWindow = 1668771428
-	CContentSpace = 1685548644
-	CControlPanelFile = 1667458166
-	CDTPWindow = 1685352567
-	CDeskAccessoryFile = 1684104809
-	CDesktop = 1667527531
-	CDesktopPrinter = 1685285744
-	CDisk = 1667524979
-	CDocumentFile = 1685021542
-	CEntireContents = 1701016691
-	CFolder = 1667657580
-	CFontFile = 1718514790
-	CFontSuitcase = 1718842740
-	CGroup = 1936159344
-	CIconFamily = 1768317293
-	CInfoWindow = 1769434724
-	CLabel = 1668047468
-	COnlineDisk = 1668244595
-	COnlineLocalDisk = 1668047987
-	COnlineRemoteDisk = 1668441203
-	CPackage = 1885430635
-	CPreferences = 1668313702
-	CPreferencesWindow = 1886875236
-	CProcess = 1886544755
-	CSharableContainer = 1935897714
-	CSharingPrivileges = 1886546294
-	CSharingWindow = 1937206884
-	CSound = 1936614432
-	CSoundFile = 1936614502
-	CSpecialFolders = 1936746092
-	CStatusWindow = 1903652452
-	CSuitcase = 1937007475
-	CTrash = 1668575859
-	CUser = 1668641637
+	CClippingFile       = 1668051046
+	CClippingWindow     = 1819766372
+	CContainer          = 1668574834
+	CContainerWindow    = 1668771428
+	CContentSpace       = 1685548644
+	CControlPanelFile   = 1667458166
+	CDTPWindow          = 1685352567
+	CDeskAccessoryFile  = 1684104809
+	CDesktop            = 1667527531
+	CDesktopPrinter     = 1685285744
+	CDisk               = 1667524979
+	CDocumentFile       = 1685021542
+	CEntireContents     = 1701016691
+	CFolder             = 1667657580
+	CFontFile           = 1718514790
+	CFontSuitcase       = 1718842740
+	CGroup              = 1936159344
+	CIconFamily         = 1768317293
+	CInfoWindow         = 1769434724
+	CLabel              = 1668047468
+	COnlineDisk         = 1668244595
+	COnlineLocalDisk    = 1668047987
+	COnlineRemoteDisk   = 1668441203
+	CPackage            = 1885430635
+	CPreferences        = 1668313702
+	CPreferencesWindow  = 1886875236
+	CProcess            = 1886544755
+	CSharableContainer  = 1935897714
+	CSharingPrivileges  = 1886546294
+	CSharingWindow      = 1937206884
+	CSound              = 1936614432
+	CSoundFile          = 1936614502
+	CSpecialFolders     = 1936746092
+	CStatusWindow       = 1903652452
+	CSuitcase           = 1937007475
+	CTrash              = 1668575859
+	CUser               = 1668641637
 )
 
 const (
-	CAliasOrString = 1936072736
-	CClosure = 1668051826
-	CListElement = 1667591277
-	CListOrRecord = 1819418656
-	CListOrString = 1819484192
-	CListRecordOrString = 1819439904
-	CNumber = 1852662386
+	CAliasOrString          = 1936072736
+	CClosure                = 1668051826
+	CListElement            = 1667591277
+	CListOrRecord           = 1819418656
+	CListOrString           = 1819484192
+	CListRecordOrString     = 1819439904
+	CNumber                 = 1852662386
 	CNumberDateTimeOrString = 1852076832
-	CNumberOrDateTime = 1852055584
-	CNumberOrString = 1853038624
-	CRawData = 1919181172
-	CSeconds = 1935896164
-	CStringClass = 1413830740
-	EnumBooleanValues = 1651470198
-	EnumMiscValues = 1835627363
-	FormUserPropertyID = 1970500208
-	KAEFalse = 1717660787
-	KAETrue = 1953658213
-	KASCurrentApplication = 1668641377
-	TypeSound = 1936614432
+	CNumberOrDateTime       = 1852055584
+	CNumberOrString         = 1853038624
+	CRawData                = 1919181172
+	CSeconds                = 1935896164
+	CStringClass            = 1413830740
+	EnumBooleanValues       = 1651470198
+	EnumMiscValues          = 1835627363
+	FormUserPropertyID      = 1970500208
+	KAEFalse                = 1717660787
+	KAETrue                 = 1953658213
+	KASCurrentApplication   = 1668641377
+	TypeSound               = 1936614432
 )
 
 const (
-	CAddress = 1633969266
-	CCoerceKataHiragana = 1954048872
-	CCoerceLowerCase = 1954049135
-	CCoerceOneByteToTwoByte = 1954047352
+	CAddress                  = 1633969266
+	CCoerceKataHiragana       = 1954048872
+	CCoerceLowerCase          = 1954049135
+	CCoerceOneByteToTwoByte   = 1954047352
 	CCoerceRemoveDiacriticals = 1954047075
-	CCoerceRemoveHyphens = 1954048121
-	CCoerceRemovePunctuation = 1954050147
-	CCoerceRemoveWhiteSpace = 1954051955
-	CCoerceSmallKana = 1954050923
-	CCoerceUpperCase = 1954051440
-	CCoerceZenkakuhankaku = 1954052709
-	CCoercion = 1668244835
-	CMachine = 1835098984
-	CRunningAddress = 1918985316
-	CStorage = 1937010546
-	CZone = 2054123109
+	CCoerceRemoveHyphens      = 1954048121
+	CCoerceRemovePunctuation  = 1954050147
+	CCoerceRemoveWhiteSpace   = 1954051955
+	CCoerceSmallKana          = 1954050923
+	CCoerceUpperCase          = 1954051440
+	CCoerceZenkakuhankaku     = 1954052709
+	CCoercion                 = 1668244835
+	CMachine                  = 1835098984
+	CRunningAddress           = 1918985316
+	CStorage                  = 1937010546
+	CZone                     = 2054123109
 )
 
 const (
@@ -1021,32 +1067,32 @@ const (
 )
 
 const (
-	CFriday = 1718774048
-	CMonday = 1836019232
-	CSaturday = 1935766560
-	CSunday = 1937075744
-	CThursday = 1953002784
-	CTuesday = 1953850656
-	CWednesday = 2003133472
-	CWeekday = 2003526777
-	CWritingCodeInfo = 1667855468
+	CFriday              = 1718774048
+	CMonday              = 1836019232
+	CSaturday            = 1935766560
+	CSunday              = 1937075744
+	CThursday            = 1953002784
+	CTuesday             = 1953850656
+	CWednesday           = 2003133472
+	CWeekday             = 2003526777
+	CWritingCodeInfo     = 1667855468
 	KASMagicEndTellEvent = 1952804452
-	KASMagicTellEvent = 1952803948
-	PASDays = 1684109683
-	PASHours = 1752135026
-	PASMinutes = 1835626016
-	PASQuote = 1903521652
-	PASSeconds = 1936024435
-	PASWeeks = 2003133803
-	PLangCode = 1886151524
-	PScriptCode = 1886610276
+	KASMagicTellEvent    = 1952803948
+	PASDays              = 1684109683
+	PASHours             = 1752135026
+	PASMinutes           = 1835626016
+	PASQuote             = 1903521652
+	PASSeconds           = 1936024435
+	PASWeeks             = 2003133803
+	PLangCode            = 1886151524
+	PScriptCode          = 1886610276
 )
 
 const (
-	EnumAliases = 1634494817
+	EnumAliases      = 1634494817
 	EnumAllDocuments = 1634495588
-	EnumFolders = 1718578276
-	EnumStationery = 1937006964
+	EnumFolders      = 1718578276
+	EnumStationery   = 1937006964
 )
 
 const (
@@ -1054,161 +1100,161 @@ const (
 )
 
 const (
-	EnumAfterDate = 1634100340
-	EnumAnyDate = 1634629988
-	EnumBeforeDate = 1650877556
+	EnumAfterDate   = 1634100340
+	EnumAnyDate     = 1634629988
+	EnumBeforeDate  = 1650877556
 	EnumBetweenDate = 1651795060
-	EnumDate = 1701733473
-	EnumLastMonth = 1819111278
-	EnumLastWeek = 1819764075
-	EnumLastYear = 1819895154
-	EnumOnDate = 1869505652
-	EnumThisMonth = 1953329006
-	EnumThisWeek = 1953981803
-	EnumThisYear = 1954112882
-	EnumToday = 1952735609
-	EnumYesterday = 2036621689
+	EnumDate        = 1701733473
+	EnumLastMonth   = 1819111278
+	EnumLastWeek    = 1819764075
+	EnumLastYear    = 1819895154
+	EnumOnDate      = 1869505652
+	EnumThisMonth   = 1953329006
+	EnumThisWeek    = 1953981803
+	EnumThisYear    = 1954112882
+	EnumToday       = 1952735609
+	EnumYesterday   = 2036621689
 )
 
 const (
-	EnumIconSize = 1769171322
+	EnumIconSize      = 1769171322
 	EnumLargeIconSize = 1818716515
-	EnumMiniIconSize = 1835624803
+	EnumMiniIconSize  = 1835624803
 	EnumSmallIconSize = 1936550243
 )
 
 const (
-	EnumFontsPanel = 1718644332
-	EnumGeneralPanel = 1735421548
-	EnumInfoWindowPanel = 1768975980
-	EnumMemoryPanel = 1836084844
-	EnumSharingPanel = 1936748140
+	EnumFontsPanel         = 1718644332
+	EnumGeneralPanel       = 1735421548
+	EnumInfoWindowPanel    = 1768975980
+	EnumMemoryPanel        = 1836084844
+	EnumSharingPanel       = 1936748140
 	EnumStatusNConfigPanel = 1935896172
 )
 
 const (
 	EnumPrefsButtonViewPanel = 1885501040
-	EnumPrefsGeneralPanel = 1885826672
-	EnumPrefsIconViewPanel = 1885959792
-	EnumPrefsLabelPanel = 1886151280
-	EnumPrefsListViewPanel = 1886156400
-	EnumPrefsWindowPanel = 1886415973
+	EnumPrefsGeneralPanel    = 1885826672
+	EnumPrefsIconViewPanel   = 1885959792
+	EnumPrefsLabelPanel      = 1886151280
+	EnumPrefsListViewPanel   = 1886156400
+	EnumPrefsWindowPanel     = 1886415973
 )
 
 const (
-	EnumSortDirection = 1936680050
-	EnumSortDirectionNormal = 1936618093
+	EnumSortDirection        = 1936680050
+	EnumSortDirectionNormal  = 1936618093
 	EnumSortDirectionReverse = 1936881267
 )
 
 const (
-	EnumConflicts = 1667656803
+	EnumConflicts     = 1667656803
 	EnumExistingItems = 1702392681
-	EnumGestalt = 1735615854
-	EnumOlderItems = 1869374578
-	EnumViewBy = 1987535481
+	EnumGestalt       = 1735615854
+	EnumOlderItems    = 1869374578
+	EnumViewBy        = 1987535481
 )
 
 const (
-	EnumAllDisks = 1634495588
-	EnumAllLocalDisks = 1634493547
+	EnumAllDisks       = 1634495588
+	EnumAllLocalDisks  = 1634493547
 	EnumAllOpenFolders = 1634690671
 	EnumAllRemoteDisks = 1634886763
-	EnumWhere = 2003330418
+	EnumWhere          = 2003330418
 )
 
 const (
-	ErrAEValueOutOfRange = -15279
-	ErrFinderAppFolderProtected = -15276
-	ErrFinderBadPackageContents = -15288
-	ErrFinderBoundsWrong = -15278
-	ErrFinderCannotPutAway = -15262
-	ErrFinderCantDeleteImmediately = -15292
-	ErrFinderCantMoveSource = -15266
-	ErrFinderCantMoveToAncestor = -15269
-	ErrFinderCantMoveToDestination = -15265
-	ErrFinderCantOverwrite = -15267
-	ErrFinderCantUseTrashedItems = -15270
-	ErrFinderCorruptOpenFolderList = -15290
-	ErrFinderFileSharingMustBeOn = -15281
-	ErrFinderIncestuousMove = -15268
-	ErrFinderIsBusy = -15260
-	ErrFinderItemAlreadyInDest = -15271
-	ErrFinderLastReserved = -15379
-	ErrFinderLockedItemsInTrash = -15284
-	ErrFinderMustBeActive = -15282
-	ErrFinderNoInvisibleFiles = -15291
-	ErrFinderOnlyLockedItemsInTrash = -15285
-	ErrFinderProgramLinkingMustBeOn = -15286
-	ErrFinderPropertyDoesNotApply = -15280
-	ErrFinderPropertyNowWindowBased = -15275
-	ErrFinderSharePointsCantInherit = -15273
-	ErrFinderSysFolderProtected = -15277
-	ErrFinderUnknownUser = -15272
+	ErrAEValueOutOfRange               = -15279
+	ErrFinderAppFolderProtected        = -15276
+	ErrFinderBadPackageContents        = -15288
+	ErrFinderBoundsWrong               = -15278
+	ErrFinderCannotPutAway             = -15262
+	ErrFinderCantDeleteImmediately     = -15292
+	ErrFinderCantMoveSource            = -15266
+	ErrFinderCantMoveToAncestor        = -15269
+	ErrFinderCantMoveToDestination     = -15265
+	ErrFinderCantOverwrite             = -15267
+	ErrFinderCantUseTrashedItems       = -15270
+	ErrFinderCorruptOpenFolderList     = -15290
+	ErrFinderFileSharingMustBeOn       = -15281
+	ErrFinderIncestuousMove            = -15268
+	ErrFinderIsBusy                    = -15260
+	ErrFinderItemAlreadyInDest         = -15271
+	ErrFinderLastReserved              = -15379
+	ErrFinderLockedItemsInTrash        = -15284
+	ErrFinderMustBeActive              = -15282
+	ErrFinderNoInvisibleFiles          = -15291
+	ErrFinderOnlyLockedItemsInTrash    = -15285
+	ErrFinderProgramLinkingMustBeOn    = -15286
+	ErrFinderPropertyDoesNotApply      = -15280
+	ErrFinderPropertyNowWindowBased    = -15275
+	ErrFinderSharePointsCantInherit    = -15273
+	ErrFinderSysFolderProtected        = -15277
+	ErrFinderUnknownUser               = -15272
 	ErrFinderUnsupportedInsidePackages = -15289
-	ErrFinderVolumeNotFound = -15283
-	ErrFinderWindowMustBeButtonView = -15287
-	ErrFinderWindowMustBeIconView = -15263
-	ErrFinderWindowMustBeListView = -15264
-	ErrFinderWindowNotOpen = -15261
-	ErrFinderWindowWrongType = -15274
+	ErrFinderVolumeNotFound            = -15283
+	ErrFinderWindowMustBeButtonView    = -15287
+	ErrFinderWindowMustBeIconView      = -15263
+	ErrFinderWindowMustBeListView      = -15264
+	ErrFinderWindowNotOpen             = -15261
+	ErrFinderWindowWrongType           = -15274
 )
 
 const (
-	FormAlias = 1634494835
+	FormAlias   = 1634494835
 	FormCreator = 1717793396
 )
 
 const (
 	EnumConsiderations = 1668247155
-	KAECase = 1667330917
-	KAEDiacritic = 1684627811
-	KAEExpansion = 1702391905
-	KAEHyphens = 1752789096
-	KAEKataHiragana = 1751739233
-	KAEPunctuation = 1886744163
-	KAESmallKana = 1936420449
-	KAEWhiteSpace = 2003331444
-	KAEZenkakuHankaku = 2053859435
+	KAECase            = 1667330917
+	KAEDiacritic       = 1684627811
+	KAEExpansion       = 1702391905
+	KAEHyphens         = 1752789096
+	KAEKataHiragana    = 1751739233
+	KAEPunctuation     = 1886744163
+	KAESmallKana       = 1936420449
+	KAEWhiteSpace      = 2003331444
+	KAEZenkakuHankaku  = 2053859435
 	KASConsiderReplies = 1919775845
-	KASNumericStrings = 1853189477
+	KASNumericStrings  = 1853189477
 )
 
 const (
-	EnumConsidsAndIgnores = 1668508007
-	KAECaseConsiderMask = 1
-	KAECaseIgnoreMask = 65536
-	KAEDiacriticConsiderMask = 2
-	KAEDiacriticIgnoreMask = 131072
-	KAEExpansionConsiderMask = 16
-	KAEExpansionIgnoreMask = 1048576
-	KAEHyphensConsiderMask = 8
-	KAEHyphensIgnoreMask = 524288
-	KAEPunctuationConsiderMask = 32
-	KAEPunctuationIgnoreMask = 2097152
-	KAEWhiteSpaceConsiderMask = 4
-	KAEWhiteSpaceIgnoreMask = 262144
+	EnumConsidsAndIgnores          = 1668508007
+	KAECaseConsiderMask            = 1
+	KAECaseIgnoreMask              = 65536
+	KAEDiacriticConsiderMask       = 2
+	KAEDiacriticIgnoreMask         = 131072
+	KAEExpansionConsiderMask       = 16
+	KAEExpansionIgnoreMask         = 1048576
+	KAEHyphensConsiderMask         = 8
+	KAEHyphensIgnoreMask           = 524288
+	KAEPunctuationConsiderMask     = 32
+	KAEPunctuationIgnoreMask       = 2097152
+	KAEWhiteSpaceConsiderMask      = 4
+	KAEWhiteSpaceIgnoreMask        = 262144
 	KASConsiderRepliesConsiderMask = 64
-	KASConsiderRepliesIgnoreMask = 4194304
-	KASNumericStringsConsiderMask = 128
-	KASNumericStringsIgnoreMask = 8388608
+	KASConsiderRepliesIgnoreMask   = 4194304
+	KASNumericStringsConsiderMask  = 128
+	KASNumericStringsIgnoreMask    = 8388608
 )
 
 const (
-	KAECleanUp = 1717791861
-	KAEEject = 1701471092
-	KAEEmpty = 1701671028
-	KAEErase = 1717924449
-	KAEGestalt = 1735619692
-	KAEInterceptOpen = 1718579310
-	KAEPutAway = 1886680953
+	KAECleanUp          = 1717791861
+	KAEEject            = 1701471092
+	KAEEmpty            = 1701671028
+	KAEErase            = 1717924449
+	KAEGestalt          = 1735619692
+	KAEInterceptOpen    = 1718579310
+	KAEPutAway          = 1886680953
 	KAERebuildDesktopDB = 1919181922
-	KAESync = 1718972516
+	KAESync             = 1718972516
 )
 
 const (
 	KAEDatabaseSuite = 1145132097
-	KAESort = 1397707348
+	KAESort          = 1397707348
 )
 
 const (
@@ -1216,59 +1262,59 @@ const (
 )
 
 const (
-	KASAdd = 723525664
-	KASComesAfter = 1667327602
-	KASComesBefore = 1667393138
-	KASConcatenate = 1667457396
-	KASContains = 1668247156
-	KASDivide = 790634528
-	KASEndsWith = 1701733491
-	KASEqual = 1025515552
-	KASGreaterThan = 1042292768
+	KASAdd                = 723525664
+	KASComesAfter         = 1667327602
+	KASComesBefore        = 1667393138
+	KASConcatenate        = 1667457396
+	KASContains           = 1668247156
+	KASDivide             = 790634528
+	KASEndsWith           = 1701733491
+	KASEqual              = 1025515552
+	KASGreaterThan        = 1042292768
 	KASGreaterThanOrEqual = 1044193312
-	KASLessThan = 1008738336
-	KASLessThanOrEqual = 1010638880
-	KASMultiply = 706748448
-	KASNotEqual = -1390403552
-	KASPower = 1579163680
-	KASQuotient = 1684633120
-	KASRemainder = 1836016672
-	KASStartsWith = 1650947956
-	KASSubtract = 757080096
+	KASLessThan           = 1008738336
+	KASLessThanOrEqual    = 1010638880
+	KASMultiply           = 706748448
+	KASNotEqual           = -1390403552
+	KASPower              = 1579163680
+	KASQuotient           = 1684633120
+	KASRemainder          = 1836016672
+	KASStartsWith         = 1650947956
+	KASSubtract           = 757080096
 )
 
 const (
-	KASAnd = 1095648288
+	KASAnd    = 1095648288
 	KASNegate = 1852139296
-	KASNot = 1313821728
-	KASOr = 1330782240
-	KeyASArg = 1634887456
+	KASNot    = 1313821728
+	KASOr     = 1330782240
+	KeyASArg  = 1634887456
 )
 
 const (
-	KASDefaultMaxHeapSize = 33554432
-	KASDefaultMaxStackSize = 16384
-	KASDefaultMinHeapSize = 4096
-	KASDefaultMinStackSize = 4096
-	KASDefaultPreferredHeapSize = 16384
+	KASDefaultMaxHeapSize        = 33554432
+	KASDefaultMaxStackSize       = 16384
+	KASDefaultMinHeapSize        = 4096
+	KASDefaultMinStackSize       = 4096
+	KASDefaultPreferredHeapSize  = 16384
 	KASDefaultPreferredStackSize = 16384
 )
 
 const (
-	KASErrorEventCode = 1701999136
-	KASExcluding = 1768779896
-	KASImporting = 1768779890
-	KASMinimumVersion = 1835626102
-	KASUseEventCode = 1970496800
-	KOSAErrorArgs = 1701999201
-	KeyAEErrorObject = 1701998434
+	KASErrorEventCode     = 1701999136
+	KASExcluding          = 1768779896
+	KASImporting          = 1768779890
+	KASMinimumVersion     = 1835626102
+	KASUseEventCode       = 1970496800
+	KOSAErrorArgs         = 1701999201
+	KeyAEErrorObject      = 1701998434
 	KeyASUserRecordFields = 1970500198
-	PInherits = 1665147742
-	PLength = 1818586727
-	PProperties = 1883327564
-	PRest = 1919251316
-	PReverse = 1920365413
-	TypeUserRecordFields = 1818850164
+	PInherits             = 1665147742
+	PLength               = 1818586727
+	PProperties           = 1883327564
+	PRest                 = 1919251316
+	PReverse              = 1920365413
+	TypeUserRecordFields  = 1818850164
 )
 
 const (
@@ -1277,83 +1323,83 @@ const (
 
 const (
 	KASSelectCopySourceAttributes = 4101
-	KASSelectGetSourceStyleNames = 4100
-	KASSelectGetSourceStyles = 4099
-	KASSelectInit = 4097
-	KASSelectSetSourceAttributes = 4102
-	KASSelectSetSourceStyles = 4098
+	KASSelectGetSourceStyleNames  = 4100
+	KASSelectGetSourceStyles      = 4099
+	KASSelectInit                 = 4097
+	KASSelectSetSourceAttributes  = 4102
+	KASSelectSetSourceStyles      = 4098
 )
 
 const (
-	KASSelectGetAppTerminology = 4362
+	KASSelectGetAppTerminology         = 4362
 	KASSelectGetAppTerminologyObsolete = 4357
-	KASSelectGetHandler = 4361
-	KASSelectGetHandlerNames = 4365
-	KASSelectGetHandlerObsolete = 4356
-	KASSelectGetProperty = 4359
-	KASSelectGetPropertyNames = 4364
-	KASSelectGetPropertyObsolete = 4354
-	KASSelectGetSysTerminology = 4363
-	KASSelectSetHandler = 4360
-	KASSelectSetHandlerObsolete = 4355
-	KASSelectSetProperty = 4358
-	KASSelectSetPropertyObsolete = 4353
+	KASSelectGetHandler                = 4361
+	KASSelectGetHandlerNames           = 4365
+	KASSelectGetHandlerObsolete        = 4356
+	KASSelectGetProperty               = 4359
+	KASSelectGetPropertyNames          = 4364
+	KASSelectGetPropertyObsolete       = 4354
+	KASSelectGetSysTerminology         = 4363
+	KASSelectSetHandler                = 4360
+	KASSelectSetHandlerObsolete        = 4355
+	KASSelectSetProperty               = 4358
+	KASSelectSetPropertyObsolete       = 4353
 )
 
 const (
-	KASNumberOfSourceStyles = 18
-	KASSourceStyleApplicationKeyword = 3
-	KASSourceStyleClass = 10
-	KASSourceStyleComment = 4
-	KASSourceStyleDynamicClass = 15
-	KASSourceStyleDynamicEnumValue = 17
-	KASSourceStyleDynamicEventName = 13
+	KASNumberOfSourceStyles            = 18
+	KASSourceStyleApplicationKeyword   = 3
+	KASSourceStyleClass                = 10
+	KASSourceStyleComment              = 4
+	KASSourceStyleDynamicClass         = 15
+	KASSourceStyleDynamicEnumValue     = 17
+	KASSourceStyleDynamicEventName     = 13
 	KASSourceStyleDynamicParameterName = 14
-	KASSourceStyleDynamicProperty = 16
-	KASSourceStyleEnumValue = 12
-	KASSourceStyleEventName = 8
-	KASSourceStyleLanguageKeyword = 2
-	KASSourceStyleLiteral = 5
-	KASSourceStyleNormalText = 1
-	KASSourceStyleObjectSpecifier = 7
-	KASSourceStyleParameterName = 9
-	KASSourceStyleProperty = 11
-	KASSourceStyleString = 7
-	KASSourceStyleUncompiledText = 0
-	KASSourceStyleUserSymbol = 6
+	KASSourceStyleDynamicProperty      = 16
+	KASSourceStyleEnumValue            = 12
+	KASSourceStyleEventName            = 8
+	KASSourceStyleLanguageKeyword      = 2
+	KASSourceStyleLiteral              = 5
+	KASSourceStyleNormalText           = 1
+	KASSourceStyleObjectSpecifier      = 7
+	KASSourceStyleParameterName        = 9
+	KASSourceStyleProperty             = 11
+	KASSourceStyleString               = 7
+	KASSourceStyleUncompiledText       = 0
+	KASSourceStyleUserSymbol           = 6
 )
 
 const (
-	KASCommentEvent = 1668116084
+	KASCommentEvent  = 1668116084
 	KASStartLogEvent = 1819240241
-	KASStopLogEvent = 1819240240
+	KASStopLogEvent  = 1819240240
 )
 
 const (
-	CClassIdentifier = 1885564019
-	CConstant = 1701737837
-	CDynamicLibrary = 1685679202
-	CEventIdentifier = 1702260340
-	CFramework = 1718775147
-	CHandler = 1751215716
-	CKeyForm = 1801876077
-	CKeyIdentifier = 1803118948
-	CLinkedList = 1819046772
-	CList = 1818850164
-	CMissingValue = 1836281447
-	CObjectBeingExamined = 1702391150
-	CPreposition = 1886545264
-	CProcedure = 1886547811
-	CReal = 1685026146
-	CRecord = 1919247215
-	CReference = 1868720672
-	CScript = 1935896692
-	CScriptingAddition = 1869832568
-	CSmallReal = 1936289383
-	CSymbol = 1937337698
-	CUndefined = 1970168934
-	CUserIdentifier = 1969841184
-	CVector = 1986356084
+	CClassIdentifier      = 1885564019
+	CConstant             = 1701737837
+	CDynamicLibrary       = 1685679202
+	CEventIdentifier      = 1702260340
+	CFramework            = 1718775147
+	CHandler              = 1751215716
+	CKeyForm              = 1801876077
+	CKeyIdentifier        = 1803118948
+	CLinkedList           = 1819046772
+	CList                 = 1818850164
+	CMissingValue         = 1836281447
+	CObjectBeingExamined  = 1702391150
+	CPreposition          = 1886545264
+	CProcedure            = 1886547811
+	CReal                 = 1685026146
+	CRecord               = 1919247215
+	CReference            = 1868720672
+	CScript               = 1935896692
+	CScriptingAddition    = 1869832568
+	CSmallReal            = 1936289383
+	CSymbol               = 1937337698
+	CUndefined            = 1970168934
+	CUserIdentifier       = 1969841184
+	CVector               = 1986356084
 	KDialectBundleResType = 1147298924
 )
 
@@ -1362,21 +1408,21 @@ const (
 )
 
 const (
-	KDigiHubBlankCD = 1650680864
-	KDigiHubBlankDVD = 1650751076
-	KDigiHubMusicCD = 1635083108
+	KDigiHubBlankCD   = 1650680864
+	KDigiHubBlankDVD  = 1650751076
+	KDigiHubMusicCD   = 1635083108
 	KDigiHubPictureCD = 1885954916
-	KDigiHubVideoDVD = 1986295396
+	KDigiHubVideoDVD  = 1986295396
 )
 
 const (
-	KGSSSelectGenericToRealID = 4101
-	KGSSSelectGetDefaultScriptingComponent = 4097
-	KGSSSelectGetScriptingComponent = 4099
+	KGSSSelectGenericToRealID                 = 4101
+	KGSSSelectGetDefaultScriptingComponent    = 4097
+	KGSSSelectGetScriptingComponent           = 4099
 	KGSSSelectGetScriptingComponentFromStored = 4100
-	KGSSSelectOutOfRange = 4103
-	KGSSSelectRealToGenericID = 4102
-	KGSSSelectSetDefaultScriptingComponent = 4098
+	KGSSSelectOutOfRange                      = 4103
+	KGSSSelectRealToGenericID                 = 4102
+	KGSSSelectSetDefaultScriptingComponent    = 4098
 )
 
 const (
@@ -1477,9 +1523,9 @@ const (
 
 const (
 	KOSAModeAlwaysInteract = 48
-	KOSAModeCanInteract = 32
-	KOSAModeDontReconnect = 128
-	KOSAModeNeverInteract = 16
+	KOSAModeCanInteract    = 32
+	KOSAModeDontReconnect  = 128
+	KOSAModeNeverInteract  = 16
 )
 
 const (
@@ -1529,7 +1575,7 @@ const (
 
 const (
 	KOSASelectCoerceFromDesc = 769
-	KOSASelectCoerceToDesc = 770
+	KOSASelectCoerceToDesc   = 770
 )
 
 const (
@@ -1538,63 +1584,63 @@ const (
 
 const (
 	KOSASelectCopySourceString = 514
-	KOSASelectGetSource = 513
+	KOSASelectGetSource        = 513
 )
 
 const (
 	KOSASelectCopyDisplayString = 11
-	KOSASelectDisplay = 4
-	KOSASelectDispose = 6
-	KOSASelectExecute = 3
-	KOSASelectGetActiveProc = 10
-	KOSASelectGetScriptInfo = 8
-	KOSASelectLoad = 1
-	KOSASelectScriptError = 5
-	KOSASelectSetActiveProc = 9
-	KOSASelectSetScriptInfo = 7
-	KOSASelectStore = 2
+	KOSASelectDisplay           = 4
+	KOSASelectDispose           = 6
+	KOSASelectExecute           = 3
+	KOSASelectGetActiveProc     = 10
+	KOSASelectGetScriptInfo     = 8
+	KOSASelectLoad              = 1
+	KOSASelectScriptError       = 5
+	KOSASelectSetActiveProc     = 9
+	KOSASelectSetScriptInfo     = 7
+	KOSASelectStore             = 2
 )
 
 const (
 	KOSASelectCompileExecute = 1538
-	KOSASelectDoScript = 1539
-	KOSASelectLoadExecute = 1537
+	KOSASelectDoScript       = 1539
+	KOSASelectLoadExecute    = 1537
 )
 
 const (
-	KOSASelectCompile = 259
-	KOSASelectCopyID = 260
-	KOSASelectCopyScript = 261
+	KOSASelectCompile                = 259
+	KOSASelectCopyID                 = 260
+	KOSASelectCopyScript             = 261
 	KOSASelectScriptingComponentName = 258
 )
 
 const (
 	KOSASelectAvailableDialectCodeList = 1797
-	KOSASelectAvailableDialects = 1795
-	KOSASelectGetCurrentDialect = 1794
-	KOSASelectGetDialectInfo = 1796
-	KOSASelectSetCurrentDialect = 1793
+	KOSASelectAvailableDialects        = 1795
+	KOSASelectGetCurrentDialect        = 1794
+	KOSASelectGetDialectInfo           = 1796
+	KOSASelectSetCurrentDialect        = 1793
 )
 
 const (
-	KOSASelectDoEvent = 2052
-	KOSASelectExecuteEvent = 2051
+	KOSASelectDoEvent               = 2052
+	KOSASelectExecuteEvent          = 2051
 	KOSASelectGetResumeDispatchProc = 2050
-	KOSASelectMakeContext = 2053
+	KOSASelectMakeContext           = 2053
 	KOSASelectSetResumeDispatchProc = 2049
 )
 
 const (
-	KOSASelectGetCreateProc = 1028
-	KOSASelectGetSendProc = 1026
-	KOSASelectSetCreateProc = 1027
+	KOSASelectGetCreateProc    = 1028
+	KOSASelectGetSendProc      = 1026
+	KOSASelectSetCreateProc    = 1027
 	KOSASelectSetDefaultTarget = 1029
-	KOSASelectSetSendProc = 1025
+	KOSASelectSetSendProc      = 1025
 )
 
 const (
 	KOSASelectStartRecording = 1281
-	KOSASelectStopRecording = 1282
+	KOSASelectStopRecording  = 1282
 )
 
 const (
@@ -1602,14 +1648,14 @@ const (
 )
 
 const (
-	KOSASupportsAECoercion = 8
-	KOSASupportsAESending = 16
-	KOSASupportsCompiling = 2
-	KOSASupportsConvenience = 64
-	KOSASupportsDialects = 128
+	KOSASupportsAECoercion    = 8
+	KOSASupportsAESending     = 16
+	KOSASupportsCompiling     = 2
+	KOSASupportsConvenience   = 64
+	KOSASupportsDialects      = 128
 	KOSASupportsEventHandling = 256
-	KOSASupportsGetSource = 4
-	KOSASupportsRecording = 32
+	KOSASupportsGetSource     = 4
+	KOSASupportsRecording     = 32
 )
 
 const (
@@ -1617,69 +1663,69 @@ const (
 )
 
 const (
-	KASAppleScriptSuite = 1634952050
-	KASComment = 1668116084
-	KASLaunchEvent = 1852796784
+	KASAppleScriptSuite        = 1634952050
+	KASComment                 = 1668116084
+	KASLaunchEvent             = 1852796784
 	KASPrepositionalSubroutine = 1886610034
-	KASScriptEditorSuite = 1416591699
-	KASSubroutineEvent = 1886610034
-	KASTypeNamesSuite = 1953525357
-	KCleanUpAEUT = 1667528052
-	KGetAETE = 1734636645
-	KGetAEUT = 1734636916
-	KUpdateAETE = 1969517669
-	KUpdateAEUT = 1969517940
-	KeyAETarget = 1952543335
-	KeyASPositionalArgs = 1885434471
-	KeyASReturning = 1265792110
-	KeyASSubroutineName = 1936613741
-	KeyScszResource = 1935897466
-	KeySubjectAttr = 1937072746
-	TypeAETE = 1634038885
-	TypeAEUT = 1634039156
-	TypeScszResource = 1935897466
+	KASScriptEditorSuite       = 1416591699
+	KASSubroutineEvent         = 1886610034
+	KASTypeNamesSuite          = 1953525357
+	KCleanUpAEUT               = 1667528052
+	KGetAETE                   = 1734636645
+	KGetAEUT                   = 1734636916
+	KUpdateAETE                = 1969517669
+	KUpdateAEUT                = 1969517940
+	KeyAETarget                = 1952543335
+	KeyASPositionalArgs        = 1885434471
+	KeyASReturning             = 1265792110
+	KeyASSubroutineName        = 1936613741
+	KeyScszResource            = 1935897466
+	KeySubjectAttr             = 1937072746
+	TypeAETE                   = 1634038885
+	TypeAEUT                   = 1634039156
+	TypeScszResource           = 1935897466
 )
 
 const (
-	KeyASPrepositionAgainst = 1634169716
-	KeyASPrepositionAround = 1634889316
+	KeyASPrepositionAgainst   = 1634169716
+	KeyASPrepositionAround    = 1634889316
 	KeyASPrepositionAsideFrom = 1634952294
-	KeyASPrepositionAt = 1635000352
-	KeyASPrepositionBeneath = 1651405928
-	KeyASPrepositionBeside = 1651730788
-	KeyASPrepositionBetween = 1651799918
-	KeyASPrepositionBy = 1652105248
-	KeyASPrepositionFor = 1718579744
-	KeyASPrepositionFrom = 1718775661
-	KeyASPrepositionIn = 1768824864
+	KeyASPrepositionAt        = 1635000352
+	KeyASPrepositionBeneath   = 1651405928
+	KeyASPrepositionBeside    = 1651730788
+	KeyASPrepositionBetween   = 1651799918
+	KeyASPrepositionBy        = 1652105248
+	KeyASPrepositionFor       = 1718579744
+	KeyASPrepositionFrom      = 1718775661
+	KeyASPrepositionIn        = 1768824864
 	KeyASPrepositionInsteadOf = 1769174127
-	KeyASPrepositionInto = 1768846447
-	KeyASPrepositionOn = 1869488160
-	KeyASPrepositionOnto = 1869509743
-	KeyASPrepositionOutOf = 1869968495
-	KeyASPrepositionThrough = 1952999272
-	KeyASPrepositionThru = 1953002101
-	KeyASPrepositionTo = 1953439776
-	KeyASPrepositionUnder = 1970168946
+	KeyASPrepositionInto      = 1768846447
+	KeyASPrepositionOn        = 1869488160
+	KeyASPrepositionOnto      = 1869509743
+	KeyASPrepositionOutOf     = 1869968495
+	KeyASPrepositionThrough   = 1952999272
+	KeyASPrepositionThru      = 1953002101
+	KeyASPrepositionTo        = 1953439776
+	KeyASPrepositionUnder     = 1970168946
 )
 
 const (
 	KeyASPrepositionHas = 1751216928
-	KeyAll = 1803116908
-	KeyOldFinderItems = 1718838636
+	KeyAll              = 1803116908
+	KeyOldFinderItems   = 1718838636
 )
 
 const (
-	KeyASPrepositionAbout = 1633841013
-	KeyASPrepositionAbove = 1633842789
+	KeyASPrepositionAbout     = 1633841013
+	KeyASPrepositionAbove     = 1633842789
 	KeyASPrepositionApartFrom = 1634759284
-	KeyASPrepositionBelow = 1650814071
-	KeyASPrepositionGiven = 1734964846
-	KeyASPrepositionOver = 1870030194
-	KeyASPrepositionSince = 1936614245
-	KeyASPrepositionUntil = 1953066092
-	KeyASPrepositionWith = 2003399784
-	KeyASPrepositionWithout = 2003793268
+	KeyASPrepositionBelow     = 1650814071
+	KeyASPrepositionGiven     = 1734964846
+	KeyASPrepositionOver      = 1870030194
+	KeyASPrepositionSince     = 1936614245
+	KeyASPrepositionUntil     = 1953066092
+	KeyASPrepositionWith      = 2003399784
+	KeyASPrepositionWithout   = 2003793268
 )
 
 const (
@@ -1687,25 +1733,25 @@ const (
 )
 
 const (
-	Key32BitIcon = 1768698674
-	Key4BitIcon = 1768123444
-	Key8BitIcon = 1768123448
-	Key8BitMask = 1815637355
-	KeyAENoAutoRouting = 1919907188
-	KeyAEReplacing = 1634497136
-	KeyAEUsing = 1970497902
-	KeyGlobalPositionList = 1836478567
-	KeyIconAndMask = 1229147683
-	KeyLocalPositionList = 1836478572
-	KeyMini1BitMask = 1768123683
-	KeyMini4BitIcon = 1768123700
-	KeyMini8BitIcon = 1768123704
+	Key32BitIcon              = 1768698674
+	Key4BitIcon               = 1768123444
+	Key8BitIcon               = 1768123448
+	Key8BitMask               = 1815637355
+	KeyAENoAutoRouting        = 1919907188
+	KeyAEReplacing            = 1634497136
+	KeyAEUsing                = 1970497902
+	KeyGlobalPositionList     = 1836478567
+	KeyIconAndMask            = 1229147683
+	KeyLocalPositionList      = 1836478572
+	KeyMini1BitMask           = 1768123683
+	KeyMini4BitIcon           = 1768123700
+	KeyMini8BitIcon           = 1768123704
 	KeyRedirectedDocumentList = 1718641772
-	KeySmall32BitIcon = 1769157426
-	KeySmall4BitIcon = 1768125236
-	KeySmall8BitIcon = 1768125240
-	KeySmall8BitMask = 1933077867
-	KeySmallIconAndMask = 1768125219
+	KeySmall32BitIcon         = 1769157426
+	KeySmall4BitIcon          = 1768125236
+	KeySmall8BitIcon          = 1768125240
+	KeySmall8BitMask          = 1933077867
+	KeySmallIconAndMask       = 1768125219
 )
 
 const (
@@ -1718,61 +1764,61 @@ const (
 
 const (
 	KASInitializeEventCode = 1768843636
-	PASIt = 1769218080
-	PASMe = 1835343904
-	PASParent = 1885434469
-	PASPi = 1885937696
-	PASPrintDepth = 1886545008
-	PASPrintLength = 1886547054
+	PASIt                  = 1769218080
+	PASMe                  = 1835343904
+	PASParent              = 1885434469
+	PASPi                  = 1885937696
+	PASPrintDepth          = 1886545008
+	PASPrintLength         = 1886547054
 	PASRequiredImportItems = 1885957490
-	PASResult = 1920167028
-	PASReturn = 1919251488
-	PASSpace = 1936744803
-	PASTab = 1952539168
-	PASTopLevelScript = 1634952050
+	PASResult              = 1920167028
+	PASReturn              = 1919251488
+	PASSpace               = 1936744803
+	PASTab                 = 1952539168
+	PASTopLevelScript      = 1634952050
 )
 
 const (
-	CApril = 1634759200
-	CAugust = 1635084064
-	CDecember = 1684366112
-	CFebruary = 1717920288
-	CJanuary = 1784770080
-	CJuly = 1786080288
-	CJune = 1786080800
-	CMarch = 1835102752
-	CMay = 1835104544
-	CMonth = 1835955304
-	CNovember = 1852798496
-	COctober = 1868788768
-	CSeptember = 1936027680
+	CApril        = 1634759200
+	CAugust       = 1635084064
+	CDecember     = 1684366112
+	CFebruary     = 1717920288
+	CJanuary      = 1784770080
+	CJuly         = 1786080288
+	CJune         = 1786080800
+	CMarch        = 1835102752
+	CMay          = 1835104544
+	CMonth        = 1835955304
+	CNovember     = 1852798496
+	COctober      = 1868788768
+	CSeptember    = 1936027680
 	PASDateString = 1685288050
-	PASDay = 1684109600
-	PASMonth = 1835955304
-	PASTime = 1953066341
+	PASDay        = 1684109600
+	PASMonth      = 1835955304
+	PASTime       = 1953066341
 	PASTimeString = 1953723506
-	PASWeekday = 2003526777
-	PASYear = 2036687218
+	PASWeekday    = 2003526777
+	PASYear       = 2036687218
 )
 
 const (
-	PAboutMacintosh = 1633837688
-	PAppleMenuItemsFolder = 1634561653
-	PControlPanelsFolder = 1668575852
-	PDesktop = 1684370283
-	PExtensionsFolder = 1702392942
-	PFinderPreferences = 1885762160
-	PFontsFolder = 1718578804
+	PAboutMacintosh        = 1633837688
+	PAppleMenuItemsFolder  = 1634561653
+	PControlPanelsFolder   = 1668575852
+	PDesktop               = 1684370283
+	PExtensionsFolder      = 1702392942
+	PFinderPreferences     = 1885762160
+	PFontsFolder           = 1718578804
 	PFontsFolderPreAllegro = 1717988980
-	PLargestFreeBlock = 1835430501
-	PPreferencesFolder = 1886545254
-	PShortCuts = 1935897972
-	PShutdownFolder = 1936221286
-	PStartingUp = 1635213675
-	PStartupItemsFolder = 1937011316
-	PSystemFolder = 1835098995
-	PTemporaryFolder = 1952804208
-	PViewPreferences = 1886812016
+	PLargestFreeBlock      = 1835430501
+	PPreferencesFolder     = 1886545254
+	PShortCuts             = 1935897972
+	PShutdownFolder        = 1936221286
+	PStartingUp            = 1635213675
+	PStartupItemsFolder    = 1937011316
+	PSystemFolder          = 1835098995
+	PTemporaryFolder       = 1952804208
+	PViewPreferences       = 1886812016
 )
 
 const (
@@ -1780,58 +1826,58 @@ const (
 )
 
 const (
-	PARADialIn = 1634885988
-	PCallBackNumber = 1667395181
-	PCanChangePassword = 1667461239
-	PCanConnect = 1667460974
+	PARADialIn           = 1634885988
+	PCallBackNumber      = 1667395181
+	PCanChangePassword   = 1667461239
+	PCanConnect          = 1667460974
 	PCanDoProgramLinking = 1667850595
-	PIsOwner = 1769172855
-	PShouldCallBack = 1667329122
+	PIsOwner             = 1769172855
+	PShouldCallBack      = 1667329122
 )
 
 const (
-	PCapacity = 1667330145
+	PCapacity  = 1667330145
 	PEjectable = 1769170282
 	PFreeSpace = 1718776688
 	PIsStartup = 1769174116
-	PLocal = 1769173622
+	PLocal     = 1769173622
 )
 
 const (
-	PComment = 1668246900
-	PContainer = 1668574834
-	PContentSpace = 1685548644
-	PCreationDate = 1634952036
-	PCreationDateOld = 1668445284
-	PDescription = 1685283698
-	PDisk = 1667524979
-	PFolder = 1634952306
-	PFolderOld = 1667657580
-	PIconBitmap = 1768516967
-	PInfoWindow = 1769434724
-	PIsSelected = 1769173868
-	PKind = 1802071652
-	PLabelIndex = 1818321513
-	PModificationDate = 1634954607
+	PComment             = 1668246900
+	PContainer           = 1668574834
+	PContentSpace        = 1685548644
+	PCreationDate        = 1634952036
+	PCreationDateOld     = 1668445284
+	PDescription         = 1685283698
+	PDisk                = 1667524979
+	PFolder              = 1634952306
+	PFolderOld           = 1667657580
+	PIconBitmap          = 1768516967
+	PInfoWindow          = 1769434724
+	PIsSelected          = 1769173868
+	PKind                = 1802071652
+	PLabelIndex          = 1818321513
+	PModificationDate    = 1634954607
 	PModificationDateOld = 1836016740
-	PPhysicalSize = 1885895027
-	PPosition = 1886352238
-	PPreferencesWindow = 1886875236
-	PSize = 1886679930
-	PWindow = 1668770158
+	PPhysicalSize        = 1885895027
+	PPosition            = 1886352238
+	PPreferencesWindow   = 1886875236
+	PSize                = 1886679930
+	PWindow              = 1668770158
 )
 
 const (
 	PCompletelyExpanded = 1885698147
-	PContainerWindow = 1668771428
-	PEntireContents = 1701016691
-	PExpandable = 1885698145
-	PExpanded = 1885698160
-	PIconSize = 1819699571
-	PKeepArranged = 1634890343
-	PKeepArrangedBy = 1634886265
-	PPreviousView = 1937139063
-	PView = 1886807415
+	PContainerWindow    = 1668771428
+	PEntireContents     = 1701016691
+	PExpandable         = 1885698145
+	PExpanded           = 1885698160
+	PIconSize           = 1819699571
+	PKeepArranged       = 1634890343
+	PKeepArrangedBy     = 1634886265
+	PPreviousView       = 1937139063
+	PView               = 1886807415
 )
 
 const (
@@ -1839,25 +1885,25 @@ const (
 )
 
 const (
-	PFile = 1718185061
+	PFile                    = 1718185061
 	PHasScriptingTerminology = 1752392562
-	PLocalAndRemoteEvents = 1919252084
-	PPartitionSpaceUsed = 1886745444
+	PLocalAndRemoteEvents    = 1919252084
+	PPartitionSpaceUsed      = 1886745444
 )
 
 const (
-	PFileCreator = 1717793396
-	PFileType = 1634956409
-	PFileTypeOld = 1718187120
-	PIsLocked = 1634954347
-	PIsLockedOld = 1769172075
+	PFileCreator    = 1717793396
+	PFileType       = 1634956409
+	PFileTypeOld    = 1718187120
+	PIsLocked       = 1634954347
+	PIsLockedOld    = 1769172075
 	PProductVersion = 1986359858
 )
 
 const (
-	PFileShareOn = 1718839410
+	PFileShareOn         = 1718839410
 	PFileShareStartingUp = 1718842736
-	PProgramLinkingOn = 1767990048
+	PProgramLinkingOn    = 1767990048
 )
 
 const (
@@ -1869,28 +1915,28 @@ const (
 )
 
 const (
-	PIsCollapsed = 2004052068
-	PIsPopup = 1685223282
+	PIsCollapsed  = 2004052068
+	PIsPopup      = 1685223282
 	PIsPulledOpen = 1886743660
 	PIsZoomedFull = 2054516070
 )
 
 const (
-	PAppPartition = 1634758772
-	PIsScriptable = 1769169250
-	PMinAppPartition = 1836085876
+	PAppPartition          = 1634758772
+	PIsScriptable          = 1769169250
+	PMinAppPartition       = 1836085876
 	PSuggestedAppPartition = 1936749172
 )
 
 const (
-	PByCreationDateArrangement = 1667527777
-	PByKindArrangement = 1802071649
-	PByLabelArrangement = 1818321505
+	PByCreationDateArrangement     = 1667527777
+	PByKindArrangement             = 1802071649
+	PByLabelArrangement            = 1818321505
 	PByModificationDateArrangement = 1835299937
-	PByNameArrangement = 1851878753
-	PBySizeArrangement = 1936292449
-	PNoArrangement = 1851880050
-	PSnapToGridArrangement = 1735550049
+	PByNameArrangement             = 1851878753
+	PBySizeArrangement             = 1936292449
+	PNoArrangement                 = 1851880050
+	PSnapToGridArrangement         = 1735550049
 )
 
 const (
@@ -1903,22 +1949,22 @@ const (
 
 const (
 	PArePrivilegesInherited = 1768977014
-	PExported = 1936029808
-	PGroup = 1936159344
-	PGroupPrivileges = 1735422066
-	PGuestPrivileges = 1735619696
-	PMounted = 1936551797
-	POwner = 1936684910
-	POwnerPrivileges = 1870098034
-	PSharing = 1936220530
-	PSharingProtection = 1936749167
-	PSharingWindow = 1937206884
+	PExported               = 1936029808
+	PGroup                  = 1936159344
+	PGroupPrivileges        = 1735422066
+	PGuestPrivileges        = 1735619696
+	PMounted                = 1936551797
+	POwner                  = 1936684910
+	POwnerPrivileges        = 1870098034
+	PSharing                = 1936220530
+	PSharingProtection      = 1936749167
+	PSharingWindow          = 1937206884
 )
 
 const (
 	PMakeChanges = 1886549623
-	PSeeFiles = 1886549618
-	PSeeFolders = 1886549619
+	PSeeFiles    = 1886549618
+	PSeeFolders  = 1886549619
 )
 
 const (
@@ -1926,49 +1972,49 @@ const (
 )
 
 const (
-	PGridIcons = 1718055524
+	PGridIcons        = 1718055524
 	PListViewIconSize = 1819699571
-	PShowComment = 1935896429
+	PShowComment      = 1935896429
 	PShowCreationDate = 1935893601
-	PShowDate = 1935958388
-	PShowDiskInfo = 1935960430
-	PShowFolderSize = 1936094074
-	PShowKind = 1936420452
-	PShowLabel = 1936482924
-	PShowSize = 1936943482
-	PShowVersion = 1937142387
-	PSortDirection = 1936683620
-	PStaggerIcons = 1718842471
-	PViewFont = 1986424436
-	PViewFontSize = 1986425722
+	PShowDate         = 1935958388
+	PShowDiskInfo     = 1935960430
+	PShowFolderSize   = 1936094074
+	PShowKind         = 1936420452
+	PShowLabel        = 1936482924
+	PShowSize         = 1936943482
+	PShowVersion      = 1937142387
+	PSortDirection    = 1936683620
+	PStaggerIcons     = 1718842471
+	PViewFont         = 1986424436
+	PViewFontSize     = 1986425722
 )
 
 const (
-	PButtonViewArrangement = 1650553458
+	PButtonViewArrangement     = 1650553458
 	PDefaultButtonViewIconSize = 1651078010
-	PDefaultIconViewIconSize = 1768518522
-	PDefaultListViewIconSize = 1818850170
-	PDelayBeforeSpringing = 1684368481
-	PIconViewArrangement = 1767993970
-	PLabel1 = 1818389553
-	PLabel2 = 1818389554
-	PLabel3 = 1818389555
-	PLabel4 = 1818389556
-	PLabel5 = 1818389557
-	PLabel6 = 1818389558
-	PLabel7 = 1818389559
-	PShowModificationDate = 1935958388
-	PSpringOpenFolders = 1936749159
-	PUseRelativeDate = 1970431092
-	PUseShortMenus = 1970498917
-	PUseWideGrid = 1970501479
+	PDefaultIconViewIconSize   = 1768518522
+	PDefaultListViewIconSize   = 1818850170
+	PDelayBeforeSpringing      = 1684368481
+	PIconViewArrangement       = 1767993970
+	PLabel1                    = 1818389553
+	PLabel2                    = 1818389554
+	PLabel3                    = 1818389555
+	PLabel4                    = 1818389556
+	PLabel5                    = 1818389557
+	PLabel6                    = 1818389558
+	PLabel7                    = 1818389559
+	PShowModificationDate      = 1935958388
+	PSpringOpenFolders         = 1936749159
+	PUseRelativeDate           = 1970431092
+	PUseShortMenus             = 1970498917
+	PUseWideGrid               = 1970501479
 )
 
 const (
-	PGrid = 1735551332
+	PGrid        = 1735551332
 	PLargeButton = 1818714741
 	PSmallButton = 1936548469
-	PSmallIcon = 1936550243
+	PSmallIcon   = 1936550243
 )
 
 const (
@@ -1977,7 +2023,7 @@ const (
 
 const (
 	PStartupDisk = 1935962987
-	PTrash = 1953657704
+	PTrash       = 1953657704
 )
 
 const (
@@ -1986,32 +2032,32 @@ const (
 
 const (
 	KAppleScriptSubtype = 1634952050
-	TypeASStorage = 1634952050
-	TypeAppleScript = 1634952050
+	TypeASStorage       = 1634952050
+	TypeAppleScript     = 1634952050
 )
 
 const (
-	Type32BitIcon = 1768698674
-	Type4BitIcon = 1768123444
-	Type8BitIcon = 1768123448
-	Type8BitMask = 1815637355
-	TypeConceptualTime = 1953066339
-	TypeIconAndMask = 1229147683
-	TypeIconFamily = 1768317293
-	TypeRelativeTime = 1920231789
-	TypeSmall32BitIcon = 1769157426
-	TypeSmall4BitIcon = 1768125236
-	TypeSmall8BitIcon = 1768125240
-	TypeSmall8BitMask = 1933077867
+	Type32BitIcon        = 1768698674
+	Type4BitIcon         = 1768123444
+	Type8BitIcon         = 1768123448
+	Type8BitMask         = 1815637355
+	TypeConceptualTime   = 1953066339
+	TypeIconAndMask      = 1229147683
+	TypeIconFamily       = 1768317293
+	TypeRelativeTime     = 1920231789
+	TypeSmall32BitIcon   = 1769157426
+	TypeSmall4BitIcon    = 1768125236
+	TypeSmall8BitIcon    = 1768125240
+	TypeSmall8BitMask    = 1933077867
 	TypeSmallIconAndMask = 1768125219
 )
 
 const (
-	KeyOSADialectCode = 1684238180
-	KeyOSADialectLangCode = 1684824932
-	KeyOSADialectName = 1684955501
+	KeyOSADialectCode       = 1684238180
+	KeyOSADialectLangCode   = 1684824932
+	KeyOSADialectName       = 1684955501
 	KeyOSADialectScriptCode = 1685283684
-	TypeOSADialectInfo = 1684629103
+	TypeOSADialectInfo      = 1684629103
 )
 
 const (
@@ -2021,4 +2067,3 @@ const (
 const (
 	TypeOSAGenericStorage = 1935896692
 )
-

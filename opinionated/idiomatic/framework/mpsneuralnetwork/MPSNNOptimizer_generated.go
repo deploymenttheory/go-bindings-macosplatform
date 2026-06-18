@@ -111,4 +111,3 @@ type NNOptimizerable interface {
 }
 
 var _ NNOptimizerable = (*NNOptimizer)(nil)
-

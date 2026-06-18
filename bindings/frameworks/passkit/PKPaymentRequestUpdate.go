@@ -16,22 +16,22 @@ type PKPaymentRequestUpdate struct {
 }
 
 var (
-	_clsPKPaymentRequestUpdate = _objcClass("PKPaymentRequestUpdate")
-	_pKPaymentRequestUpdateSelInitWithPaymentSummaryItems = objc.RegisterName("initWithPaymentSummaryItems:")
-	_pKPaymentRequestUpdateSelStatus = objc.RegisterName("status")
-	_pKPaymentRequestUpdateSelSetStatus = objc.RegisterName("setStatus:")
-	_pKPaymentRequestUpdateSelPaymentSummaryItems = objc.RegisterName("paymentSummaryItems")
-	_pKPaymentRequestUpdateSelSetPaymentSummaryItems = objc.RegisterName("setPaymentSummaryItems:")
-	_pKPaymentRequestUpdateSelShippingMethods = objc.RegisterName("shippingMethods")
-	_pKPaymentRequestUpdateSelSetShippingMethods = objc.RegisterName("setShippingMethods:")
-	_pKPaymentRequestUpdateSelMultiTokenContexts = objc.RegisterName("multiTokenContexts")
-	_pKPaymentRequestUpdateSelSetMultiTokenContexts = objc.RegisterName("setMultiTokenContexts:")
-	_pKPaymentRequestUpdateSelRecurringPaymentRequest = objc.RegisterName("recurringPaymentRequest")
-	_pKPaymentRequestUpdateSelSetRecurringPaymentRequest = objc.RegisterName("setRecurringPaymentRequest:")
-	_pKPaymentRequestUpdateSelAutomaticReloadPaymentRequest = objc.RegisterName("automaticReloadPaymentRequest")
+	_clsPKPaymentRequestUpdate                                 = _objcClass("PKPaymentRequestUpdate")
+	_pKPaymentRequestUpdateSelInitWithPaymentSummaryItems      = objc.RegisterName("initWithPaymentSummaryItems:")
+	_pKPaymentRequestUpdateSelStatus                           = objc.RegisterName("status")
+	_pKPaymentRequestUpdateSelSetStatus                        = objc.RegisterName("setStatus:")
+	_pKPaymentRequestUpdateSelPaymentSummaryItems              = objc.RegisterName("paymentSummaryItems")
+	_pKPaymentRequestUpdateSelSetPaymentSummaryItems           = objc.RegisterName("setPaymentSummaryItems:")
+	_pKPaymentRequestUpdateSelShippingMethods                  = objc.RegisterName("shippingMethods")
+	_pKPaymentRequestUpdateSelSetShippingMethods               = objc.RegisterName("setShippingMethods:")
+	_pKPaymentRequestUpdateSelMultiTokenContexts               = objc.RegisterName("multiTokenContexts")
+	_pKPaymentRequestUpdateSelSetMultiTokenContexts            = objc.RegisterName("setMultiTokenContexts:")
+	_pKPaymentRequestUpdateSelRecurringPaymentRequest          = objc.RegisterName("recurringPaymentRequest")
+	_pKPaymentRequestUpdateSelSetRecurringPaymentRequest       = objc.RegisterName("setRecurringPaymentRequest:")
+	_pKPaymentRequestUpdateSelAutomaticReloadPaymentRequest    = objc.RegisterName("automaticReloadPaymentRequest")
 	_pKPaymentRequestUpdateSelSetAutomaticReloadPaymentRequest = objc.RegisterName("setAutomaticReloadPaymentRequest:")
-	_pKPaymentRequestUpdateSelDeferredPaymentRequest = objc.RegisterName("deferredPaymentRequest")
-	_pKPaymentRequestUpdateSelSetDeferredPaymentRequest = objc.RegisterName("setDeferredPaymentRequest:")
+	_pKPaymentRequestUpdateSelDeferredPaymentRequest           = objc.RegisterName("deferredPaymentRequest")
+	_pKPaymentRequestUpdateSelSetDeferredPaymentRequest        = objc.RegisterName("setDeferredPaymentRequest:")
 )
 
 func PKPaymentRequestUpdateFromID(id objc.ID) *PKPaymentRequestUpdate {
@@ -46,7 +46,9 @@ func PKPaymentRequestUpdateFromID(id objc.ID) *PKPaymentRequestUpdate {
 
 func (o *PKPaymentRequestUpdate) InitWithPaymentSummaryItems(paymentSummaryItems *foundation.NSArray[*PKPaymentSummaryItem]) *PKPaymentRequestUpdate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestUpdateSelInitWithPaymentSummaryItems, paymentSummaryItems.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKPaymentRequestUpdateFromID(_ret)
 }
 
@@ -61,7 +63,9 @@ func (o *PKPaymentRequestUpdate) SetStatus(status PKPaymentAuthorizationStatus) 
 
 func (o *PKPaymentRequestUpdate) PaymentSummaryItems() *foundation.NSArray[*PKPaymentSummaryItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestUpdateSelPaymentSummaryItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PKPaymentSummaryItem](_ret)
 }
 
@@ -71,7 +75,9 @@ func (o *PKPaymentRequestUpdate) SetPaymentSummaryItems(paymentSummaryItems *fou
 
 func (o *PKPaymentRequestUpdate) ShippingMethods() *foundation.NSArray[*PKShippingMethod] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestUpdateSelShippingMethods)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PKShippingMethod](_ret)
 }
 
@@ -81,7 +87,9 @@ func (o *PKPaymentRequestUpdate) SetShippingMethods(shippingMethods *foundation.
 
 func (o *PKPaymentRequestUpdate) MultiTokenContexts() *foundation.NSArray[*PKPaymentTokenContext] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestUpdateSelMultiTokenContexts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PKPaymentTokenContext](_ret)
 }
 
@@ -91,7 +99,9 @@ func (o *PKPaymentRequestUpdate) SetMultiTokenContexts(multiTokenContexts *found
 
 func (o *PKPaymentRequestUpdate) RecurringPaymentRequest() *PKRecurringPaymentRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestUpdateSelRecurringPaymentRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKRecurringPaymentRequestFromID(_ret)
 }
 
@@ -101,7 +111,9 @@ func (o *PKPaymentRequestUpdate) SetRecurringPaymentRequest(recurringPaymentRequ
 
 func (o *PKPaymentRequestUpdate) AutomaticReloadPaymentRequest() *PKAutomaticReloadPaymentRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestUpdateSelAutomaticReloadPaymentRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKAutomaticReloadPaymentRequestFromID(_ret)
 }
 
@@ -111,11 +123,12 @@ func (o *PKPaymentRequestUpdate) SetAutomaticReloadPaymentRequest(automaticReloa
 
 func (o *PKPaymentRequestUpdate) DeferredPaymentRequest() *PKDeferredPaymentRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestUpdateSelDeferredPaymentRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKDeferredPaymentRequestFromID(_ret)
 }
 
 func (o *PKPaymentRequestUpdate) SetDeferredPaymentRequest(deferredPaymentRequest *PKDeferredPaymentRequest) {
 	o.Ptr().Send(_pKPaymentRequestUpdateSelSetDeferredPaymentRequest, deferredPaymentRequest.Ptr())
 }
-

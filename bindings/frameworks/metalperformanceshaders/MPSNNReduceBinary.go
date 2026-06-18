@@ -18,15 +18,15 @@ type MPSNNReduceBinary struct {
 }
 
 var (
-	_clsMPSNNReduceBinary = _objcClass("MPSNNReduceBinary")
-	_mPSNNReduceBinarySelPrimarySourceClipRect = objc.RegisterName("primarySourceClipRect")
-	_mPSNNReduceBinarySelSetPrimarySourceClipRect = objc.RegisterName("setPrimarySourceClipRect:")
-	_mPSNNReduceBinarySelSecondarySourceClipRect = objc.RegisterName("secondarySourceClipRect")
+	_clsMPSNNReduceBinary                           = _objcClass("MPSNNReduceBinary")
+	_mPSNNReduceBinarySelPrimarySourceClipRect      = objc.RegisterName("primarySourceClipRect")
+	_mPSNNReduceBinarySelSetPrimarySourceClipRect   = objc.RegisterName("setPrimarySourceClipRect:")
+	_mPSNNReduceBinarySelSecondarySourceClipRect    = objc.RegisterName("secondarySourceClipRect")
 	_mPSNNReduceBinarySelSetSecondarySourceClipRect = objc.RegisterName("setSecondarySourceClipRect:")
-	_mPSNNReduceBinarySelPrimaryOffset = objc.RegisterName("primaryOffset")
-	_mPSNNReduceBinarySelSetPrimaryOffset = objc.RegisterName("setPrimaryOffset:")
-	_mPSNNReduceBinarySelSecondaryOffset = objc.RegisterName("secondaryOffset")
-	_mPSNNReduceBinarySelSetSecondaryOffset = objc.RegisterName("setSecondaryOffset:")
+	_mPSNNReduceBinarySelPrimaryOffset              = objc.RegisterName("primaryOffset")
+	_mPSNNReduceBinarySelSetPrimaryOffset           = objc.RegisterName("setPrimaryOffset:")
+	_mPSNNReduceBinarySelSecondaryOffset            = objc.RegisterName("secondaryOffset")
+	_mPSNNReduceBinarySelSetSecondaryOffset         = objc.RegisterName("setSecondaryOffset:")
 )
 
 func MPSNNReduceBinaryFromID(id objc.ID) *MPSNNReduceBinary {
@@ -80,4 +80,3 @@ func (o *MPSNNReduceBinary) SecondaryOffset() mpscore.MPSOffset {
 func (o *MPSNNReduceBinary) SetSecondaryOffset(secondaryOffset mpscore.MPSOffset) {
 	o.Ptr().Send(_mPSNNReduceBinarySelSetSecondaryOffset, secondaryOffset)
 }
-

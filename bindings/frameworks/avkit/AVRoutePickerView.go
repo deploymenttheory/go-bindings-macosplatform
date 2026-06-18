@@ -17,15 +17,15 @@ type AVRoutePickerView struct {
 }
 
 var (
-	_clsAVRoutePickerView = _objcClass("AVRoutePickerView")
-	_aVRoutePickerViewSelRoutePickerButtonColorForState = objc.RegisterName("routePickerButtonColorForState:")
+	_clsAVRoutePickerView                                  = _objcClass("AVRoutePickerView")
+	_aVRoutePickerViewSelRoutePickerButtonColorForState    = objc.RegisterName("routePickerButtonColorForState:")
 	_aVRoutePickerViewSelSetRoutePickerButtonColorForState = objc.RegisterName("setRoutePickerButtonColor:forState:")
-	_aVRoutePickerViewSelDelegate = objc.RegisterName("delegate")
-	_aVRoutePickerViewSelSetDelegate = objc.RegisterName("setDelegate:")
-	_aVRoutePickerViewSelPlayer = objc.RegisterName("player")
-	_aVRoutePickerViewSelSetPlayer = objc.RegisterName("setPlayer:")
-	_aVRoutePickerViewSelIsRoutePickerButtonBordered = objc.RegisterName("isRoutePickerButtonBordered")
-	_aVRoutePickerViewSelSetRoutePickerButtonBordered = objc.RegisterName("setRoutePickerButtonBordered:")
+	_aVRoutePickerViewSelDelegate                          = objc.RegisterName("delegate")
+	_aVRoutePickerViewSelSetDelegate                       = objc.RegisterName("setDelegate:")
+	_aVRoutePickerViewSelPlayer                            = objc.RegisterName("player")
+	_aVRoutePickerViewSelSetPlayer                         = objc.RegisterName("setPlayer:")
+	_aVRoutePickerViewSelIsRoutePickerButtonBordered       = objc.RegisterName("isRoutePickerButtonBordered")
+	_aVRoutePickerViewSelSetRoutePickerButtonBordered      = objc.RegisterName("setRoutePickerButtonBordered:")
 )
 
 func AVRoutePickerViewFromID(id objc.ID) *AVRoutePickerView {
@@ -41,7 +41,9 @@ func AVRoutePickerViewFromID(id objc.ID) *AVRoutePickerView {
 // @method		routePickerButtonColorForState: @param			state The state for which to get the picker button color. @abstract		Returns the color of the picker button for a given state.
 func (o *AVRoutePickerView) RoutePickerButtonColorForState(state AVRoutePickerViewButtonState) *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVRoutePickerViewSelRoutePickerButtonColorForState, state)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -63,7 +65,9 @@ func (o *AVRoutePickerView) SetDelegate(delegate AVRoutePickerViewDelegate) {
 // @property 		player @abstract		The player for which to perform routing operations.
 func (o *AVRoutePickerView) Player() *avfoundation.AVPlayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVRoutePickerViewSelPlayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return avfoundation.AVPlayerFromID(_ret)
 }
 
@@ -80,4 +84,3 @@ func (o *AVRoutePickerView) IsRoutePickerButtonBordered() bool {
 func (o *AVRoutePickerView) SetRoutePickerButtonBordered(routePickerButtonBordered bool) {
 	o.Ptr().Send(_aVRoutePickerViewSelSetRoutePickerButtonBordered, routePickerButtonBordered)
 }
-

@@ -15,7 +15,7 @@ type CBMutableDescriptor struct {
 }
 
 var (
-	_clsCBMutableDescriptor = _objcClass("CBMutableDescriptor")
+	_clsCBMutableDescriptor                  = _objcClass("CBMutableDescriptor")
 	_cBMutableDescriptorSelInitWithTypeValue = objc.RegisterName("initWithType:value:")
 )
 
@@ -32,7 +32,8 @@ func CBMutableDescriptorFromID(id objc.ID) *CBMutableDescriptor {
 // @method initWithType:value: @param UUID		The Bluetooth UUID of the descriptor. @param value	The value of the descriptor. @discussion 	Returns a decriptor, initialized with a service type and value. The <i>value</i> is required and cannot be updated dynamically once the parent service has been published.
 func (o *CBMutableDescriptor) InitWithTypeValue(uUID *CBUUID, value objc.ID) *CBMutableDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBMutableDescriptorSelInitWithTypeValue, uUID.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CBMutableDescriptorFromID(_ret)
 }
-

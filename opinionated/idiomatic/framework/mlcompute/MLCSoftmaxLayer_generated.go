@@ -70,4 +70,3 @@ type SoftmaxLayerable interface {
 }
 
 var _ SoftmaxLayerable = (*SoftmaxLayer)(nil)
-

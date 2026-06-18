@@ -93,4 +93,3 @@ type Appearanceable interface {
 }
 
 var _ Appearanceable = (*Appearance)(nil)
-

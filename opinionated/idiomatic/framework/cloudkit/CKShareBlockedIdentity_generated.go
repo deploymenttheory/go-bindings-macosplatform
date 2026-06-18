@@ -57,4 +57,3 @@ type ShareBlockedIdentityable interface {
 }
 
 var _ ShareBlockedIdentityable = (*ShareBlockedIdentity)(nil)
-

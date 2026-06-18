@@ -45,7 +45,9 @@ func (x *WKWebsiteDataStore) WithProxyConfigurations(items ...*foundation.NSObje
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSObject](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -131,4 +133,3 @@ type WKWebsiteDataStoreable interface {
 }
 
 var _ WKWebsiteDataStoreable = (*WKWebsiteDataStore)(nil)
-

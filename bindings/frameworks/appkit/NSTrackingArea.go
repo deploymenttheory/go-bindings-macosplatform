@@ -17,12 +17,12 @@ type NSTrackingArea struct {
 }
 
 var (
-	_clsNSTrackingArea = _objcClass("NSTrackingArea")
+	_clsNSTrackingArea                                 = _objcClass("NSTrackingArea")
 	_nSTrackingAreaSelInitWithRectOptionsOwnerUserInfo = objc.RegisterName("initWithRect:options:owner:userInfo:")
-	_nSTrackingAreaSelRect = objc.RegisterName("rect")
-	_nSTrackingAreaSelOptions = objc.RegisterName("options")
-	_nSTrackingAreaSelOwner = objc.RegisterName("owner")
-	_nSTrackingAreaSelUserInfo = objc.RegisterName("userInfo")
+	_nSTrackingAreaSelRect                             = objc.RegisterName("rect")
+	_nSTrackingAreaSelOptions                          = objc.RegisterName("options")
+	_nSTrackingAreaSelOwner                            = objc.RegisterName("owner")
+	_nSTrackingAreaSelUserInfo                         = objc.RegisterName("userInfo")
 )
 
 func NSTrackingAreaFromID(id objc.ID) *NSTrackingArea {
@@ -37,7 +37,9 @@ func NSTrackingAreaFromID(id objc.ID) *NSTrackingArea {
 
 func (o *NSTrackingArea) InitWithRectOptionsOwnerUserInfo(rect corefoundation.CGRect, options NSTrackingAreaOptions, owner objc.ID, userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *NSTrackingArea {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTrackingAreaSelInitWithRectOptionsOwnerUserInfo, rect, options, owner, userInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTrackingAreaFromID(_ret)
 }
 
@@ -60,4 +62,3 @@ func (o *NSTrackingArea) UserInfo() *foundation.NSDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _nSTrackingAreaSelUserInfo)
 	return _ret
 }
-

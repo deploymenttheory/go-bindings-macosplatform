@@ -1092,4 +1092,3 @@ func KMDQueryUpdateRemovedItems() uintptr {
 	ptr, _ := purego.Dlsym(_metadataLib, "kMDQueryUpdateRemovedItems")
 	return ptr
 }
-

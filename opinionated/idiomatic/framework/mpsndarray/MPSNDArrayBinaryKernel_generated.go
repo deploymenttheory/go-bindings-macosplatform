@@ -116,9 +116,13 @@ func (x *ArrayBinaryKernel) SecondaryDilationRates() raw.MPSNDArraySizes {
 
 func (x *ArrayBinaryKernel) asArrayBinaryKernel() *raw.MPSNDArrayBinaryKernel { return x.inner }
 
-func (x *ArrayBinaryKernel) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel { return &x.inner.MPSNDArrayMultiaryKernel }
+func (x *ArrayBinaryKernel) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel {
+	return &x.inner.MPSNDArrayMultiaryKernel
+}
 
-func (x *ArrayBinaryKernel) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
+func (x *ArrayBinaryKernel) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase {
+	return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase
+}
 
 // ArrayBinaryKernelable is the interface implemented by [ArrayBinaryKernel], for mocking and DI.
 type ArrayBinaryKernelable interface {
@@ -141,4 +145,3 @@ type ArrayBinaryKernelable interface {
 }
 
 var _ ArrayBinaryKernelable = (*ArrayBinaryKernel)(nil)
-

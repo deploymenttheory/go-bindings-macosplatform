@@ -121,4 +121,3 @@ type CNNUpsamplingable interface {
 }
 
 var _ CNNUpsamplingable = (*CNNUpsampling)(nil)
-

@@ -46,4 +46,3 @@ type SourceQueryable interface {
 }
 
 var _ SourceQueryable = (*SourceQuery)(nil)
-

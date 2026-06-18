@@ -16,14 +16,14 @@ type SCNPhysicsContact struct {
 }
 
 var (
-	_clsSCNPhysicsContact = _objcClass("SCNPhysicsContact")
-	_sCNPhysicsContactSelNodeA = objc.RegisterName("nodeA")
-	_sCNPhysicsContactSelNodeB = objc.RegisterName("nodeB")
-	_sCNPhysicsContactSelContactPoint = objc.RegisterName("contactPoint")
-	_sCNPhysicsContactSelContactNormal = objc.RegisterName("contactNormal")
-	_sCNPhysicsContactSelCollisionImpulse = objc.RegisterName("collisionImpulse")
+	_clsSCNPhysicsContact                    = _objcClass("SCNPhysicsContact")
+	_sCNPhysicsContactSelNodeA               = objc.RegisterName("nodeA")
+	_sCNPhysicsContactSelNodeB               = objc.RegisterName("nodeB")
+	_sCNPhysicsContactSelContactPoint        = objc.RegisterName("contactPoint")
+	_sCNPhysicsContactSelContactNormal       = objc.RegisterName("contactNormal")
+	_sCNPhysicsContactSelCollisionImpulse    = objc.RegisterName("collisionImpulse")
 	_sCNPhysicsContactSelPenetrationDistance = objc.RegisterName("penetrationDistance")
-	_sCNPhysicsContactSelSweepTestFraction = objc.RegisterName("sweepTestFraction")
+	_sCNPhysicsContactSelSweepTestFraction   = objc.RegisterName("sweepTestFraction")
 )
 
 func SCNPhysicsContactFromID(id objc.ID) *SCNPhysicsContact {
@@ -38,13 +38,17 @@ func SCNPhysicsContactFromID(id objc.ID) *SCNPhysicsContact {
 
 func (o *SCNPhysicsContact) NodeA() *SCNNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNPhysicsContactSelNodeA)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNNodeFromID(_ret)
 }
 
 func (o *SCNPhysicsContact) NodeB() *SCNNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNPhysicsContactSelNodeB)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNNodeFromID(_ret)
 }
 
@@ -72,4 +76,3 @@ func (o *SCNPhysicsContact) SweepTestFraction() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _sCNPhysicsContactSelSweepTestFraction)
 	return _ret
 }
-

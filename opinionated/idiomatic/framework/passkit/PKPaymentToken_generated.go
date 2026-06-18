@@ -89,4 +89,3 @@ type PaymentTokenable interface {
 }
 
 var _ PaymentTokenable = (*PaymentToken)(nil)
-

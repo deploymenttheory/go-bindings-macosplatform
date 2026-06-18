@@ -16,12 +16,12 @@ type MTRServiceAreaClusterProgressStruct struct {
 }
 
 var (
-	_clsMTRServiceAreaClusterProgressStruct = _objcClass("MTRServiceAreaClusterProgressStruct")
-	_mTRServiceAreaClusterProgressStructSelAreaID = objc.RegisterName("areaID")
-	_mTRServiceAreaClusterProgressStructSelSetAreaID = objc.RegisterName("setAreaID:")
-	_mTRServiceAreaClusterProgressStructSelStatus = objc.RegisterName("status")
-	_mTRServiceAreaClusterProgressStructSelSetStatus = objc.RegisterName("setStatus:")
-	_mTRServiceAreaClusterProgressStructSelTotalOperationalTime = objc.RegisterName("totalOperationalTime")
+	_clsMTRServiceAreaClusterProgressStruct                        = _objcClass("MTRServiceAreaClusterProgressStruct")
+	_mTRServiceAreaClusterProgressStructSelAreaID                  = objc.RegisterName("areaID")
+	_mTRServiceAreaClusterProgressStructSelSetAreaID               = objc.RegisterName("setAreaID:")
+	_mTRServiceAreaClusterProgressStructSelStatus                  = objc.RegisterName("status")
+	_mTRServiceAreaClusterProgressStructSelSetStatus               = objc.RegisterName("setStatus:")
+	_mTRServiceAreaClusterProgressStructSelTotalOperationalTime    = objc.RegisterName("totalOperationalTime")
 	_mTRServiceAreaClusterProgressStructSelSetTotalOperationalTime = objc.RegisterName("setTotalOperationalTime:")
 )
 
@@ -37,7 +37,9 @@ func MTRServiceAreaClusterProgressStructFromID(id objc.ID) *MTRServiceAreaCluste
 
 func (o *MTRServiceAreaClusterProgressStruct) AreaID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRServiceAreaClusterProgressStructSelAreaID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTRServiceAreaClusterProgressStruct) SetAreaID(areaID *foundation.NSNum
 
 func (o *MTRServiceAreaClusterProgressStruct) Status() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRServiceAreaClusterProgressStructSelStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *MTRServiceAreaClusterProgressStruct) SetStatus(status *foundation.NSNum
 
 func (o *MTRServiceAreaClusterProgressStruct) TotalOperationalTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRServiceAreaClusterProgressStructSelTotalOperationalTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRServiceAreaClusterProgressStruct) SetTotalOperationalTime(totalOperationalTime *foundation.NSNumber) {
 	o.Ptr().Send(_mTRServiceAreaClusterProgressStructSelSetTotalOperationalTime, totalOperationalTime.Ptr())
 }
-

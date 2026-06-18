@@ -18,23 +18,23 @@ type MTRClusterActivatedCarbonFilterMonitoring struct {
 }
 
 var (
-	_clsMTRClusterActivatedCarbonFilterMonitoring = _objcClass("MTRClusterActivatedCarbonFilterMonitoring")
+	_clsMTRClusterActivatedCarbonFilterMonitoring                                                                      = _objcClass("MTRClusterActivatedCarbonFilterMonitoring")
 	_mTRClusterActivatedCarbonFilterMonitoringSelResetConditionWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("resetConditionWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterActivatedCarbonFilterMonitoringSelResetConditionWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("resetConditionWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeConditionWithParams = objc.RegisterName("readAttributeConditionWithParams:")
-	_mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeDegradationDirectionWithParams = objc.RegisterName("readAttributeDegradationDirectionWithParams:")
-	_mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeChangeIndicationWithParams = objc.RegisterName("readAttributeChangeIndicationWithParams:")
-	_mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeInPlaceIndicatorWithParams = objc.RegisterName("readAttributeInPlaceIndicatorWithParams:")
-	_mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeLastChangedTimeWithParams = objc.RegisterName("readAttributeLastChangedTimeWithParams:")
-	_mTRClusterActivatedCarbonFilterMonitoringSelWriteAttributeLastChangedTimeWithValueExpectedValueInterval = objc.RegisterName("writeAttributeLastChangedTimeWithValue:expectedValueInterval:")
-	_mTRClusterActivatedCarbonFilterMonitoringSelWriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeLastChangedTimeWithValue:expectedValueInterval:params:")
-	_mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeReplacementProductListWithParams = objc.RegisterName("readAttributeReplacementProductListWithParams:")
-	_mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterActivatedCarbonFilterMonitoringSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterActivatedCarbonFilterMonitoringSelResetConditionWithExpectedValuesExpectedValueIntervalCompletion       = objc.RegisterName("resetConditionWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeConditionWithParams                                      = objc.RegisterName("readAttributeConditionWithParams:")
+	_mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeDegradationDirectionWithParams                           = objc.RegisterName("readAttributeDegradationDirectionWithParams:")
+	_mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeChangeIndicationWithParams                               = objc.RegisterName("readAttributeChangeIndicationWithParams:")
+	_mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeInPlaceIndicatorWithParams                               = objc.RegisterName("readAttributeInPlaceIndicatorWithParams:")
+	_mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeLastChangedTimeWithParams                                = objc.RegisterName("readAttributeLastChangedTimeWithParams:")
+	_mTRClusterActivatedCarbonFilterMonitoringSelWriteAttributeLastChangedTimeWithValueExpectedValueInterval           = objc.RegisterName("writeAttributeLastChangedTimeWithValue:expectedValueInterval:")
+	_mTRClusterActivatedCarbonFilterMonitoringSelWriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams     = objc.RegisterName("writeAttributeLastChangedTimeWithValue:expectedValueInterval:params:")
+	_mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeReplacementProductListWithParams                         = objc.RegisterName("readAttributeReplacementProductListWithParams:")
+	_mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeGeneratedCommandListWithParams                           = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeAcceptedCommandListWithParams                            = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeAttributeListWithParams                                  = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeFeatureMapWithParams                                     = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeClusterRevisionWithParams                                = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterActivatedCarbonFilterMonitoringSelInitWithDeviceEndpointIDQueue                                         = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterActivatedCarbonFilterMonitoringFromID(id objc.ID) *MTRClusterActivatedCarbonFilterMonitoring {
@@ -135,7 +135,8 @@ func (o *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeClusterRevision
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterActivatedCarbonFilterMonitoring) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterActivatedCarbonFilterMonitoring {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterActivatedCarbonFilterMonitoringSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterActivatedCarbonFilterMonitoringFromID(_ret)
 }
-

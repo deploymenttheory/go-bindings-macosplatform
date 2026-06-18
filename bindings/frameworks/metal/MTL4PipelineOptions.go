@@ -16,10 +16,10 @@ type MTL4PipelineOptions struct {
 }
 
 var (
-	_clsMTL4PipelineOptions = _objcClass("MTL4PipelineOptions")
-	_mTL4PipelineOptionsSelShaderValidation = objc.RegisterName("shaderValidation")
+	_clsMTL4PipelineOptions                    = _objcClass("MTL4PipelineOptions")
+	_mTL4PipelineOptionsSelShaderValidation    = objc.RegisterName("shaderValidation")
 	_mTL4PipelineOptionsSelSetShaderValidation = objc.RegisterName("setShaderValidation:")
-	_mTL4PipelineOptionsSelShaderReflection = objc.RegisterName("shaderReflection")
+	_mTL4PipelineOptionsSelShaderReflection    = objc.RegisterName("shaderReflection")
 	_mTL4PipelineOptionsSelSetShaderReflection = objc.RegisterName("setShaderReflection:")
 )
 
@@ -52,4 +52,3 @@ func (o *MTL4PipelineOptions) ShaderReflection() MTL4ShaderReflection {
 func (o *MTL4PipelineOptions) SetShaderReflection(shaderReflection MTL4ShaderReflection) {
 	o.Ptr().Send(_mTL4PipelineOptionsSelSetShaderReflection, shaderReflection)
 }
-

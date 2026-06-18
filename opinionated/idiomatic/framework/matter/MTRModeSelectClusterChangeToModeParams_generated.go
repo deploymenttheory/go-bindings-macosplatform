@@ -16,7 +16,9 @@ type MTRModeSelectClusterChangeToModeParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRModeSelectClusterChangeToModeParams].
-func (x *MTRModeSelectClusterChangeToModeParams) Unwrap() *raw.MTRModeSelectClusterChangeToModeParams { return x.inner }
+func (x *MTRModeSelectClusterChangeToModeParams) Unwrap() *raw.MTRModeSelectClusterChangeToModeParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -99,4 +101,3 @@ type MTRModeSelectClusterChangeToModeParamsable interface {
 }
 
 var _ MTRModeSelectClusterChangeToModeParamsable = (*MTRModeSelectClusterChangeToModeParams)(nil)
-

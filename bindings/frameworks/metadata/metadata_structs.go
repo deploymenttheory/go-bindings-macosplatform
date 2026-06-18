@@ -5,12 +5,12 @@ package metadata
 
 // @typedef MDQueryBatchingParams Structure containing the progress notification batching parameters of an MDQuery. The first notification can be triggered by the either first_max_num or first_max_ms limit being exceeded. Subsequent notifications are triggered by either the progress_max_num or progress_max_ms limit. The default batching parameters are undefined and subject to change. @field first_max_num The maximum number of results that can accumulate before a progress notification is sent out by the MDQuery, for the first notification. @field first_max_ms The maximum number of milliseconds that can pass before a progress notification is sent out. This value is advisory, in that the notification will be triggered "at some point after first_max_ms milliseconds have passed since the query began accumulating results", but generally not very long after, for the first progress notification. @field progress_max_num The maximum number of results that can accumulate before a progress notification is sent out by the MDQuery, for notifications after the first, during the initial gathering phase of the query. @field progress_max_ms The maximum number of milliseconds that can pass before a progress notification is sent out. This value is advisory, in that the notification will be triggered "at some point after first_max_ms milliseconds have passed since the query began accumulating results", but generally not very long after, for progress notifications after the first, during the initial gathering phase of the query. @field update_max_num The maximum number of results that can accumulate before an update notification is sent out by the MDQuery, for notifications after the gathering phase of the query has finished. @field update_max_ms The maximum number of milliseconds that can pass before a progress notification is sent out. This value is advisory, in that the notification will be triggered "at some point after first_max_ms milliseconds have passed since the query began accumulating results", but generally not very long after, for update notifications after the gathering phase of the query has finished.
 type MDQueryBatchingParams struct {
-	First_max_num uint
-	First_max_ms uint
+	First_max_num    uint
+	First_max_ms     uint
 	Progress_max_num uint
-	Progress_max_ms uint
-	Update_max_num uint
-	Update_max_ms uint
+	Progress_max_ms  uint
+	Update_max_num   uint
+	Update_max_ms    uint
 }
 
 // @typedef MDItemRef This is the type of a reference to MDItems.
@@ -27,4 +27,3 @@ type MDLabel struct{}
 // C struct: __MDQuery
 // MDQuery is an opaque type.
 type MDQuery struct{}
-

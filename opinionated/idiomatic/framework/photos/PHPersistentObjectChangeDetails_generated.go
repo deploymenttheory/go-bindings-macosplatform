@@ -66,4 +66,3 @@ type PersistentObjectChangeDetailsable interface {
 }
 
 var _ PersistentObjectChangeDetailsable = (*PersistentObjectChangeDetails)(nil)
-

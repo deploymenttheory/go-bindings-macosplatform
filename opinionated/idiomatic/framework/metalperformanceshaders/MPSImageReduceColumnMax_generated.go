@@ -76,11 +76,17 @@ func (x *ImageReduceColumnMax) WithLabel(label string) *ImageReduceColumnMax {
 	return x
 }
 
-func (x *ImageReduceColumnMax) asImageReduceUnary() *mpsimage.MPSImageReduceUnary { return &x.inner.MPSImageReduceUnary }
+func (x *ImageReduceColumnMax) asImageReduceUnary() *mpsimage.MPSImageReduceUnary {
+	return &x.inner.MPSImageReduceUnary
+}
 
-func (x *ImageReduceColumnMax) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel }
+func (x *ImageReduceColumnMax) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
+	return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel
+}
 
-func (x *ImageReduceColumnMax) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel }
+func (x *ImageReduceColumnMax) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel
+}
 
 // ImageReduceColumnMaxable is the interface implemented by [ImageReduceColumnMax], for mocking and DI.
 type ImageReduceColumnMaxable interface {
@@ -94,4 +100,3 @@ type ImageReduceColumnMaxable interface {
 }
 
 var _ ImageReduceColumnMaxable = (*ImageReduceColumnMax)(nil)
-

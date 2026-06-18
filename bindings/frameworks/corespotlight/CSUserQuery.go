@@ -16,15 +16,15 @@ type CSUserQuery struct {
 }
 
 var (
-	_clsCSUserQuery = _objcClass("CSUserQuery")
-	_cSUserQuerySelPrepare = objc.RegisterName("prepare")
-	_cSUserQuerySelPrepareProtectionClasses = objc.RegisterName("prepareProtectionClasses:")
-	_cSUserQuerySelInitWithUserQueryStringUserQueryContext = objc.RegisterName("initWithUserQueryString:userQueryContext:")
-	_cSUserQuerySelUserEngagedWithItemVisibleItemsUserInteractionType = objc.RegisterName("userEngagedWithItem:visibleItems:userInteractionType:")
+	_clsCSUserQuery                                                               = _objcClass("CSUserQuery")
+	_cSUserQuerySelPrepare                                                        = objc.RegisterName("prepare")
+	_cSUserQuerySelPrepareProtectionClasses                                       = objc.RegisterName("prepareProtectionClasses:")
+	_cSUserQuerySelInitWithUserQueryStringUserQueryContext                        = objc.RegisterName("initWithUserQueryString:userQueryContext:")
+	_cSUserQuerySelUserEngagedWithItemVisibleItemsUserInteractionType             = objc.RegisterName("userEngagedWithItem:visibleItems:userInteractionType:")
 	_cSUserQuerySelUserEngagedWithSuggestionVisibleSuggestionsUserInteractionType = objc.RegisterName("userEngagedWithSuggestion:visibleSuggestions:userInteractionType:")
-	_cSUserQuerySelFoundSuggestionCount = objc.RegisterName("foundSuggestionCount")
-	_cSUserQuerySelFoundSuggestionsHandler = objc.RegisterName("foundSuggestionsHandler")
-	_cSUserQuerySelSetFoundSuggestionsHandler = objc.RegisterName("setFoundSuggestionsHandler:")
+	_cSUserQuerySelFoundSuggestionCount                                           = objc.RegisterName("foundSuggestionCount")
+	_cSUserQuerySelFoundSuggestionsHandler                                        = objc.RegisterName("foundSuggestionsHandler")
+	_cSUserQuerySelSetFoundSuggestionsHandler                                     = objc.RegisterName("setFoundSuggestionsHandler:")
 )
 
 func CSUserQueryFromID(id objc.ID) *CSUserQuery {
@@ -47,7 +47,9 @@ func CSUserQueryPrepareProtectionClasses(protectionClasses *foundation.NSArray[*
 
 func (o *CSUserQuery) InitWithUserQueryStringUserQueryContext(userQueryString *foundation.NSString, userQueryContext *CSUserQueryContext) *CSUserQuery {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSUserQuerySelInitWithUserQueryStringUserQueryContext, userQueryString.Ptr(), userQueryContext.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CSUserQueryFromID(_ret)
 }
 
@@ -82,4 +84,3 @@ func (o *CSUserQuery) SetFoundSuggestionsHandler(foundSuggestionsHandler func(*f
 	}
 	o.Ptr().Send(_cSUserQuerySelSetFoundSuggestionsHandler, __block_foundSuggestionsHandler)
 }
-

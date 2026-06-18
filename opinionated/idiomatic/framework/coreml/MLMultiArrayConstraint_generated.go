@@ -71,4 +71,3 @@ type MultiArrayConstraintable interface {
 }
 
 var _ MultiArrayConstraintable = (*MultiArrayConstraint)(nil)
-

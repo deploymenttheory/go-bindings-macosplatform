@@ -15,7 +15,7 @@ type MPSCNNUpsamplingGradient struct {
 }
 
 var (
-	_clsMPSCNNUpsamplingGradient = _objcClass("MPSCNNUpsamplingGradient")
+	_clsMPSCNNUpsamplingGradient             = _objcClass("MPSCNNUpsamplingGradient")
 	_mPSCNNUpsamplingGradientSelScaleFactorX = objc.RegisterName("scaleFactorX")
 	_mPSCNNUpsamplingGradientSelScaleFactorY = objc.RegisterName("scaleFactorY")
 )
@@ -41,4 +41,3 @@ func (o *MPSCNNUpsamplingGradient) ScaleFactorY() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _mPSCNNUpsamplingGradientSelScaleFactorY)
 	return _ret
 }
-

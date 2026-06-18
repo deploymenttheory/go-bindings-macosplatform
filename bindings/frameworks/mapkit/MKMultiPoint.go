@@ -18,12 +18,12 @@ type MKMultiPoint struct {
 }
 
 var (
-	_clsMKMultiPoint = _objcClass("MKMultiPoint")
-	_mKMultiPointSelPoints = objc.RegisterName("points")
-	_mKMultiPointSelGetCoordinatesRange = objc.RegisterName("getCoordinates:range:")
-	_mKMultiPointSelLocationAtPointIndex = objc.RegisterName("locationAtPointIndex:")
+	_clsMKMultiPoint                        = _objcClass("MKMultiPoint")
+	_mKMultiPointSelPoints                  = objc.RegisterName("points")
+	_mKMultiPointSelGetCoordinatesRange     = objc.RegisterName("getCoordinates:range:")
+	_mKMultiPointSelLocationAtPointIndex    = objc.RegisterName("locationAtPointIndex:")
 	_mKMultiPointSelLocationsAtPointIndexes = objc.RegisterName("locationsAtPointIndexes:")
-	_mKMultiPointSelPointCount = objc.RegisterName("pointCount")
+	_mKMultiPointSelPointCount              = objc.RegisterName("pointCount")
 )
 
 func MKMultiPointFromID(id objc.ID) *MKMultiPoint {
@@ -59,4 +59,3 @@ func (o *MKMultiPoint) PointCount() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mKMultiPointSelPointCount)
 	return _ret
 }
-

@@ -17,8 +17,8 @@ type SKProductsResponse struct {
 }
 
 var (
-	_clsSKProductsResponse = _objcClass("SKProductsResponse")
-	_sKProductsResponseSelProducts = objc.RegisterName("products")
+	_clsSKProductsResponse                          = _objcClass("SKProductsResponse")
+	_sKProductsResponseSelProducts                  = objc.RegisterName("products")
 	_sKProductsResponseSelInvalidProductIdentifiers = objc.RegisterName("invalidProductIdentifiers")
 )
 
@@ -34,7 +34,9 @@ func SKProductsResponseFromID(id objc.ID) *SKProductsResponse {
 
 func (o *SKProductsResponse) Products() *foundation.NSArray[*SKProduct] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKProductsResponseSelProducts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SKProduct](_ret)
 }
 
@@ -42,4 +44,3 @@ func (o *SKProductsResponse) InvalidProductIdentifiers() *foundation.NSArray[*fo
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _sKProductsResponseSelInvalidProductIdentifiers)
 	return _ret
 }
-

@@ -16,7 +16,9 @@ type CNNCrossChannelNormalizationGradientNode struct {
 }
 
 // Unwrap returns the underlying [raw.MPSCNNCrossChannelNormalizationGradientNode].
-func (x *CNNCrossChannelNormalizationGradientNode) Unwrap() *raw.MPSCNNCrossChannelNormalizationGradientNode { return x.inner }
+func (x *CNNCrossChannelNormalizationGradientNode) Unwrap() *raw.MPSCNNCrossChannelNormalizationGradientNode {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -54,9 +56,13 @@ func (x *CNNCrossChannelNormalizationGradientNode) KernelSize() uint {
 	return x.inner.KernelSize()
 }
 
-func (x *CNNCrossChannelNormalizationGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
+func (x *CNNCrossChannelNormalizationGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode {
+	return &x.inner.MPSNNGradientFilterNode
+}
 
-func (x *CNNCrossChannelNormalizationGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
+func (x *CNNCrossChannelNormalizationGradientNode) asNNFilterNode() *raw.MPSNNFilterNode {
+	return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode
+}
 
 // CNNCrossChannelNormalizationGradientNodeable is the interface implemented by [CNNCrossChannelNormalizationGradientNode], for mocking and DI.
 type CNNCrossChannelNormalizationGradientNodeable interface {
@@ -67,4 +73,3 @@ type CNNCrossChannelNormalizationGradientNodeable interface {
 }
 
 var _ CNNCrossChannelNormalizationGradientNodeable = (*CNNCrossChannelNormalizationGradientNode)(nil)
-

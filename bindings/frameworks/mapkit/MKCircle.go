@@ -17,12 +17,12 @@ type MKCircle struct {
 }
 
 var (
-	_clsMKCircle = _objcClass("MKCircle")
+	_clsMKCircle                                 = _objcClass("MKCircle")
 	_mKCircleSelCircleWithCenterCoordinateRadius = objc.RegisterName("circleWithCenterCoordinate:radius:")
-	_mKCircleSelCircleWithMapRect = objc.RegisterName("circleWithMapRect:")
-	_mKCircleSelCoordinate = objc.RegisterName("coordinate")
-	_mKCircleSelRadius = objc.RegisterName("radius")
-	_mKCircleSelBoundingMapRect = objc.RegisterName("boundingMapRect")
+	_mKCircleSelCircleWithMapRect                = objc.RegisterName("circleWithMapRect:")
+	_mKCircleSelCoordinate                       = objc.RegisterName("coordinate")
+	_mKCircleSelRadius                           = objc.RegisterName("radius")
+	_mKCircleSelBoundingMapRect                  = objc.RegisterName("boundingMapRect")
 )
 
 func MKCircleFromID(id objc.ID) *MKCircle {
@@ -37,13 +37,17 @@ func MKCircleFromID(id objc.ID) *MKCircle {
 
 func MKCircleCircleWithCenterCoordinateRadius(coord unsafe.Pointer, radius unsafe.Pointer) *MKCircle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKCircle), _mKCircleSelCircleWithCenterCoordinateRadius, coord, radius)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKCircleFromID(_ret)
 }
 
 func MKCircleCircleWithMapRect(mapRect MKMapRect) *MKCircle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKCircle), _mKCircleSelCircleWithMapRect, mapRect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKCircleFromID(_ret)
 }
 
@@ -61,4 +65,3 @@ func (o *MKCircle) BoundingMapRect() MKMapRect {
 	_ret := objc.Send[MKMapRect](o.Ptr(), _mKCircleSelBoundingMapRect)
 	return _ret
 }
-

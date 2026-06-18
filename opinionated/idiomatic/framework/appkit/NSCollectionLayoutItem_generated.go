@@ -108,4 +108,3 @@ type CollectionLayoutItemable interface {
 }
 
 var _ CollectionLayoutItemable = (*CollectionLayoutItem)(nil)
-

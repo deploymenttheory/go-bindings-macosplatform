@@ -1115,4 +1115,3 @@ func NSStringFromGLKVector3(vector unsafe.Pointer) *foundation.NSString {
 func NSStringFromGLKVector4(vector unsafe.Pointer) *foundation.NSString {
 	return raw.NSStringFromGLKVector4(vector)
 }
-

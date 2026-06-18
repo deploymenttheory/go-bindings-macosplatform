@@ -259,4 +259,3 @@ type NSXPCProxyCreating interface {
 	RemoteObjectProxy() objc.ID
 	RemoteObjectProxyWithErrorHandler(handler func(unsafe.Pointer)) objc.ID
 }
-

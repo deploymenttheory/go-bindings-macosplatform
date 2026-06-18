@@ -261,4 +261,3 @@ func CNSocialProfileLocalizedStringForService(service string) string {
 	}
 	return purego.GoString(_r.Ptr())
 }
-

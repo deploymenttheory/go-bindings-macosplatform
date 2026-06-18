@@ -361,4 +361,3 @@ type ActionCellable interface {
 }
 
 var _ ActionCellable = (*ActionCell)(nil)
-

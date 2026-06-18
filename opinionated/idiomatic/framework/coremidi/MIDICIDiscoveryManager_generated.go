@@ -48,4 +48,3 @@ type CIDiscoveryManagerable interface {
 }
 
 var _ CIDiscoveryManagerable = (*CIDiscoveryManager)(nil)
-

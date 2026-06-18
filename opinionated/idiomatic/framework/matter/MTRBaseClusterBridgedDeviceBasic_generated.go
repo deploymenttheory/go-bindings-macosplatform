@@ -19,7 +19,9 @@ type MTRBaseClusterBridgedDeviceBasic struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterBridgedDeviceBasic].
-func (x *MTRBaseClusterBridgedDeviceBasic) Unwrap() *raw.MTRBaseClusterBridgedDeviceBasic { return x.inner }
+func (x *MTRBaseClusterBridgedDeviceBasic) Unwrap() *raw.MTRBaseClusterBridgedDeviceBasic {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -940,11 +942,17 @@ func (x *MTRBaseClusterBridgedDeviceBasic) SubscribeAttributeClusterRevisionWith
 	}
 }
 
-func (x *MTRBaseClusterBridgedDeviceBasic) asMTRBaseClusterBridgedDeviceBasicInformation() *raw.MTRBaseClusterBridgedDeviceBasicInformation { return &x.inner.MTRBaseClusterBridgedDeviceBasicInformation }
+func (x *MTRBaseClusterBridgedDeviceBasic) asMTRBaseClusterBridgedDeviceBasicInformation() *raw.MTRBaseClusterBridgedDeviceBasicInformation {
+	return &x.inner.MTRBaseClusterBridgedDeviceBasicInformation
+}
 
-func (x *MTRBaseClusterBridgedDeviceBasic) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRBaseClusterBridgedDeviceBasicInformation.MTRGenericBaseCluster }
+func (x *MTRBaseClusterBridgedDeviceBasic) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRBaseClusterBridgedDeviceBasicInformation.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterBridgedDeviceBasic) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRBaseClusterBridgedDeviceBasicInformation.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterBridgedDeviceBasic) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRBaseClusterBridgedDeviceBasicInformation.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterBridgedDeviceBasicable is the interface implemented by [MTRBaseClusterBridgedDeviceBasic], for mocking and DI.
 type MTRBaseClusterBridgedDeviceBasicable interface {
@@ -994,4 +1002,3 @@ type MTRBaseClusterBridgedDeviceBasicable interface {
 }
 
 var _ MTRBaseClusterBridgedDeviceBasicable = (*MTRBaseClusterBridgedDeviceBasic)(nil)
-

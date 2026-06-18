@@ -16,8 +16,8 @@ type MTRContentLauncherClusterContentSearchStruct struct {
 }
 
 var (
-	_clsMTRContentLauncherClusterContentSearchStruct = _objcClass("MTRContentLauncherClusterContentSearchStruct")
-	_mTRContentLauncherClusterContentSearchStructSelParameterList = objc.RegisterName("parameterList")
+	_clsMTRContentLauncherClusterContentSearchStruct                 = _objcClass("MTRContentLauncherClusterContentSearchStruct")
+	_mTRContentLauncherClusterContentSearchStructSelParameterList    = objc.RegisterName("parameterList")
 	_mTRContentLauncherClusterContentSearchStructSelSetParameterList = objc.RegisterName("setParameterList:")
 )
 
@@ -39,4 +39,3 @@ func (o *MTRContentLauncherClusterContentSearchStruct) ParameterList() *foundati
 func (o *MTRContentLauncherClusterContentSearchStruct) SetParameterList(parameterList *foundation.NSArray[objc.ID]) {
 	o.Ptr().Send(_mTRContentLauncherClusterContentSearchStructSelSetParameterList, parameterList)
 }
-

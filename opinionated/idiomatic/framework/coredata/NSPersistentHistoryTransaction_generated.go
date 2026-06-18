@@ -133,4 +133,3 @@ type PersistentHistoryTransactionable interface {
 }
 
 var _ PersistentHistoryTransactionable = (*PersistentHistoryTransaction)(nil)
-

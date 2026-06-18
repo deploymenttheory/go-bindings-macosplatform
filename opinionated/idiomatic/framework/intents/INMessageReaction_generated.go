@@ -70,4 +70,3 @@ type MessageReactionable interface {
 }
 
 var _ MessageReactionable = (*MessageReaction)(nil)
-

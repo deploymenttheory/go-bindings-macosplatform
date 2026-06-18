@@ -89,4 +89,3 @@ type MTRUserLabelClusterLabelStructable interface {
 }
 
 var _ MTRUserLabelClusterLabelStructable = (*MTRUserLabelClusterLabelStruct)(nil)
-

@@ -16,10 +16,10 @@ type MTRDoorLockClusterCredentialStruct struct {
 }
 
 var (
-	_clsMTRDoorLockClusterCredentialStruct = _objcClass("MTRDoorLockClusterCredentialStruct")
-	_mTRDoorLockClusterCredentialStructSelCredentialType = objc.RegisterName("credentialType")
-	_mTRDoorLockClusterCredentialStructSelSetCredentialType = objc.RegisterName("setCredentialType:")
-	_mTRDoorLockClusterCredentialStructSelCredentialIndex = objc.RegisterName("credentialIndex")
+	_clsMTRDoorLockClusterCredentialStruct                   = _objcClass("MTRDoorLockClusterCredentialStruct")
+	_mTRDoorLockClusterCredentialStructSelCredentialType     = objc.RegisterName("credentialType")
+	_mTRDoorLockClusterCredentialStructSelSetCredentialType  = objc.RegisterName("setCredentialType:")
+	_mTRDoorLockClusterCredentialStructSelCredentialIndex    = objc.RegisterName("credentialIndex")
 	_mTRDoorLockClusterCredentialStructSelSetCredentialIndex = objc.RegisterName("setCredentialIndex:")
 )
 
@@ -35,7 +35,9 @@ func MTRDoorLockClusterCredentialStructFromID(id objc.ID) *MTRDoorLockClusterCre
 
 func (o *MTRDoorLockClusterCredentialStruct) CredentialType() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterCredentialStructSelCredentialType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRDoorLockClusterCredentialStruct) SetCredentialType(credentialType *f
 
 func (o *MTRDoorLockClusterCredentialStruct) CredentialIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterCredentialStructSelCredentialIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDoorLockClusterCredentialStruct) SetCredentialIndex(credentialIndex *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDoorLockClusterCredentialStructSelSetCredentialIndex, credentialIndex.Ptr())
 }
-

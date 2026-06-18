@@ -18,20 +18,20 @@ type MTRClusterOTASoftwareUpdateRequestor struct {
 }
 
 var (
-	_clsMTRClusterOTASoftwareUpdateRequestor = _objcClass("MTRClusterOTASoftwareUpdateRequestor")
+	_clsMTRClusterOTASoftwareUpdateRequestor                                                                           = _objcClass("MTRClusterOTASoftwareUpdateRequestor")
 	_mTRClusterOTASoftwareUpdateRequestorSelAnnounceOTAProviderWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("announceOTAProviderWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterOTASoftwareUpdateRequestorSelReadAttributeDefaultOTAProvidersWithParams = objc.RegisterName("readAttributeDefaultOTAProvidersWithParams:")
-	_mTRClusterOTASoftwareUpdateRequestorSelWriteAttributeDefaultOTAProvidersWithValueExpectedValueInterval = objc.RegisterName("writeAttributeDefaultOTAProvidersWithValue:expectedValueInterval:")
-	_mTRClusterOTASoftwareUpdateRequestorSelWriteAttributeDefaultOTAProvidersWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeDefaultOTAProvidersWithValue:expectedValueInterval:params:")
-	_mTRClusterOTASoftwareUpdateRequestorSelReadAttributeUpdatePossibleWithParams = objc.RegisterName("readAttributeUpdatePossibleWithParams:")
-	_mTRClusterOTASoftwareUpdateRequestorSelReadAttributeUpdateStateWithParams = objc.RegisterName("readAttributeUpdateStateWithParams:")
-	_mTRClusterOTASoftwareUpdateRequestorSelReadAttributeUpdateStateProgressWithParams = objc.RegisterName("readAttributeUpdateStateProgressWithParams:")
-	_mTRClusterOTASoftwareUpdateRequestorSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterOTASoftwareUpdateRequestorSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterOTASoftwareUpdateRequestorSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterOTASoftwareUpdateRequestorSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterOTASoftwareUpdateRequestorSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterOTASoftwareUpdateRequestorSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterOTASoftwareUpdateRequestorSelReadAttributeDefaultOTAProvidersWithParams                                 = objc.RegisterName("readAttributeDefaultOTAProvidersWithParams:")
+	_mTRClusterOTASoftwareUpdateRequestorSelWriteAttributeDefaultOTAProvidersWithValueExpectedValueInterval            = objc.RegisterName("writeAttributeDefaultOTAProvidersWithValue:expectedValueInterval:")
+	_mTRClusterOTASoftwareUpdateRequestorSelWriteAttributeDefaultOTAProvidersWithValueExpectedValueIntervalParams      = objc.RegisterName("writeAttributeDefaultOTAProvidersWithValue:expectedValueInterval:params:")
+	_mTRClusterOTASoftwareUpdateRequestorSelReadAttributeUpdatePossibleWithParams                                      = objc.RegisterName("readAttributeUpdatePossibleWithParams:")
+	_mTRClusterOTASoftwareUpdateRequestorSelReadAttributeUpdateStateWithParams                                         = objc.RegisterName("readAttributeUpdateStateWithParams:")
+	_mTRClusterOTASoftwareUpdateRequestorSelReadAttributeUpdateStateProgressWithParams                                 = objc.RegisterName("readAttributeUpdateStateProgressWithParams:")
+	_mTRClusterOTASoftwareUpdateRequestorSelReadAttributeGeneratedCommandListWithParams                                = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterOTASoftwareUpdateRequestorSelReadAttributeAcceptedCommandListWithParams                                 = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterOTASoftwareUpdateRequestorSelReadAttributeAttributeListWithParams                                       = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterOTASoftwareUpdateRequestorSelReadAttributeFeatureMapWithParams                                          = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterOTASoftwareUpdateRequestorSelReadAttributeClusterRevisionWithParams                                     = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterOTASoftwareUpdateRequestorSelInitWithDeviceEndpointIDQueue                                              = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterOTASoftwareUpdateRequestorFromID(id objc.ID) *MTRClusterOTASoftwareUpdateRequestor {
@@ -111,7 +111,8 @@ func (o *MTRClusterOTASoftwareUpdateRequestor) ReadAttributeClusterRevisionWithP
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterOTASoftwareUpdateRequestor) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterOTASoftwareUpdateRequestor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterOTASoftwareUpdateRequestorSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterOTASoftwareUpdateRequestorFromID(_ret)
 }
-

@@ -17,8 +17,8 @@ type VNTrackTranslationalImageRegistrationRequest struct {
 }
 
 var (
-	_clsVNTrackTranslationalImageRegistrationRequest = _objcClass("VNTrackTranslationalImageRegistrationRequest")
-	_vNTrackTranslationalImageRegistrationRequestSelInit = objc.RegisterName("init")
+	_clsVNTrackTranslationalImageRegistrationRequest                          = _objcClass("VNTrackTranslationalImageRegistrationRequest")
+	_vNTrackTranslationalImageRegistrationRequestSelInit                      = objc.RegisterName("init")
 	_vNTrackTranslationalImageRegistrationRequestSelInitWithCompletionHandler = objc.RegisterName("initWithCompletionHandler:")
 )
 
@@ -35,7 +35,9 @@ func VNTrackTranslationalImageRegistrationRequestFromID(id objc.ID) *VNTrackTran
 // @brief Create a new request that can statefully track the translational registration of two images. @discussion This is a convenience initializer for a frame analysis spacing of kCMTimeZero and a nil completion handler.
 func (o *VNTrackTranslationalImageRegistrationRequest) Init() *VNTrackTranslationalImageRegistrationRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTrackTranslationalImageRegistrationRequestSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTrackTranslationalImageRegistrationRequestFromID(_ret)
 }
 
@@ -52,7 +54,8 @@ func (o *VNTrackTranslationalImageRegistrationRequest) InitWithCompletionHandler
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTrackTranslationalImageRegistrationRequestSelInitWithCompletionHandler, __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTrackTranslationalImageRegistrationRequestFromID(_ret)
 }
-

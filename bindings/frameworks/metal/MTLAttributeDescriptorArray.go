@@ -16,8 +16,8 @@ type MTLAttributeDescriptorArray struct {
 }
 
 var (
-	_clsMTLAttributeDescriptorArray = _objcClass("MTLAttributeDescriptorArray")
-	_mTLAttributeDescriptorArraySelObjectAtIndexedSubscript = objc.RegisterName("objectAtIndexedSubscript:")
+	_clsMTLAttributeDescriptorArray                            = _objcClass("MTLAttributeDescriptorArray")
+	_mTLAttributeDescriptorArraySelObjectAtIndexedSubscript    = objc.RegisterName("objectAtIndexedSubscript:")
 	_mTLAttributeDescriptorArraySelSetObjectAtIndexedSubscript = objc.RegisterName("setObject:atIndexedSubscript:")
 )
 
@@ -33,11 +33,12 @@ func MTLAttributeDescriptorArrayFromID(id objc.ID) *MTLAttributeDescriptorArray 
 
 func (o *MTLAttributeDescriptorArray) ObjectAtIndexedSubscript(index uint) *MTLAttributeDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLAttributeDescriptorArraySelObjectAtIndexedSubscript, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLAttributeDescriptorFromID(_ret)
 }
 
 func (o *MTLAttributeDescriptorArray) SetObjectAtIndexedSubscript(attributeDesc *MTLAttributeDescriptor, index uint) {
 	o.Ptr().Send(_mTLAttributeDescriptorArraySelSetObjectAtIndexedSubscript, attributeDesc.Ptr(), index)
 }
-

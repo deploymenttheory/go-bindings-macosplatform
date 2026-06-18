@@ -35,7 +35,9 @@ func NewDoubleResolutionResult() *DoubleResolutionResult {
 	return &DoubleResolutionResult{inner: raw.INDoubleResolutionResultFromID(_id)}
 }
 
-func (x *DoubleResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
+func (x *DoubleResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
+	return &x.inner.INIntentResolutionResult
+}
 
 // DoubleResolutionResultable is the interface implemented by [DoubleResolutionResult], for mocking and DI.
 type DoubleResolutionResultable interface {
@@ -43,4 +45,3 @@ type DoubleResolutionResultable interface {
 }
 
 var _ DoubleResolutionResultable = (*DoubleResolutionResult)(nil)
-

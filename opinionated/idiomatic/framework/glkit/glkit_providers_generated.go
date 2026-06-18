@@ -17,4 +17,3 @@ type BaseEffectProvider interface {
 type EffectPropertyProvider interface {
 	asEffectProperty() *raw.GLKEffectProperty
 }
-

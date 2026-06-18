@@ -25,4 +25,3 @@ func MTL4AccelerationStructureDescriptorFromID(id objc.ID) *MTL4AccelerationStru
 	purego.Track(o)
 	return o
 }
-

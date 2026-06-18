@@ -199,15 +199,25 @@ func (x *DOMHTMLBaseFontElement) SetSize(size string) {
 	x.inner.SetSize(foundation.NSStringStringWithUTF8String(size))
 }
 
-func (x *DOMHTMLBaseFontElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
+func (x *DOMHTMLBaseFontElement) asDOMHTMLElement() *raw.DOMHTMLElement {
+	return &x.inner.DOMHTMLElement
+}
 
-func (x *DOMHTMLBaseFontElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
+func (x *DOMHTMLBaseFontElement) asDOMElement() *raw.DOMElement {
+	return &x.inner.DOMHTMLElement.DOMElement
+}
 
-func (x *DOMHTMLBaseFontElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTMLElement.DOMElement.DOMNode }
+func (x *DOMHTMLBaseFontElement) asDOMNode() *raw.DOMNode {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode
+}
 
-func (x *DOMHTMLBaseFontElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
+func (x *DOMHTMLBaseFontElement) asDOMObject() *raw.DOMObject {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject
+}
 
-func (x *DOMHTMLBaseFontElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+func (x *DOMHTMLBaseFontElement) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject
+}
 
 // DOMHTMLBaseFontElementable is the interface implemented by [DOMHTMLBaseFontElement], for mocking and DI.
 type DOMHTMLBaseFontElementable interface {
@@ -241,4 +251,3 @@ type DOMHTMLBaseFontElementable interface {
 }
 
 var _ DOMHTMLBaseFontElementable = (*DOMHTMLBaseFontElement)(nil)
-

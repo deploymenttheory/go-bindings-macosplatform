@@ -955,4 +955,3 @@ func SelIsMapped(sel objc.SEL) bool {
 func SelRegisterName(str string) objc.SEL {
 	return raw.SelRegisterName(str)
 }
-

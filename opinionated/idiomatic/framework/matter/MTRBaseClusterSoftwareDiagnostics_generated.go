@@ -19,7 +19,9 @@ type MTRBaseClusterSoftwareDiagnostics struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterSoftwareDiagnostics].
-func (x *MTRBaseClusterSoftwareDiagnostics) Unwrap() *raw.MTRBaseClusterSoftwareDiagnostics { return x.inner }
+func (x *MTRBaseClusterSoftwareDiagnostics) Unwrap() *raw.MTRBaseClusterSoftwareDiagnostics {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -627,9 +629,13 @@ func (x *MTRBaseClusterSoftwareDiagnostics) SubscribeAttributeClusterRevisionWit
 	}
 }
 
-func (x *MTRBaseClusterSoftwareDiagnostics) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterSoftwareDiagnostics) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterSoftwareDiagnostics) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterSoftwareDiagnostics) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterSoftwareDiagnosticsable is the interface implemented by [MTRBaseClusterSoftwareDiagnostics], for mocking and DI.
 type MTRBaseClusterSoftwareDiagnosticsable interface {
@@ -677,4 +683,3 @@ type MTRBaseClusterSoftwareDiagnosticsable interface {
 }
 
 var _ MTRBaseClusterSoftwareDiagnosticsable = (*MTRBaseClusterSoftwareDiagnostics)(nil)
-

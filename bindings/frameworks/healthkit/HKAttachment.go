@@ -17,13 +17,13 @@ type HKAttachment struct {
 }
 
 var (
-	_clsHKAttachment = _objcClass("HKAttachment")
-	_hKAttachmentSelIdentifier = objc.RegisterName("identifier")
-	_hKAttachmentSelName = objc.RegisterName("name")
-	_hKAttachmentSelContentType = objc.RegisterName("contentType")
-	_hKAttachmentSelSize = objc.RegisterName("size")
+	_clsHKAttachment             = _objcClass("HKAttachment")
+	_hKAttachmentSelIdentifier   = objc.RegisterName("identifier")
+	_hKAttachmentSelName         = objc.RegisterName("name")
+	_hKAttachmentSelContentType  = objc.RegisterName("contentType")
+	_hKAttachmentSelSize         = objc.RegisterName("size")
 	_hKAttachmentSelCreationDate = objc.RegisterName("creationDate")
-	_hKAttachmentSelMetadata = objc.RegisterName("metadata")
+	_hKAttachmentSelMetadata     = objc.RegisterName("metadata")
 )
 
 func HKAttachmentFromID(id objc.ID) *HKAttachment {
@@ -39,21 +39,27 @@ func HKAttachmentFromID(id objc.ID) *HKAttachment {
 // @property      identifier @abstract      A unique identifier of the receiver in the HealthKit database.
 func (o *HKAttachment) Identifier() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKAttachmentSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
 
 // @property      name @abstract      Represents the name of the file.
 func (o *HKAttachment) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKAttachmentSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property      contentType @abstract      The Uniform Type of the file.
 func (o *HKAttachment) ContentType() *uniformtypeidentifiers.UTType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKAttachmentSelContentType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return uniformtypeidentifiers.UTTypeFromID(_ret)
 }
 
@@ -66,7 +72,9 @@ func (o *HKAttachment) Size() int {
 // @property      creationDate @abstract      The date the receiver was created.
 func (o *HKAttachment) CreationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKAttachmentSelCreationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -75,4 +83,3 @@ func (o *HKAttachment) Metadata() *foundation.NSDictionary[*foundation.NSString,
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _hKAttachmentSelMetadata)
 	return _ret
 }
-

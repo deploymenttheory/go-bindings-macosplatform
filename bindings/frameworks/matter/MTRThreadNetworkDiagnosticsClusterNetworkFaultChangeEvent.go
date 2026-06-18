@@ -16,10 +16,10 @@ type MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent struct {
 }
 
 var (
-	_clsMTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent = _objcClass("MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent")
-	_mTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventSelCurrent = objc.RegisterName("current")
-	_mTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventSelSetCurrent = objc.RegisterName("setCurrent:")
-	_mTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventSelPrevious = objc.RegisterName("previous")
+	_clsMTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent            = _objcClass("MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent")
+	_mTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventSelCurrent     = objc.RegisterName("current")
+	_mTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventSelSetCurrent  = objc.RegisterName("setCurrent:")
+	_mTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventSelPrevious    = objc.RegisterName("previous")
 	_mTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventSelSetPrevious = objc.RegisterName("setPrevious:")
 )
 
@@ -50,4 +50,3 @@ func (o *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) Previous() *
 func (o *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) SetPrevious(previous *foundation.NSArray[objc.ID]) {
 	o.Ptr().Send(_mTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventSelSetPrevious, previous)
 }
-

@@ -16,10 +16,10 @@ type LADomainStateCompanion struct {
 }
 
 var (
-	_clsLADomainStateCompanion = _objcClass("LADomainStateCompanion")
+	_clsLADomainStateCompanion                          = _objcClass("LADomainStateCompanion")
 	_lADomainStateCompanionSelStateHashForCompanionType = objc.RegisterName("stateHashForCompanionType:")
-	_lADomainStateCompanionSelAvailableCompanionTypes = objc.RegisterName("availableCompanionTypes")
-	_lADomainStateCompanionSelStateHash = objc.RegisterName("stateHash")
+	_lADomainStateCompanionSelAvailableCompanionTypes   = objc.RegisterName("availableCompanionTypes")
+	_lADomainStateCompanionSelStateHash                 = objc.RegisterName("stateHash")
 )
 
 func LADomainStateCompanionFromID(id objc.ID) *LADomainStateCompanion {
@@ -35,7 +35,9 @@ func LADomainStateCompanionFromID(id objc.ID) *LADomainStateCompanion {
 // Returns state hash data for the given companion type. @discussion  If database of paired devices of the given type was modified state hash data will change. Nature of such database changes cannot be determined but comparing data of state hash after different policy evaluation will reveal the fact database was changed between calls. @param companionType The companion type for which state hash data should be returned.
 func (o *LADomainStateCompanion) StateHashForCompanionType(companionType LACompanionType) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lADomainStateCompanionSelStateHashForCompanionType, companionType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -48,7 +50,8 @@ func (o *LADomainStateCompanion) AvailableCompanionTypes() *foundation.NSSet[*fo
 // Contains combined state hash data for all available companion types. . Returns `nil` if no companion devices are paired. @discussion  As long as database of paired companion devices doesn't change, `stateHash` stays the same for the same set of `availableCompanions`. If database of paired companion devices was modified, `stateHash` data will change. Nature of such database changes cannot be determined but comparing data of `stateHash` after different policy evaluation will reveal the fact database was changed between calls. If you are interested in a state hash for a specific companion type you can use `stateHashForCompanionType` method. @warning Please note that the value returned by this property can change exceptionally between major OS versions even if the list of paired companions has not changed.
 func (o *LADomainStateCompanion) StateHash() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lADomainStateCompanionSelStateHash)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

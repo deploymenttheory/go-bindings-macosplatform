@@ -87,7 +87,9 @@ func (x *NETunnelNetworkSettings) SetProxySettings(proxySettings *raw.NEProxySet
 	x.inner.SetProxySettings(proxySettings)
 }
 
-func (x *NETunnelNetworkSettings) asNETunnelNetworkSettings() *raw.NETunnelNetworkSettings { return x.inner }
+func (x *NETunnelNetworkSettings) asNETunnelNetworkSettings() *raw.NETunnelNetworkSettings {
+	return x.inner
+}
 
 // NETunnelNetworkSettingsable is the interface implemented by [NETunnelNetworkSettings], for mocking and DI.
 type NETunnelNetworkSettingsable interface {
@@ -102,4 +104,3 @@ type NETunnelNetworkSettingsable interface {
 }
 
 var _ NETunnelNetworkSettingsable = (*NETunnelNetworkSettings)(nil)
-

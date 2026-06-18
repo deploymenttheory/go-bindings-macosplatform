@@ -19,61 +19,61 @@ type NSViewController struct {
 }
 
 var (
-	_clsNSViewController = _objcClass("NSViewController")
-	_nSViewControllerSelInitWithNibNameBundle = objc.RegisterName("initWithNibName:bundle:")
-	_nSViewControllerSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSViewControllerSelLoadView = objc.RegisterName("loadView")
-	_nSViewControllerSelLoadViewIfNeeded = objc.RegisterName("loadViewIfNeeded")
-	_nSViewControllerSelCommitEditingWithDelegateDidCommitSelectorContextInfo = objc.RegisterName("commitEditingWithDelegate:didCommitSelector:contextInfo:")
-	_nSViewControllerSelCommitEditing = objc.RegisterName("commitEditing")
-	_nSViewControllerSelDiscardEditing = objc.RegisterName("discardEditing")
-	_nSViewControllerSelViewDidLoad = objc.RegisterName("viewDidLoad")
-	_nSViewControllerSelViewWillAppear = objc.RegisterName("viewWillAppear")
-	_nSViewControllerSelViewDidAppear = objc.RegisterName("viewDidAppear")
-	_nSViewControllerSelViewWillDisappear = objc.RegisterName("viewWillDisappear")
-	_nSViewControllerSelViewDidDisappear = objc.RegisterName("viewDidDisappear")
-	_nSViewControllerSelUpdateViewConstraints = objc.RegisterName("updateViewConstraints")
-	_nSViewControllerSelViewWillLayout = objc.RegisterName("viewWillLayout")
-	_nSViewControllerSelViewDidLayout = objc.RegisterName("viewDidLayout")
-	_nSViewControllerSelNibName = objc.RegisterName("nibName")
-	_nSViewControllerSelNibBundle = objc.RegisterName("nibBundle")
-	_nSViewControllerSelRepresentedObject = objc.RegisterName("representedObject")
-	_nSViewControllerSelSetRepresentedObject = objc.RegisterName("setRepresentedObject:")
-	_nSViewControllerSelTitle = objc.RegisterName("title")
-	_nSViewControllerSelSetTitle = objc.RegisterName("setTitle:")
-	_nSViewControllerSelView = objc.RegisterName("view")
-	_nSViewControllerSelSetView = objc.RegisterName("setView:")
-	_nSViewControllerSelViewIfLoaded = objc.RegisterName("viewIfLoaded")
-	_nSViewControllerSelIsViewLoaded = objc.RegisterName("isViewLoaded")
-	_nSViewControllerSelPreferredContentSize = objc.RegisterName("preferredContentSize")
-	_nSViewControllerSelSetPreferredContentSize = objc.RegisterName("setPreferredContentSize:")
-	_nSViewControllerSelPresentViewControllerAnimator = objc.RegisterName("presentViewController:animator:")
-	_nSViewControllerSelDismissViewController = objc.RegisterName("dismissViewController:")
-	_nSViewControllerSelDismissController = objc.RegisterName("dismissController:")
-	_nSViewControllerSelPresentedViewControllers = objc.RegisterName("presentedViewControllers")
-	_nSViewControllerSelPresentingViewController = objc.RegisterName("presentingViewController")
-	_nSViewControllerSelPresentViewControllerAsSheet = objc.RegisterName("presentViewControllerAsSheet:")
-	_nSViewControllerSelPresentViewControllerAsModalWindow = objc.RegisterName("presentViewControllerAsModalWindow:")
-	_nSViewControllerSelPresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehavior = objc.RegisterName("presentViewController:asPopoverRelativeToRect:ofView:preferredEdge:behavior:")
+	_clsNSViewController                                                                                          = _objcClass("NSViewController")
+	_nSViewControllerSelInitWithNibNameBundle                                                                     = objc.RegisterName("initWithNibName:bundle:")
+	_nSViewControllerSelInitWithCoder                                                                             = objc.RegisterName("initWithCoder:")
+	_nSViewControllerSelLoadView                                                                                  = objc.RegisterName("loadView")
+	_nSViewControllerSelLoadViewIfNeeded                                                                          = objc.RegisterName("loadViewIfNeeded")
+	_nSViewControllerSelCommitEditingWithDelegateDidCommitSelectorContextInfo                                     = objc.RegisterName("commitEditingWithDelegate:didCommitSelector:contextInfo:")
+	_nSViewControllerSelCommitEditing                                                                             = objc.RegisterName("commitEditing")
+	_nSViewControllerSelDiscardEditing                                                                            = objc.RegisterName("discardEditing")
+	_nSViewControllerSelViewDidLoad                                                                               = objc.RegisterName("viewDidLoad")
+	_nSViewControllerSelViewWillAppear                                                                            = objc.RegisterName("viewWillAppear")
+	_nSViewControllerSelViewDidAppear                                                                             = objc.RegisterName("viewDidAppear")
+	_nSViewControllerSelViewWillDisappear                                                                         = objc.RegisterName("viewWillDisappear")
+	_nSViewControllerSelViewDidDisappear                                                                          = objc.RegisterName("viewDidDisappear")
+	_nSViewControllerSelUpdateViewConstraints                                                                     = objc.RegisterName("updateViewConstraints")
+	_nSViewControllerSelViewWillLayout                                                                            = objc.RegisterName("viewWillLayout")
+	_nSViewControllerSelViewDidLayout                                                                             = objc.RegisterName("viewDidLayout")
+	_nSViewControllerSelNibName                                                                                   = objc.RegisterName("nibName")
+	_nSViewControllerSelNibBundle                                                                                 = objc.RegisterName("nibBundle")
+	_nSViewControllerSelRepresentedObject                                                                         = objc.RegisterName("representedObject")
+	_nSViewControllerSelSetRepresentedObject                                                                      = objc.RegisterName("setRepresentedObject:")
+	_nSViewControllerSelTitle                                                                                     = objc.RegisterName("title")
+	_nSViewControllerSelSetTitle                                                                                  = objc.RegisterName("setTitle:")
+	_nSViewControllerSelView                                                                                      = objc.RegisterName("view")
+	_nSViewControllerSelSetView                                                                                   = objc.RegisterName("setView:")
+	_nSViewControllerSelViewIfLoaded                                                                              = objc.RegisterName("viewIfLoaded")
+	_nSViewControllerSelIsViewLoaded                                                                              = objc.RegisterName("isViewLoaded")
+	_nSViewControllerSelPreferredContentSize                                                                      = objc.RegisterName("preferredContentSize")
+	_nSViewControllerSelSetPreferredContentSize                                                                   = objc.RegisterName("setPreferredContentSize:")
+	_nSViewControllerSelPresentViewControllerAnimator                                                             = objc.RegisterName("presentViewController:animator:")
+	_nSViewControllerSelDismissViewController                                                                     = objc.RegisterName("dismissViewController:")
+	_nSViewControllerSelDismissController                                                                         = objc.RegisterName("dismissController:")
+	_nSViewControllerSelPresentedViewControllers                                                                  = objc.RegisterName("presentedViewControllers")
+	_nSViewControllerSelPresentingViewController                                                                  = objc.RegisterName("presentingViewController")
+	_nSViewControllerSelPresentViewControllerAsSheet                                                              = objc.RegisterName("presentViewControllerAsSheet:")
+	_nSViewControllerSelPresentViewControllerAsModalWindow                                                        = objc.RegisterName("presentViewControllerAsModalWindow:")
+	_nSViewControllerSelPresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehavior                   = objc.RegisterName("presentViewController:asPopoverRelativeToRect:ofView:preferredEdge:behavior:")
 	_nSViewControllerSelPresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehaviorHasFullSizeContent = objc.RegisterName("presentViewController:asPopoverRelativeToRect:ofView:preferredEdge:behavior:hasFullSizeContent:")
-	_nSViewControllerSelTransitionFromViewControllerToViewControllerOptionsCompletionHandler = objc.RegisterName("transitionFromViewController:toViewController:options:completionHandler:")
-	_nSViewControllerSelAddChildViewController = objc.RegisterName("addChildViewController:")
-	_nSViewControllerSelRemoveFromParentViewController = objc.RegisterName("removeFromParentViewController")
-	_nSViewControllerSelInsertChildViewControllerAtIndex = objc.RegisterName("insertChildViewController:atIndex:")
-	_nSViewControllerSelRemoveChildViewControllerAtIndex = objc.RegisterName("removeChildViewControllerAtIndex:")
-	_nSViewControllerSelPreferredContentSizeDidChangeForViewController = objc.RegisterName("preferredContentSizeDidChangeForViewController:")
-	_nSViewControllerSelViewWillTransitionToSize = objc.RegisterName("viewWillTransitionToSize:")
-	_nSViewControllerSelParentViewController = objc.RegisterName("parentViewController")
-	_nSViewControllerSelChildViewControllers = objc.RegisterName("childViewControllers")
-	_nSViewControllerSelSetChildViewControllers = objc.RegisterName("setChildViewControllers:")
-	_nSViewControllerSelStoryboard = objc.RegisterName("storyboard")
-	_nSViewControllerSelExtensionContext = objc.RegisterName("extensionContext")
-	_nSViewControllerSelSourceItemView = objc.RegisterName("sourceItemView")
-	_nSViewControllerSelSetSourceItemView = objc.RegisterName("setSourceItemView:")
-	_nSViewControllerSelPreferredScreenOrigin = objc.RegisterName("preferredScreenOrigin")
-	_nSViewControllerSelSetPreferredScreenOrigin = objc.RegisterName("setPreferredScreenOrigin:")
-	_nSViewControllerSelPreferredMinimumSize = objc.RegisterName("preferredMinimumSize")
-	_nSViewControllerSelPreferredMaximumSize = objc.RegisterName("preferredMaximumSize")
+	_nSViewControllerSelTransitionFromViewControllerToViewControllerOptionsCompletionHandler                      = objc.RegisterName("transitionFromViewController:toViewController:options:completionHandler:")
+	_nSViewControllerSelAddChildViewController                                                                    = objc.RegisterName("addChildViewController:")
+	_nSViewControllerSelRemoveFromParentViewController                                                            = objc.RegisterName("removeFromParentViewController")
+	_nSViewControllerSelInsertChildViewControllerAtIndex                                                          = objc.RegisterName("insertChildViewController:atIndex:")
+	_nSViewControllerSelRemoveChildViewControllerAtIndex                                                          = objc.RegisterName("removeChildViewControllerAtIndex:")
+	_nSViewControllerSelPreferredContentSizeDidChangeForViewController                                            = objc.RegisterName("preferredContentSizeDidChangeForViewController:")
+	_nSViewControllerSelViewWillTransitionToSize                                                                  = objc.RegisterName("viewWillTransitionToSize:")
+	_nSViewControllerSelParentViewController                                                                      = objc.RegisterName("parentViewController")
+	_nSViewControllerSelChildViewControllers                                                                      = objc.RegisterName("childViewControllers")
+	_nSViewControllerSelSetChildViewControllers                                                                   = objc.RegisterName("setChildViewControllers:")
+	_nSViewControllerSelStoryboard                                                                                = objc.RegisterName("storyboard")
+	_nSViewControllerSelExtensionContext                                                                          = objc.RegisterName("extensionContext")
+	_nSViewControllerSelSourceItemView                                                                            = objc.RegisterName("sourceItemView")
+	_nSViewControllerSelSetSourceItemView                                                                         = objc.RegisterName("setSourceItemView:")
+	_nSViewControllerSelPreferredScreenOrigin                                                                     = objc.RegisterName("preferredScreenOrigin")
+	_nSViewControllerSelSetPreferredScreenOrigin                                                                  = objc.RegisterName("setPreferredScreenOrigin:")
+	_nSViewControllerSelPreferredMinimumSize                                                                      = objc.RegisterName("preferredMinimumSize")
+	_nSViewControllerSelPreferredMaximumSize                                                                      = objc.RegisterName("preferredMaximumSize")
 )
 
 func NSViewControllerFromID(id objc.ID) *NSViewController {
@@ -88,13 +88,17 @@ func NSViewControllerFromID(id objc.ID) *NSViewController {
 
 func (o *NSViewController) InitWithNibNameBundle(nibNameOrNil *foundation.NSString, nibBundleOrNil *foundation.NSBundle) *NSViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelInitWithNibNameBundle, nibNameOrNil.Ptr(), nibBundleOrNil.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewControllerFromID(_ret)
 }
 
 func (o *NSViewController) InitWithCoder(coder *foundation.NSCoder) *NSViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewControllerFromID(_ret)
 }
 
@@ -153,13 +157,17 @@ func (o *NSViewController) ViewDidLayout() {
 
 func (o *NSViewController) NibName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelNibName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSViewController) NibBundle() *foundation.NSBundle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelNibBundle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSBundleFromID(_ret)
 }
 
@@ -174,7 +182,9 @@ func (o *NSViewController) SetRepresentedObject(representedObject objc.ID) {
 
 func (o *NSViewController) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -184,7 +194,9 @@ func (o *NSViewController) SetTitle(title *foundation.NSString) {
 
 func (o *NSViewController) View() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -194,7 +206,9 @@ func (o *NSViewController) SetView(view *NSView) {
 
 func (o *NSViewController) ViewIfLoaded() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelViewIfLoaded)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -226,13 +240,17 @@ func (o *NSViewController) DismissController(sender objc.ID) {
 
 func (o *NSViewController) PresentedViewControllers() *foundation.NSArray[*NSViewController] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelPresentedViewControllers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSViewController](_ret)
 }
 
 func (o *NSViewController) PresentingViewController() *NSViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelPresentingViewController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewControllerFromID(_ret)
 }
 
@@ -289,13 +307,17 @@ func (o *NSViewController) ViewWillTransitionToSize(newSize corefoundation.CGSiz
 
 func (o *NSViewController) ParentViewController() *NSViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelParentViewController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewControllerFromID(_ret)
 }
 
 func (o *NSViewController) ChildViewControllers() *foundation.NSArray[*NSViewController] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelChildViewControllers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSViewController](_ret)
 }
 
@@ -305,19 +327,25 @@ func (o *NSViewController) SetChildViewControllers(childViewControllers *foundat
 
 func (o *NSViewController) Storyboard() *NSStoryboard {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelStoryboard)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStoryboardFromID(_ret)
 }
 
 func (o *NSViewController) ExtensionContext() *foundation.NSExtensionContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelExtensionContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSExtensionContextFromID(_ret)
 }
 
 func (o *NSViewController) SourceItemView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelSourceItemView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -343,4 +371,3 @@ func (o *NSViewController) PreferredMaximumSize() corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSViewControllerSelPreferredMaximumSize)
 	return _ret
 }
-

@@ -99,4 +99,3 @@ type WKNavigationActionable interface {
 }
 
 var _ WKNavigationActionable = (*WKNavigationAction)(nil)
-

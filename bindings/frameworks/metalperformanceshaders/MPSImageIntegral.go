@@ -26,4 +26,3 @@ func MPSImageIntegralFromID(id objc.ID) *MPSImageIntegral {
 	purego.Track(o)
 	return o
 }
-

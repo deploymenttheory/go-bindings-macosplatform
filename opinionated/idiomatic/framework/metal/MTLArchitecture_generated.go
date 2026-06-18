@@ -52,4 +52,3 @@ type Architectureable interface {
 }
 
 var _ Architectureable = (*Architecture)(nil)
-

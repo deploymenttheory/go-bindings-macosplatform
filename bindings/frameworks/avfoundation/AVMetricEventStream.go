@@ -16,12 +16,12 @@ type AVMetricEventStream struct {
 }
 
 var (
-	_clsAVMetricEventStream = _objcClass("AVMetricEventStream")
-	_aVMetricEventStreamSelEventStream = objc.RegisterName("eventStream")
-	_aVMetricEventStreamSelAddPublisher = objc.RegisterName("addPublisher:")
-	_aVMetricEventStreamSelSetSubscriberQueue = objc.RegisterName("setSubscriber:queue:")
-	_aVMetricEventStreamSelSubscribeToMetricEvent = objc.RegisterName("subscribeToMetricEvent:")
-	_aVMetricEventStreamSelSubscribeToMetricEvents = objc.RegisterName("subscribeToMetricEvents:")
+	_clsAVMetricEventStream                           = _objcClass("AVMetricEventStream")
+	_aVMetricEventStreamSelEventStream                = objc.RegisterName("eventStream")
+	_aVMetricEventStreamSelAddPublisher               = objc.RegisterName("addPublisher:")
+	_aVMetricEventStreamSelSetSubscriberQueue         = objc.RegisterName("setSubscriber:queue:")
+	_aVMetricEventStreamSelSubscribeToMetricEvent     = objc.RegisterName("subscribeToMetricEvent:")
+	_aVMetricEventStreamSelSubscribeToMetricEvents    = objc.RegisterName("subscribeToMetricEvents:")
 	_aVMetricEventStreamSelSubscribeToAllMetricEvents = objc.RegisterName("subscribeToAllMetricEvents")
 )
 
@@ -38,7 +38,9 @@ func AVMetricEventStreamFromID(id objc.ID) *AVMetricEventStream {
 // Returns an autoreleased instance.
 func AVMetricEventStreamEventStream() *AVMetricEventStream {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMetricEventStream), _aVMetricEventStreamSelEventStream)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMetricEventStreamFromID(_ret)
 }
 
@@ -68,4 +70,3 @@ func (o *AVMetricEventStream) SubscribeToMetricEvents(metricEventClasses *founda
 func (o *AVMetricEventStream) SubscribeToAllMetricEvents() {
 	o.Ptr().Send(_aVMetricEventStreamSelSubscribeToAllMetricEvents)
 }
-

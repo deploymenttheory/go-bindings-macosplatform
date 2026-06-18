@@ -54,11 +54,17 @@ func (x *ArrayUnaryGradientKernel) EncodeToCommandBufferSourceArraySourceGradien
 	x.inner.EncodeToCommandBufferSourceArraySourceGradientGradientStateDestinationArray(cmdBuf, sourceArray, gradient, state, destination)
 }
 
-func (x *ArrayUnaryGradientKernel) asArrayUnaryGradientKernel() *raw.MPSNDArrayUnaryGradientKernel { return x.inner }
+func (x *ArrayUnaryGradientKernel) asArrayUnaryGradientKernel() *raw.MPSNDArrayUnaryGradientKernel {
+	return x.inner
+}
 
-func (x *ArrayUnaryGradientKernel) asArrayMultiaryGradientKernel() *raw.MPSNDArrayMultiaryGradientKernel { return &x.inner.MPSNDArrayMultiaryGradientKernel }
+func (x *ArrayUnaryGradientKernel) asArrayMultiaryGradientKernel() *raw.MPSNDArrayMultiaryGradientKernel {
+	return &x.inner.MPSNDArrayMultiaryGradientKernel
+}
 
-func (x *ArrayUnaryGradientKernel) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase }
+func (x *ArrayUnaryGradientKernel) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase {
+	return &x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase
+}
 
 // ArrayUnaryGradientKernelable is the interface implemented by [ArrayUnaryGradientKernel], for mocking and DI.
 type ArrayUnaryGradientKernelable interface {
@@ -69,4 +75,3 @@ type ArrayUnaryGradientKernelable interface {
 }
 
 var _ ArrayUnaryGradientKernelable = (*ArrayUnaryGradientKernel)(nil)
-

@@ -16,7 +16,9 @@ type MTRClusterRelativeHumidityMeasurement struct {
 }
 
 // Unwrap returns the underlying [raw.MTRClusterRelativeHumidityMeasurement].
-func (x *MTRClusterRelativeHumidityMeasurement) Unwrap() *raw.MTRClusterRelativeHumidityMeasurement { return x.inner }
+func (x *MTRClusterRelativeHumidityMeasurement) Unwrap() *raw.MTRClusterRelativeHumidityMeasurement {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -89,9 +91,13 @@ func (x *MTRClusterRelativeHumidityMeasurement) ReadAttributeClusterRevisionWith
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterRelativeHumidityMeasurement) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterRelativeHumidityMeasurement) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterRelativeHumidityMeasurement) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterRelativeHumidityMeasurement) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterRelativeHumidityMeasurementable is the interface implemented by [MTRClusterRelativeHumidityMeasurement], for mocking and DI.
 type MTRClusterRelativeHumidityMeasurementable interface {
@@ -108,4 +114,3 @@ type MTRClusterRelativeHumidityMeasurementable interface {
 }
 
 var _ MTRClusterRelativeHumidityMeasurementable = (*MTRClusterRelativeHumidityMeasurement)(nil)
-

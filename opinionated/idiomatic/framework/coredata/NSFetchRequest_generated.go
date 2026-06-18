@@ -64,7 +64,9 @@ func (x *FetchRequest) WithSortDescriptors(items ...*foundation.NSSortDescriptor
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSSortDescriptor](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -110,7 +112,9 @@ func (x *FetchRequest) WithRelationshipKeyPathsForPrefetching(items ...*foundati
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -162,7 +166,9 @@ func (x *FetchRequest) WithAffectedStores(items ...PersistentStoreProvider) *Fet
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asPersistentStore().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asPersistentStore().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSPersistentStore](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -371,7 +377,9 @@ func (x *FetchRequest) SetHavingPredicate(havingPredicate *foundation.NSPredicat
 	x.inner.SetHavingPredicate(havingPredicate)
 }
 
-func (x *FetchRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest { return &x.inner.NSPersistentStoreRequest }
+func (x *FetchRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest {
+	return &x.inner.NSPersistentStoreRequest
+}
 
 // FetchRequestable is the interface implemented by [FetchRequest], for mocking and DI.
 type FetchRequestable interface {
@@ -431,4 +439,3 @@ type FetchRequestable interface {
 }
 
 var _ FetchRequestable = (*FetchRequest)(nil)
-

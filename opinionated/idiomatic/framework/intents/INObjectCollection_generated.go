@@ -81,4 +81,3 @@ type ObjectCollectionable interface {
 }
 
 var _ ObjectCollectionable = (*ObjectCollection)(nil)
-

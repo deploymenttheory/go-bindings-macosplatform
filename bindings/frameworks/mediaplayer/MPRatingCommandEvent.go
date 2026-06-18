@@ -15,7 +15,7 @@ type MPRatingCommandEvent struct {
 }
 
 var (
-	_clsMPRatingCommandEvent = _objcClass("MPRatingCommandEvent")
+	_clsMPRatingCommandEvent       = _objcClass("MPRatingCommandEvent")
 	_mPRatingCommandEventSelRating = objc.RegisterName("rating")
 )
 
@@ -33,4 +33,3 @@ func (o *MPRatingCommandEvent) Rating() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _mPRatingCommandEventSelRating)
 	return _ret
 }
-

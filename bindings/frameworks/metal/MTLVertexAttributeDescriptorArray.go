@@ -16,8 +16,8 @@ type MTLVertexAttributeDescriptorArray struct {
 }
 
 var (
-	_clsMTLVertexAttributeDescriptorArray = _objcClass("MTLVertexAttributeDescriptorArray")
-	_mTLVertexAttributeDescriptorArraySelObjectAtIndexedSubscript = objc.RegisterName("objectAtIndexedSubscript:")
+	_clsMTLVertexAttributeDescriptorArray                            = _objcClass("MTLVertexAttributeDescriptorArray")
+	_mTLVertexAttributeDescriptorArraySelObjectAtIndexedSubscript    = objc.RegisterName("objectAtIndexedSubscript:")
 	_mTLVertexAttributeDescriptorArraySelSetObjectAtIndexedSubscript = objc.RegisterName("setObject:atIndexedSubscript:")
 )
 
@@ -33,11 +33,12 @@ func MTLVertexAttributeDescriptorArrayFromID(id objc.ID) *MTLVertexAttributeDesc
 
 func (o *MTLVertexAttributeDescriptorArray) ObjectAtIndexedSubscript(index uint) *MTLVertexAttributeDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLVertexAttributeDescriptorArraySelObjectAtIndexedSubscript, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLVertexAttributeDescriptorFromID(_ret)
 }
 
 func (o *MTLVertexAttributeDescriptorArray) SetObjectAtIndexedSubscript(attributeDesc *MTLVertexAttributeDescriptor, index uint) {
 	o.Ptr().Send(_mTLVertexAttributeDescriptorArraySelSetObjectAtIndexedSubscript, attributeDesc.Ptr(), index)
 }
-

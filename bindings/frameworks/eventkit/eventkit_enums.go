@@ -11,7 +11,7 @@ import (
 type EKAlarmProximity int64
 
 const (
-	EKAlarmProximityNone EKAlarmProximity = 0
+	EKAlarmProximityNone  EKAlarmProximity = 0
 	EKAlarmProximityEnter EKAlarmProximity = 1
 	EKAlarmProximityLeave EKAlarmProximity = 2
 )
@@ -32,10 +32,10 @@ func (e EKAlarmProximity) String() string {
 type EKAlarmType int64
 
 const (
-	EKAlarmTypeDisplay EKAlarmType = 0
-	EKAlarmTypeAudio EKAlarmType = 1
+	EKAlarmTypeDisplay   EKAlarmType = 0
+	EKAlarmTypeAudio     EKAlarmType = 1
 	EKAlarmTypeProcedure EKAlarmType = 2
-	EKAlarmTypeEmail EKAlarmType = 3
+	EKAlarmTypeEmail     EKAlarmType = 3
 )
 
 func (e EKAlarmType) String() string {
@@ -57,11 +57,11 @@ type EKAuthorizationStatus int64
 
 const (
 	EKAuthorizationStatusNotDetermined EKAuthorizationStatus = 0
-	EKAuthorizationStatusRestricted EKAuthorizationStatus = 1
-	EKAuthorizationStatusDenied EKAuthorizationStatus = 2
-	EKAuthorizationStatusFullAccess EKAuthorizationStatus = 3
-	EKAuthorizationStatusWriteOnly EKAuthorizationStatus = 4
-	EKAuthorizationStatusAuthorized EKAuthorizationStatus = 3
+	EKAuthorizationStatusRestricted    EKAuthorizationStatus = 1
+	EKAuthorizationStatusDenied        EKAuthorizationStatus = 2
+	EKAuthorizationStatusFullAccess    EKAuthorizationStatus = 3
+	EKAuthorizationStatusWriteOnly     EKAuthorizationStatus = 4
+	EKAuthorizationStatusAuthorized    EKAuthorizationStatus = 3
 )
 
 func (e EKAuthorizationStatus) String() string {
@@ -84,31 +84,41 @@ func (e EKAuthorizationStatus) String() string {
 type EKCalendarEventAvailabilityMask uint64
 
 const (
-	EKCalendarEventAvailabilityNone EKCalendarEventAvailabilityMask = 0
-	EKCalendarEventAvailabilityBusy EKCalendarEventAvailabilityMask = 1
-	EKCalendarEventAvailabilityFree EKCalendarEventAvailabilityMask = 2
-	EKCalendarEventAvailabilityTentative EKCalendarEventAvailabilityMask = 4
+	EKCalendarEventAvailabilityNone        EKCalendarEventAvailabilityMask = 0
+	EKCalendarEventAvailabilityBusy        EKCalendarEventAvailabilityMask = 1
+	EKCalendarEventAvailabilityFree        EKCalendarEventAvailabilityMask = 2
+	EKCalendarEventAvailabilityTentative   EKCalendarEventAvailabilityMask = 4
 	EKCalendarEventAvailabilityUnavailable EKCalendarEventAvailabilityMask = 8
 )
 
 func (e EKCalendarEventAvailabilityMask) String() string {
 	var parts []string
-	if e&EKCalendarEventAvailabilityBusy != 0 { parts = append(parts, "EKCalendarEventAvailabilityBusy") }
-	if e&EKCalendarEventAvailabilityFree != 0 { parts = append(parts, "EKCalendarEventAvailabilityFree") }
-	if e&EKCalendarEventAvailabilityTentative != 0 { parts = append(parts, "EKCalendarEventAvailabilityTentative") }
-	if e&EKCalendarEventAvailabilityUnavailable != 0 { parts = append(parts, "EKCalendarEventAvailabilityUnavailable") }
-	if len(parts) == 0 { return "0" }
+	if e&EKCalendarEventAvailabilityBusy != 0 {
+		parts = append(parts, "EKCalendarEventAvailabilityBusy")
+	}
+	if e&EKCalendarEventAvailabilityFree != 0 {
+		parts = append(parts, "EKCalendarEventAvailabilityFree")
+	}
+	if e&EKCalendarEventAvailabilityTentative != 0 {
+		parts = append(parts, "EKCalendarEventAvailabilityTentative")
+	}
+	if e&EKCalendarEventAvailabilityUnavailable != 0 {
+		parts = append(parts, "EKCalendarEventAvailabilityUnavailable")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type EKCalendarType int64
 
 const (
-	EKCalendarTypeLocal EKCalendarType = 0
-	EKCalendarTypeCalDAV EKCalendarType = 1
-	EKCalendarTypeExchange EKCalendarType = 2
+	EKCalendarTypeLocal        EKCalendarType = 0
+	EKCalendarTypeCalDAV       EKCalendarType = 1
+	EKCalendarTypeExchange     EKCalendarType = 2
 	EKCalendarTypeSubscription EKCalendarType = 3
-	EKCalendarTypeBirthday EKCalendarType = 4
+	EKCalendarTypeBirthday     EKCalendarType = 4
 )
 
 func (e EKCalendarType) String() string {
@@ -131,22 +141,28 @@ func (e EKCalendarType) String() string {
 type EKEntityMask uint64
 
 const (
-	EKEntityMaskEvent EKEntityMask = 1
+	EKEntityMaskEvent    EKEntityMask = 1
 	EKEntityMaskReminder EKEntityMask = 2
 )
 
 func (e EKEntityMask) String() string {
 	var parts []string
-	if e&EKEntityMaskEvent != 0 { parts = append(parts, "EKEntityMaskEvent") }
-	if e&EKEntityMaskReminder != 0 { parts = append(parts, "EKEntityMaskReminder") }
-	if len(parts) == 0 { return "0" }
+	if e&EKEntityMaskEvent != 0 {
+		parts = append(parts, "EKEntityMaskEvent")
+	}
+	if e&EKEntityMaskReminder != 0 {
+		parts = append(parts, "EKEntityMaskReminder")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type EKEntityType uint64
 
 const (
-	EKEntityTypeEvent EKEntityType = 0
+	EKEntityTypeEvent    EKEntityType = 0
 	EKEntityTypeReminder EKEntityType = 1
 )
 
@@ -164,44 +180,44 @@ func (e EKEntityType) String() string {
 type EKErrorCode int64
 
 const (
-	EKErrorEventNotMutable EKErrorCode = 0
-	EKErrorNoCalendar EKErrorCode = 1
-	EKErrorNoStartDate EKErrorCode = 2
-	EKErrorNoEndDate EKErrorCode = 3
-	EKErrorDatesInverted EKErrorCode = 4
-	EKErrorInternalFailure EKErrorCode = 5
-	EKErrorCalendarReadOnly EKErrorCode = 6
-	EKErrorDurationGreaterThanRecurrence EKErrorCode = 7
-	EKErrorAlarmGreaterThanRecurrence EKErrorCode = 8
-	EKErrorStartDateTooFarInFuture EKErrorCode = 9
+	EKErrorEventNotMutable                      EKErrorCode = 0
+	EKErrorNoCalendar                           EKErrorCode = 1
+	EKErrorNoStartDate                          EKErrorCode = 2
+	EKErrorNoEndDate                            EKErrorCode = 3
+	EKErrorDatesInverted                        EKErrorCode = 4
+	EKErrorInternalFailure                      EKErrorCode = 5
+	EKErrorCalendarReadOnly                     EKErrorCode = 6
+	EKErrorDurationGreaterThanRecurrence        EKErrorCode = 7
+	EKErrorAlarmGreaterThanRecurrence           EKErrorCode = 8
+	EKErrorStartDateTooFarInFuture              EKErrorCode = 9
 	EKErrorStartDateCollidesWithOtherOccurrence EKErrorCode = 10
-	EKErrorObjectBelongsToDifferentStore EKErrorCode = 11
-	EKErrorInvitesCannotBeMoved EKErrorCode = 12
-	EKErrorInvalidSpan EKErrorCode = 13
-	EKErrorCalendarHasNoSource EKErrorCode = 14
-	EKErrorCalendarSourceCannotBeModified EKErrorCode = 15
-	EKErrorCalendarIsImmutable EKErrorCode = 16
-	EKErrorSourceDoesNotAllowCalendarAddDelete EKErrorCode = 17
-	EKErrorRecurringReminderRequiresDueDate EKErrorCode = 18
-	EKErrorStructuredLocationsNotSupported EKErrorCode = 19
-	EKErrorReminderLocationsNotSupported EKErrorCode = 20
-	EKErrorAlarmProximityNotSupported EKErrorCode = 21
-	EKErrorCalendarDoesNotAllowEvents EKErrorCode = 22
-	EKErrorCalendarDoesNotAllowReminders EKErrorCode = 23
-	EKErrorSourceDoesNotAllowReminders EKErrorCode = 24
-	EKErrorSourceDoesNotAllowEvents EKErrorCode = 25
-	EKErrorPriorityIsInvalid EKErrorCode = 26
-	EKErrorInvalidEntityType EKErrorCode = 27
-	EKErrorProcedureAlarmsNotMutable EKErrorCode = 28
-	EKErrorEventStoreNotAuthorized EKErrorCode = 29
-	EKErrorOSNotSupported EKErrorCode = 30
-	EKErrorInvalidInviteReplyCalendar EKErrorCode = 31
-	EKErrorNotificationsCollectionFlagNotSet EKErrorCode = 32
-	EKErrorSourceMismatch EKErrorCode = 33
-	EKErrorNotificationCollectionMismatch EKErrorCode = 34
-	EKErrorNotificationSavedWithoutCollection EKErrorCode = 35
-	EKErrorReminderAlarmContainsEmailOrUrl EKErrorCode = 36
-	EKErrorLast EKErrorCode = 37
+	EKErrorObjectBelongsToDifferentStore        EKErrorCode = 11
+	EKErrorInvitesCannotBeMoved                 EKErrorCode = 12
+	EKErrorInvalidSpan                          EKErrorCode = 13
+	EKErrorCalendarHasNoSource                  EKErrorCode = 14
+	EKErrorCalendarSourceCannotBeModified       EKErrorCode = 15
+	EKErrorCalendarIsImmutable                  EKErrorCode = 16
+	EKErrorSourceDoesNotAllowCalendarAddDelete  EKErrorCode = 17
+	EKErrorRecurringReminderRequiresDueDate     EKErrorCode = 18
+	EKErrorStructuredLocationsNotSupported      EKErrorCode = 19
+	EKErrorReminderLocationsNotSupported        EKErrorCode = 20
+	EKErrorAlarmProximityNotSupported           EKErrorCode = 21
+	EKErrorCalendarDoesNotAllowEvents           EKErrorCode = 22
+	EKErrorCalendarDoesNotAllowReminders        EKErrorCode = 23
+	EKErrorSourceDoesNotAllowReminders          EKErrorCode = 24
+	EKErrorSourceDoesNotAllowEvents             EKErrorCode = 25
+	EKErrorPriorityIsInvalid                    EKErrorCode = 26
+	EKErrorInvalidEntityType                    EKErrorCode = 27
+	EKErrorProcedureAlarmsNotMutable            EKErrorCode = 28
+	EKErrorEventStoreNotAuthorized              EKErrorCode = 29
+	EKErrorOSNotSupported                       EKErrorCode = 30
+	EKErrorInvalidInviteReplyCalendar           EKErrorCode = 31
+	EKErrorNotificationsCollectionFlagNotSet    EKErrorCode = 32
+	EKErrorSourceMismatch                       EKErrorCode = 33
+	EKErrorNotificationCollectionMismatch       EKErrorCode = 34
+	EKErrorNotificationSavedWithoutCollection   EKErrorCode = 35
+	EKErrorReminderAlarmContainsEmailOrUrl      EKErrorCode = 36
+	EKErrorLast                                 EKErrorCode = 37
 )
 
 func (e EKErrorCode) String() string {
@@ -291,10 +307,10 @@ type EKEventAvailability int64
 
 const (
 	EKEventAvailabilityNotSupported EKEventAvailability = -1
-	EKEventAvailabilityBusy EKEventAvailability = 0
-	EKEventAvailabilityFree EKEventAvailability = 1
-	EKEventAvailabilityTentative EKEventAvailability = 2
-	EKEventAvailabilityUnavailable EKEventAvailability = 3
+	EKEventAvailabilityBusy         EKEventAvailability = 0
+	EKEventAvailabilityFree         EKEventAvailability = 1
+	EKEventAvailabilityTentative    EKEventAvailability = 2
+	EKEventAvailabilityUnavailable  EKEventAvailability = 3
 )
 
 func (e EKEventAvailability) String() string {
@@ -317,10 +333,10 @@ func (e EKEventAvailability) String() string {
 type EKEventStatus int64
 
 const (
-	EKEventStatusNone EKEventStatus = 0
+	EKEventStatusNone      EKEventStatus = 0
 	EKEventStatusConfirmed EKEventStatus = 1
 	EKEventStatusTentative EKEventStatus = 2
-	EKEventStatusCanceled EKEventStatus = 3
+	EKEventStatusCanceled  EKEventStatus = 3
 )
 
 func (e EKEventStatus) String() string {
@@ -341,10 +357,10 @@ func (e EKEventStatus) String() string {
 type EKParticipantRole int64
 
 const (
-	EKParticipantRoleUnknown EKParticipantRole = 0
-	EKParticipantRoleRequired EKParticipantRole = 1
-	EKParticipantRoleOptional EKParticipantRole = 2
-	EKParticipantRoleChair EKParticipantRole = 3
+	EKParticipantRoleUnknown        EKParticipantRole = 0
+	EKParticipantRoleRequired       EKParticipantRole = 1
+	EKParticipantRoleOptional       EKParticipantRole = 2
+	EKParticipantRoleChair          EKParticipantRole = 3
 	EKParticipantRoleNonParticipant EKParticipantRole = 4
 )
 
@@ -368,15 +384,15 @@ func (e EKParticipantRole) String() string {
 type EKParticipantScheduleStatus int64
 
 const (
-	EKParticipantScheduleStatusNone EKParticipantScheduleStatus = 0
-	EKParticipantScheduleStatusPending EKParticipantScheduleStatus = 1
-	EKParticipantScheduleStatusSent EKParticipantScheduleStatus = 2
-	EKParticipantScheduleStatusDelivered EKParticipantScheduleStatus = 3
+	EKParticipantScheduleStatusNone                   EKParticipantScheduleStatus = 0
+	EKParticipantScheduleStatusPending                EKParticipantScheduleStatus = 1
+	EKParticipantScheduleStatusSent                   EKParticipantScheduleStatus = 2
+	EKParticipantScheduleStatusDelivered              EKParticipantScheduleStatus = 3
 	EKParticipantScheduleStatusRecipientNotRecognized EKParticipantScheduleStatus = 4
-	EKParticipantScheduleStatusNoPrivileges EKParticipantScheduleStatus = 5
-	EKParticipantScheduleStatusDeliveryFailed EKParticipantScheduleStatus = 6
-	EKParticipantScheduleStatusCannotDeliver EKParticipantScheduleStatus = 7
-	EKParticipantScheduleStatusRecipientNotAllowed EKParticipantScheduleStatus = 8
+	EKParticipantScheduleStatusNoPrivileges           EKParticipantScheduleStatus = 5
+	EKParticipantScheduleStatusDeliveryFailed         EKParticipantScheduleStatus = 6
+	EKParticipantScheduleStatusCannotDeliver          EKParticipantScheduleStatus = 7
+	EKParticipantScheduleStatusRecipientNotAllowed    EKParticipantScheduleStatus = 8
 )
 
 func (e EKParticipantScheduleStatus) String() string {
@@ -407,10 +423,10 @@ func (e EKParticipantScheduleStatus) String() string {
 type EKParticipantStatus int64
 
 const (
-	EKParticipantStatusUnknown EKParticipantStatus = 0
-	EKParticipantStatusPending EKParticipantStatus = 1
-	EKParticipantStatusAccepted EKParticipantStatus = 2
-	EKParticipantStatusDeclined EKParticipantStatus = 3
+	EKParticipantStatusUnknown   EKParticipantStatus = 0
+	EKParticipantStatusPending   EKParticipantStatus = 1
+	EKParticipantStatusAccepted  EKParticipantStatus = 2
+	EKParticipantStatusDeclined  EKParticipantStatus = 3
 	EKParticipantStatusTentative EKParticipantStatus = 4
 	EKParticipantStatusDelegated EKParticipantStatus = 5
 	EKParticipantStatusCompleted EKParticipantStatus = 6
@@ -443,11 +459,11 @@ func (e EKParticipantStatus) String() string {
 type EKParticipantType int64
 
 const (
-	EKParticipantTypeUnknown EKParticipantType = 0
-	EKParticipantTypePerson EKParticipantType = 1
-	EKParticipantTypeRoom EKParticipantType = 2
+	EKParticipantTypeUnknown  EKParticipantType = 0
+	EKParticipantTypePerson   EKParticipantType = 1
+	EKParticipantTypeRoom     EKParticipantType = 2
 	EKParticipantTypeResource EKParticipantType = 3
-	EKParticipantTypeGroup EKParticipantType = 4
+	EKParticipantTypeGroup    EKParticipantType = 4
 )
 
 func (e EKParticipantType) String() string {
@@ -470,10 +486,10 @@ func (e EKParticipantType) String() string {
 type EKRecurrenceFrequency int64
 
 const (
-	EKRecurrenceFrequencyDaily EKRecurrenceFrequency = 0
-	EKRecurrenceFrequencyWeekly EKRecurrenceFrequency = 1
+	EKRecurrenceFrequencyDaily   EKRecurrenceFrequency = 0
+	EKRecurrenceFrequencyWeekly  EKRecurrenceFrequency = 1
 	EKRecurrenceFrequencyMonthly EKRecurrenceFrequency = 2
-	EKRecurrenceFrequencyYearly EKRecurrenceFrequency = 3
+	EKRecurrenceFrequencyYearly  EKRecurrenceFrequency = 3
 )
 
 func (e EKRecurrenceFrequency) String() string {
@@ -494,10 +510,10 @@ func (e EKRecurrenceFrequency) String() string {
 type EKReminderPriority uint64
 
 const (
-	EKReminderPriorityNone EKReminderPriority = 0
-	EKReminderPriorityHigh EKReminderPriority = 1
+	EKReminderPriorityNone   EKReminderPriority = 0
+	EKReminderPriorityHigh   EKReminderPriority = 1
 	EKReminderPriorityMedium EKReminderPriority = 5
-	EKReminderPriorityLow EKReminderPriority = 9
+	EKReminderPriorityLow    EKReminderPriority = 9
 )
 
 func (e EKReminderPriority) String() string {
@@ -518,12 +534,12 @@ func (e EKReminderPriority) String() string {
 type EKSourceType int64
 
 const (
-	EKSourceTypeLocal EKSourceType = 0
-	EKSourceTypeExchange EKSourceType = 1
-	EKSourceTypeCalDAV EKSourceType = 2
-	EKSourceTypeMobileMe EKSourceType = 3
+	EKSourceTypeLocal      EKSourceType = 0
+	EKSourceTypeExchange   EKSourceType = 1
+	EKSourceTypeCalDAV     EKSourceType = 2
+	EKSourceTypeMobileMe   EKSourceType = 3
 	EKSourceTypeSubscribed EKSourceType = 4
-	EKSourceTypeBirthdays EKSourceType = 5
+	EKSourceTypeBirthdays  EKSourceType = 5
 )
 
 func (e EKSourceType) String() string {
@@ -548,7 +564,7 @@ func (e EKSourceType) String() string {
 type EKSpan int64
 
 const (
-	EKSpanThisEvent EKSpan = 0
+	EKSpanThisEvent    EKSpan = 0
 	EKSpanFutureEvents EKSpan = 1
 )
 
@@ -566,20 +582,20 @@ func (e EKSpan) String() string {
 type EKWeekday int64
 
 const (
-	EKWeekdaySunday EKWeekday = 1
-	EKWeekdayMonday EKWeekday = 2
-	EKWeekdayTuesday EKWeekday = 3
+	EKWeekdaySunday    EKWeekday = 1
+	EKWeekdayMonday    EKWeekday = 2
+	EKWeekdayTuesday   EKWeekday = 3
 	EKWeekdayWednesday EKWeekday = 4
-	EKWeekdayThursday EKWeekday = 5
-	EKWeekdayFriday EKWeekday = 6
-	EKWeekdaySaturday EKWeekday = 7
-	EKSunday EKWeekday = 1
-	EKMonday EKWeekday = 2
-	EKTuesday EKWeekday = 3
-	EKWednesday EKWeekday = 4
-	EKThursday EKWeekday = 5
-	EKFriday EKWeekday = 6
-	EKSaturday EKWeekday = 7
+	EKWeekdayThursday  EKWeekday = 5
+	EKWeekdayFriday    EKWeekday = 6
+	EKWeekdaySaturday  EKWeekday = 7
+	EKSunday           EKWeekday = 1
+	EKMonday           EKWeekday = 2
+	EKTuesday          EKWeekday = 3
+	EKWednesday        EKWeekday = 4
+	EKThursday         EKWeekday = 5
+	EKFriday           EKWeekday = 6
+	EKSaturday         EKWeekday = 7
 )
 
 func (e EKWeekday) String() string {
@@ -606,10 +622,10 @@ func (e EKWeekday) String() string {
 type EvCmd int64
 
 const (
-	EVNOP EvCmd = 0
-	EVHIDE EvCmd = 1
-	EVSHOW EvCmd = 2
-	EVMOVE EvCmd = 3
+	EVNOP   EvCmd = 0
+	EVHIDE  EvCmd = 1
+	EVSHOW  EvCmd = 2
+	EVMOVE  EvCmd = 3
 	EVLEVEL EvCmd = 4
 )
 
@@ -634,7 +650,7 @@ func (e EvCmd) String() string {
 type MDLabelDomain int64
 
 const (
-	KMDLabelUserDomain MDLabelDomain = 0
+	KMDLabelUserDomain  MDLabelDomain = 0
 	KMDLabelLocalDomain MDLabelDomain = 1
 )
 
@@ -652,8 +668,8 @@ func (e MDLabelDomain) String() string {
 type MDQueryOptionFlags int64
 
 const (
-	KMDQuerySynchronous MDQueryOptionFlags = 1
-	KMDQueryWantsUpdates MDQueryOptionFlags = 4
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
 	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
 )
 
@@ -689,8 +705,8 @@ func (e MDQuerySortOptionFlags) String() string {
 type NXMouseButton int64
 
 const (
-	NX_OneButton NXMouseButton = 0
-	NX_LeftButton NXMouseButton = 1
+	NX_OneButton   NXMouseButton = 0
+	NX_LeftButton  NXMouseButton = 1
 	NX_RightButton NXMouseButton = 2
 )
 
@@ -711,8 +727,8 @@ type Acl_entry_id_t int64
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
-	ACL_NEXT_ENTRY Acl_entry_id_t = -1
-	ACL_LAST_ENTRY Acl_entry_id_t = -2
+	ACL_NEXT_ENTRY  Acl_entry_id_t = -1
+	ACL_LAST_ENTRY  Acl_entry_id_t = -2
 )
 
 func (e Acl_entry_id_t) String() string {
@@ -731,13 +747,13 @@ func (e Acl_entry_id_t) String() string {
 type Acl_flag_t int64
 
 const (
-	ACL_FLAG_DEFER_INHERIT Acl_flag_t = 1
-	ACL_FLAG_NO_INHERIT Acl_flag_t = 131072
-	ACL_ENTRY_INHERITED Acl_flag_t = 16
-	ACL_ENTRY_FILE_INHERIT Acl_flag_t = 32
+	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
+	ACL_FLAG_NO_INHERIT         Acl_flag_t = 131072
+	ACL_ENTRY_INHERITED         Acl_flag_t = 16
+	ACL_ENTRY_FILE_INHERIT      Acl_flag_t = 32
 	ACL_ENTRY_DIRECTORY_INHERIT Acl_flag_t = 64
-	ACL_ENTRY_LIMIT_INHERIT Acl_flag_t = 128
-	ACL_ENTRY_ONLY_INHERIT Acl_flag_t = 256
+	ACL_ENTRY_LIMIT_INHERIT     Acl_flag_t = 128
+	ACL_ENTRY_ONLY_INHERIT      Acl_flag_t = 256
 )
 
 func (e Acl_flag_t) String() string {
@@ -764,24 +780,24 @@ func (e Acl_flag_t) String() string {
 type Acl_perm_t int64
 
 const (
-	ACL_READ_DATA Acl_perm_t = 2
-	ACL_LIST_DIRECTORY Acl_perm_t = 2
-	ACL_WRITE_DATA Acl_perm_t = 4
-	ACL_ADD_FILE Acl_perm_t = 4
-	ACL_EXECUTE Acl_perm_t = 8
-	ACL_SEARCH Acl_perm_t = 8
-	ACL_DELETE Acl_perm_t = 16
-	ACL_APPEND_DATA Acl_perm_t = 32
-	ACL_ADD_SUBDIRECTORY Acl_perm_t = 32
-	ACL_DELETE_CHILD Acl_perm_t = 64
-	ACL_READ_ATTRIBUTES Acl_perm_t = 128
-	ACL_WRITE_ATTRIBUTES Acl_perm_t = 256
-	ACL_READ_EXTATTRIBUTES Acl_perm_t = 512
+	ACL_READ_DATA           Acl_perm_t = 2
+	ACL_LIST_DIRECTORY      Acl_perm_t = 2
+	ACL_WRITE_DATA          Acl_perm_t = 4
+	ACL_ADD_FILE            Acl_perm_t = 4
+	ACL_EXECUTE             Acl_perm_t = 8
+	ACL_SEARCH              Acl_perm_t = 8
+	ACL_DELETE              Acl_perm_t = 16
+	ACL_APPEND_DATA         Acl_perm_t = 32
+	ACL_ADD_SUBDIRECTORY    Acl_perm_t = 32
+	ACL_DELETE_CHILD        Acl_perm_t = 64
+	ACL_READ_ATTRIBUTES     Acl_perm_t = 128
+	ACL_WRITE_ATTRIBUTES    Acl_perm_t = 256
+	ACL_READ_EXTATTRIBUTES  Acl_perm_t = 512
 	ACL_WRITE_EXTATTRIBUTES Acl_perm_t = 1024
-	ACL_READ_SECURITY Acl_perm_t = 2048
-	ACL_WRITE_SECURITY Acl_perm_t = 4096
-	ACL_CHANGE_OWNER Acl_perm_t = 8192
-	ACL_SYNCHRONIZE Acl_perm_t = 1048576
+	ACL_READ_SECURITY       Acl_perm_t = 2048
+	ACL_WRITE_SECURITY      Acl_perm_t = 4096
+	ACL_CHANGE_OWNER        Acl_perm_t = 8192
+	ACL_SYNCHRONIZE         Acl_perm_t = 1048576
 )
 
 func (e Acl_perm_t) String() string {
@@ -822,9 +838,9 @@ func (e Acl_perm_t) String() string {
 type Acl_tag_t int64
 
 const (
-	ACL_UNDEFINED_TAG Acl_tag_t = 0
+	ACL_UNDEFINED_TAG  Acl_tag_t = 0
 	ACL_EXTENDED_ALLOW Acl_tag_t = 1
-	ACL_EXTENDED_DENY Acl_tag_t = 2
+	ACL_EXTENDED_DENY  Acl_tag_t = 2
 )
 
 func (e Acl_tag_t) String() string {
@@ -844,12 +860,12 @@ type Acl_type_t int64
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
-	ACL_TYPE_ACCESS Acl_type_t = 0
-	ACL_TYPE_DEFAULT Acl_type_t = 1
-	ACL_TYPE_AFS Acl_type_t = 2
-	ACL_TYPE_CODA Acl_type_t = 3
-	ACL_TYPE_NTFS Acl_type_t = 4
-	ACL_TYPE_NWFS Acl_type_t = 5
+	ACL_TYPE_ACCESS   Acl_type_t = 0
+	ACL_TYPE_DEFAULT  Acl_type_t = 1
+	ACL_TYPE_AFS      Acl_type_t = 2
+	ACL_TYPE_CODA     Acl_type_t = 3
+	ACL_TYPE_NTFS     Acl_type_t = 4
+	ACL_TYPE_NWFS     Acl_type_t = 5
 )
 
 func (e Acl_type_t) String() string {
@@ -876,14 +892,14 @@ func (e Acl_type_t) String() string {
 type Clockid_t int64
 
 const (
-	_CLOCK_REALTIME Clockid_t = 0
-	_CLOCK_MONOTONIC Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW Clockid_t = 4
+	_CLOCK_REALTIME             Clockid_t = 0
+	_CLOCK_MONOTONIC            Clockid_t = 6
+	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
 	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID Clockid_t = 16
+	_CLOCK_UPTIME_RAW           Clockid_t = 8
+	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
+	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
+	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
 )
 
 func (e Clockid_t) String() string {
@@ -912,9 +928,9 @@ func (e Clockid_t) String() string {
 type Dispatch_autorelease_frequency_t uint64
 
 const (
-	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT Dispatch_autorelease_frequency_t = 0
+	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT   Dispatch_autorelease_frequency_t = 0
 	DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM Dispatch_autorelease_frequency_t = 1
-	DISPATCH_AUTORELEASE_FREQUENCY_NEVER Dispatch_autorelease_frequency_t = 2
+	DISPATCH_AUTORELEASE_FREQUENCY_NEVER     Dispatch_autorelease_frequency_t = 2
 )
 
 func (e Dispatch_autorelease_frequency_t) String() string {
@@ -933,36 +949,50 @@ func (e Dispatch_autorelease_frequency_t) String() string {
 type Dispatch_block_flags_t uint64
 
 const (
-	DISPATCH_BLOCK_BARRIER Dispatch_block_flags_t = 1
-	DISPATCH_BLOCK_DETACHED Dispatch_block_flags_t = 2
-	DISPATCH_BLOCK_ASSIGN_CURRENT Dispatch_block_flags_t = 4
-	DISPATCH_BLOCK_NO_QOS_CLASS Dispatch_block_flags_t = 8
+	DISPATCH_BLOCK_BARRIER           Dispatch_block_flags_t = 1
+	DISPATCH_BLOCK_DETACHED          Dispatch_block_flags_t = 2
+	DISPATCH_BLOCK_ASSIGN_CURRENT    Dispatch_block_flags_t = 4
+	DISPATCH_BLOCK_NO_QOS_CLASS      Dispatch_block_flags_t = 8
 	DISPATCH_BLOCK_INHERIT_QOS_CLASS Dispatch_block_flags_t = 16
 	DISPATCH_BLOCK_ENFORCE_QOS_CLASS Dispatch_block_flags_t = 32
 )
 
 func (e Dispatch_block_flags_t) String() string {
 	var parts []string
-	if e&DISPATCH_BLOCK_BARRIER != 0 { parts = append(parts, "DISPATCH_BLOCK_BARRIER") }
-	if e&DISPATCH_BLOCK_DETACHED != 0 { parts = append(parts, "DISPATCH_BLOCK_DETACHED") }
-	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 { parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT") }
-	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS") }
-	if len(parts) == 0 { return "0" }
+	if e&DISPATCH_BLOCK_BARRIER != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_BARRIER")
+	}
+	if e&DISPATCH_BLOCK_DETACHED != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_DETACHED")
+	}
+	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT")
+	}
+	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Filesec_property_t int64
 
 const (
-	FILESEC_OWNER Filesec_property_t = 1
-	FILESEC_GROUP Filesec_property_t = 2
-	FILESEC_UUID Filesec_property_t = 3
-	FILESEC_MODE Filesec_property_t = 4
-	FILESEC_ACL Filesec_property_t = 5
-	FILESEC_GRPUUID Filesec_property_t = 6
-	FILESEC_ACL_RAW Filesec_property_t = 100
+	FILESEC_OWNER         Filesec_property_t = 1
+	FILESEC_GROUP         Filesec_property_t = 2
+	FILESEC_UUID          Filesec_property_t = 3
+	FILESEC_MODE          Filesec_property_t = 4
+	FILESEC_ACL           Filesec_property_t = 5
+	FILESEC_GRPUUID       Filesec_property_t = 6
+	FILESEC_ACL_RAW       Filesec_property_t = 100
 	FILESEC_ACL_ALLOCSIZE Filesec_property_t = 101
 )
 
@@ -992,8 +1022,8 @@ func (e Filesec_property_t) String() string {
 type Idtype_t int64
 
 const (
-	P_ALL Idtype_t = 0
-	P_PID Idtype_t = 1
+	P_ALL  Idtype_t = 0
+	P_PID  Idtype_t = 1
 	P_PGID Idtype_t = 2
 )
 
@@ -1013,62 +1043,62 @@ func (e Idtype_t) String() string {
 type Ipc_info_object_type_t int64
 
 const (
-	IPC_OTYPE_NONE Ipc_info_object_type_t = 0
-	IPC_OTYPE_THREAD_CONTROL Ipc_info_object_type_t = 1
-	IPC_OTYPE_TASK_CONTROL Ipc_info_object_type_t = 2
-	IPC_OTYPE_HOST Ipc_info_object_type_t = 3
-	IPC_OTYPE_HOST_PRIV Ipc_info_object_type_t = 4
-	IPC_OTYPE_PROCESSOR Ipc_info_object_type_t = 5
-	IPC_OTYPE_PROCESSOR_SET Ipc_info_object_type_t = 6
-	IPC_OTYPE_PROCESSOR_SET_NAME Ipc_info_object_type_t = 7
-	IPC_OTYPE_TIMER Ipc_info_object_type_t = 8
-	IPC_OTYPE_PORT_SUBST_ONCE Ipc_info_object_type_t = 9
-	IPC_OTYPE_MIG Ipc_info_object_type_t = 10
-	IPC_OTYPE_MEMORY_OBJECT Ipc_info_object_type_t = 11
-	IPC_OTYPE_XMM_PAGER Ipc_info_object_type_t = 12
-	IPC_OTYPE_XMM_KERNEL Ipc_info_object_type_t = 13
-	IPC_OTYPE_XMM_REPLY Ipc_info_object_type_t = 14
-	IPC_OTYPE_UND_REPLY Ipc_info_object_type_t = 15
-	IPC_OTYPE_HOST_NOTIFY Ipc_info_object_type_t = 16
-	IPC_OTYPE_HOST_SECURITY Ipc_info_object_type_t = 17
-	IPC_OTYPE_LEDGER Ipc_info_object_type_t = 18
-	IPC_OTYPE_MAIN_DEVICE Ipc_info_object_type_t = 19
-	IPC_OTYPE_TASK_NAME Ipc_info_object_type_t = 20
-	IPC_OTYPE_SUBSYSTEM Ipc_info_object_type_t = 21
-	IPC_OTYPE_IO_DONE_QUEUE Ipc_info_object_type_t = 22
-	IPC_OTYPE_SEMAPHORE Ipc_info_object_type_t = 23
-	IPC_OTYPE_LOCK_SET Ipc_info_object_type_t = 24
-	IPC_OTYPE_CLOCK Ipc_info_object_type_t = 25
-	IPC_OTYPE_CLOCK_CTRL Ipc_info_object_type_t = 26
-	IPC_OTYPE_IOKIT_IDENT Ipc_info_object_type_t = 27
-	IPC_OTYPE_NAMED_ENTRY Ipc_info_object_type_t = 28
-	IPC_OTYPE_IOKIT_CONNECT Ipc_info_object_type_t = 29
-	IPC_OTYPE_IOKIT_OBJECT Ipc_info_object_type_t = 30
-	IPC_OTYPE_UPL Ipc_info_object_type_t = 31
-	IPC_OTYPE_MEM_OBJ_CONTROL Ipc_info_object_type_t = 32
-	IPC_OTYPE_AU_SESSIONPORT Ipc_info_object_type_t = 33
-	IPC_OTYPE_FILEPORT Ipc_info_object_type_t = 34
-	IPC_OTYPE_LABELH Ipc_info_object_type_t = 35
-	IPC_OTYPE_TASK_RESUME Ipc_info_object_type_t = 36
-	IPC_OTYPE_VOUCHER Ipc_info_object_type_t = 37
+	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
+	IPC_OTYPE_THREAD_CONTROL       Ipc_info_object_type_t = 1
+	IPC_OTYPE_TASK_CONTROL         Ipc_info_object_type_t = 2
+	IPC_OTYPE_HOST                 Ipc_info_object_type_t = 3
+	IPC_OTYPE_HOST_PRIV            Ipc_info_object_type_t = 4
+	IPC_OTYPE_PROCESSOR            Ipc_info_object_type_t = 5
+	IPC_OTYPE_PROCESSOR_SET        Ipc_info_object_type_t = 6
+	IPC_OTYPE_PROCESSOR_SET_NAME   Ipc_info_object_type_t = 7
+	IPC_OTYPE_TIMER                Ipc_info_object_type_t = 8
+	IPC_OTYPE_PORT_SUBST_ONCE      Ipc_info_object_type_t = 9
+	IPC_OTYPE_MIG                  Ipc_info_object_type_t = 10
+	IPC_OTYPE_MEMORY_OBJECT        Ipc_info_object_type_t = 11
+	IPC_OTYPE_XMM_PAGER            Ipc_info_object_type_t = 12
+	IPC_OTYPE_XMM_KERNEL           Ipc_info_object_type_t = 13
+	IPC_OTYPE_XMM_REPLY            Ipc_info_object_type_t = 14
+	IPC_OTYPE_UND_REPLY            Ipc_info_object_type_t = 15
+	IPC_OTYPE_HOST_NOTIFY          Ipc_info_object_type_t = 16
+	IPC_OTYPE_HOST_SECURITY        Ipc_info_object_type_t = 17
+	IPC_OTYPE_LEDGER               Ipc_info_object_type_t = 18
+	IPC_OTYPE_MAIN_DEVICE          Ipc_info_object_type_t = 19
+	IPC_OTYPE_TASK_NAME            Ipc_info_object_type_t = 20
+	IPC_OTYPE_SUBSYSTEM            Ipc_info_object_type_t = 21
+	IPC_OTYPE_IO_DONE_QUEUE        Ipc_info_object_type_t = 22
+	IPC_OTYPE_SEMAPHORE            Ipc_info_object_type_t = 23
+	IPC_OTYPE_LOCK_SET             Ipc_info_object_type_t = 24
+	IPC_OTYPE_CLOCK                Ipc_info_object_type_t = 25
+	IPC_OTYPE_CLOCK_CTRL           Ipc_info_object_type_t = 26
+	IPC_OTYPE_IOKIT_IDENT          Ipc_info_object_type_t = 27
+	IPC_OTYPE_NAMED_ENTRY          Ipc_info_object_type_t = 28
+	IPC_OTYPE_IOKIT_CONNECT        Ipc_info_object_type_t = 29
+	IPC_OTYPE_IOKIT_OBJECT         Ipc_info_object_type_t = 30
+	IPC_OTYPE_UPL                  Ipc_info_object_type_t = 31
+	IPC_OTYPE_MEM_OBJ_CONTROL      Ipc_info_object_type_t = 32
+	IPC_OTYPE_AU_SESSIONPORT       Ipc_info_object_type_t = 33
+	IPC_OTYPE_FILEPORT             Ipc_info_object_type_t = 34
+	IPC_OTYPE_LABELH               Ipc_info_object_type_t = 35
+	IPC_OTYPE_TASK_RESUME          Ipc_info_object_type_t = 36
+	IPC_OTYPE_VOUCHER              Ipc_info_object_type_t = 37
 	IPC_OTYPE_VOUCHER_ATTR_CONTROL Ipc_info_object_type_t = 38
-	IPC_OTYPE_WORK_INTERVAL Ipc_info_object_type_t = 39
-	IPC_OTYPE_UX_HANDLER Ipc_info_object_type_t = 40
-	IPC_OTYPE_UEXT_OBJECT Ipc_info_object_type_t = 41
-	IPC_OTYPE_ARCADE_REG Ipc_info_object_type_t = 42
-	IPC_OTYPE_EVENTLINK Ipc_info_object_type_t = 43
-	IPC_OTYPE_TASK_INSPECT Ipc_info_object_type_t = 44
-	IPC_OTYPE_TASK_READ Ipc_info_object_type_t = 45
-	IPC_OTYPE_THREAD_INSPECT Ipc_info_object_type_t = 46
-	IPC_OTYPE_THREAD_READ Ipc_info_object_type_t = 47
-	IPC_OTYPE_SUID_CRED Ipc_info_object_type_t = 48
-	IPC_OTYPE_HYPERVISOR Ipc_info_object_type_t = 49
-	IPC_OTYPE_TASK_ID_TOKEN Ipc_info_object_type_t = 50
-	IPC_OTYPE_TASK_FATAL Ipc_info_object_type_t = 51
-	IPC_OTYPE_KCDATA Ipc_info_object_type_t = 52
-	IPC_OTYPE_EXCLAVES_RESOURCE Ipc_info_object_type_t = 53
-	IPC_OTYPE_THREAD_RESUME Ipc_info_object_type_t = 54
-	IPC_OTYPE_UNKNOWN Ipc_info_object_type_t = 4294967295
+	IPC_OTYPE_WORK_INTERVAL        Ipc_info_object_type_t = 39
+	IPC_OTYPE_UX_HANDLER           Ipc_info_object_type_t = 40
+	IPC_OTYPE_UEXT_OBJECT          Ipc_info_object_type_t = 41
+	IPC_OTYPE_ARCADE_REG           Ipc_info_object_type_t = 42
+	IPC_OTYPE_EVENTLINK            Ipc_info_object_type_t = 43
+	IPC_OTYPE_TASK_INSPECT         Ipc_info_object_type_t = 44
+	IPC_OTYPE_TASK_READ            Ipc_info_object_type_t = 45
+	IPC_OTYPE_THREAD_INSPECT       Ipc_info_object_type_t = 46
+	IPC_OTYPE_THREAD_READ          Ipc_info_object_type_t = 47
+	IPC_OTYPE_SUID_CRED            Ipc_info_object_type_t = 48
+	IPC_OTYPE_HYPERVISOR           Ipc_info_object_type_t = 49
+	IPC_OTYPE_TASK_ID_TOKEN        Ipc_info_object_type_t = 50
+	IPC_OTYPE_TASK_FATAL           Ipc_info_object_type_t = 51
+	IPC_OTYPE_KCDATA               Ipc_info_object_type_t = 52
+	IPC_OTYPE_EXCLAVES_RESOURCE    Ipc_info_object_type_t = 53
+	IPC_OTYPE_THREAD_RESUME        Ipc_info_object_type_t = 54
+	IPC_OTYPE_UNKNOWN              Ipc_info_object_type_t = 4294967295
 )
 
 func (e Ipc_info_object_type_t) String() string {
@@ -1194,15 +1224,15 @@ type Launch_data_type_t int64
 
 const (
 	LAUNCH_DATA_DICTIONARY Launch_data_type_t = 1
-	LAUNCH_DATA_ARRAY Launch_data_type_t = 2
-	LAUNCH_DATA_FD Launch_data_type_t = 3
-	LAUNCH_DATA_INTEGER Launch_data_type_t = 4
-	LAUNCH_DATA_REAL Launch_data_type_t = 5
-	LAUNCH_DATA_BOOL Launch_data_type_t = 6
-	LAUNCH_DATA_STRING Launch_data_type_t = 7
-	LAUNCH_DATA_OPAQUE Launch_data_type_t = 8
-	LAUNCH_DATA_ERRNO Launch_data_type_t = 9
-	LAUNCH_DATA_MACHPORT Launch_data_type_t = 10
+	LAUNCH_DATA_ARRAY      Launch_data_type_t = 2
+	LAUNCH_DATA_FD         Launch_data_type_t = 3
+	LAUNCH_DATA_INTEGER    Launch_data_type_t = 4
+	LAUNCH_DATA_REAL       Launch_data_type_t = 5
+	LAUNCH_DATA_BOOL       Launch_data_type_t = 6
+	LAUNCH_DATA_STRING     Launch_data_type_t = 7
+	LAUNCH_DATA_OPAQUE     Launch_data_type_t = 8
+	LAUNCH_DATA_ERRNO      Launch_data_type_t = 9
+	LAUNCH_DATA_MACHPORT   Launch_data_type_t = 10
 )
 
 func (e Launch_data_type_t) String() string {
@@ -1240,7 +1270,9 @@ const (
 
 func (e Mach_vm_range_flags_t) String() string {
 	var parts []string
-	if len(parts) == 0 { return "0" }
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1248,7 +1280,7 @@ type Mach_vm_range_flavor_t int64
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
-	MACH_VM_RANGE_FLAVOR_V1 Mach_vm_range_flavor_t = 1
+	MACH_VM_RANGE_FLAVOR_V1      Mach_vm_range_flavor_t = 1
 )
 
 func (e Mach_vm_range_flavor_t) String() string {
@@ -1266,8 +1298,8 @@ type Mach_vm_range_tag_t int64
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
-	MACH_VM_RANGE_DATA Mach_vm_range_tag_t = 1
-	MACH_VM_RANGE_FIXED Mach_vm_range_tag_t = 2
+	MACH_VM_RANGE_DATA    Mach_vm_range_tag_t = 1
+	MACH_VM_RANGE_FIXED   Mach_vm_range_tag_t = 2
 )
 
 func (e Mach_vm_range_tag_t) String() string {
@@ -1286,26 +1318,42 @@ func (e Mach_vm_range_tag_t) String() string {
 type Mpo_flags_t int64
 
 const (
-	MPO_PORT Mpo_flags_t = 0
-	MPO_SERVICE_PORT Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT Mpo_flags_t = 2048
-	MPO_REPLY_PORT Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT Mpo_flags_t = 32768
+	MPO_PORT                            Mpo_flags_t = 0
+	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
+	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
+	MPO_REPLY_PORT                      Mpo_flags_t = 4096
+	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
+	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
+	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
 	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
 )
 
 func (e Mpo_flags_t) String() string {
 	var parts []string
-	if e&MPO_SERVICE_PORT != 0 { parts = append(parts, "MPO_SERVICE_PORT") }
-	if e&MPO_CONNECTION_PORT != 0 { parts = append(parts, "MPO_CONNECTION_PORT") }
-	if e&MPO_REPLY_PORT != 0 { parts = append(parts, "MPO_REPLY_PORT") }
-	if e&MPO_WEAK_REPLY_PORT != 0 { parts = append(parts, "MPO_WEAK_REPLY_PORT") }
-	if e&MPO_NOTIFICATION_PORT != 0 { parts = append(parts, "MPO_NOTIFICATION_PORT") }
-	if e&MPO_EXCEPTION_PORT != 0 { parts = append(parts, "MPO_EXCEPTION_PORT") }
-	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 { parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY") }
-	if len(parts) == 0 { return "0" }
+	if e&MPO_SERVICE_PORT != 0 {
+		parts = append(parts, "MPO_SERVICE_PORT")
+	}
+	if e&MPO_CONNECTION_PORT != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT")
+	}
+	if e&MPO_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_REPLY_PORT")
+	}
+	if e&MPO_WEAK_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_WEAK_REPLY_PORT")
+	}
+	if e&MPO_NOTIFICATION_PORT != 0 {
+		parts = append(parts, "MPO_NOTIFICATION_PORT")
+	}
+	if e&MPO_EXCEPTION_PORT != 0 {
+		parts = append(parts, "MPO_EXCEPTION_PORT")
+	}
+	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1327,27 +1375,27 @@ func (e Os_clockid_t) String() string {
 type Ptrauth_key int64
 
 const (
-	Ptrauth_key_none Ptrauth_key = -1
-	Ptrauth_key_asia Ptrauth_key = 0
-	Ptrauth_key_asib Ptrauth_key = 1
-	Ptrauth_key_asda Ptrauth_key = 2
-	Ptrauth_key_asdb Ptrauth_key = 3
+	Ptrauth_key_none                     Ptrauth_key = -1
+	Ptrauth_key_asia                     Ptrauth_key = 0
+	Ptrauth_key_asib                     Ptrauth_key = 1
+	Ptrauth_key_asda                     Ptrauth_key = 2
+	Ptrauth_key_asdb                     Ptrauth_key = 3
 	Ptrauth_key_process_independent_code Ptrauth_key = 0
-	Ptrauth_key_process_dependent_code Ptrauth_key = 1
+	Ptrauth_key_process_dependent_code   Ptrauth_key = 1
 	Ptrauth_key_process_independent_data Ptrauth_key = 2
-	Ptrauth_key_process_dependent_data Ptrauth_key = 3
-	Ptrauth_key_return_address Ptrauth_key = 1
-	Ptrauth_key_frame_pointer Ptrauth_key = 3
-	Ptrauth_key_function_pointer Ptrauth_key = 0
-	Ptrauth_key_block_function Ptrauth_key = 0
-	Ptrauth_key_cxx_vtable_pointer Ptrauth_key = 2
-	Ptrauth_key_method_list_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_isa_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_super_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_sel_pointer Ptrauth_key = 3
-	Ptrauth_key_objc_class_ro_pointer Ptrauth_key = 2
+	Ptrauth_key_process_dependent_data   Ptrauth_key = 3
+	Ptrauth_key_return_address           Ptrauth_key = 1
+	Ptrauth_key_frame_pointer            Ptrauth_key = 3
+	Ptrauth_key_function_pointer         Ptrauth_key = 0
+	Ptrauth_key_block_function           Ptrauth_key = 0
+	Ptrauth_key_cxx_vtable_pointer       Ptrauth_key = 2
+	Ptrauth_key_method_list_pointer      Ptrauth_key = 2
+	Ptrauth_key_objc_isa_pointer         Ptrauth_key = 2
+	Ptrauth_key_objc_super_pointer       Ptrauth_key = 2
+	Ptrauth_key_objc_sel_pointer         Ptrauth_key = 3
+	Ptrauth_key_objc_class_ro_pointer    Ptrauth_key = 2
 	Ptrauth_key_block_descriptor_pointer Ptrauth_key = 2
-	Ptrauth_key_init_fini_pointer Ptrauth_key = 0
+	Ptrauth_key_init_fini_pointer        Ptrauth_key = 0
 )
 
 func (e Ptrauth_key) String() string {
@@ -1371,11 +1419,11 @@ type Qos_class_t uint32
 
 const (
 	QOS_CLASS_USER_INTERACTIVE Qos_class_t = 33
-	QOS_CLASS_USER_INITIATED Qos_class_t = 25
-	QOS_CLASS_DEFAULT Qos_class_t = 21
-	QOS_CLASS_UTILITY Qos_class_t = 17
-	QOS_CLASS_BACKGROUND Qos_class_t = 9
-	QOS_CLASS_UNSPECIFIED Qos_class_t = 0
+	QOS_CLASS_USER_INITIATED   Qos_class_t = 25
+	QOS_CLASS_DEFAULT          Qos_class_t = 21
+	QOS_CLASS_UTILITY          Qos_class_t = 17
+	QOS_CLASS_BACKGROUND       Qos_class_t = 9
+	QOS_CLASS_UNSPECIFIED      Qos_class_t = 0
 )
 
 func (e Qos_class_t) String() string {
@@ -1400,22 +1448,22 @@ func (e Qos_class_t) String() string {
 type Virtual_memory_guard_exception_code_t int64
 
 const (
-	KGUARD_EXC_DEALLOC_GAP Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
 )
@@ -1466,34 +1514,47 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 type Xpc_listener_create_flags_t int64
 
 const (
-	XPC_LISTENER_CREATE_NONE Xpc_listener_create_flags_t = 0
-	XPC_LISTENER_CREATE_INACTIVE Xpc_listener_create_flags_t = 1
-	XPC_LISTENER_CREATE_FORCE_MACH Xpc_listener_create_flags_t = 2
+	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
+	XPC_LISTENER_CREATE_INACTIVE         Xpc_listener_create_flags_t = 1
+	XPC_LISTENER_CREATE_FORCE_MACH       Xpc_listener_create_flags_t = 2
 	XPC_LISTENER_CREATE_FORCE_XPCSERVICE Xpc_listener_create_flags_t = 4
 )
 
 func (e Xpc_listener_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_LISTENER_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE") }
-	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH") }
-	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_LISTENER_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Xpc_session_create_flags_t int64
 
 const (
-	XPC_SESSION_CREATE_NONE Xpc_session_create_flags_t = 0
-	XPC_SESSION_CREATE_INACTIVE Xpc_session_create_flags_t = 1
+	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0
+	XPC_SESSION_CREATE_INACTIVE        Xpc_session_create_flags_t = 1
 	XPC_SESSION_CREATE_MACH_PRIVILEGED Xpc_session_create_flags_t = 2
 )
 
 func (e Xpc_session_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_SESSION_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_SESSION_CREATE_INACTIVE") }
-	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 { parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_SESSION_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_INACTIVE")
+	}
+	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
-

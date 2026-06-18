@@ -62,4 +62,3 @@ type ProgressReportingCapabilityable interface {
 }
 
 var _ ProgressReportingCapabilityable = (*ProgressReportingCapability)(nil)
-

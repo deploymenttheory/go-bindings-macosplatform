@@ -44,7 +44,9 @@ func (x *MutableNotificationContent) WithAttachments(items ...*raw.UNNotificatio
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.UNNotificationAttachment](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -201,7 +203,9 @@ func (x *MutableNotificationContent) SetFilterCriteria(filterCriteria string) {
 	x.inner.SetFilterCriteria(foundation.NSStringStringWithUTF8String(filterCriteria))
 }
 
-func (x *MutableNotificationContent) asNotificationContent() *raw.UNNotificationContent { return &x.inner.UNNotificationContent }
+func (x *MutableNotificationContent) asNotificationContent() *raw.UNNotificationContent {
+	return &x.inner.UNNotificationContent
+}
 
 // MutableNotificationContentable is the interface implemented by [MutableNotificationContent], for mocking and DI.
 type MutableNotificationContentable interface {
@@ -237,4 +241,3 @@ type MutableNotificationContentable interface {
 }
 
 var _ MutableNotificationContentable = (*MutableNotificationContent)(nil)
-

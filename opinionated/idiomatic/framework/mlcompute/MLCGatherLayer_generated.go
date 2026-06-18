@@ -64,4 +64,3 @@ type GatherLayerable interface {
 }
 
 var _ GatherLayerable = (*GatherLayer)(nil)
-

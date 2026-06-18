@@ -17,11 +17,11 @@ type NSPICTImageRep struct {
 }
 
 var (
-	_clsNSPICTImageRep = _objcClass("NSPICTImageRep")
-	_nSPICTImageRepSelImageRepWithData = objc.RegisterName("imageRepWithData:")
-	_nSPICTImageRepSelInitWithData = objc.RegisterName("initWithData:")
+	_clsNSPICTImageRep                   = _objcClass("NSPICTImageRep")
+	_nSPICTImageRepSelImageRepWithData   = objc.RegisterName("imageRepWithData:")
+	_nSPICTImageRepSelInitWithData       = objc.RegisterName("initWithData:")
 	_nSPICTImageRepSelPICTRepresentation = objc.RegisterName("PICTRepresentation")
-	_nSPICTImageRepSelBoundingBox = objc.RegisterName("boundingBox")
+	_nSPICTImageRepSelBoundingBox        = objc.RegisterName("boundingBox")
 )
 
 func NSPICTImageRepFromID(id objc.ID) *NSPICTImageRep {
@@ -36,19 +36,25 @@ func NSPICTImageRepFromID(id objc.ID) *NSPICTImageRep {
 
 func NSPICTImageRepImageRepWithData(pictData *foundation.NSData) *NSPICTImageRep {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPICTImageRep), _nSPICTImageRepSelImageRepWithData, pictData.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPICTImageRepFromID(_ret)
 }
 
 func (o *NSPICTImageRep) InitWithData(pictData *foundation.NSData) *NSPICTImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPICTImageRepSelInitWithData, pictData.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPICTImageRepFromID(_ret)
 }
 
 func (o *NSPICTImageRep) PICTRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPICTImageRepSelPICTRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -56,4 +62,3 @@ func (o *NSPICTImageRep) BoundingBox() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSPICTImageRepSelBoundingBox)
 	return _ret
 }
-

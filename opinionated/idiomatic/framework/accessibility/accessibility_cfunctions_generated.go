@@ -59,4 +59,3 @@ func AXReduceHighlightingEffectsEnabled() bool {
 func AXShowBordersEnabled() bool {
 	return raw.AXShowBordersEnabled()
 }
-

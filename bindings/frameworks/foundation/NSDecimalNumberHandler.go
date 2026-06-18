@@ -15,10 +15,10 @@ type NSDecimalNumberHandler struct {
 }
 
 var (
-	_clsNSDecimalNumberHandler = _objcClass("NSDecimalNumberHandler")
-	_nSDecimalNumberHandlerSelInitWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero = objc.RegisterName("initWithRoundingMode:scale:raiseOnExactness:raiseOnOverflow:raiseOnUnderflow:raiseOnDivideByZero:")
+	_clsNSDecimalNumberHandler                                                                                                            = _objcClass("NSDecimalNumberHandler")
+	_nSDecimalNumberHandlerSelInitWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero                 = objc.RegisterName("initWithRoundingMode:scale:raiseOnExactness:raiseOnOverflow:raiseOnUnderflow:raiseOnDivideByZero:")
 	_nSDecimalNumberHandlerSelDecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero = objc.RegisterName("decimalNumberHandlerWithRoundingMode:scale:raiseOnExactness:raiseOnOverflow:raiseOnUnderflow:raiseOnDivideByZero:")
-	_nSDecimalNumberHandlerSelDefaultDecimalNumberHandler = objc.RegisterName("defaultDecimalNumberHandler")
+	_nSDecimalNumberHandlerSelDefaultDecimalNumberHandler                                                                                 = objc.RegisterName("defaultDecimalNumberHandler")
 )
 
 func NSDecimalNumberHandlerFromID(id objc.ID) *NSDecimalNumberHandler {
@@ -33,19 +33,24 @@ func NSDecimalNumberHandlerFromID(id objc.ID) *NSDecimalNumberHandler {
 
 func (o *NSDecimalNumberHandler) InitWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero(roundingMode NSRoundingMode, scale int16, exact bool, overflow bool, underflow bool, divideByZero bool) *NSDecimalNumberHandler {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberHandlerSelInitWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero, roundingMode, scale, exact, overflow, underflow, divideByZero)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDecimalNumberHandlerFromID(_ret)
 }
 
 func NSDecimalNumberHandlerDecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero(roundingMode NSRoundingMode, scale int16, exact bool, overflow bool, underflow bool, divideByZero bool) *NSDecimalNumberHandler {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDecimalNumberHandler), _nSDecimalNumberHandlerSelDecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero, roundingMode, scale, exact, overflow, underflow, divideByZero)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDecimalNumberHandlerFromID(_ret)
 }
 
 func NSDecimalNumberHandlerDefaultDecimalNumberHandler() *NSDecimalNumberHandler {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDecimalNumberHandler), _nSDecimalNumberHandlerSelDefaultDecimalNumberHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDecimalNumberHandlerFromID(_ret)
 }
-

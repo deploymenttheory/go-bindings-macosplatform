@@ -16,7 +16,9 @@ type MTRSwitchClusterSwitchLatchedEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRSwitchClusterSwitchLatchedEvent].
-func (x *MTRSwitchClusterSwitchLatchedEvent) Unwrap() *raw.MTRSwitchClusterSwitchLatchedEvent { return x.inner }
+func (x *MTRSwitchClusterSwitchLatchedEvent) Unwrap() *raw.MTRSwitchClusterSwitchLatchedEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -61,4 +63,3 @@ type MTRSwitchClusterSwitchLatchedEventable interface {
 }
 
 var _ MTRSwitchClusterSwitchLatchedEventable = (*MTRSwitchClusterSwitchLatchedEvent)(nil)
-

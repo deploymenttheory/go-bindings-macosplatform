@@ -16,8 +16,8 @@ type INURLResolutionResult struct {
 }
 
 var (
-	_clsINURLResolutionResult = _objcClass("INURLResolutionResult")
-	_iNURLResolutionResultSelSuccessWithResolvedURL = objc.RegisterName("successWithResolvedURL:")
+	_clsINURLResolutionResult                                     = _objcClass("INURLResolutionResult")
+	_iNURLResolutionResultSelSuccessWithResolvedURL               = objc.RegisterName("successWithResolvedURL:")
 	_iNURLResolutionResultSelDisambiguationWithURLsToDisambiguate = objc.RegisterName("disambiguationWithURLsToDisambiguate:")
 	_iNURLResolutionResultSelConfirmationRequiredWithURLToConfirm = objc.RegisterName("confirmationRequiredWithURLToConfirm:")
 )
@@ -34,19 +34,24 @@ func INURLResolutionResultFromID(id objc.ID) *INURLResolutionResult {
 
 func INURLResolutionResultSuccessWithResolvedURL(resolvedURL *foundation.NSURL) *INURLResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINURLResolutionResult), _iNURLResolutionResultSelSuccessWithResolvedURL, resolvedURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INURLResolutionResultFromID(_ret)
 }
 
 func INURLResolutionResultDisambiguationWithURLsToDisambiguate(urlsToDisambiguate *foundation.NSArray[*foundation.NSURL]) *INURLResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINURLResolutionResult), _iNURLResolutionResultSelDisambiguationWithURLsToDisambiguate, urlsToDisambiguate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INURLResolutionResultFromID(_ret)
 }
 
 func INURLResolutionResultConfirmationRequiredWithURLToConfirm(urlToConfirm *foundation.NSURL) *INURLResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINURLResolutionResult), _iNURLResolutionResultSelConfirmationRequiredWithURLToConfirm, urlToConfirm.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INURLResolutionResultFromID(_ret)
 }
-

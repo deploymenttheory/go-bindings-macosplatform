@@ -19,7 +19,9 @@ type NDArrayBinarySecondaryGradientKernel struct {
 }
 
 // Unwrap returns the underlying [raw.MPSNDArrayBinarySecondaryGradientKernel].
-func (x *NDArrayBinarySecondaryGradientKernel) Unwrap() *raw.MPSNDArrayBinarySecondaryGradientKernel { return x.inner }
+func (x *NDArrayBinarySecondaryGradientKernel) Unwrap() *raw.MPSNDArrayBinarySecondaryGradientKernel {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -68,11 +70,17 @@ func (x *NDArrayBinarySecondaryGradientKernel) EncodeToCommandBufferPrimarySourc
 	x.inner.EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientStateDestinationArray(cmdBuf, primarySourceArray, secondarySourceArray, gradient, state, destination)
 }
 
-func (x *NDArrayBinarySecondaryGradientKernel) asNDArrayMultiaryGradientKernel() *mpsndarray.MPSNDArrayMultiaryGradientKernel { return &x.inner.MPSNDArrayMultiaryGradientKernel }
+func (x *NDArrayBinarySecondaryGradientKernel) asNDArrayMultiaryGradientKernel() *mpsndarray.MPSNDArrayMultiaryGradientKernel {
+	return &x.inner.MPSNDArrayMultiaryGradientKernel
+}
 
-func (x *NDArrayBinarySecondaryGradientKernel) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase }
+func (x *NDArrayBinarySecondaryGradientKernel) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase {
+	return &x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase
+}
 
-func (x *NDArrayBinarySecondaryGradientKernel) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.MPSKernel }
+func (x *NDArrayBinarySecondaryGradientKernel) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.MPSKernel
+}
 
 // NDArrayBinarySecondaryGradientKernelable is the interface implemented by [NDArrayBinarySecondaryGradientKernel], for mocking and DI.
 type NDArrayBinarySecondaryGradientKernelable interface {
@@ -85,4 +93,3 @@ type NDArrayBinarySecondaryGradientKernelable interface {
 }
 
 var _ NDArrayBinarySecondaryGradientKernelable = (*NDArrayBinarySecondaryGradientKernel)(nil)
-

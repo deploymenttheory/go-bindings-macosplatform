@@ -126,4 +126,3 @@ type Orthographyable interface {
 }
 
 var _ Orthographyable = (*Orthography)(nil)
-

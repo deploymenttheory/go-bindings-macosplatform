@@ -16,10 +16,10 @@ type PKFloatRange struct {
 }
 
 var (
-	_clsPKFloatRange = _objcClass("PKFloatRange")
+	_clsPKFloatRange                             = _objcClass("PKFloatRange")
 	_pKFloatRangeSelInitWithLowerBoundUpperBound = objc.RegisterName("initWithLowerBound:upperBound:")
-	_pKFloatRangeSelLowerBound = objc.RegisterName("lowerBound")
-	_pKFloatRangeSelUpperBound = objc.RegisterName("upperBound")
+	_pKFloatRangeSelLowerBound                   = objc.RegisterName("lowerBound")
+	_pKFloatRangeSelUpperBound                   = objc.RegisterName("upperBound")
 )
 
 func PKFloatRangeFromID(id objc.ID) *PKFloatRange {
@@ -34,7 +34,9 @@ func PKFloatRangeFromID(id objc.ID) *PKFloatRange {
 
 func (o *PKFloatRange) InitWithLowerBoundUpperBound(lowerBound float64, upperBound float64) *PKFloatRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKFloatRangeSelInitWithLowerBoundUpperBound, lowerBound, upperBound)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKFloatRangeFromID(_ret)
 }
 
@@ -47,4 +49,3 @@ func (o *PKFloatRange) UpperBound() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _pKFloatRangeSelUpperBound)
 	return _ret
 }
-

@@ -15,8 +15,8 @@ type NSPersistentHistoryResult struct {
 }
 
 var (
-	_clsNSPersistentHistoryResult = _objcClass("NSPersistentHistoryResult")
-	_nSPersistentHistoryResultSelResult = objc.RegisterName("result")
+	_clsNSPersistentHistoryResult           = _objcClass("NSPersistentHistoryResult")
+	_nSPersistentHistoryResultSelResult     = objc.RegisterName("result")
 	_nSPersistentHistoryResultSelResultType = objc.RegisterName("resultType")
 )
 
@@ -39,4 +39,3 @@ func (o *NSPersistentHistoryResult) ResultType() NSPersistentHistoryResultType {
 	_ret := objc.Send[NSPersistentHistoryResultType](o.Ptr(), _nSPersistentHistoryResultSelResultType)
 	return _ret
 }
-

@@ -16,10 +16,10 @@ type MKGeoJSONFeature struct {
 }
 
 var (
-	_clsMKGeoJSONFeature = _objcClass("MKGeoJSONFeature")
+	_clsMKGeoJSONFeature           = _objcClass("MKGeoJSONFeature")
 	_mKGeoJSONFeatureSelIdentifier = objc.RegisterName("identifier")
 	_mKGeoJSONFeatureSelProperties = objc.RegisterName("properties")
-	_mKGeoJSONFeatureSelGeometry = objc.RegisterName("geometry")
+	_mKGeoJSONFeatureSelGeometry   = objc.RegisterName("geometry")
 )
 
 func MKGeoJSONFeatureFromID(id objc.ID) *MKGeoJSONFeature {
@@ -34,19 +34,24 @@ func MKGeoJSONFeatureFromID(id objc.ID) *MKGeoJSONFeature {
 
 func (o *MKGeoJSONFeature) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKGeoJSONFeatureSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MKGeoJSONFeature) Properties() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKGeoJSONFeatureSelProperties)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *MKGeoJSONFeature) Geometry() *foundation.NSArray[*MKShape] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKGeoJSONFeatureSelGeometry)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MKShape](_ret)
 }
-

@@ -59,4 +59,3 @@ type CollectionLayoutSpacingable interface {
 }
 
 var _ CollectionLayoutSpacingable = (*CollectionLayoutSpacing)(nil)
-

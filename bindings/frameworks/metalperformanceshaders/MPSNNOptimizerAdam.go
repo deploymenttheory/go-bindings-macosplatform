@@ -19,24 +19,24 @@ type MPSNNOptimizerAdam struct {
 }
 
 var (
-	_clsMPSNNOptimizerAdam = _objcClass("MPSNNOptimizerAdam")
-	_mPSNNOptimizerAdamSelInitWithDeviceLearningRate = objc.RegisterName("initWithDevice:learningRate:")
-	_mPSNNOptimizerAdamSelInitWithDeviceBeta1Beta2EpsilonTimeStepOptimizerDescriptor = objc.RegisterName("initWithDevice:beta1:beta2:epsilon:timeStep:optimizerDescriptor:")
-	_mPSNNOptimizerAdamSelEncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorInputVelocityVectorResultValuesVector = objc.RegisterName("encodeToCommandBuffer:inputGradientVector:inputValuesVector:inputMomentumVector:inputVelocityVector:resultValuesVector:")
-	_mPSNNOptimizerAdamSelEncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputMomentumMatrixInputVelocityMatrixResultValuesMatrix = objc.RegisterName("encodeToCommandBuffer:inputGradientMatrix:inputValuesMatrix:inputMomentumMatrix:inputVelocityMatrix:resultValuesMatrix:")
-	_mPSNNOptimizerAdamSelEncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorInputVelocityVectorMaximumVelocityVectorResultValuesVector = objc.RegisterName("encodeToCommandBuffer:inputGradientVector:inputValuesVector:inputMomentumVector:inputVelocityVector:maximumVelocityVector:resultValuesVector:")
-	_mPSNNOptimizerAdamSelEncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputMomentumMatrixInputVelocityMatrixMaximumVelocityMatrixResultValuesMatrix = objc.RegisterName("encodeToCommandBuffer:inputGradientMatrix:inputValuesMatrix:inputMomentumMatrix:inputVelocityMatrix:maximumVelocityMatrix:resultValuesMatrix:")
-	_mPSNNOptimizerAdamSelEncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputMomentumVectorsInputVelocityVectorsResultState = objc.RegisterName("encodeToCommandBuffer:convolutionGradientState:convolutionSourceState:inputMomentumVectors:inputVelocityVectors:resultState:")
-	_mPSNNOptimizerAdamSelEncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputMomentumVectorsInputVelocityVectorsMaximumVelocityVectorsResultState = objc.RegisterName("encodeToCommandBuffer:convolutionGradientState:convolutionSourceState:inputMomentumVectors:inputVelocityVectors:maximumVelocityVectors:resultState:")
-	_mPSNNOptimizerAdamSelEncodeToCommandBufferBatchNormalizationStateInputMomentumVectorsInputVelocityVectorsResultState = objc.RegisterName("encodeToCommandBuffer:batchNormalizationState:inputMomentumVectors:inputVelocityVectors:resultState:")
-	_mPSNNOptimizerAdamSelEncodeToCommandBufferBatchNormalizationStateInputMomentumVectorsInputVelocityVectorsMaximumVelocityVectorsResultState = objc.RegisterName("encodeToCommandBuffer:batchNormalizationState:inputMomentumVectors:inputVelocityVectors:maximumVelocityVectors:resultState:")
-	_mPSNNOptimizerAdamSelEncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputMomentumVectorsInputVelocityVectorsResultState = objc.RegisterName("encodeToCommandBuffer:batchNormalizationGradientState:batchNormalizationSourceState:inputMomentumVectors:inputVelocityVectors:resultState:")
+	_clsMPSNNOptimizerAdam                                                                                                                                                           = _objcClass("MPSNNOptimizerAdam")
+	_mPSNNOptimizerAdamSelInitWithDeviceLearningRate                                                                                                                                 = objc.RegisterName("initWithDevice:learningRate:")
+	_mPSNNOptimizerAdamSelInitWithDeviceBeta1Beta2EpsilonTimeStepOptimizerDescriptor                                                                                                 = objc.RegisterName("initWithDevice:beta1:beta2:epsilon:timeStep:optimizerDescriptor:")
+	_mPSNNOptimizerAdamSelEncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorInputVelocityVectorResultValuesVector                                          = objc.RegisterName("encodeToCommandBuffer:inputGradientVector:inputValuesVector:inputMomentumVector:inputVelocityVector:resultValuesVector:")
+	_mPSNNOptimizerAdamSelEncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputMomentumMatrixInputVelocityMatrixResultValuesMatrix                                          = objc.RegisterName("encodeToCommandBuffer:inputGradientMatrix:inputValuesMatrix:inputMomentumMatrix:inputVelocityMatrix:resultValuesMatrix:")
+	_mPSNNOptimizerAdamSelEncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorInputVelocityVectorMaximumVelocityVectorResultValuesVector                     = objc.RegisterName("encodeToCommandBuffer:inputGradientVector:inputValuesVector:inputMomentumVector:inputVelocityVector:maximumVelocityVector:resultValuesVector:")
+	_mPSNNOptimizerAdamSelEncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputMomentumMatrixInputVelocityMatrixMaximumVelocityMatrixResultValuesMatrix                     = objc.RegisterName("encodeToCommandBuffer:inputGradientMatrix:inputValuesMatrix:inputMomentumMatrix:inputVelocityMatrix:maximumVelocityMatrix:resultValuesMatrix:")
+	_mPSNNOptimizerAdamSelEncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputMomentumVectorsInputVelocityVectorsResultState                                     = objc.RegisterName("encodeToCommandBuffer:convolutionGradientState:convolutionSourceState:inputMomentumVectors:inputVelocityVectors:resultState:")
+	_mPSNNOptimizerAdamSelEncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputMomentumVectorsInputVelocityVectorsMaximumVelocityVectorsResultState               = objc.RegisterName("encodeToCommandBuffer:convolutionGradientState:convolutionSourceState:inputMomentumVectors:inputVelocityVectors:maximumVelocityVectors:resultState:")
+	_mPSNNOptimizerAdamSelEncodeToCommandBufferBatchNormalizationStateInputMomentumVectorsInputVelocityVectorsResultState                                                            = objc.RegisterName("encodeToCommandBuffer:batchNormalizationState:inputMomentumVectors:inputVelocityVectors:resultState:")
+	_mPSNNOptimizerAdamSelEncodeToCommandBufferBatchNormalizationStateInputMomentumVectorsInputVelocityVectorsMaximumVelocityVectorsResultState                                      = objc.RegisterName("encodeToCommandBuffer:batchNormalizationState:inputMomentumVectors:inputVelocityVectors:maximumVelocityVectors:resultState:")
+	_mPSNNOptimizerAdamSelEncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputMomentumVectorsInputVelocityVectorsResultState                       = objc.RegisterName("encodeToCommandBuffer:batchNormalizationGradientState:batchNormalizationSourceState:inputMomentumVectors:inputVelocityVectors:resultState:")
 	_mPSNNOptimizerAdamSelEncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputMomentumVectorsInputVelocityVectorsMaximumVelocityVectorsResultState = objc.RegisterName("encodeToCommandBuffer:batchNormalizationGradientState:batchNormalizationSourceState:inputMomentumVectors:inputVelocityVectors:maximumVelocityVectors:resultState:")
-	_mPSNNOptimizerAdamSelBeta1 = objc.RegisterName("beta1")
-	_mPSNNOptimizerAdamSelBeta2 = objc.RegisterName("beta2")
-	_mPSNNOptimizerAdamSelEpsilon = objc.RegisterName("epsilon")
-	_mPSNNOptimizerAdamSelTimeStep = objc.RegisterName("timeStep")
-	_mPSNNOptimizerAdamSelSetTimeStep = objc.RegisterName("setTimeStep:")
+	_mPSNNOptimizerAdamSelBeta1                                                                                                                                                      = objc.RegisterName("beta1")
+	_mPSNNOptimizerAdamSelBeta2                                                                                                                                                      = objc.RegisterName("beta2")
+	_mPSNNOptimizerAdamSelEpsilon                                                                                                                                                    = objc.RegisterName("epsilon")
+	_mPSNNOptimizerAdamSelTimeStep                                                                                                                                                   = objc.RegisterName("timeStep")
+	_mPSNNOptimizerAdamSelSetTimeStep                                                                                                                                                = objc.RegisterName("setTimeStep:")
 )
 
 func MPSNNOptimizerAdamFromID(id objc.ID) *MPSNNOptimizerAdam {
@@ -52,14 +52,18 @@ func MPSNNOptimizerAdamFromID(id objc.ID) *MPSNNOptimizerAdam {
 // @abstract   Convenience initialization for the adam update @param      device                     The device on which the kernel will execute. @param      learningRate               The learningRate at which we will update values @return     A valid MPSNNOptimizerAdam object or nil, if failure.
 func (o *MPSNNOptimizerAdam) InitWithDeviceLearningRate(device metal.MTLDevice, learningRate float32) *MPSNNOptimizerAdam {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNOptimizerAdamSelInitWithDeviceLearningRate, device, learningRate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNOptimizerAdamFromID(_ret)
 }
 
 // @abstract   Full initialization for the adam update @param      device                     The device on which the kernel will execute. @param      beta1                      The beta1 to update values @param      beta2                      The beta2 to update values @param      epsilon                    The epsilon at which we update values @param      timeStep                   The timeStep at which values will start updating @param      optimizerDescriptor        The optimizerDescriptor which will have a bunch of properties to be applied @return     A valid MPSNNOptimizerAdam object or nil, if failure.
 func (o *MPSNNOptimizerAdam) InitWithDeviceBeta1Beta2EpsilonTimeStepOptimizerDescriptor(device metal.MTLDevice, beta1 float64, beta2 float64, epsilon float32, timeStep uint, optimizerDescriptor *mpsneuralnetwork.MPSNNOptimizerDescriptor) *MPSNNOptimizerAdam {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNOptimizerAdamSelInitWithDeviceBeta1Beta2EpsilonTimeStepOptimizerDescriptor, device, beta1, beta2, epsilon, timeStep, optimizerDescriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNOptimizerAdamFromID(_ret)
 }
 
@@ -135,4 +139,3 @@ func (o *MPSNNOptimizerAdam) TimeStep() uint {
 func (o *MPSNNOptimizerAdam) SetTimeStep(timeStep uint) {
 	o.Ptr().Send(_mPSNNOptimizerAdamSelSetTimeStep, timeStep)
 }
-

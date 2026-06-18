@@ -15,13 +15,13 @@ type NSCollectionViewCompositionalLayout struct {
 }
 
 var (
-	_clsNSCollectionViewCompositionalLayout = _objcClass("NSCollectionViewCompositionalLayout")
-	_nSCollectionViewCompositionalLayoutSelInitWithSection = objc.RegisterName("initWithSection:")
-	_nSCollectionViewCompositionalLayoutSelInitWithSectionConfiguration = objc.RegisterName("initWithSection:configuration:")
-	_nSCollectionViewCompositionalLayoutSelInitWithSectionProvider = objc.RegisterName("initWithSectionProvider:")
+	_clsNSCollectionViewCompositionalLayout                                     = _objcClass("NSCollectionViewCompositionalLayout")
+	_nSCollectionViewCompositionalLayoutSelInitWithSection                      = objc.RegisterName("initWithSection:")
+	_nSCollectionViewCompositionalLayoutSelInitWithSectionConfiguration         = objc.RegisterName("initWithSection:configuration:")
+	_nSCollectionViewCompositionalLayoutSelInitWithSectionProvider              = objc.RegisterName("initWithSectionProvider:")
 	_nSCollectionViewCompositionalLayoutSelInitWithSectionProviderConfiguration = objc.RegisterName("initWithSectionProvider:configuration:")
-	_nSCollectionViewCompositionalLayoutSelConfiguration = objc.RegisterName("configuration")
-	_nSCollectionViewCompositionalLayoutSelSetConfiguration = objc.RegisterName("setConfiguration:")
+	_nSCollectionViewCompositionalLayoutSelConfiguration                        = objc.RegisterName("configuration")
+	_nSCollectionViewCompositionalLayoutSelSetConfiguration                     = objc.RegisterName("setConfiguration:")
 )
 
 func NSCollectionViewCompositionalLayoutFromID(id objc.ID) *NSCollectionViewCompositionalLayout {
@@ -36,35 +36,44 @@ func NSCollectionViewCompositionalLayoutFromID(id objc.ID) *NSCollectionViewComp
 
 func (o *NSCollectionViewCompositionalLayout) InitWithSection(section *NSCollectionLayoutSection) *NSCollectionViewCompositionalLayout {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewCompositionalLayoutSelInitWithSection, section.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewCompositionalLayoutFromID(_ret)
 }
 
 func (o *NSCollectionViewCompositionalLayout) InitWithSectionConfiguration(section *NSCollectionLayoutSection, configuration *NSCollectionViewCompositionalLayoutConfiguration) *NSCollectionViewCompositionalLayout {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewCompositionalLayoutSelInitWithSectionConfiguration, section.Ptr(), configuration.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewCompositionalLayoutFromID(_ret)
 }
 
 func (o *NSCollectionViewCompositionalLayout) InitWithSectionProvider(sectionProvider objc.Block) *NSCollectionViewCompositionalLayout {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewCompositionalLayoutSelInitWithSectionProvider, sectionProvider)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewCompositionalLayoutFromID(_ret)
 }
 
 func (o *NSCollectionViewCompositionalLayout) InitWithSectionProviderConfiguration(sectionProvider objc.Block, configuration *NSCollectionViewCompositionalLayoutConfiguration) *NSCollectionViewCompositionalLayout {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewCompositionalLayoutSelInitWithSectionProviderConfiguration, sectionProvider, configuration.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewCompositionalLayoutFromID(_ret)
 }
 
 func (o *NSCollectionViewCompositionalLayout) Configuration() *NSCollectionViewCompositionalLayoutConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewCompositionalLayoutSelConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewCompositionalLayoutConfigurationFromID(_ret)
 }
 
 func (o *NSCollectionViewCompositionalLayout) SetConfiguration(configuration *NSCollectionViewCompositionalLayoutConfiguration) {
 	o.Ptr().Send(_nSCollectionViewCompositionalLayoutSelSetConfiguration, configuration.Ptr())
 }
-

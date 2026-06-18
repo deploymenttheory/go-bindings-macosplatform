@@ -133,4 +133,3 @@ type CertificateViewable interface {
 }
 
 var _ CertificateViewable = (*CertificateView)(nil)
-

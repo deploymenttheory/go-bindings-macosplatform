@@ -16,7 +16,9 @@ type MTROnOffClusterOnWithTimedOffParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTROnOffClusterOnWithTimedOffParams].
-func (x *MTROnOffClusterOnWithTimedOffParams) Unwrap() *raw.MTROnOffClusterOnWithTimedOffParams { return x.inner }
+func (x *MTROnOffClusterOnWithTimedOffParams) Unwrap() *raw.MTROnOffClusterOnWithTimedOffParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -137,4 +139,3 @@ type MTROnOffClusterOnWithTimedOffParamsable interface {
 }
 
 var _ MTROnOffClusterOnWithTimedOffParamsable = (*MTROnOffClusterOnWithTimedOffParams)(nil)
-

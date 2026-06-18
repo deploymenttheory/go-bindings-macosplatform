@@ -16,35 +16,35 @@ type NEVPNProtocol struct {
 }
 
 var (
-	_clsNEVPNProtocol = _objcClass("NEVPNProtocol")
-	_nEVPNProtocolSelServerAddress = objc.RegisterName("serverAddress")
-	_nEVPNProtocolSelSetServerAddress = objc.RegisterName("setServerAddress:")
-	_nEVPNProtocolSelUsername = objc.RegisterName("username")
-	_nEVPNProtocolSelSetUsername = objc.RegisterName("setUsername:")
-	_nEVPNProtocolSelPasswordReference = objc.RegisterName("passwordReference")
-	_nEVPNProtocolSelSetPasswordReference = objc.RegisterName("setPasswordReference:")
-	_nEVPNProtocolSelIdentityReference = objc.RegisterName("identityReference")
-	_nEVPNProtocolSelSetIdentityReference = objc.RegisterName("setIdentityReference:")
-	_nEVPNProtocolSelIdentityData = objc.RegisterName("identityData")
-	_nEVPNProtocolSelSetIdentityData = objc.RegisterName("setIdentityData:")
-	_nEVPNProtocolSelIdentityDataPassword = objc.RegisterName("identityDataPassword")
-	_nEVPNProtocolSelSetIdentityDataPassword = objc.RegisterName("setIdentityDataPassword:")
-	_nEVPNProtocolSelDisconnectOnSleep = objc.RegisterName("disconnectOnSleep")
-	_nEVPNProtocolSelSetDisconnectOnSleep = objc.RegisterName("setDisconnectOnSleep:")
-	_nEVPNProtocolSelProxySettings = objc.RegisterName("proxySettings")
-	_nEVPNProtocolSelSetProxySettings = objc.RegisterName("setProxySettings:")
-	_nEVPNProtocolSelIncludeAllNetworks = objc.RegisterName("includeAllNetworks")
-	_nEVPNProtocolSelSetIncludeAllNetworks = objc.RegisterName("setIncludeAllNetworks:")
-	_nEVPNProtocolSelExcludeLocalNetworks = objc.RegisterName("excludeLocalNetworks")
-	_nEVPNProtocolSelSetExcludeLocalNetworks = objc.RegisterName("setExcludeLocalNetworks:")
-	_nEVPNProtocolSelExcludeCellularServices = objc.RegisterName("excludeCellularServices")
-	_nEVPNProtocolSelSetExcludeCellularServices = objc.RegisterName("setExcludeCellularServices:")
-	_nEVPNProtocolSelExcludeAPNs = objc.RegisterName("excludeAPNs")
-	_nEVPNProtocolSelSetExcludeAPNs = objc.RegisterName("setExcludeAPNs:")
-	_nEVPNProtocolSelExcludeDeviceCommunication = objc.RegisterName("excludeDeviceCommunication")
+	_clsNEVPNProtocol                              = _objcClass("NEVPNProtocol")
+	_nEVPNProtocolSelServerAddress                 = objc.RegisterName("serverAddress")
+	_nEVPNProtocolSelSetServerAddress              = objc.RegisterName("setServerAddress:")
+	_nEVPNProtocolSelUsername                      = objc.RegisterName("username")
+	_nEVPNProtocolSelSetUsername                   = objc.RegisterName("setUsername:")
+	_nEVPNProtocolSelPasswordReference             = objc.RegisterName("passwordReference")
+	_nEVPNProtocolSelSetPasswordReference          = objc.RegisterName("setPasswordReference:")
+	_nEVPNProtocolSelIdentityReference             = objc.RegisterName("identityReference")
+	_nEVPNProtocolSelSetIdentityReference          = objc.RegisterName("setIdentityReference:")
+	_nEVPNProtocolSelIdentityData                  = objc.RegisterName("identityData")
+	_nEVPNProtocolSelSetIdentityData               = objc.RegisterName("setIdentityData:")
+	_nEVPNProtocolSelIdentityDataPassword          = objc.RegisterName("identityDataPassword")
+	_nEVPNProtocolSelSetIdentityDataPassword       = objc.RegisterName("setIdentityDataPassword:")
+	_nEVPNProtocolSelDisconnectOnSleep             = objc.RegisterName("disconnectOnSleep")
+	_nEVPNProtocolSelSetDisconnectOnSleep          = objc.RegisterName("setDisconnectOnSleep:")
+	_nEVPNProtocolSelProxySettings                 = objc.RegisterName("proxySettings")
+	_nEVPNProtocolSelSetProxySettings              = objc.RegisterName("setProxySettings:")
+	_nEVPNProtocolSelIncludeAllNetworks            = objc.RegisterName("includeAllNetworks")
+	_nEVPNProtocolSelSetIncludeAllNetworks         = objc.RegisterName("setIncludeAllNetworks:")
+	_nEVPNProtocolSelExcludeLocalNetworks          = objc.RegisterName("excludeLocalNetworks")
+	_nEVPNProtocolSelSetExcludeLocalNetworks       = objc.RegisterName("setExcludeLocalNetworks:")
+	_nEVPNProtocolSelExcludeCellularServices       = objc.RegisterName("excludeCellularServices")
+	_nEVPNProtocolSelSetExcludeCellularServices    = objc.RegisterName("setExcludeCellularServices:")
+	_nEVPNProtocolSelExcludeAPNs                   = objc.RegisterName("excludeAPNs")
+	_nEVPNProtocolSelSetExcludeAPNs                = objc.RegisterName("setExcludeAPNs:")
+	_nEVPNProtocolSelExcludeDeviceCommunication    = objc.RegisterName("excludeDeviceCommunication")
 	_nEVPNProtocolSelSetExcludeDeviceCommunication = objc.RegisterName("setExcludeDeviceCommunication:")
-	_nEVPNProtocolSelEnforceRoutes = objc.RegisterName("enforceRoutes")
-	_nEVPNProtocolSelSetEnforceRoutes = objc.RegisterName("setEnforceRoutes:")
+	_nEVPNProtocolSelEnforceRoutes                 = objc.RegisterName("enforceRoutes")
+	_nEVPNProtocolSelSetEnforceRoutes              = objc.RegisterName("setEnforceRoutes:")
 )
 
 func NEVPNProtocolFromID(id objc.ID) *NEVPNProtocol {
@@ -60,7 +60,9 @@ func NEVPNProtocolFromID(id objc.ID) *NEVPNProtocol {
 // @property serverAddress @discussion The VPN server. Depending on the protocol, may be an IP address, host name, or URL.
 func (o *NEVPNProtocol) ServerAddress() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEVPNProtocolSelServerAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -71,7 +73,9 @@ func (o *NEVPNProtocol) SetServerAddress(serverAddress *foundation.NSString) {
 // @property username @discussion The username component of the VPN authentication credential.
 func (o *NEVPNProtocol) Username() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEVPNProtocolSelUsername)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -82,7 +86,9 @@ func (o *NEVPNProtocol) SetUsername(username *foundation.NSString) {
 // @property passwordReference @discussion The password component of the VPN authentication credential. The value is a persistent reference to a keychain item with the kSecClassGenericPassword class.
 func (o *NEVPNProtocol) PasswordReference() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEVPNProtocolSelPasswordReference)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -93,7 +99,9 @@ func (o *NEVPNProtocol) SetPasswordReference(passwordReference *foundation.NSDat
 // @property identityReference @discussion The certificate and private key component of the VPN authentication credential. The value is a persistent reference to a keychain item with the kSecClassIdentity class.
 func (o *NEVPNProtocol) IdentityReference() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEVPNProtocolSelIdentityReference)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -104,7 +112,9 @@ func (o *NEVPNProtocol) SetIdentityReference(identityReference *foundation.NSDat
 // @property identityData @discussion The PKCS12 data for the VPN authentication identity. The value is a NSData in PKCS12 format.
 func (o *NEVPNProtocol) IdentityData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEVPNProtocolSelIdentityData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -115,7 +125,9 @@ func (o *NEVPNProtocol) SetIdentityData(identityData *foundation.NSData) {
 // @property identityDataPassword @discussion The password to be used to decrypt the PKCS12 identity data.
 func (o *NEVPNProtocol) IdentityDataPassword() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEVPNProtocolSelIdentityDataPassword)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -136,7 +148,9 @@ func (o *NEVPNProtocol) SetDisconnectOnSleep(disconnectOnSleep bool) {
 // @property proxySettings @discussion An NEProxySettings object containing the proxy settings to use for connections routed through the tunnel.
 func (o *NEVPNProtocol) ProxySettings() *NEProxySettings {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEVPNProtocolSelProxySettings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEProxySettingsFromID(_ret)
 }
 
@@ -203,4 +217,3 @@ func (o *NEVPNProtocol) EnforceRoutes() bool {
 func (o *NEVPNProtocol) SetEnforceRoutes(enforceRoutes bool) {
 	o.Ptr().Send(_nEVPNProtocolSelSetEnforceRoutes, enforceRoutes)
 }
-

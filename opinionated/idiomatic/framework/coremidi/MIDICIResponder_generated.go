@@ -90,4 +90,3 @@ type CIResponderable interface {
 }
 
 var _ CIResponderable = (*CIResponder)(nil)
-

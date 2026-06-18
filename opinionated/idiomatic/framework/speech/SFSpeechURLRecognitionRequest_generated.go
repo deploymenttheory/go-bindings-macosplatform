@@ -57,7 +57,9 @@ func (x *SpeechURLRecognitionRequest) WithContextualStrings(items ...*foundation
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -95,7 +97,9 @@ func (x *SpeechURLRecognitionRequest) URL() *foundation.NSURL {
 	return x.inner.URL()
 }
 
-func (x *SpeechURLRecognitionRequest) asSpeechRecognitionRequest() *raw.SFSpeechRecognitionRequest { return &x.inner.SFSpeechRecognitionRequest }
+func (x *SpeechURLRecognitionRequest) asSpeechRecognitionRequest() *raw.SFSpeechRecognitionRequest {
+	return &x.inner.SFSpeechRecognitionRequest
+}
 
 // SpeechURLRecognitionRequestable is the interface implemented by [SpeechURLRecognitionRequest], for mocking and DI.
 type SpeechURLRecognitionRequestable interface {
@@ -111,4 +115,3 @@ type SpeechURLRecognitionRequestable interface {
 }
 
 var _ SpeechURLRecognitionRequestable = (*SpeechURLRecognitionRequest)(nil)
-

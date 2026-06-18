@@ -102,7 +102,9 @@ func (x *DOMMutationEvent) asDOMEvent() *raw.DOMEvent { return &x.inner.DOMEvent
 
 func (x *DOMMutationEvent) asDOMObject() *raw.DOMObject { return &x.inner.DOMEvent.DOMObject }
 
-func (x *DOMMutationEvent) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMEvent.DOMObject.WebScriptObject }
+func (x *DOMMutationEvent) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMEvent.DOMObject.WebScriptObject
+}
 
 // DOMMutationEventable is the interface implemented by [DOMMutationEvent], for mocking and DI.
 type DOMMutationEventable interface {
@@ -117,4 +119,3 @@ type DOMMutationEventable interface {
 }
 
 var _ DOMMutationEventable = (*DOMMutationEvent)(nil)
-

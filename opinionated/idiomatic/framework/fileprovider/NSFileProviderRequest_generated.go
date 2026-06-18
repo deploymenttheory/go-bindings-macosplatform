@@ -70,4 +70,3 @@ type FileProviderRequestable interface {
 }
 
 var _ FileProviderRequestable = (*FileProviderRequest)(nil)
-

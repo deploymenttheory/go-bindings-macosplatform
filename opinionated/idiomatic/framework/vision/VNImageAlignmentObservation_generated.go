@@ -35,7 +35,9 @@ func NewImageAlignmentObservation() *ImageAlignmentObservation {
 	return &ImageAlignmentObservation{inner: raw.VNImageAlignmentObservationFromID(_id)}
 }
 
-func (x *ImageAlignmentObservation) asImageAlignmentObservation() *raw.VNImageAlignmentObservation { return x.inner }
+func (x *ImageAlignmentObservation) asImageAlignmentObservation() *raw.VNImageAlignmentObservation {
+	return x.inner
+}
 
 func (x *ImageAlignmentObservation) asObservation() *raw.VNObservation { return &x.inner.VNObservation }
 
@@ -45,4 +47,3 @@ type ImageAlignmentObservationable interface {
 }
 
 var _ ImageAlignmentObservationable = (*ImageAlignmentObservation)(nil)
-

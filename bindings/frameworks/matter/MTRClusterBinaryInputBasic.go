@@ -16,35 +16,35 @@ type MTRClusterBinaryInputBasic struct {
 }
 
 var (
-	_clsMTRClusterBinaryInputBasic = _objcClass("MTRClusterBinaryInputBasic")
-	_mTRClusterBinaryInputBasicSelReadAttributeActiveTextWithParams = objc.RegisterName("readAttributeActiveTextWithParams:")
-	_mTRClusterBinaryInputBasicSelWriteAttributeActiveTextWithValueExpectedValueInterval = objc.RegisterName("writeAttributeActiveTextWithValue:expectedValueInterval:")
-	_mTRClusterBinaryInputBasicSelWriteAttributeActiveTextWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeActiveTextWithValue:expectedValueInterval:params:")
-	_mTRClusterBinaryInputBasicSelReadAttributeDescriptionWithParams = objc.RegisterName("readAttributeDescriptionWithParams:")
-	_mTRClusterBinaryInputBasicSelWriteAttributeDescriptionWithValueExpectedValueInterval = objc.RegisterName("writeAttributeDescriptionWithValue:expectedValueInterval:")
-	_mTRClusterBinaryInputBasicSelWriteAttributeDescriptionWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeDescriptionWithValue:expectedValueInterval:params:")
-	_mTRClusterBinaryInputBasicSelReadAttributeInactiveTextWithParams = objc.RegisterName("readAttributeInactiveTextWithParams:")
-	_mTRClusterBinaryInputBasicSelWriteAttributeInactiveTextWithValueExpectedValueInterval = objc.RegisterName("writeAttributeInactiveTextWithValue:expectedValueInterval:")
+	_clsMTRClusterBinaryInputBasic                                                               = _objcClass("MTRClusterBinaryInputBasic")
+	_mTRClusterBinaryInputBasicSelReadAttributeActiveTextWithParams                              = objc.RegisterName("readAttributeActiveTextWithParams:")
+	_mTRClusterBinaryInputBasicSelWriteAttributeActiveTextWithValueExpectedValueInterval         = objc.RegisterName("writeAttributeActiveTextWithValue:expectedValueInterval:")
+	_mTRClusterBinaryInputBasicSelWriteAttributeActiveTextWithValueExpectedValueIntervalParams   = objc.RegisterName("writeAttributeActiveTextWithValue:expectedValueInterval:params:")
+	_mTRClusterBinaryInputBasicSelReadAttributeDescriptionWithParams                             = objc.RegisterName("readAttributeDescriptionWithParams:")
+	_mTRClusterBinaryInputBasicSelWriteAttributeDescriptionWithValueExpectedValueInterval        = objc.RegisterName("writeAttributeDescriptionWithValue:expectedValueInterval:")
+	_mTRClusterBinaryInputBasicSelWriteAttributeDescriptionWithValueExpectedValueIntervalParams  = objc.RegisterName("writeAttributeDescriptionWithValue:expectedValueInterval:params:")
+	_mTRClusterBinaryInputBasicSelReadAttributeInactiveTextWithParams                            = objc.RegisterName("readAttributeInactiveTextWithParams:")
+	_mTRClusterBinaryInputBasicSelWriteAttributeInactiveTextWithValueExpectedValueInterval       = objc.RegisterName("writeAttributeInactiveTextWithValue:expectedValueInterval:")
 	_mTRClusterBinaryInputBasicSelWriteAttributeInactiveTextWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeInactiveTextWithValue:expectedValueInterval:params:")
-	_mTRClusterBinaryInputBasicSelReadAttributeOutOfServiceWithParams = objc.RegisterName("readAttributeOutOfServiceWithParams:")
-	_mTRClusterBinaryInputBasicSelWriteAttributeOutOfServiceWithValueExpectedValueInterval = objc.RegisterName("writeAttributeOutOfServiceWithValue:expectedValueInterval:")
+	_mTRClusterBinaryInputBasicSelReadAttributeOutOfServiceWithParams                            = objc.RegisterName("readAttributeOutOfServiceWithParams:")
+	_mTRClusterBinaryInputBasicSelWriteAttributeOutOfServiceWithValueExpectedValueInterval       = objc.RegisterName("writeAttributeOutOfServiceWithValue:expectedValueInterval:")
 	_mTRClusterBinaryInputBasicSelWriteAttributeOutOfServiceWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeOutOfServiceWithValue:expectedValueInterval:params:")
-	_mTRClusterBinaryInputBasicSelReadAttributePolarityWithParams = objc.RegisterName("readAttributePolarityWithParams:")
-	_mTRClusterBinaryInputBasicSelReadAttributePresentValueWithParams = objc.RegisterName("readAttributePresentValueWithParams:")
-	_mTRClusterBinaryInputBasicSelWriteAttributePresentValueWithValueExpectedValueInterval = objc.RegisterName("writeAttributePresentValueWithValue:expectedValueInterval:")
+	_mTRClusterBinaryInputBasicSelReadAttributePolarityWithParams                                = objc.RegisterName("readAttributePolarityWithParams:")
+	_mTRClusterBinaryInputBasicSelReadAttributePresentValueWithParams                            = objc.RegisterName("readAttributePresentValueWithParams:")
+	_mTRClusterBinaryInputBasicSelWriteAttributePresentValueWithValueExpectedValueInterval       = objc.RegisterName("writeAttributePresentValueWithValue:expectedValueInterval:")
 	_mTRClusterBinaryInputBasicSelWriteAttributePresentValueWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributePresentValueWithValue:expectedValueInterval:params:")
-	_mTRClusterBinaryInputBasicSelReadAttributeReliabilityWithParams = objc.RegisterName("readAttributeReliabilityWithParams:")
-	_mTRClusterBinaryInputBasicSelWriteAttributeReliabilityWithValueExpectedValueInterval = objc.RegisterName("writeAttributeReliabilityWithValue:expectedValueInterval:")
-	_mTRClusterBinaryInputBasicSelWriteAttributeReliabilityWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeReliabilityWithValue:expectedValueInterval:params:")
-	_mTRClusterBinaryInputBasicSelReadAttributeStatusFlagsWithParams = objc.RegisterName("readAttributeStatusFlagsWithParams:")
-	_mTRClusterBinaryInputBasicSelReadAttributeApplicationTypeWithParams = objc.RegisterName("readAttributeApplicationTypeWithParams:")
-	_mTRClusterBinaryInputBasicSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterBinaryInputBasicSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterBinaryInputBasicSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterBinaryInputBasicSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterBinaryInputBasicSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterBinaryInputBasicSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterBinaryInputBasicSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterBinaryInputBasicSelReadAttributeReliabilityWithParams                             = objc.RegisterName("readAttributeReliabilityWithParams:")
+	_mTRClusterBinaryInputBasicSelWriteAttributeReliabilityWithValueExpectedValueInterval        = objc.RegisterName("writeAttributeReliabilityWithValue:expectedValueInterval:")
+	_mTRClusterBinaryInputBasicSelWriteAttributeReliabilityWithValueExpectedValueIntervalParams  = objc.RegisterName("writeAttributeReliabilityWithValue:expectedValueInterval:params:")
+	_mTRClusterBinaryInputBasicSelReadAttributeStatusFlagsWithParams                             = objc.RegisterName("readAttributeStatusFlagsWithParams:")
+	_mTRClusterBinaryInputBasicSelReadAttributeApplicationTypeWithParams                         = objc.RegisterName("readAttributeApplicationTypeWithParams:")
+	_mTRClusterBinaryInputBasicSelReadAttributeGeneratedCommandListWithParams                    = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterBinaryInputBasicSelReadAttributeAcceptedCommandListWithParams                     = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterBinaryInputBasicSelReadAttributeAttributeListWithParams                           = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterBinaryInputBasicSelReadAttributeFeatureMapWithParams                              = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterBinaryInputBasicSelReadAttributeClusterRevisionWithParams                         = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterBinaryInputBasicSelInitWithDeviceEndpointIDQueue                                  = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterBinaryInputBasicSelInitWithDeviceEndpointQueue                                    = objc.RegisterName("initWithDevice:endpoint:queue:")
 )
 
 func MTRClusterBinaryInputBasicFromID(id objc.ID) *MTRClusterBinaryInputBasic {
@@ -178,13 +178,16 @@ func (o *MTRClusterBinaryInputBasic) ReadAttributeClusterRevisionWithParams(para
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func (o *MTRClusterBinaryInputBasic) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterBinaryInputBasic {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterBinaryInputBasicSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterBinaryInputBasicFromID(_ret)
 }
 
 func (o *MTRClusterBinaryInputBasic) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterBinaryInputBasic {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterBinaryInputBasicSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterBinaryInputBasicFromID(_ret)
 }
-

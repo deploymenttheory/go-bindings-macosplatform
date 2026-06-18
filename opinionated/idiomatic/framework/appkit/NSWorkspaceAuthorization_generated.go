@@ -41,4 +41,3 @@ type WorkspaceAuthorizationable interface {
 }
 
 var _ WorkspaceAuthorizationable = (*WorkspaceAuthorization)(nil)
-

@@ -16,29 +16,29 @@ type NSLayoutConstraint struct {
 }
 
 var (
-	_clsNSLayoutConstraint = _objcClass("NSLayoutConstraint")
-	_nSLayoutConstraintSelConstraintsWithVisualFormatOptionsMetricsViews = objc.RegisterName("constraintsWithVisualFormat:options:metrics:views:")
+	_clsNSLayoutConstraint                                                                      = _objcClass("NSLayoutConstraint")
+	_nSLayoutConstraintSelConstraintsWithVisualFormatOptionsMetricsViews                        = objc.RegisterName("constraintsWithVisualFormat:options:metrics:views:")
 	_nSLayoutConstraintSelConstraintWithItemAttributeRelatedByToItemAttributeMultiplierConstant = objc.RegisterName("constraintWithItem:attribute:relatedBy:toItem:attribute:multiplier:constant:")
-	_nSLayoutConstraintSelActivateConstraints = objc.RegisterName("activateConstraints:")
-	_nSLayoutConstraintSelDeactivateConstraints = objc.RegisterName("deactivateConstraints:")
-	_nSLayoutConstraintSelPriority = objc.RegisterName("priority")
-	_nSLayoutConstraintSelSetPriority = objc.RegisterName("setPriority:")
-	_nSLayoutConstraintSelShouldBeArchived = objc.RegisterName("shouldBeArchived")
-	_nSLayoutConstraintSelSetShouldBeArchived = objc.RegisterName("setShouldBeArchived:")
-	_nSLayoutConstraintSelFirstItem = objc.RegisterName("firstItem")
-	_nSLayoutConstraintSelSecondItem = objc.RegisterName("secondItem")
-	_nSLayoutConstraintSelFirstAttribute = objc.RegisterName("firstAttribute")
-	_nSLayoutConstraintSelSecondAttribute = objc.RegisterName("secondAttribute")
-	_nSLayoutConstraintSelFirstAnchor = objc.RegisterName("firstAnchor")
-	_nSLayoutConstraintSelSecondAnchor = objc.RegisterName("secondAnchor")
-	_nSLayoutConstraintSelRelation = objc.RegisterName("relation")
-	_nSLayoutConstraintSelMultiplier = objc.RegisterName("multiplier")
-	_nSLayoutConstraintSelConstant = objc.RegisterName("constant")
-	_nSLayoutConstraintSelSetConstant = objc.RegisterName("setConstant:")
-	_nSLayoutConstraintSelIsActive = objc.RegisterName("isActive")
-	_nSLayoutConstraintSelSetActive = objc.RegisterName("setActive:")
-	_nSLayoutConstraintSelIdentifier = objc.RegisterName("identifier")
-	_nSLayoutConstraintSelSetIdentifier = objc.RegisterName("setIdentifier:")
+	_nSLayoutConstraintSelActivateConstraints                                                   = objc.RegisterName("activateConstraints:")
+	_nSLayoutConstraintSelDeactivateConstraints                                                 = objc.RegisterName("deactivateConstraints:")
+	_nSLayoutConstraintSelPriority                                                              = objc.RegisterName("priority")
+	_nSLayoutConstraintSelSetPriority                                                           = objc.RegisterName("setPriority:")
+	_nSLayoutConstraintSelShouldBeArchived                                                      = objc.RegisterName("shouldBeArchived")
+	_nSLayoutConstraintSelSetShouldBeArchived                                                   = objc.RegisterName("setShouldBeArchived:")
+	_nSLayoutConstraintSelFirstItem                                                             = objc.RegisterName("firstItem")
+	_nSLayoutConstraintSelSecondItem                                                            = objc.RegisterName("secondItem")
+	_nSLayoutConstraintSelFirstAttribute                                                        = objc.RegisterName("firstAttribute")
+	_nSLayoutConstraintSelSecondAttribute                                                       = objc.RegisterName("secondAttribute")
+	_nSLayoutConstraintSelFirstAnchor                                                           = objc.RegisterName("firstAnchor")
+	_nSLayoutConstraintSelSecondAnchor                                                          = objc.RegisterName("secondAnchor")
+	_nSLayoutConstraintSelRelation                                                              = objc.RegisterName("relation")
+	_nSLayoutConstraintSelMultiplier                                                            = objc.RegisterName("multiplier")
+	_nSLayoutConstraintSelConstant                                                              = objc.RegisterName("constant")
+	_nSLayoutConstraintSelSetConstant                                                           = objc.RegisterName("setConstant:")
+	_nSLayoutConstraintSelIsActive                                                              = objc.RegisterName("isActive")
+	_nSLayoutConstraintSelSetActive                                                             = objc.RegisterName("setActive:")
+	_nSLayoutConstraintSelIdentifier                                                            = objc.RegisterName("identifier")
+	_nSLayoutConstraintSelSetIdentifier                                                         = objc.RegisterName("setIdentifier:")
 )
 
 func NSLayoutConstraintFromID(id objc.ID) *NSLayoutConstraint {
@@ -53,13 +53,17 @@ func NSLayoutConstraintFromID(id objc.ID) *NSLayoutConstraint {
 
 func NSLayoutConstraintConstraintsWithVisualFormatOptionsMetricsViews(format *foundation.NSString, opts NSLayoutFormatOptions, metrics *foundation.NSDictionary[*foundation.NSString, objc.ID], views *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*NSLayoutConstraint] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSLayoutConstraint), _nSLayoutConstraintSelConstraintsWithVisualFormatOptionsMetricsViews, format.Ptr(), opts, metrics, views)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSLayoutConstraint](_ret)
 }
 
 func NSLayoutConstraintConstraintWithItemAttributeRelatedByToItemAttributeMultiplierConstant(view1 objc.ID, attr1 NSLayoutAttribute, relation NSLayoutRelation, view2 objc.ID, attr2 NSLayoutAttribute, multiplier float64, c float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSLayoutConstraint), _nSLayoutConstraintSelConstraintWithItemAttributeRelatedByToItemAttributeMultiplierConstant, view1, attr1, relation, view2, attr2, multiplier, c)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutConstraintFromID(_ret)
 }
 
@@ -149,11 +153,12 @@ func (o *NSLayoutConstraint) SetActive(active bool) {
 
 func (o *NSLayoutConstraint) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutConstraintSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSLayoutConstraint) SetIdentifier(identifier *foundation.NSString) {
 	o.Ptr().Send(_nSLayoutConstraintSelSetIdentifier, identifier.Ptr())
 }
-

@@ -60,4 +60,3 @@ type PhoneNumberable interface {
 }
 
 var _ PhoneNumberable = (*PhoneNumber)(nil)
-

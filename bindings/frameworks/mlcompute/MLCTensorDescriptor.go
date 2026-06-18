@@ -16,23 +16,23 @@ type MLCTensorDescriptor struct {
 }
 
 var (
-	_clsMLCTensorDescriptor = _objcClass("MLCTensorDescriptor")
-	_mLCTensorDescriptorSelDescriptorWithShapeDataType = objc.RegisterName("descriptorWithShape:dataType:")
-	_mLCTensorDescriptorSelDescriptorWithShapeSequenceLengthsSortedSequencesDataType = objc.RegisterName("descriptorWithShape:sequenceLengths:sortedSequences:dataType:")
-	_mLCTensorDescriptorSelDescriptorWithWidthHeightFeatureChannelCountBatchSize = objc.RegisterName("descriptorWithWidth:height:featureChannelCount:batchSize:")
-	_mLCTensorDescriptorSelDescriptorWithWidthHeightFeatureChannelCountBatchSizeDataType = objc.RegisterName("descriptorWithWidth:height:featureChannelCount:batchSize:dataType:")
+	_clsMLCTensorDescriptor                                                                                                     = _objcClass("MLCTensorDescriptor")
+	_mLCTensorDescriptorSelDescriptorWithShapeDataType                                                                          = objc.RegisterName("descriptorWithShape:dataType:")
+	_mLCTensorDescriptorSelDescriptorWithShapeSequenceLengthsSortedSequencesDataType                                            = objc.RegisterName("descriptorWithShape:sequenceLengths:sortedSequences:dataType:")
+	_mLCTensorDescriptorSelDescriptorWithWidthHeightFeatureChannelCountBatchSize                                                = objc.RegisterName("descriptorWithWidth:height:featureChannelCount:batchSize:")
+	_mLCTensorDescriptorSelDescriptorWithWidthHeightFeatureChannelCountBatchSizeDataType                                        = objc.RegisterName("descriptorWithWidth:height:featureChannelCount:batchSize:dataType:")
 	_mLCTensorDescriptorSelConvolutionWeightsDescriptorWithWidthHeightInputFeatureChannelCountOutputFeatureChannelCountDataType = objc.RegisterName("convolutionWeightsDescriptorWithWidth:height:inputFeatureChannelCount:outputFeatureChannelCount:dataType:")
-	_mLCTensorDescriptorSelConvolutionWeightsDescriptorWithInputFeatureChannelCountOutputFeatureChannelCountDataType = objc.RegisterName("convolutionWeightsDescriptorWithInputFeatureChannelCount:outputFeatureChannelCount:dataType:")
-	_mLCTensorDescriptorSelConvolutionBiasesDescriptorWithFeatureChannelCountDataType = objc.RegisterName("convolutionBiasesDescriptorWithFeatureChannelCount:dataType:")
-	_mLCTensorDescriptorSelDataType = objc.RegisterName("dataType")
-	_mLCTensorDescriptorSelDimensionCount = objc.RegisterName("dimensionCount")
-	_mLCTensorDescriptorSelShape = objc.RegisterName("shape")
-	_mLCTensorDescriptorSelStride = objc.RegisterName("stride")
-	_mLCTensorDescriptorSelTensorAllocationSizeInBytes = objc.RegisterName("tensorAllocationSizeInBytes")
-	_mLCTensorDescriptorSelSequenceLengths = objc.RegisterName("sequenceLengths")
-	_mLCTensorDescriptorSelSortedSequences = objc.RegisterName("sortedSequences")
-	_mLCTensorDescriptorSelBatchSizePerSequenceStep = objc.RegisterName("batchSizePerSequenceStep")
-	_mLCTensorDescriptorSelMaxTensorDimensions = objc.RegisterName("maxTensorDimensions")
+	_mLCTensorDescriptorSelConvolutionWeightsDescriptorWithInputFeatureChannelCountOutputFeatureChannelCountDataType            = objc.RegisterName("convolutionWeightsDescriptorWithInputFeatureChannelCount:outputFeatureChannelCount:dataType:")
+	_mLCTensorDescriptorSelConvolutionBiasesDescriptorWithFeatureChannelCountDataType                                           = objc.RegisterName("convolutionBiasesDescriptorWithFeatureChannelCount:dataType:")
+	_mLCTensorDescriptorSelDataType                                                                                             = objc.RegisterName("dataType")
+	_mLCTensorDescriptorSelDimensionCount                                                                                       = objc.RegisterName("dimensionCount")
+	_mLCTensorDescriptorSelShape                                                                                                = objc.RegisterName("shape")
+	_mLCTensorDescriptorSelStride                                                                                               = objc.RegisterName("stride")
+	_mLCTensorDescriptorSelTensorAllocationSizeInBytes                                                                          = objc.RegisterName("tensorAllocationSizeInBytes")
+	_mLCTensorDescriptorSelSequenceLengths                                                                                      = objc.RegisterName("sequenceLengths")
+	_mLCTensorDescriptorSelSortedSequences                                                                                      = objc.RegisterName("sortedSequences")
+	_mLCTensorDescriptorSelBatchSizePerSequenceStep                                                                             = objc.RegisterName("batchSizePerSequenceStep")
+	_mLCTensorDescriptorSelMaxTensorDimensions                                                                                  = objc.RegisterName("maxTensorDimensions")
 )
 
 func MLCTensorDescriptorFromID(id objc.ID) *MLCTensorDescriptor {
@@ -48,49 +48,63 @@ func MLCTensorDescriptorFromID(id objc.ID) *MLCTensorDescriptor {
 // @abstract   Create a MLCTensorDescriptor object @param      shape       The tensor shape @param      dataType    The tensor data type @return     A new MLCTensorDescriptor object or nil if failure.
 func MLCTensorDescriptorDescriptorWithShapeDataType(shape *foundation.NSArray[*foundation.NSNumber], dataType MLCDataType) *MLCTensorDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensorDescriptor), _mLCTensorDescriptorSelDescriptorWithShapeDataType, shape, dataType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorDescriptorFromID(_ret)
 }
 
 // @abstract   Create a MLCTensorDescriptor object @param      shape              The tensor shape @param      sequenceLengths    The sequence lengths in tensor @param      sortedSequences    A boolean to indicate whether sequences are sorted @param      dataType           The tensor data type @return     A new MLCTensorDescriptor object or nil if failure. @discussion This method is provided as an easy to use API to create sequence tensors used by recurrent layers.
 func MLCTensorDescriptorDescriptorWithShapeSequenceLengthsSortedSequencesDataType(shape *foundation.NSArray[*foundation.NSNumber], sequenceLengths *foundation.NSArray[*foundation.NSNumber], sortedSequences bool, dataType MLCDataType) *MLCTensorDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensorDescriptor), _mLCTensorDescriptorSelDescriptorWithShapeSequenceLengthsSortedSequencesDataType, shape, sequenceLengths, sortedSequences, dataType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorDescriptorFromID(_ret)
 }
 
 // @abstract   Create a MLCTensorDescriptor object @param      width              The tensor width @param      height             The tensor height @param      featureChannels    The number of feature channels @param      batchSize          The batch size @return     A new MLCTensorDescriptor object or nil if failure. @discussion This method is provided as an easy to use API to create [NCHW] tensors used by convolutional layers.
 func MLCTensorDescriptorDescriptorWithWidthHeightFeatureChannelCountBatchSize(width uint, height uint, featureChannels uint, batchSize uint) *MLCTensorDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensorDescriptor), _mLCTensorDescriptorSelDescriptorWithWidthHeightFeatureChannelCountBatchSize, width, height, featureChannels, batchSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorDescriptorFromID(_ret)
 }
 
 // @abstract   Create a MLCTensorDescriptor object @param      width              The tensor width @param      height             The tensor height @param      featureChannelCount    The number of feature channels @param      batchSize          The batch size @param      dataType           The tensor data type @return     A new MLCTensorDescriptor object or nil if failure. @discussion This method is provided as an easy to use API to create [NCHW] tensors used by convolutional layers.
 func MLCTensorDescriptorDescriptorWithWidthHeightFeatureChannelCountBatchSizeDataType(width uint, height uint, featureChannelCount uint, batchSize uint, dataType MLCDataType) *MLCTensorDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensorDescriptor), _mLCTensorDescriptorSelDescriptorWithWidthHeightFeatureChannelCountBatchSizeDataType, width, height, featureChannelCount, batchSize, dataType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorDescriptorFromID(_ret)
 }
 
 // @abstract   Create a MLCTensorDescriptor object @param      width                                      The tensor width @param      height                                    The tensor height @param      inputFeatureChannelCount     The number of input feature channels @param      outputFeatureChannelCount   The number of output feature channels @param      dataType                                The tensor data type @return     A new MLCTensorDescriptor object or nil if failure. @discussion This method is provided as an easy to use API to create a weight tensor.
 func MLCTensorDescriptorConvolutionWeightsDescriptorWithWidthHeightInputFeatureChannelCountOutputFeatureChannelCountDataType(width uint, height uint, inputFeatureChannelCount uint, outputFeatureChannelCount uint, dataType MLCDataType) *MLCTensorDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensorDescriptor), _mLCTensorDescriptorSelConvolutionWeightsDescriptorWithWidthHeightInputFeatureChannelCountOutputFeatureChannelCountDataType, width, height, inputFeatureChannelCount, outputFeatureChannelCount, dataType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorDescriptorFromID(_ret)
 }
 
 // @abstract   Create a MLCTensorDescriptor object @param      inputFeatureChannelCount     The number of input feature channels @param      outputFeatureChannelCount   The number of output feature channels @param      dataType                                The tensor data type @return     A new MLCTensorDescriptor object or nil if failure. @discussion This method is provided as an easy to use API to create a weight tensor for a kernel of size 1.
 func MLCTensorDescriptorConvolutionWeightsDescriptorWithInputFeatureChannelCountOutputFeatureChannelCountDataType(inputFeatureChannelCount uint, outputFeatureChannelCount uint, dataType MLCDataType) *MLCTensorDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensorDescriptor), _mLCTensorDescriptorSelConvolutionWeightsDescriptorWithInputFeatureChannelCountOutputFeatureChannelCountDataType, inputFeatureChannelCount, outputFeatureChannelCount, dataType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorDescriptorFromID(_ret)
 }
 
 // @abstract   Create a MLCTensorDescriptor object @param      featureChannelCount     The number of input feature channels @param      dataType                     The tensor data type @return     A new MLCTensorDescriptor object or nil if failure. @discussion This method is provided as an easy to use API to create a bias tensor.
 func MLCTensorDescriptorConvolutionBiasesDescriptorWithFeatureChannelCountDataType(featureChannelCount uint, dataType MLCDataType) *MLCTensorDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensorDescriptor), _mLCTensorDescriptorSelConvolutionBiasesDescriptorWithFeatureChannelCountDataType, featureChannelCount, dataType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorDescriptorFromID(_ret)
 }
 
@@ -147,4 +161,3 @@ func MLCTensorDescriptorMaxTensorDimensions() uint {
 	_ret := objc.Send[uint](objc.ID(_clsMLCTensorDescriptor), _mLCTensorDescriptorSelMaxTensorDimensions)
 	return _ret
 }
-

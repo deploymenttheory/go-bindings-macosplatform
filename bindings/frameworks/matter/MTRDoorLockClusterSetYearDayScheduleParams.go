@@ -16,18 +16,18 @@ type MTRDoorLockClusterSetYearDayScheduleParams struct {
 }
 
 var (
-	_clsMTRDoorLockClusterSetYearDayScheduleParams = _objcClass("MTRDoorLockClusterSetYearDayScheduleParams")
-	_mTRDoorLockClusterSetYearDayScheduleParamsSelYearDayIndex = objc.RegisterName("yearDayIndex")
-	_mTRDoorLockClusterSetYearDayScheduleParamsSelSetYearDayIndex = objc.RegisterName("setYearDayIndex:")
-	_mTRDoorLockClusterSetYearDayScheduleParamsSelUserIndex = objc.RegisterName("userIndex")
-	_mTRDoorLockClusterSetYearDayScheduleParamsSelSetUserIndex = objc.RegisterName("setUserIndex:")
-	_mTRDoorLockClusterSetYearDayScheduleParamsSelLocalStartTime = objc.RegisterName("localStartTime")
-	_mTRDoorLockClusterSetYearDayScheduleParamsSelSetLocalStartTime = objc.RegisterName("setLocalStartTime:")
-	_mTRDoorLockClusterSetYearDayScheduleParamsSelLocalEndTime = objc.RegisterName("localEndTime")
-	_mTRDoorLockClusterSetYearDayScheduleParamsSelSetLocalEndTime = objc.RegisterName("setLocalEndTime:")
-	_mTRDoorLockClusterSetYearDayScheduleParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRDoorLockClusterSetYearDayScheduleParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRDoorLockClusterSetYearDayScheduleParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRDoorLockClusterSetYearDayScheduleParams                               = _objcClass("MTRDoorLockClusterSetYearDayScheduleParams")
+	_mTRDoorLockClusterSetYearDayScheduleParamsSelYearDayIndex                   = objc.RegisterName("yearDayIndex")
+	_mTRDoorLockClusterSetYearDayScheduleParamsSelSetYearDayIndex                = objc.RegisterName("setYearDayIndex:")
+	_mTRDoorLockClusterSetYearDayScheduleParamsSelUserIndex                      = objc.RegisterName("userIndex")
+	_mTRDoorLockClusterSetYearDayScheduleParamsSelSetUserIndex                   = objc.RegisterName("setUserIndex:")
+	_mTRDoorLockClusterSetYearDayScheduleParamsSelLocalStartTime                 = objc.RegisterName("localStartTime")
+	_mTRDoorLockClusterSetYearDayScheduleParamsSelSetLocalStartTime              = objc.RegisterName("setLocalStartTime:")
+	_mTRDoorLockClusterSetYearDayScheduleParamsSelLocalEndTime                   = objc.RegisterName("localEndTime")
+	_mTRDoorLockClusterSetYearDayScheduleParamsSelSetLocalEndTime                = objc.RegisterName("setLocalEndTime:")
+	_mTRDoorLockClusterSetYearDayScheduleParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRDoorLockClusterSetYearDayScheduleParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRDoorLockClusterSetYearDayScheduleParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRDoorLockClusterSetYearDayScheduleParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -43,7 +43,9 @@ func MTRDoorLockClusterSetYearDayScheduleParamsFromID(id objc.ID) *MTRDoorLockCl
 
 func (o *MTRDoorLockClusterSetYearDayScheduleParams) YearDayIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterSetYearDayScheduleParamsSelYearDayIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -53,7 +55,9 @@ func (o *MTRDoorLockClusterSetYearDayScheduleParams) SetYearDayIndex(yearDayInde
 
 func (o *MTRDoorLockClusterSetYearDayScheduleParams) UserIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterSetYearDayScheduleParamsSelUserIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -63,7 +67,9 @@ func (o *MTRDoorLockClusterSetYearDayScheduleParams) SetUserIndex(userIndex *fou
 
 func (o *MTRDoorLockClusterSetYearDayScheduleParams) LocalStartTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterSetYearDayScheduleParamsSelLocalStartTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -73,7 +79,9 @@ func (o *MTRDoorLockClusterSetYearDayScheduleParams) SetLocalStartTime(localStar
 
 func (o *MTRDoorLockClusterSetYearDayScheduleParams) LocalEndTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterSetYearDayScheduleParamsSelLocalEndTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -84,7 +92,9 @@ func (o *MTRDoorLockClusterSetYearDayScheduleParams) SetLocalEndTime(localEndTim
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRDoorLockClusterSetYearDayScheduleParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterSetYearDayScheduleParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -95,11 +105,12 @@ func (o *MTRDoorLockClusterSetYearDayScheduleParams) SetTimedInvokeTimeoutMs(tim
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRDoorLockClusterSetYearDayScheduleParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterSetYearDayScheduleParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDoorLockClusterSetYearDayScheduleParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDoorLockClusterSetYearDayScheduleParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

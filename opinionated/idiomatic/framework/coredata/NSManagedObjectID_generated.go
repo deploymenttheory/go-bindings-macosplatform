@@ -74,4 +74,3 @@ type ManagedObjectIDable interface {
 }
 
 var _ ManagedObjectIDable = (*ManagedObjectID)(nil)
-

@@ -136,4 +136,3 @@ type NNGramMatrixCalculationable interface {
 }
 
 var _ NNGramMatrixCalculationable = (*NNGramMatrixCalculation)(nil)
-

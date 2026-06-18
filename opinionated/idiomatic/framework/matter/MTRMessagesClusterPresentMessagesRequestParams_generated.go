@@ -17,7 +17,9 @@ type MTRMessagesClusterPresentMessagesRequestParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRMessagesClusterPresentMessagesRequestParams].
-func (x *MTRMessagesClusterPresentMessagesRequestParams) Unwrap() *raw.MTRMessagesClusterPresentMessagesRequestParams { return x.inner }
+func (x *MTRMessagesClusterPresentMessagesRequestParams) Unwrap() *raw.MTRMessagesClusterPresentMessagesRequestParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -211,4 +213,3 @@ type MTRMessagesClusterPresentMessagesRequestParamsable interface {
 }
 
 var _ MTRMessagesClusterPresentMessagesRequestParamsable = (*MTRMessagesClusterPresentMessagesRequestParams)(nil)
-

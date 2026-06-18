@@ -16,9 +16,9 @@ type MLModelStructurePipeline struct {
 }
 
 var (
-	_clsMLModelStructurePipeline = _objcClass("MLModelStructurePipeline")
+	_clsMLModelStructurePipeline              = _objcClass("MLModelStructurePipeline")
 	_mLModelStructurePipelineSelSubModelNames = objc.RegisterName("subModelNames")
-	_mLModelStructurePipelineSelSubModels = objc.RegisterName("subModels")
+	_mLModelStructurePipelineSelSubModels     = objc.RegisterName("subModels")
 )
 
 func MLModelStructurePipelineFromID(id objc.ID) *MLModelStructurePipeline {
@@ -40,7 +40,8 @@ func (o *MLModelStructurePipeline) SubModelNames() *foundation.NSArray[*foundati
 // The structure of the sub models in the pipeline.
 func (o *MLModelStructurePipeline) SubModels() *foundation.NSArray[*MLModelStructure] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelStructurePipelineSelSubModels)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MLModelStructure](_ret)
 }
-

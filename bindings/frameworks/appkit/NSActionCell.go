@@ -25,4 +25,3 @@ func NSActionCellFromID(id objc.ID) *NSActionCell {
 	purego.Track(o)
 	return o
 }
-

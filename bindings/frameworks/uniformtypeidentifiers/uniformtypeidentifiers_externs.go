@@ -858,4 +858,3 @@ func UTTypeZIP() uintptr {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeZIP")
 	return ptr
 }
-

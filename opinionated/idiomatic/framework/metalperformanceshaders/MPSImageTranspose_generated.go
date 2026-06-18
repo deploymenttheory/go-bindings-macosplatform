@@ -69,7 +69,9 @@ func (x *ImageTranspose) WithLabel(label string) *ImageTranspose {
 	return x
 }
 
-func (x *ImageTranspose) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageTranspose) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
 func (x *ImageTranspose) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
 
@@ -84,4 +86,3 @@ type ImageTransposeable interface {
 }
 
 var _ ImageTransposeable = (*ImageTranspose)(nil)
-

@@ -109,4 +109,3 @@ type TextListable interface {
 }
 
 var _ TextListable = (*TextList)(nil)
-

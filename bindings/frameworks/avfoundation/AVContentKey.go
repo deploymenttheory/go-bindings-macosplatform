@@ -16,9 +16,9 @@ type AVContentKey struct {
 }
 
 var (
-	_clsAVContentKey = _objcClass("AVContentKey")
-	_aVContentKeySelRevoke = objc.RegisterName("revoke")
-	_aVContentKeySelContentKeySpecifier = objc.RegisterName("contentKeySpecifier")
+	_clsAVContentKey                                = _objcClass("AVContentKey")
+	_aVContentKeySelRevoke                          = objc.RegisterName("revoke")
+	_aVContentKeySelContentKeySpecifier             = objc.RegisterName("contentKeySpecifier")
 	_aVContentKeySelExternalContentProtectionStatus = objc.RegisterName("externalContentProtectionStatus")
 )
 
@@ -40,7 +40,9 @@ func (o *AVContentKey) Revoke() {
 // Specifies the content key.
 func (o *AVContentKey) ContentKeySpecifier() *AVContentKeySpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVContentKeySelContentKeySpecifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVContentKeySpecifierFromID(_ret)
 }
 
@@ -49,4 +51,3 @@ func (o *AVContentKey) ExternalContentProtectionStatus() AVExternalContentProtec
 	_ret := objc.Send[AVExternalContentProtectionStatus](o.Ptr(), _aVContentKeySelExternalContentProtectionStatus)
 	return _ret
 }
-

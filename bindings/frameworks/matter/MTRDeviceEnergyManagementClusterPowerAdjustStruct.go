@@ -16,14 +16,14 @@ type MTRDeviceEnergyManagementClusterPowerAdjustStruct struct {
 }
 
 var (
-	_clsMTRDeviceEnergyManagementClusterPowerAdjustStruct = _objcClass("MTRDeviceEnergyManagementClusterPowerAdjustStruct")
-	_mTRDeviceEnergyManagementClusterPowerAdjustStructSelMinPower = objc.RegisterName("minPower")
-	_mTRDeviceEnergyManagementClusterPowerAdjustStructSelSetMinPower = objc.RegisterName("setMinPower:")
-	_mTRDeviceEnergyManagementClusterPowerAdjustStructSelMaxPower = objc.RegisterName("maxPower")
-	_mTRDeviceEnergyManagementClusterPowerAdjustStructSelSetMaxPower = objc.RegisterName("setMaxPower:")
-	_mTRDeviceEnergyManagementClusterPowerAdjustStructSelMinDuration = objc.RegisterName("minDuration")
+	_clsMTRDeviceEnergyManagementClusterPowerAdjustStruct               = _objcClass("MTRDeviceEnergyManagementClusterPowerAdjustStruct")
+	_mTRDeviceEnergyManagementClusterPowerAdjustStructSelMinPower       = objc.RegisterName("minPower")
+	_mTRDeviceEnergyManagementClusterPowerAdjustStructSelSetMinPower    = objc.RegisterName("setMinPower:")
+	_mTRDeviceEnergyManagementClusterPowerAdjustStructSelMaxPower       = objc.RegisterName("maxPower")
+	_mTRDeviceEnergyManagementClusterPowerAdjustStructSelSetMaxPower    = objc.RegisterName("setMaxPower:")
+	_mTRDeviceEnergyManagementClusterPowerAdjustStructSelMinDuration    = objc.RegisterName("minDuration")
 	_mTRDeviceEnergyManagementClusterPowerAdjustStructSelSetMinDuration = objc.RegisterName("setMinDuration:")
-	_mTRDeviceEnergyManagementClusterPowerAdjustStructSelMaxDuration = objc.RegisterName("maxDuration")
+	_mTRDeviceEnergyManagementClusterPowerAdjustStructSelMaxDuration    = objc.RegisterName("maxDuration")
 	_mTRDeviceEnergyManagementClusterPowerAdjustStructSelSetMaxDuration = objc.RegisterName("setMaxDuration:")
 )
 
@@ -39,7 +39,9 @@ func MTRDeviceEnergyManagementClusterPowerAdjustStructFromID(id objc.ID) *MTRDev
 
 func (o *MTRDeviceEnergyManagementClusterPowerAdjustStruct) MinPower() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterPowerAdjustStructSelMinPower)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTRDeviceEnergyManagementClusterPowerAdjustStruct) SetMinPower(minPower
 
 func (o *MTRDeviceEnergyManagementClusterPowerAdjustStruct) MaxPower() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterPowerAdjustStructSelMaxPower)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,7 +63,9 @@ func (o *MTRDeviceEnergyManagementClusterPowerAdjustStruct) SetMaxPower(maxPower
 
 func (o *MTRDeviceEnergyManagementClusterPowerAdjustStruct) MinDuration() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterPowerAdjustStructSelMinDuration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -69,11 +75,12 @@ func (o *MTRDeviceEnergyManagementClusterPowerAdjustStruct) SetMinDuration(minDu
 
 func (o *MTRDeviceEnergyManagementClusterPowerAdjustStruct) MaxDuration() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterPowerAdjustStructSelMaxDuration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDeviceEnergyManagementClusterPowerAdjustStruct) SetMaxDuration(maxDuration *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDeviceEnergyManagementClusterPowerAdjustStructSelSetMaxDuration, maxDuration.Ptr())
 }
-

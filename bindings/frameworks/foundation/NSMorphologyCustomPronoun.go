@@ -16,19 +16,19 @@ type NSMorphologyCustomPronoun struct {
 }
 
 var (
-	_clsNSMorphologyCustomPronoun = _objcClass("NSMorphologyCustomPronoun")
-	_nSMorphologyCustomPronounSelIsSupportedForLanguage = objc.RegisterName("isSupportedForLanguage:")
-	_nSMorphologyCustomPronounSelRequiredKeysForLanguage = objc.RegisterName("requiredKeysForLanguage:")
-	_nSMorphologyCustomPronounSelSubjectForm = objc.RegisterName("subjectForm")
-	_nSMorphologyCustomPronounSelSetSubjectForm = objc.RegisterName("setSubjectForm:")
-	_nSMorphologyCustomPronounSelObjectForm = objc.RegisterName("objectForm")
-	_nSMorphologyCustomPronounSelSetObjectForm = objc.RegisterName("setObjectForm:")
-	_nSMorphologyCustomPronounSelPossessiveForm = objc.RegisterName("possessiveForm")
-	_nSMorphologyCustomPronounSelSetPossessiveForm = objc.RegisterName("setPossessiveForm:")
-	_nSMorphologyCustomPronounSelPossessiveAdjectiveForm = objc.RegisterName("possessiveAdjectiveForm")
+	_clsNSMorphologyCustomPronoun                           = _objcClass("NSMorphologyCustomPronoun")
+	_nSMorphologyCustomPronounSelIsSupportedForLanguage     = objc.RegisterName("isSupportedForLanguage:")
+	_nSMorphologyCustomPronounSelRequiredKeysForLanguage    = objc.RegisterName("requiredKeysForLanguage:")
+	_nSMorphologyCustomPronounSelSubjectForm                = objc.RegisterName("subjectForm")
+	_nSMorphologyCustomPronounSelSetSubjectForm             = objc.RegisterName("setSubjectForm:")
+	_nSMorphologyCustomPronounSelObjectForm                 = objc.RegisterName("objectForm")
+	_nSMorphologyCustomPronounSelSetObjectForm              = objc.RegisterName("setObjectForm:")
+	_nSMorphologyCustomPronounSelPossessiveForm             = objc.RegisterName("possessiveForm")
+	_nSMorphologyCustomPronounSelSetPossessiveForm          = objc.RegisterName("setPossessiveForm:")
+	_nSMorphologyCustomPronounSelPossessiveAdjectiveForm    = objc.RegisterName("possessiveAdjectiveForm")
 	_nSMorphologyCustomPronounSelSetPossessiveAdjectiveForm = objc.RegisterName("setPossessiveAdjectiveForm:")
-	_nSMorphologyCustomPronounSelReflexiveForm = objc.RegisterName("reflexiveForm")
-	_nSMorphologyCustomPronounSelSetReflexiveForm = objc.RegisterName("setReflexiveForm:")
+	_nSMorphologyCustomPronounSelReflexiveForm              = objc.RegisterName("reflexiveForm")
+	_nSMorphologyCustomPronounSelSetReflexiveForm           = objc.RegisterName("setReflexiveForm:")
 )
 
 func NSMorphologyCustomPronounFromID(id objc.ID) *NSMorphologyCustomPronoun {
@@ -49,13 +49,17 @@ func NSMorphologyCustomPronounIsSupportedForLanguage(language *NSString) bool {
 
 func NSMorphologyCustomPronounRequiredKeysForLanguage(language *NSString) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMorphologyCustomPronoun), _nSMorphologyCustomPronounSelRequiredKeysForLanguage, language.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSMorphologyCustomPronoun) SubjectForm() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMorphologyCustomPronounSelSubjectForm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -65,7 +69,9 @@ func (o *NSMorphologyCustomPronoun) SetSubjectForm(subjectForm *NSString) {
 
 func (o *NSMorphologyCustomPronoun) ObjectForm() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMorphologyCustomPronounSelObjectForm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -75,7 +81,9 @@ func (o *NSMorphologyCustomPronoun) SetObjectForm(objectForm *NSString) {
 
 func (o *NSMorphologyCustomPronoun) PossessiveForm() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMorphologyCustomPronounSelPossessiveForm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -85,7 +93,9 @@ func (o *NSMorphologyCustomPronoun) SetPossessiveForm(possessiveForm *NSString) 
 
 func (o *NSMorphologyCustomPronoun) PossessiveAdjectiveForm() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMorphologyCustomPronounSelPossessiveAdjectiveForm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -95,11 +105,12 @@ func (o *NSMorphologyCustomPronoun) SetPossessiveAdjectiveForm(possessiveAdjecti
 
 func (o *NSMorphologyCustomPronoun) ReflexiveForm() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMorphologyCustomPronounSelReflexiveForm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSMorphologyCustomPronoun) SetReflexiveForm(reflexiveForm *NSString) {
 	o.Ptr().Send(_nSMorphologyCustomPronounSelSetReflexiveForm, reflexiveForm.Ptr())
 }
-

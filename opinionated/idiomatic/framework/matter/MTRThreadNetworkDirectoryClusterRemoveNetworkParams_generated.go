@@ -16,7 +16,9 @@ type MTRThreadNetworkDirectoryClusterRemoveNetworkParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRThreadNetworkDirectoryClusterRemoveNetworkParams].
-func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) Unwrap() *raw.MTRThreadNetworkDirectoryClusterRemoveNetworkParams { return x.inner }
+func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) Unwrap() *raw.MTRThreadNetworkDirectoryClusterRemoveNetworkParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -99,4 +101,3 @@ type MTRThreadNetworkDirectoryClusterRemoveNetworkParamsable interface {
 }
 
 var _ MTRThreadNetworkDirectoryClusterRemoveNetworkParamsable = (*MTRThreadNetworkDirectoryClusterRemoveNetworkParams)(nil)
-

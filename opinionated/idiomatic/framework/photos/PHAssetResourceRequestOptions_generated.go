@@ -79,4 +79,3 @@ type AssetResourceRequestOptionsable interface {
 }
 
 var _ AssetResourceRequestOptionsable = (*AssetResourceRequestOptions)(nil)
-

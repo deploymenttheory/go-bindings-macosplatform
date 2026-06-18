@@ -15,10 +15,10 @@ type NSUnitElectricResistance struct {
 }
 
 var (
-	_clsNSUnitElectricResistance = _objcClass("NSUnitElectricResistance")
-	_nSUnitElectricResistanceSelMegaohms = objc.RegisterName("megaohms")
-	_nSUnitElectricResistanceSelKiloohms = objc.RegisterName("kiloohms")
-	_nSUnitElectricResistanceSelOhms = objc.RegisterName("ohms")
+	_clsNSUnitElectricResistance          = _objcClass("NSUnitElectricResistance")
+	_nSUnitElectricResistanceSelMegaohms  = objc.RegisterName("megaohms")
+	_nSUnitElectricResistanceSelKiloohms  = objc.RegisterName("kiloohms")
+	_nSUnitElectricResistanceSelOhms      = objc.RegisterName("ohms")
 	_nSUnitElectricResistanceSelMilliohms = objc.RegisterName("milliohms")
 	_nSUnitElectricResistanceSelMicroohms = objc.RegisterName("microohms")
 )
@@ -35,31 +35,40 @@ func NSUnitElectricResistanceFromID(id objc.ID) *NSUnitElectricResistance {
 
 func NSUnitElectricResistanceMegaohms() *NSUnitElectricResistance {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricResistance), _nSUnitElectricResistanceSelMegaohms)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitElectricResistanceFromID(_ret)
 }
 
 func NSUnitElectricResistanceKiloohms() *NSUnitElectricResistance {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricResistance), _nSUnitElectricResistanceSelKiloohms)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitElectricResistanceFromID(_ret)
 }
 
 func NSUnitElectricResistanceOhms() *NSUnitElectricResistance {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricResistance), _nSUnitElectricResistanceSelOhms)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitElectricResistanceFromID(_ret)
 }
 
 func NSUnitElectricResistanceMilliohms() *NSUnitElectricResistance {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricResistance), _nSUnitElectricResistanceSelMilliohms)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitElectricResistanceFromID(_ret)
 }
 
 func NSUnitElectricResistanceMicroohms() *NSUnitElectricResistance {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricResistance), _nSUnitElectricResistanceSelMicroohms)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitElectricResistanceFromID(_ret)
 }
-

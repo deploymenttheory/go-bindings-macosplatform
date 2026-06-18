@@ -15,12 +15,12 @@ type DOMWheelEvent struct {
 }
 
 var (
-	_clsDOMWheelEvent = _objcClass("DOMWheelEvent")
+	_clsDOMWheelEvent                                                                                      = _objcClass("DOMWheelEvent")
 	_dOMWheelEventSelInitWheelEventWheelDeltaYViewScreenXScreenYClientXClientYCtrlKeyAltKeyShiftKeyMetaKey = objc.RegisterName("initWheelEvent:wheelDeltaY:view:screenX:screenY:clientX:clientY:ctrlKey:altKey:shiftKey:metaKey:")
-	_dOMWheelEventSelWheelDeltaX = objc.RegisterName("wheelDeltaX")
-	_dOMWheelEventSelWheelDeltaY = objc.RegisterName("wheelDeltaY")
-	_dOMWheelEventSelWheelDelta = objc.RegisterName("wheelDelta")
-	_dOMWheelEventSelIsHorizontal = objc.RegisterName("isHorizontal")
+	_dOMWheelEventSelWheelDeltaX                                                                           = objc.RegisterName("wheelDeltaX")
+	_dOMWheelEventSelWheelDeltaY                                                                           = objc.RegisterName("wheelDeltaY")
+	_dOMWheelEventSelWheelDelta                                                                            = objc.RegisterName("wheelDelta")
+	_dOMWheelEventSelIsHorizontal                                                                          = objc.RegisterName("isHorizontal")
 )
 
 func DOMWheelEventFromID(id objc.ID) *DOMWheelEvent {
@@ -56,4 +56,3 @@ func (o *DOMWheelEvent) IsHorizontal() bool {
 	_ret := objc.Send[bool](o.Ptr(), _dOMWheelEventSelIsHorizontal)
 	return _ret
 }
-

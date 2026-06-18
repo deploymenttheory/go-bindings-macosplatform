@@ -92,7 +92,9 @@ func (x *Floor) WithMaterials(items ...*raw.SCNMaterial) *Floor {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.SCNMaterial](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -114,7 +116,9 @@ func (x *Floor) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Floor {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -261,4 +265,3 @@ type Floorable interface {
 }
 
 var _ Floorable = (*Floor)(nil)
-

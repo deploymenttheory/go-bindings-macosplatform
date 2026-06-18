@@ -16,10 +16,10 @@ type SCSensitivityAnalysis struct {
 }
 
 var (
-	_clsSCSensitivityAnalysis = _objcClass("SCSensitivityAnalysis")
-	_sCSensitivityAnalysisSelIsSensitive = objc.RegisterName("isSensitive")
+	_clsSCSensitivityAnalysis                          = _objcClass("SCSensitivityAnalysis")
+	_sCSensitivityAnalysisSelIsSensitive               = objc.RegisterName("isSensitive")
 	_sCSensitivityAnalysisSelShouldIndicateSensitivity = objc.RegisterName("shouldIndicateSensitivity")
-	_sCSensitivityAnalysisSelShouldMuteAudio = objc.RegisterName("shouldMuteAudio")
+	_sCSensitivityAnalysisSelShouldMuteAudio           = objc.RegisterName("shouldMuteAudio")
 )
 
 func SCSensitivityAnalysisFromID(id objc.ID) *SCSensitivityAnalysis {
@@ -48,4 +48,3 @@ func (o *SCSensitivityAnalysis) ShouldMuteAudio() bool {
 	_ret := objc.Send[bool](o.Ptr(), _sCSensitivityAnalysisSelShouldMuteAudio)
 	return _ret
 }
-

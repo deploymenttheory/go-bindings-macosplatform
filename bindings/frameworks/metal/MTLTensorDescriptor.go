@@ -16,22 +16,22 @@ type MTLTensorDescriptor struct {
 }
 
 var (
-	_clsMTLTensorDescriptor = _objcClass("MTLTensorDescriptor")
-	_mTLTensorDescriptorSelDimensions = objc.RegisterName("dimensions")
-	_mTLTensorDescriptorSelSetDimensions = objc.RegisterName("setDimensions:")
-	_mTLTensorDescriptorSelStrides = objc.RegisterName("strides")
-	_mTLTensorDescriptorSelSetStrides = objc.RegisterName("setStrides:")
-	_mTLTensorDescriptorSelDataType = objc.RegisterName("dataType")
-	_mTLTensorDescriptorSelSetDataType = objc.RegisterName("setDataType:")
-	_mTLTensorDescriptorSelUsage = objc.RegisterName("usage")
-	_mTLTensorDescriptorSelSetUsage = objc.RegisterName("setUsage:")
-	_mTLTensorDescriptorSelResourceOptions = objc.RegisterName("resourceOptions")
-	_mTLTensorDescriptorSelSetResourceOptions = objc.RegisterName("setResourceOptions:")
-	_mTLTensorDescriptorSelCpuCacheMode = objc.RegisterName("cpuCacheMode")
-	_mTLTensorDescriptorSelSetCpuCacheMode = objc.RegisterName("setCpuCacheMode:")
-	_mTLTensorDescriptorSelStorageMode = objc.RegisterName("storageMode")
-	_mTLTensorDescriptorSelSetStorageMode = objc.RegisterName("setStorageMode:")
-	_mTLTensorDescriptorSelHazardTrackingMode = objc.RegisterName("hazardTrackingMode")
+	_clsMTLTensorDescriptor                      = _objcClass("MTLTensorDescriptor")
+	_mTLTensorDescriptorSelDimensions            = objc.RegisterName("dimensions")
+	_mTLTensorDescriptorSelSetDimensions         = objc.RegisterName("setDimensions:")
+	_mTLTensorDescriptorSelStrides               = objc.RegisterName("strides")
+	_mTLTensorDescriptorSelSetStrides            = objc.RegisterName("setStrides:")
+	_mTLTensorDescriptorSelDataType              = objc.RegisterName("dataType")
+	_mTLTensorDescriptorSelSetDataType           = objc.RegisterName("setDataType:")
+	_mTLTensorDescriptorSelUsage                 = objc.RegisterName("usage")
+	_mTLTensorDescriptorSelSetUsage              = objc.RegisterName("setUsage:")
+	_mTLTensorDescriptorSelResourceOptions       = objc.RegisterName("resourceOptions")
+	_mTLTensorDescriptorSelSetResourceOptions    = objc.RegisterName("setResourceOptions:")
+	_mTLTensorDescriptorSelCpuCacheMode          = objc.RegisterName("cpuCacheMode")
+	_mTLTensorDescriptorSelSetCpuCacheMode       = objc.RegisterName("setCpuCacheMode:")
+	_mTLTensorDescriptorSelStorageMode           = objc.RegisterName("storageMode")
+	_mTLTensorDescriptorSelSetStorageMode        = objc.RegisterName("setStorageMode:")
+	_mTLTensorDescriptorSelHazardTrackingMode    = objc.RegisterName("hazardTrackingMode")
 	_mTLTensorDescriptorSelSetHazardTrackingMode = objc.RegisterName("setHazardTrackingMode:")
 )
 
@@ -48,7 +48,9 @@ func MTLTensorDescriptorFromID(id objc.ID) *MTLTensorDescriptor {
 // An array of sizes, in elements, one for each dimension of the tensors you create with this descriptor. The default value of this property is a rank one extents with size one.
 func (o *MTLTensorDescriptor) Dimensions() *MTLTensorExtents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLTensorDescriptorSelDimensions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLTensorExtentsFromID(_ret)
 }
 
@@ -56,10 +58,12 @@ func (o *MTLTensorDescriptor) SetDimensions(dimensions *MTLTensorExtents) {
 	o.Ptr().Send(_mTLTensorDescriptorSelSetDimensions, dimensions.Ptr())
 }
 
-// An array of strides, in elements, one for each dimension in the tensors you create with this descriptor, if applicable. You are responsible for ensuring `strides` meets the following requirements: - The first element of `strides` is one. - If ``usage`` contains ``MTLTensorUsage/MTLTensorUsageMachineLearning``, the second element of `strides` is aligned to 64 bytes, and for any `i` larger than one, `strides[i]` is equal to `strides[i-1] * dimensions[i-1]`. - If ``dataType`` is a sub-byte ``MTLTensorDataType``, for any `i` greater than or equal to 1, `strides[i]` is aligned to 128 bytes. This is not a requirement for non-sub-byte data types, but following this convention improves performance. Only set this property when creating tensors from a buffer.
+// An array of strides, in elements, one for each dimension in the tensors you create with this descriptor, if applicable. You are responsible for ensuring `strides` meets the following requirements: - The first element of `strides` is one. - If “usage“ contains “MTLTensorUsage/MTLTensorUsageMachineLearning“, the second element of `strides` is aligned to 64 bytes, and for any `i` larger than one, `strides[i]` is equal to `strides[i-1] * dimensions[i-1]`. - If “dataType“ is a sub-byte “MTLTensorDataType“, for any `i` greater than or equal to 1, `strides[i]` is aligned to 128 bytes. This is not a requirement for non-sub-byte data types, but following this convention improves performance. Only set this property when creating tensors from a buffer.
 func (o *MTLTensorDescriptor) Strides() *MTLTensorExtents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLTensorDescriptorSelStrides)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLTensorExtentsFromID(_ret)
 }
 
@@ -67,7 +71,7 @@ func (o *MTLTensorDescriptor) SetStrides(strides *MTLTensorExtents) {
 	o.Ptr().Send(_mTLTensorDescriptorSelSetStrides, strides.Ptr())
 }
 
-// A data format for the tensors you create with this descriptor. The default value of this property is ``MTLTensorDataType/MTLTensorDataTypeFloat32``.
+// A data format for the tensors you create with this descriptor. The default value of this property is “MTLTensorDataType/MTLTensorDataTypeFloat32“.
 func (o *MTLTensorDescriptor) DataType() MTLTensorDataType {
 	_ret := objc.Send[MTLTensorDataType](o.Ptr(), _mTLTensorDescriptorSelDataType)
 	return _ret
@@ -77,7 +81,7 @@ func (o *MTLTensorDescriptor) SetDataType(dataType MTLTensorDataType) {
 	o.Ptr().Send(_mTLTensorDescriptorSelSetDataType, dataType)
 }
 
-// A set of contexts in which you can use tensors you create with this descriptor. The default value for this property is a bitwise `OR` of: - ``MTLTensorUsage/MTLTensorUsageRender`` - ``MTLTensorUsage/MTLTensorUsageCompute``
+// A set of contexts in which you can use tensors you create with this descriptor. The default value for this property is a bitwise `OR` of: - “MTLTensorUsage/MTLTensorUsageRender“ - “MTLTensorUsage/MTLTensorUsageCompute“
 func (o *MTLTensorDescriptor) Usage() MTLTensorUsage {
 	_ret := objc.Send[MTLTensorUsage](o.Ptr(), _mTLTensorDescriptorSelUsage)
 	return _ret
@@ -97,7 +101,7 @@ func (o *MTLTensorDescriptor) SetResourceOptions(resourceOptions MTLResourceOpti
 	o.Ptr().Send(_mTLTensorDescriptorSelSetResourceOptions, resourceOptions)
 }
 
-// A value that configures the cache mode of CPU mapping of tensors you create with this descriptor. The default value of this property is ``MTLCPUCacheMode/MTLCPUCacheModeDefaultCache``.
+// A value that configures the cache mode of CPU mapping of tensors you create with this descriptor. The default value of this property is “MTLCPUCacheMode/MTLCPUCacheModeDefaultCache“.
 func (o *MTLTensorDescriptor) CpuCacheMode() MTLCPUCacheMode {
 	_ret := objc.Send[MTLCPUCacheMode](o.Ptr(), _mTLTensorDescriptorSelCpuCacheMode)
 	return _ret
@@ -107,7 +111,7 @@ func (o *MTLTensorDescriptor) SetCpuCacheMode(cpuCacheMode MTLCPUCacheMode) {
 	o.Ptr().Send(_mTLTensorDescriptorSelSetCpuCacheMode, cpuCacheMode)
 }
 
-// A value that configures the memory location and access permissions of tensors you create with this descriptor. The default value of this property defaults to ``MTLStorageMode/MTLStorageModeShared``.
+// A value that configures the memory location and access permissions of tensors you create with this descriptor. The default value of this property defaults to “MTLStorageMode/MTLStorageModeShared“.
 func (o *MTLTensorDescriptor) StorageMode() MTLStorageMode {
 	_ret := objc.Send[MTLStorageMode](o.Ptr(), _mTLTensorDescriptorSelStorageMode)
 	return _ret
@@ -117,7 +121,7 @@ func (o *MTLTensorDescriptor) SetStorageMode(storageMode MTLStorageMode) {
 	o.Ptr().Send(_mTLTensorDescriptorSelSetStorageMode, storageMode)
 }
 
-// A value that configures the hazard tracking of tensors you create with this descriptor. The default value of this property is ``MTLHazardTrackingMode/MTLHazardTrackingModeDefault``.
+// A value that configures the hazard tracking of tensors you create with this descriptor. The default value of this property is “MTLHazardTrackingMode/MTLHazardTrackingModeDefault“.
 func (o *MTLTensorDescriptor) HazardTrackingMode() MTLHazardTrackingMode {
 	_ret := objc.Send[MTLHazardTrackingMode](o.Ptr(), _mTLTensorDescriptorSelHazardTrackingMode)
 	return _ret
@@ -126,4 +130,3 @@ func (o *MTLTensorDescriptor) HazardTrackingMode() MTLHazardTrackingMode {
 func (o *MTLTensorDescriptor) SetHazardTrackingMode(hazardTrackingMode MTLHazardTrackingMode) {
 	o.Ptr().Send(_mTLTensorDescriptorSelSetHazardTrackingMode, hazardTrackingMode)
 }
-

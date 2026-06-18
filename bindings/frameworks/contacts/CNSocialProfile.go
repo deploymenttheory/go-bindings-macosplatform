@@ -16,14 +16,14 @@ type CNSocialProfile struct {
 }
 
 var (
-	_clsCNSocialProfile = _objcClass("CNSocialProfile")
+	_clsCNSocialProfile                                               = _objcClass("CNSocialProfile")
 	_cNSocialProfileSelInitWithUrlStringUsernameUserIdentifierService = objc.RegisterName("initWithUrlString:username:userIdentifier:service:")
-	_cNSocialProfileSelLocalizedStringForKey = objc.RegisterName("localizedStringForKey:")
-	_cNSocialProfileSelLocalizedStringForService = objc.RegisterName("localizedStringForService:")
-	_cNSocialProfileSelUrlString = objc.RegisterName("urlString")
-	_cNSocialProfileSelUsername = objc.RegisterName("username")
-	_cNSocialProfileSelUserIdentifier = objc.RegisterName("userIdentifier")
-	_cNSocialProfileSelService = objc.RegisterName("service")
+	_cNSocialProfileSelLocalizedStringForKey                          = objc.RegisterName("localizedStringForKey:")
+	_cNSocialProfileSelLocalizedStringForService                      = objc.RegisterName("localizedStringForService:")
+	_cNSocialProfileSelUrlString                                      = objc.RegisterName("urlString")
+	_cNSocialProfileSelUsername                                       = objc.RegisterName("username")
+	_cNSocialProfileSelUserIdentifier                                 = objc.RegisterName("userIdentifier")
+	_cNSocialProfileSelService                                        = objc.RegisterName("service")
 )
 
 func CNSocialProfileFromID(id objc.ID) *CNSocialProfile {
@@ -38,45 +38,58 @@ func CNSocialProfileFromID(id objc.ID) *CNSocialProfile {
 
 func (o *CNSocialProfile) InitWithUrlStringUsernameUserIdentifierService(urlString *foundation.NSString, username *foundation.NSString, userIdentifier *foundation.NSString, service *foundation.NSString) *CNSocialProfile {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNSocialProfileSelInitWithUrlStringUsernameUserIdentifierService, urlString.Ptr(), username.Ptr(), userIdentifier.Ptr(), service.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNSocialProfileFromID(_ret)
 }
 
 // Returns a user displayable property name.
 func CNSocialProfileLocalizedStringForKey(key *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNSocialProfile), _cNSocialProfileSelLocalizedStringForKey, key.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Returns a user displayable service name.
 func CNSocialProfileLocalizedStringForService(service *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNSocialProfile), _cNSocialProfileSelLocalizedStringForService, service.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CNSocialProfile) UrlString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNSocialProfileSelUrlString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CNSocialProfile) Username() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNSocialProfileSelUsername)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CNSocialProfile) UserIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNSocialProfileSelUserIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CNSocialProfile) Service() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNSocialProfileSelService)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

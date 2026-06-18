@@ -56,4 +56,3 @@ type MeshBufferDataable interface {
 }
 
 var _ MeshBufferDataable = (*MeshBufferData)(nil)
-

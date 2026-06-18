@@ -18,14 +18,14 @@ type GKState struct {
 }
 
 var (
-	_clsGKState = _objcClass("GKState")
-	_gKStateSelState = objc.RegisterName("state")
-	_gKStateSelInit = objc.RegisterName("init")
-	_gKStateSelIsValidNextState = objc.RegisterName("isValidNextState:")
+	_clsGKState                          = _objcClass("GKState")
+	_gKStateSelState                     = objc.RegisterName("state")
+	_gKStateSelInit                      = objc.RegisterName("init")
+	_gKStateSelIsValidNextState          = objc.RegisterName("isValidNextState:")
 	_gKStateSelDidEnterWithPreviousState = objc.RegisterName("didEnterWithPreviousState:")
-	_gKStateSelUpdateWithDeltaTime = objc.RegisterName("updateWithDeltaTime:")
-	_gKStateSelWillExitWithNextState = objc.RegisterName("willExitWithNextState:")
-	_gKStateSelStateMachine = objc.RegisterName("stateMachine")
+	_gKStateSelUpdateWithDeltaTime       = objc.RegisterName("updateWithDeltaTime:")
+	_gKStateSelWillExitWithNextState     = objc.RegisterName("willExitWithNextState:")
+	_gKStateSelStateMachine              = objc.RegisterName("stateMachine")
 )
 
 func GKStateFromID(id objc.ID) *GKState {
@@ -41,13 +41,17 @@ func GKStateFromID(id objc.ID) *GKState {
 // Creates a new state to be used in a state machine. @see GKStateMachine
 func GKStateState() *GKState {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKState), _gKStateSelState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKStateFromID(_ret)
 }
 
 func (o *GKState) Init() *GKState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKStateSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKStateFromID(_ret)
 }
 
@@ -75,7 +79,8 @@ func (o *GKState) WillExitWithNextState(nextState *GKState) {
 // The state machine that this state is associated with. This is nil if this state hasn't been added to a state machine yet.
 func (o *GKState) StateMachine() *GKStateMachine {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKStateSelStateMachine)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKStateMachineFromID(_ret)
 }
-

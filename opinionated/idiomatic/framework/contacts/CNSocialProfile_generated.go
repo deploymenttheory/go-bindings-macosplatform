@@ -84,4 +84,3 @@ type SocialProfileable interface {
 }
 
 var _ SocialProfileable = (*SocialProfile)(nil)
-

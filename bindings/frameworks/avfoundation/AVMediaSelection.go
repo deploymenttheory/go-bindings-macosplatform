@@ -16,10 +16,10 @@ type AVMediaSelection struct {
 }
 
 var (
-	_clsAVMediaSelection = _objcClass("AVMediaSelection")
-	_aVMediaSelectionSelSelectedMediaOptionInMediaSelectionGroup = objc.RegisterName("selectedMediaOptionInMediaSelectionGroup:")
+	_clsAVMediaSelection                                                                     = _objcClass("AVMediaSelection")
+	_aVMediaSelectionSelSelectedMediaOptionInMediaSelectionGroup                             = objc.RegisterName("selectedMediaOptionInMediaSelectionGroup:")
 	_aVMediaSelectionSelMediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup = objc.RegisterName("mediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup:")
-	_aVMediaSelectionSelAsset = objc.RegisterName("asset")
+	_aVMediaSelectionSelAsset                                                                = objc.RegisterName("asset")
 )
 
 func AVMediaSelectionFromID(id objc.ID) *AVMediaSelection {
@@ -35,7 +35,9 @@ func AVMediaSelectionFromID(id objc.ID) *AVMediaSelection {
 // @method		selectedMediaOptionInMediaSelectionGroup: @abstract		Indicates the media selection option that's currently selected from the specified group. May be nil. @param 		mediaSelectionGroup A media selection group obtained from the receiver's asset. @result		An instance of AVMediaSelectionOption that describes the currently selection option in the group. @discussion If the value of the property allowsEmptySelection of the AVMediaSelectionGroup is YES, the currently selected option in the group may be nil.
 func (o *AVMediaSelection) SelectedMediaOptionInMediaSelectionGroup(mediaSelectionGroup *AVMediaSelectionGroup) *AVMediaSelectionOption {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMediaSelectionSelSelectedMediaOptionInMediaSelectionGroup, mediaSelectionGroup.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMediaSelectionOptionFromID(_ret)
 }
 
@@ -47,7 +49,8 @@ func (o *AVMediaSelection) MediaSelectionCriteriaCanBeAppliedAutomaticallyToMedi
 
 func (o *AVMediaSelection) Asset() *AVAsset {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMediaSelectionSelAsset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetFromID(_ret)
 }
-

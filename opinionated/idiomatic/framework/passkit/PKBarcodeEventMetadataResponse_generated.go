@@ -62,4 +62,3 @@ type BarcodeEventMetadataResponseable interface {
 }
 
 var _ BarcodeEventMetadataResponseable = (*BarcodeEventMetadataResponse)(nil)
-

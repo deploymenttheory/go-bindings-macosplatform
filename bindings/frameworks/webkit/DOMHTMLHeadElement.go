@@ -16,8 +16,8 @@ type DOMHTMLHeadElement struct {
 }
 
 var (
-	_clsDOMHTMLHeadElement = _objcClass("DOMHTMLHeadElement")
-	_dOMHTMLHeadElementSelProfile = objc.RegisterName("profile")
+	_clsDOMHTMLHeadElement           = _objcClass("DOMHTMLHeadElement")
+	_dOMHTMLHeadElementSelProfile    = objc.RegisterName("profile")
 	_dOMHTMLHeadElementSelSetProfile = objc.RegisterName("setProfile:")
 )
 
@@ -33,11 +33,12 @@ func DOMHTMLHeadElementFromID(id objc.ID) *DOMHTMLHeadElement {
 
 func (o *DOMHTMLHeadElement) Profile() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLHeadElementSelProfile)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLHeadElement) SetProfile(profile *foundation.NSString) {
 	o.Ptr().Send(_dOMHTMLHeadElementSelSetProfile, profile.Ptr())
 }
-

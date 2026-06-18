@@ -16,7 +16,7 @@ type GCSteeringWheelElement struct {
 }
 
 var (
-	_clsGCSteeringWheelElement = _objcClass("GCSteeringWheelElement")
+	_clsGCSteeringWheelElement                         = _objcClass("GCSteeringWheelElement")
 	_gCSteeringWheelElementSelMaximumDegreesOfRotation = objc.RegisterName("maximumDegreesOfRotation")
 )
 
@@ -34,4 +34,3 @@ func (o *GCSteeringWheelElement) MaximumDegreesOfRotation() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _gCSteeringWheelElementSelMaximumDegreesOfRotation)
 	return _ret
 }
-

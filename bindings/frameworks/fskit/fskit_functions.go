@@ -33,4 +33,3 @@ func FsErrorForMachError(errorCode int) unsafe.Pointer {
 func FsErrorForPOSIXError(arg int) unsafe.Pointer {
 	return _fs_errorForPOSIXError(arg)
 }
-

@@ -16,20 +16,20 @@ type MTLPrimitiveAccelerationStructureDescriptor struct {
 }
 
 var (
-	_clsMTLPrimitiveAccelerationStructureDescriptor = _objcClass("MTLPrimitiveAccelerationStructureDescriptor")
-	_mTLPrimitiveAccelerationStructureDescriptorSelDescriptor = objc.RegisterName("descriptor")
-	_mTLPrimitiveAccelerationStructureDescriptorSelGeometryDescriptors = objc.RegisterName("geometryDescriptors")
-	_mTLPrimitiveAccelerationStructureDescriptorSelSetGeometryDescriptors = objc.RegisterName("setGeometryDescriptors:")
-	_mTLPrimitiveAccelerationStructureDescriptorSelMotionStartBorderMode = objc.RegisterName("motionStartBorderMode")
+	_clsMTLPrimitiveAccelerationStructureDescriptor                         = _objcClass("MTLPrimitiveAccelerationStructureDescriptor")
+	_mTLPrimitiveAccelerationStructureDescriptorSelDescriptor               = objc.RegisterName("descriptor")
+	_mTLPrimitiveAccelerationStructureDescriptorSelGeometryDescriptors      = objc.RegisterName("geometryDescriptors")
+	_mTLPrimitiveAccelerationStructureDescriptorSelSetGeometryDescriptors   = objc.RegisterName("setGeometryDescriptors:")
+	_mTLPrimitiveAccelerationStructureDescriptorSelMotionStartBorderMode    = objc.RegisterName("motionStartBorderMode")
 	_mTLPrimitiveAccelerationStructureDescriptorSelSetMotionStartBorderMode = objc.RegisterName("setMotionStartBorderMode:")
-	_mTLPrimitiveAccelerationStructureDescriptorSelMotionEndBorderMode = objc.RegisterName("motionEndBorderMode")
-	_mTLPrimitiveAccelerationStructureDescriptorSelSetMotionEndBorderMode = objc.RegisterName("setMotionEndBorderMode:")
-	_mTLPrimitiveAccelerationStructureDescriptorSelMotionStartTime = objc.RegisterName("motionStartTime")
-	_mTLPrimitiveAccelerationStructureDescriptorSelSetMotionStartTime = objc.RegisterName("setMotionStartTime:")
-	_mTLPrimitiveAccelerationStructureDescriptorSelMotionEndTime = objc.RegisterName("motionEndTime")
-	_mTLPrimitiveAccelerationStructureDescriptorSelSetMotionEndTime = objc.RegisterName("setMotionEndTime:")
-	_mTLPrimitiveAccelerationStructureDescriptorSelMotionKeyframeCount = objc.RegisterName("motionKeyframeCount")
-	_mTLPrimitiveAccelerationStructureDescriptorSelSetMotionKeyframeCount = objc.RegisterName("setMotionKeyframeCount:")
+	_mTLPrimitiveAccelerationStructureDescriptorSelMotionEndBorderMode      = objc.RegisterName("motionEndBorderMode")
+	_mTLPrimitiveAccelerationStructureDescriptorSelSetMotionEndBorderMode   = objc.RegisterName("setMotionEndBorderMode:")
+	_mTLPrimitiveAccelerationStructureDescriptorSelMotionStartTime          = objc.RegisterName("motionStartTime")
+	_mTLPrimitiveAccelerationStructureDescriptorSelSetMotionStartTime       = objc.RegisterName("setMotionStartTime:")
+	_mTLPrimitiveAccelerationStructureDescriptorSelMotionEndTime            = objc.RegisterName("motionEndTime")
+	_mTLPrimitiveAccelerationStructureDescriptorSelSetMotionEndTime         = objc.RegisterName("setMotionEndTime:")
+	_mTLPrimitiveAccelerationStructureDescriptorSelMotionKeyframeCount      = objc.RegisterName("motionKeyframeCount")
+	_mTLPrimitiveAccelerationStructureDescriptorSelSetMotionKeyframeCount   = objc.RegisterName("setMotionKeyframeCount:")
 )
 
 func MTLPrimitiveAccelerationStructureDescriptorFromID(id objc.ID) *MTLPrimitiveAccelerationStructureDescriptor {
@@ -44,14 +44,18 @@ func MTLPrimitiveAccelerationStructureDescriptorFromID(id objc.ID) *MTLPrimitive
 
 func MTLPrimitiveAccelerationStructureDescriptorDescriptor() *MTLPrimitiveAccelerationStructureDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLPrimitiveAccelerationStructureDescriptor), _mTLPrimitiveAccelerationStructureDescriptorSelDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLPrimitiveAccelerationStructureDescriptorFromID(_ret)
 }
 
 // @brief Array of geometry descriptors. If motionKeyframeCount is greater than one all geometryDescriptors must be motion versions and have motionKeyframeCount of primitive buffers.
 func (o *MTLPrimitiveAccelerationStructureDescriptor) GeometryDescriptors() *foundation.NSArray[*MTLAccelerationStructureGeometryDescriptor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLPrimitiveAccelerationStructureDescriptorSelGeometryDescriptors)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MTLAccelerationStructureGeometryDescriptor](_ret)
 }
 
@@ -108,4 +112,3 @@ func (o *MTLPrimitiveAccelerationStructureDescriptor) MotionKeyframeCount() uint
 func (o *MTLPrimitiveAccelerationStructureDescriptor) SetMotionKeyframeCount(motionKeyframeCount uint) {
 	o.Ptr().Send(_mTLPrimitiveAccelerationStructureDescriptorSelSetMotionKeyframeCount, motionKeyframeCount)
 }
-

@@ -16,14 +16,14 @@ type SKReferenceNode struct {
 }
 
 var (
-	_clsSKReferenceNode = _objcClass("SKReferenceNode")
-	_sKReferenceNodeSelInitWithURL = objc.RegisterName("initWithURL:")
-	_sKReferenceNodeSelInitWithFileNamed = objc.RegisterName("initWithFileNamed:")
-	_sKReferenceNodeSelInitWithCoder = objc.RegisterName("initWithCoder:")
+	_clsSKReferenceNode                           = _objcClass("SKReferenceNode")
+	_sKReferenceNodeSelInitWithURL                = objc.RegisterName("initWithURL:")
+	_sKReferenceNodeSelInitWithFileNamed          = objc.RegisterName("initWithFileNamed:")
+	_sKReferenceNodeSelInitWithCoder              = objc.RegisterName("initWithCoder:")
 	_sKReferenceNodeSelReferenceNodeWithFileNamed = objc.RegisterName("referenceNodeWithFileNamed:")
-	_sKReferenceNodeSelReferenceNodeWithURL = objc.RegisterName("referenceNodeWithURL:")
-	_sKReferenceNodeSelDidLoadReferenceNode = objc.RegisterName("didLoadReferenceNode:")
-	_sKReferenceNodeSelResolveReferenceNode = objc.RegisterName("resolveReferenceNode")
+	_sKReferenceNodeSelReferenceNodeWithURL       = objc.RegisterName("referenceNodeWithURL:")
+	_sKReferenceNodeSelDidLoadReferenceNode       = objc.RegisterName("didLoadReferenceNode:")
+	_sKReferenceNodeSelResolveReferenceNode       = objc.RegisterName("resolveReferenceNode")
 )
 
 func SKReferenceNodeFromID(id objc.ID) *SKReferenceNode {
@@ -39,35 +39,45 @@ func SKReferenceNodeFromID(id objc.ID) *SKReferenceNode {
 // Create a reference node with a url
 func (o *SKReferenceNode) InitWithURL(url *foundation.NSURL) *SKReferenceNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKReferenceNodeSelInitWithURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKReferenceNodeFromID(_ret)
 }
 
 // Create a reference node with a url
 func (o *SKReferenceNode) InitWithFileNamed(fileName *foundation.NSString) *SKReferenceNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKReferenceNodeSelInitWithFileNamed, fileName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKReferenceNodeFromID(_ret)
 }
 
 // Support coding and decoding via NSKeyedArchiver.
 func (o *SKReferenceNode) InitWithCoder(aDecoder *foundation.NSCoder) *SKReferenceNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKReferenceNodeSelInitWithCoder, aDecoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKReferenceNodeFromID(_ret)
 }
 
 // Create a reference node with a url
 func SKReferenceNodeReferenceNodeWithFileNamed(fileName *foundation.NSString) *SKReferenceNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKReferenceNode), _sKReferenceNodeSelReferenceNodeWithFileNamed, fileName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKReferenceNodeFromID(_ret)
 }
 
 // Create a reference node with a url
 func SKReferenceNodeReferenceNodeWithURL(referenceURL *foundation.NSURL) *SKReferenceNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKReferenceNode), _sKReferenceNodeSelReferenceNodeWithURL, referenceURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKReferenceNodeFromID(_ret)
 }
 
@@ -80,4 +90,3 @@ func (o *SKReferenceNode) DidLoadReferenceNode(node *SKNode) {
 func (o *SKReferenceNode) ResolveReferenceNode() {
 	o.Ptr().Send(_sKReferenceNodeSelResolveReferenceNode)
 }
-

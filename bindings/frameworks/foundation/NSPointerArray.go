@@ -17,25 +17,25 @@ type NSPointerArray struct {
 }
 
 var (
-	_clsNSPointerArray = _objcClass("NSPointerArray")
-	_nSPointerArraySelInitWithOptions = objc.RegisterName("initWithOptions:")
-	_nSPointerArraySelInitWithPointerFunctions = objc.RegisterName("initWithPointerFunctions:")
-	_nSPointerArraySelPointerArrayWithOptions = objc.RegisterName("pointerArrayWithOptions:")
+	_clsNSPointerArray                                 = _objcClass("NSPointerArray")
+	_nSPointerArraySelInitWithOptions                  = objc.RegisterName("initWithOptions:")
+	_nSPointerArraySelInitWithPointerFunctions         = objc.RegisterName("initWithPointerFunctions:")
+	_nSPointerArraySelPointerArrayWithOptions          = objc.RegisterName("pointerArrayWithOptions:")
 	_nSPointerArraySelPointerArrayWithPointerFunctions = objc.RegisterName("pointerArrayWithPointerFunctions:")
-	_nSPointerArraySelPointerAtIndex = objc.RegisterName("pointerAtIndex:")
-	_nSPointerArraySelAddPointer = objc.RegisterName("addPointer:")
-	_nSPointerArraySelRemovePointerAtIndex = objc.RegisterName("removePointerAtIndex:")
-	_nSPointerArraySelInsertPointerAtIndex = objc.RegisterName("insertPointer:atIndex:")
+	_nSPointerArraySelPointerAtIndex                   = objc.RegisterName("pointerAtIndex:")
+	_nSPointerArraySelAddPointer                       = objc.RegisterName("addPointer:")
+	_nSPointerArraySelRemovePointerAtIndex             = objc.RegisterName("removePointerAtIndex:")
+	_nSPointerArraySelInsertPointerAtIndex             = objc.RegisterName("insertPointer:atIndex:")
 	_nSPointerArraySelReplacePointerAtIndexWithPointer = objc.RegisterName("replacePointerAtIndex:withPointer:")
-	_nSPointerArraySelCompact = objc.RegisterName("compact")
-	_nSPointerArraySelPointerFunctions = objc.RegisterName("pointerFunctions")
-	_nSPointerArraySelCount = objc.RegisterName("count")
-	_nSPointerArraySelSetCount = objc.RegisterName("setCount:")
-	_nSPointerArraySelPointerArrayWithStrongObjects = objc.RegisterName("pointerArrayWithStrongObjects")
-	_nSPointerArraySelPointerArrayWithWeakObjects = objc.RegisterName("pointerArrayWithWeakObjects")
-	_nSPointerArraySelStrongObjectsPointerArray = objc.RegisterName("strongObjectsPointerArray")
-	_nSPointerArraySelWeakObjectsPointerArray = objc.RegisterName("weakObjectsPointerArray")
-	_nSPointerArraySelAllObjects = objc.RegisterName("allObjects")
+	_nSPointerArraySelCompact                          = objc.RegisterName("compact")
+	_nSPointerArraySelPointerFunctions                 = objc.RegisterName("pointerFunctions")
+	_nSPointerArraySelCount                            = objc.RegisterName("count")
+	_nSPointerArraySelSetCount                         = objc.RegisterName("setCount:")
+	_nSPointerArraySelPointerArrayWithStrongObjects    = objc.RegisterName("pointerArrayWithStrongObjects")
+	_nSPointerArraySelPointerArrayWithWeakObjects      = objc.RegisterName("pointerArrayWithWeakObjects")
+	_nSPointerArraySelStrongObjectsPointerArray        = objc.RegisterName("strongObjectsPointerArray")
+	_nSPointerArraySelWeakObjectsPointerArray          = objc.RegisterName("weakObjectsPointerArray")
+	_nSPointerArraySelAllObjects                       = objc.RegisterName("allObjects")
 )
 
 func NSPointerArrayFromID(id objc.ID) *NSPointerArray {
@@ -50,25 +50,33 @@ func NSPointerArrayFromID(id objc.ID) *NSPointerArray {
 
 func (o *NSPointerArray) InitWithOptions(options NSPointerFunctionsOptions) *NSPointerArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPointerArraySelInitWithOptions, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPointerArrayFromID(_ret)
 }
 
 func (o *NSPointerArray) InitWithPointerFunctions(functions *NSPointerFunctions) *NSPointerArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPointerArraySelInitWithPointerFunctions, functions.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPointerArrayFromID(_ret)
 }
 
 func NSPointerArrayPointerArrayWithOptions(options NSPointerFunctionsOptions) *NSPointerArray {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPointerArray), _nSPointerArraySelPointerArrayWithOptions, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPointerArrayFromID(_ret)
 }
 
 func NSPointerArrayPointerArrayWithPointerFunctions(functions *NSPointerFunctions) *NSPointerArray {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPointerArray), _nSPointerArraySelPointerArrayWithPointerFunctions, functions.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPointerArrayFromID(_ret)
 }
 
@@ -99,7 +107,9 @@ func (o *NSPointerArray) Compact() {
 
 func (o *NSPointerArray) PointerFunctions() *NSPointerFunctions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPointerArraySelPointerFunctions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPointerFunctionsFromID(_ret)
 }
 
@@ -126,13 +136,17 @@ func NSPointerArrayPointerArrayWithWeakObjects() objc.ID {
 
 func NSPointerArrayStrongObjectsPointerArray() *NSPointerArray {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPointerArray), _nSPointerArraySelStrongObjectsPointerArray)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPointerArrayFromID(_ret)
 }
 
 func NSPointerArrayWeakObjectsPointerArray() *NSPointerArray {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPointerArray), _nSPointerArraySelWeakObjectsPointerArray)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPointerArrayFromID(_ret)
 }
 
@@ -140,4 +154,3 @@ func (o *NSPointerArray) AllObjects() *NSArray[objc.ID] {
 	_ret := objc.Send[*NSArray[objc.ID]](o.Ptr(), _nSPointerArraySelAllObjects)
 	return _ret
 }
-

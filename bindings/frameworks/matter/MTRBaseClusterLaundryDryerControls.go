@@ -18,31 +18,31 @@ type MTRBaseClusterLaundryDryerControls struct {
 }
 
 var (
-	_clsMTRBaseClusterLaundryDryerControls = _objcClass("MTRBaseClusterLaundryDryerControls")
-	_mTRBaseClusterLaundryDryerControlsSelReadAttributeSupportedDrynessLevelsWithCompletion = objc.RegisterName("readAttributeSupportedDrynessLevelsWithCompletion:")
+	_clsMTRBaseClusterLaundryDryerControls                                                                                       = _objcClass("MTRBaseClusterLaundryDryerControls")
+	_mTRBaseClusterLaundryDryerControlsSelReadAttributeSupportedDrynessLevelsWithCompletion                                      = objc.RegisterName("readAttributeSupportedDrynessLevelsWithCompletion:")
 	_mTRBaseClusterLaundryDryerControlsSelSubscribeAttributeSupportedDrynessLevelsWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeSupportedDrynessLevelsWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterLaundryDryerControlsSelReadAttributeSupportedDrynessLevelsWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeSupportedDrynessLevelsWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterLaundryDryerControlsSelReadAttributeSelectedDrynessLevelWithCompletion = objc.RegisterName("readAttributeSelectedDrynessLevelWithCompletion:")
-	_mTRBaseClusterLaundryDryerControlsSelWriteAttributeSelectedDrynessLevelWithValueCompletion = objc.RegisterName("writeAttributeSelectedDrynessLevelWithValue:completion:")
-	_mTRBaseClusterLaundryDryerControlsSelWriteAttributeSelectedDrynessLevelWithValueParamsCompletion = objc.RegisterName("writeAttributeSelectedDrynessLevelWithValue:params:completion:")
-	_mTRBaseClusterLaundryDryerControlsSelSubscribeAttributeSelectedDrynessLevelWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeSelectedDrynessLevelWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterLaundryDryerControlsSelReadAttributeSelectedDrynessLevelWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeSelectedDrynessLevelWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterLaundryDryerControlsSelReadAttributeGeneratedCommandListWithCompletion = objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:")
-	_mTRBaseClusterLaundryDryerControlsSelSubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterLaundryDryerControlsSelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeGeneratedCommandListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterLaundryDryerControlsSelReadAttributeAcceptedCommandListWithCompletion = objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:")
-	_mTRBaseClusterLaundryDryerControlsSelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterLaundryDryerControlsSelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeAcceptedCommandListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterLaundryDryerControlsSelReadAttributeAttributeListWithCompletion = objc.RegisterName("readAttributeAttributeListWithCompletion:")
-	_mTRBaseClusterLaundryDryerControlsSelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterLaundryDryerControlsSelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeAttributeListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterLaundryDryerControlsSelReadAttributeFeatureMapWithCompletion = objc.RegisterName("readAttributeFeatureMapWithCompletion:")
-	_mTRBaseClusterLaundryDryerControlsSelSubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterLaundryDryerControlsSelReadAttributeFeatureMapWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeFeatureMapWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterLaundryDryerControlsSelReadAttributeClusterRevisionWithCompletion = objc.RegisterName("readAttributeClusterRevisionWithCompletion:")
-	_mTRBaseClusterLaundryDryerControlsSelSubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterLaundryDryerControlsSelReadAttributeClusterRevisionWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeClusterRevisionWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterLaundryDryerControlsSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRBaseClusterLaundryDryerControlsSelReadAttributeSupportedDrynessLevelsWithClusterStateCacheEndpointQueueCompletion        = objc.RegisterName("readAttributeSupportedDrynessLevelsWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterLaundryDryerControlsSelReadAttributeSelectedDrynessLevelWithCompletion                                        = objc.RegisterName("readAttributeSelectedDrynessLevelWithCompletion:")
+	_mTRBaseClusterLaundryDryerControlsSelWriteAttributeSelectedDrynessLevelWithValueCompletion                                  = objc.RegisterName("writeAttributeSelectedDrynessLevelWithValue:completion:")
+	_mTRBaseClusterLaundryDryerControlsSelWriteAttributeSelectedDrynessLevelWithValueParamsCompletion                            = objc.RegisterName("writeAttributeSelectedDrynessLevelWithValue:params:completion:")
+	_mTRBaseClusterLaundryDryerControlsSelSubscribeAttributeSelectedDrynessLevelWithParamsSubscriptionEstablishedReportHandler   = objc.RegisterName("subscribeAttributeSelectedDrynessLevelWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterLaundryDryerControlsSelReadAttributeSelectedDrynessLevelWithClusterStateCacheEndpointQueueCompletion          = objc.RegisterName("readAttributeSelectedDrynessLevelWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterLaundryDryerControlsSelReadAttributeGeneratedCommandListWithCompletion                                        = objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:")
+	_mTRBaseClusterLaundryDryerControlsSelSubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler   = objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterLaundryDryerControlsSelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion          = objc.RegisterName("readAttributeGeneratedCommandListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterLaundryDryerControlsSelReadAttributeAcceptedCommandListWithCompletion                                         = objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:")
+	_mTRBaseClusterLaundryDryerControlsSelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler    = objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterLaundryDryerControlsSelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion           = objc.RegisterName("readAttributeAcceptedCommandListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterLaundryDryerControlsSelReadAttributeAttributeListWithCompletion                                               = objc.RegisterName("readAttributeAttributeListWithCompletion:")
+	_mTRBaseClusterLaundryDryerControlsSelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler          = objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterLaundryDryerControlsSelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion                 = objc.RegisterName("readAttributeAttributeListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterLaundryDryerControlsSelReadAttributeFeatureMapWithCompletion                                                  = objc.RegisterName("readAttributeFeatureMapWithCompletion:")
+	_mTRBaseClusterLaundryDryerControlsSelSubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler             = objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterLaundryDryerControlsSelReadAttributeFeatureMapWithClusterStateCacheEndpointQueueCompletion                    = objc.RegisterName("readAttributeFeatureMapWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterLaundryDryerControlsSelReadAttributeClusterRevisionWithCompletion                                             = objc.RegisterName("readAttributeClusterRevisionWithCompletion:")
+	_mTRBaseClusterLaundryDryerControlsSelSubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler        = objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterLaundryDryerControlsSelReadAttributeClusterRevisionWithClusterStateCacheEndpointQueueCompletion               = objc.RegisterName("readAttributeClusterRevisionWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterLaundryDryerControlsSelInitWithDeviceEndpointIDQueue                                                          = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRBaseClusterLaundryDryerControlsFromID(id objc.ID) *MTRBaseClusterLaundryDryerControls {
@@ -303,7 +303,8 @@ func MTRBaseClusterLaundryDryerControlsReadAttributeClusterRevisionWithClusterSt
 // For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func (o *MTRBaseClusterLaundryDryerControls) InitWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterLaundryDryerControls {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBaseClusterLaundryDryerControlsSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRBaseClusterLaundryDryerControlsFromID(_ret)
 }
-

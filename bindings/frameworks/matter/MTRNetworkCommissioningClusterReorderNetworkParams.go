@@ -16,16 +16,16 @@ type MTRNetworkCommissioningClusterReorderNetworkParams struct {
 }
 
 var (
-	_clsMTRNetworkCommissioningClusterReorderNetworkParams = _objcClass("MTRNetworkCommissioningClusterReorderNetworkParams")
-	_mTRNetworkCommissioningClusterReorderNetworkParamsSelNetworkID = objc.RegisterName("networkID")
-	_mTRNetworkCommissioningClusterReorderNetworkParamsSelSetNetworkID = objc.RegisterName("setNetworkID:")
-	_mTRNetworkCommissioningClusterReorderNetworkParamsSelNetworkIndex = objc.RegisterName("networkIndex")
-	_mTRNetworkCommissioningClusterReorderNetworkParamsSelSetNetworkIndex = objc.RegisterName("setNetworkIndex:")
-	_mTRNetworkCommissioningClusterReorderNetworkParamsSelBreadcrumb = objc.RegisterName("breadcrumb")
-	_mTRNetworkCommissioningClusterReorderNetworkParamsSelSetBreadcrumb = objc.RegisterName("setBreadcrumb:")
-	_mTRNetworkCommissioningClusterReorderNetworkParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRNetworkCommissioningClusterReorderNetworkParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRNetworkCommissioningClusterReorderNetworkParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRNetworkCommissioningClusterReorderNetworkParams                               = _objcClass("MTRNetworkCommissioningClusterReorderNetworkParams")
+	_mTRNetworkCommissioningClusterReorderNetworkParamsSelNetworkID                      = objc.RegisterName("networkID")
+	_mTRNetworkCommissioningClusterReorderNetworkParamsSelSetNetworkID                   = objc.RegisterName("setNetworkID:")
+	_mTRNetworkCommissioningClusterReorderNetworkParamsSelNetworkIndex                   = objc.RegisterName("networkIndex")
+	_mTRNetworkCommissioningClusterReorderNetworkParamsSelSetNetworkIndex                = objc.RegisterName("setNetworkIndex:")
+	_mTRNetworkCommissioningClusterReorderNetworkParamsSelBreadcrumb                     = objc.RegisterName("breadcrumb")
+	_mTRNetworkCommissioningClusterReorderNetworkParamsSelSetBreadcrumb                  = objc.RegisterName("setBreadcrumb:")
+	_mTRNetworkCommissioningClusterReorderNetworkParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRNetworkCommissioningClusterReorderNetworkParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRNetworkCommissioningClusterReorderNetworkParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRNetworkCommissioningClusterReorderNetworkParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -41,7 +41,9 @@ func MTRNetworkCommissioningClusterReorderNetworkParamsFromID(id objc.ID) *MTRNe
 
 func (o *MTRNetworkCommissioningClusterReorderNetworkParams) NetworkID() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterReorderNetworkParamsSelNetworkID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -51,7 +53,9 @@ func (o *MTRNetworkCommissioningClusterReorderNetworkParams) SetNetworkID(networ
 
 func (o *MTRNetworkCommissioningClusterReorderNetworkParams) NetworkIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterReorderNetworkParamsSelNetworkIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *MTRNetworkCommissioningClusterReorderNetworkParams) SetNetworkIndex(net
 
 func (o *MTRNetworkCommissioningClusterReorderNetworkParams) Breadcrumb() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterReorderNetworkParamsSelBreadcrumb)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -72,7 +78,9 @@ func (o *MTRNetworkCommissioningClusterReorderNetworkParams) SetBreadcrumb(bread
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRNetworkCommissioningClusterReorderNetworkParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterReorderNetworkParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -83,11 +91,12 @@ func (o *MTRNetworkCommissioningClusterReorderNetworkParams) SetTimedInvokeTimeo
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRNetworkCommissioningClusterReorderNetworkParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterReorderNetworkParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRNetworkCommissioningClusterReorderNetworkParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRNetworkCommissioningClusterReorderNetworkParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

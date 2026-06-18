@@ -136,4 +136,3 @@ func StreamPropertiesWithDictionary(propertiesDictionary *foundation.NSDictionar
 	}
 	return &ExtensionStreamProperties{inner: _r}
 }
-

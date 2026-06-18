@@ -18,32 +18,32 @@ type MTRDoorLockClusterGetUserResponseParams struct {
 }
 
 var (
-	_clsMTRDoorLockClusterGetUserResponseParams = _objcClass("MTRDoorLockClusterGetUserResponseParams")
+	_clsMTRDoorLockClusterGetUserResponseParams                           = _objcClass("MTRDoorLockClusterGetUserResponseParams")
 	_mTRDoorLockClusterGetUserResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRDoorLockClusterGetUserResponseParamsSelUserIndex = objc.RegisterName("userIndex")
-	_mTRDoorLockClusterGetUserResponseParamsSelSetUserIndex = objc.RegisterName("setUserIndex:")
-	_mTRDoorLockClusterGetUserResponseParamsSelUserName = objc.RegisterName("userName")
-	_mTRDoorLockClusterGetUserResponseParamsSelSetUserName = objc.RegisterName("setUserName:")
-	_mTRDoorLockClusterGetUserResponseParamsSelUserUniqueID = objc.RegisterName("userUniqueID")
-	_mTRDoorLockClusterGetUserResponseParamsSelSetUserUniqueID = objc.RegisterName("setUserUniqueID:")
-	_mTRDoorLockClusterGetUserResponseParamsSelUserStatus = objc.RegisterName("userStatus")
-	_mTRDoorLockClusterGetUserResponseParamsSelSetUserStatus = objc.RegisterName("setUserStatus:")
-	_mTRDoorLockClusterGetUserResponseParamsSelUserType = objc.RegisterName("userType")
-	_mTRDoorLockClusterGetUserResponseParamsSelSetUserType = objc.RegisterName("setUserType:")
-	_mTRDoorLockClusterGetUserResponseParamsSelCredentialRule = objc.RegisterName("credentialRule")
-	_mTRDoorLockClusterGetUserResponseParamsSelSetCredentialRule = objc.RegisterName("setCredentialRule:")
-	_mTRDoorLockClusterGetUserResponseParamsSelCredentials = objc.RegisterName("credentials")
-	_mTRDoorLockClusterGetUserResponseParamsSelSetCredentials = objc.RegisterName("setCredentials:")
-	_mTRDoorLockClusterGetUserResponseParamsSelCreatorFabricIndex = objc.RegisterName("creatorFabricIndex")
-	_mTRDoorLockClusterGetUserResponseParamsSelSetCreatorFabricIndex = objc.RegisterName("setCreatorFabricIndex:")
-	_mTRDoorLockClusterGetUserResponseParamsSelLastModifiedFabricIndex = objc.RegisterName("lastModifiedFabricIndex")
+	_mTRDoorLockClusterGetUserResponseParamsSelUserIndex                  = objc.RegisterName("userIndex")
+	_mTRDoorLockClusterGetUserResponseParamsSelSetUserIndex               = objc.RegisterName("setUserIndex:")
+	_mTRDoorLockClusterGetUserResponseParamsSelUserName                   = objc.RegisterName("userName")
+	_mTRDoorLockClusterGetUserResponseParamsSelSetUserName                = objc.RegisterName("setUserName:")
+	_mTRDoorLockClusterGetUserResponseParamsSelUserUniqueID               = objc.RegisterName("userUniqueID")
+	_mTRDoorLockClusterGetUserResponseParamsSelSetUserUniqueID            = objc.RegisterName("setUserUniqueID:")
+	_mTRDoorLockClusterGetUserResponseParamsSelUserStatus                 = objc.RegisterName("userStatus")
+	_mTRDoorLockClusterGetUserResponseParamsSelSetUserStatus              = objc.RegisterName("setUserStatus:")
+	_mTRDoorLockClusterGetUserResponseParamsSelUserType                   = objc.RegisterName("userType")
+	_mTRDoorLockClusterGetUserResponseParamsSelSetUserType                = objc.RegisterName("setUserType:")
+	_mTRDoorLockClusterGetUserResponseParamsSelCredentialRule             = objc.RegisterName("credentialRule")
+	_mTRDoorLockClusterGetUserResponseParamsSelSetCredentialRule          = objc.RegisterName("setCredentialRule:")
+	_mTRDoorLockClusterGetUserResponseParamsSelCredentials                = objc.RegisterName("credentials")
+	_mTRDoorLockClusterGetUserResponseParamsSelSetCredentials             = objc.RegisterName("setCredentials:")
+	_mTRDoorLockClusterGetUserResponseParamsSelCreatorFabricIndex         = objc.RegisterName("creatorFabricIndex")
+	_mTRDoorLockClusterGetUserResponseParamsSelSetCreatorFabricIndex      = objc.RegisterName("setCreatorFabricIndex:")
+	_mTRDoorLockClusterGetUserResponseParamsSelLastModifiedFabricIndex    = objc.RegisterName("lastModifiedFabricIndex")
 	_mTRDoorLockClusterGetUserResponseParamsSelSetLastModifiedFabricIndex = objc.RegisterName("setLastModifiedFabricIndex:")
-	_mTRDoorLockClusterGetUserResponseParamsSelNextUserIndex = objc.RegisterName("nextUserIndex")
-	_mTRDoorLockClusterGetUserResponseParamsSelSetNextUserIndex = objc.RegisterName("setNextUserIndex:")
-	_mTRDoorLockClusterGetUserResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRDoorLockClusterGetUserResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRDoorLockClusterGetUserResponseParamsSelUserUniqueId = objc.RegisterName("userUniqueId")
-	_mTRDoorLockClusterGetUserResponseParamsSelSetUserUniqueId = objc.RegisterName("setUserUniqueId:")
+	_mTRDoorLockClusterGetUserResponseParamsSelNextUserIndex              = objc.RegisterName("nextUserIndex")
+	_mTRDoorLockClusterGetUserResponseParamsSelSetNextUserIndex           = objc.RegisterName("setNextUserIndex:")
+	_mTRDoorLockClusterGetUserResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRDoorLockClusterGetUserResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRDoorLockClusterGetUserResponseParamsSelUserUniqueId               = objc.RegisterName("userUniqueId")
+	_mTRDoorLockClusterGetUserResponseParamsSelSetUserUniqueId            = objc.RegisterName("setUserUniqueId:")
 )
 
 func MTRDoorLockClusterGetUserResponseParamsFromID(id objc.ID) *MTRDoorLockClusterGetUserResponseParams {
@@ -60,7 +60,9 @@ func MTRDoorLockClusterGetUserResponseParamsFromID(id objc.ID) *MTRDoorLockClust
 func (o *MTRDoorLockClusterGetUserResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRDoorLockClusterGetUserResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterGetUserResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -69,7 +71,9 @@ func (o *MTRDoorLockClusterGetUserResponseParams) InitWithResponseValueError(res
 
 func (o *MTRDoorLockClusterGetUserResponseParams) UserIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterGetUserResponseParamsSelUserIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -79,7 +83,9 @@ func (o *MTRDoorLockClusterGetUserResponseParams) SetUserIndex(userIndex *founda
 
 func (o *MTRDoorLockClusterGetUserResponseParams) UserName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterGetUserResponseParamsSelUserName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -89,7 +95,9 @@ func (o *MTRDoorLockClusterGetUserResponseParams) SetUserName(userName *foundati
 
 func (o *MTRDoorLockClusterGetUserResponseParams) UserUniqueID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterGetUserResponseParamsSelUserUniqueID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -99,7 +107,9 @@ func (o *MTRDoorLockClusterGetUserResponseParams) SetUserUniqueID(userUniqueID *
 
 func (o *MTRDoorLockClusterGetUserResponseParams) UserStatus() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterGetUserResponseParamsSelUserStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -109,7 +119,9 @@ func (o *MTRDoorLockClusterGetUserResponseParams) SetUserStatus(userStatus *foun
 
 func (o *MTRDoorLockClusterGetUserResponseParams) UserType() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterGetUserResponseParamsSelUserType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -119,7 +131,9 @@ func (o *MTRDoorLockClusterGetUserResponseParams) SetUserType(userType *foundati
 
 func (o *MTRDoorLockClusterGetUserResponseParams) CredentialRule() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterGetUserResponseParamsSelCredentialRule)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -138,7 +152,9 @@ func (o *MTRDoorLockClusterGetUserResponseParams) SetCredentials(credentials *fo
 
 func (o *MTRDoorLockClusterGetUserResponseParams) CreatorFabricIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterGetUserResponseParamsSelCreatorFabricIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -148,7 +164,9 @@ func (o *MTRDoorLockClusterGetUserResponseParams) SetCreatorFabricIndex(creatorF
 
 func (o *MTRDoorLockClusterGetUserResponseParams) LastModifiedFabricIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterGetUserResponseParamsSelLastModifiedFabricIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -158,7 +176,9 @@ func (o *MTRDoorLockClusterGetUserResponseParams) SetLastModifiedFabricIndex(las
 
 func (o *MTRDoorLockClusterGetUserResponseParams) NextUserIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterGetUserResponseParamsSelNextUserIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -169,7 +189,9 @@ func (o *MTRDoorLockClusterGetUserResponseParams) SetNextUserIndex(nextUserIndex
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRDoorLockClusterGetUserResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterGetUserResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -179,11 +201,12 @@ func (o *MTRDoorLockClusterGetUserResponseParams) SetTimedInvokeTimeoutMs(timedI
 
 func (o *MTRDoorLockClusterGetUserResponseParams) UserUniqueId() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterGetUserResponseParamsSelUserUniqueId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDoorLockClusterGetUserResponseParams) SetUserUniqueId(userUniqueId *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDoorLockClusterGetUserResponseParamsSelSetUserUniqueId, userUniqueId.Ptr())
 }
-

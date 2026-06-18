@@ -16,11 +16,15 @@ type MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams].
-func (x *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) Unwrap() *raw.MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams { return x.inner }
+func (x *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) Unwrap() *raw.MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTROtaSoftwareUpdateProviderClusterQueryImageResponseParamsFromID adopts an existing object pointer as a MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams (nil for 0).
 func MTROtaSoftwareUpdateProviderClusterQueryImageResponseParamsFromID(id objc.ID) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams {
@@ -90,7 +94,9 @@ func (x *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) WithTimedI
 	return x
 }
 
-func (x *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) asMTROTASoftwareUpdateProviderClusterQueryImageResponseParams() *raw.MTROTASoftwareUpdateProviderClusterQueryImageResponseParams { return &x.inner.MTROTASoftwareUpdateProviderClusterQueryImageResponseParams }
+func (x *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) asMTROTASoftwareUpdateProviderClusterQueryImageResponseParams() *raw.MTROTASoftwareUpdateProviderClusterQueryImageResponseParams {
+	return &x.inner.MTROTASoftwareUpdateProviderClusterQueryImageResponseParams
+}
 
 // MTROtaSoftwareUpdateProviderClusterQueryImageResponseParamsable is the interface implemented by [MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams], for mocking and DI.
 type MTROtaSoftwareUpdateProviderClusterQueryImageResponseParamsable interface {
@@ -107,4 +113,3 @@ type MTROtaSoftwareUpdateProviderClusterQueryImageResponseParamsable interface {
 }
 
 var _ MTROtaSoftwareUpdateProviderClusterQueryImageResponseParamsable = (*MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams)(nil)
-

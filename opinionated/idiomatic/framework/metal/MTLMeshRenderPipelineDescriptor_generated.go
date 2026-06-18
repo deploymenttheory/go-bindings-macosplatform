@@ -573,4 +573,3 @@ type MeshRenderPipelineDescriptorable interface {
 }
 
 var _ MeshRenderPipelineDescriptorable = (*MeshRenderPipelineDescriptor)(nil)
-

@@ -225,4 +225,3 @@ type Setable interface {
 }
 
 var _ Setable = (*Set)(nil)
-

@@ -17,163 +17,163 @@ type NSTableView struct {
 }
 
 var (
-	_clsNSTableView = _objcClass("NSTableView")
-	_nSTableViewSelInitWithFrame = objc.RegisterName("initWithFrame:")
-	_nSTableViewSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSTableViewSelNoteHeightOfRowsWithIndexesChanged = objc.RegisterName("noteHeightOfRowsWithIndexesChanged:")
-	_nSTableViewSelAddTableColumn = objc.RegisterName("addTableColumn:")
-	_nSTableViewSelRemoveTableColumn = objc.RegisterName("removeTableColumn:")
-	_nSTableViewSelMoveColumnToColumn = objc.RegisterName("moveColumn:toColumn:")
-	_nSTableViewSelColumnWithIdentifier = objc.RegisterName("columnWithIdentifier:")
-	_nSTableViewSelTableColumnWithIdentifier = objc.RegisterName("tableColumnWithIdentifier:")
-	_nSTableViewSelTile = objc.RegisterName("tile")
-	_nSTableViewSelSizeLastColumnToFit = objc.RegisterName("sizeLastColumnToFit")
-	_nSTableViewSelScrollRowToVisible = objc.RegisterName("scrollRowToVisible:")
-	_nSTableViewSelScrollColumnToVisible = objc.RegisterName("scrollColumnToVisible:")
-	_nSTableViewSelReloadData = objc.RegisterName("reloadData")
-	_nSTableViewSelNoteNumberOfRowsChanged = objc.RegisterName("noteNumberOfRowsChanged")
-	_nSTableViewSelReloadDataForRowIndexesColumnIndexes = objc.RegisterName("reloadDataForRowIndexes:columnIndexes:")
-	_nSTableViewSelSetIndicatorImageInTableColumn = objc.RegisterName("setIndicatorImage:inTableColumn:")
-	_nSTableViewSelIndicatorImageInTableColumn = objc.RegisterName("indicatorImageInTableColumn:")
-	_nSTableViewSelCanDragRowsWithIndexesAtPoint = objc.RegisterName("canDragRowsWithIndexes:atPoint:")
+	_clsNSTableView                                                   = _objcClass("NSTableView")
+	_nSTableViewSelInitWithFrame                                      = objc.RegisterName("initWithFrame:")
+	_nSTableViewSelInitWithCoder                                      = objc.RegisterName("initWithCoder:")
+	_nSTableViewSelNoteHeightOfRowsWithIndexesChanged                 = objc.RegisterName("noteHeightOfRowsWithIndexesChanged:")
+	_nSTableViewSelAddTableColumn                                     = objc.RegisterName("addTableColumn:")
+	_nSTableViewSelRemoveTableColumn                                  = objc.RegisterName("removeTableColumn:")
+	_nSTableViewSelMoveColumnToColumn                                 = objc.RegisterName("moveColumn:toColumn:")
+	_nSTableViewSelColumnWithIdentifier                               = objc.RegisterName("columnWithIdentifier:")
+	_nSTableViewSelTableColumnWithIdentifier                          = objc.RegisterName("tableColumnWithIdentifier:")
+	_nSTableViewSelTile                                               = objc.RegisterName("tile")
+	_nSTableViewSelSizeLastColumnToFit                                = objc.RegisterName("sizeLastColumnToFit")
+	_nSTableViewSelScrollRowToVisible                                 = objc.RegisterName("scrollRowToVisible:")
+	_nSTableViewSelScrollColumnToVisible                              = objc.RegisterName("scrollColumnToVisible:")
+	_nSTableViewSelReloadData                                         = objc.RegisterName("reloadData")
+	_nSTableViewSelNoteNumberOfRowsChanged                            = objc.RegisterName("noteNumberOfRowsChanged")
+	_nSTableViewSelReloadDataForRowIndexesColumnIndexes               = objc.RegisterName("reloadDataForRowIndexes:columnIndexes:")
+	_nSTableViewSelSetIndicatorImageInTableColumn                     = objc.RegisterName("setIndicatorImage:inTableColumn:")
+	_nSTableViewSelIndicatorImageInTableColumn                        = objc.RegisterName("indicatorImageInTableColumn:")
+	_nSTableViewSelCanDragRowsWithIndexesAtPoint                      = objc.RegisterName("canDragRowsWithIndexes:atPoint:")
 	_nSTableViewSelDragImageForRowsWithIndexesTableColumnsEventOffset = objc.RegisterName("dragImageForRowsWithIndexes:tableColumns:event:offset:")
-	_nSTableViewSelSetDraggingSourceOperationMaskForLocal = objc.RegisterName("setDraggingSourceOperationMask:forLocal:")
-	_nSTableViewSelSetDropRowDropOperation = objc.RegisterName("setDropRow:dropOperation:")
-	_nSTableViewSelSelectAll = objc.RegisterName("selectAll:")
-	_nSTableViewSelDeselectAll = objc.RegisterName("deselectAll:")
-	_nSTableViewSelSelectColumnIndexesByExtendingSelection = objc.RegisterName("selectColumnIndexes:byExtendingSelection:")
-	_nSTableViewSelSelectRowIndexesByExtendingSelection = objc.RegisterName("selectRowIndexes:byExtendingSelection:")
-	_nSTableViewSelDeselectColumn = objc.RegisterName("deselectColumn:")
-	_nSTableViewSelDeselectRow = objc.RegisterName("deselectRow:")
-	_nSTableViewSelIsColumnSelected = objc.RegisterName("isColumnSelected:")
-	_nSTableViewSelIsRowSelected = objc.RegisterName("isRowSelected:")
-	_nSTableViewSelRectOfColumn = objc.RegisterName("rectOfColumn:")
-	_nSTableViewSelRectOfRow = objc.RegisterName("rectOfRow:")
-	_nSTableViewSelColumnIndexesInRect = objc.RegisterName("columnIndexesInRect:")
-	_nSTableViewSelRowsInRect = objc.RegisterName("rowsInRect:")
-	_nSTableViewSelColumnAtPoint = objc.RegisterName("columnAtPoint:")
-	_nSTableViewSelRowAtPoint = objc.RegisterName("rowAtPoint:")
-	_nSTableViewSelFrameOfCellAtColumnRow = objc.RegisterName("frameOfCellAtColumn:row:")
-	_nSTableViewSelEditColumnRowWithEventSelect = objc.RegisterName("editColumn:row:withEvent:select:")
-	_nSTableViewSelDrawRowClipRect = objc.RegisterName("drawRow:clipRect:")
-	_nSTableViewSelHighlightSelectionInClipRect = objc.RegisterName("highlightSelectionInClipRect:")
-	_nSTableViewSelDrawGridInClipRect = objc.RegisterName("drawGridInClipRect:")
-	_nSTableViewSelDrawBackgroundInClipRect = objc.RegisterName("drawBackgroundInClipRect:")
-	_nSTableViewSelViewAtColumnRowMakeIfNecessary = objc.RegisterName("viewAtColumn:row:makeIfNecessary:")
-	_nSTableViewSelRowViewAtRowMakeIfNecessary = objc.RegisterName("rowViewAtRow:makeIfNecessary:")
-	_nSTableViewSelRowForView = objc.RegisterName("rowForView:")
-	_nSTableViewSelColumnForView = objc.RegisterName("columnForView:")
-	_nSTableViewSelMakeViewWithIdentifierOwner = objc.RegisterName("makeViewWithIdentifier:owner:")
-	_nSTableViewSelEnumerateAvailableRowViewsUsing = objc.RegisterName("enumerateAvailableRowViewsUsingBlock:")
-	_nSTableViewSelBeginUpdates = objc.RegisterName("beginUpdates")
-	_nSTableViewSelEndUpdates = objc.RegisterName("endUpdates")
-	_nSTableViewSelInsertRowsAtIndexesWithAnimation = objc.RegisterName("insertRowsAtIndexes:withAnimation:")
-	_nSTableViewSelRemoveRowsAtIndexesWithAnimation = objc.RegisterName("removeRowsAtIndexes:withAnimation:")
-	_nSTableViewSelMoveRowAtIndexToIndex = objc.RegisterName("moveRowAtIndex:toIndex:")
-	_nSTableViewSelHideRowsAtIndexesWithAnimation = objc.RegisterName("hideRowsAtIndexes:withAnimation:")
-	_nSTableViewSelUnhideRowsAtIndexesWithAnimation = objc.RegisterName("unhideRowsAtIndexes:withAnimation:")
-	_nSTableViewSelRegisterNibForIdentifier = objc.RegisterName("registerNib:forIdentifier:")
-	_nSTableViewSelDidAddRowViewForRow = objc.RegisterName("didAddRowView:forRow:")
-	_nSTableViewSelDidRemoveRowViewForRow = objc.RegisterName("didRemoveRowView:forRow:")
-	_nSTableViewSelDataSource = objc.RegisterName("dataSource")
-	_nSTableViewSelSetDataSource = objc.RegisterName("setDataSource:")
-	_nSTableViewSelDelegate = objc.RegisterName("delegate")
-	_nSTableViewSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSTableViewSelHeaderView = objc.RegisterName("headerView")
-	_nSTableViewSelSetHeaderView = objc.RegisterName("setHeaderView:")
-	_nSTableViewSelCornerView = objc.RegisterName("cornerView")
-	_nSTableViewSelSetCornerView = objc.RegisterName("setCornerView:")
-	_nSTableViewSelAllowsColumnReordering = objc.RegisterName("allowsColumnReordering")
-	_nSTableViewSelSetAllowsColumnReordering = objc.RegisterName("setAllowsColumnReordering:")
-	_nSTableViewSelAllowsColumnResizing = objc.RegisterName("allowsColumnResizing")
-	_nSTableViewSelSetAllowsColumnResizing = objc.RegisterName("setAllowsColumnResizing:")
-	_nSTableViewSelColumnAutoresizingStyle = objc.RegisterName("columnAutoresizingStyle")
-	_nSTableViewSelSetColumnAutoresizingStyle = objc.RegisterName("setColumnAutoresizingStyle:")
-	_nSTableViewSelGridStyleMask = objc.RegisterName("gridStyleMask")
-	_nSTableViewSelSetGridStyleMask = objc.RegisterName("setGridStyleMask:")
-	_nSTableViewSelIntercellSpacing = objc.RegisterName("intercellSpacing")
-	_nSTableViewSelSetIntercellSpacing = objc.RegisterName("setIntercellSpacing:")
-	_nSTableViewSelUsesAlternatingRowBackgroundColors = objc.RegisterName("usesAlternatingRowBackgroundColors")
-	_nSTableViewSelSetUsesAlternatingRowBackgroundColors = objc.RegisterName("setUsesAlternatingRowBackgroundColors:")
-	_nSTableViewSelBackgroundColor = objc.RegisterName("backgroundColor")
-	_nSTableViewSelSetBackgroundColor = objc.RegisterName("setBackgroundColor:")
-	_nSTableViewSelGridColor = objc.RegisterName("gridColor")
-	_nSTableViewSelSetGridColor = objc.RegisterName("setGridColor:")
-	_nSTableViewSelRowSizeStyle = objc.RegisterName("rowSizeStyle")
-	_nSTableViewSelSetRowSizeStyle = objc.RegisterName("setRowSizeStyle:")
-	_nSTableViewSelEffectiveRowSizeStyle = objc.RegisterName("effectiveRowSizeStyle")
-	_nSTableViewSelRowHeight = objc.RegisterName("rowHeight")
-	_nSTableViewSelSetRowHeight = objc.RegisterName("setRowHeight:")
-	_nSTableViewSelTableColumns = objc.RegisterName("tableColumns")
-	_nSTableViewSelNumberOfColumns = objc.RegisterName("numberOfColumns")
-	_nSTableViewSelNumberOfRows = objc.RegisterName("numberOfRows")
-	_nSTableViewSelEditedColumn = objc.RegisterName("editedColumn")
-	_nSTableViewSelEditedRow = objc.RegisterName("editedRow")
-	_nSTableViewSelClickedColumn = objc.RegisterName("clickedColumn")
-	_nSTableViewSelClickedRow = objc.RegisterName("clickedRow")
-	_nSTableViewSelDoubleAction = objc.RegisterName("doubleAction")
-	_nSTableViewSelSetDoubleAction = objc.RegisterName("setDoubleAction:")
-	_nSTableViewSelSortDescriptors = objc.RegisterName("sortDescriptors")
-	_nSTableViewSelSetSortDescriptors = objc.RegisterName("setSortDescriptors:")
-	_nSTableViewSelHighlightedTableColumn = objc.RegisterName("highlightedTableColumn")
-	_nSTableViewSelSetHighlightedTableColumn = objc.RegisterName("setHighlightedTableColumn:")
-	_nSTableViewSelVerticalMotionCanBeginDrag = objc.RegisterName("verticalMotionCanBeginDrag")
-	_nSTableViewSelSetVerticalMotionCanBeginDrag = objc.RegisterName("setVerticalMotionCanBeginDrag:")
-	_nSTableViewSelAllowsMultipleSelection = objc.RegisterName("allowsMultipleSelection")
-	_nSTableViewSelSetAllowsMultipleSelection = objc.RegisterName("setAllowsMultipleSelection:")
-	_nSTableViewSelAllowsEmptySelection = objc.RegisterName("allowsEmptySelection")
-	_nSTableViewSelSetAllowsEmptySelection = objc.RegisterName("setAllowsEmptySelection:")
-	_nSTableViewSelAllowsColumnSelection = objc.RegisterName("allowsColumnSelection")
-	_nSTableViewSelSetAllowsColumnSelection = objc.RegisterName("setAllowsColumnSelection:")
-	_nSTableViewSelSelectedColumnIndexes = objc.RegisterName("selectedColumnIndexes")
-	_nSTableViewSelSelectedRowIndexes = objc.RegisterName("selectedRowIndexes")
-	_nSTableViewSelSelectedColumn = objc.RegisterName("selectedColumn")
-	_nSTableViewSelSelectedRow = objc.RegisterName("selectedRow")
-	_nSTableViewSelNumberOfSelectedColumns = objc.RegisterName("numberOfSelectedColumns")
-	_nSTableViewSelNumberOfSelectedRows = objc.RegisterName("numberOfSelectedRows")
-	_nSTableViewSelAllowsTypeSelect = objc.RegisterName("allowsTypeSelect")
-	_nSTableViewSelSetAllowsTypeSelect = objc.RegisterName("setAllowsTypeSelect:")
-	_nSTableViewSelStyle = objc.RegisterName("style")
-	_nSTableViewSelSetStyle = objc.RegisterName("setStyle:")
-	_nSTableViewSelEffectiveStyle = objc.RegisterName("effectiveStyle")
-	_nSTableViewSelSelectionHighlightStyle = objc.RegisterName("selectionHighlightStyle")
-	_nSTableViewSelSetSelectionHighlightStyle = objc.RegisterName("setSelectionHighlightStyle:")
-	_nSTableViewSelDraggingDestinationFeedbackStyle = objc.RegisterName("draggingDestinationFeedbackStyle")
-	_nSTableViewSelSetDraggingDestinationFeedbackStyle = objc.RegisterName("setDraggingDestinationFeedbackStyle:")
-	_nSTableViewSelAutosaveName = objc.RegisterName("autosaveName")
-	_nSTableViewSelSetAutosaveName = objc.RegisterName("setAutosaveName:")
-	_nSTableViewSelAutosaveTableColumns = objc.RegisterName("autosaveTableColumns")
-	_nSTableViewSelSetAutosaveTableColumns = objc.RegisterName("setAutosaveTableColumns:")
-	_nSTableViewSelFloatsGroupRows = objc.RegisterName("floatsGroupRows")
-	_nSTableViewSelSetFloatsGroupRows = objc.RegisterName("setFloatsGroupRows:")
-	_nSTableViewSelRowActionsVisible = objc.RegisterName("rowActionsVisible")
-	_nSTableViewSelSetRowActionsVisible = objc.RegisterName("setRowActionsVisible:")
-	_nSTableViewSelHiddenRowIndexes = objc.RegisterName("hiddenRowIndexes")
-	_nSTableViewSelRegisteredNibsByIdentifier = objc.RegisterName("registeredNibsByIdentifier")
-	_nSTableViewSelUsesStaticContents = objc.RegisterName("usesStaticContents")
-	_nSTableViewSelSetUsesStaticContents = objc.RegisterName("setUsesStaticContents:")
-	_nSTableViewSelUsesAutomaticRowHeights = objc.RegisterName("usesAutomaticRowHeights")
-	_nSTableViewSelSetUsesAutomaticRowHeights = objc.RegisterName("setUsesAutomaticRowHeights:")
-	_nSTableViewSelSetDrawsGrid = objc.RegisterName("setDrawsGrid:")
-	_nSTableViewSelDrawsGrid = objc.RegisterName("drawsGrid")
-	_nSTableViewSelSelectColumnByExtendingSelection = objc.RegisterName("selectColumn:byExtendingSelection:")
-	_nSTableViewSelSelectRowByExtendingSelection = objc.RegisterName("selectRow:byExtendingSelection:")
-	_nSTableViewSelSelectedColumnEnumerator = objc.RegisterName("selectedColumnEnumerator")
-	_nSTableViewSelSelectedRowEnumerator = objc.RegisterName("selectedRowEnumerator")
-	_nSTableViewSelDragImageForRowsEventDragImageOffset = objc.RegisterName("dragImageForRows:event:dragImageOffset:")
-	_nSTableViewSelSetAutoresizesAllColumnsToFit = objc.RegisterName("setAutoresizesAllColumnsToFit:")
-	_nSTableViewSelAutoresizesAllColumnsToFit = objc.RegisterName("autoresizesAllColumnsToFit")
-	_nSTableViewSelColumnsInRect = objc.RegisterName("columnsInRect:")
-	_nSTableViewSelPreparedCellAtColumnRow = objc.RegisterName("preparedCellAtColumn:row:")
-	_nSTableViewSelTextShouldBeginEditing = objc.RegisterName("textShouldBeginEditing:")
-	_nSTableViewSelTextShouldEndEditing = objc.RegisterName("textShouldEndEditing:")
-	_nSTableViewSelTextDidBeginEditing = objc.RegisterName("textDidBeginEditing:")
-	_nSTableViewSelTextDidEndEditing = objc.RegisterName("textDidEndEditing:")
-	_nSTableViewSelTextDidChange = objc.RegisterName("textDidChange:")
-	_nSTableViewSelShouldFocusCellAtColumnRow = objc.RegisterName("shouldFocusCell:atColumn:row:")
-	_nSTableViewSelFocusedColumn = objc.RegisterName("focusedColumn")
-	_nSTableViewSelSetFocusedColumn = objc.RegisterName("setFocusedColumn:")
-	_nSTableViewSelPerformClickOnCellAtColumnRow = objc.RegisterName("performClickOnCellAtColumn:row:")
+	_nSTableViewSelSetDraggingSourceOperationMaskForLocal             = objc.RegisterName("setDraggingSourceOperationMask:forLocal:")
+	_nSTableViewSelSetDropRowDropOperation                            = objc.RegisterName("setDropRow:dropOperation:")
+	_nSTableViewSelSelectAll                                          = objc.RegisterName("selectAll:")
+	_nSTableViewSelDeselectAll                                        = objc.RegisterName("deselectAll:")
+	_nSTableViewSelSelectColumnIndexesByExtendingSelection            = objc.RegisterName("selectColumnIndexes:byExtendingSelection:")
+	_nSTableViewSelSelectRowIndexesByExtendingSelection               = objc.RegisterName("selectRowIndexes:byExtendingSelection:")
+	_nSTableViewSelDeselectColumn                                     = objc.RegisterName("deselectColumn:")
+	_nSTableViewSelDeselectRow                                        = objc.RegisterName("deselectRow:")
+	_nSTableViewSelIsColumnSelected                                   = objc.RegisterName("isColumnSelected:")
+	_nSTableViewSelIsRowSelected                                      = objc.RegisterName("isRowSelected:")
+	_nSTableViewSelRectOfColumn                                       = objc.RegisterName("rectOfColumn:")
+	_nSTableViewSelRectOfRow                                          = objc.RegisterName("rectOfRow:")
+	_nSTableViewSelColumnIndexesInRect                                = objc.RegisterName("columnIndexesInRect:")
+	_nSTableViewSelRowsInRect                                         = objc.RegisterName("rowsInRect:")
+	_nSTableViewSelColumnAtPoint                                      = objc.RegisterName("columnAtPoint:")
+	_nSTableViewSelRowAtPoint                                         = objc.RegisterName("rowAtPoint:")
+	_nSTableViewSelFrameOfCellAtColumnRow                             = objc.RegisterName("frameOfCellAtColumn:row:")
+	_nSTableViewSelEditColumnRowWithEventSelect                       = objc.RegisterName("editColumn:row:withEvent:select:")
+	_nSTableViewSelDrawRowClipRect                                    = objc.RegisterName("drawRow:clipRect:")
+	_nSTableViewSelHighlightSelectionInClipRect                       = objc.RegisterName("highlightSelectionInClipRect:")
+	_nSTableViewSelDrawGridInClipRect                                 = objc.RegisterName("drawGridInClipRect:")
+	_nSTableViewSelDrawBackgroundInClipRect                           = objc.RegisterName("drawBackgroundInClipRect:")
+	_nSTableViewSelViewAtColumnRowMakeIfNecessary                     = objc.RegisterName("viewAtColumn:row:makeIfNecessary:")
+	_nSTableViewSelRowViewAtRowMakeIfNecessary                        = objc.RegisterName("rowViewAtRow:makeIfNecessary:")
+	_nSTableViewSelRowForView                                         = objc.RegisterName("rowForView:")
+	_nSTableViewSelColumnForView                                      = objc.RegisterName("columnForView:")
+	_nSTableViewSelMakeViewWithIdentifierOwner                        = objc.RegisterName("makeViewWithIdentifier:owner:")
+	_nSTableViewSelEnumerateAvailableRowViewsUsing                    = objc.RegisterName("enumerateAvailableRowViewsUsingBlock:")
+	_nSTableViewSelBeginUpdates                                       = objc.RegisterName("beginUpdates")
+	_nSTableViewSelEndUpdates                                         = objc.RegisterName("endUpdates")
+	_nSTableViewSelInsertRowsAtIndexesWithAnimation                   = objc.RegisterName("insertRowsAtIndexes:withAnimation:")
+	_nSTableViewSelRemoveRowsAtIndexesWithAnimation                   = objc.RegisterName("removeRowsAtIndexes:withAnimation:")
+	_nSTableViewSelMoveRowAtIndexToIndex                              = objc.RegisterName("moveRowAtIndex:toIndex:")
+	_nSTableViewSelHideRowsAtIndexesWithAnimation                     = objc.RegisterName("hideRowsAtIndexes:withAnimation:")
+	_nSTableViewSelUnhideRowsAtIndexesWithAnimation                   = objc.RegisterName("unhideRowsAtIndexes:withAnimation:")
+	_nSTableViewSelRegisterNibForIdentifier                           = objc.RegisterName("registerNib:forIdentifier:")
+	_nSTableViewSelDidAddRowViewForRow                                = objc.RegisterName("didAddRowView:forRow:")
+	_nSTableViewSelDidRemoveRowViewForRow                             = objc.RegisterName("didRemoveRowView:forRow:")
+	_nSTableViewSelDataSource                                         = objc.RegisterName("dataSource")
+	_nSTableViewSelSetDataSource                                      = objc.RegisterName("setDataSource:")
+	_nSTableViewSelDelegate                                           = objc.RegisterName("delegate")
+	_nSTableViewSelSetDelegate                                        = objc.RegisterName("setDelegate:")
+	_nSTableViewSelHeaderView                                         = objc.RegisterName("headerView")
+	_nSTableViewSelSetHeaderView                                      = objc.RegisterName("setHeaderView:")
+	_nSTableViewSelCornerView                                         = objc.RegisterName("cornerView")
+	_nSTableViewSelSetCornerView                                      = objc.RegisterName("setCornerView:")
+	_nSTableViewSelAllowsColumnReordering                             = objc.RegisterName("allowsColumnReordering")
+	_nSTableViewSelSetAllowsColumnReordering                          = objc.RegisterName("setAllowsColumnReordering:")
+	_nSTableViewSelAllowsColumnResizing                               = objc.RegisterName("allowsColumnResizing")
+	_nSTableViewSelSetAllowsColumnResizing                            = objc.RegisterName("setAllowsColumnResizing:")
+	_nSTableViewSelColumnAutoresizingStyle                            = objc.RegisterName("columnAutoresizingStyle")
+	_nSTableViewSelSetColumnAutoresizingStyle                         = objc.RegisterName("setColumnAutoresizingStyle:")
+	_nSTableViewSelGridStyleMask                                      = objc.RegisterName("gridStyleMask")
+	_nSTableViewSelSetGridStyleMask                                   = objc.RegisterName("setGridStyleMask:")
+	_nSTableViewSelIntercellSpacing                                   = objc.RegisterName("intercellSpacing")
+	_nSTableViewSelSetIntercellSpacing                                = objc.RegisterName("setIntercellSpacing:")
+	_nSTableViewSelUsesAlternatingRowBackgroundColors                 = objc.RegisterName("usesAlternatingRowBackgroundColors")
+	_nSTableViewSelSetUsesAlternatingRowBackgroundColors              = objc.RegisterName("setUsesAlternatingRowBackgroundColors:")
+	_nSTableViewSelBackgroundColor                                    = objc.RegisterName("backgroundColor")
+	_nSTableViewSelSetBackgroundColor                                 = objc.RegisterName("setBackgroundColor:")
+	_nSTableViewSelGridColor                                          = objc.RegisterName("gridColor")
+	_nSTableViewSelSetGridColor                                       = objc.RegisterName("setGridColor:")
+	_nSTableViewSelRowSizeStyle                                       = objc.RegisterName("rowSizeStyle")
+	_nSTableViewSelSetRowSizeStyle                                    = objc.RegisterName("setRowSizeStyle:")
+	_nSTableViewSelEffectiveRowSizeStyle                              = objc.RegisterName("effectiveRowSizeStyle")
+	_nSTableViewSelRowHeight                                          = objc.RegisterName("rowHeight")
+	_nSTableViewSelSetRowHeight                                       = objc.RegisterName("setRowHeight:")
+	_nSTableViewSelTableColumns                                       = objc.RegisterName("tableColumns")
+	_nSTableViewSelNumberOfColumns                                    = objc.RegisterName("numberOfColumns")
+	_nSTableViewSelNumberOfRows                                       = objc.RegisterName("numberOfRows")
+	_nSTableViewSelEditedColumn                                       = objc.RegisterName("editedColumn")
+	_nSTableViewSelEditedRow                                          = objc.RegisterName("editedRow")
+	_nSTableViewSelClickedColumn                                      = objc.RegisterName("clickedColumn")
+	_nSTableViewSelClickedRow                                         = objc.RegisterName("clickedRow")
+	_nSTableViewSelDoubleAction                                       = objc.RegisterName("doubleAction")
+	_nSTableViewSelSetDoubleAction                                    = objc.RegisterName("setDoubleAction:")
+	_nSTableViewSelSortDescriptors                                    = objc.RegisterName("sortDescriptors")
+	_nSTableViewSelSetSortDescriptors                                 = objc.RegisterName("setSortDescriptors:")
+	_nSTableViewSelHighlightedTableColumn                             = objc.RegisterName("highlightedTableColumn")
+	_nSTableViewSelSetHighlightedTableColumn                          = objc.RegisterName("setHighlightedTableColumn:")
+	_nSTableViewSelVerticalMotionCanBeginDrag                         = objc.RegisterName("verticalMotionCanBeginDrag")
+	_nSTableViewSelSetVerticalMotionCanBeginDrag                      = objc.RegisterName("setVerticalMotionCanBeginDrag:")
+	_nSTableViewSelAllowsMultipleSelection                            = objc.RegisterName("allowsMultipleSelection")
+	_nSTableViewSelSetAllowsMultipleSelection                         = objc.RegisterName("setAllowsMultipleSelection:")
+	_nSTableViewSelAllowsEmptySelection                               = objc.RegisterName("allowsEmptySelection")
+	_nSTableViewSelSetAllowsEmptySelection                            = objc.RegisterName("setAllowsEmptySelection:")
+	_nSTableViewSelAllowsColumnSelection                              = objc.RegisterName("allowsColumnSelection")
+	_nSTableViewSelSetAllowsColumnSelection                           = objc.RegisterName("setAllowsColumnSelection:")
+	_nSTableViewSelSelectedColumnIndexes                              = objc.RegisterName("selectedColumnIndexes")
+	_nSTableViewSelSelectedRowIndexes                                 = objc.RegisterName("selectedRowIndexes")
+	_nSTableViewSelSelectedColumn                                     = objc.RegisterName("selectedColumn")
+	_nSTableViewSelSelectedRow                                        = objc.RegisterName("selectedRow")
+	_nSTableViewSelNumberOfSelectedColumns                            = objc.RegisterName("numberOfSelectedColumns")
+	_nSTableViewSelNumberOfSelectedRows                               = objc.RegisterName("numberOfSelectedRows")
+	_nSTableViewSelAllowsTypeSelect                                   = objc.RegisterName("allowsTypeSelect")
+	_nSTableViewSelSetAllowsTypeSelect                                = objc.RegisterName("setAllowsTypeSelect:")
+	_nSTableViewSelStyle                                              = objc.RegisterName("style")
+	_nSTableViewSelSetStyle                                           = objc.RegisterName("setStyle:")
+	_nSTableViewSelEffectiveStyle                                     = objc.RegisterName("effectiveStyle")
+	_nSTableViewSelSelectionHighlightStyle                            = objc.RegisterName("selectionHighlightStyle")
+	_nSTableViewSelSetSelectionHighlightStyle                         = objc.RegisterName("setSelectionHighlightStyle:")
+	_nSTableViewSelDraggingDestinationFeedbackStyle                   = objc.RegisterName("draggingDestinationFeedbackStyle")
+	_nSTableViewSelSetDraggingDestinationFeedbackStyle                = objc.RegisterName("setDraggingDestinationFeedbackStyle:")
+	_nSTableViewSelAutosaveName                                       = objc.RegisterName("autosaveName")
+	_nSTableViewSelSetAutosaveName                                    = objc.RegisterName("setAutosaveName:")
+	_nSTableViewSelAutosaveTableColumns                               = objc.RegisterName("autosaveTableColumns")
+	_nSTableViewSelSetAutosaveTableColumns                            = objc.RegisterName("setAutosaveTableColumns:")
+	_nSTableViewSelFloatsGroupRows                                    = objc.RegisterName("floatsGroupRows")
+	_nSTableViewSelSetFloatsGroupRows                                 = objc.RegisterName("setFloatsGroupRows:")
+	_nSTableViewSelRowActionsVisible                                  = objc.RegisterName("rowActionsVisible")
+	_nSTableViewSelSetRowActionsVisible                               = objc.RegisterName("setRowActionsVisible:")
+	_nSTableViewSelHiddenRowIndexes                                   = objc.RegisterName("hiddenRowIndexes")
+	_nSTableViewSelRegisteredNibsByIdentifier                         = objc.RegisterName("registeredNibsByIdentifier")
+	_nSTableViewSelUsesStaticContents                                 = objc.RegisterName("usesStaticContents")
+	_nSTableViewSelSetUsesStaticContents                              = objc.RegisterName("setUsesStaticContents:")
+	_nSTableViewSelUsesAutomaticRowHeights                            = objc.RegisterName("usesAutomaticRowHeights")
+	_nSTableViewSelSetUsesAutomaticRowHeights                         = objc.RegisterName("setUsesAutomaticRowHeights:")
+	_nSTableViewSelSetDrawsGrid                                       = objc.RegisterName("setDrawsGrid:")
+	_nSTableViewSelDrawsGrid                                          = objc.RegisterName("drawsGrid")
+	_nSTableViewSelSelectColumnByExtendingSelection                   = objc.RegisterName("selectColumn:byExtendingSelection:")
+	_nSTableViewSelSelectRowByExtendingSelection                      = objc.RegisterName("selectRow:byExtendingSelection:")
+	_nSTableViewSelSelectedColumnEnumerator                           = objc.RegisterName("selectedColumnEnumerator")
+	_nSTableViewSelSelectedRowEnumerator                              = objc.RegisterName("selectedRowEnumerator")
+	_nSTableViewSelDragImageForRowsEventDragImageOffset               = objc.RegisterName("dragImageForRows:event:dragImageOffset:")
+	_nSTableViewSelSetAutoresizesAllColumnsToFit                      = objc.RegisterName("setAutoresizesAllColumnsToFit:")
+	_nSTableViewSelAutoresizesAllColumnsToFit                         = objc.RegisterName("autoresizesAllColumnsToFit")
+	_nSTableViewSelColumnsInRect                                      = objc.RegisterName("columnsInRect:")
+	_nSTableViewSelPreparedCellAtColumnRow                            = objc.RegisterName("preparedCellAtColumn:row:")
+	_nSTableViewSelTextShouldBeginEditing                             = objc.RegisterName("textShouldBeginEditing:")
+	_nSTableViewSelTextShouldEndEditing                               = objc.RegisterName("textShouldEndEditing:")
+	_nSTableViewSelTextDidBeginEditing                                = objc.RegisterName("textDidBeginEditing:")
+	_nSTableViewSelTextDidEndEditing                                  = objc.RegisterName("textDidEndEditing:")
+	_nSTableViewSelTextDidChange                                      = objc.RegisterName("textDidChange:")
+	_nSTableViewSelShouldFocusCellAtColumnRow                         = objc.RegisterName("shouldFocusCell:atColumn:row:")
+	_nSTableViewSelFocusedColumn                                      = objc.RegisterName("focusedColumn")
+	_nSTableViewSelSetFocusedColumn                                   = objc.RegisterName("setFocusedColumn:")
+	_nSTableViewSelPerformClickOnCellAtColumnRow                      = objc.RegisterName("performClickOnCellAtColumn:row:")
 )
 
 func NSTableViewFromID(id objc.ID) *NSTableView {
@@ -188,13 +188,17 @@ func NSTableViewFromID(id objc.ID) *NSTableView {
 
 func (o *NSTableView) InitWithFrame(frameRect corefoundation.CGRect) *NSTableView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelInitWithFrame, frameRect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTableViewFromID(_ret)
 }
 
 func (o *NSTableView) InitWithCoder(coder *foundation.NSCoder) *NSTableView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTableViewFromID(_ret)
 }
 
@@ -221,7 +225,9 @@ func (o *NSTableView) ColumnWithIdentifier(identifier *foundation.NSString) int 
 
 func (o *NSTableView) TableColumnWithIdentifier(identifier *foundation.NSString) *NSTableColumn {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelTableColumnWithIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTableColumnFromID(_ret)
 }
 
@@ -259,7 +265,9 @@ func (o *NSTableView) SetIndicatorImageInTableColumn(image *NSImage, tableColumn
 
 func (o *NSTableView) IndicatorImageInTableColumn(tableColumn *NSTableColumn) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelIndicatorImageInTableColumn, tableColumn.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -270,7 +278,9 @@ func (o *NSTableView) CanDragRowsWithIndexesAtPoint(rowIndexes *foundation.NSInd
 
 func (o *NSTableView) DragImageForRowsWithIndexesTableColumnsEventOffset(dragRows *foundation.NSIndexSet, tableColumns *foundation.NSArray[*NSTableColumn], dragEvent *NSEvent, dragImageOffset *corefoundation.CGPoint) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelDragImageForRowsWithIndexesTableColumnsEventOffset, dragRows.Ptr(), tableColumns.Ptr(), dragEvent.Ptr(), dragImageOffset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -328,7 +338,9 @@ func (o *NSTableView) RectOfRow(row int) corefoundation.CGRect {
 
 func (o *NSTableView) ColumnIndexesInRect(rect corefoundation.CGRect) *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelColumnIndexesInRect, rect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
@@ -374,13 +386,17 @@ func (o *NSTableView) DrawBackgroundInClipRect(clipRect corefoundation.CGRect) {
 
 func (o *NSTableView) ViewAtColumnRowMakeIfNecessary(column int, row int, makeIfNecessary bool) *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelViewAtColumnRowMakeIfNecessary, column, row, makeIfNecessary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
 func (o *NSTableView) RowViewAtRowMakeIfNecessary(row int, makeIfNecessary bool) *NSTableRowView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelRowViewAtRowMakeIfNecessary, row, makeIfNecessary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTableRowViewFromID(_ret)
 }
 
@@ -396,7 +412,9 @@ func (o *NSTableView) ColumnForView(view *NSView) int {
 
 func (o *NSTableView) MakeViewWithIdentifierOwner(identifier *foundation.NSString, owner objc.ID) *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelMakeViewWithIdentifierOwner, identifier.Ptr(), owner)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -474,7 +492,9 @@ func (o *NSTableView) SetDelegate(delegate NSTableViewDelegate) {
 
 func (o *NSTableView) HeaderView() *NSTableHeaderView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelHeaderView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTableHeaderViewFromID(_ret)
 }
 
@@ -484,7 +504,9 @@ func (o *NSTableView) SetHeaderView(headerView *NSTableHeaderView) {
 
 func (o *NSTableView) CornerView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelCornerView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -548,7 +570,9 @@ func (o *NSTableView) SetUsesAlternatingRowBackgroundColors(usesAlternatingRowBa
 
 func (o *NSTableView) BackgroundColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelBackgroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -558,7 +582,9 @@ func (o *NSTableView) SetBackgroundColor(backgroundColor *NSColor) {
 
 func (o *NSTableView) GridColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelGridColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -591,7 +617,9 @@ func (o *NSTableView) SetRowHeight(rowHeight float64) {
 
 func (o *NSTableView) TableColumns() *foundation.NSArray[*NSTableColumn] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelTableColumns)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSTableColumn](_ret)
 }
 
@@ -645,7 +673,9 @@ func (o *NSTableView) SetSortDescriptors(sortDescriptors *foundation.NSArray[*fo
 
 func (o *NSTableView) HighlightedTableColumn() *NSTableColumn {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelHighlightedTableColumn)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTableColumnFromID(_ret)
 }
 
@@ -691,13 +721,17 @@ func (o *NSTableView) SetAllowsColumnSelection(allowsColumnSelection bool) {
 
 func (o *NSTableView) SelectedColumnIndexes() *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelSelectedColumnIndexes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
 func (o *NSTableView) SelectedRowIndexes() *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelSelectedRowIndexes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
@@ -764,7 +798,9 @@ func (o *NSTableView) SetDraggingDestinationFeedbackStyle(draggingDestinationFee
 
 func (o *NSTableView) AutosaveName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelAutosaveName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -801,7 +837,9 @@ func (o *NSTableView) SetRowActionsVisible(rowActionsVisible bool) {
 
 func (o *NSTableView) HiddenRowIndexes() *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelHiddenRowIndexes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
@@ -864,7 +902,9 @@ func (o *NSTableView) SelectedRowEnumerator() *foundation.NSEnumerator[objc.ID] 
 // Deprecated: since macOS 10.4.
 func (o *NSTableView) DragImageForRowsEventDragImageOffset(dragRows *foundation.NSArray[objc.ID], dragEvent *NSEvent, dragImageOffset *corefoundation.CGPoint) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelDragImageForRowsEventDragImageOffset, dragRows, dragEvent.Ptr(), dragImageOffset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -888,7 +928,9 @@ func (o *NSTableView) ColumnsInRect(rect corefoundation.CGRect) foundation.NSRan
 // Deprecated: Use View Based TableView and -viewAtColumn:row:
 func (o *NSTableView) PreparedCellAtColumnRow(column int, row int) *NSCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelPreparedCellAtColumnRow, column, row)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCellFromID(_ret)
 }
 
@@ -940,4 +982,3 @@ func (o *NSTableView) SetFocusedColumn(focusedColumn int) {
 func (o *NSTableView) PerformClickOnCellAtColumnRow(column int, row int) {
 	o.Ptr().Send(_nSTableViewSelPerformClickOnCellAtColumnRow, column, row)
 }
-

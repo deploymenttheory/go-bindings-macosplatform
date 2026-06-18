@@ -137,4 +137,3 @@ type Intentable interface {
 }
 
 var _ Intentable = (*Intent)(nil)
-

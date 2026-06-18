@@ -17,11 +17,11 @@ type GKCylindersNoiseSource struct {
 }
 
 var (
-	_clsGKCylindersNoiseSource = _objcClass("GKCylindersNoiseSource")
+	_clsGKCylindersNoiseSource                            = _objcClass("GKCylindersNoiseSource")
 	_gKCylindersNoiseSourceSelCylindersNoiseWithFrequency = objc.RegisterName("cylindersNoiseWithFrequency:")
-	_gKCylindersNoiseSourceSelInitWithFrequency = objc.RegisterName("initWithFrequency:")
-	_gKCylindersNoiseSourceSelFrequency = objc.RegisterName("frequency")
-	_gKCylindersNoiseSourceSelSetFrequency = objc.RegisterName("setFrequency:")
+	_gKCylindersNoiseSourceSelInitWithFrequency           = objc.RegisterName("initWithFrequency:")
+	_gKCylindersNoiseSourceSelFrequency                   = objc.RegisterName("frequency")
+	_gKCylindersNoiseSourceSelSetFrequency                = objc.RegisterName("setFrequency:")
 )
 
 func GKCylindersNoiseSourceFromID(id objc.ID) *GKCylindersNoiseSource {
@@ -36,13 +36,17 @@ func GKCylindersNoiseSourceFromID(id objc.ID) *GKCylindersNoiseSource {
 
 func GKCylindersNoiseSourceCylindersNoiseWithFrequency(frequency float64) *GKCylindersNoiseSource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKCylindersNoiseSource), _gKCylindersNoiseSourceSelCylindersNoiseWithFrequency, frequency)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKCylindersNoiseSourceFromID(_ret)
 }
 
 func (o *GKCylindersNoiseSource) InitWithFrequency(frequency float64) *GKCylindersNoiseSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKCylindersNoiseSourceSelInitWithFrequency, frequency)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKCylindersNoiseSourceFromID(_ret)
 }
 
@@ -54,4 +58,3 @@ func (o *GKCylindersNoiseSource) Frequency() float64 {
 func (o *GKCylindersNoiseSource) SetFrequency(frequency float64) {
 	o.Ptr().Send(_gKCylindersNoiseSourceSelSetFrequency, frequency)
 }
-

@@ -18,50 +18,50 @@ type AVAudioEngine struct {
 }
 
 var (
-	_clsAVAudioEngine = _objcClass("AVAudioEngine")
-	_aVAudioEngineSelInit = objc.RegisterName("init")
-	_aVAudioEngineSelAttachNode = objc.RegisterName("attachNode:")
-	_aVAudioEngineSelDetachNode = objc.RegisterName("detachNode:")
-	_aVAudioEngineSelConnectToFromBusToBusFormat = objc.RegisterName("connect:to:fromBus:toBus:format:")
-	_aVAudioEngineSelConnectToFormat = objc.RegisterName("connect:to:format:")
-	_aVAudioEngineSelConnectToConnectionPointsFromBusFormat = objc.RegisterName("connect:toConnectionPoints:fromBus:format:")
-	_aVAudioEngineSelDisconnectNodeInputBus = objc.RegisterName("disconnectNodeInput:bus:")
-	_aVAudioEngineSelDisconnectNodeInput = objc.RegisterName("disconnectNodeInput:")
-	_aVAudioEngineSelDisconnectNodeOutputBus = objc.RegisterName("disconnectNodeOutput:bus:")
-	_aVAudioEngineSelDisconnectNodeOutput = objc.RegisterName("disconnectNodeOutput:")
-	_aVAudioEngineSelPrepare = objc.RegisterName("prepare")
-	_aVAudioEngineSelStartAndReturnError = objc.RegisterName("startAndReturnError:")
-	_aVAudioEngineSelPause = objc.RegisterName("pause")
-	_aVAudioEngineSelReset = objc.RegisterName("reset")
-	_aVAudioEngineSelStop = objc.RegisterName("stop")
-	_aVAudioEngineSelInputConnectionPointForNodeInputBus = objc.RegisterName("inputConnectionPointForNode:inputBus:")
-	_aVAudioEngineSelOutputConnectionPointsForNodeOutputBus = objc.RegisterName("outputConnectionPointsForNode:outputBus:")
+	_clsAVAudioEngine                                                      = _objcClass("AVAudioEngine")
+	_aVAudioEngineSelInit                                                  = objc.RegisterName("init")
+	_aVAudioEngineSelAttachNode                                            = objc.RegisterName("attachNode:")
+	_aVAudioEngineSelDetachNode                                            = objc.RegisterName("detachNode:")
+	_aVAudioEngineSelConnectToFromBusToBusFormat                           = objc.RegisterName("connect:to:fromBus:toBus:format:")
+	_aVAudioEngineSelConnectToFormat                                       = objc.RegisterName("connect:to:format:")
+	_aVAudioEngineSelConnectToConnectionPointsFromBusFormat                = objc.RegisterName("connect:toConnectionPoints:fromBus:format:")
+	_aVAudioEngineSelDisconnectNodeInputBus                                = objc.RegisterName("disconnectNodeInput:bus:")
+	_aVAudioEngineSelDisconnectNodeInput                                   = objc.RegisterName("disconnectNodeInput:")
+	_aVAudioEngineSelDisconnectNodeOutputBus                               = objc.RegisterName("disconnectNodeOutput:bus:")
+	_aVAudioEngineSelDisconnectNodeOutput                                  = objc.RegisterName("disconnectNodeOutput:")
+	_aVAudioEngineSelPrepare                                               = objc.RegisterName("prepare")
+	_aVAudioEngineSelStartAndReturnError                                   = objc.RegisterName("startAndReturnError:")
+	_aVAudioEngineSelPause                                                 = objc.RegisterName("pause")
+	_aVAudioEngineSelReset                                                 = objc.RegisterName("reset")
+	_aVAudioEngineSelStop                                                  = objc.RegisterName("stop")
+	_aVAudioEngineSelInputConnectionPointForNodeInputBus                   = objc.RegisterName("inputConnectionPointForNode:inputBus:")
+	_aVAudioEngineSelOutputConnectionPointsForNodeOutputBus                = objc.RegisterName("outputConnectionPointsForNode:outputBus:")
 	_aVAudioEngineSelEnableManualRenderingModeFormatMaximumFrameCountError = objc.RegisterName("enableManualRenderingMode:format:maximumFrameCount:error:")
-	_aVAudioEngineSelDisableManualRenderingMode = objc.RegisterName("disableManualRenderingMode")
-	_aVAudioEngineSelRenderOfflineToBufferError = objc.RegisterName("renderOffline:toBuffer:error:")
-	_aVAudioEngineSelConnectMIDIToFormatBlock = objc.RegisterName("connectMIDI:to:format:block:")
-	_aVAudioEngineSelConnectMIDIToFormatEventListBlock = objc.RegisterName("connectMIDI:to:format:eventListBlock:")
-	_aVAudioEngineSelConnectMIDIToNodesFormatBlock = objc.RegisterName("connectMIDI:toNodes:format:block:")
-	_aVAudioEngineSelConnectMIDIToNodesFormatEventListBlock = objc.RegisterName("connectMIDI:toNodes:format:eventListBlock:")
-	_aVAudioEngineSelDisconnectMIDIFrom = objc.RegisterName("disconnectMIDI:from:")
-	_aVAudioEngineSelDisconnectMIDIFromNodes = objc.RegisterName("disconnectMIDI:fromNodes:")
-	_aVAudioEngineSelDisconnectMIDIInput = objc.RegisterName("disconnectMIDIInput:")
-	_aVAudioEngineSelDisconnectMIDIOutput = objc.RegisterName("disconnectMIDIOutput:")
-	_aVAudioEngineSelMusicSequence = objc.RegisterName("musicSequence")
-	_aVAudioEngineSelSetMusicSequence = objc.RegisterName("setMusicSequence:")
-	_aVAudioEngineSelOutputNode = objc.RegisterName("outputNode")
-	_aVAudioEngineSelInputNode = objc.RegisterName("inputNode")
-	_aVAudioEngineSelMainMixerNode = objc.RegisterName("mainMixerNode")
-	_aVAudioEngineSelIsRunning = objc.RegisterName("isRunning")
-	_aVAudioEngineSelIsAutoShutdownEnabled = objc.RegisterName("isAutoShutdownEnabled")
-	_aVAudioEngineSelSetAutoShutdownEnabled = objc.RegisterName("setAutoShutdownEnabled:")
-	_aVAudioEngineSelAttachedNodes = objc.RegisterName("attachedNodes")
-	_aVAudioEngineSelManualRenderingBlock = objc.RegisterName("manualRenderingBlock")
-	_aVAudioEngineSelIsInManualRenderingMode = objc.RegisterName("isInManualRenderingMode")
-	_aVAudioEngineSelManualRenderingMode = objc.RegisterName("manualRenderingMode")
-	_aVAudioEngineSelManualRenderingFormat = objc.RegisterName("manualRenderingFormat")
-	_aVAudioEngineSelManualRenderingMaximumFrameCount = objc.RegisterName("manualRenderingMaximumFrameCount")
-	_aVAudioEngineSelManualRenderingSampleTime = objc.RegisterName("manualRenderingSampleTime")
+	_aVAudioEngineSelDisableManualRenderingMode                            = objc.RegisterName("disableManualRenderingMode")
+	_aVAudioEngineSelRenderOfflineToBufferError                            = objc.RegisterName("renderOffline:toBuffer:error:")
+	_aVAudioEngineSelConnectMIDIToFormatBlock                              = objc.RegisterName("connectMIDI:to:format:block:")
+	_aVAudioEngineSelConnectMIDIToFormatEventListBlock                     = objc.RegisterName("connectMIDI:to:format:eventListBlock:")
+	_aVAudioEngineSelConnectMIDIToNodesFormatBlock                         = objc.RegisterName("connectMIDI:toNodes:format:block:")
+	_aVAudioEngineSelConnectMIDIToNodesFormatEventListBlock                = objc.RegisterName("connectMIDI:toNodes:format:eventListBlock:")
+	_aVAudioEngineSelDisconnectMIDIFrom                                    = objc.RegisterName("disconnectMIDI:from:")
+	_aVAudioEngineSelDisconnectMIDIFromNodes                               = objc.RegisterName("disconnectMIDI:fromNodes:")
+	_aVAudioEngineSelDisconnectMIDIInput                                   = objc.RegisterName("disconnectMIDIInput:")
+	_aVAudioEngineSelDisconnectMIDIOutput                                  = objc.RegisterName("disconnectMIDIOutput:")
+	_aVAudioEngineSelMusicSequence                                         = objc.RegisterName("musicSequence")
+	_aVAudioEngineSelSetMusicSequence                                      = objc.RegisterName("setMusicSequence:")
+	_aVAudioEngineSelOutputNode                                            = objc.RegisterName("outputNode")
+	_aVAudioEngineSelInputNode                                             = objc.RegisterName("inputNode")
+	_aVAudioEngineSelMainMixerNode                                         = objc.RegisterName("mainMixerNode")
+	_aVAudioEngineSelIsRunning                                             = objc.RegisterName("isRunning")
+	_aVAudioEngineSelIsAutoShutdownEnabled                                 = objc.RegisterName("isAutoShutdownEnabled")
+	_aVAudioEngineSelSetAutoShutdownEnabled                                = objc.RegisterName("setAutoShutdownEnabled:")
+	_aVAudioEngineSelAttachedNodes                                         = objc.RegisterName("attachedNodes")
+	_aVAudioEngineSelManualRenderingBlock                                  = objc.RegisterName("manualRenderingBlock")
+	_aVAudioEngineSelIsInManualRenderingMode                               = objc.RegisterName("isInManualRenderingMode")
+	_aVAudioEngineSelManualRenderingMode                                   = objc.RegisterName("manualRenderingMode")
+	_aVAudioEngineSelManualRenderingFormat                                 = objc.RegisterName("manualRenderingFormat")
+	_aVAudioEngineSelManualRenderingMaximumFrameCount                      = objc.RegisterName("manualRenderingMaximumFrameCount")
+	_aVAudioEngineSelManualRenderingSampleTime                             = objc.RegisterName("manualRenderingSampleTime")
 )
 
 func AVAudioEngineFromID(id objc.ID) *AVAudioEngine {
@@ -77,7 +77,9 @@ func AVAudioEngineFromID(id objc.ID) *AVAudioEngine {
 // @method init @abstract Initialize a new engine. On creation, the engine is by default connected to an audio device and automatically renders in realtime. It can be configured to operate in manual rendering mode through `enableManualRenderingMode:format:maximumFrameCount:error:`.
 func (o *AVAudioEngine) Init() *AVAudioEngine {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioEngineSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioEngineFromID(_ret)
 }
 
@@ -159,14 +161,18 @@ func (o *AVAudioEngine) Stop() {
 // @method inputConnectionPointForNode:inputBus: @abstract Get connection information on a node's input bus. @param node The node whose input connection is being queried. @param bus The node's input bus on which the connection is being queried. @return An AVAudioConnectionPoint object with connection information on the node's specified input bus. Connections are always one-to-one or one-to-many, never many-to-one. Returns nil if there is no connection on the node's specified input bus.
 func (o *AVAudioEngine) InputConnectionPointForNodeInputBus(node *AVAudioNode, bus uint) *AVAudioConnectionPoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioEngineSelInputConnectionPointForNodeInputBus, node.Ptr(), bus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioConnectionPointFromID(_ret)
 }
 
 // @method outputConnectionPointsForNode:outputBus: @abstract Get connection information on a node's output bus. @param node The node whose output connections are being queried. @param bus The node's output bus on which connections are being queried. @return An array of AVAudioConnectionPoint objects with connection information on the node's specified output bus. Connections are always one-to-one or one-to-many, never many-to-one. Returns an empty array if there are no connections on the node's specified output bus.
 func (o *AVAudioEngine) OutputConnectionPointsForNodeOutputBus(node *AVAudioNode, bus uint) *foundation.NSArray[*AVAudioConnectionPoint] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioEngineSelOutputConnectionPointsForNodeOutputBus, node.Ptr(), bus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVAudioConnectionPoint](_ret)
 }
 
@@ -278,21 +284,27 @@ func (o *AVAudioEngine) SetMusicSequence(musicSequence unsafe.Pointer) {
 // @property outputNode @abstract The engine's singleton output node. Audio output is performed via an output node. The engine creates a singleton on demand when this property is first accessed. Connect another node to the input of the output node, or obtain a mixer that is connected there by default, using the "mainMixerNode" property. When the engine is rendering to/from an audio device, the AVAudioSesssion category and/or availability of hardware determine whether an app can perform output. Check the output format of output node (i.e. hardware format) for non-zero sample rate and channel count to see if output is enabled. Trying to perform output through the output node when it is not enabled or available will cause the engine to throw an error (when possible) or an exception. In manual rendering mode, the output format of the output node will determine the render format of the engine. It can be changed through `enableManualRenderingMode:format:maximumFrameCount:error:`.
 func (o *AVAudioEngine) OutputNode() *AVAudioOutputNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioEngineSelOutputNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioOutputNodeFromID(_ret)
 }
 
 // @property inputNode @abstract The engine's singleton input node. Audio input is performed via an input node. The engine creates a singleton on demand when this property is first accessed. To receive input, connect another node from the output of the input node, or create a recording tap on it. When the engine is rendering to/from an audio device, the AVAudioSesssion category and/or availability of hardware determine whether an app can perform input. Check for the input node's input format (i.e. hardware format) for non-zero sample rate and channel count to see if input is enabled. Trying to perform input through the input node when it is not enabled or available will cause the engine to throw an error (when possible) or an exception. Note that if the engine has at any point previously had its inputNode enabled and permission to record was granted, then any time the engine is running, the mic-in-use indicator will appear. For applications which may need to dynamically switch between output-only and input-output modes, it may be advantageous to use two engine instances. In manual rendering mode, the input node can be used to synchronously supply data to the engine while it is rendering (see `AVAudioInputNode(setManualRenderingInputPCMFormat:inputBlock:)`.
 func (o *AVAudioEngine) InputNode() *AVAudioInputNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioEngineSelInputNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioInputNodeFromID(_ret)
 }
 
 // @property mainMixerNode @abstract The engine's optional singleton main mixer node. The engine will construct a singleton main mixer and connect it to the outputNode on demand, when this property is first accessed. You can then connect additional nodes to the mixer. If the client has never explicitly set the connection format between the mainMixerNode and the outputNode, the engine will always set/update the format to track the format of the outputNode on (re)start, even after an AVAudioEngineConfigurationChangeNotification. Otherwise, it's the client's responsibility to set/update this connection format after an AVAudioEngineConfigurationChangeNotification. By default, the mixer's output format (sample rate and channel count) will track the format of the output node. You may however make the connection explicitly with a different format.
 func (o *AVAudioEngine) MainMixerNode() *AVAudioMixerNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioEngineSelMainMixerNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioMixerNodeFromID(_ret)
 }
 
@@ -315,7 +327,9 @@ func (o *AVAudioEngine) SetAutoShutdownEnabled(autoShutdownEnabled bool) {
 // @property attachedNodes @abstract Set of all nodes attached to the engine.
 func (o *AVAudioEngine) AttachedNodes() *foundation.NSSet[*AVAudioNode] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioEngineSelAttachedNodes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*AVAudioNode](_ret)
 }
 
@@ -340,7 +354,9 @@ func (o *AVAudioEngine) ManualRenderingMode() AVAudioEngineManualRenderingMode {
 // @property manualRenderingFormat @abstract The render format of the engine in manual rendering mode. Querying this property when the engine is not in manual rendering mode will return an invalid format, with zero sample rate and channel count.
 func (o *AVAudioEngine) ManualRenderingFormat() *AVAudioFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioEngineSelManualRenderingFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioFormatFromID(_ret)
 }
 
@@ -355,4 +371,3 @@ func (o *AVAudioEngine) ManualRenderingSampleTime() int64 {
 	_ret := objc.Send[int64](o.Ptr(), _aVAudioEngineSelManualRenderingSampleTime)
 	return _ret
 }
-

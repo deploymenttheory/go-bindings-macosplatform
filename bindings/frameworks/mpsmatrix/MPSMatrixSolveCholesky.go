@@ -17,8 +17,8 @@ type MPSMatrixSolveCholesky struct {
 }
 
 var (
-	_clsMPSMatrixSolveCholesky = _objcClass("MPSMatrixSolveCholesky")
-	_mPSMatrixSolveCholeskySelInitWithDeviceUpperOrderNumberOfRightHandSides = objc.RegisterName("initWithDevice:upper:order:numberOfRightHandSides:")
+	_clsMPSMatrixSolveCholesky                                                                   = _objcClass("MPSMatrixSolveCholesky")
+	_mPSMatrixSolveCholeskySelInitWithDeviceUpperOrderNumberOfRightHandSides                     = objc.RegisterName("initWithDevice:upper:order:numberOfRightHandSides:")
 	_mPSMatrixSolveCholeskySelEncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix = objc.RegisterName("encodeToCommandBuffer:sourceMatrix:rightHandSideMatrix:solutionMatrix:")
 )
 
@@ -35,7 +35,9 @@ func MPSMatrixSolveCholeskyFromID(id objc.ID) *MPSMatrixSolveCholesky {
 // @abstract   Initialize an MPSMatrixSolveCholesky object on a device @param      device          The device on which the kernel will execute. @param      upper           A boolean value which indicates if the source matrix stores the lower or upper triangular factors. @param      order           The order of the source matrix and the number of rows in the solution and right hand side matrices. @param      numberOfRightHandSides  The number of columns in the solution and right hand side matrices. @return     A valid MPSMatrixSolveCholesky object or nil, if failure.
 func (o *MPSMatrixSolveCholesky) InitWithDeviceUpperOrderNumberOfRightHandSides(device metal.MTLDevice, upper bool, order uint, numberOfRightHandSides uint) *MPSMatrixSolveCholesky {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixSolveCholeskySelInitWithDeviceUpperOrderNumberOfRightHandSides, device, upper, order, numberOfRightHandSides)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixSolveCholeskyFromID(_ret)
 }
 
@@ -43,4 +45,3 @@ func (o *MPSMatrixSolveCholesky) InitWithDeviceUpperOrderNumberOfRightHandSides(
 func (o *MPSMatrixSolveCholesky) EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, rightHandSideMatrix *mpscore.MPSMatrix, solutionMatrix *mpscore.MPSMatrix) {
 	o.Ptr().Send(_mPSMatrixSolveCholeskySelEncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix, commandBuffer, sourceMatrix.Ptr(), rightHandSideMatrix.Ptr(), solutionMatrix.Ptr())
 }
-

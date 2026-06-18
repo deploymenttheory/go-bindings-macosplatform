@@ -25,4 +25,3 @@ func AVMetadataHumanFullBodyObjectFromID(id objc.ID) *AVMetadataHumanFullBodyObj
 	purego.Track(o)
 	return o
 }
-

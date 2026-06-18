@@ -15,17 +15,17 @@ type NSMeasurementFormatter struct {
 }
 
 var (
-	_clsNSMeasurementFormatter = _objcClass("NSMeasurementFormatter")
+	_clsNSMeasurementFormatter                      = _objcClass("NSMeasurementFormatter")
 	_nSMeasurementFormatterSelStringFromMeasurement = objc.RegisterName("stringFromMeasurement:")
-	_nSMeasurementFormatterSelStringFromUnit = objc.RegisterName("stringFromUnit:")
-	_nSMeasurementFormatterSelUnitOptions = objc.RegisterName("unitOptions")
-	_nSMeasurementFormatterSelSetUnitOptions = objc.RegisterName("setUnitOptions:")
-	_nSMeasurementFormatterSelUnitStyle = objc.RegisterName("unitStyle")
-	_nSMeasurementFormatterSelSetUnitStyle = objc.RegisterName("setUnitStyle:")
-	_nSMeasurementFormatterSelLocale = objc.RegisterName("locale")
-	_nSMeasurementFormatterSelSetLocale = objc.RegisterName("setLocale:")
-	_nSMeasurementFormatterSelNumberFormatter = objc.RegisterName("numberFormatter")
-	_nSMeasurementFormatterSelSetNumberFormatter = objc.RegisterName("setNumberFormatter:")
+	_nSMeasurementFormatterSelStringFromUnit        = objc.RegisterName("stringFromUnit:")
+	_nSMeasurementFormatterSelUnitOptions           = objc.RegisterName("unitOptions")
+	_nSMeasurementFormatterSelSetUnitOptions        = objc.RegisterName("setUnitOptions:")
+	_nSMeasurementFormatterSelUnitStyle             = objc.RegisterName("unitStyle")
+	_nSMeasurementFormatterSelSetUnitStyle          = objc.RegisterName("setUnitStyle:")
+	_nSMeasurementFormatterSelLocale                = objc.RegisterName("locale")
+	_nSMeasurementFormatterSelSetLocale             = objc.RegisterName("setLocale:")
+	_nSMeasurementFormatterSelNumberFormatter       = objc.RegisterName("numberFormatter")
+	_nSMeasurementFormatterSelSetNumberFormatter    = objc.RegisterName("setNumberFormatter:")
 )
 
 func NSMeasurementFormatterFromID(id objc.ID) *NSMeasurementFormatter {
@@ -40,13 +40,17 @@ func NSMeasurementFormatterFromID(id objc.ID) *NSMeasurementFormatter {
 
 func (o *NSMeasurementFormatter) StringFromMeasurement(measurement *NSMeasurement[objc.ID]) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMeasurementFormatterSelStringFromMeasurement, measurement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSMeasurementFormatter) StringFromUnit(unit *NSUnit) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMeasurementFormatterSelStringFromUnit, unit.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -70,7 +74,9 @@ func (o *NSMeasurementFormatter) SetUnitStyle(unitStyle NSFormattingUnitStyle) {
 
 func (o *NSMeasurementFormatter) Locale() *NSLocale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMeasurementFormatterSelLocale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLocaleFromID(_ret)
 }
 
@@ -80,11 +86,12 @@ func (o *NSMeasurementFormatter) SetLocale(locale *NSLocale) {
 
 func (o *NSMeasurementFormatter) NumberFormatter() *NSNumberFormatter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMeasurementFormatterSelNumberFormatter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFormatterFromID(_ret)
 }
 
 func (o *NSMeasurementFormatter) SetNumberFormatter(numberFormatter *NSNumberFormatter) {
 	o.Ptr().Send(_nSMeasurementFormatterSelSetNumberFormatter, numberFormatter.Ptr())
 }
-

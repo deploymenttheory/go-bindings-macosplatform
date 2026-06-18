@@ -49,7 +49,9 @@ func (x *NNGradientFilterNode) WithLabel(label string) *NNGradientFilterNode {
 	return x
 }
 
-func (x *NNGradientFilterNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+func (x *NNGradientFilterNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNFilterNode
+}
 
 // NNGradientFilterNodeable is the interface implemented by [NNGradientFilterNode], for mocking and DI.
 type NNGradientFilterNodeable interface {
@@ -59,4 +61,3 @@ type NNGradientFilterNodeable interface {
 }
 
 var _ NNGradientFilterNodeable = (*NNGradientFilterNode)(nil)
-

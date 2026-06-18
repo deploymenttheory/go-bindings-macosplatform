@@ -93,4 +93,3 @@ type PasswordCredentialIdentityable interface {
 }
 
 var _ PasswordCredentialIdentityable = (*PasswordCredentialIdentity)(nil)
-

@@ -16,24 +16,24 @@ type MTRClusterPM10ConcentrationMeasurement struct {
 }
 
 var (
-	_clsMTRClusterPM10ConcentrationMeasurement = _objcClass("MTRClusterPM10ConcentrationMeasurement")
-	_mTRClusterPM10ConcentrationMeasurementSelReadAttributeMeasuredValueWithParams = objc.RegisterName("readAttributeMeasuredValueWithParams:")
-	_mTRClusterPM10ConcentrationMeasurementSelReadAttributeMinMeasuredValueWithParams = objc.RegisterName("readAttributeMinMeasuredValueWithParams:")
-	_mTRClusterPM10ConcentrationMeasurementSelReadAttributeMaxMeasuredValueWithParams = objc.RegisterName("readAttributeMaxMeasuredValueWithParams:")
-	_mTRClusterPM10ConcentrationMeasurementSelReadAttributePeakMeasuredValueWithParams = objc.RegisterName("readAttributePeakMeasuredValueWithParams:")
-	_mTRClusterPM10ConcentrationMeasurementSelReadAttributePeakMeasuredValueWindowWithParams = objc.RegisterName("readAttributePeakMeasuredValueWindowWithParams:")
-	_mTRClusterPM10ConcentrationMeasurementSelReadAttributeAverageMeasuredValueWithParams = objc.RegisterName("readAttributeAverageMeasuredValueWithParams:")
+	_clsMTRClusterPM10ConcentrationMeasurement                                                  = _objcClass("MTRClusterPM10ConcentrationMeasurement")
+	_mTRClusterPM10ConcentrationMeasurementSelReadAttributeMeasuredValueWithParams              = objc.RegisterName("readAttributeMeasuredValueWithParams:")
+	_mTRClusterPM10ConcentrationMeasurementSelReadAttributeMinMeasuredValueWithParams           = objc.RegisterName("readAttributeMinMeasuredValueWithParams:")
+	_mTRClusterPM10ConcentrationMeasurementSelReadAttributeMaxMeasuredValueWithParams           = objc.RegisterName("readAttributeMaxMeasuredValueWithParams:")
+	_mTRClusterPM10ConcentrationMeasurementSelReadAttributePeakMeasuredValueWithParams          = objc.RegisterName("readAttributePeakMeasuredValueWithParams:")
+	_mTRClusterPM10ConcentrationMeasurementSelReadAttributePeakMeasuredValueWindowWithParams    = objc.RegisterName("readAttributePeakMeasuredValueWindowWithParams:")
+	_mTRClusterPM10ConcentrationMeasurementSelReadAttributeAverageMeasuredValueWithParams       = objc.RegisterName("readAttributeAverageMeasuredValueWithParams:")
 	_mTRClusterPM10ConcentrationMeasurementSelReadAttributeAverageMeasuredValueWindowWithParams = objc.RegisterName("readAttributeAverageMeasuredValueWindowWithParams:")
-	_mTRClusterPM10ConcentrationMeasurementSelReadAttributeUncertaintyWithParams = objc.RegisterName("readAttributeUncertaintyWithParams:")
-	_mTRClusterPM10ConcentrationMeasurementSelReadAttributeMeasurementUnitWithParams = objc.RegisterName("readAttributeMeasurementUnitWithParams:")
-	_mTRClusterPM10ConcentrationMeasurementSelReadAttributeMeasurementMediumWithParams = objc.RegisterName("readAttributeMeasurementMediumWithParams:")
-	_mTRClusterPM10ConcentrationMeasurementSelReadAttributeLevelValueWithParams = objc.RegisterName("readAttributeLevelValueWithParams:")
-	_mTRClusterPM10ConcentrationMeasurementSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterPM10ConcentrationMeasurementSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterPM10ConcentrationMeasurementSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterPM10ConcentrationMeasurementSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterPM10ConcentrationMeasurementSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterPM10ConcentrationMeasurementSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterPM10ConcentrationMeasurementSelReadAttributeUncertaintyWithParams                = objc.RegisterName("readAttributeUncertaintyWithParams:")
+	_mTRClusterPM10ConcentrationMeasurementSelReadAttributeMeasurementUnitWithParams            = objc.RegisterName("readAttributeMeasurementUnitWithParams:")
+	_mTRClusterPM10ConcentrationMeasurementSelReadAttributeMeasurementMediumWithParams          = objc.RegisterName("readAttributeMeasurementMediumWithParams:")
+	_mTRClusterPM10ConcentrationMeasurementSelReadAttributeLevelValueWithParams                 = objc.RegisterName("readAttributeLevelValueWithParams:")
+	_mTRClusterPM10ConcentrationMeasurementSelReadAttributeGeneratedCommandListWithParams       = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterPM10ConcentrationMeasurementSelReadAttributeAcceptedCommandListWithParams        = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterPM10ConcentrationMeasurementSelReadAttributeAttributeListWithParams              = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterPM10ConcentrationMeasurementSelReadAttributeFeatureMapWithParams                 = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterPM10ConcentrationMeasurementSelReadAttributeClusterRevisionWithParams            = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterPM10ConcentrationMeasurementSelInitWithDeviceEndpointIDQueue                     = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterPM10ConcentrationMeasurementFromID(id objc.ID) *MTRClusterPM10ConcentrationMeasurement {
@@ -129,7 +129,8 @@ func (o *MTRClusterPM10ConcentrationMeasurement) ReadAttributeClusterRevisionWit
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func (o *MTRClusterPM10ConcentrationMeasurement) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterPM10ConcentrationMeasurement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterPM10ConcentrationMeasurementSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterPM10ConcentrationMeasurementFromID(_ret)
 }
-

@@ -16,10 +16,10 @@ type SWHighlightChangeEvent struct {
 }
 
 var (
-	_clsSWHighlightChangeEvent = _objcClass("SWHighlightChangeEvent")
+	_clsSWHighlightChangeEvent                         = _objcClass("SWHighlightChangeEvent")
 	_sWHighlightChangeEventSelInitWithHighlightTrigger = objc.RegisterName("initWithHighlight:trigger:")
-	_sWHighlightChangeEventSelChangeEventTrigger = objc.RegisterName("changeEventTrigger")
-	_sWHighlightChangeEventSelHighlightURL = objc.RegisterName("highlightURL")
+	_sWHighlightChangeEventSelChangeEventTrigger       = objc.RegisterName("changeEventTrigger")
+	_sWHighlightChangeEventSelHighlightURL             = objc.RegisterName("highlightURL")
 )
 
 func SWHighlightChangeEventFromID(id objc.ID) *SWHighlightChangeEvent {
@@ -35,7 +35,9 @@ func SWHighlightChangeEventFromID(id objc.ID) *SWHighlightChangeEvent {
 // Initializes a highlight change event object to represent changes to a highlight. @param highlight The object on which the event occurred. @param trigger The trigger change event for the highlight.
 func (o *SWHighlightChangeEvent) InitWithHighlightTrigger(highlight *SWHighlight, trigger SWHighlightChangeEventTrigger) *SWHighlightChangeEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWHighlightChangeEventSelInitWithHighlightTrigger, highlight.Ptr(), trigger)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SWHighlightChangeEventFromID(_ret)
 }
 
@@ -46,7 +48,8 @@ func (o *SWHighlightChangeEvent) ChangeEventTrigger() SWHighlightChangeEventTrig
 
 func (o *SWHighlightChangeEvent) HighlightURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWHighlightChangeEventSelHighlightURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
-

@@ -119,4 +119,3 @@ type MTRFabricInfoable interface {
 }
 
 var _ MTRFabricInfoable = (*MTRFabricInfo)(nil)
-

@@ -16,9 +16,9 @@ type HKSource struct {
 }
 
 var (
-	_clsHKSource = _objcClass("HKSource")
-	_hKSourceSelDefaultSource = objc.RegisterName("defaultSource")
-	_hKSourceSelName = objc.RegisterName("name")
+	_clsHKSource                 = _objcClass("HKSource")
+	_hKSourceSelDefaultSource    = objc.RegisterName("defaultSource")
+	_hKSourceSelName             = objc.RegisterName("name")
 	_hKSourceSelBundleIdentifier = objc.RegisterName("bundleIdentifier")
 )
 
@@ -35,21 +35,26 @@ func HKSourceFromID(id objc.ID) *HKSource {
 // @method    defaultSource @abstract  Returns the source representing the calling application.
 func HKSourceDefaultSource() *HKSource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKSource), _hKSourceSelDefaultSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKSourceFromID(_ret)
 }
 
 // @property      name @abstract      The name of the source represented by the receiver.  If the source is an app, then the name is the localized name of the app.
 func (o *HKSource) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKSourceSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property  bundleIdentifier @abstract  The bundle identifier of the source represented by the receiver.
 func (o *HKSource) BundleIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKSourceSelBundleIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

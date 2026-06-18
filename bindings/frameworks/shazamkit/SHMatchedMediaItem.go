@@ -15,11 +15,11 @@ type SHMatchedMediaItem struct {
 }
 
 var (
-	_clsSHMatchedMediaItem = _objcClass("SHMatchedMediaItem")
-	_sHMatchedMediaItemSelFrequencySkew = objc.RegisterName("frequencySkew")
-	_sHMatchedMediaItemSelMatchOffset = objc.RegisterName("matchOffset")
+	_clsSHMatchedMediaItem                            = _objcClass("SHMatchedMediaItem")
+	_sHMatchedMediaItemSelFrequencySkew               = objc.RegisterName("frequencySkew")
+	_sHMatchedMediaItemSelMatchOffset                 = objc.RegisterName("matchOffset")
 	_sHMatchedMediaItemSelPredictedCurrentMatchOffset = objc.RegisterName("predictedCurrentMatchOffset")
-	_sHMatchedMediaItemSelConfidence = objc.RegisterName("confidence")
+	_sHMatchedMediaItemSelConfidence                  = objc.RegisterName("confidence")
 )
 
 func SHMatchedMediaItemFromID(id objc.ID) *SHMatchedMediaItem {
@@ -55,4 +55,3 @@ func (o *SHMatchedMediaItem) Confidence() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _sHMatchedMediaItemSelConfidence)
 	return _ret
 }
-

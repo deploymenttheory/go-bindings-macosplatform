@@ -16,7 +16,9 @@ type MTRLevelControlClusterStopWithOnOffParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRLevelControlClusterStopWithOnOffParams].
-func (x *MTRLevelControlClusterStopWithOnOffParams) Unwrap() *raw.MTRLevelControlClusterStopWithOnOffParams { return x.inner }
+func (x *MTRLevelControlClusterStopWithOnOffParams) Unwrap() *raw.MTRLevelControlClusterStopWithOnOffParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -118,4 +120,3 @@ type MTRLevelControlClusterStopWithOnOffParamsable interface {
 }
 
 var _ MTRLevelControlClusterStopWithOnOffParamsable = (*MTRLevelControlClusterStopWithOnOffParams)(nil)
-

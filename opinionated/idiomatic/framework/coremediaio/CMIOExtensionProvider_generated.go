@@ -98,4 +98,3 @@ type ExtensionProviderable interface {
 }
 
 var _ ExtensionProviderable = (*ExtensionProvider)(nil)
-

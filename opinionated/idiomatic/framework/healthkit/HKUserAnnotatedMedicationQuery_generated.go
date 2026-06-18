@@ -46,4 +46,3 @@ type UserAnnotatedMedicationQueryable interface {
 }
 
 var _ UserAnnotatedMedicationQueryable = (*UserAnnotatedMedicationQuery)(nil)
-

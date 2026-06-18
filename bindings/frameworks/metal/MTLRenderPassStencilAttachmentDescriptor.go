@@ -15,10 +15,10 @@ type MTLRenderPassStencilAttachmentDescriptor struct {
 }
 
 var (
-	_clsMTLRenderPassStencilAttachmentDescriptor = _objcClass("MTLRenderPassStencilAttachmentDescriptor")
-	_mTLRenderPassStencilAttachmentDescriptorSelClearStencil = objc.RegisterName("clearStencil")
-	_mTLRenderPassStencilAttachmentDescriptorSelSetClearStencil = objc.RegisterName("setClearStencil:")
-	_mTLRenderPassStencilAttachmentDescriptorSelStencilResolveFilter = objc.RegisterName("stencilResolveFilter")
+	_clsMTLRenderPassStencilAttachmentDescriptor                        = _objcClass("MTLRenderPassStencilAttachmentDescriptor")
+	_mTLRenderPassStencilAttachmentDescriptorSelClearStencil            = objc.RegisterName("clearStencil")
+	_mTLRenderPassStencilAttachmentDescriptorSelSetClearStencil         = objc.RegisterName("setClearStencil:")
+	_mTLRenderPassStencilAttachmentDescriptorSelStencilResolveFilter    = objc.RegisterName("stencilResolveFilter")
 	_mTLRenderPassStencilAttachmentDescriptorSelSetStencilResolveFilter = objc.RegisterName("setStencilResolveFilter:")
 )
 
@@ -51,4 +51,3 @@ func (o *MTLRenderPassStencilAttachmentDescriptor) StencilResolveFilter() MTLMul
 func (o *MTLRenderPassStencilAttachmentDescriptor) SetStencilResolveFilter(stencilResolveFilter MTLMultisampleStencilResolveFilter) {
 	o.Ptr().Send(_mTLRenderPassStencilAttachmentDescriptorSelSetStencilResolveFilter, stencilResolveFilter)
 }
-

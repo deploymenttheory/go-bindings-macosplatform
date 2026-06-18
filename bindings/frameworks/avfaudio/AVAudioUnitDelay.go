@@ -15,15 +15,15 @@ type AVAudioUnitDelay struct {
 }
 
 var (
-	_clsAVAudioUnitDelay = _objcClass("AVAudioUnitDelay")
-	_aVAudioUnitDelaySelDelayTime = objc.RegisterName("delayTime")
-	_aVAudioUnitDelaySelSetDelayTime = objc.RegisterName("setDelayTime:")
-	_aVAudioUnitDelaySelFeedback = objc.RegisterName("feedback")
-	_aVAudioUnitDelaySelSetFeedback = objc.RegisterName("setFeedback:")
-	_aVAudioUnitDelaySelLowPassCutoff = objc.RegisterName("lowPassCutoff")
+	_clsAVAudioUnitDelay                 = _objcClass("AVAudioUnitDelay")
+	_aVAudioUnitDelaySelDelayTime        = objc.RegisterName("delayTime")
+	_aVAudioUnitDelaySelSetDelayTime     = objc.RegisterName("setDelayTime:")
+	_aVAudioUnitDelaySelFeedback         = objc.RegisterName("feedback")
+	_aVAudioUnitDelaySelSetFeedback      = objc.RegisterName("setFeedback:")
+	_aVAudioUnitDelaySelLowPassCutoff    = objc.RegisterName("lowPassCutoff")
 	_aVAudioUnitDelaySelSetLowPassCutoff = objc.RegisterName("setLowPassCutoff:")
-	_aVAudioUnitDelaySelWetDryMix = objc.RegisterName("wetDryMix")
-	_aVAudioUnitDelaySelSetWetDryMix = objc.RegisterName("setWetDryMix:")
+	_aVAudioUnitDelaySelWetDryMix        = objc.RegisterName("wetDryMix")
+	_aVAudioUnitDelaySelSetWetDryMix     = objc.RegisterName("setWetDryMix:")
 )
 
 func AVAudioUnitDelayFromID(id objc.ID) *AVAudioUnitDelay {
@@ -75,4 +75,3 @@ func (o *AVAudioUnitDelay) WetDryMix() float32 {
 func (o *AVAudioUnitDelay) SetWetDryMix(wetDryMix float32) {
 	o.Ptr().Send(_aVAudioUnitDelaySelSetWetDryMix, wetDryMix)
 }
-

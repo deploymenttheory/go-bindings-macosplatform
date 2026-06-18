@@ -204,4 +204,3 @@ func TrackForRootFolder(rootFolder *raw.DRFolder) *Track {
 	}
 	return &Track{inner: _r}
 }
-

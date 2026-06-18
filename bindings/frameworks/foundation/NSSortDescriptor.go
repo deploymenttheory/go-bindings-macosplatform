@@ -15,21 +15,21 @@ type NSSortDescriptor struct {
 }
 
 var (
-	_clsNSSortDescriptor = _objcClass("NSSortDescriptor")
-	_nSSortDescriptorSelSortDescriptorWithKeyAscending = objc.RegisterName("sortDescriptorWithKey:ascending:")
-	_nSSortDescriptorSelSortDescriptorWithKeyAscendingSelector = objc.RegisterName("sortDescriptorWithKey:ascending:selector:")
-	_nSSortDescriptorSelInitWithKeyAscending = objc.RegisterName("initWithKey:ascending:")
-	_nSSortDescriptorSelInitWithKeyAscendingSelector = objc.RegisterName("initWithKey:ascending:selector:")
-	_nSSortDescriptorSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSSortDescriptorSelAllowEvaluation = objc.RegisterName("allowEvaluation")
+	_clsNSSortDescriptor                                         = _objcClass("NSSortDescriptor")
+	_nSSortDescriptorSelSortDescriptorWithKeyAscending           = objc.RegisterName("sortDescriptorWithKey:ascending:")
+	_nSSortDescriptorSelSortDescriptorWithKeyAscendingSelector   = objc.RegisterName("sortDescriptorWithKey:ascending:selector:")
+	_nSSortDescriptorSelInitWithKeyAscending                     = objc.RegisterName("initWithKey:ascending:")
+	_nSSortDescriptorSelInitWithKeyAscendingSelector             = objc.RegisterName("initWithKey:ascending:selector:")
+	_nSSortDescriptorSelInitWithCoder                            = objc.RegisterName("initWithCoder:")
+	_nSSortDescriptorSelAllowEvaluation                          = objc.RegisterName("allowEvaluation")
 	_nSSortDescriptorSelSortDescriptorWithKeyAscendingComparator = objc.RegisterName("sortDescriptorWithKey:ascending:comparator:")
-	_nSSortDescriptorSelInitWithKeyAscendingComparator = objc.RegisterName("initWithKey:ascending:comparator:")
-	_nSSortDescriptorSelCompareObjectToObject = objc.RegisterName("compareObject:toObject:")
-	_nSSortDescriptorSelKey = objc.RegisterName("key")
-	_nSSortDescriptorSelAscending = objc.RegisterName("ascending")
-	_nSSortDescriptorSelSelector = objc.RegisterName("selector")
-	_nSSortDescriptorSelComparator = objc.RegisterName("comparator")
-	_nSSortDescriptorSelReversedSortDescriptor = objc.RegisterName("reversedSortDescriptor")
+	_nSSortDescriptorSelInitWithKeyAscendingComparator           = objc.RegisterName("initWithKey:ascending:comparator:")
+	_nSSortDescriptorSelCompareObjectToObject                    = objc.RegisterName("compareObject:toObject:")
+	_nSSortDescriptorSelKey                                      = objc.RegisterName("key")
+	_nSSortDescriptorSelAscending                                = objc.RegisterName("ascending")
+	_nSSortDescriptorSelSelector                                 = objc.RegisterName("selector")
+	_nSSortDescriptorSelComparator                               = objc.RegisterName("comparator")
+	_nSSortDescriptorSelReversedSortDescriptor                   = objc.RegisterName("reversedSortDescriptor")
 )
 
 func NSSortDescriptorFromID(id objc.ID) *NSSortDescriptor {
@@ -44,31 +44,41 @@ func NSSortDescriptorFromID(id objc.ID) *NSSortDescriptor {
 
 func NSSortDescriptorSortDescriptorWithKeyAscending(key *NSString, ascending bool) *NSSortDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSortDescriptor), _nSSortDescriptorSelSortDescriptorWithKeyAscending, key.Ptr(), ascending)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSortDescriptorFromID(_ret)
 }
 
 func NSSortDescriptorSortDescriptorWithKeyAscendingSelector(key *NSString, ascending bool, selector objc.SEL) *NSSortDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSortDescriptor), _nSSortDescriptorSelSortDescriptorWithKeyAscendingSelector, key.Ptr(), ascending, selector)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSortDescriptorFromID(_ret)
 }
 
 func (o *NSSortDescriptor) InitWithKeyAscending(key *NSString, ascending bool) *NSSortDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSortDescriptorSelInitWithKeyAscending, key.Ptr(), ascending)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSortDescriptorFromID(_ret)
 }
 
 func (o *NSSortDescriptor) InitWithKeyAscendingSelector(key *NSString, ascending bool, selector objc.SEL) *NSSortDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSortDescriptorSelInitWithKeyAscendingSelector, key.Ptr(), ascending, selector)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSortDescriptorFromID(_ret)
 }
 
 func (o *NSSortDescriptor) InitWithCoder(coder *NSCoder) *NSSortDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSortDescriptorSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSortDescriptorFromID(_ret)
 }
 
@@ -85,7 +95,9 @@ func NSSortDescriptorSortDescriptorWithKeyAscendingComparator(key *NSString, asc
 		defer __block_cmptr.Release()
 	}
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSortDescriptor), _nSSortDescriptorSelSortDescriptorWithKeyAscendingComparator, key.Ptr(), ascending, __block_cmptr)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSortDescriptorFromID(_ret)
 }
 
@@ -98,7 +110,9 @@ func (o *NSSortDescriptor) InitWithKeyAscendingComparator(key *NSString, ascendi
 		defer __block_cmptr.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSortDescriptorSelInitWithKeyAscendingComparator, key.Ptr(), ascending, __block_cmptr)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSortDescriptorFromID(_ret)
 }
 
@@ -109,7 +123,9 @@ func (o *NSSortDescriptor) CompareObjectToObject(object1 objc.ID, object2 objc.I
 
 func (o *NSSortDescriptor) Key() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSortDescriptorSelKey)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -132,4 +148,3 @@ func (o *NSSortDescriptor) ReversedSortDescriptor() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSortDescriptorSelReversedSortDescriptor)
 	return _ret
 }
-

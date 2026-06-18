@@ -117,4 +117,3 @@ type DistanceFormatterable interface {
 }
 
 var _ DistanceFormatterable = (*DistanceFormatter)(nil)
-

@@ -408,4 +408,3 @@ func KMIDIPropertyUserPatchNameFile() uintptr {
 	ptr, _ := purego.Dlsym(_coremidiLib, "kMIDIPropertyUserPatchNameFile")
 	return ptr
 }
-

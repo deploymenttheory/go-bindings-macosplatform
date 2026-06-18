@@ -68,4 +68,3 @@ type TrackingAreaable interface {
 }
 
 var _ TrackingAreaable = (*TrackingArea)(nil)
-

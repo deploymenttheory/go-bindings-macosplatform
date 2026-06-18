@@ -16,10 +16,10 @@ type SWCollaborationCoordinator struct {
 }
 
 var (
-	_clsSWCollaborationCoordinator = _objcClass("SWCollaborationCoordinator")
+	_clsSWCollaborationCoordinator                  = _objcClass("SWCollaborationCoordinator")
 	_sWCollaborationCoordinatorSelSharedCoordinator = objc.RegisterName("sharedCoordinator")
-	_sWCollaborationCoordinatorSelActionHandler = objc.RegisterName("actionHandler")
-	_sWCollaborationCoordinatorSelSetActionHandler = objc.RegisterName("setActionHandler:")
+	_sWCollaborationCoordinatorSelActionHandler     = objc.RegisterName("actionHandler")
+	_sWCollaborationCoordinatorSelSetActionHandler  = objc.RegisterName("setActionHandler:")
 )
 
 func SWCollaborationCoordinatorFromID(id objc.ID) *SWCollaborationCoordinator {
@@ -34,7 +34,9 @@ func SWCollaborationCoordinatorFromID(id objc.ID) *SWCollaborationCoordinator {
 
 func SWCollaborationCoordinatorSharedCoordinator() *SWCollaborationCoordinator {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSWCollaborationCoordinator), _sWCollaborationCoordinatorSelSharedCoordinator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SWCollaborationCoordinatorFromID(_ret)
 }
 
@@ -46,4 +48,3 @@ func (o *SWCollaborationCoordinator) ActionHandler() SWCollaborationActionHandle
 func (o *SWCollaborationCoordinator) SetActionHandler(actionHandler SWCollaborationActionHandler) {
 	o.Ptr().Send(_sWCollaborationCoordinatorSelSetActionHandler, actionHandler)
 }
-

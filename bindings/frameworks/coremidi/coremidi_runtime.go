@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_coremidiLib uintptr
-	_loadOnce sync.Once
+	_coremidiLib   uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -49,7 +49,9 @@ func _loadLibrary() {
 		return
 	}
 	_register("MIDI1UPChannelPressure", func() { purego.RegisterLibFunc(&_fnMIDI1UPChannelPressure, _coremidiLib, "MIDI1UPChannelPressure") })
-	_register("MIDI1UPChannelVoiceMessage", func() { purego.RegisterLibFunc(&_fnMIDI1UPChannelVoiceMessage, _coremidiLib, "MIDI1UPChannelVoiceMessage") })
+	_register("MIDI1UPChannelVoiceMessage", func() {
+		purego.RegisterLibFunc(&_fnMIDI1UPChannelVoiceMessage, _coremidiLib, "MIDI1UPChannelVoiceMessage")
+	})
 	_register("MIDI1UPControlChange", func() { purego.RegisterLibFunc(&_fnMIDI1UPControlChange, _coremidiLib, "MIDI1UPControlChange") })
 	_register("MIDI1UPNoteOff", func() { purego.RegisterLibFunc(&_fnMIDI1UPNoteOff, _coremidiLib, "MIDI1UPNoteOff") })
 	_register("MIDI1UPNoteOn", func() { purego.RegisterLibFunc(&_fnMIDI1UPNoteOn, _coremidiLib, "MIDI1UPNoteOn") })
@@ -65,15 +67,31 @@ func _loadLibrary() {
 	_register("MIDI2ChannelVoiceMessage", func() { purego.RegisterLibFunc(&_fnMIDI2ChannelVoiceMessage, _coremidiLib, "MIDI2ChannelVoiceMessage") })
 	_register("MIDI2ControlChange", func() { purego.RegisterLibFunc(&_fnMIDI2ControlChange, _coremidiLib, "MIDI2ControlChange") })
 	_register("MIDI2EndOfClipMessage", func() { purego.RegisterLibFunc(&_fnMIDI2EndOfClipMessage, _coremidiLib, "MIDI2EndOfClipMessage") })
-	_register("MIDI2EndpointDeviceIdentityNotificationMessage", func() { purego.RegisterLibFunc(&_fnMIDI2EndpointDeviceIdentityNotificationMessage, _coremidiLib, "MIDI2EndpointDeviceIdentityNotificationMessage") })
-	_register("MIDI2EndpointDiscoveryMessage", func() { purego.RegisterLibFunc(&_fnMIDI2EndpointDiscoveryMessage, _coremidiLib, "MIDI2EndpointDiscoveryMessage") })
-	_register("MIDI2EndpointInfoNotificationMessage", func() { purego.RegisterLibFunc(&_fnMIDI2EndpointInfoNotificationMessage, _coremidiLib, "MIDI2EndpointInfoNotificationMessage") })
-	_register("MIDI2EndpointNameNotificationMessage", func() { purego.RegisterLibFunc(&_fnMIDI2EndpointNameNotificationMessage, _coremidiLib, "MIDI2EndpointNameNotificationMessage") })
-	_register("MIDI2EndpointProductInstanceIDNotificationMessage", func() { purego.RegisterLibFunc(&_fnMIDI2EndpointProductInstanceIDNotificationMessage, _coremidiLib, "MIDI2EndpointProductInstanceIDNotificationMessage") })
+	_register("MIDI2EndpointDeviceIdentityNotificationMessage", func() {
+		purego.RegisterLibFunc(&_fnMIDI2EndpointDeviceIdentityNotificationMessage, _coremidiLib, "MIDI2EndpointDeviceIdentityNotificationMessage")
+	})
+	_register("MIDI2EndpointDiscoveryMessage", func() {
+		purego.RegisterLibFunc(&_fnMIDI2EndpointDiscoveryMessage, _coremidiLib, "MIDI2EndpointDiscoveryMessage")
+	})
+	_register("MIDI2EndpointInfoNotificationMessage", func() {
+		purego.RegisterLibFunc(&_fnMIDI2EndpointInfoNotificationMessage, _coremidiLib, "MIDI2EndpointInfoNotificationMessage")
+	})
+	_register("MIDI2EndpointNameNotificationMessage", func() {
+		purego.RegisterLibFunc(&_fnMIDI2EndpointNameNotificationMessage, _coremidiLib, "MIDI2EndpointNameNotificationMessage")
+	})
+	_register("MIDI2EndpointProductInstanceIDNotificationMessage", func() {
+		purego.RegisterLibFunc(&_fnMIDI2EndpointProductInstanceIDNotificationMessage, _coremidiLib, "MIDI2EndpointProductInstanceIDNotificationMessage")
+	})
 	_register("MIDI2FlexDataMessage", func() { purego.RegisterLibFunc(&_fnMIDI2FlexDataMessage, _coremidiLib, "MIDI2FlexDataMessage") })
-	_register("MIDI2FunctionBlockDiscoveryMessage", func() { purego.RegisterLibFunc(&_fnMIDI2FunctionBlockDiscoveryMessage, _coremidiLib, "MIDI2FunctionBlockDiscoveryMessage") })
-	_register("MIDI2FunctionBlockInfoNotificationMessage", func() { purego.RegisterLibFunc(&_fnMIDI2FunctionBlockInfoNotificationMessage, _coremidiLib, "MIDI2FunctionBlockInfoNotificationMessage") })
-	_register("MIDI2FunctionBlockNameNotificationMessage", func() { purego.RegisterLibFunc(&_fnMIDI2FunctionBlockNameNotificationMessage, _coremidiLib, "MIDI2FunctionBlockNameNotificationMessage") })
+	_register("MIDI2FunctionBlockDiscoveryMessage", func() {
+		purego.RegisterLibFunc(&_fnMIDI2FunctionBlockDiscoveryMessage, _coremidiLib, "MIDI2FunctionBlockDiscoveryMessage")
+	})
+	_register("MIDI2FunctionBlockInfoNotificationMessage", func() {
+		purego.RegisterLibFunc(&_fnMIDI2FunctionBlockInfoNotificationMessage, _coremidiLib, "MIDI2FunctionBlockInfoNotificationMessage")
+	})
+	_register("MIDI2FunctionBlockNameNotificationMessage", func() {
+		purego.RegisterLibFunc(&_fnMIDI2FunctionBlockNameNotificationMessage, _coremidiLib, "MIDI2FunctionBlockNameNotificationMessage")
+	})
 	_register("MIDI2NoteOff", func() { purego.RegisterLibFunc(&_fnMIDI2NoteOff, _coremidiLib, "MIDI2NoteOff") })
 	_register("MIDI2NoteOn", func() { purego.RegisterLibFunc(&_fnMIDI2NoteOn, _coremidiLib, "MIDI2NoteOn") })
 	_register("MIDI2PerNoteManagment", func() { purego.RegisterLibFunc(&_fnMIDI2PerNoteManagment, _coremidiLib, "MIDI2PerNoteManagment") })
@@ -83,49 +101,87 @@ func _loadLibrary() {
 	_register("MIDI2ProgramChange", func() { purego.RegisterLibFunc(&_fnMIDI2ProgramChange, _coremidiLib, "MIDI2ProgramChange") })
 	_register("MIDI2RegisteredControl", func() { purego.RegisterLibFunc(&_fnMIDI2RegisteredControl, _coremidiLib, "MIDI2RegisteredControl") })
 	_register("MIDI2RegisteredPNC", func() { purego.RegisterLibFunc(&_fnMIDI2RegisteredPNC, _coremidiLib, "MIDI2RegisteredPNC") })
-	_register("MIDI2RelAssignableControl", func() { purego.RegisterLibFunc(&_fnMIDI2RelAssignableControl, _coremidiLib, "MIDI2RelAssignableControl") })
-	_register("MIDI2RelRegisteredControl", func() { purego.RegisterLibFunc(&_fnMIDI2RelRegisteredControl, _coremidiLib, "MIDI2RelRegisteredControl") })
+	_register("MIDI2RelAssignableControl", func() {
+		purego.RegisterLibFunc(&_fnMIDI2RelAssignableControl, _coremidiLib, "MIDI2RelAssignableControl")
+	})
+	_register("MIDI2RelRegisteredControl", func() {
+		purego.RegisterLibFunc(&_fnMIDI2RelRegisteredControl, _coremidiLib, "MIDI2RelRegisteredControl")
+	})
 	_register("MIDI2StartOfClipMessage", func() { purego.RegisterLibFunc(&_fnMIDI2StartOfClipMessage, _coremidiLib, "MIDI2StartOfClipMessage") })
-	_register("MIDI2StreamConfigurationNotificationMessage", func() { purego.RegisterLibFunc(&_fnMIDI2StreamConfigurationNotificationMessage, _coremidiLib, "MIDI2StreamConfigurationNotificationMessage") })
-	_register("MIDI2StreamConfigurationRequestMessage", func() { purego.RegisterLibFunc(&_fnMIDI2StreamConfigurationRequestMessage, _coremidiLib, "MIDI2StreamConfigurationRequestMessage") })
+	_register("MIDI2StreamConfigurationNotificationMessage", func() {
+		purego.RegisterLibFunc(&_fnMIDI2StreamConfigurationNotificationMessage, _coremidiLib, "MIDI2StreamConfigurationNotificationMessage")
+	})
+	_register("MIDI2StreamConfigurationRequestMessage", func() {
+		purego.RegisterLibFunc(&_fnMIDI2StreamConfigurationRequestMessage, _coremidiLib, "MIDI2StreamConfigurationRequestMessage")
+	})
 	_register("MIDI2StreamMessage", func() { purego.RegisterLibFunc(&_fnMIDI2StreamMessage, _coremidiLib, "MIDI2StreamMessage") })
-	_register("MIDI2StreamMessageFromData", func() { purego.RegisterLibFunc(&_fnMIDI2StreamMessageFromData, _coremidiLib, "MIDI2StreamMessageFromData") })
-	_register("MIDIBluetoothDriverActivateAllConnections", func() { purego.RegisterLibFunc(&_fnMIDIBluetoothDriverActivateAllConnections, _coremidiLib, "MIDIBluetoothDriverActivateAllConnections") })
-	_register("MIDIBluetoothDriverDisconnect", func() { purego.RegisterLibFunc(&_fnMIDIBluetoothDriverDisconnect, _coremidiLib, "MIDIBluetoothDriverDisconnect") })
+	_register("MIDI2StreamMessageFromData", func() {
+		purego.RegisterLibFunc(&_fnMIDI2StreamMessageFromData, _coremidiLib, "MIDI2StreamMessageFromData")
+	})
+	_register("MIDIBluetoothDriverActivateAllConnections", func() {
+		purego.RegisterLibFunc(&_fnMIDIBluetoothDriverActivateAllConnections, _coremidiLib, "MIDIBluetoothDriverActivateAllConnections")
+	})
+	_register("MIDIBluetoothDriverDisconnect", func() {
+		purego.RegisterLibFunc(&_fnMIDIBluetoothDriverDisconnect, _coremidiLib, "MIDIBluetoothDriverDisconnect")
+	})
 	_register("MIDIClientCreate", func() { purego.RegisterLibFunc(&_fnMIDIClientCreate, _coremidiLib, "MIDIClientCreate") })
-	_register("MIDIClientCreateWithBlock", func() { purego.RegisterLibFunc(&_fnMIDIClientCreateWithBlock, _coremidiLib, "MIDIClientCreateWithBlock") })
+	_register("MIDIClientCreateWithBlock", func() {
+		purego.RegisterLibFunc(&_fnMIDIClientCreateWithBlock, _coremidiLib, "MIDIClientCreateWithBlock")
+	})
 	_register("MIDIClientDispose", func() { purego.RegisterLibFunc(&_fnMIDIClientDispose, _coremidiLib, "MIDIClientDispose") })
-	_register("MIDIDeltaClockstampTicksPerQuarterNoteMessage", func() { purego.RegisterLibFunc(&_fnMIDIDeltaClockstampTicksPerQuarterNoteMessage, _coremidiLib, "MIDIDeltaClockstampTicksPerQuarterNoteMessage") })
+	_register("MIDIDeltaClockstampTicksPerQuarterNoteMessage", func() {
+		purego.RegisterLibFunc(&_fnMIDIDeltaClockstampTicksPerQuarterNoteMessage, _coremidiLib, "MIDIDeltaClockstampTicksPerQuarterNoteMessage")
+	})
 	_register("MIDIDestinationCreate", func() { purego.RegisterLibFunc(&_fnMIDIDestinationCreate, _coremidiLib, "MIDIDestinationCreate") })
-	_register("MIDIDestinationCreateWithBlock", func() { purego.RegisterLibFunc(&_fnMIDIDestinationCreateWithBlock, _coremidiLib, "MIDIDestinationCreateWithBlock") })
-	_register("MIDIDestinationCreateWithProtocol", func() { purego.RegisterLibFunc(&_fnMIDIDestinationCreateWithProtocol, _coremidiLib, "MIDIDestinationCreateWithProtocol") })
+	_register("MIDIDestinationCreateWithBlock", func() {
+		purego.RegisterLibFunc(&_fnMIDIDestinationCreateWithBlock, _coremidiLib, "MIDIDestinationCreateWithBlock")
+	})
+	_register("MIDIDestinationCreateWithProtocol", func() {
+		purego.RegisterLibFunc(&_fnMIDIDestinationCreateWithProtocol, _coremidiLib, "MIDIDestinationCreateWithProtocol")
+	})
 	_register("MIDIDeviceAddEntity", func() { purego.RegisterLibFunc(&_fnMIDIDeviceAddEntity, _coremidiLib, "MIDIDeviceAddEntity") })
 	_register("MIDIDeviceCreate", func() { purego.RegisterLibFunc(&_fnMIDIDeviceCreate, _coremidiLib, "MIDIDeviceCreate") })
 	_register("MIDIDeviceDispose", func() { purego.RegisterLibFunc(&_fnMIDIDeviceDispose, _coremidiLib, "MIDIDeviceDispose") })
 	_register("MIDIDeviceGetEntity", func() { purego.RegisterLibFunc(&_fnMIDIDeviceGetEntity, _coremidiLib, "MIDIDeviceGetEntity") })
-	_register("MIDIDeviceGetNumberOfEntities", func() { purego.RegisterLibFunc(&_fnMIDIDeviceGetNumberOfEntities, _coremidiLib, "MIDIDeviceGetNumberOfEntities") })
+	_register("MIDIDeviceGetNumberOfEntities", func() {
+		purego.RegisterLibFunc(&_fnMIDIDeviceGetNumberOfEntities, _coremidiLib, "MIDIDeviceGetNumberOfEntities")
+	})
 	_register("MIDIDeviceListAddDevice", func() { purego.RegisterLibFunc(&_fnMIDIDeviceListAddDevice, _coremidiLib, "MIDIDeviceListAddDevice") })
 	_register("MIDIDeviceListDispose", func() { purego.RegisterLibFunc(&_fnMIDIDeviceListDispose, _coremidiLib, "MIDIDeviceListDispose") })
 	_register("MIDIDeviceListGetDevice", func() { purego.RegisterLibFunc(&_fnMIDIDeviceListGetDevice, _coremidiLib, "MIDIDeviceListGetDevice") })
-	_register("MIDIDeviceListGetNumberOfDevices", func() { purego.RegisterLibFunc(&_fnMIDIDeviceListGetNumberOfDevices, _coremidiLib, "MIDIDeviceListGetNumberOfDevices") })
+	_register("MIDIDeviceListGetNumberOfDevices", func() {
+		purego.RegisterLibFunc(&_fnMIDIDeviceListGetNumberOfDevices, _coremidiLib, "MIDIDeviceListGetNumberOfDevices")
+	})
 	_register("MIDIDeviceNewEntity", func() { purego.RegisterLibFunc(&_fnMIDIDeviceNewEntity, _coremidiLib, "MIDIDeviceNewEntity") })
 	_register("MIDIDeviceRemoveEntity", func() { purego.RegisterLibFunc(&_fnMIDIDeviceRemoveEntity, _coremidiLib, "MIDIDeviceRemoveEntity") })
-	_register("MIDIDriverEnableMonitoring", func() { purego.RegisterLibFunc(&_fnMIDIDriverEnableMonitoring, _coremidiLib, "MIDIDriverEnableMonitoring") })
+	_register("MIDIDriverEnableMonitoring", func() {
+		purego.RegisterLibFunc(&_fnMIDIDriverEnableMonitoring, _coremidiLib, "MIDIDriverEnableMonitoring")
+	})
 	_register("MIDIEndpointDispose", func() { purego.RegisterLibFunc(&_fnMIDIEndpointDispose, _coremidiLib, "MIDIEndpointDispose") })
 	_register("MIDIEndpointGetEntity", func() { purego.RegisterLibFunc(&_fnMIDIEndpointGetEntity, _coremidiLib, "MIDIEndpointGetEntity") })
 	_register("MIDIEndpointGetRefCons", func() { purego.RegisterLibFunc(&_fnMIDIEndpointGetRefCons, _coremidiLib, "MIDIEndpointGetRefCons") })
 	_register("MIDIEndpointSetRefCons", func() { purego.RegisterLibFunc(&_fnMIDIEndpointSetRefCons, _coremidiLib, "MIDIEndpointSetRefCons") })
-	_register("MIDIEntityAddOrRemoveEndpoints", func() { purego.RegisterLibFunc(&_fnMIDIEntityAddOrRemoveEndpoints, _coremidiLib, "MIDIEntityAddOrRemoveEndpoints") })
+	_register("MIDIEntityAddOrRemoveEndpoints", func() {
+		purego.RegisterLibFunc(&_fnMIDIEntityAddOrRemoveEndpoints, _coremidiLib, "MIDIEntityAddOrRemoveEndpoints")
+	})
 	_register("MIDIEntityGetDestination", func() { purego.RegisterLibFunc(&_fnMIDIEntityGetDestination, _coremidiLib, "MIDIEntityGetDestination") })
 	_register("MIDIEntityGetDevice", func() { purego.RegisterLibFunc(&_fnMIDIEntityGetDevice, _coremidiLib, "MIDIEntityGetDevice") })
-	_register("MIDIEntityGetNumberOfDestinations", func() { purego.RegisterLibFunc(&_fnMIDIEntityGetNumberOfDestinations, _coremidiLib, "MIDIEntityGetNumberOfDestinations") })
-	_register("MIDIEntityGetNumberOfSources", func() { purego.RegisterLibFunc(&_fnMIDIEntityGetNumberOfSources, _coremidiLib, "MIDIEntityGetNumberOfSources") })
+	_register("MIDIEntityGetNumberOfDestinations", func() {
+		purego.RegisterLibFunc(&_fnMIDIEntityGetNumberOfDestinations, _coremidiLib, "MIDIEntityGetNumberOfDestinations")
+	})
+	_register("MIDIEntityGetNumberOfSources", func() {
+		purego.RegisterLibFunc(&_fnMIDIEntityGetNumberOfSources, _coremidiLib, "MIDIEntityGetNumberOfSources")
+	})
 	_register("MIDIEntityGetSource", func() { purego.RegisterLibFunc(&_fnMIDIEntityGetSource, _coremidiLib, "MIDIEntityGetSource") })
 	_register("MIDIEventListAdd", func() { purego.RegisterLibFunc(&_fnMIDIEventListAdd, _coremidiLib, "MIDIEventListAdd") })
-	_register("MIDIEventListForEachEvent", func() { purego.RegisterLibFunc(&_fnMIDIEventListForEachEvent, _coremidiLib, "MIDIEventListForEachEvent") })
+	_register("MIDIEventListForEachEvent", func() {
+		purego.RegisterLibFunc(&_fnMIDIEventListForEachEvent, _coremidiLib, "MIDIEventListForEachEvent")
+	})
 	_register("MIDIEventListInit", func() { purego.RegisterLibFunc(&_fnMIDIEventListInit, _coremidiLib, "MIDIEventListInit") })
 	_register("MIDIEventPacketNext", func() { purego.RegisterLibFunc(&_fnMIDIEventPacketNext, _coremidiLib, "MIDIEventPacketNext") })
-	_register("MIDIEventPacketSysexBytesForGroup", func() { purego.RegisterLibFunc(&_fnMIDIEventPacketSysexBytesForGroup, _coremidiLib, "MIDIEventPacketSysexBytesForGroup") })
+	_register("MIDIEventPacketSysexBytesForGroup", func() {
+		purego.RegisterLibFunc(&_fnMIDIEventPacketSysexBytesForGroup, _coremidiLib, "MIDIEventPacketSysexBytesForGroup")
+	})
 	_register("MIDIExternalDeviceCreate", func() { purego.RegisterLibFunc(&_fnMIDIExternalDeviceCreate, _coremidiLib, "MIDIExternalDeviceCreate") })
 	_register("MIDIFlushOutput", func() { purego.RegisterLibFunc(&_fnMIDIFlushOutput, _coremidiLib, "MIDIFlushOutput") })
 	_register("MIDIGetDestination", func() { purego.RegisterLibFunc(&_fnMIDIGetDestination, _coremidiLib, "MIDIGetDestination") })
@@ -133,31 +189,59 @@ func _loadLibrary() {
 	_register("MIDIGetDriverDeviceList", func() { purego.RegisterLibFunc(&_fnMIDIGetDriverDeviceList, _coremidiLib, "MIDIGetDriverDeviceList") })
 	_register("MIDIGetDriverIORunLoop", func() { purego.RegisterLibFunc(&_fnMIDIGetDriverIORunLoop, _coremidiLib, "MIDIGetDriverIORunLoop") })
 	_register("MIDIGetExternalDevice", func() { purego.RegisterLibFunc(&_fnMIDIGetExternalDevice, _coremidiLib, "MIDIGetExternalDevice") })
-	_register("MIDIGetNumberOfDestinations", func() { purego.RegisterLibFunc(&_fnMIDIGetNumberOfDestinations, _coremidiLib, "MIDIGetNumberOfDestinations") })
+	_register("MIDIGetNumberOfDestinations", func() {
+		purego.RegisterLibFunc(&_fnMIDIGetNumberOfDestinations, _coremidiLib, "MIDIGetNumberOfDestinations")
+	})
 	_register("MIDIGetNumberOfDevices", func() { purego.RegisterLibFunc(&_fnMIDIGetNumberOfDevices, _coremidiLib, "MIDIGetNumberOfDevices") })
-	_register("MIDIGetNumberOfExternalDevices", func() { purego.RegisterLibFunc(&_fnMIDIGetNumberOfExternalDevices, _coremidiLib, "MIDIGetNumberOfExternalDevices") })
+	_register("MIDIGetNumberOfExternalDevices", func() {
+		purego.RegisterLibFunc(&_fnMIDIGetNumberOfExternalDevices, _coremidiLib, "MIDIGetNumberOfExternalDevices")
+	})
 	_register("MIDIGetNumberOfSources", func() { purego.RegisterLibFunc(&_fnMIDIGetNumberOfSources, _coremidiLib, "MIDIGetNumberOfSources") })
 	_register("MIDIGetSerialPortDrivers", func() { purego.RegisterLibFunc(&_fnMIDIGetSerialPortDrivers, _coremidiLib, "MIDIGetSerialPortDrivers") })
 	_register("MIDIGetSerialPortOwner", func() { purego.RegisterLibFunc(&_fnMIDIGetSerialPortOwner, _coremidiLib, "MIDIGetSerialPortOwner") })
 	_register("MIDIGetSource", func() { purego.RegisterLibFunc(&_fnMIDIGetSource, _coremidiLib, "MIDIGetSource") })
 	_register("MIDIInputPortCreate", func() { purego.RegisterLibFunc(&_fnMIDIInputPortCreate, _coremidiLib, "MIDIInputPortCreate") })
-	_register("MIDIInputPortCreateWithBlock", func() { purego.RegisterLibFunc(&_fnMIDIInputPortCreateWithBlock, _coremidiLib, "MIDIInputPortCreateWithBlock") })
-	_register("MIDIInputPortCreateWithProtocol", func() { purego.RegisterLibFunc(&_fnMIDIInputPortCreateWithProtocol, _coremidiLib, "MIDIInputPortCreateWithProtocol") })
-	_register("MIDIJitterReductionClockMessage", func() { purego.RegisterLibFunc(&_fnMIDIJitterReductionClockMessage, _coremidiLib, "MIDIJitterReductionClockMessage") })
-	_register("MIDIJitterReductionTimestampMessage", func() { purego.RegisterLibFunc(&_fnMIDIJitterReductionTimestampMessage, _coremidiLib, "MIDIJitterReductionTimestampMessage") })
+	_register("MIDIInputPortCreateWithBlock", func() {
+		purego.RegisterLibFunc(&_fnMIDIInputPortCreateWithBlock, _coremidiLib, "MIDIInputPortCreateWithBlock")
+	})
+	_register("MIDIInputPortCreateWithProtocol", func() {
+		purego.RegisterLibFunc(&_fnMIDIInputPortCreateWithProtocol, _coremidiLib, "MIDIInputPortCreateWithProtocol")
+	})
+	_register("MIDIJitterReductionClockMessage", func() {
+		purego.RegisterLibFunc(&_fnMIDIJitterReductionClockMessage, _coremidiLib, "MIDIJitterReductionClockMessage")
+	})
+	_register("MIDIJitterReductionTimestampMessage", func() {
+		purego.RegisterLibFunc(&_fnMIDIJitterReductionTimestampMessage, _coremidiLib, "MIDIJitterReductionTimestampMessage")
+	})
 	_register("MIDIMessageTypeForUPWord", func() { purego.RegisterLibFunc(&_fnMIDIMessageTypeForUPWord, _coremidiLib, "MIDIMessageTypeForUPWord") })
 	_register("MIDINoOpMessage", func() { purego.RegisterLibFunc(&_fnMIDINoOpMessage, _coremidiLib, "MIDINoOpMessage") })
 	_register("MIDIObjectFindByUniqueID", func() { purego.RegisterLibFunc(&_fnMIDIObjectFindByUniqueID, _coremidiLib, "MIDIObjectFindByUniqueID") })
-	_register("MIDIObjectGetDataProperty", func() { purego.RegisterLibFunc(&_fnMIDIObjectGetDataProperty, _coremidiLib, "MIDIObjectGetDataProperty") })
-	_register("MIDIObjectGetDictionaryProperty", func() { purego.RegisterLibFunc(&_fnMIDIObjectGetDictionaryProperty, _coremidiLib, "MIDIObjectGetDictionaryProperty") })
-	_register("MIDIObjectGetIntegerProperty", func() { purego.RegisterLibFunc(&_fnMIDIObjectGetIntegerProperty, _coremidiLib, "MIDIObjectGetIntegerProperty") })
+	_register("MIDIObjectGetDataProperty", func() {
+		purego.RegisterLibFunc(&_fnMIDIObjectGetDataProperty, _coremidiLib, "MIDIObjectGetDataProperty")
+	})
+	_register("MIDIObjectGetDictionaryProperty", func() {
+		purego.RegisterLibFunc(&_fnMIDIObjectGetDictionaryProperty, _coremidiLib, "MIDIObjectGetDictionaryProperty")
+	})
+	_register("MIDIObjectGetIntegerProperty", func() {
+		purego.RegisterLibFunc(&_fnMIDIObjectGetIntegerProperty, _coremidiLib, "MIDIObjectGetIntegerProperty")
+	})
 	_register("MIDIObjectGetProperties", func() { purego.RegisterLibFunc(&_fnMIDIObjectGetProperties, _coremidiLib, "MIDIObjectGetProperties") })
-	_register("MIDIObjectGetStringProperty", func() { purego.RegisterLibFunc(&_fnMIDIObjectGetStringProperty, _coremidiLib, "MIDIObjectGetStringProperty") })
+	_register("MIDIObjectGetStringProperty", func() {
+		purego.RegisterLibFunc(&_fnMIDIObjectGetStringProperty, _coremidiLib, "MIDIObjectGetStringProperty")
+	})
 	_register("MIDIObjectRemoveProperty", func() { purego.RegisterLibFunc(&_fnMIDIObjectRemoveProperty, _coremidiLib, "MIDIObjectRemoveProperty") })
-	_register("MIDIObjectSetDataProperty", func() { purego.RegisterLibFunc(&_fnMIDIObjectSetDataProperty, _coremidiLib, "MIDIObjectSetDataProperty") })
-	_register("MIDIObjectSetDictionaryProperty", func() { purego.RegisterLibFunc(&_fnMIDIObjectSetDictionaryProperty, _coremidiLib, "MIDIObjectSetDictionaryProperty") })
-	_register("MIDIObjectSetIntegerProperty", func() { purego.RegisterLibFunc(&_fnMIDIObjectSetIntegerProperty, _coremidiLib, "MIDIObjectSetIntegerProperty") })
-	_register("MIDIObjectSetStringProperty", func() { purego.RegisterLibFunc(&_fnMIDIObjectSetStringProperty, _coremidiLib, "MIDIObjectSetStringProperty") })
+	_register("MIDIObjectSetDataProperty", func() {
+		purego.RegisterLibFunc(&_fnMIDIObjectSetDataProperty, _coremidiLib, "MIDIObjectSetDataProperty")
+	})
+	_register("MIDIObjectSetDictionaryProperty", func() {
+		purego.RegisterLibFunc(&_fnMIDIObjectSetDictionaryProperty, _coremidiLib, "MIDIObjectSetDictionaryProperty")
+	})
+	_register("MIDIObjectSetIntegerProperty", func() {
+		purego.RegisterLibFunc(&_fnMIDIObjectSetIntegerProperty, _coremidiLib, "MIDIObjectSetIntegerProperty")
+	})
+	_register("MIDIObjectSetStringProperty", func() {
+		purego.RegisterLibFunc(&_fnMIDIObjectSetStringProperty, _coremidiLib, "MIDIObjectSetStringProperty")
+	})
 	_register("MIDIOutputPortCreate", func() { purego.RegisterLibFunc(&_fnMIDIOutputPortCreate, _coremidiLib, "MIDIOutputPortCreate") })
 	_register("MIDIPacketListAdd", func() { purego.RegisterLibFunc(&_fnMIDIPacketListAdd, _coremidiLib, "MIDIPacketListAdd") })
 	_register("MIDIPacketListInit", func() { purego.RegisterLibFunc(&_fnMIDIPacketListInit, _coremidiLib, "MIDIPacketListInit") })
@@ -175,25 +259,43 @@ func _loadLibrary() {
 	_register("MIDISendUMPSysex8", func() { purego.RegisterLibFunc(&_fnMIDISendUMPSysex8, _coremidiLib, "MIDISendUMPSysex8") })
 	_register("MIDISetSerialPortOwner", func() { purego.RegisterLibFunc(&_fnMIDISetSerialPortOwner, _coremidiLib, "MIDISetSerialPortOwner") })
 	_register("MIDISetupAddDevice", func() { purego.RegisterLibFunc(&_fnMIDISetupAddDevice, _coremidiLib, "MIDISetupAddDevice") })
-	_register("MIDISetupAddExternalDevice", func() { purego.RegisterLibFunc(&_fnMIDISetupAddExternalDevice, _coremidiLib, "MIDISetupAddExternalDevice") })
+	_register("MIDISetupAddExternalDevice", func() {
+		purego.RegisterLibFunc(&_fnMIDISetupAddExternalDevice, _coremidiLib, "MIDISetupAddExternalDevice")
+	})
 	_register("MIDISetupCreate", func() { purego.RegisterLibFunc(&_fnMIDISetupCreate, _coremidiLib, "MIDISetupCreate") })
 	_register("MIDISetupDispose", func() { purego.RegisterLibFunc(&_fnMIDISetupDispose, _coremidiLib, "MIDISetupDispose") })
 	_register("MIDISetupFromData", func() { purego.RegisterLibFunc(&_fnMIDISetupFromData, _coremidiLib, "MIDISetupFromData") })
 	_register("MIDISetupGetCurrent", func() { purego.RegisterLibFunc(&_fnMIDISetupGetCurrent, _coremidiLib, "MIDISetupGetCurrent") })
 	_register("MIDISetupInstall", func() { purego.RegisterLibFunc(&_fnMIDISetupInstall, _coremidiLib, "MIDISetupInstall") })
 	_register("MIDISetupRemoveDevice", func() { purego.RegisterLibFunc(&_fnMIDISetupRemoveDevice, _coremidiLib, "MIDISetupRemoveDevice") })
-	_register("MIDISetupRemoveExternalDevice", func() { purego.RegisterLibFunc(&_fnMIDISetupRemoveExternalDevice, _coremidiLib, "MIDISetupRemoveExternalDevice") })
+	_register("MIDISetupRemoveExternalDevice", func() {
+		purego.RegisterLibFunc(&_fnMIDISetupRemoveExternalDevice, _coremidiLib, "MIDISetupRemoveExternalDevice")
+	})
 	_register("MIDISetupToData", func() { purego.RegisterLibFunc(&_fnMIDISetupToData, _coremidiLib, "MIDISetupToData") })
 	_register("MIDISourceCreate", func() { purego.RegisterLibFunc(&_fnMIDISourceCreate, _coremidiLib, "MIDISourceCreate") })
-	_register("MIDISourceCreateWithProtocol", func() { purego.RegisterLibFunc(&_fnMIDISourceCreateWithProtocol, _coremidiLib, "MIDISourceCreateWithProtocol") })
+	_register("MIDISourceCreateWithProtocol", func() {
+		purego.RegisterLibFunc(&_fnMIDISourceCreateWithProtocol, _coremidiLib, "MIDISourceCreateWithProtocol")
+	})
 	_register("MIDIThruConnectionCreate", func() { purego.RegisterLibFunc(&_fnMIDIThruConnectionCreate, _coremidiLib, "MIDIThruConnectionCreate") })
-	_register("MIDIThruConnectionDispose", func() { purego.RegisterLibFunc(&_fnMIDIThruConnectionDispose, _coremidiLib, "MIDIThruConnectionDispose") })
+	_register("MIDIThruConnectionDispose", func() {
+		purego.RegisterLibFunc(&_fnMIDIThruConnectionDispose, _coremidiLib, "MIDIThruConnectionDispose")
+	})
 	_register("MIDIThruConnectionFind", func() { purego.RegisterLibFunc(&_fnMIDIThruConnectionFind, _coremidiLib, "MIDIThruConnectionFind") })
-	_register("MIDIThruConnectionGetParams", func() { purego.RegisterLibFunc(&_fnMIDIThruConnectionGetParams, _coremidiLib, "MIDIThruConnectionGetParams") })
-	_register("MIDIThruConnectionParamsInitialize", func() { purego.RegisterLibFunc(&_fnMIDIThruConnectionParamsInitialize, _coremidiLib, "MIDIThruConnectionParamsInitialize") })
-	_register("MIDIThruConnectionParamsSize", func() { purego.RegisterLibFunc(&_fnMIDIThruConnectionParamsSize, _coremidiLib, "MIDIThruConnectionParamsSize") })
-	_register("MIDIThruConnectionSetParams", func() { purego.RegisterLibFunc(&_fnMIDIThruConnectionSetParams, _coremidiLib, "MIDIThruConnectionSetParams") })
-	_register("MIDITicksSinceLastEventMessage", func() { purego.RegisterLibFunc(&_fnMIDITicksSinceLastEventMessage, _coremidiLib, "MIDITicksSinceLastEventMessage") })
+	_register("MIDIThruConnectionGetParams", func() {
+		purego.RegisterLibFunc(&_fnMIDIThruConnectionGetParams, _coremidiLib, "MIDIThruConnectionGetParams")
+	})
+	_register("MIDIThruConnectionParamsInitialize", func() {
+		purego.RegisterLibFunc(&_fnMIDIThruConnectionParamsInitialize, _coremidiLib, "MIDIThruConnectionParamsInitialize")
+	})
+	_register("MIDIThruConnectionParamsSize", func() {
+		purego.RegisterLibFunc(&_fnMIDIThruConnectionParamsSize, _coremidiLib, "MIDIThruConnectionParamsSize")
+	})
+	_register("MIDIThruConnectionSetParams", func() {
+		purego.RegisterLibFunc(&_fnMIDIThruConnectionSetParams, _coremidiLib, "MIDIThruConnectionSetParams")
+	})
+	_register("MIDITicksSinceLastEventMessage", func() {
+		purego.RegisterLibFunc(&_fnMIDITicksSinceLastEventMessage, _coremidiLib, "MIDITicksSinceLastEventMessage")
+	})
 	_register("__builtin___memcpy_chk", func() { purego.RegisterLibFunc(&___builtin___memcpy_chk, _coremidiLib, "__builtin___memcpy_chk") })
 	_register("__builtin_object_size", func() { purego.RegisterLibFunc(&___builtin_object_size, _coremidiLib, "__builtin_object_size") })
 }

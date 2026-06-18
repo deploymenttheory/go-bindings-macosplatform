@@ -18,15 +18,15 @@ type NSController struct {
 }
 
 var (
-	_clsNSController = _objcClass("NSController")
-	_nSControllerSelInit = objc.RegisterName("init")
-	_nSControllerSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSControllerSelObjectDidBeginEditing = objc.RegisterName("objectDidBeginEditing:")
-	_nSControllerSelObjectDidEndEditing = objc.RegisterName("objectDidEndEditing:")
-	_nSControllerSelDiscardEditing = objc.RegisterName("discardEditing")
-	_nSControllerSelCommitEditing = objc.RegisterName("commitEditing")
+	_clsNSController                                                      = _objcClass("NSController")
+	_nSControllerSelInit                                                  = objc.RegisterName("init")
+	_nSControllerSelInitWithCoder                                         = objc.RegisterName("initWithCoder:")
+	_nSControllerSelObjectDidBeginEditing                                 = objc.RegisterName("objectDidBeginEditing:")
+	_nSControllerSelObjectDidEndEditing                                   = objc.RegisterName("objectDidEndEditing:")
+	_nSControllerSelDiscardEditing                                        = objc.RegisterName("discardEditing")
+	_nSControllerSelCommitEditing                                         = objc.RegisterName("commitEditing")
 	_nSControllerSelCommitEditingWithDelegateDidCommitSelectorContextInfo = objc.RegisterName("commitEditingWithDelegate:didCommitSelector:contextInfo:")
-	_nSControllerSelIsEditing = objc.RegisterName("isEditing")
+	_nSControllerSelIsEditing                                             = objc.RegisterName("isEditing")
 )
 
 func NSControllerFromID(id objc.ID) *NSController {
@@ -41,13 +41,17 @@ func NSControllerFromID(id objc.ID) *NSController {
 
 func (o *NSController) Init() *NSController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSControllerSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSControllerFromID(_ret)
 }
 
 func (o *NSController) InitWithCoder(coder *foundation.NSCoder) *NSController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSControllerSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSControllerFromID(_ret)
 }
 
@@ -76,4 +80,3 @@ func (o *NSController) IsEditing() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSControllerSelIsEditing)
 	return _ret
 }
-

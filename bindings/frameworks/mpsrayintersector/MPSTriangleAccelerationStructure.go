@@ -15,8 +15,8 @@ type MPSTriangleAccelerationStructure struct {
 }
 
 var (
-	_clsMPSTriangleAccelerationStructure = _objcClass("MPSTriangleAccelerationStructure")
-	_mPSTriangleAccelerationStructureSelTriangleCount = objc.RegisterName("triangleCount")
+	_clsMPSTriangleAccelerationStructure                 = _objcClass("MPSTriangleAccelerationStructure")
+	_mPSTriangleAccelerationStructureSelTriangleCount    = objc.RegisterName("triangleCount")
 	_mPSTriangleAccelerationStructureSelSetTriangleCount = objc.RegisterName("setTriangleCount:")
 )
 
@@ -39,4 +39,3 @@ func (o *MPSTriangleAccelerationStructure) TriangleCount() uint {
 func (o *MPSTriangleAccelerationStructure) SetTriangleCount(triangleCount uint) {
 	o.Ptr().Send(_mPSTriangleAccelerationStructureSelSetTriangleCount, triangleCount)
 }
-

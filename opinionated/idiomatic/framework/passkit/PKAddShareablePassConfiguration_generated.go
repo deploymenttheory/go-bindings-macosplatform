@@ -74,7 +74,9 @@ func (x *AddShareablePassConfiguration) ProvisioningPolicyIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
-func (x *AddShareablePassConfiguration) asAddSecureElementPassConfiguration() *raw.PKAddSecureElementPassConfiguration { return &x.inner.PKAddSecureElementPassConfiguration }
+func (x *AddShareablePassConfiguration) asAddSecureElementPassConfiguration() *raw.PKAddSecureElementPassConfiguration {
+	return &x.inner.PKAddSecureElementPassConfiguration
+}
 
 // AddShareablePassConfigurationable is the interface implemented by [AddShareablePassConfiguration], for mocking and DI.
 type AddShareablePassConfigurationable interface {
@@ -87,4 +89,3 @@ type AddShareablePassConfigurationable interface {
 }
 
 var _ AddShareablePassConfigurationable = (*AddShareablePassConfiguration)(nil)
-

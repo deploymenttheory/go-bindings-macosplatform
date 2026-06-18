@@ -29,4 +29,3 @@ func PGMaxDisplayPortCount() uint32 {
 func PGNewDeviceWithDescriptor(descriptor *raw.PGDeviceDescriptor) raw.PGDevice {
 	return raw.PGNewDeviceWithDescriptor(descriptor)
 }
-

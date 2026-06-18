@@ -16,7 +16,7 @@ type CLMonitoringRecord struct {
 }
 
 var (
-	_clsCLMonitoringRecord = _objcClass("CLMonitoringRecord")
+	_clsCLMonitoringRecord          = _objcClass("CLMonitoringRecord")
 	_cLMonitoringRecordSelCondition = objc.RegisterName("condition")
 	_cLMonitoringRecordSelLastEvent = objc.RegisterName("lastEvent")
 )
@@ -33,13 +33,16 @@ func CLMonitoringRecordFromID(id objc.ID) *CLMonitoringRecord {
 
 func (o *CLMonitoringRecord) Condition() *CLCondition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLMonitoringRecordSelCondition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLConditionFromID(_ret)
 }
 
 func (o *CLMonitoringRecord) LastEvent() *CLMonitoringEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLMonitoringRecordSelLastEvent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLMonitoringEventFromID(_ret)
 }
-

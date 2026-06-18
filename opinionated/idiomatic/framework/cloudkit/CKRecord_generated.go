@@ -239,4 +239,3 @@ type Recordable interface {
 }
 
 var _ Recordable = (*Record)(nil)
-

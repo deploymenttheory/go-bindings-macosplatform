@@ -17,7 +17,9 @@ type MTRAudioOutputClusterOutputInfoStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRAudioOutputClusterOutputInfoStruct].
-func (x *MTRAudioOutputClusterOutputInfoStruct) Unwrap() *raw.MTRAudioOutputClusterOutputInfoStruct { return x.inner }
+func (x *MTRAudioOutputClusterOutputInfoStruct) Unwrap() *raw.MTRAudioOutputClusterOutputInfoStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -89,7 +91,9 @@ func (x *MTRAudioOutputClusterOutputInfoStruct) SetName(name string) {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 }
 
-func (x *MTRAudioOutputClusterOutputInfoStruct) asMTRAudioOutputClusterOutputInfoStruct() *raw.MTRAudioOutputClusterOutputInfoStruct { return x.inner }
+func (x *MTRAudioOutputClusterOutputInfoStruct) asMTRAudioOutputClusterOutputInfoStruct() *raw.MTRAudioOutputClusterOutputInfoStruct {
+	return x.inner
+}
 
 // MTRAudioOutputClusterOutputInfoStructable is the interface implemented by [MTRAudioOutputClusterOutputInfoStruct], for mocking and DI.
 type MTRAudioOutputClusterOutputInfoStructable interface {
@@ -106,4 +110,3 @@ type MTRAudioOutputClusterOutputInfoStructable interface {
 }
 
 var _ MTRAudioOutputClusterOutputInfoStructable = (*MTRAudioOutputClusterOutputInfoStruct)(nil)
-

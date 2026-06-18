@@ -18,4 +18,3 @@ type OSSystemExtensionRequestDelegate interface {
 // OSSystemExtensionsWorkspaceObserver wraps the ObjC protocol OSSystemExtensionsWorkspaceObserver.
 type OSSystemExtensionsWorkspaceObserver interface {
 }
-

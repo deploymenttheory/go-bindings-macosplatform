@@ -18,11 +18,11 @@ type MEMessageEncodingResult struct {
 }
 
 var (
-	_clsMEMessageEncodingResult = _objcClass("MEMessageEncodingResult")
+	_clsMEMessageEncodingResult                                                  = _objcClass("MEMessageEncodingResult")
 	_mEMessageEncodingResultSelInitWithEncodedMessageSigningErrorEncryptionError = objc.RegisterName("initWithEncodedMessage:signingError:encryptionError:")
-	_mEMessageEncodingResultSelEncodedMessage = objc.RegisterName("encodedMessage")
-	_mEMessageEncodingResultSelSigningError = objc.RegisterName("signingError")
-	_mEMessageEncodingResultSelEncryptionError = objc.RegisterName("encryptionError")
+	_mEMessageEncodingResultSelEncodedMessage                                    = objc.RegisterName("encodedMessage")
+	_mEMessageEncodingResultSelSigningError                                      = objc.RegisterName("signingError")
+	_mEMessageEncodingResultSelEncryptionError                                   = objc.RegisterName("encryptionError")
 )
 
 func MEMessageEncodingResultFromID(id objc.ID) *MEMessageEncodingResult {
@@ -37,14 +37,18 @@ func MEMessageEncodingResultFromID(id objc.ID) *MEMessageEncodingResult {
 
 func (o *MEMessageEncodingResult) InitWithEncodedMessageSigningErrorEncryptionError(encodedMessage *MEEncodedOutgoingMessage, signingError unsafe.Pointer, encryptionError unsafe.Pointer) *MEMessageEncodingResult {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEMessageEncodingResultSelInitWithEncodedMessageSigningErrorEncryptionError, encodedMessage.Ptr(), signingError, encryptionError)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEMessageEncodingResultFromID(_ret)
 }
 
 // @brief The encoded message. Nil if no need to encode or an error occured while encoding
 func (o *MEMessageEncodingResult) EncodedMessage() *MEEncodedOutgoingMessage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEMessageEncodingResultSelEncodedMessage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEEncodedOutgoingMessageFromID(_ret)
 }
 
@@ -59,4 +63,3 @@ func (o *MEMessageEncodingResult) EncryptionError() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mEMessageEncodingResultSelEncryptionError)
 	return _ret
 }
-

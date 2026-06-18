@@ -12,68 +12,68 @@ import (
 )
 
 var (
-	_fnIOBluetoothAddSCOAudioDevice func(unsafe.Pointer, unsafe.Pointer) int
-	_fnIOBluetoothFindNumberOfRegistryEntriesOfClassName func(string) int
-	_fnIOBluetoothGetUniqueFileNameAndPath func(objc.ID, objc.ID) objc.ID
-	_fnIOBluetoothIgnoreHIDDevice func(unsafe.Pointer)
-	_fnIOBluetoothIsFileAppleDesignatedPIMData func(objc.ID) uint8
-	_fnIOBluetoothL2CAPChannelRegisterForChannelCloseNotification func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnIOBluetoothNSStringFromDeviceAddress func(*BluetoothDeviceAddress) objc.ID
-	_fnIOBluetoothNSStringFromDeviceAddressColon func(*BluetoothDeviceAddress) objc.ID
-	_fnIOBluetoothNSStringToDeviceAddress func(objc.ID, *BluetoothDeviceAddress) int
-	_fnIOBluetoothNumberOfAvailableHIDDevices func() int
-	_fnIOBluetoothNumberOfKeyboardHIDDevices func() int
-	_fnIOBluetoothNumberOfPointingHIDDevices func() int
-	_fnIOBluetoothNumberOfTabletHIDDevices func() int
+	_fnIOBluetoothAddSCOAudioDevice                                         func(unsafe.Pointer, unsafe.Pointer) int
+	_fnIOBluetoothFindNumberOfRegistryEntriesOfClassName                    func(string) int
+	_fnIOBluetoothGetUniqueFileNameAndPath                                  func(objc.ID, objc.ID) objc.ID
+	_fnIOBluetoothIgnoreHIDDevice                                           func(unsafe.Pointer)
+	_fnIOBluetoothIsFileAppleDesignatedPIMData                              func(objc.ID) uint8
+	_fnIOBluetoothL2CAPChannelRegisterForChannelCloseNotification           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnIOBluetoothNSStringFromDeviceAddress                                 func(*BluetoothDeviceAddress) objc.ID
+	_fnIOBluetoothNSStringFromDeviceAddressColon                            func(*BluetoothDeviceAddress) objc.ID
+	_fnIOBluetoothNSStringToDeviceAddress                                   func(objc.ID, *BluetoothDeviceAddress) int
+	_fnIOBluetoothNumberOfAvailableHIDDevices                               func() int
+	_fnIOBluetoothNumberOfKeyboardHIDDevices                                func() int
+	_fnIOBluetoothNumberOfPointingHIDDevices                                func() int
+	_fnIOBluetoothNumberOfTabletHIDDevices                                  func() int
 	_fnIOBluetoothOBEXSessionCreateWithIOBluetoothDeviceRefAndChannelNumber func(unsafe.Pointer, uint8, unsafe.Pointer) int32
-	_fnIOBluetoothOBEXSessionCreateWithIOBluetoothSDPServiceRecordRef func(unsafe.Pointer, unsafe.Pointer) int32
-	_fnIOBluetoothOBEXSessionCreateWithIncomingIOBluetoothRFCOMMChannel func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
-	_fnIOBluetoothOBEXSessionOpenTransportConnection func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
-	_fnIOBluetoothPackDataList func(unsafe.Pointer, string, string) int
-	_fnIOBluetoothRemoveIgnoredHIDDevice func(unsafe.Pointer)
-	_fnIOBluetoothRemoveSCOAudioDevice func(unsafe.Pointer) int
-	_fnIOBluetoothUnpackDataList func(uint, unsafe.Pointer, string, string) int
-	_fnIOBluetoothUserNotificationUnregister func(unsafe.Pointer)
-	_fnOBEXAddApplicationParameterHeader func(unsafe.Pointer, uint32, unsafe.Pointer) int32
-	_fnOBEXAddAuthorizationChallengeHeader func(unsafe.Pointer, uint32, unsafe.Pointer) int32
-	_fnOBEXAddAuthorizationResponseHeader func(unsafe.Pointer, uint32, unsafe.Pointer) int32
-	_fnOBEXAddBodyHeader func(unsafe.Pointer, uint32, uint8, unsafe.Pointer) int32
-	_fnOBEXAddByteSequenceHeader func(unsafe.Pointer, uint32, unsafe.Pointer) int32
-	_fnOBEXAddConnectionIDHeader func(unsafe.Pointer, uint32, unsafe.Pointer) int32
-	_fnOBEXAddCountHeader func(uint32, unsafe.Pointer) int32
-	_fnOBEXAddDescriptionHeader func(unsafe.Pointer, unsafe.Pointer) int32
-	_fnOBEXAddHTTPHeader func(unsafe.Pointer, uint32, unsafe.Pointer) int32
-	_fnOBEXAddLengthHeader func(uint32, unsafe.Pointer) int32
-	_fnOBEXAddNameHeader func(unsafe.Pointer, unsafe.Pointer) int32
-	_fnOBEXAddObjectClassHeader func(unsafe.Pointer, uint32, unsafe.Pointer) int32
-	_fnOBEXAddTargetHeader func(unsafe.Pointer, uint32, unsafe.Pointer) int32
-	_fnOBEXAddTime4ByteHeader func(uint32, unsafe.Pointer) int32
-	_fnOBEXAddTimeISOHeader func(unsafe.Pointer, uint32, unsafe.Pointer) int32
-	_fnOBEXAddTypeHeader func(unsafe.Pointer, unsafe.Pointer) int32
-	_fnOBEXAddUserDefinedHeader func(unsafe.Pointer, uint32, unsafe.Pointer) int32
-	_fnOBEXAddWhoHeader func(unsafe.Pointer, uint32, unsafe.Pointer) int32
-	_fnOBEXCreateVCard func(unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32) unsafe.Pointer
-	_fnOBEXCreateVEvent func(string, uint32, string, uint32, string, uint32, string, uint32, string, uint32, string, uint32, string, uint32, string, uint32, string, uint32) unsafe.Pointer
-	_fnOBEXGetHeaders func(unsafe.Pointer, uint) unsafe.Pointer
-	_fnOBEXHeadersToBytes func(unsafe.Pointer) unsafe.Pointer
-	_fnOBEXSessionAbort func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int32
-	_fnOBEXSessionAbortResponse func(unsafe.Pointer, uint8, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int32
-	_fnOBEXSessionConnect func(unsafe.Pointer, uint8, uint16, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int32
-	_fnOBEXSessionConnectResponse func(unsafe.Pointer, uint8, uint8, uint16, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int32
-	_fnOBEXSessionDelete func(unsafe.Pointer) int32
-	_fnOBEXSessionDisconnect func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int32
-	_fnOBEXSessionDisconnectResponse func(unsafe.Pointer, uint8, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int32
-	_fnOBEXSessionGet func(unsafe.Pointer, uint8, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int32
-	_fnOBEXSessionGetAvailableCommandPayloadLength func(unsafe.Pointer, uint8, *uint16) int32
-	_fnOBEXSessionGetAvailableCommandResponsePayloadLength func(unsafe.Pointer, uint8, *uint16) int32
-	_fnOBEXSessionGetMaxPacketLength func(unsafe.Pointer, *uint16) int32
-	_fnOBEXSessionGetResponse func(unsafe.Pointer, uint8, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int32
-	_fnOBEXSessionHasOpenOBEXConnection func(unsafe.Pointer, *uint8) int32
-	_fnOBEXSessionPut func(unsafe.Pointer, uint8, unsafe.Pointer, uint, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int32
-	_fnOBEXSessionPutResponse func(unsafe.Pointer, uint8, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int32
-	_fnOBEXSessionSetPath func(unsafe.Pointer, uint8, uint8, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int32
-	_fnOBEXSessionSetPathResponse func(unsafe.Pointer, uint8, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int32
-	_fnOBEXSessionSetServerCallback func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	_fnIOBluetoothOBEXSessionCreateWithIOBluetoothSDPServiceRecordRef       func(unsafe.Pointer, unsafe.Pointer) int32
+	_fnIOBluetoothOBEXSessionCreateWithIncomingIOBluetoothRFCOMMChannel     func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	_fnIOBluetoothOBEXSessionOpenTransportConnection                        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	_fnIOBluetoothPackDataList                                              func(unsafe.Pointer, string, string) int
+	_fnIOBluetoothRemoveIgnoredHIDDevice                                    func(unsafe.Pointer)
+	_fnIOBluetoothRemoveSCOAudioDevice                                      func(unsafe.Pointer) int
+	_fnIOBluetoothUnpackDataList                                            func(uint, unsafe.Pointer, string, string) int
+	_fnIOBluetoothUserNotificationUnregister                                func(unsafe.Pointer)
+	_fnOBEXAddApplicationParameterHeader                                    func(unsafe.Pointer, uint32, unsafe.Pointer) int32
+	_fnOBEXAddAuthorizationChallengeHeader                                  func(unsafe.Pointer, uint32, unsafe.Pointer) int32
+	_fnOBEXAddAuthorizationResponseHeader                                   func(unsafe.Pointer, uint32, unsafe.Pointer) int32
+	_fnOBEXAddBodyHeader                                                    func(unsafe.Pointer, uint32, uint8, unsafe.Pointer) int32
+	_fnOBEXAddByteSequenceHeader                                            func(unsafe.Pointer, uint32, unsafe.Pointer) int32
+	_fnOBEXAddConnectionIDHeader                                            func(unsafe.Pointer, uint32, unsafe.Pointer) int32
+	_fnOBEXAddCountHeader                                                   func(uint32, unsafe.Pointer) int32
+	_fnOBEXAddDescriptionHeader                                             func(unsafe.Pointer, unsafe.Pointer) int32
+	_fnOBEXAddHTTPHeader                                                    func(unsafe.Pointer, uint32, unsafe.Pointer) int32
+	_fnOBEXAddLengthHeader                                                  func(uint32, unsafe.Pointer) int32
+	_fnOBEXAddNameHeader                                                    func(unsafe.Pointer, unsafe.Pointer) int32
+	_fnOBEXAddObjectClassHeader                                             func(unsafe.Pointer, uint32, unsafe.Pointer) int32
+	_fnOBEXAddTargetHeader                                                  func(unsafe.Pointer, uint32, unsafe.Pointer) int32
+	_fnOBEXAddTime4ByteHeader                                               func(uint32, unsafe.Pointer) int32
+	_fnOBEXAddTimeISOHeader                                                 func(unsafe.Pointer, uint32, unsafe.Pointer) int32
+	_fnOBEXAddTypeHeader                                                    func(unsafe.Pointer, unsafe.Pointer) int32
+	_fnOBEXAddUserDefinedHeader                                             func(unsafe.Pointer, uint32, unsafe.Pointer) int32
+	_fnOBEXAddWhoHeader                                                     func(unsafe.Pointer, uint32, unsafe.Pointer) int32
+	_fnOBEXCreateVCard                                                      func(unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32) unsafe.Pointer
+	_fnOBEXCreateVEvent                                                     func(string, uint32, string, uint32, string, uint32, string, uint32, string, uint32, string, uint32, string, uint32, string, uint32, string, uint32) unsafe.Pointer
+	_fnOBEXGetHeaders                                                       func(unsafe.Pointer, uint) unsafe.Pointer
+	_fnOBEXHeadersToBytes                                                   func(unsafe.Pointer) unsafe.Pointer
+	_fnOBEXSessionAbort                                                     func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int32
+	_fnOBEXSessionAbortResponse                                             func(unsafe.Pointer, uint8, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int32
+	_fnOBEXSessionConnect                                                   func(unsafe.Pointer, uint8, uint16, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int32
+	_fnOBEXSessionConnectResponse                                           func(unsafe.Pointer, uint8, uint8, uint16, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int32
+	_fnOBEXSessionDelete                                                    func(unsafe.Pointer) int32
+	_fnOBEXSessionDisconnect                                                func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int32
+	_fnOBEXSessionDisconnectResponse                                        func(unsafe.Pointer, uint8, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int32
+	_fnOBEXSessionGet                                                       func(unsafe.Pointer, uint8, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int32
+	_fnOBEXSessionGetAvailableCommandPayloadLength                          func(unsafe.Pointer, uint8, *uint16) int32
+	_fnOBEXSessionGetAvailableCommandResponsePayloadLength                  func(unsafe.Pointer, uint8, *uint16) int32
+	_fnOBEXSessionGetMaxPacketLength                                        func(unsafe.Pointer, *uint16) int32
+	_fnOBEXSessionGetResponse                                               func(unsafe.Pointer, uint8, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int32
+	_fnOBEXSessionHasOpenOBEXConnection                                     func(unsafe.Pointer, *uint8) int32
+	_fnOBEXSessionPut                                                       func(unsafe.Pointer, uint8, unsafe.Pointer, uint, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int32
+	_fnOBEXSessionPutResponse                                               func(unsafe.Pointer, uint8, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int32
+	_fnOBEXSessionSetPath                                                   func(unsafe.Pointer, uint8, uint8, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int32
+	_fnOBEXSessionSetPathResponse                                           func(unsafe.Pointer, uint8, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int32
+	_fnOBEXSessionSetServerCallback                                         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 )
 
 func IOBluetoothAddSCOAudioDevice(device unsafe.Pointer, configDict unsafe.Pointer) int {
@@ -86,7 +86,9 @@ func IOBluetoothFindNumberOfRegistryEntriesOfClassName(deviceType string) int {
 
 func IOBluetoothGetUniqueFileNameAndPath(inName *foundation.NSString, inPath *foundation.NSString) *foundation.NSString {
 	_ret := _fnIOBluetoothGetUniqueFileNameAndPath(inName.Ptr(), inPath.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -104,13 +106,17 @@ func IOBluetoothL2CAPChannelRegisterForChannelCloseNotification(channel unsafe.P
 
 func IOBluetoothNSStringFromDeviceAddress(deviceAddress *BluetoothDeviceAddress) *foundation.NSString {
 	_ret := _fnIOBluetoothNSStringFromDeviceAddress(deviceAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func IOBluetoothNSStringFromDeviceAddressColon(deviceAddress *BluetoothDeviceAddress) *foundation.NSString {
 	_ret := _fnIOBluetoothNSStringFromDeviceAddressColon(deviceAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -329,4 +335,3 @@ func OBEXSessionSetPathResponse(inSessionRef unsafe.Pointer, inResponseOpCode ui
 func OBEXSessionSetServerCallback(inSessionRef unsafe.Pointer, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) int32 {
 	return _fnOBEXSessionSetServerCallback(inSessionRef, inCallback, inUserRefCon)
 }
-

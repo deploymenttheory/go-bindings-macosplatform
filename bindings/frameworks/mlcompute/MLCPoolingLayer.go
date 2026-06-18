@@ -15,9 +15,9 @@ type MLCPoolingLayer struct {
 }
 
 var (
-	_clsMLCPoolingLayer = _objcClass("MLCPoolingLayer")
+	_clsMLCPoolingLayer                    = _objcClass("MLCPoolingLayer")
 	_mLCPoolingLayerSelLayerWithDescriptor = objc.RegisterName("layerWithDescriptor:")
-	_mLCPoolingLayerSelDescriptor = objc.RegisterName("descriptor")
+	_mLCPoolingLayerSelDescriptor          = objc.RegisterName("descriptor")
 )
 
 func MLCPoolingLayerFromID(id objc.ID) *MLCPoolingLayer {
@@ -33,14 +33,17 @@ func MLCPoolingLayerFromID(id objc.ID) *MLCPoolingLayer {
 // @abstract   Create a pooling layer @param      descriptor  The pooling descriptor @return     A new pooling layer
 func MLCPoolingLayerLayerWithDescriptor(descriptor *MLCPoolingDescriptor) *MLCPoolingLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCPoolingLayer), _mLCPoolingLayerSelLayerWithDescriptor, descriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCPoolingLayerFromID(_ret)
 }
 
 // @property   descriptor @abstract   The pooling descriptor
 func (o *MLCPoolingLayer) Descriptor() *MLCPoolingDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCPoolingLayerSelDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCPoolingDescriptorFromID(_ret)
 }
-

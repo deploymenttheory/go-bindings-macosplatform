@@ -15,12 +15,12 @@ type MPSRNNSingleGateDescriptor struct {
 }
 
 var (
-	_clsMPSRNNSingleGateDescriptor = _objcClass("MPSRNNSingleGateDescriptor")
+	_clsMPSRNNSingleGateDescriptor                                                                           = _objcClass("MPSRNNSingleGateDescriptor")
 	_mPSRNNSingleGateDescriptorSelCreateRNNSingleGateDescriptorWithInputFeatureChannelsOutputFeatureChannels = objc.RegisterName("createRNNSingleGateDescriptorWithInputFeatureChannels:outputFeatureChannels:")
-	_mPSRNNSingleGateDescriptorSelInputWeights = objc.RegisterName("inputWeights")
-	_mPSRNNSingleGateDescriptorSelSetInputWeights = objc.RegisterName("setInputWeights:")
-	_mPSRNNSingleGateDescriptorSelRecurrentWeights = objc.RegisterName("recurrentWeights")
-	_mPSRNNSingleGateDescriptorSelSetRecurrentWeights = objc.RegisterName("setRecurrentWeights:")
+	_mPSRNNSingleGateDescriptorSelInputWeights                                                               = objc.RegisterName("inputWeights")
+	_mPSRNNSingleGateDescriptorSelSetInputWeights                                                            = objc.RegisterName("setInputWeights:")
+	_mPSRNNSingleGateDescriptorSelRecurrentWeights                                                           = objc.RegisterName("recurrentWeights")
+	_mPSRNNSingleGateDescriptorSelSetRecurrentWeights                                                        = objc.RegisterName("setRecurrentWeights:")
 )
 
 func MPSRNNSingleGateDescriptorFromID(id objc.ID) *MPSRNNSingleGateDescriptor {
@@ -36,7 +36,9 @@ func MPSRNNSingleGateDescriptorFromID(id objc.ID) *MPSRNNSingleGateDescriptor {
 // @abstract   Creates a MPSRNNSingleGateDescriptor @param      inputFeatureChannels    The number of feature channels in the input image/matrix. Must be >= 1. @param      outputFeatureChannels   The number of feature channels in the output image/matrix. Must be >= 1. @return     A valid MPSRNNSingleGateDescriptor object or nil, if failure.
 func MPSRNNSingleGateDescriptorCreateRNNSingleGateDescriptorWithInputFeatureChannelsOutputFeatureChannels(inputFeatureChannels uint, outputFeatureChannels uint) *MPSRNNSingleGateDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSRNNSingleGateDescriptor), _mPSRNNSingleGateDescriptorSelCreateRNNSingleGateDescriptorWithInputFeatureChannelsOutputFeatureChannels, inputFeatureChannels, outputFeatureChannels)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSRNNSingleGateDescriptorFromID(_ret)
 }
 
@@ -59,4 +61,3 @@ func (o *MPSRNNSingleGateDescriptor) RecurrentWeights() MPSCNNConvolutionDataSou
 func (o *MPSRNNSingleGateDescriptor) SetRecurrentWeights(recurrentWeights MPSCNNConvolutionDataSource) {
 	o.Ptr().Send(_mPSRNNSingleGateDescriptorSelSetRecurrentWeights, recurrentWeights)
 }
-

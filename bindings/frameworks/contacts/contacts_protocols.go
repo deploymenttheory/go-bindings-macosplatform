@@ -20,4 +20,3 @@ type CNKeyDescriptor interface {
 	foundation.NSSecureCoding
 	foundation.NSCopying
 }
-

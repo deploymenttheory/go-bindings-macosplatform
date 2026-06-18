@@ -212,7 +212,9 @@ func (x *CollectionViewFlowLayout) SetSectionFootersPinToVisibleBounds(sectionFo
 	x.inner.SetSectionFootersPinToVisibleBounds(sectionFootersPinToVisibleBounds)
 }
 
-func (x *CollectionViewFlowLayout) asCollectionViewLayout() *raw.NSCollectionViewLayout { return &x.inner.NSCollectionViewLayout }
+func (x *CollectionViewFlowLayout) asCollectionViewLayout() *raw.NSCollectionViewLayout {
+	return &x.inner.NSCollectionViewLayout
+}
 
 // CollectionViewFlowLayoutable is the interface implemented by [CollectionViewFlowLayout], for mocking and DI.
 type CollectionViewFlowLayoutable interface {
@@ -253,4 +255,3 @@ type CollectionViewFlowLayoutable interface {
 }
 
 var _ CollectionViewFlowLayoutable = (*CollectionViewFlowLayout)(nil)
-

@@ -18,10 +18,10 @@ type MTRTimeSynchronizationClusterSetTimeZoneResponseParams struct {
 }
 
 var (
-	_clsMTRTimeSynchronizationClusterSetTimeZoneResponseParams = _objcClass("MTRTimeSynchronizationClusterSetTimeZoneResponseParams")
+	_clsMTRTimeSynchronizationClusterSetTimeZoneResponseParams                           = _objcClass("MTRTimeSynchronizationClusterSetTimeZoneResponseParams")
 	_mTRTimeSynchronizationClusterSetTimeZoneResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRTimeSynchronizationClusterSetTimeZoneResponseParamsSelDstOffsetRequired = objc.RegisterName("dstOffsetRequired")
-	_mTRTimeSynchronizationClusterSetTimeZoneResponseParamsSelSetDstOffsetRequired = objc.RegisterName("setDstOffsetRequired:")
+	_mTRTimeSynchronizationClusterSetTimeZoneResponseParamsSelDstOffsetRequired          = objc.RegisterName("dstOffsetRequired")
+	_mTRTimeSynchronizationClusterSetTimeZoneResponseParamsSelSetDstOffsetRequired       = objc.RegisterName("setDstOffsetRequired:")
 )
 
 func MTRTimeSynchronizationClusterSetTimeZoneResponseParamsFromID(id objc.ID) *MTRTimeSynchronizationClusterSetTimeZoneResponseParams {
@@ -38,7 +38,9 @@ func MTRTimeSynchronizationClusterSetTimeZoneResponseParamsFromID(id objc.ID) *M
 func (o *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRTimeSynchronizationClusterSetTimeZoneResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRTimeSynchronizationClusterSetTimeZoneResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -47,11 +49,12 @@ func (o *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) InitWithRespons
 
 func (o *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) DstOffsetRequired() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRTimeSynchronizationClusterSetTimeZoneResponseParamsSelDstOffsetRequired)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) SetDstOffsetRequired(dstOffsetRequired *foundation.NSNumber) {
 	o.Ptr().Send(_mTRTimeSynchronizationClusterSetTimeZoneResponseParamsSelSetDstOffsetRequired, dstOffsetRequired.Ptr())
 }
-

@@ -16,12 +16,12 @@ type MTRRVCOperationalStateClusterErrorStateStruct struct {
 }
 
 var (
-	_clsMTRRVCOperationalStateClusterErrorStateStruct = _objcClass("MTRRVCOperationalStateClusterErrorStateStruct")
-	_mTRRVCOperationalStateClusterErrorStateStructSelErrorStateID = objc.RegisterName("errorStateID")
-	_mTRRVCOperationalStateClusterErrorStateStructSelSetErrorStateID = objc.RegisterName("setErrorStateID:")
-	_mTRRVCOperationalStateClusterErrorStateStructSelErrorStateLabel = objc.RegisterName("errorStateLabel")
-	_mTRRVCOperationalStateClusterErrorStateStructSelSetErrorStateLabel = objc.RegisterName("setErrorStateLabel:")
-	_mTRRVCOperationalStateClusterErrorStateStructSelErrorStateDetails = objc.RegisterName("errorStateDetails")
+	_clsMTRRVCOperationalStateClusterErrorStateStruct                     = _objcClass("MTRRVCOperationalStateClusterErrorStateStruct")
+	_mTRRVCOperationalStateClusterErrorStateStructSelErrorStateID         = objc.RegisterName("errorStateID")
+	_mTRRVCOperationalStateClusterErrorStateStructSelSetErrorStateID      = objc.RegisterName("setErrorStateID:")
+	_mTRRVCOperationalStateClusterErrorStateStructSelErrorStateLabel      = objc.RegisterName("errorStateLabel")
+	_mTRRVCOperationalStateClusterErrorStateStructSelSetErrorStateLabel   = objc.RegisterName("setErrorStateLabel:")
+	_mTRRVCOperationalStateClusterErrorStateStructSelErrorStateDetails    = objc.RegisterName("errorStateDetails")
 	_mTRRVCOperationalStateClusterErrorStateStructSelSetErrorStateDetails = objc.RegisterName("setErrorStateDetails:")
 )
 
@@ -37,7 +37,9 @@ func MTRRVCOperationalStateClusterErrorStateStructFromID(id objc.ID) *MTRRVCOper
 
 func (o *MTRRVCOperationalStateClusterErrorStateStruct) ErrorStateID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRRVCOperationalStateClusterErrorStateStructSelErrorStateID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTRRVCOperationalStateClusterErrorStateStruct) SetErrorStateID(errorSta
 
 func (o *MTRRVCOperationalStateClusterErrorStateStruct) ErrorStateLabel() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRRVCOperationalStateClusterErrorStateStructSelErrorStateLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *MTRRVCOperationalStateClusterErrorStateStruct) SetErrorStateLabel(error
 
 func (o *MTRRVCOperationalStateClusterErrorStateStruct) ErrorStateDetails() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRRVCOperationalStateClusterErrorStateStructSelErrorStateDetails)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTRRVCOperationalStateClusterErrorStateStruct) SetErrorStateDetails(errorStateDetails *foundation.NSString) {
 	o.Ptr().Send(_mTRRVCOperationalStateClusterErrorStateStructSelSetErrorStateDetails, errorStateDetails.Ptr())
 }
-

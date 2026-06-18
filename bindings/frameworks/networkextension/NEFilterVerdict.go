@@ -16,8 +16,8 @@ type NEFilterVerdict struct {
 }
 
 var (
-	_clsNEFilterVerdict = _objcClass("NEFilterVerdict")
-	_nEFilterVerdictSelShouldReport = objc.RegisterName("shouldReport")
+	_clsNEFilterVerdict                = _objcClass("NEFilterVerdict")
+	_nEFilterVerdictSelShouldReport    = objc.RegisterName("shouldReport")
 	_nEFilterVerdictSelSetShouldReport = objc.RegisterName("setShouldReport:")
 )
 
@@ -39,4 +39,3 @@ func (o *NEFilterVerdict) ShouldReport() bool {
 func (o *NEFilterVerdict) SetShouldReport(shouldReport bool) {
 	o.Ptr().Send(_nEFilterVerdictSelSetShouldReport, shouldReport)
 }
-

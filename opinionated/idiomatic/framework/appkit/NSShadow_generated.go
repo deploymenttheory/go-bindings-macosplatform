@@ -109,4 +109,3 @@ type Shadowable interface {
 }
 
 var _ Shadowable = (*Shadow)(nil)
-

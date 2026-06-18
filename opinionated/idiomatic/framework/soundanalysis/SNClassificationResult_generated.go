@@ -72,4 +72,3 @@ type ClassificationResultable interface {
 }
 
 var _ ClassificationResultable = (*ClassificationResult)(nil)
-

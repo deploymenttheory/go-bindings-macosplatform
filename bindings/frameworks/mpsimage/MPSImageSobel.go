@@ -17,11 +17,11 @@ type MPSImageSobel struct {
 }
 
 var (
-	_clsMPSImageSobel = _objcClass("MPSImageSobel")
-	_mPSImageSobelSelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsMPSImageSobel                                       = _objcClass("MPSImageSobel")
+	_mPSImageSobelSelInitWithDevice                         = objc.RegisterName("initWithDevice:")
 	_mPSImageSobelSelInitWithDeviceLinearGrayColorTransform = objc.RegisterName("initWithDevice:linearGrayColorTransform:")
-	_mPSImageSobelSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSImageSobelSelColorTransform = objc.RegisterName("colorTransform")
+	_mPSImageSobelSelInitWithCoderDevice                    = objc.RegisterName("initWithCoder:device:")
+	_mPSImageSobelSelColorTransform                         = objc.RegisterName("colorTransform")
 )
 
 func MPSImageSobelFromID(id objc.ID) *MPSImageSobel {
@@ -37,21 +37,27 @@ func MPSImageSobelFromID(id objc.ID) *MPSImageSobel {
 // @abstract   Initialize a Sobel filter on a given device using the default color transform. Default: BT.601/JPEG {0.299f, 0.587f, 0.114f} For non-default conversion matrices, use -initWithDevice:linearGrayColorTransform: @param      device  The device the filter will run on @return     A valid object or nil, if failure.
 func (o *MPSImageSobel) InitWithDevice(device metal.MTLDevice) *MPSImageSobel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageSobelSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageSobelFromID(_ret)
 }
 
 // @abstract   Initialize a Sobel filter on a given device with a non-default color transform @param      device          The device the filter will run on @param      transform       Array of three floats describing the rgb to gray scale color transform. @code Luminance = transform[0] * pixel.x + transform[1] * pixel.y + transform[2] * pixel.z; @endcode @return     A valid object or nil, if failure.
 func (o *MPSImageSobel) InitWithDeviceLinearGrayColorTransform(device metal.MTLDevice, transform *float32) *MPSImageSobel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageSobelSelInitWithDeviceLinearGrayColorTransform, device, transform)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageSobelFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSImageSobel) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSImageSobel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageSobelSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageSobelFromID(_ret)
 }
 
@@ -60,4 +66,3 @@ func (o *MPSImageSobel) ColorTransform() *float32 {
 	_ret := objc.Send[*float32](o.Ptr(), _mPSImageSobelSelColorTransform)
 	return _ret
 }
-

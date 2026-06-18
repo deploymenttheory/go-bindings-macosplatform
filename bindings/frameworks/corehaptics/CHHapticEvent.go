@@ -16,17 +16,17 @@ type CHHapticEvent struct {
 }
 
 var (
-	_clsCHHapticEvent = _objcClass("CHHapticEvent")
-	_cHHapticEventSelInitWithEventTypeParametersRelativeTime = objc.RegisterName("initWithEventType:parameters:relativeTime:")
-	_cHHapticEventSelInitWithEventTypeParametersRelativeTimeDuration = objc.RegisterName("initWithEventType:parameters:relativeTime:duration:")
-	_cHHapticEventSelInitWithAudioResourceIDParametersRelativeTime = objc.RegisterName("initWithAudioResourceID:parameters:relativeTime:")
+	_clsCHHapticEvent                                                      = _objcClass("CHHapticEvent")
+	_cHHapticEventSelInitWithEventTypeParametersRelativeTime               = objc.RegisterName("initWithEventType:parameters:relativeTime:")
+	_cHHapticEventSelInitWithEventTypeParametersRelativeTimeDuration       = objc.RegisterName("initWithEventType:parameters:relativeTime:duration:")
+	_cHHapticEventSelInitWithAudioResourceIDParametersRelativeTime         = objc.RegisterName("initWithAudioResourceID:parameters:relativeTime:")
 	_cHHapticEventSelInitWithAudioResourceIDParametersRelativeTimeDuration = objc.RegisterName("initWithAudioResourceID:parameters:relativeTime:duration:")
-	_cHHapticEventSelType = objc.RegisterName("type")
-	_cHHapticEventSelEventParameters = objc.RegisterName("eventParameters")
-	_cHHapticEventSelRelativeTime = objc.RegisterName("relativeTime")
-	_cHHapticEventSelSetRelativeTime = objc.RegisterName("setRelativeTime:")
-	_cHHapticEventSelDuration = objc.RegisterName("duration")
-	_cHHapticEventSelSetDuration = objc.RegisterName("setDuration:")
+	_cHHapticEventSelType                                                  = objc.RegisterName("type")
+	_cHHapticEventSelEventParameters                                       = objc.RegisterName("eventParameters")
+	_cHHapticEventSelRelativeTime                                          = objc.RegisterName("relativeTime")
+	_cHHapticEventSelSetRelativeTime                                       = objc.RegisterName("setRelativeTime:")
+	_cHHapticEventSelDuration                                              = objc.RegisterName("duration")
+	_cHHapticEventSelSetDuration                                           = objc.RegisterName("setDuration:")
 )
 
 func CHHapticEventFromID(id objc.ID) *CHHapticEvent {
@@ -42,42 +42,54 @@ func CHHapticEventFromID(id objc.ID) *CHHapticEvent {
 // @method initWithEventType:parameters:relativeTime @abstract Initialize a new CHHapticEvent.  This can only be used to create Transient event types (which do not require a duration). @param type The type of event. @param eventParams An NSArray of Event parameters.  Can be empty. @param time The relative time for this event versus the other events in the CHHapticPattern.
 func (o *CHHapticEvent) InitWithEventTypeParametersRelativeTime(type_ *foundation.NSString, eventParams *foundation.NSArray[*CHHapticEventParameter], time_ float64) *CHHapticEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticEventSelInitWithEventTypeParametersRelativeTime, type_.Ptr(), eventParams.Ptr(), time_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CHHapticEventFromID(_ret)
 }
 
 // @method initWithEventType:parameters:relativeTime:duration @abstract Initialize a new CHHapticEvent, providing a duration. @param type The type of event. @param eventParams An NSArray of Event parameters.  Can be empty. @param time The relative time for this event versus the other events in the CHHapticPattern. @param duration For Continuous event types, the length of time before the event playback begins its release. For Transient event types, the logical length of the event (used to determine pattern end and loop points).
 func (o *CHHapticEvent) InitWithEventTypeParametersRelativeTimeDuration(type_ *foundation.NSString, eventParams *foundation.NSArray[*CHHapticEventParameter], time_ float64, duration float64) *CHHapticEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticEventSelInitWithEventTypeParametersRelativeTimeDuration, type_.Ptr(), eventParams.Ptr(), time_, duration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CHHapticEventFromID(_ret)
 }
 
 // @method initWithAudioResourceID:parameters:relativeTime @abstract Initialize a new CHHapticEvent using a previously-loaded audio resource. @param resID A previously-registered audio resource ID (see `CHHapticEngine(registerAudioResource:options:error)`). @param eventParams An NSArray of Event parameters.  Can be empty. @param time The relative time for this event versus the other events in the CHHapticPattern.
 func (o *CHHapticEvent) InitWithAudioResourceIDParametersRelativeTime(resID uint, eventParams *foundation.NSArray[*CHHapticEventParameter], time_ float64) *CHHapticEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticEventSelInitWithAudioResourceIDParametersRelativeTime, resID, eventParams.Ptr(), time_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CHHapticEventFromID(_ret)
 }
 
 // @method initWithAudioResourceID:parameters:relativeTime:duration @abstract Initialize a new CHHapticEvent using a previously-loaded audio resource. @param resID A previously-registered audio resource ID (see `CHHapticEngine(registerAudioResource:options:error)`). @param eventParams An NSArray of Event parameters.  Can be empty. @param time The relative time for this event versus the other events in the CHHapticPattern. @param duration The duration of this event in seconds. @discussion If the specified duration is less than the duration of the audio resource, its playback will be truncated.  If it is greater, its playback will be padded with silence.  If zero, it will be ignored.
 func (o *CHHapticEvent) InitWithAudioResourceIDParametersRelativeTimeDuration(resID uint, eventParams *foundation.NSArray[*CHHapticEventParameter], time_ float64, duration float64) *CHHapticEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticEventSelInitWithAudioResourceIDParametersRelativeTimeDuration, resID, eventParams.Ptr(), time_, duration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CHHapticEventFromID(_ret)
 }
 
 // @property type The type of event.
 func (o *CHHapticEvent) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticEventSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property eventParameters NSArray of Event parameters.  Can be empty.
 func (o *CHHapticEvent) EventParameters() *foundation.NSArray[*CHHapticEventParameter] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticEventSelEventParameters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CHHapticEventParameter](_ret)
 }
 
@@ -100,4 +112,3 @@ func (o *CHHapticEvent) Duration() float64 {
 func (o *CHHapticEvent) SetDuration(duration float64) {
 	o.Ptr().Send(_cHHapticEventSelSetDuration, duration)
 }
-

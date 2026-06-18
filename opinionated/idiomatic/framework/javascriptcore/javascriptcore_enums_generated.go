@@ -11,10 +11,10 @@ import (
 type JSRelationCondition int64
 
 const (
-	KJSRelationConditionUndefined JSRelationCondition = 0
-	KJSRelationConditionEqual JSRelationCondition = 1
+	KJSRelationConditionUndefined   JSRelationCondition = 0
+	KJSRelationConditionEqual       JSRelationCondition = 1
 	KJSRelationConditionGreaterThan JSRelationCondition = 2
-	KJSRelationConditionLessThan JSRelationCondition = 3
+	KJSRelationConditionLessThan    JSRelationCondition = 3
 )
 
 func (e JSRelationCondition) String() string {
@@ -37,13 +37,13 @@ type JSType int64
 
 const (
 	KJSTypeUndefined JSType = 0
-	KJSTypeNull JSType = 1
-	KJSTypeBoolean JSType = 2
-	KJSTypeNumber JSType = 3
-	KJSTypeString JSType = 4
-	KJSTypeObject JSType = 5
-	KJSTypeSymbol JSType = 6
-	KJSTypeBigInt JSType = 7
+	KJSTypeNull      JSType = 1
+	KJSTypeBoolean   JSType = 2
+	KJSTypeNumber    JSType = 3
+	KJSTypeString    JSType = 4
+	KJSTypeObject    JSType = 5
+	KJSTypeSymbol    JSType = 6
+	KJSTypeBigInt    JSType = 7
 )
 
 func (e JSType) String() string {
@@ -73,19 +73,19 @@ func (e JSType) String() string {
 type JSTypedArrayType int64
 
 const (
-	KJSTypedArrayTypeInt8Array JSTypedArrayType = 0
-	KJSTypedArrayTypeInt16Array JSTypedArrayType = 1
-	KJSTypedArrayTypeInt32Array JSTypedArrayType = 2
-	KJSTypedArrayTypeUint8Array JSTypedArrayType = 3
+	KJSTypedArrayTypeInt8Array         JSTypedArrayType = 0
+	KJSTypedArrayTypeInt16Array        JSTypedArrayType = 1
+	KJSTypedArrayTypeInt32Array        JSTypedArrayType = 2
+	KJSTypedArrayTypeUint8Array        JSTypedArrayType = 3
 	KJSTypedArrayTypeUint8ClampedArray JSTypedArrayType = 4
-	KJSTypedArrayTypeUint16Array JSTypedArrayType = 5
-	KJSTypedArrayTypeUint32Array JSTypedArrayType = 6
-	KJSTypedArrayTypeFloat32Array JSTypedArrayType = 7
-	KJSTypedArrayTypeFloat64Array JSTypedArrayType = 8
-	KJSTypedArrayTypeArrayBuffer JSTypedArrayType = 9
-	KJSTypedArrayTypeNone JSTypedArrayType = 10
-	KJSTypedArrayTypeBigInt64Array JSTypedArrayType = 11
-	KJSTypedArrayTypeBigUint64Array JSTypedArrayType = 12
+	KJSTypedArrayTypeUint16Array       JSTypedArrayType = 5
+	KJSTypedArrayTypeUint32Array       JSTypedArrayType = 6
+	KJSTypedArrayTypeFloat32Array      JSTypedArrayType = 7
+	KJSTypedArrayTypeFloat64Array      JSTypedArrayType = 8
+	KJSTypedArrayTypeArrayBuffer       JSTypedArrayType = 9
+	KJSTypedArrayTypeNone              JSTypedArrayType = 10
+	KJSTypedArrayTypeBigInt64Array     JSTypedArrayType = 11
+	KJSTypedArrayTypeBigUint64Array    JSTypedArrayType = 12
 )
 
 func (e JSTypedArrayType) String() string {
@@ -120,4 +120,3 @@ func (e JSTypedArrayType) String() string {
 		return fmt.Sprintf("JSTypedArrayType(%d)", int64(e))
 	}
 }
-

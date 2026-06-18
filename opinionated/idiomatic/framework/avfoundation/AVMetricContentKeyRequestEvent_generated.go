@@ -68,7 +68,9 @@ func (x *MetricContentKeyRequestEvent) MediaResourceRequestEvent() *MetricMediaR
 	return &MetricMediaResourceRequestEvent{inner: _r}
 }
 
-func (x *MetricContentKeyRequestEvent) asMetricEvent() *raw.AVMetricEvent { return &x.inner.AVMetricEvent }
+func (x *MetricContentKeyRequestEvent) asMetricEvent() *raw.AVMetricEvent {
+	return &x.inner.AVMetricEvent
+}
 
 // MetricContentKeyRequestEventable is the interface implemented by [MetricContentKeyRequestEvent], for mocking and DI.
 type MetricContentKeyRequestEventable interface {
@@ -80,4 +82,3 @@ type MetricContentKeyRequestEventable interface {
 }
 
 var _ MetricContentKeyRequestEventable = (*MetricContentKeyRequestEvent)(nil)
-

@@ -15,13 +15,13 @@ type MPSCNNPoolingGradientNode struct {
 }
 
 var (
-	_clsMPSCNNPoolingGradientNode = _objcClass("MPSCNNPoolingGradientNode")
+	_clsMPSCNNPoolingGradientNode                                                                                                                 = _objcClass("MPSCNNPoolingGradientNode")
 	_mPSCNNPoolingGradientNodeSelNodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYPaddingPolicy = objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:kernelWidth:kernelHeight:strideInPixelsX:strideInPixelsY:paddingPolicy:")
 	_mPSCNNPoolingGradientNodeSelInitWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYPaddingPolicy = objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:kernelWidth:kernelHeight:strideInPixelsX:strideInPixelsY:paddingPolicy:")
-	_mPSCNNPoolingGradientNodeSelKernelWidth = objc.RegisterName("kernelWidth")
-	_mPSCNNPoolingGradientNodeSelKernelHeight = objc.RegisterName("kernelHeight")
-	_mPSCNNPoolingGradientNodeSelStrideInPixelsX = objc.RegisterName("strideInPixelsX")
-	_mPSCNNPoolingGradientNodeSelStrideInPixelsY = objc.RegisterName("strideInPixelsY")
+	_mPSCNNPoolingGradientNodeSelKernelWidth                                                                                                      = objc.RegisterName("kernelWidth")
+	_mPSCNNPoolingGradientNodeSelKernelHeight                                                                                                     = objc.RegisterName("kernelHeight")
+	_mPSCNNPoolingGradientNodeSelStrideInPixelsX                                                                                                  = objc.RegisterName("strideInPixelsX")
+	_mPSCNNPoolingGradientNodeSelStrideInPixelsY                                                                                                  = objc.RegisterName("strideInPixelsY")
 )
 
 func MPSCNNPoolingGradientNodeFromID(id objc.ID) *MPSCNNPoolingGradientNode {
@@ -37,14 +37,18 @@ func MPSCNNPoolingGradientNodeFromID(id objc.ID) *MPSCNNPoolingGradientNode {
 // @abstract make a pooling gradient node @discussion  It would be much easier to use [inferencePoolingNode gradientNodeForSourceGradient:] instead. @param      sourceGradient  The gradient from the downstream gradient filter. @param      sourceImage     The input image to the inference pooling filter @param      gradientState   The gradient state produced by the inference poolin filter @param      kernelWidth     The kernel width of the inference filter @param      kernelHeight    The kernel height of the inference filter @param      strideInPixelsX The X stride from the inference filter @param      strideInPixelsY The Y stride from the inference filter
 func MPSCNNPoolingGradientNodeNodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYPaddingPolicy(sourceGradient *MPSNNImageNode, sourceImage *MPSNNImageNode, gradientState *MPSNNGradientStateNode, kernelWidth uint, kernelHeight uint, strideInPixelsX uint, strideInPixelsY uint, paddingPolicy MPSNNPadding) *MPSCNNPoolingGradientNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNPoolingGradientNode), _mPSCNNPoolingGradientNodeSelNodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYPaddingPolicy, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr(), kernelWidth, kernelHeight, strideInPixelsX, strideInPixelsY, paddingPolicy)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNPoolingGradientNodeFromID(_ret)
 }
 
 // @abstract make a pooling gradient node @discussion  It would be much easier to use [inferencePoolingNode gradientNodeForSourceGradient:] instead. @param      sourceGradient  The gradient from the downstream gradient filter. @param      sourceImage     The input image to the inference pooling filter @param      gradientState   The gradient state produced by the inference poolin filter @param      kernelWidth     The kernel width of the inference filter @param      kernelHeight    The kernel height of the inference filter @param      strideInPixelsX The X stride from the inference filter @param      strideInPixelsY The Y stride from the inference filter
 func (o *MPSCNNPoolingGradientNode) InitWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYPaddingPolicy(sourceGradient *MPSNNImageNode, sourceImage *MPSNNImageNode, gradientState *MPSNNGradientStateNode, kernelWidth uint, kernelHeight uint, strideInPixelsX uint, strideInPixelsY uint, paddingPolicy MPSNNPadding) *MPSCNNPoolingGradientNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNPoolingGradientNodeSelInitWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYPaddingPolicy, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr(), kernelWidth, kernelHeight, strideInPixelsX, strideInPixelsY, paddingPolicy)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNPoolingGradientNodeFromID(_ret)
 }
 
@@ -67,4 +71,3 @@ func (o *MPSCNNPoolingGradientNode) StrideInPixelsY() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mPSCNNPoolingGradientNodeSelStrideInPixelsY)
 	return _ret
 }
-

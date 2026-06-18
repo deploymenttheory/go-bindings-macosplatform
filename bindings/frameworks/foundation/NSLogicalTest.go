@@ -15,10 +15,10 @@ type NSLogicalTest struct {
 }
 
 var (
-	_clsNSLogicalTest = _objcClass("NSLogicalTest")
+	_clsNSLogicalTest                     = _objcClass("NSLogicalTest")
 	_nSLogicalTestSelInitAndTestWithTests = objc.RegisterName("initAndTestWithTests:")
-	_nSLogicalTestSelInitOrTestWithTests = objc.RegisterName("initOrTestWithTests:")
-	_nSLogicalTestSelInitNotTestWithTest = objc.RegisterName("initNotTestWithTest:")
+	_nSLogicalTestSelInitOrTestWithTests  = objc.RegisterName("initOrTestWithTests:")
+	_nSLogicalTestSelInitNotTestWithTest  = objc.RegisterName("initNotTestWithTest:")
 )
 
 func NSLogicalTestFromID(id objc.ID) *NSLogicalTest {
@@ -33,19 +33,24 @@ func NSLogicalTestFromID(id objc.ID) *NSLogicalTest {
 
 func (o *NSLogicalTest) InitAndTestWithTests(subTests *NSArray[*NSSpecifierTest]) *NSLogicalTest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLogicalTestSelInitAndTestWithTests, subTests.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLogicalTestFromID(_ret)
 }
 
 func (o *NSLogicalTest) InitOrTestWithTests(subTests *NSArray[*NSSpecifierTest]) *NSLogicalTest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLogicalTestSelInitOrTestWithTests, subTests.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLogicalTestFromID(_ret)
 }
 
 func (o *NSLogicalTest) InitNotTestWithTest(subTest *NSScriptWhoseTest) *NSLogicalTest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLogicalTestSelInitNotTestWithTest, subTest.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLogicalTestFromID(_ret)
 }
-

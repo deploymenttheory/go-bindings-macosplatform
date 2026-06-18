@@ -26,4 +26,3 @@ func MPSNNBilinearScaleNodeFromID(id objc.ID) *MPSNNBilinearScaleNode {
 	purego.Track(o)
 	return o
 }
-

@@ -18,7 +18,9 @@ type CNNNormalizationGammaAndBetaState struct {
 }
 
 // Unwrap returns the underlying [raw.MPSCNNNormalizationGammaAndBetaState].
-func (x *CNNNormalizationGammaAndBetaState) Unwrap() *raw.MPSCNNNormalizationGammaAndBetaState { return x.inner }
+func (x *CNNNormalizationGammaAndBetaState) Unwrap() *raw.MPSCNNNormalizationGammaAndBetaState {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -73,4 +75,3 @@ type CNNNormalizationGammaAndBetaStateable interface {
 }
 
 var _ CNNNormalizationGammaAndBetaStateable = (*CNNNormalizationGammaAndBetaState)(nil)
-

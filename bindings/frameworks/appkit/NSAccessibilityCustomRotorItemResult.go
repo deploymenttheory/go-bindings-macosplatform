@@ -18,15 +18,15 @@ type NSAccessibilityCustomRotorItemResult struct {
 }
 
 var (
-	_clsNSAccessibilityCustomRotorItemResult = _objcClass("NSAccessibilityCustomRotorItemResult")
-	_nSAccessibilityCustomRotorItemResultSelInitWithTargetElement = objc.RegisterName("initWithTargetElement:")
+	_clsNSAccessibilityCustomRotorItemResult                                    = _objcClass("NSAccessibilityCustomRotorItemResult")
+	_nSAccessibilityCustomRotorItemResultSelInitWithTargetElement               = objc.RegisterName("initWithTargetElement:")
 	_nSAccessibilityCustomRotorItemResultSelInitWithItemLoadingTokenCustomLabel = objc.RegisterName("initWithItemLoadingToken:customLabel:")
-	_nSAccessibilityCustomRotorItemResultSelTargetElement = objc.RegisterName("targetElement")
-	_nSAccessibilityCustomRotorItemResultSelItemLoadingToken = objc.RegisterName("itemLoadingToken")
-	_nSAccessibilityCustomRotorItemResultSelTargetRange = objc.RegisterName("targetRange")
-	_nSAccessibilityCustomRotorItemResultSelSetTargetRange = objc.RegisterName("setTargetRange:")
-	_nSAccessibilityCustomRotorItemResultSelCustomLabel = objc.RegisterName("customLabel")
-	_nSAccessibilityCustomRotorItemResultSelSetCustomLabel = objc.RegisterName("setCustomLabel:")
+	_nSAccessibilityCustomRotorItemResultSelTargetElement                       = objc.RegisterName("targetElement")
+	_nSAccessibilityCustomRotorItemResultSelItemLoadingToken                    = objc.RegisterName("itemLoadingToken")
+	_nSAccessibilityCustomRotorItemResultSelTargetRange                         = objc.RegisterName("targetRange")
+	_nSAccessibilityCustomRotorItemResultSelSetTargetRange                      = objc.RegisterName("setTargetRange:")
+	_nSAccessibilityCustomRotorItemResultSelCustomLabel                         = objc.RegisterName("customLabel")
+	_nSAccessibilityCustomRotorItemResultSelSetCustomLabel                      = objc.RegisterName("setCustomLabel:")
 )
 
 func NSAccessibilityCustomRotorItemResultFromID(id objc.ID) *NSAccessibilityCustomRotorItemResult {
@@ -42,14 +42,18 @@ func NSAccessibilityCustomRotorItemResultFromID(id objc.ID) *NSAccessibilityCust
 // @brief Creates an item result with a given target element. Assistive technologies may try to set accessibility focus on the element.
 func (o *NSAccessibilityCustomRotorItemResult) InitWithTargetElement(targetElement NSAccessibilityElementProtocol) *NSAccessibilityCustomRotorItemResult {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAccessibilityCustomRotorItemResultSelInitWithTargetElement, targetElement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAccessibilityCustomRotorItemResultFromID(_ret)
 }
 
 // @brief Creates an item result with a given item load token and custom label. Use this initializer if the application has not yet loaded the element backing the item result.
 func (o *NSAccessibilityCustomRotorItemResult) InitWithItemLoadingTokenCustomLabel(itemLoadingToken objc.ID, customLabel *foundation.NSString) *NSAccessibilityCustomRotorItemResult {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAccessibilityCustomRotorItemResultSelInitWithItemLoadingTokenCustomLabel, itemLoadingToken, customLabel.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAccessibilityCustomRotorItemResultFromID(_ret)
 }
 
@@ -79,7 +83,9 @@ func (o *NSAccessibilityCustomRotorItemResult) SetTargetRange(targetRange founda
 // @brief A localized label that can be used instead of the default item label to describe the item result. @remark Required if using the loader-based initializer. Optional otherwise.
 func (o *NSAccessibilityCustomRotorItemResult) CustomLabel() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAccessibilityCustomRotorItemResultSelCustomLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -87,4 +93,3 @@ func (o *NSAccessibilityCustomRotorItemResult) CustomLabel() *foundation.NSStrin
 func (o *NSAccessibilityCustomRotorItemResult) SetCustomLabel(customLabel *foundation.NSString) {
 	o.Ptr().Send(_nSAccessibilityCustomRotorItemResultSelSetCustomLabel, customLabel.Ptr())
 }
-

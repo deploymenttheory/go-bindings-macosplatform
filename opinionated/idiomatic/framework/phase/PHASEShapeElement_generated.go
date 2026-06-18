@@ -64,4 +64,3 @@ type ShapeElementable interface {
 }
 
 var _ ShapeElementable = (*ShapeElement)(nil)
-

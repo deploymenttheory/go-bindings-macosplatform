@@ -62,4 +62,3 @@ type GeodesicPolylineable interface {
 }
 
 var _ GeodesicPolylineable = (*GeodesicPolyline)(nil)
-

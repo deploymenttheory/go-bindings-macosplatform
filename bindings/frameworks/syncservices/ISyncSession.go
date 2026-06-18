@@ -16,38 +16,38 @@ type ISyncSession struct {
 }
 
 var (
-	_clsISyncSession = _objcClass("ISyncSession")
-	_iSyncSessionSelBeginSessionWithClientEntityNamesBeforeDate = objc.RegisterName("beginSessionWithClient:entityNames:beforeDate:")
-	_iSyncSessionSelBeginSessionInBackgroundWithClientEntityNamesTargetSelector = objc.RegisterName("beginSessionInBackgroundWithClient:entityNames:target:selector:")
-	_iSyncSessionSelCancelPreviousBeginSessionWithClient = objc.RegisterName("cancelPreviousBeginSessionWithClient:")
-	_iSyncSessionSelBeginSessionWithClientEntityNamesBeforeDateLastAnchors = objc.RegisterName("beginSessionWithClient:entityNames:beforeDate:lastAnchors:")
-	_iSyncSessionSelBeginSessionInBackgroundWithClientEntityNamesTargetSelectorLastAnchors = objc.RegisterName("beginSessionInBackgroundWithClient:entityNames:target:selector:lastAnchors:")
-	_iSyncSessionSelClientDidResetEntityNames = objc.RegisterName("clientDidResetEntityNames:")
-	_iSyncSessionSelClientWantsToPushAllRecordsForEntityNames = objc.RegisterName("clientWantsToPushAllRecordsForEntityNames:")
-	_iSyncSessionSelShouldPushChangesForEntityName = objc.RegisterName("shouldPushChangesForEntityName:")
-	_iSyncSessionSelShouldPushAllRecordsForEntityName = objc.RegisterName("shouldPushAllRecordsForEntityName:")
-	_iSyncSessionSelShouldPullChangesForEntityName = objc.RegisterName("shouldPullChangesForEntityName:")
-	_iSyncSessionSelShouldReplaceAllRecordsOnClientForEntityName = objc.RegisterName("shouldReplaceAllRecordsOnClientForEntityName:")
-	_iSyncSessionSelPushChange = objc.RegisterName("pushChange:")
-	_iSyncSessionSelPushChangesFromRecordWithIdentifier = objc.RegisterName("pushChangesFromRecord:withIdentifier:")
-	_iSyncSessionSelDeleteRecordWithIdentifier = objc.RegisterName("deleteRecordWithIdentifier:")
-	_iSyncSessionSelClientLostRecordWithIdentifierShouldReplaceOnNextSync = objc.RegisterName("clientLostRecordWithIdentifier:shouldReplaceOnNextSync:")
-	_iSyncSessionSelClientFinishedPushingChangesWithNextAnchors = objc.RegisterName("clientFinishedPushingChangesWithNextAnchors:")
-	_iSyncSessionSelPrepareToPullChangesForEntityNamesBeforeDate = objc.RegisterName("prepareToPullChangesForEntityNames:beforeDate:")
-	_iSyncSessionSelPrepareToPullChangesInBackgroundForEntityNamesTargetSelector = objc.RegisterName("prepareToPullChangesInBackgroundForEntityNames:target:selector:")
-	_iSyncSessionSelChangeEnumeratorForEntityNames = objc.RegisterName("changeEnumeratorForEntityNames:")
+	_clsISyncSession                                                                               = _objcClass("ISyncSession")
+	_iSyncSessionSelBeginSessionWithClientEntityNamesBeforeDate                                    = objc.RegisterName("beginSessionWithClient:entityNames:beforeDate:")
+	_iSyncSessionSelBeginSessionInBackgroundWithClientEntityNamesTargetSelector                    = objc.RegisterName("beginSessionInBackgroundWithClient:entityNames:target:selector:")
+	_iSyncSessionSelCancelPreviousBeginSessionWithClient                                           = objc.RegisterName("cancelPreviousBeginSessionWithClient:")
+	_iSyncSessionSelBeginSessionWithClientEntityNamesBeforeDateLastAnchors                         = objc.RegisterName("beginSessionWithClient:entityNames:beforeDate:lastAnchors:")
+	_iSyncSessionSelBeginSessionInBackgroundWithClientEntityNamesTargetSelectorLastAnchors         = objc.RegisterName("beginSessionInBackgroundWithClient:entityNames:target:selector:lastAnchors:")
+	_iSyncSessionSelClientDidResetEntityNames                                                      = objc.RegisterName("clientDidResetEntityNames:")
+	_iSyncSessionSelClientWantsToPushAllRecordsForEntityNames                                      = objc.RegisterName("clientWantsToPushAllRecordsForEntityNames:")
+	_iSyncSessionSelShouldPushChangesForEntityName                                                 = objc.RegisterName("shouldPushChangesForEntityName:")
+	_iSyncSessionSelShouldPushAllRecordsForEntityName                                              = objc.RegisterName("shouldPushAllRecordsForEntityName:")
+	_iSyncSessionSelShouldPullChangesForEntityName                                                 = objc.RegisterName("shouldPullChangesForEntityName:")
+	_iSyncSessionSelShouldReplaceAllRecordsOnClientForEntityName                                   = objc.RegisterName("shouldReplaceAllRecordsOnClientForEntityName:")
+	_iSyncSessionSelPushChange                                                                     = objc.RegisterName("pushChange:")
+	_iSyncSessionSelPushChangesFromRecordWithIdentifier                                            = objc.RegisterName("pushChangesFromRecord:withIdentifier:")
+	_iSyncSessionSelDeleteRecordWithIdentifier                                                     = objc.RegisterName("deleteRecordWithIdentifier:")
+	_iSyncSessionSelClientLostRecordWithIdentifierShouldReplaceOnNextSync                          = objc.RegisterName("clientLostRecordWithIdentifier:shouldReplaceOnNextSync:")
+	_iSyncSessionSelClientFinishedPushingChangesWithNextAnchors                                    = objc.RegisterName("clientFinishedPushingChangesWithNextAnchors:")
+	_iSyncSessionSelPrepareToPullChangesForEntityNamesBeforeDate                                   = objc.RegisterName("prepareToPullChangesForEntityNames:beforeDate:")
+	_iSyncSessionSelPrepareToPullChangesInBackgroundForEntityNamesTargetSelector                   = objc.RegisterName("prepareToPullChangesInBackgroundForEntityNames:target:selector:")
+	_iSyncSessionSelChangeEnumeratorForEntityNames                                                 = objc.RegisterName("changeEnumeratorForEntityNames:")
 	_iSyncSessionSelClientAcceptedChangesForRecordWithIdentifierFormattedRecordNewRecordIdentifier = objc.RegisterName("clientAcceptedChangesForRecordWithIdentifier:formattedRecord:newRecordIdentifier:")
-	_iSyncSessionSelClientRefusedChangesForRecordWithIdentifier = objc.RegisterName("clientRefusedChangesForRecordWithIdentifier:")
-	_iSyncSessionSelClientCommittedAcceptedChanges = objc.RegisterName("clientCommittedAcceptedChanges")
-	_iSyncSessionSelClientCommittedAcceptedChangesWithNextAnchors = objc.RegisterName("clientCommittedAcceptedChangesWithNextAnchors:")
-	_iSyncSessionSelClientChangedRecordIdentifiers = objc.RegisterName("clientChangedRecordIdentifiers:")
-	_iSyncSessionSelIsCancelled = objc.RegisterName("isCancelled")
-	_iSyncSessionSelCancelSyncing = objc.RegisterName("cancelSyncing")
-	_iSyncSessionSelFinishSyncing = objc.RegisterName("finishSyncing")
-	_iSyncSessionSelClientInfoForRecordWithIdentifier = objc.RegisterName("clientInfoForRecordWithIdentifier:")
-	_iSyncSessionSelSetClientInfoForRecordWithIdentifier = objc.RegisterName("setClientInfo:forRecordWithIdentifier:")
-	_iSyncSessionSelSnapshotOfRecordsInTruth = objc.RegisterName("snapshotOfRecordsInTruth")
-	_iSyncSessionSelPing = objc.RegisterName("ping")
+	_iSyncSessionSelClientRefusedChangesForRecordWithIdentifier                                    = objc.RegisterName("clientRefusedChangesForRecordWithIdentifier:")
+	_iSyncSessionSelClientCommittedAcceptedChanges                                                 = objc.RegisterName("clientCommittedAcceptedChanges")
+	_iSyncSessionSelClientCommittedAcceptedChangesWithNextAnchors                                  = objc.RegisterName("clientCommittedAcceptedChangesWithNextAnchors:")
+	_iSyncSessionSelClientChangedRecordIdentifiers                                                 = objc.RegisterName("clientChangedRecordIdentifiers:")
+	_iSyncSessionSelIsCancelled                                                                    = objc.RegisterName("isCancelled")
+	_iSyncSessionSelCancelSyncing                                                                  = objc.RegisterName("cancelSyncing")
+	_iSyncSessionSelFinishSyncing                                                                  = objc.RegisterName("finishSyncing")
+	_iSyncSessionSelClientInfoForRecordWithIdentifier                                              = objc.RegisterName("clientInfoForRecordWithIdentifier:")
+	_iSyncSessionSelSetClientInfoForRecordWithIdentifier                                           = objc.RegisterName("setClientInfo:forRecordWithIdentifier:")
+	_iSyncSessionSelSnapshotOfRecordsInTruth                                                       = objc.RegisterName("snapshotOfRecordsInTruth")
+	_iSyncSessionSelPing                                                                           = objc.RegisterName("ping")
 )
 
 func ISyncSessionFromID(id objc.ID) *ISyncSession {
@@ -63,7 +63,9 @@ func ISyncSessionFromID(id objc.ID) *ISyncSession {
 // Deprecated: since macOS 10.7.
 func ISyncSessionBeginSessionWithClientEntityNamesBeforeDate(client *ISyncClient, entityNames *foundation.NSArray[objc.ID], date *foundation.NSDate) *ISyncSession {
 	_ret := objc.Send[objc.ID](objc.ID(_clsISyncSession), _iSyncSessionSelBeginSessionWithClientEntityNamesBeforeDate, client.Ptr(), entityNames, date.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ISyncSessionFromID(_ret)
 }
 
@@ -80,7 +82,9 @@ func ISyncSessionCancelPreviousBeginSessionWithClient(client *ISyncClient) {
 // Deprecated: since macOS 10.7.
 func ISyncSessionBeginSessionWithClientEntityNamesBeforeDateLastAnchors(client *ISyncClient, entityNames *foundation.NSArray[objc.ID], date *foundation.NSDate, anchors *foundation.NSDictionary[objc.ID, objc.ID]) *ISyncSession {
 	_ret := objc.Send[objc.ID](objc.ID(_clsISyncSession), _iSyncSessionSelBeginSessionWithClientEntityNamesBeforeDateLastAnchors, client.Ptr(), entityNames, date.Ptr(), anchors)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ISyncSessionFromID(_ret)
 }
 
@@ -220,7 +224,9 @@ func (o *ISyncSession) SetClientInfoForRecordWithIdentifier(clientInfo foundatio
 // Deprecated: since macOS 10.7.
 func (o *ISyncSession) SnapshotOfRecordsInTruth() *ISyncRecordSnapshot {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncSessionSelSnapshotOfRecordsInTruth)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ISyncRecordSnapshotFromID(_ret)
 }
 
@@ -228,4 +234,3 @@ func (o *ISyncSession) SnapshotOfRecordsInTruth() *ISyncRecordSnapshot {
 func (o *ISyncSession) Ping() {
 	o.Ptr().Send(_iSyncSessionSelPing)
 }
-

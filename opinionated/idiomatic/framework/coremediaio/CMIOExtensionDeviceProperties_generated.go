@@ -153,4 +153,3 @@ type ExtensionDevicePropertiesable interface {
 }
 
 var _ ExtensionDevicePropertiesable = (*ExtensionDeviceProperties)(nil)
-

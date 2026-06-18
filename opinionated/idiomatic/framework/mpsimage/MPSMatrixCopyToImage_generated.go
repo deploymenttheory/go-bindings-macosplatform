@@ -109,4 +109,3 @@ type MatrixCopyToImageable interface {
 }
 
 var _ MatrixCopyToImageable = (*MatrixCopyToImage)(nil)
-

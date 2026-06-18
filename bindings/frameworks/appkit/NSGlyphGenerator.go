@@ -16,9 +16,9 @@ type NSGlyphGenerator struct {
 }
 
 var (
-	_clsNSGlyphGenerator = _objcClass("NSGlyphGenerator")
+	_clsNSGlyphGenerator                                                                               = _objcClass("NSGlyphGenerator")
 	_nSGlyphGeneratorSelGenerateGlyphsForGlyphStorageDesiredNumberOfCharactersGlyphIndexCharacterIndex = objc.RegisterName("generateGlyphsForGlyphStorage:desiredNumberOfCharacters:glyphIndex:characterIndex:")
-	_nSGlyphGeneratorSelSharedGlyphGenerator = objc.RegisterName("sharedGlyphGenerator")
+	_nSGlyphGeneratorSelSharedGlyphGenerator                                                           = objc.RegisterName("sharedGlyphGenerator")
 )
 
 func NSGlyphGeneratorFromID(id objc.ID) *NSGlyphGenerator {
@@ -37,7 +37,8 @@ func (o *NSGlyphGenerator) GenerateGlyphsForGlyphStorageDesiredNumberOfCharacter
 
 func NSGlyphGeneratorSharedGlyphGenerator() *NSGlyphGenerator {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSGlyphGenerator), _nSGlyphGeneratorSelSharedGlyphGenerator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGlyphGeneratorFromID(_ret)
 }
-

@@ -19,4 +19,3 @@ func DCSCopyTextDefinition(dictionary unsafe.Pointer, textString unsafe.Pointer,
 func DCSGetTermRangeInString(dictionary unsafe.Pointer, textString unsafe.Pointer, offset int) corefoundation.CFRange {
 	return raw.DCSGetTermRangeInString(dictionary, textString, offset)
 }
-

@@ -66,4 +66,3 @@ type FrameRateRangeable interface {
 }
 
 var _ FrameRateRangeable = (*FrameRateRange)(nil)
-

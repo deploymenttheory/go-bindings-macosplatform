@@ -16,10 +16,10 @@ type NSAtomicStoreCacheNode struct {
 }
 
 var (
-	_clsNSAtomicStoreCacheNode = _objcClass("NSAtomicStoreCacheNode")
+	_clsNSAtomicStoreCacheNode                 = _objcClass("NSAtomicStoreCacheNode")
 	_nSAtomicStoreCacheNodeSelInitWithObjectID = objc.RegisterName("initWithObjectID:")
-	_nSAtomicStoreCacheNodeSelObjectID = objc.RegisterName("objectID")
-	_nSAtomicStoreCacheNodeSelPropertyCache = objc.RegisterName("propertyCache")
+	_nSAtomicStoreCacheNodeSelObjectID         = objc.RegisterName("objectID")
+	_nSAtomicStoreCacheNodeSelPropertyCache    = objc.RegisterName("propertyCache")
 	_nSAtomicStoreCacheNodeSelSetPropertyCache = objc.RegisterName("setPropertyCache:")
 )
 
@@ -35,13 +35,17 @@ func NSAtomicStoreCacheNodeFromID(id objc.ID) *NSAtomicStoreCacheNode {
 
 func (o *NSAtomicStoreCacheNode) InitWithObjectID(moid *NSManagedObjectID) *NSAtomicStoreCacheNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAtomicStoreCacheNodeSelInitWithObjectID, moid.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAtomicStoreCacheNodeFromID(_ret)
 }
 
 func (o *NSAtomicStoreCacheNode) ObjectID() *NSManagedObjectID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAtomicStoreCacheNodeSelObjectID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectIDFromID(_ret)
 }
 
@@ -53,4 +57,3 @@ func (o *NSAtomicStoreCacheNode) PropertyCache() *foundation.NSMutableDictionary
 func (o *NSAtomicStoreCacheNode) SetPropertyCache(propertyCache *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) {
 	o.Ptr().Send(_nSAtomicStoreCacheNodeSelSetPropertyCache, propertyCache)
 }
-

@@ -11,10 +11,10 @@ import (
 type EvCmd int64
 
 const (
-	EVNOP EvCmd = 0
-	EVHIDE EvCmd = 1
-	EVSHOW EvCmd = 2
-	EVMOVE EvCmd = 3
+	EVNOP   EvCmd = 0
+	EVHIDE  EvCmd = 1
+	EVSHOW  EvCmd = 2
+	EVMOVE  EvCmd = 3
 	EVLEVEL EvCmd = 4
 )
 
@@ -39,7 +39,7 @@ func (e EvCmd) String() string {
 type MDLabelDomain int64
 
 const (
-	KMDLabelUserDomain MDLabelDomain = 0
+	KMDLabelUserDomain  MDLabelDomain = 0
 	KMDLabelLocalDomain MDLabelDomain = 1
 )
 
@@ -57,8 +57,8 @@ func (e MDLabelDomain) String() string {
 type MDQueryOptionFlags int64
 
 const (
-	KMDQuerySynchronous MDQueryOptionFlags = 1
-	KMDQueryWantsUpdates MDQueryOptionFlags = 4
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
 	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
 )
 
@@ -94,8 +94,8 @@ func (e MDQuerySortOptionFlags) String() string {
 type NXMouseButton int64
 
 const (
-	NX_OneButton NXMouseButton = 0
-	NX_LeftButton NXMouseButton = 1
+	NX_OneButton   NXMouseButton = 0
+	NX_LeftButton  NXMouseButton = 1
 	NX_RightButton NXMouseButton = 2
 )
 
@@ -115,7 +115,7 @@ func (e NXMouseButton) String() string {
 type PMPageToPaperMappingType int64
 
 const (
-	KPMPageToPaperMappingNone PMPageToPaperMappingType = 1
+	KPMPageToPaperMappingNone       PMPageToPaperMappingType = 1
 	KPMPageToPaperMappingScaleToFit PMPageToPaperMappingType = 2
 )
 
@@ -134,8 +134,8 @@ type Acl_entry_id_t int64
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
-	ACL_NEXT_ENTRY Acl_entry_id_t = -1
-	ACL_LAST_ENTRY Acl_entry_id_t = -2
+	ACL_NEXT_ENTRY  Acl_entry_id_t = -1
+	ACL_LAST_ENTRY  Acl_entry_id_t = -2
 )
 
 func (e Acl_entry_id_t) String() string {
@@ -154,13 +154,13 @@ func (e Acl_entry_id_t) String() string {
 type Acl_flag_t int64
 
 const (
-	ACL_FLAG_DEFER_INHERIT Acl_flag_t = 1
-	ACL_FLAG_NO_INHERIT Acl_flag_t = 131072
-	ACL_ENTRY_INHERITED Acl_flag_t = 16
-	ACL_ENTRY_FILE_INHERIT Acl_flag_t = 32
+	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
+	ACL_FLAG_NO_INHERIT         Acl_flag_t = 131072
+	ACL_ENTRY_INHERITED         Acl_flag_t = 16
+	ACL_ENTRY_FILE_INHERIT      Acl_flag_t = 32
 	ACL_ENTRY_DIRECTORY_INHERIT Acl_flag_t = 64
-	ACL_ENTRY_LIMIT_INHERIT Acl_flag_t = 128
-	ACL_ENTRY_ONLY_INHERIT Acl_flag_t = 256
+	ACL_ENTRY_LIMIT_INHERIT     Acl_flag_t = 128
+	ACL_ENTRY_ONLY_INHERIT      Acl_flag_t = 256
 )
 
 func (e Acl_flag_t) String() string {
@@ -187,24 +187,24 @@ func (e Acl_flag_t) String() string {
 type Acl_perm_t int64
 
 const (
-	ACL_READ_DATA Acl_perm_t = 2
-	ACL_LIST_DIRECTORY Acl_perm_t = 2
-	ACL_WRITE_DATA Acl_perm_t = 4
-	ACL_ADD_FILE Acl_perm_t = 4
-	ACL_EXECUTE Acl_perm_t = 8
-	ACL_SEARCH Acl_perm_t = 8
-	ACL_DELETE Acl_perm_t = 16
-	ACL_APPEND_DATA Acl_perm_t = 32
-	ACL_ADD_SUBDIRECTORY Acl_perm_t = 32
-	ACL_DELETE_CHILD Acl_perm_t = 64
-	ACL_READ_ATTRIBUTES Acl_perm_t = 128
-	ACL_WRITE_ATTRIBUTES Acl_perm_t = 256
-	ACL_READ_EXTATTRIBUTES Acl_perm_t = 512
+	ACL_READ_DATA           Acl_perm_t = 2
+	ACL_LIST_DIRECTORY      Acl_perm_t = 2
+	ACL_WRITE_DATA          Acl_perm_t = 4
+	ACL_ADD_FILE            Acl_perm_t = 4
+	ACL_EXECUTE             Acl_perm_t = 8
+	ACL_SEARCH              Acl_perm_t = 8
+	ACL_DELETE              Acl_perm_t = 16
+	ACL_APPEND_DATA         Acl_perm_t = 32
+	ACL_ADD_SUBDIRECTORY    Acl_perm_t = 32
+	ACL_DELETE_CHILD        Acl_perm_t = 64
+	ACL_READ_ATTRIBUTES     Acl_perm_t = 128
+	ACL_WRITE_ATTRIBUTES    Acl_perm_t = 256
+	ACL_READ_EXTATTRIBUTES  Acl_perm_t = 512
 	ACL_WRITE_EXTATTRIBUTES Acl_perm_t = 1024
-	ACL_READ_SECURITY Acl_perm_t = 2048
-	ACL_WRITE_SECURITY Acl_perm_t = 4096
-	ACL_CHANGE_OWNER Acl_perm_t = 8192
-	ACL_SYNCHRONIZE Acl_perm_t = 1048576
+	ACL_READ_SECURITY       Acl_perm_t = 2048
+	ACL_WRITE_SECURITY      Acl_perm_t = 4096
+	ACL_CHANGE_OWNER        Acl_perm_t = 8192
+	ACL_SYNCHRONIZE         Acl_perm_t = 1048576
 )
 
 func (e Acl_perm_t) String() string {
@@ -245,9 +245,9 @@ func (e Acl_perm_t) String() string {
 type Acl_tag_t int64
 
 const (
-	ACL_UNDEFINED_TAG Acl_tag_t = 0
+	ACL_UNDEFINED_TAG  Acl_tag_t = 0
 	ACL_EXTENDED_ALLOW Acl_tag_t = 1
-	ACL_EXTENDED_DENY Acl_tag_t = 2
+	ACL_EXTENDED_DENY  Acl_tag_t = 2
 )
 
 func (e Acl_tag_t) String() string {
@@ -267,12 +267,12 @@ type Acl_type_t int64
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
-	ACL_TYPE_ACCESS Acl_type_t = 0
-	ACL_TYPE_DEFAULT Acl_type_t = 1
-	ACL_TYPE_AFS Acl_type_t = 2
-	ACL_TYPE_CODA Acl_type_t = 3
-	ACL_TYPE_NTFS Acl_type_t = 4
-	ACL_TYPE_NWFS Acl_type_t = 5
+	ACL_TYPE_ACCESS   Acl_type_t = 0
+	ACL_TYPE_DEFAULT  Acl_type_t = 1
+	ACL_TYPE_AFS      Acl_type_t = 2
+	ACL_TYPE_CODA     Acl_type_t = 3
+	ACL_TYPE_NTFS     Acl_type_t = 4
+	ACL_TYPE_NWFS     Acl_type_t = 5
 )
 
 func (e Acl_type_t) String() string {
@@ -299,14 +299,14 @@ func (e Acl_type_t) String() string {
 type Clockid_t int64
 
 const (
-	_CLOCK_REALTIME Clockid_t = 0
-	_CLOCK_MONOTONIC Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW Clockid_t = 4
+	_CLOCK_REALTIME             Clockid_t = 0
+	_CLOCK_MONOTONIC            Clockid_t = 6
+	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
 	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID Clockid_t = 16
+	_CLOCK_UPTIME_RAW           Clockid_t = 8
+	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
+	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
+	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
 )
 
 func (e Clockid_t) String() string {
@@ -335,9 +335,9 @@ func (e Clockid_t) String() string {
 type Dispatch_autorelease_frequency_t uint64
 
 const (
-	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT Dispatch_autorelease_frequency_t = 0
+	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT   Dispatch_autorelease_frequency_t = 0
 	DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM Dispatch_autorelease_frequency_t = 1
-	DISPATCH_AUTORELEASE_FREQUENCY_NEVER Dispatch_autorelease_frequency_t = 2
+	DISPATCH_AUTORELEASE_FREQUENCY_NEVER     Dispatch_autorelease_frequency_t = 2
 )
 
 func (e Dispatch_autorelease_frequency_t) String() string {
@@ -356,36 +356,50 @@ func (e Dispatch_autorelease_frequency_t) String() string {
 type Dispatch_block_flags_t uint64
 
 const (
-	DISPATCH_BLOCK_BARRIER Dispatch_block_flags_t = 1
-	DISPATCH_BLOCK_DETACHED Dispatch_block_flags_t = 2
-	DISPATCH_BLOCK_ASSIGN_CURRENT Dispatch_block_flags_t = 4
-	DISPATCH_BLOCK_NO_QOS_CLASS Dispatch_block_flags_t = 8
+	DISPATCH_BLOCK_BARRIER           Dispatch_block_flags_t = 1
+	DISPATCH_BLOCK_DETACHED          Dispatch_block_flags_t = 2
+	DISPATCH_BLOCK_ASSIGN_CURRENT    Dispatch_block_flags_t = 4
+	DISPATCH_BLOCK_NO_QOS_CLASS      Dispatch_block_flags_t = 8
 	DISPATCH_BLOCK_INHERIT_QOS_CLASS Dispatch_block_flags_t = 16
 	DISPATCH_BLOCK_ENFORCE_QOS_CLASS Dispatch_block_flags_t = 32
 )
 
 func (e Dispatch_block_flags_t) String() string {
 	var parts []string
-	if e&DISPATCH_BLOCK_BARRIER != 0 { parts = append(parts, "DISPATCH_BLOCK_BARRIER") }
-	if e&DISPATCH_BLOCK_DETACHED != 0 { parts = append(parts, "DISPATCH_BLOCK_DETACHED") }
-	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 { parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT") }
-	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS") }
-	if len(parts) == 0 { return "0" }
+	if e&DISPATCH_BLOCK_BARRIER != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_BARRIER")
+	}
+	if e&DISPATCH_BLOCK_DETACHED != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_DETACHED")
+	}
+	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT")
+	}
+	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Filesec_property_t int64
 
 const (
-	FILESEC_OWNER Filesec_property_t = 1
-	FILESEC_GROUP Filesec_property_t = 2
-	FILESEC_UUID Filesec_property_t = 3
-	FILESEC_MODE Filesec_property_t = 4
-	FILESEC_ACL Filesec_property_t = 5
-	FILESEC_GRPUUID Filesec_property_t = 6
-	FILESEC_ACL_RAW Filesec_property_t = 100
+	FILESEC_OWNER         Filesec_property_t = 1
+	FILESEC_GROUP         Filesec_property_t = 2
+	FILESEC_UUID          Filesec_property_t = 3
+	FILESEC_MODE          Filesec_property_t = 4
+	FILESEC_ACL           Filesec_property_t = 5
+	FILESEC_GRPUUID       Filesec_property_t = 6
+	FILESEC_ACL_RAW       Filesec_property_t = 100
 	FILESEC_ACL_ALLOCSIZE Filesec_property_t = 101
 )
 
@@ -415,8 +429,8 @@ func (e Filesec_property_t) String() string {
 type Idtype_t int64
 
 const (
-	P_ALL Idtype_t = 0
-	P_PID Idtype_t = 1
+	P_ALL  Idtype_t = 0
+	P_PID  Idtype_t = 1
 	P_PGID Idtype_t = 2
 )
 
@@ -436,62 +450,62 @@ func (e Idtype_t) String() string {
 type Ipc_info_object_type_t int64
 
 const (
-	IPC_OTYPE_NONE Ipc_info_object_type_t = 0
-	IPC_OTYPE_THREAD_CONTROL Ipc_info_object_type_t = 1
-	IPC_OTYPE_TASK_CONTROL Ipc_info_object_type_t = 2
-	IPC_OTYPE_HOST Ipc_info_object_type_t = 3
-	IPC_OTYPE_HOST_PRIV Ipc_info_object_type_t = 4
-	IPC_OTYPE_PROCESSOR Ipc_info_object_type_t = 5
-	IPC_OTYPE_PROCESSOR_SET Ipc_info_object_type_t = 6
-	IPC_OTYPE_PROCESSOR_SET_NAME Ipc_info_object_type_t = 7
-	IPC_OTYPE_TIMER Ipc_info_object_type_t = 8
-	IPC_OTYPE_PORT_SUBST_ONCE Ipc_info_object_type_t = 9
-	IPC_OTYPE_MIG Ipc_info_object_type_t = 10
-	IPC_OTYPE_MEMORY_OBJECT Ipc_info_object_type_t = 11
-	IPC_OTYPE_XMM_PAGER Ipc_info_object_type_t = 12
-	IPC_OTYPE_XMM_KERNEL Ipc_info_object_type_t = 13
-	IPC_OTYPE_XMM_REPLY Ipc_info_object_type_t = 14
-	IPC_OTYPE_UND_REPLY Ipc_info_object_type_t = 15
-	IPC_OTYPE_HOST_NOTIFY Ipc_info_object_type_t = 16
-	IPC_OTYPE_HOST_SECURITY Ipc_info_object_type_t = 17
-	IPC_OTYPE_LEDGER Ipc_info_object_type_t = 18
-	IPC_OTYPE_MAIN_DEVICE Ipc_info_object_type_t = 19
-	IPC_OTYPE_TASK_NAME Ipc_info_object_type_t = 20
-	IPC_OTYPE_SUBSYSTEM Ipc_info_object_type_t = 21
-	IPC_OTYPE_IO_DONE_QUEUE Ipc_info_object_type_t = 22
-	IPC_OTYPE_SEMAPHORE Ipc_info_object_type_t = 23
-	IPC_OTYPE_LOCK_SET Ipc_info_object_type_t = 24
-	IPC_OTYPE_CLOCK Ipc_info_object_type_t = 25
-	IPC_OTYPE_CLOCK_CTRL Ipc_info_object_type_t = 26
-	IPC_OTYPE_IOKIT_IDENT Ipc_info_object_type_t = 27
-	IPC_OTYPE_NAMED_ENTRY Ipc_info_object_type_t = 28
-	IPC_OTYPE_IOKIT_CONNECT Ipc_info_object_type_t = 29
-	IPC_OTYPE_IOKIT_OBJECT Ipc_info_object_type_t = 30
-	IPC_OTYPE_UPL Ipc_info_object_type_t = 31
-	IPC_OTYPE_MEM_OBJ_CONTROL Ipc_info_object_type_t = 32
-	IPC_OTYPE_AU_SESSIONPORT Ipc_info_object_type_t = 33
-	IPC_OTYPE_FILEPORT Ipc_info_object_type_t = 34
-	IPC_OTYPE_LABELH Ipc_info_object_type_t = 35
-	IPC_OTYPE_TASK_RESUME Ipc_info_object_type_t = 36
-	IPC_OTYPE_VOUCHER Ipc_info_object_type_t = 37
+	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
+	IPC_OTYPE_THREAD_CONTROL       Ipc_info_object_type_t = 1
+	IPC_OTYPE_TASK_CONTROL         Ipc_info_object_type_t = 2
+	IPC_OTYPE_HOST                 Ipc_info_object_type_t = 3
+	IPC_OTYPE_HOST_PRIV            Ipc_info_object_type_t = 4
+	IPC_OTYPE_PROCESSOR            Ipc_info_object_type_t = 5
+	IPC_OTYPE_PROCESSOR_SET        Ipc_info_object_type_t = 6
+	IPC_OTYPE_PROCESSOR_SET_NAME   Ipc_info_object_type_t = 7
+	IPC_OTYPE_TIMER                Ipc_info_object_type_t = 8
+	IPC_OTYPE_PORT_SUBST_ONCE      Ipc_info_object_type_t = 9
+	IPC_OTYPE_MIG                  Ipc_info_object_type_t = 10
+	IPC_OTYPE_MEMORY_OBJECT        Ipc_info_object_type_t = 11
+	IPC_OTYPE_XMM_PAGER            Ipc_info_object_type_t = 12
+	IPC_OTYPE_XMM_KERNEL           Ipc_info_object_type_t = 13
+	IPC_OTYPE_XMM_REPLY            Ipc_info_object_type_t = 14
+	IPC_OTYPE_UND_REPLY            Ipc_info_object_type_t = 15
+	IPC_OTYPE_HOST_NOTIFY          Ipc_info_object_type_t = 16
+	IPC_OTYPE_HOST_SECURITY        Ipc_info_object_type_t = 17
+	IPC_OTYPE_LEDGER               Ipc_info_object_type_t = 18
+	IPC_OTYPE_MAIN_DEVICE          Ipc_info_object_type_t = 19
+	IPC_OTYPE_TASK_NAME            Ipc_info_object_type_t = 20
+	IPC_OTYPE_SUBSYSTEM            Ipc_info_object_type_t = 21
+	IPC_OTYPE_IO_DONE_QUEUE        Ipc_info_object_type_t = 22
+	IPC_OTYPE_SEMAPHORE            Ipc_info_object_type_t = 23
+	IPC_OTYPE_LOCK_SET             Ipc_info_object_type_t = 24
+	IPC_OTYPE_CLOCK                Ipc_info_object_type_t = 25
+	IPC_OTYPE_CLOCK_CTRL           Ipc_info_object_type_t = 26
+	IPC_OTYPE_IOKIT_IDENT          Ipc_info_object_type_t = 27
+	IPC_OTYPE_NAMED_ENTRY          Ipc_info_object_type_t = 28
+	IPC_OTYPE_IOKIT_CONNECT        Ipc_info_object_type_t = 29
+	IPC_OTYPE_IOKIT_OBJECT         Ipc_info_object_type_t = 30
+	IPC_OTYPE_UPL                  Ipc_info_object_type_t = 31
+	IPC_OTYPE_MEM_OBJ_CONTROL      Ipc_info_object_type_t = 32
+	IPC_OTYPE_AU_SESSIONPORT       Ipc_info_object_type_t = 33
+	IPC_OTYPE_FILEPORT             Ipc_info_object_type_t = 34
+	IPC_OTYPE_LABELH               Ipc_info_object_type_t = 35
+	IPC_OTYPE_TASK_RESUME          Ipc_info_object_type_t = 36
+	IPC_OTYPE_VOUCHER              Ipc_info_object_type_t = 37
 	IPC_OTYPE_VOUCHER_ATTR_CONTROL Ipc_info_object_type_t = 38
-	IPC_OTYPE_WORK_INTERVAL Ipc_info_object_type_t = 39
-	IPC_OTYPE_UX_HANDLER Ipc_info_object_type_t = 40
-	IPC_OTYPE_UEXT_OBJECT Ipc_info_object_type_t = 41
-	IPC_OTYPE_ARCADE_REG Ipc_info_object_type_t = 42
-	IPC_OTYPE_EVENTLINK Ipc_info_object_type_t = 43
-	IPC_OTYPE_TASK_INSPECT Ipc_info_object_type_t = 44
-	IPC_OTYPE_TASK_READ Ipc_info_object_type_t = 45
-	IPC_OTYPE_THREAD_INSPECT Ipc_info_object_type_t = 46
-	IPC_OTYPE_THREAD_READ Ipc_info_object_type_t = 47
-	IPC_OTYPE_SUID_CRED Ipc_info_object_type_t = 48
-	IPC_OTYPE_HYPERVISOR Ipc_info_object_type_t = 49
-	IPC_OTYPE_TASK_ID_TOKEN Ipc_info_object_type_t = 50
-	IPC_OTYPE_TASK_FATAL Ipc_info_object_type_t = 51
-	IPC_OTYPE_KCDATA Ipc_info_object_type_t = 52
-	IPC_OTYPE_EXCLAVES_RESOURCE Ipc_info_object_type_t = 53
-	IPC_OTYPE_THREAD_RESUME Ipc_info_object_type_t = 54
-	IPC_OTYPE_UNKNOWN Ipc_info_object_type_t = 4294967295
+	IPC_OTYPE_WORK_INTERVAL        Ipc_info_object_type_t = 39
+	IPC_OTYPE_UX_HANDLER           Ipc_info_object_type_t = 40
+	IPC_OTYPE_UEXT_OBJECT          Ipc_info_object_type_t = 41
+	IPC_OTYPE_ARCADE_REG           Ipc_info_object_type_t = 42
+	IPC_OTYPE_EVENTLINK            Ipc_info_object_type_t = 43
+	IPC_OTYPE_TASK_INSPECT         Ipc_info_object_type_t = 44
+	IPC_OTYPE_TASK_READ            Ipc_info_object_type_t = 45
+	IPC_OTYPE_THREAD_INSPECT       Ipc_info_object_type_t = 46
+	IPC_OTYPE_THREAD_READ          Ipc_info_object_type_t = 47
+	IPC_OTYPE_SUID_CRED            Ipc_info_object_type_t = 48
+	IPC_OTYPE_HYPERVISOR           Ipc_info_object_type_t = 49
+	IPC_OTYPE_TASK_ID_TOKEN        Ipc_info_object_type_t = 50
+	IPC_OTYPE_TASK_FATAL           Ipc_info_object_type_t = 51
+	IPC_OTYPE_KCDATA               Ipc_info_object_type_t = 52
+	IPC_OTYPE_EXCLAVES_RESOURCE    Ipc_info_object_type_t = 53
+	IPC_OTYPE_THREAD_RESUME        Ipc_info_object_type_t = 54
+	IPC_OTYPE_UNKNOWN              Ipc_info_object_type_t = 4294967295
 )
 
 func (e Ipc_info_object_type_t) String() string {
@@ -617,15 +631,15 @@ type Launch_data_type_t int64
 
 const (
 	LAUNCH_DATA_DICTIONARY Launch_data_type_t = 1
-	LAUNCH_DATA_ARRAY Launch_data_type_t = 2
-	LAUNCH_DATA_FD Launch_data_type_t = 3
-	LAUNCH_DATA_INTEGER Launch_data_type_t = 4
-	LAUNCH_DATA_REAL Launch_data_type_t = 5
-	LAUNCH_DATA_BOOL Launch_data_type_t = 6
-	LAUNCH_DATA_STRING Launch_data_type_t = 7
-	LAUNCH_DATA_OPAQUE Launch_data_type_t = 8
-	LAUNCH_DATA_ERRNO Launch_data_type_t = 9
-	LAUNCH_DATA_MACHPORT Launch_data_type_t = 10
+	LAUNCH_DATA_ARRAY      Launch_data_type_t = 2
+	LAUNCH_DATA_FD         Launch_data_type_t = 3
+	LAUNCH_DATA_INTEGER    Launch_data_type_t = 4
+	LAUNCH_DATA_REAL       Launch_data_type_t = 5
+	LAUNCH_DATA_BOOL       Launch_data_type_t = 6
+	LAUNCH_DATA_STRING     Launch_data_type_t = 7
+	LAUNCH_DATA_OPAQUE     Launch_data_type_t = 8
+	LAUNCH_DATA_ERRNO      Launch_data_type_t = 9
+	LAUNCH_DATA_MACHPORT   Launch_data_type_t = 10
 )
 
 func (e Launch_data_type_t) String() string {
@@ -663,7 +677,9 @@ const (
 
 func (e Mach_vm_range_flags_t) String() string {
 	var parts []string
-	if len(parts) == 0 { return "0" }
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -671,7 +687,7 @@ type Mach_vm_range_flavor_t int64
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
-	MACH_VM_RANGE_FLAVOR_V1 Mach_vm_range_flavor_t = 1
+	MACH_VM_RANGE_FLAVOR_V1      Mach_vm_range_flavor_t = 1
 )
 
 func (e Mach_vm_range_flavor_t) String() string {
@@ -689,8 +705,8 @@ type Mach_vm_range_tag_t int64
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
-	MACH_VM_RANGE_DATA Mach_vm_range_tag_t = 1
-	MACH_VM_RANGE_FIXED Mach_vm_range_tag_t = 2
+	MACH_VM_RANGE_DATA    Mach_vm_range_tag_t = 1
+	MACH_VM_RANGE_FIXED   Mach_vm_range_tag_t = 2
 )
 
 func (e Mach_vm_range_tag_t) String() string {
@@ -709,26 +725,42 @@ func (e Mach_vm_range_tag_t) String() string {
 type Mpo_flags_t int64
 
 const (
-	MPO_PORT Mpo_flags_t = 0
-	MPO_SERVICE_PORT Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT Mpo_flags_t = 2048
-	MPO_REPLY_PORT Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT Mpo_flags_t = 32768
+	MPO_PORT                            Mpo_flags_t = 0
+	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
+	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
+	MPO_REPLY_PORT                      Mpo_flags_t = 4096
+	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
+	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
+	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
 	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
 )
 
 func (e Mpo_flags_t) String() string {
 	var parts []string
-	if e&MPO_SERVICE_PORT != 0 { parts = append(parts, "MPO_SERVICE_PORT") }
-	if e&MPO_CONNECTION_PORT != 0 { parts = append(parts, "MPO_CONNECTION_PORT") }
-	if e&MPO_REPLY_PORT != 0 { parts = append(parts, "MPO_REPLY_PORT") }
-	if e&MPO_WEAK_REPLY_PORT != 0 { parts = append(parts, "MPO_WEAK_REPLY_PORT") }
-	if e&MPO_NOTIFICATION_PORT != 0 { parts = append(parts, "MPO_NOTIFICATION_PORT") }
-	if e&MPO_EXCEPTION_PORT != 0 { parts = append(parts, "MPO_EXCEPTION_PORT") }
-	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 { parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY") }
-	if len(parts) == 0 { return "0" }
+	if e&MPO_SERVICE_PORT != 0 {
+		parts = append(parts, "MPO_SERVICE_PORT")
+	}
+	if e&MPO_CONNECTION_PORT != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT")
+	}
+	if e&MPO_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_REPLY_PORT")
+	}
+	if e&MPO_WEAK_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_WEAK_REPLY_PORT")
+	}
+	if e&MPO_NOTIFICATION_PORT != 0 {
+		parts = append(parts, "MPO_NOTIFICATION_PORT")
+	}
+	if e&MPO_EXCEPTION_PORT != 0 {
+		parts = append(parts, "MPO_EXCEPTION_PORT")
+	}
+	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -750,27 +782,27 @@ func (e Os_clockid_t) String() string {
 type Ptrauth_key int64
 
 const (
-	Ptrauth_key_none Ptrauth_key = -1
-	Ptrauth_key_asia Ptrauth_key = 0
-	Ptrauth_key_asib Ptrauth_key = 1
-	Ptrauth_key_asda Ptrauth_key = 2
-	Ptrauth_key_asdb Ptrauth_key = 3
+	Ptrauth_key_none                     Ptrauth_key = -1
+	Ptrauth_key_asia                     Ptrauth_key = 0
+	Ptrauth_key_asib                     Ptrauth_key = 1
+	Ptrauth_key_asda                     Ptrauth_key = 2
+	Ptrauth_key_asdb                     Ptrauth_key = 3
 	Ptrauth_key_process_independent_code Ptrauth_key = 0
-	Ptrauth_key_process_dependent_code Ptrauth_key = 1
+	Ptrauth_key_process_dependent_code   Ptrauth_key = 1
 	Ptrauth_key_process_independent_data Ptrauth_key = 2
-	Ptrauth_key_process_dependent_data Ptrauth_key = 3
-	Ptrauth_key_return_address Ptrauth_key = 1
-	Ptrauth_key_frame_pointer Ptrauth_key = 3
-	Ptrauth_key_function_pointer Ptrauth_key = 0
-	Ptrauth_key_block_function Ptrauth_key = 0
-	Ptrauth_key_cxx_vtable_pointer Ptrauth_key = 2
-	Ptrauth_key_method_list_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_isa_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_super_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_sel_pointer Ptrauth_key = 3
-	Ptrauth_key_objc_class_ro_pointer Ptrauth_key = 2
+	Ptrauth_key_process_dependent_data   Ptrauth_key = 3
+	Ptrauth_key_return_address           Ptrauth_key = 1
+	Ptrauth_key_frame_pointer            Ptrauth_key = 3
+	Ptrauth_key_function_pointer         Ptrauth_key = 0
+	Ptrauth_key_block_function           Ptrauth_key = 0
+	Ptrauth_key_cxx_vtable_pointer       Ptrauth_key = 2
+	Ptrauth_key_method_list_pointer      Ptrauth_key = 2
+	Ptrauth_key_objc_isa_pointer         Ptrauth_key = 2
+	Ptrauth_key_objc_super_pointer       Ptrauth_key = 2
+	Ptrauth_key_objc_sel_pointer         Ptrauth_key = 3
+	Ptrauth_key_objc_class_ro_pointer    Ptrauth_key = 2
 	Ptrauth_key_block_descriptor_pointer Ptrauth_key = 2
-	Ptrauth_key_init_fini_pointer Ptrauth_key = 0
+	Ptrauth_key_init_fini_pointer        Ptrauth_key = 0
 )
 
 func (e Ptrauth_key) String() string {
@@ -794,11 +826,11 @@ type Qos_class_t uint32
 
 const (
 	QOS_CLASS_USER_INTERACTIVE Qos_class_t = 33
-	QOS_CLASS_USER_INITIATED Qos_class_t = 25
-	QOS_CLASS_DEFAULT Qos_class_t = 21
-	QOS_CLASS_UTILITY Qos_class_t = 17
-	QOS_CLASS_BACKGROUND Qos_class_t = 9
-	QOS_CLASS_UNSPECIFIED Qos_class_t = 0
+	QOS_CLASS_USER_INITIATED   Qos_class_t = 25
+	QOS_CLASS_DEFAULT          Qos_class_t = 21
+	QOS_CLASS_UTILITY          Qos_class_t = 17
+	QOS_CLASS_BACKGROUND       Qos_class_t = 9
+	QOS_CLASS_UNSPECIFIED      Qos_class_t = 0
 )
 
 func (e Qos_class_t) String() string {
@@ -823,22 +855,22 @@ func (e Qos_class_t) String() string {
 type Virtual_memory_guard_exception_code_t int64
 
 const (
-	KGUARD_EXC_DEALLOC_GAP Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
 )
@@ -889,44 +921,58 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 type Xpc_listener_create_flags_t int64
 
 const (
-	XPC_LISTENER_CREATE_NONE Xpc_listener_create_flags_t = 0
-	XPC_LISTENER_CREATE_INACTIVE Xpc_listener_create_flags_t = 1
-	XPC_LISTENER_CREATE_FORCE_MACH Xpc_listener_create_flags_t = 2
+	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
+	XPC_LISTENER_CREATE_INACTIVE         Xpc_listener_create_flags_t = 1
+	XPC_LISTENER_CREATE_FORCE_MACH       Xpc_listener_create_flags_t = 2
 	XPC_LISTENER_CREATE_FORCE_XPCSERVICE Xpc_listener_create_flags_t = 4
 )
 
 func (e Xpc_listener_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_LISTENER_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE") }
-	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH") }
-	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_LISTENER_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Xpc_session_create_flags_t int64
 
 const (
-	XPC_SESSION_CREATE_NONE Xpc_session_create_flags_t = 0
-	XPC_SESSION_CREATE_INACTIVE Xpc_session_create_flags_t = 1
+	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0
+	XPC_SESSION_CREATE_INACTIVE        Xpc_session_create_flags_t = 1
 	XPC_SESSION_CREATE_MACH_PRIVILEGED Xpc_session_create_flags_t = 2
 )
 
 func (e Xpc_session_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_SESSION_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_SESSION_CREATE_INACTIVE") }
-	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 { parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_SESSION_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_INACTIVE")
+	}
+	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 const (
-	DRAWHook = 4
-	EOLHook = 0
-	HITTESTHook = 12
+	DRAWHook      = 4
+	EOLHook       = 0
+	HITTESTHook   = 12
 	TextWidthHook = 28
-	WIDTHHook = 8
-	NWIDTHHook = 24
+	WIDTHHook     = 8
+	NWIDTHHook    = 24
 )
 
 const (
@@ -934,75 +980,75 @@ const (
 )
 
 const (
-	ActiveFlag = 1
-	AlphaLock = 1024
-	BtnState = 128
-	CmdKey = 256
-	ControlKey = 4096
-	OptionKey = 2048
+	ActiveFlag      = 1
+	AlphaLock       = 1024
+	BtnState        = 128
+	CmdKey          = 256
+	ControlKey      = 4096
+	OptionKey       = 2048
 	RightControlKey = 32768
-	RightOptionKey = 16384
-	RightShiftKey = 8192
-	ShiftKey = 512
+	RightOptionKey  = 16384
+	RightShiftKey   = 8192
+	ShiftKey        = 512
 )
 
 const (
-	ActiveFlagBit = 0
-	AlphaLockBit = 10
-	BtnStateBit = 7
-	CmdKeyBit = 8
-	ControlKeyBit = 12
-	OptionKeyBit = 11
+	ActiveFlagBit      = 0
+	AlphaLockBit       = 10
+	BtnStateBit        = 7
+	CmdKeyBit          = 8
+	ControlKeyBit      = 12
+	OptionKeyBit       = 11
 	RightControlKeyBit = 15
-	RightOptionKeyBit = 14
-	RightShiftKeyBit = 13
-	ShiftKeyBit = 9
+	RightOptionKeyBit  = 14
+	RightShiftKeyBit   = 13
+	ShiftKeyBit        = 9
 )
 
 const (
-	AppearanceBadBrushIndexErr = -30560
-	AppearanceBadCursorIndexErr = -30565
-	AppearanceBadTextColorIndexErr = -30563
+	AppearanceBadBrushIndexErr        = -30560
+	AppearanceBadCursorIndexErr       = -30565
+	AppearanceBadTextColorIndexErr    = -30563
 	AppearanceProcessNotRegisteredErr = -30562
-	AppearanceProcessRegisteredErr = -30561
-	AppearanceThemeHasNoAccents = -30564
+	AppearanceProcessRegisteredErr    = -30561
+	AppearanceThemeHasNoAccents       = -30564
 )
 
 const (
-	BHandleAERecording = 16
-	BLanguageMask = 255
+	BHandleAERecording  = 16
+	BLanguageMask       = 255
 	BScriptLanguageMask = 32767
-	BScriptMask = 32512
-	BTakeActiveEvent = 15
+	BScriptMask         = 32512
+	BTakeActiveEvent    = 15
 )
 
 const (
-	CBodyColor = 1
-	CFrameColor = 0
-	CTextColor = 2
-	CThumbColor = 3
+	CBodyColor            = 1
+	CFrameColor           = 0
+	CTextColor            = 2
+	CThumbColor           = 3
 	KNumberCtlCTabEntries = 4
 )
 
 const (
-	AdbAddrMask = 16711680
-	CharCodeMask = 255
-	KeyCodeMask = 65280
+	AdbAddrMask      = 16711680
+	CharCodeMask     = 255
+	KeyCodeMask      = 65280
 	OsEvtMessageMask = 4278190080
 )
 
 const (
-	BtnCtrl = 0
-	ChkCtrl = 1
-	CtrlItem = 4
-	EditText = 16
-	IconItem = 32
+	BtnCtrl     = 0
+	ChkCtrl     = 1
+	CtrlItem    = 4
+	EditText    = 16
+	IconItem    = 32
 	ItemDisable = 128
-	PicItem = 64
-	RadCtrl = 2
-	ResCtrl = 3
-	StatText = 8
-	UserItem = 0
+	PicItem     = 64
+	RadCtrl     = 2
+	ResCtrl     = 3
+	StatText    = 8
+	UserItem    = 0
 )
 
 const (
@@ -1010,55 +1056,55 @@ const (
 )
 
 const (
-	DialogKind = 2
+	DialogKind             = 2
 	KApplicationWindowKind = 8
-	KDialogWindowKind = 2
-	UserKind = 8
+	KDialogWindowKind      = 2
+	UserKind               = 8
 )
 
 const (
-	AddSize = 16
-	DoAll = 15
-	DoColor = 8
-	DoFace = 2
-	DoFont = 1
-	DoSize = 4
+	AddSize  = 16
+	DoAll    = 15
+	DoColor  = 8
+	DoFace   = 2
+	DoFont   = 1
+	DoSize   = 4
 	DoToggle = 32
 )
 
 const (
-	AltDBoxProc = 3
-	DBoxProc = 1
-	DocumentProc = 0
-	FloatGrowProc = 1987
-	FloatProc = 1985
-	FloatSideGrowProc = 1995
-	FloatSideProc = 1993
+	AltDBoxProc           = 3
+	DBoxProc              = 1
+	DocumentProc          = 0
+	FloatGrowProc         = 1987
+	FloatProc             = 1985
+	FloatSideGrowProc     = 1995
+	FloatSideProc         = 1993
 	FloatSideZoomGrowProc = 1999
-	FloatSideZoomProc = 1997
-	FloatZoomGrowProc = 1991
-	FloatZoomProc = 1989
-	MovableDBoxProc = 5
-	NoGrowDocProc = 4
-	PlainDBox = 2
-	ZoomDocProc = 8
-	ZoomNoGrow = 12
+	FloatSideZoomProc     = 1997
+	FloatZoomGrowProc     = 1991
+	FloatZoomProc         = 1989
+	MovableDBoxProc       = 5
+	NoGrowDocProc         = 4
+	PlainDBox             = 2
+	ZoomDocProc           = 8
+	ZoomNoGrow            = 12
 )
 
 const (
-	DomCannot = 0
-	DomNative = 1
+	DomCannot         = 0
+	DomNative         = 1
 	DomTranslateFirst = 2
-	DomWildcard = 3
+	DomWildcard       = 3
 )
 
 const (
-	ErrDataBrowserInvalidPropertyData = -4974
-	ErrDataBrowserInvalidPropertyPart = -4973
-	ErrDataBrowserItemNotAdded = -4975
-	ErrDataBrowserItemNotFound = -4971
-	ErrDataBrowserNotConfigured = -4970
-	ErrDataBrowserPropertyNotFound = -4972
+	ErrDataBrowserInvalidPropertyData  = -4974
+	ErrDataBrowserInvalidPropertyPart  = -4973
+	ErrDataBrowserItemNotAdded         = -4975
+	ErrDataBrowserItemNotFound         = -4971
+	ErrDataBrowserNotConfigured        = -4970
+	ErrDataBrowserPropertyNotFound     = -4972
 	ErrDataBrowserPropertyNotSupported = -4979
 )
 
@@ -1068,11 +1114,11 @@ const (
 )
 
 const (
-	ErrKBFailSettingID = -30852
+	ErrKBFailSettingID               = -30852
 	ErrKBFailSettingTranslationTable = -30853
-	ErrKBFailWritePreference = -30854
-	ErrKBIlligalParameters = -30851
-	ErrKBPS2KeyboardNotAvailable = -30850
+	ErrKBFailWritePreference         = -30854
+	ErrKBIlligalParameters           = -30851
+	ErrKBPS2KeyboardNotAvailable     = -30850
 )
 
 const (
@@ -1080,125 +1126,125 @@ const (
 )
 
 const (
-	EventAlreadyPostedErr = -9860
-	EventClassIncorrectErr = -9864
-	EventClassInvalidErr = -9862
+	EventAlreadyPostedErr           = -9860
+	EventClassIncorrectErr          = -9864
+	EventClassInvalidErr            = -9862
 	EventDeferAccessibilityEventErr = -9865
 	EventHandlerAlreadyInstalledErr = -9866
-	EventHotKeyExistsErr = -9878
-	EventHotKeyInvalidErr = -9879
-	EventInternalErr = -9868
-	EventKindIncorrectErr = -9869
-	EventLoopQuitErr = -9876
-	EventLoopTimedOutErr = -9875
-	EventNotHandledErr = -9874
-	EventNotInQueueErr = -9877
-	EventParameterNotFoundErr = -9870
-	EventPassToNextTargetErr = -9880
-	EventTargetBusyErr = -9861
+	EventHotKeyExistsErr            = -9878
+	EventHotKeyInvalidErr           = -9879
+	EventInternalErr                = -9868
+	EventKindIncorrectErr           = -9869
+	EventLoopQuitErr                = -9876
+	EventLoopTimedOutErr            = -9875
+	EventNotHandledErr              = -9874
+	EventNotInQueueErr              = -9877
+	EventParameterNotFoundErr       = -9870
+	EventPassToNextTargetErr        = -9880
+	EventTargetBusyErr              = -9861
 )
 
 const (
-	FlavorDataPromised = 512
-	FlavorNotSaved = 4
-	FlavorSenderOnly = 1
+	FlavorDataPromised     = 512
+	FlavorNotSaved         = 4
+	FlavorSenderOnly       = 1
 	FlavorSenderTranslated = 2
 	FlavorSystemTranslated = 256
 )
 
 const (
 	AddSizeBit = 4
-	ClrBit = 3
-	FaceBit = 1
-	FontBit = 0
-	SizeBit = 2
-	ToggleBit = 5
+	ClrBit     = 3
+	FaceBit    = 1
+	FontBit    = 0
+	SizeBit    = 2
+	ToggleBit  = 5
 )
 
 const (
-	GestaltContextualMenuAttr = 1668116085
+	GestaltContextualMenuAttr                        = 1668116085
 	GestaltContextualMenuHasAttributeAndModifierKeys = 2
-	GestaltContextualMenuHasUnicodeSupport = 3
-	GestaltContextualMenuTrapAvailable = 1
-	GestaltContextualMenuUnusedBit = 0
+	GestaltContextualMenuHasUnicodeSupport           = 3
+	GestaltContextualMenuTrapAvailable               = 1
+	GestaltContextualMenuUnusedBit                   = 0
 )
 
 const (
-	GestaltKBPS2Keyboards = 1
-	GestaltKBPS2SetIDToAny = 2
+	GestaltKBPS2Keyboards           = 1
+	GestaltKBPS2SetIDToAny          = 2
 	GestaltKBPS2SetTranslationTable = 4
-	GestaltKeyboardsAttr = 1801610355
+	GestaltKeyboardsAttr            = 1801610355
 )
 
 const (
-	HMenuCmd = 27
-	HierMenu = -1
+	HMenuCmd                = 27
+	HierMenu                = -1
 	KInsertHierarchicalMenu = -1
 )
 
 const (
-	HiArchiveEncodingCompleteErr = -6782
+	HiArchiveEncodingCompleteErr         = -6782
 	HiArchiveHIObjectIgnoresArchivingErr = -6783
-	HiArchiveKeyNotAvailableErr = -6781
-	HiArchiveTypeMismatchErr = -6780
+	HiArchiveKeyNotAvailableErr          = -6781
+	HiArchiveTypeMismatchErr             = -6780
 )
 
 const (
 	HiObjectCannotSubclassSingletonErr = -22084
-	HiObjectClassExistsErr = -22080
-	HiObjectClassHasInstancesErr = -22081
-	HiObjectClassHasSubclassesErr = -22082
-	HiObjectClassIsAbstractErr = -22083
-	HiObjectDelegateAlreadyExistsErr = -22090
-	HiObjectDelegateNotFoundErr = -22091
+	HiObjectClassExistsErr             = -22080
+	HiObjectClassHasInstancesErr       = -22081
+	HiObjectClassHasSubclassesErr      = -22082
+	HiObjectClassIsAbstractErr         = -22083
+	HiObjectDelegateAlreadyExistsErr   = -22090
+	HiObjectDelegateNotFoundErr        = -22091
 )
 
 const (
-	InCollapseBox = 11
-	InContent = 3
-	InDesk = 0
-	InDrag = 4
-	InGoAway = 6
-	InGrow = 5
-	InMenuBar = 1
-	InNoWindow = 0
-	InProxyIcon = 12
-	InStructure = 15
-	InSysWindow = 2
+	InCollapseBox   = 11
+	InContent       = 3
+	InDesk          = 0
+	InDrag          = 4
+	InGoAway        = 6
+	InGrow          = 5
+	InMenuBar       = 1
+	InNoWindow      = 0
+	InProxyIcon     = 12
+	InStructure     = 15
+	InSysWindow     = 2
 	InToolbarButton = 13
-	InZoomIn = 7
-	InZoomOut = 8
+	InZoomIn        = 7
+	InZoomOut       = 8
 )
 
 const (
-	IntDrawHook = 1
-	IntEOLHook = 0
-	IntHitTestHook = 3
+	IntDrawHook                       = 1
+	IntEOLHook                        = 0
+	IntHitTestHook                    = 3
 	IntInlineInputTSMTEPostUpdateHook = 9
-	IntInlineInputTSMTEPreUpdateHook = 8
-	IntNWidthHook = 6
-	IntTextWidthHook = 7
-	IntWidthHook = 2
+	IntInlineInputTSMTEPreUpdateHook  = 8
+	IntNWidthHook                     = 6
+	IntTextWidthHook                  = 7
+	IntWidthHook                      = 2
 )
 
 const (
-	KAEDoNotIgnoreHandler = 0
-	KAEDontDisposeOnResume = -2147483648
-	KAEIgnoreAppEventHandler = 2
-	KAEIgnoreAppPhacHandler = 1
-	KAEIgnoreSysEventHandler = 8
-	KAEIgnoreSysPhacHandler = 4
+	KAEDoNotIgnoreHandler        = 0
+	KAEDontDisposeOnResume       = -2147483648
+	KAEIgnoreAppEventHandler     = 2
+	KAEIgnoreAppPhacHandler      = 1
+	KAEIgnoreSysEventHandler     = 8
+	KAEIgnoreSysPhacHandler      = 4
 	KAEIngoreBuiltInEventHandler = 16
 )
 
 const (
-	KAEInteractWithAll = 2
+	KAEInteractWithAll   = 2
 	KAEInteractWithLocal = 1
-	KAEInteractWithSelf = 0
+	KAEInteractWithSelf  = 0
 )
 
 const (
-	KAENoDispatch = 0
+	KAENoDispatch          = 0
 	KAEUseStandardDispatch = -1
 )
 
@@ -1208,126 +1254,126 @@ const (
 
 const (
 	KAlertDefaultCancelText = -1
-	KAlertDefaultOKText = -1
-	KAlertDefaultOtherText = -1
+	KAlertDefaultOKText     = -1
+	KAlertDefaultOtherText  = -1
 )
 
 const (
-	KAlertFlagsAlertIsMovable = 4
-	KAlertFlagsUseCompositing = 256
+	KAlertFlagsAlertIsMovable      = 4
+	KAlertFlagsUseCompositing      = 256
 	KAlertFlagsUseControlHierarchy = 2
-	KAlertFlagsUseThemeBackground = 1
-	KAlertFlagsUseThemeControls = 8
+	KAlertFlagsUseThemeBackground  = 1
+	KAlertFlagsUseThemeControls    = 8
 )
 
 const (
 	KAlertStdAlertCancelButton = 2
-	KAlertStdAlertHelpButton = 4
-	KAlertStdAlertOKButton = 1
-	KAlertStdAlertOtherButton = 3
+	KAlertStdAlertHelpButton   = 4
+	KAlertStdAlertOKButton     = 1
+	KAlertStdAlertOtherButton  = 3
 )
 
 const (
 	KAlertCautionAlert = 2
-	KAlertNoteAlert = 1
-	KAlertPlainAlert = 3
-	KAlertStopAlert = 0
+	KAlertNoteAlert    = 1
+	KAlertPlainAlert   = 3
+	KAlertStopAlert    = 0
 )
 
 const (
-	KAlertWindowClass = 1
-	KAllWindowClasses = 4294967295
-	KAltPlainWindowClass = 16
-	KDocumentWindowClass = 6
-	KDrawerWindowClass = 20
-	KFloatingWindowClass = 5
-	KHelpWindowClass = 10
-	KModalWindowClass = 3
+	KAlertWindowClass        = 1
+	KAllWindowClasses        = 4294967295
+	KAltPlainWindowClass     = 16
+	KDocumentWindowClass     = 6
+	KDrawerWindowClass       = 20
+	KFloatingWindowClass     = 5
+	KHelpWindowClass         = 10
+	KModalWindowClass        = 3
 	KMovableAlertWindowClass = 2
 	KMovableModalWindowClass = 4
-	KOverlayWindowClass = 14
-	KPlainWindowClass = 13
-	KSheetAlertWindowClass = 15
-	KSheetWindowClass = 11
-	KSimpleWindowClass = 18
-	KToolbarWindowClass = 12
-	KUtilityWindowClass = 8
+	KOverlayWindowClass      = 14
+	KPlainWindowClass        = 13
+	KSheetAlertWindowClass   = 15
+	KSheetWindowClass        = 11
+	KSimpleWindowClass       = 18
+	KToolbarWindowClass      = 12
+	KUtilityWindowClass      = 8
 )
 
 const (
-	KAEAppearanceChanged = 1953000805
+	KAEAppearanceChanged      = 1953000805
 	KAESmallSystemFontChanged = 1936942702
-	KAESystemFontChanged = 1937339238
-	KAEViewsFontChanged = 1986424436
-	KAppearanceEventClass = 1634758770
+	KAESystemFontChanged      = 1937339238
+	KAEViewsFontChanged       = 1986424436
+	KAppearanceEventClass     = 1634758770
 )
 
 const (
-	KAppearancePartDownButton = 21
-	KAppearancePartIndicator = 129
-	KAppearancePartLeftButton = 20
-	KAppearancePartMetaDisabled = 254
-	KAppearancePartMetaInactive = 255
-	KAppearancePartMetaNone = 0
-	KAppearancePartPageDownArea = 23
-	KAppearancePartPageLeftArea = 22
+	KAppearancePartDownButton    = 21
+	KAppearancePartIndicator     = 129
+	KAppearancePartLeftButton    = 20
+	KAppearancePartMetaDisabled  = 254
+	KAppearancePartMetaInactive  = 255
+	KAppearancePartMetaNone      = 0
+	KAppearancePartPageDownArea  = 23
+	KAppearancePartPageLeftArea  = 22
 	KAppearancePartPageRightArea = 23
-	KAppearancePartPageUpArea = 22
-	KAppearancePartRightButton = 21
-	KAppearancePartUpButton = 20
+	KAppearancePartPageUpArea    = 22
+	KAppearancePartRightButton   = 21
+	KAppearancePartUpButton      = 20
 )
 
 const (
-	KAppearanceRegionCloseBox = 2
-	KAppearanceRegionCollapseBox = 7
-	KAppearanceRegionContent = 33
-	KAppearanceRegionDrag = 5
-	KAppearanceRegionGrow = 6
-	KAppearanceRegionStructure = 32
-	KAppearanceRegionTitleBar = 0
+	KAppearanceRegionCloseBox       = 2
+	KAppearanceRegionCollapseBox    = 7
+	KAppearanceRegionContent        = 33
+	KAppearanceRegionDrag           = 5
+	KAppearanceRegionGrow           = 6
+	KAppearanceRegionStructure      = 32
+	KAppearanceRegionTitleBar       = 0
 	KAppearanceRegionTitleProxyIcon = 8
-	KAppearanceRegionTitleText = 1
-	KAppearanceRegionToolbarButton = 41
-	KAppearanceRegionZoomBox = 3
+	KAppearanceRegionTitleText      = 1
+	KAppearanceRegionToolbarButton  = 41
+	KAppearanceRegionZoomBox        = 3
 )
 
 const (
 	KAvailBoundsChangedForDisplay = 2
-	KAvailBoundsChangedForDock = 1
+	KAvailBoundsChangedForDock    = 1
 	KAvailBoundsChangedForMenuBar = 4
 )
 
 const (
-	KCMActivateTextService = 4
+	KCMActivateTextService          = 4
 	KCMCopyTextServiceInputModeList = 15
-	KCMDeactivateTextService = 5
-	KCMFixTextService = 9
-	KCMGetInputModePaletteMenu = 17
-	KCMGetScriptLangSupport = 1
-	KCMGetTextServiceMenu = 7
-	KCMGetTextServiceProperty = 12
-	KCMHidePaletteWindows = 11
-	KCMInitiateTextService = 2
-	KCMInputModePaletteItemHit = 16
-	KCMSetTextServiceCursor = 10
-	KCMSetTextServiceProperty = 13
-	KCMTerminateTextService = 3
-	KCMTextServiceEvent = 6
-	KCMTextServiceEventRef = 6
-	KCMTextServiceMenuSelect = 8
-	KCMUCTextServiceEvent = 14
+	KCMDeactivateTextService        = 5
+	KCMFixTextService               = 9
+	KCMGetInputModePaletteMenu      = 17
+	KCMGetScriptLangSupport         = 1
+	KCMGetTextServiceMenu           = 7
+	KCMGetTextServiceProperty       = 12
+	KCMHidePaletteWindows           = 11
+	KCMInitiateTextService          = 2
+	KCMInputModePaletteItemHit      = 16
+	KCMSetTextServiceCursor         = 10
+	KCMSetTextServiceProperty       = 13
+	KCMTerminateTextService         = 3
+	KCMTextServiceEvent             = 6
+	KCMTextServiceEventRef          = 6
+	KCMTextServiceMenuSelect        = 8
+	KCMUCTextServiceEvent           = 14
 )
 
 const (
 	KCMHelpItemAppleGuide = 1
-	KCMHelpItemNoHelp = 0
-	KCMHelpItemOtherHelp = 2
+	KCMHelpItemNoHelp     = 0
+	KCMHelpItemOtherHelp  = 2
 	KCMHelpItemRemoveHelp = 3
 )
 
 const (
 	KCMMenuItemSelected = 1
-	KCMNothingSelected = 0
+	KCMNothingSelected  = 0
 	KCMShowHelpSelected = 3
 )
 
@@ -1340,46 +1386,46 @@ const (
 )
 
 const (
-	KControlBehaviorMultiValueMenu = 16384
-	KControlBehaviorOffsetContents = 32768
-	KControlBehaviorPushbutton = 0
+	KControlBehaviorMultiValueMenu  = 16384
+	KControlBehaviorOffsetContents  = 32768
+	KControlBehaviorPushbutton      = 0
 	KControlBehaviorSingleValueMenu = 0
-	KControlBehaviorSticky = 512
-	KControlBehaviorToggles = 256
+	KControlBehaviorSticky          = 512
+	KControlBehaviorToggles         = 256
 )
 
 const (
-	KControlBevelButtonAlignBottom = 4
-	KControlBevelButtonAlignBottomLeft = 6
-	KControlBevelButtonAlignBottomRight = 8
-	KControlBevelButtonAlignCenter = 0
-	KControlBevelButtonAlignLeft = 1
-	KControlBevelButtonAlignRight = 2
+	KControlBevelButtonAlignBottom       = 4
+	KControlBevelButtonAlignBottomLeft   = 6
+	KControlBevelButtonAlignBottomRight  = 8
+	KControlBevelButtonAlignCenter       = 0
+	KControlBevelButtonAlignLeft         = 1
+	KControlBevelButtonAlignRight        = 2
 	KControlBevelButtonAlignSysDirection = -1
-	KControlBevelButtonAlignTop = 3
-	KControlBevelButtonAlignTopLeft = 5
-	KControlBevelButtonAlignTopRight = 7
+	KControlBevelButtonAlignTop          = 3
+	KControlBevelButtonAlignTopLeft      = 5
+	KControlBevelButtonAlignTopRight     = 7
 )
 
 const (
-	KControlBevelButtonAlignTextCenter = 1
-	KControlBevelButtonAlignTextFlushLeft = -2
-	KControlBevelButtonAlignTextFlushRight = -1
+	KControlBevelButtonAlignTextCenter       = 1
+	KControlBevelButtonAlignTextFlushLeft    = -2
+	KControlBevelButtonAlignTextFlushRight   = -1
 	KControlBevelButtonAlignTextSysDirection = 0
 )
 
 const (
 	KControlBevelButtonCenterPopupGlyphTag = 1885826147
-	KControlBevelButtonContentTag = 1668247156
-	KControlBevelButtonGraphicAlignTag = 1734437993
-	KControlBevelButtonGraphicOffsetTag = 1735353958
-	KControlBevelButtonMenuHandleTag = 1835560548
-	KControlBevelButtonMenuRefTag = 1835560548
-	KControlBevelButtonMenuValueTag = 1836474732
-	KControlBevelButtonTextAlignTag = 1952541801
-	KControlBevelButtonTextOffsetTag = 1953457766
-	KControlBevelButtonTextPlaceTag = 1953524835
-	KControlBevelButtonTransformTag = 1953653102
+	KControlBevelButtonContentTag          = 1668247156
+	KControlBevelButtonGraphicAlignTag     = 1734437993
+	KControlBevelButtonGraphicOffsetTag    = 1735353958
+	KControlBevelButtonMenuHandleTag       = 1835560548
+	KControlBevelButtonMenuRefTag          = 1835560548
+	KControlBevelButtonMenuValueTag        = 1836474732
+	KControlBevelButtonTextAlignTag        = 1952541801
+	KControlBevelButtonTextOffsetTag       = 1953457766
+	KControlBevelButtonTextPlaceTag        = 1953524835
+	KControlBevelButtonTransformTag        = 1953653102
 )
 
 const (
@@ -1387,26 +1433,26 @@ const (
 )
 
 const (
-	KControlBevelButtonLastMenuTag = 1819111029
+	KControlBevelButtonLastMenuTag  = 1819111029
 	KControlBevelButtonMenuDelayTag = 1835297913
 )
 
 const (
 	KControlBevelButtonMenuOnBottom = 0
-	KControlBevelButtonMenuOnRight = 4
+	KControlBevelButtonMenuOnRight  = 4
 )
 
 const (
-	KControlBevelButtonKindTag = 1650811499
+	KControlBevelButtonKindTag         = 1650811499
 	KControlBevelButtonOwnedMenuRefTag = 1869443686
 )
 
 const (
-	KControlBevelButtonPlaceAboveGraphic = 4
-	KControlBevelButtonPlaceBelowGraphic = 3
-	KControlBevelButtonPlaceNormally = 0
-	KControlBevelButtonPlaceSysDirection = -1
-	KControlBevelButtonPlaceToLeftOfGraphic = 2
+	KControlBevelButtonPlaceAboveGraphic     = 4
+	KControlBevelButtonPlaceBelowGraphic     = 3
+	KControlBevelButtonPlaceNormally         = 0
+	KControlBevelButtonPlaceSysDirection     = -1
+	KControlBevelButtonPlaceToLeftOfGraphic  = 2
 	KControlBevelButtonPlaceToRightOfGraphic = 1
 )
 
@@ -1415,27 +1461,27 @@ const (
 )
 
 const (
-	KControlBevelButtonLargeBevel = 2
+	KControlBevelButtonLargeBevel  = 2
 	KControlBevelButtonNormalBevel = 1
-	KControlBevelButtonSmallBevel = 0
+	KControlBevelButtonSmallBevel  = 0
 )
 
 const (
-	KControlBevelButtonLargeBevelProc = 34
+	KControlBevelButtonLargeBevelProc  = 34
 	KControlBevelButtonNormalBevelProc = 33
-	KControlBevelButtonSmallBevelProc = 32
+	KControlBevelButtonSmallBevelProc  = 32
 )
 
 const (
-	KControlBevelButtonLargeBevelVariant = 2
+	KControlBevelButtonLargeBevelVariant  = 2
 	KControlBevelButtonMenuOnRightVariant = 4
 	KControlBevelButtonNormalBevelVariant = 1
-	KControlBevelButtonSmallBevelVariant = 0
+	KControlBevelButtonSmallBevelVariant  = 0
 )
 
 const (
 	KControlBoundsChangePositionChanged = 8
-	KControlBoundsChangeSizeChanged = 4
+	KControlBoundsChangeSizeChanged     = 4
 )
 
 const (
@@ -1455,115 +1501,115 @@ const (
 )
 
 const (
-	KControlCheckBoxCheckedValue = 1
-	KControlCheckBoxMixedValue = 2
+	KControlCheckBoxCheckedValue   = 1
+	KControlCheckBoxMixedValue     = 2
 	KControlCheckBoxUncheckedValue = 0
 )
 
 const (
 	KControlClockFlagDisplayOnly = 1
-	KControlClockFlagLive = 2
-	KControlClockFlagStandard = 0
-	KControlClockIsDisplayOnly = 1
-	KControlClockIsLive = 2
-	KControlClockNoFlags = 0
+	KControlClockFlagLive        = 2
+	KControlClockFlagStandard    = 0
+	KControlClockIsDisplayOnly   = 1
+	KControlClockIsLive          = 2
+	KControlClockNoFlags         = 0
 )
 
 const (
 	KControlClockAbsoluteTimeTag = 1633842036
-	KControlClockAnimatingTag = 1634625901
-	KControlClockFontStyleTag = 1718578804
-	KControlClockLongDateTag = 1684108389
+	KControlClockAnimatingTag    = 1634625901
+	KControlClockFontStyleTag    = 1718578804
+	KControlClockLongDateTag     = 1684108389
 )
 
 const (
-	KControlClockDateProc = 242
-	KControlClockMonthYearProc = 243
-	KControlClockTimeProc = 240
+	KControlClockDateProc        = 242
+	KControlClockMonthYearProc   = 243
+	KControlClockTimeProc        = 240
 	KControlClockTimeSecondsProc = 241
 )
 
 const (
-	KControlClockTypeHourMinute = 0
+	KControlClockTypeHourMinute       = 0
 	KControlClockTypeHourMinuteSecond = 1
-	KControlClockTypeMonthDayYear = 2
-	KControlClockTypeMonthYear = 3
+	KControlClockTypeMonthDayYear     = 2
+	KControlClockTypeMonthYear        = 3
 )
 
 const (
-	KControlCollectionTagBounds = 1651471726
-	KControlCollectionTagCommand = 1668113440
-	KControlCollectionTagIDID = 1768188260
-	KControlCollectionTagIDSignature = 1768190825
-	KControlCollectionTagMaximum = 1835104288
-	KControlCollectionTagMinimum = 1835626016
-	KControlCollectionTagRefCon = 1919247971
-	KControlCollectionTagTitle = 1953068140
+	KControlCollectionTagBounds       = 1651471726
+	KControlCollectionTagCommand      = 1668113440
+	KControlCollectionTagIDID         = 1768188260
+	KControlCollectionTagIDSignature  = 1768190825
+	KControlCollectionTagMaximum      = 1835104288
+	KControlCollectionTagMinimum      = 1835626016
+	KControlCollectionTagRefCon       = 1919247971
+	KControlCollectionTagTitle        = 1953068140
 	KControlCollectionTagUnicodeTitle = 1970566252
-	KControlCollectionTagValue = 1986096245
-	KControlCollectionTagVarCode = 1986097763
-	KControlCollectionTagViewSize = 1986618743
-	KControlCollectionTagVisibility = 1986622313
+	KControlCollectionTagValue        = 1986096245
+	KControlCollectionTagVarCode      = 1986097763
+	KControlCollectionTagViewSize     = 1986618743
+	KControlCollectionTagVisibility   = 1986622313
 )
 
 const (
-	KControlContentAlertIconRes = 5
-	KControlContentCGImageRef = 134
-	KControlContentCIconHandle = 130
-	KControlContentCIconRes = 2
-	KControlContentICON = 133
-	KControlContentICONRes = 4
-	KControlContentIconRef = 132
+	KControlContentAlertIconRes    = 5
+	KControlContentCGImageRef      = 134
+	KControlContentCIconHandle     = 130
+	KControlContentCIconRes        = 2
+	KControlContentICON            = 133
+	KControlContentICONRes         = 4
+	KControlContentIconRef         = 132
 	KControlContentIconSuiteHandle = 129
-	KControlContentIconSuiteRes = 1
-	KControlContentPictHandle = 131
-	KControlContentPictRes = 3
-	KControlContentTextOnly = 0
-	KControlNoContent = 0
+	KControlContentIconSuiteRes    = 1
+	KControlContentPictHandle      = 131
+	KControlContentPictRes         = 3
+	KControlContentTextOnly        = 0
+	KControlNoContent              = 0
 )
 
 const (
-	KControlDataBrowserEditTextKeyFilterTag = 1718383730
+	KControlDataBrowserEditTextKeyFilterTag      = 1718383730
 	KControlDataBrowserEditTextValidationProcTag = 1986096233
-	KControlDataBrowserIncludesFrameAndFocusTag = 1651663986
-	KControlDataBrowserKeyFilterTag = 1718383730
+	KControlDataBrowserIncludesFrameAndFocusTag  = 1651663986
+	KControlDataBrowserKeyFilterTag              = 1718383730
 )
 
 const (
 	KControlColorTableResourceType = 1667462242
-	KControlDefProcResourceType = 1128547654
-	KControlDefProcType = 1128547654
-	KControlTemplateResourceType = 1129206860
+	KControlDefProcResourceType    = 1128547654
+	KControlDefProcType            = 1128547654
+	KControlTemplateResourceType   = 1129206860
 )
 
 const (
-	KButtonDialogItem = 4
-	KCheckBoxDialogItem = 5
-	KControlDialogItem = 4
-	KEditTextDialogItem = 16
-	KHelpDialogItem = 1
-	KIconDialogItem = 32
-	KItemDisableBit = 128
-	KPictureDialogItem = 64
-	KRadioButtonDialogItem = 6
+	KButtonDialogItem          = 4
+	KCheckBoxDialogItem        = 5
+	KControlDialogItem         = 4
+	KEditTextDialogItem        = 16
+	KHelpDialogItem            = 1
+	KIconDialogItem            = 32
+	KItemDisableBit            = 128
+	KPictureDialogItem         = 64
+	KRadioButtonDialogItem     = 6
 	KResourceControlDialogItem = 7
-	KStaticTextDialogItem = 8
-	KUserDialogItem = 0
+	KStaticTextDialogItem      = 8
+	KUserDialogItem            = 0
 )
 
 const (
-	KControlDisclosureButtonClosed = 0
+	KControlDisclosureButtonClosed    = 0
 	KControlDisclosureButtonDisclosed = 1
 )
 
 const (
 	KControlDisclosureTrianglePointDefault = 0
-	KControlDisclosureTrianglePointLeft = 2
-	KControlDisclosureTrianglePointRight = 1
+	KControlDisclosureTrianglePointLeft    = 2
+	KControlDisclosureTrianglePointRight   = 1
 )
 
 const (
-	KControlEditTextCFStringTag = 1667658612
+	KControlEditTextCFStringTag         = 1667658612
 	KControlEditTextPasswordCFStringTag = 1886872422
 )
 
@@ -1572,44 +1618,44 @@ const (
 )
 
 const (
-	KControlEditTextFixedTextTag = 1718909044
+	KControlEditTextFixedTextTag         = 1718909044
 	KControlEditTextKeyScriptBehaviorTag = 1802724210
-	KControlEditTextLockedTag = 1819239275
-	KControlEditTextValidationProcTag = 1986096233
+	KControlEditTextLockedTag            = 1819239275
+	KControlEditTextValidationProcTag    = 1986096233
 )
 
 const (
 	KControlEditTextPasswordProc = 274
-	KControlEditTextProc = 272
+	KControlEditTextProc         = 272
 )
 
 const (
-	KControlEditTextInsertCFStringRefTag = 1768842086
-	KControlEditTextInsertTextBufferTag = 1768846456
-	KControlEditTextSingleLineTag = 1936157795
-	KControlEditTextSpellCheckAsYouTypeTag = 1935892852
-	KControlEditTextSpellCheckingTag = 1936745323
+	KControlEditTextInsertCFStringRefTag     = 1768842086
+	KControlEditTextInsertTextBufferTag      = 1768846456
+	KControlEditTextSingleLineTag            = 1936157795
+	KControlEditTextSpellCheckAsYouTypeTag   = 1935892852
+	KControlEditTextSpellCheckingTag         = 1936745323
 	KControlEditUnicodeTextPostUpdateProcTag = 1970304368
 )
 
 const (
-	KControlEditTextCharCount = 1667789411
+	KControlEditTextCharCount    = 1667789411
 	KControlEditTextKeyFilterTag = 1718383730
-	KControlEditTextPasswordTag = 1885434739
+	KControlEditTextPasswordTag  = 1885434739
 	KControlEditTextSelectionTag = 1936026725
-	KControlEditTextStyleTag = 1718578804
-	KControlEditTextTextTag = 1952807028
+	KControlEditTextStyleTag     = 1718578804
+	KControlEditTextTextTag      = 1952807028
 )
 
 const (
 	KControlEditTextInlinePostUpdateProcTag = 1886352752
-	KControlEditTextInlinePreUpdateProcTag = 1886549360
-	KControlEditTextTEHandleTag = 1952997742
+	KControlEditTextInlinePreUpdateProcTag  = 1886549360
+	KControlEditTextTEHandleTag             = 1952997742
 )
 
 const (
 	KControlEditUnicodeTextPasswordProc = 914
-	KControlEditUnicodeTextProc = 912
+	KControlEditUnicodeTextProc         = 912
 )
 
 const (
@@ -1618,29 +1664,29 @@ const (
 
 const (
 	KControlFocusNextPart = -1
-	KControlFocusNoPart = 0
+	KControlFocusNoPart   = 0
 	KControlFocusPrevPart = -2
 )
 
 const (
-	KControlFontBigSystemFont = -1
-	KControlFontMiniSystemFont = -5
+	KControlFontBigSystemFont       = -1
+	KControlFontMiniSystemFont      = -5
 	KControlFontSmallBoldSystemFont = -3
-	KControlFontSmallSystemFont = -2
-	KControlFontViewSystemFont = -4
+	KControlFontSmallSystemFont     = -2
+	KControlFontViewSystemFont      = -4
 )
 
 const (
-	KControlContentTag = 1668247156
-	KControlFontStyleTag = 1718578804
-	KControlKeyFilterTag = 1718383730
-	KControlKindTag = 1802071652
-	KControlSizeTag = 1936292453
-	KControlThemeTextFontTag = 1952999028
+	KControlContentTag                  = 1668247156
+	KControlFontStyleTag                = 1718578804
+	KControlKeyFilterTag                = 1718383730
+	KControlKindTag                     = 1802071652
+	KControlSizeTag                     = 1936292453
+	KControlThemeTextFontTag            = 1952999028
 	KControlThemeTextHorizontalFlushTag = 1952999526
-	KControlThemeTextInfoTag = 1953002601
-	KControlThemeTextTruncationTag = 1953002612
-	KControlThemeTextVerticalFlushTag = 1953003110
+	KControlThemeTextInfoTag            = 1953002601
+	KControlThemeTextTruncationTag      = 1953002612
+	KControlThemeTextVerticalFlushTag   = 1953003110
 )
 
 const (
@@ -1648,18 +1694,18 @@ const (
 )
 
 const (
-	KControlGroupBoxFontStyleTag = 1718578804
+	KControlGroupBoxFontStyleTag  = 1718578804
 	KControlGroupBoxMenuHandleTag = 1835557230
-	KControlGroupBoxMenuRefTag = 1835557230
+	KControlGroupBoxMenuRefTag    = 1835557230
 )
 
 const (
-	KControlGroupBoxCheckBoxProc = 161
-	KControlGroupBoxPopupButtonProc = 162
-	KControlGroupBoxSecondaryCheckBoxProc = 165
+	KControlGroupBoxCheckBoxProc             = 161
+	KControlGroupBoxPopupButtonProc          = 162
+	KControlGroupBoxSecondaryCheckBoxProc    = 165
 	KControlGroupBoxSecondaryPopupButtonProc = 166
-	KControlGroupBoxSecondaryTextTitleProc = 164
-	KControlGroupBoxTextTitleProc = 160
+	KControlGroupBoxSecondaryTextTitleProc   = 164
+	KControlGroupBoxTextTitleProc            = 160
 )
 
 const (
@@ -1667,19 +1713,19 @@ const (
 )
 
 const (
-	KControlIconNoTrackProc = 321
-	KControlIconProc = 320
+	KControlIconNoTrackProc      = 321
+	KControlIconProc             = 320
 	KControlIconSuiteNoTrackProc = 323
-	KControlIconSuiteProc = 322
+	KControlIconSuiteProc        = 322
 )
 
 const (
 	KControlIconRefNoTrackProc = 325
-	KControlIconRefProc = 324
+	KControlIconRefProc        = 324
 )
 
 const (
-	KControlIconContentTag = 1668247156
+	KControlIconContentTag    = 1668247156
 	KControlIconResourceIDTag = 1769104755
 )
 
@@ -1689,9 +1735,9 @@ const (
 )
 
 const (
-	KControlImageWellContentTag = 1668247156
+	KControlImageWellContentTag           = 1668247156
 	KControlImageWellIsDragDestinationTag = 1685217639
-	KControlImageWellTransformTag = 1953653102
+	KControlImageWellTransformTag         = 1953653102
 )
 
 const (
@@ -1700,13 +1746,13 @@ const (
 
 const (
 	KControlKeyFilterBlockKey = 0
-	KControlKeyFilterPassKey = 1
+	KControlKeyFilterPassKey  = 1
 )
 
 const (
 	KControlKeyScriptBehaviorAllowAnyScript = 1634629920
-	KControlKeyScriptBehaviorPrefersRoman = 1886547310
-	KControlKeyScriptBehaviorRequiresRoman = 1920101742
+	KControlKeyScriptBehaviorPrefersRoman   = 1886547310
+	KControlKeyScriptBehaviorRequiresRoman  = 1920101742
 )
 
 const (
@@ -1747,7 +1793,7 @@ const (
 
 const (
 	KControlKindCheckGroupBox = 1667723888
-	KControlKindGroupBox = 1735553122
+	KControlKindGroupBox      = 1735553122
 	KControlKindPopupGroupBox = 1885827696
 )
 
@@ -1764,7 +1810,7 @@ const (
 )
 
 const (
-	KControlKindHIMenuView = 1835363957
+	KControlKindHIMenuView         = 1835363957
 	KControlKindHIStandardMenuView = 1936551541
 )
 
@@ -1813,12 +1859,12 @@ const (
 )
 
 const (
-	KControlKindProgressBar = 1886545762
+	KControlKindProgressBar  = 1886545762
 	KControlKindRelevanceBar = 1919249506
 )
 
 const (
-	KControlKindPushButton = 1886745448
+	KControlKindPushButton     = 1886745448
 	KControlKindPushIconButton = 1885954926
 )
 
@@ -1871,46 +1917,46 @@ const (
 )
 
 const (
-	KControlButtonPart = 10
-	KControlCheckBoxPart = 11
-	KControlClockAMPMPart = 12
-	KControlClockHourDayPart = 9
-	KControlClockMinuteMonthPart = 10
-	KControlClockPart = 8
-	KControlClockSecondYearPart = 11
+	KControlButtonPart             = 10
+	KControlCheckBoxPart           = 11
+	KControlClockAMPMPart          = 12
+	KControlClockHourDayPart       = 9
+	KControlClockMinuteMonthPart   = 10
+	KControlClockPart              = 8
+	KControlClockSecondYearPart    = 11
 	KControlDataBrowserDraggedPart = 25
-	KControlDataBrowserPart = 24
-	KControlDownButtonPart = 21
-	KControlEditTextPart = 5
-	KControlIconPart = 7
-	KControlImageWellPart = 26
-	KControlLabelPart = 1
+	KControlDataBrowserPart        = 24
+	KControlDownButtonPart         = 21
+	KControlEditTextPart           = 5
+	KControlIconPart               = 7
+	KControlImageWellPart          = 26
+	KControlLabelPart              = 1
 	KControlListBoxDoubleClickPart = 25
-	KControlListBoxPart = 24
-	KControlMenuPart = 2
-	KControlPageDownPart = 23
-	KControlPageUpPart = 22
-	KControlPicturePart = 6
-	KControlRadioButtonPart = 11
-	KControlRadioGroupPart = 27
-	KControlTrianglePart = 4
-	KControlUpButtonPart = 20
+	KControlListBoxPart            = 24
+	KControlMenuPart               = 2
+	KControlPageDownPart           = 23
+	KControlPageUpPart             = 22
+	KControlPicturePart            = 6
+	KControlRadioButtonPart        = 11
+	KControlRadioGroupPart         = 27
+	KControlTrianglePart           = 4
+	KControlUpButtonPart           = 20
 )
 
 const (
 	KControlListBoxDoubleClickTag = 1684171875
-	KControlListBoxLDEFTag = 1818518886
+	KControlListBoxLDEFTag        = 1818518886
 )
 
 const (
-	KControlListBoxFontStyleTag = 1718578804
-	KControlListBoxKeyFilterTag = 1718383730
+	KControlListBoxFontStyleTag  = 1718578804
+	KControlListBoxKeyFilterTag  = 1718383730
 	KControlListBoxListHandleTag = 1818780014
 )
 
 const (
 	KControlListBoxAutoSizeProc = 353
-	KControlListBoxProc = 352
+	KControlListBoxProc         = 352
 )
 
 const (
@@ -1926,14 +1972,14 @@ const (
 )
 
 const (
-	KControlDisabledPart = 254
-	KControlInactivePart = 255
+	KControlDisabledPart  = 254
+	KControlInactivePart  = 255
 	KControlIndicatorPart = 129
-	KControlNoPart = 0
+	KControlNoPart        = 0
 )
 
 const (
-	KControlNoVariant = 0
+	KControlNoVariant                    = 0
 	KControlUsesOwningWindowsFontVariant = 8
 )
 
@@ -1943,7 +1989,7 @@ const (
 
 const (
 	KControlPictureNoTrackProc = 305
-	KControlPictureProc = 304
+	KControlPictureProc        = 304
 )
 
 const (
@@ -1951,26 +1997,26 @@ const (
 )
 
 const (
-	KControlPopupArrowEastProc = 192
-	KControlPopupArrowNorthProc = 194
-	KControlPopupArrowSmallEastProc = 196
+	KControlPopupArrowEastProc       = 192
+	KControlPopupArrowNorthProc      = 194
+	KControlPopupArrowSmallEastProc  = 196
 	KControlPopupArrowSmallNorthProc = 198
 	KControlPopupArrowSmallSouthProc = 199
-	KControlPopupArrowSmallWestProc = 197
-	KControlPopupArrowSouthProc = 195
-	KControlPopupArrowWestProc = 193
+	KControlPopupArrowSmallWestProc  = 197
+	KControlPopupArrowSouthProc      = 195
+	KControlPopupArrowWestProc       = 193
 )
 
 const (
-	KControlPopupArrowOrientationEast = 0
+	KControlPopupArrowOrientationEast  = 0
 	KControlPopupArrowOrientationNorth = 2
 	KControlPopupArrowOrientationSouth = 3
-	KControlPopupArrowOrientationWest = 1
+	KControlPopupArrowOrientationWest  = 1
 )
 
 const (
 	KControlPopupArrowSizeNormal = 0
-	KControlPopupArrowSizeSmall = 1
+	KControlPopupArrowSizeSmall  = 1
 )
 
 const (
@@ -1978,31 +2024,31 @@ const (
 )
 
 const (
-	KControlPopupButtonExtraHeightTag = 1702389876
+	KControlPopupButtonExtraHeightTag  = 1702389876
 	KControlPopupButtonOwnedMenuRefTag = 1869443686
 )
 
 const (
 	KControlPopupButtonMenuHandleTag = 1835557230
-	KControlPopupButtonMenuIDTag = 1835952484
-	KControlPopupButtonMenuRefTag = 1835557230
+	KControlPopupButtonMenuIDTag     = 1835952484
+	KControlPopupButtonMenuRefTag    = 1835557230
 )
 
 const (
-	KControlPopupButtonProc = 400
-	KControlPopupFixedWidthVariant = 1
+	KControlPopupButtonProc           = 400
+	KControlPopupFixedWidthVariant    = 1
 	KControlPopupUseAddResMenuVariant = 4
-	KControlPopupUseWFontVariant = 8
+	KControlPopupUseWFontVariant      = 8
 	KControlPopupVariableWidthVariant = 2
 )
 
 const (
-	KControlProgressBarAnimatingTag = 1634625901
+	KControlProgressBarAnimatingTag     = 1634625901
 	KControlProgressBarIndeterminateTag = 1768842341
 )
 
 const (
-	KControlProgressBarProc = 80
+	KControlProgressBarProc  = 80
 	KControlRelevanceBarProc = 81
 )
 
@@ -2011,15 +2057,15 @@ const (
 )
 
 const (
-	KControlPushButtonAnimatingTag = 1634625901
-	KControlPushButtonCancelTag = 1668178796
-	KControlPushButtonContentTag = 1668247156
-	KControlPushButtonDefaultTag = 1684434036
+	KControlPushButtonAnimatingTag     = 1634625901
+	KControlPushButtonCancelTag        = 1668178796
+	KControlPushButtonContentTag       = 1668247156
+	KControlPushButtonDefaultTag       = 1684434036
 	KControlPushButtonIconAlignmentTag = 1668311393
 )
 
 const (
-	KControlPushButtonIconOnLeft = 6
+	KControlPushButtonIconOnLeft  = 6
 	KControlPushButtonIconOnRight = 7
 )
 
@@ -2028,9 +2074,9 @@ const (
 )
 
 const (
-	KControlPushButLeftIconProc = 374
+	KControlPushButLeftIconProc  = 374
 	KControlPushButRightIconProc = 375
-	KControlPushButtonProc = 368
+	KControlPushButtonProc       = 368
 )
 
 const (
@@ -2042,8 +2088,8 @@ const (
 )
 
 const (
-	KControlRadioButtonCheckedValue = 1
-	KControlRadioButtonMixedValue = 2
+	KControlRadioButtonCheckedValue   = 1
+	KControlRadioButtonMixedValue     = 2
 	KControlRadioButtonUncheckedValue = 0
 )
 
@@ -2053,17 +2099,17 @@ const (
 
 const (
 	KControlRoundButtonContentTag = 1668247156
-	KControlRoundButtonSizeTag = 1936292453
+	KControlRoundButtonSizeTag    = 1936292453
 )
 
 const (
-	KControlRoundButtonLargeSize = 2
+	KControlRoundButtonLargeSize  = 2
 	KControlRoundButtonNormalSize = 0
 )
 
 const (
 	KControlScrollBarLiveProc = 386
-	KControlScrollBarProc = 384
+	KControlScrollBarProc     = 384
 )
 
 const (
@@ -2071,21 +2117,21 @@ const (
 )
 
 const (
-	KControlScrollTextBoxAnimatingTag = 1634625901
-	KControlScrollTextBoxAutoScrollAmountTag = 1935764852
-	KControlScrollTextBoxContentsTag = 1953654131
-	KControlScrollTextBoxDelayBeforeAutoScrollTag = 1937007724
+	KControlScrollTextBoxAnimatingTag              = 1634625901
+	KControlScrollTextBoxAutoScrollAmountTag       = 1935764852
+	KControlScrollTextBoxContentsTag               = 1953654131
+	KControlScrollTextBoxDelayBeforeAutoScrollTag  = 1937007724
 	KControlScrollTextBoxDelayBetweenAutoScrollTag = 1935893612
 )
 
 const (
 	KControlScrollTextBoxAutoScrollProc = 433
-	KControlScrollTextBoxProc = 432
+	KControlScrollTextBoxProc           = 432
 )
 
 const (
 	KControlSearchFieldCancelPart = 30
-	KControlSearchFieldMenuPart = 31
+	KControlSearchFieldMenuPart   = 31
 )
 
 const (
@@ -2093,24 +2139,24 @@ const (
 )
 
 const (
-	KControlSizeAuto = 65535
-	KControlSizeLarge = 2
-	KControlSizeMini = 3
+	KControlSizeAuto   = 65535
+	KControlSizeLarge  = 2
+	KControlSizeMini   = 3
 	KControlSizeNormal = 0
-	KControlSizeSmall = 1
+	KControlSizeSmall  = 1
 )
 
 const (
-	KControlSliderDoesNotPoint = 2
+	KControlSliderDoesNotPoint      = 2
 	KControlSliderPointsDownOrRight = 0
-	KControlSliderPointsUpOrLeft = 1
+	KControlSliderPointsUpOrLeft    = 1
 )
 
 const (
-	KControlSliderHasTickMarks = 2
-	KControlSliderLiveFeedback = 1
-	KControlSliderNonDirectional = 8
-	KControlSliderProc = 48
+	KControlSliderHasTickMarks     = 2
+	KControlSliderLiveFeedback     = 1
+	KControlSliderNonDirectional   = 8
+	KControlSliderProc             = 48
 	KControlSliderReverseDirection = 4
 )
 
@@ -2119,76 +2165,76 @@ const (
 )
 
 const (
-	KControlStaticTextCFStringTag = 1667658612
+	KControlStaticTextCFStringTag    = 1667658612
 	KControlStaticTextIsMultilineTag = 1937009005
-	KControlStaticTextStyleTag = 1718578804
-	KControlStaticTextTextHeightTag = 1952998761
-	KControlStaticTextTextTag = 1952807028
-	KControlStaticTextTruncTag = 1953658222
+	KControlStaticTextStyleTag       = 1718578804
+	KControlStaticTextTextHeightTag  = 1952998761
+	KControlStaticTextTextTag        = 1952807028
+	KControlStaticTextTruncTag       = 1953658222
 )
 
 const (
 	KControlClickableMetaPart = -4
-	KControlContentMetaPart = -2
-	KControlOpaqueMetaPart = -3
+	KControlContentMetaPart   = -2
+	KControlOpaqueMetaPart    = -3
 	KControlStructureMetaPart = -1
 )
 
 const (
-	KControlAutoToggles = 16384
-	KControlGetsFocusOnClick = 256
-	KControlHandlesTracking = 32
-	KControlHasRadioBehavior = 2048
-	KControlHasSpecialBackground = 128
-	KControlIdlesWithTimer = 8388608
+	KControlAutoToggles               = 16384
+	KControlGetsFocusOnClick          = 256
+	KControlHandlesTracking           = 32
+	KControlHasRadioBehavior          = 2048
+	KControlHasSpecialBackground      = 128
+	KControlIdlesWithTimer            = 8388608
 	KControlInvertsUpDownValueMeaning = 16777216
-	KControlSupportsCalcBestRect = 512
-	KControlSupportsClickActivation = 4194304
-	KControlSupportsContextualMenus = 2097152
-	KControlSupportsDataAccess = 64
-	KControlSupportsDragAndDrop = 4096
-	KControlSupportsEmbedding = 2
-	KControlSupportsFlattening = 524288
-	KControlSupportsFocus = 4
-	KControlSupportsGetRegion = 131072
-	KControlSupportsGhosting = 1
-	KControlSupportsLiveFeedback = 1024
-	KControlSupportsSetCursor = 1048576
-	KControlWantsActivate = 16
-	KControlWantsIdle = 8
+	KControlSupportsCalcBestRect      = 512
+	KControlSupportsClickActivation   = 4194304
+	KControlSupportsContextualMenus   = 2097152
+	KControlSupportsDataAccess        = 64
+	KControlSupportsDragAndDrop       = 4096
+	KControlSupportsEmbedding         = 2
+	KControlSupportsFlattening        = 524288
+	KControlSupportsFocus             = 4
+	KControlSupportsGetRegion         = 131072
+	KControlSupportsGhosting          = 1
+	KControlSupportsLiveFeedback      = 1024
+	KControlSupportsSetCursor         = 1048576
+	KControlWantsActivate             = 16
+	KControlWantsIdle                 = 8
 )
 
 const (
-	KControlTabContentRectTag = 1919247220
-	KControlTabEnabledFlagTag = 1701732706
-	KControlTabFontStyleTag = 1718578804
+	KControlTabContentRectTag  = 1919247220
+	KControlTabEnabledFlagTag  = 1701732706
+	KControlTabFontStyleTag    = 1718578804
 	KControlTabImageContentTag = 1668247156
-	KControlTabInfoTag = 1952539241
+	KControlTabInfoTag         = 1952539241
 )
 
 const (
-	KControlTabDirectionEast = 2
+	KControlTabDirectionEast  = 2
 	KControlTabDirectionNorth = 0
 	KControlTabDirectionSouth = 1
-	KControlTabDirectionWest = 3
+	KControlTabDirectionWest  = 3
 )
 
 const (
-	KControlTabInfoVersionOne = 1
+	KControlTabInfoVersionOne  = 1
 	KControlTabInfoVersionZero = 0
 )
 
 const (
-	KControlTabLargeEastProc = 132
+	KControlTabLargeEastProc  = 132
 	KControlTabLargeNorthProc = 128
-	KControlTabLargeProc = 128
+	KControlTabLargeProc      = 128
 	KControlTabLargeSouthProc = 130
-	KControlTabLargeWestProc = 134
-	KControlTabSmallEastProc = 133
+	KControlTabLargeWestProc  = 134
+	KControlTabSmallEastProc  = 133
 	KControlTabSmallNorthProc = 129
-	KControlTabSmallProc = 129
+	KControlTabSmallProc      = 129
 	KControlTabSmallSouthProc = 131
-	KControlTabSmallWestProc = 135
+	KControlTabSmallWestProc  = 135
 )
 
 const (
@@ -2197,7 +2243,7 @@ const (
 
 const (
 	KControlTabSizeLarge = 0
-	KControlTabSizeMini = 3
+	KControlTabSizeMini  = 3
 	KControlTabSizeSmall = 1
 )
 
@@ -2206,22 +2252,22 @@ const (
 )
 
 const (
-	KControlTriangleAutoToggleProc = 66
+	KControlTriangleAutoToggleProc           = 66
 	KControlTriangleLeftFacingAutoToggleProc = 67
-	KControlTriangleLeftFacingProc = 65
-	KControlTriangleProc = 64
+	KControlTriangleLeftFacingProc           = 65
+	KControlTriangleProc                     = 64
 )
 
 const (
-	KControlAddFontSizeMask = 256
-	KControlUseAllMask = 255
+	KControlAddFontSizeMask  = 256
+	KControlUseAllMask       = 255
 	KControlUseBackColorMask = 16
-	KControlUseFaceMask = 2
-	KControlUseFontMask = 1
+	KControlUseFaceMask      = 2
+	KControlUseFontMask      = 1
 	KControlUseForeColorMask = 8
-	KControlUseJustMask = 64
-	KControlUseModeMask = 32
-	KControlUseSizeMask = 4
+	KControlUseJustMask      = 64
+	KControlUseModeMask      = 32
+	KControlUseSizeMask      = 4
 )
 
 const (
@@ -2229,15 +2275,15 @@ const (
 )
 
 const (
-	KControlUserItemDrawProcTag = 1969841264
-	KControlUserPaneActivateProcTag = 1633907817
+	KControlUserItemDrawProcTag       = 1969841264
+	KControlUserPaneActivateProcTag   = 1633907817
 	KControlUserPaneBackgroundProcTag = 1650549611
-	KControlUserPaneDrawProcTag = 1685217655
-	KControlUserPaneFocusProcTag = 1718575977
-	KControlUserPaneHitTestProcTag = 1751741556
-	KControlUserPaneIdleProcTag = 1768189029
-	KControlUserPaneKeyDownProcTag = 1801812324
-	KControlUserPaneTrackingProcTag = 1953653099
+	KControlUserPaneDrawProcTag       = 1685217655
+	KControlUserPaneFocusProcTag      = 1718575977
+	KControlUserPaneHitTestProcTag    = 1751741556
+	KControlUserPaneIdleProcTag       = 1768189029
+	KControlUserPaneKeyDownProcTag    = 1801812324
+	KControlUserPaneTrackingProcTag   = 1953653099
 )
 
 const (
@@ -2249,107 +2295,107 @@ const (
 )
 
 const (
-	KControlWindowHeaderProc = 336
+	KControlWindowHeaderProc         = 336
 	KControlWindowListViewHeaderProc = 337
 )
 
 const (
-	KDataBrowserAttributeAutoHideScrollBars = 8
-	KDataBrowserAttributeColumnViewResizeWindow = 1
+	KDataBrowserAttributeAutoHideScrollBars           = 8
+	KDataBrowserAttributeColumnViewResizeWindow       = 1
 	KDataBrowserAttributeListViewAlternatingRowColors = 2
-	KDataBrowserAttributeListViewDrawColumnDividers = 4
-	KDataBrowserAttributeNone = 0
-	KDataBrowserAttributeReserveGrowBoxSpace = 16
+	KDataBrowserAttributeListViewDrawColumnDividers   = 4
+	KDataBrowserAttributeNone                         = 0
+	KDataBrowserAttributeReserveGrowBoxSpace          = 16
 )
 
 const (
-	KDataBrowserClientPropertyFlagsMask = -16777216
+	KDataBrowserClientPropertyFlagsMask   = -16777216
 	KDataBrowserClientPropertyFlagsOffset = 24
 )
 
 const (
-	KDataBrowserContentHit = 1
-	KDataBrowserNothingHit = 0
+	KDataBrowserContentHit   = 1
+	KDataBrowserNothingHit   = 0
 	KDataBrowserStopTracking = -1
 )
 
 const (
-	KDataBrowserCheckboxType = 1667785336
-	KDataBrowserCustomType = 1061109567
-	KDataBrowserDateTimeType = 1684108389
-	KDataBrowserIconAndTextType = 1953063790
-	KDataBrowserIconType = 1768124018
-	KDataBrowserPopupMenuType = 1835363957
-	KDataBrowserProgressBarType = 1886547815
+	KDataBrowserCheckboxType      = 1667785336
+	KDataBrowserCustomType        = 1061109567
+	KDataBrowserDateTimeType      = 1684108389
+	KDataBrowserIconAndTextType   = 1953063790
+	KDataBrowserIconType          = 1768124018
+	KDataBrowserPopupMenuType     = 1835363957
+	KDataBrowserProgressBarType   = 1886547815
 	KDataBrowserRelevanceRankType = 1918987883
-	KDataBrowserSliderType = 1936483442
-	KDataBrowserTextType = 1952807028
+	KDataBrowserSliderType        = 1936483442
+	KDataBrowserTextType          = 1952807028
 )
 
 const (
-	KDataBrowserAlwaysExtendSelection = 32
-	KDataBrowserCmdTogglesSelection = 8
-	KDataBrowserDragSelect = 1
+	KDataBrowserAlwaysExtendSelection  = 32
+	KDataBrowserCmdTogglesSelection    = 8
+	KDataBrowserDragSelect             = 1
 	KDataBrowserNeverEmptySelectionSet = 64
-	KDataBrowserNoDisjointSelection = 16
-	KDataBrowserResetSelection = 4
-	KDataBrowserSelectOnlyOne = 2
+	KDataBrowserNoDisjointSelection    = 16
+	KDataBrowserResetSelection         = 4
+	KDataBrowserSelectOnlyOne          = 2
 )
 
 const (
-	KDataBrowserEditMsgClear = 1668048225
-	KDataBrowserEditMsgCopy = 1668247673
-	KDataBrowserEditMsgCut = 1668641824
-	KDataBrowserEditMsgPaste = 1885434740
-	KDataBrowserEditMsgRedo = 1919247471
+	KDataBrowserEditMsgClear     = 1668048225
+	KDataBrowserEditMsgCopy      = 1668247673
+	KDataBrowserEditMsgCut       = 1668641824
+	KDataBrowserEditMsgPaste     = 1885434740
+	KDataBrowserEditMsgRedo      = 1919247471
 	KDataBrowserEditMsgSelectAll = 1935764588
-	KDataBrowserEditMsgUndo = 1970168943
+	KDataBrowserEditMsgUndo      = 1970168943
 )
 
 const (
-	KDataBrowserContainerClosed = 10
-	KDataBrowserContainerClosing = 9
-	KDataBrowserContainerOpened = 8
-	KDataBrowserContainerSorted = 12
-	KDataBrowserContainerSorting = 11
-	KDataBrowserEditStarted = 3
-	KDataBrowserEditStopped = 4
-	KDataBrowserItemAdded = 1
-	KDataBrowserItemDeselected = 6
-	KDataBrowserItemDoubleClicked = 7
-	KDataBrowserItemRemoved = 2
-	KDataBrowserItemSelected = 5
-	KDataBrowserSelectionSetChanged = 14
-	KDataBrowserTargetChanged = 15
-	KDataBrowserUserStateChanged = 13
+	KDataBrowserContainerClosed      = 10
+	KDataBrowserContainerClosing     = 9
+	KDataBrowserContainerOpened      = 8
+	KDataBrowserContainerSorted      = 12
+	KDataBrowserContainerSorting     = 11
+	KDataBrowserEditStarted          = 3
+	KDataBrowserEditStopped          = 4
+	KDataBrowserItemAdded            = 1
+	KDataBrowserItemDeselected       = 6
+	KDataBrowserItemDoubleClicked    = 7
+	KDataBrowserItemRemoved          = 2
+	KDataBrowserItemSelected         = 5
+	KDataBrowserSelectionSetChanged  = 14
+	KDataBrowserTargetChanged        = 15
+	KDataBrowserUserStateChanged     = 13
 	KDataBrowserUserToggledContainer = 16
 )
 
 const (
-	KDataBrowserColumnViewPreviewProperty = 10
-	KDataBrowserContainerAliasIDProperty = 9
+	KDataBrowserColumnViewPreviewProperty   = 10
+	KDataBrowserContainerAliasIDProperty    = 9
 	KDataBrowserContainerIsClosableProperty = 6
 	KDataBrowserContainerIsOpenableProperty = 5
 	KDataBrowserContainerIsSortableProperty = 7
-	KDataBrowserItemIsActiveProperty = 1
-	KDataBrowserItemIsContainerProperty = 4
-	KDataBrowserItemIsEditableProperty = 3
-	KDataBrowserItemIsSelectableProperty = 2
-	KDataBrowserItemNoProperty = 0
+	KDataBrowserItemIsActiveProperty        = 1
+	KDataBrowserItemIsContainerProperty     = 4
+	KDataBrowserItemIsEditableProperty      = 3
+	KDataBrowserItemIsSelectableProperty    = 2
+	KDataBrowserItemNoProperty              = 0
 	KDataBrowserItemParentContainerProperty = 11
-	KDataBrowserItemSelfIdentityProperty = 8
+	KDataBrowserItemSelfIdentityProperty    = 8
 )
 
 const (
-	KDataBrowserContainerIsOpen = 2
-	KDataBrowserItemAnyState = 4294967295
+	KDataBrowserContainerIsOpen  = 2
+	KDataBrowserItemAnyState     = 4294967295
 	KDataBrowserItemIsDragTarget = 4
-	KDataBrowserItemIsSelected = 1
-	KDataBrowserItemNoState = 0
+	KDataBrowserItemIsSelected   = 1
+	KDataBrowserItemNoState      = 0
 )
 
 const (
-	KDataBrowserItemsAdd = 0
+	KDataBrowserItemsAdd    = 0
 	KDataBrowserItemsAssign = 1
 	KDataBrowserItemsRemove = 3
 	KDataBrowserItemsToggle = 2
@@ -2372,21 +2418,21 @@ const (
 )
 
 const (
-	KDataBrowserListViewDefaultColumnFlags = 393216
-	KDataBrowserListViewMovableColumn = 131072
+	KDataBrowserListViewDefaultColumnFlags         = 393216
+	KDataBrowserListViewMovableColumn              = 131072
 	KDataBrowserListViewNoGapForIconInHeaderButton = 1048576
-	KDataBrowserListViewSelectionColumn = 65536
-	KDataBrowserListViewSortableColumn = 262144
-	KDataBrowserListViewTypeSelectColumn = 524288
+	KDataBrowserListViewSelectionColumn            = 65536
+	KDataBrowserListViewSortableColumn             = 262144
+	KDataBrowserListViewTypeSelectColumn           = 524288
 )
 
 const (
-	KDataBrowserMetricCellContentInset = 1
-	KDataBrowserMetricDisclosureColumnEdgeInset = 3
-	KDataBrowserMetricDisclosureColumnPerDepthGap = 5
+	KDataBrowserMetricCellContentInset                = 1
+	KDataBrowserMetricDisclosureColumnEdgeInset       = 3
+	KDataBrowserMetricDisclosureColumnPerDepthGap     = 5
 	KDataBrowserMetricDisclosureTriangleAndContentGap = 4
-	KDataBrowserMetricIconAndTextGap = 2
-	KDataBrowserMetricLast = 5
+	KDataBrowserMetricIconAndTextGap                  = 2
+	KDataBrowserMetricLast                            = 5
 )
 
 const (
@@ -2395,59 +2441,59 @@ const (
 
 const (
 	KDataBrowserColumnView = 1668050294
-	KDataBrowserListView = 1819505782
-	KDataBrowserNoView = 1061109567
+	KDataBrowserListView   = 1819505782
+	KDataBrowserNoView     = 1061109567
 )
 
 const (
 	KDataBrowserOrderDecreasing = 2
 	KDataBrowserOrderIncreasing = 1
-	KDataBrowserOrderUndefined = 0
+	KDataBrowserOrderUndefined  = 0
 )
 
 const (
-	KDataBrowserPropertyCheckboxPart = 1667785336
-	KDataBrowserPropertyContentPart = 757935405
-	KDataBrowserPropertyDisclosurePart = 1684632419
-	KDataBrowserPropertyEnclosingPart = 0
-	KDataBrowserPropertyIconPart = 1768124018
-	KDataBrowserPropertyProgressBarPart = 1886547815
+	KDataBrowserPropertyCheckboxPart      = 1667785336
+	KDataBrowserPropertyContentPart       = 757935405
+	KDataBrowserPropertyDisclosurePart    = 1684632419
+	KDataBrowserPropertyEnclosingPart     = 0
+	KDataBrowserPropertyIconPart          = 1768124018
+	KDataBrowserPropertyProgressBarPart   = 1886547815
 	KDataBrowserPropertyRelevanceRankPart = 1918987883
-	KDataBrowserPropertySliderPart = 1936483442
-	KDataBrowserPropertyTextPart = 1952807028
+	KDataBrowserPropertySliderPart        = 1936483442
+	KDataBrowserPropertyTextPart          = 1952807028
 )
 
 const (
-	KDataBrowserCheckboxTriState = 256
-	KDataBrowserDateTimeDateOnly = 512
-	KDataBrowserDateTimeRelative = 256
-	KDataBrowserDateTimeSecondsToo = 2048
-	KDataBrowserDateTimeTimeOnly = 1024
-	KDataBrowserDoNotTruncateText = 768
-	KDataBrowserPopupMenuButtonless = 256
-	KDataBrowserPropertyFlagsMask = 65280
-	KDataBrowserPropertyFlagsOffset = 8
+	KDataBrowserCheckboxTriState          = 256
+	KDataBrowserDateTimeDateOnly          = 512
+	KDataBrowserDateTimeRelative          = 256
+	KDataBrowserDateTimeSecondsToo        = 2048
+	KDataBrowserDateTimeTimeOnly          = 1024
+	KDataBrowserDoNotTruncateText         = 768
+	KDataBrowserPopupMenuButtonless       = 256
+	KDataBrowserPropertyFlagsMask         = 65280
+	KDataBrowserPropertyFlagsOffset       = 8
 	KDataBrowserPropertyModificationFlags = 65280
-	KDataBrowserRelativeDateTime = 256
-	KDataBrowserSliderDownwardThumb = 512
-	KDataBrowserSliderPlainThumb = 0
-	KDataBrowserSliderUpwardThumb = 256
-	KDataBrowserTruncateTextAtEnd = 512
-	KDataBrowserTruncateTextAtStart = 256
-	KDataBrowserTruncateTextMiddle = 0
+	KDataBrowserRelativeDateTime          = 256
+	KDataBrowserSliderDownwardThumb       = 512
+	KDataBrowserSliderPlainThumb          = 0
+	KDataBrowserSliderUpwardThumb         = 256
+	KDataBrowserTruncateTextAtEnd         = 512
+	KDataBrowserTruncateTextAtStart       = 256
+	KDataBrowserTruncateTextMiddle        = 0
 )
 
 const (
-	KDataBrowserRevealAndCenterInView = 1
-	KDataBrowserRevealOnly = 0
+	KDataBrowserRevealAndCenterInView  = 1
+	KDataBrowserRevealOnly             = 0
 	KDataBrowserRevealWithoutSelecting = 2
 )
 
 const (
-	KDataBrowserSelectionAnchorDown = 1
-	KDataBrowserSelectionAnchorLeft = 2
+	KDataBrowserSelectionAnchorDown  = 1
+	KDataBrowserSelectionAnchorLeft  = 2
 	KDataBrowserSelectionAnchorRight = 3
-	KDataBrowserSelectionAnchorUp = 0
+	KDataBrowserSelectionAnchorUp    = 0
 )
 
 const (
@@ -2455,7 +2501,7 @@ const (
 )
 
 const (
-	KDataBrowserTableViewFillHilite = 1
+	KDataBrowserTableViewFillHilite    = 1
 	KDataBrowserTableViewMinimalHilite = 0
 )
 
@@ -2464,40 +2510,40 @@ const (
 )
 
 const (
-	KDataBrowserDefaultPropertyFlags = 0
-	KDataBrowserPropertyIsEditable = 1
-	KDataBrowserPropertyIsMutable = 1
-	KDataBrowserUniversalPropertyFlags = 255
+	KDataBrowserDefaultPropertyFlags       = 0
+	KDataBrowserPropertyIsEditable         = 1
+	KDataBrowserPropertyIsMutable          = 1
+	KDataBrowserUniversalPropertyFlags     = 255
 	KDataBrowserUniversalPropertyFlagsMask = 255
 )
 
 const (
-	KDataBrowserViewSpecificFlagsMask = 16711680
-	KDataBrowserViewSpecificFlagsOffset = 16
+	KDataBrowserViewSpecificFlagsMask     = 16711680
+	KDataBrowserViewSpecificFlagsOffset   = 16
 	KDataBrowserViewSpecificPropertyFlags = 16711680
 )
 
 const (
-	KDialogFlagsHandleMovableModal = 4
-	KDialogFlagsUseCompositing = 256
+	KDialogFlagsHandleMovableModal  = 4
+	KDialogFlagsUseCompositing      = 256
 	KDialogFlagsUseControlHierarchy = 2
-	KDialogFlagsUseThemeBackground = 1
-	KDialogFlagsUseThemeControls = 8
+	KDialogFlagsUseThemeBackground  = 1
+	KDialogFlagsUseThemeControls    = 8
 )
 
 const (
-	KDialogFontAddFontSizeMask = 256
+	KDialogFontAddFontSizeMask   = 256
 	KDialogFontAddToMetaFontMask = 1024
-	KDialogFontNoFontStyle = 0
-	KDialogFontUseAllMask = 255
-	KDialogFontUseBackColorMask = 16
-	KDialogFontUseFaceMask = 2
-	KDialogFontUseFontMask = 1
-	KDialogFontUseFontNameMask = 512
-	KDialogFontUseForeColorMask = 8
-	KDialogFontUseJustMask = 64
-	KDialogFontUseModeMask = 32
-	KDialogFontUseSizeMask = 4
+	KDialogFontNoFontStyle       = 0
+	KDialogFontUseAllMask        = 255
+	KDialogFontUseBackColorMask  = 16
+	KDialogFontUseFaceMask       = 2
+	KDialogFontUseFontMask       = 1
+	KDialogFontUseFontNameMask   = 512
+	KDialogFontUseForeColorMask  = 8
+	KDialogFontUseJustMask       = 64
+	KDialogFontUseModeMask       = 32
+	KDialogFontUseSizeMask       = 4
 )
 
 const (
@@ -2505,100 +2551,100 @@ const (
 )
 
 const (
-	KActivateAndHandleClick = 3
-	KActivateAndIgnoreClick = 2
+	KActivateAndHandleClick      = 3
+	KActivateAndIgnoreClick      = 2
 	KDoNotActivateAndHandleClick = 1
 	KDoNotActivateAndIgnoreClick = 0
 )
 
 const (
-	KAlertVariantCode = 7
-	KDocumentWindowVariantCode = 0
-	KModalDialogVariantCode = 1
-	KMovableAlertVariantCode = 9
+	KAlertVariantCode              = 7
+	KDocumentWindowVariantCode     = 0
+	KModalDialogVariantCode        = 1
+	KMovableAlertVariantCode       = 9
 	KMovableModalDialogVariantCode = 5
-	KPlainDialogVariantCode = 2
-	KShadowDialogVariantCode = 3
-	KSideFloaterVariantCode = 8
+	KPlainDialogVariantCode        = 2
+	KShadowDialogVariantCode       = 3
+	KSideFloaterVariantCode        = 8
 )
 
 const (
-	KDragActionAlias = 2
-	KDragActionAll = 4294967295
-	KDragActionCopy = 1
-	KDragActionDelete = 32
+	KDragActionAlias   = 2
+	KDragActionAll     = 4294967295
+	KDragActionCopy    = 1
+	KDragActionDelete  = 32
 	KDragActionGeneric = 4
-	KDragActionMove = 16
+	KDragActionMove    = 16
 	KDragActionNothing = 0
 	KDragActionPrivate = 8
 )
 
 const (
-	KDragBehaviorNone = 0
+	KDragBehaviorNone              = 0
 	KDragBehaviorZoomBackAnimation = 1
 )
 
 const (
-	FlavorTypeHFS = 1751544608
-	FlavorTypePromiseHFS = 1885890163
-	KDragFlavorTypeHFS = 1751544608
+	FlavorTypeHFS             = 1751544608
+	FlavorTypePromiseHFS      = 1885890163
+	KDragFlavorTypeHFS        = 1751544608
 	KDragFlavorTypePromiseHFS = 1885890163
 )
 
 const (
-	KDragHasLeftSenderWindow = 1
+	KDragHasLeftSenderWindow     = 1
 	KDragInsideSenderApplication = 2
-	KDragInsideSenderWindow = 4
+	KDragInsideSenderWindow      = 4
 )
 
 const (
-	KDragPromisedFlavor = 1718842192
+	KDragPromisedFlavor         = 1718842192
 	KDragPromisedFlavorFindFile = 1918332209
 )
 
 const (
 	KDragPseudoCreatorVolumeOrDirectory = 1296122707
-	KDragPseudoFileTypeDirectory = 1718578276
-	KDragPseudoFileTypeVolume = 1684632427
+	KDragPseudoFileTypeDirectory        = 1718578276
+	KDragPseudoFileTypeVolume           = 1684632427
 )
 
 const (
 	KDragDoNotScaleImage = 32
-	KDragRegionAndImage = 16
+	KDragRegionAndImage  = 16
 )
 
 const (
 	KDragRegionBegin = 1
-	KDragRegionDraw = 2
-	KDragRegionEnd = 5
-	KDragRegionHide = 3
-	KDragRegionIdle = 4
+	KDragRegionDraw  = 2
+	KDragRegionEnd   = 5
+	KDragRegionHide  = 3
+	KDragRegionIdle  = 4
 )
 
 const (
-	KDragStandardDropLocationTrash = 1953657704
+	KDragStandardDropLocationTrash   = 1953657704
 	KDragStandardDropLocationUnknown = 1970170734
 )
 
 const (
-	KDragDarkTranslucency = 1
-	KDragDarkerTranslucency = 2
-	KDragOpaqueTranslucency = 3
+	KDragDarkTranslucency     = 1
+	KDragDarkerTranslucency   = 2
+	KDragOpaqueTranslucency   = 3
 	KDragStandardTranslucency = 0
 )
 
 const (
 	KDragTrackingEnterControl = 2
-	KDragTrackingInControl = 3
+	KDragTrackingInControl    = 3
 	KDragTrackingLeaveControl = 4
 )
 
 const (
 	KDragTrackingEnterHandler = 1
-	KDragTrackingEnterWindow = 2
-	KDragTrackingInWindow = 3
+	KDragTrackingEnterWindow  = 2
+	KDragTrackingInWindow     = 3
 	KDragTrackingLeaveHandler = 5
-	KDragTrackingLeaveWindow = 4
+	KDragTrackingLeaveWindow  = 4
 )
 
 const (
@@ -2736,7 +2782,7 @@ const (
 
 const (
 	KEventAttributeMonitored = 8
-	KEventAttributeNone = 0
+	KEventAttributeNone      = 0
 	KEventAttributeUserEvent = 1
 )
 
@@ -2749,15 +2795,15 @@ const (
 )
 
 const (
-	KEventClassDelegate = 1684368485
-	KEventParamDelegateGroupClasses = 1735553123
+	KEventClassDelegate                = 1684368485
+	KEventParamDelegateGroupClasses    = 1735553123
 	KEventParamDelegateGroupParameters = 1735553136
-	KEventParamDelegateTarget = 1684368500
-	KEventParamDelegateTargetClasses = 1953654627
+	KEventParamDelegateTarget          = 1684368500
+	KEventParamDelegateTargetClasses   = 1953654627
 )
 
 const (
-	KEventClassEPPC = 1701867619
+	KEventClassEPPC      = 1701867619
 	KEventHighLevelEvent = 1
 )
 
@@ -2770,27 +2816,27 @@ const (
 )
 
 const (
-	KEventClassAccessibility = 1633903461
-	KEventClassAppearance = 1634758765
-	KEventClassAppleEvent = 1701867619
-	KEventClassApplication = 1634758764
-	KEventClassCommand = 1668113523
-	KEventClassControl = 1668183148
-	KEventClassGesture = 1734701940
-	KEventClassInk = 1768844064
-	KEventClassKeyboard = 1801812322
-	KEventClassMenu = 1835363957
-	KEventClassMouse = 1836021107
-	KEventClassService = 1936028278
-	KEventClassSystem = 1835098995
+	KEventClassAccessibility     = 1633903461
+	KEventClassAppearance        = 1634758765
+	KEventClassAppleEvent        = 1701867619
+	KEventClassApplication       = 1634758764
+	KEventClassCommand           = 1668113523
+	KEventClassControl           = 1668183148
+	KEventClassGesture           = 1734701940
+	KEventClassInk               = 1768844064
+	KEventClassKeyboard          = 1801812322
+	KEventClassMenu              = 1835363957
+	KEventClassMouse             = 1836021107
+	KEventClassService           = 1936028278
+	KEventClassSystem            = 1835098995
 	KEventClassTSMDocumentAccess = 1952735587
-	KEventClassTablet = 1952607348
-	KEventClassTextInput = 1952807028
-	KEventClassToolbar = 1952604530
-	KEventClassToolbarItem = 1952606580
-	KEventClassToolbarItemView = 1952606582
-	KEventClassVolume = 1987013664
-	KEventClassWindow = 2003398244
+	KEventClassTablet            = 1952607348
+	KEventClassTextInput         = 1952807028
+	KEventClassToolbar           = 1952604530
+	KEventClassToolbarItem       = 1952606580
+	KEventClassToolbarItemView   = 1952606582
+	KEventClassVolume            = 1987013664
+	KEventClassWindow            = 2003398244
 )
 
 const (
@@ -3127,22 +3173,22 @@ const (
 )
 
 const (
-	KEventKeyModifierFnBit = 17
+	KEventKeyModifierFnBit      = 17
 	KEventKeyModifierNumLockBit = 16
 )
 
 const (
-	KEventKeyModifierFnMask = 131072
+	KEventKeyModifierFnMask      = 131072
 	KEventKeyModifierNumLockMask = 65536
 )
 
 const (
-	KEventLeaveInQueue = 0
+	KEventLeaveInQueue    = 0
 	KEventRemoveFromQueue = 1
 )
 
 const (
-	KEventLoopIdleTimerIdling = 2
+	KEventLoopIdleTimerIdling  = 2
 	KEventLoopIdleTimerStarted = 1
 	KEventLoopIdleTimerStopped = 3
 )
@@ -3232,9 +3278,9 @@ const (
 )
 
 const (
-	KEventMouseButtonPrimary = 1
+	KEventMouseButtonPrimary   = 1
 	KEventMouseButtonSecondary = 2
-	KEventMouseButtonTertiary = 3
+	KEventMouseButtonTertiary  = 3
 )
 
 const (
@@ -3275,21 +3321,21 @@ const (
 )
 
 const (
-	KEventParamAccessibilityEventQueued = 1634038133
-	KEventParamAccessibleActionDescription = 1633903731
-	KEventParamAccessibleActionName = 1633906285
-	KEventParamAccessibleActionNames = 1633906291
-	KEventParamAccessibleAttributeName = 1635020397
-	KEventParamAccessibleAttributeNames = 1635020403
+	KEventParamAccessibilityEventQueued     = 1634038133
+	KEventParamAccessibleActionDescription  = 1633903731
+	KEventParamAccessibleActionName         = 1633906285
+	KEventParamAccessibleActionNames        = 1633906291
+	KEventParamAccessibleAttributeName      = 1635020397
+	KEventParamAccessibleAttributeNames     = 1635020403
 	KEventParamAccessibleAttributeParameter = 1635020897
-	KEventParamAccessibleAttributeSettable = 1635021684
-	KEventParamAccessibleAttributeValue = 1635022444
-	KEventParamAccessibleChild = 1633904748
-	KEventParamAccessibleObject = 1634689642
+	KEventParamAccessibleAttributeSettable  = 1635021684
+	KEventParamAccessibleAttributeValue     = 1635022444
+	KEventParamAccessibleChild              = 1633904748
+	KEventParamAccessibleObject             = 1634689642
 )
 
 const (
-	KEventParamAppleEvent = 1634039412
+	KEventParamAppleEvent      = 1634039412
 	KEventParamAppleEventReply = 1634038384
 )
 
@@ -3298,168 +3344,168 @@ const (
 )
 
 const (
-	KEventParamControlAction = 1667331440
-	KEventParamControlClickActivationResult = 1667457394
-	KEventParamControlCurrentOwningWindow = 1667460983
-	KEventParamControlCurrentPart = 1668182115
-	KEventParamControlDataBuffer = 1667523174
-	KEventParamControlDataBufferSize = 1667523187
-	KEventParamControlDataTag = 1667527783
-	KEventParamControlDrawDepth = 1667523696
-	KEventParamControlDrawEngraved = 1667523950
-	KEventParamControlDrawInColor = 1667524963
-	KEventParamControlFeatures = 1667658866
-	KEventParamControlFocusEverything = 1667655030
-	KEventParamControlFrameMetrics = 1667657076
-	KEventParamControlHit = 1667787124
+	KEventParamControlAction                  = 1667331440
+	KEventParamControlClickActivationResult   = 1667457394
+	KEventParamControlCurrentOwningWindow     = 1667460983
+	KEventParamControlCurrentPart             = 1668182115
+	KEventParamControlDataBuffer              = 1667523174
+	KEventParamControlDataBufferSize          = 1667523187
+	KEventParamControlDataTag                 = 1667527783
+	KEventParamControlDrawDepth               = 1667523696
+	KEventParamControlDrawEngraved            = 1667523950
+	KEventParamControlDrawInColor             = 1667524963
+	KEventParamControlFeatures                = 1667658866
+	KEventParamControlFocusEverything         = 1667655030
+	KEventParamControlFrameMetrics            = 1667657076
+	KEventParamControlHit                     = 1667787124
 	KEventParamControlIndicatorDragConstraint = 1667851363
-	KEventParamControlIndicatorOffset = 1667854182
-	KEventParamControlIndicatorRegion = 1667854958
-	KEventParamControlInvalRgn = 1667855986
-	KEventParamControlIsGhosting = 1667724148
-	KEventParamControlMessage = 1668117351
-	KEventParamControlOptimalBaselineOffset = 1668244079
-	KEventParamControlOptimalBounds = 1668244078
-	KEventParamControlOriginalOwningWindow = 1668247415
-	KEventParamControlParam = 1668313709
-	KEventParamControlPart = 1668313716
-	KEventParamControlPartAutoRepeats = 1667331442
-	KEventParamControlPartBounds = 1668309604
-	KEventParamControlPrefersShape = 1668313960
-	KEventParamControlPreviousPart = 1668247651
-	KEventParamControlRegion = 1668441966
-	KEventParamControlResult = 1668445036
-	KEventParamControlSubControl = 1668511074
-	KEventParamControlSubview = 1668511351
-	KEventParamControlValue = 1668702572
-	KEventParamControlWouldAcceptDrop = 1668047975
-	KEventParamInitCollection = 1768124268
-	KEventParamNextControl = 1668184163
-	KEventParamStartControl = 1668510819
-	TypeControlActionUPP = 1667331440
-	TypeControlFrameMetrics = 1667853939
-	TypeControlPartCode = 1668313716
-	TypeIndicatorDragConstraint = 1667851363
+	KEventParamControlIndicatorOffset         = 1667854182
+	KEventParamControlIndicatorRegion         = 1667854958
+	KEventParamControlInvalRgn                = 1667855986
+	KEventParamControlIsGhosting              = 1667724148
+	KEventParamControlMessage                 = 1668117351
+	KEventParamControlOptimalBaselineOffset   = 1668244079
+	KEventParamControlOptimalBounds           = 1668244078
+	KEventParamControlOriginalOwningWindow    = 1668247415
+	KEventParamControlParam                   = 1668313709
+	KEventParamControlPart                    = 1668313716
+	KEventParamControlPartAutoRepeats         = 1667331442
+	KEventParamControlPartBounds              = 1668309604
+	KEventParamControlPrefersShape            = 1668313960
+	KEventParamControlPreviousPart            = 1668247651
+	KEventParamControlRegion                  = 1668441966
+	KEventParamControlResult                  = 1668445036
+	KEventParamControlSubControl              = 1668511074
+	KEventParamControlSubview                 = 1668511351
+	KEventParamControlValue                   = 1668702572
+	KEventParamControlWouldAcceptDrop         = 1668047975
+	KEventParamInitCollection                 = 1768124268
+	KEventParamNextControl                    = 1668184163
+	KEventParamStartControl                   = 1668510819
+	TypeControlActionUPP                      = 1667331440
+	TypeControlFrameMetrics                   = 1667853939
+	TypeControlPartCode                       = 1668313716
+	TypeIndicatorDragConstraint               = 1667851363
 )
 
 const (
 	KEventParamCurrentMenuTrackingMode = 1668117613
-	KEventParamEnableMenuForKeyEvent = 1718579819
-	KEventParamMenuCommand = 1835232612
-	KEventParamMenuCommandKeyBounds = 1835232610
-	KEventParamMenuContext = 1835234424
-	KEventParamMenuContextHeight = 1835231348
-	KEventParamMenuDirection = 1835297138
-	KEventParamMenuDismissed = 1835297139
-	KEventParamMenuDrawState = 1835299443
-	KEventParamMenuEventOptions = 1835364208
-	KEventParamMenuFirstOpen = 829650031
-	KEventParamMenuFrameView = 1835430518
-	KEventParamMenuIconBounds = 1835623266
-	KEventParamMenuIsPopup = 1836085104
-	KEventParamMenuItemBounds = 1835627618
-	KEventParamMenuItemHeight = 1835627624
-	KEventParamMenuItemIndex = 1769235821
-	KEventParamMenuItemType = 1835627632
-	KEventParamMenuItemWidth = 1835627639
-	KEventParamMenuMarkBounds = 1835887458
-	KEventParamMenuPopupItem = 1836083572
-	KEventParamMenuTextBaseline = 1836343916
-	KEventParamMenuTextBounds = 1836349538
-	KEventParamMenuType = 1836349808
-	KEventParamMenuVirtualBottom = 1836479074
-	KEventParamMenuVirtualTop = 1836479092
-	KEventParamNewMenuTrackingMode = 1852666989
-	KEventParamParentMenu = 1836085869
-	KEventParamParentMenuItem = 1836085865
-	TypeMenuCommand = 1835232612
-	TypeMenuDirection = 1835297138
-	TypeMenuEventOptions = 1835364208
-	TypeMenuItemIndex = 1835623544
-	TypeMenuTrackingMode = 1836346724
-	TypeThemeMenuItemType = 1953327476
-	TypeThemeMenuState = 1953328755
-	TypeThemeMenuType = 1953330297
+	KEventParamEnableMenuForKeyEvent   = 1718579819
+	KEventParamMenuCommand             = 1835232612
+	KEventParamMenuCommandKeyBounds    = 1835232610
+	KEventParamMenuContext             = 1835234424
+	KEventParamMenuContextHeight       = 1835231348
+	KEventParamMenuDirection           = 1835297138
+	KEventParamMenuDismissed           = 1835297139
+	KEventParamMenuDrawState           = 1835299443
+	KEventParamMenuEventOptions        = 1835364208
+	KEventParamMenuFirstOpen           = 829650031
+	KEventParamMenuFrameView           = 1835430518
+	KEventParamMenuIconBounds          = 1835623266
+	KEventParamMenuIsPopup             = 1836085104
+	KEventParamMenuItemBounds          = 1835627618
+	KEventParamMenuItemHeight          = 1835627624
+	KEventParamMenuItemIndex           = 1769235821
+	KEventParamMenuItemType            = 1835627632
+	KEventParamMenuItemWidth           = 1835627639
+	KEventParamMenuMarkBounds          = 1835887458
+	KEventParamMenuPopupItem           = 1836083572
+	KEventParamMenuTextBaseline        = 1836343916
+	KEventParamMenuTextBounds          = 1836349538
+	KEventParamMenuType                = 1836349808
+	KEventParamMenuVirtualBottom       = 1836479074
+	KEventParamMenuVirtualTop          = 1836479092
+	KEventParamNewMenuTrackingMode     = 1852666989
+	KEventParamParentMenu              = 1836085869
+	KEventParamParentMenuItem          = 1836085865
+	TypeMenuCommand                    = 1835232612
+	TypeMenuDirection                  = 1835297138
+	TypeMenuEventOptions               = 1835364208
+	TypeMenuItemIndex                  = 1835623544
+	TypeMenuTrackingMode               = 1836346724
+	TypeThemeMenuItemType              = 1953327476
+	TypeThemeMenuState                 = 1953328755
+	TypeThemeMenuType                  = 1953330297
 )
 
 const (
-	KEventParamDataBrowserItemID = 1684171108
-	KEventParamDataBrowserItemState = 1684171123
+	KEventParamDataBrowserItemID     = 1684171108
+	KEventParamDataBrowserItemState  = 1684171123
 	KEventParamDataBrowserPropertyID = 1684172900
 )
 
 const (
 	KEventParamDirectObject = 757935405
-	KEventParamDragRef = 1685217639
+	KEventParamDragRef      = 1685217639
 )
 
 const (
 	KEventParamHICommand = 1751346532
-	TypeHICommand = 1751346532
+	TypeHICommand        = 1751346532
 )
 
 const (
-	KEventParamAfterDelegates = 1633969516
-	KEventParamBeforeDelegates = 1650746732
+	KEventParamAfterDelegates    = 1633969516
+	KEventParamBeforeDelegates   = 1650746732
 	KEventParamDecodingForEditor = 1684366949
-	KEventParamHIArchive = 1751736675
-	KEventParamHIObjectInstance = 1751740265
-	KEventParamInitParameters = 1885434465
-	TypeHIObjectRef = 1751740258
+	KEventParamHIArchive         = 1751736675
+	KEventParamHIObjectInstance  = 1751740265
+	KEventParamInitParameters    = 1885434465
+	TypeHIObjectRef              = 1751740258
 )
 
 const (
 	KEventParamHIViewTrackingArea = 1668575841
-	TypeHIViewTrackingAreaRef = 1668575841
+	TypeHIViewTrackingAreaRef     = 1668575841
 )
 
 const (
 	KEventParamImageSize = 1768780666
-	KEventParamLineSize = 1819177850
-	KEventParamOrigin = 1869768558
-	KEventParamViewSize = 1987539834
+	KEventParamLineSize  = 1819177850
+	KEventParamOrigin    = 1869768558
+	KEventParamViewSize  = 1987539834
 )
 
 const (
-	KEventParamInkGestureBounds = 1734504036
-	KEventParamInkGestureHotspot = 1734897524
-	KEventParamInkGestureKind = 1735093860
+	KEventParamInkGestureBounds    = 1734504036
+	KEventParamInkGestureHotspot   = 1734897524
+	KEventParamInkGestureKind      = 1735093860
 	KEventParamInkKeyboardShortcut = 1768645220
-	KEventParamInkTextRef = 1769435748
+	KEventParamInkTextRef          = 1769435748
 )
 
 const (
-	KEventParamKeyCode = 1801678692
+	KEventParamKeyCode         = 1801678692
 	KEventParamKeyMacCharCodes = 1801676914
-	KEventParamKeyModifiers = 1802334052
-	KEventParamKeyUnicodes = 1802858089
-	KEventParamKeyboardType = 1801610356
-	TypeEventHotKeyID = 1751869796
+	KEventParamKeyModifiers    = 1802334052
+	KEventParamKeyUnicodes     = 1802858089
+	KEventParamKeyboardType    = 1801610356
+	TypeEventHotKeyID          = 1751869796
 )
 
 const (
 	KEventParamMagnificationAmount = 1835100014
-	KEventParamRotationAmount = 1919906913
-	KEventParamSwipeDirection = 1937205616
+	KEventParamRotationAmount      = 1919906913
+	KEventParamSwipeDirection      = 1937205616
 )
 
 const (
-	KEventParamClickCount = 1667460724
-	KEventParamDirectionInverted = 1684632169
-	KEventParamMouseButton = 1835168878
-	KEventParamMouseChord = 1667788658
-	KEventParamMouseDelta = 1835299937
-	KEventParamMouseLocation = 1835822947
-	KEventParamMouseTrackingRef = 1836348006
-	KEventParamMouseWheelAxis = 1836540280
-	KEventParamMouseWheelDelta = 1836541036
+	KEventParamClickCount                      = 1667460724
+	KEventParamDirectionInverted               = 1684632169
+	KEventParamMouseButton                     = 1835168878
+	KEventParamMouseChord                      = 1667788658
+	KEventParamMouseDelta                      = 1835299937
+	KEventParamMouseLocation                   = 1835822947
+	KEventParamMouseTrackingRef                = 1836348006
+	KEventParamMouseWheelAxis                  = 1836540280
+	KEventParamMouseWheelDelta                 = 1836541036
 	KEventParamMouseWheelSmoothHorizontalDelta = 1935767672
-	KEventParamMouseWheelSmoothVerticalDelta = 1935767673
-	KEventParamTabletEventType = 1952607348
-	KEventParamWindowMouseLocation = 2003660661
-	TypeMouseButton = 1835168878
-	TypeMouseTrackingRef = 1836348006
-	TypeMouseWheelAxis = 1836540280
+	KEventParamMouseWheelSmoothVerticalDelta   = 1935767673
+	KEventParamTabletEventType                 = 1952607348
+	KEventParamWindowMouseLocation             = 2003660661
+	TypeMouseButton                            = 1835168878
+	TypeMouseTrackingRef                       = 1836348006
+	TypeMouseWheelAxis                         = 1836540280
 )
 
 const (
@@ -3467,115 +3513,115 @@ const (
 )
 
 const (
-	KEventParamPasteboardRef = 1885500004
-	KEventParamScrapRef = 1935897200
-	KEventParamServiceCopyTypes = 1937142628
+	KEventParamPasteboardRef      = 1885500004
+	KEventParamScrapRef           = 1935897200
+	KEventParamServiceCopyTypes   = 1937142628
 	KEventParamServiceMessageName = 1937141095
-	KEventParamServicePasteTypes = 1937141876
-	KEventParamServiceUserData = 1937143140
-	TypePasteboardRef = 1885500004
-	TypeScrapRef = 1935897200
+	KEventParamServicePasteTypes  = 1937141876
+	KEventParamServiceUserData    = 1937143140
+	TypePasteboardRef             = 1885500004
+	TypeScrapRef                  = 1935897200
 )
 
 const (
 	KEventParamPostOptions = 1886351476
-	KEventParamPostTarget = 1886679655
+	KEventParamPostTarget  = 1886679655
 	TypeEventTargetOptions = 1702129520
-	TypeEventTargetRef = 1702130279
+	TypeEventTargetRef     = 1702130279
 )
 
 const (
-	KEventParamCurrentWindow = 1668641399
+	KEventParamCurrentWindow     = 1668641399
 	KEventParamIsInInstantMouser = 1768779637
-	KEventParamLaunchErr = 1701999136
-	KEventParamLaunchRefCon = 1819436390
-	KEventParamPreviousWindow = 1886549623
-	KEventParamProcessID = 1886613024
-	KEventParamSystemUIMode = 1969843556
-	KEventParamSystemUIOptions = 1969844080
+	KEventParamLaunchErr         = 1701999136
+	KEventParamLaunchRefCon      = 1819436390
+	KEventParamPreviousWindow    = 1886549623
+	KEventParamProcessID         = 1886613024
+	KEventParamSystemUIMode      = 1969843556
+	KEventParamSystemUIOptions   = 1969844080
 )
 
 const (
-	KEventParamTSMDocAccessBaselineDelta = 1952735844
-	KEventParamTSMDocAccessCharacterCount = 1952736116
-	KEventParamTSMDocAccessEffectiveRange = 1952736626
-	KEventParamTSMDocAccessLineBounds = 1952738402
-	KEventParamTSMDocAccessLockCount = 1952738403
-	KEventParamTSMDocAccessReplyATSFont = 1952735590
-	KEventParamTSMDocAccessReplyATSUGlyphSelector = 1952739943
-	KEventParamTSMDocAccessReplyCTFontRef = 1952736102
-	KEventParamTSMDocAccessReplyCTGlyphInfoRef = 1952739945
-	KEventParamTSMDocAccessReplyCharacterRange = 1952739954
-	KEventParamTSMDocAccessReplyCharactersPtr = 1952739952
-	KEventParamTSMDocAccessReplyFontSize = 1952739955
+	KEventParamTSMDocAccessBaselineDelta                = 1952735844
+	KEventParamTSMDocAccessCharacterCount               = 1952736116
+	KEventParamTSMDocAccessEffectiveRange               = 1952736626
+	KEventParamTSMDocAccessLineBounds                   = 1952738402
+	KEventParamTSMDocAccessLockCount                    = 1952738403
+	KEventParamTSMDocAccessReplyATSFont                 = 1952735590
+	KEventParamTSMDocAccessReplyATSUGlyphSelector       = 1952739943
+	KEventParamTSMDocAccessReplyCTFontRef               = 1952736102
+	KEventParamTSMDocAccessReplyCTGlyphInfoRef          = 1952739945
+	KEventParamTSMDocAccessReplyCharacterRange          = 1952739954
+	KEventParamTSMDocAccessReplyCharactersPtr           = 1952739952
+	KEventParamTSMDocAccessReplyFontSize                = 1952739955
 	KEventParamTSMDocAccessRequestedCharacterAttributes = 1952736097
-	KEventParamTSMDocAccessSendCharacterIndex = 1952740201
-	KEventParamTSMDocAccessSendCharacterRange = 1952740210
-	KEventParamTSMDocAccessSendCharactersPtr = 1952740208
-	KEventParamTSMDocAccessSendComponentInstance = 1953719145
-	KEventParamTSMDocAccessSendRefCon = 1953722979
-	TypeATSFontRef = 1635021670
-	TypeGlyphSelector = 1735157363
+	KEventParamTSMDocAccessSendCharacterIndex           = 1952740201
+	KEventParamTSMDocAccessSendCharacterRange           = 1952740210
+	KEventParamTSMDocAccessSendCharactersPtr            = 1952740208
+	KEventParamTSMDocAccessSendComponentInstance        = 1953719145
+	KEventParamTSMDocAccessSendRefCon                   = 1953722979
+	TypeATSFontRef                                      = 1635021670
+	TypeGlyphSelector                                   = 1735157363
 )
 
 const (
 	KEventParamTSMSendComponentInstance = 1953719145
-	KEventParamTSMSendRefCon = 1953722979
+	KEventParamTSMSendRefCon            = 1953722979
 )
 
 const (
-	KEventParamTabletPointRec = 1952608867
+	KEventParamTabletPointRec     = 1952608867
 	KEventParamTabletProximityRec = 1952608376
-	TypeTabletPointRec = 1952608867
-	TypeTabletProximityRec = 1952608376
+	TypeTabletPointRec            = 1952608867
+	TypeTabletProximityRec        = 1952608376
 )
 
 const (
 	KEventParamTabletPointerRec = 1952608867
-	TypeTabletPointerRec = 1952608867
+	TypeTabletPointerRec        = 1952608867
 )
 
 const (
-	KEventParamTextInputGlyphInfoArray = 1735159912
-	KEventParamTextInputReplyATSFont = 1953653094
-	KEventParamTextInputReplyAttributedString = 1953653107
-	KEventParamTextInputReplyCTFontRef = 1953653606
-	KEventParamTextInputReplyFMFont = 1953654381
-	KEventParamTextInputReplyFont = 1953654388
-	KEventParamTextInputReplyGlyphInfoArray = 1919381608
-	KEventParamTextInputReplyLeadingEdge = 1953655909
-	KEventParamTextInputReplyLineAscent = 1953655905
-	KEventParamTextInputReplyLineHeight = 1953655912
-	KEventParamTextInputReplyMacEncoding = 1953656165
-	KEventParamTextInputReplyPoint = 1953656948
-	KEventParamTextInputReplyPointSize = 1953656954
-	KEventParamTextInputReplyRegionClass = 1953657447
-	KEventParamTextInputReplySLRec = 1953657708
-	KEventParamTextInputReplyShowHide = 1953657704
-	KEventParamTextInputReplyText = 1953657976
-	KEventParamTextInputReplyTextAngle = 1953657953
-	KEventParamTextInputReplyTextOffset = 1953657967
-	KEventParamTextInputSendAttributedString = 1953718643
-	KEventParamTextInputSendClauseRng = 1953719148
-	KEventParamTextInputSendComponentInstance = 1953719145
-	KEventParamTextInputSendCurrentPoint = 1953719152
-	KEventParamTextInputSendDraggingMode = 1953719405
-	KEventParamTextInputSendFixLen = 1953719928
-	KEventParamTextInputSendGlyphInfoArray = 1735159912
-	KEventParamTextInputSendHiliteRng = 1953720425
-	KEventParamTextInputSendKeyboardEvent = 1953721189
-	KEventParamTextInputSendLeadingEdge = 1953721445
-	KEventParamTextInputSendMouseEvent = 1953721701
-	KEventParamTextInputSendPinRng = 1953722478
-	KEventParamTextInputSendRefCon = 1953722979
-	KEventParamTextInputSendReplaceRange = 1953722992
-	KEventParamTextInputSendSLRec = 1953723244
-	KEventParamTextInputSendShowHide = 1953723240
-	KEventParamTextInputSendText = 1953723512
-	KEventParamTextInputSendTextOffset = 1953723503
-	KEventParamTextInputSendTextServiceEncoding = 1953723237
+	KEventParamTextInputGlyphInfoArray             = 1735159912
+	KEventParamTextInputReplyATSFont               = 1953653094
+	KEventParamTextInputReplyAttributedString      = 1953653107
+	KEventParamTextInputReplyCTFontRef             = 1953653606
+	KEventParamTextInputReplyFMFont                = 1953654381
+	KEventParamTextInputReplyFont                  = 1953654388
+	KEventParamTextInputReplyGlyphInfoArray        = 1919381608
+	KEventParamTextInputReplyLeadingEdge           = 1953655909
+	KEventParamTextInputReplyLineAscent            = 1953655905
+	KEventParamTextInputReplyLineHeight            = 1953655912
+	KEventParamTextInputReplyMacEncoding           = 1953656165
+	KEventParamTextInputReplyPoint                 = 1953656948
+	KEventParamTextInputReplyPointSize             = 1953656954
+	KEventParamTextInputReplyRegionClass           = 1953657447
+	KEventParamTextInputReplySLRec                 = 1953657708
+	KEventParamTextInputReplyShowHide              = 1953657704
+	KEventParamTextInputReplyText                  = 1953657976
+	KEventParamTextInputReplyTextAngle             = 1953657953
+	KEventParamTextInputReplyTextOffset            = 1953657967
+	KEventParamTextInputSendAttributedString       = 1953718643
+	KEventParamTextInputSendClauseRng              = 1953719148
+	KEventParamTextInputSendComponentInstance      = 1953719145
+	KEventParamTextInputSendCurrentPoint           = 1953719152
+	KEventParamTextInputSendDraggingMode           = 1953719405
+	KEventParamTextInputSendFixLen                 = 1953719928
+	KEventParamTextInputSendGlyphInfoArray         = 1735159912
+	KEventParamTextInputSendHiliteRng              = 1953720425
+	KEventParamTextInputSendKeyboardEvent          = 1953721189
+	KEventParamTextInputSendLeadingEdge            = 1953721445
+	KEventParamTextInputSendMouseEvent             = 1953721701
+	KEventParamTextInputSendPinRng                 = 1953722478
+	KEventParamTextInputSendRefCon                 = 1953722979
+	KEventParamTextInputSendReplaceRange           = 1953722992
+	KEventParamTextInputSendSLRec                  = 1953723244
+	KEventParamTextInputSendShowHide               = 1953723240
+	KEventParamTextInputSendText                   = 1953723512
+	KEventParamTextInputSendTextOffset             = 1953723503
+	KEventParamTextInputSendTextServiceEncoding    = 1953723237
 	KEventParamTextInputSendTextServiceMacEncoding = 1953723245
-	KEventParamTextInputSendUpdateRng = 1953723760
+	KEventParamTextInputSendUpdateRng              = 1953723760
 )
 
 const (
@@ -3583,131 +3629,131 @@ const (
 )
 
 const (
-	KEventParamCandidateText = 1953723512
-	KEventParamReplacementText = 1953657976
-	KEventParamTextSelection = 1954050924
+	KEventParamCandidateText    = 1953723512
+	KEventParamReplacementText  = 1953657976
+	KEventParamTextSelection    = 1954050924
 	KEventParamUnconfirmedRange = 1953853042
-	KEventParamUnconfirmedText = 1954051438
+	KEventParamUnconfirmedText  = 1954051438
 )
 
 const (
-	KEventParamToolbar = 1952604530
-	KEventParamToolbarItem = 1952606580
+	KEventParamToolbar               = 1952604530
+	KEventParamToolbarItem           = 1952606580
 	KEventParamToolbarItemConfigData = 1952606564
 	KEventParamToolbarItemIdentifier = 1952606569
-	TypeHIToolbarItemRef = 1952606580
-	TypeHIToolbarRef = 1952604530
+	TypeHIToolbarItemRef             = 1952606580
+	TypeHIToolbarRef                 = 1952604530
 )
 
 const (
 	KEventParamToolbarDisplayMode = 1952605293
 	KEventParamToolbarDisplaySize = 1952605299
-	TypeHIToolbarDisplayMode = 1952605293
-	TypeHIToolbarDisplaySize = 1952605299
+	TypeHIToolbarDisplayMode      = 1952605293
+	TypeHIToolbarDisplaySize      = 1952605299
 )
 
 const (
-	KEventParamClickActivation = 1668047203
-	KEventParamCurrentBounds = 1668440948
-	KEventParamCurrentDockDevice = 1667524452
-	KEventParamCurrentDockRect = 1667527267
-	KEventParamOriginalBounds = 1869767540
-	KEventParamPreviousBounds = 1886544756
-	KEventParamPreviousDockDevice = 1885628260
-	KEventParamPreviousDockRect = 1885631075
-	KEventParamWindowContentBounds = 2003001966
-	KEventParamWindowDefPart = 2003071075
-	KEventParamWindowDragHiliteFlag = 2003069030
-	KEventParamWindowFeatures = 2003203186
-	KEventParamWindowGrowRect = 1735549812
-	KEventParamWindowModifiedFlag = 2003658342
-	KEventParamWindowPartCode = 2003853682
-	KEventParamWindowProxyGWorldPtr = 2003855223
-	KEventParamWindowProxyImageRgn = 2003855730
-	KEventParamWindowProxyOutlineRgn = 2003857266
-	KEventParamWindowRegionCode = 2004052080
+	KEventParamClickActivation         = 1668047203
+	KEventParamCurrentBounds           = 1668440948
+	KEventParamCurrentDockDevice       = 1667524452
+	KEventParamCurrentDockRect         = 1667527267
+	KEventParamOriginalBounds          = 1869767540
+	KEventParamPreviousBounds          = 1886544756
+	KEventParamPreviousDockDevice      = 1885628260
+	KEventParamPreviousDockRect        = 1885631075
+	KEventParamWindowContentBounds     = 2003001966
+	KEventParamWindowDefPart           = 2003071075
+	KEventParamWindowDragHiliteFlag    = 2003069030
+	KEventParamWindowFeatures          = 2003203186
+	KEventParamWindowGrowRect          = 1735549812
+	KEventParamWindowModifiedFlag      = 2003658342
+	KEventParamWindowPartCode          = 2003853682
+	KEventParamWindowProxyGWorldPtr    = 2003855223
+	KEventParamWindowProxyImageRgn     = 2003855730
+	KEventParamWindowProxyOutlineRgn   = 2003857266
+	KEventParamWindowRegionCode        = 2004052080
 	KEventParamWindowStateChangedFlags = 2004050790
-	KEventParamWindowTitleFullWidth = 2004117111
-	KEventParamWindowTitleTextWidth = 2004120695
-	KEventParamWindowTransitionAction = 2004115811
-	KEventParamWindowTransitionEffect = 2004116838
-	TypeClickActivationResult = 1668047203
-	TypeWindowDefPartCode = 2003071092
-	TypeWindowPartCode = 2003853682
-	TypeWindowRegionCode = 2004052080
-	TypeWindowTransitionAction = 2004115811
-	TypeWindowTransitionEffect = 2004116838
+	KEventParamWindowTitleFullWidth    = 2004117111
+	KEventParamWindowTitleTextWidth    = 2004120695
+	KEventParamWindowTransitionAction  = 2004115811
+	KEventParamWindowTransitionEffect  = 2004116838
+	TypeClickActivationResult          = 1668047203
+	TypeWindowDefPartCode              = 2003071092
+	TypeWindowPartCode                 = 2003853682
+	TypeWindowRegionCode               = 2004052080
+	TypeWindowTransitionAction         = 2004115811
+	TypeWindowTransitionEffect         = 2004116838
 )
 
 const (
-	KEventParamAEEventClass = 1702257516
-	KEventParamAEEventID = 1702261865
-	KEventParamAttributes = 1635021938
-	KEventParamAvailableBounds = 1635150946
-	KEventParamBounds = 1651471726
-	KEventParamCGContextRef = 1668183160
-	KEventParamCGImageRef = 1667721581
-	KEventParamControlRef = 1668575852
-	KEventParamDeviceColor = 1684371043
-	KEventParamDeviceDepth = 1684371044
-	KEventParamDimensions = 1684630899
+	KEventParamAEEventClass       = 1702257516
+	KEventParamAEEventID          = 1702261865
+	KEventParamAttributes         = 1635021938
+	KEventParamAvailableBounds    = 1635150946
+	KEventParamBounds             = 1651471726
+	KEventParamCGContextRef       = 1668183160
+	KEventParamCGImageRef         = 1667721581
+	KEventParamControlRef         = 1668575852
+	KEventParamDeviceColor        = 1684371043
+	KEventParamDeviceDepth        = 1684371044
+	KEventParamDimensions         = 1684630899
 	KEventParamDisplayChangeFlags = 1667720304
-	KEventParamDisplayDevice = 1734632822
-	KEventParamEnabled = 1701732706
-	KEventParamEventRef = 1702260340
-	KEventParamGDevice = 1734632822
-	KEventParamGrafPort = 1735549286
-	KEventParamIndex = 1768842360
-	KEventParamMaximumSize = 1836610426
-	KEventParamMenuRef = 1835363957
-	KEventParamMinimumSize = 1835955066
-	KEventParamMutableArray = 1835102834
-	KEventParamReason = 2003335487
-	KEventParamResult = 1634628466
-	KEventParamRgnHandle = 1919381096
-	KEventParamShape = 1936220528
-	KEventParamTransactionID = 1953656435
-	KEventParamUserData = 1970500196
-	KEventParamWindowRef = 2003398244
-	TypeCFIndex = 1667656056
-	TypeCGContextRef = 1668183160
-	TypeCGDisplayChangeFlags = 1667720294
-	TypeCGDisplayID = 1667721572
-	TypeCGFloat = 1667720812
-	TypeCGFloat72DPIGlobal = 1751737959
-	TypeCGFloatScreenPixel = 1751737971
-	TypeCGImageRef = 1667721581
-	TypeCollection = 1668052078
-	TypeControlRef = 1668575852
-	TypeGDHandle = 1734632822
-	TypeGWorldPtr = 1735879780
-	TypeGrafPtr = 1735549286
-	TypeHIPoint = 1751740532
-	TypeHIPoint72DPIGlobal = 1751740519
-	TypeHIPointScreenPixel = 1751740531
-	TypeHIRect = 1751741027
-	TypeHIRect72DPIGlobal = 1751741031
-	TypeHIRectScreenPixel = 1751741043
-	TypeHIShapeRef = 1936220528
-	TypeHISize = 1751741306
-	TypeHISize72DPIGlobal = 1751741287
-	TypeHISizeScreenPixel = 1751741299
-	TypeMenuRef = 1835363957
-	TypeOSStatus = 1869837172
-	TypeQDRgnHandle = 1919381096
-	TypeVoidPtr = 1987012964
-	TypeWindowRef = 2003398244
+	KEventParamDisplayDevice      = 1734632822
+	KEventParamEnabled            = 1701732706
+	KEventParamEventRef           = 1702260340
+	KEventParamGDevice            = 1734632822
+	KEventParamGrafPort           = 1735549286
+	KEventParamIndex              = 1768842360
+	KEventParamMaximumSize        = 1836610426
+	KEventParamMenuRef            = 1835363957
+	KEventParamMinimumSize        = 1835955066
+	KEventParamMutableArray       = 1835102834
+	KEventParamReason             = 2003335487
+	KEventParamResult             = 1634628466
+	KEventParamRgnHandle          = 1919381096
+	KEventParamShape              = 1936220528
+	KEventParamTransactionID      = 1953656435
+	KEventParamUserData           = 1970500196
+	KEventParamWindowRef          = 2003398244
+	TypeCFIndex                   = 1667656056
+	TypeCGContextRef              = 1668183160
+	TypeCGDisplayChangeFlags      = 1667720294
+	TypeCGDisplayID               = 1667721572
+	TypeCGFloat                   = 1667720812
+	TypeCGFloat72DPIGlobal        = 1751737959
+	TypeCGFloatScreenPixel        = 1751737971
+	TypeCGImageRef                = 1667721581
+	TypeCollection                = 1668052078
+	TypeControlRef                = 1668575852
+	TypeGDHandle                  = 1734632822
+	TypeGWorldPtr                 = 1735879780
+	TypeGrafPtr                   = 1735549286
+	TypeHIPoint                   = 1751740532
+	TypeHIPoint72DPIGlobal        = 1751740519
+	TypeHIPointScreenPixel        = 1751740531
+	TypeHIRect                    = 1751741027
+	TypeHIRect72DPIGlobal         = 1751741031
+	TypeHIRectScreenPixel         = 1751741043
+	TypeHIShapeRef                = 1936220528
+	TypeHISize                    = 1751741306
+	TypeHISize72DPIGlobal         = 1751741287
+	TypeHISizeScreenPixel         = 1751741299
+	TypeMenuRef                   = 1835363957
+	TypeOSStatus                  = 1869837172
+	TypeQDRgnHandle               = 1919381096
+	TypeVoidPtr                   = 1987012964
+	TypeWindowRef                 = 2003398244
 )
 
 const (
-	KEventPriorityHigh = 2
-	KEventPriorityLow = 0
+	KEventPriorityHigh     = 2
+	KEventPriorityLow      = 0
 	KEventPriorityStandard = 1
 )
 
 const (
 	KEventProcessCommand = 1
-	KEventTabletPointer = 1
+	KEventTabletPointer  = 1
 )
 
 const (
@@ -3839,7 +3885,7 @@ const (
 )
 
 const (
-	KEventTargetDontPropagate = 1
+	KEventTargetDontPropagate     = 1
 	KEventTargetSendToAllHandlers = 2
 )
 
@@ -4000,11 +4046,11 @@ const (
 )
 
 const (
-	KEventGetSelectedText = 6
-	KEventOffsetToPos = 3
-	KEventPosToOffset = 4
-	KEventShowHideBottomWindow = 5
-	KEventUnicodeForKeyEvent = 2
+	KEventGetSelectedText       = 6
+	KEventOffsetToPos           = 3
+	KEventPosToOffset           = 4
+	KEventShowHideBottomWindow  = 5
+	KEventUnicodeForKeyEvent    = 2
 	KEventUpdateActiveInputArea = 1
 )
 
@@ -4081,19 +4127,19 @@ const (
 )
 
 const (
-	KEventWindowDefDispose = 1005
-	KEventWindowDefDragHilite = 1006
-	KEventWindowDefDrawFrame = 1000
-	KEventWindowDefDrawGrowBox = 1011
-	KEventWindowDefDrawPart = 1001
-	KEventWindowDefGetGrowImageRegion = 1012
-	KEventWindowDefGetRegion = 1002
-	KEventWindowDefHitTest = 1003
-	KEventWindowDefInit = 1004
-	KEventWindowDefMeasureTitle = 1010
-	KEventWindowDefModified = 1007
+	KEventWindowDefDispose             = 1005
+	KEventWindowDefDragHilite          = 1006
+	KEventWindowDefDrawFrame           = 1000
+	KEventWindowDefDrawGrowBox         = 1011
+	KEventWindowDefDrawPart            = 1001
+	KEventWindowDefGetGrowImageRegion  = 1012
+	KEventWindowDefGetRegion           = 1002
+	KEventWindowDefHitTest             = 1003
+	KEventWindowDefInit                = 1004
+	KEventWindowDefMeasureTitle        = 1010
+	KEventWindowDefModified            = 1007
 	KEventWindowDefSetupProxyDragImage = 1008
-	KEventWindowDefStateChanged = 1009
+	KEventWindowDefStateChanged        = 1009
 )
 
 const (
@@ -4369,17 +4415,17 @@ const (
 )
 
 const (
-	KFlavorTypeClippingFilename = 1668048494
-	KFlavorTypeClippingName = 1668050541
-	KFlavorTypeDragToTrashOnly = 1717859444
+	KFlavorTypeClippingFilename         = 1668048494
+	KFlavorTypeClippingName             = 1668050541
+	KFlavorTypeDragToTrashOnly          = 1717859444
 	KFlavorTypeFinderNoTrackingBehavior = 1718514786
-	KFlavorTypeUnicodeClippingFilename = 1969450086
-	KFlavorTypeUnicodeClippingName = 1969450094
+	KFlavorTypeUnicodeClippingFilename  = 1969450086
+	KFlavorTypeUnicodeClippingName      = 1969450094
 )
 
 const (
 	KHIArchiveDecodeSuperclassForUnregisteredObjects = 1
-	KHIArchiveDecodingForEditor = 2
+	KHIArchiveDecodingForEditor                      = 2
 )
 
 const (
@@ -4388,94 +4434,94 @@ const (
 
 const (
 	KHIComboBoxDisclosurePart = 28
-	KHIComboBoxEditTextPart = 5
+	KHIComboBoxEditTextPart   = 5
 )
 
 const (
 	KHIComboBoxListPixelHeightTag = 1667394664
-	KHIComboBoxListPixelWidthTag = 1667394679
-	KHIComboBoxListTag = 1667394675
+	KHIComboBoxListPixelWidthTag  = 1667394679
+	KHIComboBoxListTag            = 1667394675
 	KHIComboBoxNumVisibleItemsTag = 1667395177
 )
 
 const (
 	KHIComboBoxAutoCompletionAttribute = 1
 	KHIComboBoxAutoDisclosureAttribute = 2
-	KHIComboBoxAutoSizeListAttribute = 8
-	KHIComboBoxAutoSortAttribute = 4
-	KHIComboBoxNoAttributes = 0
-	KHIComboBoxStandardAttributes = 11
+	KHIComboBoxAutoSizeListAttribute   = 8
+	KHIComboBoxAutoSortAttribute       = 4
+	KHIComboBoxNoAttributes            = 0
+	KHIComboBoxStandardAttributes      = 11
 )
 
 const (
-	KHICommandCustomizeToolbar = 1952671335
-	KHICommandCycleToolbarModeLarger = 1952607596
+	KHICommandCustomizeToolbar        = 1952671335
+	KHICommandCycleToolbarModeLarger  = 1952607596
 	KHICommandCycleToolbarModeSmaller = 1952607603
-	KHICommandHideToolbar = 1952606308
-	KHICommandShowToolbar = 1952609128
-	KHICommandToggleAllToolbars = 1952609377
-	KHICommandToggleToolbar = 1952609383
-	KHIToolbarCommandPressAction = 1952608370
+	KHICommandHideToolbar             = 1952606308
+	KHICommandShowToolbar             = 1952609128
+	KHICommandToggleAllToolbars       = 1952609377
+	KHICommandToggleToolbar           = 1952609383
+	KHIToolbarCommandPressAction      = 1952608370
 )
 
 const (
 	KHICommandFromControl = 2
-	KHICommandFromMenu = 1
-	KHICommandFromWindow = 4
+	KHICommandFromMenu    = 1
+	KHICommandFromWindow  = 4
 )
 
 const (
-	KHICommandAbout = 1633841013
-	KHICommandAppHelp = 1634233456
-	KHICommandArrangeInFront = 1718775412
-	KHICommandBringAllToFront = 1650881140
-	KHICommandCancel = 1852797985
-	KHICommandChangeSpelling = 1667789680
-	KHICommandCheckSpelling = 1667986288
-	KHICommandCheckSpellingAsYouType = 1634955363
-	KHICommandClear = 1668048225
-	KHICommandClose = 1668050803
-	KHICommandCloseAll = 1668050785
-	KHICommandCloseFile = 1668050790
-	KHICommandCopy = 1668247673
-	KHICommandCut = 1668641824
-	KHICommandHide = 1751737445
-	KHICommandHideOthers = 1751737455
-	KHICommandIgnoreSpelling = 1768387440
-	KHICommandLearnWord = 1819440996
-	KHICommandMaximizeAll = 1835104353
-	KHICommandMaximizeWindow = 1835104361
-	KHICommandMinimizeAll = 1835626081
-	KHICommandMinimizeWindow = 1835626089
-	KHICommandNew = 1852143392
-	KHICommandOK = 1869291552
-	KHICommandOpen = 1869636974
-	KHICommandPageSetup = 1885431653
-	KHICommandPaste = 1885434740
-	KHICommandPreferences = 1886545254
-	KHICommandPrint = 1886547572
-	KHICommandQuit = 1903520116
-	KHICommandQuitAndDiscardWindows = 1903518839
-	KHICommandQuitAndKeepWindows = 1903520631
-	KHICommandRedo = 1919247471
-	KHICommandRevert = 1920365172
+	KHICommandAbout                         = 1633841013
+	KHICommandAppHelp                       = 1634233456
+	KHICommandArrangeInFront                = 1718775412
+	KHICommandBringAllToFront               = 1650881140
+	KHICommandCancel                        = 1852797985
+	KHICommandChangeSpelling                = 1667789680
+	KHICommandCheckSpelling                 = 1667986288
+	KHICommandCheckSpellingAsYouType        = 1634955363
+	KHICommandClear                         = 1668048225
+	KHICommandClose                         = 1668050803
+	KHICommandCloseAll                      = 1668050785
+	KHICommandCloseFile                     = 1668050790
+	KHICommandCopy                          = 1668247673
+	KHICommandCut                           = 1668641824
+	KHICommandHide                          = 1751737445
+	KHICommandHideOthers                    = 1751737455
+	KHICommandIgnoreSpelling                = 1768387440
+	KHICommandLearnWord                     = 1819440996
+	KHICommandMaximizeAll                   = 1835104353
+	KHICommandMaximizeWindow                = 1835104361
+	KHICommandMinimizeAll                   = 1835626081
+	KHICommandMinimizeWindow                = 1835626089
+	KHICommandNew                           = 1852143392
+	KHICommandOK                            = 1869291552
+	KHICommandOpen                          = 1869636974
+	KHICommandPageSetup                     = 1885431653
+	KHICommandPaste                         = 1885434740
+	KHICommandPreferences                   = 1886545254
+	KHICommandPrint                         = 1886547572
+	KHICommandQuit                          = 1903520116
+	KHICommandQuitAndDiscardWindows         = 1903518839
+	KHICommandQuitAndKeepWindows            = 1903520631
+	KHICommandRedo                          = 1919247471
+	KHICommandRevert                        = 1920365172
 	KHICommandRotateFloatingWindowsBackward = 1920231010
-	KHICommandRotateFloatingWindowsForward = 1920231031
-	KHICommandRotateWindowsBackward = 1919906914
-	KHICommandRotateWindowsForward = 1919906935
-	KHICommandSave = 1935767141
-	KHICommandSaveAs = 1937138035
-	KHICommandSelectAll = 1935764588
-	KHICommandSelectWindow = 1937205614
-	KHICommandShowAll = 1936220524
-	KHICommandShowCharacterPalette = 1667789424
-	KHICommandShowSpellingPanel = 1936225136
-	KHICommandStartDictation = 1935958900
-	KHICommandToggleFullScreen = 1718840608
-	KHICommandUndo = 1970168943
-	KHICommandWindowListSeparator = 2003592310
-	KHICommandWindowListTerminator = 2003596148
-	KHICommandZoomWindow = 2054123373
+	KHICommandRotateFloatingWindowsForward  = 1920231031
+	KHICommandRotateWindowsBackward         = 1919906914
+	KHICommandRotateWindowsForward          = 1919906935
+	KHICommandSave                          = 1935767141
+	KHICommandSaveAs                        = 1937138035
+	KHICommandSelectAll                     = 1935764588
+	KHICommandSelectWindow                  = 1937205614
+	KHICommandShowAll                       = 1936220524
+	KHICommandShowCharacterPalette          = 1667789424
+	KHICommandShowSpellingPanel             = 1936225136
+	KHICommandStartDictation                = 1935958900
+	KHICommandToggleFullScreen              = 1718840608
+	KHICommandUndo                          = 1970168943
+	KHICommandWindowListSeparator           = 2003592310
+	KHICommandWindowListTerminator          = 2003596148
+	KHICommandZoomWindow                    = 2054123373
 )
 
 const (
@@ -4485,26 +4531,26 @@ const (
 const (
 	KHICoordSpace72DPIGlobal = 1
 	KHICoordSpaceScreenPixel = 2
-	KHICoordSpaceView = 4
-	KHICoordSpaceWindow = 3
+	KHICoordSpaceView        = 4
+	KHICoordSpaceWindow      = 3
 )
 
 const (
-	KHIDelegateAfter = 2
-	KHIDelegateAll = 0
+	KHIDelegateAfter  = 2
+	KHIDelegateAll    = 0
 	KHIDelegateBefore = 1
 )
 
 const (
-	KHIHotKeyModeAllDisabled = 1
+	KHIHotKeyModeAllDisabled                      = 1
 	KHIHotKeyModeAllDisabledExceptUniversalAccess = 2
-	KHIHotKeyModeAllEnabled = 0
+	KHIHotKeyModeAllEnabled                       = 0
 )
 
 const (
-	KHIImageViewAutoTransformNone = 0
+	KHIImageViewAutoTransformNone         = 0
 	KHIImageViewAutoTransformOnDeactivate = 2
-	KHIImageViewAutoTransformOnDisable = 1
+	KHIImageViewAutoTransformOnDisable    = 1
 )
 
 const (
@@ -4513,12 +4559,12 @@ const (
 
 const (
 	KHILayoutBindBottom = 2
-	KHILayoutBindLeft = 1
-	KHILayoutBindMax = 2
-	KHILayoutBindMin = 1
-	KHILayoutBindNone = 0
-	KHILayoutBindRight = 2
-	KHILayoutBindTop = 1
+	KHILayoutBindLeft   = 1
+	KHILayoutBindMax    = 2
+	KHILayoutBindMin    = 1
+	KHILayoutBindNone   = 0
+	KHILayoutBindRight  = 2
+	KHILayoutBindTop    = 1
 )
 
 const (
@@ -4528,12 +4574,12 @@ const (
 const (
 	KHILayoutPositionBottom = 3
 	KHILayoutPositionCenter = 1
-	KHILayoutPositionLeft = 2
-	KHILayoutPositionMax = 3
-	KHILayoutPositionMin = 2
-	KHILayoutPositionNone = 0
-	KHILayoutPositionRight = 3
-	KHILayoutPositionTop = 2
+	KHILayoutPositionLeft   = 2
+	KHILayoutPositionMax    = 3
+	KHILayoutPositionMin    = 2
+	KHILayoutPositionNone   = 0
+	KHILayoutPositionRight  = 3
+	KHILayoutPositionTop    = 2
 )
 
 const (
@@ -4541,66 +4587,66 @@ const (
 )
 
 const (
-	KHIMenuDismissedByActivationChange = 9
-	KHIMenuDismissedByAppSwitch = 6
+	KHIMenuDismissedByActivationChange   = 9
+	KHIMenuDismissedByAppSwitch          = 6
 	KHIMenuDismissedByCancelMenuTracking = 8
-	KHIMenuDismissedByFocusChange = 10
-	KHIMenuDismissedByKeyEvent = 5
-	KHIMenuDismissedByMouseDown = 3
-	KHIMenuDismissedByMouseUp = 4
-	KHIMenuDismissedBySelection = 1
-	KHIMenuDismissedByTimeout = 7
-	KHIMenuDismissedByUserCancel = 2
+	KHIMenuDismissedByFocusChange        = 10
+	KHIMenuDismissedByKeyEvent           = 5
+	KHIMenuDismissedByMouseDown          = 3
+	KHIMenuDismissedByMouseUp            = 4
+	KHIMenuDismissedBySelection          = 1
+	KHIMenuDismissedByTimeout            = 7
+	KHIMenuDismissedByUserCancel         = 2
 )
 
 const (
 	KHIMenuCenterDirection = 2
-	KHIMenuLeftDirection = 1
-	KHIMenuRightDirection = 0
+	KHIMenuLeftDirection   = 1
+	KHIMenuRightDirection  = 0
 )
 
 const (
-	KHIModalClickAllowEvent = 2
-	KHIModalClickAnnounce = 4
-	KHIModalClickIsModal = 1
+	KHIModalClickAllowEvent  = 2
+	KHIModalClickAnnounce    = 4
+	KHIModalClickIsModal     = 1
 	KHIModalClickRaiseWindow = 8
 )
 
 const (
-	KHIScrollViewOptionsAllowGrow = 4
+	KHIScrollViewOptionsAllowGrow              = 4
 	KHIScrollViewOptionsDisableSmoothScrolling = 16
-	KHIScrollViewOptionsFillGrowArea = 8
-	KHIScrollViewOptionsHorizScroll = 2
-	KHIScrollViewOptionsVertScroll = 1
-	KHIScrollViewValidOptions = 31
+	KHIScrollViewOptionsFillGrowArea           = 8
+	KHIScrollViewOptionsHorizScroll            = 2
+	KHIScrollViewOptionsVertScroll             = 1
+	KHIScrollViewValidOptions                  = 31
 )
 
 const (
-	KHIScrollViewPageDown = 32
-	KHIScrollViewPageLeft = 64
-	KHIScrollViewPageRight = 128
-	KHIScrollViewPageUp = 16
+	KHIScrollViewPageDown       = 32
+	KHIScrollViewPageLeft       = 64
+	KHIScrollViewPageRight      = 128
+	KHIScrollViewPageUp         = 16
 	KHIScrollViewScrollToBottom = 2
-	KHIScrollViewScrollToLeft = 4
-	KHIScrollViewScrollToRight = 8
-	KHIScrollViewScrollToTop = 1
+	KHIScrollViewScrollToLeft   = 4
+	KHIScrollViewScrollToRight  = 8
+	KHIScrollViewScrollToTop    = 1
 )
 
 const (
-	KHISearchFieldAttributesCancel = 1
+	KHISearchFieldAttributesCancel     = 1
 	KHISearchFieldAttributesSearchIcon = 2
-	KHISearchFieldNoAttributes = 0
+	KHISearchFieldNoAttributes         = 0
 )
 
 const (
 	KHISegmentBehaviorMomentary = 1
-	KHISegmentBehaviorRadio = 2
-	KHISegmentBehaviorSticky = 4
-	KHISegmentBehaviorToggles = 3
+	KHISegmentBehaviorRadio     = 2
+	KHISegmentBehaviorSticky    = 4
+	KHISegmentBehaviorToggles   = 3
 )
 
 const (
-	KHISegmentNoAttributes = 0
+	KHISegmentNoAttributes       = 0
 	KHISegmentSendCmdToUserFocus = 1
 )
 
@@ -4611,41 +4657,41 @@ const (
 const (
 	KHIThemeFocusRingAbove = 1
 	KHIThemeFocusRingBelow = 2
-	KHIThemeFocusRingOnly = 0
+	KHIThemeFocusRingOnly  = 0
 )
 
 const (
-	KHIThemeFrameListBox = 1
-	KHIThemeFrameTextFieldRound = 1000
-	KHIThemeFrameTextFieldRoundMini = 1002
+	KHIThemeFrameListBox             = 1
+	KHIThemeFrameTextFieldRound      = 1000
+	KHIThemeFrameTextFieldRoundMini  = 1002
 	KHIThemeFrameTextFieldRoundSmall = 1001
-	KHIThemeFrameTextFieldSquare = 0
+	KHIThemeFrameTextFieldSquare     = 0
 )
 
 const (
-	KHIThemeGroupBoxKindPrimary = 0
-	KHIThemeGroupBoxKindPrimaryOpaque = 3
-	KHIThemeGroupBoxKindSecondary = 1
+	KHIThemeGroupBoxKindPrimary         = 0
+	KHIThemeGroupBoxKindPrimaryOpaque   = 3
+	KHIThemeGroupBoxKindSecondary       = 1
 	KHIThemeGroupBoxKindSecondaryOpaque = 4
 )
 
 const (
-	KHIThemeGrowBoxKindNone = 1
+	KHIThemeGrowBoxKindNone   = 1
 	KHIThemeGrowBoxKindNormal = 0
 )
 
 const (
 	KHIThemeGrowBoxSizeNormal = 0
-	KHIThemeGrowBoxSizeSmall = 1
+	KHIThemeGrowBoxSizeSmall  = 1
 )
 
 const (
-	KHIThemeHeaderKindList = 1
+	KHIThemeHeaderKindList   = 1
 	KHIThemeHeaderKindWindow = 0
 )
 
 const (
-	KHIThemeMenuDrawInfoVersionOne = 1001
+	KHIThemeMenuDrawInfoVersionOne  = 1001
 	KHIThemeMenuDrawInfoVersionZero = 0
 )
 
@@ -4655,44 +4701,44 @@ const (
 
 const (
 	KHIThemeOrientationInverted = 1
-	KHIThemeOrientationNormal = 0
+	KHIThemeOrientationNormal   = 0
 )
 
 const (
-	KHIThemeSegmentAdornmentFocus = 4
-	KHIThemeSegmentAdornmentLeadingSeparator = 8
-	KHIThemeSegmentAdornmentNone = 0
+	KHIThemeSegmentAdornmentFocus             = 4
+	KHIThemeSegmentAdornmentLeadingSeparator  = 8
+	KHIThemeSegmentAdornmentNone              = 0
 	KHIThemeSegmentAdornmentTrailingSeparator = 16
 )
 
 const (
-	KHIThemeSegmentKindInset = 1
-	KHIThemeSegmentKindNormal = 0
+	KHIThemeSegmentKindInset    = 1
+	KHIThemeSegmentKindNormal   = 0
 	KHIThemeSegmentKindTextured = 1
 )
 
 const (
-	KHIThemeSegmentPositionFirst = 0
-	KHIThemeSegmentPositionLast = 2
+	KHIThemeSegmentPositionFirst  = 0
+	KHIThemeSegmentPositionLast   = 2
 	KHIThemeSegmentPositionMiddle = 1
-	KHIThemeSegmentPositionOnly = 3
+	KHIThemeSegmentPositionOnly   = 3
 )
 
 const (
-	KHIThemeSegmentSizeMini = 3
+	KHIThemeSegmentSizeMini   = 3
 	KHIThemeSegmentSizeNormal = 0
-	KHIThemeSegmentSizeSmall = 1
+	KHIThemeSegmentSizeSmall  = 1
 )
 
 const (
 	KHIThemeSplitterAdornmentMetal = 1
-	KHIThemeSplitterAdornmentNone = 0
+	KHIThemeSplitterAdornmentNone  = 0
 )
 
 const (
-	KHIThemeTabAdornmentFocus = 4
-	KHIThemeTabAdornmentLeadingSeparator = 8
-	KHIThemeTabAdornmentNone = 0
+	KHIThemeTabAdornmentFocus             = 4
+	KHIThemeTabAdornmentLeadingSeparator  = 8
+	KHIThemeTabAdornmentNone              = 0
 	KHIThemeTabAdornmentTrailingSeparator = 16
 )
 
@@ -4705,83 +4751,83 @@ const (
 )
 
 const (
-	KHIThemeTabPositionFirst = 0
-	KHIThemeTabPositionLast = 2
+	KHIThemeTabPositionFirst  = 0
+	KHIThemeTabPositionLast   = 2
 	KHIThemeTabPositionMiddle = 1
-	KHIThemeTabPositionOnly = 3
+	KHIThemeTabPositionOnly   = 3
 )
 
 const (
-	KHIThemeTabSizeMini = 3
+	KHIThemeTabSizeMini   = 3
 	KHIThemeTabSizeNormal = 0
-	KHIThemeTabSizeSmall = 1
+	KHIThemeTabSizeSmall  = 1
 )
 
 const (
-	KHIThemeTextBoxOptionDontClip = 262144
-	KHIThemeTextBoxOptionEngraved = 4
-	KHIThemeTextBoxOptionNone = 0
+	KHIThemeTextBoxOptionDontClip         = 262144
+	KHIThemeTextBoxOptionEngraved         = 4
+	KHIThemeTextBoxOptionNone             = 0
 	KHIThemeTextBoxOptionStronglyVertical = 2
 )
 
 const (
-	KHIThemeTextHorizontalFlushCenter = 1
+	KHIThemeTextHorizontalFlushCenter  = 1
 	KHIThemeTextHorizontalFlushDefault = 3
-	KHIThemeTextHorizontalFlushLeft = 0
-	KHIThemeTextHorizontalFlushRight = 2
+	KHIThemeTextHorizontalFlushLeft    = 0
+	KHIThemeTextHorizontalFlushRight   = 2
 )
 
 const (
-	KHIThemeTextInfoVersionOne = 1
+	KHIThemeTextInfoVersionOne  = 1
 	KHIThemeTextInfoVersionZero = 0
 )
 
 const (
 	KHIThemeTextTruncationDefault = 3
-	KHIThemeTextTruncationEnd = 2
-	KHIThemeTextTruncationMiddle = 1
-	KHIThemeTextTruncationNone = 0
+	KHIThemeTextTruncationEnd     = 2
+	KHIThemeTextTruncationMiddle  = 1
+	KHIThemeTextTruncationNone    = 0
 )
 
 const (
-	KHIThemeTextVerticalFlushBottom = 2
-	KHIThemeTextVerticalFlushCenter = 1
+	KHIThemeTextVerticalFlushBottom  = 2
+	KHIThemeTextVerticalFlushCenter  = 1
 	KHIThemeTextVerticalFlushDefault = 3
-	KHIThemeTextVerticalFlushTop = 0
+	KHIThemeTextVerticalFlushTop     = 0
 )
 
 const (
-	KHIToolbarDisplayModeDefault = 0
+	KHIToolbarDisplayModeDefault      = 0
 	KHIToolbarDisplayModeIconAndLabel = 1
-	KHIToolbarDisplayModeIconOnly = 2
-	KHIToolbarDisplayModeLabelOnly = 3
+	KHIToolbarDisplayModeIconOnly     = 2
+	KHIToolbarDisplayModeLabelOnly    = 3
 )
 
 const (
 	KHIToolbarDisplaySizeDefault = 0
-	KHIToolbarDisplaySizeNormal = 1
-	KHIToolbarDisplaySizeSmall = 2
+	KHIToolbarDisplaySizeNormal  = 1
+	KHIToolbarDisplaySizeSmall   = 2
 )
 
 const (
-	KHIToolbarItemAllowDuplicates = 1
-	KHIToolbarItemAnchoredLeft = 4
-	KHIToolbarItemCantBeRemoved = 2
-	KHIToolbarItemDisabled = 64
-	KHIToolbarItemIsSeparator = 8
-	KHIToolbarItemLabelDisabled = 32
-	KHIToolbarItemMutableAttrs = 230
-	KHIToolbarItemNoAttributes = 0
-	KHIToolbarItemSelected = 128
+	KHIToolbarItemAllowDuplicates    = 1
+	KHIToolbarItemAnchoredLeft       = 4
+	KHIToolbarItemCantBeRemoved      = 2
+	KHIToolbarItemDisabled           = 64
+	KHIToolbarItemIsSeparator        = 8
+	KHIToolbarItemLabelDisabled      = 32
+	KHIToolbarItemMutableAttrs       = 230
+	KHIToolbarItemNoAttributes       = 0
+	KHIToolbarItemSelected           = 128
 	KHIToolbarItemSendCmdToUserFocus = 16
-	KHIToolbarItemValidAttrs = 255
+	KHIToolbarItemValidAttrs         = 255
 )
 
 const (
 	KHIToolbarAutoSavesConfig = 1
-	KHIToolbarIsConfigurable = 2
-	KHIToolbarNoAttributes = 0
-	KHIToolbarValidAttrs = 3
+	KHIToolbarIsConfigurable  = 2
+	KHIToolbarNoAttributes    = 0
+	KHIToolbarValidAttrs      = 3
 )
 
 const (
@@ -4790,53 +4836,53 @@ const (
 
 const (
 	KHITransformDisabled = 1
-	KHITransformNone = 0
+	KHITransformNone     = 0
 	KHITransformSelected = 16384
 )
 
 const (
-	KHIViewAttributeIsFieldEditor = 2
+	KHIViewAttributeIsFieldEditor          = 2
 	KHIViewAttributeSendCommandToUserFocus = 1
-	KHIViewSendCommandToUserFocus = 1
+	KHIViewSendCommandToUserFocus          = 1
 )
 
 const (
-	KHIViewContentAlertIconType = 138
-	KHIViewContentCGImageRef = 134
-	KHIViewContentIconRef = 132
-	KHIViewContentIconSuiteRef = 129
+	KHIViewContentAlertIconType      = 138
+	KHIViewContentCGImageRef         = 134
+	KHIViewContentIconRef            = 132
+	KHIViewContentIconSuiteRef       = 129
 	KHIViewContentIconTypeAndCreator = 137
-	KHIViewContentImageFile = 136
-	KHIViewContentImageResource = 135
-	KHIViewContentNSImage = 139
-	KHIViewContentNone = 0
-	KHIViewContentTextOnly = 0
+	KHIViewContentImageFile          = 136
+	KHIViewContentImageResource      = 135
+	KHIViewContentNSImage            = 139
+	KHIViewContentNone               = 0
+	KHIViewContentTextOnly           = 0
 )
 
 const (
-	KHIViewFeatureAllowsSubviews = 2
-	KHIViewFeatureAutoToggles = 16384
-	KHIViewFeatureDoesNotDraw = 134217728
-	KHIViewFeatureDoesNotUseSpecialParts = 268435456
-	KHIViewFeatureGetsFocusOnClick = 256
-	KHIViewFeatureIdlesWithTimer = 8388608
-	KHIViewFeatureIgnoresClicks = 536870912
+	KHIViewFeatureAllowsSubviews            = 2
+	KHIViewFeatureAutoToggles               = 16384
+	KHIViewFeatureDoesNotDraw               = 134217728
+	KHIViewFeatureDoesNotUseSpecialParts    = 268435456
+	KHIViewFeatureGetsFocusOnClick          = 256
+	KHIViewFeatureIdlesWithTimer            = 8388608
+	KHIViewFeatureIgnoresClicks             = 536870912
 	KHIViewFeatureInvertsUpDownValueMeaning = 16777216
-	KHIViewFeatureIsOpaque = 33554432
-	KHIViewFeatureSupportsGhosting = 1
-	KHIViewFeatureSupportsLiveFeedback = 1024
-	KHIViewFeatureSupportsRadioBehavior = 2048
+	KHIViewFeatureIsOpaque                  = 33554432
+	KHIViewFeatureSupportsGhosting          = 1
+	KHIViewFeatureSupportsLiveFeedback      = 1024
+	KHIViewFeatureSupportsRadioBehavior     = 2048
 )
 
 const (
 	KHIViewFocusNextPart = -1
-	KHIViewFocusNoPart = 0
+	KHIViewFocusNoPart   = 0
 	KHIViewFocusPrevPart = -2
 )
 
 const (
-	KHIViewFocusOnAnyControl = 1
-	KHIViewFocusTraditionally = 2
+	KHIViewFocusOnAnyControl    = 1
+	KHIViewFocusTraditionally   = 2
 	KHIViewFocusWithoutWrapping = 4
 )
 
@@ -4845,11 +4891,11 @@ const (
 )
 
 const (
-	KHIViewDisabledPart = 254
-	KHIViewEntireView = 0
-	KHIViewInactivePart = 255
+	KHIViewDisabledPart  = 254
+	KHIViewEntireView    = 0
+	KHIViewInactivePart  = 255
 	KHIViewIndicatorPart = 129
-	KHIViewNoPart = 0
+	KHIViewNoPart        = 0
 )
 
 const (
@@ -4858,24 +4904,24 @@ const (
 
 const (
 	KHIViewClickableMetaPart = -4
-	KHIViewContentMetaPart = -2
-	KHIViewOpaqueMetaPart = -3
+	KHIViewContentMetaPart   = -2
+	KHIViewOpaqueMetaPart    = -3
 	KHIViewStructureMetaPart = -1
 )
 
 const (
-	KHIViewAllowsSubviews = 2
-	KHIViewAutoToggles = 16384
-	KHIViewDoesNotDraw = 134217728
-	KHIViewDoesNotUseSpecialParts = 268435456
-	KHIViewGetsFocusOnClick = 256
-	KHIViewIdlesWithTimer = 8388608
-	KHIViewIgnoresClicks = 536870912
+	KHIViewAllowsSubviews            = 2
+	KHIViewAutoToggles               = 16384
+	KHIViewDoesNotDraw               = 134217728
+	KHIViewDoesNotUseSpecialParts    = 268435456
+	KHIViewGetsFocusOnClick          = 256
+	KHIViewIdlesWithTimer            = 8388608
+	KHIViewIgnoresClicks             = 536870912
 	KHIViewInvertsUpDownValueMeaning = 16777216
-	KHIViewIsOpaque = 33554432
-	KHIViewSupportsGhosting = 1
-	KHIViewSupportsLiveFeedback = 1024
-	KHIViewSupportsRadioBehavior = 2048
+	KHIViewIsOpaque                  = 33554432
+	KHIViewSupportsGhosting          = 1
+	KHIViewSupportsLiveFeedback      = 1024
+	KHIViewSupportsRadioBehavior     = 2048
 )
 
 const (
@@ -4888,54 +4934,54 @@ const (
 )
 
 const (
-	KHIWindowBackingLocationDefault = 0
-	KHIWindowBackingLocationMainMemory = 2
+	KHIWindowBackingLocationDefault     = 0
+	KHIWindowBackingLocationMainMemory  = 2
 	KHIWindowBackingLocationVideoMemory = 1
 )
 
 const (
 	KHIWindowBehaviorStationary = 2
-	KHIWindowBehaviorTransient = 1
-	KHIWindowCanJoinAllSpaces = 256
-	KHIWindowExposeHidden = 1
-	KHIWindowMoveToActiveSpace = 512
+	KHIWindowBehaviorTransient  = 1
+	KHIWindowCanJoinAllSpaces   = 256
+	KHIWindowExposeHidden       = 1
+	KHIWindowMoveToActiveSpace  = 512
 	KHIWindowVisibleInAllSpaces = 256
 )
 
 const (
-	KHIWindowBitAsyncDrag = 24
-	KHIWindowBitAutoCalibration = 36
-	KHIWindowBitAutoViewDragTracking = 34
-	KHIWindowBitCanBeVisibleWithoutLogin = 23
-	KHIWindowBitCloseBox = 1
-	KHIWindowBitCollapseBox = 4
-	KHIWindowBitCompositing = 20
-	KHIWindowBitDoesNotCycle = 16
-	KHIWindowBitDoesNotHide = 33
-	KHIWindowBitFullScreenAuxiliary = 46
-	KHIWindowBitFullScreenPrimary = 45
-	KHIWindowBitHideOnFullScreen = 27
-	KHIWindowBitHideOnSuspend = 25
-	KHIWindowBitHighResolutionCapable = 21
-	KHIWindowBitIgnoreClicks = 30
-	KHIWindowBitInWindowMenu = 28
-	KHIWindowBitLiveResize = 29
-	KHIWindowBitNoActivates = 18
-	KHIWindowBitNoConstrain = 32
-	KHIWindowBitNoShadow = 22
+	KHIWindowBitAsyncDrag                  = 24
+	KHIWindowBitAutoCalibration            = 36
+	KHIWindowBitAutoViewDragTracking       = 34
+	KHIWindowBitCanBeVisibleWithoutLogin   = 23
+	KHIWindowBitCloseBox                   = 1
+	KHIWindowBitCollapseBox                = 4
+	KHIWindowBitCompositing                = 20
+	KHIWindowBitDoesNotCycle               = 16
+	KHIWindowBitDoesNotHide                = 33
+	KHIWindowBitFullScreenAuxiliary        = 46
+	KHIWindowBitFullScreenPrimary          = 45
+	KHIWindowBitHideOnFullScreen           = 27
+	KHIWindowBitHideOnSuspend              = 25
+	KHIWindowBitHighResolutionCapable      = 21
+	KHIWindowBitIgnoreClicks               = 30
+	KHIWindowBitInWindowMenu               = 28
+	KHIWindowBitLiveResize                 = 29
+	KHIWindowBitNoActivates                = 18
+	KHIWindowBitNoConstrain                = 32
+	KHIWindowBitNoShadow                   = 22
 	KHIWindowBitNoTexturedContentSeparator = 12
-	KHIWindowBitNoTitleBar = 10
-	KHIWindowBitNoUpdates = 17
-	KHIWindowBitOpaqueForEvents = 19
-	KHIWindowBitResizable = 5
-	KHIWindowBitRoundBottomBarCorners = 13
-	KHIWindowBitSideTitlebar = 6
-	KHIWindowBitStandardHandler = 26
-	KHIWindowBitTextured = 9
-	KHIWindowBitTexturedSquareCorners = 11
-	KHIWindowBitToolbarButton = 7
-	KHIWindowBitUnifiedTitleAndToolbar = 8
-	KHIWindowBitZoomBox = 2
+	KHIWindowBitNoTitleBar                 = 10
+	KHIWindowBitNoUpdates                  = 17
+	KHIWindowBitOpaqueForEvents            = 19
+	KHIWindowBitResizable                  = 5
+	KHIWindowBitRoundBottomBarCorners      = 13
+	KHIWindowBitSideTitlebar               = 6
+	KHIWindowBitStandardHandler            = 26
+	KHIWindowBitTextured                   = 9
+	KHIWindowBitTexturedSquareCorners      = 11
+	KHIWindowBitToolbarButton              = 7
+	KHIWindowBitUnifiedTitleAndToolbar     = 8
+	KHIWindowBitZoomBox                    = 2
 )
 
 const (
@@ -4943,9 +4989,9 @@ const (
 )
 
 const (
-	KHIWindowDepth32Bit = 1
-	KHIWindowDepth64Bit = 2
-	KHIWindowDepthFloat = 3
+	KHIWindowDepth32Bit   = 1
+	KHIWindowDepth64Bit   = 2
+	KHIWindowDepthFloat   = 3
 	KHIWindowDepthInvalid = 0
 )
 
@@ -4954,59 +5000,59 @@ const (
 )
 
 const (
-	KHIWindowMenuCreator = 2003398244
+	KHIWindowMenuCreator   = 2003398244
 	KHIWindowMenuWindowTag = 2003398244
 )
 
 const (
 	KHIWindowScaleModeFrameworkScaled = 2
-	KHIWindowScaleModeMagnified = 1
-	KHIWindowScaleModeUnscaled = 0
+	KHIWindowScaleModeMagnified       = 1
+	KHIWindowScaleModeUnscaled        = 0
 )
 
 const (
-	KHIWindowSharingNone = 0
-	KHIWindowSharingReadOnly = 1
+	KHIWindowSharingNone      = 0
+	KHIWindowSharingReadOnly  = 1
 	KHIWindowSharingReadWrite = 2
 )
 
 const (
-	KHIWindowDragPart = 3
-	KHIWindowTitleBarPart = 2
+	KHIWindowDragPart           = 3
+	KHIWindowTitleBarPart       = 2
 	KHIWindowTitleProxyIconPart = 2
 )
 
 const (
-	KHMContentNotProvided = 1
+	KHMContentNotProvided              = 1
 	KHMContentNotProvidedDontPropagate = 2
-	KHMContentProvided = 0
+	KHMContentProvided                 = 0
 )
 
 const (
-	KHMAbsoluteCenterAligned = 23
-	KHMDefaultSide = 0
-	KHMInsideBottomCenterAligned = 17
-	KHMInsideBottomLeftCorner = 21
-	KHMInsideBottomRightCorner = 22
-	KHMInsideLeftCenterAligned = 16
-	KHMInsideRightCenterAligned = 15
-	KHMInsideTopCenterAligned = 18
-	KHMInsideTopLeftCorner = 19
-	KHMInsideTopRightCorner = 20
+	KHMAbsoluteCenterAligned      = 23
+	KHMDefaultSide                = 0
+	KHMInsideBottomCenterAligned  = 17
+	KHMInsideBottomLeftCorner     = 21
+	KHMInsideBottomRightCorner    = 22
+	KHMInsideLeftCenterAligned    = 16
+	KHMInsideRightCenterAligned   = 15
+	KHMInsideTopCenterAligned     = 18
+	KHMInsideTopLeftCorner        = 19
+	KHMInsideTopRightCorner       = 20
 	KHMOutsideBottomCenterAligned = 14
-	KHMOutsideBottomLeftAligned = 9
-	KHMOutsideBottomRightAligned = 10
+	KHMOutsideBottomLeftAligned   = 9
+	KHMOutsideBottomRightAligned  = 10
 	KHMOutsideBottomScriptAligned = 3
-	KHMOutsideLeftBottomAligned = 8
-	KHMOutsideLeftCenterAligned = 2
-	KHMOutsideLeftTopAligned = 7
-	KHMOutsideRightBottomAligned = 12
-	KHMOutsideRightCenterAligned = 4
-	KHMOutsideRightTopAligned = 11
-	KHMOutsideTopCenterAligned = 13
-	KHMOutsideTopLeftAligned = 5
-	KHMOutsideTopRightAligned = 6
-	KHMOutsideTopScriptAligned = 1
+	KHMOutsideLeftBottomAligned   = 8
+	KHMOutsideLeftCenterAligned   = 2
+	KHMOutsideLeftTopAligned      = 7
+	KHMOutsideRightBottomAligned  = 12
+	KHMOutsideRightCenterAligned  = 4
+	KHMOutsideRightTopAligned     = 11
+	KHMOutsideTopCenterAligned    = 13
+	KHMOutsideTopLeftAligned      = 5
+	KHMOutsideTopRightAligned     = 6
+	KHMOutsideTopScriptAligned    = 1
 )
 
 const (
@@ -5014,7 +5060,7 @@ const (
 )
 
 const (
-	KHMHideTagFade = 1
+	KHMHideTagFade        = 1
 	KHMHideTagImmediately = 2
 )
 
@@ -5028,34 +5074,34 @@ const (
 )
 
 const (
-	KHMCFStringContent = 1667658612
+	KHMCFStringContent          = 1667658612
 	KHMCFStringLocalizedContent = 1667658604
-	KHMNoContent = 1852796517
-	KHMPascalStrContent = 1886614642
-	KHMStrResContent = 1937011232
-	KHMStringResContent = 1937011235
-	KHMTEHandleContent = 1954051176
-	KHMTextResContent = 1952807028
+	KHMNoContent                = 1852796517
+	KHMPascalStrContent         = 1886614642
+	KHMStrResContent            = 1937011232
+	KHMStringResContent         = 1937011235
+	KHMTEHandleContent          = 1954051176
+	KHMTextResContent           = 1952807028
 )
 
 const (
 	KHMDisposeContent = 1
-	KHMSupplyContent = 0
+	KHMSupplyContent  = 0
 )
 
 const (
-	KHMBottomLeftCorner = 9
+	KHMBottomLeftCorner  = 9
 	KHMBottomRightCorner = 10
-	KHMBottomSide = 3
-	KHMLeftBottomCorner = 8
-	KHMLeftSide = 2
-	KHMLeftTopCorner = 7
+	KHMBottomSide        = 3
+	KHMLeftBottomCorner  = 8
+	KHMLeftSide          = 2
+	KHMLeftTopCorner     = 7
 	KHMRightBottomCorner = 12
-	KHMRightSide = 4
-	KHMRightTopCorner = 11
-	KHMTopLeftCorner = 5
-	KHMTopRightCorner = 6
-	KHMTopSide = 1
+	KHMRightSide         = 4
+	KHMRightTopCorner    = 11
+	KHMTopLeftCorner     = 5
+	KHMTopRightCorner    = 6
+	KHMTopSide           = 1
 )
 
 const (
@@ -5067,32 +5113,32 @@ const (
 )
 
 const (
-	KIBCarbonRuntimeCantFindNibFile = -10960
-	KIBCarbonRuntimeCantFindObject = -10962
+	KIBCarbonRuntimeCantFindNibFile          = -10960
+	KIBCarbonRuntimeCantFindObject           = -10962
 	KIBCarbonRuntimeObjectNotOfRequestedType = -10961
 )
 
 const (
-	KIMKMouseTrackingMode = 1
+	KIMKMouseTrackingMode   = 1
 	KIMKNearestBoundaryMode = 2
 )
 
 const (
 	KKLGroupIdentifier = 6
-	KKLIcon = 3
-	KKLIdentifier = 2
-	KKLKCHRData = 0
-	KKLKind = 7
-	KKLLanguageCode = 9
-	KKLLocalizedName = 4
-	KKLName = 5
-	KKLuchrData = 1
+	KKLIcon            = 3
+	KKLIdentifier      = 2
+	KKLKCHRData        = 0
+	KKLKind            = 7
+	KKLLanguageCode    = 9
+	KKLLocalizedName   = 4
+	KKLName            = 5
+	KKLuchrData        = 1
 )
 
 const (
-	KKLKCHRKind = 1
+	KKLKCHRKind     = 1
 	KKLKCHRuchrKind = 0
-	KKLuchrKind = 2
+	KKLuchrKind     = 2
 )
 
 const (
@@ -5101,24 +5147,24 @@ const (
 
 const (
 	KCharacterPaletteInputMethodClass = 1668312180
-	KInkInputMethodClass = 1768844064
-	KKeyboardInputMethodClass = 1768845421
-	KOCRInputMethodClass = 1868788256
-	KSpeechInputMethodClass = 1987012963
+	KInkInputMethodClass              = 1768844064
+	KKeyboardInputMethodClass         = 1768845421
+	KOCRInputMethodClass              = 1868788256
+	KSpeechInputMethodClass           = 1987012963
 )
 
 const (
-	KKeyboardANSI = 1095652169
-	KKeyboardISO = 1230196512
-	KKeyboardJIS = 1246319392
+	KKeyboardANSI    = 1095652169
+	KKeyboardISO     = 1230196512
+	KKeyboardJIS     = 1246319392
 	KKeyboardUnknown = 1061109567
 )
 
 const (
-	KListDefProcPtr = 0
+	KListDefProcPtr          = 0
 	KListDefStandardIconType = 2
 	KListDefStandardTextType = 1
-	KListDefUserProcType = 0
+	KListDefUserProcType     = 0
 )
 
 const (
@@ -5126,20 +5172,20 @@ const (
 )
 
 const (
-	KMenuAttrAutoDisable = 4
-	KMenuAttrCondenseSeparators = 32
-	KMenuAttrDoNotCacheImage = 64
+	KMenuAttrAutoDisable             = 4
+	KMenuAttrCondenseSeparators      = 32
+	KMenuAttrDoNotCacheImage         = 64
 	KMenuAttrDoNotUseUserCommandKeys = 128
-	KMenuAttrExcludesMarkColumn = 1
-	KMenuAttrHidden = 16
-	KMenuAttrUsePencilGlyph = 8
+	KMenuAttrExcludesMarkColumn      = 1
+	KMenuAttrHidden                  = 16
+	KMenuAttrUsePencilGlyph          = 8
 )
 
 const (
 	KMenuContextDontUpdateEnabled = 134217728
-	KMenuContextDontUpdateIcon = 67108864
-	KMenuContextDontUpdateKey = 33554432
-	KMenuContextDontUpdateText = 16777216
+	KMenuContextDontUpdateIcon    = 67108864
+	KMenuContextDontUpdateKey     = 33554432
+	KMenuContextDontUpdateText    = 16777216
 )
 
 const (
@@ -5148,18 +5194,18 @@ const (
 
 const (
 	KMenuContextCommandIDSearch = 1048576
-	KMenuContextContextualMenu = 8388608
-	KMenuContextInspection = 4194304
-	KMenuContextKeyMatching = 262144
+	KMenuContextContextualMenu  = 8388608
+	KMenuContextInspection      = 4194304
+	KMenuContextKeyMatching     = 262144
 	KMenuContextMenuBarTracking = 65536
-	KMenuContextMenuEnabling = 524288
-	KMenuContextPopUpTracking = 131072
+	KMenuContextMenuEnabling    = 524288
+	KMenuContextPopUpTracking   = 131072
 )
 
 const (
-	KMenuContextPopUp = 512
+	KMenuContextPopUp    = 512
 	KMenuContextPullDown = 256
-	KMenuContextSubmenu = 1024
+	KMenuContextSubmenu  = 1024
 )
 
 const (
@@ -5168,162 +5214,162 @@ const (
 )
 
 const (
-	KMenuCalcItemMsg = 5
-	KMenuDisposeMsg = 9
-	KMenuDrawItemsMsg = 12
-	KMenuDrawMsg = 0
-	KMenuFindItemMsg = 10
+	KMenuCalcItemMsg   = 5
+	KMenuDisposeMsg    = 9
+	KMenuDrawItemsMsg  = 12
+	KMenuDrawMsg       = 0
+	KMenuFindItemMsg   = 10
 	KMenuHiliteItemMsg = 11
-	KMenuInitMsg = 8
-	KMenuPopUpMsg = 3
-	KMenuSizeMsg = 2
+	KMenuInitMsg       = 8
+	KMenuPopUpMsg      = 3
+	KMenuSizeMsg       = 2
 	KMenuThemeSavvyMsg = 7
-	MCalcItemMsg = 5
-	MDrawMsg = 0
-	MPopUpMsg = 3
-	MSizeMsg = 2
+	MCalcItemMsg       = 5
+	MDrawMsg           = 0
+	MPopUpMsg          = 3
+	MSizeMsg           = 2
 )
 
 const (
-	KMenuEventDontCheckSubmenus = 4
+	KMenuEventDontCheckSubmenus    = 4
 	KMenuEventIncludeDisabledItems = 1
-	KMenuEventQueryOnly = 2
+	KMenuEventQueryOnly            = 2
 )
 
 const (
-	KMenuItemAttrAutoDisable = 8192
-	KMenuItemAttrAutoRepeat = 512
-	KMenuItemAttrCustomDraw = 2048
-	KMenuItemAttrDisabled = 1
-	KMenuItemAttrDynamic = 8
-	KMenuItemAttrHidden = 32
-	KMenuItemAttrIconDisabled = 2
-	KMenuItemAttrIgnoreMeta = 256
+	KMenuItemAttrAutoDisable             = 8192
+	KMenuItemAttrAutoRepeat              = 512
+	KMenuItemAttrCustomDraw              = 2048
+	KMenuItemAttrDisabled                = 1
+	KMenuItemAttrDynamic                 = 8
+	KMenuItemAttrHidden                  = 32
+	KMenuItemAttrIconDisabled            = 2
+	KMenuItemAttrIgnoreMeta              = 256
 	KMenuItemAttrIncludeInCmdKeyMatching = 4096
-	KMenuItemAttrNotPreviousAlternate = 16
-	KMenuItemAttrSectionHeader = 128
-	KMenuItemAttrSeparator = 64
-	KMenuItemAttrSubmenuParentChoosable = 4
-	KMenuItemAttrUpdateSingleItem = 16384
-	KMenuItemAttrUseVirtualKey = 1024
+	KMenuItemAttrNotPreviousAlternate    = 16
+	KMenuItemAttrSectionHeader           = 128
+	KMenuItemAttrSeparator               = 64
+	KMenuItemAttrSubmenuParentChoosable  = 4
+	KMenuItemAttrUpdateSingleItem        = 16384
+	KMenuItemAttrUseVirtualKey           = 1024
 )
 
 const (
-	KMenuItemDataAllDataVersionOne = 1048575
+	KMenuItemDataAllDataVersionOne   = 1048575
 	KMenuItemDataAllDataVersionThree = 8388607
-	KMenuItemDataAllDataVersionTwo = 2097151
-	KMenuItemDataAttributedText = 2097152
-	KMenuItemDataAttributes = 65536
-	KMenuItemDataCFString = 131072
-	KMenuItemDataCmdKey = 4
-	KMenuItemDataCmdKeyGlyph = 8
-	KMenuItemDataCmdKeyModifiers = 16
-	KMenuItemDataCmdVirtualKey = 1048576
-	KMenuItemDataCommandID = 1024
-	KMenuItemDataEnabled = 64
-	KMenuItemDataFont = 4194304
-	KMenuItemDataFontID = 16384
-	KMenuItemDataIconEnabled = 128
-	KMenuItemDataIconHandle = 512
-	KMenuItemDataIconID = 256
-	KMenuItemDataIndent = 524288
-	KMenuItemDataMark = 2
-	KMenuItemDataProperties = 262144
-	KMenuItemDataRefcon = 32768
-	KMenuItemDataStyle = 32
-	KMenuItemDataSubmenuHandle = 8192
-	KMenuItemDataSubmenuID = 4096
-	KMenuItemDataText = 1
-	KMenuItemDataTextEncoding = 2048
+	KMenuItemDataAllDataVersionTwo   = 2097151
+	KMenuItemDataAttributedText      = 2097152
+	KMenuItemDataAttributes          = 65536
+	KMenuItemDataCFString            = 131072
+	KMenuItemDataCmdKey              = 4
+	KMenuItemDataCmdKeyGlyph         = 8
+	KMenuItemDataCmdKeyModifiers     = 16
+	KMenuItemDataCmdVirtualKey       = 1048576
+	KMenuItemDataCommandID           = 1024
+	KMenuItemDataEnabled             = 64
+	KMenuItemDataFont                = 4194304
+	KMenuItemDataFontID              = 16384
+	KMenuItemDataIconEnabled         = 128
+	KMenuItemDataIconHandle          = 512
+	KMenuItemDataIconID              = 256
+	KMenuItemDataIndent              = 524288
+	KMenuItemDataMark                = 2
+	KMenuItemDataProperties          = 262144
+	KMenuItemDataRefcon              = 32768
+	KMenuItemDataStyle               = 32
+	KMenuItemDataSubmenuHandle       = 8192
+	KMenuItemDataSubmenuID           = 4096
+	KMenuItemDataText                = 1
+	KMenuItemDataTextEncoding        = 2048
 )
 
 const (
-	KMenuCGImageRefType = 7
-	KMenuColorIconType = 4
-	KMenuIconRefType = 6
-	KMenuIconResourceType = 9
-	KMenuIconSuiteType = 5
-	KMenuIconType = 1
-	KMenuNoIcon = 0
-	KMenuShrinkIconType = 2
-	KMenuSmallIconType = 3
+	KMenuCGImageRefType         = 7
+	KMenuColorIconType          = 4
+	KMenuIconRefType            = 6
+	KMenuIconResourceType       = 9
+	KMenuIconSuiteType          = 5
+	KMenuIconType               = 1
+	KMenuNoIcon                 = 0
+	KMenuShrinkIconType         = 2
+	KMenuSmallIconType          = 3
 	KMenuSystemIconSelectorType = 8
 )
 
 const (
-	KMenuControlModifier = 4
+	KMenuControlModifier   = 4
 	KMenuNoCommandModifier = 8
-	KMenuNoModifiers = 0
-	KMenuOptionModifier = 2
-	KMenuShiftModifier = 1
+	KMenuNoModifiers       = 0
+	KMenuOptionModifier    = 2
+	KMenuShiftModifier     = 1
 )
 
 const (
-	KMenuAppleLogoFilledGlyph = 20
-	KMenuAppleLogoOutlineGlyph = 108
-	KMenuBlankGlyph = 97
-	KMenuCapsLockGlyph = 99
-	KMenuCheckmarkGlyph = 18
-	KMenuClearGlyph = 28
-	KMenuCommandGlyph = 17
-	KMenuContextualMenuGlyph = 109
-	KMenuControlGlyph = 6
-	KMenuControlISOGlyph = 138
-	KMenuDeleteLeftGlyph = 23
-	KMenuDeleteRightGlyph = 10
-	KMenuDiamondGlyph = 19
-	KMenuDownArrowGlyph = 106
-	KMenuDownwardArrowDashedGlyph = 16
-	KMenuEisuGlyph = 141
-	KMenuEjectGlyph = 140
-	KMenuEnterGlyph = 4
-	KMenuEscapeGlyph = 27
-	KMenuF10Glyph = 120
-	KMenuF11Glyph = 121
-	KMenuF12Glyph = 122
-	KMenuF13Glyph = 135
-	KMenuF14Glyph = 136
-	KMenuF15Glyph = 137
-	KMenuF16Glyph = 143
-	KMenuF17Glyph = 144
-	KMenuF18Glyph = 145
-	KMenuF19Glyph = 146
-	KMenuF1Glyph = 111
-	KMenuF2Glyph = 112
-	KMenuF3Glyph = 113
-	KMenuF4Glyph = 114
-	KMenuF5Glyph = 115
-	KMenuF6Glyph = 116
-	KMenuF7Glyph = 117
-	KMenuF8Glyph = 118
-	KMenuF9Glyph = 119
-	KMenuHelpGlyph = 103
-	KMenuKanaGlyph = 142
-	KMenuLeftArrowDashedGlyph = 24
-	KMenuLeftArrowGlyph = 100
-	KMenuLeftDoubleQuotesJapaneseGlyph = 29
-	KMenuNonmarkingReturnGlyph = 13
-	KMenuNorthwestArrowGlyph = 102
-	KMenuNullGlyph = 0
-	KMenuOptionGlyph = 7
-	KMenuPageDownGlyph = 107
-	KMenuPageUpGlyph = 98
-	KMenuParagraphKoreanGlyph = 21
-	KMenuPencilGlyph = 15
-	KMenuPowerGlyph = 110
-	KMenuReturnGlyph = 11
-	KMenuReturnR2LGlyph = 12
-	KMenuRightArrowDashedGlyph = 26
-	KMenuRightArrowGlyph = 101
+	KMenuAppleLogoFilledGlyph           = 20
+	KMenuAppleLogoOutlineGlyph          = 108
+	KMenuBlankGlyph                     = 97
+	KMenuCapsLockGlyph                  = 99
+	KMenuCheckmarkGlyph                 = 18
+	KMenuClearGlyph                     = 28
+	KMenuCommandGlyph                   = 17
+	KMenuContextualMenuGlyph            = 109
+	KMenuControlGlyph                   = 6
+	KMenuControlISOGlyph                = 138
+	KMenuDeleteLeftGlyph                = 23
+	KMenuDeleteRightGlyph               = 10
+	KMenuDiamondGlyph                   = 19
+	KMenuDownArrowGlyph                 = 106
+	KMenuDownwardArrowDashedGlyph       = 16
+	KMenuEisuGlyph                      = 141
+	KMenuEjectGlyph                     = 140
+	KMenuEnterGlyph                     = 4
+	KMenuEscapeGlyph                    = 27
+	KMenuF10Glyph                       = 120
+	KMenuF11Glyph                       = 121
+	KMenuF12Glyph                       = 122
+	KMenuF13Glyph                       = 135
+	KMenuF14Glyph                       = 136
+	KMenuF15Glyph                       = 137
+	KMenuF16Glyph                       = 143
+	KMenuF17Glyph                       = 144
+	KMenuF18Glyph                       = 145
+	KMenuF19Glyph                       = 146
+	KMenuF1Glyph                        = 111
+	KMenuF2Glyph                        = 112
+	KMenuF3Glyph                        = 113
+	KMenuF4Glyph                        = 114
+	KMenuF5Glyph                        = 115
+	KMenuF6Glyph                        = 116
+	KMenuF7Glyph                        = 117
+	KMenuF8Glyph                        = 118
+	KMenuF9Glyph                        = 119
+	KMenuHelpGlyph                      = 103
+	KMenuKanaGlyph                      = 142
+	KMenuLeftArrowDashedGlyph           = 24
+	KMenuLeftArrowGlyph                 = 100
+	KMenuLeftDoubleQuotesJapaneseGlyph  = 29
+	KMenuNonmarkingReturnGlyph          = 13
+	KMenuNorthwestArrowGlyph            = 102
+	KMenuNullGlyph                      = 0
+	KMenuOptionGlyph                    = 7
+	KMenuPageDownGlyph                  = 107
+	KMenuPageUpGlyph                    = 98
+	KMenuParagraphKoreanGlyph           = 21
+	KMenuPencilGlyph                    = 15
+	KMenuPowerGlyph                     = 110
+	KMenuReturnGlyph                    = 11
+	KMenuReturnR2LGlyph                 = 12
+	KMenuRightArrowDashedGlyph          = 26
+	KMenuRightArrowGlyph                = 101
 	KMenuRightDoubleQuotesJapaneseGlyph = 30
-	KMenuShiftGlyph = 5
-	KMenuSoutheastArrowGlyph = 105
-	KMenuSpaceGlyph = 9
-	KMenuTabLeftGlyph = 3
-	KMenuTabRightGlyph = 2
-	KMenuTrademarkJapaneseGlyph = 31
-	KMenuUpArrowDashedGlyph = 25
-	KMenuUpArrowGlyph = 104
+	KMenuShiftGlyph                     = 5
+	KMenuSoutheastArrowGlyph            = 105
+	KMenuSpaceGlyph                     = 9
+	KMenuTabLeftGlyph                   = 3
+	KMenuTabRightGlyph                  = 2
+	KMenuTrademarkJapaneseGlyph         = 31
+	KMenuUpArrowDashedGlyph             = 25
+	KMenuUpArrowGlyph                   = 104
 )
 
 const (
@@ -5332,37 +5378,37 @@ const (
 
 const (
 	KMenuStdMenuBarProc = 63
-	KMenuStdMenuProc = 63
+	KMenuStdMenuProc    = 63
 )
 
 const (
 	KMenuTrackingModeKeyboard = 2
-	KMenuTrackingModeMouse = 1
+	KMenuTrackingModeMouse    = 1
 )
 
 const (
-	KMouseParamsClickAndHold = 1668049007
+	KMouseParamsClickAndHold   = 1668049007
 	KMouseParamsDragInitiation = 1685217639
-	KMouseParamsProxyIcon = 1886547832
-	KMouseParamsSticky = 1937008995
+	KMouseParamsProxyIcon      = 1886547832
+	KMouseParamsSticky         = 1937008995
 )
 
 const (
-	KMouseTrackingClientEvent = 10
+	KMouseTrackingClientEvent         = 10
 	KMouseTrackingKeyModifiersChanged = 6
-	KMouseTrackingMouseDown = 1
-	KMouseTrackingMouseDragged = 5
-	KMouseTrackingMouseEntered = 4
-	KMouseTrackingMouseExited = 3
-	KMouseTrackingMouseMoved = 9
-	KMouseTrackingMouseUp = 2
-	KMouseTrackingScrollWheel = 11
-	KMouseTrackingTimedOut = 8
-	KMouseTrackingUserCancelled = 7
+	KMouseTrackingMouseDown           = 1
+	KMouseTrackingMouseDragged        = 5
+	KMouseTrackingMouseEntered        = 4
+	KMouseTrackingMouseExited         = 3
+	KMouseTrackingMouseMoved          = 9
+	KMouseTrackingMouseUp             = 2
+	KMouseTrackingScrollWheel         = 11
+	KMouseTrackingTimedOut            = 8
+	KMouseTrackingUserCancelled       = 7
 )
 
 const (
-	KMouseTrackingMousePressed = 1
+	KMouseTrackingMousePressed  = 1
 	KMouseTrackingMouseReleased = 2
 )
 
@@ -5371,40 +5417,40 @@ const (
 )
 
 const (
-	KNextWindowGroup = 1
+	KNextWindowGroup     = 1
 	KPreviousWindowGroup = 0
 )
 
 const (
-	KAppleLogoCharCode = 20
-	KBackspaceCharCode = 8
-	KBellCharCode = 7
-	KBulletCharCode = 165
-	KCheckCharCode = 18
-	KClearCharCode = 27
-	KCommandCharCode = 17
-	KDeleteCharCode = 127
-	KDiamondCharCode = 19
-	KDownArrowCharCode = 31
-	KEndCharCode = 4
-	KEnterCharCode = 3
-	KEscapeCharCode = 27
-	KFormFeedCharCode = 12
-	KFunctionKeyCharCode = 16
-	KHelpCharCode = 5
-	KHomeCharCode = 1
-	KLeftArrowCharCode = 28
-	KLineFeedCharCode = 10
+	KAppleLogoCharCode        = 20
+	KBackspaceCharCode        = 8
+	KBellCharCode             = 7
+	KBulletCharCode           = 165
+	KCheckCharCode            = 18
+	KClearCharCode            = 27
+	KCommandCharCode          = 17
+	KDeleteCharCode           = 127
+	KDiamondCharCode          = 19
+	KDownArrowCharCode        = 31
+	KEndCharCode              = 4
+	KEnterCharCode            = 3
+	KEscapeCharCode           = 27
+	KFormFeedCharCode         = 12
+	KFunctionKeyCharCode      = 16
+	KHelpCharCode             = 5
+	KHomeCharCode             = 1
+	KLeftArrowCharCode        = 28
+	KLineFeedCharCode         = 10
 	KNonBreakingSpaceCharCode = 202
-	KNullCharCode = 0
-	KPageDownCharCode = 12
-	KPageUpCharCode = 11
-	KReturnCharCode = 13
-	KRightArrowCharCode = 29
-	KSpaceCharCode = 32
-	KTabCharCode = 9
-	KUpArrowCharCode = 30
-	KVerticalTabCharCode = 11
+	KNullCharCode             = 0
+	KPageDownCharCode         = 12
+	KPageUpCharCode           = 11
+	KReturnCharCode           = 13
+	KRightArrowCharCode       = 29
+	KSpaceCharCode            = 32
+	KTabCharCode              = 9
+	KUpArrowCharCode          = 30
+	KVerticalTabCharCode      = 11
 )
 
 const (
@@ -5412,7 +5458,7 @@ const (
 )
 
 const (
-	KScrapFlavorMaskNone = 0
+	KScrapFlavorMaskNone       = 0
 	KScrapFlavorMaskSenderOnly = 1
 	KScrapFlavorMaskTranslated = 2
 )
@@ -5422,19 +5468,19 @@ const (
 )
 
 const (
-	KScrapFlavorTypeMovie = 1836019574
-	KScrapFlavorTypePicture = 1346978644
-	KScrapFlavorTypeSound = 1936614432
-	KScrapFlavorTypeText = 1413830740
-	KScrapFlavorTypeTextStyle = 1937013100
+	KScrapFlavorTypeMovie         = 1836019574
+	KScrapFlavorTypePicture       = 1346978644
+	KScrapFlavorTypeSound         = 1936614432
+	KScrapFlavorTypeText          = 1413830740
+	KScrapFlavorTypeTextStyle     = 1937013100
 	KScrapFlavorTypeUTF16External = 1970549046
-	KScrapFlavorTypeUnicode = 1970567284
-	KScrapFlavorTypeUnicodeStyle = 1970500716
+	KScrapFlavorTypeUnicode       = 1970567284
+	KScrapFlavorTypeUnicodeStyle  = 1970500716
 )
 
 const (
 	KScrapClearNamedScrap = 1
-	KScrapGetNamedScrap = 0
+	KScrapGetNamedScrap   = 0
 )
 
 const (
@@ -5442,41 +5488,41 @@ const (
 )
 
 const (
-	KScrollBarsAlwaysActive = 1
+	KScrollBarsAlwaysActive  = 1
 	KScrollBarsSyncWithFocus = 0
 )
 
 const (
 	KScrollWindowEraseToPortBackground = 2
-	KScrollWindowInvalidate = 1
-	KScrollWindowNoOptions = 0
+	KScrollWindowInvalidate            = 1
+	KScrollWindowNoOptions             = 0
 )
 
 const (
-	KAppleLogoUnicode = 63743
-	KBulletUnicode = 8226
-	KCheckUnicode = 10003
-	KCommandUnicode = 8984
-	KControlUnicode = 8963
-	KDiamondUnicode = 9670
-	KOptionUnicode = 8997
+	KAppleLogoUnicode  = 63743
+	KBulletUnicode     = 8226
+	KCheckUnicode      = 10003
+	KCommandUnicode    = 8984
+	KControlUnicode    = 8963
+	KDiamondUnicode    = 9670
+	KOptionUnicode     = 8997
 	KPencilLeftUnicode = 63490
-	KPencilUnicode = 9998
-	KShiftUnicode = 8679
+	KPencilUnicode     = 9998
+	KShiftUnicode      = 8679
 )
 
 const (
 	KFloatingWindowDefinition = 124
-	KRoundWindowDefinition = 1
+	KRoundWindowDefinition    = 1
 	KStandardWindowDefinition = 0
 )
 
 const (
-	KStdAlertDoNotAnimateOnCancel = 4
+	KStdAlertDoNotAnimateOnCancel  = 4
 	KStdAlertDoNotAnimateOnDefault = 2
-	KStdAlertDoNotAnimateOnOther = 8
-	KStdAlertDoNotCloseOnHelp = 16
-	KStdAlertDoNotDisposeSheet = 1
+	KStdAlertDoNotAnimateOnOther   = 8
+	KStdAlertDoNotCloseOnHelp      = 16
+	KStdAlertDoNotDisposeSheet     = 1
 )
 
 const (
@@ -5485,59 +5531,59 @@ const (
 )
 
 const (
-	Cancel = 2
+	Cancel              = 2
 	KStdCancelItemIndex = 2
-	KStdOkItemIndex = 1
-	Ok = 1
+	KStdOkItemIndex     = 1
+	Ok                  = 1
 )
 
 const (
-	CautionIcon = 2
+	CautionIcon  = 2
 	KCautionIcon = 2
-	KNoteIcon = 1
-	KStopIcon = 0
-	NoteIcon = 1
-	StopIcon = 0
+	KNoteIcon    = 1
+	KStopIcon    = 0
+	NoteIcon     = 1
+	StopIcon     = 0
 )
 
 const (
 	KStoredBasicWindowDescriptionID = 1935827315
-	KStoredWindowPascalTitleID = 1932670261
-	KStoredWindowSystemTag = 1634758764
-	KStoredWindowTitleCFStringID = 1667658612
+	KStoredWindowPascalTitleID      = 1932670261
+	KStoredWindowSystemTag          = 1634758764
+	KStoredWindowTitleCFStringID    = 1667658612
 )
 
 const (
-	KSupportsFileTranslation = 1
-	KSupportsScrapTranslation = 2
+	KSupportsFileTranslation       = 1
+	KSupportsScrapTranslation      = 2
 	KTranslatorCanGenerateFilename = 4
 )
 
 const (
 	KTSMDocAccessEffectiveRangeAttribute = 2
-	KTSMDocAccessFontSizeAttribute = 1
+	KTSMDocAccessFontSizeAttribute       = 1
 )
 
 const (
 	KTSMDocAccessEffectiveRangeAttributeBit = 1
-	KTSMDocAccessFontSizeAttributeBit = 0
+	KTSMDocAccessFontSizeAttributeBit       = 0
 )
 
 const (
-	KTSMDocumentEnabledInputSourcesPropertyTag = 1701734771
-	KTSMDocumentInputModePropertyTag = 1768778093
-	KTSMDocumentInputSourceOverridePropertyTag = 1768843635
-	KTSMDocumentPropertySupportGlyphInfo = 1685088105
-	KTSMDocumentPropertyUnicodeInputWindow = 1685091682
-	KTSMDocumentRefconPropertyTag = 1919247971
+	KTSMDocumentEnabledInputSourcesPropertyTag   = 1701734771
+	KTSMDocumentInputModePropertyTag             = 1768778093
+	KTSMDocumentInputSourceOverridePropertyTag   = 1768843635
+	KTSMDocumentPropertySupportGlyphInfo         = 1685088105
+	KTSMDocumentPropertyUnicodeInputWindow       = 1685091682
+	KTSMDocumentRefconPropertyTag                = 1919247971
 	KTSMDocumentSupportDocumentAccessPropertyTag = 1684107385
-	KTSMDocumentSupportGlyphInfoPropertyTag = 1685088105
-	KTSMDocumentTSMTEPropertyTag = 1953322053
-	KTSMDocumentTextServicePropertyTag = 1953724003
-	KTSMDocumentUnicodeInputWindowPropertyTag = 1685091682
-	KTSMDocumentUnicodePropertyTag = 1969516387
-	KTSMDocumentUseFloatingWindowPropertyTag = 1970501485
-	KTSMDocumentWindowLevelPropertyTag = 1953983600
+	KTSMDocumentSupportGlyphInfoPropertyTag      = 1685088105
+	KTSMDocumentTSMTEPropertyTag                 = 1953322053
+	KTSMDocumentTextServicePropertyTag           = 1953724003
+	KTSMDocumentUnicodeInputWindowPropertyTag    = 1685091682
+	KTSMDocumentUnicodePropertyTag               = 1969516387
+	KTSMDocumentUseFloatingWindowPropertyTag     = 1970501485
+	KTSMDocumentWindowLevelPropertyTag           = 1953983600
 )
 
 const (
@@ -5546,7 +5592,7 @@ const (
 
 const (
 	KTSMTEInterfaceType = 1953322053
-	KTSMTESignature = 1953322053
+	KTSMTESignature     = 1953322053
 )
 
 const (
@@ -5555,22 +5601,22 @@ const (
 	KTSM22Version = 544
 	KTSM23Version = 560
 	KTSM24Version = 576
-	KTSMVersion = 336
+	KTSMVersion   = 336
 )
 
 const (
 	KTXNAutoIndentOff = 0
-	KTXNAutoIndentOn = 1
+	KTXNAutoIndentOn  = 1
 )
 
 const (
-	KTXNAutoScrollInsertionIntoView = 0
-	KTXNAutoScrollNever = 1
+	KTXNAutoScrollInsertionIntoView    = 0
+	KTXNAutoScrollNever                = 1
 	KTXNAutoScrollWhenInsertionVisible = 2
 )
 
 const (
-	KTXNAutoWrap = 0
+	KTXNAutoWrap   = 0
 	KTXNNoAutoWrap = 1
 )
 
@@ -5580,31 +5626,31 @@ const (
 
 const (
 	KTXNClearTheseFontFeatures = -2147483648
-	KTXNClearThisControl = -1
+	KTXNClearThisControl       = -1
 )
 
 const (
 	KTXNDisableLayoutAndDraw = 1
-	KTXNEnableLayoutAndDraw = 0
+	KTXNEnableLayoutAndDraw  = 0
 )
 
 const (
 	KTXNDisabledFunctionalityErr = -22019
-	KTXNOperationNotAllowedErr = -22020
+	KTXNOperationNotAllowedErr   = -22020
 )
 
 const (
-	KTXNDecrementTypeSize = -2147483648
-	KTXNDontCareTypeSize = -1
-	KTXNDontCareTypeStyle = 255
-	KTXNIncrementTypeSize = 1
-	KTXNNoFontVariations = 32767
+	KTXNDecrementTypeSize     = -2147483648
+	KTXNDontCareTypeSize      = -1
+	KTXNDontCareTypeStyle     = 255
+	KTXNIncrementTypeSize     = 1
+	KTXNNoFontVariations      = 32767
 	KTXNUseScriptDefaultValue = -1
 )
 
 const (
 	KTXNDontDrawCaretWhenInactive = 0
-	KTXNDrawCaretWhenInactive = 1
+	KTXNDrawCaretWhenInactive     = 1
 )
 
 const (
@@ -5617,7 +5663,7 @@ const (
 
 const (
 	KTXNDontDrawSelectionWhenInactive = 0
-	KTXNDrawSelectionWhenInactive = 1
+	KTXNDrawSelectionWhenInactive     = 1
 )
 
 const (
@@ -5625,98 +5671,98 @@ const (
 )
 
 const (
-	KOutputTextInUnicodeEncodingBit = 9
-	KTXNAlwaysWrapAtViewEdgeBit = 11
-	KTXNDisableDragAndDropBit = 15
-	KTXNDoFontSubstitutionBit = 22
-	KTXNDoNotInstallDragProcsBit = 10
+	KOutputTextInUnicodeEncodingBit      = 9
+	KTXNAlwaysWrapAtViewEdgeBit          = 11
+	KTXNDisableDragAndDropBit            = 15
+	KTXNDoFontSubstitutionBit            = 22
+	KTXNDoNotInstallDragProcsBit         = 10
 	KTXNDontDrawSelectionWhenInactiveBit = 13
-	KTXNDrawGrowIconBit = 0
-	KTXNMonostyledTextBit = 17
-	KTXNNoSelectionBit = 7
-	KTXNReadOnlyBit = 5
-	KTXNSaveStylesAsSTYLResourceBit = 8
-	KTXNShowWindowBit = 1
-	KTXNSingleLineOnlyBit = 14
-	KTXNWantHScrollBarBit = 2
-	KTXNWantVScrollBarBit = 3
+	KTXNDrawGrowIconBit                  = 0
+	KTXNMonostyledTextBit                = 17
+	KTXNNoSelectionBit                   = 7
+	KTXNReadOnlyBit                      = 5
+	KTXNSaveStylesAsSTYLResourceBit      = 8
+	KTXNShowWindowBit                    = 1
+	KTXNSingleLineOnlyBit                = 14
+	KTXNWantHScrollBarBit                = 2
+	KTXNWantVScrollBarBit                = 3
 )
 
 const (
-	KOutputTextInUnicodeEncodingMask = 512
-	KTXNAlwaysWrapAtViewEdgeMask = 2048
-	KTXNDisableDragAndDropMask = 32768
-	KTXNDoFontSubstitutionMask = 4194304
-	KTXNDoNotInstallDragProcsMask = 1024
+	KOutputTextInUnicodeEncodingMask      = 512
+	KTXNAlwaysWrapAtViewEdgeMask          = 2048
+	KTXNDisableDragAndDropMask            = 32768
+	KTXNDoFontSubstitutionMask            = 4194304
+	KTXNDoNotInstallDragProcsMask         = 1024
 	KTXNDontDrawSelectionWhenInactiveMask = 8192
-	KTXNDrawGrowIconMask = 1
-	KTXNMonostyledTextMask = 131072
-	KTXNNoSelectionMask = 128
-	KTXNReadOnlyMask = 32
-	KTXNSaveStylesAsSTYLResourceMask = 256
-	KTXNShowWindowMask = 2
-	KTXNSingleLineOnlyMask = 16384
-	KTXNWantHScrollBarMask = 4
-	KTXNWantVScrollBarMask = 8
+	KTXNDrawGrowIconMask                  = 1
+	KTXNMonostyledTextMask                = 131072
+	KTXNNoSelectionMask                   = 128
+	KTXNReadOnlyMask                      = 32
+	KTXNSaveStylesAsSTYLResourceMask      = 256
+	KTXNShowWindowMask                    = 2
+	KTXNSingleLineOnlyMask                = 16384
+	KTXNWantHScrollBarMask                = 4
+	KTXNWantVScrollBarMask                = 8
 )
 
 const (
-	KTXNDrawItemScrollbarsBit = 0
+	KTXNDrawItemScrollbarsBit       = 0
 	KTXNDrawItemTextAndSelectionBit = 2
-	KTXNDrawItemTextBit = 1
+	KTXNDrawItemTextBit             = 1
 )
 
 const (
-	KTXNDrawItemAllMask = 4294967295
-	KTXNDrawItemScrollbarsMask = 1
+	KTXNDrawItemAllMask              = 4294967295
+	KTXNDrawItemScrollbarsMask       = 1
 	KTXNDrawItemTextAndSelectionMask = 4
-	KTXNDrawItemTextMask = 2
+	KTXNDrawItemTextMask             = 2
 )
 
 const (
 	KTXNDisableDragAndDrop = 1
-	KTXNEnableDragAndDrop = 0
+	KTXNEnableDragAndDrop  = 0
 )
 
 const (
-	KTXNCenter = 4
-	KTXNFlushDefault = 0
-	KTXNFlushLeft = 1
-	KTXNFlushRight = 2
+	KTXNCenter        = 4
+	KTXNFlushDefault  = 0
+	KTXNFlushLeft     = 1
+	KTXNFlushRight    = 2
 	KTXNForceFullJust = 16
-	KTXNFullJust = 8
+	KTXNFullJust      = 8
 )
 
 const (
 	KTXNATSUIStyleContinuousBit = 4
-	KTXNColorContinuousBit = 3
-	KTXNFontContinuousBit = 0
-	KTXNSizeContinuousBit = 1
-	KTXNStyleContinuousBit = 2
+	KTXNColorContinuousBit      = 3
+	KTXNFontContinuousBit       = 0
+	KTXNSizeContinuousBit       = 1
+	KTXNStyleContinuousBit      = 2
 )
 
 const (
 	KTXNATSUIStyleContinuousMask = 16
-	KTXNColorContinuousMask = 8
-	KTXNFontContinuousMask = 1
-	KTXNSizeContinuousMask = 2
-	KTXNStyleContinuousMask = 4
+	KTXNColorContinuousMask      = 8
+	KTXNFontContinuousMask       = 1
+	KTXNSizeContinuousMask       = 2
+	KTXNStyleContinuousMask      = 4
 )
 
 const (
 	KTXNHorizontal = 0
-	KTXNVertical = 1
+	KTXNVertical   = 1
 )
 
 const (
-	KTXNEntireWordBit = 1
-	KTXNIgnoreCaseBit = 0
+	KTXNEntireWordBit           = 1
+	KTXNIgnoreCaseBit           = 0
 	KTXNUseEncodingWordRulesBit = 31
 )
 
 const (
-	KTXNEntireWordMask = 2
-	KTXNIgnoreCaseMask = 1
+	KTXNEntireWordMask           = 2
+	KTXNIgnoreCaseMask           = 1
 	KTXNUseEncodingWordRulesMask = 2147483648
 )
 
@@ -5734,41 +5780,41 @@ const (
 )
 
 const (
-	KTXNAutoIndentStateTag = 1635084654
-	KTXNAutoScrollBehaviorTag = 1935828342
-	KTXNDisableDragAndDropTag = 1685217639
-	KTXNDisableLayoutAndDrawTag = 1986622306
-	KTXNDoFontSubstitution = 1716745570
+	KTXNAutoIndentStateTag           = 1635084654
+	KTXNAutoScrollBehaviorTag        = 1935828342
+	KTXNDisableDragAndDropTag        = 1685217639
+	KTXNDisableLayoutAndDrawTag      = 1986622306
+	KTXNDoFontSubstitution           = 1716745570
 	KTXNDrawSelectionWhenInactiveTag = 1685285998
-	KTXNFlattenMoviesTag = 1718378868
-	KTXNIOPrivilegesTag = 1768910966
-	KTXNInlineStateTag = 1768846196
-	KTXNJustificationTag = 1786082164
-	KTXNLineDirectionTag = 1819174002
-	KTXNMarginsTag = 1835102823
-	KTXNNoUserIOTag = 1853188463
-	KTXNRefConTag = 1919312750
-	KTXNSelectionStateTag = 1936487284
-	KTXNSingleLevelUndoTag = 1970168943
-	KTXNTabSettingsTag = 1952539251
-	KTXNUseCarbonEvents = 1667392354
-	KTXNVisibilityTag = 1986622306
-	KTXNWordWrapStateTag = 2004316787
+	KTXNFlattenMoviesTag             = 1718378868
+	KTXNIOPrivilegesTag              = 1768910966
+	KTXNInlineStateTag               = 1768846196
+	KTXNJustificationTag             = 1786082164
+	KTXNLineDirectionTag             = 1819174002
+	KTXNMarginsTag                   = 1835102823
+	KTXNNoUserIOTag                  = 1853188463
+	KTXNRefConTag                    = 1919312750
+	KTXNSelectionStateTag            = 1936487284
+	KTXNSingleLevelUndoTag           = 1970168943
+	KTXNTabSettingsTag               = 1952539251
+	KTXNUseCarbonEvents              = 1667392354
+	KTXNVisibilityTag                = 1986622306
+	KTXNWordWrapStateTag             = 2004316787
 )
 
 const (
 	KTXNLinkNotPressed = 0
-	KTXNLinkTracking = 3
+	KTXNLinkTracking   = 3
 	KTXNLinkWasPressed = 1
 )
 
 const (
-	KTXNNoAppleEventHandlersBit = 0
+	KTXNNoAppleEventHandlersBit      = 0
 	KTXNRestartAppleEventHandlersBit = 1
 )
 
 const (
-	KTXNNoAppleEventHandlersMask = 1
+	KTXNNoAppleEventHandlersMask      = 1
 	KTXNRestartAppleEventHandlersMask = 2
 )
 
@@ -5781,140 +5827,140 @@ const (
 )
 
 const (
-	KTXNQDFontColorAttribute = 1802268530
+	KTXNQDFontColorAttribute    = 1802268530
 	KTXNQDFontFamilyIDAttribute = 1718578804
-	KTXNQDFontNameAttribute = 1718514798
-	KTXNQDFontSizeAttribute = 1936292453
-	KTXNQDFontStyleAttribute = 1717658469
+	KTXNQDFontNameAttribute     = 1718514798
+	KTXNQDFontSizeAttribute     = 1936292453
+	KTXNQDFontStyleAttribute    = 1717658469
 )
 
 const (
-	KTXNFontSizeAttributeSize = 4
-	KTXNQDFontColorAttributeSize = 6
+	KTXNFontSizeAttributeSize       = 4
+	KTXNQDFontColorAttributeSize    = 6
 	KTXNQDFontFamilyIDAttributeSize = 2
-	KTXNQDFontNameAttributeSize = 256
-	KTXNQDFontSizeAttributeSize = 2
-	KTXNQDFontStyleAttributeSize = 1
+	KTXNQDFontNameAttributeSize     = 256
+	KTXNQDFontSizeAttributeSize     = 2
+	KTXNQDFontStyleAttributeSize    = 1
 )
 
 const (
-	KTXNReadOnly = 1
+	KTXNReadOnly  = 1
 	KTXNReadWrite = 0
 )
 
 const (
 	KTXNCenterTab = 1
-	KTXNLeftTab = 0
-	KTXNRightTab = -1
+	KTXNLeftTab   = 0
+	KTXNRightTab  = -1
 )
 
 const (
-	KTXNScrollUnitsInLines = 1
-	KTXNScrollUnitsInPixels = 0
+	KTXNScrollUnitsInLines     = 1
+	KTXNScrollUnitsInPixels    = 0
 	KTXNScrollUnitsInViewRects = 2
 )
 
 const (
 	KTXNSelectionOff = 0
-	KTXNSelectionOn = 1
+	KTXNSelectionOn  = 1
 )
 
 const (
-	KTXNShowEnd = 1
+	KTXNShowEnd   = 1
 	KTXNShowStart = 0
 )
 
 const (
 	KTXNMultipleStylesPerTextDocumentResType = 1937013100
-	KTXNSingleStylePerTextDocumentResType = 1297109842
+	KTXNSingleStylePerTextDocumentResType    = 1297109842
 )
 
 const (
-	KTXNSupportEditCommandProcessing = 1
-	KTXNSupportEditCommandUpdating = 2
-	KTXNSupportFontCommandProcessing = 16
-	KTXNSupportFontCommandUpdating = 32
+	KTXNSupportEditCommandProcessing       = 1
+	KTXNSupportEditCommandUpdating         = 2
+	KTXNSupportFontCommandProcessing       = 16
+	KTXNSupportFontCommandUpdating         = 32
 	KTXNSupportSpellCheckCommandProcessing = 4
-	KTXNSupportSpellCheckCommandUpdating = 8
+	KTXNSupportSpellCheckCommandUpdating   = 8
 )
 
 const (
-	KTXNMacOSEncoding = 1
+	KTXNMacOSEncoding         = 1
 	KTXNSystemDefaultEncoding = 0
-	KTXNUnicodeEncoding = 2
+	KTXNUnicodeEncoding       = 2
 )
 
 const (
 	KTXNRichTextFormatData = 1381254688
-	KTXNTextData = 1413830740
-	KTXNUnicodeTextData = 1970567284
+	KTXNTextData           = 1413830740
+	KTXNUnicodeTextData    = 1970567284
 )
 
 const (
-	KTXNMultipleFrameType = 3
-	KTXNPageFrameType = 2
+	KTXNMultipleFrameType      = 3
+	KTXNPageFrameType          = 2
 	KTXNTextEditStyleFrameType = 1
 )
 
 const (
-	KTXNATSUIFontFeaturesAttribute = 1635018341
+	KTXNATSUIFontFeaturesAttribute   = 1635018341
 	KTXNATSUIFontVariationsAttribute = 1635022433
-	KTXNATSUIStyle = 1634956396
-	KTXNTextEncodingAttribute = 1701733220
-	KTXNURLAttribute = 1970433121
+	KTXNATSUIStyle                   = 1634956396
+	KTXNTextEncodingAttribute        = 1701733220
+	KTXNURLAttribute                 = 1970433121
 )
 
 const (
-	KTXNATSUIStyleSize = 8
+	KTXNATSUIStyleSize            = 8
 	KTXNTextEncodingAttributeSize = 4
 )
 
 const (
-	KTXNAIFFFile = 1095321158
-	KTXNTextFile = 1413830740
-	KTXNTextensionFile = 1954051182
+	KTXNAIFFFile        = 1095321158
+	KTXNTextFile        = 1413830740
+	KTXNTextensionFile  = 1954051182
 	KTXNUnicodeTextFile = 1970567284
 )
 
 const (
-	KTXNRunCountBit = 1
+	KTXNRunCountBit       = 1
 	KTXNTextInputCountBit = 0
 )
 
 const (
-	KTXNAllCountMask = 3
-	KTXNRunCountMask = 2
+	KTXNAllCountMask       = 3
+	KTXNRunCountMask       = 2
 	KTXNTextInputCountMask = 1
 )
 
 const (
-	KTXNAlignCenterAction = 9
-	KTXNAlignLeftAction = 8
-	KTXNAlignRightAction = 10
-	KTXNChangeFontAction = 4
+	KTXNAlignCenterAction     = 9
+	KTXNAlignLeftAction       = 8
+	KTXNAlignRightAction      = 10
+	KTXNChangeFontAction      = 4
 	KTXNChangeFontColorAction = 5
-	KTXNChangeFontSizeAction = 6
-	KTXNChangeStyleAction = 7
-	KTXNClearAction = 3
-	KTXNCutAction = 1
-	KTXNDropAction = 11
-	KTXNFontFeatureAction = 13
-	KTXNFontVariationAction = 14
-	KTXNMoveAction = 12
-	KTXNPasteAction = 2
-	KTXNTypingAction = 0
-	KTXNUndoLastAction = 1024
+	KTXNChangeFontSizeAction  = 6
+	KTXNChangeStyleAction     = 7
+	KTXNClearAction           = 3
+	KTXNCutAction             = 1
+	KTXNDropAction            = 11
+	KTXNFontFeatureAction     = 13
+	KTXNFontVariationAction   = 14
+	KTXNMoveAction            = 12
+	KTXNPasteAction           = 2
+	KTXNTypingAction          = 0
+	KTXNUndoLastAction        = 1024
 )
 
 const (
-	KTXNEndOffset = 2147483647
-	KTXNStartOffset = 0
+	KTXNEndOffset           = 2147483647
+	KTXNStartOffset         = 0
 	KTXNUseCurrentSelection = 4294967295
 )
 
 const (
 	KTXNUseBottomline = 1
-	KTXNUseInline = 0
+	KTXNUseInline     = 0
 )
 
 const (
@@ -5926,20 +5972,20 @@ const (
 )
 
 const (
-	KTXNDestinationRectKey = 1
+	KTXNDestinationRectKey         = 1
 	KTXNHorizontalScrollBarRectKey = 4
-	KTXNTextRectKey = 2
-	KTXNVerticalScrollBarRectKey = 3
-	KTXNViewRectKey = 0
+	KTXNTextRectKey                = 2
+	KTXNVerticalScrollBarRectKey   = 3
+	KTXNViewRectKey                = 0
 )
 
 const (
-	KTXNWillDefaultToATSUIBit = 0
+	KTXNWillDefaultToATSUIBit       = 0
 	KTXNWillDefaultToCarbonEventBit = 1
 )
 
 const (
-	KTXNWillDefaultToATSUIMask = 1
+	KTXNWillDefaultToATSUIMask       = 1
 	KTXNWillDefaultToCarbonEventMask = 2
 )
 
@@ -5948,136 +5994,136 @@ const (
 )
 
 const (
-	KTSMTEDocumentInterfaceType = 1953322053
+	KTSMTEDocumentInterfaceType       = 1953322053
 	KTextServiceDocumentInterfaceType = 1953724003
-	KUnicodeDocument = 1969516387
-	KUnicodeDocumentInterfaceType = 1969516387
+	KUnicodeDocument                  = 1969516387
+	KUnicodeDocumentInterfaceType     = 1969516387
 )
 
 const (
-	KIMJaTypingMethodKana = 1801547361
-	KIMJaTypingMethodProperty = 1786018160
-	KIMJaTypingMethodRoman = 1919905121
-	KTextServiceInputModePropertyTag = 1768778093
+	KIMJaTypingMethodKana                 = 1801547361
+	KIMJaTypingMethodProperty             = 1786018160
+	KIMJaTypingMethodRoman                = 1919905121
+	KTextServiceInputModePropertyTag      = 1768778093
 	KTextServiceJaTypingMethodPropertyTag = 1786018160
 )
 
 const (
-	KThemeActiveAlertBackgroundBrush = 3
-	KThemeActiveDialogBackgroundBrush = 1
-	KThemeActiveModelessDialogBackgroundBrush = 5
-	KThemeActiveUtilityWindowBackgroundBrush = 7
-	KThemeChasingArrowsBrush = 13
-	KThemeDocumentWindowBackgroundBrush = 15
-	KThemeDragHiliteBrush = 14
-	KThemeFinderWindowBackgroundBrush = 16
-	KThemeIconLabelBackgroundBrush = 11
-	KThemeInactiveAlertBackgroundBrush = 4
-	KThemeInactiveDialogBackgroundBrush = 2
+	KThemeActiveAlertBackgroundBrush            = 3
+	KThemeActiveDialogBackgroundBrush           = 1
+	KThemeActiveModelessDialogBackgroundBrush   = 5
+	KThemeActiveUtilityWindowBackgroundBrush    = 7
+	KThemeChasingArrowsBrush                    = 13
+	KThemeDocumentWindowBackgroundBrush         = 15
+	KThemeDragHiliteBrush                       = 14
+	KThemeFinderWindowBackgroundBrush           = 16
+	KThemeIconLabelBackgroundBrush              = 11
+	KThemeInactiveAlertBackgroundBrush          = 4
+	KThemeInactiveDialogBackgroundBrush         = 2
 	KThemeInactiveModelessDialogBackgroundBrush = 6
-	KThemeInactiveUtilityWindowBackgroundBrush = 8
-	KThemeListViewBackgroundBrush = 10
-	KThemeListViewSeparatorBrush = 12
-	KThemeListViewSortColumnBackgroundBrush = 9
+	KThemeInactiveUtilityWindowBackgroundBrush  = 8
+	KThemeListViewBackgroundBrush               = 10
+	KThemeListViewSeparatorBrush                = 12
+	KThemeListViewSortColumnBackgroundBrush     = 9
 )
 
 const (
-	KThemeActiveAlertTextColor = 3
-	KThemeActiveBevelButtonTextColor = 15
-	KThemeActiveDialogTextColor = 1
-	KThemeActiveModelessDialogTextColor = 5
-	KThemeActivePlacardTextColor = 9
-	KThemeActivePopupButtonTextColor = 18
-	KThemeActivePushButtonTextColor = 12
-	KThemeActiveWindowHeaderTextColor = 7
-	KThemeIconLabelTextColor = 21
-	KThemeInactiveAlertTextColor = 4
-	KThemeInactiveBevelButtonTextColor = 16
-	KThemeInactiveDialogTextColor = 2
+	KThemeActiveAlertTextColor            = 3
+	KThemeActiveBevelButtonTextColor      = 15
+	KThemeActiveDialogTextColor           = 1
+	KThemeActiveModelessDialogTextColor   = 5
+	KThemeActivePlacardTextColor          = 9
+	KThemeActivePopupButtonTextColor      = 18
+	KThemeActivePushButtonTextColor       = 12
+	KThemeActiveWindowHeaderTextColor     = 7
+	KThemeIconLabelTextColor              = 21
+	KThemeInactiveAlertTextColor          = 4
+	KThemeInactiveBevelButtonTextColor    = 16
+	KThemeInactiveDialogTextColor         = 2
 	KThemeInactiveModelessDialogTextColor = 6
-	KThemeInactivePlacardTextColor = 10
-	KThemeInactivePopupButtonTextColor = 19
-	KThemeInactivePushButtonTextColor = 13
-	KThemeInactiveWindowHeaderTextColor = 8
-	KThemeListViewTextColor = 22
-	KThemePressedBevelButtonTextColor = 17
-	KThemePressedPlacardTextColor = 11
-	KThemePressedPopupButtonTextColor = 20
-	KThemePressedPushButtonTextColor = 14
+	KThemeInactivePlacardTextColor        = 10
+	KThemeInactivePopupButtonTextColor    = 19
+	KThemeInactivePushButtonTextColor     = 13
+	KThemeInactiveWindowHeaderTextColor   = 8
+	KThemeListViewTextColor               = 22
+	KThemePressedBevelButtonTextColor     = 17
+	KThemePressedPlacardTextColor         = 11
+	KThemePressedPopupButtonTextColor     = 20
+	KThemePressedPushButtonTextColor      = 14
 )
 
 const (
-	KThemeActiveDocumentWindowTitleTextColor = 23
-	KThemeActiveMenuItemTextColor = 34
-	KThemeActiveMovableModalWindowTitleTextColor = 25
-	KThemeActivePopupLabelTextColor = 37
-	KThemeActivePopupWindowTitleColor = 29
-	KThemeActiveRootMenuTextColor = 31
-	KThemeActiveUtilityWindowTitleTextColor = 27
-	KThemeDisabledMenuItemTextColor = 36
-	KThemeDisabledRootMenuTextColor = 33
-	KThemeInactiveDocumentWindowTitleTextColor = 24
+	KThemeActiveDocumentWindowTitleTextColor       = 23
+	KThemeActiveMenuItemTextColor                  = 34
+	KThemeActiveMovableModalWindowTitleTextColor   = 25
+	KThemeActivePopupLabelTextColor                = 37
+	KThemeActivePopupWindowTitleColor              = 29
+	KThemeActiveRootMenuTextColor                  = 31
+	KThemeActiveUtilityWindowTitleTextColor        = 27
+	KThemeDisabledMenuItemTextColor                = 36
+	KThemeDisabledRootMenuTextColor                = 33
+	KThemeInactiveDocumentWindowTitleTextColor     = 24
 	KThemeInactiveMovableModalWindowTitleTextColor = 26
-	KThemeInactivePopupLabelTextColor = 38
-	KThemeInactivePopupWindowTitleColor = 30
-	KThemeInactiveUtilityWindowTitleTextColor = 28
-	KThemeSelectedMenuItemTextColor = 35
-	KThemeSelectedRootMenuTextColor = 32
+	KThemeInactivePopupLabelTextColor              = 38
+	KThemeInactivePopupWindowTitleColor            = 30
+	KThemeInactiveUtilityWindowTitleTextColor      = 28
+	KThemeSelectedMenuItemTextColor                = 35
+	KThemeSelectedRootMenuTextColor                = 32
 )
 
 const (
-	KThemeActivePopupArrowBrush = 20
-	KThemeActiveScrollBarDelimiterBrush = 17
-	KThemeAppleGuideCoachmarkBrush = 23
-	KThemeFocusHighlightBrush = 19
-	KThemeInactivePopupArrowBrush = 22
+	KThemeActivePopupArrowBrush           = 20
+	KThemeActiveScrollBarDelimiterBrush   = 17
+	KThemeAppleGuideCoachmarkBrush        = 23
+	KThemeFocusHighlightBrush             = 19
+	KThemeInactivePopupArrowBrush         = 22
 	KThemeInactiveScrollBarDelimiterBrush = 18
-	KThemePressedPopupArrowBrush = 21
+	KThemePressedPopupArrowBrush          = 21
 )
 
 const (
-	KThemeAdornmentNoShadow = 1024
+	KThemeAdornmentNoShadow   = 1024
 	KThemeAdornmentShadowOnly = 2048
 )
 
 const (
-	KThemeAdornmentArrowDoubleArrow = 256
-	KThemeAdornmentArrowDownArrow = 128
-	KThemeAdornmentArrowLeftArrow = 64
-	KThemeAdornmentArrowRightArrow = 1024
-	KThemeAdornmentArrowUpArrow = 512
-	KThemeAdornmentDefault = 1
-	KThemeAdornmentDrawIndicatorOnly = 32
-	KThemeAdornmentFocus = 4
-	KThemeAdornmentHeaderButtonLeftNeighborSelected = 64
-	KThemeAdornmentHeaderButtonNoShadow = 1024
-	KThemeAdornmentHeaderButtonNoSortArrow = 4096
+	KThemeAdornmentArrowDoubleArrow                  = 256
+	KThemeAdornmentArrowDownArrow                    = 128
+	KThemeAdornmentArrowLeftArrow                    = 64
+	KThemeAdornmentArrowRightArrow                   = 1024
+	KThemeAdornmentArrowUpArrow                      = 512
+	KThemeAdornmentDefault                           = 1
+	KThemeAdornmentDrawIndicatorOnly                 = 32
+	KThemeAdornmentFocus                             = 4
+	KThemeAdornmentHeaderButtonLeftNeighborSelected  = 64
+	KThemeAdornmentHeaderButtonNoShadow              = 1024
+	KThemeAdornmentHeaderButtonNoSortArrow           = 4096
 	KThemeAdornmentHeaderButtonRightNeighborSelected = 128
-	KThemeAdornmentHeaderButtonShadowOnly = 2048
-	KThemeAdornmentHeaderButtonSortUp = 256
-	KThemeAdornmentHeaderMenuButton = 512
-	KThemeAdornmentNone = 0
-	KThemeAdornmentRightToLeft = 16
+	KThemeAdornmentHeaderButtonShadowOnly            = 2048
+	KThemeAdornmentHeaderButtonSortUp                = 256
+	KThemeAdornmentHeaderMenuButton                  = 512
+	KThemeAdornmentNone                              = 0
+	KThemeAdornmentRightToLeft                       = 16
 )
 
 const (
-	KThemeAppearanceFileNameTag = 1953000805
-	KThemeDesktopPatternNameTag = 1885434990
-	KThemeDesktopPatternTag = 1885434996
-	KThemeDesktopPictureAliasTag = 1685086572
+	KThemeAppearanceFileNameTag      = 1953000805
+	KThemeDesktopPatternNameTag      = 1885434990
+	KThemeDesktopPatternTag          = 1885434996
+	KThemeDesktopPictureAliasTag     = 1685086572
 	KThemeDesktopPictureAlignmentTag = 1685086574
-	KThemeDesktopPictureNameTag = 1685089901
-	KThemeExamplePictureIDTag = 1701865827
-	KThemeHighlightColorNameTag = 1751346797
-	KThemeSmallSystemFontTag = 1936552806
-	KThemeSmoothFontEnabledTag = 1936551791
-	KThemeSmoothFontMinSizeTag = 1936551795
-	KThemeSoundMaskTag = 1936552811
-	KThemeSoundTrackNameTag = 1936614516
-	KThemeSystemFontTag = 1818719078
-	KThemeUserDefinedTag = 1970496882
-	KThemeViewsFontSizeTag = 1986425722
-	KThemeViewsFontTag = 1986424436
+	KThemeDesktopPictureNameTag      = 1685089901
+	KThemeExamplePictureIDTag        = 1701865827
+	KThemeHighlightColorNameTag      = 1751346797
+	KThemeSmallSystemFontTag         = 1936552806
+	KThemeSmoothFontEnabledTag       = 1936551791
+	KThemeSmoothFontMinSizeTag       = 1936551795
+	KThemeSoundMaskTag               = 1936552811
+	KThemeSoundTrackNameTag          = 1936614516
+	KThemeSystemFontTag              = 1818719078
+	KThemeUserDefinedTag             = 1970496882
+	KThemeViewsFontSizeTag           = 1986425722
+	KThemeViewsFontTag               = 1986424436
 )
 
 const (
@@ -6088,121 +6134,121 @@ const (
 )
 
 const (
-	KThemeAliasArrowCursor = 2
-	KThemeArrowCursor = 0
-	KThemeClosedHandCursor = 8
-	KThemeContextualMenuArrowCursor = 3
-	KThemeCopyArrowCursor = 1
-	KThemeCountingDownHandCursor = 12
+	KThemeAliasArrowCursor            = 2
+	KThemeArrowCursor                 = 0
+	KThemeClosedHandCursor            = 8
+	KThemeContextualMenuArrowCursor   = 3
+	KThemeCopyArrowCursor             = 1
+	KThemeCountingDownHandCursor      = 12
 	KThemeCountingUpAndDownHandCursor = 13
-	KThemeCountingUpHandCursor = 11
-	KThemeCrossCursor = 5
-	KThemeIBeamCursor = 4
-	KThemeNotAllowedCursor = 18
-	KThemeOpenHandCursor = 9
-	KThemePlusCursor = 6
-	KThemePointingHandCursor = 10
-	KThemePoofCursor = 22
-	KThemeResizeDownCursor = 20
-	KThemeResizeLeftCursor = 15
-	KThemeResizeLeftRightCursor = 17
-	KThemeResizeRightCursor = 16
-	KThemeResizeUpCursor = 19
-	KThemeResizeUpDownCursor = 21
-	KThemeSpinningCursor = 14
-	KThemeWatchCursor = 7
+	KThemeCountingUpHandCursor        = 11
+	KThemeCrossCursor                 = 5
+	KThemeIBeamCursor                 = 4
+	KThemeNotAllowedCursor            = 18
+	KThemeOpenHandCursor              = 9
+	KThemePlusCursor                  = 6
+	KThemePointingHandCursor          = 10
+	KThemePoofCursor                  = 22
+	KThemeResizeDownCursor            = 20
+	KThemeResizeLeftCursor            = 15
+	KThemeResizeLeftRightCursor       = 17
+	KThemeResizeRightCursor           = 16
+	KThemeResizeUpCursor              = 19
+	KThemeResizeUpDownCursor          = 21
+	KThemeSpinningCursor              = 14
+	KThemeWatchCursor                 = 7
 )
 
 const (
-	KThemeArrowDown = 1
-	KThemeArrowLeft = 0
+	KThemeArrowDown  = 1
+	KThemeArrowLeft  = 0
 	KThemeArrowRight = 2
-	KThemeArrowUp = 3
+	KThemeArrowUp    = 3
 )
 
 const (
 	KThemeBackgroundListViewWindowHeader = 4
-	KThemeBackgroundMetal = 6
-	KThemeBackgroundPlacard = 2
-	KThemeBackgroundSecondaryGroupBox = 5
-	KThemeBackgroundTabPane = 1
-	KThemeBackgroundWindowHeader = 3
+	KThemeBackgroundMetal                = 6
+	KThemeBackgroundPlacard              = 2
+	KThemeBackgroundSecondaryGroupBox    = 5
+	KThemeBackgroundTabPane              = 1
+	KThemeBackgroundWindowHeader         = 3
 )
 
 const (
-	KThemeBevelButtonInset = 31
-	KThemePushButtonInset = 32
-	KThemePushButtonInsetSmall = 33
-	KThemePushButtonTextured = 32
+	KThemeBevelButtonInset        = 31
+	KThemePushButtonInset         = 32
+	KThemePushButtonInsetSmall    = 33
+	KThemePushButtonTextured      = 32
 	KThemePushButtonTexturedSmall = 33
-	KThemeRoundButtonHelp = 34
+	KThemeRoundButtonHelp         = 34
 )
 
 const (
-	KThemeBrushActiveAreaFill = 26
-	KThemeBrushAlertBackgroundActive = 3
-	KThemeBrushAlertBackgroundInactive = 4
-	KThemeBrushAlternatePrimaryHighlightColor = -5
-	KThemeBrushAppleGuideCoachmark = 23
-	KThemeBrushBevelActiveDark = 45
-	KThemeBrushBevelActiveLight = 44
-	KThemeBrushBevelInactiveDark = 47
-	KThemeBrushBevelInactiveLight = 46
-	KThemeBrushBlack = -1
-	KThemeBrushButtonActiveDarkHighlight = 33
-	KThemeBrushButtonActiveDarkShadow = 32
-	KThemeBrushButtonActiveLightHighlight = 35
-	KThemeBrushButtonActiveLightShadow = 34
-	KThemeBrushButtonFaceActive = 29
-	KThemeBrushButtonFaceInactive = 30
-	KThemeBrushButtonFacePressed = 31
-	KThemeBrushButtonFrameActive = 27
-	KThemeBrushButtonFrameInactive = 28
-	KThemeBrushButtonInactiveDarkHighlight = 37
-	KThemeBrushButtonInactiveDarkShadow = 36
-	KThemeBrushButtonInactiveLightHighlight = 39
-	KThemeBrushButtonInactiveLightShadow = 38
-	KThemeBrushButtonPressedDarkHighlight = 41
-	KThemeBrushButtonPressedDarkShadow = 40
-	KThemeBrushButtonPressedLightHighlight = 43
-	KThemeBrushButtonPressedLightShadow = 42
-	KThemeBrushChasingArrows = 13
-	KThemeBrushDialogBackgroundActive = 1
-	KThemeBrushDialogBackgroundInactive = 2
-	KThemeBrushDocumentWindowBackground = 15
-	KThemeBrushDragHilite = 14
-	KThemeBrushDrawerBackground = 51
-	KThemeBrushFinderWindowBackground = 16
-	KThemeBrushFocusHighlight = 19
-	KThemeBrushIconLabelBackground = 11
-	KThemeBrushIconLabelBackgroundSelected = 24
-	KThemeBrushListViewBackground = 10
-	KThemeBrushListViewColumnDivider = 58
-	KThemeBrushListViewEvenRowBackground = 57
-	KThemeBrushListViewOddRowBackground = 56
-	KThemeBrushListViewSeparator = 12
-	KThemeBrushListViewSortColumnBackground = 9
-	KThemeBrushMenuBackground = 54
-	KThemeBrushMenuBackgroundSelected = 55
-	KThemeBrushModelessDialogBackgroundActive = 5
+	KThemeBrushActiveAreaFill                   = 26
+	KThemeBrushAlertBackgroundActive            = 3
+	KThemeBrushAlertBackgroundInactive          = 4
+	KThemeBrushAlternatePrimaryHighlightColor   = -5
+	KThemeBrushAppleGuideCoachmark              = 23
+	KThemeBrushBevelActiveDark                  = 45
+	KThemeBrushBevelActiveLight                 = 44
+	KThemeBrushBevelInactiveDark                = 47
+	KThemeBrushBevelInactiveLight               = 46
+	KThemeBrushBlack                            = -1
+	KThemeBrushButtonActiveDarkHighlight        = 33
+	KThemeBrushButtonActiveDarkShadow           = 32
+	KThemeBrushButtonActiveLightHighlight       = 35
+	KThemeBrushButtonActiveLightShadow          = 34
+	KThemeBrushButtonFaceActive                 = 29
+	KThemeBrushButtonFaceInactive               = 30
+	KThemeBrushButtonFacePressed                = 31
+	KThemeBrushButtonFrameActive                = 27
+	KThemeBrushButtonFrameInactive              = 28
+	KThemeBrushButtonInactiveDarkHighlight      = 37
+	KThemeBrushButtonInactiveDarkShadow         = 36
+	KThemeBrushButtonInactiveLightHighlight     = 39
+	KThemeBrushButtonInactiveLightShadow        = 38
+	KThemeBrushButtonPressedDarkHighlight       = 41
+	KThemeBrushButtonPressedDarkShadow          = 40
+	KThemeBrushButtonPressedLightHighlight      = 43
+	KThemeBrushButtonPressedLightShadow         = 42
+	KThemeBrushChasingArrows                    = 13
+	KThemeBrushDialogBackgroundActive           = 1
+	KThemeBrushDialogBackgroundInactive         = 2
+	KThemeBrushDocumentWindowBackground         = 15
+	KThemeBrushDragHilite                       = 14
+	KThemeBrushDrawerBackground                 = 51
+	KThemeBrushFinderWindowBackground           = 16
+	KThemeBrushFocusHighlight                   = 19
+	KThemeBrushIconLabelBackground              = 11
+	KThemeBrushIconLabelBackgroundSelected      = 24
+	KThemeBrushListViewBackground               = 10
+	KThemeBrushListViewColumnDivider            = 58
+	KThemeBrushListViewEvenRowBackground        = 57
+	KThemeBrushListViewOddRowBackground         = 56
+	KThemeBrushListViewSeparator                = 12
+	KThemeBrushListViewSortColumnBackground     = 9
+	KThemeBrushMenuBackground                   = 54
+	KThemeBrushMenuBackgroundSelected           = 55
+	KThemeBrushModelessDialogBackgroundActive   = 5
 	KThemeBrushModelessDialogBackgroundInactive = 6
-	KThemeBrushMovableModalBackground = 49
-	KThemeBrushNotificationWindowBackground = 48
-	KThemeBrushPopupArrowActive = 20
-	KThemeBrushPopupArrowInactive = 22
-	KThemeBrushPopupArrowPressed = 21
-	KThemeBrushPrimaryHighlightColor = -3
-	KThemeBrushScrollBarDelimiterActive = 17
-	KThemeBrushScrollBarDelimiterInactive = 18
-	KThemeBrushSecondaryHighlightColor = -4
-	KThemeBrushSheetBackground = 50
-	KThemeBrushSheetBackgroundOpaque = 50
-	KThemeBrushSheetBackgroundTransparent = 53
-	KThemeBrushStaticAreaFill = 25
-	KThemeBrushToolbarBackground = 52
-	KThemeBrushUtilityWindowBackgroundActive = 7
-	KThemeBrushUtilityWindowBackgroundInactive = 8
-	KThemeBrushWhite = -2
+	KThemeBrushMovableModalBackground           = 49
+	KThemeBrushNotificationWindowBackground     = 48
+	KThemeBrushPopupArrowActive                 = 20
+	KThemeBrushPopupArrowInactive               = 22
+	KThemeBrushPopupArrowPressed                = 21
+	KThemeBrushPrimaryHighlightColor            = -3
+	KThemeBrushScrollBarDelimiterActive         = 17
+	KThemeBrushScrollBarDelimiterInactive       = 18
+	KThemeBrushSecondaryHighlightColor          = -4
+	KThemeBrushSheetBackground                  = 50
+	KThemeBrushSheetBackgroundOpaque            = 50
+	KThemeBrushSheetBackgroundTransparent       = 53
+	KThemeBrushStaticAreaFill                   = 25
+	KThemeBrushToolbarBackground                = 52
+	KThemeBrushUtilityWindowBackgroundActive    = 7
+	KThemeBrushUtilityWindowBackgroundInactive  = 8
+	KThemeBrushWhite                            = -2
 )
 
 const (
@@ -6210,137 +6256,137 @@ const (
 )
 
 const (
-	KThemeButtonMixed = 2
-	KThemeButtonOff = 0
-	KThemeButtonOn = 1
-	KThemeDisclosureDown = 1
-	KThemeDisclosureLeft = 2
+	KThemeButtonMixed     = 2
+	KThemeButtonOff       = 0
+	KThemeButtonOn        = 1
+	KThemeDisclosureDown  = 1
+	KThemeDisclosureLeft  = 2
 	KThemeDisclosureRight = 0
 )
 
 const (
 	KThemeCheckBoxCheckMark = 1
-	KThemeCheckBoxClassicX = 0
+	KThemeCheckBoxClassicX  = 0
 )
 
 const (
-	KThemeArrowButtonMini = 24
-	KThemeArrowButtonSmall = 23
-	KThemeCheckBoxMini = 19
-	KThemeComboBoxMini = 18
-	KThemeIncDecButtonMini = 22
+	KThemeArrowButtonMini   = 24
+	KThemeArrowButtonSmall  = 23
+	KThemeCheckBoxMini      = 19
+	KThemeComboBoxMini      = 18
+	KThemeIncDecButtonMini  = 22
 	KThemeIncDecButtonSmall = 21
-	KThemePopupButtonMini = 30
+	KThemePopupButtonMini   = 30
 	KThemePopupButtonNormal = 28
-	KThemePopupButtonSmall = 29
-	KThemePushButtonMini = 27
-	KThemePushButtonNormal = 25
-	KThemePushButtonSmall = 26
-	KThemeRadioButtonMini = 20
+	KThemePopupButtonSmall  = 29
+	KThemePushButtonMini    = 27
+	KThemePushButtonNormal  = 25
+	KThemePushButtonSmall   = 26
+	KThemeRadioButtonMini   = 20
 )
 
 const (
 	KThemeCustomThemesFileType = 1935893870
-	KThemeDataFileType = 1953000805
-	KThemePlatinumFileType = 1886155886
-	KThemeSoundTrackFileType = 1953721956
+	KThemeDataFileType         = 1953000805
+	KThemePlatinumFileType     = 1886155886
+	KThemeSoundTrackFileType   = 1953721956
 )
 
 const (
-	KThemeAlertWindow = 3
-	KThemeDialogWindow = 1
-	KThemeDocumentWindow = 0
-	KThemeDrawerWindow = 11
-	KThemeMovableAlertWindow = 4
+	KThemeAlertWindow         = 3
+	KThemeDialogWindow        = 1
+	KThemeDocumentWindow      = 0
+	KThemeDrawerWindow        = 11
+	KThemeMovableAlertWindow  = 4
 	KThemeMovableDialogWindow = 2
-	KThemePlainDialogWindow = 5
-	KThemePopupWindow = 7
-	KThemeShadowDialogWindow = 6
-	KThemeSheetWindow = 10
-	KThemeUtilitySideWindow = 9
-	KThemeUtilityWindow = 8
+	KThemePlainDialogWindow   = 5
+	KThemePopupWindow         = 7
+	KThemeShadowDialogWindow  = 6
+	KThemeSheetWindow         = 10
+	KThemeUtilitySideWindow   = 9
+	KThemeUtilityWindow       = 8
 )
 
 const (
-	KThemeDragSoundDragging = 1685217639
-	KThemeDragSoundGrowUtilWindow = 1969713775
-	KThemeDragSoundGrowWindow = 2003268207
-	KThemeDragSoundMoveAlert = 1634561910
-	KThemeDragSoundMoveDialog = 1684893558
-	KThemeDragSoundMoveIcon = 1768779638
-	KThemeDragSoundMoveUtilWindow = 1970106230
-	KThemeDragSoundMoveWindow = 2003660662
-	KThemeDragSoundNone = 0
+	KThemeDragSoundDragging                 = 1685217639
+	KThemeDragSoundGrowUtilWindow           = 1969713775
+	KThemeDragSoundGrowWindow               = 2003268207
+	KThemeDragSoundMoveAlert                = 1634561910
+	KThemeDragSoundMoveDialog               = 1684893558
+	KThemeDragSoundMoveIcon                 = 1768779638
+	KThemeDragSoundMoveUtilWindow           = 1970106230
+	KThemeDragSoundMoveWindow               = 2003660662
+	KThemeDragSoundNone                     = 0
 	KThemeDragSoundScrollBarArrowDecreasing = 1935827300
 	KThemeDragSoundScrollBarArrowIncreasing = 1935827305
-	KThemeDragSoundScrollBarGhost = 1935828840
-	KThemeDragSoundScrollBarThumb = 1935832168
-	KThemeDragSoundSliderGhost = 1936484200
-	KThemeDragSoundSliderThumb = 1936487528
+	KThemeDragSoundScrollBarGhost           = 1935828840
+	KThemeDragSoundScrollBarThumb           = 1935832168
+	KThemeDragSoundSliderGhost              = 1936484200
+	KThemeDragSoundSliderThumb              = 1936487528
 )
 
 const (
-	KThemeGrowDown = 8
-	KThemeGrowLeft = 1
+	KThemeGrowDown  = 8
+	KThemeGrowLeft  = 1
 	KThemeGrowRight = 2
-	KThemeGrowUp = 4
+	KThemeGrowUp    = 4
 )
 
 const (
-	KThemeBottomInsideArrowPressed = 32
+	KThemeBottomInsideArrowPressed  = 32
 	KThemeBottomOutsideArrowPressed = 64
-	KThemeBottomTrackPressed = 16
-	KThemeLeftInsideArrowPressed = 2
-	KThemeLeftOutsideArrowPressed = 1
-	KThemeLeftTrackPressed = 4
-	KThemeRightInsideArrowPressed = 32
-	KThemeRightOutsideArrowPressed = 64
-	KThemeRightTrackPressed = 16
-	KThemeThumbPressed = 8
-	KThemeTopInsideArrowPressed = 2
-	KThemeTopOutsideArrowPressed = 1
-	KThemeTopTrackPressed = 4
+	KThemeBottomTrackPressed        = 16
+	KThemeLeftInsideArrowPressed    = 2
+	KThemeLeftOutsideArrowPressed   = 1
+	KThemeLeftTrackPressed          = 4
+	KThemeRightInsideArrowPressed   = 32
+	KThemeRightOutsideArrowPressed  = 64
+	KThemeRightTrackPressed         = 16
+	KThemeThumbPressed              = 8
+	KThemeTopInsideArrowPressed     = 2
+	KThemeTopOutsideArrowPressed    = 1
+	KThemeTopTrackPressed           = 4
 )
 
 const (
-	KThemeLargeIndeterminateBar = 8
-	KThemeLargeProgressBar = 7
+	KThemeLargeIndeterminateBar  = 8
+	KThemeLargeProgressBar       = 7
 	KThemeMediumIndeterminateBar = 4
-	KThemeMediumProgressBar = 3
-	KThemeMediumScrollBar = 0
-	KThemeMediumSlider = 2
-	KThemeMiniIndeterminateBar = 12
-	KThemeMiniProgressBar = 11
-	KThemeMiniScrollBar = 9
-	KThemeMiniSlider = 10
-	KThemeSmallScrollBar = 1
-	KThemeSmallSlider = 6
+	KThemeMediumProgressBar      = 3
+	KThemeMediumScrollBar        = 0
+	KThemeMediumSlider           = 2
+	KThemeMiniIndeterminateBar   = 12
+	KThemeMiniProgressBar        = 11
+	KThemeMiniScrollBar          = 9
+	KThemeMiniSlider             = 10
+	KThemeSmallScrollBar         = 1
+	KThemeSmallSlider            = 6
 )
 
 const (
-	KThemeMenuActive = 0
+	KThemeMenuActive   = 0
 	KThemeMenuDisabled = 3
 	KThemeMenuSelected = 1
 )
 
 const (
 	KThemeMenuBarInactive = 2
-	KThemeMenuBarNormal = 0
+	KThemeMenuBarNormal   = 0
 	KThemeMenuBarSelected = 1
 )
 
 const (
-	KThemeMenuItemAlignRight = 8192
-	KThemeMenuItemAtBottom = 512
-	KThemeMenuItemAtTop = 256
-	KThemeMenuItemHasIcon = 32768
-	KThemeMenuItemHierBackground = 1024
-	KThemeMenuItemHierarchical = 1
-	KThemeMenuItemNoBackground = 16384
-	KThemeMenuItemPlain = 0
+	KThemeMenuItemAlignRight      = 8192
+	KThemeMenuItemAtBottom        = 512
+	KThemeMenuItemAtTop           = 256
+	KThemeMenuItemHasIcon         = 32768
+	KThemeMenuItemHierBackground  = 1024
+	KThemeMenuItemHierarchical    = 1
+	KThemeMenuItemNoBackground    = 16384
+	KThemeMenuItemPlain           = 0
 	KThemeMenuItemPopUpBackground = 2048
 	KThemeMenuItemScrollDownArrow = 3
-	KThemeMenuItemScrollUpArrow = 2
+	KThemeMenuItemScrollUpArrow   = 2
 )
 
 const (
@@ -6349,215 +6395,215 @@ const (
 
 const (
 	KThemeMenuTypeHierarchical = 2
-	KThemeMenuTypeInactive = 256
-	KThemeMenuTypePopUp = 1
-	KThemeMenuTypePullDown = 0
+	KThemeMenuTypeInactive     = 256
+	KThemeMenuTypePopUp        = 1
+	KThemeMenuTypePullDown     = 0
 )
 
 const (
-	KThemeMetricBestListHeaderHeight = 20
-	KThemeMetricCheckBoxGlyphHeight = 2
-	KThemeMetricDisclosureButtonSize = 17
-	KThemeMetricProgressBarThickness = 32
-	KThemeMetricRadioButtonGlyphHeight = 3
+	KThemeMetricBestListHeaderHeight      = 20
+	KThemeMetricCheckBoxGlyphHeight       = 2
+	KThemeMetricDisclosureButtonSize      = 17
+	KThemeMetricProgressBarThickness      = 32
+	KThemeMetricRadioButtonGlyphHeight    = 3
 	KThemeMetricSmallProgressBarThickness = 58
 )
 
 const (
-	KThemeMetricComboBoxLargeBottomShadowOffset = 70
-	KThemeMetricComboBoxLargeDisclosureWidth = 74
-	KThemeMetricComboBoxLargeRightShadowOffset = 71
-	KThemeMetricComboBoxMiniBottomShadowOffset = 81
-	KThemeMetricComboBoxMiniDisclosureWidth = 82
-	KThemeMetricComboBoxMiniRightShadowOffset = 83
-	KThemeMetricComboBoxSmallBottomShadowOffset = 72
-	KThemeMetricComboBoxSmallDisclosureWidth = 75
-	KThemeMetricComboBoxSmallRightShadowOffset = 73
-	KThemeMetricLittleArrowsMiniHeight = 84
-	KThemeMetricLittleArrowsMiniWidth = 85
-	KThemeMetricLittleArrowsSmallHeight = 86
-	KThemeMetricLittleArrowsSmallWidth = 87
-	KThemeMetricMiniCheckBoxHeight = 88
-	KThemeMetricMiniCheckBoxWidth = 89
-	KThemeMetricMiniDisclosureButtonHeight = 90
-	KThemeMetricMiniDisclosureButtonWidth = 91
-	KThemeMetricMiniHSliderHeight = 92
-	KThemeMetricMiniHSliderMinThumbWidth = 93
-	KThemeMetricMiniHSliderTickHeight = 94
-	KThemeMetricMiniHSliderTickOffset = 95
-	KThemeMetricMiniPopupButtonHeight = 96
-	KThemeMetricMiniPullDownHeight = 97
-	KThemeMetricMiniPushButtonHeight = 98
-	KThemeMetricMiniRadioButtonHeight = 99
-	KThemeMetricMiniRadioButtonWidth = 100
-	KThemeMetricMiniTabCapsWidth = 101
-	KThemeMetricMiniTabFrameOverlap = 102
-	KThemeMetricMiniTabHeight = 103
-	KThemeMetricMiniTabOverlap = 104
-	KThemeMetricMiniVSliderMinThumbHeight = 105
-	KThemeMetricMiniVSliderTickOffset = 106
-	KThemeMetricMiniVSliderTickWidth = 107
-	KThemeMetricMiniVSliderWidth = 108
-	KThemeMetricRoundTextFieldContentHeight = 80
-	KThemeMetricRoundTextFieldContentInsetBottom = 78
-	KThemeMetricRoundTextFieldContentInsetLeft = 76
-	KThemeMetricRoundTextFieldContentInsetRight = 77
-	KThemeMetricRoundTextFieldContentInsetTop = 79
-	KThemeMetricRoundTextFieldContentInsetWithIconLeft = 109
-	KThemeMetricRoundTextFieldContentInsetWithIconRight = 110
-	KThemeMetricRoundTextFieldMiniContentHeight = 111
-	KThemeMetricRoundTextFieldMiniContentInsetBottom = 112
-	KThemeMetricRoundTextFieldMiniContentInsetLeft = 113
-	KThemeMetricRoundTextFieldMiniContentInsetRight = 114
-	KThemeMetricRoundTextFieldMiniContentInsetTop = 115
-	KThemeMetricRoundTextFieldMiniContentInsetWithIconLeft = 116
-	KThemeMetricRoundTextFieldMiniContentInsetWithIconRight = 117
-	KThemeMetricRoundTextFieldSmallContentHeight = 118
-	KThemeMetricRoundTextFieldSmallContentInsetBottom = 119
-	KThemeMetricRoundTextFieldSmallContentInsetLeft = 120
-	KThemeMetricRoundTextFieldSmallContentInsetRight = 121
-	KThemeMetricRoundTextFieldSmallContentInsetTop = 122
-	KThemeMetricRoundTextFieldSmallContentInsetWithIconLeft = 123
+	KThemeMetricComboBoxLargeBottomShadowOffset              = 70
+	KThemeMetricComboBoxLargeDisclosureWidth                 = 74
+	KThemeMetricComboBoxLargeRightShadowOffset               = 71
+	KThemeMetricComboBoxMiniBottomShadowOffset               = 81
+	KThemeMetricComboBoxMiniDisclosureWidth                  = 82
+	KThemeMetricComboBoxMiniRightShadowOffset                = 83
+	KThemeMetricComboBoxSmallBottomShadowOffset              = 72
+	KThemeMetricComboBoxSmallDisclosureWidth                 = 75
+	KThemeMetricComboBoxSmallRightShadowOffset               = 73
+	KThemeMetricLittleArrowsMiniHeight                       = 84
+	KThemeMetricLittleArrowsMiniWidth                        = 85
+	KThemeMetricLittleArrowsSmallHeight                      = 86
+	KThemeMetricLittleArrowsSmallWidth                       = 87
+	KThemeMetricMiniCheckBoxHeight                           = 88
+	KThemeMetricMiniCheckBoxWidth                            = 89
+	KThemeMetricMiniDisclosureButtonHeight                   = 90
+	KThemeMetricMiniDisclosureButtonWidth                    = 91
+	KThemeMetricMiniHSliderHeight                            = 92
+	KThemeMetricMiniHSliderMinThumbWidth                     = 93
+	KThemeMetricMiniHSliderTickHeight                        = 94
+	KThemeMetricMiniHSliderTickOffset                        = 95
+	KThemeMetricMiniPopupButtonHeight                        = 96
+	KThemeMetricMiniPullDownHeight                           = 97
+	KThemeMetricMiniPushButtonHeight                         = 98
+	KThemeMetricMiniRadioButtonHeight                        = 99
+	KThemeMetricMiniRadioButtonWidth                         = 100
+	KThemeMetricMiniTabCapsWidth                             = 101
+	KThemeMetricMiniTabFrameOverlap                          = 102
+	KThemeMetricMiniTabHeight                                = 103
+	KThemeMetricMiniTabOverlap                               = 104
+	KThemeMetricMiniVSliderMinThumbHeight                    = 105
+	KThemeMetricMiniVSliderTickOffset                        = 106
+	KThemeMetricMiniVSliderTickWidth                         = 107
+	KThemeMetricMiniVSliderWidth                             = 108
+	KThemeMetricRoundTextFieldContentHeight                  = 80
+	KThemeMetricRoundTextFieldContentInsetBottom             = 78
+	KThemeMetricRoundTextFieldContentInsetLeft               = 76
+	KThemeMetricRoundTextFieldContentInsetRight              = 77
+	KThemeMetricRoundTextFieldContentInsetTop                = 79
+	KThemeMetricRoundTextFieldContentInsetWithIconLeft       = 109
+	KThemeMetricRoundTextFieldContentInsetWithIconRight      = 110
+	KThemeMetricRoundTextFieldMiniContentHeight              = 111
+	KThemeMetricRoundTextFieldMiniContentInsetBottom         = 112
+	KThemeMetricRoundTextFieldMiniContentInsetLeft           = 113
+	KThemeMetricRoundTextFieldMiniContentInsetRight          = 114
+	KThemeMetricRoundTextFieldMiniContentInsetTop            = 115
+	KThemeMetricRoundTextFieldMiniContentInsetWithIconLeft   = 116
+	KThemeMetricRoundTextFieldMiniContentInsetWithIconRight  = 117
+	KThemeMetricRoundTextFieldSmallContentHeight             = 118
+	KThemeMetricRoundTextFieldSmallContentInsetBottom        = 119
+	KThemeMetricRoundTextFieldSmallContentInsetLeft          = 120
+	KThemeMetricRoundTextFieldSmallContentInsetRight         = 121
+	KThemeMetricRoundTextFieldSmallContentInsetTop           = 122
+	KThemeMetricRoundTextFieldSmallContentInsetWithIconLeft  = 123
 	KThemeMetricRoundTextFieldSmallContentInsetWithIconRight = 124
-	KThemeMetricSmallPaneSplitterHeight = 127
-	KThemeMetricSmallTabFrameOverlap = 125
-	KThemeMetricSmallTabOverlap = 126
+	KThemeMetricSmallPaneSplitterHeight                      = 127
+	KThemeMetricSmallTabFrameOverlap                         = 125
+	KThemeMetricSmallTabOverlap                              = 126
 )
 
 const (
-	KThemeMetricDisclosureButtonHeight = 17
-	KThemeMetricDisclosureButtonWidth = 22
-	KThemeMetricLargeRoundButtonSize = 40
-	KThemeMetricPaneSplitterHeight = 29
-	KThemeMetricRelevanceIndicatorHeight = 37
-	KThemeMetricRoundButtonSize = 18
-	KThemeMetricSmallCheckBoxHeight = 21
-	KThemeMetricSmallCheckBoxWidth = 51
+	KThemeMetricDisclosureButtonHeight      = 17
+	KThemeMetricDisclosureButtonWidth       = 22
+	KThemeMetricLargeRoundButtonSize        = 40
+	KThemeMetricPaneSplitterHeight          = 29
+	KThemeMetricRelevanceIndicatorHeight    = 37
+	KThemeMetricRoundButtonSize             = 18
+	KThemeMetricSmallCheckBoxHeight         = 21
+	KThemeMetricSmallCheckBoxWidth          = 51
 	KThemeMetricSmallDisclosureButtonHeight = 23
-	KThemeMetricSmallDisclosureButtonWidth = 24
-	KThemeMetricSmallHSliderHeight = 43
-	KThemeMetricSmallHSliderMinThumbWidth = 54
-	KThemeMetricSmallHSliderTickHeight = 44
-	KThemeMetricSmallHSliderTickOffset = 56
-	KThemeMetricSmallPushButtonHeight = 35
-	KThemeMetricSmallRadioButtonHeight = 36
-	KThemeMetricSmallRadioButtonWidth = 53
-	KThemeMetricSmallVSliderMinThumbHeight = 55
-	KThemeMetricSmallVSliderTickOffset = 57
-	KThemeMetricSmallVSliderTickWidth = 48
-	KThemeMetricSmallVSliderWidth = 47
+	KThemeMetricSmallDisclosureButtonWidth  = 24
+	KThemeMetricSmallHSliderHeight          = 43
+	KThemeMetricSmallHSliderMinThumbWidth   = 54
+	KThemeMetricSmallHSliderTickHeight      = 44
+	KThemeMetricSmallHSliderTickOffset      = 56
+	KThemeMetricSmallPushButtonHeight       = 35
+	KThemeMetricSmallRadioButtonHeight      = 36
+	KThemeMetricSmallRadioButtonWidth       = 53
+	KThemeMetricSmallVSliderMinThumbHeight  = 55
+	KThemeMetricSmallVSliderTickOffset      = 57
+	KThemeMetricSmallVSliderTickWidth       = 48
+	KThemeMetricSmallVSliderWidth           = 47
 )
 
 const (
-	KThemeMetricButtonRoundedHeight = 136
-	KThemeMetricButtonRoundedRecessedHeight = 137
-	KThemeMetricHSliderTickOffset = 128
-	KThemeMetricScrollBarMinThumbHeight = 132
-	KThemeMetricScrollBarMinThumbWidth = 133
-	KThemeMetricSliderMinThumbHeight = 130
-	KThemeMetricSliderMinThumbWidth = 131
+	KThemeMetricButtonRoundedHeight          = 136
+	KThemeMetricButtonRoundedRecessedHeight  = 137
+	KThemeMetricHSliderTickOffset            = 128
+	KThemeMetricScrollBarMinThumbHeight      = 132
+	KThemeMetricScrollBarMinThumbWidth       = 133
+	KThemeMetricSliderMinThumbHeight         = 130
+	KThemeMetricSliderMinThumbWidth          = 131
 	KThemeMetricSmallScrollBarMinThumbHeight = 134
-	KThemeMetricSmallScrollBarMinThumbWidth = 135
-	KThemeMetricVSliderTickOffset = 129
+	KThemeMetricSmallScrollBarMinThumbWidth  = 135
+	KThemeMetricVSliderTickOffset            = 129
 )
 
 const (
-	KThemeMetricCheckBoxHeight = 2
-	KThemeMetricCheckBoxWidth = 50
-	KThemeMetricDisclosureTriangleHeight = 25
-	KThemeMetricDisclosureTriangleWidth = 26
-	KThemeMetricEditTextFrameOutset = 5
-	KThemeMetricEditTextWhitespace = 4
-	KThemeMetricFocusRectOutset = 7
-	KThemeMetricHSliderHeight = 41
-	KThemeMetricHSliderTickHeight = 42
-	KThemeMetricImageWellThickness = 8
-	KThemeMetricLargeProgressBarThickness = 32
-	KThemeMetricLargeTabCapsWidth = 11
-	KThemeMetricLargeTabHeight = 10
-	KThemeMetricListBoxFrameOutset = 6
-	KThemeMetricListHeaderHeight = 20
-	KThemeMetricLittleArrowsHeight = 27
-	KThemeMetricLittleArrowsWidth = 28
-	KThemeMetricMenuExcludedMarkColumnWidth = 64
-	KThemeMetricMenuIconTrailingEdgeMargin = 69
-	KThemeMetricMenuIndentWidth = 68
-	KThemeMetricMenuMarkColumnWidth = 63
-	KThemeMetricMenuMarkIndent = 65
-	KThemeMetricMenuTextLeadingEdgeMargin = 66
-	KThemeMetricMenuTextTrailingEdgeMargin = 67
-	KThemeMetricNormalProgressBarThickness = 58
-	KThemeMetricPopupButtonHeight = 30
-	KThemeMetricPrimaryGroupBoxContentInset = 61
-	KThemeMetricProgressBarShadowOutset = 59
-	KThemeMetricPullDownHeight = 33
-	KThemeMetricPushButtonHeight = 19
-	KThemeMetricRadioButtonHeight = 3
-	KThemeMetricRadioButtonWidth = 52
-	KThemeMetricResizeControlHeight = 38
-	KThemeMetricScrollBarOverlap = 9
-	KThemeMetricScrollBarWidth = 0
+	KThemeMetricCheckBoxHeight                = 2
+	KThemeMetricCheckBoxWidth                 = 50
+	KThemeMetricDisclosureTriangleHeight      = 25
+	KThemeMetricDisclosureTriangleWidth       = 26
+	KThemeMetricEditTextFrameOutset           = 5
+	KThemeMetricEditTextWhitespace            = 4
+	KThemeMetricFocusRectOutset               = 7
+	KThemeMetricHSliderHeight                 = 41
+	KThemeMetricHSliderTickHeight             = 42
+	KThemeMetricImageWellThickness            = 8
+	KThemeMetricLargeProgressBarThickness     = 32
+	KThemeMetricLargeTabCapsWidth             = 11
+	KThemeMetricLargeTabHeight                = 10
+	KThemeMetricListBoxFrameOutset            = 6
+	KThemeMetricListHeaderHeight              = 20
+	KThemeMetricLittleArrowsHeight            = 27
+	KThemeMetricLittleArrowsWidth             = 28
+	KThemeMetricMenuExcludedMarkColumnWidth   = 64
+	KThemeMetricMenuIconTrailingEdgeMargin    = 69
+	KThemeMetricMenuIndentWidth               = 68
+	KThemeMetricMenuMarkColumnWidth           = 63
+	KThemeMetricMenuMarkIndent                = 65
+	KThemeMetricMenuTextLeadingEdgeMargin     = 66
+	KThemeMetricMenuTextTrailingEdgeMargin    = 67
+	KThemeMetricNormalProgressBarThickness    = 58
+	KThemeMetricPopupButtonHeight             = 30
+	KThemeMetricPrimaryGroupBoxContentInset   = 61
+	KThemeMetricProgressBarShadowOutset       = 59
+	KThemeMetricPullDownHeight                = 33
+	KThemeMetricPushButtonHeight              = 19
+	KThemeMetricRadioButtonHeight             = 3
+	KThemeMetricRadioButtonWidth              = 52
+	KThemeMetricResizeControlHeight           = 38
+	KThemeMetricScrollBarOverlap              = 9
+	KThemeMetricScrollBarWidth                = 0
 	KThemeMetricSecondaryGroupBoxContentInset = 62
-	KThemeMetricSmallPopupButtonHeight = 31
-	KThemeMetricSmallProgressBarShadowOutset = 60
-	KThemeMetricSmallPullDownHeight = 34
-	KThemeMetricSmallResizeControlHeight = 39
-	KThemeMetricSmallScrollBarWidth = 1
-	KThemeMetricSmallTabCapsWidth = 16
-	KThemeMetricSmallTabHeight = 15
-	KThemeMetricTabFrameOverlap = 12
-	KThemeMetricTabIndentOrStyle = 13
-	KThemeMetricTabOverlap = 14
-	KThemeMetricTitleBarControlsHeight = 49
-	KThemeMetricVSliderTickWidth = 46
-	KThemeMetricVSliderWidth = 45
+	KThemeMetricSmallPopupButtonHeight        = 31
+	KThemeMetricSmallProgressBarShadowOutset  = 60
+	KThemeMetricSmallPullDownHeight           = 34
+	KThemeMetricSmallResizeControlHeight      = 39
+	KThemeMetricSmallScrollBarWidth           = 1
+	KThemeMetricSmallTabCapsWidth             = 16
+	KThemeMetricSmallTabHeight                = 15
+	KThemeMetricTabFrameOverlap               = 12
+	KThemeMetricTabIndentOrStyle              = 13
+	KThemeMetricTabOverlap                    = 14
+	KThemeMetricTitleBarControlsHeight        = 49
+	KThemeMetricVSliderTickWidth              = 46
+	KThemeMetricVSliderWidth                  = 45
 )
 
 const (
-	KThemeMetricSeparatorSize = 138
-	KThemeMetricTexturedPushButtonHeight = 139
+	KThemeMetricSeparatorSize                 = 138
+	KThemeMetricTexturedPushButtonHeight      = 139
 	KThemeMetricTexturedSmallPushButtonHeight = 140
 )
 
 const (
-	KThemeDblClickCollapseTag = 1668246636
-	KThemeHighlightColorTag = 1751347052
-	KThemeNameTag = 1851878757
+	KThemeDblClickCollapseTag    = 1668246636
+	KThemeHighlightColorTag      = 1751347052
+	KThemeNameTag                = 1851878757
 	KThemeScrollBarArrowStyleTag = 1935827314
 	KThemeScrollBarThumbStyleTag = 1935832168
-	KThemeSoundsEnabledTag = 1936614515
-	KThemeVariantBaseTintTag = 1953066612
-	KThemeVariantNameTag = 1986097774
+	KThemeSoundsEnabledTag       = 1936614515
+	KThemeVariantBaseTintTag     = 1953066612
+	KThemeVariantNameTag         = 1986097774
 )
 
 const (
-	KThemeDefaultAdornment = 1
-	KThemeDrawIndicatorOnly = 32
-	KThemeFocusAdornment = 4
-	KThemeNoAdornment = 0
+	KThemeDefaultAdornment     = 1
+	KThemeDrawIndicatorOnly    = 32
+	KThemeFocusAdornment       = 4
+	KThemeNoAdornment          = 0
 	KThemeRightToLeftAdornment = 16
 )
 
 const (
 	KThemeControlSoundsMask = 4
-	KThemeFinderSoundsMask = 8
-	KThemeMenuSoundsMask = 2
-	KThemeNoSounds = 0
-	KThemeWindowSoundsMask = 1
+	KThemeFinderSoundsMask  = 8
+	KThemeMenuSoundsMask    = 2
+	KThemeNoSounds          = 0
+	KThemeWindowSoundsMask  = 1
 )
 
 const (
-	KThemeDisclosureButton = 6
-	KThemeLargeBevelButton = 9
-	KThemeLargeRoundButton = 12
+	KThemeDisclosureButton  = 6
+	KThemeLargeBevelButton  = 9
+	KThemeLargeRoundButton  = 12
 	KThemeMediumBevelButton = 3
-	KThemeMiniCheckBox = 19
-	KThemeMiniRadioButton = 20
-	KThemeNormalCheckBox = 1
+	KThemeMiniCheckBox      = 19
+	KThemeMiniRadioButton   = 20
+	KThemeNormalCheckBox    = 1
 	KThemeNormalRadioButton = 2
-	KThemeSmallBevelButton = 8
-	KThemeSmallCheckBox = 13
-	KThemeSmallRadioButton = 14
+	KThemeSmallBevelButton  = 8
+	KThemeSmallCheckBox     = 13
+	KThemeSmallRadioButton  = 14
 )
 
 const (
@@ -6567,24 +6613,24 @@ const (
 )
 
 const (
-	KThemeArrowButton = 4
-	KThemeBevelButton = 3
-	KThemeBevelButtonLarge = 9
-	KThemeBevelButtonMedium = 3
-	KThemeBevelButtonSmall = 8
-	KThemeCheckBox = 1
-	KThemeCheckBoxSmall = 13
-	KThemeComboBox = 16
-	KThemeComboBoxSmall = 17
+	KThemeArrowButton        = 4
+	KThemeBevelButton        = 3
+	KThemeBevelButtonLarge   = 9
+	KThemeBevelButtonMedium  = 3
+	KThemeBevelButtonSmall   = 8
+	KThemeCheckBox           = 1
+	KThemeCheckBoxSmall      = 13
+	KThemeComboBox           = 16
+	KThemeComboBoxSmall      = 17
 	KThemeDisclosureTriangle = 6
-	KThemeIncDecButton = 7
-	KThemeListHeaderButton = 10
-	KThemePopupButton = 5
-	KThemePushButton = 0
-	KThemeRadioButton = 2
-	KThemeRadioButtonSmall = 14
-	KThemeRoundButton = 11
-	KThemeRoundButtonLarge = 12
+	KThemeIncDecButton       = 7
+	KThemeListHeaderButton   = 10
+	KThemePopupButton        = 5
+	KThemePushButton         = 0
+	KThemeRadioButton        = 2
+	KThemeRadioButtonSmall   = 14
+	KThemeRoundButton        = 11
+	KThemeRoundButtonLarge   = 12
 	KThemeRoundedBevelButton = 15
 )
 
@@ -6594,166 +6640,166 @@ const (
 
 const (
 	KThemeIndeterminateBar = 4
-	KThemeProgressBar = 3
-	KThemeScrollBar = 0
-	KThemeSlider = 2
+	KThemeProgressBar      = 3
+	KThemeScrollBar        = 0
+	KThemeSlider           = 2
 )
 
 const (
 	KThemeScrollBarArrowsLowerRight = 1
-	KThemeScrollBarArrowsSingle = 0
+	KThemeScrollBarArrowsSingle     = 0
 )
 
 const (
-	KThemeIndeterminateBarLarge = 8
+	KThemeIndeterminateBarLarge  = 8
 	KThemeIndeterminateBarMedium = 4
-	KThemeProgressBarLarge = 7
-	KThemeProgressBarMedium = 3
-	KThemeRelevanceBar = 5
-	KThemeScrollBarMedium = 0
-	KThemeScrollBarSmall = 1
-	KThemeSliderMedium = 2
-	KThemeSliderSmall = 6
+	KThemeProgressBarLarge       = 7
+	KThemeProgressBarMedium      = 3
+	KThemeRelevanceBar           = 5
+	KThemeScrollBarMedium        = 0
+	KThemeScrollBarSmall         = 1
+	KThemeSliderMedium           = 2
+	KThemeSliderSmall            = 6
 )
 
 const (
 	KThemeIndeterminateBarMini = 12
-	KThemeProgressBarMini = 11
-	KThemeScrollBarMini = 9
-	KThemeSliderMini = 10
+	KThemeProgressBarMini      = 11
+	KThemeScrollBarMini        = 9
+	KThemeSliderMini           = 10
 )
 
 const (
-	KThemeScrollBarThumbNormal = 0
+	KThemeScrollBarThumbNormal       = 0
 	KThemeScrollBarThumbProportional = 1
 )
 
 const (
-	KThemeLargeTabHeight = 21
+	KThemeLargeTabHeight    = 21
 	KThemeLargeTabHeightMax = 24
-	KThemeSmallTabHeight = 16
+	KThemeSmallTabHeight    = 16
 	KThemeSmallTabHeightMax = 19
-	KThemeTabPaneOverlap = 3
+	KThemeTabPaneOverlap    = 3
 )
 
 const (
-	KThemeSoundAlertClose = 1634497635
-	KThemeSoundAlertOpen = 1634693230
-	KThemeSoundBalloonClose = 1651273315
-	KThemeSoundBalloonOpen = 1651273327
-	KThemeSoundBevelEnter = 1650816613
-	KThemeSoundBevelExit = 1650816632
-	KThemeSoundBevelPress = 1650816624
-	KThemeSoundBevelRelease = 1650816626
-	KThemeSoundButtonEnter = 1651797605
-	KThemeSoundButtonExit = 1651797624
-	KThemeSoundButtonPress = 1651797616
-	KThemeSoundButtonRelease = 1651797618
-	KThemeSoundCancelButtonEnter = 1667396709
-	KThemeSoundCancelButtonExit = 1667396728
-	KThemeSoundCancelButtonPress = 1667396720
-	KThemeSoundCancelButtonRelease = 1667396722
-	KThemeSoundCheckboxEnter = 1667787621
-	KThemeSoundCheckboxExit = 1667787640
-	KThemeSoundCheckboxPress = 1667787632
-	KThemeSoundCheckboxRelease = 1667787634
-	KThemeSoundCopyDone = 1717792868
-	KThemeSoundDefaultButtonEnter = 1684173925
-	KThemeSoundDefaultButtonExit = 1684173944
-	KThemeSoundDefaultButtonPress = 1684173936
-	KThemeSoundDefaultButtonRelease = 1684173938
-	KThemeSoundDialogClose = 1684825955
-	KThemeSoundDialogOpen = 1685024878
-	KThemeSoundDisclosureEnter = 1685283685
-	KThemeSoundDisclosureExit = 1685283704
-	KThemeSoundDisclosurePress = 1685283696
-	KThemeSoundDisclosureRelease = 1685283698
-	KThemeSoundDiskEject = 1685285733
-	KThemeSoundDiskInsert = 1685285737
-	KThemeSoundDragTargetDrop = 1685349490
-	KThemeSoundDragTargetHilite = 1685350505
-	KThemeSoundDragTargetUnhilite = 1685353832
-	KThemeSoundEmptyTrash = 1718907507
-	KThemeSoundFinderDragOffIcon = 1717858150
-	KThemeSoundFinderDragOnIcon = 1717858158
-	KThemeSoundLaunchApp = 1718378864
-	KThemeSoundLittleArrowDnPress = 1818322032
-	KThemeSoundLittleArrowDnRelease = 1818322034
-	KThemeSoundLittleArrowEnter = 1818325605
-	KThemeSoundLittleArrowExit = 1818325624
-	KThemeSoundLittleArrowUpPress = 1818326384
-	KThemeSoundLittleArrowUpRelease = 1818326386
-	KThemeSoundMenuClose = 1835955555
-	KThemeSoundMenuItemHilite = 1835955561
-	KThemeSoundMenuItemRelease = 1835955571
-	KThemeSoundMenuOpen = 1835955567
-	KThemeSoundNewItem = 1718510967
-	KThemeSoundNone = 0
-	KThemeSoundPopupEnter = 1886351461
-	KThemeSoundPopupExit = 1886351480
-	KThemeSoundPopupPress = 1886351472
-	KThemeSoundPopupRelease = 1886351474
-	KThemeSoundPopupWindowClose = 1886872428
-	KThemeSoundPopupWindowOpen = 1886875504
-	KThemeSoundRadioEnter = 1918985317
-	KThemeSoundRadioExit = 1918985336
-	KThemeSoundRadioPress = 1918985328
-	KThemeSoundRadioRelease = 1918985330
-	KThemeSoundReceiveDrop = 1717858928
-	KThemeSoundResolveAlias = 1718772076
-	KThemeSoundScrollArrowEnter = 1935827301
-	KThemeSoundScrollArrowExit = 1935827320
-	KThemeSoundScrollArrowPress = 1935827312
-	KThemeSoundScrollArrowRelease = 1935827314
-	KThemeSoundScrollEndOfTrack = 1935832165
-	KThemeSoundScrollTrackPress = 1935832176
-	KThemeSoundSelectItem = 1718838636
-	KThemeSoundSliderEndOfTrack = 1936487525
-	KThemeSoundSliderTrackPress = 1936487536
-	KThemeSoundTabEnter = 1952539237
-	KThemeSoundTabExit = 1952539256
-	KThemeSoundTabPressed = 1952539248
-	KThemeSoundTabRelease = 1952539250
-	KThemeSoundUtilWinCloseEnter = 1969450085
-	KThemeSoundUtilWinCloseExit = 1969450104
-	KThemeSoundUtilWinClosePress = 1969450096
-	KThemeSoundUtilWinCloseRelease = 1969450098
-	KThemeSoundUtilWinCollapseEnter = 1969450853
-	KThemeSoundUtilWinCollapseExit = 1969450872
-	KThemeSoundUtilWinCollapsePress = 1969450864
+	KThemeSoundAlertClose             = 1634497635
+	KThemeSoundAlertOpen              = 1634693230
+	KThemeSoundBalloonClose           = 1651273315
+	KThemeSoundBalloonOpen            = 1651273327
+	KThemeSoundBevelEnter             = 1650816613
+	KThemeSoundBevelExit              = 1650816632
+	KThemeSoundBevelPress             = 1650816624
+	KThemeSoundBevelRelease           = 1650816626
+	KThemeSoundButtonEnter            = 1651797605
+	KThemeSoundButtonExit             = 1651797624
+	KThemeSoundButtonPress            = 1651797616
+	KThemeSoundButtonRelease          = 1651797618
+	KThemeSoundCancelButtonEnter      = 1667396709
+	KThemeSoundCancelButtonExit       = 1667396728
+	KThemeSoundCancelButtonPress      = 1667396720
+	KThemeSoundCancelButtonRelease    = 1667396722
+	KThemeSoundCheckboxEnter          = 1667787621
+	KThemeSoundCheckboxExit           = 1667787640
+	KThemeSoundCheckboxPress          = 1667787632
+	KThemeSoundCheckboxRelease        = 1667787634
+	KThemeSoundCopyDone               = 1717792868
+	KThemeSoundDefaultButtonEnter     = 1684173925
+	KThemeSoundDefaultButtonExit      = 1684173944
+	KThemeSoundDefaultButtonPress     = 1684173936
+	KThemeSoundDefaultButtonRelease   = 1684173938
+	KThemeSoundDialogClose            = 1684825955
+	KThemeSoundDialogOpen             = 1685024878
+	KThemeSoundDisclosureEnter        = 1685283685
+	KThemeSoundDisclosureExit         = 1685283704
+	KThemeSoundDisclosurePress        = 1685283696
+	KThemeSoundDisclosureRelease      = 1685283698
+	KThemeSoundDiskEject              = 1685285733
+	KThemeSoundDiskInsert             = 1685285737
+	KThemeSoundDragTargetDrop         = 1685349490
+	KThemeSoundDragTargetHilite       = 1685350505
+	KThemeSoundDragTargetUnhilite     = 1685353832
+	KThemeSoundEmptyTrash             = 1718907507
+	KThemeSoundFinderDragOffIcon      = 1717858150
+	KThemeSoundFinderDragOnIcon       = 1717858158
+	KThemeSoundLaunchApp              = 1718378864
+	KThemeSoundLittleArrowDnPress     = 1818322032
+	KThemeSoundLittleArrowDnRelease   = 1818322034
+	KThemeSoundLittleArrowEnter       = 1818325605
+	KThemeSoundLittleArrowExit        = 1818325624
+	KThemeSoundLittleArrowUpPress     = 1818326384
+	KThemeSoundLittleArrowUpRelease   = 1818326386
+	KThemeSoundMenuClose              = 1835955555
+	KThemeSoundMenuItemHilite         = 1835955561
+	KThemeSoundMenuItemRelease        = 1835955571
+	KThemeSoundMenuOpen               = 1835955567
+	KThemeSoundNewItem                = 1718510967
+	KThemeSoundNone                   = 0
+	KThemeSoundPopupEnter             = 1886351461
+	KThemeSoundPopupExit              = 1886351480
+	KThemeSoundPopupPress             = 1886351472
+	KThemeSoundPopupRelease           = 1886351474
+	KThemeSoundPopupWindowClose       = 1886872428
+	KThemeSoundPopupWindowOpen        = 1886875504
+	KThemeSoundRadioEnter             = 1918985317
+	KThemeSoundRadioExit              = 1918985336
+	KThemeSoundRadioPress             = 1918985328
+	KThemeSoundRadioRelease           = 1918985330
+	KThemeSoundReceiveDrop            = 1717858928
+	KThemeSoundResolveAlias           = 1718772076
+	KThemeSoundScrollArrowEnter       = 1935827301
+	KThemeSoundScrollArrowExit        = 1935827320
+	KThemeSoundScrollArrowPress       = 1935827312
+	KThemeSoundScrollArrowRelease     = 1935827314
+	KThemeSoundScrollEndOfTrack       = 1935832165
+	KThemeSoundScrollTrackPress       = 1935832176
+	KThemeSoundSelectItem             = 1718838636
+	KThemeSoundSliderEndOfTrack       = 1936487525
+	KThemeSoundSliderTrackPress       = 1936487536
+	KThemeSoundTabEnter               = 1952539237
+	KThemeSoundTabExit                = 1952539256
+	KThemeSoundTabPressed             = 1952539248
+	KThemeSoundTabRelease             = 1952539250
+	KThemeSoundUtilWinCloseEnter      = 1969450085
+	KThemeSoundUtilWinCloseExit       = 1969450104
+	KThemeSoundUtilWinClosePress      = 1969450096
+	KThemeSoundUtilWinCloseRelease    = 1969450098
+	KThemeSoundUtilWinCollapseEnter   = 1969450853
+	KThemeSoundUtilWinCollapseExit    = 1969450872
+	KThemeSoundUtilWinCollapsePress   = 1969450864
 	KThemeSoundUtilWinCollapseRelease = 1969450866
-	KThemeSoundUtilWinDragBoundary = 1969513060
-	KThemeSoundUtilWinZoomEnter = 1970957669
-	KThemeSoundUtilWinZoomExit = 1970957688
-	KThemeSoundUtilWinZoomPress = 1970957680
-	KThemeSoundUtilWinZoomRelease = 1970957682
-	KThemeSoundUtilWindowActivate = 1969316724
-	KThemeSoundUtilWindowClose = 1969450099
+	KThemeSoundUtilWinDragBoundary    = 1969513060
+	KThemeSoundUtilWinZoomEnter       = 1970957669
+	KThemeSoundUtilWinZoomExit        = 1970957688
+	KThemeSoundUtilWinZoomPress       = 1970957680
+	KThemeSoundUtilWinZoomRelease     = 1970957682
+	KThemeSoundUtilWindowActivate     = 1969316724
+	KThemeSoundUtilWindowClose        = 1969450099
 	KThemeSoundUtilWindowCollapseDown = 1969584240
-	KThemeSoundUtilWindowCollapseUp = 1969450860
-	KThemeSoundUtilWindowOpen = 1970237550
-	KThemeSoundUtilWindowZoomIn = 1970957673
-	KThemeSoundUtilWindowZoomOut = 1970957679
-	KThemeSoundWindowActivate = 2002871156
-	KThemeSoundWindowClose = 2003004531
-	KThemeSoundWindowCloseEnter = 2003004517
-	KThemeSoundWindowCloseExit = 2003004536
-	KThemeSoundWindowClosePress = 2003004528
-	KThemeSoundWindowCloseRelease = 2003004530
-	KThemeSoundWindowCollapseDown = 2003138672
-	KThemeSoundWindowCollapseEnter = 2003005285
-	KThemeSoundWindowCollapseExit = 2003005304
-	KThemeSoundWindowCollapsePress = 2003005296
-	KThemeSoundWindowCollapseRelease = 2003005298
-	KThemeSoundWindowCollapseUp = 2003005292
-	KThemeSoundWindowDragBoundary = 2003067492
-	KThemeSoundWindowOpen = 2003791982
-	KThemeSoundWindowZoomEnter = 2004512101
-	KThemeSoundWindowZoomExit = 2004512120
-	KThemeSoundWindowZoomIn = 2004512105
-	KThemeSoundWindowZoomOut = 2004512111
-	KThemeSoundWindowZoomPress = 2004512112
-	KThemeSoundWindowZoomRelease = 2004512114
+	KThemeSoundUtilWindowCollapseUp   = 1969450860
+	KThemeSoundUtilWindowOpen         = 1970237550
+	KThemeSoundUtilWindowZoomIn       = 1970957673
+	KThemeSoundUtilWindowZoomOut      = 1970957679
+	KThemeSoundWindowActivate         = 2002871156
+	KThemeSoundWindowClose            = 2003004531
+	KThemeSoundWindowCloseEnter       = 2003004517
+	KThemeSoundWindowCloseExit        = 2003004536
+	KThemeSoundWindowClosePress       = 2003004528
+	KThemeSoundWindowCloseRelease     = 2003004530
+	KThemeSoundWindowCollapseDown     = 2003138672
+	KThemeSoundWindowCollapseEnter    = 2003005285
+	KThemeSoundWindowCollapseExit     = 2003005304
+	KThemeSoundWindowCollapsePress    = 2003005296
+	KThemeSoundWindowCollapseRelease  = 2003005298
+	KThemeSoundWindowCollapseUp       = 2003005292
+	KThemeSoundWindowDragBoundary     = 2003067492
+	KThemeSoundWindowOpen             = 2003791982
+	KThemeSoundWindowZoomEnter        = 2004512101
+	KThemeSoundWindowZoomExit         = 2004512120
+	KThemeSoundWindowZoomIn           = 2004512105
+	KThemeSoundWindowZoomOut          = 2004512111
+	KThemeSoundWindowZoomPress        = 2004512112
+	KThemeSoundWindowZoomRelease      = 2004512114
 )
 
 const (
@@ -6761,58 +6807,58 @@ const (
 )
 
 const (
-	KThemeStateActive = 1
-	KThemeStateInactive = 0
-	KThemeStatePressed = 2
-	KThemeStateRollover = 6
-	KThemeStateUnavailable = 7
+	KThemeStateActive              = 1
+	KThemeStateInactive            = 0
+	KThemeStatePressed             = 2
+	KThemeStateRollover            = 6
+	KThemeStateUnavailable         = 7
 	KThemeStateUnavailableInactive = 8
 )
 
 const (
 	KThemeStatePressedDown = 3
-	KThemeStatePressedUp = 2
+	KThemeStatePressedUp   = 2
 )
 
 const (
-	KThemeAlertHeaderFont = 107
-	KThemeApplicationFont = 5
-	KThemeCurrentPortFont = 200
-	KThemeEmphasizedSystemFont = 4
-	KThemeLabelFont = 6
-	KThemeMenuItemCmdKeyFont = 103
-	KThemeMenuItemFont = 101
-	KThemeMenuItemMarkFont = 102
-	KThemeMenuTitleFont = 100
-	KThemeMiniSystemFont = 109
-	KThemePushButtonFont = 105
-	KThemeSmallEmphasizedSystemFont = 2
-	KThemeSmallSystemFont = 1
-	KThemeSpecifiedFont = 201
-	KThemeSystemFont = 0
-	KThemeSystemFontDetail = 7
+	KThemeAlertHeaderFont            = 107
+	KThemeApplicationFont            = 5
+	KThemeCurrentPortFont            = 200
+	KThemeEmphasizedSystemFont       = 4
+	KThemeLabelFont                  = 6
+	KThemeMenuItemCmdKeyFont         = 103
+	KThemeMenuItemFont               = 101
+	KThemeMenuItemMarkFont           = 102
+	KThemeMenuTitleFont              = 100
+	KThemeMiniSystemFont             = 109
+	KThemePushButtonFont             = 105
+	KThemeSmallEmphasizedSystemFont  = 2
+	KThemeSmallSystemFont            = 1
+	KThemeSpecifiedFont              = 201
+	KThemeSystemFont                 = 0
+	KThemeSystemFontDetail           = 7
 	KThemeSystemFontDetailEmphasized = 8
-	KThemeToolbarFont = 108
-	KThemeUtilityWindowTitleFont = 106
-	KThemeViewsFont = 3
-	KThemeWindowTitleFont = 104
+	KThemeToolbarFont                = 108
+	KThemeUtilityWindowTitleFont     = 106
+	KThemeViewsFont                  = 3
+	KThemeWindowTitleFont            = 104
 )
 
 const (
-	KThemeTabFront = 3
-	KThemeTabFrontInactive = 4
-	KThemeTabFrontUnavailable = 6
-	KThemeTabNonFront = 0
-	KThemeTabNonFrontInactive = 2
-	KThemeTabNonFrontPressed = 1
+	KThemeTabFront               = 3
+	KThemeTabFrontInactive       = 4
+	KThemeTabFrontUnavailable    = 6
+	KThemeTabNonFront            = 0
+	KThemeTabNonFrontInactive    = 2
+	KThemeTabNonFrontPressed     = 1
 	KThemeTabNonFrontUnavailable = 5
 )
 
 const (
-	KThemeTabEast = 2
+	KThemeTabEast  = 2
 	KThemeTabNorth = 0
 	KThemeTabSouth = 1
-	KThemeTabWest = 3
+	KThemeTabWest  = 3
 )
 
 const (
@@ -6821,47 +6867,47 @@ const (
 )
 
 const (
-	KThemeTextColorAlertActive = 3
-	KThemeTextColorAlertInactive = 4
-	KThemeTextColorBevelButtonActive = 15
-	KThemeTextColorBevelButtonInactive = 16
-	KThemeTextColorBevelButtonPressed = 17
-	KThemeTextColorDialogActive = 1
-	KThemeTextColorDialogInactive = 2
-	KThemeTextColorIconLabel = 21
-	KThemeTextColorListView = 22
-	KThemeTextColorModelessDialogActive = 5
+	KThemeTextColorAlertActive            = 3
+	KThemeTextColorAlertInactive          = 4
+	KThemeTextColorBevelButtonActive      = 15
+	KThemeTextColorBevelButtonInactive    = 16
+	KThemeTextColorBevelButtonPressed     = 17
+	KThemeTextColorDialogActive           = 1
+	KThemeTextColorDialogInactive         = 2
+	KThemeTextColorIconLabel              = 21
+	KThemeTextColorListView               = 22
+	KThemeTextColorModelessDialogActive   = 5
 	KThemeTextColorModelessDialogInactive = 6
-	KThemeTextColorPlacardActive = 9
-	KThemeTextColorPlacardInactive = 10
-	KThemeTextColorPlacardPressed = 11
-	KThemeTextColorPopupButtonActive = 18
-	KThemeTextColorPopupButtonInactive = 19
-	KThemeTextColorPopupButtonPressed = 20
-	KThemeTextColorPushButtonActive = 12
-	KThemeTextColorPushButtonInactive = 13
-	KThemeTextColorPushButtonPressed = 14
-	KThemeTextColorWindowHeaderActive = 7
-	KThemeTextColorWindowHeaderInactive = 8
+	KThemeTextColorPlacardActive          = 9
+	KThemeTextColorPlacardInactive        = 10
+	KThemeTextColorPlacardPressed         = 11
+	KThemeTextColorPopupButtonActive      = 18
+	KThemeTextColorPopupButtonInactive    = 19
+	KThemeTextColorPopupButtonPressed     = 20
+	KThemeTextColorPushButtonActive       = 12
+	KThemeTextColorPushButtonInactive     = 13
+	KThemeTextColorPushButtonPressed      = 14
+	KThemeTextColorWindowHeaderActive     = 7
+	KThemeTextColorWindowHeaderInactive   = 8
 )
 
 const (
-	KThemeTextColorDocumentWindowTitleActive = 23
-	KThemeTextColorDocumentWindowTitleInactive = 24
-	KThemeTextColorMenuItemActive = 34
-	KThemeTextColorMenuItemDisabled = 36
-	KThemeTextColorMenuItemSelected = 35
-	KThemeTextColorMovableModalWindowTitleActive = 25
+	KThemeTextColorDocumentWindowTitleActive       = 23
+	KThemeTextColorDocumentWindowTitleInactive     = 24
+	KThemeTextColorMenuItemActive                  = 34
+	KThemeTextColorMenuItemDisabled                = 36
+	KThemeTextColorMenuItemSelected                = 35
+	KThemeTextColorMovableModalWindowTitleActive   = 25
 	KThemeTextColorMovableModalWindowTitleInactive = 26
-	KThemeTextColorPopupLabelActive = 37
-	KThemeTextColorPopupLabelInactive = 38
-	KThemeTextColorPopupWindowTitleActive = 29
-	KThemeTextColorPopupWindowTitleInactive = 30
-	KThemeTextColorRootMenuActive = 31
-	KThemeTextColorRootMenuDisabled = 33
-	KThemeTextColorRootMenuSelected = 32
-	KThemeTextColorUtilityWindowTitleActive = 27
-	KThemeTextColorUtilityWindowTitleInactive = 28
+	KThemeTextColorPopupLabelActive                = 37
+	KThemeTextColorPopupLabelInactive              = 38
+	KThemeTextColorPopupWindowTitleActive          = 29
+	KThemeTextColorPopupWindowTitleInactive        = 30
+	KThemeTextColorRootMenuActive                  = 31
+	KThemeTextColorRootMenuDisabled                = 33
+	KThemeTextColorRootMenuSelected                = 32
+	KThemeTextColorUtilityWindowTitleActive        = 27
+	KThemeTextColorUtilityWindowTitleInactive      = 28
 )
 
 const (
@@ -6873,66 +6919,66 @@ const (
 )
 
 const (
-	KThemeTextColorBevelButtonStickyActive = 45
+	KThemeTextColorBevelButtonStickyActive   = 45
 	KThemeTextColorBevelButtonStickyInactive = 46
-	KThemeTextColorIconLabelSelected = 44
-	KThemeTextColorTabFrontActive = 39
-	KThemeTextColorTabFrontInactive = 42
-	KThemeTextColorTabNonFrontActive = 40
-	KThemeTextColorTabNonFrontInactive = 43
-	KThemeTextColorTabNonFrontPressed = 41
+	KThemeTextColorIconLabelSelected         = 44
+	KThemeTextColorTabFrontActive            = 39
+	KThemeTextColorTabFrontInactive          = 42
+	KThemeTextColorTabNonFrontActive         = 40
+	KThemeTextColorTabNonFrontInactive       = 43
+	KThemeTextColorTabNonFrontPressed        = 41
 )
 
 const (
 	KThemeThumbDownward = 2
-	KThemeThumbPlain = 0
-	KThemeThumbUpward = 1
+	KThemeThumbPlain    = 0
+	KThemeThumbUpward   = 1
 )
 
 const (
-	KThemeTrackActive = 0
-	KThemeTrackDisabled = 1
-	KThemeTrackInactive = 3
+	KThemeTrackActive          = 0
+	KThemeTrackDisabled        = 1
+	KThemeTrackInactive        = 3
 	KThemeTrackNothingToScroll = 2
 )
 
 const (
-	KThemeTrackHasFocus = 32
-	KThemeTrackHideTrack = 64
-	KThemeTrackHorizontal = 1
-	KThemeTrackNoScrollBarArrows = 16
-	KThemeTrackRightToLeft = 2
-	KThemeTrackShowThumb = 4
+	KThemeTrackHasFocus           = 32
+	KThemeTrackHideTrack          = 64
+	KThemeTrackHorizontal         = 1
+	KThemeTrackNoScrollBarArrows  = 16
+	KThemeTrackRightToLeft        = 2
+	KThemeTrackShowThumb          = 4
 	KThemeTrackThumbRgnIsNotGhost = 8
 )
 
 const (
-	KThemeWidgetCloseBox = 0
-	KThemeWidgetCollapseBox = 2
+	KThemeWidgetCloseBox      = 0
+	KThemeWidgetCollapseBox   = 2
 	KThemeWidgetDirtyCloseBox = 6
 	KThemeWidgetToolbarButton = 7
-	KThemeWidgetZoomBox = 1
+	KThemeWidgetZoomBox       = 1
 )
 
 const (
-	KThemeWindowHasCloseBox = 32
-	KThemeWindowHasCollapseBox = 64
-	KThemeWindowHasDirty = 512
-	KThemeWindowHasFullZoom = 24
-	KThemeWindowHasGrow = 1
+	KThemeWindowHasCloseBox       = 32
+	KThemeWindowHasCollapseBox    = 64
+	KThemeWindowHasDirty          = 512
+	KThemeWindowHasFullZoom       = 24
+	KThemeWindowHasGrow           = 1
 	KThemeWindowHasHorizontalZoom = 8
-	KThemeWindowHasTitleText = 128
-	KThemeWindowHasToolbarButton = 2048
-	KThemeWindowHasVerticalZoom = 16
-	KThemeWindowIsCollapsed = 256
+	KThemeWindowHasTitleText      = 128
+	KThemeWindowHasToolbarButton  = 2048
+	KThemeWindowHasVerticalZoom   = 16
+	KThemeWindowIsCollapsed       = 256
 )
 
 const (
 	KCenterOnScreen = 2
-	KFillScreen = 4
-	KFitToScreen = 3
-	KTiledOnScreen = 1
-	KUseBestGuess = 5
+	KFillScreen     = 4
+	KFitToScreen    = 3
+	KTiledOnScreen  = 1
+	KUseBestGuess   = 5
 )
 
 const (
@@ -6941,14 +6987,14 @@ const (
 )
 
 const (
-	KTranslateGetFileTranslationList = 0
-	KTranslateGetScrapTranslationList = 10
+	KTranslateGetFileTranslationList                 = 0
+	KTranslateGetScrapTranslationList                = 10
 	KTranslateGetScrapTranslationListConsideringData = 13
-	KTranslateGetTranslatedFilename = 3
-	KTranslateIdentifyFile = 1
-	KTranslateIdentifyScrap = 11
-	KTranslateTranslateFile = 2
-	KTranslateTranslateScrap = 12
+	KTranslateGetTranslatedFilename                  = 3
+	KTranslateIdentifyFile                           = 1
+	KTranslateIdentifyScrap                          = 11
+	KTranslateTranslateFile                          = 2
+	KTranslateTranslateScrap                         = 12
 )
 
 const (
@@ -6956,96 +7002,96 @@ const (
 )
 
 const (
-	KUIModeAllHidden = 3
-	KUIModeAllSuppressed = 4
-	KUIModeContentHidden = 2
+	KUIModeAllHidden         = 3
+	KUIModeAllSuppressed     = 4
+	KUIModeContentHidden     = 2
 	KUIModeContentSuppressed = 1
-	KUIModeNormal = 0
+	KUIModeNormal            = 0
 )
 
 const (
-	KUIOptionAnimateMenuBar = 2
-	KUIOptionAutoShowMenuBar = 1
-	KUIOptionDisableAppleMenu = 4
-	KUIOptionDisableForceQuit = 16
-	KUIOptionDisableHide = 64
+	KUIOptionAnimateMenuBar             = 2
+	KUIOptionAutoShowMenuBar            = 1
+	KUIOptionDisableAppleMenu           = 4
+	KUIOptionDisableForceQuit           = 16
+	KUIOptionDisableHide                = 64
 	KUIOptionDisableMenuBarTransparency = 512
-	KUIOptionDisableProcessSwitch = 8
-	KUIOptionDisableSessionTerminate = 32
+	KUIOptionDisableProcessSwitch       = 8
+	KUIOptionDisableSessionTerminate    = 32
 )
 
 const (
-	KNeutralScript = 65535
+	KNeutralScript   = 65535
 	KUnknownLanguage = 65535
-	KUnknownScript = 65535
+	KUnknownScript   = 65535
 )
 
 const (
-	KVK_ANSI_0 = 29
-	KVK_ANSI_1 = 18
-	KVK_ANSI_2 = 19
-	KVK_ANSI_3 = 20
-	KVK_ANSI_4 = 21
-	KVK_ANSI_5 = 23
-	KVK_ANSI_6 = 22
-	KVK_ANSI_7 = 26
-	KVK_ANSI_8 = 28
-	KVK_ANSI_9 = 25
-	KVK_ANSI_A = 0
-	KVK_ANSI_B = 11
-	KVK_ANSI_Backslash = 42
-	KVK_ANSI_C = 8
-	KVK_ANSI_Comma = 43
-	KVK_ANSI_D = 2
-	KVK_ANSI_E = 14
-	KVK_ANSI_Equal = 24
-	KVK_ANSI_F = 3
-	KVK_ANSI_G = 5
-	KVK_ANSI_Grave = 50
-	KVK_ANSI_H = 4
-	KVK_ANSI_I = 34
-	KVK_ANSI_J = 38
-	KVK_ANSI_K = 40
-	KVK_ANSI_Keypad0 = 82
-	KVK_ANSI_Keypad1 = 83
-	KVK_ANSI_Keypad2 = 84
-	KVK_ANSI_Keypad3 = 85
-	KVK_ANSI_Keypad4 = 86
-	KVK_ANSI_Keypad5 = 87
-	KVK_ANSI_Keypad6 = 88
-	KVK_ANSI_Keypad7 = 89
-	KVK_ANSI_Keypad8 = 91
-	KVK_ANSI_Keypad9 = 92
-	KVK_ANSI_KeypadClear = 71
-	KVK_ANSI_KeypadDecimal = 65
-	KVK_ANSI_KeypadDivide = 75
-	KVK_ANSI_KeypadEnter = 76
-	KVK_ANSI_KeypadEquals = 81
-	KVK_ANSI_KeypadMinus = 78
+	KVK_ANSI_0              = 29
+	KVK_ANSI_1              = 18
+	KVK_ANSI_2              = 19
+	KVK_ANSI_3              = 20
+	KVK_ANSI_4              = 21
+	KVK_ANSI_5              = 23
+	KVK_ANSI_6              = 22
+	KVK_ANSI_7              = 26
+	KVK_ANSI_8              = 28
+	KVK_ANSI_9              = 25
+	KVK_ANSI_A              = 0
+	KVK_ANSI_B              = 11
+	KVK_ANSI_Backslash      = 42
+	KVK_ANSI_C              = 8
+	KVK_ANSI_Comma          = 43
+	KVK_ANSI_D              = 2
+	KVK_ANSI_E              = 14
+	KVK_ANSI_Equal          = 24
+	KVK_ANSI_F              = 3
+	KVK_ANSI_G              = 5
+	KVK_ANSI_Grave          = 50
+	KVK_ANSI_H              = 4
+	KVK_ANSI_I              = 34
+	KVK_ANSI_J              = 38
+	KVK_ANSI_K              = 40
+	KVK_ANSI_Keypad0        = 82
+	KVK_ANSI_Keypad1        = 83
+	KVK_ANSI_Keypad2        = 84
+	KVK_ANSI_Keypad3        = 85
+	KVK_ANSI_Keypad4        = 86
+	KVK_ANSI_Keypad5        = 87
+	KVK_ANSI_Keypad6        = 88
+	KVK_ANSI_Keypad7        = 89
+	KVK_ANSI_Keypad8        = 91
+	KVK_ANSI_Keypad9        = 92
+	KVK_ANSI_KeypadClear    = 71
+	KVK_ANSI_KeypadDecimal  = 65
+	KVK_ANSI_KeypadDivide   = 75
+	KVK_ANSI_KeypadEnter    = 76
+	KVK_ANSI_KeypadEquals   = 81
+	KVK_ANSI_KeypadMinus    = 78
 	KVK_ANSI_KeypadMultiply = 67
-	KVK_ANSI_KeypadPlus = 69
-	KVK_ANSI_L = 37
-	KVK_ANSI_LeftBracket = 33
-	KVK_ANSI_M = 46
-	KVK_ANSI_Minus = 27
-	KVK_ANSI_N = 45
-	KVK_ANSI_O = 31
-	KVK_ANSI_P = 35
-	KVK_ANSI_Period = 47
-	KVK_ANSI_Q = 12
-	KVK_ANSI_Quote = 39
-	KVK_ANSI_R = 15
-	KVK_ANSI_RightBracket = 30
-	KVK_ANSI_S = 1
-	KVK_ANSI_Semicolon = 41
-	KVK_ANSI_Slash = 44
-	KVK_ANSI_T = 17
-	KVK_ANSI_U = 32
-	KVK_ANSI_V = 9
-	KVK_ANSI_W = 13
-	KVK_ANSI_X = 7
-	KVK_ANSI_Y = 16
-	KVK_ANSI_Z = 6
+	KVK_ANSI_KeypadPlus     = 69
+	KVK_ANSI_L              = 37
+	KVK_ANSI_LeftBracket    = 33
+	KVK_ANSI_M              = 46
+	KVK_ANSI_Minus          = 27
+	KVK_ANSI_N              = 45
+	KVK_ANSI_O              = 31
+	KVK_ANSI_P              = 35
+	KVK_ANSI_Period         = 47
+	KVK_ANSI_Q              = 12
+	KVK_ANSI_Quote          = 39
+	KVK_ANSI_R              = 15
+	KVK_ANSI_RightBracket   = 30
+	KVK_ANSI_S              = 1
+	KVK_ANSI_Semicolon      = 41
+	KVK_ANSI_Slash          = 44
+	KVK_ANSI_T              = 17
+	KVK_ANSI_U              = 32
+	KVK_ANSI_V              = 9
+	KVK_ANSI_W              = 13
+	KVK_ANSI_X              = 7
+	KVK_ANSI_Y              = 16
+	KVK_ANSI_Z              = 6
 )
 
 const (
@@ -7053,127 +7099,127 @@ const (
 )
 
 const (
-	KVK_JIS_Eisu = 102
-	KVK_JIS_Kana = 104
+	KVK_JIS_Eisu        = 102
+	KVK_JIS_Kana        = 104
 	KVK_JIS_KeypadComma = 95
-	KVK_JIS_Underscore = 94
-	KVK_JIS_Yen = 93
+	KVK_JIS_Underscore  = 94
+	KVK_JIS_Yen         = 93
 )
 
 const (
-	KVK_CapsLock = 57
-	KVK_Command = 55
+	KVK_CapsLock       = 57
+	KVK_Command        = 55
 	KVK_ContextualMenu = 110
-	KVK_Control = 59
-	KVK_Delete = 51
-	KVK_DownArrow = 125
-	KVK_End = 119
-	KVK_Escape = 53
-	KVK_F1 = 122
-	KVK_F10 = 109
-	KVK_F11 = 103
-	KVK_F12 = 111
-	KVK_F13 = 105
-	KVK_F14 = 107
-	KVK_F15 = 113
-	KVK_F16 = 106
-	KVK_F17 = 64
-	KVK_F18 = 79
-	KVK_F19 = 80
-	KVK_F2 = 120
-	KVK_F20 = 90
-	KVK_F3 = 99
-	KVK_F4 = 118
-	KVK_F5 = 96
-	KVK_F6 = 97
-	KVK_F7 = 98
-	KVK_F8 = 100
-	KVK_F9 = 101
-	KVK_ForwardDelete = 117
-	KVK_Function = 63
-	KVK_Help = 114
-	KVK_Home = 115
-	KVK_LeftArrow = 123
-	KVK_Mute = 74
-	KVK_Option = 58
-	KVK_PageDown = 121
-	KVK_PageUp = 116
-	KVK_Return = 36
-	KVK_RightArrow = 124
-	KVK_RightCommand = 54
-	KVK_RightControl = 62
-	KVK_RightOption = 61
-	KVK_RightShift = 60
-	KVK_Shift = 56
-	KVK_Space = 49
-	KVK_Tab = 48
-	KVK_UpArrow = 126
-	KVK_VolumeDown = 73
-	KVK_VolumeUp = 72
+	KVK_Control        = 59
+	KVK_Delete         = 51
+	KVK_DownArrow      = 125
+	KVK_End            = 119
+	KVK_Escape         = 53
+	KVK_F1             = 122
+	KVK_F10            = 109
+	KVK_F11            = 103
+	KVK_F12            = 111
+	KVK_F13            = 105
+	KVK_F14            = 107
+	KVK_F15            = 113
+	KVK_F16            = 106
+	KVK_F17            = 64
+	KVK_F18            = 79
+	KVK_F19            = 80
+	KVK_F2             = 120
+	KVK_F20            = 90
+	KVK_F3             = 99
+	KVK_F4             = 118
+	KVK_F5             = 96
+	KVK_F6             = 97
+	KVK_F7             = 98
+	KVK_F8             = 100
+	KVK_F9             = 101
+	KVK_ForwardDelete  = 117
+	KVK_Function       = 63
+	KVK_Help           = 114
+	KVK_Home           = 115
+	KVK_LeftArrow      = 123
+	KVK_Mute           = 74
+	KVK_Option         = 58
+	KVK_PageDown       = 121
+	KVK_PageUp         = 116
+	KVK_Return         = 36
+	KVK_RightArrow     = 124
+	KVK_RightCommand   = 54
+	KVK_RightControl   = 62
+	KVK_RightOption    = 61
+	KVK_RightShift     = 60
+	KVK_Shift          = 56
+	KVK_Space          = 49
+	KVK_Tab            = 48
+	KVK_UpArrow        = 126
+	KVK_VolumeDown     = 73
+	KVK_VolumeUp       = 72
 )
 
 const (
-	KWindowActivationScopeAll = 2
+	KWindowActivationScopeAll         = 2
 	KWindowActivationScopeIndependent = 1
-	KWindowActivationScopeNone = 0
+	KWindowActivationScopeNone        = 0
 )
 
 const (
 	KWindowBoundsChangeOriginChanged = 8
-	KWindowBoundsChangeSizeChanged = 4
-	KWindowBoundsChangeUserDrag = 1
-	KWindowBoundsChangeUserResize = 2
-	KWindowBoundsChangeZoom = 16
+	KWindowBoundsChangeSizeChanged   = 4
+	KWindowBoundsChangeUserDrag      = 1
+	KWindowBoundsChangeUserResize    = 2
+	KWindowBoundsChangeZoom          = 16
 )
 
 const (
-	KWindowCanCollapse = 4
-	KWindowCanDrawInCurrentPort = 512
-	KWindowCanGetWindowRegion = 16
-	KWindowCanGrow = 1
-	KWindowCanMeasureTitle = 2048
-	KWindowCanSetupProxyDragImage = 1024
-	KWindowCanZoom = 2
-	KWindowDefSupportsColorGrafPort = 1073741826
-	KWindowHasTitleBar = 64
-	KWindowIsAlert = 32
-	KWindowIsModal = 8
-	KWindowIsOpaque = 16384
-	KWindowSupportsDragHilite = 128
+	KWindowCanCollapse                = 4
+	KWindowCanDrawInCurrentPort       = 512
+	KWindowCanGetWindowRegion         = 16
+	KWindowCanGrow                    = 1
+	KWindowCanMeasureTitle            = 2048
+	KWindowCanSetupProxyDragImage     = 1024
+	KWindowCanZoom                    = 2
+	KWindowDefSupportsColorGrafPort   = 1073741826
+	KWindowHasTitleBar                = 64
+	KWindowIsAlert                    = 32
+	KWindowIsModal                    = 8
+	KWindowIsOpaque                   = 16384
+	KWindowSupportsDragHilite         = 128
 	KWindowSupportsGetGrowImageRegion = 8192
-	KWindowSupportsModifiedBit = 256
+	KWindowSupportsModifiedBit        = 256
 	KWindowWantsDisposeAtProcessDeath = 4096
 )
 
 const (
-	KWindowAlertPositionOnMainScreen = 7
-	KWindowAlertPositionOnParentWindow = 8
+	KWindowAlertPositionOnMainScreen         = 7
+	KWindowAlertPositionOnParentWindow       = 8
 	KWindowAlertPositionOnParentWindowScreen = 9
-	KWindowCascadeOnMainScreen = 4
-	KWindowCascadeOnParentWindow = 5
-	KWindowCascadeOnParentWindowScreen = 6
-	KWindowCascadeStartAtParentWindowScreen = 10
-	KWindowCenterOnMainScreen = 1
-	KWindowCenterOnParentWindow = 2
-	KWindowCenterOnParentWindowScreen = 3
+	KWindowCascadeOnMainScreen               = 4
+	KWindowCascadeOnParentWindow             = 5
+	KWindowCascadeOnParentWindowScreen       = 6
+	KWindowCascadeStartAtParentWindowScreen  = 10
+	KWindowCenterOnMainScreen                = 1
+	KWindowCenterOnParentWindow              = 2
+	KWindowCenterOnParentWindowScreen        = 3
 )
 
 const (
-	KWindowConstrainAllowPartial = 4
-	KWindowConstrainCalcOnly = 8
-	KWindowConstrainMayResize = 1
-	KWindowConstrainMoveMinimum = 64
+	KWindowConstrainAllowPartial        = 4
+	KWindowConstrainCalcOnly            = 8
+	KWindowConstrainMayResize           = 1
+	KWindowConstrainMoveMinimum         = 64
 	KWindowConstrainMoveRegardlessOfFit = 2
-	KWindowConstrainStandardOptions = 2
-	KWindowConstrainUseSpecifiedBounds = 256
+	KWindowConstrainStandardOptions     = 2
+	KWindowConstrainUseSpecifiedBounds  = 256
 	KWindowConstrainUseTransitionWindow = 16
 )
 
 const (
-	KWindowDefHIView = 3
+	KWindowDefHIView      = 3
 	KWindowDefObjectClass = 1
-	KWindowDefProcID = 2
-	KWindowDefProcPtr = 0
+	KWindowDefProcID      = 2
+	KWindowDefProcPtr     = 0
 )
 
 const (
@@ -7186,61 +7232,61 @@ const (
 )
 
 const (
-	KWindowDialogDefProcResID = 65
-	KWindowDocumentDefProcResID = 64
-	KWindowSheetAlertDefProcResID = 70
-	KWindowSheetDefProcResID = 68
-	KWindowSimpleDefProcResID = 69
-	KWindowUtilityDefProcResID = 66
+	KWindowDialogDefProcResID           = 65
+	KWindowDocumentDefProcResID         = 64
+	KWindowSheetAlertDefProcResID       = 70
+	KWindowSheetDefProcResID            = 68
+	KWindowSimpleDefProcResID           = 69
+	KWindowUtilityDefProcResID          = 66
 	KWindowUtilitySideTitleDefProcResID = 67
 )
 
 const (
-	KWindowDocumentProc = 1024
-	KWindowFullZoomDocumentProc = 1030
-	KWindowFullZoomGrowDocumentProc = 1031
-	KWindowGrowDocumentProc = 1025
-	KWindowHorizZoomDocumentProc = 1028
+	KWindowDocumentProc              = 1024
+	KWindowFullZoomDocumentProc      = 1030
+	KWindowFullZoomGrowDocumentProc  = 1031
+	KWindowGrowDocumentProc          = 1025
+	KWindowHorizZoomDocumentProc     = 1028
 	KWindowHorizZoomGrowDocumentProc = 1029
-	KWindowVertZoomDocumentProc = 1026
-	KWindowVertZoomGrowDocumentProc = 1027
+	KWindowVertZoomDocumentProc      = 1026
+	KWindowVertZoomGrowDocumentProc  = 1027
 )
 
 const (
-	KWindowDrawerClosed = 4
+	KWindowDrawerClosed  = 4
 	KWindowDrawerClosing = 3
-	KWindowDrawerOpen = 2
+	KWindowDrawerOpen    = 2
 	KWindowDrawerOpening = 1
 )
 
 const (
-	KWindowEdgeBottom = 4
+	KWindowEdgeBottom  = 4
 	KWindowEdgeDefault = 0
-	KWindowEdgeLeft = 2
-	KWindowEdgeRight = 8
-	KWindowEdgeTop = 1
+	KWindowEdgeLeft    = 2
+	KWindowEdgeRight   = 8
+	KWindowEdgeTop     = 1
 )
 
 const (
-	KWindowFloatFullZoomGrowProc = 1071
-	KWindowFloatFullZoomProc = 1069
-	KWindowFloatGrowProc = 1059
+	KWindowFloatFullZoomGrowProc  = 1071
+	KWindowFloatFullZoomProc      = 1069
+	KWindowFloatGrowProc          = 1059
 	KWindowFloatHorizZoomGrowProc = 1067
-	KWindowFloatHorizZoomProc = 1065
-	KWindowFloatProc = 1057
-	KWindowFloatVertZoomGrowProc = 1063
-	KWindowFloatVertZoomProc = 1061
+	KWindowFloatHorizZoomProc     = 1065
+	KWindowFloatProc              = 1057
+	KWindowFloatVertZoomGrowProc  = 1063
+	KWindowFloatVertZoomProc      = 1061
 )
 
 const (
-	KWindowFloatSideFullZoomGrowProc = 1087
-	KWindowFloatSideFullZoomProc = 1085
-	KWindowFloatSideGrowProc = 1075
+	KWindowFloatSideFullZoomGrowProc  = 1087
+	KWindowFloatSideFullZoomProc      = 1085
+	KWindowFloatSideGrowProc          = 1075
 	KWindowFloatSideHorizZoomGrowProc = 1083
-	KWindowFloatSideHorizZoomProc = 1081
-	KWindowFloatSideProc = 1073
-	KWindowFloatSideVertZoomGrowProc = 1079
-	KWindowFloatSideVertZoomProc = 1077
+	KWindowFloatSideHorizZoomProc     = 1081
+	KWindowFloatSideProc              = 1073
+	KWindowFloatSideVertZoomGrowProc  = 1079
+	KWindowFloatSideVertZoomProc      = 1077
 )
 
 const (
@@ -7248,28 +7294,28 @@ const (
 )
 
 const (
-	KWindowGroupAttrFixedLevel = 32
-	KWindowGroupAttrHideOnCollapse = 16
-	KWindowGroupAttrLayerTogether = 4
-	KWindowGroupAttrMoveTogether = 2
-	KWindowGroupAttrSelectAsLayer = 1
+	KWindowGroupAttrFixedLevel       = 32
+	KWindowGroupAttrHideOnCollapse   = 16
+	KWindowGroupAttrLayerTogether    = 4
+	KWindowGroupAttrMoveTogether     = 2
+	KWindowGroupAttrSelectAsLayer    = 1
 	KWindowGroupAttrSharedActivation = 8
 )
 
 const (
 	KWindowGroupAttrPositionFixed = 2
-	KWindowGroupAttrSelectable = 1
-	KWindowGroupAttrZOrderFixed = 4
+	KWindowGroupAttrSelectable    = 1
+	KWindowGroupAttrZOrderFixed   = 4
 )
 
 const (
-	KWindowGroupContentsRecurse = 2
+	KWindowGroupContentsRecurse       = 2
 	KWindowGroupContentsReturnWindows = 1
-	KWindowGroupContentsVisible = 4
+	KWindowGroupContentsVisible       = 4
 )
 
 const (
-	KWindowGroupLevelActive = 1
+	KWindowGroupLevelActive   = 1
 	KWindowGroupLevelInactive = 2
 	KWindowGroupLevelPromoted = 3
 )
@@ -7279,12 +7325,12 @@ const (
 )
 
 const (
-	KWindowLatentVisibleAppHidden = 8
+	KWindowLatentVisibleAppHidden      = 8
 	KWindowLatentVisibleCollapsedGroup = 32
 	KWindowLatentVisibleCollapsedOwner = 16
-	KWindowLatentVisibleFloater = 1
-	KWindowLatentVisibleFullScreen = 4
-	KWindowLatentVisibleSuspend = 2
+	KWindowLatentVisibleFloater        = 1
+	KWindowLatentVisibleFullScreen     = 4
+	KWindowLatentVisibleSuspend        = 2
 )
 
 const (
@@ -7292,8 +7338,8 @@ const (
 )
 
 const (
-	KWindowModalityAppModal = 2
-	KWindowModalityNone = 0
+	KWindowModalityAppModal    = 2
+	KWindowModalityNone        = 0
 	KWindowModalitySystemModal = 1
 	KWindowModalityWindowModal = 3
 )
@@ -7303,27 +7349,27 @@ const (
 )
 
 const (
-	KWindowMsgDragHilite = 9
-	KWindowMsgDrawInCurrentPort = 11
-	KWindowMsgMeasureTitle = 14
-	KWindowMsgModified = 10
+	KWindowMsgDragHilite          = 9
+	KWindowMsgDrawInCurrentPort   = 11
+	KWindowMsgMeasureTitle        = 14
+	KWindowMsgModified            = 10
 	KWindowMsgSetupProxyDragImage = 12
-	KWindowMsgStateChanged = 13
+	KWindowMsgStateChanged        = 13
 )
 
 const (
-	KWindowMsgCalculateShape = 2
-	KWindowMsgCleanUp = 4
-	KWindowMsgDraw = 0
-	KWindowMsgDrawGrowBox = 6
+	KWindowMsgCalculateShape  = 2
+	KWindowMsgCleanUp         = 4
+	KWindowMsgDraw            = 0
+	KWindowMsgDrawGrowBox     = 6
 	KWindowMsgDrawGrowOutline = 5
-	KWindowMsgHitTest = 1
-	KWindowMsgInitialize = 3
+	KWindowMsgHitTest         = 1
+	KWindowMsgInitialize      = 3
 )
 
 const (
 	KWindowMsgGetFeatures = 7
-	KWindowMsgGetRegion = 8
+	KWindowMsgGetRegion   = 8
 )
 
 const (
@@ -7331,38 +7377,38 @@ const (
 )
 
 const (
-	KWindowAsyncDragAttribute = 8388608
+	KWindowAsyncDragAttribute                = 8388608
 	KWindowCanBeVisibleWithoutLoginAttribute = 4194304
-	KWindowCloseBoxAttribute = 1
-	KWindowCollapseBoxAttribute = 8
-	KWindowCompositingAttribute = 524288
-	KWindowDoesNotCycleAttribute = 32768
-	KWindowFullZoomAttribute = 6
+	KWindowCloseBoxAttribute                 = 1
+	KWindowCollapseBoxAttribute              = 8
+	KWindowCompositingAttribute              = 524288
+	KWindowDoesNotCycleAttribute             = 32768
+	KWindowFullZoomAttribute                 = 6
 	KWindowHasRoundBottomBarCornersAttribute = 4096
-	KWindowHideOnFullScreenAttribute = 67108864
-	KWindowHideOnSuspendAttribute = 16777216
-	KWindowHighResolutionCapableAttribute = 1048576
-	KWindowHorizontalZoomAttribute = 2
-	KWindowIgnoreClicksAttribute = 536870912
-	KWindowInWindowMenuAttribute = 134217728
-	KWindowLiveResizeAttribute = 268435456
-	KWindowMetalAttribute = 256
-	KWindowMetalNoContentSeparatorAttribute = 2048
-	KWindowNoActivatesAttribute = 131072
-	KWindowNoAttributes = 0
-	KWindowNoShadowAttribute = 2097152
-	KWindowNoTitleBarAttribute = 512
-	KWindowNoUpdatesAttribute = 65536
-	KWindowOpaqueForEventsAttribute = 262144
-	KWindowResizableAttribute = 16
-	KWindowSideTitlebarAttribute = 32
-	KWindowStandardDocumentAttributes = 31
-	KWindowStandardFloatingAttributes = 9
-	KWindowStandardHandlerAttribute = 33554432
-	KWindowTexturedSquareCornersAttribute = 1024
-	KWindowToolbarButtonAttribute = 64
-	KWindowUnifiedTitleAndToolbarAttribute = 128
-	KWindowVerticalZoomAttribute = 4
+	KWindowHideOnFullScreenAttribute         = 67108864
+	KWindowHideOnSuspendAttribute            = 16777216
+	KWindowHighResolutionCapableAttribute    = 1048576
+	KWindowHorizontalZoomAttribute           = 2
+	KWindowIgnoreClicksAttribute             = 536870912
+	KWindowInWindowMenuAttribute             = 134217728
+	KWindowLiveResizeAttribute               = 268435456
+	KWindowMetalAttribute                    = 256
+	KWindowMetalNoContentSeparatorAttribute  = 2048
+	KWindowNoActivatesAttribute              = 131072
+	KWindowNoAttributes                      = 0
+	KWindowNoShadowAttribute                 = 2097152
+	KWindowNoTitleBarAttribute               = 512
+	KWindowNoUpdatesAttribute                = 65536
+	KWindowOpaqueForEventsAttribute          = 262144
+	KWindowResizableAttribute                = 16
+	KWindowSideTitlebarAttribute             = 32
+	KWindowStandardDocumentAttributes        = 31
+	KWindowStandardFloatingAttributes        = 9
+	KWindowStandardHandlerAttribute          = 33554432
+	KWindowTexturedSquareCornersAttribute    = 1024
+	KWindowToolbarButtonAttribute            = 64
+	KWindowUnifiedTitleAndToolbarAttribute   = 128
+	KWindowVerticalZoomAttribute             = 4
 )
 
 const (
@@ -7370,17 +7416,17 @@ const (
 )
 
 const (
-	KWindowAlertPositionMainScreen = 12298
-	KWindowAlertPositionParentWindow = 45066
+	KWindowAlertPositionMainScreen         = 12298
+	KWindowAlertPositionParentWindow       = 45066
 	KWindowAlertPositionParentWindowScreen = 28682
-	KWindowCenterMainScreen = 10250
-	KWindowCenterParentWindow = 43018
-	KWindowCenterParentWindowScreen = 26634
-	KWindowDefaultPosition = 0
-	KWindowNoPosition = 0
-	KWindowStaggerMainScreen = 14346
-	KWindowStaggerParentWindow = 47114
-	KWindowStaggerParentWindowScreen = 30730
+	KWindowCenterMainScreen                = 10250
+	KWindowCenterParentWindow              = 43018
+	KWindowCenterParentWindowScreen        = 26634
+	KWindowDefaultPosition                 = 0
+	KWindowNoPosition                      = 0
+	KWindowStaggerMainScreen               = 14346
+	KWindowStaggerParentWindow             = 47114
+	KWindowStaggerParentWindowScreen       = 30730
 )
 
 const (
@@ -7392,12 +7438,12 @@ const (
 )
 
 const (
-	KWindowAlertProc = 1044
-	KWindowModalDialogProc = 1042
-	KWindowMovableAlertProc = 1045
+	KWindowAlertProc              = 1044
+	KWindowModalDialogProc        = 1042
+	KWindowMovableAlertProc       = 1045
 	KWindowMovableModalDialogProc = 1043
-	KWindowPlainDialogProc = 1040
-	KWindowShadowDialogProc = 1041
+	KWindowPlainDialogProc        = 1040
+	KWindowShadowDialogProc       = 1041
 )
 
 const (
@@ -7406,19 +7452,19 @@ const (
 
 const (
 	KWindowSheetAlertProc = 1120
-	KWindowSheetProc = 1088
+	KWindowSheetProc      = 1088
 )
 
 const (
-	KWindowHideTransitionAction = 2
-	KWindowMoveTransitionAction = 3
+	KWindowHideTransitionAction   = 2
+	KWindowMoveTransitionAction   = 3
 	KWindowResizeTransitionAction = 4
-	KWindowShowTransitionAction = 1
+	KWindowShowTransitionAction   = 1
 )
 
 const (
 	KWindowSimpleFrameProc = 1105
-	KWindowSimpleProc = 1104
+	KWindowSimpleProc      = 1104
 )
 
 const (
@@ -7426,126 +7472,126 @@ const (
 )
 
 const (
-	KWindowCloseBoxRgn = 2
-	KWindowCollapseBoxRgn = 7
-	KWindowContentRgn = 33
-	KWindowDragRgn = 5
-	KWindowGlobalPortRgn = 40
-	KWindowGrowRgn = 6
-	KWindowOpaqueRgn = 35
-	KWindowStructureRgn = 32
-	KWindowTitleBarRgn = 0
+	KWindowCloseBoxRgn       = 2
+	KWindowCollapseBoxRgn    = 7
+	KWindowContentRgn        = 33
+	KWindowDragRgn           = 5
+	KWindowGlobalPortRgn     = 40
+	KWindowGrowRgn           = 6
+	KWindowOpaqueRgn         = 35
+	KWindowStructureRgn      = 32
+	KWindowTitleBarRgn       = 0
 	KWindowTitleProxyIconRgn = 8
-	KWindowTitleTextRgn = 1
-	KWindowToolbarButtonRgn = 41
-	KWindowUpdateRgn = 34
-	KWindowZoomBoxRgn = 3
+	KWindowTitleTextRgn      = 1
+	KWindowToolbarButtonRgn  = 41
+	KWindowUpdateRgn         = 34
+	KWindowZoomBoxRgn        = 3
 )
 
 const (
-	KWindowFadeTransitionEffect = 4
+	KWindowFadeTransitionEffect  = 4
 	KWindowGenieTransitionEffect = 5
 	KWindowSheetTransitionEffect = 2
 	KWindowSlideTransitionEffect = 3
-	KWindowZoomTransitionEffect = 1
+	KWindowZoomTransitionEffect  = 1
 )
 
 const (
-	KZoomAccelerate = 1
-	KZoomDecelerate = 2
+	KZoomAccelerate     = 1
+	KZoomDecelerate     = 2
 	KZoomNoAcceleration = 0
 )
 
 const (
 	KeyContextualMenuAttributes = 1668112756
-	KeyContextualMenuCommandID = 1668113252
-	KeyContextualMenuModifiers = 1668115812
-	KeyContextualMenuName = 1886282093
-	KeyContextualMenuSubmenu = 1668117346
+	KeyContextualMenuCommandID  = 1668113252
+	KeyContextualMenuModifiers  = 1668115812
+	KeyContextualMenuName       = 1886282093
+	KeyContextualMenuSubmenu    = 1668117346
 )
 
 const (
-	LDoHAutoscroll = 1
-	LDoVAutoscroll = 2
+	LDoHAutoscroll  = 1
+	LDoVAutoscroll  = 2
 	LDrawingModeOff = 8
 )
 
 const (
-	LDoHAutoscrollBit = 0
-	LDoVAutoscrollBit = 1
+	LDoHAutoscrollBit  = 0
+	LDoVAutoscrollBit  = 1
 	LDrawingModeOffBit = 3
 )
 
 const (
-	LCloseMsg = 3
-	LDrawMsg = 1
+	LCloseMsg  = 3
+	LDrawMsg   = 1
 	LHiliteMsg = 2
-	LInitMsg = 0
+	LInitMsg   = 0
 )
 
 const (
-	LExtendDrag = 64
-	LNoDisjoint = 32
-	LNoExtend = 16
+	LExtendDrag  = 64
+	LNoDisjoint  = 32
+	LNoExtend    = 16
 	LNoNilHilite = 2
-	LNoRect = 8
-	LOnlyOne = -128
-	LUseSense = 4
+	LNoRect      = 8
+	LOnlyOne     = -128
+	LUseSense    = 4
 )
 
 const (
-	LExtendDragBit = 6
-	LNoDisjointBit = 5
-	LNoExtendBit = 4
+	LExtendDragBit  = 6
+	LNoDisjointBit  = 5
+	LNoExtendBit    = 4
 	LNoNilHiliteBit = 1
-	LNoRectBit = 3
-	LOnlyOneBit = 7
-	LUseSenseBit = 2
+	LNoRectBit      = 3
+	LOnlyOneBit     = 7
+	LUseSenseBit    = 2
 )
 
 const (
-	ActivMask = 256
-	AutoKeyMask = 32
-	DiskMask = 128
-	EveryEvent = 65535
+	ActivMask          = 256
+	AutoKeyMask        = 32
+	DiskMask           = 128
+	EveryEvent         = 65535
 	HighLevelEventMask = 1024
-	KeyDownMask = 8
-	KeyUpMask = 16
-	MDownMask = 2
-	MUpMask = 4
-	OsMask = 32768
-	UpdateMask = 64
+	KeyDownMask        = 8
+	KeyUpMask          = 16
+	MDownMask          = 2
+	MUpMask            = 4
+	OsMask             = 32768
+	UpdateMask         = 64
 )
 
 const (
-	MctAllItems = -98
+	MctAllItems    = -98
 	MctLastIDIndic = -99
 )
 
 const (
-	MouseMovedMessage = 250
+	MouseMovedMessage    = 250
 	SuspendResumeMessage = 1
 )
 
 const (
-	App1Evt = 12
-	App1Mask = 4096
-	App2Evt = 13
-	App2Mask = 8192
-	App3Evt = 14
-	App3Mask = 16384
-	App4Evt = 15
-	App4Mask = 32768
-	DriverEvt = 11
-	DriverMask = 2048
-	NetworkEvt = 10
+	App1Evt     = 12
+	App1Mask    = 4096
+	App2Evt     = 13
+	App2Mask    = 8192
+	App3Evt     = 14
+	App3Mask    = 16384
+	App4Evt     = 15
+	App4Mask    = 32768
+	DriverEvt   = 11
+	DriverMask  = 2048
+	NetworkEvt  = 10
 	NetworkMask = 1024
 )
 
 const (
-	HAxisOnly = 1
+	HAxisOnly    = 1
 	NoConstraint = 0
-	VAxisOnly = 2
+	VAxisOnly    = 2
 )
 
 const (
@@ -7553,54 +7599,54 @@ const (
 )
 
 const (
-	ActivateEvt = 8
-	AutoKey = 5
-	DiskEvt = 7
+	ActivateEvt     = 8
+	AutoKey         = 5
+	DiskEvt         = 7
 	KHighLevelEvent = 23
-	KeyDown = 3
-	KeyUp = 4
-	MouseDown = 1
-	MouseUp = 2
-	NullEvent = 0
-	OsEvt = 15
-	UpdateEvt = 6
+	KeyDown         = 3
+	KeyUp           = 4
+	MouseDown       = 1
+	MouseUp         = 2
+	NullEvent       = 0
+	OsEvt           = 15
+	UpdateEvt       = 6
 )
 
 const (
 	AppendDITLBottom = 2
-	AppendDITLRight = 1
-	OverlayDITL = 0
+	AppendDITLRight  = 1
+	OverlayDITL      = 0
 )
 
 const (
-	PopupFixedWidth = 1
+	PopupFixedWidth    = 1
 	PopupUseAddResMenu = 4
-	PopupUseWFont = 8
+	PopupUseWFont      = 8
 	PopupVariableWidth = 2
 )
 
 const (
-	PopupTitleBold = 256
-	PopupTitleCondense = 8192
-	PopupTitleExtend = 16384
-	PopupTitleItalic = 512
-	PopupTitleNoStyle = 32768
-	PopupTitleOutline = 2048
-	PopupTitleShadow = 4096
+	PopupTitleBold      = 256
+	PopupTitleCondense  = 8192
+	PopupTitleExtend    = 16384
+	PopupTitleItalic    = 512
+	PopupTitleNoStyle   = 32768
+	PopupTitleOutline   = 2048
+	PopupTitleShadow    = 4096
 	PopupTitleUnderline = 1024
 )
 
 const (
 	PopupTitleCenterJust = 1
-	PopupTitleLeftJust = 0
-	PopupTitleRightJust = 255
+	PopupTitleLeftJust   = 0
+	PopupTitleRightJust  = 255
 )
 
 const (
-	CheckBoxProc = 1
+	CheckBoxProc  = 1
 	PopupMenuProc = 1008
-	PushButProc = 0
-	RadioButProc = 2
+	PushButProc   = 0
+	RadioButProc  = 2
 	ScrollBarProc = 16
 )
 
@@ -7610,23 +7656,23 @@ const (
 
 const (
 	TaDstDocNeedsResourceFork = 1
-	TaDstIsAppTranslation = 2
+	TaDstIsAppTranslation     = 2
 )
 
 const (
 	TeBitClear = 0
-	TeBitSet = 1
-	TeBitTest = -1
+	TeBitSet   = 1
+	TeBitTest  = -1
 )
 
 const (
-	TeFAutoScroll = 0
-	TeFInlineInput = 3
+	TeFAutoScroll            = 0
+	TeFInlineInput           = 3
 	TeFInlineInputAutoScroll = 6
-	TeFOutlineHilite = 2
-	TeFTextBuffering = 1
-	TeFUseInlineInput = 5
-	TeFUseWhiteBackground = 4
+	TeFOutlineHilite         = 2
+	TeFTextBuffering         = 1
+	TeFUseInlineInput        = 5
+	TeFUseWhiteBackground    = 4
 )
 
 const (
@@ -7638,45 +7684,45 @@ const (
 )
 
 const (
-	TeCaret = -2
-	TeDraw = -1
-	TeFind = 0
+	TeCaret     = -2
+	TeDraw      = -1
+	TeFind      = 0
 	TeHighlight = 1
 )
 
 const (
-	TeCenter = 1
+	TeCenter       = 1
 	TeFlushDefault = 0
-	TeFlushLeft = -2
-	TeFlushRight = -1
-	TeForceLeft = -2
-	TeJustCenter = 1
-	TeJustLeft = 0
-	TeJustRight = -1
+	TeFlushLeft    = -2
+	TeFlushRight   = -1
+	TeForceLeft    = -2
+	TeJustCenter   = 1
+	TeJustLeft     = 0
+	TeJustRight    = -1
 )
 
 const (
-	TeFromFind = 12
-	TeFromRecal = 16
-	TeWordDrag = 8
+	TeFromFind   = 12
+	TeFromRecal  = 16
+	TeWordDrag   = 8
 	TeWordSelect = 4
 )
 
 const (
 	KHIMenuAppendItem = 65535
-	TextMenuProc = 0
+	TextMenuProc      = 0
 )
 
 const (
-	TsNextSelectMode = 1
-	TsNormalSelectMode = 0
+	TsNextSelectMode     = 1
+	TsNormalSelectMode   = 0
 	TsPreviousSelectMode = -1
 )
 
 const (
-	TypeByteCount = 1969450861
-	TypeByteOffset = 1969450861
-	TypeSignedByteCount = 1668246896
+	TypeByteCount        = 1969450861
+	TypeByteOffset       = 1969450861
+	TypeSignedByteCount  = 1668246896
 	TypeSignedByteOffset = 1668246896
 )
 
@@ -7685,9 +7731,9 @@ const (
 )
 
 const (
-	TypeCTFontRef = 1668572786
+	TypeCTFontRef      = 1668572786
 	TypeCTGlyphInfoRef = 1668573033
-	TypeDragRef = 1685217639
+	TypeDragRef        = 1685217639
 )
 
 const (
@@ -7696,10 +7742,10 @@ const (
 
 const (
 	KEventParamModalClickResult = 2003657586
-	KEventParamModalWindow = 1836542318
-	KEventParamWindowModality = 2003660644
-	TypeModalClickResult = 2003657586
-	TypeWindowModality = 2003660644
+	KEventParamModalWindow      = 1836542318
+	KEventParamWindowModality   = 2003660644
+	TypeModalClickResult        = 2003657586
+	TypeWindowModality          = 2003660644
 )
 
 const (
@@ -7707,34 +7753,33 @@ const (
 )
 
 const (
-	WContentColor = 0
-	WFrameColor = 1
-	WHiliteColor = 3
-	WTextColor = 2
+	WContentColor  = 0
+	WFrameColor    = 1
+	WHiliteColor   = 3
+	WTextColor     = 2
 	WTitleBarColor = 4
 )
 
 const (
-	WCalcRgns = 2
-	WDispose = 4
-	WDraw = 0
+	WCalcRgns  = 2
+	WDispose   = 4
+	WDraw      = 0
 	WDrawGIcon = 6
-	WGrow = 5
-	WHit = 1
-	WNew = 3
+	WGrow      = 5
+	WHit       = 1
+	WNew       = 3
 )
 
 const (
-	WInCollapseBox = 9
-	WInContent = 1
-	WInDrag = 2
-	WInGoAway = 4
-	WInGrow = 3
-	WInProxyIcon = 10
-	WInStructure = 13
+	WInCollapseBox   = 9
+	WInContent       = 1
+	WInDrag          = 2
+	WInGoAway        = 4
+	WInGrow          = 3
+	WInProxyIcon     = 10
+	WInStructure     = 13
 	WInToolbarButton = 11
-	WInZoomIn = 5
-	WInZoomOut = 6
-	WNoHit = 0
+	WInZoomIn        = 5
+	WInZoomOut       = 6
+	WNoHit           = 0
 )
-

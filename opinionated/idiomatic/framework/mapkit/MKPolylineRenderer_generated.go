@@ -101,7 +101,9 @@ func (x *PolylineRenderer) WithLineDashPattern(items ...*foundation.NSNumber) *P
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -153,9 +155,13 @@ func (x *PolylineRenderer) SetStrokeEnd(strokeEnd float64) {
 
 func (x *PolylineRenderer) asPolylineRenderer() *raw.MKPolylineRenderer { return x.inner }
 
-func (x *PolylineRenderer) asOverlayPathRenderer() *raw.MKOverlayPathRenderer { return &x.inner.MKOverlayPathRenderer }
+func (x *PolylineRenderer) asOverlayPathRenderer() *raw.MKOverlayPathRenderer {
+	return &x.inner.MKOverlayPathRenderer
+}
 
-func (x *PolylineRenderer) asOverlayRenderer() *raw.MKOverlayRenderer { return &x.inner.MKOverlayPathRenderer.MKOverlayRenderer }
+func (x *PolylineRenderer) asOverlayRenderer() *raw.MKOverlayRenderer {
+	return &x.inner.MKOverlayPathRenderer.MKOverlayRenderer
+}
 
 // PolylineRendererable is the interface implemented by [PolylineRenderer], for mocking and DI.
 type PolylineRendererable interface {
@@ -180,4 +186,3 @@ type PolylineRendererable interface {
 }
 
 var _ PolylineRendererable = (*PolylineRenderer)(nil)
-

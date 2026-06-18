@@ -16,9 +16,9 @@ type VZMacOSConfigurationRequirements struct {
 }
 
 var (
-	_clsVZMacOSConfigurationRequirements = _objcClass("VZMacOSConfigurationRequirements")
-	_vZMacOSConfigurationRequirementsSelHardwareModel = objc.RegisterName("hardwareModel")
-	_vZMacOSConfigurationRequirementsSelMinimumSupportedCPUCount = objc.RegisterName("minimumSupportedCPUCount")
+	_clsVZMacOSConfigurationRequirements                           = _objcClass("VZMacOSConfigurationRequirements")
+	_vZMacOSConfigurationRequirementsSelHardwareModel              = objc.RegisterName("hardwareModel")
+	_vZMacOSConfigurationRequirementsSelMinimumSupportedCPUCount   = objc.RegisterName("minimumSupportedCPUCount")
 	_vZMacOSConfigurationRequirementsSelMinimumSupportedMemorySize = objc.RegisterName("minimumSupportedMemorySize")
 )
 
@@ -35,7 +35,9 @@ func VZMacOSConfigurationRequirementsFromID(id objc.ID) *VZMacOSConfigurationReq
 // @abstract The hardware model for this configuration. @discussion The hardware model can be used to configure a new virtual machine that meets the requirements. Use VZMacPlatformConfiguration.hardwareModel to configure the Mac platform, and -[VZMacAuxiliaryStorage initCreatingStorageAtURL:hardwareModel:options:error:] to create its auxiliary storage. @seealso VZMacPlatformConfiguration @seealso VZMacAuxiliaryStorage
 func (o *VZMacOSConfigurationRequirements) HardwareModel() *VZMacHardwareModel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacOSConfigurationRequirementsSelHardwareModel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZMacHardwareModelFromID(_ret)
 }
 
@@ -50,4 +52,3 @@ func (o *VZMacOSConfigurationRequirements) MinimumSupportedMemorySize() uint64 {
 	_ret := objc.Send[uint64](o.Ptr(), _vZMacOSConfigurationRequirementsSelMinimumSupportedMemorySize)
 	return _ret
 }
-

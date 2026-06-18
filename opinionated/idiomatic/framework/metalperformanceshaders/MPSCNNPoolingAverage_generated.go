@@ -139,11 +139,17 @@ func (x *CNNPoolingAverage) SetZeroPadSizeY(zeroPadSizeY uint) {
 	x.inner.SetZeroPadSizeY(zeroPadSizeY)
 }
 
-func (x *CNNPoolingAverage) asCNNPooling() *mpsneuralnetwork.MPSCNNPooling { return &x.inner.MPSCNNPooling }
+func (x *CNNPoolingAverage) asCNNPooling() *mpsneuralnetwork.MPSCNNPooling {
+	return &x.inner.MPSCNNPooling
+}
 
-func (x *CNNPoolingAverage) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNPooling.MPSCNNKernel }
+func (x *CNNPoolingAverage) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNPooling.MPSCNNKernel
+}
 
-func (x *CNNPoolingAverage) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNPooling.MPSCNNKernel.MPSKernel }
+func (x *CNNPoolingAverage) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNPooling.MPSCNNKernel.MPSKernel
+}
 
 // CNNPoolingAverageable is the interface implemented by [CNNPoolingAverage], for mocking and DI.
 type CNNPoolingAverageable interface {
@@ -167,4 +173,3 @@ type CNNPoolingAverageable interface {
 }
 
 var _ CNNPoolingAverageable = (*CNNPoolingAverage)(nil)
-

@@ -17,7 +17,7 @@ type MPSCNNNeuronGeLUNode struct {
 }
 
 var (
-	_clsMPSCNNNeuronGeLUNode = _objcClass("MPSCNNNeuronGeLUNode")
+	_clsMPSCNNNeuronGeLUNode               = _objcClass("MPSCNNNeuronGeLUNode")
 	_mPSCNNNeuronGeLUNodeSelInitWithSource = objc.RegisterName("initWithSource:")
 	_mPSCNNNeuronGeLUNodeSelNodeWithSource = objc.RegisterName("nodeWithSource:")
 )
@@ -35,14 +35,17 @@ func MPSCNNNeuronGeLUNodeFromID(id objc.ID) *MPSCNNNeuronGeLUNode {
 // @abstract   Init a node representing a MPSCNNNeuronGeLU kernel @discussion For each pixel, applies the following function: @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @return     A new MPSNNFilter node for a MPSCNNNeuronLogarithm kernel.
 func (o *MPSCNNNeuronGeLUNode) InitWithSource(sourceNode *MPSNNImageNode) *MPSCNNNeuronGeLUNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronGeLUNodeSelInitWithSource, sourceNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronGeLUNodeFromID(_ret)
 }
 
 // @abstract Create an autoreleased node
 func MPSCNNNeuronGeLUNodeNodeWithSource(sourceNode *MPSNNImageNode) *MPSCNNNeuronGeLUNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNNeuronGeLUNode), _mPSCNNNeuronGeLUNodeSelNodeWithSource, sourceNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronGeLUNodeFromID(_ret)
 }
-

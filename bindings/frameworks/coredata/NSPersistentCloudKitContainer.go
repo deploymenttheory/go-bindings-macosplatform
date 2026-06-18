@@ -18,15 +18,15 @@ type NSPersistentCloudKitContainer struct {
 }
 
 var (
-	_clsNSPersistentCloudKitContainer = _objcClass("NSPersistentCloudKitContainer")
+	_clsNSPersistentCloudKitContainer                                         = _objcClass("NSPersistentCloudKitContainer")
 	_nSPersistentCloudKitContainerSelInitializeCloudKitSchemaWithOptionsError = objc.RegisterName("initializeCloudKitSchemaWithOptions:error:")
-	_nSPersistentCloudKitContainerSelRecordForManagedObjectID = objc.RegisterName("recordForManagedObjectID:")
-	_nSPersistentCloudKitContainerSelRecordsForManagedObjectIDs = objc.RegisterName("recordsForManagedObjectIDs:")
-	_nSPersistentCloudKitContainerSelRecordIDForManagedObjectID = objc.RegisterName("recordIDForManagedObjectID:")
-	_nSPersistentCloudKitContainerSelRecordIDsForManagedObjectIDs = objc.RegisterName("recordIDsForManagedObjectIDs:")
-	_nSPersistentCloudKitContainerSelCanUpdateRecordForManagedObjectWithID = objc.RegisterName("canUpdateRecordForManagedObjectWithID:")
-	_nSPersistentCloudKitContainerSelCanDeleteRecordForManagedObjectWithID = objc.RegisterName("canDeleteRecordForManagedObjectWithID:")
-	_nSPersistentCloudKitContainerSelCanModifyManagedObjectsInStore = objc.RegisterName("canModifyManagedObjectsInStore:")
+	_nSPersistentCloudKitContainerSelRecordForManagedObjectID                 = objc.RegisterName("recordForManagedObjectID:")
+	_nSPersistentCloudKitContainerSelRecordsForManagedObjectIDs               = objc.RegisterName("recordsForManagedObjectIDs:")
+	_nSPersistentCloudKitContainerSelRecordIDForManagedObjectID               = objc.RegisterName("recordIDForManagedObjectID:")
+	_nSPersistentCloudKitContainerSelRecordIDsForManagedObjectIDs             = objc.RegisterName("recordIDsForManagedObjectIDs:")
+	_nSPersistentCloudKitContainerSelCanUpdateRecordForManagedObjectWithID    = objc.RegisterName("canUpdateRecordForManagedObjectWithID:")
+	_nSPersistentCloudKitContainerSelCanDeleteRecordForManagedObjectWithID    = objc.RegisterName("canDeleteRecordForManagedObjectWithID:")
+	_nSPersistentCloudKitContainerSelCanModifyManagedObjectsInStore           = objc.RegisterName("canModifyManagedObjectsInStore:")
 )
 
 func NSPersistentCloudKitContainerFromID(id objc.ID) *NSPersistentCloudKitContainer {
@@ -82,4 +82,3 @@ func (o *NSPersistentCloudKitContainer) CanModifyManagedObjectsInStore(store *NS
 	_ret := objc.Send[bool](o.Ptr(), _nSPersistentCloudKitContainerSelCanModifyManagedObjectsInStore, store.Ptr())
 	return _ret
 }
-

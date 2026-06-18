@@ -58,4 +58,3 @@ type ActionExtensionContextable interface {
 }
 
 var _ ActionExtensionContextable = (*ActionExtensionContext)(nil)
-

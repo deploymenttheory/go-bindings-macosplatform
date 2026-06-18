@@ -209,4 +209,3 @@ func CBUUIDServerCharacteristicConfigurationString() uintptr {
 	ptr, _ := purego.Dlsym(_corebluetoothLib, "CBUUIDServerCharacteristicConfigurationString")
 	return ptr
 }
-

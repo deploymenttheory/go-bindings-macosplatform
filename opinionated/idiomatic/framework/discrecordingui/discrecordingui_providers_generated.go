@@ -12,4 +12,3 @@ import (
 type SetupPanelProvider interface {
 	asSetupPanel() *raw.DRSetupPanel
 }
-

@@ -45,7 +45,9 @@ func (x *CollectionLayoutGroup) WithSupplementaryItems(items ...CollectionLayout
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asCollectionLayoutSupplementaryItem().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asCollectionLayoutSupplementaryItem().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSCollectionLayoutSupplementaryItem](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -111,7 +113,9 @@ func (x *CollectionLayoutGroup) Subitems() []*CollectionLayoutItem {
 	})
 }
 
-func (x *CollectionLayoutGroup) asCollectionLayoutItem() *raw.NSCollectionLayoutItem { return &x.inner.NSCollectionLayoutItem }
+func (x *CollectionLayoutGroup) asCollectionLayoutItem() *raw.NSCollectionLayoutItem {
+	return &x.inner.NSCollectionLayoutItem
+}
 
 // CollectionLayoutGroupable is the interface implemented by [CollectionLayoutGroup], for mocking and DI.
 type CollectionLayoutGroupable interface {
@@ -128,4 +132,3 @@ type CollectionLayoutGroupable interface {
 }
 
 var _ CollectionLayoutGroupable = (*CollectionLayoutGroup)(nil)
-

@@ -16,39 +16,39 @@ type DRDevice struct {
 }
 
 var (
-	_clsDRDevice = _objcClass("DRDevice")
-	_dRDeviceSelDevices = objc.RegisterName("devices")
-	_dRDeviceSelDeviceForBSDName = objc.RegisterName("deviceForBSDName:")
+	_clsDRDevice                             = _objcClass("DRDevice")
+	_dRDeviceSelDevices                      = objc.RegisterName("devices")
+	_dRDeviceSelDeviceForBSDName             = objc.RegisterName("deviceForBSDName:")
 	_dRDeviceSelDeviceForIORegistryEntryPath = objc.RegisterName("deviceForIORegistryEntryPath:")
-	_dRDeviceSelIsValid = objc.RegisterName("isValid")
-	_dRDeviceSelInfo = objc.RegisterName("info")
-	_dRDeviceSelStatus = objc.RegisterName("status")
-	_dRDeviceSelOpenTray = objc.RegisterName("openTray")
-	_dRDeviceSelCloseTray = objc.RegisterName("closeTray")
-	_dRDeviceSelEjectMedia = objc.RegisterName("ejectMedia")
-	_dRDeviceSelAcquireExclusiveAccess = objc.RegisterName("acquireExclusiveAccess")
-	_dRDeviceSelReleaseExclusiveAccess = objc.RegisterName("releaseExclusiveAccess")
-	_dRDeviceSelAcquireMediaReservation = objc.RegisterName("acquireMediaReservation")
-	_dRDeviceSelReleaseMediaReservation = objc.RegisterName("releaseMediaReservation")
-	_dRDeviceSelIsEqualToDevice = objc.RegisterName("isEqualToDevice:")
-	_dRDeviceSelWritesCD = objc.RegisterName("writesCD")
-	_dRDeviceSelWritesDVD = objc.RegisterName("writesDVD")
-	_dRDeviceSelDisplayName = objc.RegisterName("displayName")
-	_dRDeviceSelIoRegistryEntryPath = objc.RegisterName("ioRegistryEntryPath")
-	_dRDeviceSelMediaIsPresent = objc.RegisterName("mediaIsPresent")
-	_dRDeviceSelMediaIsTransitioning = objc.RegisterName("mediaIsTransitioning")
-	_dRDeviceSelMediaIsBusy = objc.RegisterName("mediaIsBusy")
-	_dRDeviceSelMediaType = objc.RegisterName("mediaType")
-	_dRDeviceSelMediaIsBlank = objc.RegisterName("mediaIsBlank")
-	_dRDeviceSelMediaIsAppendable = objc.RegisterName("mediaIsAppendable")
-	_dRDeviceSelMediaIsOverwritable = objc.RegisterName("mediaIsOverwritable")
-	_dRDeviceSelMediaIsErasable = objc.RegisterName("mediaIsErasable")
-	_dRDeviceSelMediaIsReserved = objc.RegisterName("mediaIsReserved")
-	_dRDeviceSelMediaSpaceOverwritable = objc.RegisterName("mediaSpaceOverwritable")
-	_dRDeviceSelMediaSpaceUsed = objc.RegisterName("mediaSpaceUsed")
-	_dRDeviceSelMediaSpaceFree = objc.RegisterName("mediaSpaceFree")
-	_dRDeviceSelTrayIsOpen = objc.RegisterName("trayIsOpen")
-	_dRDeviceSelBsdName = objc.RegisterName("bsdName")
+	_dRDeviceSelIsValid                      = objc.RegisterName("isValid")
+	_dRDeviceSelInfo                         = objc.RegisterName("info")
+	_dRDeviceSelStatus                       = objc.RegisterName("status")
+	_dRDeviceSelOpenTray                     = objc.RegisterName("openTray")
+	_dRDeviceSelCloseTray                    = objc.RegisterName("closeTray")
+	_dRDeviceSelEjectMedia                   = objc.RegisterName("ejectMedia")
+	_dRDeviceSelAcquireExclusiveAccess       = objc.RegisterName("acquireExclusiveAccess")
+	_dRDeviceSelReleaseExclusiveAccess       = objc.RegisterName("releaseExclusiveAccess")
+	_dRDeviceSelAcquireMediaReservation      = objc.RegisterName("acquireMediaReservation")
+	_dRDeviceSelReleaseMediaReservation      = objc.RegisterName("releaseMediaReservation")
+	_dRDeviceSelIsEqualToDevice              = objc.RegisterName("isEqualToDevice:")
+	_dRDeviceSelWritesCD                     = objc.RegisterName("writesCD")
+	_dRDeviceSelWritesDVD                    = objc.RegisterName("writesDVD")
+	_dRDeviceSelDisplayName                  = objc.RegisterName("displayName")
+	_dRDeviceSelIoRegistryEntryPath          = objc.RegisterName("ioRegistryEntryPath")
+	_dRDeviceSelMediaIsPresent               = objc.RegisterName("mediaIsPresent")
+	_dRDeviceSelMediaIsTransitioning         = objc.RegisterName("mediaIsTransitioning")
+	_dRDeviceSelMediaIsBusy                  = objc.RegisterName("mediaIsBusy")
+	_dRDeviceSelMediaType                    = objc.RegisterName("mediaType")
+	_dRDeviceSelMediaIsBlank                 = objc.RegisterName("mediaIsBlank")
+	_dRDeviceSelMediaIsAppendable            = objc.RegisterName("mediaIsAppendable")
+	_dRDeviceSelMediaIsOverwritable          = objc.RegisterName("mediaIsOverwritable")
+	_dRDeviceSelMediaIsErasable              = objc.RegisterName("mediaIsErasable")
+	_dRDeviceSelMediaIsReserved              = objc.RegisterName("mediaIsReserved")
+	_dRDeviceSelMediaSpaceOverwritable       = objc.RegisterName("mediaSpaceOverwritable")
+	_dRDeviceSelMediaSpaceUsed               = objc.RegisterName("mediaSpaceUsed")
+	_dRDeviceSelMediaSpaceFree               = objc.RegisterName("mediaSpaceFree")
+	_dRDeviceSelTrayIsOpen                   = objc.RegisterName("trayIsOpen")
+	_dRDeviceSelBsdName                      = objc.RegisterName("bsdName")
 )
 
 func DRDeviceFromID(id objc.ID) *DRDevice {
@@ -70,14 +70,18 @@ func DRDeviceDevices() *foundation.NSArray[objc.ID] {
 // @method 		deviceForBSDName: @abstract		Obtains a DRDevice for the device corresponding to the bsd /dev node. @discussion		If the device is not an authoring device (i.e., CDR, CDRW, DVR-R, etc), returns nil. @param 			bsdName	The bsd /dev node name. @result  		An autoreleased DRDevice object.
 func DRDeviceDeviceForBSDName(bsdName *foundation.NSString) *DRDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsDRDevice), _dRDeviceSelDeviceForBSDName, bsdName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DRDeviceFromID(_ret)
 }
 
 // @method 		deviceForIORegistryEntryPath: @abstract		Obtains a DRDevice for the device at the path. @discussion		If the device is not an authoring device (i.e., CDR, CDRW, DVR-R, etc), returns nil. @param 			path	The IORegistry path to the device you wish to obtain a DRDEvice for. @result  		An autoreleased DRDevice object.
 func DRDeviceDeviceForIORegistryEntryPath(path *foundation.NSString) *DRDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsDRDevice), _dRDeviceSelDeviceForIORegistryEntryPath, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DRDeviceFromID(_ret)
 }
 
@@ -159,14 +163,18 @@ func (o *DRDevice) WritesDVD() bool {
 // @method		displayName @discussion	Returns an NSString suitable for display in the user interface.
 func (o *DRDevice) DisplayName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dRDeviceSelDisplayName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @method		ioRegistryEntryPath @discussion	Returns the path to the device in the IO Registry.
 func (o *DRDevice) IoRegistryEntryPath() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dRDeviceSelIoRegistryEntryPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -191,7 +199,9 @@ func (o *DRDevice) MediaIsBusy() bool {
 // @method		mediaType @discussion	Returns the type of media currently inserted into the device.
 func (o *DRDevice) MediaType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dRDeviceSelMediaType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -228,21 +238,27 @@ func (o *DRDevice) MediaIsReserved() bool {
 // @method		mediaSpaceOverwritable @discussion	Returns the amount of writable space on the media.
 func (o *DRDevice) MediaSpaceOverwritable() *DRMSF {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dRDeviceSelMediaSpaceOverwritable)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DRMSFFromID(_ret)
 }
 
 // @method		mediaSpaceUsed @discussion	Returns the amount of used space on the media.
 func (o *DRDevice) MediaSpaceUsed() *DRMSF {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dRDeviceSelMediaSpaceUsed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DRMSFFromID(_ret)
 }
 
 // @method		mediaSpaceFree @discussion	Returns the amount of free space on the media.
 func (o *DRDevice) MediaSpaceFree() *DRMSF {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dRDeviceSelMediaSpaceFree)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DRMSFFromID(_ret)
 }
 
@@ -255,7 +271,8 @@ func (o *DRDevice) TrayIsOpen() bool {
 // @method		bsdName @discussion	Returns the bsd /dev node name.
 func (o *DRDevice) BsdName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dRDeviceSelBsdName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

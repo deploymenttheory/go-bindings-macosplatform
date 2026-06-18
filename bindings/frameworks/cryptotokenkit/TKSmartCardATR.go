@@ -16,15 +16,15 @@ type TKSmartCardATR struct {
 }
 
 var (
-	_clsTKSmartCardATR = _objcClass("TKSmartCardATR")
-	_tKSmartCardATRSelInitWithBytes = objc.RegisterName("initWithBytes:")
-	_tKSmartCardATRSelInitWithSource = objc.RegisterName("initWithSource:")
-	_tKSmartCardATRSelInterfaceGroupAtIndex = objc.RegisterName("interfaceGroupAtIndex:")
+	_clsTKSmartCardATR                          = _objcClass("TKSmartCardATR")
+	_tKSmartCardATRSelInitWithBytes             = objc.RegisterName("initWithBytes:")
+	_tKSmartCardATRSelInitWithSource            = objc.RegisterName("initWithSource:")
+	_tKSmartCardATRSelInterfaceGroupAtIndex     = objc.RegisterName("interfaceGroupAtIndex:")
 	_tKSmartCardATRSelInterfaceGroupForProtocol = objc.RegisterName("interfaceGroupForProtocol:")
-	_tKSmartCardATRSelBytes = objc.RegisterName("bytes")
-	_tKSmartCardATRSelProtocols = objc.RegisterName("protocols")
-	_tKSmartCardATRSelHistoricalBytes = objc.RegisterName("historicalBytes")
-	_tKSmartCardATRSelHistoricalRecords = objc.RegisterName("historicalRecords")
+	_tKSmartCardATRSelBytes                     = objc.RegisterName("bytes")
+	_tKSmartCardATRSelProtocols                 = objc.RegisterName("protocols")
+	_tKSmartCardATRSelHistoricalBytes           = objc.RegisterName("historicalBytes")
+	_tKSmartCardATRSelHistoricalRecords         = objc.RegisterName("historicalRecords")
 )
 
 func TKSmartCardATRFromID(id objc.ID) *TKSmartCardATR {
@@ -40,7 +40,9 @@ func TKSmartCardATRFromID(id objc.ID) *TKSmartCardATR {
 // Parses ATR from binary data block @param bytes Data containing full valid ATR @return Parsed ATR instance, or nil when #bytes do not contain valid ATR.
 func (o *TKSmartCardATR) InitWithBytes(bytes_ *foundation.NSData) *TKSmartCardATR {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardATRSelInitWithBytes, bytes_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return TKSmartCardATRFromID(_ret)
 }
 
@@ -54,28 +56,36 @@ func (o *TKSmartCardATR) InitWithSource(source func() int) *TKSmartCardATR {
 		defer __block_source.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardATRSelInitWithSource, __block_source)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return TKSmartCardATRFromID(_ret)
 }
 
 // Retrieves interface group with specified index. @param index Index of the requested interface group.  Indexing conforms to ISO7816-3, i.e. starts from 1. @return Interface group with given index, or nil of no such group was present.
 func (o *TKSmartCardATR) InterfaceGroupAtIndex(index int) *TKSmartCardATRInterfaceGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardATRSelInterfaceGroupAtIndex, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return TKSmartCardATRInterfaceGroupFromID(_ret)
 }
 
 // @param protocol Protocol number for which the interface group is requested.
 func (o *TKSmartCardATR) InterfaceGroupForProtocol(protocol TKSmartCardProtocol) *TKSmartCardATRInterfaceGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardATRSelInterfaceGroupForProtocol, protocol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return TKSmartCardATRInterfaceGroupFromID(_ret)
 }
 
 // Full ATR as string of bytes
 func (o *TKSmartCardATR) Bytes() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardATRSelBytes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -88,14 +98,17 @@ func (o *TKSmartCardATR) Protocols() *foundation.NSArray[*foundation.NSNumber] {
 // Just historical bytes of ATR, without Tck and interface bytes.
 func (o *TKSmartCardATR) HistoricalBytes() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardATRSelHistoricalBytes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // An array of TKCompactTLVRecord instances with TLV records parsed from historical bytes.  If historical bytes are not structured using Compact TLV encoding, nil is returned. @note In case that ATR historical bytes begin with 0x00, the last three bytes (status indicator) are automatically appended into the returned records as if historical bytes would begin with 0x80 and 0x8 record is present in historical bytes.
 func (o *TKSmartCardATR) HistoricalRecords() *foundation.NSArray[*TKCompactTLVRecord] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardATRSelHistoricalRecords)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*TKCompactTLVRecord](_ret)
 }
-

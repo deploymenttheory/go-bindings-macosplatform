@@ -16,16 +16,16 @@ type QCCompositionParameterView struct {
 }
 
 var (
-	_clsQCCompositionParameterView = _objcClass("QCCompositionParameterView")
+	_clsQCCompositionParameterView                       = _objcClass("QCCompositionParameterView")
 	_qCCompositionParameterViewSelSetCompositionRenderer = objc.RegisterName("setCompositionRenderer:")
-	_qCCompositionParameterViewSelCompositionRenderer = objc.RegisterName("compositionRenderer")
-	_qCCompositionParameterViewSelHasParameters = objc.RegisterName("hasParameters")
-	_qCCompositionParameterViewSelSetBackgroundColor = objc.RegisterName("setBackgroundColor:")
-	_qCCompositionParameterViewSelBackgroundColor = objc.RegisterName("backgroundColor")
-	_qCCompositionParameterViewSelSetDrawsBackground = objc.RegisterName("setDrawsBackground:")
-	_qCCompositionParameterViewSelDrawsBackground = objc.RegisterName("drawsBackground")
-	_qCCompositionParameterViewSelSetDelegate = objc.RegisterName("setDelegate:")
-	_qCCompositionParameterViewSelDelegate = objc.RegisterName("delegate")
+	_qCCompositionParameterViewSelCompositionRenderer    = objc.RegisterName("compositionRenderer")
+	_qCCompositionParameterViewSelHasParameters          = objc.RegisterName("hasParameters")
+	_qCCompositionParameterViewSelSetBackgroundColor     = objc.RegisterName("setBackgroundColor:")
+	_qCCompositionParameterViewSelBackgroundColor        = objc.RegisterName("backgroundColor")
+	_qCCompositionParameterViewSelSetDrawsBackground     = objc.RegisterName("setDrawsBackground:")
+	_qCCompositionParameterViewSelDrawsBackground        = objc.RegisterName("drawsBackground")
+	_qCCompositionParameterViewSelSetDelegate            = objc.RegisterName("setDelegate:")
+	_qCCompositionParameterViewSelDelegate               = objc.RegisterName("delegate")
 )
 
 func QCCompositionParameterViewFromID(id objc.ID) *QCCompositionParameterView {
@@ -58,7 +58,9 @@ func (o *QCCompositionParameterView) SetBackgroundColor(color *appkit.NSColor) {
 
 func (o *QCCompositionParameterView) BackgroundColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionParameterViewSelBackgroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -79,4 +81,3 @@ func (o *QCCompositionParameterView) Delegate() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionParameterViewSelDelegate)
 	return _ret
 }
-

@@ -59,4 +59,3 @@ type PushCredentialsable interface {
 }
 
 var _ PushCredentialsable = (*PushCredentials)(nil)
-

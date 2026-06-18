@@ -143,4 +143,3 @@ type Filterable interface {
 }
 
 var _ Filterable = (*Filter)(nil)
-

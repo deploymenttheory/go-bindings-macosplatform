@@ -40,7 +40,9 @@ func (x *FeedbackCommandEvent) IsNegative() bool {
 	return x.inner.IsNegative()
 }
 
-func (x *FeedbackCommandEvent) asRemoteCommandEvent() *raw.MPRemoteCommandEvent { return &x.inner.MPRemoteCommandEvent }
+func (x *FeedbackCommandEvent) asRemoteCommandEvent() *raw.MPRemoteCommandEvent {
+	return &x.inner.MPRemoteCommandEvent
+}
 
 // FeedbackCommandEventable is the interface implemented by [FeedbackCommandEvent], for mocking and DI.
 type FeedbackCommandEventable interface {
@@ -49,4 +51,3 @@ type FeedbackCommandEventable interface {
 }
 
 var _ FeedbackCommandEventable = (*FeedbackCommandEvent)(nil)
-

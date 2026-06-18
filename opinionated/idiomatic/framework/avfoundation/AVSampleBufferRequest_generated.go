@@ -171,4 +171,3 @@ type SampleBufferRequestable interface {
 }
 
 var _ SampleBufferRequestable = (*SampleBufferRequest)(nil)
-

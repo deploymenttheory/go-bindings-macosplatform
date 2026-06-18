@@ -16,13 +16,13 @@ type NSDictionaryControllerKeyValuePair struct {
 }
 
 var (
-	_clsNSDictionaryControllerKeyValuePair = _objcClass("NSDictionaryControllerKeyValuePair")
-	_nSDictionaryControllerKeyValuePairSelKey = objc.RegisterName("key")
-	_nSDictionaryControllerKeyValuePairSelSetKey = objc.RegisterName("setKey:")
-	_nSDictionaryControllerKeyValuePairSelValue = objc.RegisterName("value")
-	_nSDictionaryControllerKeyValuePairSelSetValue = objc.RegisterName("setValue:")
-	_nSDictionaryControllerKeyValuePairSelLocalizedKey = objc.RegisterName("localizedKey")
-	_nSDictionaryControllerKeyValuePairSelSetLocalizedKey = objc.RegisterName("setLocalizedKey:")
+	_clsNSDictionaryControllerKeyValuePair                     = _objcClass("NSDictionaryControllerKeyValuePair")
+	_nSDictionaryControllerKeyValuePairSelKey                  = objc.RegisterName("key")
+	_nSDictionaryControllerKeyValuePairSelSetKey               = objc.RegisterName("setKey:")
+	_nSDictionaryControllerKeyValuePairSelValue                = objc.RegisterName("value")
+	_nSDictionaryControllerKeyValuePairSelSetValue             = objc.RegisterName("setValue:")
+	_nSDictionaryControllerKeyValuePairSelLocalizedKey         = objc.RegisterName("localizedKey")
+	_nSDictionaryControllerKeyValuePairSelSetLocalizedKey      = objc.RegisterName("setLocalizedKey:")
 	_nSDictionaryControllerKeyValuePairSelIsExplicitlyIncluded = objc.RegisterName("isExplicitlyIncluded")
 )
 
@@ -38,7 +38,9 @@ func NSDictionaryControllerKeyValuePairFromID(id objc.ID) *NSDictionaryControlle
 
 func (o *NSDictionaryControllerKeyValuePair) Key() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionaryControllerKeyValuePairSelKey)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -57,7 +59,9 @@ func (o *NSDictionaryControllerKeyValuePair) SetValue(value objc.ID) {
 
 func (o *NSDictionaryControllerKeyValuePair) LocalizedKey() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionaryControllerKeyValuePairSelLocalizedKey)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -69,4 +73,3 @@ func (o *NSDictionaryControllerKeyValuePair) IsExplicitlyIncluded() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDictionaryControllerKeyValuePairSelIsExplicitlyIncluded)
 	return _ret
 }
-

@@ -18,19 +18,19 @@ type SKWarpGeometryGrid struct {
 }
 
 var (
-	_clsSKWarpGeometryGrid = _objcClass("SKWarpGeometryGrid")
-	_sKWarpGeometryGridSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_sKWarpGeometryGridSelGrid = objc.RegisterName("grid")
-	_sKWarpGeometryGridSelGridWithColumnsRows = objc.RegisterName("gridWithColumns:rows:")
+	_clsSKWarpGeometryGrid                                                = _objcClass("SKWarpGeometryGrid")
+	_sKWarpGeometryGridSelInitWithCoder                                   = objc.RegisterName("initWithCoder:")
+	_sKWarpGeometryGridSelGrid                                            = objc.RegisterName("grid")
+	_sKWarpGeometryGridSelGridWithColumnsRows                             = objc.RegisterName("gridWithColumns:rows:")
 	_sKWarpGeometryGridSelGridWithColumnsRowsSourcePositionsDestPositions = objc.RegisterName("gridWithColumns:rows:sourcePositions:destPositions:")
 	_sKWarpGeometryGridSelInitWithColumnsRowsSourcePositionsDestPositions = objc.RegisterName("initWithColumns:rows:sourcePositions:destPositions:")
-	_sKWarpGeometryGridSelSourcePositionAtIndex = objc.RegisterName("sourcePositionAtIndex:")
-	_sKWarpGeometryGridSelDestPositionAtIndex = objc.RegisterName("destPositionAtIndex:")
-	_sKWarpGeometryGridSelGridByReplacingSourcePositions = objc.RegisterName("gridByReplacingSourcePositions:")
-	_sKWarpGeometryGridSelGridByReplacingDestPositions = objc.RegisterName("gridByReplacingDestPositions:")
-	_sKWarpGeometryGridSelNumberOfColumns = objc.RegisterName("numberOfColumns")
-	_sKWarpGeometryGridSelNumberOfRows = objc.RegisterName("numberOfRows")
-	_sKWarpGeometryGridSelVertexCount = objc.RegisterName("vertexCount")
+	_sKWarpGeometryGridSelSourcePositionAtIndex                           = objc.RegisterName("sourcePositionAtIndex:")
+	_sKWarpGeometryGridSelDestPositionAtIndex                             = objc.RegisterName("destPositionAtIndex:")
+	_sKWarpGeometryGridSelGridByReplacingSourcePositions                  = objc.RegisterName("gridByReplacingSourcePositions:")
+	_sKWarpGeometryGridSelGridByReplacingDestPositions                    = objc.RegisterName("gridByReplacingDestPositions:")
+	_sKWarpGeometryGridSelNumberOfColumns                                 = objc.RegisterName("numberOfColumns")
+	_sKWarpGeometryGridSelNumberOfRows                                    = objc.RegisterName("numberOfRows")
+	_sKWarpGeometryGridSelVertexCount                                     = objc.RegisterName("vertexCount")
 )
 
 func SKWarpGeometryGridFromID(id objc.ID) *SKWarpGeometryGrid {
@@ -45,31 +45,41 @@ func SKWarpGeometryGridFromID(id objc.ID) *SKWarpGeometryGrid {
 
 func (o *SKWarpGeometryGrid) InitWithCoder(aDecoder *foundation.NSCoder) *SKWarpGeometryGrid {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKWarpGeometryGridSelInitWithCoder, aDecoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKWarpGeometryGridFromID(_ret)
 }
 
 func SKWarpGeometryGridGrid() *SKWarpGeometryGrid {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKWarpGeometryGrid), _sKWarpGeometryGridSelGrid)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKWarpGeometryGridFromID(_ret)
 }
 
 func SKWarpGeometryGridGridWithColumnsRows(cols int, rows int) *SKWarpGeometryGrid {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKWarpGeometryGrid), _sKWarpGeometryGridSelGridWithColumnsRows, cols, rows)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKWarpGeometryGridFromID(_ret)
 }
 
 func SKWarpGeometryGridGridWithColumnsRowsSourcePositionsDestPositions(cols int, rows int, sourcePositions unsafe.Pointer, destPositions unsafe.Pointer) *SKWarpGeometryGrid {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKWarpGeometryGrid), _sKWarpGeometryGridSelGridWithColumnsRowsSourcePositionsDestPositions, cols, rows, sourcePositions, destPositions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKWarpGeometryGridFromID(_ret)
 }
 
 func (o *SKWarpGeometryGrid) InitWithColumnsRowsSourcePositionsDestPositions(cols int, rows int, sourcePositions unsafe.Pointer, destPositions unsafe.Pointer) *SKWarpGeometryGrid {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKWarpGeometryGridSelInitWithColumnsRowsSourcePositionsDestPositions, cols, rows, sourcePositions, destPositions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKWarpGeometryGridFromID(_ret)
 }
 
@@ -85,13 +95,17 @@ func (o *SKWarpGeometryGrid) DestPositionAtIndex(index int) unsafe.Pointer {
 
 func (o *SKWarpGeometryGrid) GridByReplacingSourcePositions(sourcePositions unsafe.Pointer) *SKWarpGeometryGrid {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKWarpGeometryGridSelGridByReplacingSourcePositions, sourcePositions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKWarpGeometryGridFromID(_ret)
 }
 
 func (o *SKWarpGeometryGrid) GridByReplacingDestPositions(destPositions unsafe.Pointer) *SKWarpGeometryGrid {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKWarpGeometryGridSelGridByReplacingDestPositions, destPositions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKWarpGeometryGridFromID(_ret)
 }
 
@@ -109,4 +123,3 @@ func (o *SKWarpGeometryGrid) VertexCount() int {
 	_ret := objc.Send[int](o.Ptr(), _sKWarpGeometryGridSelVertexCount)
 	return _ret
 }
-

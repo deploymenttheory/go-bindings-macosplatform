@@ -16,7 +16,9 @@ type ShareFocusStatusIntentResponse struct {
 }
 
 // Unwrap returns the underlying [raw.INShareFocusStatusIntentResponse].
-func (x *ShareFocusStatusIntentResponse) Unwrap() *raw.INShareFocusStatusIntentResponse { return x.inner }
+func (x *ShareFocusStatusIntentResponse) Unwrap() *raw.INShareFocusStatusIntentResponse {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -48,7 +50,9 @@ func (x *ShareFocusStatusIntentResponse) Code() raw.INShareFocusStatusIntentResp
 	return x.inner.Code()
 }
 
-func (x *ShareFocusStatusIntentResponse) asIntentResponse() *raw.INIntentResponse { return &x.inner.INIntentResponse }
+func (x *ShareFocusStatusIntentResponse) asIntentResponse() *raw.INIntentResponse {
+	return &x.inner.INIntentResponse
+}
 
 // ShareFocusStatusIntentResponseable is the interface implemented by [ShareFocusStatusIntentResponse], for mocking and DI.
 type ShareFocusStatusIntentResponseable interface {
@@ -58,4 +62,3 @@ type ShareFocusStatusIntentResponseable interface {
 }
 
 var _ ShareFocusStatusIntentResponseable = (*ShareFocusStatusIntentResponse)(nil)
-

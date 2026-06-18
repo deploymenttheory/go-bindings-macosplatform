@@ -128,4 +128,3 @@ type AppleEventManagerable interface {
 }
 
 var _ AppleEventManagerable = (*AppleEventManager)(nil)
-

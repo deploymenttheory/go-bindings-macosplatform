@@ -25,4 +25,3 @@ func HKCharacteristicTypeFromID(id objc.ID) *HKCharacteristicType {
 	purego.Track(o)
 	return o
 }
-

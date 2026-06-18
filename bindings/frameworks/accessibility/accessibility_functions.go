@@ -14,15 +14,15 @@ import (
 var (
 	_fnAXAnimatedImagesEnabled func() bool
 	// Returns whether Assistive Access is running. The value does not change during a process's lifetime, so it is not necessary to observe changes.
-	_fnAXAssistiveAccessEnabled func() bool
-	_fnAXNameFromColor func(unsafe.Pointer) objc.ID
-	_fnAXOpenSettingsFeature func(AXSettingsFeature, objc.Block)
-	_fnAXOpenSettingsFeatureIsSupported func(AXSettingsFeature) uint8
-	_fnAXPrefersActionSliderAlternative func() bool
-	_fnAXPrefersHorizontalTextLayout func() bool
+	_fnAXAssistiveAccessEnabled                   func() bool
+	_fnAXNameFromColor                            func(unsafe.Pointer) objc.ID
+	_fnAXOpenSettingsFeature                      func(AXSettingsFeature, objc.Block)
+	_fnAXOpenSettingsFeatureIsSupported           func(AXSettingsFeature) uint8
+	_fnAXPrefersActionSliderAlternative           func() bool
+	_fnAXPrefersHorizontalTextLayout              func() bool
 	_fnAXPrefersNonBlinkingTextInsertionIndicator func() bool
-	_fnAXReduceHighlightingEffectsEnabled func() bool
-	_fnAXShowBordersEnabled func() bool
+	_fnAXReduceHighlightingEffectsEnabled         func() bool
+	_fnAXShowBordersEnabled                       func() bool
 )
 
 func AXAnimatedImagesEnabled() bool {
@@ -36,7 +36,9 @@ func AXAssistiveAccessEnabled() bool {
 
 func AXNameFromColor(color unsafe.Pointer) *foundation.NSString {
 	_ret := _fnAXNameFromColor(color)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -74,4 +76,3 @@ func AXReduceHighlightingEffectsEnabled() bool {
 func AXShowBordersEnabled() bool {
 	return _fnAXShowBordersEnabled()
 }
-

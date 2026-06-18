@@ -16,10 +16,10 @@ type OSLogEntrySignpost struct {
 }
 
 var (
-	_clsOSLogEntrySignpost = _objcClass("OSLogEntrySignpost")
+	_clsOSLogEntrySignpost                   = _objcClass("OSLogEntrySignpost")
 	_oSLogEntrySignpostSelSignpostIdentifier = objc.RegisterName("signpostIdentifier")
-	_oSLogEntrySignpostSelSignpostName = objc.RegisterName("signpostName")
-	_oSLogEntrySignpostSelSignpostType = objc.RegisterName("signpostType")
+	_oSLogEntrySignpostSelSignpostName       = objc.RegisterName("signpostName")
+	_oSLogEntrySignpostSelSignpostType       = objc.RegisterName("signpostType")
 )
 
 func OSLogEntrySignpostFromID(id objc.ID) *OSLogEntrySignpost {
@@ -41,7 +41,9 @@ func (o *OSLogEntrySignpost) SignpostIdentifier() uint64 {
 // @property signpostName @abstract The signpost name associated with this entry.
 func (o *OSLogEntrySignpost) SignpostName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSLogEntrySignpostSelSignpostName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -50,4 +52,3 @@ func (o *OSLogEntrySignpost) SignpostType() OSLogEntrySignpostType {
 	_ret := objc.Send[OSLogEntrySignpostType](o.Ptr(), _oSLogEntrySignpostSelSignpostType)
 	return _ret
 }
-

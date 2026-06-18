@@ -103,4 +103,3 @@ type ActionRemoteGoToable interface {
 }
 
 var _ ActionRemoteGoToable = (*ActionRemoteGoTo)(nil)
-

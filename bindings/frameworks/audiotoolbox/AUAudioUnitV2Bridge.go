@@ -16,7 +16,7 @@ type AUAudioUnitV2Bridge struct {
 }
 
 var (
-	_clsAUAudioUnitV2Bridge = _objcClass("AUAudioUnitV2Bridge")
+	_clsAUAudioUnitV2Bridge          = _objcClass("AUAudioUnitV2Bridge")
 	_aUAudioUnitV2BridgeSelAudioUnit = objc.RegisterName("audioUnit")
 )
 
@@ -34,4 +34,3 @@ func (o *AUAudioUnitV2Bridge) AudioUnit() *carboncore.ComponentInstanceRecord {
 	_ret := objc.Send[*carboncore.ComponentInstanceRecord](o.Ptr(), _aUAudioUnitV2BridgeSelAudioUnit)
 	return _ret
 }
-

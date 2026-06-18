@@ -18,41 +18,41 @@ type MTRClusterFanControl struct {
 }
 
 var (
-	_clsMTRClusterFanControl = _objcClass("MTRClusterFanControl")
-	_mTRClusterFanControlSelStepWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("stepWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterFanControlSelReadAttributeFanModeWithParams = objc.RegisterName("readAttributeFanModeWithParams:")
-	_mTRClusterFanControlSelWriteAttributeFanModeWithValueExpectedValueInterval = objc.RegisterName("writeAttributeFanModeWithValue:expectedValueInterval:")
-	_mTRClusterFanControlSelWriteAttributeFanModeWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeFanModeWithValue:expectedValueInterval:params:")
-	_mTRClusterFanControlSelReadAttributeFanModeSequenceWithParams = objc.RegisterName("readAttributeFanModeSequenceWithParams:")
-	_mTRClusterFanControlSelWriteAttributeFanModeSequenceWithValueExpectedValueInterval = objc.RegisterName("writeAttributeFanModeSequenceWithValue:expectedValueInterval:")
-	_mTRClusterFanControlSelWriteAttributeFanModeSequenceWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeFanModeSequenceWithValue:expectedValueInterval:params:")
-	_mTRClusterFanControlSelReadAttributePercentSettingWithParams = objc.RegisterName("readAttributePercentSettingWithParams:")
-	_mTRClusterFanControlSelWriteAttributePercentSettingWithValueExpectedValueInterval = objc.RegisterName("writeAttributePercentSettingWithValue:expectedValueInterval:")
-	_mTRClusterFanControlSelWriteAttributePercentSettingWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributePercentSettingWithValue:expectedValueInterval:params:")
-	_mTRClusterFanControlSelReadAttributePercentCurrentWithParams = objc.RegisterName("readAttributePercentCurrentWithParams:")
-	_mTRClusterFanControlSelReadAttributeSpeedMaxWithParams = objc.RegisterName("readAttributeSpeedMaxWithParams:")
-	_mTRClusterFanControlSelReadAttributeSpeedSettingWithParams = objc.RegisterName("readAttributeSpeedSettingWithParams:")
-	_mTRClusterFanControlSelWriteAttributeSpeedSettingWithValueExpectedValueInterval = objc.RegisterName("writeAttributeSpeedSettingWithValue:expectedValueInterval:")
-	_mTRClusterFanControlSelWriteAttributeSpeedSettingWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeSpeedSettingWithValue:expectedValueInterval:params:")
-	_mTRClusterFanControlSelReadAttributeSpeedCurrentWithParams = objc.RegisterName("readAttributeSpeedCurrentWithParams:")
-	_mTRClusterFanControlSelReadAttributeRockSupportWithParams = objc.RegisterName("readAttributeRockSupportWithParams:")
-	_mTRClusterFanControlSelReadAttributeRockSettingWithParams = objc.RegisterName("readAttributeRockSettingWithParams:")
-	_mTRClusterFanControlSelWriteAttributeRockSettingWithValueExpectedValueInterval = objc.RegisterName("writeAttributeRockSettingWithValue:expectedValueInterval:")
-	_mTRClusterFanControlSelWriteAttributeRockSettingWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeRockSettingWithValue:expectedValueInterval:params:")
-	_mTRClusterFanControlSelReadAttributeWindSupportWithParams = objc.RegisterName("readAttributeWindSupportWithParams:")
-	_mTRClusterFanControlSelReadAttributeWindSettingWithParams = objc.RegisterName("readAttributeWindSettingWithParams:")
-	_mTRClusterFanControlSelWriteAttributeWindSettingWithValueExpectedValueInterval = objc.RegisterName("writeAttributeWindSettingWithValue:expectedValueInterval:")
-	_mTRClusterFanControlSelWriteAttributeWindSettingWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeWindSettingWithValue:expectedValueInterval:params:")
-	_mTRClusterFanControlSelReadAttributeAirflowDirectionWithParams = objc.RegisterName("readAttributeAirflowDirectionWithParams:")
-	_mTRClusterFanControlSelWriteAttributeAirflowDirectionWithValueExpectedValueInterval = objc.RegisterName("writeAttributeAirflowDirectionWithValue:expectedValueInterval:")
+	_clsMTRClusterFanControl                                                                   = _objcClass("MTRClusterFanControl")
+	_mTRClusterFanControlSelStepWithParamsExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("stepWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterFanControlSelReadAttributeFanModeWithParams                                     = objc.RegisterName("readAttributeFanModeWithParams:")
+	_mTRClusterFanControlSelWriteAttributeFanModeWithValueExpectedValueInterval                = objc.RegisterName("writeAttributeFanModeWithValue:expectedValueInterval:")
+	_mTRClusterFanControlSelWriteAttributeFanModeWithValueExpectedValueIntervalParams          = objc.RegisterName("writeAttributeFanModeWithValue:expectedValueInterval:params:")
+	_mTRClusterFanControlSelReadAttributeFanModeSequenceWithParams                             = objc.RegisterName("readAttributeFanModeSequenceWithParams:")
+	_mTRClusterFanControlSelWriteAttributeFanModeSequenceWithValueExpectedValueInterval        = objc.RegisterName("writeAttributeFanModeSequenceWithValue:expectedValueInterval:")
+	_mTRClusterFanControlSelWriteAttributeFanModeSequenceWithValueExpectedValueIntervalParams  = objc.RegisterName("writeAttributeFanModeSequenceWithValue:expectedValueInterval:params:")
+	_mTRClusterFanControlSelReadAttributePercentSettingWithParams                              = objc.RegisterName("readAttributePercentSettingWithParams:")
+	_mTRClusterFanControlSelWriteAttributePercentSettingWithValueExpectedValueInterval         = objc.RegisterName("writeAttributePercentSettingWithValue:expectedValueInterval:")
+	_mTRClusterFanControlSelWriteAttributePercentSettingWithValueExpectedValueIntervalParams   = objc.RegisterName("writeAttributePercentSettingWithValue:expectedValueInterval:params:")
+	_mTRClusterFanControlSelReadAttributePercentCurrentWithParams                              = objc.RegisterName("readAttributePercentCurrentWithParams:")
+	_mTRClusterFanControlSelReadAttributeSpeedMaxWithParams                                    = objc.RegisterName("readAttributeSpeedMaxWithParams:")
+	_mTRClusterFanControlSelReadAttributeSpeedSettingWithParams                                = objc.RegisterName("readAttributeSpeedSettingWithParams:")
+	_mTRClusterFanControlSelWriteAttributeSpeedSettingWithValueExpectedValueInterval           = objc.RegisterName("writeAttributeSpeedSettingWithValue:expectedValueInterval:")
+	_mTRClusterFanControlSelWriteAttributeSpeedSettingWithValueExpectedValueIntervalParams     = objc.RegisterName("writeAttributeSpeedSettingWithValue:expectedValueInterval:params:")
+	_mTRClusterFanControlSelReadAttributeSpeedCurrentWithParams                                = objc.RegisterName("readAttributeSpeedCurrentWithParams:")
+	_mTRClusterFanControlSelReadAttributeRockSupportWithParams                                 = objc.RegisterName("readAttributeRockSupportWithParams:")
+	_mTRClusterFanControlSelReadAttributeRockSettingWithParams                                 = objc.RegisterName("readAttributeRockSettingWithParams:")
+	_mTRClusterFanControlSelWriteAttributeRockSettingWithValueExpectedValueInterval            = objc.RegisterName("writeAttributeRockSettingWithValue:expectedValueInterval:")
+	_mTRClusterFanControlSelWriteAttributeRockSettingWithValueExpectedValueIntervalParams      = objc.RegisterName("writeAttributeRockSettingWithValue:expectedValueInterval:params:")
+	_mTRClusterFanControlSelReadAttributeWindSupportWithParams                                 = objc.RegisterName("readAttributeWindSupportWithParams:")
+	_mTRClusterFanControlSelReadAttributeWindSettingWithParams                                 = objc.RegisterName("readAttributeWindSettingWithParams:")
+	_mTRClusterFanControlSelWriteAttributeWindSettingWithValueExpectedValueInterval            = objc.RegisterName("writeAttributeWindSettingWithValue:expectedValueInterval:")
+	_mTRClusterFanControlSelWriteAttributeWindSettingWithValueExpectedValueIntervalParams      = objc.RegisterName("writeAttributeWindSettingWithValue:expectedValueInterval:params:")
+	_mTRClusterFanControlSelReadAttributeAirflowDirectionWithParams                            = objc.RegisterName("readAttributeAirflowDirectionWithParams:")
+	_mTRClusterFanControlSelWriteAttributeAirflowDirectionWithValueExpectedValueInterval       = objc.RegisterName("writeAttributeAirflowDirectionWithValue:expectedValueInterval:")
 	_mTRClusterFanControlSelWriteAttributeAirflowDirectionWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeAirflowDirectionWithValue:expectedValueInterval:params:")
-	_mTRClusterFanControlSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterFanControlSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterFanControlSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterFanControlSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterFanControlSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterFanControlSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterFanControlSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterFanControlSelReadAttributeGeneratedCommandListWithParams                        = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterFanControlSelReadAttributeAcceptedCommandListWithParams                         = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterFanControlSelReadAttributeAttributeListWithParams                               = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterFanControlSelReadAttributeFeatureMapWithParams                                  = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterFanControlSelReadAttributeClusterRevisionWithParams                             = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterFanControlSelInitWithDeviceEndpointIDQueue                                      = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterFanControlSelInitWithDeviceEndpointQueue                                        = objc.RegisterName("initWithDevice:endpoint:queue:")
 )
 
 func MTRClusterFanControlFromID(id objc.ID) *MTRClusterFanControl {
@@ -220,13 +220,16 @@ func (o *MTRClusterFanControl) ReadAttributeClusterRevisionWithParams(params *MT
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterFanControl) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterFanControl {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterFanControlSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterFanControlFromID(_ret)
 }
 
 func (o *MTRClusterFanControl) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterFanControl {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterFanControlSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterFanControlFromID(_ret)
 }
-

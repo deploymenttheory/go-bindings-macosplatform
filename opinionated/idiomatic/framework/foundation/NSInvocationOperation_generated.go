@@ -112,4 +112,3 @@ type InvocationOperationable interface {
 }
 
 var _ InvocationOperationable = (*InvocationOperation)(nil)
-

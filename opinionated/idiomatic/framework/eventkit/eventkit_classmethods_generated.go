@@ -113,4 +113,3 @@ func LocationWithMapItem(mapItem *mapkit.MKMapItem) *StructuredLocation {
 	}
 	return &StructuredLocation{inner: _r}
 }
-

@@ -86,7 +86,9 @@ func (x *MicroGamepadSnapshot) SetSnapshotData(snapshotData *foundation.NSData) 
 
 func (x *MicroGamepadSnapshot) asMicroGamepad() *raw.GCMicroGamepad { return &x.inner.GCMicroGamepad }
 
-func (x *MicroGamepadSnapshot) asPhysicalInputProfile() *raw.GCPhysicalInputProfile { return &x.inner.GCMicroGamepad.GCPhysicalInputProfile }
+func (x *MicroGamepadSnapshot) asPhysicalInputProfile() *raw.GCPhysicalInputProfile {
+	return &x.inner.GCMicroGamepad.GCPhysicalInputProfile
+}
 
 // MicroGamepadSnapshotable is the interface implemented by [MicroGamepadSnapshot], for mocking and DI.
 type MicroGamepadSnapshotable interface {
@@ -101,4 +103,3 @@ type MicroGamepadSnapshotable interface {
 }
 
 var _ MicroGamepadSnapshotable = (*MicroGamepadSnapshot)(nil)
-

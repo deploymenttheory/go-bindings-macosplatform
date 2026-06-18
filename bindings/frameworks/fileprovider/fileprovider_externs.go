@@ -14,13 +14,17 @@ import (
 // Posted when any domain changed. Interested client should then call `+[NSFileProviderManager getDomainsWithCompletionHandler:]` and see what changed. Note, this notification starts to be posted only after `+[NSFileProviderManager getDomainsWithCompletionHandler:]` is called.
 func NSFileProviderDomainDidChange() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_fileproviderLib, "NSFileProviderDomainDidChange")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileProviderErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_fileproviderLib, "NSFileProviderErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -31,7 +35,9 @@ func NSFileProviderErrorItemKey() uintptr {
 
 func NSFileProviderErrorNonExistentItemIdentifierKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_fileproviderLib, "NSFileProviderErrorNonExistentItemIdentifierKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -43,26 +49,34 @@ func NSFileProviderFavoriteRankUnranked() uintptr {
 
 func NSFileProviderInitialPageSortedByDate() *foundation.NSData {
 	ptr, _ := purego.Dlsym(_fileproviderLib, "NSFileProviderInitialPageSortedByDate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSData)(unsafe.Pointer(ptr))
 }
 
 func NSFileProviderInitialPageSortedByName() *foundation.NSData {
 	ptr, _ := purego.Dlsym(_fileproviderLib, "NSFileProviderInitialPageSortedByName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSData)(unsafe.Pointer(ptr))
 }
 
 func NSFileProviderMaterializedSetDidChange() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_fileproviderLib, "NSFileProviderMaterializedSetDidChange")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Posted when the pending set has changed. Interested clients can then use the pending set enumerator returned by -enumeratorForPendingItems to enumerate changes on the pending set. Note, this notification starts to be posted only after `+[NSFileProviderManager getDomainsWithCompletionHandler:]` is called.
 func NSFileProviderPendingSetDidChange() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_fileproviderLib, "NSFileProviderPendingSetDidChange")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -89,4 +103,3 @@ func NSFileProviderWorkingSetContainerItemIdentifier() uintptr {
 	ptr, _ := purego.Dlsym(_fileproviderLib, "NSFileProviderWorkingSetContainerItemIdentifier")
 	return ptr
 }
-

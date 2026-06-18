@@ -15,10 +15,10 @@ type NSUnitElectricPotentialDifference struct {
 }
 
 var (
-	_clsNSUnitElectricPotentialDifference = _objcClass("NSUnitElectricPotentialDifference")
-	_nSUnitElectricPotentialDifferenceSelMegavolts = objc.RegisterName("megavolts")
-	_nSUnitElectricPotentialDifferenceSelKilovolts = objc.RegisterName("kilovolts")
-	_nSUnitElectricPotentialDifferenceSelVolts = objc.RegisterName("volts")
+	_clsNSUnitElectricPotentialDifference           = _objcClass("NSUnitElectricPotentialDifference")
+	_nSUnitElectricPotentialDifferenceSelMegavolts  = objc.RegisterName("megavolts")
+	_nSUnitElectricPotentialDifferenceSelKilovolts  = objc.RegisterName("kilovolts")
+	_nSUnitElectricPotentialDifferenceSelVolts      = objc.RegisterName("volts")
 	_nSUnitElectricPotentialDifferenceSelMillivolts = objc.RegisterName("millivolts")
 	_nSUnitElectricPotentialDifferenceSelMicrovolts = objc.RegisterName("microvolts")
 )
@@ -35,31 +35,40 @@ func NSUnitElectricPotentialDifferenceFromID(id objc.ID) *NSUnitElectricPotentia
 
 func NSUnitElectricPotentialDifferenceMegavolts() *NSUnitElectricPotentialDifference {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricPotentialDifference), _nSUnitElectricPotentialDifferenceSelMegavolts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitElectricPotentialDifferenceFromID(_ret)
 }
 
 func NSUnitElectricPotentialDifferenceKilovolts() *NSUnitElectricPotentialDifference {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricPotentialDifference), _nSUnitElectricPotentialDifferenceSelKilovolts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitElectricPotentialDifferenceFromID(_ret)
 }
 
 func NSUnitElectricPotentialDifferenceVolts() *NSUnitElectricPotentialDifference {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricPotentialDifference), _nSUnitElectricPotentialDifferenceSelVolts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitElectricPotentialDifferenceFromID(_ret)
 }
 
 func NSUnitElectricPotentialDifferenceMillivolts() *NSUnitElectricPotentialDifference {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricPotentialDifference), _nSUnitElectricPotentialDifferenceSelMillivolts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitElectricPotentialDifferenceFromID(_ret)
 }
 
 func NSUnitElectricPotentialDifferenceMicrovolts() *NSUnitElectricPotentialDifference {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricPotentialDifference), _nSUnitElectricPotentialDifferenceSelMicrovolts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitElectricPotentialDifferenceFromID(_ret)
 }
-

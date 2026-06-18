@@ -85,4 +85,3 @@ type VirtioSocketDeviceable interface {
 }
 
 var _ VirtioSocketDeviceable = (*VirtioSocketDevice)(nil)
-

@@ -16,7 +16,9 @@ type MTRMediaInputClusterHideInputStatusParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRMediaInputClusterHideInputStatusParams].
-func (x *MTRMediaInputClusterHideInputStatusParams) Unwrap() *raw.MTRMediaInputClusterHideInputStatusParams { return x.inner }
+func (x *MTRMediaInputClusterHideInputStatusParams) Unwrap() *raw.MTRMediaInputClusterHideInputStatusParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -80,4 +82,3 @@ type MTRMediaInputClusterHideInputStatusParamsable interface {
 }
 
 var _ MTRMediaInputClusterHideInputStatusParamsable = (*MTRMediaInputClusterHideInputStatusParams)(nil)
-

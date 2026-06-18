@@ -15,7 +15,9 @@ type MetadataQueryAttributeValueTuple struct {
 }
 
 // Unwrap returns the underlying [raw.NSMetadataQueryAttributeValueTuple].
-func (x *MetadataQueryAttributeValueTuple) Unwrap() *raw.NSMetadataQueryAttributeValueTuple { return x.inner }
+func (x *MetadataQueryAttributeValueTuple) Unwrap() *raw.NSMetadataQueryAttributeValueTuple {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -72,4 +74,3 @@ type MetadataQueryAttributeValueTupleable interface {
 }
 
 var _ MetadataQueryAttributeValueTupleable = (*MetadataQueryAttributeValueTuple)(nil)
-

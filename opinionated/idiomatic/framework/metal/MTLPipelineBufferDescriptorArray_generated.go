@@ -15,7 +15,9 @@ type PipelineBufferDescriptorArray struct {
 }
 
 // Unwrap returns the underlying [raw.MTLPipelineBufferDescriptorArray].
-func (x *PipelineBufferDescriptorArray) Unwrap() *raw.MTLPipelineBufferDescriptorArray { return x.inner }
+func (x *PipelineBufferDescriptorArray) Unwrap() *raw.MTLPipelineBufferDescriptorArray {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -57,4 +59,3 @@ type PipelineBufferDescriptorArrayable interface {
 }
 
 var _ PipelineBufferDescriptorArrayable = (*PipelineBufferDescriptorArray)(nil)
-

@@ -72,4 +72,3 @@ type SignpostIntervalDataable interface {
 }
 
 var _ SignpostIntervalDataable = (*SignpostIntervalData)(nil)
-

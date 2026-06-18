@@ -12,13 +12,13 @@ import (
 type IOSurfaceComponentName int64
 
 const (
-	KIOSurfaceComponentNameUnknown IOSurfaceComponentName = 0
-	KIOSurfaceComponentNameAlpha IOSurfaceComponentName = 1
-	KIOSurfaceComponentNameRed IOSurfaceComponentName = 2
-	KIOSurfaceComponentNameGreen IOSurfaceComponentName = 3
-	KIOSurfaceComponentNameBlue IOSurfaceComponentName = 4
-	KIOSurfaceComponentNameLuma IOSurfaceComponentName = 5
-	KIOSurfaceComponentNameChromaRed IOSurfaceComponentName = 6
+	KIOSurfaceComponentNameUnknown    IOSurfaceComponentName = 0
+	KIOSurfaceComponentNameAlpha      IOSurfaceComponentName = 1
+	KIOSurfaceComponentNameRed        IOSurfaceComponentName = 2
+	KIOSurfaceComponentNameGreen      IOSurfaceComponentName = 3
+	KIOSurfaceComponentNameBlue       IOSurfaceComponentName = 4
+	KIOSurfaceComponentNameLuma       IOSurfaceComponentName = 5
+	KIOSurfaceComponentNameChromaRed  IOSurfaceComponentName = 6
 	KIOSurfaceComponentNameChromaBlue IOSurfaceComponentName = 7
 )
 
@@ -48,10 +48,10 @@ func (e IOSurfaceComponentName) String() string {
 type IOSurfaceComponentRange int64
 
 const (
-	KIOSurfaceComponentRangeUnknown IOSurfaceComponentRange = 0
-	KIOSurfaceComponentRangeFullRange IOSurfaceComponentRange = 1
+	KIOSurfaceComponentRangeUnknown    IOSurfaceComponentRange = 0
+	KIOSurfaceComponentRangeFullRange  IOSurfaceComponentRange = 1
 	KIOSurfaceComponentRangeVideoRange IOSurfaceComponentRange = 2
-	KIOSurfaceComponentRangeWideRange IOSurfaceComponentRange = 3
+	KIOSurfaceComponentRangeWideRange  IOSurfaceComponentRange = 3
 )
 
 func (e IOSurfaceComponentRange) String() string {
@@ -72,10 +72,10 @@ func (e IOSurfaceComponentRange) String() string {
 type IOSurfaceComponentType int64
 
 const (
-	KIOSurfaceComponentTypeUnknown IOSurfaceComponentType = 0
-	KIOSurfaceComponentTypeUnsignedInteger IOSurfaceComponentType = 1
-	KIOSurfaceComponentTypeSignedInteger IOSurfaceComponentType = 2
-	KIOSurfaceComponentTypeFloat IOSurfaceComponentType = 3
+	KIOSurfaceComponentTypeUnknown          IOSurfaceComponentType = 0
+	KIOSurfaceComponentTypeUnsignedInteger  IOSurfaceComponentType = 1
+	KIOSurfaceComponentTypeSignedInteger    IOSurfaceComponentType = 2
+	KIOSurfaceComponentTypeFloat            IOSurfaceComponentType = 3
 	KIOSurfaceComponentTypeSignedNormalized IOSurfaceComponentType = 4
 )
 
@@ -100,7 +100,7 @@ func (e IOSurfaceComponentType) String() string {
 type IOSurfaceLockOptions int64
 
 const (
-	KIOSurfaceLockReadOnly IOSurfaceLockOptions = 1
+	KIOSurfaceLockReadOnly  IOSurfaceLockOptions = 1
 	KIOSurfaceLockAvoidSync IOSurfaceLockOptions = 2
 )
 
@@ -122,10 +122,10 @@ type IOSurfaceSubsampling int64
 
 const (
 	KIOSurfaceSubsamplingUnknown IOSurfaceSubsampling = 0
-	KIOSurfaceSubsamplingNone IOSurfaceSubsampling = 1
-	KIOSurfaceSubsampling422 IOSurfaceSubsampling = 2
-	KIOSurfaceSubsampling420 IOSurfaceSubsampling = 3
-	KIOSurfaceSubsampling411 IOSurfaceSubsampling = 4
+	KIOSurfaceSubsamplingNone    IOSurfaceSubsampling = 1
+	KIOSurfaceSubsampling422     IOSurfaceSubsampling = 2
+	KIOSurfaceSubsampling420     IOSurfaceSubsampling = 3
+	KIOSurfaceSubsampling411     IOSurfaceSubsampling = 4
 )
 
 func (e IOSurfaceSubsampling) String() string {
@@ -144,4 +144,3 @@ func (e IOSurfaceSubsampling) String() string {
 		return fmt.Sprintf("IOSurfaceSubsampling(%d)", int64(e))
 	}
 }
-

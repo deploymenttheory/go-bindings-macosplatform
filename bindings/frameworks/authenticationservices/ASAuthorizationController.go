@@ -16,15 +16,15 @@ type ASAuthorizationController struct {
 }
 
 var (
-	_clsASAuthorizationController = _objcClass("ASAuthorizationController")
-	_aSAuthorizationControllerSelInitWithAuthorizationRequests = objc.RegisterName("initWithAuthorizationRequests:")
-	_aSAuthorizationControllerSelPerformRequests = objc.RegisterName("performRequests")
-	_aSAuthorizationControllerSelPerformRequestsWithOptions = objc.RegisterName("performRequestsWithOptions:")
-	_aSAuthorizationControllerSelCancel = objc.RegisterName("cancel")
-	_aSAuthorizationControllerSelAuthorizationRequests = objc.RegisterName("authorizationRequests")
-	_aSAuthorizationControllerSelDelegate = objc.RegisterName("delegate")
-	_aSAuthorizationControllerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_aSAuthorizationControllerSelPresentationContextProvider = objc.RegisterName("presentationContextProvider")
+	_clsASAuthorizationController                               = _objcClass("ASAuthorizationController")
+	_aSAuthorizationControllerSelInitWithAuthorizationRequests  = objc.RegisterName("initWithAuthorizationRequests:")
+	_aSAuthorizationControllerSelPerformRequests                = objc.RegisterName("performRequests")
+	_aSAuthorizationControllerSelPerformRequestsWithOptions     = objc.RegisterName("performRequestsWithOptions:")
+	_aSAuthorizationControllerSelCancel                         = objc.RegisterName("cancel")
+	_aSAuthorizationControllerSelAuthorizationRequests          = objc.RegisterName("authorizationRequests")
+	_aSAuthorizationControllerSelDelegate                       = objc.RegisterName("delegate")
+	_aSAuthorizationControllerSelSetDelegate                    = objc.RegisterName("setDelegate:")
+	_aSAuthorizationControllerSelPresentationContextProvider    = objc.RegisterName("presentationContextProvider")
 	_aSAuthorizationControllerSelSetPresentationContextProvider = objc.RegisterName("setPresentationContextProvider:")
 )
 
@@ -41,7 +41,9 @@ func ASAuthorizationControllerFromID(id objc.ID) *ASAuthorizationController {
 // @abstract Initialize the controller with authorization requests. @param authorizationRequests At least one request should be provided. Requests of same type maybe honored in first in first out order
 func (o *ASAuthorizationController) InitWithAuthorizationRequests(authorizationRequests *foundation.NSArray[*ASAuthorizationRequest]) *ASAuthorizationController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationControllerSelInitWithAuthorizationRequests, authorizationRequests.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationControllerFromID(_ret)
 }
 
@@ -63,7 +65,9 @@ func (o *ASAuthorizationController) Cancel() {
 // @abstract Authorization requests that are being serviced by this controller
 func (o *ASAuthorizationController) AuthorizationRequests() *foundation.NSArray[*ASAuthorizationRequest] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationControllerSelAuthorizationRequests)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*ASAuthorizationRequest](_ret)
 }
 
@@ -86,4 +90,3 @@ func (o *ASAuthorizationController) PresentationContextProvider() ASAuthorizatio
 func (o *ASAuthorizationController) SetPresentationContextProvider(presentationContextProvider ASAuthorizationControllerPresentationContextProviding) {
 	o.Ptr().Send(_aSAuthorizationControllerSelSetPresentationContextProvider, presentationContextProvider)
 }
-

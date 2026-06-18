@@ -124,11 +124,17 @@ func (x *ImageSubtract) WithLabel(label string) *ImageSubtract {
 	return x
 }
 
-func (x *ImageSubtract) asImageArithmetic() *mpsimage.MPSImageArithmetic { return &x.inner.MPSImageArithmetic }
+func (x *ImageSubtract) asImageArithmetic() *mpsimage.MPSImageArithmetic {
+	return &x.inner.MPSImageArithmetic
+}
 
-func (x *ImageSubtract) asBinaryImageKernel() *mpsimage.MPSBinaryImageKernel { return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel }
+func (x *ImageSubtract) asBinaryImageKernel() *mpsimage.MPSBinaryImageKernel {
+	return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel
+}
 
-func (x *ImageSubtract) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel.MPSKernel }
+func (x *ImageSubtract) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel.MPSKernel
+}
 
 // ImageSubtractable is the interface implemented by [ImageSubtract], for mocking and DI.
 type ImageSubtractable interface {
@@ -150,4 +156,3 @@ type ImageSubtractable interface {
 }
 
 var _ ImageSubtractable = (*ImageSubtract)(nil)
-

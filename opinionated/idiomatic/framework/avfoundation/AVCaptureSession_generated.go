@@ -326,4 +326,3 @@ type CaptureSessionable interface {
 }
 
 var _ CaptureSessionable = (*CaptureSession)(nil)
-

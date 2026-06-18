@@ -46,7 +46,9 @@ func (x *UMPMutableEndpoint) WithMutableFunctionBlocks(items ...*raw.MIDIUMPMuta
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.MIDIUMPMutableFunctionBlock](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -62,7 +64,9 @@ func (x *UMPMutableEndpoint) WithFunctionBlocks(items ...UMPFunctionBlockProvide
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asUMPFunctionBlock().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asUMPFunctionBlock().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.MIDIUMPFunctionBlock](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -123,4 +127,3 @@ type UMPMutableEndpointable interface {
 }
 
 var _ UMPMutableEndpointable = (*UMPMutableEndpoint)(nil)
-

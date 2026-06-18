@@ -59,4 +59,3 @@ type FlashingLightsProcessorable interface {
 }
 
 var _ FlashingLightsProcessorable = (*FlashingLightsProcessor)(nil)
-

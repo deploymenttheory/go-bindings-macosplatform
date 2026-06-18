@@ -15,9 +15,9 @@ type NSInflectionRuleExplicit struct {
 }
 
 var (
-	_clsNSInflectionRuleExplicit = _objcClass("NSInflectionRuleExplicit")
+	_clsNSInflectionRuleExplicit                   = _objcClass("NSInflectionRuleExplicit")
 	_nSInflectionRuleExplicitSelInitWithMorphology = objc.RegisterName("initWithMorphology:")
-	_nSInflectionRuleExplicitSelMorphology = objc.RegisterName("morphology")
+	_nSInflectionRuleExplicitSelMorphology         = objc.RegisterName("morphology")
 )
 
 func NSInflectionRuleExplicitFromID(id objc.ID) *NSInflectionRuleExplicit {
@@ -32,13 +32,16 @@ func NSInflectionRuleExplicitFromID(id objc.ID) *NSInflectionRuleExplicit {
 
 func (o *NSInflectionRuleExplicit) InitWithMorphology(morphology *NSMorphology) *NSInflectionRuleExplicit {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSInflectionRuleExplicitSelInitWithMorphology, morphology.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSInflectionRuleExplicitFromID(_ret)
 }
 
 func (o *NSInflectionRuleExplicit) Morphology() *NSMorphology {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSInflectionRuleExplicitSelMorphology)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMorphologyFromID(_ret)
 }
-

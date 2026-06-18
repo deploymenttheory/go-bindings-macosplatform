@@ -76,4 +76,3 @@ type CNNLossLabelsable interface {
 }
 
 var _ CNNLossLabelsable = (*CNNLossLabels)(nil)
-

@@ -19,13 +19,13 @@ type AVAssetWriterInputPixelBufferAdaptor struct {
 }
 
 var (
-	_clsAVAssetWriterInputPixelBufferAdaptor = _objcClass("AVAssetWriterInputPixelBufferAdaptor")
+	_clsAVAssetWriterInputPixelBufferAdaptor                                                                                  = _objcClass("AVAssetWriterInputPixelBufferAdaptor")
 	_aVAssetWriterInputPixelBufferAdaptorSelAssetWriterInputPixelBufferAdaptorWithAssetWriterInputSourcePixelBufferAttributes = objc.RegisterName("assetWriterInputPixelBufferAdaptorWithAssetWriterInput:sourcePixelBufferAttributes:")
-	_aVAssetWriterInputPixelBufferAdaptorSelInitWithAssetWriterInputSourcePixelBufferAttributes = objc.RegisterName("initWithAssetWriterInput:sourcePixelBufferAttributes:")
-	_aVAssetWriterInputPixelBufferAdaptorSelAppendPixelBufferWithPresentationTime = objc.RegisterName("appendPixelBuffer:withPresentationTime:")
-	_aVAssetWriterInputPixelBufferAdaptorSelAssetWriterInput = objc.RegisterName("assetWriterInput")
-	_aVAssetWriterInputPixelBufferAdaptorSelSourcePixelBufferAttributes = objc.RegisterName("sourcePixelBufferAttributes")
-	_aVAssetWriterInputPixelBufferAdaptorSelPixelBufferPool = objc.RegisterName("pixelBufferPool")
+	_aVAssetWriterInputPixelBufferAdaptorSelInitWithAssetWriterInputSourcePixelBufferAttributes                               = objc.RegisterName("initWithAssetWriterInput:sourcePixelBufferAttributes:")
+	_aVAssetWriterInputPixelBufferAdaptorSelAppendPixelBufferWithPresentationTime                                             = objc.RegisterName("appendPixelBuffer:withPresentationTime:")
+	_aVAssetWriterInputPixelBufferAdaptorSelAssetWriterInput                                                                  = objc.RegisterName("assetWriterInput")
+	_aVAssetWriterInputPixelBufferAdaptorSelSourcePixelBufferAttributes                                                       = objc.RegisterName("sourcePixelBufferAttributes")
+	_aVAssetWriterInputPixelBufferAdaptorSelPixelBufferPool                                                                   = objc.RegisterName("pixelBufferPool")
 )
 
 func AVAssetWriterInputPixelBufferAdaptorFromID(id objc.ID) *AVAssetWriterInputPixelBufferAdaptor {
@@ -41,14 +41,18 @@ func AVAssetWriterInputPixelBufferAdaptorFromID(id objc.ID) *AVAssetWriterInputP
 // Creates a new pixel buffer adaptor to receive pixel buffers for writing to the output file. In order to take advantage of the improved efficiency of appending buffers created from the adaptor's pixel buffer pool, clients should specify pixel buffer attributes that most closely accommodate the source format of the video frames being appended. Pixel buffer attributes keys for the pixel buffer pool are defined in <CoreVideo/CVPixelBuffer.h>. To specify the pixel format type, the pixelBufferAttributes dictionary should contain a value for kCVPixelBufferPixelFormatTypeKey. For example, use [NSNumber numberWithInt:kCVPixelFormatType_32BGRA] for 8-bit-per-channel BGRA. See the discussion under appendPixelBuffer:withPresentationTime: for advice on choosing a pixel format. Clients that do not need a pixel buffer pool for allocating buffers should set sourcePixelBufferAttributes to nil. This method throws an exception if the input is already attached to another asset writer input pixel buffer adaptor or if the input has already started writing (the asset writer has progressed beyond AVAssetWriterStatusUnknown). - Parameter input: An instance of AVAssetWriterInput to which the receiver should append pixel buffers. Currently, only asset writer inputs that accept media data of type AVMediaTypeVideo can be used to initialize a pixel buffer adaptor. - Parameter sourcePixelBufferAttributes: Specifies the attributes of pixel buffers that will be vended by the input's CVPixelBufferPool. - Returns: An instance of AVAssetWriterInputPixelBufferAdaptor.
 func AVAssetWriterInputPixelBufferAdaptorAssetWriterInputPixelBufferAdaptorWithAssetWriterInputSourcePixelBufferAttributes(input *AVAssetWriterInput, sourcePixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVAssetWriterInputPixelBufferAdaptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetWriterInputPixelBufferAdaptor), _aVAssetWriterInputPixelBufferAdaptorSelAssetWriterInputPixelBufferAdaptorWithAssetWriterInputSourcePixelBufferAttributes, input.Ptr(), sourcePixelBufferAttributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetWriterInputPixelBufferAdaptorFromID(_ret)
 }
 
 // Creates a new pixel buffer adaptor to receive pixel buffers for writing to the output file. In order to take advantage of the improved efficiency of appending buffers created from the adaptor's pixel buffer pool, clients should specify pixel buffer attributes that most closely accommodate the source format of the video frames being appended. Pixel buffer attributes keys for the pixel buffer pool are defined in <CoreVideo/CVPixelBuffer.h>. To specify the pixel format type, the pixelBufferAttributes dictionary should contain a value for kCVPixelBufferPixelFormatTypeKey. For example, use [NSNumber numberWithInt:kCVPixelFormatType_32BGRA] for 8-bit-per-channel BGRA. See the discussion under appendPixelBuffer:withPresentationTime: for advice on choosing a pixel format. Clients that do not need a pixel buffer pool for allocating buffers should set sourcePixelBufferAttributes to nil. This method throws an exception if the input is already attached to another asset writer input pixel buffer adaptor or if the input has already started writing (the asset writer has progressed beyond AVAssetWriterStatusUnknown). - Parameter input: An instance of AVAssetWriterInput to which the receiver should append pixel buffers. Currently, only asset writer inputs that accept media data of type AVMediaTypeVideo can be used to initialize a pixel buffer adaptor. - Parameter sourcePixelBufferAttributes: Specifies the attributes of pixel buffers that will be vended by the input's CVPixelBufferPool. - Returns: An instance of AVAssetWriterInputPixelBufferAdaptor.
 func (o *AVAssetWriterInputPixelBufferAdaptor) InitWithAssetWriterInputSourcePixelBufferAttributes(input *AVAssetWriterInput, sourcePixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVAssetWriterInputPixelBufferAdaptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterInputPixelBufferAdaptorSelInitWithAssetWriterInputSourcePixelBufferAttributes, input.Ptr(), sourcePixelBufferAttributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetWriterInputPixelBufferAdaptorFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *AVAssetWriterInputPixelBufferAdaptor) AppendPixelBufferWithPresentation
 // The asset writer input to which the receiver should append pixel buffers.
 func (o *AVAssetWriterInputPixelBufferAdaptor) AssetWriterInput() *AVAssetWriterInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterInputPixelBufferAdaptorSelAssetWriterInput)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetWriterInputFromID(_ret)
 }
 
@@ -76,4 +82,3 @@ func (o *AVAssetWriterInputPixelBufferAdaptor) PixelBufferPool() unsafe.Pointer 
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVAssetWriterInputPixelBufferAdaptorSelPixelBufferPool)
 	return _ret
 }
-

@@ -18,22 +18,22 @@ type MIDICISession struct {
 }
 
 var (
-	_clsMIDICISession = _objcClass("MIDICISession")
+	_clsMIDICISession                                                        = _objcClass("MIDICISession")
 	_mIDICISessionSelInitWithDiscoveredNodeDataReadyHandlerDisconnectHandler = objc.RegisterName("initWithDiscoveredNode:dataReadyHandler:disconnectHandler:")
-	_mIDICISessionSelProfileStateForChannel = objc.RegisterName("profileStateForChannel:")
-	_mIDICISessionSelEnableProfileOnChannelError = objc.RegisterName("enableProfile:onChannel:error:")
-	_mIDICISessionSelDisableProfileOnChannelError = objc.RegisterName("disableProfile:onChannel:error:")
-	_mIDICISessionSelSendProfileOnChannelProfileData = objc.RegisterName("sendProfile:onChannel:profileData:")
-	_mIDICISessionSelMidiDestination = objc.RegisterName("midiDestination")
-	_mIDICISessionSelSupportsProfileCapability = objc.RegisterName("supportsProfileCapability")
-	_mIDICISessionSelSupportsPropertyCapability = objc.RegisterName("supportsPropertyCapability")
-	_mIDICISessionSelDeviceInfo = objc.RegisterName("deviceInfo")
-	_mIDICISessionSelMaxSysExSize = objc.RegisterName("maxSysExSize")
-	_mIDICISessionSelMaxPropertyRequests = objc.RegisterName("maxPropertyRequests")
-	_mIDICISessionSelProfileChangedCallback = objc.RegisterName("profileChangedCallback")
-	_mIDICISessionSelSetProfileChangedCallback = objc.RegisterName("setProfileChangedCallback:")
-	_mIDICISessionSelProfileSpecificDataHandler = objc.RegisterName("profileSpecificDataHandler")
-	_mIDICISessionSelSetProfileSpecificDataHandler = objc.RegisterName("setProfileSpecificDataHandler:")
+	_mIDICISessionSelProfileStateForChannel                                  = objc.RegisterName("profileStateForChannel:")
+	_mIDICISessionSelEnableProfileOnChannelError                             = objc.RegisterName("enableProfile:onChannel:error:")
+	_mIDICISessionSelDisableProfileOnChannelError                            = objc.RegisterName("disableProfile:onChannel:error:")
+	_mIDICISessionSelSendProfileOnChannelProfileData                         = objc.RegisterName("sendProfile:onChannel:profileData:")
+	_mIDICISessionSelMidiDestination                                         = objc.RegisterName("midiDestination")
+	_mIDICISessionSelSupportsProfileCapability                               = objc.RegisterName("supportsProfileCapability")
+	_mIDICISessionSelSupportsPropertyCapability                              = objc.RegisterName("supportsPropertyCapability")
+	_mIDICISessionSelDeviceInfo                                              = objc.RegisterName("deviceInfo")
+	_mIDICISessionSelMaxSysExSize                                            = objc.RegisterName("maxSysExSize")
+	_mIDICISessionSelMaxPropertyRequests                                     = objc.RegisterName("maxPropertyRequests")
+	_mIDICISessionSelProfileChangedCallback                                  = objc.RegisterName("profileChangedCallback")
+	_mIDICISessionSelSetProfileChangedCallback                               = objc.RegisterName("setProfileChangedCallback:")
+	_mIDICISessionSelProfileSpecificDataHandler                              = objc.RegisterName("profileSpecificDataHandler")
+	_mIDICISessionSelSetProfileSpecificDataHandler                           = objc.RegisterName("setProfileSpecificDataHandler:")
 )
 
 func MIDICISessionFromID(id objc.ID) *MIDICISession {
@@ -65,13 +65,17 @@ func (o *MIDICISession) InitWithDiscoveredNodeDataReadyHandlerDisconnectHandler(
 		defer __block_disconnectHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICISessionSelInitWithDiscoveredNodeDataReadyHandlerDisconnectHandler, discoveredNode.Ptr(), __block_handler, __block_disconnectHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MIDICISessionFromID(_ret)
 }
 
 func (o *MIDICISession) ProfileStateForChannel(channel uint8) *MIDICIProfileState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICISessionSelProfileStateForChannel, channel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MIDICIProfileStateFromID(_ret)
 }
 
@@ -115,19 +119,25 @@ func (o *MIDICISession) SupportsPropertyCapability() bool {
 
 func (o *MIDICISession) DeviceInfo() *MIDICIDeviceInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICISessionSelDeviceInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MIDICIDeviceInfoFromID(_ret)
 }
 
 func (o *MIDICISession) MaxSysExSize() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICISessionSelMaxSysExSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MIDICISession) MaxPropertyRequests() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICISessionSelMaxPropertyRequests)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -177,4 +187,3 @@ func (o *MIDICISession) SetProfileSpecificDataHandler(profileSpecificDataHandler
 	}
 	o.Ptr().Send(_mIDICISessionSelSetProfileSpecificDataHandler, __block_profileSpecificDataHandler)
 }
-

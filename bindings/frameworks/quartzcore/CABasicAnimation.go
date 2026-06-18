@@ -15,13 +15,13 @@ type CABasicAnimation struct {
 }
 
 var (
-	_clsCABasicAnimation = _objcClass("CABasicAnimation")
-	_cABasicAnimationSelFromValue = objc.RegisterName("fromValue")
+	_clsCABasicAnimation             = _objcClass("CABasicAnimation")
+	_cABasicAnimationSelFromValue    = objc.RegisterName("fromValue")
 	_cABasicAnimationSelSetFromValue = objc.RegisterName("setFromValue:")
-	_cABasicAnimationSelToValue = objc.RegisterName("toValue")
-	_cABasicAnimationSelSetToValue = objc.RegisterName("setToValue:")
-	_cABasicAnimationSelByValue = objc.RegisterName("byValue")
-	_cABasicAnimationSelSetByValue = objc.RegisterName("setByValue:")
+	_cABasicAnimationSelToValue      = objc.RegisterName("toValue")
+	_cABasicAnimationSelSetToValue   = objc.RegisterName("setToValue:")
+	_cABasicAnimationSelByValue      = objc.RegisterName("byValue")
+	_cABasicAnimationSelSetByValue   = objc.RegisterName("setByValue:")
 )
 
 func CABasicAnimationFromID(id objc.ID) *CABasicAnimation {
@@ -60,4 +60,3 @@ func (o *CABasicAnimation) ByValue() objc.ID {
 func (o *CABasicAnimation) SetByValue(byValue objc.ID) {
 	o.Ptr().Send(_cABasicAnimationSelSetByValue, byValue)
 }
-

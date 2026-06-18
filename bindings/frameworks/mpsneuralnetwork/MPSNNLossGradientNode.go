@@ -18,24 +18,24 @@ type MPSNNLossGradientNode struct {
 }
 
 var (
-	_clsMPSNNLossGradientNode = _objcClass("MPSNNLossGradientNode")
+	_clsMPSNNLossGradientNode                                                                                                = _objcClass("MPSNNLossGradientNode")
 	_mPSNNLossGradientNodeSelNodeWithSourceGradientSourceImageLabelsWeightsGradientStateLossDescriptorIsLabelsGradientFilter = objc.RegisterName("nodeWithSourceGradient:sourceImage:labels:weights:gradientState:lossDescriptor:isLabelsGradientFilter:")
-	_mPSNNLossGradientNodeSelNodeWithSourceGradientSourceImageLabelsGradientStateLossDescriptorIsLabelsGradientFilter = objc.RegisterName("nodeWithSourceGradient:sourceImage:labels:gradientState:lossDescriptor:isLabelsGradientFilter:")
-	_mPSNNLossGradientNodeSelNodeWithSourcesGradientStateLossDescriptorIsLabelsGradientFilter = objc.RegisterName("nodeWithSources:gradientState:lossDescriptor:isLabelsGradientFilter:")
+	_mPSNNLossGradientNodeSelNodeWithSourceGradientSourceImageLabelsGradientStateLossDescriptorIsLabelsGradientFilter        = objc.RegisterName("nodeWithSourceGradient:sourceImage:labels:gradientState:lossDescriptor:isLabelsGradientFilter:")
+	_mPSNNLossGradientNodeSelNodeWithSourcesGradientStateLossDescriptorIsLabelsGradientFilter                                = objc.RegisterName("nodeWithSources:gradientState:lossDescriptor:isLabelsGradientFilter:")
 	_mPSNNLossGradientNodeSelInitWithSourceGradientSourceImageLabelsWeightsGradientStateLossDescriptorIsLabelsGradientFilter = objc.RegisterName("initWithSourceGradient:sourceImage:labels:weights:gradientState:lossDescriptor:isLabelsGradientFilter:")
-	_mPSNNLossGradientNodeSelInitWithSourceGradientSourceImageLabelsGradientStateLossDescriptorIsLabelsGradientFilter = objc.RegisterName("initWithSourceGradient:sourceImage:labels:gradientState:lossDescriptor:isLabelsGradientFilter:")
-	_mPSNNLossGradientNodeSelInitWithSourcesGradientStateLossDescriptorIsLabelsGradientFilter = objc.RegisterName("initWithSources:gradientState:lossDescriptor:isLabelsGradientFilter:")
-	_mPSNNLossGradientNodeSelLossType = objc.RegisterName("lossType")
-	_mPSNNLossGradientNodeSelReductionType = objc.RegisterName("reductionType")
-	_mPSNNLossGradientNodeSelNumberOfClasses = objc.RegisterName("numberOfClasses")
-	_mPSNNLossGradientNodeSelReduceAcrossBatch = objc.RegisterName("reduceAcrossBatch")
-	_mPSNNLossGradientNodeSelWeight = objc.RegisterName("weight")
-	_mPSNNLossGradientNodeSelLabelSmoothing = objc.RegisterName("labelSmoothing")
-	_mPSNNLossGradientNodeSelEpsilon = objc.RegisterName("epsilon")
-	_mPSNNLossGradientNodeSelDelta = objc.RegisterName("delta")
-	_mPSNNLossGradientNodeSelIsLabelsGradientFilter = objc.RegisterName("isLabelsGradientFilter")
-	_mPSNNLossGradientNodeSelPropertyCallBack = objc.RegisterName("propertyCallBack")
-	_mPSNNLossGradientNodeSelSetPropertyCallBack = objc.RegisterName("setPropertyCallBack:")
+	_mPSNNLossGradientNodeSelInitWithSourceGradientSourceImageLabelsGradientStateLossDescriptorIsLabelsGradientFilter        = objc.RegisterName("initWithSourceGradient:sourceImage:labels:gradientState:lossDescriptor:isLabelsGradientFilter:")
+	_mPSNNLossGradientNodeSelInitWithSourcesGradientStateLossDescriptorIsLabelsGradientFilter                                = objc.RegisterName("initWithSources:gradientState:lossDescriptor:isLabelsGradientFilter:")
+	_mPSNNLossGradientNodeSelLossType                                                                                        = objc.RegisterName("lossType")
+	_mPSNNLossGradientNodeSelReductionType                                                                                   = objc.RegisterName("reductionType")
+	_mPSNNLossGradientNodeSelNumberOfClasses                                                                                 = objc.RegisterName("numberOfClasses")
+	_mPSNNLossGradientNodeSelReduceAcrossBatch                                                                               = objc.RegisterName("reduceAcrossBatch")
+	_mPSNNLossGradientNodeSelWeight                                                                                          = objc.RegisterName("weight")
+	_mPSNNLossGradientNodeSelLabelSmoothing                                                                                  = objc.RegisterName("labelSmoothing")
+	_mPSNNLossGradientNodeSelEpsilon                                                                                         = objc.RegisterName("epsilon")
+	_mPSNNLossGradientNodeSelDelta                                                                                           = objc.RegisterName("delta")
+	_mPSNNLossGradientNodeSelIsLabelsGradientFilter                                                                          = objc.RegisterName("isLabelsGradientFilter")
+	_mPSNNLossGradientNodeSelPropertyCallBack                                                                                = objc.RegisterName("propertyCallBack")
+	_mPSNNLossGradientNodeSelSetPropertyCallBack                                                                             = objc.RegisterName("setPropertyCallBack:")
 )
 
 func MPSNNLossGradientNodeFromID(id objc.ID) *MPSNNLossGradientNode {
@@ -50,38 +50,50 @@ func MPSNNLossGradientNodeFromID(id objc.ID) *MPSNNLossGradientNode {
 
 func MPSNNLossGradientNodeNodeWithSourceGradientSourceImageLabelsWeightsGradientStateLossDescriptorIsLabelsGradientFilter(sourceGradient *MPSNNImageNode, sourceImage *MPSNNImageNode, labels *MPSNNImageNode, weights *MPSNNImageNode, gradientState *MPSNNGradientStateNode, descriptor *MPSCNNLossDescriptor, isLabelsGradientFilter bool) *MPSNNLossGradientNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNLossGradientNode), _mPSNNLossGradientNodeSelNodeWithSourceGradientSourceImageLabelsWeightsGradientStateLossDescriptorIsLabelsGradientFilter, sourceGradient.Ptr(), sourceImage.Ptr(), labels.Ptr(), weights.Ptr(), gradientState.Ptr(), descriptor.Ptr(), isLabelsGradientFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNLossGradientNodeFromID(_ret)
 }
 
 func MPSNNLossGradientNodeNodeWithSourceGradientSourceImageLabelsGradientStateLossDescriptorIsLabelsGradientFilter(sourceGradient *MPSNNImageNode, sourceImage *MPSNNImageNode, labels *MPSNNImageNode, gradientState *MPSNNGradientStateNode, descriptor *MPSCNNLossDescriptor, isLabelsGradientFilter bool) *MPSNNLossGradientNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNLossGradientNode), _mPSNNLossGradientNodeSelNodeWithSourceGradientSourceImageLabelsGradientStateLossDescriptorIsLabelsGradientFilter, sourceGradient.Ptr(), sourceImage.Ptr(), labels.Ptr(), gradientState.Ptr(), descriptor.Ptr(), isLabelsGradientFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNLossGradientNodeFromID(_ret)
 }
 
 // @abstract   Init a gradient loss node from multiple images @param      sourceNodes             The MPSNNImageNode representing the source MPSImages for the filter Node0: logits, Node1: labels, Node2: weights @return     A new MPSNNFilter node.
 func MPSNNLossGradientNodeNodeWithSourcesGradientStateLossDescriptorIsLabelsGradientFilter(sourceNodes *foundation.NSArray[*MPSNNImageNode], gradientState *MPSNNGradientStateNode, descriptor *MPSCNNLossDescriptor, isLabelsGradientFilter bool) *MPSNNLossGradientNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNLossGradientNode), _mPSNNLossGradientNodeSelNodeWithSourcesGradientStateLossDescriptorIsLabelsGradientFilter, sourceNodes.Ptr(), gradientState.Ptr(), descriptor.Ptr(), isLabelsGradientFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNLossGradientNodeFromID(_ret)
 }
 
 func (o *MPSNNLossGradientNode) InitWithSourceGradientSourceImageLabelsWeightsGradientStateLossDescriptorIsLabelsGradientFilter(sourceGradient *MPSNNImageNode, sourceImage *MPSNNImageNode, labels *MPSNNImageNode, weights *MPSNNImageNode, gradientState *MPSNNGradientStateNode, descriptor *MPSCNNLossDescriptor, isLabelsGradientFilter bool) *MPSNNLossGradientNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNLossGradientNodeSelInitWithSourceGradientSourceImageLabelsWeightsGradientStateLossDescriptorIsLabelsGradientFilter, sourceGradient.Ptr(), sourceImage.Ptr(), labels.Ptr(), weights.Ptr(), gradientState.Ptr(), descriptor.Ptr(), isLabelsGradientFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNLossGradientNodeFromID(_ret)
 }
 
 func (o *MPSNNLossGradientNode) InitWithSourceGradientSourceImageLabelsGradientStateLossDescriptorIsLabelsGradientFilter(sourceGradient *MPSNNImageNode, sourceImage *MPSNNImageNode, labels *MPSNNImageNode, gradientState *MPSNNGradientStateNode, descriptor *MPSCNNLossDescriptor, isLabelsGradientFilter bool) *MPSNNLossGradientNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNLossGradientNodeSelInitWithSourceGradientSourceImageLabelsGradientStateLossDescriptorIsLabelsGradientFilter, sourceGradient.Ptr(), sourceImage.Ptr(), labels.Ptr(), gradientState.Ptr(), descriptor.Ptr(), isLabelsGradientFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNLossGradientNodeFromID(_ret)
 }
 
 func (o *MPSNNLossGradientNode) InitWithSourcesGradientStateLossDescriptorIsLabelsGradientFilter(sourceNodes *foundation.NSArray[*MPSNNImageNode], gradientState *MPSNNGradientStateNode, descriptor *MPSCNNLossDescriptor, isLabelsGradientFilter bool) *MPSNNLossGradientNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNLossGradientNodeSelInitWithSourcesGradientStateLossDescriptorIsLabelsGradientFilter, sourceNodes.Ptr(), gradientState.Ptr(), descriptor.Ptr(), isLabelsGradientFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNLossGradientNodeFromID(_ret)
 }
 
@@ -139,4 +151,3 @@ func (o *MPSNNLossGradientNode) PropertyCallBack() MPSNNLossCallback {
 func (o *MPSNNLossGradientNode) SetPropertyCallBack(propertyCallBack MPSNNLossCallback) {
 	o.Ptr().Send(_mPSNNLossGradientNodeSelSetPropertyCallBack, propertyCallBack)
 }
-

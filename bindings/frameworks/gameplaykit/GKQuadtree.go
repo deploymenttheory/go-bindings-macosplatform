@@ -20,15 +20,15 @@ type GKQuadtree[ElementType purego.AnyObject] struct {
 }
 
 var (
-	_clsGKQuadtree = _objcClass("GKQuadtree")
+	_clsGKQuadtree                                        = _objcClass("GKQuadtree")
 	_gKQuadtreeSelQuadtreeWithBoundingQuadMinimumCellSize = objc.RegisterName("quadtreeWithBoundingQuad:minimumCellSize:")
-	_gKQuadtreeSelInitWithBoundingQuadMinimumCellSize = objc.RegisterName("initWithBoundingQuad:minimumCellSize:")
-	_gKQuadtreeSelAddElementWithPoint = objc.RegisterName("addElement:withPoint:")
-	_gKQuadtreeSelAddElementWithQuad = objc.RegisterName("addElement:withQuad:")
-	_gKQuadtreeSelElementsAtPoint = objc.RegisterName("elementsAtPoint:")
-	_gKQuadtreeSelElementsInQuad = objc.RegisterName("elementsInQuad:")
-	_gKQuadtreeSelRemoveElement = objc.RegisterName("removeElement:")
-	_gKQuadtreeSelRemoveElementWithNode = objc.RegisterName("removeElement:withNode:")
+	_gKQuadtreeSelInitWithBoundingQuadMinimumCellSize     = objc.RegisterName("initWithBoundingQuad:minimumCellSize:")
+	_gKQuadtreeSelAddElementWithPoint                     = objc.RegisterName("addElement:withPoint:")
+	_gKQuadtreeSelAddElementWithQuad                      = objc.RegisterName("addElement:withQuad:")
+	_gKQuadtreeSelElementsAtPoint                         = objc.RegisterName("elementsAtPoint:")
+	_gKQuadtreeSelElementsInQuad                          = objc.RegisterName("elementsInQuad:")
+	_gKQuadtreeSelRemoveElement                           = objc.RegisterName("removeElement:")
+	_gKQuadtreeSelRemoveElementWithNode                   = objc.RegisterName("removeElement:withNode:")
 )
 
 func GKQuadtreeFromID[ElementType purego.AnyObject](id objc.ID) *GKQuadtree[ElementType] {
@@ -44,41 +44,53 @@ func GKQuadtreeFromID[ElementType purego.AnyObject](id objc.ID) *GKQuadtree[Elem
 // Creates a quadtree with a bounding quad and minimum allowed cell size @param quad the quad that specifies of the bounds of this quadtree. Elements must only be within these bounds. @param minCellSize the minimum allowed cell size.  The quadtree will not create quadrants that have a width or height smaller than this size.
 func GKQuadtreeQuadtreeWithBoundingQuadMinimumCellSize(quad GKQuad, minCellSize float32) *GKQuadtree[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKQuadtree), _gKQuadtreeSelQuadtreeWithBoundingQuadMinimumCellSize, quad, minCellSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKQuadtreeFromID[objc.ID](_ret)
 }
 
 func (o *GKQuadtree[ElementType]) InitWithBoundingQuadMinimumCellSize(quad GKQuad, minCellSize float32) *GKQuadtree[ElementType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKQuadtreeSelInitWithBoundingQuadMinimumCellSize, quad, minCellSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKQuadtreeFromID[ElementType](_ret)
 }
 
 // Adds an NSObject to this quadtree with a given point. This data will always reside in the leaf node its point is in. @param element the element to store @param point the point associated with the element you want to store @return the quadtree node the element was added to
 func (o *GKQuadtree[ElementType]) AddElementWithPoint(element ElementType, point unsafe.Pointer) *GKQuadtreeNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKQuadtreeSelAddElementWithPoint, element, point)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKQuadtreeNodeFromID(_ret)
 }
 
 // Adds an NSObject to this quadtree with a given quad. This data will reside in the lowest node that its quad fits in completely. @param element the element to store @param quad the quad associated with the element you want to store @return the quad tree node the element was added to
 func (o *GKQuadtree[ElementType]) AddElementWithQuad(element ElementType, quad GKQuad) *GKQuadtreeNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKQuadtreeSelAddElementWithQuad, element, quad)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKQuadtreeNodeFromID(_ret)
 }
 
 // Returns all of the elements in the quadtree node this point would be placed in @param point the point to query @return an NSArray of all the data found at the quad tree node this point would be placed in
 func (o *GKQuadtree[ElementType]) ElementsAtPoint(point unsafe.Pointer) *foundation.NSArray[ElementType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKQuadtreeSelElementsAtPoint, point)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[ElementType](_ret)
 }
 
 // Returns all of the elements that resides in quad tree nodes which intersect the given quad @param quad the quad you want to test @return an NSArray of all the elements in all of the nodes that intersect the given quad
 func (o *GKQuadtree[ElementType]) ElementsInQuad(quad GKQuad) *foundation.NSArray[ElementType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKQuadtreeSelElementsInQuad, quad)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[ElementType](_ret)
 }
 
@@ -93,4 +105,3 @@ func (o *GKQuadtree[ElementType]) RemoveElementWithNode(data ElementType, node *
 	_ret := objc.Send[bool](o.Ptr(), _gKQuadtreeSelRemoveElementWithNode, data, node.Ptr())
 	return _ret
 }
-

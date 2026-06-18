@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_securityLib uintptr
-	_loadOnce sync.Once
+	_securityLib   uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -49,91 +49,187 @@ func _loadLibrary() {
 		return
 	}
 	_register("AuthorizationCopyInfo", func() { purego.RegisterLibFunc(&_fnAuthorizationCopyInfo, _securityLib, "AuthorizationCopyInfo") })
-	_register("AuthorizationCopyPrivilegedReference", func() { purego.RegisterLibFunc(&_fnAuthorizationCopyPrivilegedReference, _securityLib, "AuthorizationCopyPrivilegedReference") })
+	_register("AuthorizationCopyPrivilegedReference", func() {
+		purego.RegisterLibFunc(&_fnAuthorizationCopyPrivilegedReference, _securityLib, "AuthorizationCopyPrivilegedReference")
+	})
 	_register("AuthorizationCopyRights", func() { purego.RegisterLibFunc(&_fnAuthorizationCopyRights, _securityLib, "AuthorizationCopyRights") })
-	_register("AuthorizationCopyRightsAsync", func() { purego.RegisterLibFunc(&_fnAuthorizationCopyRightsAsync, _securityLib, "AuthorizationCopyRightsAsync") })
+	_register("AuthorizationCopyRightsAsync", func() {
+		purego.RegisterLibFunc(&_fnAuthorizationCopyRightsAsync, _securityLib, "AuthorizationCopyRightsAsync")
+	})
 	_register("AuthorizationCreate", func() { purego.RegisterLibFunc(&_fnAuthorizationCreate, _securityLib, "AuthorizationCreate") })
-	_register("AuthorizationCreateFromExternalForm", func() { purego.RegisterLibFunc(&_fnAuthorizationCreateFromExternalForm, _securityLib, "AuthorizationCreateFromExternalForm") })
-	_register("AuthorizationExecuteWithPrivileges", func() { purego.RegisterLibFunc(&_fnAuthorizationExecuteWithPrivileges, _securityLib, "AuthorizationExecuteWithPrivileges") })
+	_register("AuthorizationCreateFromExternalForm", func() {
+		purego.RegisterLibFunc(&_fnAuthorizationCreateFromExternalForm, _securityLib, "AuthorizationCreateFromExternalForm")
+	})
+	_register("AuthorizationExecuteWithPrivileges", func() {
+		purego.RegisterLibFunc(&_fnAuthorizationExecuteWithPrivileges, _securityLib, "AuthorizationExecuteWithPrivileges")
+	})
 	_register("AuthorizationFree", func() { purego.RegisterLibFunc(&_fnAuthorizationFree, _securityLib, "AuthorizationFree") })
 	_register("AuthorizationFreeItemSet", func() { purego.RegisterLibFunc(&_fnAuthorizationFreeItemSet, _securityLib, "AuthorizationFreeItemSet") })
-	_register("AuthorizationMakeExternalForm", func() { purego.RegisterLibFunc(&_fnAuthorizationMakeExternalForm, _securityLib, "AuthorizationMakeExternalForm") })
+	_register("AuthorizationMakeExternalForm", func() {
+		purego.RegisterLibFunc(&_fnAuthorizationMakeExternalForm, _securityLib, "AuthorizationMakeExternalForm")
+	})
 	_register("AuthorizationRightGet", func() { purego.RegisterLibFunc(&_fnAuthorizationRightGet, _securityLib, "AuthorizationRightGet") })
 	_register("AuthorizationRightRemove", func() { purego.RegisterLibFunc(&_fnAuthorizationRightRemove, _securityLib, "AuthorizationRightRemove") })
 	_register("AuthorizationRightSet", func() { purego.RegisterLibFunc(&_fnAuthorizationRightSet, _securityLib, "AuthorizationRightSet") })
 	_register("CMSDecoderCopyAllCerts", func() { purego.RegisterLibFunc(&_fnCMSDecoderCopyAllCerts, _securityLib, "CMSDecoderCopyAllCerts") })
 	_register("CMSDecoderCopyContent", func() { purego.RegisterLibFunc(&_fnCMSDecoderCopyContent, _securityLib, "CMSDecoderCopyContent") })
-	_register("CMSDecoderCopyDetachedContent", func() { purego.RegisterLibFunc(&_fnCMSDecoderCopyDetachedContent, _securityLib, "CMSDecoderCopyDetachedContent") })
-	_register("CMSDecoderCopyEncapsulatedContentType", func() { purego.RegisterLibFunc(&_fnCMSDecoderCopyEncapsulatedContentType, _securityLib, "CMSDecoderCopyEncapsulatedContentType") })
+	_register("CMSDecoderCopyDetachedContent", func() {
+		purego.RegisterLibFunc(&_fnCMSDecoderCopyDetachedContent, _securityLib, "CMSDecoderCopyDetachedContent")
+	})
+	_register("CMSDecoderCopyEncapsulatedContentType", func() {
+		purego.RegisterLibFunc(&_fnCMSDecoderCopyEncapsulatedContentType, _securityLib, "CMSDecoderCopyEncapsulatedContentType")
+	})
 	_register("CMSDecoderCopySignerCert", func() { purego.RegisterLibFunc(&_fnCMSDecoderCopySignerCert, _securityLib, "CMSDecoderCopySignerCert") })
-	_register("CMSDecoderCopySignerEmailAddress", func() { purego.RegisterLibFunc(&_fnCMSDecoderCopySignerEmailAddress, _securityLib, "CMSDecoderCopySignerEmailAddress") })
-	_register("CMSDecoderCopySignerSigningTime", func() { purego.RegisterLibFunc(&_fnCMSDecoderCopySignerSigningTime, _securityLib, "CMSDecoderCopySignerSigningTime") })
-	_register("CMSDecoderCopySignerStatus", func() { purego.RegisterLibFunc(&_fnCMSDecoderCopySignerStatus, _securityLib, "CMSDecoderCopySignerStatus") })
-	_register("CMSDecoderCopySignerTimestamp", func() { purego.RegisterLibFunc(&_fnCMSDecoderCopySignerTimestamp, _securityLib, "CMSDecoderCopySignerTimestamp") })
-	_register("CMSDecoderCopySignerTimestampCertificates", func() { purego.RegisterLibFunc(&_fnCMSDecoderCopySignerTimestampCertificates, _securityLib, "CMSDecoderCopySignerTimestampCertificates") })
-	_register("CMSDecoderCopySignerTimestampWithPolicy", func() { purego.RegisterLibFunc(&_fnCMSDecoderCopySignerTimestampWithPolicy, _securityLib, "CMSDecoderCopySignerTimestampWithPolicy") })
+	_register("CMSDecoderCopySignerEmailAddress", func() {
+		purego.RegisterLibFunc(&_fnCMSDecoderCopySignerEmailAddress, _securityLib, "CMSDecoderCopySignerEmailAddress")
+	})
+	_register("CMSDecoderCopySignerSigningTime", func() {
+		purego.RegisterLibFunc(&_fnCMSDecoderCopySignerSigningTime, _securityLib, "CMSDecoderCopySignerSigningTime")
+	})
+	_register("CMSDecoderCopySignerStatus", func() {
+		purego.RegisterLibFunc(&_fnCMSDecoderCopySignerStatus, _securityLib, "CMSDecoderCopySignerStatus")
+	})
+	_register("CMSDecoderCopySignerTimestamp", func() {
+		purego.RegisterLibFunc(&_fnCMSDecoderCopySignerTimestamp, _securityLib, "CMSDecoderCopySignerTimestamp")
+	})
+	_register("CMSDecoderCopySignerTimestampCertificates", func() {
+		purego.RegisterLibFunc(&_fnCMSDecoderCopySignerTimestampCertificates, _securityLib, "CMSDecoderCopySignerTimestampCertificates")
+	})
+	_register("CMSDecoderCopySignerTimestampWithPolicy", func() {
+		purego.RegisterLibFunc(&_fnCMSDecoderCopySignerTimestampWithPolicy, _securityLib, "CMSDecoderCopySignerTimestampWithPolicy")
+	})
 	_register("CMSDecoderCreate", func() { purego.RegisterLibFunc(&_fnCMSDecoderCreate, _securityLib, "CMSDecoderCreate") })
-	_register("CMSDecoderFinalizeMessage", func() { purego.RegisterLibFunc(&_fnCMSDecoderFinalizeMessage, _securityLib, "CMSDecoderFinalizeMessage") })
+	_register("CMSDecoderFinalizeMessage", func() {
+		purego.RegisterLibFunc(&_fnCMSDecoderFinalizeMessage, _securityLib, "CMSDecoderFinalizeMessage")
+	})
 	_register("CMSDecoderGetNumSigners", func() { purego.RegisterLibFunc(&_fnCMSDecoderGetNumSigners, _securityLib, "CMSDecoderGetNumSigners") })
 	_register("CMSDecoderGetTypeID", func() { purego.RegisterLibFunc(&_fnCMSDecoderGetTypeID, _securityLib, "CMSDecoderGetTypeID") })
-	_register("CMSDecoderIsContentEncrypted", func() { purego.RegisterLibFunc(&_fnCMSDecoderIsContentEncrypted, _securityLib, "CMSDecoderIsContentEncrypted") })
-	_register("CMSDecoderSetDetachedContent", func() { purego.RegisterLibFunc(&_fnCMSDecoderSetDetachedContent, _securityLib, "CMSDecoderSetDetachedContent") })
-	_register("CMSDecoderSetSearchKeychain", func() { purego.RegisterLibFunc(&_fnCMSDecoderSetSearchKeychain, _securityLib, "CMSDecoderSetSearchKeychain") })
+	_register("CMSDecoderIsContentEncrypted", func() {
+		purego.RegisterLibFunc(&_fnCMSDecoderIsContentEncrypted, _securityLib, "CMSDecoderIsContentEncrypted")
+	})
+	_register("CMSDecoderSetDetachedContent", func() {
+		purego.RegisterLibFunc(&_fnCMSDecoderSetDetachedContent, _securityLib, "CMSDecoderSetDetachedContent")
+	})
+	_register("CMSDecoderSetSearchKeychain", func() {
+		purego.RegisterLibFunc(&_fnCMSDecoderSetSearchKeychain, _securityLib, "CMSDecoderSetSearchKeychain")
+	})
 	_register("CMSDecoderUpdateMessage", func() { purego.RegisterLibFunc(&_fnCMSDecoderUpdateMessage, _securityLib, "CMSDecoderUpdateMessage") })
 	_register("CMSEncode", func() { purego.RegisterLibFunc(&_fnCMSEncode, _securityLib, "CMSEncode") })
 	_register("CMSEncodeContent", func() { purego.RegisterLibFunc(&_fnCMSEncodeContent, _securityLib, "CMSEncodeContent") })
 	_register("CMSEncoderAddRecipients", func() { purego.RegisterLibFunc(&_fnCMSEncoderAddRecipients, _securityLib, "CMSEncoderAddRecipients") })
-	_register("CMSEncoderAddSignedAttributes", func() { purego.RegisterLibFunc(&_fnCMSEncoderAddSignedAttributes, _securityLib, "CMSEncoderAddSignedAttributes") })
+	_register("CMSEncoderAddSignedAttributes", func() {
+		purego.RegisterLibFunc(&_fnCMSEncoderAddSignedAttributes, _securityLib, "CMSEncoderAddSignedAttributes")
+	})
 	_register("CMSEncoderAddSigners", func() { purego.RegisterLibFunc(&_fnCMSEncoderAddSigners, _securityLib, "CMSEncoderAddSigners") })
-	_register("CMSEncoderAddSupportingCerts", func() { purego.RegisterLibFunc(&_fnCMSEncoderAddSupportingCerts, _securityLib, "CMSEncoderAddSupportingCerts") })
-	_register("CMSEncoderCopyEncapsulatedContentType", func() { purego.RegisterLibFunc(&_fnCMSEncoderCopyEncapsulatedContentType, _securityLib, "CMSEncoderCopyEncapsulatedContentType") })
-	_register("CMSEncoderCopyEncodedContent", func() { purego.RegisterLibFunc(&_fnCMSEncoderCopyEncodedContent, _securityLib, "CMSEncoderCopyEncodedContent") })
+	_register("CMSEncoderAddSupportingCerts", func() {
+		purego.RegisterLibFunc(&_fnCMSEncoderAddSupportingCerts, _securityLib, "CMSEncoderAddSupportingCerts")
+	})
+	_register("CMSEncoderCopyEncapsulatedContentType", func() {
+		purego.RegisterLibFunc(&_fnCMSEncoderCopyEncapsulatedContentType, _securityLib, "CMSEncoderCopyEncapsulatedContentType")
+	})
+	_register("CMSEncoderCopyEncodedContent", func() {
+		purego.RegisterLibFunc(&_fnCMSEncoderCopyEncodedContent, _securityLib, "CMSEncoderCopyEncodedContent")
+	})
 	_register("CMSEncoderCopyRecipients", func() { purego.RegisterLibFunc(&_fnCMSEncoderCopyRecipients, _securityLib, "CMSEncoderCopyRecipients") })
-	_register("CMSEncoderCopySignerTimestamp", func() { purego.RegisterLibFunc(&_fnCMSEncoderCopySignerTimestamp, _securityLib, "CMSEncoderCopySignerTimestamp") })
-	_register("CMSEncoderCopySignerTimestampWithPolicy", func() { purego.RegisterLibFunc(&_fnCMSEncoderCopySignerTimestampWithPolicy, _securityLib, "CMSEncoderCopySignerTimestampWithPolicy") })
+	_register("CMSEncoderCopySignerTimestamp", func() {
+		purego.RegisterLibFunc(&_fnCMSEncoderCopySignerTimestamp, _securityLib, "CMSEncoderCopySignerTimestamp")
+	})
+	_register("CMSEncoderCopySignerTimestampWithPolicy", func() {
+		purego.RegisterLibFunc(&_fnCMSEncoderCopySignerTimestampWithPolicy, _securityLib, "CMSEncoderCopySignerTimestampWithPolicy")
+	})
 	_register("CMSEncoderCopySigners", func() { purego.RegisterLibFunc(&_fnCMSEncoderCopySigners, _securityLib, "CMSEncoderCopySigners") })
-	_register("CMSEncoderCopySupportingCerts", func() { purego.RegisterLibFunc(&_fnCMSEncoderCopySupportingCerts, _securityLib, "CMSEncoderCopySupportingCerts") })
+	_register("CMSEncoderCopySupportingCerts", func() {
+		purego.RegisterLibFunc(&_fnCMSEncoderCopySupportingCerts, _securityLib, "CMSEncoderCopySupportingCerts")
+	})
 	_register("CMSEncoderCreate", func() { purego.RegisterLibFunc(&_fnCMSEncoderCreate, _securityLib, "CMSEncoderCreate") })
-	_register("CMSEncoderGetCertificateChainMode", func() { purego.RegisterLibFunc(&_fnCMSEncoderGetCertificateChainMode, _securityLib, "CMSEncoderGetCertificateChainMode") })
-	_register("CMSEncoderGetHasDetachedContent", func() { purego.RegisterLibFunc(&_fnCMSEncoderGetHasDetachedContent, _securityLib, "CMSEncoderGetHasDetachedContent") })
+	_register("CMSEncoderGetCertificateChainMode", func() {
+		purego.RegisterLibFunc(&_fnCMSEncoderGetCertificateChainMode, _securityLib, "CMSEncoderGetCertificateChainMode")
+	})
+	_register("CMSEncoderGetHasDetachedContent", func() {
+		purego.RegisterLibFunc(&_fnCMSEncoderGetHasDetachedContent, _securityLib, "CMSEncoderGetHasDetachedContent")
+	})
 	_register("CMSEncoderGetTypeID", func() { purego.RegisterLibFunc(&_fnCMSEncoderGetTypeID, _securityLib, "CMSEncoderGetTypeID") })
-	_register("CMSEncoderSetCertificateChainMode", func() { purego.RegisterLibFunc(&_fnCMSEncoderSetCertificateChainMode, _securityLib, "CMSEncoderSetCertificateChainMode") })
-	_register("CMSEncoderSetEncapsulatedContentType", func() { purego.RegisterLibFunc(&_fnCMSEncoderSetEncapsulatedContentType, _securityLib, "CMSEncoderSetEncapsulatedContentType") })
-	_register("CMSEncoderSetEncapsulatedContentTypeOID", func() { purego.RegisterLibFunc(&_fnCMSEncoderSetEncapsulatedContentTypeOID, _securityLib, "CMSEncoderSetEncapsulatedContentTypeOID") })
-	_register("CMSEncoderSetHasDetachedContent", func() { purego.RegisterLibFunc(&_fnCMSEncoderSetHasDetachedContent, _securityLib, "CMSEncoderSetHasDetachedContent") })
-	_register("CMSEncoderSetSignerAlgorithm", func() { purego.RegisterLibFunc(&_fnCMSEncoderSetSignerAlgorithm, _securityLib, "CMSEncoderSetSignerAlgorithm") })
+	_register("CMSEncoderSetCertificateChainMode", func() {
+		purego.RegisterLibFunc(&_fnCMSEncoderSetCertificateChainMode, _securityLib, "CMSEncoderSetCertificateChainMode")
+	})
+	_register("CMSEncoderSetEncapsulatedContentType", func() {
+		purego.RegisterLibFunc(&_fnCMSEncoderSetEncapsulatedContentType, _securityLib, "CMSEncoderSetEncapsulatedContentType")
+	})
+	_register("CMSEncoderSetEncapsulatedContentTypeOID", func() {
+		purego.RegisterLibFunc(&_fnCMSEncoderSetEncapsulatedContentTypeOID, _securityLib, "CMSEncoderSetEncapsulatedContentTypeOID")
+	})
+	_register("CMSEncoderSetHasDetachedContent", func() {
+		purego.RegisterLibFunc(&_fnCMSEncoderSetHasDetachedContent, _securityLib, "CMSEncoderSetHasDetachedContent")
+	})
+	_register("CMSEncoderSetSignerAlgorithm", func() {
+		purego.RegisterLibFunc(&_fnCMSEncoderSetSignerAlgorithm, _securityLib, "CMSEncoderSetSignerAlgorithm")
+	})
 	_register("CMSEncoderUpdateContent", func() { purego.RegisterLibFunc(&_fnCMSEncoderUpdateContent, _securityLib, "CMSEncoderUpdateContent") })
 	_register("CSSM_AC_AuthCompute", func() { purego.RegisterLibFunc(&_fnCSSM_AC_AuthCompute, _securityLib, "CSSM_AC_AuthCompute") })
 	_register("CSSM_AC_PassThrough", func() { purego.RegisterLibFunc(&_fnCSSM_AC_PassThrough, _securityLib, "CSSM_AC_PassThrough") })
 	_register("CSSM_CL_CertAbortCache", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CertAbortCache, _securityLib, "CSSM_CL_CertAbortCache") })
 	_register("CSSM_CL_CertAbortQuery", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CertAbortQuery, _securityLib, "CSSM_CL_CertAbortQuery") })
 	_register("CSSM_CL_CertCache", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CertCache, _securityLib, "CSSM_CL_CertCache") })
-	_register("CSSM_CL_CertCreateTemplate", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CertCreateTemplate, _securityLib, "CSSM_CL_CertCreateTemplate") })
-	_register("CSSM_CL_CertDescribeFormat", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CertDescribeFormat, _securityLib, "CSSM_CL_CertDescribeFormat") })
+	_register("CSSM_CL_CertCreateTemplate", func() {
+		purego.RegisterLibFunc(&_fnCSSM_CL_CertCreateTemplate, _securityLib, "CSSM_CL_CertCreateTemplate")
+	})
+	_register("CSSM_CL_CertDescribeFormat", func() {
+		purego.RegisterLibFunc(&_fnCSSM_CL_CertDescribeFormat, _securityLib, "CSSM_CL_CertDescribeFormat")
+	})
 	_register("CSSM_CL_CertGetAllFields", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CertGetAllFields, _securityLib, "CSSM_CL_CertGetAllFields") })
-	_register("CSSM_CL_CertGetAllTemplateFields", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CertGetAllTemplateFields, _securityLib, "CSSM_CL_CertGetAllTemplateFields") })
-	_register("CSSM_CL_CertGetFirstCachedFieldValue", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CertGetFirstCachedFieldValue, _securityLib, "CSSM_CL_CertGetFirstCachedFieldValue") })
-	_register("CSSM_CL_CertGetFirstFieldValue", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CertGetFirstFieldValue, _securityLib, "CSSM_CL_CertGetFirstFieldValue") })
+	_register("CSSM_CL_CertGetAllTemplateFields", func() {
+		purego.RegisterLibFunc(&_fnCSSM_CL_CertGetAllTemplateFields, _securityLib, "CSSM_CL_CertGetAllTemplateFields")
+	})
+	_register("CSSM_CL_CertGetFirstCachedFieldValue", func() {
+		purego.RegisterLibFunc(&_fnCSSM_CL_CertGetFirstCachedFieldValue, _securityLib, "CSSM_CL_CertGetFirstCachedFieldValue")
+	})
+	_register("CSSM_CL_CertGetFirstFieldValue", func() {
+		purego.RegisterLibFunc(&_fnCSSM_CL_CertGetFirstFieldValue, _securityLib, "CSSM_CL_CertGetFirstFieldValue")
+	})
 	_register("CSSM_CL_CertGetKeyInfo", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CertGetKeyInfo, _securityLib, "CSSM_CL_CertGetKeyInfo") })
-	_register("CSSM_CL_CertGetNextCachedFieldValue", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CertGetNextCachedFieldValue, _securityLib, "CSSM_CL_CertGetNextCachedFieldValue") })
-	_register("CSSM_CL_CertGetNextFieldValue", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CertGetNextFieldValue, _securityLib, "CSSM_CL_CertGetNextFieldValue") })
-	_register("CSSM_CL_CertGroupFromVerifiedBundle", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CertGroupFromVerifiedBundle, _securityLib, "CSSM_CL_CertGroupFromVerifiedBundle") })
-	_register("CSSM_CL_CertGroupToSignedBundle", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CertGroupToSignedBundle, _securityLib, "CSSM_CL_CertGroupToSignedBundle") })
+	_register("CSSM_CL_CertGetNextCachedFieldValue", func() {
+		purego.RegisterLibFunc(&_fnCSSM_CL_CertGetNextCachedFieldValue, _securityLib, "CSSM_CL_CertGetNextCachedFieldValue")
+	})
+	_register("CSSM_CL_CertGetNextFieldValue", func() {
+		purego.RegisterLibFunc(&_fnCSSM_CL_CertGetNextFieldValue, _securityLib, "CSSM_CL_CertGetNextFieldValue")
+	})
+	_register("CSSM_CL_CertGroupFromVerifiedBundle", func() {
+		purego.RegisterLibFunc(&_fnCSSM_CL_CertGroupFromVerifiedBundle, _securityLib, "CSSM_CL_CertGroupFromVerifiedBundle")
+	})
+	_register("CSSM_CL_CertGroupToSignedBundle", func() {
+		purego.RegisterLibFunc(&_fnCSSM_CL_CertGroupToSignedBundle, _securityLib, "CSSM_CL_CertGroupToSignedBundle")
+	})
 	_register("CSSM_CL_CertSign", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CertSign, _securityLib, "CSSM_CL_CertSign") })
 	_register("CSSM_CL_CertVerify", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CertVerify, _securityLib, "CSSM_CL_CertVerify") })
-	_register("CSSM_CL_CertVerifyWithKey", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CertVerifyWithKey, _securityLib, "CSSM_CL_CertVerifyWithKey") })
+	_register("CSSM_CL_CertVerifyWithKey", func() {
+		purego.RegisterLibFunc(&_fnCSSM_CL_CertVerifyWithKey, _securityLib, "CSSM_CL_CertVerifyWithKey")
+	})
 	_register("CSSM_CL_CrlAbortCache", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CrlAbortCache, _securityLib, "CSSM_CL_CrlAbortCache") })
 	_register("CSSM_CL_CrlAbortQuery", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CrlAbortQuery, _securityLib, "CSSM_CL_CrlAbortQuery") })
 	_register("CSSM_CL_CrlAddCert", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CrlAddCert, _securityLib, "CSSM_CL_CrlAddCert") })
 	_register("CSSM_CL_CrlCache", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CrlCache, _securityLib, "CSSM_CL_CrlCache") })
-	_register("CSSM_CL_CrlCreateTemplate", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CrlCreateTemplate, _securityLib, "CSSM_CL_CrlCreateTemplate") })
-	_register("CSSM_CL_CrlDescribeFormat", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CrlDescribeFormat, _securityLib, "CSSM_CL_CrlDescribeFormat") })
-	_register("CSSM_CL_CrlGetAllCachedRecordFields", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CrlGetAllCachedRecordFields, _securityLib, "CSSM_CL_CrlGetAllCachedRecordFields") })
+	_register("CSSM_CL_CrlCreateTemplate", func() {
+		purego.RegisterLibFunc(&_fnCSSM_CL_CrlCreateTemplate, _securityLib, "CSSM_CL_CrlCreateTemplate")
+	})
+	_register("CSSM_CL_CrlDescribeFormat", func() {
+		purego.RegisterLibFunc(&_fnCSSM_CL_CrlDescribeFormat, _securityLib, "CSSM_CL_CrlDescribeFormat")
+	})
+	_register("CSSM_CL_CrlGetAllCachedRecordFields", func() {
+		purego.RegisterLibFunc(&_fnCSSM_CL_CrlGetAllCachedRecordFields, _securityLib, "CSSM_CL_CrlGetAllCachedRecordFields")
+	})
 	_register("CSSM_CL_CrlGetAllFields", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CrlGetAllFields, _securityLib, "CSSM_CL_CrlGetAllFields") })
-	_register("CSSM_CL_CrlGetFirstCachedFieldValue", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CrlGetFirstCachedFieldValue, _securityLib, "CSSM_CL_CrlGetFirstCachedFieldValue") })
-	_register("CSSM_CL_CrlGetFirstFieldValue", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CrlGetFirstFieldValue, _securityLib, "CSSM_CL_CrlGetFirstFieldValue") })
-	_register("CSSM_CL_CrlGetNextCachedFieldValue", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CrlGetNextCachedFieldValue, _securityLib, "CSSM_CL_CrlGetNextCachedFieldValue") })
-	_register("CSSM_CL_CrlGetNextFieldValue", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CrlGetNextFieldValue, _securityLib, "CSSM_CL_CrlGetNextFieldValue") })
+	_register("CSSM_CL_CrlGetFirstCachedFieldValue", func() {
+		purego.RegisterLibFunc(&_fnCSSM_CL_CrlGetFirstCachedFieldValue, _securityLib, "CSSM_CL_CrlGetFirstCachedFieldValue")
+	})
+	_register("CSSM_CL_CrlGetFirstFieldValue", func() {
+		purego.RegisterLibFunc(&_fnCSSM_CL_CrlGetFirstFieldValue, _securityLib, "CSSM_CL_CrlGetFirstFieldValue")
+	})
+	_register("CSSM_CL_CrlGetNextCachedFieldValue", func() {
+		purego.RegisterLibFunc(&_fnCSSM_CL_CrlGetNextCachedFieldValue, _securityLib, "CSSM_CL_CrlGetNextCachedFieldValue")
+	})
+	_register("CSSM_CL_CrlGetNextFieldValue", func() {
+		purego.RegisterLibFunc(&_fnCSSM_CL_CrlGetNextFieldValue, _securityLib, "CSSM_CL_CrlGetNextFieldValue")
+	})
 	_register("CSSM_CL_CrlRemoveCert", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CrlRemoveCert, _securityLib, "CSSM_CL_CrlRemoveCert") })
 	_register("CSSM_CL_CrlSetFields", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CrlSetFields, _securityLib, "CSSM_CL_CrlSetFields") })
 	_register("CSSM_CL_CrlSign", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CrlSign, _securityLib, "CSSM_CL_CrlSign") })
@@ -141,26 +237,52 @@ func _loadLibrary() {
 	_register("CSSM_CL_CrlVerifyWithKey", func() { purego.RegisterLibFunc(&_fnCSSM_CL_CrlVerifyWithKey, _securityLib, "CSSM_CL_CrlVerifyWithKey") })
 	_register("CSSM_CL_FreeFieldValue", func() { purego.RegisterLibFunc(&_fnCSSM_CL_FreeFieldValue, _securityLib, "CSSM_CL_FreeFieldValue") })
 	_register("CSSM_CL_FreeFields", func() { purego.RegisterLibFunc(&_fnCSSM_CL_FreeFields, _securityLib, "CSSM_CL_FreeFields") })
-	_register("CSSM_CL_IsCertInCachedCrl", func() { purego.RegisterLibFunc(&_fnCSSM_CL_IsCertInCachedCrl, _securityLib, "CSSM_CL_IsCertInCachedCrl") })
+	_register("CSSM_CL_IsCertInCachedCrl", func() {
+		purego.RegisterLibFunc(&_fnCSSM_CL_IsCertInCachedCrl, _securityLib, "CSSM_CL_IsCertInCachedCrl")
+	})
 	_register("CSSM_CL_IsCertInCrl", func() { purego.RegisterLibFunc(&_fnCSSM_CL_IsCertInCrl, _securityLib, "CSSM_CL_IsCertInCrl") })
 	_register("CSSM_CL_PassThrough", func() { purego.RegisterLibFunc(&_fnCSSM_CL_PassThrough, _securityLib, "CSSM_CL_PassThrough") })
 	_register("CSSM_CSP_ChangeLoginAcl", func() { purego.RegisterLibFunc(&_fnCSSM_CSP_ChangeLoginAcl, _securityLib, "CSSM_CSP_ChangeLoginAcl") })
-	_register("CSSM_CSP_ChangeLoginOwner", func() { purego.RegisterLibFunc(&_fnCSSM_CSP_ChangeLoginOwner, _securityLib, "CSSM_CSP_ChangeLoginOwner") })
-	_register("CSSM_CSP_CreateAsymmetricContext", func() { purego.RegisterLibFunc(&_fnCSSM_CSP_CreateAsymmetricContext, _securityLib, "CSSM_CSP_CreateAsymmetricContext") })
-	_register("CSSM_CSP_CreateDeriveKeyContext", func() { purego.RegisterLibFunc(&_fnCSSM_CSP_CreateDeriveKeyContext, _securityLib, "CSSM_CSP_CreateDeriveKeyContext") })
-	_register("CSSM_CSP_CreateDigestContext", func() { purego.RegisterLibFunc(&_fnCSSM_CSP_CreateDigestContext, _securityLib, "CSSM_CSP_CreateDigestContext") })
-	_register("CSSM_CSP_CreateKeyGenContext", func() { purego.RegisterLibFunc(&_fnCSSM_CSP_CreateKeyGenContext, _securityLib, "CSSM_CSP_CreateKeyGenContext") })
-	_register("CSSM_CSP_CreateMacContext", func() { purego.RegisterLibFunc(&_fnCSSM_CSP_CreateMacContext, _securityLib, "CSSM_CSP_CreateMacContext") })
-	_register("CSSM_CSP_CreatePassThroughContext", func() { purego.RegisterLibFunc(&_fnCSSM_CSP_CreatePassThroughContext, _securityLib, "CSSM_CSP_CreatePassThroughContext") })
-	_register("CSSM_CSP_CreateRandomGenContext", func() { purego.RegisterLibFunc(&_fnCSSM_CSP_CreateRandomGenContext, _securityLib, "CSSM_CSP_CreateRandomGenContext") })
-	_register("CSSM_CSP_CreateSignatureContext", func() { purego.RegisterLibFunc(&_fnCSSM_CSP_CreateSignatureContext, _securityLib, "CSSM_CSP_CreateSignatureContext") })
-	_register("CSSM_CSP_CreateSymmetricContext", func() { purego.RegisterLibFunc(&_fnCSSM_CSP_CreateSymmetricContext, _securityLib, "CSSM_CSP_CreateSymmetricContext") })
+	_register("CSSM_CSP_ChangeLoginOwner", func() {
+		purego.RegisterLibFunc(&_fnCSSM_CSP_ChangeLoginOwner, _securityLib, "CSSM_CSP_ChangeLoginOwner")
+	})
+	_register("CSSM_CSP_CreateAsymmetricContext", func() {
+		purego.RegisterLibFunc(&_fnCSSM_CSP_CreateAsymmetricContext, _securityLib, "CSSM_CSP_CreateAsymmetricContext")
+	})
+	_register("CSSM_CSP_CreateDeriveKeyContext", func() {
+		purego.RegisterLibFunc(&_fnCSSM_CSP_CreateDeriveKeyContext, _securityLib, "CSSM_CSP_CreateDeriveKeyContext")
+	})
+	_register("CSSM_CSP_CreateDigestContext", func() {
+		purego.RegisterLibFunc(&_fnCSSM_CSP_CreateDigestContext, _securityLib, "CSSM_CSP_CreateDigestContext")
+	})
+	_register("CSSM_CSP_CreateKeyGenContext", func() {
+		purego.RegisterLibFunc(&_fnCSSM_CSP_CreateKeyGenContext, _securityLib, "CSSM_CSP_CreateKeyGenContext")
+	})
+	_register("CSSM_CSP_CreateMacContext", func() {
+		purego.RegisterLibFunc(&_fnCSSM_CSP_CreateMacContext, _securityLib, "CSSM_CSP_CreateMacContext")
+	})
+	_register("CSSM_CSP_CreatePassThroughContext", func() {
+		purego.RegisterLibFunc(&_fnCSSM_CSP_CreatePassThroughContext, _securityLib, "CSSM_CSP_CreatePassThroughContext")
+	})
+	_register("CSSM_CSP_CreateRandomGenContext", func() {
+		purego.RegisterLibFunc(&_fnCSSM_CSP_CreateRandomGenContext, _securityLib, "CSSM_CSP_CreateRandomGenContext")
+	})
+	_register("CSSM_CSP_CreateSignatureContext", func() {
+		purego.RegisterLibFunc(&_fnCSSM_CSP_CreateSignatureContext, _securityLib, "CSSM_CSP_CreateSignatureContext")
+	})
+	_register("CSSM_CSP_CreateSymmetricContext", func() {
+		purego.RegisterLibFunc(&_fnCSSM_CSP_CreateSymmetricContext, _securityLib, "CSSM_CSP_CreateSymmetricContext")
+	})
 	_register("CSSM_CSP_GetLoginAcl", func() { purego.RegisterLibFunc(&_fnCSSM_CSP_GetLoginAcl, _securityLib, "CSSM_CSP_GetLoginAcl") })
 	_register("CSSM_CSP_GetLoginOwner", func() { purego.RegisterLibFunc(&_fnCSSM_CSP_GetLoginOwner, _securityLib, "CSSM_CSP_GetLoginOwner") })
-	_register("CSSM_CSP_GetOperationalStatistics", func() { purego.RegisterLibFunc(&_fnCSSM_CSP_GetOperationalStatistics, _securityLib, "CSSM_CSP_GetOperationalStatistics") })
+	_register("CSSM_CSP_GetOperationalStatistics", func() {
+		purego.RegisterLibFunc(&_fnCSSM_CSP_GetOperationalStatistics, _securityLib, "CSSM_CSP_GetOperationalStatistics")
+	})
 	_register("CSSM_CSP_Login", func() { purego.RegisterLibFunc(&_fnCSSM_CSP_Login, _securityLib, "CSSM_CSP_Login") })
 	_register("CSSM_CSP_Logout", func() { purego.RegisterLibFunc(&_fnCSSM_CSP_Logout, _securityLib, "CSSM_CSP_Logout") })
-	_register("CSSM_CSP_ObtainPrivateKeyFromPublicKey", func() { purego.RegisterLibFunc(&_fnCSSM_CSP_ObtainPrivateKeyFromPublicKey, _securityLib, "CSSM_CSP_ObtainPrivateKeyFromPublicKey") })
+	_register("CSSM_CSP_ObtainPrivateKeyFromPublicKey", func() {
+		purego.RegisterLibFunc(&_fnCSSM_CSP_ObtainPrivateKeyFromPublicKey, _securityLib, "CSSM_CSP_ObtainPrivateKeyFromPublicKey")
+	})
 	_register("CSSM_CSP_PassThrough", func() { purego.RegisterLibFunc(&_fnCSSM_CSP_PassThrough, _securityLib, "CSSM_CSP_PassThrough") })
 	_register("CSSM_ChangeKeyAcl", func() { purego.RegisterLibFunc(&_fnCSSM_ChangeKeyAcl, _securityLib, "CSSM_ChangeKeyAcl") })
 	_register("CSSM_ChangeKeyOwner", func() { purego.RegisterLibFunc(&_fnCSSM_ChangeKeyOwner, _securityLib, "CSSM_ChangeKeyOwner") })
@@ -171,7 +293,9 @@ func _loadLibrary() {
 	_register("CSSM_DL_DataAbortQuery", func() { purego.RegisterLibFunc(&_fnCSSM_DL_DataAbortQuery, _securityLib, "CSSM_DL_DataAbortQuery") })
 	_register("CSSM_DL_DataDelete", func() { purego.RegisterLibFunc(&_fnCSSM_DL_DataDelete, _securityLib, "CSSM_DL_DataDelete") })
 	_register("CSSM_DL_DataGetFirst", func() { purego.RegisterLibFunc(&_fnCSSM_DL_DataGetFirst, _securityLib, "CSSM_DL_DataGetFirst") })
-	_register("CSSM_DL_DataGetFromUniqueRecordId", func() { purego.RegisterLibFunc(&_fnCSSM_DL_DataGetFromUniqueRecordId, _securityLib, "CSSM_DL_DataGetFromUniqueRecordId") })
+	_register("CSSM_DL_DataGetFromUniqueRecordId", func() {
+		purego.RegisterLibFunc(&_fnCSSM_DL_DataGetFromUniqueRecordId, _securityLib, "CSSM_DL_DataGetFromUniqueRecordId")
+	})
 	_register("CSSM_DL_DataGetNext", func() { purego.RegisterLibFunc(&_fnCSSM_DL_DataGetNext, _securityLib, "CSSM_DL_DataGetNext") })
 	_register("CSSM_DL_DataInsert", func() { purego.RegisterLibFunc(&_fnCSSM_DL_DataInsert, _securityLib, "CSSM_DL_DataInsert") })
 	_register("CSSM_DL_DataModify", func() { purego.RegisterLibFunc(&_fnCSSM_DL_DataModify, _securityLib, "CSSM_DL_DataModify") })
@@ -183,7 +307,9 @@ func _loadLibrary() {
 	_register("CSSM_DL_FreeNameList", func() { purego.RegisterLibFunc(&_fnCSSM_DL_FreeNameList, _securityLib, "CSSM_DL_FreeNameList") })
 	_register("CSSM_DL_FreeUniqueRecord", func() { purego.RegisterLibFunc(&_fnCSSM_DL_FreeUniqueRecord, _securityLib, "CSSM_DL_FreeUniqueRecord") })
 	_register("CSSM_DL_GetDbAcl", func() { purego.RegisterLibFunc(&_fnCSSM_DL_GetDbAcl, _securityLib, "CSSM_DL_GetDbAcl") })
-	_register("CSSM_DL_GetDbNameFromHandle", func() { purego.RegisterLibFunc(&_fnCSSM_DL_GetDbNameFromHandle, _securityLib, "CSSM_DL_GetDbNameFromHandle") })
+	_register("CSSM_DL_GetDbNameFromHandle", func() {
+		purego.RegisterLibFunc(&_fnCSSM_DL_GetDbNameFromHandle, _securityLib, "CSSM_DL_GetDbNameFromHandle")
+	})
 	_register("CSSM_DL_GetDbNames", func() { purego.RegisterLibFunc(&_fnCSSM_DL_GetDbNames, _securityLib, "CSSM_DL_GetDbNames") })
 	_register("CSSM_DL_GetDbOwner", func() { purego.RegisterLibFunc(&_fnCSSM_DL_GetDbOwner, _securityLib, "CSSM_DL_GetDbOwner") })
 	_register("CSSM_DL_PassThrough", func() { purego.RegisterLibFunc(&_fnCSSM_DL_PassThrough, _securityLib, "CSSM_DL_PassThrough") })
@@ -194,7 +320,9 @@ func _loadLibrary() {
 	_register("CSSM_DecryptDataP", func() { purego.RegisterLibFunc(&_fnCSSM_DecryptDataP, _securityLib, "CSSM_DecryptDataP") })
 	_register("CSSM_DecryptDataUpdate", func() { purego.RegisterLibFunc(&_fnCSSM_DecryptDataUpdate, _securityLib, "CSSM_DecryptDataUpdate") })
 	_register("CSSM_DeleteContext", func() { purego.RegisterLibFunc(&_fnCSSM_DeleteContext, _securityLib, "CSSM_DeleteContext") })
-	_register("CSSM_DeleteContextAttributes", func() { purego.RegisterLibFunc(&_fnCSSM_DeleteContextAttributes, _securityLib, "CSSM_DeleteContextAttributes") })
+	_register("CSSM_DeleteContextAttributes", func() {
+		purego.RegisterLibFunc(&_fnCSSM_DeleteContextAttributes, _securityLib, "CSSM_DeleteContextAttributes")
+	})
 	_register("CSSM_DeriveKey", func() { purego.RegisterLibFunc(&_fnCSSM_DeriveKey, _securityLib, "CSSM_DeriveKey") })
 	_register("CSSM_DigestData", func() { purego.RegisterLibFunc(&_fnCSSM_DigestData, _securityLib, "CSSM_DigestData") })
 	_register("CSSM_DigestDataClone", func() { purego.RegisterLibFunc(&_fnCSSM_DigestDataClone, _securityLib, "CSSM_DigestDataClone") })
@@ -209,7 +337,9 @@ func _loadLibrary() {
 	_register("CSSM_EncryptDataUpdate", func() { purego.RegisterLibFunc(&_fnCSSM_EncryptDataUpdate, _securityLib, "CSSM_EncryptDataUpdate") })
 	_register("CSSM_FreeContext", func() { purego.RegisterLibFunc(&_fnCSSM_FreeContext, _securityLib, "CSSM_FreeContext") })
 	_register("CSSM_FreeKey", func() { purego.RegisterLibFunc(&_fnCSSM_FreeKey, _securityLib, "CSSM_FreeKey") })
-	_register("CSSM_GenerateAlgorithmParams", func() { purego.RegisterLibFunc(&_fnCSSM_GenerateAlgorithmParams, _securityLib, "CSSM_GenerateAlgorithmParams") })
+	_register("CSSM_GenerateAlgorithmParams", func() {
+		purego.RegisterLibFunc(&_fnCSSM_GenerateAlgorithmParams, _securityLib, "CSSM_GenerateAlgorithmParams")
+	})
 	_register("CSSM_GenerateKey", func() { purego.RegisterLibFunc(&_fnCSSM_GenerateKey, _securityLib, "CSSM_GenerateKey") })
 	_register("CSSM_GenerateKeyP", func() { purego.RegisterLibFunc(&_fnCSSM_GenerateKeyP, _securityLib, "CSSM_GenerateKeyP") })
 	_register("CSSM_GenerateKeyPair", func() { purego.RegisterLibFunc(&_fnCSSM_GenerateKeyPair, _securityLib, "CSSM_GenerateKeyPair") })
@@ -219,18 +349,26 @@ func _loadLibrary() {
 	_register("CSSM_GenerateMacInit", func() { purego.RegisterLibFunc(&_fnCSSM_GenerateMacInit, _securityLib, "CSSM_GenerateMacInit") })
 	_register("CSSM_GenerateMacUpdate", func() { purego.RegisterLibFunc(&_fnCSSM_GenerateMacUpdate, _securityLib, "CSSM_GenerateMacUpdate") })
 	_register("CSSM_GenerateRandom", func() { purego.RegisterLibFunc(&_fnCSSM_GenerateRandom, _securityLib, "CSSM_GenerateRandom") })
-	_register("CSSM_GetAPIMemoryFunctions", func() { purego.RegisterLibFunc(&_fnCSSM_GetAPIMemoryFunctions, _securityLib, "CSSM_GetAPIMemoryFunctions") })
+	_register("CSSM_GetAPIMemoryFunctions", func() {
+		purego.RegisterLibFunc(&_fnCSSM_GetAPIMemoryFunctions, _securityLib, "CSSM_GetAPIMemoryFunctions")
+	})
 	_register("CSSM_GetContext", func() { purego.RegisterLibFunc(&_fnCSSM_GetContext, _securityLib, "CSSM_GetContext") })
 	_register("CSSM_GetContextAttribute", func() { purego.RegisterLibFunc(&_fnCSSM_GetContextAttribute, _securityLib, "CSSM_GetContextAttribute") })
 	_register("CSSM_GetKeyAcl", func() { purego.RegisterLibFunc(&_fnCSSM_GetKeyAcl, _securityLib, "CSSM_GetKeyAcl") })
 	_register("CSSM_GetKeyOwner", func() { purego.RegisterLibFunc(&_fnCSSM_GetKeyOwner, _securityLib, "CSSM_GetKeyOwner") })
-	_register("CSSM_GetModuleGUIDFromHandle", func() { purego.RegisterLibFunc(&_fnCSSM_GetModuleGUIDFromHandle, _securityLib, "CSSM_GetModuleGUIDFromHandle") })
+	_register("CSSM_GetModuleGUIDFromHandle", func() {
+		purego.RegisterLibFunc(&_fnCSSM_GetModuleGUIDFromHandle, _securityLib, "CSSM_GetModuleGUIDFromHandle")
+	})
 	_register("CSSM_GetPrivilege", func() { purego.RegisterLibFunc(&_fnCSSM_GetPrivilege, _securityLib, "CSSM_GetPrivilege") })
-	_register("CSSM_GetSubserviceUIDFromHandle", func() { purego.RegisterLibFunc(&_fnCSSM_GetSubserviceUIDFromHandle, _securityLib, "CSSM_GetSubserviceUIDFromHandle") })
+	_register("CSSM_GetSubserviceUIDFromHandle", func() {
+		purego.RegisterLibFunc(&_fnCSSM_GetSubserviceUIDFromHandle, _securityLib, "CSSM_GetSubserviceUIDFromHandle")
+	})
 	_register("CSSM_GetTimeValue", func() { purego.RegisterLibFunc(&_fnCSSM_GetTimeValue, _securityLib, "CSSM_GetTimeValue") })
 	_register("CSSM_Init", func() { purego.RegisterLibFunc(&_fnCSSM_Init, _securityLib, "CSSM_Init") })
 	_register("CSSM_Introduce", func() { purego.RegisterLibFunc(&_fnCSSM_Introduce, _securityLib, "CSSM_Introduce") })
-	_register("CSSM_ListAttachedModuleManagers", func() { purego.RegisterLibFunc(&_fnCSSM_ListAttachedModuleManagers, _securityLib, "CSSM_ListAttachedModuleManagers") })
+	_register("CSSM_ListAttachedModuleManagers", func() {
+		purego.RegisterLibFunc(&_fnCSSM_ListAttachedModuleManagers, _securityLib, "CSSM_ListAttachedModuleManagers")
+	})
 	_register("CSSM_ModuleAttach", func() { purego.RegisterLibFunc(&_fnCSSM_ModuleAttach, _securityLib, "CSSM_ModuleAttach") })
 	_register("CSSM_ModuleDetach", func() { purego.RegisterLibFunc(&_fnCSSM_ModuleDetach, _securityLib, "CSSM_ModuleDetach") })
 	_register("CSSM_ModuleLoad", func() { purego.RegisterLibFunc(&_fnCSSM_ModuleLoad, _securityLib, "CSSM_ModuleLoad") })
@@ -246,33 +384,57 @@ func _loadLibrary() {
 	_register("CSSM_SignDataInit", func() { purego.RegisterLibFunc(&_fnCSSM_SignDataInit, _securityLib, "CSSM_SignDataInit") })
 	_register("CSSM_SignDataUpdate", func() { purego.RegisterLibFunc(&_fnCSSM_SignDataUpdate, _securityLib, "CSSM_SignDataUpdate") })
 	_register("CSSM_TP_ApplyCrlToDb", func() { purego.RegisterLibFunc(&_fnCSSM_TP_ApplyCrlToDb, _securityLib, "CSSM_TP_ApplyCrlToDb") })
-	_register("CSSM_TP_CertCreateTemplate", func() { purego.RegisterLibFunc(&_fnCSSM_TP_CertCreateTemplate, _securityLib, "CSSM_TP_CertCreateTemplate") })
-	_register("CSSM_TP_CertGetAllTemplateFields", func() { purego.RegisterLibFunc(&_fnCSSM_TP_CertGetAllTemplateFields, _securityLib, "CSSM_TP_CertGetAllTemplateFields") })
-	_register("CSSM_TP_CertGroupConstruct", func() { purego.RegisterLibFunc(&_fnCSSM_TP_CertGroupConstruct, _securityLib, "CSSM_TP_CertGroupConstruct") })
+	_register("CSSM_TP_CertCreateTemplate", func() {
+		purego.RegisterLibFunc(&_fnCSSM_TP_CertCreateTemplate, _securityLib, "CSSM_TP_CertCreateTemplate")
+	})
+	_register("CSSM_TP_CertGetAllTemplateFields", func() {
+		purego.RegisterLibFunc(&_fnCSSM_TP_CertGetAllTemplateFields, _securityLib, "CSSM_TP_CertGetAllTemplateFields")
+	})
+	_register("CSSM_TP_CertGroupConstruct", func() {
+		purego.RegisterLibFunc(&_fnCSSM_TP_CertGroupConstruct, _securityLib, "CSSM_TP_CertGroupConstruct")
+	})
 	_register("CSSM_TP_CertGroupPrune", func() { purego.RegisterLibFunc(&_fnCSSM_TP_CertGroupPrune, _securityLib, "CSSM_TP_CertGroupPrune") })
-	_register("CSSM_TP_CertGroupToTupleGroup", func() { purego.RegisterLibFunc(&_fnCSSM_TP_CertGroupToTupleGroup, _securityLib, "CSSM_TP_CertGroupToTupleGroup") })
+	_register("CSSM_TP_CertGroupToTupleGroup", func() {
+		purego.RegisterLibFunc(&_fnCSSM_TP_CertGroupToTupleGroup, _securityLib, "CSSM_TP_CertGroupToTupleGroup")
+	})
 	_register("CSSM_TP_CertGroupVerify", func() { purego.RegisterLibFunc(&_fnCSSM_TP_CertGroupVerify, _securityLib, "CSSM_TP_CertGroupVerify") })
 	_register("CSSM_TP_CertReclaimAbort", func() { purego.RegisterLibFunc(&_fnCSSM_TP_CertReclaimAbort, _securityLib, "CSSM_TP_CertReclaimAbort") })
 	_register("CSSM_TP_CertReclaimKey", func() { purego.RegisterLibFunc(&_fnCSSM_TP_CertReclaimKey, _securityLib, "CSSM_TP_CertReclaimKey") })
-	_register("CSSM_TP_CertRemoveFromCrlTemplate", func() { purego.RegisterLibFunc(&_fnCSSM_TP_CertRemoveFromCrlTemplate, _securityLib, "CSSM_TP_CertRemoveFromCrlTemplate") })
+	_register("CSSM_TP_CertRemoveFromCrlTemplate", func() {
+		purego.RegisterLibFunc(&_fnCSSM_TP_CertRemoveFromCrlTemplate, _securityLib, "CSSM_TP_CertRemoveFromCrlTemplate")
+	})
 	_register("CSSM_TP_CertRevoke", func() { purego.RegisterLibFunc(&_fnCSSM_TP_CertRevoke, _securityLib, "CSSM_TP_CertRevoke") })
 	_register("CSSM_TP_CertSign", func() { purego.RegisterLibFunc(&_fnCSSM_TP_CertSign, _securityLib, "CSSM_TP_CertSign") })
-	_register("CSSM_TP_ConfirmCredResult", func() { purego.RegisterLibFunc(&_fnCSSM_TP_ConfirmCredResult, _securityLib, "CSSM_TP_ConfirmCredResult") })
-	_register("CSSM_TP_CrlCreateTemplate", func() { purego.RegisterLibFunc(&_fnCSSM_TP_CrlCreateTemplate, _securityLib, "CSSM_TP_CrlCreateTemplate") })
+	_register("CSSM_TP_ConfirmCredResult", func() {
+		purego.RegisterLibFunc(&_fnCSSM_TP_ConfirmCredResult, _securityLib, "CSSM_TP_ConfirmCredResult")
+	})
+	_register("CSSM_TP_CrlCreateTemplate", func() {
+		purego.RegisterLibFunc(&_fnCSSM_TP_CrlCreateTemplate, _securityLib, "CSSM_TP_CrlCreateTemplate")
+	})
 	_register("CSSM_TP_CrlSign", func() { purego.RegisterLibFunc(&_fnCSSM_TP_CrlSign, _securityLib, "CSSM_TP_CrlSign") })
 	_register("CSSM_TP_CrlVerify", func() { purego.RegisterLibFunc(&_fnCSSM_TP_CrlVerify, _securityLib, "CSSM_TP_CrlVerify") })
 	_register("CSSM_TP_FormRequest", func() { purego.RegisterLibFunc(&_fnCSSM_TP_FormRequest, _securityLib, "CSSM_TP_FormRequest") })
 	_register("CSSM_TP_FormSubmit", func() { purego.RegisterLibFunc(&_fnCSSM_TP_FormSubmit, _securityLib, "CSSM_TP_FormSubmit") })
 	_register("CSSM_TP_PassThrough", func() { purego.RegisterLibFunc(&_fnCSSM_TP_PassThrough, _securityLib, "CSSM_TP_PassThrough") })
-	_register("CSSM_TP_ReceiveConfirmation", func() { purego.RegisterLibFunc(&_fnCSSM_TP_ReceiveConfirmation, _securityLib, "CSSM_TP_ReceiveConfirmation") })
-	_register("CSSM_TP_RetrieveCredResult", func() { purego.RegisterLibFunc(&_fnCSSM_TP_RetrieveCredResult, _securityLib, "CSSM_TP_RetrieveCredResult") })
-	_register("CSSM_TP_SubmitCredRequest", func() { purego.RegisterLibFunc(&_fnCSSM_TP_SubmitCredRequest, _securityLib, "CSSM_TP_SubmitCredRequest") })
-	_register("CSSM_TP_TupleGroupToCertGroup", func() { purego.RegisterLibFunc(&_fnCSSM_TP_TupleGroupToCertGroup, _securityLib, "CSSM_TP_TupleGroupToCertGroup") })
+	_register("CSSM_TP_ReceiveConfirmation", func() {
+		purego.RegisterLibFunc(&_fnCSSM_TP_ReceiveConfirmation, _securityLib, "CSSM_TP_ReceiveConfirmation")
+	})
+	_register("CSSM_TP_RetrieveCredResult", func() {
+		purego.RegisterLibFunc(&_fnCSSM_TP_RetrieveCredResult, _securityLib, "CSSM_TP_RetrieveCredResult")
+	})
+	_register("CSSM_TP_SubmitCredRequest", func() {
+		purego.RegisterLibFunc(&_fnCSSM_TP_SubmitCredRequest, _securityLib, "CSSM_TP_SubmitCredRequest")
+	})
+	_register("CSSM_TP_TupleGroupToCertGroup", func() {
+		purego.RegisterLibFunc(&_fnCSSM_TP_TupleGroupToCertGroup, _securityLib, "CSSM_TP_TupleGroupToCertGroup")
+	})
 	_register("CSSM_Terminate", func() { purego.RegisterLibFunc(&_fnCSSM_Terminate, _securityLib, "CSSM_Terminate") })
 	_register("CSSM_Unintroduce", func() { purego.RegisterLibFunc(&_fnCSSM_Unintroduce, _securityLib, "CSSM_Unintroduce") })
 	_register("CSSM_UnwrapKey", func() { purego.RegisterLibFunc(&_fnCSSM_UnwrapKey, _securityLib, "CSSM_UnwrapKey") })
 	_register("CSSM_UnwrapKeyP", func() { purego.RegisterLibFunc(&_fnCSSM_UnwrapKeyP, _securityLib, "CSSM_UnwrapKeyP") })
-	_register("CSSM_UpdateContextAttributes", func() { purego.RegisterLibFunc(&_fnCSSM_UpdateContextAttributes, _securityLib, "CSSM_UpdateContextAttributes") })
+	_register("CSSM_UpdateContextAttributes", func() {
+		purego.RegisterLibFunc(&_fnCSSM_UpdateContextAttributes, _securityLib, "CSSM_UpdateContextAttributes")
+	})
 	_register("CSSM_VerifyData", func() { purego.RegisterLibFunc(&_fnCSSM_VerifyData, _securityLib, "CSSM_VerifyData") })
 	_register("CSSM_VerifyDataFinal", func() { purego.RegisterLibFunc(&_fnCSSM_VerifyDataFinal, _securityLib, "CSSM_VerifyDataFinal") })
 	_register("CSSM_VerifyDataInit", func() { purego.RegisterLibFunc(&_fnCSSM_VerifyDataInit, _securityLib, "CSSM_VerifyDataInit") })
@@ -292,12 +454,18 @@ func _loadLibrary() {
 	_register("SSLClose", func() { purego.RegisterLibFunc(&_fnSSLClose, _securityLib, "SSLClose") })
 	_register("SSLContextGetTypeID", func() { purego.RegisterLibFunc(&_fnSSLContextGetTypeID, _securityLib, "SSLContextGetTypeID") })
 	_register("SSLCopyALPNProtocols", func() { purego.RegisterLibFunc(&_fnSSLCopyALPNProtocols, _securityLib, "SSLCopyALPNProtocols") })
-	_register("SSLCopyCertificateAuthorities", func() { purego.RegisterLibFunc(&_fnSSLCopyCertificateAuthorities, _securityLib, "SSLCopyCertificateAuthorities") })
-	_register("SSLCopyDistinguishedNames", func() { purego.RegisterLibFunc(&_fnSSLCopyDistinguishedNames, _securityLib, "SSLCopyDistinguishedNames") })
+	_register("SSLCopyCertificateAuthorities", func() {
+		purego.RegisterLibFunc(&_fnSSLCopyCertificateAuthorities, _securityLib, "SSLCopyCertificateAuthorities")
+	})
+	_register("SSLCopyDistinguishedNames", func() {
+		purego.RegisterLibFunc(&_fnSSLCopyDistinguishedNames, _securityLib, "SSLCopyDistinguishedNames")
+	})
 	_register("SSLCopyPeerCertificates", func() { purego.RegisterLibFunc(&_fnSSLCopyPeerCertificates, _securityLib, "SSLCopyPeerCertificates") })
 	_register("SSLCopyPeerTrust", func() { purego.RegisterLibFunc(&_fnSSLCopyPeerTrust, _securityLib, "SSLCopyPeerTrust") })
 	_register("SSLCopyRequestedPeerName", func() { purego.RegisterLibFunc(&_fnSSLCopyRequestedPeerName, _securityLib, "SSLCopyRequestedPeerName") })
-	_register("SSLCopyRequestedPeerNameLength", func() { purego.RegisterLibFunc(&_fnSSLCopyRequestedPeerNameLength, _securityLib, "SSLCopyRequestedPeerNameLength") })
+	_register("SSLCopyRequestedPeerNameLength", func() {
+		purego.RegisterLibFunc(&_fnSSLCopyRequestedPeerNameLength, _securityLib, "SSLCopyRequestedPeerNameLength")
+	})
 	_register("SSLCopyTrustedRoots", func() { purego.RegisterLibFunc(&_fnSSLCopyTrustedRoots, _securityLib, "SSLCopyTrustedRoots") })
 	_register("SSLCreateContext", func() { purego.RegisterLibFunc(&_fnSSLCreateContext, _securityLib, "SSLCreateContext") })
 	_register("SSLDisposeContext", func() { purego.RegisterLibFunc(&_fnSSLDisposeContext, _securityLib, "SSLDisposeContext") })
@@ -305,22 +473,38 @@ func _loadLibrary() {
 	_register("SSLGetAllowsExpiredCerts", func() { purego.RegisterLibFunc(&_fnSSLGetAllowsExpiredCerts, _securityLib, "SSLGetAllowsExpiredCerts") })
 	_register("SSLGetAllowsExpiredRoots", func() { purego.RegisterLibFunc(&_fnSSLGetAllowsExpiredRoots, _securityLib, "SSLGetAllowsExpiredRoots") })
 	_register("SSLGetBufferedReadSize", func() { purego.RegisterLibFunc(&_fnSSLGetBufferedReadSize, _securityLib, "SSLGetBufferedReadSize") })
-	_register("SSLGetClientCertificateState", func() { purego.RegisterLibFunc(&_fnSSLGetClientCertificateState, _securityLib, "SSLGetClientCertificateState") })
+	_register("SSLGetClientCertificateState", func() {
+		purego.RegisterLibFunc(&_fnSSLGetClientCertificateState, _securityLib, "SSLGetClientCertificateState")
+	})
 	_register("SSLGetConnection", func() { purego.RegisterLibFunc(&_fnSSLGetConnection, _securityLib, "SSLGetConnection") })
 	_register("SSLGetDatagramWriteSize", func() { purego.RegisterLibFunc(&_fnSSLGetDatagramWriteSize, _securityLib, "SSLGetDatagramWriteSize") })
-	_register("SSLGetDiffieHellmanParams", func() { purego.RegisterLibFunc(&_fnSSLGetDiffieHellmanParams, _securityLib, "SSLGetDiffieHellmanParams") })
+	_register("SSLGetDiffieHellmanParams", func() {
+		purego.RegisterLibFunc(&_fnSSLGetDiffieHellmanParams, _securityLib, "SSLGetDiffieHellmanParams")
+	})
 	_register("SSLGetEnableCertVerify", func() { purego.RegisterLibFunc(&_fnSSLGetEnableCertVerify, _securityLib, "SSLGetEnableCertVerify") })
 	_register("SSLGetEnabledCiphers", func() { purego.RegisterLibFunc(&_fnSSLGetEnabledCiphers, _securityLib, "SSLGetEnabledCiphers") })
-	_register("SSLGetMaxDatagramRecordSize", func() { purego.RegisterLibFunc(&_fnSSLGetMaxDatagramRecordSize, _securityLib, "SSLGetMaxDatagramRecordSize") })
+	_register("SSLGetMaxDatagramRecordSize", func() {
+		purego.RegisterLibFunc(&_fnSSLGetMaxDatagramRecordSize, _securityLib, "SSLGetMaxDatagramRecordSize")
+	})
 	_register("SSLGetNegotiatedCipher", func() { purego.RegisterLibFunc(&_fnSSLGetNegotiatedCipher, _securityLib, "SSLGetNegotiatedCipher") })
-	_register("SSLGetNegotiatedProtocolVersion", func() { purego.RegisterLibFunc(&_fnSSLGetNegotiatedProtocolVersion, _securityLib, "SSLGetNegotiatedProtocolVersion") })
-	_register("SSLGetNumberEnabledCiphers", func() { purego.RegisterLibFunc(&_fnSSLGetNumberEnabledCiphers, _securityLib, "SSLGetNumberEnabledCiphers") })
-	_register("SSLGetNumberSupportedCiphers", func() { purego.RegisterLibFunc(&_fnSSLGetNumberSupportedCiphers, _securityLib, "SSLGetNumberSupportedCiphers") })
+	_register("SSLGetNegotiatedProtocolVersion", func() {
+		purego.RegisterLibFunc(&_fnSSLGetNegotiatedProtocolVersion, _securityLib, "SSLGetNegotiatedProtocolVersion")
+	})
+	_register("SSLGetNumberEnabledCiphers", func() {
+		purego.RegisterLibFunc(&_fnSSLGetNumberEnabledCiphers, _securityLib, "SSLGetNumberEnabledCiphers")
+	})
+	_register("SSLGetNumberSupportedCiphers", func() {
+		purego.RegisterLibFunc(&_fnSSLGetNumberSupportedCiphers, _securityLib, "SSLGetNumberSupportedCiphers")
+	})
 	_register("SSLGetPeerDomainName", func() { purego.RegisterLibFunc(&_fnSSLGetPeerDomainName, _securityLib, "SSLGetPeerDomainName") })
-	_register("SSLGetPeerDomainNameLength", func() { purego.RegisterLibFunc(&_fnSSLGetPeerDomainNameLength, _securityLib, "SSLGetPeerDomainNameLength") })
+	_register("SSLGetPeerDomainNameLength", func() {
+		purego.RegisterLibFunc(&_fnSSLGetPeerDomainNameLength, _securityLib, "SSLGetPeerDomainNameLength")
+	})
 	_register("SSLGetPeerID", func() { purego.RegisterLibFunc(&_fnSSLGetPeerID, _securityLib, "SSLGetPeerID") })
 	_register("SSLGetProtocolVersion", func() { purego.RegisterLibFunc(&_fnSSLGetProtocolVersion, _securityLib, "SSLGetProtocolVersion") })
-	_register("SSLGetProtocolVersionEnabled", func() { purego.RegisterLibFunc(&_fnSSLGetProtocolVersionEnabled, _securityLib, "SSLGetProtocolVersionEnabled") })
+	_register("SSLGetProtocolVersionEnabled", func() {
+		purego.RegisterLibFunc(&_fnSSLGetProtocolVersionEnabled, _securityLib, "SSLGetProtocolVersionEnabled")
+	})
 	_register("SSLGetProtocolVersionMax", func() { purego.RegisterLibFunc(&_fnSSLGetProtocolVersionMax, _securityLib, "SSLGetProtocolVersionMax") })
 	_register("SSLGetProtocolVersionMin", func() { purego.RegisterLibFunc(&_fnSSLGetProtocolVersionMin, _securityLib, "SSLGetProtocolVersionMin") })
 	_register("SSLGetRsaBlinding", func() { purego.RegisterLibFunc(&_fnSSLGetRsaBlinding, _securityLib, "SSLGetRsaBlinding") })
@@ -336,129 +520,255 @@ func _loadLibrary() {
 	_register("SSLSetAllowsExpiredCerts", func() { purego.RegisterLibFunc(&_fnSSLSetAllowsExpiredCerts, _securityLib, "SSLSetAllowsExpiredCerts") })
 	_register("SSLSetAllowsExpiredRoots", func() { purego.RegisterLibFunc(&_fnSSLSetAllowsExpiredRoots, _securityLib, "SSLSetAllowsExpiredRoots") })
 	_register("SSLSetCertificate", func() { purego.RegisterLibFunc(&_fnSSLSetCertificate, _securityLib, "SSLSetCertificate") })
-	_register("SSLSetCertificateAuthorities", func() { purego.RegisterLibFunc(&_fnSSLSetCertificateAuthorities, _securityLib, "SSLSetCertificateAuthorities") })
-	_register("SSLSetClientSideAuthenticate", func() { purego.RegisterLibFunc(&_fnSSLSetClientSideAuthenticate, _securityLib, "SSLSetClientSideAuthenticate") })
+	_register("SSLSetCertificateAuthorities", func() {
+		purego.RegisterLibFunc(&_fnSSLSetCertificateAuthorities, _securityLib, "SSLSetCertificateAuthorities")
+	})
+	_register("SSLSetClientSideAuthenticate", func() {
+		purego.RegisterLibFunc(&_fnSSLSetClientSideAuthenticate, _securityLib, "SSLSetClientSideAuthenticate")
+	})
 	_register("SSLSetConnection", func() { purego.RegisterLibFunc(&_fnSSLSetConnection, _securityLib, "SSLSetConnection") })
-	_register("SSLSetDatagramHelloCookie", func() { purego.RegisterLibFunc(&_fnSSLSetDatagramHelloCookie, _securityLib, "SSLSetDatagramHelloCookie") })
-	_register("SSLSetDiffieHellmanParams", func() { purego.RegisterLibFunc(&_fnSSLSetDiffieHellmanParams, _securityLib, "SSLSetDiffieHellmanParams") })
+	_register("SSLSetDatagramHelloCookie", func() {
+		purego.RegisterLibFunc(&_fnSSLSetDatagramHelloCookie, _securityLib, "SSLSetDatagramHelloCookie")
+	})
+	_register("SSLSetDiffieHellmanParams", func() {
+		purego.RegisterLibFunc(&_fnSSLSetDiffieHellmanParams, _securityLib, "SSLSetDiffieHellmanParams")
+	})
 	_register("SSLSetEnableCertVerify", func() { purego.RegisterLibFunc(&_fnSSLSetEnableCertVerify, _securityLib, "SSLSetEnableCertVerify") })
 	_register("SSLSetEnabledCiphers", func() { purego.RegisterLibFunc(&_fnSSLSetEnabledCiphers, _securityLib, "SSLSetEnabledCiphers") })
-	_register("SSLSetEncryptionCertificate", func() { purego.RegisterLibFunc(&_fnSSLSetEncryptionCertificate, _securityLib, "SSLSetEncryptionCertificate") })
+	_register("SSLSetEncryptionCertificate", func() {
+		purego.RegisterLibFunc(&_fnSSLSetEncryptionCertificate, _securityLib, "SSLSetEncryptionCertificate")
+	})
 	_register("SSLSetError", func() { purego.RegisterLibFunc(&_fnSSLSetError, _securityLib, "SSLSetError") })
 	_register("SSLSetIOFuncs", func() { purego.RegisterLibFunc(&_fnSSLSetIOFuncs, _securityLib, "SSLSetIOFuncs") })
-	_register("SSLSetMaxDatagramRecordSize", func() { purego.RegisterLibFunc(&_fnSSLSetMaxDatagramRecordSize, _securityLib, "SSLSetMaxDatagramRecordSize") })
+	_register("SSLSetMaxDatagramRecordSize", func() {
+		purego.RegisterLibFunc(&_fnSSLSetMaxDatagramRecordSize, _securityLib, "SSLSetMaxDatagramRecordSize")
+	})
 	_register("SSLSetOCSPResponse", func() { purego.RegisterLibFunc(&_fnSSLSetOCSPResponse, _securityLib, "SSLSetOCSPResponse") })
 	_register("SSLSetPeerDomainName", func() { purego.RegisterLibFunc(&_fnSSLSetPeerDomainName, _securityLib, "SSLSetPeerDomainName") })
 	_register("SSLSetPeerID", func() { purego.RegisterLibFunc(&_fnSSLSetPeerID, _securityLib, "SSLSetPeerID") })
 	_register("SSLSetProtocolVersion", func() { purego.RegisterLibFunc(&_fnSSLSetProtocolVersion, _securityLib, "SSLSetProtocolVersion") })
-	_register("SSLSetProtocolVersionEnabled", func() { purego.RegisterLibFunc(&_fnSSLSetProtocolVersionEnabled, _securityLib, "SSLSetProtocolVersionEnabled") })
+	_register("SSLSetProtocolVersionEnabled", func() {
+		purego.RegisterLibFunc(&_fnSSLSetProtocolVersionEnabled, _securityLib, "SSLSetProtocolVersionEnabled")
+	})
 	_register("SSLSetProtocolVersionMax", func() { purego.RegisterLibFunc(&_fnSSLSetProtocolVersionMax, _securityLib, "SSLSetProtocolVersionMax") })
 	_register("SSLSetProtocolVersionMin", func() { purego.RegisterLibFunc(&_fnSSLSetProtocolVersionMin, _securityLib, "SSLSetProtocolVersionMin") })
 	_register("SSLSetRsaBlinding", func() { purego.RegisterLibFunc(&_fnSSLSetRsaBlinding, _securityLib, "SSLSetRsaBlinding") })
 	_register("SSLSetSessionConfig", func() { purego.RegisterLibFunc(&_fnSSLSetSessionConfig, _securityLib, "SSLSetSessionConfig") })
 	_register("SSLSetSessionOption", func() { purego.RegisterLibFunc(&_fnSSLSetSessionOption, _securityLib, "SSLSetSessionOption") })
-	_register("SSLSetSessionTicketsEnabled", func() { purego.RegisterLibFunc(&_fnSSLSetSessionTicketsEnabled, _securityLib, "SSLSetSessionTicketsEnabled") })
+	_register("SSLSetSessionTicketsEnabled", func() {
+		purego.RegisterLibFunc(&_fnSSLSetSessionTicketsEnabled, _securityLib, "SSLSetSessionTicketsEnabled")
+	})
 	_register("SSLSetTrustedRoots", func() { purego.RegisterLibFunc(&_fnSSLSetTrustedRoots, _securityLib, "SSLSetTrustedRoots") })
 	_register("SSLWrite", func() { purego.RegisterLibFunc(&_fnSSLWrite, _securityLib, "SSLWrite") })
 	_register("SecACLCopyAuthorizations", func() { purego.RegisterLibFunc(&_fnSecACLCopyAuthorizations, _securityLib, "SecACLCopyAuthorizations") })
 	_register("SecACLCopyContents", func() { purego.RegisterLibFunc(&_fnSecACLCopyContents, _securityLib, "SecACLCopyContents") })
 	_register("SecACLCopySimpleContents", func() { purego.RegisterLibFunc(&_fnSecACLCopySimpleContents, _securityLib, "SecACLCopySimpleContents") })
-	_register("SecACLCreateFromSimpleContents", func() { purego.RegisterLibFunc(&_fnSecACLCreateFromSimpleContents, _securityLib, "SecACLCreateFromSimpleContents") })
-	_register("SecACLCreateWithSimpleContents", func() { purego.RegisterLibFunc(&_fnSecACLCreateWithSimpleContents, _securityLib, "SecACLCreateWithSimpleContents") })
+	_register("SecACLCreateFromSimpleContents", func() {
+		purego.RegisterLibFunc(&_fnSecACLCreateFromSimpleContents, _securityLib, "SecACLCreateFromSimpleContents")
+	})
+	_register("SecACLCreateWithSimpleContents", func() {
+		purego.RegisterLibFunc(&_fnSecACLCreateWithSimpleContents, _securityLib, "SecACLCreateWithSimpleContents")
+	})
 	_register("SecACLGetAuthorizations", func() { purego.RegisterLibFunc(&_fnSecACLGetAuthorizations, _securityLib, "SecACLGetAuthorizations") })
 	_register("SecACLGetTypeID", func() { purego.RegisterLibFunc(&_fnSecACLGetTypeID, _securityLib, "SecACLGetTypeID") })
 	_register("SecACLRemove", func() { purego.RegisterLibFunc(&_fnSecACLRemove, _securityLib, "SecACLRemove") })
 	_register("SecACLSetAuthorizations", func() { purego.RegisterLibFunc(&_fnSecACLSetAuthorizations, _securityLib, "SecACLSetAuthorizations") })
 	_register("SecACLSetContents", func() { purego.RegisterLibFunc(&_fnSecACLSetContents, _securityLib, "SecACLSetContents") })
 	_register("SecACLSetSimpleContents", func() { purego.RegisterLibFunc(&_fnSecACLSetSimpleContents, _securityLib, "SecACLSetSimpleContents") })
-	_register("SecACLUpdateAuthorizations", func() { purego.RegisterLibFunc(&_fnSecACLUpdateAuthorizations, _securityLib, "SecACLUpdateAuthorizations") })
-	_register("SecAccessControlCreateWithFlags", func() { purego.RegisterLibFunc(&_fnSecAccessControlCreateWithFlags, _securityLib, "SecAccessControlCreateWithFlags") })
-	_register("SecAccessControlGetTypeID", func() { purego.RegisterLibFunc(&_fnSecAccessControlGetTypeID, _securityLib, "SecAccessControlGetTypeID") })
+	_register("SecACLUpdateAuthorizations", func() {
+		purego.RegisterLibFunc(&_fnSecACLUpdateAuthorizations, _securityLib, "SecACLUpdateAuthorizations")
+	})
+	_register("SecAccessControlCreateWithFlags", func() {
+		purego.RegisterLibFunc(&_fnSecAccessControlCreateWithFlags, _securityLib, "SecAccessControlCreateWithFlags")
+	})
+	_register("SecAccessControlGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnSecAccessControlGetTypeID, _securityLib, "SecAccessControlGetTypeID")
+	})
 	_register("SecAccessCopyACLList", func() { purego.RegisterLibFunc(&_fnSecAccessCopyACLList, _securityLib, "SecAccessCopyACLList") })
-	_register("SecAccessCopyMatchingACLList", func() { purego.RegisterLibFunc(&_fnSecAccessCopyMatchingACLList, _securityLib, "SecAccessCopyMatchingACLList") })
+	_register("SecAccessCopyMatchingACLList", func() {
+		purego.RegisterLibFunc(&_fnSecAccessCopyMatchingACLList, _securityLib, "SecAccessCopyMatchingACLList")
+	})
 	_register("SecAccessCopyOwnerAndACL", func() { purego.RegisterLibFunc(&_fnSecAccessCopyOwnerAndACL, _securityLib, "SecAccessCopyOwnerAndACL") })
-	_register("SecAccessCopySelectedACLList", func() { purego.RegisterLibFunc(&_fnSecAccessCopySelectedACLList, _securityLib, "SecAccessCopySelectedACLList") })
+	_register("SecAccessCopySelectedACLList", func() {
+		purego.RegisterLibFunc(&_fnSecAccessCopySelectedACLList, _securityLib, "SecAccessCopySelectedACLList")
+	})
 	_register("SecAccessCreate", func() { purego.RegisterLibFunc(&_fnSecAccessCreate, _securityLib, "SecAccessCreate") })
-	_register("SecAccessCreateFromOwnerAndACL", func() { purego.RegisterLibFunc(&_fnSecAccessCreateFromOwnerAndACL, _securityLib, "SecAccessCreateFromOwnerAndACL") })
-	_register("SecAccessCreateWithOwnerAndACL", func() { purego.RegisterLibFunc(&_fnSecAccessCreateWithOwnerAndACL, _securityLib, "SecAccessCreateWithOwnerAndACL") })
+	_register("SecAccessCreateFromOwnerAndACL", func() {
+		purego.RegisterLibFunc(&_fnSecAccessCreateFromOwnerAndACL, _securityLib, "SecAccessCreateFromOwnerAndACL")
+	})
+	_register("SecAccessCreateWithOwnerAndACL", func() {
+		purego.RegisterLibFunc(&_fnSecAccessCreateWithOwnerAndACL, _securityLib, "SecAccessCreateWithOwnerAndACL")
+	})
 	_register("SecAccessGetOwnerAndACL", func() { purego.RegisterLibFunc(&_fnSecAccessGetOwnerAndACL, _securityLib, "SecAccessGetOwnerAndACL") })
 	_register("SecAccessGetTypeID", func() { purego.RegisterLibFunc(&_fnSecAccessGetTypeID, _securityLib, "SecAccessGetTypeID") })
-	_register("SecAddSharedWebCredential", func() { purego.RegisterLibFunc(&_fnSecAddSharedWebCredential, _securityLib, "SecAddSharedWebCredential") })
-	_register("SecCertificateAddToKeychain", func() { purego.RegisterLibFunc(&_fnSecCertificateAddToKeychain, _securityLib, "SecCertificateAddToKeychain") })
-	_register("SecCertificateCopyCommonName", func() { purego.RegisterLibFunc(&_fnSecCertificateCopyCommonName, _securityLib, "SecCertificateCopyCommonName") })
+	_register("SecAddSharedWebCredential", func() {
+		purego.RegisterLibFunc(&_fnSecAddSharedWebCredential, _securityLib, "SecAddSharedWebCredential")
+	})
+	_register("SecCertificateAddToKeychain", func() {
+		purego.RegisterLibFunc(&_fnSecCertificateAddToKeychain, _securityLib, "SecCertificateAddToKeychain")
+	})
+	_register("SecCertificateCopyCommonName", func() {
+		purego.RegisterLibFunc(&_fnSecCertificateCopyCommonName, _securityLib, "SecCertificateCopyCommonName")
+	})
 	_register("SecCertificateCopyData", func() { purego.RegisterLibFunc(&_fnSecCertificateCopyData, _securityLib, "SecCertificateCopyData") })
-	_register("SecCertificateCopyEmailAddresses", func() { purego.RegisterLibFunc(&_fnSecCertificateCopyEmailAddresses, _securityLib, "SecCertificateCopyEmailAddresses") })
+	_register("SecCertificateCopyEmailAddresses", func() {
+		purego.RegisterLibFunc(&_fnSecCertificateCopyEmailAddresses, _securityLib, "SecCertificateCopyEmailAddresses")
+	})
 	_register("SecCertificateCopyKey", func() { purego.RegisterLibFunc(&_fnSecCertificateCopyKey, _securityLib, "SecCertificateCopyKey") })
-	_register("SecCertificateCopyLongDescription", func() { purego.RegisterLibFunc(&_fnSecCertificateCopyLongDescription, _securityLib, "SecCertificateCopyLongDescription") })
-	_register("SecCertificateCopyNormalizedIssuerContent", func() { purego.RegisterLibFunc(&_fnSecCertificateCopyNormalizedIssuerContent, _securityLib, "SecCertificateCopyNormalizedIssuerContent") })
-	_register("SecCertificateCopyNormalizedIssuerSequence", func() { purego.RegisterLibFunc(&_fnSecCertificateCopyNormalizedIssuerSequence, _securityLib, "SecCertificateCopyNormalizedIssuerSequence") })
-	_register("SecCertificateCopyNormalizedSubjectContent", func() { purego.RegisterLibFunc(&_fnSecCertificateCopyNormalizedSubjectContent, _securityLib, "SecCertificateCopyNormalizedSubjectContent") })
-	_register("SecCertificateCopyNormalizedSubjectSequence", func() { purego.RegisterLibFunc(&_fnSecCertificateCopyNormalizedSubjectSequence, _securityLib, "SecCertificateCopyNormalizedSubjectSequence") })
-	_register("SecCertificateCopyNotValidAfterDate", func() { purego.RegisterLibFunc(&_fnSecCertificateCopyNotValidAfterDate, _securityLib, "SecCertificateCopyNotValidAfterDate") })
-	_register("SecCertificateCopyNotValidBeforeDate", func() { purego.RegisterLibFunc(&_fnSecCertificateCopyNotValidBeforeDate, _securityLib, "SecCertificateCopyNotValidBeforeDate") })
-	_register("SecCertificateCopyPreference", func() { purego.RegisterLibFunc(&_fnSecCertificateCopyPreference, _securityLib, "SecCertificateCopyPreference") })
-	_register("SecCertificateCopyPreferred", func() { purego.RegisterLibFunc(&_fnSecCertificateCopyPreferred, _securityLib, "SecCertificateCopyPreferred") })
-	_register("SecCertificateCopyPublicKey", func() { purego.RegisterLibFunc(&_fnSecCertificateCopyPublicKey, _securityLib, "SecCertificateCopyPublicKey") })
-	_register("SecCertificateCopySerialNumber", func() { purego.RegisterLibFunc(&_fnSecCertificateCopySerialNumber, _securityLib, "SecCertificateCopySerialNumber") })
-	_register("SecCertificateCopySerialNumberData", func() { purego.RegisterLibFunc(&_fnSecCertificateCopySerialNumberData, _securityLib, "SecCertificateCopySerialNumberData") })
-	_register("SecCertificateCopyShortDescription", func() { purego.RegisterLibFunc(&_fnSecCertificateCopyShortDescription, _securityLib, "SecCertificateCopyShortDescription") })
-	_register("SecCertificateCopySubjectSummary", func() { purego.RegisterLibFunc(&_fnSecCertificateCopySubjectSummary, _securityLib, "SecCertificateCopySubjectSummary") })
+	_register("SecCertificateCopyLongDescription", func() {
+		purego.RegisterLibFunc(&_fnSecCertificateCopyLongDescription, _securityLib, "SecCertificateCopyLongDescription")
+	})
+	_register("SecCertificateCopyNormalizedIssuerContent", func() {
+		purego.RegisterLibFunc(&_fnSecCertificateCopyNormalizedIssuerContent, _securityLib, "SecCertificateCopyNormalizedIssuerContent")
+	})
+	_register("SecCertificateCopyNormalizedIssuerSequence", func() {
+		purego.RegisterLibFunc(&_fnSecCertificateCopyNormalizedIssuerSequence, _securityLib, "SecCertificateCopyNormalizedIssuerSequence")
+	})
+	_register("SecCertificateCopyNormalizedSubjectContent", func() {
+		purego.RegisterLibFunc(&_fnSecCertificateCopyNormalizedSubjectContent, _securityLib, "SecCertificateCopyNormalizedSubjectContent")
+	})
+	_register("SecCertificateCopyNormalizedSubjectSequence", func() {
+		purego.RegisterLibFunc(&_fnSecCertificateCopyNormalizedSubjectSequence, _securityLib, "SecCertificateCopyNormalizedSubjectSequence")
+	})
+	_register("SecCertificateCopyNotValidAfterDate", func() {
+		purego.RegisterLibFunc(&_fnSecCertificateCopyNotValidAfterDate, _securityLib, "SecCertificateCopyNotValidAfterDate")
+	})
+	_register("SecCertificateCopyNotValidBeforeDate", func() {
+		purego.RegisterLibFunc(&_fnSecCertificateCopyNotValidBeforeDate, _securityLib, "SecCertificateCopyNotValidBeforeDate")
+	})
+	_register("SecCertificateCopyPreference", func() {
+		purego.RegisterLibFunc(&_fnSecCertificateCopyPreference, _securityLib, "SecCertificateCopyPreference")
+	})
+	_register("SecCertificateCopyPreferred", func() {
+		purego.RegisterLibFunc(&_fnSecCertificateCopyPreferred, _securityLib, "SecCertificateCopyPreferred")
+	})
+	_register("SecCertificateCopyPublicKey", func() {
+		purego.RegisterLibFunc(&_fnSecCertificateCopyPublicKey, _securityLib, "SecCertificateCopyPublicKey")
+	})
+	_register("SecCertificateCopySerialNumber", func() {
+		purego.RegisterLibFunc(&_fnSecCertificateCopySerialNumber, _securityLib, "SecCertificateCopySerialNumber")
+	})
+	_register("SecCertificateCopySerialNumberData", func() {
+		purego.RegisterLibFunc(&_fnSecCertificateCopySerialNumberData, _securityLib, "SecCertificateCopySerialNumberData")
+	})
+	_register("SecCertificateCopyShortDescription", func() {
+		purego.RegisterLibFunc(&_fnSecCertificateCopyShortDescription, _securityLib, "SecCertificateCopyShortDescription")
+	})
+	_register("SecCertificateCopySubjectSummary", func() {
+		purego.RegisterLibFunc(&_fnSecCertificateCopySubjectSummary, _securityLib, "SecCertificateCopySubjectSummary")
+	})
 	_register("SecCertificateCopyValues", func() { purego.RegisterLibFunc(&_fnSecCertificateCopyValues, _securityLib, "SecCertificateCopyValues") })
-	_register("SecCertificateCreateFromData", func() { purego.RegisterLibFunc(&_fnSecCertificateCreateFromData, _securityLib, "SecCertificateCreateFromData") })
-	_register("SecCertificateCreateWithData", func() { purego.RegisterLibFunc(&_fnSecCertificateCreateWithData, _securityLib, "SecCertificateCreateWithData") })
-	_register("SecCertificateGetAlgorithmID", func() { purego.RegisterLibFunc(&_fnSecCertificateGetAlgorithmID, _securityLib, "SecCertificateGetAlgorithmID") })
-	_register("SecCertificateGetCLHandle", func() { purego.RegisterLibFunc(&_fnSecCertificateGetCLHandle, _securityLib, "SecCertificateGetCLHandle") })
+	_register("SecCertificateCreateFromData", func() {
+		purego.RegisterLibFunc(&_fnSecCertificateCreateFromData, _securityLib, "SecCertificateCreateFromData")
+	})
+	_register("SecCertificateCreateWithData", func() {
+		purego.RegisterLibFunc(&_fnSecCertificateCreateWithData, _securityLib, "SecCertificateCreateWithData")
+	})
+	_register("SecCertificateGetAlgorithmID", func() {
+		purego.RegisterLibFunc(&_fnSecCertificateGetAlgorithmID, _securityLib, "SecCertificateGetAlgorithmID")
+	})
+	_register("SecCertificateGetCLHandle", func() {
+		purego.RegisterLibFunc(&_fnSecCertificateGetCLHandle, _securityLib, "SecCertificateGetCLHandle")
+	})
 	_register("SecCertificateGetData", func() { purego.RegisterLibFunc(&_fnSecCertificateGetData, _securityLib, "SecCertificateGetData") })
 	_register("SecCertificateGetIssuer", func() { purego.RegisterLibFunc(&_fnSecCertificateGetIssuer, _securityLib, "SecCertificateGetIssuer") })
 	_register("SecCertificateGetSubject", func() { purego.RegisterLibFunc(&_fnSecCertificateGetSubject, _securityLib, "SecCertificateGetSubject") })
 	_register("SecCertificateGetType", func() { purego.RegisterLibFunc(&_fnSecCertificateGetType, _securityLib, "SecCertificateGetType") })
 	_register("SecCertificateGetTypeID", func() { purego.RegisterLibFunc(&_fnSecCertificateGetTypeID, _securityLib, "SecCertificateGetTypeID") })
-	_register("SecCertificateSetPreference", func() { purego.RegisterLibFunc(&_fnSecCertificateSetPreference, _securityLib, "SecCertificateSetPreference") })
-	_register("SecCertificateSetPreferred", func() { purego.RegisterLibFunc(&_fnSecCertificateSetPreferred, _securityLib, "SecCertificateSetPreferred") })
+	_register("SecCertificateSetPreference", func() {
+		purego.RegisterLibFunc(&_fnSecCertificateSetPreference, _securityLib, "SecCertificateSetPreference")
+	})
+	_register("SecCertificateSetPreferred", func() {
+		purego.RegisterLibFunc(&_fnSecCertificateSetPreferred, _securityLib, "SecCertificateSetPreferred")
+	})
 	_register("SecCodeCheckValidity", func() { purego.RegisterLibFunc(&_fnSecCodeCheckValidity, _securityLib, "SecCodeCheckValidity") })
-	_register("SecCodeCheckValidityWithErrors", func() { purego.RegisterLibFunc(&_fnSecCodeCheckValidityWithErrors, _securityLib, "SecCodeCheckValidityWithErrors") })
-	_register("SecCodeCopyDesignatedRequirement", func() { purego.RegisterLibFunc(&_fnSecCodeCopyDesignatedRequirement, _securityLib, "SecCodeCopyDesignatedRequirement") })
-	_register("SecCodeCopyGuestWithAttributes", func() { purego.RegisterLibFunc(&_fnSecCodeCopyGuestWithAttributes, _securityLib, "SecCodeCopyGuestWithAttributes") })
+	_register("SecCodeCheckValidityWithErrors", func() {
+		purego.RegisterLibFunc(&_fnSecCodeCheckValidityWithErrors, _securityLib, "SecCodeCheckValidityWithErrors")
+	})
+	_register("SecCodeCopyDesignatedRequirement", func() {
+		purego.RegisterLibFunc(&_fnSecCodeCopyDesignatedRequirement, _securityLib, "SecCodeCopyDesignatedRequirement")
+	})
+	_register("SecCodeCopyGuestWithAttributes", func() {
+		purego.RegisterLibFunc(&_fnSecCodeCopyGuestWithAttributes, _securityLib, "SecCodeCopyGuestWithAttributes")
+	})
 	_register("SecCodeCopyHost", func() { purego.RegisterLibFunc(&_fnSecCodeCopyHost, _securityLib, "SecCodeCopyHost") })
 	_register("SecCodeCopyPath", func() { purego.RegisterLibFunc(&_fnSecCodeCopyPath, _securityLib, "SecCodeCopyPath") })
 	_register("SecCodeCopySelf", func() { purego.RegisterLibFunc(&_fnSecCodeCopySelf, _securityLib, "SecCodeCopySelf") })
-	_register("SecCodeCopySigningInformation", func() { purego.RegisterLibFunc(&_fnSecCodeCopySigningInformation, _securityLib, "SecCodeCopySigningInformation") })
+	_register("SecCodeCopySigningInformation", func() {
+		purego.RegisterLibFunc(&_fnSecCodeCopySigningInformation, _securityLib, "SecCodeCopySigningInformation")
+	})
 	_register("SecCodeCopyStaticCode", func() { purego.RegisterLibFunc(&_fnSecCodeCopyStaticCode, _securityLib, "SecCodeCopyStaticCode") })
-	_register("SecCodeCreateWithXPCMessage", func() { purego.RegisterLibFunc(&_fnSecCodeCreateWithXPCMessage, _securityLib, "SecCodeCreateWithXPCMessage") })
+	_register("SecCodeCreateWithXPCMessage", func() {
+		purego.RegisterLibFunc(&_fnSecCodeCreateWithXPCMessage, _securityLib, "SecCodeCreateWithXPCMessage")
+	})
 	_register("SecCodeGetTypeID", func() { purego.RegisterLibFunc(&_fnSecCodeGetTypeID, _securityLib, "SecCodeGetTypeID") })
 	_register("SecCodeMapMemory", func() { purego.RegisterLibFunc(&_fnSecCodeMapMemory, _securityLib, "SecCodeMapMemory") })
-	_register("SecCodeValidateFileResource", func() { purego.RegisterLibFunc(&_fnSecCodeValidateFileResource, _securityLib, "SecCodeValidateFileResource") })
-	_register("SecCopyErrorMessageString", func() { purego.RegisterLibFunc(&_fnSecCopyErrorMessageString, _securityLib, "SecCopyErrorMessageString") })
-	_register("SecCreateSharedWebCredentialPassword", func() { purego.RegisterLibFunc(&_fnSecCreateSharedWebCredentialPassword, _securityLib, "SecCreateSharedWebCredentialPassword") })
+	_register("SecCodeValidateFileResource", func() {
+		purego.RegisterLibFunc(&_fnSecCodeValidateFileResource, _securityLib, "SecCodeValidateFileResource")
+	})
+	_register("SecCopyErrorMessageString", func() {
+		purego.RegisterLibFunc(&_fnSecCopyErrorMessageString, _securityLib, "SecCopyErrorMessageString")
+	})
+	_register("SecCreateSharedWebCredentialPassword", func() {
+		purego.RegisterLibFunc(&_fnSecCreateSharedWebCredentialPassword, _securityLib, "SecCreateSharedWebCredentialPassword")
+	})
 	_register("SecDecodeTransformCreate", func() { purego.RegisterLibFunc(&_fnSecDecodeTransformCreate, _securityLib, "SecDecodeTransformCreate") })
-	_register("SecDecryptTransformCreate", func() { purego.RegisterLibFunc(&_fnSecDecryptTransformCreate, _securityLib, "SecDecryptTransformCreate") })
-	_register("SecDecryptTransformGetTypeID", func() { purego.RegisterLibFunc(&_fnSecDecryptTransformGetTypeID, _securityLib, "SecDecryptTransformGetTypeID") })
+	_register("SecDecryptTransformCreate", func() {
+		purego.RegisterLibFunc(&_fnSecDecryptTransformCreate, _securityLib, "SecDecryptTransformCreate")
+	})
+	_register("SecDecryptTransformGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnSecDecryptTransformGetTypeID, _securityLib, "SecDecryptTransformGetTypeID")
+	})
 	_register("SecDigestTransformCreate", func() { purego.RegisterLibFunc(&_fnSecDigestTransformCreate, _securityLib, "SecDigestTransformCreate") })
-	_register("SecDigestTransformGetTypeID", func() { purego.RegisterLibFunc(&_fnSecDigestTransformGetTypeID, _securityLib, "SecDigestTransformGetTypeID") })
+	_register("SecDigestTransformGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnSecDigestTransformGetTypeID, _securityLib, "SecDigestTransformGetTypeID")
+	})
 	_register("SecEncodeTransformCreate", func() { purego.RegisterLibFunc(&_fnSecEncodeTransformCreate, _securityLib, "SecEncodeTransformCreate") })
-	_register("SecEncryptTransformCreate", func() { purego.RegisterLibFunc(&_fnSecEncryptTransformCreate, _securityLib, "SecEncryptTransformCreate") })
-	_register("SecEncryptTransformGetTypeID", func() { purego.RegisterLibFunc(&_fnSecEncryptTransformGetTypeID, _securityLib, "SecEncryptTransformGetTypeID") })
-	_register("SecGroupTransformGetTypeID", func() { purego.RegisterLibFunc(&_fnSecGroupTransformGetTypeID, _securityLib, "SecGroupTransformGetTypeID") })
+	_register("SecEncryptTransformCreate", func() {
+		purego.RegisterLibFunc(&_fnSecEncryptTransformCreate, _securityLib, "SecEncryptTransformCreate")
+	})
+	_register("SecEncryptTransformGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnSecEncryptTransformGetTypeID, _securityLib, "SecEncryptTransformGetTypeID")
+	})
+	_register("SecGroupTransformGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnSecGroupTransformGetTypeID, _securityLib, "SecGroupTransformGetTypeID")
+	})
 	_register("SecHostCreateGuest", func() { purego.RegisterLibFunc(&_fnSecHostCreateGuest, _securityLib, "SecHostCreateGuest") })
 	_register("SecHostRemoveGuest", func() { purego.RegisterLibFunc(&_fnSecHostRemoveGuest, _securityLib, "SecHostRemoveGuest") })
 	_register("SecHostSelectGuest", func() { purego.RegisterLibFunc(&_fnSecHostSelectGuest, _securityLib, "SecHostSelectGuest") })
 	_register("SecHostSelectedGuest", func() { purego.RegisterLibFunc(&_fnSecHostSelectedGuest, _securityLib, "SecHostSelectedGuest") })
 	_register("SecHostSetGuestStatus", func() { purego.RegisterLibFunc(&_fnSecHostSetGuestStatus, _securityLib, "SecHostSetGuestStatus") })
 	_register("SecHostSetHostingPort", func() { purego.RegisterLibFunc(&_fnSecHostSetHostingPort, _securityLib, "SecHostSetHostingPort") })
-	_register("SecIdentityCopyCertificate", func() { purego.RegisterLibFunc(&_fnSecIdentityCopyCertificate, _securityLib, "SecIdentityCopyCertificate") })
-	_register("SecIdentityCopyPreference", func() { purego.RegisterLibFunc(&_fnSecIdentityCopyPreference, _securityLib, "SecIdentityCopyPreference") })
+	_register("SecIdentityCopyCertificate", func() {
+		purego.RegisterLibFunc(&_fnSecIdentityCopyCertificate, _securityLib, "SecIdentityCopyCertificate")
+	})
+	_register("SecIdentityCopyPreference", func() {
+		purego.RegisterLibFunc(&_fnSecIdentityCopyPreference, _securityLib, "SecIdentityCopyPreference")
+	})
 	_register("SecIdentityCopyPreferred", func() { purego.RegisterLibFunc(&_fnSecIdentityCopyPreferred, _securityLib, "SecIdentityCopyPreferred") })
-	_register("SecIdentityCopyPrivateKey", func() { purego.RegisterLibFunc(&_fnSecIdentityCopyPrivateKey, _securityLib, "SecIdentityCopyPrivateKey") })
-	_register("SecIdentityCopySystemIdentity", func() { purego.RegisterLibFunc(&_fnSecIdentityCopySystemIdentity, _securityLib, "SecIdentityCopySystemIdentity") })
+	_register("SecIdentityCopyPrivateKey", func() {
+		purego.RegisterLibFunc(&_fnSecIdentityCopyPrivateKey, _securityLib, "SecIdentityCopyPrivateKey")
+	})
+	_register("SecIdentityCopySystemIdentity", func() {
+		purego.RegisterLibFunc(&_fnSecIdentityCopySystemIdentity, _securityLib, "SecIdentityCopySystemIdentity")
+	})
 	_register("SecIdentityCreate", func() { purego.RegisterLibFunc(&_fnSecIdentityCreate, _securityLib, "SecIdentityCreate") })
-	_register("SecIdentityCreateWithCertificate", func() { purego.RegisterLibFunc(&_fnSecIdentityCreateWithCertificate, _securityLib, "SecIdentityCreateWithCertificate") })
+	_register("SecIdentityCreateWithCertificate", func() {
+		purego.RegisterLibFunc(&_fnSecIdentityCreateWithCertificate, _securityLib, "SecIdentityCreateWithCertificate")
+	})
 	_register("SecIdentityGetTypeID", func() { purego.RegisterLibFunc(&_fnSecIdentityGetTypeID, _securityLib, "SecIdentityGetTypeID") })
-	_register("SecIdentitySearchCopyNext", func() { purego.RegisterLibFunc(&_fnSecIdentitySearchCopyNext, _securityLib, "SecIdentitySearchCopyNext") })
+	_register("SecIdentitySearchCopyNext", func() {
+		purego.RegisterLibFunc(&_fnSecIdentitySearchCopyNext, _securityLib, "SecIdentitySearchCopyNext")
+	})
 	_register("SecIdentitySearchCreate", func() { purego.RegisterLibFunc(&_fnSecIdentitySearchCreate, _securityLib, "SecIdentitySearchCreate") })
-	_register("SecIdentitySearchGetTypeID", func() { purego.RegisterLibFunc(&_fnSecIdentitySearchGetTypeID, _securityLib, "SecIdentitySearchGetTypeID") })
+	_register("SecIdentitySearchGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnSecIdentitySearchGetTypeID, _securityLib, "SecIdentitySearchGetTypeID")
+	})
 	_register("SecIdentitySetPreference", func() { purego.RegisterLibFunc(&_fnSecIdentitySetPreference, _securityLib, "SecIdentitySetPreference") })
 	_register("SecIdentitySetPreferred", func() { purego.RegisterLibFunc(&_fnSecIdentitySetPreferred, _securityLib, "SecIdentitySetPreferred") })
-	_register("SecIdentitySetSystemIdentity", func() { purego.RegisterLibFunc(&_fnSecIdentitySetSystemIdentity, _securityLib, "SecIdentitySetSystemIdentity") })
+	_register("SecIdentitySetSystemIdentity", func() {
+		purego.RegisterLibFunc(&_fnSecIdentitySetSystemIdentity, _securityLib, "SecIdentitySetSystemIdentity")
+	})
 	_register("SecItemAdd", func() { purego.RegisterLibFunc(&_fnSecItemAdd, _securityLib, "SecItemAdd") })
 	_register("SecItemCopyMatching", func() { purego.RegisterLibFunc(&_fnSecItemCopyMatching, _securityLib, "SecItemCopyMatching") })
 	_register("SecItemDelete", func() { purego.RegisterLibFunc(&_fnSecItemDelete, _securityLib, "SecItemDelete") })
@@ -466,11 +776,19 @@ func _loadLibrary() {
 	_register("SecItemImport", func() { purego.RegisterLibFunc(&_fnSecItemImport, _securityLib, "SecItemImport") })
 	_register("SecItemUpdate", func() { purego.RegisterLibFunc(&_fnSecItemUpdate, _securityLib, "SecItemUpdate") })
 	_register("SecKeyCopyAttributes", func() { purego.RegisterLibFunc(&_fnSecKeyCopyAttributes, _securityLib, "SecKeyCopyAttributes") })
-	_register("SecKeyCopyExternalRepresentation", func() { purego.RegisterLibFunc(&_fnSecKeyCopyExternalRepresentation, _securityLib, "SecKeyCopyExternalRepresentation") })
-	_register("SecKeyCopyKeyExchangeResult", func() { purego.RegisterLibFunc(&_fnSecKeyCopyKeyExchangeResult, _securityLib, "SecKeyCopyKeyExchangeResult") })
+	_register("SecKeyCopyExternalRepresentation", func() {
+		purego.RegisterLibFunc(&_fnSecKeyCopyExternalRepresentation, _securityLib, "SecKeyCopyExternalRepresentation")
+	})
+	_register("SecKeyCopyKeyExchangeResult", func() {
+		purego.RegisterLibFunc(&_fnSecKeyCopyKeyExchangeResult, _securityLib, "SecKeyCopyKeyExchangeResult")
+	})
 	_register("SecKeyCopyPublicKey", func() { purego.RegisterLibFunc(&_fnSecKeyCopyPublicKey, _securityLib, "SecKeyCopyPublicKey") })
-	_register("SecKeyCreateDecryptedData", func() { purego.RegisterLibFunc(&_fnSecKeyCreateDecryptedData, _securityLib, "SecKeyCreateDecryptedData") })
-	_register("SecKeyCreateEncryptedData", func() { purego.RegisterLibFunc(&_fnSecKeyCreateEncryptedData, _securityLib, "SecKeyCreateEncryptedData") })
+	_register("SecKeyCreateDecryptedData", func() {
+		purego.RegisterLibFunc(&_fnSecKeyCreateDecryptedData, _securityLib, "SecKeyCreateDecryptedData")
+	})
+	_register("SecKeyCreateEncryptedData", func() {
+		purego.RegisterLibFunc(&_fnSecKeyCreateEncryptedData, _securityLib, "SecKeyCreateEncryptedData")
+	})
 	_register("SecKeyCreateFromData", func() { purego.RegisterLibFunc(&_fnSecKeyCreateFromData, _securityLib, "SecKeyCreateFromData") })
 	_register("SecKeyCreatePair", func() { purego.RegisterLibFunc(&_fnSecKeyCreatePair, _securityLib, "SecKeyCreatePair") })
 	_register("SecKeyCreateRandomKey", func() { purego.RegisterLibFunc(&_fnSecKeyCreateRandomKey, _securityLib, "SecKeyCreateRandomKey") })
@@ -486,75 +804,147 @@ func _loadLibrary() {
 	_register("SecKeyGetCSSMKey", func() { purego.RegisterLibFunc(&_fnSecKeyGetCSSMKey, _securityLib, "SecKeyGetCSSMKey") })
 	_register("SecKeyGetCredentials", func() { purego.RegisterLibFunc(&_fnSecKeyGetCredentials, _securityLib, "SecKeyGetCredentials") })
 	_register("SecKeyGetTypeID", func() { purego.RegisterLibFunc(&_fnSecKeyGetTypeID, _securityLib, "SecKeyGetTypeID") })
-	_register("SecKeyIsAlgorithmSupported", func() { purego.RegisterLibFunc(&_fnSecKeyIsAlgorithmSupported, _securityLib, "SecKeyIsAlgorithmSupported") })
+	_register("SecKeyIsAlgorithmSupported", func() {
+		purego.RegisterLibFunc(&_fnSecKeyIsAlgorithmSupported, _securityLib, "SecKeyIsAlgorithmSupported")
+	})
 	_register("SecKeyUnwrapSymmetric", func() { purego.RegisterLibFunc(&_fnSecKeyUnwrapSymmetric, _securityLib, "SecKeyUnwrapSymmetric") })
 	_register("SecKeyVerifySignature", func() { purego.RegisterLibFunc(&_fnSecKeyVerifySignature, _securityLib, "SecKeyVerifySignature") })
 	_register("SecKeyWrapSymmetric", func() { purego.RegisterLibFunc(&_fnSecKeyWrapSymmetric, _securityLib, "SecKeyWrapSymmetric") })
 	_register("SecKeychainAddCallback", func() { purego.RegisterLibFunc(&_fnSecKeychainAddCallback, _securityLib, "SecKeychainAddCallback") })
-	_register("SecKeychainAddGenericPassword", func() { purego.RegisterLibFunc(&_fnSecKeychainAddGenericPassword, _securityLib, "SecKeychainAddGenericPassword") })
-	_register("SecKeychainAddInternetPassword", func() { purego.RegisterLibFunc(&_fnSecKeychainAddInternetPassword, _securityLib, "SecKeychainAddInternetPassword") })
-	_register("SecKeychainAttributeInfoForItemID", func() { purego.RegisterLibFunc(&_fnSecKeychainAttributeInfoForItemID, _securityLib, "SecKeychainAttributeInfoForItemID") })
+	_register("SecKeychainAddGenericPassword", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainAddGenericPassword, _securityLib, "SecKeychainAddGenericPassword")
+	})
+	_register("SecKeychainAddInternetPassword", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainAddInternetPassword, _securityLib, "SecKeychainAddInternetPassword")
+	})
+	_register("SecKeychainAttributeInfoForItemID", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainAttributeInfoForItemID, _securityLib, "SecKeychainAttributeInfoForItemID")
+	})
 	_register("SecKeychainCopyAccess", func() { purego.RegisterLibFunc(&_fnSecKeychainCopyAccess, _securityLib, "SecKeychainCopyAccess") })
 	_register("SecKeychainCopyDefault", func() { purego.RegisterLibFunc(&_fnSecKeychainCopyDefault, _securityLib, "SecKeychainCopyDefault") })
-	_register("SecKeychainCopyDomainDefault", func() { purego.RegisterLibFunc(&_fnSecKeychainCopyDomainDefault, _securityLib, "SecKeychainCopyDomainDefault") })
-	_register("SecKeychainCopyDomainSearchList", func() { purego.RegisterLibFunc(&_fnSecKeychainCopyDomainSearchList, _securityLib, "SecKeychainCopyDomainSearchList") })
-	_register("SecKeychainCopySearchList", func() { purego.RegisterLibFunc(&_fnSecKeychainCopySearchList, _securityLib, "SecKeychainCopySearchList") })
+	_register("SecKeychainCopyDomainDefault", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainCopyDomainDefault, _securityLib, "SecKeychainCopyDomainDefault")
+	})
+	_register("SecKeychainCopyDomainSearchList", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainCopyDomainSearchList, _securityLib, "SecKeychainCopyDomainSearchList")
+	})
+	_register("SecKeychainCopySearchList", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainCopySearchList, _securityLib, "SecKeychainCopySearchList")
+	})
 	_register("SecKeychainCopySettings", func() { purego.RegisterLibFunc(&_fnSecKeychainCopySettings, _securityLib, "SecKeychainCopySettings") })
 	_register("SecKeychainCreate", func() { purego.RegisterLibFunc(&_fnSecKeychainCreate, _securityLib, "SecKeychainCreate") })
 	_register("SecKeychainDelete", func() { purego.RegisterLibFunc(&_fnSecKeychainDelete, _securityLib, "SecKeychainDelete") })
-	_register("SecKeychainFindGenericPassword", func() { purego.RegisterLibFunc(&_fnSecKeychainFindGenericPassword, _securityLib, "SecKeychainFindGenericPassword") })
-	_register("SecKeychainFindInternetPassword", func() { purego.RegisterLibFunc(&_fnSecKeychainFindInternetPassword, _securityLib, "SecKeychainFindInternetPassword") })
-	_register("SecKeychainFreeAttributeInfo", func() { purego.RegisterLibFunc(&_fnSecKeychainFreeAttributeInfo, _securityLib, "SecKeychainFreeAttributeInfo") })
+	_register("SecKeychainFindGenericPassword", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainFindGenericPassword, _securityLib, "SecKeychainFindGenericPassword")
+	})
+	_register("SecKeychainFindInternetPassword", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainFindInternetPassword, _securityLib, "SecKeychainFindInternetPassword")
+	})
+	_register("SecKeychainFreeAttributeInfo", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainFreeAttributeInfo, _securityLib, "SecKeychainFreeAttributeInfo")
+	})
 	_register("SecKeychainGetCSPHandle", func() { purego.RegisterLibFunc(&_fnSecKeychainGetCSPHandle, _securityLib, "SecKeychainGetCSPHandle") })
 	_register("SecKeychainGetDLDBHandle", func() { purego.RegisterLibFunc(&_fnSecKeychainGetDLDBHandle, _securityLib, "SecKeychainGetDLDBHandle") })
 	_register("SecKeychainGetPath", func() { purego.RegisterLibFunc(&_fnSecKeychainGetPath, _securityLib, "SecKeychainGetPath") })
-	_register("SecKeychainGetPreferenceDomain", func() { purego.RegisterLibFunc(&_fnSecKeychainGetPreferenceDomain, _securityLib, "SecKeychainGetPreferenceDomain") })
+	_register("SecKeychainGetPreferenceDomain", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainGetPreferenceDomain, _securityLib, "SecKeychainGetPreferenceDomain")
+	})
 	_register("SecKeychainGetStatus", func() { purego.RegisterLibFunc(&_fnSecKeychainGetStatus, _securityLib, "SecKeychainGetStatus") })
 	_register("SecKeychainGetTypeID", func() { purego.RegisterLibFunc(&_fnSecKeychainGetTypeID, _securityLib, "SecKeychainGetTypeID") })
-	_register("SecKeychainGetUserInteractionAllowed", func() { purego.RegisterLibFunc(&_fnSecKeychainGetUserInteractionAllowed, _securityLib, "SecKeychainGetUserInteractionAllowed") })
+	_register("SecKeychainGetUserInteractionAllowed", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainGetUserInteractionAllowed, _securityLib, "SecKeychainGetUserInteractionAllowed")
+	})
 	_register("SecKeychainGetVersion", func() { purego.RegisterLibFunc(&_fnSecKeychainGetVersion, _securityLib, "SecKeychainGetVersion") })
-	_register("SecKeychainItemCopyAccess", func() { purego.RegisterLibFunc(&_fnSecKeychainItemCopyAccess, _securityLib, "SecKeychainItemCopyAccess") })
-	_register("SecKeychainItemCopyAttributesAndData", func() { purego.RegisterLibFunc(&_fnSecKeychainItemCopyAttributesAndData, _securityLib, "SecKeychainItemCopyAttributesAndData") })
-	_register("SecKeychainItemCopyContent", func() { purego.RegisterLibFunc(&_fnSecKeychainItemCopyContent, _securityLib, "SecKeychainItemCopyContent") })
-	_register("SecKeychainItemCopyFromPersistentReference", func() { purego.RegisterLibFunc(&_fnSecKeychainItemCopyFromPersistentReference, _securityLib, "SecKeychainItemCopyFromPersistentReference") })
-	_register("SecKeychainItemCopyKeychain", func() { purego.RegisterLibFunc(&_fnSecKeychainItemCopyKeychain, _securityLib, "SecKeychainItemCopyKeychain") })
-	_register("SecKeychainItemCreateCopy", func() { purego.RegisterLibFunc(&_fnSecKeychainItemCreateCopy, _securityLib, "SecKeychainItemCreateCopy") })
-	_register("SecKeychainItemCreateFromContent", func() { purego.RegisterLibFunc(&_fnSecKeychainItemCreateFromContent, _securityLib, "SecKeychainItemCreateFromContent") })
-	_register("SecKeychainItemCreatePersistentReference", func() { purego.RegisterLibFunc(&_fnSecKeychainItemCreatePersistentReference, _securityLib, "SecKeychainItemCreatePersistentReference") })
+	_register("SecKeychainItemCopyAccess", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainItemCopyAccess, _securityLib, "SecKeychainItemCopyAccess")
+	})
+	_register("SecKeychainItemCopyAttributesAndData", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainItemCopyAttributesAndData, _securityLib, "SecKeychainItemCopyAttributesAndData")
+	})
+	_register("SecKeychainItemCopyContent", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainItemCopyContent, _securityLib, "SecKeychainItemCopyContent")
+	})
+	_register("SecKeychainItemCopyFromPersistentReference", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainItemCopyFromPersistentReference, _securityLib, "SecKeychainItemCopyFromPersistentReference")
+	})
+	_register("SecKeychainItemCopyKeychain", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainItemCopyKeychain, _securityLib, "SecKeychainItemCopyKeychain")
+	})
+	_register("SecKeychainItemCreateCopy", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainItemCreateCopy, _securityLib, "SecKeychainItemCreateCopy")
+	})
+	_register("SecKeychainItemCreateFromContent", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainItemCreateFromContent, _securityLib, "SecKeychainItemCreateFromContent")
+	})
+	_register("SecKeychainItemCreatePersistentReference", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainItemCreatePersistentReference, _securityLib, "SecKeychainItemCreatePersistentReference")
+	})
 	_register("SecKeychainItemDelete", func() { purego.RegisterLibFunc(&_fnSecKeychainItemDelete, _securityLib, "SecKeychainItemDelete") })
 	_register("SecKeychainItemExport", func() { purego.RegisterLibFunc(&_fnSecKeychainItemExport, _securityLib, "SecKeychainItemExport") })
-	_register("SecKeychainItemFreeAttributesAndData", func() { purego.RegisterLibFunc(&_fnSecKeychainItemFreeAttributesAndData, _securityLib, "SecKeychainItemFreeAttributesAndData") })
-	_register("SecKeychainItemFreeContent", func() { purego.RegisterLibFunc(&_fnSecKeychainItemFreeContent, _securityLib, "SecKeychainItemFreeContent") })
-	_register("SecKeychainItemGetDLDBHandle", func() { purego.RegisterLibFunc(&_fnSecKeychainItemGetDLDBHandle, _securityLib, "SecKeychainItemGetDLDBHandle") })
+	_register("SecKeychainItemFreeAttributesAndData", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainItemFreeAttributesAndData, _securityLib, "SecKeychainItemFreeAttributesAndData")
+	})
+	_register("SecKeychainItemFreeContent", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainItemFreeContent, _securityLib, "SecKeychainItemFreeContent")
+	})
+	_register("SecKeychainItemGetDLDBHandle", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainItemGetDLDBHandle, _securityLib, "SecKeychainItemGetDLDBHandle")
+	})
 	_register("SecKeychainItemGetTypeID", func() { purego.RegisterLibFunc(&_fnSecKeychainItemGetTypeID, _securityLib, "SecKeychainItemGetTypeID") })
-	_register("SecKeychainItemGetUniqueRecordID", func() { purego.RegisterLibFunc(&_fnSecKeychainItemGetUniqueRecordID, _securityLib, "SecKeychainItemGetUniqueRecordID") })
+	_register("SecKeychainItemGetUniqueRecordID", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainItemGetUniqueRecordID, _securityLib, "SecKeychainItemGetUniqueRecordID")
+	})
 	_register("SecKeychainItemImport", func() { purego.RegisterLibFunc(&_fnSecKeychainItemImport, _securityLib, "SecKeychainItemImport") })
-	_register("SecKeychainItemModifyAttributesAndData", func() { purego.RegisterLibFunc(&_fnSecKeychainItemModifyAttributesAndData, _securityLib, "SecKeychainItemModifyAttributesAndData") })
-	_register("SecKeychainItemModifyContent", func() { purego.RegisterLibFunc(&_fnSecKeychainItemModifyContent, _securityLib, "SecKeychainItemModifyContent") })
+	_register("SecKeychainItemModifyAttributesAndData", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainItemModifyAttributesAndData, _securityLib, "SecKeychainItemModifyAttributesAndData")
+	})
+	_register("SecKeychainItemModifyContent", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainItemModifyContent, _securityLib, "SecKeychainItemModifyContent")
+	})
 	_register("SecKeychainItemSetAccess", func() { purego.RegisterLibFunc(&_fnSecKeychainItemSetAccess, _securityLib, "SecKeychainItemSetAccess") })
 	_register("SecKeychainLock", func() { purego.RegisterLibFunc(&_fnSecKeychainLock, _securityLib, "SecKeychainLock") })
 	_register("SecKeychainLockAll", func() { purego.RegisterLibFunc(&_fnSecKeychainLockAll, _securityLib, "SecKeychainLockAll") })
 	_register("SecKeychainOpen", func() { purego.RegisterLibFunc(&_fnSecKeychainOpen, _securityLib, "SecKeychainOpen") })
-	_register("SecKeychainRemoveCallback", func() { purego.RegisterLibFunc(&_fnSecKeychainRemoveCallback, _securityLib, "SecKeychainRemoveCallback") })
-	_register("SecKeychainSearchCopyNext", func() { purego.RegisterLibFunc(&_fnSecKeychainSearchCopyNext, _securityLib, "SecKeychainSearchCopyNext") })
-	_register("SecKeychainSearchCreateFromAttributes", func() { purego.RegisterLibFunc(&_fnSecKeychainSearchCreateFromAttributes, _securityLib, "SecKeychainSearchCreateFromAttributes") })
-	_register("SecKeychainSearchGetTypeID", func() { purego.RegisterLibFunc(&_fnSecKeychainSearchGetTypeID, _securityLib, "SecKeychainSearchGetTypeID") })
+	_register("SecKeychainRemoveCallback", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainRemoveCallback, _securityLib, "SecKeychainRemoveCallback")
+	})
+	_register("SecKeychainSearchCopyNext", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainSearchCopyNext, _securityLib, "SecKeychainSearchCopyNext")
+	})
+	_register("SecKeychainSearchCreateFromAttributes", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainSearchCreateFromAttributes, _securityLib, "SecKeychainSearchCreateFromAttributes")
+	})
+	_register("SecKeychainSearchGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainSearchGetTypeID, _securityLib, "SecKeychainSearchGetTypeID")
+	})
 	_register("SecKeychainSetAccess", func() { purego.RegisterLibFunc(&_fnSecKeychainSetAccess, _securityLib, "SecKeychainSetAccess") })
 	_register("SecKeychainSetDefault", func() { purego.RegisterLibFunc(&_fnSecKeychainSetDefault, _securityLib, "SecKeychainSetDefault") })
-	_register("SecKeychainSetDomainDefault", func() { purego.RegisterLibFunc(&_fnSecKeychainSetDomainDefault, _securityLib, "SecKeychainSetDomainDefault") })
-	_register("SecKeychainSetDomainSearchList", func() { purego.RegisterLibFunc(&_fnSecKeychainSetDomainSearchList, _securityLib, "SecKeychainSetDomainSearchList") })
-	_register("SecKeychainSetPreferenceDomain", func() { purego.RegisterLibFunc(&_fnSecKeychainSetPreferenceDomain, _securityLib, "SecKeychainSetPreferenceDomain") })
+	_register("SecKeychainSetDomainDefault", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainSetDomainDefault, _securityLib, "SecKeychainSetDomainDefault")
+	})
+	_register("SecKeychainSetDomainSearchList", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainSetDomainSearchList, _securityLib, "SecKeychainSetDomainSearchList")
+	})
+	_register("SecKeychainSetPreferenceDomain", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainSetPreferenceDomain, _securityLib, "SecKeychainSetPreferenceDomain")
+	})
 	_register("SecKeychainSetSearchList", func() { purego.RegisterLibFunc(&_fnSecKeychainSetSearchList, _securityLib, "SecKeychainSetSearchList") })
 	_register("SecKeychainSetSettings", func() { purego.RegisterLibFunc(&_fnSecKeychainSetSettings, _securityLib, "SecKeychainSetSettings") })
-	_register("SecKeychainSetUserInteractionAllowed", func() { purego.RegisterLibFunc(&_fnSecKeychainSetUserInteractionAllowed, _securityLib, "SecKeychainSetUserInteractionAllowed") })
+	_register("SecKeychainSetUserInteractionAllowed", func() {
+		purego.RegisterLibFunc(&_fnSecKeychainSetUserInteractionAllowed, _securityLib, "SecKeychainSetUserInteractionAllowed")
+	})
 	_register("SecKeychainUnlock", func() { purego.RegisterLibFunc(&_fnSecKeychainUnlock, _securityLib, "SecKeychainUnlock") })
 	_register("SecPKCS12Import", func() { purego.RegisterLibFunc(&_fnSecPKCS12Import, _securityLib, "SecPKCS12Import") })
 	_register("SecPolicyCopyProperties", func() { purego.RegisterLibFunc(&_fnSecPolicyCopyProperties, _securityLib, "SecPolicyCopyProperties") })
 	_register("SecPolicyCreateBasicX509", func() { purego.RegisterLibFunc(&_fnSecPolicyCreateBasicX509, _securityLib, "SecPolicyCreateBasicX509") })
-	_register("SecPolicyCreateRevocation", func() { purego.RegisterLibFunc(&_fnSecPolicyCreateRevocation, _securityLib, "SecPolicyCreateRevocation") })
+	_register("SecPolicyCreateRevocation", func() {
+		purego.RegisterLibFunc(&_fnSecPolicyCreateRevocation, _securityLib, "SecPolicyCreateRevocation")
+	})
 	_register("SecPolicyCreateSSL", func() { purego.RegisterLibFunc(&_fnSecPolicyCreateSSL, _securityLib, "SecPolicyCreateSSL") })
 	_register("SecPolicyCreateWithOID", func() { purego.RegisterLibFunc(&_fnSecPolicyCreateWithOID, _securityLib, "SecPolicyCreateWithOID") })
-	_register("SecPolicyCreateWithProperties", func() { purego.RegisterLibFunc(&_fnSecPolicyCreateWithProperties, _securityLib, "SecPolicyCreateWithProperties") })
+	_register("SecPolicyCreateWithProperties", func() {
+		purego.RegisterLibFunc(&_fnSecPolicyCreateWithProperties, _securityLib, "SecPolicyCreateWithProperties")
+	})
 	_register("SecPolicyGetOID", func() { purego.RegisterLibFunc(&_fnSecPolicyGetOID, _securityLib, "SecPolicyGetOID") })
 	_register("SecPolicyGetTPHandle", func() { purego.RegisterLibFunc(&_fnSecPolicyGetTPHandle, _securityLib, "SecPolicyGetTPHandle") })
 	_register("SecPolicyGetTypeID", func() { purego.RegisterLibFunc(&_fnSecPolicyGetTypeID, _securityLib, "SecPolicyGetTypeID") })
@@ -565,92 +955,190 @@ func _loadLibrary() {
 	_register("SecPolicySetProperties", func() { purego.RegisterLibFunc(&_fnSecPolicySetProperties, _securityLib, "SecPolicySetProperties") })
 	_register("SecPolicySetValue", func() { purego.RegisterLibFunc(&_fnSecPolicySetValue, _securityLib, "SecPolicySetValue") })
 	_register("SecRandomCopyBytes", func() { purego.RegisterLibFunc(&_fnSecRandomCopyBytes, _securityLib, "SecRandomCopyBytes") })
-	_register("SecRequestSharedWebCredential", func() { purego.RegisterLibFunc(&_fnSecRequestSharedWebCredential, _securityLib, "SecRequestSharedWebCredential") })
+	_register("SecRequestSharedWebCredential", func() {
+		purego.RegisterLibFunc(&_fnSecRequestSharedWebCredential, _securityLib, "SecRequestSharedWebCredential")
+	})
 	_register("SecRequirementCopyData", func() { purego.RegisterLibFunc(&_fnSecRequirementCopyData, _securityLib, "SecRequirementCopyData") })
 	_register("SecRequirementCopyString", func() { purego.RegisterLibFunc(&_fnSecRequirementCopyString, _securityLib, "SecRequirementCopyString") })
-	_register("SecRequirementCreateWithData", func() { purego.RegisterLibFunc(&_fnSecRequirementCreateWithData, _securityLib, "SecRequirementCreateWithData") })
-	_register("SecRequirementCreateWithString", func() { purego.RegisterLibFunc(&_fnSecRequirementCreateWithString, _securityLib, "SecRequirementCreateWithString") })
-	_register("SecRequirementCreateWithStringAndErrors", func() { purego.RegisterLibFunc(&_fnSecRequirementCreateWithStringAndErrors, _securityLib, "SecRequirementCreateWithStringAndErrors") })
+	_register("SecRequirementCreateWithData", func() {
+		purego.RegisterLibFunc(&_fnSecRequirementCreateWithData, _securityLib, "SecRequirementCreateWithData")
+	})
+	_register("SecRequirementCreateWithString", func() {
+		purego.RegisterLibFunc(&_fnSecRequirementCreateWithString, _securityLib, "SecRequirementCreateWithString")
+	})
+	_register("SecRequirementCreateWithStringAndErrors", func() {
+		purego.RegisterLibFunc(&_fnSecRequirementCreateWithStringAndErrors, _securityLib, "SecRequirementCreateWithStringAndErrors")
+	})
 	_register("SecRequirementGetTypeID", func() { purego.RegisterLibFunc(&_fnSecRequirementGetTypeID, _securityLib, "SecRequirementGetTypeID") })
 	_register("SecSignTransformCreate", func() { purego.RegisterLibFunc(&_fnSecSignTransformCreate, _securityLib, "SecSignTransformCreate") })
-	_register("SecStaticCodeCheckValidity", func() { purego.RegisterLibFunc(&_fnSecStaticCodeCheckValidity, _securityLib, "SecStaticCodeCheckValidity") })
-	_register("SecStaticCodeCheckValidityWithErrors", func() { purego.RegisterLibFunc(&_fnSecStaticCodeCheckValidityWithErrors, _securityLib, "SecStaticCodeCheckValidityWithErrors") })
-	_register("SecStaticCodeCreateWithPath", func() { purego.RegisterLibFunc(&_fnSecStaticCodeCreateWithPath, _securityLib, "SecStaticCodeCreateWithPath") })
-	_register("SecStaticCodeCreateWithPathAndAttributes", func() { purego.RegisterLibFunc(&_fnSecStaticCodeCreateWithPathAndAttributes, _securityLib, "SecStaticCodeCreateWithPathAndAttributes") })
+	_register("SecStaticCodeCheckValidity", func() {
+		purego.RegisterLibFunc(&_fnSecStaticCodeCheckValidity, _securityLib, "SecStaticCodeCheckValidity")
+	})
+	_register("SecStaticCodeCheckValidityWithErrors", func() {
+		purego.RegisterLibFunc(&_fnSecStaticCodeCheckValidityWithErrors, _securityLib, "SecStaticCodeCheckValidityWithErrors")
+	})
+	_register("SecStaticCodeCreateWithPath", func() {
+		purego.RegisterLibFunc(&_fnSecStaticCodeCreateWithPath, _securityLib, "SecStaticCodeCreateWithPath")
+	})
+	_register("SecStaticCodeCreateWithPathAndAttributes", func() {
+		purego.RegisterLibFunc(&_fnSecStaticCodeCreateWithPathAndAttributes, _securityLib, "SecStaticCodeCreateWithPathAndAttributes")
+	})
 	_register("SecStaticCodeGetTypeID", func() { purego.RegisterLibFunc(&_fnSecStaticCodeGetTypeID, _securityLib, "SecStaticCodeGetTypeID") })
-	_register("SecTaskCopySigningIdentifier", func() { purego.RegisterLibFunc(&_fnSecTaskCopySigningIdentifier, _securityLib, "SecTaskCopySigningIdentifier") })
-	_register("SecTaskCopyValueForEntitlement", func() { purego.RegisterLibFunc(&_fnSecTaskCopyValueForEntitlement, _securityLib, "SecTaskCopyValueForEntitlement") })
-	_register("SecTaskCopyValuesForEntitlements", func() { purego.RegisterLibFunc(&_fnSecTaskCopyValuesForEntitlements, _securityLib, "SecTaskCopyValuesForEntitlements") })
+	_register("SecTaskCopySigningIdentifier", func() {
+		purego.RegisterLibFunc(&_fnSecTaskCopySigningIdentifier, _securityLib, "SecTaskCopySigningIdentifier")
+	})
+	_register("SecTaskCopyValueForEntitlement", func() {
+		purego.RegisterLibFunc(&_fnSecTaskCopyValueForEntitlement, _securityLib, "SecTaskCopyValueForEntitlement")
+	})
+	_register("SecTaskCopyValuesForEntitlements", func() {
+		purego.RegisterLibFunc(&_fnSecTaskCopyValuesForEntitlements, _securityLib, "SecTaskCopyValuesForEntitlements")
+	})
 	_register("SecTaskCreateFromSelf", func() { purego.RegisterLibFunc(&_fnSecTaskCreateFromSelf, _securityLib, "SecTaskCreateFromSelf") })
-	_register("SecTaskCreateWithAuditToken", func() { purego.RegisterLibFunc(&_fnSecTaskCreateWithAuditToken, _securityLib, "SecTaskCreateWithAuditToken") })
+	_register("SecTaskCreateWithAuditToken", func() {
+		purego.RegisterLibFunc(&_fnSecTaskCreateWithAuditToken, _securityLib, "SecTaskCreateWithAuditToken")
+	})
 	_register("SecTaskGetTypeID", func() { purego.RegisterLibFunc(&_fnSecTaskGetTypeID, _securityLib, "SecTaskGetTypeID") })
-	_register("SecTranformCustomGetAttribute", func() { purego.RegisterLibFunc(&_fnSecTranformCustomGetAttribute, _securityLib, "SecTranformCustomGetAttribute") })
-	_register("SecTransformConnectTransforms", func() { purego.RegisterLibFunc(&_fnSecTransformConnectTransforms, _securityLib, "SecTransformConnectTransforms") })
-	_register("SecTransformCopyExternalRepresentation", func() { purego.RegisterLibFunc(&_fnSecTransformCopyExternalRepresentation, _securityLib, "SecTransformCopyExternalRepresentation") })
+	_register("SecTranformCustomGetAttribute", func() {
+		purego.RegisterLibFunc(&_fnSecTranformCustomGetAttribute, _securityLib, "SecTranformCustomGetAttribute")
+	})
+	_register("SecTransformConnectTransforms", func() {
+		purego.RegisterLibFunc(&_fnSecTransformConnectTransforms, _securityLib, "SecTransformConnectTransforms")
+	})
+	_register("SecTransformCopyExternalRepresentation", func() {
+		purego.RegisterLibFunc(&_fnSecTransformCopyExternalRepresentation, _securityLib, "SecTransformCopyExternalRepresentation")
+	})
 	_register("SecTransformCreate", func() { purego.RegisterLibFunc(&_fnSecTransformCreate, _securityLib, "SecTransformCreate") })
-	_register("SecTransformCreateFromExternalRepresentation", func() { purego.RegisterLibFunc(&_fnSecTransformCreateFromExternalRepresentation, _securityLib, "SecTransformCreateFromExternalRepresentation") })
-	_register("SecTransformCreateGroupTransform", func() { purego.RegisterLibFunc(&_fnSecTransformCreateGroupTransform, _securityLib, "SecTransformCreateGroupTransform") })
-	_register("SecTransformCreateReadTransformWithReadStream", func() { purego.RegisterLibFunc(&_fnSecTransformCreateReadTransformWithReadStream, _securityLib, "SecTransformCreateReadTransformWithReadStream") })
-	_register("SecTransformCustomGetAttribute", func() { purego.RegisterLibFunc(&_fnSecTransformCustomGetAttribute, _securityLib, "SecTransformCustomGetAttribute") })
-	_register("SecTransformCustomSetAttribute", func() { purego.RegisterLibFunc(&_fnSecTransformCustomSetAttribute, _securityLib, "SecTransformCustomSetAttribute") })
+	_register("SecTransformCreateFromExternalRepresentation", func() {
+		purego.RegisterLibFunc(&_fnSecTransformCreateFromExternalRepresentation, _securityLib, "SecTransformCreateFromExternalRepresentation")
+	})
+	_register("SecTransformCreateGroupTransform", func() {
+		purego.RegisterLibFunc(&_fnSecTransformCreateGroupTransform, _securityLib, "SecTransformCreateGroupTransform")
+	})
+	_register("SecTransformCreateReadTransformWithReadStream", func() {
+		purego.RegisterLibFunc(&_fnSecTransformCreateReadTransformWithReadStream, _securityLib, "SecTransformCreateReadTransformWithReadStream")
+	})
+	_register("SecTransformCustomGetAttribute", func() {
+		purego.RegisterLibFunc(&_fnSecTransformCustomGetAttribute, _securityLib, "SecTransformCustomGetAttribute")
+	})
+	_register("SecTransformCustomSetAttribute", func() {
+		purego.RegisterLibFunc(&_fnSecTransformCustomSetAttribute, _securityLib, "SecTransformCustomSetAttribute")
+	})
 	_register("SecTransformExecute", func() { purego.RegisterLibFunc(&_fnSecTransformExecute, _securityLib, "SecTransformExecute") })
 	_register("SecTransformExecuteAsync", func() { purego.RegisterLibFunc(&_fnSecTransformExecuteAsync, _securityLib, "SecTransformExecuteAsync") })
 	_register("SecTransformFindByName", func() { purego.RegisterLibFunc(&_fnSecTransformFindByName, _securityLib, "SecTransformFindByName") })
 	_register("SecTransformGetAttribute", func() { purego.RegisterLibFunc(&_fnSecTransformGetAttribute, _securityLib, "SecTransformGetAttribute") })
 	_register("SecTransformGetTypeID", func() { purego.RegisterLibFunc(&_fnSecTransformGetTypeID, _securityLib, "SecTransformGetTypeID") })
 	_register("SecTransformNoData", func() { purego.RegisterLibFunc(&_fnSecTransformNoData, _securityLib, "SecTransformNoData") })
-	_register("SecTransformPushbackAttribute", func() { purego.RegisterLibFunc(&_fnSecTransformPushbackAttribute, _securityLib, "SecTransformPushbackAttribute") })
+	_register("SecTransformPushbackAttribute", func() {
+		purego.RegisterLibFunc(&_fnSecTransformPushbackAttribute, _securityLib, "SecTransformPushbackAttribute")
+	})
 	_register("SecTransformRegister", func() { purego.RegisterLibFunc(&_fnSecTransformRegister, _securityLib, "SecTransformRegister") })
 	_register("SecTransformSetAttribute", func() { purego.RegisterLibFunc(&_fnSecTransformSetAttribute, _securityLib, "SecTransformSetAttribute") })
-	_register("SecTransformSetAttributeAction", func() { purego.RegisterLibFunc(&_fnSecTransformSetAttributeAction, _securityLib, "SecTransformSetAttributeAction") })
-	_register("SecTransformSetDataAction", func() { purego.RegisterLibFunc(&_fnSecTransformSetDataAction, _securityLib, "SecTransformSetDataAction") })
-	_register("SecTransformSetTransformAction", func() { purego.RegisterLibFunc(&_fnSecTransformSetTransformAction, _securityLib, "SecTransformSetTransformAction") })
-	_register("SecTrustCopyAnchorCertificates", func() { purego.RegisterLibFunc(&_fnSecTrustCopyAnchorCertificates, _securityLib, "SecTrustCopyAnchorCertificates") })
-	_register("SecTrustCopyCertificateChain", func() { purego.RegisterLibFunc(&_fnSecTrustCopyCertificateChain, _securityLib, "SecTrustCopyCertificateChain") })
-	_register("SecTrustCopyCustomAnchorCertificates", func() { purego.RegisterLibFunc(&_fnSecTrustCopyCustomAnchorCertificates, _securityLib, "SecTrustCopyCustomAnchorCertificates") })
+	_register("SecTransformSetAttributeAction", func() {
+		purego.RegisterLibFunc(&_fnSecTransformSetAttributeAction, _securityLib, "SecTransformSetAttributeAction")
+	})
+	_register("SecTransformSetDataAction", func() {
+		purego.RegisterLibFunc(&_fnSecTransformSetDataAction, _securityLib, "SecTransformSetDataAction")
+	})
+	_register("SecTransformSetTransformAction", func() {
+		purego.RegisterLibFunc(&_fnSecTransformSetTransformAction, _securityLib, "SecTransformSetTransformAction")
+	})
+	_register("SecTrustCopyAnchorCertificates", func() {
+		purego.RegisterLibFunc(&_fnSecTrustCopyAnchorCertificates, _securityLib, "SecTrustCopyAnchorCertificates")
+	})
+	_register("SecTrustCopyCertificateChain", func() {
+		purego.RegisterLibFunc(&_fnSecTrustCopyCertificateChain, _securityLib, "SecTrustCopyCertificateChain")
+	})
+	_register("SecTrustCopyCustomAnchorCertificates", func() {
+		purego.RegisterLibFunc(&_fnSecTrustCopyCustomAnchorCertificates, _securityLib, "SecTrustCopyCustomAnchorCertificates")
+	})
 	_register("SecTrustCopyExceptions", func() { purego.RegisterLibFunc(&_fnSecTrustCopyExceptions, _securityLib, "SecTrustCopyExceptions") })
 	_register("SecTrustCopyKey", func() { purego.RegisterLibFunc(&_fnSecTrustCopyKey, _securityLib, "SecTrustCopyKey") })
 	_register("SecTrustCopyPolicies", func() { purego.RegisterLibFunc(&_fnSecTrustCopyPolicies, _securityLib, "SecTrustCopyPolicies") })
 	_register("SecTrustCopyProperties", func() { purego.RegisterLibFunc(&_fnSecTrustCopyProperties, _securityLib, "SecTrustCopyProperties") })
 	_register("SecTrustCopyPublicKey", func() { purego.RegisterLibFunc(&_fnSecTrustCopyPublicKey, _securityLib, "SecTrustCopyPublicKey") })
 	_register("SecTrustCopyResult", func() { purego.RegisterLibFunc(&_fnSecTrustCopyResult, _securityLib, "SecTrustCopyResult") })
-	_register("SecTrustCreateWithCertificates", func() { purego.RegisterLibFunc(&_fnSecTrustCreateWithCertificates, _securityLib, "SecTrustCreateWithCertificates") })
+	_register("SecTrustCreateWithCertificates", func() {
+		purego.RegisterLibFunc(&_fnSecTrustCreateWithCertificates, _securityLib, "SecTrustCreateWithCertificates")
+	})
 	_register("SecTrustEvaluate", func() { purego.RegisterLibFunc(&_fnSecTrustEvaluate, _securityLib, "SecTrustEvaluate") })
 	_register("SecTrustEvaluateAsync", func() { purego.RegisterLibFunc(&_fnSecTrustEvaluateAsync, _securityLib, "SecTrustEvaluateAsync") })
-	_register("SecTrustEvaluateAsyncWithError", func() { purego.RegisterLibFunc(&_fnSecTrustEvaluateAsyncWithError, _securityLib, "SecTrustEvaluateAsyncWithError") })
-	_register("SecTrustEvaluateWithError", func() { purego.RegisterLibFunc(&_fnSecTrustEvaluateWithError, _securityLib, "SecTrustEvaluateWithError") })
-	_register("SecTrustGetCertificateAtIndex", func() { purego.RegisterLibFunc(&_fnSecTrustGetCertificateAtIndex, _securityLib, "SecTrustGetCertificateAtIndex") })
-	_register("SecTrustGetCertificateCount", func() { purego.RegisterLibFunc(&_fnSecTrustGetCertificateCount, _securityLib, "SecTrustGetCertificateCount") })
+	_register("SecTrustEvaluateAsyncWithError", func() {
+		purego.RegisterLibFunc(&_fnSecTrustEvaluateAsyncWithError, _securityLib, "SecTrustEvaluateAsyncWithError")
+	})
+	_register("SecTrustEvaluateWithError", func() {
+		purego.RegisterLibFunc(&_fnSecTrustEvaluateWithError, _securityLib, "SecTrustEvaluateWithError")
+	})
+	_register("SecTrustGetCertificateAtIndex", func() {
+		purego.RegisterLibFunc(&_fnSecTrustGetCertificateAtIndex, _securityLib, "SecTrustGetCertificateAtIndex")
+	})
+	_register("SecTrustGetCertificateCount", func() {
+		purego.RegisterLibFunc(&_fnSecTrustGetCertificateCount, _securityLib, "SecTrustGetCertificateCount")
+	})
 	_register("SecTrustGetCssmResult", func() { purego.RegisterLibFunc(&_fnSecTrustGetCssmResult, _securityLib, "SecTrustGetCssmResult") })
-	_register("SecTrustGetCssmResultCode", func() { purego.RegisterLibFunc(&_fnSecTrustGetCssmResultCode, _securityLib, "SecTrustGetCssmResultCode") })
-	_register("SecTrustGetNetworkFetchAllowed", func() { purego.RegisterLibFunc(&_fnSecTrustGetNetworkFetchAllowed, _securityLib, "SecTrustGetNetworkFetchAllowed") })
+	_register("SecTrustGetCssmResultCode", func() {
+		purego.RegisterLibFunc(&_fnSecTrustGetCssmResultCode, _securityLib, "SecTrustGetCssmResultCode")
+	})
+	_register("SecTrustGetNetworkFetchAllowed", func() {
+		purego.RegisterLibFunc(&_fnSecTrustGetNetworkFetchAllowed, _securityLib, "SecTrustGetNetworkFetchAllowed")
+	})
 	_register("SecTrustGetResult", func() { purego.RegisterLibFunc(&_fnSecTrustGetResult, _securityLib, "SecTrustGetResult") })
 	_register("SecTrustGetTPHandle", func() { purego.RegisterLibFunc(&_fnSecTrustGetTPHandle, _securityLib, "SecTrustGetTPHandle") })
 	_register("SecTrustGetTrustResult", func() { purego.RegisterLibFunc(&_fnSecTrustGetTrustResult, _securityLib, "SecTrustGetTrustResult") })
 	_register("SecTrustGetTypeID", func() { purego.RegisterLibFunc(&_fnSecTrustGetTypeID, _securityLib, "SecTrustGetTypeID") })
 	_register("SecTrustGetVerifyTime", func() { purego.RegisterLibFunc(&_fnSecTrustGetVerifyTime, _securityLib, "SecTrustGetVerifyTime") })
-	_register("SecTrustSetAnchorCertificates", func() { purego.RegisterLibFunc(&_fnSecTrustSetAnchorCertificates, _securityLib, "SecTrustSetAnchorCertificates") })
-	_register("SecTrustSetAnchorCertificatesOnly", func() { purego.RegisterLibFunc(&_fnSecTrustSetAnchorCertificatesOnly, _securityLib, "SecTrustSetAnchorCertificatesOnly") })
+	_register("SecTrustSetAnchorCertificates", func() {
+		purego.RegisterLibFunc(&_fnSecTrustSetAnchorCertificates, _securityLib, "SecTrustSetAnchorCertificates")
+	})
+	_register("SecTrustSetAnchorCertificatesOnly", func() {
+		purego.RegisterLibFunc(&_fnSecTrustSetAnchorCertificatesOnly, _securityLib, "SecTrustSetAnchorCertificatesOnly")
+	})
 	_register("SecTrustSetExceptions", func() { purego.RegisterLibFunc(&_fnSecTrustSetExceptions, _securityLib, "SecTrustSetExceptions") })
 	_register("SecTrustSetKeychains", func() { purego.RegisterLibFunc(&_fnSecTrustSetKeychains, _securityLib, "SecTrustSetKeychains") })
-	_register("SecTrustSetNetworkFetchAllowed", func() { purego.RegisterLibFunc(&_fnSecTrustSetNetworkFetchAllowed, _securityLib, "SecTrustSetNetworkFetchAllowed") })
+	_register("SecTrustSetNetworkFetchAllowed", func() {
+		purego.RegisterLibFunc(&_fnSecTrustSetNetworkFetchAllowed, _securityLib, "SecTrustSetNetworkFetchAllowed")
+	})
 	_register("SecTrustSetOCSPResponse", func() { purego.RegisterLibFunc(&_fnSecTrustSetOCSPResponse, _securityLib, "SecTrustSetOCSPResponse") })
 	_register("SecTrustSetOptions", func() { purego.RegisterLibFunc(&_fnSecTrustSetOptions, _securityLib, "SecTrustSetOptions") })
 	_register("SecTrustSetParameters", func() { purego.RegisterLibFunc(&_fnSecTrustSetParameters, _securityLib, "SecTrustSetParameters") })
 	_register("SecTrustSetPolicies", func() { purego.RegisterLibFunc(&_fnSecTrustSetPolicies, _securityLib, "SecTrustSetPolicies") })
-	_register("SecTrustSetSignedCertificateTimestamps", func() { purego.RegisterLibFunc(&_fnSecTrustSetSignedCertificateTimestamps, _securityLib, "SecTrustSetSignedCertificateTimestamps") })
+	_register("SecTrustSetSignedCertificateTimestamps", func() {
+		purego.RegisterLibFunc(&_fnSecTrustSetSignedCertificateTimestamps, _securityLib, "SecTrustSetSignedCertificateTimestamps")
+	})
 	_register("SecTrustSetVerifyDate", func() { purego.RegisterLibFunc(&_fnSecTrustSetVerifyDate, _securityLib, "SecTrustSetVerifyDate") })
-	_register("SecTrustSettingsCopyCertificates", func() { purego.RegisterLibFunc(&_fnSecTrustSettingsCopyCertificates, _securityLib, "SecTrustSettingsCopyCertificates") })
-	_register("SecTrustSettingsCopyModificationDate", func() { purego.RegisterLibFunc(&_fnSecTrustSettingsCopyModificationDate, _securityLib, "SecTrustSettingsCopyModificationDate") })
-	_register("SecTrustSettingsCopyTrustSettings", func() { purego.RegisterLibFunc(&_fnSecTrustSettingsCopyTrustSettings, _securityLib, "SecTrustSettingsCopyTrustSettings") })
-	_register("SecTrustSettingsCreateExternalRepresentation", func() { purego.RegisterLibFunc(&_fnSecTrustSettingsCreateExternalRepresentation, _securityLib, "SecTrustSettingsCreateExternalRepresentation") })
-	_register("SecTrustSettingsImportExternalRepresentation", func() { purego.RegisterLibFunc(&_fnSecTrustSettingsImportExternalRepresentation, _securityLib, "SecTrustSettingsImportExternalRepresentation") })
-	_register("SecTrustSettingsRemoveTrustSettings", func() { purego.RegisterLibFunc(&_fnSecTrustSettingsRemoveTrustSettings, _securityLib, "SecTrustSettingsRemoveTrustSettings") })
-	_register("SecTrustSettingsSetTrustSettings", func() { purego.RegisterLibFunc(&_fnSecTrustSettingsSetTrustSettings, _securityLib, "SecTrustSettingsSetTrustSettings") })
-	_register("SecTrustedApplicationCopyData", func() { purego.RegisterLibFunc(&_fnSecTrustedApplicationCopyData, _securityLib, "SecTrustedApplicationCopyData") })
-	_register("SecTrustedApplicationCreateFromPath", func() { purego.RegisterLibFunc(&_fnSecTrustedApplicationCreateFromPath, _securityLib, "SecTrustedApplicationCreateFromPath") })
-	_register("SecTrustedApplicationGetTypeID", func() { purego.RegisterLibFunc(&_fnSecTrustedApplicationGetTypeID, _securityLib, "SecTrustedApplicationGetTypeID") })
-	_register("SecTrustedApplicationSetData", func() { purego.RegisterLibFunc(&_fnSecTrustedApplicationSetData, _securityLib, "SecTrustedApplicationSetData") })
+	_register("SecTrustSettingsCopyCertificates", func() {
+		purego.RegisterLibFunc(&_fnSecTrustSettingsCopyCertificates, _securityLib, "SecTrustSettingsCopyCertificates")
+	})
+	_register("SecTrustSettingsCopyModificationDate", func() {
+		purego.RegisterLibFunc(&_fnSecTrustSettingsCopyModificationDate, _securityLib, "SecTrustSettingsCopyModificationDate")
+	})
+	_register("SecTrustSettingsCopyTrustSettings", func() {
+		purego.RegisterLibFunc(&_fnSecTrustSettingsCopyTrustSettings, _securityLib, "SecTrustSettingsCopyTrustSettings")
+	})
+	_register("SecTrustSettingsCreateExternalRepresentation", func() {
+		purego.RegisterLibFunc(&_fnSecTrustSettingsCreateExternalRepresentation, _securityLib, "SecTrustSettingsCreateExternalRepresentation")
+	})
+	_register("SecTrustSettingsImportExternalRepresentation", func() {
+		purego.RegisterLibFunc(&_fnSecTrustSettingsImportExternalRepresentation, _securityLib, "SecTrustSettingsImportExternalRepresentation")
+	})
+	_register("SecTrustSettingsRemoveTrustSettings", func() {
+		purego.RegisterLibFunc(&_fnSecTrustSettingsRemoveTrustSettings, _securityLib, "SecTrustSettingsRemoveTrustSettings")
+	})
+	_register("SecTrustSettingsSetTrustSettings", func() {
+		purego.RegisterLibFunc(&_fnSecTrustSettingsSetTrustSettings, _securityLib, "SecTrustSettingsSetTrustSettings")
+	})
+	_register("SecTrustedApplicationCopyData", func() {
+		purego.RegisterLibFunc(&_fnSecTrustedApplicationCopyData, _securityLib, "SecTrustedApplicationCopyData")
+	})
+	_register("SecTrustedApplicationCreateFromPath", func() {
+		purego.RegisterLibFunc(&_fnSecTrustedApplicationCreateFromPath, _securityLib, "SecTrustedApplicationCreateFromPath")
+	})
+	_register("SecTrustedApplicationGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnSecTrustedApplicationGetTypeID, _securityLib, "SecTrustedApplicationGetTypeID")
+	})
+	_register("SecTrustedApplicationSetData", func() {
+		purego.RegisterLibFunc(&_fnSecTrustedApplicationSetData, _securityLib, "SecTrustedApplicationSetData")
+	})
 	_register("SecVerifyTransformCreate", func() { purego.RegisterLibFunc(&_fnSecVerifyTransformCreate, _securityLib, "SecVerifyTransformCreate") })
 	_register("SessionCreate", func() { purego.RegisterLibFunc(&_fnSessionCreate, _securityLib, "SessionCreate") })
 	_register("SessionGetInfo", func() { purego.RegisterLibFunc(&_fnSessionGetInfo, _securityLib, "SessionGetInfo") })
@@ -659,60 +1147,166 @@ func _loadLibrary() {
 	_register("cssmPerror", func() { purego.RegisterLibFunc(&_cssmPerror, _securityLib, "cssmPerror") })
 	_register("sec_certificate_copy_ref", func() { purego.RegisterLibFunc(&_sec_certificate_copy_ref, _securityLib, "sec_certificate_copy_ref") })
 	_register("sec_certificate_create", func() { purego.RegisterLibFunc(&_sec_certificate_create, _securityLib, "sec_certificate_create") })
-	_register("sec_identity_access_certificates", func() { purego.RegisterLibFunc(&_sec_identity_access_certificates, _securityLib, "sec_identity_access_certificates") })
-	_register("sec_identity_copy_certificates_ref", func() { purego.RegisterLibFunc(&_sec_identity_copy_certificates_ref, _securityLib, "sec_identity_copy_certificates_ref") })
+	_register("sec_identity_access_certificates", func() {
+		purego.RegisterLibFunc(&_sec_identity_access_certificates, _securityLib, "sec_identity_access_certificates")
+	})
+	_register("sec_identity_copy_certificates_ref", func() {
+		purego.RegisterLibFunc(&_sec_identity_copy_certificates_ref, _securityLib, "sec_identity_copy_certificates_ref")
+	})
 	_register("sec_identity_copy_ref", func() { purego.RegisterLibFunc(&_sec_identity_copy_ref, _securityLib, "sec_identity_copy_ref") })
-	_register("sec_identity_create_with_certificates", func() { purego.RegisterLibFunc(&_sec_identity_create_with_certificates, _securityLib, "sec_identity_create_with_certificates") })
-	_register("sec_protocol_metadata_access_distinguished_names", func() { purego.RegisterLibFunc(&_sec_protocol_metadata_access_distinguished_names, _securityLib, "sec_protocol_metadata_access_distinguished_names") })
-	_register("sec_protocol_metadata_access_ocsp_response", func() { purego.RegisterLibFunc(&_sec_protocol_metadata_access_ocsp_response, _securityLib, "sec_protocol_metadata_access_ocsp_response") })
-	_register("sec_protocol_metadata_access_peer_certificate_chain", func() { purego.RegisterLibFunc(&_sec_protocol_metadata_access_peer_certificate_chain, _securityLib, "sec_protocol_metadata_access_peer_certificate_chain") })
-	_register("sec_protocol_metadata_access_pre_shared_keys", func() { purego.RegisterLibFunc(&_sec_protocol_metadata_access_pre_shared_keys, _securityLib, "sec_protocol_metadata_access_pre_shared_keys") })
-	_register("sec_protocol_metadata_access_supported_signature_algorithms", func() { purego.RegisterLibFunc(&_sec_protocol_metadata_access_supported_signature_algorithms, _securityLib, "sec_protocol_metadata_access_supported_signature_algorithms") })
-	_register("sec_protocol_metadata_challenge_parameters_are_equal", func() { purego.RegisterLibFunc(&_sec_protocol_metadata_challenge_parameters_are_equal, _securityLib, "sec_protocol_metadata_challenge_parameters_are_equal") })
-	_register("sec_protocol_metadata_copy_negotiated_protocol", func() { purego.RegisterLibFunc(&_sec_protocol_metadata_copy_negotiated_protocol, _securityLib, "sec_protocol_metadata_copy_negotiated_protocol") })
-	_register("sec_protocol_metadata_copy_peer_public_key", func() { purego.RegisterLibFunc(&_sec_protocol_metadata_copy_peer_public_key, _securityLib, "sec_protocol_metadata_copy_peer_public_key") })
-	_register("sec_protocol_metadata_copy_server_name", func() { purego.RegisterLibFunc(&_sec_protocol_metadata_copy_server_name, _securityLib, "sec_protocol_metadata_copy_server_name") })
-	_register("sec_protocol_metadata_create_secret", func() { purego.RegisterLibFunc(&_sec_protocol_metadata_create_secret, _securityLib, "sec_protocol_metadata_create_secret") })
-	_register("sec_protocol_metadata_create_secret_with_context", func() { purego.RegisterLibFunc(&_sec_protocol_metadata_create_secret_with_context, _securityLib, "sec_protocol_metadata_create_secret_with_context") })
-	_register("sec_protocol_metadata_get_early_data_accepted", func() { purego.RegisterLibFunc(&_sec_protocol_metadata_get_early_data_accepted, _securityLib, "sec_protocol_metadata_get_early_data_accepted") })
-	_register("sec_protocol_metadata_get_negotiated_ciphersuite", func() { purego.RegisterLibFunc(&_sec_protocol_metadata_get_negotiated_ciphersuite, _securityLib, "sec_protocol_metadata_get_negotiated_ciphersuite") })
-	_register("sec_protocol_metadata_get_negotiated_protocol", func() { purego.RegisterLibFunc(&_sec_protocol_metadata_get_negotiated_protocol, _securityLib, "sec_protocol_metadata_get_negotiated_protocol") })
-	_register("sec_protocol_metadata_get_negotiated_protocol_version", func() { purego.RegisterLibFunc(&_sec_protocol_metadata_get_negotiated_protocol_version, _securityLib, "sec_protocol_metadata_get_negotiated_protocol_version") })
-	_register("sec_protocol_metadata_get_negotiated_tls_ciphersuite", func() { purego.RegisterLibFunc(&_sec_protocol_metadata_get_negotiated_tls_ciphersuite, _securityLib, "sec_protocol_metadata_get_negotiated_tls_ciphersuite") })
-	_register("sec_protocol_metadata_get_negotiated_tls_protocol_version", func() { purego.RegisterLibFunc(&_sec_protocol_metadata_get_negotiated_tls_protocol_version, _securityLib, "sec_protocol_metadata_get_negotiated_tls_protocol_version") })
-	_register("sec_protocol_metadata_get_server_name", func() { purego.RegisterLibFunc(&_sec_protocol_metadata_get_server_name, _securityLib, "sec_protocol_metadata_get_server_name") })
-	_register("sec_protocol_metadata_peers_are_equal", func() { purego.RegisterLibFunc(&_sec_protocol_metadata_peers_are_equal, _securityLib, "sec_protocol_metadata_peers_are_equal") })
-	_register("sec_protocol_options_add_pre_shared_key", func() { purego.RegisterLibFunc(&_sec_protocol_options_add_pre_shared_key, _securityLib, "sec_protocol_options_add_pre_shared_key") })
-	_register("sec_protocol_options_add_tls_application_protocol", func() { purego.RegisterLibFunc(&_sec_protocol_options_add_tls_application_protocol, _securityLib, "sec_protocol_options_add_tls_application_protocol") })
-	_register("sec_protocol_options_add_tls_ciphersuite", func() { purego.RegisterLibFunc(&_sec_protocol_options_add_tls_ciphersuite, _securityLib, "sec_protocol_options_add_tls_ciphersuite") })
-	_register("sec_protocol_options_add_tls_ciphersuite_group", func() { purego.RegisterLibFunc(&_sec_protocol_options_add_tls_ciphersuite_group, _securityLib, "sec_protocol_options_add_tls_ciphersuite_group") })
-	_register("sec_protocol_options_append_tls_ciphersuite", func() { purego.RegisterLibFunc(&_sec_protocol_options_append_tls_ciphersuite, _securityLib, "sec_protocol_options_append_tls_ciphersuite") })
-	_register("sec_protocol_options_append_tls_ciphersuite_group", func() { purego.RegisterLibFunc(&_sec_protocol_options_append_tls_ciphersuite_group, _securityLib, "sec_protocol_options_append_tls_ciphersuite_group") })
-	_register("sec_protocol_options_are_equal", func() { purego.RegisterLibFunc(&_sec_protocol_options_are_equal, _securityLib, "sec_protocol_options_are_equal") })
-	_register("sec_protocol_options_get_default_max_dtls_protocol_version", func() { purego.RegisterLibFunc(&_sec_protocol_options_get_default_max_dtls_protocol_version, _securityLib, "sec_protocol_options_get_default_max_dtls_protocol_version") })
-	_register("sec_protocol_options_get_default_max_tls_protocol_version", func() { purego.RegisterLibFunc(&_sec_protocol_options_get_default_max_tls_protocol_version, _securityLib, "sec_protocol_options_get_default_max_tls_protocol_version") })
-	_register("sec_protocol_options_get_default_min_dtls_protocol_version", func() { purego.RegisterLibFunc(&_sec_protocol_options_get_default_min_dtls_protocol_version, _securityLib, "sec_protocol_options_get_default_min_dtls_protocol_version") })
-	_register("sec_protocol_options_get_default_min_tls_protocol_version", func() { purego.RegisterLibFunc(&_sec_protocol_options_get_default_min_tls_protocol_version, _securityLib, "sec_protocol_options_get_default_min_tls_protocol_version") })
-	_register("sec_protocol_options_set_challenge_block", func() { purego.RegisterLibFunc(&_sec_protocol_options_set_challenge_block, _securityLib, "sec_protocol_options_set_challenge_block") })
-	_register("sec_protocol_options_set_key_update_block", func() { purego.RegisterLibFunc(&_sec_protocol_options_set_key_update_block, _securityLib, "sec_protocol_options_set_key_update_block") })
-	_register("sec_protocol_options_set_local_identity", func() { purego.RegisterLibFunc(&_sec_protocol_options_set_local_identity, _securityLib, "sec_protocol_options_set_local_identity") })
-	_register("sec_protocol_options_set_max_tls_protocol_version", func() { purego.RegisterLibFunc(&_sec_protocol_options_set_max_tls_protocol_version, _securityLib, "sec_protocol_options_set_max_tls_protocol_version") })
-	_register("sec_protocol_options_set_min_tls_protocol_version", func() { purego.RegisterLibFunc(&_sec_protocol_options_set_min_tls_protocol_version, _securityLib, "sec_protocol_options_set_min_tls_protocol_version") })
-	_register("sec_protocol_options_set_peer_authentication_required", func() { purego.RegisterLibFunc(&_sec_protocol_options_set_peer_authentication_required, _securityLib, "sec_protocol_options_set_peer_authentication_required") })
-	_register("sec_protocol_options_set_pre_shared_key_selection_block", func() { purego.RegisterLibFunc(&_sec_protocol_options_set_pre_shared_key_selection_block, _securityLib, "sec_protocol_options_set_pre_shared_key_selection_block") })
-	_register("sec_protocol_options_set_tls_diffie_hellman_parameters", func() { purego.RegisterLibFunc(&_sec_protocol_options_set_tls_diffie_hellman_parameters, _securityLib, "sec_protocol_options_set_tls_diffie_hellman_parameters") })
-	_register("sec_protocol_options_set_tls_false_start_enabled", func() { purego.RegisterLibFunc(&_sec_protocol_options_set_tls_false_start_enabled, _securityLib, "sec_protocol_options_set_tls_false_start_enabled") })
-	_register("sec_protocol_options_set_tls_is_fallback_attempt", func() { purego.RegisterLibFunc(&_sec_protocol_options_set_tls_is_fallback_attempt, _securityLib, "sec_protocol_options_set_tls_is_fallback_attempt") })
-	_register("sec_protocol_options_set_tls_max_version", func() { purego.RegisterLibFunc(&_sec_protocol_options_set_tls_max_version, _securityLib, "sec_protocol_options_set_tls_max_version") })
-	_register("sec_protocol_options_set_tls_min_version", func() { purego.RegisterLibFunc(&_sec_protocol_options_set_tls_min_version, _securityLib, "sec_protocol_options_set_tls_min_version") })
-	_register("sec_protocol_options_set_tls_ocsp_enabled", func() { purego.RegisterLibFunc(&_sec_protocol_options_set_tls_ocsp_enabled, _securityLib, "sec_protocol_options_set_tls_ocsp_enabled") })
-	_register("sec_protocol_options_set_tls_pre_shared_key_identity_hint", func() { purego.RegisterLibFunc(&_sec_protocol_options_set_tls_pre_shared_key_identity_hint, _securityLib, "sec_protocol_options_set_tls_pre_shared_key_identity_hint") })
-	_register("sec_protocol_options_set_tls_renegotiation_enabled", func() { purego.RegisterLibFunc(&_sec_protocol_options_set_tls_renegotiation_enabled, _securityLib, "sec_protocol_options_set_tls_renegotiation_enabled") })
-	_register("sec_protocol_options_set_tls_resumption_enabled", func() { purego.RegisterLibFunc(&_sec_protocol_options_set_tls_resumption_enabled, _securityLib, "sec_protocol_options_set_tls_resumption_enabled") })
-	_register("sec_protocol_options_set_tls_sct_enabled", func() { purego.RegisterLibFunc(&_sec_protocol_options_set_tls_sct_enabled, _securityLib, "sec_protocol_options_set_tls_sct_enabled") })
-	_register("sec_protocol_options_set_tls_server_name", func() { purego.RegisterLibFunc(&_sec_protocol_options_set_tls_server_name, _securityLib, "sec_protocol_options_set_tls_server_name") })
-	_register("sec_protocol_options_set_tls_tickets_enabled", func() { purego.RegisterLibFunc(&_sec_protocol_options_set_tls_tickets_enabled, _securityLib, "sec_protocol_options_set_tls_tickets_enabled") })
-	_register("sec_protocol_options_set_verify_block", func() { purego.RegisterLibFunc(&_sec_protocol_options_set_verify_block, _securityLib, "sec_protocol_options_set_verify_block") })
+	_register("sec_identity_create_with_certificates", func() {
+		purego.RegisterLibFunc(&_sec_identity_create_with_certificates, _securityLib, "sec_identity_create_with_certificates")
+	})
+	_register("sec_protocol_metadata_access_distinguished_names", func() {
+		purego.RegisterLibFunc(&_sec_protocol_metadata_access_distinguished_names, _securityLib, "sec_protocol_metadata_access_distinguished_names")
+	})
+	_register("sec_protocol_metadata_access_ocsp_response", func() {
+		purego.RegisterLibFunc(&_sec_protocol_metadata_access_ocsp_response, _securityLib, "sec_protocol_metadata_access_ocsp_response")
+	})
+	_register("sec_protocol_metadata_access_peer_certificate_chain", func() {
+		purego.RegisterLibFunc(&_sec_protocol_metadata_access_peer_certificate_chain, _securityLib, "sec_protocol_metadata_access_peer_certificate_chain")
+	})
+	_register("sec_protocol_metadata_access_pre_shared_keys", func() {
+		purego.RegisterLibFunc(&_sec_protocol_metadata_access_pre_shared_keys, _securityLib, "sec_protocol_metadata_access_pre_shared_keys")
+	})
+	_register("sec_protocol_metadata_access_supported_signature_algorithms", func() {
+		purego.RegisterLibFunc(&_sec_protocol_metadata_access_supported_signature_algorithms, _securityLib, "sec_protocol_metadata_access_supported_signature_algorithms")
+	})
+	_register("sec_protocol_metadata_challenge_parameters_are_equal", func() {
+		purego.RegisterLibFunc(&_sec_protocol_metadata_challenge_parameters_are_equal, _securityLib, "sec_protocol_metadata_challenge_parameters_are_equal")
+	})
+	_register("sec_protocol_metadata_copy_negotiated_protocol", func() {
+		purego.RegisterLibFunc(&_sec_protocol_metadata_copy_negotiated_protocol, _securityLib, "sec_protocol_metadata_copy_negotiated_protocol")
+	})
+	_register("sec_protocol_metadata_copy_peer_public_key", func() {
+		purego.RegisterLibFunc(&_sec_protocol_metadata_copy_peer_public_key, _securityLib, "sec_protocol_metadata_copy_peer_public_key")
+	})
+	_register("sec_protocol_metadata_copy_server_name", func() {
+		purego.RegisterLibFunc(&_sec_protocol_metadata_copy_server_name, _securityLib, "sec_protocol_metadata_copy_server_name")
+	})
+	_register("sec_protocol_metadata_create_secret", func() {
+		purego.RegisterLibFunc(&_sec_protocol_metadata_create_secret, _securityLib, "sec_protocol_metadata_create_secret")
+	})
+	_register("sec_protocol_metadata_create_secret_with_context", func() {
+		purego.RegisterLibFunc(&_sec_protocol_metadata_create_secret_with_context, _securityLib, "sec_protocol_metadata_create_secret_with_context")
+	})
+	_register("sec_protocol_metadata_get_early_data_accepted", func() {
+		purego.RegisterLibFunc(&_sec_protocol_metadata_get_early_data_accepted, _securityLib, "sec_protocol_metadata_get_early_data_accepted")
+	})
+	_register("sec_protocol_metadata_get_negotiated_ciphersuite", func() {
+		purego.RegisterLibFunc(&_sec_protocol_metadata_get_negotiated_ciphersuite, _securityLib, "sec_protocol_metadata_get_negotiated_ciphersuite")
+	})
+	_register("sec_protocol_metadata_get_negotiated_protocol", func() {
+		purego.RegisterLibFunc(&_sec_protocol_metadata_get_negotiated_protocol, _securityLib, "sec_protocol_metadata_get_negotiated_protocol")
+	})
+	_register("sec_protocol_metadata_get_negotiated_protocol_version", func() {
+		purego.RegisterLibFunc(&_sec_protocol_metadata_get_negotiated_protocol_version, _securityLib, "sec_protocol_metadata_get_negotiated_protocol_version")
+	})
+	_register("sec_protocol_metadata_get_negotiated_tls_ciphersuite", func() {
+		purego.RegisterLibFunc(&_sec_protocol_metadata_get_negotiated_tls_ciphersuite, _securityLib, "sec_protocol_metadata_get_negotiated_tls_ciphersuite")
+	})
+	_register("sec_protocol_metadata_get_negotiated_tls_protocol_version", func() {
+		purego.RegisterLibFunc(&_sec_protocol_metadata_get_negotiated_tls_protocol_version, _securityLib, "sec_protocol_metadata_get_negotiated_tls_protocol_version")
+	})
+	_register("sec_protocol_metadata_get_server_name", func() {
+		purego.RegisterLibFunc(&_sec_protocol_metadata_get_server_name, _securityLib, "sec_protocol_metadata_get_server_name")
+	})
+	_register("sec_protocol_metadata_peers_are_equal", func() {
+		purego.RegisterLibFunc(&_sec_protocol_metadata_peers_are_equal, _securityLib, "sec_protocol_metadata_peers_are_equal")
+	})
+	_register("sec_protocol_options_add_pre_shared_key", func() {
+		purego.RegisterLibFunc(&_sec_protocol_options_add_pre_shared_key, _securityLib, "sec_protocol_options_add_pre_shared_key")
+	})
+	_register("sec_protocol_options_add_tls_application_protocol", func() {
+		purego.RegisterLibFunc(&_sec_protocol_options_add_tls_application_protocol, _securityLib, "sec_protocol_options_add_tls_application_protocol")
+	})
+	_register("sec_protocol_options_add_tls_ciphersuite", func() {
+		purego.RegisterLibFunc(&_sec_protocol_options_add_tls_ciphersuite, _securityLib, "sec_protocol_options_add_tls_ciphersuite")
+	})
+	_register("sec_protocol_options_add_tls_ciphersuite_group", func() {
+		purego.RegisterLibFunc(&_sec_protocol_options_add_tls_ciphersuite_group, _securityLib, "sec_protocol_options_add_tls_ciphersuite_group")
+	})
+	_register("sec_protocol_options_append_tls_ciphersuite", func() {
+		purego.RegisterLibFunc(&_sec_protocol_options_append_tls_ciphersuite, _securityLib, "sec_protocol_options_append_tls_ciphersuite")
+	})
+	_register("sec_protocol_options_append_tls_ciphersuite_group", func() {
+		purego.RegisterLibFunc(&_sec_protocol_options_append_tls_ciphersuite_group, _securityLib, "sec_protocol_options_append_tls_ciphersuite_group")
+	})
+	_register("sec_protocol_options_are_equal", func() {
+		purego.RegisterLibFunc(&_sec_protocol_options_are_equal, _securityLib, "sec_protocol_options_are_equal")
+	})
+	_register("sec_protocol_options_get_default_max_dtls_protocol_version", func() {
+		purego.RegisterLibFunc(&_sec_protocol_options_get_default_max_dtls_protocol_version, _securityLib, "sec_protocol_options_get_default_max_dtls_protocol_version")
+	})
+	_register("sec_protocol_options_get_default_max_tls_protocol_version", func() {
+		purego.RegisterLibFunc(&_sec_protocol_options_get_default_max_tls_protocol_version, _securityLib, "sec_protocol_options_get_default_max_tls_protocol_version")
+	})
+	_register("sec_protocol_options_get_default_min_dtls_protocol_version", func() {
+		purego.RegisterLibFunc(&_sec_protocol_options_get_default_min_dtls_protocol_version, _securityLib, "sec_protocol_options_get_default_min_dtls_protocol_version")
+	})
+	_register("sec_protocol_options_get_default_min_tls_protocol_version", func() {
+		purego.RegisterLibFunc(&_sec_protocol_options_get_default_min_tls_protocol_version, _securityLib, "sec_protocol_options_get_default_min_tls_protocol_version")
+	})
+	_register("sec_protocol_options_set_challenge_block", func() {
+		purego.RegisterLibFunc(&_sec_protocol_options_set_challenge_block, _securityLib, "sec_protocol_options_set_challenge_block")
+	})
+	_register("sec_protocol_options_set_key_update_block", func() {
+		purego.RegisterLibFunc(&_sec_protocol_options_set_key_update_block, _securityLib, "sec_protocol_options_set_key_update_block")
+	})
+	_register("sec_protocol_options_set_local_identity", func() {
+		purego.RegisterLibFunc(&_sec_protocol_options_set_local_identity, _securityLib, "sec_protocol_options_set_local_identity")
+	})
+	_register("sec_protocol_options_set_max_tls_protocol_version", func() {
+		purego.RegisterLibFunc(&_sec_protocol_options_set_max_tls_protocol_version, _securityLib, "sec_protocol_options_set_max_tls_protocol_version")
+	})
+	_register("sec_protocol_options_set_min_tls_protocol_version", func() {
+		purego.RegisterLibFunc(&_sec_protocol_options_set_min_tls_protocol_version, _securityLib, "sec_protocol_options_set_min_tls_protocol_version")
+	})
+	_register("sec_protocol_options_set_peer_authentication_required", func() {
+		purego.RegisterLibFunc(&_sec_protocol_options_set_peer_authentication_required, _securityLib, "sec_protocol_options_set_peer_authentication_required")
+	})
+	_register("sec_protocol_options_set_pre_shared_key_selection_block", func() {
+		purego.RegisterLibFunc(&_sec_protocol_options_set_pre_shared_key_selection_block, _securityLib, "sec_protocol_options_set_pre_shared_key_selection_block")
+	})
+	_register("sec_protocol_options_set_tls_diffie_hellman_parameters", func() {
+		purego.RegisterLibFunc(&_sec_protocol_options_set_tls_diffie_hellman_parameters, _securityLib, "sec_protocol_options_set_tls_diffie_hellman_parameters")
+	})
+	_register("sec_protocol_options_set_tls_false_start_enabled", func() {
+		purego.RegisterLibFunc(&_sec_protocol_options_set_tls_false_start_enabled, _securityLib, "sec_protocol_options_set_tls_false_start_enabled")
+	})
+	_register("sec_protocol_options_set_tls_is_fallback_attempt", func() {
+		purego.RegisterLibFunc(&_sec_protocol_options_set_tls_is_fallback_attempt, _securityLib, "sec_protocol_options_set_tls_is_fallback_attempt")
+	})
+	_register("sec_protocol_options_set_tls_max_version", func() {
+		purego.RegisterLibFunc(&_sec_protocol_options_set_tls_max_version, _securityLib, "sec_protocol_options_set_tls_max_version")
+	})
+	_register("sec_protocol_options_set_tls_min_version", func() {
+		purego.RegisterLibFunc(&_sec_protocol_options_set_tls_min_version, _securityLib, "sec_protocol_options_set_tls_min_version")
+	})
+	_register("sec_protocol_options_set_tls_ocsp_enabled", func() {
+		purego.RegisterLibFunc(&_sec_protocol_options_set_tls_ocsp_enabled, _securityLib, "sec_protocol_options_set_tls_ocsp_enabled")
+	})
+	_register("sec_protocol_options_set_tls_pre_shared_key_identity_hint", func() {
+		purego.RegisterLibFunc(&_sec_protocol_options_set_tls_pre_shared_key_identity_hint, _securityLib, "sec_protocol_options_set_tls_pre_shared_key_identity_hint")
+	})
+	_register("sec_protocol_options_set_tls_renegotiation_enabled", func() {
+		purego.RegisterLibFunc(&_sec_protocol_options_set_tls_renegotiation_enabled, _securityLib, "sec_protocol_options_set_tls_renegotiation_enabled")
+	})
+	_register("sec_protocol_options_set_tls_resumption_enabled", func() {
+		purego.RegisterLibFunc(&_sec_protocol_options_set_tls_resumption_enabled, _securityLib, "sec_protocol_options_set_tls_resumption_enabled")
+	})
+	_register("sec_protocol_options_set_tls_sct_enabled", func() {
+		purego.RegisterLibFunc(&_sec_protocol_options_set_tls_sct_enabled, _securityLib, "sec_protocol_options_set_tls_sct_enabled")
+	})
+	_register("sec_protocol_options_set_tls_server_name", func() {
+		purego.RegisterLibFunc(&_sec_protocol_options_set_tls_server_name, _securityLib, "sec_protocol_options_set_tls_server_name")
+	})
+	_register("sec_protocol_options_set_tls_tickets_enabled", func() {
+		purego.RegisterLibFunc(&_sec_protocol_options_set_tls_tickets_enabled, _securityLib, "sec_protocol_options_set_tls_tickets_enabled")
+	})
+	_register("sec_protocol_options_set_verify_block", func() {
+		purego.RegisterLibFunc(&_sec_protocol_options_set_verify_block, _securityLib, "sec_protocol_options_set_verify_block")
+	})
 	_register("sec_release", func() { purego.RegisterLibFunc(&_sec_release, _securityLib, "sec_release") })
 	_register("sec_retain", func() { purego.RegisterLibFunc(&_sec_retain, _securityLib, "sec_retain") })
 	_register("sec_trust_copy_ref", func() { purego.RegisterLibFunc(&_sec_trust_copy_ref, _securityLib, "sec_trust_copy_ref") })

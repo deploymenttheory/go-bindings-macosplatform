@@ -18,12 +18,12 @@ type MTRLaundryWasherModeClusterChangeToModeResponseParams struct {
 }
 
 var (
-	_clsMTRLaundryWasherModeClusterChangeToModeResponseParams = _objcClass("MTRLaundryWasherModeClusterChangeToModeResponseParams")
+	_clsMTRLaundryWasherModeClusterChangeToModeResponseParams                           = _objcClass("MTRLaundryWasherModeClusterChangeToModeResponseParams")
 	_mTRLaundryWasherModeClusterChangeToModeResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRLaundryWasherModeClusterChangeToModeResponseParamsSelStatus = objc.RegisterName("status")
-	_mTRLaundryWasherModeClusterChangeToModeResponseParamsSelSetStatus = objc.RegisterName("setStatus:")
-	_mTRLaundryWasherModeClusterChangeToModeResponseParamsSelStatusText = objc.RegisterName("statusText")
-	_mTRLaundryWasherModeClusterChangeToModeResponseParamsSelSetStatusText = objc.RegisterName("setStatusText:")
+	_mTRLaundryWasherModeClusterChangeToModeResponseParamsSelStatus                     = objc.RegisterName("status")
+	_mTRLaundryWasherModeClusterChangeToModeResponseParamsSelSetStatus                  = objc.RegisterName("setStatus:")
+	_mTRLaundryWasherModeClusterChangeToModeResponseParamsSelStatusText                 = objc.RegisterName("statusText")
+	_mTRLaundryWasherModeClusterChangeToModeResponseParamsSelSetStatusText              = objc.RegisterName("setStatusText:")
 )
 
 func MTRLaundryWasherModeClusterChangeToModeResponseParamsFromID(id objc.ID) *MTRLaundryWasherModeClusterChangeToModeResponseParams {
@@ -40,7 +40,9 @@ func MTRLaundryWasherModeClusterChangeToModeResponseParamsFromID(id objc.ID) *MT
 func (o *MTRLaundryWasherModeClusterChangeToModeResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRLaundryWasherModeClusterChangeToModeResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRLaundryWasherModeClusterChangeToModeResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -49,7 +51,9 @@ func (o *MTRLaundryWasherModeClusterChangeToModeResponseParams) InitWithResponse
 
 func (o *MTRLaundryWasherModeClusterChangeToModeResponseParams) Status() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRLaundryWasherModeClusterChangeToModeResponseParamsSelStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,11 +63,12 @@ func (o *MTRLaundryWasherModeClusterChangeToModeResponseParams) SetStatus(status
 
 func (o *MTRLaundryWasherModeClusterChangeToModeResponseParams) StatusText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRLaundryWasherModeClusterChangeToModeResponseParamsSelStatusText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTRLaundryWasherModeClusterChangeToModeResponseParams) SetStatusText(statusText *foundation.NSString) {
 	o.Ptr().Send(_mTRLaundryWasherModeClusterChangeToModeResponseParamsSelSetStatusText, statusText.Ptr())
 }
-

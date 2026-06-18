@@ -150,4 +150,3 @@ type DepthStencilDescriptorable interface {
 }
 
 var _ DepthStencilDescriptorable = (*DepthStencilDescriptor)(nil)
-

@@ -18,13 +18,13 @@ type CNContactPicker struct {
 }
 
 var (
-	_clsCNContactPicker = _objcClass("CNContactPicker")
+	_clsCNContactPicker                                      = _objcClass("CNContactPicker")
 	_cNContactPickerSelShowRelativeToRectOfViewPreferredEdge = objc.RegisterName("showRelativeToRect:ofView:preferredEdge:")
-	_cNContactPickerSelClose = objc.RegisterName("close")
-	_cNContactPickerSelDisplayedKeys = objc.RegisterName("displayedKeys")
-	_cNContactPickerSelSetDisplayedKeys = objc.RegisterName("setDisplayedKeys:")
-	_cNContactPickerSelDelegate = objc.RegisterName("delegate")
-	_cNContactPickerSelSetDelegate = objc.RegisterName("setDelegate:")
+	_cNContactPickerSelClose                                 = objc.RegisterName("close")
+	_cNContactPickerSelDisplayedKeys                         = objc.RegisterName("displayedKeys")
+	_cNContactPickerSelSetDisplayedKeys                      = objc.RegisterName("setDisplayedKeys:")
+	_cNContactPickerSelDelegate                              = objc.RegisterName("delegate")
+	_cNContactPickerSelSetDelegate                           = objc.RegisterName("setDelegate:")
 )
 
 func CNContactPickerFromID(id objc.ID) *CNContactPicker {
@@ -66,4 +66,3 @@ func (o *CNContactPicker) Delegate() CNContactPickerDelegate {
 func (o *CNContactPicker) SetDelegate(delegate CNContactPickerDelegate) {
 	o.Ptr().Send(_cNContactPickerSelSetDelegate, delegate)
 }
-

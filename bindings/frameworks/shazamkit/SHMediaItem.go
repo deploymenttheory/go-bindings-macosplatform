@@ -18,26 +18,26 @@ type SHMediaItem struct {
 }
 
 var (
-	_clsSHMediaItem = _objcClass("SHMediaItem")
-	_sHMediaItemSelMediaItemWithProperties = objc.RegisterName("mediaItemWithProperties:")
+	_clsSHMediaItem                                            = _objcClass("SHMediaItem")
+	_sHMediaItemSelMediaItemWithProperties                     = objc.RegisterName("mediaItemWithProperties:")
 	_sHMediaItemSelFetchMediaItemWithShazamIDCompletionHandler = objc.RegisterName("fetchMediaItemWithShazamID:completionHandler:")
-	_sHMediaItemSelValueForProperty = objc.RegisterName("valueForProperty:")
-	_sHMediaItemSelObjectForKeyedSubscript = objc.RegisterName("objectForKeyedSubscript:")
-	_sHMediaItemSelShazamID = objc.RegisterName("shazamID")
-	_sHMediaItemSelTitle = objc.RegisterName("title")
-	_sHMediaItemSelSubtitle = objc.RegisterName("subtitle")
-	_sHMediaItemSelArtist = objc.RegisterName("artist")
-	_sHMediaItemSelGenres = objc.RegisterName("genres")
-	_sHMediaItemSelAppleMusicID = objc.RegisterName("appleMusicID")
-	_sHMediaItemSelAppleMusicURL = objc.RegisterName("appleMusicURL")
-	_sHMediaItemSelWebURL = objc.RegisterName("webURL")
-	_sHMediaItemSelArtworkURL = objc.RegisterName("artworkURL")
-	_sHMediaItemSelVideoURL = objc.RegisterName("videoURL")
-	_sHMediaItemSelExplicitContent = objc.RegisterName("explicitContent")
-	_sHMediaItemSelIsrc = objc.RegisterName("isrc")
-	_sHMediaItemSelTimeRanges = objc.RegisterName("timeRanges")
-	_sHMediaItemSelFrequencySkewRanges = objc.RegisterName("frequencySkewRanges")
-	_sHMediaItemSelCreationDate = objc.RegisterName("creationDate")
+	_sHMediaItemSelValueForProperty                            = objc.RegisterName("valueForProperty:")
+	_sHMediaItemSelObjectForKeyedSubscript                     = objc.RegisterName("objectForKeyedSubscript:")
+	_sHMediaItemSelShazamID                                    = objc.RegisterName("shazamID")
+	_sHMediaItemSelTitle                                       = objc.RegisterName("title")
+	_sHMediaItemSelSubtitle                                    = objc.RegisterName("subtitle")
+	_sHMediaItemSelArtist                                      = objc.RegisterName("artist")
+	_sHMediaItemSelGenres                                      = objc.RegisterName("genres")
+	_sHMediaItemSelAppleMusicID                                = objc.RegisterName("appleMusicID")
+	_sHMediaItemSelAppleMusicURL                               = objc.RegisterName("appleMusicURL")
+	_sHMediaItemSelWebURL                                      = objc.RegisterName("webURL")
+	_sHMediaItemSelArtworkURL                                  = objc.RegisterName("artworkURL")
+	_sHMediaItemSelVideoURL                                    = objc.RegisterName("videoURL")
+	_sHMediaItemSelExplicitContent                             = objc.RegisterName("explicitContent")
+	_sHMediaItemSelIsrc                                        = objc.RegisterName("isrc")
+	_sHMediaItemSelTimeRanges                                  = objc.RegisterName("timeRanges")
+	_sHMediaItemSelFrequencySkewRanges                         = objc.RegisterName("frequencySkewRanges")
+	_sHMediaItemSelCreationDate                                = objc.RegisterName("creationDate")
 )
 
 func SHMediaItemFromID(id objc.ID) *SHMediaItem {
@@ -53,7 +53,9 @@ func SHMediaItemFromID(id objc.ID) *SHMediaItem {
 // Creates a media item object with a dictionary of properties and their associated values. - Parameters: - properties: A dictionary that contains the media item properties and their associated values.
 func SHMediaItemMediaItemWithProperties(properties *foundation.NSDictionary[*foundation.NSString, objc.ID]) *SHMediaItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSHMediaItem), _sHMediaItemSelMediaItemWithProperties, properties)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SHMediaItemFromID(_ret)
 }
 
@@ -87,28 +89,36 @@ func (o *SHMediaItem) ObjectForKeyedSubscript(key *foundation.NSString) objc.ID 
 // The Shazam ID for the song.
 func (o *SHMediaItem) ShazamID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sHMediaItemSelShazamID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // A title for the media item.
 func (o *SHMediaItem) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sHMediaItemSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // A subtitle for the media item.
 func (o *SHMediaItem) Subtitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sHMediaItemSelSubtitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The name of the artist for the media item, such as the performer of a song.
 func (o *SHMediaItem) Artist() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sHMediaItemSelArtist)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -121,35 +131,45 @@ func (o *SHMediaItem) Genres() *foundation.NSArray[*foundation.NSString] {
 // The Apple Music ID for the song.
 func (o *SHMediaItem) AppleMusicID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sHMediaItemSelAppleMusicID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // A link to the Apple Music page that contains the full information for the song.
 func (o *SHMediaItem) AppleMusicURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sHMediaItemSelAppleMusicURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // A link to the Shazam Music catalog page that contains the full information for the song. This link opens the Shazam app or App Clip if it's available on the device.
 func (o *SHMediaItem) WebURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sHMediaItemSelWebURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // The URL for artwork for the media item, such as an album cover.
 func (o *SHMediaItem) ArtworkURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sHMediaItemSelArtworkURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // The URL for a video for the media item, such as a music video.
 func (o *SHMediaItem) VideoURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sHMediaItemSelVideoURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -162,28 +182,35 @@ func (o *SHMediaItem) ExplicitContent() bool {
 // The International Standard Recording Code (ISRC) for the media item.
 func (o *SHMediaItem) Isrc() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sHMediaItemSelIsrc)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // An array of ranges that indicate the offsets within the reference signature that this media item describes.
 func (o *SHMediaItem) TimeRanges() *foundation.NSArray[*SHRange] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sHMediaItemSelTimeRanges)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SHRange](_ret)
 }
 
 // An array of ranges that indicate the frequency skews in the reference signature that this media item describes.
 func (o *SHMediaItem) FrequencySkewRanges() *foundation.NSArray[*SHRange] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sHMediaItemSelFrequencySkewRanges)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SHRange](_ret)
 }
 
 // The date the media item was created.
 func (o *SHMediaItem) CreationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sHMediaItemSelCreationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
-

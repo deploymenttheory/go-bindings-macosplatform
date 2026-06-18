@@ -14,7 +14,7 @@ import (
 
 var (
 	_osservicesLib uintptr
-	_loadOnce sync.Once
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -49,29 +49,53 @@ func _loadLibrary() {
 		return
 	}
 	_register("BatteryCount", func() { purego.RegisterLibFunc(&_fnBatteryCount, _osservicesLib, "BatteryCount") })
-	_register("CSGetDefaultIdentityAuthority", func() { purego.RegisterLibFunc(&_fnCSGetDefaultIdentityAuthority, _osservicesLib, "CSGetDefaultIdentityAuthority") })
-	_register("CSGetLocalIdentityAuthority", func() { purego.RegisterLibFunc(&_fnCSGetLocalIdentityAuthority, _osservicesLib, "CSGetLocalIdentityAuthority") })
-	_register("CSGetManagedIdentityAuthority", func() { purego.RegisterLibFunc(&_fnCSGetManagedIdentityAuthority, _osservicesLib, "CSGetManagedIdentityAuthority") })
+	_register("CSGetDefaultIdentityAuthority", func() {
+		purego.RegisterLibFunc(&_fnCSGetDefaultIdentityAuthority, _osservicesLib, "CSGetDefaultIdentityAuthority")
+	})
+	_register("CSGetLocalIdentityAuthority", func() {
+		purego.RegisterLibFunc(&_fnCSGetLocalIdentityAuthority, _osservicesLib, "CSGetLocalIdentityAuthority")
+	})
+	_register("CSGetManagedIdentityAuthority", func() {
+		purego.RegisterLibFunc(&_fnCSGetManagedIdentityAuthority, _osservicesLib, "CSGetManagedIdentityAuthority")
+	})
 	_register("CSIdentityAddAlias", func() { purego.RegisterLibFunc(&_fnCSIdentityAddAlias, _osservicesLib, "CSIdentityAddAlias") })
 	_register("CSIdentityAddMember", func() { purego.RegisterLibFunc(&_fnCSIdentityAddMember, _osservicesLib, "CSIdentityAddMember") })
-	_register("CSIdentityAuthenticateUsingPassword", func() { purego.RegisterLibFunc(&_fnCSIdentityAuthenticateUsingPassword, _osservicesLib, "CSIdentityAuthenticateUsingPassword") })
-	_register("CSIdentityAuthorityCopyLocalizedName", func() { purego.RegisterLibFunc(&_fnCSIdentityAuthorityCopyLocalizedName, _osservicesLib, "CSIdentityAuthorityCopyLocalizedName") })
-	_register("CSIdentityAuthorityGetTypeID", func() { purego.RegisterLibFunc(&_fnCSIdentityAuthorityGetTypeID, _osservicesLib, "CSIdentityAuthorityGetTypeID") })
+	_register("CSIdentityAuthenticateUsingPassword", func() {
+		purego.RegisterLibFunc(&_fnCSIdentityAuthenticateUsingPassword, _osservicesLib, "CSIdentityAuthenticateUsingPassword")
+	})
+	_register("CSIdentityAuthorityCopyLocalizedName", func() {
+		purego.RegisterLibFunc(&_fnCSIdentityAuthorityCopyLocalizedName, _osservicesLib, "CSIdentityAuthorityCopyLocalizedName")
+	})
+	_register("CSIdentityAuthorityGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnCSIdentityAuthorityGetTypeID, _osservicesLib, "CSIdentityAuthorityGetTypeID")
+	})
 	_register("CSIdentityCommit", func() { purego.RegisterLibFunc(&_fnCSIdentityCommit, _osservicesLib, "CSIdentityCommit") })
-	_register("CSIdentityCommitAsynchronously", func() { purego.RegisterLibFunc(&_fnCSIdentityCommitAsynchronously, _osservicesLib, "CSIdentityCommitAsynchronously") })
+	_register("CSIdentityCommitAsynchronously", func() {
+		purego.RegisterLibFunc(&_fnCSIdentityCommitAsynchronously, _osservicesLib, "CSIdentityCommitAsynchronously")
+	})
 	_register("CSIdentityCreate", func() { purego.RegisterLibFunc(&_fnCSIdentityCreate, _osservicesLib, "CSIdentityCreate") })
 	_register("CSIdentityCreateCopy", func() { purego.RegisterLibFunc(&_fnCSIdentityCreateCopy, _osservicesLib, "CSIdentityCreateCopy") })
-	_register("CSIdentityCreateGroupMembershipQuery", func() { purego.RegisterLibFunc(&_fnCSIdentityCreateGroupMembershipQuery, _osservicesLib, "CSIdentityCreateGroupMembershipQuery") })
-	_register("CSIdentityCreatePersistentReference", func() { purego.RegisterLibFunc(&_fnCSIdentityCreatePersistentReference, _osservicesLib, "CSIdentityCreatePersistentReference") })
+	_register("CSIdentityCreateGroupMembershipQuery", func() {
+		purego.RegisterLibFunc(&_fnCSIdentityCreateGroupMembershipQuery, _osservicesLib, "CSIdentityCreateGroupMembershipQuery")
+	})
+	_register("CSIdentityCreatePersistentReference", func() {
+		purego.RegisterLibFunc(&_fnCSIdentityCreatePersistentReference, _osservicesLib, "CSIdentityCreatePersistentReference")
+	})
 	_register("CSIdentityDelete", func() { purego.RegisterLibFunc(&_fnCSIdentityDelete, _osservicesLib, "CSIdentityDelete") })
 	_register("CSIdentityGetAliases", func() { purego.RegisterLibFunc(&_fnCSIdentityGetAliases, _osservicesLib, "CSIdentityGetAliases") })
 	_register("CSIdentityGetAuthority", func() { purego.RegisterLibFunc(&_fnCSIdentityGetAuthority, _osservicesLib, "CSIdentityGetAuthority") })
-	_register("CSIdentityGetCertificate", func() { purego.RegisterLibFunc(&_fnCSIdentityGetCertificate, _osservicesLib, "CSIdentityGetCertificate") })
+	_register("CSIdentityGetCertificate", func() {
+		purego.RegisterLibFunc(&_fnCSIdentityGetCertificate, _osservicesLib, "CSIdentityGetCertificate")
+	})
 	_register("CSIdentityGetClass", func() { purego.RegisterLibFunc(&_fnCSIdentityGetClass, _osservicesLib, "CSIdentityGetClass") })
-	_register("CSIdentityGetEmailAddress", func() { purego.RegisterLibFunc(&_fnCSIdentityGetEmailAddress, _osservicesLib, "CSIdentityGetEmailAddress") })
+	_register("CSIdentityGetEmailAddress", func() {
+		purego.RegisterLibFunc(&_fnCSIdentityGetEmailAddress, _osservicesLib, "CSIdentityGetEmailAddress")
+	})
 	_register("CSIdentityGetFullName", func() { purego.RegisterLibFunc(&_fnCSIdentityGetFullName, _osservicesLib, "CSIdentityGetFullName") })
 	_register("CSIdentityGetImageData", func() { purego.RegisterLibFunc(&_fnCSIdentityGetImageData, _osservicesLib, "CSIdentityGetImageData") })
-	_register("CSIdentityGetImageDataType", func() { purego.RegisterLibFunc(&_fnCSIdentityGetImageDataType, _osservicesLib, "CSIdentityGetImageDataType") })
+	_register("CSIdentityGetImageDataType", func() {
+		purego.RegisterLibFunc(&_fnCSIdentityGetImageDataType, _osservicesLib, "CSIdentityGetImageDataType")
+	})
 	_register("CSIdentityGetImageURL", func() { purego.RegisterLibFunc(&_fnCSIdentityGetImageURL, _osservicesLib, "CSIdentityGetImageURL") })
 	_register("CSIdentityGetPosixID", func() { purego.RegisterLibFunc(&_fnCSIdentityGetPosixID, _osservicesLib, "CSIdentityGetPosixID") })
 	_register("CSIdentityGetPosixName", func() { purego.RegisterLibFunc(&_fnCSIdentityGetPosixName, _osservicesLib, "CSIdentityGetPosixName") })
@@ -80,23 +104,45 @@ func _loadLibrary() {
 	_register("CSIdentityIsCommitting", func() { purego.RegisterLibFunc(&_fnCSIdentityIsCommitting, _osservicesLib, "CSIdentityIsCommitting") })
 	_register("CSIdentityIsEnabled", func() { purego.RegisterLibFunc(&_fnCSIdentityIsEnabled, _osservicesLib, "CSIdentityIsEnabled") })
 	_register("CSIdentityIsHidden", func() { purego.RegisterLibFunc(&_fnCSIdentityIsHidden, _osservicesLib, "CSIdentityIsHidden") })
-	_register("CSIdentityIsMemberOfGroup", func() { purego.RegisterLibFunc(&_fnCSIdentityIsMemberOfGroup, _osservicesLib, "CSIdentityIsMemberOfGroup") })
-	_register("CSIdentityQueryCopyResults", func() { purego.RegisterLibFunc(&_fnCSIdentityQueryCopyResults, _osservicesLib, "CSIdentityQueryCopyResults") })
+	_register("CSIdentityIsMemberOfGroup", func() {
+		purego.RegisterLibFunc(&_fnCSIdentityIsMemberOfGroup, _osservicesLib, "CSIdentityIsMemberOfGroup")
+	})
+	_register("CSIdentityQueryCopyResults", func() {
+		purego.RegisterLibFunc(&_fnCSIdentityQueryCopyResults, _osservicesLib, "CSIdentityQueryCopyResults")
+	})
 	_register("CSIdentityQueryCreate", func() { purego.RegisterLibFunc(&_fnCSIdentityQueryCreate, _osservicesLib, "CSIdentityQueryCreate") })
-	_register("CSIdentityQueryCreateForCurrentUser", func() { purego.RegisterLibFunc(&_fnCSIdentityQueryCreateForCurrentUser, _osservicesLib, "CSIdentityQueryCreateForCurrentUser") })
-	_register("CSIdentityQueryCreateForName", func() { purego.RegisterLibFunc(&_fnCSIdentityQueryCreateForName, _osservicesLib, "CSIdentityQueryCreateForName") })
-	_register("CSIdentityQueryCreateForPersistentReference", func() { purego.RegisterLibFunc(&_fnCSIdentityQueryCreateForPersistentReference, _osservicesLib, "CSIdentityQueryCreateForPersistentReference") })
-	_register("CSIdentityQueryCreateForPosixID", func() { purego.RegisterLibFunc(&_fnCSIdentityQueryCreateForPosixID, _osservicesLib, "CSIdentityQueryCreateForPosixID") })
-	_register("CSIdentityQueryCreateForUUID", func() { purego.RegisterLibFunc(&_fnCSIdentityQueryCreateForUUID, _osservicesLib, "CSIdentityQueryCreateForUUID") })
+	_register("CSIdentityQueryCreateForCurrentUser", func() {
+		purego.RegisterLibFunc(&_fnCSIdentityQueryCreateForCurrentUser, _osservicesLib, "CSIdentityQueryCreateForCurrentUser")
+	})
+	_register("CSIdentityQueryCreateForName", func() {
+		purego.RegisterLibFunc(&_fnCSIdentityQueryCreateForName, _osservicesLib, "CSIdentityQueryCreateForName")
+	})
+	_register("CSIdentityQueryCreateForPersistentReference", func() {
+		purego.RegisterLibFunc(&_fnCSIdentityQueryCreateForPersistentReference, _osservicesLib, "CSIdentityQueryCreateForPersistentReference")
+	})
+	_register("CSIdentityQueryCreateForPosixID", func() {
+		purego.RegisterLibFunc(&_fnCSIdentityQueryCreateForPosixID, _osservicesLib, "CSIdentityQueryCreateForPosixID")
+	})
+	_register("CSIdentityQueryCreateForUUID", func() {
+		purego.RegisterLibFunc(&_fnCSIdentityQueryCreateForUUID, _osservicesLib, "CSIdentityQueryCreateForUUID")
+	})
 	_register("CSIdentityQueryExecute", func() { purego.RegisterLibFunc(&_fnCSIdentityQueryExecute, _osservicesLib, "CSIdentityQueryExecute") })
-	_register("CSIdentityQueryExecuteAsynchronously", func() { purego.RegisterLibFunc(&_fnCSIdentityQueryExecuteAsynchronously, _osservicesLib, "CSIdentityQueryExecuteAsynchronously") })
-	_register("CSIdentityQueryGetTypeID", func() { purego.RegisterLibFunc(&_fnCSIdentityQueryGetTypeID, _osservicesLib, "CSIdentityQueryGetTypeID") })
+	_register("CSIdentityQueryExecuteAsynchronously", func() {
+		purego.RegisterLibFunc(&_fnCSIdentityQueryExecuteAsynchronously, _osservicesLib, "CSIdentityQueryExecuteAsynchronously")
+	})
+	_register("CSIdentityQueryGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnCSIdentityQueryGetTypeID, _osservicesLib, "CSIdentityQueryGetTypeID")
+	})
 	_register("CSIdentityQueryStop", func() { purego.RegisterLibFunc(&_fnCSIdentityQueryStop, _osservicesLib, "CSIdentityQueryStop") })
 	_register("CSIdentityRemoveAlias", func() { purego.RegisterLibFunc(&_fnCSIdentityRemoveAlias, _osservicesLib, "CSIdentityRemoveAlias") })
 	_register("CSIdentityRemoveClient", func() { purego.RegisterLibFunc(&_fnCSIdentityRemoveClient, _osservicesLib, "CSIdentityRemoveClient") })
 	_register("CSIdentityRemoveMember", func() { purego.RegisterLibFunc(&_fnCSIdentityRemoveMember, _osservicesLib, "CSIdentityRemoveMember") })
-	_register("CSIdentitySetCertificate", func() { purego.RegisterLibFunc(&_fnCSIdentitySetCertificate, _osservicesLib, "CSIdentitySetCertificate") })
-	_register("CSIdentitySetEmailAddress", func() { purego.RegisterLibFunc(&_fnCSIdentitySetEmailAddress, _osservicesLib, "CSIdentitySetEmailAddress") })
+	_register("CSIdentitySetCertificate", func() {
+		purego.RegisterLibFunc(&_fnCSIdentitySetCertificate, _osservicesLib, "CSIdentitySetCertificate")
+	})
+	_register("CSIdentitySetEmailAddress", func() {
+		purego.RegisterLibFunc(&_fnCSIdentitySetEmailAddress, _osservicesLib, "CSIdentitySetEmailAddress")
+	})
 	_register("CSIdentitySetFullName", func() { purego.RegisterLibFunc(&_fnCSIdentitySetFullName, _osservicesLib, "CSIdentitySetFullName") })
 	_register("CSIdentitySetImageData", func() { purego.RegisterLibFunc(&_fnCSIdentitySetImageData, _osservicesLib, "CSIdentitySetImageData") })
 	_register("CSIdentitySetImageURL", func() { purego.RegisterLibFunc(&_fnCSIdentitySetImageURL, _osservicesLib, "CSIdentitySetImageURL") })
@@ -112,18 +158,24 @@ func _loadLibrary() {
 	_register("KCCopyItem", func() { purego.RegisterLibFunc(&_fnKCCopyItem, _osservicesLib, "KCCopyItem") })
 	_register("KCCountKeychains", func() { purego.RegisterLibFunc(&_fnKCCountKeychains, _osservicesLib, "KCCountKeychains") })
 	_register("KCDeleteItem", func() { purego.RegisterLibFunc(&_fnKCDeleteItem, _osservicesLib, "KCDeleteItem") })
-	_register("KCFindAppleSharePassword", func() { purego.RegisterLibFunc(&_fnKCFindAppleSharePassword, _osservicesLib, "KCFindAppleSharePassword") })
+	_register("KCFindAppleSharePassword", func() {
+		purego.RegisterLibFunc(&_fnKCFindAppleSharePassword, _osservicesLib, "KCFindAppleSharePassword")
+	})
 	_register("KCFindFirstItem", func() { purego.RegisterLibFunc(&_fnKCFindFirstItem, _osservicesLib, "KCFindFirstItem") })
 	_register("KCFindGenericPassword", func() { purego.RegisterLibFunc(&_fnKCFindGenericPassword, _osservicesLib, "KCFindGenericPassword") })
 	_register("KCFindInternetPassword", func() { purego.RegisterLibFunc(&_fnKCFindInternetPassword, _osservicesLib, "KCFindInternetPassword") })
-	_register("KCFindInternetPasswordWithPath", func() { purego.RegisterLibFunc(&_fnKCFindInternetPasswordWithPath, _osservicesLib, "KCFindInternetPasswordWithPath") })
+	_register("KCFindInternetPasswordWithPath", func() {
+		purego.RegisterLibFunc(&_fnKCFindInternetPasswordWithPath, _osservicesLib, "KCFindInternetPasswordWithPath")
+	})
 	_register("KCFindNextItem", func() { purego.RegisterLibFunc(&_fnKCFindNextItem, _osservicesLib, "KCFindNextItem") })
 	_register("KCGetAttribute", func() { purego.RegisterLibFunc(&_fnKCGetAttribute, _osservicesLib, "KCGetAttribute") })
 	_register("KCGetData", func() { purego.RegisterLibFunc(&_fnKCGetData, _osservicesLib, "KCGetData") })
 	_register("KCGetDefaultKeychain", func() { purego.RegisterLibFunc(&_fnKCGetDefaultKeychain, _osservicesLib, "KCGetDefaultKeychain") })
 	_register("KCGetIndKeychain", func() { purego.RegisterLibFunc(&_fnKCGetIndKeychain, _osservicesLib, "KCGetIndKeychain") })
 	_register("KCGetKeychain", func() { purego.RegisterLibFunc(&_fnKCGetKeychain, _osservicesLib, "KCGetKeychain") })
-	_register("KCGetKeychainManagerVersion", func() { purego.RegisterLibFunc(&_fnKCGetKeychainManagerVersion, _osservicesLib, "KCGetKeychainManagerVersion") })
+	_register("KCGetKeychainManagerVersion", func() {
+		purego.RegisterLibFunc(&_fnKCGetKeychainManagerVersion, _osservicesLib, "KCGetKeychainManagerVersion")
+	})
 	_register("KCGetKeychainName", func() { purego.RegisterLibFunc(&_fnKCGetKeychainName, _osservicesLib, "KCGetKeychainName") })
 	_register("KCGetStatus", func() { purego.RegisterLibFunc(&_fnKCGetStatus, _osservicesLib, "KCGetStatus") })
 	_register("KCIsInteractionAllowed", func() { purego.RegisterLibFunc(&_fnKCIsInteractionAllowed, _osservicesLib, "KCIsInteractionAllowed") })
@@ -148,38 +200,90 @@ func _loadLibrary() {
 	_register("SleepQInstall", func() { purego.RegisterLibFunc(&_fnSleepQInstall, _osservicesLib, "SleepQInstall") })
 	_register("SleepQRemove", func() { purego.RegisterLibFunc(&_fnSleepQRemove, _osservicesLib, "SleepQRemove") })
 	_register("UpdateSystemActivity", func() { purego.RegisterLibFunc(&_fnUpdateSystemActivity, _osservicesLib, "UpdateSystemActivity") })
-	_register("WSGetCFTypeIDFromWSTypeID", func() { purego.RegisterLibFunc(&_fnWSGetCFTypeIDFromWSTypeID, _osservicesLib, "WSGetCFTypeIDFromWSTypeID") })
+	_register("WSGetCFTypeIDFromWSTypeID", func() {
+		purego.RegisterLibFunc(&_fnWSGetCFTypeIDFromWSTypeID, _osservicesLib, "WSGetCFTypeIDFromWSTypeID")
+	})
 	_register("WSGetWSTypeIDFromCFType", func() { purego.RegisterLibFunc(&_fnWSGetWSTypeIDFromCFType, _osservicesLib, "WSGetWSTypeIDFromCFType") })
-	_register("WSMethodInvocationAddDeserializationOverride", func() { purego.RegisterLibFunc(&_fnWSMethodInvocationAddDeserializationOverride, _osservicesLib, "WSMethodInvocationAddDeserializationOverride") })
-	_register("WSMethodInvocationAddSerializationOverride", func() { purego.RegisterLibFunc(&_fnWSMethodInvocationAddSerializationOverride, _osservicesLib, "WSMethodInvocationAddSerializationOverride") })
-	_register("WSMethodInvocationCopyParameters", func() { purego.RegisterLibFunc(&_fnWSMethodInvocationCopyParameters, _osservicesLib, "WSMethodInvocationCopyParameters") })
-	_register("WSMethodInvocationCopyProperty", func() { purego.RegisterLibFunc(&_fnWSMethodInvocationCopyProperty, _osservicesLib, "WSMethodInvocationCopyProperty") })
-	_register("WSMethodInvocationCopySerialization", func() { purego.RegisterLibFunc(&_fnWSMethodInvocationCopySerialization, _osservicesLib, "WSMethodInvocationCopySerialization") })
-	_register("WSMethodInvocationCreate", func() { purego.RegisterLibFunc(&_fnWSMethodInvocationCreate, _osservicesLib, "WSMethodInvocationCreate") })
-	_register("WSMethodInvocationCreateFromSerialization", func() { purego.RegisterLibFunc(&_fnWSMethodInvocationCreateFromSerialization, _osservicesLib, "WSMethodInvocationCreateFromSerialization") })
-	_register("WSMethodInvocationGetTypeID", func() { purego.RegisterLibFunc(&_fnWSMethodInvocationGetTypeID, _osservicesLib, "WSMethodInvocationGetTypeID") })
-	_register("WSMethodInvocationInvoke", func() { purego.RegisterLibFunc(&_fnWSMethodInvocationInvoke, _osservicesLib, "WSMethodInvocationInvoke") })
-	_register("WSMethodInvocationScheduleWithRunLoop", func() { purego.RegisterLibFunc(&_fnWSMethodInvocationScheduleWithRunLoop, _osservicesLib, "WSMethodInvocationScheduleWithRunLoop") })
-	_register("WSMethodInvocationSetCallBack", func() { purego.RegisterLibFunc(&_fnWSMethodInvocationSetCallBack, _osservicesLib, "WSMethodInvocationSetCallBack") })
-	_register("WSMethodInvocationSetParameters", func() { purego.RegisterLibFunc(&_fnWSMethodInvocationSetParameters, _osservicesLib, "WSMethodInvocationSetParameters") })
-	_register("WSMethodInvocationSetProperty", func() { purego.RegisterLibFunc(&_fnWSMethodInvocationSetProperty, _osservicesLib, "WSMethodInvocationSetProperty") })
-	_register("WSMethodInvocationUnscheduleFromRunLoop", func() { purego.RegisterLibFunc(&_fnWSMethodInvocationUnscheduleFromRunLoop, _osservicesLib, "WSMethodInvocationUnscheduleFromRunLoop") })
+	_register("WSMethodInvocationAddDeserializationOverride", func() {
+		purego.RegisterLibFunc(&_fnWSMethodInvocationAddDeserializationOverride, _osservicesLib, "WSMethodInvocationAddDeserializationOverride")
+	})
+	_register("WSMethodInvocationAddSerializationOverride", func() {
+		purego.RegisterLibFunc(&_fnWSMethodInvocationAddSerializationOverride, _osservicesLib, "WSMethodInvocationAddSerializationOverride")
+	})
+	_register("WSMethodInvocationCopyParameters", func() {
+		purego.RegisterLibFunc(&_fnWSMethodInvocationCopyParameters, _osservicesLib, "WSMethodInvocationCopyParameters")
+	})
+	_register("WSMethodInvocationCopyProperty", func() {
+		purego.RegisterLibFunc(&_fnWSMethodInvocationCopyProperty, _osservicesLib, "WSMethodInvocationCopyProperty")
+	})
+	_register("WSMethodInvocationCopySerialization", func() {
+		purego.RegisterLibFunc(&_fnWSMethodInvocationCopySerialization, _osservicesLib, "WSMethodInvocationCopySerialization")
+	})
+	_register("WSMethodInvocationCreate", func() {
+		purego.RegisterLibFunc(&_fnWSMethodInvocationCreate, _osservicesLib, "WSMethodInvocationCreate")
+	})
+	_register("WSMethodInvocationCreateFromSerialization", func() {
+		purego.RegisterLibFunc(&_fnWSMethodInvocationCreateFromSerialization, _osservicesLib, "WSMethodInvocationCreateFromSerialization")
+	})
+	_register("WSMethodInvocationGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnWSMethodInvocationGetTypeID, _osservicesLib, "WSMethodInvocationGetTypeID")
+	})
+	_register("WSMethodInvocationInvoke", func() {
+		purego.RegisterLibFunc(&_fnWSMethodInvocationInvoke, _osservicesLib, "WSMethodInvocationInvoke")
+	})
+	_register("WSMethodInvocationScheduleWithRunLoop", func() {
+		purego.RegisterLibFunc(&_fnWSMethodInvocationScheduleWithRunLoop, _osservicesLib, "WSMethodInvocationScheduleWithRunLoop")
+	})
+	_register("WSMethodInvocationSetCallBack", func() {
+		purego.RegisterLibFunc(&_fnWSMethodInvocationSetCallBack, _osservicesLib, "WSMethodInvocationSetCallBack")
+	})
+	_register("WSMethodInvocationSetParameters", func() {
+		purego.RegisterLibFunc(&_fnWSMethodInvocationSetParameters, _osservicesLib, "WSMethodInvocationSetParameters")
+	})
+	_register("WSMethodInvocationSetProperty", func() {
+		purego.RegisterLibFunc(&_fnWSMethodInvocationSetProperty, _osservicesLib, "WSMethodInvocationSetProperty")
+	})
+	_register("WSMethodInvocationUnscheduleFromRunLoop", func() {
+		purego.RegisterLibFunc(&_fnWSMethodInvocationUnscheduleFromRunLoop, _osservicesLib, "WSMethodInvocationUnscheduleFromRunLoop")
+	})
 	_register("WSMethodResultIsFault", func() { purego.RegisterLibFunc(&_fnWSMethodResultIsFault, _osservicesLib, "WSMethodResultIsFault") })
-	_register("WSProtocolHandlerCopyFaultDocument", func() { purego.RegisterLibFunc(&_fnWSProtocolHandlerCopyFaultDocument, _osservicesLib, "WSProtocolHandlerCopyFaultDocument") })
-	_register("WSProtocolHandlerCopyProperty", func() { purego.RegisterLibFunc(&_fnWSProtocolHandlerCopyProperty, _osservicesLib, "WSProtocolHandlerCopyProperty") })
-	_register("WSProtocolHandlerCopyReplyDictionary", func() { purego.RegisterLibFunc(&_fnWSProtocolHandlerCopyReplyDictionary, _osservicesLib, "WSProtocolHandlerCopyReplyDictionary") })
-	_register("WSProtocolHandlerCopyReplyDocument", func() { purego.RegisterLibFunc(&_fnWSProtocolHandlerCopyReplyDocument, _osservicesLib, "WSProtocolHandlerCopyReplyDocument") })
-	_register("WSProtocolHandlerCopyRequestDictionary", func() { purego.RegisterLibFunc(&_fnWSProtocolHandlerCopyRequestDictionary, _osservicesLib, "WSProtocolHandlerCopyRequestDictionary") })
-	_register("WSProtocolHandlerCopyRequestDocument", func() { purego.RegisterLibFunc(&_fnWSProtocolHandlerCopyRequestDocument, _osservicesLib, "WSProtocolHandlerCopyRequestDocument") })
+	_register("WSProtocolHandlerCopyFaultDocument", func() {
+		purego.RegisterLibFunc(&_fnWSProtocolHandlerCopyFaultDocument, _osservicesLib, "WSProtocolHandlerCopyFaultDocument")
+	})
+	_register("WSProtocolHandlerCopyProperty", func() {
+		purego.RegisterLibFunc(&_fnWSProtocolHandlerCopyProperty, _osservicesLib, "WSProtocolHandlerCopyProperty")
+	})
+	_register("WSProtocolHandlerCopyReplyDictionary", func() {
+		purego.RegisterLibFunc(&_fnWSProtocolHandlerCopyReplyDictionary, _osservicesLib, "WSProtocolHandlerCopyReplyDictionary")
+	})
+	_register("WSProtocolHandlerCopyReplyDocument", func() {
+		purego.RegisterLibFunc(&_fnWSProtocolHandlerCopyReplyDocument, _osservicesLib, "WSProtocolHandlerCopyReplyDocument")
+	})
+	_register("WSProtocolHandlerCopyRequestDictionary", func() {
+		purego.RegisterLibFunc(&_fnWSProtocolHandlerCopyRequestDictionary, _osservicesLib, "WSProtocolHandlerCopyRequestDictionary")
+	})
+	_register("WSProtocolHandlerCopyRequestDocument", func() {
+		purego.RegisterLibFunc(&_fnWSProtocolHandlerCopyRequestDocument, _osservicesLib, "WSProtocolHandlerCopyRequestDocument")
+	})
 	_register("WSProtocolHandlerCreate", func() { purego.RegisterLibFunc(&_fnWSProtocolHandlerCreate, _osservicesLib, "WSProtocolHandlerCreate") })
-	_register("WSProtocolHandlerGetTypeID", func() { purego.RegisterLibFunc(&_fnWSProtocolHandlerGetTypeID, _osservicesLib, "WSProtocolHandlerGetTypeID") })
-	_register("WSProtocolHandlerSetDeserializationOverride", func() { purego.RegisterLibFunc(&_fnWSProtocolHandlerSetDeserializationOverride, _osservicesLib, "WSProtocolHandlerSetDeserializationOverride") })
-	_register("WSProtocolHandlerSetProperty", func() { purego.RegisterLibFunc(&_fnWSProtocolHandlerSetProperty, _osservicesLib, "WSProtocolHandlerSetProperty") })
-	_register("WSProtocolHandlerSetSerializationOverride", func() { purego.RegisterLibFunc(&_fnWSProtocolHandlerSetSerializationOverride, _osservicesLib, "WSProtocolHandlerSetSerializationOverride") })
+	_register("WSProtocolHandlerGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnWSProtocolHandlerGetTypeID, _osservicesLib, "WSProtocolHandlerGetTypeID")
+	})
+	_register("WSProtocolHandlerSetDeserializationOverride", func() {
+		purego.RegisterLibFunc(&_fnWSProtocolHandlerSetDeserializationOverride, _osservicesLib, "WSProtocolHandlerSetDeserializationOverride")
+	})
+	_register("WSProtocolHandlerSetProperty", func() {
+		purego.RegisterLibFunc(&_fnWSProtocolHandlerSetProperty, _osservicesLib, "WSProtocolHandlerSetProperty")
+	})
+	_register("WSProtocolHandlerSetSerializationOverride", func() {
+		purego.RegisterLibFunc(&_fnWSProtocolHandlerSetSerializationOverride, _osservicesLib, "WSProtocolHandlerSetSerializationOverride")
+	})
 	_register("kcfindapplesharepassword", func() { purego.RegisterLibFunc(&_kcfindapplesharepassword, _osservicesLib, "kcfindapplesharepassword") })
 	_register("kcfindgenericpassword", func() { purego.RegisterLibFunc(&_kcfindgenericpassword, _osservicesLib, "kcfindgenericpassword") })
 	_register("kcfindinternetpassword", func() { purego.RegisterLibFunc(&_kcfindinternetpassword, _osservicesLib, "kcfindinternetpassword") })
-	_register("kcfindinternetpasswordwithpath", func() { purego.RegisterLibFunc(&_kcfindinternetpasswordwithpath, _osservicesLib, "kcfindinternetpasswordwithpath") })
+	_register("kcfindinternetpasswordwithpath", func() {
+		purego.RegisterLibFunc(&_kcfindinternetpasswordwithpath, _osservicesLib, "kcfindinternetpasswordwithpath")
+	})
 	_register("kcgetkeychainname", func() { purego.RegisterLibFunc(&_kcgetkeychainname, _osservicesLib, "kcgetkeychainname") })
 }
 

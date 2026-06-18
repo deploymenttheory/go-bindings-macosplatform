@@ -15,8 +15,8 @@ type NSSpecifierTest struct {
 }
 
 var (
-	_clsNSSpecifierTest = _objcClass("NSSpecifierTest")
-	_nSSpecifierTestSelInitWithCoder = objc.RegisterName("initWithCoder:")
+	_clsNSSpecifierTest                                                    = _objcClass("NSSpecifierTest")
+	_nSSpecifierTestSelInitWithCoder                                       = objc.RegisterName("initWithCoder:")
 	_nSSpecifierTestSelInitWithObjectSpecifierComparisonOperatorTestObject = objc.RegisterName("initWithObjectSpecifier:comparisonOperator:testObject:")
 )
 
@@ -32,13 +32,16 @@ func NSSpecifierTestFromID(id objc.ID) *NSSpecifierTest {
 
 func (o *NSSpecifierTest) InitWithCoder(inCoder *NSCoder) *NSSpecifierTest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSpecifierTestSelInitWithCoder, inCoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSpecifierTestFromID(_ret)
 }
 
 func (o *NSSpecifierTest) InitWithObjectSpecifierComparisonOperatorTestObject(obj1 *NSScriptObjectSpecifier, compOp NSTestComparisonOperation, obj2 objc.ID) *NSSpecifierTest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSpecifierTestSelInitWithObjectSpecifierComparisonOperatorTestObject, obj1.Ptr(), compOp, obj2)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSpecifierTestFromID(_ret)
 }
-

@@ -17,22 +17,22 @@ type MPSNNNeuronDescriptor struct {
 }
 
 var (
-	_clsMPSNNNeuronDescriptor = _objcClass("MPSNNNeuronDescriptor")
-	_mPSNNNeuronDescriptorSelCnnNeuronDescriptorWithType = objc.RegisterName("cnnNeuronDescriptorWithType:")
-	_mPSNNNeuronDescriptorSelCnnNeuronDescriptorWithTypeA = objc.RegisterName("cnnNeuronDescriptorWithType:a:")
-	_mPSNNNeuronDescriptorSelCnnNeuronDescriptorWithTypeAB = objc.RegisterName("cnnNeuronDescriptorWithType:a:b:")
-	_mPSNNNeuronDescriptorSelCnnNeuronDescriptorWithTypeABC = objc.RegisterName("cnnNeuronDescriptorWithType:a:b:c:")
+	_clsMPSNNNeuronDescriptor                                       = _objcClass("MPSNNNeuronDescriptor")
+	_mPSNNNeuronDescriptorSelCnnNeuronDescriptorWithType            = objc.RegisterName("cnnNeuronDescriptorWithType:")
+	_mPSNNNeuronDescriptorSelCnnNeuronDescriptorWithTypeA           = objc.RegisterName("cnnNeuronDescriptorWithType:a:")
+	_mPSNNNeuronDescriptorSelCnnNeuronDescriptorWithTypeAB          = objc.RegisterName("cnnNeuronDescriptorWithType:a:b:")
+	_mPSNNNeuronDescriptorSelCnnNeuronDescriptorWithTypeABC         = objc.RegisterName("cnnNeuronDescriptorWithType:a:b:c:")
 	_mPSNNNeuronDescriptorSelCnnNeuronPReLUDescriptorWithDataNoCopy = objc.RegisterName("cnnNeuronPReLUDescriptorWithData:noCopy:")
-	_mPSNNNeuronDescriptorSelNeuronType = objc.RegisterName("neuronType")
-	_mPSNNNeuronDescriptorSelSetNeuronType = objc.RegisterName("setNeuronType:")
-	_mPSNNNeuronDescriptorSelA = objc.RegisterName("a")
-	_mPSNNNeuronDescriptorSelSetA = objc.RegisterName("setA:")
-	_mPSNNNeuronDescriptorSelB = objc.RegisterName("b")
-	_mPSNNNeuronDescriptorSelSetB = objc.RegisterName("setB:")
-	_mPSNNNeuronDescriptorSelC = objc.RegisterName("c")
-	_mPSNNNeuronDescriptorSelSetC = objc.RegisterName("setC:")
-	_mPSNNNeuronDescriptorSelData = objc.RegisterName("data")
-	_mPSNNNeuronDescriptorSelSetData = objc.RegisterName("setData:")
+	_mPSNNNeuronDescriptorSelNeuronType                             = objc.RegisterName("neuronType")
+	_mPSNNNeuronDescriptorSelSetNeuronType                          = objc.RegisterName("setNeuronType:")
+	_mPSNNNeuronDescriptorSelA                                      = objc.RegisterName("a")
+	_mPSNNNeuronDescriptorSelSetA                                   = objc.RegisterName("setA:")
+	_mPSNNNeuronDescriptorSelB                                      = objc.RegisterName("b")
+	_mPSNNNeuronDescriptorSelSetB                                   = objc.RegisterName("setB:")
+	_mPSNNNeuronDescriptorSelC                                      = objc.RegisterName("c")
+	_mPSNNNeuronDescriptorSelSetC                                   = objc.RegisterName("setC:")
+	_mPSNNNeuronDescriptorSelData                                   = objc.RegisterName("data")
+	_mPSNNNeuronDescriptorSelSetData                                = objc.RegisterName("setData:")
 )
 
 func MPSNNNeuronDescriptorFromID(id objc.ID) *MPSNNNeuronDescriptor {
@@ -48,35 +48,45 @@ func MPSNNNeuronDescriptorFromID(id objc.ID) *MPSNNNeuronDescriptor {
 // @abstract  Make a descriptor for a MPSCNNNeuron object. @param     neuronType           The type of a neuron filter. @return    A valid MPSNNNeuronDescriptor object or nil, if failure.
 func MPSNNNeuronDescriptorCnnNeuronDescriptorWithType(neuronType mpsneuralnetwork.MPSCNNNeuronType) *mpsneuralnetwork.MPSNNNeuronDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNNeuronDescriptor), _mPSNNNeuronDescriptorSelCnnNeuronDescriptorWithType, neuronType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsneuralnetwork.MPSNNNeuronDescriptorFromID(_ret)
 }
 
 // @abstract  Make a descriptor for a MPSCNNNeuron object. @param     neuronType           The type of a neuron filter. @param     a                    Parameter "a". @return    A valid MPSNNNeuronDescriptor object or nil, if failure.
 func MPSNNNeuronDescriptorCnnNeuronDescriptorWithTypeA(neuronType mpsneuralnetwork.MPSCNNNeuronType, a float32) *mpsneuralnetwork.MPSNNNeuronDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNNeuronDescriptor), _mPSNNNeuronDescriptorSelCnnNeuronDescriptorWithTypeA, neuronType, a)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsneuralnetwork.MPSNNNeuronDescriptorFromID(_ret)
 }
 
 // @abstract  Initialize the neuron descriptor. @param     neuronType           The type of a neuron filter. @param     a                    Parameter "a". @param     b                    Parameter "b". @return    A valid MPSNNNeuronDescriptor object or nil, if failure.
 func MPSNNNeuronDescriptorCnnNeuronDescriptorWithTypeAB(neuronType mpsneuralnetwork.MPSCNNNeuronType, a float32, b float32) *mpsneuralnetwork.MPSNNNeuronDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNNeuronDescriptor), _mPSNNNeuronDescriptorSelCnnNeuronDescriptorWithTypeAB, neuronType, a, b)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsneuralnetwork.MPSNNNeuronDescriptorFromID(_ret)
 }
 
 // @abstract  Make a descriptor for a MPSCNNNeuron object. @param     neuronType           The type of a neuron filter. @param     a                    Parameter "a". @param     b                    Parameter "b". @param     c                    Parameter "c". @return    A valid MPSNNNeuronDescriptor object or nil, if failure.
 func MPSNNNeuronDescriptorCnnNeuronDescriptorWithTypeABC(neuronType mpsneuralnetwork.MPSCNNNeuronType, a float32, b float32, c float32) *mpsneuralnetwork.MPSNNNeuronDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNNeuronDescriptor), _mPSNNNeuronDescriptorSelCnnNeuronDescriptorWithTypeABC, neuronType, a, b, c)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsneuralnetwork.MPSNNNeuronDescriptorFromID(_ret)
 }
 
 // @abstract   Make a descriptor for a neuron of type MPSCNNNeuronTypePReLU. @discussion The PReLU neuron is the same as a ReLU neuron, except parameter "a" is per feature channel. @param      data                A NSData containing a float array with the per feature channel value of PReLu parameter. The number of float values in this array usually corresponds to number of output channels in a convolution layer. The descriptor retains the NSData object. @param      noCopy              An optimization flag that tells us whether the NSData allocation is suitable for use directly with no copying of the data into internal storage. This allocation has to match the same restrictions as listed for the newBufferWithBytesNoCopy:length:options:deallocator: method of MTLBuffer. @return     A valid MPSNNNeuronDescriptor object for a neuron of type MPSCNNNeuronTypePReLU or nil, if failure
 func MPSNNNeuronDescriptorCnnNeuronPReLUDescriptorWithDataNoCopy(data *foundation.NSData, noCopy bool) *mpsneuralnetwork.MPSNNNeuronDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNNeuronDescriptor), _mPSNNNeuronDescriptorSelCnnNeuronPReLUDescriptorWithDataNoCopy, data.Ptr(), noCopy)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsneuralnetwork.MPSNNNeuronDescriptorFromID(_ret)
 }
 
@@ -118,11 +128,12 @@ func (o *MPSNNNeuronDescriptor) SetC(c float32) {
 
 func (o *MPSNNNeuronDescriptor) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNNeuronDescriptorSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *MPSNNNeuronDescriptor) SetData(data *foundation.NSData) {
 	o.Ptr().Send(_mPSNNNeuronDescriptorSelSetData, data.Ptr())
 }
-

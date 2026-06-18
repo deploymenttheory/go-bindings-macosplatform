@@ -180,4 +180,3 @@ type NotificationContentable interface {
 }
 
 var _ NotificationContentable = (*NotificationContent)(nil)
-

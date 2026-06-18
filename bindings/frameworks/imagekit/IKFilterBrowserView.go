@@ -17,9 +17,9 @@ type IKFilterBrowserView struct {
 }
 
 var (
-	_clsIKFilterBrowserView = _objcClass("IKFilterBrowserView")
+	_clsIKFilterBrowserView                = _objcClass("IKFilterBrowserView")
 	_iKFilterBrowserViewSelSetPreviewState = objc.RegisterName("setPreviewState:")
-	_iKFilterBrowserViewSelFilterName = objc.RegisterName("filterName")
+	_iKFilterBrowserViewSelFilterName      = objc.RegisterName("filterName")
 )
 
 func IKFilterBrowserViewFromID(id objc.ID) *IKFilterBrowserView {
@@ -40,7 +40,8 @@ func (o *IKFilterBrowserView) SetPreviewState(inState bool) {
 // @method     filterName @abstract   Returns the name of the currently selected filter. @discussion Use this method in response to a IKFilterBrowserFilterSelectedNotification or IKFilterBrowserFilterDoubleClickNotification or afer returning from a modal session.
 func (o *IKFilterBrowserView) FilterName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKFilterBrowserViewSelFilterName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

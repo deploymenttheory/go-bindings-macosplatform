@@ -14,56 +14,74 @@ import (
 // The error domain for specific errors for ShazamKit.
 func SHErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_shazamkitLib, "SHErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SHMediaItemAppleMusicID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_shazamkitLib, "SHMediaItemAppleMusicID")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SHMediaItemAppleMusicURL() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_shazamkitLib, "SHMediaItemAppleMusicURL")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SHMediaItemArtist() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_shazamkitLib, "SHMediaItemArtist")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SHMediaItemArtworkURL() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_shazamkitLib, "SHMediaItemArtworkURL")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SHMediaItemConfidence() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_shazamkitLib, "SHMediaItemConfidence")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // The date when the media item was created
 func SHMediaItemCreationDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_shazamkitLib, "SHMediaItemCreationDate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SHMediaItemExplicitContent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_shazamkitLib, "SHMediaItemExplicitContent")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SHMediaItemFrequencySkew() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_shazamkitLib, "SHMediaItemFrequencySkew")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -75,31 +93,41 @@ func SHMediaItemFrequencySkewRanges() uintptr {
 
 func SHMediaItemGenres() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_shazamkitLib, "SHMediaItemGenres")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SHMediaItemISRC() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_shazamkitLib, "SHMediaItemISRC")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SHMediaItemMatchOffset() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_shazamkitLib, "SHMediaItemMatchOffset")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SHMediaItemShazamID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_shazamkitLib, "SHMediaItemShazamID")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SHMediaItemSubtitle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_shazamkitLib, "SHMediaItemSubtitle")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -111,19 +139,24 @@ func SHMediaItemTimeRanges() uintptr {
 
 func SHMediaItemTitle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_shazamkitLib, "SHMediaItemTitle")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SHMediaItemVideoURL() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_shazamkitLib, "SHMediaItemVideoURL")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SHMediaItemWebURL() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_shazamkitLib, "SHMediaItemWebURL")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
-

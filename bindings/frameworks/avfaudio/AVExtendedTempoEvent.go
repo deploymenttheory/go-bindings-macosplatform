@@ -15,10 +15,10 @@ type AVExtendedTempoEvent struct {
 }
 
 var (
-	_clsAVExtendedTempoEvent = _objcClass("AVExtendedTempoEvent")
+	_clsAVExtendedTempoEvent              = _objcClass("AVExtendedTempoEvent")
 	_aVExtendedTempoEventSelInitWithTempo = objc.RegisterName("initWithTempo:")
-	_aVExtendedTempoEventSelTempo = objc.RegisterName("tempo")
-	_aVExtendedTempoEventSelSetTempo = objc.RegisterName("setTempo:")
+	_aVExtendedTempoEventSelTempo         = objc.RegisterName("tempo")
+	_aVExtendedTempoEventSelSetTempo      = objc.RegisterName("setTempo:")
 )
 
 func AVExtendedTempoEventFromID(id objc.ID) *AVExtendedTempoEvent {
@@ -34,7 +34,9 @@ func AVExtendedTempoEventFromID(id objc.ID) *AVExtendedTempoEvent {
 // @method initWithTempo: @abstract Initialize the event tempo. @param tempo The new tempo in beats-per-minute.  Range:  Any positive value. The new tempo will begin at the timestamp for this event.
 func (o *AVExtendedTempoEvent) InitWithTempo(tempo float64) *AVExtendedTempoEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVExtendedTempoEventSelInitWithTempo, tempo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVExtendedTempoEventFromID(_ret)
 }
 
@@ -46,4 +48,3 @@ func (o *AVExtendedTempoEvent) Tempo() float64 {
 func (o *AVExtendedTempoEvent) SetTempo(tempo float64) {
 	o.Ptr().Send(_aVExtendedTempoEventSelSetTempo, tempo)
 }
-

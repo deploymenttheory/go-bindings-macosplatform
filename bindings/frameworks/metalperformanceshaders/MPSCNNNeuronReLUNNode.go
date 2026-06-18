@@ -18,11 +18,11 @@ type MPSCNNNeuronReLUNNode struct {
 }
 
 var (
-	_clsMPSCNNNeuronReLUNNode = _objcClass("MPSCNNNeuronReLUNNode")
+	_clsMPSCNNNeuronReLUNNode                 = _objcClass("MPSCNNNeuronReLUNNode")
 	_mPSCNNNeuronReLUNNodeSelNodeWithSourceAB = objc.RegisterName("nodeWithSource:a:b:")
 	_mPSCNNNeuronReLUNNodeSelInitWithSourceAB = objc.RegisterName("initWithSource:a:b:")
-	_mPSCNNNeuronReLUNNodeSelNodeWithSource = objc.RegisterName("nodeWithSource:")
-	_mPSCNNNeuronReLUNNodeSelInitWithSource = objc.RegisterName("initWithSource:")
+	_mPSCNNNeuronReLUNNodeSelNodeWithSource   = objc.RegisterName("nodeWithSource:")
+	_mPSCNNNeuronReLUNNodeSelInitWithSource   = objc.RegisterName("initWithSource:")
 )
 
 func MPSCNNNeuronReLUNNodeFromID(id objc.ID) *MPSCNNNeuronReLUNNode {
@@ -37,27 +37,34 @@ func MPSCNNNeuronReLUNNodeFromID(id objc.ID) *MPSCNNNeuronReLUNNode {
 
 func MPSCNNNeuronReLUNNodeNodeWithSourceAB(sourceNode *mpsneuralnetwork.MPSNNImageNode, a float32, b float32) *MPSCNNNeuronReLUNNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNNeuronReLUNNode), _mPSCNNNeuronReLUNNodeSelNodeWithSourceAB, sourceNode.Ptr(), a, b)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronReLUNNodeFromID(_ret)
 }
 
 func (o *MPSCNNNeuronReLUNNode) InitWithSourceAB(sourceNode *mpsneuralnetwork.MPSNNImageNode, a float32, b float32) *MPSCNNNeuronReLUNNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronReLUNNodeSelInitWithSourceAB, sourceNode.Ptr(), a, b)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronReLUNNodeFromID(_ret)
 }
 
 // @abstract Create an autoreleased node with default values for parameters a & b
 func MPSCNNNeuronReLUNNodeNodeWithSource(sourceNode *mpsneuralnetwork.MPSNNImageNode) *MPSCNNNeuronReLUNNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNNeuronReLUNNode), _mPSCNNNeuronReLUNNodeSelNodeWithSource, sourceNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronReLUNNodeFromID(_ret)
 }
 
 // @abstract Create an autoreleased node with default values for parameters a & b
 func (o *MPSCNNNeuronReLUNNode) InitWithSource(sourceNode *mpsneuralnetwork.MPSNNImageNode) *MPSCNNNeuronReLUNNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronReLUNNodeSelInitWithSource, sourceNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronReLUNNodeFromID(_ret)
 }
-

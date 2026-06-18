@@ -102,7 +102,9 @@ func (x *NNReduceRowMax) WithDestinationImageAllocator(destinationImageAllocator
 
 func (x *NNReduceRowMax) asNNReduceUnary() *raw.MPSNNReduceUnary { return &x.inner.MPSNNReduceUnary }
 
-func (x *NNReduceRowMax) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
+func (x *NNReduceRowMax) asCNNKernel() *raw.MPSCNNKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel
+}
 
 // NNReduceRowMaxable is the interface implemented by [NNReduceRowMax], for mocking and DI.
 type NNReduceRowMaxable interface {
@@ -119,4 +121,3 @@ type NNReduceRowMaxable interface {
 }
 
 var _ NNReduceRowMaxable = (*NNReduceRowMax)(nil)
-

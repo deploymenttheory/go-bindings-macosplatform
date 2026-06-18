@@ -110,9 +110,13 @@ func (x *MTRClusterIdentify) TriggerEffectWithParamsExpectedValuesExpectedValueI
 	x.inner.TriggerEffectWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
 }
 
-func (x *MTRClusterIdentify) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterIdentify) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterIdentify) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterIdentify) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterIdentifyable is the interface implemented by [MTRClusterIdentify], for mocking and DI.
 type MTRClusterIdentifyable interface {
@@ -133,4 +137,3 @@ type MTRClusterIdentifyable interface {
 }
 
 var _ MTRClusterIdentifyable = (*MTRClusterIdentify)(nil)
-

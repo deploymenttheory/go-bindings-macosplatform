@@ -19,17 +19,17 @@ type MPSNNPad struct {
 }
 
 var (
-	_clsMPSNNPad = _objcClass("MPSNNPad")
-	_mPSNNPadSelInitWithDevice = objc.RegisterName("initWithDevice:")
-	_mPSNNPadSelInitWithDevicePaddingSizeBeforePaddingSizeAfter = objc.RegisterName("initWithDevice:paddingSizeBefore:paddingSizeAfter:")
+	_clsMPSNNPad                                                              = _objcClass("MPSNNPad")
+	_mPSNNPadSelInitWithDevice                                                = objc.RegisterName("initWithDevice:")
+	_mPSNNPadSelInitWithDevicePaddingSizeBeforePaddingSizeAfter               = objc.RegisterName("initWithDevice:paddingSizeBefore:paddingSizeAfter:")
 	_mPSNNPadSelInitWithDevicePaddingSizeBeforePaddingSizeAfterFillValueArray = objc.RegisterName("initWithDevice:paddingSizeBefore:paddingSizeAfter:fillValueArray:")
-	_mPSNNPadSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSNNPadSelPaddingSizeBefore = objc.RegisterName("paddingSizeBefore")
-	_mPSNNPadSelSetPaddingSizeBefore = objc.RegisterName("setPaddingSizeBefore:")
-	_mPSNNPadSelPaddingSizeAfter = objc.RegisterName("paddingSizeAfter")
-	_mPSNNPadSelSetPaddingSizeAfter = objc.RegisterName("setPaddingSizeAfter:")
-	_mPSNNPadSelFillValue = objc.RegisterName("fillValue")
-	_mPSNNPadSelSetFillValue = objc.RegisterName("setFillValue:")
+	_mPSNNPadSelInitWithCoderDevice                                           = objc.RegisterName("initWithCoder:device:")
+	_mPSNNPadSelPaddingSizeBefore                                             = objc.RegisterName("paddingSizeBefore")
+	_mPSNNPadSelSetPaddingSizeBefore                                          = objc.RegisterName("setPaddingSizeBefore:")
+	_mPSNNPadSelPaddingSizeAfter                                              = objc.RegisterName("paddingSizeAfter")
+	_mPSNNPadSelSetPaddingSizeAfter                                           = objc.RegisterName("setPaddingSizeAfter:")
+	_mPSNNPadSelFillValue                                                     = objc.RegisterName("fillValue")
+	_mPSNNPadSelSetFillValue                                                  = objc.RegisterName("setFillValue:")
 )
 
 func MPSNNPadFromID(id objc.ID) *MPSNNPad {
@@ -44,25 +44,33 @@ func MPSNNPadFromID(id objc.ID) *MPSNNPad {
 
 func (o *MPSNNPad) InitWithDevice(device metal.MTLDevice) *MPSNNPad {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNPadSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNPadFromID(_ret)
 }
 
 func (o *MPSNNPad) InitWithDevicePaddingSizeBeforePaddingSizeAfter(device metal.MTLDevice, paddingSizeBefore mpscore.MPSImageCoordinate, paddingSizeAfter mpscore.MPSImageCoordinate) *MPSNNPad {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNPadSelInitWithDevicePaddingSizeBeforePaddingSizeAfter, device, paddingSizeBefore, paddingSizeAfter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNPadFromID(_ret)
 }
 
 func (o *MPSNNPad) InitWithDevicePaddingSizeBeforePaddingSizeAfterFillValueArray(device metal.MTLDevice, paddingSizeBefore mpscore.MPSImageCoordinate, paddingSizeAfter mpscore.MPSImageCoordinate, fillValueArray *foundation.NSData) *MPSNNPad {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNPadSelInitWithDevicePaddingSizeBeforePaddingSizeAfterFillValueArray, device, paddingSizeBefore, paddingSizeAfter, fillValueArray.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNPadFromID(_ret)
 }
 
 func (o *MPSNNPad) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSNNPad {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNPadSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNPadFromID(_ret)
 }
 
@@ -95,4 +103,3 @@ func (o *MPSNNPad) FillValue() float32 {
 func (o *MPSNNPad) SetFillValue(fillValue float32) {
 	o.Ptr().Send(_mPSNNPadSelSetFillValue, fillValue)
 }
-

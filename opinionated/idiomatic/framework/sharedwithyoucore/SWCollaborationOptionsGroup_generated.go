@@ -58,7 +58,9 @@ func (x *CollaborationOptionsGroup) WithOptions(items ...*raw.SWCollaborationOpt
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.SWCollaborationOption](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -120,7 +122,9 @@ func (x *CollaborationOptionsGroup) SetOptions(options *foundation.NSArray[*raw.
 	x.inner.SetOptions(options)
 }
 
-func (x *CollaborationOptionsGroup) asCollaborationOptionsGroup() *raw.SWCollaborationOptionsGroup { return x.inner }
+func (x *CollaborationOptionsGroup) asCollaborationOptionsGroup() *raw.SWCollaborationOptionsGroup {
+	return x.inner
+}
 
 // CollaborationOptionsGroupable is the interface implemented by [CollaborationOptionsGroup], for mocking and DI.
 type CollaborationOptionsGroupable interface {
@@ -138,4 +142,3 @@ type CollaborationOptionsGroupable interface {
 }
 
 var _ CollaborationOptionsGroupable = (*CollaborationOptionsGroup)(nil)
-

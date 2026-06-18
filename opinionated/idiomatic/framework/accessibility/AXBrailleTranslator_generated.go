@@ -63,4 +63,3 @@ type BrailleTranslatorable interface {
 }
 
 var _ BrailleTranslatorable = (*BrailleTranslator)(nil)
-

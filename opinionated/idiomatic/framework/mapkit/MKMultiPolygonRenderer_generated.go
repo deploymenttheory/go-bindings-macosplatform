@@ -89,7 +89,9 @@ func (x *MultiPolygonRenderer) WithLineDashPattern(items ...*foundation.NSNumber
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -119,9 +121,13 @@ func (x *MultiPolygonRenderer) MultiPolygon() *MultiPolygon {
 	return &MultiPolygon{inner: _r}
 }
 
-func (x *MultiPolygonRenderer) asOverlayPathRenderer() *raw.MKOverlayPathRenderer { return &x.inner.MKOverlayPathRenderer }
+func (x *MultiPolygonRenderer) asOverlayPathRenderer() *raw.MKOverlayPathRenderer {
+	return &x.inner.MKOverlayPathRenderer
+}
 
-func (x *MultiPolygonRenderer) asOverlayRenderer() *raw.MKOverlayRenderer { return &x.inner.MKOverlayPathRenderer.MKOverlayRenderer }
+func (x *MultiPolygonRenderer) asOverlayRenderer() *raw.MKOverlayRenderer {
+	return &x.inner.MKOverlayPathRenderer.MKOverlayRenderer
+}
 
 // MultiPolygonRendererable is the interface implemented by [MultiPolygonRenderer], for mocking and DI.
 type MultiPolygonRendererable interface {
@@ -140,4 +146,3 @@ type MultiPolygonRendererable interface {
 }
 
 var _ MultiPolygonRendererable = (*MultiPolygonRenderer)(nil)
-

@@ -25,4 +25,3 @@ func PKInstantFundsOutFeeSummaryItemFromID(id objc.ID) *PKInstantFundsOutFeeSumm
 	purego.Track(o)
 	return o
 }
-

@@ -19,7 +19,9 @@ type MTRBaseClusterMicrowaveOvenControl struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterMicrowaveOvenControl].
-func (x *MTRBaseClusterMicrowaveOvenControl) Unwrap() *raw.MTRBaseClusterMicrowaveOvenControl { return x.inner }
+func (x *MTRBaseClusterMicrowaveOvenControl) Unwrap() *raw.MTRBaseClusterMicrowaveOvenControl {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -517,9 +519,13 @@ func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeClusterRevisionWi
 	}
 }
 
-func (x *MTRBaseClusterMicrowaveOvenControl) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterMicrowaveOvenControl) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterMicrowaveOvenControl) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterMicrowaveOvenControl) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterMicrowaveOvenControlable is the interface implemented by [MTRBaseClusterMicrowaveOvenControl], for mocking and DI.
 type MTRBaseClusterMicrowaveOvenControlable interface {
@@ -554,4 +560,3 @@ type MTRBaseClusterMicrowaveOvenControlable interface {
 }
 
 var _ MTRBaseClusterMicrowaveOvenControlable = (*MTRBaseClusterMicrowaveOvenControl)(nil)
-

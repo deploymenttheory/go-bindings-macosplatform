@@ -82,4 +82,3 @@ type CachingImageManagerable interface {
 }
 
 var _ CachingImageManagerable = (*CachingImageManager)(nil)
-

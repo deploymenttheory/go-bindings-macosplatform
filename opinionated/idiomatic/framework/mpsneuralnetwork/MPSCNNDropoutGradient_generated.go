@@ -169,9 +169,13 @@ func (x *CNNDropoutGradient) MaskStrideInPixels() metal.MTLSize {
 	return x.inner.MaskStrideInPixels()
 }
 
-func (x *CNNDropoutGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
+func (x *CNNDropoutGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNGradientKernel
+}
 
-func (x *CNNDropoutGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *CNNDropoutGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
 // CNNDropoutGradientable is the interface implemented by [CNNDropoutGradient], for mocking and DI.
 type CNNDropoutGradientable interface {
@@ -200,4 +204,3 @@ type CNNDropoutGradientable interface {
 }
 
 var _ CNNDropoutGradientable = (*CNNDropoutGradient)(nil)
-

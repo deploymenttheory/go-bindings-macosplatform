@@ -15,7 +15,7 @@ type CKSyncEngineStateUpdateEvent struct {
 }
 
 var (
-	_clsCKSyncEngineStateUpdateEvent = _objcClass("CKSyncEngineStateUpdateEvent")
+	_clsCKSyncEngineStateUpdateEvent                   = _objcClass("CKSyncEngineStateUpdateEvent")
 	_cKSyncEngineStateUpdateEventSelStateSerialization = objc.RegisterName("stateSerialization")
 )
 
@@ -31,7 +31,8 @@ func CKSyncEngineStateUpdateEventFromID(id objc.ID) *CKSyncEngineStateUpdateEven
 
 func (o *CKSyncEngineStateUpdateEvent) StateSerialization() *CKSyncEngineStateSerialization {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineStateUpdateEventSelStateSerialization)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKSyncEngineStateSerializationFromID(_ret)
 }
-

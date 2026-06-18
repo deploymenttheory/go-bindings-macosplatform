@@ -18,9 +18,9 @@ type FSMutableFileDataBuffer struct {
 }
 
 var (
-	_clsFSMutableFileDataBuffer = _objcClass("FSMutableFileDataBuffer")
+	_clsFSMutableFileDataBuffer             = _objcClass("FSMutableFileDataBuffer")
 	_fSMutableFileDataBufferSelMutableBytes = objc.RegisterName("mutableBytes")
-	_fSMutableFileDataBufferSelLength = objc.RegisterName("length")
+	_fSMutableFileDataBufferSelLength       = objc.RegisterName("length")
 )
 
 func FSMutableFileDataBufferFromID(id objc.ID) *FSMutableFileDataBuffer {
@@ -44,4 +44,3 @@ func (o *FSMutableFileDataBuffer) Length() uint {
 	_ret := objc.Send[uint](o.Ptr(), _fSMutableFileDataBufferSelLength)
 	return _ret
 }
-

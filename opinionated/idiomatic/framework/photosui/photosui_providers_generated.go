@@ -12,4 +12,3 @@ import (
 type ProjectElementProvider interface {
 	asProjectElement() *raw.PHProjectElement
 }
-

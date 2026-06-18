@@ -17,9 +17,9 @@ type AUPannerView struct {
 }
 
 var (
-	_clsAUPannerView = _objcClass("AUPannerView")
+	_clsAUPannerView                          = _objcClass("AUPannerView")
 	_aUPannerViewSelAUPannerViewWithAudioUnit = objc.RegisterName("AUPannerViewWithAudioUnit:")
-	_aUPannerViewSelAudioUnit = objc.RegisterName("audioUnit")
+	_aUPannerViewSelAudioUnit                 = objc.RegisterName("audioUnit")
 )
 
 func AUPannerViewFromID(id objc.ID) *AUPannerView {
@@ -35,7 +35,9 @@ func AUPannerViewFromID(id objc.ID) *AUPannerView {
 // @method +AUPannerViewWithAudioUnit: @abstract Static constructor used to create the view @param au  The Panner Audio Unit associated with the view @result  Returns the newly created view object autoreleased or nil on error
 func AUPannerViewAUPannerViewWithAudioUnit(au *carboncore.ComponentInstanceRecord) *AUPannerView {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAUPannerView), _aUPannerViewSelAUPannerViewWithAudioUnit, au)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AUPannerViewFromID(_ret)
 }
 
@@ -44,4 +46,3 @@ func (o *AUPannerView) AudioUnit() *carboncore.ComponentInstanceRecord {
 	_ret := objc.Send[*carboncore.ComponentInstanceRecord](o.Ptr(), _aUPannerViewSelAudioUnit)
 	return _ret
 }
-

@@ -142,7 +142,9 @@ func (x *TextLayer) WithSublayers(items ...LayerProvider) *TextLayer {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asLayer().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asLayer().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.CALayer](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -392,7 +394,9 @@ func (x *TextLayer) WithConstraints(items ...*raw.CAConstraint) *TextLayer {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.CAConstraint](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -570,4 +574,3 @@ type TextLayerable interface {
 }
 
 var _ TextLayerable = (*TextLayer)(nil)
-

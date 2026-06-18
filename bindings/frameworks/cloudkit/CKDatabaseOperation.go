@@ -15,8 +15,8 @@ type CKDatabaseOperation struct {
 }
 
 var (
-	_clsCKDatabaseOperation = _objcClass("CKDatabaseOperation")
-	_cKDatabaseOperationSelDatabase = objc.RegisterName("database")
+	_clsCKDatabaseOperation            = _objcClass("CKDatabaseOperation")
+	_cKDatabaseOperationSelDatabase    = objc.RegisterName("database")
 	_cKDatabaseOperationSelSetDatabase = objc.RegisterName("setDatabase:")
 )
 
@@ -32,11 +32,12 @@ func CKDatabaseOperationFromID(id objc.ID) *CKDatabaseOperation {
 
 func (o *CKDatabaseOperation) Database() *CKDatabase {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKDatabaseOperationSelDatabase)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKDatabaseFromID(_ret)
 }
 
 func (o *CKDatabaseOperation) SetDatabase(database *CKDatabase) {
 	o.Ptr().Send(_cKDatabaseOperationSelSetDatabase, database.Ptr())
 }
-

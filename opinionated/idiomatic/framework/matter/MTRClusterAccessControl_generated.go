@@ -168,9 +168,13 @@ func (x *MTRClusterAccessControl) WriteAttributeAclWithValueExpectedValueInterva
 	x.inner.WriteAttributeAclWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
 }
 
-func (x *MTRClusterAccessControl) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterAccessControl) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterAccessControl) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterAccessControl) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterAccessControlable is the interface implemented by [MTRClusterAccessControl], for mocking and DI.
 type MTRClusterAccessControlable interface {
@@ -198,4 +202,3 @@ type MTRClusterAccessControlable interface {
 }
 
 var _ MTRClusterAccessControlable = (*MTRClusterAccessControl)(nil)
-

@@ -135,7 +135,9 @@ func (x *UserNotification) WithAdditionalActions(items ...*raw.NSUserNotificatio
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := raw.NSArrayFromID[*raw.NSUserNotificationAction](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -465,4 +467,3 @@ type UserNotificationable interface {
 }
 
 var _ UserNotificationable = (*UserNotification)(nil)
-

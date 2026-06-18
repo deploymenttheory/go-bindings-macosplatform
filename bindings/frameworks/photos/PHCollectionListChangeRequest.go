@@ -16,21 +16,21 @@ type PHCollectionListChangeRequest struct {
 }
 
 var (
-	_clsPHCollectionListChangeRequest = _objcClass("PHCollectionListChangeRequest")
-	_pHCollectionListChangeRequestSelCreationRequestForCollectionListWithTitle = objc.RegisterName("creationRequestForCollectionListWithTitle:")
-	_pHCollectionListChangeRequestSelDeleteCollectionLists = objc.RegisterName("deleteCollectionLists:")
-	_pHCollectionListChangeRequestSelChangeRequestForCollectionList = objc.RegisterName("changeRequestForCollectionList:")
-	_pHCollectionListChangeRequestSelChangeRequestForCollectionListChildCollections = objc.RegisterName("changeRequestForCollectionList:childCollections:")
+	_clsPHCollectionListChangeRequest                                                      = _objcClass("PHCollectionListChangeRequest")
+	_pHCollectionListChangeRequestSelCreationRequestForCollectionListWithTitle             = objc.RegisterName("creationRequestForCollectionListWithTitle:")
+	_pHCollectionListChangeRequestSelDeleteCollectionLists                                 = objc.RegisterName("deleteCollectionLists:")
+	_pHCollectionListChangeRequestSelChangeRequestForCollectionList                        = objc.RegisterName("changeRequestForCollectionList:")
+	_pHCollectionListChangeRequestSelChangeRequestForCollectionListChildCollections        = objc.RegisterName("changeRequestForCollectionList:childCollections:")
 	_pHCollectionListChangeRequestSelChangeRequestForTopLevelCollectionListUserCollections = objc.RegisterName("changeRequestForTopLevelCollectionListUserCollections:")
-	_pHCollectionListChangeRequestSelAddChildCollections = objc.RegisterName("addChildCollections:")
-	_pHCollectionListChangeRequestSelInsertChildCollectionsAtIndexes = objc.RegisterName("insertChildCollections:atIndexes:")
-	_pHCollectionListChangeRequestSelRemoveChildCollections = objc.RegisterName("removeChildCollections:")
-	_pHCollectionListChangeRequestSelRemoveChildCollectionsAtIndexes = objc.RegisterName("removeChildCollectionsAtIndexes:")
-	_pHCollectionListChangeRequestSelReplaceChildCollectionsAtIndexesWithChildCollections = objc.RegisterName("replaceChildCollectionsAtIndexes:withChildCollections:")
-	_pHCollectionListChangeRequestSelMoveChildCollectionsAtIndexesToIndex = objc.RegisterName("moveChildCollectionsAtIndexes:toIndex:")
-	_pHCollectionListChangeRequestSelPlaceholderForCreatedCollectionList = objc.RegisterName("placeholderForCreatedCollectionList")
-	_pHCollectionListChangeRequestSelTitle = objc.RegisterName("title")
-	_pHCollectionListChangeRequestSelSetTitle = objc.RegisterName("setTitle:")
+	_pHCollectionListChangeRequestSelAddChildCollections                                   = objc.RegisterName("addChildCollections:")
+	_pHCollectionListChangeRequestSelInsertChildCollectionsAtIndexes                       = objc.RegisterName("insertChildCollections:atIndexes:")
+	_pHCollectionListChangeRequestSelRemoveChildCollections                                = objc.RegisterName("removeChildCollections:")
+	_pHCollectionListChangeRequestSelRemoveChildCollectionsAtIndexes                       = objc.RegisterName("removeChildCollectionsAtIndexes:")
+	_pHCollectionListChangeRequestSelReplaceChildCollectionsAtIndexesWithChildCollections  = objc.RegisterName("replaceChildCollectionsAtIndexes:withChildCollections:")
+	_pHCollectionListChangeRequestSelMoveChildCollectionsAtIndexesToIndex                  = objc.RegisterName("moveChildCollectionsAtIndexes:toIndex:")
+	_pHCollectionListChangeRequestSelPlaceholderForCreatedCollectionList                   = objc.RegisterName("placeholderForCreatedCollectionList")
+	_pHCollectionListChangeRequestSelTitle                                                 = objc.RegisterName("title")
+	_pHCollectionListChangeRequestSelSetTitle                                              = objc.RegisterName("setTitle:")
 )
 
 func PHCollectionListChangeRequestFromID(id objc.ID) *PHCollectionListChangeRequest {
@@ -45,7 +45,9 @@ func PHCollectionListChangeRequestFromID(id objc.ID) *PHCollectionListChangeRequ
 
 func PHCollectionListChangeRequestCreationRequestForCollectionListWithTitle(title *foundation.NSString) *PHCollectionListChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHCollectionListChangeRequest), _pHCollectionListChangeRequestSelCreationRequestForCollectionListWithTitle, title.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHCollectionListChangeRequestFromID(_ret)
 }
 
@@ -55,19 +57,25 @@ func PHCollectionListChangeRequestDeleteCollectionLists(collectionLists foundati
 
 func PHCollectionListChangeRequestChangeRequestForCollectionList(collectionList *PHCollectionList) *PHCollectionListChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHCollectionListChangeRequest), _pHCollectionListChangeRequestSelChangeRequestForCollectionList, collectionList.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHCollectionListChangeRequestFromID(_ret)
 }
 
 func PHCollectionListChangeRequestChangeRequestForCollectionListChildCollections(collectionList *PHCollectionList, childCollections *PHFetchResult[*PHCollection]) *PHCollectionListChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHCollectionListChangeRequest), _pHCollectionListChangeRequestSelChangeRequestForCollectionListChildCollections, collectionList.Ptr(), childCollections.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHCollectionListChangeRequestFromID(_ret)
 }
 
 func PHCollectionListChangeRequestChangeRequestForTopLevelCollectionListUserCollections(childCollections *PHFetchResult[*PHCollection]) *PHCollectionListChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHCollectionListChangeRequest), _pHCollectionListChangeRequestSelChangeRequestForTopLevelCollectionListUserCollections, childCollections.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHCollectionListChangeRequestFromID(_ret)
 }
 
@@ -97,17 +105,20 @@ func (o *PHCollectionListChangeRequest) MoveChildCollectionsAtIndexesToIndex(ind
 
 func (o *PHCollectionListChangeRequest) PlaceholderForCreatedCollectionList() *PHObjectPlaceholder {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHCollectionListChangeRequestSelPlaceholderForCreatedCollectionList)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHObjectPlaceholderFromID(_ret)
 }
 
 func (o *PHCollectionListChangeRequest) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHCollectionListChangeRequestSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PHCollectionListChangeRequest) SetTitle(title *foundation.NSString) {
 	o.Ptr().Send(_pHCollectionListChangeRequestSelSetTitle, title.Ptr())
 }
-

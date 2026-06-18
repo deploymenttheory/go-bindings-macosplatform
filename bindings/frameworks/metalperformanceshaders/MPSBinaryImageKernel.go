@@ -20,25 +20,25 @@ type MPSBinaryImageKernel struct {
 }
 
 var (
-	_clsMPSBinaryImageKernel = _objcClass("MPSBinaryImageKernel")
-	_mPSBinaryImageKernelSelInitWithDevice = objc.RegisterName("initWithDevice:")
-	_mPSBinaryImageKernelSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
+	_clsMPSBinaryImageKernel                                                                                = _objcClass("MPSBinaryImageKernel")
+	_mPSBinaryImageKernelSelInitWithDevice                                                                  = objc.RegisterName("initWithDevice:")
+	_mPSBinaryImageKernelSelInitWithCoderDevice                                                             = objc.RegisterName("initWithCoder:device:")
 	_mPSBinaryImageKernelSelEncodeToCommandBufferPrimaryTextureInPlaceSecondaryTextureFallbackCopyAllocator = objc.RegisterName("encodeToCommandBuffer:primaryTexture:inPlaceSecondaryTexture:fallbackCopyAllocator:")
 	_mPSBinaryImageKernelSelEncodeToCommandBufferInPlacePrimaryTextureSecondaryTextureFallbackCopyAllocator = objc.RegisterName("encodeToCommandBuffer:inPlacePrimaryTexture:secondaryTexture:fallbackCopyAllocator:")
-	_mPSBinaryImageKernelSelEncodeToCommandBufferPrimaryTextureSecondaryTextureDestinationTexture = objc.RegisterName("encodeToCommandBuffer:primaryTexture:secondaryTexture:destinationTexture:")
-	_mPSBinaryImageKernelSelEncodeToCommandBufferPrimaryImageSecondaryImageDestinationImage = objc.RegisterName("encodeToCommandBuffer:primaryImage:secondaryImage:destinationImage:")
-	_mPSBinaryImageKernelSelPrimarySourceRegionForDestinationSize = objc.RegisterName("primarySourceRegionForDestinationSize:")
-	_mPSBinaryImageKernelSelSecondarySourceRegionForDestinationSize = objc.RegisterName("secondarySourceRegionForDestinationSize:")
-	_mPSBinaryImageKernelSelPrimaryOffset = objc.RegisterName("primaryOffset")
-	_mPSBinaryImageKernelSelSetPrimaryOffset = objc.RegisterName("setPrimaryOffset:")
-	_mPSBinaryImageKernelSelSecondaryOffset = objc.RegisterName("secondaryOffset")
-	_mPSBinaryImageKernelSelSetSecondaryOffset = objc.RegisterName("setSecondaryOffset:")
-	_mPSBinaryImageKernelSelPrimaryEdgeMode = objc.RegisterName("primaryEdgeMode")
-	_mPSBinaryImageKernelSelSetPrimaryEdgeMode = objc.RegisterName("setPrimaryEdgeMode:")
-	_mPSBinaryImageKernelSelSecondaryEdgeMode = objc.RegisterName("secondaryEdgeMode")
-	_mPSBinaryImageKernelSelSetSecondaryEdgeMode = objc.RegisterName("setSecondaryEdgeMode:")
-	_mPSBinaryImageKernelSelClipRect = objc.RegisterName("clipRect")
-	_mPSBinaryImageKernelSelSetClipRect = objc.RegisterName("setClipRect:")
+	_mPSBinaryImageKernelSelEncodeToCommandBufferPrimaryTextureSecondaryTextureDestinationTexture           = objc.RegisterName("encodeToCommandBuffer:primaryTexture:secondaryTexture:destinationTexture:")
+	_mPSBinaryImageKernelSelEncodeToCommandBufferPrimaryImageSecondaryImageDestinationImage                 = objc.RegisterName("encodeToCommandBuffer:primaryImage:secondaryImage:destinationImage:")
+	_mPSBinaryImageKernelSelPrimarySourceRegionForDestinationSize                                           = objc.RegisterName("primarySourceRegionForDestinationSize:")
+	_mPSBinaryImageKernelSelSecondarySourceRegionForDestinationSize                                         = objc.RegisterName("secondarySourceRegionForDestinationSize:")
+	_mPSBinaryImageKernelSelPrimaryOffset                                                                   = objc.RegisterName("primaryOffset")
+	_mPSBinaryImageKernelSelSetPrimaryOffset                                                                = objc.RegisterName("setPrimaryOffset:")
+	_mPSBinaryImageKernelSelSecondaryOffset                                                                 = objc.RegisterName("secondaryOffset")
+	_mPSBinaryImageKernelSelSetSecondaryOffset                                                              = objc.RegisterName("setSecondaryOffset:")
+	_mPSBinaryImageKernelSelPrimaryEdgeMode                                                                 = objc.RegisterName("primaryEdgeMode")
+	_mPSBinaryImageKernelSelSetPrimaryEdgeMode                                                              = objc.RegisterName("setPrimaryEdgeMode:")
+	_mPSBinaryImageKernelSelSecondaryEdgeMode                                                               = objc.RegisterName("secondaryEdgeMode")
+	_mPSBinaryImageKernelSelSetSecondaryEdgeMode                                                            = objc.RegisterName("setSecondaryEdgeMode:")
+	_mPSBinaryImageKernelSelClipRect                                                                        = objc.RegisterName("clipRect")
+	_mPSBinaryImageKernelSelSetClipRect                                                                     = objc.RegisterName("setClipRect:")
 )
 
 func MPSBinaryImageKernelFromID(id objc.ID) *MPSBinaryImageKernel {
@@ -54,14 +54,18 @@ func MPSBinaryImageKernelFromID(id objc.ID) *MPSBinaryImageKernel {
 // @abstract   Standard init with default properties per filter type @param      device      The device that the filter will be used on. May not be NULL. @result     a pointer to the newly initialized object. This will fail, returning nil if the device is not supported. Devices must be MTLFeatureSet_iOS_GPUFamily2_v1 or later.
 func (o *MPSBinaryImageKernel) InitWithDevice(device metal.MTLDevice) *MPSBinaryImageKernel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSBinaryImageKernelSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSBinaryImageKernelFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSBinaryImageKernel) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSBinaryImageKernel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSBinaryImageKernelSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSBinaryImageKernelFromID(_ret)
 }
 
@@ -162,4 +166,3 @@ func (o *MPSBinaryImageKernel) ClipRect() metal.MTLRegion {
 func (o *MPSBinaryImageKernel) SetClipRect(clipRect metal.MTLRegion) {
 	o.Ptr().Send(_mPSBinaryImageKernelSelSetClipRect, clipRect)
 }
-

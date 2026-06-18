@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_vmnetLib uintptr
-	_loadOnce sync.Once
+	_vmnetLib      uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -48,34 +48,88 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("vmnet_copy_shared_interface_list", func() { purego.RegisterLibFunc(&_vmnet_copy_shared_interface_list, _vmnetLib, "vmnet_copy_shared_interface_list") })
-	_register("vmnet_interface_add_ip_port_forwarding_rule", func() { purego.RegisterLibFunc(&_vmnet_interface_add_ip_port_forwarding_rule, _vmnetLib, "vmnet_interface_add_ip_port_forwarding_rule") })
-	_register("vmnet_interface_add_port_forwarding_rule", func() { purego.RegisterLibFunc(&_vmnet_interface_add_port_forwarding_rule, _vmnetLib, "vmnet_interface_add_port_forwarding_rule") })
-	_register("vmnet_interface_get_ip_port_forwarding_rules", func() { purego.RegisterLibFunc(&_vmnet_interface_get_ip_port_forwarding_rules, _vmnetLib, "vmnet_interface_get_ip_port_forwarding_rules") })
-	_register("vmnet_interface_get_port_forwarding_rules", func() { purego.RegisterLibFunc(&_vmnet_interface_get_port_forwarding_rules, _vmnetLib, "vmnet_interface_get_port_forwarding_rules") })
-	_register("vmnet_interface_remove_ip_port_forwarding_rule", func() { purego.RegisterLibFunc(&_vmnet_interface_remove_ip_port_forwarding_rule, _vmnetLib, "vmnet_interface_remove_ip_port_forwarding_rule") })
-	_register("vmnet_interface_remove_port_forwarding_rule", func() { purego.RegisterLibFunc(&_vmnet_interface_remove_port_forwarding_rule, _vmnetLib, "vmnet_interface_remove_port_forwarding_rule") })
-	_register("vmnet_interface_set_event_callback", func() { purego.RegisterLibFunc(&_vmnet_interface_set_event_callback, _vmnetLib, "vmnet_interface_set_event_callback") })
-	_register("vmnet_interface_start_with_network", func() { purego.RegisterLibFunc(&_vmnet_interface_start_with_network, _vmnetLib, "vmnet_interface_start_with_network") })
-	_register("vmnet_ip_port_forwarding_rule_get_details", func() { purego.RegisterLibFunc(&_vmnet_ip_port_forwarding_rule_get_details, _vmnetLib, "vmnet_ip_port_forwarding_rule_get_details") })
-	_register("vmnet_network_configuration_add_dhcp_reservation", func() { purego.RegisterLibFunc(&_vmnet_network_configuration_add_dhcp_reservation, _vmnetLib, "vmnet_network_configuration_add_dhcp_reservation") })
-	_register("vmnet_network_configuration_add_port_forwarding_rule", func() { purego.RegisterLibFunc(&_vmnet_network_configuration_add_port_forwarding_rule, _vmnetLib, "vmnet_network_configuration_add_port_forwarding_rule") })
-	_register("vmnet_network_configuration_create", func() { purego.RegisterLibFunc(&_vmnet_network_configuration_create, _vmnetLib, "vmnet_network_configuration_create") })
-	_register("vmnet_network_configuration_disable_dhcp", func() { purego.RegisterLibFunc(&_vmnet_network_configuration_disable_dhcp, _vmnetLib, "vmnet_network_configuration_disable_dhcp") })
-	_register("vmnet_network_configuration_disable_dns_proxy", func() { purego.RegisterLibFunc(&_vmnet_network_configuration_disable_dns_proxy, _vmnetLib, "vmnet_network_configuration_disable_dns_proxy") })
-	_register("vmnet_network_configuration_disable_nat44", func() { purego.RegisterLibFunc(&_vmnet_network_configuration_disable_nat44, _vmnetLib, "vmnet_network_configuration_disable_nat44") })
-	_register("vmnet_network_configuration_disable_nat66", func() { purego.RegisterLibFunc(&_vmnet_network_configuration_disable_nat66, _vmnetLib, "vmnet_network_configuration_disable_nat66") })
-	_register("vmnet_network_configuration_disable_router_advertisement", func() { purego.RegisterLibFunc(&_vmnet_network_configuration_disable_router_advertisement, _vmnetLib, "vmnet_network_configuration_disable_router_advertisement") })
-	_register("vmnet_network_configuration_set_external_interface", func() { purego.RegisterLibFunc(&_vmnet_network_configuration_set_external_interface, _vmnetLib, "vmnet_network_configuration_set_external_interface") })
-	_register("vmnet_network_configuration_set_ipv4_subnet", func() { purego.RegisterLibFunc(&_vmnet_network_configuration_set_ipv4_subnet, _vmnetLib, "vmnet_network_configuration_set_ipv4_subnet") })
-	_register("vmnet_network_configuration_set_ipv6_prefix", func() { purego.RegisterLibFunc(&_vmnet_network_configuration_set_ipv6_prefix, _vmnetLib, "vmnet_network_configuration_set_ipv6_prefix") })
-	_register("vmnet_network_configuration_set_mtu", func() { purego.RegisterLibFunc(&_vmnet_network_configuration_set_mtu, _vmnetLib, "vmnet_network_configuration_set_mtu") })
-	_register("vmnet_network_copy_serialization", func() { purego.RegisterLibFunc(&_vmnet_network_copy_serialization, _vmnetLib, "vmnet_network_copy_serialization") })
+	_register("vmnet_copy_shared_interface_list", func() {
+		purego.RegisterLibFunc(&_vmnet_copy_shared_interface_list, _vmnetLib, "vmnet_copy_shared_interface_list")
+	})
+	_register("vmnet_interface_add_ip_port_forwarding_rule", func() {
+		purego.RegisterLibFunc(&_vmnet_interface_add_ip_port_forwarding_rule, _vmnetLib, "vmnet_interface_add_ip_port_forwarding_rule")
+	})
+	_register("vmnet_interface_add_port_forwarding_rule", func() {
+		purego.RegisterLibFunc(&_vmnet_interface_add_port_forwarding_rule, _vmnetLib, "vmnet_interface_add_port_forwarding_rule")
+	})
+	_register("vmnet_interface_get_ip_port_forwarding_rules", func() {
+		purego.RegisterLibFunc(&_vmnet_interface_get_ip_port_forwarding_rules, _vmnetLib, "vmnet_interface_get_ip_port_forwarding_rules")
+	})
+	_register("vmnet_interface_get_port_forwarding_rules", func() {
+		purego.RegisterLibFunc(&_vmnet_interface_get_port_forwarding_rules, _vmnetLib, "vmnet_interface_get_port_forwarding_rules")
+	})
+	_register("vmnet_interface_remove_ip_port_forwarding_rule", func() {
+		purego.RegisterLibFunc(&_vmnet_interface_remove_ip_port_forwarding_rule, _vmnetLib, "vmnet_interface_remove_ip_port_forwarding_rule")
+	})
+	_register("vmnet_interface_remove_port_forwarding_rule", func() {
+		purego.RegisterLibFunc(&_vmnet_interface_remove_port_forwarding_rule, _vmnetLib, "vmnet_interface_remove_port_forwarding_rule")
+	})
+	_register("vmnet_interface_set_event_callback", func() {
+		purego.RegisterLibFunc(&_vmnet_interface_set_event_callback, _vmnetLib, "vmnet_interface_set_event_callback")
+	})
+	_register("vmnet_interface_start_with_network", func() {
+		purego.RegisterLibFunc(&_vmnet_interface_start_with_network, _vmnetLib, "vmnet_interface_start_with_network")
+	})
+	_register("vmnet_ip_port_forwarding_rule_get_details", func() {
+		purego.RegisterLibFunc(&_vmnet_ip_port_forwarding_rule_get_details, _vmnetLib, "vmnet_ip_port_forwarding_rule_get_details")
+	})
+	_register("vmnet_network_configuration_add_dhcp_reservation", func() {
+		purego.RegisterLibFunc(&_vmnet_network_configuration_add_dhcp_reservation, _vmnetLib, "vmnet_network_configuration_add_dhcp_reservation")
+	})
+	_register("vmnet_network_configuration_add_port_forwarding_rule", func() {
+		purego.RegisterLibFunc(&_vmnet_network_configuration_add_port_forwarding_rule, _vmnetLib, "vmnet_network_configuration_add_port_forwarding_rule")
+	})
+	_register("vmnet_network_configuration_create", func() {
+		purego.RegisterLibFunc(&_vmnet_network_configuration_create, _vmnetLib, "vmnet_network_configuration_create")
+	})
+	_register("vmnet_network_configuration_disable_dhcp", func() {
+		purego.RegisterLibFunc(&_vmnet_network_configuration_disable_dhcp, _vmnetLib, "vmnet_network_configuration_disable_dhcp")
+	})
+	_register("vmnet_network_configuration_disable_dns_proxy", func() {
+		purego.RegisterLibFunc(&_vmnet_network_configuration_disable_dns_proxy, _vmnetLib, "vmnet_network_configuration_disable_dns_proxy")
+	})
+	_register("vmnet_network_configuration_disable_nat44", func() {
+		purego.RegisterLibFunc(&_vmnet_network_configuration_disable_nat44, _vmnetLib, "vmnet_network_configuration_disable_nat44")
+	})
+	_register("vmnet_network_configuration_disable_nat66", func() {
+		purego.RegisterLibFunc(&_vmnet_network_configuration_disable_nat66, _vmnetLib, "vmnet_network_configuration_disable_nat66")
+	})
+	_register("vmnet_network_configuration_disable_router_advertisement", func() {
+		purego.RegisterLibFunc(&_vmnet_network_configuration_disable_router_advertisement, _vmnetLib, "vmnet_network_configuration_disable_router_advertisement")
+	})
+	_register("vmnet_network_configuration_set_external_interface", func() {
+		purego.RegisterLibFunc(&_vmnet_network_configuration_set_external_interface, _vmnetLib, "vmnet_network_configuration_set_external_interface")
+	})
+	_register("vmnet_network_configuration_set_ipv4_subnet", func() {
+		purego.RegisterLibFunc(&_vmnet_network_configuration_set_ipv4_subnet, _vmnetLib, "vmnet_network_configuration_set_ipv4_subnet")
+	})
+	_register("vmnet_network_configuration_set_ipv6_prefix", func() {
+		purego.RegisterLibFunc(&_vmnet_network_configuration_set_ipv6_prefix, _vmnetLib, "vmnet_network_configuration_set_ipv6_prefix")
+	})
+	_register("vmnet_network_configuration_set_mtu", func() {
+		purego.RegisterLibFunc(&_vmnet_network_configuration_set_mtu, _vmnetLib, "vmnet_network_configuration_set_mtu")
+	})
+	_register("vmnet_network_copy_serialization", func() {
+		purego.RegisterLibFunc(&_vmnet_network_copy_serialization, _vmnetLib, "vmnet_network_copy_serialization")
+	})
 	_register("vmnet_network_create", func() { purego.RegisterLibFunc(&_vmnet_network_create, _vmnetLib, "vmnet_network_create") })
-	_register("vmnet_network_create_with_serialization", func() { purego.RegisterLibFunc(&_vmnet_network_create_with_serialization, _vmnetLib, "vmnet_network_create_with_serialization") })
-	_register("vmnet_network_get_ipv4_subnet", func() { purego.RegisterLibFunc(&_vmnet_network_get_ipv4_subnet, _vmnetLib, "vmnet_network_get_ipv4_subnet") })
-	_register("vmnet_network_get_ipv6_prefix", func() { purego.RegisterLibFunc(&_vmnet_network_get_ipv6_prefix, _vmnetLib, "vmnet_network_get_ipv6_prefix") })
-	_register("vmnet_port_forwarding_rule_get_details", func() { purego.RegisterLibFunc(&_vmnet_port_forwarding_rule_get_details, _vmnetLib, "vmnet_port_forwarding_rule_get_details") })
+	_register("vmnet_network_create_with_serialization", func() {
+		purego.RegisterLibFunc(&_vmnet_network_create_with_serialization, _vmnetLib, "vmnet_network_create_with_serialization")
+	})
+	_register("vmnet_network_get_ipv4_subnet", func() {
+		purego.RegisterLibFunc(&_vmnet_network_get_ipv4_subnet, _vmnetLib, "vmnet_network_get_ipv4_subnet")
+	})
+	_register("vmnet_network_get_ipv6_prefix", func() {
+		purego.RegisterLibFunc(&_vmnet_network_get_ipv6_prefix, _vmnetLib, "vmnet_network_get_ipv6_prefix")
+	})
+	_register("vmnet_port_forwarding_rule_get_details", func() {
+		purego.RegisterLibFunc(&_vmnet_port_forwarding_rule_get_details, _vmnetLib, "vmnet_port_forwarding_rule_get_details")
+	})
 	_register("vmnet_read", func() { purego.RegisterLibFunc(&_vmnet_read, _vmnetLib, "vmnet_read") })
 	_register("vmnet_start_interface", func() { purego.RegisterLibFunc(&_vmnet_start_interface, _vmnetLib, "vmnet_start_interface") })
 	_register("vmnet_stop_interface", func() { purego.RegisterLibFunc(&_vmnet_stop_interface, _vmnetLib, "vmnet_stop_interface") })

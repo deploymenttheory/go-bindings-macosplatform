@@ -16,7 +16,7 @@ type MPSImageReduceColumnMean struct {
 }
 
 var (
-	_clsMPSImageReduceColumnMean = _objcClass("MPSImageReduceColumnMean")
+	_clsMPSImageReduceColumnMean               = _objcClass("MPSImageReduceColumnMean")
 	_mPSImageReduceColumnMeanSelInitWithDevice = objc.RegisterName("initWithDevice:")
 )
 
@@ -32,7 +32,8 @@ func MPSImageReduceColumnMeanFromID(id objc.ID) *MPSImageReduceColumnMean {
 
 func (o *MPSImageReduceColumnMean) InitWithDevice(device metal.MTLDevice) *MPSImageReduceColumnMean {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageReduceColumnMeanSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageReduceColumnMeanFromID(_ret)
 }
-

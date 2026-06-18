@@ -18,23 +18,23 @@ type GKGameActivityDefinition struct {
 }
 
 var (
-	_clsGKGameActivityDefinition = _objcClass("GKGameActivityDefinition")
-	_gKGameActivityDefinitionSelLoadAchievementDescriptionsWithCompletionHandler = objc.RegisterName("loadAchievementDescriptionsWithCompletionHandler:")
-	_gKGameActivityDefinitionSelLoadLeaderboardsWithCompletionHandler = objc.RegisterName("loadLeaderboardsWithCompletionHandler:")
-	_gKGameActivityDefinitionSelLoadImageWithCompletionHandler = objc.RegisterName("loadImageWithCompletionHandler:")
-	_gKGameActivityDefinitionSelIdentifier = objc.RegisterName("identifier")
-	_gKGameActivityDefinitionSelGroupIdentifier = objc.RegisterName("groupIdentifier")
-	_gKGameActivityDefinitionSelTitle = objc.RegisterName("title")
-	_gKGameActivityDefinitionSelDetails = objc.RegisterName("details")
-	_gKGameActivityDefinitionSelDefaultProperties = objc.RegisterName("defaultProperties")
-	_gKGameActivityDefinitionSelFallbackURL = objc.RegisterName("fallbackURL")
-	_gKGameActivityDefinitionSelSupportsPartyCode = objc.RegisterName("supportsPartyCode")
-	_gKGameActivityDefinitionSelMaxPlayers = objc.RegisterName("maxPlayers")
-	_gKGameActivityDefinitionSelMinPlayers = objc.RegisterName("minPlayers")
-	_gKGameActivityDefinitionSelSupportsUnlimitedPlayers = objc.RegisterName("supportsUnlimitedPlayers")
-	_gKGameActivityDefinitionSelPlayStyle = objc.RegisterName("playStyle")
-	_gKGameActivityDefinitionSelReleaseState = objc.RegisterName("releaseState")
-	_gKGameActivityDefinitionSelLoadGameActivityDefinitionsWithCompletionHandler = objc.RegisterName("loadGameActivityDefinitionsWithCompletionHandler:")
+	_clsGKGameActivityDefinition                                                    = _objcClass("GKGameActivityDefinition")
+	_gKGameActivityDefinitionSelLoadAchievementDescriptionsWithCompletionHandler    = objc.RegisterName("loadAchievementDescriptionsWithCompletionHandler:")
+	_gKGameActivityDefinitionSelLoadLeaderboardsWithCompletionHandler               = objc.RegisterName("loadLeaderboardsWithCompletionHandler:")
+	_gKGameActivityDefinitionSelLoadImageWithCompletionHandler                      = objc.RegisterName("loadImageWithCompletionHandler:")
+	_gKGameActivityDefinitionSelIdentifier                                          = objc.RegisterName("identifier")
+	_gKGameActivityDefinitionSelGroupIdentifier                                     = objc.RegisterName("groupIdentifier")
+	_gKGameActivityDefinitionSelTitle                                               = objc.RegisterName("title")
+	_gKGameActivityDefinitionSelDetails                                             = objc.RegisterName("details")
+	_gKGameActivityDefinitionSelDefaultProperties                                   = objc.RegisterName("defaultProperties")
+	_gKGameActivityDefinitionSelFallbackURL                                         = objc.RegisterName("fallbackURL")
+	_gKGameActivityDefinitionSelSupportsPartyCode                                   = objc.RegisterName("supportsPartyCode")
+	_gKGameActivityDefinitionSelMaxPlayers                                          = objc.RegisterName("maxPlayers")
+	_gKGameActivityDefinitionSelMinPlayers                                          = objc.RegisterName("minPlayers")
+	_gKGameActivityDefinitionSelSupportsUnlimitedPlayers                            = objc.RegisterName("supportsUnlimitedPlayers")
+	_gKGameActivityDefinitionSelPlayStyle                                           = objc.RegisterName("playStyle")
+	_gKGameActivityDefinitionSelReleaseState                                        = objc.RegisterName("releaseState")
+	_gKGameActivityDefinitionSelLoadGameActivityDefinitionsWithCompletionHandler    = objc.RegisterName("loadGameActivityDefinitionsWithCompletionHandler:")
 	_gKGameActivityDefinitionSelLoadGameActivityDefinitionsWithIDsCompletionHandler = objc.RegisterName("loadGameActivityDefinitionsWithIDs:completionHandler:")
 )
 
@@ -93,28 +93,36 @@ func (o *GKGameActivityDefinition) LoadImageWithCompletionHandler(completionHand
 // The developer defined identifier for a given game activity.
 func (o *GKGameActivityDefinition) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameActivityDefinitionSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The group identifier for the activity, if one exists.
 func (o *GKGameActivityDefinition) GroupIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameActivityDefinitionSelGroupIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // A short title for the game activity.
 func (o *GKGameActivityDefinition) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameActivityDefinitionSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // A more detailed description of the game activity.
 func (o *GKGameActivityDefinition) Details() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameActivityDefinitionSelDetails)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -127,11 +135,13 @@ func (o *GKGameActivityDefinition) DefaultProperties() *foundation.NSDictionary[
 // A fallback URL that can be used to construct a game-specific URL for players to share or join, if the joining device does not support the default URL.
 func (o *GKGameActivityDefinition) FallbackURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameActivityDefinitionSelFallbackURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
-// Whether the activity can be joined by others via a party code. - SeeAlso: ``-[GKGameActivityListener player:wantsToPlayGameActivity:completionHandler:]`` where you can receive and handle game activities that players want to play in a party with friends.
+// Whether the activity can be joined by others via a party code. - SeeAlso: “-[GKGameActivityListener player:wantsToPlayGameActivity:completionHandler:]“ where you can receive and handle game activities that players want to play in a party with friends.
 func (o *GKGameActivityDefinition) SupportsPartyCode() bool {
 	_ret := objc.Send[bool](o.Ptr(), _gKGameActivityDefinitionSelSupportsPartyCode)
 	return _ret
@@ -140,14 +150,18 @@ func (o *GKGameActivityDefinition) SupportsPartyCode() bool {
 // The maximum number of participants that can join the activity. Returns nil when no maximum is set (unlimited players) or when player range is undefined. When not nil, the value is always greater than or equal to `minPlayers`.
 func (o *GKGameActivityDefinition) MaxPlayers() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameActivityDefinitionSelMaxPlayers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // The minimum number of participants that can join the activity.
 func (o *GKGameActivityDefinition) MinPlayers() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameActivityDefinitionSelMinPlayers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -198,4 +212,3 @@ func GKGameActivityDefinitionLoadGameActivityDefinitionsWithIDsCompletionHandler
 	}
 	objc.ID(_clsGKGameActivityDefinition).Send(_gKGameActivityDefinitionSelLoadGameActivityDefinitionsWithIDsCompletionHandler, activityDefinitionIDs, __block_completionHandler)
 }
-

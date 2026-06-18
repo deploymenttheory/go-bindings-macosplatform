@@ -15,10 +15,10 @@ type NSUnitElectricCurrent struct {
 }
 
 var (
-	_clsNSUnitElectricCurrent = _objcClass("NSUnitElectricCurrent")
-	_nSUnitElectricCurrentSelMegaamperes = objc.RegisterName("megaamperes")
-	_nSUnitElectricCurrentSelKiloamperes = objc.RegisterName("kiloamperes")
-	_nSUnitElectricCurrentSelAmperes = objc.RegisterName("amperes")
+	_clsNSUnitElectricCurrent             = _objcClass("NSUnitElectricCurrent")
+	_nSUnitElectricCurrentSelMegaamperes  = objc.RegisterName("megaamperes")
+	_nSUnitElectricCurrentSelKiloamperes  = objc.RegisterName("kiloamperes")
+	_nSUnitElectricCurrentSelAmperes      = objc.RegisterName("amperes")
 	_nSUnitElectricCurrentSelMilliamperes = objc.RegisterName("milliamperes")
 	_nSUnitElectricCurrentSelMicroamperes = objc.RegisterName("microamperes")
 )
@@ -35,31 +35,40 @@ func NSUnitElectricCurrentFromID(id objc.ID) *NSUnitElectricCurrent {
 
 func NSUnitElectricCurrentMegaamperes() *NSUnitElectricCurrent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricCurrent), _nSUnitElectricCurrentSelMegaamperes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitElectricCurrentFromID(_ret)
 }
 
 func NSUnitElectricCurrentKiloamperes() *NSUnitElectricCurrent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricCurrent), _nSUnitElectricCurrentSelKiloamperes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitElectricCurrentFromID(_ret)
 }
 
 func NSUnitElectricCurrentAmperes() *NSUnitElectricCurrent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricCurrent), _nSUnitElectricCurrentSelAmperes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitElectricCurrentFromID(_ret)
 }
 
 func NSUnitElectricCurrentMilliamperes() *NSUnitElectricCurrent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricCurrent), _nSUnitElectricCurrentSelMilliamperes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitElectricCurrentFromID(_ret)
 }
 
 func NSUnitElectricCurrentMicroamperes() *NSUnitElectricCurrent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricCurrent), _nSUnitElectricCurrentSelMicroamperes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitElectricCurrentFromID(_ret)
 }
-

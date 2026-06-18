@@ -17,7 +17,9 @@ type RenderingSessionFrameAttributes struct {
 }
 
 // Unwrap returns the underlying [raw.CNRenderingSessionFrameAttributes].
-func (x *RenderingSessionFrameAttributes) Unwrap() *raw.CNRenderingSessionFrameAttributes { return x.inner }
+func (x *RenderingSessionFrameAttributes) Unwrap() *raw.CNRenderingSessionFrameAttributes {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -89,4 +91,3 @@ type RenderingSessionFrameAttributesable interface {
 }
 
 var _ RenderingSessionFrameAttributesable = (*RenderingSessionFrameAttributes)(nil)
-

@@ -15,33 +15,33 @@ type NSMutableCharacterSet struct {
 }
 
 var (
-	_clsNSMutableCharacterSet = _objcClass("NSMutableCharacterSet")
-	_nSMutableCharacterSetSelAddCharactersInRange = objc.RegisterName("addCharactersInRange:")
-	_nSMutableCharacterSetSelRemoveCharactersInRange = objc.RegisterName("removeCharactersInRange:")
-	_nSMutableCharacterSetSelAddCharactersInString = objc.RegisterName("addCharactersInString:")
-	_nSMutableCharacterSetSelRemoveCharactersInString = objc.RegisterName("removeCharactersInString:")
-	_nSMutableCharacterSetSelFormUnionWithCharacterSet = objc.RegisterName("formUnionWithCharacterSet:")
-	_nSMutableCharacterSetSelFormIntersectionWithCharacterSet = objc.RegisterName("formIntersectionWithCharacterSet:")
-	_nSMutableCharacterSetSelInvert = objc.RegisterName("invert")
-	_nSMutableCharacterSetSelControlCharacterSet = objc.RegisterName("controlCharacterSet")
-	_nSMutableCharacterSetSelWhitespaceCharacterSet = objc.RegisterName("whitespaceCharacterSet")
-	_nSMutableCharacterSetSelWhitespaceAndNewlineCharacterSet = objc.RegisterName("whitespaceAndNewlineCharacterSet")
-	_nSMutableCharacterSetSelDecimalDigitCharacterSet = objc.RegisterName("decimalDigitCharacterSet")
-	_nSMutableCharacterSetSelLetterCharacterSet = objc.RegisterName("letterCharacterSet")
-	_nSMutableCharacterSetSelLowercaseLetterCharacterSet = objc.RegisterName("lowercaseLetterCharacterSet")
-	_nSMutableCharacterSetSelUppercaseLetterCharacterSet = objc.RegisterName("uppercaseLetterCharacterSet")
-	_nSMutableCharacterSetSelNonBaseCharacterSet = objc.RegisterName("nonBaseCharacterSet")
-	_nSMutableCharacterSetSelAlphanumericCharacterSet = objc.RegisterName("alphanumericCharacterSet")
-	_nSMutableCharacterSetSelDecomposableCharacterSet = objc.RegisterName("decomposableCharacterSet")
-	_nSMutableCharacterSetSelIllegalCharacterSet = objc.RegisterName("illegalCharacterSet")
-	_nSMutableCharacterSetSelPunctuationCharacterSet = objc.RegisterName("punctuationCharacterSet")
-	_nSMutableCharacterSetSelCapitalizedLetterCharacterSet = objc.RegisterName("capitalizedLetterCharacterSet")
-	_nSMutableCharacterSetSelSymbolCharacterSet = objc.RegisterName("symbolCharacterSet")
-	_nSMutableCharacterSetSelNewlineCharacterSet = objc.RegisterName("newlineCharacterSet")
-	_nSMutableCharacterSetSelCharacterSetWithRange = objc.RegisterName("characterSetWithRange:")
-	_nSMutableCharacterSetSelCharacterSetWithCharactersInString = objc.RegisterName("characterSetWithCharactersInString:")
+	_clsNSMutableCharacterSet                                     = _objcClass("NSMutableCharacterSet")
+	_nSMutableCharacterSetSelAddCharactersInRange                 = objc.RegisterName("addCharactersInRange:")
+	_nSMutableCharacterSetSelRemoveCharactersInRange              = objc.RegisterName("removeCharactersInRange:")
+	_nSMutableCharacterSetSelAddCharactersInString                = objc.RegisterName("addCharactersInString:")
+	_nSMutableCharacterSetSelRemoveCharactersInString             = objc.RegisterName("removeCharactersInString:")
+	_nSMutableCharacterSetSelFormUnionWithCharacterSet            = objc.RegisterName("formUnionWithCharacterSet:")
+	_nSMutableCharacterSetSelFormIntersectionWithCharacterSet     = objc.RegisterName("formIntersectionWithCharacterSet:")
+	_nSMutableCharacterSetSelInvert                               = objc.RegisterName("invert")
+	_nSMutableCharacterSetSelControlCharacterSet                  = objc.RegisterName("controlCharacterSet")
+	_nSMutableCharacterSetSelWhitespaceCharacterSet               = objc.RegisterName("whitespaceCharacterSet")
+	_nSMutableCharacterSetSelWhitespaceAndNewlineCharacterSet     = objc.RegisterName("whitespaceAndNewlineCharacterSet")
+	_nSMutableCharacterSetSelDecimalDigitCharacterSet             = objc.RegisterName("decimalDigitCharacterSet")
+	_nSMutableCharacterSetSelLetterCharacterSet                   = objc.RegisterName("letterCharacterSet")
+	_nSMutableCharacterSetSelLowercaseLetterCharacterSet          = objc.RegisterName("lowercaseLetterCharacterSet")
+	_nSMutableCharacterSetSelUppercaseLetterCharacterSet          = objc.RegisterName("uppercaseLetterCharacterSet")
+	_nSMutableCharacterSetSelNonBaseCharacterSet                  = objc.RegisterName("nonBaseCharacterSet")
+	_nSMutableCharacterSetSelAlphanumericCharacterSet             = objc.RegisterName("alphanumericCharacterSet")
+	_nSMutableCharacterSetSelDecomposableCharacterSet             = objc.RegisterName("decomposableCharacterSet")
+	_nSMutableCharacterSetSelIllegalCharacterSet                  = objc.RegisterName("illegalCharacterSet")
+	_nSMutableCharacterSetSelPunctuationCharacterSet              = objc.RegisterName("punctuationCharacterSet")
+	_nSMutableCharacterSetSelCapitalizedLetterCharacterSet        = objc.RegisterName("capitalizedLetterCharacterSet")
+	_nSMutableCharacterSetSelSymbolCharacterSet                   = objc.RegisterName("symbolCharacterSet")
+	_nSMutableCharacterSetSelNewlineCharacterSet                  = objc.RegisterName("newlineCharacterSet")
+	_nSMutableCharacterSetSelCharacterSetWithRange                = objc.RegisterName("characterSetWithRange:")
+	_nSMutableCharacterSetSelCharacterSetWithCharactersInString   = objc.RegisterName("characterSetWithCharactersInString:")
 	_nSMutableCharacterSetSelCharacterSetWithBitmapRepresentation = objc.RegisterName("characterSetWithBitmapRepresentation:")
-	_nSMutableCharacterSetSelCharacterSetWithContentsOfFile = objc.RegisterName("characterSetWithContentsOfFile:")
+	_nSMutableCharacterSetSelCharacterSetWithContentsOfFile       = objc.RegisterName("characterSetWithContentsOfFile:")
 )
 
 func NSMutableCharacterSetFromID(id objc.ID) *NSMutableCharacterSet {
@@ -84,115 +84,152 @@ func (o *NSMutableCharacterSet) Invert() {
 
 func NSMutableCharacterSetControlCharacterSet() *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelControlCharacterSet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableCharacterSetFromID(_ret)
 }
 
 func NSMutableCharacterSetWhitespaceCharacterSet() *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelWhitespaceCharacterSet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableCharacterSetFromID(_ret)
 }
 
 func NSMutableCharacterSetWhitespaceAndNewlineCharacterSet() *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelWhitespaceAndNewlineCharacterSet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableCharacterSetFromID(_ret)
 }
 
 func NSMutableCharacterSetDecimalDigitCharacterSet() *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelDecimalDigitCharacterSet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableCharacterSetFromID(_ret)
 }
 
 func NSMutableCharacterSetLetterCharacterSet() *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelLetterCharacterSet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableCharacterSetFromID(_ret)
 }
 
 func NSMutableCharacterSetLowercaseLetterCharacterSet() *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelLowercaseLetterCharacterSet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableCharacterSetFromID(_ret)
 }
 
 func NSMutableCharacterSetUppercaseLetterCharacterSet() *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelUppercaseLetterCharacterSet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableCharacterSetFromID(_ret)
 }
 
 func NSMutableCharacterSetNonBaseCharacterSet() *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelNonBaseCharacterSet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableCharacterSetFromID(_ret)
 }
 
 func NSMutableCharacterSetAlphanumericCharacterSet() *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelAlphanumericCharacterSet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableCharacterSetFromID(_ret)
 }
 
 func NSMutableCharacterSetDecomposableCharacterSet() *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelDecomposableCharacterSet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableCharacterSetFromID(_ret)
 }
 
 func NSMutableCharacterSetIllegalCharacterSet() *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelIllegalCharacterSet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableCharacterSetFromID(_ret)
 }
 
 func NSMutableCharacterSetPunctuationCharacterSet() *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelPunctuationCharacterSet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableCharacterSetFromID(_ret)
 }
 
 func NSMutableCharacterSetCapitalizedLetterCharacterSet() *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelCapitalizedLetterCharacterSet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableCharacterSetFromID(_ret)
 }
 
 func NSMutableCharacterSetSymbolCharacterSet() *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelSymbolCharacterSet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableCharacterSetFromID(_ret)
 }
 
 func NSMutableCharacterSetNewlineCharacterSet() *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelNewlineCharacterSet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableCharacterSetFromID(_ret)
 }
 
 func NSMutableCharacterSetCharacterSetWithRange(aRange NSRange) *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelCharacterSetWithRange, aRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableCharacterSetFromID(_ret)
 }
 
 func NSMutableCharacterSetCharacterSetWithCharactersInString(aString *NSString) *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelCharacterSetWithCharactersInString, aString.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableCharacterSetFromID(_ret)
 }
 
 func NSMutableCharacterSetCharacterSetWithBitmapRepresentation(data *NSData) *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelCharacterSetWithBitmapRepresentation, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableCharacterSetFromID(_ret)
 }
 
 func NSMutableCharacterSetCharacterSetWithContentsOfFile(fName *NSString) *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelCharacterSetWithContentsOfFile, fName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableCharacterSetFromID(_ret)
 }
-

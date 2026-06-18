@@ -158,7 +158,9 @@ func (x *NNGridSample) SetUseGridValueAsInputCoordinate(useGridValueAsInputCoord
 	x.inner.SetUseGridValueAsInputCoordinate(useGridValueAsInputCoordinate)
 }
 
-func (x *NNGridSample) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNBinaryKernel }
+func (x *NNGridSample) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNBinaryKernel
+}
 
 // NNGridSampleable is the interface implemented by [NNGridSample], for mocking and DI.
 type NNGridSampleable interface {
@@ -185,4 +187,3 @@ type NNGridSampleable interface {
 }
 
 var _ NNGridSampleable = (*NNGridSample)(nil)
-

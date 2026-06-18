@@ -16,7 +16,9 @@ type MagnificationGestureRecognizer struct {
 }
 
 // Unwrap returns the underlying [raw.NSMagnificationGestureRecognizer].
-func (x *MagnificationGestureRecognizer) Unwrap() *raw.NSMagnificationGestureRecognizer { return x.inner }
+func (x *MagnificationGestureRecognizer) Unwrap() *raw.NSMagnificationGestureRecognizer {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -136,7 +138,9 @@ func (x *MagnificationGestureRecognizer) SetMagnification(magnification float64)
 	x.inner.SetMagnification(magnification)
 }
 
-func (x *MagnificationGestureRecognizer) asGestureRecognizer() *raw.NSGestureRecognizer { return &x.inner.NSGestureRecognizer }
+func (x *MagnificationGestureRecognizer) asGestureRecognizer() *raw.NSGestureRecognizer {
+	return &x.inner.NSGestureRecognizer
+}
 
 // MagnificationGestureRecognizerable is the interface implemented by [MagnificationGestureRecognizer], for mocking and DI.
 type MagnificationGestureRecognizerable interface {
@@ -161,4 +165,3 @@ type MagnificationGestureRecognizerable interface {
 }
 
 var _ MagnificationGestureRecognizerable = (*MagnificationGestureRecognizer)(nil)
-

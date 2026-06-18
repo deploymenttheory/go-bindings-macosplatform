@@ -16,7 +16,9 @@ type MTRDoorLockClusterDoorStateChangeEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRDoorLockClusterDoorStateChangeEvent].
-func (x *MTRDoorLockClusterDoorStateChangeEvent) Unwrap() *raw.MTRDoorLockClusterDoorStateChangeEvent { return x.inner }
+func (x *MTRDoorLockClusterDoorStateChangeEvent) Unwrap() *raw.MTRDoorLockClusterDoorStateChangeEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -61,4 +63,3 @@ type MTRDoorLockClusterDoorStateChangeEventable interface {
 }
 
 var _ MTRDoorLockClusterDoorStateChangeEventable = (*MTRDoorLockClusterDoorStateChangeEvent)(nil)
-

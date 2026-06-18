@@ -15,7 +15,9 @@ type ConeDirectivityModelSubbandParameters struct {
 }
 
 // Unwrap returns the underlying [raw.PHASEConeDirectivityModelSubbandParameters].
-func (x *ConeDirectivityModelSubbandParameters) Unwrap() *raw.PHASEConeDirectivityModelSubbandParameters { return x.inner }
+func (x *ConeDirectivityModelSubbandParameters) Unwrap() *raw.PHASEConeDirectivityModelSubbandParameters {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -97,4 +99,3 @@ type ConeDirectivityModelSubbandParametersable interface {
 }
 
 var _ ConeDirectivityModelSubbandParametersable = (*ConeDirectivityModelSubbandParameters)(nil)
-

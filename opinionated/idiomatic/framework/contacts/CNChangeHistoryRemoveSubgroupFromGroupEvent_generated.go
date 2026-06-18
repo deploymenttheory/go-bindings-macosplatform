@@ -15,7 +15,9 @@ type ChangeHistoryRemoveSubgroupFromGroupEvent struct {
 }
 
 // Unwrap returns the underlying [raw.CNChangeHistoryRemoveSubgroupFromGroupEvent].
-func (x *ChangeHistoryRemoveSubgroupFromGroupEvent) Unwrap() *raw.CNChangeHistoryRemoveSubgroupFromGroupEvent { return x.inner }
+func (x *ChangeHistoryRemoveSubgroupFromGroupEvent) Unwrap() *raw.CNChangeHistoryRemoveSubgroupFromGroupEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -53,7 +55,9 @@ func (x *ChangeHistoryRemoveSubgroupFromGroupEvent) Group() *Group {
 	return &Group{inner: _r}
 }
 
-func (x *ChangeHistoryRemoveSubgroupFromGroupEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent { return &x.inner.CNChangeHistoryEvent }
+func (x *ChangeHistoryRemoveSubgroupFromGroupEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent {
+	return &x.inner.CNChangeHistoryEvent
+}
 
 // ChangeHistoryRemoveSubgroupFromGroupEventable is the interface implemented by [ChangeHistoryRemoveSubgroupFromGroupEvent], for mocking and DI.
 type ChangeHistoryRemoveSubgroupFromGroupEventable interface {
@@ -63,4 +67,3 @@ type ChangeHistoryRemoveSubgroupFromGroupEventable interface {
 }
 
 var _ ChangeHistoryRemoveSubgroupFromGroupEventable = (*ChangeHistoryRemoveSubgroupFromGroupEvent)(nil)
-

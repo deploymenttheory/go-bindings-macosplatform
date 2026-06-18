@@ -183,4 +183,3 @@ type PolygonBufferable interface {
 }
 
 var _ PolygonBufferable = (*PolygonBuffer)(nil)
-

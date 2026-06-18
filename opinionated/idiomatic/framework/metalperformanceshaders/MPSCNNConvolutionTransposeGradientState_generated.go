@@ -18,7 +18,9 @@ type CNNConvolutionTransposeGradientState struct {
 }
 
 // Unwrap returns the underlying [raw.MPSCNNConvolutionTransposeGradientState].
-func (x *CNNConvolutionTransposeGradientState) Unwrap() *raw.MPSCNNConvolutionTransposeGradientState { return x.inner }
+func (x *CNNConvolutionTransposeGradientState) Unwrap() *raw.MPSCNNConvolutionTransposeGradientState {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -55,11 +57,17 @@ func (x *CNNConvolutionTransposeGradientState) ConvolutionTranspose() *mpsneural
 	return x.inner.ConvolutionTranspose()
 }
 
-func (x *CNNConvolutionTransposeGradientState) asCNNConvolutionGradientState() *mpsneuralnetwork.MPSCNNConvolutionGradientState { return &x.inner.MPSCNNConvolutionGradientState }
+func (x *CNNConvolutionTransposeGradientState) asCNNConvolutionGradientState() *mpsneuralnetwork.MPSCNNConvolutionGradientState {
+	return &x.inner.MPSCNNConvolutionGradientState
+}
 
-func (x *CNNConvolutionTransposeGradientState) asNNGradientState() *mpsneuralnetwork.MPSNNGradientState { return &x.inner.MPSCNNConvolutionGradientState.MPSNNGradientState }
+func (x *CNNConvolutionTransposeGradientState) asNNGradientState() *mpsneuralnetwork.MPSNNGradientState {
+	return &x.inner.MPSCNNConvolutionGradientState.MPSNNGradientState
+}
 
-func (x *CNNConvolutionTransposeGradientState) asState() *mpscore.MPSState { return &x.inner.MPSCNNConvolutionGradientState.MPSNNGradientState.MPSState }
+func (x *CNNConvolutionTransposeGradientState) asState() *mpscore.MPSState {
+	return &x.inner.MPSCNNConvolutionGradientState.MPSNNGradientState.MPSState
+}
 
 // CNNConvolutionTransposeGradientStateable is the interface implemented by [CNNConvolutionTransposeGradientState], for mocking and DI.
 type CNNConvolutionTransposeGradientStateable interface {
@@ -70,4 +78,3 @@ type CNNConvolutionTransposeGradientStateable interface {
 }
 
 var _ CNNConvolutionTransposeGradientStateable = (*CNNConvolutionTransposeGradientState)(nil)
-

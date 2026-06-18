@@ -16,26 +16,26 @@ type PKAddPaymentPassRequestConfiguration struct {
 }
 
 var (
-	_clsPKAddPaymentPassRequestConfiguration = _objcClass("PKAddPaymentPassRequestConfiguration")
-	_pKAddPaymentPassRequestConfigurationSelInitWithEncryptionScheme = objc.RegisterName("initWithEncryptionScheme:")
-	_pKAddPaymentPassRequestConfigurationSelEncryptionScheme = objc.RegisterName("encryptionScheme")
-	_pKAddPaymentPassRequestConfigurationSelStyle = objc.RegisterName("style")
-	_pKAddPaymentPassRequestConfigurationSelSetStyle = objc.RegisterName("setStyle:")
-	_pKAddPaymentPassRequestConfigurationSelCardholderName = objc.RegisterName("cardholderName")
-	_pKAddPaymentPassRequestConfigurationSelSetCardholderName = objc.RegisterName("setCardholderName:")
-	_pKAddPaymentPassRequestConfigurationSelPrimaryAccountSuffix = objc.RegisterName("primaryAccountSuffix")
-	_pKAddPaymentPassRequestConfigurationSelSetPrimaryAccountSuffix = objc.RegisterName("setPrimaryAccountSuffix:")
-	_pKAddPaymentPassRequestConfigurationSelCardDetails = objc.RegisterName("cardDetails")
-	_pKAddPaymentPassRequestConfigurationSelSetCardDetails = objc.RegisterName("setCardDetails:")
-	_pKAddPaymentPassRequestConfigurationSelLocalizedDescription = objc.RegisterName("localizedDescription")
-	_pKAddPaymentPassRequestConfigurationSelSetLocalizedDescription = objc.RegisterName("setLocalizedDescription:")
-	_pKAddPaymentPassRequestConfigurationSelPrimaryAccountIdentifier = objc.RegisterName("primaryAccountIdentifier")
-	_pKAddPaymentPassRequestConfigurationSelSetPrimaryAccountIdentifier = objc.RegisterName("setPrimaryAccountIdentifier:")
-	_pKAddPaymentPassRequestConfigurationSelPaymentNetwork = objc.RegisterName("paymentNetwork")
-	_pKAddPaymentPassRequestConfigurationSelSetPaymentNetwork = objc.RegisterName("setPaymentNetwork:")
-	_pKAddPaymentPassRequestConfigurationSelProductIdentifiers = objc.RegisterName("productIdentifiers")
-	_pKAddPaymentPassRequestConfigurationSelSetProductIdentifiers = objc.RegisterName("setProductIdentifiers:")
-	_pKAddPaymentPassRequestConfigurationSelRequiresFelicaSecureElement = objc.RegisterName("requiresFelicaSecureElement")
+	_clsPKAddPaymentPassRequestConfiguration                               = _objcClass("PKAddPaymentPassRequestConfiguration")
+	_pKAddPaymentPassRequestConfigurationSelInitWithEncryptionScheme       = objc.RegisterName("initWithEncryptionScheme:")
+	_pKAddPaymentPassRequestConfigurationSelEncryptionScheme               = objc.RegisterName("encryptionScheme")
+	_pKAddPaymentPassRequestConfigurationSelStyle                          = objc.RegisterName("style")
+	_pKAddPaymentPassRequestConfigurationSelSetStyle                       = objc.RegisterName("setStyle:")
+	_pKAddPaymentPassRequestConfigurationSelCardholderName                 = objc.RegisterName("cardholderName")
+	_pKAddPaymentPassRequestConfigurationSelSetCardholderName              = objc.RegisterName("setCardholderName:")
+	_pKAddPaymentPassRequestConfigurationSelPrimaryAccountSuffix           = objc.RegisterName("primaryAccountSuffix")
+	_pKAddPaymentPassRequestConfigurationSelSetPrimaryAccountSuffix        = objc.RegisterName("setPrimaryAccountSuffix:")
+	_pKAddPaymentPassRequestConfigurationSelCardDetails                    = objc.RegisterName("cardDetails")
+	_pKAddPaymentPassRequestConfigurationSelSetCardDetails                 = objc.RegisterName("setCardDetails:")
+	_pKAddPaymentPassRequestConfigurationSelLocalizedDescription           = objc.RegisterName("localizedDescription")
+	_pKAddPaymentPassRequestConfigurationSelSetLocalizedDescription        = objc.RegisterName("setLocalizedDescription:")
+	_pKAddPaymentPassRequestConfigurationSelPrimaryAccountIdentifier       = objc.RegisterName("primaryAccountIdentifier")
+	_pKAddPaymentPassRequestConfigurationSelSetPrimaryAccountIdentifier    = objc.RegisterName("setPrimaryAccountIdentifier:")
+	_pKAddPaymentPassRequestConfigurationSelPaymentNetwork                 = objc.RegisterName("paymentNetwork")
+	_pKAddPaymentPassRequestConfigurationSelSetPaymentNetwork              = objc.RegisterName("setPaymentNetwork:")
+	_pKAddPaymentPassRequestConfigurationSelProductIdentifiers             = objc.RegisterName("productIdentifiers")
+	_pKAddPaymentPassRequestConfigurationSelSetProductIdentifiers          = objc.RegisterName("setProductIdentifiers:")
+	_pKAddPaymentPassRequestConfigurationSelRequiresFelicaSecureElement    = objc.RegisterName("requiresFelicaSecureElement")
 	_pKAddPaymentPassRequestConfigurationSelSetRequiresFelicaSecureElement = objc.RegisterName("setRequiresFelicaSecureElement:")
 )
 
@@ -51,13 +51,17 @@ func PKAddPaymentPassRequestConfigurationFromID(id objc.ID) *PKAddPaymentPassReq
 
 func (o *PKAddPaymentPassRequestConfiguration) InitWithEncryptionScheme(encryptionScheme *foundation.NSString) *PKAddPaymentPassRequestConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddPaymentPassRequestConfigurationSelInitWithEncryptionScheme, encryptionScheme.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKAddPaymentPassRequestConfigurationFromID(_ret)
 }
 
 func (o *PKAddPaymentPassRequestConfiguration) EncryptionScheme() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddPaymentPassRequestConfigurationSelEncryptionScheme)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -72,7 +76,9 @@ func (o *PKAddPaymentPassRequestConfiguration) SetStyle(style PKAddPaymentPassSt
 
 func (o *PKAddPaymentPassRequestConfiguration) CardholderName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddPaymentPassRequestConfigurationSelCardholderName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -82,7 +88,9 @@ func (o *PKAddPaymentPassRequestConfiguration) SetCardholderName(cardholderName 
 
 func (o *PKAddPaymentPassRequestConfiguration) PrimaryAccountSuffix() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddPaymentPassRequestConfigurationSelPrimaryAccountSuffix)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -92,7 +100,9 @@ func (o *PKAddPaymentPassRequestConfiguration) SetPrimaryAccountSuffix(primaryAc
 
 func (o *PKAddPaymentPassRequestConfiguration) CardDetails() *foundation.NSArray[*PKLabeledValue] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddPaymentPassRequestConfigurationSelCardDetails)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PKLabeledValue](_ret)
 }
 
@@ -102,7 +112,9 @@ func (o *PKAddPaymentPassRequestConfiguration) SetCardDetails(cardDetails *found
 
 func (o *PKAddPaymentPassRequestConfiguration) LocalizedDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddPaymentPassRequestConfigurationSelLocalizedDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -112,7 +124,9 @@ func (o *PKAddPaymentPassRequestConfiguration) SetLocalizedDescription(localized
 
 func (o *PKAddPaymentPassRequestConfiguration) PrimaryAccountIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddPaymentPassRequestConfigurationSelPrimaryAccountIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -122,7 +136,9 @@ func (o *PKAddPaymentPassRequestConfiguration) SetPrimaryAccountIdentifier(prima
 
 func (o *PKAddPaymentPassRequestConfiguration) PaymentNetwork() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddPaymentPassRequestConfigurationSelPaymentNetwork)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -147,4 +163,3 @@ func (o *PKAddPaymentPassRequestConfiguration) RequiresFelicaSecureElement() boo
 func (o *PKAddPaymentPassRequestConfiguration) SetRequiresFelicaSecureElement(requiresFelicaSecureElement bool) {
 	o.Ptr().Send(_pKAddPaymentPassRequestConfigurationSelSetRequiresFelicaSecureElement, requiresFelicaSecureElement)
 }
-

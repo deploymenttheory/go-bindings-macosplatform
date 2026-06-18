@@ -50,7 +50,9 @@ func (x *NNConcatenationNode) WithLabel(label string) *NNConcatenationNode {
 	return x
 }
 
-func (x *NNConcatenationNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+func (x *NNConcatenationNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNFilterNode
+}
 
 // NNConcatenationNodeable is the interface implemented by [NNConcatenationNode], for mocking and DI.
 type NNConcatenationNodeable interface {
@@ -60,4 +62,3 @@ type NNConcatenationNodeable interface {
 }
 
 var _ NNConcatenationNodeable = (*NNConcatenationNode)(nil)
-

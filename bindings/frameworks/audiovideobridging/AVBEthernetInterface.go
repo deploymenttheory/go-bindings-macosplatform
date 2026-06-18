@@ -25,4 +25,3 @@ func AVBEthernetInterfaceFromID(id objc.ID) *AVBEthernetInterface {
 	purego.Track(o)
 	return o
 }
-

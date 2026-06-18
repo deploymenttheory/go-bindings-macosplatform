@@ -56,4 +56,3 @@ type BroadcastHandlerable interface {
 }
 
 var _ BroadcastHandlerable = (*BroadcastHandler)(nil)
-

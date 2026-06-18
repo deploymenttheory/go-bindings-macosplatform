@@ -137,4 +137,3 @@ type ObstacleGraphable interface {
 }
 
 var _ ObstacleGraphable = (*ObstacleGraph)(nil)
-

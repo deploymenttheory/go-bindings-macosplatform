@@ -118,4 +118,3 @@ type AllowedSharingOptionsable interface {
 }
 
 var _ AllowedSharingOptionsable = (*AllowedSharingOptions)(nil)
-

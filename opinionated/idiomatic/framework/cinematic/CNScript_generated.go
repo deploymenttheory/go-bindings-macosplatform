@@ -253,4 +253,3 @@ type Scriptable interface {
 }
 
 var _ Scriptable = (*Script)(nil)
-

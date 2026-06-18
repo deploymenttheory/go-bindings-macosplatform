@@ -724,4 +724,3 @@ func KCTWritingDirectionAttributeName() uintptr {
 	ptr, _ := purego.Dlsym(_coretextLib, "kCTWritingDirectionAttributeName")
 	return ptr
 }
-

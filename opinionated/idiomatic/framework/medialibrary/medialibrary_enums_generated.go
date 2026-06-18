@@ -28,4 +28,3 @@ func (e MLMediaType) String() string {
 		return fmt.Sprintf("MLMediaType(%d)", int64(e))
 	}
 }
-

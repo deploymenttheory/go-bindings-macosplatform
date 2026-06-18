@@ -16,11 +16,11 @@ type SHRange struct {
 }
 
 var (
-	_clsSHRange = _objcClass("SHRange")
+	_clsSHRange                              = _objcClass("SHRange")
 	_sHRangeSelRangeWithLowerBoundUpperBound = objc.RegisterName("rangeWithLowerBound:upperBound:")
-	_sHRangeSelInitWithLowerBoundUpperBound = objc.RegisterName("initWithLowerBound:upperBound:")
-	_sHRangeSelLowerBound = objc.RegisterName("lowerBound")
-	_sHRangeSelUpperBound = objc.RegisterName("upperBound")
+	_sHRangeSelInitWithLowerBoundUpperBound  = objc.RegisterName("initWithLowerBound:upperBound:")
+	_sHRangeSelLowerBound                    = objc.RegisterName("lowerBound")
+	_sHRangeSelUpperBound                    = objc.RegisterName("upperBound")
 )
 
 func SHRangeFromID(id objc.ID) *SHRange {
@@ -36,14 +36,18 @@ func SHRangeFromID(id objc.ID) *SHRange {
 // Creates a range with the bounds you specify. - Parameters: - lowerBound: The lower bound of the range. - upperBound: The upper bound of the range.
 func SHRangeRangeWithLowerBoundUpperBound(lowerBound float64, upperBound float64) *SHRange {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSHRange), _sHRangeSelRangeWithLowerBoundUpperBound, lowerBound, upperBound)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SHRangeFromID(_ret)
 }
 
 // Creates a range with the bounds you specify. - Parameters: - lowerBound: The lower bound of the range. - upperBound: The upper bound of the range.
 func (o *SHRange) InitWithLowerBoundUpperBound(lowerBound float64, upperBound float64) *SHRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sHRangeSelInitWithLowerBoundUpperBound, lowerBound, upperBound)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SHRangeFromID(_ret)
 }
 
@@ -58,4 +62,3 @@ func (o *SHRange) UpperBound() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _sHRangeSelUpperBound)
 	return _ret
 }
-

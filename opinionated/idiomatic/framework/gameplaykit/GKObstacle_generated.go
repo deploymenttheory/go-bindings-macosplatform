@@ -43,4 +43,3 @@ type Obstacleable interface {
 }
 
 var _ Obstacleable = (*Obstacle)(nil)
-

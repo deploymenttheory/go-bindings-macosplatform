@@ -16,17 +16,17 @@ type NSTextList struct {
 }
 
 var (
-	_clsNSTextList = _objcClass("NSTextList")
+	_clsNSTextList                                              = _objcClass("NSTextList")
 	_nSTextListSelInitWithMarkerFormatOptionsStartingItemNumber = objc.RegisterName("initWithMarkerFormat:options:startingItemNumber:")
-	_nSTextListSelInitWithMarkerFormatOptions = objc.RegisterName("initWithMarkerFormat:options:")
-	_nSTextListSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSTextListSelMarkerForItemNumber = objc.RegisterName("markerForItemNumber:")
-	_nSTextListSelMarkerFormat = objc.RegisterName("markerFormat")
-	_nSTextListSelListOptions = objc.RegisterName("listOptions")
-	_nSTextListSelStartingItemNumber = objc.RegisterName("startingItemNumber")
-	_nSTextListSelSetStartingItemNumber = objc.RegisterName("setStartingItemNumber:")
-	_nSTextListSelIsOrdered = objc.RegisterName("isOrdered")
-	_nSTextListSelIncludesTextListMarkers = objc.RegisterName("includesTextListMarkers")
+	_nSTextListSelInitWithMarkerFormatOptions                   = objc.RegisterName("initWithMarkerFormat:options:")
+	_nSTextListSelInitWithCoder                                 = objc.RegisterName("initWithCoder:")
+	_nSTextListSelMarkerForItemNumber                           = objc.RegisterName("markerForItemNumber:")
+	_nSTextListSelMarkerFormat                                  = objc.RegisterName("markerFormat")
+	_nSTextListSelListOptions                                   = objc.RegisterName("listOptions")
+	_nSTextListSelStartingItemNumber                            = objc.RegisterName("startingItemNumber")
+	_nSTextListSelSetStartingItemNumber                         = objc.RegisterName("setStartingItemNumber:")
+	_nSTextListSelIsOrdered                                     = objc.RegisterName("isOrdered")
+	_nSTextListSelIncludesTextListMarkers                       = objc.RegisterName("includesTextListMarkers")
 )
 
 func NSTextListFromID(id objc.ID) *NSTextList {
@@ -41,31 +41,41 @@ func NSTextListFromID(id objc.ID) *NSTextList {
 
 func (o *NSTextList) InitWithMarkerFormatOptionsStartingItemNumber(markerFormat *foundation.NSString, options NSTextListOptions, startingItemNumber int) *NSTextList {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextListSelInitWithMarkerFormatOptionsStartingItemNumber, markerFormat.Ptr(), options, startingItemNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextListFromID(_ret)
 }
 
 func (o *NSTextList) InitWithMarkerFormatOptions(markerFormat *foundation.NSString, options uint) *NSTextList {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextListSelInitWithMarkerFormatOptions, markerFormat.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextListFromID(_ret)
 }
 
 func (o *NSTextList) InitWithCoder(coder *foundation.NSCoder) *NSTextList {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextListSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextListFromID(_ret)
 }
 
 func (o *NSTextList) MarkerForItemNumber(itemNumber int) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextListSelMarkerForItemNumber, itemNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSTextList) MarkerFormat() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextListSelMarkerFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -92,4 +102,3 @@ func NSTextListIncludesTextListMarkers() bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSTextList), _nSTextListSelIncludesTextListMarkers)
 	return _ret
 }
-

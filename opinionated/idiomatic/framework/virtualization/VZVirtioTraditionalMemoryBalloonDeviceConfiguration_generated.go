@@ -15,7 +15,9 @@ type VirtioTraditionalMemoryBalloonDeviceConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.VZVirtioTraditionalMemoryBalloonDeviceConfiguration].
-func (x *VirtioTraditionalMemoryBalloonDeviceConfiguration) Unwrap() *raw.VZVirtioTraditionalMemoryBalloonDeviceConfiguration { return x.inner }
+func (x *VirtioTraditionalMemoryBalloonDeviceConfiguration) Unwrap() *raw.VZVirtioTraditionalMemoryBalloonDeviceConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -35,7 +37,9 @@ func NewVirtioTraditionalMemoryBalloonDeviceConfiguration() *VirtioTraditionalMe
 	return &VirtioTraditionalMemoryBalloonDeviceConfiguration{inner: raw.VZVirtioTraditionalMemoryBalloonDeviceConfigurationFromID(_id)}
 }
 
-func (x *VirtioTraditionalMemoryBalloonDeviceConfiguration) asMemoryBalloonDeviceConfiguration() *raw.VZMemoryBalloonDeviceConfiguration { return &x.inner.VZMemoryBalloonDeviceConfiguration }
+func (x *VirtioTraditionalMemoryBalloonDeviceConfiguration) asMemoryBalloonDeviceConfiguration() *raw.VZMemoryBalloonDeviceConfiguration {
+	return &x.inner.VZMemoryBalloonDeviceConfiguration
+}
 
 // VirtioTraditionalMemoryBalloonDeviceConfigurationable is the interface implemented by [VirtioTraditionalMemoryBalloonDeviceConfiguration], for mocking and DI.
 type VirtioTraditionalMemoryBalloonDeviceConfigurationable interface {
@@ -43,4 +47,3 @@ type VirtioTraditionalMemoryBalloonDeviceConfigurationable interface {
 }
 
 var _ VirtioTraditionalMemoryBalloonDeviceConfigurationable = (*VirtioTraditionalMemoryBalloonDeviceConfiguration)(nil)
-

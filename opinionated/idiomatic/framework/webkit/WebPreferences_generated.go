@@ -614,4 +614,3 @@ type WebPreferencesable interface {
 }
 
 var _ WebPreferencesable = (*WebPreferences)(nil)
-

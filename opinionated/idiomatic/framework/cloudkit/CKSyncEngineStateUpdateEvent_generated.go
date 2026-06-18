@@ -44,7 +44,9 @@ func (x *SyncEngineStateUpdateEvent) StateSerialization() *SyncEngineStateSerial
 	return &SyncEngineStateSerialization{inner: _r}
 }
 
-func (x *SyncEngineStateUpdateEvent) asSyncEngineEvent() *raw.CKSyncEngineEvent { return &x.inner.CKSyncEngineEvent }
+func (x *SyncEngineStateUpdateEvent) asSyncEngineEvent() *raw.CKSyncEngineEvent {
+	return &x.inner.CKSyncEngineEvent
+}
 
 // SyncEngineStateUpdateEventable is the interface implemented by [SyncEngineStateUpdateEvent], for mocking and DI.
 type SyncEngineStateUpdateEventable interface {
@@ -53,4 +55,3 @@ type SyncEngineStateUpdateEventable interface {
 }
 
 var _ SyncEngineStateUpdateEventable = (*SyncEngineStateUpdateEvent)(nil)
-

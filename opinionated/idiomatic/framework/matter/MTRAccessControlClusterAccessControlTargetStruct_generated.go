@@ -16,7 +16,9 @@ type MTRAccessControlClusterAccessControlTargetStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRAccessControlClusterAccessControlTargetStruct].
-func (x *MTRAccessControlClusterAccessControlTargetStruct) Unwrap() *raw.MTRAccessControlClusterAccessControlTargetStruct { return x.inner }
+func (x *MTRAccessControlClusterAccessControlTargetStruct) Unwrap() *raw.MTRAccessControlClusterAccessControlTargetStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -84,7 +86,9 @@ func (x *MTRAccessControlClusterAccessControlTargetStruct) SetDeviceType(deviceT
 	x.inner.SetDeviceType(deviceType)
 }
 
-func (x *MTRAccessControlClusterAccessControlTargetStruct) asMTRAccessControlClusterAccessControlTargetStruct() *raw.MTRAccessControlClusterAccessControlTargetStruct { return x.inner }
+func (x *MTRAccessControlClusterAccessControlTargetStruct) asMTRAccessControlClusterAccessControlTargetStruct() *raw.MTRAccessControlClusterAccessControlTargetStruct {
+	return x.inner
+}
 
 // MTRAccessControlClusterAccessControlTargetStructable is the interface implemented by [MTRAccessControlClusterAccessControlTargetStruct], for mocking and DI.
 type MTRAccessControlClusterAccessControlTargetStructable interface {
@@ -101,4 +105,3 @@ type MTRAccessControlClusterAccessControlTargetStructable interface {
 }
 
 var _ MTRAccessControlClusterAccessControlTargetStructable = (*MTRAccessControlClusterAccessControlTargetStruct)(nil)
-

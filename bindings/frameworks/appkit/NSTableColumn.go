@@ -16,39 +16,39 @@ type NSTableColumn struct {
 }
 
 var (
-	_clsNSTableColumn = _objcClass("NSTableColumn")
-	_nSTableColumnSelInitWithIdentifier = objc.RegisterName("initWithIdentifier:")
-	_nSTableColumnSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSTableColumnSelSizeToFit = objc.RegisterName("sizeToFit")
-	_nSTableColumnSelIdentifier = objc.RegisterName("identifier")
-	_nSTableColumnSelSetIdentifier = objc.RegisterName("setIdentifier:")
-	_nSTableColumnSelTableView = objc.RegisterName("tableView")
-	_nSTableColumnSelSetTableView = objc.RegisterName("setTableView:")
-	_nSTableColumnSelWidth = objc.RegisterName("width")
-	_nSTableColumnSelSetWidth = objc.RegisterName("setWidth:")
-	_nSTableColumnSelMinWidth = objc.RegisterName("minWidth")
-	_nSTableColumnSelSetMinWidth = objc.RegisterName("setMinWidth:")
-	_nSTableColumnSelMaxWidth = objc.RegisterName("maxWidth")
-	_nSTableColumnSelSetMaxWidth = objc.RegisterName("setMaxWidth:")
-	_nSTableColumnSelTitle = objc.RegisterName("title")
-	_nSTableColumnSelSetTitle = objc.RegisterName("setTitle:")
-	_nSTableColumnSelHeaderCell = objc.RegisterName("headerCell")
-	_nSTableColumnSelSetHeaderCell = objc.RegisterName("setHeaderCell:")
-	_nSTableColumnSelIsEditable = objc.RegisterName("isEditable")
-	_nSTableColumnSelSetEditable = objc.RegisterName("setEditable:")
-	_nSTableColumnSelSortDescriptorPrototype = objc.RegisterName("sortDescriptorPrototype")
+	_clsNSTableColumn                           = _objcClass("NSTableColumn")
+	_nSTableColumnSelInitWithIdentifier         = objc.RegisterName("initWithIdentifier:")
+	_nSTableColumnSelInitWithCoder              = objc.RegisterName("initWithCoder:")
+	_nSTableColumnSelSizeToFit                  = objc.RegisterName("sizeToFit")
+	_nSTableColumnSelIdentifier                 = objc.RegisterName("identifier")
+	_nSTableColumnSelSetIdentifier              = objc.RegisterName("setIdentifier:")
+	_nSTableColumnSelTableView                  = objc.RegisterName("tableView")
+	_nSTableColumnSelSetTableView               = objc.RegisterName("setTableView:")
+	_nSTableColumnSelWidth                      = objc.RegisterName("width")
+	_nSTableColumnSelSetWidth                   = objc.RegisterName("setWidth:")
+	_nSTableColumnSelMinWidth                   = objc.RegisterName("minWidth")
+	_nSTableColumnSelSetMinWidth                = objc.RegisterName("setMinWidth:")
+	_nSTableColumnSelMaxWidth                   = objc.RegisterName("maxWidth")
+	_nSTableColumnSelSetMaxWidth                = objc.RegisterName("setMaxWidth:")
+	_nSTableColumnSelTitle                      = objc.RegisterName("title")
+	_nSTableColumnSelSetTitle                   = objc.RegisterName("setTitle:")
+	_nSTableColumnSelHeaderCell                 = objc.RegisterName("headerCell")
+	_nSTableColumnSelSetHeaderCell              = objc.RegisterName("setHeaderCell:")
+	_nSTableColumnSelIsEditable                 = objc.RegisterName("isEditable")
+	_nSTableColumnSelSetEditable                = objc.RegisterName("setEditable:")
+	_nSTableColumnSelSortDescriptorPrototype    = objc.RegisterName("sortDescriptorPrototype")
 	_nSTableColumnSelSetSortDescriptorPrototype = objc.RegisterName("setSortDescriptorPrototype:")
-	_nSTableColumnSelResizingMask = objc.RegisterName("resizingMask")
-	_nSTableColumnSelSetResizingMask = objc.RegisterName("setResizingMask:")
-	_nSTableColumnSelHeaderToolTip = objc.RegisterName("headerToolTip")
-	_nSTableColumnSelSetHeaderToolTip = objc.RegisterName("setHeaderToolTip:")
-	_nSTableColumnSelIsHidden = objc.RegisterName("isHidden")
-	_nSTableColumnSelSetHidden = objc.RegisterName("setHidden:")
-	_nSTableColumnSelSetResizable = objc.RegisterName("setResizable:")
-	_nSTableColumnSelIsResizable = objc.RegisterName("isResizable")
-	_nSTableColumnSelDataCellForRow = objc.RegisterName("dataCellForRow:")
-	_nSTableColumnSelDataCell = objc.RegisterName("dataCell")
-	_nSTableColumnSelSetDataCell = objc.RegisterName("setDataCell:")
+	_nSTableColumnSelResizingMask               = objc.RegisterName("resizingMask")
+	_nSTableColumnSelSetResizingMask            = objc.RegisterName("setResizingMask:")
+	_nSTableColumnSelHeaderToolTip              = objc.RegisterName("headerToolTip")
+	_nSTableColumnSelSetHeaderToolTip           = objc.RegisterName("setHeaderToolTip:")
+	_nSTableColumnSelIsHidden                   = objc.RegisterName("isHidden")
+	_nSTableColumnSelSetHidden                  = objc.RegisterName("setHidden:")
+	_nSTableColumnSelSetResizable               = objc.RegisterName("setResizable:")
+	_nSTableColumnSelIsResizable                = objc.RegisterName("isResizable")
+	_nSTableColumnSelDataCellForRow             = objc.RegisterName("dataCellForRow:")
+	_nSTableColumnSelDataCell                   = objc.RegisterName("dataCell")
+	_nSTableColumnSelSetDataCell                = objc.RegisterName("setDataCell:")
 )
 
 func NSTableColumnFromID(id objc.ID) *NSTableColumn {
@@ -63,13 +63,17 @@ func NSTableColumnFromID(id objc.ID) *NSTableColumn {
 
 func (o *NSTableColumn) InitWithIdentifier(identifier *foundation.NSString) *NSTableColumn {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableColumnSelInitWithIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTableColumnFromID(_ret)
 }
 
 func (o *NSTableColumn) InitWithCoder(coder *foundation.NSCoder) *NSTableColumn {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableColumnSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTableColumnFromID(_ret)
 }
 
@@ -79,7 +83,9 @@ func (o *NSTableColumn) SizeToFit() {
 
 func (o *NSTableColumn) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableColumnSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -89,7 +95,9 @@ func (o *NSTableColumn) SetIdentifier(identifier *foundation.NSString) {
 
 func (o *NSTableColumn) TableView() *NSTableView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableColumnSelTableView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTableViewFromID(_ret)
 }
 
@@ -126,7 +134,9 @@ func (o *NSTableColumn) SetMaxWidth(maxWidth float64) {
 
 func (o *NSTableColumn) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableColumnSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -136,7 +146,9 @@ func (o *NSTableColumn) SetTitle(title *foundation.NSString) {
 
 func (o *NSTableColumn) HeaderCell() *NSTableHeaderCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableColumnSelHeaderCell)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTableHeaderCellFromID(_ret)
 }
 
@@ -155,7 +167,9 @@ func (o *NSTableColumn) SetEditable(editable bool) {
 
 func (o *NSTableColumn) SortDescriptorPrototype() *foundation.NSSortDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableColumnSelSortDescriptorPrototype)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSortDescriptorFromID(_ret)
 }
 
@@ -174,7 +188,9 @@ func (o *NSTableColumn) SetResizingMask(resizingMask NSTableColumnResizingOption
 
 func (o *NSTableColumn) HeaderToolTip() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableColumnSelHeaderToolTip)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -217,4 +233,3 @@ func (o *NSTableColumn) DataCell() objc.ID {
 func (o *NSTableColumn) SetDataCell(dataCell objc.ID) {
 	o.Ptr().Send(_nSTableColumnSelSetDataCell, dataCell)
 }
-

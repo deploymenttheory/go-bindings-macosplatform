@@ -173,13 +173,21 @@ func (x *CNNPoolingL2NormGradient) WithLabel(label string) *CNNPoolingL2NormGrad
 	return x
 }
 
-func (x *CNNPoolingL2NormGradient) asCNNPoolingGradient() *mpsneuralnetwork.MPSCNNPoolingGradient { return &x.inner.MPSCNNPoolingGradient }
+func (x *CNNPoolingL2NormGradient) asCNNPoolingGradient() *mpsneuralnetwork.MPSCNNPoolingGradient {
+	return &x.inner.MPSCNNPoolingGradient
+}
 
-func (x *CNNPoolingL2NormGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel { return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel }
+func (x *CNNPoolingL2NormGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel
+}
 
-func (x *CNNPoolingL2NormGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *CNNPoolingL2NormGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
-func (x *CNNPoolingL2NormGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel }
+func (x *CNNPoolingL2NormGradient) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel
+}
 
 // CNNPoolingL2NormGradientable is the interface implemented by [CNNPoolingL2NormGradient], for mocking and DI.
 type CNNPoolingL2NormGradientable interface {
@@ -208,4 +216,3 @@ type CNNPoolingL2NormGradientable interface {
 }
 
 var _ CNNPoolingL2NormGradientable = (*CNNPoolingL2NormGradient)(nil)
-

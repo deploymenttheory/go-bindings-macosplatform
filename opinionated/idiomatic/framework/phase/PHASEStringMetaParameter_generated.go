@@ -41,7 +41,9 @@ func (x *StringMetaParameter) WithValue(value objc.ID) *StringMetaParameter {
 	return x
 }
 
-func (x *StringMetaParameter) asMetaParameter() *raw.PHASEMetaParameter { return &x.inner.PHASEMetaParameter }
+func (x *StringMetaParameter) asMetaParameter() *raw.PHASEMetaParameter {
+	return &x.inner.PHASEMetaParameter
+}
 
 // StringMetaParameterable is the interface implemented by [StringMetaParameter], for mocking and DI.
 type StringMetaParameterable interface {
@@ -50,4 +52,3 @@ type StringMetaParameterable interface {
 }
 
 var _ StringMetaParameterable = (*StringMetaParameter)(nil)
-

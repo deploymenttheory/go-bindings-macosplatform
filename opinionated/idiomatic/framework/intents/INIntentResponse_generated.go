@@ -63,4 +63,3 @@ type IntentResponseable interface {
 }
 
 var _ IntentResponseable = (*IntentResponse)(nil)
-

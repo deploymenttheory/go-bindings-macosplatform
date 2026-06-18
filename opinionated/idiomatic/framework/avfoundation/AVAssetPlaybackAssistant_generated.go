@@ -47,4 +47,3 @@ type AssetPlaybackAssistantable interface {
 }
 
 var _ AssetPlaybackAssistantable = (*AssetPlaybackAssistant)(nil)
-

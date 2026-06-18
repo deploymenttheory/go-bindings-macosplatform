@@ -15,11 +15,11 @@ type MTLTensorReferenceType struct {
 }
 
 var (
-	_clsMTLTensorReferenceType = _objcClass("MTLTensorReferenceType")
+	_clsMTLTensorReferenceType               = _objcClass("MTLTensorReferenceType")
 	_mTLTensorReferenceTypeSelTensorDataType = objc.RegisterName("tensorDataType")
-	_mTLTensorReferenceTypeSelIndexType = objc.RegisterName("indexType")
-	_mTLTensorReferenceTypeSelDimensions = objc.RegisterName("dimensions")
-	_mTLTensorReferenceTypeSelAccess = objc.RegisterName("access")
+	_mTLTensorReferenceTypeSelIndexType      = objc.RegisterName("indexType")
+	_mTLTensorReferenceTypeSelDimensions     = objc.RegisterName("dimensions")
+	_mTLTensorReferenceTypeSelAccess         = objc.RegisterName("access")
 )
 
 func MTLTensorReferenceTypeFromID(id objc.ID) *MTLTensorReferenceType {
@@ -44,10 +44,12 @@ func (o *MTLTensorReferenceType) IndexType() MTLDataType {
 	return _ret
 }
 
-// The array of sizes, in elements, one for each dimension of this tensor. Because shader-bound tensors have dynamic extents, the ``MTLTensorExtents/rank`` of `dimensions` corresponds to the rank the shader function specifies, and ``MTLTensorExtents/extentsAtDimensionIndex:`` always returns a value of -1.
+// The array of sizes, in elements, one for each dimension of this tensor. Because shader-bound tensors have dynamic extents, the “MTLTensorExtents/rank“ of `dimensions` corresponds to the rank the shader function specifies, and “MTLTensorExtents/extentsAtDimensionIndex:“ always returns a value of -1.
 func (o *MTLTensorReferenceType) Dimensions() *MTLTensorExtents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLTensorReferenceTypeSelDimensions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLTensorExtentsFromID(_ret)
 }
 
@@ -56,4 +58,3 @@ func (o *MTLTensorReferenceType) Access() MTLBindingAccess {
 	_ret := objc.Send[MTLBindingAccess](o.Ptr(), _mTLTensorReferenceTypeSelAccess)
 	return _ret
 }
-

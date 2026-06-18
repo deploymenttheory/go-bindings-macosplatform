@@ -133,4 +133,3 @@ type AuthorizationViewable interface {
 }
 
 var _ AuthorizationViewable = (*AuthorizationView)(nil)
-

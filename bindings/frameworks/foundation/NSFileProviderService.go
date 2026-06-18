@@ -17,9 +17,9 @@ type NSFileProviderService struct {
 }
 
 var (
-	_clsNSFileProviderService = _objcClass("NSFileProviderService")
+	_clsNSFileProviderService                                               = _objcClass("NSFileProviderService")
 	_nSFileProviderServiceSelGetFileProviderConnectionWithCompletionHandler = objc.RegisterName("getFileProviderConnectionWithCompletionHandler:")
-	_nSFileProviderServiceSelName = objc.RegisterName("name")
+	_nSFileProviderServiceSelName                                           = objc.RegisterName("name")
 )
 
 func NSFileProviderServiceFromID(id objc.ID) *NSFileProviderService {
@@ -48,7 +48,8 @@ func (o *NSFileProviderService) GetFileProviderConnectionWithCompletionHandler(c
 
 func (o *NSFileProviderService) Name() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderServiceSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
-

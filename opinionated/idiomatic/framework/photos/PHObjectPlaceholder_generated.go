@@ -43,4 +43,3 @@ type ObjectPlaceholderable interface {
 }
 
 var _ ObjectPlaceholderable = (*ObjectPlaceholder)(nil)
-

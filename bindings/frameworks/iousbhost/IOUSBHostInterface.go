@@ -20,15 +20,15 @@ type IOUSBHostInterface struct {
 }
 
 var (
-	_clsIOUSBHostInterface = _objcClass("IOUSBHostInterface")
+	_clsIOUSBHostInterface                                                                                                                                                           = _objcClass("IOUSBHostInterface")
 	_iOUSBHostInterfaceSelCreateMatchingDictionaryWithVendorIDProductIDBcdDeviceInterfaceNumberConfigurationValueInterfaceClassInterfaceSubclassInterfaceProtocolSpeedProductIDArray = objc.RegisterName("createMatchingDictionaryWithVendorID:productID:bcdDevice:interfaceNumber:configurationValue:interfaceClass:interfaceSubclass:interfaceProtocol:speed:productIDArray:")
-	_iOUSBHostInterfaceSelInitWithIOServiceOptionsQueueErrorInterestHandler = objc.RegisterName("initWithIOService:options:queue:error:interestHandler:")
-	_iOUSBHostInterfaceSelSetIdleTimeoutError = objc.RegisterName("setIdleTimeout:error:")
-	_iOUSBHostInterfaceSelSelectAlternateSettingError = objc.RegisterName("selectAlternateSetting:error:")
-	_iOUSBHostInterfaceSelCopyPipeWithAddressError = objc.RegisterName("copyPipeWithAddress:error:")
-	_iOUSBHostInterfaceSelIdleTimeout = objc.RegisterName("idleTimeout")
-	_iOUSBHostInterfaceSelConfigurationDescriptor = objc.RegisterName("configurationDescriptor")
-	_iOUSBHostInterfaceSelInterfaceDescriptor = objc.RegisterName("interfaceDescriptor")
+	_iOUSBHostInterfaceSelInitWithIOServiceOptionsQueueErrorInterestHandler                                                                                                          = objc.RegisterName("initWithIOService:options:queue:error:interestHandler:")
+	_iOUSBHostInterfaceSelSetIdleTimeoutError                                                                                                                                        = objc.RegisterName("setIdleTimeout:error:")
+	_iOUSBHostInterfaceSelSelectAlternateSettingError                                                                                                                                = objc.RegisterName("selectAlternateSetting:error:")
+	_iOUSBHostInterfaceSelCopyPipeWithAddressError                                                                                                                                   = objc.RegisterName("copyPipeWithAddress:error:")
+	_iOUSBHostInterfaceSelIdleTimeout                                                                                                                                                = objc.RegisterName("idleTimeout")
+	_iOUSBHostInterfaceSelConfigurationDescriptor                                                                                                                                    = objc.RegisterName("configurationDescriptor")
+	_iOUSBHostInterfaceSelInterfaceDescriptor                                                                                                                                        = objc.RegisterName("interfaceDescriptor")
 )
 
 func IOUSBHostInterfaceFromID(id objc.ID) *IOUSBHostInterface {
@@ -60,7 +60,9 @@ func (o *IOUSBHostInterface) InitWithIOServiceOptionsQueueErrorInterestHandler(i
 		defer __block_interestHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostInterfaceSelInitWithIOServiceOptionsQueueErrorInterestHandler, ioService, options, queue.Ptr(), error_, __block_interestHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOUSBHostInterfaceFromID(_ret)
 }
 
@@ -111,4 +113,3 @@ func (o *IOUSBHostInterface) InterfaceDescriptor() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _iOUSBHostInterfaceSelInterfaceDescriptor)
 	return _ret
 }
-

@@ -48,7 +48,9 @@ func (x *UnsendMessagesIntentResponse) Code() raw.INUnsendMessagesIntentResponse
 	return x.inner.Code()
 }
 
-func (x *UnsendMessagesIntentResponse) asIntentResponse() *raw.INIntentResponse { return &x.inner.INIntentResponse }
+func (x *UnsendMessagesIntentResponse) asIntentResponse() *raw.INIntentResponse {
+	return &x.inner.INIntentResponse
+}
 
 // UnsendMessagesIntentResponseable is the interface implemented by [UnsendMessagesIntentResponse], for mocking and DI.
 type UnsendMessagesIntentResponseable interface {
@@ -58,4 +60,3 @@ type UnsendMessagesIntentResponseable interface {
 }
 
 var _ UnsendMessagesIntentResponseable = (*UnsendMessagesIntentResponse)(nil)
-

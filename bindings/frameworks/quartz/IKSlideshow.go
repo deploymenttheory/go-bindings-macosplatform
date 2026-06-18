@@ -18,17 +18,17 @@ type IKSlideshow struct {
 }
 
 var (
-	_clsIKSlideshow = _objcClass("IKSlideshow")
-	_iKSlideshowSelSharedSlideshow = objc.RegisterName("sharedSlideshow")
+	_clsIKSlideshow                                        = _objcClass("IKSlideshow")
+	_iKSlideshowSelSharedSlideshow                         = objc.RegisterName("sharedSlideshow")
 	_iKSlideshowSelRunSlideshowWithDataSourceInModeOptions = objc.RegisterName("runSlideshowWithDataSource:inMode:options:")
-	_iKSlideshowSelStopSlideshow = objc.RegisterName("stopSlideshow:")
-	_iKSlideshowSelReloadData = objc.RegisterName("reloadData")
-	_iKSlideshowSelReloadSlideshowItemAtIndex = objc.RegisterName("reloadSlideshowItemAtIndex:")
-	_iKSlideshowSelIndexOfCurrentSlideshowItem = objc.RegisterName("indexOfCurrentSlideshowItem")
-	_iKSlideshowSelCanExportToApplication = objc.RegisterName("canExportToApplication:")
-	_iKSlideshowSelExportSlideshowItemToApplication = objc.RegisterName("exportSlideshowItem:toApplication:")
-	_iKSlideshowSelAutoPlayDelay = objc.RegisterName("autoPlayDelay")
-	_iKSlideshowSelSetAutoPlayDelay = objc.RegisterName("setAutoPlayDelay:")
+	_iKSlideshowSelStopSlideshow                           = objc.RegisterName("stopSlideshow:")
+	_iKSlideshowSelReloadData                              = objc.RegisterName("reloadData")
+	_iKSlideshowSelReloadSlideshowItemAtIndex              = objc.RegisterName("reloadSlideshowItemAtIndex:")
+	_iKSlideshowSelIndexOfCurrentSlideshowItem             = objc.RegisterName("indexOfCurrentSlideshowItem")
+	_iKSlideshowSelCanExportToApplication                  = objc.RegisterName("canExportToApplication:")
+	_iKSlideshowSelExportSlideshowItemToApplication        = objc.RegisterName("exportSlideshowItem:toApplication:")
+	_iKSlideshowSelAutoPlayDelay                           = objc.RegisterName("autoPlayDelay")
+	_iKSlideshowSelSetAutoPlayDelay                        = objc.RegisterName("setAutoPlayDelay:")
 )
 
 func IKSlideshowFromID(id objc.ID) *IKSlideshow {
@@ -93,4 +93,3 @@ func (o *IKSlideshow) AutoPlayDelay() float64 {
 func (o *IKSlideshow) SetAutoPlayDelay(autoPlayDelay float64) {
 	o.Ptr().Send(_iKSlideshowSelSetAutoPlayDelay, autoPlayDelay)
 }
-

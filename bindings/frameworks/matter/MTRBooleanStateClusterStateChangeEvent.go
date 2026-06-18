@@ -16,8 +16,8 @@ type MTRBooleanStateClusterStateChangeEvent struct {
 }
 
 var (
-	_clsMTRBooleanStateClusterStateChangeEvent = _objcClass("MTRBooleanStateClusterStateChangeEvent")
-	_mTRBooleanStateClusterStateChangeEventSelStateValue = objc.RegisterName("stateValue")
+	_clsMTRBooleanStateClusterStateChangeEvent              = _objcClass("MTRBooleanStateClusterStateChangeEvent")
+	_mTRBooleanStateClusterStateChangeEventSelStateValue    = objc.RegisterName("stateValue")
 	_mTRBooleanStateClusterStateChangeEventSelSetStateValue = objc.RegisterName("setStateValue:")
 )
 
@@ -33,11 +33,12 @@ func MTRBooleanStateClusterStateChangeEventFromID(id objc.ID) *MTRBooleanStateCl
 
 func (o *MTRBooleanStateClusterStateChangeEvent) StateValue() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBooleanStateClusterStateChangeEventSelStateValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRBooleanStateClusterStateChangeEvent) SetStateValue(stateValue *foundation.NSNumber) {
 	o.Ptr().Send(_mTRBooleanStateClusterStateChangeEventSelSetStateValue, stateValue.Ptr())
 }
-

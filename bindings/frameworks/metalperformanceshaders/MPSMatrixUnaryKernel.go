@@ -17,15 +17,15 @@ type MPSMatrixUnaryKernel struct {
 }
 
 var (
-	_clsMPSMatrixUnaryKernel = _objcClass("MPSMatrixUnaryKernel")
-	_mPSMatrixUnaryKernelSelSourceMatrixOrigin = objc.RegisterName("sourceMatrixOrigin")
+	_clsMPSMatrixUnaryKernel                      = _objcClass("MPSMatrixUnaryKernel")
+	_mPSMatrixUnaryKernelSelSourceMatrixOrigin    = objc.RegisterName("sourceMatrixOrigin")
 	_mPSMatrixUnaryKernelSelSetSourceMatrixOrigin = objc.RegisterName("setSourceMatrixOrigin:")
-	_mPSMatrixUnaryKernelSelResultMatrixOrigin = objc.RegisterName("resultMatrixOrigin")
+	_mPSMatrixUnaryKernelSelResultMatrixOrigin    = objc.RegisterName("resultMatrixOrigin")
 	_mPSMatrixUnaryKernelSelSetResultMatrixOrigin = objc.RegisterName("setResultMatrixOrigin:")
-	_mPSMatrixUnaryKernelSelBatchStart = objc.RegisterName("batchStart")
-	_mPSMatrixUnaryKernelSelSetBatchStart = objc.RegisterName("setBatchStart:")
-	_mPSMatrixUnaryKernelSelBatchSize = objc.RegisterName("batchSize")
-	_mPSMatrixUnaryKernelSelSetBatchSize = objc.RegisterName("setBatchSize:")
+	_mPSMatrixUnaryKernelSelBatchStart            = objc.RegisterName("batchStart")
+	_mPSMatrixUnaryKernelSelSetBatchStart         = objc.RegisterName("setBatchStart:")
+	_mPSMatrixUnaryKernelSelBatchSize             = objc.RegisterName("batchSize")
+	_mPSMatrixUnaryKernelSelSetBatchSize          = objc.RegisterName("setBatchSize:")
 )
 
 func MPSMatrixUnaryKernelFromID(id objc.ID) *MPSMatrixUnaryKernel {
@@ -77,4 +77,3 @@ func (o *MPSMatrixUnaryKernel) BatchSize() uint {
 func (o *MPSMatrixUnaryKernel) SetBatchSize(batchSize uint) {
 	o.Ptr().Send(_mPSMatrixUnaryKernelSelSetBatchSize, batchSize)
 }
-

@@ -19,7 +19,9 @@ type MTRBaseClusterRefrigeratorAlarm struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterRefrigeratorAlarm].
-func (x *MTRBaseClusterRefrigeratorAlarm) Unwrap() *raw.MTRBaseClusterRefrigeratorAlarm { return x.inner }
+func (x *MTRBaseClusterRefrigeratorAlarm) Unwrap() *raw.MTRBaseClusterRefrigeratorAlarm {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -310,9 +312,13 @@ func (x *MTRBaseClusterRefrigeratorAlarm) SubscribeAttributeClusterRevisionWithP
 	}
 }
 
-func (x *MTRBaseClusterRefrigeratorAlarm) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterRefrigeratorAlarm) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterRefrigeratorAlarm) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterRefrigeratorAlarm) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterRefrigeratorAlarmable is the interface implemented by [MTRBaseClusterRefrigeratorAlarm], for mocking and DI.
 type MTRBaseClusterRefrigeratorAlarmable interface {
@@ -336,4 +342,3 @@ type MTRBaseClusterRefrigeratorAlarmable interface {
 }
 
 var _ MTRBaseClusterRefrigeratorAlarmable = (*MTRBaseClusterRefrigeratorAlarm)(nil)
-

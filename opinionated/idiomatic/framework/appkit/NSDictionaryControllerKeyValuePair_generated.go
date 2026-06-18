@@ -17,7 +17,9 @@ type DictionaryControllerKeyValuePair struct {
 }
 
 // Unwrap returns the underlying [raw.NSDictionaryControllerKeyValuePair].
-func (x *DictionaryControllerKeyValuePair) Unwrap() *raw.NSDictionaryControllerKeyValuePair { return x.inner }
+func (x *DictionaryControllerKeyValuePair) Unwrap() *raw.NSDictionaryControllerKeyValuePair {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -114,4 +116,3 @@ type DictionaryControllerKeyValuePairable interface {
 }
 
 var _ DictionaryControllerKeyValuePairable = (*DictionaryControllerKeyValuePair)(nil)
-

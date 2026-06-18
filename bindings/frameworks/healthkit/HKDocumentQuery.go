@@ -18,11 +18,11 @@ type HKDocumentQuery struct {
 }
 
 var (
-	_clsHKDocumentQuery = _objcClass("HKDocumentQuery")
+	_clsHKDocumentQuery                                                                                   = _objcClass("HKDocumentQuery")
 	_hKDocumentQuerySelInitWithDocumentTypePredicateLimitSortDescriptorsIncludeDocumentDataResultsHandler = objc.RegisterName("initWithDocumentType:predicate:limit:sortDescriptors:includeDocumentData:resultsHandler:")
-	_hKDocumentQuerySelLimit = objc.RegisterName("limit")
-	_hKDocumentQuerySelSortDescriptors = objc.RegisterName("sortDescriptors")
-	_hKDocumentQuerySelIncludeDocumentData = objc.RegisterName("includeDocumentData")
+	_hKDocumentQuerySelLimit                                                                              = objc.RegisterName("limit")
+	_hKDocumentQuerySelSortDescriptors                                                                    = objc.RegisterName("sortDescriptors")
+	_hKDocumentQuerySelIncludeDocumentData                                                                = objc.RegisterName("includeDocumentData")
 )
 
 func HKDocumentQueryFromID(id objc.ID) *HKDocumentQuery {
@@ -51,7 +51,9 @@ func (o *HKDocumentQuery) InitWithDocumentTypePredicateLimitSortDescriptorsInclu
 		defer __block_resultsHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKDocumentQuerySelInitWithDocumentTypePredicateLimitSortDescriptorsIncludeDocumentDataResultsHandler, documentType.Ptr(), predicate.Ptr(), limit, sortDescriptors, includeDocumentData, __block_resultsHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKDocumentQueryFromID(_ret)
 }
 
@@ -72,4 +74,3 @@ func (o *HKDocumentQuery) IncludeDocumentData() bool {
 	_ret := objc.Send[bool](o.Ptr(), _hKDocumentQuerySelIncludeDocumentData)
 	return _ret
 }
-

@@ -51,7 +51,9 @@ func (x *DOMNodeList) Length() uint {
 
 func (x *DOMNodeList) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
-func (x *DOMNodeList) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+func (x *DOMNodeList) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMObject.WebScriptObject
+}
 
 // DOMNodeListable is the interface implemented by [DOMNodeList], for mocking and DI.
 type DOMNodeListable interface {
@@ -61,4 +63,3 @@ type DOMNodeListable interface {
 }
 
 var _ DOMNodeListable = (*DOMNodeList)(nil)
-

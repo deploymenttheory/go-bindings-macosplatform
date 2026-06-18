@@ -1987,9 +1987,13 @@ func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeClusterRevisionWithMinIn
 	}
 }
 
-func (x *MTRBaseClusterMediaPlayback) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterMediaPlayback) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterMediaPlayback) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterMediaPlayback) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterMediaPlaybackable is the interface implemented by [MTRBaseClusterMediaPlayback], for mocking and DI.
 type MTRBaseClusterMediaPlaybackable interface {
@@ -2087,4 +2091,3 @@ type MTRBaseClusterMediaPlaybackable interface {
 }
 
 var _ MTRBaseClusterMediaPlaybackable = (*MTRBaseClusterMediaPlayback)(nil)
-

@@ -14,8 +14,8 @@ import (
 
 var (
 	_metalperformanceshadersLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce                   sync.Once
+	_failedSymbols              = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -48,10 +48,18 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("MPSGetPreferredDevice", func() { purego.RegisterLibFunc(&_fnMPSGetPreferredDevice, _metalperformanceshadersLib, "MPSGetPreferredDevice") })
-	_register("MPSHintTemporaryMemoryHighWaterMark", func() { purego.RegisterLibFunc(&_fnMPSHintTemporaryMemoryHighWaterMark, _metalperformanceshadersLib, "MPSHintTemporaryMemoryHighWaterMark") })
-	_register("MPSSetHeapCacheDuration", func() { purego.RegisterLibFunc(&_fnMPSSetHeapCacheDuration, _metalperformanceshadersLib, "MPSSetHeapCacheDuration") })
-	_register("MPSSupportsMTLDevice", func() { purego.RegisterLibFunc(&_fnMPSSupportsMTLDevice, _metalperformanceshadersLib, "MPSSupportsMTLDevice") })
+	_register("MPSGetPreferredDevice", func() {
+		purego.RegisterLibFunc(&_fnMPSGetPreferredDevice, _metalperformanceshadersLib, "MPSGetPreferredDevice")
+	})
+	_register("MPSHintTemporaryMemoryHighWaterMark", func() {
+		purego.RegisterLibFunc(&_fnMPSHintTemporaryMemoryHighWaterMark, _metalperformanceshadersLib, "MPSHintTemporaryMemoryHighWaterMark")
+	})
+	_register("MPSSetHeapCacheDuration", func() {
+		purego.RegisterLibFunc(&_fnMPSSetHeapCacheDuration, _metalperformanceshadersLib, "MPSSetHeapCacheDuration")
+	})
+	_register("MPSSupportsMTLDevice", func() {
+		purego.RegisterLibFunc(&_fnMPSSupportsMTLDevice, _metalperformanceshadersLib, "MPSSupportsMTLDevice")
+	})
 }
 
 func init() {

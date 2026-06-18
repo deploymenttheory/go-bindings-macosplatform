@@ -154,7 +154,9 @@ func (x *MutableMovieTrack) WithMetadata(items ...MetadataItemProvider) *Mutable
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asMetadataItem().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asMetadataItem().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.AVMetadataItem](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -360,7 +362,9 @@ func (x *MutableMovieTrack) InsertMediaTimeRangeIntoTimeRange(mediaTimeRange cor
 
 func (x *MutableMovieTrack) asMovieTrack() *raw.AVMovieTrack { return &x.inner.AVMovieTrack }
 
-func (x *MutableMovieTrack) asAssetTrack() *raw.AVAssetTrack { return &x.inner.AVMovieTrack.AVAssetTrack }
+func (x *MutableMovieTrack) asAssetTrack() *raw.AVAssetTrack {
+	return &x.inner.AVMovieTrack.AVAssetTrack
+}
 
 // MutableMovieTrackable is the interface implemented by [MutableMovieTrack], for mocking and DI.
 type MutableMovieTrackable interface {
@@ -426,4 +430,3 @@ type MutableMovieTrackable interface {
 }
 
 var _ MutableMovieTrackable = (*MutableMovieTrack)(nil)
-

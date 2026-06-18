@@ -64,4 +64,3 @@ type MatchShipmentTrackingNumberable interface {
 }
 
 var _ MatchShipmentTrackingNumberable = (*MatchShipmentTrackingNumber)(nil)
-

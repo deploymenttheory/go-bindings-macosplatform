@@ -16,14 +16,14 @@ type MTRMediaInputClusterInputInfoStruct struct {
 }
 
 var (
-	_clsMTRMediaInputClusterInputInfoStruct = _objcClass("MTRMediaInputClusterInputInfoStruct")
-	_mTRMediaInputClusterInputInfoStructSelIndex = objc.RegisterName("index")
-	_mTRMediaInputClusterInputInfoStructSelSetIndex = objc.RegisterName("setIndex:")
-	_mTRMediaInputClusterInputInfoStructSelInputType = objc.RegisterName("inputType")
-	_mTRMediaInputClusterInputInfoStructSelSetInputType = objc.RegisterName("setInputType:")
-	_mTRMediaInputClusterInputInfoStructSelName = objc.RegisterName("name")
-	_mTRMediaInputClusterInputInfoStructSelSetName = objc.RegisterName("setName:")
-	_mTRMediaInputClusterInputInfoStructSelDescriptionString = objc.RegisterName("descriptionString")
+	_clsMTRMediaInputClusterInputInfoStruct                     = _objcClass("MTRMediaInputClusterInputInfoStruct")
+	_mTRMediaInputClusterInputInfoStructSelIndex                = objc.RegisterName("index")
+	_mTRMediaInputClusterInputInfoStructSelSetIndex             = objc.RegisterName("setIndex:")
+	_mTRMediaInputClusterInputInfoStructSelInputType            = objc.RegisterName("inputType")
+	_mTRMediaInputClusterInputInfoStructSelSetInputType         = objc.RegisterName("setInputType:")
+	_mTRMediaInputClusterInputInfoStructSelName                 = objc.RegisterName("name")
+	_mTRMediaInputClusterInputInfoStructSelSetName              = objc.RegisterName("setName:")
+	_mTRMediaInputClusterInputInfoStructSelDescriptionString    = objc.RegisterName("descriptionString")
 	_mTRMediaInputClusterInputInfoStructSelSetDescriptionString = objc.RegisterName("setDescriptionString:")
 )
 
@@ -39,7 +39,9 @@ func MTRMediaInputClusterInputInfoStructFromID(id objc.ID) *MTRMediaInputCluster
 
 func (o *MTRMediaInputClusterInputInfoStruct) Index() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMediaInputClusterInputInfoStructSelIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTRMediaInputClusterInputInfoStruct) SetIndex(index *foundation.NSNumbe
 
 func (o *MTRMediaInputClusterInputInfoStruct) InputType() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMediaInputClusterInputInfoStructSelInputType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,7 +63,9 @@ func (o *MTRMediaInputClusterInputInfoStruct) SetInputType(inputType *foundation
 
 func (o *MTRMediaInputClusterInputInfoStruct) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMediaInputClusterInputInfoStructSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -69,11 +75,12 @@ func (o *MTRMediaInputClusterInputInfoStruct) SetName(name *foundation.NSString)
 
 func (o *MTRMediaInputClusterInputInfoStruct) DescriptionString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMediaInputClusterInputInfoStructSelDescriptionString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTRMediaInputClusterInputInfoStruct) SetDescriptionString(descriptionString *foundation.NSString) {
 	o.Ptr().Send(_mTRMediaInputClusterInputInfoStructSelSetDescriptionString, descriptionString.Ptr())
 }
-

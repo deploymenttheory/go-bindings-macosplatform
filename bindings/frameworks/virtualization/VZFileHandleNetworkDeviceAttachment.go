@@ -16,10 +16,10 @@ type VZFileHandleNetworkDeviceAttachment struct {
 }
 
 var (
-	_clsVZFileHandleNetworkDeviceAttachment = _objcClass("VZFileHandleNetworkDeviceAttachment")
-	_vZFileHandleNetworkDeviceAttachmentSelInitWithFileHandle = objc.RegisterName("initWithFileHandle:")
-	_vZFileHandleNetworkDeviceAttachmentSelFileHandle = objc.RegisterName("fileHandle")
-	_vZFileHandleNetworkDeviceAttachmentSelMaximumTransmissionUnit = objc.RegisterName("maximumTransmissionUnit")
+	_clsVZFileHandleNetworkDeviceAttachment                           = _objcClass("VZFileHandleNetworkDeviceAttachment")
+	_vZFileHandleNetworkDeviceAttachmentSelInitWithFileHandle         = objc.RegisterName("initWithFileHandle:")
+	_vZFileHandleNetworkDeviceAttachmentSelFileHandle                 = objc.RegisterName("fileHandle")
+	_vZFileHandleNetworkDeviceAttachmentSelMaximumTransmissionUnit    = objc.RegisterName("maximumTransmissionUnit")
 	_vZFileHandleNetworkDeviceAttachmentSelSetMaximumTransmissionUnit = objc.RegisterName("setMaximumTransmissionUnit:")
 )
 
@@ -36,14 +36,18 @@ func VZFileHandleNetworkDeviceAttachmentFromID(id objc.ID) *VZFileHandleNetworkD
 // @abstract Initialize the attachment with a file handle. @param fileHandle File handle holding a connected datagram socket.
 func (o *VZFileHandleNetworkDeviceAttachment) InitWithFileHandle(fileHandle *foundation.NSFileHandle) *VZFileHandleNetworkDeviceAttachment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZFileHandleNetworkDeviceAttachmentSelInitWithFileHandle, fileHandle.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZFileHandleNetworkDeviceAttachmentFromID(_ret)
 }
 
 // @abstract The file handle associated with this attachment.
 func (o *VZFileHandleNetworkDeviceAttachment) FileHandle() *foundation.NSFileHandle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZFileHandleNetworkDeviceAttachmentSelFileHandle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSFileHandleFromID(_ret)
 }
 
@@ -56,4 +60,3 @@ func (o *VZFileHandleNetworkDeviceAttachment) MaximumTransmissionUnit() int {
 func (o *VZFileHandleNetworkDeviceAttachment) SetMaximumTransmissionUnit(maximumTransmissionUnit int) {
 	o.Ptr().Send(_vZFileHandleNetworkDeviceAttachmentSelSetMaximumTransmissionUnit, maximumTransmissionUnit)
 }
-

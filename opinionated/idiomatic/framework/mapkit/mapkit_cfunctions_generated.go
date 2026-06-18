@@ -205,4 +205,3 @@ func MKStringFromMapRect(rect raw.MKMapRect) *foundation.NSString {
 func MKStringFromMapSize(size raw.MKMapSize) *foundation.NSString {
 	return raw.MKStringFromMapSize(size)
 }
-

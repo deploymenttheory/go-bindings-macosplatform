@@ -412,15 +412,25 @@ func (x *DOMHTMLTableCellElement) SetScope(scope string) {
 	x.inner.SetScope(foundation.NSStringStringWithUTF8String(scope))
 }
 
-func (x *DOMHTMLTableCellElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
+func (x *DOMHTMLTableCellElement) asDOMHTMLElement() *raw.DOMHTMLElement {
+	return &x.inner.DOMHTMLElement
+}
 
-func (x *DOMHTMLTableCellElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
+func (x *DOMHTMLTableCellElement) asDOMElement() *raw.DOMElement {
+	return &x.inner.DOMHTMLElement.DOMElement
+}
 
-func (x *DOMHTMLTableCellElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTMLElement.DOMElement.DOMNode }
+func (x *DOMHTMLTableCellElement) asDOMNode() *raw.DOMNode {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode
+}
 
-func (x *DOMHTMLTableCellElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
+func (x *DOMHTMLTableCellElement) asDOMObject() *raw.DOMObject {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject
+}
 
-func (x *DOMHTMLTableCellElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+func (x *DOMHTMLTableCellElement) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject
+}
 
 // DOMHTMLTableCellElementable is the interface implemented by [DOMHTMLTableCellElement], for mocking and DI.
 type DOMHTMLTableCellElementable interface {
@@ -488,4 +498,3 @@ type DOMHTMLTableCellElementable interface {
 }
 
 var _ DOMHTMLTableCellElementable = (*DOMHTMLTableCellElement)(nil)
-

@@ -26,4 +26,3 @@ func MTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEventFromID(i
 	purego.Track(o)
 	return o
 }
-

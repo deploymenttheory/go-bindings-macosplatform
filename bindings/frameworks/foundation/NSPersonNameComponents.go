@@ -15,20 +15,20 @@ type NSPersonNameComponents struct {
 }
 
 var (
-	_clsNSPersonNameComponents = _objcClass("NSPersonNameComponents")
-	_nSPersonNameComponentsSelNamePrefix = objc.RegisterName("namePrefix")
-	_nSPersonNameComponentsSelSetNamePrefix = objc.RegisterName("setNamePrefix:")
-	_nSPersonNameComponentsSelGivenName = objc.RegisterName("givenName")
-	_nSPersonNameComponentsSelSetGivenName = objc.RegisterName("setGivenName:")
-	_nSPersonNameComponentsSelMiddleName = objc.RegisterName("middleName")
-	_nSPersonNameComponentsSelSetMiddleName = objc.RegisterName("setMiddleName:")
-	_nSPersonNameComponentsSelFamilyName = objc.RegisterName("familyName")
-	_nSPersonNameComponentsSelSetFamilyName = objc.RegisterName("setFamilyName:")
-	_nSPersonNameComponentsSelNameSuffix = objc.RegisterName("nameSuffix")
-	_nSPersonNameComponentsSelSetNameSuffix = objc.RegisterName("setNameSuffix:")
-	_nSPersonNameComponentsSelNickname = objc.RegisterName("nickname")
-	_nSPersonNameComponentsSelSetNickname = objc.RegisterName("setNickname:")
-	_nSPersonNameComponentsSelPhoneticRepresentation = objc.RegisterName("phoneticRepresentation")
+	_clsNSPersonNameComponents                          = _objcClass("NSPersonNameComponents")
+	_nSPersonNameComponentsSelNamePrefix                = objc.RegisterName("namePrefix")
+	_nSPersonNameComponentsSelSetNamePrefix             = objc.RegisterName("setNamePrefix:")
+	_nSPersonNameComponentsSelGivenName                 = objc.RegisterName("givenName")
+	_nSPersonNameComponentsSelSetGivenName              = objc.RegisterName("setGivenName:")
+	_nSPersonNameComponentsSelMiddleName                = objc.RegisterName("middleName")
+	_nSPersonNameComponentsSelSetMiddleName             = objc.RegisterName("setMiddleName:")
+	_nSPersonNameComponentsSelFamilyName                = objc.RegisterName("familyName")
+	_nSPersonNameComponentsSelSetFamilyName             = objc.RegisterName("setFamilyName:")
+	_nSPersonNameComponentsSelNameSuffix                = objc.RegisterName("nameSuffix")
+	_nSPersonNameComponentsSelSetNameSuffix             = objc.RegisterName("setNameSuffix:")
+	_nSPersonNameComponentsSelNickname                  = objc.RegisterName("nickname")
+	_nSPersonNameComponentsSelSetNickname               = objc.RegisterName("setNickname:")
+	_nSPersonNameComponentsSelPhoneticRepresentation    = objc.RegisterName("phoneticRepresentation")
 	_nSPersonNameComponentsSelSetPhoneticRepresentation = objc.RegisterName("setPhoneticRepresentation:")
 )
 
@@ -44,7 +44,9 @@ func NSPersonNameComponentsFromID(id objc.ID) *NSPersonNameComponents {
 
 func (o *NSPersonNameComponents) NamePrefix() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersonNameComponentsSelNamePrefix)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -54,7 +56,9 @@ func (o *NSPersonNameComponents) SetNamePrefix(namePrefix *NSString) {
 
 func (o *NSPersonNameComponents) GivenName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersonNameComponentsSelGivenName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -64,7 +68,9 @@ func (o *NSPersonNameComponents) SetGivenName(givenName *NSString) {
 
 func (o *NSPersonNameComponents) MiddleName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersonNameComponentsSelMiddleName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -74,7 +80,9 @@ func (o *NSPersonNameComponents) SetMiddleName(middleName *NSString) {
 
 func (o *NSPersonNameComponents) FamilyName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersonNameComponentsSelFamilyName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -84,7 +92,9 @@ func (o *NSPersonNameComponents) SetFamilyName(familyName *NSString) {
 
 func (o *NSPersonNameComponents) NameSuffix() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersonNameComponentsSelNameSuffix)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -94,7 +104,9 @@ func (o *NSPersonNameComponents) SetNameSuffix(nameSuffix *NSString) {
 
 func (o *NSPersonNameComponents) Nickname() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersonNameComponentsSelNickname)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -104,11 +116,12 @@ func (o *NSPersonNameComponents) SetNickname(nickname *NSString) {
 
 func (o *NSPersonNameComponents) PhoneticRepresentation() *NSPersonNameComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersonNameComponentsSelPhoneticRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersonNameComponentsFromID(_ret)
 }
 
 func (o *NSPersonNameComponents) SetPhoneticRepresentation(phoneticRepresentation *NSPersonNameComponents) {
 	o.Ptr().Send(_nSPersonNameComponentsSelSetPhoneticRepresentation, phoneticRepresentation.Ptr())
 }
-

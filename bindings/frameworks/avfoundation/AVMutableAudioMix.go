@@ -16,8 +16,8 @@ type AVMutableAudioMix struct {
 }
 
 var (
-	_clsAVMutableAudioMix = _objcClass("AVMutableAudioMix")
-	_aVMutableAudioMixSelAudioMix = objc.RegisterName("audioMix")
+	_clsAVMutableAudioMix                   = _objcClass("AVMutableAudioMix")
+	_aVMutableAudioMixSelAudioMix           = objc.RegisterName("audioMix")
 	_aVMutableAudioMixSelSetInputParameters = objc.RegisterName("setInputParameters:")
 )
 
@@ -33,11 +33,12 @@ func AVMutableAudioMixFromID(id objc.ID) *AVMutableAudioMix {
 
 func AVMutableAudioMixAudioMix() *AVMutableAudioMix {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableAudioMix), _aVMutableAudioMixSelAudioMix)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMutableAudioMixFromID(_ret)
 }
 
 func (o *AVMutableAudioMix) SetInputParameters(inputParameters *foundation.NSArray[*AVAudioMixInputParameters]) {
 	o.Ptr().Send(_aVMutableAudioMixSelSetInputParameters, inputParameters.Ptr())
 }
-

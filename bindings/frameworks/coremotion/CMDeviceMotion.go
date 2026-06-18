@@ -15,14 +15,14 @@ type CMDeviceMotion struct {
 }
 
 var (
-	_clsCMDeviceMotion = _objcClass("CMDeviceMotion")
-	_cMDeviceMotionSelAttitude = objc.RegisterName("attitude")
-	_cMDeviceMotionSelRotationRate = objc.RegisterName("rotationRate")
-	_cMDeviceMotionSelGravity = objc.RegisterName("gravity")
+	_clsCMDeviceMotion                 = _objcClass("CMDeviceMotion")
+	_cMDeviceMotionSelAttitude         = objc.RegisterName("attitude")
+	_cMDeviceMotionSelRotationRate     = objc.RegisterName("rotationRate")
+	_cMDeviceMotionSelGravity          = objc.RegisterName("gravity")
 	_cMDeviceMotionSelUserAcceleration = objc.RegisterName("userAcceleration")
-	_cMDeviceMotionSelMagneticField = objc.RegisterName("magneticField")
-	_cMDeviceMotionSelHeading = objc.RegisterName("heading")
-	_cMDeviceMotionSelSensorLocation = objc.RegisterName("sensorLocation")
+	_cMDeviceMotionSelMagneticField    = objc.RegisterName("magneticField")
+	_cMDeviceMotionSelHeading          = objc.RegisterName("heading")
+	_cMDeviceMotionSelSensorLocation   = objc.RegisterName("sensorLocation")
 )
 
 func CMDeviceMotionFromID(id objc.ID) *CMDeviceMotion {
@@ -37,7 +37,9 @@ func CMDeviceMotionFromID(id objc.ID) *CMDeviceMotion {
 
 func (o *CMDeviceMotion) Attitude() *CMAttitude {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMDeviceMotionSelAttitude)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CMAttitudeFromID(_ret)
 }
 
@@ -70,4 +72,3 @@ func (o *CMDeviceMotion) SensorLocation() CMDeviceMotionSensorLocation {
 	_ret := objc.Send[CMDeviceMotionSensorLocation](o.Ptr(), _cMDeviceMotionSelSensorLocation)
 	return _ret
 }
-

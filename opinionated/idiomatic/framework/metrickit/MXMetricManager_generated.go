@@ -78,4 +78,3 @@ type MetricManagerable interface {
 }
 
 var _ MetricManagerable = (*MetricManager)(nil)
-

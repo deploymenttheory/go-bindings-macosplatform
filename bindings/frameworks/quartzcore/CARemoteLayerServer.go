@@ -16,9 +16,9 @@ type CARemoteLayerServer struct {
 }
 
 var (
-	_clsCARemoteLayerServer = _objcClass("CARemoteLayerServer")
+	_clsCARemoteLayerServer             = _objcClass("CARemoteLayerServer")
 	_cARemoteLayerServerSelSharedServer = objc.RegisterName("sharedServer")
-	_cARemoteLayerServerSelServerPort = objc.RegisterName("serverPort")
+	_cARemoteLayerServerSelServerPort   = objc.RegisterName("serverPort")
 )
 
 func CARemoteLayerServerFromID(id objc.ID) *CARemoteLayerServer {
@@ -33,7 +33,9 @@ func CARemoteLayerServerFromID(id objc.ID) *CARemoteLayerServer {
 
 func CARemoteLayerServerSharedServer() *CARemoteLayerServer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCARemoteLayerServer), _cARemoteLayerServerSelSharedServer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CARemoteLayerServerFromID(_ret)
 }
 
@@ -41,4 +43,3 @@ func (o *CARemoteLayerServer) ServerPort() uint {
 	_ret := objc.Send[uint](o.Ptr(), _cARemoteLayerServerSelServerPort)
 	return _ret
 }
-

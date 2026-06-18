@@ -46,4 +46,3 @@ func ReplyWithImageFileURL(fileURL string) *ThumbnailReply {
 	}
 	return &ThumbnailReply{inner: _r}
 }
-

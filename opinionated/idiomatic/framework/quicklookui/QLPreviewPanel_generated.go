@@ -148,4 +148,3 @@ type PreviewPanelable interface {
 }
 
 var _ PreviewPanelable = (*PreviewPanel)(nil)
-

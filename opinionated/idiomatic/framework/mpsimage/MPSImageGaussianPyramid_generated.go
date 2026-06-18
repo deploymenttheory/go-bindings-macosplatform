@@ -57,7 +57,9 @@ func (x *ImageGaussianPyramid) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *
 
 func (x *ImageGaussianPyramid) asImagePyramid() *raw.MPSImagePyramid { return &x.inner.MPSImagePyramid }
 
-func (x *ImageGaussianPyramid) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSImagePyramid.MPSUnaryImageKernel }
+func (x *ImageGaussianPyramid) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
+	return &x.inner.MPSImagePyramid.MPSUnaryImageKernel
+}
 
 // ImageGaussianPyramidable is the interface implemented by [ImageGaussianPyramid], for mocking and DI.
 type ImageGaussianPyramidable interface {
@@ -68,4 +70,3 @@ type ImageGaussianPyramidable interface {
 }
 
 var _ ImageGaussianPyramidable = (*ImageGaussianPyramid)(nil)
-

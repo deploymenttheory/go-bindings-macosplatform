@@ -16,17 +16,17 @@ type NSWindowTabGroup struct {
 }
 
 var (
-	_clsNSWindowTabGroup = _objcClass("NSWindowTabGroup")
-	_nSWindowTabGroupSelAddWindow = objc.RegisterName("addWindow:")
+	_clsNSWindowTabGroup                    = _objcClass("NSWindowTabGroup")
+	_nSWindowTabGroupSelAddWindow           = objc.RegisterName("addWindow:")
 	_nSWindowTabGroupSelInsertWindowAtIndex = objc.RegisterName("insertWindow:atIndex:")
-	_nSWindowTabGroupSelRemoveWindow = objc.RegisterName("removeWindow:")
-	_nSWindowTabGroupSelIdentifier = objc.RegisterName("identifier")
-	_nSWindowTabGroupSelWindows = objc.RegisterName("windows")
-	_nSWindowTabGroupSelIsOverviewVisible = objc.RegisterName("isOverviewVisible")
-	_nSWindowTabGroupSelSetOverviewVisible = objc.RegisterName("setOverviewVisible:")
-	_nSWindowTabGroupSelIsTabBarVisible = objc.RegisterName("isTabBarVisible")
-	_nSWindowTabGroupSelSelectedWindow = objc.RegisterName("selectedWindow")
-	_nSWindowTabGroupSelSetSelectedWindow = objc.RegisterName("setSelectedWindow:")
+	_nSWindowTabGroupSelRemoveWindow        = objc.RegisterName("removeWindow:")
+	_nSWindowTabGroupSelIdentifier          = objc.RegisterName("identifier")
+	_nSWindowTabGroupSelWindows             = objc.RegisterName("windows")
+	_nSWindowTabGroupSelIsOverviewVisible   = objc.RegisterName("isOverviewVisible")
+	_nSWindowTabGroupSelSetOverviewVisible  = objc.RegisterName("setOverviewVisible:")
+	_nSWindowTabGroupSelIsTabBarVisible     = objc.RegisterName("isTabBarVisible")
+	_nSWindowTabGroupSelSelectedWindow      = objc.RegisterName("selectedWindow")
+	_nSWindowTabGroupSelSetSelectedWindow   = objc.RegisterName("setSelectedWindow:")
 )
 
 func NSWindowTabGroupFromID(id objc.ID) *NSWindowTabGroup {
@@ -53,13 +53,17 @@ func (o *NSWindowTabGroup) RemoveWindow(window *NSWindow) {
 
 func (o *NSWindowTabGroup) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowTabGroupSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSWindowTabGroup) Windows() *foundation.NSArray[*NSWindow] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowTabGroupSelWindows)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSWindow](_ret)
 }
 
@@ -79,11 +83,12 @@ func (o *NSWindowTabGroup) IsTabBarVisible() bool {
 
 func (o *NSWindowTabGroup) SelectedWindow() *NSWindow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowTabGroupSelSelectedWindow)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWindowFromID(_ret)
 }
 
 func (o *NSWindowTabGroup) SetSelectedWindow(selectedWindow *NSWindow) {
 	o.Ptr().Send(_nSWindowTabGroupSelSetSelectedWindow, selectedWindow.Ptr())
 }
-

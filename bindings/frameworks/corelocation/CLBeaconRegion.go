@@ -17,22 +17,22 @@ type CLBeaconRegion struct {
 }
 
 var (
-	_clsCLBeaconRegion = _objcClass("CLBeaconRegion")
-	_cLBeaconRegionSelInitWithUUIDIdentifier = objc.RegisterName("initWithUUID:identifier:")
-	_cLBeaconRegionSelInitWithProximityUUIDIdentifier = objc.RegisterName("initWithProximityUUID:identifier:")
-	_cLBeaconRegionSelInitWithUUIDMajorIdentifier = objc.RegisterName("initWithUUID:major:identifier:")
-	_cLBeaconRegionSelInitWithProximityUUIDMajorIdentifier = objc.RegisterName("initWithProximityUUID:major:identifier:")
-	_cLBeaconRegionSelInitWithUUIDMajorMinorIdentifier = objc.RegisterName("initWithUUID:major:minor:identifier:")
-	_cLBeaconRegionSelInitWithProximityUUIDMajorMinorIdentifier = objc.RegisterName("initWithProximityUUID:major:minor:identifier:")
+	_clsCLBeaconRegion                                           = _objcClass("CLBeaconRegion")
+	_cLBeaconRegionSelInitWithUUIDIdentifier                     = objc.RegisterName("initWithUUID:identifier:")
+	_cLBeaconRegionSelInitWithProximityUUIDIdentifier            = objc.RegisterName("initWithProximityUUID:identifier:")
+	_cLBeaconRegionSelInitWithUUIDMajorIdentifier                = objc.RegisterName("initWithUUID:major:identifier:")
+	_cLBeaconRegionSelInitWithProximityUUIDMajorIdentifier       = objc.RegisterName("initWithProximityUUID:major:identifier:")
+	_cLBeaconRegionSelInitWithUUIDMajorMinorIdentifier           = objc.RegisterName("initWithUUID:major:minor:identifier:")
+	_cLBeaconRegionSelInitWithProximityUUIDMajorMinorIdentifier  = objc.RegisterName("initWithProximityUUID:major:minor:identifier:")
 	_cLBeaconRegionSelInitWithBeaconIdentityConstraintIdentifier = objc.RegisterName("initWithBeaconIdentityConstraint:identifier:")
-	_cLBeaconRegionSelPeripheralDataWithMeasuredPower = objc.RegisterName("peripheralDataWithMeasuredPower:")
-	_cLBeaconRegionSelBeaconIdentityConstraint = objc.RegisterName("beaconIdentityConstraint")
-	_cLBeaconRegionSelUUID = objc.RegisterName("UUID")
-	_cLBeaconRegionSelProximityUUID = objc.RegisterName("proximityUUID")
-	_cLBeaconRegionSelMajor = objc.RegisterName("major")
-	_cLBeaconRegionSelMinor = objc.RegisterName("minor")
-	_cLBeaconRegionSelNotifyEntryStateOnDisplay = objc.RegisterName("notifyEntryStateOnDisplay")
-	_cLBeaconRegionSelSetNotifyEntryStateOnDisplay = objc.RegisterName("setNotifyEntryStateOnDisplay:")
+	_cLBeaconRegionSelPeripheralDataWithMeasuredPower            = objc.RegisterName("peripheralDataWithMeasuredPower:")
+	_cLBeaconRegionSelBeaconIdentityConstraint                   = objc.RegisterName("beaconIdentityConstraint")
+	_cLBeaconRegionSelUUID                                       = objc.RegisterName("UUID")
+	_cLBeaconRegionSelProximityUUID                              = objc.RegisterName("proximityUUID")
+	_cLBeaconRegionSelMajor                                      = objc.RegisterName("major")
+	_cLBeaconRegionSelMinor                                      = objc.RegisterName("minor")
+	_cLBeaconRegionSelNotifyEntryStateOnDisplay                  = objc.RegisterName("notifyEntryStateOnDisplay")
+	_cLBeaconRegionSelSetNotifyEntryStateOnDisplay               = objc.RegisterName("setNotifyEntryStateOnDisplay:")
 )
 
 func CLBeaconRegionFromID(id objc.ID) *CLBeaconRegion {
@@ -47,46 +47,60 @@ func CLBeaconRegionFromID(id objc.ID) *CLBeaconRegion {
 
 func (o *CLBeaconRegion) InitWithUUIDIdentifier(uuid *foundation.NSUUID, identifier *foundation.NSString) *CLBeaconRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconRegionSelInitWithUUIDIdentifier, uuid.Ptr(), identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLBeaconRegionFromID(_ret)
 }
 
 // Deprecated: since macOS 10.15.
 func (o *CLBeaconRegion) InitWithProximityUUIDIdentifier(proximityUUID *foundation.NSUUID, identifier *foundation.NSString) *CLBeaconRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconRegionSelInitWithProximityUUIDIdentifier, proximityUUID.Ptr(), identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLBeaconRegionFromID(_ret)
 }
 
 func (o *CLBeaconRegion) InitWithUUIDMajorIdentifier(uuid *foundation.NSUUID, major uint16, identifier *foundation.NSString) *CLBeaconRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconRegionSelInitWithUUIDMajorIdentifier, uuid.Ptr(), major, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLBeaconRegionFromID(_ret)
 }
 
 // Deprecated: since macOS 10.15.
 func (o *CLBeaconRegion) InitWithProximityUUIDMajorIdentifier(proximityUUID *foundation.NSUUID, major uint16, identifier *foundation.NSString) *CLBeaconRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconRegionSelInitWithProximityUUIDMajorIdentifier, proximityUUID.Ptr(), major, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLBeaconRegionFromID(_ret)
 }
 
 func (o *CLBeaconRegion) InitWithUUIDMajorMinorIdentifier(uuid *foundation.NSUUID, major uint16, minor uint16, identifier *foundation.NSString) *CLBeaconRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconRegionSelInitWithUUIDMajorMinorIdentifier, uuid.Ptr(), major, minor, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLBeaconRegionFromID(_ret)
 }
 
 // Deprecated: since macOS 10.15.
 func (o *CLBeaconRegion) InitWithProximityUUIDMajorMinorIdentifier(proximityUUID *foundation.NSUUID, major uint16, minor uint16, identifier *foundation.NSString) *CLBeaconRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconRegionSelInitWithProximityUUIDMajorMinorIdentifier, proximityUUID.Ptr(), major, minor, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLBeaconRegionFromID(_ret)
 }
 
 func (o *CLBeaconRegion) InitWithBeaconIdentityConstraintIdentifier(beaconIdentityConstraint *CLBeaconIdentityConstraint, identifier *foundation.NSString) *CLBeaconRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconRegionSelInitWithBeaconIdentityConstraintIdentifier, beaconIdentityConstraint.Ptr(), identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLBeaconRegionFromID(_ret)
 }
 
@@ -97,32 +111,42 @@ func (o *CLBeaconRegion) PeripheralDataWithMeasuredPower(measuredPower *foundati
 
 func (o *CLBeaconRegion) BeaconIdentityConstraint() *CLBeaconIdentityConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconRegionSelBeaconIdentityConstraint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLBeaconIdentityConstraintFromID(_ret)
 }
 
 func (o *CLBeaconRegion) UUID() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconRegionSelUUID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
 
 // Deprecated: since macOS 10.15.
 func (o *CLBeaconRegion) ProximityUUID() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconRegionSelProximityUUID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
 
 func (o *CLBeaconRegion) Major() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconRegionSelMajor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *CLBeaconRegion) Minor() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconRegionSelMinor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -134,4 +158,3 @@ func (o *CLBeaconRegion) NotifyEntryStateOnDisplay() bool {
 func (o *CLBeaconRegion) SetNotifyEntryStateOnDisplay(notifyEntryStateOnDisplay bool) {
 	o.Ptr().Send(_cLBeaconRegionSelSetNotifyEntryStateOnDisplay, notifyEntryStateOnDisplay)
 }
-

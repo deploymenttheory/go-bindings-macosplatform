@@ -939,9 +939,13 @@ func (x *MTRBaseClusterOnOff) SubscribeAttributeClusterRevisionWithMinIntervalMa
 	}
 }
 
-func (x *MTRBaseClusterOnOff) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterOnOff) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterOnOff) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterOnOff) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterOnOffable is the interface implemented by [MTRBaseClusterOnOff], for mocking and DI.
 type MTRBaseClusterOnOffable interface {
@@ -1021,4 +1025,3 @@ type MTRBaseClusterOnOffable interface {
 }
 
 var _ MTRBaseClusterOnOffable = (*MTRBaseClusterOnOff)(nil)
-

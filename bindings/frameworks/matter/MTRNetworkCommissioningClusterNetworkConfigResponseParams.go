@@ -18,16 +18,16 @@ type MTRNetworkCommissioningClusterNetworkConfigResponseParams struct {
 }
 
 var (
-	_clsMTRNetworkCommissioningClusterNetworkConfigResponseParams = _objcClass("MTRNetworkCommissioningClusterNetworkConfigResponseParams")
+	_clsMTRNetworkCommissioningClusterNetworkConfigResponseParams                           = _objcClass("MTRNetworkCommissioningClusterNetworkConfigResponseParams")
 	_mTRNetworkCommissioningClusterNetworkConfigResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRNetworkCommissioningClusterNetworkConfigResponseParamsSelNetworkingStatus = objc.RegisterName("networkingStatus")
-	_mTRNetworkCommissioningClusterNetworkConfigResponseParamsSelSetNetworkingStatus = objc.RegisterName("setNetworkingStatus:")
-	_mTRNetworkCommissioningClusterNetworkConfigResponseParamsSelDebugText = objc.RegisterName("debugText")
-	_mTRNetworkCommissioningClusterNetworkConfigResponseParamsSelSetDebugText = objc.RegisterName("setDebugText:")
-	_mTRNetworkCommissioningClusterNetworkConfigResponseParamsSelNetworkIndex = objc.RegisterName("networkIndex")
-	_mTRNetworkCommissioningClusterNetworkConfigResponseParamsSelSetNetworkIndex = objc.RegisterName("setNetworkIndex:")
-	_mTRNetworkCommissioningClusterNetworkConfigResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRNetworkCommissioningClusterNetworkConfigResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRNetworkCommissioningClusterNetworkConfigResponseParamsSelNetworkingStatus           = objc.RegisterName("networkingStatus")
+	_mTRNetworkCommissioningClusterNetworkConfigResponseParamsSelSetNetworkingStatus        = objc.RegisterName("setNetworkingStatus:")
+	_mTRNetworkCommissioningClusterNetworkConfigResponseParamsSelDebugText                  = objc.RegisterName("debugText")
+	_mTRNetworkCommissioningClusterNetworkConfigResponseParamsSelSetDebugText               = objc.RegisterName("setDebugText:")
+	_mTRNetworkCommissioningClusterNetworkConfigResponseParamsSelNetworkIndex               = objc.RegisterName("networkIndex")
+	_mTRNetworkCommissioningClusterNetworkConfigResponseParamsSelSetNetworkIndex            = objc.RegisterName("setNetworkIndex:")
+	_mTRNetworkCommissioningClusterNetworkConfigResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRNetworkCommissioningClusterNetworkConfigResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
 )
 
 func MTRNetworkCommissioningClusterNetworkConfigResponseParamsFromID(id objc.ID) *MTRNetworkCommissioningClusterNetworkConfigResponseParams {
@@ -44,7 +44,9 @@ func MTRNetworkCommissioningClusterNetworkConfigResponseParamsFromID(id objc.ID)
 func (o *MTRNetworkCommissioningClusterNetworkConfigResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRNetworkCommissioningClusterNetworkConfigResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterNetworkConfigResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -53,7 +55,9 @@ func (o *MTRNetworkCommissioningClusterNetworkConfigResponseParams) InitWithResp
 
 func (o *MTRNetworkCommissioningClusterNetworkConfigResponseParams) NetworkingStatus() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterNetworkConfigResponseParamsSelNetworkingStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -63,7 +67,9 @@ func (o *MTRNetworkCommissioningClusterNetworkConfigResponseParams) SetNetworkin
 
 func (o *MTRNetworkCommissioningClusterNetworkConfigResponseParams) DebugText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterNetworkConfigResponseParamsSelDebugText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -73,7 +79,9 @@ func (o *MTRNetworkCommissioningClusterNetworkConfigResponseParams) SetDebugText
 
 func (o *MTRNetworkCommissioningClusterNetworkConfigResponseParams) NetworkIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterNetworkConfigResponseParamsSelNetworkIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -84,11 +92,12 @@ func (o *MTRNetworkCommissioningClusterNetworkConfigResponseParams) SetNetworkIn
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRNetworkCommissioningClusterNetworkConfigResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterNetworkConfigResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRNetworkCommissioningClusterNetworkConfigResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
 	o.Ptr().Send(_mTRNetworkCommissioningClusterNetworkConfigResponseParamsSelSetTimedInvokeTimeoutMs, timedInvokeTimeoutMs.Ptr())
 }
-

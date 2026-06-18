@@ -26,4 +26,3 @@ func MTRWaterHeaterManagementClusterBoostEndedEventFromID(id objc.ID) *MTRWaterH
 	purego.Track(o)
 	return o
 }
-

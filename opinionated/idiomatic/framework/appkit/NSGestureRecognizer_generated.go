@@ -506,4 +506,3 @@ type GestureRecognizerable interface {
 }
 
 var _ GestureRecognizerable = (*GestureRecognizer)(nil)
-

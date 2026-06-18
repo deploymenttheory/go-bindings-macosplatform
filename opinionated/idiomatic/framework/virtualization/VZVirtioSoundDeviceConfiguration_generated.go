@@ -18,7 +18,9 @@ type VirtioSoundDeviceConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.VZVirtioSoundDeviceConfiguration].
-func (x *VirtioSoundDeviceConfiguration) Unwrap() *raw.VZVirtioSoundDeviceConfiguration { return x.inner }
+func (x *VirtioSoundDeviceConfiguration) Unwrap() *raw.VZVirtioSoundDeviceConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -45,7 +47,9 @@ func (x *VirtioSoundDeviceConfiguration) WithStreams(items ...VirtioSoundDeviceS
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asVirtioSoundDeviceStreamConfiguration().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asVirtioSoundDeviceStreamConfiguration().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.VZVirtioSoundDeviceStreamConfiguration](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -70,7 +74,9 @@ func (x *VirtioSoundDeviceConfiguration) SetStreams(streams *foundation.NSArray[
 	x.inner.SetStreams(streams)
 }
 
-func (x *VirtioSoundDeviceConfiguration) asAudioDeviceConfiguration() *raw.VZAudioDeviceConfiguration { return &x.inner.VZAudioDeviceConfiguration }
+func (x *VirtioSoundDeviceConfiguration) asAudioDeviceConfiguration() *raw.VZAudioDeviceConfiguration {
+	return &x.inner.VZAudioDeviceConfiguration
+}
 
 // VirtioSoundDeviceConfigurationable is the interface implemented by [VirtioSoundDeviceConfiguration], for mocking and DI.
 type VirtioSoundDeviceConfigurationable interface {
@@ -81,4 +87,3 @@ type VirtioSoundDeviceConfigurationable interface {
 }
 
 var _ VirtioSoundDeviceConfigurationable = (*VirtioSoundDeviceConfiguration)(nil)
-

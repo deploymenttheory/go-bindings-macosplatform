@@ -96,4 +96,3 @@ type CompositionParameterViewable interface {
 }
 
 var _ CompositionParameterViewable = (*CompositionParameterView)(nil)
-

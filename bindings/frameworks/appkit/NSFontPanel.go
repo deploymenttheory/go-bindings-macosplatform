@@ -16,16 +16,16 @@ type NSFontPanel struct {
 }
 
 var (
-	_clsNSFontPanel = _objcClass("NSFontPanel")
-	_nSFontPanelSelSetPanelFontIsMultiple = objc.RegisterName("setPanelFont:isMultiple:")
-	_nSFontPanelSelPanelConvertFont = objc.RegisterName("panelConvertFont:")
+	_clsNSFontPanel                          = _objcClass("NSFontPanel")
+	_nSFontPanelSelSetPanelFontIsMultiple    = objc.RegisterName("setPanelFont:isMultiple:")
+	_nSFontPanelSelPanelConvertFont          = objc.RegisterName("panelConvertFont:")
 	_nSFontPanelSelReloadDefaultFontFamilies = objc.RegisterName("reloadDefaultFontFamilies")
-	_nSFontPanelSelSharedFontPanel = objc.RegisterName("sharedFontPanel")
-	_nSFontPanelSelSharedFontPanelExists = objc.RegisterName("sharedFontPanelExists")
-	_nSFontPanelSelAccessoryView = objc.RegisterName("accessoryView")
-	_nSFontPanelSelSetAccessoryView = objc.RegisterName("setAccessoryView:")
-	_nSFontPanelSelIsEnabled = objc.RegisterName("isEnabled")
-	_nSFontPanelSelSetEnabled = objc.RegisterName("setEnabled:")
+	_nSFontPanelSelSharedFontPanel           = objc.RegisterName("sharedFontPanel")
+	_nSFontPanelSelSharedFontPanelExists     = objc.RegisterName("sharedFontPanelExists")
+	_nSFontPanelSelAccessoryView             = objc.RegisterName("accessoryView")
+	_nSFontPanelSelSetAccessoryView          = objc.RegisterName("setAccessoryView:")
+	_nSFontPanelSelIsEnabled                 = objc.RegisterName("isEnabled")
+	_nSFontPanelSelSetEnabled                = objc.RegisterName("setEnabled:")
 )
 
 func NSFontPanelFromID(id objc.ID) *NSFontPanel {
@@ -44,7 +44,9 @@ func (o *NSFontPanel) SetPanelFontIsMultiple(fontObj *NSFont, flag bool) {
 
 func (o *NSFontPanel) PanelConvertFont(fontObj *NSFont) *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontPanelSelPanelConvertFont, fontObj.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
@@ -54,7 +56,9 @@ func (o *NSFontPanel) ReloadDefaultFontFamilies() {
 
 func NSFontPanelSharedFontPanel() *NSFontPanel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFontPanel), _nSFontPanelSelSharedFontPanel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontPanelFromID(_ret)
 }
 
@@ -65,7 +69,9 @@ func NSFontPanelSharedFontPanelExists() bool {
 
 func (o *NSFontPanel) AccessoryView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontPanelSelAccessoryView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -81,4 +87,3 @@ func (o *NSFontPanel) IsEnabled() bool {
 func (o *NSFontPanel) SetEnabled(enabled bool) {
 	o.Ptr().Send(_nSFontPanelSelSetEnabled, enabled)
 }
-

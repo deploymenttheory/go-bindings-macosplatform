@@ -18,12 +18,12 @@ type CBUserIdentity struct {
 }
 
 var (
-	_clsCBUserIdentity = _objcClass("CBUserIdentity")
+	_clsCBUserIdentity                                  = _objcClass("CBUserIdentity")
 	_cBUserIdentitySelUserIdentityWithPosixUIDAuthority = objc.RegisterName("userIdentityWithPosixUID:authority:")
-	_cBUserIdentitySelAuthenticateWithPassword = objc.RegisterName("authenticateWithPassword:")
-	_cBUserIdentitySelPosixUID = objc.RegisterName("posixUID")
-	_cBUserIdentitySelCertificate = objc.RegisterName("certificate")
-	_cBUserIdentitySelIsEnabled = objc.RegisterName("isEnabled")
+	_cBUserIdentitySelAuthenticateWithPassword          = objc.RegisterName("authenticateWithPassword:")
+	_cBUserIdentitySelPosixUID                          = objc.RegisterName("posixUID")
+	_cBUserIdentitySelCertificate                       = objc.RegisterName("certificate")
+	_cBUserIdentitySelIsEnabled                         = objc.RegisterName("isEnabled")
 )
 
 func CBUserIdentityFromID(id objc.ID) *CBUserIdentity {
@@ -39,7 +39,9 @@ func CBUserIdentityFromID(id objc.ID) *CBUserIdentity {
 // Returns the user identity with the given POSIX UID in the specified identity authority. - Parameters: - uid: The UID of the identity you are searching for. - authority: The identity authority to search. - Returns: The user identity with the given UID in the specified identity authority, or `nil` if no identity exists with the specified UID.
 func CBUserIdentityUserIdentityWithPosixUIDAuthority(uid uint, authority *CBIdentityAuthority) *CBUserIdentity {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCBUserIdentity), _cBUserIdentitySelUserIdentityWithPosixUIDAuthority, uid, authority.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CBUserIdentityFromID(_ret)
 }
 
@@ -66,4 +68,3 @@ func (o *CBUserIdentity) IsEnabled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cBUserIdentitySelIsEnabled)
 	return _ret
 }
-

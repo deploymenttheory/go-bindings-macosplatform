@@ -17,11 +17,11 @@ type AVAssetSegmentReportSampleInformation struct {
 }
 
 var (
-	_clsAVAssetSegmentReportSampleInformation = _objcClass("AVAssetSegmentReportSampleInformation")
+	_clsAVAssetSegmentReportSampleInformation                      = _objcClass("AVAssetSegmentReportSampleInformation")
 	_aVAssetSegmentReportSampleInformationSelPresentationTimeStamp = objc.RegisterName("presentationTimeStamp")
-	_aVAssetSegmentReportSampleInformationSelOffset = objc.RegisterName("offset")
-	_aVAssetSegmentReportSampleInformationSelLength = objc.RegisterName("length")
-	_aVAssetSegmentReportSampleInformationSelIsSyncSample = objc.RegisterName("isSyncSample")
+	_aVAssetSegmentReportSampleInformationSelOffset                = objc.RegisterName("offset")
+	_aVAssetSegmentReportSampleInformationSelLength                = objc.RegisterName("length")
+	_aVAssetSegmentReportSampleInformationSelIsSyncSample          = objc.RegisterName("isSyncSample")
 )
 
 func AVAssetSegmentReportSampleInformationFromID(id objc.ID) *AVAssetSegmentReportSampleInformation {
@@ -57,4 +57,3 @@ func (o *AVAssetSegmentReportSampleInformation) IsSyncSample() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVAssetSegmentReportSampleInformationSelIsSyncSample)
 	return _ret
 }
-

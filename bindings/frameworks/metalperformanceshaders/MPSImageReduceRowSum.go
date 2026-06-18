@@ -17,7 +17,7 @@ type MPSImageReduceRowSum struct {
 }
 
 var (
-	_clsMPSImageReduceRowSum = _objcClass("MPSImageReduceRowSum")
+	_clsMPSImageReduceRowSum               = _objcClass("MPSImageReduceRowSum")
 	_mPSImageReduceRowSumSelInitWithDevice = objc.RegisterName("initWithDevice:")
 )
 
@@ -33,7 +33,8 @@ func MPSImageReduceRowSumFromID(id objc.ID) *MPSImageReduceRowSum {
 
 func (o *MPSImageReduceRowSum) InitWithDevice(device metal.MTLDevice) *MPSImageReduceRowSum {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageReduceRowSumSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageReduceRowSumFromID(_ret)
 }
-

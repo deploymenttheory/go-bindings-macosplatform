@@ -16,10 +16,10 @@ type ASOneTimeCodeCredential struct {
 }
 
 var (
-	_clsASOneTimeCodeCredential = _objcClass("ASOneTimeCodeCredential")
+	_clsASOneTimeCodeCredential                   = _objcClass("ASOneTimeCodeCredential")
 	_aSOneTimeCodeCredentialSelCredentialWithCode = objc.RegisterName("credentialWithCode:")
-	_aSOneTimeCodeCredentialSelInitWithCode = objc.RegisterName("initWithCode:")
-	_aSOneTimeCodeCredentialSelCode = objc.RegisterName("code")
+	_aSOneTimeCodeCredentialSelInitWithCode       = objc.RegisterName("initWithCode:")
+	_aSOneTimeCodeCredentialSelCode               = objc.RegisterName("code")
 )
 
 func ASOneTimeCodeCredentialFromID(id objc.ID) *ASOneTimeCodeCredential {
@@ -35,20 +35,25 @@ func ASOneTimeCodeCredentialFromID(id objc.ID) *ASOneTimeCodeCredential {
 // @abstract Creates and initializes a new ASOneTimeCodeCredential object. @param code the one time code.
 func ASOneTimeCodeCredentialCredentialWithCode(code *foundation.NSString) *ASOneTimeCodeCredential {
 	_ret := objc.Send[objc.ID](objc.ID(_clsASOneTimeCodeCredential), _aSOneTimeCodeCredentialSelCredentialWithCode, code.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASOneTimeCodeCredentialFromID(_ret)
 }
 
 // @abstract Initializes an ASOneTimeCodeCredential object. @param code the one time code.
 func (o *ASOneTimeCodeCredential) InitWithCode(code *foundation.NSString) *ASOneTimeCodeCredential {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSOneTimeCodeCredentialSelInitWithCode, code.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASOneTimeCodeCredentialFromID(_ret)
 }
 
 func (o *ASOneTimeCodeCredential) Code() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSOneTimeCodeCredentialSelCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

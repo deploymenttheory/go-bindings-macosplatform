@@ -26,4 +26,3 @@ func MTRSmokeCOAlarmClusterEndOfServiceEventFromID(id objc.ID) *MTRSmokeCOAlarmC
 	purego.Track(o)
 	return o
 }
-

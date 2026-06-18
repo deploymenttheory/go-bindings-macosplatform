@@ -16,15 +16,15 @@ type CKSyncEngineSendChangesScope struct {
 }
 
 var (
-	_clsCKSyncEngineSendChangesScope = _objcClass("CKSyncEngineSendChangesScope")
-	_cKSyncEngineSendChangesScopeSelInitWithZoneIDs = objc.RegisterName("initWithZoneIDs:")
-	_cKSyncEngineSendChangesScopeSelInitWithExcludedZoneIDs = objc.RegisterName("initWithExcludedZoneIDs:")
-	_cKSyncEngineSendChangesScopeSelInitWithRecordIDs = objc.RegisterName("initWithRecordIDs:")
-	_cKSyncEngineSendChangesScopeSelContainsRecordID = objc.RegisterName("containsRecordID:")
+	_clsCKSyncEngineSendChangesScope                                = _objcClass("CKSyncEngineSendChangesScope")
+	_cKSyncEngineSendChangesScopeSelInitWithZoneIDs                 = objc.RegisterName("initWithZoneIDs:")
+	_cKSyncEngineSendChangesScopeSelInitWithExcludedZoneIDs         = objc.RegisterName("initWithExcludedZoneIDs:")
+	_cKSyncEngineSendChangesScopeSelInitWithRecordIDs               = objc.RegisterName("initWithRecordIDs:")
+	_cKSyncEngineSendChangesScopeSelContainsRecordID                = objc.RegisterName("containsRecordID:")
 	_cKSyncEngineSendChangesScopeSelContainsPendingRecordZoneChange = objc.RegisterName("containsPendingRecordZoneChange:")
-	_cKSyncEngineSendChangesScopeSelZoneIDs = objc.RegisterName("zoneIDs")
-	_cKSyncEngineSendChangesScopeSelExcludedZoneIDs = objc.RegisterName("excludedZoneIDs")
-	_cKSyncEngineSendChangesScopeSelRecordIDs = objc.RegisterName("recordIDs")
+	_cKSyncEngineSendChangesScopeSelZoneIDs                         = objc.RegisterName("zoneIDs")
+	_cKSyncEngineSendChangesScopeSelExcludedZoneIDs                 = objc.RegisterName("excludedZoneIDs")
+	_cKSyncEngineSendChangesScopeSelRecordIDs                       = objc.RegisterName("recordIDs")
 )
 
 func CKSyncEngineSendChangesScopeFromID(id objc.ID) *CKSyncEngineSendChangesScope {
@@ -40,21 +40,27 @@ func CKSyncEngineSendChangesScopeFromID(id objc.ID) *CKSyncEngineSendChangesScop
 // Creates a scope that contains only the given zone IDs. If `zoneIDs` is `nil`, then this scope contains all zones.
 func (o *CKSyncEngineSendChangesScope) InitWithZoneIDs(zoneIDs *foundation.NSSet[*CKRecordZoneID]) *CKSyncEngineSendChangesScope {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineSendChangesScopeSelInitWithZoneIDs, zoneIDs.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKSyncEngineSendChangesScopeFromID(_ret)
 }
 
 // Creates a scope that contains all zones except for the given zone IDs.
 func (o *CKSyncEngineSendChangesScope) InitWithExcludedZoneIDs(excludedZoneIDs *foundation.NSSet[*CKRecordZoneID]) *CKSyncEngineSendChangesScope {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineSendChangesScopeSelInitWithExcludedZoneIDs, excludedZoneIDs.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKSyncEngineSendChangesScopeFromID(_ret)
 }
 
 // Creates a scope that includes only the given record IDs. If `recordIDs` is nil, this scope contains all records.
 func (o *CKSyncEngineSendChangesScope) InitWithRecordIDs(recordIDs *foundation.NSSet[*CKRecordID]) *CKSyncEngineSendChangesScope {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineSendChangesScopeSelInitWithRecordIDs, recordIDs.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKSyncEngineSendChangesScopeFromID(_ret)
 }
 
@@ -70,24 +76,29 @@ func (o *CKSyncEngineSendChangesScope) ContainsPendingRecordZoneChange(pendingRe
 	return _ret
 }
 
-// The scope of zone IDs in which to send changes. If you only want to send changes for a particular set of zones, you can initialize your scope with those zone IDs. When creating the next batch of changes to send to the server, consult this, and only send changes within these zones. If this and ``recordIDs`` are `nil`, then you should send all changes.
+// The scope of zone IDs in which to send changes. If you only want to send changes for a particular set of zones, you can initialize your scope with those zone IDs. When creating the next batch of changes to send to the server, consult this, and only send changes within these zones. If this and “recordIDs“ are `nil`, then you should send all changes.
 func (o *CKSyncEngineSendChangesScope) ZoneIDs() *foundation.NSSet[*CKRecordZoneID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineSendChangesScopeSelZoneIDs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*CKRecordZoneID](_ret)
 }
 
-// A specific set of zone IDs to exclude from this scope. If you know that you don't want to send changes for a particular set of zones, you can set those zones here. - Note: a scope with a non-nil ``zoneIDs`` always has an empty `excludedZoneIDs`.
+// A specific set of zone IDs to exclude from this scope. If you know that you don't want to send changes for a particular set of zones, you can set those zones here. - Note: a scope with a non-nil “zoneIDs“ always has an empty `excludedZoneIDs`.
 func (o *CKSyncEngineSendChangesScope) ExcludedZoneIDs() *foundation.NSSet[*CKRecordZoneID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineSendChangesScopeSelExcludedZoneIDs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*CKRecordZoneID](_ret)
 }
 
-// The scope of record IDs in which to send changes. If you only want to send changes for a particular set of records, you can initialize your scope with those records IDs. When creating the next batch of changes to send to the server, consult this property, and only send changes for these record IDs. If this and ``zoneIDs`` are `nil`, then you should send all changes.
+// The scope of record IDs in which to send changes. If you only want to send changes for a particular set of records, you can initialize your scope with those records IDs. When creating the next batch of changes to send to the server, consult this property, and only send changes for these record IDs. If this and “zoneIDs“ are `nil`, then you should send all changes.
 func (o *CKSyncEngineSendChangesScope) RecordIDs() *foundation.NSSet[*CKRecordID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineSendChangesScopeSelRecordIDs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*CKRecordID](_ret)
 }
-

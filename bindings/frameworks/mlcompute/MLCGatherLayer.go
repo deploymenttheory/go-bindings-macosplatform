@@ -15,9 +15,9 @@ type MLCGatherLayer struct {
 }
 
 var (
-	_clsMLCGatherLayer = _objcClass("MLCGatherLayer")
+	_clsMLCGatherLayer                   = _objcClass("MLCGatherLayer")
 	_mLCGatherLayerSelLayerWithDimension = objc.RegisterName("layerWithDimension:")
-	_mLCGatherLayerSelDimension = objc.RegisterName("dimension")
+	_mLCGatherLayerSelDimension          = objc.RegisterName("dimension")
 )
 
 func MLCGatherLayerFromID(id objc.ID) *MLCGatherLayer {
@@ -33,7 +33,9 @@ func MLCGatherLayerFromID(id objc.ID) *MLCGatherLayer {
 // @abstract   Create a gather layer @param      dimension  The dimension along which to index @return     A new gather layer
 func MLCGatherLayerLayerWithDimension(dimension uint) *MLCGatherLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCGatherLayer), _mLCGatherLayerSelLayerWithDimension, dimension)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCGatherLayerFromID(_ret)
 }
 
@@ -42,4 +44,3 @@ func (o *MLCGatherLayer) Dimension() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mLCGatherLayerSelDimension)
 	return _ret
 }
-

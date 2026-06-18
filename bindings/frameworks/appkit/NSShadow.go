@@ -17,15 +17,15 @@ type NSShadow struct {
 }
 
 var (
-	_clsNSShadow = _objcClass("NSShadow")
-	_nSShadowSelInit = objc.RegisterName("init")
-	_nSShadowSelSet = objc.RegisterName("set")
-	_nSShadowSelShadowOffset = objc.RegisterName("shadowOffset")
-	_nSShadowSelSetShadowOffset = objc.RegisterName("setShadowOffset:")
-	_nSShadowSelShadowBlurRadius = objc.RegisterName("shadowBlurRadius")
+	_clsNSShadow                    = _objcClass("NSShadow")
+	_nSShadowSelInit                = objc.RegisterName("init")
+	_nSShadowSelSet                 = objc.RegisterName("set")
+	_nSShadowSelShadowOffset        = objc.RegisterName("shadowOffset")
+	_nSShadowSelSetShadowOffset     = objc.RegisterName("setShadowOffset:")
+	_nSShadowSelShadowBlurRadius    = objc.RegisterName("shadowBlurRadius")
 	_nSShadowSelSetShadowBlurRadius = objc.RegisterName("setShadowBlurRadius:")
-	_nSShadowSelShadowColor = objc.RegisterName("shadowColor")
-	_nSShadowSelSetShadowColor = objc.RegisterName("setShadowColor:")
+	_nSShadowSelShadowColor         = objc.RegisterName("shadowColor")
+	_nSShadowSelSetShadowColor      = objc.RegisterName("setShadowColor:")
 )
 
 func NSShadowFromID(id objc.ID) *NSShadow {
@@ -40,7 +40,9 @@ func NSShadowFromID(id objc.ID) *NSShadow {
 
 func (o *NSShadow) Init() *NSShadow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSShadowSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSShadowFromID(_ret)
 }
 
@@ -68,11 +70,12 @@ func (o *NSShadow) SetShadowBlurRadius(shadowBlurRadius float64) {
 
 func (o *NSShadow) ShadowColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSShadowSelShadowColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
 func (o *NSShadow) SetShadowColor(shadowColor *NSColor) {
 	o.Ptr().Send(_nSShadowSelSetShadowColor, shadowColor.Ptr())
 }
-

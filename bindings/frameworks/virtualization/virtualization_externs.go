@@ -13,7 +13,8 @@ import (
 
 func VZErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_virtualizationLib, "VZErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
-

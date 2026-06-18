@@ -18,12 +18,12 @@ type MPSNNResizeBilinear struct {
 }
 
 var (
-	_clsMPSNNResizeBilinear = _objcClass("MPSNNResizeBilinear")
+	_clsMPSNNResizeBilinear                                                  = _objcClass("MPSNNResizeBilinear")
 	_mPSNNResizeBilinearSelInitWithDeviceResizeWidthResizeHeightAlignCorners = objc.RegisterName("initWithDevice:resizeWidth:resizeHeight:alignCorners:")
-	_mPSNNResizeBilinearSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSNNResizeBilinearSelResizeWidth = objc.RegisterName("resizeWidth")
-	_mPSNNResizeBilinearSelResizeHeight = objc.RegisterName("resizeHeight")
-	_mPSNNResizeBilinearSelAlignCorners = objc.RegisterName("alignCorners")
+	_mPSNNResizeBilinearSelInitWithCoderDevice                               = objc.RegisterName("initWithCoder:device:")
+	_mPSNNResizeBilinearSelResizeWidth                                       = objc.RegisterName("resizeWidth")
+	_mPSNNResizeBilinearSelResizeHeight                                      = objc.RegisterName("resizeHeight")
+	_mPSNNResizeBilinearSelAlignCorners                                      = objc.RegisterName("alignCorners")
 )
 
 func MPSNNResizeBilinearFromID(id objc.ID) *MPSNNResizeBilinear {
@@ -38,14 +38,18 @@ func MPSNNResizeBilinearFromID(id objc.ID) *MPSNNResizeBilinear {
 
 func (o *MPSNNResizeBilinear) InitWithDeviceResizeWidthResizeHeightAlignCorners(device metal.MTLDevice, resizeWidth uint, resizeHeight uint, alignCorners bool) *MPSNNResizeBilinear {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNResizeBilinearSelInitWithDeviceResizeWidthResizeHeightAlignCorners, device, resizeWidth, resizeHeight, alignCorners)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNResizeBilinearFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSNNResizeBilinear @param      device      The MTLDevice on which to make the MPSNNResizeBilinear @return     A new MPSNNResizeBilinear object, or nil if failure.
 func (o *MPSNNResizeBilinear) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSNNResizeBilinear {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNResizeBilinearSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNResizeBilinearFromID(_ret)
 }
 
@@ -66,4 +70,3 @@ func (o *MPSNNResizeBilinear) AlignCorners() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mPSNNResizeBilinearSelAlignCorners)
 	return _ret
 }
-

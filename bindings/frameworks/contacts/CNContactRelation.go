@@ -16,10 +16,10 @@ type CNContactRelation struct {
 }
 
 var (
-	_clsCNContactRelation = _objcClass("CNContactRelation")
+	_clsCNContactRelation                        = _objcClass("CNContactRelation")
 	_cNContactRelationSelContactRelationWithName = objc.RegisterName("contactRelationWithName:")
-	_cNContactRelationSelInitWithName = objc.RegisterName("initWithName:")
-	_cNContactRelationSelName = objc.RegisterName("name")
+	_cNContactRelationSelInitWithName            = objc.RegisterName("initWithName:")
+	_cNContactRelationSelName                    = objc.RegisterName("name")
 )
 
 func CNContactRelationFromID(id objc.ID) *CNContactRelation {
@@ -34,19 +34,24 @@ func CNContactRelationFromID(id objc.ID) *CNContactRelation {
 
 func CNContactRelationContactRelationWithName(name *foundation.NSString) *CNContactRelation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContactRelation), _cNContactRelationSelContactRelationWithName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNContactRelationFromID(_ret)
 }
 
 func (o *CNContactRelation) InitWithName(name *foundation.NSString) *CNContactRelation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactRelationSelInitWithName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNContactRelationFromID(_ret)
 }
 
 func (o *CNContactRelation) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactRelationSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

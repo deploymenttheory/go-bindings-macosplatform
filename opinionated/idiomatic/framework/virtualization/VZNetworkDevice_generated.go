@@ -64,4 +64,3 @@ type NetworkDeviceable interface {
 }
 
 var _ NetworkDeviceable = (*NetworkDevice)(nil)
-

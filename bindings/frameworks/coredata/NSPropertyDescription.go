@@ -16,30 +16,30 @@ type NSPropertyDescription struct {
 }
 
 var (
-	_clsNSPropertyDescription = _objcClass("NSPropertyDescription")
+	_clsNSPropertyDescription                                              = _objcClass("NSPropertyDescription")
 	_nSPropertyDescriptionSelSetValidationPredicatesWithValidationWarnings = objc.RegisterName("setValidationPredicates:withValidationWarnings:")
-	_nSPropertyDescriptionSelEntity = objc.RegisterName("entity")
-	_nSPropertyDescriptionSelName = objc.RegisterName("name")
-	_nSPropertyDescriptionSelSetName = objc.RegisterName("setName:")
-	_nSPropertyDescriptionSelIsOptional = objc.RegisterName("isOptional")
-	_nSPropertyDescriptionSelSetOptional = objc.RegisterName("setOptional:")
-	_nSPropertyDescriptionSelIsTransient = objc.RegisterName("isTransient")
-	_nSPropertyDescriptionSelSetTransient = objc.RegisterName("setTransient:")
-	_nSPropertyDescriptionSelValidationPredicates = objc.RegisterName("validationPredicates")
-	_nSPropertyDescriptionSelValidationWarnings = objc.RegisterName("validationWarnings")
-	_nSPropertyDescriptionSelUserInfo = objc.RegisterName("userInfo")
-	_nSPropertyDescriptionSelSetUserInfo = objc.RegisterName("setUserInfo:")
-	_nSPropertyDescriptionSelIsIndexed = objc.RegisterName("isIndexed")
-	_nSPropertyDescriptionSelSetIndexed = objc.RegisterName("setIndexed:")
-	_nSPropertyDescriptionSelVersionHash = objc.RegisterName("versionHash")
-	_nSPropertyDescriptionSelVersionHashModifier = objc.RegisterName("versionHashModifier")
-	_nSPropertyDescriptionSelSetVersionHashModifier = objc.RegisterName("setVersionHashModifier:")
-	_nSPropertyDescriptionSelIsIndexedBySpotlight = objc.RegisterName("isIndexedBySpotlight")
-	_nSPropertyDescriptionSelSetIndexedBySpotlight = objc.RegisterName("setIndexedBySpotlight:")
-	_nSPropertyDescriptionSelIsStoredInExternalRecord = objc.RegisterName("isStoredInExternalRecord")
-	_nSPropertyDescriptionSelSetStoredInExternalRecord = objc.RegisterName("setStoredInExternalRecord:")
-	_nSPropertyDescriptionSelRenamingIdentifier = objc.RegisterName("renamingIdentifier")
-	_nSPropertyDescriptionSelSetRenamingIdentifier = objc.RegisterName("setRenamingIdentifier:")
+	_nSPropertyDescriptionSelEntity                                        = objc.RegisterName("entity")
+	_nSPropertyDescriptionSelName                                          = objc.RegisterName("name")
+	_nSPropertyDescriptionSelSetName                                       = objc.RegisterName("setName:")
+	_nSPropertyDescriptionSelIsOptional                                    = objc.RegisterName("isOptional")
+	_nSPropertyDescriptionSelSetOptional                                   = objc.RegisterName("setOptional:")
+	_nSPropertyDescriptionSelIsTransient                                   = objc.RegisterName("isTransient")
+	_nSPropertyDescriptionSelSetTransient                                  = objc.RegisterName("setTransient:")
+	_nSPropertyDescriptionSelValidationPredicates                          = objc.RegisterName("validationPredicates")
+	_nSPropertyDescriptionSelValidationWarnings                            = objc.RegisterName("validationWarnings")
+	_nSPropertyDescriptionSelUserInfo                                      = objc.RegisterName("userInfo")
+	_nSPropertyDescriptionSelSetUserInfo                                   = objc.RegisterName("setUserInfo:")
+	_nSPropertyDescriptionSelIsIndexed                                     = objc.RegisterName("isIndexed")
+	_nSPropertyDescriptionSelSetIndexed                                    = objc.RegisterName("setIndexed:")
+	_nSPropertyDescriptionSelVersionHash                                   = objc.RegisterName("versionHash")
+	_nSPropertyDescriptionSelVersionHashModifier                           = objc.RegisterName("versionHashModifier")
+	_nSPropertyDescriptionSelSetVersionHashModifier                        = objc.RegisterName("setVersionHashModifier:")
+	_nSPropertyDescriptionSelIsIndexedBySpotlight                          = objc.RegisterName("isIndexedBySpotlight")
+	_nSPropertyDescriptionSelSetIndexedBySpotlight                         = objc.RegisterName("setIndexedBySpotlight:")
+	_nSPropertyDescriptionSelIsStoredInExternalRecord                      = objc.RegisterName("isStoredInExternalRecord")
+	_nSPropertyDescriptionSelSetStoredInExternalRecord                     = objc.RegisterName("setStoredInExternalRecord:")
+	_nSPropertyDescriptionSelRenamingIdentifier                            = objc.RegisterName("renamingIdentifier")
+	_nSPropertyDescriptionSelSetRenamingIdentifier                         = objc.RegisterName("setRenamingIdentifier:")
 )
 
 func NSPropertyDescriptionFromID(id objc.ID) *NSPropertyDescription {
@@ -58,13 +58,17 @@ func (o *NSPropertyDescription) SetValidationPredicatesWithValidationWarnings(va
 
 func (o *NSPropertyDescription) Entity() *NSEntityDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPropertyDescriptionSelEntity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEntityDescriptionFromID(_ret)
 }
 
 func (o *NSPropertyDescription) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPropertyDescriptionSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -122,13 +126,17 @@ func (o *NSPropertyDescription) SetIndexed(indexed bool) {
 
 func (o *NSPropertyDescription) VersionHash() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPropertyDescriptionSelVersionHash)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *NSPropertyDescription) VersionHashModifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPropertyDescriptionSelVersionHashModifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -158,11 +166,12 @@ func (o *NSPropertyDescription) SetStoredInExternalRecord(storedInExternalRecord
 
 func (o *NSPropertyDescription) RenamingIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPropertyDescriptionSelRenamingIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSPropertyDescription) SetRenamingIdentifier(renamingIdentifier *foundation.NSString) {
 	o.Ptr().Send(_nSPropertyDescriptionSelSetRenamingIdentifier, renamingIdentifier.Ptr())
 }
-

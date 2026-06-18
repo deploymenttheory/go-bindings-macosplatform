@@ -73,4 +73,3 @@ type MutableTextureable interface {
 }
 
 var _ MutableTextureable = (*MutableTexture)(nil)
-

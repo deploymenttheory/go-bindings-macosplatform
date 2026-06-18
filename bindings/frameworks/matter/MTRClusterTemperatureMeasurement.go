@@ -16,18 +16,18 @@ type MTRClusterTemperatureMeasurement struct {
 }
 
 var (
-	_clsMTRClusterTemperatureMeasurement = _objcClass("MTRClusterTemperatureMeasurement")
-	_mTRClusterTemperatureMeasurementSelReadAttributeMeasuredValueWithParams = objc.RegisterName("readAttributeMeasuredValueWithParams:")
-	_mTRClusterTemperatureMeasurementSelReadAttributeMinMeasuredValueWithParams = objc.RegisterName("readAttributeMinMeasuredValueWithParams:")
-	_mTRClusterTemperatureMeasurementSelReadAttributeMaxMeasuredValueWithParams = objc.RegisterName("readAttributeMaxMeasuredValueWithParams:")
-	_mTRClusterTemperatureMeasurementSelReadAttributeToleranceWithParams = objc.RegisterName("readAttributeToleranceWithParams:")
+	_clsMTRClusterTemperatureMeasurement                                            = _objcClass("MTRClusterTemperatureMeasurement")
+	_mTRClusterTemperatureMeasurementSelReadAttributeMeasuredValueWithParams        = objc.RegisterName("readAttributeMeasuredValueWithParams:")
+	_mTRClusterTemperatureMeasurementSelReadAttributeMinMeasuredValueWithParams     = objc.RegisterName("readAttributeMinMeasuredValueWithParams:")
+	_mTRClusterTemperatureMeasurementSelReadAttributeMaxMeasuredValueWithParams     = objc.RegisterName("readAttributeMaxMeasuredValueWithParams:")
+	_mTRClusterTemperatureMeasurementSelReadAttributeToleranceWithParams            = objc.RegisterName("readAttributeToleranceWithParams:")
 	_mTRClusterTemperatureMeasurementSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterTemperatureMeasurementSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterTemperatureMeasurementSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterTemperatureMeasurementSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterTemperatureMeasurementSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterTemperatureMeasurementSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterTemperatureMeasurementSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterTemperatureMeasurementSelReadAttributeAcceptedCommandListWithParams  = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterTemperatureMeasurementSelReadAttributeAttributeListWithParams        = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterTemperatureMeasurementSelReadAttributeFeatureMapWithParams           = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterTemperatureMeasurementSelReadAttributeClusterRevisionWithParams      = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterTemperatureMeasurementSelInitWithDeviceEndpointIDQueue               = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterTemperatureMeasurementSelInitWithDeviceEndpointQueue                 = objc.RegisterName("initWithDevice:endpoint:queue:")
 )
 
 func MTRClusterTemperatureMeasurementFromID(id objc.ID) *MTRClusterTemperatureMeasurement {
@@ -88,13 +88,16 @@ func (o *MTRClusterTemperatureMeasurement) ReadAttributeClusterRevisionWithParam
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func (o *MTRClusterTemperatureMeasurement) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterTemperatureMeasurement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterTemperatureMeasurementSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterTemperatureMeasurementFromID(_ret)
 }
 
 func (o *MTRClusterTemperatureMeasurement) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterTemperatureMeasurement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterTemperatureMeasurementSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterTemperatureMeasurementFromID(_ret)
 }
-

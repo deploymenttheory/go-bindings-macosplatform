@@ -25,4 +25,3 @@ func NETransparentProxyProviderFromID(id objc.ID) *NETransparentProxyProvider {
 	purego.Track(o)
 	return o
 }
-

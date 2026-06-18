@@ -49,11 +49,17 @@ func (x *CNNPoolingL2NormGradientNode) WithLabel(label string) *CNNPoolingL2Norm
 	return x
 }
 
-func (x *CNNPoolingL2NormGradientNode) asCNNPoolingGradientNode() *mpsneuralnetwork.MPSCNNPoolingGradientNode { return &x.inner.MPSCNNPoolingGradientNode }
+func (x *CNNPoolingL2NormGradientNode) asCNNPoolingGradientNode() *mpsneuralnetwork.MPSCNNPoolingGradientNode {
+	return &x.inner.MPSCNNPoolingGradientNode
+}
 
-func (x *CNNPoolingL2NormGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode { return &x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode }
+func (x *CNNPoolingL2NormGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode {
+	return &x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode
+}
 
-func (x *CNNPoolingL2NormGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode }
+func (x *CNNPoolingL2NormGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode
+}
 
 // CNNPoolingL2NormGradientNodeable is the interface implemented by [CNNPoolingL2NormGradientNode], for mocking and DI.
 type CNNPoolingL2NormGradientNodeable interface {
@@ -63,4 +69,3 @@ type CNNPoolingL2NormGradientNodeable interface {
 }
 
 var _ CNNPoolingL2NormGradientNodeable = (*CNNPoolingL2NormGradientNode)(nil)
-

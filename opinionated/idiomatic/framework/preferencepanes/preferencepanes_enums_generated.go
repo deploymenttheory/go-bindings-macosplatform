@@ -12,8 +12,8 @@ type NSPreferencePaneUnselectReply uint64
 
 const (
 	NSUnselectCancel NSPreferencePaneUnselectReply = 0
-	NSUnselectNow NSPreferencePaneUnselectReply = 1
-	NSUnselectLater NSPreferencePaneUnselectReply = 2
+	NSUnselectNow    NSPreferencePaneUnselectReply = 1
+	NSUnselectLater  NSPreferencePaneUnselectReply = 2
 )
 
 func (e NSPreferencePaneUnselectReply) String() string {
@@ -28,4 +28,3 @@ func (e NSPreferencePaneUnselectReply) String() string {
 		return fmt.Sprintf("NSPreferencePaneUnselectReply(%d)", int64(e))
 	}
 }
-

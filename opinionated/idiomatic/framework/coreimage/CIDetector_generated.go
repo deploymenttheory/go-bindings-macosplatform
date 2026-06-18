@@ -54,4 +54,3 @@ type Detectorable interface {
 }
 
 var _ Detectorable = (*Detector)(nil)
-

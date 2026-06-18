@@ -17,7 +17,9 @@ type RAWProcessingSubGroupParameter struct {
 }
 
 // Unwrap returns the underlying [raw.MERAWProcessingSubGroupParameter].
-func (x *RAWProcessingSubGroupParameter) Unwrap() *raw.MERAWProcessingSubGroupParameter { return x.inner }
+func (x *RAWProcessingSubGroupParameter) Unwrap() *raw.MERAWProcessingSubGroupParameter {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -55,7 +57,9 @@ func (x *RAWProcessingSubGroupParameter) SubGroupParameters() []*RAWProcessingPa
 	})
 }
 
-func (x *RAWProcessingSubGroupParameter) asRAWProcessingParameter() *raw.MERAWProcessingParameter { return &x.inner.MERAWProcessingParameter }
+func (x *RAWProcessingSubGroupParameter) asRAWProcessingParameter() *raw.MERAWProcessingParameter {
+	return &x.inner.MERAWProcessingParameter
+}
 
 // RAWProcessingSubGroupParameterable is the interface implemented by [RAWProcessingSubGroupParameter], for mocking and DI.
 type RAWProcessingSubGroupParameterable interface {
@@ -65,4 +69,3 @@ type RAWProcessingSubGroupParameterable interface {
 }
 
 var _ RAWProcessingSubGroupParameterable = (*RAWProcessingSubGroupParameter)(nil)
-

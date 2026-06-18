@@ -13,8 +13,7 @@ type GLKMatrixStack struct{}
 // @struct GLKVertexAttributeParameters @abstract Structure for parameters to use in glVertexAttribPointer given a MDLVertexForamt
 // C struct: _GLKVertexAttributeParameters
 type GLKVertexAttributeParameters struct {
-	Type uint32
-	Size int32
+	Type       uint32
+	Size       int32
 	Normalized uint8
 }
-

@@ -151,11 +151,15 @@ func (x *AreaLight) SetAspect(aspect float32) {
 	x.inner.SetAspect(aspect)
 }
 
-func (x *AreaLight) asPhysicallyPlausibleLight() *raw.MDLPhysicallyPlausibleLight { return &x.inner.MDLPhysicallyPlausibleLight }
+func (x *AreaLight) asPhysicallyPlausibleLight() *raw.MDLPhysicallyPlausibleLight {
+	return &x.inner.MDLPhysicallyPlausibleLight
+}
 
 func (x *AreaLight) asLight() *raw.MDLLight { return &x.inner.MDLPhysicallyPlausibleLight.MDLLight }
 
-func (x *AreaLight) asObject() *raw.MDLObject { return &x.inner.MDLPhysicallyPlausibleLight.MDLLight.MDLObject }
+func (x *AreaLight) asObject() *raw.MDLObject {
+	return &x.inner.MDLPhysicallyPlausibleLight.MDLLight.MDLObject
+}
 
 // AreaLightable is the interface implemented by [AreaLight], for mocking and DI.
 type AreaLightable interface {
@@ -183,4 +187,3 @@ type AreaLightable interface {
 }
 
 var _ AreaLightable = (*AreaLight)(nil)
-

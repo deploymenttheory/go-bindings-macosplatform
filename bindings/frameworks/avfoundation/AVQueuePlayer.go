@@ -16,15 +16,15 @@ type AVQueuePlayer struct {
 }
 
 var (
-	_clsAVQueuePlayer = _objcClass("AVQueuePlayer")
-	_aVQueuePlayerSelQueuePlayerWithItems = objc.RegisterName("queuePlayerWithItems:")
-	_aVQueuePlayerSelInitWithItems = objc.RegisterName("initWithItems:")
-	_aVQueuePlayerSelItems = objc.RegisterName("items")
-	_aVQueuePlayerSelAdvanceToNextItem = objc.RegisterName("advanceToNextItem")
+	_clsAVQueuePlayer                       = _objcClass("AVQueuePlayer")
+	_aVQueuePlayerSelQueuePlayerWithItems   = objc.RegisterName("queuePlayerWithItems:")
+	_aVQueuePlayerSelInitWithItems          = objc.RegisterName("initWithItems:")
+	_aVQueuePlayerSelItems                  = objc.RegisterName("items")
+	_aVQueuePlayerSelAdvanceToNextItem      = objc.RegisterName("advanceToNextItem")
 	_aVQueuePlayerSelCanInsertItemAfterItem = objc.RegisterName("canInsertItem:afterItem:")
-	_aVQueuePlayerSelInsertItemAfterItem = objc.RegisterName("insertItem:afterItem:")
-	_aVQueuePlayerSelRemoveItem = objc.RegisterName("removeItem:")
-	_aVQueuePlayerSelRemoveAllItems = objc.RegisterName("removeAllItems")
+	_aVQueuePlayerSelInsertItemAfterItem    = objc.RegisterName("insertItem:afterItem:")
+	_aVQueuePlayerSelRemoveItem             = objc.RegisterName("removeItem:")
+	_aVQueuePlayerSelRemoveAllItems         = objc.RegisterName("removeAllItems")
 )
 
 func AVQueuePlayerFromID(id objc.ID) *AVQueuePlayer {
@@ -40,21 +40,27 @@ func AVQueuePlayerFromID(id objc.ID) *AVQueuePlayer {
 // Creates an instance of AVQueuePlayer and enqueues the AVPlayerItems from the specified array. - Parameter items: An NSArray of AVPlayerItems with which to populate the player's queue initially. - Returns: An instance of AVQueuePlayer.
 func AVQueuePlayerQueuePlayerWithItems(items *foundation.NSArray[*AVPlayerItem]) *AVQueuePlayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVQueuePlayer), _aVQueuePlayerSelQueuePlayerWithItems, items.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVQueuePlayerFromID(_ret)
 }
 
 // Initializes an instance of AVQueuePlayer by enqueueing the AVPlayerItems from the specified array. This method throws an exception if items contains duplicated values or values associated with another AVPlayer. - Parameter items: An NSArray of AVPlayerItems with which to populate the player's queue initially. - Returns: An instance of AVQueuePlayer.
 func (o *AVQueuePlayer) InitWithItems(items *foundation.NSArray[*AVPlayerItem]) *AVQueuePlayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVQueuePlayerSelInitWithItems, items.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVQueuePlayerFromID(_ret)
 }
 
 // Provides an array of the currently enqueued items. - Returns: An NSArray containing the enqueued AVPlayerItems.
 func (o *AVQueuePlayer) Items() *foundation.NSArray[*AVPlayerItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVQueuePlayerSelItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVPlayerItem](_ret)
 }
 
@@ -83,4 +89,3 @@ func (o *AVQueuePlayer) RemoveItem(item *AVPlayerItem) {
 func (o *AVQueuePlayer) RemoveAllItems() {
 	o.Ptr().Send(_aVQueuePlayerSelRemoveAllItems)
 }
-

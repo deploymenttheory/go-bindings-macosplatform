@@ -17,7 +17,9 @@ type ScannerFunctionalUnitDocumentFeeder struct {
 }
 
 // Unwrap returns the underlying [raw.ICScannerFunctionalUnitDocumentFeeder].
-func (x *ScannerFunctionalUnitDocumentFeeder) Unwrap() *raw.ICScannerFunctionalUnitDocumentFeeder { return x.inner }
+func (x *ScannerFunctionalUnitDocumentFeeder) Unwrap() *raw.ICScannerFunctionalUnitDocumentFeeder {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -186,7 +188,9 @@ func (x *ScannerFunctionalUnitDocumentFeeder) ReverseFeederPageOrder() bool {
 	return x.inner.ReverseFeederPageOrder()
 }
 
-func (x *ScannerFunctionalUnitDocumentFeeder) asScannerFunctionalUnit() *raw.ICScannerFunctionalUnit { return &x.inner.ICScannerFunctionalUnit }
+func (x *ScannerFunctionalUnitDocumentFeeder) asScannerFunctionalUnit() *raw.ICScannerFunctionalUnit {
+	return &x.inner.ICScannerFunctionalUnit
+}
 
 // ScannerFunctionalUnitDocumentFeederable is the interface implemented by [ScannerFunctionalUnitDocumentFeeder], for mocking and DI.
 type ScannerFunctionalUnitDocumentFeederable interface {
@@ -221,4 +225,3 @@ type ScannerFunctionalUnitDocumentFeederable interface {
 }
 
 var _ ScannerFunctionalUnitDocumentFeederable = (*ScannerFunctionalUnitDocumentFeeder)(nil)
-

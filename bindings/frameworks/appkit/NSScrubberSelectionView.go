@@ -25,4 +25,3 @@ func NSScrubberSelectionViewFromID(id objc.ID) *NSScrubberSelectionView {
 	purego.Track(o)
 	return o
 }
-

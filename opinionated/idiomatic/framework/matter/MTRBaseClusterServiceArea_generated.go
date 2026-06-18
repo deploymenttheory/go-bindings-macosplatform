@@ -354,9 +354,13 @@ func (x *MTRBaseClusterServiceArea) SubscribeAttributeClusterRevisionWithParamsS
 	}
 }
 
-func (x *MTRBaseClusterServiceArea) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterServiceArea) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterServiceArea) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterServiceArea) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterServiceAreaable is the interface implemented by [MTRBaseClusterServiceArea], for mocking and DI.
 type MTRBaseClusterServiceAreaable interface {
@@ -388,4 +392,3 @@ type MTRBaseClusterServiceAreaable interface {
 }
 
 var _ MTRBaseClusterServiceAreaable = (*MTRBaseClusterServiceArea)(nil)
-

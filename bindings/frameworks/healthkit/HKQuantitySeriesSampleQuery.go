@@ -18,13 +18,13 @@ type HKQuantitySeriesSampleQuery struct {
 }
 
 var (
-	_clsHKQuantitySeriesSampleQuery = _objcClass("HKQuantitySeriesSampleQuery")
+	_clsHKQuantitySeriesSampleQuery                                             = _objcClass("HKQuantitySeriesSampleQuery")
 	_hKQuantitySeriesSampleQuerySelInitWithQuantityTypePredicateQuantityHandler = objc.RegisterName("initWithQuantityType:predicate:quantityHandler:")
-	_hKQuantitySeriesSampleQuerySelInitWithSampleQuantityHandler = objc.RegisterName("initWithSample:quantityHandler:")
-	_hKQuantitySeriesSampleQuerySelIncludeSample = objc.RegisterName("includeSample")
-	_hKQuantitySeriesSampleQuerySelSetIncludeSample = objc.RegisterName("setIncludeSample:")
-	_hKQuantitySeriesSampleQuerySelOrderByQuantitySampleStartDate = objc.RegisterName("orderByQuantitySampleStartDate")
-	_hKQuantitySeriesSampleQuerySelSetOrderByQuantitySampleStartDate = objc.RegisterName("setOrderByQuantitySampleStartDate:")
+	_hKQuantitySeriesSampleQuerySelInitWithSampleQuantityHandler                = objc.RegisterName("initWithSample:quantityHandler:")
+	_hKQuantitySeriesSampleQuerySelIncludeSample                                = objc.RegisterName("includeSample")
+	_hKQuantitySeriesSampleQuerySelSetIncludeSample                             = objc.RegisterName("setIncludeSample:")
+	_hKQuantitySeriesSampleQuerySelOrderByQuantitySampleStartDate               = objc.RegisterName("orderByQuantitySampleStartDate")
+	_hKQuantitySeriesSampleQuerySelSetOrderByQuantitySampleStartDate            = objc.RegisterName("setOrderByQuantitySampleStartDate:")
 )
 
 func HKQuantitySeriesSampleQueryFromID(id objc.ID) *HKQuantitySeriesSampleQuery {
@@ -59,7 +59,9 @@ func (o *HKQuantitySeriesSampleQuery) InitWithQuantityTypePredicateQuantityHandl
 		defer __block_quantityHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKQuantitySeriesSampleQuerySelInitWithQuantityTypePredicateQuantityHandler, quantityType.Ptr(), predicate.Ptr(), __block_quantityHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantitySeriesSampleQueryFromID(_ret)
 }
 
@@ -81,7 +83,9 @@ func (o *HKQuantitySeriesSampleQuery) InitWithSampleQuantityHandler(quantitySamp
 		defer __block_quantityHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKQuantitySeriesSampleQuerySelInitWithSampleQuantityHandler, quantitySample.Ptr(), __block_quantityHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantitySeriesSampleQueryFromID(_ret)
 }
 
@@ -104,4 +108,3 @@ func (o *HKQuantitySeriesSampleQuery) OrderByQuantitySampleStartDate() bool {
 func (o *HKQuantitySeriesSampleQuery) SetOrderByQuantitySampleStartDate(orderByQuantitySampleStartDate bool) {
 	o.Ptr().Send(_hKQuantitySeriesSampleQuerySelSetOrderByQuantitySampleStartDate, orderByQuantitySampleStartDate)
 }
-

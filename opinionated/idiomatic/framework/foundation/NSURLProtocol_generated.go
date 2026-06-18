@@ -106,4 +106,3 @@ type URLProtocolable interface {
 }
 
 var _ URLProtocolable = (*URLProtocol)(nil)
-

@@ -15,7 +15,9 @@ type MTL4RenderPipelineColorAttachmentDescriptorArray struct {
 }
 
 // Unwrap returns the underlying [raw.MTL4RenderPipelineColorAttachmentDescriptorArray].
-func (x *MTL4RenderPipelineColorAttachmentDescriptorArray) Unwrap() *raw.MTL4RenderPipelineColorAttachmentDescriptorArray { return x.inner }
+func (x *MTL4RenderPipelineColorAttachmentDescriptorArray) Unwrap() *raw.MTL4RenderPipelineColorAttachmentDescriptorArray {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -63,4 +65,3 @@ type MTL4RenderPipelineColorAttachmentDescriptorArrayable interface {
 }
 
 var _ MTL4RenderPipelineColorAttachmentDescriptorArrayable = (*MTL4RenderPipelineColorAttachmentDescriptorArray)(nil)
-

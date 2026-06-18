@@ -16,7 +16,9 @@ type MTRUnitTestingClusterTestListStructOctet struct {
 }
 
 // Unwrap returns the underlying [raw.MTRUnitTestingClusterTestListStructOctet].
-func (x *MTRUnitTestingClusterTestListStructOctet) Unwrap() *raw.MTRUnitTestingClusterTestListStructOctet { return x.inner }
+func (x *MTRUnitTestingClusterTestListStructOctet) Unwrap() *raw.MTRUnitTestingClusterTestListStructOctet {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -68,7 +70,9 @@ func (x *MTRUnitTestingClusterTestListStructOctet) SetMember2(member2 *foundatio
 	x.inner.SetMember2(member2)
 }
 
-func (x *MTRUnitTestingClusterTestListStructOctet) asMTRUnitTestingClusterTestListStructOctet() *raw.MTRUnitTestingClusterTestListStructOctet { return x.inner }
+func (x *MTRUnitTestingClusterTestListStructOctet) asMTRUnitTestingClusterTestListStructOctet() *raw.MTRUnitTestingClusterTestListStructOctet {
+	return x.inner
+}
 
 // MTRUnitTestingClusterTestListStructOctetable is the interface implemented by [MTRUnitTestingClusterTestListStructOctet], for mocking and DI.
 type MTRUnitTestingClusterTestListStructOctetable interface {
@@ -82,4 +86,3 @@ type MTRUnitTestingClusterTestListStructOctetable interface {
 }
 
 var _ MTRUnitTestingClusterTestListStructOctetable = (*MTRUnitTestingClusterTestListStructOctet)(nil)
-

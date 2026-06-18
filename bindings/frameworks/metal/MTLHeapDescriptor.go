@@ -16,22 +16,22 @@ type MTLHeapDescriptor struct {
 }
 
 var (
-	_clsMTLHeapDescriptor = _objcClass("MTLHeapDescriptor")
-	_mTLHeapDescriptorSelSize = objc.RegisterName("size")
-	_mTLHeapDescriptorSelSetSize = objc.RegisterName("setSize:")
-	_mTLHeapDescriptorSelStorageMode = objc.RegisterName("storageMode")
-	_mTLHeapDescriptorSelSetStorageMode = objc.RegisterName("setStorageMode:")
-	_mTLHeapDescriptorSelCpuCacheMode = objc.RegisterName("cpuCacheMode")
-	_mTLHeapDescriptorSelSetCpuCacheMode = objc.RegisterName("setCpuCacheMode:")
-	_mTLHeapDescriptorSelSparsePageSize = objc.RegisterName("sparsePageSize")
-	_mTLHeapDescriptorSelSetSparsePageSize = objc.RegisterName("setSparsePageSize:")
-	_mTLHeapDescriptorSelHazardTrackingMode = objc.RegisterName("hazardTrackingMode")
-	_mTLHeapDescriptorSelSetHazardTrackingMode = objc.RegisterName("setHazardTrackingMode:")
-	_mTLHeapDescriptorSelResourceOptions = objc.RegisterName("resourceOptions")
-	_mTLHeapDescriptorSelSetResourceOptions = objc.RegisterName("setResourceOptions:")
-	_mTLHeapDescriptorSelType = objc.RegisterName("type")
-	_mTLHeapDescriptorSelSetType = objc.RegisterName("setType:")
-	_mTLHeapDescriptorSelMaxCompatiblePlacementSparsePageSize = objc.RegisterName("maxCompatiblePlacementSparsePageSize")
+	_clsMTLHeapDescriptor                                        = _objcClass("MTLHeapDescriptor")
+	_mTLHeapDescriptorSelSize                                    = objc.RegisterName("size")
+	_mTLHeapDescriptorSelSetSize                                 = objc.RegisterName("setSize:")
+	_mTLHeapDescriptorSelStorageMode                             = objc.RegisterName("storageMode")
+	_mTLHeapDescriptorSelSetStorageMode                          = objc.RegisterName("setStorageMode:")
+	_mTLHeapDescriptorSelCpuCacheMode                            = objc.RegisterName("cpuCacheMode")
+	_mTLHeapDescriptorSelSetCpuCacheMode                         = objc.RegisterName("setCpuCacheMode:")
+	_mTLHeapDescriptorSelSparsePageSize                          = objc.RegisterName("sparsePageSize")
+	_mTLHeapDescriptorSelSetSparsePageSize                       = objc.RegisterName("setSparsePageSize:")
+	_mTLHeapDescriptorSelHazardTrackingMode                      = objc.RegisterName("hazardTrackingMode")
+	_mTLHeapDescriptorSelSetHazardTrackingMode                   = objc.RegisterName("setHazardTrackingMode:")
+	_mTLHeapDescriptorSelResourceOptions                         = objc.RegisterName("resourceOptions")
+	_mTLHeapDescriptorSelSetResourceOptions                      = objc.RegisterName("setResourceOptions:")
+	_mTLHeapDescriptorSelType                                    = objc.RegisterName("type")
+	_mTLHeapDescriptorSelSetType                                 = objc.RegisterName("setType:")
+	_mTLHeapDescriptorSelMaxCompatiblePlacementSparsePageSize    = objc.RegisterName("maxCompatiblePlacementSparsePageSize")
 	_mTLHeapDescriptorSelSetMaxCompatiblePlacementSparsePageSize = objc.RegisterName("setMaxCompatiblePlacementSparsePageSize:")
 )
 
@@ -115,14 +115,13 @@ func (o *MTLHeapDescriptor) SetType(type_ MTLHeapType) {
 	o.Ptr().Send(_mTLHeapDescriptorSelSetType, type_)
 }
 
-// Specifies the largest sparse page size that the Metal heap supports. This parameter only affects the heap if you set the ``type`` property of this descriptor to ``MTLHeapType/MTLHeapTypePlacement``. The value you assign to this property determines the compatibility of the Metal heap with with placement sparse resources, because placement sparse resources require that their sparse page size be less than or equal to the placement sparse page of the Metal heap that this property controls.
+// Specifies the largest sparse page size that the Metal heap supports. This parameter only affects the heap if you set the “type“ property of this descriptor to “MTLHeapType/MTLHeapTypePlacement“. The value you assign to this property determines the compatibility of the Metal heap with with placement sparse resources, because placement sparse resources require that their sparse page size be less than or equal to the placement sparse page of the Metal heap that this property controls.
 func (o *MTLHeapDescriptor) MaxCompatiblePlacementSparsePageSize() MTLSparsePageSize {
 	_ret := objc.Send[MTLSparsePageSize](o.Ptr(), _mTLHeapDescriptorSelMaxCompatiblePlacementSparsePageSize)
 	return _ret
 }
 
-// Specifies the largest sparse page size that the Metal heap supports. This parameter only affects the heap if you set the ``type`` property of this descriptor to ``MTLHeapType/MTLHeapTypePlacement``. The value you assign to this property determines the compatibility of the Metal heap with with placement sparse resources, because placement sparse resources require that their sparse page size be less than or equal to the placement sparse page of the Metal heap that this property controls.
+// Specifies the largest sparse page size that the Metal heap supports. This parameter only affects the heap if you set the “type“ property of this descriptor to “MTLHeapType/MTLHeapTypePlacement“. The value you assign to this property determines the compatibility of the Metal heap with with placement sparse resources, because placement sparse resources require that their sparse page size be less than or equal to the placement sparse page of the Metal heap that this property controls.
 func (o *MTLHeapDescriptor) SetMaxCompatiblePlacementSparsePageSize(maxCompatiblePlacementSparsePageSize MTLSparsePageSize) {
 	o.Ptr().Send(_mTLHeapDescriptorSelSetMaxCompatiblePlacementSparsePageSize, maxCompatiblePlacementSparsePageSize)
 }
-

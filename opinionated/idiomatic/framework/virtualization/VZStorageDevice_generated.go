@@ -43,4 +43,3 @@ type StorageDeviceable interface {
 }
 
 var _ StorageDeviceable = (*StorageDevice)(nil)
-

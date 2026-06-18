@@ -22,4 +22,3 @@ func AUPannerViewWithAudioUnit(au *carboncore.ComponentInstanceRecord) *AUPanner
 func IsAVBSupported() bool {
 	return raw.CANetworkBrowserWindowControllerIsAVBSupported()
 }
-

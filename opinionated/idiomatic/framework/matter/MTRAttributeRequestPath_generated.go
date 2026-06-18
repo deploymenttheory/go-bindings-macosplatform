@@ -60,4 +60,3 @@ type MTRAttributeRequestPathable interface {
 }
 
 var _ MTRAttributeRequestPathable = (*MTRAttributeRequestPath)(nil)
-

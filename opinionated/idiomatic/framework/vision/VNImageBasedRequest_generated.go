@@ -86,4 +86,3 @@ type ImageBasedRequestable interface {
 }
 
 var _ ImageBasedRequestable = (*ImageBasedRequest)(nil)
-

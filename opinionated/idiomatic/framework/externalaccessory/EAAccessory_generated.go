@@ -119,4 +119,3 @@ type Accessoryable interface {
 }
 
 var _ Accessoryable = (*Accessory)(nil)
-

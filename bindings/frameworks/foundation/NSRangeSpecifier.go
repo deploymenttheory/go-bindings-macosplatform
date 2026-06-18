@@ -15,13 +15,13 @@ type NSRangeSpecifier struct {
 }
 
 var (
-	_clsNSRangeSpecifier = _objcClass("NSRangeSpecifier")
-	_nSRangeSpecifierSelInitWithCoder = objc.RegisterName("initWithCoder:")
+	_clsNSRangeSpecifier                                                                                 = _objcClass("NSRangeSpecifier")
+	_nSRangeSpecifierSelInitWithCoder                                                                    = objc.RegisterName("initWithCoder:")
 	_nSRangeSpecifierSelInitWithContainerClassDescriptionContainerSpecifierKeyStartSpecifierEndSpecifier = objc.RegisterName("initWithContainerClassDescription:containerSpecifier:key:startSpecifier:endSpecifier:")
-	_nSRangeSpecifierSelStartSpecifier = objc.RegisterName("startSpecifier")
-	_nSRangeSpecifierSelSetStartSpecifier = objc.RegisterName("setStartSpecifier:")
-	_nSRangeSpecifierSelEndSpecifier = objc.RegisterName("endSpecifier")
-	_nSRangeSpecifierSelSetEndSpecifier = objc.RegisterName("setEndSpecifier:")
+	_nSRangeSpecifierSelStartSpecifier                                                                   = objc.RegisterName("startSpecifier")
+	_nSRangeSpecifierSelSetStartSpecifier                                                                = objc.RegisterName("setStartSpecifier:")
+	_nSRangeSpecifierSelEndSpecifier                                                                     = objc.RegisterName("endSpecifier")
+	_nSRangeSpecifierSelSetEndSpecifier                                                                  = objc.RegisterName("setEndSpecifier:")
 )
 
 func NSRangeSpecifierFromID(id objc.ID) *NSRangeSpecifier {
@@ -36,19 +36,25 @@ func NSRangeSpecifierFromID(id objc.ID) *NSRangeSpecifier {
 
 func (o *NSRangeSpecifier) InitWithCoder(inCoder *NSCoder) *NSRangeSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRangeSpecifierSelInitWithCoder, inCoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSRangeSpecifierFromID(_ret)
 }
 
 func (o *NSRangeSpecifier) InitWithContainerClassDescriptionContainerSpecifierKeyStartSpecifierEndSpecifier(classDesc *NSScriptClassDescription, container *NSScriptObjectSpecifier, property *NSString, startSpec *NSScriptObjectSpecifier, endSpec *NSScriptObjectSpecifier) *NSRangeSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRangeSpecifierSelInitWithContainerClassDescriptionContainerSpecifierKeyStartSpecifierEndSpecifier, classDesc.Ptr(), container.Ptr(), property.Ptr(), startSpec.Ptr(), endSpec.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSRangeSpecifierFromID(_ret)
 }
 
 func (o *NSRangeSpecifier) StartSpecifier() *NSScriptObjectSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRangeSpecifierSelStartSpecifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptObjectSpecifierFromID(_ret)
 }
 
@@ -58,11 +64,12 @@ func (o *NSRangeSpecifier) SetStartSpecifier(startSpecifier *NSScriptObjectSpeci
 
 func (o *NSRangeSpecifier) EndSpecifier() *NSScriptObjectSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRangeSpecifierSelEndSpecifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptObjectSpecifierFromID(_ret)
 }
 
 func (o *NSRangeSpecifier) SetEndSpecifier(endSpecifier *NSScriptObjectSpecifier) {
 	o.Ptr().Send(_nSRangeSpecifierSelSetEndSpecifier, endSpecifier.Ptr())
 }
-

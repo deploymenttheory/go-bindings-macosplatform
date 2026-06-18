@@ -16,11 +16,15 @@ type MTROperationalCredentialsClusterCertificateChainRequestParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTROperationalCredentialsClusterCertificateChainRequestParams].
-func (x *MTROperationalCredentialsClusterCertificateChainRequestParams) Unwrap() *raw.MTROperationalCredentialsClusterCertificateChainRequestParams { return x.inner }
+func (x *MTROperationalCredentialsClusterCertificateChainRequestParams) Unwrap() *raw.MTROperationalCredentialsClusterCertificateChainRequestParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTROperationalCredentialsClusterCertificateChainRequestParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTROperationalCredentialsClusterCertificateChainRequestParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTROperationalCredentialsClusterCertificateChainRequestParamsFromID adopts an existing object pointer as a MTROperationalCredentialsClusterCertificateChainRequestParams (nil for 0).
 func MTROperationalCredentialsClusterCertificateChainRequestParamsFromID(id objc.ID) *MTROperationalCredentialsClusterCertificateChainRequestParams {
@@ -99,4 +103,3 @@ type MTROperationalCredentialsClusterCertificateChainRequestParamsable interface
 }
 
 var _ MTROperationalCredentialsClusterCertificateChainRequestParamsable = (*MTROperationalCredentialsClusterCertificateChainRequestParams)(nil)
-

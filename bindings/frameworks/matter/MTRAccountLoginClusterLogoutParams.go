@@ -16,12 +16,12 @@ type MTRAccountLoginClusterLogoutParams struct {
 }
 
 var (
-	_clsMTRAccountLoginClusterLogoutParams = _objcClass("MTRAccountLoginClusterLogoutParams")
-	_mTRAccountLoginClusterLogoutParamsSelNode = objc.RegisterName("node")
-	_mTRAccountLoginClusterLogoutParamsSelSetNode = objc.RegisterName("setNode:")
-	_mTRAccountLoginClusterLogoutParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRAccountLoginClusterLogoutParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRAccountLoginClusterLogoutParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRAccountLoginClusterLogoutParams                               = _objcClass("MTRAccountLoginClusterLogoutParams")
+	_mTRAccountLoginClusterLogoutParamsSelNode                           = objc.RegisterName("node")
+	_mTRAccountLoginClusterLogoutParamsSelSetNode                        = objc.RegisterName("setNode:")
+	_mTRAccountLoginClusterLogoutParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRAccountLoginClusterLogoutParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRAccountLoginClusterLogoutParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRAccountLoginClusterLogoutParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -37,7 +37,9 @@ func MTRAccountLoginClusterLogoutParamsFromID(id objc.ID) *MTRAccountLoginCluste
 
 func (o *MTRAccountLoginClusterLogoutParams) Node() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAccountLoginClusterLogoutParamsSelNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -48,7 +50,9 @@ func (o *MTRAccountLoginClusterLogoutParams) SetNode(node *foundation.NSNumber) 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRAccountLoginClusterLogoutParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAccountLoginClusterLogoutParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,11 +63,12 @@ func (o *MTRAccountLoginClusterLogoutParams) SetTimedInvokeTimeoutMs(timedInvoke
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRAccountLoginClusterLogoutParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAccountLoginClusterLogoutParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRAccountLoginClusterLogoutParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRAccountLoginClusterLogoutParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

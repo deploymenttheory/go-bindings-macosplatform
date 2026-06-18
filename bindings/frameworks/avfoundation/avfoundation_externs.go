@@ -68,14 +68,18 @@ func AVAssetDownloadTaskPrefersLosslessAudioKey() uintptr {
 // Used to mark assets have the default priority. They will be the first to be purged.
 func AVAssetDownloadedAssetEvictionPriorityDefault() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetDownloadedAssetEvictionPriorityDefault")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Used to mark assets with the highest priority. They will be the last to be purged.
 func AVAssetDownloadedAssetEvictionPriorityImportant() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetDownloadedAssetEvictionPriorityImportant")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -277,35 +281,45 @@ func AVAssetMediaSelectionGroupsDidChangeNotification() uintptr {
 // Indicates whether the asset is Apple Immersive Video. Clients may use this property to switch into specific display and control modes for Apple Immersive Video playback.
 func AVAssetPlaybackConfigurationOptionAppleImmersiveVideo() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetPlaybackConfigurationOptionAppleImmersiveVideo")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Indicates whether the asset calls for the use of a non-rectilinear projection for rendering video. Clients may use this property to determine whether to configure a non-rectilinear projection when displaying video.
 func AVAssetPlaybackConfigurationOptionNonRectilinearProjection() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetPlaybackConfigurationOptionNonRectilinearProjection")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Indicates whether or not the asset can be rendered as spatial video. Clients may use this property to determine whether to configure spatial video rendering.
 func AVAssetPlaybackConfigurationOptionSpatialVideo() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetPlaybackConfigurationOptionSpatialVideo")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Indicates whether or not the asset can rendered as stereo video and is also in a multiview compression format. Clients may use this property to determine whether to configure stereo video rendering.
 func AVAssetPlaybackConfigurationOptionStereoMultiviewVideo() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetPlaybackConfigurationOptionStereoMultiviewVideo")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Indicates whether or not the asset can be rendered as stereo video. Clients may use this property to determine whether to configure stereo video rendering.
 func AVAssetPlaybackConfigurationOptionStereoVideo() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetPlaybackConfigurationOptionStereoVideo")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -360,61 +374,79 @@ func AVAssetWriterInputMediaDataLocationSparselyInterleavedWithMainMediaData() u
 
 func AVAudioTimePitchAlgorithmSpectral() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAudioTimePitchAlgorithmSpectral")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVAudioTimePitchAlgorithmTimeDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAudioTimePitchAlgorithmTimeDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVAudioTimePitchAlgorithmVarispeed() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAudioTimePitchAlgorithmVarispeed")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant      AVCaptionConversionAdjustmentTypeTimeRange @abstract      Indicates a timing adjustment.
 func AVCaptionConversionAdjustmentTypeTimeRange() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptionConversionAdjustmentTypeTimeRange")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant      AVCaptionConversionWarningTypeExcessMediaData @abstract      Indicates that one or more captions in the validator's captions array exceed the capacity for media data of the media type and subtype specified by the conversion settings.
 func AVCaptionConversionWarningTypeExcessMediaData() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptionConversionWarningTypeExcessMediaData")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant	AVCaptionMediaSubTypeKey @abstract	Indicates the output media subtype of a caption conversion operation. For example, [NSNumber numberWithInt:kCMClosedCaptionFormatType_CEA608]. @discussion Both numeric and string forms of media subtypes are accepted for caption conversions, so you could, for example, use @"c608" instead of [NSNumber numberWithInt:kCMClosedCaptionFormatType_CEA608].
 func AVCaptionMediaSubTypeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptionMediaSubTypeKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant	AVCaptionMediaTypeKey @abstract	Indicates the output media type of a caption conversion operation. For example, AVMediaTypeClosedCaption.
 func AVCaptionMediaTypeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptionMediaTypeKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant   AVCaptionTimeCodeFrameDurationKey @abstract	Frame duration used for the time code. @discussion Some formats, such as TTML, use time code notation to indicate the timing of a caption. Use the property to specify the frame rate of the time code. For example, if the time code steps for every 1001 / 30000 seconds, the value should be CMTime(value: 1001, scale: 30000).
 func AVCaptionTimeCodeFrameDurationKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptionTimeCodeFrameDurationKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant	AVCaptionUseDropFrameTimeCodeKey @abstract	Indicates whether to use drop frame time code. @discussion Some formats, such as SCC, use time code notation to indicate the timing of a caption. Use the property to specify whether to use the drop frame time code or non-drop frame time code. When the value for this key is a NSNumber indicating the BOOL YES, the receiver will use the drop frame time code. When the value for this key is a NSNumber indicating the BOOL NO, the receiver will use the non-drop frame time code. The default is NO.
 func AVCaptionUseDropFrameTimeCodeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptionUseDropFrameTimeCodeKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -675,21 +707,27 @@ func AVContentKeyRequestRequiresValidationDataInSecureTokenKey() uintptr {
 // Indicates that the content key request should be retried because an obsolete key response was set on the previous content key request.
 func AVContentKeyRequestRetryReasonReceivedObsoleteContentKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVContentKeyRequestRetryReasonReceivedObsoleteContentKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Indicates that the content key request should be retried because a key response with expired lease was set on the previous content key request.
 func AVContentKeyRequestRetryReasonReceivedResponseWithExpiredLease() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVContentKeyRequestRetryReasonReceivedResponseWithExpiredLease")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Indicates that the content key request should be retried because the key response was not set soon enough either due the initial request/response was taking too long, or a lease was expiring in the meantime.
 func AVContentKeyRequestRetryReasonTimedOut() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVContentKeyRequestRetryReasonTimedOut")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -702,35 +740,45 @@ func AVContentKeyRequestShouldRandomizeDeviceIdentifierKey() uintptr {
 // Specifies the versions of the content protection protocol supported by the application; as an NSArray of one or more NSNumber objects. If this option is not set, an appropriate protocol version will be selected based on sideband information such as an associated HLS playlist. If such information is not available, a protocol version of 1 is assumed
 func AVContentKeySessionServerPlaybackContextOptionProtocolVersions() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVContentKeySessionServerPlaybackContextOptionProtocolVersions")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Specifies a nonce as a 8-byte NSData object to be included in the secure server playback context (SPC) in order to prevent replay attacks. If not specified default server challenge of 0 is assumed.
 func AVContentKeySessionServerPlaybackContextOptionServerChallenge() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVContentKeySessionServerPlaybackContextOptionServerChallenge")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Used to specify a token that could be used to authorize playback of associated content key recipients.
 func AVContentKeySystemAuthorizationToken() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVContentKeySystemAuthorizationToken")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Used to specify clear key as the method of key delivery.
 func AVContentKeySystemClearKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVContentKeySystemClearKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Used to specify FairPlay Streaming (FPS) as the method of key delivery.
 func AVContentKeySystemFairPlayStreaming() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVContentKeySystemFairPlayStreaming")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -773,7 +821,9 @@ func AVCoordinatedPlaybackSuspensionReasonUserIsChangingCurrentTime() uintptr {
 // @constant					AVCoreAnimationBeginTimeAtZero @discussion				Use this constant to set the CoreAnimation's animation beginTime property to be time 0. The constant is a small, non-zero, positive value which avoids CoreAnimation from replacing 0.0 with CACurrentMediaTime().
 func AVCoreAnimationBeginTimeAtZero() float64 {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCoreAnimationBeginTimeAtZero")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
@@ -835,202 +885,260 @@ func AVErrorTimeKey() uintptr {
 // A UTI for the 3GPP file format. The value of this UTI is @"public.3gpp". Files are identified with the .3gp, .3gpp, and .sdv extensions.
 func AVFileType3GPP() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFileType3GPP")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A UTI for the 3GPP file format. The value of this UTI is @"public.3gpp2". Files are identified with the .3g2, .3gp2 extensions.
 func AVFileType3GPP2() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFileType3GPP2")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A UTI for the AC-3 audio file format. The value of this UTI is @"public.ac3-audio". Files are identified with the .ac3 extension.
 func AVFileTypeAC3() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFileTypeAC3")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A UTI for the Apple Haptics Audio Pattern file format. The value of this UTI is @"public.haptics-content". Files are identified with the .ahap extension.
 func AVFileTypeAHAP() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFileTypeAHAP")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A UTI for the AIFC audio file format. The value of this UTI is @"public.aifc-audio". Files are identified with the .aifc and .cdda extensions.
 func AVFileTypeAIFC() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFileTypeAIFC")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A UTI for the AIFF audio file format. The value of this UTI is @"public.aiff-audio". Files are identified with the .aif and .aiff extensions.
 func AVFileTypeAIFF() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFileTypeAIFF")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A UTI for the adaptive multi-rate audio file format. The value of this UTI is @"org.3gpp.adaptive-multi-rate-audio". Files are identified with the .amr extension.
 func AVFileTypeAMR() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFileTypeAMR")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A UTI for the high efficiency image file format containing H.264 compressed images. The value of this UTI is @"public.avci". Files are identified with the .avci extension.
 func AVFileTypeAVCI() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFileTypeAVCI")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // The value of this UTI is @"com.apple.m4a-audio". Files are identified with the .m4a extension.
 func AVFileTypeAppleM4A() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFileTypeAppleM4A")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // The value of this UTI is @"com.apple.m4v-video". Files are identified with the .m4v extension.
 func AVFileTypeAppleM4V() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFileTypeAppleM4V")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A UTI for the Apple iTT caption file format The value of this UTI is @"com.apple.itunes-timed-text". Files are identified with the .itt extension.
 func AVFileTypeAppleiTT() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFileTypeAppleiTT")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A UTI for the CoreAudio file format. The value of this UTI is @"com.apple.coreaudio-format". Files are identified with the .caf extension.
 func AVFileTypeCoreAudioFormat() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFileTypeCoreAudioFormat")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A UTI for the Digital Imaging and Communications in Medicine (DICOM) file format. The value of this UTI is @"org.nema.dicom". Files are identified with the .dcm extension.
 func AVFileTypeDICOM() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFileTypeDICOM")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A UTI for the Adobe digital negative file format. The value of this UTI is @"com.adobe.raw-image". Files are identified with the .dng extension.
 func AVFileTypeDNG() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFileTypeDNG")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A UTI for the enhanced AC-3 audio file format. The value of this UTI is @"public.enhanced-ac3-audio". Files are identified with the .eac3 extension.
 func AVFileTypeEnhancedAC3() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFileTypeEnhancedAC3")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A UTI for the high efficiency image file format containing HEVC compressed images. The value of this UTI is @"public.heic". Files are identified with the .heic extension.
 func AVFileTypeHEIC() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFileTypeHEIC")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A UTI for the high efficiency image file format containing images compressed with any codec. The value of this UTI is @"public.heif". Files are identified with the .heif extension.
 func AVFileTypeHEIF() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFileTypeHEIF")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A UTI for the JPEG (JFIF) format. The value of this UTI is @"public.jpeg". Files are identified with the .jpg or .jpeg extension.
 func AVFileTypeJPEG() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFileTypeJPEG")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A UTI for the MPEG-4 file format. The value of this UTI is @"public.mpeg-4". Files are identified with the .mp4 extension.
 func AVFileTypeMPEG4() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFileTypeMPEG4")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A UTI for the MPEG layer 3 audio file format. The value of this UTI is @"public.mp3". Files are identified with the .mp3 extension.
 func AVFileTypeMPEGLayer3() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFileTypeMPEGLayer3")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Apple HTTP Live Streaming profile The profile that is suitable for Apple HTTP Live Streaming.
 func AVFileTypeProfileMPEG4AppleHLS() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFileTypeProfileMPEG4AppleHLS")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // CMAF compliant profile The profile that is compliance with CMAF format.
 func AVFileTypeProfileMPEG4CMAFCompliant() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFileTypeProfileMPEG4CMAFCompliant")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A UTI for the QuickTime audio file format The value of this UTI is @"com.apple.quicktime-audio". Files are identified with the .qta extension.
 func AVFileTypeQuickTimeAudio() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFileTypeQuickTimeAudio")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A UTI for the QuickTime movie file format. The value of this UTI is @"com.apple.quicktime-movie". Files are identified with the .mov and .qt extensions.
 func AVFileTypeQuickTimeMovie() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFileTypeQuickTimeMovie")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A UTI for the Scenarist closed caption file format The value of this UTI is @"com.scenarist.closed-caption". Files are identified with the .scc extension.
 func AVFileTypeSCC() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFileTypeSCC")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A UTI for the Sun/NeXT audio file format. The value of this UTI is @"public.au-audio". Files are identified with the .au and .snd extensions.
 func AVFileTypeSunAU() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFileTypeSunAU")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A UTI for the tagged image file format. The value of this UTI is @"public.tiff". Files are identified with the .tiff or .tif extension.
 func AVFileTypeTIFF() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFileTypeTIFF")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A UTI for the WAVE audio file format. The value of this UTI is @"com.microsoft.waveform-audio". Files are identified with the .wav, .wave, and .bwf extensions.
 func AVFileTypeWAVE() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFileTypeWAVE")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVFoundationErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFoundationErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1074,3006 +1182,3988 @@ func AVFragmentedMovieWasDefragmentedNotification() uintptr {
 // @constant		AVLayerVideoGravityResize @abstract		Stretch to fill layer bounds. @discussion     AVLayerVideoGravityResize may be used when setting the videoGravity property of an AVPlayerLayer or AVCaptureVideoPreviewLayer instance.
 func AVLayerVideoGravityResize() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVLayerVideoGravityResize")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant		AVLayerVideoGravityResizeAspect @abstract		Preserve aspect ratio; fit within layer bounds. @discussion		AVLayerVideoGravityResizeAspect may be used when setting the videoGravity property of an AVPlayerLayer or AVCaptureVideoPreviewLayer instance.
 func AVLayerVideoGravityResizeAspect() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVLayerVideoGravityResizeAspect")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant		AVLayerVideoGravityResizeAspectFill @abstract		Preserve aspect ratio; fill layer bounds. @discussion     AVLayerVideoGravityResizeAspectFill may be used when setting the videoGravity property of an AVPlayerLayer or AVCaptureVideoPreviewLayer instance.
 func AVLayerVideoGravityResizeAspectFill() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVLayerVideoGravityResizeAspectFill")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A media characteristic that indicates that a track or media selection option includes audible content. AVMediaTypeAudio is a media type with the characteristic AVMediaCharacteristicAudible. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 func AVMediaCharacteristicAudible() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaCharacteristicAudible")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A media characteristic that indicates that the stereoscopic video track carries additional information related to the stereoscopic video. This is not an indication that the encoded video carries stereoscopic views. It instead indicates that it carries additional information that may influence the interpretation of those views and contribute to a better experience. The value of this characteristic is @“com.apple.quicktime.video.stereo-metadata". Note for content authors: the presence of this characteristic is strictly inferred from the format description of the associated track.
 func AVMediaCharacteristicCarriesVideoStereoMetadata() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaCharacteristicCarriesVideoStereoMetadata")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A media characteristic that indicates that a track contains an alpha channel. To determine whether alpha is straight or pre-multiplied, look for the format description extension with key kCMFormatDescriptionExtension_AlphaChannelMode.
 func AVMediaCharacteristicContainsAlphaChannel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaCharacteristicContainsAlphaChannel")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A media characteristic that indicates that a track contains HDR video. HDR video contains extended dynamic range that requires explicit support when compositing. The value of this characteristic is @“public.contains-hdr-video". Note for content authors: the presence of this characteristic is strictly inferred from the format description of the associated track.
 func AVMediaCharacteristicContainsHDRVideo() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaCharacteristicContainsHDRVideo")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A media characteristic that indicates that a track or media selection option presents only forced subtitles. Media options with forced-only subtitles are typically selected when 1) the user has not selected a legible option with an accessibility characteristic or an auxiliary purpose and 2) its locale matches the locale of the selected audible media selection option. The value of this characteristic is @"public.subtitles.forced-only". Note for content authors: the presence of this characteristic for a legible media option may be inferred from the format description of the associated track that presents the subtitle media, if the format description carries sufficient information to indicate the presence or absence of forced and non-forced subtitles. If the format description does not carry this information, the legible media option can be explicitly tagged with the characteristic. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 func AVMediaCharacteristicContainsOnlyForcedSubtitles() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaCharacteristicContainsOnlyForcedSubtitles")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A media characteristic that indicates that a track contains stereoscopic video captured in a multiview compression format. Stereoscopic video contains two views with one view for the left eye and one view for the right eye. Multiview video contains more than one view (not necessarily stereoscopic) in the same compressed video sample. The combination of stereoscopic and multiview indicates that multiview carriage is used to carry at least two stereoscopic views. It does not imply that there might not be more than two views. Access to the two stereo views may require opt-in to retrieve both views. Accessing only one of the left or right stereoscopic views as a fallback for playback or compositing where stereoscopic rendering is not supported may itself not be supported. The value of this characteristic is @“public.contains-stereo-multiview-video". Note for content authors: the presence of this characteristic is strictly inferred from the format description of the associated track.
 func AVMediaCharacteristicContainsStereoMultiviewVideo() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaCharacteristicContainsStereoMultiviewVideo")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A media characteristic that indicates that a track or media selection option includes legible content in the language of its specified locale that: - describes music and - describes sound other than spoken dialog, such as sound effects and significant silences, occurring in program audio. Legible tracks provided for accessibility purposes are typically tagged both with this characteristic as well as with AVMediaCharacteristicTranscribesSpokenDialogForAccessibility. A legible track provided for accessibility purposes that's associated with an audio track without music and without sound other than spoken dialog -- lacking even significant silences -- can be tagged with this characteristic, because it trivially meets these requirements. The value of this characteristic is @"public.accessibility.describes-music-and-sound". Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicDescribesMusicAndSoundForAccessibility only if it's explicitly tagged with that characteristic. See the discussion of the tagging of tracks with media characteristics below. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 func AVMediaCharacteristicDescribesMusicAndSoundForAccessibility() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaCharacteristicDescribesMusicAndSoundForAccessibility")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A media characteristic that indicates that a track or media selection option provides descriptions of the visual portion of the presentation that are sufficient to comprehend essential information that it depicts, such as action and setting. See -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:]. The value of this characteristic is @"public.accessibility.describes-video". Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicDescribesVideoForAccessibility only if it's explicitly tagged with that characteristic. See the discussion of the tagging of tracks with media characteristics below. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 func AVMediaCharacteristicDescribesVideoForAccessibility() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaCharacteristicDescribesVideoForAccessibility")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A media characteristic that indicates that a track or media selection option contains a language or dialect translation of originally or previously produced content, created by substituting most or all of the dialog in a previous mix of audio content with dialog spoken in its designated language. Tracks to which this characteristic is assigned should typically also be assigned the characteristic AVMediaCharacteristicLanguageTranslation. See -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:]. The value of this characteristic is @"public.translation.dubbed". Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicDubbedTranslation only if it's explicitly tagged with that characteristic. See the discussion of the tagging of tracks with media characteristics below.
 func AVMediaCharacteristicDubbedTranslation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaCharacteristicDubbedTranslation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A media characteristic that indicates that a track or media selection option provides legible content in the language of its specified locale that has been edited for ease of reading. The value of this characteristic is @"public.easy-to-read". Closed caption tracks that carry "easy reader" captions (per the CEA-608 specification) should be tagged with this characteristic. Subtitle tracks can also be tagged with this characteristic, where appropriate. Note for content authors: for QuickTime movie and .m4v files a track is considered to have the characteristic AVMediaCharacteristicEasyToRead only if it's explicitly tagged with that characteristic. See the discussion of the tagging of tracks with media characteristics below. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 func AVMediaCharacteristicEasyToRead() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaCharacteristicEasyToRead")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A media characteristic that indicates that a track or media selection option includes audio that has been prepared or otherwise processed to heighten the intelligibility of speech. The value of this characteristic is @"public.accessibility.enhances-speech-intelligibility". Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicEnhancesSpeechIntelligibility only if it's explicitly tagged with that characteristic. See the discussion of the tagging of tracks with media characteristics below. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 func AVMediaCharacteristicEnhancesSpeechIntelligibility() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaCharacteristicEnhancesSpeechIntelligibility")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A media characteristic that indicates that a track or media selection option includes content that's frame-based. Frame-based content typically comprises discrete media samples that, once rendered, can remain current for indefinite periods of time without additional processing in support of "time-stretching". Further, any dependencies between samples are always explicitly signalled, so that the operations required to render any single sample can readily be performed on demand. AVMediaTypeVideo is the most common type of frame-based media. AVMediaTypeAudio is the most common counterexample. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 func AVMediaCharacteristicFrameBased() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaCharacteristicFrameBased")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A media characteristic that indicates the video track carries information related to the horizontal field of view. This media characteristic is currently synthesized if the CMVideoFormatDescription includes a kCMFormatDescriptionExtension_HorizontalFieldOfView extension. This is not an indication that the field of view is expanded beyond or more narrow than typical horizontal fields of view. The value of this characteristic is @“public.indicates-horizontal-field-of-view". Note for content authors: the presence of this characteristic is strictly inferred from the format description of the associated track.
 func AVMediaCharacteristicIndicatesHorizontalFieldOfView() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaCharacteristicIndicatesHorizontalFieldOfView")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A media characteristic that indicates the video track carries information related to how it should be projected for display. This media characteristic is currently synthesized if the CMVideoFormatDescription specifies a non-rectilinear projection. To determine which kind of projection is indicated, look for the format description extension with key kCMFormatDescriptionExtension_ProjectionKind. The value of this characteristic is @“public.indicates-non-rectilinear-projection". Note for content authors: the presence of this characteristic is strictly inferred from the format description of the associated track.
 func AVMediaCharacteristicIndicatesNonRectilinearProjection() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaCharacteristicIndicatesNonRectilinearProjection")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A media characteristic that indicates that a track or media selection option includes content that's marked by the content author as auxiliary to the presentation of the asset. The value of this characteristic is @"public.auxiliary-content". Example: an option that presents audio media containing commentary on the presentation would typically have this characteristic. Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicIsAuxiliaryContent if it's explicitly tagged with that characteristic or if, as a member of an alternate track group, its associated track is excluded from autoselection. See the discussion of the tagging of tracks with media characteristics below. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 func AVMediaCharacteristicIsAuxiliaryContent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaCharacteristicIsAuxiliaryContent")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A media characteristic that indicates that a track or media selection option includes content that's marked by the content author as intrinsic to the presentation of the asset. Example: an option that presents the main program audio for the presentation, regardless of locale, would typically have this characteristic. The value of this characteristic is @"public.main-program-content". Note for content authors: the presence of this characteristic for a media option is inferred; any option that does not have the characteristic AVMediaCharacteristicIsAuxiliaryContent is considered to have the characteristic AVMediaCharacteristicIsMainProgramContent. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 func AVMediaCharacteristicIsMainProgramContent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaCharacteristicIsMainProgramContent")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A media characteristic that indicates that a track or media selection option includes content that's marked by the content author as original to the principal production of the media, as opposed to supplementary or derivative content created by means of language translation or by other means. The value of this characteristic is @"public.original-content". Example: an option that presents audio media with dialog in the principal language of the production may be tagged with this characteristic; audio media containing dialog dubbed in a language other than the principal language of the production typically would not be tagged with this characteristic. Note for content authors: for QuickTime movie and .m4v files and for HTTP Live Streaming, a media option is considered to have the characteristic AVMediaCharacteristicIsOriginalContent only if it's explicitly tagged with the characteristic. See the discussion of the tagging of tracks with media characteristics below. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 func AVMediaCharacteristicIsOriginalContent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaCharacteristicIsOriginalContent")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A media characteristic that indicates that a track or media selection option contains a language or dialect translation of originally or previously produced content, intended to be used as a substitute for that content by users who prefer its designated language. See -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:]. The value of this characteristic is @"public.translation". Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicLanguageTranslation only if it's explicitly tagged with that characteristic. See the discussion of the tagging of tracks with media characteristics below.
 func AVMediaCharacteristicLanguageTranslation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaCharacteristicLanguageTranslation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A media characteristic that indicates that a track or media selection option includes legible content. AVMediaTypeSubtitle and AVMediaTypeClosedCaption are examples of media types with the characteristic AVMediaCharacteristicLegible. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 func AVMediaCharacteristicLegible() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaCharacteristicLegible")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A media characteristic that indicates that a track was generated in an automated fashion by a machine. This media characteristic can be used to distinguish machine generated content from human authored content. The value of this characteristic is @“public.machine-generated". Note for content authors: for QuickTime movie and .m4v files and for HTTP Live Streaming, a media option is considered to have the characteristic AVMediaCharacteristicIsOriginalContent only if it's explicitly tagged with the characteristic. See the discussion of the tagging of tracks with media characteristics below. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 func AVMediaCharacteristicMachineGenerated() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaCharacteristicMachineGenerated")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A media characteristic that indicates that a track or media selection option includes haptic content that's marked by the content author as providing minimal tactile stimulation. Example: an option that presents low strength haptics feedback when user is actively attending the device, would typically have this characteristic. See -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:]. The value of this characteristic is @"public.haptics.minimal". Note for content authors: for QuickTime movie and MPEG-4 files a track is considered to have the characteristic AVMediaCharacteristicTactileMinimal only if it's explicitly tagged with that characteristic. See the discussion of the tagging of tracks with media characteristics below.
 func AVMediaCharacteristicTactileMinimal() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaCharacteristicTactileMinimal")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A media characteristic that indicates that a track or media selection option includes legible content in the language of its specified locale that: - transcribes spoken dialog and - identifies speakers whenever other visual cues are insufficient for a viewer to determine who is speaking. Legible tracks provided for accessibility purposes are typically tagged both with this characteristic as well as with AVMediaCharacteristicDescribesMusicAndSoundForAccessibility. A legible track provided for accessibility purposes that's associated with an audio track that has no spoken dialog can be tagged with this characteristic, because it trivially meets these requirements. The value of this characteristic is @"public.accessibility.transcribes-spoken-dialog". Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicTranscribesSpokenDialogForAccessibility only if it's explicitly tagged with that characteristic. See the discussion of the tagging of tracks with media characteristics below. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 func AVMediaCharacteristicTranscribesSpokenDialogForAccessibility() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaCharacteristicTranscribesSpokenDialogForAccessibility")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A media characteristic that indicates that a track uses a wide gamut color space and therefore may make use of colors that cannot be accurately represented otherwise. A wide color space such as AVVideo*_P3_D65 contains additional dynamic range that may benefit from special treatment when compositing. Care should be taken to avoid clamping. Non-wide spaces include AVVideo*_ITU_R_709_2 and AVVideo*_SMPTE_C.
 func AVMediaCharacteristicUsesWideGamutColorSpace() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaCharacteristicUsesWideGamutColorSpace")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A media characteristic that indicates that a track or media selection option includes visual content. AVMediaTypeVideo, AVMediaTypeSubtitle, AVMediaTypeClosedCaption are examples of media types with the characteristic AVMediaCharacteristicVisual. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 func AVMediaCharacteristicVisual() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaCharacteristicVisual")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A media characteristic that indicates that a track or media selection option contains a language translation of originally or previously produced content, created by adding, in its designated language, a verbal interpretation of dialog and translations of other important information to a new mix of the audio content. Tracks to which this characteristic is assigned should typically also be assigned the characteristic AVMediaCharacteristicLanguageTranslation. See -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:]. The value of this characteristic is @"public.translation.voice-over". Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicVoiceOverTranslation only if it's explicitly tagged with that characteristic. See the discussion of the tagging of tracks with media characteristics below.
 func AVMediaCharacteristicVoiceOverTranslation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaCharacteristicVoiceOverTranslation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMediaTypeAudio() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaTypeAudio")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // This media type is used only to identify the track type. An Auxiliary Picture track is not intended to be displayed; as such, the track_in_movie flag in TrackHeaderBox of these tracks will be 0. A track with this media type contain video samples the media type of the format description of which is AVMediaTypeVideo.
 func AVMediaTypeAuxiliaryPicture() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaTypeAuxiliaryPicture")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMediaTypeClosedCaption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaTypeClosedCaption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMediaTypeDepthData() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaTypeDepthData")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMediaTypeHaptic() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaTypeHaptic")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMediaTypeMetadata() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaTypeMetadata")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMediaTypeMuxed() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaTypeMuxed")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMediaTypeSubtitle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaTypeSubtitle")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMediaTypeText() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaTypeText")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMediaTypeTimecode() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaTypeTimecode")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMediaTypeVideo() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMediaTypeVideo")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadata3GPUserDataKeyAlbumAndTrack() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadata3GPUserDataKeyAlbumAndTrack")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadata3GPUserDataKeyAuthor() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadata3GPUserDataKeyAuthor")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadata3GPUserDataKeyCollection() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadata3GPUserDataKeyCollection")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadata3GPUserDataKeyCopyright() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadata3GPUserDataKeyCopyright")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadata3GPUserDataKeyDescription() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadata3GPUserDataKeyDescription")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadata3GPUserDataKeyGenre() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadata3GPUserDataKeyGenre")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadata3GPUserDataKeyKeywordList() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadata3GPUserDataKeyKeywordList")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadata3GPUserDataKeyLocation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadata3GPUserDataKeyLocation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadata3GPUserDataKeyMediaClassification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadata3GPUserDataKeyMediaClassification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadata3GPUserDataKeyMediaRating() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadata3GPUserDataKeyMediaRating")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadata3GPUserDataKeyPerformer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadata3GPUserDataKeyPerformer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadata3GPUserDataKeyRecordingYear() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadata3GPUserDataKeyRecordingYear")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadata3GPUserDataKeyThumbnail() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadata3GPUserDataKeyThumbnail")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadata3GPUserDataKeyTitle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadata3GPUserDataKeyTitle")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadata3GPUserDataKeyUserRating() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadata3GPUserDataKeyUserRating")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonIdentifierAccessibilityDescription() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonIdentifierAccessibilityDescription")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonIdentifierAlbumName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonIdentifierAlbumName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonIdentifierArtist() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonIdentifierArtist")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonIdentifierArtwork() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonIdentifierArtwork")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonIdentifierAssetIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonIdentifierAssetIdentifier")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonIdentifierAuthor() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonIdentifierAuthor")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonIdentifierContributor() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonIdentifierContributor")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonIdentifierCopyrights() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonIdentifierCopyrights")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonIdentifierCreationDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonIdentifierCreationDate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonIdentifierCreator() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonIdentifierCreator")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonIdentifierDescription() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonIdentifierDescription")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonIdentifierFormat() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonIdentifierFormat")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonIdentifierLanguage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonIdentifierLanguage")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonIdentifierLastModifiedDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonIdentifierLastModifiedDate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonIdentifierLocation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonIdentifierLocation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonIdentifierMake() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonIdentifierMake")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonIdentifierModel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonIdentifierModel")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonIdentifierPublisher() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonIdentifierPublisher")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonIdentifierRelation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonIdentifierRelation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonIdentifierSoftware() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonIdentifierSoftware")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonIdentifierSource() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonIdentifierSource")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonIdentifierSubject() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonIdentifierSubject")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonIdentifierTitle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonIdentifierTitle")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonIdentifierType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonIdentifierType")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonKeyAccessibilityDescription() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonKeyAccessibilityDescription")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonKeyAlbumName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonKeyAlbumName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonKeyArtist() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonKeyArtist")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonKeyArtwork() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonKeyArtwork")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonKeyAuthor() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonKeyAuthor")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonKeyContributor() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonKeyContributor")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonKeyCopyrights() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonKeyCopyrights")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonKeyCreationDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonKeyCreationDate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonKeyCreator() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonKeyCreator")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonKeyDescription() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonKeyDescription")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonKeyFormat() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonKeyFormat")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonKeyIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonKeyIdentifier")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonKeyLanguage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonKeyLanguage")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonKeyLastModifiedDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonKeyLastModifiedDate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonKeyLocation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonKeyLocation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonKeyMake() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonKeyMake")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonKeyModel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonKeyModel")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonKeyPublisher() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonKeyPublisher")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonKeyRelation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonKeyRelation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonKeySoftware() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonKeySoftware")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonKeySource() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonKeySource")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonKeySubject() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonKeySubject")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonKeyTitle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonKeyTitle")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataCommonKeyType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataCommonKeyType")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // When present in an item's extraAttributes dictionary, identifies the base URI against which other URIs related to the item are to be resolved, e.g. AVMetadataExtraAttributeValueURIKey. Values for this key are of type NSString.
 func AVMetadataExtraAttributeBaseURIKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataExtraAttributeBaseURIKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // More information about the item; specific to the item keySpace & key. For example, this key is used with the following ID3 tags: TXXX, WXXX, APIC, GEOB: carries the Description PRIV: carries the Owner Identifier
 func AVMetadataExtraAttributeInfoKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataExtraAttributeInfoKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // When present in an item's extraAttributes dictionary, identifies the resource to be used as the item's value. Values for this key are of type NSString.
 func AVMetadataExtraAttributeValueURIKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataExtraAttributeValueURIKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // HTTP Live Streaming metadata
 func AVMetadataFormatHLSMetadata() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataFormatHLSMetadata")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataFormatID3Metadata() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataFormatID3Metadata")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataFormatISOUserData() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataFormatISOUserData")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataFormatQuickTimeMetadata() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataFormatQuickTimeMetadata")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataFormatQuickTimeUserData() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataFormatQuickTimeUserData")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Metadata format for AVMetadataItems of unknown provenance. This can occur when metadata is provided generically by an intermediate interface, such as AudioToolbox's AudioFile interface.
 func AVMetadataFormatUnknown() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataFormatUnknown")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataFormatiTunesMetadata() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataFormatiTunesMetadata")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyAlbumSortOrder() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyAlbumSortOrder")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyAlbumTitle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyAlbumTitle")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyAttachedPicture() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyAttachedPicture")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyAudioEncryption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyAudioEncryption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyAudioSeekPointIndex() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyAudioSeekPointIndex")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyBand() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyBand")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyBeatsPerMinute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyBeatsPerMinute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyComments() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyComments")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyCommercial() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyCommercial")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyCommercialInformation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyCommercialInformation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: since macOS 10.11.
 func AVMetadataID3MetadataKeyCommerical() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyCommerical")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyComposer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyComposer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyConductor() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyConductor")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyContentGroupDescription() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyContentGroupDescription")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyContentType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyContentType")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyCopyright() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyCopyright")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyCopyrightInformation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyCopyrightInformation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyDate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyEncodedBy() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyEncodedBy")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyEncodedWith() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyEncodedWith")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyEncodingTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyEncodingTime")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyEncryption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyEncryption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyEqualization() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyEqualization")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyEqualization2() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyEqualization2")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyEventTimingCodes() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyEventTimingCodes")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyFileOwner() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyFileOwner")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyFileType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyFileType")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyGeneralEncapsulatedObject() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyGeneralEncapsulatedObject")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyGroupIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyGroupIdentifier")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyInitialKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyInitialKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyInternationalStandardRecordingCode() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyInternationalStandardRecordingCode")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyInternetRadioStationName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyInternetRadioStationName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyInternetRadioStationOwner() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyInternetRadioStationOwner")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyInvolvedPeopleList_v23() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyInvolvedPeopleList_v23")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyInvolvedPeopleList_v24() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyInvolvedPeopleList_v24")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyLanguage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyLanguage")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyLeadPerformer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyLeadPerformer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyLength() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyLength")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyLink() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyLink")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyLyricist() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyLyricist")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyMPEGLocationLookupTable() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyMPEGLocationLookupTable")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyMediaType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyMediaType")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyModifiedBy() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyModifiedBy")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyMood() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyMood")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyMusicCDIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyMusicCDIdentifier")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyMusicianCreditsList() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyMusicianCreditsList")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyOfficialArtistWebpage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyOfficialArtistWebpage")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyOfficialAudioFileWebpage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyOfficialAudioFileWebpage")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyOfficialAudioSourceWebpage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyOfficialAudioSourceWebpage")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyOfficialInternetRadioStationHomepage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyOfficialInternetRadioStationHomepage")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyOfficialPublisherWebpage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyOfficialPublisherWebpage")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyOriginalAlbumTitle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyOriginalAlbumTitle")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyOriginalArtist() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyOriginalArtist")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyOriginalFilename() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyOriginalFilename")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyOriginalLyricist() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyOriginalLyricist")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyOriginalReleaseTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyOriginalReleaseTime")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyOriginalReleaseYear() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyOriginalReleaseYear")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyOwnership() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyOwnership")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyPartOfASet() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyPartOfASet")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyPayment() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyPayment")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyPerformerSortOrder() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyPerformerSortOrder")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyPlayCounter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyPlayCounter")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyPlaylistDelay() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyPlaylistDelay")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyPopularimeter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyPopularimeter")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyPositionSynchronization() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyPositionSynchronization")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyPrivate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyPrivate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyProducedNotice() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyProducedNotice")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyPublisher() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyPublisher")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyRecommendedBufferSize() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyRecommendedBufferSize")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyRecordingDates() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyRecordingDates")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyRecordingTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyRecordingTime")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyRelativeVolumeAdjustment() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyRelativeVolumeAdjustment")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyRelativeVolumeAdjustment2() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyRelativeVolumeAdjustment2")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyReleaseTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyReleaseTime")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyReverb() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyReverb")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeySeek() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeySeek")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeySetSubtitle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeySetSubtitle")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeySignature() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeySignature")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeySize() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeySize")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeySubTitle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeySubTitle")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeySynchronizedLyric() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeySynchronizedLyric")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeySynchronizedTempoCodes() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeySynchronizedTempoCodes")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyTaggingTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyTaggingTime")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyTermsOfUse() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyTermsOfUse")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyTime")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyTitleDescription() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyTitleDescription")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyTitleSortOrder() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyTitleSortOrder")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyTrackNumber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyTrackNumber")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyUniqueFileIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyUniqueFileIdentifier")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyUnsynchronizedLyric() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyUnsynchronizedLyric")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyUserText() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyUserText")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyUserURL() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyUserURL")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataID3MetadataKeyYear() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataID3MetadataKeyYear")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataISOUserDataKeyAccessibilityDescription() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataISOUserDataKeyAccessibilityDescription")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataISOUserDataKeyCopyright() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataISOUserDataKeyCopyright")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // ISO User data key for the content creation date/time. The value is date and time, formatted according to ISO 8601, when the content was created. For clips captured by recording devices, this is typically the date and time when the clip’s recording started. When stored in AV(Mutable)MetadataItem, the value type must be either NSDate or NSString. When NSString is used, the value uses one of ISO 8601 formats such as "2016-01-11T17:31:10Z".
 func AVMetadataISOUserDataKeyDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataISOUserDataKeyDate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataISOUserDataKeyTaggedCharacteristic() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataISOUserDataKeyTaggedCharacteristic")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIcyMetadataKeyStreamTitle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIcyMetadataKeyStreamTitle")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIcyMetadataKeyStreamURL() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIcyMetadataKeyStreamURL")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifier3GPUserDataAlbumAndTrack() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifier3GPUserDataAlbumAndTrack")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifier3GPUserDataAuthor() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifier3GPUserDataAuthor")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifier3GPUserDataCollection() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifier3GPUserDataCollection")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifier3GPUserDataCopyright() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifier3GPUserDataCopyright")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifier3GPUserDataDescription() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifier3GPUserDataDescription")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifier3GPUserDataGenre() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifier3GPUserDataGenre")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifier3GPUserDataKeywordList() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifier3GPUserDataKeywordList")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifier3GPUserDataLocation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifier3GPUserDataLocation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifier3GPUserDataMediaClassification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifier3GPUserDataMediaClassification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifier3GPUserDataMediaRating() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifier3GPUserDataMediaRating")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifier3GPUserDataPerformer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifier3GPUserDataPerformer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifier3GPUserDataRecordingYear() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifier3GPUserDataRecordingYear")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifier3GPUserDataThumbnail() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifier3GPUserDataThumbnail")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifier3GPUserDataTitle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifier3GPUserDataTitle")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifier3GPUserDataUserRating() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifier3GPUserDataUserRating")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataAlbumSortOrder() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataAlbumSortOrder")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataAlbumTitle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataAlbumTitle")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataAttachedPicture() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataAttachedPicture")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataAudioEncryption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataAudioEncryption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataAudioSeekPointIndex() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataAudioSeekPointIndex")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataBand() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataBand")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataBeatsPerMinute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataBeatsPerMinute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataComments() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataComments")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataCommercial() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataCommercial")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataCommercialInformation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataCommercialInformation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: No longer supported
 func AVMetadataIdentifierID3MetadataCommerical() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataCommerical")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataComposer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataComposer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataConductor() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataConductor")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataContentGroupDescription() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataContentGroupDescription")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataContentType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataContentType")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataCopyright() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataCopyright")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataCopyrightInformation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataCopyrightInformation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataDate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataEncodedBy() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataEncodedBy")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataEncodedWith() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataEncodedWith")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataEncodingTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataEncodingTime")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataEncryption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataEncryption")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataEqualization() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataEqualization")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataEqualization2() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataEqualization2")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataEventTimingCodes() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataEventTimingCodes")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataFileOwner() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataFileOwner")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataFileType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataFileType")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataGeneralEncapsulatedObject() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataGeneralEncapsulatedObject")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataGroupIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataGroupIdentifier")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataInitialKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataInitialKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataInternationalStandardRecordingCode() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataInternationalStandardRecordingCode")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataInternetRadioStationName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataInternetRadioStationName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataInternetRadioStationOwner() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataInternetRadioStationOwner")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataInvolvedPeopleList_v23() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataInvolvedPeopleList_v23")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataInvolvedPeopleList_v24() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataInvolvedPeopleList_v24")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataLanguage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataLanguage")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataLeadPerformer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataLeadPerformer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataLength() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataLength")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataLink() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataLink")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataLyricist() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataLyricist")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataMPEGLocationLookupTable() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataMPEGLocationLookupTable")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataMediaType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataMediaType")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataModifiedBy() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataModifiedBy")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataMood() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataMood")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataMusicCDIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataMusicCDIdentifier")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataMusicianCreditsList() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataMusicianCreditsList")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataOfficialArtistWebpage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataOfficialArtistWebpage")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataOfficialAudioFileWebpage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataOfficialAudioFileWebpage")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataOfficialAudioSourceWebpage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataOfficialAudioSourceWebpage")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataOfficialInternetRadioStationHomepage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataOfficialInternetRadioStationHomepage")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataOfficialPublisherWebpage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataOfficialPublisherWebpage")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataOriginalAlbumTitle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataOriginalAlbumTitle")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataOriginalArtist() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataOriginalArtist")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataOriginalFilename() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataOriginalFilename")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataOriginalLyricist() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataOriginalLyricist")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataOriginalReleaseTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataOriginalReleaseTime")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataOriginalReleaseYear() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataOriginalReleaseYear")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataOwnership() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataOwnership")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataPartOfASet() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataPartOfASet")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataPayment() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataPayment")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataPerformerSortOrder() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataPerformerSortOrder")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataPlayCounter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataPlayCounter")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataPlaylistDelay() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataPlaylistDelay")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataPopularimeter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataPopularimeter")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataPositionSynchronization() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataPositionSynchronization")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataPrivate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataPrivate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataProducedNotice() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataProducedNotice")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataPublisher() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataPublisher")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataRecommendedBufferSize() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataRecommendedBufferSize")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataRecordingDates() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataRecordingDates")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataRecordingTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataRecordingTime")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataRelativeVolumeAdjustment() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataRelativeVolumeAdjustment")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataRelativeVolumeAdjustment2() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataRelativeVolumeAdjustment2")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataReleaseTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataReleaseTime")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataReverb() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataReverb")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataSeek() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataSeek")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataSetSubtitle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataSetSubtitle")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataSignature() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataSignature")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataSize() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataSize")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataSubTitle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataSubTitle")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataSynchronizedLyric() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataSynchronizedLyric")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataSynchronizedTempoCodes() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataSynchronizedTempoCodes")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataTaggingTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataTaggingTime")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataTermsOfUse() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataTermsOfUse")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataTime")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataTitleDescription() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataTitleDescription")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataTitleSortOrder() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataTitleSortOrder")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataTrackNumber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataTrackNumber")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataUniqueFileIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataUniqueFileIdentifier")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataUnsynchronizedLyric() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataUnsynchronizedLyric")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataUserText() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataUserText")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataUserURL() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataUserURL")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierID3MetadataYear() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierID3MetadataYear")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierISOUserDataAccessibilityDescription() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierISOUserDataAccessibilityDescription")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierISOUserDataCopyright() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierISOUserDataCopyright")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierISOUserDataDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierISOUserDataDate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierISOUserDataTaggedCharacteristic() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierISOUserDataTaggedCharacteristic")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierIcyMetadataStreamTitle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierIcyMetadataStreamTitle")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierIcyMetadataStreamURL() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierIcyMetadataStreamURL")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A value of type kCMMetadataBaseDataType_RawData The static presentation metadata, Apple Immersive Media Embedded (AIME), for Apple Immersive Video that originates from ImmersiveMediaSupport framework's VenueDescriptor.aimeData.
 func AVMetadataIdentifierQuickTimeMetadataAIMEData() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataAIMEData")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataAccessibilityDescription() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataAccessibilityDescription")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataAlbum() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataAlbum")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataArranger() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataArranger")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataArtist() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataArtist")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataArtwork() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataArtwork")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataAuthor() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataAuthor")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A value of type kCMMetadataBaseDataType_UInt8 indicating whether this Live Photo movie was captured in "Auto" mode. Clients capturing LivePhoto content may add this movie-level metadata to signify that the movie content should only be used (when swiping between photos, or force-touching a photo) if it's sufficiently dynamic. For instance, photos of static scenes or documents are to be excluded from the Live Photo experience.
 func AVMetadataIdentifierQuickTimeMetadataAutoLivePhoto() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataAutoLivePhoto")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A value of type kCMMetadataBaseDataType_UTF8 indicating focal length normalized to the 35mm film equivalent value (e.g. "50.00mm"). This is track-level metadata for video track that is associated with the camera.
 func AVMetadataIdentifierQuickTimeMetadataCameraFocalLength35mmEquivalent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataCameraFocalLength35mmEquivalent")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataCameraFrameReadoutTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataCameraFrameReadoutTime")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A value of type kCMMetadataBaseDataType_UTF8 indicating the sensitivity of the camera to light in terms of ISO exposure index (e.g. "800"). See SMPTE RDD 18.
 func AVMetadataIdentifierQuickTimeMetadataCameraISOSensitivity() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataCameraISOSensitivity")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataCameraIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataCameraIdentifier")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A value of type kCMMetadataBaseDataType_UTF8 indicating measure of the amount of light transmitted through the lens. It is the focal length divided by the effective lens aperture diameter (e.g. "F2.8" or "2.8"). This is track-level metadata for video track that is associated with the camera.
 func AVMetadataIdentifierQuickTimeMetadataCameraLensIrisFNumber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataCameraLensIrisFNumber")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A value of type kCMMetadataBaseDataType_UTF8 indicating the lens model (e.g. "iPhone 16 Pro back camera 6.765mm f/1.78"). This is track-level metadata for video track that is associated with the camera.
 func AVMetadataIdentifierQuickTimeMetadataCameraLensModel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataCameraLensModel")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A value of type kCMMetadataBaseDataType_UTF8 indicating the exposure period expressed as an angle in minutes (1/60 degree) (e.g. "21600" or "360.00deg"").
 func AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedAngle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedAngle")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A value of type kCMMetadataBaseDataType_UTF8 indicating the exposure period expressed as a time per one frame/field period in seconds.
 func AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedTime")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A value of type kCMMetadataBaseDataType_UTF8 indicating the white balance value defined by the temperature in Kelvin units (e.g. "5500K" or "5500"). See SMPTE RDD 18.
 func AVMetadataIdentifierQuickTimeMetadataCameraWhiteBalance() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataCameraWhiteBalance")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A value of type `kCMMetadataBaseDataType_UInt8` indicating whether this movie is intended as a Cinematic Video (1) or not (0). This movie-level metadata is automatically added (with a value of 1) to a movie recorded using the Cinematic Video API. Clients can override it with a value of 0 to signal that this movie is not to be treated as a Cinematic Video by Apple's software like Photos.
 func AVMetadataIdentifierQuickTimeMetadataCinematicVideoIntent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataCinematicVideoIntent")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataCollectionUser() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataCollectionUser")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataComment() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataComment")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataComposer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataComposer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataContentIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataContentIdentifier")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataCopyright() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataCopyright")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataCreationDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataCreationDate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataCredits() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataCredits")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataDescription() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataDescription")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataDetectedCatBody() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataDetectedCatBody")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataDetectedDogBody() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataDetectedDogBody")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataDetectedFace() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataDetectedFace")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataDetectedHumanBody() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataDetectedHumanBody")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataDetectedSalientObject() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataDetectedSalientObject")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataDirectionFacing() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataDirectionFacing")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataDirectionMotion() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataDirectionMotion")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataDirector() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataDirector")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataDisplayName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataDisplayName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataEncodedBy() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataEncodedBy")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A value of type kCMMetadataBaseDataType_UInt8 indicating whether this movie is intended to be played back at the full frame rate (1), or at a slow motion rate (0). Historically, some apps have played movies recorded at frame rates of 120fps or higher in slow motion by default. With the introduction of this metadata, apps that record high-frame-rate movies may add this movie-level metadata to indicate whether the movie is intended to be played at the full frame rate (1) or at a slow motion rate (0). Apps that play movies may use this metadata, when present, to guide their behavior.
 func AVMetadataIdentifierQuickTimeMetadataFullFrameRatePlaybackIntent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataFullFrameRatePlaybackIntent")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataGenre() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataGenre")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataInformation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataInformation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataIsMontage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataIsMontage")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataKeywords() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataKeywords")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A value of type kCMMetadataBaseDataType_Float32. Live Photo movies may be algorithmically scored from 0. to 1. on their level of vitality. A Live Photo movie with a low vitality score offers little dynamism to the still photo it accompanies. The vitality score is normalized and independent of the vitality scoring version of the algorithm (see AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScoringVersion). If a Live Photo movie contains the AVMetadataIdentifierQuickTimeMetadataAutoLivePhoto key and its value is non-zero, apps should read the AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScore value and only display the movie's content if the score is 0.5 or higher. If the capture session includes a metadata output configured to provide face, dog, or cat metadata objects, their presence will greatly increase the vitality score.
 func AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScore() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScore")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A value of type kCMMetadataBaseDataType_UInt32. The version of the algorithm that scored the Live Photo movie for vitality.
 func AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScoringVersion() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScoringVersion")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataLocationBody() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataLocationBody")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataLocationDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataLocationDate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A value of type kCMMetadataBaseDataType_Float32. The horizontal accuracy of the provided location data (usually specified by AVMetadataIdentifierQuickTimeMetadataLocationISO6709).
 func AVMetadataIdentifierQuickTimeMetadataLocationHorizontalAccuracyInMeters() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataLocationHorizontalAccuracyInMeters")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataLocationISO6709() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataLocationISO6709")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataLocationName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataLocationName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataLocationNote() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataLocationNote")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataLocationRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataLocationRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataMake() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataMake")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataModel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataModel")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataOriginalArtist() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataOriginalArtist")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataPerformer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataPerformer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataPhonogramRights() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataPhonogramRights")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataPreferredAffineTransform() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataPreferredAffineTransform")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A value of type kCMMetadataBaseDataType_RawData The presentation timed metadata for Apple Immerisve Video. Value is a JSON-encoding of ImmersiveMediaSupport framework's PresentationDescriptor object.
 func AVMetadataIdentifierQuickTimeMetadataPresentationImmersiveMedia() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataPresentationImmersiveMedia")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataProducer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataProducer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataPublisher() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataPublisher")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataRatingUser() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataRatingUser")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataSoftware() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataSoftware")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A value of type kCMMetadataBaseDataType_Float32. The video may be scored by a heuristic which considers factors such as exposure and focus. The value ranges from 0-1, where a score below 0.5 indicates the asset has serious flaws.
 func AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScore() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScore")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A value of type kCMMetadataBaseDataType_UInt32. The version of the algorithm that provided the spatial over capture quality score.
 func AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScoringVersion() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScoringVersion")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataTitle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataTitle")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataVideoOrientation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataVideoOrientation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A value of type kCMMetadataBaseDataType_RawData indicating the reference color translation matrix data for ProRes RAW.
 func AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTColorMatrices() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTColorMatrices")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A value of type kCMMetadataBaseDataType_RawData indicating the reference white balance multiplication factor data for ProRes RAW.
 func AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTWhiteBalanceFactors() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTWhiteBalanceFactors")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataYear() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataYear")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeMetadataiXML() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataiXML")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataAccessibilityDescription() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataAccessibilityDescription")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataAlbum() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataAlbum")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataArranger() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataArranger")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataArtist() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataArtist")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataAuthor() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataAuthor")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataChapter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataChapter")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataComment() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataComment")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataComposer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataComposer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataCopyright() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataCopyright")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataCreationDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataCreationDate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataCredits() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataCredits")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataDescription() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataDescription")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataDirector() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataDirector")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataDisclaimer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataDisclaimer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataEncodedBy() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataEncodedBy")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataFullName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataFullName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataGenre() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataGenre")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataHostComputer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataHostComputer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataInformation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataInformation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataKeywords() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataKeywords")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataLocationISO6709() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataLocationISO6709")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataMake() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataMake")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataModel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataModel")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataOriginalArtist() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataOriginalArtist")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataOriginalFormat() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataOriginalFormat")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataOriginalSource() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataOriginalSource")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataPerformers() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataPerformers")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataPhonogramRights() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataPhonogramRights")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataProducer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataProducer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataProduct() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataProduct")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataPublisher() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataPublisher")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataSoftware() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataSoftware")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataSpecialPlaybackRequirements() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataSpecialPlaybackRequirements")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataTaggedCharacteristic() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataTaggedCharacteristic")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataTrack() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataTrack")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataTrackName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataTrackName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataURLLink() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataURLLink")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataWarning() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataWarning")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifierQuickTimeUserDataWriter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeUserDataWriter")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataAccountKind() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataAccountKind")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataAcknowledgement() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataAcknowledgement")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataAlbum() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataAlbum")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataAlbumArtist() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataAlbumArtist")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataAppleID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataAppleID")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataArranger() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataArranger")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataArtDirector() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataArtDirector")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataArtist() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataArtist")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataArtistID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataArtistID")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataAuthor() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataAuthor")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataBeatsPerMin() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataBeatsPerMin")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataComposer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataComposer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataConductor() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataConductor")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataContentRating() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataContentRating")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataCopyright() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataCopyright")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataCoverArt() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataCoverArt")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataCredits() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataCredits")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataDescription() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataDescription")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataDirector() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataDirector")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataDiscCompilation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataDiscCompilation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataDiscNumber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataDiscNumber")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataEQ() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataEQ")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataEncodedBy() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataEncodedBy")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataEncodingTool() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataEncodingTool")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataExecProducer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataExecProducer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataGenreID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataGenreID")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataGrouping() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataGrouping")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataLinerNotes() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataLinerNotes")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataLyrics() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataLyrics")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataOnlineExtras() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataOnlineExtras")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataOriginalArtist() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataOriginalArtist")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataPerformer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataPerformer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataPhonogramRights() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataPhonogramRights")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataPlaylistID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataPlaylistID")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataPredefinedGenre() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataPredefinedGenre")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataProducer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataProducer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataPublisher() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataPublisher")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataRecordCompany() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataRecordCompany")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataReleaseDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataReleaseDate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataSoloist() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataSoloist")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataSongID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataSongID")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataSongName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataSongName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataSoundEngineer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataSoundEngineer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataThanks() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataThanks")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataTrackNumber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataTrackNumber")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataTrackSubTitle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataTrackSubTitle")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataUserComment() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataUserComment")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataIdentifieriTunesMetadataUserGenre() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifieriTunesMetadataUserGenre")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Keys for metadata provided by AudioToolbox's AudioFile interface. See <AudioToolbox/AudioFile.h>
 func AVMetadataKeySpaceAudioFile() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataKeySpaceAudioFile")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataKeySpaceCommon() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataKeySpaceCommon")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // HLS Metadata does not define its own keySpace or keys. Use of the keySpace AVMetadataKeySpaceQuickTimeMetadata and its keys is recommended.
 func AVMetadataKeySpaceHLSDateRange() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataKeySpaceHLSDateRange")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataKeySpaceID3() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataKeySpaceID3")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataKeySpaceISOUserData() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataKeySpaceISOUserData")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Icecast/ShoutCAST streaming metadata
 func AVMetadataKeySpaceIcy() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataKeySpaceIcy")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataKeySpaceQuickTimeMetadata() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataKeySpaceQuickTimeMetadata")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataKeySpaceQuickTimeUserData() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataKeySpaceQuickTimeUserData")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataKeySpaceiTunes() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataKeySpaceiTunes")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant AVMetadataObjectTypeAztecCode @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeAztecCode. @discussion AVMetadataMachineReadableCodeObject objects generated from Aztec codes return this constant as their type.
 func AVMetadataObjectTypeAztecCode() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataObjectTypeAztecCode")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -4083,7 +5173,7 @@ func AVMetadataObjectTypeCatBody() uintptr {
 	return ptr
 }
 
-// An identifier for an instance of a cat head object. ``AVMetadataCatHeadObject`` objects return this constant as their type.
+// An identifier for an instance of a cat head object. “AVMetadataCatHeadObject“ objects return this constant as their type.
 func AVMetadataObjectTypeCatHead() uintptr {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataObjectTypeCatHead")
 	return ptr
@@ -4098,35 +5188,45 @@ func AVMetadataObjectTypeCodabarCode() uintptr {
 // @constant AVMetadataObjectTypeCode128Code @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeCode128Code. @discussion AVMetadataMachineReadableCodeObject objects generated from Code 128 codes return this constant as their type.
 func AVMetadataObjectTypeCode128Code() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataObjectTypeCode128Code")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant AVMetadataObjectTypeCode39Code @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeCode39Code. @discussion AVMetadataMachineReadableCodeObject objects generated from Code 39 codes return this constant as their type.
 func AVMetadataObjectTypeCode39Code() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataObjectTypeCode39Code")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant AVMetadataObjectTypeCode39Mod43Code @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeCode39Mod43Code. @discussion AVMetadataMachineReadableCodeObject objects generated from Code 39 mod 43 codes return this constant as their type.
 func AVMetadataObjectTypeCode39Mod43Code() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataObjectTypeCode39Mod43Code")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant AVMetadataObjectTypeCode93Code @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeCode93Code. @discussion AVMetadataMachineReadableCodeObject objects generated from Code 93 codes return this constant as their type.
 func AVMetadataObjectTypeCode93Code() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataObjectTypeCode93Code")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant AVMetadataObjectTypeDataMatrixCode @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeDataMatrixCode. @discussion AVMetadataMachineReadableCodeObject objects generated from DataMatrix codes return this constant as their type.
 func AVMetadataObjectTypeDataMatrixCode() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataObjectTypeDataMatrixCode")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -4136,7 +5236,7 @@ func AVMetadataObjectTypeDogBody() uintptr {
 	return ptr
 }
 
-// An identifier for an instance of a dog head object. ``AVMetadataDogHeadObject`` objects return this constant as their type.
+// An identifier for an instance of a dog head object. “AVMetadataDogHeadObject“ objects return this constant as their type.
 func AVMetadataObjectTypeDogHead() uintptr {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataObjectTypeDogHead")
 	return ptr
@@ -4145,21 +5245,27 @@ func AVMetadataObjectTypeDogHead() uintptr {
 // @constant AVMetadataObjectTypeEAN13Code @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeEAN13Code. @discussion AVMetadataMachineReadableCodeObject objects generated from EAN-13 (including UPC-A) codes return this constant as their type.
 func AVMetadataObjectTypeEAN13Code() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataObjectTypeEAN13Code")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant AVMetadataObjectTypeEAN8Code @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeEAN8Code. @discussion AVMetadataMachineReadableCodeObject objects generated from EAN-8 codes return this constant as their type.
 func AVMetadataObjectTypeEAN8Code() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataObjectTypeEAN8Code")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant AVMetadataObjectTypeFace @abstract An identifier for an instance of AVMetadataFaceObject. @discussion AVMetadataFaceObject objects return this constant as their type.
 func AVMetadataObjectTypeFace() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataObjectTypeFace")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -4196,14 +5302,18 @@ func AVMetadataObjectTypeHumanFullBody() uintptr {
 // @constant AVMetadataObjectTypeITF14Code @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeITF14Code. @discussion AVMetadataMachineReadableCodeObject objects generated from ITF14 codes return this constant as their type.
 func AVMetadataObjectTypeITF14Code() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataObjectTypeITF14Code")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant AVMetadataObjectTypeInterleaved2of5Code @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeInterleaved2of5Code. @discussion AVMetadataMachineReadableCodeObject objects generated from Interleaved 2 of 5 codes return this constant as their type.
 func AVMetadataObjectTypeInterleaved2of5Code() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataObjectTypeInterleaved2of5Code")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -4222,14 +5332,18 @@ func AVMetadataObjectTypeMicroQRCode() uintptr {
 // @constant AVMetadataObjectTypePDF417Code @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypePDF417Code. @discussion AVMetadataMachineReadableCodeObject objects generated from PDF417 codes return this constant as their type.
 func AVMetadataObjectTypePDF417Code() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataObjectTypePDF417Code")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant AVMetadataObjectTypeQRCode @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeQRCode. @discussion AVMetadataMachineReadableCodeObject objects generated from QR codes return this constant as their type.
 func AVMetadataObjectTypeQRCode() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataObjectTypeQRCode")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -4242,864 +5356,1148 @@ func AVMetadataObjectTypeSalientObject() uintptr {
 // @constant AVMetadataObjectTypeUPCECode @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeUPCECode. @discussion AVMetadataMachineReadableCodeObject objects generated from UPC-E codes return this constant as their type.
 func AVMetadataObjectTypeUPCECode() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataObjectTypeUPCECode")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyAccessibilityDescription() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyAccessibilityDescription")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyAlbum() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyAlbum")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyArranger() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyArranger")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyArtist() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyArtist")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyArtwork() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyArtwork")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyAuthor() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyAuthor")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A value of type kCMMetadataBaseDataType_UTF8 indicating focal length normalized to the 35mm film equivalent value (e.g. "50.00mm"). This is track-level metadata for video track that is associated with the camera.
 func AVMetadataQuickTimeMetadataKeyCameraFocalLength35mmEquivalent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyCameraFocalLength35mmEquivalent")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyCameraFrameReadoutTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyCameraFrameReadoutTime")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A value of type kCMMetadataBaseDataType_UTF8 indicating the sensitivity of the camera to light in terms of ISO exposure index (e.g. "800"). See SMPTE RDD 18.
 func AVMetadataQuickTimeMetadataKeyCameraISOSensitivity() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyCameraISOSensitivity")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyCameraIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyCameraIdentifier")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A value of type kCMMetadataBaseDataType_UTF8 indicating measure of the amount of light transmitted through the lens. It is the focal length divided by the effective lens aperture diameter (e.g. "F2.8" or "2.8"). This is track-level metadata for video track that is associated with the camera.
 func AVMetadataQuickTimeMetadataKeyCameraLensIrisFNumber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyCameraLensIrisFNumber")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A value of type kCMMetadataBaseDataType_UTF8 indicating the lens model (e.g. "iPhone 16 Pro back camera 6.765mm f/1.78"). This is track-level metadata for video track that is associated with the camera.
 func AVMetadataQuickTimeMetadataKeyCameraLensModel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyCameraLensModel")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A value of type kCMMetadataBaseDataType_UTF8 indicating the exposure period expressed as an angle in minutes (1/60 degree) (e.g. "21600" or "360.00deg"").
 func AVMetadataQuickTimeMetadataKeyCameraShutterSpeedAngle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyCameraShutterSpeedAngle")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A value of type kCMMetadataBaseDataType_UTF8 indicating the exposure period expressed as a time per one frame/field period in seconds.
 func AVMetadataQuickTimeMetadataKeyCameraShutterSpeedTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyCameraShutterSpeedTime")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A value of type kCMMetadataBaseDataType_UTF8 indicating the white balance value defined by the temperature in Kelvin units (e.g. "5500K" or "5500"). See SMPTE RDD 18.
 func AVMetadataQuickTimeMetadataKeyCameraWhiteBalance() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyCameraWhiteBalance")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A value of type `kCMMetadataBaseDataType_UInt8` indicating whether this movie is intended as a Cinematic Video (1) or not (0). This movie-level metadata is automatically added (with a value of 1) to a movie recorded using the Cinematic Video API. Clients can override it with a value of 0 to signal that this movie is not to be treated as a Cinematic Video by Apple's software like Photos.
 func AVMetadataQuickTimeMetadataKeyCinematicVideoIntent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyCinematicVideoIntent")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyCollectionUser() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyCollectionUser")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyComment() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyComment")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyComposer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyComposer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyContentIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyContentIdentifier")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyCopyright() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyCopyright")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyCreationDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyCreationDate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyCredits() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyCredits")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyDescription() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyDescription")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyDirectionFacing() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyDirectionFacing")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyDirectionMotion() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyDirectionMotion")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyDirector() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyDirector")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyDisplayName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyDisplayName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyEncodedBy() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyEncodedBy")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A value of type kCMMetadataBaseDataType_UInt8 indicating whether this movie is intended to be played back at the full frame rate (1), or at a slow motion rate (0). Historically, some apps have played movies recorded at frame rates of 120fps or higher in slow motion by default. With the introduction of this metadata, apps that record high-frame-rate movies may add this movie-level metadata to indicate whether the movie is intended to be played at the full frame rate (1) or at a slow motion rate (0). Apps that play movies may use this metadata, when present, to guide their behavior.
 func AVMetadataQuickTimeMetadataKeyFullFrameRatePlaybackIntent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyFullFrameRatePlaybackIntent")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyGenre() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyGenre")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyInformation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyInformation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyIsMontage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyIsMontage")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyKeywords() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyKeywords")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyLocationBody() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyLocationBody")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyLocationDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyLocationDate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyLocationISO6709() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyLocationISO6709")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyLocationName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyLocationName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyLocationNote() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyLocationNote")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyLocationRole() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyLocationRole")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyMake() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyMake")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyModel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyModel")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyOriginalArtist() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyOriginalArtist")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyPerformer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyPerformer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyPhonogramRights() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyPhonogramRights")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyProducer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyProducer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyPublisher() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyPublisher")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyRatingUser() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyRatingUser")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeySoftware() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeySoftware")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyTitle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyTitle")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A value of type kCMMetadataBaseDataType_RawData indicating the reference color translation matrix data for ProRes RAW.
 func AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTColorMatrices() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTColorMatrices")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A value of type kCMMetadataBaseDataType_RawData indicating the reference white balance multiplication factor data for ProRes RAW.
 func AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTWhiteBalanceFactors() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTWhiteBalanceFactors")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyYear() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyYear")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeMetadataKeyiXML() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeMetadataKeyiXML")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyAccessibilityDescription() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyAccessibilityDescription")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyAlbum() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyAlbum")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyArranger() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyArranger")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyArtist() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyArtist")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyAuthor() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyAuthor")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyChapter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyChapter")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyComment() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyComment")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyComposer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyComposer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyCopyright() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyCopyright")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyCreationDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyCreationDate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyCredits() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyCredits")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyDescription() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyDescription")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyDirector() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyDirector")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyDisclaimer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyDisclaimer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyEncodedBy() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyEncodedBy")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyFullName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyFullName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyGenre() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyGenre")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyHostComputer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyHostComputer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyInformation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyInformation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyKeywords() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyKeywords")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyLocationISO6709() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyLocationISO6709")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyMake() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyMake")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyModel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyModel")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyOriginalArtist() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyOriginalArtist")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyOriginalFormat() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyOriginalFormat")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyOriginalSource() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyOriginalSource")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyPerformers() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyPerformers")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyPhonogramRights() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyPhonogramRights")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyProducer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyProducer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyProduct() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyProduct")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyPublisher() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyPublisher")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeySoftware() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeySoftware")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeySpecialPlaybackRequirements() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeySpecialPlaybackRequirements")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyTaggedCharacteristic() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyTaggedCharacteristic")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyTrack() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyTrack")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyTrackName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyTrackName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyURLLink() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyURLLink")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyWarning() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyWarning")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataQuickTimeUserDataKeyWriter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataQuickTimeUserDataKeyWriter")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyAccountKind() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyAccountKind")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyAcknowledgement() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyAcknowledgement")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyAlbum() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyAlbum")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyAlbumArtist() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyAlbumArtist")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyAppleID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyAppleID")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyArranger() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyArranger")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyArtDirector() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyArtDirector")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyArtist() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyArtist")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyArtistID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyArtistID")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyAuthor() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyAuthor")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyBeatsPerMin() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyBeatsPerMin")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyComposer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyComposer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyConductor() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyConductor")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyContentRating() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyContentRating")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyCopyright() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyCopyright")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyCoverArt() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyCoverArt")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyCredits() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyCredits")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyDescription() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyDescription")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyDirector() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyDirector")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyDiscCompilation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyDiscCompilation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyDiscNumber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyDiscNumber")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyEQ() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyEQ")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyEncodedBy() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyEncodedBy")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyEncodingTool() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyEncodingTool")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyExecProducer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyExecProducer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyGenreID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyGenreID")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyGrouping() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyGrouping")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyLinerNotes() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyLinerNotes")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyLyrics() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyLyrics")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyOnlineExtras() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyOnlineExtras")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyOriginalArtist() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyOriginalArtist")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyPerformer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyPerformer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyPhonogramRights() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyPhonogramRights")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyPlaylistID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyPlaylistID")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyPredefinedGenre() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyPredefinedGenre")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyProducer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyProducer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyPublisher() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyPublisher")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyRecordCompany() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyRecordCompany")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyReleaseDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyReleaseDate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeySoloist() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeySoloist")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeySongID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeySongID")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeySongName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeySongName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeySoundEngineer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeySoundEngineer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyThanks() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyThanks")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyTrackNumber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyTrackNumber")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyTrackSubTitle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyTrackSubTitle")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyUserComment() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyUserComment")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVMetadataiTunesMetadataKeyUserGenre() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataiTunesMetadataKeyUserGenre")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5162,13 +6560,17 @@ func AVOutputSettingsPresetHEVC3840x2160WithAlpha() uintptr {
 
 func AVOutputSettingsPresetHEVC4320x2160() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVOutputSettingsPresetHEVC4320x2160")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVOutputSettingsPresetHEVC7680x4320() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVOutputSettingsPresetHEVC7680x4320")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5179,13 +6581,17 @@ func AVOutputSettingsPresetMVHEVC1440x1440() uintptr {
 
 func AVOutputSettingsPresetMVHEVC4320x4320() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVOutputSettingsPresetMVHEVC4320x4320")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVOutputSettingsPresetMVHEVC7680x7680() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVOutputSettingsPresetMVHEVC7680x7680")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5208,20 +6614,26 @@ func AVPlaybackCoordinatorSuspensionReasonsDidChangeNotification() uintptr {
 
 func AVPlayerEligibleForHDRPlaybackDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerEligibleForHDRPlaybackDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant	AVPlayerIntegratedTimelineSnapshotsOutOfSyncNotification @abstract	A notification which is posted when the snapshot objects provided by this timeline would be out of sync with the current timeline state. See keys below.
 func AVPlayerIntegratedTimelineSnapshotsOutOfSyncNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerIntegratedTimelineSnapshotsOutOfSyncNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonCurrentSegmentChanged() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonCurrentSegmentChanged")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5233,27 +6645,35 @@ func AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonKey() uintptr {
 
 func AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonLoadedTimeRangesChanged() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonLoadedTimeRangesChanged")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonSegmentsChanged() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonSegmentsChanged")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Event playback should occur before starting primary playback, regardless of initial primary playback position.
 func AVPlayerInterstitialEventJoinCue() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerInterstitialEventJoinCue")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Event playback should occur after primary playback ends without error, either at the end of the primary asset or at the client-specified forward playback end time.
 func AVPlayerInterstitialEventLeaveCue() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerInterstitialEventLeaveCue")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5272,7 +6692,9 @@ func AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeEventKey() 
 // A notification that is posted whenever an AVPlayerInterstitialEvent's asset list response status changes. Carries a userInfo dictionary that can contain the following keys and values: 1. AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeEventKey, with a value that indicates the AVPlayerInterstitialEvent for which the asset response status has changed. 2. AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey, with a value of type AVPlayerInterstitialEventAssetListResponseStatus, indicating the changed asset response status. 3. AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeErrorKey, with a value of type NSError that carries additional information about the failure to read the asset list. This key is only present when the new AVPlayerInterstitialEventAssetListResponseStatus is AVPlayerInterstitialEventAssetListResponseStatusUnavailable.
 func AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5285,7 +6707,9 @@ func AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey()
 // A notification that's posted whenever the currentEvent of an AVPlayerInterstitialEventMonitor changes.
 func AVPlayerInterstitialEventMonitorCurrentEventDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerInterstitialEventMonitorCurrentEventDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5298,7 +6722,9 @@ func AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeEventKey
 // A notification that's posted whenever the currentEventSkippableState of an AVPlayerInterstitialEventMonitor changes.
 func AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5323,14 +6749,18 @@ func AVPlayerInterstitialEventMonitorCurrentEventSkippedEventKey() uintptr {
 // A notification that's posted whenever an event was skipped via skip control.
 func AVPlayerInterstitialEventMonitorCurrentEventSkippedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerInterstitialEventMonitorCurrentEventSkippedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A notification that's posted whenever the value of events of an AVPlayerInterstitialEventMonitor is changed.
 func AVPlayerInterstitialEventMonitorEventsDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerInterstitialEventMonitorEventsDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5349,7 +6779,9 @@ func AVPlayerInterstitialEventMonitorInterstitialEventDidFinishEventKey() uintpt
 // A notification that is posted whenever an AVPlayerInterstitialEvent finished playing. Carries a userInfo dictionary that can contain the following keys and values: 1. AVPlayerInterstitialEventMonitorInterstitialEventDidFinishEventKey, with a value that indicates the AVPlayerInterstitialEvent that finished playing. 2. AVPlayerInterstitialEventMonitorInterstitialEventDidFinishPlayoutTimeKey, with a value that indicates how long that AVPlayerInterstitialEvent played out for. 3. AVPlayerInterstitialEventMonitorInterstitialEventDidFinishDidPlayEntireEventKey, with a value that indicates whether the AVPlayerInterstitialEvent was fully played out. Note that cancelling an AVPlayerInterstitialEvent after playback started but prior to playback finishing will also trigger this event.
 func AVPlayerInterstitialEventMonitorInterstitialEventDidFinishNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerInterstitialEventMonitorInterstitialEventDidFinishNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5374,14 +6806,18 @@ func AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledEventKey() u
 // A notification that is posted whenever an AVPlayerInterstitialEvent with loaded assets was unscheduled prior to playing. Carries a userInfo dictionary that can contain the following keys and values: 1. AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledEventKey, with a value that indicates which AVPlayerInterstitialEvent was unscheduled. 2. AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledErrorKey, with an NSError value. This key will only be present if the AVPlayerInterstitialEvent was unscheduled due to an error.
 func AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A notification that is posted whenever a daterange-schedule request completes. The userInfo dictionary can contain the following keys and values: 1. AVPlayerInterstitialEventMonitorScheduleRequestIdentifierKey, whose value is an NSString identifying the schedule. 2. AVPlayerInterstitialEventMonitorScheduleRequestResponseKey, whose value is an NSData carrying the JSON response. Absent if request failed. 3. AVPlayerInterstitialEventMonitorScheduleRequestErrorKey, whose value is an NSError.
 func AVPlayerInterstitialEventMonitorScheduleRequestCompletedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerInterstitialEventMonitorScheduleRequestCompletedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5406,13 +6842,17 @@ func AVPlayerInterstitialEventMonitorScheduleRequestResponseKey() uintptr {
 // No cue specified; event playback should start at event time (or date).
 func AVPlayerInterstitialEventNoCue() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerInterstitialEventNoCue")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVPlayerItemDidPlayToEndTimeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerItemDidPlayToEndTimeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5423,7 +6863,9 @@ func AVPlayerItemFailedToPlayToEndTimeErrorKey() uintptr {
 
 func AVPlayerItemFailedToPlayToEndTimeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerItemFailedToPlayToEndTimeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5441,37 +6883,49 @@ func AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly() uintptr 
 
 func AVPlayerItemMediaSelectionDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerItemMediaSelectionDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVPlayerItemNewAccessLogEntryNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerItemNewAccessLogEntryNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVPlayerItemNewErrorLogEntryNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerItemNewErrorLogEntryNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVPlayerItemPlaybackStalledNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerItemPlaybackStalledNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVPlayerItemRecommendedTimeOffsetFromLiveDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerItemRecommendedTimeOffsetFromLiveDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVPlayerItemTimeJumpedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerItemTimeJumpedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5490,7 +6944,9 @@ func AVPlayerItemTrackVideoFieldModeDeinterlaceFields() uintptr {
 // Indicates a player rate change. Posted by the player when its rate changes. Similar to KVO of AVPlayer.rate, but providing additional information about the rate change in the userInfo. See keys below.
 func AVPlayerRateDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerRateDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5518,13 +6974,17 @@ func AVPlayerRateDidChangeReasonKey() uintptr {
 
 func AVPlayerRateDidChangeReasonPlayheadReachedLiveEdge() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerRateDidChangeReasonPlayheadReachedLiveEdge")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVPlayerRateDidChangeReasonReversePlaybackReachedStartOfSeekableRange() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerRateDidChangeReasonReversePlaybackReachedStartOfSeekableRange")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5541,7 +7001,9 @@ func AVPlayerRateDidChangeReasonSetRateFailed() uintptr {
 // Indicates that the player is waiting for the completion of an interstitial event. The player is waiting for playback because an interstitial event is currently in progress. Interstitial events can be monitored via use of an AVPlayerInterstitialEventMonitor.
 func AVPlayerWaitingDuringInterstitialEventReason() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerWaitingDuringInterstitialEventReason")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5554,21 +7016,27 @@ func AVPlayerWaitingForCoordinatedPlaybackReason() uintptr {
 // Indicates that the player is waiting for appropriate playback buffer conditions before starting playback The player is waiting for playback because automaticallyWaitToMinimizeStalling is YES and playback at the specified rate would likely cause the playback buffer to become empty before playback completes. Playback will resume when 1) playback at the specified rate will likely complete without a stall or 2) the playback buffer becomes full, meaning no forther buffering of media data is possible. When the value of automaticallyWaitsToMinimizeStalling is NO, timeControlStatus cannot become AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate for this reason.
 func AVPlayerWaitingToMinimizeStallsReason() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerWaitingToMinimizeStallsReason")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Indicates that the player is monitoring the playback buffer fill rate to determine if playback is likely to complete without interruptions. The player is waiting for playback because automaticallyWaitToMinimizeStalling is YES and it has not yet determined if starting playback at the specified rate would likely cause the buffer to become empty. When the brief initial monitoring period is over, either playback will begin or the value of reasonForWaitingToPlayAtSpecifiedRate will switch to AVPlayerWaitingToMinimizeStallsReason. Recommended practice is not to show UI indicating the waiting state to the user while the value of reasonForWaitingToPlayAtSpecifiedRate is AVPlayerWaitingWhileEvaluatingBufferingRateReason.
 func AVPlayerWaitingWhileEvaluatingBufferingRateReason() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerWaitingWhileEvaluatingBufferingRateReason")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Indicates that the AVPlayer is waiting because its currentItem is nil The player is waiting for playback because automaticallyWaitToMinimizeStalling is YES and the value of currentItem is nil. When an item becomes available, either because of a call to -replaceCurrentItemWithPlayerItem: or -insertItem: afterItem:, playback will begin or the value of reasonForWaitingToPlay will change.
 func AVPlayerWaitingWithNoItemToPlayReason() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerWaitingWithNoItemToPlayReason")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5587,14 +7055,18 @@ func AVSampleBufferAudioRendererFlushTimeKey() uintptr {
 // @constant		AVSampleBufferAudioRendererOutputConfigurationDidChangeNotification @abstract		A notification that indicates the hardware configuration does not match the enqueued data format. @discussion The output configuration of the playback hardware might change during the playback session if other clients play content with different format. In such cases, if the media content format does not match the hardware configuration it would produce suboptimal rendering of the enqueued media data. When the framework detects such mismatch it will issue this notification, so the client can flush the renderer and re-enqueue the sample buffers from the current media playhead, which will configure the hardware based on the format of newly enqueued sample buffers.
 func AVSampleBufferAudioRendererOutputConfigurationDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVSampleBufferAudioRendererOutputConfigurationDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant		AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification @abstract		A notification that fires whenever the receiver's enqueued media data has been flushed for a reason other than a call to the -flush method. @discussion The renderer may flush enqueued media data when the user routes playback to a new destination.  The renderer may also flush enqueued media data when the playback rate of the attached AVSampleBufferRenderSynchronizer is changed (e.g. 1.0 -> 2.0 or 1.0 -> 0.0 -> 2.0), however no flush will occur for normal pauses (non-zero -> 0.0) and resumes (0.0 -> same non-zero rate as before). When an automatic flush occurs, the attached render synchronizer's timebase will remain running at its current rate.  It is typically best to respond to this notification by enqueueing media data with timestamps starting at the timebase's current time.  To the listener, this will sound similar to muting the audio for a short period of time.  If it is more desirable to ensure that all audio is played than to keep the timeline moving, you may also stop the synchronizer, set the synchronizer's current time to the value of AVSampleBufferAudioRendererFlushTimeKey, start reenqueueing sample buffers with timestamps starting at that time, and restart the synchronizer.  To the listener, this will sound similar to pausing the audio for a short period of time. This notification is delivered on an arbitrary thread.  If sample buffers are being enqueued with the renderer concurrently with the receipt of this notification, it is possible that one or more sample buffers will remain enqueued in the renderer.  This is generally undesirable, because the sample buffers that remain will likely have timestamps far ahead of the timebase's current time and so won't be rendered for some time.  The best practice is to invoke the -flush method, in a manner that is serialized with enqueueing sample buffers, after receiving this notification and before resuming the enqueueing of sample buffers.
 func AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5610,7 +7082,9 @@ func AVSampleBufferDisplayLayerFailedToDecodeNotificationErrorKey() uintptr {
 
 func AVSampleBufferDisplayLayerOutputObscuredDueToInsufficientExternalProtectionDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVSampleBufferDisplayLayerOutputObscuredDueToInsufficientExternalProtectionDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5627,7 +7101,9 @@ func AVSampleBufferDisplayLayerRequiresFlushToResumeDecodingDidChangeNotificatio
 // A notification that fires whenever the value of the "rate" property changes. The rate can change as a result of setting the rate property, either by directly setting the property or calling -setRate:time:. The rate can also change at any time, without any action by the client of the render synchronizer. For example, on iOS if the app's playback is interrupted (e.g. by a phone call or another non-mixable app starting playback), the rate will automatically be set to zero. This notification will be sent in all of those cases.
 func AVSampleBufferRenderSynchronizerRateDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVSampleBufferRenderSynchronizerRateDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5649,28 +7125,36 @@ func AVSampleBufferVideoRendererRequiresFlushToResumeDecodingDidChangeNotificati
 // @constant AVSemanticSegmentationMatteTypeGlasses A matting image segmenting all glasses ( e.g. eyeglasses, sunglasses ) from all persons wearing glasses in the visible field-of-view of an image.
 func AVSemanticSegmentationMatteTypeGlasses() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVSemanticSegmentationMatteTypeGlasses")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant AVSemanticSegmentationMatteTypeHair A matting image segmenting all hair from all persons in the visible field-of-view of an image.
 func AVSemanticSegmentationMatteTypeHair() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVSemanticSegmentationMatteTypeHair")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant AVSemanticSegmentationMatteTypeSkin A matting image segmenting all skin from all persons in the visible field-of-view of an image.
 func AVSemanticSegmentationMatteTypeSkin() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVSemanticSegmentationMatteTypeSkin")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant AVSemanticSegmentationMatteTypeTeeth A matting image segmenting all teeth from all persons in the visible field-of-view of an image.
 func AVSemanticSegmentationMatteTypeTeeth() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVSemanticSegmentationMatteTypeTeeth")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5701,49 +7185,63 @@ func AVStreamingKeyDeliveryPersistentContentKeyType() uintptr {
 // Indicates an association between an audio track with another audio track that contains the same content but is typically encoded in a different format that's more widely supported, used to nominate a track that should be used in place of an unsupported track. Associations of type AVTrackAssociationTypeAudioFallback are supported only between audio tracks. This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with a corresponding track that has content that's less widely supported, and the input parameter should be an instance of AVAssetWriterInput with a corresponding track that has content that's more widely supported. Example: Using AVTrackAssociationTypeAudioFallback, a stereo audio track with media subtype kAudioFormatMPEG4AAC could be nominated as the "fallback" for an audio track encoding the same source material but with media subtype kAudioFormatAC3 and a 5.1 channel layout. This would ensure that all clients are capable of playing back some form of the audio.
 func AVTrackAssociationTypeAudioFallback() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVTrackAssociationTypeAudioFallback")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Indicates an association between a track with another track that contains chapter information. The track containing chapter information may be a text track, a video track, or a timed metadata track. This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with a corresponding track that has renderable content while the input parameter should be an instance of AVAssetWriterInput with a corresponding track that contains chapter metadata.
 func AVTrackAssociationTypeChapterList() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVTrackAssociationTypeChapterList")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Indicates an association between a subtitle track typically containing both forced and non-forced subtitles with another subtitle track that contains only forced subtitles, for use when the user indicates that only essential subtitles should be displayed. When such an association is established, the forced subtitles in both tracks are expected to present the same content in the same language but may have different timing. Associations of type AVTrackAssociationTypeForcedSubtitlesOnly are supported only between subtitle tracks. This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with a corresponding subtitle track that contains non-forced subtitles, and the input parameter should be an instance of AVAssetWriterInput with a corresponding subtitle track that contains forced subtitles only.
 func AVTrackAssociationTypeForcedSubtitlesOnly() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVTrackAssociationTypeForcedSubtitlesOnly")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Indicates an association between a metadata track and the track that's described or annotated via the contents of the metadata track. This track association is optional for AVAssetTracks with the mediaType AVMediaTypeMetadata. When a metadata track lacks this track association, its contents are assumed to describe or annotate the asset as a whole. This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with mediaType AVMediaTypeMetadata while the input parameter should be an instance of AVAssetWriterInput that's used to create the track to which the contents of the receiver's corresponding metadata track refer.
 func AVTrackAssociationTypeMetadataReferent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVTrackAssociationTypeMetadataReferent")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Indicates an association between a metadata track and another track where the metadata provides additional information for rendering of that track. This track association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with mediaType, AVMediaTypeMetadata, while the input parameter should be an instance of AVAssetWriterInput for the target track that would be rendered (for example, a video track).
 func AVTrackAssociationTypeRenderMetadataSource() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVTrackAssociationTypeRenderMetadataSource")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Indicates an association between a pair of tracks that specifies that, when the first of the pair is selected, the second of the pair should be considered an appropriate default for selection also. Example: a subtitle track in the same language as an audio track may be associated with that audio track using AVTrackAssociationTypeSelectionFollower, to indicate that selection of the subtitle track, in the absence of a directive for subtitle selection from the user, can "follow" the selection of the audio track. This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the input parameter should be an instance of AVAssetWriterInput whose selection may depend on the selection of the receiver. In the example above, the receiver would be the instance of AVAssetWriterInput corresponding with the audio track and the input parameter would be the instance of AVAssetWriterInput corresponding with the subtitle track.
 func AVTrackAssociationTypeSelectionFollower() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVTrackAssociationTypeSelectionFollower")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Indicates an association between a track with another track that contains timecode information. The track containing timecode information should be a timecode track. This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with a corresponding track that may be a video track or an audio track while the input parameter should be an instance of AVAssetWriterInput with a corresponding timecode track.
 func AVTrackAssociationTypeTimecode() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVTrackAssociationTypeTimecode")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5834,21 +7332,27 @@ func AVVideoAllowWideColorKey() uintptr {
 // @constant	AVVideoApertureModeCleanAperture @abstract	Both pixel aspect ratio and clean aperture will be applied. @discussion An image's clean aperture is a region of video free from transition artifacts caused by the encoding of the signal.
 func AVVideoApertureModeCleanAperture() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoApertureModeCleanAperture")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant	AVVideoApertureModeEncodedPixels @abstract	Neither pixel aspect ratio nor clean aperture will be applied. @discussion The image is not cropped to the clean aperture region and is not scaled according to the pixel aspect ratio. The encoded dimensions of the image description are displayed.
 func AVVideoApertureModeEncodedPixels() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoApertureModeEncodedPixels")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant	AVVideoApertureModeProductionAperture @abstract	Only pixel aspect ratio will be applied. @discussion The image is not cropped to the clean aperture region, but it is scaled according to the pixel aspect ratio. Use this option when you want to see all the pixels in your video, including the edges.
 func AVVideoApertureModeProductionAperture() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoApertureModeProductionAperture")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -5931,79 +7435,105 @@ func AVVideoCodecKey() uintptr {
 
 func AVVideoCodecTypeAppleProRes422() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoCodecTypeAppleProRes422")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVVideoCodecTypeAppleProRes422HQ() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoCodecTypeAppleProRes422HQ")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVVideoCodecTypeAppleProRes422LT() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoCodecTypeAppleProRes422LT")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVVideoCodecTypeAppleProRes422Proxy() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoCodecTypeAppleProRes422Proxy")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVVideoCodecTypeAppleProRes4444() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoCodecTypeAppleProRes4444")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVVideoCodecTypeAppleProRes4444XQ() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoCodecTypeAppleProRes4444XQ")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVVideoCodecTypeAppleProResRAW() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoCodecTypeAppleProResRAW")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVVideoCodecTypeAppleProResRAWHQ() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoCodecTypeAppleProResRAWHQ")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVVideoCodecTypeH264() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoCodecTypeH264")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVVideoCodecTypeHEVC() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoCodecTypeHEVC")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVVideoCodecTypeHEVCWithAlpha() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoCodecTypeHEVCWithAlpha")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVVideoCodecTypeJPEG() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoCodecTypeJPEG")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVVideoCodecTypeJPEGXL() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoCodecTypeJPEGXL")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -6045,14 +7575,18 @@ func AVVideoColorPropertiesKey() uintptr {
 // AVVideoComposition may generate HDR metadata and attach it to the rendered frame. HDR metadata generation is influenced by the color space of the rendered frame, device, and HDR metadata format platform support. Any previously attached HDR metadata of the same metadata format will be overwritten.
 func AVVideoCompositionPerFrameHDRDisplayMetadataPolicyGenerate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoCompositionPerFrameHDRDisplayMetadataPolicyGenerate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Default. Pass the HDR metadata through, if present on the composed frame.
 func AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -6200,21 +7734,27 @@ func AVVideoQualityKey() uintptr {
 // Indicates that the video range as HLG
 func AVVideoRangeHLG() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoRangeHLG")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Indicates that the video range as PQ
 func AVVideoRangePQ() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoRangePQ")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Indicates that the video range as SDR
 func AVVideoRangeSDR() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoRangeSDR")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -6307,4 +7847,3 @@ func AVVideoYCbCrMatrix_SMPTE_240M_1995() uintptr {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoYCbCrMatrix_SMPTE_240M_1995")
 	return ptr
 }
-

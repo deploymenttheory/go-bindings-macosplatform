@@ -17,39 +17,39 @@ type NSSet[ObjectType purego.AnyObject] struct {
 }
 
 var (
-	_clsNSSet = _objcClass("NSSet")
-	_nSSetSelMember = objc.RegisterName("member:")
-	_nSSetSelObjectEnumerator = objc.RegisterName("objectEnumerator")
-	_nSSetSelInit = objc.RegisterName("init")
-	_nSSetSelInitWithObjectsCount = objc.RegisterName("initWithObjects:count:")
-	_nSSetSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSSetSelCount = objc.RegisterName("count")
-	_nSSetSelAnyObject = objc.RegisterName("anyObject")
-	_nSSetSelContainsObject = objc.RegisterName("containsObject:")
-	_nSSetSelDescriptionWithLocale = objc.RegisterName("descriptionWithLocale:")
-	_nSSetSelIntersectsSet = objc.RegisterName("intersectsSet:")
-	_nSSetSelIsEqualToSet = objc.RegisterName("isEqualToSet:")
-	_nSSetSelIsSubsetOfSet = objc.RegisterName("isSubsetOfSet:")
-	_nSSetSelMakeObjectsPerformSelector = objc.RegisterName("makeObjectsPerformSelector:")
+	_clsNSSet                                     = _objcClass("NSSet")
+	_nSSetSelMember                               = objc.RegisterName("member:")
+	_nSSetSelObjectEnumerator                     = objc.RegisterName("objectEnumerator")
+	_nSSetSelInit                                 = objc.RegisterName("init")
+	_nSSetSelInitWithObjectsCount                 = objc.RegisterName("initWithObjects:count:")
+	_nSSetSelInitWithCoder                        = objc.RegisterName("initWithCoder:")
+	_nSSetSelCount                                = objc.RegisterName("count")
+	_nSSetSelAnyObject                            = objc.RegisterName("anyObject")
+	_nSSetSelContainsObject                       = objc.RegisterName("containsObject:")
+	_nSSetSelDescriptionWithLocale                = objc.RegisterName("descriptionWithLocale:")
+	_nSSetSelIntersectsSet                        = objc.RegisterName("intersectsSet:")
+	_nSSetSelIsEqualToSet                         = objc.RegisterName("isEqualToSet:")
+	_nSSetSelIsSubsetOfSet                        = objc.RegisterName("isSubsetOfSet:")
+	_nSSetSelMakeObjectsPerformSelector           = objc.RegisterName("makeObjectsPerformSelector:")
 	_nSSetSelMakeObjectsPerformSelectorWithObject = objc.RegisterName("makeObjectsPerformSelector:withObject:")
-	_nSSetSelSetByAddingObject = objc.RegisterName("setByAddingObject:")
-	_nSSetSelSetByAddingObjectsFromSet = objc.RegisterName("setByAddingObjectsFromSet:")
-	_nSSetSelSetByAddingObjectsFromArray = objc.RegisterName("setByAddingObjectsFromArray:")
-	_nSSetSelEnumerateObjectsUsing = objc.RegisterName("enumerateObjectsUsingBlock:")
-	_nSSetSelEnumerateObjectsWithOptionsUsing = objc.RegisterName("enumerateObjectsWithOptions:usingBlock:")
-	_nSSetSelObjectsPassingTest = objc.RegisterName("objectsPassingTest:")
-	_nSSetSelObjectsWithOptionsPassingTest = objc.RegisterName("objectsWithOptions:passingTest:")
-	_nSSetSelAllObjects = objc.RegisterName("allObjects")
-	_nSSetSelSet = objc.RegisterName("set")
-	_nSSetSelSetWithObject = objc.RegisterName("setWithObject:")
-	_nSSetSelSetWithObjectsCount = objc.RegisterName("setWithObjects:count:")
-	_nSSetSelSetWithSet = objc.RegisterName("setWithSet:")
-	_nSSetSelSetWithArray = objc.RegisterName("setWithArray:")
-	_nSSetSelInitWithSet = objc.RegisterName("initWithSet:")
-	_nSSetSelInitWithSetCopyItems = objc.RegisterName("initWithSet:copyItems:")
-	_nSSetSelInitWithArray = objc.RegisterName("initWithArray:")
-	_nSSetSelSortedArrayUsingDescriptors = objc.RegisterName("sortedArrayUsingDescriptors:")
-	_nSSetSelFilteredSetUsingPredicate = objc.RegisterName("filteredSetUsingPredicate:")
+	_nSSetSelSetByAddingObject                    = objc.RegisterName("setByAddingObject:")
+	_nSSetSelSetByAddingObjectsFromSet            = objc.RegisterName("setByAddingObjectsFromSet:")
+	_nSSetSelSetByAddingObjectsFromArray          = objc.RegisterName("setByAddingObjectsFromArray:")
+	_nSSetSelEnumerateObjectsUsing                = objc.RegisterName("enumerateObjectsUsingBlock:")
+	_nSSetSelEnumerateObjectsWithOptionsUsing     = objc.RegisterName("enumerateObjectsWithOptions:usingBlock:")
+	_nSSetSelObjectsPassingTest                   = objc.RegisterName("objectsPassingTest:")
+	_nSSetSelObjectsWithOptionsPassingTest        = objc.RegisterName("objectsWithOptions:passingTest:")
+	_nSSetSelAllObjects                           = objc.RegisterName("allObjects")
+	_nSSetSelSet                                  = objc.RegisterName("set")
+	_nSSetSelSetWithObject                        = objc.RegisterName("setWithObject:")
+	_nSSetSelSetWithObjectsCount                  = objc.RegisterName("setWithObjects:count:")
+	_nSSetSelSetWithSet                           = objc.RegisterName("setWithSet:")
+	_nSSetSelSetWithArray                         = objc.RegisterName("setWithArray:")
+	_nSSetSelInitWithSet                          = objc.RegisterName("initWithSet:")
+	_nSSetSelInitWithSetCopyItems                 = objc.RegisterName("initWithSet:copyItems:")
+	_nSSetSelInitWithArray                        = objc.RegisterName("initWithArray:")
+	_nSSetSelSortedArrayUsingDescriptors          = objc.RegisterName("sortedArrayUsingDescriptors:")
+	_nSSetSelFilteredSetUsingPredicate            = objc.RegisterName("filteredSetUsingPredicate:")
 )
 
 func NSSetFromID[ObjectType purego.AnyObject](id objc.ID) *NSSet[ObjectType] {
@@ -69,25 +69,33 @@ func (o *NSSet[ObjectType]) Member(object ObjectType) ObjectType {
 
 func (o *NSSet[ObjectType]) ObjectEnumerator() *NSEnumerator[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetSelObjectEnumerator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEnumeratorFromID[ObjectType](_ret)
 }
 
 func (o *NSSet[ObjectType]) Init() *NSSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSetFromID[ObjectType](_ret)
 }
 
 func (o *NSSet[ObjectType]) InitWithObjectsCount(objects unsafe.Pointer, cnt uint) *NSSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetSelInitWithObjectsCount, objects, cnt)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSetFromID[ObjectType](_ret)
 }
 
 func (o *NSSet[ObjectType]) InitWithCoder(coder *NSCoder) *NSSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSetFromID[ObjectType](_ret)
 }
 
@@ -108,7 +116,9 @@ func (o *NSSet[ObjectType]) ContainsObject(anObject ObjectType) bool {
 
 func (o *NSSet[ObjectType]) DescriptionWithLocale(locale objc.ID) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetSelDescriptionWithLocale, locale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -137,19 +147,25 @@ func (o *NSSet[ObjectType]) MakeObjectsPerformSelectorWithObject(aSelector objc.
 
 func (o *NSSet[ObjectType]) SetByAddingObject(anObject ObjectType) *NSSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetSelSetByAddingObject, anObject)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSetFromID[ObjectType](_ret)
 }
 
 func (o *NSSet[ObjectType]) SetByAddingObjectsFromSet(other *NSSet[ObjectType]) *NSSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetSelSetByAddingObjectsFromSet, other.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSetFromID[ObjectType](_ret)
 }
 
 func (o *NSSet[ObjectType]) SetByAddingObjectsFromArray(other *NSArray[ObjectType]) *NSSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetSelSetByAddingObjectsFromArray, other.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSetFromID[ObjectType](_ret)
 }
 
@@ -163,79 +179,104 @@ func (o *NSSet[ObjectType]) EnumerateObjectsWithOptionsUsing(opts NSEnumerationO
 
 func (o *NSSet[ObjectType]) ObjectsPassingTest(predicate objc.Block) *NSSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetSelObjectsPassingTest, predicate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSetFromID[ObjectType](_ret)
 }
 
 func (o *NSSet[ObjectType]) ObjectsWithOptionsPassingTest(opts NSEnumerationOptions, predicate objc.Block) *NSSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetSelObjectsWithOptionsPassingTest, opts, predicate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSetFromID[ObjectType](_ret)
 }
 
 func (o *NSSet[ObjectType]) AllObjects() *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetSelAllObjects)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[ObjectType](_ret)
 }
 
 func NSSetSet() *NSSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSet), _nSSetSelSet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSetFromID[objc.ID](_ret)
 }
 
 func NSSetSetWithObject(object objc.ID) *NSSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSet), _nSSetSelSetWithObject, object)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSetFromID[objc.ID](_ret)
 }
 
 func NSSetSetWithObjectsCount(objects unsafe.Pointer, cnt uint) *NSSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSet), _nSSetSelSetWithObjectsCount, objects, cnt)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSetFromID[objc.ID](_ret)
 }
 
 func NSSetSetWithSet(set *NSSet[objc.ID]) *NSSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSet), _nSSetSelSetWithSet, set.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSetFromID[objc.ID](_ret)
 }
 
 func NSSetSetWithArray(array *NSArray[objc.ID]) *NSSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSet), _nSSetSelSetWithArray, array.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSetFromID[objc.ID](_ret)
 }
 
 func (o *NSSet[ObjectType]) InitWithSet(set *NSSet[ObjectType]) *NSSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetSelInitWithSet, set.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSetFromID[ObjectType](_ret)
 }
 
 func (o *NSSet[ObjectType]) InitWithSetCopyItems(set *NSSet[ObjectType], flag bool) *NSSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetSelInitWithSetCopyItems, set.Ptr(), flag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSetFromID[ObjectType](_ret)
 }
 
 func (o *NSSet[ObjectType]) InitWithArray(array *NSArray[ObjectType]) *NSSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetSelInitWithArray, array.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSetFromID[ObjectType](_ret)
 }
 
 func (o *NSSet[ObjectType]) SortedArrayUsingDescriptors(sortDescriptors *NSArray[*NSSortDescriptor]) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetSelSortedArrayUsingDescriptors, sortDescriptors.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[ObjectType](_ret)
 }
 
 func (o *NSSet[ObjectType]) FilteredSetUsingPredicate(predicate *NSPredicate) *NSSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetSelFilteredSetUsingPredicate, predicate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSetFromID[ObjectType](_ret)
 }
-

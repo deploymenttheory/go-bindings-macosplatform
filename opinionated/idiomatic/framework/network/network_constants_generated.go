@@ -21,4 +21,3 @@ func KNWErrorDomainTLS() objc.ID { return purego.CFConstant(raw.KNWErrorDomainTL
 
 // KNWErrorDomainWiFiAware returns the value of the CoreFoundation reference constant kNWErrorDomainWiFiAware as an objc.ID.
 func KNWErrorDomainWiFiAware() objc.ID { return purego.CFConstant(raw.KNWErrorDomainWiFiAware()) }
-

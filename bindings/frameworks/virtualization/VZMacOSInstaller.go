@@ -18,12 +18,12 @@ type VZMacOSInstaller struct {
 }
 
 var (
-	_clsVZMacOSInstaller = _objcClass("VZMacOSInstaller")
+	_clsVZMacOSInstaller                                      = _objcClass("VZMacOSInstaller")
 	_vZMacOSInstallerSelInitWithVirtualMachineRestoreImageURL = objc.RegisterName("initWithVirtualMachine:restoreImageURL:")
-	_vZMacOSInstallerSelInstallWithCompletionHandler = objc.RegisterName("installWithCompletionHandler:")
-	_vZMacOSInstallerSelProgress = objc.RegisterName("progress")
-	_vZMacOSInstallerSelVirtualMachine = objc.RegisterName("virtualMachine")
-	_vZMacOSInstallerSelRestoreImageURL = objc.RegisterName("restoreImageURL")
+	_vZMacOSInstallerSelInstallWithCompletionHandler          = objc.RegisterName("installWithCompletionHandler:")
+	_vZMacOSInstallerSelProgress                              = objc.RegisterName("progress")
+	_vZMacOSInstallerSelVirtualMachine                        = objc.RegisterName("virtualMachine")
+	_vZMacOSInstallerSelRestoreImageURL                       = objc.RegisterName("restoreImageURL")
 )
 
 func VZMacOSInstallerFromID(id objc.ID) *VZMacOSInstaller {
@@ -39,7 +39,9 @@ func VZMacOSInstallerFromID(id objc.ID) *VZMacOSInstaller {
 // @abstract Initialize a VZMacOSInstaller object. @param virtualMachine The virtual machine that the operating system will be installed onto. @param restoreImageFileURL A file URL indicating the macOS restore image to install. @discussion The virtual machine platform must be macOS and the restore image URL must be a file URL referring to a file on disk or an exception will be raised. This method must be called on the virtual machine's queue.
 func (o *VZMacOSInstaller) InitWithVirtualMachineRestoreImageURL(virtualMachine *VZVirtualMachine, restoreImageFileURL *foundation.NSURL) *VZMacOSInstaller {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacOSInstallerSelInitWithVirtualMachineRestoreImageURL, virtualMachine.Ptr(), restoreImageFileURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZMacOSInstallerFromID(_ret)
 }
 
@@ -58,21 +60,26 @@ func (o *VZMacOSInstaller) InstallWithCompletionHandler(completionHandler func(u
 // @abstract An NSProgress object that can be used to observe or cancel installation. @discussion If the progress object is cancelled before installation is started, an exception will be raised.
 func (o *VZMacOSInstaller) Progress() *foundation.NSProgress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacOSInstallerSelProgress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSProgressFromID(_ret)
 }
 
 // @abstract The virtual machine that this installer was initialized with.
 func (o *VZMacOSInstaller) VirtualMachine() *VZVirtualMachine {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacOSInstallerSelVirtualMachine)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZVirtualMachineFromID(_ret)
 }
 
 // @abstract The restore image URL that this installer was initialized with.
 func (o *VZMacOSInstaller) RestoreImageURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacOSInstallerSelRestoreImageURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
-

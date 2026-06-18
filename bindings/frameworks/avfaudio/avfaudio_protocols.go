@@ -49,4 +49,3 @@ type AVAudioStereoMixing interface {
 // AVSpeechSynthesizerDelegate wraps the ObjC protocol AVSpeechSynthesizerDelegate.
 type AVSpeechSynthesizerDelegate interface {
 }
-

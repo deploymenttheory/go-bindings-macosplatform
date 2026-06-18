@@ -16,16 +16,16 @@ type CMIOExtensionProviderProperties struct {
 }
 
 var (
-	_clsCMIOExtensionProviderProperties = _objcClass("CMIOExtensionProviderProperties")
+	_clsCMIOExtensionProviderProperties                                 = _objcClass("CMIOExtensionProviderProperties")
 	_cMIOExtensionProviderPropertiesSelProviderPropertiesWithDictionary = objc.RegisterName("providerPropertiesWithDictionary:")
-	_cMIOExtensionProviderPropertiesSelInitWithDictionary = objc.RegisterName("initWithDictionary:")
-	_cMIOExtensionProviderPropertiesSelSetPropertyStateForProperty = objc.RegisterName("setPropertyState:forProperty:")
-	_cMIOExtensionProviderPropertiesSelName = objc.RegisterName("name")
-	_cMIOExtensionProviderPropertiesSelSetName = objc.RegisterName("setName:")
-	_cMIOExtensionProviderPropertiesSelManufacturer = objc.RegisterName("manufacturer")
-	_cMIOExtensionProviderPropertiesSelSetManufacturer = objc.RegisterName("setManufacturer:")
-	_cMIOExtensionProviderPropertiesSelPropertiesDictionary = objc.RegisterName("propertiesDictionary")
-	_cMIOExtensionProviderPropertiesSelSetPropertiesDictionary = objc.RegisterName("setPropertiesDictionary:")
+	_cMIOExtensionProviderPropertiesSelInitWithDictionary               = objc.RegisterName("initWithDictionary:")
+	_cMIOExtensionProviderPropertiesSelSetPropertyStateForProperty      = objc.RegisterName("setPropertyState:forProperty:")
+	_cMIOExtensionProviderPropertiesSelName                             = objc.RegisterName("name")
+	_cMIOExtensionProviderPropertiesSelSetName                          = objc.RegisterName("setName:")
+	_cMIOExtensionProviderPropertiesSelManufacturer                     = objc.RegisterName("manufacturer")
+	_cMIOExtensionProviderPropertiesSelSetManufacturer                  = objc.RegisterName("setManufacturer:")
+	_cMIOExtensionProviderPropertiesSelPropertiesDictionary             = objc.RegisterName("propertiesDictionary")
+	_cMIOExtensionProviderPropertiesSelSetPropertiesDictionary          = objc.RegisterName("setPropertiesDictionary:")
 )
 
 func CMIOExtensionProviderPropertiesFromID(id objc.ID) *CMIOExtensionProviderProperties {
@@ -41,14 +41,18 @@ func CMIOExtensionProviderPropertiesFromID(id objc.ID) *CMIOExtensionProviderPro
 // @method providerPropertiesWithDictionary: @abstract Return a provider properties instance. @param propertiesDictionary The dictionary of properties. @result A CMIOExtensionProviderProperties instance.
 func CMIOExtensionProviderPropertiesProviderPropertiesWithDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CMIOExtensionProviderProperties {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCMIOExtensionProviderProperties), _cMIOExtensionProviderPropertiesSelProviderPropertiesWithDictionary, propertiesDictionary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CMIOExtensionProviderPropertiesFromID(_ret)
 }
 
 // @method initWithDictionary: @abstract Initialize a provider properties instance. @param propertiesDictionary The dictionary of properties. @result A CMIOExtensionProviderProperties instance.
 func (o *CMIOExtensionProviderProperties) InitWithDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CMIOExtensionProviderProperties {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionProviderPropertiesSelInitWithDictionary, propertiesDictionary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CMIOExtensionProviderPropertiesFromID(_ret)
 }
 
@@ -60,7 +64,9 @@ func (o *CMIOExtensionProviderProperties) SetPropertyStateForProperty(propertySt
 // @property name @abstract The provider name. @discussion The property key is CMIOExtensionPropertyProviderName.
 func (o *CMIOExtensionProviderProperties) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionProviderPropertiesSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -71,7 +77,9 @@ func (o *CMIOExtensionProviderProperties) SetName(name *foundation.NSString) {
 // @property manufacturer @abstract The provider manufacturer. @discussion The property key is CMIOExtensionPropertyProviderManufacturer.
 func (o *CMIOExtensionProviderProperties) Manufacturer() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionProviderPropertiesSelManufacturer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -88,4 +96,3 @@ func (o *CMIOExtensionProviderProperties) PropertiesDictionary() *foundation.NSD
 func (o *CMIOExtensionProviderProperties) SetPropertiesDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	o.Ptr().Send(_cMIOExtensionProviderPropertiesSelSetPropertiesDictionary, propertiesDictionary)
 }
-

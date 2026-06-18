@@ -82,4 +82,3 @@ type Attributeable interface {
 }
 
 var _ Attributeable = (*Attribute)(nil)
-

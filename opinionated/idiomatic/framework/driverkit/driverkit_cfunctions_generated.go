@@ -519,4 +519,3 @@ func Remque(elt *raw.QueueEntry) {
 func Remqueue(elt *raw.QueueEntry) {
 	raw.Remqueue(elt)
 }
-

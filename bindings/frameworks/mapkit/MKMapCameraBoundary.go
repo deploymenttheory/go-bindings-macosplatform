@@ -16,12 +16,12 @@ type MKMapCameraBoundary struct {
 }
 
 var (
-	_clsMKMapCameraBoundary = _objcClass("MKMapCameraBoundary")
-	_mKMapCameraBoundarySelInitWithMapRect = objc.RegisterName("initWithMapRect:")
+	_clsMKMapCameraBoundary                         = _objcClass("MKMapCameraBoundary")
+	_mKMapCameraBoundarySelInitWithMapRect          = objc.RegisterName("initWithMapRect:")
 	_mKMapCameraBoundarySelInitWithCoordinateRegion = objc.RegisterName("initWithCoordinateRegion:")
-	_mKMapCameraBoundarySelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_mKMapCameraBoundarySelMapRect = objc.RegisterName("mapRect")
-	_mKMapCameraBoundarySelRegion = objc.RegisterName("region")
+	_mKMapCameraBoundarySelInitWithCoder            = objc.RegisterName("initWithCoder:")
+	_mKMapCameraBoundarySelMapRect                  = objc.RegisterName("mapRect")
+	_mKMapCameraBoundarySelRegion                   = objc.RegisterName("region")
 )
 
 func MKMapCameraBoundaryFromID(id objc.ID) *MKMapCameraBoundary {
@@ -36,19 +36,25 @@ func MKMapCameraBoundaryFromID(id objc.ID) *MKMapCameraBoundary {
 
 func (o *MKMapCameraBoundary) InitWithMapRect(mapRect MKMapRect) *MKMapCameraBoundary {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapCameraBoundarySelInitWithMapRect, mapRect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapCameraBoundaryFromID(_ret)
 }
 
 func (o *MKMapCameraBoundary) InitWithCoordinateRegion(region MKCoordinateRegion) *MKMapCameraBoundary {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapCameraBoundarySelInitWithCoordinateRegion, region)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapCameraBoundaryFromID(_ret)
 }
 
 func (o *MKMapCameraBoundary) InitWithCoder(coder *foundation.NSCoder) *MKMapCameraBoundary {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapCameraBoundarySelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapCameraBoundaryFromID(_ret)
 }
 
@@ -61,4 +67,3 @@ func (o *MKMapCameraBoundary) Region() MKCoordinateRegion {
 	_ret := objc.Send[MKCoordinateRegion](o.Ptr(), _mKMapCameraBoundarySelRegion)
 	return _ret
 }
-

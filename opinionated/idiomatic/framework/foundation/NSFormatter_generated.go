@@ -101,4 +101,3 @@ type Formatterable interface {
 }
 
 var _ Formatterable = (*Formatter)(nil)
-

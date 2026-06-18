@@ -26,23 +26,36 @@ func KODSessionProxyUsername() objc.ID { return purego.CFConstant(raw.KODSession
 func KODSessionProxyPassword() objc.ID { return purego.CFConstant(raw.KODSessionProxyPassword()) }
 
 // KODModuleConfigOptionQueryTimeout returns the value of the CoreFoundation reference constant kODModuleConfigOptionQueryTimeout as an objc.ID.
-func KODModuleConfigOptionQueryTimeout() objc.ID { return purego.CFConstant(raw.KODModuleConfigOptionQueryTimeout()) }
+func KODModuleConfigOptionQueryTimeout() objc.ID {
+	return purego.CFConstant(raw.KODModuleConfigOptionQueryTimeout())
+}
 
 // KODModuleConfigOptionConnectionSetupTimeout returns the value of the CoreFoundation reference constant kODModuleConfigOptionConnectionSetupTimeout as an objc.ID.
-func KODModuleConfigOptionConnectionSetupTimeout() objc.ID { return purego.CFConstant(raw.KODModuleConfigOptionConnectionSetupTimeout()) }
+func KODModuleConfigOptionConnectionSetupTimeout() objc.ID {
+	return purego.CFConstant(raw.KODModuleConfigOptionConnectionSetupTimeout())
+}
 
 // KODModuleConfigOptionConnectionIdleDisconnect returns the value of the CoreFoundation reference constant kODModuleConfigOptionConnectionIdleDisconnect as an objc.ID.
-func KODModuleConfigOptionConnectionIdleDisconnect() objc.ID { return purego.CFConstant(raw.KODModuleConfigOptionConnectionIdleDisconnect()) }
+func KODModuleConfigOptionConnectionIdleDisconnect() objc.ID {
+	return purego.CFConstant(raw.KODModuleConfigOptionConnectionIdleDisconnect())
+}
 
 // KODModuleConfigOptionPacketSigning returns the value of the CoreFoundation reference constant kODModuleConfigOptionPacketSigning as an objc.ID.
-func KODModuleConfigOptionPacketSigning() objc.ID { return purego.CFConstant(raw.KODModuleConfigOptionPacketSigning()) }
+func KODModuleConfigOptionPacketSigning() objc.ID {
+	return purego.CFConstant(raw.KODModuleConfigOptionPacketSigning())
+}
 
 // KODModuleConfigOptionPacketEncryption returns the value of the CoreFoundation reference constant kODModuleConfigOptionPacketEncryption as an objc.ID.
-func KODModuleConfigOptionPacketEncryption() objc.ID { return purego.CFConstant(raw.KODModuleConfigOptionPacketEncryption()) }
+func KODModuleConfigOptionPacketEncryption() objc.ID {
+	return purego.CFConstant(raw.KODModuleConfigOptionPacketEncryption())
+}
 
 // KODModuleConfigOptionManInTheMiddle returns the value of the CoreFoundation reference constant kODModuleConfigOptionManInTheMiddle as an objc.ID.
-func KODModuleConfigOptionManInTheMiddle() objc.ID { return purego.CFConstant(raw.KODModuleConfigOptionManInTheMiddle()) }
+func KODModuleConfigOptionManInTheMiddle() objc.ID {
+	return purego.CFConstant(raw.KODModuleConfigOptionManInTheMiddle())
+}
 
 // KODNodeOptionsQuerySkippedSubnode returns the value of the CoreFoundation reference constant kODNodeOptionsQuerySkippedSubnode as an objc.ID.
-func KODNodeOptionsQuerySkippedSubnode() objc.ID { return purego.CFConstant(raw.KODNodeOptionsQuerySkippedSubnode()) }
-
+func KODNodeOptionsQuerySkippedSubnode() objc.ID {
+	return purego.CFConstant(raw.KODNodeOptionsQuerySkippedSubnode())
+}

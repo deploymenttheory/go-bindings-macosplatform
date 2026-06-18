@@ -19,13 +19,13 @@ type PHProjectMapElement struct {
 }
 
 var (
-	_clsPHProjectMapElement = _objcClass("PHProjectMapElement")
-	_pHProjectMapElementSelMapType = objc.RegisterName("mapType")
+	_clsPHProjectMapElement                 = _objcClass("PHProjectMapElement")
+	_pHProjectMapElementSelMapType          = objc.RegisterName("mapType")
 	_pHProjectMapElementSelCenterCoordinate = objc.RegisterName("centerCoordinate")
-	_pHProjectMapElementSelHeading = objc.RegisterName("heading")
-	_pHProjectMapElementSelPitch = objc.RegisterName("pitch")
-	_pHProjectMapElementSelAltitude = objc.RegisterName("altitude")
-	_pHProjectMapElementSelAnnotations = objc.RegisterName("annotations")
+	_pHProjectMapElementSelHeading          = objc.RegisterName("heading")
+	_pHProjectMapElementSelPitch            = objc.RegisterName("pitch")
+	_pHProjectMapElementSelAltitude         = objc.RegisterName("altitude")
+	_pHProjectMapElementSelAnnotations      = objc.RegisterName("annotations")
 )
 
 func PHProjectMapElementFromID(id objc.ID) *PHProjectMapElement {
@@ -68,4 +68,3 @@ func (o *PHProjectMapElement) Annotations() *foundation.NSArray[mapkit.MKAnnotat
 	_ret := objc.Send[*foundation.NSArray[mapkit.MKAnnotation]](o.Ptr(), _pHProjectMapElementSelAnnotations)
 	return _ret
 }
-

@@ -54,4 +54,3 @@ type RecurrenceEndable interface {
 }
 
 var _ RecurrenceEndable = (*RecurrenceEnd)(nil)
-

@@ -17,7 +17,9 @@ type MTRApplicationBasicClusterApplicationStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRApplicationBasicClusterApplicationStruct].
-func (x *MTRApplicationBasicClusterApplicationStruct) Unwrap() *raw.MTRApplicationBasicClusterApplicationStruct { return x.inner }
+func (x *MTRApplicationBasicClusterApplicationStruct) Unwrap() *raw.MTRApplicationBasicClusterApplicationStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -109,7 +111,9 @@ func (x *MTRApplicationBasicClusterApplicationStruct) SetApplicationId(applicati
 	x.inner.SetApplicationId(foundation.NSStringStringWithUTF8String(applicationId))
 }
 
-func (x *MTRApplicationBasicClusterApplicationStruct) asMTRApplicationBasicClusterApplicationStruct() *raw.MTRApplicationBasicClusterApplicationStruct { return x.inner }
+func (x *MTRApplicationBasicClusterApplicationStruct) asMTRApplicationBasicClusterApplicationStruct() *raw.MTRApplicationBasicClusterApplicationStruct {
+	return x.inner
+}
 
 // MTRApplicationBasicClusterApplicationStructable is the interface implemented by [MTRApplicationBasicClusterApplicationStruct], for mocking and DI.
 type MTRApplicationBasicClusterApplicationStructable interface {
@@ -129,4 +133,3 @@ type MTRApplicationBasicClusterApplicationStructable interface {
 }
 
 var _ MTRApplicationBasicClusterApplicationStructable = (*MTRApplicationBasicClusterApplicationStruct)(nil)
-

@@ -37,4 +37,3 @@ func SSRandomIntBetween(a int, b int) int {
 func SSRandomPointForSizeWithinRect(size corefoundation.CGSize, rect corefoundation.CGRect) corefoundation.CGPoint {
 	return _fnSSRandomPointForSizeWithinRect(size, rect)
 }
-

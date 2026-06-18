@@ -50,9 +50,13 @@ func (x *CNNArithmeticGradientState) WithLabel(label string) *CNNArithmeticGradi
 	return x
 }
 
-func (x *CNNArithmeticGradientState) asNNBinaryGradientState() *mpsneuralnetwork.MPSNNBinaryGradientState { return &x.inner.MPSNNBinaryGradientState }
+func (x *CNNArithmeticGradientState) asNNBinaryGradientState() *mpsneuralnetwork.MPSNNBinaryGradientState {
+	return &x.inner.MPSNNBinaryGradientState
+}
 
-func (x *CNNArithmeticGradientState) asState() *mpscore.MPSState { return &x.inner.MPSNNBinaryGradientState.MPSState }
+func (x *CNNArithmeticGradientState) asState() *mpscore.MPSState {
+	return &x.inner.MPSNNBinaryGradientState.MPSState
+}
 
 // CNNArithmeticGradientStateable is the interface implemented by [CNNArithmeticGradientState], for mocking and DI.
 type CNNArithmeticGradientStateable interface {
@@ -62,4 +66,3 @@ type CNNArithmeticGradientStateable interface {
 }
 
 var _ CNNArithmeticGradientStateable = (*CNNArithmeticGradientState)(nil)
-

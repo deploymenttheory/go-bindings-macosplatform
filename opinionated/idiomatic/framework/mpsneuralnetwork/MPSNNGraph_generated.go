@@ -208,4 +208,3 @@ type NNGraphable interface {
 }
 
 var _ NNGraphable = (*NNGraph)(nil)
-

@@ -15,7 +15,9 @@ type URLSessionTaskTransactionMetrics struct {
 }
 
 // Unwrap returns the underlying [raw.NSURLSessionTaskTransactionMetrics].
-func (x *URLSessionTaskTransactionMetrics) Unwrap() *raw.NSURLSessionTaskTransactionMetrics { return x.inner }
+func (x *URLSessionTaskTransactionMetrics) Unwrap() *raw.NSURLSessionTaskTransactionMetrics {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -334,4 +336,3 @@ type URLSessionTaskTransactionMetricsable interface {
 }
 
 var _ URLSessionTaskTransactionMetricsable = (*URLSessionTaskTransactionMetrics)(nil)
-

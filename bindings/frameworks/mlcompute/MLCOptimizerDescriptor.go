@@ -16,20 +16,20 @@ type MLCOptimizerDescriptor struct {
 }
 
 var (
-	_clsMLCOptimizerDescriptor = _objcClass("MLCOptimizerDescriptor")
-	_mLCOptimizerDescriptorSelDescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale = objc.RegisterName("descriptorWithLearningRate:gradientRescale:regularizationType:regularizationScale:")
-	_mLCOptimizerDescriptorSelDescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale = objc.RegisterName("descriptorWithLearningRate:gradientRescale:appliesGradientClipping:gradientClipMax:gradientClipMin:regularizationType:regularizationScale:")
+	_clsMLCOptimizerDescriptor                                                                                                                                                                                           = _objcClass("MLCOptimizerDescriptor")
+	_mLCOptimizerDescriptorSelDescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale                                                                                                             = objc.RegisterName("descriptorWithLearningRate:gradientRescale:regularizationType:regularizationScale:")
+	_mLCOptimizerDescriptorSelDescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale                                                        = objc.RegisterName("descriptorWithLearningRate:gradientRescale:appliesGradientClipping:gradientClipMax:gradientClipMin:regularizationType:regularizationScale:")
 	_mLCOptimizerDescriptorSelDescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClippingTypeGradientClipMaxGradientClipMinMaximumClippingNormCustomGlobalNormRegularizationTypeRegularizationScale = objc.RegisterName("descriptorWithLearningRate:gradientRescale:appliesGradientClipping:gradientClippingType:gradientClipMax:gradientClipMin:maximumClippingNorm:customGlobalNorm:regularizationType:regularizationScale:")
-	_mLCOptimizerDescriptorSelLearningRate = objc.RegisterName("learningRate")
-	_mLCOptimizerDescriptorSelGradientRescale = objc.RegisterName("gradientRescale")
-	_mLCOptimizerDescriptorSelAppliesGradientClipping = objc.RegisterName("appliesGradientClipping")
-	_mLCOptimizerDescriptorSelGradientClipMax = objc.RegisterName("gradientClipMax")
-	_mLCOptimizerDescriptorSelGradientClipMin = objc.RegisterName("gradientClipMin")
-	_mLCOptimizerDescriptorSelRegularizationScale = objc.RegisterName("regularizationScale")
-	_mLCOptimizerDescriptorSelRegularizationType = objc.RegisterName("regularizationType")
-	_mLCOptimizerDescriptorSelGradientClippingType = objc.RegisterName("gradientClippingType")
-	_mLCOptimizerDescriptorSelMaximumClippingNorm = objc.RegisterName("maximumClippingNorm")
-	_mLCOptimizerDescriptorSelCustomGlobalNorm = objc.RegisterName("customGlobalNorm")
+	_mLCOptimizerDescriptorSelLearningRate                                                                                                                                                                               = objc.RegisterName("learningRate")
+	_mLCOptimizerDescriptorSelGradientRescale                                                                                                                                                                            = objc.RegisterName("gradientRescale")
+	_mLCOptimizerDescriptorSelAppliesGradientClipping                                                                                                                                                                    = objc.RegisterName("appliesGradientClipping")
+	_mLCOptimizerDescriptorSelGradientClipMax                                                                                                                                                                            = objc.RegisterName("gradientClipMax")
+	_mLCOptimizerDescriptorSelGradientClipMin                                                                                                                                                                            = objc.RegisterName("gradientClipMin")
+	_mLCOptimizerDescriptorSelRegularizationScale                                                                                                                                                                        = objc.RegisterName("regularizationScale")
+	_mLCOptimizerDescriptorSelRegularizationType                                                                                                                                                                         = objc.RegisterName("regularizationType")
+	_mLCOptimizerDescriptorSelGradientClippingType                                                                                                                                                                       = objc.RegisterName("gradientClippingType")
+	_mLCOptimizerDescriptorSelMaximumClippingNorm                                                                                                                                                                        = objc.RegisterName("maximumClippingNorm")
+	_mLCOptimizerDescriptorSelCustomGlobalNorm                                                                                                                                                                           = objc.RegisterName("customGlobalNorm")
 )
 
 func MLCOptimizerDescriptorFromID(id objc.ID) *MLCOptimizerDescriptor {
@@ -45,21 +45,27 @@ func MLCOptimizerDescriptorFromID(id objc.ID) *MLCOptimizerDescriptor {
 // @abstract   Create a MLCOptimizerDescriptor object @param      learningRate                    The learning rate @param      gradientRescale              The gradient rescale value @param      regularizationType       The regularization type @param      regularizationScale     The regularization scale @return     A new MLCOptimizerDescriptor object.
 func MLCOptimizerDescriptorDescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, regularizationType MLCRegularizationType, regularizationScale float32) *MLCOptimizerDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCOptimizerDescriptor), _mLCOptimizerDescriptorSelDescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale, learningRate, gradientRescale, regularizationType, regularizationScale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCOptimizerDescriptorFromID(_ret)
 }
 
 // @abstract   Create a MLCOptimizerDescriptor object @param      learningRate                      The learning rate @param      gradientRescale                The gradient rescale value @param      appliesGradientClipping   Whether to apply gradient clipping @param      gradientClipMax                The maximum gradient value to be used with gradient clipping @param      gradientClipMin                The minimum gradient value to be used with gradient clipping @param      regularizationType          The regularization type @param      regularizationScale        The regularization scale @return     A new MLCOptimizerDescriptor object.
 func MLCOptimizerDescriptorDescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, appliesGradientClipping bool, gradientClipMax float32, gradientClipMin float32, regularizationType MLCRegularizationType, regularizationScale float32) *MLCOptimizerDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCOptimizerDescriptor), _mLCOptimizerDescriptorSelDescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale, learningRate, gradientRescale, appliesGradientClipping, gradientClipMax, gradientClipMin, regularizationType, regularizationScale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCOptimizerDescriptorFromID(_ret)
 }
 
 // @abstract   Create an MLCOptimizerDescriptor object @param      learningRate                            The learning rate @param      gradientRescale                      The gradient rescale value @param      appliesGradientClipping    Whether to apply gradient clipping @param      gradientClippingType           The type of clipping applied to gradients @param      gradientClipMax                      The maximum gradient value to be used with gradient clipping @param      gradientClipMin                      The minimum gradient value to be used with gradient clipping @param      maximumClippingNorm             The maximum norm to be used with gradient clipping @param      customGlobalNorm                    If non-zero, the norm to be used instead of calculating the global norm @param      regularizationType               The regularization type @param      regularizationScale             The regularization scale @return     A new MLCOptimizerDescriptor object.
 func MLCOptimizerDescriptorDescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClippingTypeGradientClipMaxGradientClipMinMaximumClippingNormCustomGlobalNormRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, appliesGradientClipping bool, gradientClippingType MLCGradientClippingType, gradientClipMax float32, gradientClipMin float32, maximumClippingNorm float32, customGlobalNorm float32, regularizationType MLCRegularizationType, regularizationScale float32) *MLCOptimizerDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCOptimizerDescriptor), _mLCOptimizerDescriptorSelDescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClippingTypeGradientClipMaxGradientClipMinMaximumClippingNormCustomGlobalNormRegularizationTypeRegularizationScale, learningRate, gradientRescale, appliesGradientClipping, gradientClippingType, gradientClipMax, gradientClipMin, maximumClippingNorm, customGlobalNorm, regularizationType, regularizationScale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCOptimizerDescriptorFromID(_ret)
 }
 
@@ -122,4 +128,3 @@ func (o *MLCOptimizerDescriptor) CustomGlobalNorm() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _mLCOptimizerDescriptorSelCustomGlobalNorm)
 	return _ret
 }
-

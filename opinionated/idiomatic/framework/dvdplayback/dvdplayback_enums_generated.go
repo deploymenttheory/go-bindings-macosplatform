@@ -12,10 +12,10 @@ type DVDAspectRatio int64
 
 const (
 	KDVDAspectRatioUninitialized DVDAspectRatio = 0
-	KDVDAspectRatio4x3 DVDAspectRatio = 1
+	KDVDAspectRatio4x3           DVDAspectRatio = 1
 	KDVDAspectRatio4x3PanAndScan DVDAspectRatio = 2
-	KDVDAspectRatio16x9 DVDAspectRatio = 3
-	KDVDAspectRatioLetterBox DVDAspectRatio = 4
+	KDVDAspectRatio16x9          DVDAspectRatio = 3
+	KDVDAspectRatioLetterBox     DVDAspectRatio = 4
 )
 
 func (e DVDAspectRatio) String() string {
@@ -39,15 +39,15 @@ type DVDAudioFormat int64
 
 const (
 	KDVDAudioUnknownFormat DVDAudioFormat = 0
-	KDVDAudioAC3Format DVDAudioFormat = 1
-	KDVDAudioMPEG1Format DVDAudioFormat = 2
-	KDVDAudioMPEG2Format DVDAudioFormat = 3
-	KDVDAudioPCMFormat DVDAudioFormat = 4
-	KDVDAudioDTSFormat DVDAudioFormat = 5
-	KDVDAudioSDDSFormat DVDAudioFormat = 6
-	KDVDAudioMLPFormat DVDAudioFormat = 7
-	KDVDAudioDDPlusFormat DVDAudioFormat = 8
-	KDVDAudioDTSHDFormat DVDAudioFormat = 9
+	KDVDAudioAC3Format     DVDAudioFormat = 1
+	KDVDAudioMPEG1Format   DVDAudioFormat = 2
+	KDVDAudioMPEG2Format   DVDAudioFormat = 3
+	KDVDAudioPCMFormat     DVDAudioFormat = 4
+	KDVDAudioDTSFormat     DVDAudioFormat = 5
+	KDVDAudioSDDSFormat    DVDAudioFormat = 6
+	KDVDAudioMLPFormat     DVDAudioFormat = 7
+	KDVDAudioDDPlusFormat  DVDAudioFormat = 8
+	KDVDAudioDTSHDFormat   DVDAudioFormat = 9
 )
 
 func (e DVDAudioFormat) String() string {
@@ -80,32 +80,32 @@ func (e DVDAudioFormat) String() string {
 type DVDEventCode int64
 
 const (
-	KDVDEventTitle DVDEventCode = 1
-	KDVDEventPTT DVDEventCode = 2
-	KDVDEventValidUOP DVDEventCode = 3
-	KDVDEventAngle DVDEventCode = 4
-	KDVDEventAudioStream DVDEventCode = 5
-	KDVDEventSubpictureStream DVDEventCode = 6
-	KDVDEventDisplayMode DVDEventCode = 7
-	KDVDEventDomain DVDEventCode = 8
-	KDVDEventBitrate DVDEventCode = 9
-	KDVDEventStill DVDEventCode = 10
-	KDVDEventPlayback DVDEventCode = 11
-	KDVDEventVideoStandard DVDEventCode = 12
-	KDVDEventStreams DVDEventCode = 13
-	KDVDEventScanSpeed DVDEventCode = 14
-	KDVDEventMenuCalled DVDEventCode = 15
-	KDVDEventParental DVDEventCode = 16
-	KDVDEventPGC DVDEventCode = 17
-	KDVDEventGPRM DVDEventCode = 18
-	KDVDEventRegionMismatch DVDEventCode = 19
-	KDVDEventTitleTime DVDEventCode = 20
+	KDVDEventTitle                   DVDEventCode = 1
+	KDVDEventPTT                     DVDEventCode = 2
+	KDVDEventValidUOP                DVDEventCode = 3
+	KDVDEventAngle                   DVDEventCode = 4
+	KDVDEventAudioStream             DVDEventCode = 5
+	KDVDEventSubpictureStream        DVDEventCode = 6
+	KDVDEventDisplayMode             DVDEventCode = 7
+	KDVDEventDomain                  DVDEventCode = 8
+	KDVDEventBitrate                 DVDEventCode = 9
+	KDVDEventStill                   DVDEventCode = 10
+	KDVDEventPlayback                DVDEventCode = 11
+	KDVDEventVideoStandard           DVDEventCode = 12
+	KDVDEventStreams                 DVDEventCode = 13
+	KDVDEventScanSpeed               DVDEventCode = 14
+	KDVDEventMenuCalled              DVDEventCode = 15
+	KDVDEventParental                DVDEventCode = 16
+	KDVDEventPGC                     DVDEventCode = 17
+	KDVDEventGPRM                    DVDEventCode = 18
+	KDVDEventRegionMismatch          DVDEventCode = 19
+	KDVDEventTitleTime               DVDEventCode = 20
 	KDVDEventSubpictureStreamNumbers DVDEventCode = 21
-	KDVDEventAudioStreamNumbers DVDEventCode = 22
-	KDVDEventAngleNumbers DVDEventCode = 23
-	KDVDEventError DVDEventCode = 24
-	KDVDEventCCInfo DVDEventCode = 25
-	KDVDEventChapterTime DVDEventCode = 26
+	KDVDEventAudioStreamNumbers      DVDEventCode = 22
+	KDVDEventAngleNumbers            DVDEventCode = 23
+	KDVDEventError                   DVDEventCode = 24
+	KDVDEventCCInfo                  DVDEventCode = 25
+	KDVDEventChapterTime             DVDEventCode = 26
 )
 
 func (e DVDEventCode) String() string {
@@ -171,10 +171,10 @@ type DVDFormat int64
 
 const (
 	KDVDFormatUninitialized DVDFormat = 0
-	KDVDFormatNTSC DVDFormat = 1
-	KDVDFormatPAL DVDFormat = 2
-	KDVDFormatNTSC_HDTV DVDFormat = 3
-	KDVDFormatPAL_HDTV DVDFormat = 4
+	KDVDFormatNTSC          DVDFormat = 1
+	KDVDFormatPAL           DVDFormat = 2
+	KDVDFormatNTSC_HDTV     DVDFormat = 3
+	KDVDFormatPAL_HDTV      DVDFormat = 4
 )
 
 func (e DVDFormat) String() string {
@@ -197,13 +197,13 @@ func (e DVDFormat) String() string {
 type DVDMenu int64
 
 const (
-	KDVDMenuTitle DVDMenu = 0
-	KDVDMenuRoot DVDMenu = 1
+	KDVDMenuTitle      DVDMenu = 0
+	KDVDMenuRoot       DVDMenu = 1
 	KDVDMenuSubPicture DVDMenu = 2
-	KDVDMenuAudio DVDMenu = 3
-	KDVDMenuAngle DVDMenu = 4
-	KDVDMenuPTT DVDMenu = 5
-	KDVDMenuNone DVDMenu = 6
+	KDVDMenuAudio      DVDMenu = 3
+	KDVDMenuAngle      DVDMenu = 4
+	KDVDMenuPTT        DVDMenu = 5
+	KDVDMenuNone       DVDMenu = 6
 )
 
 func (e DVDMenu) String() string {
@@ -230,7 +230,7 @@ func (e DVDMenu) String() string {
 type DVDScanDirection int64
 
 const (
-	KDVDScanDirectionForward DVDScanDirection = 0
+	KDVDScanDirectionForward  DVDScanDirection = 0
 	KDVDScanDirectionBackward DVDScanDirection = 1
 )
 
@@ -248,15 +248,15 @@ func (e DVDScanDirection) String() string {
 type DVDScanRate int64
 
 const (
-	KDVDScanRateOneEigth DVDScanRate = -8
+	KDVDScanRateOneEigth  DVDScanRate = -8
 	KDVDScanRateOneFourth DVDScanRate = -4
-	KDVDScanRateOneHalf DVDScanRate = -2
-	KDVDScanRate1x DVDScanRate = 1
-	KDVDScanRate2x DVDScanRate = 2
-	KDVDScanRate4x DVDScanRate = 4
-	KDVDScanRate8x DVDScanRate = 8
-	KDVDScanRate16x DVDScanRate = 16
-	KDVDScanRate32x DVDScanRate = 32
+	KDVDScanRateOneHalf   DVDScanRate = -2
+	KDVDScanRate1x        DVDScanRate = 1
+	KDVDScanRate2x        DVDScanRate = 2
+	KDVDScanRate4x        DVDScanRate = 4
+	KDVDScanRate8x        DVDScanRate = 8
+	KDVDScanRate16x       DVDScanRate = 16
+	KDVDScanRate32x       DVDScanRate = 32
 )
 
 func (e DVDScanRate) String() string {
@@ -287,14 +287,14 @@ func (e DVDScanRate) String() string {
 type DVDState int64
 
 const (
-	KDVDStateUnknown DVDState = 0
-	KDVDStatePlaying DVDState = 1
+	KDVDStateUnknown      DVDState = 0
+	KDVDStatePlaying      DVDState = 1
 	KDVDStatePlayingStill DVDState = 2
-	KDVDStatePaused DVDState = 3
-	KDVDStateStopped DVDState = 4
-	KDVDStateScanning DVDState = 5
-	KDVDStateIdle DVDState = 6
-	KDVDStatePlayingSlow DVDState = 7
+	KDVDStatePaused       DVDState = 3
+	KDVDStateStopped      DVDState = 4
+	KDVDStateScanning     DVDState = 5
+	KDVDStateIdle         DVDState = 6
+	KDVDStatePlayingSlow  DVDState = 7
 )
 
 func (e DVDState) String() string {
@@ -323,11 +323,11 @@ func (e DVDState) String() string {
 type DVDUserNavigation int64
 
 const (
-	KDVDUserNavigationMoveUp DVDUserNavigation = 1
-	KDVDUserNavigationMoveDown DVDUserNavigation = 2
-	KDVDUserNavigationMoveLeft DVDUserNavigation = 3
+	KDVDUserNavigationMoveUp    DVDUserNavigation = 1
+	KDVDUserNavigationMoveDown  DVDUserNavigation = 2
+	KDVDUserNavigationMoveLeft  DVDUserNavigation = 3
 	KDVDUserNavigationMoveRight DVDUserNavigation = 4
-	KDVDUserNavigationEnter DVDUserNavigation = 5
+	KDVDUserNavigationEnter     DVDUserNavigation = 5
 )
 
 func (e DVDUserNavigation) String() string {
@@ -346,4 +346,3 @@ func (e DVDUserNavigation) String() string {
 		return fmt.Sprintf("DVDUserNavigation(%d)", int64(e))
 	}
 }
-

@@ -205,13 +205,21 @@ func (x *CNNPoolingAverageGradient) SetZeroPadSizeY(zeroPadSizeY uint) {
 	x.inner.SetZeroPadSizeY(zeroPadSizeY)
 }
 
-func (x *CNNPoolingAverageGradient) asCNNPoolingGradient() *mpsneuralnetwork.MPSCNNPoolingGradient { return &x.inner.MPSCNNPoolingGradient }
+func (x *CNNPoolingAverageGradient) asCNNPoolingGradient() *mpsneuralnetwork.MPSCNNPoolingGradient {
+	return &x.inner.MPSCNNPoolingGradient
+}
 
-func (x *CNNPoolingAverageGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel { return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel }
+func (x *CNNPoolingAverageGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel
+}
 
-func (x *CNNPoolingAverageGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *CNNPoolingAverageGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
-func (x *CNNPoolingAverageGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel }
+func (x *CNNPoolingAverageGradient) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel
+}
 
 // CNNPoolingAverageGradientable is the interface implemented by [CNNPoolingAverageGradient], for mocking and DI.
 type CNNPoolingAverageGradientable interface {
@@ -246,4 +254,3 @@ type CNNPoolingAverageGradientable interface {
 }
 
 var _ CNNPoolingAverageGradientable = (*CNNPoolingAverageGradient)(nil)
-

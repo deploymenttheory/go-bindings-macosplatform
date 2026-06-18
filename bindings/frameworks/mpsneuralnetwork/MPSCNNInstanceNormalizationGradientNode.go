@@ -15,7 +15,7 @@ type MPSCNNInstanceNormalizationGradientNode struct {
 }
 
 var (
-	_clsMPSCNNInstanceNormalizationGradientNode = _objcClass("MPSCNNInstanceNormalizationGradientNode")
+	_clsMPSCNNInstanceNormalizationGradientNode                                               = _objcClass("MPSCNNInstanceNormalizationGradientNode")
 	_mPSCNNInstanceNormalizationGradientNodeSelNodeWithSourceGradientSourceImageGradientState = objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:")
 	_mPSCNNInstanceNormalizationGradientNodeSelInitWithSourceGradientSourceImageGradientState = objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:")
 )
@@ -32,13 +32,16 @@ func MPSCNNInstanceNormalizationGradientNodeFromID(id objc.ID) *MPSCNNInstanceNo
 
 func MPSCNNInstanceNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient *MPSNNImageNode, sourceImage *MPSNNImageNode, gradientState *MPSNNGradientStateNode) *MPSCNNInstanceNormalizationGradientNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNInstanceNormalizationGradientNode), _mPSCNNInstanceNormalizationGradientNodeSelNodeWithSourceGradientSourceImageGradientState, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNInstanceNormalizationGradientNodeFromID(_ret)
 }
 
 func (o *MPSCNNInstanceNormalizationGradientNode) InitWithSourceGradientSourceImageGradientState(sourceGradient *MPSNNImageNode, sourceImage *MPSNNImageNode, gradientState *MPSNNGradientStateNode) *MPSCNNInstanceNormalizationGradientNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNInstanceNormalizationGradientNodeSelInitWithSourceGradientSourceImageGradientState, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNInstanceNormalizationGradientNodeFromID(_ret)
 }
-

@@ -19,7 +19,9 @@ type ImageLaplacianPyramidSubtract struct {
 }
 
 // Unwrap returns the underlying [raw.MPSImageLaplacianPyramidSubtract].
-func (x *ImageLaplacianPyramidSubtract) Unwrap() *raw.MPSImageLaplacianPyramidSubtract { return x.inner }
+func (x *ImageLaplacianPyramidSubtract) Unwrap() *raw.MPSImageLaplacianPyramidSubtract {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -81,13 +83,21 @@ func (x *ImageLaplacianPyramidSubtract) WithLabel(label string) *ImageLaplacianP
 	return x
 }
 
-func (x *ImageLaplacianPyramidSubtract) asImageLaplacianPyramid() *mpsimage.MPSImageLaplacianPyramid { return &x.inner.MPSImageLaplacianPyramid }
+func (x *ImageLaplacianPyramidSubtract) asImageLaplacianPyramid() *mpsimage.MPSImageLaplacianPyramid {
+	return &x.inner.MPSImageLaplacianPyramid
+}
 
-func (x *ImageLaplacianPyramidSubtract) asImagePyramid() *mpsimage.MPSImagePyramid { return &x.inner.MPSImageLaplacianPyramid.MPSImagePyramid }
+func (x *ImageLaplacianPyramidSubtract) asImagePyramid() *mpsimage.MPSImagePyramid {
+	return &x.inner.MPSImageLaplacianPyramid.MPSImagePyramid
+}
 
-func (x *ImageLaplacianPyramidSubtract) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSImageLaplacianPyramid.MPSImagePyramid.MPSUnaryImageKernel }
+func (x *ImageLaplacianPyramidSubtract) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
+	return &x.inner.MPSImageLaplacianPyramid.MPSImagePyramid.MPSUnaryImageKernel
+}
 
-func (x *ImageLaplacianPyramidSubtract) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImageLaplacianPyramid.MPSImagePyramid.MPSUnaryImageKernel.MPSKernel }
+func (x *ImageLaplacianPyramidSubtract) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSImageLaplacianPyramid.MPSImagePyramid.MPSUnaryImageKernel.MPSKernel
+}
 
 // ImageLaplacianPyramidSubtractable is the interface implemented by [ImageLaplacianPyramidSubtract], for mocking and DI.
 type ImageLaplacianPyramidSubtractable interface {
@@ -102,4 +112,3 @@ type ImageLaplacianPyramidSubtractable interface {
 }
 
 var _ ImageLaplacianPyramidSubtractable = (*ImageLaplacianPyramidSubtract)(nil)
-

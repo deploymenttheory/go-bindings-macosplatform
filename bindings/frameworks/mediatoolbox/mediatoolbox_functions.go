@@ -16,10 +16,10 @@ var (
 	// @function	MTAudioProcessingTapGetSourceAudio @abstract	Used by a processing tap to retrieve source audio. @discussion	This function may only be called from the processing tap's callback. @param		tap The processing tap. @param		numberFrames The number of frames the processing tap requires for its processing. @param		bufferListInOut The audio buffer list which will contain the source data. On input, all fields except for the buffer pointers must be filled in. If the buffer pointers are NULL (recommended), non-NULL pointers will be returned and system owns the source buffers; these buffers are only applicable for the duration of the processing tap callback. If the buffer pointers are non-NULL, then they must be big enough to hold numberFrames, and the source data will be copied into these buffers. @param		flagsOut Flags to describe state about the input requested, e.g., discontinuity/complete. Can be NULL. @param		timeRangeOut The asset time range corresponding to the provided source audio frames. Can be NULL. @param		numberFramesOut The number of source frames that have been provided. Can be NULL. This can be less than the number of requested frames specified in numberFrames. @result		An OSStatus result code.
 	_fnMTAudioProcessingTapGetSourceAudio func(unsafe.Pointer, int, *coreaudiotypes.AudioBufferList, *uint32, *coremedia.CMTimeRange, *int) int
 	// @function	MTAudioProcessingTapGetStorage @abstract	Used by a processing tap to retrieve a custom storage pointer. @param		tap The processing tap. @result		The tapStorage returned by the init callback.
-	_fnMTAudioProcessingTapGetStorage func(unsafe.Pointer) unsafe.Pointer
-	_fnMTAudioProcessingTapGetTypeID func() uint
+	_fnMTAudioProcessingTapGetStorage     func(unsafe.Pointer) unsafe.Pointer
+	_fnMTAudioProcessingTapGetTypeID      func() uint
 	_fnMTCopyLocalizedNameForMediaSubType func(uint, uint) unsafe.Pointer
-	_fnMTCopyLocalizedNameForMediaType func(uint) unsafe.Pointer
+	_fnMTCopyLocalizedNameForMediaType    func(uint) unsafe.Pointer
 	// @function	MTRegisterProfessionalVideoWorkflowFormatReaders @abstract	Allows the client to use media format readers appropriate for professional video workflows. @discussion	By calling this function, a client indicates to MediaToolbox that it wishes to support Media Extension format readers. Note that this functionality is intended for applications supporting professional video workflows. It is not recommended for network-facing applications such as web browsers, messaging clients, mail clients, etc. By convention, format readers registered using this function should conform to the abstract UTType of "com.apple.mediaextension-content" which in turn conforms to the abstract type "public.movie". Clients can use the type "com.apple.mediaextension-content" to do type filtering (e.g. in Open... dialogs).
 	_fnMTRegisterProfessionalVideoWorkflowFormatReaders func()
 )
@@ -55,4 +55,3 @@ func MTCopyLocalizedNameForMediaType(mediaType uint) unsafe.Pointer {
 func MTRegisterProfessionalVideoWorkflowFormatReaders() {
 	_fnMTRegisterProfessionalVideoWorkflowFormatReaders()
 }
-

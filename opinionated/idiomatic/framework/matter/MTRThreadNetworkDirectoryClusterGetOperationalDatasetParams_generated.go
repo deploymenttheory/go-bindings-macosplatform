@@ -16,11 +16,15 @@ type MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams].
-func (x *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) Unwrap() *raw.MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams { return x.inner }
+func (x *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) Unwrap() *raw.MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRThreadNetworkDirectoryClusterGetOperationalDatasetParamsFromID adopts an existing object pointer as a MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams (nil for 0).
 func MTRThreadNetworkDirectoryClusterGetOperationalDatasetParamsFromID(id objc.ID) *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams {
@@ -99,4 +103,3 @@ type MTRThreadNetworkDirectoryClusterGetOperationalDatasetParamsable interface {
 }
 
 var _ MTRThreadNetworkDirectoryClusterGetOperationalDatasetParamsable = (*MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams)(nil)
-

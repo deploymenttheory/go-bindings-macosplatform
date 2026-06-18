@@ -21,15 +21,15 @@ type MPSMatrixSoftMaxGradient struct {
 }
 
 var (
-	_clsMPSMatrixSoftMaxGradient = _objcClass("MPSMatrixSoftMaxGradient")
-	_mPSMatrixSoftMaxGradientSelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsMPSMatrixSoftMaxGradient                                                                   = _objcClass("MPSMatrixSoftMaxGradient")
+	_mPSMatrixSoftMaxGradientSelInitWithDevice                                                     = objc.RegisterName("initWithDevice:")
 	_mPSMatrixSoftMaxGradientSelEncodeToCommandBufferGradientMatrixForwardOutputMatrixResultMatrix = objc.RegisterName("encodeToCommandBuffer:gradientMatrix:forwardOutputMatrix:resultMatrix:")
-	_mPSMatrixSoftMaxGradientSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSMatrixSoftMaxGradientSelCopyWithZoneDevice = objc.RegisterName("copyWithZone:device:")
-	_mPSMatrixSoftMaxGradientSelSourceRows = objc.RegisterName("sourceRows")
-	_mPSMatrixSoftMaxGradientSelSetSourceRows = objc.RegisterName("setSourceRows:")
-	_mPSMatrixSoftMaxGradientSelSourceColumns = objc.RegisterName("sourceColumns")
-	_mPSMatrixSoftMaxGradientSelSetSourceColumns = objc.RegisterName("setSourceColumns:")
+	_mPSMatrixSoftMaxGradientSelInitWithCoderDevice                                                = objc.RegisterName("initWithCoder:device:")
+	_mPSMatrixSoftMaxGradientSelCopyWithZoneDevice                                                 = objc.RegisterName("copyWithZone:device:")
+	_mPSMatrixSoftMaxGradientSelSourceRows                                                         = objc.RegisterName("sourceRows")
+	_mPSMatrixSoftMaxGradientSelSetSourceRows                                                      = objc.RegisterName("setSourceRows:")
+	_mPSMatrixSoftMaxGradientSelSourceColumns                                                      = objc.RegisterName("sourceColumns")
+	_mPSMatrixSoftMaxGradientSelSetSourceColumns                                                   = objc.RegisterName("setSourceColumns:")
 )
 
 func MPSMatrixSoftMaxGradientFromID(id objc.ID) *MPSMatrixSoftMaxGradient {
@@ -45,7 +45,9 @@ func MPSMatrixSoftMaxGradientFromID(id objc.ID) *MPSMatrixSoftMaxGradient {
 // @abstract   Initialize an MPSMatrixSoftMaxGradient object on a device. @param      device          The device on which the kernel will execute. @return     A valid MPSMatrixSoftMaxGradient object or nil, if failure.
 func (o *MPSMatrixSoftMaxGradient) InitWithDevice(device metal.MTLDevice) *MPSMatrixSoftMaxGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixSoftMaxGradientSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixSoftMaxGradientFromID(_ret)
 }
 
@@ -57,7 +59,9 @@ func (o *MPSMatrixSoftMaxGradient) EncodeToCommandBufferGradientMatrixForwardOut
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSMatrixSoftMaxGradient @param      device      The MTLDevice on which to make the MPSMatrixSoftMaxGradient @return     A new MPSMatrixSoftMaxGradient object, or nil if failure.
 func (o *MPSMatrixSoftMaxGradient) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSMatrixSoftMaxGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixSoftMaxGradientSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixSoftMaxGradientFromID(_ret)
 }
 
@@ -85,4 +89,3 @@ func (o *MPSMatrixSoftMaxGradient) SourceColumns() uint {
 func (o *MPSMatrixSoftMaxGradient) SetSourceColumns(sourceColumns uint) {
 	o.Ptr().Send(_mPSMatrixSoftMaxGradientSelSetSourceColumns, sourceColumns)
 }
-

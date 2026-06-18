@@ -109,4 +109,3 @@ type SpeechSynthesizerable interface {
 }
 
 var _ SpeechSynthesizerable = (*SpeechSynthesizer)(nil)
-

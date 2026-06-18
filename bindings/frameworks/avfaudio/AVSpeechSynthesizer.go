@@ -16,19 +16,19 @@ type AVSpeechSynthesizer struct {
 }
 
 var (
-	_clsAVSpeechSynthesizer = _objcClass("AVSpeechSynthesizer")
-	_aVSpeechSynthesizerSelSpeakUtterance = objc.RegisterName("speakUtterance:")
-	_aVSpeechSynthesizerSelWriteUtteranceToBufferCallback = objc.RegisterName("writeUtterance:toBufferCallback:")
-	_aVSpeechSynthesizerSelWriteUtteranceToBufferCallbackToMarkerCallback = objc.RegisterName("writeUtterance:toBufferCallback:toMarkerCallback:")
-	_aVSpeechSynthesizerSelStopSpeakingAtBoundary = objc.RegisterName("stopSpeakingAtBoundary:")
-	_aVSpeechSynthesizerSelPauseSpeakingAtBoundary = objc.RegisterName("pauseSpeakingAtBoundary:")
-	_aVSpeechSynthesizerSelContinueSpeaking = objc.RegisterName("continueSpeaking")
+	_clsAVSpeechSynthesizer                                                       = _objcClass("AVSpeechSynthesizer")
+	_aVSpeechSynthesizerSelSpeakUtterance                                         = objc.RegisterName("speakUtterance:")
+	_aVSpeechSynthesizerSelWriteUtteranceToBufferCallback                         = objc.RegisterName("writeUtterance:toBufferCallback:")
+	_aVSpeechSynthesizerSelWriteUtteranceToBufferCallbackToMarkerCallback         = objc.RegisterName("writeUtterance:toBufferCallback:toMarkerCallback:")
+	_aVSpeechSynthesizerSelStopSpeakingAtBoundary                                 = objc.RegisterName("stopSpeakingAtBoundary:")
+	_aVSpeechSynthesizerSelPauseSpeakingAtBoundary                                = objc.RegisterName("pauseSpeakingAtBoundary:")
+	_aVSpeechSynthesizerSelContinueSpeaking                                       = objc.RegisterName("continueSpeaking")
 	_aVSpeechSynthesizerSelRequestPersonalVoiceAuthorizationWithCompletionHandler = objc.RegisterName("requestPersonalVoiceAuthorizationWithCompletionHandler:")
-	_aVSpeechSynthesizerSelDelegate = objc.RegisterName("delegate")
-	_aVSpeechSynthesizerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_aVSpeechSynthesizerSelIsSpeaking = objc.RegisterName("isSpeaking")
-	_aVSpeechSynthesizerSelIsPaused = objc.RegisterName("isPaused")
-	_aVSpeechSynthesizerSelPersonalVoiceAuthorizationStatus = objc.RegisterName("personalVoiceAuthorizationStatus")
+	_aVSpeechSynthesizerSelDelegate                                               = objc.RegisterName("delegate")
+	_aVSpeechSynthesizerSelSetDelegate                                            = objc.RegisterName("setDelegate:")
+	_aVSpeechSynthesizerSelIsSpeaking                                             = objc.RegisterName("isSpeaking")
+	_aVSpeechSynthesizerSelIsPaused                                               = objc.RegisterName("isPaused")
+	_aVSpeechSynthesizerSelPersonalVoiceAuthorizationStatus                       = objc.RegisterName("personalVoiceAuthorizationStatus")
 )
 
 func AVSpeechSynthesizerFromID(id objc.ID) *AVSpeechSynthesizer {
@@ -135,4 +135,3 @@ func AVSpeechSynthesizerPersonalVoiceAuthorizationStatus() AVSpeechSynthesisPers
 	_ret := objc.Send[AVSpeechSynthesisPersonalVoiceAuthorizationStatus](objc.ID(_clsAVSpeechSynthesizer), _aVSpeechSynthesizerSelPersonalVoiceAuthorizationStatus)
 	return _ret
 }
-

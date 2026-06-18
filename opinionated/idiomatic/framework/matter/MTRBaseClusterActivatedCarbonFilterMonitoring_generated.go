@@ -19,7 +19,9 @@ type MTRBaseClusterActivatedCarbonFilterMonitoring struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterActivatedCarbonFilterMonitoring].
-func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) Unwrap() *raw.MTRBaseClusterActivatedCarbonFilterMonitoring { return x.inner }
+func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) Unwrap() *raw.MTRBaseClusterActivatedCarbonFilterMonitoring {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -436,9 +438,13 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeCluste
 	}
 }
 
-func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterActivatedCarbonFilterMonitoringable is the interface implemented by [MTRBaseClusterActivatedCarbonFilterMonitoring], for mocking and DI.
 type MTRBaseClusterActivatedCarbonFilterMonitoringable interface {
@@ -472,4 +478,3 @@ type MTRBaseClusterActivatedCarbonFilterMonitoringable interface {
 }
 
 var _ MTRBaseClusterActivatedCarbonFilterMonitoringable = (*MTRBaseClusterActivatedCarbonFilterMonitoring)(nil)
-

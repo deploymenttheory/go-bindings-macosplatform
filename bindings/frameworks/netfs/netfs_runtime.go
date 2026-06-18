@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_netfsLib uintptr
-	_loadOnce sync.Once
+	_netfsLib      uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -48,7 +48,9 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("NetFSCopyURLForRemountingVolume", func() { purego.RegisterLibFunc(&_fnNetFSCopyURLForRemountingVolume, _netfsLib, "NetFSCopyURLForRemountingVolume") })
+	_register("NetFSCopyURLForRemountingVolume", func() {
+		purego.RegisterLibFunc(&_fnNetFSCopyURLForRemountingVolume, _netfsLib, "NetFSCopyURLForRemountingVolume")
+	})
 	_register("NetFSMountURLAsync", func() { purego.RegisterLibFunc(&_fnNetFSMountURLAsync, _netfsLib, "NetFSMountURLAsync") })
 	_register("NetFSMountURLCancel", func() { purego.RegisterLibFunc(&_fnNetFSMountURLCancel, _netfsLib, "NetFSMountURLCancel") })
 	_register("NetFSMountURLProbe", func() { purego.RegisterLibFunc(&_fnNetFSMountURLProbe, _netfsLib, "NetFSMountURLProbe") })

@@ -16,9 +16,9 @@ type DOMCSSImportRule struct {
 }
 
 var (
-	_clsDOMCSSImportRule = _objcClass("DOMCSSImportRule")
-	_dOMCSSImportRuleSelHref = objc.RegisterName("href")
-	_dOMCSSImportRuleSelMedia = objc.RegisterName("media")
+	_clsDOMCSSImportRule           = _objcClass("DOMCSSImportRule")
+	_dOMCSSImportRuleSelHref       = objc.RegisterName("href")
+	_dOMCSSImportRuleSelMedia      = objc.RegisterName("media")
 	_dOMCSSImportRuleSelStyleSheet = objc.RegisterName("styleSheet")
 )
 
@@ -34,19 +34,24 @@ func DOMCSSImportRuleFromID(id objc.ID) *DOMCSSImportRule {
 
 func (o *DOMCSSImportRule) Href() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSImportRuleSelHref)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMCSSImportRule) Media() *DOMMediaList {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSImportRuleSelMedia)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMMediaListFromID(_ret)
 }
 
 func (o *DOMCSSImportRule) StyleSheet() *DOMCSSStyleSheet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSImportRuleSelStyleSheet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMCSSStyleSheetFromID(_ret)
 }
-

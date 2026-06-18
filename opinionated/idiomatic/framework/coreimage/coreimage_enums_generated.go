@@ -75,8 +75,8 @@ func (e CIQRCodeErrorCorrectionLevel) String() string {
 type CIRenderDestinationAlphaMode uint64
 
 const (
-	CIRenderDestinationAlphaNone CIRenderDestinationAlphaMode = 0
-	CIRenderDestinationAlphaPremultiplied CIRenderDestinationAlphaMode = 1
+	CIRenderDestinationAlphaNone            CIRenderDestinationAlphaMode = 0
+	CIRenderDestinationAlphaPremultiplied   CIRenderDestinationAlphaMode = 1
 	CIRenderDestinationAlphaUnpremultiplied CIRenderDestinationAlphaMode = 2
 )
 
@@ -92,4 +92,3 @@ func (e CIRenderDestinationAlphaMode) String() string {
 		return fmt.Sprintf("CIRenderDestinationAlphaMode(%d)", int64(e))
 	}
 }
-

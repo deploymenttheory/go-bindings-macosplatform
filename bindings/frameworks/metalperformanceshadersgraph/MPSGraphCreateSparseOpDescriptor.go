@@ -16,12 +16,12 @@ type MPSGraphCreateSparseOpDescriptor struct {
 }
 
 var (
-	_clsMPSGraphCreateSparseOpDescriptor = _objcClass("MPSGraphCreateSparseOpDescriptor")
+	_clsMPSGraphCreateSparseOpDescriptor                                  = _objcClass("MPSGraphCreateSparseOpDescriptor")
 	_mPSGraphCreateSparseOpDescriptorSelDescriptorWithStorageTypeDataType = objc.RegisterName("descriptorWithStorageType:dataType:")
-	_mPSGraphCreateSparseOpDescriptorSelSparseStorageType = objc.RegisterName("sparseStorageType")
-	_mPSGraphCreateSparseOpDescriptorSelSetSparseStorageType = objc.RegisterName("setSparseStorageType:")
-	_mPSGraphCreateSparseOpDescriptorSelDataType = objc.RegisterName("dataType")
-	_mPSGraphCreateSparseOpDescriptorSelSetDataType = objc.RegisterName("setDataType:")
+	_mPSGraphCreateSparseOpDescriptorSelSparseStorageType                 = objc.RegisterName("sparseStorageType")
+	_mPSGraphCreateSparseOpDescriptorSelSetSparseStorageType              = objc.RegisterName("setSparseStorageType:")
+	_mPSGraphCreateSparseOpDescriptorSelDataType                          = objc.RegisterName("dataType")
+	_mPSGraphCreateSparseOpDescriptorSelSetDataType                       = objc.RegisterName("setDataType:")
 )
 
 func MPSGraphCreateSparseOpDescriptorFromID(id objc.ID) *MPSGraphCreateSparseOpDescriptor {
@@ -37,7 +37,9 @@ func MPSGraphCreateSparseOpDescriptorFromID(id objc.ID) *MPSGraphCreateSparseOpD
 // Creates a descriptor for a sparse tensor. - Parameters: - sparseStorageType: A sparseStorageType. - dataType: A dataType of the sparse tensor. - Returns: The descriptor.
 func MPSGraphCreateSparseOpDescriptorDescriptorWithStorageTypeDataType(sparseStorageType MPSGraphSparseStorageType, dataType mpscore.MPSDataType) *MPSGraphCreateSparseOpDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphCreateSparseOpDescriptor), _mPSGraphCreateSparseOpDescriptorSelDescriptorWithStorageTypeDataType, sparseStorageType, dataType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSGraphCreateSparseOpDescriptorFromID(_ret)
 }
 
@@ -60,4 +62,3 @@ func (o *MPSGraphCreateSparseOpDescriptor) DataType() mpscore.MPSDataType {
 func (o *MPSGraphCreateSparseOpDescriptor) SetDataType(dataType mpscore.MPSDataType) {
 	o.Ptr().Send(_mPSGraphCreateSparseOpDescriptorSelSetDataType, dataType)
 }
-

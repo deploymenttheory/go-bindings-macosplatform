@@ -15,23 +15,23 @@ type MTL4TileRenderPipelineDescriptor struct {
 }
 
 var (
-	_clsMTL4TileRenderPipelineDescriptor = _objcClass("MTL4TileRenderPipelineDescriptor")
-	_mTL4TileRenderPipelineDescriptorSelReset = objc.RegisterName("reset")
-	_mTL4TileRenderPipelineDescriptorSelTileFunctionDescriptor = objc.RegisterName("tileFunctionDescriptor")
-	_mTL4TileRenderPipelineDescriptorSelSetTileFunctionDescriptor = objc.RegisterName("setTileFunctionDescriptor:")
-	_mTL4TileRenderPipelineDescriptorSelRasterSampleCount = objc.RegisterName("rasterSampleCount")
-	_mTL4TileRenderPipelineDescriptorSelSetRasterSampleCount = objc.RegisterName("setRasterSampleCount:")
-	_mTL4TileRenderPipelineDescriptorSelColorAttachments = objc.RegisterName("colorAttachments")
-	_mTL4TileRenderPipelineDescriptorSelThreadgroupSizeMatchesTileSize = objc.RegisterName("threadgroupSizeMatchesTileSize")
+	_clsMTL4TileRenderPipelineDescriptor                                  = _objcClass("MTL4TileRenderPipelineDescriptor")
+	_mTL4TileRenderPipelineDescriptorSelReset                             = objc.RegisterName("reset")
+	_mTL4TileRenderPipelineDescriptorSelTileFunctionDescriptor            = objc.RegisterName("tileFunctionDescriptor")
+	_mTL4TileRenderPipelineDescriptorSelSetTileFunctionDescriptor         = objc.RegisterName("setTileFunctionDescriptor:")
+	_mTL4TileRenderPipelineDescriptorSelRasterSampleCount                 = objc.RegisterName("rasterSampleCount")
+	_mTL4TileRenderPipelineDescriptorSelSetRasterSampleCount              = objc.RegisterName("setRasterSampleCount:")
+	_mTL4TileRenderPipelineDescriptorSelColorAttachments                  = objc.RegisterName("colorAttachments")
+	_mTL4TileRenderPipelineDescriptorSelThreadgroupSizeMatchesTileSize    = objc.RegisterName("threadgroupSizeMatchesTileSize")
 	_mTL4TileRenderPipelineDescriptorSelSetThreadgroupSizeMatchesTileSize = objc.RegisterName("setThreadgroupSizeMatchesTileSize:")
-	_mTL4TileRenderPipelineDescriptorSelMaxTotalThreadsPerThreadgroup = objc.RegisterName("maxTotalThreadsPerThreadgroup")
-	_mTL4TileRenderPipelineDescriptorSelSetMaxTotalThreadsPerThreadgroup = objc.RegisterName("setMaxTotalThreadsPerThreadgroup:")
-	_mTL4TileRenderPipelineDescriptorSelRequiredThreadsPerThreadgroup = objc.RegisterName("requiredThreadsPerThreadgroup")
-	_mTL4TileRenderPipelineDescriptorSelSetRequiredThreadsPerThreadgroup = objc.RegisterName("setRequiredThreadsPerThreadgroup:")
-	_mTL4TileRenderPipelineDescriptorSelStaticLinkingDescriptor = objc.RegisterName("staticLinkingDescriptor")
-	_mTL4TileRenderPipelineDescriptorSelSetStaticLinkingDescriptor = objc.RegisterName("setStaticLinkingDescriptor:")
-	_mTL4TileRenderPipelineDescriptorSelSupportBinaryLinking = objc.RegisterName("supportBinaryLinking")
-	_mTL4TileRenderPipelineDescriptorSelSetSupportBinaryLinking = objc.RegisterName("setSupportBinaryLinking:")
+	_mTL4TileRenderPipelineDescriptorSelMaxTotalThreadsPerThreadgroup     = objc.RegisterName("maxTotalThreadsPerThreadgroup")
+	_mTL4TileRenderPipelineDescriptorSelSetMaxTotalThreadsPerThreadgroup  = objc.RegisterName("setMaxTotalThreadsPerThreadgroup:")
+	_mTL4TileRenderPipelineDescriptorSelRequiredThreadsPerThreadgroup     = objc.RegisterName("requiredThreadsPerThreadgroup")
+	_mTL4TileRenderPipelineDescriptorSelSetRequiredThreadsPerThreadgroup  = objc.RegisterName("setRequiredThreadsPerThreadgroup:")
+	_mTL4TileRenderPipelineDescriptorSelStaticLinkingDescriptor           = objc.RegisterName("staticLinkingDescriptor")
+	_mTL4TileRenderPipelineDescriptorSelSetStaticLinkingDescriptor        = objc.RegisterName("setStaticLinkingDescriptor:")
+	_mTL4TileRenderPipelineDescriptorSelSupportBinaryLinking              = objc.RegisterName("supportBinaryLinking")
+	_mTL4TileRenderPipelineDescriptorSelSetSupportBinaryLinking           = objc.RegisterName("setSupportBinaryLinking:")
 )
 
 func MTL4TileRenderPipelineDescriptorFromID(id objc.ID) *MTL4TileRenderPipelineDescriptor {
@@ -52,7 +52,9 @@ func (o *MTL4TileRenderPipelineDescriptor) Reset() {
 // Configures the tile function that the render pipeline executes for each tile in the tile shader stage.
 func (o *MTL4TileRenderPipelineDescriptor) TileFunctionDescriptor() *MTL4FunctionDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4TileRenderPipelineDescriptorSelTileFunctionDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTL4FunctionDescriptorFromID(_ret)
 }
 
@@ -73,7 +75,9 @@ func (o *MTL4TileRenderPipelineDescriptor) SetRasterSampleCount(rasterSampleCoun
 // Access an array of descriptors that configure the properties of each color attachment in the tile render pipeline.
 func (o *MTL4TileRenderPipelineDescriptor) ColorAttachments() *MTLTileRenderPipelineColorAttachmentDescriptorArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4TileRenderPipelineDescriptorSelColorAttachments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLTileRenderPipelineColorAttachmentDescriptorArrayFromID(_ret)
 }
 
@@ -97,7 +101,7 @@ func (o *MTL4TileRenderPipelineDescriptor) SetMaxTotalThreadsPerThreadgroup(maxT
 	o.Ptr().Send(_mTL4TileRenderPipelineDescriptorSelSetMaxTotalThreadsPerThreadgroup, maxTotalThreadsPerThreadgroup)
 }
 
-// Sets the required number of threads per threadgroup for tile dispatches. This value is typically optional, except in the cases where the tile function that ``tileFunctionDescriptor`` references uses `CooperativeTensors`. In this case, you need to provide a non-zero value to this property. Additionally, when you set this value, the `threadsPerTile` argument of any tile dispatch needs to match it. Setting this value to a size of 0 in every dimension disables this property.
+// Sets the required number of threads per threadgroup for tile dispatches. This value is typically optional, except in the cases where the tile function that “tileFunctionDescriptor“ references uses `CooperativeTensors`. In this case, you need to provide a non-zero value to this property. Additionally, when you set this value, the `threadsPerTile` argument of any tile dispatch needs to match it. Setting this value to a size of 0 in every dimension disables this property.
 func (o *MTL4TileRenderPipelineDescriptor) RequiredThreadsPerThreadgroup() MTLSize {
 	_ret := objc.Send[MTLSize](o.Ptr(), _mTL4TileRenderPipelineDescriptorSelRequiredThreadsPerThreadgroup)
 	return _ret
@@ -110,7 +114,9 @@ func (o *MTL4TileRenderPipelineDescriptor) SetRequiredThreadsPerThreadgroup(requ
 // Configures an object that contains information about functions to link to the tile render pipeline when Metal builds it.
 func (o *MTL4TileRenderPipelineDescriptor) StaticLinkingDescriptor() *MTL4StaticLinkingDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4TileRenderPipelineDescriptorSelStaticLinkingDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTL4StaticLinkingDescriptorFromID(_ret)
 }
 
@@ -127,4 +133,3 @@ func (o *MTL4TileRenderPipelineDescriptor) SupportBinaryLinking() bool {
 func (o *MTL4TileRenderPipelineDescriptor) SetSupportBinaryLinking(supportBinaryLinking bool) {
 	o.Ptr().Send(_mTL4TileRenderPipelineDescriptorSelSetSupportBinaryLinking, supportBinaryLinking)
 }
-

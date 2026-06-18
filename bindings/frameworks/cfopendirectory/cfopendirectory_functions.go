@@ -12,82 +12,82 @@ import (
 )
 
 var (
-	_fnODContextGetTypeID func() uint
-	_fnODNodeAddAccountPolicy func(unsafe.Pointer, unsafe.Pointer, objc.ID, unsafe.Pointer) bool
-	_fnODNodeCopyAccountPolicies func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnODNodeCopyDetails func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnODNodeCopyPolicies func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnODNodeCopyRecord func(unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnODNodeCopySubnodeNames func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnODNodeCopySupportedAttributes func(unsafe.Pointer, objc.ID, unsafe.Pointer) unsafe.Pointer
-	_fnODNodeCopySupportedPolicies func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnODNodeCopySupportedRecordTypes func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnODNodeCopyUnreachableSubnodeNames func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnODNodeCreateCopy func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnODNodeCreateRecord func(unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnODNodeCreateWithName func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnODNodeCreateWithNodeType func(unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) unsafe.Pointer
-	_fnODNodeCustomCall func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnODNodeCustomFunction func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnODNodeGetName func(unsafe.Pointer) unsafe.Pointer
-	_fnODNodeGetTypeID func() uint
-	_fnODNodePasswordContentCheck func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
-	_fnODNodeRemoveAccountPolicy func(unsafe.Pointer, unsafe.Pointer, objc.ID, unsafe.Pointer) bool
-	_fnODNodeRemovePolicy func(unsafe.Pointer, objc.ID, unsafe.Pointer) bool
-	_fnODNodeSetAccountPolicies func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
-	_fnODNodeSetCredentials func(unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
-	_fnODNodeSetCredentialsExtended func(unsafe.Pointer, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
-	_fnODNodeSetCredentialsUsingKerberosCache func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
-	_fnODNodeSetPolicies func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
-	_fnODNodeSetPolicy func(unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Pointer) bool
-	_fnODQueryCopyResults func(unsafe.Pointer, bool, unsafe.Pointer) unsafe.Pointer
-	_fnODQueryCreateWithNode func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, objc.ID, uint32, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
-	_fnODQueryCreateWithNodeType func(unsafe.Pointer, uint32, unsafe.Pointer, objc.ID, uint32, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
-	_fnODQueryGetTypeID func() uint
-	_fnODQueryScheduleWithRunLoop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnODQuerySetCallback func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnODQuerySetDispatchQueue func(unsafe.Pointer, objc.ID)
-	_fnODQuerySynchronize func(unsafe.Pointer)
-	_fnODQueryUnscheduleFromRunLoop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnODRecordAddAccountPolicy func(unsafe.Pointer, unsafe.Pointer, objc.ID, unsafe.Pointer) bool
-	_fnODRecordAddMember func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
-	_fnODRecordAddValue func(unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Pointer) bool
-	_fnODRecordAuthenticationAllowed func(unsafe.Pointer, unsafe.Pointer) bool
-	_fnODRecordChangePassword func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
-	_fnODRecordContainsMember func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
-	_fnODRecordCopyAccountPolicies func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnODRecordCopyDetails func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnODRecordCopyEffectivePolicies func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnODRecordCopyPasswordPolicy func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnODRecordCopyPolicies func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnODRecordCopySupportedPolicies func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnODRecordCopyValues func(unsafe.Pointer, objc.ID, unsafe.Pointer) unsafe.Pointer
-	_fnODRecordDelete func(unsafe.Pointer, unsafe.Pointer) bool
-	_fnODRecordGetRecordName func(unsafe.Pointer) unsafe.Pointer
-	_fnODRecordGetRecordType func(unsafe.Pointer) unsafe.Pointer
-	_fnODRecordGetTypeID func() uint
-	_fnODRecordPasswordChangeAllowed func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
-	_fnODRecordRemoveAccountPolicy func(unsafe.Pointer, unsafe.Pointer, objc.ID, unsafe.Pointer) bool
-	_fnODRecordRemoveMember func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
-	_fnODRecordRemovePolicy func(unsafe.Pointer, objc.ID, unsafe.Pointer) bool
-	_fnODRecordRemoveValue func(unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Pointer) bool
-	_fnODRecordSecondsUntilAuthenticationsExpire func(unsafe.Pointer) int64
-	_fnODRecordSecondsUntilPasswordExpires func(unsafe.Pointer) int64
-	_fnODRecordSetAccountPolicies func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
-	_fnODRecordSetNodeCredentials func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
-	_fnODRecordSetNodeCredentialsExtended func(unsafe.Pointer, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	_fnODContextGetTypeID                           func() uint
+	_fnODNodeAddAccountPolicy                       func(unsafe.Pointer, unsafe.Pointer, objc.ID, unsafe.Pointer) bool
+	_fnODNodeCopyAccountPolicies                    func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnODNodeCopyDetails                            func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnODNodeCopyPolicies                           func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnODNodeCopyRecord                             func(unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnODNodeCopySubnodeNames                       func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnODNodeCopySupportedAttributes                func(unsafe.Pointer, objc.ID, unsafe.Pointer) unsafe.Pointer
+	_fnODNodeCopySupportedPolicies                  func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnODNodeCopySupportedRecordTypes               func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnODNodeCopyUnreachableSubnodeNames            func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnODNodeCreateCopy                             func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnODNodeCreateRecord                           func(unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnODNodeCreateWithName                         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnODNodeCreateWithNodeType                     func(unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) unsafe.Pointer
+	_fnODNodeCustomCall                             func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnODNodeCustomFunction                         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnODNodeGetName                                func(unsafe.Pointer) unsafe.Pointer
+	_fnODNodeGetTypeID                              func() uint
+	_fnODNodePasswordContentCheck                   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	_fnODNodeRemoveAccountPolicy                    func(unsafe.Pointer, unsafe.Pointer, objc.ID, unsafe.Pointer) bool
+	_fnODNodeRemovePolicy                           func(unsafe.Pointer, objc.ID, unsafe.Pointer) bool
+	_fnODNodeSetAccountPolicies                     func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	_fnODNodeSetCredentials                         func(unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	_fnODNodeSetCredentialsExtended                 func(unsafe.Pointer, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	_fnODNodeSetCredentialsUsingKerberosCache       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	_fnODNodeSetPolicies                            func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	_fnODNodeSetPolicy                              func(unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Pointer) bool
+	_fnODQueryCopyResults                           func(unsafe.Pointer, bool, unsafe.Pointer) unsafe.Pointer
+	_fnODQueryCreateWithNode                        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, objc.ID, uint32, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
+	_fnODQueryCreateWithNodeType                    func(unsafe.Pointer, uint32, unsafe.Pointer, objc.ID, uint32, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
+	_fnODQueryGetTypeID                             func() uint
+	_fnODQueryScheduleWithRunLoop                   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnODQuerySetCallback                           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnODQuerySetDispatchQueue                      func(unsafe.Pointer, objc.ID)
+	_fnODQuerySynchronize                           func(unsafe.Pointer)
+	_fnODQueryUnscheduleFromRunLoop                 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnODRecordAddAccountPolicy                     func(unsafe.Pointer, unsafe.Pointer, objc.ID, unsafe.Pointer) bool
+	_fnODRecordAddMember                            func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	_fnODRecordAddValue                             func(unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Pointer) bool
+	_fnODRecordAuthenticationAllowed                func(unsafe.Pointer, unsafe.Pointer) bool
+	_fnODRecordChangePassword                       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	_fnODRecordContainsMember                       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	_fnODRecordCopyAccountPolicies                  func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnODRecordCopyDetails                          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnODRecordCopyEffectivePolicies                func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnODRecordCopyPasswordPolicy                   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnODRecordCopyPolicies                         func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnODRecordCopySupportedPolicies                func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnODRecordCopyValues                           func(unsafe.Pointer, objc.ID, unsafe.Pointer) unsafe.Pointer
+	_fnODRecordDelete                               func(unsafe.Pointer, unsafe.Pointer) bool
+	_fnODRecordGetRecordName                        func(unsafe.Pointer) unsafe.Pointer
+	_fnODRecordGetRecordType                        func(unsafe.Pointer) unsafe.Pointer
+	_fnODRecordGetTypeID                            func() uint
+	_fnODRecordPasswordChangeAllowed                func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	_fnODRecordRemoveAccountPolicy                  func(unsafe.Pointer, unsafe.Pointer, objc.ID, unsafe.Pointer) bool
+	_fnODRecordRemoveMember                         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	_fnODRecordRemovePolicy                         func(unsafe.Pointer, objc.ID, unsafe.Pointer) bool
+	_fnODRecordRemoveValue                          func(unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Pointer) bool
+	_fnODRecordSecondsUntilAuthenticationsExpire    func(unsafe.Pointer) int64
+	_fnODRecordSecondsUntilPasswordExpires          func(unsafe.Pointer) int64
+	_fnODRecordSetAccountPolicies                   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	_fnODRecordSetNodeCredentials                   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	_fnODRecordSetNodeCredentialsExtended           func(unsafe.Pointer, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
 	_fnODRecordSetNodeCredentialsUsingKerberosCache func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
-	_fnODRecordSetPolicies func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
-	_fnODRecordSetPolicy func(unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Pointer) bool
-	_fnODRecordSetValue func(unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Pointer) bool
-	_fnODRecordSynchronize func(unsafe.Pointer, unsafe.Pointer) bool
-	_fnODRecordVerifyPassword func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
-	_fnODRecordVerifyPasswordExtended func(unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
-	_fnODRecordWillAuthenticationsExpire func(unsafe.Pointer, uint64) bool
-	_fnODRecordWillPasswordExpire func(unsafe.Pointer, uint64) bool
-	_fnODSessionCopyNodeNames func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnODSessionCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnODSessionGetTypeID func() uint
+	_fnODRecordSetPolicies                          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	_fnODRecordSetPolicy                            func(unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Pointer) bool
+	_fnODRecordSetValue                             func(unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Pointer) bool
+	_fnODRecordSynchronize                          func(unsafe.Pointer, unsafe.Pointer) bool
+	_fnODRecordVerifyPassword                       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	_fnODRecordVerifyPasswordExtended               func(unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	_fnODRecordWillAuthenticationsExpire            func(unsafe.Pointer, uint64) bool
+	_fnODRecordWillPasswordExpire                   func(unsafe.Pointer, uint64) bool
+	_fnODSessionCopyNodeNames                       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnODSessionCreate                              func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnODSessionGetTypeID                           func() uint
 )
 
 func ODContextGetTypeID() uint {
@@ -393,4 +393,3 @@ func ODSessionCreate(allocator unsafe.Pointer, options unsafe.Pointer, error_ un
 func ODSessionGetTypeID() uint {
 	return _fnODSessionGetTypeID()
 }
-

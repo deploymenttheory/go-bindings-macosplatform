@@ -120,7 +120,9 @@ func (x *Box) WithSubviews(items ...ViewProvider) *Box {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asView().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSView](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -262,7 +264,9 @@ func (x *Box) WithBackgroundFilters(items ...*coreimage.CIFilter) *Box {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -284,7 +288,9 @@ func (x *Box) WithContentFilters(items ...*coreimage.CIFilter) *Box {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -348,7 +354,9 @@ func (x *Box) WithGestureRecognizers(items ...GestureRecognizerProvider) *Box {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -718,4 +726,3 @@ type Boxable interface {
 }
 
 var _ Boxable = (*Box)(nil)
-

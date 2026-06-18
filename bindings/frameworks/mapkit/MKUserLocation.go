@@ -19,13 +19,13 @@ type MKUserLocation struct {
 }
 
 var (
-	_clsMKUserLocation = _objcClass("MKUserLocation")
-	_mKUserLocationSelIsUpdating = objc.RegisterName("isUpdating")
-	_mKUserLocationSelLocation = objc.RegisterName("location")
-	_mKUserLocationSelHeading = objc.RegisterName("heading")
-	_mKUserLocationSelTitle = objc.RegisterName("title")
-	_mKUserLocationSelSetTitle = objc.RegisterName("setTitle:")
-	_mKUserLocationSelSubtitle = objc.RegisterName("subtitle")
+	_clsMKUserLocation            = _objcClass("MKUserLocation")
+	_mKUserLocationSelIsUpdating  = objc.RegisterName("isUpdating")
+	_mKUserLocationSelLocation    = objc.RegisterName("location")
+	_mKUserLocationSelHeading     = objc.RegisterName("heading")
+	_mKUserLocationSelTitle       = objc.RegisterName("title")
+	_mKUserLocationSelSetTitle    = objc.RegisterName("setTitle:")
+	_mKUserLocationSelSubtitle    = objc.RegisterName("subtitle")
 	_mKUserLocationSelSetSubtitle = objc.RegisterName("setSubtitle:")
 )
 
@@ -51,13 +51,17 @@ func (o *MKUserLocation) Location() unsafe.Pointer {
 
 func (o *MKUserLocation) Heading() *corelocation.CLHeading {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKUserLocationSelHeading)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return corelocation.CLHeadingFromID(_ret)
 }
 
 func (o *MKUserLocation) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKUserLocationSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -67,11 +71,12 @@ func (o *MKUserLocation) SetTitle(title *foundation.NSString) {
 
 func (o *MKUserLocation) Subtitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKUserLocationSelSubtitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MKUserLocation) SetSubtitle(subtitle *foundation.NSString) {
 	o.Ptr().Send(_mKUserLocationSelSetSubtitle, subtitle.Ptr())
 }
-

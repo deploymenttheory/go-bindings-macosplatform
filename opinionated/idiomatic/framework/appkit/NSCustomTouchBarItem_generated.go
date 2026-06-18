@@ -90,4 +90,3 @@ type CustomTouchBarItemable interface {
 }
 
 var _ CustomTouchBarItemable = (*CustomTouchBarItem)(nil)
-

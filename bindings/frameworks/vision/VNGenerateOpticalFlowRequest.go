@@ -15,13 +15,13 @@ type VNGenerateOpticalFlowRequest struct {
 }
 
 var (
-	_clsVNGenerateOpticalFlowRequest = _objcClass("VNGenerateOpticalFlowRequest")
-	_vNGenerateOpticalFlowRequestSelComputationAccuracy = objc.RegisterName("computationAccuracy")
+	_clsVNGenerateOpticalFlowRequest                       = _objcClass("VNGenerateOpticalFlowRequest")
+	_vNGenerateOpticalFlowRequestSelComputationAccuracy    = objc.RegisterName("computationAccuracy")
 	_vNGenerateOpticalFlowRequestSelSetComputationAccuracy = objc.RegisterName("setComputationAccuracy:")
-	_vNGenerateOpticalFlowRequestSelOutputPixelFormat = objc.RegisterName("outputPixelFormat")
-	_vNGenerateOpticalFlowRequestSelSetOutputPixelFormat = objc.RegisterName("setOutputPixelFormat:")
-	_vNGenerateOpticalFlowRequestSelKeepNetworkOutput = objc.RegisterName("keepNetworkOutput")
-	_vNGenerateOpticalFlowRequestSelSetKeepNetworkOutput = objc.RegisterName("setKeepNetworkOutput:")
+	_vNGenerateOpticalFlowRequestSelOutputPixelFormat      = objc.RegisterName("outputPixelFormat")
+	_vNGenerateOpticalFlowRequestSelSetOutputPixelFormat   = objc.RegisterName("setOutputPixelFormat:")
+	_vNGenerateOpticalFlowRequestSelKeepNetworkOutput      = objc.RegisterName("keepNetworkOutput")
+	_vNGenerateOpticalFlowRequestSelSetKeepNetworkOutput   = objc.RegisterName("setKeepNetworkOutput:")
 )
 
 func VNGenerateOpticalFlowRequestFromID(id objc.ID) *VNGenerateOpticalFlowRequest {
@@ -63,4 +63,3 @@ func (o *VNGenerateOpticalFlowRequest) KeepNetworkOutput() bool {
 func (o *VNGenerateOpticalFlowRequest) SetKeepNetworkOutput(keepNetworkOutput bool) {
 	o.Ptr().Send(_vNGenerateOpticalFlowRequestSelSetKeepNetworkOutput, keepNetworkOutput)
 }
-

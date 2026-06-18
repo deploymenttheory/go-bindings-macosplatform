@@ -16,7 +16,9 @@ type MTRColorControlClusterEnhancedStepHueParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRColorControlClusterEnhancedStepHueParams].
-func (x *MTRColorControlClusterEnhancedStepHueParams) Unwrap() *raw.MTRColorControlClusterEnhancedStepHueParams { return x.inner }
+func (x *MTRColorControlClusterEnhancedStepHueParams) Unwrap() *raw.MTRColorControlClusterEnhancedStepHueParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -175,4 +177,3 @@ type MTRColorControlClusterEnhancedStepHueParamsable interface {
 }
 
 var _ MTRColorControlClusterEnhancedStepHueParamsable = (*MTRColorControlClusterEnhancedStepHueParams)(nil)
-

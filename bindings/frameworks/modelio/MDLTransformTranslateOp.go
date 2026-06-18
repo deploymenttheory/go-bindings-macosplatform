@@ -16,8 +16,8 @@ type MDLTransformTranslateOp struct {
 }
 
 var (
-	_clsMDLTransformTranslateOp = _objcClass("MDLTransformTranslateOp")
-	_mDLTransformTranslateOpSelName = objc.RegisterName("name")
+	_clsMDLTransformTranslateOp              = _objcClass("MDLTransformTranslateOp")
+	_mDLTransformTranslateOpSelName          = objc.RegisterName("name")
 	_mDLTransformTranslateOpSelAnimatedValue = objc.RegisterName("animatedValue")
 )
 
@@ -33,13 +33,16 @@ func MDLTransformTranslateOpFromID(id objc.ID) *MDLTransformTranslateOp {
 
 func (o *MDLTransformTranslateOp) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTransformTranslateOpSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MDLTransformTranslateOp) AnimatedValue() *MDLAnimatedVector3 {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTransformTranslateOpSelAnimatedValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLAnimatedVector3FromID(_ret)
 }
-

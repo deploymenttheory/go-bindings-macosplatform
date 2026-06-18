@@ -16,20 +16,20 @@ type PHFetchResult[ObjectType purego.AnyObject] struct {
 }
 
 var (
-	_clsPHFetchResult = _objcClass("PHFetchResult")
-	_pHFetchResultSelObjectAtIndex = objc.RegisterName("objectAtIndex:")
-	_pHFetchResultSelObjectAtIndexedSubscript = objc.RegisterName("objectAtIndexedSubscript:")
-	_pHFetchResultSelContainsObject = objc.RegisterName("containsObject:")
-	_pHFetchResultSelIndexOfObject = objc.RegisterName("indexOfObject:")
-	_pHFetchResultSelIndexOfObjectInRange = objc.RegisterName("indexOfObject:inRange:")
-	_pHFetchResultSelObjectsAtIndexes = objc.RegisterName("objectsAtIndexes:")
-	_pHFetchResultSelEnumerateObjectsUsing = objc.RegisterName("enumerateObjectsUsingBlock:")
-	_pHFetchResultSelEnumerateObjectsWithOptionsUsing = objc.RegisterName("enumerateObjectsWithOptions:usingBlock:")
+	_clsPHFetchResult                                      = _objcClass("PHFetchResult")
+	_pHFetchResultSelObjectAtIndex                         = objc.RegisterName("objectAtIndex:")
+	_pHFetchResultSelObjectAtIndexedSubscript              = objc.RegisterName("objectAtIndexedSubscript:")
+	_pHFetchResultSelContainsObject                        = objc.RegisterName("containsObject:")
+	_pHFetchResultSelIndexOfObject                         = objc.RegisterName("indexOfObject:")
+	_pHFetchResultSelIndexOfObjectInRange                  = objc.RegisterName("indexOfObject:inRange:")
+	_pHFetchResultSelObjectsAtIndexes                      = objc.RegisterName("objectsAtIndexes:")
+	_pHFetchResultSelEnumerateObjectsUsing                 = objc.RegisterName("enumerateObjectsUsingBlock:")
+	_pHFetchResultSelEnumerateObjectsWithOptionsUsing      = objc.RegisterName("enumerateObjectsWithOptions:usingBlock:")
 	_pHFetchResultSelEnumerateObjectsAtIndexesOptionsUsing = objc.RegisterName("enumerateObjectsAtIndexes:options:usingBlock:")
-	_pHFetchResultSelCountOfAssetsWithMediaType = objc.RegisterName("countOfAssetsWithMediaType:")
-	_pHFetchResultSelCount = objc.RegisterName("count")
-	_pHFetchResultSelFirstObject = objc.RegisterName("firstObject")
-	_pHFetchResultSelLastObject = objc.RegisterName("lastObject")
+	_pHFetchResultSelCountOfAssetsWithMediaType            = objc.RegisterName("countOfAssetsWithMediaType:")
+	_pHFetchResultSelCount                                 = objc.RegisterName("count")
+	_pHFetchResultSelFirstObject                           = objc.RegisterName("firstObject")
+	_pHFetchResultSelLastObject                            = objc.RegisterName("lastObject")
 )
 
 func PHFetchResultFromID[ObjectType purego.AnyObject](id objc.ID) *PHFetchResult[ObjectType] {
@@ -69,7 +69,9 @@ func (o *PHFetchResult[ObjectType]) IndexOfObjectInRange(anObject ObjectType, ra
 
 func (o *PHFetchResult[ObjectType]) ObjectsAtIndexes(indexes *foundation.NSIndexSet) *foundation.NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHFetchResultSelObjectsAtIndexes, indexes.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[ObjectType](_ret)
 }
 
@@ -104,4 +106,3 @@ func (o *PHFetchResult[ObjectType]) LastObject() ObjectType {
 	_ret := objc.Send[ObjectType](o.Ptr(), _pHFetchResultSelLastObject)
 	return _ret
 }
-

@@ -19,11 +19,11 @@ type GKPolygonObstacle struct {
 }
 
 var (
-	_clsGKPolygonObstacle = _objcClass("GKPolygonObstacle")
+	_clsGKPolygonObstacle                        = _objcClass("GKPolygonObstacle")
 	_gKPolygonObstacleSelObstacleWithPointsCount = objc.RegisterName("obstacleWithPoints:count:")
-	_gKPolygonObstacleSelInitWithPointsCount = objc.RegisterName("initWithPoints:count:")
-	_gKPolygonObstacleSelVertexAtIndex = objc.RegisterName("vertexAtIndex:")
-	_gKPolygonObstacleSelVertexCount = objc.RegisterName("vertexCount")
+	_gKPolygonObstacleSelInitWithPointsCount     = objc.RegisterName("initWithPoints:count:")
+	_gKPolygonObstacleSelVertexAtIndex           = objc.RegisterName("vertexAtIndex:")
+	_gKPolygonObstacleSelVertexCount             = objc.RegisterName("vertexCount")
 )
 
 func GKPolygonObstacleFromID(id objc.ID) *GKPolygonObstacle {
@@ -39,13 +39,17 @@ func GKPolygonObstacleFromID(id objc.ID) *GKPolygonObstacle {
 // Creates a polygon obstacle with an array of points. @param points array of points in counter-clockwise order that are the vertices of a convex polygon @param numPoints the number of points in the array
 func GKPolygonObstacleObstacleWithPointsCount(points unsafe.Pointer, numPoints uint) *GKPolygonObstacle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKPolygonObstacle), _gKPolygonObstacleSelObstacleWithPointsCount, points, numPoints)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKPolygonObstacleFromID(_ret)
 }
 
 func (o *GKPolygonObstacle) InitWithPointsCount(points unsafe.Pointer, numPoints uint) *GKPolygonObstacle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKPolygonObstacleSelInitWithPointsCount, points, numPoints)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKPolygonObstacleFromID(_ret)
 }
 
@@ -60,4 +64,3 @@ func (o *GKPolygonObstacle) VertexCount() uint {
 	_ret := objc.Send[uint](o.Ptr(), _gKPolygonObstacleSelVertexCount)
 	return _ret
 }
-

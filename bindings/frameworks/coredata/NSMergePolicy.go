@@ -18,17 +18,17 @@ type NSMergePolicy struct {
 }
 
 var (
-	_clsNSMergePolicy = _objcClass("NSMergePolicy")
-	_nSMergePolicySelInitWithMergeType = objc.RegisterName("initWithMergeType:")
-	_nSMergePolicySelResolveConflictsError = objc.RegisterName("resolveConflicts:error:")
+	_clsNSMergePolicy                                              = _objcClass("NSMergePolicy")
+	_nSMergePolicySelInitWithMergeType                             = objc.RegisterName("initWithMergeType:")
+	_nSMergePolicySelResolveConflictsError                         = objc.RegisterName("resolveConflicts:error:")
 	_nSMergePolicySelResolveOptimisticLockingVersionConflictsError = objc.RegisterName("resolveOptimisticLockingVersionConflicts:error:")
-	_nSMergePolicySelResolveConstraintConflictsError = objc.RegisterName("resolveConstraintConflicts:error:")
-	_nSMergePolicySelErrorMergePolicy = objc.RegisterName("errorMergePolicy")
-	_nSMergePolicySelRollbackMergePolicy = objc.RegisterName("rollbackMergePolicy")
-	_nSMergePolicySelOverwriteMergePolicy = objc.RegisterName("overwriteMergePolicy")
-	_nSMergePolicySelMergeByPropertyObjectTrumpMergePolicy = objc.RegisterName("mergeByPropertyObjectTrumpMergePolicy")
-	_nSMergePolicySelMergeByPropertyStoreTrumpMergePolicy = objc.RegisterName("mergeByPropertyStoreTrumpMergePolicy")
-	_nSMergePolicySelMergeType = objc.RegisterName("mergeType")
+	_nSMergePolicySelResolveConstraintConflictsError               = objc.RegisterName("resolveConstraintConflicts:error:")
+	_nSMergePolicySelErrorMergePolicy                              = objc.RegisterName("errorMergePolicy")
+	_nSMergePolicySelRollbackMergePolicy                           = objc.RegisterName("rollbackMergePolicy")
+	_nSMergePolicySelOverwriteMergePolicy                          = objc.RegisterName("overwriteMergePolicy")
+	_nSMergePolicySelMergeByPropertyObjectTrumpMergePolicy         = objc.RegisterName("mergeByPropertyObjectTrumpMergePolicy")
+	_nSMergePolicySelMergeByPropertyStoreTrumpMergePolicy          = objc.RegisterName("mergeByPropertyStoreTrumpMergePolicy")
+	_nSMergePolicySelMergeType                                     = objc.RegisterName("mergeType")
 )
 
 func NSMergePolicyFromID(id objc.ID) *NSMergePolicy {
@@ -75,31 +75,41 @@ func (o *NSMergePolicy) ResolveConstraintConflictsError(list *foundation.NSArray
 
 func NSMergePolicyErrorMergePolicy() *NSMergePolicy {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMergePolicy), _nSMergePolicySelErrorMergePolicy)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMergePolicyFromID(_ret)
 }
 
 func NSMergePolicyRollbackMergePolicy() *NSMergePolicy {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMergePolicy), _nSMergePolicySelRollbackMergePolicy)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMergePolicyFromID(_ret)
 }
 
 func NSMergePolicyOverwriteMergePolicy() *NSMergePolicy {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMergePolicy), _nSMergePolicySelOverwriteMergePolicy)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMergePolicyFromID(_ret)
 }
 
 func NSMergePolicyMergeByPropertyObjectTrumpMergePolicy() *NSMergePolicy {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMergePolicy), _nSMergePolicySelMergeByPropertyObjectTrumpMergePolicy)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMergePolicyFromID(_ret)
 }
 
 func NSMergePolicyMergeByPropertyStoreTrumpMergePolicy() *NSMergePolicy {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMergePolicy), _nSMergePolicySelMergeByPropertyStoreTrumpMergePolicy)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMergePolicyFromID(_ret)
 }
 
@@ -107,4 +117,3 @@ func (o *NSMergePolicy) MergeType() NSMergePolicyType {
 	_ret := objc.Send[NSMergePolicyType](o.Ptr(), _nSMergePolicySelMergeType)
 	return _ret
 }
-

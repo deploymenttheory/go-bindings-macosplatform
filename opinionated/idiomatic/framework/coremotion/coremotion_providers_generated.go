@@ -17,4 +17,3 @@ type LogItemProvider interface {
 type RotationRateDataProvider interface {
 	asRotationRateData() *raw.CMRotationRateData
 }
-

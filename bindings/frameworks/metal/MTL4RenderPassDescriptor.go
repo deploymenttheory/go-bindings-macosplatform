@@ -16,37 +16,37 @@ type MTL4RenderPassDescriptor struct {
 }
 
 var (
-	_clsMTL4RenderPassDescriptor = _objcClass("MTL4RenderPassDescriptor")
-	_mTL4RenderPassDescriptorSelSetSamplePositionsCount = objc.RegisterName("setSamplePositions:count:")
-	_mTL4RenderPassDescriptorSelGetSamplePositionsCount = objc.RegisterName("getSamplePositions:count:")
-	_mTL4RenderPassDescriptorSelColorAttachments = objc.RegisterName("colorAttachments")
-	_mTL4RenderPassDescriptorSelDepthAttachment = objc.RegisterName("depthAttachment")
-	_mTL4RenderPassDescriptorSelSetDepthAttachment = objc.RegisterName("setDepthAttachment:")
-	_mTL4RenderPassDescriptorSelStencilAttachment = objc.RegisterName("stencilAttachment")
-	_mTL4RenderPassDescriptorSelSetStencilAttachment = objc.RegisterName("setStencilAttachment:")
-	_mTL4RenderPassDescriptorSelRenderTargetArrayLength = objc.RegisterName("renderTargetArrayLength")
-	_mTL4RenderPassDescriptorSelSetRenderTargetArrayLength = objc.RegisterName("setRenderTargetArrayLength:")
-	_mTL4RenderPassDescriptorSelImageblockSampleLength = objc.RegisterName("imageblockSampleLength")
-	_mTL4RenderPassDescriptorSelSetImageblockSampleLength = objc.RegisterName("setImageblockSampleLength:")
-	_mTL4RenderPassDescriptorSelThreadgroupMemoryLength = objc.RegisterName("threadgroupMemoryLength")
-	_mTL4RenderPassDescriptorSelSetThreadgroupMemoryLength = objc.RegisterName("setThreadgroupMemoryLength:")
-	_mTL4RenderPassDescriptorSelTileWidth = objc.RegisterName("tileWidth")
-	_mTL4RenderPassDescriptorSelSetTileWidth = objc.RegisterName("setTileWidth:")
-	_mTL4RenderPassDescriptorSelTileHeight = objc.RegisterName("tileHeight")
-	_mTL4RenderPassDescriptorSelSetTileHeight = objc.RegisterName("setTileHeight:")
-	_mTL4RenderPassDescriptorSelDefaultRasterSampleCount = objc.RegisterName("defaultRasterSampleCount")
-	_mTL4RenderPassDescriptorSelSetDefaultRasterSampleCount = objc.RegisterName("setDefaultRasterSampleCount:")
-	_mTL4RenderPassDescriptorSelRenderTargetWidth = objc.RegisterName("renderTargetWidth")
-	_mTL4RenderPassDescriptorSelSetRenderTargetWidth = objc.RegisterName("setRenderTargetWidth:")
-	_mTL4RenderPassDescriptorSelRenderTargetHeight = objc.RegisterName("renderTargetHeight")
-	_mTL4RenderPassDescriptorSelSetRenderTargetHeight = objc.RegisterName("setRenderTargetHeight:")
-	_mTL4RenderPassDescriptorSelRasterizationRateMap = objc.RegisterName("rasterizationRateMap")
-	_mTL4RenderPassDescriptorSelSetRasterizationRateMap = objc.RegisterName("setRasterizationRateMap:")
-	_mTL4RenderPassDescriptorSelVisibilityResultBuffer = objc.RegisterName("visibilityResultBuffer")
-	_mTL4RenderPassDescriptorSelSetVisibilityResultBuffer = objc.RegisterName("setVisibilityResultBuffer:")
-	_mTL4RenderPassDescriptorSelVisibilityResultType = objc.RegisterName("visibilityResultType")
-	_mTL4RenderPassDescriptorSelSetVisibilityResultType = objc.RegisterName("setVisibilityResultType:")
-	_mTL4RenderPassDescriptorSelSupportColorAttachmentMapping = objc.RegisterName("supportColorAttachmentMapping")
+	_clsMTL4RenderPassDescriptor                                 = _objcClass("MTL4RenderPassDescriptor")
+	_mTL4RenderPassDescriptorSelSetSamplePositionsCount          = objc.RegisterName("setSamplePositions:count:")
+	_mTL4RenderPassDescriptorSelGetSamplePositionsCount          = objc.RegisterName("getSamplePositions:count:")
+	_mTL4RenderPassDescriptorSelColorAttachments                 = objc.RegisterName("colorAttachments")
+	_mTL4RenderPassDescriptorSelDepthAttachment                  = objc.RegisterName("depthAttachment")
+	_mTL4RenderPassDescriptorSelSetDepthAttachment               = objc.RegisterName("setDepthAttachment:")
+	_mTL4RenderPassDescriptorSelStencilAttachment                = objc.RegisterName("stencilAttachment")
+	_mTL4RenderPassDescriptorSelSetStencilAttachment             = objc.RegisterName("setStencilAttachment:")
+	_mTL4RenderPassDescriptorSelRenderTargetArrayLength          = objc.RegisterName("renderTargetArrayLength")
+	_mTL4RenderPassDescriptorSelSetRenderTargetArrayLength       = objc.RegisterName("setRenderTargetArrayLength:")
+	_mTL4RenderPassDescriptorSelImageblockSampleLength           = objc.RegisterName("imageblockSampleLength")
+	_mTL4RenderPassDescriptorSelSetImageblockSampleLength        = objc.RegisterName("setImageblockSampleLength:")
+	_mTL4RenderPassDescriptorSelThreadgroupMemoryLength          = objc.RegisterName("threadgroupMemoryLength")
+	_mTL4RenderPassDescriptorSelSetThreadgroupMemoryLength       = objc.RegisterName("setThreadgroupMemoryLength:")
+	_mTL4RenderPassDescriptorSelTileWidth                        = objc.RegisterName("tileWidth")
+	_mTL4RenderPassDescriptorSelSetTileWidth                     = objc.RegisterName("setTileWidth:")
+	_mTL4RenderPassDescriptorSelTileHeight                       = objc.RegisterName("tileHeight")
+	_mTL4RenderPassDescriptorSelSetTileHeight                    = objc.RegisterName("setTileHeight:")
+	_mTL4RenderPassDescriptorSelDefaultRasterSampleCount         = objc.RegisterName("defaultRasterSampleCount")
+	_mTL4RenderPassDescriptorSelSetDefaultRasterSampleCount      = objc.RegisterName("setDefaultRasterSampleCount:")
+	_mTL4RenderPassDescriptorSelRenderTargetWidth                = objc.RegisterName("renderTargetWidth")
+	_mTL4RenderPassDescriptorSelSetRenderTargetWidth             = objc.RegisterName("setRenderTargetWidth:")
+	_mTL4RenderPassDescriptorSelRenderTargetHeight               = objc.RegisterName("renderTargetHeight")
+	_mTL4RenderPassDescriptorSelSetRenderTargetHeight            = objc.RegisterName("setRenderTargetHeight:")
+	_mTL4RenderPassDescriptorSelRasterizationRateMap             = objc.RegisterName("rasterizationRateMap")
+	_mTL4RenderPassDescriptorSelSetRasterizationRateMap          = objc.RegisterName("setRasterizationRateMap:")
+	_mTL4RenderPassDescriptorSelVisibilityResultBuffer           = objc.RegisterName("visibilityResultBuffer")
+	_mTL4RenderPassDescriptorSelSetVisibilityResultBuffer        = objc.RegisterName("setVisibilityResultBuffer:")
+	_mTL4RenderPassDescriptorSelVisibilityResultType             = objc.RegisterName("visibilityResultType")
+	_mTL4RenderPassDescriptorSelSetVisibilityResultType          = objc.RegisterName("setVisibilityResultType:")
+	_mTL4RenderPassDescriptorSelSupportColorAttachmentMapping    = objc.RegisterName("supportColorAttachmentMapping")
 	_mTL4RenderPassDescriptorSelSetSupportColorAttachmentMapping = objc.RegisterName("setSupportColorAttachmentMapping:")
 )
 
@@ -60,12 +60,12 @@ func MTL4RenderPassDescriptorFromID(id objc.ID) *MTL4RenderPassDescriptor {
 	return o
 }
 
-// Configures the custom sample positions to use in MSAA rendering. - Parameters: - positions: Array of ``MTLSamplePosition`` instances. - count:     Number of ``MTLSamplePosition`` instances in the array. This value needs to be a valid sample count, or `0` to disable custom sample positions.
+// Configures the custom sample positions to use in MSAA rendering. - Parameters: - positions: Array of “MTLSamplePosition“ instances. - count:     Number of “MTLSamplePosition“ instances in the array. This value needs to be a valid sample count, or `0` to disable custom sample positions.
 func (o *MTL4RenderPassDescriptor) SetSamplePositionsCount(positions *MTLSamplePosition, count uint) {
 	o.Ptr().Send(_mTL4RenderPassDescriptorSelSetSamplePositionsCount, positions, count)
 }
 
-// Retrieves the previously-configured custom sample positions. This method stores the app's last set custom sample positions into an output array. Metal only modifies the array when the `count` parameter consists of a length sufficient to store the number of sample positions. - Parameters: - positions: The destination array where Metal stores ``MTLSamplePosition`` instances. - count:     Number of ``MTLSamplePosition`` instances in the array. This array needs to be large enough to store all sample positions. - Returns: The number of previously-configured custom sample positions.
+// Retrieves the previously-configured custom sample positions. This method stores the app's last set custom sample positions into an output array. Metal only modifies the array when the `count` parameter consists of a length sufficient to store the number of sample positions. - Parameters: - positions: The destination array where Metal stores “MTLSamplePosition“ instances. - count:     Number of “MTLSamplePosition“ instances in the array. This array needs to be large enough to store all sample positions. - Returns: The number of previously-configured custom sample positions.
 func (o *MTL4RenderPassDescriptor) GetSamplePositionsCount(positions *MTLSamplePosition, count uint) uint {
 	_ret := objc.Send[uint](o.Ptr(), _mTL4RenderPassDescriptorSelGetSamplePositionsCount, positions, count)
 	return _ret
@@ -74,14 +74,18 @@ func (o *MTL4RenderPassDescriptor) GetSamplePositionsCount(positions *MTLSampleP
 // Accesses the array of state information for render attachments that store color data.
 func (o *MTL4RenderPassDescriptor) ColorAttachments() *MTLRenderPassColorAttachmentDescriptorArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4RenderPassDescriptorSelColorAttachments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLRenderPassColorAttachmentDescriptorArrayFromID(_ret)
 }
 
 // Accesses state information for a render attachment that stores depth data.
 func (o *MTL4RenderPassDescriptor) DepthAttachment() *MTLRenderPassDepthAttachmentDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4RenderPassDescriptorSelDepthAttachment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLRenderPassDepthAttachmentDescriptorFromID(_ret)
 }
 
@@ -92,7 +96,9 @@ func (o *MTL4RenderPassDescriptor) SetDepthAttachment(depthAttachment *MTLRender
 // Accesses state information for a render attachment that stores stencil data.
 func (o *MTL4RenderPassDescriptor) StencilAttachment() *MTLRenderPassStencilAttachmentDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4RenderPassDescriptorSelStencilAttachment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLRenderPassStencilAttachmentDescriptorFromID(_ret)
 }
 
@@ -219,4 +225,3 @@ func (o *MTL4RenderPassDescriptor) SupportColorAttachmentMapping() bool {
 func (o *MTL4RenderPassDescriptor) SetSupportColorAttachmentMapping(supportColorAttachmentMapping bool) {
 	o.Ptr().Send(_mTL4RenderPassDescriptorSelSetSupportColorAttachmentMapping, supportColorAttachmentMapping)
 }
-

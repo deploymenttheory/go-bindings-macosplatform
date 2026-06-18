@@ -64,4 +64,3 @@ type EmailAddressable interface {
 }
 
 var _ EmailAddressable = (*EmailAddress)(nil)
-

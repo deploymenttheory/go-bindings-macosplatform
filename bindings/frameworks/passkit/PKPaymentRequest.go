@@ -18,68 +18,68 @@ type PKPaymentRequest struct {
 }
 
 var (
-	_clsPKPaymentRequest = _objcClass("PKPaymentRequest")
-	_pKPaymentRequestSelAvailableNetworks = objc.RegisterName("availableNetworks")
-	_pKPaymentRequestSelPaymentContactInvalidErrorWithContactFieldLocalizedDescription = objc.RegisterName("paymentContactInvalidErrorWithContactField:localizedDescription:")
-	_pKPaymentRequestSelPaymentShippingAddressInvalidErrorWithKeyLocalizedDescription = objc.RegisterName("paymentShippingAddressInvalidErrorWithKey:localizedDescription:")
-	_pKPaymentRequestSelPaymentBillingAddressInvalidErrorWithKeyLocalizedDescription = objc.RegisterName("paymentBillingAddressInvalidErrorWithKey:localizedDescription:")
+	_clsPKPaymentRequest                                                                 = _objcClass("PKPaymentRequest")
+	_pKPaymentRequestSelAvailableNetworks                                                = objc.RegisterName("availableNetworks")
+	_pKPaymentRequestSelPaymentContactInvalidErrorWithContactFieldLocalizedDescription   = objc.RegisterName("paymentContactInvalidErrorWithContactField:localizedDescription:")
+	_pKPaymentRequestSelPaymentShippingAddressInvalidErrorWithKeyLocalizedDescription    = objc.RegisterName("paymentShippingAddressInvalidErrorWithKey:localizedDescription:")
+	_pKPaymentRequestSelPaymentBillingAddressInvalidErrorWithKeyLocalizedDescription     = objc.RegisterName("paymentBillingAddressInvalidErrorWithKey:localizedDescription:")
 	_pKPaymentRequestSelPaymentShippingAddressUnserviceableErrorWithLocalizedDescription = objc.RegisterName("paymentShippingAddressUnserviceableErrorWithLocalizedDescription:")
-	_pKPaymentRequestSelPaymentCouponCodeInvalidErrorWithLocalizedDescription = objc.RegisterName("paymentCouponCodeInvalidErrorWithLocalizedDescription:")
-	_pKPaymentRequestSelPaymentCouponCodeExpiredErrorWithLocalizedDescription = objc.RegisterName("paymentCouponCodeExpiredErrorWithLocalizedDescription:")
-	_pKPaymentRequestSelMerchantIdentifier = objc.RegisterName("merchantIdentifier")
-	_pKPaymentRequestSelSetMerchantIdentifier = objc.RegisterName("setMerchantIdentifier:")
-	_pKPaymentRequestSelAttributionIdentifier = objc.RegisterName("attributionIdentifier")
-	_pKPaymentRequestSelSetAttributionIdentifier = objc.RegisterName("setAttributionIdentifier:")
-	_pKPaymentRequestSelCountryCode = objc.RegisterName("countryCode")
-	_pKPaymentRequestSelSetCountryCode = objc.RegisterName("setCountryCode:")
-	_pKPaymentRequestSelSupportedNetworks = objc.RegisterName("supportedNetworks")
-	_pKPaymentRequestSelSetSupportedNetworks = objc.RegisterName("setSupportedNetworks:")
-	_pKPaymentRequestSelMerchantCapabilities = objc.RegisterName("merchantCapabilities")
-	_pKPaymentRequestSelSetMerchantCapabilities = objc.RegisterName("setMerchantCapabilities:")
-	_pKPaymentRequestSelSupportsCouponCode = objc.RegisterName("supportsCouponCode")
-	_pKPaymentRequestSelSetSupportsCouponCode = objc.RegisterName("setSupportsCouponCode:")
-	_pKPaymentRequestSelCouponCode = objc.RegisterName("couponCode")
-	_pKPaymentRequestSelSetCouponCode = objc.RegisterName("setCouponCode:")
-	_pKPaymentRequestSelMerchantCategoryCode = objc.RegisterName("merchantCategoryCode")
-	_pKPaymentRequestSelSetMerchantCategoryCode = objc.RegisterName("setMerchantCategoryCode:")
-	_pKPaymentRequestSelPaymentSummaryItems = objc.RegisterName("paymentSummaryItems")
-	_pKPaymentRequestSelSetPaymentSummaryItems = objc.RegisterName("setPaymentSummaryItems:")
-	_pKPaymentRequestSelCurrencyCode = objc.RegisterName("currencyCode")
-	_pKPaymentRequestSelSetCurrencyCode = objc.RegisterName("setCurrencyCode:")
-	_pKPaymentRequestSelRequiredBillingContactFields = objc.RegisterName("requiredBillingContactFields")
-	_pKPaymentRequestSelSetRequiredBillingContactFields = objc.RegisterName("setRequiredBillingContactFields:")
-	_pKPaymentRequestSelRequiredBillingAddressFields = objc.RegisterName("requiredBillingAddressFields")
-	_pKPaymentRequestSelSetRequiredBillingAddressFields = objc.RegisterName("setRequiredBillingAddressFields:")
-	_pKPaymentRequestSelBillingContact = objc.RegisterName("billingContact")
-	_pKPaymentRequestSelSetBillingContact = objc.RegisterName("setBillingContact:")
-	_pKPaymentRequestSelRequiredShippingContactFields = objc.RegisterName("requiredShippingContactFields")
-	_pKPaymentRequestSelSetRequiredShippingContactFields = objc.RegisterName("setRequiredShippingContactFields:")
-	_pKPaymentRequestSelRequiredShippingAddressFields = objc.RegisterName("requiredShippingAddressFields")
-	_pKPaymentRequestSelSetRequiredShippingAddressFields = objc.RegisterName("setRequiredShippingAddressFields:")
-	_pKPaymentRequestSelShippingContact = objc.RegisterName("shippingContact")
-	_pKPaymentRequestSelSetShippingContact = objc.RegisterName("setShippingContact:")
-	_pKPaymentRequestSelShippingMethods = objc.RegisterName("shippingMethods")
-	_pKPaymentRequestSelSetShippingMethods = objc.RegisterName("setShippingMethods:")
-	_pKPaymentRequestSelShippingType = objc.RegisterName("shippingType")
-	_pKPaymentRequestSelSetShippingType = objc.RegisterName("setShippingType:")
-	_pKPaymentRequestSelShippingContactEditingMode = objc.RegisterName("shippingContactEditingMode")
-	_pKPaymentRequestSelSetShippingContactEditingMode = objc.RegisterName("setShippingContactEditingMode:")
-	_pKPaymentRequestSelApplicationData = objc.RegisterName("applicationData")
-	_pKPaymentRequestSelSetApplicationData = objc.RegisterName("setApplicationData:")
-	_pKPaymentRequestSelSupportedCountries = objc.RegisterName("supportedCountries")
-	_pKPaymentRequestSelSetSupportedCountries = objc.RegisterName("setSupportedCountries:")
-	_pKPaymentRequestSelMultiTokenContexts = objc.RegisterName("multiTokenContexts")
-	_pKPaymentRequestSelSetMultiTokenContexts = objc.RegisterName("setMultiTokenContexts:")
-	_pKPaymentRequestSelRecurringPaymentRequest = objc.RegisterName("recurringPaymentRequest")
-	_pKPaymentRequestSelSetRecurringPaymentRequest = objc.RegisterName("setRecurringPaymentRequest:")
-	_pKPaymentRequestSelAutomaticReloadPaymentRequest = objc.RegisterName("automaticReloadPaymentRequest")
-	_pKPaymentRequestSelSetAutomaticReloadPaymentRequest = objc.RegisterName("setAutomaticReloadPaymentRequest:")
-	_pKPaymentRequestSelDeferredPaymentRequest = objc.RegisterName("deferredPaymentRequest")
-	_pKPaymentRequestSelSetDeferredPaymentRequest = objc.RegisterName("setDeferredPaymentRequest:")
-	_pKPaymentRequestSelApplePayLaterAvailability = objc.RegisterName("applePayLaterAvailability")
-	_pKPaymentRequestSelSetApplePayLaterAvailability = objc.RegisterName("setApplePayLaterAvailability:")
-	_pKPaymentRequestSelIsDelegatedRequest = objc.RegisterName("isDelegatedRequest")
-	_pKPaymentRequestSelSetIsDelegatedRequest = objc.RegisterName("setIsDelegatedRequest:")
+	_pKPaymentRequestSelPaymentCouponCodeInvalidErrorWithLocalizedDescription            = objc.RegisterName("paymentCouponCodeInvalidErrorWithLocalizedDescription:")
+	_pKPaymentRequestSelPaymentCouponCodeExpiredErrorWithLocalizedDescription            = objc.RegisterName("paymentCouponCodeExpiredErrorWithLocalizedDescription:")
+	_pKPaymentRequestSelMerchantIdentifier                                               = objc.RegisterName("merchantIdentifier")
+	_pKPaymentRequestSelSetMerchantIdentifier                                            = objc.RegisterName("setMerchantIdentifier:")
+	_pKPaymentRequestSelAttributionIdentifier                                            = objc.RegisterName("attributionIdentifier")
+	_pKPaymentRequestSelSetAttributionIdentifier                                         = objc.RegisterName("setAttributionIdentifier:")
+	_pKPaymentRequestSelCountryCode                                                      = objc.RegisterName("countryCode")
+	_pKPaymentRequestSelSetCountryCode                                                   = objc.RegisterName("setCountryCode:")
+	_pKPaymentRequestSelSupportedNetworks                                                = objc.RegisterName("supportedNetworks")
+	_pKPaymentRequestSelSetSupportedNetworks                                             = objc.RegisterName("setSupportedNetworks:")
+	_pKPaymentRequestSelMerchantCapabilities                                             = objc.RegisterName("merchantCapabilities")
+	_pKPaymentRequestSelSetMerchantCapabilities                                          = objc.RegisterName("setMerchantCapabilities:")
+	_pKPaymentRequestSelSupportsCouponCode                                               = objc.RegisterName("supportsCouponCode")
+	_pKPaymentRequestSelSetSupportsCouponCode                                            = objc.RegisterName("setSupportsCouponCode:")
+	_pKPaymentRequestSelCouponCode                                                       = objc.RegisterName("couponCode")
+	_pKPaymentRequestSelSetCouponCode                                                    = objc.RegisterName("setCouponCode:")
+	_pKPaymentRequestSelMerchantCategoryCode                                             = objc.RegisterName("merchantCategoryCode")
+	_pKPaymentRequestSelSetMerchantCategoryCode                                          = objc.RegisterName("setMerchantCategoryCode:")
+	_pKPaymentRequestSelPaymentSummaryItems                                              = objc.RegisterName("paymentSummaryItems")
+	_pKPaymentRequestSelSetPaymentSummaryItems                                           = objc.RegisterName("setPaymentSummaryItems:")
+	_pKPaymentRequestSelCurrencyCode                                                     = objc.RegisterName("currencyCode")
+	_pKPaymentRequestSelSetCurrencyCode                                                  = objc.RegisterName("setCurrencyCode:")
+	_pKPaymentRequestSelRequiredBillingContactFields                                     = objc.RegisterName("requiredBillingContactFields")
+	_pKPaymentRequestSelSetRequiredBillingContactFields                                  = objc.RegisterName("setRequiredBillingContactFields:")
+	_pKPaymentRequestSelRequiredBillingAddressFields                                     = objc.RegisterName("requiredBillingAddressFields")
+	_pKPaymentRequestSelSetRequiredBillingAddressFields                                  = objc.RegisterName("setRequiredBillingAddressFields:")
+	_pKPaymentRequestSelBillingContact                                                   = objc.RegisterName("billingContact")
+	_pKPaymentRequestSelSetBillingContact                                                = objc.RegisterName("setBillingContact:")
+	_pKPaymentRequestSelRequiredShippingContactFields                                    = objc.RegisterName("requiredShippingContactFields")
+	_pKPaymentRequestSelSetRequiredShippingContactFields                                 = objc.RegisterName("setRequiredShippingContactFields:")
+	_pKPaymentRequestSelRequiredShippingAddressFields                                    = objc.RegisterName("requiredShippingAddressFields")
+	_pKPaymentRequestSelSetRequiredShippingAddressFields                                 = objc.RegisterName("setRequiredShippingAddressFields:")
+	_pKPaymentRequestSelShippingContact                                                  = objc.RegisterName("shippingContact")
+	_pKPaymentRequestSelSetShippingContact                                               = objc.RegisterName("setShippingContact:")
+	_pKPaymentRequestSelShippingMethods                                                  = objc.RegisterName("shippingMethods")
+	_pKPaymentRequestSelSetShippingMethods                                               = objc.RegisterName("setShippingMethods:")
+	_pKPaymentRequestSelShippingType                                                     = objc.RegisterName("shippingType")
+	_pKPaymentRequestSelSetShippingType                                                  = objc.RegisterName("setShippingType:")
+	_pKPaymentRequestSelShippingContactEditingMode                                       = objc.RegisterName("shippingContactEditingMode")
+	_pKPaymentRequestSelSetShippingContactEditingMode                                    = objc.RegisterName("setShippingContactEditingMode:")
+	_pKPaymentRequestSelApplicationData                                                  = objc.RegisterName("applicationData")
+	_pKPaymentRequestSelSetApplicationData                                               = objc.RegisterName("setApplicationData:")
+	_pKPaymentRequestSelSupportedCountries                                               = objc.RegisterName("supportedCountries")
+	_pKPaymentRequestSelSetSupportedCountries                                            = objc.RegisterName("setSupportedCountries:")
+	_pKPaymentRequestSelMultiTokenContexts                                               = objc.RegisterName("multiTokenContexts")
+	_pKPaymentRequestSelSetMultiTokenContexts                                            = objc.RegisterName("setMultiTokenContexts:")
+	_pKPaymentRequestSelRecurringPaymentRequest                                          = objc.RegisterName("recurringPaymentRequest")
+	_pKPaymentRequestSelSetRecurringPaymentRequest                                       = objc.RegisterName("setRecurringPaymentRequest:")
+	_pKPaymentRequestSelAutomaticReloadPaymentRequest                                    = objc.RegisterName("automaticReloadPaymentRequest")
+	_pKPaymentRequestSelSetAutomaticReloadPaymentRequest                                 = objc.RegisterName("setAutomaticReloadPaymentRequest:")
+	_pKPaymentRequestSelDeferredPaymentRequest                                           = objc.RegisterName("deferredPaymentRequest")
+	_pKPaymentRequestSelSetDeferredPaymentRequest                                        = objc.RegisterName("setDeferredPaymentRequest:")
+	_pKPaymentRequestSelApplePayLaterAvailability                                        = objc.RegisterName("applePayLaterAvailability")
+	_pKPaymentRequestSelSetApplePayLaterAvailability                                     = objc.RegisterName("setApplePayLaterAvailability:")
+	_pKPaymentRequestSelIsDelegatedRequest                                               = objc.RegisterName("isDelegatedRequest")
+	_pKPaymentRequestSelSetIsDelegatedRequest                                            = objc.RegisterName("setIsDelegatedRequest:")
 )
 
 func PKPaymentRequestFromID(id objc.ID) *PKPaymentRequest {
@@ -129,7 +129,9 @@ func PKPaymentRequestPaymentCouponCodeExpiredErrorWithLocalizedDescription(local
 
 func (o *PKPaymentRequest) MerchantIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestSelMerchantIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -139,7 +141,9 @@ func (o *PKPaymentRequest) SetMerchantIdentifier(merchantIdentifier *foundation.
 
 func (o *PKPaymentRequest) AttributionIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestSelAttributionIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -149,7 +153,9 @@ func (o *PKPaymentRequest) SetAttributionIdentifier(attributionIdentifier *found
 
 func (o *PKPaymentRequest) CountryCode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestSelCountryCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -186,7 +192,9 @@ func (o *PKPaymentRequest) SetSupportsCouponCode(supportsCouponCode bool) {
 
 func (o *PKPaymentRequest) CouponCode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestSelCouponCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -205,7 +213,9 @@ func (o *PKPaymentRequest) SetMerchantCategoryCode(merchantCategoryCode int16) {
 
 func (o *PKPaymentRequest) PaymentSummaryItems() *foundation.NSArray[*PKPaymentSummaryItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestSelPaymentSummaryItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PKPaymentSummaryItem](_ret)
 }
 
@@ -215,7 +225,9 @@ func (o *PKPaymentRequest) SetPaymentSummaryItems(paymentSummaryItems *foundatio
 
 func (o *PKPaymentRequest) CurrencyCode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestSelCurrencyCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -243,7 +255,9 @@ func (o *PKPaymentRequest) SetRequiredBillingAddressFields(requiredBillingAddres
 
 func (o *PKPaymentRequest) BillingContact() *PKContact {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestSelBillingContact)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKContactFromID(_ret)
 }
 
@@ -271,7 +285,9 @@ func (o *PKPaymentRequest) SetRequiredShippingAddressFields(requiredShippingAddr
 
 func (o *PKPaymentRequest) ShippingContact() *PKContact {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestSelShippingContact)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKContactFromID(_ret)
 }
 
@@ -281,7 +297,9 @@ func (o *PKPaymentRequest) SetShippingContact(shippingContact *PKContact) {
 
 func (o *PKPaymentRequest) ShippingMethods() *foundation.NSArray[*PKShippingMethod] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestSelShippingMethods)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PKShippingMethod](_ret)
 }
 
@@ -309,7 +327,9 @@ func (o *PKPaymentRequest) SetShippingContactEditingMode(shippingContactEditingM
 
 func (o *PKPaymentRequest) ApplicationData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestSelApplicationData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -328,7 +348,9 @@ func (o *PKPaymentRequest) SetSupportedCountries(supportedCountries *foundation.
 
 func (o *PKPaymentRequest) MultiTokenContexts() *foundation.NSArray[*PKPaymentTokenContext] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestSelMultiTokenContexts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PKPaymentTokenContext](_ret)
 }
 
@@ -338,7 +360,9 @@ func (o *PKPaymentRequest) SetMultiTokenContexts(multiTokenContexts *foundation.
 
 func (o *PKPaymentRequest) RecurringPaymentRequest() *PKRecurringPaymentRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestSelRecurringPaymentRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKRecurringPaymentRequestFromID(_ret)
 }
 
@@ -348,7 +372,9 @@ func (o *PKPaymentRequest) SetRecurringPaymentRequest(recurringPaymentRequest *P
 
 func (o *PKPaymentRequest) AutomaticReloadPaymentRequest() *PKAutomaticReloadPaymentRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestSelAutomaticReloadPaymentRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKAutomaticReloadPaymentRequestFromID(_ret)
 }
 
@@ -358,7 +384,9 @@ func (o *PKPaymentRequest) SetAutomaticReloadPaymentRequest(automaticReloadPayme
 
 func (o *PKPaymentRequest) DeferredPaymentRequest() *PKDeferredPaymentRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestSelDeferredPaymentRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKDeferredPaymentRequestFromID(_ret)
 }
 
@@ -384,4 +412,3 @@ func (o *PKPaymentRequest) IsDelegatedRequest() bool {
 func (o *PKPaymentRequest) SetIsDelegatedRequest(isDelegatedRequest bool) {
 	o.Ptr().Send(_pKPaymentRequestSelSetIsDelegatedRequest, isDelegatedRequest)
 }
-

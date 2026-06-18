@@ -17,7 +17,9 @@ type MTRClusterActivatedCarbonFilterMonitoring struct {
 }
 
 // Unwrap returns the underlying [raw.MTRClusterActivatedCarbonFilterMonitoring].
-func (x *MTRClusterActivatedCarbonFilterMonitoring) Unwrap() *raw.MTRClusterActivatedCarbonFilterMonitoring { return x.inner }
+func (x *MTRClusterActivatedCarbonFilterMonitoring) Unwrap() *raw.MTRClusterActivatedCarbonFilterMonitoring {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -113,9 +115,13 @@ func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeClusterRevision
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterActivatedCarbonFilterMonitoring) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterActivatedCarbonFilterMonitoring) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterActivatedCarbonFilterMonitoring) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterActivatedCarbonFilterMonitoring) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterActivatedCarbonFilterMonitoringable is the interface implemented by [MTRClusterActivatedCarbonFilterMonitoring], for mocking and DI.
 type MTRClusterActivatedCarbonFilterMonitoringable interface {
@@ -138,4 +144,3 @@ type MTRClusterActivatedCarbonFilterMonitoringable interface {
 }
 
 var _ MTRClusterActivatedCarbonFilterMonitoringable = (*MTRClusterActivatedCarbonFilterMonitoring)(nil)
-

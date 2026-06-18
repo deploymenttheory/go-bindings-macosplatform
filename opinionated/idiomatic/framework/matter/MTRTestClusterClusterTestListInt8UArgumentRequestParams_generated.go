@@ -16,7 +16,9 @@ type MTRTestClusterClusterTestListInt8UArgumentRequestParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRTestClusterClusterTestListInt8UArgumentRequestParams].
-func (x *MTRTestClusterClusterTestListInt8UArgumentRequestParams) Unwrap() *raw.MTRTestClusterClusterTestListInt8UArgumentRequestParams { return x.inner }
+func (x *MTRTestClusterClusterTestListInt8UArgumentRequestParams) Unwrap() *raw.MTRTestClusterClusterTestListInt8UArgumentRequestParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -48,7 +50,9 @@ func (x *MTRTestClusterClusterTestListInt8UArgumentRequestParams) WithServerSide
 	return x
 }
 
-func (x *MTRTestClusterClusterTestListInt8UArgumentRequestParams) asMTRUnitTestingClusterTestListInt8UArgumentRequestParams() *raw.MTRUnitTestingClusterTestListInt8UArgumentRequestParams { return &x.inner.MTRUnitTestingClusterTestListInt8UArgumentRequestParams }
+func (x *MTRTestClusterClusterTestListInt8UArgumentRequestParams) asMTRUnitTestingClusterTestListInt8UArgumentRequestParams() *raw.MTRUnitTestingClusterTestListInt8UArgumentRequestParams {
+	return &x.inner.MTRUnitTestingClusterTestListInt8UArgumentRequestParams
+}
 
 // MTRTestClusterClusterTestListInt8UArgumentRequestParamsable is the interface implemented by [MTRTestClusterClusterTestListInt8UArgumentRequestParams], for mocking and DI.
 type MTRTestClusterClusterTestListInt8UArgumentRequestParamsable interface {
@@ -58,4 +62,3 @@ type MTRTestClusterClusterTestListInt8UArgumentRequestParamsable interface {
 }
 
 var _ MTRTestClusterClusterTestListInt8UArgumentRequestParamsable = (*MTRTestClusterClusterTestListInt8UArgumentRequestParams)(nil)
-

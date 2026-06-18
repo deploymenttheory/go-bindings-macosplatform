@@ -80,4 +80,3 @@ type PredictionOptionsable interface {
 }
 
 var _ PredictionOptionsable = (*PredictionOptions)(nil)
-

@@ -94,4 +94,3 @@ type Tokenable interface {
 }
 
 var _ Tokenable = (*Token)(nil)
-

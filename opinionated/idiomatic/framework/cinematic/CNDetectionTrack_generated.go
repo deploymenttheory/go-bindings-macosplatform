@@ -101,4 +101,3 @@ type DetectionTrackable interface {
 }
 
 var _ DetectionTrackable = (*DetectionTrack)(nil)
-

@@ -17,45 +17,45 @@ type NSTask struct {
 }
 
 var (
-	_clsNSTask = _objcClass("NSTask")
-	_nSTaskSelInit = objc.RegisterName("init")
-	_nSTaskSelLaunchAndReturnError = objc.RegisterName("launchAndReturnError:")
-	_nSTaskSelInterrupt = objc.RegisterName("interrupt")
-	_nSTaskSelTerminate = objc.RegisterName("terminate")
-	_nSTaskSelSuspend = objc.RegisterName("suspend")
-	_nSTaskSelResume = objc.RegisterName("resume")
-	_nSTaskSelExecutableURL = objc.RegisterName("executableURL")
-	_nSTaskSelSetExecutableURL = objc.RegisterName("setExecutableURL:")
-	_nSTaskSelArguments = objc.RegisterName("arguments")
-	_nSTaskSelSetArguments = objc.RegisterName("setArguments:")
-	_nSTaskSelEnvironment = objc.RegisterName("environment")
-	_nSTaskSelSetEnvironment = objc.RegisterName("setEnvironment:")
-	_nSTaskSelCurrentDirectoryURL = objc.RegisterName("currentDirectoryURL")
-	_nSTaskSelSetCurrentDirectoryURL = objc.RegisterName("setCurrentDirectoryURL:")
-	_nSTaskSelLaunchRequirementData = objc.RegisterName("launchRequirementData")
-	_nSTaskSelSetLaunchRequirementData = objc.RegisterName("setLaunchRequirementData:")
-	_nSTaskSelStandardInput = objc.RegisterName("standardInput")
-	_nSTaskSelSetStandardInput = objc.RegisterName("setStandardInput:")
-	_nSTaskSelStandardOutput = objc.RegisterName("standardOutput")
-	_nSTaskSelSetStandardOutput = objc.RegisterName("setStandardOutput:")
-	_nSTaskSelStandardError = objc.RegisterName("standardError")
-	_nSTaskSelSetStandardError = objc.RegisterName("setStandardError:")
-	_nSTaskSelProcessIdentifier = objc.RegisterName("processIdentifier")
-	_nSTaskSelIsRunning = objc.RegisterName("isRunning")
-	_nSTaskSelTerminationStatus = objc.RegisterName("terminationStatus")
-	_nSTaskSelTerminationReason = objc.RegisterName("terminationReason")
-	_nSTaskSelTerminationHandler = objc.RegisterName("terminationHandler")
-	_nSTaskSelSetTerminationHandler = objc.RegisterName("setTerminationHandler:")
-	_nSTaskSelQualityOfService = objc.RegisterName("qualityOfService")
-	_nSTaskSelSetQualityOfService = objc.RegisterName("setQualityOfService:")
+	_clsNSTask                                                              = _objcClass("NSTask")
+	_nSTaskSelInit                                                          = objc.RegisterName("init")
+	_nSTaskSelLaunchAndReturnError                                          = objc.RegisterName("launchAndReturnError:")
+	_nSTaskSelInterrupt                                                     = objc.RegisterName("interrupt")
+	_nSTaskSelTerminate                                                     = objc.RegisterName("terminate")
+	_nSTaskSelSuspend                                                       = objc.RegisterName("suspend")
+	_nSTaskSelResume                                                        = objc.RegisterName("resume")
+	_nSTaskSelExecutableURL                                                 = objc.RegisterName("executableURL")
+	_nSTaskSelSetExecutableURL                                              = objc.RegisterName("setExecutableURL:")
+	_nSTaskSelArguments                                                     = objc.RegisterName("arguments")
+	_nSTaskSelSetArguments                                                  = objc.RegisterName("setArguments:")
+	_nSTaskSelEnvironment                                                   = objc.RegisterName("environment")
+	_nSTaskSelSetEnvironment                                                = objc.RegisterName("setEnvironment:")
+	_nSTaskSelCurrentDirectoryURL                                           = objc.RegisterName("currentDirectoryURL")
+	_nSTaskSelSetCurrentDirectoryURL                                        = objc.RegisterName("setCurrentDirectoryURL:")
+	_nSTaskSelLaunchRequirementData                                         = objc.RegisterName("launchRequirementData")
+	_nSTaskSelSetLaunchRequirementData                                      = objc.RegisterName("setLaunchRequirementData:")
+	_nSTaskSelStandardInput                                                 = objc.RegisterName("standardInput")
+	_nSTaskSelSetStandardInput                                              = objc.RegisterName("setStandardInput:")
+	_nSTaskSelStandardOutput                                                = objc.RegisterName("standardOutput")
+	_nSTaskSelSetStandardOutput                                             = objc.RegisterName("setStandardOutput:")
+	_nSTaskSelStandardError                                                 = objc.RegisterName("standardError")
+	_nSTaskSelSetStandardError                                              = objc.RegisterName("setStandardError:")
+	_nSTaskSelProcessIdentifier                                             = objc.RegisterName("processIdentifier")
+	_nSTaskSelIsRunning                                                     = objc.RegisterName("isRunning")
+	_nSTaskSelTerminationStatus                                             = objc.RegisterName("terminationStatus")
+	_nSTaskSelTerminationReason                                             = objc.RegisterName("terminationReason")
+	_nSTaskSelTerminationHandler                                            = objc.RegisterName("terminationHandler")
+	_nSTaskSelSetTerminationHandler                                         = objc.RegisterName("setTerminationHandler:")
+	_nSTaskSelQualityOfService                                              = objc.RegisterName("qualityOfService")
+	_nSTaskSelSetQualityOfService                                           = objc.RegisterName("setQualityOfService:")
 	_nSTaskSelLaunchedTaskWithExecutableURLArgumentsErrorTerminationHandler = objc.RegisterName("launchedTaskWithExecutableURL:arguments:error:terminationHandler:")
-	_nSTaskSelWaitUntilExit = objc.RegisterName("waitUntilExit")
-	_nSTaskSelLaunch = objc.RegisterName("launch")
-	_nSTaskSelLaunchedTaskWithLaunchPathArguments = objc.RegisterName("launchedTaskWithLaunchPath:arguments:")
-	_nSTaskSelLaunchPath = objc.RegisterName("launchPath")
-	_nSTaskSelSetLaunchPath = objc.RegisterName("setLaunchPath:")
-	_nSTaskSelCurrentDirectoryPath = objc.RegisterName("currentDirectoryPath")
-	_nSTaskSelSetCurrentDirectoryPath = objc.RegisterName("setCurrentDirectoryPath:")
+	_nSTaskSelWaitUntilExit                                                 = objc.RegisterName("waitUntilExit")
+	_nSTaskSelLaunch                                                        = objc.RegisterName("launch")
+	_nSTaskSelLaunchedTaskWithLaunchPathArguments                           = objc.RegisterName("launchedTaskWithLaunchPath:arguments:")
+	_nSTaskSelLaunchPath                                                    = objc.RegisterName("launchPath")
+	_nSTaskSelSetLaunchPath                                                 = objc.RegisterName("setLaunchPath:")
+	_nSTaskSelCurrentDirectoryPath                                          = objc.RegisterName("currentDirectoryPath")
+	_nSTaskSelSetCurrentDirectoryPath                                       = objc.RegisterName("setCurrentDirectoryPath:")
 )
 
 func NSTaskFromID(id objc.ID) *NSTask {
@@ -70,7 +70,9 @@ func NSTaskFromID(id objc.ID) *NSTask {
 
 func (o *NSTask) Init() *NSTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTaskSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTaskFromID(_ret)
 }
 
@@ -103,7 +105,9 @@ func (o *NSTask) Resume() bool {
 
 func (o *NSTask) ExecutableURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTaskSelExecutableURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
@@ -113,7 +117,9 @@ func (o *NSTask) SetExecutableURL(executableURL *NSURL) {
 
 func (o *NSTask) Arguments() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTaskSelArguments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -123,7 +129,9 @@ func (o *NSTask) SetArguments(arguments *NSArray[*NSString]) {
 
 func (o *NSTask) Environment() *NSDictionary[*NSString, *NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTaskSelEnvironment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDictionaryFromID[*NSString, *NSString](_ret)
 }
 
@@ -133,7 +141,9 @@ func (o *NSTask) SetEnvironment(environment *NSDictionary[*NSString, *NSString])
 
 func (o *NSTask) CurrentDirectoryURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTaskSelCurrentDirectoryURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
@@ -143,7 +153,9 @@ func (o *NSTask) SetCurrentDirectoryURL(currentDirectoryURL *NSURL) {
 
 func (o *NSTask) LaunchRequirementData() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTaskSelLaunchRequirementData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
@@ -238,7 +250,9 @@ func NSTaskLaunchedTaskWithExecutableURLArgumentsErrorTerminationHandler(url *NS
 		defer __block_terminationHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTask), _nSTaskSelLaunchedTaskWithExecutableURLArgumentsErrorTerminationHandler, url.Ptr(), arguments.Ptr(), error_, __block_terminationHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTaskFromID(_ret)
 }
 
@@ -254,7 +268,9 @@ func (o *NSTask) Launch() {
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func NSTaskLaunchedTaskWithLaunchPathArguments(path *NSString, arguments *NSArray[*NSString]) *NSTask {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTask), _nSTaskSelLaunchedTaskWithLaunchPathArguments, path.Ptr(), arguments.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTaskFromID(_ret)
 }
 
@@ -279,4 +295,3 @@ func (o *NSTask) CurrentDirectoryPath() unsafe.Pointer {
 func (o *NSTask) SetCurrentDirectoryPath(currentDirectoryPath unsafe.Pointer) {
 	o.Ptr().Send(_nSTaskSelSetCurrentDirectoryPath, currentDirectoryPath)
 }
-

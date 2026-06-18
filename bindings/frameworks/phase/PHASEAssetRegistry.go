@@ -19,14 +19,14 @@ type PHASEAssetRegistry struct {
 }
 
 var (
-	_clsPHASEAssetRegistry = _objcClass("PHASEAssetRegistry")
-	_pHASEAssetRegistrySelRegisterGlobalMetaParameterError = objc.RegisterName("registerGlobalMetaParameter:error:")
-	_pHASEAssetRegistrySelRegisterSoundEventAssetWithRootNodeIdentifierError = objc.RegisterName("registerSoundEventAssetWithRootNode:identifier:error:")
+	_clsPHASEAssetRegistry                                                                              = _objcClass("PHASEAssetRegistry")
+	_pHASEAssetRegistrySelRegisterGlobalMetaParameterError                                              = objc.RegisterName("registerGlobalMetaParameter:error:")
+	_pHASEAssetRegistrySelRegisterSoundEventAssetWithRootNodeIdentifierError                            = objc.RegisterName("registerSoundEventAssetWithRootNode:identifier:error:")
 	_pHASEAssetRegistrySelRegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutNormalizationModeError = objc.RegisterName("registerSoundAssetAtURL:identifier:assetType:channelLayout:normalizationMode:error:")
-	_pHASEAssetRegistrySelRegisterSoundAssetWithDataIdentifierFormatNormalizationModeError = objc.RegisterName("registerSoundAssetWithData:identifier:format:normalizationMode:error:")
-	_pHASEAssetRegistrySelUnregisterAssetWithIdentifierCompletion = objc.RegisterName("unregisterAssetWithIdentifier:completion:")
-	_pHASEAssetRegistrySelAssetForIdentifier = objc.RegisterName("assetForIdentifier:")
-	_pHASEAssetRegistrySelGlobalMetaParameters = objc.RegisterName("globalMetaParameters")
+	_pHASEAssetRegistrySelRegisterSoundAssetWithDataIdentifierFormatNormalizationModeError              = objc.RegisterName("registerSoundAssetWithData:identifier:format:normalizationMode:error:")
+	_pHASEAssetRegistrySelUnregisterAssetWithIdentifierCompletion                                       = objc.RegisterName("unregisterAssetWithIdentifier:completion:")
+	_pHASEAssetRegistrySelAssetForIdentifier                                                            = objc.RegisterName("assetForIdentifier:")
+	_pHASEAssetRegistrySelGlobalMetaParameters                                                          = objc.RegisterName("globalMetaParameters")
 )
 
 func PHASEAssetRegistryFromID(id objc.ID) *PHASEAssetRegistry {
@@ -43,7 +43,9 @@ func PHASEAssetRegistryFromID(id objc.ID) *PHASEAssetRegistry {
 func (o *PHASEAssetRegistry) RegisterGlobalMetaParameterError(metaParameterDefinition *PHASEMetaParameterDefinition) (*PHASEGlobalMetaParameterAsset, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEAssetRegistrySelRegisterGlobalMetaParameterError, metaParameterDefinition.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -54,7 +56,9 @@ func (o *PHASEAssetRegistry) RegisterGlobalMetaParameterError(metaParameterDefin
 func (o *PHASEAssetRegistry) RegisterSoundEventAssetWithRootNodeIdentifierError(rootNode *PHASESoundEventNodeDefinition, identifier *foundation.NSString) (*PHASESoundEventNodeAsset, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEAssetRegistrySelRegisterSoundEventAssetWithRootNodeIdentifierError, rootNode.Ptr(), identifier.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -65,7 +69,9 @@ func (o *PHASEAssetRegistry) RegisterSoundEventAssetWithRootNodeIdentifierError(
 func (o *PHASEAssetRegistry) RegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutNormalizationModeError(url *foundation.NSURL, identifier *foundation.NSString, assetType PHASEAssetType, channelLayout *avfaudio.AVAudioChannelLayout, normalizationMode PHASENormalizationMode) (*PHASESoundAsset, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEAssetRegistrySelRegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutNormalizationModeError, url.Ptr(), identifier.Ptr(), assetType, channelLayout.Ptr(), normalizationMode, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -76,7 +82,9 @@ func (o *PHASEAssetRegistry) RegisterSoundAssetAtURLIdentifierAssetTypeChannelLa
 func (o *PHASEAssetRegistry) RegisterSoundAssetWithDataIdentifierFormatNormalizationModeError(data *foundation.NSData, identifier *foundation.NSString, format *avfaudio.AVAudioFormat, normalizationMode PHASENormalizationMode) (*PHASESoundAsset, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEAssetRegistrySelRegisterSoundAssetWithDataIdentifierFormatNormalizationModeError, data.Ptr(), identifier.Ptr(), format.Ptr(), normalizationMode, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -98,7 +106,9 @@ func (o *PHASEAssetRegistry) UnregisterAssetWithIdentifierCompletion(identifier 
 // @method assetForIdentifier @abstract Finds an asset in the asset registry, given an identifier. @param identifier The identifier of this asset @return A PHASEAsset object, or nil if one could not be found.
 func (o *PHASEAssetRegistry) AssetForIdentifier(identifier *foundation.NSString) *PHASEAsset {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEAssetRegistrySelAssetForIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEAssetFromID(_ret)
 }
 
@@ -106,4 +116,3 @@ func (o *PHASEAssetRegistry) GlobalMetaParameters() *foundation.NSDictionary[*fo
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *PHASEMetaParameter]](o.Ptr(), _pHASEAssetRegistrySelGlobalMetaParameters)
 	return _ret
 }
-

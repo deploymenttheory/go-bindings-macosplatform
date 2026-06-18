@@ -16,8 +16,8 @@ type AUParameterGroup struct {
 }
 
 var (
-	_clsAUParameterGroup = _objcClass("AUParameterGroup")
-	_aUParameterGroupSelChildren = objc.RegisterName("children")
+	_clsAUParameterGroup              = _objcClass("AUParameterGroup")
+	_aUParameterGroupSelChildren      = objc.RegisterName("children")
 	_aUParameterGroupSelAllParameters = objc.RegisterName("allParameters")
 )
 
@@ -34,14 +34,17 @@ func AUParameterGroupFromID(id objc.ID) *AUParameterGroup {
 // The group's child nodes (AUParameterGroupNode).
 func (o *AUParameterGroup) Children() *foundation.NSArray[*AUParameterNode] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUParameterGroupSelChildren)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AUParameterNode](_ret)
 }
 
 // Returns a flat array of all parameters in the group, including those in child groups.
 func (o *AUParameterGroup) AllParameters() *foundation.NSArray[*AUParameter] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUParameterGroupSelAllParameters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AUParameter](_ret)
 }
-

@@ -63,4 +63,3 @@ type ExtendedTempoEventable interface {
 }
 
 var _ ExtendedTempoEventable = (*ExtendedTempoEvent)(nil)
-

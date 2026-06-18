@@ -16,13 +16,13 @@ type MTRTargetNavigatorClusterTargetUpdatedEvent struct {
 }
 
 var (
-	_clsMTRTargetNavigatorClusterTargetUpdatedEvent = _objcClass("MTRTargetNavigatorClusterTargetUpdatedEvent")
-	_mTRTargetNavigatorClusterTargetUpdatedEventSelTargetList = objc.RegisterName("targetList")
-	_mTRTargetNavigatorClusterTargetUpdatedEventSelSetTargetList = objc.RegisterName("setTargetList:")
-	_mTRTargetNavigatorClusterTargetUpdatedEventSelCurrentTarget = objc.RegisterName("currentTarget")
+	_clsMTRTargetNavigatorClusterTargetUpdatedEvent                 = _objcClass("MTRTargetNavigatorClusterTargetUpdatedEvent")
+	_mTRTargetNavigatorClusterTargetUpdatedEventSelTargetList       = objc.RegisterName("targetList")
+	_mTRTargetNavigatorClusterTargetUpdatedEventSelSetTargetList    = objc.RegisterName("setTargetList:")
+	_mTRTargetNavigatorClusterTargetUpdatedEventSelCurrentTarget    = objc.RegisterName("currentTarget")
 	_mTRTargetNavigatorClusterTargetUpdatedEventSelSetCurrentTarget = objc.RegisterName("setCurrentTarget:")
-	_mTRTargetNavigatorClusterTargetUpdatedEventSelData = objc.RegisterName("data")
-	_mTRTargetNavigatorClusterTargetUpdatedEventSelSetData = objc.RegisterName("setData:")
+	_mTRTargetNavigatorClusterTargetUpdatedEventSelData             = objc.RegisterName("data")
+	_mTRTargetNavigatorClusterTargetUpdatedEventSelSetData          = objc.RegisterName("setData:")
 )
 
 func MTRTargetNavigatorClusterTargetUpdatedEventFromID(id objc.ID) *MTRTargetNavigatorClusterTargetUpdatedEvent {
@@ -46,7 +46,9 @@ func (o *MTRTargetNavigatorClusterTargetUpdatedEvent) SetTargetList(targetList *
 
 func (o *MTRTargetNavigatorClusterTargetUpdatedEvent) CurrentTarget() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRTargetNavigatorClusterTargetUpdatedEventSelCurrentTarget)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -56,11 +58,12 @@ func (o *MTRTargetNavigatorClusterTargetUpdatedEvent) SetCurrentTarget(currentTa
 
 func (o *MTRTargetNavigatorClusterTargetUpdatedEvent) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRTargetNavigatorClusterTargetUpdatedEventSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *MTRTargetNavigatorClusterTargetUpdatedEvent) SetData(data *foundation.NSData) {
 	o.Ptr().Send(_mTRTargetNavigatorClusterTargetUpdatedEventSelSetData, data.Ptr())
 }
-

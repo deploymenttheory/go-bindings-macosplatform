@@ -15,8 +15,8 @@ type MPSQuadrilateralAccelerationStructure struct {
 }
 
 var (
-	_clsMPSQuadrilateralAccelerationStructure = _objcClass("MPSQuadrilateralAccelerationStructure")
-	_mPSQuadrilateralAccelerationStructureSelQuadrilateralCount = objc.RegisterName("quadrilateralCount")
+	_clsMPSQuadrilateralAccelerationStructure                      = _objcClass("MPSQuadrilateralAccelerationStructure")
+	_mPSQuadrilateralAccelerationStructureSelQuadrilateralCount    = objc.RegisterName("quadrilateralCount")
 	_mPSQuadrilateralAccelerationStructureSelSetQuadrilateralCount = objc.RegisterName("setQuadrilateralCount:")
 )
 
@@ -39,4 +39,3 @@ func (o *MPSQuadrilateralAccelerationStructure) QuadrilateralCount() uint {
 func (o *MPSQuadrilateralAccelerationStructure) SetQuadrilateralCount(quadrilateralCount uint) {
 	o.Ptr().Send(_mPSQuadrilateralAccelerationStructureSelSetQuadrilateralCount, quadrilateralCount)
 }
-

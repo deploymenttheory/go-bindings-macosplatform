@@ -16,7 +16,9 @@ type MTRSmokeCOAlarmClusterSelfTestRequestParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRSmokeCOAlarmClusterSelfTestRequestParams].
-func (x *MTRSmokeCOAlarmClusterSelfTestRequestParams) Unwrap() *raw.MTRSmokeCOAlarmClusterSelfTestRequestParams { return x.inner }
+func (x *MTRSmokeCOAlarmClusterSelfTestRequestParams) Unwrap() *raw.MTRSmokeCOAlarmClusterSelfTestRequestParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -80,4 +82,3 @@ type MTRSmokeCOAlarmClusterSelfTestRequestParamsable interface {
 }
 
 var _ MTRSmokeCOAlarmClusterSelfTestRequestParamsable = (*MTRSmokeCOAlarmClusterSelfTestRequestParams)(nil)
-

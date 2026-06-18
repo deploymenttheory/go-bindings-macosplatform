@@ -16,18 +16,18 @@ type SCNAnimationPlayer struct {
 }
 
 var (
-	_clsSCNAnimationPlayer = _objcClass("SCNAnimationPlayer")
+	_clsSCNAnimationPlayer                             = _objcClass("SCNAnimationPlayer")
 	_sCNAnimationPlayerSelAnimationPlayerWithAnimation = objc.RegisterName("animationPlayerWithAnimation:")
-	_sCNAnimationPlayerSelPlay = objc.RegisterName("play")
-	_sCNAnimationPlayerSelStop = objc.RegisterName("stop")
-	_sCNAnimationPlayerSelStopWithBlendOutDuration = objc.RegisterName("stopWithBlendOutDuration:")
-	_sCNAnimationPlayerSelAnimation = objc.RegisterName("animation")
-	_sCNAnimationPlayerSelSpeed = objc.RegisterName("speed")
-	_sCNAnimationPlayerSelSetSpeed = objc.RegisterName("setSpeed:")
-	_sCNAnimationPlayerSelBlendFactor = objc.RegisterName("blendFactor")
-	_sCNAnimationPlayerSelSetBlendFactor = objc.RegisterName("setBlendFactor:")
-	_sCNAnimationPlayerSelPaused = objc.RegisterName("paused")
-	_sCNAnimationPlayerSelSetPaused = objc.RegisterName("setPaused:")
+	_sCNAnimationPlayerSelPlay                         = objc.RegisterName("play")
+	_sCNAnimationPlayerSelStop                         = objc.RegisterName("stop")
+	_sCNAnimationPlayerSelStopWithBlendOutDuration     = objc.RegisterName("stopWithBlendOutDuration:")
+	_sCNAnimationPlayerSelAnimation                    = objc.RegisterName("animation")
+	_sCNAnimationPlayerSelSpeed                        = objc.RegisterName("speed")
+	_sCNAnimationPlayerSelSetSpeed                     = objc.RegisterName("setSpeed:")
+	_sCNAnimationPlayerSelBlendFactor                  = objc.RegisterName("blendFactor")
+	_sCNAnimationPlayerSelSetBlendFactor               = objc.RegisterName("setBlendFactor:")
+	_sCNAnimationPlayerSelPaused                       = objc.RegisterName("paused")
+	_sCNAnimationPlayerSelSetPaused                    = objc.RegisterName("setPaused:")
 )
 
 func SCNAnimationPlayerFromID(id objc.ID) *SCNAnimationPlayer {
@@ -43,7 +43,9 @@ func SCNAnimationPlayerFromID(id objc.ID) *SCNAnimationPlayer {
 // Initialize an animation player with an animation @param animation The animation to play
 func SCNAnimationPlayerAnimationPlayerWithAnimation(animation *SCNAnimation) *SCNAnimationPlayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAnimationPlayer), _sCNAnimationPlayerSelAnimationPlayerWithAnimation, animation.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNAnimationPlayerFromID(_ret)
 }
 
@@ -65,7 +67,9 @@ func (o *SCNAnimationPlayer) StopWithBlendOutDuration(duration float64) {
 // The played animation
 func (o *SCNAnimationPlayer) Animation() *SCNAnimation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNAnimationPlayerSelAnimation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNAnimationFromID(_ret)
 }
 
@@ -98,4 +102,3 @@ func (o *SCNAnimationPlayer) Paused() bool {
 func (o *SCNAnimationPlayer) SetPaused(paused bool) {
 	o.Ptr().Send(_sCNAnimationPlayerSelSetPaused, paused)
 }
-

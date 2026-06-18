@@ -15,10 +15,10 @@ type HKContactsLensSpecification struct {
 }
 
 var (
-	_clsHKContactsLensSpecification = _objcClass("HKContactsLensSpecification")
+	_clsHKContactsLensSpecification                                                    = _objcClass("HKContactsLensSpecification")
 	_hKContactsLensSpecificationSelInitWithSphereCylinderAxisAddPowerBaseCurveDiameter = objc.RegisterName("initWithSphere:cylinder:axis:addPower:baseCurve:diameter:")
-	_hKContactsLensSpecificationSelBaseCurve = objc.RegisterName("baseCurve")
-	_hKContactsLensSpecificationSelDiameter = objc.RegisterName("diameter")
+	_hKContactsLensSpecificationSelBaseCurve                                           = objc.RegisterName("baseCurve")
+	_hKContactsLensSpecificationSelDiameter                                            = objc.RegisterName("diameter")
 )
 
 func HKContactsLensSpecificationFromID(id objc.ID) *HKContactsLensSpecification {
@@ -34,21 +34,26 @@ func HKContactsLensSpecificationFromID(id objc.ID) *HKContactsLensSpecification 
 // @method        initWithSphere:cylinder:axis:addPower:baseCurve:diameter @param         sphere     The lens power to correct nearsightedness or farsightedness @param         cylinder   The lens power required to correct astigmatism @param         axis       The angle along which cylindrical power should be positioned to correct astigmatism @param         addPower   The power adjustment applied to a multifocal lens to correct presbyopia @param         baseCurve  The curvature of the back surface of the lens @param         diameter   The width of the lens from edge to edge
 func (o *HKContactsLensSpecification) InitWithSphereCylinderAxisAddPowerBaseCurveDiameter(sphere *HKQuantity, cylinder *HKQuantity, axis *HKQuantity, addPower *HKQuantity, baseCurve *HKQuantity, diameter *HKQuantity) *HKContactsLensSpecification {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKContactsLensSpecificationSelInitWithSphereCylinderAxisAddPowerBaseCurveDiameter, sphere.Ptr(), cylinder.Ptr(), axis.Ptr(), addPower.Ptr(), baseCurve.Ptr(), diameter.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKContactsLensSpecificationFromID(_ret)
 }
 
 // @property      baseCurve @abstract      The curvature of the back surface of the lens (measured in mm)
 func (o *HKContactsLensSpecification) BaseCurve() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKContactsLensSpecificationSelBaseCurve)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
 // @property      diameter @abstract      The width of the lens from edge to edge (measured in mm)
 func (o *HKContactsLensSpecification) Diameter() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKContactsLensSpecificationSelDiameter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
-

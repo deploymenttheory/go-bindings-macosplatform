@@ -25,4 +25,3 @@ func MTRSoftwareDiagnosticsClusterThreadMetricsFromID(id objc.ID) *MTRSoftwareDi
 	purego.Track(o)
 	return o
 }
-

@@ -356,4 +356,3 @@ func OSAStore(scriptingComponent *carboncore.ComponentInstanceRecord, scriptID u
 func OSAStoreFile(scriptingComponent *carboncore.ComponentInstanceRecord, scriptID uint, desiredType uint, modeFlags int, scriptFile *carboncore.FSRef) int {
 	return raw.OSAStoreFile(scriptingComponent, scriptID, desiredType, modeFlags, scriptFile)
 }
-

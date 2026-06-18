@@ -210,4 +210,3 @@ type QCCompositionPickerViewable interface {
 }
 
 var _ QCCompositionPickerViewable = (*QCCompositionPickerView)(nil)
-

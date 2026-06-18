@@ -85,7 +85,9 @@ func (x *ParameterTree) ParameterWithIDScopeElement(paramID uint, scope uint, el
 
 func (x *ParameterTree) asParameterGroup() *raw.AUParameterGroup { return &x.inner.AUParameterGroup }
 
-func (x *ParameterTree) asParameterNode() *raw.AUParameterNode { return &x.inner.AUParameterGroup.AUParameterNode }
+func (x *ParameterTree) asParameterNode() *raw.AUParameterNode {
+	return &x.inner.AUParameterGroup.AUParameterNode
+}
 
 // ParameterTreeable is the interface implemented by [ParameterTree], for mocking and DI.
 type ParameterTreeable interface {
@@ -100,4 +102,3 @@ type ParameterTreeable interface {
 }
 
 var _ ParameterTreeable = (*ParameterTree)(nil)
-

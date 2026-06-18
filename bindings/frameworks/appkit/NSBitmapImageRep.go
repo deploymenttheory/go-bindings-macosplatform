@@ -20,48 +20,48 @@ type NSBitmapImageRep struct {
 }
 
 var (
-	_clsNSBitmapImageRep = _objcClass("NSBitmapImageRep")
-	_nSBitmapImageRepSelInitWithFocusedViewRect = objc.RegisterName("initWithFocusedViewRect:")
-	_nSBitmapImageRepSelInitWithBitmapDataPlanesPixelsWidePixelsHighBitsPerSampleSamplesPerPixelHasAlphaIsPlanarColorSpaceNameBytesPerRowBitsPerPixel = objc.RegisterName("initWithBitmapDataPlanes:pixelsWide:pixelsHigh:bitsPerSample:samplesPerPixel:hasAlpha:isPlanar:colorSpaceName:bytesPerRow:bitsPerPixel:")
+	_clsNSBitmapImageRep                                                                                                                                          = _objcClass("NSBitmapImageRep")
+	_nSBitmapImageRepSelInitWithFocusedViewRect                                                                                                                   = objc.RegisterName("initWithFocusedViewRect:")
+	_nSBitmapImageRepSelInitWithBitmapDataPlanesPixelsWidePixelsHighBitsPerSampleSamplesPerPixelHasAlphaIsPlanarColorSpaceNameBytesPerRowBitsPerPixel             = objc.RegisterName("initWithBitmapDataPlanes:pixelsWide:pixelsHigh:bitsPerSample:samplesPerPixel:hasAlpha:isPlanar:colorSpaceName:bytesPerRow:bitsPerPixel:")
 	_nSBitmapImageRepSelInitWithBitmapDataPlanesPixelsWidePixelsHighBitsPerSampleSamplesPerPixelHasAlphaIsPlanarColorSpaceNameBitmapFormatBytesPerRowBitsPerPixel = objc.RegisterName("initWithBitmapDataPlanes:pixelsWide:pixelsHigh:bitsPerSample:samplesPerPixel:hasAlpha:isPlanar:colorSpaceName:bitmapFormat:bytesPerRow:bitsPerPixel:")
-	_nSBitmapImageRepSelInitWithCGImage = objc.RegisterName("initWithCGImage:")
-	_nSBitmapImageRepSelInitWithCIImage = objc.RegisterName("initWithCIImage:")
-	_nSBitmapImageRepSelImageRepsWithData = objc.RegisterName("imageRepsWithData:")
-	_nSBitmapImageRepSelImageRepWithData = objc.RegisterName("imageRepWithData:")
-	_nSBitmapImageRepSelInitWithData = objc.RegisterName("initWithData:")
-	_nSBitmapImageRepSelGetBitmapDataPlanes = objc.RegisterName("getBitmapDataPlanes:")
-	_nSBitmapImageRepSelGetCompressionFactor = objc.RegisterName("getCompression:factor:")
-	_nSBitmapImageRepSelSetCompressionFactor = objc.RegisterName("setCompression:factor:")
-	_nSBitmapImageRepSelTIFFRepresentationUsingCompressionFactor = objc.RegisterName("TIFFRepresentationUsingCompression:factor:")
-	_nSBitmapImageRepSelTIFFRepresentationOfImageRepsInArray = objc.RegisterName("TIFFRepresentationOfImageRepsInArray:")
-	_nSBitmapImageRepSelTIFFRepresentationOfImageRepsInArrayUsingCompressionFactor = objc.RegisterName("TIFFRepresentationOfImageRepsInArray:usingCompression:factor:")
-	_nSBitmapImageRepSelGetTIFFCompressionTypesCount = objc.RegisterName("getTIFFCompressionTypes:count:")
-	_nSBitmapImageRepSelLocalizedNameForTIFFCompressionType = objc.RegisterName("localizedNameForTIFFCompressionType:")
-	_nSBitmapImageRepSelCanBeCompressedUsing = objc.RegisterName("canBeCompressedUsing:")
-	_nSBitmapImageRepSelColorizeByMappingGrayToColorBlackMappingWhiteMapping = objc.RegisterName("colorizeByMappingGray:toColor:blackMapping:whiteMapping:")
-	_nSBitmapImageRepSelInitForIncrementalLoad = objc.RegisterName("initForIncrementalLoad")
-	_nSBitmapImageRepSelIncrementalLoadFromDataComplete = objc.RegisterName("incrementalLoadFromData:complete:")
-	_nSBitmapImageRepSelSetColorAtXY = objc.RegisterName("setColor:atX:y:")
-	_nSBitmapImageRepSelColorAtXY = objc.RegisterName("colorAtX:y:")
-	_nSBitmapImageRepSelGetPixelAtXY = objc.RegisterName("getPixel:atX:y:")
-	_nSBitmapImageRepSelSetPixelAtXY = objc.RegisterName("setPixel:atX:y:")
-	_nSBitmapImageRepSelBitmapImageRepByConvertingToColorSpaceRenderingIntent = objc.RegisterName("bitmapImageRepByConvertingToColorSpace:renderingIntent:")
-	_nSBitmapImageRepSelBitmapImageRepByRetaggingWithColorSpace = objc.RegisterName("bitmapImageRepByRetaggingWithColorSpace:")
-	_nSBitmapImageRepSelBitmapData = objc.RegisterName("bitmapData")
-	_nSBitmapImageRepSelIsPlanar = objc.RegisterName("isPlanar")
-	_nSBitmapImageRepSelSamplesPerPixel = objc.RegisterName("samplesPerPixel")
-	_nSBitmapImageRepSelBitsPerPixel = objc.RegisterName("bitsPerPixel")
-	_nSBitmapImageRepSelBytesPerRow = objc.RegisterName("bytesPerRow")
-	_nSBitmapImageRepSelBytesPerPlane = objc.RegisterName("bytesPerPlane")
-	_nSBitmapImageRepSelNumberOfPlanes = objc.RegisterName("numberOfPlanes")
-	_nSBitmapImageRepSelBitmapFormat = objc.RegisterName("bitmapFormat")
-	_nSBitmapImageRepSelTIFFRepresentation = objc.RegisterName("TIFFRepresentation")
-	_nSBitmapImageRepSelCGImage = objc.RegisterName("CGImage")
-	_nSBitmapImageRepSelColorSpace = objc.RegisterName("colorSpace")
-	_nSBitmapImageRepSelRepresentationOfImageRepsInArrayUsingTypeProperties = objc.RegisterName("representationOfImageRepsInArray:usingType:properties:")
-	_nSBitmapImageRepSelRepresentationUsingTypeProperties = objc.RegisterName("representationUsingType:properties:")
-	_nSBitmapImageRepSelSetPropertyWithValue = objc.RegisterName("setProperty:withValue:")
-	_nSBitmapImageRepSelValueForProperty = objc.RegisterName("valueForProperty:")
+	_nSBitmapImageRepSelInitWithCGImage                                                                                                                           = objc.RegisterName("initWithCGImage:")
+	_nSBitmapImageRepSelInitWithCIImage                                                                                                                           = objc.RegisterName("initWithCIImage:")
+	_nSBitmapImageRepSelImageRepsWithData                                                                                                                         = objc.RegisterName("imageRepsWithData:")
+	_nSBitmapImageRepSelImageRepWithData                                                                                                                          = objc.RegisterName("imageRepWithData:")
+	_nSBitmapImageRepSelInitWithData                                                                                                                              = objc.RegisterName("initWithData:")
+	_nSBitmapImageRepSelGetBitmapDataPlanes                                                                                                                       = objc.RegisterName("getBitmapDataPlanes:")
+	_nSBitmapImageRepSelGetCompressionFactor                                                                                                                      = objc.RegisterName("getCompression:factor:")
+	_nSBitmapImageRepSelSetCompressionFactor                                                                                                                      = objc.RegisterName("setCompression:factor:")
+	_nSBitmapImageRepSelTIFFRepresentationUsingCompressionFactor                                                                                                  = objc.RegisterName("TIFFRepresentationUsingCompression:factor:")
+	_nSBitmapImageRepSelTIFFRepresentationOfImageRepsInArray                                                                                                      = objc.RegisterName("TIFFRepresentationOfImageRepsInArray:")
+	_nSBitmapImageRepSelTIFFRepresentationOfImageRepsInArrayUsingCompressionFactor                                                                                = objc.RegisterName("TIFFRepresentationOfImageRepsInArray:usingCompression:factor:")
+	_nSBitmapImageRepSelGetTIFFCompressionTypesCount                                                                                                              = objc.RegisterName("getTIFFCompressionTypes:count:")
+	_nSBitmapImageRepSelLocalizedNameForTIFFCompressionType                                                                                                       = objc.RegisterName("localizedNameForTIFFCompressionType:")
+	_nSBitmapImageRepSelCanBeCompressedUsing                                                                                                                      = objc.RegisterName("canBeCompressedUsing:")
+	_nSBitmapImageRepSelColorizeByMappingGrayToColorBlackMappingWhiteMapping                                                                                      = objc.RegisterName("colorizeByMappingGray:toColor:blackMapping:whiteMapping:")
+	_nSBitmapImageRepSelInitForIncrementalLoad                                                                                                                    = objc.RegisterName("initForIncrementalLoad")
+	_nSBitmapImageRepSelIncrementalLoadFromDataComplete                                                                                                           = objc.RegisterName("incrementalLoadFromData:complete:")
+	_nSBitmapImageRepSelSetColorAtXY                                                                                                                              = objc.RegisterName("setColor:atX:y:")
+	_nSBitmapImageRepSelColorAtXY                                                                                                                                 = objc.RegisterName("colorAtX:y:")
+	_nSBitmapImageRepSelGetPixelAtXY                                                                                                                              = objc.RegisterName("getPixel:atX:y:")
+	_nSBitmapImageRepSelSetPixelAtXY                                                                                                                              = objc.RegisterName("setPixel:atX:y:")
+	_nSBitmapImageRepSelBitmapImageRepByConvertingToColorSpaceRenderingIntent                                                                                     = objc.RegisterName("bitmapImageRepByConvertingToColorSpace:renderingIntent:")
+	_nSBitmapImageRepSelBitmapImageRepByRetaggingWithColorSpace                                                                                                   = objc.RegisterName("bitmapImageRepByRetaggingWithColorSpace:")
+	_nSBitmapImageRepSelBitmapData                                                                                                                                = objc.RegisterName("bitmapData")
+	_nSBitmapImageRepSelIsPlanar                                                                                                                                  = objc.RegisterName("isPlanar")
+	_nSBitmapImageRepSelSamplesPerPixel                                                                                                                           = objc.RegisterName("samplesPerPixel")
+	_nSBitmapImageRepSelBitsPerPixel                                                                                                                              = objc.RegisterName("bitsPerPixel")
+	_nSBitmapImageRepSelBytesPerRow                                                                                                                               = objc.RegisterName("bytesPerRow")
+	_nSBitmapImageRepSelBytesPerPlane                                                                                                                             = objc.RegisterName("bytesPerPlane")
+	_nSBitmapImageRepSelNumberOfPlanes                                                                                                                            = objc.RegisterName("numberOfPlanes")
+	_nSBitmapImageRepSelBitmapFormat                                                                                                                              = objc.RegisterName("bitmapFormat")
+	_nSBitmapImageRepSelTIFFRepresentation                                                                                                                        = objc.RegisterName("TIFFRepresentation")
+	_nSBitmapImageRepSelCGImage                                                                                                                                   = objc.RegisterName("CGImage")
+	_nSBitmapImageRepSelColorSpace                                                                                                                                = objc.RegisterName("colorSpace")
+	_nSBitmapImageRepSelRepresentationOfImageRepsInArrayUsingTypeProperties                                                                                       = objc.RegisterName("representationOfImageRepsInArray:usingType:properties:")
+	_nSBitmapImageRepSelRepresentationUsingTypeProperties                                                                                                         = objc.RegisterName("representationUsingType:properties:")
+	_nSBitmapImageRepSelSetPropertyWithValue                                                                                                                      = objc.RegisterName("setProperty:withValue:")
+	_nSBitmapImageRepSelValueForProperty                                                                                                                          = objc.RegisterName("valueForProperty:")
 )
 
 func NSBitmapImageRepFromID(id objc.ID) *NSBitmapImageRep {
@@ -77,51 +77,67 @@ func NSBitmapImageRepFromID(id objc.ID) *NSBitmapImageRep {
 // Deprecated: Use -[NSView cacheDisplayInRect:toBitmapImageRep:] to snapshot a view.
 func (o *NSBitmapImageRep) InitWithFocusedViewRect(rect corefoundation.CGRect) *NSBitmapImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBitmapImageRepSelInitWithFocusedViewRect, rect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBitmapImageRepFromID(_ret)
 }
 
 // Deprecated: Use -[NSView cacheDisplayInRect:toBitmapImageRep:] to snapshot a view.
 func (o *NSBitmapImageRep) InitWithBitmapDataPlanesPixelsWidePixelsHighBitsPerSampleSamplesPerPixelHasAlphaIsPlanarColorSpaceNameBytesPerRowBitsPerPixel(planes *uint8, width int, height int, bps int, spp int, alpha bool, isPlanar bool, colorSpaceName *foundation.NSString, rBytes int, pBits int) *NSBitmapImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBitmapImageRepSelInitWithBitmapDataPlanesPixelsWidePixelsHighBitsPerSampleSamplesPerPixelHasAlphaIsPlanarColorSpaceNameBytesPerRowBitsPerPixel, planes, width, height, bps, spp, alpha, isPlanar, colorSpaceName.Ptr(), rBytes, pBits)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBitmapImageRepFromID(_ret)
 }
 
 // Deprecated: Use -[NSView cacheDisplayInRect:toBitmapImageRep:] to snapshot a view.
 func (o *NSBitmapImageRep) InitWithBitmapDataPlanesPixelsWidePixelsHighBitsPerSampleSamplesPerPixelHasAlphaIsPlanarColorSpaceNameBitmapFormatBytesPerRowBitsPerPixel(planes *uint8, width int, height int, bps int, spp int, alpha bool, isPlanar bool, colorSpaceName *foundation.NSString, bitmapFormat NSBitmapFormat, rBytes int, pBits int) *NSBitmapImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBitmapImageRepSelInitWithBitmapDataPlanesPixelsWidePixelsHighBitsPerSampleSamplesPerPixelHasAlphaIsPlanarColorSpaceNameBitmapFormatBytesPerRowBitsPerPixel, planes, width, height, bps, spp, alpha, isPlanar, colorSpaceName.Ptr(), bitmapFormat, rBytes, pBits)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBitmapImageRepFromID(_ret)
 }
 
 func (o *NSBitmapImageRep) InitWithCGImage(cgImage unsafe.Pointer) *NSBitmapImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBitmapImageRepSelInitWithCGImage, cgImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBitmapImageRepFromID(_ret)
 }
 
 func (o *NSBitmapImageRep) InitWithCIImage(ciImage *coreimage.CIImage) *NSBitmapImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBitmapImageRepSelInitWithCIImage, ciImage.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBitmapImageRepFromID(_ret)
 }
 
 func NSBitmapImageRepImageRepsWithData(data *foundation.NSData) *foundation.NSArray[*NSImageRep] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBitmapImageRep), _nSBitmapImageRepSelImageRepsWithData, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSImageRep](_ret)
 }
 
 func NSBitmapImageRepImageRepWithData(data *foundation.NSData) *NSBitmapImageRep {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBitmapImageRep), _nSBitmapImageRepSelImageRepWithData, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBitmapImageRepFromID(_ret)
 }
 
 func (o *NSBitmapImageRep) InitWithData(data *foundation.NSData) *NSBitmapImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBitmapImageRepSelInitWithData, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBitmapImageRepFromID(_ret)
 }
 
@@ -139,19 +155,25 @@ func (o *NSBitmapImageRep) SetCompressionFactor(compression NSTIFFCompression, f
 
 func (o *NSBitmapImageRep) TIFFRepresentationUsingCompressionFactor(comp NSTIFFCompression, factor float32) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBitmapImageRepSelTIFFRepresentationUsingCompressionFactor, comp, factor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func NSBitmapImageRepTIFFRepresentationOfImageRepsInArray(array *foundation.NSArray[*NSImageRep]) *foundation.NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBitmapImageRep), _nSBitmapImageRepSelTIFFRepresentationOfImageRepsInArray, array.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func NSBitmapImageRepTIFFRepresentationOfImageRepsInArrayUsingCompressionFactor(array *foundation.NSArray[*NSImageRep], comp NSTIFFCompression, factor float32) *foundation.NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBitmapImageRep), _nSBitmapImageRepSelTIFFRepresentationOfImageRepsInArrayUsingCompressionFactor, array.Ptr(), comp, factor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -161,7 +183,9 @@ func NSBitmapImageRepGetTIFFCompressionTypesCount(list *NSTIFFCompression, numTy
 
 func NSBitmapImageRepLocalizedNameForTIFFCompressionType(compression NSTIFFCompression) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBitmapImageRep), _nSBitmapImageRepSelLocalizedNameForTIFFCompressionType, compression)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -176,7 +200,9 @@ func (o *NSBitmapImageRep) ColorizeByMappingGrayToColorBlackMappingWhiteMapping(
 
 func (o *NSBitmapImageRep) InitForIncrementalLoad() *NSBitmapImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBitmapImageRepSelInitForIncrementalLoad)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBitmapImageRepFromID(_ret)
 }
 
@@ -191,7 +217,9 @@ func (o *NSBitmapImageRep) SetColorAtXY(color *NSColor, x int, y int) {
 
 func (o *NSBitmapImageRep) ColorAtXY(x int, y int) *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBitmapImageRepSelColorAtXY, x, y)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -205,13 +233,17 @@ func (o *NSBitmapImageRep) SetPixelAtXY(p *uint, x int, y int) {
 
 func (o *NSBitmapImageRep) BitmapImageRepByConvertingToColorSpaceRenderingIntent(targetSpace *NSColorSpace, renderingIntent NSColorRenderingIntent) *NSBitmapImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBitmapImageRepSelBitmapImageRepByConvertingToColorSpaceRenderingIntent, targetSpace.Ptr(), renderingIntent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBitmapImageRepFromID(_ret)
 }
 
 func (o *NSBitmapImageRep) BitmapImageRepByRetaggingWithColorSpace(newSpace *NSColorSpace) *NSBitmapImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBitmapImageRepSelBitmapImageRepByRetaggingWithColorSpace, newSpace.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBitmapImageRepFromID(_ret)
 }
 
@@ -257,7 +289,9 @@ func (o *NSBitmapImageRep) BitmapFormat() NSBitmapFormat {
 
 func (o *NSBitmapImageRep) TIFFRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBitmapImageRepSelTIFFRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -268,19 +302,25 @@ func (o *NSBitmapImageRep) CGImage() unsafe.Pointer {
 
 func (o *NSBitmapImageRep) ColorSpace() *NSColorSpace {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBitmapImageRepSelColorSpace)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorSpaceFromID(_ret)
 }
 
 func NSBitmapImageRepRepresentationOfImageRepsInArrayUsingTypeProperties(imageReps *foundation.NSArray[*NSImageRep], storageType NSBitmapImageFileType, properties *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBitmapImageRep), _nSBitmapImageRepSelRepresentationOfImageRepsInArrayUsingTypeProperties, imageReps.Ptr(), storageType, properties)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *NSBitmapImageRep) RepresentationUsingTypeProperties(storageType NSBitmapImageFileType, properties *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBitmapImageRepSelRepresentationUsingTypeProperties, storageType, properties)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -292,4 +332,3 @@ func (o *NSBitmapImageRep) ValueForProperty(property *foundation.NSString) objc.
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBitmapImageRepSelValueForProperty, property.Ptr())
 	return _ret
 }
-

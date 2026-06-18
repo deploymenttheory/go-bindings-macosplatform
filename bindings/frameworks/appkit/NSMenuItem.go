@@ -16,77 +16,77 @@ type NSMenuItem struct {
 }
 
 var (
-	_clsNSMenuItem = _objcClass("NSMenuItem")
-	_nSMenuItemSelSeparatorItem = objc.RegisterName("separatorItem")
-	_nSMenuItemSelSectionHeaderWithTitle = objc.RegisterName("sectionHeaderWithTitle:")
-	_nSMenuItemSelInitWithTitleActionKeyEquivalent = objc.RegisterName("initWithTitle:action:keyEquivalent:")
-	_nSMenuItemSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSMenuItemSelUsesUserKeyEquivalents = objc.RegisterName("usesUserKeyEquivalents")
-	_nSMenuItemSelSetUsesUserKeyEquivalents = objc.RegisterName("setUsesUserKeyEquivalents:")
-	_nSMenuItemSelWritingToolsItems = objc.RegisterName("writingToolsItems")
-	_nSMenuItemSelMenu = objc.RegisterName("menu")
-	_nSMenuItemSelSetMenu = objc.RegisterName("setMenu:")
-	_nSMenuItemSelHasSubmenu = objc.RegisterName("hasSubmenu")
-	_nSMenuItemSelSubmenu = objc.RegisterName("submenu")
-	_nSMenuItemSelSetSubmenu = objc.RegisterName("setSubmenu:")
-	_nSMenuItemSelParentItem = objc.RegisterName("parentItem")
-	_nSMenuItemSelTitle = objc.RegisterName("title")
-	_nSMenuItemSelSetTitle = objc.RegisterName("setTitle:")
-	_nSMenuItemSelAttributedTitle = objc.RegisterName("attributedTitle")
-	_nSMenuItemSelSetAttributedTitle = objc.RegisterName("setAttributedTitle:")
-	_nSMenuItemSelSubtitle = objc.RegisterName("subtitle")
-	_nSMenuItemSelSetSubtitle = objc.RegisterName("setSubtitle:")
-	_nSMenuItemSelIsSeparatorItem = objc.RegisterName("isSeparatorItem")
-	_nSMenuItemSelIsSectionHeader = objc.RegisterName("isSectionHeader")
-	_nSMenuItemSelKeyEquivalent = objc.RegisterName("keyEquivalent")
-	_nSMenuItemSelSetKeyEquivalent = objc.RegisterName("setKeyEquivalent:")
-	_nSMenuItemSelKeyEquivalentModifierMask = objc.RegisterName("keyEquivalentModifierMask")
-	_nSMenuItemSelSetKeyEquivalentModifierMask = objc.RegisterName("setKeyEquivalentModifierMask:")
-	_nSMenuItemSelUserKeyEquivalent = objc.RegisterName("userKeyEquivalent")
-	_nSMenuItemSelAllowsKeyEquivalentWhenHidden = objc.RegisterName("allowsKeyEquivalentWhenHidden")
-	_nSMenuItemSelSetAllowsKeyEquivalentWhenHidden = objc.RegisterName("setAllowsKeyEquivalentWhenHidden:")
-	_nSMenuItemSelAllowsAutomaticKeyEquivalentLocalization = objc.RegisterName("allowsAutomaticKeyEquivalentLocalization")
+	_clsNSMenuItem                                            = _objcClass("NSMenuItem")
+	_nSMenuItemSelSeparatorItem                               = objc.RegisterName("separatorItem")
+	_nSMenuItemSelSectionHeaderWithTitle                      = objc.RegisterName("sectionHeaderWithTitle:")
+	_nSMenuItemSelInitWithTitleActionKeyEquivalent            = objc.RegisterName("initWithTitle:action:keyEquivalent:")
+	_nSMenuItemSelInitWithCoder                               = objc.RegisterName("initWithCoder:")
+	_nSMenuItemSelUsesUserKeyEquivalents                      = objc.RegisterName("usesUserKeyEquivalents")
+	_nSMenuItemSelSetUsesUserKeyEquivalents                   = objc.RegisterName("setUsesUserKeyEquivalents:")
+	_nSMenuItemSelWritingToolsItems                           = objc.RegisterName("writingToolsItems")
+	_nSMenuItemSelMenu                                        = objc.RegisterName("menu")
+	_nSMenuItemSelSetMenu                                     = objc.RegisterName("setMenu:")
+	_nSMenuItemSelHasSubmenu                                  = objc.RegisterName("hasSubmenu")
+	_nSMenuItemSelSubmenu                                     = objc.RegisterName("submenu")
+	_nSMenuItemSelSetSubmenu                                  = objc.RegisterName("setSubmenu:")
+	_nSMenuItemSelParentItem                                  = objc.RegisterName("parentItem")
+	_nSMenuItemSelTitle                                       = objc.RegisterName("title")
+	_nSMenuItemSelSetTitle                                    = objc.RegisterName("setTitle:")
+	_nSMenuItemSelAttributedTitle                             = objc.RegisterName("attributedTitle")
+	_nSMenuItemSelSetAttributedTitle                          = objc.RegisterName("setAttributedTitle:")
+	_nSMenuItemSelSubtitle                                    = objc.RegisterName("subtitle")
+	_nSMenuItemSelSetSubtitle                                 = objc.RegisterName("setSubtitle:")
+	_nSMenuItemSelIsSeparatorItem                             = objc.RegisterName("isSeparatorItem")
+	_nSMenuItemSelIsSectionHeader                             = objc.RegisterName("isSectionHeader")
+	_nSMenuItemSelKeyEquivalent                               = objc.RegisterName("keyEquivalent")
+	_nSMenuItemSelSetKeyEquivalent                            = objc.RegisterName("setKeyEquivalent:")
+	_nSMenuItemSelKeyEquivalentModifierMask                   = objc.RegisterName("keyEquivalentModifierMask")
+	_nSMenuItemSelSetKeyEquivalentModifierMask                = objc.RegisterName("setKeyEquivalentModifierMask:")
+	_nSMenuItemSelUserKeyEquivalent                           = objc.RegisterName("userKeyEquivalent")
+	_nSMenuItemSelAllowsKeyEquivalentWhenHidden               = objc.RegisterName("allowsKeyEquivalentWhenHidden")
+	_nSMenuItemSelSetAllowsKeyEquivalentWhenHidden            = objc.RegisterName("setAllowsKeyEquivalentWhenHidden:")
+	_nSMenuItemSelAllowsAutomaticKeyEquivalentLocalization    = objc.RegisterName("allowsAutomaticKeyEquivalentLocalization")
 	_nSMenuItemSelSetAllowsAutomaticKeyEquivalentLocalization = objc.RegisterName("setAllowsAutomaticKeyEquivalentLocalization:")
-	_nSMenuItemSelAllowsAutomaticKeyEquivalentMirroring = objc.RegisterName("allowsAutomaticKeyEquivalentMirroring")
-	_nSMenuItemSelSetAllowsAutomaticKeyEquivalentMirroring = objc.RegisterName("setAllowsAutomaticKeyEquivalentMirroring:")
-	_nSMenuItemSelImage = objc.RegisterName("image")
-	_nSMenuItemSelSetImage = objc.RegisterName("setImage:")
-	_nSMenuItemSelState = objc.RegisterName("state")
-	_nSMenuItemSelSetState = objc.RegisterName("setState:")
-	_nSMenuItemSelOnStateImage = objc.RegisterName("onStateImage")
-	_nSMenuItemSelSetOnStateImage = objc.RegisterName("setOnStateImage:")
-	_nSMenuItemSelOffStateImage = objc.RegisterName("offStateImage")
-	_nSMenuItemSelSetOffStateImage = objc.RegisterName("setOffStateImage:")
-	_nSMenuItemSelMixedStateImage = objc.RegisterName("mixedStateImage")
-	_nSMenuItemSelSetMixedStateImage = objc.RegisterName("setMixedStateImage:")
-	_nSMenuItemSelIsEnabled = objc.RegisterName("isEnabled")
-	_nSMenuItemSelSetEnabled = objc.RegisterName("setEnabled:")
-	_nSMenuItemSelIsAlternate = objc.RegisterName("isAlternate")
-	_nSMenuItemSelSetAlternate = objc.RegisterName("setAlternate:")
-	_nSMenuItemSelIndentationLevel = objc.RegisterName("indentationLevel")
-	_nSMenuItemSelSetIndentationLevel = objc.RegisterName("setIndentationLevel:")
-	_nSMenuItemSelTarget = objc.RegisterName("target")
-	_nSMenuItemSelSetTarget = objc.RegisterName("setTarget:")
-	_nSMenuItemSelAction = objc.RegisterName("action")
-	_nSMenuItemSelSetAction = objc.RegisterName("setAction:")
-	_nSMenuItemSelTag = objc.RegisterName("tag")
-	_nSMenuItemSelSetTag = objc.RegisterName("setTag:")
-	_nSMenuItemSelRepresentedObject = objc.RegisterName("representedObject")
-	_nSMenuItemSelSetRepresentedObject = objc.RegisterName("setRepresentedObject:")
-	_nSMenuItemSelView = objc.RegisterName("view")
-	_nSMenuItemSelSetView = objc.RegisterName("setView:")
-	_nSMenuItemSelIsHighlighted = objc.RegisterName("isHighlighted")
-	_nSMenuItemSelIsHidden = objc.RegisterName("isHidden")
-	_nSMenuItemSelSetHidden = objc.RegisterName("setHidden:")
-	_nSMenuItemSelIsHiddenOrHasHiddenAncestor = objc.RegisterName("isHiddenOrHasHiddenAncestor")
-	_nSMenuItemSelToolTip = objc.RegisterName("toolTip")
-	_nSMenuItemSelSetToolTip = objc.RegisterName("setToolTip:")
-	_nSMenuItemSelBadge = objc.RegisterName("badge")
-	_nSMenuItemSelSetBadge = objc.RegisterName("setBadge:")
-	_nSMenuItemSelSetMnemonicLocation = objc.RegisterName("setMnemonicLocation:")
-	_nSMenuItemSelMnemonicLocation = objc.RegisterName("mnemonicLocation")
-	_nSMenuItemSelMnemonic = objc.RegisterName("mnemonic")
-	_nSMenuItemSelSetTitleWithMnemonic = objc.RegisterName("setTitleWithMnemonic:")
+	_nSMenuItemSelAllowsAutomaticKeyEquivalentMirroring       = objc.RegisterName("allowsAutomaticKeyEquivalentMirroring")
+	_nSMenuItemSelSetAllowsAutomaticKeyEquivalentMirroring    = objc.RegisterName("setAllowsAutomaticKeyEquivalentMirroring:")
+	_nSMenuItemSelImage                                       = objc.RegisterName("image")
+	_nSMenuItemSelSetImage                                    = objc.RegisterName("setImage:")
+	_nSMenuItemSelState                                       = objc.RegisterName("state")
+	_nSMenuItemSelSetState                                    = objc.RegisterName("setState:")
+	_nSMenuItemSelOnStateImage                                = objc.RegisterName("onStateImage")
+	_nSMenuItemSelSetOnStateImage                             = objc.RegisterName("setOnStateImage:")
+	_nSMenuItemSelOffStateImage                               = objc.RegisterName("offStateImage")
+	_nSMenuItemSelSetOffStateImage                            = objc.RegisterName("setOffStateImage:")
+	_nSMenuItemSelMixedStateImage                             = objc.RegisterName("mixedStateImage")
+	_nSMenuItemSelSetMixedStateImage                          = objc.RegisterName("setMixedStateImage:")
+	_nSMenuItemSelIsEnabled                                   = objc.RegisterName("isEnabled")
+	_nSMenuItemSelSetEnabled                                  = objc.RegisterName("setEnabled:")
+	_nSMenuItemSelIsAlternate                                 = objc.RegisterName("isAlternate")
+	_nSMenuItemSelSetAlternate                                = objc.RegisterName("setAlternate:")
+	_nSMenuItemSelIndentationLevel                            = objc.RegisterName("indentationLevel")
+	_nSMenuItemSelSetIndentationLevel                         = objc.RegisterName("setIndentationLevel:")
+	_nSMenuItemSelTarget                                      = objc.RegisterName("target")
+	_nSMenuItemSelSetTarget                                   = objc.RegisterName("setTarget:")
+	_nSMenuItemSelAction                                      = objc.RegisterName("action")
+	_nSMenuItemSelSetAction                                   = objc.RegisterName("setAction:")
+	_nSMenuItemSelTag                                         = objc.RegisterName("tag")
+	_nSMenuItemSelSetTag                                      = objc.RegisterName("setTag:")
+	_nSMenuItemSelRepresentedObject                           = objc.RegisterName("representedObject")
+	_nSMenuItemSelSetRepresentedObject                        = objc.RegisterName("setRepresentedObject:")
+	_nSMenuItemSelView                                        = objc.RegisterName("view")
+	_nSMenuItemSelSetView                                     = objc.RegisterName("setView:")
+	_nSMenuItemSelIsHighlighted                               = objc.RegisterName("isHighlighted")
+	_nSMenuItemSelIsHidden                                    = objc.RegisterName("isHidden")
+	_nSMenuItemSelSetHidden                                   = objc.RegisterName("setHidden:")
+	_nSMenuItemSelIsHiddenOrHasHiddenAncestor                 = objc.RegisterName("isHiddenOrHasHiddenAncestor")
+	_nSMenuItemSelToolTip                                     = objc.RegisterName("toolTip")
+	_nSMenuItemSelSetToolTip                                  = objc.RegisterName("setToolTip:")
+	_nSMenuItemSelBadge                                       = objc.RegisterName("badge")
+	_nSMenuItemSelSetBadge                                    = objc.RegisterName("setBadge:")
+	_nSMenuItemSelSetMnemonicLocation                         = objc.RegisterName("setMnemonicLocation:")
+	_nSMenuItemSelMnemonicLocation                            = objc.RegisterName("mnemonicLocation")
+	_nSMenuItemSelMnemonic                                    = objc.RegisterName("mnemonic")
+	_nSMenuItemSelSetTitleWithMnemonic                        = objc.RegisterName("setTitleWithMnemonic:")
 )
 
 func NSMenuItemFromID(id objc.ID) *NSMenuItem {
@@ -101,26 +101,34 @@ func NSMenuItemFromID(id objc.ID) *NSMenuItem {
 
 func NSMenuItemSeparatorItem() *NSMenuItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMenuItem), _nSMenuItemSelSeparatorItem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuItemFromID(_ret)
 }
 
 // Creates a menu item representing a section header with the provided title. Section header items are used to provide context to a grouping of menu items. Items created using this method are non-interactive and do not perform an action.
 func NSMenuItemSectionHeaderWithTitle(title *foundation.NSString) *NSMenuItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMenuItem), _nSMenuItemSelSectionHeaderWithTitle, title.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuItemFromID(_ret)
 }
 
 func (o *NSMenuItem) InitWithTitleActionKeyEquivalent(string_ *foundation.NSString, selector objc.SEL, charCode *foundation.NSString) *NSMenuItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemSelInitWithTitleActionKeyEquivalent, string_.Ptr(), selector, charCode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuItemFromID(_ret)
 }
 
 func (o *NSMenuItem) InitWithCoder(coder *foundation.NSCoder) *NSMenuItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuItemFromID(_ret)
 }
 
@@ -136,14 +144,18 @@ func NSMenuItemSetUsesUserKeyEquivalents(usesUserKeyEquivalents bool) {
 // An array of standard menu items related to Writing Tools. Each call to this method returns an array of newly allocated instances of NSMenuItem.
 func NSMenuItemWritingToolsItems() *foundation.NSArray[*NSMenuItem] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMenuItem), _nSMenuItemSelWritingToolsItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSMenuItem](_ret)
 }
 
 // @note Never call the setter method directly: it is there only for subclassers.
 func (o *NSMenuItem) Menu() *NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemSelMenu)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuFromID(_ret)
 }
 
@@ -159,7 +171,9 @@ func (o *NSMenuItem) HasSubmenu() bool {
 
 func (o *NSMenuItem) Submenu() *NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemSelSubmenu)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuFromID(_ret)
 }
 
@@ -170,13 +184,17 @@ func (o *NSMenuItem) SetSubmenu(submenu *NSMenu) {
 // @return The `NSMenuItem` whose submenu contains the receiver, or nil if the receiver does not have a parent item.
 func (o *NSMenuItem) ParentItem() *NSMenuItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemSelParentItem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuItemFromID(_ret)
 }
 
 func (o *NSMenuItem) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -186,7 +204,9 @@ func (o *NSMenuItem) SetTitle(title *foundation.NSString) {
 
 func (o *NSMenuItem) AttributedTitle() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemSelAttributedTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
@@ -197,7 +217,9 @@ func (o *NSMenuItem) SetAttributedTitle(attributedTitle *foundation.NSAttributed
 // @abstract       Used to specify a standard subtitle for the menu item. @discussion     The subtitle is displayed below the standard title. @note           On macOS 14, a menu item with an attributed title does not show the subtitle. The subtitle is shown on macOS 15 and later.
 func (o *NSMenuItem) Subtitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemSelSubtitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -219,7 +241,9 @@ func (o *NSMenuItem) IsSectionHeader() bool {
 
 func (o *NSMenuItem) KeyEquivalent() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemSelKeyEquivalent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -238,7 +262,9 @@ func (o *NSMenuItem) SetKeyEquivalentModifierMask(keyEquivalentModifierMask NSEv
 
 func (o *NSMenuItem) UserKeyEquivalent() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemSelUserKeyEquivalent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -271,7 +297,9 @@ func (o *NSMenuItem) SetAllowsAutomaticKeyEquivalentMirroring(allowsAutomaticKey
 
 func (o *NSMenuItem) Image() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemSelImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -290,7 +318,9 @@ func (o *NSMenuItem) SetState(state int) {
 
 func (o *NSMenuItem) OnStateImage() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemSelOnStateImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -300,7 +330,9 @@ func (o *NSMenuItem) SetOnStateImage(onStateImage *NSImage) {
 
 func (o *NSMenuItem) OffStateImage() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemSelOffStateImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -310,7 +342,9 @@ func (o *NSMenuItem) SetOffStateImage(offStateImage *NSImage) {
 
 func (o *NSMenuItem) MixedStateImage() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemSelMixedStateImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -383,7 +417,9 @@ func (o *NSMenuItem) SetRepresentedObject(representedObject objc.ID) {
 
 func (o *NSMenuItem) View() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemSelView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -412,7 +448,9 @@ func (o *NSMenuItem) IsHiddenOrHasHiddenAncestor() bool {
 
 func (o *NSMenuItem) ToolTip() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemSelToolTip)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -423,7 +461,9 @@ func (o *NSMenuItem) SetToolTip(toolTip *foundation.NSString) {
 // A badge used to provide additional quantitative information specific to the menu item, such as the number of available updates. The default value of this property is `nil`.
 func (o *NSMenuItem) Badge() *NSMenuItemBadge {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemSelBadge)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuItemBadgeFromID(_ret)
 }
 
@@ -446,7 +486,9 @@ func (o *NSMenuItem) MnemonicLocation() uint {
 // Deprecated: since macOS 10.6.
 func (o *NSMenuItem) Mnemonic() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemSelMnemonic)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -454,4 +496,3 @@ func (o *NSMenuItem) Mnemonic() *foundation.NSString {
 func (o *NSMenuItem) SetTitleWithMnemonic(stringWithAmpersand *foundation.NSString) {
 	o.Ptr().Send(_nSMenuItemSelSetTitleWithMnemonic, stringWithAmpersand.Ptr())
 }
-

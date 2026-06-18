@@ -18,14 +18,14 @@ type GKStateMachine struct {
 }
 
 var (
-	_clsGKStateMachine = _objcClass("GKStateMachine")
+	_clsGKStateMachine                       = _objcClass("GKStateMachine")
 	_gKStateMachineSelStateMachineWithStates = objc.RegisterName("stateMachineWithStates:")
-	_gKStateMachineSelInitWithStates = objc.RegisterName("initWithStates:")
-	_gKStateMachineSelUpdateWithDeltaTime = objc.RegisterName("updateWithDeltaTime:")
-	_gKStateMachineSelStateForClass = objc.RegisterName("stateForClass:")
-	_gKStateMachineSelCanEnterState = objc.RegisterName("canEnterState:")
-	_gKStateMachineSelEnterState = objc.RegisterName("enterState:")
-	_gKStateMachineSelCurrentState = objc.RegisterName("currentState")
+	_gKStateMachineSelInitWithStates         = objc.RegisterName("initWithStates:")
+	_gKStateMachineSelUpdateWithDeltaTime    = objc.RegisterName("updateWithDeltaTime:")
+	_gKStateMachineSelStateForClass          = objc.RegisterName("stateForClass:")
+	_gKStateMachineSelCanEnterState          = objc.RegisterName("canEnterState:")
+	_gKStateMachineSelEnterState             = objc.RegisterName("enterState:")
+	_gKStateMachineSelCurrentState           = objc.RegisterName("currentState")
 )
 
 func GKStateMachineFromID(id objc.ID) *GKStateMachine {
@@ -41,13 +41,17 @@ func GKStateMachineFromID(id objc.ID) *GKStateMachine {
 // Creates a state machine with an array of possible states and an initial state. @param states a list of possible states for this state machine.
 func GKStateMachineStateMachineWithStates(states *foundation.NSArray[*GKState]) *GKStateMachine {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKStateMachine), _gKStateMachineSelStateMachineWithStates, states.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKStateMachineFromID(_ret)
 }
 
 func (o *GKStateMachine) InitWithStates(states *foundation.NSArray[*GKState]) *GKStateMachine {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKStateMachineSelInitWithStates, states.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKStateMachineFromID(_ret)
 }
 
@@ -59,7 +63,9 @@ func (o *GKStateMachine) UpdateWithDeltaTime(sec float64) {
 // Gets the instance of the indicated state class from this state machine. Returns nil if the state does not exist @param stateClass the class of the state to be retrieved
 func (o *GKStateMachine) StateForClass(stateClass objc.Class) *GKState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKStateMachineSelStateForClass, stateClass)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKStateFromID(_ret)
 }
 
@@ -78,7 +84,8 @@ func (o *GKStateMachine) EnterState(stateClass objc.Class) bool {
 // The current state that the state machine is in. Prior to the first called to enterState this is equal to nil.
 func (o *GKStateMachine) CurrentState() *GKState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKStateMachineSelCurrentState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKStateFromID(_ret)
 }
-

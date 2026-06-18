@@ -16,9 +16,9 @@ type SFAcousticFeature struct {
 }
 
 var (
-	_clsSFAcousticFeature = _objcClass("SFAcousticFeature")
+	_clsSFAcousticFeature                             = _objcClass("SFAcousticFeature")
 	_sFAcousticFeatureSelAcousticFeatureValuePerFrame = objc.RegisterName("acousticFeatureValuePerFrame")
-	_sFAcousticFeatureSelFrameDuration = objc.RegisterName("frameDuration")
+	_sFAcousticFeatureSelFrameDuration                = objc.RegisterName("frameDuration")
 )
 
 func SFAcousticFeatureFromID(id objc.ID) *SFAcousticFeature {
@@ -42,4 +42,3 @@ func (o *SFAcousticFeature) FrameDuration() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _sFAcousticFeatureSelFrameDuration)
 	return _ret
 }
-

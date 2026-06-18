@@ -164,4 +164,3 @@ type MatrixFullyConnectedable interface {
 }
 
 var _ MatrixFullyConnectedable = (*MatrixFullyConnected)(nil)
-

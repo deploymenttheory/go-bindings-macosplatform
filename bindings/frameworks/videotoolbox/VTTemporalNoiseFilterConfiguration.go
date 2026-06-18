@@ -17,19 +17,19 @@ type VTTemporalNoiseFilterConfiguration struct {
 }
 
 var (
-	_clsVTTemporalNoiseFilterConfiguration = _objcClass("VTTemporalNoiseFilterConfiguration")
+	_clsVTTemporalNoiseFilterConfiguration                                               = _objcClass("VTTemporalNoiseFilterConfiguration")
 	_vTTemporalNoiseFilterConfigurationSelInitWithFrameWidthFrameHeightSourcePixelFormat = objc.RegisterName("initWithFrameWidth:frameHeight:sourcePixelFormat:")
-	_vTTemporalNoiseFilterConfigurationSelFrameWidth = objc.RegisterName("frameWidth")
-	_vTTemporalNoiseFilterConfigurationSelFrameHeight = objc.RegisterName("frameHeight")
-	_vTTemporalNoiseFilterConfigurationSelFrameSupportedPixelFormats = objc.RegisterName("frameSupportedPixelFormats")
-	_vTTemporalNoiseFilterConfigurationSelSourcePixelBufferAttributes = objc.RegisterName("sourcePixelBufferAttributes")
-	_vTTemporalNoiseFilterConfigurationSelDestinationPixelBufferAttributes = objc.RegisterName("destinationPixelBufferAttributes")
-	_vTTemporalNoiseFilterConfigurationSelNextFrameCount = objc.RegisterName("nextFrameCount")
-	_vTTemporalNoiseFilterConfigurationSelPreviousFrameCount = objc.RegisterName("previousFrameCount")
-	_vTTemporalNoiseFilterConfigurationSelSupportedSourcePixelFormats = objc.RegisterName("supportedSourcePixelFormats")
-	_vTTemporalNoiseFilterConfigurationSelMaximumDimensions = objc.RegisterName("maximumDimensions")
-	_vTTemporalNoiseFilterConfigurationSelMinimumDimensions = objc.RegisterName("minimumDimensions")
-	_vTTemporalNoiseFilterConfigurationSelIsSupported = objc.RegisterName("isSupported")
+	_vTTemporalNoiseFilterConfigurationSelFrameWidth                                     = objc.RegisterName("frameWidth")
+	_vTTemporalNoiseFilterConfigurationSelFrameHeight                                    = objc.RegisterName("frameHeight")
+	_vTTemporalNoiseFilterConfigurationSelFrameSupportedPixelFormats                     = objc.RegisterName("frameSupportedPixelFormats")
+	_vTTemporalNoiseFilterConfigurationSelSourcePixelBufferAttributes                    = objc.RegisterName("sourcePixelBufferAttributes")
+	_vTTemporalNoiseFilterConfigurationSelDestinationPixelBufferAttributes               = objc.RegisterName("destinationPixelBufferAttributes")
+	_vTTemporalNoiseFilterConfigurationSelNextFrameCount                                 = objc.RegisterName("nextFrameCount")
+	_vTTemporalNoiseFilterConfigurationSelPreviousFrameCount                             = objc.RegisterName("previousFrameCount")
+	_vTTemporalNoiseFilterConfigurationSelSupportedSourcePixelFormats                    = objc.RegisterName("supportedSourcePixelFormats")
+	_vTTemporalNoiseFilterConfigurationSelMaximumDimensions                              = objc.RegisterName("maximumDimensions")
+	_vTTemporalNoiseFilterConfigurationSelMinimumDimensions                              = objc.RegisterName("minimumDimensions")
+	_vTTemporalNoiseFilterConfigurationSelIsSupported                                    = objc.RegisterName("isSupported")
 )
 
 func VTTemporalNoiseFilterConfigurationFromID(id objc.ID) *VTTemporalNoiseFilterConfiguration {
@@ -45,7 +45,9 @@ func VTTemporalNoiseFilterConfigurationFromID(id objc.ID) *VTTemporalNoiseFilter
 // Creates a new temporal noise-processor configuration. Returns nil if frameWidth, frameHeight, or sourcePixelFormat is unsupported. - Parameters: - frameWidth: Width of source frame in pixels. - frameHeight: Height of source frame in pixels.
 func (o *VTTemporalNoiseFilterConfiguration) InitWithFrameWidthFrameHeightSourcePixelFormat(frameWidth int, frameHeight int, sourcePixelFormat uint) *VTTemporalNoiseFilterConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTTemporalNoiseFilterConfigurationSelInitWithFrameWidthFrameHeightSourcePixelFormat, frameWidth, frameHeight, sourcePixelFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VTTemporalNoiseFilterConfigurationFromID(_ret)
 }
 
@@ -67,13 +69,13 @@ func (o *VTTemporalNoiseFilterConfiguration) FrameSupportedPixelFormats() *found
 	return _ret
 }
 
-// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use ``CVPixelBufferCreateResolvedAttributesDictionary`` to combine this dictionary with your pixel buffer attributes dictionary.
+// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (o *VTTemporalNoiseFilterConfiguration) SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _vTTemporalNoiseFilterConfigurationSelSourcePixelBufferAttributes)
 	return _ret
 }
 
-// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use ``CVPixelBufferCreateResolvedAttributesDictionary`` to combine this dictionary with your pixel buffer attributes dictionary.
+// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (o *VTTemporalNoiseFilterConfiguration) DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _vTTemporalNoiseFilterConfigurationSelDestinationPixelBufferAttributes)
 	return _ret
@@ -114,4 +116,3 @@ func VTTemporalNoiseFilterConfigurationIsSupported() bool {
 	_ret := objc.Send[bool](objc.ID(_clsVTTemporalNoiseFilterConfiguration), _vTTemporalNoiseFilterConfigurationSelIsSupported)
 	return _ret
 }
-

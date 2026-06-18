@@ -50,7 +50,9 @@ func (x *CNNLogSoftMaxNode) WithLabel(label string) *CNNLogSoftMaxNode {
 	return x
 }
 
-func (x *CNNLogSoftMaxNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+func (x *CNNLogSoftMaxNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNFilterNode
+}
 
 // CNNLogSoftMaxNodeable is the interface implemented by [CNNLogSoftMaxNode], for mocking and DI.
 type CNNLogSoftMaxNodeable interface {
@@ -60,4 +62,3 @@ type CNNLogSoftMaxNodeable interface {
 }
 
 var _ CNNLogSoftMaxNodeable = (*CNNLogSoftMaxNode)(nil)
-

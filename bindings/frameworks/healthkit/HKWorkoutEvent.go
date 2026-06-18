@@ -16,14 +16,14 @@ type HKWorkoutEvent struct {
 }
 
 var (
-	_clsHKWorkoutEvent = _objcClass("HKWorkoutEvent")
-	_hKWorkoutEventSelWorkoutEventWithTypeDate = objc.RegisterName("workoutEventWithType:date:")
-	_hKWorkoutEventSelWorkoutEventWithTypeDateMetadata = objc.RegisterName("workoutEventWithType:date:metadata:")
+	_clsHKWorkoutEvent                                         = _objcClass("HKWorkoutEvent")
+	_hKWorkoutEventSelWorkoutEventWithTypeDate                 = objc.RegisterName("workoutEventWithType:date:")
+	_hKWorkoutEventSelWorkoutEventWithTypeDateMetadata         = objc.RegisterName("workoutEventWithType:date:metadata:")
 	_hKWorkoutEventSelWorkoutEventWithTypeDateIntervalMetadata = objc.RegisterName("workoutEventWithType:dateInterval:metadata:")
-	_hKWorkoutEventSelType = objc.RegisterName("type")
-	_hKWorkoutEventSelDate = objc.RegisterName("date")
-	_hKWorkoutEventSelDateInterval = objc.RegisterName("dateInterval")
-	_hKWorkoutEventSelMetadata = objc.RegisterName("metadata")
+	_hKWorkoutEventSelType                                     = objc.RegisterName("type")
+	_hKWorkoutEventSelDate                                     = objc.RegisterName("date")
+	_hKWorkoutEventSelDateInterval                             = objc.RegisterName("dateInterval")
+	_hKWorkoutEventSelMetadata                                 = objc.RegisterName("metadata")
 )
 
 func HKWorkoutEventFromID(id objc.ID) *HKWorkoutEvent {
@@ -38,20 +38,26 @@ func HKWorkoutEventFromID(id objc.ID) *HKWorkoutEvent {
 
 func HKWorkoutEventWorkoutEventWithTypeDate(type_ HKWorkoutEventType, date *foundation.NSDate) *HKWorkoutEvent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKWorkoutEvent), _hKWorkoutEventSelWorkoutEventWithTypeDate, type_, date.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKWorkoutEventFromID(_ret)
 }
 
 func HKWorkoutEventWorkoutEventWithTypeDateMetadata(type_ HKWorkoutEventType, date *foundation.NSDate, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKWorkoutEvent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKWorkoutEvent), _hKWorkoutEventSelWorkoutEventWithTypeDateMetadata, type_, date.Ptr(), metadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKWorkoutEventFromID(_ret)
 }
 
 // @method        workoutEventWithType:dateInterval:metadata: @discussion    Creates an event with a date interval with or without a duration. @param         type                    The type of event to create @param         dateInterval            The dateInterval over which the event occurs @param         metadata                Dictionary of metadata associated with the event, nullable
 func HKWorkoutEventWorkoutEventWithTypeDateIntervalMetadata(type_ HKWorkoutEventType, dateInterval *foundation.NSDateInterval, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKWorkoutEvent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKWorkoutEvent), _hKWorkoutEventSelWorkoutEventWithTypeDateIntervalMetadata, type_, dateInterval.Ptr(), metadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKWorkoutEventFromID(_ret)
 }
 
@@ -63,14 +69,18 @@ func (o *HKWorkoutEvent) Type() HKWorkoutEventType {
 
 func (o *HKWorkoutEvent) Date() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutEventSelDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // @property      dateInterval @abstract      Date interval representing the time period for which the event is valid. @discussion    Most event types only support date intervals with zero duration. Events of type HKWorkoutEventTypeLap and HKWorkoutEventTypeSegment are currently the only events that support a nonzero duration.
 func (o *HKWorkoutEvent) DateInterval() *foundation.NSDateInterval {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutEventSelDateInterval)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateIntervalFromID(_ret)
 }
 
@@ -79,4 +89,3 @@ func (o *HKWorkoutEvent) Metadata() *foundation.NSDictionary[*foundation.NSStrin
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _hKWorkoutEventSelMetadata)
 	return _ret
 }
-

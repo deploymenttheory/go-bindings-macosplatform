@@ -18,80 +18,80 @@ type IOBluetoothDevice struct {
 }
 
 var (
-	_clsIOBluetoothDevice = _objcClass("IOBluetoothDevice")
-	_iOBluetoothDeviceSelRegisterForConnectNotificationsSelector = objc.RegisterName("registerForConnectNotifications:selector:")
-	_iOBluetoothDeviceSelRegisterForDisconnectNotificationSelector = objc.RegisterName("registerForDisconnectNotification:selector:")
-	_iOBluetoothDeviceSelDeviceWithAddress = objc.RegisterName("deviceWithAddress:")
-	_iOBluetoothDeviceSelWithAddress = objc.RegisterName("withAddress:")
-	_iOBluetoothDeviceSelDeviceWithAddressString = objc.RegisterName("deviceWithAddressString:")
-	_iOBluetoothDeviceSelWithDeviceRef = objc.RegisterName("withDeviceRef:")
-	_iOBluetoothDeviceSelGetDeviceRef = objc.RegisterName("getDeviceRef")
-	_iOBluetoothDeviceSelOpenL2CAPChannelSyncWithPSMDelegate = objc.RegisterName("openL2CAPChannelSync:withPSM:delegate:")
-	_iOBluetoothDeviceSelOpenL2CAPChannelAsyncWithPSMDelegate = objc.RegisterName("openL2CAPChannelAsync:withPSM:delegate:")
-	_iOBluetoothDeviceSelOpenL2CAPChannelFindExistingNewChannel = objc.RegisterName("openL2CAPChannel:findExisting:newChannel:")
-	_iOBluetoothDeviceSelSendL2CAPEchoRequestLength = objc.RegisterName("sendL2CAPEchoRequest:length:")
-	_iOBluetoothDeviceSelOpenRFCOMMChannelChannel = objc.RegisterName("openRFCOMMChannel:channel:")
-	_iOBluetoothDeviceSelOpenRFCOMMChannelSyncWithChannelIDDelegate = objc.RegisterName("openRFCOMMChannelSync:withChannelID:delegate:")
-	_iOBluetoothDeviceSelOpenRFCOMMChannelAsyncWithChannelIDDelegate = objc.RegisterName("openRFCOMMChannelAsync:withChannelID:delegate:")
-	_iOBluetoothDeviceSelGetClassOfDevice = objc.RegisterName("getClassOfDevice")
-	_iOBluetoothDeviceSelGetServiceClassMajor = objc.RegisterName("getServiceClassMajor")
-	_iOBluetoothDeviceSelGetDeviceClassMajor = objc.RegisterName("getDeviceClassMajor")
-	_iOBluetoothDeviceSelGetDeviceClassMinor = objc.RegisterName("getDeviceClassMinor")
-	_iOBluetoothDeviceSelGetName = objc.RegisterName("getName")
-	_iOBluetoothDeviceSelGetNameOrAddress = objc.RegisterName("getNameOrAddress")
-	_iOBluetoothDeviceSelGetLastNameUpdate = objc.RegisterName("getLastNameUpdate")
-	_iOBluetoothDeviceSelGetAddress = objc.RegisterName("getAddress")
-	_iOBluetoothDeviceSelGetAddressString = objc.RegisterName("getAddressString")
-	_iOBluetoothDeviceSelGetPageScanRepetitionMode = objc.RegisterName("getPageScanRepetitionMode")
-	_iOBluetoothDeviceSelGetPageScanPeriodMode = objc.RegisterName("getPageScanPeriodMode")
-	_iOBluetoothDeviceSelGetPageScanMode = objc.RegisterName("getPageScanMode")
-	_iOBluetoothDeviceSelGetClockOffset = objc.RegisterName("getClockOffset")
-	_iOBluetoothDeviceSelGetLastInquiryUpdate = objc.RegisterName("getLastInquiryUpdate")
-	_iOBluetoothDeviceSelRSSI = objc.RegisterName("RSSI")
-	_iOBluetoothDeviceSelRawRSSI = objc.RegisterName("rawRSSI")
-	_iOBluetoothDeviceSelIsConnected = objc.RegisterName("isConnected")
-	_iOBluetoothDeviceSelOpenConnection = objc.RegisterName("openConnection")
-	_iOBluetoothDeviceSelOpenConnectionWithPageTimeoutAuthenticationRequired = objc.RegisterName("openConnection:withPageTimeout:authenticationRequired:")
-	_iOBluetoothDeviceSelCloseConnection = objc.RegisterName("closeConnection")
-	_iOBluetoothDeviceSelRemoteNameRequest = objc.RegisterName("remoteNameRequest:")
-	_iOBluetoothDeviceSelRemoteNameRequestWithPageTimeout = objc.RegisterName("remoteNameRequest:withPageTimeout:")
-	_iOBluetoothDeviceSelRequestAuthentication = objc.RegisterName("requestAuthentication")
-	_iOBluetoothDeviceSelGetConnectionHandle = objc.RegisterName("getConnectionHandle")
-	_iOBluetoothDeviceSelIsIncoming = objc.RegisterName("isIncoming")
-	_iOBluetoothDeviceSelGetLinkType = objc.RegisterName("getLinkType")
-	_iOBluetoothDeviceSelGetEncryptionMode = objc.RegisterName("getEncryptionMode")
-	_iOBluetoothDeviceSelPerformSDPQuery = objc.RegisterName("performSDPQuery:")
-	_iOBluetoothDeviceSelPerformSDPQueryUuids = objc.RegisterName("performSDPQuery:uuids:")
-	_iOBluetoothDeviceSelGetServices = objc.RegisterName("getServices")
-	_iOBluetoothDeviceSelGetLastServicesUpdate = objc.RegisterName("getLastServicesUpdate")
-	_iOBluetoothDeviceSelGetServiceRecordForUUID = objc.RegisterName("getServiceRecordForUUID:")
-	_iOBluetoothDeviceSelFavoriteDevices = objc.RegisterName("favoriteDevices")
-	_iOBluetoothDeviceSelIsFavorite = objc.RegisterName("isFavorite")
-	_iOBluetoothDeviceSelAddToFavorites = objc.RegisterName("addToFavorites")
-	_iOBluetoothDeviceSelRemoveFromFavorites = objc.RegisterName("removeFromFavorites")
-	_iOBluetoothDeviceSelRecentDevices = objc.RegisterName("recentDevices:")
-	_iOBluetoothDeviceSelRecentAccessDate = objc.RegisterName("recentAccessDate")
-	_iOBluetoothDeviceSelPairedDevices = objc.RegisterName("pairedDevices")
-	_iOBluetoothDeviceSelIsPaired = objc.RegisterName("isPaired")
-	_iOBluetoothDeviceSelSetSupervisionTimeout = objc.RegisterName("setSupervisionTimeout:")
-	_iOBluetoothDeviceSelOpenL2CAPChannelSyncWithPSMWithConfigurationDelegate = objc.RegisterName("openL2CAPChannelSync:withPSM:withConfiguration:delegate:")
+	_clsIOBluetoothDevice                                                      = _objcClass("IOBluetoothDevice")
+	_iOBluetoothDeviceSelRegisterForConnectNotificationsSelector               = objc.RegisterName("registerForConnectNotifications:selector:")
+	_iOBluetoothDeviceSelRegisterForDisconnectNotificationSelector             = objc.RegisterName("registerForDisconnectNotification:selector:")
+	_iOBluetoothDeviceSelDeviceWithAddress                                     = objc.RegisterName("deviceWithAddress:")
+	_iOBluetoothDeviceSelWithAddress                                           = objc.RegisterName("withAddress:")
+	_iOBluetoothDeviceSelDeviceWithAddressString                               = objc.RegisterName("deviceWithAddressString:")
+	_iOBluetoothDeviceSelWithDeviceRef                                         = objc.RegisterName("withDeviceRef:")
+	_iOBluetoothDeviceSelGetDeviceRef                                          = objc.RegisterName("getDeviceRef")
+	_iOBluetoothDeviceSelOpenL2CAPChannelSyncWithPSMDelegate                   = objc.RegisterName("openL2CAPChannelSync:withPSM:delegate:")
+	_iOBluetoothDeviceSelOpenL2CAPChannelAsyncWithPSMDelegate                  = objc.RegisterName("openL2CAPChannelAsync:withPSM:delegate:")
+	_iOBluetoothDeviceSelOpenL2CAPChannelFindExistingNewChannel                = objc.RegisterName("openL2CAPChannel:findExisting:newChannel:")
+	_iOBluetoothDeviceSelSendL2CAPEchoRequestLength                            = objc.RegisterName("sendL2CAPEchoRequest:length:")
+	_iOBluetoothDeviceSelOpenRFCOMMChannelChannel                              = objc.RegisterName("openRFCOMMChannel:channel:")
+	_iOBluetoothDeviceSelOpenRFCOMMChannelSyncWithChannelIDDelegate            = objc.RegisterName("openRFCOMMChannelSync:withChannelID:delegate:")
+	_iOBluetoothDeviceSelOpenRFCOMMChannelAsyncWithChannelIDDelegate           = objc.RegisterName("openRFCOMMChannelAsync:withChannelID:delegate:")
+	_iOBluetoothDeviceSelGetClassOfDevice                                      = objc.RegisterName("getClassOfDevice")
+	_iOBluetoothDeviceSelGetServiceClassMajor                                  = objc.RegisterName("getServiceClassMajor")
+	_iOBluetoothDeviceSelGetDeviceClassMajor                                   = objc.RegisterName("getDeviceClassMajor")
+	_iOBluetoothDeviceSelGetDeviceClassMinor                                   = objc.RegisterName("getDeviceClassMinor")
+	_iOBluetoothDeviceSelGetName                                               = objc.RegisterName("getName")
+	_iOBluetoothDeviceSelGetNameOrAddress                                      = objc.RegisterName("getNameOrAddress")
+	_iOBluetoothDeviceSelGetLastNameUpdate                                     = objc.RegisterName("getLastNameUpdate")
+	_iOBluetoothDeviceSelGetAddress                                            = objc.RegisterName("getAddress")
+	_iOBluetoothDeviceSelGetAddressString                                      = objc.RegisterName("getAddressString")
+	_iOBluetoothDeviceSelGetPageScanRepetitionMode                             = objc.RegisterName("getPageScanRepetitionMode")
+	_iOBluetoothDeviceSelGetPageScanPeriodMode                                 = objc.RegisterName("getPageScanPeriodMode")
+	_iOBluetoothDeviceSelGetPageScanMode                                       = objc.RegisterName("getPageScanMode")
+	_iOBluetoothDeviceSelGetClockOffset                                        = objc.RegisterName("getClockOffset")
+	_iOBluetoothDeviceSelGetLastInquiryUpdate                                  = objc.RegisterName("getLastInquiryUpdate")
+	_iOBluetoothDeviceSelRSSI                                                  = objc.RegisterName("RSSI")
+	_iOBluetoothDeviceSelRawRSSI                                               = objc.RegisterName("rawRSSI")
+	_iOBluetoothDeviceSelIsConnected                                           = objc.RegisterName("isConnected")
+	_iOBluetoothDeviceSelOpenConnection                                        = objc.RegisterName("openConnection")
+	_iOBluetoothDeviceSelOpenConnectionWithPageTimeoutAuthenticationRequired   = objc.RegisterName("openConnection:withPageTimeout:authenticationRequired:")
+	_iOBluetoothDeviceSelCloseConnection                                       = objc.RegisterName("closeConnection")
+	_iOBluetoothDeviceSelRemoteNameRequest                                     = objc.RegisterName("remoteNameRequest:")
+	_iOBluetoothDeviceSelRemoteNameRequestWithPageTimeout                      = objc.RegisterName("remoteNameRequest:withPageTimeout:")
+	_iOBluetoothDeviceSelRequestAuthentication                                 = objc.RegisterName("requestAuthentication")
+	_iOBluetoothDeviceSelGetConnectionHandle                                   = objc.RegisterName("getConnectionHandle")
+	_iOBluetoothDeviceSelIsIncoming                                            = objc.RegisterName("isIncoming")
+	_iOBluetoothDeviceSelGetLinkType                                           = objc.RegisterName("getLinkType")
+	_iOBluetoothDeviceSelGetEncryptionMode                                     = objc.RegisterName("getEncryptionMode")
+	_iOBluetoothDeviceSelPerformSDPQuery                                       = objc.RegisterName("performSDPQuery:")
+	_iOBluetoothDeviceSelPerformSDPQueryUuids                                  = objc.RegisterName("performSDPQuery:uuids:")
+	_iOBluetoothDeviceSelGetServices                                           = objc.RegisterName("getServices")
+	_iOBluetoothDeviceSelGetLastServicesUpdate                                 = objc.RegisterName("getLastServicesUpdate")
+	_iOBluetoothDeviceSelGetServiceRecordForUUID                               = objc.RegisterName("getServiceRecordForUUID:")
+	_iOBluetoothDeviceSelFavoriteDevices                                       = objc.RegisterName("favoriteDevices")
+	_iOBluetoothDeviceSelIsFavorite                                            = objc.RegisterName("isFavorite")
+	_iOBluetoothDeviceSelAddToFavorites                                        = objc.RegisterName("addToFavorites")
+	_iOBluetoothDeviceSelRemoveFromFavorites                                   = objc.RegisterName("removeFromFavorites")
+	_iOBluetoothDeviceSelRecentDevices                                         = objc.RegisterName("recentDevices:")
+	_iOBluetoothDeviceSelRecentAccessDate                                      = objc.RegisterName("recentAccessDate")
+	_iOBluetoothDeviceSelPairedDevices                                         = objc.RegisterName("pairedDevices")
+	_iOBluetoothDeviceSelIsPaired                                              = objc.RegisterName("isPaired")
+	_iOBluetoothDeviceSelSetSupervisionTimeout                                 = objc.RegisterName("setSupervisionTimeout:")
+	_iOBluetoothDeviceSelOpenL2CAPChannelSyncWithPSMWithConfigurationDelegate  = objc.RegisterName("openL2CAPChannelSync:withPSM:withConfiguration:delegate:")
 	_iOBluetoothDeviceSelOpenL2CAPChannelAsyncWithPSMWithConfigurationDelegate = objc.RegisterName("openL2CAPChannelAsync:withPSM:withConfiguration:delegate:")
-	_iOBluetoothDeviceSelClassOfDevice = objc.RegisterName("classOfDevice")
-	_iOBluetoothDeviceSelServiceClassMajor = objc.RegisterName("serviceClassMajor")
-	_iOBluetoothDeviceSelDeviceClassMajor = objc.RegisterName("deviceClassMajor")
-	_iOBluetoothDeviceSelDeviceClassMinor = objc.RegisterName("deviceClassMinor")
-	_iOBluetoothDeviceSelName = objc.RegisterName("name")
-	_iOBluetoothDeviceSelNameOrAddress = objc.RegisterName("nameOrAddress")
-	_iOBluetoothDeviceSelLastNameUpdate = objc.RegisterName("lastNameUpdate")
-	_iOBluetoothDeviceSelAddressString = objc.RegisterName("addressString")
-	_iOBluetoothDeviceSelConnectionHandle = objc.RegisterName("connectionHandle")
-	_iOBluetoothDeviceSelServices = objc.RegisterName("services")
-	_iOBluetoothDeviceSelHandsFreeAudioGatewayDriverID = objc.RegisterName("handsFreeAudioGatewayDriverID")
-	_iOBluetoothDeviceSelHandsFreeAudioGatewayServiceRecord = objc.RegisterName("handsFreeAudioGatewayServiceRecord")
-	_iOBluetoothDeviceSelHandsFreeDeviceDriverID = objc.RegisterName("handsFreeDeviceDriverID")
-	_iOBluetoothDeviceSelHandsFreeDeviceServiceRecord = objc.RegisterName("handsFreeDeviceServiceRecord")
-	_iOBluetoothDeviceSelIsHandsFreeAudioGateway = objc.RegisterName("isHandsFreeAudioGateway")
-	_iOBluetoothDeviceSelIsHandsFreeDevice = objc.RegisterName("isHandsFreeDevice")
+	_iOBluetoothDeviceSelClassOfDevice                                         = objc.RegisterName("classOfDevice")
+	_iOBluetoothDeviceSelServiceClassMajor                                     = objc.RegisterName("serviceClassMajor")
+	_iOBluetoothDeviceSelDeviceClassMajor                                      = objc.RegisterName("deviceClassMajor")
+	_iOBluetoothDeviceSelDeviceClassMinor                                      = objc.RegisterName("deviceClassMinor")
+	_iOBluetoothDeviceSelName                                                  = objc.RegisterName("name")
+	_iOBluetoothDeviceSelNameOrAddress                                         = objc.RegisterName("nameOrAddress")
+	_iOBluetoothDeviceSelLastNameUpdate                                        = objc.RegisterName("lastNameUpdate")
+	_iOBluetoothDeviceSelAddressString                                         = objc.RegisterName("addressString")
+	_iOBluetoothDeviceSelConnectionHandle                                      = objc.RegisterName("connectionHandle")
+	_iOBluetoothDeviceSelServices                                              = objc.RegisterName("services")
+	_iOBluetoothDeviceSelHandsFreeAudioGatewayDriverID                         = objc.RegisterName("handsFreeAudioGatewayDriverID")
+	_iOBluetoothDeviceSelHandsFreeAudioGatewayServiceRecord                    = objc.RegisterName("handsFreeAudioGatewayServiceRecord")
+	_iOBluetoothDeviceSelHandsFreeDeviceDriverID                               = objc.RegisterName("handsFreeDeviceDriverID")
+	_iOBluetoothDeviceSelHandsFreeDeviceServiceRecord                          = objc.RegisterName("handsFreeDeviceServiceRecord")
+	_iOBluetoothDeviceSelIsHandsFreeAudioGateway                               = objc.RegisterName("isHandsFreeAudioGateway")
+	_iOBluetoothDeviceSelIsHandsFreeDevice                                     = objc.RegisterName("isHandsFreeDevice")
 )
 
 func IOBluetoothDeviceFromID(id objc.ID) *IOBluetoothDevice {
@@ -106,37 +106,49 @@ func IOBluetoothDeviceFromID(id objc.ID) *IOBluetoothDevice {
 
 func IOBluetoothDeviceRegisterForConnectNotificationsSelector(observer objc.ID, inSelector objc.SEL) *IOBluetoothUserNotification {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothDevice), _iOBluetoothDeviceSelRegisterForConnectNotificationsSelector, observer, inSelector)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothUserNotificationFromID(_ret)
 }
 
 func (o *IOBluetoothDevice) RegisterForDisconnectNotificationSelector(observer objc.ID, inSelector objc.SEL) *IOBluetoothUserNotification {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelRegisterForDisconnectNotificationSelector, observer, inSelector)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothUserNotificationFromID(_ret)
 }
 
 func IOBluetoothDeviceDeviceWithAddress(address *BluetoothDeviceAddress) *IOBluetoothDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothDevice), _iOBluetoothDeviceSelDeviceWithAddress, address)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothDeviceFromID(_ret)
 }
 
 func IOBluetoothDeviceWithAddress(address *BluetoothDeviceAddress) *IOBluetoothDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothDevice), _iOBluetoothDeviceSelWithAddress, address)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothDeviceFromID(_ret)
 }
 
 func IOBluetoothDeviceDeviceWithAddressString(address *foundation.NSString) *IOBluetoothDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothDevice), _iOBluetoothDeviceSelDeviceWithAddressString, address.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothDeviceFromID(_ret)
 }
 
 func IOBluetoothDeviceWithDeviceRef(deviceRef unsafe.Pointer) *IOBluetoothDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothDevice), _iOBluetoothDeviceSelWithDeviceRef, deviceRef)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothDeviceFromID(_ret)
 }
 
@@ -202,19 +214,25 @@ func (o *IOBluetoothDevice) GetDeviceClassMinor() uint32 {
 
 func (o *IOBluetoothDevice) GetName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelGetName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *IOBluetoothDevice) GetNameOrAddress() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelGetNameOrAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *IOBluetoothDevice) GetLastNameUpdate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelGetLastNameUpdate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -225,7 +243,9 @@ func (o *IOBluetoothDevice) GetAddress() *BluetoothDeviceAddress {
 
 func (o *IOBluetoothDevice) GetAddressString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelGetAddressString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -251,7 +271,9 @@ func (o *IOBluetoothDevice) GetClockOffset() uint16 {
 
 func (o *IOBluetoothDevice) GetLastInquiryUpdate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelGetLastInquiryUpdate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -343,13 +365,17 @@ func (o *IOBluetoothDevice) GetServices() *foundation.NSArray[objc.ID] {
 
 func (o *IOBluetoothDevice) GetLastServicesUpdate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelGetLastServicesUpdate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *IOBluetoothDevice) GetServiceRecordForUUID(sdpUUID *IOBluetoothSDPUUID) *IOBluetoothSDPServiceRecord {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelGetServiceRecordForUUID, sdpUUID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothSDPServiceRecordFromID(_ret)
 }
 
@@ -380,7 +406,9 @@ func IOBluetoothDeviceRecentDevices(numDevices uint) *foundation.NSArray[objc.ID
 
 func (o *IOBluetoothDevice) RecentAccessDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelRecentAccessDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -431,25 +459,33 @@ func (o *IOBluetoothDevice) DeviceClassMinor() uint32 {
 
 func (o *IOBluetoothDevice) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *IOBluetoothDevice) NameOrAddress() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelNameOrAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *IOBluetoothDevice) LastNameUpdate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelLastNameUpdate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *IOBluetoothDevice) AddressString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelAddressString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -467,14 +503,18 @@ func (o *IOBluetoothDevice) Services() *foundation.NSArray[objc.ID] {
 // Deprecated: since macOS 10.8.
 func (o *IOBluetoothDevice) HandsFreeAudioGatewayDriverID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelHandsFreeAudioGatewayDriverID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @method		handsFreeAudioGatewayServiceRecord @abstract		Return the hands free gateway SDP record @discussion	Returns the hands free gateway SDP record. @result		The hands free gateway SDP record
 func (o *IOBluetoothDevice) HandsFreeAudioGatewayServiceRecord() *IOBluetoothSDPServiceRecord {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelHandsFreeAudioGatewayServiceRecord)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothSDPServiceRecordFromID(_ret)
 }
 
@@ -482,14 +522,18 @@ func (o *IOBluetoothDevice) HandsFreeAudioGatewayServiceRecord() *IOBluetoothSDP
 // Deprecated: since macOS 10.8.
 func (o *IOBluetoothDevice) HandsFreeDeviceDriverID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelHandsFreeDeviceDriverID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @method		handsFreeDeviceServiceRecord @abstract		Return the hands free device SDP record @discussion	Returns the hands free device SDP record. @result		The hands free device SDP record
 func (o *IOBluetoothDevice) HandsFreeDeviceServiceRecord() *IOBluetoothSDPServiceRecord {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelHandsFreeDeviceServiceRecord)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothSDPServiceRecordFromID(_ret)
 }
 
@@ -504,4 +548,3 @@ func (o *IOBluetoothDevice) IsHandsFreeDevice() bool {
 	_ret := objc.Send[bool](o.Ptr(), _iOBluetoothDeviceSelIsHandsFreeDevice)
 	return _ret
 }
-

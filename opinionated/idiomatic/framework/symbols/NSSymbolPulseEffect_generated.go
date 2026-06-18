@@ -63,4 +63,3 @@ type SymbolPulseEffectable interface {
 }
 
 var _ SymbolPulseEffectable = (*SymbolPulseEffect)(nil)
-

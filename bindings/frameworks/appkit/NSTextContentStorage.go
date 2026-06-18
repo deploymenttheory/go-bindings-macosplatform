@@ -16,16 +16,16 @@ type NSTextContentStorage struct {
 }
 
 var (
-	_clsNSTextContentStorage = _objcClass("NSTextContentStorage")
-	_nSTextContentStorageSelAttributedStringForTextElement = objc.RegisterName("attributedStringForTextElement:")
-	_nSTextContentStorageSelTextElementForAttributedString = objc.RegisterName("textElementForAttributedString:")
-	_nSTextContentStorageSelLocationFromLocationWithOffset = objc.RegisterName("locationFromLocation:withOffset:")
-	_nSTextContentStorageSelOffsetFromLocationToLocation = objc.RegisterName("offsetFromLocation:toLocation:")
+	_clsNSTextContentStorage                                              = _objcClass("NSTextContentStorage")
+	_nSTextContentStorageSelAttributedStringForTextElement                = objc.RegisterName("attributedStringForTextElement:")
+	_nSTextContentStorageSelTextElementForAttributedString                = objc.RegisterName("textElementForAttributedString:")
+	_nSTextContentStorageSelLocationFromLocationWithOffset                = objc.RegisterName("locationFromLocation:withOffset:")
+	_nSTextContentStorageSelOffsetFromLocationToLocation                  = objc.RegisterName("offsetFromLocation:toLocation:")
 	_nSTextContentStorageSelAdjustedRangeFromRangeForEditingTextSelection = objc.RegisterName("adjustedRangeFromRange:forEditingTextSelection:")
-	_nSTextContentStorageSelIncludesTextListMarkers = objc.RegisterName("includesTextListMarkers")
-	_nSTextContentStorageSelSetIncludesTextListMarkers = objc.RegisterName("setIncludesTextListMarkers:")
-	_nSTextContentStorageSelAttributedString = objc.RegisterName("attributedString")
-	_nSTextContentStorageSelSetAttributedString = objc.RegisterName("setAttributedString:")
+	_nSTextContentStorageSelIncludesTextListMarkers                       = objc.RegisterName("includesTextListMarkers")
+	_nSTextContentStorageSelSetIncludesTextListMarkers                    = objc.RegisterName("setIncludesTextListMarkers:")
+	_nSTextContentStorageSelAttributedString                              = objc.RegisterName("attributedString")
+	_nSTextContentStorageSelSetAttributedString                           = objc.RegisterName("setAttributedString:")
 )
 
 func NSTextContentStorageFromID(id objc.ID) *NSTextContentStorage {
@@ -40,13 +40,17 @@ func NSTextContentStorageFromID(id objc.ID) *NSTextContentStorage {
 
 func (o *NSTextContentStorage) AttributedStringForTextElement(textElement *NSTextElement) *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContentStorageSelAttributedStringForTextElement, textElement.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
 func (o *NSTextContentStorage) TextElementForAttributedString(attributedString *foundation.NSAttributedString) *NSTextElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContentStorageSelTextElementForAttributedString, attributedString.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextElementFromID(_ret)
 }
 
@@ -62,7 +66,9 @@ func (o *NSTextContentStorage) OffsetFromLocationToLocation(from NSTextLocation,
 
 func (o *NSTextContentStorage) AdjustedRangeFromRangeForEditingTextSelection(textRange *NSTextRange, forEditingTextSelection bool) *NSTextRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContentStorageSelAdjustedRangeFromRangeForEditingTextSelection, textRange.Ptr(), forEditingTextSelection)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextRangeFromID(_ret)
 }
 
@@ -77,11 +83,12 @@ func (o *NSTextContentStorage) SetIncludesTextListMarkers(includesTextListMarker
 
 func (o *NSTextContentStorage) AttributedString() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContentStorageSelAttributedString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
 func (o *NSTextContentStorage) SetAttributedString(attributedString *foundation.NSAttributedString) {
 	o.Ptr().Send(_nSTextContentStorageSelSetAttributedString, attributedString.Ptr())
 }
-

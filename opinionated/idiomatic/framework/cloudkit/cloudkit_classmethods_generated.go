@@ -114,4 +114,3 @@ func LookupInfosWithPhoneNumbers(phoneNumbers *foundation.NSArray[*foundation.NS
 func LookupInfosWithRecordIDs(recordIDs *foundation.NSArray[*raw.CKRecordID]) *foundation.NSArray[*raw.CKUserIdentityLookupInfo] {
 	return raw.CKUserIdentityLookupInfoLookupInfosWithRecordIDs(recordIDs)
 }
-

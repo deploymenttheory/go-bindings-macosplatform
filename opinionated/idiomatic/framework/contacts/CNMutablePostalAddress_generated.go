@@ -124,7 +124,9 @@ func (x *MutablePostalAddress) SetISOCountryCode(iSOCountryCode string) {
 	x.inner.SetISOCountryCode(foundation.NSStringStringWithUTF8String(iSOCountryCode))
 }
 
-func (x *MutablePostalAddress) asPostalAddress() *raw.CNPostalAddress { return &x.inner.CNPostalAddress }
+func (x *MutablePostalAddress) asPostalAddress() *raw.CNPostalAddress {
+	return &x.inner.CNPostalAddress
+}
 
 // MutablePostalAddressable is the interface implemented by [MutablePostalAddress], for mocking and DI.
 type MutablePostalAddressable interface {
@@ -148,4 +150,3 @@ type MutablePostalAddressable interface {
 }
 
 var _ MutablePostalAddressable = (*MutablePostalAddress)(nil)
-

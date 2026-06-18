@@ -19,10 +19,10 @@ type VTFrameProcessorFrame struct {
 }
 
 var (
-	_clsVTFrameProcessorFrame = _objcClass("VTFrameProcessorFrame")
+	_clsVTFrameProcessorFrame                                    = _objcClass("VTFrameProcessorFrame")
 	_vTFrameProcessorFrameSelInitWithBufferPresentationTimeStamp = objc.RegisterName("initWithBuffer:presentationTimeStamp:")
-	_vTFrameProcessorFrameSelBuffer = objc.RegisterName("buffer")
-	_vTFrameProcessorFrameSelPresentationTimeStamp = objc.RegisterName("presentationTimeStamp")
+	_vTFrameProcessorFrameSelBuffer                              = objc.RegisterName("buffer")
+	_vTFrameProcessorFrameSelPresentationTimeStamp               = objc.RegisterName("presentationTimeStamp")
 )
 
 func VTFrameProcessorFrameFromID(id objc.ID) *VTFrameProcessorFrame {
@@ -35,10 +35,12 @@ func VTFrameProcessorFrameFromID(id objc.ID) *VTFrameProcessorFrame {
 	return o
 }
 
-// Creates a new instance of frame with a pixel buffer and presentation timestamp. The `CVPixelBuffer` is retained in this object. Returns `nil` if the ``CVPixelBuffer`` you provided is NULL or the ``CVPixelBuffer`` is not backed by ``IOSurface``. - Parameters: - buffer: The ``CVPixelBuffer`` that this frame wraps; it must not be `nil` and must be ``IOSurface`` backed. - presentationTimeStamp: The presentation timestamp of the buffer.
+// Creates a new instance of frame with a pixel buffer and presentation timestamp. The `CVPixelBuffer` is retained in this object. Returns `nil` if the “CVPixelBuffer“ you provided is NULL or the “CVPixelBuffer“ is not backed by “IOSurface“. - Parameters: - buffer: The “CVPixelBuffer“ that this frame wraps; it must not be `nil` and must be “IOSurface“ backed. - presentationTimeStamp: The presentation timestamp of the buffer.
 func (o *VTFrameProcessorFrame) InitWithBufferPresentationTimeStamp(buffer unsafe.Pointer, presentationTimeStamp coremedia.CMTime) *VTFrameProcessorFrame {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTFrameProcessorFrameSelInitWithBufferPresentationTimeStamp, buffer, presentationTimeStamp)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VTFrameProcessorFrameFromID(_ret)
 }
 
@@ -53,4 +55,3 @@ func (o *VTFrameProcessorFrame) PresentationTimeStamp() coremedia.CMTime {
 	_ret := objc.Send[coremedia.CMTime](o.Ptr(), _vTFrameProcessorFrameSelPresentationTimeStamp)
 	return _ret
 }
-

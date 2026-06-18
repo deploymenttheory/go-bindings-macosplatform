@@ -16,7 +16,9 @@ type MTRDoorLockClusterLockOperationErrorEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRDoorLockClusterLockOperationErrorEvent].
-func (x *MTRDoorLockClusterLockOperationErrorEvent) Unwrap() *raw.MTRDoorLockClusterLockOperationErrorEvent { return x.inner }
+func (x *MTRDoorLockClusterLockOperationErrorEvent) Unwrap() *raw.MTRDoorLockClusterLockOperationErrorEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -168,4 +170,3 @@ type MTRDoorLockClusterLockOperationErrorEventable interface {
 }
 
 var _ MTRDoorLockClusterLockOperationErrorEventable = (*MTRDoorLockClusterLockOperationErrorEvent)(nil)
-

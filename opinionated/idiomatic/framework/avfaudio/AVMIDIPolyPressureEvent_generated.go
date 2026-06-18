@@ -74,9 +74,13 @@ func (x *MIDIPolyPressureEvent) SetPressure(pressure uint) {
 	x.inner.SetPressure(pressure)
 }
 
-func (x *MIDIPolyPressureEvent) asMIDIChannelEvent() *raw.AVMIDIChannelEvent { return &x.inner.AVMIDIChannelEvent }
+func (x *MIDIPolyPressureEvent) asMIDIChannelEvent() *raw.AVMIDIChannelEvent {
+	return &x.inner.AVMIDIChannelEvent
+}
 
-func (x *MIDIPolyPressureEvent) asMusicEvent() *raw.AVMusicEvent { return &x.inner.AVMIDIChannelEvent.AVMusicEvent }
+func (x *MIDIPolyPressureEvent) asMusicEvent() *raw.AVMusicEvent {
+	return &x.inner.AVMIDIChannelEvent.AVMusicEvent
+}
 
 // MIDIPolyPressureEventable is the interface implemented by [MIDIPolyPressureEvent], for mocking and DI.
 type MIDIPolyPressureEventable interface {
@@ -91,4 +95,3 @@ type MIDIPolyPressureEventable interface {
 }
 
 var _ MIDIPolyPressureEventable = (*MIDIPolyPressureEvent)(nil)
-

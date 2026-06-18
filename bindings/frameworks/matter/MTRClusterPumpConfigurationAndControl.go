@@ -16,45 +16,45 @@ type MTRClusterPumpConfigurationAndControl struct {
 }
 
 var (
-	_clsMTRClusterPumpConfigurationAndControl = _objcClass("MTRClusterPumpConfigurationAndControl")
-	_mTRClusterPumpConfigurationAndControlSelReadAttributeMaxPressureWithParams = objc.RegisterName("readAttributeMaxPressureWithParams:")
-	_mTRClusterPumpConfigurationAndControlSelReadAttributeMaxSpeedWithParams = objc.RegisterName("readAttributeMaxSpeedWithParams:")
-	_mTRClusterPumpConfigurationAndControlSelReadAttributeMaxFlowWithParams = objc.RegisterName("readAttributeMaxFlowWithParams:")
-	_mTRClusterPumpConfigurationAndControlSelReadAttributeMinConstPressureWithParams = objc.RegisterName("readAttributeMinConstPressureWithParams:")
-	_mTRClusterPumpConfigurationAndControlSelReadAttributeMaxConstPressureWithParams = objc.RegisterName("readAttributeMaxConstPressureWithParams:")
-	_mTRClusterPumpConfigurationAndControlSelReadAttributeMinCompPressureWithParams = objc.RegisterName("readAttributeMinCompPressureWithParams:")
-	_mTRClusterPumpConfigurationAndControlSelReadAttributeMaxCompPressureWithParams = objc.RegisterName("readAttributeMaxCompPressureWithParams:")
-	_mTRClusterPumpConfigurationAndControlSelReadAttributeMinConstSpeedWithParams = objc.RegisterName("readAttributeMinConstSpeedWithParams:")
-	_mTRClusterPumpConfigurationAndControlSelReadAttributeMaxConstSpeedWithParams = objc.RegisterName("readAttributeMaxConstSpeedWithParams:")
-	_mTRClusterPumpConfigurationAndControlSelReadAttributeMinConstFlowWithParams = objc.RegisterName("readAttributeMinConstFlowWithParams:")
-	_mTRClusterPumpConfigurationAndControlSelReadAttributeMaxConstFlowWithParams = objc.RegisterName("readAttributeMaxConstFlowWithParams:")
-	_mTRClusterPumpConfigurationAndControlSelReadAttributeMinConstTempWithParams = objc.RegisterName("readAttributeMinConstTempWithParams:")
-	_mTRClusterPumpConfigurationAndControlSelReadAttributeMaxConstTempWithParams = objc.RegisterName("readAttributeMaxConstTempWithParams:")
-	_mTRClusterPumpConfigurationAndControlSelReadAttributePumpStatusWithParams = objc.RegisterName("readAttributePumpStatusWithParams:")
-	_mTRClusterPumpConfigurationAndControlSelReadAttributeEffectiveOperationModeWithParams = objc.RegisterName("readAttributeEffectiveOperationModeWithParams:")
-	_mTRClusterPumpConfigurationAndControlSelReadAttributeEffectiveControlModeWithParams = objc.RegisterName("readAttributeEffectiveControlModeWithParams:")
-	_mTRClusterPumpConfigurationAndControlSelReadAttributeCapacityWithParams = objc.RegisterName("readAttributeCapacityWithParams:")
-	_mTRClusterPumpConfigurationAndControlSelReadAttributeSpeedWithParams = objc.RegisterName("readAttributeSpeedWithParams:")
-	_mTRClusterPumpConfigurationAndControlSelReadAttributeLifetimeRunningHoursWithParams = objc.RegisterName("readAttributeLifetimeRunningHoursWithParams:")
-	_mTRClusterPumpConfigurationAndControlSelWriteAttributeLifetimeRunningHoursWithValueExpectedValueInterval = objc.RegisterName("writeAttributeLifetimeRunningHoursWithValue:expectedValueInterval:")
-	_mTRClusterPumpConfigurationAndControlSelWriteAttributeLifetimeRunningHoursWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeLifetimeRunningHoursWithValue:expectedValueInterval:params:")
-	_mTRClusterPumpConfigurationAndControlSelReadAttributePowerWithParams = objc.RegisterName("readAttributePowerWithParams:")
-	_mTRClusterPumpConfigurationAndControlSelReadAttributeLifetimeEnergyConsumedWithParams = objc.RegisterName("readAttributeLifetimeEnergyConsumedWithParams:")
-	_mTRClusterPumpConfigurationAndControlSelWriteAttributeLifetimeEnergyConsumedWithValueExpectedValueInterval = objc.RegisterName("writeAttributeLifetimeEnergyConsumedWithValue:expectedValueInterval:")
+	_clsMTRClusterPumpConfigurationAndControl                                                                         = _objcClass("MTRClusterPumpConfigurationAndControl")
+	_mTRClusterPumpConfigurationAndControlSelReadAttributeMaxPressureWithParams                                       = objc.RegisterName("readAttributeMaxPressureWithParams:")
+	_mTRClusterPumpConfigurationAndControlSelReadAttributeMaxSpeedWithParams                                          = objc.RegisterName("readAttributeMaxSpeedWithParams:")
+	_mTRClusterPumpConfigurationAndControlSelReadAttributeMaxFlowWithParams                                           = objc.RegisterName("readAttributeMaxFlowWithParams:")
+	_mTRClusterPumpConfigurationAndControlSelReadAttributeMinConstPressureWithParams                                  = objc.RegisterName("readAttributeMinConstPressureWithParams:")
+	_mTRClusterPumpConfigurationAndControlSelReadAttributeMaxConstPressureWithParams                                  = objc.RegisterName("readAttributeMaxConstPressureWithParams:")
+	_mTRClusterPumpConfigurationAndControlSelReadAttributeMinCompPressureWithParams                                   = objc.RegisterName("readAttributeMinCompPressureWithParams:")
+	_mTRClusterPumpConfigurationAndControlSelReadAttributeMaxCompPressureWithParams                                   = objc.RegisterName("readAttributeMaxCompPressureWithParams:")
+	_mTRClusterPumpConfigurationAndControlSelReadAttributeMinConstSpeedWithParams                                     = objc.RegisterName("readAttributeMinConstSpeedWithParams:")
+	_mTRClusterPumpConfigurationAndControlSelReadAttributeMaxConstSpeedWithParams                                     = objc.RegisterName("readAttributeMaxConstSpeedWithParams:")
+	_mTRClusterPumpConfigurationAndControlSelReadAttributeMinConstFlowWithParams                                      = objc.RegisterName("readAttributeMinConstFlowWithParams:")
+	_mTRClusterPumpConfigurationAndControlSelReadAttributeMaxConstFlowWithParams                                      = objc.RegisterName("readAttributeMaxConstFlowWithParams:")
+	_mTRClusterPumpConfigurationAndControlSelReadAttributeMinConstTempWithParams                                      = objc.RegisterName("readAttributeMinConstTempWithParams:")
+	_mTRClusterPumpConfigurationAndControlSelReadAttributeMaxConstTempWithParams                                      = objc.RegisterName("readAttributeMaxConstTempWithParams:")
+	_mTRClusterPumpConfigurationAndControlSelReadAttributePumpStatusWithParams                                        = objc.RegisterName("readAttributePumpStatusWithParams:")
+	_mTRClusterPumpConfigurationAndControlSelReadAttributeEffectiveOperationModeWithParams                            = objc.RegisterName("readAttributeEffectiveOperationModeWithParams:")
+	_mTRClusterPumpConfigurationAndControlSelReadAttributeEffectiveControlModeWithParams                              = objc.RegisterName("readAttributeEffectiveControlModeWithParams:")
+	_mTRClusterPumpConfigurationAndControlSelReadAttributeCapacityWithParams                                          = objc.RegisterName("readAttributeCapacityWithParams:")
+	_mTRClusterPumpConfigurationAndControlSelReadAttributeSpeedWithParams                                             = objc.RegisterName("readAttributeSpeedWithParams:")
+	_mTRClusterPumpConfigurationAndControlSelReadAttributeLifetimeRunningHoursWithParams                              = objc.RegisterName("readAttributeLifetimeRunningHoursWithParams:")
+	_mTRClusterPumpConfigurationAndControlSelWriteAttributeLifetimeRunningHoursWithValueExpectedValueInterval         = objc.RegisterName("writeAttributeLifetimeRunningHoursWithValue:expectedValueInterval:")
+	_mTRClusterPumpConfigurationAndControlSelWriteAttributeLifetimeRunningHoursWithValueExpectedValueIntervalParams   = objc.RegisterName("writeAttributeLifetimeRunningHoursWithValue:expectedValueInterval:params:")
+	_mTRClusterPumpConfigurationAndControlSelReadAttributePowerWithParams                                             = objc.RegisterName("readAttributePowerWithParams:")
+	_mTRClusterPumpConfigurationAndControlSelReadAttributeLifetimeEnergyConsumedWithParams                            = objc.RegisterName("readAttributeLifetimeEnergyConsumedWithParams:")
+	_mTRClusterPumpConfigurationAndControlSelWriteAttributeLifetimeEnergyConsumedWithValueExpectedValueInterval       = objc.RegisterName("writeAttributeLifetimeEnergyConsumedWithValue:expectedValueInterval:")
 	_mTRClusterPumpConfigurationAndControlSelWriteAttributeLifetimeEnergyConsumedWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeLifetimeEnergyConsumedWithValue:expectedValueInterval:params:")
-	_mTRClusterPumpConfigurationAndControlSelReadAttributeOperationModeWithParams = objc.RegisterName("readAttributeOperationModeWithParams:")
-	_mTRClusterPumpConfigurationAndControlSelWriteAttributeOperationModeWithValueExpectedValueInterval = objc.RegisterName("writeAttributeOperationModeWithValue:expectedValueInterval:")
-	_mTRClusterPumpConfigurationAndControlSelWriteAttributeOperationModeWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeOperationModeWithValue:expectedValueInterval:params:")
-	_mTRClusterPumpConfigurationAndControlSelReadAttributeControlModeWithParams = objc.RegisterName("readAttributeControlModeWithParams:")
-	_mTRClusterPumpConfigurationAndControlSelWriteAttributeControlModeWithValueExpectedValueInterval = objc.RegisterName("writeAttributeControlModeWithValue:expectedValueInterval:")
-	_mTRClusterPumpConfigurationAndControlSelWriteAttributeControlModeWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeControlModeWithValue:expectedValueInterval:params:")
-	_mTRClusterPumpConfigurationAndControlSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterPumpConfigurationAndControlSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterPumpConfigurationAndControlSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterPumpConfigurationAndControlSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterPumpConfigurationAndControlSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterPumpConfigurationAndControlSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterPumpConfigurationAndControlSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterPumpConfigurationAndControlSelReadAttributeOperationModeWithParams                                     = objc.RegisterName("readAttributeOperationModeWithParams:")
+	_mTRClusterPumpConfigurationAndControlSelWriteAttributeOperationModeWithValueExpectedValueInterval                = objc.RegisterName("writeAttributeOperationModeWithValue:expectedValueInterval:")
+	_mTRClusterPumpConfigurationAndControlSelWriteAttributeOperationModeWithValueExpectedValueIntervalParams          = objc.RegisterName("writeAttributeOperationModeWithValue:expectedValueInterval:params:")
+	_mTRClusterPumpConfigurationAndControlSelReadAttributeControlModeWithParams                                       = objc.RegisterName("readAttributeControlModeWithParams:")
+	_mTRClusterPumpConfigurationAndControlSelWriteAttributeControlModeWithValueExpectedValueInterval                  = objc.RegisterName("writeAttributeControlModeWithValue:expectedValueInterval:")
+	_mTRClusterPumpConfigurationAndControlSelWriteAttributeControlModeWithValueExpectedValueIntervalParams            = objc.RegisterName("writeAttributeControlModeWithValue:expectedValueInterval:params:")
+	_mTRClusterPumpConfigurationAndControlSelReadAttributeGeneratedCommandListWithParams                              = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterPumpConfigurationAndControlSelReadAttributeAcceptedCommandListWithParams                               = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterPumpConfigurationAndControlSelReadAttributeAttributeListWithParams                                     = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterPumpConfigurationAndControlSelReadAttributeFeatureMapWithParams                                        = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterPumpConfigurationAndControlSelReadAttributeClusterRevisionWithParams                                   = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterPumpConfigurationAndControlSelInitWithDeviceEndpointIDQueue                                            = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterPumpConfigurationAndControlSelInitWithDeviceEndpointQueue                                              = objc.RegisterName("initWithDevice:endpoint:queue:")
 )
 
 func MTRClusterPumpConfigurationAndControlFromID(id objc.ID) *MTRClusterPumpConfigurationAndControl {
@@ -242,13 +242,16 @@ func (o *MTRClusterPumpConfigurationAndControl) ReadAttributeClusterRevisionWith
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func (o *MTRClusterPumpConfigurationAndControl) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterPumpConfigurationAndControl {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterPumpConfigurationAndControlSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterPumpConfigurationAndControlFromID(_ret)
 }
 
 func (o *MTRClusterPumpConfigurationAndControl) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterPumpConfigurationAndControl {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterPumpConfigurationAndControlSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterPumpConfigurationAndControlFromID(_ret)
 }
-

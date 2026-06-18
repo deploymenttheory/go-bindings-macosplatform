@@ -54,4 +54,3 @@ type PedometerEventable interface {
 }
 
 var _ PedometerEventable = (*PedometerEvent)(nil)
-

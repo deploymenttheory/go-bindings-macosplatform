@@ -234,11 +234,17 @@ func (x *CNNConvolutionGradient) SetSerializeWeightsAndBiases(serializeWeightsAn
 	x.inner.SetSerializeWeightsAndBiases(serializeWeightsAndBiases)
 }
 
-func (x *CNNConvolutionGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
+func (x *CNNConvolutionGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNGradientKernel
+}
 
-func (x *CNNConvolutionGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *CNNConvolutionGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
-func (x *CNNConvolutionGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel }
+func (x *CNNConvolutionGradient) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel
+}
 
 // CNNConvolutionGradientable is the interface implemented by [CNNConvolutionGradient], for mocking and DI.
 type CNNConvolutionGradientable interface {
@@ -279,4 +285,3 @@ type CNNConvolutionGradientable interface {
 }
 
 var _ CNNConvolutionGradientable = (*CNNConvolutionGradient)(nil)
-

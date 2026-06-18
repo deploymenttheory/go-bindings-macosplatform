@@ -16,9 +16,9 @@ type SWPersonIdentity struct {
 }
 
 var (
-	_clsSWPersonIdentity = _objcClass("SWPersonIdentity")
+	_clsSWPersonIdentity                 = _objcClass("SWPersonIdentity")
 	_sWPersonIdentitySelInitWithRootHash = objc.RegisterName("initWithRootHash:")
-	_sWPersonIdentitySelRootHash = objc.RegisterName("rootHash")
+	_sWPersonIdentitySelRootHash         = objc.RegisterName("rootHash")
 )
 
 func SWPersonIdentityFromID(id objc.ID) *SWPersonIdentity {
@@ -34,14 +34,17 @@ func SWPersonIdentityFromID(id objc.ID) *SWPersonIdentity {
 // @abstract An initializer @param rootHash The root hash of the tree that represents this individual's identity. @discussion The data contains a SHA256 hash of the user's combined public identities.
 func (o *SWPersonIdentity) InitWithRootHash(rootHash *foundation.NSData) *SWPersonIdentity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWPersonIdentitySelInitWithRootHash, rootHash.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SWPersonIdentityFromID(_ret)
 }
 
 // @abstract The root hash of the tree that represents this individual's identity. @discussion The data contains a SHA256 hash of the user's combined public identities.
 func (o *SWPersonIdentity) RootHash() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWPersonIdentitySelRootHash)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

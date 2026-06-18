@@ -15,12 +15,12 @@ type NSHTTPURLResponse struct {
 }
 
 var (
-	_clsNSHTTPURLResponse = _objcClass("NSHTTPURLResponse")
+	_clsNSHTTPURLResponse                                             = _objcClass("NSHTTPURLResponse")
 	_nSHTTPURLResponseSelInitWithURLStatusCodeHTTPVersionHeaderFields = objc.RegisterName("initWithURL:statusCode:HTTPVersion:headerFields:")
-	_nSHTTPURLResponseSelValueForHTTPHeaderField = objc.RegisterName("valueForHTTPHeaderField:")
-	_nSHTTPURLResponseSelLocalizedStringForStatusCode = objc.RegisterName("localizedStringForStatusCode:")
-	_nSHTTPURLResponseSelStatusCode = objc.RegisterName("statusCode")
-	_nSHTTPURLResponseSelAllHeaderFields = objc.RegisterName("allHeaderFields")
+	_nSHTTPURLResponseSelValueForHTTPHeaderField                      = objc.RegisterName("valueForHTTPHeaderField:")
+	_nSHTTPURLResponseSelLocalizedStringForStatusCode                 = objc.RegisterName("localizedStringForStatusCode:")
+	_nSHTTPURLResponseSelStatusCode                                   = objc.RegisterName("statusCode")
+	_nSHTTPURLResponseSelAllHeaderFields                              = objc.RegisterName("allHeaderFields")
 )
 
 func NSHTTPURLResponseFromID(id objc.ID) *NSHTTPURLResponse {
@@ -36,21 +36,27 @@ func NSHTTPURLResponseFromID(id objc.ID) *NSHTTPURLResponse {
 // @method	initWithURL:statusCode:HTTPVersion:headerFields: @abstract initializer for NSHTTPURLResponse objects. @param 	url the URL from which the response was generated. @param	statusCode an HTTP status code. @param	HTTPVersion The version of the HTTP response as represented by the server.  This is typically represented as "HTTP/1.1". @param 	headerFields A dictionary representing the header keys and values of the server response. @result 	the instance of the object, or NULL if an error occurred during initialization. @discussion This API was introduced in Mac OS X 10.7.2 and iOS 5.0 and is not available prior to those releases.
 func (o *NSHTTPURLResponse) InitWithURLStatusCodeHTTPVersionHeaderFields(url *NSURL, statusCode int, hTTPVersion *NSString, headerFields *NSDictionary[*NSString, *NSString]) *NSHTTPURLResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSHTTPURLResponseSelInitWithURLStatusCodeHTTPVersionHeaderFields, url.Ptr(), statusCode, hTTPVersion.Ptr(), headerFields.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSHTTPURLResponseFromID(_ret)
 }
 
 // @method valueForHTTPHeaderField: @abstract Returns the value which corresponds to the given header field. Note that, in keeping with the HTTP RFC, HTTP header field names are case-insensitive. @param field the header field name to use for the lookup (case-insensitive). @result the value associated with the given header field, or nil if there is no value associated with the given header field.
 func (o *NSHTTPURLResponse) ValueForHTTPHeaderField(field *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSHTTPURLResponseSelValueForHTTPHeaderField, field.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // @method localizedStringForStatusCode: @abstract Convenience method which returns a localized string corresponding to the status code for this response. @param statusCode the status code to use to produce a localized string. @result A localized string corresponding to the given status code.
 func NSHTTPURLResponseLocalizedStringForStatusCode(statusCode int) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSHTTPURLResponse), _nSHTTPURLResponseSelLocalizedStringForStatusCode, statusCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -65,4 +71,3 @@ func (o *NSHTTPURLResponse) AllHeaderFields() *NSDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[*NSDictionary[objc.ID, objc.ID]](o.Ptr(), _nSHTTPURLResponseSelAllHeaderFields)
 	return _ret
 }
-

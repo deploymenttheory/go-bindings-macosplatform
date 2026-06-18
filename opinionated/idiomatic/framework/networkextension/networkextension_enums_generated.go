@@ -110,7 +110,7 @@ const (
 	// @const NEFilterPacketProviderVerdictAllow Allow a packet
 	NEFilterPacketProviderVerdictAllow NEFilterPacketProviderVerdict = 0
 	// @const NEFilterPacketProviderVerdictDrop Drop a packet
-	NEFilterPacketProviderVerdictDrop NEFilterPacketProviderVerdict = 1
+	NEFilterPacketProviderVerdictDrop  NEFilterPacketProviderVerdict = 1
 	NEFilterPacketProviderVerdictDelay NEFilterPacketProviderVerdict = 2
 )
 
@@ -815,4 +815,3 @@ func (e NWUDPSessionState) String() string {
 		return fmt.Sprintf("NWUDPSessionState(%d)", int64(e))
 	}
 }
-

@@ -200,4 +200,3 @@ type Printerable interface {
 }
 
 var _ Printerable = (*Printer)(nil)
-

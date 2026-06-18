@@ -18,14 +18,14 @@ type MDLAnimationBindComponent struct {
 }
 
 var (
-	_clsMDLAnimationBindComponent = _objcClass("MDLAnimationBindComponent")
-	_mDLAnimationBindComponentSelSkeleton = objc.RegisterName("skeleton")
-	_mDLAnimationBindComponentSelSetSkeleton = objc.RegisterName("setSkeleton:")
-	_mDLAnimationBindComponentSelJointAnimation = objc.RegisterName("jointAnimation")
-	_mDLAnimationBindComponentSelSetJointAnimation = objc.RegisterName("setJointAnimation:")
-	_mDLAnimationBindComponentSelJointPaths = objc.RegisterName("jointPaths")
-	_mDLAnimationBindComponentSelSetJointPaths = objc.RegisterName("setJointPaths:")
-	_mDLAnimationBindComponentSelGeometryBindTransform = objc.RegisterName("geometryBindTransform")
+	_clsMDLAnimationBindComponent                         = _objcClass("MDLAnimationBindComponent")
+	_mDLAnimationBindComponentSelSkeleton                 = objc.RegisterName("skeleton")
+	_mDLAnimationBindComponentSelSetSkeleton              = objc.RegisterName("setSkeleton:")
+	_mDLAnimationBindComponentSelJointAnimation           = objc.RegisterName("jointAnimation")
+	_mDLAnimationBindComponentSelSetJointAnimation        = objc.RegisterName("setJointAnimation:")
+	_mDLAnimationBindComponentSelJointPaths               = objc.RegisterName("jointPaths")
+	_mDLAnimationBindComponentSelSetJointPaths            = objc.RegisterName("setJointPaths:")
+	_mDLAnimationBindComponentSelGeometryBindTransform    = objc.RegisterName("geometryBindTransform")
 	_mDLAnimationBindComponentSelSetGeometryBindTransform = objc.RegisterName("setGeometryBindTransform:")
 )
 
@@ -41,7 +41,9 @@ func MDLAnimationBindComponentFromID(id objc.ID) *MDLAnimationBindComponent {
 
 func (o *MDLAnimationBindComponent) Skeleton() *MDLSkeleton {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLAnimationBindComponentSelSkeleton)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLSkeletonFromID(_ret)
 }
 
@@ -75,4 +77,3 @@ func (o *MDLAnimationBindComponent) GeometryBindTransform() unsafe.Pointer {
 func (o *MDLAnimationBindComponent) SetGeometryBindTransform(geometryBindTransform unsafe.Pointer) {
 	o.Ptr().Send(_mDLAnimationBindComponentSelSetGeometryBindTransform, geometryBindTransform)
 }
-

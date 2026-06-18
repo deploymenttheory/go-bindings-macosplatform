@@ -166,11 +166,17 @@ func (x *CNNFullyConnectedGradient) WithDestinationImageAllocator(destinationIma
 	return x
 }
 
-func (x *CNNFullyConnectedGradient) asCNNConvolutionGradient() *raw.MPSCNNConvolutionGradient { return &x.inner.MPSCNNConvolutionGradient }
+func (x *CNNFullyConnectedGradient) asCNNConvolutionGradient() *raw.MPSCNNConvolutionGradient {
+	return &x.inner.MPSCNNConvolutionGradient
+}
 
-func (x *CNNFullyConnectedGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel { return &x.inner.MPSCNNConvolutionGradient.MPSCNNGradientKernel }
+func (x *CNNFullyConnectedGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNConvolutionGradient.MPSCNNGradientKernel
+}
 
-func (x *CNNFullyConnectedGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNConvolutionGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *CNNFullyConnectedGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNConvolutionGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
 // CNNFullyConnectedGradientable is the interface implemented by [CNNFullyConnectedGradient], for mocking and DI.
 type CNNFullyConnectedGradientable interface {
@@ -198,4 +204,3 @@ type CNNFullyConnectedGradientable interface {
 }
 
 var _ CNNFullyConnectedGradientable = (*CNNFullyConnectedGradient)(nil)
-

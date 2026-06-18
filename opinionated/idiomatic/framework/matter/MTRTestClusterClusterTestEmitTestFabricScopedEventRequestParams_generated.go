@@ -16,11 +16,15 @@ type MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams].
-func (x *MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams) Unwrap() *raw.MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams { return x.inner }
+func (x *MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams) Unwrap() *raw.MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParamsFromID adopts an existing object pointer as a MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams (nil for 0).
 func MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParamsFromID(id objc.ID) *MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams {
@@ -54,7 +58,9 @@ func (x *MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams) WithSe
 	return x
 }
 
-func (x *MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams) asMTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams() *raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams { return &x.inner.MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams }
+func (x *MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams) asMTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams() *raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams {
+	return &x.inner.MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams
+}
 
 // MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParamsable is the interface implemented by [MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams], for mocking and DI.
 type MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParamsable interface {
@@ -65,4 +71,3 @@ type MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParamsable interfa
 }
 
 var _ MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParamsable = (*MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams)(nil)
-

@@ -16,7 +16,7 @@ type VNSaliencyImageObservation struct {
 }
 
 var (
-	_clsVNSaliencyImageObservation = _objcClass("VNSaliencyImageObservation")
+	_clsVNSaliencyImageObservation               = _objcClass("VNSaliencyImageObservation")
 	_vNSaliencyImageObservationSelSalientObjects = objc.RegisterName("salientObjects")
 )
 
@@ -32,7 +32,8 @@ func VNSaliencyImageObservationFromID(id objc.ID) *VNSaliencyImageObservation {
 
 func (o *VNSaliencyImageObservation) SalientObjects() *foundation.NSArray[*VNRectangleObservation] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNSaliencyImageObservationSelSalientObjects)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VNRectangleObservation](_ret)
 }
-

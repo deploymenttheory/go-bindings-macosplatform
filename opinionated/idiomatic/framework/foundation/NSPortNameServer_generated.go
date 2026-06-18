@@ -85,4 +85,3 @@ type PortNameServerable interface {
 }
 
 var _ PortNameServerable = (*PortNameServer)(nil)
-

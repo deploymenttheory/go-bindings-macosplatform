@@ -75,4 +75,3 @@ type AUGenericViewable interface {
 }
 
 var _ AUGenericViewable = (*AUGenericView)(nil)
-

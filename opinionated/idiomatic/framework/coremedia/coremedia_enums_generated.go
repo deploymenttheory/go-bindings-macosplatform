@@ -11,16 +11,16 @@ import (
 type CMTagCategory int64
 
 const (
-	KCMTagCategory_Undefined CMTagCategory = 0
-	KCMTagCategory_MediaType CMTagCategory = 1835297121
-	KCMTagCategory_MediaSubType CMTagCategory = 1836283234
-	KCMTagCategory_TrackID CMTagCategory = 1953653099
-	KCMTagCategory_ChannelID CMTagCategory = 1986226286
-	KCMTagCategory_VideoLayerID CMTagCategory = 1986814329
-	KCMTagCategory_PixelFormat CMTagCategory = 1885960294
-	KCMTagCategory_PackingType CMTagCategory = 1885430635
-	KCMTagCategory_ProjectionType CMTagCategory = 1886547818
-	KCMTagCategory_StereoView CMTagCategory = 1702454643
+	KCMTagCategory_Undefined                CMTagCategory = 0
+	KCMTagCategory_MediaType                CMTagCategory = 1835297121
+	KCMTagCategory_MediaSubType             CMTagCategory = 1836283234
+	KCMTagCategory_TrackID                  CMTagCategory = 1953653099
+	KCMTagCategory_ChannelID                CMTagCategory = 1986226286
+	KCMTagCategory_VideoLayerID             CMTagCategory = 1986814329
+	KCMTagCategory_PixelFormat              CMTagCategory = 1885960294
+	KCMTagCategory_PackingType              CMTagCategory = 1885430635
+	KCMTagCategory_ProjectionType           CMTagCategory = 1886547818
+	KCMTagCategory_StereoView               CMTagCategory = 1702454643
 	KCMTagCategory_StereoViewInterpretation CMTagCategory = 1702455664
 )
 
@@ -57,10 +57,10 @@ type CMTagDataType int64
 
 const (
 	KCMTagDataType_Invalid CMTagDataType = 0
-	KCMTagDataType_SInt64 CMTagDataType = 2
+	KCMTagDataType_SInt64  CMTagDataType = 2
 	KCMTagDataType_Float64 CMTagDataType = 3
-	KCMTagDataType_OSType CMTagDataType = 5
-	KCMTagDataType_Flags CMTagDataType = 7
+	KCMTagDataType_OSType  CMTagDataType = 5
+	KCMTagDataType_Flags   CMTagDataType = 7
 )
 
 func (e CMTagDataType) String() string {
@@ -83,13 +83,13 @@ func (e CMTagDataType) String() string {
 type CMTimeRoundingMethod int64
 
 const (
-	KCMTimeRoundingMethod_RoundHalfAwayFromZero CMTimeRoundingMethod = 1
-	KCMTimeRoundingMethod_RoundTowardZero CMTimeRoundingMethod = 2
-	KCMTimeRoundingMethod_RoundAwayFromZero CMTimeRoundingMethod = 3
-	KCMTimeRoundingMethod_QuickTime CMTimeRoundingMethod = 4
+	KCMTimeRoundingMethod_RoundHalfAwayFromZero       CMTimeRoundingMethod = 1
+	KCMTimeRoundingMethod_RoundTowardZero             CMTimeRoundingMethod = 2
+	KCMTimeRoundingMethod_RoundAwayFromZero           CMTimeRoundingMethod = 3
+	KCMTimeRoundingMethod_QuickTime                   CMTimeRoundingMethod = 4
 	KCMTimeRoundingMethod_RoundTowardPositiveInfinity CMTimeRoundingMethod = 5
 	KCMTimeRoundingMethod_RoundTowardNegativeInfinity CMTimeRoundingMethod = 6
-	KCMTimeRoundingMethod_Default CMTimeRoundingMethod = 1
+	KCMTimeRoundingMethod_Default                     CMTimeRoundingMethod = 1
 )
 
 func (e CMTimeRoundingMethod) String() string {
@@ -110,4 +110,3 @@ func (e CMTimeRoundingMethod) String() string {
 		return fmt.Sprintf("CMTimeRoundingMethod(%d)", int64(e))
 	}
 }
-

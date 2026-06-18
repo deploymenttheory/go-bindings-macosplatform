@@ -43,4 +43,3 @@ type SpeakableStringable interface {
 }
 
 var _ SpeakableStringable = (*SpeakableString)(nil)
-

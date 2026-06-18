@@ -85,4 +85,3 @@ type PortraitEffectsMatteable interface {
 }
 
 var _ PortraitEffectsMatteable = (*PortraitEffectsMatte)(nil)
-

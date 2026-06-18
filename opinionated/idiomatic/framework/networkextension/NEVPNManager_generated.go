@@ -46,7 +46,9 @@ func (x *NEVPNManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NEVPN
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asNEOnDemandRule().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asNEOnDemandRule().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NEOnDemandRule](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -262,4 +264,3 @@ type NEVPNManagerable interface {
 }
 
 var _ NEVPNManagerable = (*NEVPNManager)(nil)
-

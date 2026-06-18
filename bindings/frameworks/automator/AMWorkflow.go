@@ -18,22 +18,22 @@ type AMWorkflow struct {
 }
 
 var (
-	_clsAMWorkflow = _objcClass("AMWorkflow")
+	_clsAMWorkflow                               = _objcClass("AMWorkflow")
 	_aMWorkflowSelRunWorkflowAtURLWithInputError = objc.RegisterName("runWorkflowAtURL:withInput:error:")
-	_aMWorkflowSelInit = objc.RegisterName("init")
-	_aMWorkflowSelInitWithContentsOfURLError = objc.RegisterName("initWithContentsOfURL:error:")
-	_aMWorkflowSelWriteToURLError = objc.RegisterName("writeToURL:error:")
-	_aMWorkflowSelSetValueForVariableWithName = objc.RegisterName("setValue:forVariableWithName:")
-	_aMWorkflowSelValueForVariableWithName = objc.RegisterName("valueForVariableWithName:")
-	_aMWorkflowSelAddAction = objc.RegisterName("addAction:")
-	_aMWorkflowSelRemoveAction = objc.RegisterName("removeAction:")
-	_aMWorkflowSelInsertActionAtIndex = objc.RegisterName("insertAction:atIndex:")
-	_aMWorkflowSelMoveActionAtIndexToIndex = objc.RegisterName("moveActionAtIndex:toIndex:")
-	_aMWorkflowSelFileURL = objc.RegisterName("fileURL")
-	_aMWorkflowSelActions = objc.RegisterName("actions")
-	_aMWorkflowSelInput = objc.RegisterName("input")
-	_aMWorkflowSelSetInput = objc.RegisterName("setInput:")
-	_aMWorkflowSelOutput = objc.RegisterName("output")
+	_aMWorkflowSelInit                           = objc.RegisterName("init")
+	_aMWorkflowSelInitWithContentsOfURLError     = objc.RegisterName("initWithContentsOfURL:error:")
+	_aMWorkflowSelWriteToURLError                = objc.RegisterName("writeToURL:error:")
+	_aMWorkflowSelSetValueForVariableWithName    = objc.RegisterName("setValue:forVariableWithName:")
+	_aMWorkflowSelValueForVariableWithName       = objc.RegisterName("valueForVariableWithName:")
+	_aMWorkflowSelAddAction                      = objc.RegisterName("addAction:")
+	_aMWorkflowSelRemoveAction                   = objc.RegisterName("removeAction:")
+	_aMWorkflowSelInsertActionAtIndex            = objc.RegisterName("insertAction:atIndex:")
+	_aMWorkflowSelMoveActionAtIndexToIndex       = objc.RegisterName("moveActionAtIndex:toIndex:")
+	_aMWorkflowSelFileURL                        = objc.RegisterName("fileURL")
+	_aMWorkflowSelActions                        = objc.RegisterName("actions")
+	_aMWorkflowSelInput                          = objc.RegisterName("input")
+	_aMWorkflowSelSetInput                       = objc.RegisterName("setInput:")
+	_aMWorkflowSelOutput                         = objc.RegisterName("output")
 )
 
 func AMWorkflowFromID(id objc.ID) *AMWorkflow {
@@ -57,14 +57,18 @@ func AMWorkflowRunWorkflowAtURLWithInputError(fileURL *foundation.NSURL, input o
 
 func (o *AMWorkflow) Init() *AMWorkflow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aMWorkflowSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AMWorkflowFromID(_ret)
 }
 
 func (o *AMWorkflow) InitWithContentsOfURLError(fileURL *foundation.NSURL) (*AMWorkflow, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aMWorkflowSelInitWithContentsOfURLError, fileURL.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -108,13 +112,17 @@ func (o *AMWorkflow) MoveActionAtIndexToIndex(startIndex uint, endIndex uint) {
 
 func (o *AMWorkflow) FileURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aMWorkflowSelFileURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *AMWorkflow) Actions() *foundation.NSArray[*AMAction] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aMWorkflowSelActions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AMAction](_ret)
 }
 
@@ -131,4 +139,3 @@ func (o *AMWorkflow) Output() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aMWorkflowSelOutput)
 	return _ret
 }
-

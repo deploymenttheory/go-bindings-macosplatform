@@ -12,12 +12,12 @@ import (
 type INAnswerCallIntentResponseCode int64
 
 const (
-	INAnswerCallIntentResponseCodeUnspecified INAnswerCallIntentResponseCode = 0
-	INAnswerCallIntentResponseCodeReady INAnswerCallIntentResponseCode = 1
-	INAnswerCallIntentResponseCodeContinueInApp INAnswerCallIntentResponseCode = 2
-	INAnswerCallIntentResponseCodeInProgress INAnswerCallIntentResponseCode = 3
-	INAnswerCallIntentResponseCodeSuccess INAnswerCallIntentResponseCode = 4
-	INAnswerCallIntentResponseCodeFailure INAnswerCallIntentResponseCode = 5
+	INAnswerCallIntentResponseCodeUnspecified               INAnswerCallIntentResponseCode = 0
+	INAnswerCallIntentResponseCodeReady                     INAnswerCallIntentResponseCode = 1
+	INAnswerCallIntentResponseCodeContinueInApp             INAnswerCallIntentResponseCode = 2
+	INAnswerCallIntentResponseCodeInProgress                INAnswerCallIntentResponseCode = 3
+	INAnswerCallIntentResponseCodeSuccess                   INAnswerCallIntentResponseCode = 4
+	INAnswerCallIntentResponseCodeFailure                   INAnswerCallIntentResponseCode = 5
 	INAnswerCallIntentResponseCodeFailureRequiringAppLaunch INAnswerCallIntentResponseCode = 6
 )
 
@@ -45,9 +45,9 @@ func (e INAnswerCallIntentResponseCode) String() string {
 type INCallAudioRoute int64
 
 const (
-	INCallAudioRouteUnknown INCallAudioRoute = 0
+	INCallAudioRouteUnknown                INCallAudioRoute = 0
 	INCallAudioRouteSpeakerphoneAudioRoute INCallAudioRoute = 1
-	INCallAudioRouteBluetoothAudioRoute INCallAudioRoute = 2
+	INCallAudioRouteBluetoothAudioRoute    INCallAudioRoute = 2
 )
 
 func (e INCallAudioRoute) String() string {
@@ -66,7 +66,7 @@ func (e INCallAudioRoute) String() string {
 type INCallCapability int64
 
 const (
-	INCallCapabilityUnknown INCallCapability = 0
+	INCallCapabilityUnknown   INCallCapability = 0
 	INCallCapabilityAudioCall INCallCapability = 1
 	INCallCapabilityVideoCall INCallCapability = 2
 )
@@ -87,12 +87,12 @@ func (e INCallCapability) String() string {
 type INCallDestinationType int64
 
 const (
-	INCallDestinationTypeUnknown INCallDestinationType = 0
-	INCallDestinationTypeNormal INCallDestinationType = 1
+	INCallDestinationTypeUnknown   INCallDestinationType = 0
+	INCallDestinationTypeNormal    INCallDestinationType = 1
 	INCallDestinationTypeEmergency INCallDestinationType = 2
 	INCallDestinationTypeVoicemail INCallDestinationType = 3
-	INCallDestinationTypeRedial INCallDestinationType = 4
-	INCallDestinationTypeCallBack INCallDestinationType = 5
+	INCallDestinationTypeRedial    INCallDestinationType = 4
+	INCallDestinationTypeCallBack  INCallDestinationType = 5
 	// Deprecated: Use INCallDestinationTypeNormal instead
 	INCallDestinationTypeNormalDestination INCallDestinationType = 1
 	// Deprecated: Use INCallDestinationTypeEmergency instead
@@ -125,15 +125,15 @@ func (e INCallDestinationType) String() string {
 type INCallRecordType int64
 
 const (
-	INCallRecordTypeUnknown INCallRecordType = 0
-	INCallRecordTypeOutgoing INCallRecordType = 1
-	INCallRecordTypeMissed INCallRecordType = 2
-	INCallRecordTypeReceived INCallRecordType = 3
-	INCallRecordTypeLatest INCallRecordType = 4
-	INCallRecordTypeVoicemail INCallRecordType = 5
-	INCallRecordTypeRinging INCallRecordType = 6
+	INCallRecordTypeUnknown    INCallRecordType = 0
+	INCallRecordTypeOutgoing   INCallRecordType = 1
+	INCallRecordTypeMissed     INCallRecordType = 2
+	INCallRecordTypeReceived   INCallRecordType = 3
+	INCallRecordTypeLatest     INCallRecordType = 4
+	INCallRecordTypeVoicemail  INCallRecordType = 5
+	INCallRecordTypeRinging    INCallRecordType = 6
 	INCallRecordTypeInProgress INCallRecordType = 7
-	INCallRecordTypeOnHold INCallRecordType = 8
+	INCallRecordTypeOnHold     INCallRecordType = 8
 )
 
 func (e INCallRecordType) String() string {
@@ -165,14 +165,14 @@ func (e INCallRecordType) String() string {
 type INCallRecordTypeOptions uint64
 
 const (
-	INCallRecordTypeOptionOutgoing INCallRecordTypeOptions = 1
-	INCallRecordTypeOptionMissed INCallRecordTypeOptions = 2
-	INCallRecordTypeOptionReceived INCallRecordTypeOptions = 4
-	INCallRecordTypeOptionLatest INCallRecordTypeOptions = 8
-	INCallRecordTypeOptionVoicemail INCallRecordTypeOptions = 16
-	INCallRecordTypeOptionRinging INCallRecordTypeOptions = 32
+	INCallRecordTypeOptionOutgoing   INCallRecordTypeOptions = 1
+	INCallRecordTypeOptionMissed     INCallRecordTypeOptions = 2
+	INCallRecordTypeOptionReceived   INCallRecordTypeOptions = 4
+	INCallRecordTypeOptionLatest     INCallRecordTypeOptions = 8
+	INCallRecordTypeOptionVoicemail  INCallRecordTypeOptions = 16
+	INCallRecordTypeOptionRinging    INCallRecordTypeOptions = 32
 	INCallRecordTypeOptionInProgress INCallRecordTypeOptions = 64
-	INCallRecordTypeOptionOnHold INCallRecordTypeOptions = 128
+	INCallRecordTypeOptionOnHold     INCallRecordTypeOptions = 128
 )
 
 func (e INCallRecordTypeOptions) String() string {
@@ -210,17 +210,17 @@ func (e INCallRecordTypeOptions) String() string {
 type INEditMessageIntentResponseCode int64
 
 const (
-	INEditMessageIntentResponseCodeUnspecified INEditMessageIntentResponseCode = 0
-	INEditMessageIntentResponseCodeReady INEditMessageIntentResponseCode = 1
-	INEditMessageIntentResponseCodeInProgress INEditMessageIntentResponseCode = 2
-	INEditMessageIntentResponseCodeSuccess INEditMessageIntentResponseCode = 3
-	INEditMessageIntentResponseCodeFailure INEditMessageIntentResponseCode = 4
-	INEditMessageIntentResponseCodeFailureRequiringAppLaunch INEditMessageIntentResponseCode = 5
-	INEditMessageIntentResponseCodeFailureMessageNotFound INEditMessageIntentResponseCode = 6
-	INEditMessageIntentResponseCodeFailurePastEditTimeLimit INEditMessageIntentResponseCode = 7
-	INEditMessageIntentResponseCodeFailureMessageTypeUnsupported INEditMessageIntentResponseCode = 8
-	INEditMessageIntentResponseCodeFailureUnsupportedOnService INEditMessageIntentResponseCode = 9
-	INEditMessageIntentResponseCodeFailureMessageServiceNotAvailable INEditMessageIntentResponseCode = 10
+	INEditMessageIntentResponseCodeUnspecified                         INEditMessageIntentResponseCode = 0
+	INEditMessageIntentResponseCodeReady                               INEditMessageIntentResponseCode = 1
+	INEditMessageIntentResponseCodeInProgress                          INEditMessageIntentResponseCode = 2
+	INEditMessageIntentResponseCodeSuccess                             INEditMessageIntentResponseCode = 3
+	INEditMessageIntentResponseCodeFailure                             INEditMessageIntentResponseCode = 4
+	INEditMessageIntentResponseCodeFailureRequiringAppLaunch           INEditMessageIntentResponseCode = 5
+	INEditMessageIntentResponseCodeFailureMessageNotFound              INEditMessageIntentResponseCode = 6
+	INEditMessageIntentResponseCodeFailurePastEditTimeLimit            INEditMessageIntentResponseCode = 7
+	INEditMessageIntentResponseCodeFailureMessageTypeUnsupported       INEditMessageIntentResponseCode = 8
+	INEditMessageIntentResponseCodeFailureUnsupportedOnService         INEditMessageIntentResponseCode = 9
+	INEditMessageIntentResponseCodeFailureMessageServiceNotAvailable   INEditMessageIntentResponseCode = 10
 	INEditMessageIntentResponseCodeFailureRequiringInAppAuthentication INEditMessageIntentResponseCode = 11
 )
 
@@ -259,9 +259,9 @@ type INFocusStatusAuthorizationStatus int64
 
 const (
 	INFocusStatusAuthorizationStatusNotDetermined INFocusStatusAuthorizationStatus = 0
-	INFocusStatusAuthorizationStatusRestricted INFocusStatusAuthorizationStatus = 1
-	INFocusStatusAuthorizationStatusDenied INFocusStatusAuthorizationStatus = 2
-	INFocusStatusAuthorizationStatusAuthorized INFocusStatusAuthorizationStatus = 3
+	INFocusStatusAuthorizationStatusRestricted    INFocusStatusAuthorizationStatus = 1
+	INFocusStatusAuthorizationStatusDenied        INFocusStatusAuthorizationStatus = 2
+	INFocusStatusAuthorizationStatusAuthorized    INFocusStatusAuthorizationStatus = 3
 )
 
 func (e INFocusStatusAuthorizationStatus) String() string {
@@ -282,11 +282,11 @@ func (e INFocusStatusAuthorizationStatus) String() string {
 type INGetReservationDetailsIntentResponseCode int64
 
 const (
-	INGetReservationDetailsIntentResponseCodeUnspecified INGetReservationDetailsIntentResponseCode = 0
-	INGetReservationDetailsIntentResponseCodeReady INGetReservationDetailsIntentResponseCode = 1
-	INGetReservationDetailsIntentResponseCodeInProgress INGetReservationDetailsIntentResponseCode = 2
-	INGetReservationDetailsIntentResponseCodeSuccess INGetReservationDetailsIntentResponseCode = 3
-	INGetReservationDetailsIntentResponseCodeFailure INGetReservationDetailsIntentResponseCode = 4
+	INGetReservationDetailsIntentResponseCodeUnspecified               INGetReservationDetailsIntentResponseCode = 0
+	INGetReservationDetailsIntentResponseCodeReady                     INGetReservationDetailsIntentResponseCode = 1
+	INGetReservationDetailsIntentResponseCodeInProgress                INGetReservationDetailsIntentResponseCode = 2
+	INGetReservationDetailsIntentResponseCodeSuccess                   INGetReservationDetailsIntentResponseCode = 3
+	INGetReservationDetailsIntentResponseCodeFailure                   INGetReservationDetailsIntentResponseCode = 4
 	INGetReservationDetailsIntentResponseCodeFailureRequiringAppLaunch INGetReservationDetailsIntentResponseCode = 5
 )
 
@@ -312,13 +312,13 @@ func (e INGetReservationDetailsIntentResponseCode) String() string {
 type INHangUpCallIntentResponseCode int64
 
 const (
-	INHangUpCallIntentResponseCodeUnspecified INHangUpCallIntentResponseCode = 0
-	INHangUpCallIntentResponseCodeReady INHangUpCallIntentResponseCode = 1
-	INHangUpCallIntentResponseCodeInProgress INHangUpCallIntentResponseCode = 2
-	INHangUpCallIntentResponseCodeSuccess INHangUpCallIntentResponseCode = 3
-	INHangUpCallIntentResponseCodeFailure INHangUpCallIntentResponseCode = 4
+	INHangUpCallIntentResponseCodeUnspecified               INHangUpCallIntentResponseCode = 0
+	INHangUpCallIntentResponseCodeReady                     INHangUpCallIntentResponseCode = 1
+	INHangUpCallIntentResponseCodeInProgress                INHangUpCallIntentResponseCode = 2
+	INHangUpCallIntentResponseCodeSuccess                   INHangUpCallIntentResponseCode = 3
+	INHangUpCallIntentResponseCodeFailure                   INHangUpCallIntentResponseCode = 4
 	INHangUpCallIntentResponseCodeFailureRequiringAppLaunch INHangUpCallIntentResponseCode = 5
-	INHangUpCallIntentResponseCodeFailureNoCallToHangUp INHangUpCallIntentResponseCode = 6
+	INHangUpCallIntentResponseCodeFailureNoCallToHangUp     INHangUpCallIntentResponseCode = 6
 )
 
 func (e INHangUpCallIntentResponseCode) String() string {
@@ -345,12 +345,12 @@ func (e INHangUpCallIntentResponseCode) String() string {
 type INIntentHandlingStatus int64
 
 const (
-	INIntentHandlingStatusUnspecified INIntentHandlingStatus = 0
-	INIntentHandlingStatusReady INIntentHandlingStatus = 1
-	INIntentHandlingStatusInProgress INIntentHandlingStatus = 2
-	INIntentHandlingStatusSuccess INIntentHandlingStatus = 3
-	INIntentHandlingStatusFailure INIntentHandlingStatus = 4
-	INIntentHandlingStatusDeferredToApplication INIntentHandlingStatus = 5
+	INIntentHandlingStatusUnspecified              INIntentHandlingStatus = 0
+	INIntentHandlingStatusReady                    INIntentHandlingStatus = 1
+	INIntentHandlingStatusInProgress               INIntentHandlingStatus = 2
+	INIntentHandlingStatusSuccess                  INIntentHandlingStatus = 3
+	INIntentHandlingStatusFailure                  INIntentHandlingStatus = 4
+	INIntentHandlingStatusDeferredToApplication    INIntentHandlingStatus = 5
 	INIntentHandlingStatusUserConfirmationRequired INIntentHandlingStatus = 6
 )
 
@@ -379,8 +379,8 @@ type INInteractionDirection int64
 
 const (
 	INInteractionDirectionUnspecified INInteractionDirection = 0
-	INInteractionDirectionOutgoing INInteractionDirection = 1
-	INInteractionDirectionIncoming INInteractionDirection = 2
+	INInteractionDirectionOutgoing    INInteractionDirection = 1
+	INInteractionDirectionIncoming    INInteractionDirection = 2
 )
 
 func (e INInteractionDirection) String() string {
@@ -400,7 +400,7 @@ type INMessageReactionType int64
 
 const (
 	INMessageReactionTypeUnknown INMessageReactionType = 0
-	INMessageReactionTypeEmoji INMessageReactionType = 1
+	INMessageReactionTypeEmoji   INMessageReactionType = 1
 	INMessageReactionTypeGeneric INMessageReactionType = 2
 )
 
@@ -420,8 +420,8 @@ func (e INMessageReactionType) String() string {
 type INOutgoingMessageType int64
 
 const (
-	INOutgoingMessageTypeUnknown INOutgoingMessageType = 0
-	INOutgoingMessageTypeOutgoingMessageText INOutgoingMessageType = 1
+	INOutgoingMessageTypeUnknown              INOutgoingMessageType = 0
+	INOutgoingMessageTypeOutgoingMessageText  INOutgoingMessageType = 1
 	INOutgoingMessageTypeOutgoingMessageAudio INOutgoingMessageType = 2
 )
 
@@ -441,15 +441,15 @@ func (e INOutgoingMessageType) String() string {
 type INPaymentMethodType int64
 
 const (
-	INPaymentMethodTypeUnknown INPaymentMethodType = 0
-	INPaymentMethodTypeChecking INPaymentMethodType = 1
-	INPaymentMethodTypeSavings INPaymentMethodType = 2
+	INPaymentMethodTypeUnknown   INPaymentMethodType = 0
+	INPaymentMethodTypeChecking  INPaymentMethodType = 1
+	INPaymentMethodTypeSavings   INPaymentMethodType = 2
 	INPaymentMethodTypeBrokerage INPaymentMethodType = 3
-	INPaymentMethodTypeDebit INPaymentMethodType = 4
-	INPaymentMethodTypeCredit INPaymentMethodType = 5
-	INPaymentMethodTypePrepaid INPaymentMethodType = 6
-	INPaymentMethodTypeStore INPaymentMethodType = 7
-	INPaymentMethodTypeApplePay INPaymentMethodType = 8
+	INPaymentMethodTypeDebit     INPaymentMethodType = 4
+	INPaymentMethodTypeCredit    INPaymentMethodType = 5
+	INPaymentMethodTypePrepaid   INPaymentMethodType = 6
+	INPaymentMethodTypeStore     INPaymentMethodType = 7
+	INPaymentMethodTypeApplePay  INPaymentMethodType = 8
 )
 
 func (e INPaymentMethodType) String() string {
@@ -480,9 +480,9 @@ func (e INPaymentMethodType) String() string {
 type INPersonHandleType int64
 
 const (
-	INPersonHandleTypeUnknown INPersonHandleType = 0
+	INPersonHandleTypeUnknown      INPersonHandleType = 0
 	INPersonHandleTypeEmailAddress INPersonHandleType = 1
-	INPersonHandleTypePhoneNumber INPersonHandleType = 2
+	INPersonHandleTypePhoneNumber  INPersonHandleType = 2
 )
 
 func (e INPersonHandleType) String() string {
@@ -501,8 +501,8 @@ func (e INPersonHandleType) String() string {
 type INPersonSuggestionType int64
 
 const (
-	INPersonSuggestionTypeNone INPersonSuggestionType = 0
-	INPersonSuggestionTypeSocialProfile INPersonSuggestionType = 1
+	INPersonSuggestionTypeNone                  INPersonSuggestionType = 0
+	INPersonSuggestionTypeSocialProfile         INPersonSuggestionType = 1
 	INPersonSuggestionTypeInstantMessageAddress INPersonSuggestionType = 2
 )
 
@@ -540,10 +540,10 @@ func (e INReservationActionType) String() string {
 type INReservationStatus int64
 
 const (
-	INReservationStatusUnknown INReservationStatus = 0
-	INReservationStatusCanceled INReservationStatus = 1
-	INReservationStatusPending INReservationStatus = 2
-	INReservationStatusHold INReservationStatus = 3
+	INReservationStatusUnknown   INReservationStatus = 0
+	INReservationStatusCanceled  INReservationStatus = 1
+	INReservationStatusPending   INReservationStatus = 2
+	INReservationStatusHold      INReservationStatus = 3
 	INReservationStatusConfirmed INReservationStatus = 4
 )
 
@@ -567,13 +567,13 @@ func (e INReservationStatus) String() string {
 type INSendMessageIntentResponseCode int64
 
 const (
-	INSendMessageIntentResponseCodeUnspecified INSendMessageIntentResponseCode = 0
-	INSendMessageIntentResponseCodeReady INSendMessageIntentResponseCode = 1
-	INSendMessageIntentResponseCodeInProgress INSendMessageIntentResponseCode = 2
-	INSendMessageIntentResponseCodeSuccess INSendMessageIntentResponseCode = 3
-	INSendMessageIntentResponseCodeFailure INSendMessageIntentResponseCode = 4
-	INSendMessageIntentResponseCodeFailureRequiringAppLaunch INSendMessageIntentResponseCode = 5
-	INSendMessageIntentResponseCodeFailureMessageServiceNotAvailable INSendMessageIntentResponseCode = 6
+	INSendMessageIntentResponseCodeUnspecified                         INSendMessageIntentResponseCode = 0
+	INSendMessageIntentResponseCodeReady                               INSendMessageIntentResponseCode = 1
+	INSendMessageIntentResponseCodeInProgress                          INSendMessageIntentResponseCode = 2
+	INSendMessageIntentResponseCodeSuccess                             INSendMessageIntentResponseCode = 3
+	INSendMessageIntentResponseCodeFailure                             INSendMessageIntentResponseCode = 4
+	INSendMessageIntentResponseCodeFailureRequiringAppLaunch           INSendMessageIntentResponseCode = 5
+	INSendMessageIntentResponseCodeFailureMessageServiceNotAvailable   INSendMessageIntentResponseCode = 6
 	INSendMessageIntentResponseCodeFailureRequiringInAppAuthentication INSendMessageIntentResponseCode = 7
 )
 
@@ -603,13 +603,13 @@ func (e INSendMessageIntentResponseCode) String() string {
 type INSendMessageRecipientUnsupportedReason int64
 
 const (
-	INSendMessageRecipientUnsupportedReasonNoAccount INSendMessageRecipientUnsupportedReason = 1
-	INSendMessageRecipientUnsupportedReasonOffline INSendMessageRecipientUnsupportedReason = 2
+	INSendMessageRecipientUnsupportedReasonNoAccount                              INSendMessageRecipientUnsupportedReason = 1
+	INSendMessageRecipientUnsupportedReasonOffline                                INSendMessageRecipientUnsupportedReason = 2
 	INSendMessageRecipientUnsupportedReasonMessagingServiceNotEnabledForRecipient INSendMessageRecipientUnsupportedReason = 3
-	INSendMessageRecipientUnsupportedReasonNoValidHandle INSendMessageRecipientUnsupportedReason = 4
-	INSendMessageRecipientUnsupportedReasonRequestedHandleInvalid INSendMessageRecipientUnsupportedReason = 5
-	INSendMessageRecipientUnsupportedReasonNoHandleForLabel INSendMessageRecipientUnsupportedReason = 6
-	INSendMessageRecipientUnsupportedReasonRequiringInAppAuthentication INSendMessageRecipientUnsupportedReason = 7
+	INSendMessageRecipientUnsupportedReasonNoValidHandle                          INSendMessageRecipientUnsupportedReason = 4
+	INSendMessageRecipientUnsupportedReasonRequestedHandleInvalid                 INSendMessageRecipientUnsupportedReason = 5
+	INSendMessageRecipientUnsupportedReasonNoHandleForLabel                       INSendMessageRecipientUnsupportedReason = 6
+	INSendMessageRecipientUnsupportedReasonRequiringInAppAuthentication           INSendMessageRecipientUnsupportedReason = 7
 )
 
 func (e INSendMessageRecipientUnsupportedReason) String() string {
@@ -636,11 +636,11 @@ func (e INSendMessageRecipientUnsupportedReason) String() string {
 type INShareFocusStatusIntentResponseCode int64
 
 const (
-	INShareFocusStatusIntentResponseCodeUnspecified INShareFocusStatusIntentResponseCode = 0
-	INShareFocusStatusIntentResponseCodeReady INShareFocusStatusIntentResponseCode = 1
-	INShareFocusStatusIntentResponseCodeInProgress INShareFocusStatusIntentResponseCode = 2
-	INShareFocusStatusIntentResponseCodeSuccess INShareFocusStatusIntentResponseCode = 3
-	INShareFocusStatusIntentResponseCodeFailure INShareFocusStatusIntentResponseCode = 4
+	INShareFocusStatusIntentResponseCodeUnspecified               INShareFocusStatusIntentResponseCode = 0
+	INShareFocusStatusIntentResponseCodeReady                     INShareFocusStatusIntentResponseCode = 1
+	INShareFocusStatusIntentResponseCodeInProgress                INShareFocusStatusIntentResponseCode = 2
+	INShareFocusStatusIntentResponseCodeSuccess                   INShareFocusStatusIntentResponseCode = 3
+	INShareFocusStatusIntentResponseCodeFailure                   INShareFocusStatusIntentResponseCode = 4
 	INShareFocusStatusIntentResponseCodeFailureRequiringAppLaunch INShareFocusStatusIntentResponseCode = 5
 )
 
@@ -682,7 +682,7 @@ type INStickerType int64
 
 const (
 	INStickerTypeUnknown INStickerType = 0
-	INStickerTypeEmoji INStickerType = 1
+	INStickerTypeEmoji   INStickerType = 1
 	INStickerTypeGeneric INStickerType = 2
 )
 
@@ -703,7 +703,7 @@ type INTicketedEventCategory int64
 
 const (
 	INTicketedEventCategoryUnknown INTicketedEventCategory = 0
-	INTicketedEventCategoryMovie INTicketedEventCategory = 1
+	INTicketedEventCategoryMovie   INTicketedEventCategory = 1
 )
 
 func (e INTicketedEventCategory) String() string {
@@ -720,17 +720,17 @@ func (e INTicketedEventCategory) String() string {
 type INUnsendMessagesIntentResponseCode int64
 
 const (
-	INUnsendMessagesIntentResponseCodeUnspecified INUnsendMessagesIntentResponseCode = 0
-	INUnsendMessagesIntentResponseCodeReady INUnsendMessagesIntentResponseCode = 1
-	INUnsendMessagesIntentResponseCodeInProgress INUnsendMessagesIntentResponseCode = 2
-	INUnsendMessagesIntentResponseCodeSuccess INUnsendMessagesIntentResponseCode = 3
-	INUnsendMessagesIntentResponseCodeFailure INUnsendMessagesIntentResponseCode = 4
-	INUnsendMessagesIntentResponseCodeFailureRequiringAppLaunch INUnsendMessagesIntentResponseCode = 5
-	INUnsendMessagesIntentResponseCodeFailureMessageNotFound INUnsendMessagesIntentResponseCode = 6
-	INUnsendMessagesIntentResponseCodeFailurePastUnsendTimeLimit INUnsendMessagesIntentResponseCode = 7
-	INUnsendMessagesIntentResponseCodeFailureMessageTypeUnsupported INUnsendMessagesIntentResponseCode = 8
-	INUnsendMessagesIntentResponseCodeFailureUnsupportedOnService INUnsendMessagesIntentResponseCode = 9
-	INUnsendMessagesIntentResponseCodeFailureMessageServiceNotAvailable INUnsendMessagesIntentResponseCode = 10
+	INUnsendMessagesIntentResponseCodeUnspecified                         INUnsendMessagesIntentResponseCode = 0
+	INUnsendMessagesIntentResponseCodeReady                               INUnsendMessagesIntentResponseCode = 1
+	INUnsendMessagesIntentResponseCodeInProgress                          INUnsendMessagesIntentResponseCode = 2
+	INUnsendMessagesIntentResponseCodeSuccess                             INUnsendMessagesIntentResponseCode = 3
+	INUnsendMessagesIntentResponseCodeFailure                             INUnsendMessagesIntentResponseCode = 4
+	INUnsendMessagesIntentResponseCodeFailureRequiringAppLaunch           INUnsendMessagesIntentResponseCode = 5
+	INUnsendMessagesIntentResponseCodeFailureMessageNotFound              INUnsendMessagesIntentResponseCode = 6
+	INUnsendMessagesIntentResponseCodeFailurePastUnsendTimeLimit          INUnsendMessagesIntentResponseCode = 7
+	INUnsendMessagesIntentResponseCodeFailureMessageTypeUnsupported       INUnsendMessagesIntentResponseCode = 8
+	INUnsendMessagesIntentResponseCodeFailureUnsupportedOnService         INUnsendMessagesIntentResponseCode = 9
+	INUnsendMessagesIntentResponseCodeFailureMessageServiceNotAvailable   INUnsendMessagesIntentResponseCode = 10
 	INUnsendMessagesIntentResponseCodeFailureRequiringInAppAuthentication INUnsendMessagesIntentResponseCode = 11
 )
 
@@ -764,4 +764,3 @@ func (e INUnsendMessagesIntentResponseCode) String() string {
 		return fmt.Sprintf("INUnsendMessagesIntentResponseCode(%d)", int64(e))
 	}
 }
-

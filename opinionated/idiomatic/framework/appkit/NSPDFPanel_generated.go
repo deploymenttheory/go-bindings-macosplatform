@@ -114,4 +114,3 @@ type PDFPanelable interface {
 }
 
 var _ PDFPanelable = (*PDFPanel)(nil)
-

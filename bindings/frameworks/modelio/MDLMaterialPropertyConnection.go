@@ -16,10 +16,10 @@ type MDLMaterialPropertyConnection struct {
 }
 
 var (
-	_clsMDLMaterialPropertyConnection = _objcClass("MDLMaterialPropertyConnection")
+	_clsMDLMaterialPropertyConnection                    = _objcClass("MDLMaterialPropertyConnection")
 	_mDLMaterialPropertyConnectionSelInitWithOutputInput = objc.RegisterName("initWithOutput:input:")
-	_mDLMaterialPropertyConnectionSelOutput = objc.RegisterName("output")
-	_mDLMaterialPropertyConnectionSelInput = objc.RegisterName("input")
+	_mDLMaterialPropertyConnectionSelOutput              = objc.RegisterName("output")
+	_mDLMaterialPropertyConnectionSelInput               = objc.RegisterName("input")
 )
 
 func MDLMaterialPropertyConnectionFromID(id objc.ID) *MDLMaterialPropertyConnection {
@@ -35,19 +35,24 @@ func MDLMaterialPropertyConnectionFromID(id objc.ID) *MDLMaterialPropertyConnect
 // Connects the output to the input
 func (o *MDLMaterialPropertyConnection) InitWithOutputInput(output *MDLMaterialProperty, input *MDLMaterialProperty) *MDLMaterialPropertyConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertyConnectionSelInitWithOutputInput, output.Ptr(), input.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMaterialPropertyConnectionFromID(_ret)
 }
 
 func (o *MDLMaterialPropertyConnection) Output() *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertyConnectionSelOutput)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMaterialPropertyFromID(_ret)
 }
 
 func (o *MDLMaterialPropertyConnection) Input() *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertyConnectionSelInput)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMaterialPropertyFromID(_ret)
 }
-

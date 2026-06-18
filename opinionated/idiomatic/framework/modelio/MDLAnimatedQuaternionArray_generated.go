@@ -88,7 +88,9 @@ func (x *AnimatedQuaternionArray) ElementCount() uint {
 	return x.inner.ElementCount()
 }
 
-func (x *AnimatedQuaternionArray) asAnimatedValue() *raw.MDLAnimatedValue { return &x.inner.MDLAnimatedValue }
+func (x *AnimatedQuaternionArray) asAnimatedValue() *raw.MDLAnimatedValue {
+	return &x.inner.MDLAnimatedValue
+}
 
 // AnimatedQuaternionArrayable is the interface implemented by [AnimatedQuaternionArray], for mocking and DI.
 type AnimatedQuaternionArrayable interface {
@@ -106,4 +108,3 @@ type AnimatedQuaternionArrayable interface {
 }
 
 var _ AnimatedQuaternionArrayable = (*AnimatedQuaternionArray)(nil)
-

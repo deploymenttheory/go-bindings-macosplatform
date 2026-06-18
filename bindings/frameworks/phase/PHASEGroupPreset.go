@@ -16,15 +16,15 @@ type PHASEGroupPreset struct {
 }
 
 var (
-	_clsPHASEGroupPreset = _objcClass("PHASEGroupPreset")
+	_clsPHASEGroupPreset                                              = _objcClass("PHASEGroupPreset")
 	_pHASEGroupPresetSelInitWithEngineSettingsTimeToTargetTimeToReset = objc.RegisterName("initWithEngine:settings:timeToTarget:timeToReset:")
-	_pHASEGroupPresetSelActivate = objc.RegisterName("activate")
-	_pHASEGroupPresetSelActivateWithTimeToTargetOverride = objc.RegisterName("activateWithTimeToTargetOverride:")
-	_pHASEGroupPresetSelDeactivate = objc.RegisterName("deactivate")
-	_pHASEGroupPresetSelDeactivateWithTimeToResetOverride = objc.RegisterName("deactivateWithTimeToResetOverride:")
-	_pHASEGroupPresetSelSettings = objc.RegisterName("settings")
-	_pHASEGroupPresetSelTimeToTarget = objc.RegisterName("timeToTarget")
-	_pHASEGroupPresetSelTimeToReset = objc.RegisterName("timeToReset")
+	_pHASEGroupPresetSelActivate                                      = objc.RegisterName("activate")
+	_pHASEGroupPresetSelActivateWithTimeToTargetOverride              = objc.RegisterName("activateWithTimeToTargetOverride:")
+	_pHASEGroupPresetSelDeactivate                                    = objc.RegisterName("deactivate")
+	_pHASEGroupPresetSelDeactivateWithTimeToResetOverride             = objc.RegisterName("deactivateWithTimeToResetOverride:")
+	_pHASEGroupPresetSelSettings                                      = objc.RegisterName("settings")
+	_pHASEGroupPresetSelTimeToTarget                                  = objc.RegisterName("timeToTarget")
+	_pHASEGroupPresetSelTimeToReset                                   = objc.RegisterName("timeToReset")
 )
 
 func PHASEGroupPresetFromID(id objc.ID) *PHASEGroupPreset {
@@ -40,7 +40,9 @@ func PHASEGroupPresetFromID(id objc.ID) *PHASEGroupPreset {
 // @method initWithEngine @abstract Create a new PHASEGroupPreset object with a given PHASEEngine object. @param engine The PHASEEngine object to register this preset with. @param settings A dictionary containing PHASEGroupPresetSetting objects paired with PHASEGroup objects as keys. @param timeToTarget The time interval that all group settings in this preset will take to gradually fade to the new value @param timeToReset The time interval that all group settings in this preset will take to gradually fade to the unity value @note The timeToTarget and timeToReset are scaled by unitsPerSecond internally, so can be provided at the client's native time scale.
 func (o *PHASEGroupPreset) InitWithEngineSettingsTimeToTargetTimeToReset(engine *PHASEEngine, settings *foundation.NSDictionary[*foundation.NSString, *PHASEGroupPresetSetting], timeToTarget float64, timeToReset float64) *PHASEGroupPreset {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEGroupPresetSelInitWithEngineSettingsTimeToTargetTimeToReset, engine.Ptr(), settings, timeToTarget, timeToReset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEGroupPresetFromID(_ret)
 }
 
@@ -81,4 +83,3 @@ func (o *PHASEGroupPreset) TimeToReset() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _pHASEGroupPresetSelTimeToReset)
 	return _ret
 }
-

@@ -131,4 +131,3 @@ type URLAssetable interface {
 }
 
 var _ URLAssetable = (*URLAsset)(nil)
-

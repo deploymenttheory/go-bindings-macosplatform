@@ -16,7 +16,9 @@ type MTRClusterLocalizationConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.MTRClusterLocalizationConfiguration].
-func (x *MTRClusterLocalizationConfiguration) Unwrap() *raw.MTRClusterLocalizationConfiguration { return x.inner }
+func (x *MTRClusterLocalizationConfiguration) Unwrap() *raw.MTRClusterLocalizationConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -89,9 +91,13 @@ func (x *MTRClusterLocalizationConfiguration) ReadAttributeClusterRevisionWithPa
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterLocalizationConfiguration) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterLocalizationConfiguration) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterLocalizationConfiguration) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterLocalizationConfiguration) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterLocalizationConfigurationable is the interface implemented by [MTRClusterLocalizationConfiguration], for mocking and DI.
 type MTRClusterLocalizationConfigurationable interface {
@@ -108,4 +114,3 @@ type MTRClusterLocalizationConfigurationable interface {
 }
 
 var _ MTRClusterLocalizationConfigurationable = (*MTRClusterLocalizationConfiguration)(nil)
-

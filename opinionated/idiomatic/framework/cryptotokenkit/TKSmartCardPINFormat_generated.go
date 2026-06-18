@@ -212,4 +212,3 @@ type SmartCardPINFormatable interface {
 }
 
 var _ SmartCardPINFormatable = (*SmartCardPINFormat)(nil)
-

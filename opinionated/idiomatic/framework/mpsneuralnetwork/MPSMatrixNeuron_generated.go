@@ -151,4 +151,3 @@ type MatrixNeuronable interface {
 }
 
 var _ MatrixNeuronable = (*MatrixNeuron)(nil)
-

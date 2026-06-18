@@ -18,32 +18,32 @@ type MTRClusterDeviceEnergyManagement struct {
 }
 
 var (
-	_clsMTRClusterDeviceEnergyManagement = _objcClass("MTRClusterDeviceEnergyManagement")
-	_mTRClusterDeviceEnergyManagementSelPowerAdjustRequestWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("powerAdjustRequestWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterDeviceEnergyManagementSelCancelPowerAdjustRequestWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("cancelPowerAdjustRequestWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterDeviceEnergyManagementSelCancelPowerAdjustRequestWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("cancelPowerAdjustRequestWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterDeviceEnergyManagementSelStartTimeAdjustRequestWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("startTimeAdjustRequestWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterDeviceEnergyManagementSelPauseRequestWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("pauseRequestWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterDeviceEnergyManagementSelResumeRequestWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("resumeRequestWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterDeviceEnergyManagementSelResumeRequestWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("resumeRequestWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterDeviceEnergyManagementSelModifyForecastRequestWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("modifyForecastRequestWithParams:expectedValues:expectedValueInterval:completion:")
+	_clsMTRClusterDeviceEnergyManagement                                                                                      = _objcClass("MTRClusterDeviceEnergyManagement")
+	_mTRClusterDeviceEnergyManagementSelPowerAdjustRequestWithParamsExpectedValuesExpectedValueIntervalCompletion             = objc.RegisterName("powerAdjustRequestWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterDeviceEnergyManagementSelCancelPowerAdjustRequestWithParamsExpectedValuesExpectedValueIntervalCompletion       = objc.RegisterName("cancelPowerAdjustRequestWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterDeviceEnergyManagementSelCancelPowerAdjustRequestWithExpectedValuesExpectedValueIntervalCompletion             = objc.RegisterName("cancelPowerAdjustRequestWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterDeviceEnergyManagementSelStartTimeAdjustRequestWithParamsExpectedValuesExpectedValueIntervalCompletion         = objc.RegisterName("startTimeAdjustRequestWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterDeviceEnergyManagementSelPauseRequestWithParamsExpectedValuesExpectedValueIntervalCompletion                   = objc.RegisterName("pauseRequestWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterDeviceEnergyManagementSelResumeRequestWithParamsExpectedValuesExpectedValueIntervalCompletion                  = objc.RegisterName("resumeRequestWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterDeviceEnergyManagementSelResumeRequestWithExpectedValuesExpectedValueIntervalCompletion                        = objc.RegisterName("resumeRequestWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterDeviceEnergyManagementSelModifyForecastRequestWithParamsExpectedValuesExpectedValueIntervalCompletion          = objc.RegisterName("modifyForecastRequestWithParams:expectedValues:expectedValueInterval:completion:")
 	_mTRClusterDeviceEnergyManagementSelRequestConstraintBasedForecastWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("requestConstraintBasedForecastWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterDeviceEnergyManagementSelCancelRequestWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("cancelRequestWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterDeviceEnergyManagementSelCancelRequestWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("cancelRequestWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterDeviceEnergyManagementSelReadAttributeESATypeWithParams = objc.RegisterName("readAttributeESATypeWithParams:")
-	_mTRClusterDeviceEnergyManagementSelReadAttributeESACanGenerateWithParams = objc.RegisterName("readAttributeESACanGenerateWithParams:")
-	_mTRClusterDeviceEnergyManagementSelReadAttributeESAStateWithParams = objc.RegisterName("readAttributeESAStateWithParams:")
-	_mTRClusterDeviceEnergyManagementSelReadAttributeAbsMinPowerWithParams = objc.RegisterName("readAttributeAbsMinPowerWithParams:")
-	_mTRClusterDeviceEnergyManagementSelReadAttributeAbsMaxPowerWithParams = objc.RegisterName("readAttributeAbsMaxPowerWithParams:")
-	_mTRClusterDeviceEnergyManagementSelReadAttributePowerAdjustmentCapabilityWithParams = objc.RegisterName("readAttributePowerAdjustmentCapabilityWithParams:")
-	_mTRClusterDeviceEnergyManagementSelReadAttributeForecastWithParams = objc.RegisterName("readAttributeForecastWithParams:")
-	_mTRClusterDeviceEnergyManagementSelReadAttributeOptOutStateWithParams = objc.RegisterName("readAttributeOptOutStateWithParams:")
-	_mTRClusterDeviceEnergyManagementSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterDeviceEnergyManagementSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterDeviceEnergyManagementSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterDeviceEnergyManagementSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterDeviceEnergyManagementSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterDeviceEnergyManagementSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterDeviceEnergyManagementSelCancelRequestWithParamsExpectedValuesExpectedValueIntervalCompletion                  = objc.RegisterName("cancelRequestWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterDeviceEnergyManagementSelCancelRequestWithExpectedValuesExpectedValueIntervalCompletion                        = objc.RegisterName("cancelRequestWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterDeviceEnergyManagementSelReadAttributeESATypeWithParams                                                        = objc.RegisterName("readAttributeESATypeWithParams:")
+	_mTRClusterDeviceEnergyManagementSelReadAttributeESACanGenerateWithParams                                                 = objc.RegisterName("readAttributeESACanGenerateWithParams:")
+	_mTRClusterDeviceEnergyManagementSelReadAttributeESAStateWithParams                                                       = objc.RegisterName("readAttributeESAStateWithParams:")
+	_mTRClusterDeviceEnergyManagementSelReadAttributeAbsMinPowerWithParams                                                    = objc.RegisterName("readAttributeAbsMinPowerWithParams:")
+	_mTRClusterDeviceEnergyManagementSelReadAttributeAbsMaxPowerWithParams                                                    = objc.RegisterName("readAttributeAbsMaxPowerWithParams:")
+	_mTRClusterDeviceEnergyManagementSelReadAttributePowerAdjustmentCapabilityWithParams                                      = objc.RegisterName("readAttributePowerAdjustmentCapabilityWithParams:")
+	_mTRClusterDeviceEnergyManagementSelReadAttributeForecastWithParams                                                       = objc.RegisterName("readAttributeForecastWithParams:")
+	_mTRClusterDeviceEnergyManagementSelReadAttributeOptOutStateWithParams                                                    = objc.RegisterName("readAttributeOptOutStateWithParams:")
+	_mTRClusterDeviceEnergyManagementSelReadAttributeGeneratedCommandListWithParams                                           = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterDeviceEnergyManagementSelReadAttributeAcceptedCommandListWithParams                                            = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterDeviceEnergyManagementSelReadAttributeAttributeListWithParams                                                  = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterDeviceEnergyManagementSelReadAttributeFeatureMapWithParams                                                     = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterDeviceEnergyManagementSelReadAttributeClusterRevisionWithParams                                                = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterDeviceEnergyManagementSelInitWithDeviceEndpointIDQueue                                                         = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterDeviceEnergyManagementFromID(id objc.ID) *MTRClusterDeviceEnergyManagement {
@@ -245,7 +245,8 @@ func (o *MTRClusterDeviceEnergyManagement) ReadAttributeClusterRevisionWithParam
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterDeviceEnergyManagement) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterDeviceEnergyManagement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterDeviceEnergyManagementSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterDeviceEnergyManagementFromID(_ret)
 }
-

@@ -15,11 +15,15 @@ type MTRPumpConfigurationAndControlClusterPumpMotorFatalFailureEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRPumpConfigurationAndControlClusterPumpMotorFatalFailureEvent].
-func (x *MTRPumpConfigurationAndControlClusterPumpMotorFatalFailureEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterPumpMotorFatalFailureEvent { return x.inner }
+func (x *MTRPumpConfigurationAndControlClusterPumpMotorFatalFailureEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterPumpMotorFatalFailureEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRPumpConfigurationAndControlClusterPumpMotorFatalFailureEvent) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRPumpConfigurationAndControlClusterPumpMotorFatalFailureEvent) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRPumpConfigurationAndControlClusterPumpMotorFatalFailureEventFromID adopts an existing object pointer as a MTRPumpConfigurationAndControlClusterPumpMotorFatalFailureEvent (nil for 0).
 func MTRPumpConfigurationAndControlClusterPumpMotorFatalFailureEventFromID(id objc.ID) *MTRPumpConfigurationAndControlClusterPumpMotorFatalFailureEvent {
@@ -41,4 +45,3 @@ type MTRPumpConfigurationAndControlClusterPumpMotorFatalFailureEventable interfa
 }
 
 var _ MTRPumpConfigurationAndControlClusterPumpMotorFatalFailureEventable = (*MTRPumpConfigurationAndControlClusterPumpMotorFatalFailureEvent)(nil)
-

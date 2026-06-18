@@ -17,4 +17,3 @@ type ToolProvider interface {
 type ToolPickerItemProvider interface {
 	asToolPickerItem() *raw.PKToolPickerItem
 }
-

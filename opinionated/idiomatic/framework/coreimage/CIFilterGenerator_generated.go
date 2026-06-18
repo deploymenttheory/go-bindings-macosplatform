@@ -120,4 +120,3 @@ type FilterGeneratorable interface {
 }
 
 var _ FilterGeneratorable = (*FilterGenerator)(nil)
-

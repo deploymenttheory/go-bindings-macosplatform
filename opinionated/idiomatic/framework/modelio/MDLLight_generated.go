@@ -137,4 +137,3 @@ type Lightable interface {
 }
 
 var _ Lightable = (*Light)(nil)
-

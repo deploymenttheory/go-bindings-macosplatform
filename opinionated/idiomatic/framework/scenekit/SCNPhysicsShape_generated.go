@@ -67,4 +67,3 @@ type PhysicsShapeable interface {
 }
 
 var _ PhysicsShapeable = (*PhysicsShape)(nil)
-

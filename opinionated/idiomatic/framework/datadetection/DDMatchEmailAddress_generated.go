@@ -64,4 +64,3 @@ type MatchEmailAddressable interface {
 }
 
 var _ MatchEmailAddressable = (*MatchEmailAddress)(nil)
-

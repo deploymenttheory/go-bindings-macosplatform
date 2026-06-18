@@ -17,23 +17,23 @@ type PGDisplayDescriptor struct {
 }
 
 var (
-	_clsPGDisplayDescriptor = _objcClass("PGDisplayDescriptor")
-	_pGDisplayDescriptorSelName = objc.RegisterName("name")
-	_pGDisplayDescriptorSelSetName = objc.RegisterName("setName:")
-	_pGDisplayDescriptorSelSizeInMillimeters = objc.RegisterName("sizeInMillimeters")
-	_pGDisplayDescriptorSelSetSizeInMillimeters = objc.RegisterName("setSizeInMillimeters:")
-	_pGDisplayDescriptorSelQueue = objc.RegisterName("queue")
-	_pGDisplayDescriptorSelSetQueue = objc.RegisterName("setQueue:")
-	_pGDisplayDescriptorSelModeChangeHandler = objc.RegisterName("modeChangeHandler")
-	_pGDisplayDescriptorSelSetModeChangeHandler = objc.RegisterName("setModeChangeHandler:")
-	_pGDisplayDescriptorSelNewFrameEventHandler = objc.RegisterName("newFrameEventHandler")
+	_clsPGDisplayDescriptor                        = _objcClass("PGDisplayDescriptor")
+	_pGDisplayDescriptorSelName                    = objc.RegisterName("name")
+	_pGDisplayDescriptorSelSetName                 = objc.RegisterName("setName:")
+	_pGDisplayDescriptorSelSizeInMillimeters       = objc.RegisterName("sizeInMillimeters")
+	_pGDisplayDescriptorSelSetSizeInMillimeters    = objc.RegisterName("setSizeInMillimeters:")
+	_pGDisplayDescriptorSelQueue                   = objc.RegisterName("queue")
+	_pGDisplayDescriptorSelSetQueue                = objc.RegisterName("setQueue:")
+	_pGDisplayDescriptorSelModeChangeHandler       = objc.RegisterName("modeChangeHandler")
+	_pGDisplayDescriptorSelSetModeChangeHandler    = objc.RegisterName("setModeChangeHandler:")
+	_pGDisplayDescriptorSelNewFrameEventHandler    = objc.RegisterName("newFrameEventHandler")
 	_pGDisplayDescriptorSelSetNewFrameEventHandler = objc.RegisterName("setNewFrameEventHandler:")
-	_pGDisplayDescriptorSelCursorGlyphHandler = objc.RegisterName("cursorGlyphHandler")
-	_pGDisplayDescriptorSelSetCursorGlyphHandler = objc.RegisterName("setCursorGlyphHandler:")
-	_pGDisplayDescriptorSelCursorShowHandler = objc.RegisterName("cursorShowHandler")
-	_pGDisplayDescriptorSelSetCursorShowHandler = objc.RegisterName("setCursorShowHandler:")
-	_pGDisplayDescriptorSelCursorMoveHandler = objc.RegisterName("cursorMoveHandler")
-	_pGDisplayDescriptorSelSetCursorMoveHandler = objc.RegisterName("setCursorMoveHandler:")
+	_pGDisplayDescriptorSelCursorGlyphHandler      = objc.RegisterName("cursorGlyphHandler")
+	_pGDisplayDescriptorSelSetCursorGlyphHandler   = objc.RegisterName("setCursorGlyphHandler:")
+	_pGDisplayDescriptorSelCursorShowHandler       = objc.RegisterName("cursorShowHandler")
+	_pGDisplayDescriptorSelSetCursorShowHandler    = objc.RegisterName("setCursorShowHandler:")
+	_pGDisplayDescriptorSelCursorMoveHandler       = objc.RegisterName("cursorMoveHandler")
+	_pGDisplayDescriptorSelSetCursorMoveHandler    = objc.RegisterName("setCursorMoveHandler:")
 )
 
 func PGDisplayDescriptorFromID(id objc.ID) *PGDisplayDescriptor {
@@ -49,7 +49,9 @@ func PGDisplayDescriptorFromID(id objc.ID) *PGDisplayDescriptor {
 // @property name @abstract Client supplied name of display, as seen by guest. @discussion Truncates to 13 characters.  Defaults to "Apple Virtual".  Value provided here may be made visible via guest UI.
 func (o *PGDisplayDescriptor) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pGDisplayDescriptorSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -70,7 +72,9 @@ func (o *PGDisplayDescriptor) SetSizeInMillimeters(sizeInMillimeters corefoundat
 // @property queue @abstract Client supplied dispatch_queue on which to invoke client supplied blocks. @discussion Typical client provides serial queue, and redispatches if beneficial to process out of order.
 func (o *PGDisplayDescriptor) Queue() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pGDisplayDescriptorSelQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
@@ -148,4 +152,3 @@ func (o *PGDisplayDescriptor) SetCursorMoveHandler(cursorMoveHandler func()) {
 	}
 	o.Ptr().Send(_pGDisplayDescriptorSelSetCursorMoveHandler, __block_cursorMoveHandler)
 }
-

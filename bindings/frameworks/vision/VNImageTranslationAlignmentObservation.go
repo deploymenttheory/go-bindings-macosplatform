@@ -16,7 +16,7 @@ type VNImageTranslationAlignmentObservation struct {
 }
 
 var (
-	_clsVNImageTranslationAlignmentObservation = _objcClass("VNImageTranslationAlignmentObservation")
+	_clsVNImageTranslationAlignmentObservation                   = _objcClass("VNImageTranslationAlignmentObservation")
 	_vNImageTranslationAlignmentObservationSelAlignmentTransform = objc.RegisterName("alignmentTransform")
 )
 
@@ -34,4 +34,3 @@ func (o *VNImageTranslationAlignmentObservation) AlignmentTransform() corefounda
 	_ret := objc.Send[corefoundation.CGAffineTransform](o.Ptr(), _vNImageTranslationAlignmentObservationSelAlignmentTransform)
 	return _ret
 }
-

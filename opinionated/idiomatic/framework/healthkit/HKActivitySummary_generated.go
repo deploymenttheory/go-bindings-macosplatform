@@ -316,4 +316,3 @@ type ActivitySummaryable interface {
 }
 
 var _ ActivitySummaryable = (*ActivitySummary)(nil)
-

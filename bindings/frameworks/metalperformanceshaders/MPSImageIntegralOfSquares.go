@@ -26,4 +26,3 @@ func MPSImageIntegralOfSquaresFromID(id objc.ID) *MPSImageIntegralOfSquares {
 	purego.Track(o)
 	return o
 }
-

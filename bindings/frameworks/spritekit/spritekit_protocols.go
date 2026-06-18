@@ -26,4 +26,3 @@ type SKWarpable interface {
 // UIFocusItem wraps the ObjC protocol UIFocusItem.
 type UIFocusItem interface {
 }
-

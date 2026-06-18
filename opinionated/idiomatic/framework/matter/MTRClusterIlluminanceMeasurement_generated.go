@@ -16,7 +16,9 @@ type MTRClusterIlluminanceMeasurement struct {
 }
 
 // Unwrap returns the underlying [raw.MTRClusterIlluminanceMeasurement].
-func (x *MTRClusterIlluminanceMeasurement) Unwrap() *raw.MTRClusterIlluminanceMeasurement { return x.inner }
+func (x *MTRClusterIlluminanceMeasurement) Unwrap() *raw.MTRClusterIlluminanceMeasurement {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -94,9 +96,13 @@ func (x *MTRClusterIlluminanceMeasurement) ReadAttributeClusterRevisionWithParam
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterIlluminanceMeasurement) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterIlluminanceMeasurement) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterIlluminanceMeasurement) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterIlluminanceMeasurement) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterIlluminanceMeasurementable is the interface implemented by [MTRClusterIlluminanceMeasurement], for mocking and DI.
 type MTRClusterIlluminanceMeasurementable interface {
@@ -114,4 +120,3 @@ type MTRClusterIlluminanceMeasurementable interface {
 }
 
 var _ MTRClusterIlluminanceMeasurementable = (*MTRClusterIlluminanceMeasurement)(nil)
-

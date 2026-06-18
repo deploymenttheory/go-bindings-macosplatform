@@ -16,20 +16,20 @@ type AXDataPoint struct {
 }
 
 var (
-	_clsAXDataPoint = _objcClass("AXDataPoint")
-	_aXDataPointSelInitWithXY = objc.RegisterName("initWithX:y:")
-	_aXDataPointSelInitWithXYAdditionalValues = objc.RegisterName("initWithX:y:additionalValues:")
+	_clsAXDataPoint                                = _objcClass("AXDataPoint")
+	_aXDataPointSelInitWithXY                      = objc.RegisterName("initWithX:y:")
+	_aXDataPointSelInitWithXYAdditionalValues      = objc.RegisterName("initWithX:y:additionalValues:")
 	_aXDataPointSelInitWithXYAdditionalValuesLabel = objc.RegisterName("initWithX:y:additionalValues:label:")
-	_aXDataPointSelXValue = objc.RegisterName("xValue")
-	_aXDataPointSelSetXValue = objc.RegisterName("setXValue:")
-	_aXDataPointSelYValue = objc.RegisterName("yValue")
-	_aXDataPointSelSetYValue = objc.RegisterName("setYValue:")
-	_aXDataPointSelAdditionalValues = objc.RegisterName("additionalValues")
-	_aXDataPointSelSetAdditionalValues = objc.RegisterName("setAdditionalValues:")
-	_aXDataPointSelLabel = objc.RegisterName("label")
-	_aXDataPointSelSetLabel = objc.RegisterName("setLabel:")
-	_aXDataPointSelAttributedLabel = objc.RegisterName("attributedLabel")
-	_aXDataPointSelSetAttributedLabel = objc.RegisterName("setAttributedLabel:")
+	_aXDataPointSelXValue                          = objc.RegisterName("xValue")
+	_aXDataPointSelSetXValue                       = objc.RegisterName("setXValue:")
+	_aXDataPointSelYValue                          = objc.RegisterName("yValue")
+	_aXDataPointSelSetYValue                       = objc.RegisterName("setYValue:")
+	_aXDataPointSelAdditionalValues                = objc.RegisterName("additionalValues")
+	_aXDataPointSelSetAdditionalValues             = objc.RegisterName("setAdditionalValues:")
+	_aXDataPointSelLabel                           = objc.RegisterName("label")
+	_aXDataPointSelSetLabel                        = objc.RegisterName("setLabel:")
+	_aXDataPointSelAttributedLabel                 = objc.RegisterName("attributedLabel")
+	_aXDataPointSelSetAttributedLabel              = objc.RegisterName("setAttributedLabel:")
 )
 
 func AXDataPointFromID(id objc.ID) *AXDataPoint {
@@ -44,26 +44,34 @@ func AXDataPointFromID(id objc.ID) *AXDataPoint {
 
 func (o *AXDataPoint) InitWithXY(xValue *AXDataPointValue, yValue *AXDataPointValue) *AXDataPoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXDataPointSelInitWithXY, xValue.Ptr(), yValue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXDataPointFromID(_ret)
 }
 
 func (o *AXDataPoint) InitWithXYAdditionalValues(xValue *AXDataPointValue, yValue *AXDataPointValue, additionalValues *foundation.NSArray[*AXDataPointValue]) *AXDataPoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXDataPointSelInitWithXYAdditionalValues, xValue.Ptr(), yValue.Ptr(), additionalValues.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXDataPointFromID(_ret)
 }
 
 func (o *AXDataPoint) InitWithXYAdditionalValuesLabel(xValue *AXDataPointValue, yValue *AXDataPointValue, additionalValues *foundation.NSArray[*AXDataPointValue], label *foundation.NSString) *AXDataPoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXDataPointSelInitWithXYAdditionalValuesLabel, xValue.Ptr(), yValue.Ptr(), additionalValues.Ptr(), label.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXDataPointFromID(_ret)
 }
 
 // The x-axis value for this data point. Should be a Double for a numeric x-axis or a String for a categorical x-axis.
 func (o *AXDataPoint) XValue() *AXDataPointValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXDataPointSelXValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXDataPointValueFromID(_ret)
 }
 
@@ -74,7 +82,9 @@ func (o *AXDataPoint) SetXValue(xValue *AXDataPointValue) {
 // The y-axis value for this data point.
 func (o *AXDataPoint) YValue() *AXDataPointValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXDataPointSelYValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXDataPointValueFromID(_ret)
 }
 
@@ -85,7 +95,9 @@ func (o *AXDataPoint) SetYValue(yValue *AXDataPointValue) {
 // Any additional values for additional axes for this data point. These should be provided in the same order as their corresponding `AXDataAxisDescriptor` objects in `AXChartDescriptor.additionalAxes`.
 func (o *AXDataPoint) AdditionalValues() *foundation.NSArray[*AXDataPointValue] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXDataPointSelAdditionalValues)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AXDataPointValue](_ret)
 }
 
@@ -96,7 +108,9 @@ func (o *AXDataPoint) SetAdditionalValues(additionalValues *foundation.NSArray[*
 // A name or label for this data point.
 func (o *AXDataPoint) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXDataPointSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -107,11 +121,12 @@ func (o *AXDataPoint) SetLabel(label *foundation.NSString) {
 // An attributed version of the name or label for this data point.
 func (o *AXDataPoint) AttributedLabel() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXDataPointSelAttributedLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
 func (o *AXDataPoint) SetAttributedLabel(attributedLabel *foundation.NSAttributedString) {
 	o.Ptr().Send(_aXDataPointSelSetAttributedLabel, attributedLabel.Ptr())
 }
-

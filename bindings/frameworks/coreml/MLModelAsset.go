@@ -18,13 +18,13 @@ type MLModelAsset struct {
 }
 
 var (
-	_clsMLModelAsset = _objcClass("MLModelAsset")
-	_mLModelAssetSelModelAssetWithSpecificationDataError = objc.RegisterName("modelAssetWithSpecificationData:error:")
-	_mLModelAssetSelModelAssetWithSpecificationDataBlobMappingError = objc.RegisterName("modelAssetWithSpecificationData:blobMapping:error:")
-	_mLModelAssetSelModelAssetWithURLError = objc.RegisterName("modelAssetWithURL:error:")
-	_mLModelAssetSelModelDescriptionWithCompletionHandler = objc.RegisterName("modelDescriptionWithCompletionHandler:")
+	_clsMLModelAsset                                                 = _objcClass("MLModelAsset")
+	_mLModelAssetSelModelAssetWithSpecificationDataError             = objc.RegisterName("modelAssetWithSpecificationData:error:")
+	_mLModelAssetSelModelAssetWithSpecificationDataBlobMappingError  = objc.RegisterName("modelAssetWithSpecificationData:blobMapping:error:")
+	_mLModelAssetSelModelAssetWithURLError                           = objc.RegisterName("modelAssetWithURL:error:")
+	_mLModelAssetSelModelDescriptionWithCompletionHandler            = objc.RegisterName("modelDescriptionWithCompletionHandler:")
 	_mLModelAssetSelModelDescriptionOfFunctionNamedCompletionHandler = objc.RegisterName("modelDescriptionOfFunctionNamed:completionHandler:")
-	_mLModelAssetSelFunctionNamesWithCompletionHandler = objc.RegisterName("functionNamesWithCompletionHandler:")
+	_mLModelAssetSelFunctionNamesWithCompletionHandler               = objc.RegisterName("functionNamesWithCompletionHandler:")
 )
 
 func MLModelAssetFromID(id objc.ID) *MLModelAsset {
@@ -41,7 +41,9 @@ func MLModelAssetFromID(id objc.ID) *MLModelAsset {
 func MLModelAssetModelAssetWithSpecificationDataError(specificationData *foundation.NSData) (*MLModelAsset, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLModelAsset), _mLModelAssetSelModelAssetWithSpecificationDataError, specificationData.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -52,7 +54,9 @@ func MLModelAssetModelAssetWithSpecificationDataError(specificationData *foundat
 func MLModelAssetModelAssetWithSpecificationDataBlobMappingError(specificationData *foundation.NSData, blobMapping *foundation.NSDictionary[*foundation.NSURL, *foundation.NSData]) (*MLModelAsset, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLModelAsset), _mLModelAssetSelModelAssetWithSpecificationDataBlobMappingError, specificationData.Ptr(), blobMapping, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -63,7 +67,9 @@ func MLModelAssetModelAssetWithSpecificationDataBlobMappingError(specificationDa
 func MLModelAssetModelAssetWithURLError(compiledModelURL *foundation.NSURL) (*MLModelAsset, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLModelAsset), _mLModelAssetSelModelAssetWithURLError, compiledModelURL.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -104,4 +110,3 @@ func (o *MLModelAsset) ModelDescriptionOfFunctionNamedCompletionHandler(function
 func (o *MLModelAsset) FunctionNamesWithCompletionHandler(handler objc.Block) {
 	o.Ptr().Send(_mLModelAssetSelFunctionNamesWithCompletionHandler, handler)
 }
-

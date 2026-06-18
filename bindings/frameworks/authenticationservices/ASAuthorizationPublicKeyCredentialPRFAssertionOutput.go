@@ -16,8 +16,8 @@ type ASAuthorizationPublicKeyCredentialPRFAssertionOutput struct {
 }
 
 var (
-	_clsASAuthorizationPublicKeyCredentialPRFAssertionOutput = _objcClass("ASAuthorizationPublicKeyCredentialPRFAssertionOutput")
-	_aSAuthorizationPublicKeyCredentialPRFAssertionOutputSelFirst = objc.RegisterName("first")
+	_clsASAuthorizationPublicKeyCredentialPRFAssertionOutput       = _objcClass("ASAuthorizationPublicKeyCredentialPRFAssertionOutput")
+	_aSAuthorizationPublicKeyCredentialPRFAssertionOutputSelFirst  = objc.RegisterName("first")
 	_aSAuthorizationPublicKeyCredentialPRFAssertionOutputSelSecond = objc.RegisterName("second")
 )
 
@@ -33,13 +33,16 @@ func ASAuthorizationPublicKeyCredentialPRFAssertionOutputFromID(id objc.ID) *ASA
 
 func (o *ASAuthorizationPublicKeyCredentialPRFAssertionOutput) First() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPublicKeyCredentialPRFAssertionOutputSelFirst)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *ASAuthorizationPublicKeyCredentialPRFAssertionOutput) Second() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPublicKeyCredentialPRFAssertionOutputSelSecond)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

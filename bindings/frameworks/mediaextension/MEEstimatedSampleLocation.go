@@ -17,11 +17,11 @@ type MEEstimatedSampleLocation struct {
 }
 
 var (
-	_clsMEEstimatedSampleLocation = _objcClass("MEEstimatedSampleLocation")
+	_clsMEEstimatedSampleLocation                                                                = _objcClass("MEEstimatedSampleLocation")
 	_mEEstimatedSampleLocationSelInitWithByteSourceEstimatedSampleLocationRefinementDataLocation = objc.RegisterName("initWithByteSource:estimatedSampleLocation:refinementDataLocation:")
-	_mEEstimatedSampleLocationSelEstimatedSampleLocation = objc.RegisterName("estimatedSampleLocation")
-	_mEEstimatedSampleLocationSelRefinementDataLocation = objc.RegisterName("refinementDataLocation")
-	_mEEstimatedSampleLocationSelByteSource = objc.RegisterName("byteSource")
+	_mEEstimatedSampleLocationSelEstimatedSampleLocation                                         = objc.RegisterName("estimatedSampleLocation")
+	_mEEstimatedSampleLocationSelRefinementDataLocation                                          = objc.RegisterName("refinementDataLocation")
+	_mEEstimatedSampleLocationSelByteSource                                                      = objc.RegisterName("byteSource")
 )
 
 func MEEstimatedSampleLocationFromID(id objc.ID) *MEEstimatedSampleLocation {
@@ -37,7 +37,9 @@ func MEEstimatedSampleLocationFromID(id objc.ID) *MEEstimatedSampleLocation {
 // @property		initWithByteSource @abstract		The initializer for the MEEstimatedSampleLocation class. @param			byteSource The MEByteSource to be used to read the data for the sample. @param			estimatedSampleLocation The estimated starting file offset and size in bytes of the sample. @param			refinementDataLocation The starting file offset and size in bytes of the the data necessary to provide an accurate sample location.
 func (o *MEEstimatedSampleLocation) InitWithByteSourceEstimatedSampleLocationRefinementDataLocation(byteSource *MEByteSource, estimatedSampleLocation avfoundation.AVSampleCursorStorageRange, refinementDataLocation avfoundation.AVSampleCursorStorageRange) *MEEstimatedSampleLocation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEEstimatedSampleLocationSelInitWithByteSourceEstimatedSampleLocationRefinementDataLocation, byteSource.Ptr(), estimatedSampleLocation, refinementDataLocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEEstimatedSampleLocationFromID(_ret)
 }
 
@@ -56,7 +58,8 @@ func (o *MEEstimatedSampleLocation) RefinementDataLocation() avfoundation.AVSamp
 // @property		byteSource @abstract		The MEByteSource to be used to read the data for the sample.
 func (o *MEEstimatedSampleLocation) ByteSource() *MEByteSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEEstimatedSampleLocationSelByteSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEByteSourceFromID(_ret)
 }
-

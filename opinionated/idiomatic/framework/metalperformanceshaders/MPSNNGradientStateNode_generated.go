@@ -54,7 +54,9 @@ func (x *NNGradientStateNode) WithSynchronizeResource(synchronizeResource bool) 
 	return x
 }
 
-func (x *NNGradientStateNode) asNNStateNode() *mpsneuralnetwork.MPSNNStateNode { return &x.inner.MPSNNStateNode }
+func (x *NNGradientStateNode) asNNStateNode() *mpsneuralnetwork.MPSNNStateNode {
+	return &x.inner.MPSNNStateNode
+}
 
 // NNGradientStateNodeable is the interface implemented by [NNGradientStateNode], for mocking and DI.
 type NNGradientStateNodeable interface {
@@ -65,4 +67,3 @@ type NNGradientStateNodeable interface {
 }
 
 var _ NNGradientStateNodeable = (*NNGradientStateNode)(nil)
-

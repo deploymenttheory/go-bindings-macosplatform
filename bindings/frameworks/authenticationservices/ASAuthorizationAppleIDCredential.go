@@ -16,16 +16,16 @@ type ASAuthorizationAppleIDCredential struct {
 }
 
 var (
-	_clsASAuthorizationAppleIDCredential = _objcClass("ASAuthorizationAppleIDCredential")
-	_aSAuthorizationAppleIDCredentialSelUser = objc.RegisterName("user")
-	_aSAuthorizationAppleIDCredentialSelState = objc.RegisterName("state")
-	_aSAuthorizationAppleIDCredentialSelAuthorizedScopes = objc.RegisterName("authorizedScopes")
+	_clsASAuthorizationAppleIDCredential                  = _objcClass("ASAuthorizationAppleIDCredential")
+	_aSAuthorizationAppleIDCredentialSelUser              = objc.RegisterName("user")
+	_aSAuthorizationAppleIDCredentialSelState             = objc.RegisterName("state")
+	_aSAuthorizationAppleIDCredentialSelAuthorizedScopes  = objc.RegisterName("authorizedScopes")
 	_aSAuthorizationAppleIDCredentialSelAuthorizationCode = objc.RegisterName("authorizationCode")
-	_aSAuthorizationAppleIDCredentialSelIdentityToken = objc.RegisterName("identityToken")
-	_aSAuthorizationAppleIDCredentialSelEmail = objc.RegisterName("email")
-	_aSAuthorizationAppleIDCredentialSelFullName = objc.RegisterName("fullName")
-	_aSAuthorizationAppleIDCredentialSelRealUserStatus = objc.RegisterName("realUserStatus")
-	_aSAuthorizationAppleIDCredentialSelUserAgeRange = objc.RegisterName("userAgeRange")
+	_aSAuthorizationAppleIDCredentialSelIdentityToken     = objc.RegisterName("identityToken")
+	_aSAuthorizationAppleIDCredentialSelEmail             = objc.RegisterName("email")
+	_aSAuthorizationAppleIDCredentialSelFullName          = objc.RegisterName("fullName")
+	_aSAuthorizationAppleIDCredentialSelRealUserStatus    = objc.RegisterName("realUserStatus")
+	_aSAuthorizationAppleIDCredentialSelUserAgeRange      = objc.RegisterName("userAgeRange")
 )
 
 func ASAuthorizationAppleIDCredentialFromID(id objc.ID) *ASAuthorizationAppleIDCredential {
@@ -41,14 +41,18 @@ func ASAuthorizationAppleIDCredentialFromID(id objc.ID) *ASAuthorizationAppleIDC
 // @abstract An opaque user ID associated with the AppleID used for the sign in. This identifier will be stable across the 'developer team', it can later be used as an input to @see ASAuthorizationRequest to request user contact information. The identifier will remain stable as long as the user is connected with the requesting client.  The value may change upon user disconnecting from the identity provider.
 func (o *ASAuthorizationAppleIDCredential) User() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationAppleIDCredentialSelUser)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract A copy of the state value that was passed to ASAuthorizationRequest.
 func (o *ASAuthorizationAppleIDCredential) State() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationAppleIDCredentialSelState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -61,28 +65,36 @@ func (o *ASAuthorizationAppleIDCredential) AuthorizedScopes() *foundation.NSArra
 // @abstract A short-lived, one-time valid token that provides proof of authorization to the server component of the app. The authorization code is bound to the specific transaction using the state attribute passed in the authorization request. The server component of the app can validate the code using Apple’s identity service endpoint provided for this purpose.
 func (o *ASAuthorizationAppleIDCredential) AuthorizationCode() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationAppleIDCredentialSelAuthorizationCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @abstract A JSON Web Token (JWT) used to communicate information about the identity of the user in a secure way to the app. The ID token will contain the following information: Issuer Identifier, Subject Identifier, Audience, Expiry Time and Issuance Time signed by Apple's identity service.
 func (o *ASAuthorizationAppleIDCredential) IdentityToken() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationAppleIDCredentialSelIdentityToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @abstract An optional email shared by the user.  This field is populated with a value that the user authorized.
 func (o *ASAuthorizationAppleIDCredential) Email() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationAppleIDCredentialSelEmail)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract An optional full name shared by the user.  This field is populated with a value that the user authorized.
 func (o *ASAuthorizationAppleIDCredential) FullName() *foundation.NSPersonNameComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationAppleIDCredentialSelFullName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPersonNameComponentsFromID(_ret)
 }
 
@@ -97,4 +109,3 @@ func (o *ASAuthorizationAppleIDCredential) UserAgeRange() ASUserAgeRange {
 	_ret := objc.Send[ASUserAgeRange](o.Ptr(), _aSAuthorizationAppleIDCredentialSelUserAgeRange)
 	return _ret
 }
-

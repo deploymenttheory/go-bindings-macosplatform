@@ -16,13 +16,13 @@ type CMIOExtensionPropertyState[ObjectType purego.AnyObject] struct {
 }
 
 var (
-	_clsCMIOExtensionPropertyState = _objcClass("CMIOExtensionPropertyState")
-	_cMIOExtensionPropertyStateSelPropertyStateWithValue = objc.RegisterName("propertyStateWithValue:")
+	_clsCMIOExtensionPropertyState                                 = _objcClass("CMIOExtensionPropertyState")
+	_cMIOExtensionPropertyStateSelPropertyStateWithValue           = objc.RegisterName("propertyStateWithValue:")
 	_cMIOExtensionPropertyStateSelPropertyStateWithValueAttributes = objc.RegisterName("propertyStateWithValue:attributes:")
-	_cMIOExtensionPropertyStateSelInitWithValue = objc.RegisterName("initWithValue:")
-	_cMIOExtensionPropertyStateSelInitWithValueAttributes = objc.RegisterName("initWithValue:attributes:")
-	_cMIOExtensionPropertyStateSelValue = objc.RegisterName("value")
-	_cMIOExtensionPropertyStateSelAttributes = objc.RegisterName("attributes")
+	_cMIOExtensionPropertyStateSelInitWithValue                    = objc.RegisterName("initWithValue:")
+	_cMIOExtensionPropertyStateSelInitWithValueAttributes          = objc.RegisterName("initWithValue:attributes:")
+	_cMIOExtensionPropertyStateSelValue                            = objc.RegisterName("value")
+	_cMIOExtensionPropertyStateSelAttributes                       = objc.RegisterName("attributes")
 )
 
 func CMIOExtensionPropertyStateFromID[ObjectType purego.AnyObject](id objc.ID) *CMIOExtensionPropertyState[ObjectType] {
@@ -38,28 +38,36 @@ func CMIOExtensionPropertyStateFromID[ObjectType purego.AnyObject](id objc.ID) *
 // @method propertyStateWithValue: @abstract Returns a property state instance. @param value The value associated with a property state. @result A CMIOExtensionPropertyState instance with a nil attributes.
 func CMIOExtensionPropertyStatePropertyStateWithValue(value objc.ID) *CMIOExtensionPropertyState[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCMIOExtensionPropertyState), _cMIOExtensionPropertyStateSelPropertyStateWithValue, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CMIOExtensionPropertyStateFromID[objc.ID](_ret)
 }
 
 // @method propertyStateWithValue:attributes: @abstract Returns a property state instance. @param value The value associated with a property state. @param attributes The property attributes associated with a property state. @result A CMIOExtensionPropertyState instance. @discussion A nil property attributes defaults to a read/write property that doesn't have a minValue/maxValue/validValues. The supported value types are NSDictionary/NSArray/NSString/NSData/NSNumber.
 func CMIOExtensionPropertyStatePropertyStateWithValueAttributes(value objc.ID, attributes *CMIOExtensionPropertyAttributes[objc.ID]) *CMIOExtensionPropertyState[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCMIOExtensionPropertyState), _cMIOExtensionPropertyStateSelPropertyStateWithValueAttributes, value, attributes.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CMIOExtensionPropertyStateFromID[objc.ID](_ret)
 }
 
 // @method initWithValue: @abstract Initialize a property state instance. @param value The value associated with a property state. @result A CMIOExtensionPropertyState instance. @discussion A nil property attributes defaults to a read/write property that doesn't have a minValue/maxValue/validValues. The supported value types are NSDictionary/NSArray/NSString/NSData/NSNumber.
 func (o *CMIOExtensionPropertyState[ObjectType]) InitWithValue(value ObjectType) *CMIOExtensionPropertyState[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionPropertyStateSelInitWithValue, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CMIOExtensionPropertyStateFromID[ObjectType](_ret)
 }
 
 // @method initWithValue:attributes: @abstract Initialize a property state instance. @param value The value associated with a property state. @param attributes The property attributes associated with a property state. @result A CMIOExtensionPropertyState instance. @discussion A nil property attributes defaults to a read/write property that doesn't have a minValue/maxValue/validValues. The supported value types are NSDictionary/NSArray/NSString/NSData/NSNumber.
 func (o *CMIOExtensionPropertyState[ObjectType]) InitWithValueAttributes(value ObjectType, attributes *CMIOExtensionPropertyAttributes[ObjectType]) *CMIOExtensionPropertyState[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionPropertyStateSelInitWithValueAttributes, value, attributes.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CMIOExtensionPropertyStateFromID[ObjectType](_ret)
 }
 
@@ -72,7 +80,8 @@ func (o *CMIOExtensionPropertyState[ObjectType]) Value() ObjectType {
 // @property attributes @abstract The property attributes of the property.
 func (o *CMIOExtensionPropertyState[ObjectType]) Attributes() *CMIOExtensionPropertyAttributes[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionPropertyStateSelAttributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CMIOExtensionPropertyAttributesFromID[ObjectType](_ret)
 }
-

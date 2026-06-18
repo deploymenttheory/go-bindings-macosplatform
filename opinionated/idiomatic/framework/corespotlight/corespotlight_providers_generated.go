@@ -17,4 +17,3 @@ type SearchQueryProvider interface {
 type SearchQueryContextProvider interface {
 	asSearchQueryContext() *raw.CSSearchQueryContext
 }
-

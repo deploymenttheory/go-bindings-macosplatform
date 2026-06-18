@@ -18,25 +18,25 @@ type AVCaptureVideoPreviewLayer struct {
 }
 
 var (
-	_clsAVCaptureVideoPreviewLayer = _objcClass("AVCaptureVideoPreviewLayer")
-	_aVCaptureVideoPreviewLayerSelLayerWithSession = objc.RegisterName("layerWithSession:")
-	_aVCaptureVideoPreviewLayerSelInitWithSession = objc.RegisterName("initWithSession:")
-	_aVCaptureVideoPreviewLayerSelLayerWithSessionWithNoConnection = objc.RegisterName("layerWithSessionWithNoConnection:")
-	_aVCaptureVideoPreviewLayerSelInitWithSessionWithNoConnection = objc.RegisterName("initWithSessionWithNoConnection:")
-	_aVCaptureVideoPreviewLayerSelSetSessionWithNoConnection = objc.RegisterName("setSessionWithNoConnection:")
-	_aVCaptureVideoPreviewLayerSelCaptureDevicePointOfInterestForPoint = objc.RegisterName("captureDevicePointOfInterestForPoint:")
-	_aVCaptureVideoPreviewLayerSelPointForCaptureDevicePointOfInterest = objc.RegisterName("pointForCaptureDevicePointOfInterest:")
-	_aVCaptureVideoPreviewLayerSelMetadataOutputRectOfInterestForRect = objc.RegisterName("metadataOutputRectOfInterestForRect:")
-	_aVCaptureVideoPreviewLayerSelRectForMetadataOutputRectOfInterest = objc.RegisterName("rectForMetadataOutputRectOfInterest:")
+	_clsAVCaptureVideoPreviewLayer                                           = _objcClass("AVCaptureVideoPreviewLayer")
+	_aVCaptureVideoPreviewLayerSelLayerWithSession                           = objc.RegisterName("layerWithSession:")
+	_aVCaptureVideoPreviewLayerSelInitWithSession                            = objc.RegisterName("initWithSession:")
+	_aVCaptureVideoPreviewLayerSelLayerWithSessionWithNoConnection           = objc.RegisterName("layerWithSessionWithNoConnection:")
+	_aVCaptureVideoPreviewLayerSelInitWithSessionWithNoConnection            = objc.RegisterName("initWithSessionWithNoConnection:")
+	_aVCaptureVideoPreviewLayerSelSetSessionWithNoConnection                 = objc.RegisterName("setSessionWithNoConnection:")
+	_aVCaptureVideoPreviewLayerSelCaptureDevicePointOfInterestForPoint       = objc.RegisterName("captureDevicePointOfInterestForPoint:")
+	_aVCaptureVideoPreviewLayerSelPointForCaptureDevicePointOfInterest       = objc.RegisterName("pointForCaptureDevicePointOfInterest:")
+	_aVCaptureVideoPreviewLayerSelMetadataOutputRectOfInterestForRect        = objc.RegisterName("metadataOutputRectOfInterestForRect:")
+	_aVCaptureVideoPreviewLayerSelRectForMetadataOutputRectOfInterest        = objc.RegisterName("rectForMetadataOutputRectOfInterest:")
 	_aVCaptureVideoPreviewLayerSelTransformedMetadataObjectForMetadataObject = objc.RegisterName("transformedMetadataObjectForMetadataObject:")
-	_aVCaptureVideoPreviewLayerSelSession = objc.RegisterName("session")
-	_aVCaptureVideoPreviewLayerSelSetSession = objc.RegisterName("setSession:")
-	_aVCaptureVideoPreviewLayerSelConnection = objc.RegisterName("connection")
-	_aVCaptureVideoPreviewLayerSelVideoGravity = objc.RegisterName("videoGravity")
-	_aVCaptureVideoPreviewLayerSelSetVideoGravity = objc.RegisterName("setVideoGravity:")
-	_aVCaptureVideoPreviewLayerSelIsDeferredStartSupported = objc.RegisterName("isDeferredStartSupported")
-	_aVCaptureVideoPreviewLayerSelIsDeferredStartEnabled = objc.RegisterName("isDeferredStartEnabled")
-	_aVCaptureVideoPreviewLayerSelSetDeferredStartEnabled = objc.RegisterName("setDeferredStartEnabled:")
+	_aVCaptureVideoPreviewLayerSelSession                                    = objc.RegisterName("session")
+	_aVCaptureVideoPreviewLayerSelSetSession                                 = objc.RegisterName("setSession:")
+	_aVCaptureVideoPreviewLayerSelConnection                                 = objc.RegisterName("connection")
+	_aVCaptureVideoPreviewLayerSelVideoGravity                               = objc.RegisterName("videoGravity")
+	_aVCaptureVideoPreviewLayerSelSetVideoGravity                            = objc.RegisterName("setVideoGravity:")
+	_aVCaptureVideoPreviewLayerSelIsDeferredStartSupported                   = objc.RegisterName("isDeferredStartSupported")
+	_aVCaptureVideoPreviewLayerSelIsDeferredStartEnabled                     = objc.RegisterName("isDeferredStartEnabled")
+	_aVCaptureVideoPreviewLayerSelSetDeferredStartEnabled                    = objc.RegisterName("setDeferredStartEnabled:")
 )
 
 func AVCaptureVideoPreviewLayerFromID(id objc.ID) *AVCaptureVideoPreviewLayer {
@@ -52,28 +52,36 @@ func AVCaptureVideoPreviewLayerFromID(id objc.ID) *AVCaptureVideoPreviewLayer {
 // @method layerWithSession: @abstract Creates an AVCaptureVideoPreviewLayer for previewing the visual output of the specified AVCaptureSession. @param session The AVCaptureSession instance to be previewed. @result A newly initialized AVCaptureVideoPreviewLayer instance.
 func AVCaptureVideoPreviewLayerLayerWithSession(session *AVCaptureSession) *AVCaptureVideoPreviewLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureVideoPreviewLayer), _aVCaptureVideoPreviewLayerSelLayerWithSession, session.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureVideoPreviewLayerFromID(_ret)
 }
 
 // @method initWithSession: @abstract Creates an AVCaptureVideoPreviewLayer for previewing the visual output of the specified AVCaptureSession. @param session The AVCaptureSession instance to be previewed. @result A newly initialized AVCaptureVideoPreviewLayer instance.
 func (o *AVCaptureVideoPreviewLayer) InitWithSession(session *AVCaptureSession) *AVCaptureVideoPreviewLayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureVideoPreviewLayerSelInitWithSession, session.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureVideoPreviewLayerFromID(_ret)
 }
 
 // @method layerWithSessionWithNoConnection: @abstract Creates an AVCaptureVideoPreviewLayer for previewing the visual output of the specified AVCaptureSession, but creates no connections to any of the session's eligible video inputs. Only use this initializer if you intend to manually form a connection between a desired AVCaptureInputPort and the receiver using AVCaptureSession's -addConnection: method. @param session The AVCaptureSession instance to be previewed. @result A newly initialized AVCaptureVideoPreviewLayer instance.
 func AVCaptureVideoPreviewLayerLayerWithSessionWithNoConnection(session *AVCaptureSession) *AVCaptureVideoPreviewLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureVideoPreviewLayer), _aVCaptureVideoPreviewLayerSelLayerWithSessionWithNoConnection, session.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureVideoPreviewLayerFromID(_ret)
 }
 
 // @method initWithSessionWithNoConnection: @abstract Creates an AVCaptureVideoPreviewLayer for previewing the visual output of the specified AVCaptureSession, but creates no connections to any of the session's eligible video inputs. Only use this initializer if you intend to manually form a connection between a desired AVCaptureInputPort and the receiver using AVCaptureSession's -addConnection: method. @param session The AVCaptureSession instance to be previewed. @result A newly initialized AVCaptureVideoPreviewLayer instance.
 func (o *AVCaptureVideoPreviewLayer) InitWithSessionWithNoConnection(session *AVCaptureSession) *AVCaptureVideoPreviewLayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureVideoPreviewLayerSelInitWithSessionWithNoConnection, session.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureVideoPreviewLayerFromID(_ret)
 }
 
@@ -109,14 +117,18 @@ func (o *AVCaptureVideoPreviewLayer) RectForMetadataOutputRectOfInterest(rectInM
 // @method transformedMetadataObjectForMetadataObject: @abstract Converts an AVMetadataObject's visual properties to layer coordinates. @param metadataObject An AVMetadataObject originating from the same AVCaptureInput as the preview layer. @result An AVMetadataObject whose properties are in layer coordinates. @discussion AVMetadataObject bounds may be expressed as a rect where {0,0} represents the top left of the picture area, and {1,1} represents the bottom right on an unrotated picture. Face metadata objects likewise express yaw and roll angles with respect to an unrotated picture. -transformedMetadataObjectForMetadataObject: converts the visual properties in the coordinate space of the supplied AVMetadataObject to the coordinate space of the receiver. The conversion takes orientation, mirroring, layer bounds and videoGravity into consideration. If the provided metadata object originates from an input source other than the preview layer's, nil will be returned.
 func (o *AVCaptureVideoPreviewLayer) TransformedMetadataObjectForMetadataObject(metadataObject *AVMetadataObject) *AVMetadataObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureVideoPreviewLayerSelTransformedMetadataObjectForMetadataObject, metadataObject.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMetadataObjectFromID(_ret)
 }
 
 // @property session @abstract The AVCaptureSession instance being previewed by the receiver. @discussion The session is retained by the preview layer.
 func (o *AVCaptureVideoPreviewLayer) Session() *AVCaptureSession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureVideoPreviewLayerSelSession)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureSessionFromID(_ret)
 }
 
@@ -127,14 +139,18 @@ func (o *AVCaptureVideoPreviewLayer) SetSession(session *AVCaptureSession) {
 // @property connection @abstract The AVCaptureConnection instance describing the AVCaptureInputPort to which the receiver is connected. @discussion When calling initWithSession: or setSession: with a valid AVCaptureSession instance, a connection is formed to the first eligible video AVCaptureInput. If the receiver is detached from a session, the connection property becomes nil.
 func (o *AVCaptureVideoPreviewLayer) Connection() *AVCaptureConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureVideoPreviewLayerSelConnection)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureConnectionFromID(_ret)
 }
 
 // @property videoGravity @abstract A string defining how the video is displayed within an AVCaptureVideoPreviewLayer bounds rect. @discussion Options are AVLayerVideoGravityResize, AVLayerVideoGravityResizeAspect and AVLayerVideoGravityResizeAspectFill. AVLayerVideoGravityResizeAspect is default. See <AVFoundation/AVAnimation.h> for a description of these options.
 func (o *AVCaptureVideoPreviewLayer) VideoGravity() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureVideoPreviewLayerSelVideoGravity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -142,13 +158,13 @@ func (o *AVCaptureVideoPreviewLayer) SetVideoGravity(videoGravity *foundation.NS
 	o.Ptr().Send(_aVCaptureVideoPreviewLayerSelSetVideoGravity, videoGravity.Ptr())
 }
 
-// A `BOOL` value that indicates whether the preview layer supports deferred start. You can only set the ``deferredStartEnabled`` property to `true` if the preview layer supports deferred start.
+// A `BOOL` value that indicates whether the preview layer supports deferred start. You can only set the “deferredStartEnabled“ property to `true` if the preview layer supports deferred start.
 func (o *AVCaptureVideoPreviewLayer) IsDeferredStartSupported() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptureVideoPreviewLayerSelIsDeferredStartSupported)
 	return _ret
 }
 
-// A `BOOL` value that indicates whether to defer starting this preview layer. When this value is `true`, the session does not prepare the output's resources until some time after ``AVCaptureSession/startRunning`` returns. You can start the visual parts of your user interface (e.g. preview) prior to other parts (e.g. photo/movie capture, metadata output, etc..) to improve startup performance. Set this value to `false` if your app needs video preview immediately for startup, and `true` if it does not. By default, this value is `false` for ``AVCaptureVideoPreviewLayer`` objects, since this object is used to display preview. For best session start performance, set ``deferredStartEnabled`` to `false` for preview layers. If your app contains multiple preview layers, you may want to display the main preview layer as soon as possible and allow the remaining layers to display subsequently. In this case, set ``deferredStartEnabled`` to `true` for the remaining layers. - Note: Setting this property to the same value for all outputs, including ``AVCaptureVideoPreviewLayer`` and ``AVCaptureOutput``, is equivalent to not using deferred start. If ``deferredStartSupported`` is `false`, setting this property value to `true` results in the session throwing an `NSInvalidArgumentException`. - Note: Set this value before calling ``AVCaptureSession/commitConfiguration`` as it requires a lengthy reconfiguration of the capture render pipeline.
+// A `BOOL` value that indicates whether to defer starting this preview layer. When this value is `true`, the session does not prepare the output's resources until some time after “AVCaptureSession/startRunning“ returns. You can start the visual parts of your user interface (e.g. preview) prior to other parts (e.g. photo/movie capture, metadata output, etc..) to improve startup performance. Set this value to `false` if your app needs video preview immediately for startup, and `true` if it does not. By default, this value is `false` for “AVCaptureVideoPreviewLayer“ objects, since this object is used to display preview. For best session start performance, set “deferredStartEnabled“ to `false` for preview layers. If your app contains multiple preview layers, you may want to display the main preview layer as soon as possible and allow the remaining layers to display subsequently. In this case, set “deferredStartEnabled“ to `true` for the remaining layers. - Note: Setting this property to the same value for all outputs, including “AVCaptureVideoPreviewLayer“ and “AVCaptureOutput“, is equivalent to not using deferred start. If “deferredStartSupported“ is `false`, setting this property value to `true` results in the session throwing an `NSInvalidArgumentException`. - Note: Set this value before calling “AVCaptureSession/commitConfiguration“ as it requires a lengthy reconfiguration of the capture render pipeline.
 func (o *AVCaptureVideoPreviewLayer) IsDeferredStartEnabled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptureVideoPreviewLayerSelIsDeferredStartEnabled)
 	return _ret
@@ -157,4 +173,3 @@ func (o *AVCaptureVideoPreviewLayer) IsDeferredStartEnabled() bool {
 func (o *AVCaptureVideoPreviewLayer) SetDeferredStartEnabled(deferredStartEnabled bool) {
 	o.Ptr().Send(_aVCaptureVideoPreviewLayerSelSetDeferredStartEnabled, deferredStartEnabled)
 }
-

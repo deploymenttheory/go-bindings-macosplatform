@@ -82,7 +82,9 @@ func (x *MutableCompositionTrack) WithSegments(items ...*raw.AVCompositionTrackS
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.AVCompositionTrackSegment](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -171,9 +173,13 @@ func (x *MutableCompositionTrack) ReplaceFormatDescriptionWithFormatDescription(
 	x.inner.ReplaceFormatDescriptionWithFormatDescription(originalFormatDescription, replacementFormatDescription)
 }
 
-func (x *MutableCompositionTrack) asCompositionTrack() *raw.AVCompositionTrack { return &x.inner.AVCompositionTrack }
+func (x *MutableCompositionTrack) asCompositionTrack() *raw.AVCompositionTrack {
+	return &x.inner.AVCompositionTrack
+}
 
-func (x *MutableCompositionTrack) asAssetTrack() *raw.AVAssetTrack { return &x.inner.AVCompositionTrack.AVAssetTrack }
+func (x *MutableCompositionTrack) asAssetTrack() *raw.AVAssetTrack {
+	return &x.inner.AVCompositionTrack.AVAssetTrack
+}
 
 // MutableCompositionTrackable is the interface implemented by [MutableCompositionTrack], for mocking and DI.
 type MutableCompositionTrackable interface {
@@ -204,4 +210,3 @@ type MutableCompositionTrackable interface {
 }
 
 var _ MutableCompositionTrackable = (*MutableCompositionTrack)(nil)
-

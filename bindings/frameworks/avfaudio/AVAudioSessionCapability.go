@@ -16,9 +16,9 @@ type AVAudioSessionCapability struct {
 }
 
 var (
-	_clsAVAudioSessionCapability = _objcClass("AVAudioSessionCapability")
+	_clsAVAudioSessionCapability            = _objcClass("AVAudioSessionCapability")
 	_aVAudioSessionCapabilitySelIsSupported = objc.RegisterName("isSupported")
-	_aVAudioSessionCapabilitySelIsEnabled = objc.RegisterName("isEnabled")
+	_aVAudioSessionCapabilitySelIsEnabled   = objc.RegisterName("isEnabled")
 )
 
 func AVAudioSessionCapabilityFromID(id objc.ID) *AVAudioSessionCapability {
@@ -42,4 +42,3 @@ func (o *AVAudioSessionCapability) IsEnabled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioSessionCapabilitySelIsEnabled)
 	return _ret
 }
-

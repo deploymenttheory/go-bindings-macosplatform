@@ -16,16 +16,16 @@ type VNDetectContoursRequest struct {
 }
 
 var (
-	_clsVNDetectContoursRequest = _objcClass("VNDetectContoursRequest")
-	_vNDetectContoursRequestSelContrastAdjustment = objc.RegisterName("contrastAdjustment")
-	_vNDetectContoursRequestSelSetContrastAdjustment = objc.RegisterName("setContrastAdjustment:")
-	_vNDetectContoursRequestSelContrastPivot = objc.RegisterName("contrastPivot")
-	_vNDetectContoursRequestSelSetContrastPivot = objc.RegisterName("setContrastPivot:")
-	_vNDetectContoursRequestSelDetectsDarkOnLight = objc.RegisterName("detectsDarkOnLight")
-	_vNDetectContoursRequestSelSetDetectsDarkOnLight = objc.RegisterName("setDetectsDarkOnLight:")
-	_vNDetectContoursRequestSelDetectDarkOnLight = objc.RegisterName("detectDarkOnLight")
-	_vNDetectContoursRequestSelSetDetectDarkOnLight = objc.RegisterName("setDetectDarkOnLight:")
-	_vNDetectContoursRequestSelMaximumImageDimension = objc.RegisterName("maximumImageDimension")
+	_clsVNDetectContoursRequest                         = _objcClass("VNDetectContoursRequest")
+	_vNDetectContoursRequestSelContrastAdjustment       = objc.RegisterName("contrastAdjustment")
+	_vNDetectContoursRequestSelSetContrastAdjustment    = objc.RegisterName("setContrastAdjustment:")
+	_vNDetectContoursRequestSelContrastPivot            = objc.RegisterName("contrastPivot")
+	_vNDetectContoursRequestSelSetContrastPivot         = objc.RegisterName("setContrastPivot:")
+	_vNDetectContoursRequestSelDetectsDarkOnLight       = objc.RegisterName("detectsDarkOnLight")
+	_vNDetectContoursRequestSelSetDetectsDarkOnLight    = objc.RegisterName("setDetectsDarkOnLight:")
+	_vNDetectContoursRequestSelDetectDarkOnLight        = objc.RegisterName("detectDarkOnLight")
+	_vNDetectContoursRequestSelSetDetectDarkOnLight     = objc.RegisterName("setDetectDarkOnLight:")
+	_vNDetectContoursRequestSelMaximumImageDimension    = objc.RegisterName("maximumImageDimension")
 	_vNDetectContoursRequestSelSetMaximumImageDimension = objc.RegisterName("setMaximumImageDimension:")
 )
 
@@ -52,7 +52,9 @@ func (o *VNDetectContoursRequest) SetContrastAdjustment(contrastAdjustment float
 // @brief The pixel value to use as a pivot for the contrast. Valid values are from [0.0 ... +1.0], or nil to auto-detect based on image intensity. The default value is +0.5 (i.e. pixel center).
 func (o *VNDetectContoursRequest) ContrastPivot() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNDetectContoursRequestSelContrastPivot)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -90,4 +92,3 @@ func (o *VNDetectContoursRequest) MaximumImageDimension() uint {
 func (o *VNDetectContoursRequest) SetMaximumImageDimension(maximumImageDimension uint) {
 	o.Ptr().Send(_vNDetectContoursRequestSelSetMaximumImageDimension, maximumImageDimension)
 }
-

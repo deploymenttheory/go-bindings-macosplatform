@@ -18,21 +18,21 @@ type GLKSkyboxEffect struct {
 }
 
 var (
-	_clsGLKSkyboxEffect = _objcClass("GLKSkyboxEffect")
-	_gLKSkyboxEffectSelPrepareToDraw = objc.RegisterName("prepareToDraw")
-	_gLKSkyboxEffectSelDraw = objc.RegisterName("draw")
-	_gLKSkyboxEffectSelCenter = objc.RegisterName("center")
-	_gLKSkyboxEffectSelSetCenter = objc.RegisterName("setCenter:")
-	_gLKSkyboxEffectSelXSize = objc.RegisterName("xSize")
-	_gLKSkyboxEffectSelSetXSize = objc.RegisterName("setXSize:")
-	_gLKSkyboxEffectSelYSize = objc.RegisterName("ySize")
-	_gLKSkyboxEffectSelSetYSize = objc.RegisterName("setYSize:")
-	_gLKSkyboxEffectSelZSize = objc.RegisterName("zSize")
-	_gLKSkyboxEffectSelSetZSize = objc.RegisterName("setZSize:")
+	_clsGLKSkyboxEffect               = _objcClass("GLKSkyboxEffect")
+	_gLKSkyboxEffectSelPrepareToDraw  = objc.RegisterName("prepareToDraw")
+	_gLKSkyboxEffectSelDraw           = objc.RegisterName("draw")
+	_gLKSkyboxEffectSelCenter         = objc.RegisterName("center")
+	_gLKSkyboxEffectSelSetCenter      = objc.RegisterName("setCenter:")
+	_gLKSkyboxEffectSelXSize          = objc.RegisterName("xSize")
+	_gLKSkyboxEffectSelSetXSize       = objc.RegisterName("setXSize:")
+	_gLKSkyboxEffectSelYSize          = objc.RegisterName("ySize")
+	_gLKSkyboxEffectSelSetYSize       = objc.RegisterName("setYSize:")
+	_gLKSkyboxEffectSelZSize          = objc.RegisterName("zSize")
+	_gLKSkyboxEffectSelSetZSize       = objc.RegisterName("setZSize:")
 	_gLKSkyboxEffectSelTextureCubeMap = objc.RegisterName("textureCubeMap")
-	_gLKSkyboxEffectSelTransform = objc.RegisterName("transform")
-	_gLKSkyboxEffectSelLabel = objc.RegisterName("label")
-	_gLKSkyboxEffectSelSetLabel = objc.RegisterName("setLabel:")
+	_gLKSkyboxEffectSelTransform      = objc.RegisterName("transform")
+	_gLKSkyboxEffectSelLabel          = objc.RegisterName("label")
+	_gLKSkyboxEffectSelSetLabel       = objc.RegisterName("setLabel:")
 )
 
 func GLKSkyboxEffectFromID(id objc.ID) *GLKSkyboxEffect {
@@ -91,23 +91,28 @@ func (o *GLKSkyboxEffect) SetZSize(zSize float32) {
 
 func (o *GLKSkyboxEffect) TextureCubeMap() *GLKEffectPropertyTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gLKSkyboxEffectSelTextureCubeMap)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GLKEffectPropertyTextureFromID(_ret)
 }
 
 func (o *GLKSkyboxEffect) Transform() *GLKEffectPropertyTransform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gLKSkyboxEffectSelTransform)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GLKEffectPropertyTransformFromID(_ret)
 }
 
 func (o *GLKSkyboxEffect) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gLKSkyboxEffectSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *GLKSkyboxEffect) SetLabel(label *foundation.NSString) {
 	o.Ptr().Send(_gLKSkyboxEffectSelSetLabel, label.Ptr())
 }
-

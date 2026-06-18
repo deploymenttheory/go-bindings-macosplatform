@@ -101,4 +101,3 @@ type TextureInfoable interface {
 }
 
 var _ TextureInfoable = (*TextureInfo)(nil)
-

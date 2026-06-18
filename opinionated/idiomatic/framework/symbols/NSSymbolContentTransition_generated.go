@@ -35,7 +35,9 @@ func NewSymbolContentTransition() *SymbolContentTransition {
 	return &SymbolContentTransition{inner: raw.NSSymbolContentTransitionFromID(_id)}
 }
 
-func (x *SymbolContentTransition) asSymbolContentTransition() *raw.NSSymbolContentTransition { return x.inner }
+func (x *SymbolContentTransition) asSymbolContentTransition() *raw.NSSymbolContentTransition {
+	return x.inner
+}
 
 // SymbolContentTransitionable is the interface implemented by [SymbolContentTransition], for mocking and DI.
 type SymbolContentTransitionable interface {
@@ -43,4 +45,3 @@ type SymbolContentTransitionable interface {
 }
 
 var _ SymbolContentTransitionable = (*SymbolContentTransition)(nil)
-

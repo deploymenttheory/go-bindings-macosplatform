@@ -72,4 +72,3 @@ type MultiPolygonable interface {
 }
 
 var _ MultiPolygonable = (*MultiPolygon)(nil)
-

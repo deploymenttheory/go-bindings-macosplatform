@@ -64,4 +64,3 @@ type ClinicalCodingable interface {
 }
 
 var _ ClinicalCodingable = (*ClinicalCoding)(nil)
-

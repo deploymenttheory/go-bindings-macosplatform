@@ -96,4 +96,3 @@ type Behaviorable interface {
 }
 
 var _ Behaviorable = (*Behavior)(nil)
-

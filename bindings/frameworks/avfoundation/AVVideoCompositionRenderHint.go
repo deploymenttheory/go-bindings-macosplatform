@@ -17,9 +17,9 @@ type AVVideoCompositionRenderHint struct {
 }
 
 var (
-	_clsAVVideoCompositionRenderHint = _objcClass("AVVideoCompositionRenderHint")
+	_clsAVVideoCompositionRenderHint                     = _objcClass("AVVideoCompositionRenderHint")
 	_aVVideoCompositionRenderHintSelStartCompositionTime = objc.RegisterName("startCompositionTime")
-	_aVVideoCompositionRenderHintSelEndCompositionTime = objc.RegisterName("endCompositionTime")
+	_aVVideoCompositionRenderHintSelEndCompositionTime   = objc.RegisterName("endCompositionTime")
 )
 
 func AVVideoCompositionRenderHintFromID(id objc.ID) *AVVideoCompositionRenderHint {
@@ -43,4 +43,3 @@ func (o *AVVideoCompositionRenderHint) EndCompositionTime() coremedia.CMTime {
 	_ret := objc.Send[coremedia.CMTime](o.Ptr(), _aVVideoCompositionRenderHintSelEndCompositionTime)
 	return _ret
 }
-

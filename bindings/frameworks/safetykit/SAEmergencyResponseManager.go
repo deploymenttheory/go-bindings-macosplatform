@@ -18,10 +18,10 @@ type SAEmergencyResponseManager struct {
 }
 
 var (
-	_clsSAEmergencyResponseManager = _objcClass("SAEmergencyResponseManager")
+	_clsSAEmergencyResponseManager                                            = _objcClass("SAEmergencyResponseManager")
 	_sAEmergencyResponseManagerSelDialVoiceCallToPhoneNumberCompletionHandler = objc.RegisterName("dialVoiceCallToPhoneNumber:completionHandler:")
-	_sAEmergencyResponseManagerSelDelegate = objc.RegisterName("delegate")
-	_sAEmergencyResponseManagerSelSetDelegate = objc.RegisterName("setDelegate:")
+	_sAEmergencyResponseManagerSelDelegate                                    = objc.RegisterName("delegate")
+	_sAEmergencyResponseManagerSelSetDelegate                                 = objc.RegisterName("setDelegate:")
 )
 
 func SAEmergencyResponseManagerFromID(id objc.ID) *SAEmergencyResponseManager {
@@ -55,4 +55,3 @@ func (o *SAEmergencyResponseManager) Delegate() SAEmergencyResponseDelegate {
 func (o *SAEmergencyResponseManager) SetDelegate(delegate SAEmergencyResponseDelegate) {
 	o.Ptr().Send(_sAEmergencyResponseManagerSelSetDelegate, delegate)
 }
-

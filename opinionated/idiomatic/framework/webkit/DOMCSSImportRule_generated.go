@@ -74,7 +74,9 @@ func (x *DOMCSSImportRule) asDOMCSSRule() *raw.DOMCSSRule { return &x.inner.DOMC
 
 func (x *DOMCSSImportRule) asDOMObject() *raw.DOMObject { return &x.inner.DOMCSSRule.DOMObject }
 
-func (x *DOMCSSImportRule) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMCSSRule.DOMObject.WebScriptObject }
+func (x *DOMCSSImportRule) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMCSSRule.DOMObject.WebScriptObject
+}
 
 // DOMCSSImportRuleable is the interface implemented by [DOMCSSImportRule], for mocking and DI.
 type DOMCSSImportRuleable interface {
@@ -86,4 +88,3 @@ type DOMCSSImportRuleable interface {
 }
 
 var _ DOMCSSImportRuleable = (*DOMCSSImportRule)(nil)
-

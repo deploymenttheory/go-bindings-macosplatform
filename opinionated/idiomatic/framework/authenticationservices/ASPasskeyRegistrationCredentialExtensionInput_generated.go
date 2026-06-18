@@ -15,7 +15,9 @@ type PasskeyRegistrationCredentialExtensionInput struct {
 }
 
 // Unwrap returns the underlying [raw.ASPasskeyRegistrationCredentialExtensionInput].
-func (x *PasskeyRegistrationCredentialExtensionInput) Unwrap() *raw.ASPasskeyRegistrationCredentialExtensionInput { return x.inner }
+func (x *PasskeyRegistrationCredentialExtensionInput) Unwrap() *raw.ASPasskeyRegistrationCredentialExtensionInput {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -51,4 +53,3 @@ type PasskeyRegistrationCredentialExtensionInputable interface {
 }
 
 var _ PasskeyRegistrationCredentialExtensionInputable = (*PasskeyRegistrationCredentialExtensionInput)(nil)
-

@@ -76,9 +76,13 @@ func (x *AnimalBodyPoseObservation) AvailableJointGroupNames() []*foundation.NSS
 	})
 }
 
-func (x *AnimalBodyPoseObservation) asRecognizedPointsObservation() *raw.VNRecognizedPointsObservation { return &x.inner.VNRecognizedPointsObservation }
+func (x *AnimalBodyPoseObservation) asRecognizedPointsObservation() *raw.VNRecognizedPointsObservation {
+	return &x.inner.VNRecognizedPointsObservation
+}
 
-func (x *AnimalBodyPoseObservation) asObservation() *raw.VNObservation { return &x.inner.VNRecognizedPointsObservation.VNObservation }
+func (x *AnimalBodyPoseObservation) asObservation() *raw.VNObservation {
+	return &x.inner.VNRecognizedPointsObservation.VNObservation
+}
 
 // AnimalBodyPoseObservationable is the interface implemented by [AnimalBodyPoseObservation], for mocking and DI.
 type AnimalBodyPoseObservationable interface {
@@ -90,4 +94,3 @@ type AnimalBodyPoseObservationable interface {
 }
 
 var _ AnimalBodyPoseObservationable = (*AnimalBodyPoseObservation)(nil)
-

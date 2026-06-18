@@ -12,24 +12,24 @@ import (
 type CBATTError int64
 
 const (
-	CBATTErrorSuccess CBATTError = 0
-	CBATTErrorInvalidHandle CBATTError = 1
-	CBATTErrorReadNotPermitted CBATTError = 2
-	CBATTErrorWriteNotPermitted CBATTError = 3
-	CBATTErrorInvalidPdu CBATTError = 4
-	CBATTErrorInsufficientAuthentication CBATTError = 5
-	CBATTErrorRequestNotSupported CBATTError = 6
-	CBATTErrorInvalidOffset CBATTError = 7
-	CBATTErrorInsufficientAuthorization CBATTError = 8
-	CBATTErrorPrepareQueueFull CBATTError = 9
-	CBATTErrorAttributeNotFound CBATTError = 10
-	CBATTErrorAttributeNotLong CBATTError = 11
+	CBATTErrorSuccess                       CBATTError = 0
+	CBATTErrorInvalidHandle                 CBATTError = 1
+	CBATTErrorReadNotPermitted              CBATTError = 2
+	CBATTErrorWriteNotPermitted             CBATTError = 3
+	CBATTErrorInvalidPdu                    CBATTError = 4
+	CBATTErrorInsufficientAuthentication    CBATTError = 5
+	CBATTErrorRequestNotSupported           CBATTError = 6
+	CBATTErrorInvalidOffset                 CBATTError = 7
+	CBATTErrorInsufficientAuthorization     CBATTError = 8
+	CBATTErrorPrepareQueueFull              CBATTError = 9
+	CBATTErrorAttributeNotFound             CBATTError = 10
+	CBATTErrorAttributeNotLong              CBATTError = 11
 	CBATTErrorInsufficientEncryptionKeySize CBATTError = 12
-	CBATTErrorInvalidAttributeValueLength CBATTError = 13
-	CBATTErrorUnlikelyError CBATTError = 14
-	CBATTErrorInsufficientEncryption CBATTError = 15
-	CBATTErrorUnsupportedGroupType CBATTError = 16
-	CBATTErrorInsufficientResources CBATTError = 17
+	CBATTErrorInvalidAttributeValueLength   CBATTError = 13
+	CBATTErrorUnlikelyError                 CBATTError = 14
+	CBATTErrorInsufficientEncryption        CBATTError = 15
+	CBATTErrorUnsupportedGroupType          CBATTError = 16
+	CBATTErrorInsufficientResources         CBATTError = 17
 )
 
 func (e CBATTError) String() string {
@@ -79,9 +79,9 @@ func (e CBATTError) String() string {
 type CBAttributePermissions uint64
 
 const (
-	CBAttributePermissionsReadable CBAttributePermissions = 1
-	CBAttributePermissionsWriteable CBAttributePermissions = 2
-	CBAttributePermissionsReadEncryptionRequired CBAttributePermissions = 4
+	CBAttributePermissionsReadable                CBAttributePermissions = 1
+	CBAttributePermissionsWriteable               CBAttributePermissions = 2
+	CBAttributePermissionsReadEncryptionRequired  CBAttributePermissions = 4
 	CBAttributePermissionsWriteEncryptionRequired CBAttributePermissions = 8
 )
 
@@ -109,15 +109,15 @@ func (e CBAttributePermissions) String() string {
 type CBCharacteristicProperties uint64
 
 const (
-	CBCharacteristicPropertyBroadcast CBCharacteristicProperties = 1
-	CBCharacteristicPropertyRead CBCharacteristicProperties = 2
-	CBCharacteristicPropertyWriteWithoutResponse CBCharacteristicProperties = 4
-	CBCharacteristicPropertyWrite CBCharacteristicProperties = 8
-	CBCharacteristicPropertyNotify CBCharacteristicProperties = 16
-	CBCharacteristicPropertyIndicate CBCharacteristicProperties = 32
-	CBCharacteristicPropertyAuthenticatedSignedWrites CBCharacteristicProperties = 64
-	CBCharacteristicPropertyExtendedProperties CBCharacteristicProperties = 128
-	CBCharacteristicPropertyNotifyEncryptionRequired CBCharacteristicProperties = 256
+	CBCharacteristicPropertyBroadcast                  CBCharacteristicProperties = 1
+	CBCharacteristicPropertyRead                       CBCharacteristicProperties = 2
+	CBCharacteristicPropertyWriteWithoutResponse       CBCharacteristicProperties = 4
+	CBCharacteristicPropertyWrite                      CBCharacteristicProperties = 8
+	CBCharacteristicPropertyNotify                     CBCharacteristicProperties = 16
+	CBCharacteristicPropertyIndicate                   CBCharacteristicProperties = 32
+	CBCharacteristicPropertyAuthenticatedSignedWrites  CBCharacteristicProperties = 64
+	CBCharacteristicPropertyExtendedProperties         CBCharacteristicProperties = 128
+	CBCharacteristicPropertyNotifyEncryptionRequired   CBCharacteristicProperties = 256
 	CBCharacteristicPropertyIndicateEncryptionRequired CBCharacteristicProperties = 512
 )
 
@@ -162,7 +162,7 @@ func (e CBCharacteristicProperties) String() string {
 type CBCharacteristicWriteType int64
 
 const (
-	CBCharacteristicWriteWithResponse CBCharacteristicWriteType = 0
+	CBCharacteristicWriteWithResponse    CBCharacteristicWriteType = 0
 	CBCharacteristicWriteWithoutResponse CBCharacteristicWriteType = 1
 )
 
@@ -181,8 +181,8 @@ type CBManagerAuthorization int64
 
 const (
 	CBManagerAuthorizationNotDetermined CBManagerAuthorization = 0
-	CBManagerAuthorizationRestricted CBManagerAuthorization = 1
-	CBManagerAuthorizationDenied CBManagerAuthorization = 2
+	CBManagerAuthorizationRestricted    CBManagerAuthorization = 1
+	CBManagerAuthorizationDenied        CBManagerAuthorization = 2
 	CBManagerAuthorizationAllowedAlways CBManagerAuthorization = 3
 )
 
@@ -204,12 +204,12 @@ func (e CBManagerAuthorization) String() string {
 type CBManagerState int64
 
 const (
-	CBManagerStateUnknown CBManagerState = 0
-	CBManagerStateResetting CBManagerState = 1
-	CBManagerStateUnsupported CBManagerState = 2
+	CBManagerStateUnknown      CBManagerState = 0
+	CBManagerStateResetting    CBManagerState = 1
+	CBManagerStateUnsupported  CBManagerState = 2
 	CBManagerStateUnauthorized CBManagerState = 3
-	CBManagerStatePoweredOff CBManagerState = 4
-	CBManagerStatePoweredOn CBManagerState = 5
+	CBManagerStatePoweredOff   CBManagerState = 4
+	CBManagerStatePoweredOn    CBManagerState = 5
 )
 
 func (e CBManagerState) String() string {
@@ -236,9 +236,9 @@ type CBPeripheralManagerAuthorizationStatus int64
 
 const (
 	CBPeripheralManagerAuthorizationStatusNotDetermined CBPeripheralManagerAuthorizationStatus = 0
-	CBPeripheralManagerAuthorizationStatusRestricted CBPeripheralManagerAuthorizationStatus = 1
-	CBPeripheralManagerAuthorizationStatusDenied CBPeripheralManagerAuthorizationStatus = 2
-	CBPeripheralManagerAuthorizationStatusAuthorized CBPeripheralManagerAuthorizationStatus = 3
+	CBPeripheralManagerAuthorizationStatusRestricted    CBPeripheralManagerAuthorizationStatus = 1
+	CBPeripheralManagerAuthorizationStatusDenied        CBPeripheralManagerAuthorizationStatus = 2
+	CBPeripheralManagerAuthorizationStatusAuthorized    CBPeripheralManagerAuthorizationStatus = 3
 )
 
 func (e CBPeripheralManagerAuthorizationStatus) String() string {
@@ -259,9 +259,9 @@ func (e CBPeripheralManagerAuthorizationStatus) String() string {
 type CBPeripheralManagerConnectionLatency int64
 
 const (
-	CBPeripheralManagerConnectionLatencyLow CBPeripheralManagerConnectionLatency = 0
+	CBPeripheralManagerConnectionLatencyLow    CBPeripheralManagerConnectionLatency = 0
 	CBPeripheralManagerConnectionLatencyMedium CBPeripheralManagerConnectionLatency = 1
-	CBPeripheralManagerConnectionLatencyHigh CBPeripheralManagerConnectionLatency = 2
+	CBPeripheralManagerConnectionLatencyHigh   CBPeripheralManagerConnectionLatency = 2
 )
 
 func (e CBPeripheralManagerConnectionLatency) String() string {
@@ -280,9 +280,9 @@ func (e CBPeripheralManagerConnectionLatency) String() string {
 type CBPeripheralState int64
 
 const (
-	CBPeripheralStateDisconnected CBPeripheralState = 0
-	CBPeripheralStateConnecting CBPeripheralState = 1
-	CBPeripheralStateConnected CBPeripheralState = 2
+	CBPeripheralStateDisconnected  CBPeripheralState = 0
+	CBPeripheralStateConnecting    CBPeripheralState = 1
+	CBPeripheralStateConnected     CBPeripheralState = 2
 	CBPeripheralStateDisconnecting CBPeripheralState = 3
 )
 
@@ -300,4 +300,3 @@ func (e CBPeripheralState) String() string {
 		return fmt.Sprintf("CBPeripheralState(%d)", int64(e))
 	}
 }
-

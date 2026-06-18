@@ -17,9 +17,9 @@ type AVAssetTrackSegment struct {
 }
 
 var (
-	_clsAVAssetTrackSegment = _objcClass("AVAssetTrackSegment")
+	_clsAVAssetTrackSegment            = _objcClass("AVAssetTrackSegment")
 	_aVAssetTrackSegmentSelTimeMapping = objc.RegisterName("timeMapping")
-	_aVAssetTrackSegmentSelIsEmpty = objc.RegisterName("isEmpty")
+	_aVAssetTrackSegmentSelIsEmpty     = objc.RegisterName("isEmpty")
 )
 
 func AVAssetTrackSegmentFromID(id objc.ID) *AVAssetTrackSegment {
@@ -41,4 +41,3 @@ func (o *AVAssetTrackSegment) IsEmpty() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVAssetTrackSegmentSelIsEmpty)
 	return _ret
 }
-

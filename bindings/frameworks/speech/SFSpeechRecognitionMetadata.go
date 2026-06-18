@@ -16,12 +16,12 @@ type SFSpeechRecognitionMetadata struct {
 }
 
 var (
-	_clsSFSpeechRecognitionMetadata = _objcClass("SFSpeechRecognitionMetadata")
-	_sFSpeechRecognitionMetadataSelSpeakingRate = objc.RegisterName("speakingRate")
+	_clsSFSpeechRecognitionMetadata                     = _objcClass("SFSpeechRecognitionMetadata")
+	_sFSpeechRecognitionMetadataSelSpeakingRate         = objc.RegisterName("speakingRate")
 	_sFSpeechRecognitionMetadataSelAveragePauseDuration = objc.RegisterName("averagePauseDuration")
 	_sFSpeechRecognitionMetadataSelSpeechStartTimestamp = objc.RegisterName("speechStartTimestamp")
-	_sFSpeechRecognitionMetadataSelSpeechDuration = objc.RegisterName("speechDuration")
-	_sFSpeechRecognitionMetadataSelVoiceAnalytics = objc.RegisterName("voiceAnalytics")
+	_sFSpeechRecognitionMetadataSelSpeechDuration       = objc.RegisterName("speechDuration")
+	_sFSpeechRecognitionMetadataSelVoiceAnalytics       = objc.RegisterName("voiceAnalytics")
 )
 
 func SFSpeechRecognitionMetadataFromID(id objc.ID) *SFSpeechRecognitionMetadata {
@@ -61,7 +61,8 @@ func (o *SFSpeechRecognitionMetadata) SpeechDuration() float64 {
 // An analysis of the transcription segment's vocal properties.
 func (o *SFSpeechRecognitionMetadata) VoiceAnalytics() *SFVoiceAnalytics {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFSpeechRecognitionMetadataSelVoiceAnalytics)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SFVoiceAnalyticsFromID(_ret)
 }
-

@@ -15,7 +15,9 @@ type RenderPassColorAttachmentDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTLRenderPassColorAttachmentDescriptor].
-func (x *RenderPassColorAttachmentDescriptor) Unwrap() *raw.MTLRenderPassColorAttachmentDescriptor { return x.inner }
+func (x *RenderPassColorAttachmentDescriptor) Unwrap() *raw.MTLRenderPassColorAttachmentDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -117,7 +119,9 @@ func (x *RenderPassColorAttachmentDescriptor) SetClearColor(clearColor raw.MTLCl
 	x.inner.SetClearColor(clearColor)
 }
 
-func (x *RenderPassColorAttachmentDescriptor) asRenderPassAttachmentDescriptor() *raw.MTLRenderPassAttachmentDescriptor { return &x.inner.MTLRenderPassAttachmentDescriptor }
+func (x *RenderPassColorAttachmentDescriptor) asRenderPassAttachmentDescriptor() *raw.MTLRenderPassAttachmentDescriptor {
+	return &x.inner.MTLRenderPassAttachmentDescriptor
+}
 
 // RenderPassColorAttachmentDescriptorable is the interface implemented by [RenderPassColorAttachmentDescriptor], for mocking and DI.
 type RenderPassColorAttachmentDescriptorable interface {
@@ -139,4 +143,3 @@ type RenderPassColorAttachmentDescriptorable interface {
 }
 
 var _ RenderPassColorAttachmentDescriptorable = (*RenderPassColorAttachmentDescriptor)(nil)
-

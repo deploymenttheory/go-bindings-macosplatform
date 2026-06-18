@@ -16,28 +16,28 @@ type NSSliderTouchBarItem struct {
 }
 
 var (
-	_clsNSSliderTouchBarItem = _objcClass("NSSliderTouchBarItem")
-	_nSSliderTouchBarItemSelSlider = objc.RegisterName("slider")
-	_nSSliderTouchBarItemSelSetSlider = objc.RegisterName("setSlider:")
-	_nSSliderTouchBarItemSelDoubleValue = objc.RegisterName("doubleValue")
-	_nSSliderTouchBarItemSelSetDoubleValue = objc.RegisterName("setDoubleValue:")
-	_nSSliderTouchBarItemSelMinimumSliderWidth = objc.RegisterName("minimumSliderWidth")
-	_nSSliderTouchBarItemSelSetMinimumSliderWidth = objc.RegisterName("setMinimumSliderWidth:")
-	_nSSliderTouchBarItemSelMaximumSliderWidth = objc.RegisterName("maximumSliderWidth")
-	_nSSliderTouchBarItemSelSetMaximumSliderWidth = objc.RegisterName("setMaximumSliderWidth:")
-	_nSSliderTouchBarItemSelLabel = objc.RegisterName("label")
-	_nSSliderTouchBarItemSelSetLabel = objc.RegisterName("setLabel:")
-	_nSSliderTouchBarItemSelMinimumValueAccessory = objc.RegisterName("minimumValueAccessory")
+	_clsNSSliderTouchBarItem                         = _objcClass("NSSliderTouchBarItem")
+	_nSSliderTouchBarItemSelSlider                   = objc.RegisterName("slider")
+	_nSSliderTouchBarItemSelSetSlider                = objc.RegisterName("setSlider:")
+	_nSSliderTouchBarItemSelDoubleValue              = objc.RegisterName("doubleValue")
+	_nSSliderTouchBarItemSelSetDoubleValue           = objc.RegisterName("setDoubleValue:")
+	_nSSliderTouchBarItemSelMinimumSliderWidth       = objc.RegisterName("minimumSliderWidth")
+	_nSSliderTouchBarItemSelSetMinimumSliderWidth    = objc.RegisterName("setMinimumSliderWidth:")
+	_nSSliderTouchBarItemSelMaximumSliderWidth       = objc.RegisterName("maximumSliderWidth")
+	_nSSliderTouchBarItemSelSetMaximumSliderWidth    = objc.RegisterName("setMaximumSliderWidth:")
+	_nSSliderTouchBarItemSelLabel                    = objc.RegisterName("label")
+	_nSSliderTouchBarItemSelSetLabel                 = objc.RegisterName("setLabel:")
+	_nSSliderTouchBarItemSelMinimumValueAccessory    = objc.RegisterName("minimumValueAccessory")
 	_nSSliderTouchBarItemSelSetMinimumValueAccessory = objc.RegisterName("setMinimumValueAccessory:")
-	_nSSliderTouchBarItemSelMaximumValueAccessory = objc.RegisterName("maximumValueAccessory")
+	_nSSliderTouchBarItemSelMaximumValueAccessory    = objc.RegisterName("maximumValueAccessory")
 	_nSSliderTouchBarItemSelSetMaximumValueAccessory = objc.RegisterName("setMaximumValueAccessory:")
-	_nSSliderTouchBarItemSelValueAccessoryWidth = objc.RegisterName("valueAccessoryWidth")
-	_nSSliderTouchBarItemSelSetValueAccessoryWidth = objc.RegisterName("setValueAccessoryWidth:")
-	_nSSliderTouchBarItemSelTarget = objc.RegisterName("target")
-	_nSSliderTouchBarItemSelSetTarget = objc.RegisterName("setTarget:")
-	_nSSliderTouchBarItemSelAction = objc.RegisterName("action")
-	_nSSliderTouchBarItemSelSetAction = objc.RegisterName("setAction:")
-	_nSSliderTouchBarItemSelSetCustomizationLabel = objc.RegisterName("setCustomizationLabel:")
+	_nSSliderTouchBarItemSelValueAccessoryWidth      = objc.RegisterName("valueAccessoryWidth")
+	_nSSliderTouchBarItemSelSetValueAccessoryWidth   = objc.RegisterName("setValueAccessoryWidth:")
+	_nSSliderTouchBarItemSelTarget                   = objc.RegisterName("target")
+	_nSSliderTouchBarItemSelSetTarget                = objc.RegisterName("setTarget:")
+	_nSSliderTouchBarItemSelAction                   = objc.RegisterName("action")
+	_nSSliderTouchBarItemSelSetAction                = objc.RegisterName("setAction:")
+	_nSSliderTouchBarItemSelSetCustomizationLabel    = objc.RegisterName("setCustomizationLabel:")
 )
 
 func NSSliderTouchBarItemFromID(id objc.ID) *NSSliderTouchBarItem {
@@ -53,7 +53,9 @@ func NSSliderTouchBarItemFromID(id objc.ID) *NSSliderTouchBarItem {
 // The slider displayed by the bar item. It is automatically created, but can be set to a custom subclass. doubleValue, minValue, maxValue, etc can all be read and set through the slider.
 func (o *NSSliderTouchBarItem) Slider() *NSSlider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderTouchBarItemSelSlider)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSliderFromID(_ret)
 }
 
@@ -93,7 +95,9 @@ func (o *NSSliderTouchBarItem) SetMaximumSliderWidth(maximumSliderWidth float64)
 // The text label displayed along with the slider. If set to nil, the label will not have space reserved in the item.
 func (o *NSSliderTouchBarItem) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderTouchBarItemSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -104,7 +108,9 @@ func (o *NSSliderTouchBarItem) SetLabel(label *foundation.NSString) {
 // The accessory that appears on the end of the slider with the minimum value
 func (o *NSSliderTouchBarItem) MinimumValueAccessory() *NSSliderAccessory {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderTouchBarItemSelMinimumValueAccessory)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSliderAccessoryFromID(_ret)
 }
 
@@ -115,7 +121,9 @@ func (o *NSSliderTouchBarItem) SetMinimumValueAccessory(minimumValueAccessory *N
 // The accessory that appears on the end of the slider with the maximum value
 func (o *NSSliderTouchBarItem) MaximumValueAccessory() *NSSliderAccessory {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderTouchBarItemSelMaximumValueAccessory)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSliderAccessoryFromID(_ret)
 }
 
@@ -156,4 +164,3 @@ func (o *NSSliderTouchBarItem) SetAction(action objc.SEL) {
 func (o *NSSliderTouchBarItem) SetCustomizationLabel(customizationLabel *foundation.NSString) {
 	o.Ptr().Send(_nSSliderTouchBarItemSelSetCustomizationLabel, customizationLabel.Ptr())
 }
-

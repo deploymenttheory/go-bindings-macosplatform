@@ -744,7 +744,9 @@ func Xpc_get_type(object unsafe.Pointer) *Xpc_type_t {
 func Xpc_type_get_name(type_ *Xpc_type_t) string {
 	defer cgo.KeepAlive(type_)
 	var _objcPtr_type_ unsafe.Pointer
-	if type_ != nil { _objcPtr_type_ = type_.Ptr() }
+	if type_ != nil {
+		_objcPtr_type_ = type_.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := C.GoString(C.xpc_fn_xpc_type_get_name(_objcPtr_type_, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1709,4 +1711,3 @@ func Xpc_set_event_stream_handler(stream string, targetq unsafe.Pointer, handler
 	C.xpc_fn_xpc_set_event_stream_handler(_cstr_stream, targetq, handler, &_exc)
 	cgo.RaiseIfException(_exc)
 }
-

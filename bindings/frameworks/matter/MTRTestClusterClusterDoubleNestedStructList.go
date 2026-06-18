@@ -25,4 +25,3 @@ func MTRTestClusterClusterDoubleNestedStructListFromID(id objc.ID) *MTRTestClust
 	purego.Track(o)
 	return o
 }
-

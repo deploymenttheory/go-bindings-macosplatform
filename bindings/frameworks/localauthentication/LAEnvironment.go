@@ -16,11 +16,11 @@ type LAEnvironment struct {
 }
 
 var (
-	_clsLAEnvironment = _objcClass("LAEnvironment")
-	_lAEnvironmentSelAddObserver = objc.RegisterName("addObserver:")
+	_clsLAEnvironment               = _objcClass("LAEnvironment")
+	_lAEnvironmentSelAddObserver    = objc.RegisterName("addObserver:")
 	_lAEnvironmentSelRemoveObserver = objc.RegisterName("removeObserver:")
-	_lAEnvironmentSelCurrentUser = objc.RegisterName("currentUser")
-	_lAEnvironmentSelState = objc.RegisterName("state")
+	_lAEnvironmentSelCurrentUser    = objc.RegisterName("currentUser")
+	_lAEnvironmentSelState          = objc.RegisterName("state")
 )
 
 func LAEnvironmentFromID(id objc.ID) *LAEnvironment {
@@ -46,14 +46,17 @@ func (o *LAEnvironment) RemoveObserver(observer LAEnvironmentObserver) {
 // Environment of the current user.
 func LAEnvironmentCurrentUser() *LAEnvironment {
 	_ret := objc.Send[objc.ID](objc.ID(_clsLAEnvironment), _lAEnvironmentSelCurrentUser)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return LAEnvironmentFromID(_ret)
 }
 
 // The environment state information.
 func (o *LAEnvironment) State() *LAEnvironmentState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lAEnvironmentSelState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return LAEnvironmentStateFromID(_ret)
 }
-

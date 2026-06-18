@@ -16,11 +16,11 @@ type MDLMaterialPropertyGraph struct {
 }
 
 var (
-	_clsMDLMaterialPropertyGraph = _objcClass("MDLMaterialPropertyGraph")
+	_clsMDLMaterialPropertyGraph                         = _objcClass("MDLMaterialPropertyGraph")
 	_mDLMaterialPropertyGraphSelInitWithNodesConnections = objc.RegisterName("initWithNodes:connections:")
-	_mDLMaterialPropertyGraphSelEvaluate = objc.RegisterName("evaluate")
-	_mDLMaterialPropertyGraphSelNodes = objc.RegisterName("nodes")
-	_mDLMaterialPropertyGraphSelConnections = objc.RegisterName("connections")
+	_mDLMaterialPropertyGraphSelEvaluate                 = objc.RegisterName("evaluate")
+	_mDLMaterialPropertyGraphSelNodes                    = objc.RegisterName("nodes")
+	_mDLMaterialPropertyGraphSelConnections              = objc.RegisterName("connections")
 )
 
 func MDLMaterialPropertyGraphFromID(id objc.ID) *MDLMaterialPropertyGraph {
@@ -35,7 +35,9 @@ func MDLMaterialPropertyGraphFromID(id objc.ID) *MDLMaterialPropertyGraph {
 
 func (o *MDLMaterialPropertyGraph) InitWithNodesConnections(nodes *foundation.NSArray[*MDLMaterialPropertyNode], connections *foundation.NSArray[*MDLMaterialPropertyConnection]) *MDLMaterialPropertyGraph {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertyGraphSelInitWithNodesConnections, nodes.Ptr(), connections.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMaterialPropertyGraphFromID(_ret)
 }
 
@@ -45,13 +47,16 @@ func (o *MDLMaterialPropertyGraph) Evaluate() {
 
 func (o *MDLMaterialPropertyGraph) Nodes() *foundation.NSArray[*MDLMaterialPropertyNode] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertyGraphSelNodes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MDLMaterialPropertyNode](_ret)
 }
 
 func (o *MDLMaterialPropertyGraph) Connections() *foundation.NSArray[*MDLMaterialPropertyConnection] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertyGraphSelConnections)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MDLMaterialPropertyConnection](_ret)
 }
-

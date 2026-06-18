@@ -252,4 +252,3 @@ type PGDeviceDescriptorable interface {
 }
 
 var _ PGDeviceDescriptorable = (*PGDeviceDescriptor)(nil)
-

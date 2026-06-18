@@ -94,9 +94,13 @@ func (x *MatrixVectorMultiplication) EncodeToCommandBufferInputMatrixInputVector
 	x.inner.EncodeToCommandBufferInputMatrixInputVectorResultVector(commandBuffer, inputMatrix, inputVector, resultVector)
 }
 
-func (x *MatrixVectorMultiplication) asMatrixBinaryKernel() *mpsmatrix.MPSMatrixBinaryKernel { return &x.inner.MPSMatrixBinaryKernel }
+func (x *MatrixVectorMultiplication) asMatrixBinaryKernel() *mpsmatrix.MPSMatrixBinaryKernel {
+	return &x.inner.MPSMatrixBinaryKernel
+}
 
-func (x *MatrixVectorMultiplication) asKernel() *mpscore.MPSKernel { return &x.inner.MPSMatrixBinaryKernel.MPSKernel }
+func (x *MatrixVectorMultiplication) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSMatrixBinaryKernel.MPSKernel
+}
 
 // MatrixVectorMultiplicationable is the interface implemented by [MatrixVectorMultiplication], for mocking and DI.
 type MatrixVectorMultiplicationable interface {
@@ -112,4 +116,3 @@ type MatrixVectorMultiplicationable interface {
 }
 
 var _ MatrixVectorMultiplicationable = (*MatrixVectorMultiplication)(nil)
-

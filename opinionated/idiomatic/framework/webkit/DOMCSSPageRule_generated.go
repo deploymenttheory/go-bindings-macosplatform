@@ -76,7 +76,9 @@ func (x *DOMCSSPageRule) asDOMCSSRule() *raw.DOMCSSRule { return &x.inner.DOMCSS
 
 func (x *DOMCSSPageRule) asDOMObject() *raw.DOMObject { return &x.inner.DOMCSSRule.DOMObject }
 
-func (x *DOMCSSPageRule) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMCSSRule.DOMObject.WebScriptObject }
+func (x *DOMCSSPageRule) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMCSSRule.DOMObject.WebScriptObject
+}
 
 // DOMCSSPageRuleable is the interface implemented by [DOMCSSPageRule], for mocking and DI.
 type DOMCSSPageRuleable interface {
@@ -89,4 +91,3 @@ type DOMCSSPageRuleable interface {
 }
 
 var _ DOMCSSPageRuleable = (*DOMCSSPageRule)(nil)
-

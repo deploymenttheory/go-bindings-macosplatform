@@ -15,7 +15,9 @@ type BridgedNetworkDeviceAttachment struct {
 }
 
 // Unwrap returns the underlying [raw.VZBridgedNetworkDeviceAttachment].
-func (x *BridgedNetworkDeviceAttachment) Unwrap() *raw.VZBridgedNetworkDeviceAttachment { return x.inner }
+func (x *BridgedNetworkDeviceAttachment) Unwrap() *raw.VZBridgedNetworkDeviceAttachment {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -45,7 +47,9 @@ func (x *BridgedNetworkDeviceAttachment) Interface() *BridgedNetworkInterface {
 	return &BridgedNetworkInterface{inner: _r}
 }
 
-func (x *BridgedNetworkDeviceAttachment) asNetworkDeviceAttachment() *raw.VZNetworkDeviceAttachment { return &x.inner.VZNetworkDeviceAttachment }
+func (x *BridgedNetworkDeviceAttachment) asNetworkDeviceAttachment() *raw.VZNetworkDeviceAttachment {
+	return &x.inner.VZNetworkDeviceAttachment
+}
 
 // BridgedNetworkDeviceAttachmentable is the interface implemented by [BridgedNetworkDeviceAttachment], for mocking and DI.
 type BridgedNetworkDeviceAttachmentable interface {
@@ -54,4 +58,3 @@ type BridgedNetworkDeviceAttachmentable interface {
 }
 
 var _ BridgedNetworkDeviceAttachmentable = (*BridgedNetworkDeviceAttachment)(nil)
-

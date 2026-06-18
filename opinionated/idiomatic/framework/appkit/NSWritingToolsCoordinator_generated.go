@@ -198,4 +198,3 @@ type WritingToolsCoordinatorable interface {
 }
 
 var _ WritingToolsCoordinatorable = (*WritingToolsCoordinator)(nil)
-

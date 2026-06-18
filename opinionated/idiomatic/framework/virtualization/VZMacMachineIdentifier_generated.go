@@ -55,4 +55,3 @@ type MacMachineIdentifierable interface {
 }
 
 var _ MacMachineIdentifierable = (*MacMachineIdentifier)(nil)
-

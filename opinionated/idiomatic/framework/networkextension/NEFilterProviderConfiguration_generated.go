@@ -272,4 +272,3 @@ type NEFilterProviderConfigurationable interface {
 }
 
 var _ NEFilterProviderConfigurationable = (*NEFilterProviderConfiguration)(nil)
-

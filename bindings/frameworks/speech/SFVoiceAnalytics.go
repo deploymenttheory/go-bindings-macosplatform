@@ -16,10 +16,10 @@ type SFVoiceAnalytics struct {
 }
 
 var (
-	_clsSFVoiceAnalytics = _objcClass("SFVoiceAnalytics")
-	_sFVoiceAnalyticsSelJitter = objc.RegisterName("jitter")
+	_clsSFVoiceAnalytics        = _objcClass("SFVoiceAnalytics")
+	_sFVoiceAnalyticsSelJitter  = objc.RegisterName("jitter")
 	_sFVoiceAnalyticsSelShimmer = objc.RegisterName("shimmer")
-	_sFVoiceAnalyticsSelPitch = objc.RegisterName("pitch")
+	_sFVoiceAnalyticsSelPitch   = objc.RegisterName("pitch")
 	_sFVoiceAnalyticsSelVoicing = objc.RegisterName("voicing")
 )
 
@@ -35,27 +35,34 @@ func SFVoiceAnalyticsFromID(id objc.ID) *SFVoiceAnalytics {
 
 func (o *SFVoiceAnalytics) Jitter() *SFAcousticFeature {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFVoiceAnalyticsSelJitter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SFAcousticFeatureFromID(_ret)
 }
 
 // The variation in vocal volume stability (amplitude) in each frame of a transcription segment, expressed in decibels.
 func (o *SFVoiceAnalytics) Shimmer() *SFAcousticFeature {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFVoiceAnalyticsSelShimmer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SFAcousticFeatureFromID(_ret)
 }
 
 // The highness or lowness of the tone (fundamental frequency) in each frame of a transcription segment, expressed as a logarithm. The value is a logarithm (base `e`) of the normalized pitch estimate for each frame.
 func (o *SFVoiceAnalytics) Pitch() *SFAcousticFeature {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFVoiceAnalyticsSelPitch)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SFAcousticFeatureFromID(_ret)
 }
 
 func (o *SFVoiceAnalytics) Voicing() *SFAcousticFeature {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFVoiceAnalyticsSelVoicing)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SFAcousticFeatureFromID(_ret)
 }
-

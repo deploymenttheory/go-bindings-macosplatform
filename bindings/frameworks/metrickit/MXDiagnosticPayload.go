@@ -16,15 +16,15 @@ type MXDiagnosticPayload struct {
 }
 
 var (
-	_clsMXDiagnosticPayload = _objcClass("MXDiagnosticPayload")
-	_mXDiagnosticPayloadSelJSONRepresentation = objc.RegisterName("JSONRepresentation")
-	_mXDiagnosticPayloadSelDictionaryRepresentation = objc.RegisterName("dictionaryRepresentation")
-	_mXDiagnosticPayloadSelCpuExceptionDiagnostics = objc.RegisterName("cpuExceptionDiagnostics")
+	_clsMXDiagnosticPayload                              = _objcClass("MXDiagnosticPayload")
+	_mXDiagnosticPayloadSelJSONRepresentation            = objc.RegisterName("JSONRepresentation")
+	_mXDiagnosticPayloadSelDictionaryRepresentation      = objc.RegisterName("dictionaryRepresentation")
+	_mXDiagnosticPayloadSelCpuExceptionDiagnostics       = objc.RegisterName("cpuExceptionDiagnostics")
 	_mXDiagnosticPayloadSelDiskWriteExceptionDiagnostics = objc.RegisterName("diskWriteExceptionDiagnostics")
-	_mXDiagnosticPayloadSelHangDiagnostics = objc.RegisterName("hangDiagnostics")
-	_mXDiagnosticPayloadSelCrashDiagnostics = objc.RegisterName("crashDiagnostics")
-	_mXDiagnosticPayloadSelTimeStampBegin = objc.RegisterName("timeStampBegin")
-	_mXDiagnosticPayloadSelTimeStampEnd = objc.RegisterName("timeStampEnd")
+	_mXDiagnosticPayloadSelHangDiagnostics               = objc.RegisterName("hangDiagnostics")
+	_mXDiagnosticPayloadSelCrashDiagnostics              = objc.RegisterName("crashDiagnostics")
+	_mXDiagnosticPayloadSelTimeStampBegin                = objc.RegisterName("timeStampBegin")
+	_mXDiagnosticPayloadSelTimeStampEnd                  = objc.RegisterName("timeStampEnd")
 )
 
 func MXDiagnosticPayloadFromID(id objc.ID) *MXDiagnosticPayload {
@@ -40,7 +40,9 @@ func MXDiagnosticPayloadFromID(id objc.ID) *MXDiagnosticPayload {
 // @method        JSONRepresentation @abstract      Convenience method to return a JSON representation of this diagnostic payload. @result        An NSData object containing the JSON representation
 func (o *MXDiagnosticPayload) JSONRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXDiagnosticPayloadSelJSONRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -53,42 +55,53 @@ func (o *MXDiagnosticPayload) DictionaryRepresentation() *foundation.NSDictionar
 // @property      cpuExceptionDiagnostics @abstract      An array containing CPU exception diagnostics for this application.
 func (o *MXDiagnosticPayload) CpuExceptionDiagnostics() *foundation.NSArray[*MXCPUExceptionDiagnostic] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXDiagnosticPayloadSelCpuExceptionDiagnostics)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MXCPUExceptionDiagnostic](_ret)
 }
 
 // @property      diskWriteExceptionDiagnostics @abstract      An array containing disk write exception diagnostics for this application.
 func (o *MXDiagnosticPayload) DiskWriteExceptionDiagnostics() *foundation.NSArray[*MXDiskWriteExceptionDiagnostic] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXDiagnosticPayloadSelDiskWriteExceptionDiagnostics)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MXDiskWriteExceptionDiagnostic](_ret)
 }
 
 // @property      hangDiagnostics @abstract      An array containing hang diagnostics for this application.
 func (o *MXDiagnosticPayload) HangDiagnostics() *foundation.NSArray[*MXHangDiagnostic] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXDiagnosticPayloadSelHangDiagnostics)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MXHangDiagnostic](_ret)
 }
 
 // @property      crashDiagnostics @abstract      An array containing crash diagnostics for this application.
 func (o *MXDiagnosticPayload) CrashDiagnostics() *foundation.NSArray[*MXCrashDiagnostic] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXDiagnosticPayloadSelCrashDiagnostics)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MXCrashDiagnostic](_ret)
 }
 
 // @property      timeStampBegin @abstract      An NSDate object that indicates the start time for which the payload was generated.
 func (o *MXDiagnosticPayload) TimeStampBegin() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXDiagnosticPayloadSelTimeStampBegin)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // @property      timeStampEnd @abstract      An NSDate object that indicates the end time for which the payload was generated.
 func (o *MXDiagnosticPayload) TimeStampEnd() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXDiagnosticPayloadSelTimeStampEnd)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
-

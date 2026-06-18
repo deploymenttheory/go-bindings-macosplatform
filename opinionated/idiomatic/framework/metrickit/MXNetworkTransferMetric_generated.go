@@ -68,4 +68,3 @@ type NetworkTransferMetricable interface {
 }
 
 var _ NetworkTransferMetricable = (*NetworkTransferMetric)(nil)
-

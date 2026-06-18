@@ -6,4 +6,3 @@ package findersync
 // FIFinderSyncProtocol wraps the ObjC protocol FIFinderSync.
 type FIFinderSyncProtocol interface {
 }
-

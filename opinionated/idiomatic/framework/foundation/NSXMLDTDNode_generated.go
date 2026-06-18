@@ -189,4 +189,3 @@ type XMLDTDNodeable interface {
 }
 
 var _ XMLDTDNodeable = (*XMLDTDNode)(nil)
-

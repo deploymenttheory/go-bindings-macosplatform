@@ -20,122 +20,122 @@ type PDFAnnotation struct {
 }
 
 var (
-	_clsPDFAnnotation = _objcClass("PDFAnnotation")
+	_clsPDFAnnotation                                    = _objcClass("PDFAnnotation")
 	_pDFAnnotationSelInitWithBoundsForTypeWithProperties = objc.RegisterName("initWithBounds:forType:withProperties:")
-	_pDFAnnotationSelDrawWithBoxInContext = objc.RegisterName("drawWithBox:inContext:")
-	_pDFAnnotationSelSetValueForAnnotationKey = objc.RegisterName("setValue:forAnnotationKey:")
-	_pDFAnnotationSelSetBooleanForAnnotationKey = objc.RegisterName("setBoolean:forAnnotationKey:")
-	_pDFAnnotationSelSetRectForAnnotationKey = objc.RegisterName("setRect:forAnnotationKey:")
-	_pDFAnnotationSelValueForAnnotationKey = objc.RegisterName("valueForAnnotationKey:")
-	_pDFAnnotationSelRemoveValueForAnnotationKey = objc.RegisterName("removeValueForAnnotationKey:")
-	_pDFAnnotationSelPage = objc.RegisterName("page")
-	_pDFAnnotationSelSetPage = objc.RegisterName("setPage:")
-	_pDFAnnotationSelType = objc.RegisterName("type")
-	_pDFAnnotationSelSetType = objc.RegisterName("setType:")
-	_pDFAnnotationSelBounds = objc.RegisterName("bounds")
-	_pDFAnnotationSelSetBounds = objc.RegisterName("setBounds:")
-	_pDFAnnotationSelShouldDisplay = objc.RegisterName("shouldDisplay")
-	_pDFAnnotationSelSetShouldDisplay = objc.RegisterName("setShouldDisplay:")
-	_pDFAnnotationSelShouldPrint = objc.RegisterName("shouldPrint")
-	_pDFAnnotationSelSetShouldPrint = objc.RegisterName("setShouldPrint:")
-	_pDFAnnotationSelModificationDate = objc.RegisterName("modificationDate")
-	_pDFAnnotationSelSetModificationDate = objc.RegisterName("setModificationDate:")
-	_pDFAnnotationSelUserName = objc.RegisterName("userName")
-	_pDFAnnotationSelSetUserName = objc.RegisterName("setUserName:")
-	_pDFAnnotationSelPopup = objc.RegisterName("popup")
-	_pDFAnnotationSelSetPopup = objc.RegisterName("setPopup:")
-	_pDFAnnotationSelBorder = objc.RegisterName("border")
-	_pDFAnnotationSelSetBorder = objc.RegisterName("setBorder:")
-	_pDFAnnotationSelColor = objc.RegisterName("color")
-	_pDFAnnotationSelSetColor = objc.RegisterName("setColor:")
-	_pDFAnnotationSelContents = objc.RegisterName("contents")
-	_pDFAnnotationSelSetContents = objc.RegisterName("setContents:")
-	_pDFAnnotationSelAction = objc.RegisterName("action")
-	_pDFAnnotationSelSetAction = objc.RegisterName("setAction:")
-	_pDFAnnotationSelHasAppearanceStream = objc.RegisterName("hasAppearanceStream")
-	_pDFAnnotationSelIsHighlighted = objc.RegisterName("isHighlighted")
-	_pDFAnnotationSelSetHighlighted = objc.RegisterName("setHighlighted:")
-	_pDFAnnotationSelAnnotationKeyValues = objc.RegisterName("annotationKeyValues")
-	_pDFAnnotationSelInitWithDictionaryForPage = objc.RegisterName("initWithDictionary:forPage:")
-	_pDFAnnotationSelInitWithBounds = objc.RegisterName("initWithBounds:")
-	_pDFAnnotationSelRemoveAllAppearanceStreams = objc.RegisterName("removeAllAppearanceStreams")
-	_pDFAnnotationSelDrawWithBox = objc.RegisterName("drawWithBox:")
-	_pDFAnnotationSelToolTip = objc.RegisterName("toolTip")
-	_pDFAnnotationSelMouseUpAction = objc.RegisterName("mouseUpAction")
-	_pDFAnnotationSelSetMouseUpAction = objc.RegisterName("setMouseUpAction:")
-	_pDFAnnotationSelLineStyleFromName = objc.RegisterName("lineStyleFromName:")
-	_pDFAnnotationSelNameForLineStyle = objc.RegisterName("nameForLineStyle:")
-	_pDFAnnotationSelAddBezierPath = objc.RegisterName("addBezierPath:")
-	_pDFAnnotationSelRemoveBezierPath = objc.RegisterName("removeBezierPath:")
-	_pDFAnnotationSelFont = objc.RegisterName("font")
-	_pDFAnnotationSelSetFont = objc.RegisterName("setFont:")
-	_pDFAnnotationSelFontColor = objc.RegisterName("fontColor")
-	_pDFAnnotationSelSetFontColor = objc.RegisterName("setFontColor:")
-	_pDFAnnotationSelInteriorColor = objc.RegisterName("interiorColor")
-	_pDFAnnotationSelSetInteriorColor = objc.RegisterName("setInteriorColor:")
-	_pDFAnnotationSelAlignment = objc.RegisterName("alignment")
-	_pDFAnnotationSelSetAlignment = objc.RegisterName("setAlignment:")
-	_pDFAnnotationSelStartPoint = objc.RegisterName("startPoint")
-	_pDFAnnotationSelSetStartPoint = objc.RegisterName("setStartPoint:")
-	_pDFAnnotationSelEndPoint = objc.RegisterName("endPoint")
-	_pDFAnnotationSelSetEndPoint = objc.RegisterName("setEndPoint:")
-	_pDFAnnotationSelStartLineStyle = objc.RegisterName("startLineStyle")
-	_pDFAnnotationSelSetStartLineStyle = objc.RegisterName("setStartLineStyle:")
-	_pDFAnnotationSelEndLineStyle = objc.RegisterName("endLineStyle")
-	_pDFAnnotationSelSetEndLineStyle = objc.RegisterName("setEndLineStyle:")
-	_pDFAnnotationSelIconType = objc.RegisterName("iconType")
-	_pDFAnnotationSelSetIconType = objc.RegisterName("setIconType:")
-	_pDFAnnotationSelQuadrilateralPoints = objc.RegisterName("quadrilateralPoints")
-	_pDFAnnotationSelSetQuadrilateralPoints = objc.RegisterName("setQuadrilateralPoints:")
-	_pDFAnnotationSelMarkupType = objc.RegisterName("markupType")
-	_pDFAnnotationSelSetMarkupType = objc.RegisterName("setMarkupType:")
-	_pDFAnnotationSelWidgetFieldType = objc.RegisterName("widgetFieldType")
-	_pDFAnnotationSelSetWidgetFieldType = objc.RegisterName("setWidgetFieldType:")
-	_pDFAnnotationSelWidgetControlType = objc.RegisterName("widgetControlType")
-	_pDFAnnotationSelSetWidgetControlType = objc.RegisterName("setWidgetControlType:")
-	_pDFAnnotationSelIsMultiline = objc.RegisterName("isMultiline")
-	_pDFAnnotationSelSetMultiline = objc.RegisterName("setMultiline:")
-	_pDFAnnotationSelIsActivatableTextField = objc.RegisterName("isActivatableTextField")
-	_pDFAnnotationSelIsPasswordField = objc.RegisterName("isPasswordField")
-	_pDFAnnotationSelHasComb = objc.RegisterName("hasComb")
-	_pDFAnnotationSelSetComb = objc.RegisterName("setComb:")
-	_pDFAnnotationSelMaximumLength = objc.RegisterName("maximumLength")
-	_pDFAnnotationSelSetMaximumLength = objc.RegisterName("setMaximumLength:")
-	_pDFAnnotationSelWidgetStringValue = objc.RegisterName("widgetStringValue")
-	_pDFAnnotationSelSetWidgetStringValue = objc.RegisterName("setWidgetStringValue:")
-	_pDFAnnotationSelWidgetDefaultStringValue = objc.RegisterName("widgetDefaultStringValue")
-	_pDFAnnotationSelSetWidgetDefaultStringValue = objc.RegisterName("setWidgetDefaultStringValue:")
-	_pDFAnnotationSelAllowsToggleToOff = objc.RegisterName("allowsToggleToOff")
-	_pDFAnnotationSelSetAllowsToggleToOff = objc.RegisterName("setAllowsToggleToOff:")
-	_pDFAnnotationSelRadiosInUnison = objc.RegisterName("radiosInUnison")
-	_pDFAnnotationSelSetRadiosInUnison = objc.RegisterName("setRadiosInUnison:")
-	_pDFAnnotationSelIsReadOnly = objc.RegisterName("isReadOnly")
-	_pDFAnnotationSelSetReadOnly = objc.RegisterName("setReadOnly:")
-	_pDFAnnotationSelIsListChoice = objc.RegisterName("isListChoice")
-	_pDFAnnotationSelSetListChoice = objc.RegisterName("setListChoice:")
-	_pDFAnnotationSelChoices = objc.RegisterName("choices")
-	_pDFAnnotationSelSetChoices = objc.RegisterName("setChoices:")
-	_pDFAnnotationSelValues = objc.RegisterName("values")
-	_pDFAnnotationSelSetValues = objc.RegisterName("setValues:")
-	_pDFAnnotationSelButtonWidgetState = objc.RegisterName("buttonWidgetState")
-	_pDFAnnotationSelSetButtonWidgetState = objc.RegisterName("setButtonWidgetState:")
-	_pDFAnnotationSelButtonWidgetStateString = objc.RegisterName("buttonWidgetStateString")
-	_pDFAnnotationSelSetButtonWidgetStateString = objc.RegisterName("setButtonWidgetStateString:")
-	_pDFAnnotationSelIsOpen = objc.RegisterName("isOpen")
-	_pDFAnnotationSelSetOpen = objc.RegisterName("setOpen:")
-	_pDFAnnotationSelPaths = objc.RegisterName("paths")
-	_pDFAnnotationSelDestination = objc.RegisterName("destination")
-	_pDFAnnotationSelSetDestination = objc.RegisterName("setDestination:")
-	_pDFAnnotationSelURL = objc.RegisterName("URL")
-	_pDFAnnotationSelSetURL = objc.RegisterName("setURL:")
-	_pDFAnnotationSelFieldName = objc.RegisterName("fieldName")
-	_pDFAnnotationSelSetFieldName = objc.RegisterName("setFieldName:")
-	_pDFAnnotationSelCaption = objc.RegisterName("caption")
-	_pDFAnnotationSelSetCaption = objc.RegisterName("setCaption:")
-	_pDFAnnotationSelBackgroundColor = objc.RegisterName("backgroundColor")
-	_pDFAnnotationSelSetBackgroundColor = objc.RegisterName("setBackgroundColor:")
-	_pDFAnnotationSelStampName = objc.RegisterName("stampName")
-	_pDFAnnotationSelSetStampName = objc.RegisterName("setStampName:")
+	_pDFAnnotationSelDrawWithBoxInContext                = objc.RegisterName("drawWithBox:inContext:")
+	_pDFAnnotationSelSetValueForAnnotationKey            = objc.RegisterName("setValue:forAnnotationKey:")
+	_pDFAnnotationSelSetBooleanForAnnotationKey          = objc.RegisterName("setBoolean:forAnnotationKey:")
+	_pDFAnnotationSelSetRectForAnnotationKey             = objc.RegisterName("setRect:forAnnotationKey:")
+	_pDFAnnotationSelValueForAnnotationKey               = objc.RegisterName("valueForAnnotationKey:")
+	_pDFAnnotationSelRemoveValueForAnnotationKey         = objc.RegisterName("removeValueForAnnotationKey:")
+	_pDFAnnotationSelPage                                = objc.RegisterName("page")
+	_pDFAnnotationSelSetPage                             = objc.RegisterName("setPage:")
+	_pDFAnnotationSelType                                = objc.RegisterName("type")
+	_pDFAnnotationSelSetType                             = objc.RegisterName("setType:")
+	_pDFAnnotationSelBounds                              = objc.RegisterName("bounds")
+	_pDFAnnotationSelSetBounds                           = objc.RegisterName("setBounds:")
+	_pDFAnnotationSelShouldDisplay                       = objc.RegisterName("shouldDisplay")
+	_pDFAnnotationSelSetShouldDisplay                    = objc.RegisterName("setShouldDisplay:")
+	_pDFAnnotationSelShouldPrint                         = objc.RegisterName("shouldPrint")
+	_pDFAnnotationSelSetShouldPrint                      = objc.RegisterName("setShouldPrint:")
+	_pDFAnnotationSelModificationDate                    = objc.RegisterName("modificationDate")
+	_pDFAnnotationSelSetModificationDate                 = objc.RegisterName("setModificationDate:")
+	_pDFAnnotationSelUserName                            = objc.RegisterName("userName")
+	_pDFAnnotationSelSetUserName                         = objc.RegisterName("setUserName:")
+	_pDFAnnotationSelPopup                               = objc.RegisterName("popup")
+	_pDFAnnotationSelSetPopup                            = objc.RegisterName("setPopup:")
+	_pDFAnnotationSelBorder                              = objc.RegisterName("border")
+	_pDFAnnotationSelSetBorder                           = objc.RegisterName("setBorder:")
+	_pDFAnnotationSelColor                               = objc.RegisterName("color")
+	_pDFAnnotationSelSetColor                            = objc.RegisterName("setColor:")
+	_pDFAnnotationSelContents                            = objc.RegisterName("contents")
+	_pDFAnnotationSelSetContents                         = objc.RegisterName("setContents:")
+	_pDFAnnotationSelAction                              = objc.RegisterName("action")
+	_pDFAnnotationSelSetAction                           = objc.RegisterName("setAction:")
+	_pDFAnnotationSelHasAppearanceStream                 = objc.RegisterName("hasAppearanceStream")
+	_pDFAnnotationSelIsHighlighted                       = objc.RegisterName("isHighlighted")
+	_pDFAnnotationSelSetHighlighted                      = objc.RegisterName("setHighlighted:")
+	_pDFAnnotationSelAnnotationKeyValues                 = objc.RegisterName("annotationKeyValues")
+	_pDFAnnotationSelInitWithDictionaryForPage           = objc.RegisterName("initWithDictionary:forPage:")
+	_pDFAnnotationSelInitWithBounds                      = objc.RegisterName("initWithBounds:")
+	_pDFAnnotationSelRemoveAllAppearanceStreams          = objc.RegisterName("removeAllAppearanceStreams")
+	_pDFAnnotationSelDrawWithBox                         = objc.RegisterName("drawWithBox:")
+	_pDFAnnotationSelToolTip                             = objc.RegisterName("toolTip")
+	_pDFAnnotationSelMouseUpAction                       = objc.RegisterName("mouseUpAction")
+	_pDFAnnotationSelSetMouseUpAction                    = objc.RegisterName("setMouseUpAction:")
+	_pDFAnnotationSelLineStyleFromName                   = objc.RegisterName("lineStyleFromName:")
+	_pDFAnnotationSelNameForLineStyle                    = objc.RegisterName("nameForLineStyle:")
+	_pDFAnnotationSelAddBezierPath                       = objc.RegisterName("addBezierPath:")
+	_pDFAnnotationSelRemoveBezierPath                    = objc.RegisterName("removeBezierPath:")
+	_pDFAnnotationSelFont                                = objc.RegisterName("font")
+	_pDFAnnotationSelSetFont                             = objc.RegisterName("setFont:")
+	_pDFAnnotationSelFontColor                           = objc.RegisterName("fontColor")
+	_pDFAnnotationSelSetFontColor                        = objc.RegisterName("setFontColor:")
+	_pDFAnnotationSelInteriorColor                       = objc.RegisterName("interiorColor")
+	_pDFAnnotationSelSetInteriorColor                    = objc.RegisterName("setInteriorColor:")
+	_pDFAnnotationSelAlignment                           = objc.RegisterName("alignment")
+	_pDFAnnotationSelSetAlignment                        = objc.RegisterName("setAlignment:")
+	_pDFAnnotationSelStartPoint                          = objc.RegisterName("startPoint")
+	_pDFAnnotationSelSetStartPoint                       = objc.RegisterName("setStartPoint:")
+	_pDFAnnotationSelEndPoint                            = objc.RegisterName("endPoint")
+	_pDFAnnotationSelSetEndPoint                         = objc.RegisterName("setEndPoint:")
+	_pDFAnnotationSelStartLineStyle                      = objc.RegisterName("startLineStyle")
+	_pDFAnnotationSelSetStartLineStyle                   = objc.RegisterName("setStartLineStyle:")
+	_pDFAnnotationSelEndLineStyle                        = objc.RegisterName("endLineStyle")
+	_pDFAnnotationSelSetEndLineStyle                     = objc.RegisterName("setEndLineStyle:")
+	_pDFAnnotationSelIconType                            = objc.RegisterName("iconType")
+	_pDFAnnotationSelSetIconType                         = objc.RegisterName("setIconType:")
+	_pDFAnnotationSelQuadrilateralPoints                 = objc.RegisterName("quadrilateralPoints")
+	_pDFAnnotationSelSetQuadrilateralPoints              = objc.RegisterName("setQuadrilateralPoints:")
+	_pDFAnnotationSelMarkupType                          = objc.RegisterName("markupType")
+	_pDFAnnotationSelSetMarkupType                       = objc.RegisterName("setMarkupType:")
+	_pDFAnnotationSelWidgetFieldType                     = objc.RegisterName("widgetFieldType")
+	_pDFAnnotationSelSetWidgetFieldType                  = objc.RegisterName("setWidgetFieldType:")
+	_pDFAnnotationSelWidgetControlType                   = objc.RegisterName("widgetControlType")
+	_pDFAnnotationSelSetWidgetControlType                = objc.RegisterName("setWidgetControlType:")
+	_pDFAnnotationSelIsMultiline                         = objc.RegisterName("isMultiline")
+	_pDFAnnotationSelSetMultiline                        = objc.RegisterName("setMultiline:")
+	_pDFAnnotationSelIsActivatableTextField              = objc.RegisterName("isActivatableTextField")
+	_pDFAnnotationSelIsPasswordField                     = objc.RegisterName("isPasswordField")
+	_pDFAnnotationSelHasComb                             = objc.RegisterName("hasComb")
+	_pDFAnnotationSelSetComb                             = objc.RegisterName("setComb:")
+	_pDFAnnotationSelMaximumLength                       = objc.RegisterName("maximumLength")
+	_pDFAnnotationSelSetMaximumLength                    = objc.RegisterName("setMaximumLength:")
+	_pDFAnnotationSelWidgetStringValue                   = objc.RegisterName("widgetStringValue")
+	_pDFAnnotationSelSetWidgetStringValue                = objc.RegisterName("setWidgetStringValue:")
+	_pDFAnnotationSelWidgetDefaultStringValue            = objc.RegisterName("widgetDefaultStringValue")
+	_pDFAnnotationSelSetWidgetDefaultStringValue         = objc.RegisterName("setWidgetDefaultStringValue:")
+	_pDFAnnotationSelAllowsToggleToOff                   = objc.RegisterName("allowsToggleToOff")
+	_pDFAnnotationSelSetAllowsToggleToOff                = objc.RegisterName("setAllowsToggleToOff:")
+	_pDFAnnotationSelRadiosInUnison                      = objc.RegisterName("radiosInUnison")
+	_pDFAnnotationSelSetRadiosInUnison                   = objc.RegisterName("setRadiosInUnison:")
+	_pDFAnnotationSelIsReadOnly                          = objc.RegisterName("isReadOnly")
+	_pDFAnnotationSelSetReadOnly                         = objc.RegisterName("setReadOnly:")
+	_pDFAnnotationSelIsListChoice                        = objc.RegisterName("isListChoice")
+	_pDFAnnotationSelSetListChoice                       = objc.RegisterName("setListChoice:")
+	_pDFAnnotationSelChoices                             = objc.RegisterName("choices")
+	_pDFAnnotationSelSetChoices                          = objc.RegisterName("setChoices:")
+	_pDFAnnotationSelValues                              = objc.RegisterName("values")
+	_pDFAnnotationSelSetValues                           = objc.RegisterName("setValues:")
+	_pDFAnnotationSelButtonWidgetState                   = objc.RegisterName("buttonWidgetState")
+	_pDFAnnotationSelSetButtonWidgetState                = objc.RegisterName("setButtonWidgetState:")
+	_pDFAnnotationSelButtonWidgetStateString             = objc.RegisterName("buttonWidgetStateString")
+	_pDFAnnotationSelSetButtonWidgetStateString          = objc.RegisterName("setButtonWidgetStateString:")
+	_pDFAnnotationSelIsOpen                              = objc.RegisterName("isOpen")
+	_pDFAnnotationSelSetOpen                             = objc.RegisterName("setOpen:")
+	_pDFAnnotationSelPaths                               = objc.RegisterName("paths")
+	_pDFAnnotationSelDestination                         = objc.RegisterName("destination")
+	_pDFAnnotationSelSetDestination                      = objc.RegisterName("setDestination:")
+	_pDFAnnotationSelURL                                 = objc.RegisterName("URL")
+	_pDFAnnotationSelSetURL                              = objc.RegisterName("setURL:")
+	_pDFAnnotationSelFieldName                           = objc.RegisterName("fieldName")
+	_pDFAnnotationSelSetFieldName                        = objc.RegisterName("setFieldName:")
+	_pDFAnnotationSelCaption                             = objc.RegisterName("caption")
+	_pDFAnnotationSelSetCaption                          = objc.RegisterName("setCaption:")
+	_pDFAnnotationSelBackgroundColor                     = objc.RegisterName("backgroundColor")
+	_pDFAnnotationSelSetBackgroundColor                  = objc.RegisterName("setBackgroundColor:")
+	_pDFAnnotationSelStampName                           = objc.RegisterName("stampName")
+	_pDFAnnotationSelSetStampName                        = objc.RegisterName("setStampName:")
 )
 
 func PDFAnnotationFromID(id objc.ID) *PDFAnnotation {
@@ -150,7 +150,9 @@ func PDFAnnotationFromID(id objc.ID) *PDFAnnotation {
 
 func (o *PDFAnnotation) InitWithBoundsForTypeWithProperties(bounds corefoundation.CGRect, annotationType unsafe.Pointer, properties *foundation.NSDictionary[objc.ID, objc.ID]) *PDFAnnotation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationSelInitWithBoundsForTypeWithProperties, bounds, annotationType, properties)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFAnnotationFromID(_ret)
 }
 
@@ -184,7 +186,9 @@ func (o *PDFAnnotation) RemoveValueForAnnotationKey(key unsafe.Pointer) {
 
 func (o *PDFAnnotation) Page() *PDFPage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationSelPage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFPageFromID(_ret)
 }
 
@@ -194,7 +198,9 @@ func (o *PDFAnnotation) SetPage(page *PDFPage) {
 
 func (o *PDFAnnotation) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -313,13 +319,17 @@ func (o *PDFAnnotation) AnnotationKeyValues() unsafe.Pointer {
 
 func (o *PDFAnnotation) InitWithDictionaryForPage(dictionary *foundation.NSDictionary[objc.ID, objc.ID], page *PDFPage) *PDFAnnotation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationSelInitWithDictionaryForPage, dictionary, page.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFAnnotationFromID(_ret)
 }
 
 func (o *PDFAnnotation) InitWithBounds(bounds corefoundation.CGRect) *PDFAnnotation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationSelInitWithBounds, bounds)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFAnnotationFromID(_ret)
 }
 
@@ -352,7 +362,9 @@ func PDFAnnotationLineStyleFromName(name *foundation.NSString) PDFLineStyle {
 
 func PDFAnnotationNameForLineStyle(style PDFLineStyle) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPDFAnnotation), _pDFAnnotationSelNameForLineStyle, style)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -366,7 +378,9 @@ func (o *PDFAnnotation) RemoveBezierPath(path *appkit.NSBezierPath) {
 
 func (o *PDFAnnotation) Font() *appkit.NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationSelFont)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSFontFromID(_ret)
 }
 
@@ -376,7 +390,9 @@ func (o *PDFAnnotation) SetFont(font *appkit.NSFont) {
 
 func (o *PDFAnnotation) FontColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationSelFontColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -386,7 +402,9 @@ func (o *PDFAnnotation) SetFontColor(fontColor *appkit.NSColor) {
 
 func (o *PDFAnnotation) InteriorColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationSelInteriorColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -468,7 +486,9 @@ func (o *PDFAnnotation) SetMarkupType(markupType PDFMarkupType) {
 
 func (o *PDFAnnotation) WidgetFieldType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationSelWidgetFieldType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -524,7 +544,9 @@ func (o *PDFAnnotation) SetMaximumLength(maximumLength int) {
 
 func (o *PDFAnnotation) WidgetStringValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationSelWidgetStringValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -534,7 +556,9 @@ func (o *PDFAnnotation) SetWidgetStringValue(widgetStringValue *foundation.NSStr
 
 func (o *PDFAnnotation) WidgetDefaultStringValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationSelWidgetDefaultStringValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -607,7 +631,9 @@ func (o *PDFAnnotation) SetButtonWidgetState(buttonWidgetState PDFWidgetCellStat
 
 func (o *PDFAnnotation) ButtonWidgetStateString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationSelButtonWidgetStateString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -631,7 +657,9 @@ func (o *PDFAnnotation) Paths() *foundation.NSArray[*appkit.NSBezierPath] {
 
 func (o *PDFAnnotation) Destination() *PDFDestination {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationSelDestination)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFDestinationFromID(_ret)
 }
 
@@ -641,7 +669,9 @@ func (o *PDFAnnotation) SetDestination(destination *PDFDestination) {
 
 func (o *PDFAnnotation) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -651,7 +681,9 @@ func (o *PDFAnnotation) SetURL(uRL *foundation.NSURL) {
 
 func (o *PDFAnnotation) FieldName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationSelFieldName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -661,7 +693,9 @@ func (o *PDFAnnotation) SetFieldName(fieldName *foundation.NSString) {
 
 func (o *PDFAnnotation) Caption() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationSelCaption)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -671,7 +705,9 @@ func (o *PDFAnnotation) SetCaption(caption *foundation.NSString) {
 
 func (o *PDFAnnotation) BackgroundColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationSelBackgroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -681,11 +717,12 @@ func (o *PDFAnnotation) SetBackgroundColor(backgroundColor *appkit.NSColor) {
 
 func (o *PDFAnnotation) StampName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationSelStampName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PDFAnnotation) SetStampName(stampName *foundation.NSString) {
 	o.Ptr().Send(_pDFAnnotationSelSetStampName, stampName.Ptr())
 }
-

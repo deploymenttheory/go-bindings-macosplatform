@@ -212,7 +212,9 @@ func (x *PinAnnotationView) SetPinColor(pinColor raw.MKPinAnnotationColor) {
 	x.inner.SetPinColor(pinColor)
 }
 
-func (x *PinAnnotationView) asAnnotationView() *raw.MKAnnotationView { return &x.inner.MKAnnotationView }
+func (x *PinAnnotationView) asAnnotationView() *raw.MKAnnotationView {
+	return &x.inner.MKAnnotationView
+}
 
 // PinAnnotationViewable is the interface implemented by [PinAnnotationView], for mocking and DI.
 type PinAnnotationViewable interface {
@@ -250,4 +252,3 @@ type PinAnnotationViewable interface {
 }
 
 var _ PinAnnotationViewable = (*PinAnnotationView)(nil)
-

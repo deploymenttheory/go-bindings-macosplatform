@@ -16,7 +16,7 @@ type MXUnitAveragePixelLuminance struct {
 }
 
 var (
-	_clsMXUnitAveragePixelLuminance = _objcClass("MXUnitAveragePixelLuminance")
+	_clsMXUnitAveragePixelLuminance    = _objcClass("MXUnitAveragePixelLuminance")
 	_mXUnitAveragePixelLuminanceSelApl = objc.RegisterName("apl")
 )
 
@@ -32,7 +32,8 @@ func MXUnitAveragePixelLuminanceFromID(id objc.ID) *MXUnitAveragePixelLuminance 
 
 func MXUnitAveragePixelLuminanceApl() *MXUnitAveragePixelLuminance {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMXUnitAveragePixelLuminance), _mXUnitAveragePixelLuminanceSelApl)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MXUnitAveragePixelLuminanceFromID(_ret)
 }
-

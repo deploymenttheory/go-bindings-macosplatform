@@ -43,4 +43,3 @@ type BarcodeDescriptorable interface {
 }
 
 var _ BarcodeDescriptorable = (*BarcodeDescriptor)(nil)
-

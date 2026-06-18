@@ -15,12 +15,12 @@ type NSSpellServer struct {
 }
 
 var (
-	_clsNSSpellServer = _objcClass("NSSpellServer")
-	_nSSpellServerSelRegisterLanguageByVendor = objc.RegisterName("registerLanguage:byVendor:")
+	_clsNSSpellServer                                      = _objcClass("NSSpellServer")
+	_nSSpellServerSelRegisterLanguageByVendor              = objc.RegisterName("registerLanguage:byVendor:")
 	_nSSpellServerSelIsWordInUserDictionariesCaseSensitive = objc.RegisterName("isWordInUserDictionaries:caseSensitive:")
-	_nSSpellServerSelRun = objc.RegisterName("run")
-	_nSSpellServerSelDelegate = objc.RegisterName("delegate")
-	_nSSpellServerSelSetDelegate = objc.RegisterName("setDelegate:")
+	_nSSpellServerSelRun                                   = objc.RegisterName("run")
+	_nSSpellServerSelDelegate                              = objc.RegisterName("delegate")
+	_nSSpellServerSelSetDelegate                           = objc.RegisterName("setDelegate:")
 )
 
 func NSSpellServerFromID(id objc.ID) *NSSpellServer {
@@ -55,4 +55,3 @@ func (o *NSSpellServer) Delegate() NSSpellServerDelegate {
 func (o *NSSpellServer) SetDelegate(delegate NSSpellServerDelegate) {
 	o.Ptr().Send(_nSSpellServerSelSetDelegate, delegate)
 }
-

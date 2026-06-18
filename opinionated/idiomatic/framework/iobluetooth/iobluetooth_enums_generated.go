@@ -11,9 +11,9 @@ import (
 type BluetoothRFCOMMLineStatus int64
 
 const (
-	BluetoothRFCOMMLineStatusNoError BluetoothRFCOMMLineStatus = 0
+	BluetoothRFCOMMLineStatusNoError      BluetoothRFCOMMLineStatus = 0
 	BluetoothRFCOMMLineStatusOverrunError BluetoothRFCOMMLineStatus = 1
-	BluetoothRFCOMMLineStatusParityError BluetoothRFCOMMLineStatus = 2
+	BluetoothRFCOMMLineStatusParityError  BluetoothRFCOMMLineStatus = 2
 	BluetoothRFCOMMLineStatusFramingError BluetoothRFCOMMLineStatus = 3
 )
 
@@ -35,10 +35,10 @@ func (e BluetoothRFCOMMLineStatus) String() string {
 type BluetoothRFCOMMParityType int64
 
 const (
-	KBluetoothRFCOMMParityTypeNoParity BluetoothRFCOMMParityType = 0
-	KBluetoothRFCOMMParityTypeOddParity BluetoothRFCOMMParityType = 1
+	KBluetoothRFCOMMParityTypeNoParity   BluetoothRFCOMMParityType = 0
+	KBluetoothRFCOMMParityTypeOddParity  BluetoothRFCOMMParityType = 1
 	KBluetoothRFCOMMParityTypeEvenParity BluetoothRFCOMMParityType = 2
-	KBluetoothRFCOMMParityTypeMaxParity BluetoothRFCOMMParityType = 3
+	KBluetoothRFCOMMParityTypeMaxParity  BluetoothRFCOMMParityType = 3
 )
 
 func (e BluetoothRFCOMMParityType) String() string {
@@ -59,7 +59,7 @@ func (e BluetoothRFCOMMParityType) String() string {
 type IOBluetoothSMSMode uint64
 
 const (
-	IOBluetoothSMSModePDU IOBluetoothSMSMode = 0
+	IOBluetoothSMSModePDU  IOBluetoothSMSMode = 0
 	IOBluetoothSMSModeText IOBluetoothSMSMode = 1
 )
 
@@ -77,7 +77,7 @@ func (e IOBluetoothSMSMode) String() string {
 type IOBluetoothUserNotificationChannelDirection int64
 
 const (
-	KIOBluetoothUserNotificationChannelDirectionAny IOBluetoothUserNotificationChannelDirection = 0
+	KIOBluetoothUserNotificationChannelDirectionAny      IOBluetoothUserNotificationChannelDirection = 0
 	KIOBluetoothUserNotificationChannelDirectionIncoming IOBluetoothUserNotificationChannelDirection = 1
 	KIOBluetoothUserNotificationChannelDirectionOutgoing IOBluetoothUserNotificationChannelDirection = 2
 )
@@ -94,4 +94,3 @@ func (e IOBluetoothUserNotificationChannelDirection) String() string {
 		return fmt.Sprintf("IOBluetoothUserNotificationChannelDirection(%d)", int64(e))
 	}
 }
-

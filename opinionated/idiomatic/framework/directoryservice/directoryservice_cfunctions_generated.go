@@ -468,4 +468,3 @@ func DsSetRecordType(inRecordReference uint, inNewRecordType *raw.TDataBuffer) r
 func DsVerifyDirRefNum(inDirReference uint) raw.TDirStatus {
 	return raw.DsVerifyDirRefNum(inDirReference)
 }
-

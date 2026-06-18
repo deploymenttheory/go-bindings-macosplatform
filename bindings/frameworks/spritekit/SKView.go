@@ -18,46 +18,46 @@ type SKView struct {
 }
 
 var (
-	_clsSKView = _objcClass("SKView")
-	_sKViewSelPresentScene = objc.RegisterName("presentScene:")
-	_sKViewSelPresentSceneTransition = objc.RegisterName("presentScene:transition:")
-	_sKViewSelTextureFromNode = objc.RegisterName("textureFromNode:")
-	_sKViewSelTextureFromNodeCrop = objc.RegisterName("textureFromNode:crop:")
-	_sKViewSelConvertPointToScene = objc.RegisterName("convertPoint:toScene:")
-	_sKViewSelConvertPointFromScene = objc.RegisterName("convertPoint:fromScene:")
-	_sKViewSelIsPaused = objc.RegisterName("isPaused")
-	_sKViewSelSetPaused = objc.RegisterName("setPaused:")
-	_sKViewSelShowsFPS = objc.RegisterName("showsFPS")
-	_sKViewSelSetShowsFPS = objc.RegisterName("setShowsFPS:")
-	_sKViewSelShowsDrawCount = objc.RegisterName("showsDrawCount")
-	_sKViewSelSetShowsDrawCount = objc.RegisterName("setShowsDrawCount:")
-	_sKViewSelShowsNodeCount = objc.RegisterName("showsNodeCount")
-	_sKViewSelSetShowsNodeCount = objc.RegisterName("setShowsNodeCount:")
-	_sKViewSelShowsQuadCount = objc.RegisterName("showsQuadCount")
-	_sKViewSelSetShowsQuadCount = objc.RegisterName("setShowsQuadCount:")
-	_sKViewSelShowsPhysics = objc.RegisterName("showsPhysics")
-	_sKViewSelSetShowsPhysics = objc.RegisterName("setShowsPhysics:")
-	_sKViewSelShowsFields = objc.RegisterName("showsFields")
-	_sKViewSelSetShowsFields = objc.RegisterName("setShowsFields:")
-	_sKViewSelIsAsynchronous = objc.RegisterName("isAsynchronous")
-	_sKViewSelSetAsynchronous = objc.RegisterName("setAsynchronous:")
-	_sKViewSelAllowsTransparency = objc.RegisterName("allowsTransparency")
-	_sKViewSelSetAllowsTransparency = objc.RegisterName("setAllowsTransparency:")
-	_sKViewSelIgnoresSiblingOrder = objc.RegisterName("ignoresSiblingOrder")
-	_sKViewSelSetIgnoresSiblingOrder = objc.RegisterName("setIgnoresSiblingOrder:")
-	_sKViewSelShouldCullNonVisibleNodes = objc.RegisterName("shouldCullNonVisibleNodes")
+	_clsSKView                             = _objcClass("SKView")
+	_sKViewSelPresentScene                 = objc.RegisterName("presentScene:")
+	_sKViewSelPresentSceneTransition       = objc.RegisterName("presentScene:transition:")
+	_sKViewSelTextureFromNode              = objc.RegisterName("textureFromNode:")
+	_sKViewSelTextureFromNodeCrop          = objc.RegisterName("textureFromNode:crop:")
+	_sKViewSelConvertPointToScene          = objc.RegisterName("convertPoint:toScene:")
+	_sKViewSelConvertPointFromScene        = objc.RegisterName("convertPoint:fromScene:")
+	_sKViewSelIsPaused                     = objc.RegisterName("isPaused")
+	_sKViewSelSetPaused                    = objc.RegisterName("setPaused:")
+	_sKViewSelShowsFPS                     = objc.RegisterName("showsFPS")
+	_sKViewSelSetShowsFPS                  = objc.RegisterName("setShowsFPS:")
+	_sKViewSelShowsDrawCount               = objc.RegisterName("showsDrawCount")
+	_sKViewSelSetShowsDrawCount            = objc.RegisterName("setShowsDrawCount:")
+	_sKViewSelShowsNodeCount               = objc.RegisterName("showsNodeCount")
+	_sKViewSelSetShowsNodeCount            = objc.RegisterName("setShowsNodeCount:")
+	_sKViewSelShowsQuadCount               = objc.RegisterName("showsQuadCount")
+	_sKViewSelSetShowsQuadCount            = objc.RegisterName("setShowsQuadCount:")
+	_sKViewSelShowsPhysics                 = objc.RegisterName("showsPhysics")
+	_sKViewSelSetShowsPhysics              = objc.RegisterName("setShowsPhysics:")
+	_sKViewSelShowsFields                  = objc.RegisterName("showsFields")
+	_sKViewSelSetShowsFields               = objc.RegisterName("setShowsFields:")
+	_sKViewSelIsAsynchronous               = objc.RegisterName("isAsynchronous")
+	_sKViewSelSetAsynchronous              = objc.RegisterName("setAsynchronous:")
+	_sKViewSelAllowsTransparency           = objc.RegisterName("allowsTransparency")
+	_sKViewSelSetAllowsTransparency        = objc.RegisterName("setAllowsTransparency:")
+	_sKViewSelIgnoresSiblingOrder          = objc.RegisterName("ignoresSiblingOrder")
+	_sKViewSelSetIgnoresSiblingOrder       = objc.RegisterName("setIgnoresSiblingOrder:")
+	_sKViewSelShouldCullNonVisibleNodes    = objc.RegisterName("shouldCullNonVisibleNodes")
 	_sKViewSelSetShouldCullNonVisibleNodes = objc.RegisterName("setShouldCullNonVisibleNodes:")
-	_sKViewSelPreferredFramesPerSecond = objc.RegisterName("preferredFramesPerSecond")
-	_sKViewSelSetPreferredFramesPerSecond = objc.RegisterName("setPreferredFramesPerSecond:")
-	_sKViewSelDisableDepthStencilBuffer = objc.RegisterName("disableDepthStencilBuffer")
+	_sKViewSelPreferredFramesPerSecond     = objc.RegisterName("preferredFramesPerSecond")
+	_sKViewSelSetPreferredFramesPerSecond  = objc.RegisterName("setPreferredFramesPerSecond:")
+	_sKViewSelDisableDepthStencilBuffer    = objc.RegisterName("disableDepthStencilBuffer")
 	_sKViewSelSetDisableDepthStencilBuffer = objc.RegisterName("setDisableDepthStencilBuffer:")
-	_sKViewSelDelegate = objc.RegisterName("delegate")
-	_sKViewSelSetDelegate = objc.RegisterName("setDelegate:")
-	_sKViewSelFrameInterval = objc.RegisterName("frameInterval")
-	_sKViewSelSetFrameInterval = objc.RegisterName("setFrameInterval:")
-	_sKViewSelPreferredFrameRate = objc.RegisterName("preferredFrameRate")
-	_sKViewSelSetPreferredFrameRate = objc.RegisterName("setPreferredFrameRate:")
-	_sKViewSelScene = objc.RegisterName("scene")
+	_sKViewSelDelegate                     = objc.RegisterName("delegate")
+	_sKViewSelSetDelegate                  = objc.RegisterName("setDelegate:")
+	_sKViewSelFrameInterval                = objc.RegisterName("frameInterval")
+	_sKViewSelSetFrameInterval             = objc.RegisterName("setFrameInterval:")
+	_sKViewSelPreferredFrameRate           = objc.RegisterName("preferredFrameRate")
+	_sKViewSelSetPreferredFrameRate        = objc.RegisterName("setPreferredFrameRate:")
+	_sKViewSelScene                        = objc.RegisterName("scene")
 )
 
 func SKViewFromID(id objc.ID) *SKView {
@@ -83,14 +83,18 @@ func (o *SKView) PresentSceneTransition(scene *SKScene, transition *SKTransition
 // Create an SKTexture containing a snapshot of how it would have been rendered in this view. The texture is tightly cropped to the size of the node. @param node the node subtree to render to the texture.
 func (o *SKView) TextureFromNode(node *SKNode) *SKTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKViewSelTextureFromNode, node.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTextureFromID(_ret)
 }
 
 // Create an SKTexture containing a snapshot of how it would have been rendered in this view. The texture is cropped to the specified rectangle @param node the node subtree to render to the texture. @param crop the crop
 func (o *SKView) TextureFromNodeCrop(node *SKNode, crop corefoundation.CGRect) *SKTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKViewSelTextureFromNodeCrop, node.Ptr(), crop)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTextureFromID(_ret)
 }
 
@@ -231,7 +235,9 @@ func (o *SKView) SetDisableDepthStencilBuffer(disableDepthStencilBuffer bool) {
 // Optional view delegate, see SKViewDelegate.
 func (o *SKView) Delegate() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKViewSelDelegate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
@@ -264,7 +270,8 @@ func (o *SKView) SetPreferredFrameRate(preferredFrameRate float32) {
 // The currently presented scene, otherwise nil. If in a transition, the 'incoming' scene is returned.
 func (o *SKView) Scene() *SKScene {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKViewSelScene)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKSceneFromID(_ret)
 }
-

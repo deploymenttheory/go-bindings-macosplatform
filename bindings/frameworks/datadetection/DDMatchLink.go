@@ -18,7 +18,7 @@ type DDMatchLink struct {
 }
 
 var (
-	_clsDDMatchLink = _objcClass("DDMatchLink")
+	_clsDDMatchLink    = _objcClass("DDMatchLink")
 	_dDMatchLinkSelURL = objc.RegisterName("URL")
 )
 
@@ -34,7 +34,8 @@ func DDMatchLinkFromID(id objc.ID) *DDMatchLink {
 
 func (o *DDMatchLink) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDMatchLinkSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
-

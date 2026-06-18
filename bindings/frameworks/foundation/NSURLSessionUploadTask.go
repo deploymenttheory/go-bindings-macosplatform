@@ -15,9 +15,9 @@ type NSURLSessionUploadTask struct {
 }
 
 var (
-	_clsNSURLSessionUploadTask = _objcClass("NSURLSessionUploadTask")
-	_nSURLSessionUploadTaskSelInit = objc.RegisterName("init")
-	_nSURLSessionUploadTaskSelNew = objc.RegisterName("new")
+	_clsNSURLSessionUploadTask                            = _objcClass("NSURLSessionUploadTask")
+	_nSURLSessionUploadTaskSelInit                        = objc.RegisterName("init")
+	_nSURLSessionUploadTaskSelNew                         = objc.RegisterName("new")
 	_nSURLSessionUploadTaskSelCancelByProducingResumeData = objc.RegisterName("cancelByProducingResumeData:")
 )
 
@@ -34,7 +34,9 @@ func NSURLSessionUploadTaskFromID(id objc.ID) *NSURLSessionUploadTask {
 // Deprecated: Please use -[NSURLSession uploadTaskWithStreamedRequest:] or other NSURLSession methods to create instances
 func (o *NSURLSessionUploadTask) Init() *NSURLSessionUploadTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionUploadTaskSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionUploadTaskFromID(_ret)
 }
 
@@ -58,4 +60,3 @@ func (o *NSURLSessionUploadTask) CancelByProducingResumeData(completionHandler f
 	}
 	o.Ptr().Send(_nSURLSessionUploadTaskSelCancelByProducingResumeData, __block_completionHandler)
 }
-

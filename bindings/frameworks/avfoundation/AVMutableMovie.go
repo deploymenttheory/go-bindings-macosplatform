@@ -20,32 +20,32 @@ type AVMutableMovie struct {
 }
 
 var (
-	_clsAVMutableMovie = _objcClass("AVMutableMovie")
-	_aVMutableMovieSelMovieWithURLOptionsError = objc.RegisterName("movieWithURL:options:error:")
-	_aVMutableMovieSelInitWithURLOptionsError = objc.RegisterName("initWithURL:options:error:")
-	_aVMutableMovieSelMovieWithDataOptionsError = objc.RegisterName("movieWithData:options:error:")
-	_aVMutableMovieSelInitWithDataOptionsError = objc.RegisterName("initWithData:options:error:")
-	_aVMutableMovieSelMovieWithSettingsFromMovieOptionsError = objc.RegisterName("movieWithSettingsFromMovie:options:error:")
-	_aVMutableMovieSelInitWithSettingsFromMovieOptionsError = objc.RegisterName("initWithSettingsFromMovie:options:error:")
-	_aVMutableMovieSelSetPreferredRate = objc.RegisterName("setPreferredRate:")
-	_aVMutableMovieSelSetPreferredVolume = objc.RegisterName("setPreferredVolume:")
-	_aVMutableMovieSelSetPreferredTransform = objc.RegisterName("setPreferredTransform:")
-	_aVMutableMovieSelTimescale = objc.RegisterName("timescale")
-	_aVMutableMovieSelSetTimescale = objc.RegisterName("setTimescale:")
-	_aVMutableMovieSelInsertTimeRangeOfAssetAtTimeCopySampleDataError = objc.RegisterName("insertTimeRange:ofAsset:atTime:copySampleData:error:")
-	_aVMutableMovieSelInsertEmptyTimeRange = objc.RegisterName("insertEmptyTimeRange:")
-	_aVMutableMovieSelRemoveTimeRange = objc.RegisterName("removeTimeRange:")
-	_aVMutableMovieSelScaleTimeRangeToDuration = objc.RegisterName("scaleTimeRange:toDuration:")
-	_aVMutableMovieSelIsModified = objc.RegisterName("isModified")
-	_aVMutableMovieSelSetModified = objc.RegisterName("setModified:")
-	_aVMutableMovieSelSetDefaultMediaDataStorage = objc.RegisterName("setDefaultMediaDataStorage:")
-	_aVMutableMovieSelInterleavingPeriod = objc.RegisterName("interleavingPeriod")
-	_aVMutableMovieSelSetInterleavingPeriod = objc.RegisterName("setInterleavingPeriod:")
-	_aVMutableMovieSelMutableTrackCompatibleWithTrack = objc.RegisterName("mutableTrackCompatibleWithTrack:")
+	_clsAVMutableMovie                                                         = _objcClass("AVMutableMovie")
+	_aVMutableMovieSelMovieWithURLOptionsError                                 = objc.RegisterName("movieWithURL:options:error:")
+	_aVMutableMovieSelInitWithURLOptionsError                                  = objc.RegisterName("initWithURL:options:error:")
+	_aVMutableMovieSelMovieWithDataOptionsError                                = objc.RegisterName("movieWithData:options:error:")
+	_aVMutableMovieSelInitWithDataOptionsError                                 = objc.RegisterName("initWithData:options:error:")
+	_aVMutableMovieSelMovieWithSettingsFromMovieOptionsError                   = objc.RegisterName("movieWithSettingsFromMovie:options:error:")
+	_aVMutableMovieSelInitWithSettingsFromMovieOptionsError                    = objc.RegisterName("initWithSettingsFromMovie:options:error:")
+	_aVMutableMovieSelSetPreferredRate                                         = objc.RegisterName("setPreferredRate:")
+	_aVMutableMovieSelSetPreferredVolume                                       = objc.RegisterName("setPreferredVolume:")
+	_aVMutableMovieSelSetPreferredTransform                                    = objc.RegisterName("setPreferredTransform:")
+	_aVMutableMovieSelTimescale                                                = objc.RegisterName("timescale")
+	_aVMutableMovieSelSetTimescale                                             = objc.RegisterName("setTimescale:")
+	_aVMutableMovieSelInsertTimeRangeOfAssetAtTimeCopySampleDataError          = objc.RegisterName("insertTimeRange:ofAsset:atTime:copySampleData:error:")
+	_aVMutableMovieSelInsertEmptyTimeRange                                     = objc.RegisterName("insertEmptyTimeRange:")
+	_aVMutableMovieSelRemoveTimeRange                                          = objc.RegisterName("removeTimeRange:")
+	_aVMutableMovieSelScaleTimeRangeToDuration                                 = objc.RegisterName("scaleTimeRange:toDuration:")
+	_aVMutableMovieSelIsModified                                               = objc.RegisterName("isModified")
+	_aVMutableMovieSelSetModified                                              = objc.RegisterName("setModified:")
+	_aVMutableMovieSelSetDefaultMediaDataStorage                               = objc.RegisterName("setDefaultMediaDataStorage:")
+	_aVMutableMovieSelInterleavingPeriod                                       = objc.RegisterName("interleavingPeriod")
+	_aVMutableMovieSelSetInterleavingPeriod                                    = objc.RegisterName("setInterleavingPeriod:")
+	_aVMutableMovieSelMutableTrackCompatibleWithTrack                          = objc.RegisterName("mutableTrackCompatibleWithTrack:")
 	_aVMutableMovieSelAddMutableTrackWithMediaTypeCopySettingsFromTrackOptions = objc.RegisterName("addMutableTrackWithMediaType:copySettingsFromTrack:options:")
-	_aVMutableMovieSelAddMutableTracksCopyingSettingsFromTracksOptions = objc.RegisterName("addMutableTracksCopyingSettingsFromTracks:options:")
-	_aVMutableMovieSelRemoveTrack = objc.RegisterName("removeTrack:")
-	_aVMutableMovieSelSetMetadata = objc.RegisterName("setMetadata:")
+	_aVMutableMovieSelAddMutableTracksCopyingSettingsFromTracksOptions         = objc.RegisterName("addMutableTracksCopyingSettingsFromTracks:options:")
+	_aVMutableMovieSelRemoveTrack                                              = objc.RegisterName("removeTrack:")
+	_aVMutableMovieSelSetMetadata                                              = objc.RegisterName("setMetadata:")
 )
 
 func AVMutableMovieFromID(id objc.ID) *AVMutableMovie {
@@ -62,7 +62,9 @@ func AVMutableMovieFromID(id objc.ID) *AVMutableMovie {
 func AVMutableMovieMovieWithURLOptionsError(uRL *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*AVMutableMovie, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableMovie), _aVMutableMovieSelMovieWithURLOptionsError, uRL.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -73,7 +75,9 @@ func AVMutableMovieMovieWithURLOptionsError(uRL *foundation.NSURL, options *foun
 func (o *AVMutableMovie) InitWithURLOptionsError(uRL *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*AVMutableMovie, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMutableMovieSelInitWithURLOptionsError, uRL.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -84,7 +88,9 @@ func (o *AVMutableMovie) InitWithURLOptionsError(uRL *foundation.NSURL, options 
 func AVMutableMovieMovieWithDataOptionsError(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*AVMutableMovie, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableMovie), _aVMutableMovieSelMovieWithDataOptionsError, data.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -95,7 +101,9 @@ func AVMutableMovieMovieWithDataOptionsError(data *foundation.NSData, options *f
 func (o *AVMutableMovie) InitWithDataOptionsError(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*AVMutableMovie, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMutableMovieSelInitWithDataOptionsError, data.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -106,7 +114,9 @@ func (o *AVMutableMovie) InitWithDataOptionsError(data *foundation.NSData, optio
 func AVMutableMovieMovieWithSettingsFromMovieOptionsError(movie *AVMovie, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*AVMutableMovie, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableMovie), _aVMutableMovieSelMovieWithSettingsFromMovieOptionsError, movie.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -117,7 +127,9 @@ func AVMutableMovieMovieWithSettingsFromMovieOptionsError(movie *AVMovie, option
 func (o *AVMutableMovie) InitWithSettingsFromMovieOptionsError(movie *AVMovie, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*AVMutableMovie, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMutableMovieSelInitWithSettingsFromMovieOptionsError, movie.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -198,21 +210,27 @@ func (o *AVMutableMovie) SetInterleavingPeriod(interleavingPeriod coremedia.CMTi
 // @method			mutableTrackCompatibleWithTrack: @abstract		Provides a reference to a track of a mutable movie into which any time range of an AVAssetTrack can be inserted (via -[AVMutableMovieTrack insertTimeRange:ofTrack:atTime:copySampleData:error:]). @param			track A reference to the AVAssetTrack from which a time range may be inserted. @result			An AVMutableMovieTrack that can accommodate the insertion. If no such track is available, the result is nil. A new track of the same media type as the AVAssetTrack can be created via -addMutableTrackWithMediaType:copySettingsFromTrack:options:, and this new track will be compatible. @discussion		For best performance, the number of tracks in a movie should be kept to a minimum, corresponding to the number for which media data must be presented in parallel. If media data of the same type is to be presented serially, even from multiple assets, a single track of that media type should be used. This method, -mutableTrackCompatibleWithTrack:, can help the client to identify an existing target track for an insertion.
 func (o *AVMutableMovie) MutableTrackCompatibleWithTrack(track *AVAssetTrack) *AVMutableMovieTrack {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMutableMovieSelMutableTrackCompatibleWithTrack, track.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMutableMovieTrackFromID(_ret)
 }
 
 // @method			addMutableTrackWithMediaType:copySettingsFromTrack:options: @abstract		Adds an empty track to the target movie. @param			mediaType The media type of the new track (e.g. AVMediaTypeVideo for a video track). @param			track If you wish to transfer settings from an existing track, including width, height, preferred volume, etc., pass a reference to an AVAssetTrack representing that track. Otherwise pass nil. @param			options An NSDictionary object that contains keys for specifying options for the initialization of the new AVMutableMovieTrack object. Pass nil for default initialization behavior. @result			An AVMutableMovieTrack object @discussion		The trackID of the newly added track is a property of the returned instance of AVMutableMovieTrack. This method throws an exception if media type is not equal to the track's media type, or if any option is invalid. Note that metadata will not be automatically copied.
 func (o *AVMutableMovie) AddMutableTrackWithMediaTypeCopySettingsFromTrackOptions(mediaType *foundation.NSString, track *AVAssetTrack, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVMutableMovieTrack {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMutableMovieSelAddMutableTrackWithMediaTypeCopySettingsFromTrackOptions, mediaType.Ptr(), track.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMutableMovieTrackFromID(_ret)
 }
 
 // @method			addMutableTracksCopyingSettingsFromTracks:options: @abstract		Adds one or more empty tracks to the target movie, copying track settings from the source tracks. @param			existingTracks An array of AVAssetTrack objects. @param			options An NSDictionary object that contains keys for specifying options for the initialization of the new AVMutableMovieTrack objects. Pass nil for default initialization behavior. @result			An array of AVMutableMovieTrack objects; the index of a track in this array is the same as the index of its source track in the existingTracks array. @discussion		This method creates one or more empty tracks in the target movie and configures those tracks with settings (such as track userdata and metadata, width, height, and preferred volume) copied from the source tracks in the existingTracks array. Also, properties involving pairs of tracks (such as track references) are copied from the source tracks to the target tracks. This method throws an exception if any option is invalid.
 func (o *AVMutableMovie) AddMutableTracksCopyingSettingsFromTracksOptions(existingTracks *foundation.NSArray[*AVAssetTrack], options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*AVMutableMovieTrack] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMutableMovieSelAddMutableTracksCopyingSettingsFromTracksOptions, existingTracks.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVMutableMovieTrack](_ret)
 }
 
@@ -224,4 +242,3 @@ func (o *AVMutableMovie) RemoveTrack(track *AVMovieTrack) {
 func (o *AVMutableMovie) SetMetadata(metadata *foundation.NSArray[*AVMetadataItem]) {
 	o.Ptr().Send(_aVMutableMovieSelSetMetadata, metadata.Ptr())
 }
-

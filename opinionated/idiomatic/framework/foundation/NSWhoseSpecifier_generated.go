@@ -176,7 +176,9 @@ func (x *WhoseSpecifier) SetEndSubelementIndex(endSubelementIndex int) {
 	x.inner.SetEndSubelementIndex(endSubelementIndex)
 }
 
-func (x *WhoseSpecifier) asScriptObjectSpecifier() *raw.NSScriptObjectSpecifier { return &x.inner.NSScriptObjectSpecifier }
+func (x *WhoseSpecifier) asScriptObjectSpecifier() *raw.NSScriptObjectSpecifier {
+	return &x.inner.NSScriptObjectSpecifier
+}
 
 func (x *WhoseSpecifier) asObject() *raw.NSObject { return &x.inner.NSScriptObjectSpecifier.NSObject }
 
@@ -209,4 +211,3 @@ type WhoseSpecifierable interface {
 }
 
 var _ WhoseSpecifierable = (*WhoseSpecifier)(nil)
-

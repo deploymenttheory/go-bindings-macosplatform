@@ -101,7 +101,9 @@ func (x *PolygonRenderer) WithLineDashPattern(items ...*foundation.NSNumber) *Po
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -151,9 +153,13 @@ func (x *PolygonRenderer) SetStrokeEnd(strokeEnd float64) {
 	x.inner.SetStrokeEnd(strokeEnd)
 }
 
-func (x *PolygonRenderer) asOverlayPathRenderer() *raw.MKOverlayPathRenderer { return &x.inner.MKOverlayPathRenderer }
+func (x *PolygonRenderer) asOverlayPathRenderer() *raw.MKOverlayPathRenderer {
+	return &x.inner.MKOverlayPathRenderer
+}
 
-func (x *PolygonRenderer) asOverlayRenderer() *raw.MKOverlayRenderer { return &x.inner.MKOverlayPathRenderer.MKOverlayRenderer }
+func (x *PolygonRenderer) asOverlayRenderer() *raw.MKOverlayRenderer {
+	return &x.inner.MKOverlayPathRenderer.MKOverlayRenderer
+}
 
 // PolygonRendererable is the interface implemented by [PolygonRenderer], for mocking and DI.
 type PolygonRendererable interface {
@@ -178,4 +184,3 @@ type PolygonRendererable interface {
 }
 
 var _ PolygonRendererable = (*PolygonRenderer)(nil)
-

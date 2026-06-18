@@ -17,172 +17,172 @@ type NSString struct {
 }
 
 var (
-	_clsNSString = _objcClass("NSString")
-	_nSStringSelCharacterAtIndex = objc.RegisterName("characterAtIndex:")
-	_nSStringSelInit = objc.RegisterName("init")
-	_nSStringSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSStringSelLength = objc.RegisterName("length")
-	_nSStringSelSubstringFromIndex = objc.RegisterName("substringFromIndex:")
-	_nSStringSelSubstringToIndex = objc.RegisterName("substringToIndex:")
-	_nSStringSelSubstringWithRange = objc.RegisterName("substringWithRange:")
-	_nSStringSelGetCharactersRange = objc.RegisterName("getCharacters:range:")
-	_nSStringSelCompare = objc.RegisterName("compare:")
-	_nSStringSelCompareOptions = objc.RegisterName("compare:options:")
-	_nSStringSelCompareOptionsRange = objc.RegisterName("compare:options:range:")
-	_nSStringSelCompareOptionsRangeLocale = objc.RegisterName("compare:options:range:locale:")
-	_nSStringSelCaseInsensitiveCompare = objc.RegisterName("caseInsensitiveCompare:")
-	_nSStringSelLocalizedCompare = objc.RegisterName("localizedCompare:")
-	_nSStringSelLocalizedCaseInsensitiveCompare = objc.RegisterName("localizedCaseInsensitiveCompare:")
-	_nSStringSelLocalizedStandardCompare = objc.RegisterName("localizedStandardCompare:")
-	_nSStringSelIsEqualToString = objc.RegisterName("isEqualToString:")
-	_nSStringSelHasPrefix = objc.RegisterName("hasPrefix:")
-	_nSStringSelHasSuffix = objc.RegisterName("hasSuffix:")
-	_nSStringSelCommonPrefixWithStringOptions = objc.RegisterName("commonPrefixWithString:options:")
-	_nSStringSelContainsString = objc.RegisterName("containsString:")
-	_nSStringSelLocalizedCaseInsensitiveContainsString = objc.RegisterName("localizedCaseInsensitiveContainsString:")
-	_nSStringSelLocalizedStandardContainsString = objc.RegisterName("localizedStandardContainsString:")
-	_nSStringSelLocalizedStandardRangeOfString = objc.RegisterName("localizedStandardRangeOfString:")
-	_nSStringSelRangeOfString = objc.RegisterName("rangeOfString:")
-	_nSStringSelRangeOfStringOptions = objc.RegisterName("rangeOfString:options:")
-	_nSStringSelRangeOfStringOptionsRange = objc.RegisterName("rangeOfString:options:range:")
-	_nSStringSelRangeOfStringOptionsRangeLocale = objc.RegisterName("rangeOfString:options:range:locale:")
-	_nSStringSelRangeOfCharacterFromSet = objc.RegisterName("rangeOfCharacterFromSet:")
-	_nSStringSelRangeOfCharacterFromSetOptions = objc.RegisterName("rangeOfCharacterFromSet:options:")
-	_nSStringSelRangeOfCharacterFromSetOptionsRange = objc.RegisterName("rangeOfCharacterFromSet:options:range:")
-	_nSStringSelRangeOfComposedCharacterSequenceAtIndex = objc.RegisterName("rangeOfComposedCharacterSequenceAtIndex:")
-	_nSStringSelRangeOfComposedCharacterSequencesForRange = objc.RegisterName("rangeOfComposedCharacterSequencesForRange:")
-	_nSStringSelStringByAppendingString = objc.RegisterName("stringByAppendingString:")
-	_nSStringSelStringByAppendingFormat = objc.RegisterName("stringByAppendingFormat:")
-	_nSStringSelUppercaseStringWithLocale = objc.RegisterName("uppercaseStringWithLocale:")
-	_nSStringSelLowercaseStringWithLocale = objc.RegisterName("lowercaseStringWithLocale:")
-	_nSStringSelCapitalizedStringWithLocale = objc.RegisterName("capitalizedStringWithLocale:")
-	_nSStringSelGetLineStartEndContentsEndForRange = objc.RegisterName("getLineStart:end:contentsEnd:forRange:")
-	_nSStringSelLineRangeForRange = objc.RegisterName("lineRangeForRange:")
-	_nSStringSelGetParagraphStartEndContentsEndForRange = objc.RegisterName("getParagraphStart:end:contentsEnd:forRange:")
-	_nSStringSelParagraphRangeForRange = objc.RegisterName("paragraphRangeForRange:")
-	_nSStringSelEnumerateSubstringsInRangeOptionsUsing = objc.RegisterName("enumerateSubstringsInRange:options:usingBlock:")
-	_nSStringSelEnumerateLinesUsing = objc.RegisterName("enumerateLinesUsingBlock:")
-	_nSStringSelDataUsingEncodingAllowLossyConversion = objc.RegisterName("dataUsingEncoding:allowLossyConversion:")
-	_nSStringSelDataUsingEncoding = objc.RegisterName("dataUsingEncoding:")
-	_nSStringSelCanBeConvertedToEncoding = objc.RegisterName("canBeConvertedToEncoding:")
-	_nSStringSelCStringUsingEncoding = objc.RegisterName("cStringUsingEncoding:")
-	_nSStringSelGetCStringMaxLengthEncoding = objc.RegisterName("getCString:maxLength:encoding:")
-	_nSStringSelGetBytesMaxLengthUsedLengthEncodingOptionsRangeRemainingRange = objc.RegisterName("getBytes:maxLength:usedLength:encoding:options:range:remainingRange:")
-	_nSStringSelMaximumLengthOfBytesUsingEncoding = objc.RegisterName("maximumLengthOfBytesUsingEncoding:")
-	_nSStringSelLengthOfBytesUsingEncoding = objc.RegisterName("lengthOfBytesUsingEncoding:")
-	_nSStringSelLocalizedNameOfStringEncoding = objc.RegisterName("localizedNameOfStringEncoding:")
-	_nSStringSelComponentsSeparatedByString = objc.RegisterName("componentsSeparatedByString:")
-	_nSStringSelComponentsSeparatedByCharactersInSet = objc.RegisterName("componentsSeparatedByCharactersInSet:")
-	_nSStringSelStringByTrimmingCharactersInSet = objc.RegisterName("stringByTrimmingCharactersInSet:")
-	_nSStringSelStringByPaddingToLengthWithStringStartingAtIndex = objc.RegisterName("stringByPaddingToLength:withString:startingAtIndex:")
-	_nSStringSelStringByFoldingWithOptionsLocale = objc.RegisterName("stringByFoldingWithOptions:locale:")
-	_nSStringSelStringByReplacingOccurrencesOfStringWithStringOptionsRange = objc.RegisterName("stringByReplacingOccurrencesOfString:withString:options:range:")
-	_nSStringSelStringByReplacingOccurrencesOfStringWithString = objc.RegisterName("stringByReplacingOccurrencesOfString:withString:")
-	_nSStringSelStringByReplacingCharactersInRangeWithString = objc.RegisterName("stringByReplacingCharactersInRange:withString:")
-	_nSStringSelStringByApplyingTransformReverse = objc.RegisterName("stringByApplyingTransform:reverse:")
-	_nSStringSelWriteToURLAtomicallyEncodingError = objc.RegisterName("writeToURL:atomically:encoding:error:")
-	_nSStringSelWriteToFileAtomicallyEncodingError = objc.RegisterName("writeToFile:atomically:encoding:error:")
-	_nSStringSelInitWithCharactersNoCopyLengthFreeWhenDone = objc.RegisterName("initWithCharactersNoCopy:length:freeWhenDone:")
-	_nSStringSelInitWithCharactersNoCopyLengthDeallocator = objc.RegisterName("initWithCharactersNoCopy:length:deallocator:")
-	_nSStringSelInitWithCharactersLength = objc.RegisterName("initWithCharacters:length:")
-	_nSStringSelInitWithUTF8String = objc.RegisterName("initWithUTF8String:")
-	_nSStringSelInitWithString = objc.RegisterName("initWithString:")
-	_nSStringSelInitWithFormat = objc.RegisterName("initWithFormat:")
-	_nSStringSelInitWithFormatArguments = objc.RegisterName("initWithFormat:arguments:")
-	_nSStringSelInitWithFormatLocale = objc.RegisterName("initWithFormat:locale:")
-	_nSStringSelInitWithFormatLocaleArguments = objc.RegisterName("initWithFormat:locale:arguments:")
-	_nSStringSelInitWithValidatedFormatValidFormatSpecifiersError = objc.RegisterName("initWithValidatedFormat:validFormatSpecifiers:error:")
-	_nSStringSelInitWithValidatedFormatValidFormatSpecifiersLocaleError = objc.RegisterName("initWithValidatedFormat:validFormatSpecifiers:locale:error:")
-	_nSStringSelInitWithValidatedFormatValidFormatSpecifiersArgumentsError = objc.RegisterName("initWithValidatedFormat:validFormatSpecifiers:arguments:error:")
-	_nSStringSelInitWithValidatedFormatValidFormatSpecifiersLocaleArgumentsError = objc.RegisterName("initWithValidatedFormat:validFormatSpecifiers:locale:arguments:error:")
-	_nSStringSelInitWithDataEncoding = objc.RegisterName("initWithData:encoding:")
-	_nSStringSelInitWithBytesLengthEncoding = objc.RegisterName("initWithBytes:length:encoding:")
-	_nSStringSelInitWithBytesNoCopyLengthEncodingFreeWhenDone = objc.RegisterName("initWithBytesNoCopy:length:encoding:freeWhenDone:")
-	_nSStringSelInitWithBytesNoCopyLengthEncodingDeallocator = objc.RegisterName("initWithBytesNoCopy:length:encoding:deallocator:")
-	_nSStringSelString = objc.RegisterName("string")
-	_nSStringSelStringWithString = objc.RegisterName("stringWithString:")
-	_nSStringSelStringWithCharactersLength = objc.RegisterName("stringWithCharacters:length:")
-	_nSStringSelStringWithUTF8String = objc.RegisterName("stringWithUTF8String:")
-	_nSStringSelStringWithFormat = objc.RegisterName("stringWithFormat:")
-	_nSStringSelLocalizedStringWithFormat = objc.RegisterName("localizedStringWithFormat:")
-	_nSStringSelStringWithValidatedFormatValidFormatSpecifiersError = objc.RegisterName("stringWithValidatedFormat:validFormatSpecifiers:error:")
-	_nSStringSelLocalizedStringWithValidatedFormatValidFormatSpecifiersError = objc.RegisterName("localizedStringWithValidatedFormat:validFormatSpecifiers:error:")
-	_nSStringSelInitWithCStringEncoding = objc.RegisterName("initWithCString:encoding:")
-	_nSStringSelStringWithCStringEncoding = objc.RegisterName("stringWithCString:encoding:")
-	_nSStringSelInitWithContentsOfURLEncodingError = objc.RegisterName("initWithContentsOfURL:encoding:error:")
-	_nSStringSelInitWithContentsOfFileEncodingError = objc.RegisterName("initWithContentsOfFile:encoding:error:")
-	_nSStringSelStringWithContentsOfURLEncodingError = objc.RegisterName("stringWithContentsOfURL:encoding:error:")
-	_nSStringSelStringWithContentsOfFileEncodingError = objc.RegisterName("stringWithContentsOfFile:encoding:error:")
-	_nSStringSelInitWithContentsOfURLUsedEncodingError = objc.RegisterName("initWithContentsOfURL:usedEncoding:error:")
-	_nSStringSelInitWithContentsOfFileUsedEncodingError = objc.RegisterName("initWithContentsOfFile:usedEncoding:error:")
-	_nSStringSelStringWithContentsOfURLUsedEncodingError = objc.RegisterName("stringWithContentsOfURL:usedEncoding:error:")
-	_nSStringSelStringWithContentsOfFileUsedEncodingError = objc.RegisterName("stringWithContentsOfFile:usedEncoding:error:")
-	_nSStringSelDoubleValue = objc.RegisterName("doubleValue")
-	_nSStringSelFloatValue = objc.RegisterName("floatValue")
-	_nSStringSelIntValue = objc.RegisterName("intValue")
-	_nSStringSelIntegerValue = objc.RegisterName("integerValue")
-	_nSStringSelLongLongValue = objc.RegisterName("longLongValue")
-	_nSStringSelBoolValue = objc.RegisterName("boolValue")
-	_nSStringSelUppercaseString = objc.RegisterName("uppercaseString")
-	_nSStringSelLowercaseString = objc.RegisterName("lowercaseString")
-	_nSStringSelCapitalizedString = objc.RegisterName("capitalizedString")
-	_nSStringSelLocalizedUppercaseString = objc.RegisterName("localizedUppercaseString")
-	_nSStringSelLocalizedLowercaseString = objc.RegisterName("localizedLowercaseString")
-	_nSStringSelLocalizedCapitalizedString = objc.RegisterName("localizedCapitalizedString")
-	_nSStringSelUTF8String = objc.RegisterName("UTF8String")
-	_nSStringSelFastestEncoding = objc.RegisterName("fastestEncoding")
-	_nSStringSelSmallestEncoding = objc.RegisterName("smallestEncoding")
-	_nSStringSelAvailableStringEncodings = objc.RegisterName("availableStringEncodings")
-	_nSStringSelDefaultCStringEncoding = objc.RegisterName("defaultCStringEncoding")
-	_nSStringSelDecomposedStringWithCanonicalMapping = objc.RegisterName("decomposedStringWithCanonicalMapping")
-	_nSStringSelPrecomposedStringWithCanonicalMapping = objc.RegisterName("precomposedStringWithCanonicalMapping")
-	_nSStringSelDecomposedStringWithCompatibilityMapping = objc.RegisterName("decomposedStringWithCompatibilityMapping")
-	_nSStringSelPrecomposedStringWithCompatibilityMapping = objc.RegisterName("precomposedStringWithCompatibilityMapping")
+	_clsNSString                                                                       = _objcClass("NSString")
+	_nSStringSelCharacterAtIndex                                                       = objc.RegisterName("characterAtIndex:")
+	_nSStringSelInit                                                                   = objc.RegisterName("init")
+	_nSStringSelInitWithCoder                                                          = objc.RegisterName("initWithCoder:")
+	_nSStringSelLength                                                                 = objc.RegisterName("length")
+	_nSStringSelSubstringFromIndex                                                     = objc.RegisterName("substringFromIndex:")
+	_nSStringSelSubstringToIndex                                                       = objc.RegisterName("substringToIndex:")
+	_nSStringSelSubstringWithRange                                                     = objc.RegisterName("substringWithRange:")
+	_nSStringSelGetCharactersRange                                                     = objc.RegisterName("getCharacters:range:")
+	_nSStringSelCompare                                                                = objc.RegisterName("compare:")
+	_nSStringSelCompareOptions                                                         = objc.RegisterName("compare:options:")
+	_nSStringSelCompareOptionsRange                                                    = objc.RegisterName("compare:options:range:")
+	_nSStringSelCompareOptionsRangeLocale                                              = objc.RegisterName("compare:options:range:locale:")
+	_nSStringSelCaseInsensitiveCompare                                                 = objc.RegisterName("caseInsensitiveCompare:")
+	_nSStringSelLocalizedCompare                                                       = objc.RegisterName("localizedCompare:")
+	_nSStringSelLocalizedCaseInsensitiveCompare                                        = objc.RegisterName("localizedCaseInsensitiveCompare:")
+	_nSStringSelLocalizedStandardCompare                                               = objc.RegisterName("localizedStandardCompare:")
+	_nSStringSelIsEqualToString                                                        = objc.RegisterName("isEqualToString:")
+	_nSStringSelHasPrefix                                                              = objc.RegisterName("hasPrefix:")
+	_nSStringSelHasSuffix                                                              = objc.RegisterName("hasSuffix:")
+	_nSStringSelCommonPrefixWithStringOptions                                          = objc.RegisterName("commonPrefixWithString:options:")
+	_nSStringSelContainsString                                                         = objc.RegisterName("containsString:")
+	_nSStringSelLocalizedCaseInsensitiveContainsString                                 = objc.RegisterName("localizedCaseInsensitiveContainsString:")
+	_nSStringSelLocalizedStandardContainsString                                        = objc.RegisterName("localizedStandardContainsString:")
+	_nSStringSelLocalizedStandardRangeOfString                                         = objc.RegisterName("localizedStandardRangeOfString:")
+	_nSStringSelRangeOfString                                                          = objc.RegisterName("rangeOfString:")
+	_nSStringSelRangeOfStringOptions                                                   = objc.RegisterName("rangeOfString:options:")
+	_nSStringSelRangeOfStringOptionsRange                                              = objc.RegisterName("rangeOfString:options:range:")
+	_nSStringSelRangeOfStringOptionsRangeLocale                                        = objc.RegisterName("rangeOfString:options:range:locale:")
+	_nSStringSelRangeOfCharacterFromSet                                                = objc.RegisterName("rangeOfCharacterFromSet:")
+	_nSStringSelRangeOfCharacterFromSetOptions                                         = objc.RegisterName("rangeOfCharacterFromSet:options:")
+	_nSStringSelRangeOfCharacterFromSetOptionsRange                                    = objc.RegisterName("rangeOfCharacterFromSet:options:range:")
+	_nSStringSelRangeOfComposedCharacterSequenceAtIndex                                = objc.RegisterName("rangeOfComposedCharacterSequenceAtIndex:")
+	_nSStringSelRangeOfComposedCharacterSequencesForRange                              = objc.RegisterName("rangeOfComposedCharacterSequencesForRange:")
+	_nSStringSelStringByAppendingString                                                = objc.RegisterName("stringByAppendingString:")
+	_nSStringSelStringByAppendingFormat                                                = objc.RegisterName("stringByAppendingFormat:")
+	_nSStringSelUppercaseStringWithLocale                                              = objc.RegisterName("uppercaseStringWithLocale:")
+	_nSStringSelLowercaseStringWithLocale                                              = objc.RegisterName("lowercaseStringWithLocale:")
+	_nSStringSelCapitalizedStringWithLocale                                            = objc.RegisterName("capitalizedStringWithLocale:")
+	_nSStringSelGetLineStartEndContentsEndForRange                                     = objc.RegisterName("getLineStart:end:contentsEnd:forRange:")
+	_nSStringSelLineRangeForRange                                                      = objc.RegisterName("lineRangeForRange:")
+	_nSStringSelGetParagraphStartEndContentsEndForRange                                = objc.RegisterName("getParagraphStart:end:contentsEnd:forRange:")
+	_nSStringSelParagraphRangeForRange                                                 = objc.RegisterName("paragraphRangeForRange:")
+	_nSStringSelEnumerateSubstringsInRangeOptionsUsing                                 = objc.RegisterName("enumerateSubstringsInRange:options:usingBlock:")
+	_nSStringSelEnumerateLinesUsing                                                    = objc.RegisterName("enumerateLinesUsingBlock:")
+	_nSStringSelDataUsingEncodingAllowLossyConversion                                  = objc.RegisterName("dataUsingEncoding:allowLossyConversion:")
+	_nSStringSelDataUsingEncoding                                                      = objc.RegisterName("dataUsingEncoding:")
+	_nSStringSelCanBeConvertedToEncoding                                               = objc.RegisterName("canBeConvertedToEncoding:")
+	_nSStringSelCStringUsingEncoding                                                   = objc.RegisterName("cStringUsingEncoding:")
+	_nSStringSelGetCStringMaxLengthEncoding                                            = objc.RegisterName("getCString:maxLength:encoding:")
+	_nSStringSelGetBytesMaxLengthUsedLengthEncodingOptionsRangeRemainingRange          = objc.RegisterName("getBytes:maxLength:usedLength:encoding:options:range:remainingRange:")
+	_nSStringSelMaximumLengthOfBytesUsingEncoding                                      = objc.RegisterName("maximumLengthOfBytesUsingEncoding:")
+	_nSStringSelLengthOfBytesUsingEncoding                                             = objc.RegisterName("lengthOfBytesUsingEncoding:")
+	_nSStringSelLocalizedNameOfStringEncoding                                          = objc.RegisterName("localizedNameOfStringEncoding:")
+	_nSStringSelComponentsSeparatedByString                                            = objc.RegisterName("componentsSeparatedByString:")
+	_nSStringSelComponentsSeparatedByCharactersInSet                                   = objc.RegisterName("componentsSeparatedByCharactersInSet:")
+	_nSStringSelStringByTrimmingCharactersInSet                                        = objc.RegisterName("stringByTrimmingCharactersInSet:")
+	_nSStringSelStringByPaddingToLengthWithStringStartingAtIndex                       = objc.RegisterName("stringByPaddingToLength:withString:startingAtIndex:")
+	_nSStringSelStringByFoldingWithOptionsLocale                                       = objc.RegisterName("stringByFoldingWithOptions:locale:")
+	_nSStringSelStringByReplacingOccurrencesOfStringWithStringOptionsRange             = objc.RegisterName("stringByReplacingOccurrencesOfString:withString:options:range:")
+	_nSStringSelStringByReplacingOccurrencesOfStringWithString                         = objc.RegisterName("stringByReplacingOccurrencesOfString:withString:")
+	_nSStringSelStringByReplacingCharactersInRangeWithString                           = objc.RegisterName("stringByReplacingCharactersInRange:withString:")
+	_nSStringSelStringByApplyingTransformReverse                                       = objc.RegisterName("stringByApplyingTransform:reverse:")
+	_nSStringSelWriteToURLAtomicallyEncodingError                                      = objc.RegisterName("writeToURL:atomically:encoding:error:")
+	_nSStringSelWriteToFileAtomicallyEncodingError                                     = objc.RegisterName("writeToFile:atomically:encoding:error:")
+	_nSStringSelInitWithCharactersNoCopyLengthFreeWhenDone                             = objc.RegisterName("initWithCharactersNoCopy:length:freeWhenDone:")
+	_nSStringSelInitWithCharactersNoCopyLengthDeallocator                              = objc.RegisterName("initWithCharactersNoCopy:length:deallocator:")
+	_nSStringSelInitWithCharactersLength                                               = objc.RegisterName("initWithCharacters:length:")
+	_nSStringSelInitWithUTF8String                                                     = objc.RegisterName("initWithUTF8String:")
+	_nSStringSelInitWithString                                                         = objc.RegisterName("initWithString:")
+	_nSStringSelInitWithFormat                                                         = objc.RegisterName("initWithFormat:")
+	_nSStringSelInitWithFormatArguments                                                = objc.RegisterName("initWithFormat:arguments:")
+	_nSStringSelInitWithFormatLocale                                                   = objc.RegisterName("initWithFormat:locale:")
+	_nSStringSelInitWithFormatLocaleArguments                                          = objc.RegisterName("initWithFormat:locale:arguments:")
+	_nSStringSelInitWithValidatedFormatValidFormatSpecifiersError                      = objc.RegisterName("initWithValidatedFormat:validFormatSpecifiers:error:")
+	_nSStringSelInitWithValidatedFormatValidFormatSpecifiersLocaleError                = objc.RegisterName("initWithValidatedFormat:validFormatSpecifiers:locale:error:")
+	_nSStringSelInitWithValidatedFormatValidFormatSpecifiersArgumentsError             = objc.RegisterName("initWithValidatedFormat:validFormatSpecifiers:arguments:error:")
+	_nSStringSelInitWithValidatedFormatValidFormatSpecifiersLocaleArgumentsError       = objc.RegisterName("initWithValidatedFormat:validFormatSpecifiers:locale:arguments:error:")
+	_nSStringSelInitWithDataEncoding                                                   = objc.RegisterName("initWithData:encoding:")
+	_nSStringSelInitWithBytesLengthEncoding                                            = objc.RegisterName("initWithBytes:length:encoding:")
+	_nSStringSelInitWithBytesNoCopyLengthEncodingFreeWhenDone                          = objc.RegisterName("initWithBytesNoCopy:length:encoding:freeWhenDone:")
+	_nSStringSelInitWithBytesNoCopyLengthEncodingDeallocator                           = objc.RegisterName("initWithBytesNoCopy:length:encoding:deallocator:")
+	_nSStringSelString                                                                 = objc.RegisterName("string")
+	_nSStringSelStringWithString                                                       = objc.RegisterName("stringWithString:")
+	_nSStringSelStringWithCharactersLength                                             = objc.RegisterName("stringWithCharacters:length:")
+	_nSStringSelStringWithUTF8String                                                   = objc.RegisterName("stringWithUTF8String:")
+	_nSStringSelStringWithFormat                                                       = objc.RegisterName("stringWithFormat:")
+	_nSStringSelLocalizedStringWithFormat                                              = objc.RegisterName("localizedStringWithFormat:")
+	_nSStringSelStringWithValidatedFormatValidFormatSpecifiersError                    = objc.RegisterName("stringWithValidatedFormat:validFormatSpecifiers:error:")
+	_nSStringSelLocalizedStringWithValidatedFormatValidFormatSpecifiersError           = objc.RegisterName("localizedStringWithValidatedFormat:validFormatSpecifiers:error:")
+	_nSStringSelInitWithCStringEncoding                                                = objc.RegisterName("initWithCString:encoding:")
+	_nSStringSelStringWithCStringEncoding                                              = objc.RegisterName("stringWithCString:encoding:")
+	_nSStringSelInitWithContentsOfURLEncodingError                                     = objc.RegisterName("initWithContentsOfURL:encoding:error:")
+	_nSStringSelInitWithContentsOfFileEncodingError                                    = objc.RegisterName("initWithContentsOfFile:encoding:error:")
+	_nSStringSelStringWithContentsOfURLEncodingError                                   = objc.RegisterName("stringWithContentsOfURL:encoding:error:")
+	_nSStringSelStringWithContentsOfFileEncodingError                                  = objc.RegisterName("stringWithContentsOfFile:encoding:error:")
+	_nSStringSelInitWithContentsOfURLUsedEncodingError                                 = objc.RegisterName("initWithContentsOfURL:usedEncoding:error:")
+	_nSStringSelInitWithContentsOfFileUsedEncodingError                                = objc.RegisterName("initWithContentsOfFile:usedEncoding:error:")
+	_nSStringSelStringWithContentsOfURLUsedEncodingError                               = objc.RegisterName("stringWithContentsOfURL:usedEncoding:error:")
+	_nSStringSelStringWithContentsOfFileUsedEncodingError                              = objc.RegisterName("stringWithContentsOfFile:usedEncoding:error:")
+	_nSStringSelDoubleValue                                                            = objc.RegisterName("doubleValue")
+	_nSStringSelFloatValue                                                             = objc.RegisterName("floatValue")
+	_nSStringSelIntValue                                                               = objc.RegisterName("intValue")
+	_nSStringSelIntegerValue                                                           = objc.RegisterName("integerValue")
+	_nSStringSelLongLongValue                                                          = objc.RegisterName("longLongValue")
+	_nSStringSelBoolValue                                                              = objc.RegisterName("boolValue")
+	_nSStringSelUppercaseString                                                        = objc.RegisterName("uppercaseString")
+	_nSStringSelLowercaseString                                                        = objc.RegisterName("lowercaseString")
+	_nSStringSelCapitalizedString                                                      = objc.RegisterName("capitalizedString")
+	_nSStringSelLocalizedUppercaseString                                               = objc.RegisterName("localizedUppercaseString")
+	_nSStringSelLocalizedLowercaseString                                               = objc.RegisterName("localizedLowercaseString")
+	_nSStringSelLocalizedCapitalizedString                                             = objc.RegisterName("localizedCapitalizedString")
+	_nSStringSelUTF8String                                                             = objc.RegisterName("UTF8String")
+	_nSStringSelFastestEncoding                                                        = objc.RegisterName("fastestEncoding")
+	_nSStringSelSmallestEncoding                                                       = objc.RegisterName("smallestEncoding")
+	_nSStringSelAvailableStringEncodings                                               = objc.RegisterName("availableStringEncodings")
+	_nSStringSelDefaultCStringEncoding                                                 = objc.RegisterName("defaultCStringEncoding")
+	_nSStringSelDecomposedStringWithCanonicalMapping                                   = objc.RegisterName("decomposedStringWithCanonicalMapping")
+	_nSStringSelPrecomposedStringWithCanonicalMapping                                  = objc.RegisterName("precomposedStringWithCanonicalMapping")
+	_nSStringSelDecomposedStringWithCompatibilityMapping                               = objc.RegisterName("decomposedStringWithCompatibilityMapping")
+	_nSStringSelPrecomposedStringWithCompatibilityMapping                              = objc.RegisterName("precomposedStringWithCompatibilityMapping")
 	_nSStringSelStringEncodingForDataEncodingOptionsConvertedStringUsedLossyConversion = objc.RegisterName("stringEncodingForData:encodingOptions:convertedString:usedLossyConversion:")
-	_nSStringSelPropertyList = objc.RegisterName("propertyList")
-	_nSStringSelPropertyListFromStringsFileFormat = objc.RegisterName("propertyListFromStringsFileFormat")
-	_nSStringSelCString = objc.RegisterName("cString")
-	_nSStringSelLossyCString = objc.RegisterName("lossyCString")
-	_nSStringSelCStringLength = objc.RegisterName("cStringLength")
-	_nSStringSelGetCString = objc.RegisterName("getCString:")
-	_nSStringSelGetCStringMaxLength = objc.RegisterName("getCString:maxLength:")
-	_nSStringSelGetCStringMaxLengthRangeRemainingRange = objc.RegisterName("getCString:maxLength:range:remainingRange:")
-	_nSStringSelWriteToFileAtomically = objc.RegisterName("writeToFile:atomically:")
-	_nSStringSelWriteToURLAtomically = objc.RegisterName("writeToURL:atomically:")
-	_nSStringSelInitWithContentsOfFile = objc.RegisterName("initWithContentsOfFile:")
-	_nSStringSelInitWithContentsOfURL = objc.RegisterName("initWithContentsOfURL:")
-	_nSStringSelStringWithContentsOfFile = objc.RegisterName("stringWithContentsOfFile:")
-	_nSStringSelStringWithContentsOfURL = objc.RegisterName("stringWithContentsOfURL:")
-	_nSStringSelInitWithCStringNoCopyLengthFreeWhenDone = objc.RegisterName("initWithCStringNoCopy:length:freeWhenDone:")
-	_nSStringSelInitWithCStringLength = objc.RegisterName("initWithCString:length:")
-	_nSStringSelInitWithCString = objc.RegisterName("initWithCString:")
-	_nSStringSelStringWithCStringLength = objc.RegisterName("stringWithCString:length:")
-	_nSStringSelStringWithCString = objc.RegisterName("stringWithCString:")
-	_nSStringSelGetCharacters = objc.RegisterName("getCharacters:")
-	_nSStringSelVariantFittingPresentationWidth = objc.RegisterName("variantFittingPresentationWidth:")
-	_nSStringSelPathWithComponents = objc.RegisterName("pathWithComponents:")
-	_nSStringSelStringByAppendingPathComponent = objc.RegisterName("stringByAppendingPathComponent:")
-	_nSStringSelStringByAppendingPathExtension = objc.RegisterName("stringByAppendingPathExtension:")
-	_nSStringSelStringsByAppendingPaths = objc.RegisterName("stringsByAppendingPaths:")
-	_nSStringSelCompletePathIntoStringCaseSensitiveMatchesIntoArrayFilterTypes = objc.RegisterName("completePathIntoString:caseSensitive:matchesIntoArray:filterTypes:")
-	_nSStringSelGetFileSystemRepresentationMaxLength = objc.RegisterName("getFileSystemRepresentation:maxLength:")
-	_nSStringSelPathComponents = objc.RegisterName("pathComponents")
-	_nSStringSelIsAbsolutePath = objc.RegisterName("isAbsolutePath")
-	_nSStringSelLastPathComponent = objc.RegisterName("lastPathComponent")
-	_nSStringSelStringByDeletingLastPathComponent = objc.RegisterName("stringByDeletingLastPathComponent")
-	_nSStringSelPathExtension = objc.RegisterName("pathExtension")
-	_nSStringSelStringByDeletingPathExtension = objc.RegisterName("stringByDeletingPathExtension")
-	_nSStringSelStringByAbbreviatingWithTildeInPath = objc.RegisterName("stringByAbbreviatingWithTildeInPath")
-	_nSStringSelStringByExpandingTildeInPath = objc.RegisterName("stringByExpandingTildeInPath")
-	_nSStringSelStringByStandardizingPath = objc.RegisterName("stringByStandardizingPath")
-	_nSStringSelStringByResolvingSymlinksInPath = objc.RegisterName("stringByResolvingSymlinksInPath")
-	_nSStringSelFileSystemRepresentation = objc.RegisterName("fileSystemRepresentation")
-	_nSStringSelStringByAddingPercentEncodingWithAllowedCharacters = objc.RegisterName("stringByAddingPercentEncodingWithAllowedCharacters:")
-	_nSStringSelStringByAddingPercentEscapesUsingEncoding = objc.RegisterName("stringByAddingPercentEscapesUsingEncoding:")
-	_nSStringSelStringByReplacingPercentEscapesUsingEncoding = objc.RegisterName("stringByReplacingPercentEscapesUsingEncoding:")
-	_nSStringSelStringByRemovingPercentEncoding = objc.RegisterName("stringByRemovingPercentEncoding")
-	_nSStringSelLinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges = objc.RegisterName("linguisticTagsInRange:scheme:options:orthography:tokenRanges:")
-	_nSStringSelEnumerateLinguisticTagsInRangeSchemeOptionsOrthographyUsing = objc.RegisterName("enumerateLinguisticTagsInRange:scheme:options:orthography:usingBlock:")
+	_nSStringSelPropertyList                                                           = objc.RegisterName("propertyList")
+	_nSStringSelPropertyListFromStringsFileFormat                                      = objc.RegisterName("propertyListFromStringsFileFormat")
+	_nSStringSelCString                                                                = objc.RegisterName("cString")
+	_nSStringSelLossyCString                                                           = objc.RegisterName("lossyCString")
+	_nSStringSelCStringLength                                                          = objc.RegisterName("cStringLength")
+	_nSStringSelGetCString                                                             = objc.RegisterName("getCString:")
+	_nSStringSelGetCStringMaxLength                                                    = objc.RegisterName("getCString:maxLength:")
+	_nSStringSelGetCStringMaxLengthRangeRemainingRange                                 = objc.RegisterName("getCString:maxLength:range:remainingRange:")
+	_nSStringSelWriteToFileAtomically                                                  = objc.RegisterName("writeToFile:atomically:")
+	_nSStringSelWriteToURLAtomically                                                   = objc.RegisterName("writeToURL:atomically:")
+	_nSStringSelInitWithContentsOfFile                                                 = objc.RegisterName("initWithContentsOfFile:")
+	_nSStringSelInitWithContentsOfURL                                                  = objc.RegisterName("initWithContentsOfURL:")
+	_nSStringSelStringWithContentsOfFile                                               = objc.RegisterName("stringWithContentsOfFile:")
+	_nSStringSelStringWithContentsOfURL                                                = objc.RegisterName("stringWithContentsOfURL:")
+	_nSStringSelInitWithCStringNoCopyLengthFreeWhenDone                                = objc.RegisterName("initWithCStringNoCopy:length:freeWhenDone:")
+	_nSStringSelInitWithCStringLength                                                  = objc.RegisterName("initWithCString:length:")
+	_nSStringSelInitWithCString                                                        = objc.RegisterName("initWithCString:")
+	_nSStringSelStringWithCStringLength                                                = objc.RegisterName("stringWithCString:length:")
+	_nSStringSelStringWithCString                                                      = objc.RegisterName("stringWithCString:")
+	_nSStringSelGetCharacters                                                          = objc.RegisterName("getCharacters:")
+	_nSStringSelVariantFittingPresentationWidth                                        = objc.RegisterName("variantFittingPresentationWidth:")
+	_nSStringSelPathWithComponents                                                     = objc.RegisterName("pathWithComponents:")
+	_nSStringSelStringByAppendingPathComponent                                         = objc.RegisterName("stringByAppendingPathComponent:")
+	_nSStringSelStringByAppendingPathExtension                                         = objc.RegisterName("stringByAppendingPathExtension:")
+	_nSStringSelStringsByAppendingPaths                                                = objc.RegisterName("stringsByAppendingPaths:")
+	_nSStringSelCompletePathIntoStringCaseSensitiveMatchesIntoArrayFilterTypes         = objc.RegisterName("completePathIntoString:caseSensitive:matchesIntoArray:filterTypes:")
+	_nSStringSelGetFileSystemRepresentationMaxLength                                   = objc.RegisterName("getFileSystemRepresentation:maxLength:")
+	_nSStringSelPathComponents                                                         = objc.RegisterName("pathComponents")
+	_nSStringSelIsAbsolutePath                                                         = objc.RegisterName("isAbsolutePath")
+	_nSStringSelLastPathComponent                                                      = objc.RegisterName("lastPathComponent")
+	_nSStringSelStringByDeletingLastPathComponent                                      = objc.RegisterName("stringByDeletingLastPathComponent")
+	_nSStringSelPathExtension                                                          = objc.RegisterName("pathExtension")
+	_nSStringSelStringByDeletingPathExtension                                          = objc.RegisterName("stringByDeletingPathExtension")
+	_nSStringSelStringByAbbreviatingWithTildeInPath                                    = objc.RegisterName("stringByAbbreviatingWithTildeInPath")
+	_nSStringSelStringByExpandingTildeInPath                                           = objc.RegisterName("stringByExpandingTildeInPath")
+	_nSStringSelStringByStandardizingPath                                              = objc.RegisterName("stringByStandardizingPath")
+	_nSStringSelStringByResolvingSymlinksInPath                                        = objc.RegisterName("stringByResolvingSymlinksInPath")
+	_nSStringSelFileSystemRepresentation                                               = objc.RegisterName("fileSystemRepresentation")
+	_nSStringSelStringByAddingPercentEncodingWithAllowedCharacters                     = objc.RegisterName("stringByAddingPercentEncodingWithAllowedCharacters:")
+	_nSStringSelStringByAddingPercentEscapesUsingEncoding                              = objc.RegisterName("stringByAddingPercentEscapesUsingEncoding:")
+	_nSStringSelStringByReplacingPercentEscapesUsingEncoding                           = objc.RegisterName("stringByReplacingPercentEscapesUsingEncoding:")
+	_nSStringSelStringByRemovingPercentEncoding                                        = objc.RegisterName("stringByRemovingPercentEncoding")
+	_nSStringSelLinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges               = objc.RegisterName("linguisticTagsInRange:scheme:options:orthography:tokenRanges:")
+	_nSStringSelEnumerateLinguisticTagsInRangeSchemeOptionsOrthographyUsing            = objc.RegisterName("enumerateLinguisticTagsInRange:scheme:options:orthography:usingBlock:")
 )
 
 func NSStringFromID(id objc.ID) *NSString {
@@ -202,13 +202,17 @@ func (o *NSString) CharacterAtIndex(index uint) uint16 {
 
 func (o *NSString) Init() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) InitWithCoder(coder *NSCoder) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -219,19 +223,25 @@ func (o *NSString) Length() uint {
 
 func (o *NSString) SubstringFromIndex(from uint) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelSubstringFromIndex, from)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) SubstringToIndex(to uint) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelSubstringToIndex, to)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) SubstringWithRange(range_ NSRange) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelSubstringWithRange, range_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -296,7 +306,9 @@ func (o *NSString) HasSuffix(str *NSString) bool {
 
 func (o *NSString) CommonPrefixWithStringOptions(str *NSString, mask NSStringCompareOptions) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelCommonPrefixWithStringOptions, str.Ptr(), mask)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -367,31 +379,41 @@ func (o *NSString) RangeOfComposedCharacterSequencesForRange(range_ NSRange) NSR
 
 func (o *NSString) StringByAppendingString(aString *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByAppendingString, aString.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) StringByAppendingFormat(format *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByAppendingFormat, format.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) UppercaseStringWithLocale(locale *NSLocale) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelUppercaseStringWithLocale, locale.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) LowercaseStringWithLocale(locale *NSLocale) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelLowercaseStringWithLocale, locale.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) CapitalizedStringWithLocale(locale *NSLocale) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelCapitalizedStringWithLocale, locale.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -433,13 +455,17 @@ func (o *NSString) EnumerateLinesUsing(block func(*NSString, *bool)) {
 
 func (o *NSString) DataUsingEncodingAllowLossyConversion(encoding uint, lossy bool) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelDataUsingEncodingAllowLossyConversion, encoding, lossy)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
 func (o *NSString) DataUsingEncoding(encoding uint) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelDataUsingEncoding, encoding)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
@@ -475,61 +501,81 @@ func (o *NSString) LengthOfBytesUsingEncoding(enc uint) uint {
 
 func NSStringLocalizedNameOfStringEncoding(encoding uint) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelLocalizedNameOfStringEncoding, encoding)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) ComponentsSeparatedByString(separator *NSString) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelComponentsSeparatedByString, separator.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSString) ComponentsSeparatedByCharactersInSet(separator *NSCharacterSet) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelComponentsSeparatedByCharactersInSet, separator.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSString) StringByTrimmingCharactersInSet(set *NSCharacterSet) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByTrimmingCharactersInSet, set.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) StringByPaddingToLengthWithStringStartingAtIndex(newLength uint, padString *NSString, padIndex uint) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByPaddingToLengthWithStringStartingAtIndex, newLength, padString.Ptr(), padIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) StringByFoldingWithOptionsLocale(options NSStringCompareOptions, locale *NSLocale) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByFoldingWithOptionsLocale, options, locale.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) StringByReplacingOccurrencesOfStringWithStringOptionsRange(target *NSString, replacement *NSString, options NSStringCompareOptions, searchRange NSRange) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByReplacingOccurrencesOfStringWithStringOptionsRange, target.Ptr(), replacement.Ptr(), options, searchRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) StringByReplacingOccurrencesOfStringWithString(target *NSString, replacement *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByReplacingOccurrencesOfStringWithString, target.Ptr(), replacement.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) StringByReplacingCharactersInRangeWithString(range_ NSRange, replacement *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByReplacingCharactersInRangeWithString, range_, replacement.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) StringByApplyingTransformReverse(transform *NSString, reverse bool) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByApplyingTransformReverse, transform.Ptr(), reverse)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -553,7 +599,9 @@ func (o *NSString) WriteToFileAtomicallyEncodingError(path *NSString, useAuxilia
 
 func (o *NSString) InitWithCharactersNoCopyLengthFreeWhenDone(characters *uint16, length uint, freeBuffer bool) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithCharactersNoCopyLengthFreeWhenDone, characters, length, freeBuffer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -566,56 +614,74 @@ func (o *NSString) InitWithCharactersNoCopyLengthDeallocator(chars *uint16, len_
 		defer __block_deallocator.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithCharactersNoCopyLengthDeallocator, chars, len_, __block_deallocator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) InitWithCharactersLength(characters *uint16, length uint) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithCharactersLength, characters, length)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) InitWithUTF8String(nullTerminatedCString string) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithUTF8String, nullTerminatedCString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) InitWithString(aString *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithString, aString.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) InitWithFormat(format *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithFormat, format.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) InitWithFormatArguments(format *NSString, argList string) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithFormatArguments, format.Ptr(), argList)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) InitWithFormatLocale(format *NSString, locale objc.ID) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithFormatLocale, format.Ptr(), locale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) InitWithFormatLocaleArguments(format *NSString, locale objc.ID, argList string) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithFormatLocaleArguments, format.Ptr(), locale, argList)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) InitWithValidatedFormatValidFormatSpecifiersError(format *NSString, validFormatSpecifiers *NSString) (*NSString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithValidatedFormatValidFormatSpecifiersError, format.Ptr(), validFormatSpecifiers.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -625,7 +691,9 @@ func (o *NSString) InitWithValidatedFormatValidFormatSpecifiersError(format *NSS
 func (o *NSString) InitWithValidatedFormatValidFormatSpecifiersLocaleError(format *NSString, validFormatSpecifiers *NSString, locale objc.ID) (*NSString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithValidatedFormatValidFormatSpecifiersLocaleError, format.Ptr(), validFormatSpecifiers.Ptr(), locale, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -635,7 +703,9 @@ func (o *NSString) InitWithValidatedFormatValidFormatSpecifiersLocaleError(forma
 func (o *NSString) InitWithValidatedFormatValidFormatSpecifiersArgumentsError(format *NSString, validFormatSpecifiers *NSString, argList string) (*NSString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithValidatedFormatValidFormatSpecifiersArgumentsError, format.Ptr(), validFormatSpecifiers.Ptr(), argList, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -645,7 +715,9 @@ func (o *NSString) InitWithValidatedFormatValidFormatSpecifiersArgumentsError(fo
 func (o *NSString) InitWithValidatedFormatValidFormatSpecifiersLocaleArgumentsError(format *NSString, validFormatSpecifiers *NSString, locale objc.ID, argList string) (*NSString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithValidatedFormatValidFormatSpecifiersLocaleArgumentsError, format.Ptr(), validFormatSpecifiers.Ptr(), locale, argList, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -654,19 +726,25 @@ func (o *NSString) InitWithValidatedFormatValidFormatSpecifiersLocaleArgumentsEr
 
 func (o *NSString) InitWithDataEncoding(data *NSData, encoding uint) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithDataEncoding, data.Ptr(), encoding)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) InitWithBytesLengthEncoding(bytes_ unsafe.Pointer, len_ uint, encoding uint) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithBytesLengthEncoding, bytes_, len_, encoding)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) InitWithBytesNoCopyLengthEncodingFreeWhenDone(bytes_ unsafe.Pointer, len_ uint, encoding uint, freeBuffer bool) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithBytesNoCopyLengthEncodingFreeWhenDone, bytes_, len_, encoding, freeBuffer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -679,50 +757,66 @@ func (o *NSString) InitWithBytesNoCopyLengthEncodingDeallocator(bytes_ unsafe.Po
 		defer __block_deallocator.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithBytesNoCopyLengthEncodingDeallocator, bytes_, len_, encoding, __block_deallocator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func NSStringString() *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func NSStringStringWithString(string_ *NSString) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelStringWithString, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func NSStringStringWithCharactersLength(characters *uint16, length uint) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelStringWithCharactersLength, characters, length)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func NSStringStringWithUTF8String(nullTerminatedCString string) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelStringWithUTF8String, nullTerminatedCString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func NSStringStringWithFormat(format *NSString) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelStringWithFormat, format.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func NSStringLocalizedStringWithFormat(format *NSString) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelLocalizedStringWithFormat, format.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func NSStringStringWithValidatedFormatValidFormatSpecifiersError(format *NSString, validFormatSpecifiers *NSString) (*NSString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelStringWithValidatedFormatValidFormatSpecifiersError, format.Ptr(), validFormatSpecifiers.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -732,7 +826,9 @@ func NSStringStringWithValidatedFormatValidFormatSpecifiersError(format *NSStrin
 func NSStringLocalizedStringWithValidatedFormatValidFormatSpecifiersError(format *NSString, validFormatSpecifiers *NSString) (*NSString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelLocalizedStringWithValidatedFormatValidFormatSpecifiersError, format.Ptr(), validFormatSpecifiers.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -741,20 +837,26 @@ func NSStringLocalizedStringWithValidatedFormatValidFormatSpecifiersError(format
 
 func (o *NSString) InitWithCStringEncoding(nullTerminatedCString string, encoding uint) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithCStringEncoding, nullTerminatedCString, encoding)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func NSStringStringWithCStringEncoding(cString string, enc uint) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelStringWithCStringEncoding, cString, enc)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) InitWithContentsOfURLEncodingError(url *NSURL, enc uint) (*NSString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithContentsOfURLEncodingError, url.Ptr(), enc, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -764,7 +866,9 @@ func (o *NSString) InitWithContentsOfURLEncodingError(url *NSURL, enc uint) (*NS
 func (o *NSString) InitWithContentsOfFileEncodingError(path *NSString, enc uint) (*NSString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithContentsOfFileEncodingError, path.Ptr(), enc, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -774,7 +878,9 @@ func (o *NSString) InitWithContentsOfFileEncodingError(path *NSString, enc uint)
 func NSStringStringWithContentsOfURLEncodingError(url *NSURL, enc uint) (*NSString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelStringWithContentsOfURLEncodingError, url.Ptr(), enc, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -784,7 +890,9 @@ func NSStringStringWithContentsOfURLEncodingError(url *NSURL, enc uint) (*NSStri
 func NSStringStringWithContentsOfFileEncodingError(path *NSString, enc uint) (*NSString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelStringWithContentsOfFileEncodingError, path.Ptr(), enc, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -794,7 +902,9 @@ func NSStringStringWithContentsOfFileEncodingError(path *NSString, enc uint) (*N
 func (o *NSString) InitWithContentsOfURLUsedEncodingError(url *NSURL, enc *uint) (*NSString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithContentsOfURLUsedEncodingError, url.Ptr(), enc, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -804,7 +914,9 @@ func (o *NSString) InitWithContentsOfURLUsedEncodingError(url *NSURL, enc *uint)
 func (o *NSString) InitWithContentsOfFileUsedEncodingError(path *NSString, enc *uint) (*NSString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithContentsOfFileUsedEncodingError, path.Ptr(), enc, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -814,7 +926,9 @@ func (o *NSString) InitWithContentsOfFileUsedEncodingError(path *NSString, enc *
 func NSStringStringWithContentsOfURLUsedEncodingError(url *NSURL, enc *uint) (*NSString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelStringWithContentsOfURLUsedEncodingError, url.Ptr(), enc, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -824,7 +938,9 @@ func NSStringStringWithContentsOfURLUsedEncodingError(url *NSURL, enc *uint) (*N
 func NSStringStringWithContentsOfFileUsedEncodingError(path *NSString, enc *uint) (*NSString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelStringWithContentsOfFileUsedEncodingError, path.Ptr(), enc, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -863,37 +979,49 @@ func (o *NSString) BoolValue() bool {
 
 func (o *NSString) UppercaseString() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelUppercaseString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) LowercaseString() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelLowercaseString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) CapitalizedString() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelCapitalizedString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) LocalizedUppercaseString() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelLocalizedUppercaseString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) LocalizedLowercaseString() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelLocalizedLowercaseString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) LocalizedCapitalizedString() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelLocalizedCapitalizedString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -924,25 +1052,33 @@ func NSStringDefaultCStringEncoding() uint {
 
 func (o *NSString) DecomposedStringWithCanonicalMapping() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelDecomposedStringWithCanonicalMapping)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) PrecomposedStringWithCanonicalMapping() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelPrecomposedStringWithCanonicalMapping)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) DecomposedStringWithCompatibilityMapping() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelDecomposedStringWithCompatibilityMapping)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) PrecomposedStringWithCompatibilityMapping() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelPrecomposedStringWithCompatibilityMapping)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -1067,31 +1203,41 @@ func (o *NSString) GetCharacters(buffer *uint16) {
 
 func (o *NSString) VariantFittingPresentationWidth(width int) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelVariantFittingPresentationWidth, width)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func NSStringPathWithComponents(components *NSArray[*NSString]) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelPathWithComponents, components.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) StringByAppendingPathComponent(str *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByAppendingPathComponent, str.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) StringByAppendingPathExtension(str *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByAppendingPathExtension, str.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) StringsByAppendingPaths(paths *NSArray[*NSString]) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringsByAppendingPaths, paths.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -1107,7 +1253,9 @@ func (o *NSString) GetFileSystemRepresentationMaxLength(cname string, max uint) 
 
 func (o *NSString) PathComponents() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelPathComponents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -1118,49 +1266,65 @@ func (o *NSString) IsAbsolutePath() bool {
 
 func (o *NSString) LastPathComponent() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelLastPathComponent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) StringByDeletingLastPathComponent() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByDeletingLastPathComponent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) PathExtension() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelPathExtension)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) StringByDeletingPathExtension() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByDeletingPathExtension)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) StringByAbbreviatingWithTildeInPath() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByAbbreviatingWithTildeInPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) StringByExpandingTildeInPath() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByExpandingTildeInPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) StringByStandardizingPath() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByStandardizingPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) StringByResolvingSymlinksInPath() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByResolvingSymlinksInPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -1171,34 +1335,44 @@ func (o *NSString) FileSystemRepresentation() unsafe.Pointer {
 
 func (o *NSString) StringByAddingPercentEncodingWithAllowedCharacters(allowedCharacters *NSCharacterSet) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByAddingPercentEncodingWithAllowedCharacters, allowedCharacters.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // Deprecated: Use -stringByAddingPercentEncodingWithAllowedCharacters: instead, which always uses the recommended UTF-8 encoding, and which encodes for a specific URL component or subcomponent since each URL component or subcomponent has different rules for what characters are valid.
 func (o *NSString) StringByAddingPercentEscapesUsingEncoding(enc uint) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByAddingPercentEscapesUsingEncoding, enc)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // Deprecated: Use -stringByRemovingPercentEncoding instead, which always uses the recommended UTF-8 encoding.
 func (o *NSString) StringByReplacingPercentEscapesUsingEncoding(enc uint) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByReplacingPercentEscapesUsingEncoding, enc)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSString) StringByRemovingPercentEncoding() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByRemovingPercentEncoding)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func (o *NSString) LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges(range_ NSRange, scheme *NSString, options NSLinguisticTaggerOptions, orthography *NSOrthography, tokenRanges *NSArray[*NSValue]) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelLinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges, range_, scheme.Ptr(), options, orthography.Ptr(), tokenRanges.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -1206,4 +1380,3 @@ func (o *NSString) LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges(rang
 func (o *NSString) EnumerateLinguisticTagsInRangeSchemeOptionsOrthographyUsing(range_ NSRange, scheme *NSString, options NSLinguisticTaggerOptions, orthography *NSOrthography, block objc.Block) {
 	o.Ptr().Send(_nSStringSelEnumerateLinguisticTagsInRangeSchemeOptionsOrthographyUsing, range_, scheme.Ptr(), options, orthography.Ptr(), block)
 }
-

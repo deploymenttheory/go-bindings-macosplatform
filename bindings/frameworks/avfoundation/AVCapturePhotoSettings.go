@@ -17,27 +17,27 @@ type AVCapturePhotoSettings struct {
 }
 
 var (
-	_clsAVCapturePhotoSettings = _objcClass("AVCapturePhotoSettings")
-	_aVCapturePhotoSettingsSelPhotoSettings = objc.RegisterName("photoSettings")
-	_aVCapturePhotoSettingsSelPhotoSettingsWithFormat = objc.RegisterName("photoSettingsWithFormat:")
-	_aVCapturePhotoSettingsSelPhotoSettingsFromPhotoSettings = objc.RegisterName("photoSettingsFromPhotoSettings:")
-	_aVCapturePhotoSettingsSelUniqueID = objc.RegisterName("uniqueID")
-	_aVCapturePhotoSettingsSelFormat = objc.RegisterName("format")
-	_aVCapturePhotoSettingsSelProcessedFileType = objc.RegisterName("processedFileType")
-	_aVCapturePhotoSettingsSelFlashMode = objc.RegisterName("flashMode")
-	_aVCapturePhotoSettingsSelSetFlashMode = objc.RegisterName("setFlashMode:")
-	_aVCapturePhotoSettingsSelPhotoQualityPrioritization = objc.RegisterName("photoQualityPrioritization")
-	_aVCapturePhotoSettingsSelSetPhotoQualityPrioritization = objc.RegisterName("setPhotoQualityPrioritization:")
-	_aVCapturePhotoSettingsSelIsHighResolutionPhotoEnabled = objc.RegisterName("isHighResolutionPhotoEnabled")
-	_aVCapturePhotoSettingsSelSetHighResolutionPhotoEnabled = objc.RegisterName("setHighResolutionPhotoEnabled:")
-	_aVCapturePhotoSettingsSelMaxPhotoDimensions = objc.RegisterName("maxPhotoDimensions")
-	_aVCapturePhotoSettingsSelSetMaxPhotoDimensions = objc.RegisterName("setMaxPhotoDimensions:")
-	_aVCapturePhotoSettingsSelIsConstantColorEnabled = objc.RegisterName("isConstantColorEnabled")
-	_aVCapturePhotoSettingsSelSetConstantColorEnabled = objc.RegisterName("setConstantColorEnabled:")
-	_aVCapturePhotoSettingsSelIsConstantColorFallbackPhotoDeliveryEnabled = objc.RegisterName("isConstantColorFallbackPhotoDeliveryEnabled")
+	_clsAVCapturePhotoSettings                                             = _objcClass("AVCapturePhotoSettings")
+	_aVCapturePhotoSettingsSelPhotoSettings                                = objc.RegisterName("photoSettings")
+	_aVCapturePhotoSettingsSelPhotoSettingsWithFormat                      = objc.RegisterName("photoSettingsWithFormat:")
+	_aVCapturePhotoSettingsSelPhotoSettingsFromPhotoSettings               = objc.RegisterName("photoSettingsFromPhotoSettings:")
+	_aVCapturePhotoSettingsSelUniqueID                                     = objc.RegisterName("uniqueID")
+	_aVCapturePhotoSettingsSelFormat                                       = objc.RegisterName("format")
+	_aVCapturePhotoSettingsSelProcessedFileType                            = objc.RegisterName("processedFileType")
+	_aVCapturePhotoSettingsSelFlashMode                                    = objc.RegisterName("flashMode")
+	_aVCapturePhotoSettingsSelSetFlashMode                                 = objc.RegisterName("setFlashMode:")
+	_aVCapturePhotoSettingsSelPhotoQualityPrioritization                   = objc.RegisterName("photoQualityPrioritization")
+	_aVCapturePhotoSettingsSelSetPhotoQualityPrioritization                = objc.RegisterName("setPhotoQualityPrioritization:")
+	_aVCapturePhotoSettingsSelIsHighResolutionPhotoEnabled                 = objc.RegisterName("isHighResolutionPhotoEnabled")
+	_aVCapturePhotoSettingsSelSetHighResolutionPhotoEnabled                = objc.RegisterName("setHighResolutionPhotoEnabled:")
+	_aVCapturePhotoSettingsSelMaxPhotoDimensions                           = objc.RegisterName("maxPhotoDimensions")
+	_aVCapturePhotoSettingsSelSetMaxPhotoDimensions                        = objc.RegisterName("setMaxPhotoDimensions:")
+	_aVCapturePhotoSettingsSelIsConstantColorEnabled                       = objc.RegisterName("isConstantColorEnabled")
+	_aVCapturePhotoSettingsSelSetConstantColorEnabled                      = objc.RegisterName("setConstantColorEnabled:")
+	_aVCapturePhotoSettingsSelIsConstantColorFallbackPhotoDeliveryEnabled  = objc.RegisterName("isConstantColorFallbackPhotoDeliveryEnabled")
 	_aVCapturePhotoSettingsSelSetConstantColorFallbackPhotoDeliveryEnabled = objc.RegisterName("setConstantColorFallbackPhotoDeliveryEnabled:")
-	_aVCapturePhotoSettingsSelIsShutterSoundSuppressionEnabled = objc.RegisterName("isShutterSoundSuppressionEnabled")
-	_aVCapturePhotoSettingsSelSetShutterSoundSuppressionEnabled = objc.RegisterName("setShutterSoundSuppressionEnabled:")
+	_aVCapturePhotoSettingsSelIsShutterSoundSuppressionEnabled             = objc.RegisterName("isShutterSoundSuppressionEnabled")
+	_aVCapturePhotoSettingsSelSetShutterSoundSuppressionEnabled            = objc.RegisterName("setShutterSoundSuppressionEnabled:")
 )
 
 func AVCapturePhotoSettingsFromID(id objc.ID) *AVCapturePhotoSettings {
@@ -53,21 +53,27 @@ func AVCapturePhotoSettingsFromID(id objc.ID) *AVCapturePhotoSettings {
 // @method photoSettings @abstract Creates a default instance of AVCapturePhotoSettings. @result An instance of AVCapturePhotoSettings. @discussion A default AVCapturePhotoSettings object has a format of AVVideoCodecTypeJPEG, a fileType of AVFileTypeJPEG, and photoQualityPrioritization set to AVCapturePhotoQualityPrioritizationBalanced.
 func AVCapturePhotoSettingsPhotoSettings() *AVCapturePhotoSettings {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCapturePhotoSettings), _aVCapturePhotoSettingsSelPhotoSettings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCapturePhotoSettingsFromID(_ret)
 }
 
 // @method photoSettingsWithFormat: @abstract Creates an instance of AVCapturePhotoSettings with a user-specified output format. @param format A dictionary of Core Video pixel buffer attributes or AVVideoSettings, analogous to AVCaptureStillImageOutput's outputSettings property. @result An instance of AVCapturePhotoSettings. @discussion If you wish an uncompressed format, your dictionary must contain kCVPixelBufferPixelFormatTypeKey, and the format specified must be present in AVCapturePhotoOutput's -availablePhotoPixelFormatTypes array. kCVPixelBufferPixelFormatTypeKey is the only supported key when expressing uncompressed output. If you wish a compressed format, your dictionary must contain AVVideoCodecKey and the codec specified must be present in AVCapturePhotoOutput's -availablePhotoCodecTypes array. If you are specifying a compressed format, the AVVideoCompressionPropertiesKey is also supported, with a payload dictionary containing a single AVVideoQualityKey. Passing a nil format dictionary is analogous to calling +photoSettings.
 func AVCapturePhotoSettingsPhotoSettingsWithFormat(format *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVCapturePhotoSettings {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCapturePhotoSettings), _aVCapturePhotoSettingsSelPhotoSettingsWithFormat, format)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCapturePhotoSettingsFromID(_ret)
 }
 
 // @method photoSettingsFromPhotoSettings: @abstract Creates an instance of AVCapturePhotoSettings with a new uniqueID from an existing instance of AVCapturePhotoSettings. @param photoSettings An existing AVCapturePhotoSettings instance. @result An new instance of AVCapturePhotoSettings with new uniqueID. @discussion Use this factory method to create a clone of an existing photo settings instance, but with a new uniqueID that can safely be passed to AVCapturePhotoOutput -capturePhotoWithSettings:delegate:.
 func AVCapturePhotoSettingsPhotoSettingsFromPhotoSettings(photoSettings *AVCapturePhotoSettings) *AVCapturePhotoSettings {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCapturePhotoSettings), _aVCapturePhotoSettingsSelPhotoSettingsFromPhotoSettings, photoSettings.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCapturePhotoSettingsFromID(_ret)
 }
 
@@ -86,7 +92,9 @@ func (o *AVCapturePhotoSettings) Format() *foundation.NSDictionary[*foundation.N
 // @property processedFileType @abstract The file container for which the processed photo is formatted to be stored. @discussion The formatting of data within a photo buffer is often dependent on the file format intended for storage. For instance, a JPEG encoded photo buffer intended for storage in a JPEG (JPEG File Interchange Format) file differs from JPEG to be stored in HEIF. The HEIF-containerized JPEG buffer is tiled for readback efficiency and partitioned into the box structure dictated by the HEIF file format. Some codecs are only supported by AVCapturePhotoOutput if containerized. For instance, the AVVideoCodecTypeHEVC is only supported with AVFileTypeHEIF and AVFileTypeHEIC formatting. To discover which photo pixel format types and video codecs are supported for a given file type, you may query AVCapturePhotoOutput's -supportedPhotoPixelFormatTypesForFileType:, or -supportedPhotoCodecTypesForFileType: respectively.
 func (o *AVCapturePhotoSettings) ProcessedFileType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCapturePhotoSettingsSelProcessedFileType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -161,4 +169,3 @@ func (o *AVCapturePhotoSettings) IsShutterSoundSuppressionEnabled() bool {
 func (o *AVCapturePhotoSettings) SetShutterSoundSuppressionEnabled(shutterSoundSuppressionEnabled bool) {
 	o.Ptr().Send(_aVCapturePhotoSettingsSelSetShutterSoundSuppressionEnabled, shutterSoundSuppressionEnabled)
 }
-

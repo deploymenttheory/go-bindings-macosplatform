@@ -25,4 +25,3 @@ func VNImageRegistrationRequestFromID(id objc.ID) *VNImageRegistrationRequest {
 	purego.Track(o)
 	return o
 }
-

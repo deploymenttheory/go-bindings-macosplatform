@@ -104,4 +104,3 @@ type CNNNeuronELUable interface {
 }
 
 var _ CNNNeuronELUable = (*CNNNeuronELU)(nil)
-

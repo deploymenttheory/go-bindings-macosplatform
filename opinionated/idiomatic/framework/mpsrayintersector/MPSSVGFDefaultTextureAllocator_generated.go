@@ -73,4 +73,3 @@ type SVGFDefaultTextureAllocatorable interface {
 }
 
 var _ SVGFDefaultTextureAllocatorable = (*SVGFDefaultTextureAllocator)(nil)
-

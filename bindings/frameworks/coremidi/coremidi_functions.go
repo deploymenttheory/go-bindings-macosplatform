@@ -10,64 +10,64 @@ import (
 )
 
 var (
-	_fnMIDI1UPChannelPressure func(uint8, uint8, uint8) uint
-	_fnMIDI1UPChannelVoiceMessage func(uint8, uint8, uint8, uint8, uint8) uint
-	_fnMIDI1UPControlChange func(uint8, uint8, uint8, uint8) uint
-	_fnMIDI1UPNoteOff func(uint8, uint8, uint8, uint8) uint
-	_fnMIDI1UPNoteOn func(uint8, uint8, uint8, uint8) uint
-	_fnMIDI1UPPitchBend func(uint8, uint8, uint8, uint8) uint
-	_fnMIDI1UPPolyPressure func(uint8, uint8, uint8, uint8) uint
-	_fnMIDI1UPProgramChange func(uint8, uint8, uint8) uint
-	_fnMIDI1UPSysEx func(uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8) MIDIMessage_64
-	_fnMIDI1UPSysExArray func(uint8, uint8, *uint8, *uint8) MIDIMessage_64
-	_fnMIDI1UPSystemCommon func(uint8, uint8, uint8, uint8) uint
-	_fnMIDI2AssignableControl func(uint8, uint8, uint8, uint8, uint) MIDIMessage_64
-	_fnMIDI2AssignablePNC func(uint8, uint8, uint8, uint8, uint) MIDIMessage_64
-	_fnMIDI2ChannelPressure func(uint8, uint8, uint) MIDIMessage_64
-	_fnMIDI2ChannelVoiceMessage func(uint8, uint8, uint8, uint16, uint) MIDIMessage_64
-	_fnMIDI2ControlChange func(uint8, uint8, uint8, uint) MIDIMessage_64
-	_fnMIDI2EndOfClipMessage func() MIDIMessage_128
-	_fnMIDI2EndpointDeviceIdentityNotificationMessage func(uint8, uint8, uint8, uint16, uint16, uint) MIDIMessage_128
-	_fnMIDI2EndpointDiscoveryMessage func(uint8, uint8, bool, bool, bool, bool, bool) MIDIMessage_128
-	_fnMIDI2EndpointInfoNotificationMessage func(uint8, uint8, bool, uint8, bool, bool, bool, bool) MIDIMessage_128
-	_fnMIDI2EndpointNameNotificationMessage func(UMPStreamMessageFormat, string, uint) MIDIMessage_128
+	_fnMIDI1UPChannelPressure                            func(uint8, uint8, uint8) uint
+	_fnMIDI1UPChannelVoiceMessage                        func(uint8, uint8, uint8, uint8, uint8) uint
+	_fnMIDI1UPControlChange                              func(uint8, uint8, uint8, uint8) uint
+	_fnMIDI1UPNoteOff                                    func(uint8, uint8, uint8, uint8) uint
+	_fnMIDI1UPNoteOn                                     func(uint8, uint8, uint8, uint8) uint
+	_fnMIDI1UPPitchBend                                  func(uint8, uint8, uint8, uint8) uint
+	_fnMIDI1UPPolyPressure                               func(uint8, uint8, uint8, uint8) uint
+	_fnMIDI1UPProgramChange                              func(uint8, uint8, uint8) uint
+	_fnMIDI1UPSysEx                                      func(uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8) MIDIMessage_64
+	_fnMIDI1UPSysExArray                                 func(uint8, uint8, *uint8, *uint8) MIDIMessage_64
+	_fnMIDI1UPSystemCommon                               func(uint8, uint8, uint8, uint8) uint
+	_fnMIDI2AssignableControl                            func(uint8, uint8, uint8, uint8, uint) MIDIMessage_64
+	_fnMIDI2AssignablePNC                                func(uint8, uint8, uint8, uint8, uint) MIDIMessage_64
+	_fnMIDI2ChannelPressure                              func(uint8, uint8, uint) MIDIMessage_64
+	_fnMIDI2ChannelVoiceMessage                          func(uint8, uint8, uint8, uint16, uint) MIDIMessage_64
+	_fnMIDI2ControlChange                                func(uint8, uint8, uint8, uint) MIDIMessage_64
+	_fnMIDI2EndOfClipMessage                             func() MIDIMessage_128
+	_fnMIDI2EndpointDeviceIdentityNotificationMessage    func(uint8, uint8, uint8, uint16, uint16, uint) MIDIMessage_128
+	_fnMIDI2EndpointDiscoveryMessage                     func(uint8, uint8, bool, bool, bool, bool, bool) MIDIMessage_128
+	_fnMIDI2EndpointInfoNotificationMessage              func(uint8, uint8, bool, uint8, bool, bool, bool, bool) MIDIMessage_128
+	_fnMIDI2EndpointNameNotificationMessage              func(UMPStreamMessageFormat, string, uint) MIDIMessage_128
 	_fnMIDI2EndpointProductInstanceIDNotificationMessage func(UMPStreamMessageFormat, string, uint) MIDIMessage_128
-	_fnMIDI2FlexDataMessage func(uint8, uint8, uint8, uint8, uint8, uint8, uint, uint, uint) MIDIMessage_128
-	_fnMIDI2FunctionBlockDiscoveryMessage func(uint8, bool, bool) MIDIMessage_128
-	_fnMIDI2FunctionBlockInfoNotificationMessage func(bool, uint8, MIDIUMPFunctionBlockUIHint, MIDIUMPFunctionBlockMIDI1Info, MIDIUMPFunctionBlockDirection, uint8, uint8, uint8, uint8) MIDIMessage_128
-	_fnMIDI2FunctionBlockNameNotificationMessage func(UMPStreamMessageFormat, uint8, string, uint) MIDIMessage_128
-	_fnMIDI2NoteOff func(uint8, uint8, uint8, uint8, uint16, uint16) MIDIMessage_64
-	_fnMIDI2NoteOn func(uint8, uint8, uint8, uint8, uint16, uint16) MIDIMessage_64
-	_fnMIDI2PerNoteManagment func(uint8, uint8, uint8, bool, bool) MIDIMessage_64
-	_fnMIDI2PerNotePitchBend func(uint8, uint8, uint8, uint) MIDIMessage_64
-	_fnMIDI2PitchBend func(uint8, uint8, uint) MIDIMessage_64
-	_fnMIDI2PolyPressure func(uint8, uint8, uint8, uint) MIDIMessage_64
-	_fnMIDI2ProgramChange func(uint8, uint8, bool, uint8, uint8, uint8) MIDIMessage_64
-	_fnMIDI2RegisteredControl func(uint8, uint8, uint8, uint8, uint) MIDIMessage_64
-	_fnMIDI2RegisteredPNC func(uint8, uint8, uint8, uint8, uint) MIDIMessage_64
-	_fnMIDI2RelAssignableControl func(uint8, uint8, uint8, uint8, uint) MIDIMessage_64
-	_fnMIDI2RelRegisteredControl func(uint8, uint8, uint8, uint8, uint) MIDIMessage_64
-	_fnMIDI2StartOfClipMessage func() MIDIMessage_128
-	_fnMIDI2StreamConfigurationNotificationMessage func(uint8, bool, bool) MIDIMessage_128
-	_fnMIDI2StreamConfigurationRequestMessage func(uint8, bool, bool) MIDIMessage_128
-	_fnMIDI2StreamMessage func(UMPStreamMessageFormat, UMPStreamMessageStatus, uint16, uint, uint, uint) MIDIMessage_128
-	_fnMIDI2StreamMessageFromData func(UMPStreamMessageFormat, UMPStreamMessageStatus, *uint8, uint) MIDIMessage_128
-	_fnMIDIBluetoothDriverActivateAllConnections func() int
-	_fnMIDIBluetoothDriverDisconnect func(unsafe.Pointer) int
-	_fnMIDIClientCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint) int
-	_fnMIDIClientCreateWithBlock func(unsafe.Pointer, *uint, objc.Block) int
-	_fnMIDIClientDispose func(uint) int
-	_fnMIDIDeltaClockstampTicksPerQuarterNoteMessage func(uint16) uint
-	_fnMIDIDestinationCreate func(uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint) int
-	_fnMIDIDestinationCreateWithBlock func(uint, unsafe.Pointer, *uint, objc.Block) int
-	_fnMIDIDestinationCreateWithProtocol func(uint, unsafe.Pointer, MIDIProtocolID, *uint, objc.Block) int
-// Deprecated: since macOS API_TO_BE_DEPRECATED.
+	_fnMIDI2FlexDataMessage                              func(uint8, uint8, uint8, uint8, uint8, uint8, uint, uint, uint) MIDIMessage_128
+	_fnMIDI2FunctionBlockDiscoveryMessage                func(uint8, bool, bool) MIDIMessage_128
+	_fnMIDI2FunctionBlockInfoNotificationMessage         func(bool, uint8, MIDIUMPFunctionBlockUIHint, MIDIUMPFunctionBlockMIDI1Info, MIDIUMPFunctionBlockDirection, uint8, uint8, uint8, uint8) MIDIMessage_128
+	_fnMIDI2FunctionBlockNameNotificationMessage         func(UMPStreamMessageFormat, uint8, string, uint) MIDIMessage_128
+	_fnMIDI2NoteOff                                      func(uint8, uint8, uint8, uint8, uint16, uint16) MIDIMessage_64
+	_fnMIDI2NoteOn                                       func(uint8, uint8, uint8, uint8, uint16, uint16) MIDIMessage_64
+	_fnMIDI2PerNoteManagment                             func(uint8, uint8, uint8, bool, bool) MIDIMessage_64
+	_fnMIDI2PerNotePitchBend                             func(uint8, uint8, uint8, uint) MIDIMessage_64
+	_fnMIDI2PitchBend                                    func(uint8, uint8, uint) MIDIMessage_64
+	_fnMIDI2PolyPressure                                 func(uint8, uint8, uint8, uint) MIDIMessage_64
+	_fnMIDI2ProgramChange                                func(uint8, uint8, bool, uint8, uint8, uint8) MIDIMessage_64
+	_fnMIDI2RegisteredControl                            func(uint8, uint8, uint8, uint8, uint) MIDIMessage_64
+	_fnMIDI2RegisteredPNC                                func(uint8, uint8, uint8, uint8, uint) MIDIMessage_64
+	_fnMIDI2RelAssignableControl                         func(uint8, uint8, uint8, uint8, uint) MIDIMessage_64
+	_fnMIDI2RelRegisteredControl                         func(uint8, uint8, uint8, uint8, uint) MIDIMessage_64
+	_fnMIDI2StartOfClipMessage                           func() MIDIMessage_128
+	_fnMIDI2StreamConfigurationNotificationMessage       func(uint8, bool, bool) MIDIMessage_128
+	_fnMIDI2StreamConfigurationRequestMessage            func(uint8, bool, bool) MIDIMessage_128
+	_fnMIDI2StreamMessage                                func(UMPStreamMessageFormat, UMPStreamMessageStatus, uint16, uint, uint, uint) MIDIMessage_128
+	_fnMIDI2StreamMessageFromData                        func(UMPStreamMessageFormat, UMPStreamMessageStatus, *uint8, uint) MIDIMessage_128
+	_fnMIDIBluetoothDriverActivateAllConnections         func() int
+	_fnMIDIBluetoothDriverDisconnect                     func(unsafe.Pointer) int
+	_fnMIDIClientCreate                                  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint) int
+	_fnMIDIClientCreateWithBlock                         func(unsafe.Pointer, *uint, objc.Block) int
+	_fnMIDIClientDispose                                 func(uint) int
+	_fnMIDIDeltaClockstampTicksPerQuarterNoteMessage     func(uint16) uint
+	_fnMIDIDestinationCreate                             func(uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint) int
+	_fnMIDIDestinationCreateWithBlock                    func(uint, unsafe.Pointer, *uint, objc.Block) int
+	_fnMIDIDestinationCreateWithProtocol                 func(uint, unsafe.Pointer, MIDIProtocolID, *uint, objc.Block) int
+	// Deprecated: since macOS API_TO_BE_DEPRECATED.
 	_fnMIDIDeviceAddEntity func(uint, unsafe.Pointer, uint8, uint, uint, *uint) int
 	// @function		MIDIDeviceCreate @discussion		Drivers call this function to create new MIDIDevice objects corresponding to the hardware that is present. Non-drivers may call this function as of CoreMIDI 1.1, to create external devices. @param			owner The driver creating the device.  NULL if a non-driver. @param			name The name of the new device. @param			manufacturer The name of the device's manufacturer. @param			model The device's model name. @param			outDevice On successful return, points to the newly-created device. @result			An OSStatus result code.
 	_fnMIDIDeviceCreate func(*MIDIDriverInterface, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint) int
 	// @function		MIDIDeviceDispose @discussion		Drivers may call this function to dispose MIDIDevice objects which have not yet been added to the system via MIDISetupAddDevice. Once a device has been added to the system with MIDISetupAddDevice, the driver must not use this call to destroy it; it must use MIDISetupRemoveDevice to do so. Non-drivers do not have access to this function; they must call MIDISetupAddDevice and MIDISetupRemoveDevice. @param			device The device to be disposed. @result			An OSStatus result code.
-	_fnMIDIDeviceDispose func(uint) int
-	_fnMIDIDeviceGetEntity func(uint, uint) uint
+	_fnMIDIDeviceDispose             func(uint) int
+	_fnMIDIDeviceGetEntity           func(uint, uint) uint
 	_fnMIDIDeviceGetNumberOfEntities func(uint) uint
 	// @function		MIDIDeviceListAddDevice @discussion		Add a device to a device list. @param			devList The device list. @param			dev The device to add to the list. @result			An OSStatus result code.
 	_fnMIDIDeviceListAddDevice func(uint, uint) int
@@ -77,112 +77,112 @@ var (
 	_fnMIDIDeviceListGetDevice func(uint, uint) uint
 	// @function		MIDIDeviceListGetNumberOfDevices @discussion		Returns the number of devices in a device list. @param			devList The device list. @result			The number of devices in the list, or 0 if an error occurred.
 	_fnMIDIDeviceListGetNumberOfDevices func(uint) uint
-	_fnMIDIDeviceNewEntity func(uint, unsafe.Pointer, MIDIProtocolID, uint8, uint, uint, *uint) int
-	_fnMIDIDeviceRemoveEntity func(uint, uint) int
+	_fnMIDIDeviceNewEntity              func(uint, unsafe.Pointer, MIDIProtocolID, uint8, uint, uint, *uint) int
+	_fnMIDIDeviceRemoveEntity           func(uint, uint) int
 	// @function		MIDIDriverEnableMonitoring @discussion		A driver may make this call to have MIDIServer pass it every outgoing MIDI packet, to all destinations in the system (not just those controlled by itself). @param			driver The driver whose Monitor function is to be enabled. @param			enabled true to enable monitoring, false to disable it. @result			An OSStatus result code.
 	_fnMIDIDriverEnableMonitoring func(*MIDIDriverInterface, uint8) int
-	_fnMIDIEndpointDispose func(uint) int
-	_fnMIDIEndpointGetEntity func(uint, *uint) int
+	_fnMIDIEndpointDispose        func(uint) int
+	_fnMIDIEndpointGetEntity      func(uint, *uint) int
 	// @function		MIDIEndpointGetRefCons @discussion		Obtain the refCons assigned to the endpoints @param			endpt The endpoint whose refCons are to be return @param			ref1 On exit, the first refCon. @param			ref2 On exit, the second refCon. @result			An OSStatus result code.
 	_fnMIDIEndpointGetRefCons func(uint, unsafe.Pointer, unsafe.Pointer) int
 	// @function		MIDIEndpointSetRefCons @discussion		Drivers need an efficient way to translate from a MIDIEndpoint (source or destination) to their own internal data structures corresponding to that endpoint.  This function provides a way for the driver to assign its own refCons to endpoints. These refCons are passed back to the driver in its Send() and Flush() methods. RefCons are not persistent (i.e. they are not saved as part of a MIDISetup).  They need to be re-initialized in each call to Start(). A typical use is to use one refCon to refer to a device, and a second to refer to a port on the device. @param			endpt The endpoint whose refCons are to be set @param			ref1 The first refCon. @param			ref2 The second refCon. @result			An OSStatus result code.
-	_fnMIDIEndpointSetRefCons func(uint, unsafe.Pointer, unsafe.Pointer) int
-	_fnMIDIEntityAddOrRemoveEndpoints func(uint, uint, uint) int
-	_fnMIDIEntityGetDestination func(uint, uint) uint
-	_fnMIDIEntityGetDevice func(uint, *uint) int
+	_fnMIDIEndpointSetRefCons            func(uint, unsafe.Pointer, unsafe.Pointer) int
+	_fnMIDIEntityAddOrRemoveEndpoints    func(uint, uint, uint) int
+	_fnMIDIEntityGetDestination          func(uint, uint) uint
+	_fnMIDIEntityGetDevice               func(uint, *uint) int
 	_fnMIDIEntityGetNumberOfDestinations func(uint) uint
-	_fnMIDIEntityGetNumberOfSources func(uint) uint
-	_fnMIDIEntityGetSource func(uint, uint) uint
-	_fnMIDIEventListAdd func(*MIDIEventList, uint, *MIDIEventPacket, uint64, uint, *uint) *MIDIEventPacket
+	_fnMIDIEntityGetNumberOfSources      func(uint) uint
+	_fnMIDIEntityGetSource               func(uint, uint) uint
+	_fnMIDIEventListAdd                  func(*MIDIEventList, uint, *MIDIEventPacket, uint64, uint, *uint) *MIDIEventPacket
 	// @typedef		MIDIEventListForEachEvent @abstract		Parses UMPs from a MIDIEventList. @discussion MIDIEventListForEachEvent iterates over all UMPs in the provided MIDIEventList. It parses each UMP and fills a MIDIUniversalMessage struct. It calls the provided visitor on each of these UMPs. In case of an unknown UMP the raw UMP words will be provided. @param			evtlist The MIDIEventList which is to be parsed. @param			visitor The visitor that is called on each UMP in evtlist. @param			visitorContext A context for the visitor that is passed to it when being called.
 	_fnMIDIEventListForEachEvent func(*MIDIEventList, unsafe.Pointer, unsafe.Pointer)
-	_fnMIDIEventListInit func(*MIDIEventList, MIDIProtocolID) *MIDIEventPacket
+	_fnMIDIEventListInit         func(*MIDIEventList, MIDIProtocolID) *MIDIEventPacket
 	// @function		MIDIEventPacketNext @abstract 		Advances a MIDIEventPacket pointer to the MIDIEventPacket which immediately follows it in memory if it is part of a MIDIEventList. @param			pkt A pointer to a MIDIEventPacket in a MIDIEventList. @result		The subsequent packet in the MIDIEventList.
-	_fnMIDIEventPacketNext func(*MIDIEventPacket) *MIDIEventPacket
+	_fnMIDIEventPacketNext               func(*MIDIEventPacket) *MIDIEventPacket
 	_fnMIDIEventPacketSysexBytesForGroup func(*MIDIEventPacket, uint8, unsafe.Pointer) int
-	_fnMIDIExternalDeviceCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint) int
-	_fnMIDIFlushOutput func(uint) int
-	_fnMIDIGetDestination func(uint) uint
-	_fnMIDIGetDevice func(uint) uint
+	_fnMIDIExternalDeviceCreate          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint) int
+	_fnMIDIFlushOutput                   func(uint) int
+	_fnMIDIGetDestination                func(uint) uint
+	_fnMIDIGetDevice                     func(uint) uint
 	// @function		MIDIGetDriverDeviceList @discussion		Returns the list of devices which are in the current MIDISetup and which were created/owned by the specified driver. The returned device list should be disposed (using MIDIDeviceListDispose) by the caller. @param			driver The driver whose devices are to be returned. @result			The requested device list.
 	_fnMIDIGetDriverDeviceList func(*MIDIDriverInterface) uint
 	// @function		MIDIGetDriverIORunLoop @discussion		Drivers typically need to receive asynchronous I/O completion callbacks on a high-priority thread.  To save drivers from the trouble of creating their own threads for this purpose, and to make efficient use of system resources, the MIDIServer provides a thread which drivers may use. Drivers should do as little work as possible in this thread; typically, just dequeueing and encoding output packets, and decoding input packets into MIDIPacketLists to be passed to MIDIReceived. This is a realtime-priority thread and shouldn't be used for anything other than I/O.  For lower-priority tasks, drivers can use the runloop which was current when they were constructed. @result			The CFRunLoopRef of the server's driver I/O thread.
-	_fnMIDIGetDriverIORunLoop func() unsafe.Pointer
-	_fnMIDIGetExternalDevice func(uint) uint
-	_fnMIDIGetNumberOfDestinations func() uint
-	_fnMIDIGetNumberOfDevices func() uint
+	_fnMIDIGetDriverIORunLoop         func() unsafe.Pointer
+	_fnMIDIGetExternalDevice          func(uint) uint
+	_fnMIDIGetNumberOfDestinations    func() uint
+	_fnMIDIGetNumberOfDevices         func() uint
 	_fnMIDIGetNumberOfExternalDevices func() uint
-	_fnMIDIGetNumberOfSources func() uint
-// Deprecated: No longer supported
+	_fnMIDIGetNumberOfSources         func() uint
+	// Deprecated: No longer supported
 	_fnMIDIGetSerialPortDrivers func(unsafe.Pointer) int
-// Deprecated: No longer supported
-	_fnMIDIGetSerialPortOwner func(unsafe.Pointer, unsafe.Pointer) int
-	_fnMIDIGetSource func(uint) uint
-	_fnMIDIInputPortCreate func(uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint) int
-	_fnMIDIInputPortCreateWithBlock func(uint, unsafe.Pointer, *uint, objc.Block) int
-	_fnMIDIInputPortCreateWithProtocol func(uint, unsafe.Pointer, MIDIProtocolID, *uint, objc.Block) int
-	_fnMIDIJitterReductionClockMessage func(uint16) uint
+	// Deprecated: No longer supported
+	_fnMIDIGetSerialPortOwner              func(unsafe.Pointer, unsafe.Pointer) int
+	_fnMIDIGetSource                       func(uint) uint
+	_fnMIDIInputPortCreate                 func(uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint) int
+	_fnMIDIInputPortCreateWithBlock        func(uint, unsafe.Pointer, *uint, objc.Block) int
+	_fnMIDIInputPortCreateWithProtocol     func(uint, unsafe.Pointer, MIDIProtocolID, *uint, objc.Block) int
+	_fnMIDIJitterReductionClockMessage     func(uint16) uint
 	_fnMIDIJitterReductionTimestampMessage func(uint16) uint
-	_fnMIDIMessageTypeForUPWord func(uint) MIDIMessageType
-	_fnMIDINoOpMessage func() uint
-	_fnMIDIObjectFindByUniqueID func(int, *uint, *MIDIObjectType) int
-	_fnMIDIObjectGetDataProperty func(uint, unsafe.Pointer, unsafe.Pointer) int
-	_fnMIDIObjectGetDictionaryProperty func(uint, unsafe.Pointer, unsafe.Pointer) int
-	_fnMIDIObjectGetIntegerProperty func(uint, unsafe.Pointer, *int) int
-	_fnMIDIObjectGetProperties func(uint, unsafe.Pointer, uint8) int
-	_fnMIDIObjectGetStringProperty func(uint, unsafe.Pointer, unsafe.Pointer) int
-	_fnMIDIObjectRemoveProperty func(uint, unsafe.Pointer) int
-	_fnMIDIObjectSetDataProperty func(uint, unsafe.Pointer, unsafe.Pointer) int
-	_fnMIDIObjectSetDictionaryProperty func(uint, unsafe.Pointer, unsafe.Pointer) int
-	_fnMIDIObjectSetIntegerProperty func(uint, unsafe.Pointer, int) int
-	_fnMIDIObjectSetStringProperty func(uint, unsafe.Pointer, unsafe.Pointer) int
-	_fnMIDIOutputPortCreate func(uint, unsafe.Pointer, *uint) int
-	_fnMIDIPacketListAdd func(*MIDIPacketList, uint, *MIDIPacket, uint64, uint, *uint8) *MIDIPacket
-	_fnMIDIPacketListInit func(*MIDIPacketList) *MIDIPacket
+	_fnMIDIMessageTypeForUPWord            func(uint) MIDIMessageType
+	_fnMIDINoOpMessage                     func() uint
+	_fnMIDIObjectFindByUniqueID            func(int, *uint, *MIDIObjectType) int
+	_fnMIDIObjectGetDataProperty           func(uint, unsafe.Pointer, unsafe.Pointer) int
+	_fnMIDIObjectGetDictionaryProperty     func(uint, unsafe.Pointer, unsafe.Pointer) int
+	_fnMIDIObjectGetIntegerProperty        func(uint, unsafe.Pointer, *int) int
+	_fnMIDIObjectGetProperties             func(uint, unsafe.Pointer, uint8) int
+	_fnMIDIObjectGetStringProperty         func(uint, unsafe.Pointer, unsafe.Pointer) int
+	_fnMIDIObjectRemoveProperty            func(uint, unsafe.Pointer) int
+	_fnMIDIObjectSetDataProperty           func(uint, unsafe.Pointer, unsafe.Pointer) int
+	_fnMIDIObjectSetDictionaryProperty     func(uint, unsafe.Pointer, unsafe.Pointer) int
+	_fnMIDIObjectSetIntegerProperty        func(uint, unsafe.Pointer, int) int
+	_fnMIDIObjectSetStringProperty         func(uint, unsafe.Pointer, unsafe.Pointer) int
+	_fnMIDIOutputPortCreate                func(uint, unsafe.Pointer, *uint) int
+	_fnMIDIPacketListAdd                   func(*MIDIPacketList, uint, *MIDIPacket, uint64, uint, *uint8) *MIDIPacket
+	_fnMIDIPacketListInit                  func(*MIDIPacketList) *MIDIPacket
 	// @function		MIDIPacketNext @abstract 		Advances a MIDIPacket pointer to the MIDIPacket which immediately follows it in memory if it is part of a MIDIPacketList. @param			pkt A pointer to a MIDIPacket in a MIDIPacketList. @result			The subsequent packet in the MIDIPacketList.
-	_fnMIDIPacketNext func(*MIDIPacket) *MIDIPacket
-	_fnMIDIPortConnectSource func(uint, uint, unsafe.Pointer) int
+	_fnMIDIPacketNext           func(*MIDIPacket) *MIDIPacket
+	_fnMIDIPortConnectSource    func(uint, uint, unsafe.Pointer) int
 	_fnMIDIPortDisconnectSource func(uint, uint) int
-	_fnMIDIPortDispose func(uint) int
-	_fnMIDIReceived func(uint, *MIDIPacketList) int
-	_fnMIDIReceivedEventList func(uint, *MIDIEventList) int
-	_fnMIDIRestart func() int
-	_fnMIDISend func(uint, uint, *MIDIPacketList) int
-	_fnMIDISendEventList func(uint, uint, *MIDIEventList) int
-	_fnMIDISendSysex func(*MIDISysexSendRequest) int
-	_fnMIDISendUMPSysex func(*MIDISysexSendRequestUMP) int
-	_fnMIDISendUMPSysex8 func(*MIDISysexSendRequestUMP) int
-// Deprecated: No longer supported
-	_fnMIDISetSerialPortOwner func(unsafe.Pointer, unsafe.Pointer) int
-	_fnMIDISetupAddDevice func(uint) int
+	_fnMIDIPortDispose          func(uint) int
+	_fnMIDIReceived             func(uint, *MIDIPacketList) int
+	_fnMIDIReceivedEventList    func(uint, *MIDIEventList) int
+	_fnMIDIRestart              func() int
+	_fnMIDISend                 func(uint, uint, *MIDIPacketList) int
+	_fnMIDISendEventList        func(uint, uint, *MIDIEventList) int
+	_fnMIDISendSysex            func(*MIDISysexSendRequest) int
+	_fnMIDISendUMPSysex         func(*MIDISysexSendRequestUMP) int
+	_fnMIDISendUMPSysex8        func(*MIDISysexSendRequestUMP) int
+	// Deprecated: No longer supported
+	_fnMIDISetSerialPortOwner     func(unsafe.Pointer, unsafe.Pointer) int
+	_fnMIDISetupAddDevice         func(uint) int
 	_fnMIDISetupAddExternalDevice func(uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnMIDISetupCreate func(*uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnMIDISetupDispose func(uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnMIDISetupFromData func(unsafe.Pointer, *uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnMIDISetupGetCurrent func(*uint) int
-// Deprecated: No longer supported
-	_fnMIDISetupInstall func(uint) int
-	_fnMIDISetupRemoveDevice func(uint) int
+	// Deprecated: No longer supported
+	_fnMIDISetupInstall              func(uint) int
+	_fnMIDISetupRemoveDevice         func(uint) int
 	_fnMIDISetupRemoveExternalDevice func(uint) int
-// Deprecated: No longer supported
-	_fnMIDISetupToData func(uint, unsafe.Pointer) int
-	_fnMIDISourceCreate func(uint, unsafe.Pointer, *uint) int
-	_fnMIDISourceCreateWithProtocol func(uint, unsafe.Pointer, MIDIProtocolID, *uint) int
-	_fnMIDIThruConnectionCreate func(unsafe.Pointer, unsafe.Pointer, *uint) int
-	_fnMIDIThruConnectionDispose func(uint) int
-	_fnMIDIThruConnectionFind func(unsafe.Pointer, unsafe.Pointer) int
-	_fnMIDIThruConnectionGetParams func(uint, unsafe.Pointer) int
+	// Deprecated: No longer supported
+	_fnMIDISetupToData                    func(uint, unsafe.Pointer) int
+	_fnMIDISourceCreate                   func(uint, unsafe.Pointer, *uint) int
+	_fnMIDISourceCreateWithProtocol       func(uint, unsafe.Pointer, MIDIProtocolID, *uint) int
+	_fnMIDIThruConnectionCreate           func(unsafe.Pointer, unsafe.Pointer, *uint) int
+	_fnMIDIThruConnectionDispose          func(uint) int
+	_fnMIDIThruConnectionFind             func(unsafe.Pointer, unsafe.Pointer) int
+	_fnMIDIThruConnectionGetParams        func(uint, unsafe.Pointer) int
 	_fnMIDIThruConnectionParamsInitialize func(*MIDIThruConnectionParams)
 	// @defined    MIDIThruConnectionParamsSize @abstract   Returns the size of a MIDIThruConnectionParams. Accounts for the variable-length elements in the structure and returns its true size in bytes.
-	_fnMIDIThruConnectionParamsSize func(*MIDIThruConnectionParams) uint
-	_fnMIDIThruConnectionSetParams func(uint, unsafe.Pointer) int
+	_fnMIDIThruConnectionParamsSize   func(*MIDIThruConnectionParams) uint
+	_fnMIDIThruConnectionSetParams    func(uint, unsafe.Pointer) int
 	_fnMIDITicksSinceLastEventMessage func(uint) uint
-	___builtin___memcpy_chk func(unsafe.Pointer, unsafe.Pointer, uint, uint) unsafe.Pointer
-	___builtin_object_size func(unsafe.Pointer, int) uint
+	___builtin___memcpy_chk           func(unsafe.Pointer, unsafe.Pointer, uint, uint) unsafe.Pointer
+	___builtin_object_size            func(unsafe.Pointer, int) uint
 )
 
 func MIDI1UPChannelPressure(group uint8, channel uint8, value uint8) uint {
@@ -838,4 +838,3 @@ func BuiltinMemcpyChk(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 uint, arg4 u
 func BuiltinObjectSize(arg unsafe.Pointer, arg2 int) uint {
 	return ___builtin_object_size(arg, arg2)
 }
-

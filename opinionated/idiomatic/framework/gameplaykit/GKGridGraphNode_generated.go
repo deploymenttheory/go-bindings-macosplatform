@@ -51,4 +51,3 @@ type GridGraphNodeable interface {
 }
 
 var _ GridGraphNodeable = (*GridGraphNode)(nil)
-

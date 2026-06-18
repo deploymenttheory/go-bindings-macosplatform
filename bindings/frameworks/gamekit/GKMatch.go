@@ -18,22 +18,22 @@ type GKMatch struct {
 }
 
 var (
-	_clsGKMatch = _objcClass("GKMatch")
-	_gKMatchSelSendDataToPlayersDataModeError = objc.RegisterName("sendData:toPlayers:dataMode:error:")
-	_gKMatchSelSendDataToAllPlayersWithDataModeError = objc.RegisterName("sendDataToAllPlayers:withDataMode:error:")
-	_gKMatchSelDisconnect = objc.RegisterName("disconnect")
+	_clsGKMatch                                             = _objcClass("GKMatch")
+	_gKMatchSelSendDataToPlayersDataModeError               = objc.RegisterName("sendData:toPlayers:dataMode:error:")
+	_gKMatchSelSendDataToAllPlayersWithDataModeError        = objc.RegisterName("sendDataToAllPlayers:withDataMode:error:")
+	_gKMatchSelDisconnect                                   = objc.RegisterName("disconnect")
 	_gKMatchSelChooseBestHostingPlayerWithCompletionHandler = objc.RegisterName("chooseBestHostingPlayerWithCompletionHandler:")
-	_gKMatchSelRematchWithCompletionHandler = objc.RegisterName("rematchWithCompletionHandler:")
-	_gKMatchSelVoiceChatWithName = objc.RegisterName("voiceChatWithName:")
-	_gKMatchSelPlayers = objc.RegisterName("players")
-	_gKMatchSelDelegate = objc.RegisterName("delegate")
-	_gKMatchSelSetDelegate = objc.RegisterName("setDelegate:")
-	_gKMatchSelExpectedPlayerCount = objc.RegisterName("expectedPlayerCount")
-	_gKMatchSelProperties = objc.RegisterName("properties")
-	_gKMatchSelPlayerProperties = objc.RegisterName("playerProperties")
-	_gKMatchSelChooseBestHostPlayerWithCompletionHandler = objc.RegisterName("chooseBestHostPlayerWithCompletionHandler:")
-	_gKMatchSelSendDataToPlayersWithDataModeError = objc.RegisterName("sendData:toPlayers:withDataMode:error:")
-	_gKMatchSelPlayerIDs = objc.RegisterName("playerIDs")
+	_gKMatchSelRematchWithCompletionHandler                 = objc.RegisterName("rematchWithCompletionHandler:")
+	_gKMatchSelVoiceChatWithName                            = objc.RegisterName("voiceChatWithName:")
+	_gKMatchSelPlayers                                      = objc.RegisterName("players")
+	_gKMatchSelDelegate                                     = objc.RegisterName("delegate")
+	_gKMatchSelSetDelegate                                  = objc.RegisterName("setDelegate:")
+	_gKMatchSelExpectedPlayerCount                          = objc.RegisterName("expectedPlayerCount")
+	_gKMatchSelProperties                                   = objc.RegisterName("properties")
+	_gKMatchSelPlayerProperties                             = objc.RegisterName("playerProperties")
+	_gKMatchSelChooseBestHostPlayerWithCompletionHandler    = objc.RegisterName("chooseBestHostPlayerWithCompletionHandler:")
+	_gKMatchSelSendDataToPlayersWithDataModeError           = objc.RegisterName("sendData:toPlayers:withDataMode:error:")
+	_gKMatchSelPlayerIDs                                    = objc.RegisterName("playerIDs")
 )
 
 func GKMatchFromID(id objc.ID) *GKMatch {
@@ -105,13 +105,17 @@ func (o *GKMatch) RematchWithCompletionHandler(completionHandler func(*GKMatch, 
 // Deprecated: No longer supported
 func (o *GKMatch) VoiceChatWithName(name *foundation.NSString) *GKVoiceChat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKMatchSelVoiceChatWithName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKVoiceChatFromID(_ret)
 }
 
 func (o *GKMatch) Players() *foundation.NSArray[*GKPlayer] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKMatchSelPlayers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GKPlayer](_ret)
 }
 
@@ -171,4 +175,3 @@ func (o *GKMatch) PlayerIDs() *foundation.NSArray[*foundation.NSString] {
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _gKMatchSelPlayerIDs)
 	return _ret
 }
-

@@ -17,23 +17,23 @@ type MTLArgument struct {
 }
 
 var (
-	_clsMTLArgument = _objcClass("MTLArgument")
-	_mTLArgumentSelName = objc.RegisterName("name")
-	_mTLArgumentSelType = objc.RegisterName("type")
-	_mTLArgumentSelAccess = objc.RegisterName("access")
-	_mTLArgumentSelIndex = objc.RegisterName("index")
-	_mTLArgumentSelIsActive = objc.RegisterName("isActive")
-	_mTLArgumentSelBufferAlignment = objc.RegisterName("bufferAlignment")
-	_mTLArgumentSelBufferDataSize = objc.RegisterName("bufferDataSize")
-	_mTLArgumentSelBufferDataType = objc.RegisterName("bufferDataType")
-	_mTLArgumentSelBufferStructType = objc.RegisterName("bufferStructType")
-	_mTLArgumentSelBufferPointerType = objc.RegisterName("bufferPointerType")
+	_clsMTLArgument                           = _objcClass("MTLArgument")
+	_mTLArgumentSelName                       = objc.RegisterName("name")
+	_mTLArgumentSelType                       = objc.RegisterName("type")
+	_mTLArgumentSelAccess                     = objc.RegisterName("access")
+	_mTLArgumentSelIndex                      = objc.RegisterName("index")
+	_mTLArgumentSelIsActive                   = objc.RegisterName("isActive")
+	_mTLArgumentSelBufferAlignment            = objc.RegisterName("bufferAlignment")
+	_mTLArgumentSelBufferDataSize             = objc.RegisterName("bufferDataSize")
+	_mTLArgumentSelBufferDataType             = objc.RegisterName("bufferDataType")
+	_mTLArgumentSelBufferStructType           = objc.RegisterName("bufferStructType")
+	_mTLArgumentSelBufferPointerType          = objc.RegisterName("bufferPointerType")
 	_mTLArgumentSelThreadgroupMemoryAlignment = objc.RegisterName("threadgroupMemoryAlignment")
-	_mTLArgumentSelThreadgroupMemoryDataSize = objc.RegisterName("threadgroupMemoryDataSize")
-	_mTLArgumentSelTextureType = objc.RegisterName("textureType")
-	_mTLArgumentSelTextureDataType = objc.RegisterName("textureDataType")
-	_mTLArgumentSelIsDepthTexture = objc.RegisterName("isDepthTexture")
-	_mTLArgumentSelArrayLength = objc.RegisterName("arrayLength")
+	_mTLArgumentSelThreadgroupMemoryDataSize  = objc.RegisterName("threadgroupMemoryDataSize")
+	_mTLArgumentSelTextureType                = objc.RegisterName("textureType")
+	_mTLArgumentSelTextureDataType            = objc.RegisterName("textureDataType")
+	_mTLArgumentSelIsDepthTexture             = objc.RegisterName("isDepthTexture")
+	_mTLArgumentSelArrayLength                = objc.RegisterName("arrayLength")
 )
 
 func MTLArgumentFromID(id objc.ID) *MTLArgument {
@@ -49,7 +49,9 @@ func MTLArgumentFromID(id objc.ID) *MTLArgument {
 // Deprecated: since macOS 13.0.
 func (o *MTLArgument) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLArgumentSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -91,13 +93,17 @@ func (o *MTLArgument) BufferDataType() MTLDataType {
 
 func (o *MTLArgument) BufferStructType() *MTLStructType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLArgumentSelBufferStructType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLStructTypeFromID(_ret)
 }
 
 func (o *MTLArgument) BufferPointerType() *MTLPointerType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLArgumentSelBufferPointerType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLPointerTypeFromID(_ret)
 }
 
@@ -130,4 +136,3 @@ func (o *MTLArgument) ArrayLength() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mTLArgumentSelArrayLength)
 	return _ret
 }
-

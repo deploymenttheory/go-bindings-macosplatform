@@ -16,7 +16,7 @@ type MLComputePlanCost struct {
 }
 
 var (
-	_clsMLComputePlanCost = _objcClass("MLComputePlanCost")
+	_clsMLComputePlanCost       = _objcClass("MLComputePlanCost")
 	_mLComputePlanCostSelWeight = objc.RegisterName("weight")
 )
 
@@ -34,4 +34,3 @@ func (o *MLComputePlanCost) Weight() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _mLComputePlanCostSelWeight)
 	return _ret
 }
-

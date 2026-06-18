@@ -76,9 +76,13 @@ func (x *HumanBodyPoseObservation) AvailableJointsGroupNames() []*foundation.NSS
 	})
 }
 
-func (x *HumanBodyPoseObservation) asRecognizedPointsObservation() *raw.VNRecognizedPointsObservation { return &x.inner.VNRecognizedPointsObservation }
+func (x *HumanBodyPoseObservation) asRecognizedPointsObservation() *raw.VNRecognizedPointsObservation {
+	return &x.inner.VNRecognizedPointsObservation
+}
 
-func (x *HumanBodyPoseObservation) asObservation() *raw.VNObservation { return &x.inner.VNRecognizedPointsObservation.VNObservation }
+func (x *HumanBodyPoseObservation) asObservation() *raw.VNObservation {
+	return &x.inner.VNRecognizedPointsObservation.VNObservation
+}
 
 // HumanBodyPoseObservationable is the interface implemented by [HumanBodyPoseObservation], for mocking and DI.
 type HumanBodyPoseObservationable interface {
@@ -90,4 +94,3 @@ type HumanBodyPoseObservationable interface {
 }
 
 var _ HumanBodyPoseObservationable = (*HumanBodyPoseObservation)(nil)
-

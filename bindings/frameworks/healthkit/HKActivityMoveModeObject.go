@@ -16,7 +16,7 @@ type HKActivityMoveModeObject struct {
 }
 
 var (
-	_clsHKActivityMoveModeObject = _objcClass("HKActivityMoveModeObject")
+	_clsHKActivityMoveModeObject                 = _objcClass("HKActivityMoveModeObject")
 	_hKActivityMoveModeObjectSelActivityMoveMode = objc.RegisterName("activityMoveMode")
 )
 
@@ -34,4 +34,3 @@ func (o *HKActivityMoveModeObject) ActivityMoveMode() HKActivityMoveMode {
 	_ret := objc.Send[HKActivityMoveMode](o.Ptr(), _hKActivityMoveModeObjectSelActivityMoveMode)
 	return _ret
 }
-

@@ -70,4 +70,3 @@ type UserNotificationActionable interface {
 }
 
 var _ UserNotificationActionable = (*UserNotificationAction)(nil)
-

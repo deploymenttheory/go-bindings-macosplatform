@@ -17,11 +17,11 @@ type MPSImageStatisticsMean struct {
 }
 
 var (
-	_clsMPSImageStatisticsMean = _objcClass("MPSImageStatisticsMean")
-	_mPSImageStatisticsMeanSelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsMPSImageStatisticsMean                    = _objcClass("MPSImageStatisticsMean")
+	_mPSImageStatisticsMeanSelInitWithDevice      = objc.RegisterName("initWithDevice:")
 	_mPSImageStatisticsMeanSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSImageStatisticsMeanSelClipRectSource = objc.RegisterName("clipRectSource")
-	_mPSImageStatisticsMeanSelSetClipRectSource = objc.RegisterName("setClipRectSource:")
+	_mPSImageStatisticsMeanSelClipRectSource      = objc.RegisterName("clipRectSource")
+	_mPSImageStatisticsMeanSelSetClipRectSource   = objc.RegisterName("setClipRectSource:")
 )
 
 func MPSImageStatisticsMeanFromID(id objc.ID) *MPSImageStatisticsMean {
@@ -36,14 +36,18 @@ func MPSImageStatisticsMeanFromID(id objc.ID) *MPSImageStatisticsMean {
 
 func (o *MPSImageStatisticsMean) InitWithDevice(device metal.MTLDevice) *MPSImageStatisticsMean {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageStatisticsMeanSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageStatisticsMeanFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSImageStatisticsMean) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSImageStatisticsMean {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageStatisticsMeanSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageStatisticsMeanFromID(_ret)
 }
 
@@ -56,4 +60,3 @@ func (o *MPSImageStatisticsMean) ClipRectSource() metal.MTLRegion {
 func (o *MPSImageStatisticsMean) SetClipRectSource(clipRectSource metal.MTLRegion) {
 	o.Ptr().Send(_mPSImageStatisticsMeanSelSetClipRectSource, clipRectSource)
 }
-

@@ -25,4 +25,3 @@ func VNDetectHorizonRequestFromID(id objc.ID) *VNDetectHorizonRequest {
 	purego.Track(o)
 	return o
 }
-

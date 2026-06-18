@@ -8,18 +8,18 @@ import (
 )
 
 var (
-	_fnDRBurnSessionBeginProgressDialog func(unsafe.Pointer, unsafe.Pointer, *DRBurnSessionProgressDialogOptions, *DRBurnSessionProgressCallbacks)
-	_fnDRBurnSessionCreate func() unsafe.Pointer
-	_fnDRBurnSessionGetBurn func(unsafe.Pointer) unsafe.Pointer
-	_fnDRBurnSessionGetTypeID func() uint
-	_fnDRBurnSessionSetBurn func(unsafe.Pointer, unsafe.Pointer)
-	_fnDRBurnSessionSetupDialog func(unsafe.Pointer, *DRBurnSessionSetupDialogOptions, *DRBurnSessionSetupCallbacks) int8
+	_fnDRBurnSessionBeginProgressDialog  func(unsafe.Pointer, unsafe.Pointer, *DRBurnSessionProgressDialogOptions, *DRBurnSessionProgressCallbacks)
+	_fnDRBurnSessionCreate               func() unsafe.Pointer
+	_fnDRBurnSessionGetBurn              func(unsafe.Pointer) unsafe.Pointer
+	_fnDRBurnSessionGetTypeID            func() uint
+	_fnDRBurnSessionSetBurn              func(unsafe.Pointer, unsafe.Pointer)
+	_fnDRBurnSessionSetupDialog          func(unsafe.Pointer, *DRBurnSessionSetupDialogOptions, *DRBurnSessionSetupCallbacks) int8
 	_fnDREraseSessionBeginProgressDialog func(unsafe.Pointer, *DREraseSessionProgressDialogOptions, *DREraseSessionProgressCallbacks)
-	_fnDREraseSessionCreate func() unsafe.Pointer
-	_fnDREraseSessionGetErase func(unsafe.Pointer) unsafe.Pointer
-	_fnDREraseSessionGetTypeID func() uint
-	_fnDREraseSessionSetErase func(unsafe.Pointer, unsafe.Pointer)
-	_fnDREraseSessionSetupDialog func(unsafe.Pointer, *DREraseSessionSetupDialogOptions, *DREraseSessionSetupCallbacks) int8
+	_fnDREraseSessionCreate              func() unsafe.Pointer
+	_fnDREraseSessionGetErase            func(unsafe.Pointer) unsafe.Pointer
+	_fnDREraseSessionGetTypeID           func() uint
+	_fnDREraseSessionSetErase            func(unsafe.Pointer, unsafe.Pointer)
+	_fnDREraseSessionSetupDialog         func(unsafe.Pointer, *DREraseSessionSetupDialogOptions, *DREraseSessionSetupCallbacks) int8
 )
 
 func DRBurnSessionBeginProgressDialog(burnSession unsafe.Pointer, layout unsafe.Pointer, options *DRBurnSessionProgressDialogOptions, progressCallbacks *DRBurnSessionProgressCallbacks) {
@@ -69,4 +69,3 @@ func DREraseSessionSetErase(eraseSession unsafe.Pointer, erase unsafe.Pointer) {
 func DREraseSessionSetupDialog(eraseSession unsafe.Pointer, options *DREraseSessionSetupDialogOptions, setupCallbacks *DREraseSessionSetupCallbacks) int8 {
 	return _fnDREraseSessionSetupDialog(eraseSession, options, setupCallbacks)
 }
-

@@ -15,12 +15,12 @@ type NSImageCell struct {
 }
 
 var (
-	_clsNSImageCell = _objcClass("NSImageCell")
-	_nSImageCellSelImageAlignment = objc.RegisterName("imageAlignment")
-	_nSImageCellSelSetImageAlignment = objc.RegisterName("setImageAlignment:")
-	_nSImageCellSelImageScaling = objc.RegisterName("imageScaling")
-	_nSImageCellSelSetImageScaling = objc.RegisterName("setImageScaling:")
-	_nSImageCellSelImageFrameStyle = objc.RegisterName("imageFrameStyle")
+	_clsNSImageCell                   = _objcClass("NSImageCell")
+	_nSImageCellSelImageAlignment     = objc.RegisterName("imageAlignment")
+	_nSImageCellSelSetImageAlignment  = objc.RegisterName("setImageAlignment:")
+	_nSImageCellSelImageScaling       = objc.RegisterName("imageScaling")
+	_nSImageCellSelSetImageScaling    = objc.RegisterName("setImageScaling:")
+	_nSImageCellSelImageFrameStyle    = objc.RegisterName("imageFrameStyle")
 	_nSImageCellSelSetImageFrameStyle = objc.RegisterName("setImageFrameStyle:")
 )
 
@@ -60,4 +60,3 @@ func (o *NSImageCell) ImageFrameStyle() NSImageFrameStyle {
 func (o *NSImageCell) SetImageFrameStyle(imageFrameStyle NSImageFrameStyle) {
 	o.Ptr().Send(_nSImageCellSelSetImageFrameStyle, imageFrameStyle)
 }
-

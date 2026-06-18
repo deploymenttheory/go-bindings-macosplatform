@@ -16,9 +16,9 @@ type FSItemGetAttributesRequest struct {
 }
 
 var (
-	_clsFSItemGetAttributesRequest = _objcClass("FSItemGetAttributesRequest")
-	_fSItemGetAttributesRequestSelIsAttributeWanted = objc.RegisterName("isAttributeWanted:")
-	_fSItemGetAttributesRequestSelWantedAttributes = objc.RegisterName("wantedAttributes")
+	_clsFSItemGetAttributesRequest                    = _objcClass("FSItemGetAttributesRequest")
+	_fSItemGetAttributesRequestSelIsAttributeWanted   = objc.RegisterName("isAttributeWanted:")
+	_fSItemGetAttributesRequestSelWantedAttributes    = objc.RegisterName("wantedAttributes")
 	_fSItemGetAttributesRequestSelSetWantedAttributes = objc.RegisterName("setWantedAttributes:")
 )
 
@@ -32,7 +32,7 @@ func FSItemGetAttributesRequestFromID(id objc.ID) *FSItemGetAttributesRequest {
 	return o
 }
 
-// A method that indicates whether the request wants given attribute. - Parameter attribute: The ``FSItemAttribute`` to check.
+// A method that indicates whether the request wants given attribute. - Parameter attribute: The “FSItemAttribute“ to check.
 func (o *FSItemGetAttributesRequest) IsAttributeWanted(attribute FSItemAttribute) bool {
 	_ret := objc.Send[bool](o.Ptr(), _fSItemGetAttributesRequestSelIsAttributeWanted, attribute)
 	return _ret
@@ -47,4 +47,3 @@ func (o *FSItemGetAttributesRequest) WantedAttributes() FSItemAttribute {
 func (o *FSItemGetAttributesRequest) SetWantedAttributes(wantedAttributes FSItemAttribute) {
 	o.Ptr().Send(_fSItemGetAttributesRequestSelSetWantedAttributes, wantedAttributes)
 }
-

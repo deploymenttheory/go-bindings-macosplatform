@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_aeLib uintptr
-	_loadOnce sync.Once
+	_aeLib         uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -58,13 +58,19 @@ func _loadLibrary() {
 	_register("AECreateDesc", func() { purego.RegisterLibFunc(&_fnAECreateDesc, _aeLib, "AECreateDesc") })
 	_register("AECreateDescFromExternalPtr", func() { purego.RegisterLibFunc(&_fnAECreateDescFromExternalPtr, _aeLib, "AECreateDescFromExternalPtr") })
 	_register("AECreateList", func() { purego.RegisterLibFunc(&_fnAECreateList, _aeLib, "AECreateList") })
-	_register("AECreateRemoteProcessResolver", func() { purego.RegisterLibFunc(&_fnAECreateRemoteProcessResolver, _aeLib, "AECreateRemoteProcessResolver") })
+	_register("AECreateRemoteProcessResolver", func() {
+		purego.RegisterLibFunc(&_fnAECreateRemoteProcessResolver, _aeLib, "AECreateRemoteProcessResolver")
+	})
 	_register("AEDecodeMessage", func() { purego.RegisterLibFunc(&_fnAEDecodeMessage, _aeLib, "AEDecodeMessage") })
 	_register("AEDeleteItem", func() { purego.RegisterLibFunc(&_fnAEDeleteItem, _aeLib, "AEDeleteItem") })
 	_register("AEDeleteParam", func() { purego.RegisterLibFunc(&_fnAEDeleteParam, _aeLib, "AEDeleteParam") })
-	_register("AEDeterminePermissionToAutomateTarget", func() { purego.RegisterLibFunc(&_fnAEDeterminePermissionToAutomateTarget, _aeLib, "AEDeterminePermissionToAutomateTarget") })
+	_register("AEDeterminePermissionToAutomateTarget", func() {
+		purego.RegisterLibFunc(&_fnAEDeterminePermissionToAutomateTarget, _aeLib, "AEDeterminePermissionToAutomateTarget")
+	})
 	_register("AEDisposeDesc", func() { purego.RegisterLibFunc(&_fnAEDisposeDesc, _aeLib, "AEDisposeDesc") })
-	_register("AEDisposeRemoteProcessResolver", func() { purego.RegisterLibFunc(&_fnAEDisposeRemoteProcessResolver, _aeLib, "AEDisposeRemoteProcessResolver") })
+	_register("AEDisposeRemoteProcessResolver", func() {
+		purego.RegisterLibFunc(&_fnAEDisposeRemoteProcessResolver, _aeLib, "AEDisposeRemoteProcessResolver")
+	})
 	_register("AEDisposeToken", func() { purego.RegisterLibFunc(&_fnAEDisposeToken, _aeLib, "AEDisposeToken") })
 	_register("AEDuplicateDesc", func() { purego.RegisterLibFunc(&_fnAEDuplicateDesc, _aeLib, "AEDuplicateDesc") })
 	_register("AEFlattenDesc", func() { purego.RegisterLibFunc(&_fnAEFlattenDesc, _aeLib, "AEFlattenDesc") })
@@ -99,8 +105,12 @@ func _loadLibrary() {
 	_register("AEPutParamDesc", func() { purego.RegisterLibFunc(&_fnAEPutParamDesc, _aeLib, "AEPutParamDesc") })
 	_register("AEPutParamPtr", func() { purego.RegisterLibFunc(&_fnAEPutParamPtr, _aeLib, "AEPutParamPtr") })
 	_register("AEPutPtr", func() { purego.RegisterLibFunc(&_fnAEPutPtr, _aeLib, "AEPutPtr") })
-	_register("AERemoteProcessResolverGetProcesses", func() { purego.RegisterLibFunc(&_fnAERemoteProcessResolverGetProcesses, _aeLib, "AERemoteProcessResolverGetProcesses") })
-	_register("AERemoteProcessResolverScheduleWithRunLoop", func() { purego.RegisterLibFunc(&_fnAERemoteProcessResolverScheduleWithRunLoop, _aeLib, "AERemoteProcessResolverScheduleWithRunLoop") })
+	_register("AERemoteProcessResolverGetProcesses", func() {
+		purego.RegisterLibFunc(&_fnAERemoteProcessResolverGetProcesses, _aeLib, "AERemoteProcessResolverGetProcesses")
+	})
+	_register("AERemoteProcessResolverScheduleWithRunLoop", func() {
+		purego.RegisterLibFunc(&_fnAERemoteProcessResolverScheduleWithRunLoop, _aeLib, "AERemoteProcessResolverScheduleWithRunLoop")
+	})
 	_register("AERemoveCoercionHandler", func() { purego.RegisterLibFunc(&_fnAERemoveCoercionHandler, _aeLib, "AERemoveCoercionHandler") })
 	_register("AERemoveEventHandler", func() { purego.RegisterLibFunc(&_fnAERemoveEventHandler, _aeLib, "AERemoveEventHandler") })
 	_register("AERemoveObjectAccessor", func() { purego.RegisterLibFunc(&_fnAERemoveObjectAccessor, _aeLib, "AERemoveObjectAccessor") })

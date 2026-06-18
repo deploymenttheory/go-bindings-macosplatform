@@ -47,7 +47,9 @@ func (x *DelegatingPlaybackCoordinator) WithSuspensionReasonsThatTriggerWaiting(
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -96,7 +98,9 @@ func (x *DelegatingPlaybackCoordinator) CurrentItemIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
-func (x *DelegatingPlaybackCoordinator) asPlaybackCoordinator() *raw.AVPlaybackCoordinator { return &x.inner.AVPlaybackCoordinator }
+func (x *DelegatingPlaybackCoordinator) asPlaybackCoordinator() *raw.AVPlaybackCoordinator {
+	return &x.inner.AVPlaybackCoordinator
+}
 
 // DelegatingPlaybackCoordinatorable is the interface implemented by [DelegatingPlaybackCoordinator], for mocking and DI.
 type DelegatingPlaybackCoordinatorable interface {
@@ -112,4 +116,3 @@ type DelegatingPlaybackCoordinatorable interface {
 }
 
 var _ DelegatingPlaybackCoordinatorable = (*DelegatingPlaybackCoordinator)(nil)
-

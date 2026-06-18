@@ -15,7 +15,7 @@ type VZHostAudioOutputStreamSink struct {
 }
 
 var (
-	_clsVZHostAudioOutputStreamSink = _objcClass("VZHostAudioOutputStreamSink")
+	_clsVZHostAudioOutputStreamSink     = _objcClass("VZHostAudioOutputStreamSink")
 	_vZHostAudioOutputStreamSinkSelInit = objc.RegisterName("init")
 )
 
@@ -31,7 +31,8 @@ func VZHostAudioOutputStreamSinkFromID(id objc.ID) *VZHostAudioOutputStreamSink 
 
 func (o *VZHostAudioOutputStreamSink) Init() *VZHostAudioOutputStreamSink {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZHostAudioOutputStreamSinkSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZHostAudioOutputStreamSinkFromID(_ret)
 }
-

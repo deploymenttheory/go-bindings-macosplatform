@@ -19,88 +19,88 @@ type NSEvent struct {
 }
 
 var (
-	_clsNSEvent = _objcClass("NSEvent")
-	_nSEventSelCharactersByApplyingModifiers = objc.RegisterName("charactersByApplyingModifiers:")
-	_nSEventSelEventWithEventRef = objc.RegisterName("eventWithEventRef:")
-	_nSEventSelEventWithCGEvent = objc.RegisterName("eventWithCGEvent:")
-	_nSEventSelTouchesMatchingPhaseInView = objc.RegisterName("touchesMatchingPhase:inView:")
-	_nSEventSelAllTouches = objc.RegisterName("allTouches")
-	_nSEventSelTouchesForView = objc.RegisterName("touchesForView:")
-	_nSEventSelCoalescedTouchesForTouch = objc.RegisterName("coalescedTouchesForTouch:")
-	_nSEventSelTrackSwipeEventWithOptionsDampenAmountThresholdMinMaxUsingHandler = objc.RegisterName("trackSwipeEventWithOptions:dampenAmountThresholdMin:max:usingHandler:")
-	_nSEventSelStartPeriodicEventsAfterDelayWithPeriod = objc.RegisterName("startPeriodicEventsAfterDelay:withPeriod:")
-	_nSEventSelStopPeriodicEvents = objc.RegisterName("stopPeriodicEvents")
-	_nSEventSelMouseEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNumberClickCountPressure = objc.RegisterName("mouseEventWithType:location:modifierFlags:timestamp:windowNumber:context:eventNumber:clickCount:pressure:")
+	_clsNSEvent                                                                                                                       = _objcClass("NSEvent")
+	_nSEventSelCharactersByApplyingModifiers                                                                                          = objc.RegisterName("charactersByApplyingModifiers:")
+	_nSEventSelEventWithEventRef                                                                                                      = objc.RegisterName("eventWithEventRef:")
+	_nSEventSelEventWithCGEvent                                                                                                       = objc.RegisterName("eventWithCGEvent:")
+	_nSEventSelTouchesMatchingPhaseInView                                                                                             = objc.RegisterName("touchesMatchingPhase:inView:")
+	_nSEventSelAllTouches                                                                                                             = objc.RegisterName("allTouches")
+	_nSEventSelTouchesForView                                                                                                         = objc.RegisterName("touchesForView:")
+	_nSEventSelCoalescedTouchesForTouch                                                                                               = objc.RegisterName("coalescedTouchesForTouch:")
+	_nSEventSelTrackSwipeEventWithOptionsDampenAmountThresholdMinMaxUsingHandler                                                      = objc.RegisterName("trackSwipeEventWithOptions:dampenAmountThresholdMin:max:usingHandler:")
+	_nSEventSelStartPeriodicEventsAfterDelayWithPeriod                                                                                = objc.RegisterName("startPeriodicEventsAfterDelay:withPeriod:")
+	_nSEventSelStopPeriodicEvents                                                                                                     = objc.RegisterName("stopPeriodicEvents")
+	_nSEventSelMouseEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNumberClickCountPressure                       = objc.RegisterName("mouseEventWithType:location:modifierFlags:timestamp:windowNumber:context:eventNumber:clickCount:pressure:")
 	_nSEventSelKeyEventWithTypeLocationModifierFlagsTimestampWindowNumberContextCharactersCharactersIgnoringModifiersIsARepeatKeyCode = objc.RegisterName("keyEventWithType:location:modifierFlags:timestamp:windowNumber:context:characters:charactersIgnoringModifiers:isARepeat:keyCode:")
-	_nSEventSelEnterExitEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNumberTrackingNumberUserData = objc.RegisterName("enterExitEventWithType:location:modifierFlags:timestamp:windowNumber:context:eventNumber:trackingNumber:userData:")
-	_nSEventSelOtherEventWithTypeLocationModifierFlagsTimestampWindowNumberContextSubtypeData1Data2 = objc.RegisterName("otherEventWithType:location:modifierFlags:timestamp:windowNumber:context:subtype:data1:data2:")
-	_nSEventSelAddGlobalMonitorForEventsMatchingMaskHandler = objc.RegisterName("addGlobalMonitorForEventsMatchingMask:handler:")
-	_nSEventSelAddLocalMonitorForEventsMatchingMaskHandler = objc.RegisterName("addLocalMonitorForEventsMatchingMask:handler:")
-	_nSEventSelRemoveMonitor = objc.RegisterName("removeMonitor:")
-	_nSEventSelType = objc.RegisterName("type")
-	_nSEventSelModifierFlags = objc.RegisterName("modifierFlags")
-	_nSEventSelTimestamp = objc.RegisterName("timestamp")
-	_nSEventSelWindow = objc.RegisterName("window")
-	_nSEventSelWindowNumber = objc.RegisterName("windowNumber")
-	_nSEventSelContext = objc.RegisterName("context")
-	_nSEventSelClickCount = objc.RegisterName("clickCount")
-	_nSEventSelButtonNumber = objc.RegisterName("buttonNumber")
-	_nSEventSelEventNumber = objc.RegisterName("eventNumber")
-	_nSEventSelPressure = objc.RegisterName("pressure")
-	_nSEventSelLocationInWindow = objc.RegisterName("locationInWindow")
-	_nSEventSelDeltaX = objc.RegisterName("deltaX")
-	_nSEventSelDeltaY = objc.RegisterName("deltaY")
-	_nSEventSelDeltaZ = objc.RegisterName("deltaZ")
-	_nSEventSelHasPreciseScrollingDeltas = objc.RegisterName("hasPreciseScrollingDeltas")
-	_nSEventSelScrollingDeltaX = objc.RegisterName("scrollingDeltaX")
-	_nSEventSelScrollingDeltaY = objc.RegisterName("scrollingDeltaY")
-	_nSEventSelMomentumPhase = objc.RegisterName("momentumPhase")
-	_nSEventSelIsDirectionInvertedFromDevice = objc.RegisterName("isDirectionInvertedFromDevice")
-	_nSEventSelCharacters = objc.RegisterName("characters")
-	_nSEventSelCharactersIgnoringModifiers = objc.RegisterName("charactersIgnoringModifiers")
-	_nSEventSelIsARepeat = objc.RegisterName("isARepeat")
-	_nSEventSelKeyCode = objc.RegisterName("keyCode")
-	_nSEventSelTrackingNumber = objc.RegisterName("trackingNumber")
-	_nSEventSelUserData = objc.RegisterName("userData")
-	_nSEventSelTrackingArea = objc.RegisterName("trackingArea")
-	_nSEventSelSubtype = objc.RegisterName("subtype")
-	_nSEventSelData1 = objc.RegisterName("data1")
-	_nSEventSelData2 = objc.RegisterName("data2")
-	_nSEventSelEventRef = objc.RegisterName("eventRef")
-	_nSEventSelCGEvent = objc.RegisterName("CGEvent")
-	_nSEventSelIsMouseCoalescingEnabled = objc.RegisterName("isMouseCoalescingEnabled")
-	_nSEventSelSetMouseCoalescingEnabled = objc.RegisterName("setMouseCoalescingEnabled:")
-	_nSEventSelMagnification = objc.RegisterName("magnification")
-	_nSEventSelDeviceID = objc.RegisterName("deviceID")
-	_nSEventSelRotation = objc.RegisterName("rotation")
-	_nSEventSelAbsoluteX = objc.RegisterName("absoluteX")
-	_nSEventSelAbsoluteY = objc.RegisterName("absoluteY")
-	_nSEventSelAbsoluteZ = objc.RegisterName("absoluteZ")
-	_nSEventSelButtonMask = objc.RegisterName("buttonMask")
-	_nSEventSelTilt = objc.RegisterName("tilt")
-	_nSEventSelTangentialPressure = objc.RegisterName("tangentialPressure")
-	_nSEventSelVendorDefined = objc.RegisterName("vendorDefined")
-	_nSEventSelVendorID = objc.RegisterName("vendorID")
-	_nSEventSelTabletID = objc.RegisterName("tabletID")
-	_nSEventSelPointingDeviceID = objc.RegisterName("pointingDeviceID")
-	_nSEventSelSystemTabletID = objc.RegisterName("systemTabletID")
-	_nSEventSelVendorPointingDeviceType = objc.RegisterName("vendorPointingDeviceType")
-	_nSEventSelPointingDeviceSerialNumber = objc.RegisterName("pointingDeviceSerialNumber")
-	_nSEventSelUniqueID = objc.RegisterName("uniqueID")
-	_nSEventSelCapabilityMask = objc.RegisterName("capabilityMask")
-	_nSEventSelPointingDeviceType = objc.RegisterName("pointingDeviceType")
-	_nSEventSelIsEnteringProximity = objc.RegisterName("isEnteringProximity")
-	_nSEventSelPhase = objc.RegisterName("phase")
-	_nSEventSelStage = objc.RegisterName("stage")
-	_nSEventSelStageTransition = objc.RegisterName("stageTransition")
-	_nSEventSelAssociatedEventsMask = objc.RegisterName("associatedEventsMask")
-	_nSEventSelPressureBehavior = objc.RegisterName("pressureBehavior")
-	_nSEventSelIsSwipeTrackingFromScrollEventsEnabled = objc.RegisterName("isSwipeTrackingFromScrollEventsEnabled")
-	_nSEventSelMouseLocation = objc.RegisterName("mouseLocation")
-	_nSEventSelPressedMouseButtons = objc.RegisterName("pressedMouseButtons")
-	_nSEventSelDoubleClickInterval = objc.RegisterName("doubleClickInterval")
-	_nSEventSelKeyRepeatDelay = objc.RegisterName("keyRepeatDelay")
-	_nSEventSelKeyRepeatInterval = objc.RegisterName("keyRepeatInterval")
+	_nSEventSelEnterExitEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNumberTrackingNumberUserData               = objc.RegisterName("enterExitEventWithType:location:modifierFlags:timestamp:windowNumber:context:eventNumber:trackingNumber:userData:")
+	_nSEventSelOtherEventWithTypeLocationModifierFlagsTimestampWindowNumberContextSubtypeData1Data2                                   = objc.RegisterName("otherEventWithType:location:modifierFlags:timestamp:windowNumber:context:subtype:data1:data2:")
+	_nSEventSelAddGlobalMonitorForEventsMatchingMaskHandler                                                                           = objc.RegisterName("addGlobalMonitorForEventsMatchingMask:handler:")
+	_nSEventSelAddLocalMonitorForEventsMatchingMaskHandler                                                                            = objc.RegisterName("addLocalMonitorForEventsMatchingMask:handler:")
+	_nSEventSelRemoveMonitor                                                                                                          = objc.RegisterName("removeMonitor:")
+	_nSEventSelType                                                                                                                   = objc.RegisterName("type")
+	_nSEventSelModifierFlags                                                                                                          = objc.RegisterName("modifierFlags")
+	_nSEventSelTimestamp                                                                                                              = objc.RegisterName("timestamp")
+	_nSEventSelWindow                                                                                                                 = objc.RegisterName("window")
+	_nSEventSelWindowNumber                                                                                                           = objc.RegisterName("windowNumber")
+	_nSEventSelContext                                                                                                                = objc.RegisterName("context")
+	_nSEventSelClickCount                                                                                                             = objc.RegisterName("clickCount")
+	_nSEventSelButtonNumber                                                                                                           = objc.RegisterName("buttonNumber")
+	_nSEventSelEventNumber                                                                                                            = objc.RegisterName("eventNumber")
+	_nSEventSelPressure                                                                                                               = objc.RegisterName("pressure")
+	_nSEventSelLocationInWindow                                                                                                       = objc.RegisterName("locationInWindow")
+	_nSEventSelDeltaX                                                                                                                 = objc.RegisterName("deltaX")
+	_nSEventSelDeltaY                                                                                                                 = objc.RegisterName("deltaY")
+	_nSEventSelDeltaZ                                                                                                                 = objc.RegisterName("deltaZ")
+	_nSEventSelHasPreciseScrollingDeltas                                                                                              = objc.RegisterName("hasPreciseScrollingDeltas")
+	_nSEventSelScrollingDeltaX                                                                                                        = objc.RegisterName("scrollingDeltaX")
+	_nSEventSelScrollingDeltaY                                                                                                        = objc.RegisterName("scrollingDeltaY")
+	_nSEventSelMomentumPhase                                                                                                          = objc.RegisterName("momentumPhase")
+	_nSEventSelIsDirectionInvertedFromDevice                                                                                          = objc.RegisterName("isDirectionInvertedFromDevice")
+	_nSEventSelCharacters                                                                                                             = objc.RegisterName("characters")
+	_nSEventSelCharactersIgnoringModifiers                                                                                            = objc.RegisterName("charactersIgnoringModifiers")
+	_nSEventSelIsARepeat                                                                                                              = objc.RegisterName("isARepeat")
+	_nSEventSelKeyCode                                                                                                                = objc.RegisterName("keyCode")
+	_nSEventSelTrackingNumber                                                                                                         = objc.RegisterName("trackingNumber")
+	_nSEventSelUserData                                                                                                               = objc.RegisterName("userData")
+	_nSEventSelTrackingArea                                                                                                           = objc.RegisterName("trackingArea")
+	_nSEventSelSubtype                                                                                                                = objc.RegisterName("subtype")
+	_nSEventSelData1                                                                                                                  = objc.RegisterName("data1")
+	_nSEventSelData2                                                                                                                  = objc.RegisterName("data2")
+	_nSEventSelEventRef                                                                                                               = objc.RegisterName("eventRef")
+	_nSEventSelCGEvent                                                                                                                = objc.RegisterName("CGEvent")
+	_nSEventSelIsMouseCoalescingEnabled                                                                                               = objc.RegisterName("isMouseCoalescingEnabled")
+	_nSEventSelSetMouseCoalescingEnabled                                                                                              = objc.RegisterName("setMouseCoalescingEnabled:")
+	_nSEventSelMagnification                                                                                                          = objc.RegisterName("magnification")
+	_nSEventSelDeviceID                                                                                                               = objc.RegisterName("deviceID")
+	_nSEventSelRotation                                                                                                               = objc.RegisterName("rotation")
+	_nSEventSelAbsoluteX                                                                                                              = objc.RegisterName("absoluteX")
+	_nSEventSelAbsoluteY                                                                                                              = objc.RegisterName("absoluteY")
+	_nSEventSelAbsoluteZ                                                                                                              = objc.RegisterName("absoluteZ")
+	_nSEventSelButtonMask                                                                                                             = objc.RegisterName("buttonMask")
+	_nSEventSelTilt                                                                                                                   = objc.RegisterName("tilt")
+	_nSEventSelTangentialPressure                                                                                                     = objc.RegisterName("tangentialPressure")
+	_nSEventSelVendorDefined                                                                                                          = objc.RegisterName("vendorDefined")
+	_nSEventSelVendorID                                                                                                               = objc.RegisterName("vendorID")
+	_nSEventSelTabletID                                                                                                               = objc.RegisterName("tabletID")
+	_nSEventSelPointingDeviceID                                                                                                       = objc.RegisterName("pointingDeviceID")
+	_nSEventSelSystemTabletID                                                                                                         = objc.RegisterName("systemTabletID")
+	_nSEventSelVendorPointingDeviceType                                                                                               = objc.RegisterName("vendorPointingDeviceType")
+	_nSEventSelPointingDeviceSerialNumber                                                                                             = objc.RegisterName("pointingDeviceSerialNumber")
+	_nSEventSelUniqueID                                                                                                               = objc.RegisterName("uniqueID")
+	_nSEventSelCapabilityMask                                                                                                         = objc.RegisterName("capabilityMask")
+	_nSEventSelPointingDeviceType                                                                                                     = objc.RegisterName("pointingDeviceType")
+	_nSEventSelIsEnteringProximity                                                                                                    = objc.RegisterName("isEnteringProximity")
+	_nSEventSelPhase                                                                                                                  = objc.RegisterName("phase")
+	_nSEventSelStage                                                                                                                  = objc.RegisterName("stage")
+	_nSEventSelStageTransition                                                                                                        = objc.RegisterName("stageTransition")
+	_nSEventSelAssociatedEventsMask                                                                                                   = objc.RegisterName("associatedEventsMask")
+	_nSEventSelPressureBehavior                                                                                                       = objc.RegisterName("pressureBehavior")
+	_nSEventSelIsSwipeTrackingFromScrollEventsEnabled                                                                                 = objc.RegisterName("isSwipeTrackingFromScrollEventsEnabled")
+	_nSEventSelMouseLocation                                                                                                          = objc.RegisterName("mouseLocation")
+	_nSEventSelPressedMouseButtons                                                                                                    = objc.RegisterName("pressedMouseButtons")
+	_nSEventSelDoubleClickInterval                                                                                                    = objc.RegisterName("doubleClickInterval")
+	_nSEventSelKeyRepeatDelay                                                                                                         = objc.RegisterName("keyRepeatDelay")
+	_nSEventSelKeyRepeatInterval                                                                                                      = objc.RegisterName("keyRepeatInterval")
 )
 
 func NSEventFromID(id objc.ID) *NSEvent {
@@ -115,43 +115,57 @@ func NSEventFromID(id objc.ID) *NSEvent {
 
 func (o *NSEvent) CharactersByApplyingModifiers(modifiers NSEventModifierFlags) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEventSelCharactersByApplyingModifiers, modifiers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func NSEventEventWithEventRef(eventRef unsafe.Pointer) *NSEvent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSEvent), _nSEventSelEventWithEventRef, eventRef)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEventFromID(_ret)
 }
 
 func NSEventEventWithCGEvent(cgEvent unsafe.Pointer) *NSEvent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSEvent), _nSEventSelEventWithCGEvent, cgEvent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEventFromID(_ret)
 }
 
 func (o *NSEvent) TouchesMatchingPhaseInView(phase NSTouchPhase, view *NSView) *foundation.NSSet[*NSTouch] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEventSelTouchesMatchingPhaseInView, phase, view.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*NSTouch](_ret)
 }
 
 func (o *NSEvent) AllTouches() *foundation.NSSet[*NSTouch] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEventSelAllTouches)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*NSTouch](_ret)
 }
 
 func (o *NSEvent) TouchesForView(view *NSView) *foundation.NSSet[*NSTouch] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEventSelTouchesForView, view.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*NSTouch](_ret)
 }
 
 func (o *NSEvent) CoalescedTouchesForTouch(touch *NSTouch) *foundation.NSArray[*NSTouch] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEventSelCoalescedTouchesForTouch, touch.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSTouch](_ret)
 }
 
@@ -176,25 +190,33 @@ func NSEventStopPeriodicEvents() {
 
 func NSEventMouseEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNumberClickCountPressure(type_ NSEventType, location corefoundation.CGPoint, flags NSEventModifierFlags, time_ float64, wNum int, unusedPassNil *NSGraphicsContext, eNum int, cNum int, pressure float32) *NSEvent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSEvent), _nSEventSelMouseEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNumberClickCountPressure, type_, location, flags, time_, wNum, unusedPassNil.Ptr(), eNum, cNum, pressure)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEventFromID(_ret)
 }
 
 func NSEventKeyEventWithTypeLocationModifierFlagsTimestampWindowNumberContextCharactersCharactersIgnoringModifiersIsARepeatKeyCode(type_ NSEventType, location corefoundation.CGPoint, flags NSEventModifierFlags, time_ float64, wNum int, unusedPassNil *NSGraphicsContext, keys *foundation.NSString, ukeys *foundation.NSString, flag bool, code uint16) *NSEvent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSEvent), _nSEventSelKeyEventWithTypeLocationModifierFlagsTimestampWindowNumberContextCharactersCharactersIgnoringModifiersIsARepeatKeyCode, type_, location, flags, time_, wNum, unusedPassNil.Ptr(), keys.Ptr(), ukeys.Ptr(), flag, code)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEventFromID(_ret)
 }
 
 func NSEventEnterExitEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNumberTrackingNumberUserData(type_ NSEventType, location corefoundation.CGPoint, flags NSEventModifierFlags, time_ float64, wNum int, unusedPassNil *NSGraphicsContext, eNum int, tNum int, data unsafe.Pointer) *NSEvent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSEvent), _nSEventSelEnterExitEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNumberTrackingNumberUserData, type_, location, flags, time_, wNum, unusedPassNil.Ptr(), eNum, tNum, data)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEventFromID(_ret)
 }
 
 func NSEventOtherEventWithTypeLocationModifierFlagsTimestampWindowNumberContextSubtypeData1Data2(type_ NSEventType, location corefoundation.CGPoint, flags NSEventModifierFlags, time_ float64, wNum int, unusedPassNil *NSGraphicsContext, subtype int16, d1 int, d2 int) *NSEvent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSEvent), _nSEventSelOtherEventWithTypeLocationModifierFlagsTimestampWindowNumberContextSubtypeData1Data2, type_, location, flags, time_, wNum, unusedPassNil.Ptr(), subtype, d1, d2)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEventFromID(_ret)
 }
 
@@ -239,7 +261,9 @@ func (o *NSEvent) Timestamp() float64 {
 
 func (o *NSEvent) Window() *NSWindow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEventSelWindow)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWindowFromID(_ret)
 }
 
@@ -251,7 +275,9 @@ func (o *NSEvent) WindowNumber() int {
 // Deprecated: This method always returns nil. If you need access to the current drawing context, use [NSGraphicsContext currentContext] inside of a draw operation.
 func (o *NSEvent) Context() *NSGraphicsContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEventSelContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGraphicsContextFromID(_ret)
 }
 
@@ -324,13 +350,17 @@ func (o *NSEvent) IsDirectionInvertedFromDevice() bool {
 
 func (o *NSEvent) Characters() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEventSelCharacters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSEvent) CharactersIgnoringModifiers() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEventSelCharactersIgnoringModifiers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -356,7 +386,9 @@ func (o *NSEvent) UserData() unsafe.Pointer {
 
 func (o *NSEvent) TrackingArea() *NSTrackingArea {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEventSelTrackingArea)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTrackingAreaFromID(_ret)
 }
 
@@ -553,4 +585,3 @@ func NSEventKeyRepeatInterval() float64 {
 	_ret := objc.Send[float64](objc.ID(_clsNSEvent), _nSEventSelKeyRepeatInterval)
 	return _ret
 }
-

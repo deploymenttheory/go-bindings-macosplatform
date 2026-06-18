@@ -197,7 +197,9 @@ func (x *CNNGradientKernel) SetKernelOffsetY(kernelOffsetY int) {
 
 func (x *CNNGradientKernel) asCNNGradientKernel() *raw.MPSCNNGradientKernel { return x.inner }
 
-func (x *CNNGradientKernel) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNBinaryKernel }
+func (x *CNNGradientKernel) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNBinaryKernel
+}
 
 // CNNGradientKernelable is the interface implemented by [CNNGradientKernel], for mocking and DI.
 type CNNGradientKernelable interface {
@@ -231,4 +233,3 @@ type CNNGradientKernelable interface {
 }
 
 var _ CNNGradientKernelable = (*CNNGradientKernel)(nil)
-

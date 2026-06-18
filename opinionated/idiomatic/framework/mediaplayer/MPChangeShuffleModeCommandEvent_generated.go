@@ -45,7 +45,9 @@ func (x *ChangeShuffleModeCommandEvent) PreservesShuffleMode() bool {
 	return x.inner.PreservesShuffleMode()
 }
 
-func (x *ChangeShuffleModeCommandEvent) asRemoteCommandEvent() *raw.MPRemoteCommandEvent { return &x.inner.MPRemoteCommandEvent }
+func (x *ChangeShuffleModeCommandEvent) asRemoteCommandEvent() *raw.MPRemoteCommandEvent {
+	return &x.inner.MPRemoteCommandEvent
+}
 
 // ChangeShuffleModeCommandEventable is the interface implemented by [ChangeShuffleModeCommandEvent], for mocking and DI.
 type ChangeShuffleModeCommandEventable interface {
@@ -55,4 +57,3 @@ type ChangeShuffleModeCommandEventable interface {
 }
 
 var _ ChangeShuffleModeCommandEventable = (*ChangeShuffleModeCommandEvent)(nil)
-

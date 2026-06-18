@@ -81,7 +81,9 @@ func (x *CNNBatchNormalizationNode) SetTrainingStyle(trainingStyle raw.MPSNNTrai
 	x.inner.SetTrainingStyle(trainingStyle)
 }
 
-func (x *CNNBatchNormalizationNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+func (x *CNNBatchNormalizationNode) asNNFilterNode() *raw.MPSNNFilterNode {
+	return &x.inner.MPSNNFilterNode
+}
 
 // CNNBatchNormalizationNodeable is the interface implemented by [CNNBatchNormalizationNode], for mocking and DI.
 type CNNBatchNormalizationNodeable interface {
@@ -97,4 +99,3 @@ type CNNBatchNormalizationNodeable interface {
 }
 
 var _ CNNBatchNormalizationNodeable = (*CNNBatchNormalizationNode)(nil)
-

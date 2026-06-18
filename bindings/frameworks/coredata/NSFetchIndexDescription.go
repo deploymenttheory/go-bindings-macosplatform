@@ -16,14 +16,14 @@ type NSFetchIndexDescription struct {
 }
 
 var (
-	_clsNSFetchIndexDescription = _objcClass("NSFetchIndexDescription")
-	_nSFetchIndexDescriptionSelInitWithNameElements = objc.RegisterName("initWithName:elements:")
-	_nSFetchIndexDescriptionSelName = objc.RegisterName("name")
-	_nSFetchIndexDescriptionSelSetName = objc.RegisterName("setName:")
-	_nSFetchIndexDescriptionSelElements = objc.RegisterName("elements")
-	_nSFetchIndexDescriptionSelSetElements = objc.RegisterName("setElements:")
-	_nSFetchIndexDescriptionSelEntity = objc.RegisterName("entity")
-	_nSFetchIndexDescriptionSelPartialIndexPredicate = objc.RegisterName("partialIndexPredicate")
+	_clsNSFetchIndexDescription                         = _objcClass("NSFetchIndexDescription")
+	_nSFetchIndexDescriptionSelInitWithNameElements     = objc.RegisterName("initWithName:elements:")
+	_nSFetchIndexDescriptionSelName                     = objc.RegisterName("name")
+	_nSFetchIndexDescriptionSelSetName                  = objc.RegisterName("setName:")
+	_nSFetchIndexDescriptionSelElements                 = objc.RegisterName("elements")
+	_nSFetchIndexDescriptionSelSetElements              = objc.RegisterName("setElements:")
+	_nSFetchIndexDescriptionSelEntity                   = objc.RegisterName("entity")
+	_nSFetchIndexDescriptionSelPartialIndexPredicate    = objc.RegisterName("partialIndexPredicate")
 	_nSFetchIndexDescriptionSelSetPartialIndexPredicate = objc.RegisterName("setPartialIndexPredicate:")
 )
 
@@ -39,13 +39,17 @@ func NSFetchIndexDescriptionFromID(id objc.ID) *NSFetchIndexDescription {
 
 func (o *NSFetchIndexDescription) InitWithNameElements(name *foundation.NSString, elements *foundation.NSArray[*NSFetchIndexElementDescription]) *NSFetchIndexDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchIndexDescriptionSelInitWithNameElements, name.Ptr(), elements.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFetchIndexDescriptionFromID(_ret)
 }
 
 func (o *NSFetchIndexDescription) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchIndexDescriptionSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -55,7 +59,9 @@ func (o *NSFetchIndexDescription) SetName(name *foundation.NSString) {
 
 func (o *NSFetchIndexDescription) Elements() *foundation.NSArray[*NSFetchIndexElementDescription] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchIndexDescriptionSelElements)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSFetchIndexElementDescription](_ret)
 }
 
@@ -65,17 +71,20 @@ func (o *NSFetchIndexDescription) SetElements(elements *foundation.NSArray[*NSFe
 
 func (o *NSFetchIndexDescription) Entity() *NSEntityDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchIndexDescriptionSelEntity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEntityDescriptionFromID(_ret)
 }
 
 func (o *NSFetchIndexDescription) PartialIndexPredicate() *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchIndexDescriptionSelPartialIndexPredicate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
 func (o *NSFetchIndexDescription) SetPartialIndexPredicate(partialIndexPredicate *foundation.NSPredicate) {
 	o.Ptr().Send(_nSFetchIndexDescriptionSelSetPartialIndexPredicate, partialIndexPredicate.Ptr())
 }
-

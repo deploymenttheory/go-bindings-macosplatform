@@ -20,4 +20,3 @@ func CreateMatchingDictionaryWithVendorIDProductIDBcdDeviceDeviceClassDeviceSubc
 func CreateMatchingDictionaryWithVendorIDProductIDBcdDeviceInterfaceNumberConfigurationValueInterfaceClassInterfaceSubclassInterfaceProtocolSpeedProductIDArray(vendorID *foundation.NSNumber, productID *foundation.NSNumber, bcdDevice *foundation.NSNumber, interfaceNumber *foundation.NSNumber, configurationValue *foundation.NSNumber, interfaceClass *foundation.NSNumber, interfaceSubclass *foundation.NSNumber, interfaceProtocol *foundation.NSNumber, speed *foundation.NSNumber, productIDArray *foundation.NSArray[objc.ID]) unsafe.Pointer {
 	return raw.IOUSBHostInterfaceCreateMatchingDictionaryWithVendorIDProductIDBcdDeviceInterfaceNumberConfigurationValueInterfaceClassInterfaceSubclassInterfaceProtocolSpeedProductIDArray(vendorID, productID, bcdDevice, interfaceNumber, configurationValue, interfaceClass, interfaceSubclass, interfaceProtocol, speed, productIDArray)
 }
-

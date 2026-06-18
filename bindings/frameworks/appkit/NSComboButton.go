@@ -16,18 +16,18 @@ type NSComboButton struct {
 }
 
 var (
-	_clsNSComboButton = _objcClass("NSComboButton")
-	_nSComboButtonSelComboButtonWithTitleMenuTargetAction = objc.RegisterName("comboButtonWithTitle:menu:target:action:")
-	_nSComboButtonSelComboButtonWithImageMenuTargetAction = objc.RegisterName("comboButtonWithImage:menu:target:action:")
+	_clsNSComboButton                                          = _objcClass("NSComboButton")
+	_nSComboButtonSelComboButtonWithTitleMenuTargetAction      = objc.RegisterName("comboButtonWithTitle:menu:target:action:")
+	_nSComboButtonSelComboButtonWithImageMenuTargetAction      = objc.RegisterName("comboButtonWithImage:menu:target:action:")
 	_nSComboButtonSelComboButtonWithTitleImageMenuTargetAction = objc.RegisterName("comboButtonWithTitle:image:menu:target:action:")
-	_nSComboButtonSelTitle = objc.RegisterName("title")
-	_nSComboButtonSelSetTitle = objc.RegisterName("setTitle:")
-	_nSComboButtonSelImage = objc.RegisterName("image")
-	_nSComboButtonSelSetImage = objc.RegisterName("setImage:")
-	_nSComboButtonSelImageScaling = objc.RegisterName("imageScaling")
-	_nSComboButtonSelSetImageScaling = objc.RegisterName("setImageScaling:")
-	_nSComboButtonSelStyle = objc.RegisterName("style")
-	_nSComboButtonSelSetStyle = objc.RegisterName("setStyle:")
+	_nSComboButtonSelTitle                                     = objc.RegisterName("title")
+	_nSComboButtonSelSetTitle                                  = objc.RegisterName("setTitle:")
+	_nSComboButtonSelImage                                     = objc.RegisterName("image")
+	_nSComboButtonSelSetImage                                  = objc.RegisterName("setImage:")
+	_nSComboButtonSelImageScaling                              = objc.RegisterName("imageScaling")
+	_nSComboButtonSelSetImageScaling                           = objc.RegisterName("setImageScaling:")
+	_nSComboButtonSelStyle                                     = objc.RegisterName("style")
+	_nSComboButtonSelSetStyle                                  = objc.RegisterName("setStyle:")
 )
 
 func NSComboButtonFromID(id objc.ID) *NSComboButton {
@@ -43,28 +43,36 @@ func NSComboButtonFromID(id objc.ID) *NSComboButton {
 // Creates a standard combo button with a title, menu, and primary action. @param title The localized title string that is displayed on the button. @param menu The additional menu to display on the button. @param target The target object that receives primary action messages from the control. @param action The action message sent by the primary action portion of the control.
 func NSComboButtonComboButtonWithTitleMenuTargetAction(title *foundation.NSString, menu *NSMenu, target objc.ID, action objc.SEL) *NSComboButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSComboButton), _nSComboButtonSelComboButtonWithTitleMenuTargetAction, title.Ptr(), menu.Ptr(), target, action)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSComboButtonFromID(_ret)
 }
 
 // Creates a standard combo button with a image, menu, and primary action. @param image The image to display in the body of the button. @param menu The additional menu to display on the button. @param target The target object that receives primary action messages from the control. @param action The action message sent by the primary action portion of the control.
 func NSComboButtonComboButtonWithImageMenuTargetAction(image *NSImage, menu *NSMenu, target objc.ID, action objc.SEL) *NSComboButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSComboButton), _nSComboButtonSelComboButtonWithImageMenuTargetAction, image.Ptr(), menu.Ptr(), target, action)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSComboButtonFromID(_ret)
 }
 
 // Creates a standard combo button with a title, image, menu, and primary action. @param title The localized title string that is displayed on the button. @param image The image to display in the body of the button. @param menu The additional menu to display on the button. @param target The target object that receives primary action messages from the control. @param action The action message sent by the primary action portion of the control.
 func NSComboButtonComboButtonWithTitleImageMenuTargetAction(title *foundation.NSString, image *NSImage, menu *NSMenu, target objc.ID, action objc.SEL) *NSComboButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSComboButton), _nSComboButtonSelComboButtonWithTitleImageMenuTargetAction, title.Ptr(), image.Ptr(), menu.Ptr(), target, action)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSComboButtonFromID(_ret)
 }
 
 // The title displayed on the control. The default value is an empty string.
 func (o *NSComboButton) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSComboButtonSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -76,7 +84,9 @@ func (o *NSComboButton) SetTitle(title *foundation.NSString) {
 // The image displayed on the control. The default value is `nil`.
 func (o *NSComboButton) Image() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSComboButtonSelImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -106,4 +116,3 @@ func (o *NSComboButton) Style() NSComboButtonStyle {
 func (o *NSComboButton) SetStyle(style NSComboButtonStyle) {
 	o.Ptr().Send(_nSComboButtonSelSetStyle, style)
 }
-

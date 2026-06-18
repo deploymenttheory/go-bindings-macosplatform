@@ -18,7 +18,9 @@ type AddPaymentPassRequestConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.PKAddPaymentPassRequestConfiguration].
-func (x *AddPaymentPassRequestConfiguration) Unwrap() *raw.PKAddPaymentPassRequestConfiguration { return x.inner }
+func (x *AddPaymentPassRequestConfiguration) Unwrap() *raw.PKAddPaymentPassRequestConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -64,7 +66,9 @@ func (x *AddPaymentPassRequestConfiguration) WithCardDetails(items ...*raw.PKLab
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.PKLabeledValue](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -262,4 +266,3 @@ type AddPaymentPassRequestConfigurationable interface {
 }
 
 var _ AddPaymentPassRequestConfigurationable = (*AddPaymentPassRequestConfiguration)(nil)
-

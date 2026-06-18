@@ -18,7 +18,9 @@ type ImageStatisticsMeanAndVariance struct {
 }
 
 // Unwrap returns the underlying [raw.MPSImageStatisticsMeanAndVariance].
-func (x *ImageStatisticsMeanAndVariance) Unwrap() *raw.MPSImageStatisticsMeanAndVariance { return x.inner }
+func (x *ImageStatisticsMeanAndVariance) Unwrap() *raw.MPSImageStatisticsMeanAndVariance {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -80,7 +82,9 @@ func (x *ImageStatisticsMeanAndVariance) SetClipRectSource(clipRectSource metal.
 	x.inner.SetClipRectSource(clipRectSource)
 }
 
-func (x *ImageStatisticsMeanAndVariance) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageStatisticsMeanAndVariance) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
 // ImageStatisticsMeanAndVarianceable is the interface implemented by [ImageStatisticsMeanAndVariance], for mocking and DI.
 type ImageStatisticsMeanAndVarianceable interface {
@@ -94,4 +98,3 @@ type ImageStatisticsMeanAndVarianceable interface {
 }
 
 var _ ImageStatisticsMeanAndVarianceable = (*ImageStatisticsMeanAndVariance)(nil)
-

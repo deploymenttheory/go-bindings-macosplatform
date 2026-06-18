@@ -16,11 +16,11 @@ type MTRMicrowaveOvenModeClusterModeTagStruct struct {
 }
 
 var (
-	_clsMTRMicrowaveOvenModeClusterModeTagStruct = _objcClass("MTRMicrowaveOvenModeClusterModeTagStruct")
-	_mTRMicrowaveOvenModeClusterModeTagStructSelMfgCode = objc.RegisterName("mfgCode")
+	_clsMTRMicrowaveOvenModeClusterModeTagStruct           = _objcClass("MTRMicrowaveOvenModeClusterModeTagStruct")
+	_mTRMicrowaveOvenModeClusterModeTagStructSelMfgCode    = objc.RegisterName("mfgCode")
 	_mTRMicrowaveOvenModeClusterModeTagStructSelSetMfgCode = objc.RegisterName("setMfgCode:")
-	_mTRMicrowaveOvenModeClusterModeTagStructSelValue = objc.RegisterName("value")
-	_mTRMicrowaveOvenModeClusterModeTagStructSelSetValue = objc.RegisterName("setValue:")
+	_mTRMicrowaveOvenModeClusterModeTagStructSelValue      = objc.RegisterName("value")
+	_mTRMicrowaveOvenModeClusterModeTagStructSelSetValue   = objc.RegisterName("setValue:")
 )
 
 func MTRMicrowaveOvenModeClusterModeTagStructFromID(id objc.ID) *MTRMicrowaveOvenModeClusterModeTagStruct {
@@ -35,7 +35,9 @@ func MTRMicrowaveOvenModeClusterModeTagStructFromID(id objc.ID) *MTRMicrowaveOve
 
 func (o *MTRMicrowaveOvenModeClusterModeTagStruct) MfgCode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMicrowaveOvenModeClusterModeTagStructSelMfgCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRMicrowaveOvenModeClusterModeTagStruct) SetMfgCode(mfgCode *foundatio
 
 func (o *MTRMicrowaveOvenModeClusterModeTagStruct) Value() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMicrowaveOvenModeClusterModeTagStructSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRMicrowaveOvenModeClusterModeTagStruct) SetValue(value *foundation.NSNumber) {
 	o.Ptr().Send(_mTRMicrowaveOvenModeClusterModeTagStructSelSetValue, value.Ptr())
 }
-

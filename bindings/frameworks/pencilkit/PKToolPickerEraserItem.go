@@ -15,10 +15,10 @@ type PKToolPickerEraserItem struct {
 }
 
 var (
-	_clsPKToolPickerEraserItem = _objcClass("PKToolPickerEraserItem")
-	_pKToolPickerEraserItemSelInitWithEraserType = objc.RegisterName("initWithEraserType:")
+	_clsPKToolPickerEraserItem                        = _objcClass("PKToolPickerEraserItem")
+	_pKToolPickerEraserItemSelInitWithEraserType      = objc.RegisterName("initWithEraserType:")
 	_pKToolPickerEraserItemSelInitWithEraserTypeWidth = objc.RegisterName("initWithEraserType:width:")
-	_pKToolPickerEraserItemSelEraserTool = objc.RegisterName("eraserTool")
+	_pKToolPickerEraserItemSelEraserTool              = objc.RegisterName("eraserTool")
 )
 
 func PKToolPickerEraserItemFromID(id objc.ID) *PKToolPickerEraserItem {
@@ -34,20 +34,25 @@ func PKToolPickerEraserItemFromID(id objc.ID) *PKToolPickerEraserItem {
 // Create a new eraser tool item.
 func (o *PKToolPickerEraserItem) InitWithEraserType(eraserType PKEraserType) *PKToolPickerEraserItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKToolPickerEraserItemSelInitWithEraserType, eraserType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKToolPickerEraserItemFromID(_ret)
 }
 
 // Create a new eraser tool item with a width. @param eraserType The type of eraser. @param width The width of the eraser.
 func (o *PKToolPickerEraserItem) InitWithEraserTypeWidth(eraserType PKEraserType, width float64) *PKToolPickerEraserItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKToolPickerEraserItemSelInitWithEraserTypeWidth, eraserType, width)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKToolPickerEraserItemFromID(_ret)
 }
 
 func (o *PKToolPickerEraserItem) EraserTool() *PKEraserTool {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKToolPickerEraserItemSelEraserTool)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKEraserToolFromID(_ret)
 }
-

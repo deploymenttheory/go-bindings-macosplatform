@@ -150,4 +150,3 @@ type Argumentable interface {
 }
 
 var _ Argumentable = (*Argument)(nil)
-

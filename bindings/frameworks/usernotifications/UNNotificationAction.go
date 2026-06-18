@@ -16,13 +16,13 @@ type UNNotificationAction struct {
 }
 
 var (
-	_clsUNNotificationAction = _objcClass("UNNotificationAction")
-	_uNNotificationActionSelActionWithIdentifierTitleOptions = objc.RegisterName("actionWithIdentifier:title:options:")
+	_clsUNNotificationAction                                     = _objcClass("UNNotificationAction")
+	_uNNotificationActionSelActionWithIdentifierTitleOptions     = objc.RegisterName("actionWithIdentifier:title:options:")
 	_uNNotificationActionSelActionWithIdentifierTitleOptionsIcon = objc.RegisterName("actionWithIdentifier:title:options:icon:")
-	_uNNotificationActionSelIdentifier = objc.RegisterName("identifier")
-	_uNNotificationActionSelTitle = objc.RegisterName("title")
-	_uNNotificationActionSelOptions = objc.RegisterName("options")
-	_uNNotificationActionSelIcon = objc.RegisterName("icon")
+	_uNNotificationActionSelIdentifier                           = objc.RegisterName("identifier")
+	_uNNotificationActionSelTitle                                = objc.RegisterName("title")
+	_uNNotificationActionSelOptions                              = objc.RegisterName("options")
+	_uNNotificationActionSelIcon                                 = objc.RegisterName("icon")
 )
 
 func UNNotificationActionFromID(id objc.ID) *UNNotificationAction {
@@ -37,25 +37,33 @@ func UNNotificationActionFromID(id objc.ID) *UNNotificationAction {
 
 func UNNotificationActionActionWithIdentifierTitleOptions(identifier *foundation.NSString, title *foundation.NSString, options UNNotificationActionOptions) *UNNotificationAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationAction), _uNNotificationActionSelActionWithIdentifierTitleOptions, identifier.Ptr(), title.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UNNotificationActionFromID(_ret)
 }
 
 func UNNotificationActionActionWithIdentifierTitleOptionsIcon(identifier *foundation.NSString, title *foundation.NSString, options UNNotificationActionOptions, icon *UNNotificationActionIcon) *UNNotificationAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationAction), _uNNotificationActionSelActionWithIdentifierTitleOptionsIcon, identifier.Ptr(), title.Ptr(), options, icon.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UNNotificationActionFromID(_ret)
 }
 
 func (o *UNNotificationAction) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNNotificationActionSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *UNNotificationAction) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNNotificationActionSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -66,7 +74,8 @@ func (o *UNNotificationAction) Options() UNNotificationActionOptions {
 
 func (o *UNNotificationAction) Icon() *UNNotificationActionIcon {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNNotificationActionSelIcon)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UNNotificationActionIconFromID(_ret)
 }
-

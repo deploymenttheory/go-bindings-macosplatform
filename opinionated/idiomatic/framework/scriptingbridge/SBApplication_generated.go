@@ -154,4 +154,3 @@ type Applicationable interface {
 }
 
 var _ Applicationable = (*Application)(nil)
-

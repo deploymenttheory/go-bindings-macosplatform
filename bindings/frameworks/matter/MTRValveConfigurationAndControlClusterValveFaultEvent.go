@@ -16,8 +16,8 @@ type MTRValveConfigurationAndControlClusterValveFaultEvent struct {
 }
 
 var (
-	_clsMTRValveConfigurationAndControlClusterValveFaultEvent = _objcClass("MTRValveConfigurationAndControlClusterValveFaultEvent")
-	_mTRValveConfigurationAndControlClusterValveFaultEventSelValveFault = objc.RegisterName("valveFault")
+	_clsMTRValveConfigurationAndControlClusterValveFaultEvent              = _objcClass("MTRValveConfigurationAndControlClusterValveFaultEvent")
+	_mTRValveConfigurationAndControlClusterValveFaultEventSelValveFault    = objc.RegisterName("valveFault")
 	_mTRValveConfigurationAndControlClusterValveFaultEventSelSetValveFault = objc.RegisterName("setValveFault:")
 )
 
@@ -33,11 +33,12 @@ func MTRValveConfigurationAndControlClusterValveFaultEventFromID(id objc.ID) *MT
 
 func (o *MTRValveConfigurationAndControlClusterValveFaultEvent) ValveFault() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRValveConfigurationAndControlClusterValveFaultEventSelValveFault)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRValveConfigurationAndControlClusterValveFaultEvent) SetValveFault(valveFault *foundation.NSNumber) {
 	o.Ptr().Send(_mTRValveConfigurationAndControlClusterValveFaultEventSelSetValveFault, valveFault.Ptr())
 }
-

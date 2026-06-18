@@ -16,14 +16,14 @@ type NSUnarchiver struct {
 }
 
 var (
-	_clsNSUnarchiver = _objcClass("NSUnarchiver")
-	_nSUnarchiverSelInitForReadingWithData = objc.RegisterName("initForReadingWithData:")
-	_nSUnarchiverSelUnarchiveObjectWithData = objc.RegisterName("unarchiveObjectWithData:")
-	_nSUnarchiverSelUnarchiveObjectWithFile = objc.RegisterName("unarchiveObjectWithFile:")
-	_nSUnarchiverSelDecodeClassNameAsClassName = objc.RegisterName("decodeClassName:asClassName:")
+	_clsNSUnarchiver                                    = _objcClass("NSUnarchiver")
+	_nSUnarchiverSelInitForReadingWithData              = objc.RegisterName("initForReadingWithData:")
+	_nSUnarchiverSelUnarchiveObjectWithData             = objc.RegisterName("unarchiveObjectWithData:")
+	_nSUnarchiverSelUnarchiveObjectWithFile             = objc.RegisterName("unarchiveObjectWithFile:")
+	_nSUnarchiverSelDecodeClassNameAsClassName          = objc.RegisterName("decodeClassName:asClassName:")
 	_nSUnarchiverSelClassNameDecodedForArchiveClassName = objc.RegisterName("classNameDecodedForArchiveClassName:")
-	_nSUnarchiverSelReplaceObjectWithObject = objc.RegisterName("replaceObject:withObject:")
-	_nSUnarchiverSelIsAtEnd = objc.RegisterName("isAtEnd")
+	_nSUnarchiverSelReplaceObjectWithObject             = objc.RegisterName("replaceObject:withObject:")
+	_nSUnarchiverSelIsAtEnd                             = objc.RegisterName("isAtEnd")
 )
 
 func NSUnarchiverFromID(id objc.ID) *NSUnarchiver {
@@ -38,7 +38,9 @@ func NSUnarchiverFromID(id objc.ID) *NSUnarchiver {
 
 func (o *NSUnarchiver) InitForReadingWithData(data *NSData) *NSUnarchiver {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUnarchiverSelInitForReadingWithData, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnarchiverFromID(_ret)
 }
 
@@ -62,13 +64,17 @@ func (o *NSUnarchiver) DecodeClassNameAsClassName(inArchiveName *NSString, trueN
 
 func NSUnarchiverClassNameDecodedForArchiveClassName(inArchiveName *NSString) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnarchiver), _nSUnarchiverSelClassNameDecodedForArchiveClassName, inArchiveName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSUnarchiver) ClassNameDecodedForArchiveClassName(inArchiveName *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUnarchiverSelClassNameDecodedForArchiveClassName, inArchiveName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -80,4 +86,3 @@ func (o *NSUnarchiver) IsAtEnd() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSUnarchiverSelIsAtEnd)
 	return _ret
 }
-

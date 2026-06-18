@@ -18,59 +18,59 @@ type MTRDeviceController struct {
 }
 
 var (
-	_clsMTRDeviceController = _objcClass("MTRDeviceController")
-	_mTRDeviceControllerSelInitWithParametersError = objc.RegisterName("initWithParameters:error:")
-	_mTRDeviceControllerSelSetupCommissioningSessionWithPayloadNewNodeIDError = objc.RegisterName("setupCommissioningSessionWithPayload:newNodeID:error:")
+	_clsMTRDeviceController                                                                   = _objcClass("MTRDeviceController")
+	_mTRDeviceControllerSelInitWithParametersError                                            = objc.RegisterName("initWithParameters:error:")
+	_mTRDeviceControllerSelSetupCommissioningSessionWithPayloadNewNodeIDError                 = objc.RegisterName("setupCommissioningSessionWithPayload:newNodeID:error:")
 	_mTRDeviceControllerSelSetupCommissioningSessionWithDiscoveredDevicePayloadNewNodeIDError = objc.RegisterName("setupCommissioningSessionWithDiscoveredDevice:payload:newNodeID:error:")
-	_mTRDeviceControllerSelCommissionNodeWithIDCommissioningParamsError = objc.RegisterName("commissionNodeWithID:commissioningParams:error:")
-	_mTRDeviceControllerSelContinueCommissioningDeviceIgnoreAttestationFailureError = objc.RegisterName("continueCommissioningDevice:ignoreAttestationFailure:error:")
-	_mTRDeviceControllerSelCancelCommissioningForNodeIDError = objc.RegisterName("cancelCommissioningForNodeID:error:")
-	_mTRDeviceControllerSelDeviceBeingCommissionedWithNodeIDError = objc.RegisterName("deviceBeingCommissionedWithNodeID:error:")
-	_mTRDeviceControllerSelPreWarmCommissioningSession = objc.RegisterName("preWarmCommissioningSession")
-	_mTRDeviceControllerSelSetDeviceControllerDelegateQueue = objc.RegisterName("setDeviceControllerDelegate:queue:")
-	_mTRDeviceControllerSelAddDeviceControllerDelegateQueue = objc.RegisterName("addDeviceControllerDelegate:queue:")
-	_mTRDeviceControllerSelRemoveDeviceControllerDelegate = objc.RegisterName("removeDeviceControllerDelegate:")
-	_mTRDeviceControllerSelStartBrowseForCommissionablesQueue = objc.RegisterName("startBrowseForCommissionables:queue:")
-	_mTRDeviceControllerSelStopBrowseForCommissionables = objc.RegisterName("stopBrowseForCommissionables")
-	_mTRDeviceControllerSelAttestationChallengeForDeviceID = objc.RegisterName("attestationChallengeForDeviceID:")
-	_mTRDeviceControllerSelAddServerEndpoint = objc.RegisterName("addServerEndpoint:")
-	_mTRDeviceControllerSelRemoveServerEndpointQueueCompletion = objc.RegisterName("removeServerEndpoint:queue:completion:")
-	_mTRDeviceControllerSelRemoveServerEndpoint = objc.RegisterName("removeServerEndpoint:")
-	_mTRDeviceControllerSelForgetDeviceWithNodeID = objc.RegisterName("forgetDeviceWithNodeID:")
-	_mTRDeviceControllerSelComputePASEVerifierForSetupPasscodeIterationsSaltError = objc.RegisterName("computePASEVerifierForSetupPasscode:iterations:salt:error:")
-	_mTRDeviceControllerSelSuspend = objc.RegisterName("suspend")
-	_mTRDeviceControllerSelResume = objc.RegisterName("resume")
-	_mTRDeviceControllerSelShutdown = objc.RegisterName("shutdown")
-	_mTRDeviceControllerSelIsRunning = objc.RegisterName("isRunning")
-	_mTRDeviceControllerSelIsSuspended = objc.RegisterName("isSuspended")
-	_mTRDeviceControllerSelUniqueIdentifier = objc.RegisterName("uniqueIdentifier")
-	_mTRDeviceControllerSelControllerNodeID = objc.RegisterName("controllerNodeID")
-	_mTRDeviceControllerSelDevices = objc.RegisterName("devices")
-	_mTRDeviceControllerSelNodesWithStoredData = objc.RegisterName("nodesWithStoredData")
-	_mTRDeviceControllerSelFetchAttestationChallengeForDeviceId = objc.RegisterName("fetchAttestationChallengeForDeviceId:")
-	_mTRDeviceControllerSelGetBaseDeviceQueueCompletionHandler = objc.RegisterName("getBaseDevice:queue:completionHandler:")
-	_mTRDeviceControllerSelPairDeviceDiscriminatorSetupPINCodeError = objc.RegisterName("pairDevice:discriminator:setupPINCode:error:")
-	_mTRDeviceControllerSelPairDeviceAddressPortSetupPINCodeError = objc.RegisterName("pairDevice:address:port:setupPINCode:error:")
-	_mTRDeviceControllerSelPairDeviceOnboardingPayloadError = objc.RegisterName("pairDevice:onboardingPayload:error:")
-	_mTRDeviceControllerSelCommissionDeviceCommissioningParamsError = objc.RegisterName("commissionDevice:commissioningParams:error:")
-	_mTRDeviceControllerSelStopDevicePairingError = objc.RegisterName("stopDevicePairing:error:")
-	_mTRDeviceControllerSelGetDeviceBeingCommissionedError = objc.RegisterName("getDeviceBeingCommissioned:error:")
-	_mTRDeviceControllerSelOpenPairingWindowDurationError = objc.RegisterName("openPairingWindow:duration:error:")
-	_mTRDeviceControllerSelOpenPairingWindowWithPINDurationDiscriminatorSetupPINError = objc.RegisterName("openPairingWindowWithPIN:duration:discriminator:setupPIN:error:")
-	_mTRDeviceControllerSelComputePaseVerifierIterationsSalt = objc.RegisterName("computePaseVerifier:iterations:salt:")
-	_mTRDeviceControllerSelSetPairingDelegateQueue = objc.RegisterName("setPairingDelegate:queue:")
-	_mTRDeviceControllerSelSetNocChainIssuerQueue = objc.RegisterName("setNocChainIssuer:queue:")
-	_mTRDeviceControllerSelControllerNodeId = objc.RegisterName("controllerNodeId")
-	_mTRDeviceControllerSelSharedControllerWithIDXpcConnectBlock = objc.RegisterName("sharedControllerWithID:xpcConnectBlock:")
-	_mTRDeviceControllerSelEncodeXPCResponseValues = objc.RegisterName("encodeXPCResponseValues:")
-	_mTRDeviceControllerSelDecodeXPCResponseValues = objc.RegisterName("decodeXPCResponseValues:")
-	_mTRDeviceControllerSelEncodeXPCReadParams = objc.RegisterName("encodeXPCReadParams:")
-	_mTRDeviceControllerSelDecodeXPCReadParams = objc.RegisterName("decodeXPCReadParams:")
-	_mTRDeviceControllerSelEncodeXPCSubscribeParams = objc.RegisterName("encodeXPCSubscribeParams:")
-	_mTRDeviceControllerSelDecodeXPCSubscribeParams = objc.RegisterName("decodeXPCSubscribeParams:")
-	_mTRDeviceControllerSelXpcInterfaceForServerProtocol = objc.RegisterName("xpcInterfaceForServerProtocol")
-	_mTRDeviceControllerSelXpcInterfaceForClientProtocol = objc.RegisterName("xpcInterfaceForClientProtocol")
-	_mTRDeviceControllerSelSharedControllerWithIdXpcConnectBlock = objc.RegisterName("sharedControllerWithId:xpcConnectBlock:")
+	_mTRDeviceControllerSelCommissionNodeWithIDCommissioningParamsError                       = objc.RegisterName("commissionNodeWithID:commissioningParams:error:")
+	_mTRDeviceControllerSelContinueCommissioningDeviceIgnoreAttestationFailureError           = objc.RegisterName("continueCommissioningDevice:ignoreAttestationFailure:error:")
+	_mTRDeviceControllerSelCancelCommissioningForNodeIDError                                  = objc.RegisterName("cancelCommissioningForNodeID:error:")
+	_mTRDeviceControllerSelDeviceBeingCommissionedWithNodeIDError                             = objc.RegisterName("deviceBeingCommissionedWithNodeID:error:")
+	_mTRDeviceControllerSelPreWarmCommissioningSession                                        = objc.RegisterName("preWarmCommissioningSession")
+	_mTRDeviceControllerSelSetDeviceControllerDelegateQueue                                   = objc.RegisterName("setDeviceControllerDelegate:queue:")
+	_mTRDeviceControllerSelAddDeviceControllerDelegateQueue                                   = objc.RegisterName("addDeviceControllerDelegate:queue:")
+	_mTRDeviceControllerSelRemoveDeviceControllerDelegate                                     = objc.RegisterName("removeDeviceControllerDelegate:")
+	_mTRDeviceControllerSelStartBrowseForCommissionablesQueue                                 = objc.RegisterName("startBrowseForCommissionables:queue:")
+	_mTRDeviceControllerSelStopBrowseForCommissionables                                       = objc.RegisterName("stopBrowseForCommissionables")
+	_mTRDeviceControllerSelAttestationChallengeForDeviceID                                    = objc.RegisterName("attestationChallengeForDeviceID:")
+	_mTRDeviceControllerSelAddServerEndpoint                                                  = objc.RegisterName("addServerEndpoint:")
+	_mTRDeviceControllerSelRemoveServerEndpointQueueCompletion                                = objc.RegisterName("removeServerEndpoint:queue:completion:")
+	_mTRDeviceControllerSelRemoveServerEndpoint                                               = objc.RegisterName("removeServerEndpoint:")
+	_mTRDeviceControllerSelForgetDeviceWithNodeID                                             = objc.RegisterName("forgetDeviceWithNodeID:")
+	_mTRDeviceControllerSelComputePASEVerifierForSetupPasscodeIterationsSaltError             = objc.RegisterName("computePASEVerifierForSetupPasscode:iterations:salt:error:")
+	_mTRDeviceControllerSelSuspend                                                            = objc.RegisterName("suspend")
+	_mTRDeviceControllerSelResume                                                             = objc.RegisterName("resume")
+	_mTRDeviceControllerSelShutdown                                                           = objc.RegisterName("shutdown")
+	_mTRDeviceControllerSelIsRunning                                                          = objc.RegisterName("isRunning")
+	_mTRDeviceControllerSelIsSuspended                                                        = objc.RegisterName("isSuspended")
+	_mTRDeviceControllerSelUniqueIdentifier                                                   = objc.RegisterName("uniqueIdentifier")
+	_mTRDeviceControllerSelControllerNodeID                                                   = objc.RegisterName("controllerNodeID")
+	_mTRDeviceControllerSelDevices                                                            = objc.RegisterName("devices")
+	_mTRDeviceControllerSelNodesWithStoredData                                                = objc.RegisterName("nodesWithStoredData")
+	_mTRDeviceControllerSelFetchAttestationChallengeForDeviceId                               = objc.RegisterName("fetchAttestationChallengeForDeviceId:")
+	_mTRDeviceControllerSelGetBaseDeviceQueueCompletionHandler                                = objc.RegisterName("getBaseDevice:queue:completionHandler:")
+	_mTRDeviceControllerSelPairDeviceDiscriminatorSetupPINCodeError                           = objc.RegisterName("pairDevice:discriminator:setupPINCode:error:")
+	_mTRDeviceControllerSelPairDeviceAddressPortSetupPINCodeError                             = objc.RegisterName("pairDevice:address:port:setupPINCode:error:")
+	_mTRDeviceControllerSelPairDeviceOnboardingPayloadError                                   = objc.RegisterName("pairDevice:onboardingPayload:error:")
+	_mTRDeviceControllerSelCommissionDeviceCommissioningParamsError                           = objc.RegisterName("commissionDevice:commissioningParams:error:")
+	_mTRDeviceControllerSelStopDevicePairingError                                             = objc.RegisterName("stopDevicePairing:error:")
+	_mTRDeviceControllerSelGetDeviceBeingCommissionedError                                    = objc.RegisterName("getDeviceBeingCommissioned:error:")
+	_mTRDeviceControllerSelOpenPairingWindowDurationError                                     = objc.RegisterName("openPairingWindow:duration:error:")
+	_mTRDeviceControllerSelOpenPairingWindowWithPINDurationDiscriminatorSetupPINError         = objc.RegisterName("openPairingWindowWithPIN:duration:discriminator:setupPIN:error:")
+	_mTRDeviceControllerSelComputePaseVerifierIterationsSalt                                  = objc.RegisterName("computePaseVerifier:iterations:salt:")
+	_mTRDeviceControllerSelSetPairingDelegateQueue                                            = objc.RegisterName("setPairingDelegate:queue:")
+	_mTRDeviceControllerSelSetNocChainIssuerQueue                                             = objc.RegisterName("setNocChainIssuer:queue:")
+	_mTRDeviceControllerSelControllerNodeId                                                   = objc.RegisterName("controllerNodeId")
+	_mTRDeviceControllerSelSharedControllerWithIDXpcConnectBlock                              = objc.RegisterName("sharedControllerWithID:xpcConnectBlock:")
+	_mTRDeviceControllerSelEncodeXPCResponseValues                                            = objc.RegisterName("encodeXPCResponseValues:")
+	_mTRDeviceControllerSelDecodeXPCResponseValues                                            = objc.RegisterName("decodeXPCResponseValues:")
+	_mTRDeviceControllerSelEncodeXPCReadParams                                                = objc.RegisterName("encodeXPCReadParams:")
+	_mTRDeviceControllerSelDecodeXPCReadParams                                                = objc.RegisterName("decodeXPCReadParams:")
+	_mTRDeviceControllerSelEncodeXPCSubscribeParams                                           = objc.RegisterName("encodeXPCSubscribeParams:")
+	_mTRDeviceControllerSelDecodeXPCSubscribeParams                                           = objc.RegisterName("decodeXPCSubscribeParams:")
+	_mTRDeviceControllerSelXpcInterfaceForServerProtocol                                      = objc.RegisterName("xpcInterfaceForServerProtocol")
+	_mTRDeviceControllerSelXpcInterfaceForClientProtocol                                      = objc.RegisterName("xpcInterfaceForClientProtocol")
+	_mTRDeviceControllerSelSharedControllerWithIdXpcConnectBlock                              = objc.RegisterName("sharedControllerWithId:xpcConnectBlock:")
 )
 
 func MTRDeviceControllerFromID(id objc.ID) *MTRDeviceController {
@@ -87,7 +87,9 @@ func MTRDeviceControllerFromID(id objc.ID) *MTRDeviceController {
 func (o *MTRDeviceController) InitWithParametersError(parameters *MTRDeviceControllerAbstractParameters) (*MTRDeviceController, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerSelInitWithParametersError, parameters.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -148,7 +150,9 @@ func (o *MTRDeviceController) CancelCommissioningForNodeIDError(nodeID *foundati
 func (o *MTRDeviceController) DeviceBeingCommissionedWithNodeIDError(nodeID *foundation.NSNumber) (*MTRBaseDevice, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerSelDeviceBeingCommissionedWithNodeIDError, nodeID.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -189,7 +193,9 @@ func (o *MTRDeviceController) StopBrowseForCommissionables() bool {
 // Return the attestation challenge for the secure session of the device being commissioned. Attempts to retrieve the attestation challenge for a commissionee with the given Device ID. Returns nil if given Device ID does not match an active commissionee, or if a Secure Session is not availale.
 func (o *MTRDeviceController) AttestationChallengeForDeviceID(deviceID *foundation.NSNumber) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerSelAttestationChallengeForDeviceID, deviceID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -225,7 +231,9 @@ func (o *MTRDeviceController) ForgetDeviceWithNodeID(nodeID *foundation.NSNumber
 func MTRDeviceControllerComputePASEVerifierForSetupPasscodeIterationsSaltError(setupPasscode *foundation.NSNumber, iterations *foundation.NSNumber, salt *foundation.NSData) (*foundation.NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRDeviceController), _mTRDeviceControllerSelComputePASEVerifierForSetupPasscodeIterationsSaltError, setupPasscode.Ptr(), iterations.Ptr(), salt.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -262,20 +270,26 @@ func (o *MTRDeviceController) IsSuspended() bool {
 // The ID assigned to this controller at creation time.
 func (o *MTRDeviceController) UniqueIdentifier() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerSelUniqueIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
 
 func (o *MTRDeviceController) ControllerNodeID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerSelControllerNodeID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // Returns the list of MTRDevice instances that this controller has loaded into memory. Returns an empty array if no devices are in memory.
 func (o *MTRDeviceController) Devices() *foundation.NSArray[*MTRDevice] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerSelDevices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MTRDevice](_ret)
 }
 
@@ -287,7 +301,9 @@ func (o *MTRDeviceController) NodesWithStoredData() *foundation.NSArray[*foundat
 
 func (o *MTRDeviceController) FetchAttestationChallengeForDeviceId(deviceId uint64) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerSelFetchAttestationChallengeForDeviceId, deviceId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -354,7 +370,9 @@ func (o *MTRDeviceController) StopDevicePairingError(deviceID uint64) (bool, err
 func (o *MTRDeviceController) GetDeviceBeingCommissionedError(deviceId uint64) (*MTRBaseDevice, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerSelGetDeviceBeingCommissionedError, deviceId, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -373,7 +391,9 @@ func (o *MTRDeviceController) OpenPairingWindowDurationError(deviceID uint64, du
 func (o *MTRDeviceController) OpenPairingWindowWithPINDurationDiscriminatorSetupPINError(deviceID uint64, duration uint, discriminator uint, setupPIN uint) (*foundation.NSString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerSelOpenPairingWindowWithPINDurationDiscriminatorSetupPINError, deviceID, duration, discriminator, setupPIN, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -382,7 +402,9 @@ func (o *MTRDeviceController) OpenPairingWindowWithPINDurationDiscriminatorSetup
 
 func (o *MTRDeviceController) ComputePaseVerifierIterationsSalt(setupPincode uint32, iterations uint32, salt *foundation.NSData) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerSelComputePaseVerifierIterationsSalt, setupPincode, iterations, salt.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -396,14 +418,18 @@ func (o *MTRDeviceController) SetNocChainIssuerQueue(nocChainIssuer MTRNOCChainI
 
 func (o *MTRDeviceController) ControllerNodeId() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerSelControllerNodeId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // Returns a shared device controller proxy for the controller object over XPC connection. @param controllerID    an implementation specific id in case multiple shared device controllers are available over XPC connection @param xpcConnectBlock block to connect to an XPC listener serving the shared device controllers in an implementation specific way
 func MTRDeviceControllerSharedControllerWithIDXpcConnectBlock(controllerID foundation.NSCopying, xpcConnectBlock objc.Block) *MTRDeviceController {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRDeviceController), _mTRDeviceControllerSelSharedControllerWithIDXpcConnectBlock, controllerID, xpcConnectBlock)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRDeviceControllerFromID(_ret)
 }
 
@@ -428,7 +454,9 @@ func MTRDeviceControllerEncodeXPCReadParams(params *MTRReadParams) *foundation.N
 // Returns a deserialized read parameter object from an object received over XPC
 func MTRDeviceControllerDecodeXPCReadParams(params *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MTRReadParams {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRDeviceController), _mTRDeviceControllerSelDecodeXPCReadParams, params)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRReadParamsFromID(_ret)
 }
 
@@ -441,27 +469,34 @@ func MTRDeviceControllerEncodeXPCSubscribeParams(params *MTRSubscribeParams) *fo
 // Returns a deserialized subscribe parameter object from an object received over XPC
 func MTRDeviceControllerDecodeXPCSubscribeParams(params *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MTRSubscribeParams {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRDeviceController), _mTRDeviceControllerSelDecodeXPCSubscribeParams, params)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRSubscribeParamsFromID(_ret)
 }
 
 // Returns an NSXPCInterface configured for MTRDeviceControllerServerProtocol.
 func MTRDeviceControllerXpcInterfaceForServerProtocol() *foundation.NSXPCInterface {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRDeviceController), _mTRDeviceControllerSelXpcInterfaceForServerProtocol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSXPCInterfaceFromID(_ret)
 }
 
 // Returns an NSXPCInterface configured for MTRDeviceControllerClientProtocol.
 func MTRDeviceControllerXpcInterfaceForClientProtocol() *foundation.NSXPCInterface {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRDeviceController), _mTRDeviceControllerSelXpcInterfaceForClientProtocol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSXPCInterfaceFromID(_ret)
 }
 
 func MTRDeviceControllerSharedControllerWithIdXpcConnectBlock(controllerID foundation.NSCopying, xpcConnectBlock objc.Block) *MTRDeviceController {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRDeviceController), _mTRDeviceControllerSelSharedControllerWithIdXpcConnectBlock, controllerID, xpcConnectBlock)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRDeviceControllerFromID(_ret)
 }
-

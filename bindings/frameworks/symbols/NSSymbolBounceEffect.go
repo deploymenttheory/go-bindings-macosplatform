@@ -15,11 +15,11 @@ type NSSymbolBounceEffect struct {
 }
 
 var (
-	_clsNSSymbolBounceEffect = _objcClass("NSSymbolBounceEffect")
-	_nSSymbolBounceEffectSelEffect = objc.RegisterName("effect")
-	_nSSymbolBounceEffectSelBounceUpEffect = objc.RegisterName("bounceUpEffect")
-	_nSSymbolBounceEffectSelBounceDownEffect = objc.RegisterName("bounceDownEffect")
-	_nSSymbolBounceEffectSelEffectWithByLayer = objc.RegisterName("effectWithByLayer")
+	_clsNSSymbolBounceEffect                      = _objcClass("NSSymbolBounceEffect")
+	_nSSymbolBounceEffectSelEffect                = objc.RegisterName("effect")
+	_nSSymbolBounceEffectSelBounceUpEffect        = objc.RegisterName("bounceUpEffect")
+	_nSSymbolBounceEffectSelBounceDownEffect      = objc.RegisterName("bounceDownEffect")
+	_nSSymbolBounceEffectSelEffectWithByLayer     = objc.RegisterName("effectWithByLayer")
 	_nSSymbolBounceEffectSelEffectWithWholeSymbol = objc.RegisterName("effectWithWholeSymbol")
 )
 
@@ -36,35 +36,44 @@ func NSSymbolBounceEffectFromID(id objc.ID) *NSSymbolBounceEffect {
 // The default bounce effect, determined by the system.
 func NSSymbolBounceEffectEffect() *NSSymbolBounceEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolBounceEffect), _nSSymbolBounceEffectSelEffect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolBounceEffectFromID(_ret)
 }
 
 // Convenience initializer for a bounce effect that bounces up.
 func NSSymbolBounceEffectBounceUpEffect() *NSSymbolBounceEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolBounceEffect), _nSSymbolBounceEffectSelBounceUpEffect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolBounceEffectFromID(_ret)
 }
 
 // Convenience initializer for a bounce effect that bounces down.
 func NSSymbolBounceEffectBounceDownEffect() *NSSymbolBounceEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolBounceEffect), _nSSymbolBounceEffectSelBounceDownEffect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolBounceEffectFromID(_ret)
 }
 
 // Returns a copy of the effect that animates incrementally, by layer.
 func (o *NSSymbolBounceEffect) EffectWithByLayer() *NSSymbolBounceEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolBounceEffectSelEffectWithByLayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolBounceEffectFromID(_ret)
 }
 
 // Returns a copy of the effect that animates all layers of the symbol simultaneously.
 func (o *NSSymbolBounceEffect) EffectWithWholeSymbol() *NSSymbolBounceEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolBounceEffectSelEffectWithWholeSymbol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolBounceEffectFromID(_ret)
 }
-

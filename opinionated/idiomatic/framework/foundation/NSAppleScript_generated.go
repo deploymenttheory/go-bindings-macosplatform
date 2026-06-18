@@ -101,4 +101,3 @@ type AppleScriptable interface {
 }
 
 var _ AppleScriptable = (*AppleScript)(nil)
-

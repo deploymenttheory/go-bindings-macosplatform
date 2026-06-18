@@ -19,29 +19,29 @@ type AVSampleBufferDisplayLayer struct {
 }
 
 var (
-	_clsAVSampleBufferDisplayLayer = _objcClass("AVSampleBufferDisplayLayer")
-	_aVSampleBufferDisplayLayerSelControlTimebase = objc.RegisterName("controlTimebase")
-	_aVSampleBufferDisplayLayerSelSetControlTimebase = objc.RegisterName("setControlTimebase:")
-	_aVSampleBufferDisplayLayerSelVideoGravity = objc.RegisterName("videoGravity")
-	_aVSampleBufferDisplayLayerSelSetVideoGravity = objc.RegisterName("setVideoGravity:")
-	_aVSampleBufferDisplayLayerSelIsReadyForDisplay = objc.RegisterName("isReadyForDisplay")
-	_aVSampleBufferDisplayLayerSelEnqueueSampleBuffer = objc.RegisterName("enqueueSampleBuffer:")
-	_aVSampleBufferDisplayLayerSelFlush = objc.RegisterName("flush")
-	_aVSampleBufferDisplayLayerSelFlushAndRemoveImage = objc.RegisterName("flushAndRemoveImage")
-	_aVSampleBufferDisplayLayerSelRequestMediaDataWhenReadyOnQueueUsing = objc.RegisterName("requestMediaDataWhenReadyOnQueue:usingBlock:")
-	_aVSampleBufferDisplayLayerSelStopRequestingMediaData = objc.RegisterName("stopRequestingMediaData")
-	_aVSampleBufferDisplayLayerSelTimebase = objc.RegisterName("timebase")
-	_aVSampleBufferDisplayLayerSelStatus = objc.RegisterName("status")
-	_aVSampleBufferDisplayLayerSelError = objc.RegisterName("error")
-	_aVSampleBufferDisplayLayerSelRequiresFlushToResumeDecoding = objc.RegisterName("requiresFlushToResumeDecoding")
-	_aVSampleBufferDisplayLayerSelIsReadyForMoreMediaData = objc.RegisterName("isReadyForMoreMediaData")
-	_aVSampleBufferDisplayLayerSelHasSufficientMediaDataForReliablePlaybackStart = objc.RegisterName("hasSufficientMediaDataForReliablePlaybackStart")
-	_aVSampleBufferDisplayLayerSelPreventsCapture = objc.RegisterName("preventsCapture")
-	_aVSampleBufferDisplayLayerSelSetPreventsCapture = objc.RegisterName("setPreventsCapture:")
-	_aVSampleBufferDisplayLayerSelPreventsDisplaySleepDuringVideoPlayback = objc.RegisterName("preventsDisplaySleepDuringVideoPlayback")
-	_aVSampleBufferDisplayLayerSelSetPreventsDisplaySleepDuringVideoPlayback = objc.RegisterName("setPreventsDisplaySleepDuringVideoPlayback:")
+	_clsAVSampleBufferDisplayLayer                                                  = _objcClass("AVSampleBufferDisplayLayer")
+	_aVSampleBufferDisplayLayerSelControlTimebase                                   = objc.RegisterName("controlTimebase")
+	_aVSampleBufferDisplayLayerSelSetControlTimebase                                = objc.RegisterName("setControlTimebase:")
+	_aVSampleBufferDisplayLayerSelVideoGravity                                      = objc.RegisterName("videoGravity")
+	_aVSampleBufferDisplayLayerSelSetVideoGravity                                   = objc.RegisterName("setVideoGravity:")
+	_aVSampleBufferDisplayLayerSelIsReadyForDisplay                                 = objc.RegisterName("isReadyForDisplay")
+	_aVSampleBufferDisplayLayerSelEnqueueSampleBuffer                               = objc.RegisterName("enqueueSampleBuffer:")
+	_aVSampleBufferDisplayLayerSelFlush                                             = objc.RegisterName("flush")
+	_aVSampleBufferDisplayLayerSelFlushAndRemoveImage                               = objc.RegisterName("flushAndRemoveImage")
+	_aVSampleBufferDisplayLayerSelRequestMediaDataWhenReadyOnQueueUsing             = objc.RegisterName("requestMediaDataWhenReadyOnQueue:usingBlock:")
+	_aVSampleBufferDisplayLayerSelStopRequestingMediaData                           = objc.RegisterName("stopRequestingMediaData")
+	_aVSampleBufferDisplayLayerSelTimebase                                          = objc.RegisterName("timebase")
+	_aVSampleBufferDisplayLayerSelStatus                                            = objc.RegisterName("status")
+	_aVSampleBufferDisplayLayerSelError                                             = objc.RegisterName("error")
+	_aVSampleBufferDisplayLayerSelRequiresFlushToResumeDecoding                     = objc.RegisterName("requiresFlushToResumeDecoding")
+	_aVSampleBufferDisplayLayerSelIsReadyForMoreMediaData                           = objc.RegisterName("isReadyForMoreMediaData")
+	_aVSampleBufferDisplayLayerSelHasSufficientMediaDataForReliablePlaybackStart    = objc.RegisterName("hasSufficientMediaDataForReliablePlaybackStart")
+	_aVSampleBufferDisplayLayerSelPreventsCapture                                   = objc.RegisterName("preventsCapture")
+	_aVSampleBufferDisplayLayerSelSetPreventsCapture                                = objc.RegisterName("setPreventsCapture:")
+	_aVSampleBufferDisplayLayerSelPreventsDisplaySleepDuringVideoPlayback           = objc.RegisterName("preventsDisplaySleepDuringVideoPlayback")
+	_aVSampleBufferDisplayLayerSelSetPreventsDisplaySleepDuringVideoPlayback        = objc.RegisterName("setPreventsDisplaySleepDuringVideoPlayback:")
 	_aVSampleBufferDisplayLayerSelOutputObscuredDueToInsufficientExternalProtection = objc.RegisterName("outputObscuredDueToInsufficientExternalProtection")
-	_aVSampleBufferDisplayLayerSelSampleBufferRenderer = objc.RegisterName("sampleBufferRenderer")
+	_aVSampleBufferDisplayLayerSelSampleBufferRenderer                              = objc.RegisterName("sampleBufferRenderer")
 )
 
 func AVSampleBufferDisplayLayerFromID(id objc.ID) *AVSampleBufferDisplayLayer {
@@ -67,7 +67,9 @@ func (o *AVSampleBufferDisplayLayer) SetControlTimebase(controlTimebase unsafe.P
 // @property		videoGravity @abstract		A string defining how the video is displayed within an AVSampleBufferDisplayLayer bounds rect. @discusssion	Options are AVLayerVideoGravityResizeAspect, AVLayerVideoGravityResizeAspectFill and AVLayerVideoGravityResize. AVLayerVideoGravityResizeAspect is default. See <AVFoundation/AVAnimation.h> for a description of these options.
 func (o *AVSampleBufferDisplayLayer) VideoGravity() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSampleBufferDisplayLayerSelVideoGravity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -185,7 +187,8 @@ func (o *AVSampleBufferDisplayLayer) OutputObscuredDueToInsufficientExternalProt
 
 func (o *AVSampleBufferDisplayLayer) SampleBufferRenderer() *AVSampleBufferVideoRenderer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSampleBufferDisplayLayerSelSampleBufferRenderer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVSampleBufferVideoRendererFromID(_ret)
 }
-

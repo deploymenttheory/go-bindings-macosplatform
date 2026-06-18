@@ -16,8 +16,8 @@ type DOMHTMLTableCaptionElement struct {
 }
 
 var (
-	_clsDOMHTMLTableCaptionElement = _objcClass("DOMHTMLTableCaptionElement")
-	_dOMHTMLTableCaptionElementSelAlign = objc.RegisterName("align")
+	_clsDOMHTMLTableCaptionElement         = _objcClass("DOMHTMLTableCaptionElement")
+	_dOMHTMLTableCaptionElementSelAlign    = objc.RegisterName("align")
 	_dOMHTMLTableCaptionElementSelSetAlign = objc.RegisterName("setAlign:")
 )
 
@@ -33,11 +33,12 @@ func DOMHTMLTableCaptionElementFromID(id objc.ID) *DOMHTMLTableCaptionElement {
 
 func (o *DOMHTMLTableCaptionElement) Align() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTableCaptionElementSelAlign)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLTableCaptionElement) SetAlign(align *foundation.NSString) {
 	o.Ptr().Send(_dOMHTMLTableCaptionElementSelSetAlign, align.Ptr())
 }
-

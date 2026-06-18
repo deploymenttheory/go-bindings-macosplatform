@@ -15,12 +15,12 @@ type HKGlassesLensSpecification struct {
 }
 
 var (
-	_clsHKGlassesLensSpecification = _objcClass("HKGlassesLensSpecification")
+	_clsHKGlassesLensSpecification                                                                                               = _objcClass("HKGlassesLensSpecification")
 	_hKGlassesLensSpecificationSelInitWithSphereCylinderAxisAddPowerVertexDistancePrismFarPupillaryDistanceNearPupillaryDistance = objc.RegisterName("initWithSphere:cylinder:axis:addPower:vertexDistance:prism:farPupillaryDistance:nearPupillaryDistance:")
-	_hKGlassesLensSpecificationSelVertexDistance = objc.RegisterName("vertexDistance")
-	_hKGlassesLensSpecificationSelPrism = objc.RegisterName("prism")
-	_hKGlassesLensSpecificationSelFarPupillaryDistance = objc.RegisterName("farPupillaryDistance")
-	_hKGlassesLensSpecificationSelNearPupillaryDistance = objc.RegisterName("nearPupillaryDistance")
+	_hKGlassesLensSpecificationSelVertexDistance                                                                                 = objc.RegisterName("vertexDistance")
+	_hKGlassesLensSpecificationSelPrism                                                                                          = objc.RegisterName("prism")
+	_hKGlassesLensSpecificationSelFarPupillaryDistance                                                                           = objc.RegisterName("farPupillaryDistance")
+	_hKGlassesLensSpecificationSelNearPupillaryDistance                                                                          = objc.RegisterName("nearPupillaryDistance")
 )
 
 func HKGlassesLensSpecificationFromID(id objc.ID) *HKGlassesLensSpecification {
@@ -36,35 +36,44 @@ func HKGlassesLensSpecificationFromID(id objc.ID) *HKGlassesLensSpecification {
 // @method        initWithSphere:cylinder:axis:addPower:vertexDistance:prism:farPupillaryDistance:nearPupillaryDistance @param         sphere                  The lens power to correct nearsightedness or farsightedness @param         cylinder                The lens power required to correct astigmatism @param         axis                    The angle along which cylindrical power should be positioned to correct astigmatism @param         addPower                The power adjustment applied to a multifocal lens to correct presbyopia @param         vertexDistance          The distance between the back of the eyeglass lens and the eye @param         prism                   The object encapsulating the prism fields @param         farPupillaryDistance    The distance from each pupil to the center of the nose (measured in mm) when looking at a far target. Can be described as combined or individual value. For distance prescriptions, the pupillary distance will be a far value. @param         nearPupillaryDistance   The distance from each pupil to the center of the nose (measured in mm) when looking at a near target. Can be described as combined or individual value. For near prescriptions, the pupillary distance will be a near value.
 func (o *HKGlassesLensSpecification) InitWithSphereCylinderAxisAddPowerVertexDistancePrismFarPupillaryDistanceNearPupillaryDistance(sphere *HKQuantity, cylinder *HKQuantity, axis *HKQuantity, addPower *HKQuantity, vertexDistance *HKQuantity, prism *HKVisionPrism, farPupillaryDistance *HKQuantity, nearPupillaryDistance *HKQuantity) *HKGlassesLensSpecification {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKGlassesLensSpecificationSelInitWithSphereCylinderAxisAddPowerVertexDistancePrismFarPupillaryDistanceNearPupillaryDistance, sphere.Ptr(), cylinder.Ptr(), axis.Ptr(), addPower.Ptr(), vertexDistance.Ptr(), prism.Ptr(), farPupillaryDistance.Ptr(), nearPupillaryDistance.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKGlassesLensSpecificationFromID(_ret)
 }
 
 // @property      vertexDistance @abstract      The distance between the back of the eyeglass lens and the eye (measured in mm)
 func (o *HKGlassesLensSpecification) VertexDistance() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKGlassesLensSpecificationSelVertexDistance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
 // @property      prism @abstract      The object encapsulating the prism fields
 func (o *HKGlassesLensSpecification) Prism() *HKVisionPrism {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKGlassesLensSpecificationSelPrism)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKVisionPrismFromID(_ret)
 }
 
 // @property      farPupillaryDistance @abstract      The distance from each pupil to the center of the nose (measured in mm) when looking at a far target. Can be described as combined or individual value. For distance prescriptions, the pupillary distance will be a far value.
 func (o *HKGlassesLensSpecification) FarPupillaryDistance() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKGlassesLensSpecificationSelFarPupillaryDistance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
 // @property      nearPupillaryDistance @abstract      The distance from each pupil to the center of the nose (measured in mm) when looking at a near target. Can be described as combined or individual value. For near prescriptions, the pupillary distance will be a near value.
 func (o *HKGlassesLensSpecification) NearPupillaryDistance() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKGlassesLensSpecificationSelNearPupillaryDistance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
-

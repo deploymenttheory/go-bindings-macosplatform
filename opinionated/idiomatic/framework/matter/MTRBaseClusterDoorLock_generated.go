@@ -4946,9 +4946,13 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeClusterRevisionWithMinInterva
 	}
 }
 
-func (x *MTRBaseClusterDoorLock) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterDoorLock) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterDoorLock) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterDoorLock) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterDoorLockable is the interface implemented by [MTRBaseClusterDoorLock], for mocking and DI.
 type MTRBaseClusterDoorLockable interface {
@@ -5253,4 +5257,3 @@ type MTRBaseClusterDoorLockable interface {
 }
 
 var _ MTRBaseClusterDoorLockable = (*MTRBaseClusterDoorLock)(nil)
-

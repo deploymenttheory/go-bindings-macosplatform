@@ -20,58 +20,58 @@ type PDFDocument struct {
 }
 
 var (
-	_clsPDFDocument = _objcClass("PDFDocument")
-	_pDFDocumentSelInit = objc.RegisterName("init")
-	_pDFDocumentSelInitWithURL = objc.RegisterName("initWithURL:")
-	_pDFDocumentSelInitWithData = objc.RegisterName("initWithData:")
-	_pDFDocumentSelUnlockWithPassword = objc.RegisterName("unlockWithPassword:")
-	_pDFDocumentSelDataRepresentation = objc.RegisterName("dataRepresentation")
-	_pDFDocumentSelDataRepresentationWithOptions = objc.RegisterName("dataRepresentationWithOptions:")
-	_pDFDocumentSelWriteToFile = objc.RegisterName("writeToFile:")
-	_pDFDocumentSelWriteToFileWithOptions = objc.RegisterName("writeToFile:withOptions:")
-	_pDFDocumentSelWriteToURL = objc.RegisterName("writeToURL:")
-	_pDFDocumentSelWriteToURLWithOptions = objc.RegisterName("writeToURL:withOptions:")
-	_pDFDocumentSelOutlineItemForSelection = objc.RegisterName("outlineItemForSelection:")
-	_pDFDocumentSelPageAtIndex = objc.RegisterName("pageAtIndex:")
-	_pDFDocumentSelIndexForPage = objc.RegisterName("indexForPage:")
-	_pDFDocumentSelInsertPageAtIndex = objc.RegisterName("insertPage:atIndex:")
-	_pDFDocumentSelRemovePageAtIndex = objc.RegisterName("removePageAtIndex:")
-	_pDFDocumentSelExchangePageAtIndexWithPageAtIndex = objc.RegisterName("exchangePageAtIndex:withPageAtIndex:")
-	_pDFDocumentSelFindStringWithOptions = objc.RegisterName("findString:withOptions:")
-	_pDFDocumentSelBeginFindStringWithOptions = objc.RegisterName("beginFindString:withOptions:")
-	_pDFDocumentSelBeginFindStringsWithOptions = objc.RegisterName("beginFindStrings:withOptions:")
-	_pDFDocumentSelFindStringFromSelectionWithOptions = objc.RegisterName("findString:fromSelection:withOptions:")
-	_pDFDocumentSelCancelFindString = objc.RegisterName("cancelFindString")
-	_pDFDocumentSelPrintOperationForPrintInfoScalingModeAutoRotate = objc.RegisterName("printOperationForPrintInfo:scalingMode:autoRotate:")
-	_pDFDocumentSelSelectionFromPageAtPointToPageAtPoint = objc.RegisterName("selectionFromPage:atPoint:toPage:atPoint:")
-	_pDFDocumentSelSelectionFromPageAtPointToPageAtPointWithGranularity = objc.RegisterName("selectionFromPage:atPoint:toPage:atPoint:withGranularity:")
+	_clsPDFDocument                                                        = _objcClass("PDFDocument")
+	_pDFDocumentSelInit                                                    = objc.RegisterName("init")
+	_pDFDocumentSelInitWithURL                                             = objc.RegisterName("initWithURL:")
+	_pDFDocumentSelInitWithData                                            = objc.RegisterName("initWithData:")
+	_pDFDocumentSelUnlockWithPassword                                      = objc.RegisterName("unlockWithPassword:")
+	_pDFDocumentSelDataRepresentation                                      = objc.RegisterName("dataRepresentation")
+	_pDFDocumentSelDataRepresentationWithOptions                           = objc.RegisterName("dataRepresentationWithOptions:")
+	_pDFDocumentSelWriteToFile                                             = objc.RegisterName("writeToFile:")
+	_pDFDocumentSelWriteToFileWithOptions                                  = objc.RegisterName("writeToFile:withOptions:")
+	_pDFDocumentSelWriteToURL                                              = objc.RegisterName("writeToURL:")
+	_pDFDocumentSelWriteToURLWithOptions                                   = objc.RegisterName("writeToURL:withOptions:")
+	_pDFDocumentSelOutlineItemForSelection                                 = objc.RegisterName("outlineItemForSelection:")
+	_pDFDocumentSelPageAtIndex                                             = objc.RegisterName("pageAtIndex:")
+	_pDFDocumentSelIndexForPage                                            = objc.RegisterName("indexForPage:")
+	_pDFDocumentSelInsertPageAtIndex                                       = objc.RegisterName("insertPage:atIndex:")
+	_pDFDocumentSelRemovePageAtIndex                                       = objc.RegisterName("removePageAtIndex:")
+	_pDFDocumentSelExchangePageAtIndexWithPageAtIndex                      = objc.RegisterName("exchangePageAtIndex:withPageAtIndex:")
+	_pDFDocumentSelFindStringWithOptions                                   = objc.RegisterName("findString:withOptions:")
+	_pDFDocumentSelBeginFindStringWithOptions                              = objc.RegisterName("beginFindString:withOptions:")
+	_pDFDocumentSelBeginFindStringsWithOptions                             = objc.RegisterName("beginFindStrings:withOptions:")
+	_pDFDocumentSelFindStringFromSelectionWithOptions                      = objc.RegisterName("findString:fromSelection:withOptions:")
+	_pDFDocumentSelCancelFindString                                        = objc.RegisterName("cancelFindString")
+	_pDFDocumentSelPrintOperationForPrintInfoScalingModeAutoRotate         = objc.RegisterName("printOperationForPrintInfo:scalingMode:autoRotate:")
+	_pDFDocumentSelSelectionFromPageAtPointToPageAtPoint                   = objc.RegisterName("selectionFromPage:atPoint:toPage:atPoint:")
+	_pDFDocumentSelSelectionFromPageAtPointToPageAtPointWithGranularity    = objc.RegisterName("selectionFromPage:atPoint:toPage:atPoint:withGranularity:")
 	_pDFDocumentSelSelectionFromPageAtCharacterIndexToPageAtCharacterIndex = objc.RegisterName("selectionFromPage:atCharacterIndex:toPage:atCharacterIndex:")
-	_pDFDocumentSelDocumentURL = objc.RegisterName("documentURL")
-	_pDFDocumentSelDocumentRef = objc.RegisterName("documentRef")
-	_pDFDocumentSelDocumentAttributes = objc.RegisterName("documentAttributes")
-	_pDFDocumentSelSetDocumentAttributes = objc.RegisterName("setDocumentAttributes:")
-	_pDFDocumentSelMajorVersion = objc.RegisterName("majorVersion")
-	_pDFDocumentSelMinorVersion = objc.RegisterName("minorVersion")
-	_pDFDocumentSelIsEncrypted = objc.RegisterName("isEncrypted")
-	_pDFDocumentSelIsLocked = objc.RegisterName("isLocked")
-	_pDFDocumentSelAllowsPrinting = objc.RegisterName("allowsPrinting")
-	_pDFDocumentSelAllowsCopying = objc.RegisterName("allowsCopying")
-	_pDFDocumentSelAllowsDocumentChanges = objc.RegisterName("allowsDocumentChanges")
-	_pDFDocumentSelAllowsDocumentAssembly = objc.RegisterName("allowsDocumentAssembly")
-	_pDFDocumentSelAllowsContentAccessibility = objc.RegisterName("allowsContentAccessibility")
-	_pDFDocumentSelAllowsCommenting = objc.RegisterName("allowsCommenting")
-	_pDFDocumentSelAllowsFormFieldEntry = objc.RegisterName("allowsFormFieldEntry")
-	_pDFDocumentSelAccessPermissions = objc.RegisterName("accessPermissions")
-	_pDFDocumentSelPermissionsStatus = objc.RegisterName("permissionsStatus")
-	_pDFDocumentSelString = objc.RegisterName("string")
-	_pDFDocumentSelDelegate = objc.RegisterName("delegate")
-	_pDFDocumentSelSetDelegate = objc.RegisterName("setDelegate:")
-	_pDFDocumentSelOutlineRoot = objc.RegisterName("outlineRoot")
-	_pDFDocumentSelSetOutlineRoot = objc.RegisterName("setOutlineRoot:")
-	_pDFDocumentSelPageCount = objc.RegisterName("pageCount")
-	_pDFDocumentSelPageClass = objc.RegisterName("pageClass")
-	_pDFDocumentSelIsFinding = objc.RegisterName("isFinding")
-	_pDFDocumentSelSelectionForEntireDocument = objc.RegisterName("selectionForEntireDocument")
+	_pDFDocumentSelDocumentURL                                             = objc.RegisterName("documentURL")
+	_pDFDocumentSelDocumentRef                                             = objc.RegisterName("documentRef")
+	_pDFDocumentSelDocumentAttributes                                      = objc.RegisterName("documentAttributes")
+	_pDFDocumentSelSetDocumentAttributes                                   = objc.RegisterName("setDocumentAttributes:")
+	_pDFDocumentSelMajorVersion                                            = objc.RegisterName("majorVersion")
+	_pDFDocumentSelMinorVersion                                            = objc.RegisterName("minorVersion")
+	_pDFDocumentSelIsEncrypted                                             = objc.RegisterName("isEncrypted")
+	_pDFDocumentSelIsLocked                                                = objc.RegisterName("isLocked")
+	_pDFDocumentSelAllowsPrinting                                          = objc.RegisterName("allowsPrinting")
+	_pDFDocumentSelAllowsCopying                                           = objc.RegisterName("allowsCopying")
+	_pDFDocumentSelAllowsDocumentChanges                                   = objc.RegisterName("allowsDocumentChanges")
+	_pDFDocumentSelAllowsDocumentAssembly                                  = objc.RegisterName("allowsDocumentAssembly")
+	_pDFDocumentSelAllowsContentAccessibility                              = objc.RegisterName("allowsContentAccessibility")
+	_pDFDocumentSelAllowsCommenting                                        = objc.RegisterName("allowsCommenting")
+	_pDFDocumentSelAllowsFormFieldEntry                                    = objc.RegisterName("allowsFormFieldEntry")
+	_pDFDocumentSelAccessPermissions                                       = objc.RegisterName("accessPermissions")
+	_pDFDocumentSelPermissionsStatus                                       = objc.RegisterName("permissionsStatus")
+	_pDFDocumentSelString                                                  = objc.RegisterName("string")
+	_pDFDocumentSelDelegate                                                = objc.RegisterName("delegate")
+	_pDFDocumentSelSetDelegate                                             = objc.RegisterName("setDelegate:")
+	_pDFDocumentSelOutlineRoot                                             = objc.RegisterName("outlineRoot")
+	_pDFDocumentSelSetOutlineRoot                                          = objc.RegisterName("setOutlineRoot:")
+	_pDFDocumentSelPageCount                                               = objc.RegisterName("pageCount")
+	_pDFDocumentSelPageClass                                               = objc.RegisterName("pageClass")
+	_pDFDocumentSelIsFinding                                               = objc.RegisterName("isFinding")
+	_pDFDocumentSelSelectionForEntireDocument                              = objc.RegisterName("selectionForEntireDocument")
 )
 
 func PDFDocumentFromID(id objc.ID) *PDFDocument {
@@ -86,19 +86,25 @@ func PDFDocumentFromID(id objc.ID) *PDFDocument {
 
 func (o *PDFDocument) Init() *PDFDocument {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFDocumentSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFDocumentFromID(_ret)
 }
 
 func (o *PDFDocument) InitWithURL(url *foundation.NSURL) *PDFDocument {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFDocumentSelInitWithURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFDocumentFromID(_ret)
 }
 
 func (o *PDFDocument) InitWithData(data *foundation.NSData) *PDFDocument {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFDocumentSelInitWithData, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFDocumentFromID(_ret)
 }
 
@@ -109,13 +115,17 @@ func (o *PDFDocument) UnlockWithPassword(password *foundation.NSString) bool {
 
 func (o *PDFDocument) DataRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFDocumentSelDataRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *PDFDocument) DataRepresentationWithOptions(options *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFDocumentSelDataRepresentationWithOptions, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -141,13 +151,17 @@ func (o *PDFDocument) WriteToURLWithOptions(url *foundation.NSURL, options *foun
 
 func (o *PDFDocument) OutlineItemForSelection(selection *PDFSelection) *PDFOutline {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFDocumentSelOutlineItemForSelection, selection.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFOutlineFromID(_ret)
 }
 
 func (o *PDFDocument) PageAtIndex(index uint) *PDFPage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFDocumentSelPageAtIndex, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFPageFromID(_ret)
 }
 
@@ -170,7 +184,9 @@ func (o *PDFDocument) ExchangePageAtIndexWithPageAtIndex(indexA uint, indexB uin
 
 func (o *PDFDocument) FindStringWithOptions(string_ *foundation.NSString, options foundation.NSStringCompareOptions) *foundation.NSArray[*PDFSelection] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFDocumentSelFindStringWithOptions, string_.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PDFSelection](_ret)
 }
 
@@ -184,7 +200,9 @@ func (o *PDFDocument) BeginFindStringsWithOptions(strings_ *foundation.NSArray[*
 
 func (o *PDFDocument) FindStringFromSelectionWithOptions(string_ *foundation.NSString, selection *PDFSelection, options foundation.NSStringCompareOptions) *PDFSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFDocumentSelFindStringFromSelectionWithOptions, string_.Ptr(), selection.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFSelectionFromID(_ret)
 }
 
@@ -194,31 +212,41 @@ func (o *PDFDocument) CancelFindString() {
 
 func (o *PDFDocument) PrintOperationForPrintInfoScalingModeAutoRotate(printInfo *appkit.NSPrintInfo, scaleMode PDFPrintScalingMode, doRotate bool) *appkit.NSPrintOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFDocumentSelPrintOperationForPrintInfoScalingModeAutoRotate, printInfo.Ptr(), scaleMode, doRotate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSPrintOperationFromID(_ret)
 }
 
 func (o *PDFDocument) SelectionFromPageAtPointToPageAtPoint(startPage *PDFPage, startPoint corefoundation.CGPoint, endPage *PDFPage, endPoint corefoundation.CGPoint) *PDFSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFDocumentSelSelectionFromPageAtPointToPageAtPoint, startPage.Ptr(), startPoint, endPage.Ptr(), endPoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFSelectionFromID(_ret)
 }
 
 func (o *PDFDocument) SelectionFromPageAtPointToPageAtPointWithGranularity(startPage *PDFPage, startPoint corefoundation.CGPoint, endPage *PDFPage, endPoint corefoundation.CGPoint, granularity PDFSelectionGranularity) *PDFSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFDocumentSelSelectionFromPageAtPointToPageAtPointWithGranularity, startPage.Ptr(), startPoint, endPage.Ptr(), endPoint, granularity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFSelectionFromID(_ret)
 }
 
 func (o *PDFDocument) SelectionFromPageAtCharacterIndexToPageAtCharacterIndex(startPage *PDFPage, startCharacter uint, endPage *PDFPage, endCharacter uint) *PDFSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFDocumentSelSelectionFromPageAtCharacterIndexToPageAtCharacterIndex, startPage.Ptr(), startCharacter, endPage.Ptr(), endCharacter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFSelectionFromID(_ret)
 }
 
 func (o *PDFDocument) DocumentURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFDocumentSelDocumentURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -303,7 +331,9 @@ func (o *PDFDocument) PermissionsStatus() PDFDocumentPermissions {
 
 func (o *PDFDocument) String() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFDocumentSelString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -342,7 +372,8 @@ func (o *PDFDocument) IsFinding() bool {
 
 func (o *PDFDocument) SelectionForEntireDocument() *PDFSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFDocumentSelSelectionForEntireDocument)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFSelectionFromID(_ret)
 }
-

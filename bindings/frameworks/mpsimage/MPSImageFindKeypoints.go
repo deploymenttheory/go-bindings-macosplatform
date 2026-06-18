@@ -18,11 +18,11 @@ type MPSImageFindKeypoints struct {
 }
 
 var (
-	_clsMPSImageFindKeypoints = _objcClass("MPSImageFindKeypoints")
-	_mPSImageFindKeypointsSelInitWithDeviceInfo = objc.RegisterName("initWithDevice:info:")
-	_mPSImageFindKeypointsSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
+	_clsMPSImageFindKeypoints                                                                                                                                               = _objcClass("MPSImageFindKeypoints")
+	_mPSImageFindKeypointsSelInitWithDeviceInfo                                                                                                                             = objc.RegisterName("initWithDevice:info:")
+	_mPSImageFindKeypointsSelInitWithCoderDevice                                                                                                                            = objc.RegisterName("initWithCoder:device:")
 	_mPSImageFindKeypointsSelEncodeToCommandBufferSourceTextureRegionsNumberOfRegionsKeypointCountBufferKeypointCountBufferOffsetKeypointDataBufferKeypointDataBufferOffset = objc.RegisterName("encodeToCommandBuffer:sourceTexture:regions:numberOfRegions:keypointCountBuffer:keypointCountBufferOffset:keypointDataBuffer:keypointDataBufferOffset:")
-	_mPSImageFindKeypointsSelKeypointRangeInfo = objc.RegisterName("keypointRangeInfo")
+	_mPSImageFindKeypointsSelKeypointRangeInfo                                                                                                                              = objc.RegisterName("keypointRangeInfo")
 )
 
 func MPSImageFindKeypointsFromID(id objc.ID) *MPSImageFindKeypoints {
@@ -37,14 +37,18 @@ func MPSImageFindKeypointsFromID(id objc.ID) *MPSImageFindKeypoints {
 
 func (o *MPSImageFindKeypoints) InitWithDeviceInfo(device metal.MTLDevice, info *MPSImageKeypointRangeInfo) *MPSImageFindKeypoints {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageFindKeypointsSelInitWithDeviceInfo, device, info)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageFindKeypointsFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSImageFindKeypoints) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSImageFindKeypoints {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageFindKeypointsSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageFindKeypointsFromID(_ret)
 }
 
@@ -58,4 +62,3 @@ func (o *MPSImageFindKeypoints) KeypointRangeInfo() MPSImageKeypointRangeInfo {
 	_ret := objc.Send[MPSImageKeypointRangeInfo](o.Ptr(), _mPSImageFindKeypointsSelKeypointRangeInfo)
 	return _ret
 }
-

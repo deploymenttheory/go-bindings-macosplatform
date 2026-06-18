@@ -131,4 +131,3 @@ type AccessibilityCustomRotorable interface {
 }
 
 var _ AccessibilityCustomRotorable = (*AccessibilityCustomRotor)(nil)
-

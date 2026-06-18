@@ -16,9 +16,9 @@ type DOMHTMLLabelElement struct {
 }
 
 var (
-	_clsDOMHTMLLabelElement = _objcClass("DOMHTMLLabelElement")
-	_dOMHTMLLabelElementSelForm = objc.RegisterName("form")
-	_dOMHTMLLabelElementSelHtmlFor = objc.RegisterName("htmlFor")
+	_clsDOMHTMLLabelElement           = _objcClass("DOMHTMLLabelElement")
+	_dOMHTMLLabelElementSelForm       = objc.RegisterName("form")
+	_dOMHTMLLabelElementSelHtmlFor    = objc.RegisterName("htmlFor")
 	_dOMHTMLLabelElementSelSetHtmlFor = objc.RegisterName("setHtmlFor:")
 )
 
@@ -34,17 +34,20 @@ func DOMHTMLLabelElementFromID(id objc.ID) *DOMHTMLLabelElement {
 
 func (o *DOMHTMLLabelElement) Form() *DOMHTMLFormElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLLabelElementSelForm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMHTMLFormElementFromID(_ret)
 }
 
 func (o *DOMHTMLLabelElement) HtmlFor() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLLabelElementSelHtmlFor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLLabelElement) SetHtmlFor(htmlFor *foundation.NSString) {
 	o.Ptr().Send(_dOMHTMLLabelElementSelSetHtmlFor, htmlFor.Ptr())
 }
-

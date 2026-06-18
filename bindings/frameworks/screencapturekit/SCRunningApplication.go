@@ -16,10 +16,10 @@ type SCRunningApplication struct {
 }
 
 var (
-	_clsSCRunningApplication = _objcClass("SCRunningApplication")
+	_clsSCRunningApplication                 = _objcClass("SCRunningApplication")
 	_sCRunningApplicationSelBundleIdentifier = objc.RegisterName("bundleIdentifier")
-	_sCRunningApplicationSelApplicationName = objc.RegisterName("applicationName")
-	_sCRunningApplicationSelProcessID = objc.RegisterName("processID")
+	_sCRunningApplicationSelApplicationName  = objc.RegisterName("applicationName")
+	_sCRunningApplicationSelProcessID        = objc.RegisterName("processID")
 )
 
 func SCRunningApplicationFromID(id objc.ID) *SCRunningApplication {
@@ -35,14 +35,18 @@ func SCRunningApplicationFromID(id objc.ID) *SCRunningApplication {
 // @abstract bundleIdentifier the bundleIdentifier for the SCRunningApplication
 func (o *SCRunningApplication) BundleIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCRunningApplicationSelBundleIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract applicationName the application name for the SCRunningApplication
 func (o *SCRunningApplication) ApplicationName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCRunningApplicationSelApplicationName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -51,4 +55,3 @@ func (o *SCRunningApplication) ProcessID() int {
 	_ret := objc.Send[int](o.Ptr(), _sCRunningApplicationSelProcessID)
 	return _ret
 }
-

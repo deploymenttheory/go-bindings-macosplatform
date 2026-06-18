@@ -11,4 +11,3 @@ import (
 type PKPushRegistryDelegate interface {
 	PushRegistryDidUpdatePushCredentialsForType(registry *PKPushRegistry, pushCredentials *PKPushCredentials, type_ *foundation.NSString)
 }
-

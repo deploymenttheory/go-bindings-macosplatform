@@ -16,11 +16,11 @@ type GCColor struct {
 }
 
 var (
-	_clsGCColor = _objcClass("GCColor")
+	_clsGCColor                     = _objcClass("GCColor")
 	_gCColorSelInitWithRedGreenBlue = objc.RegisterName("initWithRed:green:blue:")
-	_gCColorSelRed = objc.RegisterName("red")
-	_gCColorSelGreen = objc.RegisterName("green")
-	_gCColorSelBlue = objc.RegisterName("blue")
+	_gCColorSelRed                  = objc.RegisterName("red")
+	_gCColorSelGreen                = objc.RegisterName("green")
+	_gCColorSelBlue                 = objc.RegisterName("blue")
 )
 
 func GCColorFromID(id objc.ID) *GCColor {
@@ -35,7 +35,9 @@ func GCColorFromID(id objc.ID) *GCColor {
 
 func (o *GCColor) InitWithRedGreenBlue(red float32, green float32, blue float32) *GCColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCColorSelInitWithRedGreenBlue, red, green, blue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCColorFromID(_ret)
 }
 
@@ -53,4 +55,3 @@ func (o *GCColor) Blue() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _gCColorSelBlue)
 	return _ret
 }
-

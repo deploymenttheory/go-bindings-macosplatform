@@ -18,12 +18,12 @@ type MTRUnitTestingClusterBooleanResponseParams struct {
 }
 
 var (
-	_clsMTRUnitTestingClusterBooleanResponseParams = _objcClass("MTRUnitTestingClusterBooleanResponseParams")
+	_clsMTRUnitTestingClusterBooleanResponseParams                           = _objcClass("MTRUnitTestingClusterBooleanResponseParams")
 	_mTRUnitTestingClusterBooleanResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRUnitTestingClusterBooleanResponseParamsSelValue = objc.RegisterName("value")
-	_mTRUnitTestingClusterBooleanResponseParamsSelSetValue = objc.RegisterName("setValue:")
-	_mTRUnitTestingClusterBooleanResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRUnitTestingClusterBooleanResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRUnitTestingClusterBooleanResponseParamsSelValue                      = objc.RegisterName("value")
+	_mTRUnitTestingClusterBooleanResponseParamsSelSetValue                   = objc.RegisterName("setValue:")
+	_mTRUnitTestingClusterBooleanResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRUnitTestingClusterBooleanResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
 )
 
 func MTRUnitTestingClusterBooleanResponseParamsFromID(id objc.ID) *MTRUnitTestingClusterBooleanResponseParams {
@@ -40,7 +40,9 @@ func MTRUnitTestingClusterBooleanResponseParamsFromID(id objc.ID) *MTRUnitTestin
 func (o *MTRUnitTestingClusterBooleanResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRUnitTestingClusterBooleanResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterBooleanResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -49,7 +51,9 @@ func (o *MTRUnitTestingClusterBooleanResponseParams) InitWithResponseValueError(
 
 func (o *MTRUnitTestingClusterBooleanResponseParams) Value() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterBooleanResponseParamsSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -60,11 +64,12 @@ func (o *MTRUnitTestingClusterBooleanResponseParams) SetValue(value *foundation.
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRUnitTestingClusterBooleanResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterBooleanResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRUnitTestingClusterBooleanResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
 	o.Ptr().Send(_mTRUnitTestingClusterBooleanResponseParamsSelSetTimedInvokeTimeoutMs, timedInvokeTimeoutMs.Ptr())
 }
-

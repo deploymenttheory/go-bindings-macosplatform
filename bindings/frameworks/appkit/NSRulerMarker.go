@@ -17,27 +17,27 @@ type NSRulerMarker struct {
 }
 
 var (
-	_clsNSRulerMarker = _objcClass("NSRulerMarker")
+	_clsNSRulerMarker                                                = _objcClass("NSRulerMarker")
 	_nSRulerMarkerSelInitWithRulerViewMarkerLocationImageImageOrigin = objc.RegisterName("initWithRulerView:markerLocation:image:imageOrigin:")
-	_nSRulerMarkerSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSRulerMarkerSelDrawRect = objc.RegisterName("drawRect:")
-	_nSRulerMarkerSelTrackMouseAdding = objc.RegisterName("trackMouse:adding:")
-	_nSRulerMarkerSelRuler = objc.RegisterName("ruler")
-	_nSRulerMarkerSelMarkerLocation = objc.RegisterName("markerLocation")
-	_nSRulerMarkerSelSetMarkerLocation = objc.RegisterName("setMarkerLocation:")
-	_nSRulerMarkerSelImage = objc.RegisterName("image")
-	_nSRulerMarkerSelSetImage = objc.RegisterName("setImage:")
-	_nSRulerMarkerSelImageOrigin = objc.RegisterName("imageOrigin")
-	_nSRulerMarkerSelSetImageOrigin = objc.RegisterName("setImageOrigin:")
-	_nSRulerMarkerSelIsMovable = objc.RegisterName("isMovable")
-	_nSRulerMarkerSelSetMovable = objc.RegisterName("setMovable:")
-	_nSRulerMarkerSelIsRemovable = objc.RegisterName("isRemovable")
-	_nSRulerMarkerSelSetRemovable = objc.RegisterName("setRemovable:")
-	_nSRulerMarkerSelIsDragging = objc.RegisterName("isDragging")
-	_nSRulerMarkerSelRepresentedObject = objc.RegisterName("representedObject")
-	_nSRulerMarkerSelSetRepresentedObject = objc.RegisterName("setRepresentedObject:")
-	_nSRulerMarkerSelImageRectInRuler = objc.RegisterName("imageRectInRuler")
-	_nSRulerMarkerSelThicknessRequiredInRuler = objc.RegisterName("thicknessRequiredInRuler")
+	_nSRulerMarkerSelInitWithCoder                                   = objc.RegisterName("initWithCoder:")
+	_nSRulerMarkerSelDrawRect                                        = objc.RegisterName("drawRect:")
+	_nSRulerMarkerSelTrackMouseAdding                                = objc.RegisterName("trackMouse:adding:")
+	_nSRulerMarkerSelRuler                                           = objc.RegisterName("ruler")
+	_nSRulerMarkerSelMarkerLocation                                  = objc.RegisterName("markerLocation")
+	_nSRulerMarkerSelSetMarkerLocation                               = objc.RegisterName("setMarkerLocation:")
+	_nSRulerMarkerSelImage                                           = objc.RegisterName("image")
+	_nSRulerMarkerSelSetImage                                        = objc.RegisterName("setImage:")
+	_nSRulerMarkerSelImageOrigin                                     = objc.RegisterName("imageOrigin")
+	_nSRulerMarkerSelSetImageOrigin                                  = objc.RegisterName("setImageOrigin:")
+	_nSRulerMarkerSelIsMovable                                       = objc.RegisterName("isMovable")
+	_nSRulerMarkerSelSetMovable                                      = objc.RegisterName("setMovable:")
+	_nSRulerMarkerSelIsRemovable                                     = objc.RegisterName("isRemovable")
+	_nSRulerMarkerSelSetRemovable                                    = objc.RegisterName("setRemovable:")
+	_nSRulerMarkerSelIsDragging                                      = objc.RegisterName("isDragging")
+	_nSRulerMarkerSelRepresentedObject                               = objc.RegisterName("representedObject")
+	_nSRulerMarkerSelSetRepresentedObject                            = objc.RegisterName("setRepresentedObject:")
+	_nSRulerMarkerSelImageRectInRuler                                = objc.RegisterName("imageRectInRuler")
+	_nSRulerMarkerSelThicknessRequiredInRuler                        = objc.RegisterName("thicknessRequiredInRuler")
 )
 
 func NSRulerMarkerFromID(id objc.ID) *NSRulerMarker {
@@ -52,13 +52,17 @@ func NSRulerMarkerFromID(id objc.ID) *NSRulerMarker {
 
 func (o *NSRulerMarker) InitWithRulerViewMarkerLocationImageImageOrigin(ruler *NSRulerView, location float64, image *NSImage, imageOrigin corefoundation.CGPoint) *NSRulerMarker {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRulerMarkerSelInitWithRulerViewMarkerLocationImageImageOrigin, ruler.Ptr(), location, image.Ptr(), imageOrigin)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSRulerMarkerFromID(_ret)
 }
 
 func (o *NSRulerMarker) InitWithCoder(coder *foundation.NSCoder) *NSRulerMarker {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRulerMarkerSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSRulerMarkerFromID(_ret)
 }
 
@@ -73,7 +77,9 @@ func (o *NSRulerMarker) TrackMouseAdding(mouseDownEvent *NSEvent, isAdding bool)
 
 func (o *NSRulerMarker) Ruler() *NSRulerView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRulerMarkerSelRuler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSRulerViewFromID(_ret)
 }
 
@@ -88,7 +94,9 @@ func (o *NSRulerMarker) SetMarkerLocation(markerLocation float64) {
 
 func (o *NSRulerMarker) Image() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRulerMarkerSelImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -146,4 +154,3 @@ func (o *NSRulerMarker) ThicknessRequiredInRuler() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSRulerMarkerSelThicknessRequiredInRuler)
 	return _ret
 }
-

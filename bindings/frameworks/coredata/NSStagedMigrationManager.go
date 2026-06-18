@@ -16,10 +16,10 @@ type NSStagedMigrationManager struct {
 }
 
 var (
-	_clsNSStagedMigrationManager = _objcClass("NSStagedMigrationManager")
+	_clsNSStagedMigrationManager                        = _objcClass("NSStagedMigrationManager")
 	_nSStagedMigrationManagerSelInitWithMigrationStages = objc.RegisterName("initWithMigrationStages:")
-	_nSStagedMigrationManagerSelStages = objc.RegisterName("stages")
-	_nSStagedMigrationManagerSelContainer = objc.RegisterName("container")
+	_nSStagedMigrationManagerSelStages                  = objc.RegisterName("stages")
+	_nSStagedMigrationManagerSelContainer               = objc.RegisterName("container")
 )
 
 func NSStagedMigrationManagerFromID(id objc.ID) *NSStagedMigrationManager {
@@ -34,19 +34,24 @@ func NSStagedMigrationManagerFromID(id objc.ID) *NSStagedMigrationManager {
 
 func (o *NSStagedMigrationManager) InitWithMigrationStages(stages *foundation.NSArray[*NSMigrationStage]) *NSStagedMigrationManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStagedMigrationManagerSelInitWithMigrationStages, stages.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStagedMigrationManagerFromID(_ret)
 }
 
 func (o *NSStagedMigrationManager) Stages() *foundation.NSArray[*NSMigrationStage] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStagedMigrationManagerSelStages)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSMigrationStage](_ret)
 }
 
 func (o *NSStagedMigrationManager) Container() *NSPersistentContainer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStagedMigrationManagerSelContainer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersistentContainerFromID(_ret)
 }
-

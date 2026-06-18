@@ -72,4 +72,3 @@ type IOBluetoothSDPUUIDable interface {
 }
 
 var _ IOBluetoothSDPUUIDable = (*IOBluetoothSDPUUID)(nil)
-

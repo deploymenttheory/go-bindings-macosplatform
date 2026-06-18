@@ -17,19 +17,19 @@ type NSURLConnection struct {
 }
 
 var (
-	_clsNSURLConnection = _objcClass("NSURLConnection")
-	_nSURLConnectionSelInitWithRequestDelegateStartImmediately = objc.RegisterName("initWithRequest:delegate:startImmediately:")
-	_nSURLConnectionSelInitWithRequestDelegate = objc.RegisterName("initWithRequest:delegate:")
-	_nSURLConnectionSelConnectionWithRequestDelegate = objc.RegisterName("connectionWithRequest:delegate:")
-	_nSURLConnectionSelStart = objc.RegisterName("start")
-	_nSURLConnectionSelCancel = objc.RegisterName("cancel")
-	_nSURLConnectionSelScheduleInRunLoopForMode = objc.RegisterName("scheduleInRunLoop:forMode:")
-	_nSURLConnectionSelUnscheduleFromRunLoopForMode = objc.RegisterName("unscheduleFromRunLoop:forMode:")
-	_nSURLConnectionSelSetDelegateQueue = objc.RegisterName("setDelegateQueue:")
-	_nSURLConnectionSelCanHandleRequest = objc.RegisterName("canHandleRequest:")
-	_nSURLConnectionSelOriginalRequest = objc.RegisterName("originalRequest")
-	_nSURLConnectionSelCurrentRequest = objc.RegisterName("currentRequest")
-	_nSURLConnectionSelSendSynchronousRequestReturningResponseError = objc.RegisterName("sendSynchronousRequest:returningResponse:error:")
+	_clsNSURLConnection                                              = _objcClass("NSURLConnection")
+	_nSURLConnectionSelInitWithRequestDelegateStartImmediately       = objc.RegisterName("initWithRequest:delegate:startImmediately:")
+	_nSURLConnectionSelInitWithRequestDelegate                       = objc.RegisterName("initWithRequest:delegate:")
+	_nSURLConnectionSelConnectionWithRequestDelegate                 = objc.RegisterName("connectionWithRequest:delegate:")
+	_nSURLConnectionSelStart                                         = objc.RegisterName("start")
+	_nSURLConnectionSelCancel                                        = objc.RegisterName("cancel")
+	_nSURLConnectionSelScheduleInRunLoopForMode                      = objc.RegisterName("scheduleInRunLoop:forMode:")
+	_nSURLConnectionSelUnscheduleFromRunLoopForMode                  = objc.RegisterName("unscheduleFromRunLoop:forMode:")
+	_nSURLConnectionSelSetDelegateQueue                              = objc.RegisterName("setDelegateQueue:")
+	_nSURLConnectionSelCanHandleRequest                              = objc.RegisterName("canHandleRequest:")
+	_nSURLConnectionSelOriginalRequest                               = objc.RegisterName("originalRequest")
+	_nSURLConnectionSelCurrentRequest                                = objc.RegisterName("currentRequest")
+	_nSURLConnectionSelSendSynchronousRequestReturningResponseError  = objc.RegisterName("sendSynchronousRequest:returningResponse:error:")
 	_nSURLConnectionSelSendAsynchronousRequestQueueCompletionHandler = objc.RegisterName("sendAsynchronousRequest:queue:completionHandler:")
 )
 
@@ -46,21 +46,27 @@ func NSURLConnectionFromID(id objc.ID) *NSURLConnection {
 // Deprecated: Use NSURLSession (see NSURLSession.h)
 func (o *NSURLConnection) InitWithRequestDelegateStartImmediately(request *NSURLRequest, delegate objc.ID, startImmediately bool) *NSURLConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLConnectionSelInitWithRequestDelegateStartImmediately, request.Ptr(), delegate, startImmediately)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLConnectionFromID(_ret)
 }
 
 // Deprecated: Use NSURLSession (see NSURLSession.h)
 func (o *NSURLConnection) InitWithRequestDelegate(request *NSURLRequest, delegate objc.ID) *NSURLConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLConnectionSelInitWithRequestDelegate, request.Ptr(), delegate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLConnectionFromID(_ret)
 }
 
 // Deprecated: Use NSURLSession (see NSURLSession.h)
 func NSURLConnectionConnectionWithRequestDelegate(request *NSURLRequest, delegate objc.ID) *NSURLConnection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLConnection), _nSURLConnectionSelConnectionWithRequestDelegate, request.Ptr(), delegate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLConnectionFromID(_ret)
 }
 
@@ -92,13 +98,17 @@ func NSURLConnectionCanHandleRequest(request *NSURLRequest) bool {
 
 func (o *NSURLConnection) OriginalRequest() *NSURLRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLConnectionSelOriginalRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLRequestFromID(_ret)
 }
 
 func (o *NSURLConnection) CurrentRequest() *NSURLRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLConnectionSelCurrentRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLRequestFromID(_ret)
 }
 
@@ -107,7 +117,9 @@ func (o *NSURLConnection) CurrentRequest() *NSURLRequest {
 func NSURLConnectionSendSynchronousRequestReturningResponseError(request *NSURLRequest, response *NSURLResponse) (*NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLConnection), _nSURLConnectionSelSendSynchronousRequestReturningResponseError, request.Ptr(), response.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -132,4 +144,3 @@ func NSURLConnectionSendAsynchronousRequestQueueCompletionHandler(request *NSURL
 	}
 	objc.ID(_clsNSURLConnection).Send(_nSURLConnectionSelSendAsynchronousRequestQueueCompletionHandler, request.Ptr(), queue.Ptr(), __block_handler)
 }
-

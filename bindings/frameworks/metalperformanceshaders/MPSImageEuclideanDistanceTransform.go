@@ -18,10 +18,10 @@ type MPSImageEuclideanDistanceTransform struct {
 }
 
 var (
-	_clsMPSImageEuclideanDistanceTransform = _objcClass("MPSImageEuclideanDistanceTransform")
-	_mPSImageEuclideanDistanceTransformSelInitWithDevice = objc.RegisterName("initWithDevice:")
-	_mPSImageEuclideanDistanceTransformSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSImageEuclideanDistanceTransformSelSearchLimitRadius = objc.RegisterName("searchLimitRadius")
+	_clsMPSImageEuclideanDistanceTransform                     = _objcClass("MPSImageEuclideanDistanceTransform")
+	_mPSImageEuclideanDistanceTransformSelInitWithDevice       = objc.RegisterName("initWithDevice:")
+	_mPSImageEuclideanDistanceTransformSelInitWithCoderDevice  = objc.RegisterName("initWithCoder:device:")
+	_mPSImageEuclideanDistanceTransformSelSearchLimitRadius    = objc.RegisterName("searchLimitRadius")
 	_mPSImageEuclideanDistanceTransformSelSetSearchLimitRadius = objc.RegisterName("setSearchLimitRadius:")
 )
 
@@ -37,14 +37,18 @@ func MPSImageEuclideanDistanceTransformFromID(id objc.ID) *MPSImageEuclideanDist
 
 func (o *MPSImageEuclideanDistanceTransform) InitWithDevice(device metal.MTLDevice) *MPSImageEuclideanDistanceTransform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageEuclideanDistanceTransformSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageEuclideanDistanceTransformFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSImageEuclideanDistanceTransform) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSImageEuclideanDistanceTransform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageEuclideanDistanceTransformSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageEuclideanDistanceTransformFromID(_ret)
 }
 
@@ -57,4 +61,3 @@ func (o *MPSImageEuclideanDistanceTransform) SearchLimitRadius() float32 {
 func (o *MPSImageEuclideanDistanceTransform) SetSearchLimitRadius(searchLimitRadius float32) {
 	o.Ptr().Send(_mPSImageEuclideanDistanceTransformSelSetSearchLimitRadius, searchLimitRadius)
 }
-

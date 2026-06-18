@@ -6,4 +6,3 @@ package automaticassessmentconfiguration
 // AEAssessmentSessionDelegate wraps the ObjC protocol AEAssessmentSessionDelegate.
 type AEAssessmentSessionDelegate interface {
 }
-

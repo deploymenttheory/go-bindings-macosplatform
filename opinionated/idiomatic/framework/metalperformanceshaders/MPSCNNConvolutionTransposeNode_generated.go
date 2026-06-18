@@ -62,9 +62,13 @@ func (x *CNNConvolutionTransposeNode) WithLabel(label string) *CNNConvolutionTra
 	return x
 }
 
-func (x *CNNConvolutionTransposeNode) asCNNConvolutionNode() *mpsneuralnetwork.MPSCNNConvolutionNode { return &x.inner.MPSCNNConvolutionNode }
+func (x *CNNConvolutionTransposeNode) asCNNConvolutionNode() *mpsneuralnetwork.MPSCNNConvolutionNode {
+	return &x.inner.MPSCNNConvolutionNode
+}
 
-func (x *CNNConvolutionTransposeNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSCNNConvolutionNode.MPSNNFilterNode }
+func (x *CNNConvolutionTransposeNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSCNNConvolutionNode.MPSNNFilterNode
+}
 
 // CNNConvolutionTransposeNodeable is the interface implemented by [CNNConvolutionTransposeNode], for mocking and DI.
 type CNNConvolutionTransposeNodeable interface {
@@ -76,4 +80,3 @@ type CNNConvolutionTransposeNodeable interface {
 }
 
 var _ CNNConvolutionTransposeNodeable = (*CNNConvolutionTransposeNode)(nil)
-

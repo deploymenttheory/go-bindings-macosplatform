@@ -119,7 +119,9 @@ func (x *LeaderboardViewController) SetLeaderboardDelegate(leaderboardDelegate r
 	x.inner.SetLeaderboardDelegate(leaderboardDelegate)
 }
 
-func (x *LeaderboardViewController) asGameCenterViewController() *raw.GKGameCenterViewController { return &x.inner.GKGameCenterViewController }
+func (x *LeaderboardViewController) asGameCenterViewController() *raw.GKGameCenterViewController {
+	return &x.inner.GKGameCenterViewController
+}
 
 // LeaderboardViewControllerable is the interface implemented by [LeaderboardViewController], for mocking and DI.
 type LeaderboardViewControllerable interface {
@@ -141,4 +143,3 @@ type LeaderboardViewControllerable interface {
 }
 
 var _ LeaderboardViewControllerable = (*LeaderboardViewController)(nil)
-

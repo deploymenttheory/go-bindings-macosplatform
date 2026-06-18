@@ -21,11 +21,11 @@ func (o *NWBonjourServiceEndpoint) Ptr() objc.ID { return o.ptr }
 func (o *NWBonjourServiceEndpoint) InitPtr(id objc.ID) { o.ptr = id }
 
 var (
-	_clsNWBonjourServiceEndpoint = _objcClass("NWBonjourServiceEndpoint")
+	_clsNWBonjourServiceEndpoint                           = _objcClass("NWBonjourServiceEndpoint")
 	_nWBonjourServiceEndpointSelEndpointWithNameTypeDomain = objc.RegisterName("endpointWithName:type:domain:")
-	_nWBonjourServiceEndpointSelName = objc.RegisterName("name")
-	_nWBonjourServiceEndpointSelType = objc.RegisterName("type")
-	_nWBonjourServiceEndpointSelDomain = objc.RegisterName("domain")
+	_nWBonjourServiceEndpointSelName                       = objc.RegisterName("name")
+	_nWBonjourServiceEndpointSelType                       = objc.RegisterName("type")
+	_nWBonjourServiceEndpointSelDomain                     = objc.RegisterName("domain")
 )
 
 func NWBonjourServiceEndpointFromID(id objc.ID) *NWBonjourServiceEndpoint {
@@ -42,7 +42,9 @@ func NWBonjourServiceEndpointFromID(id objc.ID) *NWBonjourServiceEndpoint {
 // Deprecated: Use `nw_endpoint_create_bonjour_service` in Network framework instead, see deprecation notice in <NetworkExtension/NWBonjourServiceEndpoint.h>
 func NWBonjourServiceEndpointEndpointWithNameTypeDomain(name *foundation.NSString, type_ *foundation.NSString, domain *foundation.NSString) *NWBonjourServiceEndpoint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNWBonjourServiceEndpoint), _nWBonjourServiceEndpointSelEndpointWithNameTypeDomain, name.Ptr(), type_.Ptr(), domain.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NWBonjourServiceEndpointFromID(_ret)
 }
 
@@ -50,7 +52,9 @@ func NWBonjourServiceEndpointEndpointWithNameTypeDomain(name *foundation.NSStrin
 // Deprecated: Use `nw_endpoint_get_bonjour_service_name` in Network framework instead, see deprecation notice in <NetworkExtension/NWBonjourServiceEndpoint.h>
 func (o *NWBonjourServiceEndpoint) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nWBonjourServiceEndpointSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -58,7 +62,9 @@ func (o *NWBonjourServiceEndpoint) Name() *foundation.NSString {
 // Deprecated: Use `nw_endpoint_get_bonjour_service_type` in Network framework instead, see deprecation notice in <NetworkExtension/NWBonjourServiceEndpoint.h>
 func (o *NWBonjourServiceEndpoint) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nWBonjourServiceEndpointSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -66,7 +72,8 @@ func (o *NWBonjourServiceEndpoint) Type() *foundation.NSString {
 // Deprecated: Use `nw_endpoint_get_bonjour_service_domain` in Network framework instead, see deprecation notice in <NetworkExtension/NWBonjourServiceEndpoint.h>
 func (o *NWBonjourServiceEndpoint) Domain() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nWBonjourServiceEndpointSelDomain)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

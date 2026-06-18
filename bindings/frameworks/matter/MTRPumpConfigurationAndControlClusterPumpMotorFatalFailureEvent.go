@@ -26,4 +26,3 @@ func MTRPumpConfigurationAndControlClusterPumpMotorFatalFailureEventFromID(id ob
 	purego.Track(o)
 	return o
 }
-

@@ -71,4 +71,3 @@ type ReshapeLayerable interface {
 }
 
 var _ ReshapeLayerable = (*ReshapeLayer)(nil)
-

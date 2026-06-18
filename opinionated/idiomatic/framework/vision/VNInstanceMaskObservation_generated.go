@@ -75,4 +75,3 @@ type InstanceMaskObservationable interface {
 }
 
 var _ InstanceMaskObservationable = (*InstanceMaskObservation)(nil)
-

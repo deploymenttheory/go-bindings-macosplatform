@@ -73,4 +73,3 @@ type TermOfAddressable interface {
 }
 
 var _ TermOfAddressable = (*TermOfAddress)(nil)
-

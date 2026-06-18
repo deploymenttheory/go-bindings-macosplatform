@@ -54,4 +54,3 @@ type AppExtensionInfoable interface {
 }
 
 var _ AppExtensionInfoable = (*AppExtensionInfo)(nil)
-

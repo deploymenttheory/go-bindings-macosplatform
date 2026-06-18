@@ -16,15 +16,15 @@ type MTRRefrigeratorAlarmClusterNotifyEvent struct {
 }
 
 var (
-	_clsMTRRefrigeratorAlarmClusterNotifyEvent = _objcClass("MTRRefrigeratorAlarmClusterNotifyEvent")
-	_mTRRefrigeratorAlarmClusterNotifyEventSelActive = objc.RegisterName("active")
-	_mTRRefrigeratorAlarmClusterNotifyEventSelSetActive = objc.RegisterName("setActive:")
-	_mTRRefrigeratorAlarmClusterNotifyEventSelInactive = objc.RegisterName("inactive")
+	_clsMTRRefrigeratorAlarmClusterNotifyEvent            = _objcClass("MTRRefrigeratorAlarmClusterNotifyEvent")
+	_mTRRefrigeratorAlarmClusterNotifyEventSelActive      = objc.RegisterName("active")
+	_mTRRefrigeratorAlarmClusterNotifyEventSelSetActive   = objc.RegisterName("setActive:")
+	_mTRRefrigeratorAlarmClusterNotifyEventSelInactive    = objc.RegisterName("inactive")
 	_mTRRefrigeratorAlarmClusterNotifyEventSelSetInactive = objc.RegisterName("setInactive:")
-	_mTRRefrigeratorAlarmClusterNotifyEventSelState = objc.RegisterName("state")
-	_mTRRefrigeratorAlarmClusterNotifyEventSelSetState = objc.RegisterName("setState:")
-	_mTRRefrigeratorAlarmClusterNotifyEventSelMask = objc.RegisterName("mask")
-	_mTRRefrigeratorAlarmClusterNotifyEventSelSetMask = objc.RegisterName("setMask:")
+	_mTRRefrigeratorAlarmClusterNotifyEventSelState       = objc.RegisterName("state")
+	_mTRRefrigeratorAlarmClusterNotifyEventSelSetState    = objc.RegisterName("setState:")
+	_mTRRefrigeratorAlarmClusterNotifyEventSelMask        = objc.RegisterName("mask")
+	_mTRRefrigeratorAlarmClusterNotifyEventSelSetMask     = objc.RegisterName("setMask:")
 )
 
 func MTRRefrigeratorAlarmClusterNotifyEventFromID(id objc.ID) *MTRRefrigeratorAlarmClusterNotifyEvent {
@@ -39,7 +39,9 @@ func MTRRefrigeratorAlarmClusterNotifyEventFromID(id objc.ID) *MTRRefrigeratorAl
 
 func (o *MTRRefrigeratorAlarmClusterNotifyEvent) Active() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRRefrigeratorAlarmClusterNotifyEventSelActive)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTRRefrigeratorAlarmClusterNotifyEvent) SetActive(active *foundation.NS
 
 func (o *MTRRefrigeratorAlarmClusterNotifyEvent) Inactive() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRRefrigeratorAlarmClusterNotifyEventSelInactive)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,7 +63,9 @@ func (o *MTRRefrigeratorAlarmClusterNotifyEvent) SetInactive(inactive *foundatio
 
 func (o *MTRRefrigeratorAlarmClusterNotifyEvent) State() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRRefrigeratorAlarmClusterNotifyEventSelState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -69,11 +75,12 @@ func (o *MTRRefrigeratorAlarmClusterNotifyEvent) SetState(state *foundation.NSNu
 
 func (o *MTRRefrigeratorAlarmClusterNotifyEvent) Mask() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRRefrigeratorAlarmClusterNotifyEventSelMask)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRRefrigeratorAlarmClusterNotifyEvent) SetMask(mask *foundation.NSNumber) {
 	o.Ptr().Send(_mTRRefrigeratorAlarmClusterNotifyEventSelSetMask, mask.Ptr())
 }
-

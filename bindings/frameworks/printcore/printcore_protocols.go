@@ -38,4 +38,3 @@ type PDEPlugInCallbackProtocol interface {
 	PpdFile() unsafe.Pointer
 	WillChangePPDOptionKeyValuePpdChoice(option *foundation.NSString, choice *foundation.NSString) bool
 }
-

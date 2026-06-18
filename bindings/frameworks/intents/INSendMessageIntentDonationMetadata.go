@@ -15,16 +15,16 @@ type INSendMessageIntentDonationMetadata struct {
 }
 
 var (
-	_clsINSendMessageIntentDonationMetadata = _objcClass("INSendMessageIntentDonationMetadata")
-	_iNSendMessageIntentDonationMetadataSelInit = objc.RegisterName("init")
-	_iNSendMessageIntentDonationMetadataSelMentionsCurrentUser = objc.RegisterName("mentionsCurrentUser")
-	_iNSendMessageIntentDonationMetadataSelSetMentionsCurrentUser = objc.RegisterName("setMentionsCurrentUser:")
-	_iNSendMessageIntentDonationMetadataSelIsReplyToCurrentUser = objc.RegisterName("isReplyToCurrentUser")
-	_iNSendMessageIntentDonationMetadataSelSetReplyToCurrentUser = objc.RegisterName("setReplyToCurrentUser:")
-	_iNSendMessageIntentDonationMetadataSelNotifyRecipientAnyway = objc.RegisterName("notifyRecipientAnyway")
+	_clsINSendMessageIntentDonationMetadata                         = _objcClass("INSendMessageIntentDonationMetadata")
+	_iNSendMessageIntentDonationMetadataSelInit                     = objc.RegisterName("init")
+	_iNSendMessageIntentDonationMetadataSelMentionsCurrentUser      = objc.RegisterName("mentionsCurrentUser")
+	_iNSendMessageIntentDonationMetadataSelSetMentionsCurrentUser   = objc.RegisterName("setMentionsCurrentUser:")
+	_iNSendMessageIntentDonationMetadataSelIsReplyToCurrentUser     = objc.RegisterName("isReplyToCurrentUser")
+	_iNSendMessageIntentDonationMetadataSelSetReplyToCurrentUser    = objc.RegisterName("setReplyToCurrentUser:")
+	_iNSendMessageIntentDonationMetadataSelNotifyRecipientAnyway    = objc.RegisterName("notifyRecipientAnyway")
 	_iNSendMessageIntentDonationMetadataSelSetNotifyRecipientAnyway = objc.RegisterName("setNotifyRecipientAnyway:")
-	_iNSendMessageIntentDonationMetadataSelRecipientCount = objc.RegisterName("recipientCount")
-	_iNSendMessageIntentDonationMetadataSelSetRecipientCount = objc.RegisterName("setRecipientCount:")
+	_iNSendMessageIntentDonationMetadataSelRecipientCount           = objc.RegisterName("recipientCount")
+	_iNSendMessageIntentDonationMetadataSelSetRecipientCount        = objc.RegisterName("setRecipientCount:")
 )
 
 func INSendMessageIntentDonationMetadataFromID(id objc.ID) *INSendMessageIntentDonationMetadata {
@@ -39,7 +39,9 @@ func INSendMessageIntentDonationMetadataFromID(id objc.ID) *INSendMessageIntentD
 
 func (o *INSendMessageIntentDonationMetadata) Init() *INSendMessageIntentDonationMetadata {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNSendMessageIntentDonationMetadataSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INSendMessageIntentDonationMetadataFromID(_ret)
 }
 
@@ -78,4 +80,3 @@ func (o *INSendMessageIntentDonationMetadata) RecipientCount() uint {
 func (o *INSendMessageIntentDonationMetadata) SetRecipientCount(recipientCount uint) {
 	o.Ptr().Send(_iNSendMessageIntentDonationMetadataSelSetRecipientCount, recipientCount)
 }
-

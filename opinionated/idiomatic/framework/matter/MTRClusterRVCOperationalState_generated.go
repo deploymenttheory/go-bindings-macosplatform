@@ -251,9 +251,13 @@ func (x *MTRClusterRVCOperationalState) ReadAttributeClusterRevisionWithParams(p
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterRVCOperationalState) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterRVCOperationalState) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterRVCOperationalState) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterRVCOperationalState) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterRVCOperationalStateable is the interface implemented by [MTRClusterRVCOperationalState], for mocking and DI.
 type MTRClusterRVCOperationalStateable interface {
@@ -278,4 +282,3 @@ type MTRClusterRVCOperationalStateable interface {
 }
 
 var _ MTRClusterRVCOperationalStateable = (*MTRClusterRVCOperationalState)(nil)
-

@@ -16,18 +16,18 @@ type MTL4RenderPipelineBinaryFunctionsDescriptor struct {
 }
 
 var (
-	_clsMTL4RenderPipelineBinaryFunctionsDescriptor = _objcClass("MTL4RenderPipelineBinaryFunctionsDescriptor")
-	_mTL4RenderPipelineBinaryFunctionsDescriptorSelReset = objc.RegisterName("reset")
-	_mTL4RenderPipelineBinaryFunctionsDescriptorSelVertexAdditionalBinaryFunctions = objc.RegisterName("vertexAdditionalBinaryFunctions")
-	_mTL4RenderPipelineBinaryFunctionsDescriptorSelSetVertexAdditionalBinaryFunctions = objc.RegisterName("setVertexAdditionalBinaryFunctions:")
-	_mTL4RenderPipelineBinaryFunctionsDescriptorSelFragmentAdditionalBinaryFunctions = objc.RegisterName("fragmentAdditionalBinaryFunctions")
+	_clsMTL4RenderPipelineBinaryFunctionsDescriptor                                     = _objcClass("MTL4RenderPipelineBinaryFunctionsDescriptor")
+	_mTL4RenderPipelineBinaryFunctionsDescriptorSelReset                                = objc.RegisterName("reset")
+	_mTL4RenderPipelineBinaryFunctionsDescriptorSelVertexAdditionalBinaryFunctions      = objc.RegisterName("vertexAdditionalBinaryFunctions")
+	_mTL4RenderPipelineBinaryFunctionsDescriptorSelSetVertexAdditionalBinaryFunctions   = objc.RegisterName("setVertexAdditionalBinaryFunctions:")
+	_mTL4RenderPipelineBinaryFunctionsDescriptorSelFragmentAdditionalBinaryFunctions    = objc.RegisterName("fragmentAdditionalBinaryFunctions")
 	_mTL4RenderPipelineBinaryFunctionsDescriptorSelSetFragmentAdditionalBinaryFunctions = objc.RegisterName("setFragmentAdditionalBinaryFunctions:")
-	_mTL4RenderPipelineBinaryFunctionsDescriptorSelTileAdditionalBinaryFunctions = objc.RegisterName("tileAdditionalBinaryFunctions")
-	_mTL4RenderPipelineBinaryFunctionsDescriptorSelSetTileAdditionalBinaryFunctions = objc.RegisterName("setTileAdditionalBinaryFunctions:")
-	_mTL4RenderPipelineBinaryFunctionsDescriptorSelObjectAdditionalBinaryFunctions = objc.RegisterName("objectAdditionalBinaryFunctions")
-	_mTL4RenderPipelineBinaryFunctionsDescriptorSelSetObjectAdditionalBinaryFunctions = objc.RegisterName("setObjectAdditionalBinaryFunctions:")
-	_mTL4RenderPipelineBinaryFunctionsDescriptorSelMeshAdditionalBinaryFunctions = objc.RegisterName("meshAdditionalBinaryFunctions")
-	_mTL4RenderPipelineBinaryFunctionsDescriptorSelSetMeshAdditionalBinaryFunctions = objc.RegisterName("setMeshAdditionalBinaryFunctions:")
+	_mTL4RenderPipelineBinaryFunctionsDescriptorSelTileAdditionalBinaryFunctions        = objc.RegisterName("tileAdditionalBinaryFunctions")
+	_mTL4RenderPipelineBinaryFunctionsDescriptorSelSetTileAdditionalBinaryFunctions     = objc.RegisterName("setTileAdditionalBinaryFunctions:")
+	_mTL4RenderPipelineBinaryFunctionsDescriptorSelObjectAdditionalBinaryFunctions      = objc.RegisterName("objectAdditionalBinaryFunctions")
+	_mTL4RenderPipelineBinaryFunctionsDescriptorSelSetObjectAdditionalBinaryFunctions   = objc.RegisterName("setObjectAdditionalBinaryFunctions:")
+	_mTL4RenderPipelineBinaryFunctionsDescriptorSelMeshAdditionalBinaryFunctions        = objc.RegisterName("meshAdditionalBinaryFunctions")
+	_mTL4RenderPipelineBinaryFunctionsDescriptorSelSetMeshAdditionalBinaryFunctions     = objc.RegisterName("setMeshAdditionalBinaryFunctions:")
 )
 
 func MTL4RenderPipelineBinaryFunctionsDescriptorFromID(id objc.ID) *MTL4RenderPipelineBinaryFunctionsDescriptor {
@@ -48,7 +48,9 @@ func (o *MTL4RenderPipelineBinaryFunctionsDescriptor) Reset() {
 // Provides an array of binary functions representing additional binary vertex shader functions.
 func (o *MTL4RenderPipelineBinaryFunctionsDescriptor) VertexAdditionalBinaryFunctions() *foundation.NSArray[MTL4BinaryFunction] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4RenderPipelineBinaryFunctionsDescriptorSelVertexAdditionalBinaryFunctions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTL4BinaryFunction](_ret)
 }
 
@@ -59,7 +61,9 @@ func (o *MTL4RenderPipelineBinaryFunctionsDescriptor) SetVertexAdditionalBinaryF
 // Provides an array of binary functions representing additional binary fragment shader functions.
 func (o *MTL4RenderPipelineBinaryFunctionsDescriptor) FragmentAdditionalBinaryFunctions() *foundation.NSArray[MTL4BinaryFunction] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4RenderPipelineBinaryFunctionsDescriptorSelFragmentAdditionalBinaryFunctions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTL4BinaryFunction](_ret)
 }
 
@@ -70,7 +74,9 @@ func (o *MTL4RenderPipelineBinaryFunctionsDescriptor) SetFragmentAdditionalBinar
 // Provides an array of binary functions representing additional binary tile shader functions.
 func (o *MTL4RenderPipelineBinaryFunctionsDescriptor) TileAdditionalBinaryFunctions() *foundation.NSArray[MTL4BinaryFunction] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4RenderPipelineBinaryFunctionsDescriptorSelTileAdditionalBinaryFunctions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTL4BinaryFunction](_ret)
 }
 
@@ -81,7 +87,9 @@ func (o *MTL4RenderPipelineBinaryFunctionsDescriptor) SetTileAdditionalBinaryFun
 // Provides an array of binary functions representing additional binary object shader functions.
 func (o *MTL4RenderPipelineBinaryFunctionsDescriptor) ObjectAdditionalBinaryFunctions() *foundation.NSArray[MTL4BinaryFunction] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4RenderPipelineBinaryFunctionsDescriptorSelObjectAdditionalBinaryFunctions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTL4BinaryFunction](_ret)
 }
 
@@ -92,11 +100,12 @@ func (o *MTL4RenderPipelineBinaryFunctionsDescriptor) SetObjectAdditionalBinaryF
 // Provides an array of binary functions representing additional binary mesh shader functions.
 func (o *MTL4RenderPipelineBinaryFunctionsDescriptor) MeshAdditionalBinaryFunctions() *foundation.NSArray[MTL4BinaryFunction] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4RenderPipelineBinaryFunctionsDescriptorSelMeshAdditionalBinaryFunctions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTL4BinaryFunction](_ret)
 }
 
 func (o *MTL4RenderPipelineBinaryFunctionsDescriptor) SetMeshAdditionalBinaryFunctions(meshAdditionalBinaryFunctions *foundation.NSArray[MTL4BinaryFunction]) {
 	o.Ptr().Send(_mTL4RenderPipelineBinaryFunctionsDescriptorSelSetMeshAdditionalBinaryFunctions, meshAdditionalBinaryFunctions.Ptr())
 }
-

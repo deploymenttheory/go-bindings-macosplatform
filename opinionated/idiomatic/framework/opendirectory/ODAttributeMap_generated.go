@@ -136,4 +136,3 @@ type AttributeMapable interface {
 }
 
 var _ AttributeMapable = (*AttributeMap)(nil)
-

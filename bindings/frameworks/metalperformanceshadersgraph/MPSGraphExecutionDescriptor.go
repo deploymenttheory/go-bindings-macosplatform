@@ -18,17 +18,17 @@ type MPSGraphExecutionDescriptor struct {
 }
 
 var (
-	_clsMPSGraphExecutionDescriptor = _objcClass("MPSGraphExecutionDescriptor")
-	_mPSGraphExecutionDescriptorSelWaitForEventValue = objc.RegisterName("waitForEvent:value:")
+	_clsMPSGraphExecutionDescriptor                                 = _objcClass("MPSGraphExecutionDescriptor")
+	_mPSGraphExecutionDescriptorSelWaitForEventValue                = objc.RegisterName("waitForEvent:value:")
 	_mPSGraphExecutionDescriptorSelSignalEventAtExecutionEventValue = objc.RegisterName("signalEvent:atExecutionEvent:value:")
-	_mPSGraphExecutionDescriptorSelScheduledHandler = objc.RegisterName("scheduledHandler")
-	_mPSGraphExecutionDescriptorSelSetScheduledHandler = objc.RegisterName("setScheduledHandler:")
-	_mPSGraphExecutionDescriptorSelCompletionHandler = objc.RegisterName("completionHandler")
-	_mPSGraphExecutionDescriptorSelSetCompletionHandler = objc.RegisterName("setCompletionHandler:")
-	_mPSGraphExecutionDescriptorSelWaitUntilCompleted = objc.RegisterName("waitUntilCompleted")
-	_mPSGraphExecutionDescriptorSelSetWaitUntilCompleted = objc.RegisterName("setWaitUntilCompleted:")
-	_mPSGraphExecutionDescriptorSelCompilationDescriptor = objc.RegisterName("compilationDescriptor")
-	_mPSGraphExecutionDescriptorSelSetCompilationDescriptor = objc.RegisterName("setCompilationDescriptor:")
+	_mPSGraphExecutionDescriptorSelScheduledHandler                 = objc.RegisterName("scheduledHandler")
+	_mPSGraphExecutionDescriptorSelSetScheduledHandler              = objc.RegisterName("setScheduledHandler:")
+	_mPSGraphExecutionDescriptorSelCompletionHandler                = objc.RegisterName("completionHandler")
+	_mPSGraphExecutionDescriptorSelSetCompletionHandler             = objc.RegisterName("setCompletionHandler:")
+	_mPSGraphExecutionDescriptorSelWaitUntilCompleted               = objc.RegisterName("waitUntilCompleted")
+	_mPSGraphExecutionDescriptorSelSetWaitUntilCompleted            = objc.RegisterName("setWaitUntilCompleted:")
+	_mPSGraphExecutionDescriptorSelCompilationDescriptor            = objc.RegisterName("compilationDescriptor")
+	_mPSGraphExecutionDescriptorSelSetCompilationDescriptor         = objc.RegisterName("setCompilationDescriptor:")
 )
 
 func MPSGraphExecutionDescriptorFromID(id objc.ID) *MPSGraphExecutionDescriptor {
@@ -98,7 +98,9 @@ func (o *MPSGraphExecutionDescriptor) SetWaitUntilCompleted(waitUntilCompleted b
 // The compilation descriptor for the graph. Default value is nil.
 func (o *MPSGraphExecutionDescriptor) CompilationDescriptor() *MPSGraphCompilationDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphExecutionDescriptorSelCompilationDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSGraphCompilationDescriptorFromID(_ret)
 }
 
@@ -106,4 +108,3 @@ func (o *MPSGraphExecutionDescriptor) CompilationDescriptor() *MPSGraphCompilati
 func (o *MPSGraphExecutionDescriptor) SetCompilationDescriptor(compilationDescriptor *MPSGraphCompilationDescriptor) {
 	o.Ptr().Send(_mPSGraphExecutionDescriptorSelSetCompilationDescriptor, compilationDescriptor.Ptr())
 }
-

@@ -16,25 +16,25 @@ type MPContentItem struct {
 }
 
 var (
-	_clsMPContentItem = _objcClass("MPContentItem")
-	_mPContentItemSelInitWithIdentifier = objc.RegisterName("initWithIdentifier:")
-	_mPContentItemSelIdentifier = objc.RegisterName("identifier")
-	_mPContentItemSelTitle = objc.RegisterName("title")
-	_mPContentItemSelSetTitle = objc.RegisterName("setTitle:")
-	_mPContentItemSelSubtitle = objc.RegisterName("subtitle")
-	_mPContentItemSelSetSubtitle = objc.RegisterName("setSubtitle:")
-	_mPContentItemSelArtwork = objc.RegisterName("artwork")
-	_mPContentItemSelSetArtwork = objc.RegisterName("setArtwork:")
-	_mPContentItemSelPlaybackProgress = objc.RegisterName("playbackProgress")
+	_clsMPContentItem                    = _objcClass("MPContentItem")
+	_mPContentItemSelInitWithIdentifier  = objc.RegisterName("initWithIdentifier:")
+	_mPContentItemSelIdentifier          = objc.RegisterName("identifier")
+	_mPContentItemSelTitle               = objc.RegisterName("title")
+	_mPContentItemSelSetTitle            = objc.RegisterName("setTitle:")
+	_mPContentItemSelSubtitle            = objc.RegisterName("subtitle")
+	_mPContentItemSelSetSubtitle         = objc.RegisterName("setSubtitle:")
+	_mPContentItemSelArtwork             = objc.RegisterName("artwork")
+	_mPContentItemSelSetArtwork          = objc.RegisterName("setArtwork:")
+	_mPContentItemSelPlaybackProgress    = objc.RegisterName("playbackProgress")
 	_mPContentItemSelSetPlaybackProgress = objc.RegisterName("setPlaybackProgress:")
-	_mPContentItemSelIsStreamingContent = objc.RegisterName("isStreamingContent")
+	_mPContentItemSelIsStreamingContent  = objc.RegisterName("isStreamingContent")
 	_mPContentItemSelSetStreamingContent = objc.RegisterName("setStreamingContent:")
-	_mPContentItemSelIsExplicitContent = objc.RegisterName("isExplicitContent")
-	_mPContentItemSelSetExplicitContent = objc.RegisterName("setExplicitContent:")
-	_mPContentItemSelIsContainer = objc.RegisterName("isContainer")
-	_mPContentItemSelSetContainer = objc.RegisterName("setContainer:")
-	_mPContentItemSelIsPlayable = objc.RegisterName("isPlayable")
-	_mPContentItemSelSetPlayable = objc.RegisterName("setPlayable:")
+	_mPContentItemSelIsExplicitContent   = objc.RegisterName("isExplicitContent")
+	_mPContentItemSelSetExplicitContent  = objc.RegisterName("setExplicitContent:")
+	_mPContentItemSelIsContainer         = objc.RegisterName("isContainer")
+	_mPContentItemSelSetContainer        = objc.RegisterName("setContainer:")
+	_mPContentItemSelIsPlayable          = objc.RegisterName("isPlayable")
+	_mPContentItemSelSetPlayable         = objc.RegisterName("setPlayable:")
 )
 
 func MPContentItemFromID(id objc.ID) *MPContentItem {
@@ -50,21 +50,27 @@ func MPContentItemFromID(id objc.ID) *MPContentItem {
 // Designated initializer. A unique identifier is required to identify the item for later use.
 func (o *MPContentItem) InitWithIdentifier(identifier *foundation.NSString) *MPContentItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPContentItemSelInitWithIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPContentItemFromID(_ret)
 }
 
 // A unique identifier for this content item. (Required)
 func (o *MPContentItem) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPContentItemSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // A title for this item. Usually this would be the track name, if representing a song, the episode name of a podcast, etc.
 func (o *MPContentItem) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPContentItemSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -75,7 +81,9 @@ func (o *MPContentItem) SetTitle(title *foundation.NSString) {
 // A subtitle for this item. If this were representing a song, this would usually be the artist or composer.
 func (o *MPContentItem) Subtitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPContentItemSelSubtitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -86,7 +94,9 @@ func (o *MPContentItem) SetSubtitle(subtitle *foundation.NSString) {
 // Artwork for this item. Examples of artwork for a content item are the album cover for a song, or a movie poster for a movie.
 func (o *MPContentItem) Artwork() *MPMediaItemArtwork {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPContentItemSelArtwork)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPMediaItemArtworkFromID(_ret)
 }
 
@@ -143,4 +153,3 @@ func (o *MPContentItem) IsPlayable() bool {
 func (o *MPContentItem) SetPlayable(playable bool) {
 	o.Ptr().Send(_mPContentItemSelSetPlayable, playable)
 }
-

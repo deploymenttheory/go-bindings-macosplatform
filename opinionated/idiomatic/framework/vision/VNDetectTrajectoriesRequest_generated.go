@@ -148,11 +148,17 @@ func (x *DetectTrajectoriesRequest) SetTargetFrameTime(targetFrameTime coremedia
 	x.inner.SetTargetFrameTime(targetFrameTime)
 }
 
-func (x *DetectTrajectoriesRequest) asStatefulRequest() *raw.VNStatefulRequest { return &x.inner.VNStatefulRequest }
+func (x *DetectTrajectoriesRequest) asStatefulRequest() *raw.VNStatefulRequest {
+	return &x.inner.VNStatefulRequest
+}
 
-func (x *DetectTrajectoriesRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNStatefulRequest.VNImageBasedRequest }
+func (x *DetectTrajectoriesRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNStatefulRequest.VNImageBasedRequest
+}
 
-func (x *DetectTrajectoriesRequest) asRequest() *raw.VNRequest { return &x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest }
+func (x *DetectTrajectoriesRequest) asRequest() *raw.VNRequest {
+	return &x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest
+}
 
 // DetectTrajectoriesRequestable is the interface implemented by [DetectTrajectoriesRequest], for mocking and DI.
 type DetectTrajectoriesRequestable interface {
@@ -180,4 +186,3 @@ type DetectTrajectoriesRequestable interface {
 }
 
 var _ DetectTrajectoriesRequestable = (*DetectTrajectoriesRequest)(nil)
-

@@ -126,4 +126,3 @@ type WebAuthenticationSessionable interface {
 }
 
 var _ WebAuthenticationSessionable = (*WebAuthenticationSession)(nil)
-

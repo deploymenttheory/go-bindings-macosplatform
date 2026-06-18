@@ -18,27 +18,27 @@ type MPSRNNMatrixTrainingLayer struct {
 }
 
 var (
-	_clsMPSRNNMatrixTrainingLayer = _objcClass("MPSRNNMatrixTrainingLayer")
-	_mPSRNNMatrixTrainingLayerSelInitWithDeviceRnnDescriptorTrainableWeights = objc.RegisterName("initWithDevice:rnnDescriptor:trainableWeights:")
-	_mPSRNNMatrixTrainingLayerSelCreateWeightGradientMatricesDataType = objc.RegisterName("createWeightGradientMatrices:dataType:")
-	_mPSRNNMatrixTrainingLayerSelCreateTemporaryWeightGradientMatricesDataTypeCommandBuffer = objc.RegisterName("createTemporaryWeightGradientMatrices:dataType:commandBuffer:")
-	_mPSRNNMatrixTrainingLayerSelCreateWeightMatrices = objc.RegisterName("createWeightMatrices:")
-	_mPSRNNMatrixTrainingLayerSelEncodeCopyWeightsToCommandBufferWeightsMatrixIdMatrixCopyFromWeightsToMatrixMatrixOffset = objc.RegisterName("encodeCopyWeightsToCommandBuffer:weights:matrixId:matrix:copyFromWeightsToMatrix:matrixOffset:")
-	_mPSRNNMatrixTrainingLayerSelEncodeForwardSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsTrainingStatesRecurrentInputStateRecurrentOutputStatesWeights = objc.RegisterName("encodeForwardSequenceToCommandBuffer:sourceMatrices:sourceOffsets:destinationMatrices:destinationOffsets:trainingStates:recurrentInputState:recurrentOutputStates:weights:")
-	_mPSRNNMatrixTrainingLayerSelEncodeForwardSequenceToCommandBufferSourceMatricesDestinationMatricesTrainingStatesWeights = objc.RegisterName("encodeForwardSequenceToCommandBuffer:sourceMatrices:destinationMatrices:trainingStates:weights:")
+	_clsMPSRNNMatrixTrainingLayer                                                                                                                                                                                                                              = _objcClass("MPSRNNMatrixTrainingLayer")
+	_mPSRNNMatrixTrainingLayerSelInitWithDeviceRnnDescriptorTrainableWeights                                                                                                                                                                                   = objc.RegisterName("initWithDevice:rnnDescriptor:trainableWeights:")
+	_mPSRNNMatrixTrainingLayerSelCreateWeightGradientMatricesDataType                                                                                                                                                                                          = objc.RegisterName("createWeightGradientMatrices:dataType:")
+	_mPSRNNMatrixTrainingLayerSelCreateTemporaryWeightGradientMatricesDataTypeCommandBuffer                                                                                                                                                                    = objc.RegisterName("createTemporaryWeightGradientMatrices:dataType:commandBuffer:")
+	_mPSRNNMatrixTrainingLayerSelCreateWeightMatrices                                                                                                                                                                                                          = objc.RegisterName("createWeightMatrices:")
+	_mPSRNNMatrixTrainingLayerSelEncodeCopyWeightsToCommandBufferWeightsMatrixIdMatrixCopyFromWeightsToMatrixMatrixOffset                                                                                                                                      = objc.RegisterName("encodeCopyWeightsToCommandBuffer:weights:matrixId:matrix:copyFromWeightsToMatrix:matrixOffset:")
+	_mPSRNNMatrixTrainingLayerSelEncodeForwardSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsTrainingStatesRecurrentInputStateRecurrentOutputStatesWeights                                                             = objc.RegisterName("encodeForwardSequenceToCommandBuffer:sourceMatrices:sourceOffsets:destinationMatrices:destinationOffsets:trainingStates:recurrentInputState:recurrentOutputStates:weights:")
+	_mPSRNNMatrixTrainingLayerSelEncodeForwardSequenceToCommandBufferSourceMatricesDestinationMatricesTrainingStatesWeights                                                                                                                                    = objc.RegisterName("encodeForwardSequenceToCommandBuffer:sourceMatrices:destinationMatrices:trainingStates:weights:")
 	_mPSRNNMatrixTrainingLayerSelEncodeGradientSequenceToCommandBufferForwardSourcesForwardSourceOffsetsSourceGradientsSourceGradientOffsetsDestinationGradientsDestinationOffsetsWeightGradientsTrainingStatesRecurrentInputStateRecurrentOutputStatesWeights = objc.RegisterName("encodeGradientSequenceToCommandBuffer:forwardSources:forwardSourceOffsets:sourceGradients:sourceGradientOffsets:destinationGradients:destinationOffsets:weightGradients:trainingStates:recurrentInputState:recurrentOutputStates:weights:")
-	_mPSRNNMatrixTrainingLayerSelEncodeGradientSequenceToCommandBufferForwardSourcesSourceGradientsDestinationGradientsWeightGradientsTrainingStatesWeights = objc.RegisterName("encodeGradientSequenceToCommandBuffer:forwardSources:sourceGradients:destinationGradients:weightGradients:trainingStates:weights:")
-	_mPSRNNMatrixTrainingLayerSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSRNNMatrixTrainingLayerSelInputFeatureChannels = objc.RegisterName("inputFeatureChannels")
-	_mPSRNNMatrixTrainingLayerSelOutputFeatureChannels = objc.RegisterName("outputFeatureChannels")
-	_mPSRNNMatrixTrainingLayerSelStoreAllIntermediateStates = objc.RegisterName("storeAllIntermediateStates")
-	_mPSRNNMatrixTrainingLayerSelSetStoreAllIntermediateStates = objc.RegisterName("setStoreAllIntermediateStates:")
-	_mPSRNNMatrixTrainingLayerSelRecurrentOutputIsTemporary = objc.RegisterName("recurrentOutputIsTemporary")
-	_mPSRNNMatrixTrainingLayerSelSetRecurrentOutputIsTemporary = objc.RegisterName("setRecurrentOutputIsTemporary:")
-	_mPSRNNMatrixTrainingLayerSelTrainingStateIsTemporary = objc.RegisterName("trainingStateIsTemporary")
-	_mPSRNNMatrixTrainingLayerSelSetTrainingStateIsTemporary = objc.RegisterName("setTrainingStateIsTemporary:")
-	_mPSRNNMatrixTrainingLayerSelAccumulateWeightGradients = objc.RegisterName("accumulateWeightGradients")
-	_mPSRNNMatrixTrainingLayerSelSetAccumulateWeightGradients = objc.RegisterName("setAccumulateWeightGradients:")
+	_mPSRNNMatrixTrainingLayerSelEncodeGradientSequenceToCommandBufferForwardSourcesSourceGradientsDestinationGradientsWeightGradientsTrainingStatesWeights                                                                                                    = objc.RegisterName("encodeGradientSequenceToCommandBuffer:forwardSources:sourceGradients:destinationGradients:weightGradients:trainingStates:weights:")
+	_mPSRNNMatrixTrainingLayerSelInitWithCoderDevice                                                                                                                                                                                                           = objc.RegisterName("initWithCoder:device:")
+	_mPSRNNMatrixTrainingLayerSelInputFeatureChannels                                                                                                                                                                                                          = objc.RegisterName("inputFeatureChannels")
+	_mPSRNNMatrixTrainingLayerSelOutputFeatureChannels                                                                                                                                                                                                         = objc.RegisterName("outputFeatureChannels")
+	_mPSRNNMatrixTrainingLayerSelStoreAllIntermediateStates                                                                                                                                                                                                    = objc.RegisterName("storeAllIntermediateStates")
+	_mPSRNNMatrixTrainingLayerSelSetStoreAllIntermediateStates                                                                                                                                                                                                 = objc.RegisterName("setStoreAllIntermediateStates:")
+	_mPSRNNMatrixTrainingLayerSelRecurrentOutputIsTemporary                                                                                                                                                                                                    = objc.RegisterName("recurrentOutputIsTemporary")
+	_mPSRNNMatrixTrainingLayerSelSetRecurrentOutputIsTemporary                                                                                                                                                                                                 = objc.RegisterName("setRecurrentOutputIsTemporary:")
+	_mPSRNNMatrixTrainingLayerSelTrainingStateIsTemporary                                                                                                                                                                                                      = objc.RegisterName("trainingStateIsTemporary")
+	_mPSRNNMatrixTrainingLayerSelSetTrainingStateIsTemporary                                                                                                                                                                                                   = objc.RegisterName("setTrainingStateIsTemporary:")
+	_mPSRNNMatrixTrainingLayerSelAccumulateWeightGradients                                                                                                                                                                                                     = objc.RegisterName("accumulateWeightGradients")
+	_mPSRNNMatrixTrainingLayerSelSetAccumulateWeightGradients                                                                                                                                                                                                  = objc.RegisterName("setAccumulateWeightGradients:")
 )
 
 func MPSRNNMatrixTrainingLayerFromID(id objc.ID) *MPSRNNMatrixTrainingLayer {
@@ -54,7 +54,9 @@ func MPSRNNMatrixTrainingLayerFromID(id objc.ID) *MPSRNNMatrixTrainingLayer {
 // @abstract   Initializes a linear (fully connected) RNN kernel for training @param      device                      The MTLDevice on which this MPSRNNMatrixLayer filter will be used @param      rnnDescriptor               The descriptor that defines the RNN layer @param      trainableWeights            An array where to store the weights of the layer as MPSMatrices. NOTE: The exact layout and number of matrices may vary between platforms and therefore you should not save out these weights directly, but instead use the function encodeCopyWeightsToCommandBuffer to identify the weights and biases for serialization. Typically you should pass here an initialized but empty NSMutableArray and when this function returns the array will have been populated with the weight matrices needed in the encode-calls, by using initial values from the datasources in rnnDescriptor. @return     A valid MPSRNNMatrixTrainingLayer object or nil, if failure.
 func (o *MPSRNNMatrixTrainingLayer) InitWithDeviceRnnDescriptorTrainableWeights(device metal.MTLDevice, rnnDescriptor *MPSRNNDescriptor, trainableWeights *foundation.NSMutableArray[*mpscore.MPSMatrix]) *MPSRNNMatrixTrainingLayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSRNNMatrixTrainingLayerSelInitWithDeviceRnnDescriptorTrainableWeights, device, rnnDescriptor.Ptr(), trainableWeights)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSRNNMatrixTrainingLayerFromID(_ret)
 }
 
@@ -96,7 +98,9 @@ func (o *MPSRNNMatrixTrainingLayer) EncodeGradientSequenceToCommandBufferForward
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSRNNMatrixTrainingLayer @param      device      The MTLDevice on which to make the MPSRNNMatrixTrainingLayer @return     A new MPSRNNMatrixTrainingLayer object, or nil if failure.
 func (o *MPSRNNMatrixTrainingLayer) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSRNNMatrixTrainingLayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSRNNMatrixTrainingLayerSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSRNNMatrixTrainingLayerFromID(_ret)
 }
 
@@ -151,4 +155,3 @@ func (o *MPSRNNMatrixTrainingLayer) AccumulateWeightGradients() bool {
 func (o *MPSRNNMatrixTrainingLayer) SetAccumulateWeightGradients(accumulateWeightGradients bool) {
 	o.Ptr().Send(_mPSRNNMatrixTrainingLayerSelSetAccumulateWeightGradients, accumulateWeightGradients)
 }
-

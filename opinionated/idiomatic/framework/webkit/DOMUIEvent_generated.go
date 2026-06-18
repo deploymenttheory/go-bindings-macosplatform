@@ -111,7 +111,9 @@ func (x *DOMUIEvent) asDOMEvent() *raw.DOMEvent { return &x.inner.DOMEvent }
 
 func (x *DOMUIEvent) asDOMObject() *raw.DOMObject { return &x.inner.DOMEvent.DOMObject }
 
-func (x *DOMUIEvent) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMEvent.DOMObject.WebScriptObject }
+func (x *DOMUIEvent) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMEvent.DOMObject.WebScriptObject
+}
 
 // DOMUIEventable is the interface implemented by [DOMUIEvent], for mocking and DI.
 type DOMUIEventable interface {
@@ -130,4 +132,3 @@ type DOMUIEventable interface {
 }
 
 var _ DOMUIEventable = (*DOMUIEvent)(nil)
-

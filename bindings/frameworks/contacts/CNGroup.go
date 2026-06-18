@@ -16,11 +16,11 @@ type CNGroup struct {
 }
 
 var (
-	_clsCNGroup = _objcClass("CNGroup")
-	_cNGroupSelIdentifier = objc.RegisterName("identifier")
-	_cNGroupSelName = objc.RegisterName("name")
-	_cNGroupSelPredicateForGroupsWithIdentifiers = objc.RegisterName("predicateForGroupsWithIdentifiers:")
-	_cNGroupSelPredicateForSubgroupsInGroupWithIdentifier = objc.RegisterName("predicateForSubgroupsInGroupWithIdentifier:")
+	_clsCNGroup                                            = _objcClass("CNGroup")
+	_cNGroupSelIdentifier                                  = objc.RegisterName("identifier")
+	_cNGroupSelName                                        = objc.RegisterName("name")
+	_cNGroupSelPredicateForGroupsWithIdentifiers           = objc.RegisterName("predicateForGroupsWithIdentifiers:")
+	_cNGroupSelPredicateForSubgroupsInGroupWithIdentifier  = objc.RegisterName("predicateForSubgroupsInGroupWithIdentifier:")
 	_cNGroupSelPredicateForGroupsInContainerWithIdentifier = objc.RegisterName("predicateForGroupsInContainerWithIdentifier:")
 )
 
@@ -37,31 +37,40 @@ func CNGroupFromID(id objc.ID) *CNGroup {
 // The identifier is unique among groups on the device. It can be saved and used for fetching groups next application launch.
 func (o *CNGroup) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNGroupSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CNGroup) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNGroupSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func CNGroupPredicateForGroupsWithIdentifiers(identifiers *foundation.NSArray[*foundation.NSString]) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNGroup), _cNGroupSelPredicateForGroupsWithIdentifiers, identifiers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
 func CNGroupPredicateForSubgroupsInGroupWithIdentifier(parentGroupIdentifier *foundation.NSString) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNGroup), _cNGroupSelPredicateForSubgroupsInGroupWithIdentifier, parentGroupIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
 func CNGroupPredicateForGroupsInContainerWithIdentifier(containerIdentifier *foundation.NSString) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNGroup), _cNGroupSelPredicateForGroupsInContainerWithIdentifier, containerIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
-

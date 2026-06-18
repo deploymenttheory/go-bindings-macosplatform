@@ -32,9 +32,9 @@ type VTDecodeFrameFlags int64
 
 const (
 	KVTDecodeFrame_EnableAsynchronousDecompression VTDecodeFrameFlags = 1
-	KVTDecodeFrame_DoNotOutputFrame VTDecodeFrameFlags = 2
-	KVTDecodeFrame_1xRealTimePlayback VTDecodeFrameFlags = 4
-	KVTDecodeFrame_EnableTemporalProcessing VTDecodeFrameFlags = 8
+	KVTDecodeFrame_DoNotOutputFrame                VTDecodeFrameFlags = 2
+	KVTDecodeFrame_1xRealTimePlayback              VTDecodeFrameFlags = 4
+	KVTDecodeFrame_EnableTemporalProcessing        VTDecodeFrameFlags = 8
 )
 
 func (e VTDecodeFrameFlags) String() string {
@@ -61,11 +61,11 @@ func (e VTDecodeFrameFlags) String() string {
 type VTDecodeInfoFlags int64
 
 const (
-	KVTDecodeInfo_Asynchronous VTDecodeInfoFlags = 1
-	KVTDecodeInfo_FrameDropped VTDecodeInfoFlags = 2
-	KVTDecodeInfo_ImageBufferModifiable VTDecodeInfoFlags = 4
+	KVTDecodeInfo_Asynchronous               VTDecodeInfoFlags = 1
+	KVTDecodeInfo_FrameDropped               VTDecodeInfoFlags = 2
+	KVTDecodeInfo_ImageBufferModifiable      VTDecodeInfoFlags = 4
 	KVTDecodeInfo_SkippedLeadingFrameDropped VTDecodeInfoFlags = 8
-	KVTDecodeInfo_FrameInterrupted VTDecodeInfoFlags = 16
+	KVTDecodeInfo_FrameInterrupted           VTDecodeInfoFlags = 16
 )
 
 func (e VTDecodeInfoFlags) String() string {
@@ -116,7 +116,7 @@ func (e VTEncodeInfoFlags) String() string {
 type VTFrameRateConversionConfigurationQualityPrioritization int64
 
 const (
-	VTFrameRateConversionConfigurationQualityPrioritizationNormal VTFrameRateConversionConfigurationQualityPrioritization = 1
+	VTFrameRateConversionConfigurationQualityPrioritizationNormal  VTFrameRateConversionConfigurationQualityPrioritization = 1
 	VTFrameRateConversionConfigurationQualityPrioritizationQuality VTFrameRateConversionConfigurationQualityPrioritization = 2
 )
 
@@ -173,7 +173,7 @@ func (e VTFrameRateConversionParametersSubmissionMode) String() string {
 type VTMotionBlurConfigurationQualityPrioritization int64
 
 const (
-	VTMotionBlurConfigurationQualityPrioritizationNormal VTMotionBlurConfigurationQualityPrioritization = 1
+	VTMotionBlurConfigurationQualityPrioritizationNormal  VTMotionBlurConfigurationQualityPrioritization = 1
 	VTMotionBlurConfigurationQualityPrioritizationQuality VTMotionBlurConfigurationQualityPrioritization = 2
 )
 
@@ -206,7 +206,7 @@ func (e VTMotionBlurConfigurationRevision) String() string {
 type VTMotionBlurParametersSubmissionMode int64
 
 const (
-	VTMotionBlurParametersSubmissionModeRandom VTMotionBlurParametersSubmissionMode = 1
+	VTMotionBlurParametersSubmissionModeRandom     VTMotionBlurParametersSubmissionMode = 1
 	VTMotionBlurParametersSubmissionModeSequential VTMotionBlurParametersSubmissionMode = 2
 )
 
@@ -261,7 +261,7 @@ func (e VTMotionEstimationInfoFlags) String() string {
 type VTOpticalFlowConfigurationQualityPrioritization int64
 
 const (
-	VTOpticalFlowConfigurationQualityPrioritizationNormal VTOpticalFlowConfigurationQualityPrioritization = 1
+	VTOpticalFlowConfigurationQualityPrioritizationNormal  VTOpticalFlowConfigurationQualityPrioritization = 1
 	VTOpticalFlowConfigurationQualityPrioritizationQuality VTOpticalFlowConfigurationQualityPrioritization = 2
 )
 
@@ -294,7 +294,7 @@ func (e VTOpticalFlowConfigurationRevision) String() string {
 type VTOpticalFlowParametersSubmissionMode int64
 
 const (
-	VTOpticalFlowParametersSubmissionModeRandom VTOpticalFlowParametersSubmissionMode = 1
+	VTOpticalFlowParametersSubmissionModeRandom     VTOpticalFlowParametersSubmissionMode = 1
 	VTOpticalFlowParametersSubmissionModeSequential VTOpticalFlowParametersSubmissionMode = 2
 )
 
@@ -331,8 +331,8 @@ type VTSuperResolutionScalerConfigurationModelStatus int64
 
 const (
 	VTSuperResolutionScalerConfigurationModelStatusDownloadRequired VTSuperResolutionScalerConfigurationModelStatus = 0
-	VTSuperResolutionScalerConfigurationModelStatusDownloading VTSuperResolutionScalerConfigurationModelStatus = 1
-	VTSuperResolutionScalerConfigurationModelStatusReady VTSuperResolutionScalerConfigurationModelStatus = 2
+	VTSuperResolutionScalerConfigurationModelStatusDownloading      VTSuperResolutionScalerConfigurationModelStatus = 1
+	VTSuperResolutionScalerConfigurationModelStatusReady            VTSuperResolutionScalerConfigurationModelStatus = 2
 )
 
 func (e VTSuperResolutionScalerConfigurationModelStatus) String() string {
@@ -381,7 +381,7 @@ func (e VTSuperResolutionScalerConfigurationRevision) String() string {
 type VTSuperResolutionScalerParametersSubmissionMode int64
 
 const (
-	VTSuperResolutionScalerParametersSubmissionModeRandom VTSuperResolutionScalerParametersSubmissionMode = 1
+	VTSuperResolutionScalerParametersSubmissionModeRandom     VTSuperResolutionScalerParametersSubmissionMode = 1
 	VTSuperResolutionScalerParametersSubmissionModeSequential VTSuperResolutionScalerParametersSubmissionMode = 2
 )
 
@@ -395,4 +395,3 @@ func (e VTSuperResolutionScalerParametersSubmissionMode) String() string {
 		return fmt.Sprintf("VTSuperResolutionScalerParametersSubmissionMode(%d)", int64(e))
 	}
 }
-

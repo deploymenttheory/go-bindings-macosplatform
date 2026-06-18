@@ -16,10 +16,10 @@ type NSPersistentStoreRequest struct {
 }
 
 var (
-	_clsNSPersistentStoreRequest = _objcClass("NSPersistentStoreRequest")
-	_nSPersistentStoreRequestSelAffectedStores = objc.RegisterName("affectedStores")
+	_clsNSPersistentStoreRequest                  = _objcClass("NSPersistentStoreRequest")
+	_nSPersistentStoreRequestSelAffectedStores    = objc.RegisterName("affectedStores")
 	_nSPersistentStoreRequestSelSetAffectedStores = objc.RegisterName("setAffectedStores:")
-	_nSPersistentStoreRequestSelRequestType = objc.RegisterName("requestType")
+	_nSPersistentStoreRequestSelRequestType       = objc.RegisterName("requestType")
 )
 
 func NSPersistentStoreRequestFromID(id objc.ID) *NSPersistentStoreRequest {
@@ -34,7 +34,9 @@ func NSPersistentStoreRequestFromID(id objc.ID) *NSPersistentStoreRequest {
 
 func (o *NSPersistentStoreRequest) AffectedStores() *foundation.NSArray[*NSPersistentStore] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreRequestSelAffectedStores)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSPersistentStore](_ret)
 }
 
@@ -46,4 +48,3 @@ func (o *NSPersistentStoreRequest) RequestType() NSPersistentStoreRequestType {
 	_ret := objc.Send[NSPersistentStoreRequestType](o.Ptr(), _nSPersistentStoreRequestSelRequestType)
 	return _ret
 }
-

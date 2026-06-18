@@ -66,4 +66,3 @@ type MachPortable interface {
 }
 
 var _ MachPortable = (*MachPort)(nil)
-

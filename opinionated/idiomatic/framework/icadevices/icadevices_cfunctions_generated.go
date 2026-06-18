@@ -358,4 +358,3 @@ func ICD_ScannerMain(argc int, argv string) int {
 func ICD_main(argc int, argv string) int {
 	return raw.ICD_main(argc, argv)
 }
-

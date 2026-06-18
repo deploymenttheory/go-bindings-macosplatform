@@ -13,7 +13,7 @@ import (
 
 var (
 	_symbolsLib uintptr
-	_loadOnce sync.Once
+	_loadOnce   sync.Once
 )
 
 func _loadLibrary() {

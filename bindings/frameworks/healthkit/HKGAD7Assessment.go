@@ -16,11 +16,11 @@ type HKGAD7Assessment struct {
 }
 
 var (
-	_clsHKGAD7Assessment = _objcClass("HKGAD7Assessment")
-	_hKGAD7AssessmentSelAssessmentWithDateAnswers = objc.RegisterName("assessmentWithDate:answers:")
+	_clsHKGAD7Assessment                                  = _objcClass("HKGAD7Assessment")
+	_hKGAD7AssessmentSelAssessmentWithDateAnswers         = objc.RegisterName("assessmentWithDate:answers:")
 	_hKGAD7AssessmentSelAssessmentWithDateAnswersMetadata = objc.RegisterName("assessmentWithDate:answers:metadata:")
-	_hKGAD7AssessmentSelAnswers = objc.RegisterName("answers")
-	_hKGAD7AssessmentSelRisk = objc.RegisterName("risk")
+	_hKGAD7AssessmentSelAnswers                           = objc.RegisterName("answers")
+	_hKGAD7AssessmentSelRisk                              = objc.RegisterName("risk")
 )
 
 func HKGAD7AssessmentFromID(id objc.ID) *HKGAD7Assessment {
@@ -36,14 +36,18 @@ func HKGAD7AssessmentFromID(id objc.ID) *HKGAD7Assessment {
 // Creates a new GAD-7 sample. There must be exactly 7 elements in answers, each answer must be of type `HKGAD7AssessmentAnswer`.
 func HKGAD7AssessmentAssessmentWithDateAnswers(date *foundation.NSDate, answers *foundation.NSArray[*foundation.NSNumber]) *HKGAD7Assessment {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKGAD7Assessment), _hKGAD7AssessmentSelAssessmentWithDateAnswers, date.Ptr(), answers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKGAD7AssessmentFromID(_ret)
 }
 
 // Creates a new GAD-7 sample. There must be exactly 7 elements in answers, each answer must be of type `HKGAD7AssessmentAnswer`.
 func HKGAD7AssessmentAssessmentWithDateAnswersMetadata(date *foundation.NSDate, answers *foundation.NSArray[*foundation.NSNumber], metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKGAD7Assessment {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKGAD7Assessment), _hKGAD7AssessmentSelAssessmentWithDateAnswersMetadata, date.Ptr(), answers, metadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKGAD7AssessmentFromID(_ret)
 }
 
@@ -58,4 +62,3 @@ func (o *HKGAD7Assessment) Risk() HKGAD7AssessmentRisk {
 	_ret := objc.Send[HKGAD7AssessmentRisk](o.Ptr(), _hKGAD7AssessmentSelRisk)
 	return _ret
 }
-

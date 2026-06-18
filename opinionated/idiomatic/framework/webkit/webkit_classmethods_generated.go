@@ -320,4 +320,3 @@ func RegisterURLSchemeAsLocal(scheme string) {
 func RegisterViewClassRepresentationClassForMIMEType(viewClass objc.Class, representationClass objc.Class, mIMEType string) {
 	raw.WebViewRegisterViewClassRepresentationClassForMIMEType(viewClass, representationClass, foundation.NSStringStringWithUTF8String(mIMEType))
 }
-

@@ -16,19 +16,19 @@ type MTRDeviceControllerParameters struct {
 }
 
 var (
-	_clsMTRDeviceControllerParameters = _objcClass("MTRDeviceControllerParameters")
-	_mTRDeviceControllerParametersSelSetOperationalCertificateIssuerQueue = objc.RegisterName("setOperationalCertificateIssuer:queue:")
-	_mTRDeviceControllerParametersSelSetOTAProviderDelegateQueue = objc.RegisterName("setOTAProviderDelegate:queue:")
-	_mTRDeviceControllerParametersSelProductAttestationAuthorityCertificates = objc.RegisterName("productAttestationAuthorityCertificates")
-	_mTRDeviceControllerParametersSelSetProductAttestationAuthorityCertificates = objc.RegisterName("setProductAttestationAuthorityCertificates:")
-	_mTRDeviceControllerParametersSelCertificationDeclarationCertificates = objc.RegisterName("certificationDeclarationCertificates")
-	_mTRDeviceControllerParametersSelSetCertificationDeclarationCertificates = objc.RegisterName("setCertificationDeclarationCertificates:")
-	_mTRDeviceControllerParametersSelShouldAdvertiseOperational = objc.RegisterName("shouldAdvertiseOperational")
-	_mTRDeviceControllerParametersSelSetShouldAdvertiseOperational = objc.RegisterName("setShouldAdvertiseOperational:")
-	_mTRDeviceControllerParametersSelConcurrentSubscriptionEstablishmentsAllowedOnThread = objc.RegisterName("concurrentSubscriptionEstablishmentsAllowedOnThread")
+	_clsMTRDeviceControllerParameters                                                       = _objcClass("MTRDeviceControllerParameters")
+	_mTRDeviceControllerParametersSelSetOperationalCertificateIssuerQueue                   = objc.RegisterName("setOperationalCertificateIssuer:queue:")
+	_mTRDeviceControllerParametersSelSetOTAProviderDelegateQueue                            = objc.RegisterName("setOTAProviderDelegate:queue:")
+	_mTRDeviceControllerParametersSelProductAttestationAuthorityCertificates                = objc.RegisterName("productAttestationAuthorityCertificates")
+	_mTRDeviceControllerParametersSelSetProductAttestationAuthorityCertificates             = objc.RegisterName("setProductAttestationAuthorityCertificates:")
+	_mTRDeviceControllerParametersSelCertificationDeclarationCertificates                   = objc.RegisterName("certificationDeclarationCertificates")
+	_mTRDeviceControllerParametersSelSetCertificationDeclarationCertificates                = objc.RegisterName("setCertificationDeclarationCertificates:")
+	_mTRDeviceControllerParametersSelShouldAdvertiseOperational                             = objc.RegisterName("shouldAdvertiseOperational")
+	_mTRDeviceControllerParametersSelSetShouldAdvertiseOperational                          = objc.RegisterName("setShouldAdvertiseOperational:")
+	_mTRDeviceControllerParametersSelConcurrentSubscriptionEstablishmentsAllowedOnThread    = objc.RegisterName("concurrentSubscriptionEstablishmentsAllowedOnThread")
 	_mTRDeviceControllerParametersSelSetConcurrentSubscriptionEstablishmentsAllowedOnThread = objc.RegisterName("setConcurrentSubscriptionEstablishmentsAllowedOnThread:")
-	_mTRDeviceControllerParametersSelStorageBehaviorConfiguration = objc.RegisterName("storageBehaviorConfiguration")
-	_mTRDeviceControllerParametersSelSetStorageBehaviorConfiguration = objc.RegisterName("setStorageBehaviorConfiguration:")
+	_mTRDeviceControllerParametersSelStorageBehaviorConfiguration                           = objc.RegisterName("storageBehaviorConfiguration")
+	_mTRDeviceControllerParametersSelSetStorageBehaviorConfiguration                        = objc.RegisterName("setStorageBehaviorConfiguration:")
 )
 
 func MTRDeviceControllerParametersFromID(id objc.ID) *MTRDeviceControllerParameters {
@@ -94,11 +94,12 @@ func (o *MTRDeviceControllerParameters) SetConcurrentSubscriptionEstablishmentsA
 // Sets the storage behavior configuration - see MTRDeviceStorageBehaviorConfiguration.h for details If this value is nil, a default storage behavior configuration will be used.
 func (o *MTRDeviceControllerParameters) StorageBehaviorConfiguration() *MTRDeviceStorageBehaviorConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerParametersSelStorageBehaviorConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRDeviceStorageBehaviorConfigurationFromID(_ret)
 }
 
 func (o *MTRDeviceControllerParameters) SetStorageBehaviorConfiguration(storageBehaviorConfiguration *MTRDeviceStorageBehaviorConfiguration) {
 	o.Ptr().Send(_mTRDeviceControllerParametersSelSetStorageBehaviorConfiguration, storageBehaviorConfiguration.Ptr())
 }
-

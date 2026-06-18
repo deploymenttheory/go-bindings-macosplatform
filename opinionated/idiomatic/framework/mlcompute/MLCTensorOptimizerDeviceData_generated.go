@@ -41,4 +41,3 @@ type TensorOptimizerDeviceDataable interface {
 }
 
 var _ TensorOptimizerDeviceDataable = (*TensorOptimizerDeviceData)(nil)
-

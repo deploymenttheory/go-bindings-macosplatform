@@ -67,4 +67,3 @@ type SoundEventNodeDefinitionProvider interface {
 type StreamNodeProvider interface {
 	asStreamNode() *raw.PHASEStreamNode
 }
-

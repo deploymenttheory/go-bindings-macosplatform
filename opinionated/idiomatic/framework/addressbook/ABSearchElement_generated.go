@@ -47,4 +47,3 @@ type SearchElementable interface {
 }
 
 var _ SearchElementable = (*SearchElement)(nil)
-

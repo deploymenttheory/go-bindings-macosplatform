@@ -16,18 +16,18 @@ type DOMUIEvent struct {
 }
 
 var (
-	_clsDOMUIEvent = _objcClass("DOMUIEvent")
+	_clsDOMUIEvent                                         = _objcClass("DOMUIEvent")
 	_dOMUIEventSelInitUIEventCanBubbleCancelableViewDetail = objc.RegisterName("initUIEvent:canBubble:cancelable:view:detail:")
-	_dOMUIEventSelView = objc.RegisterName("view")
-	_dOMUIEventSelDetail = objc.RegisterName("detail")
-	_dOMUIEventSelKeyCode = objc.RegisterName("keyCode")
-	_dOMUIEventSelCharCode = objc.RegisterName("charCode")
-	_dOMUIEventSelLayerX = objc.RegisterName("layerX")
-	_dOMUIEventSelLayerY = objc.RegisterName("layerY")
-	_dOMUIEventSelPageX = objc.RegisterName("pageX")
-	_dOMUIEventSelPageY = objc.RegisterName("pageY")
-	_dOMUIEventSelWhich = objc.RegisterName("which")
-	_dOMUIEventSelInitUIEvent = objc.RegisterName("initUIEvent:::::")
+	_dOMUIEventSelView                                     = objc.RegisterName("view")
+	_dOMUIEventSelDetail                                   = objc.RegisterName("detail")
+	_dOMUIEventSelKeyCode                                  = objc.RegisterName("keyCode")
+	_dOMUIEventSelCharCode                                 = objc.RegisterName("charCode")
+	_dOMUIEventSelLayerX                                   = objc.RegisterName("layerX")
+	_dOMUIEventSelLayerY                                   = objc.RegisterName("layerY")
+	_dOMUIEventSelPageX                                    = objc.RegisterName("pageX")
+	_dOMUIEventSelPageY                                    = objc.RegisterName("pageY")
+	_dOMUIEventSelWhich                                    = objc.RegisterName("which")
+	_dOMUIEventSelInitUIEvent                              = objc.RegisterName("initUIEvent:::::")
 )
 
 func DOMUIEventFromID(id objc.ID) *DOMUIEvent {
@@ -46,7 +46,9 @@ func (o *DOMUIEvent) InitUIEventCanBubbleCancelableViewDetail(type_ *foundation.
 
 func (o *DOMUIEvent) View() *DOMAbstractView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMUIEventSelView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMAbstractViewFromID(_ret)
 }
 
@@ -93,4 +95,3 @@ func (o *DOMUIEvent) Which() int {
 func (o *DOMUIEvent) InitUIEvent(type_ *foundation.NSString, canBubble bool, cancelable bool, view *DOMAbstractView, detail int) {
 	o.Ptr().Send(_dOMUIEventSelInitUIEvent, type_.Ptr(), canBubble, cancelable, view.Ptr(), detail)
 }
-

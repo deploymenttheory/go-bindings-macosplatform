@@ -15,13 +15,13 @@ type NSNotification struct {
 }
 
 var (
-	_clsNSNotification = _objcClass("NSNotification")
-	_nSNotificationSelInitWithNameObjectUserInfo = objc.RegisterName("initWithName:object:userInfo:")
-	_nSNotificationSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSNotificationSelName = objc.RegisterName("name")
-	_nSNotificationSelObject = objc.RegisterName("object")
-	_nSNotificationSelUserInfo = objc.RegisterName("userInfo")
-	_nSNotificationSelNotificationWithNameObject = objc.RegisterName("notificationWithName:object:")
+	_clsNSNotification                                   = _objcClass("NSNotification")
+	_nSNotificationSelInitWithNameObjectUserInfo         = objc.RegisterName("initWithName:object:userInfo:")
+	_nSNotificationSelInitWithCoder                      = objc.RegisterName("initWithCoder:")
+	_nSNotificationSelName                               = objc.RegisterName("name")
+	_nSNotificationSelObject                             = objc.RegisterName("object")
+	_nSNotificationSelUserInfo                           = objc.RegisterName("userInfo")
+	_nSNotificationSelNotificationWithNameObject         = objc.RegisterName("notificationWithName:object:")
 	_nSNotificationSelNotificationWithNameObjectUserInfo = objc.RegisterName("notificationWithName:object:userInfo:")
 )
 
@@ -37,19 +37,25 @@ func NSNotificationFromID(id objc.ID) *NSNotification {
 
 func (o *NSNotification) InitWithNameObjectUserInfo(name *NSString, object objc.ID, userInfo *NSDictionary[objc.ID, objc.ID]) *NSNotification {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNotificationSelInitWithNameObjectUserInfo, name.Ptr(), object, userInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNotificationFromID(_ret)
 }
 
 func (o *NSNotification) InitWithCoder(coder *NSCoder) *NSNotification {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNotificationSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNotificationFromID(_ret)
 }
 
 func (o *NSNotification) Name() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNotificationSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -65,13 +71,16 @@ func (o *NSNotification) UserInfo() *NSDictionary[objc.ID, objc.ID] {
 
 func NSNotificationNotificationWithNameObject(aName *NSString, anObject objc.ID) *NSNotification {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNotification), _nSNotificationSelNotificationWithNameObject, aName.Ptr(), anObject)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNotificationFromID(_ret)
 }
 
 func NSNotificationNotificationWithNameObjectUserInfo(aName *NSString, anObject objc.ID, aUserInfo *NSDictionary[objc.ID, objc.ID]) *NSNotification {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNotification), _nSNotificationSelNotificationWithNameObjectUserInfo, aName.Ptr(), anObject, aUserInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNotificationFromID(_ret)
 }
-

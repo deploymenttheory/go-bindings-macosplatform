@@ -17,7 +17,7 @@ type MPSImageSubtract struct {
 }
 
 var (
-	_clsMPSImageSubtract = _objcClass("MPSImageSubtract")
+	_clsMPSImageSubtract               = _objcClass("MPSImageSubtract")
 	_mPSImageSubtractSelInitWithDevice = objc.RegisterName("initWithDevice:")
 )
 
@@ -34,7 +34,8 @@ func MPSImageSubtractFromID(id objc.ID) *MPSImageSubtract {
 // @abstract  Initialize the subtraction operator @param     device           The device the filter will run on. @return    A valid MPSImageSubtract object or nil, if failure.
 func (o *MPSImageSubtract) InitWithDevice(device metal.MTLDevice) *MPSImageSubtract {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageSubtractSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageSubtractFromID(_ret)
 }
-

@@ -62,4 +62,3 @@ type SoundAssetable interface {
 }
 
 var _ SoundAssetable = (*SoundAsset)(nil)
-

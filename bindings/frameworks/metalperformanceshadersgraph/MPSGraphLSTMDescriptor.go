@@ -15,28 +15,28 @@ type MPSGraphLSTMDescriptor struct {
 }
 
 var (
-	_clsMPSGraphLSTMDescriptor = _objcClass("MPSGraphLSTMDescriptor")
-	_mPSGraphLSTMDescriptorSelDescriptor = objc.RegisterName("descriptor")
-	_mPSGraphLSTMDescriptorSelReverse = objc.RegisterName("reverse")
-	_mPSGraphLSTMDescriptorSelSetReverse = objc.RegisterName("setReverse:")
-	_mPSGraphLSTMDescriptorSelBidirectional = objc.RegisterName("bidirectional")
-	_mPSGraphLSTMDescriptorSelSetBidirectional = objc.RegisterName("setBidirectional:")
-	_mPSGraphLSTMDescriptorSelProduceCell = objc.RegisterName("produceCell")
-	_mPSGraphLSTMDescriptorSelSetProduceCell = objc.RegisterName("setProduceCell:")
-	_mPSGraphLSTMDescriptorSelTraining = objc.RegisterName("training")
-	_mPSGraphLSTMDescriptorSelSetTraining = objc.RegisterName("setTraining:")
-	_mPSGraphLSTMDescriptorSelForgetGateLast = objc.RegisterName("forgetGateLast")
-	_mPSGraphLSTMDescriptorSelSetForgetGateLast = objc.RegisterName("setForgetGateLast:")
-	_mPSGraphLSTMDescriptorSelInputGateActivation = objc.RegisterName("inputGateActivation")
-	_mPSGraphLSTMDescriptorSelSetInputGateActivation = objc.RegisterName("setInputGateActivation:")
-	_mPSGraphLSTMDescriptorSelForgetGateActivation = objc.RegisterName("forgetGateActivation")
+	_clsMPSGraphLSTMDescriptor                        = _objcClass("MPSGraphLSTMDescriptor")
+	_mPSGraphLSTMDescriptorSelDescriptor              = objc.RegisterName("descriptor")
+	_mPSGraphLSTMDescriptorSelReverse                 = objc.RegisterName("reverse")
+	_mPSGraphLSTMDescriptorSelSetReverse              = objc.RegisterName("setReverse:")
+	_mPSGraphLSTMDescriptorSelBidirectional           = objc.RegisterName("bidirectional")
+	_mPSGraphLSTMDescriptorSelSetBidirectional        = objc.RegisterName("setBidirectional:")
+	_mPSGraphLSTMDescriptorSelProduceCell             = objc.RegisterName("produceCell")
+	_mPSGraphLSTMDescriptorSelSetProduceCell          = objc.RegisterName("setProduceCell:")
+	_mPSGraphLSTMDescriptorSelTraining                = objc.RegisterName("training")
+	_mPSGraphLSTMDescriptorSelSetTraining             = objc.RegisterName("setTraining:")
+	_mPSGraphLSTMDescriptorSelForgetGateLast          = objc.RegisterName("forgetGateLast")
+	_mPSGraphLSTMDescriptorSelSetForgetGateLast       = objc.RegisterName("setForgetGateLast:")
+	_mPSGraphLSTMDescriptorSelInputGateActivation     = objc.RegisterName("inputGateActivation")
+	_mPSGraphLSTMDescriptorSelSetInputGateActivation  = objc.RegisterName("setInputGateActivation:")
+	_mPSGraphLSTMDescriptorSelForgetGateActivation    = objc.RegisterName("forgetGateActivation")
 	_mPSGraphLSTMDescriptorSelSetForgetGateActivation = objc.RegisterName("setForgetGateActivation:")
-	_mPSGraphLSTMDescriptorSelCellGateActivation = objc.RegisterName("cellGateActivation")
-	_mPSGraphLSTMDescriptorSelSetCellGateActivation = objc.RegisterName("setCellGateActivation:")
-	_mPSGraphLSTMDescriptorSelOutputGateActivation = objc.RegisterName("outputGateActivation")
+	_mPSGraphLSTMDescriptorSelCellGateActivation      = objc.RegisterName("cellGateActivation")
+	_mPSGraphLSTMDescriptorSelSetCellGateActivation   = objc.RegisterName("setCellGateActivation:")
+	_mPSGraphLSTMDescriptorSelOutputGateActivation    = objc.RegisterName("outputGateActivation")
 	_mPSGraphLSTMDescriptorSelSetOutputGateActivation = objc.RegisterName("setOutputGateActivation:")
-	_mPSGraphLSTMDescriptorSelActivation = objc.RegisterName("activation")
-	_mPSGraphLSTMDescriptorSelSetActivation = objc.RegisterName("setActivation:")
+	_mPSGraphLSTMDescriptorSelActivation              = objc.RegisterName("activation")
+	_mPSGraphLSTMDescriptorSelSetActivation           = objc.RegisterName("setActivation:")
 )
 
 func MPSGraphLSTMDescriptorFromID(id objc.ID) *MPSGraphLSTMDescriptor {
@@ -52,7 +52,9 @@ func MPSGraphLSTMDescriptorFromID(id objc.ID) *MPSGraphLSTMDescriptor {
 // Creates an LSTM descriptor with default values.
 func MPSGraphLSTMDescriptorDescriptor() *MPSGraphLSTMDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphLSTMDescriptor), _mPSGraphLSTMDescriptorSelDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSGraphLSTMDescriptorFromID(_ret)
 }
 
@@ -155,4 +157,3 @@ func (o *MPSGraphLSTMDescriptor) Activation() MPSGraphRNNActivation {
 func (o *MPSGraphLSTMDescriptor) SetActivation(activation MPSGraphRNNActivation) {
 	o.Ptr().Send(_mPSGraphLSTMDescriptorSelSetActivation, activation)
 }
-

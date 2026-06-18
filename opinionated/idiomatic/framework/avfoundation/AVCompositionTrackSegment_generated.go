@@ -55,7 +55,9 @@ func (x *CompositionTrackSegment) SourceTrackID() int32 {
 	return x.inner.SourceTrackID()
 }
 
-func (x *CompositionTrackSegment) asAssetTrackSegment() *raw.AVAssetTrackSegment { return &x.inner.AVAssetTrackSegment }
+func (x *CompositionTrackSegment) asAssetTrackSegment() *raw.AVAssetTrackSegment {
+	return &x.inner.AVAssetTrackSegment
+}
 
 // CompositionTrackSegmentable is the interface implemented by [CompositionTrackSegment], for mocking and DI.
 type CompositionTrackSegmentable interface {
@@ -65,4 +67,3 @@ type CompositionTrackSegmentable interface {
 }
 
 var _ CompositionTrackSegmentable = (*CompositionTrackSegment)(nil)
-

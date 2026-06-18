@@ -16,13 +16,13 @@ type MTLCaptureDescriptor struct {
 }
 
 var (
-	_clsMTLCaptureDescriptor = _objcClass("MTLCaptureDescriptor")
-	_mTLCaptureDescriptorSelCaptureObject = objc.RegisterName("captureObject")
+	_clsMTLCaptureDescriptor                 = _objcClass("MTLCaptureDescriptor")
+	_mTLCaptureDescriptorSelCaptureObject    = objc.RegisterName("captureObject")
 	_mTLCaptureDescriptorSelSetCaptureObject = objc.RegisterName("setCaptureObject:")
-	_mTLCaptureDescriptorSelDestination = objc.RegisterName("destination")
-	_mTLCaptureDescriptorSelSetDestination = objc.RegisterName("setDestination:")
-	_mTLCaptureDescriptorSelOutputURL = objc.RegisterName("outputURL")
-	_mTLCaptureDescriptorSelSetOutputURL = objc.RegisterName("setOutputURL:")
+	_mTLCaptureDescriptorSelDestination      = objc.RegisterName("destination")
+	_mTLCaptureDescriptorSelSetDestination   = objc.RegisterName("setDestination:")
+	_mTLCaptureDescriptorSelOutputURL        = objc.RegisterName("outputURL")
+	_mTLCaptureDescriptorSelSetOutputURL     = objc.RegisterName("setOutputURL:")
 )
 
 func MTLCaptureDescriptorFromID(id objc.ID) *MTLCaptureDescriptor {
@@ -58,11 +58,12 @@ func (o *MTLCaptureDescriptor) SetDestination(destination MTLCaptureDestination)
 // URL the GPU Trace document will be captured to. Must be specified when destiation is MTLCaptureDestinationGPUTraceDocument.
 func (o *MTLCaptureDescriptor) OutputURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLCaptureDescriptorSelOutputURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *MTLCaptureDescriptor) SetOutputURL(outputURL *foundation.NSURL) {
 	o.Ptr().Send(_mTLCaptureDescriptorSelSetOutputURL, outputURL.Ptr())
 }
-

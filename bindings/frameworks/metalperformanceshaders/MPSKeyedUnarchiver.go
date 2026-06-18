@@ -19,15 +19,15 @@ type MPSKeyedUnarchiver struct {
 }
 
 var (
-	_clsMPSKeyedUnarchiver = _objcClass("MPSKeyedUnarchiver")
+	_clsMPSKeyedUnarchiver                                             = _objcClass("MPSKeyedUnarchiver")
 	_mPSKeyedUnarchiverSelUnarchivedObjectOfClassesFromDataDeviceError = objc.RegisterName("unarchivedObjectOfClasses:fromData:device:error:")
-	_mPSKeyedUnarchiverSelUnarchivedObjectOfClassFromDataDeviceError = objc.RegisterName("unarchivedObjectOfClass:fromData:device:error:")
-	_mPSKeyedUnarchiverSelInitForReadingFromDataDeviceError = objc.RegisterName("initForReadingFromData:device:error:")
-	_mPSKeyedUnarchiverSelMpsMTLDevice = objc.RegisterName("mpsMTLDevice")
-	_mPSKeyedUnarchiverSelUnarchiveObjectWithDataDevice = objc.RegisterName("unarchiveObjectWithData:device:")
-	_mPSKeyedUnarchiverSelUnarchiveObjectWithFileDevice = objc.RegisterName("unarchiveObjectWithFile:device:")
-	_mPSKeyedUnarchiverSelInitWithDevice = objc.RegisterName("initWithDevice:")
-	_mPSKeyedUnarchiverSelInitForReadingWithDataDevice = objc.RegisterName("initForReadingWithData:device:")
+	_mPSKeyedUnarchiverSelUnarchivedObjectOfClassFromDataDeviceError   = objc.RegisterName("unarchivedObjectOfClass:fromData:device:error:")
+	_mPSKeyedUnarchiverSelInitForReadingFromDataDeviceError            = objc.RegisterName("initForReadingFromData:device:error:")
+	_mPSKeyedUnarchiverSelMpsMTLDevice                                 = objc.RegisterName("mpsMTLDevice")
+	_mPSKeyedUnarchiverSelUnarchiveObjectWithDataDevice                = objc.RegisterName("unarchiveObjectWithData:device:")
+	_mPSKeyedUnarchiverSelUnarchiveObjectWithFileDevice                = objc.RegisterName("unarchiveObjectWithFile:device:")
+	_mPSKeyedUnarchiverSelInitWithDevice                               = objc.RegisterName("initWithDevice:")
+	_mPSKeyedUnarchiverSelInitForReadingWithDataDevice                 = objc.RegisterName("initForReadingWithData:device:")
 )
 
 func MPSKeyedUnarchiverFromID(id objc.ID) *MPSKeyedUnarchiver {
@@ -61,7 +61,9 @@ func MPSKeyedUnarchiverUnarchivedObjectOfClassFromDataDeviceError(cls objc.Class
 func (o *MPSKeyedUnarchiver) InitForReadingFromDataDeviceError(data *foundation.NSData, device metal.MTLDevice) (*MPSKeyedUnarchiver, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSKeyedUnarchiverSelInitForReadingFromDataDeviceError, data.Ptr(), device, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -86,13 +88,16 @@ func MPSKeyedUnarchiverUnarchiveObjectWithFileDevice(path *foundation.NSString, 
 
 func (o *MPSKeyedUnarchiver) InitWithDevice(device metal.MTLDevice) *MPSKeyedUnarchiver {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSKeyedUnarchiverSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSKeyedUnarchiverFromID(_ret)
 }
 
 func (o *MPSKeyedUnarchiver) InitForReadingWithDataDevice(data *foundation.NSData, device metal.MTLDevice) *MPSKeyedUnarchiver {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSKeyedUnarchiverSelInitForReadingWithDataDevice, data.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSKeyedUnarchiverFromID(_ret)
 }
-

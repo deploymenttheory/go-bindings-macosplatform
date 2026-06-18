@@ -11,9 +11,9 @@ import (
 type MPChangeLanguageOptionSetting int64
 
 const (
-	MPChangeLanguageOptionSettingNone MPChangeLanguageOptionSetting = 0
+	MPChangeLanguageOptionSettingNone               MPChangeLanguageOptionSetting = 0
 	MPChangeLanguageOptionSettingNowPlayingItemOnly MPChangeLanguageOptionSetting = 1
-	MPChangeLanguageOptionSettingPermanent MPChangeLanguageOptionSetting = 2
+	MPChangeLanguageOptionSettingPermanent          MPChangeLanguageOptionSetting = 2
 )
 
 func (e MPChangeLanguageOptionSetting) String() string {
@@ -50,10 +50,10 @@ func (e MPNowPlayingInfoLanguageOptionType) String() string {
 type MPNowPlayingPlaybackState uint64
 
 const (
-	MPNowPlayingPlaybackStateUnknown MPNowPlayingPlaybackState = 0
-	MPNowPlayingPlaybackStatePlaying MPNowPlayingPlaybackState = 1
-	MPNowPlayingPlaybackStatePaused MPNowPlayingPlaybackState = 2
-	MPNowPlayingPlaybackStateStopped MPNowPlayingPlaybackState = 3
+	MPNowPlayingPlaybackStateUnknown     MPNowPlayingPlaybackState = 0
+	MPNowPlayingPlaybackStatePlaying     MPNowPlayingPlaybackState = 1
+	MPNowPlayingPlaybackStatePaused      MPNowPlayingPlaybackState = 2
+	MPNowPlayingPlaybackStateStopped     MPNowPlayingPlaybackState = 3
 	MPNowPlayingPlaybackStateInterrupted MPNowPlayingPlaybackState = 4
 )
 
@@ -131,7 +131,7 @@ type MPSeekCommandEventType uint64
 
 const (
 	MPSeekCommandEventTypeBeginSeeking MPSeekCommandEventType = 0
-	MPSeekCommandEventTypeEndSeeking MPSeekCommandEventType = 1
+	MPSeekCommandEventTypeEndSeeking   MPSeekCommandEventType = 1
 )
 
 func (e MPSeekCommandEventType) String() string {
@@ -148,8 +148,8 @@ func (e MPSeekCommandEventType) String() string {
 type MPShuffleType int64
 
 const (
-	MPShuffleTypeOff MPShuffleType = 0
-	MPShuffleTypeItems MPShuffleType = 1
+	MPShuffleTypeOff         MPShuffleType = 0
+	MPShuffleTypeItems       MPShuffleType = 1
 	MPShuffleTypeCollections MPShuffleType = 2
 )
 
@@ -165,4 +165,3 @@ func (e MPShuffleType) String() string {
 		return fmt.Sprintf("MPShuffleType(%d)", int64(e))
 	}
 }
-

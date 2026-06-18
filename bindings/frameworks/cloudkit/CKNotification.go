@@ -18,28 +18,28 @@ type CKNotification struct {
 }
 
 var (
-	_clsCKNotification = _objcClass("CKNotification")
+	_clsCKNotification                                             = _objcClass("CKNotification")
 	_cKNotificationSelNotificationFromRemoteNotificationDictionary = objc.RegisterName("notificationFromRemoteNotificationDictionary:")
-	_cKNotificationSelNotificationType = objc.RegisterName("notificationType")
-	_cKNotificationSelNotificationID = objc.RegisterName("notificationID")
-	_cKNotificationSelContainerIdentifier = objc.RegisterName("containerIdentifier")
-	_cKNotificationSelSubscriptionOwnerUserRecordID = objc.RegisterName("subscriptionOwnerUserRecordID")
-	_cKNotificationSelIsPruned = objc.RegisterName("isPruned")
-	_cKNotificationSelSubscriptionID = objc.RegisterName("subscriptionID")
-	_cKNotificationSelAlertBody = objc.RegisterName("alertBody")
-	_cKNotificationSelAlertLocalizationKey = objc.RegisterName("alertLocalizationKey")
-	_cKNotificationSelAlertLocalizationArgs = objc.RegisterName("alertLocalizationArgs")
-	_cKNotificationSelTitle = objc.RegisterName("title")
-	_cKNotificationSelTitleLocalizationKey = objc.RegisterName("titleLocalizationKey")
-	_cKNotificationSelTitleLocalizationArgs = objc.RegisterName("titleLocalizationArgs")
-	_cKNotificationSelSubtitle = objc.RegisterName("subtitle")
-	_cKNotificationSelSubtitleLocalizationKey = objc.RegisterName("subtitleLocalizationKey")
-	_cKNotificationSelSubtitleLocalizationArgs = objc.RegisterName("subtitleLocalizationArgs")
-	_cKNotificationSelAlertActionLocalizationKey = objc.RegisterName("alertActionLocalizationKey")
-	_cKNotificationSelAlertLaunchImage = objc.RegisterName("alertLaunchImage")
-	_cKNotificationSelBadge = objc.RegisterName("badge")
-	_cKNotificationSelSoundName = objc.RegisterName("soundName")
-	_cKNotificationSelCategory = objc.RegisterName("category")
+	_cKNotificationSelNotificationType                             = objc.RegisterName("notificationType")
+	_cKNotificationSelNotificationID                               = objc.RegisterName("notificationID")
+	_cKNotificationSelContainerIdentifier                          = objc.RegisterName("containerIdentifier")
+	_cKNotificationSelSubscriptionOwnerUserRecordID                = objc.RegisterName("subscriptionOwnerUserRecordID")
+	_cKNotificationSelIsPruned                                     = objc.RegisterName("isPruned")
+	_cKNotificationSelSubscriptionID                               = objc.RegisterName("subscriptionID")
+	_cKNotificationSelAlertBody                                    = objc.RegisterName("alertBody")
+	_cKNotificationSelAlertLocalizationKey                         = objc.RegisterName("alertLocalizationKey")
+	_cKNotificationSelAlertLocalizationArgs                        = objc.RegisterName("alertLocalizationArgs")
+	_cKNotificationSelTitle                                        = objc.RegisterName("title")
+	_cKNotificationSelTitleLocalizationKey                         = objc.RegisterName("titleLocalizationKey")
+	_cKNotificationSelTitleLocalizationArgs                        = objc.RegisterName("titleLocalizationArgs")
+	_cKNotificationSelSubtitle                                     = objc.RegisterName("subtitle")
+	_cKNotificationSelSubtitleLocalizationKey                      = objc.RegisterName("subtitleLocalizationKey")
+	_cKNotificationSelSubtitleLocalizationArgs                     = objc.RegisterName("subtitleLocalizationArgs")
+	_cKNotificationSelAlertActionLocalizationKey                   = objc.RegisterName("alertActionLocalizationKey")
+	_cKNotificationSelAlertLaunchImage                             = objc.RegisterName("alertLaunchImage")
+	_cKNotificationSelBadge                                        = objc.RegisterName("badge")
+	_cKNotificationSelSoundName                                    = objc.RegisterName("soundName")
+	_cKNotificationSelCategory                                     = objc.RegisterName("category")
 )
 
 func CKNotificationFromID(id objc.ID) *CKNotification {
@@ -55,11 +55,13 @@ func CKNotificationFromID(id objc.ID) *CKNotification {
 // Creates a new notification using the specified payload data. - Parameters: - notificationDictionary: The push notification's payload data. Use the dictionary that the system provides to your app delegate's <doc://com.apple.documentation/documentation/uikit/uiapplicationdelegate/application(_:didreceiveremotenotification:fetchcompletionhandler:)> method. This parameter must not be `nil`.
 func CKNotificationNotificationFromRemoteNotificationDictionary(notificationDictionary *foundation.NSDictionary[objc.ID, objc.ID]) *CKNotification {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCKNotification), _cKNotificationSelNotificationFromRemoteNotificationDictionary, notificationDictionary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKNotificationFromID(_ret)
 }
 
-// The type of event that generates the notification. Different notification types correspond to different subclasses of ``CKNotification``, so you can use the value in this property to determine how to handle the notification data.
+// The type of event that generates the notification. Different notification types correspond to different subclasses of “CKNotification“, so you can use the value in this property to determine how to handle the notification data.
 func (o *CKNotification) NotificationType() CKNotificationType {
 	_ret := objc.Send[CKNotificationType](o.Ptr(), _cKNotificationSelNotificationType)
 	return _ret
@@ -68,25 +70,31 @@ func (o *CKNotification) NotificationType() CKNotificationType {
 // The notification's ID. Use this property to differentiate notifications.
 func (o *CKNotification) NotificationID() *CKNotificationID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKNotificationSelNotificationID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKNotificationIDFromID(_ret)
 }
 
 // The ID of the container with the content that triggers the notification. Use this property to determine the location of the changed content.
 func (o *CKNotification) ContainerIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKNotificationSelContainerIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The ID of the user record that creates the subscription that generates the push notification. On a system that supports multiple users, such as tvOS, use this identifier to check whether the pending content is for the current user. If your app always fetches data from CloudKit on launch, you may improve efficiency by disregarding notifications for other users. For more information about supporting a multiuser environment, see <doc://com.apple.documentation/documentation/tvservices/personalizing-your-app-for-each-user-on-apple-tv>.
 func (o *CKNotification) SubscriptionOwnerUserRecordID() *CKRecordID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKNotificationSelSubscriptionOwnerUserRecordID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKRecordIDFromID(_ret)
 }
 
-// A Boolean value that indicates whether the system removes some push notification content before delivery. The server may truncate the payload data of a push notification if the size of that data exceeds the allowed maximum. For notifications you create using a payload dictionary, the value of this property is <doc://com.apple.documentation/documentation/swift/true> if the payload data doesn't contain all information regarding the change. The value is <doc://com.apple.documentation/documentation/swift/false> if the payload data is complete. For notifications you fetch from the database using a `CKFetchNotificationChangesOperation` operation, this property's value is always <doc://com.apple.documentation/documentation/swift/true>. When CloudKit must remove payload data, it removes it in a specific order. This class's properties are among the last that CloudKit removes because they define information about how to deliver the push notification. The following list shows the properties that CloudKit removes, and the order for removing them: 1. ``CKNotification/containerIdentifier`` 2. Keys that subclasses of `CKNotification` define. 3. ``CKNotification/soundName`` 4. ``CKNotification/alertLaunchImage`` 5. ``CKNotification/alertActionLocalizationKey`` 6. ``CKNotification/alertBody`` 7. ``CKNotification/alertLocalizationArgs`` 8. ``CKNotification/alertLocalizationKey`` 9. ``CKNotification/badge`` 10. ``CKNotification/notificationID``
+// A Boolean value that indicates whether the system removes some push notification content before delivery. The server may truncate the payload data of a push notification if the size of that data exceeds the allowed maximum. For notifications you create using a payload dictionary, the value of this property is <doc://com.apple.documentation/documentation/swift/true> if the payload data doesn't contain all information regarding the change. The value is <doc://com.apple.documentation/documentation/swift/false> if the payload data is complete. For notifications you fetch from the database using a `CKFetchNotificationChangesOperation` operation, this property's value is always <doc://com.apple.documentation/documentation/swift/true>. When CloudKit must remove payload data, it removes it in a specific order. This class's properties are among the last that CloudKit removes because they define information about how to deliver the push notification. The following list shows the properties that CloudKit removes, and the order for removing them: 1. “CKNotification/containerIdentifier“ 2. Keys that subclasses of `CKNotification` define. 3. “CKNotification/soundName“ 4. “CKNotification/alertLaunchImage“ 5. “CKNotification/alertActionLocalizationKey“ 6. “CKNotification/alertBody“ 7. “CKNotification/alertLocalizationArgs“ 8. “CKNotification/alertLocalizationKey“ 9. “CKNotification/badge“ 10. “CKNotification/notificationID“
 func (o *CKNotification) IsPruned() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cKNotificationSelIsPruned)
 	return _ret
@@ -95,7 +103,9 @@ func (o *CKNotification) IsPruned() bool {
 // The ID of the subscription that triggers the notification.
 func (o *CKNotification) SubscriptionID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKNotificationSelSubscriptionID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -105,7 +115,7 @@ func (o *CKNotification) AlertBody() unsafe.Pointer {
 	return _ret
 }
 
-// The key that identifies the localized text for the alert body. When the system delivers a push notification to your app, it gets the text for the alert body by looking up the specified key in your app's `Localizable.strings` file. CloudKit ignores the value in ``CKNotification/alertBody`` if you set this property.
+// The key that identifies the localized text for the alert body. When the system delivers a push notification to your app, it gets the text for the alert body by looking up the specified key in your app's `Localizable.strings` file. CloudKit ignores the value in “CKNotification/alertBody“ if you set this property.
 func (o *CKNotification) AlertLocalizationKey() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cKNotificationSelAlertLocalizationKey)
 	return _ret
@@ -117,13 +127,13 @@ func (o *CKNotification) AlertLocalizationArgs() unsafe.Pointer {
 	return _ret
 }
 
-// The notification's title. The system ignores this property if ``CKNotification/titleLocalizationKey`` has a value.
+// The notification's title. The system ignores this property if “CKNotification/titleLocalizationKey“ has a value.
 func (o *CKNotification) Title() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cKNotificationSelTitle)
 	return _ret
 }
 
-// The key that identifies the localized string for the notification's title. This property takes precedence over ``CKNotification/title``.
+// The key that identifies the localized string for the notification's title. This property takes precedence over “CKNotification/title“.
 func (o *CKNotification) TitleLocalizationKey() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cKNotificationSelTitleLocalizationKey)
 	return _ret
@@ -135,13 +145,13 @@ func (o *CKNotification) TitleLocalizationArgs() unsafe.Pointer {
 	return _ret
 }
 
-// The notification's subtitle. The system ignores this property if ``CKNotification/subtitleLocalizationKey`` has a value.
+// The notification's subtitle. The system ignores this property if “CKNotification/subtitleLocalizationKey“ has a value.
 func (o *CKNotification) Subtitle() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cKNotificationSelSubtitle)
 	return _ret
 }
 
-// The key that identifies the localized string for the notification's subtitle. This property takes precedence over ``CKNotification/subtitle``.
+// The key that identifies the localized string for the notification's subtitle. This property takes precedence over “CKNotification/subtitle“.
 func (o *CKNotification) SubtitleLocalizationKey() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cKNotificationSelSubtitleLocalizationKey)
 	return _ret
@@ -168,7 +178,9 @@ func (o *CKNotification) AlertLaunchImage() unsafe.Pointer {
 // The value that the app icon's badge displays.
 func (o *CKNotification) Badge() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKNotificationSelBadge)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -183,4 +195,3 @@ func (o *CKNotification) Category() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cKNotificationSelCategory)
 	return _ret
 }
-

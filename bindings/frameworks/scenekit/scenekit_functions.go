@@ -14,32 +14,32 @@ import (
 
 var (
 	_fnSCNExportJavaScriptModule func(objc.ID)
-	_fnSCNMatrix4EqualToMatrix4 func(quartzcore.CATransform3D, quartzcore.CATransform3D) bool
-	_fnSCNMatrix4FromGLKMatrix4 func(unsafe.Pointer) quartzcore.CATransform3D
-	_fnSCNMatrix4FromMat4 func(unsafe.Pointer) quartzcore.CATransform3D
-	_fnSCNMatrix4Invert func(quartzcore.CATransform3D) quartzcore.CATransform3D
-	_fnSCNMatrix4IsIdentity func(quartzcore.CATransform3D) bool
-	_fnSCNMatrix4MakeRotation func(float64, float64, float64, float64) quartzcore.CATransform3D
-	_fnSCNMatrix4MakeScale func(float64, float64, float64) quartzcore.CATransform3D
+	_fnSCNMatrix4EqualToMatrix4  func(quartzcore.CATransform3D, quartzcore.CATransform3D) bool
+	_fnSCNMatrix4FromGLKMatrix4  func(unsafe.Pointer) quartzcore.CATransform3D
+	_fnSCNMatrix4FromMat4        func(unsafe.Pointer) quartzcore.CATransform3D
+	_fnSCNMatrix4Invert          func(quartzcore.CATransform3D) quartzcore.CATransform3D
+	_fnSCNMatrix4IsIdentity      func(quartzcore.CATransform3D) bool
+	_fnSCNMatrix4MakeRotation    func(float64, float64, float64, float64) quartzcore.CATransform3D
+	_fnSCNMatrix4MakeScale       func(float64, float64, float64) quartzcore.CATransform3D
 	_fnSCNMatrix4MakeTranslation func(float64, float64, float64) quartzcore.CATransform3D
-	_fnSCNMatrix4Mult func(quartzcore.CATransform3D, quartzcore.CATransform3D) quartzcore.CATransform3D
-	_fnSCNMatrix4Rotate func(quartzcore.CATransform3D, float64, float64, float64, float64) quartzcore.CATransform3D
-	_fnSCNMatrix4Scale func(quartzcore.CATransform3D, float64, float64, float64) quartzcore.CATransform3D
-	_fnSCNMatrix4ToGLKMatrix4 func(quartzcore.CATransform3D) unsafe.Pointer
-	_fnSCNMatrix4ToMat4 func(quartzcore.CATransform3D) unsafe.Pointer
-	_fnSCNMatrix4Translate func(quartzcore.CATransform3D, float64, float64, float64) quartzcore.CATransform3D
-	_fnSCNVector3EqualToVector3 func(SCNVector3, SCNVector3) bool
-	_fnSCNVector3FromFloat3 func(unsafe.Pointer) SCNVector3
-	_fnSCNVector3FromGLKVector3 func(unsafe.Pointer) SCNVector3
-	_fnSCNVector3Make func(float64, float64, float64) SCNVector3
-	_fnSCNVector3ToFloat3 func(SCNVector3) unsafe.Pointer
-	_fnSCNVector3ToGLKVector3 func(SCNVector3) unsafe.Pointer
-	_fnSCNVector4EqualToVector4 func(SCNVector4, SCNVector4) bool
-	_fnSCNVector4FromFloat4 func(unsafe.Pointer) SCNVector4
-	_fnSCNVector4FromGLKVector4 func(unsafe.Pointer) SCNVector4
-	_fnSCNVector4Make func(float64, float64, float64, float64) SCNVector4
-	_fnSCNVector4ToFloat4 func(SCNVector4) unsafe.Pointer
-	_fnSCNVector4ToGLKVector4 func(SCNVector4) unsafe.Pointer
+	_fnSCNMatrix4Mult            func(quartzcore.CATransform3D, quartzcore.CATransform3D) quartzcore.CATransform3D
+	_fnSCNMatrix4Rotate          func(quartzcore.CATransform3D, float64, float64, float64, float64) quartzcore.CATransform3D
+	_fnSCNMatrix4Scale           func(quartzcore.CATransform3D, float64, float64, float64) quartzcore.CATransform3D
+	_fnSCNMatrix4ToGLKMatrix4    func(quartzcore.CATransform3D) unsafe.Pointer
+	_fnSCNMatrix4ToMat4          func(quartzcore.CATransform3D) unsafe.Pointer
+	_fnSCNMatrix4Translate       func(quartzcore.CATransform3D, float64, float64, float64) quartzcore.CATransform3D
+	_fnSCNVector3EqualToVector3  func(SCNVector3, SCNVector3) bool
+	_fnSCNVector3FromFloat3      func(unsafe.Pointer) SCNVector3
+	_fnSCNVector3FromGLKVector3  func(unsafe.Pointer) SCNVector3
+	_fnSCNVector3Make            func(float64, float64, float64) SCNVector3
+	_fnSCNVector3ToFloat3        func(SCNVector3) unsafe.Pointer
+	_fnSCNVector3ToGLKVector3    func(SCNVector3) unsafe.Pointer
+	_fnSCNVector4EqualToVector4  func(SCNVector4, SCNVector4) bool
+	_fnSCNVector4FromFloat4      func(unsafe.Pointer) SCNVector4
+	_fnSCNVector4FromGLKVector4  func(unsafe.Pointer) SCNVector4
+	_fnSCNVector4Make            func(float64, float64, float64, float64) SCNVector4
+	_fnSCNVector4ToFloat4        func(SCNVector4) unsafe.Pointer
+	_fnSCNVector4ToGLKVector4    func(SCNVector4) unsafe.Pointer
 )
 
 func SCNExportJavaScriptModule(context_ *javascriptcore.JSContext) {
@@ -149,4 +149,3 @@ func SCNVector4ToFloat4(v SCNVector4) unsafe.Pointer {
 func SCNVector4ToGLKVector4(vector SCNVector4) unsafe.Pointer {
 	return _fnSCNVector4ToGLKVector4(vector)
 }
-

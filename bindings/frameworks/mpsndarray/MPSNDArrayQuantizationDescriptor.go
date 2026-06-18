@@ -17,9 +17,9 @@ type MPSNDArrayQuantizationDescriptor struct {
 }
 
 var (
-	_clsMPSNDArrayQuantizationDescriptor = _objcClass("MPSNDArrayQuantizationDescriptor")
+	_clsMPSNDArrayQuantizationDescriptor                     = _objcClass("MPSNDArrayQuantizationDescriptor")
 	_mPSNDArrayQuantizationDescriptorSelQuantizationDataType = objc.RegisterName("quantizationDataType")
-	_mPSNDArrayQuantizationDescriptorSelQuantizationScheme = objc.RegisterName("quantizationScheme")
+	_mPSNDArrayQuantizationDescriptorSelQuantizationScheme   = objc.RegisterName("quantizationScheme")
 )
 
 func MPSNDArrayQuantizationDescriptorFromID(id objc.ID) *MPSNDArrayQuantizationDescriptor {
@@ -43,4 +43,3 @@ func (o *MPSNDArrayQuantizationDescriptor) QuantizationScheme() MPSNDArrayQuanti
 	_ret := objc.Send[MPSNDArrayQuantizationScheme](o.Ptr(), _mPSNDArrayQuantizationDescriptorSelQuantizationScheme)
 	return _ret
 }
-

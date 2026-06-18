@@ -16,10 +16,10 @@ type PHProjectSection struct {
 }
 
 var (
-	_clsPHProjectSection = _objcClass("PHProjectSection")
+	_clsPHProjectSection                = _objcClass("PHProjectSection")
 	_pHProjectSectionSelSectionContents = objc.RegisterName("sectionContents")
-	_pHProjectSectionSelSectionType = objc.RegisterName("sectionType")
-	_pHProjectSectionSelTitle = objc.RegisterName("title")
+	_pHProjectSectionSelSectionType     = objc.RegisterName("sectionType")
+	_pHProjectSectionSelTitle           = objc.RegisterName("title")
 )
 
 func PHProjectSectionFromID(id objc.ID) *PHProjectSection {
@@ -35,7 +35,9 @@ func PHProjectSectionFromID(id objc.ID) *PHProjectSection {
 // Array containing one or more PHProjectSectionContent objects. Ordered by number of elements from least to most. Projects should only present one level of content to the user at a time as assets will be reused within individual content objects.
 func (o *PHProjectSection) SectionContents() *foundation.NSArray[*PHProjectSectionContent] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectSectionSelSectionContents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PHProjectSectionContent](_ret)
 }
 
@@ -48,7 +50,8 @@ func (o *PHProjectSection) SectionType() PHProjectSectionType {
 // Title for the section (e.g., a Moment name or a general geographical location), might be an empty string.
 func (o *PHProjectSection) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectSectionSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

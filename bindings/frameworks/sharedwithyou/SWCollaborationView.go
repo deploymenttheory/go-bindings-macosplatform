@@ -17,28 +17,28 @@ type SWCollaborationView struct {
 }
 
 var (
-	_clsSWCollaborationView = _objcClass("SWCollaborationView")
-	_sWCollaborationViewSelSetContentView = objc.RegisterName("setContentView:")
-	_sWCollaborationViewSelInitWithItemProvider = objc.RegisterName("initWithItemProvider:")
-	_sWCollaborationViewSelDismissPopover = objc.RegisterName("dismissPopover:")
-	_sWCollaborationViewSelSetShowManageButton = objc.RegisterName("setShowManageButton:")
-	_sWCollaborationViewSelCloudSharingDelegate = objc.RegisterName("cloudSharingDelegate")
-	_sWCollaborationViewSelSetCloudSharingDelegate = objc.RegisterName("setCloudSharingDelegate:")
-	_sWCollaborationViewSelActiveParticipantCount = objc.RegisterName("activeParticipantCount")
-	_sWCollaborationViewSelSetActiveParticipantCount = objc.RegisterName("setActiveParticipantCount:")
-	_sWCollaborationViewSelDelegate = objc.RegisterName("delegate")
-	_sWCollaborationViewSelSetDelegate = objc.RegisterName("setDelegate:")
-	_sWCollaborationViewSelHeaderTitle = objc.RegisterName("headerTitle")
-	_sWCollaborationViewSelSetHeaderTitle = objc.RegisterName("setHeaderTitle:")
-	_sWCollaborationViewSelHeaderSubtitle = objc.RegisterName("headerSubtitle")
-	_sWCollaborationViewSelSetHeaderSubtitle = objc.RegisterName("setHeaderSubtitle:")
-	_sWCollaborationViewSelHeaderImage = objc.RegisterName("headerImage")
-	_sWCollaborationViewSelSetHeaderImage = objc.RegisterName("setHeaderImage:")
-	_sWCollaborationViewSelMenuFormRepresentation = objc.RegisterName("menuFormRepresentation")
-	_sWCollaborationViewSelCloudSharingServiceDelegate = objc.RegisterName("cloudSharingServiceDelegate")
+	_clsSWCollaborationView                               = _objcClass("SWCollaborationView")
+	_sWCollaborationViewSelSetContentView                 = objc.RegisterName("setContentView:")
+	_sWCollaborationViewSelInitWithItemProvider           = objc.RegisterName("initWithItemProvider:")
+	_sWCollaborationViewSelDismissPopover                 = objc.RegisterName("dismissPopover:")
+	_sWCollaborationViewSelSetShowManageButton            = objc.RegisterName("setShowManageButton:")
+	_sWCollaborationViewSelCloudSharingDelegate           = objc.RegisterName("cloudSharingDelegate")
+	_sWCollaborationViewSelSetCloudSharingDelegate        = objc.RegisterName("setCloudSharingDelegate:")
+	_sWCollaborationViewSelActiveParticipantCount         = objc.RegisterName("activeParticipantCount")
+	_sWCollaborationViewSelSetActiveParticipantCount      = objc.RegisterName("setActiveParticipantCount:")
+	_sWCollaborationViewSelDelegate                       = objc.RegisterName("delegate")
+	_sWCollaborationViewSelSetDelegate                    = objc.RegisterName("setDelegate:")
+	_sWCollaborationViewSelHeaderTitle                    = objc.RegisterName("headerTitle")
+	_sWCollaborationViewSelSetHeaderTitle                 = objc.RegisterName("setHeaderTitle:")
+	_sWCollaborationViewSelHeaderSubtitle                 = objc.RegisterName("headerSubtitle")
+	_sWCollaborationViewSelSetHeaderSubtitle              = objc.RegisterName("setHeaderSubtitle:")
+	_sWCollaborationViewSelHeaderImage                    = objc.RegisterName("headerImage")
+	_sWCollaborationViewSelSetHeaderImage                 = objc.RegisterName("setHeaderImage:")
+	_sWCollaborationViewSelMenuFormRepresentation         = objc.RegisterName("menuFormRepresentation")
+	_sWCollaborationViewSelCloudSharingServiceDelegate    = objc.RegisterName("cloudSharingServiceDelegate")
 	_sWCollaborationViewSelSetCloudSharingServiceDelegate = objc.RegisterName("setCloudSharingServiceDelegate:")
-	_sWCollaborationViewSelManageButtonTitle = objc.RegisterName("manageButtonTitle")
-	_sWCollaborationViewSelSetManageButtonTitle = objc.RegisterName("setManageButtonTitle:")
+	_sWCollaborationViewSelManageButtonTitle              = objc.RegisterName("manageButtonTitle")
+	_sWCollaborationViewSelSetManageButtonTitle           = objc.RegisterName("setManageButtonTitle:")
 )
 
 func SWCollaborationViewFromID(id objc.ID) *SWCollaborationView {
@@ -57,7 +57,9 @@ func (o *SWCollaborationView) SetContentView(detailViewListContentView *appkit.N
 
 func (o *SWCollaborationView) InitWithItemProvider(itemProvider *foundation.NSItemProvider) *SWCollaborationView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationViewSelInitWithItemProvider, itemProvider.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SWCollaborationViewFromID(_ret)
 }
 
@@ -107,7 +109,9 @@ func (o *SWCollaborationView) SetDelegate(delegate SWCollaborationViewDelegate) 
 
 func (o *SWCollaborationView) HeaderTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationViewSelHeaderTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -117,7 +121,9 @@ func (o *SWCollaborationView) SetHeaderTitle(headerTitle *foundation.NSString) {
 
 func (o *SWCollaborationView) HeaderSubtitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationViewSelHeaderSubtitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -127,7 +133,9 @@ func (o *SWCollaborationView) SetHeaderSubtitle(headerSubtitle *foundation.NSStr
 
 func (o *SWCollaborationView) HeaderImage() *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationViewSelHeaderImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSImageFromID(_ret)
 }
 
@@ -137,7 +145,9 @@ func (o *SWCollaborationView) SetHeaderImage(headerImage *appkit.NSImage) {
 
 func (o *SWCollaborationView) MenuFormRepresentation() *appkit.NSMenuItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationViewSelMenuFormRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSMenuItemFromID(_ret)
 }
 
@@ -154,11 +164,12 @@ func (o *SWCollaborationView) SetCloudSharingServiceDelegate(cloudSharingService
 // @abstract sets the title of the manage participants button in the collaboration popover to the given string, defaults to "Manage Share"
 func (o *SWCollaborationView) ManageButtonTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationViewSelManageButtonTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *SWCollaborationView) SetManageButtonTitle(manageButtonTitle *foundation.NSString) {
 	o.Ptr().Send(_sWCollaborationViewSelSetManageButtonTitle, manageButtonTitle.Ptr())
 }
-

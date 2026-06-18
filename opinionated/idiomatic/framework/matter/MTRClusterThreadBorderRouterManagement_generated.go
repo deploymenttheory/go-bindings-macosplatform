@@ -19,7 +19,9 @@ type MTRClusterThreadBorderRouterManagement struct {
 }
 
 // Unwrap returns the underlying [raw.MTRClusterThreadBorderRouterManagement].
-func (x *MTRClusterThreadBorderRouterManagement) Unwrap() *raw.MTRClusterThreadBorderRouterManagement { return x.inner }
+func (x *MTRClusterThreadBorderRouterManagement) Unwrap() *raw.MTRClusterThreadBorderRouterManagement {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -209,9 +211,13 @@ func (x *MTRClusterThreadBorderRouterManagement) ReadAttributeClusterRevisionWit
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterThreadBorderRouterManagement) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterThreadBorderRouterManagement) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterThreadBorderRouterManagement) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterThreadBorderRouterManagement) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterThreadBorderRouterManagementable is the interface implemented by [MTRClusterThreadBorderRouterManagement], for mocking and DI.
 type MTRClusterThreadBorderRouterManagementable interface {
@@ -236,4 +242,3 @@ type MTRClusterThreadBorderRouterManagementable interface {
 }
 
 var _ MTRClusterThreadBorderRouterManagementable = (*MTRClusterThreadBorderRouterManagement)(nil)
-

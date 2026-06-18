@@ -17,10 +17,10 @@ type MPSNNGridSample struct {
 }
 
 var (
-	_clsMPSNNGridSample = _objcClass("MPSNNGridSample")
-	_mPSNNGridSampleSelInitWithDevice = objc.RegisterName("initWithDevice:")
-	_mPSNNGridSampleSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSNNGridSampleSelUseGridValueAsInputCoordinate = objc.RegisterName("useGridValueAsInputCoordinate")
+	_clsMPSNNGridSample                                 = _objcClass("MPSNNGridSample")
+	_mPSNNGridSampleSelInitWithDevice                   = objc.RegisterName("initWithDevice:")
+	_mPSNNGridSampleSelInitWithCoderDevice              = objc.RegisterName("initWithCoder:device:")
+	_mPSNNGridSampleSelUseGridValueAsInputCoordinate    = objc.RegisterName("useGridValueAsInputCoordinate")
 	_mPSNNGridSampleSelSetUseGridValueAsInputCoordinate = objc.RegisterName("setUseGridValueAsInputCoordinate:")
 )
 
@@ -37,14 +37,18 @@ func MPSNNGridSampleFromID(id objc.ID) *MPSNNGridSample {
 // @abstract Create a grid sample kernel. @param    device            The device the filter will run on @return     A valid MPSNNGridSample object or nil, if failure.
 func (o *MPSNNGridSample) InitWithDevice(device metal.MTLDevice) *MPSNNGridSample {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNGridSampleSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNGridSampleFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSNNGridSample) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSNNGridSample {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNGridSampleSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNGridSampleFromID(_ret)
 }
 
@@ -57,4 +61,3 @@ func (o *MPSNNGridSample) UseGridValueAsInputCoordinate() bool {
 func (o *MPSNNGridSample) SetUseGridValueAsInputCoordinate(useGridValueAsInputCoordinate bool) {
 	o.Ptr().Send(_mPSNNGridSampleSelSetUseGridValueAsInputCoordinate, useGridValueAsInputCoordinate)
 }
-

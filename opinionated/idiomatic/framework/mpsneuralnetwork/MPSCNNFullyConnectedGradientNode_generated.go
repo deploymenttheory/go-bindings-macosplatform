@@ -16,7 +16,9 @@ type CNNFullyConnectedGradientNode struct {
 }
 
 // Unwrap returns the underlying [raw.MPSCNNFullyConnectedGradientNode].
-func (x *CNNFullyConnectedGradientNode) Unwrap() *raw.MPSCNNFullyConnectedGradientNode { return x.inner }
+func (x *CNNFullyConnectedGradientNode) Unwrap() *raw.MPSCNNFullyConnectedGradientNode {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -49,11 +51,17 @@ func (x *CNNFullyConnectedGradientNode) WithLabel(label string) *CNNFullyConnect
 	return x
 }
 
-func (x *CNNFullyConnectedGradientNode) asCNNConvolutionGradientNode() *raw.MPSCNNConvolutionGradientNode { return &x.inner.MPSCNNConvolutionGradientNode }
+func (x *CNNFullyConnectedGradientNode) asCNNConvolutionGradientNode() *raw.MPSCNNConvolutionGradientNode {
+	return &x.inner.MPSCNNConvolutionGradientNode
+}
 
-func (x *CNNFullyConnectedGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode { return &x.inner.MPSCNNConvolutionGradientNode.MPSNNGradientFilterNode }
+func (x *CNNFullyConnectedGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode {
+	return &x.inner.MPSCNNConvolutionGradientNode.MPSNNGradientFilterNode
+}
 
-func (x *CNNFullyConnectedGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSCNNConvolutionGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode }
+func (x *CNNFullyConnectedGradientNode) asNNFilterNode() *raw.MPSNNFilterNode {
+	return &x.inner.MPSCNNConvolutionGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode
+}
 
 // CNNFullyConnectedGradientNodeable is the interface implemented by [CNNFullyConnectedGradientNode], for mocking and DI.
 type CNNFullyConnectedGradientNodeable interface {
@@ -63,4 +71,3 @@ type CNNFullyConnectedGradientNodeable interface {
 }
 
 var _ CNNFullyConnectedGradientNodeable = (*CNNFullyConnectedGradientNode)(nil)
-

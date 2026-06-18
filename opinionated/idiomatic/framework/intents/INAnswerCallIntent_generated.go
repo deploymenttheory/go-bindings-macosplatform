@@ -76,4 +76,3 @@ type AnswerCallIntentable interface {
 }
 
 var _ AnswerCallIntentable = (*AnswerCallIntent)(nil)
-

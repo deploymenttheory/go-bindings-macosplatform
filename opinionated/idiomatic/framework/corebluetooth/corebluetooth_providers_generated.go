@@ -37,4 +37,3 @@ type PeerProvider interface {
 type ServiceProvider interface {
 	asService() *raw.CBService
 }
-

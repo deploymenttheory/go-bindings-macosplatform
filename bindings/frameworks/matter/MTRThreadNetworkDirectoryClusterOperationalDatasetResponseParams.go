@@ -18,10 +18,10 @@ type MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams struct {
 }
 
 var (
-	_clsMTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams = _objcClass("MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams")
+	_clsMTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams                           = _objcClass("MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams")
 	_mTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsSelOperationalDataset = objc.RegisterName("operationalDataset")
-	_mTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsSelSetOperationalDataset = objc.RegisterName("setOperationalDataset:")
+	_mTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsSelOperationalDataset         = objc.RegisterName("operationalDataset")
+	_mTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsSelSetOperationalDataset      = objc.RegisterName("setOperationalDataset:")
 )
 
 func MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsFromID(id objc.ID) *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams {
@@ -38,7 +38,9 @@ func MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsFromID(id o
 func (o *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -47,11 +49,12 @@ func (o *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) InitW
 
 func (o *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) OperationalDataset() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsSelOperationalDataset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) SetOperationalDataset(operationalDataset *foundation.NSData) {
 	o.Ptr().Send(_mTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsSelSetOperationalDataset, operationalDataset.Ptr())
 }
-

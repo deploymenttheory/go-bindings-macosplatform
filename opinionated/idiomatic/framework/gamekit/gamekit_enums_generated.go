@@ -12,9 +12,9 @@ import (
 type GKAccessPointLocation int64
 
 const (
-	GKAccessPointLocationTopLeading GKAccessPointLocation = 0
-	GKAccessPointLocationTopTrailing GKAccessPointLocation = 1
-	GKAccessPointLocationBottomLeading GKAccessPointLocation = 2
+	GKAccessPointLocationTopLeading     GKAccessPointLocation = 0
+	GKAccessPointLocationTopTrailing    GKAccessPointLocation = 1
+	GKAccessPointLocationBottomLeading  GKAccessPointLocation = 2
 	GKAccessPointLocationBottomTrailing GKAccessPointLocation = 3
 )
 
@@ -37,10 +37,10 @@ func (e GKAccessPointLocation) String() string {
 type GKChallengeState int64
 
 const (
-	GKChallengeStateInvalid GKChallengeState = 0
-	GKChallengeStatePending GKChallengeState = 1
+	GKChallengeStateInvalid   GKChallengeState = 0
+	GKChallengeStatePending   GKChallengeState = 1
 	GKChallengeStateCompleted GKChallengeState = 2
-	GKChallengeStateDeclined GKChallengeState = 3
+	GKChallengeStateDeclined  GKChallengeState = 3
 )
 
 func (e GKChallengeState) String() string {
@@ -62,7 +62,7 @@ type GKConnectionState int64
 
 const (
 	GKConnectionStateNotConnected GKConnectionState = 0
-	GKConnectionStateConnected GKConnectionState = 1
+	GKConnectionStateConnected    GKConnectionState = 1
 )
 
 func (e GKConnectionState) String() string {
@@ -80,9 +80,9 @@ type GKFriendsAuthorizationStatus int64
 
 const (
 	GKFriendsAuthorizationStatusNotDetermined GKFriendsAuthorizationStatus = 0
-	GKFriendsAuthorizationStatusRestricted GKFriendsAuthorizationStatus = 1
-	GKFriendsAuthorizationStatusDenied GKFriendsAuthorizationStatus = 2
-	GKFriendsAuthorizationStatusAuthorized GKFriendsAuthorizationStatus = 3
+	GKFriendsAuthorizationStatusRestricted    GKFriendsAuthorizationStatus = 1
+	GKFriendsAuthorizationStatusDenied        GKFriendsAuthorizationStatus = 2
+	GKFriendsAuthorizationStatusAuthorized    GKFriendsAuthorizationStatus = 3
 )
 
 func (e GKFriendsAuthorizationStatus) String() string {
@@ -103,8 +103,8 @@ func (e GKFriendsAuthorizationStatus) String() string {
 type GKGameActivityPlayStyle int64
 
 const (
-	GKGameActivityPlayStyleUnspecified GKGameActivityPlayStyle = 0
-	GKGameActivityPlayStyleSynchronous GKGameActivityPlayStyle = 1
+	GKGameActivityPlayStyleUnspecified  GKGameActivityPlayStyle = 0
+	GKGameActivityPlayStyleSynchronous  GKGameActivityPlayStyle = 1
 	GKGameActivityPlayStyleAsynchronous GKGameActivityPlayStyle = 2
 )
 
@@ -153,13 +153,13 @@ type GKGameCenterViewControllerState int64
 
 const (
 	// Deprecated: since macOS 26.0.
-	GKGameCenterViewControllerStateDefault GKGameCenterViewControllerState = -1
+	GKGameCenterViewControllerStateDefault      GKGameCenterViewControllerState = -1
 	GKGameCenterViewControllerStateLeaderboards GKGameCenterViewControllerState = 0
 	GKGameCenterViewControllerStateAchievements GKGameCenterViewControllerState = 1
 	// Deprecated: since macOS 26.0.
-	GKGameCenterViewControllerStateChallenges GKGameCenterViewControllerState = 2
-	GKGameCenterViewControllerStateLocalPlayerProfile GKGameCenterViewControllerState = 3
-	GKGameCenterViewControllerStateDashboard GKGameCenterViewControllerState = 4
+	GKGameCenterViewControllerStateChallenges             GKGameCenterViewControllerState = 2
+	GKGameCenterViewControllerStateLocalPlayerProfile     GKGameCenterViewControllerState = 3
+	GKGameCenterViewControllerStateDashboard              GKGameCenterViewControllerState = 4
 	GKGameCenterViewControllerStateLocalPlayerFriendsList GKGameCenterViewControllerState = 5
 )
 
@@ -187,12 +187,12 @@ func (e GKGameCenterViewControllerState) String() string {
 type GKInviteRecipientResponse int64
 
 const (
-	GKInviteRecipientResponseAccepted GKInviteRecipientResponse = 0
-	GKInviteRecipientResponseDeclined GKInviteRecipientResponse = 1
-	GKInviteRecipientResponseFailed GKInviteRecipientResponse = 2
-	GKInviteRecipientResponseIncompatible GKInviteRecipientResponse = 3
+	GKInviteRecipientResponseAccepted        GKInviteRecipientResponse = 0
+	GKInviteRecipientResponseDeclined        GKInviteRecipientResponse = 1
+	GKInviteRecipientResponseFailed          GKInviteRecipientResponse = 2
+	GKInviteRecipientResponseIncompatible    GKInviteRecipientResponse = 3
 	GKInviteRecipientResponseUnableToConnect GKInviteRecipientResponse = 4
-	GKInviteRecipientResponseNoAnswer GKInviteRecipientResponse = 5
+	GKInviteRecipientResponseNoAnswer        GKInviteRecipientResponse = 5
 	// Deprecated: since macOS 15.4.
 	GKInviteeResponseAccepted GKInviteRecipientResponse = 0
 	// Deprecated: since macOS 15.4.
@@ -229,7 +229,7 @@ func (e GKInviteRecipientResponse) String() string {
 type GKLeaderboardPlayerScope int64
 
 const (
-	GKLeaderboardPlayerScopeGlobal GKLeaderboardPlayerScope = 0
+	GKLeaderboardPlayerScopeGlobal      GKLeaderboardPlayerScope = 0
 	GKLeaderboardPlayerScopeFriendsOnly GKLeaderboardPlayerScope = 1
 )
 
@@ -247,8 +247,8 @@ func (e GKLeaderboardPlayerScope) String() string {
 type GKLeaderboardTimeScope int64
 
 const (
-	GKLeaderboardTimeScopeToday GKLeaderboardTimeScope = 0
-	GKLeaderboardTimeScopeWeek GKLeaderboardTimeScope = 1
+	GKLeaderboardTimeScopeToday   GKLeaderboardTimeScope = 0
+	GKLeaderboardTimeScopeWeek    GKLeaderboardTimeScope = 1
 	GKLeaderboardTimeScopeAllTime GKLeaderboardTimeScope = 2
 )
 
@@ -268,7 +268,7 @@ func (e GKLeaderboardTimeScope) String() string {
 type GKLeaderboardType int64
 
 const (
-	GKLeaderboardTypeClassic GKLeaderboardType = 0
+	GKLeaderboardTypeClassic   GKLeaderboardType = 0
 	GKLeaderboardTypeRecurring GKLeaderboardType = 1
 )
 
@@ -286,7 +286,7 @@ func (e GKLeaderboardType) String() string {
 type GKMatchSendDataMode int64
 
 const (
-	GKMatchSendDataReliable GKMatchSendDataMode = 0
+	GKMatchSendDataReliable   GKMatchSendDataMode = 0
 	GKMatchSendDataUnreliable GKMatchSendDataMode = 1
 )
 
@@ -307,7 +307,7 @@ const (
 	// Deprecated: since macOS 10.10.
 	GKMatchTypePeerToPeer GKMatchType = 0
 	// Deprecated: since macOS 10.10.
-	GKMatchTypeHosted GKMatchType = 1
+	GKMatchTypeHosted    GKMatchType = 1
 	GKMatchTypeTurnBased GKMatchType = 2
 )
 
@@ -327,10 +327,10 @@ func (e GKMatchType) String() string {
 type GKMatchmakingMode int64
 
 const (
-	GKMatchmakingModeDefault GKMatchmakingMode = 0
-	GKMatchmakingModeNearbyOnly GKMatchmakingMode = 1
+	GKMatchmakingModeDefault       GKMatchmakingMode = 0
+	GKMatchmakingModeNearbyOnly    GKMatchmakingMode = 1
 	GKMatchmakingModeAutomatchOnly GKMatchmakingMode = 2
-	GKMatchmakingModeInviteOnly GKMatchmakingMode = 3
+	GKMatchmakingModeInviteOnly    GKMatchmakingMode = 3
 )
 
 func (e GKMatchmakingMode) String() string {
@@ -352,11 +352,11 @@ func (e GKMatchmakingMode) String() string {
 type GKPeerConnectionState int32
 
 const (
-	GKPeerStateAvailable GKPeerConnectionState = 0
-	GKPeerStateUnavailable GKPeerConnectionState = 1
-	GKPeerStateConnected GKPeerConnectionState = 2
-	GKPeerStateDisconnected GKPeerConnectionState = 3
-	GKPeerStateConnecting GKPeerConnectionState = 4
+	GKPeerStateAvailable      GKPeerConnectionState = 0
+	GKPeerStateUnavailable    GKPeerConnectionState = 1
+	GKPeerStateConnected      GKPeerConnectionState = 2
+	GKPeerStateDisconnected   GKPeerConnectionState = 3
+	GKPeerStateConnecting     GKPeerConnectionState = 4
 	GKPeerStateConnectedRelay GKPeerConnectionState = 5
 )
 
@@ -382,7 +382,7 @@ func (e GKPeerConnectionState) String() string {
 type GKPhotoSize int64
 
 const (
-	GKPhotoSizeSmall GKPhotoSize = 0
+	GKPhotoSizeSmall  GKPhotoSize = 0
 	GKPhotoSizeNormal GKPhotoSize = 1
 )
 
@@ -427,7 +427,7 @@ func (e GKReleaseState) String() string {
 type GKSendDataMode int32
 
 const (
-	GKSendDataReliable GKSendDataMode = 0
+	GKSendDataReliable   GKSendDataMode = 0
 	GKSendDataUnreliable GKSendDataMode = 1
 )
 
@@ -448,7 +448,7 @@ type GKSessionMode int32
 const (
 	GKSessionModeServer GKSessionMode = 0
 	GKSessionModeClient GKSessionMode = 1
-	GKSessionModePeer GKSessionMode = 2
+	GKSessionModePeer   GKSessionMode = 2
 )
 
 func (e GKSessionMode) String() string {
@@ -468,7 +468,7 @@ type GKTransportType int64
 
 const (
 	GKTransportTypeUnreliable GKTransportType = 0
-	GKTransportTypeReliable GKTransportType = 1
+	GKTransportTypeReliable   GKTransportType = 1
 )
 
 func (e GKTransportType) String() string {
@@ -485,8 +485,8 @@ func (e GKTransportType) String() string {
 type GKTurnBasedExchangeStatus int64
 
 const (
-	GKTurnBasedExchangeStatusUnknown GKTurnBasedExchangeStatus = 0
-	GKTurnBasedExchangeStatusActive GKTurnBasedExchangeStatus = 1
+	GKTurnBasedExchangeStatusUnknown  GKTurnBasedExchangeStatus = 0
+	GKTurnBasedExchangeStatusActive   GKTurnBasedExchangeStatus = 1
 	GKTurnBasedExchangeStatusComplete GKTurnBasedExchangeStatus = 2
 	GKTurnBasedExchangeStatusResolved GKTurnBasedExchangeStatus = 3
 	GKTurnBasedExchangeStatusCanceled GKTurnBasedExchangeStatus = 4
@@ -512,16 +512,16 @@ func (e GKTurnBasedExchangeStatus) String() string {
 type GKTurnBasedMatchOutcome int64
 
 const (
-	GKTurnBasedMatchOutcomeNone GKTurnBasedMatchOutcome = 0
-	GKTurnBasedMatchOutcomeQuit GKTurnBasedMatchOutcome = 1
-	GKTurnBasedMatchOutcomeWon GKTurnBasedMatchOutcome = 2
-	GKTurnBasedMatchOutcomeLost GKTurnBasedMatchOutcome = 3
-	GKTurnBasedMatchOutcomeTied GKTurnBasedMatchOutcome = 4
+	GKTurnBasedMatchOutcomeNone        GKTurnBasedMatchOutcome = 0
+	GKTurnBasedMatchOutcomeQuit        GKTurnBasedMatchOutcome = 1
+	GKTurnBasedMatchOutcomeWon         GKTurnBasedMatchOutcome = 2
+	GKTurnBasedMatchOutcomeLost        GKTurnBasedMatchOutcome = 3
+	GKTurnBasedMatchOutcomeTied        GKTurnBasedMatchOutcome = 4
 	GKTurnBasedMatchOutcomeTimeExpired GKTurnBasedMatchOutcome = 5
-	GKTurnBasedMatchOutcomeFirst GKTurnBasedMatchOutcome = 6
-	GKTurnBasedMatchOutcomeSecond GKTurnBasedMatchOutcome = 7
-	GKTurnBasedMatchOutcomeThird GKTurnBasedMatchOutcome = 8
-	GKTurnBasedMatchOutcomeFourth GKTurnBasedMatchOutcome = 9
+	GKTurnBasedMatchOutcomeFirst       GKTurnBasedMatchOutcome = 6
+	GKTurnBasedMatchOutcomeSecond      GKTurnBasedMatchOutcome = 7
+	GKTurnBasedMatchOutcomeThird       GKTurnBasedMatchOutcome = 8
+	GKTurnBasedMatchOutcomeFourth      GKTurnBasedMatchOutcome = 9
 	GKTurnBasedMatchOutcomeCustomRange GKTurnBasedMatchOutcome = 16711680
 )
 
@@ -557,9 +557,9 @@ func (e GKTurnBasedMatchOutcome) String() string {
 type GKTurnBasedMatchStatus int64
 
 const (
-	GKTurnBasedMatchStatusUnknown GKTurnBasedMatchStatus = 0
-	GKTurnBasedMatchStatusOpen GKTurnBasedMatchStatus = 1
-	GKTurnBasedMatchStatusEnded GKTurnBasedMatchStatus = 2
+	GKTurnBasedMatchStatusUnknown  GKTurnBasedMatchStatus = 0
+	GKTurnBasedMatchStatusOpen     GKTurnBasedMatchStatus = 1
+	GKTurnBasedMatchStatusEnded    GKTurnBasedMatchStatus = 2
 	GKTurnBasedMatchStatusMatching GKTurnBasedMatchStatus = 3
 )
 
@@ -581,12 +581,12 @@ func (e GKTurnBasedMatchStatus) String() string {
 type GKTurnBasedParticipantStatus int64
 
 const (
-	GKTurnBasedParticipantStatusUnknown GKTurnBasedParticipantStatus = 0
-	GKTurnBasedParticipantStatusInvited GKTurnBasedParticipantStatus = 1
+	GKTurnBasedParticipantStatusUnknown  GKTurnBasedParticipantStatus = 0
+	GKTurnBasedParticipantStatusInvited  GKTurnBasedParticipantStatus = 1
 	GKTurnBasedParticipantStatusDeclined GKTurnBasedParticipantStatus = 2
 	GKTurnBasedParticipantStatusMatching GKTurnBasedParticipantStatus = 3
-	GKTurnBasedParticipantStatusActive GKTurnBasedParticipantStatus = 4
-	GKTurnBasedParticipantStatusDone GKTurnBasedParticipantStatus = 5
+	GKTurnBasedParticipantStatusActive   GKTurnBasedParticipantStatus = 4
+	GKTurnBasedParticipantStatusDone     GKTurnBasedParticipantStatus = 5
 )
 
 func (e GKTurnBasedParticipantStatus) String() string {
@@ -612,11 +612,11 @@ func (e GKTurnBasedParticipantStatus) String() string {
 type GKVoiceChatPlayerState int64
 
 const (
-	GKVoiceChatPlayerConnected GKVoiceChatPlayerState = 0
+	GKVoiceChatPlayerConnected    GKVoiceChatPlayerState = 0
 	GKVoiceChatPlayerDisconnected GKVoiceChatPlayerState = 1
-	GKVoiceChatPlayerSpeaking GKVoiceChatPlayerState = 2
-	GKVoiceChatPlayerSilent GKVoiceChatPlayerState = 3
-	GKVoiceChatPlayerConnecting GKVoiceChatPlayerState = 4
+	GKVoiceChatPlayerSpeaking     GKVoiceChatPlayerState = 2
+	GKVoiceChatPlayerSilent       GKVoiceChatPlayerState = 3
+	GKVoiceChatPlayerConnecting   GKVoiceChatPlayerState = 4
 )
 
 func (e GKVoiceChatPlayerState) String() string {
@@ -635,4 +635,3 @@ func (e GKVoiceChatPlayerState) String() string {
 		return fmt.Sprintf("GKVoiceChatPlayerState(%d)", int64(e))
 	}
 }
-

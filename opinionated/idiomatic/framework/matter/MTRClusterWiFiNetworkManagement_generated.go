@@ -19,7 +19,9 @@ type MTRClusterWiFiNetworkManagement struct {
 }
 
 // Unwrap returns the underlying [raw.MTRClusterWiFiNetworkManagement].
-func (x *MTRClusterWiFiNetworkManagement) Unwrap() *raw.MTRClusterWiFiNetworkManagement { return x.inner }
+func (x *MTRClusterWiFiNetworkManagement) Unwrap() *raw.MTRClusterWiFiNetworkManagement {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -127,9 +129,13 @@ func (x *MTRClusterWiFiNetworkManagement) ReadAttributeClusterRevisionWithParams
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterWiFiNetworkManagement) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterWiFiNetworkManagement) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterWiFiNetworkManagement) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterWiFiNetworkManagement) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterWiFiNetworkManagementable is the interface implemented by [MTRClusterWiFiNetworkManagement], for mocking and DI.
 type MTRClusterWiFiNetworkManagementable interface {
@@ -146,4 +152,3 @@ type MTRClusterWiFiNetworkManagementable interface {
 }
 
 var _ MTRClusterWiFiNetworkManagementable = (*MTRClusterWiFiNetworkManagement)(nil)
-

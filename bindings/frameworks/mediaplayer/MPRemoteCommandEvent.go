@@ -16,8 +16,8 @@ type MPRemoteCommandEvent struct {
 }
 
 var (
-	_clsMPRemoteCommandEvent = _objcClass("MPRemoteCommandEvent")
-	_mPRemoteCommandEventSelCommand = objc.RegisterName("command")
+	_clsMPRemoteCommandEvent          = _objcClass("MPRemoteCommandEvent")
+	_mPRemoteCommandEventSelCommand   = objc.RegisterName("command")
 	_mPRemoteCommandEventSelTimestamp = objc.RegisterName("timestamp")
 )
 
@@ -34,7 +34,9 @@ func MPRemoteCommandEventFromID(id objc.ID) *MPRemoteCommandEvent {
 // The command that sent the event.
 func (o *MPRemoteCommandEvent) Command() *MPRemoteCommand {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPRemoteCommandEventSelCommand)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPRemoteCommandFromID(_ret)
 }
 
@@ -43,4 +45,3 @@ func (o *MPRemoteCommandEvent) Timestamp() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _mPRemoteCommandEventSelTimestamp)
 	return _ret
 }
-

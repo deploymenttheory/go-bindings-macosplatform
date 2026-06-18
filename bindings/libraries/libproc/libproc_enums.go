@@ -13,14 +13,14 @@ import (
 type Clockid_t int64
 
 const (
-	_CLOCK_REALTIME Clockid_t = 0
-	_CLOCK_MONOTONIC Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW Clockid_t = 4
+	_CLOCK_REALTIME             Clockid_t = 0
+	_CLOCK_MONOTONIC            Clockid_t = 6
+	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
 	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID Clockid_t = 16
+	_CLOCK_UPTIME_RAW           Clockid_t = 8
+	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
+	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
+	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
 )
 
 func (i Clockid_t) String() string {
@@ -87,12 +87,12 @@ func (i Clockid_t) isMultiValue() bool {
 type Cryptex_auth_type_t int64
 
 const (
-	CRYPTEX1_AUTH_ENV_GENERIC Cryptex_auth_type_t = 4
+	CRYPTEX1_AUTH_ENV_GENERIC              Cryptex_auth_type_t = 4
 	CRYPTEX1_AUTH_ENV_GENERIC_SUPPLEMENTAL Cryptex_auth_type_t = 5
-	CRYPTEX_AUTH_PDI_NONCE Cryptex_auth_type_t = 6
-	CRYPTEX_AUTH_MOBILE_ASSET Cryptex_auth_type_t = 8
-	CRYPTEX_AUTH_MOBILE_ASSET_WITH_CODE Cryptex_auth_type_t = 9
-	CRYPTEX_AUTH_MAX Cryptex_auth_type_t = 9
+	CRYPTEX_AUTH_PDI_NONCE                 Cryptex_auth_type_t = 6
+	CRYPTEX_AUTH_MOBILE_ASSET              Cryptex_auth_type_t = 8
+	CRYPTEX_AUTH_MOBILE_ASSET_WITH_CODE    Cryptex_auth_type_t = 9
+	CRYPTEX_AUTH_MAX                       Cryptex_auth_type_t = 9
 )
 
 func (i Cryptex_auth_type_t) String() string {
@@ -149,15 +149,15 @@ func (i Cryptex_auth_type_t) isMultiValue() bool {
 type Graftdmg_type_t int64
 
 const (
-	GRAFTDMG_CRYPTEX_BOOT Graftdmg_type_t = 1
-	GRAFTDMG_CRYPTEX_PREBOOT Graftdmg_type_t = 2
-	GRAFTDMG_CRYPTEX_DOWNLEVEL Graftdmg_type_t = 3
-	GRAFTDMG_CRYPTEX_AUTH_ENV_GENERIC Graftdmg_type_t = 4
-	GRAFTDMG_CRYPTEX_PDI_NONCE Graftdmg_type_t = 6
-	GRAFTDMG_CRYPTEX_EFFECTIVE_AP Graftdmg_type_t = 7
-	GRAFTDMG_CRYPTEX_MOBILE_ASSET Graftdmg_type_t = 8
+	GRAFTDMG_CRYPTEX_BOOT                   Graftdmg_type_t = 1
+	GRAFTDMG_CRYPTEX_PREBOOT                Graftdmg_type_t = 2
+	GRAFTDMG_CRYPTEX_DOWNLEVEL              Graftdmg_type_t = 3
+	GRAFTDMG_CRYPTEX_AUTH_ENV_GENERIC       Graftdmg_type_t = 4
+	GRAFTDMG_CRYPTEX_PDI_NONCE              Graftdmg_type_t = 6
+	GRAFTDMG_CRYPTEX_EFFECTIVE_AP           Graftdmg_type_t = 7
+	GRAFTDMG_CRYPTEX_MOBILE_ASSET           Graftdmg_type_t = 8
 	GRAFTDMG_CRYPTEX_MOBILE_ASSET_WITH_CODE Graftdmg_type_t = 9
-	GRAFTDMG_CRYPTEX_MAX Graftdmg_type_t = 9
+	GRAFTDMG_CRYPTEX_MAX                    Graftdmg_type_t = 9
 )
 
 func (i Graftdmg_type_t) String() string {
@@ -227,13 +227,13 @@ func (i Graftdmg_type_t) isMultiValue() bool {
 type Mpo_flags_t int64
 
 const (
-	MPO_PORT Mpo_flags_t = 0
-	MPO_SERVICE_PORT Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT Mpo_flags_t = 2048
-	MPO_REPLY_PORT Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT Mpo_flags_t = 32768
+	MPO_PORT                            Mpo_flags_t = 0
+	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
+	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
+	MPO_REPLY_PORT                      Mpo_flags_t = 4096
+	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
+	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
+	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
 	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
 )
 
@@ -304,4 +304,3 @@ func SerializeMpo_flags_t(values []Mpo_flags_t) []string {
 func (i Mpo_flags_t) isMultiValue() bool {
 	return true
 }
-

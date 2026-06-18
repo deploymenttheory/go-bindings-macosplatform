@@ -12,7 +12,7 @@ import (
 )
 
 var (
-	_fnMPSDataTypeBitsCount func(MPSDataType) uint
+	_fnMPSDataTypeBitsCount         func(MPSDataType) uint
 	_fnMPSFindIntegerDivisionParams func(uint16) MPSIntegerDivisionParams
 	// @abstract  The index of the first destination texture argument
 	_fnMPSGetCustomKernelBatchedDestinationIndex func(MPSCustomKernelArgumentCount) uint
@@ -22,7 +22,7 @@ var (
 	_fnMPSGetCustomKernelBroadcastSourceIndex func(MPSCustomKernelArgumentCount, uint, uint) uint
 	// @abstract  maximum allowed batch size
 	_fnMPSGetCustomKernelMaxBatchSize func(MPSCustomKernelArgumentCount, uint) uint
-	_fnMPSGetImageType func(objc.ID) objc.ID
+	_fnMPSGetImageType                func(objc.ID) objc.ID
 	// @abstract raise or lower the readcount of a batch by a set amount @discussion     In some circumstances, a MPSImage may appear in a MPSImageBatch multiple times. This is particularly common when the MPSImage serves as an accumulator across the entire batch, such as when accumulating gradients for convolution weight update or batch statistics for batch normalization.  A naive function would then end up incrementing the state multiple times, probably leading to an error. MPSImageBatchIncrementReadCount() will efficiently increment the readCounts of each object in the batch only once, avoiding this problem. Non-temporary images and images with readCount already 0 will be ignored. CAUTION: At many places in MPS, the framework assumes all images in the batch have the same characteristics, such as MPSImageFeatureChannelFormat. At times, for example, it is necessary to patch in a special version of the kernel to handle BFloat16 or another characteristic. When this happens, the kernel generally can't respond correctly when some images in a batch have that characteristic and some do not, because the special case handling code is hard compiled in.  For this reason, all images in a batch should be constructed from the same list of descriptor parameters. @param  batch   The MPSImageBatch to increment @param  amount  The value to add to the read count for each unique image in the batch @return         The number of different images in the batch
 	_fnMPSImageBatchIncrementReadCount func(unsafe.Pointer, int) uint
 	// @abstract   Iterate over unique images in the batch @discussion This function looks only at image address to determine uniqueness. The same texture stored in different MPSImages would be considered not unique. @param      batch           The image batch @param      iteratorBlock   Callback block to execute once for each unique image. Return a value greater than NSIntegerMin to terminate early. The index gives the first position in the batch where the image appears. Behavior is undefined if MPSImageBatchIterate is called recursively on the same images. @return     The value returned by the iterator block for the last image on which it ran
@@ -31,14 +31,14 @@ var (
 	_fnMPSImageBatchResourceSize func(unsafe.Pointer) uint
 	// @abstract Call [MTLBlitEncoder synchronizeResource:] on unique resources
 	_fnMPSImageBatchSynchronize func(unsafe.Pointer, metal.MTLCommandBuffer)
-	_fnMPSSizeofMPSDataType func(MPSDataType) uint
+	_fnMPSSizeofMPSDataType     func(MPSDataType) uint
 	// @abstract raise or lower the readcount of a batch by a set amount @discussion     In some circumstances, a MPSState may appear in a MPSStateBatch multiple times. This is particularly common when the MPSState serves as an accumulator across the entire batch, such as when accumulating gradients for convolution weight update or batch statistics for batch normalization.  A naive function would then end up incrementing the state multiple times, probably leading to an error. MPSStateBatchIncrementReadCount() will efficiently increment the readCounts of each object in the batch only once, avoiding this problem. @param  batch   The MPSStateBatch to increment @param  amount  The value to add to the read count for each unique state in the batch @return  The number of different objects in the batch
 	_fnMPSStateBatchIncrementReadCount func(unsafe.Pointer, int) uint
 	// @abstract Call [MTLBlitEncoder resourceSize] on unique resources
 	_fnMPSStateBatchResourceSize func(unsafe.Pointer) uint
 	// @abstract Call [MTLBlitEncoder synchronizeResource:] on unique resources
 	_fnMPSStateBatchSynchronize func(unsafe.Pointer, metal.MTLCommandBuffer)
-	___builtin_clz func(uint) int
+	___builtin_clz              func(uint) int
 )
 
 func MPSDataTypeBitsCount(t MPSDataType) uint {
@@ -126,4 +126,3 @@ func MPSStateBatchSynchronize(batch unsafe.Pointer, cmdBuf metal.MTLCommandBuffe
 func BuiltinClz(arg uint) int {
 	return ___builtin_clz(arg)
 }
-

@@ -86,4 +86,3 @@ type Techniqueable interface {
 }
 
 var _ Techniqueable = (*Technique)(nil)
-

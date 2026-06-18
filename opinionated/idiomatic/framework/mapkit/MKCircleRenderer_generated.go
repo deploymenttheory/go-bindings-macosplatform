@@ -101,7 +101,9 @@ func (x *CircleRenderer) WithLineDashPattern(items ...*foundation.NSNumber) *Cir
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -151,9 +153,13 @@ func (x *CircleRenderer) SetStrokeEnd(strokeEnd float64) {
 	x.inner.SetStrokeEnd(strokeEnd)
 }
 
-func (x *CircleRenderer) asOverlayPathRenderer() *raw.MKOverlayPathRenderer { return &x.inner.MKOverlayPathRenderer }
+func (x *CircleRenderer) asOverlayPathRenderer() *raw.MKOverlayPathRenderer {
+	return &x.inner.MKOverlayPathRenderer
+}
 
-func (x *CircleRenderer) asOverlayRenderer() *raw.MKOverlayRenderer { return &x.inner.MKOverlayPathRenderer.MKOverlayRenderer }
+func (x *CircleRenderer) asOverlayRenderer() *raw.MKOverlayRenderer {
+	return &x.inner.MKOverlayPathRenderer.MKOverlayRenderer
+}
 
 // CircleRendererable is the interface implemented by [CircleRenderer], for mocking and DI.
 type CircleRendererable interface {
@@ -178,4 +184,3 @@ type CircleRendererable interface {
 }
 
 var _ CircleRendererable = (*CircleRenderer)(nil)
-

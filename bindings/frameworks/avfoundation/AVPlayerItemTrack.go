@@ -16,13 +16,13 @@ type AVPlayerItemTrack struct {
 }
 
 var (
-	_clsAVPlayerItemTrack = _objcClass("AVPlayerItemTrack")
-	_aVPlayerItemTrackSelAssetTrack = objc.RegisterName("assetTrack")
-	_aVPlayerItemTrackSelIsEnabled = objc.RegisterName("isEnabled")
-	_aVPlayerItemTrackSelSetEnabled = objc.RegisterName("setEnabled:")
+	_clsAVPlayerItemTrack                      = _objcClass("AVPlayerItemTrack")
+	_aVPlayerItemTrackSelAssetTrack            = objc.RegisterName("assetTrack")
+	_aVPlayerItemTrackSelIsEnabled             = objc.RegisterName("isEnabled")
+	_aVPlayerItemTrackSelSetEnabled            = objc.RegisterName("setEnabled:")
 	_aVPlayerItemTrackSelCurrentVideoFrameRate = objc.RegisterName("currentVideoFrameRate")
-	_aVPlayerItemTrackSelVideoFieldMode = objc.RegisterName("videoFieldMode")
-	_aVPlayerItemTrackSelSetVideoFieldMode = objc.RegisterName("setVideoFieldMode:")
+	_aVPlayerItemTrackSelVideoFieldMode        = objc.RegisterName("videoFieldMode")
+	_aVPlayerItemTrackSelSetVideoFieldMode     = objc.RegisterName("setVideoFieldMode:")
 )
 
 func AVPlayerItemTrackFromID(id objc.ID) *AVPlayerItemTrack {
@@ -38,7 +38,9 @@ func AVPlayerItemTrackFromID(id objc.ID) *AVPlayerItemTrack {
 // @property		assetTrack @abstract		Indicates the AVAssetTrack for which the AVPlayerItemTrack represents presentation state. @discussion	This property is not observable. Clients must serialize their access to the resulting AVAssetTrack and related objects on the associated AVPlayer's notification queue.  By default, this queue is the main queue.
 func (o *AVPlayerItemTrack) AssetTrack() *AVAssetTrack {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemTrackSelAssetTrack)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetTrackFromID(_ret)
 }
 
@@ -61,7 +63,9 @@ func (o *AVPlayerItemTrack) CurrentVideoFrameRate() float32 {
 // @property		videoFieldMode @abstract		If the media type of the assetTrack is AVMediaTypeVideo, specifies the handling of video frames that contain multiple fields. @discussion	A value of nil indicates default processing of video frames. If you want video fields to be deinterlaced, set videoFieldMode to AVPlayerItemTrackVideoFieldModeDeinterlaceFields. You can test whether video being played has multiple fields by examining the underlying AVAssetTrack's format descriptions. See -[AVAssetTrack formatDescriptions] and, for video format descriptions, kCMFormatDescriptionExtension_FieldCount. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
 func (o *AVPlayerItemTrack) VideoFieldMode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemTrackSelVideoFieldMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -69,4 +73,3 @@ func (o *AVPlayerItemTrack) VideoFieldMode() *foundation.NSString {
 func (o *AVPlayerItemTrack) SetVideoFieldMode(videoFieldMode *foundation.NSString) {
 	o.Ptr().Send(_aVPlayerItemTrackSelSetVideoFieldMode, videoFieldMode.Ptr())
 }
-

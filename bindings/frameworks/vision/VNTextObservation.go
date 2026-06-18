@@ -16,7 +16,7 @@ type VNTextObservation struct {
 }
 
 var (
-	_clsVNTextObservation = _objcClass("VNTextObservation")
+	_clsVNTextObservation               = _objcClass("VNTextObservation")
 	_vNTextObservationSelCharacterBoxes = objc.RegisterName("characterBoxes")
 )
 
@@ -32,7 +32,8 @@ func VNTextObservationFromID(id objc.ID) *VNTextObservation {
 
 func (o *VNTextObservation) CharacterBoxes() *foundation.NSArray[*VNRectangleObservation] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTextObservationSelCharacterBoxes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VNRectangleObservation](_ret)
 }
-

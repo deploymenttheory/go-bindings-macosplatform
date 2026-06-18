@@ -151,4 +151,3 @@ type MatrixNeuronGradientable interface {
 }
 
 var _ MatrixNeuronGradientable = (*MatrixNeuronGradient)(nil)
-

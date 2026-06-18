@@ -336,9 +336,13 @@ func (x *FetchDatabaseChangesOperation) SetFetchDatabaseChangesCompletionBlock(f
 	x.inner.SetFetchDatabaseChangesCompletionBlock(fetchDatabaseChangesCompletionBlock)
 }
 
-func (x *FetchDatabaseChangesOperation) asDatabaseOperation() *raw.CKDatabaseOperation { return &x.inner.CKDatabaseOperation }
+func (x *FetchDatabaseChangesOperation) asDatabaseOperation() *raw.CKDatabaseOperation {
+	return &x.inner.CKDatabaseOperation
+}
 
-func (x *FetchDatabaseChangesOperation) asOperation() *raw.CKOperation { return &x.inner.CKDatabaseOperation.CKOperation }
+func (x *FetchDatabaseChangesOperation) asOperation() *raw.CKOperation {
+	return &x.inner.CKDatabaseOperation.CKOperation
+}
 
 // FetchDatabaseChangesOperationable is the interface implemented by [FetchDatabaseChangesOperation], for mocking and DI.
 type FetchDatabaseChangesOperationable interface {
@@ -382,4 +386,3 @@ type FetchDatabaseChangesOperationable interface {
 }
 
 var _ FetchDatabaseChangesOperationable = (*FetchDatabaseChangesOperation)(nil)
-

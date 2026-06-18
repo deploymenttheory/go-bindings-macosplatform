@@ -100,4 +100,3 @@ type GraphFFTDescriptorable interface {
 }
 
 var _ GraphFFTDescriptorable = (*GraphFFTDescriptor)(nil)
-

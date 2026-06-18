@@ -75,13 +75,17 @@ func WKWebExtensionContextGrantedPermissionsWereRemovedNotification() uintptr {
 
 func WKWebExtensionContextNotificationUserInfoKeyMatchPatterns() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionContextNotificationUserInfoKeyMatchPatterns")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WKWebExtensionContextNotificationUserInfoKeyPermissions() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionContextNotificationUserInfoKeyPermissions")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -112,19 +116,25 @@ func WKWebExtensionDataRecordErrorDomain() uintptr {
 
 func WKWebExtensionDataTypeLocal() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionDataTypeLocal")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WKWebExtensionDataTypeSession() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionDataTypeSession")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WKWebExtensionDataTypeSynchronized() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionDataTypeSynchronized")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -145,97 +155,129 @@ func WKWebExtensionMessagePortErrorDomain() uintptr {
 
 func WKWebExtensionPermissionActiveTab() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionPermissionActiveTab")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WKWebExtensionPermissionAlarms() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionPermissionAlarms")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WKWebExtensionPermissionClipboardWrite() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionPermissionClipboardWrite")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WKWebExtensionPermissionContextMenus() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionPermissionContextMenus")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WKWebExtensionPermissionCookies() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionPermissionCookies")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WKWebExtensionPermissionDeclarativeNetRequest() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionPermissionDeclarativeNetRequest")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WKWebExtensionPermissionDeclarativeNetRequestFeedback() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionPermissionDeclarativeNetRequestFeedback")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WKWebExtensionPermissionDeclarativeNetRequestWithHostAccess() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionPermissionDeclarativeNetRequestWithHostAccess")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WKWebExtensionPermissionMenus() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionPermissionMenus")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WKWebExtensionPermissionNativeMessaging() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionPermissionNativeMessaging")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WKWebExtensionPermissionScripting() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionPermissionScripting")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WKWebExtensionPermissionStorage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionPermissionStorage")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WKWebExtensionPermissionTabs() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionPermissionTabs")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WKWebExtensionPermissionUnlimitedStorage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionPermissionUnlimitedStorage")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WKWebExtensionPermissionWebNavigation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionPermissionWebNavigation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WKWebExtensionPermissionWebRequest() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionPermissionWebRequest")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -332,152 +374,202 @@ func WKWebsiteDataTypeWebSQLDatabases() uintptr {
 
 func WebActionButtonKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebActionButtonKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WebActionElementKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebActionElementKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WebActionModifierFlagsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebActionModifierFlagsKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WebActionNavigationTypeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebActionNavigationTypeKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WebActionOriginalURLKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebActionOriginalURLKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @const WebArchivePboardType @abstract The pasteboard type constant used when adding or accessing a WebArchive on the pasteboard.
 func WebArchivePboardType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebArchivePboardType")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WebElementDOMNodeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebElementDOMNodeKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WebElementFrameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebElementFrameKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WebElementImageAltStringKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebElementImageAltStringKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WebElementImageKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebElementImageKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WebElementImageRectKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebElementImageRectKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WebElementImageURLKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebElementImageURLKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WebElementIsSelectedKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebElementIsSelectedKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WebElementLinkLabelKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebElementLinkLabelKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WebElementLinkTargetFrameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebElementLinkTargetFrameKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WebElementLinkTitleKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebElementLinkTitleKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WebElementLinkURLKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebElementLinkURLKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WebHistoryAllItemsRemovedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebHistoryAllItemsRemovedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WebHistoryItemChangedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebHistoryItemChangedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WebHistoryItemsAddedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebHistoryItemsAddedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WebHistoryItemsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebHistoryItemsKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WebHistoryItemsRemovedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebHistoryItemsRemovedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WebHistoryLoadedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebHistoryLoadedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WebHistorySavedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebHistorySavedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WebKitErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebKitErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -499,41 +591,53 @@ func WebKitErrorPlugInPageURLStringKey() uintptr {
 // @constant WebPlugInAttributesKey REQUIRED. The dictionary containing the names and values of all attributes of the HTML element associated with the plug-in AND the names and values of all parameters to be passed to the plug-in (e.g. PARAM elements within an APPLET element). In the case of a conflict between names, the attributes of an element take precedence over any PARAMs.  All of the keys and values in this NSDictionary must be NSStrings.
 func WebPlugInAttributesKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebPlugInAttributesKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant WebPlugInBaseURLKey REQUIRED. The base URL of the document containing the plug-in's view.
 func WebPlugInBaseURLKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebPlugInBaseURLKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant WebPlugInContainer OPTIONAL. An object that conforms to the WebPlugInContainer informal protocol. This object is used for callbacks from the plug-in to the app. if this argument is nil, no callbacks will occur.
 func WebPlugInContainerKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebPlugInContainerKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant WebPlugInContainingElementKey The DOMElement that was used to specify the plug-in.  May be nil.
 func WebPlugInContainingElementKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebPlugInContainingElementKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant WebPlugInShouldLoadMainResourceKey REQUIRED. NSNumber (BOOL) indicating whether the plug-in should load its own main resource (the "src" URL, in most cases). If YES, the plug-in should load its own main resource. If NO, the plug-in should use the data provided by WebKit. See -webPlugInMainResourceReceivedData: in WebPluginPrivate.h. For compatibility with older versions of WebKit, the plug-in should assume that the value for WebPlugInShouldLoadMainResourceKey is NO if it is absent from the arguments dictionary.
 func WebPlugInShouldLoadMainResourceKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebPlugInShouldLoadMainResourceKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WebPreferencesChangedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebPreferencesChangedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -564,19 +668,24 @@ func WebViewDidEndEditingNotification() uintptr {
 
 func WebViewProgressEstimateChangedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebViewProgressEstimateChangedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WebViewProgressFinishedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebViewProgressFinishedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func WebViewProgressStartedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebViewProgressStartedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
-

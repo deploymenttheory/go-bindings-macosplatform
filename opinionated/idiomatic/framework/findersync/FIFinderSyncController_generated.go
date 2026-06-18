@@ -145,4 +145,3 @@ type FinderSyncControllerable interface {
 }
 
 var _ FinderSyncControllerable = (*FinderSyncController)(nil)
-

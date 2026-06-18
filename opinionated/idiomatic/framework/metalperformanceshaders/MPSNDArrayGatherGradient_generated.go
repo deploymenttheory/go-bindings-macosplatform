@@ -56,13 +56,21 @@ func (x *NDArrayGatherGradient) WithLabel(label string) *NDArrayGatherGradient {
 	return x
 }
 
-func (x *NDArrayGatherGradient) asNDArrayBinaryPrimaryGradientKernel() *mpsndarray.MPSNDArrayBinaryPrimaryGradientKernel { return &x.inner.MPSNDArrayBinaryPrimaryGradientKernel }
+func (x *NDArrayGatherGradient) asNDArrayBinaryPrimaryGradientKernel() *mpsndarray.MPSNDArrayBinaryPrimaryGradientKernel {
+	return &x.inner.MPSNDArrayBinaryPrimaryGradientKernel
+}
 
-func (x *NDArrayGatherGradient) asNDArrayMultiaryGradientKernel() *mpsndarray.MPSNDArrayMultiaryGradientKernel { return &x.inner.MPSNDArrayBinaryPrimaryGradientKernel.MPSNDArrayMultiaryGradientKernel }
+func (x *NDArrayGatherGradient) asNDArrayMultiaryGradientKernel() *mpsndarray.MPSNDArrayMultiaryGradientKernel {
+	return &x.inner.MPSNDArrayBinaryPrimaryGradientKernel.MPSNDArrayMultiaryGradientKernel
+}
 
-func (x *NDArrayGatherGradient) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayBinaryPrimaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase }
+func (x *NDArrayGatherGradient) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase {
+	return &x.inner.MPSNDArrayBinaryPrimaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase
+}
 
-func (x *NDArrayGatherGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNDArrayBinaryPrimaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.MPSKernel }
+func (x *NDArrayGatherGradient) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSNDArrayBinaryPrimaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.MPSKernel
+}
 
 // NDArrayGatherGradientable is the interface implemented by [NDArrayGatherGradient], for mocking and DI.
 type NDArrayGatherGradientable interface {
@@ -73,4 +81,3 @@ type NDArrayGatherGradientable interface {
 }
 
 var _ NDArrayGatherGradientable = (*NDArrayGatherGradient)(nil)
-

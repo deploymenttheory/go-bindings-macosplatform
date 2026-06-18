@@ -18,7 +18,7 @@ type MTROnboardingPayloadParser struct {
 }
 
 var (
-	_clsMTROnboardingPayloadParser = _objcClass("MTROnboardingPayloadParser")
+	_clsMTROnboardingPayloadParser                                      = _objcClass("MTROnboardingPayloadParser")
 	_mTROnboardingPayloadParserSelSetupPayloadForOnboardingPayloadError = objc.RegisterName("setupPayloadForOnboardingPayload:error:")
 )
 
@@ -35,10 +35,11 @@ func MTROnboardingPayloadParserFromID(id objc.ID) *MTROnboardingPayloadParser {
 func MTROnboardingPayloadParserSetupPayloadForOnboardingPayloadError(onboardingPayload *foundation.NSString) (*MTRSetupPayload, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTROnboardingPayloadParser), _mTROnboardingPayloadParserSelSetupPayloadForOnboardingPayloadError, onboardingPayload.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return MTRSetupPayloadFromID(_ret), nil
 }
-

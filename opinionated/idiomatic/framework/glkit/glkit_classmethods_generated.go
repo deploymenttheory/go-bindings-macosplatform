@@ -112,4 +112,3 @@ func CubeMapWithContentsOfURLOptionsError(url string, options *foundation.NSDict
 	}
 	return &TextureInfo{inner: _r}, nil
 }
-

@@ -26,4 +26,3 @@ func MPSImageGaussianPyramidFromID(id objc.ID) *MPSImageGaussianPyramid {
 	purego.Track(o)
 	return o
 }
-

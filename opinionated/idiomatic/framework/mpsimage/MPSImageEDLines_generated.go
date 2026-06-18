@@ -197,4 +197,3 @@ type ImageEDLinesable interface {
 }
 
 var _ ImageEDLinesable = (*ImageEDLines)(nil)
-

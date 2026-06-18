@@ -47,4 +47,3 @@ type GlyphGeneratorable interface {
 }
 
 var _ GlyphGeneratorable = (*GlyphGenerator)(nil)
-

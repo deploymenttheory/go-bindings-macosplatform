@@ -15,8 +15,8 @@ type NSStatusBarButton struct {
 }
 
 var (
-	_clsNSStatusBarButton = _objcClass("NSStatusBarButton")
-	_nSStatusBarButtonSelAppearsDisabled = objc.RegisterName("appearsDisabled")
+	_clsNSStatusBarButton                   = _objcClass("NSStatusBarButton")
+	_nSStatusBarButtonSelAppearsDisabled    = objc.RegisterName("appearsDisabled")
 	_nSStatusBarButtonSelSetAppearsDisabled = objc.RegisterName("setAppearsDisabled:")
 )
 
@@ -40,4 +40,3 @@ func (o *NSStatusBarButton) AppearsDisabled() bool {
 func (o *NSStatusBarButton) SetAppearsDisabled(appearsDisabled bool) {
 	o.Ptr().Send(_nSStatusBarButtonSelSetAppearsDisabled, appearsDisabled)
 }
-

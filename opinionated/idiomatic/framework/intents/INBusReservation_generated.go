@@ -65,4 +65,3 @@ type BusReservationable interface {
 }
 
 var _ BusReservationable = (*BusReservation)(nil)
-

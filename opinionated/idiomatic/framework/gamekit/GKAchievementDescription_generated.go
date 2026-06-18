@@ -173,4 +173,3 @@ type AchievementDescriptionable interface {
 }
 
 var _ AchievementDescriptionable = (*AchievementDescription)(nil)
-

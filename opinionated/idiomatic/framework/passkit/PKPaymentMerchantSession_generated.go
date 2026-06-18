@@ -43,4 +43,3 @@ type PaymentMerchantSessionable interface {
 }
 
 var _ PaymentMerchantSessionable = (*PaymentMerchantSession)(nil)
-

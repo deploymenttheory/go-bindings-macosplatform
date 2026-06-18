@@ -74,4 +74,3 @@ type UniversalLinkable interface {
 }
 
 var _ UniversalLinkable = (*UniversalLink)(nil)
-

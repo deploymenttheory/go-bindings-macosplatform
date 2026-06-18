@@ -65,4 +65,3 @@ type MTRCommissioningOperationable interface {
 }
 
 var _ MTRCommissioningOperationable = (*MTRCommissioningOperation)(nil)
-

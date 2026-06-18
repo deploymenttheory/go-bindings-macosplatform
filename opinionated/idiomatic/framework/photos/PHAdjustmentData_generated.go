@@ -70,4 +70,3 @@ type AdjustmentDataable interface {
 }
 
 var _ AdjustmentDataable = (*AdjustmentData)(nil)
-

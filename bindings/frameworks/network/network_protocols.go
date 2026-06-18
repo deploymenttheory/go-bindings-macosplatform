@@ -130,4 +130,3 @@ type OS_nw_ws_request interface {
 // OS_nw_ws_response wraps the ObjC protocol OS_nw_ws_response.
 type OS_nw_ws_response interface {
 }
-

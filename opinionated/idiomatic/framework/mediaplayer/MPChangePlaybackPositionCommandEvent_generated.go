@@ -15,7 +15,9 @@ type ChangePlaybackPositionCommandEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MPChangePlaybackPositionCommandEvent].
-func (x *ChangePlaybackPositionCommandEvent) Unwrap() *raw.MPChangePlaybackPositionCommandEvent { return x.inner }
+func (x *ChangePlaybackPositionCommandEvent) Unwrap() *raw.MPChangePlaybackPositionCommandEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -40,7 +42,9 @@ func (x *ChangePlaybackPositionCommandEvent) PositionTime() float64 {
 	return x.inner.PositionTime()
 }
 
-func (x *ChangePlaybackPositionCommandEvent) asRemoteCommandEvent() *raw.MPRemoteCommandEvent { return &x.inner.MPRemoteCommandEvent }
+func (x *ChangePlaybackPositionCommandEvent) asRemoteCommandEvent() *raw.MPRemoteCommandEvent {
+	return &x.inner.MPRemoteCommandEvent
+}
 
 // ChangePlaybackPositionCommandEventable is the interface implemented by [ChangePlaybackPositionCommandEvent], for mocking and DI.
 type ChangePlaybackPositionCommandEventable interface {
@@ -49,4 +53,3 @@ type ChangePlaybackPositionCommandEventable interface {
 }
 
 var _ ChangePlaybackPositionCommandEventable = (*ChangePlaybackPositionCommandEvent)(nil)
-

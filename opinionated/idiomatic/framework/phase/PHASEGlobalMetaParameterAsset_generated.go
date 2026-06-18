@@ -43,4 +43,3 @@ type GlobalMetaParameterAssetable interface {
 }
 
 var _ GlobalMetaParameterAssetable = (*GlobalMetaParameterAsset)(nil)
-

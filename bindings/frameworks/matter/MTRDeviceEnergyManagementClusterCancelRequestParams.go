@@ -16,10 +16,10 @@ type MTRDeviceEnergyManagementClusterCancelRequestParams struct {
 }
 
 var (
-	_clsMTRDeviceEnergyManagementClusterCancelRequestParams = _objcClass("MTRDeviceEnergyManagementClusterCancelRequestParams")
-	_mTRDeviceEnergyManagementClusterCancelRequestParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRDeviceEnergyManagementClusterCancelRequestParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRDeviceEnergyManagementClusterCancelRequestParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRDeviceEnergyManagementClusterCancelRequestParams                               = _objcClass("MTRDeviceEnergyManagementClusterCancelRequestParams")
+	_mTRDeviceEnergyManagementClusterCancelRequestParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRDeviceEnergyManagementClusterCancelRequestParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRDeviceEnergyManagementClusterCancelRequestParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRDeviceEnergyManagementClusterCancelRequestParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -36,7 +36,9 @@ func MTRDeviceEnergyManagementClusterCancelRequestParamsFromID(id objc.ID) *MTRD
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRDeviceEnergyManagementClusterCancelRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterCancelRequestParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -47,11 +49,12 @@ func (o *MTRDeviceEnergyManagementClusterCancelRequestParams) SetTimedInvokeTime
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRDeviceEnergyManagementClusterCancelRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterCancelRequestParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDeviceEnergyManagementClusterCancelRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDeviceEnergyManagementClusterCancelRequestParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

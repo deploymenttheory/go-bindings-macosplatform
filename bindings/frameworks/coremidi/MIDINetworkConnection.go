@@ -16,9 +16,9 @@ type MIDINetworkConnection struct {
 }
 
 var (
-	_clsMIDINetworkConnection = _objcClass("MIDINetworkConnection")
+	_clsMIDINetworkConnection                   = _objcClass("MIDINetworkConnection")
 	_mIDINetworkConnectionSelConnectionWithHost = objc.RegisterName("connectionWithHost:")
-	_mIDINetworkConnectionSelHost = objc.RegisterName("host")
+	_mIDINetworkConnectionSelHost               = objc.RegisterName("host")
 )
 
 func MIDINetworkConnectionFromID(id objc.ID) *MIDINetworkConnection {
@@ -33,13 +33,16 @@ func MIDINetworkConnectionFromID(id objc.ID) *MIDINetworkConnection {
 
 func MIDINetworkConnectionConnectionWithHost(host *MIDINetworkHost) *MIDINetworkConnection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMIDINetworkConnection), _mIDINetworkConnectionSelConnectionWithHost, host.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MIDINetworkConnectionFromID(_ret)
 }
 
 func (o *MIDINetworkConnection) Host() *MIDINetworkHost {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDINetworkConnectionSelHost)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MIDINetworkHostFromID(_ret)
 }
-

@@ -16,10 +16,10 @@ type FSPathURLResource struct {
 }
 
 var (
-	_clsFSPathURLResource = _objcClass("FSPathURLResource")
+	_clsFSPathURLResource                    = _objcClass("FSPathURLResource")
 	_fSPathURLResourceSelInitWithURLWritable = objc.RegisterName("initWithURL:writable:")
-	_fSPathURLResourceSelUrl = objc.RegisterName("url")
-	_fSPathURLResourceSelIsWritable = objc.RegisterName("isWritable")
+	_fSPathURLResourceSelUrl                 = objc.RegisterName("url")
+	_fSPathURLResourceSelIsWritable          = objc.RegisterName("isWritable")
 )
 
 func FSPathURLResourceFromID(id objc.ID) *FSPathURLResource {
@@ -35,14 +35,18 @@ func FSPathURLResourceFromID(id objc.ID) *FSPathURLResource {
 // Creates a path URL resource. - Parameters: - URL: A URL in the system file space that represents the contents of a file system. This parameter uses the `file:` scheme. - writable: A Boolean value that indicates whether the file system supports writing to the contents of the URL.
 func (o *FSPathURLResource) InitWithURLWritable(uRL *foundation.NSURL, writable bool) *FSPathURLResource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSPathURLResourceSelInitWithURLWritable, uRL.Ptr(), writable)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return FSPathURLResourceFromID(_ret)
 }
 
 // The URL represented by the resource.
 func (o *FSPathURLResource) Url() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSPathURLResourceSelUrl)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -50,4 +54,3 @@ func (o *FSPathURLResource) IsWritable() bool {
 	_ret := objc.Send[bool](o.Ptr(), _fSPathURLResourceSelIsWritable)
 	return _ret
 }
-

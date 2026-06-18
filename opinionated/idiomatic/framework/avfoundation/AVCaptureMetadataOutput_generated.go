@@ -46,7 +46,9 @@ func (x *CaptureMetadataOutput) WithMetadataObjectTypes(items ...*foundation.NSS
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -130,7 +132,9 @@ func (x *CaptureMetadataOutput) RequiredMetadataObjectTypesForCinematicVideoCapt
 	})
 }
 
-func (x *CaptureMetadataOutput) asCaptureOutput() *raw.AVCaptureOutput { return &x.inner.AVCaptureOutput }
+func (x *CaptureMetadataOutput) asCaptureOutput() *raw.AVCaptureOutput {
+	return &x.inner.AVCaptureOutput
+}
 
 // CaptureMetadataOutputable is the interface implemented by [CaptureMetadataOutput], for mocking and DI.
 type CaptureMetadataOutputable interface {
@@ -150,4 +154,3 @@ type CaptureMetadataOutputable interface {
 }
 
 var _ CaptureMetadataOutputable = (*CaptureMetadataOutput)(nil)
-

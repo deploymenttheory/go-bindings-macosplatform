@@ -118,4 +118,3 @@ type AddPaymentPassRequestable interface {
 }
 
 var _ AddPaymentPassRequestable = (*AddPaymentPassRequest)(nil)
-

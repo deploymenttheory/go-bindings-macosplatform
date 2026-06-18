@@ -475,9 +475,13 @@ func (x *MTRBaseClusterMediaInput) SubscribeAttributeClusterRevisionWithMinInter
 	}
 }
 
-func (x *MTRBaseClusterMediaInput) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterMediaInput) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterMediaInput) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterMediaInput) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterMediaInputable is the interface implemented by [MTRBaseClusterMediaInput], for mocking and DI.
 type MTRBaseClusterMediaInputable interface {
@@ -525,4 +529,3 @@ type MTRBaseClusterMediaInputable interface {
 }
 
 var _ MTRBaseClusterMediaInputable = (*MTRBaseClusterMediaInput)(nil)
-

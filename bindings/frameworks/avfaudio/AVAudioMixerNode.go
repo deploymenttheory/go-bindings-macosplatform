@@ -15,10 +15,10 @@ type AVAudioMixerNode struct {
 }
 
 var (
-	_clsAVAudioMixerNode = _objcClass("AVAudioMixerNode")
-	_aVAudioMixerNodeSelInit = objc.RegisterName("init")
-	_aVAudioMixerNodeSelOutputVolume = objc.RegisterName("outputVolume")
-	_aVAudioMixerNodeSelSetOutputVolume = objc.RegisterName("setOutputVolume:")
+	_clsAVAudioMixerNode                      = _objcClass("AVAudioMixerNode")
+	_aVAudioMixerNodeSelInit                  = objc.RegisterName("init")
+	_aVAudioMixerNodeSelOutputVolume          = objc.RegisterName("outputVolume")
+	_aVAudioMixerNodeSelSetOutputVolume       = objc.RegisterName("setOutputVolume:")
 	_aVAudioMixerNodeSelNextAvailableInputBus = objc.RegisterName("nextAvailableInputBus")
 )
 
@@ -34,7 +34,9 @@ func AVAudioMixerNodeFromID(id objc.ID) *AVAudioMixerNode {
 
 func (o *AVAudioMixerNode) Init() *AVAudioMixerNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioMixerNodeSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioMixerNodeFromID(_ret)
 }
 
@@ -53,4 +55,3 @@ func (o *AVAudioMixerNode) NextAvailableInputBus() uint {
 	_ret := objc.Send[uint](o.Ptr(), _aVAudioMixerNodeSelNextAvailableInputBus)
 	return _ret
 }
-

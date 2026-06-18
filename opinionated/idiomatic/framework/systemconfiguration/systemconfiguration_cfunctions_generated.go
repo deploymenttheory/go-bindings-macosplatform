@@ -839,4 +839,3 @@ func SCVLANInterfaceSetOptions(vlan unsafe.Pointer, newOptions unsafe.Pointer) u
 func SCVLANInterfaceSetPhysicalInterfaceAndTag(vlan unsafe.Pointer, physical unsafe.Pointer, tag unsafe.Pointer) uint8 {
 	return raw.SCVLANInterfaceSetPhysicalInterfaceAndTag(vlan, physical, tag)
 }
-

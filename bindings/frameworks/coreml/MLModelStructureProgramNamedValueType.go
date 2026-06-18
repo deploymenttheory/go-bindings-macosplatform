@@ -16,7 +16,7 @@ type MLModelStructureProgramNamedValueType struct {
 }
 
 var (
-	_clsMLModelStructureProgramNamedValueType = _objcClass("MLModelStructureProgramNamedValueType")
+	_clsMLModelStructureProgramNamedValueType     = _objcClass("MLModelStructureProgramNamedValueType")
 	_mLModelStructureProgramNamedValueTypeSelName = objc.RegisterName("name")
 	_mLModelStructureProgramNamedValueTypeSelType = objc.RegisterName("type")
 )
@@ -34,14 +34,17 @@ func MLModelStructureProgramNamedValueTypeFromID(id objc.ID) *MLModelStructurePr
 // The name of the parameter.
 func (o *MLModelStructureProgramNamedValueType) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelStructureProgramNamedValueTypeSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The type of the parameter.
 func (o *MLModelStructureProgramNamedValueType) Type() *MLModelStructureProgramValueType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelStructureProgramNamedValueTypeSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLModelStructureProgramValueTypeFromID(_ret)
 }
-

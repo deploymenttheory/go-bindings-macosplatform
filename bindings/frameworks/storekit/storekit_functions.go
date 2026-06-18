@@ -10,4 +10,3 @@ var (
 func SKTerminateForInvalidReceipt() {
 	_fnSKTerminateForInvalidReceipt()
 }
-

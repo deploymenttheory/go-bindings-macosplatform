@@ -49,9 +49,13 @@ func (x *CNNPoolingL2NormNode) WithLabel(label string) *CNNPoolingL2NormNode {
 	return x
 }
 
-func (x *CNNPoolingL2NormNode) asCNNPoolingNode() *mpsneuralnetwork.MPSCNNPoolingNode { return &x.inner.MPSCNNPoolingNode }
+func (x *CNNPoolingL2NormNode) asCNNPoolingNode() *mpsneuralnetwork.MPSCNNPoolingNode {
+	return &x.inner.MPSCNNPoolingNode
+}
 
-func (x *CNNPoolingL2NormNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSCNNPoolingNode.MPSNNFilterNode }
+func (x *CNNPoolingL2NormNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSCNNPoolingNode.MPSNNFilterNode
+}
 
 // CNNPoolingL2NormNodeable is the interface implemented by [CNNPoolingL2NormNode], for mocking and DI.
 type CNNPoolingL2NormNodeable interface {
@@ -61,4 +65,3 @@ type CNNPoolingL2NormNodeable interface {
 }
 
 var _ CNNPoolingL2NormNodeable = (*CNNPoolingL2NormNode)(nil)
-

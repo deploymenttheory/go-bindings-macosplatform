@@ -16,13 +16,13 @@ type CMAttitude struct {
 }
 
 var (
-	_clsCMAttitude = _objcClass("CMAttitude")
+	_clsCMAttitude                            = _objcClass("CMAttitude")
 	_cMAttitudeSelMultiplyByInverseOfAttitude = objc.RegisterName("multiplyByInverseOfAttitude:")
-	_cMAttitudeSelRoll = objc.RegisterName("roll")
-	_cMAttitudeSelPitch = objc.RegisterName("pitch")
-	_cMAttitudeSelYaw = objc.RegisterName("yaw")
-	_cMAttitudeSelRotationMatrix = objc.RegisterName("rotationMatrix")
-	_cMAttitudeSelQuaternion = objc.RegisterName("quaternion")
+	_cMAttitudeSelRoll                        = objc.RegisterName("roll")
+	_cMAttitudeSelPitch                       = objc.RegisterName("pitch")
+	_cMAttitudeSelYaw                         = objc.RegisterName("yaw")
+	_cMAttitudeSelRotationMatrix              = objc.RegisterName("rotationMatrix")
+	_cMAttitudeSelQuaternion                  = objc.RegisterName("quaternion")
 )
 
 func CMAttitudeFromID(id objc.ID) *CMAttitude {
@@ -63,4 +63,3 @@ func (o *CMAttitude) Quaternion() CMQuaternion {
 	_ret := objc.Send[CMQuaternion](o.Ptr(), _cMAttitudeSelQuaternion)
 	return _ret
 }
-

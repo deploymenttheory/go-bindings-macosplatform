@@ -18,47 +18,47 @@ type AVCaptureSession struct {
 }
 
 var (
-	_clsAVCaptureSession = _objcClass("AVCaptureSession")
-	_aVCaptureSessionSelCanSetSessionPreset = objc.RegisterName("canSetSessionPreset:")
-	_aVCaptureSessionSelCanAddInput = objc.RegisterName("canAddInput:")
-	_aVCaptureSessionSelAddInput = objc.RegisterName("addInput:")
-	_aVCaptureSessionSelRemoveInput = objc.RegisterName("removeInput:")
-	_aVCaptureSessionSelCanAddOutput = objc.RegisterName("canAddOutput:")
-	_aVCaptureSessionSelAddOutput = objc.RegisterName("addOutput:")
-	_aVCaptureSessionSelRemoveOutput = objc.RegisterName("removeOutput:")
-	_aVCaptureSessionSelAddInputWithNoConnections = objc.RegisterName("addInputWithNoConnections:")
-	_aVCaptureSessionSelAddOutputWithNoConnections = objc.RegisterName("addOutputWithNoConnections:")
-	_aVCaptureSessionSelCanAddConnection = objc.RegisterName("canAddConnection:")
-	_aVCaptureSessionSelAddConnection = objc.RegisterName("addConnection:")
-	_aVCaptureSessionSelRemoveConnection = objc.RegisterName("removeConnection:")
-	_aVCaptureSessionSelSetControlsDelegateQueue = objc.RegisterName("setControlsDelegate:queue:")
-	_aVCaptureSessionSelCanAddControl = objc.RegisterName("canAddControl:")
-	_aVCaptureSessionSelAddControl = objc.RegisterName("addControl:")
-	_aVCaptureSessionSelRemoveControl = objc.RegisterName("removeControl:")
-	_aVCaptureSessionSelBeginConfiguration = objc.RegisterName("beginConfiguration")
-	_aVCaptureSessionSelCommitConfiguration = objc.RegisterName("commitConfiguration")
-	_aVCaptureSessionSelStartRunning = objc.RegisterName("startRunning")
-	_aVCaptureSessionSelStopRunning = objc.RegisterName("stopRunning")
-	_aVCaptureSessionSelRunDeferredStartWhenNeeded = objc.RegisterName("runDeferredStartWhenNeeded")
+	_clsAVCaptureSession                                                           = _objcClass("AVCaptureSession")
+	_aVCaptureSessionSelCanSetSessionPreset                                        = objc.RegisterName("canSetSessionPreset:")
+	_aVCaptureSessionSelCanAddInput                                                = objc.RegisterName("canAddInput:")
+	_aVCaptureSessionSelAddInput                                                   = objc.RegisterName("addInput:")
+	_aVCaptureSessionSelRemoveInput                                                = objc.RegisterName("removeInput:")
+	_aVCaptureSessionSelCanAddOutput                                               = objc.RegisterName("canAddOutput:")
+	_aVCaptureSessionSelAddOutput                                                  = objc.RegisterName("addOutput:")
+	_aVCaptureSessionSelRemoveOutput                                               = objc.RegisterName("removeOutput:")
+	_aVCaptureSessionSelAddInputWithNoConnections                                  = objc.RegisterName("addInputWithNoConnections:")
+	_aVCaptureSessionSelAddOutputWithNoConnections                                 = objc.RegisterName("addOutputWithNoConnections:")
+	_aVCaptureSessionSelCanAddConnection                                           = objc.RegisterName("canAddConnection:")
+	_aVCaptureSessionSelAddConnection                                              = objc.RegisterName("addConnection:")
+	_aVCaptureSessionSelRemoveConnection                                           = objc.RegisterName("removeConnection:")
+	_aVCaptureSessionSelSetControlsDelegateQueue                                   = objc.RegisterName("setControlsDelegate:queue:")
+	_aVCaptureSessionSelCanAddControl                                              = objc.RegisterName("canAddControl:")
+	_aVCaptureSessionSelAddControl                                                 = objc.RegisterName("addControl:")
+	_aVCaptureSessionSelRemoveControl                                              = objc.RegisterName("removeControl:")
+	_aVCaptureSessionSelBeginConfiguration                                         = objc.RegisterName("beginConfiguration")
+	_aVCaptureSessionSelCommitConfiguration                                        = objc.RegisterName("commitConfiguration")
+	_aVCaptureSessionSelStartRunning                                               = objc.RegisterName("startRunning")
+	_aVCaptureSessionSelStopRunning                                                = objc.RegisterName("stopRunning")
+	_aVCaptureSessionSelRunDeferredStartWhenNeeded                                 = objc.RegisterName("runDeferredStartWhenNeeded")
 	_aVCaptureSessionSelSetDeferredStartDelegateDeferredStartDelegateCallbackQueue = objc.RegisterName("setDeferredStartDelegate:deferredStartDelegateCallbackQueue:")
-	_aVCaptureSessionSelSessionPreset = objc.RegisterName("sessionPreset")
-	_aVCaptureSessionSelSetSessionPreset = objc.RegisterName("setSessionPreset:")
-	_aVCaptureSessionSelInputs = objc.RegisterName("inputs")
-	_aVCaptureSessionSelOutputs = objc.RegisterName("outputs")
-	_aVCaptureSessionSelConnections = objc.RegisterName("connections")
-	_aVCaptureSessionSelSupportsControls = objc.RegisterName("supportsControls")
-	_aVCaptureSessionSelMaxControlsCount = objc.RegisterName("maxControlsCount")
-	_aVCaptureSessionSelControlsDelegate = objc.RegisterName("controlsDelegate")
-	_aVCaptureSessionSelControlsDelegateCallbackQueue = objc.RegisterName("controlsDelegateCallbackQueue")
-	_aVCaptureSessionSelControls = objc.RegisterName("controls")
-	_aVCaptureSessionSelIsRunning = objc.RegisterName("isRunning")
-	_aVCaptureSessionSelSynchronizationClock = objc.RegisterName("synchronizationClock")
-	_aVCaptureSessionSelMasterClock = objc.RegisterName("masterClock")
-	_aVCaptureSessionSelIsManualDeferredStartSupported = objc.RegisterName("isManualDeferredStartSupported")
-	_aVCaptureSessionSelAutomaticallyRunsDeferredStart = objc.RegisterName("automaticallyRunsDeferredStart")
-	_aVCaptureSessionSelSetAutomaticallyRunsDeferredStart = objc.RegisterName("setAutomaticallyRunsDeferredStart:")
-	_aVCaptureSessionSelDeferredStartDelegate = objc.RegisterName("deferredStartDelegate")
-	_aVCaptureSessionSelDeferredStartDelegateCallbackQueue = objc.RegisterName("deferredStartDelegateCallbackQueue")
+	_aVCaptureSessionSelSessionPreset                                              = objc.RegisterName("sessionPreset")
+	_aVCaptureSessionSelSetSessionPreset                                           = objc.RegisterName("setSessionPreset:")
+	_aVCaptureSessionSelInputs                                                     = objc.RegisterName("inputs")
+	_aVCaptureSessionSelOutputs                                                    = objc.RegisterName("outputs")
+	_aVCaptureSessionSelConnections                                                = objc.RegisterName("connections")
+	_aVCaptureSessionSelSupportsControls                                           = objc.RegisterName("supportsControls")
+	_aVCaptureSessionSelMaxControlsCount                                           = objc.RegisterName("maxControlsCount")
+	_aVCaptureSessionSelControlsDelegate                                           = objc.RegisterName("controlsDelegate")
+	_aVCaptureSessionSelControlsDelegateCallbackQueue                              = objc.RegisterName("controlsDelegateCallbackQueue")
+	_aVCaptureSessionSelControls                                                   = objc.RegisterName("controls")
+	_aVCaptureSessionSelIsRunning                                                  = objc.RegisterName("isRunning")
+	_aVCaptureSessionSelSynchronizationClock                                       = objc.RegisterName("synchronizationClock")
+	_aVCaptureSessionSelMasterClock                                                = objc.RegisterName("masterClock")
+	_aVCaptureSessionSelIsManualDeferredStartSupported                             = objc.RegisterName("isManualDeferredStartSupported")
+	_aVCaptureSessionSelAutomaticallyRunsDeferredStart                             = objc.RegisterName("automaticallyRunsDeferredStart")
+	_aVCaptureSessionSelSetAutomaticallyRunsDeferredStart                          = objc.RegisterName("setAutomaticallyRunsDeferredStart:")
+	_aVCaptureSessionSelDeferredStartDelegate                                      = objc.RegisterName("deferredStartDelegate")
+	_aVCaptureSessionSelDeferredStartDelegateCallbackQueue                         = objc.RegisterName("deferredStartDelegateCallbackQueue")
 )
 
 func AVCaptureSessionFromID(id objc.ID) *AVCaptureSession {
@@ -176,12 +176,12 @@ func (o *AVCaptureSession) StopRunning() {
 	o.Ptr().Send(_aVCaptureSessionSelStopRunning)
 }
 
-// Tells the session to run deferred start when appropriate. For best perceived startup performance, call this after displaying the first frame, so that deferred start processing doesn't interfere with other initialization operations. For example, if using a <doc://com.apple.documentation/documentation/quartzcore/cametallayer> to draw camera frames, add a `presentHandler` (using <doc://com.apple.documentation/metal/mtldrawable/addpresentedhandler>) to the first drawable and call ``runDeferredStartWhenNeeded`` from there. If one or more outputs need to start to perform a capture operation, and ``runDeferredStartWhenNeeded`` has not run yet, the session runs the deferred start on your app's behalf. Only call this method once for each configuration commit - after the first call, subsequent calls to ``runDeferredStartWhenNeeded`` have no effect. The deferred start runs asynchronously, so this method returns immediately. - Note: You can only call this when ``automaticallyRunsDeferredStart`` is `false`. Otherwise, the session throws an `NSInvalidArgumentException`. - Important: To avoid blocking your app's UI, don't call this method from the application's main actor or queue.
+// Tells the session to run deferred start when appropriate. For best perceived startup performance, call this after displaying the first frame, so that deferred start processing doesn't interfere with other initialization operations. For example, if using a <doc://com.apple.documentation/documentation/quartzcore/cametallayer> to draw camera frames, add a `presentHandler` (using <doc://com.apple.documentation/metal/mtldrawable/addpresentedhandler>) to the first drawable and call “runDeferredStartWhenNeeded“ from there. If one or more outputs need to start to perform a capture operation, and “runDeferredStartWhenNeeded“ has not run yet, the session runs the deferred start on your app's behalf. Only call this method once for each configuration commit - after the first call, subsequent calls to “runDeferredStartWhenNeeded“ have no effect. The deferred start runs asynchronously, so this method returns immediately. - Note: You can only call this when “automaticallyRunsDeferredStart“ is `false`. Otherwise, the session throws an `NSInvalidArgumentException`. - Important: To avoid blocking your app's UI, don't call this method from the application's main actor or queue.
 func (o *AVCaptureSession) RunDeferredStartWhenNeeded() {
 	o.Ptr().Send(_aVCaptureSessionSelRunDeferredStartWhenNeeded)
 }
 
-// Sets a delegate object for the session to call when performing deferred start. This delegate receives a call to the ``AVCaptureSessionDeferredStartDelegate/sessionWillRunDeferredStart:`` method when deferred start is about to run. It is non-blocking, so by the time this method is called, the deferred start may already be underway. If you want your app to perform initialization (potentially) concurrently with deferred start (e.g. user-facing camera features that are not needed to display the first preview frame, but are available to the user as soon as possible) it may be done in the delegate's ``AVCaptureSessionDeferredStartDelegate/sessionWillRunDeferredStart:`` method. To wait until deferred start is finished to perform some remaining initialization work, use the ``AVCaptureSessionDeferredStartDelegate/sessionDidRunDeferredStart:`` method instead. The delegate receives a call to the ``AVCaptureSessionDeferredStartDelegate/sessionDidRunDeferredStart:`` method when the deferred start finishes running. This allows you to run less-critical application initialization code. For example, if you've deferred an ``AVCapturePhotoOutput`` by setting its ``AVCaptureOutput/deferredStartEnabled`` property to `true`, and you'd like to do some app-specific initialization related to still capture, here might be a good place to put it. If the delegate is non-nil, the session still calls the ``AVCaptureSessionDeferredStartDelegate/sessionWillRunDeferredStart:`` and ``AVCaptureSessionDeferredStartDelegate/sessionDidRunDeferredStart:`` methods regardless of the value of the session's ``automaticallyRunsDeferredStart`` property. To minimize the capture session's startup latency, defer all unnecessary work until after the session starts. This delegate provides callbacks for you to schedule deferred work without impacting session startup performance. To perform initialization prior to deferred start but after the user interface displays, set ``automaticallyRunsDeferredStart`` to `false`, and then run the custom initialization prior to calling ``runDeferredStartWhenNeeded``. If ``deferredStartDelegate`` is not `NULL`, the session throws an exception if ``deferredStartDelegateCallbackQueue`` is `nil`. - Parameter deferredStartDelegate: An object conforming to the ``AVCaptureSessionDeferredStartDelegate`` protocol that receives events about deferred start. - Parameter deferredStartDelegateCallbackQueue: A dispatch queue on which deferredStart delegate methods are called.
+// Sets a delegate object for the session to call when performing deferred start. This delegate receives a call to the “AVCaptureSessionDeferredStartDelegate/sessionWillRunDeferredStart:“ method when deferred start is about to run. It is non-blocking, so by the time this method is called, the deferred start may already be underway. If you want your app to perform initialization (potentially) concurrently with deferred start (e.g. user-facing camera features that are not needed to display the first preview frame, but are available to the user as soon as possible) it may be done in the delegate's “AVCaptureSessionDeferredStartDelegate/sessionWillRunDeferredStart:“ method. To wait until deferred start is finished to perform some remaining initialization work, use the “AVCaptureSessionDeferredStartDelegate/sessionDidRunDeferredStart:“ method instead. The delegate receives a call to the “AVCaptureSessionDeferredStartDelegate/sessionDidRunDeferredStart:“ method when the deferred start finishes running. This allows you to run less-critical application initialization code. For example, if you've deferred an “AVCapturePhotoOutput“ by setting its “AVCaptureOutput/deferredStartEnabled“ property to `true`, and you'd like to do some app-specific initialization related to still capture, here might be a good place to put it. If the delegate is non-nil, the session still calls the “AVCaptureSessionDeferredStartDelegate/sessionWillRunDeferredStart:“ and “AVCaptureSessionDeferredStartDelegate/sessionDidRunDeferredStart:“ methods regardless of the value of the session's “automaticallyRunsDeferredStart“ property. To minimize the capture session's startup latency, defer all unnecessary work until after the session starts. This delegate provides callbacks for you to schedule deferred work without impacting session startup performance. To perform initialization prior to deferred start but after the user interface displays, set “automaticallyRunsDeferredStart“ to `false`, and then run the custom initialization prior to calling “runDeferredStartWhenNeeded“. If “deferredStartDelegate“ is not `NULL`, the session throws an exception if “deferredStartDelegateCallbackQueue“ is `nil`. - Parameter deferredStartDelegate: An object conforming to the “AVCaptureSessionDeferredStartDelegate“ protocol that receives events about deferred start. - Parameter deferredStartDelegateCallbackQueue: A dispatch queue on which deferredStart delegate methods are called.
 func (o *AVCaptureSession) SetDeferredStartDelegateDeferredStartDelegateCallbackQueue(deferredStartDelegate AVCaptureSessionDeferredStartDelegate, deferredStartDelegateCallbackQueue *foundation.NSObject) {
 	o.Ptr().Send(_aVCaptureSessionSelSetDeferredStartDelegateDeferredStartDelegateCallbackQueue, deferredStartDelegate, deferredStartDelegateCallbackQueue.Ptr())
 }
@@ -189,7 +189,9 @@ func (o *AVCaptureSession) SetDeferredStartDelegateDeferredStartDelegateCallback
 // @property sessionPreset @abstract Indicates the session preset currently in use by the receiver. @discussion The value of this property is an AVCaptureSessionPreset indicating the current session preset in use by the receiver. The sessionPreset property may be set while the receiver is running.
 func (o *AVCaptureSession) SessionPreset() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureSessionSelSessionPreset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -200,21 +202,27 @@ func (o *AVCaptureSession) SetSessionPreset(sessionPreset *foundation.NSString) 
 // @property inputs @abstract An NSArray of AVCaptureInputs currently added to the receiver. @discussion The value of this property is an NSArray of AVCaptureInputs currently added to the receiver. Clients can add AVCaptureInputs to a session by calling -addInput:.
 func (o *AVCaptureSession) Inputs() *foundation.NSArray[*AVCaptureInput] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureSessionSelInputs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVCaptureInput](_ret)
 }
 
 // @property outputs @abstract An NSArray of AVCaptureOutputs currently added to the receiver. @discussion The value of this property is an NSArray of AVCaptureOutputs currently added to the receiver. Clients can add AVCaptureOutputs to a session by calling -addOutput:.
 func (o *AVCaptureSession) Outputs() *foundation.NSArray[*AVCaptureOutput] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureSessionSelOutputs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVCaptureOutput](_ret)
 }
 
 // @property connections @abstract An NSArray of AVCaptureConnections currently added to the receiver. @discussion The value of this property is an NSArray of AVCaptureConnections currently added to the receiver. Connections are formed implicitly by the receiver when a client calls -addInput: or -addOutput:. Connections are formed explicitly when a client calls -addConnection:.
 func (o *AVCaptureSession) Connections() *foundation.NSArray[*AVCaptureConnection] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureSessionSelConnections)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVCaptureConnection](_ret)
 }
 
@@ -239,14 +247,18 @@ func (o *AVCaptureSession) ControlsDelegate() AVCaptureSessionControlsDelegate {
 // @property controlsDelegateCallbackQueue @abstract The dispatch queue on which all controls delegate methods will be called. @discussion The value of this property is a `dispatch_queue_t`. The queue is set using the `-setControlsDelegate:queue:` method.
 func (o *AVCaptureSession) ControlsDelegateCallbackQueue() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureSessionSelControlsDelegateCallbackQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
 // @property controls @abstract An `NSArray` of `AVCaptureControl`s currently added to the session. @discussion The value of this property is an `NSArray` of `AVCaptureControl`s currently added to the session. Clients can add `AVCaptureControl`s to a session by calling `-addControl:`.
 func (o *AVCaptureSession) Controls() *foundation.NSArray[*AVCaptureControl] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureSessionSelControls)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVCaptureControl](_ret)
 }
 
@@ -269,13 +281,13 @@ func (o *AVCaptureSession) MasterClock() unsafe.Pointer {
 	return _ret
 }
 
-// A `BOOL` value that indicates whether the session supports manually running deferred start. Deferred Start is a feature that allows you to control, on a per-output basis, whether output objects start when or after the session is started. The session defers starting an output when its ``deferredStartEnabled`` property is set to `true`, and starts it after the session is started. You can only set the ``automaticallyRunsDeferredStart`` property value to `false` if the session supports manual deferred start.
+// A `BOOL` value that indicates whether the session supports manually running deferred start. Deferred Start is a feature that allows you to control, on a per-output basis, whether output objects start when or after the session is started. The session defers starting an output when its “deferredStartEnabled“ property is set to `true`, and starts it after the session is started. You can only set the “automaticallyRunsDeferredStart“ property value to `false` if the session supports manual deferred start.
 func (o *AVCaptureSession) IsManualDeferredStartSupported() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptureSessionSelIsManualDeferredStartSupported)
 	return _ret
 }
 
-// A `BOOL` value that indicates whether deferred start runs automatically. Deferred Start is a feature that allows you to control, on a per-output basis, whether output objects start when or after the session is started. The session defers starting an output when its ``AVCaptureOutput/deferredStartEnabled`` property is set to `true`, and starts it after the session is started. When this value is `true`, ``AVCaptureSession`` automatically runs deferred start. If only ``AVCaptureVideoPreviewLayer`` objects have ``AVCaptureVideoPreviewLayer/deferredStartEnabled`` set to `false`, the session runs deferred start a short time after displaying the first frame. If there are ``AVCaptureOutput`` objects that have ``AVCaptureOutput/deferredStartEnabled`` set to `false`, then the session waits until each output that provides streaming data to your app sends its first frame. If you set this value to `false`, call ``runDeferredStartWhenNeeded`` to indicate when to run deferred start. By default, for apps that are linked on or after iOS 26, this value is `true`. - Note: If ``manualDeferredStartSupported`` is `false`, setting this property value to `false` results in the session throwing an `NSInvalidArgumentException`. - Note: Set this value before committing the configuration.
+// A `BOOL` value that indicates whether deferred start runs automatically. Deferred Start is a feature that allows you to control, on a per-output basis, whether output objects start when or after the session is started. The session defers starting an output when its “AVCaptureOutput/deferredStartEnabled“ property is set to `true`, and starts it after the session is started. When this value is `true`, “AVCaptureSession“ automatically runs deferred start. If only “AVCaptureVideoPreviewLayer“ objects have “AVCaptureVideoPreviewLayer/deferredStartEnabled“ set to `false`, the session runs deferred start a short time after displaying the first frame. If there are “AVCaptureOutput“ objects that have “AVCaptureOutput/deferredStartEnabled“ set to `false`, then the session waits until each output that provides streaming data to your app sends its first frame. If you set this value to `false`, call “runDeferredStartWhenNeeded“ to indicate when to run deferred start. By default, for apps that are linked on or after iOS 26, this value is `true`. - Note: If “manualDeferredStartSupported“ is `false`, setting this property value to `false` results in the session throwing an `NSInvalidArgumentException`. - Note: Set this value before committing the configuration.
 func (o *AVCaptureSession) AutomaticallyRunsDeferredStart() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptureSessionSelAutomaticallyRunsDeferredStart)
 	return _ret
@@ -285,16 +297,17 @@ func (o *AVCaptureSession) SetAutomaticallyRunsDeferredStart(automaticallyRunsDe
 	o.Ptr().Send(_aVCaptureSessionSelSetAutomaticallyRunsDeferredStart, automaticallyRunsDeferredStart)
 }
 
-// A delegate object that observes events about deferred start. Call the ``setDeferredStartDelegate:deferredStartDelegateCallbackQueue:`` method to set the deferred start delegate for a session.
+// A delegate object that observes events about deferred start. Call the “setDeferredStartDelegate:deferredStartDelegateCallbackQueue:“ method to set the deferred start delegate for a session.
 func (o *AVCaptureSession) DeferredStartDelegate() AVCaptureSessionDeferredStartDelegate {
 	_ret := objc.Send[AVCaptureSessionDeferredStartDelegate](o.Ptr(), _aVCaptureSessionSelDeferredStartDelegate)
 	return _ret
 }
 
-// The dispatch queue on which the session calls deferred start delegate methods. Call the ``setDeferredStartDelegate:deferredStartDelegateCallbackQueue:`` method to specify the dispatch queue on which to call the deferred start delegate methods.
+// The dispatch queue on which the session calls deferred start delegate methods. Call the “setDeferredStartDelegate:deferredStartDelegateCallbackQueue:“ method to specify the dispatch queue on which to call the deferred start delegate methods.
 func (o *AVCaptureSession) DeferredStartDelegateCallbackQueue() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureSessionSelDeferredStartDelegateCallbackQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
-

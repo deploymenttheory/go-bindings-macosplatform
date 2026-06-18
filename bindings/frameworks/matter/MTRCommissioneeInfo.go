@@ -16,11 +16,11 @@ type MTRCommissioneeInfo struct {
 }
 
 var (
-	_clsMTRCommissioneeInfo = _objcClass("MTRCommissioneeInfo")
+	_clsMTRCommissioneeInfo                = _objcClass("MTRCommissioneeInfo")
 	_mTRCommissioneeInfoSelProductIdentity = objc.RegisterName("productIdentity")
-	_mTRCommissioneeInfoSelEndpointsById = objc.RegisterName("endpointsById")
-	_mTRCommissioneeInfoSelRootEndpoint = objc.RegisterName("rootEndpoint")
-	_mTRCommissioneeInfoSelAttributes = objc.RegisterName("attributes")
+	_mTRCommissioneeInfoSelEndpointsById   = objc.RegisterName("endpointsById")
+	_mTRCommissioneeInfoSelRootEndpoint    = objc.RegisterName("rootEndpoint")
+	_mTRCommissioneeInfoSelAttributes      = objc.RegisterName("attributes")
 )
 
 func MTRCommissioneeInfoFromID(id objc.ID) *MTRCommissioneeInfo {
@@ -36,7 +36,9 @@ func MTRCommissioneeInfoFromID(id objc.ID) *MTRCommissioneeInfo {
 // The product identity (VID / PID) of the commissionee.
 func (o *MTRCommissioneeInfo) ProductIdentity() *MTRProductIdentity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissioneeInfoSelProductIdentity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRProductIdentityFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTRCommissioneeInfo) EndpointsById() *foundation.NSDictionary[*foundati
 // Endpoint information for the root endpoint of the commissionee. Will be present only if readEndpointInformation is set to YES on MTRCommissioningParameters.
 func (o *MTRCommissioneeInfo) RootEndpoint() *MTREndpointInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissioneeInfoSelRootEndpoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTREndpointInfoFromID(_ret)
 }
 
@@ -58,4 +62,3 @@ func (o *MTRCommissioneeInfo) Attributes() *foundation.NSDictionary[*MTRAttribut
 	_ret := objc.Send[*foundation.NSDictionary[*MTRAttributePath, objc.ID]](o.Ptr(), _mTRCommissioneeInfoSelAttributes)
 	return _ret
 }
-

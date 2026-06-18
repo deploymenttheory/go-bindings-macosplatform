@@ -108,4 +108,3 @@ type GKVoiceChatClient interface {
 	VoiceChatServiceSendDataToParticipantID(voiceChatService objc.ID, data *foundation.NSData, participantID *foundation.NSString)
 	ParticipantID() *foundation.NSString
 }
-

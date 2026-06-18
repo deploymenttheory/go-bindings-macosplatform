@@ -16,7 +16,9 @@ type MTRColorControlClusterStepColorTemperatureParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRColorControlClusterStepColorTemperatureParams].
-func (x *MTRColorControlClusterStepColorTemperatureParams) Unwrap() *raw.MTRColorControlClusterStepColorTemperatureParams { return x.inner }
+func (x *MTRColorControlClusterStepColorTemperatureParams) Unwrap() *raw.MTRColorControlClusterStepColorTemperatureParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -213,4 +215,3 @@ type MTRColorControlClusterStepColorTemperatureParamsable interface {
 }
 
 var _ MTRColorControlClusterStepColorTemperatureParamsable = (*MTRColorControlClusterStepColorTemperatureParams)(nil)
-

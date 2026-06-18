@@ -92,4 +92,3 @@ type CNNDropoutNodeable interface {
 }
 
 var _ CNNDropoutNodeable = (*CNNDropoutNode)(nil)
-

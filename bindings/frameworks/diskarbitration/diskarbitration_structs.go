@@ -14,4 +14,3 @@ type DADissenter struct{}
 // C struct: __DASession
 // DASession is an opaque type.
 type DASession struct{}
-

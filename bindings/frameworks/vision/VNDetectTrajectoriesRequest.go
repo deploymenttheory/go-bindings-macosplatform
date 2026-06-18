@@ -18,19 +18,19 @@ type VNDetectTrajectoriesRequest struct {
 }
 
 var (
-	_clsVNDetectTrajectoriesRequest = _objcClass("VNDetectTrajectoriesRequest")
+	_clsVNDetectTrajectoriesRequest                                                              = _objcClass("VNDetectTrajectoriesRequest")
 	_vNDetectTrajectoriesRequestSelInitWithFrameAnalysisSpacingTrajectoryLengthCompletionHandler = objc.RegisterName("initWithFrameAnalysisSpacing:trajectoryLength:completionHandler:")
-	_vNDetectTrajectoriesRequestSelTrajectoryLength = objc.RegisterName("trajectoryLength")
-	_vNDetectTrajectoriesRequestSelObjectMinimumNormalizedRadius = objc.RegisterName("objectMinimumNormalizedRadius")
-	_vNDetectTrajectoriesRequestSelSetObjectMinimumNormalizedRadius = objc.RegisterName("setObjectMinimumNormalizedRadius:")
-	_vNDetectTrajectoriesRequestSelMinimumObjectSize = objc.RegisterName("minimumObjectSize")
-	_vNDetectTrajectoriesRequestSelSetMinimumObjectSize = objc.RegisterName("setMinimumObjectSize:")
-	_vNDetectTrajectoriesRequestSelObjectMaximumNormalizedRadius = objc.RegisterName("objectMaximumNormalizedRadius")
-	_vNDetectTrajectoriesRequestSelSetObjectMaximumNormalizedRadius = objc.RegisterName("setObjectMaximumNormalizedRadius:")
-	_vNDetectTrajectoriesRequestSelMaximumObjectSize = objc.RegisterName("maximumObjectSize")
-	_vNDetectTrajectoriesRequestSelSetMaximumObjectSize = objc.RegisterName("setMaximumObjectSize:")
-	_vNDetectTrajectoriesRequestSelTargetFrameTime = objc.RegisterName("targetFrameTime")
-	_vNDetectTrajectoriesRequestSelSetTargetFrameTime = objc.RegisterName("setTargetFrameTime:")
+	_vNDetectTrajectoriesRequestSelTrajectoryLength                                              = objc.RegisterName("trajectoryLength")
+	_vNDetectTrajectoriesRequestSelObjectMinimumNormalizedRadius                                 = objc.RegisterName("objectMinimumNormalizedRadius")
+	_vNDetectTrajectoriesRequestSelSetObjectMinimumNormalizedRadius                              = objc.RegisterName("setObjectMinimumNormalizedRadius:")
+	_vNDetectTrajectoriesRequestSelMinimumObjectSize                                             = objc.RegisterName("minimumObjectSize")
+	_vNDetectTrajectoriesRequestSelSetMinimumObjectSize                                          = objc.RegisterName("setMinimumObjectSize:")
+	_vNDetectTrajectoriesRequestSelObjectMaximumNormalizedRadius                                 = objc.RegisterName("objectMaximumNormalizedRadius")
+	_vNDetectTrajectoriesRequestSelSetObjectMaximumNormalizedRadius                              = objc.RegisterName("setObjectMaximumNormalizedRadius:")
+	_vNDetectTrajectoriesRequestSelMaximumObjectSize                                             = objc.RegisterName("maximumObjectSize")
+	_vNDetectTrajectoriesRequestSelSetMaximumObjectSize                                          = objc.RegisterName("setMaximumObjectSize:")
+	_vNDetectTrajectoriesRequestSelTargetFrameTime                                               = objc.RegisterName("targetFrameTime")
+	_vNDetectTrajectoriesRequestSelSetTargetFrameTime                                            = objc.RegisterName("setTargetFrameTime:")
 )
 
 func VNDetectTrajectoriesRequestFromID(id objc.ID) *VNDetectTrajectoriesRequest {
@@ -56,7 +56,9 @@ func (o *VNDetectTrajectoriesRequest) InitWithFrameAnalysisSpacingTrajectoryLeng
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNDetectTrajectoriesRequestSelInitWithFrameAnalysisSpacingTrajectoryLengthCompletionHandler, frameAnalysisSpacing, trajectoryLength, __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNDetectTrajectoriesRequestFromID(_ret)
 }
 
@@ -117,4 +119,3 @@ func (o *VNDetectTrajectoriesRequest) TargetFrameTime() coremedia.CMTime {
 func (o *VNDetectTrajectoriesRequest) SetTargetFrameTime(targetFrameTime coremedia.CMTime) {
 	o.Ptr().Send(_vNDetectTrajectoriesRequestSelSetTargetFrameTime, targetFrameTime)
 }
-

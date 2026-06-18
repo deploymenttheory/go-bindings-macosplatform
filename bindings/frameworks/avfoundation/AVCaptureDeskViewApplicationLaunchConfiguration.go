@@ -17,10 +17,10 @@ type AVCaptureDeskViewApplicationLaunchConfiguration struct {
 }
 
 var (
-	_clsAVCaptureDeskViewApplicationLaunchConfiguration = _objcClass("AVCaptureDeskViewApplicationLaunchConfiguration")
-	_aVCaptureDeskViewApplicationLaunchConfigurationSelMainWindowFrame = objc.RegisterName("mainWindowFrame")
-	_aVCaptureDeskViewApplicationLaunchConfigurationSelSetMainWindowFrame = objc.RegisterName("setMainWindowFrame:")
-	_aVCaptureDeskViewApplicationLaunchConfigurationSelRequiresSetUpModeCompletion = objc.RegisterName("requiresSetUpModeCompletion")
+	_clsAVCaptureDeskViewApplicationLaunchConfiguration                               = _objcClass("AVCaptureDeskViewApplicationLaunchConfiguration")
+	_aVCaptureDeskViewApplicationLaunchConfigurationSelMainWindowFrame                = objc.RegisterName("mainWindowFrame")
+	_aVCaptureDeskViewApplicationLaunchConfigurationSelSetMainWindowFrame             = objc.RegisterName("setMainWindowFrame:")
+	_aVCaptureDeskViewApplicationLaunchConfigurationSelRequiresSetUpModeCompletion    = objc.RegisterName("requiresSetUpModeCompletion")
 	_aVCaptureDeskViewApplicationLaunchConfigurationSelSetRequiresSetUpModeCompletion = objc.RegisterName("setRequiresSetUpModeCompletion:")
 )
 
@@ -53,4 +53,3 @@ func (o *AVCaptureDeskViewApplicationLaunchConfiguration) RequiresSetUpModeCompl
 func (o *AVCaptureDeskViewApplicationLaunchConfiguration) SetRequiresSetUpModeCompletion(requiresSetUpModeCompletion bool) {
 	o.Ptr().Send(_aVCaptureDeskViewApplicationLaunchConfigurationSelSetRequiresSetUpModeCompletion, requiresSetUpModeCompletion)
 }
-

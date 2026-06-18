@@ -17,7 +17,7 @@ type MLGPUComputeDevice struct {
 }
 
 var (
-	_clsMLGPUComputeDevice = _objcClass("MLGPUComputeDevice")
+	_clsMLGPUComputeDevice            = _objcClass("MLGPUComputeDevice")
 	_mLGPUComputeDeviceSelMetalDevice = objc.RegisterName("metalDevice")
 )
 
@@ -35,4 +35,3 @@ func (o *MLGPUComputeDevice) MetalDevice() metal.MTLDevice {
 	_ret := objc.Send[metal.MTLDevice](o.Ptr(), _mLGPUComputeDeviceSelMetalDevice)
 	return _ret
 }
-

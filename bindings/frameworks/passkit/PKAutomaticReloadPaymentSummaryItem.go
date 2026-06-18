@@ -16,8 +16,8 @@ type PKAutomaticReloadPaymentSummaryItem struct {
 }
 
 var (
-	_clsPKAutomaticReloadPaymentSummaryItem = _objcClass("PKAutomaticReloadPaymentSummaryItem")
-	_pKAutomaticReloadPaymentSummaryItemSelThresholdAmount = objc.RegisterName("thresholdAmount")
+	_clsPKAutomaticReloadPaymentSummaryItem                   = _objcClass("PKAutomaticReloadPaymentSummaryItem")
+	_pKAutomaticReloadPaymentSummaryItemSelThresholdAmount    = objc.RegisterName("thresholdAmount")
 	_pKAutomaticReloadPaymentSummaryItemSelSetThresholdAmount = objc.RegisterName("setThresholdAmount:")
 )
 
@@ -33,11 +33,12 @@ func PKAutomaticReloadPaymentSummaryItemFromID(id objc.ID) *PKAutomaticReloadPay
 
 func (o *PKAutomaticReloadPaymentSummaryItem) ThresholdAmount() *foundation.NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAutomaticReloadPaymentSummaryItemSelThresholdAmount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDecimalNumberFromID(_ret)
 }
 
 func (o *PKAutomaticReloadPaymentSummaryItem) SetThresholdAmount(thresholdAmount *foundation.NSDecimalNumber) {
 	o.Ptr().Send(_pKAutomaticReloadPaymentSummaryItemSelSetThresholdAmount, thresholdAmount.Ptr())
 }
-

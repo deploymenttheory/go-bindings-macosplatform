@@ -126,7 +126,9 @@ func (x *EffectPropertyFog) SetEnd(end float32) {
 	x.inner.SetEnd(end)
 }
 
-func (x *EffectPropertyFog) asEffectProperty() *raw.GLKEffectProperty { return &x.inner.GLKEffectProperty }
+func (x *EffectPropertyFog) asEffectProperty() *raw.GLKEffectProperty {
+	return &x.inner.GLKEffectProperty
+}
 
 // EffectPropertyFogable is the interface implemented by [EffectPropertyFog], for mocking and DI.
 type EffectPropertyFogable interface {
@@ -151,4 +153,3 @@ type EffectPropertyFogable interface {
 }
 
 var _ EffectPropertyFogable = (*EffectPropertyFog)(nil)
-

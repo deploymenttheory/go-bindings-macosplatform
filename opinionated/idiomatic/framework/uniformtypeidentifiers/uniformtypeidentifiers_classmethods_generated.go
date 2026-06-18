@@ -103,4 +103,3 @@ func ImportedTypeWithIdentifierConformingToType(identifier string, parentType *r
 	}
 	return &Type{inner: _r}
 }
-

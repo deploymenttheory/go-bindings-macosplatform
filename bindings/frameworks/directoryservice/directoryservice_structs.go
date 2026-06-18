@@ -5,47 +5,46 @@ package directoryservice
 
 // C struct: tAccessControlEntry
 type TAccessControlEntry struct {
-	FGuestAccessFlags uint
-	FDirMemberFlags uint
+	FGuestAccessFlags   uint
+	FDirMemberFlags     uint
 	FDirNodeMemberFlags uint
-	FOwnerFlags uint
+	FOwnerFlags         uint
 	FAdministratorFlags uint
 }
 
 // C struct: tAttributeEntry
 type TAttributeEntry struct {
-	FReserved1 uint
-	FReserved2 TAccessControlEntry
-	FAttributeValueCount uint
-	FAttributeDataSize uint
+	FReserved1             uint
+	FReserved2             TAccessControlEntry
+	FAttributeValueCount   uint
+	FAttributeDataSize     uint
 	FAttributeValueMaxSize uint
-	FAttributeSignature TDataBuffer
+	FAttributeSignature    TDataBuffer
 }
 
 // C struct: tAttributeValueEntry
 type TAttributeValueEntry struct {
-	FAttributeValueID uint
+	FAttributeValueID   uint
 	FAttributeValueData TDataBuffer
 }
 
 // C struct: tDataBuffer
 type TDataBuffer struct {
-	FBufferSize uint
+	FBufferSize   uint
 	FBufferLength uint
-	FBufferData [1]int8
+	FBufferData   [1]int8
 }
 
 // C struct: tDataList
 type TDataList struct {
 	FDataNodeCount uint
-	FDataListHead *TDataBuffer
+	FDataListHead  *TDataBuffer
 }
 
 // C struct: tRecordEntry
 type TRecordEntry struct {
-	FReserved1 uint
-	FReserved2 TAccessControlEntry
+	FReserved1            uint
+	FReserved2            TAccessControlEntry
 	FRecordAttributeCount uint
-	FRecordNameAndType TDataBuffer
+	FRecordNameAndType    TDataBuffer
 }
-

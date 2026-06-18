@@ -88,4 +88,3 @@ type Octreeable interface {
 }
 
 var _ Octreeable = (*Octree)(nil)
-

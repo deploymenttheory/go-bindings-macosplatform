@@ -18,19 +18,19 @@ type CKModifyRecordZonesOperation struct {
 }
 
 var (
-	_clsCKModifyRecordZonesOperation = _objcClass("CKModifyRecordZonesOperation")
-	_cKModifyRecordZonesOperationSelInit = objc.RegisterName("init")
+	_clsCKModifyRecordZonesOperation                                               = _objcClass("CKModifyRecordZonesOperation")
+	_cKModifyRecordZonesOperationSelInit                                           = objc.RegisterName("init")
 	_cKModifyRecordZonesOperationSelInitWithRecordZonesToSaveRecordZoneIDsToDelete = objc.RegisterName("initWithRecordZonesToSave:recordZoneIDsToDelete:")
-	_cKModifyRecordZonesOperationSelRecordZonesToSave = objc.RegisterName("recordZonesToSave")
-	_cKModifyRecordZonesOperationSelSetRecordZonesToSave = objc.RegisterName("setRecordZonesToSave:")
-	_cKModifyRecordZonesOperationSelRecordZoneIDsToDelete = objc.RegisterName("recordZoneIDsToDelete")
-	_cKModifyRecordZonesOperationSelSetRecordZoneIDsToDelete = objc.RegisterName("setRecordZoneIDsToDelete:")
-	_cKModifyRecordZonesOperationSelPerRecordZoneSaveBlock = objc.RegisterName("perRecordZoneSaveBlock")
-	_cKModifyRecordZonesOperationSelSetPerRecordZoneSaveBlock = objc.RegisterName("setPerRecordZoneSaveBlock:")
-	_cKModifyRecordZonesOperationSelPerRecordZoneDeleteBlock = objc.RegisterName("perRecordZoneDeleteBlock")
-	_cKModifyRecordZonesOperationSelSetPerRecordZoneDeleteBlock = objc.RegisterName("setPerRecordZoneDeleteBlock:")
-	_cKModifyRecordZonesOperationSelModifyRecordZonesCompletionBlock = objc.RegisterName("modifyRecordZonesCompletionBlock")
-	_cKModifyRecordZonesOperationSelSetModifyRecordZonesCompletionBlock = objc.RegisterName("setModifyRecordZonesCompletionBlock:")
+	_cKModifyRecordZonesOperationSelRecordZonesToSave                              = objc.RegisterName("recordZonesToSave")
+	_cKModifyRecordZonesOperationSelSetRecordZonesToSave                           = objc.RegisterName("setRecordZonesToSave:")
+	_cKModifyRecordZonesOperationSelRecordZoneIDsToDelete                          = objc.RegisterName("recordZoneIDsToDelete")
+	_cKModifyRecordZonesOperationSelSetRecordZoneIDsToDelete                       = objc.RegisterName("setRecordZoneIDsToDelete:")
+	_cKModifyRecordZonesOperationSelPerRecordZoneSaveBlock                         = objc.RegisterName("perRecordZoneSaveBlock")
+	_cKModifyRecordZonesOperationSelSetPerRecordZoneSaveBlock                      = objc.RegisterName("setPerRecordZoneSaveBlock:")
+	_cKModifyRecordZonesOperationSelPerRecordZoneDeleteBlock                       = objc.RegisterName("perRecordZoneDeleteBlock")
+	_cKModifyRecordZonesOperationSelSetPerRecordZoneDeleteBlock                    = objc.RegisterName("setPerRecordZoneDeleteBlock:")
+	_cKModifyRecordZonesOperationSelModifyRecordZonesCompletionBlock               = objc.RegisterName("modifyRecordZonesCompletionBlock")
+	_cKModifyRecordZonesOperationSelSetModifyRecordZonesCompletionBlock            = objc.RegisterName("setModifyRecordZonesCompletionBlock:")
 )
 
 func CKModifyRecordZonesOperationFromID(id objc.ID) *CKModifyRecordZonesOperation {
@@ -43,24 +43,30 @@ func CKModifyRecordZonesOperationFromID(id objc.ID) *CKModifyRecordZonesOperatio
 	return o
 }
 
-// Creates an empty modify record zones operation. You must set at least one of the ``CKModifyRecordZonesOperation/recordZonesToSave`` or ``CKModifyRecordZonesOperation/recordZoneIDsToDelete`` properties before you execute the operation.
+// Creates an empty modify record zones operation. You must set at least one of the “CKModifyRecordZonesOperation/recordZonesToSave“ or “CKModifyRecordZonesOperation/recordZoneIDsToDelete“ properties before you execute the operation.
 func (o *CKModifyRecordZonesOperation) Init() *CKModifyRecordZonesOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKModifyRecordZonesOperationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKModifyRecordZonesOperationFromID(_ret)
 }
 
 // Creates an operation for modifying the specified record zones. - Parameters: - recordZonesToSave: The record zones to save. You can specify `nil` for this parameter. - recordZoneIDsToDelete: The IDs of the record zones to delete. You can specify `nil` for this parameter. The record zones you intend to save or delete must all reside in the same database, which you specify when you configure the operation. If you delete a record zone, CloudKit deletes any records it contains.
 func (o *CKModifyRecordZonesOperation) InitWithRecordZonesToSaveRecordZoneIDsToDelete(recordZonesToSave *foundation.NSArray[*CKRecordZone], recordZoneIDsToDelete *foundation.NSArray[*CKRecordZoneID]) *CKModifyRecordZonesOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKModifyRecordZonesOperationSelInitWithRecordZonesToSaveRecordZoneIDsToDelete, recordZonesToSave.Ptr(), recordZoneIDsToDelete.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKModifyRecordZonesOperationFromID(_ret)
 }
 
-// The record zones to save to the database. The initial value of the property is the array that you provide to the ``CKModifyRecordZonesOperation/init(recordZonesToSave:recordZoneIDsToDelete:)`` method. You can modify this array as necessary before you execute the operation. The record zones must all target the same database. You can specify `nil`, or an empty array, for this property. If you intend to change the value of this property, do so before you execute the operation or submit the operation to a queue.
+// The record zones to save to the database. The initial value of the property is the array that you provide to the “CKModifyRecordZonesOperation/init(recordZonesToSave:recordZoneIDsToDelete:)“ method. You can modify this array as necessary before you execute the operation. The record zones must all target the same database. You can specify `nil`, or an empty array, for this property. If you intend to change the value of this property, do so before you execute the operation or submit the operation to a queue.
 func (o *CKModifyRecordZonesOperation) RecordZonesToSave() *foundation.NSArray[*CKRecordZone] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKModifyRecordZonesOperationSelRecordZonesToSave)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CKRecordZone](_ret)
 }
 
@@ -68,10 +74,12 @@ func (o *CKModifyRecordZonesOperation) SetRecordZonesToSave(recordZonesToSave *f
 	o.Ptr().Send(_cKModifyRecordZonesOperationSelSetRecordZonesToSave, recordZonesToSave.Ptr())
 }
 
-// The IDs of the record zones to delete permanently from the database. The initial value of the property is the array of zone IDs that you provide to the ``CKModifyRecordZonesOperation/init(recordZonesToSave:recordZoneIDsToDelete:)`` method. You can modify this array as necessary before you execute the operation. The record zones must all target the same database. You can specify `nil`, or an empty array, for this property. If you intend to change the value of this property, do so before you execute the operation or submit the operation to a queue.
+// The IDs of the record zones to delete permanently from the database. The initial value of the property is the array of zone IDs that you provide to the “CKModifyRecordZonesOperation/init(recordZonesToSave:recordZoneIDsToDelete:)“ method. You can modify this array as necessary before you execute the operation. The record zones must all target the same database. You can specify `nil`, or an empty array, for this property. If you intend to change the value of this property, do so before you execute the operation or submit the operation to a queue.
 func (o *CKModifyRecordZonesOperation) RecordZoneIDsToDelete() *foundation.NSArray[*CKRecordZoneID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKModifyRecordZonesOperationSelRecordZoneIDsToDelete)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CKRecordZoneID](_ret)
 }
 
@@ -79,7 +87,7 @@ func (o *CKModifyRecordZonesOperation) SetRecordZoneIDsToDelete(recordZoneIDsToD
 	o.Ptr().Send(_cKModifyRecordZonesOperationSelSetRecordZoneIDsToDelete, recordZoneIDsToDelete.Ptr())
 }
 
-// The closure to execute when CloudKit saves a record zone. This property is a closure that returns no value and has the following parameters: - The ID of the record zone that CloudKit saves. - The record zone that CloudKit saves, or `nil` if CloudKit can't save the record zone. - If CloudKit can't save the record zone, an error that provides information about the failure; otherwise, `nil`. The closure executes once for each record zone in the ``CKModifyRecordZonesOperation/recordZonesToSave`` property. Each time the closure executes, it executes serially with respect to the other record zone completion blocks of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+// The closure to execute when CloudKit saves a record zone. This property is a closure that returns no value and has the following parameters: - The ID of the record zone that CloudKit saves. - The record zone that CloudKit saves, or `nil` if CloudKit can't save the record zone. - If CloudKit can't save the record zone, an error that provides information about the failure; otherwise, `nil`. The closure executes once for each record zone in the “CKModifyRecordZonesOperation/recordZonesToSave“ property. Each time the closure executes, it executes serially with respect to the other record zone completion blocks of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
 func (o *CKModifyRecordZonesOperation) PerRecordZoneSaveBlock() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _cKModifyRecordZonesOperationSelPerRecordZoneSaveBlock)
 	return _ret
@@ -102,7 +110,7 @@ func (o *CKModifyRecordZonesOperation) SetPerRecordZoneSaveBlock(perRecordZoneSa
 	o.Ptr().Send(_cKModifyRecordZonesOperationSelSetPerRecordZoneSaveBlock, __block_perRecordZoneSaveBlock)
 }
 
-// The closure to execute when CloudKit deletes a record zone. This property is a closure that returns no value and has the following parameters: - The ID of the record zone that CloudKit deletes. - If CloudKit can't delete the record zone, an error that provides information about the failure; otherwise, `nil`. The closure executes once for each record zone in the ``CKModifyRecordZonesOperation/recordZoneIDsToDelete`` property. Each time the closure executes, it executes serially with respect to the other record zone completion blocks of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+// The closure to execute when CloudKit deletes a record zone. This property is a closure that returns no value and has the following parameters: - The ID of the record zone that CloudKit deletes. - If CloudKit can't delete the record zone, an error that provides information about the failure; otherwise, `nil`. The closure executes once for each record zone in the “CKModifyRecordZonesOperation/recordZoneIDsToDelete“ property. Each time the closure executes, it executes serially with respect to the other record zone completion blocks of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
 func (o *CKModifyRecordZonesOperation) PerRecordZoneDeleteBlock() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _cKModifyRecordZonesOperationSelPerRecordZoneDeleteBlock)
 	return _ret
@@ -122,7 +130,7 @@ func (o *CKModifyRecordZonesOperation) SetPerRecordZoneDeleteBlock(perRecordZone
 	o.Ptr().Send(_cKModifyRecordZonesOperationSelSetPerRecordZoneDeleteBlock, __block_perRecordZoneDeleteBlock)
 }
 
-// The closure to execute after CloudKit modifies all of the record zones. This property is a closure that returns no value and has the following parameters: - The record zones that CloudKit saves. - The IDs of the record zones that CloudKit deletes. - If CloudKit can't modify any of the record zones, this parameter provides information about the failure; otherwise, it's `nil`. The closure executes once, and represents your only opportunity to process the results. The closure reports an error of type ``CKError/Code/partialFailure`` when it modifies only some of the record zones successfully. The <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary of the error contains a ``CKPartialErrorsByItemIDKey`` key that has a dictionary as its value. The keys of the dictionary are the IDs of the record zones that the operation can't modify, and the corresponding values are errors that contain information about the failures. If you intend to use this closure to process the results, set it before you execute the operation or submit the operation to a queue.
+// The closure to execute after CloudKit modifies all of the record zones. This property is a closure that returns no value and has the following parameters: - The record zones that CloudKit saves. - The IDs of the record zones that CloudKit deletes. - If CloudKit can't modify any of the record zones, this parameter provides information about the failure; otherwise, it's `nil`. The closure executes once, and represents your only opportunity to process the results. The closure reports an error of type “CKError/Code/partialFailure“ when it modifies only some of the record zones successfully. The <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary of the error contains a “CKPartialErrorsByItemIDKey“ key that has a dictionary as its value. The keys of the dictionary are the IDs of the record zones that the operation can't modify, and the corresponding values are errors that contain information about the failures. If you intend to use this closure to process the results, set it before you execute the operation or submit the operation to a queue.
 func (o *CKModifyRecordZonesOperation) ModifyRecordZonesCompletionBlock() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _cKModifyRecordZonesOperationSelModifyRecordZonesCompletionBlock)
 	return _ret
@@ -144,4 +152,3 @@ func (o *CKModifyRecordZonesOperation) SetModifyRecordZonesCompletionBlock(modif
 	}
 	o.Ptr().Send(_cKModifyRecordZonesOperationSelSetModifyRecordZonesCompletionBlock, __block_modifyRecordZonesCompletionBlock)
 }
-

@@ -344,4 +344,3 @@ type CaptureDeviceFormatable interface {
 }
 
 var _ CaptureDeviceFormatable = (*CaptureDeviceFormat)(nil)
-

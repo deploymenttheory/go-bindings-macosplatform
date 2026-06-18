@@ -16,11 +16,15 @@ type MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct].
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) Unwrap() *raw.MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct { return x.inner }
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) Unwrap() *raw.MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStructFromID adopts an existing object pointer as a MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct (nil for 0).
 func MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStructFromID(id objc.ID) *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct {
@@ -73,4 +77,3 @@ type MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStructable interface {
 }
 
 var _ MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStructable = (*MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct)(nil)
-

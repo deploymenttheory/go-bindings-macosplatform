@@ -19,20 +19,20 @@ type AVCaption struct {
 }
 
 var (
-	_clsAVCaption = _objcClass("AVCaption")
-	_aVCaptionSelInitWithTextTimeRange = objc.RegisterName("initWithText:timeRange:")
-	_aVCaptionSelText = objc.RegisterName("text")
-	_aVCaptionSelTimeRange = objc.RegisterName("timeRange")
-	_aVCaptionSelTextColorAtIndexRange = objc.RegisterName("textColorAtIndex:range:")
+	_clsAVCaption                            = _objcClass("AVCaption")
+	_aVCaptionSelInitWithTextTimeRange       = objc.RegisterName("initWithText:timeRange:")
+	_aVCaptionSelText                        = objc.RegisterName("text")
+	_aVCaptionSelTimeRange                   = objc.RegisterName("timeRange")
+	_aVCaptionSelTextColorAtIndexRange       = objc.RegisterName("textColorAtIndex:range:")
 	_aVCaptionSelBackgroundColorAtIndexRange = objc.RegisterName("backgroundColorAtIndex:range:")
-	_aVCaptionSelFontWeightAtIndexRange = objc.RegisterName("fontWeightAtIndex:range:")
-	_aVCaptionSelFontStyleAtIndexRange = objc.RegisterName("fontStyleAtIndex:range:")
-	_aVCaptionSelDecorationAtIndexRange = objc.RegisterName("decorationAtIndex:range:")
-	_aVCaptionSelTextCombineAtIndexRange = objc.RegisterName("textCombineAtIndex:range:")
-	_aVCaptionSelRubyAtIndexRange = objc.RegisterName("rubyAtIndex:range:")
-	_aVCaptionSelRegion = objc.RegisterName("region")
-	_aVCaptionSelTextAlignment = objc.RegisterName("textAlignment")
-	_aVCaptionSelAnimation = objc.RegisterName("animation")
+	_aVCaptionSelFontWeightAtIndexRange      = objc.RegisterName("fontWeightAtIndex:range:")
+	_aVCaptionSelFontStyleAtIndexRange       = objc.RegisterName("fontStyleAtIndex:range:")
+	_aVCaptionSelDecorationAtIndexRange      = objc.RegisterName("decorationAtIndex:range:")
+	_aVCaptionSelTextCombineAtIndexRange     = objc.RegisterName("textCombineAtIndex:range:")
+	_aVCaptionSelRubyAtIndexRange            = objc.RegisterName("rubyAtIndex:range:")
+	_aVCaptionSelRegion                      = objc.RegisterName("region")
+	_aVCaptionSelTextAlignment               = objc.RegisterName("textAlignment")
+	_aVCaptionSelAnimation                   = objc.RegisterName("animation")
 )
 
 func AVCaptionFromID(id objc.ID) *AVCaption {
@@ -48,14 +48,18 @@ func AVCaptionFromID(id objc.ID) *AVCaption {
 // @method initWithText:timeRange: @abstract Initializes an instance of AVCaption with the given text and time range. @param text The text for the new caption object. See text property for the available character sets and other restrictions. @param timeRange The time range for the new caption object. @result An instance of AVCaption that carries the given text and time range.
 func (o *AVCaption) InitWithTextTimeRange(text *foundation.NSString, timeRange coremedia.CMTimeRange) *AVCaption {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptionSelInitWithTextTimeRange, text.Ptr(), timeRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptionFromID(_ret)
 }
 
 // @property text @abstract The text content of the caption. @discussion The text may contain any of the line breaking character sequences (LF, CR, or CF+LF) and separating the lines in the presentation. The Apple iTT format supports all Unicode code points allowed in a XML document. Any XML special characters such as '&' are converted to a corresponding character reference syntax when written to the destination file. CEA608 closed captions support the following Unicode characters. Range: U+0020 - U+005F Range: U+0061 - U+007E Range: U+00A1 - U+00A5 Characters: U+00A9, U+00AB, U+00AE, U+00B0, U+00BB, U+00BD, U+00BF Range: U+00C0-U+00C5 Range: U+00C7-U+00CF Range: U+00D1-U+00D6 Range: U+00D8-U+00DC Range: U+00DF-U+00E5 Range: U+00E7-U+00EF Range: U+00F1-U+00FC Range: U+2018-U+2019 Range: U+2018-U+201D Character: U+2022 Range: U+2120-U+2122 Characters: U+2501, U+2503, U+250F, U+2513, U+2517, U+251B, U+2588, U+266A CEA608 closed captions don't support the line breaking character sequences (LF, CR, or CF+LF).
 func (o *AVCaption) Text() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptionSelText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -104,14 +108,18 @@ func (o *AVCaption) TextCombineAtIndexRange(index int, outRange *foundation.NSRa
 // @method	rubyAtIndex:range: @abstract Get Ruby associated with the characters. @discussion The range parameter receives UTF-16 code unit index range where the ruby text is applied. After returning from the call, the range will indicate where the current style returned (including NULL) will be active and allows discovery of the next change in the style. It returns nil when the text doesn't have a ruby at the position. CEA608 closed captions ignore this property.
 func (o *AVCaption) RubyAtIndexRange(index int, outRange *foundation.NSRange) *AVCaptionRuby {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptionSelRubyAtIndexRange, index, outRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptionRubyFromID(_ret)
 }
 
 // @property region @abstract The region where the caption is placed. @discussion It can be nil when the underlying caption format doesn't support or use regions.
 func (o *AVCaption) Region() *AVCaptionRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptionSelRegion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptionRegionFromID(_ret)
 }
 
@@ -125,4 +133,3 @@ func (o *AVCaption) Animation() AVCaptionAnimation {
 	_ret := objc.Send[AVCaptionAnimation](o.Ptr(), _aVCaptionSelAnimation)
 	return _ret
 }
-

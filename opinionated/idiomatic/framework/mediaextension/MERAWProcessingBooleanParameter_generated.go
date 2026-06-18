@@ -96,7 +96,9 @@ func (x *RAWProcessingBooleanParameter) SetCurrentValue(currentValue bool) {
 	x.inner.SetCurrentValue(currentValue)
 }
 
-func (x *RAWProcessingBooleanParameter) asRAWProcessingParameter() *raw.MERAWProcessingParameter { return &x.inner.MERAWProcessingParameter }
+func (x *RAWProcessingBooleanParameter) asRAWProcessingParameter() *raw.MERAWProcessingParameter {
+	return &x.inner.MERAWProcessingParameter
+}
 
 // RAWProcessingBooleanParameterable is the interface implemented by [RAWProcessingBooleanParameter], for mocking and DI.
 type RAWProcessingBooleanParameterable interface {
@@ -110,4 +112,3 @@ type RAWProcessingBooleanParameterable interface {
 }
 
 var _ RAWProcessingBooleanParameterable = (*RAWProcessingBooleanParameter)(nil)
-

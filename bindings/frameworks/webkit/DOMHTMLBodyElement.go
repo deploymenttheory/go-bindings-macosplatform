@@ -16,19 +16,19 @@ type DOMHTMLBodyElement struct {
 }
 
 var (
-	_clsDOMHTMLBodyElement = _objcClass("DOMHTMLBodyElement")
-	_dOMHTMLBodyElementSelALink = objc.RegisterName("aLink")
-	_dOMHTMLBodyElementSelSetALink = objc.RegisterName("setALink:")
-	_dOMHTMLBodyElementSelBackground = objc.RegisterName("background")
+	_clsDOMHTMLBodyElement              = _objcClass("DOMHTMLBodyElement")
+	_dOMHTMLBodyElementSelALink         = objc.RegisterName("aLink")
+	_dOMHTMLBodyElementSelSetALink      = objc.RegisterName("setALink:")
+	_dOMHTMLBodyElementSelBackground    = objc.RegisterName("background")
 	_dOMHTMLBodyElementSelSetBackground = objc.RegisterName("setBackground:")
-	_dOMHTMLBodyElementSelBgColor = objc.RegisterName("bgColor")
-	_dOMHTMLBodyElementSelSetBgColor = objc.RegisterName("setBgColor:")
-	_dOMHTMLBodyElementSelLink = objc.RegisterName("link")
-	_dOMHTMLBodyElementSelSetLink = objc.RegisterName("setLink:")
-	_dOMHTMLBodyElementSelText = objc.RegisterName("text")
-	_dOMHTMLBodyElementSelSetText = objc.RegisterName("setText:")
-	_dOMHTMLBodyElementSelVLink = objc.RegisterName("vLink")
-	_dOMHTMLBodyElementSelSetVLink = objc.RegisterName("setVLink:")
+	_dOMHTMLBodyElementSelBgColor       = objc.RegisterName("bgColor")
+	_dOMHTMLBodyElementSelSetBgColor    = objc.RegisterName("setBgColor:")
+	_dOMHTMLBodyElementSelLink          = objc.RegisterName("link")
+	_dOMHTMLBodyElementSelSetLink       = objc.RegisterName("setLink:")
+	_dOMHTMLBodyElementSelText          = objc.RegisterName("text")
+	_dOMHTMLBodyElementSelSetText       = objc.RegisterName("setText:")
+	_dOMHTMLBodyElementSelVLink         = objc.RegisterName("vLink")
+	_dOMHTMLBodyElementSelSetVLink      = objc.RegisterName("setVLink:")
 )
 
 func DOMHTMLBodyElementFromID(id objc.ID) *DOMHTMLBodyElement {
@@ -43,7 +43,9 @@ func DOMHTMLBodyElementFromID(id objc.ID) *DOMHTMLBodyElement {
 
 func (o *DOMHTMLBodyElement) ALink() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLBodyElementSelALink)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -53,7 +55,9 @@ func (o *DOMHTMLBodyElement) SetALink(aLink *foundation.NSString) {
 
 func (o *DOMHTMLBodyElement) Background() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLBodyElementSelBackground)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -63,7 +67,9 @@ func (o *DOMHTMLBodyElement) SetBackground(background *foundation.NSString) {
 
 func (o *DOMHTMLBodyElement) BgColor() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLBodyElementSelBgColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -73,7 +79,9 @@ func (o *DOMHTMLBodyElement) SetBgColor(bgColor *foundation.NSString) {
 
 func (o *DOMHTMLBodyElement) Link() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLBodyElementSelLink)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -83,7 +91,9 @@ func (o *DOMHTMLBodyElement) SetLink(link *foundation.NSString) {
 
 func (o *DOMHTMLBodyElement) Text() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLBodyElementSelText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -93,11 +103,12 @@ func (o *DOMHTMLBodyElement) SetText(text *foundation.NSString) {
 
 func (o *DOMHTMLBodyElement) VLink() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLBodyElementSelVLink)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLBodyElement) SetVLink(vLink *foundation.NSString) {
 	o.Ptr().Send(_dOMHTMLBodyElementSelSetVLink, vLink.Ptr())
 }
-

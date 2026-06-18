@@ -16,14 +16,14 @@ type MXCrashDiagnosticObjectiveCExceptionReason struct {
 }
 
 var (
-	_clsMXCrashDiagnosticObjectiveCExceptionReason = _objcClass("MXCrashDiagnosticObjectiveCExceptionReason")
-	_mXCrashDiagnosticObjectiveCExceptionReasonSelJSONRepresentation = objc.RegisterName("JSONRepresentation")
+	_clsMXCrashDiagnosticObjectiveCExceptionReason                         = _objcClass("MXCrashDiagnosticObjectiveCExceptionReason")
+	_mXCrashDiagnosticObjectiveCExceptionReasonSelJSONRepresentation       = objc.RegisterName("JSONRepresentation")
 	_mXCrashDiagnosticObjectiveCExceptionReasonSelDictionaryRepresentation = objc.RegisterName("dictionaryRepresentation")
-	_mXCrashDiagnosticObjectiveCExceptionReasonSelComposedMessage = objc.RegisterName("composedMessage")
-	_mXCrashDiagnosticObjectiveCExceptionReasonSelFormatString = objc.RegisterName("formatString")
-	_mXCrashDiagnosticObjectiveCExceptionReasonSelArguments = objc.RegisterName("arguments")
-	_mXCrashDiagnosticObjectiveCExceptionReasonSelExceptionType = objc.RegisterName("exceptionType")
-	_mXCrashDiagnosticObjectiveCExceptionReasonSelExceptionName = objc.RegisterName("exceptionName")
+	_mXCrashDiagnosticObjectiveCExceptionReasonSelComposedMessage          = objc.RegisterName("composedMessage")
+	_mXCrashDiagnosticObjectiveCExceptionReasonSelFormatString             = objc.RegisterName("formatString")
+	_mXCrashDiagnosticObjectiveCExceptionReasonSelArguments                = objc.RegisterName("arguments")
+	_mXCrashDiagnosticObjectiveCExceptionReasonSelExceptionType            = objc.RegisterName("exceptionType")
+	_mXCrashDiagnosticObjectiveCExceptionReasonSelExceptionName            = objc.RegisterName("exceptionName")
 )
 
 func MXCrashDiagnosticObjectiveCExceptionReasonFromID(id objc.ID) *MXCrashDiagnosticObjectiveCExceptionReason {
@@ -39,7 +39,9 @@ func MXCrashDiagnosticObjectiveCExceptionReasonFromID(id objc.ID) *MXCrashDiagno
 // @method        JSONRepresentation @abstract      Convenience method to return a JSON representation of this MXCrashDiagnosticObjectiveCExceptionReason object. @result        An NSData object containing the JSON representation
 func (o *MXCrashDiagnosticObjectiveCExceptionReason) JSONRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXCrashDiagnosticObjectiveCExceptionReasonSelJSONRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -52,14 +54,18 @@ func (o *MXCrashDiagnosticObjectiveCExceptionReason) DictionaryRepresentation() 
 // @property      composedMessage @abstract      A human-readable message string summarizing the reason for the exception.
 func (o *MXCrashDiagnosticObjectiveCExceptionReason) ComposedMessage() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXCrashDiagnosticObjectiveCExceptionReasonSelComposedMessage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property      formatString @abstract      A string representing the exception message before arguments are substituted into the message
 func (o *MXCrashDiagnosticObjectiveCExceptionReason) FormatString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXCrashDiagnosticObjectiveCExceptionReasonSelFormatString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -72,14 +78,17 @@ func (o *MXCrashDiagnosticObjectiveCExceptionReason) Arguments() *foundation.NSA
 // @property      exceptionType @abstract      A human-readable string denoting type of the exception
 func (o *MXCrashDiagnosticObjectiveCExceptionReason) ExceptionType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXCrashDiagnosticObjectiveCExceptionReasonSelExceptionType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property      exceptionName @abstract      A string representing name of the exception @discussion    This will align with the "name" field of the NSException
 func (o *MXCrashDiagnosticObjectiveCExceptionReason) ExceptionName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXCrashDiagnosticObjectiveCExceptionReasonSelExceptionName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

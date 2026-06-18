@@ -15,12 +15,12 @@ type AVMIDIPolyPressureEvent struct {
 }
 
 var (
-	_clsAVMIDIPolyPressureEvent = _objcClass("AVMIDIPolyPressureEvent")
+	_clsAVMIDIPolyPressureEvent                           = _objcClass("AVMIDIPolyPressureEvent")
 	_aVMIDIPolyPressureEventSelInitWithChannelKeyPressure = objc.RegisterName("initWithChannel:key:pressure:")
-	_aVMIDIPolyPressureEventSelKey = objc.RegisterName("key")
-	_aVMIDIPolyPressureEventSelSetKey = objc.RegisterName("setKey:")
-	_aVMIDIPolyPressureEventSelPressure = objc.RegisterName("pressure")
-	_aVMIDIPolyPressureEventSelSetPressure = objc.RegisterName("setPressure:")
+	_aVMIDIPolyPressureEventSelKey                        = objc.RegisterName("key")
+	_aVMIDIPolyPressureEventSelSetKey                     = objc.RegisterName("setKey:")
+	_aVMIDIPolyPressureEventSelPressure                   = objc.RegisterName("pressure")
+	_aVMIDIPolyPressureEventSelSetPressure                = objc.RegisterName("setPressure:")
 )
 
 func AVMIDIPolyPressureEventFromID(id objc.ID) *AVMIDIPolyPressureEvent {
@@ -36,7 +36,9 @@ func AVMIDIPolyPressureEventFromID(id objc.ID) *AVMIDIPolyPressureEvent {
 // @method initWithChannel:key:pressure @abstract Initialize the event with a channel, a MIDI key number, and a key pressure value. @param channel The MIDI channel for the message.  Range: 0-15. @param key The MIDI key number to which the pressure should be applied. @param pressure The poly pressure value.
 func (o *AVMIDIPolyPressureEvent) InitWithChannelKeyPressure(channel uint, key uint, pressure uint) *AVMIDIPolyPressureEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMIDIPolyPressureEventSelInitWithChannelKeyPressure, channel, key, pressure)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMIDIPolyPressureEventFromID(_ret)
 }
 
@@ -59,4 +61,3 @@ func (o *AVMIDIPolyPressureEvent) Pressure() uint {
 func (o *AVMIDIPolyPressureEvent) SetPressure(pressure uint) {
 	o.Ptr().Send(_aVMIDIPolyPressureEventSelSetPressure, pressure)
 }
-

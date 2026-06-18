@@ -16,48 +16,48 @@ type CNContact struct {
 }
 
 var (
-	_clsCNContact = _objcClass("CNContact")
-	_cNContactSelIsKeyAvailable = objc.RegisterName("isKeyAvailable:")
-	_cNContactSelAreKeysAvailable = objc.RegisterName("areKeysAvailable:")
-	_cNContactSelLocalizedStringForKey = objc.RegisterName("localizedStringForKey:")
-	_cNContactSelComparatorForNameSortOrder = objc.RegisterName("comparatorForNameSortOrder:")
-	_cNContactSelDescriptorForAllComparatorKeys = objc.RegisterName("descriptorForAllComparatorKeys")
-	_cNContactSelIsUnifiedWithContactWithIdentifier = objc.RegisterName("isUnifiedWithContactWithIdentifier:")
-	_cNContactSelIdentifier = objc.RegisterName("identifier")
-	_cNContactSelContactType = objc.RegisterName("contactType")
-	_cNContactSelNamePrefix = objc.RegisterName("namePrefix")
-	_cNContactSelGivenName = objc.RegisterName("givenName")
-	_cNContactSelMiddleName = objc.RegisterName("middleName")
-	_cNContactSelFamilyName = objc.RegisterName("familyName")
-	_cNContactSelPreviousFamilyName = objc.RegisterName("previousFamilyName")
-	_cNContactSelNameSuffix = objc.RegisterName("nameSuffix")
-	_cNContactSelNickname = objc.RegisterName("nickname")
-	_cNContactSelOrganizationName = objc.RegisterName("organizationName")
-	_cNContactSelDepartmentName = objc.RegisterName("departmentName")
-	_cNContactSelJobTitle = objc.RegisterName("jobTitle")
-	_cNContactSelPhoneticGivenName = objc.RegisterName("phoneticGivenName")
-	_cNContactSelPhoneticMiddleName = objc.RegisterName("phoneticMiddleName")
-	_cNContactSelPhoneticFamilyName = objc.RegisterName("phoneticFamilyName")
-	_cNContactSelPhoneticOrganizationName = objc.RegisterName("phoneticOrganizationName")
-	_cNContactSelNote = objc.RegisterName("note")
-	_cNContactSelImageData = objc.RegisterName("imageData")
-	_cNContactSelThumbnailImageData = objc.RegisterName("thumbnailImageData")
-	_cNContactSelImageDataAvailable = objc.RegisterName("imageDataAvailable")
-	_cNContactSelPhoneNumbers = objc.RegisterName("phoneNumbers")
-	_cNContactSelEmailAddresses = objc.RegisterName("emailAddresses")
-	_cNContactSelPostalAddresses = objc.RegisterName("postalAddresses")
-	_cNContactSelUrlAddresses = objc.RegisterName("urlAddresses")
-	_cNContactSelContactRelations = objc.RegisterName("contactRelations")
-	_cNContactSelSocialProfiles = objc.RegisterName("socialProfiles")
-	_cNContactSelInstantMessageAddresses = objc.RegisterName("instantMessageAddresses")
-	_cNContactSelBirthday = objc.RegisterName("birthday")
-	_cNContactSelNonGregorianBirthday = objc.RegisterName("nonGregorianBirthday")
-	_cNContactSelDates = objc.RegisterName("dates")
-	_cNContactSelPredicateForContactsMatchingName = objc.RegisterName("predicateForContactsMatchingName:")
-	_cNContactSelPredicateForContactsMatchingEmailAddress = objc.RegisterName("predicateForContactsMatchingEmailAddress:")
-	_cNContactSelPredicateForContactsMatchingPhoneNumber = objc.RegisterName("predicateForContactsMatchingPhoneNumber:")
-	_cNContactSelPredicateForContactsWithIdentifiers = objc.RegisterName("predicateForContactsWithIdentifiers:")
-	_cNContactSelPredicateForContactsInGroupWithIdentifier = objc.RegisterName("predicateForContactsInGroupWithIdentifier:")
+	_clsCNContact                                              = _objcClass("CNContact")
+	_cNContactSelIsKeyAvailable                                = objc.RegisterName("isKeyAvailable:")
+	_cNContactSelAreKeysAvailable                              = objc.RegisterName("areKeysAvailable:")
+	_cNContactSelLocalizedStringForKey                         = objc.RegisterName("localizedStringForKey:")
+	_cNContactSelComparatorForNameSortOrder                    = objc.RegisterName("comparatorForNameSortOrder:")
+	_cNContactSelDescriptorForAllComparatorKeys                = objc.RegisterName("descriptorForAllComparatorKeys")
+	_cNContactSelIsUnifiedWithContactWithIdentifier            = objc.RegisterName("isUnifiedWithContactWithIdentifier:")
+	_cNContactSelIdentifier                                    = objc.RegisterName("identifier")
+	_cNContactSelContactType                                   = objc.RegisterName("contactType")
+	_cNContactSelNamePrefix                                    = objc.RegisterName("namePrefix")
+	_cNContactSelGivenName                                     = objc.RegisterName("givenName")
+	_cNContactSelMiddleName                                    = objc.RegisterName("middleName")
+	_cNContactSelFamilyName                                    = objc.RegisterName("familyName")
+	_cNContactSelPreviousFamilyName                            = objc.RegisterName("previousFamilyName")
+	_cNContactSelNameSuffix                                    = objc.RegisterName("nameSuffix")
+	_cNContactSelNickname                                      = objc.RegisterName("nickname")
+	_cNContactSelOrganizationName                              = objc.RegisterName("organizationName")
+	_cNContactSelDepartmentName                                = objc.RegisterName("departmentName")
+	_cNContactSelJobTitle                                      = objc.RegisterName("jobTitle")
+	_cNContactSelPhoneticGivenName                             = objc.RegisterName("phoneticGivenName")
+	_cNContactSelPhoneticMiddleName                            = objc.RegisterName("phoneticMiddleName")
+	_cNContactSelPhoneticFamilyName                            = objc.RegisterName("phoneticFamilyName")
+	_cNContactSelPhoneticOrganizationName                      = objc.RegisterName("phoneticOrganizationName")
+	_cNContactSelNote                                          = objc.RegisterName("note")
+	_cNContactSelImageData                                     = objc.RegisterName("imageData")
+	_cNContactSelThumbnailImageData                            = objc.RegisterName("thumbnailImageData")
+	_cNContactSelImageDataAvailable                            = objc.RegisterName("imageDataAvailable")
+	_cNContactSelPhoneNumbers                                  = objc.RegisterName("phoneNumbers")
+	_cNContactSelEmailAddresses                                = objc.RegisterName("emailAddresses")
+	_cNContactSelPostalAddresses                               = objc.RegisterName("postalAddresses")
+	_cNContactSelUrlAddresses                                  = objc.RegisterName("urlAddresses")
+	_cNContactSelContactRelations                              = objc.RegisterName("contactRelations")
+	_cNContactSelSocialProfiles                                = objc.RegisterName("socialProfiles")
+	_cNContactSelInstantMessageAddresses                       = objc.RegisterName("instantMessageAddresses")
+	_cNContactSelBirthday                                      = objc.RegisterName("birthday")
+	_cNContactSelNonGregorianBirthday                          = objc.RegisterName("nonGregorianBirthday")
+	_cNContactSelDates                                         = objc.RegisterName("dates")
+	_cNContactSelPredicateForContactsMatchingName              = objc.RegisterName("predicateForContactsMatchingName:")
+	_cNContactSelPredicateForContactsMatchingEmailAddress      = objc.RegisterName("predicateForContactsMatchingEmailAddress:")
+	_cNContactSelPredicateForContactsMatchingPhoneNumber       = objc.RegisterName("predicateForContactsMatchingPhoneNumber:")
+	_cNContactSelPredicateForContactsWithIdentifiers           = objc.RegisterName("predicateForContactsWithIdentifiers:")
+	_cNContactSelPredicateForContactsInGroupWithIdentifier     = objc.RegisterName("predicateForContactsInGroupWithIdentifier:")
 	_cNContactSelPredicateForContactsInContainerWithIdentifier = objc.RegisterName("predicateForContactsInContainerWithIdentifier:")
 )
 
@@ -86,7 +86,9 @@ func (o *CNContact) AreKeysAvailable(keyDescriptors *foundation.NSArray[CNKeyDes
 // Returns a user displayable property name.
 func CNContactLocalizedStringForKey(key *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContact), _cNContactSelLocalizedStringForKey, key.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -111,7 +113,9 @@ func (o *CNContact) IsUnifiedWithContactWithIdentifier(contactIdentifier *founda
 // The identifier is unique among contacts on the device. It can be saved and used for fetching contacts next application launch.
 func (o *CNContact) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -122,103 +126,137 @@ func (o *CNContact) ContactType() CNContactType {
 
 func (o *CNContact) NamePrefix() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactSelNamePrefix)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CNContact) GivenName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactSelGivenName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CNContact) MiddleName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactSelMiddleName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CNContact) FamilyName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactSelFamilyName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CNContact) PreviousFamilyName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactSelPreviousFamilyName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CNContact) NameSuffix() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactSelNameSuffix)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CNContact) Nickname() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactSelNickname)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CNContact) OrganizationName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactSelOrganizationName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CNContact) DepartmentName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactSelDepartmentName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CNContact) JobTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactSelJobTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CNContact) PhoneticGivenName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactSelPhoneticGivenName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CNContact) PhoneticMiddleName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactSelPhoneticMiddleName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CNContact) PhoneticFamilyName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactSelPhoneticFamilyName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CNContact) PhoneticOrganizationName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactSelPhoneticOrganizationName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CNContact) Note() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactSelNote)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CNContact) ImageData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactSelImageData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *CNContact) ThumbnailImageData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactSelThumbnailImageData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -265,14 +303,18 @@ func (o *CNContact) InstantMessageAddresses() *foundation.NSArray[objc.ID] {
 // The Gregorian birthday.
 func (o *CNContact) Birthday() *foundation.NSDateComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactSelBirthday)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateComponentsFromID(_ret)
 }
 
 // The alternate birthday (Lunisolar).
 func (o *CNContact) NonGregorianBirthday() *foundation.NSDateComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactSelNonGregorianBirthday)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateComponentsFromID(_ret)
 }
 
@@ -285,40 +327,51 @@ func (o *CNContact) Dates() *foundation.NSArray[objc.ID] {
 // @abstract To fetch contacts matching a name. @discussion The name can contain any number of words.
 func CNContactPredicateForContactsMatchingName(name *foundation.NSString) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContact), _cNContactSelPredicateForContactsMatchingName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
 // @abstract    Fetch contacts matching an email address. @discussion  Use this predicate to find the contact(s) which contain the specified email address. The search is not case-sensitive. @param       emailAddress The email address to search for. Do not include a scheme (e.g., "mailto:").
 func CNContactPredicateForContactsMatchingEmailAddress(emailAddress *foundation.NSString) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContact), _cNContactSelPredicateForContactsMatchingEmailAddress, emailAddress.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
 // @abstract    Fetch contacts matching a phone number. @discussion  If the predicate and contact differ in their use or presence of country codes, a best effort will be made to match results; however, inexact matches are not guaranteed. @param       phoneNumber A @c CNPhoneNumber representing the phone number to search for. Do not include a scheme (e.g., "tel:").
 func CNContactPredicateForContactsMatchingPhoneNumber(phoneNumber *CNPhoneNumber) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContact), _cNContactSelPredicateForContactsMatchingPhoneNumber, phoneNumber.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
 // To fetch contacts matching contact identifiers.
 func CNContactPredicateForContactsWithIdentifiers(identifiers *foundation.NSArray[*foundation.NSString]) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContact), _cNContactSelPredicateForContactsWithIdentifiers, identifiers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
 func CNContactPredicateForContactsInGroupWithIdentifier(groupIdentifier *foundation.NSString) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContact), _cNContactSelPredicateForContactsInGroupWithIdentifier, groupIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
 func CNContactPredicateForContactsInContainerWithIdentifier(containerIdentifier *foundation.NSString) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContact), _cNContactSelPredicateForContactsInContainerWithIdentifier, containerIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
-

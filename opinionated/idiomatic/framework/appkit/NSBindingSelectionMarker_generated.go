@@ -41,4 +41,3 @@ type BindingSelectionMarkerable interface {
 }
 
 var _ BindingSelectionMarkerable = (*BindingSelectionMarker)(nil)
-

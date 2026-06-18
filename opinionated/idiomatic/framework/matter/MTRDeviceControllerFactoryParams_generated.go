@@ -18,7 +18,9 @@ type MTRDeviceControllerFactoryParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRDeviceControllerFactoryParams].
-func (x *MTRDeviceControllerFactoryParams) Unwrap() *raw.MTRDeviceControllerFactoryParams { return x.inner }
+func (x *MTRDeviceControllerFactoryParams) Unwrap() *raw.MTRDeviceControllerFactoryParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -52,7 +54,9 @@ func (x *MTRDeviceControllerFactoryParams) WithProductAttestationAuthorityCertif
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSData](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -68,7 +72,9 @@ func (x *MTRDeviceControllerFactoryParams) WithCertificationDeclarationCertifica
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSData](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -156,7 +162,9 @@ func (x *MTRDeviceControllerFactoryParams) SetShouldStartServer(shouldStartServe
 	x.inner.SetShouldStartServer(shouldStartServer)
 }
 
-func (x *MTRDeviceControllerFactoryParams) asMTRDeviceControllerFactoryParams() *raw.MTRDeviceControllerFactoryParams { return x.inner }
+func (x *MTRDeviceControllerFactoryParams) asMTRDeviceControllerFactoryParams() *raw.MTRDeviceControllerFactoryParams {
+	return x.inner
+}
 
 // MTRDeviceControllerFactoryParamsable is the interface implemented by [MTRDeviceControllerFactoryParams], for mocking and DI.
 type MTRDeviceControllerFactoryParamsable interface {
@@ -180,4 +188,3 @@ type MTRDeviceControllerFactoryParamsable interface {
 }
 
 var _ MTRDeviceControllerFactoryParamsable = (*MTRDeviceControllerFactoryParams)(nil)
-

@@ -338,7 +338,9 @@ func (x *LSTMDescriptor) SetCellToOutputNeuronParamC(cellToOutputNeuronParamC fl
 	x.inner.SetCellToOutputNeuronParamC(cellToOutputNeuronParamC)
 }
 
-func (x *LSTMDescriptor) asRNNDescriptor() *mpsneuralnetwork.MPSRNNDescriptor { return &x.inner.MPSRNNDescriptor }
+func (x *LSTMDescriptor) asRNNDescriptor() *mpsneuralnetwork.MPSRNNDescriptor {
+	return &x.inner.MPSRNNDescriptor
+}
 
 // LSTMDescriptorable is the interface implemented by [LSTMDescriptor], for mocking and DI.
 type LSTMDescriptorable interface {
@@ -402,4 +404,3 @@ type LSTMDescriptorable interface {
 }
 
 var _ LSTMDescriptorable = (*LSTMDescriptor)(nil)
-

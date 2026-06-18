@@ -112,7 +112,9 @@ func (x *ImageDivide) WithClipRect(clipRect metal.MTLRegion) *ImageDivide {
 
 func (x *ImageDivide) asImageArithmetic() *raw.MPSImageArithmetic { return &x.inner.MPSImageArithmetic }
 
-func (x *ImageDivide) asBinaryImageKernel() *raw.MPSBinaryImageKernel { return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel }
+func (x *ImageDivide) asBinaryImageKernel() *raw.MPSBinaryImageKernel {
+	return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel
+}
 
 // ImageDivideable is the interface implemented by [ImageDivide], for mocking and DI.
 type ImageDivideable interface {
@@ -132,4 +134,3 @@ type ImageDivideable interface {
 }
 
 var _ ImageDivideable = (*ImageDivide)(nil)
-

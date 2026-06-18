@@ -16,11 +16,11 @@ type DOMHTMLOptGroupElement struct {
 }
 
 var (
-	_clsDOMHTMLOptGroupElement = _objcClass("DOMHTMLOptGroupElement")
-	_dOMHTMLOptGroupElementSelDisabled = objc.RegisterName("disabled")
+	_clsDOMHTMLOptGroupElement            = _objcClass("DOMHTMLOptGroupElement")
+	_dOMHTMLOptGroupElementSelDisabled    = objc.RegisterName("disabled")
 	_dOMHTMLOptGroupElementSelSetDisabled = objc.RegisterName("setDisabled:")
-	_dOMHTMLOptGroupElementSelLabel = objc.RegisterName("label")
-	_dOMHTMLOptGroupElementSelSetLabel = objc.RegisterName("setLabel:")
+	_dOMHTMLOptGroupElementSelLabel       = objc.RegisterName("label")
+	_dOMHTMLOptGroupElementSelSetLabel    = objc.RegisterName("setLabel:")
 )
 
 func DOMHTMLOptGroupElementFromID(id objc.ID) *DOMHTMLOptGroupElement {
@@ -44,11 +44,12 @@ func (o *DOMHTMLOptGroupElement) SetDisabled(disabled bool) {
 
 func (o *DOMHTMLOptGroupElement) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLOptGroupElementSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLOptGroupElement) SetLabel(label *foundation.NSString) {
 	o.Ptr().Send(_dOMHTMLOptGroupElementSelSetLabel, label.Ptr())
 }
-

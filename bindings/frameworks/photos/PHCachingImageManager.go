@@ -17,12 +17,12 @@ type PHCachingImageManager struct {
 }
 
 var (
-	_clsPHCachingImageManager = _objcClass("PHCachingImageManager")
+	_clsPHCachingImageManager                                                        = _objcClass("PHCachingImageManager")
 	_pHCachingImageManagerSelStartCachingImagesForAssetsTargetSizeContentModeOptions = objc.RegisterName("startCachingImagesForAssets:targetSize:contentMode:options:")
-	_pHCachingImageManagerSelStopCachingImagesForAssetsTargetSizeContentModeOptions = objc.RegisterName("stopCachingImagesForAssets:targetSize:contentMode:options:")
-	_pHCachingImageManagerSelStopCachingImagesForAllAssets = objc.RegisterName("stopCachingImagesForAllAssets")
-	_pHCachingImageManagerSelAllowsCachingHighQualityImages = objc.RegisterName("allowsCachingHighQualityImages")
-	_pHCachingImageManagerSelSetAllowsCachingHighQualityImages = objc.RegisterName("setAllowsCachingHighQualityImages:")
+	_pHCachingImageManagerSelStopCachingImagesForAssetsTargetSizeContentModeOptions  = objc.RegisterName("stopCachingImagesForAssets:targetSize:contentMode:options:")
+	_pHCachingImageManagerSelStopCachingImagesForAllAssets                           = objc.RegisterName("stopCachingImagesForAllAssets")
+	_pHCachingImageManagerSelAllowsCachingHighQualityImages                          = objc.RegisterName("allowsCachingHighQualityImages")
+	_pHCachingImageManagerSelSetAllowsCachingHighQualityImages                       = objc.RegisterName("setAllowsCachingHighQualityImages:")
 )
 
 func PHCachingImageManagerFromID(id objc.ID) *PHCachingImageManager {
@@ -57,4 +57,3 @@ func (o *PHCachingImageManager) AllowsCachingHighQualityImages() bool {
 func (o *PHCachingImageManager) SetAllowsCachingHighQualityImages(allowsCachingHighQualityImages bool) {
 	o.Ptr().Send(_pHCachingImageManagerSelSetAllowsCachingHighQualityImages, allowsCachingHighQualityImages)
 }
-

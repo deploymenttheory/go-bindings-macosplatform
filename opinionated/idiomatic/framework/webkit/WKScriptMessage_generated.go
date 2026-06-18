@@ -88,4 +88,3 @@ type WKScriptMessageable interface {
 }
 
 var _ WKScriptMessageable = (*WKScriptMessage)(nil)
-

@@ -67,4 +67,3 @@ type WebContentProcessable interface {
 }
 
 var _ WebContentProcessable = (*WebContentProcess)(nil)
-

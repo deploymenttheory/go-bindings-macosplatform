@@ -15,9 +15,9 @@ type VZVirtioSoundDeviceOutputStreamConfiguration struct {
 }
 
 var (
-	_clsVZVirtioSoundDeviceOutputStreamConfiguration = _objcClass("VZVirtioSoundDeviceOutputStreamConfiguration")
-	_vZVirtioSoundDeviceOutputStreamConfigurationSelInit = objc.RegisterName("init")
-	_vZVirtioSoundDeviceOutputStreamConfigurationSelSink = objc.RegisterName("sink")
+	_clsVZVirtioSoundDeviceOutputStreamConfiguration        = _objcClass("VZVirtioSoundDeviceOutputStreamConfiguration")
+	_vZVirtioSoundDeviceOutputStreamConfigurationSelInit    = objc.RegisterName("init")
+	_vZVirtioSoundDeviceOutputStreamConfigurationSelSink    = objc.RegisterName("sink")
 	_vZVirtioSoundDeviceOutputStreamConfigurationSelSetSink = objc.RegisterName("setSink:")
 )
 
@@ -34,17 +34,20 @@ func VZVirtioSoundDeviceOutputStreamConfigurationFromID(id objc.ID) *VZVirtioSou
 // @abstract Initialize the output stream configuration.
 func (o *VZVirtioSoundDeviceOutputStreamConfiguration) Init() *VZVirtioSoundDeviceOutputStreamConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioSoundDeviceOutputStreamConfigurationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZVirtioSoundDeviceOutputStreamConfigurationFromID(_ret)
 }
 
 func (o *VZVirtioSoundDeviceOutputStreamConfiguration) Sink() *VZAudioOutputStreamSink {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioSoundDeviceOutputStreamConfigurationSelSink)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZAudioOutputStreamSinkFromID(_ret)
 }
 
 func (o *VZVirtioSoundDeviceOutputStreamConfiguration) SetSink(sink *VZAudioOutputStreamSink) {
 	o.Ptr().Send(_vZVirtioSoundDeviceOutputStreamConfigurationSelSetSink, sink.Ptr())
 }
-

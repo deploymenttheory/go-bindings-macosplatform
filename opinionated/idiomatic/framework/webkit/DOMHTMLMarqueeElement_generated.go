@@ -148,15 +148,25 @@ func (x *DOMHTMLMarqueeElement) Stop() {
 	x.inner.Stop()
 }
 
-func (x *DOMHTMLMarqueeElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
+func (x *DOMHTMLMarqueeElement) asDOMHTMLElement() *raw.DOMHTMLElement {
+	return &x.inner.DOMHTMLElement
+}
 
-func (x *DOMHTMLMarqueeElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
+func (x *DOMHTMLMarqueeElement) asDOMElement() *raw.DOMElement {
+	return &x.inner.DOMHTMLElement.DOMElement
+}
 
-func (x *DOMHTMLMarqueeElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTMLElement.DOMElement.DOMNode }
+func (x *DOMHTMLMarqueeElement) asDOMNode() *raw.DOMNode {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode
+}
 
-func (x *DOMHTMLMarqueeElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
+func (x *DOMHTMLMarqueeElement) asDOMObject() *raw.DOMObject {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject
+}
 
-func (x *DOMHTMLMarqueeElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+func (x *DOMHTMLMarqueeElement) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject
+}
 
 // DOMHTMLMarqueeElementable is the interface implemented by [DOMHTMLMarqueeElement], for mocking and DI.
 type DOMHTMLMarqueeElementable interface {
@@ -183,4 +193,3 @@ type DOMHTMLMarqueeElementable interface {
 }
 
 var _ DOMHTMLMarqueeElementable = (*DOMHTMLMarqueeElement)(nil)
-

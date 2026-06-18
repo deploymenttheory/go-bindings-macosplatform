@@ -352,4 +352,3 @@ type XMLNodeable interface {
 }
 
 var _ XMLNodeable = (*XMLNode)(nil)
-

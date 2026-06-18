@@ -15,7 +15,9 @@ type StartCallCallRecordToCallBackResolutionResult struct {
 }
 
 // Unwrap returns the underlying [raw.INStartCallCallRecordToCallBackResolutionResult].
-func (x *StartCallCallRecordToCallBackResolutionResult) Unwrap() *raw.INStartCallCallRecordToCallBackResolutionResult { return x.inner }
+func (x *StartCallCallRecordToCallBackResolutionResult) Unwrap() *raw.INStartCallCallRecordToCallBackResolutionResult {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -36,9 +38,13 @@ func NewStartCallCallRecordToCallBackResolutionResultWithCallRecordResolutionRes
 	return &StartCallCallRecordToCallBackResolutionResult{inner: raw.INStartCallCallRecordToCallBackResolutionResultFromID(_id)}
 }
 
-func (x *StartCallCallRecordToCallBackResolutionResult) asCallRecordResolutionResult() *raw.INCallRecordResolutionResult { return &x.inner.INCallRecordResolutionResult }
+func (x *StartCallCallRecordToCallBackResolutionResult) asCallRecordResolutionResult() *raw.INCallRecordResolutionResult {
+	return &x.inner.INCallRecordResolutionResult
+}
 
-func (x *StartCallCallRecordToCallBackResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INCallRecordResolutionResult.INIntentResolutionResult }
+func (x *StartCallCallRecordToCallBackResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
+	return &x.inner.INCallRecordResolutionResult.INIntentResolutionResult
+}
 
 // StartCallCallRecordToCallBackResolutionResultable is the interface implemented by [StartCallCallRecordToCallBackResolutionResult], for mocking and DI.
 type StartCallCallRecordToCallBackResolutionResultable interface {
@@ -46,4 +52,3 @@ type StartCallCallRecordToCallBackResolutionResultable interface {
 }
 
 var _ StartCallCallRecordToCallBackResolutionResultable = (*StartCallCallRecordToCallBackResolutionResult)(nil)
-

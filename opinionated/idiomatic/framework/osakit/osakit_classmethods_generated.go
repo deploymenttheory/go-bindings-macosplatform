@@ -67,4 +67,3 @@ func LanguageInstanceWithLanguage(language *raw.OSALanguage) *LanguageInstance {
 func ScriptDataDescriptorWithContentsOfURL(url string) *foundation.NSAppleEventDescriptor {
 	return raw.OSAScriptScriptDataDescriptorWithContentsOfURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
 }
-

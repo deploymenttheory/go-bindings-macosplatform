@@ -57,4 +57,3 @@ type AttributeDescriptorArrayable interface {
 }
 
 var _ AttributeDescriptorArrayable = (*AttributeDescriptorArray)(nil)
-

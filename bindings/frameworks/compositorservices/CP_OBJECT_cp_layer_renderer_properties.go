@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// Returns the type value that specifies how the underlying texture organizes its views. - Parameters: - texture_topology: The texture topology to query. Get the texture topology from the layer properties using the ``cp_layer_renderer_properties_get_texture_topology`` function. - Returns: A Metal value that indicates the arrangement of views within the texture. A texture might store the content of one view or multiple views. For example, a single texture might store one or both views for the left and right eyes of a head-mounted display. The texture type indicates this content organization strategy.
+// Returns the type value that specifies how the underlying texture organizes its views. - Parameters: - texture_topology: The texture topology to query. Get the texture topology from the layer properties using the “cp_layer_renderer_properties_get_texture_topology“ function. - Returns: A Metal value that indicates the arrangement of views within the texture. A texture might store the content of one view or multiple views. For example, a single texture might store one or both views for the left and right eyes of a head-mounted display. The texture type indicates this content organization strategy.
 //
 // Apple documentation: https://developer.apple.com/documentation/compositorservices/cp_object_cp_layer_renderer_properties
 type CP_OBJECT_cp_layer_renderer_properties struct {
@@ -28,4 +28,3 @@ func CP_OBJECT_cp_layer_renderer_propertiesFromID(id objc.ID) *CP_OBJECT_cp_laye
 	purego.Track(o)
 	return o
 }
-

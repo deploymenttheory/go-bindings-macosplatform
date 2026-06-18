@@ -14,4 +14,3 @@ type AUCustomViewPersistentData interface {
 	CustomViewPersistentData() *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	SetCustomViewPersistentData(customViewPersistentData *foundation.NSDictionary[*foundation.NSString, objc.ID])
 }
-

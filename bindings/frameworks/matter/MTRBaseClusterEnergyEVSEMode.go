@@ -18,30 +18,30 @@ type MTRBaseClusterEnergyEVSEMode struct {
 }
 
 var (
-	_clsMTRBaseClusterEnergyEVSEMode = _objcClass("MTRBaseClusterEnergyEVSEMode")
-	_mTRBaseClusterEnergyEVSEModeSelChangeToModeWithParamsCompletion = objc.RegisterName("changeToModeWithParams:completion:")
-	_mTRBaseClusterEnergyEVSEModeSelReadAttributeSupportedModesWithCompletion = objc.RegisterName("readAttributeSupportedModesWithCompletion:")
-	_mTRBaseClusterEnergyEVSEModeSelSubscribeAttributeSupportedModesWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeSupportedModesWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterEnergyEVSEModeSelReadAttributeSupportedModesWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeSupportedModesWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterEnergyEVSEModeSelReadAttributeCurrentModeWithCompletion = objc.RegisterName("readAttributeCurrentModeWithCompletion:")
-	_mTRBaseClusterEnergyEVSEModeSelSubscribeAttributeCurrentModeWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeCurrentModeWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterEnergyEVSEModeSelReadAttributeCurrentModeWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeCurrentModeWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterEnergyEVSEModeSelReadAttributeGeneratedCommandListWithCompletion = objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:")
+	_clsMTRBaseClusterEnergyEVSEMode                                                                                     = _objcClass("MTRBaseClusterEnergyEVSEMode")
+	_mTRBaseClusterEnergyEVSEModeSelChangeToModeWithParamsCompletion                                                     = objc.RegisterName("changeToModeWithParams:completion:")
+	_mTRBaseClusterEnergyEVSEModeSelReadAttributeSupportedModesWithCompletion                                            = objc.RegisterName("readAttributeSupportedModesWithCompletion:")
+	_mTRBaseClusterEnergyEVSEModeSelSubscribeAttributeSupportedModesWithParamsSubscriptionEstablishedReportHandler       = objc.RegisterName("subscribeAttributeSupportedModesWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterEnergyEVSEModeSelReadAttributeSupportedModesWithClusterStateCacheEndpointQueueCompletion              = objc.RegisterName("readAttributeSupportedModesWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterEnergyEVSEModeSelReadAttributeCurrentModeWithCompletion                                               = objc.RegisterName("readAttributeCurrentModeWithCompletion:")
+	_mTRBaseClusterEnergyEVSEModeSelSubscribeAttributeCurrentModeWithParamsSubscriptionEstablishedReportHandler          = objc.RegisterName("subscribeAttributeCurrentModeWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterEnergyEVSEModeSelReadAttributeCurrentModeWithClusterStateCacheEndpointQueueCompletion                 = objc.RegisterName("readAttributeCurrentModeWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterEnergyEVSEModeSelReadAttributeGeneratedCommandListWithCompletion                                      = objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:")
 	_mTRBaseClusterEnergyEVSEModeSelSubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterEnergyEVSEModeSelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeGeneratedCommandListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterEnergyEVSEModeSelReadAttributeAcceptedCommandListWithCompletion = objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:")
-	_mTRBaseClusterEnergyEVSEModeSelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterEnergyEVSEModeSelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeAcceptedCommandListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterEnergyEVSEModeSelReadAttributeAttributeListWithCompletion = objc.RegisterName("readAttributeAttributeListWithCompletion:")
-	_mTRBaseClusterEnergyEVSEModeSelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterEnergyEVSEModeSelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeAttributeListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterEnergyEVSEModeSelReadAttributeFeatureMapWithCompletion = objc.RegisterName("readAttributeFeatureMapWithCompletion:")
-	_mTRBaseClusterEnergyEVSEModeSelSubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterEnergyEVSEModeSelReadAttributeFeatureMapWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeFeatureMapWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterEnergyEVSEModeSelReadAttributeClusterRevisionWithCompletion = objc.RegisterName("readAttributeClusterRevisionWithCompletion:")
-	_mTRBaseClusterEnergyEVSEModeSelSubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterEnergyEVSEModeSelReadAttributeClusterRevisionWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeClusterRevisionWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterEnergyEVSEModeSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRBaseClusterEnergyEVSEModeSelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion        = objc.RegisterName("readAttributeGeneratedCommandListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterEnergyEVSEModeSelReadAttributeAcceptedCommandListWithCompletion                                       = objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:")
+	_mTRBaseClusterEnergyEVSEModeSelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler  = objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterEnergyEVSEModeSelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion         = objc.RegisterName("readAttributeAcceptedCommandListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterEnergyEVSEModeSelReadAttributeAttributeListWithCompletion                                             = objc.RegisterName("readAttributeAttributeListWithCompletion:")
+	_mTRBaseClusterEnergyEVSEModeSelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler        = objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterEnergyEVSEModeSelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion               = objc.RegisterName("readAttributeAttributeListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterEnergyEVSEModeSelReadAttributeFeatureMapWithCompletion                                                = objc.RegisterName("readAttributeFeatureMapWithCompletion:")
+	_mTRBaseClusterEnergyEVSEModeSelSubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler           = objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterEnergyEVSEModeSelReadAttributeFeatureMapWithClusterStateCacheEndpointQueueCompletion                  = objc.RegisterName("readAttributeFeatureMapWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterEnergyEVSEModeSelReadAttributeClusterRevisionWithCompletion                                           = objc.RegisterName("readAttributeClusterRevisionWithCompletion:")
+	_mTRBaseClusterEnergyEVSEModeSelSubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler      = objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterEnergyEVSEModeSelReadAttributeClusterRevisionWithClusterStateCacheEndpointQueueCompletion             = objc.RegisterName("readAttributeClusterRevisionWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterEnergyEVSEModeSelInitWithDeviceEndpointIDQueue                                                        = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRBaseClusterEnergyEVSEModeFromID(id objc.ID) *MTRBaseClusterEnergyEVSEMode {
@@ -295,7 +295,8 @@ func MTRBaseClusterEnergyEVSEModeReadAttributeClusterRevisionWithClusterStateCac
 // For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func (o *MTRBaseClusterEnergyEVSEMode) InitWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterEnergyEVSEMode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBaseClusterEnergyEVSEModeSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRBaseClusterEnergyEVSEModeFromID(_ret)
 }
-

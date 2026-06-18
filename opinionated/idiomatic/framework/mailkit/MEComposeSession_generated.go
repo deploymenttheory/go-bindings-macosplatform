@@ -74,4 +74,3 @@ type ComposeSessionable interface {
 }
 
 var _ ComposeSessionable = (*ComposeSession)(nil)
-

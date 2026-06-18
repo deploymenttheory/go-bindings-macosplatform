@@ -105,4 +105,3 @@ type ContentEditingOutputable interface {
 }
 
 var _ ContentEditingOutputable = (*ContentEditingOutput)(nil)
-

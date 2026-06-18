@@ -86,7 +86,9 @@ func (x *PathComponentCell) WithAllowedInputSourceLocales(items ...*foundation.N
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -377,7 +379,9 @@ func (x *PathComponentCell) SetURL(uRL string) {
 
 func (x *PathComponentCell) asTextFieldCell() *raw.NSTextFieldCell { return &x.inner.NSTextFieldCell }
 
-func (x *PathComponentCell) asActionCell() *raw.NSActionCell { return &x.inner.NSTextFieldCell.NSActionCell }
+func (x *PathComponentCell) asActionCell() *raw.NSActionCell {
+	return &x.inner.NSTextFieldCell.NSActionCell
+}
 
 func (x *PathComponentCell) asCell() *raw.NSCell { return &x.inner.NSTextFieldCell.NSActionCell.NSCell }
 
@@ -442,4 +446,3 @@ type PathComponentCellable interface {
 }
 
 var _ PathComponentCellable = (*PathComponentCell)(nil)
-

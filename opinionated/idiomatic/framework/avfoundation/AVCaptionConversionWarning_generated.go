@@ -69,4 +69,3 @@ type CaptionConversionWarningable interface {
 }
 
 var _ CaptionConversionWarningable = (*CaptionConversionWarning)(nil)
-

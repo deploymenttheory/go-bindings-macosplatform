@@ -54,4 +54,3 @@ type MutableFileDataBufferable interface {
 }
 
 var _ MutableFileDataBufferable = (*MutableFileDataBuffer)(nil)
-

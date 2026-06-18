@@ -15,7 +15,9 @@ type AccelerationStructurePassDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTLAccelerationStructurePassDescriptor].
-func (x *AccelerationStructurePassDescriptor) Unwrap() *raw.MTLAccelerationStructurePassDescriptor { return x.inner }
+func (x *AccelerationStructurePassDescriptor) Unwrap() *raw.MTLAccelerationStructurePassDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -51,4 +53,3 @@ type AccelerationStructurePassDescriptorable interface {
 }
 
 var _ AccelerationStructurePassDescriptorable = (*AccelerationStructurePassDescriptor)(nil)
-

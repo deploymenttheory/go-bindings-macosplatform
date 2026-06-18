@@ -18,7 +18,9 @@ type GraphExecutableExecutionDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MPSGraphExecutableExecutionDescriptor].
-func (x *GraphExecutableExecutionDescriptor) Unwrap() *raw.MPSGraphExecutableExecutionDescriptor { return x.inner }
+func (x *GraphExecutableExecutionDescriptor) Unwrap() *raw.MPSGraphExecutableExecutionDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -96,7 +98,9 @@ func (x *GraphExecutableExecutionDescriptor) SetWaitUntilCompleted(waitUntilComp
 	x.inner.SetWaitUntilCompleted(waitUntilCompleted)
 }
 
-func (x *GraphExecutableExecutionDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
+func (x *GraphExecutableExecutionDescriptor) asGraphObject() *raw.MPSGraphObject {
+	return &x.inner.MPSGraphObject
+}
 
 // GraphExecutableExecutionDescriptorable is the interface implemented by [GraphExecutableExecutionDescriptor], for mocking and DI.
 type GraphExecutableExecutionDescriptorable interface {
@@ -115,4 +119,3 @@ type GraphExecutableExecutionDescriptorable interface {
 }
 
 var _ GraphExecutableExecutionDescriptorable = (*GraphExecutableExecutionDescriptor)(nil)
-

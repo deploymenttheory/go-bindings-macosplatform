@@ -19,14 +19,14 @@ type VTFrameProcessor struct {
 }
 
 var (
-	_clsVTFrameProcessor = _objcClass("VTFrameProcessor")
-	_vTFrameProcessorSelInit = objc.RegisterName("init")
-	_vTFrameProcessorSelStartSessionWithConfigurationError = objc.RegisterName("startSessionWithConfiguration:error:")
-	_vTFrameProcessorSelProcessWithParametersError = objc.RegisterName("processWithParameters:error:")
-	_vTFrameProcessorSelProcessWithParametersCompletionHandler = objc.RegisterName("processWithParameters:completionHandler:")
+	_clsVTFrameProcessor                                        = _objcClass("VTFrameProcessor")
+	_vTFrameProcessorSelInit                                    = objc.RegisterName("init")
+	_vTFrameProcessorSelStartSessionWithConfigurationError      = objc.RegisterName("startSessionWithConfiguration:error:")
+	_vTFrameProcessorSelProcessWithParametersError              = objc.RegisterName("processWithParameters:error:")
+	_vTFrameProcessorSelProcessWithParametersCompletionHandler  = objc.RegisterName("processWithParameters:completionHandler:")
 	_vTFrameProcessorSelProcessWithParametersFrameOutputHandler = objc.RegisterName("processWithParameters:frameOutputHandler:")
-	_vTFrameProcessorSelProcessWithCommandBufferParameters = objc.RegisterName("processWithCommandBuffer:parameters:")
-	_vTFrameProcessorSelEndSession = objc.RegisterName("endSession")
+	_vTFrameProcessorSelProcessWithCommandBufferParameters      = objc.RegisterName("processWithCommandBuffer:parameters:")
+	_vTFrameProcessorSelEndSession                              = objc.RegisterName("endSession")
 )
 
 func VTFrameProcessorFromID(id objc.ID) *VTFrameProcessor {
@@ -42,11 +42,13 @@ func VTFrameProcessorFromID(id objc.ID) *VTFrameProcessor {
 // Create a new instance of the frame processor.
 func (o *VTFrameProcessor) Init() *VTFrameProcessor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTFrameProcessorSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VTFrameProcessorFromID(_ret)
 }
 
-// Starts a new session and configures the processor pipeline for an effect. - Parameters: - configuration: The system uses this parameter to create an effect pipeline for processing frames. This object must conform to the ``VTFrameProcessorConfiguration`` interface. - error: Contains error information if any. You may specify NULL for this parameter if you do not want the error information.
+// Starts a new session and configures the processor pipeline for an effect. - Parameters: - configuration: The system uses this parameter to create an effect pipeline for processing frames. This object must conform to the “VTFrameProcessorConfiguration“ interface. - error: Contains error information if any. You may specify NULL for this parameter if you do not want the error information.
 func (o *VTFrameProcessor) StartSessionWithConfigurationError(configuration VTFrameProcessorConfiguration) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vTFrameProcessorSelStartSessionWithConfigurationError, configuration, unsafe.Pointer(&_nsErr))
@@ -56,7 +58,7 @@ func (o *VTFrameProcessor) StartSessionWithConfigurationError(configuration VTFr
 	return _ret, nil
 }
 
-// Synchronously performs the processor effects. Use the respective ``VTFrameProcessorParameters`` to pass frame level settings and frame level input/output parameters for the effect that you configured this session for by calling ``startSessionWithConfiguration:error``. - Parameters: - parameters: A `VTFrameProcessorParameters` based object to specify additional frame based parameters to use during processing. It needs to match the configuration type used during start session. - error: Contains error information if any. You may specify NULL for this parameter if you do not want the error information.
+// Synchronously performs the processor effects. Use the respective “VTFrameProcessorParameters“ to pass frame level settings and frame level input/output parameters for the effect that you configured this session for by calling “startSessionWithConfiguration:error“. - Parameters: - parameters: A `VTFrameProcessorParameters` based object to specify additional frame based parameters to use during processing. It needs to match the configuration type used during start session. - error: Contains error information if any. You may specify NULL for this parameter if you do not want the error information.
 func (o *VTFrameProcessor) ProcessWithParametersError(parameters VTFrameProcessorParameters) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vTFrameProcessorSelProcessWithParametersError, parameters, unsafe.Pointer(&_nsErr))
@@ -88,8 +90,7 @@ func (o *VTFrameProcessor) ProcessWithCommandBufferParameters(commandBuffer meta
 	o.Ptr().Send(_vTFrameProcessorSelProcessWithCommandBufferParameters, commandBuffer, parameters)
 }
 
-// Performs all necessary tasks to end the session. After this call completes, you can process no new frames unless you call ``startSessionWithConfiguration`` again.
+// Performs all necessary tasks to end the session. After this call completes, you can process no new frames unless you call “startSessionWithConfiguration“ again.
 func (o *VTFrameProcessor) EndSession() {
 	o.Ptr().Send(_vTFrameProcessorSelEndSession)
 }
-

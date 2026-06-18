@@ -18,11 +18,11 @@ type IKFilterUIView struct {
 }
 
 var (
-	_clsIKFilterUIView = _objcClass("IKFilterUIView")
+	_clsIKFilterUIView                    = _objcClass("IKFilterUIView")
 	_iKFilterUIViewSelViewWithFrameFilter = objc.RegisterName("viewWithFrame:filter:")
 	_iKFilterUIViewSelInitWithFrameFilter = objc.RegisterName("initWithFrame:filter:")
-	_iKFilterUIViewSelFilter = objc.RegisterName("filter")
-	_iKFilterUIViewSelObjectController = objc.RegisterName("objectController")
+	_iKFilterUIViewSelFilter              = objc.RegisterName("filter")
+	_iKFilterUIViewSelObjectController    = objc.RegisterName("objectController")
 )
 
 func IKFilterUIViewFromID(id objc.ID) *IKFilterUIView {
@@ -50,14 +50,17 @@ func (o *IKFilterUIView) InitWithFrameFilter(frameRect corefoundation.CGRect, in
 // @method     filter @abstract   Accessor method to return the filter instance that the view controls.
 func (o *IKFilterUIView) Filter() *coreimage.CIFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKFilterUIViewSelFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return coreimage.CIFilterFromID(_ret)
 }
 
 // @method     objectController @abstract   Accessor method for the object controller for all bindings between the filter and the UI representation.
 func (o *IKFilterUIView) ObjectController() *appkit.NSObjectController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKFilterUIViewSelObjectController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSObjectControllerFromID(_ret)
 }
-

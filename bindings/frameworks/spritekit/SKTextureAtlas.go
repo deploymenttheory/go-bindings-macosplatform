@@ -18,14 +18,14 @@ type SKTextureAtlas struct {
 }
 
 var (
-	_clsSKTextureAtlas = _objcClass("SKTextureAtlas")
-	_sKTextureAtlasSelAtlasNamed = objc.RegisterName("atlasNamed:")
-	_sKTextureAtlasSelAtlasWithDictionary = objc.RegisterName("atlasWithDictionary:")
-	_sKTextureAtlasSelTextureNamed = objc.RegisterName("textureNamed:")
-	_sKTextureAtlasSelPreloadTextureAtlasesWithCompletionHandler = objc.RegisterName("preloadTextureAtlases:withCompletionHandler:")
+	_clsSKTextureAtlas                                                = _objcClass("SKTextureAtlas")
+	_sKTextureAtlasSelAtlasNamed                                      = objc.RegisterName("atlasNamed:")
+	_sKTextureAtlasSelAtlasWithDictionary                             = objc.RegisterName("atlasWithDictionary:")
+	_sKTextureAtlasSelTextureNamed                                    = objc.RegisterName("textureNamed:")
+	_sKTextureAtlasSelPreloadTextureAtlasesWithCompletionHandler      = objc.RegisterName("preloadTextureAtlases:withCompletionHandler:")
 	_sKTextureAtlasSelPreloadTextureAtlasesNamedWithCompletionHandler = objc.RegisterName("preloadTextureAtlasesNamed:withCompletionHandler:")
-	_sKTextureAtlasSelPreloadWithCompletionHandler = objc.RegisterName("preloadWithCompletionHandler:")
-	_sKTextureAtlasSelTextureNames = objc.RegisterName("textureNames")
+	_sKTextureAtlasSelPreloadWithCompletionHandler                    = objc.RegisterName("preloadWithCompletionHandler:")
+	_sKTextureAtlasSelTextureNames                                    = objc.RegisterName("textureNames")
 )
 
 func SKTextureAtlasFromID(id objc.ID) *SKTextureAtlas {
@@ -40,19 +40,25 @@ func SKTextureAtlasFromID(id objc.ID) *SKTextureAtlas {
 
 func SKTextureAtlasAtlasNamed(name *foundation.NSString) *SKTextureAtlas {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTextureAtlas), _sKTextureAtlasSelAtlasNamed, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTextureAtlasFromID(_ret)
 }
 
 func SKTextureAtlasAtlasWithDictionary(properties *foundation.NSDictionary[*foundation.NSString, objc.ID]) *SKTextureAtlas {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTextureAtlas), _sKTextureAtlasSelAtlasWithDictionary, properties)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTextureAtlasFromID(_ret)
 }
 
 func (o *SKTextureAtlas) TextureNamed(name *foundation.NSString) *SKTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTextureAtlasSelTextureNamed, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTextureFromID(_ret)
 }
 
@@ -99,4 +105,3 @@ func (o *SKTextureAtlas) TextureNames() *foundation.NSArray[*foundation.NSString
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _sKTextureAtlasSelTextureNames)
 	return _ret
 }
-

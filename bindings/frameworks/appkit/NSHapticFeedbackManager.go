@@ -16,7 +16,7 @@ type NSHapticFeedbackManager struct {
 }
 
 var (
-	_clsNSHapticFeedbackManager = _objcClass("NSHapticFeedbackManager")
+	_clsNSHapticFeedbackManager                 = _objcClass("NSHapticFeedbackManager")
 	_nSHapticFeedbackManagerSelDefaultPerformer = objc.RegisterName("defaultPerformer")
 )
 
@@ -34,4 +34,3 @@ func NSHapticFeedbackManagerDefaultPerformer() NSHapticFeedbackPerformer {
 	_ret := objc.Send[NSHapticFeedbackPerformer](objc.ID(_clsNSHapticFeedbackManager), _nSHapticFeedbackManagerSelDefaultPerformer)
 	return _ret
 }
-

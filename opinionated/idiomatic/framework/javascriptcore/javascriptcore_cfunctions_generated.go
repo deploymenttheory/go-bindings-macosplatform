@@ -603,4 +603,3 @@ func JSValueToUInt64(ctx unsafe.Pointer, value unsafe.Pointer, exception unsafe.
 func JSValueUnprotect(ctx unsafe.Pointer, value unsafe.Pointer) {
 	raw.JSValueUnprotect(ctx, value)
 }
-

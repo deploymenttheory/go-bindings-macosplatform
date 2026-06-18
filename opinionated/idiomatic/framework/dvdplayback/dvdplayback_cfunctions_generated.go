@@ -63,4 +63,3 @@ func DVDSetVideoWindowRef(inWindowRef unsafe.Pointer) int {
 func DVDUnregisterEventCallBack(inCallBackID unsafe.Pointer) int {
 	return raw.DVDUnregisterEventCallBack(inCallBackID)
 }
-

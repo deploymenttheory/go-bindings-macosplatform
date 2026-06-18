@@ -16,24 +16,24 @@ type NSTextSelection struct {
 }
 
 var (
-	_clsNSTextSelection = _objcClass("NSTextSelection")
+	_clsNSTextSelection                                  = _objcClass("NSTextSelection")
 	_nSTextSelectionSelInitWithRangesAffinityGranularity = objc.RegisterName("initWithRanges:affinity:granularity:")
-	_nSTextSelectionSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSTextSelectionSelInitWithRangeAffinityGranularity = objc.RegisterName("initWithRange:affinity:granularity:")
-	_nSTextSelectionSelInitWithLocationAffinity = objc.RegisterName("initWithLocation:affinity:")
-	_nSTextSelectionSelTextSelectionWithTextRanges = objc.RegisterName("textSelectionWithTextRanges:")
-	_nSTextSelectionSelTextRanges = objc.RegisterName("textRanges")
-	_nSTextSelectionSelGranularity = objc.RegisterName("granularity")
-	_nSTextSelectionSelAffinity = objc.RegisterName("affinity")
-	_nSTextSelectionSelIsTransient = objc.RegisterName("isTransient")
-	_nSTextSelectionSelAnchorPositionOffset = objc.RegisterName("anchorPositionOffset")
-	_nSTextSelectionSelSetAnchorPositionOffset = objc.RegisterName("setAnchorPositionOffset:")
-	_nSTextSelectionSelIsLogical = objc.RegisterName("isLogical")
-	_nSTextSelectionSelSetLogical = objc.RegisterName("setLogical:")
-	_nSTextSelectionSelSecondarySelectionLocation = objc.RegisterName("secondarySelectionLocation")
-	_nSTextSelectionSelSetSecondarySelectionLocation = objc.RegisterName("setSecondarySelectionLocation:")
-	_nSTextSelectionSelTypingAttributes = objc.RegisterName("typingAttributes")
-	_nSTextSelectionSelSetTypingAttributes = objc.RegisterName("setTypingAttributes:")
+	_nSTextSelectionSelInitWithCoder                     = objc.RegisterName("initWithCoder:")
+	_nSTextSelectionSelInitWithRangeAffinityGranularity  = objc.RegisterName("initWithRange:affinity:granularity:")
+	_nSTextSelectionSelInitWithLocationAffinity          = objc.RegisterName("initWithLocation:affinity:")
+	_nSTextSelectionSelTextSelectionWithTextRanges       = objc.RegisterName("textSelectionWithTextRanges:")
+	_nSTextSelectionSelTextRanges                        = objc.RegisterName("textRanges")
+	_nSTextSelectionSelGranularity                       = objc.RegisterName("granularity")
+	_nSTextSelectionSelAffinity                          = objc.RegisterName("affinity")
+	_nSTextSelectionSelIsTransient                       = objc.RegisterName("isTransient")
+	_nSTextSelectionSelAnchorPositionOffset              = objc.RegisterName("anchorPositionOffset")
+	_nSTextSelectionSelSetAnchorPositionOffset           = objc.RegisterName("setAnchorPositionOffset:")
+	_nSTextSelectionSelIsLogical                         = objc.RegisterName("isLogical")
+	_nSTextSelectionSelSetLogical                        = objc.RegisterName("setLogical:")
+	_nSTextSelectionSelSecondarySelectionLocation        = objc.RegisterName("secondarySelectionLocation")
+	_nSTextSelectionSelSetSecondarySelectionLocation     = objc.RegisterName("setSecondarySelectionLocation:")
+	_nSTextSelectionSelTypingAttributes                  = objc.RegisterName("typingAttributes")
+	_nSTextSelectionSelSetTypingAttributes               = objc.RegisterName("setTypingAttributes:")
 )
 
 func NSTextSelectionFromID(id objc.ID) *NSTextSelection {
@@ -48,37 +48,49 @@ func NSTextSelectionFromID(id objc.ID) *NSTextSelection {
 
 func (o *NSTextSelection) InitWithRangesAffinityGranularity(textRanges *foundation.NSArray[*NSTextRange], affinity NSTextSelectionAffinity, granularity NSTextSelectionGranularity) *NSTextSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelectionSelInitWithRangesAffinityGranularity, textRanges.Ptr(), affinity, granularity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextSelectionFromID(_ret)
 }
 
 func (o *NSTextSelection) InitWithCoder(coder *foundation.NSCoder) *NSTextSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelectionSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextSelectionFromID(_ret)
 }
 
 func (o *NSTextSelection) InitWithRangeAffinityGranularity(range_ *NSTextRange, affinity NSTextSelectionAffinity, granularity NSTextSelectionGranularity) *NSTextSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelectionSelInitWithRangeAffinityGranularity, range_.Ptr(), affinity, granularity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextSelectionFromID(_ret)
 }
 
 func (o *NSTextSelection) InitWithLocationAffinity(location NSTextLocation, affinity NSTextSelectionAffinity) *NSTextSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelectionSelInitWithLocationAffinity, location, affinity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextSelectionFromID(_ret)
 }
 
 func (o *NSTextSelection) TextSelectionWithTextRanges(textRanges *foundation.NSArray[*NSTextRange]) *NSTextSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelectionSelTextSelectionWithTextRanges, textRanges.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextSelectionFromID(_ret)
 }
 
 func (o *NSTextSelection) TextRanges() *foundation.NSArray[*NSTextRange] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelectionSelTextRanges)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSTextRange](_ret)
 }
 
@@ -132,4 +144,3 @@ func (o *NSTextSelection) TypingAttributes() *foundation.NSDictionary[*foundatio
 func (o *NSTextSelection) SetTypingAttributes(typingAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	o.Ptr().Send(_nSTextSelectionSelSetTypingAttributes, typingAttributes)
 }
-

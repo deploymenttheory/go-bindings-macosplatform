@@ -13,11 +13,11 @@ type OSLogEntryLogLevel int64
 
 const (
 	OSLogEntryLogLevelUndefined OSLogEntryLogLevel = 0
-	OSLogEntryLogLevelDebug OSLogEntryLogLevel = 1
-	OSLogEntryLogLevelInfo OSLogEntryLogLevel = 2
-	OSLogEntryLogLevelNotice OSLogEntryLogLevel = 3
-	OSLogEntryLogLevelError OSLogEntryLogLevel = 4
-	OSLogEntryLogLevelFault OSLogEntryLogLevel = 5
+	OSLogEntryLogLevelDebug     OSLogEntryLogLevel = 1
+	OSLogEntryLogLevelInfo      OSLogEntryLogLevel = 2
+	OSLogEntryLogLevelNotice    OSLogEntryLogLevel = 3
+	OSLogEntryLogLevelError     OSLogEntryLogLevel = 4
+	OSLogEntryLogLevelFault     OSLogEntryLogLevel = 5
 )
 
 func (e OSLogEntryLogLevel) String() string {
@@ -42,10 +42,10 @@ func (e OSLogEntryLogLevel) String() string {
 type OSLogEntrySignpostType int64
 
 const (
-	OSLogEntrySignpostTypeUndefined OSLogEntrySignpostType = 0
+	OSLogEntrySignpostTypeUndefined     OSLogEntrySignpostType = 0
 	OSLogEntrySignpostTypeIntervalBegin OSLogEntrySignpostType = 1
-	OSLogEntrySignpostTypeIntervalEnd OSLogEntrySignpostType = 2
-	OSLogEntrySignpostTypeEvent OSLogEntrySignpostType = 3
+	OSLogEntrySignpostTypeIntervalEnd   OSLogEntrySignpostType = 2
+	OSLogEntrySignpostTypeEvent         OSLogEntrySignpostType = 3
 )
 
 func (e OSLogEntrySignpostType) String() string {
@@ -66,15 +66,15 @@ func (e OSLogEntrySignpostType) String() string {
 type OSLogEntryStoreCategory int64
 
 const (
-	OSLogEntryStoreCategoryUndefined OSLogEntryStoreCategory = 0
-	OSLogEntryStoreCategoryMetadata OSLogEntryStoreCategory = 1
-	OSLogEntryStoreCategoryShortTerm OSLogEntryStoreCategory = 2
+	OSLogEntryStoreCategoryUndefined    OSLogEntryStoreCategory = 0
+	OSLogEntryStoreCategoryMetadata     OSLogEntryStoreCategory = 1
+	OSLogEntryStoreCategoryShortTerm    OSLogEntryStoreCategory = 2
 	OSLogEntryStoreCategoryLongTermAuto OSLogEntryStoreCategory = 3
-	OSLogEntryStoreCategoryLongTerm1 OSLogEntryStoreCategory = 4
-	OSLogEntryStoreCategoryLongTerm3 OSLogEntryStoreCategory = 5
-	OSLogEntryStoreCategoryLongTerm7 OSLogEntryStoreCategory = 6
-	OSLogEntryStoreCategoryLongTerm14 OSLogEntryStoreCategory = 7
-	OSLogEntryStoreCategoryLongTerm30 OSLogEntryStoreCategory = 8
+	OSLogEntryStoreCategoryLongTerm1    OSLogEntryStoreCategory = 4
+	OSLogEntryStoreCategoryLongTerm3    OSLogEntryStoreCategory = 5
+	OSLogEntryStoreCategoryLongTerm7    OSLogEntryStoreCategory = 6
+	OSLogEntryStoreCategoryLongTerm14   OSLogEntryStoreCategory = 7
+	OSLogEntryStoreCategoryLongTerm30   OSLogEntryStoreCategory = 8
 )
 
 func (e OSLogEntryStoreCategory) String() string {
@@ -124,11 +124,11 @@ type OSLogMessageComponentArgumentCategory int64
 
 const (
 	OSLogMessageComponentArgumentCategoryUndefined OSLogMessageComponentArgumentCategory = 0
-	OSLogMessageComponentArgumentCategoryData OSLogMessageComponentArgumentCategory = 1
-	OSLogMessageComponentArgumentCategoryDouble OSLogMessageComponentArgumentCategory = 2
-	OSLogMessageComponentArgumentCategoryInt64 OSLogMessageComponentArgumentCategory = 3
-	OSLogMessageComponentArgumentCategoryString OSLogMessageComponentArgumentCategory = 4
-	OSLogMessageComponentArgumentCategoryUInt64 OSLogMessageComponentArgumentCategory = 5
+	OSLogMessageComponentArgumentCategoryData      OSLogMessageComponentArgumentCategory = 1
+	OSLogMessageComponentArgumentCategoryDouble    OSLogMessageComponentArgumentCategory = 2
+	OSLogMessageComponentArgumentCategoryInt64     OSLogMessageComponentArgumentCategory = 3
+	OSLogMessageComponentArgumentCategoryString    OSLogMessageComponentArgumentCategory = 4
+	OSLogMessageComponentArgumentCategoryUInt64    OSLogMessageComponentArgumentCategory = 5
 )
 
 func (e OSLogMessageComponentArgumentCategory) String() string {
@@ -153,7 +153,7 @@ func (e OSLogMessageComponentArgumentCategory) String() string {
 type OSLogStoreScope int64
 
 const (
-	OSLogStoreSystem OSLogStoreScope = 0
+	OSLogStoreSystem                   OSLogStoreScope = 0
 	OSLogStoreCurrentProcessIdentifier OSLogStoreScope = 1
 )
 
@@ -167,4 +167,3 @@ func (e OSLogStoreScope) String() string {
 		return fmt.Sprintf("OSLogStoreScope(%d)", int64(e))
 	}
 }
-

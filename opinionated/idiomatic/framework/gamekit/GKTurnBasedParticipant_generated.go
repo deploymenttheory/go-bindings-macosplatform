@@ -100,4 +100,3 @@ type TurnBasedParticipantable interface {
 }
 
 var _ TurnBasedParticipantable = (*TurnBasedParticipant)(nil)
-

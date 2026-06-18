@@ -16,7 +16,9 @@ type ChangeHistoryDeleteContactEvent struct {
 }
 
 // Unwrap returns the underlying [raw.CNChangeHistoryDeleteContactEvent].
-func (x *ChangeHistoryDeleteContactEvent) Unwrap() *raw.CNChangeHistoryDeleteContactEvent { return x.inner }
+func (x *ChangeHistoryDeleteContactEvent) Unwrap() *raw.CNChangeHistoryDeleteContactEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -45,7 +47,9 @@ func (x *ChangeHistoryDeleteContactEvent) ContactIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
-func (x *ChangeHistoryDeleteContactEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent { return &x.inner.CNChangeHistoryEvent }
+func (x *ChangeHistoryDeleteContactEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent {
+	return &x.inner.CNChangeHistoryEvent
+}
 
 // ChangeHistoryDeleteContactEventable is the interface implemented by [ChangeHistoryDeleteContactEvent], for mocking and DI.
 type ChangeHistoryDeleteContactEventable interface {
@@ -54,4 +58,3 @@ type ChangeHistoryDeleteContactEventable interface {
 }
 
 var _ ChangeHistoryDeleteContactEventable = (*ChangeHistoryDeleteContactEvent)(nil)
-

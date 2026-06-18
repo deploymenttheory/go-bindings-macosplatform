@@ -70,4 +70,3 @@ type HangUpCallIntentable interface {
 }
 
 var _ HangUpCallIntentable = (*HangUpCallIntent)(nil)
-

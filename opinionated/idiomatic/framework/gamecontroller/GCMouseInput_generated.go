@@ -105,7 +105,9 @@ func (x *MouseInput) AuxiliaryButtons() []*ControllerButtonInput {
 	})
 }
 
-func (x *MouseInput) asPhysicalInputProfile() *raw.GCPhysicalInputProfile { return &x.inner.GCPhysicalInputProfile }
+func (x *MouseInput) asPhysicalInputProfile() *raw.GCPhysicalInputProfile {
+	return &x.inner.GCPhysicalInputProfile
+}
 
 // MouseInputable is the interface implemented by [MouseInput], for mocking and DI.
 type MouseInputable interface {
@@ -122,4 +124,3 @@ type MouseInputable interface {
 }
 
 var _ MouseInputable = (*MouseInput)(nil)
-

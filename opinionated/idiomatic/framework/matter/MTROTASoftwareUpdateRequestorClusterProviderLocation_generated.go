@@ -16,7 +16,9 @@ type MTROtaSoftwareUpdateRequestorClusterProviderLocation struct {
 }
 
 // Unwrap returns the underlying [raw.MTROtaSoftwareUpdateRequestorClusterProviderLocation].
-func (x *MTROtaSoftwareUpdateRequestorClusterProviderLocation) Unwrap() *raw.MTROtaSoftwareUpdateRequestorClusterProviderLocation { return x.inner }
+func (x *MTROtaSoftwareUpdateRequestorClusterProviderLocation) Unwrap() *raw.MTROtaSoftwareUpdateRequestorClusterProviderLocation {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -54,7 +56,9 @@ func (x *MTROtaSoftwareUpdateRequestorClusterProviderLocation) WithFabricIndex(f
 	return x
 }
 
-func (x *MTROtaSoftwareUpdateRequestorClusterProviderLocation) asMTROTASoftwareUpdateRequestorClusterProviderLocation() *raw.MTROTASoftwareUpdateRequestorClusterProviderLocation { return &x.inner.MTROTASoftwareUpdateRequestorClusterProviderLocation }
+func (x *MTROtaSoftwareUpdateRequestorClusterProviderLocation) asMTROTASoftwareUpdateRequestorClusterProviderLocation() *raw.MTROTASoftwareUpdateRequestorClusterProviderLocation {
+	return &x.inner.MTROTASoftwareUpdateRequestorClusterProviderLocation
+}
 
 // MTROtaSoftwareUpdateRequestorClusterProviderLocationable is the interface implemented by [MTROtaSoftwareUpdateRequestorClusterProviderLocation], for mocking and DI.
 type MTROtaSoftwareUpdateRequestorClusterProviderLocationable interface {
@@ -65,4 +69,3 @@ type MTROtaSoftwareUpdateRequestorClusterProviderLocationable interface {
 }
 
 var _ MTROtaSoftwareUpdateRequestorClusterProviderLocationable = (*MTROtaSoftwareUpdateRequestorClusterProviderLocation)(nil)
-

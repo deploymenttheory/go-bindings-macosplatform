@@ -36,4 +36,3 @@ func SystemDefaultSpeeds() []*PlaybackSpeed {
 		return &PlaybackSpeed{inner: raw.AVPlaybackSpeedFromID(purego.Retain(_id))}
 	})
 }
-

@@ -16,12 +16,12 @@ type MTRServiceAreaClusterAreaStruct struct {
 }
 
 var (
-	_clsMTRServiceAreaClusterAreaStruct = _objcClass("MTRServiceAreaClusterAreaStruct")
-	_mTRServiceAreaClusterAreaStructSelAreaID = objc.RegisterName("areaID")
-	_mTRServiceAreaClusterAreaStructSelSetAreaID = objc.RegisterName("setAreaID:")
-	_mTRServiceAreaClusterAreaStructSelMapID = objc.RegisterName("mapID")
-	_mTRServiceAreaClusterAreaStructSelSetMapID = objc.RegisterName("setMapID:")
-	_mTRServiceAreaClusterAreaStructSelAreaInfo = objc.RegisterName("areaInfo")
+	_clsMTRServiceAreaClusterAreaStruct            = _objcClass("MTRServiceAreaClusterAreaStruct")
+	_mTRServiceAreaClusterAreaStructSelAreaID      = objc.RegisterName("areaID")
+	_mTRServiceAreaClusterAreaStructSelSetAreaID   = objc.RegisterName("setAreaID:")
+	_mTRServiceAreaClusterAreaStructSelMapID       = objc.RegisterName("mapID")
+	_mTRServiceAreaClusterAreaStructSelSetMapID    = objc.RegisterName("setMapID:")
+	_mTRServiceAreaClusterAreaStructSelAreaInfo    = objc.RegisterName("areaInfo")
 	_mTRServiceAreaClusterAreaStructSelSetAreaInfo = objc.RegisterName("setAreaInfo:")
 )
 
@@ -37,7 +37,9 @@ func MTRServiceAreaClusterAreaStructFromID(id objc.ID) *MTRServiceAreaClusterAre
 
 func (o *MTRServiceAreaClusterAreaStruct) AreaID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRServiceAreaClusterAreaStructSelAreaID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTRServiceAreaClusterAreaStruct) SetAreaID(areaID *foundation.NSNumber)
 
 func (o *MTRServiceAreaClusterAreaStruct) MapID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRServiceAreaClusterAreaStructSelMapID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *MTRServiceAreaClusterAreaStruct) SetMapID(mapID *foundation.NSNumber) {
 
 func (o *MTRServiceAreaClusterAreaStruct) AreaInfo() *MTRServiceAreaClusterAreaInfoStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRServiceAreaClusterAreaStructSelAreaInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRServiceAreaClusterAreaInfoStructFromID(_ret)
 }
 
 func (o *MTRServiceAreaClusterAreaStruct) SetAreaInfo(areaInfo *MTRServiceAreaClusterAreaInfoStruct) {
 	o.Ptr().Send(_mTRServiceAreaClusterAreaStructSelSetAreaInfo, areaInfo.Ptr())
 }
-

@@ -18,11 +18,11 @@ type VNHumanBodyPoseObservation struct {
 }
 
 var (
-	_clsVNHumanBodyPoseObservation = _objcClass("VNHumanBodyPoseObservation")
-	_vNHumanBodyPoseObservationSelRecognizedPointForJointNameError = objc.RegisterName("recognizedPointForJointName:error:")
+	_clsVNHumanBodyPoseObservation                                        = _objcClass("VNHumanBodyPoseObservation")
+	_vNHumanBodyPoseObservationSelRecognizedPointForJointNameError        = objc.RegisterName("recognizedPointForJointName:error:")
 	_vNHumanBodyPoseObservationSelRecognizedPointsForJointsGroupNameError = objc.RegisterName("recognizedPointsForJointsGroupName:error:")
-	_vNHumanBodyPoseObservationSelAvailableJointNames = objc.RegisterName("availableJointNames")
-	_vNHumanBodyPoseObservationSelAvailableJointsGroupNames = objc.RegisterName("availableJointsGroupNames")
+	_vNHumanBodyPoseObservationSelAvailableJointNames                     = objc.RegisterName("availableJointNames")
+	_vNHumanBodyPoseObservationSelAvailableJointsGroupNames               = objc.RegisterName("availableJointsGroupNames")
 )
 
 func VNHumanBodyPoseObservationFromID(id objc.ID) *VNHumanBodyPoseObservation {
@@ -39,7 +39,9 @@ func VNHumanBodyPoseObservationFromID(id objc.ID) *VNHumanBodyPoseObservation {
 func (o *VNHumanBodyPoseObservation) RecognizedPointForJointNameError(jointName *foundation.NSString) (*VNRecognizedPoint, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNHumanBodyPoseObservationSelRecognizedPointForJointNameError, jointName.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -67,4 +69,3 @@ func (o *VNHumanBodyPoseObservation) AvailableJointsGroupNames() *foundation.NSA
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vNHumanBodyPoseObservationSelAvailableJointsGroupNames)
 	return _ret
 }
-

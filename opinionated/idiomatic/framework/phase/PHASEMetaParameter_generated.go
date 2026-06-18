@@ -73,4 +73,3 @@ type MetaParameterable interface {
 }
 
 var _ MetaParameterable = (*MetaParameter)(nil)
-

@@ -147,4 +147,3 @@ type URLProtectionSpaceable interface {
 }
 
 var _ URLProtectionSpaceable = (*URLProtectionSpace)(nil)
-

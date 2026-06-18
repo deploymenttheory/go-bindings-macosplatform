@@ -16,7 +16,7 @@ type MEFormatReaderInstantiationOptions struct {
 }
 
 var (
-	_clsMEFormatReaderInstantiationOptions = _objcClass("MEFormatReaderInstantiationOptions")
+	_clsMEFormatReaderInstantiationOptions                                = _objcClass("MEFormatReaderInstantiationOptions")
 	_mEFormatReaderInstantiationOptionsSelAllowIncrementalFragmentParsing = objc.RegisterName("allowIncrementalFragmentParsing")
 )
 
@@ -34,4 +34,3 @@ func (o *MEFormatReaderInstantiationOptions) AllowIncrementalFragmentParsing() b
 	_ret := objc.Send[bool](o.Ptr(), _mEFormatReaderInstantiationOptionsSelAllowIncrementalFragmentParsing)
 	return _ret
 }
-

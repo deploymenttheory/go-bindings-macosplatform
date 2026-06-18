@@ -16,11 +16,15 @@ type MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams struct
 }
 
 // Unwrap returns the underlying [raw.MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams].
-func (x *MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams) Unwrap() *raw.MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams { return x.inner }
+func (x *MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams) Unwrap() *raw.MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParamsFromID adopts an existing object pointer as a MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams (nil for 0).
 func MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParamsFromID(id objc.ID) *MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams {
@@ -80,4 +84,3 @@ type MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParamsable in
 }
 
 var _ MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParamsable = (*MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams)(nil)
-

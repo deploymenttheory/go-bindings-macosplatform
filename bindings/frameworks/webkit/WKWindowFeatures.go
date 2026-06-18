@@ -16,15 +16,15 @@ type WKWindowFeatures struct {
 }
 
 var (
-	_clsWKWindowFeatures = _objcClass("WKWindowFeatures")
-	_wKWindowFeaturesSelMenuBarVisibility = objc.RegisterName("menuBarVisibility")
+	_clsWKWindowFeatures                    = _objcClass("WKWindowFeatures")
+	_wKWindowFeaturesSelMenuBarVisibility   = objc.RegisterName("menuBarVisibility")
 	_wKWindowFeaturesSelStatusBarVisibility = objc.RegisterName("statusBarVisibility")
-	_wKWindowFeaturesSelToolbarsVisibility = objc.RegisterName("toolbarsVisibility")
-	_wKWindowFeaturesSelAllowsResizing = objc.RegisterName("allowsResizing")
-	_wKWindowFeaturesSelX = objc.RegisterName("x")
-	_wKWindowFeaturesSelY = objc.RegisterName("y")
-	_wKWindowFeaturesSelWidth = objc.RegisterName("width")
-	_wKWindowFeaturesSelHeight = objc.RegisterName("height")
+	_wKWindowFeaturesSelToolbarsVisibility  = objc.RegisterName("toolbarsVisibility")
+	_wKWindowFeaturesSelAllowsResizing      = objc.RegisterName("allowsResizing")
+	_wKWindowFeaturesSelX                   = objc.RegisterName("x")
+	_wKWindowFeaturesSelY                   = objc.RegisterName("y")
+	_wKWindowFeaturesSelWidth               = objc.RegisterName("width")
+	_wKWindowFeaturesSelHeight              = objc.RegisterName("height")
 )
 
 func WKWindowFeaturesFromID(id objc.ID) *WKWindowFeatures {
@@ -40,56 +40,71 @@ func WKWindowFeaturesFromID(id objc.ID) *WKWindowFeatures {
 // @abstract BOOL. Whether the menu bar should be visible. nil if menu bar visibility was not specified.
 func (o *WKWindowFeatures) MenuBarVisibility() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWindowFeaturesSelMenuBarVisibility)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // @abstract BOOL. Whether the status bar should be visible. nil if status bar visibility was not specified.
 func (o *WKWindowFeatures) StatusBarVisibility() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWindowFeaturesSelStatusBarVisibility)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // @abstract BOOL. Whether toolbars should be visible. nil if toolbar visibility was not specified.
 func (o *WKWindowFeatures) ToolbarsVisibility() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWindowFeaturesSelToolbarsVisibility)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // @abstract BOOL. Whether the containing window should be resizable. nil if resizability was not specified.
 func (o *WKWindowFeatures) AllowsResizing() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWindowFeaturesSelAllowsResizing)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // @abstract CGFloat. The x coordinate of the containing window. nil if the x coordinate was not specified.
 func (o *WKWindowFeatures) X() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWindowFeaturesSelX)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // @abstract CGFloat. The y coordinate of the containing window. nil if the y coordinate was not specified.
 func (o *WKWindowFeatures) Y() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWindowFeaturesSelY)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // @abstract CGFloat. The width coordinate of the containing window. nil if the width was not specified.
 func (o *WKWindowFeatures) Width() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWindowFeaturesSelWidth)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // @abstract CGFloat. The height coordinate of the containing window. nil if the height was not specified.
 func (o *WKWindowFeatures) Height() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWindowFeaturesSelHeight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
-

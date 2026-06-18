@@ -16,11 +16,15 @@ type MTRTestClusterClusterTestStructArrayArgumentRequestParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRTestClusterClusterTestStructArrayArgumentRequestParams].
-func (x *MTRTestClusterClusterTestStructArrayArgumentRequestParams) Unwrap() *raw.MTRTestClusterClusterTestStructArrayArgumentRequestParams { return x.inner }
+func (x *MTRTestClusterClusterTestStructArrayArgumentRequestParams) Unwrap() *raw.MTRTestClusterClusterTestStructArrayArgumentRequestParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRTestClusterClusterTestStructArrayArgumentRequestParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRTestClusterClusterTestStructArrayArgumentRequestParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRTestClusterClusterTestStructArrayArgumentRequestParamsFromID adopts an existing object pointer as a MTRTestClusterClusterTestStructArrayArgumentRequestParams (nil for 0).
 func MTRTestClusterClusterTestStructArrayArgumentRequestParamsFromID(id objc.ID) *MTRTestClusterClusterTestStructArrayArgumentRequestParams {
@@ -60,7 +64,9 @@ func (x *MTRTestClusterClusterTestStructArrayArgumentRequestParams) WithServerSi
 	return x
 }
 
-func (x *MTRTestClusterClusterTestStructArrayArgumentRequestParams) asMTRUnitTestingClusterTestStructArrayArgumentRequestParams() *raw.MTRUnitTestingClusterTestStructArrayArgumentRequestParams { return &x.inner.MTRUnitTestingClusterTestStructArrayArgumentRequestParams }
+func (x *MTRTestClusterClusterTestStructArrayArgumentRequestParams) asMTRUnitTestingClusterTestStructArrayArgumentRequestParams() *raw.MTRUnitTestingClusterTestStructArrayArgumentRequestParams {
+	return &x.inner.MTRUnitTestingClusterTestStructArrayArgumentRequestParams
+}
 
 // MTRTestClusterClusterTestStructArrayArgumentRequestParamsable is the interface implemented by [MTRTestClusterClusterTestStructArrayArgumentRequestParams], for mocking and DI.
 type MTRTestClusterClusterTestStructArrayArgumentRequestParamsable interface {
@@ -72,4 +78,3 @@ type MTRTestClusterClusterTestStructArrayArgumentRequestParamsable interface {
 }
 
 var _ MTRTestClusterClusterTestStructArrayArgumentRequestParamsable = (*MTRTestClusterClusterTestStructArrayArgumentRequestParams)(nil)
-

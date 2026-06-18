@@ -82,4 +82,3 @@ type DecodedMessageable interface {
 }
 
 var _ DecodedMessageable = (*DecodedMessage)(nil)
-

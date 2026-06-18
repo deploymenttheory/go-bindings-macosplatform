@@ -61,4 +61,3 @@ type CategorySampleable interface {
 }
 
 var _ CategorySampleable = (*CategorySample)(nil)
-

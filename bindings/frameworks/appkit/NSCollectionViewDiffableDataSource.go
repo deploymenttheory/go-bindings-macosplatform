@@ -16,14 +16,14 @@ type NSCollectionViewDiffableDataSource[SectionIdentifierType purego.AnyObject, 
 }
 
 var (
-	_clsNSCollectionViewDiffableDataSource = _objcClass("NSCollectionViewDiffableDataSource")
+	_clsNSCollectionViewDiffableDataSource                                   = _objcClass("NSCollectionViewDiffableDataSource")
 	_nSCollectionViewDiffableDataSourceSelInitWithCollectionViewItemProvider = objc.RegisterName("initWithCollectionView:itemProvider:")
-	_nSCollectionViewDiffableDataSourceSelSnapshot = objc.RegisterName("snapshot")
-	_nSCollectionViewDiffableDataSourceSelApplySnapshotAnimatingDifferences = objc.RegisterName("applySnapshot:animatingDifferences:")
-	_nSCollectionViewDiffableDataSourceSelItemIdentifierForIndexPath = objc.RegisterName("itemIdentifierForIndexPath:")
-	_nSCollectionViewDiffableDataSourceSelIndexPathForItemIdentifier = objc.RegisterName("indexPathForItemIdentifier:")
-	_nSCollectionViewDiffableDataSourceSelSupplementaryViewProvider = objc.RegisterName("supplementaryViewProvider")
-	_nSCollectionViewDiffableDataSourceSelSetSupplementaryViewProvider = objc.RegisterName("setSupplementaryViewProvider:")
+	_nSCollectionViewDiffableDataSourceSelSnapshot                           = objc.RegisterName("snapshot")
+	_nSCollectionViewDiffableDataSourceSelApplySnapshotAnimatingDifferences  = objc.RegisterName("applySnapshot:animatingDifferences:")
+	_nSCollectionViewDiffableDataSourceSelItemIdentifierForIndexPath         = objc.RegisterName("itemIdentifierForIndexPath:")
+	_nSCollectionViewDiffableDataSourceSelIndexPathForItemIdentifier         = objc.RegisterName("indexPathForItemIdentifier:")
+	_nSCollectionViewDiffableDataSourceSelSupplementaryViewProvider          = objc.RegisterName("supplementaryViewProvider")
+	_nSCollectionViewDiffableDataSourceSelSetSupplementaryViewProvider       = objc.RegisterName("setSupplementaryViewProvider:")
 )
 
 func NSCollectionViewDiffableDataSourceFromID[SectionIdentifierType purego.AnyObject, ItemIdentifierType purego.AnyObject](id objc.ID) *NSCollectionViewDiffableDataSource[SectionIdentifierType, ItemIdentifierType] {
@@ -38,13 +38,17 @@ func NSCollectionViewDiffableDataSourceFromID[SectionIdentifierType purego.AnyOb
 
 func (o *NSCollectionViewDiffableDataSource[SectionIdentifierType, ItemIdentifierType]) InitWithCollectionViewItemProvider(collectionView *NSCollectionView, itemProvider objc.Block) *NSCollectionViewDiffableDataSource[SectionIdentifierType, ItemIdentifierType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewDiffableDataSourceSelInitWithCollectionViewItemProvider, collectionView.Ptr(), itemProvider)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewDiffableDataSourceFromID[SectionIdentifierType, ItemIdentifierType](_ret)
 }
 
 func (o *NSCollectionViewDiffableDataSource[SectionIdentifierType, ItemIdentifierType]) Snapshot() *NSDiffableDataSourceSnapshot[SectionIdentifierType, ItemIdentifierType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewDiffableDataSourceSelSnapshot)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDiffableDataSourceSnapshotFromID[SectionIdentifierType, ItemIdentifierType](_ret)
 }
 
@@ -59,7 +63,9 @@ func (o *NSCollectionViewDiffableDataSource[SectionIdentifierType, ItemIdentifie
 
 func (o *NSCollectionViewDiffableDataSource[SectionIdentifierType, ItemIdentifierType]) IndexPathForItemIdentifier(identifier ItemIdentifierType) *foundation.NSIndexPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewDiffableDataSourceSelIndexPathForItemIdentifier, identifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexPathFromID(_ret)
 }
 
@@ -71,4 +77,3 @@ func (o *NSCollectionViewDiffableDataSource[SectionIdentifierType, ItemIdentifie
 func (o *NSCollectionViewDiffableDataSource[SectionIdentifierType, ItemIdentifierType]) SetSupplementaryViewProvider(supplementaryViewProvider objc.Block) {
 	o.Ptr().Send(_nSCollectionViewDiffableDataSourceSelSetSupplementaryViewProvider, supplementaryViewProvider)
 }
-

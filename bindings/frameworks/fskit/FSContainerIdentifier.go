@@ -15,7 +15,7 @@ type FSContainerIdentifier struct {
 }
 
 var (
-	_clsFSContainerIdentifier = _objcClass("FSContainerIdentifier")
+	_clsFSContainerIdentifier                 = _objcClass("FSContainerIdentifier")
 	_fSContainerIdentifierSelVolumeIdentifier = objc.RegisterName("volumeIdentifier")
 )
 
@@ -31,7 +31,8 @@ func FSContainerIdentifierFromID(id objc.ID) *FSContainerIdentifier {
 
 func (o *FSContainerIdentifier) VolumeIdentifier() *FSVolumeIdentifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSContainerIdentifierSelVolumeIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return FSVolumeIdentifierFromID(_ret)
 }
-

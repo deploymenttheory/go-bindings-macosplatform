@@ -12,7 +12,7 @@ import (
 )
 
 var (
-	_qdLib uintptr
+	_qdLib    uintptr
 	_loadOnce sync.Once
 )
 

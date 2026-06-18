@@ -16,9 +16,9 @@ type INPersonResolutionResult struct {
 }
 
 var (
-	_clsINPersonResolutionResult = _objcClass("INPersonResolutionResult")
-	_iNPersonResolutionResultSelSuccessWithResolvedPerson = objc.RegisterName("successWithResolvedPerson:")
-	_iNPersonResolutionResultSelDisambiguationWithPeopleToDisambiguate = objc.RegisterName("disambiguationWithPeopleToDisambiguate:")
+	_clsINPersonResolutionResult                                        = _objcClass("INPersonResolutionResult")
+	_iNPersonResolutionResultSelSuccessWithResolvedPerson               = objc.RegisterName("successWithResolvedPerson:")
+	_iNPersonResolutionResultSelDisambiguationWithPeopleToDisambiguate  = objc.RegisterName("disambiguationWithPeopleToDisambiguate:")
 	_iNPersonResolutionResultSelConfirmationRequiredWithPersonToConfirm = objc.RegisterName("confirmationRequiredWithPersonToConfirm:")
 )
 
@@ -34,19 +34,24 @@ func INPersonResolutionResultFromID(id objc.ID) *INPersonResolutionResult {
 
 func INPersonResolutionResultSuccessWithResolvedPerson(resolvedPerson *INPerson) *INPersonResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINPersonResolutionResult), _iNPersonResolutionResultSelSuccessWithResolvedPerson, resolvedPerson.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INPersonResolutionResultFromID(_ret)
 }
 
 func INPersonResolutionResultDisambiguationWithPeopleToDisambiguate(peopleToDisambiguate *foundation.NSArray[*INPerson]) *INPersonResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINPersonResolutionResult), _iNPersonResolutionResultSelDisambiguationWithPeopleToDisambiguate, peopleToDisambiguate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INPersonResolutionResultFromID(_ret)
 }
 
 func INPersonResolutionResultConfirmationRequiredWithPersonToConfirm(personToConfirm *INPerson) *INPersonResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINPersonResolutionResult), _iNPersonResolutionResultSelConfirmationRequiredWithPersonToConfirm, personToConfirm.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INPersonResolutionResultFromID(_ret)
 }
-

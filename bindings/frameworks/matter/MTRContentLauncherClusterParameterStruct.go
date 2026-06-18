@@ -16,12 +16,12 @@ type MTRContentLauncherClusterParameterStruct struct {
 }
 
 var (
-	_clsMTRContentLauncherClusterParameterStruct = _objcClass("MTRContentLauncherClusterParameterStruct")
-	_mTRContentLauncherClusterParameterStructSelType = objc.RegisterName("type")
-	_mTRContentLauncherClusterParameterStructSelSetType = objc.RegisterName("setType:")
-	_mTRContentLauncherClusterParameterStructSelValue = objc.RegisterName("value")
-	_mTRContentLauncherClusterParameterStructSelSetValue = objc.RegisterName("setValue:")
-	_mTRContentLauncherClusterParameterStructSelExternalIDList = objc.RegisterName("externalIDList")
+	_clsMTRContentLauncherClusterParameterStruct                  = _objcClass("MTRContentLauncherClusterParameterStruct")
+	_mTRContentLauncherClusterParameterStructSelType              = objc.RegisterName("type")
+	_mTRContentLauncherClusterParameterStructSelSetType           = objc.RegisterName("setType:")
+	_mTRContentLauncherClusterParameterStructSelValue             = objc.RegisterName("value")
+	_mTRContentLauncherClusterParameterStructSelSetValue          = objc.RegisterName("setValue:")
+	_mTRContentLauncherClusterParameterStructSelExternalIDList    = objc.RegisterName("externalIDList")
 	_mTRContentLauncherClusterParameterStructSelSetExternalIDList = objc.RegisterName("setExternalIDList:")
 )
 
@@ -37,7 +37,9 @@ func MTRContentLauncherClusterParameterStructFromID(id objc.ID) *MTRContentLaunc
 
 func (o *MTRContentLauncherClusterParameterStruct) Type() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentLauncherClusterParameterStructSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTRContentLauncherClusterParameterStruct) SetType(type_ *foundation.NSN
 
 func (o *MTRContentLauncherClusterParameterStruct) Value() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentLauncherClusterParameterStructSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -63,4 +67,3 @@ func (o *MTRContentLauncherClusterParameterStruct) ExternalIDList() *foundation.
 func (o *MTRContentLauncherClusterParameterStruct) SetExternalIDList(externalIDList *foundation.NSArray[objc.ID]) {
 	o.Ptr().Send(_mTRContentLauncherClusterParameterStructSelSetExternalIDList, externalIDList)
 }
-

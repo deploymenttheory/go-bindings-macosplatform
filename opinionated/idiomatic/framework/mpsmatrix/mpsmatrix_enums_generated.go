@@ -14,7 +14,7 @@ type MPSMatrixRandomDistribution uint64
 const (
 	MPSMatrixRandomDistributionDefault MPSMatrixRandomDistribution = 1
 	MPSMatrixRandomDistributionUniform MPSMatrixRandomDistribution = 2
-	MPSMatrixRandomDistributionNormal MPSMatrixRandomDistribution = 3
+	MPSMatrixRandomDistributionNormal  MPSMatrixRandomDistribution = 3
 )
 
 func (e MPSMatrixRandomDistribution) String() string {
@@ -33,4 +33,3 @@ func (e MPSMatrixRandomDistribution) String() string {
 	}
 	return strings.Join(parts, "|")
 }
-

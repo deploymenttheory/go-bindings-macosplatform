@@ -80,4 +80,3 @@ type BoundsPredictionable interface {
 }
 
 var _ BoundsPredictionable = (*BoundsPrediction)(nil)
-

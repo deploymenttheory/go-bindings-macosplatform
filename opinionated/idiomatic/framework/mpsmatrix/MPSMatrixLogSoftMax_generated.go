@@ -74,7 +74,9 @@ func (x *MatrixLogSoftMax) WithBatchSize(batchSize uint) *MatrixLogSoftMax {
 
 func (x *MatrixLogSoftMax) asMatrixSoftMax() *raw.MPSMatrixSoftMax { return &x.inner.MPSMatrixSoftMax }
 
-func (x *MatrixLogSoftMax) asMatrixUnaryKernel() *raw.MPSMatrixUnaryKernel { return &x.inner.MPSMatrixSoftMax.MPSMatrixUnaryKernel }
+func (x *MatrixLogSoftMax) asMatrixUnaryKernel() *raw.MPSMatrixUnaryKernel {
+	return &x.inner.MPSMatrixSoftMax.MPSMatrixUnaryKernel
+}
 
 // MatrixLogSoftMaxable is the interface implemented by [MatrixLogSoftMax], for mocking and DI.
 type MatrixLogSoftMaxable interface {
@@ -88,4 +90,3 @@ type MatrixLogSoftMaxable interface {
 }
 
 var _ MatrixLogSoftMaxable = (*MatrixLogSoftMax)(nil)
-

@@ -15,15 +15,15 @@ type NSTextInsertionIndicator struct {
 }
 
 var (
-	_clsNSTextInsertionIndicator = _objcClass("NSTextInsertionIndicator")
-	_nSTextInsertionIndicatorSelDisplayMode = objc.RegisterName("displayMode")
-	_nSTextInsertionIndicatorSelSetDisplayMode = objc.RegisterName("setDisplayMode:")
-	_nSTextInsertionIndicatorSelColor = objc.RegisterName("color")
-	_nSTextInsertionIndicatorSelSetColor = objc.RegisterName("setColor:")
-	_nSTextInsertionIndicatorSelAutomaticModeOptions = objc.RegisterName("automaticModeOptions")
+	_clsNSTextInsertionIndicator                        = _objcClass("NSTextInsertionIndicator")
+	_nSTextInsertionIndicatorSelDisplayMode             = objc.RegisterName("displayMode")
+	_nSTextInsertionIndicatorSelSetDisplayMode          = objc.RegisterName("setDisplayMode:")
+	_nSTextInsertionIndicatorSelColor                   = objc.RegisterName("color")
+	_nSTextInsertionIndicatorSelSetColor                = objc.RegisterName("setColor:")
+	_nSTextInsertionIndicatorSelAutomaticModeOptions    = objc.RegisterName("automaticModeOptions")
 	_nSTextInsertionIndicatorSelSetAutomaticModeOptions = objc.RegisterName("setAutomaticModeOptions:")
-	_nSTextInsertionIndicatorSelEffectsViewInserter = objc.RegisterName("effectsViewInserter")
-	_nSTextInsertionIndicatorSelSetEffectsViewInserter = objc.RegisterName("setEffectsViewInserter:")
+	_nSTextInsertionIndicatorSelEffectsViewInserter     = objc.RegisterName("effectsViewInserter")
+	_nSTextInsertionIndicatorSelSetEffectsViewInserter  = objc.RegisterName("setEffectsViewInserter:")
 )
 
 func NSTextInsertionIndicatorFromID(id objc.ID) *NSTextInsertionIndicator {
@@ -50,7 +50,9 @@ func (o *NSTextInsertionIndicator) SetDisplayMode(displayMode NSTextInsertionInd
 // The color of the indicator. @discussion Defaults to NSColor.textInsertionPointColor. @note If set to @c nil, uses NSColor.textInsertionPointColor.
 func (o *NSTextInsertionIndicator) Color() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextInsertionIndicatorSelColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -90,4 +92,3 @@ func (o *NSTextInsertionIndicator) SetEffectsViewInserter(effectsViewInserter fu
 	}
 	o.Ptr().Send(_nSTextInsertionIndicatorSelSetEffectsViewInserter, __block_effectsViewInserter)
 }
-

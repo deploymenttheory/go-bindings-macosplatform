@@ -60,9 +60,13 @@ func (x *CNNConvolutionGradientState) GradientForWeightsLayout() raw.MPSCNNConvo
 	return x.inner.GradientForWeightsLayout()
 }
 
-func (x *CNNConvolutionGradientState) asCNNConvolutionGradientState() *raw.MPSCNNConvolutionGradientState { return x.inner }
+func (x *CNNConvolutionGradientState) asCNNConvolutionGradientState() *raw.MPSCNNConvolutionGradientState {
+	return x.inner
+}
 
-func (x *CNNConvolutionGradientState) asNNGradientState() *raw.MPSNNGradientState { return &x.inner.MPSNNGradientState }
+func (x *CNNConvolutionGradientState) asNNGradientState() *raw.MPSNNGradientState {
+	return &x.inner.MPSNNGradientState
+}
 
 // CNNConvolutionGradientStateable is the interface implemented by [CNNConvolutionGradientState], for mocking and DI.
 type CNNConvolutionGradientStateable interface {
@@ -74,4 +78,3 @@ type CNNConvolutionGradientStateable interface {
 }
 
 var _ CNNConvolutionGradientStateable = (*CNNConvolutionGradientState)(nil)
-

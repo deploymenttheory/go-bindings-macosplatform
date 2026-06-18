@@ -16,11 +16,11 @@ type NEPacketTunnelFlow struct {
 }
 
 var (
-	_clsNEPacketTunnelFlow = _objcClass("NEPacketTunnelFlow")
-	_nEPacketTunnelFlowSelReadPacketsWithCompletionHandler = objc.RegisterName("readPacketsWithCompletionHandler:")
-	_nEPacketTunnelFlowSelWritePacketsWithProtocols = objc.RegisterName("writePackets:withProtocols:")
+	_clsNEPacketTunnelFlow                                       = _objcClass("NEPacketTunnelFlow")
+	_nEPacketTunnelFlowSelReadPacketsWithCompletionHandler       = objc.RegisterName("readPacketsWithCompletionHandler:")
+	_nEPacketTunnelFlowSelWritePacketsWithProtocols              = objc.RegisterName("writePackets:withProtocols:")
 	_nEPacketTunnelFlowSelReadPacketObjectsWithCompletionHandler = objc.RegisterName("readPacketObjectsWithCompletionHandler:")
-	_nEPacketTunnelFlowSelWritePacketObjects = objc.RegisterName("writePacketObjects:")
+	_nEPacketTunnelFlowSelWritePacketObjects                     = objc.RegisterName("writePacketObjects:")
 )
 
 func NEPacketTunnelFlowFromID(id objc.ID) *NEPacketTunnelFlow {
@@ -64,4 +64,3 @@ func (o *NEPacketTunnelFlow) WritePacketObjects(packets *foundation.NSArray[*NEP
 	_ret := objc.Send[bool](o.Ptr(), _nEPacketTunnelFlowSelWritePacketObjects, packets.Ptr())
 	return _ret
 }
-

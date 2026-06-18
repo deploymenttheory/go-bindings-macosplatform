@@ -25,4 +25,3 @@ func DOMCSSUnknownRuleFromID(id objc.ID) *DOMCSSUnknownRule {
 	purego.Track(o)
 	return o
 }
-

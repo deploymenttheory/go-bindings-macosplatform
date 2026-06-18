@@ -55,4 +55,3 @@ type CaptionGrouperable interface {
 }
 
 var _ CaptionGrouperable = (*CaptionGrouper)(nil)
-

@@ -26,4 +26,3 @@ func MDLObjectContainerFromID(id objc.ID) *MDLObjectContainer {
 	purego.Track(o)
 	return o
 }
-

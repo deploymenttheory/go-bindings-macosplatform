@@ -18,15 +18,15 @@ type MEMessageSecurityInformation struct {
 }
 
 var (
-	_clsMEMessageSecurityInformation = _objcClass("MEMessageSecurityInformation")
-	_mEMessageSecurityInformationSelInitWithSignersIsEncryptedSigningErrorEncryptionError = objc.RegisterName("initWithSigners:isEncrypted:signingError:encryptionError:")
+	_clsMEMessageSecurityInformation                                                                                                                  = _objcClass("MEMessageSecurityInformation")
+	_mEMessageSecurityInformationSelInitWithSignersIsEncryptedSigningErrorEncryptionError                                                             = objc.RegisterName("initWithSigners:isEncrypted:signingError:encryptionError:")
 	_mEMessageSecurityInformationSelInitWithSignersIsEncryptedSigningErrorEncryptionErrorShouldBlockRemoteContentLocalizedRemoteContentBlockingReason = objc.RegisterName("initWithSigners:isEncrypted:signingError:encryptionError:shouldBlockRemoteContent:localizedRemoteContentBlockingReason:")
-	_mEMessageSecurityInformationSelSigners = objc.RegisterName("signers")
-	_mEMessageSecurityInformationSelIsEncrypted = objc.RegisterName("isEncrypted")
-	_mEMessageSecurityInformationSelSigningError = objc.RegisterName("signingError")
-	_mEMessageSecurityInformationSelEncryptionError = objc.RegisterName("encryptionError")
-	_mEMessageSecurityInformationSelShouldBlockRemoteContent = objc.RegisterName("shouldBlockRemoteContent")
-	_mEMessageSecurityInformationSelLocalizedRemoteContentBlockingReason = objc.RegisterName("localizedRemoteContentBlockingReason")
+	_mEMessageSecurityInformationSelSigners                                                                                                           = objc.RegisterName("signers")
+	_mEMessageSecurityInformationSelIsEncrypted                                                                                                       = objc.RegisterName("isEncrypted")
+	_mEMessageSecurityInformationSelSigningError                                                                                                      = objc.RegisterName("signingError")
+	_mEMessageSecurityInformationSelEncryptionError                                                                                                   = objc.RegisterName("encryptionError")
+	_mEMessageSecurityInformationSelShouldBlockRemoteContent                                                                                          = objc.RegisterName("shouldBlockRemoteContent")
+	_mEMessageSecurityInformationSelLocalizedRemoteContentBlockingReason                                                                              = objc.RegisterName("localizedRemoteContentBlockingReason")
 )
 
 func MEMessageSecurityInformationFromID(id objc.ID) *MEMessageSecurityInformation {
@@ -41,20 +41,26 @@ func MEMessageSecurityInformationFromID(id objc.ID) *MEMessageSecurityInformatio
 
 func (o *MEMessageSecurityInformation) InitWithSignersIsEncryptedSigningErrorEncryptionError(signers *foundation.NSArray[*MEMessageSigner], isEncrypted bool, signingError unsafe.Pointer, encryptionError unsafe.Pointer) *MEMessageSecurityInformation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEMessageSecurityInformationSelInitWithSignersIsEncryptedSigningErrorEncryptionError, signers.Ptr(), isEncrypted, signingError, encryptionError)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEMessageSecurityInformationFromID(_ret)
 }
 
 func (o *MEMessageSecurityInformation) InitWithSignersIsEncryptedSigningErrorEncryptionErrorShouldBlockRemoteContentLocalizedRemoteContentBlockingReason(signers *foundation.NSArray[*MEMessageSigner], isEncrypted bool, signingError unsafe.Pointer, encryptionError unsafe.Pointer, shouldBlockRemoteContent bool, localizedRemoteContentBlockingReason *foundation.NSString) *MEMessageSecurityInformation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEMessageSecurityInformationSelInitWithSignersIsEncryptedSigningErrorEncryptionErrorShouldBlockRemoteContentLocalizedRemoteContentBlockingReason, signers.Ptr(), isEncrypted, signingError, encryptionError, shouldBlockRemoteContent, localizedRemoteContentBlockingReason.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEMessageSecurityInformationFromID(_ret)
 }
 
 // @brief The signers of the message
 func (o *MEMessageSecurityInformation) Signers() *foundation.NSArray[*MEMessageSigner] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEMessageSecurityInformationSelSigners)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MEMessageSigner](_ret)
 }
 
@@ -85,7 +91,8 @@ func (o *MEMessageSecurityInformation) ShouldBlockRemoteContent() bool {
 // @brief A localized string containing the reason for blocking remote content.
 func (o *MEMessageSecurityInformation) LocalizedRemoteContentBlockingReason() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEMessageSecurityInformationSelLocalizedRemoteContentBlockingReason)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

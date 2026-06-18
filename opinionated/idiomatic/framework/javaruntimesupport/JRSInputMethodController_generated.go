@@ -75,4 +75,3 @@ type InputMethodControllerable interface {
 }
 
 var _ InputMethodControllerable = (*InputMethodController)(nil)
-

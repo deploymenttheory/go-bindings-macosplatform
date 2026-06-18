@@ -15,9 +15,9 @@ type NSURLSessionDataTask struct {
 }
 
 var (
-	_clsNSURLSessionDataTask = _objcClass("NSURLSessionDataTask")
+	_clsNSURLSessionDataTask     = _objcClass("NSURLSessionDataTask")
 	_nSURLSessionDataTaskSelInit = objc.RegisterName("init")
-	_nSURLSessionDataTaskSelNew = objc.RegisterName("new")
+	_nSURLSessionDataTaskSelNew  = objc.RegisterName("new")
 )
 
 func NSURLSessionDataTaskFromID(id objc.ID) *NSURLSessionDataTask {
@@ -33,7 +33,9 @@ func NSURLSessionDataTaskFromID(id objc.ID) *NSURLSessionDataTask {
 // Deprecated: Please use -[NSURLSession dataTaskWithRequest:] or other NSURLSession methods to create instances
 func (o *NSURLSessionDataTask) Init() *NSURLSessionDataTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionDataTaskSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionDataTaskFromID(_ret)
 }
 
@@ -42,4 +44,3 @@ func NSURLSessionDataTaskNew() *NSURLSessionDataTask {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLSessionDataTask), _nSURLSessionDataTaskSelNew)
 	return NSURLSessionDataTaskFromID(_ret)
 }
-

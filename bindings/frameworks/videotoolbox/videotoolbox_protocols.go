@@ -21,4 +21,3 @@ type VTFrameProcessorConfiguration interface {
 type VTFrameProcessorParameters interface {
 	SourceFrame() *VTFrameProcessorFrame
 }
-

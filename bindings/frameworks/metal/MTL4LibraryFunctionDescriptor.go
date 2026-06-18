@@ -16,10 +16,10 @@ type MTL4LibraryFunctionDescriptor struct {
 }
 
 var (
-	_clsMTL4LibraryFunctionDescriptor = _objcClass("MTL4LibraryFunctionDescriptor")
-	_mTL4LibraryFunctionDescriptorSelName = objc.RegisterName("name")
-	_mTL4LibraryFunctionDescriptorSelSetName = objc.RegisterName("setName:")
-	_mTL4LibraryFunctionDescriptorSelLibrary = objc.RegisterName("library")
+	_clsMTL4LibraryFunctionDescriptor           = _objcClass("MTL4LibraryFunctionDescriptor")
+	_mTL4LibraryFunctionDescriptorSelName       = objc.RegisterName("name")
+	_mTL4LibraryFunctionDescriptorSelSetName    = objc.RegisterName("setName:")
+	_mTL4LibraryFunctionDescriptorSelLibrary    = objc.RegisterName("library")
 	_mTL4LibraryFunctionDescriptorSelSetLibrary = objc.RegisterName("setLibrary:")
 )
 
@@ -36,7 +36,9 @@ func MTL4LibraryFunctionDescriptorFromID(id objc.ID) *MTL4LibraryFunctionDescrip
 // Assigns a name to the function.
 func (o *MTL4LibraryFunctionDescriptor) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4LibraryFunctionDescriptorSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -53,4 +55,3 @@ func (o *MTL4LibraryFunctionDescriptor) Library() MTLLibrary {
 func (o *MTL4LibraryFunctionDescriptor) SetLibrary(library MTLLibrary) {
 	o.Ptr().Send(_mTL4LibraryFunctionDescriptorSelSetLibrary, library)
 }
-

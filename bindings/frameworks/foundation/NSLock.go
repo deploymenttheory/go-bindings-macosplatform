@@ -15,11 +15,11 @@ type NSLock struct {
 }
 
 var (
-	_clsNSLock = _objcClass("NSLock")
-	_nSLockSelTryLock = objc.RegisterName("tryLock")
+	_clsNSLock               = _objcClass("NSLock")
+	_nSLockSelTryLock        = objc.RegisterName("tryLock")
 	_nSLockSelLockBeforeDate = objc.RegisterName("lockBeforeDate:")
-	_nSLockSelName = objc.RegisterName("name")
-	_nSLockSelSetName = objc.RegisterName("setName:")
+	_nSLockSelName           = objc.RegisterName("name")
+	_nSLockSelSetName        = objc.RegisterName("setName:")
 )
 
 func NSLockFromID(id objc.ID) *NSLock {
@@ -44,11 +44,12 @@ func (o *NSLock) LockBeforeDate(limit *NSDate) bool {
 
 func (o *NSLock) Name() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLockSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSLock) SetName(name *NSString) {
 	o.Ptr().Send(_nSLockSelSetName, name.Ptr())
 }
-

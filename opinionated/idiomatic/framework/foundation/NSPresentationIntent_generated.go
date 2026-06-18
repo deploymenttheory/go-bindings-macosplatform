@@ -137,4 +137,3 @@ type PresentationIntentable interface {
 }
 
 var _ PresentationIntentable = (*PresentationIntent)(nil)
-

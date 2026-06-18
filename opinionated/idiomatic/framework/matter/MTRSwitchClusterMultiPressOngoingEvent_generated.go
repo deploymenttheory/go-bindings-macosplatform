@@ -16,7 +16,9 @@ type MTRSwitchClusterMultiPressOngoingEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRSwitchClusterMultiPressOngoingEvent].
-func (x *MTRSwitchClusterMultiPressOngoingEvent) Unwrap() *raw.MTRSwitchClusterMultiPressOngoingEvent { return x.inner }
+func (x *MTRSwitchClusterMultiPressOngoingEvent) Unwrap() *raw.MTRSwitchClusterMultiPressOngoingEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -80,4 +82,3 @@ type MTRSwitchClusterMultiPressOngoingEventable interface {
 }
 
 var _ MTRSwitchClusterMultiPressOngoingEventable = (*MTRSwitchClusterMultiPressOngoingEvent)(nil)
-

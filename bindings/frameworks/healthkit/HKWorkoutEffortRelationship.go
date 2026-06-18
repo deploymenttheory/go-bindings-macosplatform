@@ -16,10 +16,10 @@ type HKWorkoutEffortRelationship struct {
 }
 
 var (
-	_clsHKWorkoutEffortRelationship = _objcClass("HKWorkoutEffortRelationship")
-	_hKWorkoutEffortRelationshipSelWorkout = objc.RegisterName("workout")
+	_clsHKWorkoutEffortRelationship         = _objcClass("HKWorkoutEffortRelationship")
+	_hKWorkoutEffortRelationshipSelWorkout  = objc.RegisterName("workout")
 	_hKWorkoutEffortRelationshipSelActivity = objc.RegisterName("activity")
-	_hKWorkoutEffortRelationshipSelSamples = objc.RegisterName("samples")
+	_hKWorkoutEffortRelationshipSelSamples  = objc.RegisterName("samples")
 )
 
 func HKWorkoutEffortRelationshipFromID(id objc.ID) *HKWorkoutEffortRelationship {
@@ -35,21 +35,26 @@ func HKWorkoutEffortRelationshipFromID(id objc.ID) *HKWorkoutEffortRelationship 
 // @property      workout
 func (o *HKWorkoutEffortRelationship) Workout() *HKWorkout {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutEffortRelationshipSelWorkout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKWorkoutFromID(_ret)
 }
 
 // @property      activity
 func (o *HKWorkoutEffortRelationship) Activity() *HKWorkoutActivity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutEffortRelationshipSelActivity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKWorkoutActivityFromID(_ret)
 }
 
 // @property      samples @abstract      The samples related to the workout but not any sub-activities
 func (o *HKWorkoutEffortRelationship) Samples() *foundation.NSArray[*HKSample] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutEffortRelationshipSelSamples)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*HKSample](_ret)
 }
-

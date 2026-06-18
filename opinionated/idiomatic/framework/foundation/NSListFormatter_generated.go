@@ -108,4 +108,3 @@ type ListFormatterable interface {
 }
 
 var _ ListFormatterable = (*ListFormatter)(nil)
-

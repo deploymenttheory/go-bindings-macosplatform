@@ -25,4 +25,3 @@ func MTRMediaInputClusterInputInfoFromID(id objc.ID) *MTRMediaInputClusterInputI
 	purego.Track(o)
 	return o
 }
-

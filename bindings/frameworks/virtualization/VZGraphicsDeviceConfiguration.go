@@ -26,4 +26,3 @@ func VZGraphicsDeviceConfigurationFromID(id objc.ID) *VZGraphicsDeviceConfigurat
 	purego.Track(o)
 	return o
 }
-

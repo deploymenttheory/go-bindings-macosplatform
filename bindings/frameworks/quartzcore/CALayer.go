@@ -19,174 +19,174 @@ type CALayer struct {
 }
 
 var (
-	_clsCALayer = _objcClass("CALayer")
-	_cALayerSelLayer = objc.RegisterName("layer")
-	_cALayerSelInit = objc.RegisterName("init")
-	_cALayerSelInitWithLayer = objc.RegisterName("initWithLayer:")
-	_cALayerSelPresentationLayer = objc.RegisterName("presentationLayer")
-	_cALayerSelModelLayer = objc.RegisterName("modelLayer")
-	_cALayerSelDefaultValueForKey = objc.RegisterName("defaultValueForKey:")
-	_cALayerSelNeedsDisplayForKey = objc.RegisterName("needsDisplayForKey:")
-	_cALayerSelShouldArchiveValueForKey = objc.RegisterName("shouldArchiveValueForKey:")
-	_cALayerSelAffineTransform = objc.RegisterName("affineTransform")
-	_cALayerSelSetAffineTransform = objc.RegisterName("setAffineTransform:")
-	_cALayerSelContentsAreFlipped = objc.RegisterName("contentsAreFlipped")
-	_cALayerSelRemoveFromSuperlayer = objc.RegisterName("removeFromSuperlayer")
-	_cALayerSelAddSublayer = objc.RegisterName("addSublayer:")
-	_cALayerSelInsertSublayerAtIndex = objc.RegisterName("insertSublayer:atIndex:")
-	_cALayerSelInsertSublayerBelow = objc.RegisterName("insertSublayer:below:")
-	_cALayerSelInsertSublayerAbove = objc.RegisterName("insertSublayer:above:")
-	_cALayerSelReplaceSublayerWith = objc.RegisterName("replaceSublayer:with:")
-	_cALayerSelConvertPointFromLayer = objc.RegisterName("convertPoint:fromLayer:")
-	_cALayerSelConvertPointToLayer = objc.RegisterName("convertPoint:toLayer:")
-	_cALayerSelConvertRectFromLayer = objc.RegisterName("convertRect:fromLayer:")
-	_cALayerSelConvertRectToLayer = objc.RegisterName("convertRect:toLayer:")
-	_cALayerSelConvertTimeFromLayer = objc.RegisterName("convertTime:fromLayer:")
-	_cALayerSelConvertTimeToLayer = objc.RegisterName("convertTime:toLayer:")
-	_cALayerSelHitTest = objc.RegisterName("hitTest:")
-	_cALayerSelContainsPoint = objc.RegisterName("containsPoint:")
-	_cALayerSelDisplay = objc.RegisterName("display")
-	_cALayerSelSetNeedsDisplay = objc.RegisterName("setNeedsDisplay")
-	_cALayerSelSetNeedsDisplayInRect = objc.RegisterName("setNeedsDisplayInRect:")
-	_cALayerSelNeedsDisplay = objc.RegisterName("needsDisplay")
-	_cALayerSelDisplayIfNeeded = objc.RegisterName("displayIfNeeded")
-	_cALayerSelDrawInContext = objc.RegisterName("drawInContext:")
-	_cALayerSelRenderInContext = objc.RegisterName("renderInContext:")
-	_cALayerSelCornerCurveExpansionFactor = objc.RegisterName("cornerCurveExpansionFactor:")
-	_cALayerSelPreferredFrameSize = objc.RegisterName("preferredFrameSize")
-	_cALayerSelSetNeedsLayout = objc.RegisterName("setNeedsLayout")
-	_cALayerSelNeedsLayout = objc.RegisterName("needsLayout")
-	_cALayerSelLayoutIfNeeded = objc.RegisterName("layoutIfNeeded")
-	_cALayerSelLayoutSublayers = objc.RegisterName("layoutSublayers")
-	_cALayerSelResizeSublayersWithOldSize = objc.RegisterName("resizeSublayersWithOldSize:")
-	_cALayerSelResizeWithOldSuperlayerSize = objc.RegisterName("resizeWithOldSuperlayerSize:")
-	_cALayerSelDefaultActionForKey = objc.RegisterName("defaultActionForKey:")
-	_cALayerSelActionForKey = objc.RegisterName("actionForKey:")
-	_cALayerSelAddAnimationForKey = objc.RegisterName("addAnimation:forKey:")
-	_cALayerSelRemoveAllAnimations = objc.RegisterName("removeAllAnimations")
-	_cALayerSelRemoveAnimationForKey = objc.RegisterName("removeAnimationForKey:")
-	_cALayerSelAnimationKeys = objc.RegisterName("animationKeys")
-	_cALayerSelAnimationForKey = objc.RegisterName("animationForKey:")
-	_cALayerSelBounds = objc.RegisterName("bounds")
-	_cALayerSelSetBounds = objc.RegisterName("setBounds:")
-	_cALayerSelPosition = objc.RegisterName("position")
-	_cALayerSelSetPosition = objc.RegisterName("setPosition:")
-	_cALayerSelZPosition = objc.RegisterName("zPosition")
-	_cALayerSelSetZPosition = objc.RegisterName("setZPosition:")
-	_cALayerSelAnchorPoint = objc.RegisterName("anchorPoint")
-	_cALayerSelSetAnchorPoint = objc.RegisterName("setAnchorPoint:")
-	_cALayerSelAnchorPointZ = objc.RegisterName("anchorPointZ")
-	_cALayerSelSetAnchorPointZ = objc.RegisterName("setAnchorPointZ:")
-	_cALayerSelTransform = objc.RegisterName("transform")
-	_cALayerSelSetTransform = objc.RegisterName("setTransform:")
-	_cALayerSelFrame = objc.RegisterName("frame")
-	_cALayerSelSetFrame = objc.RegisterName("setFrame:")
-	_cALayerSelIsHidden = objc.RegisterName("isHidden")
-	_cALayerSelSetHidden = objc.RegisterName("setHidden:")
-	_cALayerSelIsDoubleSided = objc.RegisterName("isDoubleSided")
-	_cALayerSelSetDoubleSided = objc.RegisterName("setDoubleSided:")
-	_cALayerSelIsGeometryFlipped = objc.RegisterName("isGeometryFlipped")
-	_cALayerSelSetGeometryFlipped = objc.RegisterName("setGeometryFlipped:")
-	_cALayerSelSuperlayer = objc.RegisterName("superlayer")
-	_cALayerSelSublayers = objc.RegisterName("sublayers")
-	_cALayerSelSetSublayers = objc.RegisterName("setSublayers:")
-	_cALayerSelSublayerTransform = objc.RegisterName("sublayerTransform")
-	_cALayerSelSetSublayerTransform = objc.RegisterName("setSublayerTransform:")
-	_cALayerSelMask = objc.RegisterName("mask")
-	_cALayerSelSetMask = objc.RegisterName("setMask:")
-	_cALayerSelMasksToBounds = objc.RegisterName("masksToBounds")
-	_cALayerSelSetMasksToBounds = objc.RegisterName("setMasksToBounds:")
-	_cALayerSelContents = objc.RegisterName("contents")
-	_cALayerSelSetContents = objc.RegisterName("setContents:")
-	_cALayerSelContentsRect = objc.RegisterName("contentsRect")
-	_cALayerSelSetContentsRect = objc.RegisterName("setContentsRect:")
-	_cALayerSelContentsGravity = objc.RegisterName("contentsGravity")
-	_cALayerSelSetContentsGravity = objc.RegisterName("setContentsGravity:")
-	_cALayerSelContentsScale = objc.RegisterName("contentsScale")
-	_cALayerSelSetContentsScale = objc.RegisterName("setContentsScale:")
-	_cALayerSelContentsCenter = objc.RegisterName("contentsCenter")
-	_cALayerSelSetContentsCenter = objc.RegisterName("setContentsCenter:")
-	_cALayerSelContentsFormat = objc.RegisterName("contentsFormat")
-	_cALayerSelSetContentsFormat = objc.RegisterName("setContentsFormat:")
-	_cALayerSelWantsExtendedDynamicRangeContent = objc.RegisterName("wantsExtendedDynamicRangeContent")
+	_clsCALayer                                    = _objcClass("CALayer")
+	_cALayerSelLayer                               = objc.RegisterName("layer")
+	_cALayerSelInit                                = objc.RegisterName("init")
+	_cALayerSelInitWithLayer                       = objc.RegisterName("initWithLayer:")
+	_cALayerSelPresentationLayer                   = objc.RegisterName("presentationLayer")
+	_cALayerSelModelLayer                          = objc.RegisterName("modelLayer")
+	_cALayerSelDefaultValueForKey                  = objc.RegisterName("defaultValueForKey:")
+	_cALayerSelNeedsDisplayForKey                  = objc.RegisterName("needsDisplayForKey:")
+	_cALayerSelShouldArchiveValueForKey            = objc.RegisterName("shouldArchiveValueForKey:")
+	_cALayerSelAffineTransform                     = objc.RegisterName("affineTransform")
+	_cALayerSelSetAffineTransform                  = objc.RegisterName("setAffineTransform:")
+	_cALayerSelContentsAreFlipped                  = objc.RegisterName("contentsAreFlipped")
+	_cALayerSelRemoveFromSuperlayer                = objc.RegisterName("removeFromSuperlayer")
+	_cALayerSelAddSublayer                         = objc.RegisterName("addSublayer:")
+	_cALayerSelInsertSublayerAtIndex               = objc.RegisterName("insertSublayer:atIndex:")
+	_cALayerSelInsertSublayerBelow                 = objc.RegisterName("insertSublayer:below:")
+	_cALayerSelInsertSublayerAbove                 = objc.RegisterName("insertSublayer:above:")
+	_cALayerSelReplaceSublayerWith                 = objc.RegisterName("replaceSublayer:with:")
+	_cALayerSelConvertPointFromLayer               = objc.RegisterName("convertPoint:fromLayer:")
+	_cALayerSelConvertPointToLayer                 = objc.RegisterName("convertPoint:toLayer:")
+	_cALayerSelConvertRectFromLayer                = objc.RegisterName("convertRect:fromLayer:")
+	_cALayerSelConvertRectToLayer                  = objc.RegisterName("convertRect:toLayer:")
+	_cALayerSelConvertTimeFromLayer                = objc.RegisterName("convertTime:fromLayer:")
+	_cALayerSelConvertTimeToLayer                  = objc.RegisterName("convertTime:toLayer:")
+	_cALayerSelHitTest                             = objc.RegisterName("hitTest:")
+	_cALayerSelContainsPoint                       = objc.RegisterName("containsPoint:")
+	_cALayerSelDisplay                             = objc.RegisterName("display")
+	_cALayerSelSetNeedsDisplay                     = objc.RegisterName("setNeedsDisplay")
+	_cALayerSelSetNeedsDisplayInRect               = objc.RegisterName("setNeedsDisplayInRect:")
+	_cALayerSelNeedsDisplay                        = objc.RegisterName("needsDisplay")
+	_cALayerSelDisplayIfNeeded                     = objc.RegisterName("displayIfNeeded")
+	_cALayerSelDrawInContext                       = objc.RegisterName("drawInContext:")
+	_cALayerSelRenderInContext                     = objc.RegisterName("renderInContext:")
+	_cALayerSelCornerCurveExpansionFactor          = objc.RegisterName("cornerCurveExpansionFactor:")
+	_cALayerSelPreferredFrameSize                  = objc.RegisterName("preferredFrameSize")
+	_cALayerSelSetNeedsLayout                      = objc.RegisterName("setNeedsLayout")
+	_cALayerSelNeedsLayout                         = objc.RegisterName("needsLayout")
+	_cALayerSelLayoutIfNeeded                      = objc.RegisterName("layoutIfNeeded")
+	_cALayerSelLayoutSublayers                     = objc.RegisterName("layoutSublayers")
+	_cALayerSelResizeSublayersWithOldSize          = objc.RegisterName("resizeSublayersWithOldSize:")
+	_cALayerSelResizeWithOldSuperlayerSize         = objc.RegisterName("resizeWithOldSuperlayerSize:")
+	_cALayerSelDefaultActionForKey                 = objc.RegisterName("defaultActionForKey:")
+	_cALayerSelActionForKey                        = objc.RegisterName("actionForKey:")
+	_cALayerSelAddAnimationForKey                  = objc.RegisterName("addAnimation:forKey:")
+	_cALayerSelRemoveAllAnimations                 = objc.RegisterName("removeAllAnimations")
+	_cALayerSelRemoveAnimationForKey               = objc.RegisterName("removeAnimationForKey:")
+	_cALayerSelAnimationKeys                       = objc.RegisterName("animationKeys")
+	_cALayerSelAnimationForKey                     = objc.RegisterName("animationForKey:")
+	_cALayerSelBounds                              = objc.RegisterName("bounds")
+	_cALayerSelSetBounds                           = objc.RegisterName("setBounds:")
+	_cALayerSelPosition                            = objc.RegisterName("position")
+	_cALayerSelSetPosition                         = objc.RegisterName("setPosition:")
+	_cALayerSelZPosition                           = objc.RegisterName("zPosition")
+	_cALayerSelSetZPosition                        = objc.RegisterName("setZPosition:")
+	_cALayerSelAnchorPoint                         = objc.RegisterName("anchorPoint")
+	_cALayerSelSetAnchorPoint                      = objc.RegisterName("setAnchorPoint:")
+	_cALayerSelAnchorPointZ                        = objc.RegisterName("anchorPointZ")
+	_cALayerSelSetAnchorPointZ                     = objc.RegisterName("setAnchorPointZ:")
+	_cALayerSelTransform                           = objc.RegisterName("transform")
+	_cALayerSelSetTransform                        = objc.RegisterName("setTransform:")
+	_cALayerSelFrame                               = objc.RegisterName("frame")
+	_cALayerSelSetFrame                            = objc.RegisterName("setFrame:")
+	_cALayerSelIsHidden                            = objc.RegisterName("isHidden")
+	_cALayerSelSetHidden                           = objc.RegisterName("setHidden:")
+	_cALayerSelIsDoubleSided                       = objc.RegisterName("isDoubleSided")
+	_cALayerSelSetDoubleSided                      = objc.RegisterName("setDoubleSided:")
+	_cALayerSelIsGeometryFlipped                   = objc.RegisterName("isGeometryFlipped")
+	_cALayerSelSetGeometryFlipped                  = objc.RegisterName("setGeometryFlipped:")
+	_cALayerSelSuperlayer                          = objc.RegisterName("superlayer")
+	_cALayerSelSublayers                           = objc.RegisterName("sublayers")
+	_cALayerSelSetSublayers                        = objc.RegisterName("setSublayers:")
+	_cALayerSelSublayerTransform                   = objc.RegisterName("sublayerTransform")
+	_cALayerSelSetSublayerTransform                = objc.RegisterName("setSublayerTransform:")
+	_cALayerSelMask                                = objc.RegisterName("mask")
+	_cALayerSelSetMask                             = objc.RegisterName("setMask:")
+	_cALayerSelMasksToBounds                       = objc.RegisterName("masksToBounds")
+	_cALayerSelSetMasksToBounds                    = objc.RegisterName("setMasksToBounds:")
+	_cALayerSelContents                            = objc.RegisterName("contents")
+	_cALayerSelSetContents                         = objc.RegisterName("setContents:")
+	_cALayerSelContentsRect                        = objc.RegisterName("contentsRect")
+	_cALayerSelSetContentsRect                     = objc.RegisterName("setContentsRect:")
+	_cALayerSelContentsGravity                     = objc.RegisterName("contentsGravity")
+	_cALayerSelSetContentsGravity                  = objc.RegisterName("setContentsGravity:")
+	_cALayerSelContentsScale                       = objc.RegisterName("contentsScale")
+	_cALayerSelSetContentsScale                    = objc.RegisterName("setContentsScale:")
+	_cALayerSelContentsCenter                      = objc.RegisterName("contentsCenter")
+	_cALayerSelSetContentsCenter                   = objc.RegisterName("setContentsCenter:")
+	_cALayerSelContentsFormat                      = objc.RegisterName("contentsFormat")
+	_cALayerSelSetContentsFormat                   = objc.RegisterName("setContentsFormat:")
+	_cALayerSelWantsExtendedDynamicRangeContent    = objc.RegisterName("wantsExtendedDynamicRangeContent")
 	_cALayerSelSetWantsExtendedDynamicRangeContent = objc.RegisterName("setWantsExtendedDynamicRangeContent:")
-	_cALayerSelToneMapMode = objc.RegisterName("toneMapMode")
-	_cALayerSelSetToneMapMode = objc.RegisterName("setToneMapMode:")
-	_cALayerSelPreferredDynamicRange = objc.RegisterName("preferredDynamicRange")
-	_cALayerSelSetPreferredDynamicRange = objc.RegisterName("setPreferredDynamicRange:")
-	_cALayerSelContentsHeadroom = objc.RegisterName("contentsHeadroom")
-	_cALayerSelSetContentsHeadroom = objc.RegisterName("setContentsHeadroom:")
-	_cALayerSelMinificationFilter = objc.RegisterName("minificationFilter")
-	_cALayerSelSetMinificationFilter = objc.RegisterName("setMinificationFilter:")
-	_cALayerSelMagnificationFilter = objc.RegisterName("magnificationFilter")
-	_cALayerSelSetMagnificationFilter = objc.RegisterName("setMagnificationFilter:")
-	_cALayerSelMinificationFilterBias = objc.RegisterName("minificationFilterBias")
-	_cALayerSelSetMinificationFilterBias = objc.RegisterName("setMinificationFilterBias:")
-	_cALayerSelIsOpaque = objc.RegisterName("isOpaque")
-	_cALayerSelSetOpaque = objc.RegisterName("setOpaque:")
-	_cALayerSelNeedsDisplayOnBoundsChange = objc.RegisterName("needsDisplayOnBoundsChange")
-	_cALayerSelSetNeedsDisplayOnBoundsChange = objc.RegisterName("setNeedsDisplayOnBoundsChange:")
-	_cALayerSelDrawsAsynchronously = objc.RegisterName("drawsAsynchronously")
-	_cALayerSelSetDrawsAsynchronously = objc.RegisterName("setDrawsAsynchronously:")
-	_cALayerSelEdgeAntialiasingMask = objc.RegisterName("edgeAntialiasingMask")
-	_cALayerSelSetEdgeAntialiasingMask = objc.RegisterName("setEdgeAntialiasingMask:")
-	_cALayerSelAllowsEdgeAntialiasing = objc.RegisterName("allowsEdgeAntialiasing")
-	_cALayerSelSetAllowsEdgeAntialiasing = objc.RegisterName("setAllowsEdgeAntialiasing:")
-	_cALayerSelBackgroundColor = objc.RegisterName("backgroundColor")
-	_cALayerSelSetBackgroundColor = objc.RegisterName("setBackgroundColor:")
-	_cALayerSelCornerRadius = objc.RegisterName("cornerRadius")
-	_cALayerSelSetCornerRadius = objc.RegisterName("setCornerRadius:")
-	_cALayerSelMaskedCorners = objc.RegisterName("maskedCorners")
-	_cALayerSelSetMaskedCorners = objc.RegisterName("setMaskedCorners:")
-	_cALayerSelCornerCurve = objc.RegisterName("cornerCurve")
-	_cALayerSelSetCornerCurve = objc.RegisterName("setCornerCurve:")
-	_cALayerSelBorderWidth = objc.RegisterName("borderWidth")
-	_cALayerSelSetBorderWidth = objc.RegisterName("setBorderWidth:")
-	_cALayerSelBorderColor = objc.RegisterName("borderColor")
-	_cALayerSelSetBorderColor = objc.RegisterName("setBorderColor:")
-	_cALayerSelOpacity = objc.RegisterName("opacity")
-	_cALayerSelSetOpacity = objc.RegisterName("setOpacity:")
-	_cALayerSelAllowsGroupOpacity = objc.RegisterName("allowsGroupOpacity")
-	_cALayerSelSetAllowsGroupOpacity = objc.RegisterName("setAllowsGroupOpacity:")
-	_cALayerSelCompositingFilter = objc.RegisterName("compositingFilter")
-	_cALayerSelSetCompositingFilter = objc.RegisterName("setCompositingFilter:")
-	_cALayerSelFilters = objc.RegisterName("filters")
-	_cALayerSelSetFilters = objc.RegisterName("setFilters:")
-	_cALayerSelBackgroundFilters = objc.RegisterName("backgroundFilters")
-	_cALayerSelSetBackgroundFilters = objc.RegisterName("setBackgroundFilters:")
-	_cALayerSelShouldRasterize = objc.RegisterName("shouldRasterize")
-	_cALayerSelSetShouldRasterize = objc.RegisterName("setShouldRasterize:")
-	_cALayerSelRasterizationScale = objc.RegisterName("rasterizationScale")
-	_cALayerSelSetRasterizationScale = objc.RegisterName("setRasterizationScale:")
-	_cALayerSelShadowColor = objc.RegisterName("shadowColor")
-	_cALayerSelSetShadowColor = objc.RegisterName("setShadowColor:")
-	_cALayerSelShadowOpacity = objc.RegisterName("shadowOpacity")
-	_cALayerSelSetShadowOpacity = objc.RegisterName("setShadowOpacity:")
-	_cALayerSelShadowOffset = objc.RegisterName("shadowOffset")
-	_cALayerSelSetShadowOffset = objc.RegisterName("setShadowOffset:")
-	_cALayerSelShadowRadius = objc.RegisterName("shadowRadius")
-	_cALayerSelSetShadowRadius = objc.RegisterName("setShadowRadius:")
-	_cALayerSelShadowPath = objc.RegisterName("shadowPath")
-	_cALayerSelSetShadowPath = objc.RegisterName("setShadowPath:")
-	_cALayerSelAutoresizingMask = objc.RegisterName("autoresizingMask")
-	_cALayerSelSetAutoresizingMask = objc.RegisterName("setAutoresizingMask:")
-	_cALayerSelLayoutManager = objc.RegisterName("layoutManager")
-	_cALayerSelSetLayoutManager = objc.RegisterName("setLayoutManager:")
-	_cALayerSelActions = objc.RegisterName("actions")
-	_cALayerSelSetActions = objc.RegisterName("setActions:")
-	_cALayerSelName = objc.RegisterName("name")
-	_cALayerSelSetName = objc.RegisterName("setName:")
-	_cALayerSelDelegate = objc.RegisterName("delegate")
-	_cALayerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_cALayerSelStyle = objc.RegisterName("style")
-	_cALayerSelSetStyle = objc.RegisterName("setStyle:")
-	_cALayerSelAddConstraint = objc.RegisterName("addConstraint:")
-	_cALayerSelConstraints = objc.RegisterName("constraints")
-	_cALayerSelSetConstraints = objc.RegisterName("setConstraints:")
-	_cALayerSelLayerWithRemoteClientId = objc.RegisterName("layerWithRemoteClientId:")
-	_cALayerSelScrollPoint = objc.RegisterName("scrollPoint:")
-	_cALayerSelScrollRectToVisible = objc.RegisterName("scrollRectToVisible:")
-	_cALayerSelVisibleRect = objc.RegisterName("visibleRect")
+	_cALayerSelToneMapMode                         = objc.RegisterName("toneMapMode")
+	_cALayerSelSetToneMapMode                      = objc.RegisterName("setToneMapMode:")
+	_cALayerSelPreferredDynamicRange               = objc.RegisterName("preferredDynamicRange")
+	_cALayerSelSetPreferredDynamicRange            = objc.RegisterName("setPreferredDynamicRange:")
+	_cALayerSelContentsHeadroom                    = objc.RegisterName("contentsHeadroom")
+	_cALayerSelSetContentsHeadroom                 = objc.RegisterName("setContentsHeadroom:")
+	_cALayerSelMinificationFilter                  = objc.RegisterName("minificationFilter")
+	_cALayerSelSetMinificationFilter               = objc.RegisterName("setMinificationFilter:")
+	_cALayerSelMagnificationFilter                 = objc.RegisterName("magnificationFilter")
+	_cALayerSelSetMagnificationFilter              = objc.RegisterName("setMagnificationFilter:")
+	_cALayerSelMinificationFilterBias              = objc.RegisterName("minificationFilterBias")
+	_cALayerSelSetMinificationFilterBias           = objc.RegisterName("setMinificationFilterBias:")
+	_cALayerSelIsOpaque                            = objc.RegisterName("isOpaque")
+	_cALayerSelSetOpaque                           = objc.RegisterName("setOpaque:")
+	_cALayerSelNeedsDisplayOnBoundsChange          = objc.RegisterName("needsDisplayOnBoundsChange")
+	_cALayerSelSetNeedsDisplayOnBoundsChange       = objc.RegisterName("setNeedsDisplayOnBoundsChange:")
+	_cALayerSelDrawsAsynchronously                 = objc.RegisterName("drawsAsynchronously")
+	_cALayerSelSetDrawsAsynchronously              = objc.RegisterName("setDrawsAsynchronously:")
+	_cALayerSelEdgeAntialiasingMask                = objc.RegisterName("edgeAntialiasingMask")
+	_cALayerSelSetEdgeAntialiasingMask             = objc.RegisterName("setEdgeAntialiasingMask:")
+	_cALayerSelAllowsEdgeAntialiasing              = objc.RegisterName("allowsEdgeAntialiasing")
+	_cALayerSelSetAllowsEdgeAntialiasing           = objc.RegisterName("setAllowsEdgeAntialiasing:")
+	_cALayerSelBackgroundColor                     = objc.RegisterName("backgroundColor")
+	_cALayerSelSetBackgroundColor                  = objc.RegisterName("setBackgroundColor:")
+	_cALayerSelCornerRadius                        = objc.RegisterName("cornerRadius")
+	_cALayerSelSetCornerRadius                     = objc.RegisterName("setCornerRadius:")
+	_cALayerSelMaskedCorners                       = objc.RegisterName("maskedCorners")
+	_cALayerSelSetMaskedCorners                    = objc.RegisterName("setMaskedCorners:")
+	_cALayerSelCornerCurve                         = objc.RegisterName("cornerCurve")
+	_cALayerSelSetCornerCurve                      = objc.RegisterName("setCornerCurve:")
+	_cALayerSelBorderWidth                         = objc.RegisterName("borderWidth")
+	_cALayerSelSetBorderWidth                      = objc.RegisterName("setBorderWidth:")
+	_cALayerSelBorderColor                         = objc.RegisterName("borderColor")
+	_cALayerSelSetBorderColor                      = objc.RegisterName("setBorderColor:")
+	_cALayerSelOpacity                             = objc.RegisterName("opacity")
+	_cALayerSelSetOpacity                          = objc.RegisterName("setOpacity:")
+	_cALayerSelAllowsGroupOpacity                  = objc.RegisterName("allowsGroupOpacity")
+	_cALayerSelSetAllowsGroupOpacity               = objc.RegisterName("setAllowsGroupOpacity:")
+	_cALayerSelCompositingFilter                   = objc.RegisterName("compositingFilter")
+	_cALayerSelSetCompositingFilter                = objc.RegisterName("setCompositingFilter:")
+	_cALayerSelFilters                             = objc.RegisterName("filters")
+	_cALayerSelSetFilters                          = objc.RegisterName("setFilters:")
+	_cALayerSelBackgroundFilters                   = objc.RegisterName("backgroundFilters")
+	_cALayerSelSetBackgroundFilters                = objc.RegisterName("setBackgroundFilters:")
+	_cALayerSelShouldRasterize                     = objc.RegisterName("shouldRasterize")
+	_cALayerSelSetShouldRasterize                  = objc.RegisterName("setShouldRasterize:")
+	_cALayerSelRasterizationScale                  = objc.RegisterName("rasterizationScale")
+	_cALayerSelSetRasterizationScale               = objc.RegisterName("setRasterizationScale:")
+	_cALayerSelShadowColor                         = objc.RegisterName("shadowColor")
+	_cALayerSelSetShadowColor                      = objc.RegisterName("setShadowColor:")
+	_cALayerSelShadowOpacity                       = objc.RegisterName("shadowOpacity")
+	_cALayerSelSetShadowOpacity                    = objc.RegisterName("setShadowOpacity:")
+	_cALayerSelShadowOffset                        = objc.RegisterName("shadowOffset")
+	_cALayerSelSetShadowOffset                     = objc.RegisterName("setShadowOffset:")
+	_cALayerSelShadowRadius                        = objc.RegisterName("shadowRadius")
+	_cALayerSelSetShadowRadius                     = objc.RegisterName("setShadowRadius:")
+	_cALayerSelShadowPath                          = objc.RegisterName("shadowPath")
+	_cALayerSelSetShadowPath                       = objc.RegisterName("setShadowPath:")
+	_cALayerSelAutoresizingMask                    = objc.RegisterName("autoresizingMask")
+	_cALayerSelSetAutoresizingMask                 = objc.RegisterName("setAutoresizingMask:")
+	_cALayerSelLayoutManager                       = objc.RegisterName("layoutManager")
+	_cALayerSelSetLayoutManager                    = objc.RegisterName("setLayoutManager:")
+	_cALayerSelActions                             = objc.RegisterName("actions")
+	_cALayerSelSetActions                          = objc.RegisterName("setActions:")
+	_cALayerSelName                                = objc.RegisterName("name")
+	_cALayerSelSetName                             = objc.RegisterName("setName:")
+	_cALayerSelDelegate                            = objc.RegisterName("delegate")
+	_cALayerSelSetDelegate                         = objc.RegisterName("setDelegate:")
+	_cALayerSelStyle                               = objc.RegisterName("style")
+	_cALayerSelSetStyle                            = objc.RegisterName("setStyle:")
+	_cALayerSelAddConstraint                       = objc.RegisterName("addConstraint:")
+	_cALayerSelConstraints                         = objc.RegisterName("constraints")
+	_cALayerSelSetConstraints                      = objc.RegisterName("setConstraints:")
+	_cALayerSelLayerWithRemoteClientId             = objc.RegisterName("layerWithRemoteClientId:")
+	_cALayerSelScrollPoint                         = objc.RegisterName("scrollPoint:")
+	_cALayerSelScrollRectToVisible                 = objc.RegisterName("scrollRectToVisible:")
+	_cALayerSelVisibleRect                         = objc.RegisterName("visibleRect")
 )
 
 func CALayerFromID(id objc.ID) *CALayer {
@@ -201,31 +201,41 @@ func CALayerFromID(id objc.ID) *CALayer {
 
 func CALayerLayer() *CALayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCALayer), _cALayerSelLayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CALayerFromID(_ret)
 }
 
 func (o *CALayer) Init() *CALayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cALayerSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CALayerFromID(_ret)
 }
 
 func (o *CALayer) InitWithLayer(layer objc.ID) *CALayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cALayerSelInitWithLayer, layer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CALayerFromID(_ret)
 }
 
 func (o *CALayer) PresentationLayer() *CALayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cALayerSelPresentationLayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CALayerFromID(_ret)
 }
 
 func (o *CALayer) ModelLayer() *CALayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cALayerSelModelLayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CALayerFromID(_ret)
 }
 
@@ -314,7 +324,9 @@ func (o *CALayer) ConvertTimeToLayer(t float64, l *CALayer) float64 {
 
 func (o *CALayer) HitTest(p corefoundation.CGPoint) *CALayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cALayerSelHitTest, p)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CALayerFromID(_ret)
 }
 
@@ -416,7 +428,9 @@ func (o *CALayer) AnimationKeys() *foundation.NSArray[*foundation.NSString] {
 
 func (o *CALayer) AnimationForKey(key *foundation.NSString) *CAAnimation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cALayerSelAnimationForKey, key.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CAAnimationFromID(_ret)
 }
 
@@ -512,13 +526,17 @@ func (o *CALayer) SetGeometryFlipped(geometryFlipped bool) {
 
 func (o *CALayer) Superlayer() *CALayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cALayerSelSuperlayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CALayerFromID(_ret)
 }
 
 func (o *CALayer) Sublayers() *foundation.NSArray[*CALayer] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cALayerSelSublayers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CALayer](_ret)
 }
 
@@ -537,7 +555,9 @@ func (o *CALayer) SetSublayerTransform(sublayerTransform CATransform3D) {
 
 func (o *CALayer) Mask() *CALayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cALayerSelMask)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CALayerFromID(_ret)
 }
 
@@ -574,7 +594,9 @@ func (o *CALayer) SetContentsRect(contentsRect corefoundation.CGRect) {
 
 func (o *CALayer) ContentsGravity() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cALayerSelContentsGravity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -602,7 +624,9 @@ func (o *CALayer) SetContentsCenter(contentsCenter corefoundation.CGRect) {
 
 func (o *CALayer) ContentsFormat() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cALayerSelContentsFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -623,7 +647,9 @@ func (o *CALayer) SetWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeC
 
 func (o *CALayer) ToneMapMode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cALayerSelToneMapMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -633,7 +659,9 @@ func (o *CALayer) SetToneMapMode(toneMapMode *foundation.NSString) {
 
 func (o *CALayer) PreferredDynamicRange() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cALayerSelPreferredDynamicRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -652,7 +680,9 @@ func (o *CALayer) SetContentsHeadroom(contentsHeadroom float64) {
 
 func (o *CALayer) MinificationFilter() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cALayerSelMinificationFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -662,7 +692,9 @@ func (o *CALayer) SetMinificationFilter(minificationFilter *foundation.NSString)
 
 func (o *CALayer) MagnificationFilter() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cALayerSelMagnificationFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -753,7 +785,9 @@ func (o *CALayer) SetMaskedCorners(maskedCorners CACornerMask) {
 
 func (o *CALayer) CornerCurve() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cALayerSelCornerCurve)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -916,7 +950,9 @@ func (o *CALayer) SetActions(actions *foundation.NSDictionary[*foundation.NSStri
 
 func (o *CALayer) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cALayerSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -948,7 +984,9 @@ func (o *CALayer) AddConstraint(c *CAConstraint) {
 
 func (o *CALayer) Constraints() *foundation.NSArray[*CAConstraint] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cALayerSelConstraints)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CAConstraint](_ret)
 }
 
@@ -958,7 +996,9 @@ func (o *CALayer) SetConstraints(constraints *foundation.NSArray[*CAConstraint])
 
 func CALayerLayerWithRemoteClientId(client_id uint32) *CALayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCALayer), _cALayerSelLayerWithRemoteClientId, client_id)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CALayerFromID(_ret)
 }
 
@@ -974,4 +1014,3 @@ func (o *CALayer) VisibleRect() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _cALayerSelVisibleRect)
 	return _ret
 }
-

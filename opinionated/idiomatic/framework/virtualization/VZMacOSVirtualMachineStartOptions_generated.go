@@ -15,7 +15,9 @@ type MacOSVirtualMachineStartOptions struct {
 }
 
 // Unwrap returns the underlying [raw.VZMacOSVirtualMachineStartOptions].
-func (x *MacOSVirtualMachineStartOptions) Unwrap() *raw.VZMacOSVirtualMachineStartOptions { return x.inner }
+func (x *MacOSVirtualMachineStartOptions) Unwrap() *raw.VZMacOSVirtualMachineStartOptions {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -51,7 +53,9 @@ func (x *MacOSVirtualMachineStartOptions) SetStartUpFromMacOSRecovery(startUpFro
 	x.inner.SetStartUpFromMacOSRecovery(startUpFromMacOSRecovery)
 }
 
-func (x *MacOSVirtualMachineStartOptions) asVirtualMachineStartOptions() *raw.VZVirtualMachineStartOptions { return &x.inner.VZVirtualMachineStartOptions }
+func (x *MacOSVirtualMachineStartOptions) asVirtualMachineStartOptions() *raw.VZVirtualMachineStartOptions {
+	return &x.inner.VZVirtualMachineStartOptions
+}
 
 // MacOSVirtualMachineStartOptionsable is the interface implemented by [MacOSVirtualMachineStartOptions], for mocking and DI.
 type MacOSVirtualMachineStartOptionsable interface {
@@ -62,4 +66,3 @@ type MacOSVirtualMachineStartOptionsable interface {
 }
 
 var _ MacOSVirtualMachineStartOptionsable = (*MacOSVirtualMachineStartOptions)(nil)
-

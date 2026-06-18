@@ -311,4 +311,3 @@ type PickerTouchBarItemable interface {
 }
 
 var _ PickerTouchBarItemable = (*PickerTouchBarItem)(nil)
-

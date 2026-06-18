@@ -61,4 +61,3 @@ type AUGenericViewControllerable interface {
 }
 
 var _ AUGenericViewControllerable = (*AUGenericViewController)(nil)
-

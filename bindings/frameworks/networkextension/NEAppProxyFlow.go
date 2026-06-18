@@ -18,17 +18,17 @@ type NEAppProxyFlow struct {
 }
 
 var (
-	_clsNEAppProxyFlow = _objcClass("NEAppProxyFlow")
+	_clsNEAppProxyFlow                                           = _objcClass("NEAppProxyFlow")
 	_nEAppProxyFlowSelOpenWithLocalFlowEndpointCompletionHandler = objc.RegisterName("openWithLocalFlowEndpoint:completionHandler:")
-	_nEAppProxyFlowSelOpenWithLocalEndpointCompletionHandler = objc.RegisterName("openWithLocalEndpoint:completionHandler:")
-	_nEAppProxyFlowSelCloseReadWithError = objc.RegisterName("closeReadWithError:")
-	_nEAppProxyFlowSelCloseWriteWithError = objc.RegisterName("closeWriteWithError:")
-	_nEAppProxyFlowSelSetMetadata = objc.RegisterName("setMetadata:")
-	_nEAppProxyFlowSelMetaData = objc.RegisterName("metaData")
-	_nEAppProxyFlowSelNetworkInterface = objc.RegisterName("networkInterface")
-	_nEAppProxyFlowSelSetNetworkInterface = objc.RegisterName("setNetworkInterface:")
-	_nEAppProxyFlowSelRemoteHostname = objc.RegisterName("remoteHostname")
-	_nEAppProxyFlowSelIsBound = objc.RegisterName("isBound")
+	_nEAppProxyFlowSelOpenWithLocalEndpointCompletionHandler     = objc.RegisterName("openWithLocalEndpoint:completionHandler:")
+	_nEAppProxyFlowSelCloseReadWithError                         = objc.RegisterName("closeReadWithError:")
+	_nEAppProxyFlowSelCloseWriteWithError                        = objc.RegisterName("closeWriteWithError:")
+	_nEAppProxyFlowSelSetMetadata                                = objc.RegisterName("setMetadata:")
+	_nEAppProxyFlowSelMetaData                                   = objc.RegisterName("metaData")
+	_nEAppProxyFlowSelNetworkInterface                           = objc.RegisterName("networkInterface")
+	_nEAppProxyFlowSelSetNetworkInterface                        = objc.RegisterName("setNetworkInterface:")
+	_nEAppProxyFlowSelRemoteHostname                             = objc.RegisterName("remoteHostname")
+	_nEAppProxyFlowSelIsBound                                    = objc.RegisterName("isBound")
 )
 
 func NEAppProxyFlowFromID(id objc.ID) *NEAppProxyFlow {
@@ -84,14 +84,18 @@ func (o *NEAppProxyFlow) SetMetadata(parameters *foundation.NSObject) {
 // @property metaData @discussion An NEFlowMetaData object containing meta data for the flow.
 func (o *NEAppProxyFlow) MetaData() *NEFlowMetaData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEAppProxyFlowSelMetaData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEFlowMetaDataFromID(_ret)
 }
 
 // @property networkInterface @discussion An nw_interface_t containing information about the network interface used by the flow. If the flow's data is transported using a different interface, this property should be set to that interface.
 func (o *NEAppProxyFlow) NetworkInterface() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEAppProxyFlowSelNetworkInterface)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
@@ -102,7 +106,9 @@ func (o *NEAppProxyFlow) SetNetworkInterface(networkInterface *foundation.NSObje
 // @property remoteHostname @discussion If the flow was created by passing a hostname to a "connect by name" API such as NSURLSession or Network.framework, this property is set to the remote hostname.
 func (o *NEAppProxyFlow) RemoteHostname() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEAppProxyFlowSelRemoteHostname)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -111,4 +117,3 @@ func (o *NEAppProxyFlow) IsBound() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nEAppProxyFlowSelIsBound)
 	return _ret
 }
-

@@ -16,11 +16,11 @@ type MEMessageSigner struct {
 }
 
 var (
-	_clsMEMessageSigner = _objcClass("MEMessageSigner")
+	_clsMEMessageSigner                                            = _objcClass("MEMessageSigner")
 	_mEMessageSignerSelInitWithEmailAddressesSignatureLabelContext = objc.RegisterName("initWithEmailAddresses:signatureLabel:context:")
-	_mEMessageSignerSelEmailAddresses = objc.RegisterName("emailAddresses")
-	_mEMessageSignerSelLabel = objc.RegisterName("label")
-	_mEMessageSignerSelContext = objc.RegisterName("context")
+	_mEMessageSignerSelEmailAddresses                              = objc.RegisterName("emailAddresses")
+	_mEMessageSignerSelLabel                                       = objc.RegisterName("label")
+	_mEMessageSignerSelContext                                     = objc.RegisterName("context")
 )
 
 func MEMessageSignerFromID(id objc.ID) *MEMessageSigner {
@@ -35,28 +35,35 @@ func MEMessageSignerFromID(id objc.ID) *MEMessageSigner {
 
 func (o *MEMessageSigner) InitWithEmailAddressesSignatureLabelContext(emailAddresses *foundation.NSArray[*MEEmailAddress], label *foundation.NSString, context_ *foundation.NSData) *MEMessageSigner {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEMessageSignerSelInitWithEmailAddressesSignatureLabelContext, emailAddresses.Ptr(), label.Ptr(), context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEMessageSignerFromID(_ret)
 }
 
 // @brief Email addresses associated with the signature.
 func (o *MEMessageSigner) EmailAddresses() *foundation.NSArray[*MEEmailAddress] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEMessageSignerSelEmailAddresses)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MEEmailAddress](_ret)
 }
 
 // @brief The message signers label. Shown in the message header view. For instance, "John Smith".
 func (o *MEMessageSigner) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEMessageSignerSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @brief The context for the message signature. This might include the signing certificate. This will be passed back to the extension for either verifying the signature or if the user wishes to view signature information.
 func (o *MEMessageSigner) Context() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEMessageSignerSelContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

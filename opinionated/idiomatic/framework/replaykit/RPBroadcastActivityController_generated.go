@@ -60,4 +60,3 @@ type BroadcastActivityControllerable interface {
 }
 
 var _ BroadcastActivityControllerable = (*BroadcastActivityController)(nil)
-

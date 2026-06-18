@@ -60,7 +60,9 @@ func (x *ScrubberProportionalLayout) SetNumberOfVisibleItems(numberOfVisibleItem
 	x.inner.SetNumberOfVisibleItems(numberOfVisibleItems)
 }
 
-func (x *ScrubberProportionalLayout) asScrubberLayout() *raw.NSScrubberLayout { return &x.inner.NSScrubberLayout }
+func (x *ScrubberProportionalLayout) asScrubberLayout() *raw.NSScrubberLayout {
+	return &x.inner.NSScrubberLayout
+}
 
 // ScrubberProportionalLayoutable is the interface implemented by [ScrubberProportionalLayout], for mocking and DI.
 type ScrubberProportionalLayoutable interface {
@@ -71,4 +73,3 @@ type ScrubberProportionalLayoutable interface {
 }
 
 var _ ScrubberProportionalLayoutable = (*ScrubberProportionalLayout)(nil)
-

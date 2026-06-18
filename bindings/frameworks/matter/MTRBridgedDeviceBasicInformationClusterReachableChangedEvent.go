@@ -16,8 +16,8 @@ type MTRBridgedDeviceBasicInformationClusterReachableChangedEvent struct {
 }
 
 var (
-	_clsMTRBridgedDeviceBasicInformationClusterReachableChangedEvent = _objcClass("MTRBridgedDeviceBasicInformationClusterReachableChangedEvent")
-	_mTRBridgedDeviceBasicInformationClusterReachableChangedEventSelReachableNewValue = objc.RegisterName("reachableNewValue")
+	_clsMTRBridgedDeviceBasicInformationClusterReachableChangedEvent                     = _objcClass("MTRBridgedDeviceBasicInformationClusterReachableChangedEvent")
+	_mTRBridgedDeviceBasicInformationClusterReachableChangedEventSelReachableNewValue    = objc.RegisterName("reachableNewValue")
 	_mTRBridgedDeviceBasicInformationClusterReachableChangedEventSelSetReachableNewValue = objc.RegisterName("setReachableNewValue:")
 )
 
@@ -33,11 +33,12 @@ func MTRBridgedDeviceBasicInformationClusterReachableChangedEventFromID(id objc.
 
 func (o *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent) ReachableNewValue() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBridgedDeviceBasicInformationClusterReachableChangedEventSelReachableNewValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent) SetReachableNewValue(reachableNewValue *foundation.NSNumber) {
 	o.Ptr().Send(_mTRBridgedDeviceBasicInformationClusterReachableChangedEventSelSetReachableNewValue, reachableNewValue.Ptr())
 }
-

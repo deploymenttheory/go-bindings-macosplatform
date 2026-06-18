@@ -67,7 +67,9 @@ func (x *MatrixDecompositionCholesky) EncodeToCommandBufferSourceMatrixResultMat
 	x.inner.EncodeToCommandBufferSourceMatrixResultMatrixStatus(commandBuffer, sourceMatrix, resultMatrix, status)
 }
 
-func (x *MatrixDecompositionCholesky) asMatrixUnaryKernel() *raw.MPSMatrixUnaryKernel { return &x.inner.MPSMatrixUnaryKernel }
+func (x *MatrixDecompositionCholesky) asMatrixUnaryKernel() *raw.MPSMatrixUnaryKernel {
+	return &x.inner.MPSMatrixUnaryKernel
+}
 
 // MatrixDecompositionCholeskyable is the interface implemented by [MatrixDecompositionCholesky], for mocking and DI.
 type MatrixDecompositionCholeskyable interface {
@@ -80,4 +82,3 @@ type MatrixDecompositionCholeskyable interface {
 }
 
 var _ MatrixDecompositionCholeskyable = (*MatrixDecompositionCholesky)(nil)
-

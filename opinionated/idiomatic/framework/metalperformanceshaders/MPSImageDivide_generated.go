@@ -124,11 +124,17 @@ func (x *ImageDivide) WithLabel(label string) *ImageDivide {
 	return x
 }
 
-func (x *ImageDivide) asImageArithmetic() *mpsimage.MPSImageArithmetic { return &x.inner.MPSImageArithmetic }
+func (x *ImageDivide) asImageArithmetic() *mpsimage.MPSImageArithmetic {
+	return &x.inner.MPSImageArithmetic
+}
 
-func (x *ImageDivide) asBinaryImageKernel() *mpsimage.MPSBinaryImageKernel { return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel }
+func (x *ImageDivide) asBinaryImageKernel() *mpsimage.MPSBinaryImageKernel {
+	return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel
+}
 
-func (x *ImageDivide) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel.MPSKernel }
+func (x *ImageDivide) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel.MPSKernel
+}
 
 // ImageDivideable is the interface implemented by [ImageDivide], for mocking and DI.
 type ImageDivideable interface {
@@ -150,4 +156,3 @@ type ImageDivideable interface {
 }
 
 var _ ImageDivideable = (*ImageDivide)(nil)
-

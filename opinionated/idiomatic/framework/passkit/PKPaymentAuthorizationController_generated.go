@@ -16,7 +16,9 @@ type PaymentAuthorizationController struct {
 }
 
 // Unwrap returns the underlying [raw.PKPaymentAuthorizationController].
-func (x *PaymentAuthorizationController) Unwrap() *raw.PKPaymentAuthorizationController { return x.inner }
+func (x *PaymentAuthorizationController) Unwrap() *raw.PKPaymentAuthorizationController {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -90,4 +92,3 @@ type PaymentAuthorizationControllerable interface {
 }
 
 var _ PaymentAuthorizationControllerable = (*PaymentAuthorizationController)(nil)
-

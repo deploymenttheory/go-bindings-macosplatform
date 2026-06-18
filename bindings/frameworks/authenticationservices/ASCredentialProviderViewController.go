@@ -17,21 +17,21 @@ type ASCredentialProviderViewController struct {
 }
 
 var (
-	_clsASCredentialProviderViewController = _objcClass("ASCredentialProviderViewController")
-	_aSCredentialProviderViewControllerSelPrepareCredentialListForServiceIdentifiers = objc.RegisterName("prepareCredentialListForServiceIdentifiers:")
-	_aSCredentialProviderViewControllerSelPrepareCredentialListForServiceIdentifiersRequestParameters = objc.RegisterName("prepareCredentialListForServiceIdentifiers:requestParameters:")
-	_aSCredentialProviderViewControllerSelPrepareOneTimeCodeCredentialListForServiceIdentifiers = objc.RegisterName("prepareOneTimeCodeCredentialListForServiceIdentifiers:")
-	_aSCredentialProviderViewControllerSelProvideCredentialWithoutUserInteractionForIdentity = objc.RegisterName("provideCredentialWithoutUserInteractionForIdentity:")
-	_aSCredentialProviderViewControllerSelProvideCredentialWithoutUserInteractionForRequest = objc.RegisterName("provideCredentialWithoutUserInteractionForRequest:")
-	_aSCredentialProviderViewControllerSelPrepareInterfaceToProvideCredentialForIdentity = objc.RegisterName("prepareInterfaceToProvideCredentialForIdentity:")
-	_aSCredentialProviderViewControllerSelPrepareInterfaceToProvideCredentialForRequest = objc.RegisterName("prepareInterfaceToProvideCredentialForRequest:")
-	_aSCredentialProviderViewControllerSelPrepareInterfaceForExtensionConfiguration = objc.RegisterName("prepareInterfaceForExtensionConfiguration")
-	_aSCredentialProviderViewControllerSelPrepareInterfaceForPasskeyRegistration = objc.RegisterName("prepareInterfaceForPasskeyRegistration:")
-	_aSCredentialProviderViewControllerSelPerformPasskeyRegistrationWithoutUserInteractionIfPossible = objc.RegisterName("performPasskeyRegistrationWithoutUserInteractionIfPossible:")
-	_aSCredentialProviderViewControllerSelReportPublicKeyCredentialUpdateForRelyingPartyUserHandleNewName = objc.RegisterName("reportPublicKeyCredentialUpdateForRelyingParty:userHandle:newName:")
-	_aSCredentialProviderViewControllerSelReportUnknownPublicKeyCredentialForRelyingPartyCredentialID = objc.RegisterName("reportUnknownPublicKeyCredentialForRelyingParty:credentialID:")
+	_clsASCredentialProviderViewController                                                                                    = _objcClass("ASCredentialProviderViewController")
+	_aSCredentialProviderViewControllerSelPrepareCredentialListForServiceIdentifiers                                          = objc.RegisterName("prepareCredentialListForServiceIdentifiers:")
+	_aSCredentialProviderViewControllerSelPrepareCredentialListForServiceIdentifiersRequestParameters                         = objc.RegisterName("prepareCredentialListForServiceIdentifiers:requestParameters:")
+	_aSCredentialProviderViewControllerSelPrepareOneTimeCodeCredentialListForServiceIdentifiers                               = objc.RegisterName("prepareOneTimeCodeCredentialListForServiceIdentifiers:")
+	_aSCredentialProviderViewControllerSelProvideCredentialWithoutUserInteractionForIdentity                                  = objc.RegisterName("provideCredentialWithoutUserInteractionForIdentity:")
+	_aSCredentialProviderViewControllerSelProvideCredentialWithoutUserInteractionForRequest                                   = objc.RegisterName("provideCredentialWithoutUserInteractionForRequest:")
+	_aSCredentialProviderViewControllerSelPrepareInterfaceToProvideCredentialForIdentity                                      = objc.RegisterName("prepareInterfaceToProvideCredentialForIdentity:")
+	_aSCredentialProviderViewControllerSelPrepareInterfaceToProvideCredentialForRequest                                       = objc.RegisterName("prepareInterfaceToProvideCredentialForRequest:")
+	_aSCredentialProviderViewControllerSelPrepareInterfaceForExtensionConfiguration                                           = objc.RegisterName("prepareInterfaceForExtensionConfiguration")
+	_aSCredentialProviderViewControllerSelPrepareInterfaceForPasskeyRegistration                                              = objc.RegisterName("prepareInterfaceForPasskeyRegistration:")
+	_aSCredentialProviderViewControllerSelPerformPasskeyRegistrationWithoutUserInteractionIfPossible                          = objc.RegisterName("performPasskeyRegistrationWithoutUserInteractionIfPossible:")
+	_aSCredentialProviderViewControllerSelReportPublicKeyCredentialUpdateForRelyingPartyUserHandleNewName                     = objc.RegisterName("reportPublicKeyCredentialUpdateForRelyingParty:userHandle:newName:")
+	_aSCredentialProviderViewControllerSelReportUnknownPublicKeyCredentialForRelyingPartyCredentialID                         = objc.RegisterName("reportUnknownPublicKeyCredentialForRelyingParty:credentialID:")
 	_aSCredentialProviderViewControllerSelReportAllAcceptedPublicKeyCredentialsForRelyingPartyUserHandleAcceptedCredentialIDs = objc.RegisterName("reportAllAcceptedPublicKeyCredentialsForRelyingParty:userHandle:acceptedCredentialIDs:")
-	_aSCredentialProviderViewControllerSelReportUnusedPasswordCredentialForDomainUserName = objc.RegisterName("reportUnusedPasswordCredentialForDomain:userName:")
+	_aSCredentialProviderViewControllerSelReportUnusedPasswordCredentialForDomainUserName                                     = objc.RegisterName("reportUnusedPasswordCredentialForDomain:userName:")
 )
 
 func ASCredentialProviderViewControllerFromID(id objc.ID) *ASCredentialProviderViewController {
@@ -115,4 +115,3 @@ func (o *ASCredentialProviderViewController) ReportAllAcceptedPublicKeyCredentia
 func (o *ASCredentialProviderViewController) ReportUnusedPasswordCredentialForDomainUserName(domain *foundation.NSString, userName *foundation.NSString) {
 	o.Ptr().Send(_aSCredentialProviderViewControllerSelReportUnusedPasswordCredentialForDomainUserName, domain.Ptr(), userName.Ptr())
 }
-

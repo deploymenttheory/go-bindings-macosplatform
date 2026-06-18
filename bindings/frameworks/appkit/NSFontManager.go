@@ -16,58 +16,58 @@ type NSFontManager struct {
 }
 
 var (
-	_clsNSFontManager = _objcClass("NSFontManager")
-	_nSFontManagerSelSetFontPanelFactory = objc.RegisterName("setFontPanelFactory:")
-	_nSFontManagerSelSetFontManagerFactory = objc.RegisterName("setFontManagerFactory:")
-	_nSFontManagerSelSetSelectedFontIsMultiple = objc.RegisterName("setSelectedFont:isMultiple:")
-	_nSFontManagerSelSetFontMenu = objc.RegisterName("setFontMenu:")
-	_nSFontManagerSelFontMenu = objc.RegisterName("fontMenu:")
-	_nSFontManagerSelFontPanel = objc.RegisterName("fontPanel:")
-	_nSFontManagerSelFontWithFamilyTraitsWeightSize = objc.RegisterName("fontWithFamily:traits:weight:size:")
-	_nSFontManagerSelTraitsOfFont = objc.RegisterName("traitsOfFont:")
-	_nSFontManagerSelWeightOfFont = objc.RegisterName("weightOfFont:")
-	_nSFontManagerSelAvailableMembersOfFontFamily = objc.RegisterName("availableMembersOfFontFamily:")
-	_nSFontManagerSelConvertFont = objc.RegisterName("convertFont:")
-	_nSFontManagerSelConvertFontToSize = objc.RegisterName("convertFont:toSize:")
-	_nSFontManagerSelConvertFontToFace = objc.RegisterName("convertFont:toFace:")
-	_nSFontManagerSelConvertFontToFamily = objc.RegisterName("convertFont:toFamily:")
-	_nSFontManagerSelConvertFontToHaveTrait = objc.RegisterName("convertFont:toHaveTrait:")
-	_nSFontManagerSelConvertFontToNotHaveTrait = objc.RegisterName("convertFont:toNotHaveTrait:")
-	_nSFontManagerSelConvertWeightOfFont = objc.RegisterName("convertWeight:ofFont:")
-	_nSFontManagerSelSendAction = objc.RegisterName("sendAction")
-	_nSFontManagerSelLocalizedNameForFamilyFace = objc.RegisterName("localizedNameForFamily:face:")
-	_nSFontManagerSelSetSelectedAttributesIsMultiple = objc.RegisterName("setSelectedAttributes:isMultiple:")
-	_nSFontManagerSelConvertAttributes = objc.RegisterName("convertAttributes:")
+	_clsNSFontManager                                         = _objcClass("NSFontManager")
+	_nSFontManagerSelSetFontPanelFactory                      = objc.RegisterName("setFontPanelFactory:")
+	_nSFontManagerSelSetFontManagerFactory                    = objc.RegisterName("setFontManagerFactory:")
+	_nSFontManagerSelSetSelectedFontIsMultiple                = objc.RegisterName("setSelectedFont:isMultiple:")
+	_nSFontManagerSelSetFontMenu                              = objc.RegisterName("setFontMenu:")
+	_nSFontManagerSelFontMenu                                 = objc.RegisterName("fontMenu:")
+	_nSFontManagerSelFontPanel                                = objc.RegisterName("fontPanel:")
+	_nSFontManagerSelFontWithFamilyTraitsWeightSize           = objc.RegisterName("fontWithFamily:traits:weight:size:")
+	_nSFontManagerSelTraitsOfFont                             = objc.RegisterName("traitsOfFont:")
+	_nSFontManagerSelWeightOfFont                             = objc.RegisterName("weightOfFont:")
+	_nSFontManagerSelAvailableMembersOfFontFamily             = objc.RegisterName("availableMembersOfFontFamily:")
+	_nSFontManagerSelConvertFont                              = objc.RegisterName("convertFont:")
+	_nSFontManagerSelConvertFontToSize                        = objc.RegisterName("convertFont:toSize:")
+	_nSFontManagerSelConvertFontToFace                        = objc.RegisterName("convertFont:toFace:")
+	_nSFontManagerSelConvertFontToFamily                      = objc.RegisterName("convertFont:toFamily:")
+	_nSFontManagerSelConvertFontToHaveTrait                   = objc.RegisterName("convertFont:toHaveTrait:")
+	_nSFontManagerSelConvertFontToNotHaveTrait                = objc.RegisterName("convertFont:toNotHaveTrait:")
+	_nSFontManagerSelConvertWeightOfFont                      = objc.RegisterName("convertWeight:ofFont:")
+	_nSFontManagerSelSendAction                               = objc.RegisterName("sendAction")
+	_nSFontManagerSelLocalizedNameForFamilyFace               = objc.RegisterName("localizedNameForFamily:face:")
+	_nSFontManagerSelSetSelectedAttributesIsMultiple          = objc.RegisterName("setSelectedAttributes:isMultiple:")
+	_nSFontManagerSelConvertAttributes                        = objc.RegisterName("convertAttributes:")
 	_nSFontManagerSelAvailableFontNamesMatchingFontDescriptor = objc.RegisterName("availableFontNamesMatchingFontDescriptor:")
-	_nSFontManagerSelFontDescriptorsInCollection = objc.RegisterName("fontDescriptorsInCollection:")
-	_nSFontManagerSelAddCollectionOptions = objc.RegisterName("addCollection:options:")
-	_nSFontManagerSelRemoveCollection = objc.RegisterName("removeCollection:")
-	_nSFontManagerSelAddFontDescriptorsToCollection = objc.RegisterName("addFontDescriptors:toCollection:")
-	_nSFontManagerSelRemoveFontDescriptorFromCollection = objc.RegisterName("removeFontDescriptor:fromCollection:")
-	_nSFontManagerSelConvertFontTraits = objc.RegisterName("convertFontTraits:")
-	_nSFontManagerSelSharedFontManager = objc.RegisterName("sharedFontManager")
-	_nSFontManagerSelIsMultiple = objc.RegisterName("isMultiple")
-	_nSFontManagerSelSelectedFont = objc.RegisterName("selectedFont")
-	_nSFontManagerSelAvailableFonts = objc.RegisterName("availableFonts")
-	_nSFontManagerSelAvailableFontFamilies = objc.RegisterName("availableFontFamilies")
-	_nSFontManagerSelIsEnabled = objc.RegisterName("isEnabled")
-	_nSFontManagerSelSetEnabled = objc.RegisterName("setEnabled:")
-	_nSFontManagerSelAction = objc.RegisterName("action")
-	_nSFontManagerSelSetAction = objc.RegisterName("setAction:")
-	_nSFontManagerSelDelegate = objc.RegisterName("delegate")
-	_nSFontManagerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSFontManagerSelCollectionNames = objc.RegisterName("collectionNames")
-	_nSFontManagerSelCurrentFontAction = objc.RegisterName("currentFontAction")
-	_nSFontManagerSelTarget = objc.RegisterName("target")
-	_nSFontManagerSelSetTarget = objc.RegisterName("setTarget:")
-	_nSFontManagerSelFontNamedHasTraits = objc.RegisterName("fontNamed:hasTraits:")
-	_nSFontManagerSelAvailableFontNamesWithTraits = objc.RegisterName("availableFontNamesWithTraits:")
-	_nSFontManagerSelAddFontTrait = objc.RegisterName("addFontTrait:")
-	_nSFontManagerSelRemoveFontTrait = objc.RegisterName("removeFontTrait:")
-	_nSFontManagerSelModifyFontViaPanel = objc.RegisterName("modifyFontViaPanel:")
-	_nSFontManagerSelModifyFont = objc.RegisterName("modifyFont:")
-	_nSFontManagerSelOrderFrontFontPanel = objc.RegisterName("orderFrontFontPanel:")
-	_nSFontManagerSelOrderFrontStylesPanel = objc.RegisterName("orderFrontStylesPanel:")
+	_nSFontManagerSelFontDescriptorsInCollection              = objc.RegisterName("fontDescriptorsInCollection:")
+	_nSFontManagerSelAddCollectionOptions                     = objc.RegisterName("addCollection:options:")
+	_nSFontManagerSelRemoveCollection                         = objc.RegisterName("removeCollection:")
+	_nSFontManagerSelAddFontDescriptorsToCollection           = objc.RegisterName("addFontDescriptors:toCollection:")
+	_nSFontManagerSelRemoveFontDescriptorFromCollection       = objc.RegisterName("removeFontDescriptor:fromCollection:")
+	_nSFontManagerSelConvertFontTraits                        = objc.RegisterName("convertFontTraits:")
+	_nSFontManagerSelSharedFontManager                        = objc.RegisterName("sharedFontManager")
+	_nSFontManagerSelIsMultiple                               = objc.RegisterName("isMultiple")
+	_nSFontManagerSelSelectedFont                             = objc.RegisterName("selectedFont")
+	_nSFontManagerSelAvailableFonts                           = objc.RegisterName("availableFonts")
+	_nSFontManagerSelAvailableFontFamilies                    = objc.RegisterName("availableFontFamilies")
+	_nSFontManagerSelIsEnabled                                = objc.RegisterName("isEnabled")
+	_nSFontManagerSelSetEnabled                               = objc.RegisterName("setEnabled:")
+	_nSFontManagerSelAction                                   = objc.RegisterName("action")
+	_nSFontManagerSelSetAction                                = objc.RegisterName("setAction:")
+	_nSFontManagerSelDelegate                                 = objc.RegisterName("delegate")
+	_nSFontManagerSelSetDelegate                              = objc.RegisterName("setDelegate:")
+	_nSFontManagerSelCollectionNames                          = objc.RegisterName("collectionNames")
+	_nSFontManagerSelCurrentFontAction                        = objc.RegisterName("currentFontAction")
+	_nSFontManagerSelTarget                                   = objc.RegisterName("target")
+	_nSFontManagerSelSetTarget                                = objc.RegisterName("setTarget:")
+	_nSFontManagerSelFontNamedHasTraits                       = objc.RegisterName("fontNamed:hasTraits:")
+	_nSFontManagerSelAvailableFontNamesWithTraits             = objc.RegisterName("availableFontNamesWithTraits:")
+	_nSFontManagerSelAddFontTrait                             = objc.RegisterName("addFontTrait:")
+	_nSFontManagerSelRemoveFontTrait                          = objc.RegisterName("removeFontTrait:")
+	_nSFontManagerSelModifyFontViaPanel                       = objc.RegisterName("modifyFontViaPanel:")
+	_nSFontManagerSelModifyFont                               = objc.RegisterName("modifyFont:")
+	_nSFontManagerSelOrderFrontFontPanel                      = objc.RegisterName("orderFrontFontPanel:")
+	_nSFontManagerSelOrderFrontStylesPanel                    = objc.RegisterName("orderFrontStylesPanel:")
 )
 
 func NSFontManagerFromID(id objc.ID) *NSFontManager {
@@ -98,19 +98,25 @@ func (o *NSFontManager) SetFontMenu(newMenu *NSMenu) {
 
 func (o *NSFontManager) FontMenu(create bool) *NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontManagerSelFontMenu, create)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuFromID(_ret)
 }
 
 func (o *NSFontManager) FontPanel(create bool) *NSFontPanel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontManagerSelFontPanel, create)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontPanelFromID(_ret)
 }
 
 func (o *NSFontManager) FontWithFamilyTraitsWeightSize(family *foundation.NSString, traits NSFontTraitMask, weight int, size float64) *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontManagerSelFontWithFamilyTraitsWeightSize, family.Ptr(), traits, weight, size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
@@ -131,43 +137,57 @@ func (o *NSFontManager) AvailableMembersOfFontFamily(fam *foundation.NSString) *
 
 func (o *NSFontManager) ConvertFont(fontObj *NSFont) *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontManagerSelConvertFont, fontObj.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
 func (o *NSFontManager) ConvertFontToSize(fontObj *NSFont, size float64) *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontManagerSelConvertFontToSize, fontObj.Ptr(), size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
 func (o *NSFontManager) ConvertFontToFace(fontObj *NSFont, typeface *foundation.NSString) *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontManagerSelConvertFontToFace, fontObj.Ptr(), typeface.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
 func (o *NSFontManager) ConvertFontToFamily(fontObj *NSFont, family *foundation.NSString) *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontManagerSelConvertFontToFamily, fontObj.Ptr(), family.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
 func (o *NSFontManager) ConvertFontToHaveTrait(fontObj *NSFont, trait NSFontTraitMask) *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontManagerSelConvertFontToHaveTrait, fontObj.Ptr(), trait)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
 func (o *NSFontManager) ConvertFontToNotHaveTrait(fontObj *NSFont, trait NSFontTraitMask) *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontManagerSelConvertFontToNotHaveTrait, fontObj.Ptr(), trait)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
 func (o *NSFontManager) ConvertWeightOfFont(upFlag bool, fontObj *NSFont) *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontManagerSelConvertWeightOfFont, upFlag, fontObj.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
@@ -179,7 +199,9 @@ func (o *NSFontManager) SendAction() bool {
 
 func (o *NSFontManager) LocalizedNameForFamilyFace(family *foundation.NSString, faceKey *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontManagerSelLocalizedNameForFamilyFace, family.Ptr(), faceKey.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -233,7 +255,9 @@ func (o *NSFontManager) ConvertFontTraits(traits NSFontTraitMask) NSFontTraitMas
 
 func NSFontManagerSharedFontManager() *NSFontManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFontManager), _nSFontManagerSelSharedFontManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontManagerFromID(_ret)
 }
 
@@ -244,7 +268,9 @@ func (o *NSFontManager) IsMultiple() bool {
 
 func (o *NSFontManager) SelectedFont() *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontManagerSelSelectedFont)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
@@ -340,4 +366,3 @@ func (o *NSFontManager) OrderFrontFontPanel(sender objc.ID) {
 func (o *NSFontManager) OrderFrontStylesPanel(sender objc.ID) {
 	o.Ptr().Send(_nSFontManagerSelOrderFrontStylesPanel, sender)
 }
-

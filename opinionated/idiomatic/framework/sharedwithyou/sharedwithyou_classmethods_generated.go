@@ -29,4 +29,3 @@ func IsSystemCollaborationSupportAvailable() bool {
 func ShowAlertWithParticipantHighlightInWindow(participant *sharedwithyoucore.SWPerson, highlight *raw.SWCollaborationHighlight, window *appkit.NSWindow) {
 	raw.SWRemoveParticipantAlertShowAlertWithParticipantHighlightInWindow(participant, highlight, window)
 }
-

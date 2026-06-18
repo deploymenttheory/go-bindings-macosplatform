@@ -16,17 +16,17 @@ type MLCMultiheadAttentionDescriptor struct {
 }
 
 var (
-	_clsMLCMultiheadAttentionDescriptor = _objcClass("MLCMultiheadAttentionDescriptor")
+	_clsMLCMultiheadAttentionDescriptor                                                                                                                   = _objcClass("MLCMultiheadAttentionDescriptor")
 	_mLCMultiheadAttentionDescriptorSelDescriptorWithModelDimensionKeyDimensionValueDimensionHeadCountDropoutHasBiasesHasAttentionBiasesAddsZeroAttention = objc.RegisterName("descriptorWithModelDimension:keyDimension:valueDimension:headCount:dropout:hasBiases:hasAttentionBiases:addsZeroAttention:")
-	_mLCMultiheadAttentionDescriptorSelDescriptorWithModelDimensionHeadCount = objc.RegisterName("descriptorWithModelDimension:headCount:")
-	_mLCMultiheadAttentionDescriptorSelModelDimension = objc.RegisterName("modelDimension")
-	_mLCMultiheadAttentionDescriptorSelKeyDimension = objc.RegisterName("keyDimension")
-	_mLCMultiheadAttentionDescriptorSelValueDimension = objc.RegisterName("valueDimension")
-	_mLCMultiheadAttentionDescriptorSelHeadCount = objc.RegisterName("headCount")
-	_mLCMultiheadAttentionDescriptorSelDropout = objc.RegisterName("dropout")
-	_mLCMultiheadAttentionDescriptorSelHasBiases = objc.RegisterName("hasBiases")
-	_mLCMultiheadAttentionDescriptorSelHasAttentionBiases = objc.RegisterName("hasAttentionBiases")
-	_mLCMultiheadAttentionDescriptorSelAddsZeroAttention = objc.RegisterName("addsZeroAttention")
+	_mLCMultiheadAttentionDescriptorSelDescriptorWithModelDimensionHeadCount                                                                              = objc.RegisterName("descriptorWithModelDimension:headCount:")
+	_mLCMultiheadAttentionDescriptorSelModelDimension                                                                                                     = objc.RegisterName("modelDimension")
+	_mLCMultiheadAttentionDescriptorSelKeyDimension                                                                                                       = objc.RegisterName("keyDimension")
+	_mLCMultiheadAttentionDescriptorSelValueDimension                                                                                                     = objc.RegisterName("valueDimension")
+	_mLCMultiheadAttentionDescriptorSelHeadCount                                                                                                          = objc.RegisterName("headCount")
+	_mLCMultiheadAttentionDescriptorSelDropout                                                                                                            = objc.RegisterName("dropout")
+	_mLCMultiheadAttentionDescriptorSelHasBiases                                                                                                          = objc.RegisterName("hasBiases")
+	_mLCMultiheadAttentionDescriptorSelHasAttentionBiases                                                                                                 = objc.RegisterName("hasAttentionBiases")
+	_mLCMultiheadAttentionDescriptorSelAddsZeroAttention                                                                                                  = objc.RegisterName("addsZeroAttention")
 )
 
 func MLCMultiheadAttentionDescriptorFromID(id objc.ID) *MLCMultiheadAttentionDescriptor {
@@ -42,14 +42,18 @@ func MLCMultiheadAttentionDescriptorFromID(id objc.ID) *MLCMultiheadAttentionDes
 // @abstract   A multi-head attention layer descriptor @param      modelDimension  total dimension of model space @param      keyDimension  total dimension of key space. Default = modelDimension @param      valueDimension  total dimension of value space. Default = modelDimension @param      headCount  number of parallel attention heads @param      dropout optional, a dropout layer applied to the output projection weights. Default = 0.0f @param      hasBiases  if true, bias will be added to query/key/value/output projections. Default = YES @param      hasAttentionBiases  if true, an array of biases is added to key and value respectively. Default = NO @param      addsZeroAttention  if true, a row of zeroes is added to projected key and value. Default = NO @return     A new MultiheadAttention layer descriptor
 func MLCMultiheadAttentionDescriptorDescriptorWithModelDimensionKeyDimensionValueDimensionHeadCountDropoutHasBiasesHasAttentionBiasesAddsZeroAttention(modelDimension uint, keyDimension uint, valueDimension uint, headCount uint, dropout float32, hasBiases bool, hasAttentionBiases bool, addsZeroAttention bool) *MLCMultiheadAttentionDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCMultiheadAttentionDescriptor), _mLCMultiheadAttentionDescriptorSelDescriptorWithModelDimensionKeyDimensionValueDimensionHeadCountDropoutHasBiasesHasAttentionBiasesAddsZeroAttention, modelDimension, keyDimension, valueDimension, headCount, dropout, hasBiases, hasAttentionBiases, addsZeroAttention)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCMultiheadAttentionDescriptorFromID(_ret)
 }
 
 // @abstract   A multi-head attention layer descriptor @param      modelDimension  total dimension of model space @param      headCount  number of parallel attention heads @return     A valid MultiheadAttention layer descriptor
 func MLCMultiheadAttentionDescriptorDescriptorWithModelDimensionHeadCount(modelDimension uint, headCount uint) *MLCMultiheadAttentionDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCMultiheadAttentionDescriptor), _mLCMultiheadAttentionDescriptorSelDescriptorWithModelDimensionHeadCount, modelDimension, headCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCMultiheadAttentionDescriptorFromID(_ret)
 }
 
@@ -100,4 +104,3 @@ func (o *MLCMultiheadAttentionDescriptor) AddsZeroAttention() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mLCMultiheadAttentionDescriptorSelAddsZeroAttention)
 	return _ret
 }
-

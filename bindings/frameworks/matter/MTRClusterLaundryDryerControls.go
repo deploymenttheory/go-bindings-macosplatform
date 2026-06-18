@@ -16,17 +16,17 @@ type MTRClusterLaundryDryerControls struct {
 }
 
 var (
-	_clsMTRClusterLaundryDryerControls = _objcClass("MTRClusterLaundryDryerControls")
-	_mTRClusterLaundryDryerControlsSelReadAttributeSupportedDrynessLevelsWithParams = objc.RegisterName("readAttributeSupportedDrynessLevelsWithParams:")
-	_mTRClusterLaundryDryerControlsSelReadAttributeSelectedDrynessLevelWithParams = objc.RegisterName("readAttributeSelectedDrynessLevelWithParams:")
-	_mTRClusterLaundryDryerControlsSelWriteAttributeSelectedDrynessLevelWithValueExpectedValueInterval = objc.RegisterName("writeAttributeSelectedDrynessLevelWithValue:expectedValueInterval:")
+	_clsMTRClusterLaundryDryerControls                                                                       = _objcClass("MTRClusterLaundryDryerControls")
+	_mTRClusterLaundryDryerControlsSelReadAttributeSupportedDrynessLevelsWithParams                          = objc.RegisterName("readAttributeSupportedDrynessLevelsWithParams:")
+	_mTRClusterLaundryDryerControlsSelReadAttributeSelectedDrynessLevelWithParams                            = objc.RegisterName("readAttributeSelectedDrynessLevelWithParams:")
+	_mTRClusterLaundryDryerControlsSelWriteAttributeSelectedDrynessLevelWithValueExpectedValueInterval       = objc.RegisterName("writeAttributeSelectedDrynessLevelWithValue:expectedValueInterval:")
 	_mTRClusterLaundryDryerControlsSelWriteAttributeSelectedDrynessLevelWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeSelectedDrynessLevelWithValue:expectedValueInterval:params:")
-	_mTRClusterLaundryDryerControlsSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterLaundryDryerControlsSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterLaundryDryerControlsSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterLaundryDryerControlsSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterLaundryDryerControlsSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterLaundryDryerControlsSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterLaundryDryerControlsSelReadAttributeGeneratedCommandListWithParams                            = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterLaundryDryerControlsSelReadAttributeAcceptedCommandListWithParams                             = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterLaundryDryerControlsSelReadAttributeAttributeListWithParams                                   = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterLaundryDryerControlsSelReadAttributeFeatureMapWithParams                                      = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterLaundryDryerControlsSelReadAttributeClusterRevisionWithParams                                 = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterLaundryDryerControlsSelInitWithDeviceEndpointIDQueue                                          = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterLaundryDryerControlsFromID(id objc.ID) *MTRClusterLaundryDryerControls {
@@ -85,7 +85,8 @@ func (o *MTRClusterLaundryDryerControls) ReadAttributeClusterRevisionWithParams(
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func (o *MTRClusterLaundryDryerControls) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterLaundryDryerControls {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterLaundryDryerControlsSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterLaundryDryerControlsFromID(_ret)
 }
-

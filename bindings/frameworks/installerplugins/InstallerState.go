@@ -16,15 +16,15 @@ type InstallerState struct {
 }
 
 var (
-	_clsInstallerState = _objcClass("InstallerState")
+	_clsInstallerState                              = _objcClass("InstallerState")
 	_installerStateSelChoiceDictionaryForIdentifier = objc.RegisterName("choiceDictionaryForIdentifier:")
-	_installerStateSelLicenseAgreed = objc.RegisterName("licenseAgreed")
-	_installerStateSelLicenseAgreedLanguage = objc.RegisterName("licenseAgreedLanguage")
-	_installerStateSelTargetVolumePath = objc.RegisterName("targetVolumePath")
-	_installerStateSelTargetPath = objc.RegisterName("targetPath")
-	_installerStateSelChoiceDictionaries = objc.RegisterName("choiceDictionaries")
-	_installerStateSelInstallStarted = objc.RegisterName("installStarted")
-	_installerStateSelInstallSucceeded = objc.RegisterName("installSucceeded")
+	_installerStateSelLicenseAgreed                 = objc.RegisterName("licenseAgreed")
+	_installerStateSelLicenseAgreedLanguage         = objc.RegisterName("licenseAgreedLanguage")
+	_installerStateSelTargetVolumePath              = objc.RegisterName("targetVolumePath")
+	_installerStateSelTargetPath                    = objc.RegisterName("targetPath")
+	_installerStateSelChoiceDictionaries            = objc.RegisterName("choiceDictionaries")
+	_installerStateSelInstallStarted                = objc.RegisterName("installStarted")
+	_installerStateSelInstallSucceeded              = objc.RegisterName("installSucceeded")
 )
 
 func InstallerStateFromID(id objc.ID) *InstallerState {
@@ -52,21 +52,27 @@ func (o *InstallerState) LicenseAgreed() bool {
 // @method     licenseAgreedLanguage @abstract   Specifies the language the language was last viewed or agreed with.
 func (o *InstallerState) LicenseAgreedLanguage() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _installerStateSelLicenseAgreedLanguage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @method     targetVolumePath @abstract   Specifies the mount point of the selected target @discussion Only Available after target has been selected.
 func (o *InstallerState) TargetVolumePath() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _installerStateSelTargetVolumePath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @method     targetPath @abstract   Full target path selected. @discussion Specifies the full path selected by the user.  This path contains the targetVolumePath.
 func (o *InstallerState) TargetPath() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _installerStateSelTargetPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -87,4 +93,3 @@ func (o *InstallerState) InstallSucceeded() bool {
 	_ret := objc.Send[bool](o.Ptr(), _installerStateSelInstallSucceeded)
 	return _ret
 }
-

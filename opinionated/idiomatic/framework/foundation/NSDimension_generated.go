@@ -66,4 +66,3 @@ type Dimensionable interface {
 }
 
 var _ Dimensionable = (*Dimension)(nil)
-

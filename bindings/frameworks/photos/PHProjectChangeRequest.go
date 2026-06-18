@@ -17,14 +17,14 @@ type PHProjectChangeRequest struct {
 }
 
 var (
-	_clsPHProjectChangeRequest = _objcClass("PHProjectChangeRequest")
-	_pHProjectChangeRequestSelInitWithProject = objc.RegisterName("initWithProject:")
-	_pHProjectChangeRequestSelSetKeyAsset = objc.RegisterName("setKeyAsset:")
-	_pHProjectChangeRequestSelSetProjectPreviewImage = objc.RegisterName("setProjectPreviewImage:")
-	_pHProjectChangeRequestSelRemoveAssets = objc.RegisterName("removeAssets:")
-	_pHProjectChangeRequestSelTitle = objc.RegisterName("title")
-	_pHProjectChangeRequestSelSetTitle = objc.RegisterName("setTitle:")
-	_pHProjectChangeRequestSelProjectExtensionData = objc.RegisterName("projectExtensionData")
+	_clsPHProjectChangeRequest                        = _objcClass("PHProjectChangeRequest")
+	_pHProjectChangeRequestSelInitWithProject         = objc.RegisterName("initWithProject:")
+	_pHProjectChangeRequestSelSetKeyAsset             = objc.RegisterName("setKeyAsset:")
+	_pHProjectChangeRequestSelSetProjectPreviewImage  = objc.RegisterName("setProjectPreviewImage:")
+	_pHProjectChangeRequestSelRemoveAssets            = objc.RegisterName("removeAssets:")
+	_pHProjectChangeRequestSelTitle                   = objc.RegisterName("title")
+	_pHProjectChangeRequestSelSetTitle                = objc.RegisterName("setTitle:")
+	_pHProjectChangeRequestSelProjectExtensionData    = objc.RegisterName("projectExtensionData")
 	_pHProjectChangeRequestSelSetProjectExtensionData = objc.RegisterName("setProjectExtensionData:")
 )
 
@@ -40,7 +40,9 @@ func PHProjectChangeRequestFromID(id objc.ID) *PHProjectChangeRequest {
 
 func (o *PHProjectChangeRequest) InitWithProject(project *PHProject) *PHProjectChangeRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectChangeRequestSelInitWithProject, project.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHProjectChangeRequestFromID(_ret)
 }
 
@@ -61,7 +63,9 @@ func (o *PHProjectChangeRequest) RemoveAssets(assets foundation.NSFastEnumeratio
 
 func (o *PHProjectChangeRequest) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectChangeRequestSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -72,7 +76,9 @@ func (o *PHProjectChangeRequest) SetTitle(title *foundation.NSString) {
 // The projectExtensionData property is intended for storage of compressed, project specific data only. Do not include things like rasterized images that can be locally cached in this data. The total size of stored data is limited to 5 MB. Attempting to store more data than allowed will result in an error.
 func (o *PHProjectChangeRequest) ProjectExtensionData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectChangeRequestSelProjectExtensionData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -80,4 +86,3 @@ func (o *PHProjectChangeRequest) ProjectExtensionData() *foundation.NSData {
 func (o *PHProjectChangeRequest) SetProjectExtensionData(projectExtensionData *foundation.NSData) {
 	o.Ptr().Send(_pHProjectChangeRequestSelSetProjectExtensionData, projectExtensionData.Ptr())
 }
-

@@ -16,17 +16,17 @@ type GLKTextureInfo struct {
 }
 
 var (
-	_clsGLKTextureInfo = _objcClass("GLKTextureInfo")
-	_gLKTextureInfoSelName = objc.RegisterName("name")
-	_gLKTextureInfoSelTarget = objc.RegisterName("target")
-	_gLKTextureInfoSelWidth = objc.RegisterName("width")
-	_gLKTextureInfoSelHeight = objc.RegisterName("height")
-	_gLKTextureInfoSelDepth = objc.RegisterName("depth")
-	_gLKTextureInfoSelAlphaState = objc.RegisterName("alphaState")
-	_gLKTextureInfoSelTextureOrigin = objc.RegisterName("textureOrigin")
+	_clsGLKTextureInfo                = _objcClass("GLKTextureInfo")
+	_gLKTextureInfoSelName            = objc.RegisterName("name")
+	_gLKTextureInfoSelTarget          = objc.RegisterName("target")
+	_gLKTextureInfoSelWidth           = objc.RegisterName("width")
+	_gLKTextureInfoSelHeight          = objc.RegisterName("height")
+	_gLKTextureInfoSelDepth           = objc.RegisterName("depth")
+	_gLKTextureInfoSelAlphaState      = objc.RegisterName("alphaState")
+	_gLKTextureInfoSelTextureOrigin   = objc.RegisterName("textureOrigin")
 	_gLKTextureInfoSelContainsMipmaps = objc.RegisterName("containsMipmaps")
 	_gLKTextureInfoSelMimapLevelCount = objc.RegisterName("mimapLevelCount")
-	_gLKTextureInfoSelArrayLength = objc.RegisterName("arrayLength")
+	_gLKTextureInfoSelArrayLength     = objc.RegisterName("arrayLength")
 )
 
 func GLKTextureInfoFromID(id objc.ID) *GLKTextureInfo {
@@ -88,4 +88,3 @@ func (o *GLKTextureInfo) ArrayLength() uint32 {
 	_ret := objc.Send[uint32](o.Ptr(), _gLKTextureInfoSelArrayLength)
 	return _ret
 }
-

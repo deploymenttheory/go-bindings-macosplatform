@@ -134,4 +134,3 @@ type ImageBrowserCellable interface {
 }
 
 var _ ImageBrowserCellable = (*ImageBrowserCell)(nil)
-

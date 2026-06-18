@@ -87,4 +87,3 @@ type Configurationable interface {
 }
 
 var _ Configurationable = (*Configuration)(nil)
-

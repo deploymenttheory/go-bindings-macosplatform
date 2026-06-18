@@ -110,4 +110,3 @@ type TemporalAAable interface {
 }
 
 var _ TemporalAAable = (*TemporalAA)(nil)
-

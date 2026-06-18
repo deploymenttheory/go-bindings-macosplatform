@@ -63,4 +63,3 @@ type EraserToolable interface {
 }
 
 var _ EraserToolable = (*EraserTool)(nil)
-

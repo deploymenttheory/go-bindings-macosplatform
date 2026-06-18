@@ -55,7 +55,9 @@ func (x *ImageIntegralOfSquares) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode)
 	return x
 }
 
-func (x *ImageIntegralOfSquares) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageIntegralOfSquares) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
 // ImageIntegralOfSquaresable is the interface implemented by [ImageIntegralOfSquares], for mocking and DI.
 type ImageIntegralOfSquaresable interface {
@@ -66,4 +68,3 @@ type ImageIntegralOfSquaresable interface {
 }
 
 var _ ImageIntegralOfSquaresable = (*ImageIntegralOfSquares)(nil)
-

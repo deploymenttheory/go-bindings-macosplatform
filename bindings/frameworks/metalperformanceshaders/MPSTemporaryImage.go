@@ -18,14 +18,14 @@ type MPSTemporaryImage struct {
 }
 
 var (
-	_clsMPSTemporaryImage = _objcClass("MPSTemporaryImage")
-	_mPSTemporaryImageSelDefaultAllocator = objc.RegisterName("defaultAllocator")
-	_mPSTemporaryImageSelTemporaryImageWithCommandBufferImageDescriptor = objc.RegisterName("temporaryImageWithCommandBuffer:imageDescriptor:")
-	_mPSTemporaryImageSelTemporaryImageWithCommandBufferTextureDescriptor = objc.RegisterName("temporaryImageWithCommandBuffer:textureDescriptor:")
+	_clsMPSTemporaryImage                                                                = _objcClass("MPSTemporaryImage")
+	_mPSTemporaryImageSelDefaultAllocator                                                = objc.RegisterName("defaultAllocator")
+	_mPSTemporaryImageSelTemporaryImageWithCommandBufferImageDescriptor                  = objc.RegisterName("temporaryImageWithCommandBuffer:imageDescriptor:")
+	_mPSTemporaryImageSelTemporaryImageWithCommandBufferTextureDescriptor                = objc.RegisterName("temporaryImageWithCommandBuffer:textureDescriptor:")
 	_mPSTemporaryImageSelTemporaryImageWithCommandBufferTextureDescriptorFeatureChannels = objc.RegisterName("temporaryImageWithCommandBuffer:textureDescriptor:featureChannels:")
-	_mPSTemporaryImageSelPrefetchStorageWithCommandBufferImageDescriptorList = objc.RegisterName("prefetchStorageWithCommandBuffer:imageDescriptorList:")
-	_mPSTemporaryImageSelReadCount = objc.RegisterName("readCount")
-	_mPSTemporaryImageSelSetReadCount = objc.RegisterName("setReadCount:")
+	_mPSTemporaryImageSelPrefetchStorageWithCommandBufferImageDescriptorList             = objc.RegisterName("prefetchStorageWithCommandBuffer:imageDescriptorList:")
+	_mPSTemporaryImageSelReadCount                                                       = objc.RegisterName("readCount")
+	_mPSTemporaryImageSelSetReadCount                                                    = objc.RegisterName("setReadCount:")
 )
 
 func MPSTemporaryImageFromID(id objc.ID) *MPSTemporaryImage {
@@ -47,21 +47,27 @@ func MPSTemporaryImageDefaultAllocator() mpscore.MPSImageAllocator {
 // @abstract   Initialize a MPSTemporaryImage for use on a MTLCommandBuffer @param      commandBuffer   The MTLCommandBuffer on which the MPSTemporaryImage will be exclusively used @param      imageDescriptor A valid imageDescriptor describing the MPSImage format to create. @return     A valid MPSTemporaryImage.  The object will be released when the command buffer is committed. The underlying texture will become invalid before this time due to the action of the readCount property.
 func MPSTemporaryImageTemporaryImageWithCommandBufferImageDescriptor(commandBuffer metal.MTLCommandBuffer, imageDescriptor *mpscore.MPSImageDescriptor) *MPSTemporaryImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSTemporaryImage), _mPSTemporaryImageSelTemporaryImageWithCommandBufferImageDescriptor, commandBuffer, imageDescriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSTemporaryImageFromID(_ret)
 }
 
 // @abstract       Low level interface for creating a MPSTemporaryImage using a MTLTextureDescriptor @discussion     This function provides access to MTLPixelFormats not typically covered by -initForCommandBuffer:imageDescriptor: The feature channels will be inferred from the MTLPixelFormat without changing the width. The following restrictions apply: MTLTextureType must be MTLTextureType2D or MTLTextureType2DArray MTLTextureUsage must contain at least one of MTLTextureUsageShaderRead, MTLTextureUsageShaderWrite MTLStorageMode must be MTLStorageModePrivate depth must be 1 @param commandBuffer        The command buffer on which the MPSTemporaryImage may be used @param textureDescriptor    A texture descriptor describing the MPSTemporaryImage texture @return     A valid MPSTemporaryImage.  The object will be released when the command buffer is committed. The underlying texture will become invalid before this time due to the action of the readCount property.
 func MPSTemporaryImageTemporaryImageWithCommandBufferTextureDescriptor(commandBuffer metal.MTLCommandBuffer, textureDescriptor *metal.MTLTextureDescriptor) *MPSTemporaryImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSTemporaryImage), _mPSTemporaryImageSelTemporaryImageWithCommandBufferTextureDescriptor, commandBuffer, textureDescriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSTemporaryImageFromID(_ret)
 }
 
 // @abstract       Low level interface for creating a MPSTemporaryImage using a MTLTextureDescriptor @discussion     This function provides access to MTLPixelFormats not typically covered by -initForCommandBuffer:imageDescriptor: The number of images will be inferred from number of slices in the descriptor.arrayLength and the number of feature channels. The following restrictions apply: MTLTextureType must be MTLTextureType2D or MTLTextureType2DArray MTLTextureUsage must contain at least one of MTLTextureUsageShaderRead, MTLTextureUsageShaderWrite MTLStorageMode must be MTLStorageModePrivate @param commandBuffer        The command buffer on which the MPSTemporaryImage may be used @param textureDescriptor    A texture descriptor describing the MPSTemporaryImage texture @return     A valid MPSTemporaryImage.  The object will be released when the command buffer is committed. The underlying texture will become invalid before this time due to the action of the readCount property.
 func MPSTemporaryImageTemporaryImageWithCommandBufferTextureDescriptorFeatureChannels(commandBuffer metal.MTLCommandBuffer, textureDescriptor *metal.MTLTextureDescriptor, featureChannels uint) *MPSTemporaryImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSTemporaryImage), _mPSTemporaryImageSelTemporaryImageWithCommandBufferTextureDescriptorFeatureChannels, commandBuffer, textureDescriptor.Ptr(), featureChannels)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSTemporaryImageFromID(_ret)
 }
 
@@ -78,4 +84,3 @@ func (o *MPSTemporaryImage) ReadCount() uint {
 func (o *MPSTemporaryImage) SetReadCount(readCount uint) {
 	o.Ptr().Send(_mPSTemporaryImageSelSetReadCount, readCount)
 }
-

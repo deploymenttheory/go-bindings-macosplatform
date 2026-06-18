@@ -101,7 +101,9 @@ func (x *GradientPolylineRenderer) WithLineDashPattern(items ...*foundation.NSNu
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -149,11 +151,17 @@ func (x *GradientPolylineRenderer) Colors() []*appkit.NSColor {
 	})
 }
 
-func (x *GradientPolylineRenderer) asPolylineRenderer() *raw.MKPolylineRenderer { return &x.inner.MKPolylineRenderer }
+func (x *GradientPolylineRenderer) asPolylineRenderer() *raw.MKPolylineRenderer {
+	return &x.inner.MKPolylineRenderer
+}
 
-func (x *GradientPolylineRenderer) asOverlayPathRenderer() *raw.MKOverlayPathRenderer { return &x.inner.MKPolylineRenderer.MKOverlayPathRenderer }
+func (x *GradientPolylineRenderer) asOverlayPathRenderer() *raw.MKOverlayPathRenderer {
+	return &x.inner.MKPolylineRenderer.MKOverlayPathRenderer
+}
 
-func (x *GradientPolylineRenderer) asOverlayRenderer() *raw.MKOverlayRenderer { return &x.inner.MKPolylineRenderer.MKOverlayPathRenderer.MKOverlayRenderer }
+func (x *GradientPolylineRenderer) asOverlayRenderer() *raw.MKOverlayRenderer {
+	return &x.inner.MKPolylineRenderer.MKOverlayPathRenderer.MKOverlayRenderer
+}
 
 // GradientPolylineRendererable is the interface implemented by [GradientPolylineRenderer], for mocking and DI.
 type GradientPolylineRendererable interface {
@@ -176,4 +184,3 @@ type GradientPolylineRendererable interface {
 }
 
 var _ GradientPolylineRendererable = (*GradientPolylineRenderer)(nil)
-

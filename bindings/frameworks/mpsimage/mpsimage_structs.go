@@ -10,9 +10,9 @@ import (
 // @brief      Specifies information to compute the histogram for channels of an image.
 type MPSImageHistogramInfo struct {
 	NumberOfHistogramEntries uint
-	HistogramForAlpha bool
-	MinPixelValue unsafe.Pointer
-	MaxPixelValue unsafe.Pointer
+	HistogramForAlpha        bool
+	MinPixelValue            unsafe.Pointer
+	MaxPixelValue            unsafe.Pointer
 }
 
 // @brief      Specifies keypoint information.
@@ -23,7 +23,6 @@ type MPSImageKeypointData struct {
 
 // @brief      Specifies information to find the keypoints in an image.
 type MPSImageKeypointRangeInfo struct {
-	MaximumKeypoints uint
+	MaximumKeypoints      uint
 	MinimumThresholdValue float32
 }
-

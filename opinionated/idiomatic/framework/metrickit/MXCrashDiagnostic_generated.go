@@ -103,4 +103,3 @@ type CrashDiagnosticable interface {
 }
 
 var _ CrashDiagnosticable = (*CrashDiagnostic)(nil)
-

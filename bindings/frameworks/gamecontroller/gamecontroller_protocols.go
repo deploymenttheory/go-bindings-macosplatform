@@ -201,4 +201,3 @@ type GCTouchedStateInput interface {
 	LastTouchedStateLatency() float64
 	Sources() *foundation.NSSet[GCPhysicalInputSource]
 }
-

@@ -28,85 +28,112 @@ func INIntentErrorDomain() uintptr {
 
 func INPersonHandleLabelHome() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_intentsLib, "INPersonHandleLabelHome")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func INPersonHandleLabelHomeFax() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_intentsLib, "INPersonHandleLabelHomeFax")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func INPersonHandleLabelMain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_intentsLib, "INPersonHandleLabelMain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func INPersonHandleLabelMobile() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_intentsLib, "INPersonHandleLabelMobile")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func INPersonHandleLabelOther() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_intentsLib, "INPersonHandleLabelOther")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func INPersonHandleLabelPager() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_intentsLib, "INPersonHandleLabelPager")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func INPersonHandleLabelSchool() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_intentsLib, "INPersonHandleLabelSchool")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func INPersonHandleLabelWork() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_intentsLib, "INPersonHandleLabelWork")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func INPersonHandleLabelWorkFax() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_intentsLib, "INPersonHandleLabelWorkFax")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func INPersonHandleLabeliPhone() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_intentsLib, "INPersonHandleLabeliPhone")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func INPersonRelationshipDaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_intentsLib, "INPersonRelationshipDaughter")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func INPersonRelationshipSon() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_intentsLib, "INPersonRelationshipSon")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func IntentsVersionNumber() float64 {
 	ptr, _ := purego.Dlsym(_intentsLib, "IntentsVersionNumber")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func IntentsVersionString() []unsafe.Pointer {
 	ptr, _ := purego.Dlsym(_intentsLib, "IntentsVersionString")
-	if ptr == 0 { return []unsafe.Pointer{} }
+	if ptr == 0 {
+		return []unsafe.Pointer{}
+	}
 	return *(*[]unsafe.Pointer)(unsafe.Pointer(ptr))
 }
-

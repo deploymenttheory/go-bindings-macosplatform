@@ -115,9 +115,13 @@ func (x *NNMultiplicationNode) WithLabel(label string) *NNMultiplicationNode {
 	return x
 }
 
-func (x *NNMultiplicationNode) asNNBinaryArithmeticNode() *mpsneuralnetwork.MPSNNBinaryArithmeticNode { return &x.inner.MPSNNBinaryArithmeticNode }
+func (x *NNMultiplicationNode) asNNBinaryArithmeticNode() *mpsneuralnetwork.MPSNNBinaryArithmeticNode {
+	return &x.inner.MPSNNBinaryArithmeticNode
+}
 
-func (x *NNMultiplicationNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode }
+func (x *NNMultiplicationNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode
+}
 
 // NNMultiplicationNodeable is the interface implemented by [NNMultiplicationNode], for mocking and DI.
 type NNMultiplicationNodeable interface {
@@ -138,4 +142,3 @@ type NNMultiplicationNodeable interface {
 }
 
 var _ NNMultiplicationNodeable = (*NNMultiplicationNode)(nil)
-

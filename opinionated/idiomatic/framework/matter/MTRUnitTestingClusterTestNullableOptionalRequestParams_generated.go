@@ -16,7 +16,9 @@ type MTRUnitTestingClusterTestNullableOptionalRequestParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRUnitTestingClusterTestNullableOptionalRequestParams].
-func (x *MTRUnitTestingClusterTestNullableOptionalRequestParams) Unwrap() *raw.MTRUnitTestingClusterTestNullableOptionalRequestParams { return x.inner }
+func (x *MTRUnitTestingClusterTestNullableOptionalRequestParams) Unwrap() *raw.MTRUnitTestingClusterTestNullableOptionalRequestParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -84,7 +86,9 @@ func (x *MTRUnitTestingClusterTestNullableOptionalRequestParams) SetServerSidePr
 	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
 }
 
-func (x *MTRUnitTestingClusterTestNullableOptionalRequestParams) asMTRUnitTestingClusterTestNullableOptionalRequestParams() *raw.MTRUnitTestingClusterTestNullableOptionalRequestParams { return x.inner }
+func (x *MTRUnitTestingClusterTestNullableOptionalRequestParams) asMTRUnitTestingClusterTestNullableOptionalRequestParams() *raw.MTRUnitTestingClusterTestNullableOptionalRequestParams {
+	return x.inner
+}
 
 // MTRUnitTestingClusterTestNullableOptionalRequestParamsable is the interface implemented by [MTRUnitTestingClusterTestNullableOptionalRequestParams], for mocking and DI.
 type MTRUnitTestingClusterTestNullableOptionalRequestParamsable interface {
@@ -101,4 +105,3 @@ type MTRUnitTestingClusterTestNullableOptionalRequestParamsable interface {
 }
 
 var _ MTRUnitTestingClusterTestNullableOptionalRequestParamsable = (*MTRUnitTestingClusterTestNullableOptionalRequestParams)(nil)
-

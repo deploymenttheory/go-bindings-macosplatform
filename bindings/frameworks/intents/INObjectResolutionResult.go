@@ -16,8 +16,8 @@ type INObjectResolutionResult struct {
 }
 
 var (
-	_clsINObjectResolutionResult = _objcClass("INObjectResolutionResult")
-	_iNObjectResolutionResultSelSuccessWithResolvedObject = objc.RegisterName("successWithResolvedObject:")
+	_clsINObjectResolutionResult                                        = _objcClass("INObjectResolutionResult")
+	_iNObjectResolutionResultSelSuccessWithResolvedObject               = objc.RegisterName("successWithResolvedObject:")
 	_iNObjectResolutionResultSelDisambiguationWithObjectsToDisambiguate = objc.RegisterName("disambiguationWithObjectsToDisambiguate:")
 	_iNObjectResolutionResultSelConfirmationRequiredWithObjectToConfirm = objc.RegisterName("confirmationRequiredWithObjectToConfirm:")
 )
@@ -34,19 +34,24 @@ func INObjectResolutionResultFromID(id objc.ID) *INObjectResolutionResult {
 
 func INObjectResolutionResultSuccessWithResolvedObject(resolvedObject *INObject) *INObjectResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINObjectResolutionResult), _iNObjectResolutionResultSelSuccessWithResolvedObject, resolvedObject.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INObjectResolutionResultFromID(_ret)
 }
 
 func INObjectResolutionResultDisambiguationWithObjectsToDisambiguate(objectsToDisambiguate *foundation.NSArray[*INObject]) *INObjectResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINObjectResolutionResult), _iNObjectResolutionResultSelDisambiguationWithObjectsToDisambiguate, objectsToDisambiguate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INObjectResolutionResultFromID(_ret)
 }
 
 func INObjectResolutionResultConfirmationRequiredWithObjectToConfirm(objectToConfirm *INObject) *INObjectResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINObjectResolutionResult), _iNObjectResolutionResultSelConfirmationRequiredWithObjectToConfirm, objectToConfirm.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INObjectResolutionResultFromID(_ret)
 }
-

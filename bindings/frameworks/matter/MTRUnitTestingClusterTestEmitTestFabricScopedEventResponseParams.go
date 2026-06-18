@@ -18,12 +18,12 @@ type MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams struct {
 }
 
 var (
-	_clsMTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams = _objcClass("MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams")
+	_clsMTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams                           = _objcClass("MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams")
 	_mTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsSelValue = objc.RegisterName("value")
-	_mTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsSelSetValue = objc.RegisterName("setValue:")
-	_mTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsSelValue                      = objc.RegisterName("value")
+	_mTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsSelSetValue                   = objc.RegisterName("setValue:")
+	_mTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
 )
 
 func MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsFromID(id objc.ID) *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams {
@@ -40,7 +40,9 @@ func MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsFromID(id o
 func (o *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -49,7 +51,9 @@ func (o *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) InitW
 
 func (o *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) Value() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -60,11 +64,12 @@ func (o *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) SetVa
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
 	o.Ptr().Send(_mTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsSelSetTimedInvokeTimeoutMs, timedInvokeTimeoutMs.Ptr())
 }
-

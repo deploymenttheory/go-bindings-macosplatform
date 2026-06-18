@@ -16,7 +16,9 @@ type MTRServiceAreaClusterProgressStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRServiceAreaClusterProgressStruct].
-func (x *MTRServiceAreaClusterProgressStruct) Unwrap() *raw.MTRServiceAreaClusterProgressStruct { return x.inner }
+func (x *MTRServiceAreaClusterProgressStruct) Unwrap() *raw.MTRServiceAreaClusterProgressStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -99,4 +101,3 @@ type MTRServiceAreaClusterProgressStructable interface {
 }
 
 var _ MTRServiceAreaClusterProgressStructable = (*MTRServiceAreaClusterProgressStruct)(nil)
-

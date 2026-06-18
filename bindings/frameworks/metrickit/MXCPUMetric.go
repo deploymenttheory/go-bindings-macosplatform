@@ -16,8 +16,8 @@ type MXCPUMetric struct {
 }
 
 var (
-	_clsMXCPUMetric = _objcClass("MXCPUMetric")
-	_mXCPUMetricSelCumulativeCPUTime = objc.RegisterName("cumulativeCPUTime")
+	_clsMXCPUMetric                          = _objcClass("MXCPUMetric")
+	_mXCPUMetricSelCumulativeCPUTime         = objc.RegisterName("cumulativeCPUTime")
 	_mXCPUMetricSelCumulativeCPUInstructions = objc.RegisterName("cumulativeCPUInstructions")
 )
 
@@ -42,4 +42,3 @@ func (o *MXCPUMetric) CumulativeCPUInstructions() *foundation.NSMeasurement[*fou
 	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnit]](o.Ptr(), _mXCPUMetricSelCumulativeCPUInstructions)
 	return _ret
 }
-

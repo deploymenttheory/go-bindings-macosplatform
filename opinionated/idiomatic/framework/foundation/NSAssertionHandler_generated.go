@@ -50,4 +50,3 @@ type AssertionHandlerable interface {
 }
 
 var _ AssertionHandlerable = (*AssertionHandler)(nil)
-

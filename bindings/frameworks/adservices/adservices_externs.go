@@ -14,7 +14,8 @@ import (
 // The framework attribution error domain.
 func AAAttributionErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_adservicesLib, "AAAttributionErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
-

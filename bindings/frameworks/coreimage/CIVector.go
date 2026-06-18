@@ -17,35 +17,35 @@ type CIVector struct {
 }
 
 var (
-	_clsCIVector = _objcClass("CIVector")
-	_cIVectorSelVectorWithValuesCount = objc.RegisterName("vectorWithValues:count:")
-	_cIVectorSelVectorWithX = objc.RegisterName("vectorWithX:")
-	_cIVectorSelVectorWithXY = objc.RegisterName("vectorWithX:Y:")
-	_cIVectorSelVectorWithXYZ = objc.RegisterName("vectorWithX:Y:Z:")
-	_cIVectorSelVectorWithXYZW = objc.RegisterName("vectorWithX:Y:Z:W:")
-	_cIVectorSelVectorWithCGPoint = objc.RegisterName("vectorWithCGPoint:")
-	_cIVectorSelVectorWithCGRect = objc.RegisterName("vectorWithCGRect:")
+	_clsCIVector                            = _objcClass("CIVector")
+	_cIVectorSelVectorWithValuesCount       = objc.RegisterName("vectorWithValues:count:")
+	_cIVectorSelVectorWithX                 = objc.RegisterName("vectorWithX:")
+	_cIVectorSelVectorWithXY                = objc.RegisterName("vectorWithX:Y:")
+	_cIVectorSelVectorWithXYZ               = objc.RegisterName("vectorWithX:Y:Z:")
+	_cIVectorSelVectorWithXYZW              = objc.RegisterName("vectorWithX:Y:Z:W:")
+	_cIVectorSelVectorWithCGPoint           = objc.RegisterName("vectorWithCGPoint:")
+	_cIVectorSelVectorWithCGRect            = objc.RegisterName("vectorWithCGRect:")
 	_cIVectorSelVectorWithCGAffineTransform = objc.RegisterName("vectorWithCGAffineTransform:")
-	_cIVectorSelVectorWithString = objc.RegisterName("vectorWithString:")
-	_cIVectorSelInitWithValuesCount = objc.RegisterName("initWithValues:count:")
-	_cIVectorSelInitWithX = objc.RegisterName("initWithX:")
-	_cIVectorSelInitWithXY = objc.RegisterName("initWithX:Y:")
-	_cIVectorSelInitWithXYZ = objc.RegisterName("initWithX:Y:Z:")
-	_cIVectorSelInitWithXYZW = objc.RegisterName("initWithX:Y:Z:W:")
-	_cIVectorSelInitWithCGPoint = objc.RegisterName("initWithCGPoint:")
-	_cIVectorSelInitWithCGRect = objc.RegisterName("initWithCGRect:")
-	_cIVectorSelInitWithCGAffineTransform = objc.RegisterName("initWithCGAffineTransform:")
-	_cIVectorSelInitWithString = objc.RegisterName("initWithString:")
-	_cIVectorSelValueAtIndex = objc.RegisterName("valueAtIndex:")
-	_cIVectorSelCount = objc.RegisterName("count")
-	_cIVectorSelX = objc.RegisterName("X")
-	_cIVectorSelY = objc.RegisterName("Y")
-	_cIVectorSelZ = objc.RegisterName("Z")
-	_cIVectorSelW = objc.RegisterName("W")
-	_cIVectorSelCGPointValue = objc.RegisterName("CGPointValue")
-	_cIVectorSelCGRectValue = objc.RegisterName("CGRectValue")
-	_cIVectorSelCGAffineTransformValue = objc.RegisterName("CGAffineTransformValue")
-	_cIVectorSelStringRepresentation = objc.RegisterName("stringRepresentation")
+	_cIVectorSelVectorWithString            = objc.RegisterName("vectorWithString:")
+	_cIVectorSelInitWithValuesCount         = objc.RegisterName("initWithValues:count:")
+	_cIVectorSelInitWithX                   = objc.RegisterName("initWithX:")
+	_cIVectorSelInitWithXY                  = objc.RegisterName("initWithX:Y:")
+	_cIVectorSelInitWithXYZ                 = objc.RegisterName("initWithX:Y:Z:")
+	_cIVectorSelInitWithXYZW                = objc.RegisterName("initWithX:Y:Z:W:")
+	_cIVectorSelInitWithCGPoint             = objc.RegisterName("initWithCGPoint:")
+	_cIVectorSelInitWithCGRect              = objc.RegisterName("initWithCGRect:")
+	_cIVectorSelInitWithCGAffineTransform   = objc.RegisterName("initWithCGAffineTransform:")
+	_cIVectorSelInitWithString              = objc.RegisterName("initWithString:")
+	_cIVectorSelValueAtIndex                = objc.RegisterName("valueAtIndex:")
+	_cIVectorSelCount                       = objc.RegisterName("count")
+	_cIVectorSelX                           = objc.RegisterName("X")
+	_cIVectorSelY                           = objc.RegisterName("Y")
+	_cIVectorSelZ                           = objc.RegisterName("Z")
+	_cIVectorSelW                           = objc.RegisterName("W")
+	_cIVectorSelCGPointValue                = objc.RegisterName("CGPointValue")
+	_cIVectorSelCGRectValue                 = objc.RegisterName("CGRectValue")
+	_cIVectorSelCGAffineTransformValue      = objc.RegisterName("CGAffineTransformValue")
+	_cIVectorSelStringRepresentation        = objc.RegisterName("stringRepresentation")
 )
 
 func CIVectorFromID(id objc.ID) *CIVector {
@@ -58,129 +58,165 @@ func CIVectorFromID(id objc.ID) *CIVector {
 	return o
 }
 
-// Create a Core Image vector object that is initialized with the specified values. - Parameters: - values: The pointer `CGFloat` values to initialize the vector with. - count: The number of `CGFloats` specified by the `values` parameter. - Returns: An autoreleased ``CIVector`` object of length `count`.
+// Create a Core Image vector object that is initialized with the specified values. - Parameters: - values: The pointer `CGFloat` values to initialize the vector with. - count: The number of `CGFloats` specified by the `values` parameter. - Returns: An autoreleased “CIVector“ object of length `count`.
 func CIVectorVectorWithValuesCount(values *float64, count uint) *CIVector {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIVector), _cIVectorSelVectorWithValuesCount, values, count)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIVectorFromID(_ret)
 }
 
-// Create a Core Image vector object that is initialized with one value. - Parameters: - x: The value for the first position in the vector. - Returns: An autoreleased ``CIVector`` object of length 1.
+// Create a Core Image vector object that is initialized with one value. - Parameters: - x: The value for the first position in the vector. - Returns: An autoreleased “CIVector“ object of length 1.
 func CIVectorVectorWithX(x float64) *CIVector {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIVector), _cIVectorSelVectorWithX, x)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIVectorFromID(_ret)
 }
 
-// Create a Core Image vector object that is initialized with two values. - Parameters: - x: The value for the first position in the vector. - y: The value for the second position in the vector. - Returns: An autoreleased ``CIVector`` object of length 2.
+// Create a Core Image vector object that is initialized with two values. - Parameters: - x: The value for the first position in the vector. - y: The value for the second position in the vector. - Returns: An autoreleased “CIVector“ object of length 2.
 func CIVectorVectorWithXY(x float64, y float64) *CIVector {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIVector), _cIVectorSelVectorWithXY, x, y)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIVectorFromID(_ret)
 }
 
-// Create a Core Image vector object that is initialized with three values. - Parameters: - x: The value for the first position in the vector. - y: The value for the second position in the vector. - z: The value for the third position in the vector. - Returns: An autoreleased ``CIVector`` object of length 3.
+// Create a Core Image vector object that is initialized with three values. - Parameters: - x: The value for the first position in the vector. - y: The value for the second position in the vector. - z: The value for the third position in the vector. - Returns: An autoreleased “CIVector“ object of length 3.
 func CIVectorVectorWithXYZ(x float64, y float64, z float64) *CIVector {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIVector), _cIVectorSelVectorWithXYZ, x, y, z)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIVectorFromID(_ret)
 }
 
-// Create a Core Image vector object that is initialized with four values. - Parameters: - x: The value for the first position in the vector. - y: The value for the second position in the vector. - z: The value for the third position in the vector. - w: The value for the forth position in the vector. - Returns: An autoreleased ``CIVector`` object of length 4.
+// Create a Core Image vector object that is initialized with four values. - Parameters: - x: The value for the first position in the vector. - y: The value for the second position in the vector. - z: The value for the third position in the vector. - w: The value for the forth position in the vector. - Returns: An autoreleased “CIVector“ object of length 4.
 func CIVectorVectorWithXYZW(x float64, y float64, z float64, w float64) *CIVector {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIVector), _cIVectorSelVectorWithXYZW, x, y, z, w)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIVectorFromID(_ret)
 }
 
-// Create a Core Image vector object that is initialized with two values provided by a `CGPoint` structure. The `CGRect` structure’s `y` and `y` values are stored in the vector’s two values. - Parameters: - p: The `CGPoint` structure. - Returns: An autoreleased ``CIVector`` object of length 2.
+// Create a Core Image vector object that is initialized with two values provided by a `CGPoint` structure. The `CGRect` structure’s `y` and `y` values are stored in the vector’s two values. - Parameters: - p: The `CGPoint` structure. - Returns: An autoreleased “CIVector“ object of length 2.
 func CIVectorVectorWithCGPoint(p corefoundation.CGPoint) *CIVector {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIVector), _cIVectorSelVectorWithCGPoint, p)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIVectorFromID(_ret)
 }
 
-// Create a Core Image vector object that is initialized with four values provided by a `CGRect` structure. The `CGRect` structure’s `x`, `y`, `height` and `width` values are stored in the vector’s four values. - Parameters: - r: The `CGRect` structure. - Returns: An autoreleased ``CIVector`` object of length 4.
+// Create a Core Image vector object that is initialized with four values provided by a `CGRect` structure. The `CGRect` structure’s `x`, `y`, `height` and `width` values are stored in the vector’s four values. - Parameters: - r: The `CGRect` structure. - Returns: An autoreleased “CIVector“ object of length 4.
 func CIVectorVectorWithCGRect(r corefoundation.CGRect) *CIVector {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIVector), _cIVectorSelVectorWithCGRect, r)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIVectorFromID(_ret)
 }
 
-// Create a Core Image vector object that is initialized with six values provided by a `CGAffineTransform` structure. The `CGAffineTransform` structure’s `a`, `b`, `c`, `d`, `tx` and `ty` values are stored in the vector’s six values. - Parameters: - t: The `CGAffineTransform` structure. - Returns: An autoreleased ``CIVector`` object of length 6.
+// Create a Core Image vector object that is initialized with six values provided by a `CGAffineTransform` structure. The `CGAffineTransform` structure’s `a`, `b`, `c`, `d`, `tx` and `ty` values are stored in the vector’s six values. - Parameters: - t: The `CGAffineTransform` structure. - Returns: An autoreleased “CIVector“ object of length 6.
 func CIVectorVectorWithCGAffineTransform(t corefoundation.CGAffineTransform) *CIVector {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIVector), _cIVectorSelVectorWithCGAffineTransform, t)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIVectorFromID(_ret)
 }
 
-// Create a Core Image vector object with values provided in a string representation. - Parameters: - representation: A string that is in one of the formats returned by the `stringRepresentation` method. - Returns: An autoreleased ``CIVector`` object.
+// Create a Core Image vector object with values provided in a string representation. - Parameters: - representation: A string that is in one of the formats returned by the `stringRepresentation` method. - Returns: An autoreleased “CIVector“ object.
 func CIVectorVectorWithString(representation *foundation.NSString) *CIVector {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIVector), _cIVectorSelVectorWithString, representation.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIVectorFromID(_ret)
 }
 
-// Initialize a Core Image vector object with the specified the values. - Parameters: - values: A pointer `CGFloat` values for vector. - count: The number of `CGFloats` specified by the `values` parameter. - Returns: An initialized ``CIVector`` object of length `count`.
+// Initialize a Core Image vector object with the specified the values. - Parameters: - values: A pointer `CGFloat` values for vector. - count: The number of `CGFloats` specified by the `values` parameter. - Returns: An initialized “CIVector“ object of length `count`.
 func (o *CIVector) InitWithValuesCount(values *float64, count uint) *CIVector {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIVectorSelInitWithValuesCount, values, count)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIVectorFromID(_ret)
 }
 
-// Initialize a Core Image vector object with one value. - Parameters: - x: The value for the first position in the vector. - Returns: An initialized ``CIVector`` object of length 1.
+// Initialize a Core Image vector object with one value. - Parameters: - x: The value for the first position in the vector. - Returns: An initialized “CIVector“ object of length 1.
 func (o *CIVector) InitWithX(x float64) *CIVector {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIVectorSelInitWithX, x)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIVectorFromID(_ret)
 }
 
-// Initialize a Core Image vector object with two values. - Parameters: - x: The value for the first position in the vector. - y: The value for the second position in the vector. - Returns: An initialized ``CIVector`` object of length 2.
+// Initialize a Core Image vector object with two values. - Parameters: - x: The value for the first position in the vector. - y: The value for the second position in the vector. - Returns: An initialized “CIVector“ object of length 2.
 func (o *CIVector) InitWithXY(x float64, y float64) *CIVector {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIVectorSelInitWithXY, x, y)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIVectorFromID(_ret)
 }
 
-// Initialize a Core Image vector object with three values. - Parameters: - x: The value for the first position in the vector. - y: The value for the second position in the vector. - z: The value for the third position in the vector. - Returns: An initialized ``CIVector`` object of length 3.
+// Initialize a Core Image vector object with three values. - Parameters: - x: The value for the first position in the vector. - y: The value for the second position in the vector. - z: The value for the third position in the vector. - Returns: An initialized “CIVector“ object of length 3.
 func (o *CIVector) InitWithXYZ(x float64, y float64, z float64) *CIVector {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIVectorSelInitWithXYZ, x, y, z)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIVectorFromID(_ret)
 }
 
-// Initialize a Core Image vector object with four values. - Parameters: - x: The value for the first position in the vector. - y: The value for the second position in the vector. - z: The value for the third position in the vector. - w: The value for the forth position in the vector. - Returns: An initialized ``CIVector`` object of length 4.
+// Initialize a Core Image vector object with four values. - Parameters: - x: The value for the first position in the vector. - y: The value for the second position in the vector. - z: The value for the third position in the vector. - w: The value for the forth position in the vector. - Returns: An initialized “CIVector“ object of length 4.
 func (o *CIVector) InitWithXYZW(x float64, y float64, z float64, w float64) *CIVector {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIVectorSelInitWithXYZW, x, y, z, w)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIVectorFromID(_ret)
 }
 
-// Initialize a Core Image vector object with two values provided by a `CGPoint` structure. The `CGRect` structure’s `y` and `y` values are stored in the vector’s two values. - Parameters: - p: The `CGPoint` structure. - Returns: An initialized ``CIVector`` object of length 2.
+// Initialize a Core Image vector object with two values provided by a `CGPoint` structure. The `CGRect` structure’s `y` and `y` values are stored in the vector’s two values. - Parameters: - p: The `CGPoint` structure. - Returns: An initialized “CIVector“ object of length 2.
 func (o *CIVector) InitWithCGPoint(p corefoundation.CGPoint) *CIVector {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIVectorSelInitWithCGPoint, p)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIVectorFromID(_ret)
 }
 
-// Initialize a Core Image vector object with four values provided by a `CGRect` structure. The `CGRect` structure’s `x`, `y`, `height` and `width` values are stored in the vector’s four values. - Parameters: - r: The `CGRect` structure. - Returns: An initialized ``CIVector`` object of length 4.
+// Initialize a Core Image vector object with four values provided by a `CGRect` structure. The `CGRect` structure’s `x`, `y`, `height` and `width` values are stored in the vector’s four values. - Parameters: - r: The `CGRect` structure. - Returns: An initialized “CIVector“ object of length 4.
 func (o *CIVector) InitWithCGRect(r corefoundation.CGRect) *CIVector {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIVectorSelInitWithCGRect, r)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIVectorFromID(_ret)
 }
 
-// Initialize a Core Image vector object with six values provided by a `CGAffineTransform` structure. The `CGAffineTransform` structure’s `a`, `b`, `c`, `c`, `tx` and `ty` values are stored in the vector’s six values. - Parameters: - t: The `CGAffineTransform` structure. - Returns: An initialized ``CIVector`` object of length 6.
+// Initialize a Core Image vector object with six values provided by a `CGAffineTransform` structure. The `CGAffineTransform` structure’s `a`, `b`, `c`, `c`, `tx` and `ty` values are stored in the vector’s six values. - Parameters: - t: The `CGAffineTransform` structure. - Returns: An initialized “CIVector“ object of length 6.
 func (o *CIVector) InitWithCGAffineTransform(t corefoundation.CGAffineTransform) *CIVector {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIVectorSelInitWithCGAffineTransform, t)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIVectorFromID(_ret)
 }
 
-// Initialize a Core Image vector object with values provided in a string representation. - Parameters: - representation: A string that is in one of the formats returned by the `stringRepresentation` method. - Returns: An initialized ``CIVector`` object.
+// Initialize a Core Image vector object with values provided in a string representation. - Parameters: - representation: A string that is in one of the formats returned by the `stringRepresentation` method. - Returns: An initialized “CIVector“ object.
 func (o *CIVector) InitWithString(representation *foundation.NSString) *CIVector {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIVectorSelInitWithString, representation.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIVectorFromID(_ret)
 }
 
@@ -238,10 +274,11 @@ func (o *CIVector) CGAffineTransformValue() corefoundation.CGAffineTransform {
 	return _ret
 }
 
-// Returns a formatted string with all the values of a `CIVector`. Some example string representations of vectors: `CIVector`                               | `stringRepresentation` ---------------------------------------- | -------------- `[CIVector vectorWithX:1.0 Y:0.5 Z:0.3]` | `"[1.0 0.5 0.3]"` `[CIVector vectorWithX:10.0 Y:23.0]`     | `"[10.0 23.0]"` To create a ``CIVector`` object from a string representation, use the ``vectorWithString:`` method.
+// Returns a formatted string with all the values of a `CIVector`. Some example string representations of vectors: `CIVector`                               | `stringRepresentation` ---------------------------------------- | -------------- `[CIVector vectorWithX:1.0 Y:0.5 Z:0.3]` | `"[1.0 0.5 0.3]"` `[CIVector vectorWithX:10.0 Y:23.0]`     | `"[10.0 23.0]"` To create a “CIVector“ object from a string representation, use the “vectorWithString:“ method.
 func (o *CIVector) StringRepresentation() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIVectorSelStringRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

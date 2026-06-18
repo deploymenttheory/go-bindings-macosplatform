@@ -16,20 +16,20 @@ type NSUserDefaultsController struct {
 }
 
 var (
-	_clsNSUserDefaultsController = _objcClass("NSUserDefaultsController")
+	_clsNSUserDefaultsController                              = _objcClass("NSUserDefaultsController")
 	_nSUserDefaultsControllerSelInitWithDefaultsInitialValues = objc.RegisterName("initWithDefaults:initialValues:")
-	_nSUserDefaultsControllerSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSUserDefaultsControllerSelRevert = objc.RegisterName("revert:")
-	_nSUserDefaultsControllerSelSave = objc.RegisterName("save:")
-	_nSUserDefaultsControllerSelRevertToInitialValues = objc.RegisterName("revertToInitialValues:")
-	_nSUserDefaultsControllerSelSharedUserDefaultsController = objc.RegisterName("sharedUserDefaultsController")
-	_nSUserDefaultsControllerSelDefaults = objc.RegisterName("defaults")
-	_nSUserDefaultsControllerSelInitialValues = objc.RegisterName("initialValues")
-	_nSUserDefaultsControllerSelSetInitialValues = objc.RegisterName("setInitialValues:")
-	_nSUserDefaultsControllerSelAppliesImmediately = objc.RegisterName("appliesImmediately")
-	_nSUserDefaultsControllerSelSetAppliesImmediately = objc.RegisterName("setAppliesImmediately:")
-	_nSUserDefaultsControllerSelHasUnappliedChanges = objc.RegisterName("hasUnappliedChanges")
-	_nSUserDefaultsControllerSelValues = objc.RegisterName("values")
+	_nSUserDefaultsControllerSelInitWithCoder                 = objc.RegisterName("initWithCoder:")
+	_nSUserDefaultsControllerSelRevert                        = objc.RegisterName("revert:")
+	_nSUserDefaultsControllerSelSave                          = objc.RegisterName("save:")
+	_nSUserDefaultsControllerSelRevertToInitialValues         = objc.RegisterName("revertToInitialValues:")
+	_nSUserDefaultsControllerSelSharedUserDefaultsController  = objc.RegisterName("sharedUserDefaultsController")
+	_nSUserDefaultsControllerSelDefaults                      = objc.RegisterName("defaults")
+	_nSUserDefaultsControllerSelInitialValues                 = objc.RegisterName("initialValues")
+	_nSUserDefaultsControllerSelSetInitialValues              = objc.RegisterName("setInitialValues:")
+	_nSUserDefaultsControllerSelAppliesImmediately            = objc.RegisterName("appliesImmediately")
+	_nSUserDefaultsControllerSelSetAppliesImmediately         = objc.RegisterName("setAppliesImmediately:")
+	_nSUserDefaultsControllerSelHasUnappliedChanges           = objc.RegisterName("hasUnappliedChanges")
+	_nSUserDefaultsControllerSelValues                        = objc.RegisterName("values")
 )
 
 func NSUserDefaultsControllerFromID(id objc.ID) *NSUserDefaultsController {
@@ -44,13 +44,17 @@ func NSUserDefaultsControllerFromID(id objc.ID) *NSUserDefaultsController {
 
 func (o *NSUserDefaultsController) InitWithDefaultsInitialValues(defaults *foundation.NSUserDefaults, initialValues *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NSUserDefaultsController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserDefaultsControllerSelInitWithDefaultsInitialValues, defaults.Ptr(), initialValues)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUserDefaultsControllerFromID(_ret)
 }
 
 func (o *NSUserDefaultsController) InitWithCoder(coder *foundation.NSCoder) *NSUserDefaultsController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserDefaultsControllerSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUserDefaultsControllerFromID(_ret)
 }
 
@@ -68,13 +72,17 @@ func (o *NSUserDefaultsController) RevertToInitialValues(sender objc.ID) {
 
 func NSUserDefaultsControllerSharedUserDefaultsController() *NSUserDefaultsController {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUserDefaultsController), _nSUserDefaultsControllerSelSharedUserDefaultsController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUserDefaultsControllerFromID(_ret)
 }
 
 func (o *NSUserDefaultsController) Defaults() *foundation.NSUserDefaults {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserDefaultsControllerSelDefaults)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUserDefaultsFromID(_ret)
 }
 
@@ -105,4 +113,3 @@ func (o *NSUserDefaultsController) Values() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserDefaultsControllerSelValues)
 	return _ret
 }
-

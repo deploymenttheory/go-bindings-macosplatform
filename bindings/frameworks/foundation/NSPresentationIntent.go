@@ -15,31 +15,31 @@ type NSPresentationIntent struct {
 }
 
 var (
-	_clsNSPresentationIntent = _objcClass("NSPresentationIntent")
-	_nSPresentationIntentSelParagraphIntentWithIdentityNestedInsideIntent = objc.RegisterName("paragraphIntentWithIdentity:nestedInsideIntent:")
-	_nSPresentationIntentSelHeaderIntentWithIdentityLevelNestedInsideIntent = objc.RegisterName("headerIntentWithIdentity:level:nestedInsideIntent:")
-	_nSPresentationIntentSelCodeBlockIntentWithIdentityLanguageHintNestedInsideIntent = objc.RegisterName("codeBlockIntentWithIdentity:languageHint:nestedInsideIntent:")
-	_nSPresentationIntentSelThematicBreakIntentWithIdentityNestedInsideIntent = objc.RegisterName("thematicBreakIntentWithIdentity:nestedInsideIntent:")
-	_nSPresentationIntentSelOrderedListIntentWithIdentityNestedInsideIntent = objc.RegisterName("orderedListIntentWithIdentity:nestedInsideIntent:")
-	_nSPresentationIntentSelUnorderedListIntentWithIdentityNestedInsideIntent = objc.RegisterName("unorderedListIntentWithIdentity:nestedInsideIntent:")
-	_nSPresentationIntentSelListItemIntentWithIdentityOrdinalNestedInsideIntent = objc.RegisterName("listItemIntentWithIdentity:ordinal:nestedInsideIntent:")
-	_nSPresentationIntentSelBlockQuoteIntentWithIdentityNestedInsideIntent = objc.RegisterName("blockQuoteIntentWithIdentity:nestedInsideIntent:")
+	_clsNSPresentationIntent                                                               = _objcClass("NSPresentationIntent")
+	_nSPresentationIntentSelParagraphIntentWithIdentityNestedInsideIntent                  = objc.RegisterName("paragraphIntentWithIdentity:nestedInsideIntent:")
+	_nSPresentationIntentSelHeaderIntentWithIdentityLevelNestedInsideIntent                = objc.RegisterName("headerIntentWithIdentity:level:nestedInsideIntent:")
+	_nSPresentationIntentSelCodeBlockIntentWithIdentityLanguageHintNestedInsideIntent      = objc.RegisterName("codeBlockIntentWithIdentity:languageHint:nestedInsideIntent:")
+	_nSPresentationIntentSelThematicBreakIntentWithIdentityNestedInsideIntent              = objc.RegisterName("thematicBreakIntentWithIdentity:nestedInsideIntent:")
+	_nSPresentationIntentSelOrderedListIntentWithIdentityNestedInsideIntent                = objc.RegisterName("orderedListIntentWithIdentity:nestedInsideIntent:")
+	_nSPresentationIntentSelUnorderedListIntentWithIdentityNestedInsideIntent              = objc.RegisterName("unorderedListIntentWithIdentity:nestedInsideIntent:")
+	_nSPresentationIntentSelListItemIntentWithIdentityOrdinalNestedInsideIntent            = objc.RegisterName("listItemIntentWithIdentity:ordinal:nestedInsideIntent:")
+	_nSPresentationIntentSelBlockQuoteIntentWithIdentityNestedInsideIntent                 = objc.RegisterName("blockQuoteIntentWithIdentity:nestedInsideIntent:")
 	_nSPresentationIntentSelTableIntentWithIdentityColumnCountAlignmentsNestedInsideIntent = objc.RegisterName("tableIntentWithIdentity:columnCount:alignments:nestedInsideIntent:")
-	_nSPresentationIntentSelTableHeaderRowIntentWithIdentityNestedInsideIntent = objc.RegisterName("tableHeaderRowIntentWithIdentity:nestedInsideIntent:")
-	_nSPresentationIntentSelTableRowIntentWithIdentityRowNestedInsideIntent = objc.RegisterName("tableRowIntentWithIdentity:row:nestedInsideIntent:")
-	_nSPresentationIntentSelTableCellIntentWithIdentityColumnNestedInsideIntent = objc.RegisterName("tableCellIntentWithIdentity:column:nestedInsideIntent:")
-	_nSPresentationIntentSelIsEquivalentToPresentationIntent = objc.RegisterName("isEquivalentToPresentationIntent:")
-	_nSPresentationIntentSelIntentKind = objc.RegisterName("intentKind")
-	_nSPresentationIntentSelParentIntent = objc.RegisterName("parentIntent")
-	_nSPresentationIntentSelIdentity = objc.RegisterName("identity")
-	_nSPresentationIntentSelOrdinal = objc.RegisterName("ordinal")
-	_nSPresentationIntentSelColumnAlignments = objc.RegisterName("columnAlignments")
-	_nSPresentationIntentSelColumnCount = objc.RegisterName("columnCount")
-	_nSPresentationIntentSelHeaderLevel = objc.RegisterName("headerLevel")
-	_nSPresentationIntentSelLanguageHint = objc.RegisterName("languageHint")
-	_nSPresentationIntentSelColumn = objc.RegisterName("column")
-	_nSPresentationIntentSelRow = objc.RegisterName("row")
-	_nSPresentationIntentSelIndentationLevel = objc.RegisterName("indentationLevel")
+	_nSPresentationIntentSelTableHeaderRowIntentWithIdentityNestedInsideIntent             = objc.RegisterName("tableHeaderRowIntentWithIdentity:nestedInsideIntent:")
+	_nSPresentationIntentSelTableRowIntentWithIdentityRowNestedInsideIntent                = objc.RegisterName("tableRowIntentWithIdentity:row:nestedInsideIntent:")
+	_nSPresentationIntentSelTableCellIntentWithIdentityColumnNestedInsideIntent            = objc.RegisterName("tableCellIntentWithIdentity:column:nestedInsideIntent:")
+	_nSPresentationIntentSelIsEquivalentToPresentationIntent                               = objc.RegisterName("isEquivalentToPresentationIntent:")
+	_nSPresentationIntentSelIntentKind                                                     = objc.RegisterName("intentKind")
+	_nSPresentationIntentSelParentIntent                                                   = objc.RegisterName("parentIntent")
+	_nSPresentationIntentSelIdentity                                                       = objc.RegisterName("identity")
+	_nSPresentationIntentSelOrdinal                                                        = objc.RegisterName("ordinal")
+	_nSPresentationIntentSelColumnAlignments                                               = objc.RegisterName("columnAlignments")
+	_nSPresentationIntentSelColumnCount                                                    = objc.RegisterName("columnCount")
+	_nSPresentationIntentSelHeaderLevel                                                    = objc.RegisterName("headerLevel")
+	_nSPresentationIntentSelLanguageHint                                                   = objc.RegisterName("languageHint")
+	_nSPresentationIntentSelColumn                                                         = objc.RegisterName("column")
+	_nSPresentationIntentSelRow                                                            = objc.RegisterName("row")
+	_nSPresentationIntentSelIndentationLevel                                               = objc.RegisterName("indentationLevel")
 )
 
 func NSPresentationIntentFromID(id objc.ID) *NSPresentationIntent {
@@ -54,73 +54,97 @@ func NSPresentationIntentFromID(id objc.ID) *NSPresentationIntent {
 
 func NSPresentationIntentParagraphIntentWithIdentityNestedInsideIntent(identity int, parent *NSPresentationIntent) *NSPresentationIntent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPresentationIntent), _nSPresentationIntentSelParagraphIntentWithIdentityNestedInsideIntent, identity, parent.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPresentationIntentFromID(_ret)
 }
 
 func NSPresentationIntentHeaderIntentWithIdentityLevelNestedInsideIntent(identity int, level int, parent *NSPresentationIntent) *NSPresentationIntent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPresentationIntent), _nSPresentationIntentSelHeaderIntentWithIdentityLevelNestedInsideIntent, identity, level, parent.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPresentationIntentFromID(_ret)
 }
 
 func NSPresentationIntentCodeBlockIntentWithIdentityLanguageHintNestedInsideIntent(identity int, languageHint *NSString, parent *NSPresentationIntent) *NSPresentationIntent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPresentationIntent), _nSPresentationIntentSelCodeBlockIntentWithIdentityLanguageHintNestedInsideIntent, identity, languageHint.Ptr(), parent.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPresentationIntentFromID(_ret)
 }
 
 func NSPresentationIntentThematicBreakIntentWithIdentityNestedInsideIntent(identity int, parent *NSPresentationIntent) *NSPresentationIntent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPresentationIntent), _nSPresentationIntentSelThematicBreakIntentWithIdentityNestedInsideIntent, identity, parent.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPresentationIntentFromID(_ret)
 }
 
 func NSPresentationIntentOrderedListIntentWithIdentityNestedInsideIntent(identity int, parent *NSPresentationIntent) *NSPresentationIntent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPresentationIntent), _nSPresentationIntentSelOrderedListIntentWithIdentityNestedInsideIntent, identity, parent.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPresentationIntentFromID(_ret)
 }
 
 func NSPresentationIntentUnorderedListIntentWithIdentityNestedInsideIntent(identity int, parent *NSPresentationIntent) *NSPresentationIntent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPresentationIntent), _nSPresentationIntentSelUnorderedListIntentWithIdentityNestedInsideIntent, identity, parent.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPresentationIntentFromID(_ret)
 }
 
 func NSPresentationIntentListItemIntentWithIdentityOrdinalNestedInsideIntent(identity int, ordinal int, parent *NSPresentationIntent) *NSPresentationIntent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPresentationIntent), _nSPresentationIntentSelListItemIntentWithIdentityOrdinalNestedInsideIntent, identity, ordinal, parent.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPresentationIntentFromID(_ret)
 }
 
 func NSPresentationIntentBlockQuoteIntentWithIdentityNestedInsideIntent(identity int, parent *NSPresentationIntent) *NSPresentationIntent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPresentationIntent), _nSPresentationIntentSelBlockQuoteIntentWithIdentityNestedInsideIntent, identity, parent.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPresentationIntentFromID(_ret)
 }
 
 func NSPresentationIntentTableIntentWithIdentityColumnCountAlignmentsNestedInsideIntent(identity int, columnCount int, alignments *NSArray[*NSNumber], parent *NSPresentationIntent) *NSPresentationIntent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPresentationIntent), _nSPresentationIntentSelTableIntentWithIdentityColumnCountAlignmentsNestedInsideIntent, identity, columnCount, alignments.Ptr(), parent.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPresentationIntentFromID(_ret)
 }
 
 func NSPresentationIntentTableHeaderRowIntentWithIdentityNestedInsideIntent(identity int, parent *NSPresentationIntent) *NSPresentationIntent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPresentationIntent), _nSPresentationIntentSelTableHeaderRowIntentWithIdentityNestedInsideIntent, identity, parent.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPresentationIntentFromID(_ret)
 }
 
 func NSPresentationIntentTableRowIntentWithIdentityRowNestedInsideIntent(identity int, row int, parent *NSPresentationIntent) *NSPresentationIntent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPresentationIntent), _nSPresentationIntentSelTableRowIntentWithIdentityRowNestedInsideIntent, identity, row, parent.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPresentationIntentFromID(_ret)
 }
 
 func NSPresentationIntentTableCellIntentWithIdentityColumnNestedInsideIntent(identity int, column int, parent *NSPresentationIntent) *NSPresentationIntent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPresentationIntent), _nSPresentationIntentSelTableCellIntentWithIdentityColumnNestedInsideIntent, identity, column, parent.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPresentationIntentFromID(_ret)
 }
 
@@ -137,7 +161,9 @@ func (o *NSPresentationIntent) IntentKind() NSPresentationIntentKind {
 
 func (o *NSPresentationIntent) ParentIntent() *NSPresentationIntent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPresentationIntentSelParentIntent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPresentationIntentFromID(_ret)
 }
 
@@ -156,7 +182,9 @@ func (o *NSPresentationIntent) Ordinal() int {
 // If the intent is not a table, this value is `nil`.
 func (o *NSPresentationIntent) ColumnAlignments() *NSArray[*NSNumber] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPresentationIntentSelColumnAlignments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSNumber](_ret)
 }
 
@@ -175,7 +203,9 @@ func (o *NSPresentationIntent) HeaderLevel() int {
 // If the intent is not a code block, this value is `nil`.
 func (o *NSPresentationIntent) LanguageHint() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPresentationIntentSelLanguageHint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -196,4 +226,3 @@ func (o *NSPresentationIntent) IndentationLevel() int {
 	_ret := objc.Send[int](o.Ptr(), _nSPresentationIntentSelIndentationLevel)
 	return _ret
 }
-

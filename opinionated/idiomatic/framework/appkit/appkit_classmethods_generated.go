@@ -5136,4 +5136,3 @@ func Configuration() *WorkspaceOpenConfiguration {
 func IsWritingToolsAvailable() bool {
 	return raw.NSWritingToolsCoordinatorIsWritingToolsAvailable()
 }
-

@@ -117,4 +117,3 @@ type ArrayTypeable interface {
 }
 
 var _ ArrayTypeable = (*ArrayType)(nil)
-

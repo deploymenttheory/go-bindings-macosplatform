@@ -56,7 +56,9 @@ func (x *NumberMetaParameter) Maximum() float64 {
 	return x.inner.Maximum()
 }
 
-func (x *NumberMetaParameter) asMetaParameter() *raw.PHASEMetaParameter { return &x.inner.PHASEMetaParameter }
+func (x *NumberMetaParameter) asMetaParameter() *raw.PHASEMetaParameter {
+	return &x.inner.PHASEMetaParameter
+}
 
 // NumberMetaParameterable is the interface implemented by [NumberMetaParameter], for mocking and DI.
 type NumberMetaParameterable interface {
@@ -68,4 +70,3 @@ type NumberMetaParameterable interface {
 }
 
 var _ NumberMetaParameterable = (*NumberMetaParameter)(nil)
-

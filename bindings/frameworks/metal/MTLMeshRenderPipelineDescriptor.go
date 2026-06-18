@@ -16,62 +16,62 @@ type MTLMeshRenderPipelineDescriptor struct {
 }
 
 var (
-	_clsMTLMeshRenderPipelineDescriptor = _objcClass("MTLMeshRenderPipelineDescriptor")
-	_mTLMeshRenderPipelineDescriptorSelReset = objc.RegisterName("reset")
-	_mTLMeshRenderPipelineDescriptorSelLabel = objc.RegisterName("label")
-	_mTLMeshRenderPipelineDescriptorSelSetLabel = objc.RegisterName("setLabel:")
-	_mTLMeshRenderPipelineDescriptorSelObjectFunction = objc.RegisterName("objectFunction")
-	_mTLMeshRenderPipelineDescriptorSelSetObjectFunction = objc.RegisterName("setObjectFunction:")
-	_mTLMeshRenderPipelineDescriptorSelMeshFunction = objc.RegisterName("meshFunction")
-	_mTLMeshRenderPipelineDescriptorSelSetMeshFunction = objc.RegisterName("setMeshFunction:")
-	_mTLMeshRenderPipelineDescriptorSelFragmentFunction = objc.RegisterName("fragmentFunction")
-	_mTLMeshRenderPipelineDescriptorSelSetFragmentFunction = objc.RegisterName("setFragmentFunction:")
-	_mTLMeshRenderPipelineDescriptorSelMaxTotalThreadsPerObjectThreadgroup = objc.RegisterName("maxTotalThreadsPerObjectThreadgroup")
-	_mTLMeshRenderPipelineDescriptorSelSetMaxTotalThreadsPerObjectThreadgroup = objc.RegisterName("setMaxTotalThreadsPerObjectThreadgroup:")
-	_mTLMeshRenderPipelineDescriptorSelMaxTotalThreadsPerMeshThreadgroup = objc.RegisterName("maxTotalThreadsPerMeshThreadgroup")
-	_mTLMeshRenderPipelineDescriptorSelSetMaxTotalThreadsPerMeshThreadgroup = objc.RegisterName("setMaxTotalThreadsPerMeshThreadgroup:")
-	_mTLMeshRenderPipelineDescriptorSelObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth = objc.RegisterName("objectThreadgroupSizeIsMultipleOfThreadExecutionWidth")
+	_clsMTLMeshRenderPipelineDescriptor                                                         = _objcClass("MTLMeshRenderPipelineDescriptor")
+	_mTLMeshRenderPipelineDescriptorSelReset                                                    = objc.RegisterName("reset")
+	_mTLMeshRenderPipelineDescriptorSelLabel                                                    = objc.RegisterName("label")
+	_mTLMeshRenderPipelineDescriptorSelSetLabel                                                 = objc.RegisterName("setLabel:")
+	_mTLMeshRenderPipelineDescriptorSelObjectFunction                                           = objc.RegisterName("objectFunction")
+	_mTLMeshRenderPipelineDescriptorSelSetObjectFunction                                        = objc.RegisterName("setObjectFunction:")
+	_mTLMeshRenderPipelineDescriptorSelMeshFunction                                             = objc.RegisterName("meshFunction")
+	_mTLMeshRenderPipelineDescriptorSelSetMeshFunction                                          = objc.RegisterName("setMeshFunction:")
+	_mTLMeshRenderPipelineDescriptorSelFragmentFunction                                         = objc.RegisterName("fragmentFunction")
+	_mTLMeshRenderPipelineDescriptorSelSetFragmentFunction                                      = objc.RegisterName("setFragmentFunction:")
+	_mTLMeshRenderPipelineDescriptorSelMaxTotalThreadsPerObjectThreadgroup                      = objc.RegisterName("maxTotalThreadsPerObjectThreadgroup")
+	_mTLMeshRenderPipelineDescriptorSelSetMaxTotalThreadsPerObjectThreadgroup                   = objc.RegisterName("setMaxTotalThreadsPerObjectThreadgroup:")
+	_mTLMeshRenderPipelineDescriptorSelMaxTotalThreadsPerMeshThreadgroup                        = objc.RegisterName("maxTotalThreadsPerMeshThreadgroup")
+	_mTLMeshRenderPipelineDescriptorSelSetMaxTotalThreadsPerMeshThreadgroup                     = objc.RegisterName("setMaxTotalThreadsPerMeshThreadgroup:")
+	_mTLMeshRenderPipelineDescriptorSelObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth    = objc.RegisterName("objectThreadgroupSizeIsMultipleOfThreadExecutionWidth")
 	_mTLMeshRenderPipelineDescriptorSelSetObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth = objc.RegisterName("setObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth:")
-	_mTLMeshRenderPipelineDescriptorSelMeshThreadgroupSizeIsMultipleOfThreadExecutionWidth = objc.RegisterName("meshThreadgroupSizeIsMultipleOfThreadExecutionWidth")
-	_mTLMeshRenderPipelineDescriptorSelSetMeshThreadgroupSizeIsMultipleOfThreadExecutionWidth = objc.RegisterName("setMeshThreadgroupSizeIsMultipleOfThreadExecutionWidth:")
-	_mTLMeshRenderPipelineDescriptorSelPayloadMemoryLength = objc.RegisterName("payloadMemoryLength")
-	_mTLMeshRenderPipelineDescriptorSelSetPayloadMemoryLength = objc.RegisterName("setPayloadMemoryLength:")
-	_mTLMeshRenderPipelineDescriptorSelMaxTotalThreadgroupsPerMeshGrid = objc.RegisterName("maxTotalThreadgroupsPerMeshGrid")
-	_mTLMeshRenderPipelineDescriptorSelSetMaxTotalThreadgroupsPerMeshGrid = objc.RegisterName("setMaxTotalThreadgroupsPerMeshGrid:")
-	_mTLMeshRenderPipelineDescriptorSelObjectBuffers = objc.RegisterName("objectBuffers")
-	_mTLMeshRenderPipelineDescriptorSelMeshBuffers = objc.RegisterName("meshBuffers")
-	_mTLMeshRenderPipelineDescriptorSelFragmentBuffers = objc.RegisterName("fragmentBuffers")
-	_mTLMeshRenderPipelineDescriptorSelRasterSampleCount = objc.RegisterName("rasterSampleCount")
-	_mTLMeshRenderPipelineDescriptorSelSetRasterSampleCount = objc.RegisterName("setRasterSampleCount:")
-	_mTLMeshRenderPipelineDescriptorSelIsAlphaToCoverageEnabled = objc.RegisterName("isAlphaToCoverageEnabled")
-	_mTLMeshRenderPipelineDescriptorSelSetAlphaToCoverageEnabled = objc.RegisterName("setAlphaToCoverageEnabled:")
-	_mTLMeshRenderPipelineDescriptorSelIsAlphaToOneEnabled = objc.RegisterName("isAlphaToOneEnabled")
-	_mTLMeshRenderPipelineDescriptorSelSetAlphaToOneEnabled = objc.RegisterName("setAlphaToOneEnabled:")
-	_mTLMeshRenderPipelineDescriptorSelIsRasterizationEnabled = objc.RegisterName("isRasterizationEnabled")
-	_mTLMeshRenderPipelineDescriptorSelSetRasterizationEnabled = objc.RegisterName("setRasterizationEnabled:")
-	_mTLMeshRenderPipelineDescriptorSelMaxVertexAmplificationCount = objc.RegisterName("maxVertexAmplificationCount")
-	_mTLMeshRenderPipelineDescriptorSelSetMaxVertexAmplificationCount = objc.RegisterName("setMaxVertexAmplificationCount:")
-	_mTLMeshRenderPipelineDescriptorSelColorAttachments = objc.RegisterName("colorAttachments")
-	_mTLMeshRenderPipelineDescriptorSelDepthAttachmentPixelFormat = objc.RegisterName("depthAttachmentPixelFormat")
-	_mTLMeshRenderPipelineDescriptorSelSetDepthAttachmentPixelFormat = objc.RegisterName("setDepthAttachmentPixelFormat:")
-	_mTLMeshRenderPipelineDescriptorSelStencilAttachmentPixelFormat = objc.RegisterName("stencilAttachmentPixelFormat")
-	_mTLMeshRenderPipelineDescriptorSelSetStencilAttachmentPixelFormat = objc.RegisterName("setStencilAttachmentPixelFormat:")
-	_mTLMeshRenderPipelineDescriptorSelSupportIndirectCommandBuffers = objc.RegisterName("supportIndirectCommandBuffers")
-	_mTLMeshRenderPipelineDescriptorSelSetSupportIndirectCommandBuffers = objc.RegisterName("setSupportIndirectCommandBuffers:")
-	_mTLMeshRenderPipelineDescriptorSelBinaryArchives = objc.RegisterName("binaryArchives")
-	_mTLMeshRenderPipelineDescriptorSelSetBinaryArchives = objc.RegisterName("setBinaryArchives:")
-	_mTLMeshRenderPipelineDescriptorSelObjectLinkedFunctions = objc.RegisterName("objectLinkedFunctions")
-	_mTLMeshRenderPipelineDescriptorSelSetObjectLinkedFunctions = objc.RegisterName("setObjectLinkedFunctions:")
-	_mTLMeshRenderPipelineDescriptorSelMeshLinkedFunctions = objc.RegisterName("meshLinkedFunctions")
-	_mTLMeshRenderPipelineDescriptorSelSetMeshLinkedFunctions = objc.RegisterName("setMeshLinkedFunctions:")
-	_mTLMeshRenderPipelineDescriptorSelFragmentLinkedFunctions = objc.RegisterName("fragmentLinkedFunctions")
-	_mTLMeshRenderPipelineDescriptorSelSetFragmentLinkedFunctions = objc.RegisterName("setFragmentLinkedFunctions:")
-	_mTLMeshRenderPipelineDescriptorSelShaderValidation = objc.RegisterName("shaderValidation")
-	_mTLMeshRenderPipelineDescriptorSelSetShaderValidation = objc.RegisterName("setShaderValidation:")
-	_mTLMeshRenderPipelineDescriptorSelRequiredThreadsPerObjectThreadgroup = objc.RegisterName("requiredThreadsPerObjectThreadgroup")
-	_mTLMeshRenderPipelineDescriptorSelSetRequiredThreadsPerObjectThreadgroup = objc.RegisterName("setRequiredThreadsPerObjectThreadgroup:")
-	_mTLMeshRenderPipelineDescriptorSelRequiredThreadsPerMeshThreadgroup = objc.RegisterName("requiredThreadsPerMeshThreadgroup")
-	_mTLMeshRenderPipelineDescriptorSelSetRequiredThreadsPerMeshThreadgroup = objc.RegisterName("setRequiredThreadsPerMeshThreadgroup:")
+	_mTLMeshRenderPipelineDescriptorSelMeshThreadgroupSizeIsMultipleOfThreadExecutionWidth      = objc.RegisterName("meshThreadgroupSizeIsMultipleOfThreadExecutionWidth")
+	_mTLMeshRenderPipelineDescriptorSelSetMeshThreadgroupSizeIsMultipleOfThreadExecutionWidth   = objc.RegisterName("setMeshThreadgroupSizeIsMultipleOfThreadExecutionWidth:")
+	_mTLMeshRenderPipelineDescriptorSelPayloadMemoryLength                                      = objc.RegisterName("payloadMemoryLength")
+	_mTLMeshRenderPipelineDescriptorSelSetPayloadMemoryLength                                   = objc.RegisterName("setPayloadMemoryLength:")
+	_mTLMeshRenderPipelineDescriptorSelMaxTotalThreadgroupsPerMeshGrid                          = objc.RegisterName("maxTotalThreadgroupsPerMeshGrid")
+	_mTLMeshRenderPipelineDescriptorSelSetMaxTotalThreadgroupsPerMeshGrid                       = objc.RegisterName("setMaxTotalThreadgroupsPerMeshGrid:")
+	_mTLMeshRenderPipelineDescriptorSelObjectBuffers                                            = objc.RegisterName("objectBuffers")
+	_mTLMeshRenderPipelineDescriptorSelMeshBuffers                                              = objc.RegisterName("meshBuffers")
+	_mTLMeshRenderPipelineDescriptorSelFragmentBuffers                                          = objc.RegisterName("fragmentBuffers")
+	_mTLMeshRenderPipelineDescriptorSelRasterSampleCount                                        = objc.RegisterName("rasterSampleCount")
+	_mTLMeshRenderPipelineDescriptorSelSetRasterSampleCount                                     = objc.RegisterName("setRasterSampleCount:")
+	_mTLMeshRenderPipelineDescriptorSelIsAlphaToCoverageEnabled                                 = objc.RegisterName("isAlphaToCoverageEnabled")
+	_mTLMeshRenderPipelineDescriptorSelSetAlphaToCoverageEnabled                                = objc.RegisterName("setAlphaToCoverageEnabled:")
+	_mTLMeshRenderPipelineDescriptorSelIsAlphaToOneEnabled                                      = objc.RegisterName("isAlphaToOneEnabled")
+	_mTLMeshRenderPipelineDescriptorSelSetAlphaToOneEnabled                                     = objc.RegisterName("setAlphaToOneEnabled:")
+	_mTLMeshRenderPipelineDescriptorSelIsRasterizationEnabled                                   = objc.RegisterName("isRasterizationEnabled")
+	_mTLMeshRenderPipelineDescriptorSelSetRasterizationEnabled                                  = objc.RegisterName("setRasterizationEnabled:")
+	_mTLMeshRenderPipelineDescriptorSelMaxVertexAmplificationCount                              = objc.RegisterName("maxVertexAmplificationCount")
+	_mTLMeshRenderPipelineDescriptorSelSetMaxVertexAmplificationCount                           = objc.RegisterName("setMaxVertexAmplificationCount:")
+	_mTLMeshRenderPipelineDescriptorSelColorAttachments                                         = objc.RegisterName("colorAttachments")
+	_mTLMeshRenderPipelineDescriptorSelDepthAttachmentPixelFormat                               = objc.RegisterName("depthAttachmentPixelFormat")
+	_mTLMeshRenderPipelineDescriptorSelSetDepthAttachmentPixelFormat                            = objc.RegisterName("setDepthAttachmentPixelFormat:")
+	_mTLMeshRenderPipelineDescriptorSelStencilAttachmentPixelFormat                             = objc.RegisterName("stencilAttachmentPixelFormat")
+	_mTLMeshRenderPipelineDescriptorSelSetStencilAttachmentPixelFormat                          = objc.RegisterName("setStencilAttachmentPixelFormat:")
+	_mTLMeshRenderPipelineDescriptorSelSupportIndirectCommandBuffers                            = objc.RegisterName("supportIndirectCommandBuffers")
+	_mTLMeshRenderPipelineDescriptorSelSetSupportIndirectCommandBuffers                         = objc.RegisterName("setSupportIndirectCommandBuffers:")
+	_mTLMeshRenderPipelineDescriptorSelBinaryArchives                                           = objc.RegisterName("binaryArchives")
+	_mTLMeshRenderPipelineDescriptorSelSetBinaryArchives                                        = objc.RegisterName("setBinaryArchives:")
+	_mTLMeshRenderPipelineDescriptorSelObjectLinkedFunctions                                    = objc.RegisterName("objectLinkedFunctions")
+	_mTLMeshRenderPipelineDescriptorSelSetObjectLinkedFunctions                                 = objc.RegisterName("setObjectLinkedFunctions:")
+	_mTLMeshRenderPipelineDescriptorSelMeshLinkedFunctions                                      = objc.RegisterName("meshLinkedFunctions")
+	_mTLMeshRenderPipelineDescriptorSelSetMeshLinkedFunctions                                   = objc.RegisterName("setMeshLinkedFunctions:")
+	_mTLMeshRenderPipelineDescriptorSelFragmentLinkedFunctions                                  = objc.RegisterName("fragmentLinkedFunctions")
+	_mTLMeshRenderPipelineDescriptorSelSetFragmentLinkedFunctions                               = objc.RegisterName("setFragmentLinkedFunctions:")
+	_mTLMeshRenderPipelineDescriptorSelShaderValidation                                         = objc.RegisterName("shaderValidation")
+	_mTLMeshRenderPipelineDescriptorSelSetShaderValidation                                      = objc.RegisterName("setShaderValidation:")
+	_mTLMeshRenderPipelineDescriptorSelRequiredThreadsPerObjectThreadgroup                      = objc.RegisterName("requiredThreadsPerObjectThreadgroup")
+	_mTLMeshRenderPipelineDescriptorSelSetRequiredThreadsPerObjectThreadgroup                   = objc.RegisterName("setRequiredThreadsPerObjectThreadgroup:")
+	_mTLMeshRenderPipelineDescriptorSelRequiredThreadsPerMeshThreadgroup                        = objc.RegisterName("requiredThreadsPerMeshThreadgroup")
+	_mTLMeshRenderPipelineDescriptorSelSetRequiredThreadsPerMeshThreadgroup                     = objc.RegisterName("setRequiredThreadsPerMeshThreadgroup:")
 )
 
 func MTLMeshRenderPipelineDescriptorFromID(id objc.ID) *MTLMeshRenderPipelineDescriptor {
@@ -92,7 +92,9 @@ func (o *MTLMeshRenderPipelineDescriptor) Reset() {
 // @property label @discussion A name or description provided by the application that will be displayed in debugging tools. The default value is nil.
 func (o *MTLMeshRenderPipelineDescriptor) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLMeshRenderPipelineDescriptorSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -193,21 +195,27 @@ func (o *MTLMeshRenderPipelineDescriptor) SetMaxTotalThreadgroupsPerMeshGrid(max
 // @property objectBuffers @abstract Provide mutability information on the buffers used by objectFunction. @discussion Specifying these values is optional; it may be used to optimize the shader code.
 func (o *MTLMeshRenderPipelineDescriptor) ObjectBuffers() *MTLPipelineBufferDescriptorArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLMeshRenderPipelineDescriptorSelObjectBuffers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLPipelineBufferDescriptorArrayFromID(_ret)
 }
 
 // @property meshBuffers @abstract Provide mutability information on the buffers used by meshFunction. @discussion Specifying these values is optional; it may be used to optimize the shader code.
 func (o *MTLMeshRenderPipelineDescriptor) MeshBuffers() *MTLPipelineBufferDescriptorArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLMeshRenderPipelineDescriptorSelMeshBuffers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLPipelineBufferDescriptorArrayFromID(_ret)
 }
 
 // @property fragmentBuffers @abstract Provide mutability information on the buffers used by fragmentFunction. @discussion Specifying these values is optional; it may be used to optimize the shader code.
 func (o *MTLMeshRenderPipelineDescriptor) FragmentBuffers() *MTLPipelineBufferDescriptorArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLMeshRenderPipelineDescriptorSelFragmentBuffers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLPipelineBufferDescriptorArrayFromID(_ret)
 }
 
@@ -264,7 +272,9 @@ func (o *MTLMeshRenderPipelineDescriptor) SetMaxVertexAmplificationCount(maxVert
 // @property colorAttachments @abstract Describes the color attachments of the render pass in which this pipeline will be used.
 func (o *MTLMeshRenderPipelineDescriptor) ColorAttachments() *MTLRenderPipelineColorAttachmentDescriptorArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLMeshRenderPipelineDescriptorSelColorAttachments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLRenderPipelineColorAttachmentDescriptorArrayFromID(_ret)
 }
 
@@ -301,7 +311,9 @@ func (o *MTLMeshRenderPipelineDescriptor) SetSupportIndirectCommandBuffers(suppo
 // @property binaryArchives @abstract The set of MTLBinaryArchive to search for compiled code when creating the pipeline state. @discussion Accelerate pipeline state creation by providing archives of compiled code such that no compilation needs to happen on the fast path. @see MTLBinaryArchive
 func (o *MTLMeshRenderPipelineDescriptor) BinaryArchives() *foundation.NSArray[MTLBinaryArchive] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLMeshRenderPipelineDescriptorSelBinaryArchives)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTLBinaryArchive](_ret)
 }
 
@@ -312,7 +324,9 @@ func (o *MTLMeshRenderPipelineDescriptor) SetBinaryArchives(binaryArchives *foun
 // @property objectLinkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the object function. @see MTLLinkedFunctions
 func (o *MTLMeshRenderPipelineDescriptor) ObjectLinkedFunctions() *MTLLinkedFunctions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLMeshRenderPipelineDescriptorSelObjectLinkedFunctions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLLinkedFunctionsFromID(_ret)
 }
 
@@ -323,7 +337,9 @@ func (o *MTLMeshRenderPipelineDescriptor) SetObjectLinkedFunctions(objectLinkedF
 // @property meshLinkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the mesh function. @see MTLLinkedFunctions
 func (o *MTLMeshRenderPipelineDescriptor) MeshLinkedFunctions() *MTLLinkedFunctions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLMeshRenderPipelineDescriptorSelMeshLinkedFunctions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLLinkedFunctionsFromID(_ret)
 }
 
@@ -334,7 +350,9 @@ func (o *MTLMeshRenderPipelineDescriptor) SetMeshLinkedFunctions(meshLinkedFunct
 // @property fragmentLinkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the fragment function. @see MTLLinkedFunctions
 func (o *MTLMeshRenderPipelineDescriptor) FragmentLinkedFunctions() *MTLLinkedFunctions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLMeshRenderPipelineDescriptorSelFragmentLinkedFunctions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLLinkedFunctionsFromID(_ret)
 }
 
@@ -371,4 +389,3 @@ func (o *MTLMeshRenderPipelineDescriptor) RequiredThreadsPerMeshThreadgroup() MT
 func (o *MTLMeshRenderPipelineDescriptor) SetRequiredThreadsPerMeshThreadgroup(requiredThreadsPerMeshThreadgroup MTLSize) {
 	o.Ptr().Send(_mTLMeshRenderPipelineDescriptorSelSetRequiredThreadsPerMeshThreadgroup, requiredThreadsPerMeshThreadgroup)
 }
-

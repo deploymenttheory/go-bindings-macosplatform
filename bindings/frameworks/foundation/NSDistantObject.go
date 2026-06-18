@@ -18,14 +18,14 @@ type NSDistantObject struct {
 }
 
 var (
-	_clsNSDistantObject = _objcClass("NSDistantObject")
+	_clsNSDistantObject                          = _objcClass("NSDistantObject")
 	_nSDistantObjectSelProxyWithTargetConnection = objc.RegisterName("proxyWithTarget:connection:")
-	_nSDistantObjectSelInitWithTargetConnection = objc.RegisterName("initWithTarget:connection:")
-	_nSDistantObjectSelProxyWithLocalConnection = objc.RegisterName("proxyWithLocal:connection:")
-	_nSDistantObjectSelInitWithLocalConnection = objc.RegisterName("initWithLocal:connection:")
-	_nSDistantObjectSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSDistantObjectSelSetProtocolForProxy = objc.RegisterName("setProtocolForProxy:")
-	_nSDistantObjectSelConnectionForProxy = objc.RegisterName("connectionForProxy")
+	_nSDistantObjectSelInitWithTargetConnection  = objc.RegisterName("initWithTarget:connection:")
+	_nSDistantObjectSelProxyWithLocalConnection  = objc.RegisterName("proxyWithLocal:connection:")
+	_nSDistantObjectSelInitWithLocalConnection   = objc.RegisterName("initWithLocal:connection:")
+	_nSDistantObjectSelInitWithCoder             = objc.RegisterName("initWithCoder:")
+	_nSDistantObjectSelSetProtocolForProxy       = objc.RegisterName("setProtocolForProxy:")
+	_nSDistantObjectSelConnectionForProxy        = objc.RegisterName("connectionForProxy")
 )
 
 func NSDistantObjectFromID(id objc.ID) *NSDistantObject {
@@ -45,7 +45,9 @@ func NSDistantObjectProxyWithTargetConnection(target objc.ID, connection *NSConn
 
 func (o *NSDistantObject) InitWithTargetConnection(target objc.ID, connection *NSConnection) *NSDistantObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDistantObjectSelInitWithTargetConnection, target, connection.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDistantObjectFromID(_ret)
 }
 
@@ -56,13 +58,17 @@ func NSDistantObjectProxyWithLocalConnection(target objc.ID, connection *NSConne
 
 func (o *NSDistantObject) InitWithLocalConnection(target objc.ID, connection *NSConnection) *NSDistantObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDistantObjectSelInitWithLocalConnection, target, connection.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDistantObjectFromID(_ret)
 }
 
 func (o *NSDistantObject) InitWithCoder(inCoder *NSCoder) *NSDistantObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDistantObjectSelInitWithCoder, inCoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDistantObjectFromID(_ret)
 }
 
@@ -72,7 +78,8 @@ func (o *NSDistantObject) SetProtocolForProxy(proto unsafe.Pointer) {
 
 func (o *NSDistantObject) ConnectionForProxy() *NSConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDistantObjectSelConnectionForProxy)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSConnectionFromID(_ret)
 }
-

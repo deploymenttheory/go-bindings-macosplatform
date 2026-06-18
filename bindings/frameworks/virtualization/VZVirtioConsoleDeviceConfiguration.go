@@ -15,8 +15,8 @@ type VZVirtioConsoleDeviceConfiguration struct {
 }
 
 var (
-	_clsVZVirtioConsoleDeviceConfiguration = _objcClass("VZVirtioConsoleDeviceConfiguration")
-	_vZVirtioConsoleDeviceConfigurationSelInit = objc.RegisterName("init")
+	_clsVZVirtioConsoleDeviceConfiguration      = _objcClass("VZVirtioConsoleDeviceConfiguration")
+	_vZVirtioConsoleDeviceConfigurationSelInit  = objc.RegisterName("init")
 	_vZVirtioConsoleDeviceConfigurationSelPorts = objc.RegisterName("ports")
 )
 
@@ -32,13 +32,16 @@ func VZVirtioConsoleDeviceConfigurationFromID(id objc.ID) *VZVirtioConsoleDevice
 
 func (o *VZVirtioConsoleDeviceConfiguration) Init() *VZVirtioConsoleDeviceConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioConsoleDeviceConfigurationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZVirtioConsoleDeviceConfigurationFromID(_ret)
 }
 
 func (o *VZVirtioConsoleDeviceConfiguration) Ports() *VZVirtioConsolePortConfigurationArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioConsoleDeviceConfigurationSelPorts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZVirtioConsolePortConfigurationArrayFromID(_ret)
 }
-

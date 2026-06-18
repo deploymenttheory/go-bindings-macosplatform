@@ -16,10 +16,10 @@ type WKSecurityOrigin struct {
 }
 
 var (
-	_clsWKSecurityOrigin = _objcClass("WKSecurityOrigin")
+	_clsWKSecurityOrigin         = _objcClass("WKSecurityOrigin")
 	_wKSecurityOriginSelProtocol = objc.RegisterName("protocol")
-	_wKSecurityOriginSelHost = objc.RegisterName("host")
-	_wKSecurityOriginSelPort = objc.RegisterName("port")
+	_wKSecurityOriginSelHost     = objc.RegisterName("host")
+	_wKSecurityOriginSelPort     = objc.RegisterName("port")
 )
 
 func WKSecurityOriginFromID(id objc.ID) *WKSecurityOrigin {
@@ -35,14 +35,18 @@ func WKSecurityOriginFromID(id objc.ID) *WKSecurityOrigin {
 // @abstract The security origin's protocol.
 func (o *WKSecurityOrigin) Protocol() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKSecurityOriginSelProtocol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract The security origin's host.
 func (o *WKSecurityOrigin) Host() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKSecurityOriginSelHost)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -51,4 +55,3 @@ func (o *WKSecurityOrigin) Port() int {
 	_ret := objc.Send[int](o.Ptr(), _wKSecurityOriginSelPort)
 	return _ret
 }
-

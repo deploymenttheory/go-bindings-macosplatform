@@ -35,7 +35,9 @@ func NewPointingDeviceConfiguration() *PointingDeviceConfiguration {
 	return &PointingDeviceConfiguration{inner: raw.VZPointingDeviceConfigurationFromID(_id)}
 }
 
-func (x *PointingDeviceConfiguration) asPointingDeviceConfiguration() *raw.VZPointingDeviceConfiguration { return x.inner }
+func (x *PointingDeviceConfiguration) asPointingDeviceConfiguration() *raw.VZPointingDeviceConfiguration {
+	return x.inner
+}
 
 // PointingDeviceConfigurationable is the interface implemented by [PointingDeviceConfiguration], for mocking and DI.
 type PointingDeviceConfigurationable interface {
@@ -43,4 +45,3 @@ type PointingDeviceConfigurationable interface {
 }
 
 var _ PointingDeviceConfigurationable = (*PointingDeviceConfiguration)(nil)
-

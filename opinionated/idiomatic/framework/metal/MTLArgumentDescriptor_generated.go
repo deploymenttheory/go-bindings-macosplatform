@@ -155,4 +155,3 @@ type ArgumentDescriptorable interface {
 }
 
 var _ ArgumentDescriptorable = (*ArgumentDescriptor)(nil)
-

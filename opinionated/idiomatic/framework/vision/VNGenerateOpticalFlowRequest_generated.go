@@ -108,11 +108,17 @@ func (x *GenerateOpticalFlowRequest) SetKeepNetworkOutput(keepNetworkOutput bool
 	x.inner.SetKeepNetworkOutput(keepNetworkOutput)
 }
 
-func (x *GenerateOpticalFlowRequest) asTargetedImageRequest() *raw.VNTargetedImageRequest { return &x.inner.VNTargetedImageRequest }
+func (x *GenerateOpticalFlowRequest) asTargetedImageRequest() *raw.VNTargetedImageRequest {
+	return &x.inner.VNTargetedImageRequest
+}
 
-func (x *GenerateOpticalFlowRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNTargetedImageRequest.VNImageBasedRequest }
+func (x *GenerateOpticalFlowRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNTargetedImageRequest.VNImageBasedRequest
+}
 
-func (x *GenerateOpticalFlowRequest) asRequest() *raw.VNRequest { return &x.inner.VNTargetedImageRequest.VNImageBasedRequest.VNRequest }
+func (x *GenerateOpticalFlowRequest) asRequest() *raw.VNRequest {
+	return &x.inner.VNTargetedImageRequest.VNImageBasedRequest.VNRequest
+}
 
 // GenerateOpticalFlowRequestable is the interface implemented by [GenerateOpticalFlowRequest], for mocking and DI.
 type GenerateOpticalFlowRequestable interface {
@@ -133,4 +139,3 @@ type GenerateOpticalFlowRequestable interface {
 }
 
 var _ GenerateOpticalFlowRequestable = (*GenerateOpticalFlowRequest)(nil)
-

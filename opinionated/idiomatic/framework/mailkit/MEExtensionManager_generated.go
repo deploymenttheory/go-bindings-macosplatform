@@ -41,4 +41,3 @@ type ExtensionManagerable interface {
 }
 
 var _ ExtensionManagerable = (*ExtensionManager)(nil)
-

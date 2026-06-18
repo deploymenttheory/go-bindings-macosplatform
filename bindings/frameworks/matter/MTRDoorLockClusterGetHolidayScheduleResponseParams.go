@@ -18,20 +18,20 @@ type MTRDoorLockClusterGetHolidayScheduleResponseParams struct {
 }
 
 var (
-	_clsMTRDoorLockClusterGetHolidayScheduleResponseParams = _objcClass("MTRDoorLockClusterGetHolidayScheduleResponseParams")
+	_clsMTRDoorLockClusterGetHolidayScheduleResponseParams                           = _objcClass("MTRDoorLockClusterGetHolidayScheduleResponseParams")
 	_mTRDoorLockClusterGetHolidayScheduleResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRDoorLockClusterGetHolidayScheduleResponseParamsSelHolidayIndex = objc.RegisterName("holidayIndex")
-	_mTRDoorLockClusterGetHolidayScheduleResponseParamsSelSetHolidayIndex = objc.RegisterName("setHolidayIndex:")
-	_mTRDoorLockClusterGetHolidayScheduleResponseParamsSelStatus = objc.RegisterName("status")
-	_mTRDoorLockClusterGetHolidayScheduleResponseParamsSelSetStatus = objc.RegisterName("setStatus:")
-	_mTRDoorLockClusterGetHolidayScheduleResponseParamsSelLocalStartTime = objc.RegisterName("localStartTime")
-	_mTRDoorLockClusterGetHolidayScheduleResponseParamsSelSetLocalStartTime = objc.RegisterName("setLocalStartTime:")
-	_mTRDoorLockClusterGetHolidayScheduleResponseParamsSelLocalEndTime = objc.RegisterName("localEndTime")
-	_mTRDoorLockClusterGetHolidayScheduleResponseParamsSelSetLocalEndTime = objc.RegisterName("setLocalEndTime:")
-	_mTRDoorLockClusterGetHolidayScheduleResponseParamsSelOperatingMode = objc.RegisterName("operatingMode")
-	_mTRDoorLockClusterGetHolidayScheduleResponseParamsSelSetOperatingMode = objc.RegisterName("setOperatingMode:")
-	_mTRDoorLockClusterGetHolidayScheduleResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRDoorLockClusterGetHolidayScheduleResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRDoorLockClusterGetHolidayScheduleResponseParamsSelHolidayIndex               = objc.RegisterName("holidayIndex")
+	_mTRDoorLockClusterGetHolidayScheduleResponseParamsSelSetHolidayIndex            = objc.RegisterName("setHolidayIndex:")
+	_mTRDoorLockClusterGetHolidayScheduleResponseParamsSelStatus                     = objc.RegisterName("status")
+	_mTRDoorLockClusterGetHolidayScheduleResponseParamsSelSetStatus                  = objc.RegisterName("setStatus:")
+	_mTRDoorLockClusterGetHolidayScheduleResponseParamsSelLocalStartTime             = objc.RegisterName("localStartTime")
+	_mTRDoorLockClusterGetHolidayScheduleResponseParamsSelSetLocalStartTime          = objc.RegisterName("setLocalStartTime:")
+	_mTRDoorLockClusterGetHolidayScheduleResponseParamsSelLocalEndTime               = objc.RegisterName("localEndTime")
+	_mTRDoorLockClusterGetHolidayScheduleResponseParamsSelSetLocalEndTime            = objc.RegisterName("setLocalEndTime:")
+	_mTRDoorLockClusterGetHolidayScheduleResponseParamsSelOperatingMode              = objc.RegisterName("operatingMode")
+	_mTRDoorLockClusterGetHolidayScheduleResponseParamsSelSetOperatingMode           = objc.RegisterName("setOperatingMode:")
+	_mTRDoorLockClusterGetHolidayScheduleResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRDoorLockClusterGetHolidayScheduleResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
 )
 
 func MTRDoorLockClusterGetHolidayScheduleResponseParamsFromID(id objc.ID) *MTRDoorLockClusterGetHolidayScheduleResponseParams {
@@ -48,7 +48,9 @@ func MTRDoorLockClusterGetHolidayScheduleResponseParamsFromID(id objc.ID) *MTRDo
 func (o *MTRDoorLockClusterGetHolidayScheduleResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRDoorLockClusterGetHolidayScheduleResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterGetHolidayScheduleResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -57,7 +59,9 @@ func (o *MTRDoorLockClusterGetHolidayScheduleResponseParams) InitWithResponseVal
 
 func (o *MTRDoorLockClusterGetHolidayScheduleResponseParams) HolidayIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterGetHolidayScheduleResponseParamsSelHolidayIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -67,7 +71,9 @@ func (o *MTRDoorLockClusterGetHolidayScheduleResponseParams) SetHolidayIndex(hol
 
 func (o *MTRDoorLockClusterGetHolidayScheduleResponseParams) Status() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterGetHolidayScheduleResponseParamsSelStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -77,7 +83,9 @@ func (o *MTRDoorLockClusterGetHolidayScheduleResponseParams) SetStatus(status *f
 
 func (o *MTRDoorLockClusterGetHolidayScheduleResponseParams) LocalStartTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterGetHolidayScheduleResponseParamsSelLocalStartTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -87,7 +95,9 @@ func (o *MTRDoorLockClusterGetHolidayScheduleResponseParams) SetLocalStartTime(l
 
 func (o *MTRDoorLockClusterGetHolidayScheduleResponseParams) LocalEndTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterGetHolidayScheduleResponseParamsSelLocalEndTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -97,7 +107,9 @@ func (o *MTRDoorLockClusterGetHolidayScheduleResponseParams) SetLocalEndTime(loc
 
 func (o *MTRDoorLockClusterGetHolidayScheduleResponseParams) OperatingMode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterGetHolidayScheduleResponseParamsSelOperatingMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -108,11 +120,12 @@ func (o *MTRDoorLockClusterGetHolidayScheduleResponseParams) SetOperatingMode(op
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRDoorLockClusterGetHolidayScheduleResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterGetHolidayScheduleResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDoorLockClusterGetHolidayScheduleResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDoorLockClusterGetHolidayScheduleResponseParamsSelSetTimedInvokeTimeoutMs, timedInvokeTimeoutMs.Ptr())
 }
-

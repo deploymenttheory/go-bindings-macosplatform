@@ -79,4 +79,3 @@ type URLSessionTaskMetricsable interface {
 }
 
 var _ URLSessionTaskMetricsable = (*URLSessionTaskMetrics)(nil)
-

@@ -66,4 +66,3 @@ type SmartCardATRInterfaceGroupable interface {
 }
 
 var _ SmartCardATRInterfaceGroupable = (*SmartCardATRInterfaceGroup)(nil)
-

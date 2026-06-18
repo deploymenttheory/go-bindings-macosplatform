@@ -16,13 +16,13 @@ type NETunnelNetworkSettings struct {
 }
 
 var (
-	_clsNETunnelNetworkSettings = _objcClass("NETunnelNetworkSettings")
+	_clsNETunnelNetworkSettings                            = _objcClass("NETunnelNetworkSettings")
 	_nETunnelNetworkSettingsSelInitWithTunnelRemoteAddress = objc.RegisterName("initWithTunnelRemoteAddress:")
-	_nETunnelNetworkSettingsSelTunnelRemoteAddress = objc.RegisterName("tunnelRemoteAddress")
-	_nETunnelNetworkSettingsSelDNSSettings = objc.RegisterName("DNSSettings")
-	_nETunnelNetworkSettingsSelSetDNSSettings = objc.RegisterName("setDNSSettings:")
-	_nETunnelNetworkSettingsSelProxySettings = objc.RegisterName("proxySettings")
-	_nETunnelNetworkSettingsSelSetProxySettings = objc.RegisterName("setProxySettings:")
+	_nETunnelNetworkSettingsSelTunnelRemoteAddress         = objc.RegisterName("tunnelRemoteAddress")
+	_nETunnelNetworkSettingsSelDNSSettings                 = objc.RegisterName("DNSSettings")
+	_nETunnelNetworkSettingsSelSetDNSSettings              = objc.RegisterName("setDNSSettings:")
+	_nETunnelNetworkSettingsSelProxySettings               = objc.RegisterName("proxySettings")
+	_nETunnelNetworkSettingsSelSetProxySettings            = objc.RegisterName("setProxySettings:")
 )
 
 func NETunnelNetworkSettingsFromID(id objc.ID) *NETunnelNetworkSettings {
@@ -38,21 +38,27 @@ func NETunnelNetworkSettingsFromID(id objc.ID) *NETunnelNetworkSettings {
 // @method initWithTunnelRemoteAddress: @discussion This function initializes a newly-allocated NETunnelNetworkSettings object with a given tunnel remote address. @param address The address of the remote endpoint that is providing the tunnel service.
 func (o *NETunnelNetworkSettings) InitWithTunnelRemoteAddress(address *foundation.NSString) *NETunnelNetworkSettings {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nETunnelNetworkSettingsSelInitWithTunnelRemoteAddress, address.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NETunnelNetworkSettingsFromID(_ret)
 }
 
 // @property tunnelRemoteAddress @discussion A string containing the IP address of the remote endpoint that is providing the tunnel service.
 func (o *NETunnelNetworkSettings) TunnelRemoteAddress() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nETunnelNetworkSettingsSelTunnelRemoteAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property DNSSettings @discussion An NEDNSSettings object that contains the desired tunnel DNS settings.
 func (o *NETunnelNetworkSettings) DNSSettings() *NEDNSSettings {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nETunnelNetworkSettingsSelDNSSettings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEDNSSettingsFromID(_ret)
 }
 
@@ -63,11 +69,12 @@ func (o *NETunnelNetworkSettings) SetDNSSettings(dNSSettings *NEDNSSettings) {
 // @property proxySettings @discussion An NEProxySettings object that contains the desired tunnel proxy settings.
 func (o *NETunnelNetworkSettings) ProxySettings() *NEProxySettings {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nETunnelNetworkSettingsSelProxySettings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEProxySettingsFromID(_ret)
 }
 
 func (o *NETunnelNetworkSettings) SetProxySettings(proxySettings *NEProxySettings) {
 	o.Ptr().Send(_nETunnelNetworkSettingsSelSetProxySettings, proxySettings.Ptr())
 }
-

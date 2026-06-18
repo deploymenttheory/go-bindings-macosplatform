@@ -16,8 +16,8 @@ type MDLTransformRotateOp struct {
 }
 
 var (
-	_clsMDLTransformRotateOp = _objcClass("MDLTransformRotateOp")
-	_mDLTransformRotateOpSelName = objc.RegisterName("name")
+	_clsMDLTransformRotateOp              = _objcClass("MDLTransformRotateOp")
+	_mDLTransformRotateOpSelName          = objc.RegisterName("name")
 	_mDLTransformRotateOpSelAnimatedValue = objc.RegisterName("animatedValue")
 )
 
@@ -33,13 +33,16 @@ func MDLTransformRotateOpFromID(id objc.ID) *MDLTransformRotateOp {
 
 func (o *MDLTransformRotateOp) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTransformRotateOpSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MDLTransformRotateOp) AnimatedValue() *MDLAnimatedVector3 {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTransformRotateOpSelAnimatedValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLAnimatedVector3FromID(_ret)
 }
-

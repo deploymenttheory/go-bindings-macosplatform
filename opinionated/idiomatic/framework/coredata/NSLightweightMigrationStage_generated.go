@@ -55,7 +55,9 @@ func (x *LightweightMigrationStage) VersionChecksums() []string {
 	})
 }
 
-func (x *LightweightMigrationStage) asMigrationStage() *raw.NSMigrationStage { return &x.inner.NSMigrationStage }
+func (x *LightweightMigrationStage) asMigrationStage() *raw.NSMigrationStage {
+	return &x.inner.NSMigrationStage
+}
 
 // LightweightMigrationStageable is the interface implemented by [LightweightMigrationStage], for mocking and DI.
 type LightweightMigrationStageable interface {
@@ -65,4 +67,3 @@ type LightweightMigrationStageable interface {
 }
 
 var _ LightweightMigrationStageable = (*LightweightMigrationStage)(nil)
-

@@ -79,4 +79,3 @@ type SampleQueryable interface {
 }
 
 var _ SampleQueryable = (*SampleQuery)(nil)
-

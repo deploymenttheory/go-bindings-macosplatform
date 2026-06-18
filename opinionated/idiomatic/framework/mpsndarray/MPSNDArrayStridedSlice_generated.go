@@ -53,11 +53,17 @@ func (x *ArrayStridedSlice) SetStrides(strides raw.MPSNDArrayOffsets) {
 	x.inner.SetStrides(strides)
 }
 
-func (x *ArrayStridedSlice) asArrayUnaryKernel() *raw.MPSNDArrayUnaryKernel { return &x.inner.MPSNDArrayUnaryKernel }
+func (x *ArrayStridedSlice) asArrayUnaryKernel() *raw.MPSNDArrayUnaryKernel {
+	return &x.inner.MPSNDArrayUnaryKernel
+}
 
-func (x *ArrayStridedSlice) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel { return &x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel }
+func (x *ArrayStridedSlice) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel {
+	return &x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel
+}
 
-func (x *ArrayStridedSlice) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
+func (x *ArrayStridedSlice) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase {
+	return &x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase
+}
 
 // ArrayStridedSliceable is the interface implemented by [ArrayStridedSlice], for mocking and DI.
 type ArrayStridedSliceable interface {
@@ -68,4 +74,3 @@ type ArrayStridedSliceable interface {
 }
 
 var _ ArrayStridedSliceable = (*ArrayStridedSlice)(nil)
-

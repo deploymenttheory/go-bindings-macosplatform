@@ -102,9 +102,13 @@ func (x *CNNNeuronReLUN) WithLabel(label string) *CNNNeuronReLUN {
 
 func (x *CNNNeuronReLUN) asCNNNeuron() *mpsneuralnetwork.MPSCNNNeuron { return &x.inner.MPSCNNNeuron }
 
-func (x *CNNNeuronReLUN) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel }
+func (x *CNNNeuronReLUN) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNNeuron.MPSCNNKernel
+}
 
-func (x *CNNNeuronReLUN) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel }
+func (x *CNNNeuronReLUN) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel
+}
 
 // CNNNeuronReLUNable is the interface implemented by [CNNNeuronReLUN], for mocking and DI.
 type CNNNeuronReLUNable interface {
@@ -122,4 +126,3 @@ type CNNNeuronReLUNable interface {
 }
 
 var _ CNNNeuronReLUNable = (*CNNNeuronReLUN)(nil)
-

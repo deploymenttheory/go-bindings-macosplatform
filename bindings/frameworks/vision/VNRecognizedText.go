@@ -18,10 +18,10 @@ type VNRecognizedText struct {
 }
 
 var (
-	_clsVNRecognizedText = _objcClass("VNRecognizedText")
+	_clsVNRecognizedText                         = _objcClass("VNRecognizedText")
 	_vNRecognizedTextSelBoundingBoxForRangeError = objc.RegisterName("boundingBoxForRange:error:")
-	_vNRecognizedTextSelString = objc.RegisterName("string")
-	_vNRecognizedTextSelConfidence = objc.RegisterName("confidence")
+	_vNRecognizedTextSelString                   = objc.RegisterName("string")
+	_vNRecognizedTextSelConfidence               = objc.RegisterName("confidence")
 )
 
 func VNRecognizedTextFromID(id objc.ID) *VNRecognizedText {
@@ -38,7 +38,9 @@ func VNRecognizedTextFromID(id objc.ID) *VNRecognizedText {
 func (o *VNRecognizedText) BoundingBoxForRangeError(range_ foundation.NSRange) (*VNRectangleObservation, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNRecognizedTextSelBoundingBoxForRangeError, range_, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -48,7 +50,9 @@ func (o *VNRecognizedText) BoundingBoxForRangeError(range_ foundation.NSRange) (
 // @brief        Field that contains recognized text. @discussion   This is the top candidate of the recognized text.
 func (o *VNRecognizedText) String() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNRecognizedTextSelString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -57,4 +61,3 @@ func (o *VNRecognizedText) Confidence() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _vNRecognizedTextSelConfidence)
 	return _ret
 }
-

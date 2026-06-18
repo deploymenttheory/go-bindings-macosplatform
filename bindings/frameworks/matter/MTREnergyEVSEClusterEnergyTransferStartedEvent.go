@@ -16,12 +16,12 @@ type MTREnergyEVSEClusterEnergyTransferStartedEvent struct {
 }
 
 var (
-	_clsMTREnergyEVSEClusterEnergyTransferStartedEvent = _objcClass("MTREnergyEVSEClusterEnergyTransferStartedEvent")
-	_mTREnergyEVSEClusterEnergyTransferStartedEventSelSessionID = objc.RegisterName("sessionID")
-	_mTREnergyEVSEClusterEnergyTransferStartedEventSelSetSessionID = objc.RegisterName("setSessionID:")
-	_mTREnergyEVSEClusterEnergyTransferStartedEventSelState = objc.RegisterName("state")
-	_mTREnergyEVSEClusterEnergyTransferStartedEventSelSetState = objc.RegisterName("setState:")
-	_mTREnergyEVSEClusterEnergyTransferStartedEventSelMaximumCurrent = objc.RegisterName("maximumCurrent")
+	_clsMTREnergyEVSEClusterEnergyTransferStartedEvent                  = _objcClass("MTREnergyEVSEClusterEnergyTransferStartedEvent")
+	_mTREnergyEVSEClusterEnergyTransferStartedEventSelSessionID         = objc.RegisterName("sessionID")
+	_mTREnergyEVSEClusterEnergyTransferStartedEventSelSetSessionID      = objc.RegisterName("setSessionID:")
+	_mTREnergyEVSEClusterEnergyTransferStartedEventSelState             = objc.RegisterName("state")
+	_mTREnergyEVSEClusterEnergyTransferStartedEventSelSetState          = objc.RegisterName("setState:")
+	_mTREnergyEVSEClusterEnergyTransferStartedEventSelMaximumCurrent    = objc.RegisterName("maximumCurrent")
 	_mTREnergyEVSEClusterEnergyTransferStartedEventSelSetMaximumCurrent = objc.RegisterName("setMaximumCurrent:")
 )
 
@@ -37,7 +37,9 @@ func MTREnergyEVSEClusterEnergyTransferStartedEventFromID(id objc.ID) *MTREnergy
 
 func (o *MTREnergyEVSEClusterEnergyTransferStartedEvent) SessionID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREnergyEVSEClusterEnergyTransferStartedEventSelSessionID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTREnergyEVSEClusterEnergyTransferStartedEvent) SetSessionID(sessionID 
 
 func (o *MTREnergyEVSEClusterEnergyTransferStartedEvent) State() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREnergyEVSEClusterEnergyTransferStartedEventSelState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *MTREnergyEVSEClusterEnergyTransferStartedEvent) SetState(state *foundat
 
 func (o *MTREnergyEVSEClusterEnergyTransferStartedEvent) MaximumCurrent() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREnergyEVSEClusterEnergyTransferStartedEventSelMaximumCurrent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTREnergyEVSEClusterEnergyTransferStartedEvent) SetMaximumCurrent(maximumCurrent *foundation.NSNumber) {
 	o.Ptr().Send(_mTREnergyEVSEClusterEnergyTransferStartedEventSelSetMaximumCurrent, maximumCurrent.Ptr())
 }
-

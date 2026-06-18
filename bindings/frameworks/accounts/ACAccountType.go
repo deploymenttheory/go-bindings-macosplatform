@@ -17,10 +17,10 @@ type ACAccountType struct {
 }
 
 var (
-	_clsACAccountType = _objcClass("ACAccountType")
+	_clsACAccountType                       = _objcClass("ACAccountType")
 	_aCAccountTypeSelAccountTypeDescription = objc.RegisterName("accountTypeDescription")
-	_aCAccountTypeSelIdentifier = objc.RegisterName("identifier")
-	_aCAccountTypeSelAccessGranted = objc.RegisterName("accessGranted")
+	_aCAccountTypeSelIdentifier             = objc.RegisterName("identifier")
+	_aCAccountTypeSelAccessGranted          = objc.RegisterName("accessGranted")
 )
 
 func ACAccountTypeFromID(id objc.ID) *ACAccountType {
@@ -35,13 +35,17 @@ func ACAccountTypeFromID(id objc.ID) *ACAccountType {
 
 func (o *ACAccountType) AccountTypeDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aCAccountTypeSelAccountTypeDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *ACAccountType) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aCAccountTypeSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -49,4 +53,3 @@ func (o *ACAccountType) AccessGranted() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aCAccountTypeSelAccessGranted)
 	return _ret
 }
-

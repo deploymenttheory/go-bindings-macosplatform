@@ -18,19 +18,19 @@ type MLCInferenceGraph struct {
 }
 
 var (
-	_clsMLCInferenceGraph = _objcClass("MLCInferenceGraph")
-	_mLCInferenceGraphSelGraphWithGraphObjects = objc.RegisterName("graphWithGraphObjects:")
-	_mLCInferenceGraphSelAddInputs = objc.RegisterName("addInputs:")
-	_mLCInferenceGraphSelAddInputsLossLabelsLossLabelWeights = objc.RegisterName("addInputs:lossLabels:lossLabelWeights:")
-	_mLCInferenceGraphSelAddOutputs = objc.RegisterName("addOutputs:")
-	_mLCInferenceGraphSelCompileWithOptionsDevice = objc.RegisterName("compileWithOptions:device:")
-	_mLCInferenceGraphSelCompileWithOptionsDeviceInputTensorsInputTensorsData = objc.RegisterName("compileWithOptions:device:inputTensors:inputTensorsData:")
-	_mLCInferenceGraphSelLinkWithGraphs = objc.RegisterName("linkWithGraphs:")
-	_mLCInferenceGraphSelExecuteWithInputsDataBatchSizeOptionsCompletionHandler = objc.RegisterName("executeWithInputsData:batchSize:options:completionHandler:")
-	_mLCInferenceGraphSelExecuteWithInputsDataOutputsDataBatchSizeOptionsCompletionHandler = objc.RegisterName("executeWithInputsData:outputsData:batchSize:options:completionHandler:")
-	_mLCInferenceGraphSelExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler = objc.RegisterName("executeWithInputsData:lossLabelsData:lossLabelWeightsData:batchSize:options:completionHandler:")
+	_clsMLCInferenceGraph                                                                                                    = _objcClass("MLCInferenceGraph")
+	_mLCInferenceGraphSelGraphWithGraphObjects                                                                               = objc.RegisterName("graphWithGraphObjects:")
+	_mLCInferenceGraphSelAddInputs                                                                                           = objc.RegisterName("addInputs:")
+	_mLCInferenceGraphSelAddInputsLossLabelsLossLabelWeights                                                                 = objc.RegisterName("addInputs:lossLabels:lossLabelWeights:")
+	_mLCInferenceGraphSelAddOutputs                                                                                          = objc.RegisterName("addOutputs:")
+	_mLCInferenceGraphSelCompileWithOptionsDevice                                                                            = objc.RegisterName("compileWithOptions:device:")
+	_mLCInferenceGraphSelCompileWithOptionsDeviceInputTensorsInputTensorsData                                                = objc.RegisterName("compileWithOptions:device:inputTensors:inputTensorsData:")
+	_mLCInferenceGraphSelLinkWithGraphs                                                                                      = objc.RegisterName("linkWithGraphs:")
+	_mLCInferenceGraphSelExecuteWithInputsDataBatchSizeOptionsCompletionHandler                                              = objc.RegisterName("executeWithInputsData:batchSize:options:completionHandler:")
+	_mLCInferenceGraphSelExecuteWithInputsDataOutputsDataBatchSizeOptionsCompletionHandler                                   = objc.RegisterName("executeWithInputsData:outputsData:batchSize:options:completionHandler:")
+	_mLCInferenceGraphSelExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler            = objc.RegisterName("executeWithInputsData:lossLabelsData:lossLabelWeightsData:batchSize:options:completionHandler:")
 	_mLCInferenceGraphSelExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler = objc.RegisterName("executeWithInputsData:lossLabelsData:lossLabelWeightsData:outputsData:batchSize:options:completionHandler:")
-	_mLCInferenceGraphSelDeviceMemorySize = objc.RegisterName("deviceMemorySize")
+	_mLCInferenceGraphSelDeviceMemorySize                                                                                    = objc.RegisterName("deviceMemorySize")
 )
 
 func MLCInferenceGraphFromID(id objc.ID) *MLCInferenceGraph {
@@ -46,7 +46,9 @@ func MLCInferenceGraphFromID(id objc.ID) *MLCInferenceGraph {
 // @abstract   Create an inference graph @param      graphObjects    The layers from these graph objects will be added to the training graph @return     A new inference graph object
 func MLCInferenceGraphGraphWithGraphObjects(graphObjects *foundation.NSArray[*MLCGraph]) *MLCInferenceGraph {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCInferenceGraph), _mLCInferenceGraphSelGraphWithGraphObjects, graphObjects.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCInferenceGraphFromID(_ret)
 }
 
@@ -155,4 +157,3 @@ func (o *MLCInferenceGraph) DeviceMemorySize() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mLCInferenceGraphSelDeviceMemorySize)
 	return _ret
 }
-

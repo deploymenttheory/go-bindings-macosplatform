@@ -78,4 +78,3 @@ type VerifiableClinicalRecordQueryable interface {
 }
 
 var _ VerifiableClinicalRecordQueryable = (*VerifiableClinicalRecordQuery)(nil)
-

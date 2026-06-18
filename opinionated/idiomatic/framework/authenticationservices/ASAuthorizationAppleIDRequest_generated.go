@@ -51,7 +51,9 @@ func (x *AuthorizationAppleIDRequest) WithRequestedScopes(items ...*foundation.N
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -92,9 +94,13 @@ func (x *AuthorizationAppleIDRequest) SetUser(user string) {
 	x.inner.SetUser(foundation.NSStringStringWithUTF8String(user))
 }
 
-func (x *AuthorizationAppleIDRequest) asAuthorizationOpenIDRequest() *raw.ASAuthorizationOpenIDRequest { return &x.inner.ASAuthorizationOpenIDRequest }
+func (x *AuthorizationAppleIDRequest) asAuthorizationOpenIDRequest() *raw.ASAuthorizationOpenIDRequest {
+	return &x.inner.ASAuthorizationOpenIDRequest
+}
 
-func (x *AuthorizationAppleIDRequest) asAuthorizationRequest() *raw.ASAuthorizationRequest { return &x.inner.ASAuthorizationOpenIDRequest.ASAuthorizationRequest }
+func (x *AuthorizationAppleIDRequest) asAuthorizationRequest() *raw.ASAuthorizationRequest {
+	return &x.inner.ASAuthorizationOpenIDRequest.ASAuthorizationRequest
+}
 
 // AuthorizationAppleIDRequestable is the interface implemented by [AuthorizationAppleIDRequest], for mocking and DI.
 type AuthorizationAppleIDRequestable interface {
@@ -109,4 +115,3 @@ type AuthorizationAppleIDRequestable interface {
 }
 
 var _ AuthorizationAppleIDRequestable = (*AuthorizationAppleIDRequest)(nil)
-

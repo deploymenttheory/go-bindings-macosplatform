@@ -109,4 +109,3 @@ type LogMessageComponentable interface {
 }
 
 var _ LogMessageComponentable = (*LogMessageComponent)(nil)
-

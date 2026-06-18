@@ -16,11 +16,11 @@ type GCPhysicalInputElementCollection[Key purego.AnyObject, Element purego.AnyOb
 }
 
 var (
-	_clsGCPhysicalInputElementCollection = _objcClass("GCPhysicalInputElementCollection")
-	_gCPhysicalInputElementCollectionSelElementForAlias = objc.RegisterName("elementForAlias:")
+	_clsGCPhysicalInputElementCollection                        = _objcClass("GCPhysicalInputElementCollection")
+	_gCPhysicalInputElementCollectionSelElementForAlias         = objc.RegisterName("elementForAlias:")
 	_gCPhysicalInputElementCollectionSelObjectForKeyedSubscript = objc.RegisterName("objectForKeyedSubscript:")
-	_gCPhysicalInputElementCollectionSelElementEnumerator = objc.RegisterName("elementEnumerator")
-	_gCPhysicalInputElementCollectionSelCount = objc.RegisterName("count")
+	_gCPhysicalInputElementCollectionSelElementEnumerator       = objc.RegisterName("elementEnumerator")
+	_gCPhysicalInputElementCollectionSelCount                   = objc.RegisterName("count")
 )
 
 func GCPhysicalInputElementCollectionFromID[Key purego.AnyObject, Element purego.AnyObject](id objc.ID) *GCPhysicalInputElementCollection[Key, Element] {
@@ -46,7 +46,9 @@ func (o *GCPhysicalInputElementCollection[Key, Element]) ObjectForKeyedSubscript
 
 func (o *GCPhysicalInputElementCollection[Key, Element]) ElementEnumerator() *foundation.NSEnumerator[Element] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCPhysicalInputElementCollectionSelElementEnumerator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSEnumeratorFromID[Element](_ret)
 }
 
@@ -55,4 +57,3 @@ func (o *GCPhysicalInputElementCollection[Key, Element]) Count() uint {
 	_ret := objc.Send[uint](o.Ptr(), _gCPhysicalInputElementCollectionSelCount)
 	return _ret
 }
-

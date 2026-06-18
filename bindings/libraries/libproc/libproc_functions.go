@@ -301,4 +301,3 @@ func Proc_udata_info(pid int32, flavor int32, buffer unsafe.Pointer, buffersize 
 	cgo.RaiseIfException(_exc)
 	return _result
 }
-

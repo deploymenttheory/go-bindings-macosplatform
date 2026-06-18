@@ -16,7 +16,9 @@ type MTRColorControlClusterStepSaturationParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRColorControlClusterStepSaturationParams].
-func (x *MTRColorControlClusterStepSaturationParams) Unwrap() *raw.MTRColorControlClusterStepSaturationParams { return x.inner }
+func (x *MTRColorControlClusterStepSaturationParams) Unwrap() *raw.MTRColorControlClusterStepSaturationParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -175,4 +177,3 @@ type MTRColorControlClusterStepSaturationParamsable interface {
 }
 
 var _ MTRColorControlClusterStepSaturationParamsable = (*MTRColorControlClusterStepSaturationParams)(nil)
-

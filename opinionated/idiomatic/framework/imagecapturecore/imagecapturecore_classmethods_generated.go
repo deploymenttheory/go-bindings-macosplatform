@@ -18,4 +18,3 @@ func FingerprintForFileAtURL(url string) string {
 	}
 	return purego.GoString(_r.Ptr())
 }
-

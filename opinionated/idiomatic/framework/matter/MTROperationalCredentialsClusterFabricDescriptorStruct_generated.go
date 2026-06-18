@@ -17,7 +17,9 @@ type MTROperationalCredentialsClusterFabricDescriptorStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTROperationalCredentialsClusterFabricDescriptorStruct].
-func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) Unwrap() *raw.MTROperationalCredentialsClusterFabricDescriptorStruct { return x.inner }
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) Unwrap() *raw.MTROperationalCredentialsClusterFabricDescriptorStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -185,7 +187,9 @@ func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) SetFabricIndex(
 	x.inner.SetFabricIndex(fabricIndex)
 }
 
-func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) asMTROperationalCredentialsClusterFabricDescriptorStruct() *raw.MTROperationalCredentialsClusterFabricDescriptorStruct { return x.inner }
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) asMTROperationalCredentialsClusterFabricDescriptorStruct() *raw.MTROperationalCredentialsClusterFabricDescriptorStruct {
+	return x.inner
+}
 
 // MTROperationalCredentialsClusterFabricDescriptorStructable is the interface implemented by [MTROperationalCredentialsClusterFabricDescriptorStruct], for mocking and DI.
 type MTROperationalCredentialsClusterFabricDescriptorStructable interface {
@@ -220,4 +224,3 @@ type MTROperationalCredentialsClusterFabricDescriptorStructable interface {
 }
 
 var _ MTROperationalCredentialsClusterFabricDescriptorStructable = (*MTROperationalCredentialsClusterFabricDescriptorStruct)(nil)
-

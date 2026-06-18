@@ -197,9 +197,13 @@ func (x *RNNImageInferenceLayer) SetBidirectionalCombineMode(bidirectionalCombin
 	x.inner.SetBidirectionalCombineMode(bidirectionalCombineMode)
 }
 
-func (x *RNNImageInferenceLayer) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNKernel }
+func (x *RNNImageInferenceLayer) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNKernel
+}
 
-func (x *RNNImageInferenceLayer) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
+func (x *RNNImageInferenceLayer) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNKernel.MPSKernel
+}
 
 // RNNImageInferenceLayerable is the interface implemented by [RNNImageInferenceLayer], for mocking and DI.
 type RNNImageInferenceLayerable interface {
@@ -232,4 +236,3 @@ type RNNImageInferenceLayerable interface {
 }
 
 var _ RNNImageInferenceLayerable = (*RNNImageInferenceLayer)(nil)
-

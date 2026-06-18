@@ -26,4 +26,3 @@ func SupportsMultipleParticipants() bool {
 func SupportsConfigurationUpdates() bool {
 	return raw.AEAssessmentSessionSupportsConfigurationUpdates()
 }
-

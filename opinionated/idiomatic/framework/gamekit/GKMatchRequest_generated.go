@@ -69,7 +69,9 @@ func (x *MatchRequest) WithRecipients(items ...PlayerProvider) *MatchRequest {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asPlayer().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asPlayer().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.GKPlayer](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -115,7 +117,9 @@ func (x *MatchRequest) WithPlayersToInvite(items ...*foundation.NSString) *Match
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -343,4 +347,3 @@ type MatchRequestable interface {
 }
 
 var _ MatchRequestable = (*MatchRequest)(nil)
-

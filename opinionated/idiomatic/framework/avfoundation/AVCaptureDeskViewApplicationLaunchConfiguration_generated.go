@@ -16,7 +16,9 @@ type CaptureDeskViewApplicationLaunchConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.AVCaptureDeskViewApplicationLaunchConfiguration].
-func (x *CaptureDeskViewApplicationLaunchConfiguration) Unwrap() *raw.AVCaptureDeskViewApplicationLaunchConfiguration { return x.inner }
+func (x *CaptureDeskViewApplicationLaunchConfiguration) Unwrap() *raw.AVCaptureDeskViewApplicationLaunchConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -80,4 +82,3 @@ type CaptureDeskViewApplicationLaunchConfigurationable interface {
 }
 
 var _ CaptureDeskViewApplicationLaunchConfigurationable = (*CaptureDeskViewApplicationLaunchConfiguration)(nil)
-

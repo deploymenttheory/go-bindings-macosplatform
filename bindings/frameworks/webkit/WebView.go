@@ -18,142 +18,142 @@ type WebView struct {
 }
 
 var (
-	_clsWebView = _objcClass("WebView")
-	_webViewSelCanShowMIMEType = objc.RegisterName("canShowMIMEType:")
-	_webViewSelCanShowMIMETypeAsHTML = objc.RegisterName("canShowMIMETypeAsHTML:")
-	_webViewSelMIMETypesShownAsHTML = objc.RegisterName("MIMETypesShownAsHTML")
-	_webViewSelSetMIMETypesShownAsHTML = objc.RegisterName("setMIMETypesShownAsHTML:")
-	_webViewSelURLFromPasteboard = objc.RegisterName("URLFromPasteboard:")
-	_webViewSelURLTitleFromPasteboard = objc.RegisterName("URLTitleFromPasteboard:")
-	_webViewSelRegisterURLSchemeAsLocal = objc.RegisterName("registerURLSchemeAsLocal:")
-	_webViewSelInitWithFrameFrameNameGroupName = objc.RegisterName("initWithFrame:frameName:groupName:")
-	_webViewSelClose = objc.RegisterName("close")
-	_webViewSelSetMaintainsBackForwardList = objc.RegisterName("setMaintainsBackForwardList:")
-	_webViewSelGoBack = objc.RegisterName("goBack")
-	_webViewSelGoForward = objc.RegisterName("goForward")
-	_webViewSelGoToBackForwardItem = objc.RegisterName("goToBackForwardItem:")
-	_webViewSelUserAgentForURL = objc.RegisterName("userAgentForURL:")
-	_webViewSelStringByEvaluatingJavaScriptFromString = objc.RegisterName("stringByEvaluatingJavaScriptFromString:")
-	_webViewSelSearchForDirectionCaseSensitiveWrap = objc.RegisterName("searchFor:direction:caseSensitive:wrap:")
+	_clsWebView                                                = _objcClass("WebView")
+	_webViewSelCanShowMIMEType                                 = objc.RegisterName("canShowMIMEType:")
+	_webViewSelCanShowMIMETypeAsHTML                           = objc.RegisterName("canShowMIMETypeAsHTML:")
+	_webViewSelMIMETypesShownAsHTML                            = objc.RegisterName("MIMETypesShownAsHTML")
+	_webViewSelSetMIMETypesShownAsHTML                         = objc.RegisterName("setMIMETypesShownAsHTML:")
+	_webViewSelURLFromPasteboard                               = objc.RegisterName("URLFromPasteboard:")
+	_webViewSelURLTitleFromPasteboard                          = objc.RegisterName("URLTitleFromPasteboard:")
+	_webViewSelRegisterURLSchemeAsLocal                        = objc.RegisterName("registerURLSchemeAsLocal:")
+	_webViewSelInitWithFrameFrameNameGroupName                 = objc.RegisterName("initWithFrame:frameName:groupName:")
+	_webViewSelClose                                           = objc.RegisterName("close")
+	_webViewSelSetMaintainsBackForwardList                     = objc.RegisterName("setMaintainsBackForwardList:")
+	_webViewSelGoBack                                          = objc.RegisterName("goBack")
+	_webViewSelGoForward                                       = objc.RegisterName("goForward")
+	_webViewSelGoToBackForwardItem                             = objc.RegisterName("goToBackForwardItem:")
+	_webViewSelUserAgentForURL                                 = objc.RegisterName("userAgentForURL:")
+	_webViewSelStringByEvaluatingJavaScriptFromString          = objc.RegisterName("stringByEvaluatingJavaScriptFromString:")
+	_webViewSelSearchForDirectionCaseSensitiveWrap             = objc.RegisterName("searchFor:direction:caseSensitive:wrap:")
 	_webViewSelRegisterViewClassRepresentationClassForMIMEType = objc.RegisterName("registerViewClass:representationClass:forMIMEType:")
-	_webViewSelElementAtPoint = objc.RegisterName("elementAtPoint:")
-	_webViewSelWriteSelectionWithPasteboardTypesToPasteboard = objc.RegisterName("writeSelectionWithPasteboardTypes:toPasteboard:")
-	_webViewSelPasteboardTypesForElement = objc.RegisterName("pasteboardTypesForElement:")
-	_webViewSelWriteElementWithPasteboardTypesToPasteboard = objc.RegisterName("writeElement:withPasteboardTypes:toPasteboard:")
-	_webViewSelMoveDragCaretToPoint = objc.RegisterName("moveDragCaretToPoint:")
-	_webViewSelRemoveDragCaret = objc.RegisterName("removeDragCaret")
-	_webViewSelShouldCloseWithWindow = objc.RegisterName("shouldCloseWithWindow")
-	_webViewSelSetShouldCloseWithWindow = objc.RegisterName("setShouldCloseWithWindow:")
-	_webViewSelUIDelegate = objc.RegisterName("UIDelegate")
-	_webViewSelSetUIDelegate = objc.RegisterName("setUIDelegate:")
-	_webViewSelResourceLoadDelegate = objc.RegisterName("resourceLoadDelegate")
-	_webViewSelSetResourceLoadDelegate = objc.RegisterName("setResourceLoadDelegate:")
-	_webViewSelDownloadDelegate = objc.RegisterName("downloadDelegate")
-	_webViewSelSetDownloadDelegate = objc.RegisterName("setDownloadDelegate:")
-	_webViewSelFrameLoadDelegate = objc.RegisterName("frameLoadDelegate")
-	_webViewSelSetFrameLoadDelegate = objc.RegisterName("setFrameLoadDelegate:")
-	_webViewSelPolicyDelegate = objc.RegisterName("policyDelegate")
-	_webViewSelSetPolicyDelegate = objc.RegisterName("setPolicyDelegate:")
-	_webViewSelMainFrame = objc.RegisterName("mainFrame")
-	_webViewSelSelectedFrame = objc.RegisterName("selectedFrame")
-	_webViewSelBackForwardList = objc.RegisterName("backForwardList")
-	_webViewSelTextSizeMultiplier = objc.RegisterName("textSizeMultiplier")
-	_webViewSelSetTextSizeMultiplier = objc.RegisterName("setTextSizeMultiplier:")
-	_webViewSelApplicationNameForUserAgent = objc.RegisterName("applicationNameForUserAgent")
-	_webViewSelSetApplicationNameForUserAgent = objc.RegisterName("setApplicationNameForUserAgent:")
-	_webViewSelCustomUserAgent = objc.RegisterName("customUserAgent")
-	_webViewSelSetCustomUserAgent = objc.RegisterName("setCustomUserAgent:")
-	_webViewSelSupportsTextEncoding = objc.RegisterName("supportsTextEncoding")
-	_webViewSelCustomTextEncodingName = objc.RegisterName("customTextEncodingName")
-	_webViewSelSetCustomTextEncodingName = objc.RegisterName("setCustomTextEncodingName:")
-	_webViewSelMediaStyle = objc.RegisterName("mediaStyle")
-	_webViewSelSetMediaStyle = objc.RegisterName("setMediaStyle:")
-	_webViewSelWindowScriptObject = objc.RegisterName("windowScriptObject")
-	_webViewSelPreferences = objc.RegisterName("preferences")
-	_webViewSelSetPreferences = objc.RegisterName("setPreferences:")
-	_webViewSelPreferencesIdentifier = objc.RegisterName("preferencesIdentifier")
-	_webViewSelSetPreferencesIdentifier = objc.RegisterName("setPreferencesIdentifier:")
-	_webViewSelHostWindow = objc.RegisterName("hostWindow")
-	_webViewSelSetHostWindow = objc.RegisterName("setHostWindow:")
-	_webViewSelGroupName = objc.RegisterName("groupName")
-	_webViewSelSetGroupName = objc.RegisterName("setGroupName:")
-	_webViewSelEstimatedProgress = objc.RegisterName("estimatedProgress")
-	_webViewSelIsLoading = objc.RegisterName("isLoading")
-	_webViewSelPasteboardTypesForSelection = objc.RegisterName("pasteboardTypesForSelection")
-	_webViewSelDrawsBackground = objc.RegisterName("drawsBackground")
-	_webViewSelSetDrawsBackground = objc.RegisterName("setDrawsBackground:")
-	_webViewSelShouldUpdateWhileOffscreen = objc.RegisterName("shouldUpdateWhileOffscreen")
-	_webViewSelSetShouldUpdateWhileOffscreen = objc.RegisterName("setShouldUpdateWhileOffscreen:")
-	_webViewSelMainFrameURL = objc.RegisterName("mainFrameURL")
-	_webViewSelSetMainFrameURL = objc.RegisterName("setMainFrameURL:")
-	_webViewSelMainFrameDocument = objc.RegisterName("mainFrameDocument")
-	_webViewSelMainFrameTitle = objc.RegisterName("mainFrameTitle")
-	_webViewSelMainFrameIcon = objc.RegisterName("mainFrameIcon")
-	_webViewSelTakeStringURLFrom = objc.RegisterName("takeStringURLFrom:")
-	_webViewSelStopLoading = objc.RegisterName("stopLoading:")
-	_webViewSelReload = objc.RegisterName("reload:")
-	_webViewSelReloadFromOrigin = objc.RegisterName("reloadFromOrigin:")
-	_webViewSelMakeTextLarger = objc.RegisterName("makeTextLarger:")
-	_webViewSelMakeTextSmaller = objc.RegisterName("makeTextSmaller:")
-	_webViewSelMakeTextStandardSize = objc.RegisterName("makeTextStandardSize:")
-	_webViewSelToggleContinuousSpellChecking = objc.RegisterName("toggleContinuousSpellChecking:")
-	_webViewSelToggleSmartInsertDelete = objc.RegisterName("toggleSmartInsertDelete:")
-	_webViewSelCanGoBack = objc.RegisterName("canGoBack")
-	_webViewSelCanGoForward = objc.RegisterName("canGoForward")
-	_webViewSelCanMakeTextLarger = objc.RegisterName("canMakeTextLarger")
-	_webViewSelCanMakeTextSmaller = objc.RegisterName("canMakeTextSmaller")
-	_webViewSelCanMakeTextStandardSize = objc.RegisterName("canMakeTextStandardSize")
-	_webViewSelComputedStyleForElementPseudoElement = objc.RegisterName("computedStyleForElement:pseudoElement:")
-	_webViewSelEditableDOMRangeForPoint = objc.RegisterName("editableDOMRangeForPoint:")
-	_webViewSelSetSelectedDOMRangeAffinity = objc.RegisterName("setSelectedDOMRange:affinity:")
-	_webViewSelStyleDeclarationWithText = objc.RegisterName("styleDeclarationWithText:")
-	_webViewSelSelectedDOMRange = objc.RegisterName("selectedDOMRange")
-	_webViewSelSelectionAffinity = objc.RegisterName("selectionAffinity")
-	_webViewSelMaintainsInactiveSelection = objc.RegisterName("maintainsInactiveSelection")
-	_webViewSelIsEditable = objc.RegisterName("isEditable")
-	_webViewSelSetEditable = objc.RegisterName("setEditable:")
-	_webViewSelTypingStyle = objc.RegisterName("typingStyle")
-	_webViewSelSetTypingStyle = objc.RegisterName("setTypingStyle:")
-	_webViewSelSmartInsertDeleteEnabled = objc.RegisterName("smartInsertDeleteEnabled")
-	_webViewSelSetSmartInsertDeleteEnabled = objc.RegisterName("setSmartInsertDeleteEnabled:")
-	_webViewSelIsContinuousSpellCheckingEnabled = objc.RegisterName("isContinuousSpellCheckingEnabled")
-	_webViewSelSetContinuousSpellCheckingEnabled = objc.RegisterName("setContinuousSpellCheckingEnabled:")
-	_webViewSelSpellCheckerDocumentTag = objc.RegisterName("spellCheckerDocumentTag")
-	_webViewSelEditingDelegate = objc.RegisterName("editingDelegate")
-	_webViewSelSetEditingDelegate = objc.RegisterName("setEditingDelegate:")
-	_webViewSelReplaceSelectionWithNode = objc.RegisterName("replaceSelectionWithNode:")
-	_webViewSelReplaceSelectionWithText = objc.RegisterName("replaceSelectionWithText:")
-	_webViewSelReplaceSelectionWithMarkupString = objc.RegisterName("replaceSelectionWithMarkupString:")
-	_webViewSelReplaceSelectionWithArchive = objc.RegisterName("replaceSelectionWithArchive:")
-	_webViewSelDeleteSelection = objc.RegisterName("deleteSelection")
-	_webViewSelApplyStyle = objc.RegisterName("applyStyle:")
-	_webViewSelCopy = objc.RegisterName("copy:")
-	_webViewSelCut = objc.RegisterName("cut:")
-	_webViewSelPaste = objc.RegisterName("paste:")
-	_webViewSelCopyFont = objc.RegisterName("copyFont:")
-	_webViewSelPasteFont = objc.RegisterName("pasteFont:")
-	_webViewSelDelete = objc.RegisterName("delete:")
-	_webViewSelPasteAsPlainText = objc.RegisterName("pasteAsPlainText:")
-	_webViewSelPasteAsRichText = objc.RegisterName("pasteAsRichText:")
-	_webViewSelChangeFont = objc.RegisterName("changeFont:")
-	_webViewSelChangeAttributes = objc.RegisterName("changeAttributes:")
-	_webViewSelChangeDocumentBackgroundColor = objc.RegisterName("changeDocumentBackgroundColor:")
-	_webViewSelChangeColor = objc.RegisterName("changeColor:")
-	_webViewSelAlignCenter = objc.RegisterName("alignCenter:")
-	_webViewSelAlignJustified = objc.RegisterName("alignJustified:")
-	_webViewSelAlignLeft = objc.RegisterName("alignLeft:")
-	_webViewSelAlignRight = objc.RegisterName("alignRight:")
-	_webViewSelCheckSpelling = objc.RegisterName("checkSpelling:")
-	_webViewSelShowGuessPanel = objc.RegisterName("showGuessPanel:")
-	_webViewSelPerformFindPanelAction = objc.RegisterName("performFindPanelAction:")
-	_webViewSelStartSpeaking = objc.RegisterName("startSpeaking:")
-	_webViewSelStopSpeaking = objc.RegisterName("stopSpeaking:")
-	_webViewSelMoveToBeginningOfSentence = objc.RegisterName("moveToBeginningOfSentence:")
-	_webViewSelMoveToBeginningOfSentenceAndModifySelection = objc.RegisterName("moveToBeginningOfSentenceAndModifySelection:")
-	_webViewSelMoveToEndOfSentence = objc.RegisterName("moveToEndOfSentence:")
-	_webViewSelMoveToEndOfSentenceAndModifySelection = objc.RegisterName("moveToEndOfSentenceAndModifySelection:")
-	_webViewSelSelectSentence = objc.RegisterName("selectSentence:")
-	_webViewSelOverWrite = objc.RegisterName("overWrite:")
+	_webViewSelElementAtPoint                                  = objc.RegisterName("elementAtPoint:")
+	_webViewSelWriteSelectionWithPasteboardTypesToPasteboard   = objc.RegisterName("writeSelectionWithPasteboardTypes:toPasteboard:")
+	_webViewSelPasteboardTypesForElement                       = objc.RegisterName("pasteboardTypesForElement:")
+	_webViewSelWriteElementWithPasteboardTypesToPasteboard     = objc.RegisterName("writeElement:withPasteboardTypes:toPasteboard:")
+	_webViewSelMoveDragCaretToPoint                            = objc.RegisterName("moveDragCaretToPoint:")
+	_webViewSelRemoveDragCaret                                 = objc.RegisterName("removeDragCaret")
+	_webViewSelShouldCloseWithWindow                           = objc.RegisterName("shouldCloseWithWindow")
+	_webViewSelSetShouldCloseWithWindow                        = objc.RegisterName("setShouldCloseWithWindow:")
+	_webViewSelUIDelegate                                      = objc.RegisterName("UIDelegate")
+	_webViewSelSetUIDelegate                                   = objc.RegisterName("setUIDelegate:")
+	_webViewSelResourceLoadDelegate                            = objc.RegisterName("resourceLoadDelegate")
+	_webViewSelSetResourceLoadDelegate                         = objc.RegisterName("setResourceLoadDelegate:")
+	_webViewSelDownloadDelegate                                = objc.RegisterName("downloadDelegate")
+	_webViewSelSetDownloadDelegate                             = objc.RegisterName("setDownloadDelegate:")
+	_webViewSelFrameLoadDelegate                               = objc.RegisterName("frameLoadDelegate")
+	_webViewSelSetFrameLoadDelegate                            = objc.RegisterName("setFrameLoadDelegate:")
+	_webViewSelPolicyDelegate                                  = objc.RegisterName("policyDelegate")
+	_webViewSelSetPolicyDelegate                               = objc.RegisterName("setPolicyDelegate:")
+	_webViewSelMainFrame                                       = objc.RegisterName("mainFrame")
+	_webViewSelSelectedFrame                                   = objc.RegisterName("selectedFrame")
+	_webViewSelBackForwardList                                 = objc.RegisterName("backForwardList")
+	_webViewSelTextSizeMultiplier                              = objc.RegisterName("textSizeMultiplier")
+	_webViewSelSetTextSizeMultiplier                           = objc.RegisterName("setTextSizeMultiplier:")
+	_webViewSelApplicationNameForUserAgent                     = objc.RegisterName("applicationNameForUserAgent")
+	_webViewSelSetApplicationNameForUserAgent                  = objc.RegisterName("setApplicationNameForUserAgent:")
+	_webViewSelCustomUserAgent                                 = objc.RegisterName("customUserAgent")
+	_webViewSelSetCustomUserAgent                              = objc.RegisterName("setCustomUserAgent:")
+	_webViewSelSupportsTextEncoding                            = objc.RegisterName("supportsTextEncoding")
+	_webViewSelCustomTextEncodingName                          = objc.RegisterName("customTextEncodingName")
+	_webViewSelSetCustomTextEncodingName                       = objc.RegisterName("setCustomTextEncodingName:")
+	_webViewSelMediaStyle                                      = objc.RegisterName("mediaStyle")
+	_webViewSelSetMediaStyle                                   = objc.RegisterName("setMediaStyle:")
+	_webViewSelWindowScriptObject                              = objc.RegisterName("windowScriptObject")
+	_webViewSelPreferences                                     = objc.RegisterName("preferences")
+	_webViewSelSetPreferences                                  = objc.RegisterName("setPreferences:")
+	_webViewSelPreferencesIdentifier                           = objc.RegisterName("preferencesIdentifier")
+	_webViewSelSetPreferencesIdentifier                        = objc.RegisterName("setPreferencesIdentifier:")
+	_webViewSelHostWindow                                      = objc.RegisterName("hostWindow")
+	_webViewSelSetHostWindow                                   = objc.RegisterName("setHostWindow:")
+	_webViewSelGroupName                                       = objc.RegisterName("groupName")
+	_webViewSelSetGroupName                                    = objc.RegisterName("setGroupName:")
+	_webViewSelEstimatedProgress                               = objc.RegisterName("estimatedProgress")
+	_webViewSelIsLoading                                       = objc.RegisterName("isLoading")
+	_webViewSelPasteboardTypesForSelection                     = objc.RegisterName("pasteboardTypesForSelection")
+	_webViewSelDrawsBackground                                 = objc.RegisterName("drawsBackground")
+	_webViewSelSetDrawsBackground                              = objc.RegisterName("setDrawsBackground:")
+	_webViewSelShouldUpdateWhileOffscreen                      = objc.RegisterName("shouldUpdateWhileOffscreen")
+	_webViewSelSetShouldUpdateWhileOffscreen                   = objc.RegisterName("setShouldUpdateWhileOffscreen:")
+	_webViewSelMainFrameURL                                    = objc.RegisterName("mainFrameURL")
+	_webViewSelSetMainFrameURL                                 = objc.RegisterName("setMainFrameURL:")
+	_webViewSelMainFrameDocument                               = objc.RegisterName("mainFrameDocument")
+	_webViewSelMainFrameTitle                                  = objc.RegisterName("mainFrameTitle")
+	_webViewSelMainFrameIcon                                   = objc.RegisterName("mainFrameIcon")
+	_webViewSelTakeStringURLFrom                               = objc.RegisterName("takeStringURLFrom:")
+	_webViewSelStopLoading                                     = objc.RegisterName("stopLoading:")
+	_webViewSelReload                                          = objc.RegisterName("reload:")
+	_webViewSelReloadFromOrigin                                = objc.RegisterName("reloadFromOrigin:")
+	_webViewSelMakeTextLarger                                  = objc.RegisterName("makeTextLarger:")
+	_webViewSelMakeTextSmaller                                 = objc.RegisterName("makeTextSmaller:")
+	_webViewSelMakeTextStandardSize                            = objc.RegisterName("makeTextStandardSize:")
+	_webViewSelToggleContinuousSpellChecking                   = objc.RegisterName("toggleContinuousSpellChecking:")
+	_webViewSelToggleSmartInsertDelete                         = objc.RegisterName("toggleSmartInsertDelete:")
+	_webViewSelCanGoBack                                       = objc.RegisterName("canGoBack")
+	_webViewSelCanGoForward                                    = objc.RegisterName("canGoForward")
+	_webViewSelCanMakeTextLarger                               = objc.RegisterName("canMakeTextLarger")
+	_webViewSelCanMakeTextSmaller                              = objc.RegisterName("canMakeTextSmaller")
+	_webViewSelCanMakeTextStandardSize                         = objc.RegisterName("canMakeTextStandardSize")
+	_webViewSelComputedStyleForElementPseudoElement            = objc.RegisterName("computedStyleForElement:pseudoElement:")
+	_webViewSelEditableDOMRangeForPoint                        = objc.RegisterName("editableDOMRangeForPoint:")
+	_webViewSelSetSelectedDOMRangeAffinity                     = objc.RegisterName("setSelectedDOMRange:affinity:")
+	_webViewSelStyleDeclarationWithText                        = objc.RegisterName("styleDeclarationWithText:")
+	_webViewSelSelectedDOMRange                                = objc.RegisterName("selectedDOMRange")
+	_webViewSelSelectionAffinity                               = objc.RegisterName("selectionAffinity")
+	_webViewSelMaintainsInactiveSelection                      = objc.RegisterName("maintainsInactiveSelection")
+	_webViewSelIsEditable                                      = objc.RegisterName("isEditable")
+	_webViewSelSetEditable                                     = objc.RegisterName("setEditable:")
+	_webViewSelTypingStyle                                     = objc.RegisterName("typingStyle")
+	_webViewSelSetTypingStyle                                  = objc.RegisterName("setTypingStyle:")
+	_webViewSelSmartInsertDeleteEnabled                        = objc.RegisterName("smartInsertDeleteEnabled")
+	_webViewSelSetSmartInsertDeleteEnabled                     = objc.RegisterName("setSmartInsertDeleteEnabled:")
+	_webViewSelIsContinuousSpellCheckingEnabled                = objc.RegisterName("isContinuousSpellCheckingEnabled")
+	_webViewSelSetContinuousSpellCheckingEnabled               = objc.RegisterName("setContinuousSpellCheckingEnabled:")
+	_webViewSelSpellCheckerDocumentTag                         = objc.RegisterName("spellCheckerDocumentTag")
+	_webViewSelEditingDelegate                                 = objc.RegisterName("editingDelegate")
+	_webViewSelSetEditingDelegate                              = objc.RegisterName("setEditingDelegate:")
+	_webViewSelReplaceSelectionWithNode                        = objc.RegisterName("replaceSelectionWithNode:")
+	_webViewSelReplaceSelectionWithText                        = objc.RegisterName("replaceSelectionWithText:")
+	_webViewSelReplaceSelectionWithMarkupString                = objc.RegisterName("replaceSelectionWithMarkupString:")
+	_webViewSelReplaceSelectionWithArchive                     = objc.RegisterName("replaceSelectionWithArchive:")
+	_webViewSelDeleteSelection                                 = objc.RegisterName("deleteSelection")
+	_webViewSelApplyStyle                                      = objc.RegisterName("applyStyle:")
+	_webViewSelCopy                                            = objc.RegisterName("copy:")
+	_webViewSelCut                                             = objc.RegisterName("cut:")
+	_webViewSelPaste                                           = objc.RegisterName("paste:")
+	_webViewSelCopyFont                                        = objc.RegisterName("copyFont:")
+	_webViewSelPasteFont                                       = objc.RegisterName("pasteFont:")
+	_webViewSelDelete                                          = objc.RegisterName("delete:")
+	_webViewSelPasteAsPlainText                                = objc.RegisterName("pasteAsPlainText:")
+	_webViewSelPasteAsRichText                                 = objc.RegisterName("pasteAsRichText:")
+	_webViewSelChangeFont                                      = objc.RegisterName("changeFont:")
+	_webViewSelChangeAttributes                                = objc.RegisterName("changeAttributes:")
+	_webViewSelChangeDocumentBackgroundColor                   = objc.RegisterName("changeDocumentBackgroundColor:")
+	_webViewSelChangeColor                                     = objc.RegisterName("changeColor:")
+	_webViewSelAlignCenter                                     = objc.RegisterName("alignCenter:")
+	_webViewSelAlignJustified                                  = objc.RegisterName("alignJustified:")
+	_webViewSelAlignLeft                                       = objc.RegisterName("alignLeft:")
+	_webViewSelAlignRight                                      = objc.RegisterName("alignRight:")
+	_webViewSelCheckSpelling                                   = objc.RegisterName("checkSpelling:")
+	_webViewSelShowGuessPanel                                  = objc.RegisterName("showGuessPanel:")
+	_webViewSelPerformFindPanelAction                          = objc.RegisterName("performFindPanelAction:")
+	_webViewSelStartSpeaking                                   = objc.RegisterName("startSpeaking:")
+	_webViewSelStopSpeaking                                    = objc.RegisterName("stopSpeaking:")
+	_webViewSelMoveToBeginningOfSentence                       = objc.RegisterName("moveToBeginningOfSentence:")
+	_webViewSelMoveToBeginningOfSentenceAndModifySelection     = objc.RegisterName("moveToBeginningOfSentenceAndModifySelection:")
+	_webViewSelMoveToEndOfSentence                             = objc.RegisterName("moveToEndOfSentence:")
+	_webViewSelMoveToEndOfSentenceAndModifySelection           = objc.RegisterName("moveToEndOfSentenceAndModifySelection:")
+	_webViewSelSelectSentence                                  = objc.RegisterName("selectSentence:")
+	_webViewSelOverWrite                                       = objc.RegisterName("overWrite:")
 )
 
 func WebViewFromID(id objc.ID) *WebView {
@@ -192,14 +192,18 @@ func WebViewSetMIMETypesShownAsHTML(mIMETypes *foundation.NSArray[objc.ID]) {
 // @method URLFromPasteboard: @abstract Returns a URL from a pasteboard @param pasteboard The pasteboard with a URL @result A URL if the pasteboard has one. Nil if it does not. @discussion This method differs than NSURL's URLFromPasteboard method in that it tries multiple pasteboard types including NSURLPboardType to find a URL on the pasteboard.
 func WebViewURLFromPasteboard(pasteboard *appkit.NSPasteboard) *foundation.NSURL {
 	_ret := objc.Send[objc.ID](objc.ID(_clsWebView), _webViewSelURLFromPasteboard, pasteboard.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // @method URLTitleFromPasteboard: @abstract Returns a URL title from a pasteboard @param pasteboard The pasteboard with a URL title @result A URL title if the pasteboard has one. Nil if it does not. @discussion This method returns a title that refers a URL on the pasteboard. An example of this is the link label which is the text inside the anchor tag.
 func WebViewURLTitleFromPasteboard(pasteboard *appkit.NSPasteboard) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsWebView), _webViewSelURLTitleFromPasteboard, pasteboard.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -211,7 +215,9 @@ func WebViewRegisterURLSchemeAsLocal(scheme *foundation.NSString) {
 // @method initWithFrame:frameName:groupName: @abstract The designated initializer for WebView. @discussion Initialize a WebView with the supplied parameters. This method will create a main WebFrame with the view. Passing a top level frame name is useful if you handle a targetted frame navigation that would normally open a window in some other way that still ends up creating a new WebView. @param frame The frame used to create the view. @param frameName The name to use for the top level frame. May be nil. @param groupName The name of the webView set to which this webView will be added.  May be nil. @result Returns an initialized WebView.
 func (o *WebView) InitWithFrameFrameNameGroupName(frame corefoundation.CGRect, frameName *foundation.NSString, groupName *foundation.NSString) *WebView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelInitWithFrameFrameNameGroupName, frame, frameName.Ptr(), groupName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebViewFromID(_ret)
 }
 
@@ -246,14 +252,18 @@ func (o *WebView) GoToBackForwardItem(item *WebHistoryItem) bool {
 // @method userAgentForURL: @abstract Get the appropriate user-agent string for a particular URL. @param URL The URL. @result The user-agent string for the supplied URL.
 func (o *WebView) UserAgentForURL(uRL *foundation.NSURL) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelUserAgentForURL, uRL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @method stringByEvaluatingJavaScriptFromString: @param script The text of the JavaScript. @result The result of the script, converted to a string, or nil for failure.
 func (o *WebView) StringByEvaluatingJavaScriptFromString(script *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelStringByEvaluatingJavaScriptFromString, script.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -363,21 +373,27 @@ func (o *WebView) SetPolicyDelegate(policyDelegate WebPolicyDelegate) {
 // @property mainFrame @abstract The top level frame. @discussion Note that even documents that are not framesets will have a mainFrame.
 func (o *WebView) MainFrame() *WebFrame {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelMainFrame)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebFrameFromID(_ret)
 }
 
 // @property selectedFrame @abstract The frame that has the active selection. @discussion Returns the frame that contains the first responder, if any. Otherwise returns the frame that contains a non-zero-length selection, if any. Returns nil if no frame meets these criteria.
 func (o *WebView) SelectedFrame() *WebFrame {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelSelectedFrame)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebFrameFromID(_ret)
 }
 
 // @property backForwardList @abstract The backforward list for this WebView.
 func (o *WebView) BackForwardList() *WebBackForwardList {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelBackForwardList)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebBackForwardListFromID(_ret)
 }
 
@@ -394,7 +410,9 @@ func (o *WebView) SetTextSizeMultiplier(textSizeMultiplier float32) {
 // @property applicationNameForUserAgent @abstract The name of the application as used in the user-agent string.
 func (o *WebView) ApplicationNameForUserAgent() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelApplicationNameForUserAgent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -405,7 +423,9 @@ func (o *WebView) SetApplicationNameForUserAgent(applicationNameForUserAgent *fo
 // @property customUserAgent @abstract The custom user-agent string or nil if no custom user-agent string has been set. @discussion Setting this means that the webView should use this user-agent string instead of constructing a user-agent string for each URL. Setting it to nil causes the webView to construct the user-agent string for each URL for best results rendering web pages
 func (o *WebView) CustomUserAgent() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelCustomUserAgent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -422,7 +442,9 @@ func (o *WebView) SupportsTextEncoding() bool {
 // @property customTextEncodingName @abstract The custom text encoding name or nil if no custom text encoding name has been set. @discussion Make the page display with a different text encoding; stops any load in progress. The text encoding passed in overrides the normal text encoding smarts including what's specified in a web page's header or HTTP response. The text encoding automatically goes back to the default when the top level frame changes to a new location. Setting the text encoding name to nil makes the webView use default encoding rules.
 func (o *WebView) CustomTextEncodingName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelCustomTextEncodingName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -433,7 +455,9 @@ func (o *WebView) SetCustomTextEncodingName(customTextEncodingName *foundation.N
 // @property mediaStyle @abstract The media style for the WebView. @discussion The mediaStyle will override the normal value of the CSS media property. Setting the value to nil will restore the normal value. The value will be nil unless explicitly set.
 func (o *WebView) MediaStyle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelMediaStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -444,14 +468,18 @@ func (o *WebView) SetMediaStyle(mediaStyle *foundation.NSString) {
 // @property windowScriptObject @abstract A WebScriptObject that represents the window object from the script environment.
 func (o *WebView) WindowScriptObject() *WebScriptObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelWindowScriptObject)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebScriptObjectFromID(_ret)
 }
 
 // @property preferences @abstract The preferences used by this WebView. @discussion This method will return [WebPreferences standardPreferences] if no other instance of WebPreferences has been set.
 func (o *WebView) Preferences() *WebPreferences {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelPreferences)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebPreferencesFromID(_ret)
 }
 
@@ -462,7 +490,9 @@ func (o *WebView) SetPreferences(preferences *WebPreferences) {
 // @property preferencesIdentifier @abstract The WebPreferences key prefix. @discussion If the WebPreferences for this WebView are stored in the user defaults database, this string will be used as a key prefix.
 func (o *WebView) PreferencesIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelPreferencesIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -473,7 +503,9 @@ func (o *WebView) SetPreferencesIdentifier(preferencesIdentifier *foundation.NSS
 // @property hostWindow @abstract The host window for the web view. @discussion Parts of WebKit (such as plug-ins and JavaScript) depend on a window to function properly. Set a host window so these parts continue to function even when the web view is not in an actual window.
 func (o *WebView) HostWindow() *appkit.NSWindow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelHostWindow)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSWindowFromID(_ret)
 }
 
@@ -484,7 +516,9 @@ func (o *WebView) SetHostWindow(hostWindow *appkit.NSWindow) {
 // @property groupName @abstract The group name for this WebView. @discussion JavaScript may access named frames within the same group.
 func (o *WebView) GroupName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelGroupName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -533,7 +567,9 @@ func (o *WebView) SetShouldUpdateWhileOffscreen(shouldUpdateWhileOffscreen bool)
 // @property mainFrameURL @abstract The main frame's current URL.
 func (o *WebView) MainFrameURL() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelMainFrameURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -544,21 +580,27 @@ func (o *WebView) SetMainFrameURL(mainFrameURL *foundation.NSString) {
 // @property mainFrameDocument @abstract The main frame's DOMDocument.
 func (o *WebView) MainFrameDocument() *DOMDocument {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelMainFrameDocument)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMDocumentFromID(_ret)
 }
 
 // @property mainFrameTitle @abstract The main frame's title if any, otherwise an empty string.
 func (o *WebView) MainFrameTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelMainFrameTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property mainFrameIcon @abstract The site icon for the current page loaded in the mainFrame, or nil.
 func (o *WebView) MainFrameIcon() *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelMainFrameIcon)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSImageFromID(_ret)
 }
 
@@ -633,13 +675,17 @@ func (o *WebView) CanMakeTextStandardSize() bool {
 
 func (o *WebView) ComputedStyleForElementPseudoElement(element *DOMElement, pseudoElement *foundation.NSString) *DOMCSSStyleDeclaration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelComputedStyleForElementPseudoElement, element.Ptr(), pseudoElement.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMCSSStyleDeclarationFromID(_ret)
 }
 
 func (o *WebView) EditableDOMRangeForPoint(point corefoundation.CGPoint) *DOMRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelEditableDOMRangeForPoint, point)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMRangeFromID(_ret)
 }
 
@@ -649,13 +695,17 @@ func (o *WebView) SetSelectedDOMRangeAffinity(range_ *DOMRange, selectionAffinit
 
 func (o *WebView) StyleDeclarationWithText(text *foundation.NSString) *DOMCSSStyleDeclaration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelStyleDeclarationWithText, text.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMCSSStyleDeclarationFromID(_ret)
 }
 
 func (o *WebView) SelectedDOMRange() *DOMRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelSelectedDOMRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMRangeFromID(_ret)
 }
 
@@ -680,7 +730,9 @@ func (o *WebView) SetEditable(editable bool) {
 
 func (o *WebView) TypingStyle() *DOMCSSStyleDeclaration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelTypingStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMCSSStyleDeclarationFromID(_ret)
 }
 
@@ -851,4 +903,3 @@ func (o *WebView) SelectSentence(sender objc.ID) {
 func (o *WebView) OverWrite(sender objc.ID) {
 	o.Ptr().Send(_webViewSelOverWrite, sender)
 }
-

@@ -20,17 +20,17 @@ type CLGeocoder struct {
 }
 
 var (
-	_clsCLGeocoder = _objcClass("CLGeocoder")
-	_cLGeocoderSelReverseGeocodeLocationCompletionHandler = objc.RegisterName("reverseGeocodeLocation:completionHandler:")
-	_cLGeocoderSelReverseGeocodeLocationPreferredLocaleCompletionHandler = objc.RegisterName("reverseGeocodeLocation:preferredLocale:completionHandler:")
-	_cLGeocoderSelGeocodeAddressDictionaryCompletionHandler = objc.RegisterName("geocodeAddressDictionary:completionHandler:")
-	_cLGeocoderSelGeocodeAddressStringInRegionCompletionHandler = objc.RegisterName("geocodeAddressString:inRegion:completionHandler:")
+	_clsCLGeocoder                                                             = _objcClass("CLGeocoder")
+	_cLGeocoderSelReverseGeocodeLocationCompletionHandler                      = objc.RegisterName("reverseGeocodeLocation:completionHandler:")
+	_cLGeocoderSelReverseGeocodeLocationPreferredLocaleCompletionHandler       = objc.RegisterName("reverseGeocodeLocation:preferredLocale:completionHandler:")
+	_cLGeocoderSelGeocodeAddressDictionaryCompletionHandler                    = objc.RegisterName("geocodeAddressDictionary:completionHandler:")
+	_cLGeocoderSelGeocodeAddressStringInRegionCompletionHandler                = objc.RegisterName("geocodeAddressString:inRegion:completionHandler:")
 	_cLGeocoderSelGeocodeAddressStringInRegionPreferredLocaleCompletionHandler = objc.RegisterName("geocodeAddressString:inRegion:preferredLocale:completionHandler:")
-	_cLGeocoderSelGeocodeAddressStringCompletionHandler = objc.RegisterName("geocodeAddressString:completionHandler:")
-	_cLGeocoderSelCancelGeocode = objc.RegisterName("cancelGeocode")
-	_cLGeocoderSelIsGeocoding = objc.RegisterName("isGeocoding")
-	_cLGeocoderSelGeocodePostalAddressCompletionHandler = objc.RegisterName("geocodePostalAddress:completionHandler:")
-	_cLGeocoderSelGeocodePostalAddressPreferredLocaleCompletionHandler = objc.RegisterName("geocodePostalAddress:preferredLocale:completionHandler:")
+	_cLGeocoderSelGeocodeAddressStringCompletionHandler                        = objc.RegisterName("geocodeAddressString:completionHandler:")
+	_cLGeocoderSelCancelGeocode                                                = objc.RegisterName("cancelGeocode")
+	_cLGeocoderSelIsGeocoding                                                  = objc.RegisterName("isGeocoding")
+	_cLGeocoderSelGeocodePostalAddressCompletionHandler                        = objc.RegisterName("geocodePostalAddress:completionHandler:")
+	_cLGeocoderSelGeocodePostalAddressPreferredLocaleCompletionHandler         = objc.RegisterName("geocodePostalAddress:preferredLocale:completionHandler:")
 )
 
 func CLGeocoderFromID(id objc.ID) *CLGeocoder {
@@ -172,4 +172,3 @@ func (o *CLGeocoder) GeocodePostalAddressPreferredLocaleCompletionHandler(postal
 	}
 	o.Ptr().Send(_cLGeocoderSelGeocodePostalAddressPreferredLocaleCompletionHandler, postalAddress.Ptr(), locale.Ptr(), __block_completionHandler)
 }
-

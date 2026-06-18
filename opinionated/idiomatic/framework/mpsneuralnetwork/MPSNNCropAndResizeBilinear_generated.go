@@ -134,4 +134,3 @@ type NNCropAndResizeBilinearable interface {
 }
 
 var _ NNCropAndResizeBilinearable = (*NNCropAndResizeBilinear)(nil)
-

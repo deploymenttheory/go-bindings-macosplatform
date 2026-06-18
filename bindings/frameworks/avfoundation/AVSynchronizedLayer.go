@@ -16,10 +16,10 @@ type AVSynchronizedLayer struct {
 }
 
 var (
-	_clsAVSynchronizedLayer = _objcClass("AVSynchronizedLayer")
+	_clsAVSynchronizedLayer                                = _objcClass("AVSynchronizedLayer")
 	_aVSynchronizedLayerSelSynchronizedLayerWithPlayerItem = objc.RegisterName("synchronizedLayerWithPlayerItem:")
-	_aVSynchronizedLayerSelPlayerItem = objc.RegisterName("playerItem")
-	_aVSynchronizedLayerSelSetPlayerItem = objc.RegisterName("setPlayerItem:")
+	_aVSynchronizedLayerSelPlayerItem                      = objc.RegisterName("playerItem")
+	_aVSynchronizedLayerSelSetPlayerItem                   = objc.RegisterName("setPlayerItem:")
 )
 
 func AVSynchronizedLayerFromID(id objc.ID) *AVSynchronizedLayer {
@@ -35,17 +35,20 @@ func AVSynchronizedLayerFromID(id objc.ID) *AVSynchronizedLayer {
 // @method			synchronizedLayerWithPlayerItem: @abstract		Returns an instance of AVSynchronizedLayer with timing synchronized with the specified AVPlayerItem. @result			An instance of AVSynchronizedLayer.
 func AVSynchronizedLayerSynchronizedLayerWithPlayerItem(playerItem *AVPlayerItem) *AVSynchronizedLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVSynchronizedLayer), _aVSynchronizedLayerSelSynchronizedLayerWithPlayerItem, playerItem.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVSynchronizedLayerFromID(_ret)
 }
 
 func (o *AVSynchronizedLayer) PlayerItem() *AVPlayerItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSynchronizedLayerSelPlayerItem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerItemFromID(_ret)
 }
 
 func (o *AVSynchronizedLayer) SetPlayerItem(playerItem *AVPlayerItem) {
 	o.Ptr().Send(_aVSynchronizedLayerSelSetPlayerItem, playerItem.Ptr())
 }
-

@@ -66,4 +66,3 @@ type StagedMigrationManagerable interface {
 }
 
 var _ StagedMigrationManagerable = (*StagedMigrationManager)(nil)
-

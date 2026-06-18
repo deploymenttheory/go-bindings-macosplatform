@@ -18,23 +18,23 @@ type MTRClusterHEPAFilterMonitoring struct {
 }
 
 var (
-	_clsMTRClusterHEPAFilterMonitoring = _objcClass("MTRClusterHEPAFilterMonitoring")
+	_clsMTRClusterHEPAFilterMonitoring                                                                      = _objcClass("MTRClusterHEPAFilterMonitoring")
 	_mTRClusterHEPAFilterMonitoringSelResetConditionWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("resetConditionWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterHEPAFilterMonitoringSelResetConditionWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("resetConditionWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterHEPAFilterMonitoringSelReadAttributeConditionWithParams = objc.RegisterName("readAttributeConditionWithParams:")
-	_mTRClusterHEPAFilterMonitoringSelReadAttributeDegradationDirectionWithParams = objc.RegisterName("readAttributeDegradationDirectionWithParams:")
-	_mTRClusterHEPAFilterMonitoringSelReadAttributeChangeIndicationWithParams = objc.RegisterName("readAttributeChangeIndicationWithParams:")
-	_mTRClusterHEPAFilterMonitoringSelReadAttributeInPlaceIndicatorWithParams = objc.RegisterName("readAttributeInPlaceIndicatorWithParams:")
-	_mTRClusterHEPAFilterMonitoringSelReadAttributeLastChangedTimeWithParams = objc.RegisterName("readAttributeLastChangedTimeWithParams:")
-	_mTRClusterHEPAFilterMonitoringSelWriteAttributeLastChangedTimeWithValueExpectedValueInterval = objc.RegisterName("writeAttributeLastChangedTimeWithValue:expectedValueInterval:")
-	_mTRClusterHEPAFilterMonitoringSelWriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeLastChangedTimeWithValue:expectedValueInterval:params:")
-	_mTRClusterHEPAFilterMonitoringSelReadAttributeReplacementProductListWithParams = objc.RegisterName("readAttributeReplacementProductListWithParams:")
-	_mTRClusterHEPAFilterMonitoringSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterHEPAFilterMonitoringSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterHEPAFilterMonitoringSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterHEPAFilterMonitoringSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterHEPAFilterMonitoringSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterHEPAFilterMonitoringSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterHEPAFilterMonitoringSelResetConditionWithExpectedValuesExpectedValueIntervalCompletion       = objc.RegisterName("resetConditionWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterHEPAFilterMonitoringSelReadAttributeConditionWithParams                                      = objc.RegisterName("readAttributeConditionWithParams:")
+	_mTRClusterHEPAFilterMonitoringSelReadAttributeDegradationDirectionWithParams                           = objc.RegisterName("readAttributeDegradationDirectionWithParams:")
+	_mTRClusterHEPAFilterMonitoringSelReadAttributeChangeIndicationWithParams                               = objc.RegisterName("readAttributeChangeIndicationWithParams:")
+	_mTRClusterHEPAFilterMonitoringSelReadAttributeInPlaceIndicatorWithParams                               = objc.RegisterName("readAttributeInPlaceIndicatorWithParams:")
+	_mTRClusterHEPAFilterMonitoringSelReadAttributeLastChangedTimeWithParams                                = objc.RegisterName("readAttributeLastChangedTimeWithParams:")
+	_mTRClusterHEPAFilterMonitoringSelWriteAttributeLastChangedTimeWithValueExpectedValueInterval           = objc.RegisterName("writeAttributeLastChangedTimeWithValue:expectedValueInterval:")
+	_mTRClusterHEPAFilterMonitoringSelWriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams     = objc.RegisterName("writeAttributeLastChangedTimeWithValue:expectedValueInterval:params:")
+	_mTRClusterHEPAFilterMonitoringSelReadAttributeReplacementProductListWithParams                         = objc.RegisterName("readAttributeReplacementProductListWithParams:")
+	_mTRClusterHEPAFilterMonitoringSelReadAttributeGeneratedCommandListWithParams                           = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterHEPAFilterMonitoringSelReadAttributeAcceptedCommandListWithParams                            = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterHEPAFilterMonitoringSelReadAttributeAttributeListWithParams                                  = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterHEPAFilterMonitoringSelReadAttributeFeatureMapWithParams                                     = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterHEPAFilterMonitoringSelReadAttributeClusterRevisionWithParams                                = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterHEPAFilterMonitoringSelInitWithDeviceEndpointIDQueue                                         = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterHEPAFilterMonitoringFromID(id objc.ID) *MTRClusterHEPAFilterMonitoring {
@@ -135,7 +135,8 @@ func (o *MTRClusterHEPAFilterMonitoring) ReadAttributeClusterRevisionWithParams(
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterHEPAFilterMonitoring) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterHEPAFilterMonitoring {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterHEPAFilterMonitoringSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterHEPAFilterMonitoringFromID(_ret)
 }
-

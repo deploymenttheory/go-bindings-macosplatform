@@ -297,7 +297,9 @@ func (x *MarkerAnnotationView) SetAnimatesWhenAdded(animatesWhenAdded bool) {
 	x.inner.SetAnimatesWhenAdded(animatesWhenAdded)
 }
 
-func (x *MarkerAnnotationView) asAnnotationView() *raw.MKAnnotationView { return &x.inner.MKAnnotationView }
+func (x *MarkerAnnotationView) asAnnotationView() *raw.MKAnnotationView {
+	return &x.inner.MKAnnotationView
+}
 
 // MarkerAnnotationViewable is the interface implemented by [MarkerAnnotationView], for mocking and DI.
 type MarkerAnnotationViewable interface {
@@ -350,4 +352,3 @@ type MarkerAnnotationViewable interface {
 }
 
 var _ MarkerAnnotationViewable = (*MarkerAnnotationView)(nil)
-

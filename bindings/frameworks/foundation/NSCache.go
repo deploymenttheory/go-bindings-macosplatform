@@ -15,21 +15,21 @@ type NSCache[KeyType purego.AnyObject, ObjectType purego.AnyObject] struct {
 }
 
 var (
-	_clsNSCache = _objcClass("NSCache")
-	_nSCacheSelObjectForKey = objc.RegisterName("objectForKey:")
-	_nSCacheSelSetObjectForKey = objc.RegisterName("setObject:forKey:")
-	_nSCacheSelSetObjectForKeyCost = objc.RegisterName("setObject:forKey:cost:")
-	_nSCacheSelRemoveObjectForKey = objc.RegisterName("removeObjectForKey:")
-	_nSCacheSelRemoveAllObjects = objc.RegisterName("removeAllObjects")
-	_nSCacheSelName = objc.RegisterName("name")
-	_nSCacheSelSetName = objc.RegisterName("setName:")
-	_nSCacheSelDelegate = objc.RegisterName("delegate")
-	_nSCacheSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSCacheSelTotalCostLimit = objc.RegisterName("totalCostLimit")
-	_nSCacheSelSetTotalCostLimit = objc.RegisterName("setTotalCostLimit:")
-	_nSCacheSelCountLimit = objc.RegisterName("countLimit")
-	_nSCacheSelSetCountLimit = objc.RegisterName("setCountLimit:")
-	_nSCacheSelEvictsObjectsWithDiscardedContent = objc.RegisterName("evictsObjectsWithDiscardedContent")
+	_clsNSCache                                     = _objcClass("NSCache")
+	_nSCacheSelObjectForKey                         = objc.RegisterName("objectForKey:")
+	_nSCacheSelSetObjectForKey                      = objc.RegisterName("setObject:forKey:")
+	_nSCacheSelSetObjectForKeyCost                  = objc.RegisterName("setObject:forKey:cost:")
+	_nSCacheSelRemoveObjectForKey                   = objc.RegisterName("removeObjectForKey:")
+	_nSCacheSelRemoveAllObjects                     = objc.RegisterName("removeAllObjects")
+	_nSCacheSelName                                 = objc.RegisterName("name")
+	_nSCacheSelSetName                              = objc.RegisterName("setName:")
+	_nSCacheSelDelegate                             = objc.RegisterName("delegate")
+	_nSCacheSelSetDelegate                          = objc.RegisterName("setDelegate:")
+	_nSCacheSelTotalCostLimit                       = objc.RegisterName("totalCostLimit")
+	_nSCacheSelSetTotalCostLimit                    = objc.RegisterName("setTotalCostLimit:")
+	_nSCacheSelCountLimit                           = objc.RegisterName("countLimit")
+	_nSCacheSelSetCountLimit                        = objc.RegisterName("setCountLimit:")
+	_nSCacheSelEvictsObjectsWithDiscardedContent    = objc.RegisterName("evictsObjectsWithDiscardedContent")
 	_nSCacheSelSetEvictsObjectsWithDiscardedContent = objc.RegisterName("setEvictsObjectsWithDiscardedContent:")
 )
 
@@ -66,7 +66,9 @@ func (o *NSCache[KeyType, ObjectType]) RemoveAllObjects() {
 
 func (o *NSCache[KeyType, ObjectType]) Name() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCacheSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -109,4 +111,3 @@ func (o *NSCache[KeyType, ObjectType]) EvictsObjectsWithDiscardedContent() bool 
 func (o *NSCache[KeyType, ObjectType]) SetEvictsObjectsWithDiscardedContent(evictsObjectsWithDiscardedContent bool) {
 	o.Ptr().Send(_nSCacheSelSetEvictsObjectsWithDiscardedContent, evictsObjectsWithDiscardedContent)
 }
-

@@ -16,17 +16,17 @@ type MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct struct {
 }
 
 var (
-	_clsMTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct = _objcClass("MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct")
-	_mTRElectricalPowerMeasurementClusterMeasurementAccuracyStructSelMeasurementType = objc.RegisterName("measurementType")
-	_mTRElectricalPowerMeasurementClusterMeasurementAccuracyStructSelSetMeasurementType = objc.RegisterName("setMeasurementType:")
-	_mTRElectricalPowerMeasurementClusterMeasurementAccuracyStructSelMeasured = objc.RegisterName("measured")
-	_mTRElectricalPowerMeasurementClusterMeasurementAccuracyStructSelSetMeasured = objc.RegisterName("setMeasured:")
-	_mTRElectricalPowerMeasurementClusterMeasurementAccuracyStructSelMinMeasuredValue = objc.RegisterName("minMeasuredValue")
+	_clsMTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct                    = _objcClass("MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct")
+	_mTRElectricalPowerMeasurementClusterMeasurementAccuracyStructSelMeasurementType     = objc.RegisterName("measurementType")
+	_mTRElectricalPowerMeasurementClusterMeasurementAccuracyStructSelSetMeasurementType  = objc.RegisterName("setMeasurementType:")
+	_mTRElectricalPowerMeasurementClusterMeasurementAccuracyStructSelMeasured            = objc.RegisterName("measured")
+	_mTRElectricalPowerMeasurementClusterMeasurementAccuracyStructSelSetMeasured         = objc.RegisterName("setMeasured:")
+	_mTRElectricalPowerMeasurementClusterMeasurementAccuracyStructSelMinMeasuredValue    = objc.RegisterName("minMeasuredValue")
 	_mTRElectricalPowerMeasurementClusterMeasurementAccuracyStructSelSetMinMeasuredValue = objc.RegisterName("setMinMeasuredValue:")
-	_mTRElectricalPowerMeasurementClusterMeasurementAccuracyStructSelMaxMeasuredValue = objc.RegisterName("maxMeasuredValue")
+	_mTRElectricalPowerMeasurementClusterMeasurementAccuracyStructSelMaxMeasuredValue    = objc.RegisterName("maxMeasuredValue")
 	_mTRElectricalPowerMeasurementClusterMeasurementAccuracyStructSelSetMaxMeasuredValue = objc.RegisterName("setMaxMeasuredValue:")
-	_mTRElectricalPowerMeasurementClusterMeasurementAccuracyStructSelAccuracyRanges = objc.RegisterName("accuracyRanges")
-	_mTRElectricalPowerMeasurementClusterMeasurementAccuracyStructSelSetAccuracyRanges = objc.RegisterName("setAccuracyRanges:")
+	_mTRElectricalPowerMeasurementClusterMeasurementAccuracyStructSelAccuracyRanges      = objc.RegisterName("accuracyRanges")
+	_mTRElectricalPowerMeasurementClusterMeasurementAccuracyStructSelSetAccuracyRanges   = objc.RegisterName("setAccuracyRanges:")
 )
 
 func MTRElectricalPowerMeasurementClusterMeasurementAccuracyStructFromID(id objc.ID) *MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct {
@@ -41,7 +41,9 @@ func MTRElectricalPowerMeasurementClusterMeasurementAccuracyStructFromID(id objc
 
 func (o *MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct) MeasurementType() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalPowerMeasurementClusterMeasurementAccuracyStructSelMeasurementType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -51,7 +53,9 @@ func (o *MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct) SetMeasu
 
 func (o *MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct) Measured() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalPowerMeasurementClusterMeasurementAccuracyStructSelMeasured)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct) SetMeasu
 
 func (o *MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct) MinMeasuredValue() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalPowerMeasurementClusterMeasurementAccuracyStructSelMinMeasuredValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -71,7 +77,9 @@ func (o *MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct) SetMinMe
 
 func (o *MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct) MaxMeasuredValue() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalPowerMeasurementClusterMeasurementAccuracyStructSelMaxMeasuredValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -87,4 +95,3 @@ func (o *MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct) Accuracy
 func (o *MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct) SetAccuracyRanges(accuracyRanges *foundation.NSArray[objc.ID]) {
 	o.Ptr().Send(_mTRElectricalPowerMeasurementClusterMeasurementAccuracyStructSelSetAccuracyRanges, accuracyRanges)
 }
-

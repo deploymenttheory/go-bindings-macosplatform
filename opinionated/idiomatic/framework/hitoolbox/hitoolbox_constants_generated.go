@@ -14,34 +14,54 @@ import (
 func KHIObjectInitParamUserName() objc.ID { return purego.CFConstant(raw.KHIObjectInitParamUserName()) }
 
 // KHIObjectInitParamDescription returns the value of the CoreFoundation reference constant kHIObjectInitParamDescription as an objc.ID.
-func KHIObjectInitParamDescription() objc.ID { return purego.CFConstant(raw.KHIObjectInitParamDescription()) }
+func KHIObjectInitParamDescription() objc.ID {
+	return purego.CFConstant(raw.KHIObjectInitParamDescription())
+}
 
 // KHIObjectInitParamEventName returns the value of the CoreFoundation reference constant kHIObjectInitParamEventName as an objc.ID.
-func KHIObjectInitParamEventName() objc.ID { return purego.CFConstant(raw.KHIObjectInitParamEventName()) }
+func KHIObjectInitParamEventName() objc.ID {
+	return purego.CFConstant(raw.KHIObjectInitParamEventName())
+}
 
 // KHIObjectInitParamEventType returns the value of the CoreFoundation reference constant kHIObjectInitParamEventType as an objc.ID.
-func KHIObjectInitParamEventType() objc.ID { return purego.CFConstant(raw.KHIObjectInitParamEventType()) }
+func KHIObjectInitParamEventType() objc.ID {
+	return purego.CFConstant(raw.KHIObjectInitParamEventType())
+}
 
 // KHIObjectCustomDataParameterNamesKey returns the value of the CoreFoundation reference constant kHIObjectCustomDataParameterNamesKey as an objc.ID.
-func KHIObjectCustomDataParameterNamesKey() objc.ID { return purego.CFConstant(raw.KHIObjectCustomDataParameterNamesKey()) }
+func KHIObjectCustomDataParameterNamesKey() objc.ID {
+	return purego.CFConstant(raw.KHIObjectCustomDataParameterNamesKey())
+}
 
 // KHIObjectCustomDataParameterTypesKey returns the value of the CoreFoundation reference constant kHIObjectCustomDataParameterTypesKey as an objc.ID.
-func KHIObjectCustomDataParameterTypesKey() objc.ID { return purego.CFConstant(raw.KHIObjectCustomDataParameterTypesKey()) }
+func KHIObjectCustomDataParameterTypesKey() objc.ID {
+	return purego.CFConstant(raw.KHIObjectCustomDataParameterTypesKey())
+}
 
 // KHIObjectCustomDataParameterValuesKey returns the value of the CoreFoundation reference constant kHIObjectCustomDataParameterValuesKey as an objc.ID.
-func KHIObjectCustomDataParameterValuesKey() objc.ID { return purego.CFConstant(raw.KHIObjectCustomDataParameterValuesKey()) }
+func KHIObjectCustomDataParameterValuesKey() objc.ID {
+	return purego.CFConstant(raw.KHIObjectCustomDataParameterValuesKey())
+}
 
 // KHIObjectCustomDataClassIDKey returns the value of the CoreFoundation reference constant kHIObjectCustomDataClassIDKey as an objc.ID.
-func KHIObjectCustomDataClassIDKey() objc.ID { return purego.CFConstant(raw.KHIObjectCustomDataClassIDKey()) }
+func KHIObjectCustomDataClassIDKey() objc.ID {
+	return purego.CFConstant(raw.KHIObjectCustomDataClassIDKey())
+}
 
 // KHIObjectCustomDataSuperClassIDKey returns the value of the CoreFoundation reference constant kHIObjectCustomDataSuperClassIDKey as an objc.ID.
-func KHIObjectCustomDataSuperClassIDKey() objc.ID { return purego.CFConstant(raw.KHIObjectCustomDataSuperClassIDKey()) }
+func KHIObjectCustomDataSuperClassIDKey() objc.ID {
+	return purego.CFConstant(raw.KHIObjectCustomDataSuperClassIDKey())
+}
 
 // KHIObjectCustomDataCDEFProcIDKey returns the value of the CoreFoundation reference constant kHIObjectCustomDataCDEFProcIDKey as an objc.ID.
-func KHIObjectCustomDataCDEFProcIDKey() objc.ID { return purego.CFConstant(raw.KHIObjectCustomDataCDEFProcIDKey()) }
+func KHIObjectCustomDataCDEFProcIDKey() objc.ID {
+	return purego.CFConstant(raw.KHIObjectCustomDataCDEFProcIDKey())
+}
 
 // KHIObjectCustomDataDelegateGroupParametersKey returns the value of the CoreFoundation reference constant kHIObjectCustomDataDelegateGroupParametersKey as an objc.ID.
-func KHIObjectCustomDataDelegateGroupParametersKey() objc.ID { return purego.CFConstant(raw.KHIObjectCustomDataDelegateGroupParametersKey()) }
+func KHIObjectCustomDataDelegateGroupParametersKey() objc.ID {
+	return purego.CFConstant(raw.KHIObjectCustomDataDelegateGroupParametersKey())
+}
 
 // KHIDelegateBeforeKey returns the value of the CoreFoundation reference constant kHIDelegateBeforeKey as an objc.ID.
 func KHIDelegateBeforeKey() objc.ID { return purego.CFConstant(raw.KHIDelegateBeforeKey()) }
@@ -89,64 +109,102 @@ func KTXNActionDrop() objc.ID { return purego.CFConstant(raw.KTXNActionDrop()) }
 func KTXNActionMove() objc.ID { return purego.CFConstant(raw.KTXNActionMove()) }
 
 // KTXNActionChangeFontFeature returns the value of the CoreFoundation reference constant kTXNActionChangeFontFeature as an objc.ID.
-func KTXNActionChangeFontFeature() objc.ID { return purego.CFConstant(raw.KTXNActionChangeFontFeature()) }
+func KTXNActionChangeFontFeature() objc.ID {
+	return purego.CFConstant(raw.KTXNActionChangeFontFeature())
+}
 
 // KTXNActionChangeFontVariation returns the value of the CoreFoundation reference constant kTXNActionChangeFontVariation as an objc.ID.
-func KTXNActionChangeFontVariation() objc.ID { return purego.CFConstant(raw.KTXNActionChangeFontVariation()) }
+func KTXNActionChangeFontVariation() objc.ID {
+	return purego.CFConstant(raw.KTXNActionChangeFontVariation())
+}
 
 // KTXNActionChangeGlyphVariation returns the value of the CoreFoundation reference constant kTXNActionChangeGlyphVariation as an objc.ID.
-func KTXNActionChangeGlyphVariation() objc.ID { return purego.CFConstant(raw.KTXNActionChangeGlyphVariation()) }
+func KTXNActionChangeGlyphVariation() objc.ID {
+	return purego.CFConstant(raw.KTXNActionChangeGlyphVariation())
+}
 
 // KTXNActionChangeTextPosition returns the value of the CoreFoundation reference constant kTXNActionChangeTextPosition as an objc.ID.
-func KTXNActionChangeTextPosition() objc.ID { return purego.CFConstant(raw.KTXNActionChangeTextPosition()) }
+func KTXNActionChangeTextPosition() objc.ID {
+	return purego.CFConstant(raw.KTXNActionChangeTextPosition())
+}
 
 // KTXNActionUndoLast returns the value of the CoreFoundation reference constant kTXNActionUndoLast as an objc.ID.
 func KTXNActionUndoLast() objc.ID { return purego.CFConstant(raw.KTXNActionUndoLast()) }
 
 // KTXNActionCountOfTextChanges returns the value of the CoreFoundation reference constant kTXNActionCountOfTextChanges as an objc.ID.
-func KTXNActionCountOfTextChanges() objc.ID { return purego.CFConstant(raw.KTXNActionCountOfTextChanges()) }
+func KTXNActionCountOfTextChanges() objc.ID {
+	return purego.CFConstant(raw.KTXNActionCountOfTextChanges())
+}
 
 // KTXNActionCountOfStyleChanges returns the value of the CoreFoundation reference constant kTXNActionCountOfStyleChanges as an objc.ID.
-func KTXNActionCountOfStyleChanges() objc.ID { return purego.CFConstant(raw.KTXNActionCountOfStyleChanges()) }
+func KTXNActionCountOfStyleChanges() objc.ID {
+	return purego.CFConstant(raw.KTXNActionCountOfStyleChanges())
+}
 
 // KTXNActionCountOfAllChanges returns the value of the CoreFoundation reference constant kTXNActionCountOfAllChanges as an objc.ID.
-func KTXNActionCountOfAllChanges() objc.ID { return purego.CFConstant(raw.KTXNActionCountOfAllChanges()) }
+func KTXNActionCountOfAllChanges() objc.ID {
+	return purego.CFConstant(raw.KTXNActionCountOfAllChanges())
+}
 
 // KTXNDocumentAttributeTitleKey returns the value of the CoreFoundation reference constant kTXNDocumentAttributeTitleKey as an objc.ID.
-func KTXNDocumentAttributeTitleKey() objc.ID { return purego.CFConstant(raw.KTXNDocumentAttributeTitleKey()) }
+func KTXNDocumentAttributeTitleKey() objc.ID {
+	return purego.CFConstant(raw.KTXNDocumentAttributeTitleKey())
+}
 
 // KTXNDocumentAttributeCompanyNameKey returns the value of the CoreFoundation reference constant kTXNDocumentAttributeCompanyNameKey as an objc.ID.
-func KTXNDocumentAttributeCompanyNameKey() objc.ID { return purego.CFConstant(raw.KTXNDocumentAttributeCompanyNameKey()) }
+func KTXNDocumentAttributeCompanyNameKey() objc.ID {
+	return purego.CFConstant(raw.KTXNDocumentAttributeCompanyNameKey())
+}
 
 // KTXNDocumentAttributeSubjectKey returns the value of the CoreFoundation reference constant kTXNDocumentAttributeSubjectKey as an objc.ID.
-func KTXNDocumentAttributeSubjectKey() objc.ID { return purego.CFConstant(raw.KTXNDocumentAttributeSubjectKey()) }
+func KTXNDocumentAttributeSubjectKey() objc.ID {
+	return purego.CFConstant(raw.KTXNDocumentAttributeSubjectKey())
+}
 
 // KTXNDocumentAttributeAuthorKey returns the value of the CoreFoundation reference constant kTXNDocumentAttributeAuthorKey as an objc.ID.
-func KTXNDocumentAttributeAuthorKey() objc.ID { return purego.CFConstant(raw.KTXNDocumentAttributeAuthorKey()) }
+func KTXNDocumentAttributeAuthorKey() objc.ID {
+	return purego.CFConstant(raw.KTXNDocumentAttributeAuthorKey())
+}
 
 // KTXNDocumentAttributeKeywordsKey returns the value of the CoreFoundation reference constant kTXNDocumentAttributeKeywordsKey as an objc.ID.
-func KTXNDocumentAttributeKeywordsKey() objc.ID { return purego.CFConstant(raw.KTXNDocumentAttributeKeywordsKey()) }
+func KTXNDocumentAttributeKeywordsKey() objc.ID {
+	return purego.CFConstant(raw.KTXNDocumentAttributeKeywordsKey())
+}
 
 // KTXNDocumentAttributeCommentKey returns the value of the CoreFoundation reference constant kTXNDocumentAttributeCommentKey as an objc.ID.
-func KTXNDocumentAttributeCommentKey() objc.ID { return purego.CFConstant(raw.KTXNDocumentAttributeCommentKey()) }
+func KTXNDocumentAttributeCommentKey() objc.ID {
+	return purego.CFConstant(raw.KTXNDocumentAttributeCommentKey())
+}
 
 // KTXNDocumentAttributeEditorKey returns the value of the CoreFoundation reference constant kTXNDocumentAttributeEditorKey as an objc.ID.
-func KTXNDocumentAttributeEditorKey() objc.ID { return purego.CFConstant(raw.KTXNDocumentAttributeEditorKey()) }
+func KTXNDocumentAttributeEditorKey() objc.ID {
+	return purego.CFConstant(raw.KTXNDocumentAttributeEditorKey())
+}
 
 // KTXNDocumentAttributeCreationTimeKey returns the value of the CoreFoundation reference constant kTXNDocumentAttributeCreationTimeKey as an objc.ID.
-func KTXNDocumentAttributeCreationTimeKey() objc.ID { return purego.CFConstant(raw.KTXNDocumentAttributeCreationTimeKey()) }
+func KTXNDocumentAttributeCreationTimeKey() objc.ID {
+	return purego.CFConstant(raw.KTXNDocumentAttributeCreationTimeKey())
+}
 
 // KTXNDocumentAttributeModificationTimeKey returns the value of the CoreFoundation reference constant kTXNDocumentAttributeModificationTimeKey as an objc.ID.
-func KTXNDocumentAttributeModificationTimeKey() objc.ID { return purego.CFConstant(raw.KTXNDocumentAttributeModificationTimeKey()) }
+func KTXNDocumentAttributeModificationTimeKey() objc.ID {
+	return purego.CFConstant(raw.KTXNDocumentAttributeModificationTimeKey())
+}
 
 // KTXNDocumentAttributeCopyrightKey returns the value of the CoreFoundation reference constant kTXNDocumentAttributeCopyrightKey as an objc.ID.
-func KTXNDocumentAttributeCopyrightKey() objc.ID { return purego.CFConstant(raw.KTXNDocumentAttributeCopyrightKey()) }
+func KTXNDocumentAttributeCopyrightKey() objc.ID {
+	return purego.CFConstant(raw.KTXNDocumentAttributeCopyrightKey())
+}
 
 // KTXNDataOptionDocumentTypeKey returns the value of the CoreFoundation reference constant kTXNDataOptionDocumentTypeKey as an objc.ID.
-func KTXNDataOptionDocumentTypeKey() objc.ID { return purego.CFConstant(raw.KTXNDataOptionDocumentTypeKey()) }
+func KTXNDataOptionDocumentTypeKey() objc.ID {
+	return purego.CFConstant(raw.KTXNDataOptionDocumentTypeKey())
+}
 
 // KTXNDataOptionCharacterEncodingKey returns the value of the CoreFoundation reference constant kTXNDataOptionCharacterEncodingKey as an objc.ID.
-func KTXNDataOptionCharacterEncodingKey() objc.ID { return purego.CFConstant(raw.KTXNDataOptionCharacterEncodingKey()) }
+func KTXNDataOptionCharacterEncodingKey() objc.ID {
+	return purego.CFConstant(raw.KTXNDataOptionCharacterEncodingKey())
+}
 
 // KTXNPlainTextDocumentType returns the value of the CoreFoundation reference constant kTXNPlainTextDocumentType as an objc.ID.
 func KTXNPlainTextDocumentType() objc.ID { return purego.CFConstant(raw.KTXNPlainTextDocumentType()) }
@@ -164,25 +222,39 @@ func KTXNQuickTimeDocumentType() objc.ID { return purego.CFConstant(raw.KTXNQuic
 func KHITextViewClassID() objc.ID { return purego.CFConstant(raw.KHITextViewClassID()) }
 
 // KTISPropertyInputSourceCategory returns the value of the CoreFoundation reference constant kTISPropertyInputSourceCategory as an objc.ID.
-func KTISPropertyInputSourceCategory() objc.ID { return purego.CFConstant(raw.KTISPropertyInputSourceCategory()) }
+func KTISPropertyInputSourceCategory() objc.ID {
+	return purego.CFConstant(raw.KTISPropertyInputSourceCategory())
+}
 
 // KTISPropertyInputSourceType returns the value of the CoreFoundation reference constant kTISPropertyInputSourceType as an objc.ID.
-func KTISPropertyInputSourceType() objc.ID { return purego.CFConstant(raw.KTISPropertyInputSourceType()) }
+func KTISPropertyInputSourceType() objc.ID {
+	return purego.CFConstant(raw.KTISPropertyInputSourceType())
+}
 
 // KTISPropertyInputSourceIsASCIICapable returns the value of the CoreFoundation reference constant kTISPropertyInputSourceIsASCIICapable as an objc.ID.
-func KTISPropertyInputSourceIsASCIICapable() objc.ID { return purego.CFConstant(raw.KTISPropertyInputSourceIsASCIICapable()) }
+func KTISPropertyInputSourceIsASCIICapable() objc.ID {
+	return purego.CFConstant(raw.KTISPropertyInputSourceIsASCIICapable())
+}
 
 // KTISPropertyInputSourceIsEnableCapable returns the value of the CoreFoundation reference constant kTISPropertyInputSourceIsEnableCapable as an objc.ID.
-func KTISPropertyInputSourceIsEnableCapable() objc.ID { return purego.CFConstant(raw.KTISPropertyInputSourceIsEnableCapable()) }
+func KTISPropertyInputSourceIsEnableCapable() objc.ID {
+	return purego.CFConstant(raw.KTISPropertyInputSourceIsEnableCapable())
+}
 
 // KTISPropertyInputSourceIsSelectCapable returns the value of the CoreFoundation reference constant kTISPropertyInputSourceIsSelectCapable as an objc.ID.
-func KTISPropertyInputSourceIsSelectCapable() objc.ID { return purego.CFConstant(raw.KTISPropertyInputSourceIsSelectCapable()) }
+func KTISPropertyInputSourceIsSelectCapable() objc.ID {
+	return purego.CFConstant(raw.KTISPropertyInputSourceIsSelectCapable())
+}
 
 // KTISPropertyInputSourceIsEnabled returns the value of the CoreFoundation reference constant kTISPropertyInputSourceIsEnabled as an objc.ID.
-func KTISPropertyInputSourceIsEnabled() objc.ID { return purego.CFConstant(raw.KTISPropertyInputSourceIsEnabled()) }
+func KTISPropertyInputSourceIsEnabled() objc.ID {
+	return purego.CFConstant(raw.KTISPropertyInputSourceIsEnabled())
+}
 
 // KTISPropertyInputSourceIsSelected returns the value of the CoreFoundation reference constant kTISPropertyInputSourceIsSelected as an objc.ID.
-func KTISPropertyInputSourceIsSelected() objc.ID { return purego.CFConstant(raw.KTISPropertyInputSourceIsSelected()) }
+func KTISPropertyInputSourceIsSelected() objc.ID {
+	return purego.CFConstant(raw.KTISPropertyInputSourceIsSelected())
+}
 
 // KTISPropertyInputSourceID returns the value of the CoreFoundation reference constant kTISPropertyInputSourceID as an objc.ID.
 func KTISPropertyInputSourceID() objc.ID { return purego.CFConstant(raw.KTISPropertyInputSourceID()) }
@@ -197,10 +269,14 @@ func KTISPropertyInputModeID() objc.ID { return purego.CFConstant(raw.KTISProper
 func KTISPropertyLocalizedName() objc.ID { return purego.CFConstant(raw.KTISPropertyLocalizedName()) }
 
 // KTISPropertyInputSourceLanguages returns the value of the CoreFoundation reference constant kTISPropertyInputSourceLanguages as an objc.ID.
-func KTISPropertyInputSourceLanguages() objc.ID { return purego.CFConstant(raw.KTISPropertyInputSourceLanguages()) }
+func KTISPropertyInputSourceLanguages() objc.ID {
+	return purego.CFConstant(raw.KTISPropertyInputSourceLanguages())
+}
 
 // KTISPropertyUnicodeKeyLayoutData returns the value of the CoreFoundation reference constant kTISPropertyUnicodeKeyLayoutData as an objc.ID.
-func KTISPropertyUnicodeKeyLayoutData() objc.ID { return purego.CFConstant(raw.KTISPropertyUnicodeKeyLayoutData()) }
+func KTISPropertyUnicodeKeyLayoutData() objc.ID {
+	return purego.CFConstant(raw.KTISPropertyUnicodeKeyLayoutData())
+}
 
 // KTISPropertyIconRef returns the value of the CoreFoundation reference constant kTISPropertyIconRef as an objc.ID.
 func KTISPropertyIconRef() objc.ID { return purego.CFConstant(raw.KTISPropertyIconRef()) }
@@ -209,10 +285,14 @@ func KTISPropertyIconRef() objc.ID { return purego.CFConstant(raw.KTISPropertyIc
 func KTISPropertyIconImageURL() objc.ID { return purego.CFConstant(raw.KTISPropertyIconImageURL()) }
 
 // KTISCategoryKeyboardInputSource returns the value of the CoreFoundation reference constant kTISCategoryKeyboardInputSource as an objc.ID.
-func KTISCategoryKeyboardInputSource() objc.ID { return purego.CFConstant(raw.KTISCategoryKeyboardInputSource()) }
+func KTISCategoryKeyboardInputSource() objc.ID {
+	return purego.CFConstant(raw.KTISCategoryKeyboardInputSource())
+}
 
 // KTISCategoryPaletteInputSource returns the value of the CoreFoundation reference constant kTISCategoryPaletteInputSource as an objc.ID.
-func KTISCategoryPaletteInputSource() objc.ID { return purego.CFConstant(raw.KTISCategoryPaletteInputSource()) }
+func KTISCategoryPaletteInputSource() objc.ID {
+	return purego.CFConstant(raw.KTISCategoryPaletteInputSource())
+}
 
 // KTISCategoryInkInputSource returns the value of the CoreFoundation reference constant kTISCategoryInkInputSource as an objc.ID.
 func KTISCategoryInkInputSource() objc.ID { return purego.CFConstant(raw.KTISCategoryInkInputSource()) }
@@ -221,10 +301,14 @@ func KTISCategoryInkInputSource() objc.ID { return purego.CFConstant(raw.KTISCat
 func KTISTypeKeyboardLayout() objc.ID { return purego.CFConstant(raw.KTISTypeKeyboardLayout()) }
 
 // KTISTypeKeyboardInputMethodWithoutModes returns the value of the CoreFoundation reference constant kTISTypeKeyboardInputMethodWithoutModes as an objc.ID.
-func KTISTypeKeyboardInputMethodWithoutModes() objc.ID { return purego.CFConstant(raw.KTISTypeKeyboardInputMethodWithoutModes()) }
+func KTISTypeKeyboardInputMethodWithoutModes() objc.ID {
+	return purego.CFConstant(raw.KTISTypeKeyboardInputMethodWithoutModes())
+}
 
 // KTISTypeKeyboardInputMethodModeEnabled returns the value of the CoreFoundation reference constant kTISTypeKeyboardInputMethodModeEnabled as an objc.ID.
-func KTISTypeKeyboardInputMethodModeEnabled() objc.ID { return purego.CFConstant(raw.KTISTypeKeyboardInputMethodModeEnabled()) }
+func KTISTypeKeyboardInputMethodModeEnabled() objc.ID {
+	return purego.CFConstant(raw.KTISTypeKeyboardInputMethodModeEnabled())
+}
 
 // KTISTypeKeyboardInputMode returns the value of the CoreFoundation reference constant kTISTypeKeyboardInputMode as an objc.ID.
 func KTISTypeKeyboardInputMode() objc.ID { return purego.CFConstant(raw.KTISTypeKeyboardInputMode()) }
@@ -239,8 +323,11 @@ func KTISTypeKeyboardViewer() objc.ID { return purego.CFConstant(raw.KTISTypeKey
 func KTISTypeInk() objc.ID { return purego.CFConstant(raw.KTISTypeInk()) }
 
 // KTISNotifySelectedKeyboardInputSourceChanged returns the value of the CoreFoundation reference constant kTISNotifySelectedKeyboardInputSourceChanged as an objc.ID.
-func KTISNotifySelectedKeyboardInputSourceChanged() objc.ID { return purego.CFConstant(raw.KTISNotifySelectedKeyboardInputSourceChanged()) }
+func KTISNotifySelectedKeyboardInputSourceChanged() objc.ID {
+	return purego.CFConstant(raw.KTISNotifySelectedKeyboardInputSourceChanged())
+}
 
 // KTISNotifyEnabledKeyboardInputSourcesChanged returns the value of the CoreFoundation reference constant kTISNotifyEnabledKeyboardInputSourcesChanged as an objc.ID.
-func KTISNotifyEnabledKeyboardInputSourcesChanged() objc.ID { return purego.CFConstant(raw.KTISNotifyEnabledKeyboardInputSourcesChanged()) }
-
+func KTISNotifyEnabledKeyboardInputSourcesChanged() objc.ID {
+	return purego.CFConstant(raw.KTISNotifyEnabledKeyboardInputSourcesChanged())
+}

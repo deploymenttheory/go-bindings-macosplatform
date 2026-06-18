@@ -74,9 +74,13 @@ func (x *MTRClusterFixedLabel) ReadAttributeClusterRevisionWithParams(params *ra
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterFixedLabel) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterFixedLabel) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterFixedLabel) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterFixedLabel) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterFixedLabelable is the interface implemented by [MTRClusterFixedLabel], for mocking and DI.
 type MTRClusterFixedLabelable interface {
@@ -90,4 +94,3 @@ type MTRClusterFixedLabelable interface {
 }
 
 var _ MTRClusterFixedLabelable = (*MTRClusterFixedLabel)(nil)
-

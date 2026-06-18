@@ -20,28 +20,28 @@ type AVVideoComposition struct {
 }
 
 var (
-	_clsAVVideoComposition = _objcClass("AVVideoComposition")
-	_aVVideoCompositionSelVideoCompositionWithPropertiesOfAsset = objc.RegisterName("videoCompositionWithPropertiesOfAsset:")
-	_aVVideoCompositionSelVideoCompositionWithPropertiesOfAssetCompletionHandler = objc.RegisterName("videoCompositionWithPropertiesOfAsset:completionHandler:")
-	_aVVideoCompositionSelCustomVideoCompositorClass = objc.RegisterName("customVideoCompositorClass")
-	_aVVideoCompositionSelFrameDuration = objc.RegisterName("frameDuration")
-	_aVVideoCompositionSelSourceTrackIDForFrameTiming = objc.RegisterName("sourceTrackIDForFrameTiming")
-	_aVVideoCompositionSelRenderSize = objc.RegisterName("renderSize")
-	_aVVideoCompositionSelRenderScale = objc.RegisterName("renderScale")
-	_aVVideoCompositionSelInstructions = objc.RegisterName("instructions")
-	_aVVideoCompositionSelAnimationTool = objc.RegisterName("animationTool")
-	_aVVideoCompositionSelSourceSampleDataTrackIDs = objc.RegisterName("sourceSampleDataTrackIDs")
-	_aVVideoCompositionSelOutputBufferDescription = objc.RegisterName("outputBufferDescription")
-	_aVVideoCompositionSelSpatialVideoConfigurations = objc.RegisterName("spatialVideoConfigurations")
-	_aVVideoCompositionSelColorPrimaries = objc.RegisterName("colorPrimaries")
-	_aVVideoCompositionSelColorYCbCrMatrix = objc.RegisterName("colorYCbCrMatrix")
-	_aVVideoCompositionSelColorTransferFunction = objc.RegisterName("colorTransferFunction")
-	_aVVideoCompositionSelPerFrameHDRDisplayMetadataPolicy = objc.RegisterName("perFrameHDRDisplayMetadataPolicy")
-	_aVVideoCompositionSelVideoCompositionWithAssetApplyingCIFiltersWithHandler = objc.RegisterName("videoCompositionWithAsset:applyingCIFiltersWithHandler:")
+	_clsAVVideoComposition                                                                       = _objcClass("AVVideoComposition")
+	_aVVideoCompositionSelVideoCompositionWithPropertiesOfAsset                                  = objc.RegisterName("videoCompositionWithPropertiesOfAsset:")
+	_aVVideoCompositionSelVideoCompositionWithPropertiesOfAssetCompletionHandler                 = objc.RegisterName("videoCompositionWithPropertiesOfAsset:completionHandler:")
+	_aVVideoCompositionSelCustomVideoCompositorClass                                             = objc.RegisterName("customVideoCompositorClass")
+	_aVVideoCompositionSelFrameDuration                                                          = objc.RegisterName("frameDuration")
+	_aVVideoCompositionSelSourceTrackIDForFrameTiming                                            = objc.RegisterName("sourceTrackIDForFrameTiming")
+	_aVVideoCompositionSelRenderSize                                                             = objc.RegisterName("renderSize")
+	_aVVideoCompositionSelRenderScale                                                            = objc.RegisterName("renderScale")
+	_aVVideoCompositionSelInstructions                                                           = objc.RegisterName("instructions")
+	_aVVideoCompositionSelAnimationTool                                                          = objc.RegisterName("animationTool")
+	_aVVideoCompositionSelSourceSampleDataTrackIDs                                               = objc.RegisterName("sourceSampleDataTrackIDs")
+	_aVVideoCompositionSelOutputBufferDescription                                                = objc.RegisterName("outputBufferDescription")
+	_aVVideoCompositionSelSpatialVideoConfigurations                                             = objc.RegisterName("spatialVideoConfigurations")
+	_aVVideoCompositionSelColorPrimaries                                                         = objc.RegisterName("colorPrimaries")
+	_aVVideoCompositionSelColorYCbCrMatrix                                                       = objc.RegisterName("colorYCbCrMatrix")
+	_aVVideoCompositionSelColorTransferFunction                                                  = objc.RegisterName("colorTransferFunction")
+	_aVVideoCompositionSelPerFrameHDRDisplayMetadataPolicy                                       = objc.RegisterName("perFrameHDRDisplayMetadataPolicy")
+	_aVVideoCompositionSelVideoCompositionWithAssetApplyingCIFiltersWithHandler                  = objc.RegisterName("videoCompositionWithAsset:applyingCIFiltersWithHandler:")
 	_aVVideoCompositionSelVideoCompositionWithAssetApplyingCIFiltersWithHandlerCompletionHandler = objc.RegisterName("videoCompositionWithAsset:applyingCIFiltersWithHandler:completionHandler:")
-	_aVVideoCompositionSelIsValidForAssetTimeRangeValidationDelegate = objc.RegisterName("isValidForAsset:timeRange:validationDelegate:")
-	_aVVideoCompositionSelDetermineValidityForAssetTimeRangeValidationDelegateCompletionHandler = objc.RegisterName("determineValidityForAsset:timeRange:validationDelegate:completionHandler:")
-	_aVVideoCompositionSelIsValidForTracksAssetDurationTimeRangeValidationDelegate = objc.RegisterName("isValidForTracks:assetDuration:timeRange:validationDelegate:")
+	_aVVideoCompositionSelIsValidForAssetTimeRangeValidationDelegate                             = objc.RegisterName("isValidForAsset:timeRange:validationDelegate:")
+	_aVVideoCompositionSelDetermineValidityForAssetTimeRangeValidationDelegateCompletionHandler  = objc.RegisterName("determineValidityForAsset:timeRange:validationDelegate:completionHandler:")
+	_aVVideoCompositionSelIsValidForTracksAssetDurationTimeRangeValidationDelegate               = objc.RegisterName("isValidForTracks:assetDuration:timeRange:validationDelegate:")
 )
 
 func AVVideoCompositionFromID(id objc.ID) *AVVideoComposition {
@@ -58,7 +58,9 @@ func AVVideoCompositionFromID(id objc.ID) *AVVideoComposition {
 // Deprecated: Use videoCompositionWithPropertiesOfAsset:completionHandler: instead
 func AVVideoCompositionVideoCompositionWithPropertiesOfAsset(asset *AVAsset) *AVVideoComposition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVVideoComposition), _aVVideoCompositionSelVideoCompositionWithPropertiesOfAsset, asset.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVVideoCompositionFromID(_ret)
 }
 
@@ -110,14 +112,18 @@ func (o *AVVideoComposition) RenderScale() float32 {
 // Indicates instructions for video composition via an NSArray of instances of classes implementing the AVVideoCompositionInstruction protocol. For the first instruction in the array, timeRange.start must be less than or equal to the earliest time for which playback or other processing will be attempted (note that this will typically be kCMTimeZero). For subsequent instructions, timeRange.start must be equal to the prior instruction's end time. The end time of the last instruction must be greater than or equal to the latest time for which playback or other processing will be attempted (note that this will often be the duration of the asset with which the instance of AVVideoComposition is associated).
 func (o *AVVideoComposition) Instructions() *foundation.NSArray[AVVideoCompositionInstructionProtocol] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVVideoCompositionSelInstructions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[AVVideoCompositionInstructionProtocol](_ret)
 }
 
 // Indicates a special video composition tool for use of Core Animation; may be nil
 func (o *AVVideoComposition) AnimationTool() *AVVideoCompositionCoreAnimationTool {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVVideoCompositionSelAnimationTool)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVVideoCompositionCoreAnimationToolFromID(_ret)
 }
 
@@ -136,35 +142,45 @@ func (o *AVVideoComposition) OutputBufferDescription() *foundation.NSArray[objc.
 // Indicates the spatial configurations that are available to associate with the output of the video composition. A custom compositor can output spatial video by specifying one of these spatial configurations. A spatial configuration with all nil values indicates the video is not spatial. A nil spatial configuration also indicates the video is not spatial. The value can be nil, which indicates the output will not be spatial. NOTE: If this property is not empty, then the client must attach one of the spatial configurations in this array to all of the pixel buffers, otherwise an exception will be thrown.
 func (o *AVVideoComposition) SpatialVideoConfigurations() *foundation.NSArray[*AVSpatialVideoConfiguration] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVVideoCompositionSelSpatialVideoConfigurations)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVSpatialVideoConfiguration](_ret)
 }
 
 // Rendering will use these primaries and frames will be tagged as such. If the value of this property is nil then the source's primaries will be propagated and used. Default is nil. Valid values are those suitable for AVVideoColorPrimariesKey. Generally set as a triple along with colorYCbCrMatrix and colorTransferFunction.
 func (o *AVVideoComposition) ColorPrimaries() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVVideoCompositionSelColorPrimaries)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Rendering will use this matrix and frames will be tagged as such. If the value of this property is nil then the source's matrix will be propagated and used. Default is nil. Valid values are those suitable for AVVideoYCbCrMatrixKey. Generally set as a triple along with colorPrimaries and colorTransferFunction.
 func (o *AVVideoComposition) ColorYCbCrMatrix() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVVideoCompositionSelColorYCbCrMatrix)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Rendering will use this transfer function and frames will be tagged as such. If the value of this property is nil then the source's transfer function will be propagated and used. Default is nil. Valid values are those suitable for AVVideoTransferFunctionKey. Generally set as a triple along with colorYCbCrMatrix and colorYCbCrMatrix.
 func (o *AVVideoComposition) ColorTransferFunction() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVVideoCompositionSelColorTransferFunction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Configures policy for per frame HDR display metadata on the rendered frame Allows the system to identify situations where HDR metadata can be generated and attached to the rendered video frame. Default is AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate. Any HDR metadata attached to the composed frame will be propagated to the rendered video frames.
 func (o *AVVideoComposition) PerFrameHDRDisplayMetadataPolicy() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVVideoCompositionSelPerFrameHDRDisplayMetadataPolicy)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -182,7 +198,9 @@ func AVVideoCompositionVideoCompositionWithAssetApplyingCIFiltersWithHandler(ass
 		defer __block_applier.Release()
 	}
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVVideoComposition), _aVVideoCompositionSelVideoCompositionWithAssetApplyingCIFiltersWithHandler, asset.Ptr(), __block_applier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVVideoCompositionFromID(_ret)
 }
 
@@ -236,4 +254,3 @@ func (o *AVVideoComposition) IsValidForTracksAssetDurationTimeRangeValidationDel
 	_ret := objc.Send[bool](o.Ptr(), _aVVideoCompositionSelIsValidForTracksAssetDurationTimeRangeValidationDelegate, tracks.Ptr(), duration, timeRange, validationDelegate)
 	return _ret
 }
-

@@ -15,8 +15,8 @@ type INCallCapabilityResolutionResult struct {
 }
 
 var (
-	_clsINCallCapabilityResolutionResult = _objcClass("INCallCapabilityResolutionResult")
-	_iNCallCapabilityResolutionResultSelSuccessWithResolvedCallCapability = objc.RegisterName("successWithResolvedCallCapability:")
+	_clsINCallCapabilityResolutionResult                                                = _objcClass("INCallCapabilityResolutionResult")
+	_iNCallCapabilityResolutionResultSelSuccessWithResolvedCallCapability               = objc.RegisterName("successWithResolvedCallCapability:")
 	_iNCallCapabilityResolutionResultSelConfirmationRequiredWithCallCapabilityToConfirm = objc.RegisterName("confirmationRequiredWithCallCapabilityToConfirm:")
 )
 
@@ -32,13 +32,16 @@ func INCallCapabilityResolutionResultFromID(id objc.ID) *INCallCapabilityResolut
 
 func INCallCapabilityResolutionResultSuccessWithResolvedCallCapability(resolvedCallCapability INCallCapability) *INCallCapabilityResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINCallCapabilityResolutionResult), _iNCallCapabilityResolutionResultSelSuccessWithResolvedCallCapability, resolvedCallCapability)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INCallCapabilityResolutionResultFromID(_ret)
 }
 
 func INCallCapabilityResolutionResultConfirmationRequiredWithCallCapabilityToConfirm(callCapabilityToConfirm INCallCapability) *INCallCapabilityResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINCallCapabilityResolutionResult), _iNCallCapabilityResolutionResultSelConfirmationRequiredWithCallCapabilityToConfirm, callCapabilityToConfirm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INCallCapabilityResolutionResultFromID(_ret)
 }
-

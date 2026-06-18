@@ -63,11 +63,17 @@ func (x *ContactsPrescription) Brand() string {
 	return purego.GoString(_r.Ptr())
 }
 
-func (x *ContactsPrescription) asVisionPrescription() *raw.HKVisionPrescription { return &x.inner.HKVisionPrescription }
+func (x *ContactsPrescription) asVisionPrescription() *raw.HKVisionPrescription {
+	return &x.inner.HKVisionPrescription
+}
 
-func (x *ContactsPrescription) asSample() *raw.HKSample { return &x.inner.HKVisionPrescription.HKSample }
+func (x *ContactsPrescription) asSample() *raw.HKSample {
+	return &x.inner.HKVisionPrescription.HKSample
+}
 
-func (x *ContactsPrescription) asObject() *raw.HKObject { return &x.inner.HKVisionPrescription.HKSample.HKObject }
+func (x *ContactsPrescription) asObject() *raw.HKObject {
+	return &x.inner.HKVisionPrescription.HKSample.HKObject
+}
 
 // ContactsPrescriptionable is the interface implemented by [ContactsPrescription], for mocking and DI.
 type ContactsPrescriptionable interface {
@@ -78,4 +84,3 @@ type ContactsPrescriptionable interface {
 }
 
 var _ ContactsPrescriptionable = (*ContactsPrescription)(nil)
-

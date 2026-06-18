@@ -16,11 +16,11 @@ type MTLVertexDescriptor struct {
 }
 
 var (
-	_clsMTLVertexDescriptor = _objcClass("MTLVertexDescriptor")
+	_clsMTLVertexDescriptor                 = _objcClass("MTLVertexDescriptor")
 	_mTLVertexDescriptorSelVertexDescriptor = objc.RegisterName("vertexDescriptor")
-	_mTLVertexDescriptorSelReset = objc.RegisterName("reset")
-	_mTLVertexDescriptorSelLayouts = objc.RegisterName("layouts")
-	_mTLVertexDescriptorSelAttributes = objc.RegisterName("attributes")
+	_mTLVertexDescriptorSelReset            = objc.RegisterName("reset")
+	_mTLVertexDescriptorSelLayouts          = objc.RegisterName("layouts")
+	_mTLVertexDescriptorSelAttributes       = objc.RegisterName("attributes")
 )
 
 func MTLVertexDescriptorFromID(id objc.ID) *MTLVertexDescriptor {
@@ -35,7 +35,9 @@ func MTLVertexDescriptorFromID(id objc.ID) *MTLVertexDescriptor {
 
 func MTLVertexDescriptorVertexDescriptor() *MTLVertexDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLVertexDescriptor), _mTLVertexDescriptorSelVertexDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLVertexDescriptorFromID(_ret)
 }
 
@@ -45,13 +47,16 @@ func (o *MTLVertexDescriptor) Reset() {
 
 func (o *MTLVertexDescriptor) Layouts() *MTLVertexBufferLayoutDescriptorArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLVertexDescriptorSelLayouts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLVertexBufferLayoutDescriptorArrayFromID(_ret)
 }
 
 func (o *MTLVertexDescriptor) Attributes() *MTLVertexAttributeDescriptorArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLVertexDescriptorSelAttributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLVertexAttributeDescriptorArrayFromID(_ret)
 }
-

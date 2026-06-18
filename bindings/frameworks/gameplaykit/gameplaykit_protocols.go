@@ -52,4 +52,3 @@ type GKStrategist interface {
 	RandomSource() GKRandom
 	SetRandomSource(randomSource GKRandom)
 }
-

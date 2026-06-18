@@ -16,7 +16,9 @@ type MTL4AccelerationStructureBoundingBoxGeometryDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTL4AccelerationStructureBoundingBoxGeometryDescriptor].
-func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) Unwrap() *raw.MTL4AccelerationStructureBoundingBoxGeometryDescriptor { return x.inner }
+func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) Unwrap() *raw.MTL4AccelerationStructureBoundingBoxGeometryDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -126,7 +128,9 @@ func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) SetBoundingBoxC
 	x.inner.SetBoundingBoxCount(boundingBoxCount)
 }
 
-func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) asMTL4AccelerationStructureGeometryDescriptor() *raw.MTL4AccelerationStructureGeometryDescriptor { return &x.inner.MTL4AccelerationStructureGeometryDescriptor }
+func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) asMTL4AccelerationStructureGeometryDescriptor() *raw.MTL4AccelerationStructureGeometryDescriptor {
+	return &x.inner.MTL4AccelerationStructureGeometryDescriptor
+}
 
 // MTL4AccelerationStructureBoundingBoxGeometryDescriptorable is the interface implemented by [MTL4AccelerationStructureBoundingBoxGeometryDescriptor], for mocking and DI.
 type MTL4AccelerationStructureBoundingBoxGeometryDescriptorable interface {
@@ -150,4 +154,3 @@ type MTL4AccelerationStructureBoundingBoxGeometryDescriptorable interface {
 }
 
 var _ MTL4AccelerationStructureBoundingBoxGeometryDescriptorable = (*MTL4AccelerationStructureBoundingBoxGeometryDescriptor)(nil)
-

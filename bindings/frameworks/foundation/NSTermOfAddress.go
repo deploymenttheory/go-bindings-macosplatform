@@ -15,14 +15,14 @@ type NSTermOfAddress struct {
 }
 
 var (
-	_clsNSTermOfAddress = _objcClass("NSTermOfAddress")
-	_nSTermOfAddressSelNeutral = objc.RegisterName("neutral")
-	_nSTermOfAddressSelFeminine = objc.RegisterName("feminine")
-	_nSTermOfAddressSelMasculine = objc.RegisterName("masculine")
-	_nSTermOfAddressSelCurrentUser = objc.RegisterName("currentUser")
+	_clsNSTermOfAddress                                           = _objcClass("NSTermOfAddress")
+	_nSTermOfAddressSelNeutral                                    = objc.RegisterName("neutral")
+	_nSTermOfAddressSelFeminine                                   = objc.RegisterName("feminine")
+	_nSTermOfAddressSelMasculine                                  = objc.RegisterName("masculine")
+	_nSTermOfAddressSelCurrentUser                                = objc.RegisterName("currentUser")
 	_nSTermOfAddressSelLocalizedForLanguageIdentifierWithPronouns = objc.RegisterName("localizedForLanguageIdentifier:withPronouns:")
-	_nSTermOfAddressSelLanguageIdentifier = objc.RegisterName("languageIdentifier")
-	_nSTermOfAddressSelPronouns = objc.RegisterName("pronouns")
+	_nSTermOfAddressSelLanguageIdentifier                         = objc.RegisterName("languageIdentifier")
+	_nSTermOfAddressSelPronouns                                   = objc.RegisterName("pronouns")
 )
 
 func NSTermOfAddressFromID(id objc.ID) *NSTermOfAddress {
@@ -38,49 +38,62 @@ func NSTermOfAddressFromID(id objc.ID) *NSTermOfAddress {
 // Term of address that uses gender-neutral pronouns (e.g. they/them/theirs in English), and an epicene grammatical gender when inflecting verbs and adjectives referring to the person
 func NSTermOfAddressNeutral() *NSTermOfAddress {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTermOfAddress), _nSTermOfAddressSelNeutral)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTermOfAddressFromID(_ret)
 }
 
 // Term of address that uses feminine pronouns (e.g. she/her/hers in English), and a feminine grammatical gender when inflecting verbs and adjectives referring to the person
 func NSTermOfAddressFeminine() *NSTermOfAddress {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTermOfAddress), _nSTermOfAddressSelFeminine)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTermOfAddressFromID(_ret)
 }
 
 // Term of address that uses masculine pronouns (e.g. he/him/his in English), and a masculine grammatical gender when inflecting verbs and adjectives referring to the person
 func NSTermOfAddressMasculine() *NSTermOfAddress {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTermOfAddress), _nSTermOfAddressSelMasculine)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTermOfAddressFromID(_ret)
 }
 
 // The term of address that should be used for addressing the user This term of address will only compare equal to another `+[NSTermOfAddress currentUser]`
 func NSTermOfAddressCurrentUser() *NSTermOfAddress {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTermOfAddress), _nSTermOfAddressSelCurrentUser)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTermOfAddressFromID(_ret)
 }
 
 // A term of address restricted to a given language @param language ISO language code identifier for the language @param pronouns A list of pronouns in the target language that can be used to refer to the person.
 func NSTermOfAddressLocalizedForLanguageIdentifierWithPronouns(language *NSString, pronouns *NSArray[*NSMorphologyPronoun]) *NSTermOfAddress {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTermOfAddress), _nSTermOfAddressSelLocalizedForLanguageIdentifierWithPronouns, language.Ptr(), pronouns.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTermOfAddressFromID(_ret)
 }
 
 // The ISO language code if this is a localized term of address
 func (o *NSTermOfAddress) LanguageIdentifier() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTermOfAddressSelLanguageIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // A list of pronouns for a localized term of address
 func (o *NSTermOfAddress) Pronouns() *NSArray[*NSMorphologyPronoun] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTermOfAddressSelPronouns)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSMorphologyPronoun](_ret)
 }
-

@@ -16,16 +16,16 @@ type MXSignpostRecord struct {
 }
 
 var (
-	_clsMXSignpostRecord = _objcClass("MXSignpostRecord")
-	_mXSignpostRecordSelJSONRepresentation = objc.RegisterName("JSONRepresentation")
+	_clsMXSignpostRecord                         = _objcClass("MXSignpostRecord")
+	_mXSignpostRecordSelJSONRepresentation       = objc.RegisterName("JSONRepresentation")
 	_mXSignpostRecordSelDictionaryRepresentation = objc.RegisterName("dictionaryRepresentation")
-	_mXSignpostRecordSelSubsystem = objc.RegisterName("subsystem")
-	_mXSignpostRecordSelCategory = objc.RegisterName("category")
-	_mXSignpostRecordSelName = objc.RegisterName("name")
-	_mXSignpostRecordSelBeginTimeStamp = objc.RegisterName("beginTimeStamp")
-	_mXSignpostRecordSelEndTimeStamp = objc.RegisterName("endTimeStamp")
-	_mXSignpostRecordSelDuration = objc.RegisterName("duration")
-	_mXSignpostRecordSelIsInterval = objc.RegisterName("isInterval")
+	_mXSignpostRecordSelSubsystem                = objc.RegisterName("subsystem")
+	_mXSignpostRecordSelCategory                 = objc.RegisterName("category")
+	_mXSignpostRecordSelName                     = objc.RegisterName("name")
+	_mXSignpostRecordSelBeginTimeStamp           = objc.RegisterName("beginTimeStamp")
+	_mXSignpostRecordSelEndTimeStamp             = objc.RegisterName("endTimeStamp")
+	_mXSignpostRecordSelDuration                 = objc.RegisterName("duration")
+	_mXSignpostRecordSelIsInterval               = objc.RegisterName("isInterval")
 )
 
 func MXSignpostRecordFromID(id objc.ID) *MXSignpostRecord {
@@ -41,7 +41,9 @@ func MXSignpostRecordFromID(id objc.ID) *MXSignpostRecord {
 // @method        JSONRepresentation @abstract      Convenience method to return a JSON representation of this SignpostRecord. @result        An NSData object containing the JSON representation
 func (o *MXSignpostRecord) JSONRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXSignpostRecordSelJSONRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -54,31 +56,41 @@ func (o *MXSignpostRecord) DictionaryRepresentation() *foundation.NSDictionary[o
 // @property      subsystem @abstract      An NSString representation of the subsystem of the signpost instance.
 func (o *MXSignpostRecord) Subsystem() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXSignpostRecordSelSubsystem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MXSignpostRecord) Category() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXSignpostRecordSelCategory)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MXSignpostRecord) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXSignpostRecordSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MXSignpostRecord) BeginTimeStamp() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXSignpostRecordSelBeginTimeStamp)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *MXSignpostRecord) EndTimeStamp() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXSignpostRecordSelEndTimeStamp)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -91,4 +103,3 @@ func (o *MXSignpostRecord) IsInterval() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mXSignpostRecordSelIsInterval)
 	return _ret
 }
-

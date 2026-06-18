@@ -171,4 +171,3 @@ type Outlineable interface {
 }
 
 var _ Outlineable = (*Outline)(nil)
-

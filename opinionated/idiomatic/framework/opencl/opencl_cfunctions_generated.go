@@ -714,4 +714,3 @@ func GclStopTimer(t uint64) float64 {
 func GclUnmap(arg unsafe.Pointer) {
 	raw.GclUnmap(arg)
 }
-

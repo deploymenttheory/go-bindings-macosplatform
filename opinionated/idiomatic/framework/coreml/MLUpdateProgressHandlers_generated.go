@@ -42,4 +42,3 @@ type UpdateProgressHandlersable interface {
 }
 
 var _ UpdateProgressHandlersable = (*UpdateProgressHandlers)(nil)
-

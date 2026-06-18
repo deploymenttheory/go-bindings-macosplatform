@@ -16,7 +16,7 @@ type AVCompositionTrack struct {
 }
 
 var (
-	_clsAVCompositionTrack = _objcClass("AVCompositionTrack")
+	_clsAVCompositionTrack                              = _objcClass("AVCompositionTrack")
 	_aVCompositionTrackSelFormatDescriptionReplacements = objc.RegisterName("formatDescriptionReplacements")
 )
 
@@ -33,7 +33,8 @@ func AVCompositionTrackFromID(id objc.ID) *AVCompositionTrack {
 // @property		formatDescriptionReplacements @abstract		An array of AVCompositionTrackFormatDescriptionReplacement objects indicating original format descriptions and their replacements. @discussion     The value of this property is an array of AVCompositionTrackFormatDescriptionReplacement objects, each of which specifies an original format description together with its replacement format description (as specified by a previous call to -replaceFormatDescription:withFormatDescription:). Only format descriptions that are to be replaced will occur as the originalFormatDescription elements in the AVCompositionTrackFormatDescriptionReplacement objects in this array.
 func (o *AVCompositionTrack) FormatDescriptionReplacements() *foundation.NSArray[*AVCompositionTrackFormatDescriptionReplacement] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCompositionTrackSelFormatDescriptionReplacements)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVCompositionTrackFormatDescriptionReplacement](_ret)
 }
-

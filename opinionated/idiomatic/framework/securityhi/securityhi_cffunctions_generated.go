@@ -18,4 +18,3 @@ func SecDisplayCertificateGroup(certificates *security.CssmCertgroup, keychainLi
 	}
 	return nil
 }
-

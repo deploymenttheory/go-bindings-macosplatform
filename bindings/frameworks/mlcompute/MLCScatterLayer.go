@@ -15,10 +15,10 @@ type MLCScatterLayer struct {
 }
 
 var (
-	_clsMLCScatterLayer = _objcClass("MLCScatterLayer")
+	_clsMLCScatterLayer                                = _objcClass("MLCScatterLayer")
 	_mLCScatterLayerSelLayerWithDimensionReductionType = objc.RegisterName("layerWithDimension:reductionType:")
-	_mLCScatterLayerSelDimension = objc.RegisterName("dimension")
-	_mLCScatterLayerSelReductionType = objc.RegisterName("reductionType")
+	_mLCScatterLayerSelDimension                       = objc.RegisterName("dimension")
+	_mLCScatterLayerSelReductionType                   = objc.RegisterName("reductionType")
 )
 
 func MLCScatterLayerFromID(id objc.ID) *MLCScatterLayer {
@@ -34,7 +34,9 @@ func MLCScatterLayerFromID(id objc.ID) *MLCScatterLayer {
 // @abstract   Create a scatter layer @param      dimension  The dimension along which to index @param      reductionType  The reduction type to use @return     A new scatter layer
 func MLCScatterLayerLayerWithDimensionReductionType(dimension uint, reductionType MLCReductionType) *MLCScatterLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCScatterLayer), _mLCScatterLayerSelLayerWithDimensionReductionType, dimension, reductionType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCScatterLayerFromID(_ret)
 }
 
@@ -49,4 +51,3 @@ func (o *MLCScatterLayer) ReductionType() MLCReductionType {
 	_ret := objc.Send[MLCReductionType](o.Ptr(), _mLCScatterLayerSelReductionType)
 	return _ret
 }
-

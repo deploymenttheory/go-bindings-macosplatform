@@ -45,7 +45,9 @@ func (x *SyncEnginePendingZoneSave) Zone() *RecordZone {
 	return &RecordZone{inner: _r}
 }
 
-func (x *SyncEnginePendingZoneSave) asSyncEnginePendingDatabaseChange() *raw.CKSyncEnginePendingDatabaseChange { return &x.inner.CKSyncEnginePendingDatabaseChange }
+func (x *SyncEnginePendingZoneSave) asSyncEnginePendingDatabaseChange() *raw.CKSyncEnginePendingDatabaseChange {
+	return &x.inner.CKSyncEnginePendingDatabaseChange
+}
 
 // SyncEnginePendingZoneSaveable is the interface implemented by [SyncEnginePendingZoneSave], for mocking and DI.
 type SyncEnginePendingZoneSaveable interface {
@@ -54,4 +56,3 @@ type SyncEnginePendingZoneSaveable interface {
 }
 
 var _ SyncEnginePendingZoneSaveable = (*SyncEnginePendingZoneSave)(nil)
-

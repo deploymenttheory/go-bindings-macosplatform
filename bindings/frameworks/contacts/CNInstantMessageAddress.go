@@ -16,12 +16,12 @@ type CNInstantMessageAddress struct {
 }
 
 var (
-	_clsCNInstantMessageAddress = _objcClass("CNInstantMessageAddress")
-	_cNInstantMessageAddressSelInitWithUsernameService = objc.RegisterName("initWithUsername:service:")
-	_cNInstantMessageAddressSelLocalizedStringForKey = objc.RegisterName("localizedStringForKey:")
+	_clsCNInstantMessageAddress                          = _objcClass("CNInstantMessageAddress")
+	_cNInstantMessageAddressSelInitWithUsernameService   = objc.RegisterName("initWithUsername:service:")
+	_cNInstantMessageAddressSelLocalizedStringForKey     = objc.RegisterName("localizedStringForKey:")
 	_cNInstantMessageAddressSelLocalizedStringForService = objc.RegisterName("localizedStringForService:")
-	_cNInstantMessageAddressSelUsername = objc.RegisterName("username")
-	_cNInstantMessageAddressSelService = objc.RegisterName("service")
+	_cNInstantMessageAddressSelUsername                  = objc.RegisterName("username")
+	_cNInstantMessageAddressSelService                   = objc.RegisterName("service")
 )
 
 func CNInstantMessageAddressFromID(id objc.ID) *CNInstantMessageAddress {
@@ -36,33 +36,42 @@ func CNInstantMessageAddressFromID(id objc.ID) *CNInstantMessageAddress {
 
 func (o *CNInstantMessageAddress) InitWithUsernameService(username *foundation.NSString, service *foundation.NSString) *CNInstantMessageAddress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNInstantMessageAddressSelInitWithUsernameService, username.Ptr(), service.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNInstantMessageAddressFromID(_ret)
 }
 
 // Returns a user displayable property name.
 func CNInstantMessageAddressLocalizedStringForKey(key *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNInstantMessageAddress), _cNInstantMessageAddressSelLocalizedStringForKey, key.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Returns a user displayable service name.
 func CNInstantMessageAddressLocalizedStringForService(service *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNInstantMessageAddress), _cNInstantMessageAddressSelLocalizedStringForService, service.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CNInstantMessageAddress) Username() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNInstantMessageAddressSelUsername)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CNInstantMessageAddress) Service() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNInstantMessageAddressSelService)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

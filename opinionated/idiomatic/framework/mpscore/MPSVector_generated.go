@@ -113,4 +113,3 @@ type Vectorable interface {
 }
 
 var _ Vectorable = (*Vector)(nil)
-

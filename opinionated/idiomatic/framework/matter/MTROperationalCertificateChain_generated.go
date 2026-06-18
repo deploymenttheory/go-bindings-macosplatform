@@ -119,4 +119,3 @@ type MTROperationalCertificateChainable interface {
 }
 
 var _ MTROperationalCertificateChainable = (*MTROperationalCertificateChain)(nil)
-

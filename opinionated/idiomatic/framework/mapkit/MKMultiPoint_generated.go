@@ -91,4 +91,3 @@ type MultiPointable interface {
 }
 
 var _ MultiPointable = (*MultiPoint)(nil)
-

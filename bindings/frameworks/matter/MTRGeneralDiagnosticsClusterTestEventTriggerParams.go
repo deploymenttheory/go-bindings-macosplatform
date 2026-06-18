@@ -16,14 +16,14 @@ type MTRGeneralDiagnosticsClusterTestEventTriggerParams struct {
 }
 
 var (
-	_clsMTRGeneralDiagnosticsClusterTestEventTriggerParams = _objcClass("MTRGeneralDiagnosticsClusterTestEventTriggerParams")
-	_mTRGeneralDiagnosticsClusterTestEventTriggerParamsSelEnableKey = objc.RegisterName("enableKey")
-	_mTRGeneralDiagnosticsClusterTestEventTriggerParamsSelSetEnableKey = objc.RegisterName("setEnableKey:")
-	_mTRGeneralDiagnosticsClusterTestEventTriggerParamsSelEventTrigger = objc.RegisterName("eventTrigger")
-	_mTRGeneralDiagnosticsClusterTestEventTriggerParamsSelSetEventTrigger = objc.RegisterName("setEventTrigger:")
-	_mTRGeneralDiagnosticsClusterTestEventTriggerParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRGeneralDiagnosticsClusterTestEventTriggerParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRGeneralDiagnosticsClusterTestEventTriggerParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRGeneralDiagnosticsClusterTestEventTriggerParams                               = _objcClass("MTRGeneralDiagnosticsClusterTestEventTriggerParams")
+	_mTRGeneralDiagnosticsClusterTestEventTriggerParamsSelEnableKey                      = objc.RegisterName("enableKey")
+	_mTRGeneralDiagnosticsClusterTestEventTriggerParamsSelSetEnableKey                   = objc.RegisterName("setEnableKey:")
+	_mTRGeneralDiagnosticsClusterTestEventTriggerParamsSelEventTrigger                   = objc.RegisterName("eventTrigger")
+	_mTRGeneralDiagnosticsClusterTestEventTriggerParamsSelSetEventTrigger                = objc.RegisterName("setEventTrigger:")
+	_mTRGeneralDiagnosticsClusterTestEventTriggerParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRGeneralDiagnosticsClusterTestEventTriggerParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRGeneralDiagnosticsClusterTestEventTriggerParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRGeneralDiagnosticsClusterTestEventTriggerParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -39,7 +39,9 @@ func MTRGeneralDiagnosticsClusterTestEventTriggerParamsFromID(id objc.ID) *MTRGe
 
 func (o *MTRGeneralDiagnosticsClusterTestEventTriggerParams) EnableKey() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralDiagnosticsClusterTestEventTriggerParamsSelEnableKey)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTRGeneralDiagnosticsClusterTestEventTriggerParams) SetEnableKey(enable
 
 func (o *MTRGeneralDiagnosticsClusterTestEventTriggerParams) EventTrigger() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralDiagnosticsClusterTestEventTriggerParamsSelEventTrigger)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -60,7 +64,9 @@ func (o *MTRGeneralDiagnosticsClusterTestEventTriggerParams) SetEventTrigger(eve
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRGeneralDiagnosticsClusterTestEventTriggerParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralDiagnosticsClusterTestEventTriggerParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -71,11 +77,12 @@ func (o *MTRGeneralDiagnosticsClusterTestEventTriggerParams) SetTimedInvokeTimeo
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRGeneralDiagnosticsClusterTestEventTriggerParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralDiagnosticsClusterTestEventTriggerParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRGeneralDiagnosticsClusterTestEventTriggerParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRGeneralDiagnosticsClusterTestEventTriggerParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

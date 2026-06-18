@@ -140,7 +140,9 @@ func (x *GraphStencilOpDescriptor) SetPaddingConstant(paddingConstant float32) {
 	x.inner.SetPaddingConstant(paddingConstant)
 }
 
-func (x *GraphStencilOpDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
+func (x *GraphStencilOpDescriptor) asGraphObject() *raw.MPSGraphObject {
+	return &x.inner.MPSGraphObject
+}
 
 // GraphStencilOpDescriptorable is the interface implemented by [GraphStencilOpDescriptor], for mocking and DI.
 type GraphStencilOpDescriptorable interface {
@@ -168,4 +170,3 @@ type GraphStencilOpDescriptorable interface {
 }
 
 var _ GraphStencilOpDescriptorable = (*GraphStencilOpDescriptor)(nil)
-

@@ -16,7 +16,9 @@ type MTRContentLauncherClusterContentSearchStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRContentLauncherClusterContentSearchStruct].
-func (x *MTRContentLauncherClusterContentSearchStruct) Unwrap() *raw.MTRContentLauncherClusterContentSearchStruct { return x.inner }
+func (x *MTRContentLauncherClusterContentSearchStruct) Unwrap() *raw.MTRContentLauncherClusterContentSearchStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -46,7 +48,9 @@ func (x *MTRContentLauncherClusterContentSearchStruct) SetParameterList(paramete
 	x.inner.SetParameterList(parameterList)
 }
 
-func (x *MTRContentLauncherClusterContentSearchStruct) asMTRContentLauncherClusterContentSearchStruct() *raw.MTRContentLauncherClusterContentSearchStruct { return x.inner }
+func (x *MTRContentLauncherClusterContentSearchStruct) asMTRContentLauncherClusterContentSearchStruct() *raw.MTRContentLauncherClusterContentSearchStruct {
+	return x.inner
+}
 
 // MTRContentLauncherClusterContentSearchStructable is the interface implemented by [MTRContentLauncherClusterContentSearchStruct], for mocking and DI.
 type MTRContentLauncherClusterContentSearchStructable interface {
@@ -56,4 +60,3 @@ type MTRContentLauncherClusterContentSearchStructable interface {
 }
 
 var _ MTRContentLauncherClusterContentSearchStructable = (*MTRContentLauncherClusterContentSearchStruct)(nil)
-

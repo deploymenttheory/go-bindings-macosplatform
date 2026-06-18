@@ -62,4 +62,3 @@ type MediaItemArtworkable interface {
 }
 
 var _ MediaItemArtworkable = (*MediaItemArtwork)(nil)
-

@@ -15,7 +15,9 @@ type AccelerationStructureDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTLAccelerationStructureDescriptor].
-func (x *AccelerationStructureDescriptor) Unwrap() *raw.MTLAccelerationStructureDescriptor { return x.inner }
+func (x *AccelerationStructureDescriptor) Unwrap() *raw.MTLAccelerationStructureDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -51,7 +53,9 @@ func (x *AccelerationStructureDescriptor) SetUsage(usage raw.MTLAccelerationStru
 	x.inner.SetUsage(usage)
 }
 
-func (x *AccelerationStructureDescriptor) asAccelerationStructureDescriptor() *raw.MTLAccelerationStructureDescriptor { return x.inner }
+func (x *AccelerationStructureDescriptor) asAccelerationStructureDescriptor() *raw.MTLAccelerationStructureDescriptor {
+	return x.inner
+}
 
 // AccelerationStructureDescriptorable is the interface implemented by [AccelerationStructureDescriptor], for mocking and DI.
 type AccelerationStructureDescriptorable interface {
@@ -62,4 +66,3 @@ type AccelerationStructureDescriptorable interface {
 }
 
 var _ AccelerationStructureDescriptorable = (*AccelerationStructureDescriptor)(nil)
-

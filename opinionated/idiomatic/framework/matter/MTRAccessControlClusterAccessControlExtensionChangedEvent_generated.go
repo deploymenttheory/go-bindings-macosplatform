@@ -16,11 +16,15 @@ type MTRAccessControlClusterAccessControlExtensionChangedEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRAccessControlClusterAccessControlExtensionChangedEvent].
-func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) Unwrap() *raw.MTRAccessControlClusterAccessControlExtensionChangedEvent { return x.inner }
+func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) Unwrap() *raw.MTRAccessControlClusterAccessControlExtensionChangedEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRAccessControlClusterAccessControlExtensionChangedEventFromID adopts an existing object pointer as a MTRAccessControlClusterAccessControlExtensionChangedEvent (nil for 0).
 func MTRAccessControlClusterAccessControlExtensionChangedEventFromID(id objc.ID) *MTRAccessControlClusterAccessControlExtensionChangedEvent {
@@ -141,4 +145,3 @@ type MTRAccessControlClusterAccessControlExtensionChangedEventable interface {
 }
 
 var _ MTRAccessControlClusterAccessControlExtensionChangedEventable = (*MTRAccessControlClusterAccessControlExtensionChangedEvent)(nil)
-

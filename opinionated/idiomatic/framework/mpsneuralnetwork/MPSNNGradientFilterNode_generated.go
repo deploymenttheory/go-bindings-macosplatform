@@ -60,4 +60,3 @@ type NNGradientFilterNodeable interface {
 }
 
 var _ NNGradientFilterNodeable = (*NNGradientFilterNode)(nil)
-

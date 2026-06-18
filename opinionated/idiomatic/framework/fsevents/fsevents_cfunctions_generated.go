@@ -119,4 +119,3 @@ func FSEventsGetLastEventIdForDeviceBeforeTime(dev int, time_ float64) uint64 {
 func FSEventsPurgeEventsForDeviceUpToEventId(dev int, eventId uint64) uint8 {
 	return raw.FSEventsPurgeEventsForDeviceUpToEventId(dev, eventId)
 }
-

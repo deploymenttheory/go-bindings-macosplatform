@@ -16,7 +16,9 @@ type MTRTestClusterClusterTestEmitTestEventResponseParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRTestClusterClusterTestEmitTestEventResponseParams].
-func (x *MTRTestClusterClusterTestEmitTestEventResponseParams) Unwrap() *raw.MTRTestClusterClusterTestEmitTestEventResponseParams { return x.inner }
+func (x *MTRTestClusterClusterTestEmitTestEventResponseParams) Unwrap() *raw.MTRTestClusterClusterTestEmitTestEventResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -48,7 +50,9 @@ func (x *MTRTestClusterClusterTestEmitTestEventResponseParams) WithTimedInvokeTi
 	return x
 }
 
-func (x *MTRTestClusterClusterTestEmitTestEventResponseParams) asMTRUnitTestingClusterTestEmitTestEventResponseParams() *raw.MTRUnitTestingClusterTestEmitTestEventResponseParams { return &x.inner.MTRUnitTestingClusterTestEmitTestEventResponseParams }
+func (x *MTRTestClusterClusterTestEmitTestEventResponseParams) asMTRUnitTestingClusterTestEmitTestEventResponseParams() *raw.MTRUnitTestingClusterTestEmitTestEventResponseParams {
+	return &x.inner.MTRUnitTestingClusterTestEmitTestEventResponseParams
+}
 
 // MTRTestClusterClusterTestEmitTestEventResponseParamsable is the interface implemented by [MTRTestClusterClusterTestEmitTestEventResponseParams], for mocking and DI.
 type MTRTestClusterClusterTestEmitTestEventResponseParamsable interface {
@@ -58,4 +62,3 @@ type MTRTestClusterClusterTestEmitTestEventResponseParamsable interface {
 }
 
 var _ MTRTestClusterClusterTestEmitTestEventResponseParamsable = (*MTRTestClusterClusterTestEmitTestEventResponseParams)(nil)
-

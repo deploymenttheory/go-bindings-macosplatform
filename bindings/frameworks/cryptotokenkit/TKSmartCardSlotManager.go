@@ -16,11 +16,11 @@ type TKSmartCardSlotManager struct {
 }
 
 var (
-	_clsTKSmartCardSlotManager = _objcClass("TKSmartCardSlotManager")
+	_clsTKSmartCardSlotManager                     = _objcClass("TKSmartCardSlotManager")
 	_tKSmartCardSlotManagerSelGetSlotWithNameReply = objc.RegisterName("getSlotWithName:reply:")
-	_tKSmartCardSlotManagerSelSlotNamed = objc.RegisterName("slotNamed:")
-	_tKSmartCardSlotManagerSelDefaultManager = objc.RegisterName("defaultManager")
-	_tKSmartCardSlotManagerSelSlotNames = objc.RegisterName("slotNames")
+	_tKSmartCardSlotManagerSelSlotNamed            = objc.RegisterName("slotNamed:")
+	_tKSmartCardSlotManagerSelDefaultManager       = objc.RegisterName("defaultManager")
+	_tKSmartCardSlotManagerSelSlotNames            = objc.RegisterName("slotNames")
 )
 
 func TKSmartCardSlotManagerFromID(id objc.ID) *TKSmartCardSlotManager {
@@ -51,14 +51,18 @@ func (o *TKSmartCardSlotManager) GetSlotWithNameReply(name *foundation.NSString,
 // Gets SmartCard reader slot with specified name.  If reader slot with this name does not exist, returns nil.
 func (o *TKSmartCardSlotManager) SlotNamed(name *foundation.NSString) *TKSmartCardSlot {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardSlotManagerSelSlotNamed, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return TKSmartCardSlotFromID(_ret)
 }
 
 // Global pool of SmartCard reader slots. macOS: Note that defaultManager instance is accessible only if the calling application has 'com.apple.security.smartcard' entitlement set to Boolean:YES.  If the calling application does not have this entitlement, defaultManager is always set to nil. iOS: The defaultManager instance is always accessible.
 func TKSmartCardSlotManagerDefaultManager() *TKSmartCardSlotManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsTKSmartCardSlotManager), _tKSmartCardSlotManagerSelDefaultManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return TKSmartCardSlotManagerFromID(_ret)
 }
 
@@ -67,4 +71,3 @@ func (o *TKSmartCardSlotManager) SlotNames() *foundation.NSArray[*foundation.NSS
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _tKSmartCardSlotManagerSelSlotNames)
 	return _ret
 }
-

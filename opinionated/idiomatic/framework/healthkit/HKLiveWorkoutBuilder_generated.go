@@ -110,7 +110,9 @@ func (x *LiveWorkoutBuilder) CurrentWorkoutActivity() *WorkoutActivity {
 	return &WorkoutActivity{inner: _r}
 }
 
-func (x *LiveWorkoutBuilder) asWorkoutBuilder() *raw.HKWorkoutBuilder { return &x.inner.HKWorkoutBuilder }
+func (x *LiveWorkoutBuilder) asWorkoutBuilder() *raw.HKWorkoutBuilder {
+	return &x.inner.HKWorkoutBuilder
+}
 
 // LiveWorkoutBuilderable is the interface implemented by [LiveWorkoutBuilder], for mocking and DI.
 type LiveWorkoutBuilderable interface {
@@ -130,4 +132,3 @@ type LiveWorkoutBuilderable interface {
 }
 
 var _ LiveWorkoutBuilderable = (*LiveWorkoutBuilder)(nil)
-

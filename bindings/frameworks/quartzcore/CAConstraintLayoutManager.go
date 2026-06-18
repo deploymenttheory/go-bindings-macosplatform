@@ -16,7 +16,7 @@ type CAConstraintLayoutManager struct {
 }
 
 var (
-	_clsCAConstraintLayoutManager = _objcClass("CAConstraintLayoutManager")
+	_clsCAConstraintLayoutManager              = _objcClass("CAConstraintLayoutManager")
 	_cAConstraintLayoutManagerSelLayoutManager = objc.RegisterName("layoutManager")
 )
 
@@ -32,7 +32,8 @@ func CAConstraintLayoutManagerFromID(id objc.ID) *CAConstraintLayoutManager {
 
 func CAConstraintLayoutManagerLayoutManager() *CAConstraintLayoutManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCAConstraintLayoutManager), _cAConstraintLayoutManagerSelLayoutManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CAConstraintLayoutManagerFromID(_ret)
 }
-

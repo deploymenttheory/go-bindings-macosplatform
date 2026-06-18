@@ -66,7 +66,9 @@ func (x *DOMCSSValue) asDOMCSSValue() *raw.DOMCSSValue { return x.inner }
 
 func (x *DOMCSSValue) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
-func (x *DOMCSSValue) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+func (x *DOMCSSValue) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMObject.WebScriptObject
+}
 
 // DOMCSSValueable is the interface implemented by [DOMCSSValue], for mocking and DI.
 type DOMCSSValueable interface {
@@ -78,4 +80,3 @@ type DOMCSSValueable interface {
 }
 
 var _ DOMCSSValueable = (*DOMCSSValue)(nil)
-

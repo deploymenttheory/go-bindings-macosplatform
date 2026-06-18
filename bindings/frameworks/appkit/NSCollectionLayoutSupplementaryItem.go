@@ -16,14 +16,14 @@ type NSCollectionLayoutSupplementaryItem struct {
 }
 
 var (
-	_clsNSCollectionLayoutSupplementaryItem = _objcClass("NSCollectionLayoutSupplementaryItem")
-	_nSCollectionLayoutSupplementaryItemSelSupplementaryItemWithLayoutSizeElementKindContainerAnchor = objc.RegisterName("supplementaryItemWithLayoutSize:elementKind:containerAnchor:")
+	_clsNSCollectionLayoutSupplementaryItem                                                                    = _objcClass("NSCollectionLayoutSupplementaryItem")
+	_nSCollectionLayoutSupplementaryItemSelSupplementaryItemWithLayoutSizeElementKindContainerAnchor           = objc.RegisterName("supplementaryItemWithLayoutSize:elementKind:containerAnchor:")
 	_nSCollectionLayoutSupplementaryItemSelSupplementaryItemWithLayoutSizeElementKindContainerAnchorItemAnchor = objc.RegisterName("supplementaryItemWithLayoutSize:elementKind:containerAnchor:itemAnchor:")
-	_nSCollectionLayoutSupplementaryItemSelZIndex = objc.RegisterName("zIndex")
-	_nSCollectionLayoutSupplementaryItemSelSetZIndex = objc.RegisterName("setZIndex:")
-	_nSCollectionLayoutSupplementaryItemSelElementKind = objc.RegisterName("elementKind")
-	_nSCollectionLayoutSupplementaryItemSelContainerAnchor = objc.RegisterName("containerAnchor")
-	_nSCollectionLayoutSupplementaryItemSelItemAnchor = objc.RegisterName("itemAnchor")
+	_nSCollectionLayoutSupplementaryItemSelZIndex                                                              = objc.RegisterName("zIndex")
+	_nSCollectionLayoutSupplementaryItemSelSetZIndex                                                           = objc.RegisterName("setZIndex:")
+	_nSCollectionLayoutSupplementaryItemSelElementKind                                                         = objc.RegisterName("elementKind")
+	_nSCollectionLayoutSupplementaryItemSelContainerAnchor                                                     = objc.RegisterName("containerAnchor")
+	_nSCollectionLayoutSupplementaryItemSelItemAnchor                                                          = objc.RegisterName("itemAnchor")
 )
 
 func NSCollectionLayoutSupplementaryItemFromID(id objc.ID) *NSCollectionLayoutSupplementaryItem {
@@ -38,13 +38,17 @@ func NSCollectionLayoutSupplementaryItemFromID(id objc.ID) *NSCollectionLayoutSu
 
 func NSCollectionLayoutSupplementaryItemSupplementaryItemWithLayoutSizeElementKindContainerAnchor(layoutSize *NSCollectionLayoutSize, elementKind *foundation.NSString, containerAnchor *NSCollectionLayoutAnchor) *NSCollectionLayoutSupplementaryItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutSupplementaryItem), _nSCollectionLayoutSupplementaryItemSelSupplementaryItemWithLayoutSizeElementKindContainerAnchor, layoutSize.Ptr(), elementKind.Ptr(), containerAnchor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutSupplementaryItemFromID(_ret)
 }
 
 func NSCollectionLayoutSupplementaryItemSupplementaryItemWithLayoutSizeElementKindContainerAnchorItemAnchor(layoutSize *NSCollectionLayoutSize, elementKind *foundation.NSString, containerAnchor *NSCollectionLayoutAnchor, itemAnchor *NSCollectionLayoutAnchor) *NSCollectionLayoutSupplementaryItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutSupplementaryItem), _nSCollectionLayoutSupplementaryItemSelSupplementaryItemWithLayoutSizeElementKindContainerAnchorItemAnchor, layoutSize.Ptr(), elementKind.Ptr(), containerAnchor.Ptr(), itemAnchor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutSupplementaryItemFromID(_ret)
 }
 
@@ -59,19 +63,24 @@ func (o *NSCollectionLayoutSupplementaryItem) SetZIndex(zIndex int) {
 
 func (o *NSCollectionLayoutSupplementaryItem) ElementKind() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutSupplementaryItemSelElementKind)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSCollectionLayoutSupplementaryItem) ContainerAnchor() *NSCollectionLayoutAnchor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutSupplementaryItemSelContainerAnchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutAnchorFromID(_ret)
 }
 
 func (o *NSCollectionLayoutSupplementaryItem) ItemAnchor() *NSCollectionLayoutAnchor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutSupplementaryItemSelItemAnchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutAnchorFromID(_ret)
 }
-

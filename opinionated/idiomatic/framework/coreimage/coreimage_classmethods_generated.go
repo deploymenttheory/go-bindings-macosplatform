@@ -1475,4 +1475,3 @@ func CIWarpKernelKernelWithString(string_ string) *WarpKernel {
 	}
 	return &WarpKernel{inner: _r}
 }
-

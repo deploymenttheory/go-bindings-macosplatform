@@ -74,9 +74,13 @@ func (x *MTRClusterBooleanState) ReadAttributeClusterRevisionWithParams(params *
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterBooleanState) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterBooleanState) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterBooleanState) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterBooleanState) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterBooleanStateable is the interface implemented by [MTRClusterBooleanState], for mocking and DI.
 type MTRClusterBooleanStateable interface {
@@ -90,4 +94,3 @@ type MTRClusterBooleanStateable interface {
 }
 
 var _ MTRClusterBooleanStateable = (*MTRClusterBooleanState)(nil)
-

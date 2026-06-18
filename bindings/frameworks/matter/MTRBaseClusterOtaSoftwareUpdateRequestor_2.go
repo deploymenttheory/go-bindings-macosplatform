@@ -18,38 +18,38 @@ type MTRBaseClusterOtaSoftwareUpdateRequestor struct {
 }
 
 var (
-	_clsMTRBaseClusterOtaSoftwareUpdateRequestor = _objcClass("MTRBaseClusterOtaSoftwareUpdateRequestor")
-	_mTRBaseClusterOtaSoftwareUpdateRequestorSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
-	_mTRBaseClusterOtaSoftwareUpdateRequestorSelAnnounceOtaProviderWithParamsCompletionHandler = objc.RegisterName("announceOtaProviderWithParams:completionHandler:")
-	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeDefaultOtaProvidersWithParamsCompletionHandler = objc.RegisterName("readAttributeDefaultOtaProvidersWithParams:completionHandler:")
-	_mTRBaseClusterOtaSoftwareUpdateRequestorSelWriteAttributeDefaultOtaProvidersWithValueCompletionHandler = objc.RegisterName("writeAttributeDefaultOtaProvidersWithValue:completionHandler:")
-	_mTRBaseClusterOtaSoftwareUpdateRequestorSelWriteAttributeDefaultOtaProvidersWithValueParamsCompletionHandler = objc.RegisterName("writeAttributeDefaultOtaProvidersWithValue:params:completionHandler:")
-	_mTRBaseClusterOtaSoftwareUpdateRequestorSelSubscribeAttributeDefaultOtaProvidersWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeDefaultOtaProvidersWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeDefaultOtaProvidersWithAttributeCacheEndpointQueueCompletionHandler = objc.RegisterName("readAttributeDefaultOtaProvidersWithAttributeCache:endpoint:queue:completionHandler:")
-	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeUpdatePossibleWithCompletionHandler = objc.RegisterName("readAttributeUpdatePossibleWithCompletionHandler:")
-	_mTRBaseClusterOtaSoftwareUpdateRequestorSelSubscribeAttributeUpdatePossibleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeUpdatePossibleWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeUpdatePossibleWithAttributeCacheEndpointQueueCompletionHandler = objc.RegisterName("readAttributeUpdatePossibleWithAttributeCache:endpoint:queue:completionHandler:")
-	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeUpdateStateWithCompletionHandler = objc.RegisterName("readAttributeUpdateStateWithCompletionHandler:")
-	_mTRBaseClusterOtaSoftwareUpdateRequestorSelSubscribeAttributeUpdateStateWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeUpdateStateWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeUpdateStateWithAttributeCacheEndpointQueueCompletionHandler = objc.RegisterName("readAttributeUpdateStateWithAttributeCache:endpoint:queue:completionHandler:")
-	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeUpdateStateProgressWithCompletionHandler = objc.RegisterName("readAttributeUpdateStateProgressWithCompletionHandler:")
-	_mTRBaseClusterOtaSoftwareUpdateRequestorSelSubscribeAttributeUpdateStateProgressWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeUpdateStateProgressWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeUpdateStateProgressWithAttributeCacheEndpointQueueCompletionHandler = objc.RegisterName("readAttributeUpdateStateProgressWithAttributeCache:endpoint:queue:completionHandler:")
-	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeGeneratedCommandListWithCompletionHandler = objc.RegisterName("readAttributeGeneratedCommandListWithCompletionHandler:")
+	_clsMTRBaseClusterOtaSoftwareUpdateRequestor                                                                                                           = _objcClass("MTRBaseClusterOtaSoftwareUpdateRequestor")
+	_mTRBaseClusterOtaSoftwareUpdateRequestorSelInitWithDeviceEndpointQueue                                                                                = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRBaseClusterOtaSoftwareUpdateRequestorSelAnnounceOtaProviderWithParamsCompletionHandler                                                             = objc.RegisterName("announceOtaProviderWithParams:completionHandler:")
+	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeDefaultOtaProvidersWithParamsCompletionHandler                                                = objc.RegisterName("readAttributeDefaultOtaProvidersWithParams:completionHandler:")
+	_mTRBaseClusterOtaSoftwareUpdateRequestorSelWriteAttributeDefaultOtaProvidersWithValueCompletionHandler                                                = objc.RegisterName("writeAttributeDefaultOtaProvidersWithValue:completionHandler:")
+	_mTRBaseClusterOtaSoftwareUpdateRequestorSelWriteAttributeDefaultOtaProvidersWithValueParamsCompletionHandler                                          = objc.RegisterName("writeAttributeDefaultOtaProvidersWithValue:params:completionHandler:")
+	_mTRBaseClusterOtaSoftwareUpdateRequestorSelSubscribeAttributeDefaultOtaProvidersWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler  = objc.RegisterName("subscribeAttributeDefaultOtaProvidersWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeDefaultOtaProvidersWithAttributeCacheEndpointQueueCompletionHandler                           = objc.RegisterName("readAttributeDefaultOtaProvidersWithAttributeCache:endpoint:queue:completionHandler:")
+	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeUpdatePossibleWithCompletionHandler                                                           = objc.RegisterName("readAttributeUpdatePossibleWithCompletionHandler:")
+	_mTRBaseClusterOtaSoftwareUpdateRequestorSelSubscribeAttributeUpdatePossibleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler       = objc.RegisterName("subscribeAttributeUpdatePossibleWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeUpdatePossibleWithAttributeCacheEndpointQueueCompletionHandler                                = objc.RegisterName("readAttributeUpdatePossibleWithAttributeCache:endpoint:queue:completionHandler:")
+	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeUpdateStateWithCompletionHandler                                                              = objc.RegisterName("readAttributeUpdateStateWithCompletionHandler:")
+	_mTRBaseClusterOtaSoftwareUpdateRequestorSelSubscribeAttributeUpdateStateWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler          = objc.RegisterName("subscribeAttributeUpdateStateWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeUpdateStateWithAttributeCacheEndpointQueueCompletionHandler                                   = objc.RegisterName("readAttributeUpdateStateWithAttributeCache:endpoint:queue:completionHandler:")
+	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeUpdateStateProgressWithCompletionHandler                                                      = objc.RegisterName("readAttributeUpdateStateProgressWithCompletionHandler:")
+	_mTRBaseClusterOtaSoftwareUpdateRequestorSelSubscribeAttributeUpdateStateProgressWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler  = objc.RegisterName("subscribeAttributeUpdateStateProgressWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeUpdateStateProgressWithAttributeCacheEndpointQueueCompletionHandler                           = objc.RegisterName("readAttributeUpdateStateProgressWithAttributeCache:endpoint:queue:completionHandler:")
+	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeGeneratedCommandListWithCompletionHandler                                                     = objc.RegisterName("readAttributeGeneratedCommandListWithCompletionHandler:")
 	_mTRBaseClusterOtaSoftwareUpdateRequestorSelSubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeGeneratedCommandListWithAttributeCacheEndpointQueueCompletionHandler = objc.RegisterName("readAttributeGeneratedCommandListWithAttributeCache:endpoint:queue:completionHandler:")
-	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeAcceptedCommandListWithCompletionHandler = objc.RegisterName("readAttributeAcceptedCommandListWithCompletionHandler:")
-	_mTRBaseClusterOtaSoftwareUpdateRequestorSelSubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeAcceptedCommandListWithAttributeCacheEndpointQueueCompletionHandler = objc.RegisterName("readAttributeAcceptedCommandListWithAttributeCache:endpoint:queue:completionHandler:")
-	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeAttributeListWithCompletionHandler = objc.RegisterName("readAttributeAttributeListWithCompletionHandler:")
-	_mTRBaseClusterOtaSoftwareUpdateRequestorSelSubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeAttributeListWithAttributeCacheEndpointQueueCompletionHandler = objc.RegisterName("readAttributeAttributeListWithAttributeCache:endpoint:queue:completionHandler:")
-	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeFeatureMapWithCompletionHandler = objc.RegisterName("readAttributeFeatureMapWithCompletionHandler:")
-	_mTRBaseClusterOtaSoftwareUpdateRequestorSelSubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeFeatureMapWithAttributeCacheEndpointQueueCompletionHandler = objc.RegisterName("readAttributeFeatureMapWithAttributeCache:endpoint:queue:completionHandler:")
-	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeClusterRevisionWithCompletionHandler = objc.RegisterName("readAttributeClusterRevisionWithCompletionHandler:")
-	_mTRBaseClusterOtaSoftwareUpdateRequestorSelSubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeClusterRevisionWithAttributeCacheEndpointQueueCompletionHandler = objc.RegisterName("readAttributeClusterRevisionWithAttributeCache:endpoint:queue:completionHandler:")
+	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeGeneratedCommandListWithAttributeCacheEndpointQueueCompletionHandler                          = objc.RegisterName("readAttributeGeneratedCommandListWithAttributeCache:endpoint:queue:completionHandler:")
+	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeAcceptedCommandListWithCompletionHandler                                                      = objc.RegisterName("readAttributeAcceptedCommandListWithCompletionHandler:")
+	_mTRBaseClusterOtaSoftwareUpdateRequestorSelSubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler  = objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeAcceptedCommandListWithAttributeCacheEndpointQueueCompletionHandler                           = objc.RegisterName("readAttributeAcceptedCommandListWithAttributeCache:endpoint:queue:completionHandler:")
+	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeAttributeListWithCompletionHandler                                                            = objc.RegisterName("readAttributeAttributeListWithCompletionHandler:")
+	_mTRBaseClusterOtaSoftwareUpdateRequestorSelSubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler        = objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeAttributeListWithAttributeCacheEndpointQueueCompletionHandler                                 = objc.RegisterName("readAttributeAttributeListWithAttributeCache:endpoint:queue:completionHandler:")
+	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeFeatureMapWithCompletionHandler                                                               = objc.RegisterName("readAttributeFeatureMapWithCompletionHandler:")
+	_mTRBaseClusterOtaSoftwareUpdateRequestorSelSubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler           = objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeFeatureMapWithAttributeCacheEndpointQueueCompletionHandler                                    = objc.RegisterName("readAttributeFeatureMapWithAttributeCache:endpoint:queue:completionHandler:")
+	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeClusterRevisionWithCompletionHandler                                                          = objc.RegisterName("readAttributeClusterRevisionWithCompletionHandler:")
+	_mTRBaseClusterOtaSoftwareUpdateRequestorSelSubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler      = objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeClusterRevisionWithAttributeCacheEndpointQueueCompletionHandler                               = objc.RegisterName("readAttributeClusterRevisionWithAttributeCache:endpoint:queue:completionHandler:")
 )
 
 func MTRBaseClusterOtaSoftwareUpdateRequestorFromID(id objc.ID) *MTRBaseClusterOtaSoftwareUpdateRequestor {
@@ -64,7 +64,9 @@ func MTRBaseClusterOtaSoftwareUpdateRequestorFromID(id objc.ID) *MTRBaseClusterO
 
 func (o *MTRBaseClusterOtaSoftwareUpdateRequestor) InitWithDeviceEndpointQueue(device *MTRBaseDevice, endpoint uint16, queue *foundation.NSObject) *MTRBaseClusterOtaSoftwareUpdateRequestor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBaseClusterOtaSoftwareUpdateRequestorSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRBaseClusterOtaSoftwareUpdateRequestorFromID(_ret)
 }
 
@@ -421,4 +423,3 @@ func MTRBaseClusterOtaSoftwareUpdateRequestorReadAttributeClusterRevisionWithAtt
 	}
 	objc.ID(_clsMTRBaseClusterOtaSoftwareUpdateRequestor).Send(_mTRBaseClusterOtaSoftwareUpdateRequestorSelReadAttributeClusterRevisionWithAttributeCacheEndpointQueueCompletionHandler, attributeCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), __block_completionHandler)
 }
-

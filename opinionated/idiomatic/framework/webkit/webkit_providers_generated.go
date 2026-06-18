@@ -82,4 +82,3 @@ type DOMUIEventProvider interface {
 type WebScriptObjectProvider interface {
 	asWebScriptObject() *raw.WebScriptObject
 }
-

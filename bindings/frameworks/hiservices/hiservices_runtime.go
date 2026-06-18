@@ -14,7 +14,7 @@ import (
 
 var (
 	_hiservicesLib uintptr
-	_loadOnce sync.Once
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -50,42 +50,94 @@ func _loadLibrary() {
 	}
 	_register("AXAPIEnabled", func() { purego.RegisterLibFunc(&_fnAXAPIEnabled, _hiservicesLib, "AXAPIEnabled") })
 	_register("AXIsProcessTrusted", func() { purego.RegisterLibFunc(&_fnAXIsProcessTrusted, _hiservicesLib, "AXIsProcessTrusted") })
-	_register("AXIsProcessTrustedWithOptions", func() { purego.RegisterLibFunc(&_fnAXIsProcessTrustedWithOptions, _hiservicesLib, "AXIsProcessTrustedWithOptions") })
+	_register("AXIsProcessTrustedWithOptions", func() {
+		purego.RegisterLibFunc(&_fnAXIsProcessTrustedWithOptions, _hiservicesLib, "AXIsProcessTrustedWithOptions")
+	})
 	_register("AXMakeProcessTrusted", func() { purego.RegisterLibFunc(&_fnAXMakeProcessTrusted, _hiservicesLib, "AXMakeProcessTrusted") })
-	_register("AXObserverAddNotification", func() { purego.RegisterLibFunc(&_fnAXObserverAddNotification, _hiservicesLib, "AXObserverAddNotification") })
+	_register("AXObserverAddNotification", func() {
+		purego.RegisterLibFunc(&_fnAXObserverAddNotification, _hiservicesLib, "AXObserverAddNotification")
+	})
 	_register("AXObserverCreate", func() { purego.RegisterLibFunc(&_fnAXObserverCreate, _hiservicesLib, "AXObserverCreate") })
-	_register("AXObserverCreateWithInfoCallback", func() { purego.RegisterLibFunc(&_fnAXObserverCreateWithInfoCallback, _hiservicesLib, "AXObserverCreateWithInfoCallback") })
-	_register("AXObserverGetRunLoopSource", func() { purego.RegisterLibFunc(&_fnAXObserverGetRunLoopSource, _hiservicesLib, "AXObserverGetRunLoopSource") })
+	_register("AXObserverCreateWithInfoCallback", func() {
+		purego.RegisterLibFunc(&_fnAXObserverCreateWithInfoCallback, _hiservicesLib, "AXObserverCreateWithInfoCallback")
+	})
+	_register("AXObserverGetRunLoopSource", func() {
+		purego.RegisterLibFunc(&_fnAXObserverGetRunLoopSource, _hiservicesLib, "AXObserverGetRunLoopSource")
+	})
 	_register("AXObserverGetTypeID", func() { purego.RegisterLibFunc(&_fnAXObserverGetTypeID, _hiservicesLib, "AXObserverGetTypeID") })
-	_register("AXObserverRemoveNotification", func() { purego.RegisterLibFunc(&_fnAXObserverRemoveNotification, _hiservicesLib, "AXObserverRemoveNotification") })
+	_register("AXObserverRemoveNotification", func() {
+		purego.RegisterLibFunc(&_fnAXObserverRemoveNotification, _hiservicesLib, "AXObserverRemoveNotification")
+	})
 	_register("AXTextMarkerCreate", func() { purego.RegisterLibFunc(&_fnAXTextMarkerCreate, _hiservicesLib, "AXTextMarkerCreate") })
 	_register("AXTextMarkerGetBytePtr", func() { purego.RegisterLibFunc(&_fnAXTextMarkerGetBytePtr, _hiservicesLib, "AXTextMarkerGetBytePtr") })
 	_register("AXTextMarkerGetLength", func() { purego.RegisterLibFunc(&_fnAXTextMarkerGetLength, _hiservicesLib, "AXTextMarkerGetLength") })
 	_register("AXTextMarkerGetTypeID", func() { purego.RegisterLibFunc(&_fnAXTextMarkerGetTypeID, _hiservicesLib, "AXTextMarkerGetTypeID") })
-	_register("AXTextMarkerRangeCopyEndMarker", func() { purego.RegisterLibFunc(&_fnAXTextMarkerRangeCopyEndMarker, _hiservicesLib, "AXTextMarkerRangeCopyEndMarker") })
-	_register("AXTextMarkerRangeCopyStartMarker", func() { purego.RegisterLibFunc(&_fnAXTextMarkerRangeCopyStartMarker, _hiservicesLib, "AXTextMarkerRangeCopyStartMarker") })
+	_register("AXTextMarkerRangeCopyEndMarker", func() {
+		purego.RegisterLibFunc(&_fnAXTextMarkerRangeCopyEndMarker, _hiservicesLib, "AXTextMarkerRangeCopyEndMarker")
+	})
+	_register("AXTextMarkerRangeCopyStartMarker", func() {
+		purego.RegisterLibFunc(&_fnAXTextMarkerRangeCopyStartMarker, _hiservicesLib, "AXTextMarkerRangeCopyStartMarker")
+	})
 	_register("AXTextMarkerRangeCreate", func() { purego.RegisterLibFunc(&_fnAXTextMarkerRangeCreate, _hiservicesLib, "AXTextMarkerRangeCreate") })
-	_register("AXTextMarkerRangeCreateWithBytes", func() { purego.RegisterLibFunc(&_fnAXTextMarkerRangeCreateWithBytes, _hiservicesLib, "AXTextMarkerRangeCreateWithBytes") })
-	_register("AXTextMarkerRangeGetTypeID", func() { purego.RegisterLibFunc(&_fnAXTextMarkerRangeGetTypeID, _hiservicesLib, "AXTextMarkerRangeGetTypeID") })
-	_register("AXUIElementCopyActionDescription", func() { purego.RegisterLibFunc(&_fnAXUIElementCopyActionDescription, _hiservicesLib, "AXUIElementCopyActionDescription") })
-	_register("AXUIElementCopyActionNames", func() { purego.RegisterLibFunc(&_fnAXUIElementCopyActionNames, _hiservicesLib, "AXUIElementCopyActionNames") })
-	_register("AXUIElementCopyAttributeNames", func() { purego.RegisterLibFunc(&_fnAXUIElementCopyAttributeNames, _hiservicesLib, "AXUIElementCopyAttributeNames") })
-	_register("AXUIElementCopyAttributeValue", func() { purego.RegisterLibFunc(&_fnAXUIElementCopyAttributeValue, _hiservicesLib, "AXUIElementCopyAttributeValue") })
-	_register("AXUIElementCopyAttributeValues", func() { purego.RegisterLibFunc(&_fnAXUIElementCopyAttributeValues, _hiservicesLib, "AXUIElementCopyAttributeValues") })
-	_register("AXUIElementCopyElementAtPosition", func() { purego.RegisterLibFunc(&_fnAXUIElementCopyElementAtPosition, _hiservicesLib, "AXUIElementCopyElementAtPosition") })
-	_register("AXUIElementCopyMultipleAttributeValues", func() { purego.RegisterLibFunc(&_fnAXUIElementCopyMultipleAttributeValues, _hiservicesLib, "AXUIElementCopyMultipleAttributeValues") })
-	_register("AXUIElementCopyParameterizedAttributeNames", func() { purego.RegisterLibFunc(&_fnAXUIElementCopyParameterizedAttributeNames, _hiservicesLib, "AXUIElementCopyParameterizedAttributeNames") })
-	_register("AXUIElementCopyParameterizedAttributeValue", func() { purego.RegisterLibFunc(&_fnAXUIElementCopyParameterizedAttributeValue, _hiservicesLib, "AXUIElementCopyParameterizedAttributeValue") })
-	_register("AXUIElementCreateApplication", func() { purego.RegisterLibFunc(&_fnAXUIElementCreateApplication, _hiservicesLib, "AXUIElementCreateApplication") })
-	_register("AXUIElementCreateSystemWide", func() { purego.RegisterLibFunc(&_fnAXUIElementCreateSystemWide, _hiservicesLib, "AXUIElementCreateSystemWide") })
-	_register("AXUIElementGetAttributeValueCount", func() { purego.RegisterLibFunc(&_fnAXUIElementGetAttributeValueCount, _hiservicesLib, "AXUIElementGetAttributeValueCount") })
+	_register("AXTextMarkerRangeCreateWithBytes", func() {
+		purego.RegisterLibFunc(&_fnAXTextMarkerRangeCreateWithBytes, _hiservicesLib, "AXTextMarkerRangeCreateWithBytes")
+	})
+	_register("AXTextMarkerRangeGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnAXTextMarkerRangeGetTypeID, _hiservicesLib, "AXTextMarkerRangeGetTypeID")
+	})
+	_register("AXUIElementCopyActionDescription", func() {
+		purego.RegisterLibFunc(&_fnAXUIElementCopyActionDescription, _hiservicesLib, "AXUIElementCopyActionDescription")
+	})
+	_register("AXUIElementCopyActionNames", func() {
+		purego.RegisterLibFunc(&_fnAXUIElementCopyActionNames, _hiservicesLib, "AXUIElementCopyActionNames")
+	})
+	_register("AXUIElementCopyAttributeNames", func() {
+		purego.RegisterLibFunc(&_fnAXUIElementCopyAttributeNames, _hiservicesLib, "AXUIElementCopyAttributeNames")
+	})
+	_register("AXUIElementCopyAttributeValue", func() {
+		purego.RegisterLibFunc(&_fnAXUIElementCopyAttributeValue, _hiservicesLib, "AXUIElementCopyAttributeValue")
+	})
+	_register("AXUIElementCopyAttributeValues", func() {
+		purego.RegisterLibFunc(&_fnAXUIElementCopyAttributeValues, _hiservicesLib, "AXUIElementCopyAttributeValues")
+	})
+	_register("AXUIElementCopyElementAtPosition", func() {
+		purego.RegisterLibFunc(&_fnAXUIElementCopyElementAtPosition, _hiservicesLib, "AXUIElementCopyElementAtPosition")
+	})
+	_register("AXUIElementCopyMultipleAttributeValues", func() {
+		purego.RegisterLibFunc(&_fnAXUIElementCopyMultipleAttributeValues, _hiservicesLib, "AXUIElementCopyMultipleAttributeValues")
+	})
+	_register("AXUIElementCopyParameterizedAttributeNames", func() {
+		purego.RegisterLibFunc(&_fnAXUIElementCopyParameterizedAttributeNames, _hiservicesLib, "AXUIElementCopyParameterizedAttributeNames")
+	})
+	_register("AXUIElementCopyParameterizedAttributeValue", func() {
+		purego.RegisterLibFunc(&_fnAXUIElementCopyParameterizedAttributeValue, _hiservicesLib, "AXUIElementCopyParameterizedAttributeValue")
+	})
+	_register("AXUIElementCreateApplication", func() {
+		purego.RegisterLibFunc(&_fnAXUIElementCreateApplication, _hiservicesLib, "AXUIElementCreateApplication")
+	})
+	_register("AXUIElementCreateSystemWide", func() {
+		purego.RegisterLibFunc(&_fnAXUIElementCreateSystemWide, _hiservicesLib, "AXUIElementCreateSystemWide")
+	})
+	_register("AXUIElementGetAttributeValueCount", func() {
+		purego.RegisterLibFunc(&_fnAXUIElementGetAttributeValueCount, _hiservicesLib, "AXUIElementGetAttributeValueCount")
+	})
 	_register("AXUIElementGetPid", func() { purego.RegisterLibFunc(&_fnAXUIElementGetPid, _hiservicesLib, "AXUIElementGetPid") })
 	_register("AXUIElementGetTypeID", func() { purego.RegisterLibFunc(&_fnAXUIElementGetTypeID, _hiservicesLib, "AXUIElementGetTypeID") })
-	_register("AXUIElementIsAttributeSettable", func() { purego.RegisterLibFunc(&_fnAXUIElementIsAttributeSettable, _hiservicesLib, "AXUIElementIsAttributeSettable") })
-	_register("AXUIElementPerformAction", func() { purego.RegisterLibFunc(&_fnAXUIElementPerformAction, _hiservicesLib, "AXUIElementPerformAction") })
-	_register("AXUIElementPostKeyboardEvent", func() { purego.RegisterLibFunc(&_fnAXUIElementPostKeyboardEvent, _hiservicesLib, "AXUIElementPostKeyboardEvent") })
-	_register("AXUIElementSetAttributeValue", func() { purego.RegisterLibFunc(&_fnAXUIElementSetAttributeValue, _hiservicesLib, "AXUIElementSetAttributeValue") })
-	_register("AXUIElementSetMessagingTimeout", func() { purego.RegisterLibFunc(&_fnAXUIElementSetMessagingTimeout, _hiservicesLib, "AXUIElementSetMessagingTimeout") })
+	_register("AXUIElementIsAttributeSettable", func() {
+		purego.RegisterLibFunc(&_fnAXUIElementIsAttributeSettable, _hiservicesLib, "AXUIElementIsAttributeSettable")
+	})
+	_register("AXUIElementPerformAction", func() {
+		purego.RegisterLibFunc(&_fnAXUIElementPerformAction, _hiservicesLib, "AXUIElementPerformAction")
+	})
+	_register("AXUIElementPostKeyboardEvent", func() {
+		purego.RegisterLibFunc(&_fnAXUIElementPostKeyboardEvent, _hiservicesLib, "AXUIElementPostKeyboardEvent")
+	})
+	_register("AXUIElementSetAttributeValue", func() {
+		purego.RegisterLibFunc(&_fnAXUIElementSetAttributeValue, _hiservicesLib, "AXUIElementSetAttributeValue")
+	})
+	_register("AXUIElementSetMessagingTimeout", func() {
+		purego.RegisterLibFunc(&_fnAXUIElementSetMessagingTimeout, _hiservicesLib, "AXUIElementSetMessagingTimeout")
+	})
 	_register("AXValueCreate", func() { purego.RegisterLibFunc(&_fnAXValueCreate, _hiservicesLib, "AXValueCreate") })
 	_register("AXValueGetType", func() { purego.RegisterLibFunc(&_fnAXValueGetType, _hiservicesLib, "AXValueGetType") })
 	_register("AXValueGetTypeID", func() { purego.RegisterLibFunc(&_fnAXValueGetTypeID, _hiservicesLib, "AXValueGetTypeID") })
@@ -99,7 +151,9 @@ func _loadLibrary() {
 	_register("GetIconFamilyData", func() { purego.RegisterLibFunc(&_fnGetIconFamilyData, _hiservicesLib, "GetIconFamilyData") })
 	_register("GetIconRefVariant", func() { purego.RegisterLibFunc(&_fnGetIconRefVariant, _hiservicesLib, "GetIconRefVariant") })
 	_register("GetNextProcess", func() { purego.RegisterLibFunc(&_fnGetNextProcess, _hiservicesLib, "GetNextProcess") })
-	_register("GetProcessBundleLocation", func() { purego.RegisterLibFunc(&_fnGetProcessBundleLocation, _hiservicesLib, "GetProcessBundleLocation") })
+	_register("GetProcessBundleLocation", func() {
+		purego.RegisterLibFunc(&_fnGetProcessBundleLocation, _hiservicesLib, "GetProcessBundleLocation")
+	})
 	_register("GetProcessForPID", func() { purego.RegisterLibFunc(&_fnGetProcessForPID, _hiservicesLib, "GetProcessForPID") })
 	_register("GetProcessInformation", func() { purego.RegisterLibFunc(&_fnGetProcessInformation, _hiservicesLib, "GetProcessInformation") })
 	_register("GetProcessPID", func() { purego.RegisterLibFunc(&_fnGetProcessPID, _hiservicesLib, "GetProcessPID") })
@@ -107,10 +161,16 @@ func _loadLibrary() {
 	_register("HIShapeCreateCopy", func() { purego.RegisterLibFunc(&_fnHIShapeCreateCopy, _hiservicesLib, "HIShapeCreateCopy") })
 	_register("HIShapeCreateDifference", func() { purego.RegisterLibFunc(&_fnHIShapeCreateDifference, _hiservicesLib, "HIShapeCreateDifference") })
 	_register("HIShapeCreateEmpty", func() { purego.RegisterLibFunc(&_fnHIShapeCreateEmpty, _hiservicesLib, "HIShapeCreateEmpty") })
-	_register("HIShapeCreateIntersection", func() { purego.RegisterLibFunc(&_fnHIShapeCreateIntersection, _hiservicesLib, "HIShapeCreateIntersection") })
+	_register("HIShapeCreateIntersection", func() {
+		purego.RegisterLibFunc(&_fnHIShapeCreateIntersection, _hiservicesLib, "HIShapeCreateIntersection")
+	})
 	_register("HIShapeCreateMutable", func() { purego.RegisterLibFunc(&_fnHIShapeCreateMutable, _hiservicesLib, "HIShapeCreateMutable") })
-	_register("HIShapeCreateMutableCopy", func() { purego.RegisterLibFunc(&_fnHIShapeCreateMutableCopy, _hiservicesLib, "HIShapeCreateMutableCopy") })
-	_register("HIShapeCreateMutableWithRect", func() { purego.RegisterLibFunc(&_fnHIShapeCreateMutableWithRect, _hiservicesLib, "HIShapeCreateMutableWithRect") })
+	_register("HIShapeCreateMutableCopy", func() {
+		purego.RegisterLibFunc(&_fnHIShapeCreateMutableCopy, _hiservicesLib, "HIShapeCreateMutableCopy")
+	})
+	_register("HIShapeCreateMutableWithRect", func() {
+		purego.RegisterLibFunc(&_fnHIShapeCreateMutableWithRect, _hiservicesLib, "HIShapeCreateMutableWithRect")
+	})
 	_register("HIShapeCreateUnion", func() { purego.RegisterLibFunc(&_fnHIShapeCreateUnion, _hiservicesLib, "HIShapeCreateUnion") })
 	_register("HIShapeCreateWithQDRgn", func() { purego.RegisterLibFunc(&_fnHIShapeCreateWithQDRgn, _hiservicesLib, "HIShapeCreateWithQDRgn") })
 	_register("HIShapeCreateWithRect", func() { purego.RegisterLibFunc(&_fnHIShapeCreateWithRect, _hiservicesLib, "HIShapeCreateWithRect") })
@@ -126,7 +186,9 @@ func _loadLibrary() {
 	_register("HIShapeIsEmpty", func() { purego.RegisterLibFunc(&_fnHIShapeIsEmpty, _hiservicesLib, "HIShapeIsEmpty") })
 	_register("HIShapeIsRectangular", func() { purego.RegisterLibFunc(&_fnHIShapeIsRectangular, _hiservicesLib, "HIShapeIsRectangular") })
 	_register("HIShapeOffset", func() { purego.RegisterLibFunc(&_fnHIShapeOffset, _hiservicesLib, "HIShapeOffset") })
-	_register("HIShapeReplacePathInCGContext", func() { purego.RegisterLibFunc(&_fnHIShapeReplacePathInCGContext, _hiservicesLib, "HIShapeReplacePathInCGContext") })
+	_register("HIShapeReplacePathInCGContext", func() {
+		purego.RegisterLibFunc(&_fnHIShapeReplacePathInCGContext, _hiservicesLib, "HIShapeReplacePathInCGContext")
+	})
 	_register("HIShapeSetEmpty", func() { purego.RegisterLibFunc(&_fnHIShapeSetEmpty, _hiservicesLib, "HIShapeSetEmpty") })
 	_register("HIShapeSetWithShape", func() { purego.RegisterLibFunc(&_fnHIShapeSetWithShape, _hiservicesLib, "HIShapeSetWithShape") })
 	_register("HIShapeUnion", func() { purego.RegisterLibFunc(&_fnHIShapeUnion, _hiservicesLib, "HIShapeUnion") })
@@ -185,37 +247,71 @@ func _loadLibrary() {
 	_register("NewIconActionUPP", func() { purego.RegisterLibFunc(&_fnNewIconActionUPP, _hiservicesLib, "NewIconActionUPP") })
 	_register("NewIconGetterUPP", func() { purego.RegisterLibFunc(&_fnNewIconGetterUPP, _hiservicesLib, "NewIconGetterUPP") })
 	_register("PasteboardClear", func() { purego.RegisterLibFunc(&_fnPasteboardClear, _hiservicesLib, "PasteboardClear") })
-	_register("PasteboardCopyItemFlavorData", func() { purego.RegisterLibFunc(&_fnPasteboardCopyItemFlavorData, _hiservicesLib, "PasteboardCopyItemFlavorData") })
-	_register("PasteboardCopyItemFlavors", func() { purego.RegisterLibFunc(&_fnPasteboardCopyItemFlavors, _hiservicesLib, "PasteboardCopyItemFlavors") })
+	_register("PasteboardCopyItemFlavorData", func() {
+		purego.RegisterLibFunc(&_fnPasteboardCopyItemFlavorData, _hiservicesLib, "PasteboardCopyItemFlavorData")
+	})
+	_register("PasteboardCopyItemFlavors", func() {
+		purego.RegisterLibFunc(&_fnPasteboardCopyItemFlavors, _hiservicesLib, "PasteboardCopyItemFlavors")
+	})
 	_register("PasteboardCopyName", func() { purego.RegisterLibFunc(&_fnPasteboardCopyName, _hiservicesLib, "PasteboardCopyName") })
-	_register("PasteboardCopyPasteLocation", func() { purego.RegisterLibFunc(&_fnPasteboardCopyPasteLocation, _hiservicesLib, "PasteboardCopyPasteLocation") })
+	_register("PasteboardCopyPasteLocation", func() {
+		purego.RegisterLibFunc(&_fnPasteboardCopyPasteLocation, _hiservicesLib, "PasteboardCopyPasteLocation")
+	})
 	_register("PasteboardCreate", func() { purego.RegisterLibFunc(&_fnPasteboardCreate, _hiservicesLib, "PasteboardCreate") })
 	_register("PasteboardGetItemCount", func() { purego.RegisterLibFunc(&_fnPasteboardGetItemCount, _hiservicesLib, "PasteboardGetItemCount") })
-	_register("PasteboardGetItemFlavorFlags", func() { purego.RegisterLibFunc(&_fnPasteboardGetItemFlavorFlags, _hiservicesLib, "PasteboardGetItemFlavorFlags") })
-	_register("PasteboardGetItemIdentifier", func() { purego.RegisterLibFunc(&_fnPasteboardGetItemIdentifier, _hiservicesLib, "PasteboardGetItemIdentifier") })
+	_register("PasteboardGetItemFlavorFlags", func() {
+		purego.RegisterLibFunc(&_fnPasteboardGetItemFlavorFlags, _hiservicesLib, "PasteboardGetItemFlavorFlags")
+	})
+	_register("PasteboardGetItemIdentifier", func() {
+		purego.RegisterLibFunc(&_fnPasteboardGetItemIdentifier, _hiservicesLib, "PasteboardGetItemIdentifier")
+	})
 	_register("PasteboardGetTypeID", func() { purego.RegisterLibFunc(&_fnPasteboardGetTypeID, _hiservicesLib, "PasteboardGetTypeID") })
 	_register("PasteboardPutItemFlavor", func() { purego.RegisterLibFunc(&_fnPasteboardPutItemFlavor, _hiservicesLib, "PasteboardPutItemFlavor") })
-	_register("PasteboardResolvePromises", func() { purego.RegisterLibFunc(&_fnPasteboardResolvePromises, _hiservicesLib, "PasteboardResolvePromises") })
-	_register("PasteboardSetPasteLocation", func() { purego.RegisterLibFunc(&_fnPasteboardSetPasteLocation, _hiservicesLib, "PasteboardSetPasteLocation") })
-	_register("PasteboardSetPromiseKeeper", func() { purego.RegisterLibFunc(&_fnPasteboardSetPromiseKeeper, _hiservicesLib, "PasteboardSetPromiseKeeper") })
+	_register("PasteboardResolvePromises", func() {
+		purego.RegisterLibFunc(&_fnPasteboardResolvePromises, _hiservicesLib, "PasteboardResolvePromises")
+	})
+	_register("PasteboardSetPasteLocation", func() {
+		purego.RegisterLibFunc(&_fnPasteboardSetPasteLocation, _hiservicesLib, "PasteboardSetPasteLocation")
+	})
+	_register("PasteboardSetPromiseKeeper", func() {
+		purego.RegisterLibFunc(&_fnPasteboardSetPromiseKeeper, _hiservicesLib, "PasteboardSetPromiseKeeper")
+	})
 	_register("PasteboardSynchronize", func() { purego.RegisterLibFunc(&_fnPasteboardSynchronize, _hiservicesLib, "PasteboardSynchronize") })
 	_register("PlotIconRefInContext", func() { purego.RegisterLibFunc(&_fnPlotIconRefInContext, _hiservicesLib, "PlotIconRefInContext") })
-	_register("ProcessInformationCopyDictionary", func() { purego.RegisterLibFunc(&_fnProcessInformationCopyDictionary, _hiservicesLib, "ProcessInformationCopyDictionary") })
+	_register("ProcessInformationCopyDictionary", func() {
+		purego.RegisterLibFunc(&_fnProcessInformationCopyDictionary, _hiservicesLib, "ProcessInformationCopyDictionary")
+	})
 	_register("SameProcess", func() { purego.RegisterLibFunc(&_fnSameProcess, _hiservicesLib, "SameProcess") })
 	_register("SetFrontProcess", func() { purego.RegisterLibFunc(&_fnSetFrontProcess, _hiservicesLib, "SetFrontProcess") })
-	_register("SetFrontProcessWithOptions", func() { purego.RegisterLibFunc(&_fnSetFrontProcessWithOptions, _hiservicesLib, "SetFrontProcessWithOptions") })
+	_register("SetFrontProcessWithOptions", func() {
+		purego.RegisterLibFunc(&_fnSetFrontProcessWithOptions, _hiservicesLib, "SetFrontProcessWithOptions")
+	})
 	_register("SetIconFamilyData", func() { purego.RegisterLibFunc(&_fnSetIconFamilyData, _hiservicesLib, "SetIconFamilyData") })
 	_register("ShowHideProcess", func() { purego.RegisterLibFunc(&_fnShowHideProcess, _hiservicesLib, "ShowHideProcess") })
 	_register("TransformProcessType", func() { purego.RegisterLibFunc(&_fnTransformProcessType, _hiservicesLib, "TransformProcessType") })
-	_register("TranslationCopyDestinationType", func() { purego.RegisterLibFunc(&_fnTranslationCopyDestinationType, _hiservicesLib, "TranslationCopyDestinationType") })
-	_register("TranslationCopySourceType", func() { purego.RegisterLibFunc(&_fnTranslationCopySourceType, _hiservicesLib, "TranslationCopySourceType") })
+	_register("TranslationCopyDestinationType", func() {
+		purego.RegisterLibFunc(&_fnTranslationCopyDestinationType, _hiservicesLib, "TranslationCopyDestinationType")
+	})
+	_register("TranslationCopySourceType", func() {
+		purego.RegisterLibFunc(&_fnTranslationCopySourceType, _hiservicesLib, "TranslationCopySourceType")
+	})
 	_register("TranslationCreate", func() { purego.RegisterLibFunc(&_fnTranslationCreate, _hiservicesLib, "TranslationCreate") })
-	_register("TranslationCreateWithSourceArray", func() { purego.RegisterLibFunc(&_fnTranslationCreateWithSourceArray, _hiservicesLib, "TranslationCreateWithSourceArray") })
-	_register("TranslationGetTranslationFlags", func() { purego.RegisterLibFunc(&_fnTranslationGetTranslationFlags, _hiservicesLib, "TranslationGetTranslationFlags") })
+	_register("TranslationCreateWithSourceArray", func() {
+		purego.RegisterLibFunc(&_fnTranslationCreateWithSourceArray, _hiservicesLib, "TranslationCreateWithSourceArray")
+	})
+	_register("TranslationGetTranslationFlags", func() {
+		purego.RegisterLibFunc(&_fnTranslationGetTranslationFlags, _hiservicesLib, "TranslationGetTranslationFlags")
+	})
 	_register("TranslationGetTypeID", func() { purego.RegisterLibFunc(&_fnTranslationGetTypeID, _hiservicesLib, "TranslationGetTypeID") })
-	_register("TranslationPerformForData", func() { purego.RegisterLibFunc(&_fnTranslationPerformForData, _hiservicesLib, "TranslationPerformForData") })
-	_register("TranslationPerformForFile", func() { purego.RegisterLibFunc(&_fnTranslationPerformForFile, _hiservicesLib, "TranslationPerformForFile") })
-	_register("TranslationPerformForURL", func() { purego.RegisterLibFunc(&_fnTranslationPerformForURL, _hiservicesLib, "TranslationPerformForURL") })
+	_register("TranslationPerformForData", func() {
+		purego.RegisterLibFunc(&_fnTranslationPerformForData, _hiservicesLib, "TranslationPerformForData")
+	})
+	_register("TranslationPerformForFile", func() {
+		purego.RegisterLibFunc(&_fnTranslationPerformForFile, _hiservicesLib, "TranslationPerformForFile")
+	})
+	_register("TranslationPerformForURL", func() {
+		purego.RegisterLibFunc(&_fnTranslationPerformForURL, _hiservicesLib, "TranslationPerformForURL")
+	})
 	_register("UAZoomChangeFocus", func() { purego.RegisterLibFunc(&_fnUAZoomChangeFocus, _hiservicesLib, "UAZoomChangeFocus") })
 	_register("UAZoomEnabled", func() { purego.RegisterLibFunc(&_fnUAZoomEnabled, _hiservicesLib, "UAZoomEnabled") })
 	_register("WakeUpProcess", func() { purego.RegisterLibFunc(&_fnWakeUpProcess, _hiservicesLib, "WakeUpProcess") })

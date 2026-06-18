@@ -15,15 +15,15 @@ type NSOrderedCollectionDifference[ObjectType purego.AnyObject] struct {
 }
 
 var (
-	_clsNSOrderedCollectionDifference = _objcClass("NSOrderedCollectionDifference")
-	_nSOrderedCollectionDifferenceSelInitWithChanges = objc.RegisterName("initWithChanges:")
+	_clsNSOrderedCollectionDifference                                                                                 = _objcClass("NSOrderedCollectionDifference")
+	_nSOrderedCollectionDifferenceSelInitWithChanges                                                                  = objc.RegisterName("initWithChanges:")
 	_nSOrderedCollectionDifferenceSelInitWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjectsAdditionalChanges = objc.RegisterName("initWithInsertIndexes:insertedObjects:removeIndexes:removedObjects:additionalChanges:")
-	_nSOrderedCollectionDifferenceSelInitWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjects = objc.RegisterName("initWithInsertIndexes:insertedObjects:removeIndexes:removedObjects:")
-	_nSOrderedCollectionDifferenceSelDifferenceByTransformingChangesWith = objc.RegisterName("differenceByTransformingChangesWithBlock:")
-	_nSOrderedCollectionDifferenceSelInverseDifference = objc.RegisterName("inverseDifference")
-	_nSOrderedCollectionDifferenceSelInsertions = objc.RegisterName("insertions")
-	_nSOrderedCollectionDifferenceSelRemovals = objc.RegisterName("removals")
-	_nSOrderedCollectionDifferenceSelHasChanges = objc.RegisterName("hasChanges")
+	_nSOrderedCollectionDifferenceSelInitWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjects                  = objc.RegisterName("initWithInsertIndexes:insertedObjects:removeIndexes:removedObjects:")
+	_nSOrderedCollectionDifferenceSelDifferenceByTransformingChangesWith                                              = objc.RegisterName("differenceByTransformingChangesWithBlock:")
+	_nSOrderedCollectionDifferenceSelInverseDifference                                                                = objc.RegisterName("inverseDifference")
+	_nSOrderedCollectionDifferenceSelInsertions                                                                       = objc.RegisterName("insertions")
+	_nSOrderedCollectionDifferenceSelRemovals                                                                         = objc.RegisterName("removals")
+	_nSOrderedCollectionDifferenceSelHasChanges                                                                       = objc.RegisterName("hasChanges")
 )
 
 func NSOrderedCollectionDifferenceFromID[ObjectType purego.AnyObject](id objc.ID) *NSOrderedCollectionDifference[ObjectType] {
@@ -39,19 +39,25 @@ func NSOrderedCollectionDifferenceFromID[ObjectType purego.AnyObject](id objc.ID
 // Creates a new difference representing the changes in the parameter. For clients interested in the difference between two collections, the collection's differenceFrom method should be used instead. To guarantee that instances are unambiguous and safe for compatible base states, this method requires that its parameter conform to the following requirements: 1) All insertion offsets are unique 2) All removal offsets are unique 3) All associated indexes match a change with the opposite parity.
 func (o *NSOrderedCollectionDifference[ObjectType]) InitWithChanges(changes *NSArray[objc.ID]) *NSOrderedCollectionDifference[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedCollectionDifferenceSelInitWithChanges, changes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedCollectionDifferenceFromID[ObjectType](_ret)
 }
 
 func (o *NSOrderedCollectionDifference[ObjectType]) InitWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjectsAdditionalChanges(inserts *NSIndexSet, insertedObjects *NSArray[ObjectType], removes *NSIndexSet, removedObjects *NSArray[ObjectType], changes *NSArray[objc.ID]) *NSOrderedCollectionDifference[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedCollectionDifferenceSelInitWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjectsAdditionalChanges, inserts.Ptr(), insertedObjects.Ptr(), removes.Ptr(), removedObjects.Ptr(), changes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedCollectionDifferenceFromID[ObjectType](_ret)
 }
 
 func (o *NSOrderedCollectionDifference[ObjectType]) InitWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjects(inserts *NSIndexSet, insertedObjects *NSArray[ObjectType], removes *NSIndexSet, removedObjects *NSArray[ObjectType]) *NSOrderedCollectionDifference[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedCollectionDifferenceSelInitWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjects, inserts.Ptr(), insertedObjects.Ptr(), removes.Ptr(), removedObjects.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedCollectionDifferenceFromID[ObjectType](_ret)
 }
 
@@ -62,7 +68,9 @@ func (o *NSOrderedCollectionDifference[ObjectType]) DifferenceByTransformingChan
 
 func (o *NSOrderedCollectionDifference[ObjectType]) InverseDifference() *NSOrderedCollectionDifference[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedCollectionDifferenceSelInverseDifference)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedCollectionDifferenceFromID[ObjectType](_ret)
 }
 
@@ -80,4 +88,3 @@ func (o *NSOrderedCollectionDifference[ObjectType]) HasChanges() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSOrderedCollectionDifferenceSelHasChanges)
 	return _ret
 }
-

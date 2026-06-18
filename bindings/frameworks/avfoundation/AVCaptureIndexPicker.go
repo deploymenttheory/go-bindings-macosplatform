@@ -16,19 +16,19 @@ type AVCaptureIndexPicker struct {
 }
 
 var (
-	_clsAVCaptureIndexPicker = _objcClass("AVCaptureIndexPicker")
-	_aVCaptureIndexPickerSelInitWithLocalizedTitleSymbolNameNumberOfIndexes = objc.RegisterName("initWithLocalizedTitle:symbolName:numberOfIndexes:")
+	_clsAVCaptureIndexPicker                                                                       = _objcClass("AVCaptureIndexPicker")
+	_aVCaptureIndexPickerSelInitWithLocalizedTitleSymbolNameNumberOfIndexes                        = objc.RegisterName("initWithLocalizedTitle:symbolName:numberOfIndexes:")
 	_aVCaptureIndexPickerSelInitWithLocalizedTitleSymbolNameNumberOfIndexesLocalizedTitleTransform = objc.RegisterName("initWithLocalizedTitle:symbolName:numberOfIndexes:localizedTitleTransform:")
-	_aVCaptureIndexPickerSelInitWithLocalizedTitleSymbolNameLocalizedIndexTitles = objc.RegisterName("initWithLocalizedTitle:symbolName:localizedIndexTitles:")
-	_aVCaptureIndexPickerSelSetActionQueueAction = objc.RegisterName("setActionQueue:action:")
-	_aVCaptureIndexPickerSelSelectedIndex = objc.RegisterName("selectedIndex")
-	_aVCaptureIndexPickerSelSetSelectedIndex = objc.RegisterName("setSelectedIndex:")
-	_aVCaptureIndexPickerSelLocalizedTitle = objc.RegisterName("localizedTitle")
-	_aVCaptureIndexPickerSelSymbolName = objc.RegisterName("symbolName")
-	_aVCaptureIndexPickerSelNumberOfIndexes = objc.RegisterName("numberOfIndexes")
-	_aVCaptureIndexPickerSelLocalizedIndexTitles = objc.RegisterName("localizedIndexTitles")
-	_aVCaptureIndexPickerSelAccessibilityIdentifier = objc.RegisterName("accessibilityIdentifier")
-	_aVCaptureIndexPickerSelSetAccessibilityIdentifier = objc.RegisterName("setAccessibilityIdentifier:")
+	_aVCaptureIndexPickerSelInitWithLocalizedTitleSymbolNameLocalizedIndexTitles                   = objc.RegisterName("initWithLocalizedTitle:symbolName:localizedIndexTitles:")
+	_aVCaptureIndexPickerSelSetActionQueueAction                                                   = objc.RegisterName("setActionQueue:action:")
+	_aVCaptureIndexPickerSelSelectedIndex                                                          = objc.RegisterName("selectedIndex")
+	_aVCaptureIndexPickerSelSetSelectedIndex                                                       = objc.RegisterName("setSelectedIndex:")
+	_aVCaptureIndexPickerSelLocalizedTitle                                                         = objc.RegisterName("localizedTitle")
+	_aVCaptureIndexPickerSelSymbolName                                                             = objc.RegisterName("symbolName")
+	_aVCaptureIndexPickerSelNumberOfIndexes                                                        = objc.RegisterName("numberOfIndexes")
+	_aVCaptureIndexPickerSelLocalizedIndexTitles                                                   = objc.RegisterName("localizedIndexTitles")
+	_aVCaptureIndexPickerSelAccessibilityIdentifier                                                = objc.RegisterName("accessibilityIdentifier")
+	_aVCaptureIndexPickerSelSetAccessibilityIdentifier                                             = objc.RegisterName("setAccessibilityIdentifier:")
 )
 
 func AVCaptureIndexPickerFromID(id objc.ID) *AVCaptureIndexPicker {
@@ -44,21 +44,27 @@ func AVCaptureIndexPickerFromID(id objc.ID) *AVCaptureIndexPicker {
 // @method initWithLocalizedTitle:symbolName:numberOfIndexes: @abstract Initializes an `AVCaptureIndexPicker` to pick between `numberOfIndexes` values. @param localizedTitle A localized string that describes the picker's `action`. @param symbolName The name of a symbol to represent the picker. @param numberOfIndexes The number of indexes to pick between. `numberOfIndexes` must be greater than 0, otherwise an `NSInvalidArgumentException` is thrown. @result An `AVCaptureIndexPicker` instance that picks between `numberOfIndexes` values. @discussion Suitable when your picked values don't need titles.
 func (o *AVCaptureIndexPicker) InitWithLocalizedTitleSymbolNameNumberOfIndexes(localizedTitle *foundation.NSString, symbolName *foundation.NSString, numberOfIndexes int) *AVCaptureIndexPicker {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureIndexPickerSelInitWithLocalizedTitleSymbolNameNumberOfIndexes, localizedTitle.Ptr(), symbolName.Ptr(), numberOfIndexes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureIndexPickerFromID(_ret)
 }
 
 // @method initWithLocalizedTitle:symbolName:numberOfIndexes:localizedTitleTransform: @abstract Initializes an `AVCaptureIndexPicker` to pick between `numberOfIndexes` values. @param localizedTitle A localized string that describes the picker's `action`. @param symbolName The name of a symbol to represent the picker. @param numberOfIndexes The number of indexes to pick between. `numberOfIndexes` must be greater than 0, otherwise an `NSInvalidArgumentException` is thrown. @param localizedTitleTransform A transformation from index to localized title. @result An `AVCaptureIndexPicker` instance that picks between `numberOfIndexes` values with a transformation from index to localized title. @discussion Suitable when you want to provide a title for each picked value lazily.
 func (o *AVCaptureIndexPicker) InitWithLocalizedTitleSymbolNameNumberOfIndexesLocalizedTitleTransform(localizedTitle *foundation.NSString, symbolName *foundation.NSString, numberOfIndexes int, localizedTitleTransform objc.Block) *AVCaptureIndexPicker {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureIndexPickerSelInitWithLocalizedTitleSymbolNameNumberOfIndexesLocalizedTitleTransform, localizedTitle.Ptr(), symbolName.Ptr(), numberOfIndexes, localizedTitleTransform)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureIndexPickerFromID(_ret)
 }
 
 // @method initWithLocalizedTitle:symbolName:localizedIndexTitles: @abstract Initializes an `AVCaptureIndexPicker` to pick between `localizedIndexTitles.count` values. @param localizedTitle A localized string that describes the picker's `action`. @param symbolName The name of a symbol to represent the picker. @param localizedIndexTitles The titles to use for each index. `localizedIndexTitles` must be greater than 0, otherwise an `NSInvalidArgumentException` is thrown. @result An `AVCaptureIndexPicker` instance that picks between `localizedIndexTitles.count` values. @discussion Suitable when you already have an array containing a title for each picked value.
 func (o *AVCaptureIndexPicker) InitWithLocalizedTitleSymbolNameLocalizedIndexTitles(localizedTitle *foundation.NSString, symbolName *foundation.NSString, localizedIndexTitles *foundation.NSArray[*foundation.NSString]) *AVCaptureIndexPicker {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureIndexPickerSelInitWithLocalizedTitleSymbolNameLocalizedIndexTitles, localizedTitle.Ptr(), symbolName.Ptr(), localizedIndexTitles)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureIndexPickerFromID(_ret)
 }
 
@@ -87,14 +93,18 @@ func (o *AVCaptureIndexPicker) SetSelectedIndex(selectedIndex int) {
 // @property localizedTitle @abstract A localized string that describes the picker's `action`.
 func (o *AVCaptureIndexPicker) LocalizedTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureIndexPickerSelLocalizedTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property symbolName @abstract The name of a symbol to represent the picker.
 func (o *AVCaptureIndexPicker) SymbolName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureIndexPickerSelSymbolName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -113,11 +123,12 @@ func (o *AVCaptureIndexPicker) LocalizedIndexTitles() *foundation.NSArray[*found
 // @property accessibilityIdentifier @abstract A string that identifies the picker.
 func (o *AVCaptureIndexPicker) AccessibilityIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureIndexPickerSelAccessibilityIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *AVCaptureIndexPicker) SetAccessibilityIdentifier(accessibilityIdentifier *foundation.NSString) {
 	o.Ptr().Send(_aVCaptureIndexPickerSelSetAccessibilityIdentifier, accessibilityIdentifier.Ptr())
 }
-

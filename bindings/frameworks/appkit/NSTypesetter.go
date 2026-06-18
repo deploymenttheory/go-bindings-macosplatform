@@ -17,68 +17,68 @@ type NSTypesetter struct {
 }
 
 var (
-	_clsNSTypesetter = _objcClass("NSTypesetter")
-	_nSTypesetterSelSubstituteFontForFont = objc.RegisterName("substituteFontForFont:")
-	_nSTypesetterSelTextTabForGlyphLocationWritingDirectionMaxLocation = objc.RegisterName("textTabForGlyphLocation:writingDirection:maxLocation:")
-	_nSTypesetterSelSetParagraphGlyphRangeSeparatorGlyphRange = objc.RegisterName("setParagraphGlyphRange:separatorGlyphRange:")
-	_nSTypesetterSelLayoutParagraphAtPoint = objc.RegisterName("layoutParagraphAtPoint:")
-	_nSTypesetterSelBeginParagraph = objc.RegisterName("beginParagraph")
-	_nSTypesetterSelEndParagraph = objc.RegisterName("endParagraph")
-	_nSTypesetterSelBeginLineWithGlyphAtIndex = objc.RegisterName("beginLineWithGlyphAtIndex:")
-	_nSTypesetterSelEndLineWithGlyphRange = objc.RegisterName("endLineWithGlyphRange:")
-	_nSTypesetterSelLineSpacingAfterGlyphAtIndexWithProposedLineFragmentRect = objc.RegisterName("lineSpacingAfterGlyphAtIndex:withProposedLineFragmentRect:")
-	_nSTypesetterSelParagraphSpacingBeforeGlyphAtIndexWithProposedLineFragmentRect = objc.RegisterName("paragraphSpacingBeforeGlyphAtIndex:withProposedLineFragmentRect:")
-	_nSTypesetterSelParagraphSpacingAfterGlyphAtIndexWithProposedLineFragmentRect = objc.RegisterName("paragraphSpacingAfterGlyphAtIndex:withProposedLineFragmentRect:")
-	_nSTypesetterSelGetLineFragmentRectUsedRectForParagraphSeparatorGlyphRangeAtProposedOrigin = objc.RegisterName("getLineFragmentRect:usedRect:forParagraphSeparatorGlyphRange:atProposedOrigin:")
-	_nSTypesetterSelSetHardInvalidationForGlyphRange = objc.RegisterName("setHardInvalidation:forGlyphRange:")
-	_nSTypesetterSelLayoutGlyphsInLayoutManagerStartingAtGlyphIndexMaxNumberOfLineFragmentsNextGlyphIndex = objc.RegisterName("layoutGlyphsInLayoutManager:startingAtGlyphIndex:maxNumberOfLineFragments:nextGlyphIndex:")
-	_nSTypesetterSelLayoutCharactersInRangeForLayoutManagerMaximumNumberOfLineFragments = objc.RegisterName("layoutCharactersInRange:forLayoutManager:maximumNumberOfLineFragments:")
-	_nSTypesetterSelPrintingAdjustmentInLayoutManagerForNominallySpacedGlyphRangePackedGlyphsCount = objc.RegisterName("printingAdjustmentInLayoutManager:forNominallySpacedGlyphRange:packedGlyphs:count:")
-	_nSTypesetterSelBaselineOffsetInLayoutManagerGlyphIndex = objc.RegisterName("baselineOffsetInLayoutManager:glyphIndex:")
-	_nSTypesetterSelSharedSystemTypesetterForBehavior = objc.RegisterName("sharedSystemTypesetterForBehavior:")
-	_nSTypesetterSelUsesFontLeading = objc.RegisterName("usesFontLeading")
-	_nSTypesetterSelSetUsesFontLeading = objc.RegisterName("setUsesFontLeading:")
-	_nSTypesetterSelTypesetterBehavior = objc.RegisterName("typesetterBehavior")
-	_nSTypesetterSelSetTypesetterBehavior = objc.RegisterName("setTypesetterBehavior:")
-	_nSTypesetterSelHyphenationFactor = objc.RegisterName("hyphenationFactor")
-	_nSTypesetterSelSetHyphenationFactor = objc.RegisterName("setHyphenationFactor:")
-	_nSTypesetterSelLineFragmentPadding = objc.RegisterName("lineFragmentPadding")
-	_nSTypesetterSelSetLineFragmentPadding = objc.RegisterName("setLineFragmentPadding:")
-	_nSTypesetterSelBidiProcessingEnabled = objc.RegisterName("bidiProcessingEnabled")
-	_nSTypesetterSelSetBidiProcessingEnabled = objc.RegisterName("setBidiProcessingEnabled:")
-	_nSTypesetterSelAttributedString = objc.RegisterName("attributedString")
-	_nSTypesetterSelSetAttributedString = objc.RegisterName("setAttributedString:")
-	_nSTypesetterSelParagraphGlyphRange = objc.RegisterName("paragraphGlyphRange")
-	_nSTypesetterSelParagraphSeparatorGlyphRange = objc.RegisterName("paragraphSeparatorGlyphRange")
-	_nSTypesetterSelParagraphCharacterRange = objc.RegisterName("paragraphCharacterRange")
-	_nSTypesetterSelParagraphSeparatorCharacterRange = objc.RegisterName("paragraphSeparatorCharacterRange")
-	_nSTypesetterSelAttributesForExtraLineFragment = objc.RegisterName("attributesForExtraLineFragment")
-	_nSTypesetterSelLayoutManager = objc.RegisterName("layoutManager")
-	_nSTypesetterSelTextContainers = objc.RegisterName("textContainers")
-	_nSTypesetterSelCurrentTextContainer = objc.RegisterName("currentTextContainer")
-	_nSTypesetterSelCurrentParagraphStyle = objc.RegisterName("currentParagraphStyle")
-	_nSTypesetterSelSharedSystemTypesetter = objc.RegisterName("sharedSystemTypesetter")
-	_nSTypesetterSelDefaultTypesetterBehavior = objc.RegisterName("defaultTypesetterBehavior")
-	_nSTypesetterSelWillSetLineFragmentRectForGlyphRangeUsedRectBaselineOffset = objc.RegisterName("willSetLineFragmentRect:forGlyphRange:usedRect:baselineOffset:")
-	_nSTypesetterSelShouldBreakLineByWordBeforeCharacterAtIndex = objc.RegisterName("shouldBreakLineByWordBeforeCharacterAtIndex:")
-	_nSTypesetterSelShouldBreakLineByHyphenatingBeforeCharacterAtIndex = objc.RegisterName("shouldBreakLineByHyphenatingBeforeCharacterAtIndex:")
-	_nSTypesetterSelHyphenationFactorForGlyphAtIndex = objc.RegisterName("hyphenationFactorForGlyphAtIndex:")
-	_nSTypesetterSelHyphenCharacterForGlyphAtIndex = objc.RegisterName("hyphenCharacterForGlyphAtIndex:")
-	_nSTypesetterSelBoundingBoxForControlGlyphAtIndexForTextContainerProposedLineFragmentGlyphPositionCharacterIndex = objc.RegisterName("boundingBoxForControlGlyphAtIndex:forTextContainer:proposedLineFragment:glyphPosition:characterIndex:")
-	_nSTypesetterSelCharacterRangeForGlyphRangeActualGlyphRange = objc.RegisterName("characterRangeForGlyphRange:actualGlyphRange:")
-	_nSTypesetterSelGlyphRangeForCharacterRangeActualCharacterRange = objc.RegisterName("glyphRangeForCharacterRange:actualCharacterRange:")
+	_clsNSTypesetter                                                                                                                                  = _objcClass("NSTypesetter")
+	_nSTypesetterSelSubstituteFontForFont                                                                                                             = objc.RegisterName("substituteFontForFont:")
+	_nSTypesetterSelTextTabForGlyphLocationWritingDirectionMaxLocation                                                                                = objc.RegisterName("textTabForGlyphLocation:writingDirection:maxLocation:")
+	_nSTypesetterSelSetParagraphGlyphRangeSeparatorGlyphRange                                                                                         = objc.RegisterName("setParagraphGlyphRange:separatorGlyphRange:")
+	_nSTypesetterSelLayoutParagraphAtPoint                                                                                                            = objc.RegisterName("layoutParagraphAtPoint:")
+	_nSTypesetterSelBeginParagraph                                                                                                                    = objc.RegisterName("beginParagraph")
+	_nSTypesetterSelEndParagraph                                                                                                                      = objc.RegisterName("endParagraph")
+	_nSTypesetterSelBeginLineWithGlyphAtIndex                                                                                                         = objc.RegisterName("beginLineWithGlyphAtIndex:")
+	_nSTypesetterSelEndLineWithGlyphRange                                                                                                             = objc.RegisterName("endLineWithGlyphRange:")
+	_nSTypesetterSelLineSpacingAfterGlyphAtIndexWithProposedLineFragmentRect                                                                          = objc.RegisterName("lineSpacingAfterGlyphAtIndex:withProposedLineFragmentRect:")
+	_nSTypesetterSelParagraphSpacingBeforeGlyphAtIndexWithProposedLineFragmentRect                                                                    = objc.RegisterName("paragraphSpacingBeforeGlyphAtIndex:withProposedLineFragmentRect:")
+	_nSTypesetterSelParagraphSpacingAfterGlyphAtIndexWithProposedLineFragmentRect                                                                     = objc.RegisterName("paragraphSpacingAfterGlyphAtIndex:withProposedLineFragmentRect:")
+	_nSTypesetterSelGetLineFragmentRectUsedRectForParagraphSeparatorGlyphRangeAtProposedOrigin                                                        = objc.RegisterName("getLineFragmentRect:usedRect:forParagraphSeparatorGlyphRange:atProposedOrigin:")
+	_nSTypesetterSelSetHardInvalidationForGlyphRange                                                                                                  = objc.RegisterName("setHardInvalidation:forGlyphRange:")
+	_nSTypesetterSelLayoutGlyphsInLayoutManagerStartingAtGlyphIndexMaxNumberOfLineFragmentsNextGlyphIndex                                             = objc.RegisterName("layoutGlyphsInLayoutManager:startingAtGlyphIndex:maxNumberOfLineFragments:nextGlyphIndex:")
+	_nSTypesetterSelLayoutCharactersInRangeForLayoutManagerMaximumNumberOfLineFragments                                                               = objc.RegisterName("layoutCharactersInRange:forLayoutManager:maximumNumberOfLineFragments:")
+	_nSTypesetterSelPrintingAdjustmentInLayoutManagerForNominallySpacedGlyphRangePackedGlyphsCount                                                    = objc.RegisterName("printingAdjustmentInLayoutManager:forNominallySpacedGlyphRange:packedGlyphs:count:")
+	_nSTypesetterSelBaselineOffsetInLayoutManagerGlyphIndex                                                                                           = objc.RegisterName("baselineOffsetInLayoutManager:glyphIndex:")
+	_nSTypesetterSelSharedSystemTypesetterForBehavior                                                                                                 = objc.RegisterName("sharedSystemTypesetterForBehavior:")
+	_nSTypesetterSelUsesFontLeading                                                                                                                   = objc.RegisterName("usesFontLeading")
+	_nSTypesetterSelSetUsesFontLeading                                                                                                                = objc.RegisterName("setUsesFontLeading:")
+	_nSTypesetterSelTypesetterBehavior                                                                                                                = objc.RegisterName("typesetterBehavior")
+	_nSTypesetterSelSetTypesetterBehavior                                                                                                             = objc.RegisterName("setTypesetterBehavior:")
+	_nSTypesetterSelHyphenationFactor                                                                                                                 = objc.RegisterName("hyphenationFactor")
+	_nSTypesetterSelSetHyphenationFactor                                                                                                              = objc.RegisterName("setHyphenationFactor:")
+	_nSTypesetterSelLineFragmentPadding                                                                                                               = objc.RegisterName("lineFragmentPadding")
+	_nSTypesetterSelSetLineFragmentPadding                                                                                                            = objc.RegisterName("setLineFragmentPadding:")
+	_nSTypesetterSelBidiProcessingEnabled                                                                                                             = objc.RegisterName("bidiProcessingEnabled")
+	_nSTypesetterSelSetBidiProcessingEnabled                                                                                                          = objc.RegisterName("setBidiProcessingEnabled:")
+	_nSTypesetterSelAttributedString                                                                                                                  = objc.RegisterName("attributedString")
+	_nSTypesetterSelSetAttributedString                                                                                                               = objc.RegisterName("setAttributedString:")
+	_nSTypesetterSelParagraphGlyphRange                                                                                                               = objc.RegisterName("paragraphGlyphRange")
+	_nSTypesetterSelParagraphSeparatorGlyphRange                                                                                                      = objc.RegisterName("paragraphSeparatorGlyphRange")
+	_nSTypesetterSelParagraphCharacterRange                                                                                                           = objc.RegisterName("paragraphCharacterRange")
+	_nSTypesetterSelParagraphSeparatorCharacterRange                                                                                                  = objc.RegisterName("paragraphSeparatorCharacterRange")
+	_nSTypesetterSelAttributesForExtraLineFragment                                                                                                    = objc.RegisterName("attributesForExtraLineFragment")
+	_nSTypesetterSelLayoutManager                                                                                                                     = objc.RegisterName("layoutManager")
+	_nSTypesetterSelTextContainers                                                                                                                    = objc.RegisterName("textContainers")
+	_nSTypesetterSelCurrentTextContainer                                                                                                              = objc.RegisterName("currentTextContainer")
+	_nSTypesetterSelCurrentParagraphStyle                                                                                                             = objc.RegisterName("currentParagraphStyle")
+	_nSTypesetterSelSharedSystemTypesetter                                                                                                            = objc.RegisterName("sharedSystemTypesetter")
+	_nSTypesetterSelDefaultTypesetterBehavior                                                                                                         = objc.RegisterName("defaultTypesetterBehavior")
+	_nSTypesetterSelWillSetLineFragmentRectForGlyphRangeUsedRectBaselineOffset                                                                        = objc.RegisterName("willSetLineFragmentRect:forGlyphRange:usedRect:baselineOffset:")
+	_nSTypesetterSelShouldBreakLineByWordBeforeCharacterAtIndex                                                                                       = objc.RegisterName("shouldBreakLineByWordBeforeCharacterAtIndex:")
+	_nSTypesetterSelShouldBreakLineByHyphenatingBeforeCharacterAtIndex                                                                                = objc.RegisterName("shouldBreakLineByHyphenatingBeforeCharacterAtIndex:")
+	_nSTypesetterSelHyphenationFactorForGlyphAtIndex                                                                                                  = objc.RegisterName("hyphenationFactorForGlyphAtIndex:")
+	_nSTypesetterSelHyphenCharacterForGlyphAtIndex                                                                                                    = objc.RegisterName("hyphenCharacterForGlyphAtIndex:")
+	_nSTypesetterSelBoundingBoxForControlGlyphAtIndexForTextContainerProposedLineFragmentGlyphPositionCharacterIndex                                  = objc.RegisterName("boundingBoxForControlGlyphAtIndex:forTextContainer:proposedLineFragment:glyphPosition:characterIndex:")
+	_nSTypesetterSelCharacterRangeForGlyphRangeActualGlyphRange                                                                                       = objc.RegisterName("characterRangeForGlyphRange:actualGlyphRange:")
+	_nSTypesetterSelGlyphRangeForCharacterRangeActualCharacterRange                                                                                   = objc.RegisterName("glyphRangeForCharacterRange:actualCharacterRange:")
 	_nSTypesetterSelGetLineFragmentRectUsedRectRemainingRectForStartingGlyphAtIndexProposedRectLineSpacingParagraphSpacingBeforeParagraphSpacingAfter = objc.RegisterName("getLineFragmentRect:usedRect:remainingRect:forStartingGlyphAtIndex:proposedRect:lineSpacing:paragraphSpacingBefore:paragraphSpacingAfter:")
-	_nSTypesetterSelSetLineFragmentRectForGlyphRangeUsedRectBaselineOffset = objc.RegisterName("setLineFragmentRect:forGlyphRange:usedRect:baselineOffset:")
-	_nSTypesetterSelSetNotShownAttributeForGlyphRange = objc.RegisterName("setNotShownAttribute:forGlyphRange:")
-	_nSTypesetterSelSetDrawsOutsideLineFragmentForGlyphRange = objc.RegisterName("setDrawsOutsideLineFragment:forGlyphRange:")
-	_nSTypesetterSelSetLocationWithAdvancementsForStartOfGlyphRange = objc.RegisterName("setLocation:withAdvancements:forStartOfGlyphRange:")
-	_nSTypesetterSelSetAttachmentSizeForGlyphRange = objc.RegisterName("setAttachmentSize:forGlyphRange:")
-	_nSTypesetterSelSetBidiLevelsForGlyphRange = objc.RegisterName("setBidiLevels:forGlyphRange:")
-	_nSTypesetterSelActionForControlCharacterAtIndex = objc.RegisterName("actionForControlCharacterAtIndex:")
-	_nSTypesetterSelGetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBitsBidiLevels = objc.RegisterName("getGlyphsInRange:glyphs:characterIndexes:glyphInscriptions:elasticBits:bidiLevels:")
-	_nSTypesetterSelSubstituteGlyphsInRangeWithGlyphs = objc.RegisterName("substituteGlyphsInRange:withGlyphs:")
-	_nSTypesetterSelInsertGlyphAtGlyphIndexCharacterIndex = objc.RegisterName("insertGlyph:atGlyphIndex:characterIndex:")
-	_nSTypesetterSelDeleteGlyphsInRange = objc.RegisterName("deleteGlyphsInRange:")
+	_nSTypesetterSelSetLineFragmentRectForGlyphRangeUsedRectBaselineOffset                                                                            = objc.RegisterName("setLineFragmentRect:forGlyphRange:usedRect:baselineOffset:")
+	_nSTypesetterSelSetNotShownAttributeForGlyphRange                                                                                                 = objc.RegisterName("setNotShownAttribute:forGlyphRange:")
+	_nSTypesetterSelSetDrawsOutsideLineFragmentForGlyphRange                                                                                          = objc.RegisterName("setDrawsOutsideLineFragment:forGlyphRange:")
+	_nSTypesetterSelSetLocationWithAdvancementsForStartOfGlyphRange                                                                                   = objc.RegisterName("setLocation:withAdvancements:forStartOfGlyphRange:")
+	_nSTypesetterSelSetAttachmentSizeForGlyphRange                                                                                                    = objc.RegisterName("setAttachmentSize:forGlyphRange:")
+	_nSTypesetterSelSetBidiLevelsForGlyphRange                                                                                                        = objc.RegisterName("setBidiLevels:forGlyphRange:")
+	_nSTypesetterSelActionForControlCharacterAtIndex                                                                                                  = objc.RegisterName("actionForControlCharacterAtIndex:")
+	_nSTypesetterSelGetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBitsBidiLevels                                                      = objc.RegisterName("getGlyphsInRange:glyphs:characterIndexes:glyphInscriptions:elasticBits:bidiLevels:")
+	_nSTypesetterSelSubstituteGlyphsInRangeWithGlyphs                                                                                                 = objc.RegisterName("substituteGlyphsInRange:withGlyphs:")
+	_nSTypesetterSelInsertGlyphAtGlyphIndexCharacterIndex                                                                                             = objc.RegisterName("insertGlyph:atGlyphIndex:characterIndex:")
+	_nSTypesetterSelDeleteGlyphsInRange                                                                                                               = objc.RegisterName("deleteGlyphsInRange:")
 )
 
 func NSTypesetterFromID(id objc.ID) *NSTypesetter {
@@ -93,13 +93,17 @@ func NSTypesetterFromID(id objc.ID) *NSTypesetter {
 
 func (o *NSTypesetter) SubstituteFontForFont(originalFont *NSFont) *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTypesetterSelSubstituteFontForFont, originalFont.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
 func (o *NSTypesetter) TextTabForGlyphLocationWritingDirectionMaxLocation(glyphLocation float64, direction NSWritingDirection, maxLocation float64) *NSTextTab {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTypesetterSelTextTabForGlyphLocationWritingDirectionMaxLocation, glyphLocation, direction, maxLocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextTabFromID(_ret)
 }
 
@@ -222,7 +226,9 @@ func (o *NSTypesetter) SetBidiProcessingEnabled(bidiProcessingEnabled bool) {
 
 func (o *NSTypesetter) AttributedString() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTypesetterSelAttributedString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
@@ -257,31 +263,41 @@ func (o *NSTypesetter) AttributesForExtraLineFragment() *foundation.NSDictionary
 
 func (o *NSTypesetter) LayoutManager() *NSLayoutManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTypesetterSelLayoutManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutManagerFromID(_ret)
 }
 
 func (o *NSTypesetter) TextContainers() *foundation.NSArray[*NSTextContainer] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTypesetterSelTextContainers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSTextContainer](_ret)
 }
 
 func (o *NSTypesetter) CurrentTextContainer() *NSTextContainer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTypesetterSelCurrentTextContainer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextContainerFromID(_ret)
 }
 
 func (o *NSTypesetter) CurrentParagraphStyle() *NSParagraphStyle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTypesetterSelCurrentParagraphStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSParagraphStyleFromID(_ret)
 }
 
 func NSTypesetterSharedSystemTypesetter() *NSTypesetter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTypesetter), _nSTypesetterSelSharedSystemTypesetter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTypesetterFromID(_ret)
 }
 
@@ -382,4 +398,3 @@ func (o *NSTypesetter) InsertGlyphAtGlyphIndexCharacterIndex(glyph uint, glyphIn
 func (o *NSTypesetter) DeleteGlyphsInRange(glyphRange foundation.NSRange) {
 	o.Ptr().Send(_nSTypesetterSelDeleteGlyphsInRange, glyphRange)
 }
-

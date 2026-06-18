@@ -15,7 +15,9 @@ type MacOSConfigurationRequirements struct {
 }
 
 // Unwrap returns the underlying [raw.VZMacOSConfigurationRequirements].
-func (x *MacOSConfigurationRequirements) Unwrap() *raw.VZMacOSConfigurationRequirements { return x.inner }
+func (x *MacOSConfigurationRequirements) Unwrap() *raw.VZMacOSConfigurationRequirements {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -63,4 +65,3 @@ type MacOSConfigurationRequirementsable interface {
 }
 
 var _ MacOSConfigurationRequirementsable = (*MacOSConfigurationRequirements)(nil)
-

@@ -101,4 +101,3 @@ type BackgroundExitDataable interface {
 }
 
 var _ BackgroundExitDataable = (*BackgroundExitData)(nil)
-

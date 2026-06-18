@@ -16,7 +16,9 @@ type MTRBasicInformationClusterStartUpEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBasicInformationClusterStartUpEvent].
-func (x *MTRBasicInformationClusterStartUpEvent) Unwrap() *raw.MTRBasicInformationClusterStartUpEvent { return x.inner }
+func (x *MTRBasicInformationClusterStartUpEvent) Unwrap() *raw.MTRBasicInformationClusterStartUpEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -52,7 +54,9 @@ func (x *MTRBasicInformationClusterStartUpEvent) SetSoftwareVersion(softwareVers
 	x.inner.SetSoftwareVersion(softwareVersion)
 }
 
-func (x *MTRBasicInformationClusterStartUpEvent) asMTRBasicInformationClusterStartUpEvent() *raw.MTRBasicInformationClusterStartUpEvent { return x.inner }
+func (x *MTRBasicInformationClusterStartUpEvent) asMTRBasicInformationClusterStartUpEvent() *raw.MTRBasicInformationClusterStartUpEvent {
+	return x.inner
+}
 
 // MTRBasicInformationClusterStartUpEventable is the interface implemented by [MTRBasicInformationClusterStartUpEvent], for mocking and DI.
 type MTRBasicInformationClusterStartUpEventable interface {
@@ -63,4 +67,3 @@ type MTRBasicInformationClusterStartUpEventable interface {
 }
 
 var _ MTRBasicInformationClusterStartUpEventable = (*MTRBasicInformationClusterStartUpEvent)(nil)
-

@@ -252,9 +252,13 @@ func (x *MTRClusterGroupKeyManagement) KeySetReadAllIndicesWithParamsExpectedVal
 	}
 }
 
-func (x *MTRClusterGroupKeyManagement) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterGroupKeyManagement) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterGroupKeyManagement) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterGroupKeyManagement) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterGroupKeyManagementable is the interface implemented by [MTRClusterGroupKeyManagement], for mocking and DI.
 type MTRClusterGroupKeyManagementable interface {
@@ -282,4 +286,3 @@ type MTRClusterGroupKeyManagementable interface {
 }
 
 var _ MTRClusterGroupKeyManagementable = (*MTRClusterGroupKeyManagement)(nil)
-

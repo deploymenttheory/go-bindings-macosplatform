@@ -138,4 +138,3 @@ type ComposeServiceViewControllerable interface {
 }
 
 var _ ComposeServiceViewControllerable = (*ComposeServiceViewController)(nil)
-

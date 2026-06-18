@@ -8,21 +8,21 @@ import (
 )
 
 type CSIdentityClientContext struct {
-	Version int
-	Info unsafe.Pointer
-	Retain unsafe.Pointer
-	Release unsafe.Pointer
+	Version         int
+	Info            unsafe.Pointer
+	Retain          unsafe.Pointer
+	Release         unsafe.Pointer
 	CopyDescription unsafe.Pointer
-	StatusUpdated unsafe.Pointer
+	StatusUpdated   unsafe.Pointer
 }
 
 type CSIdentityQueryClientContext struct {
-	Version int
-	Info unsafe.Pointer
-	RetainInfo unsafe.Pointer
-	ReleaseInfo unsafe.Pointer
+	Version             int
+	Info                unsafe.Pointer
+	RetainInfo          unsafe.Pointer
+	ReleaseInfo         unsafe.Pointer
 	CopyInfoDescription unsafe.Pointer
-	ReceiveEvent unsafe.Pointer
+	ReceiveEvent        unsafe.Pointer
 }
 
 type IconFamilyElement struct {
@@ -34,15 +34,15 @@ type IconFamilyElement struct {
 type IconFamilyResource struct {
 	ResourceType uint
 	ResourceSize int
-	Elements [1]IconFamilyElement
+	Elements     [1]IconFamilyElement
 }
 
 type KCCallbackInfo struct {
-	Version uint
-	Item unsafe.Pointer
+	Version   uint
+	Item      unsafe.Pointer
 	ProcessID [2]int
-	Event [4]int
-	Keychain unsafe.Pointer
+	Event     [4]int
+	Keychain  unsafe.Pointer
 }
 
 // OpaqueWSMethodInvocationRef is an opaque type.
@@ -52,17 +52,17 @@ type OpaqueWSMethodInvocationRef struct{}
 type OpaqueWSProtocolHandlerRef struct{}
 
 type SleepQRec struct {
-	SleepQLink *SleepQRec
-	SleepQType int16
-	SleepQProc unsafe.Pointer
+	SleepQLink  *SleepQRec
+	SleepQType  int16
+	SleepQProc  unsafe.Pointer
 	SleepQFlags int16
 }
 
 type WSClientContext struct {
-	Version int
-	Info unsafe.Pointer
-	Retain unsafe.Pointer
-	Release unsafe.Pointer
+	Version         int
+	Info            unsafe.Pointer
+	Retain          unsafe.Pointer
+	Release         unsafe.Pointer
 	CopyDescription unsafe.Pointer
 }
 
@@ -77,4 +77,3 @@ type CSIdentityAuthority struct{}
 // C struct: __CSIdentityQuery
 // CSIdentityQuery is an opaque type.
 type CSIdentityQuery struct{}
-

@@ -16,14 +16,14 @@ type ASAuthorizationOpenIDRequest struct {
 }
 
 var (
-	_clsASAuthorizationOpenIDRequest = _objcClass("ASAuthorizationOpenIDRequest")
-	_aSAuthorizationOpenIDRequestSelRequestedScopes = objc.RegisterName("requestedScopes")
-	_aSAuthorizationOpenIDRequestSelSetRequestedScopes = objc.RegisterName("setRequestedScopes:")
-	_aSAuthorizationOpenIDRequestSelState = objc.RegisterName("state")
-	_aSAuthorizationOpenIDRequestSelSetState = objc.RegisterName("setState:")
-	_aSAuthorizationOpenIDRequestSelNonce = objc.RegisterName("nonce")
-	_aSAuthorizationOpenIDRequestSelSetNonce = objc.RegisterName("setNonce:")
-	_aSAuthorizationOpenIDRequestSelRequestedOperation = objc.RegisterName("requestedOperation")
+	_clsASAuthorizationOpenIDRequest                      = _objcClass("ASAuthorizationOpenIDRequest")
+	_aSAuthorizationOpenIDRequestSelRequestedScopes       = objc.RegisterName("requestedScopes")
+	_aSAuthorizationOpenIDRequestSelSetRequestedScopes    = objc.RegisterName("setRequestedScopes:")
+	_aSAuthorizationOpenIDRequestSelState                 = objc.RegisterName("state")
+	_aSAuthorizationOpenIDRequestSelSetState              = objc.RegisterName("setState:")
+	_aSAuthorizationOpenIDRequestSelNonce                 = objc.RegisterName("nonce")
+	_aSAuthorizationOpenIDRequestSelSetNonce              = objc.RegisterName("setNonce:")
+	_aSAuthorizationOpenIDRequestSelRequestedOperation    = objc.RegisterName("requestedOperation")
 	_aSAuthorizationOpenIDRequestSelSetRequestedOperation = objc.RegisterName("setRequestedOperation:")
 )
 
@@ -50,7 +50,9 @@ func (o *ASAuthorizationOpenIDRequest) SetRequestedScopes(requestedScopes *found
 // @abstract State to be passed to the identity provider.  This value will be returned as a part of successful ASAuthorization response. @note The state size may depend on the actual technology used and an error might be returned by the request execution.
 func (o *ASAuthorizationOpenIDRequest) State() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationOpenIDRequestSelState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -61,7 +63,9 @@ func (o *ASAuthorizationOpenIDRequest) SetState(state *foundation.NSString) {
 // @abstract Nonce to be passed to the identity provider.  This value can be verified with the identity token provided as a part of successful ASAuthorization response. @note The nonce size may depend on the actual technology used and an error might be returned by the request execution.
 func (o *ASAuthorizationOpenIDRequest) Nonce() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationOpenIDRequestSelNonce)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -72,11 +76,12 @@ func (o *ASAuthorizationOpenIDRequest) SetNonce(nonce *foundation.NSString) {
 // @abstract Operation to be executed by the request. The ASAuthorizationOperationImplicit operation interpretation depends on the credential provider implementation.
 func (o *ASAuthorizationOpenIDRequest) RequestedOperation() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationOpenIDRequestSelRequestedOperation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *ASAuthorizationOpenIDRequest) SetRequestedOperation(requestedOperation *foundation.NSString) {
 	o.Ptr().Send(_aSAuthorizationOpenIDRequestSelSetRequestedOperation, requestedOperation.Ptr())
 }
-

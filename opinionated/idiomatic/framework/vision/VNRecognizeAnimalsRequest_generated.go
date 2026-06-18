@@ -76,9 +76,13 @@ func (x *RecognizeAnimalsRequest) SupportedIdentifiers() ([]*foundation.NSString
 	}), nil
 }
 
-func (x *RecognizeAnimalsRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
+func (x *RecognizeAnimalsRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNImageBasedRequest
+}
 
-func (x *RecognizeAnimalsRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+func (x *RecognizeAnimalsRequest) asRequest() *raw.VNRequest {
+	return &x.inner.VNImageBasedRequest.VNRequest
+}
 
 // RecognizeAnimalsRequestable is the interface implemented by [RecognizeAnimalsRequest], for mocking and DI.
 type RecognizeAnimalsRequestable interface {
@@ -91,4 +95,3 @@ type RecognizeAnimalsRequestable interface {
 }
 
 var _ RecognizeAnimalsRequestable = (*RecognizeAnimalsRequest)(nil)
-

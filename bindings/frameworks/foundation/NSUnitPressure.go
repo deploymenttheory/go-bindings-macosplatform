@@ -15,16 +15,16 @@ type NSUnitPressure struct {
 }
 
 var (
-	_clsNSUnitPressure = _objcClass("NSUnitPressure")
-	_nSUnitPressureSelNewtonsPerMetersSquared = objc.RegisterName("newtonsPerMetersSquared")
-	_nSUnitPressureSelGigapascals = objc.RegisterName("gigapascals")
-	_nSUnitPressureSelMegapascals = objc.RegisterName("megapascals")
-	_nSUnitPressureSelKilopascals = objc.RegisterName("kilopascals")
-	_nSUnitPressureSelHectopascals = objc.RegisterName("hectopascals")
-	_nSUnitPressureSelInchesOfMercury = objc.RegisterName("inchesOfMercury")
-	_nSUnitPressureSelBars = objc.RegisterName("bars")
-	_nSUnitPressureSelMillibars = objc.RegisterName("millibars")
-	_nSUnitPressureSelMillimetersOfMercury = objc.RegisterName("millimetersOfMercury")
+	_clsNSUnitPressure                         = _objcClass("NSUnitPressure")
+	_nSUnitPressureSelNewtonsPerMetersSquared  = objc.RegisterName("newtonsPerMetersSquared")
+	_nSUnitPressureSelGigapascals              = objc.RegisterName("gigapascals")
+	_nSUnitPressureSelMegapascals              = objc.RegisterName("megapascals")
+	_nSUnitPressureSelKilopascals              = objc.RegisterName("kilopascals")
+	_nSUnitPressureSelHectopascals             = objc.RegisterName("hectopascals")
+	_nSUnitPressureSelInchesOfMercury          = objc.RegisterName("inchesOfMercury")
+	_nSUnitPressureSelBars                     = objc.RegisterName("bars")
+	_nSUnitPressureSelMillibars                = objc.RegisterName("millibars")
+	_nSUnitPressureSelMillimetersOfMercury     = objc.RegisterName("millimetersOfMercury")
 	_nSUnitPressureSelPoundsForcePerSquareInch = objc.RegisterName("poundsForcePerSquareInch")
 )
 
@@ -40,61 +40,80 @@ func NSUnitPressureFromID(id objc.ID) *NSUnitPressure {
 
 func NSUnitPressureNewtonsPerMetersSquared() *NSUnitPressure {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPressure), _nSUnitPressureSelNewtonsPerMetersSquared)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitPressureFromID(_ret)
 }
 
 func NSUnitPressureGigapascals() *NSUnitPressure {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPressure), _nSUnitPressureSelGigapascals)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitPressureFromID(_ret)
 }
 
 func NSUnitPressureMegapascals() *NSUnitPressure {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPressure), _nSUnitPressureSelMegapascals)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitPressureFromID(_ret)
 }
 
 func NSUnitPressureKilopascals() *NSUnitPressure {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPressure), _nSUnitPressureSelKilopascals)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitPressureFromID(_ret)
 }
 
 func NSUnitPressureHectopascals() *NSUnitPressure {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPressure), _nSUnitPressureSelHectopascals)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitPressureFromID(_ret)
 }
 
 func NSUnitPressureInchesOfMercury() *NSUnitPressure {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPressure), _nSUnitPressureSelInchesOfMercury)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitPressureFromID(_ret)
 }
 
 func NSUnitPressureBars() *NSUnitPressure {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPressure), _nSUnitPressureSelBars)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitPressureFromID(_ret)
 }
 
 func NSUnitPressureMillibars() *NSUnitPressure {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPressure), _nSUnitPressureSelMillibars)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitPressureFromID(_ret)
 }
 
 func NSUnitPressureMillimetersOfMercury() *NSUnitPressure {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPressure), _nSUnitPressureSelMillimetersOfMercury)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitPressureFromID(_ret)
 }
 
 func NSUnitPressurePoundsForcePerSquareInch() *NSUnitPressure {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPressure), _nSUnitPressureSelPoundsForcePerSquareInch)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitPressureFromID(_ret)
 }
-

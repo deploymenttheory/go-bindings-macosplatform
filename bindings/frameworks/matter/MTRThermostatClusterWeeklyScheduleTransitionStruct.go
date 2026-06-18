@@ -16,13 +16,13 @@ type MTRThermostatClusterWeeklyScheduleTransitionStruct struct {
 }
 
 var (
-	_clsMTRThermostatClusterWeeklyScheduleTransitionStruct = _objcClass("MTRThermostatClusterWeeklyScheduleTransitionStruct")
-	_mTRThermostatClusterWeeklyScheduleTransitionStructSelTransitionTime = objc.RegisterName("transitionTime")
+	_clsMTRThermostatClusterWeeklyScheduleTransitionStruct                  = _objcClass("MTRThermostatClusterWeeklyScheduleTransitionStruct")
+	_mTRThermostatClusterWeeklyScheduleTransitionStructSelTransitionTime    = objc.RegisterName("transitionTime")
 	_mTRThermostatClusterWeeklyScheduleTransitionStructSelSetTransitionTime = objc.RegisterName("setTransitionTime:")
-	_mTRThermostatClusterWeeklyScheduleTransitionStructSelHeatSetpoint = objc.RegisterName("heatSetpoint")
-	_mTRThermostatClusterWeeklyScheduleTransitionStructSelSetHeatSetpoint = objc.RegisterName("setHeatSetpoint:")
-	_mTRThermostatClusterWeeklyScheduleTransitionStructSelCoolSetpoint = objc.RegisterName("coolSetpoint")
-	_mTRThermostatClusterWeeklyScheduleTransitionStructSelSetCoolSetpoint = objc.RegisterName("setCoolSetpoint:")
+	_mTRThermostatClusterWeeklyScheduleTransitionStructSelHeatSetpoint      = objc.RegisterName("heatSetpoint")
+	_mTRThermostatClusterWeeklyScheduleTransitionStructSelSetHeatSetpoint   = objc.RegisterName("setHeatSetpoint:")
+	_mTRThermostatClusterWeeklyScheduleTransitionStructSelCoolSetpoint      = objc.RegisterName("coolSetpoint")
+	_mTRThermostatClusterWeeklyScheduleTransitionStructSelSetCoolSetpoint   = objc.RegisterName("setCoolSetpoint:")
 )
 
 func MTRThermostatClusterWeeklyScheduleTransitionStructFromID(id objc.ID) *MTRThermostatClusterWeeklyScheduleTransitionStruct {
@@ -37,7 +37,9 @@ func MTRThermostatClusterWeeklyScheduleTransitionStructFromID(id objc.ID) *MTRTh
 
 func (o *MTRThermostatClusterWeeklyScheduleTransitionStruct) TransitionTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterWeeklyScheduleTransitionStructSelTransitionTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTRThermostatClusterWeeklyScheduleTransitionStruct) SetTransitionTime(t
 
 func (o *MTRThermostatClusterWeeklyScheduleTransitionStruct) HeatSetpoint() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterWeeklyScheduleTransitionStructSelHeatSetpoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *MTRThermostatClusterWeeklyScheduleTransitionStruct) SetHeatSetpoint(hea
 
 func (o *MTRThermostatClusterWeeklyScheduleTransitionStruct) CoolSetpoint() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterWeeklyScheduleTransitionStructSelCoolSetpoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRThermostatClusterWeeklyScheduleTransitionStruct) SetCoolSetpoint(coolSetpoint *foundation.NSNumber) {
 	o.Ptr().Send(_mTRThermostatClusterWeeklyScheduleTransitionStructSelSetCoolSetpoint, coolSetpoint.Ptr())
 }
-

@@ -77,4 +77,3 @@ type StatisticsCollectionable interface {
 }
 
 var _ StatisticsCollectionable = (*StatisticsCollection)(nil)
-

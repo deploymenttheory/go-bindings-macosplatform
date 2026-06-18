@@ -58,4 +58,3 @@ type CompositionTrackable interface {
 }
 
 var _ CompositionTrackable = (*CompositionTrack)(nil)
-

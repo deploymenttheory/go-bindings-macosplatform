@@ -361,43 +361,57 @@ func KCFSOCKSVersionKey() uintptr {
 
 func KCFStreamErrorDomainFTP() int {
 	ptr, _ := purego.Dlsym(_cfnetworkLib, "kCFStreamErrorDomainFTP")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func KCFStreamErrorDomainHTTP() int {
 	ptr, _ := purego.Dlsym(_cfnetworkLib, "kCFStreamErrorDomainHTTP")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func KCFStreamErrorDomainMach() int {
 	ptr, _ := purego.Dlsym(_cfnetworkLib, "kCFStreamErrorDomainMach")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func KCFStreamErrorDomainNetDB() int {
 	ptr, _ := purego.Dlsym(_cfnetworkLib, "kCFStreamErrorDomainNetDB")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func KCFStreamErrorDomainNetServices() int {
 	ptr, _ := purego.Dlsym(_cfnetworkLib, "kCFStreamErrorDomainNetServices")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func KCFStreamErrorDomainSystemConfiguration() int {
 	ptr, _ := purego.Dlsym(_cfnetworkLib, "kCFStreamErrorDomainSystemConfiguration")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func KCFStreamErrorDomainWinSock() int {
 	ptr, _ := purego.Dlsym(_cfnetworkLib, "kCFStreamErrorDomainWinSock")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
@@ -675,4 +689,3 @@ func KCFURLErrorFailingURLStringErrorKey() uintptr {
 	ptr, _ := purego.Dlsym(_cfnetworkLib, "kCFURLErrorFailingURLStringErrorKey")
 	return ptr
 }
-

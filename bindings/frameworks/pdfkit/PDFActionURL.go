@@ -16,10 +16,10 @@ type PDFActionURL struct {
 }
 
 var (
-	_clsPDFActionURL = _objcClass("PDFActionURL")
+	_clsPDFActionURL            = _objcClass("PDFActionURL")
 	_pDFActionURLSelInitWithURL = objc.RegisterName("initWithURL:")
-	_pDFActionURLSelURL = objc.RegisterName("URL")
-	_pDFActionURLSelSetURL = objc.RegisterName("setURL:")
+	_pDFActionURLSelURL         = objc.RegisterName("URL")
+	_pDFActionURLSelSetURL      = objc.RegisterName("setURL:")
 )
 
 func PDFActionURLFromID(id objc.ID) *PDFActionURL {
@@ -34,17 +34,20 @@ func PDFActionURLFromID(id objc.ID) *PDFActionURL {
 
 func (o *PDFActionURL) InitWithURL(url *foundation.NSURL) *PDFActionURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFActionURLSelInitWithURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFActionURLFromID(_ret)
 }
 
 func (o *PDFActionURL) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFActionURLSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *PDFActionURL) SetURL(uRL *foundation.NSURL) {
 	o.Ptr().Send(_pDFActionURLSelSetURL, uRL.Ptr())
 }
-

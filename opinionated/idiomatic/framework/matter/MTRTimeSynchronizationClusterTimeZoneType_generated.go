@@ -16,7 +16,9 @@ type MTRTimeSynchronizationClusterTimeZoneType struct {
 }
 
 // Unwrap returns the underlying [raw.MTRTimeSynchronizationClusterTimeZoneType].
-func (x *MTRTimeSynchronizationClusterTimeZoneType) Unwrap() *raw.MTRTimeSynchronizationClusterTimeZoneType { return x.inner }
+func (x *MTRTimeSynchronizationClusterTimeZoneType) Unwrap() *raw.MTRTimeSynchronizationClusterTimeZoneType {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -54,7 +56,9 @@ func (x *MTRTimeSynchronizationClusterTimeZoneType) WithName(name string) *MTRTi
 	return x
 }
 
-func (x *MTRTimeSynchronizationClusterTimeZoneType) asMTRTimeSynchronizationClusterTimeZoneStruct() *raw.MTRTimeSynchronizationClusterTimeZoneStruct { return &x.inner.MTRTimeSynchronizationClusterTimeZoneStruct }
+func (x *MTRTimeSynchronizationClusterTimeZoneType) asMTRTimeSynchronizationClusterTimeZoneStruct() *raw.MTRTimeSynchronizationClusterTimeZoneStruct {
+	return &x.inner.MTRTimeSynchronizationClusterTimeZoneStruct
+}
 
 // MTRTimeSynchronizationClusterTimeZoneTypeable is the interface implemented by [MTRTimeSynchronizationClusterTimeZoneType], for mocking and DI.
 type MTRTimeSynchronizationClusterTimeZoneTypeable interface {
@@ -65,4 +69,3 @@ type MTRTimeSynchronizationClusterTimeZoneTypeable interface {
 }
 
 var _ MTRTimeSynchronizationClusterTimeZoneTypeable = (*MTRTimeSynchronizationClusterTimeZoneType)(nil)
-

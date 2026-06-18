@@ -17,7 +17,9 @@ type SpeechSynthesisProviderRequest struct {
 }
 
 // Unwrap returns the underlying [raw.AVSpeechSynthesisProviderRequest].
-func (x *SpeechSynthesisProviderRequest) Unwrap() *raw.AVSpeechSynthesisProviderRequest { return x.inner }
+func (x *SpeechSynthesisProviderRequest) Unwrap() *raw.AVSpeechSynthesisProviderRequest {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -64,4 +66,3 @@ type SpeechSynthesisProviderRequestable interface {
 }
 
 var _ SpeechSynthesisProviderRequestable = (*SpeechSynthesisProviderRequest)(nil)
-

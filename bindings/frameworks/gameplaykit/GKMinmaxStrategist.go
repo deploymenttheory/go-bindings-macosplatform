@@ -18,11 +18,11 @@ type GKMinmaxStrategist struct {
 }
 
 var (
-	_clsGKMinmaxStrategist = _objcClass("GKMinmaxStrategist")
-	_gKMinmaxStrategistSelBestMoveForPlayer = objc.RegisterName("bestMoveForPlayer:")
+	_clsGKMinmaxStrategist                                         = _objcClass("GKMinmaxStrategist")
+	_gKMinmaxStrategistSelBestMoveForPlayer                        = objc.RegisterName("bestMoveForPlayer:")
 	_gKMinmaxStrategistSelRandomMoveForPlayerFromNumberOfBestMoves = objc.RegisterName("randomMoveForPlayer:fromNumberOfBestMoves:")
-	_gKMinmaxStrategistSelMaxLookAheadDepth = objc.RegisterName("maxLookAheadDepth")
-	_gKMinmaxStrategistSelSetMaxLookAheadDepth = objc.RegisterName("setMaxLookAheadDepth:")
+	_gKMinmaxStrategistSelMaxLookAheadDepth                        = objc.RegisterName("maxLookAheadDepth")
+	_gKMinmaxStrategistSelSetMaxLookAheadDepth                     = objc.RegisterName("setMaxLookAheadDepth:")
 )
 
 func GKMinmaxStrategistFromID(id objc.ID) *GKMinmaxStrategist {
@@ -56,4 +56,3 @@ func (o *GKMinmaxStrategist) MaxLookAheadDepth() int {
 func (o *GKMinmaxStrategist) SetMaxLookAheadDepth(maxLookAheadDepth int) {
 	o.Ptr().Send(_gKMinmaxStrategistSelSetMaxLookAheadDepth, maxLookAheadDepth)
 }
-

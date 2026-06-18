@@ -16,7 +16,7 @@ type MXUnitSignalBars struct {
 }
 
 var (
-	_clsMXUnitSignalBars = _objcClass("MXUnitSignalBars")
+	_clsMXUnitSignalBars     = _objcClass("MXUnitSignalBars")
 	_mXUnitSignalBarsSelBars = objc.RegisterName("bars")
 )
 
@@ -32,7 +32,8 @@ func MXUnitSignalBarsFromID(id objc.ID) *MXUnitSignalBars {
 
 func MXUnitSignalBarsBars() *MXUnitSignalBars {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMXUnitSignalBars), _mXUnitSignalBarsSelBars)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MXUnitSignalBarsFromID(_ret)
 }
-

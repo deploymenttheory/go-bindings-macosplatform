@@ -16,7 +16,9 @@ type MTRActionsClusterPauseActionWithDurationParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRActionsClusterPauseActionWithDurationParams].
-func (x *MTRActionsClusterPauseActionWithDurationParams) Unwrap() *raw.MTRActionsClusterPauseActionWithDurationParams { return x.inner }
+func (x *MTRActionsClusterPauseActionWithDurationParams) Unwrap() *raw.MTRActionsClusterPauseActionWithDurationParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -137,4 +139,3 @@ type MTRActionsClusterPauseActionWithDurationParamsable interface {
 }
 
 var _ MTRActionsClusterPauseActionWithDurationParamsable = (*MTRActionsClusterPauseActionWithDurationParams)(nil)
-

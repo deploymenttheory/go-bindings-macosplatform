@@ -16,11 +16,11 @@ type MTRXPCDeviceControllerParameters struct {
 }
 
 var (
-	_clsMTRXPCDeviceControllerParameters = _objcClass("MTRXPCDeviceControllerParameters")
+	_clsMTRXPCDeviceControllerParameters                                           = _objcClass("MTRXPCDeviceControllerParameters")
 	_mTRXPCDeviceControllerParametersSelInitWithXPCConnectionBlockUniqueIdentifier = objc.RegisterName("initWithXPCConnectionBlock:uniqueIdentifier:")
-	_mTRXPCDeviceControllerParametersSelInitWithXPConnectionBlockUniqueIdentifier = objc.RegisterName("initWithXPConnectionBlock:uniqueIdentifier:")
-	_mTRXPCDeviceControllerParametersSelUniqueIdentifier = objc.RegisterName("uniqueIdentifier")
-	_mTRXPCDeviceControllerParametersSelXpcConnectionBlock = objc.RegisterName("xpcConnectionBlock")
+	_mTRXPCDeviceControllerParametersSelInitWithXPConnectionBlockUniqueIdentifier  = objc.RegisterName("initWithXPConnectionBlock:uniqueIdentifier:")
+	_mTRXPCDeviceControllerParametersSelUniqueIdentifier                           = objc.RegisterName("uniqueIdentifier")
+	_mTRXPCDeviceControllerParametersSelXpcConnectionBlock                         = objc.RegisterName("xpcConnectionBlock")
 )
 
 func MTRXPCDeviceControllerParametersFromID(id objc.ID) *MTRXPCDeviceControllerParameters {
@@ -36,19 +36,25 @@ func MTRXPCDeviceControllerParametersFromID(id objc.ID) *MTRXPCDeviceControllerP
 // A controller created from this way will connect to a remote instance of an MTRDeviceController loaded in an XPC Service @param xpcConnectionBlock The XPC Connection block that will return an NSXPCConnection to the intended listener. @param uniqueIdentifier The unique id to assign to the controller.
 func (o *MTRXPCDeviceControllerParameters) InitWithXPCConnectionBlockUniqueIdentifier(xpcConnectionBlock objc.Block, uniqueIdentifier *foundation.NSUUID) *MTRXPCDeviceControllerParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRXPCDeviceControllerParametersSelInitWithXPCConnectionBlockUniqueIdentifier, xpcConnectionBlock, uniqueIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRXPCDeviceControllerParametersFromID(_ret)
 }
 
 func (o *MTRXPCDeviceControllerParameters) InitWithXPConnectionBlockUniqueIdentifier(xpcConnectionBlock objc.Block, uniqueIdentifier *foundation.NSUUID) *MTRXPCDeviceControllerParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRXPCDeviceControllerParametersSelInitWithXPConnectionBlockUniqueIdentifier, xpcConnectionBlock, uniqueIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRXPCDeviceControllerParametersFromID(_ret)
 }
 
 func (o *MTRXPCDeviceControllerParameters) UniqueIdentifier() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRXPCDeviceControllerParametersSelUniqueIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
 
@@ -56,4 +62,3 @@ func (o *MTRXPCDeviceControllerParameters) XpcConnectionBlock() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _mTRXPCDeviceControllerParametersSelXpcConnectionBlock)
 	return _ret
 }
-

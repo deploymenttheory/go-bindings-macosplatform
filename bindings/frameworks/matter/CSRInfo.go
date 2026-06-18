@@ -16,16 +16,16 @@ type CSRInfo struct {
 }
 
 var (
-	_clsCSRInfo = _objcClass("CSRInfo")
+	_clsCSRInfo                                          = _objcClass("CSRInfo")
 	_cSRInfoSelInitWithNonceElementsElementsSignatureCsr = objc.RegisterName("initWithNonce:elements:elementsSignature:csr:")
-	_cSRInfoSelNonce = objc.RegisterName("nonce")
-	_cSRInfoSelSetNonce = objc.RegisterName("setNonce:")
-	_cSRInfoSelElements = objc.RegisterName("elements")
-	_cSRInfoSelSetElements = objc.RegisterName("setElements:")
-	_cSRInfoSelElementsSignature = objc.RegisterName("elementsSignature")
-	_cSRInfoSelSetElementsSignature = objc.RegisterName("setElementsSignature:")
-	_cSRInfoSelCsr = objc.RegisterName("csr")
-	_cSRInfoSelSetCsr = objc.RegisterName("setCsr:")
+	_cSRInfoSelNonce                                     = objc.RegisterName("nonce")
+	_cSRInfoSelSetNonce                                  = objc.RegisterName("setNonce:")
+	_cSRInfoSelElements                                  = objc.RegisterName("elements")
+	_cSRInfoSelSetElements                               = objc.RegisterName("setElements:")
+	_cSRInfoSelElementsSignature                         = objc.RegisterName("elementsSignature")
+	_cSRInfoSelSetElementsSignature                      = objc.RegisterName("setElementsSignature:")
+	_cSRInfoSelCsr                                       = objc.RegisterName("csr")
+	_cSRInfoSelSetCsr                                    = objc.RegisterName("setCsr:")
 )
 
 func CSRInfoFromID(id objc.ID) *CSRInfo {
@@ -40,13 +40,17 @@ func CSRInfoFromID(id objc.ID) *CSRInfo {
 
 func (o *CSRInfo) InitWithNonceElementsElementsSignatureCsr(nonce *foundation.NSData, elements *foundation.NSData, elementsSignature *foundation.NSData, csr *foundation.NSData) *CSRInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSRInfoSelInitWithNonceElementsElementsSignatureCsr, nonce.Ptr(), elements.Ptr(), elementsSignature.Ptr(), csr.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CSRInfoFromID(_ret)
 }
 
 func (o *CSRInfo) Nonce() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSRInfoSelNonce)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -56,7 +60,9 @@ func (o *CSRInfo) SetNonce(nonce *foundation.NSData) {
 
 func (o *CSRInfo) Elements() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSRInfoSelElements)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -66,7 +72,9 @@ func (o *CSRInfo) SetElements(elements *foundation.NSData) {
 
 func (o *CSRInfo) ElementsSignature() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSRInfoSelElementsSignature)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -76,11 +84,12 @@ func (o *CSRInfo) SetElementsSignature(elementsSignature *foundation.NSData) {
 
 func (o *CSRInfo) Csr() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSRInfoSelCsr)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *CSRInfo) SetCsr(csr *foundation.NSData) {
 	o.Ptr().Send(_cSRInfoSelSetCsr, csr.Ptr())
 }
-

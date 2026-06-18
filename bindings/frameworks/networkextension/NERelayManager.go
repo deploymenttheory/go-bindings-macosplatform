@@ -18,33 +18,33 @@ type NERelayManager struct {
 }
 
 var (
-	_clsNERelayManager = _objcClass("NERelayManager")
-	_nERelayManagerSelSharedManager = objc.RegisterName("sharedManager")
-	_nERelayManagerSelLoadFromPreferencesWithCompletionHandler = objc.RegisterName("loadFromPreferencesWithCompletionHandler:")
-	_nERelayManagerSelRemoveFromPreferencesWithCompletionHandler = objc.RegisterName("removeFromPreferencesWithCompletionHandler:")
-	_nERelayManagerSelSaveToPreferencesWithCompletionHandler = objc.RegisterName("saveToPreferencesWithCompletionHandler:")
-	_nERelayManagerSelGetLastClientErrorsCompletionHandler = objc.RegisterName("getLastClientErrors:completionHandler:")
+	_clsNERelayManager                                                    = _objcClass("NERelayManager")
+	_nERelayManagerSelSharedManager                                       = objc.RegisterName("sharedManager")
+	_nERelayManagerSelLoadFromPreferencesWithCompletionHandler            = objc.RegisterName("loadFromPreferencesWithCompletionHandler:")
+	_nERelayManagerSelRemoveFromPreferencesWithCompletionHandler          = objc.RegisterName("removeFromPreferencesWithCompletionHandler:")
+	_nERelayManagerSelSaveToPreferencesWithCompletionHandler              = objc.RegisterName("saveToPreferencesWithCompletionHandler:")
+	_nERelayManagerSelGetLastClientErrorsCompletionHandler                = objc.RegisterName("getLastClientErrors:completionHandler:")
 	_nERelayManagerSelLoadAllManagersFromPreferencesWithCompletionHandler = objc.RegisterName("loadAllManagersFromPreferencesWithCompletionHandler:")
-	_nERelayManagerSelLocalizedDescription = objc.RegisterName("localizedDescription")
-	_nERelayManagerSelSetLocalizedDescription = objc.RegisterName("setLocalizedDescription:")
-	_nERelayManagerSelIsEnabled = objc.RegisterName("isEnabled")
-	_nERelayManagerSelSetEnabled = objc.RegisterName("setEnabled:")
-	_nERelayManagerSelIsUIToggleEnabled = objc.RegisterName("isUIToggleEnabled")
-	_nERelayManagerSelSetUIToggleEnabled = objc.RegisterName("setUIToggleEnabled:")
-	_nERelayManagerSelIsDNSFailoverAllowed = objc.RegisterName("isDNSFailoverAllowed")
-	_nERelayManagerSelSetAllowDNSFailover = objc.RegisterName("setAllowDNSFailover:")
-	_nERelayManagerSelRelays = objc.RegisterName("relays")
-	_nERelayManagerSelSetRelays = objc.RegisterName("setRelays:")
-	_nERelayManagerSelMatchDomains = objc.RegisterName("matchDomains")
-	_nERelayManagerSelSetMatchDomains = objc.RegisterName("setMatchDomains:")
-	_nERelayManagerSelMatchFQDNs = objc.RegisterName("matchFQDNs")
-	_nERelayManagerSelSetMatchFQDNs = objc.RegisterName("setMatchFQDNs:")
-	_nERelayManagerSelExcludedDomains = objc.RegisterName("excludedDomains")
-	_nERelayManagerSelSetExcludedDomains = objc.RegisterName("setExcludedDomains:")
-	_nERelayManagerSelExcludedFQDNs = objc.RegisterName("excludedFQDNs")
-	_nERelayManagerSelSetExcludedFQDNs = objc.RegisterName("setExcludedFQDNs:")
-	_nERelayManagerSelOnDemandRules = objc.RegisterName("onDemandRules")
-	_nERelayManagerSelSetOnDemandRules = objc.RegisterName("setOnDemandRules:")
+	_nERelayManagerSelLocalizedDescription                                = objc.RegisterName("localizedDescription")
+	_nERelayManagerSelSetLocalizedDescription                             = objc.RegisterName("setLocalizedDescription:")
+	_nERelayManagerSelIsEnabled                                           = objc.RegisterName("isEnabled")
+	_nERelayManagerSelSetEnabled                                          = objc.RegisterName("setEnabled:")
+	_nERelayManagerSelIsUIToggleEnabled                                   = objc.RegisterName("isUIToggleEnabled")
+	_nERelayManagerSelSetUIToggleEnabled                                  = objc.RegisterName("setUIToggleEnabled:")
+	_nERelayManagerSelIsDNSFailoverAllowed                                = objc.RegisterName("isDNSFailoverAllowed")
+	_nERelayManagerSelSetAllowDNSFailover                                 = objc.RegisterName("setAllowDNSFailover:")
+	_nERelayManagerSelRelays                                              = objc.RegisterName("relays")
+	_nERelayManagerSelSetRelays                                           = objc.RegisterName("setRelays:")
+	_nERelayManagerSelMatchDomains                                        = objc.RegisterName("matchDomains")
+	_nERelayManagerSelSetMatchDomains                                     = objc.RegisterName("setMatchDomains:")
+	_nERelayManagerSelMatchFQDNs                                          = objc.RegisterName("matchFQDNs")
+	_nERelayManagerSelSetMatchFQDNs                                       = objc.RegisterName("setMatchFQDNs:")
+	_nERelayManagerSelExcludedDomains                                     = objc.RegisterName("excludedDomains")
+	_nERelayManagerSelSetExcludedDomains                                  = objc.RegisterName("setExcludedDomains:")
+	_nERelayManagerSelExcludedFQDNs                                       = objc.RegisterName("excludedFQDNs")
+	_nERelayManagerSelSetExcludedFQDNs                                    = objc.RegisterName("setExcludedFQDNs:")
+	_nERelayManagerSelOnDemandRules                                       = objc.RegisterName("onDemandRules")
+	_nERelayManagerSelSetOnDemandRules                                    = objc.RegisterName("setOnDemandRules:")
 )
 
 func NERelayManagerFromID(id objc.ID) *NERelayManager {
@@ -60,7 +60,9 @@ func NERelayManagerFromID(id objc.ID) *NERelayManager {
 // @method sharedManager @return The singleton NERelayManager object for the calling process.
 func NERelayManagerSharedManager() *NERelayManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNERelayManager), _nERelayManagerSelSharedManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NERelayManagerFromID(_ret)
 }
 
@@ -123,7 +125,9 @@ func NERelayManagerLoadAllManagersFromPreferencesWithCompletionHandler(completio
 // @property localizedDescription @discussion A string containing a description of the relay.
 func (o *NERelayManager) LocalizedDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nERelayManagerSelLocalizedDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -164,7 +168,9 @@ func (o *NERelayManager) SetAllowDNSFailover(allowDNSFailover bool) {
 // @property relays @discussion An array of relay configurations describing one or more relay hops.
 func (o *NERelayManager) Relays() *foundation.NSArray[*NERelay] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nERelayManagerSelRelays)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NERelay](_ret)
 }
 
@@ -215,11 +221,12 @@ func (o *NERelayManager) SetExcludedFQDNs(excludedFQDNs *foundation.NSArray[*fou
 // @property onDemandRules @discussion An array of NEOnDemandRule objects. If nil, the associated relay will always apply. If non-nil, the array describes the networks on which the relay should be used or not.
 func (o *NERelayManager) OnDemandRules() *foundation.NSArray[*NEOnDemandRule] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nERelayManagerSelOnDemandRules)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NEOnDemandRule](_ret)
 }
 
 func (o *NERelayManager) SetOnDemandRules(onDemandRules *foundation.NSArray[*NEOnDemandRule]) {
 	o.Ptr().Send(_nERelayManagerSelSetOnDemandRules, onDemandRules.Ptr())
 }
-

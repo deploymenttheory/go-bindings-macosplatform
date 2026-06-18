@@ -18,8 +18,8 @@ type EKVirtualConferenceProvider struct {
 }
 
 var (
-	_clsEKVirtualConferenceProvider = _objcClass("EKVirtualConferenceProvider")
-	_eKVirtualConferenceProviderSelFetchAvailableRoomTypesWithCompletionHandler = objc.RegisterName("fetchAvailableRoomTypesWithCompletionHandler:")
+	_clsEKVirtualConferenceProvider                                                     = _objcClass("EKVirtualConferenceProvider")
+	_eKVirtualConferenceProviderSelFetchAvailableRoomTypesWithCompletionHandler         = objc.RegisterName("fetchAvailableRoomTypesWithCompletionHandler:")
 	_eKVirtualConferenceProviderSelFetchVirtualConferenceForIdentifierCompletionHandler = objc.RegisterName("fetchVirtualConferenceForIdentifier:completionHandler:")
 )
 
@@ -61,4 +61,3 @@ func (o *EKVirtualConferenceProvider) FetchVirtualConferenceForIdentifierComplet
 	}
 	o.Ptr().Send(_eKVirtualConferenceProviderSelFetchVirtualConferenceForIdentifierCompletionHandler, identifier.Ptr(), __block_completionHandler)
 }
-

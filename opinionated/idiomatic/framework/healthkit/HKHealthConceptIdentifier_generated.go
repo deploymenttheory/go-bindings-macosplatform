@@ -52,4 +52,3 @@ type HealthConceptIdentifierable interface {
 }
 
 var _ HealthConceptIdentifierable = (*HealthConceptIdentifier)(nil)
-

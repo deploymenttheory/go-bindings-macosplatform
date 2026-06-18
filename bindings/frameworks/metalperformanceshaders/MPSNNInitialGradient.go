@@ -17,7 +17,7 @@ type MPSNNInitialGradient struct {
 }
 
 var (
-	_clsMPSNNInitialGradient = _objcClass("MPSNNInitialGradient")
+	_clsMPSNNInitialGradient               = _objcClass("MPSNNInitialGradient")
 	_mPSNNInitialGradientSelInitWithDevice = objc.RegisterName("initWithDevice:")
 )
 
@@ -34,7 +34,8 @@ func MPSNNInitialGradientFromID(id objc.ID) *MPSNNInitialGradient {
 // @abstract   Initializes a MPSNNInitialGradient kernel. @param      device      The MTLDevice on which this MPSNNInitialGradient filter will be used. @return     A valid MPSNNInitialGradient object or nil, if failure.
 func (o *MPSNNInitialGradient) InitWithDevice(device metal.MTLDevice) *MPSNNInitialGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNInitialGradientSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNInitialGradientFromID(_ret)
 }
-

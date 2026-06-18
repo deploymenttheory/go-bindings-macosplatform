@@ -56,4 +56,3 @@ type Metricable interface {
 }
 
 var _ Metricable = (*Metric)(nil)
-

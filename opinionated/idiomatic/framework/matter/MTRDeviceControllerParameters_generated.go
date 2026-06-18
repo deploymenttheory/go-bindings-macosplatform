@@ -45,7 +45,9 @@ func (x *MTRDeviceControllerParameters) WithProductAttestationAuthorityCertifica
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSData](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -61,7 +63,9 @@ func (x *MTRDeviceControllerParameters) WithCertificationDeclarationCertificates
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSData](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -170,9 +174,13 @@ func (x *MTRDeviceControllerParameters) SetStorageBehaviorConfiguration(storageB
 	x.inner.SetStorageBehaviorConfiguration(storageBehaviorConfiguration)
 }
 
-func (x *MTRDeviceControllerParameters) asMTRDeviceControllerParameters() *raw.MTRDeviceControllerParameters { return x.inner }
+func (x *MTRDeviceControllerParameters) asMTRDeviceControllerParameters() *raw.MTRDeviceControllerParameters {
+	return x.inner
+}
 
-func (x *MTRDeviceControllerParameters) asMTRDeviceControllerAbstractParameters() *raw.MTRDeviceControllerAbstractParameters { return &x.inner.MTRDeviceControllerAbstractParameters }
+func (x *MTRDeviceControllerParameters) asMTRDeviceControllerAbstractParameters() *raw.MTRDeviceControllerAbstractParameters {
+	return &x.inner.MTRDeviceControllerAbstractParameters
+}
 
 // MTRDeviceControllerParametersable is the interface implemented by [MTRDeviceControllerParameters], for mocking and DI.
 type MTRDeviceControllerParametersable interface {
@@ -198,4 +206,3 @@ type MTRDeviceControllerParametersable interface {
 }
 
 var _ MTRDeviceControllerParametersable = (*MTRDeviceControllerParameters)(nil)
-

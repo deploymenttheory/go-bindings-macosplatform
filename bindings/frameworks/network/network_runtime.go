@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_networkLib uintptr
-	_loadOnce sync.Once
+	_networkLib    uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -48,118 +48,306 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("nw_advertise_descriptor_copy_txt_record_object", func() { purego.RegisterLibFunc(&_nw_advertise_descriptor_copy_txt_record_object, _networkLib, "nw_advertise_descriptor_copy_txt_record_object") })
-	_register("nw_advertise_descriptor_create_application_service", func() { purego.RegisterLibFunc(&_nw_advertise_descriptor_create_application_service, _networkLib, "nw_advertise_descriptor_create_application_service") })
-	_register("nw_advertise_descriptor_create_bonjour_service", func() { purego.RegisterLibFunc(&_nw_advertise_descriptor_create_bonjour_service, _networkLib, "nw_advertise_descriptor_create_bonjour_service") })
-	_register("nw_advertise_descriptor_get_application_service_name", func() { purego.RegisterLibFunc(&_nw_advertise_descriptor_get_application_service_name, _networkLib, "nw_advertise_descriptor_get_application_service_name") })
-	_register("nw_advertise_descriptor_get_no_auto_rename", func() { purego.RegisterLibFunc(&_nw_advertise_descriptor_get_no_auto_rename, _networkLib, "nw_advertise_descriptor_get_no_auto_rename") })
-	_register("nw_advertise_descriptor_set_no_auto_rename", func() { purego.RegisterLibFunc(&_nw_advertise_descriptor_set_no_auto_rename, _networkLib, "nw_advertise_descriptor_set_no_auto_rename") })
-	_register("nw_advertise_descriptor_set_txt_record", func() { purego.RegisterLibFunc(&_nw_advertise_descriptor_set_txt_record, _networkLib, "nw_advertise_descriptor_set_txt_record") })
-	_register("nw_advertise_descriptor_set_txt_record_object", func() { purego.RegisterLibFunc(&_nw_advertise_descriptor_set_txt_record_object, _networkLib, "nw_advertise_descriptor_set_txt_record_object") })
-	_register("nw_browse_descriptor_create_application_service", func() { purego.RegisterLibFunc(&_nw_browse_descriptor_create_application_service, _networkLib, "nw_browse_descriptor_create_application_service") })
-	_register("nw_browse_descriptor_create_bonjour_service", func() { purego.RegisterLibFunc(&_nw_browse_descriptor_create_bonjour_service, _networkLib, "nw_browse_descriptor_create_bonjour_service") })
-	_register("nw_browse_descriptor_get_application_service_name", func() { purego.RegisterLibFunc(&_nw_browse_descriptor_get_application_service_name, _networkLib, "nw_browse_descriptor_get_application_service_name") })
-	_register("nw_browse_descriptor_get_bonjour_service_domain", func() { purego.RegisterLibFunc(&_nw_browse_descriptor_get_bonjour_service_domain, _networkLib, "nw_browse_descriptor_get_bonjour_service_domain") })
-	_register("nw_browse_descriptor_get_bonjour_service_type", func() { purego.RegisterLibFunc(&_nw_browse_descriptor_get_bonjour_service_type, _networkLib, "nw_browse_descriptor_get_bonjour_service_type") })
-	_register("nw_browse_descriptor_get_include_txt_record", func() { purego.RegisterLibFunc(&_nw_browse_descriptor_get_include_txt_record, _networkLib, "nw_browse_descriptor_get_include_txt_record") })
-	_register("nw_browse_descriptor_set_include_txt_record", func() { purego.RegisterLibFunc(&_nw_browse_descriptor_set_include_txt_record, _networkLib, "nw_browse_descriptor_set_include_txt_record") })
-	_register("nw_browse_result_copy_endpoint", func() { purego.RegisterLibFunc(&_nw_browse_result_copy_endpoint, _networkLib, "nw_browse_result_copy_endpoint") })
-	_register("nw_browse_result_copy_txt_record_object", func() { purego.RegisterLibFunc(&_nw_browse_result_copy_txt_record_object, _networkLib, "nw_browse_result_copy_txt_record_object") })
-	_register("nw_browse_result_enumerate_interfaces", func() { purego.RegisterLibFunc(&_nw_browse_result_enumerate_interfaces, _networkLib, "nw_browse_result_enumerate_interfaces") })
-	_register("nw_browse_result_get_changes", func() { purego.RegisterLibFunc(&_nw_browse_result_get_changes, _networkLib, "nw_browse_result_get_changes") })
-	_register("nw_browse_result_get_interfaces_count", func() { purego.RegisterLibFunc(&_nw_browse_result_get_interfaces_count, _networkLib, "nw_browse_result_get_interfaces_count") })
+	_register("nw_advertise_descriptor_copy_txt_record_object", func() {
+		purego.RegisterLibFunc(&_nw_advertise_descriptor_copy_txt_record_object, _networkLib, "nw_advertise_descriptor_copy_txt_record_object")
+	})
+	_register("nw_advertise_descriptor_create_application_service", func() {
+		purego.RegisterLibFunc(&_nw_advertise_descriptor_create_application_service, _networkLib, "nw_advertise_descriptor_create_application_service")
+	})
+	_register("nw_advertise_descriptor_create_bonjour_service", func() {
+		purego.RegisterLibFunc(&_nw_advertise_descriptor_create_bonjour_service, _networkLib, "nw_advertise_descriptor_create_bonjour_service")
+	})
+	_register("nw_advertise_descriptor_get_application_service_name", func() {
+		purego.RegisterLibFunc(&_nw_advertise_descriptor_get_application_service_name, _networkLib, "nw_advertise_descriptor_get_application_service_name")
+	})
+	_register("nw_advertise_descriptor_get_no_auto_rename", func() {
+		purego.RegisterLibFunc(&_nw_advertise_descriptor_get_no_auto_rename, _networkLib, "nw_advertise_descriptor_get_no_auto_rename")
+	})
+	_register("nw_advertise_descriptor_set_no_auto_rename", func() {
+		purego.RegisterLibFunc(&_nw_advertise_descriptor_set_no_auto_rename, _networkLib, "nw_advertise_descriptor_set_no_auto_rename")
+	})
+	_register("nw_advertise_descriptor_set_txt_record", func() {
+		purego.RegisterLibFunc(&_nw_advertise_descriptor_set_txt_record, _networkLib, "nw_advertise_descriptor_set_txt_record")
+	})
+	_register("nw_advertise_descriptor_set_txt_record_object", func() {
+		purego.RegisterLibFunc(&_nw_advertise_descriptor_set_txt_record_object, _networkLib, "nw_advertise_descriptor_set_txt_record_object")
+	})
+	_register("nw_browse_descriptor_create_application_service", func() {
+		purego.RegisterLibFunc(&_nw_browse_descriptor_create_application_service, _networkLib, "nw_browse_descriptor_create_application_service")
+	})
+	_register("nw_browse_descriptor_create_bonjour_service", func() {
+		purego.RegisterLibFunc(&_nw_browse_descriptor_create_bonjour_service, _networkLib, "nw_browse_descriptor_create_bonjour_service")
+	})
+	_register("nw_browse_descriptor_get_application_service_name", func() {
+		purego.RegisterLibFunc(&_nw_browse_descriptor_get_application_service_name, _networkLib, "nw_browse_descriptor_get_application_service_name")
+	})
+	_register("nw_browse_descriptor_get_bonjour_service_domain", func() {
+		purego.RegisterLibFunc(&_nw_browse_descriptor_get_bonjour_service_domain, _networkLib, "nw_browse_descriptor_get_bonjour_service_domain")
+	})
+	_register("nw_browse_descriptor_get_bonjour_service_type", func() {
+		purego.RegisterLibFunc(&_nw_browse_descriptor_get_bonjour_service_type, _networkLib, "nw_browse_descriptor_get_bonjour_service_type")
+	})
+	_register("nw_browse_descriptor_get_include_txt_record", func() {
+		purego.RegisterLibFunc(&_nw_browse_descriptor_get_include_txt_record, _networkLib, "nw_browse_descriptor_get_include_txt_record")
+	})
+	_register("nw_browse_descriptor_set_include_txt_record", func() {
+		purego.RegisterLibFunc(&_nw_browse_descriptor_set_include_txt_record, _networkLib, "nw_browse_descriptor_set_include_txt_record")
+	})
+	_register("nw_browse_result_copy_endpoint", func() {
+		purego.RegisterLibFunc(&_nw_browse_result_copy_endpoint, _networkLib, "nw_browse_result_copy_endpoint")
+	})
+	_register("nw_browse_result_copy_txt_record_object", func() {
+		purego.RegisterLibFunc(&_nw_browse_result_copy_txt_record_object, _networkLib, "nw_browse_result_copy_txt_record_object")
+	})
+	_register("nw_browse_result_enumerate_interfaces", func() {
+		purego.RegisterLibFunc(&_nw_browse_result_enumerate_interfaces, _networkLib, "nw_browse_result_enumerate_interfaces")
+	})
+	_register("nw_browse_result_get_changes", func() {
+		purego.RegisterLibFunc(&_nw_browse_result_get_changes, _networkLib, "nw_browse_result_get_changes")
+	})
+	_register("nw_browse_result_get_interfaces_count", func() {
+		purego.RegisterLibFunc(&_nw_browse_result_get_interfaces_count, _networkLib, "nw_browse_result_get_interfaces_count")
+	})
 	_register("nw_browser_cancel", func() { purego.RegisterLibFunc(&_nw_browser_cancel, _networkLib, "nw_browser_cancel") })
-	_register("nw_browser_copy_browse_descriptor", func() { purego.RegisterLibFunc(&_nw_browser_copy_browse_descriptor, _networkLib, "nw_browser_copy_browse_descriptor") })
-	_register("nw_browser_copy_parameters", func() { purego.RegisterLibFunc(&_nw_browser_copy_parameters, _networkLib, "nw_browser_copy_parameters") })
+	_register("nw_browser_copy_browse_descriptor", func() {
+		purego.RegisterLibFunc(&_nw_browser_copy_browse_descriptor, _networkLib, "nw_browser_copy_browse_descriptor")
+	})
+	_register("nw_browser_copy_parameters", func() {
+		purego.RegisterLibFunc(&_nw_browser_copy_parameters, _networkLib, "nw_browser_copy_parameters")
+	})
 	_register("nw_browser_create", func() { purego.RegisterLibFunc(&_nw_browser_create, _networkLib, "nw_browser_create") })
-	_register("nw_browser_set_browse_results_changed_handler", func() { purego.RegisterLibFunc(&_nw_browser_set_browse_results_changed_handler, _networkLib, "nw_browser_set_browse_results_changed_handler") })
+	_register("nw_browser_set_browse_results_changed_handler", func() {
+		purego.RegisterLibFunc(&_nw_browser_set_browse_results_changed_handler, _networkLib, "nw_browser_set_browse_results_changed_handler")
+	})
 	_register("nw_browser_set_queue", func() { purego.RegisterLibFunc(&_nw_browser_set_queue, _networkLib, "nw_browser_set_queue") })
-	_register("nw_browser_set_state_changed_handler", func() { purego.RegisterLibFunc(&_nw_browser_set_state_changed_handler, _networkLib, "nw_browser_set_state_changed_handler") })
+	_register("nw_browser_set_state_changed_handler", func() {
+		purego.RegisterLibFunc(&_nw_browser_set_state_changed_handler, _networkLib, "nw_browser_set_state_changed_handler")
+	})
 	_register("nw_browser_start", func() { purego.RegisterLibFunc(&_nw_browser_start, _networkLib, "nw_browser_start") })
-	_register("nw_connection_access_establishment_report", func() { purego.RegisterLibFunc(&_nw_connection_access_establishment_report, _networkLib, "nw_connection_access_establishment_report") })
+	_register("nw_connection_access_establishment_report", func() {
+		purego.RegisterLibFunc(&_nw_connection_access_establishment_report, _networkLib, "nw_connection_access_establishment_report")
+	})
 	_register("nw_connection_batch", func() { purego.RegisterLibFunc(&_nw_connection_batch, _networkLib, "nw_connection_batch") })
 	_register("nw_connection_cancel", func() { purego.RegisterLibFunc(&_nw_connection_cancel, _networkLib, "nw_connection_cancel") })
-	_register("nw_connection_cancel_current_endpoint", func() { purego.RegisterLibFunc(&_nw_connection_cancel_current_endpoint, _networkLib, "nw_connection_cancel_current_endpoint") })
-	_register("nw_connection_copy_current_path", func() { purego.RegisterLibFunc(&_nw_connection_copy_current_path, _networkLib, "nw_connection_copy_current_path") })
-	_register("nw_connection_copy_description", func() { purego.RegisterLibFunc(&_nw_connection_copy_description, _networkLib, "nw_connection_copy_description") })
-	_register("nw_connection_copy_endpoint", func() { purego.RegisterLibFunc(&_nw_connection_copy_endpoint, _networkLib, "nw_connection_copy_endpoint") })
-	_register("nw_connection_copy_parameters", func() { purego.RegisterLibFunc(&_nw_connection_copy_parameters, _networkLib, "nw_connection_copy_parameters") })
-	_register("nw_connection_copy_protocol_metadata", func() { purego.RegisterLibFunc(&_nw_connection_copy_protocol_metadata, _networkLib, "nw_connection_copy_protocol_metadata") })
+	_register("nw_connection_cancel_current_endpoint", func() {
+		purego.RegisterLibFunc(&_nw_connection_cancel_current_endpoint, _networkLib, "nw_connection_cancel_current_endpoint")
+	})
+	_register("nw_connection_copy_current_path", func() {
+		purego.RegisterLibFunc(&_nw_connection_copy_current_path, _networkLib, "nw_connection_copy_current_path")
+	})
+	_register("nw_connection_copy_description", func() {
+		purego.RegisterLibFunc(&_nw_connection_copy_description, _networkLib, "nw_connection_copy_description")
+	})
+	_register("nw_connection_copy_endpoint", func() {
+		purego.RegisterLibFunc(&_nw_connection_copy_endpoint, _networkLib, "nw_connection_copy_endpoint")
+	})
+	_register("nw_connection_copy_parameters", func() {
+		purego.RegisterLibFunc(&_nw_connection_copy_parameters, _networkLib, "nw_connection_copy_parameters")
+	})
+	_register("nw_connection_copy_protocol_metadata", func() {
+		purego.RegisterLibFunc(&_nw_connection_copy_protocol_metadata, _networkLib, "nw_connection_copy_protocol_metadata")
+	})
 	_register("nw_connection_create", func() { purego.RegisterLibFunc(&_nw_connection_create, _networkLib, "nw_connection_create") })
-	_register("nw_connection_create_new_data_transfer_report", func() { purego.RegisterLibFunc(&_nw_connection_create_new_data_transfer_report, _networkLib, "nw_connection_create_new_data_transfer_report") })
-	_register("nw_connection_force_cancel", func() { purego.RegisterLibFunc(&_nw_connection_force_cancel, _networkLib, "nw_connection_force_cancel") })
-	_register("nw_connection_get_maximum_datagram_size", func() { purego.RegisterLibFunc(&_nw_connection_get_maximum_datagram_size, _networkLib, "nw_connection_get_maximum_datagram_size") })
-	_register("nw_connection_group_cancel", func() { purego.RegisterLibFunc(&_nw_connection_group_cancel, _networkLib, "nw_connection_group_cancel") })
-	_register("nw_connection_group_copy_descriptor", func() { purego.RegisterLibFunc(&_nw_connection_group_copy_descriptor, _networkLib, "nw_connection_group_copy_descriptor") })
-	_register("nw_connection_group_copy_local_endpoint_for_message", func() { purego.RegisterLibFunc(&_nw_connection_group_copy_local_endpoint_for_message, _networkLib, "nw_connection_group_copy_local_endpoint_for_message") })
-	_register("nw_connection_group_copy_parameters", func() { purego.RegisterLibFunc(&_nw_connection_group_copy_parameters, _networkLib, "nw_connection_group_copy_parameters") })
-	_register("nw_connection_group_copy_path_for_message", func() { purego.RegisterLibFunc(&_nw_connection_group_copy_path_for_message, _networkLib, "nw_connection_group_copy_path_for_message") })
-	_register("nw_connection_group_copy_protocol_metadata", func() { purego.RegisterLibFunc(&_nw_connection_group_copy_protocol_metadata, _networkLib, "nw_connection_group_copy_protocol_metadata") })
-	_register("nw_connection_group_copy_protocol_metadata_for_message", func() { purego.RegisterLibFunc(&_nw_connection_group_copy_protocol_metadata_for_message, _networkLib, "nw_connection_group_copy_protocol_metadata_for_message") })
-	_register("nw_connection_group_copy_remote_endpoint_for_message", func() { purego.RegisterLibFunc(&_nw_connection_group_copy_remote_endpoint_for_message, _networkLib, "nw_connection_group_copy_remote_endpoint_for_message") })
-	_register("nw_connection_group_create", func() { purego.RegisterLibFunc(&_nw_connection_group_create, _networkLib, "nw_connection_group_create") })
-	_register("nw_connection_group_extract_connection", func() { purego.RegisterLibFunc(&_nw_connection_group_extract_connection, _networkLib, "nw_connection_group_extract_connection") })
-	_register("nw_connection_group_extract_connection_for_message", func() { purego.RegisterLibFunc(&_nw_connection_group_extract_connection_for_message, _networkLib, "nw_connection_group_extract_connection_for_message") })
-	_register("nw_connection_group_reinsert_extracted_connection", func() { purego.RegisterLibFunc(&_nw_connection_group_reinsert_extracted_connection, _networkLib, "nw_connection_group_reinsert_extracted_connection") })
+	_register("nw_connection_create_new_data_transfer_report", func() {
+		purego.RegisterLibFunc(&_nw_connection_create_new_data_transfer_report, _networkLib, "nw_connection_create_new_data_transfer_report")
+	})
+	_register("nw_connection_force_cancel", func() {
+		purego.RegisterLibFunc(&_nw_connection_force_cancel, _networkLib, "nw_connection_force_cancel")
+	})
+	_register("nw_connection_get_maximum_datagram_size", func() {
+		purego.RegisterLibFunc(&_nw_connection_get_maximum_datagram_size, _networkLib, "nw_connection_get_maximum_datagram_size")
+	})
+	_register("nw_connection_group_cancel", func() {
+		purego.RegisterLibFunc(&_nw_connection_group_cancel, _networkLib, "nw_connection_group_cancel")
+	})
+	_register("nw_connection_group_copy_descriptor", func() {
+		purego.RegisterLibFunc(&_nw_connection_group_copy_descriptor, _networkLib, "nw_connection_group_copy_descriptor")
+	})
+	_register("nw_connection_group_copy_local_endpoint_for_message", func() {
+		purego.RegisterLibFunc(&_nw_connection_group_copy_local_endpoint_for_message, _networkLib, "nw_connection_group_copy_local_endpoint_for_message")
+	})
+	_register("nw_connection_group_copy_parameters", func() {
+		purego.RegisterLibFunc(&_nw_connection_group_copy_parameters, _networkLib, "nw_connection_group_copy_parameters")
+	})
+	_register("nw_connection_group_copy_path_for_message", func() {
+		purego.RegisterLibFunc(&_nw_connection_group_copy_path_for_message, _networkLib, "nw_connection_group_copy_path_for_message")
+	})
+	_register("nw_connection_group_copy_protocol_metadata", func() {
+		purego.RegisterLibFunc(&_nw_connection_group_copy_protocol_metadata, _networkLib, "nw_connection_group_copy_protocol_metadata")
+	})
+	_register("nw_connection_group_copy_protocol_metadata_for_message", func() {
+		purego.RegisterLibFunc(&_nw_connection_group_copy_protocol_metadata_for_message, _networkLib, "nw_connection_group_copy_protocol_metadata_for_message")
+	})
+	_register("nw_connection_group_copy_remote_endpoint_for_message", func() {
+		purego.RegisterLibFunc(&_nw_connection_group_copy_remote_endpoint_for_message, _networkLib, "nw_connection_group_copy_remote_endpoint_for_message")
+	})
+	_register("nw_connection_group_create", func() {
+		purego.RegisterLibFunc(&_nw_connection_group_create, _networkLib, "nw_connection_group_create")
+	})
+	_register("nw_connection_group_extract_connection", func() {
+		purego.RegisterLibFunc(&_nw_connection_group_extract_connection, _networkLib, "nw_connection_group_extract_connection")
+	})
+	_register("nw_connection_group_extract_connection_for_message", func() {
+		purego.RegisterLibFunc(&_nw_connection_group_extract_connection_for_message, _networkLib, "nw_connection_group_extract_connection_for_message")
+	})
+	_register("nw_connection_group_reinsert_extracted_connection", func() {
+		purego.RegisterLibFunc(&_nw_connection_group_reinsert_extracted_connection, _networkLib, "nw_connection_group_reinsert_extracted_connection")
+	})
 	_register("nw_connection_group_reply", func() { purego.RegisterLibFunc(&_nw_connection_group_reply, _networkLib, "nw_connection_group_reply") })
-	_register("nw_connection_group_send_message", func() { purego.RegisterLibFunc(&_nw_connection_group_send_message, _networkLib, "nw_connection_group_send_message") })
-	_register("nw_connection_group_set_new_connection_handler", func() { purego.RegisterLibFunc(&_nw_connection_group_set_new_connection_handler, _networkLib, "nw_connection_group_set_new_connection_handler") })
-	_register("nw_connection_group_set_queue", func() { purego.RegisterLibFunc(&_nw_connection_group_set_queue, _networkLib, "nw_connection_group_set_queue") })
-	_register("nw_connection_group_set_receive_handler", func() { purego.RegisterLibFunc(&_nw_connection_group_set_receive_handler, _networkLib, "nw_connection_group_set_receive_handler") })
-	_register("nw_connection_group_set_state_changed_handler", func() { purego.RegisterLibFunc(&_nw_connection_group_set_state_changed_handler, _networkLib, "nw_connection_group_set_state_changed_handler") })
+	_register("nw_connection_group_send_message", func() {
+		purego.RegisterLibFunc(&_nw_connection_group_send_message, _networkLib, "nw_connection_group_send_message")
+	})
+	_register("nw_connection_group_set_new_connection_handler", func() {
+		purego.RegisterLibFunc(&_nw_connection_group_set_new_connection_handler, _networkLib, "nw_connection_group_set_new_connection_handler")
+	})
+	_register("nw_connection_group_set_queue", func() {
+		purego.RegisterLibFunc(&_nw_connection_group_set_queue, _networkLib, "nw_connection_group_set_queue")
+	})
+	_register("nw_connection_group_set_receive_handler", func() {
+		purego.RegisterLibFunc(&_nw_connection_group_set_receive_handler, _networkLib, "nw_connection_group_set_receive_handler")
+	})
+	_register("nw_connection_group_set_state_changed_handler", func() {
+		purego.RegisterLibFunc(&_nw_connection_group_set_state_changed_handler, _networkLib, "nw_connection_group_set_state_changed_handler")
+	})
 	_register("nw_connection_group_start", func() { purego.RegisterLibFunc(&_nw_connection_group_start, _networkLib, "nw_connection_group_start") })
 	_register("nw_connection_receive", func() { purego.RegisterLibFunc(&_nw_connection_receive, _networkLib, "nw_connection_receive") })
-	_register("nw_connection_receive_message", func() { purego.RegisterLibFunc(&_nw_connection_receive_message, _networkLib, "nw_connection_receive_message") })
+	_register("nw_connection_receive_message", func() {
+		purego.RegisterLibFunc(&_nw_connection_receive_message, _networkLib, "nw_connection_receive_message")
+	})
 	_register("nw_connection_restart", func() { purego.RegisterLibFunc(&_nw_connection_restart, _networkLib, "nw_connection_restart") })
 	_register("nw_connection_send", func() { purego.RegisterLibFunc(&_nw_connection_send, _networkLib, "nw_connection_send") })
-	_register("nw_connection_set_better_path_available_handler", func() { purego.RegisterLibFunc(&_nw_connection_set_better_path_available_handler, _networkLib, "nw_connection_set_better_path_available_handler") })
-	_register("nw_connection_set_path_changed_handler", func() { purego.RegisterLibFunc(&_nw_connection_set_path_changed_handler, _networkLib, "nw_connection_set_path_changed_handler") })
+	_register("nw_connection_set_better_path_available_handler", func() {
+		purego.RegisterLibFunc(&_nw_connection_set_better_path_available_handler, _networkLib, "nw_connection_set_better_path_available_handler")
+	})
+	_register("nw_connection_set_path_changed_handler", func() {
+		purego.RegisterLibFunc(&_nw_connection_set_path_changed_handler, _networkLib, "nw_connection_set_path_changed_handler")
+	})
 	_register("nw_connection_set_queue", func() { purego.RegisterLibFunc(&_nw_connection_set_queue, _networkLib, "nw_connection_set_queue") })
-	_register("nw_connection_set_state_changed_handler", func() { purego.RegisterLibFunc(&_nw_connection_set_state_changed_handler, _networkLib, "nw_connection_set_state_changed_handler") })
-	_register("nw_connection_set_viability_changed_handler", func() { purego.RegisterLibFunc(&_nw_connection_set_viability_changed_handler, _networkLib, "nw_connection_set_viability_changed_handler") })
+	_register("nw_connection_set_state_changed_handler", func() {
+		purego.RegisterLibFunc(&_nw_connection_set_state_changed_handler, _networkLib, "nw_connection_set_state_changed_handler")
+	})
+	_register("nw_connection_set_viability_changed_handler", func() {
+		purego.RegisterLibFunc(&_nw_connection_set_viability_changed_handler, _networkLib, "nw_connection_set_viability_changed_handler")
+	})
 	_register("nw_connection_start", func() { purego.RegisterLibFunc(&_nw_connection_start, _networkLib, "nw_connection_start") })
-	_register("nw_content_context_copy_antecedent", func() { purego.RegisterLibFunc(&_nw_content_context_copy_antecedent, _networkLib, "nw_content_context_copy_antecedent") })
-	_register("nw_content_context_copy_protocol_metadata", func() { purego.RegisterLibFunc(&_nw_content_context_copy_protocol_metadata, _networkLib, "nw_content_context_copy_protocol_metadata") })
+	_register("nw_content_context_copy_antecedent", func() {
+		purego.RegisterLibFunc(&_nw_content_context_copy_antecedent, _networkLib, "nw_content_context_copy_antecedent")
+	})
+	_register("nw_content_context_copy_protocol_metadata", func() {
+		purego.RegisterLibFunc(&_nw_content_context_copy_protocol_metadata, _networkLib, "nw_content_context_copy_protocol_metadata")
+	})
 	_register("nw_content_context_create", func() { purego.RegisterLibFunc(&_nw_content_context_create, _networkLib, "nw_content_context_create") })
-	_register("nw_content_context_foreach_protocol_metadata", func() { purego.RegisterLibFunc(&_nw_content_context_foreach_protocol_metadata, _networkLib, "nw_content_context_foreach_protocol_metadata") })
-	_register("nw_content_context_get_expiration_milliseconds", func() { purego.RegisterLibFunc(&_nw_content_context_get_expiration_milliseconds, _networkLib, "nw_content_context_get_expiration_milliseconds") })
-	_register("nw_content_context_get_identifier", func() { purego.RegisterLibFunc(&_nw_content_context_get_identifier, _networkLib, "nw_content_context_get_identifier") })
-	_register("nw_content_context_get_is_final", func() { purego.RegisterLibFunc(&_nw_content_context_get_is_final, _networkLib, "nw_content_context_get_is_final") })
-	_register("nw_content_context_get_relative_priority", func() { purego.RegisterLibFunc(&_nw_content_context_get_relative_priority, _networkLib, "nw_content_context_get_relative_priority") })
-	_register("nw_content_context_set_antecedent", func() { purego.RegisterLibFunc(&_nw_content_context_set_antecedent, _networkLib, "nw_content_context_set_antecedent") })
-	_register("nw_content_context_set_expiration_milliseconds", func() { purego.RegisterLibFunc(&_nw_content_context_set_expiration_milliseconds, _networkLib, "nw_content_context_set_expiration_milliseconds") })
-	_register("nw_content_context_set_is_final", func() { purego.RegisterLibFunc(&_nw_content_context_set_is_final, _networkLib, "nw_content_context_set_is_final") })
-	_register("nw_content_context_set_metadata_for_protocol", func() { purego.RegisterLibFunc(&_nw_content_context_set_metadata_for_protocol, _networkLib, "nw_content_context_set_metadata_for_protocol") })
-	_register("nw_content_context_set_relative_priority", func() { purego.RegisterLibFunc(&_nw_content_context_set_relative_priority, _networkLib, "nw_content_context_set_relative_priority") })
-	_register("nw_data_transfer_report_collect", func() { purego.RegisterLibFunc(&_nw_data_transfer_report_collect, _networkLib, "nw_data_transfer_report_collect") })
-	_register("nw_data_transfer_report_copy_path_interface", func() { purego.RegisterLibFunc(&_nw_data_transfer_report_copy_path_interface, _networkLib, "nw_data_transfer_report_copy_path_interface") })
-	_register("nw_data_transfer_report_get_duration_milliseconds", func() { purego.RegisterLibFunc(&_nw_data_transfer_report_get_duration_milliseconds, _networkLib, "nw_data_transfer_report_get_duration_milliseconds") })
-	_register("nw_data_transfer_report_get_path_count", func() { purego.RegisterLibFunc(&_nw_data_transfer_report_get_path_count, _networkLib, "nw_data_transfer_report_get_path_count") })
-	_register("nw_data_transfer_report_get_path_radio_type", func() { purego.RegisterLibFunc(&_nw_data_transfer_report_get_path_radio_type, _networkLib, "nw_data_transfer_report_get_path_radio_type") })
-	_register("nw_data_transfer_report_get_received_application_byte_count", func() { purego.RegisterLibFunc(&_nw_data_transfer_report_get_received_application_byte_count, _networkLib, "nw_data_transfer_report_get_received_application_byte_count") })
-	_register("nw_data_transfer_report_get_received_ip_packet_count", func() { purego.RegisterLibFunc(&_nw_data_transfer_report_get_received_ip_packet_count, _networkLib, "nw_data_transfer_report_get_received_ip_packet_count") })
-	_register("nw_data_transfer_report_get_received_transport_byte_count", func() { purego.RegisterLibFunc(&_nw_data_transfer_report_get_received_transport_byte_count, _networkLib, "nw_data_transfer_report_get_received_transport_byte_count") })
-	_register("nw_data_transfer_report_get_received_transport_duplicate_byte_count", func() { purego.RegisterLibFunc(&_nw_data_transfer_report_get_received_transport_duplicate_byte_count, _networkLib, "nw_data_transfer_report_get_received_transport_duplicate_byte_count") })
-	_register("nw_data_transfer_report_get_received_transport_out_of_order_byte_count", func() { purego.RegisterLibFunc(&_nw_data_transfer_report_get_received_transport_out_of_order_byte_count, _networkLib, "nw_data_transfer_report_get_received_transport_out_of_order_byte_count") })
-	_register("nw_data_transfer_report_get_sent_application_byte_count", func() { purego.RegisterLibFunc(&_nw_data_transfer_report_get_sent_application_byte_count, _networkLib, "nw_data_transfer_report_get_sent_application_byte_count") })
-	_register("nw_data_transfer_report_get_sent_ip_packet_count", func() { purego.RegisterLibFunc(&_nw_data_transfer_report_get_sent_ip_packet_count, _networkLib, "nw_data_transfer_report_get_sent_ip_packet_count") })
-	_register("nw_data_transfer_report_get_sent_transport_byte_count", func() { purego.RegisterLibFunc(&_nw_data_transfer_report_get_sent_transport_byte_count, _networkLib, "nw_data_transfer_report_get_sent_transport_byte_count") })
-	_register("nw_data_transfer_report_get_sent_transport_retransmitted_byte_count", func() { purego.RegisterLibFunc(&_nw_data_transfer_report_get_sent_transport_retransmitted_byte_count, _networkLib, "nw_data_transfer_report_get_sent_transport_retransmitted_byte_count") })
-	_register("nw_data_transfer_report_get_state", func() { purego.RegisterLibFunc(&_nw_data_transfer_report_get_state, _networkLib, "nw_data_transfer_report_get_state") })
-	_register("nw_data_transfer_report_get_transport_minimum_rtt_milliseconds", func() { purego.RegisterLibFunc(&_nw_data_transfer_report_get_transport_minimum_rtt_milliseconds, _networkLib, "nw_data_transfer_report_get_transport_minimum_rtt_milliseconds") })
-	_register("nw_data_transfer_report_get_transport_rtt_variance", func() { purego.RegisterLibFunc(&_nw_data_transfer_report_get_transport_rtt_variance, _networkLib, "nw_data_transfer_report_get_transport_rtt_variance") })
-	_register("nw_data_transfer_report_get_transport_smoothed_rtt_milliseconds", func() { purego.RegisterLibFunc(&_nw_data_transfer_report_get_transport_smoothed_rtt_milliseconds, _networkLib, "nw_data_transfer_report_get_transport_smoothed_rtt_milliseconds") })
-	_register("nw_endpoint_copy_address_string", func() { purego.RegisterLibFunc(&_nw_endpoint_copy_address_string, _networkLib, "nw_endpoint_copy_address_string") })
-	_register("nw_endpoint_copy_port_string", func() { purego.RegisterLibFunc(&_nw_endpoint_copy_port_string, _networkLib, "nw_endpoint_copy_port_string") })
-	_register("nw_endpoint_copy_txt_record", func() { purego.RegisterLibFunc(&_nw_endpoint_copy_txt_record, _networkLib, "nw_endpoint_copy_txt_record") })
-	_register("nw_endpoint_create_address", func() { purego.RegisterLibFunc(&_nw_endpoint_create_address, _networkLib, "nw_endpoint_create_address") })
-	_register("nw_endpoint_create_bonjour_service", func() { purego.RegisterLibFunc(&_nw_endpoint_create_bonjour_service, _networkLib, "nw_endpoint_create_bonjour_service") })
+	_register("nw_content_context_foreach_protocol_metadata", func() {
+		purego.RegisterLibFunc(&_nw_content_context_foreach_protocol_metadata, _networkLib, "nw_content_context_foreach_protocol_metadata")
+	})
+	_register("nw_content_context_get_expiration_milliseconds", func() {
+		purego.RegisterLibFunc(&_nw_content_context_get_expiration_milliseconds, _networkLib, "nw_content_context_get_expiration_milliseconds")
+	})
+	_register("nw_content_context_get_identifier", func() {
+		purego.RegisterLibFunc(&_nw_content_context_get_identifier, _networkLib, "nw_content_context_get_identifier")
+	})
+	_register("nw_content_context_get_is_final", func() {
+		purego.RegisterLibFunc(&_nw_content_context_get_is_final, _networkLib, "nw_content_context_get_is_final")
+	})
+	_register("nw_content_context_get_relative_priority", func() {
+		purego.RegisterLibFunc(&_nw_content_context_get_relative_priority, _networkLib, "nw_content_context_get_relative_priority")
+	})
+	_register("nw_content_context_set_antecedent", func() {
+		purego.RegisterLibFunc(&_nw_content_context_set_antecedent, _networkLib, "nw_content_context_set_antecedent")
+	})
+	_register("nw_content_context_set_expiration_milliseconds", func() {
+		purego.RegisterLibFunc(&_nw_content_context_set_expiration_milliseconds, _networkLib, "nw_content_context_set_expiration_milliseconds")
+	})
+	_register("nw_content_context_set_is_final", func() {
+		purego.RegisterLibFunc(&_nw_content_context_set_is_final, _networkLib, "nw_content_context_set_is_final")
+	})
+	_register("nw_content_context_set_metadata_for_protocol", func() {
+		purego.RegisterLibFunc(&_nw_content_context_set_metadata_for_protocol, _networkLib, "nw_content_context_set_metadata_for_protocol")
+	})
+	_register("nw_content_context_set_relative_priority", func() {
+		purego.RegisterLibFunc(&_nw_content_context_set_relative_priority, _networkLib, "nw_content_context_set_relative_priority")
+	})
+	_register("nw_data_transfer_report_collect", func() {
+		purego.RegisterLibFunc(&_nw_data_transfer_report_collect, _networkLib, "nw_data_transfer_report_collect")
+	})
+	_register("nw_data_transfer_report_copy_path_interface", func() {
+		purego.RegisterLibFunc(&_nw_data_transfer_report_copy_path_interface, _networkLib, "nw_data_transfer_report_copy_path_interface")
+	})
+	_register("nw_data_transfer_report_get_duration_milliseconds", func() {
+		purego.RegisterLibFunc(&_nw_data_transfer_report_get_duration_milliseconds, _networkLib, "nw_data_transfer_report_get_duration_milliseconds")
+	})
+	_register("nw_data_transfer_report_get_path_count", func() {
+		purego.RegisterLibFunc(&_nw_data_transfer_report_get_path_count, _networkLib, "nw_data_transfer_report_get_path_count")
+	})
+	_register("nw_data_transfer_report_get_path_radio_type", func() {
+		purego.RegisterLibFunc(&_nw_data_transfer_report_get_path_radio_type, _networkLib, "nw_data_transfer_report_get_path_radio_type")
+	})
+	_register("nw_data_transfer_report_get_received_application_byte_count", func() {
+		purego.RegisterLibFunc(&_nw_data_transfer_report_get_received_application_byte_count, _networkLib, "nw_data_transfer_report_get_received_application_byte_count")
+	})
+	_register("nw_data_transfer_report_get_received_ip_packet_count", func() {
+		purego.RegisterLibFunc(&_nw_data_transfer_report_get_received_ip_packet_count, _networkLib, "nw_data_transfer_report_get_received_ip_packet_count")
+	})
+	_register("nw_data_transfer_report_get_received_transport_byte_count", func() {
+		purego.RegisterLibFunc(&_nw_data_transfer_report_get_received_transport_byte_count, _networkLib, "nw_data_transfer_report_get_received_transport_byte_count")
+	})
+	_register("nw_data_transfer_report_get_received_transport_duplicate_byte_count", func() {
+		purego.RegisterLibFunc(&_nw_data_transfer_report_get_received_transport_duplicate_byte_count, _networkLib, "nw_data_transfer_report_get_received_transport_duplicate_byte_count")
+	})
+	_register("nw_data_transfer_report_get_received_transport_out_of_order_byte_count", func() {
+		purego.RegisterLibFunc(&_nw_data_transfer_report_get_received_transport_out_of_order_byte_count, _networkLib, "nw_data_transfer_report_get_received_transport_out_of_order_byte_count")
+	})
+	_register("nw_data_transfer_report_get_sent_application_byte_count", func() {
+		purego.RegisterLibFunc(&_nw_data_transfer_report_get_sent_application_byte_count, _networkLib, "nw_data_transfer_report_get_sent_application_byte_count")
+	})
+	_register("nw_data_transfer_report_get_sent_ip_packet_count", func() {
+		purego.RegisterLibFunc(&_nw_data_transfer_report_get_sent_ip_packet_count, _networkLib, "nw_data_transfer_report_get_sent_ip_packet_count")
+	})
+	_register("nw_data_transfer_report_get_sent_transport_byte_count", func() {
+		purego.RegisterLibFunc(&_nw_data_transfer_report_get_sent_transport_byte_count, _networkLib, "nw_data_transfer_report_get_sent_transport_byte_count")
+	})
+	_register("nw_data_transfer_report_get_sent_transport_retransmitted_byte_count", func() {
+		purego.RegisterLibFunc(&_nw_data_transfer_report_get_sent_transport_retransmitted_byte_count, _networkLib, "nw_data_transfer_report_get_sent_transport_retransmitted_byte_count")
+	})
+	_register("nw_data_transfer_report_get_state", func() {
+		purego.RegisterLibFunc(&_nw_data_transfer_report_get_state, _networkLib, "nw_data_transfer_report_get_state")
+	})
+	_register("nw_data_transfer_report_get_transport_minimum_rtt_milliseconds", func() {
+		purego.RegisterLibFunc(&_nw_data_transfer_report_get_transport_minimum_rtt_milliseconds, _networkLib, "nw_data_transfer_report_get_transport_minimum_rtt_milliseconds")
+	})
+	_register("nw_data_transfer_report_get_transport_rtt_variance", func() {
+		purego.RegisterLibFunc(&_nw_data_transfer_report_get_transport_rtt_variance, _networkLib, "nw_data_transfer_report_get_transport_rtt_variance")
+	})
+	_register("nw_data_transfer_report_get_transport_smoothed_rtt_milliseconds", func() {
+		purego.RegisterLibFunc(&_nw_data_transfer_report_get_transport_smoothed_rtt_milliseconds, _networkLib, "nw_data_transfer_report_get_transport_smoothed_rtt_milliseconds")
+	})
+	_register("nw_endpoint_copy_address_string", func() {
+		purego.RegisterLibFunc(&_nw_endpoint_copy_address_string, _networkLib, "nw_endpoint_copy_address_string")
+	})
+	_register("nw_endpoint_copy_port_string", func() {
+		purego.RegisterLibFunc(&_nw_endpoint_copy_port_string, _networkLib, "nw_endpoint_copy_port_string")
+	})
+	_register("nw_endpoint_copy_txt_record", func() {
+		purego.RegisterLibFunc(&_nw_endpoint_copy_txt_record, _networkLib, "nw_endpoint_copy_txt_record")
+	})
+	_register("nw_endpoint_create_address", func() {
+		purego.RegisterLibFunc(&_nw_endpoint_create_address, _networkLib, "nw_endpoint_create_address")
+	})
+	_register("nw_endpoint_create_bonjour_service", func() {
+		purego.RegisterLibFunc(&_nw_endpoint_create_bonjour_service, _networkLib, "nw_endpoint_create_bonjour_service")
+	})
 	_register("nw_endpoint_create_host", func() { purego.RegisterLibFunc(&_nw_endpoint_create_host, _networkLib, "nw_endpoint_create_host") })
 	_register("nw_endpoint_create_url", func() { purego.RegisterLibFunc(&_nw_endpoint_create_url, _networkLib, "nw_endpoint_create_url") })
 	_register("nw_endpoint_get_address", func() { purego.RegisterLibFunc(&_nw_endpoint_get_address, _networkLib, "nw_endpoint_get_address") })
-	_register("nw_endpoint_get_bonjour_service_domain", func() { purego.RegisterLibFunc(&_nw_endpoint_get_bonjour_service_domain, _networkLib, "nw_endpoint_get_bonjour_service_domain") })
-	_register("nw_endpoint_get_bonjour_service_name", func() { purego.RegisterLibFunc(&_nw_endpoint_get_bonjour_service_name, _networkLib, "nw_endpoint_get_bonjour_service_name") })
-	_register("nw_endpoint_get_bonjour_service_type", func() { purego.RegisterLibFunc(&_nw_endpoint_get_bonjour_service_type, _networkLib, "nw_endpoint_get_bonjour_service_type") })
+	_register("nw_endpoint_get_bonjour_service_domain", func() {
+		purego.RegisterLibFunc(&_nw_endpoint_get_bonjour_service_domain, _networkLib, "nw_endpoint_get_bonjour_service_domain")
+	})
+	_register("nw_endpoint_get_bonjour_service_name", func() {
+		purego.RegisterLibFunc(&_nw_endpoint_get_bonjour_service_name, _networkLib, "nw_endpoint_get_bonjour_service_name")
+	})
+	_register("nw_endpoint_get_bonjour_service_type", func() {
+		purego.RegisterLibFunc(&_nw_endpoint_get_bonjour_service_type, _networkLib, "nw_endpoint_get_bonjour_service_type")
+	})
 	_register("nw_endpoint_get_hostname", func() { purego.RegisterLibFunc(&_nw_endpoint_get_hostname, _networkLib, "nw_endpoint_get_hostname") })
 	_register("nw_endpoint_get_port", func() { purego.RegisterLibFunc(&_nw_endpoint_get_port, _networkLib, "nw_endpoint_get_port") })
 	_register("nw_endpoint_get_signature", func() { purego.RegisterLibFunc(&_nw_endpoint_get_signature, _networkLib, "nw_endpoint_get_signature") })
@@ -168,320 +356,824 @@ func _loadLibrary() {
 	_register("nw_error_copy_cf_error", func() { purego.RegisterLibFunc(&_nw_error_copy_cf_error, _networkLib, "nw_error_copy_cf_error") })
 	_register("nw_error_get_error_code", func() { purego.RegisterLibFunc(&_nw_error_get_error_code, _networkLib, "nw_error_get_error_code") })
 	_register("nw_error_get_error_domain", func() { purego.RegisterLibFunc(&_nw_error_get_error_domain, _networkLib, "nw_error_get_error_domain") })
-	_register("nw_establishment_report_copy_proxy_endpoint", func() { purego.RegisterLibFunc(&_nw_establishment_report_copy_proxy_endpoint, _networkLib, "nw_establishment_report_copy_proxy_endpoint") })
-	_register("nw_establishment_report_enumerate_protocols", func() { purego.RegisterLibFunc(&_nw_establishment_report_enumerate_protocols, _networkLib, "nw_establishment_report_enumerate_protocols") })
-	_register("nw_establishment_report_enumerate_resolution_reports", func() { purego.RegisterLibFunc(&_nw_establishment_report_enumerate_resolution_reports, _networkLib, "nw_establishment_report_enumerate_resolution_reports") })
-	_register("nw_establishment_report_enumerate_resolutions", func() { purego.RegisterLibFunc(&_nw_establishment_report_enumerate_resolutions, _networkLib, "nw_establishment_report_enumerate_resolutions") })
-	_register("nw_establishment_report_get_attempt_started_after_milliseconds", func() { purego.RegisterLibFunc(&_nw_establishment_report_get_attempt_started_after_milliseconds, _networkLib, "nw_establishment_report_get_attempt_started_after_milliseconds") })
-	_register("nw_establishment_report_get_duration_milliseconds", func() { purego.RegisterLibFunc(&_nw_establishment_report_get_duration_milliseconds, _networkLib, "nw_establishment_report_get_duration_milliseconds") })
-	_register("nw_establishment_report_get_previous_attempt_count", func() { purego.RegisterLibFunc(&_nw_establishment_report_get_previous_attempt_count, _networkLib, "nw_establishment_report_get_previous_attempt_count") })
-	_register("nw_establishment_report_get_proxy_configured", func() { purego.RegisterLibFunc(&_nw_establishment_report_get_proxy_configured, _networkLib, "nw_establishment_report_get_proxy_configured") })
-	_register("nw_establishment_report_get_used_proxy", func() { purego.RegisterLibFunc(&_nw_establishment_report_get_used_proxy, _networkLib, "nw_establishment_report_get_used_proxy") })
-	_register("nw_ethernet_channel_cancel", func() { purego.RegisterLibFunc(&_nw_ethernet_channel_cancel, _networkLib, "nw_ethernet_channel_cancel") })
-	_register("nw_ethernet_channel_create", func() { purego.RegisterLibFunc(&_nw_ethernet_channel_create, _networkLib, "nw_ethernet_channel_create") })
-	_register("nw_ethernet_channel_create_with_parameters", func() { purego.RegisterLibFunc(&_nw_ethernet_channel_create_with_parameters, _networkLib, "nw_ethernet_channel_create_with_parameters") })
-	_register("nw_ethernet_channel_get_maximum_payload_size", func() { purego.RegisterLibFunc(&_nw_ethernet_channel_get_maximum_payload_size, _networkLib, "nw_ethernet_channel_get_maximum_payload_size") })
+	_register("nw_establishment_report_copy_proxy_endpoint", func() {
+		purego.RegisterLibFunc(&_nw_establishment_report_copy_proxy_endpoint, _networkLib, "nw_establishment_report_copy_proxy_endpoint")
+	})
+	_register("nw_establishment_report_enumerate_protocols", func() {
+		purego.RegisterLibFunc(&_nw_establishment_report_enumerate_protocols, _networkLib, "nw_establishment_report_enumerate_protocols")
+	})
+	_register("nw_establishment_report_enumerate_resolution_reports", func() {
+		purego.RegisterLibFunc(&_nw_establishment_report_enumerate_resolution_reports, _networkLib, "nw_establishment_report_enumerate_resolution_reports")
+	})
+	_register("nw_establishment_report_enumerate_resolutions", func() {
+		purego.RegisterLibFunc(&_nw_establishment_report_enumerate_resolutions, _networkLib, "nw_establishment_report_enumerate_resolutions")
+	})
+	_register("nw_establishment_report_get_attempt_started_after_milliseconds", func() {
+		purego.RegisterLibFunc(&_nw_establishment_report_get_attempt_started_after_milliseconds, _networkLib, "nw_establishment_report_get_attempt_started_after_milliseconds")
+	})
+	_register("nw_establishment_report_get_duration_milliseconds", func() {
+		purego.RegisterLibFunc(&_nw_establishment_report_get_duration_milliseconds, _networkLib, "nw_establishment_report_get_duration_milliseconds")
+	})
+	_register("nw_establishment_report_get_previous_attempt_count", func() {
+		purego.RegisterLibFunc(&_nw_establishment_report_get_previous_attempt_count, _networkLib, "nw_establishment_report_get_previous_attempt_count")
+	})
+	_register("nw_establishment_report_get_proxy_configured", func() {
+		purego.RegisterLibFunc(&_nw_establishment_report_get_proxy_configured, _networkLib, "nw_establishment_report_get_proxy_configured")
+	})
+	_register("nw_establishment_report_get_used_proxy", func() {
+		purego.RegisterLibFunc(&_nw_establishment_report_get_used_proxy, _networkLib, "nw_establishment_report_get_used_proxy")
+	})
+	_register("nw_ethernet_channel_cancel", func() {
+		purego.RegisterLibFunc(&_nw_ethernet_channel_cancel, _networkLib, "nw_ethernet_channel_cancel")
+	})
+	_register("nw_ethernet_channel_create", func() {
+		purego.RegisterLibFunc(&_nw_ethernet_channel_create, _networkLib, "nw_ethernet_channel_create")
+	})
+	_register("nw_ethernet_channel_create_with_parameters", func() {
+		purego.RegisterLibFunc(&_nw_ethernet_channel_create_with_parameters, _networkLib, "nw_ethernet_channel_create_with_parameters")
+	})
+	_register("nw_ethernet_channel_get_maximum_payload_size", func() {
+		purego.RegisterLibFunc(&_nw_ethernet_channel_get_maximum_payload_size, _networkLib, "nw_ethernet_channel_get_maximum_payload_size")
+	})
 	_register("nw_ethernet_channel_send", func() { purego.RegisterLibFunc(&_nw_ethernet_channel_send, _networkLib, "nw_ethernet_channel_send") })
-	_register("nw_ethernet_channel_set_queue", func() { purego.RegisterLibFunc(&_nw_ethernet_channel_set_queue, _networkLib, "nw_ethernet_channel_set_queue") })
-	_register("nw_ethernet_channel_set_receive_handler", func() { purego.RegisterLibFunc(&_nw_ethernet_channel_set_receive_handler, _networkLib, "nw_ethernet_channel_set_receive_handler") })
-	_register("nw_ethernet_channel_set_state_changed_handler", func() { purego.RegisterLibFunc(&_nw_ethernet_channel_set_state_changed_handler, _networkLib, "nw_ethernet_channel_set_state_changed_handler") })
+	_register("nw_ethernet_channel_set_queue", func() {
+		purego.RegisterLibFunc(&_nw_ethernet_channel_set_queue, _networkLib, "nw_ethernet_channel_set_queue")
+	})
+	_register("nw_ethernet_channel_set_receive_handler", func() {
+		purego.RegisterLibFunc(&_nw_ethernet_channel_set_receive_handler, _networkLib, "nw_ethernet_channel_set_receive_handler")
+	})
+	_register("nw_ethernet_channel_set_state_changed_handler", func() {
+		purego.RegisterLibFunc(&_nw_ethernet_channel_set_state_changed_handler, _networkLib, "nw_ethernet_channel_set_state_changed_handler")
+	})
 	_register("nw_ethernet_channel_start", func() { purego.RegisterLibFunc(&_nw_ethernet_channel_start, _networkLib, "nw_ethernet_channel_start") })
 	_register("nw_framer_async", func() { purego.RegisterLibFunc(&_nw_framer_async, _networkLib, "nw_framer_async") })
-	_register("nw_framer_copy_local_endpoint", func() { purego.RegisterLibFunc(&_nw_framer_copy_local_endpoint, _networkLib, "nw_framer_copy_local_endpoint") })
+	_register("nw_framer_copy_local_endpoint", func() {
+		purego.RegisterLibFunc(&_nw_framer_copy_local_endpoint, _networkLib, "nw_framer_copy_local_endpoint")
+	})
 	_register("nw_framer_copy_options", func() { purego.RegisterLibFunc(&_nw_framer_copy_options, _networkLib, "nw_framer_copy_options") })
 	_register("nw_framer_copy_parameters", func() { purego.RegisterLibFunc(&_nw_framer_copy_parameters, _networkLib, "nw_framer_copy_parameters") })
-	_register("nw_framer_copy_remote_endpoint", func() { purego.RegisterLibFunc(&_nw_framer_copy_remote_endpoint, _networkLib, "nw_framer_copy_remote_endpoint") })
-	_register("nw_framer_create_definition", func() { purego.RegisterLibFunc(&_nw_framer_create_definition, _networkLib, "nw_framer_create_definition") })
+	_register("nw_framer_copy_remote_endpoint", func() {
+		purego.RegisterLibFunc(&_nw_framer_copy_remote_endpoint, _networkLib, "nw_framer_copy_remote_endpoint")
+	})
+	_register("nw_framer_create_definition", func() {
+		purego.RegisterLibFunc(&_nw_framer_create_definition, _networkLib, "nw_framer_create_definition")
+	})
 	_register("nw_framer_create_options", func() { purego.RegisterLibFunc(&_nw_framer_create_options, _networkLib, "nw_framer_create_options") })
 	_register("nw_framer_deliver_input", func() { purego.RegisterLibFunc(&_nw_framer_deliver_input, _networkLib, "nw_framer_deliver_input") })
-	_register("nw_framer_deliver_input_no_copy", func() { purego.RegisterLibFunc(&_nw_framer_deliver_input_no_copy, _networkLib, "nw_framer_deliver_input_no_copy") })
-	_register("nw_framer_mark_failed_with_error", func() { purego.RegisterLibFunc(&_nw_framer_mark_failed_with_error, _networkLib, "nw_framer_mark_failed_with_error") })
+	_register("nw_framer_deliver_input_no_copy", func() {
+		purego.RegisterLibFunc(&_nw_framer_deliver_input_no_copy, _networkLib, "nw_framer_deliver_input_no_copy")
+	})
+	_register("nw_framer_mark_failed_with_error", func() {
+		purego.RegisterLibFunc(&_nw_framer_mark_failed_with_error, _networkLib, "nw_framer_mark_failed_with_error")
+	})
 	_register("nw_framer_mark_ready", func() { purego.RegisterLibFunc(&_nw_framer_mark_ready, _networkLib, "nw_framer_mark_ready") })
-	_register("nw_framer_message_access_value", func() { purego.RegisterLibFunc(&_nw_framer_message_access_value, _networkLib, "nw_framer_message_access_value") })
-	_register("nw_framer_message_copy_object_value", func() { purego.RegisterLibFunc(&_nw_framer_message_copy_object_value, _networkLib, "nw_framer_message_copy_object_value") })
+	_register("nw_framer_message_access_value", func() {
+		purego.RegisterLibFunc(&_nw_framer_message_access_value, _networkLib, "nw_framer_message_access_value")
+	})
+	_register("nw_framer_message_copy_object_value", func() {
+		purego.RegisterLibFunc(&_nw_framer_message_copy_object_value, _networkLib, "nw_framer_message_copy_object_value")
+	})
 	_register("nw_framer_message_create", func() { purego.RegisterLibFunc(&_nw_framer_message_create, _networkLib, "nw_framer_message_create") })
-	_register("nw_framer_message_set_object_value", func() { purego.RegisterLibFunc(&_nw_framer_message_set_object_value, _networkLib, "nw_framer_message_set_object_value") })
-	_register("nw_framer_message_set_value", func() { purego.RegisterLibFunc(&_nw_framer_message_set_value, _networkLib, "nw_framer_message_set_value") })
-	_register("nw_framer_options_copy_object_value", func() { purego.RegisterLibFunc(&_nw_framer_options_copy_object_value, _networkLib, "nw_framer_options_copy_object_value") })
-	_register("nw_framer_options_set_object_value", func() { purego.RegisterLibFunc(&_nw_framer_options_set_object_value, _networkLib, "nw_framer_options_set_object_value") })
+	_register("nw_framer_message_set_object_value", func() {
+		purego.RegisterLibFunc(&_nw_framer_message_set_object_value, _networkLib, "nw_framer_message_set_object_value")
+	})
+	_register("nw_framer_message_set_value", func() {
+		purego.RegisterLibFunc(&_nw_framer_message_set_value, _networkLib, "nw_framer_message_set_value")
+	})
+	_register("nw_framer_options_copy_object_value", func() {
+		purego.RegisterLibFunc(&_nw_framer_options_copy_object_value, _networkLib, "nw_framer_options_copy_object_value")
+	})
+	_register("nw_framer_options_set_object_value", func() {
+		purego.RegisterLibFunc(&_nw_framer_options_set_object_value, _networkLib, "nw_framer_options_set_object_value")
+	})
 	_register("nw_framer_parse_input", func() { purego.RegisterLibFunc(&_nw_framer_parse_input, _networkLib, "nw_framer_parse_input") })
 	_register("nw_framer_parse_output", func() { purego.RegisterLibFunc(&_nw_framer_parse_output, _networkLib, "nw_framer_parse_output") })
-	_register("nw_framer_pass_through_input", func() { purego.RegisterLibFunc(&_nw_framer_pass_through_input, _networkLib, "nw_framer_pass_through_input") })
-	_register("nw_framer_pass_through_output", func() { purego.RegisterLibFunc(&_nw_framer_pass_through_output, _networkLib, "nw_framer_pass_through_output") })
-	_register("nw_framer_prepend_application_protocol", func() { purego.RegisterLibFunc(&_nw_framer_prepend_application_protocol, _networkLib, "nw_framer_prepend_application_protocol") })
-	_register("nw_framer_protocol_create_message", func() { purego.RegisterLibFunc(&_nw_framer_protocol_create_message, _networkLib, "nw_framer_protocol_create_message") })
+	_register("nw_framer_pass_through_input", func() {
+		purego.RegisterLibFunc(&_nw_framer_pass_through_input, _networkLib, "nw_framer_pass_through_input")
+	})
+	_register("nw_framer_pass_through_output", func() {
+		purego.RegisterLibFunc(&_nw_framer_pass_through_output, _networkLib, "nw_framer_pass_through_output")
+	})
+	_register("nw_framer_prepend_application_protocol", func() {
+		purego.RegisterLibFunc(&_nw_framer_prepend_application_protocol, _networkLib, "nw_framer_prepend_application_protocol")
+	})
+	_register("nw_framer_protocol_create_message", func() {
+		purego.RegisterLibFunc(&_nw_framer_protocol_create_message, _networkLib, "nw_framer_protocol_create_message")
+	})
 	_register("nw_framer_schedule_wakeup", func() { purego.RegisterLibFunc(&_nw_framer_schedule_wakeup, _networkLib, "nw_framer_schedule_wakeup") })
-	_register("nw_framer_set_cleanup_handler", func() { purego.RegisterLibFunc(&_nw_framer_set_cleanup_handler, _networkLib, "nw_framer_set_cleanup_handler") })
-	_register("nw_framer_set_input_handler", func() { purego.RegisterLibFunc(&_nw_framer_set_input_handler, _networkLib, "nw_framer_set_input_handler") })
-	_register("nw_framer_set_output_handler", func() { purego.RegisterLibFunc(&_nw_framer_set_output_handler, _networkLib, "nw_framer_set_output_handler") })
-	_register("nw_framer_set_stop_handler", func() { purego.RegisterLibFunc(&_nw_framer_set_stop_handler, _networkLib, "nw_framer_set_stop_handler") })
-	_register("nw_framer_set_wakeup_handler", func() { purego.RegisterLibFunc(&_nw_framer_set_wakeup_handler, _networkLib, "nw_framer_set_wakeup_handler") })
+	_register("nw_framer_set_cleanup_handler", func() {
+		purego.RegisterLibFunc(&_nw_framer_set_cleanup_handler, _networkLib, "nw_framer_set_cleanup_handler")
+	})
+	_register("nw_framer_set_input_handler", func() {
+		purego.RegisterLibFunc(&_nw_framer_set_input_handler, _networkLib, "nw_framer_set_input_handler")
+	})
+	_register("nw_framer_set_output_handler", func() {
+		purego.RegisterLibFunc(&_nw_framer_set_output_handler, _networkLib, "nw_framer_set_output_handler")
+	})
+	_register("nw_framer_set_stop_handler", func() {
+		purego.RegisterLibFunc(&_nw_framer_set_stop_handler, _networkLib, "nw_framer_set_stop_handler")
+	})
+	_register("nw_framer_set_wakeup_handler", func() {
+		purego.RegisterLibFunc(&_nw_framer_set_wakeup_handler, _networkLib, "nw_framer_set_wakeup_handler")
+	})
 	_register("nw_framer_write_output", func() { purego.RegisterLibFunc(&_nw_framer_write_output, _networkLib, "nw_framer_write_output") })
-	_register("nw_framer_write_output_data", func() { purego.RegisterLibFunc(&_nw_framer_write_output_data, _networkLib, "nw_framer_write_output_data") })
-	_register("nw_framer_write_output_no_copy", func() { purego.RegisterLibFunc(&_nw_framer_write_output_no_copy, _networkLib, "nw_framer_write_output_no_copy") })
-	_register("nw_group_descriptor_add_endpoint", func() { purego.RegisterLibFunc(&_nw_group_descriptor_add_endpoint, _networkLib, "nw_group_descriptor_add_endpoint") })
-	_register("nw_group_descriptor_create_multicast", func() { purego.RegisterLibFunc(&_nw_group_descriptor_create_multicast, _networkLib, "nw_group_descriptor_create_multicast") })
-	_register("nw_group_descriptor_create_multiplex", func() { purego.RegisterLibFunc(&_nw_group_descriptor_create_multiplex, _networkLib, "nw_group_descriptor_create_multiplex") })
-	_register("nw_group_descriptor_enumerate_endpoints", func() { purego.RegisterLibFunc(&_nw_group_descriptor_enumerate_endpoints, _networkLib, "nw_group_descriptor_enumerate_endpoints") })
+	_register("nw_framer_write_output_data", func() {
+		purego.RegisterLibFunc(&_nw_framer_write_output_data, _networkLib, "nw_framer_write_output_data")
+	})
+	_register("nw_framer_write_output_no_copy", func() {
+		purego.RegisterLibFunc(&_nw_framer_write_output_no_copy, _networkLib, "nw_framer_write_output_no_copy")
+	})
+	_register("nw_group_descriptor_add_endpoint", func() {
+		purego.RegisterLibFunc(&_nw_group_descriptor_add_endpoint, _networkLib, "nw_group_descriptor_add_endpoint")
+	})
+	_register("nw_group_descriptor_create_multicast", func() {
+		purego.RegisterLibFunc(&_nw_group_descriptor_create_multicast, _networkLib, "nw_group_descriptor_create_multicast")
+	})
+	_register("nw_group_descriptor_create_multiplex", func() {
+		purego.RegisterLibFunc(&_nw_group_descriptor_create_multiplex, _networkLib, "nw_group_descriptor_create_multiplex")
+	})
+	_register("nw_group_descriptor_enumerate_endpoints", func() {
+		purego.RegisterLibFunc(&_nw_group_descriptor_enumerate_endpoints, _networkLib, "nw_group_descriptor_enumerate_endpoints")
+	})
 	_register("nw_interface_get_index", func() { purego.RegisterLibFunc(&_nw_interface_get_index, _networkLib, "nw_interface_get_index") })
 	_register("nw_interface_get_name", func() { purego.RegisterLibFunc(&_nw_interface_get_name, _networkLib, "nw_interface_get_name") })
 	_register("nw_interface_get_type", func() { purego.RegisterLibFunc(&_nw_interface_get_type, _networkLib, "nw_interface_get_type") })
 	_register("nw_ip_create_metadata", func() { purego.RegisterLibFunc(&_nw_ip_create_metadata, _networkLib, "nw_ip_create_metadata") })
-	_register("nw_ip_metadata_get_ecn_flag", func() { purego.RegisterLibFunc(&_nw_ip_metadata_get_ecn_flag, _networkLib, "nw_ip_metadata_get_ecn_flag") })
-	_register("nw_ip_metadata_get_receive_time", func() { purego.RegisterLibFunc(&_nw_ip_metadata_get_receive_time, _networkLib, "nw_ip_metadata_get_receive_time") })
-	_register("nw_ip_metadata_get_service_class", func() { purego.RegisterLibFunc(&_nw_ip_metadata_get_service_class, _networkLib, "nw_ip_metadata_get_service_class") })
-	_register("nw_ip_metadata_set_ecn_flag", func() { purego.RegisterLibFunc(&_nw_ip_metadata_set_ecn_flag, _networkLib, "nw_ip_metadata_set_ecn_flag") })
-	_register("nw_ip_metadata_set_service_class", func() { purego.RegisterLibFunc(&_nw_ip_metadata_set_service_class, _networkLib, "nw_ip_metadata_set_service_class") })
-	_register("nw_ip_options_set_calculate_receive_time", func() { purego.RegisterLibFunc(&_nw_ip_options_set_calculate_receive_time, _networkLib, "nw_ip_options_set_calculate_receive_time") })
-	_register("nw_ip_options_set_disable_fragmentation", func() { purego.RegisterLibFunc(&_nw_ip_options_set_disable_fragmentation, _networkLib, "nw_ip_options_set_disable_fragmentation") })
-	_register("nw_ip_options_set_disable_multicast_loopback", func() { purego.RegisterLibFunc(&_nw_ip_options_set_disable_multicast_loopback, _networkLib, "nw_ip_options_set_disable_multicast_loopback") })
-	_register("nw_ip_options_set_hop_limit", func() { purego.RegisterLibFunc(&_nw_ip_options_set_hop_limit, _networkLib, "nw_ip_options_set_hop_limit") })
-	_register("nw_ip_options_set_local_address_preference", func() { purego.RegisterLibFunc(&_nw_ip_options_set_local_address_preference, _networkLib, "nw_ip_options_set_local_address_preference") })
-	_register("nw_ip_options_set_use_minimum_mtu", func() { purego.RegisterLibFunc(&_nw_ip_options_set_use_minimum_mtu, _networkLib, "nw_ip_options_set_use_minimum_mtu") })
+	_register("nw_ip_metadata_get_ecn_flag", func() {
+		purego.RegisterLibFunc(&_nw_ip_metadata_get_ecn_flag, _networkLib, "nw_ip_metadata_get_ecn_flag")
+	})
+	_register("nw_ip_metadata_get_receive_time", func() {
+		purego.RegisterLibFunc(&_nw_ip_metadata_get_receive_time, _networkLib, "nw_ip_metadata_get_receive_time")
+	})
+	_register("nw_ip_metadata_get_service_class", func() {
+		purego.RegisterLibFunc(&_nw_ip_metadata_get_service_class, _networkLib, "nw_ip_metadata_get_service_class")
+	})
+	_register("nw_ip_metadata_set_ecn_flag", func() {
+		purego.RegisterLibFunc(&_nw_ip_metadata_set_ecn_flag, _networkLib, "nw_ip_metadata_set_ecn_flag")
+	})
+	_register("nw_ip_metadata_set_service_class", func() {
+		purego.RegisterLibFunc(&_nw_ip_metadata_set_service_class, _networkLib, "nw_ip_metadata_set_service_class")
+	})
+	_register("nw_ip_options_set_calculate_receive_time", func() {
+		purego.RegisterLibFunc(&_nw_ip_options_set_calculate_receive_time, _networkLib, "nw_ip_options_set_calculate_receive_time")
+	})
+	_register("nw_ip_options_set_disable_fragmentation", func() {
+		purego.RegisterLibFunc(&_nw_ip_options_set_disable_fragmentation, _networkLib, "nw_ip_options_set_disable_fragmentation")
+	})
+	_register("nw_ip_options_set_disable_multicast_loopback", func() {
+		purego.RegisterLibFunc(&_nw_ip_options_set_disable_multicast_loopback, _networkLib, "nw_ip_options_set_disable_multicast_loopback")
+	})
+	_register("nw_ip_options_set_hop_limit", func() {
+		purego.RegisterLibFunc(&_nw_ip_options_set_hop_limit, _networkLib, "nw_ip_options_set_hop_limit")
+	})
+	_register("nw_ip_options_set_local_address_preference", func() {
+		purego.RegisterLibFunc(&_nw_ip_options_set_local_address_preference, _networkLib, "nw_ip_options_set_local_address_preference")
+	})
+	_register("nw_ip_options_set_use_minimum_mtu", func() {
+		purego.RegisterLibFunc(&_nw_ip_options_set_use_minimum_mtu, _networkLib, "nw_ip_options_set_use_minimum_mtu")
+	})
 	_register("nw_ip_options_set_version", func() { purego.RegisterLibFunc(&_nw_ip_options_set_version, _networkLib, "nw_ip_options_set_version") })
 	_register("nw_listener_cancel", func() { purego.RegisterLibFunc(&_nw_listener_cancel, _networkLib, "nw_listener_cancel") })
 	_register("nw_listener_create", func() { purego.RegisterLibFunc(&_nw_listener_create, _networkLib, "nw_listener_create") })
-	_register("nw_listener_create_with_connection", func() { purego.RegisterLibFunc(&_nw_listener_create_with_connection, _networkLib, "nw_listener_create_with_connection") })
-	_register("nw_listener_create_with_launchd_key", func() { purego.RegisterLibFunc(&_nw_listener_create_with_launchd_key, _networkLib, "nw_listener_create_with_launchd_key") })
-	_register("nw_listener_create_with_port", func() { purego.RegisterLibFunc(&_nw_listener_create_with_port, _networkLib, "nw_listener_create_with_port") })
-	_register("nw_listener_get_new_connection_limit", func() { purego.RegisterLibFunc(&_nw_listener_get_new_connection_limit, _networkLib, "nw_listener_get_new_connection_limit") })
+	_register("nw_listener_create_with_connection", func() {
+		purego.RegisterLibFunc(&_nw_listener_create_with_connection, _networkLib, "nw_listener_create_with_connection")
+	})
+	_register("nw_listener_create_with_launchd_key", func() {
+		purego.RegisterLibFunc(&_nw_listener_create_with_launchd_key, _networkLib, "nw_listener_create_with_launchd_key")
+	})
+	_register("nw_listener_create_with_port", func() {
+		purego.RegisterLibFunc(&_nw_listener_create_with_port, _networkLib, "nw_listener_create_with_port")
+	})
+	_register("nw_listener_get_new_connection_limit", func() {
+		purego.RegisterLibFunc(&_nw_listener_get_new_connection_limit, _networkLib, "nw_listener_get_new_connection_limit")
+	})
 	_register("nw_listener_get_port", func() { purego.RegisterLibFunc(&_nw_listener_get_port, _networkLib, "nw_listener_get_port") })
-	_register("nw_listener_set_advertise_descriptor", func() { purego.RegisterLibFunc(&_nw_listener_set_advertise_descriptor, _networkLib, "nw_listener_set_advertise_descriptor") })
-	_register("nw_listener_set_advertised_endpoint_changed_handler", func() { purego.RegisterLibFunc(&_nw_listener_set_advertised_endpoint_changed_handler, _networkLib, "nw_listener_set_advertised_endpoint_changed_handler") })
-	_register("nw_listener_set_new_connection_group_handler", func() { purego.RegisterLibFunc(&_nw_listener_set_new_connection_group_handler, _networkLib, "nw_listener_set_new_connection_group_handler") })
-	_register("nw_listener_set_new_connection_handler", func() { purego.RegisterLibFunc(&_nw_listener_set_new_connection_handler, _networkLib, "nw_listener_set_new_connection_handler") })
-	_register("nw_listener_set_new_connection_limit", func() { purego.RegisterLibFunc(&_nw_listener_set_new_connection_limit, _networkLib, "nw_listener_set_new_connection_limit") })
+	_register("nw_listener_set_advertise_descriptor", func() {
+		purego.RegisterLibFunc(&_nw_listener_set_advertise_descriptor, _networkLib, "nw_listener_set_advertise_descriptor")
+	})
+	_register("nw_listener_set_advertised_endpoint_changed_handler", func() {
+		purego.RegisterLibFunc(&_nw_listener_set_advertised_endpoint_changed_handler, _networkLib, "nw_listener_set_advertised_endpoint_changed_handler")
+	})
+	_register("nw_listener_set_new_connection_group_handler", func() {
+		purego.RegisterLibFunc(&_nw_listener_set_new_connection_group_handler, _networkLib, "nw_listener_set_new_connection_group_handler")
+	})
+	_register("nw_listener_set_new_connection_handler", func() {
+		purego.RegisterLibFunc(&_nw_listener_set_new_connection_handler, _networkLib, "nw_listener_set_new_connection_handler")
+	})
+	_register("nw_listener_set_new_connection_limit", func() {
+		purego.RegisterLibFunc(&_nw_listener_set_new_connection_limit, _networkLib, "nw_listener_set_new_connection_limit")
+	})
 	_register("nw_listener_set_queue", func() { purego.RegisterLibFunc(&_nw_listener_set_queue, _networkLib, "nw_listener_set_queue") })
-	_register("nw_listener_set_state_changed_handler", func() { purego.RegisterLibFunc(&_nw_listener_set_state_changed_handler, _networkLib, "nw_listener_set_state_changed_handler") })
+	_register("nw_listener_set_state_changed_handler", func() {
+		purego.RegisterLibFunc(&_nw_listener_set_state_changed_handler, _networkLib, "nw_listener_set_state_changed_handler")
+	})
 	_register("nw_listener_start", func() { purego.RegisterLibFunc(&_nw_listener_start, _networkLib, "nw_listener_start") })
-	_register("nw_multicast_group_descriptor_get_disable_unicast_traffic", func() { purego.RegisterLibFunc(&_nw_multicast_group_descriptor_get_disable_unicast_traffic, _networkLib, "nw_multicast_group_descriptor_get_disable_unicast_traffic") })
-	_register("nw_multicast_group_descriptor_set_disable_unicast_traffic", func() { purego.RegisterLibFunc(&_nw_multicast_group_descriptor_set_disable_unicast_traffic, _networkLib, "nw_multicast_group_descriptor_set_disable_unicast_traffic") })
-	_register("nw_multicast_group_descriptor_set_specific_source", func() { purego.RegisterLibFunc(&_nw_multicast_group_descriptor_set_specific_source, _networkLib, "nw_multicast_group_descriptor_set_specific_source") })
-	_register("nw_parameters_clear_prohibited_interface_types", func() { purego.RegisterLibFunc(&_nw_parameters_clear_prohibited_interface_types, _networkLib, "nw_parameters_clear_prohibited_interface_types") })
-	_register("nw_parameters_clear_prohibited_interfaces", func() { purego.RegisterLibFunc(&_nw_parameters_clear_prohibited_interfaces, _networkLib, "nw_parameters_clear_prohibited_interfaces") })
+	_register("nw_multicast_group_descriptor_get_disable_unicast_traffic", func() {
+		purego.RegisterLibFunc(&_nw_multicast_group_descriptor_get_disable_unicast_traffic, _networkLib, "nw_multicast_group_descriptor_get_disable_unicast_traffic")
+	})
+	_register("nw_multicast_group_descriptor_set_disable_unicast_traffic", func() {
+		purego.RegisterLibFunc(&_nw_multicast_group_descriptor_set_disable_unicast_traffic, _networkLib, "nw_multicast_group_descriptor_set_disable_unicast_traffic")
+	})
+	_register("nw_multicast_group_descriptor_set_specific_source", func() {
+		purego.RegisterLibFunc(&_nw_multicast_group_descriptor_set_specific_source, _networkLib, "nw_multicast_group_descriptor_set_specific_source")
+	})
+	_register("nw_parameters_clear_prohibited_interface_types", func() {
+		purego.RegisterLibFunc(&_nw_parameters_clear_prohibited_interface_types, _networkLib, "nw_parameters_clear_prohibited_interface_types")
+	})
+	_register("nw_parameters_clear_prohibited_interfaces", func() {
+		purego.RegisterLibFunc(&_nw_parameters_clear_prohibited_interfaces, _networkLib, "nw_parameters_clear_prohibited_interfaces")
+	})
 	_register("nw_parameters_copy", func() { purego.RegisterLibFunc(&_nw_parameters_copy, _networkLib, "nw_parameters_copy") })
-	_register("nw_parameters_copy_default_protocol_stack", func() { purego.RegisterLibFunc(&_nw_parameters_copy_default_protocol_stack, _networkLib, "nw_parameters_copy_default_protocol_stack") })
-	_register("nw_parameters_copy_local_endpoint", func() { purego.RegisterLibFunc(&_nw_parameters_copy_local_endpoint, _networkLib, "nw_parameters_copy_local_endpoint") })
-	_register("nw_parameters_copy_required_interface", func() { purego.RegisterLibFunc(&_nw_parameters_copy_required_interface, _networkLib, "nw_parameters_copy_required_interface") })
+	_register("nw_parameters_copy_default_protocol_stack", func() {
+		purego.RegisterLibFunc(&_nw_parameters_copy_default_protocol_stack, _networkLib, "nw_parameters_copy_default_protocol_stack")
+	})
+	_register("nw_parameters_copy_local_endpoint", func() {
+		purego.RegisterLibFunc(&_nw_parameters_copy_local_endpoint, _networkLib, "nw_parameters_copy_local_endpoint")
+	})
+	_register("nw_parameters_copy_required_interface", func() {
+		purego.RegisterLibFunc(&_nw_parameters_copy_required_interface, _networkLib, "nw_parameters_copy_required_interface")
+	})
 	_register("nw_parameters_create", func() { purego.RegisterLibFunc(&_nw_parameters_create, _networkLib, "nw_parameters_create") })
-	_register("nw_parameters_create_application_service", func() { purego.RegisterLibFunc(&_nw_parameters_create_application_service, _networkLib, "nw_parameters_create_application_service") })
-	_register("nw_parameters_create_custom_ip", func() { purego.RegisterLibFunc(&_nw_parameters_create_custom_ip, _networkLib, "nw_parameters_create_custom_ip") })
+	_register("nw_parameters_create_application_service", func() {
+		purego.RegisterLibFunc(&_nw_parameters_create_application_service, _networkLib, "nw_parameters_create_application_service")
+	})
+	_register("nw_parameters_create_custom_ip", func() {
+		purego.RegisterLibFunc(&_nw_parameters_create_custom_ip, _networkLib, "nw_parameters_create_custom_ip")
+	})
 	_register("nw_parameters_create_quic", func() { purego.RegisterLibFunc(&_nw_parameters_create_quic, _networkLib, "nw_parameters_create_quic") })
-	_register("nw_parameters_create_secure_tcp", func() { purego.RegisterLibFunc(&_nw_parameters_create_secure_tcp, _networkLib, "nw_parameters_create_secure_tcp") })
-	_register("nw_parameters_create_secure_udp", func() { purego.RegisterLibFunc(&_nw_parameters_create_secure_udp, _networkLib, "nw_parameters_create_secure_udp") })
-	_register("nw_parameters_get_allow_ultra_constrained", func() { purego.RegisterLibFunc(&_nw_parameters_get_allow_ultra_constrained, _networkLib, "nw_parameters_get_allow_ultra_constrained") })
-	_register("nw_parameters_get_attribution", func() { purego.RegisterLibFunc(&_nw_parameters_get_attribution, _networkLib, "nw_parameters_get_attribution") })
-	_register("nw_parameters_get_expired_dns_behavior", func() { purego.RegisterLibFunc(&_nw_parameters_get_expired_dns_behavior, _networkLib, "nw_parameters_get_expired_dns_behavior") })
-	_register("nw_parameters_get_fast_open_enabled", func() { purego.RegisterLibFunc(&_nw_parameters_get_fast_open_enabled, _networkLib, "nw_parameters_get_fast_open_enabled") })
-	_register("nw_parameters_get_include_peer_to_peer", func() { purego.RegisterLibFunc(&_nw_parameters_get_include_peer_to_peer, _networkLib, "nw_parameters_get_include_peer_to_peer") })
-	_register("nw_parameters_get_local_only", func() { purego.RegisterLibFunc(&_nw_parameters_get_local_only, _networkLib, "nw_parameters_get_local_only") })
-	_register("nw_parameters_get_multipath_service", func() { purego.RegisterLibFunc(&_nw_parameters_get_multipath_service, _networkLib, "nw_parameters_get_multipath_service") })
-	_register("nw_parameters_get_prefer_no_proxy", func() { purego.RegisterLibFunc(&_nw_parameters_get_prefer_no_proxy, _networkLib, "nw_parameters_get_prefer_no_proxy") })
-	_register("nw_parameters_get_prohibit_constrained", func() { purego.RegisterLibFunc(&_nw_parameters_get_prohibit_constrained, _networkLib, "nw_parameters_get_prohibit_constrained") })
-	_register("nw_parameters_get_prohibit_expensive", func() { purego.RegisterLibFunc(&_nw_parameters_get_prohibit_expensive, _networkLib, "nw_parameters_get_prohibit_expensive") })
-	_register("nw_parameters_get_required_interface_type", func() { purego.RegisterLibFunc(&_nw_parameters_get_required_interface_type, _networkLib, "nw_parameters_get_required_interface_type") })
-	_register("nw_parameters_get_reuse_local_address", func() { purego.RegisterLibFunc(&_nw_parameters_get_reuse_local_address, _networkLib, "nw_parameters_get_reuse_local_address") })
-	_register("nw_parameters_get_service_class", func() { purego.RegisterLibFunc(&_nw_parameters_get_service_class, _networkLib, "nw_parameters_get_service_class") })
-	_register("nw_parameters_iterate_prohibited_interface_types", func() { purego.RegisterLibFunc(&_nw_parameters_iterate_prohibited_interface_types, _networkLib, "nw_parameters_iterate_prohibited_interface_types") })
-	_register("nw_parameters_iterate_prohibited_interfaces", func() { purego.RegisterLibFunc(&_nw_parameters_iterate_prohibited_interfaces, _networkLib, "nw_parameters_iterate_prohibited_interfaces") })
-	_register("nw_parameters_prohibit_interface", func() { purego.RegisterLibFunc(&_nw_parameters_prohibit_interface, _networkLib, "nw_parameters_prohibit_interface") })
-	_register("nw_parameters_prohibit_interface_type", func() { purego.RegisterLibFunc(&_nw_parameters_prohibit_interface_type, _networkLib, "nw_parameters_prohibit_interface_type") })
-	_register("nw_parameters_require_interface", func() { purego.RegisterLibFunc(&_nw_parameters_require_interface, _networkLib, "nw_parameters_require_interface") })
-	_register("nw_parameters_requires_dnssec_validation", func() { purego.RegisterLibFunc(&_nw_parameters_requires_dnssec_validation, _networkLib, "nw_parameters_requires_dnssec_validation") })
-	_register("nw_parameters_set_allow_ultra_constrained", func() { purego.RegisterLibFunc(&_nw_parameters_set_allow_ultra_constrained, _networkLib, "nw_parameters_set_allow_ultra_constrained") })
-	_register("nw_parameters_set_attribution", func() { purego.RegisterLibFunc(&_nw_parameters_set_attribution, _networkLib, "nw_parameters_set_attribution") })
-	_register("nw_parameters_set_expired_dns_behavior", func() { purego.RegisterLibFunc(&_nw_parameters_set_expired_dns_behavior, _networkLib, "nw_parameters_set_expired_dns_behavior") })
-	_register("nw_parameters_set_fast_open_enabled", func() { purego.RegisterLibFunc(&_nw_parameters_set_fast_open_enabled, _networkLib, "nw_parameters_set_fast_open_enabled") })
-	_register("nw_parameters_set_include_peer_to_peer", func() { purego.RegisterLibFunc(&_nw_parameters_set_include_peer_to_peer, _networkLib, "nw_parameters_set_include_peer_to_peer") })
-	_register("nw_parameters_set_local_endpoint", func() { purego.RegisterLibFunc(&_nw_parameters_set_local_endpoint, _networkLib, "nw_parameters_set_local_endpoint") })
-	_register("nw_parameters_set_local_only", func() { purego.RegisterLibFunc(&_nw_parameters_set_local_only, _networkLib, "nw_parameters_set_local_only") })
-	_register("nw_parameters_set_multipath_service", func() { purego.RegisterLibFunc(&_nw_parameters_set_multipath_service, _networkLib, "nw_parameters_set_multipath_service") })
-	_register("nw_parameters_set_prefer_no_proxy", func() { purego.RegisterLibFunc(&_nw_parameters_set_prefer_no_proxy, _networkLib, "nw_parameters_set_prefer_no_proxy") })
-	_register("nw_parameters_set_privacy_context", func() { purego.RegisterLibFunc(&_nw_parameters_set_privacy_context, _networkLib, "nw_parameters_set_privacy_context") })
-	_register("nw_parameters_set_prohibit_constrained", func() { purego.RegisterLibFunc(&_nw_parameters_set_prohibit_constrained, _networkLib, "nw_parameters_set_prohibit_constrained") })
-	_register("nw_parameters_set_prohibit_expensive", func() { purego.RegisterLibFunc(&_nw_parameters_set_prohibit_expensive, _networkLib, "nw_parameters_set_prohibit_expensive") })
-	_register("nw_parameters_set_required_interface_type", func() { purego.RegisterLibFunc(&_nw_parameters_set_required_interface_type, _networkLib, "nw_parameters_set_required_interface_type") })
-	_register("nw_parameters_set_requires_dnssec_validation", func() { purego.RegisterLibFunc(&_nw_parameters_set_requires_dnssec_validation, _networkLib, "nw_parameters_set_requires_dnssec_validation") })
-	_register("nw_parameters_set_reuse_local_address", func() { purego.RegisterLibFunc(&_nw_parameters_set_reuse_local_address, _networkLib, "nw_parameters_set_reuse_local_address") })
-	_register("nw_parameters_set_service_class", func() { purego.RegisterLibFunc(&_nw_parameters_set_service_class, _networkLib, "nw_parameters_set_service_class") })
-	_register("nw_path_copy_effective_local_endpoint", func() { purego.RegisterLibFunc(&_nw_path_copy_effective_local_endpoint, _networkLib, "nw_path_copy_effective_local_endpoint") })
-	_register("nw_path_copy_effective_remote_endpoint", func() { purego.RegisterLibFunc(&_nw_path_copy_effective_remote_endpoint, _networkLib, "nw_path_copy_effective_remote_endpoint") })
-	_register("nw_path_enumerate_gateways", func() { purego.RegisterLibFunc(&_nw_path_enumerate_gateways, _networkLib, "nw_path_enumerate_gateways") })
-	_register("nw_path_enumerate_interfaces", func() { purego.RegisterLibFunc(&_nw_path_enumerate_interfaces, _networkLib, "nw_path_enumerate_interfaces") })
+	_register("nw_parameters_create_secure_tcp", func() {
+		purego.RegisterLibFunc(&_nw_parameters_create_secure_tcp, _networkLib, "nw_parameters_create_secure_tcp")
+	})
+	_register("nw_parameters_create_secure_udp", func() {
+		purego.RegisterLibFunc(&_nw_parameters_create_secure_udp, _networkLib, "nw_parameters_create_secure_udp")
+	})
+	_register("nw_parameters_get_allow_ultra_constrained", func() {
+		purego.RegisterLibFunc(&_nw_parameters_get_allow_ultra_constrained, _networkLib, "nw_parameters_get_allow_ultra_constrained")
+	})
+	_register("nw_parameters_get_attribution", func() {
+		purego.RegisterLibFunc(&_nw_parameters_get_attribution, _networkLib, "nw_parameters_get_attribution")
+	})
+	_register("nw_parameters_get_expired_dns_behavior", func() {
+		purego.RegisterLibFunc(&_nw_parameters_get_expired_dns_behavior, _networkLib, "nw_parameters_get_expired_dns_behavior")
+	})
+	_register("nw_parameters_get_fast_open_enabled", func() {
+		purego.RegisterLibFunc(&_nw_parameters_get_fast_open_enabled, _networkLib, "nw_parameters_get_fast_open_enabled")
+	})
+	_register("nw_parameters_get_include_peer_to_peer", func() {
+		purego.RegisterLibFunc(&_nw_parameters_get_include_peer_to_peer, _networkLib, "nw_parameters_get_include_peer_to_peer")
+	})
+	_register("nw_parameters_get_local_only", func() {
+		purego.RegisterLibFunc(&_nw_parameters_get_local_only, _networkLib, "nw_parameters_get_local_only")
+	})
+	_register("nw_parameters_get_multipath_service", func() {
+		purego.RegisterLibFunc(&_nw_parameters_get_multipath_service, _networkLib, "nw_parameters_get_multipath_service")
+	})
+	_register("nw_parameters_get_prefer_no_proxy", func() {
+		purego.RegisterLibFunc(&_nw_parameters_get_prefer_no_proxy, _networkLib, "nw_parameters_get_prefer_no_proxy")
+	})
+	_register("nw_parameters_get_prohibit_constrained", func() {
+		purego.RegisterLibFunc(&_nw_parameters_get_prohibit_constrained, _networkLib, "nw_parameters_get_prohibit_constrained")
+	})
+	_register("nw_parameters_get_prohibit_expensive", func() {
+		purego.RegisterLibFunc(&_nw_parameters_get_prohibit_expensive, _networkLib, "nw_parameters_get_prohibit_expensive")
+	})
+	_register("nw_parameters_get_required_interface_type", func() {
+		purego.RegisterLibFunc(&_nw_parameters_get_required_interface_type, _networkLib, "nw_parameters_get_required_interface_type")
+	})
+	_register("nw_parameters_get_reuse_local_address", func() {
+		purego.RegisterLibFunc(&_nw_parameters_get_reuse_local_address, _networkLib, "nw_parameters_get_reuse_local_address")
+	})
+	_register("nw_parameters_get_service_class", func() {
+		purego.RegisterLibFunc(&_nw_parameters_get_service_class, _networkLib, "nw_parameters_get_service_class")
+	})
+	_register("nw_parameters_iterate_prohibited_interface_types", func() {
+		purego.RegisterLibFunc(&_nw_parameters_iterate_prohibited_interface_types, _networkLib, "nw_parameters_iterate_prohibited_interface_types")
+	})
+	_register("nw_parameters_iterate_prohibited_interfaces", func() {
+		purego.RegisterLibFunc(&_nw_parameters_iterate_prohibited_interfaces, _networkLib, "nw_parameters_iterate_prohibited_interfaces")
+	})
+	_register("nw_parameters_prohibit_interface", func() {
+		purego.RegisterLibFunc(&_nw_parameters_prohibit_interface, _networkLib, "nw_parameters_prohibit_interface")
+	})
+	_register("nw_parameters_prohibit_interface_type", func() {
+		purego.RegisterLibFunc(&_nw_parameters_prohibit_interface_type, _networkLib, "nw_parameters_prohibit_interface_type")
+	})
+	_register("nw_parameters_require_interface", func() {
+		purego.RegisterLibFunc(&_nw_parameters_require_interface, _networkLib, "nw_parameters_require_interface")
+	})
+	_register("nw_parameters_requires_dnssec_validation", func() {
+		purego.RegisterLibFunc(&_nw_parameters_requires_dnssec_validation, _networkLib, "nw_parameters_requires_dnssec_validation")
+	})
+	_register("nw_parameters_set_allow_ultra_constrained", func() {
+		purego.RegisterLibFunc(&_nw_parameters_set_allow_ultra_constrained, _networkLib, "nw_parameters_set_allow_ultra_constrained")
+	})
+	_register("nw_parameters_set_attribution", func() {
+		purego.RegisterLibFunc(&_nw_parameters_set_attribution, _networkLib, "nw_parameters_set_attribution")
+	})
+	_register("nw_parameters_set_expired_dns_behavior", func() {
+		purego.RegisterLibFunc(&_nw_parameters_set_expired_dns_behavior, _networkLib, "nw_parameters_set_expired_dns_behavior")
+	})
+	_register("nw_parameters_set_fast_open_enabled", func() {
+		purego.RegisterLibFunc(&_nw_parameters_set_fast_open_enabled, _networkLib, "nw_parameters_set_fast_open_enabled")
+	})
+	_register("nw_parameters_set_include_peer_to_peer", func() {
+		purego.RegisterLibFunc(&_nw_parameters_set_include_peer_to_peer, _networkLib, "nw_parameters_set_include_peer_to_peer")
+	})
+	_register("nw_parameters_set_local_endpoint", func() {
+		purego.RegisterLibFunc(&_nw_parameters_set_local_endpoint, _networkLib, "nw_parameters_set_local_endpoint")
+	})
+	_register("nw_parameters_set_local_only", func() {
+		purego.RegisterLibFunc(&_nw_parameters_set_local_only, _networkLib, "nw_parameters_set_local_only")
+	})
+	_register("nw_parameters_set_multipath_service", func() {
+		purego.RegisterLibFunc(&_nw_parameters_set_multipath_service, _networkLib, "nw_parameters_set_multipath_service")
+	})
+	_register("nw_parameters_set_prefer_no_proxy", func() {
+		purego.RegisterLibFunc(&_nw_parameters_set_prefer_no_proxy, _networkLib, "nw_parameters_set_prefer_no_proxy")
+	})
+	_register("nw_parameters_set_privacy_context", func() {
+		purego.RegisterLibFunc(&_nw_parameters_set_privacy_context, _networkLib, "nw_parameters_set_privacy_context")
+	})
+	_register("nw_parameters_set_prohibit_constrained", func() {
+		purego.RegisterLibFunc(&_nw_parameters_set_prohibit_constrained, _networkLib, "nw_parameters_set_prohibit_constrained")
+	})
+	_register("nw_parameters_set_prohibit_expensive", func() {
+		purego.RegisterLibFunc(&_nw_parameters_set_prohibit_expensive, _networkLib, "nw_parameters_set_prohibit_expensive")
+	})
+	_register("nw_parameters_set_required_interface_type", func() {
+		purego.RegisterLibFunc(&_nw_parameters_set_required_interface_type, _networkLib, "nw_parameters_set_required_interface_type")
+	})
+	_register("nw_parameters_set_requires_dnssec_validation", func() {
+		purego.RegisterLibFunc(&_nw_parameters_set_requires_dnssec_validation, _networkLib, "nw_parameters_set_requires_dnssec_validation")
+	})
+	_register("nw_parameters_set_reuse_local_address", func() {
+		purego.RegisterLibFunc(&_nw_parameters_set_reuse_local_address, _networkLib, "nw_parameters_set_reuse_local_address")
+	})
+	_register("nw_parameters_set_service_class", func() {
+		purego.RegisterLibFunc(&_nw_parameters_set_service_class, _networkLib, "nw_parameters_set_service_class")
+	})
+	_register("nw_path_copy_effective_local_endpoint", func() {
+		purego.RegisterLibFunc(&_nw_path_copy_effective_local_endpoint, _networkLib, "nw_path_copy_effective_local_endpoint")
+	})
+	_register("nw_path_copy_effective_remote_endpoint", func() {
+		purego.RegisterLibFunc(&_nw_path_copy_effective_remote_endpoint, _networkLib, "nw_path_copy_effective_remote_endpoint")
+	})
+	_register("nw_path_enumerate_gateways", func() {
+		purego.RegisterLibFunc(&_nw_path_enumerate_gateways, _networkLib, "nw_path_enumerate_gateways")
+	})
+	_register("nw_path_enumerate_interfaces", func() {
+		purego.RegisterLibFunc(&_nw_path_enumerate_interfaces, _networkLib, "nw_path_enumerate_interfaces")
+	})
 	_register("nw_path_get_link_quality", func() { purego.RegisterLibFunc(&_nw_path_get_link_quality, _networkLib, "nw_path_get_link_quality") })
 	_register("nw_path_get_status", func() { purego.RegisterLibFunc(&_nw_path_get_status, _networkLib, "nw_path_get_status") })
-	_register("nw_path_get_unsatisfied_reason", func() { purego.RegisterLibFunc(&_nw_path_get_unsatisfied_reason, _networkLib, "nw_path_get_unsatisfied_reason") })
+	_register("nw_path_get_unsatisfied_reason", func() {
+		purego.RegisterLibFunc(&_nw_path_get_unsatisfied_reason, _networkLib, "nw_path_get_unsatisfied_reason")
+	})
 	_register("nw_path_has_dns", func() { purego.RegisterLibFunc(&_nw_path_has_dns, _networkLib, "nw_path_has_dns") })
 	_register("nw_path_has_ipv4", func() { purego.RegisterLibFunc(&_nw_path_has_ipv4, _networkLib, "nw_path_has_ipv4") })
 	_register("nw_path_has_ipv6", func() { purego.RegisterLibFunc(&_nw_path_has_ipv6, _networkLib, "nw_path_has_ipv6") })
 	_register("nw_path_is_constrained", func() { purego.RegisterLibFunc(&_nw_path_is_constrained, _networkLib, "nw_path_is_constrained") })
 	_register("nw_path_is_equal", func() { purego.RegisterLibFunc(&_nw_path_is_equal, _networkLib, "nw_path_is_equal") })
 	_register("nw_path_is_expensive", func() { purego.RegisterLibFunc(&_nw_path_is_expensive, _networkLib, "nw_path_is_expensive") })
-	_register("nw_path_is_ultra_constrained", func() { purego.RegisterLibFunc(&_nw_path_is_ultra_constrained, _networkLib, "nw_path_is_ultra_constrained") })
+	_register("nw_path_is_ultra_constrained", func() {
+		purego.RegisterLibFunc(&_nw_path_is_ultra_constrained, _networkLib, "nw_path_is_ultra_constrained")
+	})
 	_register("nw_path_monitor_cancel", func() { purego.RegisterLibFunc(&_nw_path_monitor_cancel, _networkLib, "nw_path_monitor_cancel") })
 	_register("nw_path_monitor_create", func() { purego.RegisterLibFunc(&_nw_path_monitor_create, _networkLib, "nw_path_monitor_create") })
-	_register("nw_path_monitor_create_for_ethernet_channel", func() { purego.RegisterLibFunc(&_nw_path_monitor_create_for_ethernet_channel, _networkLib, "nw_path_monitor_create_for_ethernet_channel") })
-	_register("nw_path_monitor_create_with_type", func() { purego.RegisterLibFunc(&_nw_path_monitor_create_with_type, _networkLib, "nw_path_monitor_create_with_type") })
-	_register("nw_path_monitor_prohibit_interface_type", func() { purego.RegisterLibFunc(&_nw_path_monitor_prohibit_interface_type, _networkLib, "nw_path_monitor_prohibit_interface_type") })
-	_register("nw_path_monitor_set_cancel_handler", func() { purego.RegisterLibFunc(&_nw_path_monitor_set_cancel_handler, _networkLib, "nw_path_monitor_set_cancel_handler") })
+	_register("nw_path_monitor_create_for_ethernet_channel", func() {
+		purego.RegisterLibFunc(&_nw_path_monitor_create_for_ethernet_channel, _networkLib, "nw_path_monitor_create_for_ethernet_channel")
+	})
+	_register("nw_path_monitor_create_with_type", func() {
+		purego.RegisterLibFunc(&_nw_path_monitor_create_with_type, _networkLib, "nw_path_monitor_create_with_type")
+	})
+	_register("nw_path_monitor_prohibit_interface_type", func() {
+		purego.RegisterLibFunc(&_nw_path_monitor_prohibit_interface_type, _networkLib, "nw_path_monitor_prohibit_interface_type")
+	})
+	_register("nw_path_monitor_set_cancel_handler", func() {
+		purego.RegisterLibFunc(&_nw_path_monitor_set_cancel_handler, _networkLib, "nw_path_monitor_set_cancel_handler")
+	})
 	_register("nw_path_monitor_set_queue", func() { purego.RegisterLibFunc(&_nw_path_monitor_set_queue, _networkLib, "nw_path_monitor_set_queue") })
-	_register("nw_path_monitor_set_update_handler", func() { purego.RegisterLibFunc(&_nw_path_monitor_set_update_handler, _networkLib, "nw_path_monitor_set_update_handler") })
+	_register("nw_path_monitor_set_update_handler", func() {
+		purego.RegisterLibFunc(&_nw_path_monitor_set_update_handler, _networkLib, "nw_path_monitor_set_update_handler")
+	})
 	_register("nw_path_monitor_start", func() { purego.RegisterLibFunc(&_nw_path_monitor_start, _networkLib, "nw_path_monitor_start") })
-	_register("nw_path_uses_interface_type", func() { purego.RegisterLibFunc(&_nw_path_uses_interface_type, _networkLib, "nw_path_uses_interface_type") })
-	_register("nw_privacy_context_add_proxy", func() { purego.RegisterLibFunc(&_nw_privacy_context_add_proxy, _networkLib, "nw_privacy_context_add_proxy") })
-	_register("nw_privacy_context_clear_proxies", func() { purego.RegisterLibFunc(&_nw_privacy_context_clear_proxies, _networkLib, "nw_privacy_context_clear_proxies") })
+	_register("nw_path_uses_interface_type", func() {
+		purego.RegisterLibFunc(&_nw_path_uses_interface_type, _networkLib, "nw_path_uses_interface_type")
+	})
+	_register("nw_privacy_context_add_proxy", func() {
+		purego.RegisterLibFunc(&_nw_privacy_context_add_proxy, _networkLib, "nw_privacy_context_add_proxy")
+	})
+	_register("nw_privacy_context_clear_proxies", func() {
+		purego.RegisterLibFunc(&_nw_privacy_context_clear_proxies, _networkLib, "nw_privacy_context_clear_proxies")
+	})
 	_register("nw_privacy_context_create", func() { purego.RegisterLibFunc(&_nw_privacy_context_create, _networkLib, "nw_privacy_context_create") })
-	_register("nw_privacy_context_disable_logging", func() { purego.RegisterLibFunc(&_nw_privacy_context_disable_logging, _networkLib, "nw_privacy_context_disable_logging") })
-	_register("nw_privacy_context_flush_cache", func() { purego.RegisterLibFunc(&_nw_privacy_context_flush_cache, _networkLib, "nw_privacy_context_flush_cache") })
-	_register("nw_privacy_context_require_encrypted_name_resolution", func() { purego.RegisterLibFunc(&_nw_privacy_context_require_encrypted_name_resolution, _networkLib, "nw_privacy_context_require_encrypted_name_resolution") })
-	_register("nw_protocol_copy_ip_definition", func() { purego.RegisterLibFunc(&_nw_protocol_copy_ip_definition, _networkLib, "nw_protocol_copy_ip_definition") })
-	_register("nw_protocol_copy_quic_definition", func() { purego.RegisterLibFunc(&_nw_protocol_copy_quic_definition, _networkLib, "nw_protocol_copy_quic_definition") })
-	_register("nw_protocol_copy_tcp_definition", func() { purego.RegisterLibFunc(&_nw_protocol_copy_tcp_definition, _networkLib, "nw_protocol_copy_tcp_definition") })
-	_register("nw_protocol_copy_tls_definition", func() { purego.RegisterLibFunc(&_nw_protocol_copy_tls_definition, _networkLib, "nw_protocol_copy_tls_definition") })
-	_register("nw_protocol_copy_udp_definition", func() { purego.RegisterLibFunc(&_nw_protocol_copy_udp_definition, _networkLib, "nw_protocol_copy_udp_definition") })
-	_register("nw_protocol_copy_ws_definition", func() { purego.RegisterLibFunc(&_nw_protocol_copy_ws_definition, _networkLib, "nw_protocol_copy_ws_definition") })
-	_register("nw_protocol_definition_is_equal", func() { purego.RegisterLibFunc(&_nw_protocol_definition_is_equal, _networkLib, "nw_protocol_definition_is_equal") })
-	_register("nw_protocol_metadata_copy_definition", func() { purego.RegisterLibFunc(&_nw_protocol_metadata_copy_definition, _networkLib, "nw_protocol_metadata_copy_definition") })
-	_register("nw_protocol_metadata_is_framer_message", func() { purego.RegisterLibFunc(&_nw_protocol_metadata_is_framer_message, _networkLib, "nw_protocol_metadata_is_framer_message") })
-	_register("nw_protocol_metadata_is_ip", func() { purego.RegisterLibFunc(&_nw_protocol_metadata_is_ip, _networkLib, "nw_protocol_metadata_is_ip") })
-	_register("nw_protocol_metadata_is_quic", func() { purego.RegisterLibFunc(&_nw_protocol_metadata_is_quic, _networkLib, "nw_protocol_metadata_is_quic") })
-	_register("nw_protocol_metadata_is_tcp", func() { purego.RegisterLibFunc(&_nw_protocol_metadata_is_tcp, _networkLib, "nw_protocol_metadata_is_tcp") })
-	_register("nw_protocol_metadata_is_tls", func() { purego.RegisterLibFunc(&_nw_protocol_metadata_is_tls, _networkLib, "nw_protocol_metadata_is_tls") })
-	_register("nw_protocol_metadata_is_udp", func() { purego.RegisterLibFunc(&_nw_protocol_metadata_is_udp, _networkLib, "nw_protocol_metadata_is_udp") })
-	_register("nw_protocol_metadata_is_ws", func() { purego.RegisterLibFunc(&_nw_protocol_metadata_is_ws, _networkLib, "nw_protocol_metadata_is_ws") })
-	_register("nw_protocol_options_copy_definition", func() { purego.RegisterLibFunc(&_nw_protocol_options_copy_definition, _networkLib, "nw_protocol_options_copy_definition") })
-	_register("nw_protocol_options_is_quic", func() { purego.RegisterLibFunc(&_nw_protocol_options_is_quic, _networkLib, "nw_protocol_options_is_quic") })
-	_register("nw_protocol_stack_clear_application_protocols", func() { purego.RegisterLibFunc(&_nw_protocol_stack_clear_application_protocols, _networkLib, "nw_protocol_stack_clear_application_protocols") })
-	_register("nw_protocol_stack_copy_internet_protocol", func() { purego.RegisterLibFunc(&_nw_protocol_stack_copy_internet_protocol, _networkLib, "nw_protocol_stack_copy_internet_protocol") })
-	_register("nw_protocol_stack_copy_transport_protocol", func() { purego.RegisterLibFunc(&_nw_protocol_stack_copy_transport_protocol, _networkLib, "nw_protocol_stack_copy_transport_protocol") })
-	_register("nw_protocol_stack_iterate_application_protocols", func() { purego.RegisterLibFunc(&_nw_protocol_stack_iterate_application_protocols, _networkLib, "nw_protocol_stack_iterate_application_protocols") })
-	_register("nw_protocol_stack_prepend_application_protocol", func() { purego.RegisterLibFunc(&_nw_protocol_stack_prepend_application_protocol, _networkLib, "nw_protocol_stack_prepend_application_protocol") })
-	_register("nw_protocol_stack_set_transport_protocol", func() { purego.RegisterLibFunc(&_nw_protocol_stack_set_transport_protocol, _networkLib, "nw_protocol_stack_set_transport_protocol") })
-	_register("nw_proxy_config_add_excluded_domain", func() { purego.RegisterLibFunc(&_nw_proxy_config_add_excluded_domain, _networkLib, "nw_proxy_config_add_excluded_domain") })
-	_register("nw_proxy_config_add_match_domain", func() { purego.RegisterLibFunc(&_nw_proxy_config_add_match_domain, _networkLib, "nw_proxy_config_add_match_domain") })
-	_register("nw_proxy_config_clear_excluded_domains", func() { purego.RegisterLibFunc(&_nw_proxy_config_clear_excluded_domains, _networkLib, "nw_proxy_config_clear_excluded_domains") })
-	_register("nw_proxy_config_clear_match_domains", func() { purego.RegisterLibFunc(&_nw_proxy_config_clear_match_domains, _networkLib, "nw_proxy_config_clear_match_domains") })
-	_register("nw_proxy_config_create_http_connect", func() { purego.RegisterLibFunc(&_nw_proxy_config_create_http_connect, _networkLib, "nw_proxy_config_create_http_connect") })
-	_register("nw_proxy_config_create_oblivious_http", func() { purego.RegisterLibFunc(&_nw_proxy_config_create_oblivious_http, _networkLib, "nw_proxy_config_create_oblivious_http") })
-	_register("nw_proxy_config_create_relay", func() { purego.RegisterLibFunc(&_nw_proxy_config_create_relay, _networkLib, "nw_proxy_config_create_relay") })
-	_register("nw_proxy_config_create_socksv5", func() { purego.RegisterLibFunc(&_nw_proxy_config_create_socksv5, _networkLib, "nw_proxy_config_create_socksv5") })
-	_register("nw_proxy_config_enumerate_excluded_domains", func() { purego.RegisterLibFunc(&_nw_proxy_config_enumerate_excluded_domains, _networkLib, "nw_proxy_config_enumerate_excluded_domains") })
-	_register("nw_proxy_config_enumerate_match_domains", func() { purego.RegisterLibFunc(&_nw_proxy_config_enumerate_match_domains, _networkLib, "nw_proxy_config_enumerate_match_domains") })
-	_register("nw_proxy_config_get_failover_allowed", func() { purego.RegisterLibFunc(&_nw_proxy_config_get_failover_allowed, _networkLib, "nw_proxy_config_get_failover_allowed") })
-	_register("nw_proxy_config_set_failover_allowed", func() { purego.RegisterLibFunc(&_nw_proxy_config_set_failover_allowed, _networkLib, "nw_proxy_config_set_failover_allowed") })
-	_register("nw_proxy_config_set_username_and_password", func() { purego.RegisterLibFunc(&_nw_proxy_config_set_username_and_password, _networkLib, "nw_proxy_config_set_username_and_password") })
-	_register("nw_quic_add_tls_application_protocol", func() { purego.RegisterLibFunc(&_nw_quic_add_tls_application_protocol, _networkLib, "nw_quic_add_tls_application_protocol") })
-	_register("nw_quic_copy_sec_protocol_metadata", func() { purego.RegisterLibFunc(&_nw_quic_copy_sec_protocol_metadata, _networkLib, "nw_quic_copy_sec_protocol_metadata") })
-	_register("nw_quic_copy_sec_protocol_options", func() { purego.RegisterLibFunc(&_nw_quic_copy_sec_protocol_options, _networkLib, "nw_quic_copy_sec_protocol_options") })
+	_register("nw_privacy_context_disable_logging", func() {
+		purego.RegisterLibFunc(&_nw_privacy_context_disable_logging, _networkLib, "nw_privacy_context_disable_logging")
+	})
+	_register("nw_privacy_context_flush_cache", func() {
+		purego.RegisterLibFunc(&_nw_privacy_context_flush_cache, _networkLib, "nw_privacy_context_flush_cache")
+	})
+	_register("nw_privacy_context_require_encrypted_name_resolution", func() {
+		purego.RegisterLibFunc(&_nw_privacy_context_require_encrypted_name_resolution, _networkLib, "nw_privacy_context_require_encrypted_name_resolution")
+	})
+	_register("nw_protocol_copy_ip_definition", func() {
+		purego.RegisterLibFunc(&_nw_protocol_copy_ip_definition, _networkLib, "nw_protocol_copy_ip_definition")
+	})
+	_register("nw_protocol_copy_quic_definition", func() {
+		purego.RegisterLibFunc(&_nw_protocol_copy_quic_definition, _networkLib, "nw_protocol_copy_quic_definition")
+	})
+	_register("nw_protocol_copy_tcp_definition", func() {
+		purego.RegisterLibFunc(&_nw_protocol_copy_tcp_definition, _networkLib, "nw_protocol_copy_tcp_definition")
+	})
+	_register("nw_protocol_copy_tls_definition", func() {
+		purego.RegisterLibFunc(&_nw_protocol_copy_tls_definition, _networkLib, "nw_protocol_copy_tls_definition")
+	})
+	_register("nw_protocol_copy_udp_definition", func() {
+		purego.RegisterLibFunc(&_nw_protocol_copy_udp_definition, _networkLib, "nw_protocol_copy_udp_definition")
+	})
+	_register("nw_protocol_copy_ws_definition", func() {
+		purego.RegisterLibFunc(&_nw_protocol_copy_ws_definition, _networkLib, "nw_protocol_copy_ws_definition")
+	})
+	_register("nw_protocol_definition_is_equal", func() {
+		purego.RegisterLibFunc(&_nw_protocol_definition_is_equal, _networkLib, "nw_protocol_definition_is_equal")
+	})
+	_register("nw_protocol_metadata_copy_definition", func() {
+		purego.RegisterLibFunc(&_nw_protocol_metadata_copy_definition, _networkLib, "nw_protocol_metadata_copy_definition")
+	})
+	_register("nw_protocol_metadata_is_framer_message", func() {
+		purego.RegisterLibFunc(&_nw_protocol_metadata_is_framer_message, _networkLib, "nw_protocol_metadata_is_framer_message")
+	})
+	_register("nw_protocol_metadata_is_ip", func() {
+		purego.RegisterLibFunc(&_nw_protocol_metadata_is_ip, _networkLib, "nw_protocol_metadata_is_ip")
+	})
+	_register("nw_protocol_metadata_is_quic", func() {
+		purego.RegisterLibFunc(&_nw_protocol_metadata_is_quic, _networkLib, "nw_protocol_metadata_is_quic")
+	})
+	_register("nw_protocol_metadata_is_tcp", func() {
+		purego.RegisterLibFunc(&_nw_protocol_metadata_is_tcp, _networkLib, "nw_protocol_metadata_is_tcp")
+	})
+	_register("nw_protocol_metadata_is_tls", func() {
+		purego.RegisterLibFunc(&_nw_protocol_metadata_is_tls, _networkLib, "nw_protocol_metadata_is_tls")
+	})
+	_register("nw_protocol_metadata_is_udp", func() {
+		purego.RegisterLibFunc(&_nw_protocol_metadata_is_udp, _networkLib, "nw_protocol_metadata_is_udp")
+	})
+	_register("nw_protocol_metadata_is_ws", func() {
+		purego.RegisterLibFunc(&_nw_protocol_metadata_is_ws, _networkLib, "nw_protocol_metadata_is_ws")
+	})
+	_register("nw_protocol_options_copy_definition", func() {
+		purego.RegisterLibFunc(&_nw_protocol_options_copy_definition, _networkLib, "nw_protocol_options_copy_definition")
+	})
+	_register("nw_protocol_options_is_quic", func() {
+		purego.RegisterLibFunc(&_nw_protocol_options_is_quic, _networkLib, "nw_protocol_options_is_quic")
+	})
+	_register("nw_protocol_stack_clear_application_protocols", func() {
+		purego.RegisterLibFunc(&_nw_protocol_stack_clear_application_protocols, _networkLib, "nw_protocol_stack_clear_application_protocols")
+	})
+	_register("nw_protocol_stack_copy_internet_protocol", func() {
+		purego.RegisterLibFunc(&_nw_protocol_stack_copy_internet_protocol, _networkLib, "nw_protocol_stack_copy_internet_protocol")
+	})
+	_register("nw_protocol_stack_copy_transport_protocol", func() {
+		purego.RegisterLibFunc(&_nw_protocol_stack_copy_transport_protocol, _networkLib, "nw_protocol_stack_copy_transport_protocol")
+	})
+	_register("nw_protocol_stack_iterate_application_protocols", func() {
+		purego.RegisterLibFunc(&_nw_protocol_stack_iterate_application_protocols, _networkLib, "nw_protocol_stack_iterate_application_protocols")
+	})
+	_register("nw_protocol_stack_prepend_application_protocol", func() {
+		purego.RegisterLibFunc(&_nw_protocol_stack_prepend_application_protocol, _networkLib, "nw_protocol_stack_prepend_application_protocol")
+	})
+	_register("nw_protocol_stack_set_transport_protocol", func() {
+		purego.RegisterLibFunc(&_nw_protocol_stack_set_transport_protocol, _networkLib, "nw_protocol_stack_set_transport_protocol")
+	})
+	_register("nw_proxy_config_add_excluded_domain", func() {
+		purego.RegisterLibFunc(&_nw_proxy_config_add_excluded_domain, _networkLib, "nw_proxy_config_add_excluded_domain")
+	})
+	_register("nw_proxy_config_add_match_domain", func() {
+		purego.RegisterLibFunc(&_nw_proxy_config_add_match_domain, _networkLib, "nw_proxy_config_add_match_domain")
+	})
+	_register("nw_proxy_config_clear_excluded_domains", func() {
+		purego.RegisterLibFunc(&_nw_proxy_config_clear_excluded_domains, _networkLib, "nw_proxy_config_clear_excluded_domains")
+	})
+	_register("nw_proxy_config_clear_match_domains", func() {
+		purego.RegisterLibFunc(&_nw_proxy_config_clear_match_domains, _networkLib, "nw_proxy_config_clear_match_domains")
+	})
+	_register("nw_proxy_config_create_http_connect", func() {
+		purego.RegisterLibFunc(&_nw_proxy_config_create_http_connect, _networkLib, "nw_proxy_config_create_http_connect")
+	})
+	_register("nw_proxy_config_create_oblivious_http", func() {
+		purego.RegisterLibFunc(&_nw_proxy_config_create_oblivious_http, _networkLib, "nw_proxy_config_create_oblivious_http")
+	})
+	_register("nw_proxy_config_create_relay", func() {
+		purego.RegisterLibFunc(&_nw_proxy_config_create_relay, _networkLib, "nw_proxy_config_create_relay")
+	})
+	_register("nw_proxy_config_create_socksv5", func() {
+		purego.RegisterLibFunc(&_nw_proxy_config_create_socksv5, _networkLib, "nw_proxy_config_create_socksv5")
+	})
+	_register("nw_proxy_config_enumerate_excluded_domains", func() {
+		purego.RegisterLibFunc(&_nw_proxy_config_enumerate_excluded_domains, _networkLib, "nw_proxy_config_enumerate_excluded_domains")
+	})
+	_register("nw_proxy_config_enumerate_match_domains", func() {
+		purego.RegisterLibFunc(&_nw_proxy_config_enumerate_match_domains, _networkLib, "nw_proxy_config_enumerate_match_domains")
+	})
+	_register("nw_proxy_config_get_failover_allowed", func() {
+		purego.RegisterLibFunc(&_nw_proxy_config_get_failover_allowed, _networkLib, "nw_proxy_config_get_failover_allowed")
+	})
+	_register("nw_proxy_config_set_failover_allowed", func() {
+		purego.RegisterLibFunc(&_nw_proxy_config_set_failover_allowed, _networkLib, "nw_proxy_config_set_failover_allowed")
+	})
+	_register("nw_proxy_config_set_username_and_password", func() {
+		purego.RegisterLibFunc(&_nw_proxy_config_set_username_and_password, _networkLib, "nw_proxy_config_set_username_and_password")
+	})
+	_register("nw_quic_add_tls_application_protocol", func() {
+		purego.RegisterLibFunc(&_nw_quic_add_tls_application_protocol, _networkLib, "nw_quic_add_tls_application_protocol")
+	})
+	_register("nw_quic_copy_sec_protocol_metadata", func() {
+		purego.RegisterLibFunc(&_nw_quic_copy_sec_protocol_metadata, _networkLib, "nw_quic_copy_sec_protocol_metadata")
+	})
+	_register("nw_quic_copy_sec_protocol_options", func() {
+		purego.RegisterLibFunc(&_nw_quic_copy_sec_protocol_options, _networkLib, "nw_quic_copy_sec_protocol_options")
+	})
 	_register("nw_quic_create_options", func() { purego.RegisterLibFunc(&_nw_quic_create_options, _networkLib, "nw_quic_create_options") })
-	_register("nw_quic_get_application_error", func() { purego.RegisterLibFunc(&_nw_quic_get_application_error, _networkLib, "nw_quic_get_application_error") })
-	_register("nw_quic_get_application_error_reason", func() { purego.RegisterLibFunc(&_nw_quic_get_application_error_reason, _networkLib, "nw_quic_get_application_error_reason") })
+	_register("nw_quic_get_application_error", func() {
+		purego.RegisterLibFunc(&_nw_quic_get_application_error, _networkLib, "nw_quic_get_application_error")
+	})
+	_register("nw_quic_get_application_error_reason", func() {
+		purego.RegisterLibFunc(&_nw_quic_get_application_error_reason, _networkLib, "nw_quic_get_application_error_reason")
+	})
 	_register("nw_quic_get_idle_timeout", func() { purego.RegisterLibFunc(&_nw_quic_get_idle_timeout, _networkLib, "nw_quic_get_idle_timeout") })
-	_register("nw_quic_get_initial_max_data", func() { purego.RegisterLibFunc(&_nw_quic_get_initial_max_data, _networkLib, "nw_quic_get_initial_max_data") })
-	_register("nw_quic_get_initial_max_stream_data_bidirectional_local", func() { purego.RegisterLibFunc(&_nw_quic_get_initial_max_stream_data_bidirectional_local, _networkLib, "nw_quic_get_initial_max_stream_data_bidirectional_local") })
-	_register("nw_quic_get_initial_max_stream_data_bidirectional_remote", func() { purego.RegisterLibFunc(&_nw_quic_get_initial_max_stream_data_bidirectional_remote, _networkLib, "nw_quic_get_initial_max_stream_data_bidirectional_remote") })
-	_register("nw_quic_get_initial_max_stream_data_unidirectional", func() { purego.RegisterLibFunc(&_nw_quic_get_initial_max_stream_data_unidirectional, _networkLib, "nw_quic_get_initial_max_stream_data_unidirectional") })
-	_register("nw_quic_get_initial_max_streams_bidirectional", func() { purego.RegisterLibFunc(&_nw_quic_get_initial_max_streams_bidirectional, _networkLib, "nw_quic_get_initial_max_streams_bidirectional") })
-	_register("nw_quic_get_initial_max_streams_unidirectional", func() { purego.RegisterLibFunc(&_nw_quic_get_initial_max_streams_unidirectional, _networkLib, "nw_quic_get_initial_max_streams_unidirectional") })
-	_register("nw_quic_get_keepalive_interval", func() { purego.RegisterLibFunc(&_nw_quic_get_keepalive_interval, _networkLib, "nw_quic_get_keepalive_interval") })
-	_register("nw_quic_get_local_max_streams_bidirectional", func() { purego.RegisterLibFunc(&_nw_quic_get_local_max_streams_bidirectional, _networkLib, "nw_quic_get_local_max_streams_bidirectional") })
-	_register("nw_quic_get_local_max_streams_unidirectional", func() { purego.RegisterLibFunc(&_nw_quic_get_local_max_streams_unidirectional, _networkLib, "nw_quic_get_local_max_streams_unidirectional") })
-	_register("nw_quic_get_max_datagram_frame_size", func() { purego.RegisterLibFunc(&_nw_quic_get_max_datagram_frame_size, _networkLib, "nw_quic_get_max_datagram_frame_size") })
-	_register("nw_quic_get_max_udp_payload_size", func() { purego.RegisterLibFunc(&_nw_quic_get_max_udp_payload_size, _networkLib, "nw_quic_get_max_udp_payload_size") })
-	_register("nw_quic_get_remote_idle_timeout", func() { purego.RegisterLibFunc(&_nw_quic_get_remote_idle_timeout, _networkLib, "nw_quic_get_remote_idle_timeout") })
-	_register("nw_quic_get_remote_max_streams_bidirectional", func() { purego.RegisterLibFunc(&_nw_quic_get_remote_max_streams_bidirectional, _networkLib, "nw_quic_get_remote_max_streams_bidirectional") })
-	_register("nw_quic_get_remote_max_streams_unidirectional", func() { purego.RegisterLibFunc(&_nw_quic_get_remote_max_streams_unidirectional, _networkLib, "nw_quic_get_remote_max_streams_unidirectional") })
-	_register("nw_quic_get_stream_application_error", func() { purego.RegisterLibFunc(&_nw_quic_get_stream_application_error, _networkLib, "nw_quic_get_stream_application_error") })
+	_register("nw_quic_get_initial_max_data", func() {
+		purego.RegisterLibFunc(&_nw_quic_get_initial_max_data, _networkLib, "nw_quic_get_initial_max_data")
+	})
+	_register("nw_quic_get_initial_max_stream_data_bidirectional_local", func() {
+		purego.RegisterLibFunc(&_nw_quic_get_initial_max_stream_data_bidirectional_local, _networkLib, "nw_quic_get_initial_max_stream_data_bidirectional_local")
+	})
+	_register("nw_quic_get_initial_max_stream_data_bidirectional_remote", func() {
+		purego.RegisterLibFunc(&_nw_quic_get_initial_max_stream_data_bidirectional_remote, _networkLib, "nw_quic_get_initial_max_stream_data_bidirectional_remote")
+	})
+	_register("nw_quic_get_initial_max_stream_data_unidirectional", func() {
+		purego.RegisterLibFunc(&_nw_quic_get_initial_max_stream_data_unidirectional, _networkLib, "nw_quic_get_initial_max_stream_data_unidirectional")
+	})
+	_register("nw_quic_get_initial_max_streams_bidirectional", func() {
+		purego.RegisterLibFunc(&_nw_quic_get_initial_max_streams_bidirectional, _networkLib, "nw_quic_get_initial_max_streams_bidirectional")
+	})
+	_register("nw_quic_get_initial_max_streams_unidirectional", func() {
+		purego.RegisterLibFunc(&_nw_quic_get_initial_max_streams_unidirectional, _networkLib, "nw_quic_get_initial_max_streams_unidirectional")
+	})
+	_register("nw_quic_get_keepalive_interval", func() {
+		purego.RegisterLibFunc(&_nw_quic_get_keepalive_interval, _networkLib, "nw_quic_get_keepalive_interval")
+	})
+	_register("nw_quic_get_local_max_streams_bidirectional", func() {
+		purego.RegisterLibFunc(&_nw_quic_get_local_max_streams_bidirectional, _networkLib, "nw_quic_get_local_max_streams_bidirectional")
+	})
+	_register("nw_quic_get_local_max_streams_unidirectional", func() {
+		purego.RegisterLibFunc(&_nw_quic_get_local_max_streams_unidirectional, _networkLib, "nw_quic_get_local_max_streams_unidirectional")
+	})
+	_register("nw_quic_get_max_datagram_frame_size", func() {
+		purego.RegisterLibFunc(&_nw_quic_get_max_datagram_frame_size, _networkLib, "nw_quic_get_max_datagram_frame_size")
+	})
+	_register("nw_quic_get_max_udp_payload_size", func() {
+		purego.RegisterLibFunc(&_nw_quic_get_max_udp_payload_size, _networkLib, "nw_quic_get_max_udp_payload_size")
+	})
+	_register("nw_quic_get_remote_idle_timeout", func() {
+		purego.RegisterLibFunc(&_nw_quic_get_remote_idle_timeout, _networkLib, "nw_quic_get_remote_idle_timeout")
+	})
+	_register("nw_quic_get_remote_max_streams_bidirectional", func() {
+		purego.RegisterLibFunc(&_nw_quic_get_remote_max_streams_bidirectional, _networkLib, "nw_quic_get_remote_max_streams_bidirectional")
+	})
+	_register("nw_quic_get_remote_max_streams_unidirectional", func() {
+		purego.RegisterLibFunc(&_nw_quic_get_remote_max_streams_unidirectional, _networkLib, "nw_quic_get_remote_max_streams_unidirectional")
+	})
+	_register("nw_quic_get_stream_application_error", func() {
+		purego.RegisterLibFunc(&_nw_quic_get_stream_application_error, _networkLib, "nw_quic_get_stream_application_error")
+	})
 	_register("nw_quic_get_stream_id", func() { purego.RegisterLibFunc(&_nw_quic_get_stream_id, _networkLib, "nw_quic_get_stream_id") })
-	_register("nw_quic_get_stream_is_datagram", func() { purego.RegisterLibFunc(&_nw_quic_get_stream_is_datagram, _networkLib, "nw_quic_get_stream_is_datagram") })
-	_register("nw_quic_get_stream_is_unidirectional", func() { purego.RegisterLibFunc(&_nw_quic_get_stream_is_unidirectional, _networkLib, "nw_quic_get_stream_is_unidirectional") })
+	_register("nw_quic_get_stream_is_datagram", func() {
+		purego.RegisterLibFunc(&_nw_quic_get_stream_is_datagram, _networkLib, "nw_quic_get_stream_is_datagram")
+	})
+	_register("nw_quic_get_stream_is_unidirectional", func() {
+		purego.RegisterLibFunc(&_nw_quic_get_stream_is_unidirectional, _networkLib, "nw_quic_get_stream_is_unidirectional")
+	})
 	_register("nw_quic_get_stream_type", func() { purego.RegisterLibFunc(&_nw_quic_get_stream_type, _networkLib, "nw_quic_get_stream_type") })
-	_register("nw_quic_get_stream_usable_datagram_frame_size", func() { purego.RegisterLibFunc(&_nw_quic_get_stream_usable_datagram_frame_size, _networkLib, "nw_quic_get_stream_usable_datagram_frame_size") })
-	_register("nw_quic_set_application_error", func() { purego.RegisterLibFunc(&_nw_quic_set_application_error, _networkLib, "nw_quic_set_application_error") })
+	_register("nw_quic_get_stream_usable_datagram_frame_size", func() {
+		purego.RegisterLibFunc(&_nw_quic_get_stream_usable_datagram_frame_size, _networkLib, "nw_quic_get_stream_usable_datagram_frame_size")
+	})
+	_register("nw_quic_set_application_error", func() {
+		purego.RegisterLibFunc(&_nw_quic_set_application_error, _networkLib, "nw_quic_set_application_error")
+	})
 	_register("nw_quic_set_idle_timeout", func() { purego.RegisterLibFunc(&_nw_quic_set_idle_timeout, _networkLib, "nw_quic_set_idle_timeout") })
-	_register("nw_quic_set_initial_max_data", func() { purego.RegisterLibFunc(&_nw_quic_set_initial_max_data, _networkLib, "nw_quic_set_initial_max_data") })
-	_register("nw_quic_set_initial_max_stream_data_bidirectional_local", func() { purego.RegisterLibFunc(&_nw_quic_set_initial_max_stream_data_bidirectional_local, _networkLib, "nw_quic_set_initial_max_stream_data_bidirectional_local") })
-	_register("nw_quic_set_initial_max_stream_data_bidirectional_remote", func() { purego.RegisterLibFunc(&_nw_quic_set_initial_max_stream_data_bidirectional_remote, _networkLib, "nw_quic_set_initial_max_stream_data_bidirectional_remote") })
-	_register("nw_quic_set_initial_max_stream_data_unidirectional", func() { purego.RegisterLibFunc(&_nw_quic_set_initial_max_stream_data_unidirectional, _networkLib, "nw_quic_set_initial_max_stream_data_unidirectional") })
-	_register("nw_quic_set_initial_max_streams_bidirectional", func() { purego.RegisterLibFunc(&_nw_quic_set_initial_max_streams_bidirectional, _networkLib, "nw_quic_set_initial_max_streams_bidirectional") })
-	_register("nw_quic_set_initial_max_streams_unidirectional", func() { purego.RegisterLibFunc(&_nw_quic_set_initial_max_streams_unidirectional, _networkLib, "nw_quic_set_initial_max_streams_unidirectional") })
-	_register("nw_quic_set_keepalive_interval", func() { purego.RegisterLibFunc(&_nw_quic_set_keepalive_interval, _networkLib, "nw_quic_set_keepalive_interval") })
-	_register("nw_quic_set_local_max_streams_bidirectional", func() { purego.RegisterLibFunc(&_nw_quic_set_local_max_streams_bidirectional, _networkLib, "nw_quic_set_local_max_streams_bidirectional") })
-	_register("nw_quic_set_local_max_streams_unidirectional", func() { purego.RegisterLibFunc(&_nw_quic_set_local_max_streams_unidirectional, _networkLib, "nw_quic_set_local_max_streams_unidirectional") })
-	_register("nw_quic_set_max_datagram_frame_size", func() { purego.RegisterLibFunc(&_nw_quic_set_max_datagram_frame_size, _networkLib, "nw_quic_set_max_datagram_frame_size") })
-	_register("nw_quic_set_max_udp_payload_size", func() { purego.RegisterLibFunc(&_nw_quic_set_max_udp_payload_size, _networkLib, "nw_quic_set_max_udp_payload_size") })
-	_register("nw_quic_set_stream_application_error", func() { purego.RegisterLibFunc(&_nw_quic_set_stream_application_error, _networkLib, "nw_quic_set_stream_application_error") })
-	_register("nw_quic_set_stream_is_datagram", func() { purego.RegisterLibFunc(&_nw_quic_set_stream_is_datagram, _networkLib, "nw_quic_set_stream_is_datagram") })
-	_register("nw_quic_set_stream_is_unidirectional", func() { purego.RegisterLibFunc(&_nw_quic_set_stream_is_unidirectional, _networkLib, "nw_quic_set_stream_is_unidirectional") })
-	_register("nw_relay_hop_add_additional_http_header_field", func() { purego.RegisterLibFunc(&_nw_relay_hop_add_additional_http_header_field, _networkLib, "nw_relay_hop_add_additional_http_header_field") })
+	_register("nw_quic_set_initial_max_data", func() {
+		purego.RegisterLibFunc(&_nw_quic_set_initial_max_data, _networkLib, "nw_quic_set_initial_max_data")
+	})
+	_register("nw_quic_set_initial_max_stream_data_bidirectional_local", func() {
+		purego.RegisterLibFunc(&_nw_quic_set_initial_max_stream_data_bidirectional_local, _networkLib, "nw_quic_set_initial_max_stream_data_bidirectional_local")
+	})
+	_register("nw_quic_set_initial_max_stream_data_bidirectional_remote", func() {
+		purego.RegisterLibFunc(&_nw_quic_set_initial_max_stream_data_bidirectional_remote, _networkLib, "nw_quic_set_initial_max_stream_data_bidirectional_remote")
+	})
+	_register("nw_quic_set_initial_max_stream_data_unidirectional", func() {
+		purego.RegisterLibFunc(&_nw_quic_set_initial_max_stream_data_unidirectional, _networkLib, "nw_quic_set_initial_max_stream_data_unidirectional")
+	})
+	_register("nw_quic_set_initial_max_streams_bidirectional", func() {
+		purego.RegisterLibFunc(&_nw_quic_set_initial_max_streams_bidirectional, _networkLib, "nw_quic_set_initial_max_streams_bidirectional")
+	})
+	_register("nw_quic_set_initial_max_streams_unidirectional", func() {
+		purego.RegisterLibFunc(&_nw_quic_set_initial_max_streams_unidirectional, _networkLib, "nw_quic_set_initial_max_streams_unidirectional")
+	})
+	_register("nw_quic_set_keepalive_interval", func() {
+		purego.RegisterLibFunc(&_nw_quic_set_keepalive_interval, _networkLib, "nw_quic_set_keepalive_interval")
+	})
+	_register("nw_quic_set_local_max_streams_bidirectional", func() {
+		purego.RegisterLibFunc(&_nw_quic_set_local_max_streams_bidirectional, _networkLib, "nw_quic_set_local_max_streams_bidirectional")
+	})
+	_register("nw_quic_set_local_max_streams_unidirectional", func() {
+		purego.RegisterLibFunc(&_nw_quic_set_local_max_streams_unidirectional, _networkLib, "nw_quic_set_local_max_streams_unidirectional")
+	})
+	_register("nw_quic_set_max_datagram_frame_size", func() {
+		purego.RegisterLibFunc(&_nw_quic_set_max_datagram_frame_size, _networkLib, "nw_quic_set_max_datagram_frame_size")
+	})
+	_register("nw_quic_set_max_udp_payload_size", func() {
+		purego.RegisterLibFunc(&_nw_quic_set_max_udp_payload_size, _networkLib, "nw_quic_set_max_udp_payload_size")
+	})
+	_register("nw_quic_set_stream_application_error", func() {
+		purego.RegisterLibFunc(&_nw_quic_set_stream_application_error, _networkLib, "nw_quic_set_stream_application_error")
+	})
+	_register("nw_quic_set_stream_is_datagram", func() {
+		purego.RegisterLibFunc(&_nw_quic_set_stream_is_datagram, _networkLib, "nw_quic_set_stream_is_datagram")
+	})
+	_register("nw_quic_set_stream_is_unidirectional", func() {
+		purego.RegisterLibFunc(&_nw_quic_set_stream_is_unidirectional, _networkLib, "nw_quic_set_stream_is_unidirectional")
+	})
+	_register("nw_relay_hop_add_additional_http_header_field", func() {
+		purego.RegisterLibFunc(&_nw_relay_hop_add_additional_http_header_field, _networkLib, "nw_relay_hop_add_additional_http_header_field")
+	})
 	_register("nw_relay_hop_create", func() { purego.RegisterLibFunc(&_nw_relay_hop_create, _networkLib, "nw_relay_hop_create") })
 	_register("nw_release", func() { purego.RegisterLibFunc(&_nw_release, _networkLib, "nw_release") })
-	_register("nw_resolution_report_copy_preferred_endpoint", func() { purego.RegisterLibFunc(&_nw_resolution_report_copy_preferred_endpoint, _networkLib, "nw_resolution_report_copy_preferred_endpoint") })
-	_register("nw_resolution_report_copy_successful_endpoint", func() { purego.RegisterLibFunc(&_nw_resolution_report_copy_successful_endpoint, _networkLib, "nw_resolution_report_copy_successful_endpoint") })
-	_register("nw_resolution_report_get_endpoint_count", func() { purego.RegisterLibFunc(&_nw_resolution_report_get_endpoint_count, _networkLib, "nw_resolution_report_get_endpoint_count") })
-	_register("nw_resolution_report_get_milliseconds", func() { purego.RegisterLibFunc(&_nw_resolution_report_get_milliseconds, _networkLib, "nw_resolution_report_get_milliseconds") })
-	_register("nw_resolution_report_get_protocol", func() { purego.RegisterLibFunc(&_nw_resolution_report_get_protocol, _networkLib, "nw_resolution_report_get_protocol") })
-	_register("nw_resolution_report_get_source", func() { purego.RegisterLibFunc(&_nw_resolution_report_get_source, _networkLib, "nw_resolution_report_get_source") })
-	_register("nw_resolver_config_add_server_address", func() { purego.RegisterLibFunc(&_nw_resolver_config_add_server_address, _networkLib, "nw_resolver_config_add_server_address") })
-	_register("nw_resolver_config_create_https", func() { purego.RegisterLibFunc(&_nw_resolver_config_create_https, _networkLib, "nw_resolver_config_create_https") })
-	_register("nw_resolver_config_create_tls", func() { purego.RegisterLibFunc(&_nw_resolver_config_create_tls, _networkLib, "nw_resolver_config_create_tls") })
+	_register("nw_resolution_report_copy_preferred_endpoint", func() {
+		purego.RegisterLibFunc(&_nw_resolution_report_copy_preferred_endpoint, _networkLib, "nw_resolution_report_copy_preferred_endpoint")
+	})
+	_register("nw_resolution_report_copy_successful_endpoint", func() {
+		purego.RegisterLibFunc(&_nw_resolution_report_copy_successful_endpoint, _networkLib, "nw_resolution_report_copy_successful_endpoint")
+	})
+	_register("nw_resolution_report_get_endpoint_count", func() {
+		purego.RegisterLibFunc(&_nw_resolution_report_get_endpoint_count, _networkLib, "nw_resolution_report_get_endpoint_count")
+	})
+	_register("nw_resolution_report_get_milliseconds", func() {
+		purego.RegisterLibFunc(&_nw_resolution_report_get_milliseconds, _networkLib, "nw_resolution_report_get_milliseconds")
+	})
+	_register("nw_resolution_report_get_protocol", func() {
+		purego.RegisterLibFunc(&_nw_resolution_report_get_protocol, _networkLib, "nw_resolution_report_get_protocol")
+	})
+	_register("nw_resolution_report_get_source", func() {
+		purego.RegisterLibFunc(&_nw_resolution_report_get_source, _networkLib, "nw_resolution_report_get_source")
+	})
+	_register("nw_resolver_config_add_server_address", func() {
+		purego.RegisterLibFunc(&_nw_resolver_config_add_server_address, _networkLib, "nw_resolver_config_add_server_address")
+	})
+	_register("nw_resolver_config_create_https", func() {
+		purego.RegisterLibFunc(&_nw_resolver_config_create_https, _networkLib, "nw_resolver_config_create_https")
+	})
+	_register("nw_resolver_config_create_tls", func() {
+		purego.RegisterLibFunc(&_nw_resolver_config_create_tls, _networkLib, "nw_resolver_config_create_tls")
+	})
 	_register("nw_retain", func() { purego.RegisterLibFunc(&_nw_retain, _networkLib, "nw_retain") })
 	_register("nw_tcp_create_options", func() { purego.RegisterLibFunc(&_nw_tcp_create_options, _networkLib, "nw_tcp_create_options") })
-	_register("nw_tcp_get_available_receive_buffer", func() { purego.RegisterLibFunc(&_nw_tcp_get_available_receive_buffer, _networkLib, "nw_tcp_get_available_receive_buffer") })
-	_register("nw_tcp_get_available_send_buffer", func() { purego.RegisterLibFunc(&_nw_tcp_get_available_send_buffer, _networkLib, "nw_tcp_get_available_send_buffer") })
-	_register("nw_tcp_options_set_connection_timeout", func() { purego.RegisterLibFunc(&_nw_tcp_options_set_connection_timeout, _networkLib, "nw_tcp_options_set_connection_timeout") })
-	_register("nw_tcp_options_set_disable_ack_stretching", func() { purego.RegisterLibFunc(&_nw_tcp_options_set_disable_ack_stretching, _networkLib, "nw_tcp_options_set_disable_ack_stretching") })
-	_register("nw_tcp_options_set_disable_ecn", func() { purego.RegisterLibFunc(&_nw_tcp_options_set_disable_ecn, _networkLib, "nw_tcp_options_set_disable_ecn") })
-	_register("nw_tcp_options_set_enable_fast_open", func() { purego.RegisterLibFunc(&_nw_tcp_options_set_enable_fast_open, _networkLib, "nw_tcp_options_set_enable_fast_open") })
-	_register("nw_tcp_options_set_enable_keepalive", func() { purego.RegisterLibFunc(&_nw_tcp_options_set_enable_keepalive, _networkLib, "nw_tcp_options_set_enable_keepalive") })
-	_register("nw_tcp_options_set_keepalive_count", func() { purego.RegisterLibFunc(&_nw_tcp_options_set_keepalive_count, _networkLib, "nw_tcp_options_set_keepalive_count") })
-	_register("nw_tcp_options_set_keepalive_idle_time", func() { purego.RegisterLibFunc(&_nw_tcp_options_set_keepalive_idle_time, _networkLib, "nw_tcp_options_set_keepalive_idle_time") })
-	_register("nw_tcp_options_set_keepalive_interval", func() { purego.RegisterLibFunc(&_nw_tcp_options_set_keepalive_interval, _networkLib, "nw_tcp_options_set_keepalive_interval") })
-	_register("nw_tcp_options_set_maximum_segment_size", func() { purego.RegisterLibFunc(&_nw_tcp_options_set_maximum_segment_size, _networkLib, "nw_tcp_options_set_maximum_segment_size") })
-	_register("nw_tcp_options_set_multipath_force_version", func() { purego.RegisterLibFunc(&_nw_tcp_options_set_multipath_force_version, _networkLib, "nw_tcp_options_set_multipath_force_version") })
-	_register("nw_tcp_options_set_no_delay", func() { purego.RegisterLibFunc(&_nw_tcp_options_set_no_delay, _networkLib, "nw_tcp_options_set_no_delay") })
-	_register("nw_tcp_options_set_no_options", func() { purego.RegisterLibFunc(&_nw_tcp_options_set_no_options, _networkLib, "nw_tcp_options_set_no_options") })
-	_register("nw_tcp_options_set_no_push", func() { purego.RegisterLibFunc(&_nw_tcp_options_set_no_push, _networkLib, "nw_tcp_options_set_no_push") })
-	_register("nw_tcp_options_set_persist_timeout", func() { purego.RegisterLibFunc(&_nw_tcp_options_set_persist_timeout, _networkLib, "nw_tcp_options_set_persist_timeout") })
-	_register("nw_tcp_options_set_retransmit_connection_drop_time", func() { purego.RegisterLibFunc(&_nw_tcp_options_set_retransmit_connection_drop_time, _networkLib, "nw_tcp_options_set_retransmit_connection_drop_time") })
-	_register("nw_tcp_options_set_retransmit_fin_drop", func() { purego.RegisterLibFunc(&_nw_tcp_options_set_retransmit_fin_drop, _networkLib, "nw_tcp_options_set_retransmit_fin_drop") })
-	_register("nw_tls_copy_sec_protocol_metadata", func() { purego.RegisterLibFunc(&_nw_tls_copy_sec_protocol_metadata, _networkLib, "nw_tls_copy_sec_protocol_metadata") })
-	_register("nw_tls_copy_sec_protocol_options", func() { purego.RegisterLibFunc(&_nw_tls_copy_sec_protocol_options, _networkLib, "nw_tls_copy_sec_protocol_options") })
+	_register("nw_tcp_get_available_receive_buffer", func() {
+		purego.RegisterLibFunc(&_nw_tcp_get_available_receive_buffer, _networkLib, "nw_tcp_get_available_receive_buffer")
+	})
+	_register("nw_tcp_get_available_send_buffer", func() {
+		purego.RegisterLibFunc(&_nw_tcp_get_available_send_buffer, _networkLib, "nw_tcp_get_available_send_buffer")
+	})
+	_register("nw_tcp_options_set_connection_timeout", func() {
+		purego.RegisterLibFunc(&_nw_tcp_options_set_connection_timeout, _networkLib, "nw_tcp_options_set_connection_timeout")
+	})
+	_register("nw_tcp_options_set_disable_ack_stretching", func() {
+		purego.RegisterLibFunc(&_nw_tcp_options_set_disable_ack_stretching, _networkLib, "nw_tcp_options_set_disable_ack_stretching")
+	})
+	_register("nw_tcp_options_set_disable_ecn", func() {
+		purego.RegisterLibFunc(&_nw_tcp_options_set_disable_ecn, _networkLib, "nw_tcp_options_set_disable_ecn")
+	})
+	_register("nw_tcp_options_set_enable_fast_open", func() {
+		purego.RegisterLibFunc(&_nw_tcp_options_set_enable_fast_open, _networkLib, "nw_tcp_options_set_enable_fast_open")
+	})
+	_register("nw_tcp_options_set_enable_keepalive", func() {
+		purego.RegisterLibFunc(&_nw_tcp_options_set_enable_keepalive, _networkLib, "nw_tcp_options_set_enable_keepalive")
+	})
+	_register("nw_tcp_options_set_keepalive_count", func() {
+		purego.RegisterLibFunc(&_nw_tcp_options_set_keepalive_count, _networkLib, "nw_tcp_options_set_keepalive_count")
+	})
+	_register("nw_tcp_options_set_keepalive_idle_time", func() {
+		purego.RegisterLibFunc(&_nw_tcp_options_set_keepalive_idle_time, _networkLib, "nw_tcp_options_set_keepalive_idle_time")
+	})
+	_register("nw_tcp_options_set_keepalive_interval", func() {
+		purego.RegisterLibFunc(&_nw_tcp_options_set_keepalive_interval, _networkLib, "nw_tcp_options_set_keepalive_interval")
+	})
+	_register("nw_tcp_options_set_maximum_segment_size", func() {
+		purego.RegisterLibFunc(&_nw_tcp_options_set_maximum_segment_size, _networkLib, "nw_tcp_options_set_maximum_segment_size")
+	})
+	_register("nw_tcp_options_set_multipath_force_version", func() {
+		purego.RegisterLibFunc(&_nw_tcp_options_set_multipath_force_version, _networkLib, "nw_tcp_options_set_multipath_force_version")
+	})
+	_register("nw_tcp_options_set_no_delay", func() {
+		purego.RegisterLibFunc(&_nw_tcp_options_set_no_delay, _networkLib, "nw_tcp_options_set_no_delay")
+	})
+	_register("nw_tcp_options_set_no_options", func() {
+		purego.RegisterLibFunc(&_nw_tcp_options_set_no_options, _networkLib, "nw_tcp_options_set_no_options")
+	})
+	_register("nw_tcp_options_set_no_push", func() {
+		purego.RegisterLibFunc(&_nw_tcp_options_set_no_push, _networkLib, "nw_tcp_options_set_no_push")
+	})
+	_register("nw_tcp_options_set_persist_timeout", func() {
+		purego.RegisterLibFunc(&_nw_tcp_options_set_persist_timeout, _networkLib, "nw_tcp_options_set_persist_timeout")
+	})
+	_register("nw_tcp_options_set_retransmit_connection_drop_time", func() {
+		purego.RegisterLibFunc(&_nw_tcp_options_set_retransmit_connection_drop_time, _networkLib, "nw_tcp_options_set_retransmit_connection_drop_time")
+	})
+	_register("nw_tcp_options_set_retransmit_fin_drop", func() {
+		purego.RegisterLibFunc(&_nw_tcp_options_set_retransmit_fin_drop, _networkLib, "nw_tcp_options_set_retransmit_fin_drop")
+	})
+	_register("nw_tls_copy_sec_protocol_metadata", func() {
+		purego.RegisterLibFunc(&_nw_tls_copy_sec_protocol_metadata, _networkLib, "nw_tls_copy_sec_protocol_metadata")
+	})
+	_register("nw_tls_copy_sec_protocol_options", func() {
+		purego.RegisterLibFunc(&_nw_tls_copy_sec_protocol_options, _networkLib, "nw_tls_copy_sec_protocol_options")
+	})
 	_register("nw_tls_create_options", func() { purego.RegisterLibFunc(&_nw_tls_create_options, _networkLib, "nw_tls_create_options") })
-	_register("nw_txt_record_access_bytes", func() { purego.RegisterLibFunc(&_nw_txt_record_access_bytes, _networkLib, "nw_txt_record_access_bytes") })
+	_register("nw_txt_record_access_bytes", func() {
+		purego.RegisterLibFunc(&_nw_txt_record_access_bytes, _networkLib, "nw_txt_record_access_bytes")
+	})
 	_register("nw_txt_record_access_key", func() { purego.RegisterLibFunc(&_nw_txt_record_access_key, _networkLib, "nw_txt_record_access_key") })
 	_register("nw_txt_record_apply", func() { purego.RegisterLibFunc(&_nw_txt_record_apply, _networkLib, "nw_txt_record_apply") })
 	_register("nw_txt_record_copy", func() { purego.RegisterLibFunc(&_nw_txt_record_copy, _networkLib, "nw_txt_record_copy") })
-	_register("nw_txt_record_create_dictionary", func() { purego.RegisterLibFunc(&_nw_txt_record_create_dictionary, _networkLib, "nw_txt_record_create_dictionary") })
-	_register("nw_txt_record_create_with_bytes", func() { purego.RegisterLibFunc(&_nw_txt_record_create_with_bytes, _networkLib, "nw_txt_record_create_with_bytes") })
+	_register("nw_txt_record_create_dictionary", func() {
+		purego.RegisterLibFunc(&_nw_txt_record_create_dictionary, _networkLib, "nw_txt_record_create_dictionary")
+	})
+	_register("nw_txt_record_create_with_bytes", func() {
+		purego.RegisterLibFunc(&_nw_txt_record_create_with_bytes, _networkLib, "nw_txt_record_create_with_bytes")
+	})
 	_register("nw_txt_record_find_key", func() { purego.RegisterLibFunc(&_nw_txt_record_find_key, _networkLib, "nw_txt_record_find_key") })
-	_register("nw_txt_record_get_key_count", func() { purego.RegisterLibFunc(&_nw_txt_record_get_key_count, _networkLib, "nw_txt_record_get_key_count") })
-	_register("nw_txt_record_is_dictionary", func() { purego.RegisterLibFunc(&_nw_txt_record_is_dictionary, _networkLib, "nw_txt_record_is_dictionary") })
+	_register("nw_txt_record_get_key_count", func() {
+		purego.RegisterLibFunc(&_nw_txt_record_get_key_count, _networkLib, "nw_txt_record_get_key_count")
+	})
+	_register("nw_txt_record_is_dictionary", func() {
+		purego.RegisterLibFunc(&_nw_txt_record_is_dictionary, _networkLib, "nw_txt_record_is_dictionary")
+	})
 	_register("nw_txt_record_is_equal", func() { purego.RegisterLibFunc(&_nw_txt_record_is_equal, _networkLib, "nw_txt_record_is_equal") })
 	_register("nw_txt_record_remove_key", func() { purego.RegisterLibFunc(&_nw_txt_record_remove_key, _networkLib, "nw_txt_record_remove_key") })
 	_register("nw_txt_record_set_key", func() { purego.RegisterLibFunc(&_nw_txt_record_set_key, _networkLib, "nw_txt_record_set_key") })
 	_register("nw_udp_create_metadata", func() { purego.RegisterLibFunc(&_nw_udp_create_metadata, _networkLib, "nw_udp_create_metadata") })
 	_register("nw_udp_create_options", func() { purego.RegisterLibFunc(&_nw_udp_create_options, _networkLib, "nw_udp_create_options") })
-	_register("nw_udp_options_set_prefer_no_checksum", func() { purego.RegisterLibFunc(&_nw_udp_options_set_prefer_no_checksum, _networkLib, "nw_udp_options_set_prefer_no_checksum") })
+	_register("nw_udp_options_set_prefer_no_checksum", func() {
+		purego.RegisterLibFunc(&_nw_udp_options_set_prefer_no_checksum, _networkLib, "nw_udp_options_set_prefer_no_checksum")
+	})
 	_register("nw_ws_create_metadata", func() { purego.RegisterLibFunc(&_nw_ws_create_metadata, _networkLib, "nw_ws_create_metadata") })
 	_register("nw_ws_create_options", func() { purego.RegisterLibFunc(&_nw_ws_create_options, _networkLib, "nw_ws_create_options") })
-	_register("nw_ws_metadata_copy_server_response", func() { purego.RegisterLibFunc(&_nw_ws_metadata_copy_server_response, _networkLib, "nw_ws_metadata_copy_server_response") })
-	_register("nw_ws_metadata_get_close_code", func() { purego.RegisterLibFunc(&_nw_ws_metadata_get_close_code, _networkLib, "nw_ws_metadata_get_close_code") })
+	_register("nw_ws_metadata_copy_server_response", func() {
+		purego.RegisterLibFunc(&_nw_ws_metadata_copy_server_response, _networkLib, "nw_ws_metadata_copy_server_response")
+	})
+	_register("nw_ws_metadata_get_close_code", func() {
+		purego.RegisterLibFunc(&_nw_ws_metadata_get_close_code, _networkLib, "nw_ws_metadata_get_close_code")
+	})
 	_register("nw_ws_metadata_get_opcode", func() { purego.RegisterLibFunc(&_nw_ws_metadata_get_opcode, _networkLib, "nw_ws_metadata_get_opcode") })
-	_register("nw_ws_metadata_set_close_code", func() { purego.RegisterLibFunc(&_nw_ws_metadata_set_close_code, _networkLib, "nw_ws_metadata_set_close_code") })
-	_register("nw_ws_metadata_set_pong_handler", func() { purego.RegisterLibFunc(&_nw_ws_metadata_set_pong_handler, _networkLib, "nw_ws_metadata_set_pong_handler") })
-	_register("nw_ws_options_add_additional_header", func() { purego.RegisterLibFunc(&_nw_ws_options_add_additional_header, _networkLib, "nw_ws_options_add_additional_header") })
-	_register("nw_ws_options_add_subprotocol", func() { purego.RegisterLibFunc(&_nw_ws_options_add_subprotocol, _networkLib, "nw_ws_options_add_subprotocol") })
-	_register("nw_ws_options_set_auto_reply_ping", func() { purego.RegisterLibFunc(&_nw_ws_options_set_auto_reply_ping, _networkLib, "nw_ws_options_set_auto_reply_ping") })
-	_register("nw_ws_options_set_client_request_handler", func() { purego.RegisterLibFunc(&_nw_ws_options_set_client_request_handler, _networkLib, "nw_ws_options_set_client_request_handler") })
-	_register("nw_ws_options_set_maximum_message_size", func() { purego.RegisterLibFunc(&_nw_ws_options_set_maximum_message_size, _networkLib, "nw_ws_options_set_maximum_message_size") })
-	_register("nw_ws_options_set_skip_handshake", func() { purego.RegisterLibFunc(&_nw_ws_options_set_skip_handshake, _networkLib, "nw_ws_options_set_skip_handshake") })
-	_register("nw_ws_request_enumerate_additional_headers", func() { purego.RegisterLibFunc(&_nw_ws_request_enumerate_additional_headers, _networkLib, "nw_ws_request_enumerate_additional_headers") })
-	_register("nw_ws_request_enumerate_subprotocols", func() { purego.RegisterLibFunc(&_nw_ws_request_enumerate_subprotocols, _networkLib, "nw_ws_request_enumerate_subprotocols") })
-	_register("nw_ws_response_add_additional_header", func() { purego.RegisterLibFunc(&_nw_ws_response_add_additional_header, _networkLib, "nw_ws_response_add_additional_header") })
+	_register("nw_ws_metadata_set_close_code", func() {
+		purego.RegisterLibFunc(&_nw_ws_metadata_set_close_code, _networkLib, "nw_ws_metadata_set_close_code")
+	})
+	_register("nw_ws_metadata_set_pong_handler", func() {
+		purego.RegisterLibFunc(&_nw_ws_metadata_set_pong_handler, _networkLib, "nw_ws_metadata_set_pong_handler")
+	})
+	_register("nw_ws_options_add_additional_header", func() {
+		purego.RegisterLibFunc(&_nw_ws_options_add_additional_header, _networkLib, "nw_ws_options_add_additional_header")
+	})
+	_register("nw_ws_options_add_subprotocol", func() {
+		purego.RegisterLibFunc(&_nw_ws_options_add_subprotocol, _networkLib, "nw_ws_options_add_subprotocol")
+	})
+	_register("nw_ws_options_set_auto_reply_ping", func() {
+		purego.RegisterLibFunc(&_nw_ws_options_set_auto_reply_ping, _networkLib, "nw_ws_options_set_auto_reply_ping")
+	})
+	_register("nw_ws_options_set_client_request_handler", func() {
+		purego.RegisterLibFunc(&_nw_ws_options_set_client_request_handler, _networkLib, "nw_ws_options_set_client_request_handler")
+	})
+	_register("nw_ws_options_set_maximum_message_size", func() {
+		purego.RegisterLibFunc(&_nw_ws_options_set_maximum_message_size, _networkLib, "nw_ws_options_set_maximum_message_size")
+	})
+	_register("nw_ws_options_set_skip_handshake", func() {
+		purego.RegisterLibFunc(&_nw_ws_options_set_skip_handshake, _networkLib, "nw_ws_options_set_skip_handshake")
+	})
+	_register("nw_ws_request_enumerate_additional_headers", func() {
+		purego.RegisterLibFunc(&_nw_ws_request_enumerate_additional_headers, _networkLib, "nw_ws_request_enumerate_additional_headers")
+	})
+	_register("nw_ws_request_enumerate_subprotocols", func() {
+		purego.RegisterLibFunc(&_nw_ws_request_enumerate_subprotocols, _networkLib, "nw_ws_request_enumerate_subprotocols")
+	})
+	_register("nw_ws_response_add_additional_header", func() {
+		purego.RegisterLibFunc(&_nw_ws_response_add_additional_header, _networkLib, "nw_ws_response_add_additional_header")
+	})
 	_register("nw_ws_response_create", func() { purego.RegisterLibFunc(&_nw_ws_response_create, _networkLib, "nw_ws_response_create") })
-	_register("nw_ws_response_enumerate_additional_headers", func() { purego.RegisterLibFunc(&_nw_ws_response_enumerate_additional_headers, _networkLib, "nw_ws_response_enumerate_additional_headers") })
-	_register("nw_ws_response_get_selected_subprotocol", func() { purego.RegisterLibFunc(&_nw_ws_response_get_selected_subprotocol, _networkLib, "nw_ws_response_get_selected_subprotocol") })
+	_register("nw_ws_response_enumerate_additional_headers", func() {
+		purego.RegisterLibFunc(&_nw_ws_response_enumerate_additional_headers, _networkLib, "nw_ws_response_enumerate_additional_headers")
+	})
+	_register("nw_ws_response_get_selected_subprotocol", func() {
+		purego.RegisterLibFunc(&_nw_ws_response_get_selected_subprotocol, _networkLib, "nw_ws_response_get_selected_subprotocol")
+	})
 	_register("nw_ws_response_get_status", func() { purego.RegisterLibFunc(&_nw_ws_response_get_status, _networkLib, "nw_ws_response_get_status") })
 }
 

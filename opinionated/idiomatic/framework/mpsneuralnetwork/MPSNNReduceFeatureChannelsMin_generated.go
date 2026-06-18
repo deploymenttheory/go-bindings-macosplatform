@@ -100,9 +100,13 @@ func (x *NNReduceFeatureChannelsMin) WithDestinationImageAllocator(destinationIm
 	return x
 }
 
-func (x *NNReduceFeatureChannelsMin) asNNReduceUnary() *raw.MPSNNReduceUnary { return &x.inner.MPSNNReduceUnary }
+func (x *NNReduceFeatureChannelsMin) asNNReduceUnary() *raw.MPSNNReduceUnary {
+	return &x.inner.MPSNNReduceUnary
+}
 
-func (x *NNReduceFeatureChannelsMin) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
+func (x *NNReduceFeatureChannelsMin) asCNNKernel() *raw.MPSCNNKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel
+}
 
 // NNReduceFeatureChannelsMinable is the interface implemented by [NNReduceFeatureChannelsMin], for mocking and DI.
 type NNReduceFeatureChannelsMinable interface {
@@ -119,4 +123,3 @@ type NNReduceFeatureChannelsMinable interface {
 }
 
 var _ NNReduceFeatureChannelsMinable = (*NNReduceFeatureChannelsMin)(nil)
-

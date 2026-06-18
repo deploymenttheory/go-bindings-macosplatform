@@ -16,11 +16,11 @@ type MIDICIProfile struct {
 }
 
 var (
-	_clsMIDICIProfile = _objcClass("MIDICIProfile")
-	_mIDICIProfileSelInitWithData = objc.RegisterName("initWithData:")
+	_clsMIDICIProfile                 = _objcClass("MIDICIProfile")
+	_mIDICIProfileSelInitWithData     = objc.RegisterName("initWithData:")
 	_mIDICIProfileSelInitWithDataName = objc.RegisterName("initWithData:name:")
-	_mIDICIProfileSelName = objc.RegisterName("name")
-	_mIDICIProfileSelProfileID = objc.RegisterName("profileID")
+	_mIDICIProfileSelName             = objc.RegisterName("name")
+	_mIDICIProfileSelProfileID        = objc.RegisterName("profileID")
 )
 
 func MIDICIProfileFromID(id objc.ID) *MIDICIProfile {
@@ -35,27 +35,34 @@ func MIDICIProfileFromID(id objc.ID) *MIDICIProfile {
 
 func (o *MIDICIProfile) InitWithData(data *foundation.NSData) *MIDICIProfile {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICIProfileSelInitWithData, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MIDICIProfileFromID(_ret)
 }
 
 func (o *MIDICIProfile) InitWithDataName(data *foundation.NSData, inName *foundation.NSString) *MIDICIProfile {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICIProfileSelInitWithDataName, data.Ptr(), inName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MIDICIProfileFromID(_ret)
 }
 
 // An NSString describing the profile.
 func (o *MIDICIProfile) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICIProfileSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The unique 5-byte profile identifier representing the profile.
 func (o *MIDICIProfile) ProfileID() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICIProfileSelProfileID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

@@ -13,49 +13,65 @@ import (
 
 func CLSContextTopicArtsAndMusic() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_classkitLib, "CLSContextTopicArtsAndMusic")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func CLSContextTopicComputerScienceAndEngineering() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_classkitLib, "CLSContextTopicComputerScienceAndEngineering")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func CLSContextTopicHealthAndFitness() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_classkitLib, "CLSContextTopicHealthAndFitness")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func CLSContextTopicLiteracyAndWriting() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_classkitLib, "CLSContextTopicLiteracyAndWriting")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func CLSContextTopicMath() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_classkitLib, "CLSContextTopicMath")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func CLSContextTopicScience() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_classkitLib, "CLSContextTopicScience")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func CLSContextTopicSocialScience() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_classkitLib, "CLSContextTopicSocialScience")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func CLSContextTopicWorldLanguage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_classkitLib, "CLSContextTopicWorldLanguage")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -67,57 +83,74 @@ func CLSErrorCodeDomain() uintptr {
 // @abstract   Any object that caused a failure will be available in - [NSError userInfo]; under this key.
 func CLSErrorObjectKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_classkitLib, "CLSErrorObjectKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @abstract   Errors with the code `CLSErrorCodePartialFailure` may contain an array of successful entities in - [NSError userInfo]; under this key.
 func CLSErrorSuccessfulObjectsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_classkitLib, "CLSErrorSuccessfulObjectsKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @abstract   If multiple objects cause errors we return an error with code `CLSErrorCodePartialFailure` which will contain an array of errors in - [NSError userInfo]; under this key.
 func CLSErrorUnderlyingErrorsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_classkitLib, "CLSErrorUnderlyingErrorsKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func CLSPredicateKeyPathDateCreated() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_classkitLib, "CLSPredicateKeyPathDateCreated")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func CLSPredicateKeyPathIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_classkitLib, "CLSPredicateKeyPathIdentifier")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func CLSPredicateKeyPathParent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_classkitLib, "CLSPredicateKeyPathParent")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func CLSPredicateKeyPathTitle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_classkitLib, "CLSPredicateKeyPathTitle")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func CLSPredicateKeyPathTopic() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_classkitLib, "CLSPredicateKeyPathTopic")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func CLSPredicateKeyPathUniversalLinkURL() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_classkitLib, "CLSPredicateKeyPathUniversalLinkURL")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
-

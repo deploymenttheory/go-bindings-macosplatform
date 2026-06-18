@@ -16,12 +16,12 @@ type CHHapticParameterCurveControlPoint struct {
 }
 
 var (
-	_clsCHHapticParameterCurveControlPoint = _objcClass("CHHapticParameterCurveControlPoint")
+	_clsCHHapticParameterCurveControlPoint                          = _objcClass("CHHapticParameterCurveControlPoint")
 	_cHHapticParameterCurveControlPointSelInitWithRelativeTimeValue = objc.RegisterName("initWithRelativeTime:value:")
-	_cHHapticParameterCurveControlPointSelRelativeTime = objc.RegisterName("relativeTime")
-	_cHHapticParameterCurveControlPointSelSetRelativeTime = objc.RegisterName("setRelativeTime:")
-	_cHHapticParameterCurveControlPointSelValue = objc.RegisterName("value")
-	_cHHapticParameterCurveControlPointSelSetValue = objc.RegisterName("setValue:")
+	_cHHapticParameterCurveControlPointSelRelativeTime              = objc.RegisterName("relativeTime")
+	_cHHapticParameterCurveControlPointSelSetRelativeTime           = objc.RegisterName("setRelativeTime:")
+	_cHHapticParameterCurveControlPointSelValue                     = objc.RegisterName("value")
+	_cHHapticParameterCurveControlPointSelSetValue                  = objc.RegisterName("setValue:")
 )
 
 func CHHapticParameterCurveControlPointFromID(id objc.ID) *CHHapticParameterCurveControlPoint {
@@ -37,7 +37,9 @@ func CHHapticParameterCurveControlPointFromID(id objc.ID) *CHHapticParameterCurv
 // @method initWithRelativeTime:value @abstract Initialize a CHHapticParameterCurveControlPoint with a relative time and value. @param value The value of the associated parameter. @param time The time at which the associated parameter will reach this value, relative to the start time of the parameter curve.
 func (o *CHHapticParameterCurveControlPoint) InitWithRelativeTimeValue(time_ float64, value float32) *CHHapticParameterCurveControlPoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticParameterCurveControlPointSelInitWithRelativeTimeValue, time_, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CHHapticParameterCurveControlPointFromID(_ret)
 }
 
@@ -58,4 +60,3 @@ func (o *CHHapticParameterCurveControlPoint) Value() float32 {
 func (o *CHHapticParameterCurveControlPoint) SetValue(value float32) {
 	o.Ptr().Send(_cHHapticParameterCurveControlPointSelSetValue, value)
 }
-

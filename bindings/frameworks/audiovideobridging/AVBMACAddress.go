@@ -18,15 +18,15 @@ type AVBMACAddress struct {
 }
 
 var (
-	_clsAVBMACAddress = _objcClass("AVBMACAddress")
-	_aVBMACAddressSelInitWithBytes = objc.RegisterName("initWithBytes:")
-	_aVBMACAddressSelBytes = objc.RegisterName("bytes")
-	_aVBMACAddressSelDataRepresentation = objc.RegisterName("dataRepresentation")
-	_aVBMACAddressSelSetDataRepresentation = objc.RegisterName("setDataRepresentation:")
-	_aVBMACAddressSelStringRepresentation = objc.RegisterName("stringRepresentation")
+	_clsAVBMACAddress                        = _objcClass("AVBMACAddress")
+	_aVBMACAddressSelInitWithBytes           = objc.RegisterName("initWithBytes:")
+	_aVBMACAddressSelBytes                   = objc.RegisterName("bytes")
+	_aVBMACAddressSelDataRepresentation      = objc.RegisterName("dataRepresentation")
+	_aVBMACAddressSelSetDataRepresentation   = objc.RegisterName("setDataRepresentation:")
+	_aVBMACAddressSelStringRepresentation    = objc.RegisterName("stringRepresentation")
 	_aVBMACAddressSelSetStringRepresentation = objc.RegisterName("setStringRepresentation:")
-	_aVBMACAddressSelIsMulticast = objc.RegisterName("isMulticast")
-	_aVBMACAddressSelSetMulticast = objc.RegisterName("setMulticast:")
+	_aVBMACAddressSelIsMulticast             = objc.RegisterName("isMulticast")
+	_aVBMACAddressSelSetMulticast            = objc.RegisterName("setMulticast:")
 )
 
 func AVBMACAddressFromID(id objc.ID) *AVBMACAddress {
@@ -42,7 +42,9 @@ func AVBMACAddressFromID(id objc.ID) *AVBMACAddress {
 // @method		initWithBytes: @abstract	This method initializes the receiver to contain the MAC address specified. @param		bytes A pointer to 6 octets of memory containing the MAC address. @result		The initialized receiver.
 func (o *AVBMACAddress) InitWithBytes(bytes_ *uint8) *AVBMACAddress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVBMACAddressSelInitWithBytes, bytes_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVBMACAddressFromID(_ret)
 }
 
@@ -55,7 +57,9 @@ func (o *AVBMACAddress) Bytes() unsafe.Pointer {
 // @property	dataRepresentation @abstract	An NSData object containing the bytes of the MAC address.
 func (o *AVBMACAddress) DataRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVBMACAddressSelDataRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -66,7 +70,9 @@ func (o *AVBMACAddress) SetDataRepresentation(dataRepresentation *foundation.NSD
 // @property	stringRepresentation @abstract	The colon separated cannonical string representation of the MAC address e.g. 12:34:56:78:ab:cd
 func (o *AVBMACAddress) StringRepresentation() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVBMACAddressSelStringRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -83,4 +89,3 @@ func (o *AVBMACAddress) IsMulticast() bool {
 func (o *AVBMACAddress) SetMulticast(multicast bool) {
 	o.Ptr().Send(_aVBMACAddressSelSetMulticast, multicast)
 }
-

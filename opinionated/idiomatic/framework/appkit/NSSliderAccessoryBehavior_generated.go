@@ -47,4 +47,3 @@ type SliderAccessoryBehaviorable interface {
 }
 
 var _ SliderAccessoryBehaviorable = (*SliderAccessoryBehavior)(nil)
-

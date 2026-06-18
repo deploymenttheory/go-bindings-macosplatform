@@ -17,7 +17,9 @@ type MTRMessagesClusterMessageStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRMessagesClusterMessageStruct].
-func (x *MTRMessagesClusterMessageStruct) Unwrap() *raw.MTRMessagesClusterMessageStruct { return x.inner }
+func (x *MTRMessagesClusterMessageStruct) Unwrap() *raw.MTRMessagesClusterMessageStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -173,4 +175,3 @@ type MTRMessagesClusterMessageStructable interface {
 }
 
 var _ MTRMessagesClusterMessageStructable = (*MTRMessagesClusterMessageStruct)(nil)
-

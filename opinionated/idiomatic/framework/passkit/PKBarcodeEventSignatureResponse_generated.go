@@ -62,4 +62,3 @@ type BarcodeEventSignatureResponseable interface {
 }
 
 var _ BarcodeEventSignatureResponseable = (*BarcodeEventSignatureResponse)(nil)
-

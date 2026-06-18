@@ -15,7 +15,9 @@ type CaptureSystemExposureBiasSlider struct {
 }
 
 // Unwrap returns the underlying [raw.AVCaptureSystemExposureBiasSlider].
-func (x *CaptureSystemExposureBiasSlider) Unwrap() *raw.AVCaptureSystemExposureBiasSlider { return x.inner }
+func (x *CaptureSystemExposureBiasSlider) Unwrap() *raw.AVCaptureSystemExposureBiasSlider {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -49,7 +51,9 @@ func (x *CaptureSystemExposureBiasSlider) WithEnabled(enabled bool) *CaptureSyst
 	return x
 }
 
-func (x *CaptureSystemExposureBiasSlider) asCaptureControl() *raw.AVCaptureControl { return &x.inner.AVCaptureControl }
+func (x *CaptureSystemExposureBiasSlider) asCaptureControl() *raw.AVCaptureControl {
+	return &x.inner.AVCaptureControl
+}
 
 // CaptureSystemExposureBiasSliderable is the interface implemented by [CaptureSystemExposureBiasSlider], for mocking and DI.
 type CaptureSystemExposureBiasSliderable interface {
@@ -58,4 +62,3 @@ type CaptureSystemExposureBiasSliderable interface {
 }
 
 var _ CaptureSystemExposureBiasSliderable = (*CaptureSystemExposureBiasSlider)(nil)
-

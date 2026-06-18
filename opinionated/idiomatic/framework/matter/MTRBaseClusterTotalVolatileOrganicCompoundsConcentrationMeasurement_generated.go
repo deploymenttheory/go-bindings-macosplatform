@@ -19,11 +19,15 @@ type MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement struct 
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement].
-func (x *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) Unwrap() *raw.MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement { return x.inner }
+func (x *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) Unwrap() *raw.MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurementFromID adopts an existing object pointer as a MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement (nil for 0).
 func MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurementFromID(id objc.ID) *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement {
@@ -694,9 +698,13 @@ func (x *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) Su
 	}
 }
 
-func (x *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurementable is the interface implemented by [MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement], for mocking and DI.
 type MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurementable interface {
@@ -736,4 +744,3 @@ type MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurementable int
 }
 
 var _ MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurementable = (*MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement)(nil)
-

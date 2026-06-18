@@ -16,7 +16,9 @@ type MTRServiceAreaClusterSkipAreaParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRServiceAreaClusterSkipAreaParams].
-func (x *MTRServiceAreaClusterSkipAreaParams) Unwrap() *raw.MTRServiceAreaClusterSkipAreaParams { return x.inner }
+func (x *MTRServiceAreaClusterSkipAreaParams) Unwrap() *raw.MTRServiceAreaClusterSkipAreaParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -99,4 +101,3 @@ type MTRServiceAreaClusterSkipAreaParamsable interface {
 }
 
 var _ MTRServiceAreaClusterSkipAreaParamsable = (*MTRServiceAreaClusterSkipAreaParams)(nil)
-

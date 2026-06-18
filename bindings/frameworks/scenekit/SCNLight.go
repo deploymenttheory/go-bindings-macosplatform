@@ -19,93 +19,93 @@ type SCNLight struct {
 }
 
 var (
-	_clsSCNLight = _objcClass("SCNLight")
-	_sCNLightSelLight = objc.RegisterName("light")
-	_sCNLightSelType = objc.RegisterName("type")
-	_sCNLightSelSetType = objc.RegisterName("setType:")
-	_sCNLightSelColor = objc.RegisterName("color")
-	_sCNLightSelSetColor = objc.RegisterName("setColor:")
-	_sCNLightSelTemperature = objc.RegisterName("temperature")
-	_sCNLightSelSetTemperature = objc.RegisterName("setTemperature:")
-	_sCNLightSelIntensity = objc.RegisterName("intensity")
-	_sCNLightSelSetIntensity = objc.RegisterName("setIntensity:")
-	_sCNLightSelName = objc.RegisterName("name")
-	_sCNLightSelSetName = objc.RegisterName("setName:")
-	_sCNLightSelCastsShadow = objc.RegisterName("castsShadow")
-	_sCNLightSelSetCastsShadow = objc.RegisterName("setCastsShadow:")
-	_sCNLightSelShadowColor = objc.RegisterName("shadowColor")
-	_sCNLightSelSetShadowColor = objc.RegisterName("setShadowColor:")
-	_sCNLightSelShadowRadius = objc.RegisterName("shadowRadius")
-	_sCNLightSelSetShadowRadius = objc.RegisterName("setShadowRadius:")
-	_sCNLightSelShadowMapSize = objc.RegisterName("shadowMapSize")
-	_sCNLightSelSetShadowMapSize = objc.RegisterName("setShadowMapSize:")
-	_sCNLightSelShadowSampleCount = objc.RegisterName("shadowSampleCount")
-	_sCNLightSelSetShadowSampleCount = objc.RegisterName("setShadowSampleCount:")
-	_sCNLightSelShadowMode = objc.RegisterName("shadowMode")
-	_sCNLightSelSetShadowMode = objc.RegisterName("setShadowMode:")
-	_sCNLightSelShadowBias = objc.RegisterName("shadowBias")
-	_sCNLightSelSetShadowBias = objc.RegisterName("setShadowBias:")
-	_sCNLightSelAutomaticallyAdjustsShadowProjection = objc.RegisterName("automaticallyAdjustsShadowProjection")
+	_clsSCNLight                                        = _objcClass("SCNLight")
+	_sCNLightSelLight                                   = objc.RegisterName("light")
+	_sCNLightSelType                                    = objc.RegisterName("type")
+	_sCNLightSelSetType                                 = objc.RegisterName("setType:")
+	_sCNLightSelColor                                   = objc.RegisterName("color")
+	_sCNLightSelSetColor                                = objc.RegisterName("setColor:")
+	_sCNLightSelTemperature                             = objc.RegisterName("temperature")
+	_sCNLightSelSetTemperature                          = objc.RegisterName("setTemperature:")
+	_sCNLightSelIntensity                               = objc.RegisterName("intensity")
+	_sCNLightSelSetIntensity                            = objc.RegisterName("setIntensity:")
+	_sCNLightSelName                                    = objc.RegisterName("name")
+	_sCNLightSelSetName                                 = objc.RegisterName("setName:")
+	_sCNLightSelCastsShadow                             = objc.RegisterName("castsShadow")
+	_sCNLightSelSetCastsShadow                          = objc.RegisterName("setCastsShadow:")
+	_sCNLightSelShadowColor                             = objc.RegisterName("shadowColor")
+	_sCNLightSelSetShadowColor                          = objc.RegisterName("setShadowColor:")
+	_sCNLightSelShadowRadius                            = objc.RegisterName("shadowRadius")
+	_sCNLightSelSetShadowRadius                         = objc.RegisterName("setShadowRadius:")
+	_sCNLightSelShadowMapSize                           = objc.RegisterName("shadowMapSize")
+	_sCNLightSelSetShadowMapSize                        = objc.RegisterName("setShadowMapSize:")
+	_sCNLightSelShadowSampleCount                       = objc.RegisterName("shadowSampleCount")
+	_sCNLightSelSetShadowSampleCount                    = objc.RegisterName("setShadowSampleCount:")
+	_sCNLightSelShadowMode                              = objc.RegisterName("shadowMode")
+	_sCNLightSelSetShadowMode                           = objc.RegisterName("setShadowMode:")
+	_sCNLightSelShadowBias                              = objc.RegisterName("shadowBias")
+	_sCNLightSelSetShadowBias                           = objc.RegisterName("setShadowBias:")
+	_sCNLightSelAutomaticallyAdjustsShadowProjection    = objc.RegisterName("automaticallyAdjustsShadowProjection")
 	_sCNLightSelSetAutomaticallyAdjustsShadowProjection = objc.RegisterName("setAutomaticallyAdjustsShadowProjection:")
-	_sCNLightSelMaximumShadowDistance = objc.RegisterName("maximumShadowDistance")
-	_sCNLightSelSetMaximumShadowDistance = objc.RegisterName("setMaximumShadowDistance:")
-	_sCNLightSelForcesBackFaceCasters = objc.RegisterName("forcesBackFaceCasters")
-	_sCNLightSelSetForcesBackFaceCasters = objc.RegisterName("setForcesBackFaceCasters:")
-	_sCNLightSelSampleDistributedShadowMaps = objc.RegisterName("sampleDistributedShadowMaps")
-	_sCNLightSelSetSampleDistributedShadowMaps = objc.RegisterName("setSampleDistributedShadowMaps:")
-	_sCNLightSelShadowCascadeCount = objc.RegisterName("shadowCascadeCount")
-	_sCNLightSelSetShadowCascadeCount = objc.RegisterName("setShadowCascadeCount:")
-	_sCNLightSelShadowCascadeSplittingFactor = objc.RegisterName("shadowCascadeSplittingFactor")
-	_sCNLightSelSetShadowCascadeSplittingFactor = objc.RegisterName("setShadowCascadeSplittingFactor:")
-	_sCNLightSelOrthographicScale = objc.RegisterName("orthographicScale")
-	_sCNLightSelSetOrthographicScale = objc.RegisterName("setOrthographicScale:")
-	_sCNLightSelZNear = objc.RegisterName("zNear")
-	_sCNLightSelSetZNear = objc.RegisterName("setZNear:")
-	_sCNLightSelZFar = objc.RegisterName("zFar")
-	_sCNLightSelSetZFar = objc.RegisterName("setZFar:")
-	_sCNLightSelAttenuationStartDistance = objc.RegisterName("attenuationStartDistance")
-	_sCNLightSelSetAttenuationStartDistance = objc.RegisterName("setAttenuationStartDistance:")
-	_sCNLightSelAttenuationEndDistance = objc.RegisterName("attenuationEndDistance")
-	_sCNLightSelSetAttenuationEndDistance = objc.RegisterName("setAttenuationEndDistance:")
-	_sCNLightSelAttenuationFalloffExponent = objc.RegisterName("attenuationFalloffExponent")
-	_sCNLightSelSetAttenuationFalloffExponent = objc.RegisterName("setAttenuationFalloffExponent:")
-	_sCNLightSelSpotInnerAngle = objc.RegisterName("spotInnerAngle")
-	_sCNLightSelSetSpotInnerAngle = objc.RegisterName("setSpotInnerAngle:")
-	_sCNLightSelSpotOuterAngle = objc.RegisterName("spotOuterAngle")
-	_sCNLightSelSetSpotOuterAngle = objc.RegisterName("setSpotOuterAngle:")
-	_sCNLightSelIESProfileURL = objc.RegisterName("IESProfileURL")
-	_sCNLightSelSetIESProfileURL = objc.RegisterName("setIESProfileURL:")
-	_sCNLightSelSphericalHarmonicsCoefficients = objc.RegisterName("sphericalHarmonicsCoefficients")
-	_sCNLightSelProbeType = objc.RegisterName("probeType")
-	_sCNLightSelSetProbeType = objc.RegisterName("setProbeType:")
-	_sCNLightSelProbeUpdateType = objc.RegisterName("probeUpdateType")
-	_sCNLightSelSetProbeUpdateType = objc.RegisterName("setProbeUpdateType:")
-	_sCNLightSelProbeExtents = objc.RegisterName("probeExtents")
-	_sCNLightSelSetProbeExtents = objc.RegisterName("setProbeExtents:")
-	_sCNLightSelProbeOffset = objc.RegisterName("probeOffset")
-	_sCNLightSelSetProbeOffset = objc.RegisterName("setProbeOffset:")
-	_sCNLightSelParallaxCorrectionEnabled = objc.RegisterName("parallaxCorrectionEnabled")
-	_sCNLightSelSetParallaxCorrectionEnabled = objc.RegisterName("setParallaxCorrectionEnabled:")
-	_sCNLightSelParallaxExtentsFactor = objc.RegisterName("parallaxExtentsFactor")
-	_sCNLightSelSetParallaxExtentsFactor = objc.RegisterName("setParallaxExtentsFactor:")
-	_sCNLightSelParallaxCenterOffset = objc.RegisterName("parallaxCenterOffset")
-	_sCNLightSelSetParallaxCenterOffset = objc.RegisterName("setParallaxCenterOffset:")
-	_sCNLightSelProbeEnvironment = objc.RegisterName("probeEnvironment")
-	_sCNLightSelAreaType = objc.RegisterName("areaType")
-	_sCNLightSelSetAreaType = objc.RegisterName("setAreaType:")
-	_sCNLightSelAreaExtents = objc.RegisterName("areaExtents")
-	_sCNLightSelSetAreaExtents = objc.RegisterName("setAreaExtents:")
-	_sCNLightSelAreaPolygonVertices = objc.RegisterName("areaPolygonVertices")
-	_sCNLightSelSetAreaPolygonVertices = objc.RegisterName("setAreaPolygonVertices:")
-	_sCNLightSelDrawsArea = objc.RegisterName("drawsArea")
-	_sCNLightSelSetDrawsArea = objc.RegisterName("setDrawsArea:")
-	_sCNLightSelDoubleSided = objc.RegisterName("doubleSided")
-	_sCNLightSelSetDoubleSided = objc.RegisterName("setDoubleSided:")
-	_sCNLightSelGobo = objc.RegisterName("gobo")
-	_sCNLightSelCategoryBitMask = objc.RegisterName("categoryBitMask")
-	_sCNLightSelSetCategoryBitMask = objc.RegisterName("setCategoryBitMask:")
-	_sCNLightSelAttributeForKey = objc.RegisterName("attributeForKey:")
-	_sCNLightSelSetAttributeForKey = objc.RegisterName("setAttribute:forKey:")
+	_sCNLightSelMaximumShadowDistance                   = objc.RegisterName("maximumShadowDistance")
+	_sCNLightSelSetMaximumShadowDistance                = objc.RegisterName("setMaximumShadowDistance:")
+	_sCNLightSelForcesBackFaceCasters                   = objc.RegisterName("forcesBackFaceCasters")
+	_sCNLightSelSetForcesBackFaceCasters                = objc.RegisterName("setForcesBackFaceCasters:")
+	_sCNLightSelSampleDistributedShadowMaps             = objc.RegisterName("sampleDistributedShadowMaps")
+	_sCNLightSelSetSampleDistributedShadowMaps          = objc.RegisterName("setSampleDistributedShadowMaps:")
+	_sCNLightSelShadowCascadeCount                      = objc.RegisterName("shadowCascadeCount")
+	_sCNLightSelSetShadowCascadeCount                   = objc.RegisterName("setShadowCascadeCount:")
+	_sCNLightSelShadowCascadeSplittingFactor            = objc.RegisterName("shadowCascadeSplittingFactor")
+	_sCNLightSelSetShadowCascadeSplittingFactor         = objc.RegisterName("setShadowCascadeSplittingFactor:")
+	_sCNLightSelOrthographicScale                       = objc.RegisterName("orthographicScale")
+	_sCNLightSelSetOrthographicScale                    = objc.RegisterName("setOrthographicScale:")
+	_sCNLightSelZNear                                   = objc.RegisterName("zNear")
+	_sCNLightSelSetZNear                                = objc.RegisterName("setZNear:")
+	_sCNLightSelZFar                                    = objc.RegisterName("zFar")
+	_sCNLightSelSetZFar                                 = objc.RegisterName("setZFar:")
+	_sCNLightSelAttenuationStartDistance                = objc.RegisterName("attenuationStartDistance")
+	_sCNLightSelSetAttenuationStartDistance             = objc.RegisterName("setAttenuationStartDistance:")
+	_sCNLightSelAttenuationEndDistance                  = objc.RegisterName("attenuationEndDistance")
+	_sCNLightSelSetAttenuationEndDistance               = objc.RegisterName("setAttenuationEndDistance:")
+	_sCNLightSelAttenuationFalloffExponent              = objc.RegisterName("attenuationFalloffExponent")
+	_sCNLightSelSetAttenuationFalloffExponent           = objc.RegisterName("setAttenuationFalloffExponent:")
+	_sCNLightSelSpotInnerAngle                          = objc.RegisterName("spotInnerAngle")
+	_sCNLightSelSetSpotInnerAngle                       = objc.RegisterName("setSpotInnerAngle:")
+	_sCNLightSelSpotOuterAngle                          = objc.RegisterName("spotOuterAngle")
+	_sCNLightSelSetSpotOuterAngle                       = objc.RegisterName("setSpotOuterAngle:")
+	_sCNLightSelIESProfileURL                           = objc.RegisterName("IESProfileURL")
+	_sCNLightSelSetIESProfileURL                        = objc.RegisterName("setIESProfileURL:")
+	_sCNLightSelSphericalHarmonicsCoefficients          = objc.RegisterName("sphericalHarmonicsCoefficients")
+	_sCNLightSelProbeType                               = objc.RegisterName("probeType")
+	_sCNLightSelSetProbeType                            = objc.RegisterName("setProbeType:")
+	_sCNLightSelProbeUpdateType                         = objc.RegisterName("probeUpdateType")
+	_sCNLightSelSetProbeUpdateType                      = objc.RegisterName("setProbeUpdateType:")
+	_sCNLightSelProbeExtents                            = objc.RegisterName("probeExtents")
+	_sCNLightSelSetProbeExtents                         = objc.RegisterName("setProbeExtents:")
+	_sCNLightSelProbeOffset                             = objc.RegisterName("probeOffset")
+	_sCNLightSelSetProbeOffset                          = objc.RegisterName("setProbeOffset:")
+	_sCNLightSelParallaxCorrectionEnabled               = objc.RegisterName("parallaxCorrectionEnabled")
+	_sCNLightSelSetParallaxCorrectionEnabled            = objc.RegisterName("setParallaxCorrectionEnabled:")
+	_sCNLightSelParallaxExtentsFactor                   = objc.RegisterName("parallaxExtentsFactor")
+	_sCNLightSelSetParallaxExtentsFactor                = objc.RegisterName("setParallaxExtentsFactor:")
+	_sCNLightSelParallaxCenterOffset                    = objc.RegisterName("parallaxCenterOffset")
+	_sCNLightSelSetParallaxCenterOffset                 = objc.RegisterName("setParallaxCenterOffset:")
+	_sCNLightSelProbeEnvironment                        = objc.RegisterName("probeEnvironment")
+	_sCNLightSelAreaType                                = objc.RegisterName("areaType")
+	_sCNLightSelSetAreaType                             = objc.RegisterName("setAreaType:")
+	_sCNLightSelAreaExtents                             = objc.RegisterName("areaExtents")
+	_sCNLightSelSetAreaExtents                          = objc.RegisterName("setAreaExtents:")
+	_sCNLightSelAreaPolygonVertices                     = objc.RegisterName("areaPolygonVertices")
+	_sCNLightSelSetAreaPolygonVertices                  = objc.RegisterName("setAreaPolygonVertices:")
+	_sCNLightSelDrawsArea                               = objc.RegisterName("drawsArea")
+	_sCNLightSelSetDrawsArea                            = objc.RegisterName("setDrawsArea:")
+	_sCNLightSelDoubleSided                             = objc.RegisterName("doubleSided")
+	_sCNLightSelSetDoubleSided                          = objc.RegisterName("setDoubleSided:")
+	_sCNLightSelGobo                                    = objc.RegisterName("gobo")
+	_sCNLightSelCategoryBitMask                         = objc.RegisterName("categoryBitMask")
+	_sCNLightSelSetCategoryBitMask                      = objc.RegisterName("setCategoryBitMask:")
+	_sCNLightSelAttributeForKey                         = objc.RegisterName("attributeForKey:")
+	_sCNLightSelSetAttributeForKey                      = objc.RegisterName("setAttribute:forKey:")
 )
 
 func SCNLightFromID(id objc.ID) *SCNLight {
@@ -121,14 +121,18 @@ func SCNLightFromID(id objc.ID) *SCNLight {
 // @method light @abstract Creates and returns a light instance.
 func SCNLightLight() *SCNLight {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNLight), _sCNLightSelLight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNLightFromID(_ret)
 }
 
 // @property type @abstract Specifies the receiver's type. @discussion Defaults to SCNLightTypeOmni on iOS 8 and later, and on macOS 10.10 and later (otherwise defaults to SCNLightTypeAmbient).
 func (o *SCNLight) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNLightSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -169,7 +173,9 @@ func (o *SCNLight) SetIntensity(intensity float64) {
 // @property name @abstract Determines the name of the receiver.
 func (o *SCNLight) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNLightSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -390,7 +396,9 @@ func (o *SCNLight) SetSpotOuterAngle(spotOuterAngle float64) {
 // @property IESProfileURL @abstract Specifies the IES file from which the shape, direction, and intensity of illumination is determined. Defaults to nil.
 func (o *SCNLight) IESProfileURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNLightSelIESProfileURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -401,7 +409,9 @@ func (o *SCNLight) SetIESProfileURL(iESProfileURL *foundation.NSURL) {
 // @property sphericalHarmonicsCoefficients @abstract The receiver's spherical harmonics coefficients. @discussion Currently spherical harmonics are only supported by light probes (SCNLightTypeProbe). The data is an array of 27 32-bit floating-point values, containing three non-interleaved data sets corresponding to the red, green, and blue sets of coefficients.
 func (o *SCNLight) SphericalHarmonicsCoefficients() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNLightSelSphericalHarmonicsCoefficients)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -470,7 +480,9 @@ func (o *SCNLight) SetParallaxCenterOffset(parallaxCenterOffset unsafe.Pointer) 
 
 func (o *SCNLight) ProbeEnvironment() *SCNMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNLightSelProbeEnvironment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNMaterialPropertyFromID(_ret)
 }
 
@@ -527,7 +539,9 @@ func (o *SCNLight) SetDoubleSided(doubleSided bool) {
 // @property gobo @abstract Specifies the gobo (or "cookie") of the light, used to control the shape of emitted light. @discussion Gobos are only supported by spot lights.
 func (o *SCNLight) Gobo() *SCNMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNLightSelGobo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNMaterialPropertyFromID(_ret)
 }
 
@@ -553,4 +567,3 @@ func (o *SCNLight) AttributeForKey(key *foundation.NSString) objc.ID {
 func (o *SCNLight) SetAttributeForKey(attribute objc.ID, key *foundation.NSString) {
 	o.Ptr().Send(_sCNLightSelSetAttributeForKey, attribute, key.Ptr())
 }
-

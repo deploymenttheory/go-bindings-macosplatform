@@ -15,7 +15,8 @@ var (
 
 func ABLocalizedPropertyOrLabel(propertyOrLabel *foundation.NSString) *foundation.NSString {
 	_ret := _fnABLocalizedPropertyOrLabel(propertyOrLabel.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

@@ -16,23 +16,23 @@ type MTLAccelerationStructureGeometryDescriptor struct {
 }
 
 var (
-	_clsMTLAccelerationStructureGeometryDescriptor = _objcClass("MTLAccelerationStructureGeometryDescriptor")
-	_mTLAccelerationStructureGeometryDescriptorSelIntersectionFunctionTableOffset = objc.RegisterName("intersectionFunctionTableOffset")
-	_mTLAccelerationStructureGeometryDescriptorSelSetIntersectionFunctionTableOffset = objc.RegisterName("setIntersectionFunctionTableOffset:")
-	_mTLAccelerationStructureGeometryDescriptorSelOpaque = objc.RegisterName("opaque")
-	_mTLAccelerationStructureGeometryDescriptorSelSetOpaque = objc.RegisterName("setOpaque:")
-	_mTLAccelerationStructureGeometryDescriptorSelAllowDuplicateIntersectionFunctionInvocation = objc.RegisterName("allowDuplicateIntersectionFunctionInvocation")
+	_clsMTLAccelerationStructureGeometryDescriptor                                                = _objcClass("MTLAccelerationStructureGeometryDescriptor")
+	_mTLAccelerationStructureGeometryDescriptorSelIntersectionFunctionTableOffset                 = objc.RegisterName("intersectionFunctionTableOffset")
+	_mTLAccelerationStructureGeometryDescriptorSelSetIntersectionFunctionTableOffset              = objc.RegisterName("setIntersectionFunctionTableOffset:")
+	_mTLAccelerationStructureGeometryDescriptorSelOpaque                                          = objc.RegisterName("opaque")
+	_mTLAccelerationStructureGeometryDescriptorSelSetOpaque                                       = objc.RegisterName("setOpaque:")
+	_mTLAccelerationStructureGeometryDescriptorSelAllowDuplicateIntersectionFunctionInvocation    = objc.RegisterName("allowDuplicateIntersectionFunctionInvocation")
 	_mTLAccelerationStructureGeometryDescriptorSelSetAllowDuplicateIntersectionFunctionInvocation = objc.RegisterName("setAllowDuplicateIntersectionFunctionInvocation:")
-	_mTLAccelerationStructureGeometryDescriptorSelLabel = objc.RegisterName("label")
-	_mTLAccelerationStructureGeometryDescriptorSelSetLabel = objc.RegisterName("setLabel:")
-	_mTLAccelerationStructureGeometryDescriptorSelPrimitiveDataBuffer = objc.RegisterName("primitiveDataBuffer")
-	_mTLAccelerationStructureGeometryDescriptorSelSetPrimitiveDataBuffer = objc.RegisterName("setPrimitiveDataBuffer:")
-	_mTLAccelerationStructureGeometryDescriptorSelPrimitiveDataBufferOffset = objc.RegisterName("primitiveDataBufferOffset")
-	_mTLAccelerationStructureGeometryDescriptorSelSetPrimitiveDataBufferOffset = objc.RegisterName("setPrimitiveDataBufferOffset:")
-	_mTLAccelerationStructureGeometryDescriptorSelPrimitiveDataStride = objc.RegisterName("primitiveDataStride")
-	_mTLAccelerationStructureGeometryDescriptorSelSetPrimitiveDataStride = objc.RegisterName("setPrimitiveDataStride:")
-	_mTLAccelerationStructureGeometryDescriptorSelPrimitiveDataElementSize = objc.RegisterName("primitiveDataElementSize")
-	_mTLAccelerationStructureGeometryDescriptorSelSetPrimitiveDataElementSize = objc.RegisterName("setPrimitiveDataElementSize:")
+	_mTLAccelerationStructureGeometryDescriptorSelLabel                                           = objc.RegisterName("label")
+	_mTLAccelerationStructureGeometryDescriptorSelSetLabel                                        = objc.RegisterName("setLabel:")
+	_mTLAccelerationStructureGeometryDescriptorSelPrimitiveDataBuffer                             = objc.RegisterName("primitiveDataBuffer")
+	_mTLAccelerationStructureGeometryDescriptorSelSetPrimitiveDataBuffer                          = objc.RegisterName("setPrimitiveDataBuffer:")
+	_mTLAccelerationStructureGeometryDescriptorSelPrimitiveDataBufferOffset                       = objc.RegisterName("primitiveDataBufferOffset")
+	_mTLAccelerationStructureGeometryDescriptorSelSetPrimitiveDataBufferOffset                    = objc.RegisterName("setPrimitiveDataBufferOffset:")
+	_mTLAccelerationStructureGeometryDescriptorSelPrimitiveDataStride                             = objc.RegisterName("primitiveDataStride")
+	_mTLAccelerationStructureGeometryDescriptorSelSetPrimitiveDataStride                          = objc.RegisterName("setPrimitiveDataStride:")
+	_mTLAccelerationStructureGeometryDescriptorSelPrimitiveDataElementSize                        = objc.RegisterName("primitiveDataElementSize")
+	_mTLAccelerationStructureGeometryDescriptorSelSetPrimitiveDataElementSize                     = objc.RegisterName("setPrimitiveDataElementSize:")
 )
 
 func MTLAccelerationStructureGeometryDescriptorFromID(id objc.ID) *MTLAccelerationStructureGeometryDescriptor {
@@ -77,7 +77,9 @@ func (o *MTLAccelerationStructureGeometryDescriptor) SetAllowDuplicateIntersecti
 // @brief Label
 func (o *MTLAccelerationStructureGeometryDescriptor) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLAccelerationStructureGeometryDescriptorSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -124,4 +126,3 @@ func (o *MTLAccelerationStructureGeometryDescriptor) PrimitiveDataElementSize() 
 func (o *MTLAccelerationStructureGeometryDescriptor) SetPrimitiveDataElementSize(primitiveDataElementSize uint) {
 	o.Ptr().Send(_mTLAccelerationStructureGeometryDescriptorSelSetPrimitiveDataElementSize, primitiveDataElementSize)
 }
-

@@ -16,11 +16,11 @@ type SKAttribute struct {
 }
 
 var (
-	_clsSKAttribute = _objcClass("SKAttribute")
+	_clsSKAttribute                      = _objcClass("SKAttribute")
 	_sKAttributeSelAttributeWithNameType = objc.RegisterName("attributeWithName:type:")
-	_sKAttributeSelInitWithNameType = objc.RegisterName("initWithName:type:")
-	_sKAttributeSelName = objc.RegisterName("name")
-	_sKAttributeSelType = objc.RegisterName("type")
+	_sKAttributeSelInitWithNameType      = objc.RegisterName("initWithName:type:")
+	_sKAttributeSelName                  = objc.RegisterName("name")
+	_sKAttributeSelType                  = objc.RegisterName("type")
 )
 
 func SKAttributeFromID(id objc.ID) *SKAttribute {
@@ -35,19 +35,25 @@ func SKAttributeFromID(id objc.ID) *SKAttribute {
 
 func SKAttributeAttributeWithNameType(name *foundation.NSString, type_ SKAttributeType) *SKAttribute {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKAttribute), _sKAttributeSelAttributeWithNameType, name.Ptr(), type_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKAttributeFromID(_ret)
 }
 
 func (o *SKAttribute) InitWithNameType(name *foundation.NSString, type_ SKAttributeType) *SKAttribute {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKAttributeSelInitWithNameType, name.Ptr(), type_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKAttributeFromID(_ret)
 }
 
 func (o *SKAttribute) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKAttributeSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -55,4 +61,3 @@ func (o *SKAttribute) Type() SKAttributeType {
 	_ret := objc.Send[SKAttributeType](o.Ptr(), _sKAttributeSelType)
 	return _ret
 }
-

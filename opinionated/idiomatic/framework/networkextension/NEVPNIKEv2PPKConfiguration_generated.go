@@ -79,4 +79,3 @@ type NEVPNIKEv2PPKConfigurationable interface {
 }
 
 var _ NEVPNIKEv2PPKConfigurationable = (*NEVPNIKEv2PPKConfiguration)(nil)
-

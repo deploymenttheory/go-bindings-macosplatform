@@ -18,10 +18,10 @@ type GKSCNNodeComponent struct {
 }
 
 var (
-	_clsGKSCNNodeComponent = _objcClass("GKSCNNodeComponent")
+	_clsGKSCNNodeComponent                  = _objcClass("GKSCNNodeComponent")
 	_gKSCNNodeComponentSelComponentWithNode = objc.RegisterName("componentWithNode:")
-	_gKSCNNodeComponentSelInitWithNode = objc.RegisterName("initWithNode:")
-	_gKSCNNodeComponentSelNode = objc.RegisterName("node")
+	_gKSCNNodeComponentSelInitWithNode      = objc.RegisterName("initWithNode:")
+	_gKSCNNodeComponentSelNode              = objc.RegisterName("node")
 )
 
 func GKSCNNodeComponentFromID(id objc.ID) *GKSCNNodeComponent {
@@ -37,20 +37,25 @@ func GKSCNNodeComponentFromID(id objc.ID) *GKSCNNodeComponent {
 // Creates a component that encapsulate the given SceneKit node. When the component is added to an entity, the SCNNode's entity property will be set. @param node Node to associate with the component. @see SCNNode.entity
 func GKSCNNodeComponentComponentWithNode(node *scenekit.SCNNode) *GKSCNNodeComponent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKSCNNodeComponent), _gKSCNNodeComponentSelComponentWithNode, node.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKSCNNodeComponentFromID(_ret)
 }
 
 // Initializes component to encapsulate the given SceneKit node. When the component is added to an entity, the SCNNode's entity property will be set. @param node Node to associate with the component. @see SCNNode.entity
 func (o *GKSCNNodeComponent) InitWithNode(node *scenekit.SCNNode) *GKSCNNodeComponent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKSCNNodeComponentSelInitWithNode, node.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKSCNNodeComponentFromID(_ret)
 }
 
 func (o *GKSCNNodeComponent) Node() *scenekit.SCNNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKSCNNodeComponentSelNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return scenekit.SCNNodeFromID(_ret)
 }
-

@@ -23,4 +23,3 @@ type OSLogEntryWithPayload interface {
 	FormatString() *foundation.NSString
 	Subsystem() *foundation.NSString
 }
-

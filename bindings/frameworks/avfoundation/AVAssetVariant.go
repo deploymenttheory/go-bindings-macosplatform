@@ -16,12 +16,12 @@ type AVAssetVariant struct {
 }
 
 var (
-	_clsAVAssetVariant = _objcClass("AVAssetVariant")
-	_aVAssetVariantSelPeakBitRate = objc.RegisterName("peakBitRate")
-	_aVAssetVariantSelAverageBitRate = objc.RegisterName("averageBitRate")
+	_clsAVAssetVariant                = _objcClass("AVAssetVariant")
+	_aVAssetVariantSelPeakBitRate     = objc.RegisterName("peakBitRate")
+	_aVAssetVariantSelAverageBitRate  = objc.RegisterName("averageBitRate")
 	_aVAssetVariantSelVideoAttributes = objc.RegisterName("videoAttributes")
 	_aVAssetVariantSelAudioAttributes = objc.RegisterName("audioAttributes")
-	_aVAssetVariantSelURL = objc.RegisterName("URL")
+	_aVAssetVariantSelURL             = objc.RegisterName("URL")
 )
 
 func AVAssetVariantFromID(id objc.ID) *AVAssetVariant {
@@ -49,21 +49,26 @@ func (o *AVAssetVariant) AverageBitRate() float64 {
 // Provides variant's video rendition attributes. If no video attributes are declared, it will be nil.
 func (o *AVAssetVariant) VideoAttributes() *AVAssetVariantVideoAttributes {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetVariantSelVideoAttributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetVariantVideoAttributesFromID(_ret)
 }
 
 // Provides variant's audio rendition attributes. If no audio attributes are declared, it will be nil.
 func (o *AVAssetVariant) AudioAttributes() *AVAssetVariantAudioAttributes {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetVariantSelAudioAttributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetVariantAudioAttributesFromID(_ret)
 }
 
 // Provides URL to media playlist corresponding to variant
 func (o *AVAssetVariant) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetVariantSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
-

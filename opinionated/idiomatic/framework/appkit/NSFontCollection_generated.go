@@ -99,4 +99,3 @@ type FontCollectionable interface {
 }
 
 var _ FontCollectionable = (*FontCollection)(nil)
-

@@ -16,14 +16,14 @@ type NSMergeConflict struct {
 }
 
 var (
-	_clsNSMergeConflict = _objcClass("NSMergeConflict")
+	_clsNSMergeConflict                                                                  = _objcClass("NSMergeConflict")
 	_nSMergeConflictSelInitWithSourceNewVersionOldVersionCachedSnapshotPersistedSnapshot = objc.RegisterName("initWithSource:newVersion:oldVersion:cachedSnapshot:persistedSnapshot:")
-	_nSMergeConflictSelSourceObject = objc.RegisterName("sourceObject")
-	_nSMergeConflictSelObjectSnapshot = objc.RegisterName("objectSnapshot")
-	_nSMergeConflictSelCachedSnapshot = objc.RegisterName("cachedSnapshot")
-	_nSMergeConflictSelPersistedSnapshot = objc.RegisterName("persistedSnapshot")
-	_nSMergeConflictSelNewVersionNumber = objc.RegisterName("newVersionNumber")
-	_nSMergeConflictSelOldVersionNumber = objc.RegisterName("oldVersionNumber")
+	_nSMergeConflictSelSourceObject                                                      = objc.RegisterName("sourceObject")
+	_nSMergeConflictSelObjectSnapshot                                                    = objc.RegisterName("objectSnapshot")
+	_nSMergeConflictSelCachedSnapshot                                                    = objc.RegisterName("cachedSnapshot")
+	_nSMergeConflictSelPersistedSnapshot                                                 = objc.RegisterName("persistedSnapshot")
+	_nSMergeConflictSelNewVersionNumber                                                  = objc.RegisterName("newVersionNumber")
+	_nSMergeConflictSelOldVersionNumber                                                  = objc.RegisterName("oldVersionNumber")
 )
 
 func NSMergeConflictFromID(id objc.ID) *NSMergeConflict {
@@ -38,13 +38,17 @@ func NSMergeConflictFromID(id objc.ID) *NSMergeConflict {
 
 func (o *NSMergeConflict) InitWithSourceNewVersionOldVersionCachedSnapshotPersistedSnapshot(srcObject *NSManagedObject, newvers uint, oldvers uint, cachesnap *foundation.NSDictionary[*foundation.NSString, objc.ID], persnap *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NSMergeConflict {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMergeConflictSelInitWithSourceNewVersionOldVersionCachedSnapshotPersistedSnapshot, srcObject.Ptr(), newvers, oldvers, cachesnap, persnap)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMergeConflictFromID(_ret)
 }
 
 func (o *NSMergeConflict) SourceObject() *NSManagedObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMergeConflictSelSourceObject)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectFromID(_ret)
 }
 
@@ -72,4 +76,3 @@ func (o *NSMergeConflict) OldVersionNumber() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSMergeConflictSelOldVersionNumber)
 	return _ret
 }
-

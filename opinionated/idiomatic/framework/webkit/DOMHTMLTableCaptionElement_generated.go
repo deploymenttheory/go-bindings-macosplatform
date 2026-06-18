@@ -159,15 +159,25 @@ func (x *DOMHTMLTableCaptionElement) SetAlign(align string) {
 	x.inner.SetAlign(foundation.NSStringStringWithUTF8String(align))
 }
 
-func (x *DOMHTMLTableCaptionElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
+func (x *DOMHTMLTableCaptionElement) asDOMHTMLElement() *raw.DOMHTMLElement {
+	return &x.inner.DOMHTMLElement
+}
 
-func (x *DOMHTMLTableCaptionElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
+func (x *DOMHTMLTableCaptionElement) asDOMElement() *raw.DOMElement {
+	return &x.inner.DOMHTMLElement.DOMElement
+}
 
-func (x *DOMHTMLTableCaptionElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTMLElement.DOMElement.DOMNode }
+func (x *DOMHTMLTableCaptionElement) asDOMNode() *raw.DOMNode {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode
+}
 
-func (x *DOMHTMLTableCaptionElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
+func (x *DOMHTMLTableCaptionElement) asDOMObject() *raw.DOMObject {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject
+}
 
-func (x *DOMHTMLTableCaptionElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+func (x *DOMHTMLTableCaptionElement) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject
+}
 
 // DOMHTMLTableCaptionElementable is the interface implemented by [DOMHTMLTableCaptionElement], for mocking and DI.
 type DOMHTMLTableCaptionElementable interface {
@@ -195,4 +205,3 @@ type DOMHTMLTableCaptionElementable interface {
 }
 
 var _ DOMHTMLTableCaptionElementable = (*DOMHTMLTableCaptionElement)(nil)
-

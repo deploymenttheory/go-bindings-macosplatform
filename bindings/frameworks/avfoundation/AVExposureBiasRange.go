@@ -16,10 +16,10 @@ type AVExposureBiasRange struct {
 }
 
 var (
-	_clsAVExposureBiasRange = _objcClass("AVExposureBiasRange")
+	_clsAVExposureBiasRange                     = _objcClass("AVExposureBiasRange")
 	_aVExposureBiasRangeSelContainsExposureBias = objc.RegisterName("containsExposureBias:")
-	_aVExposureBiasRangeSelMinExposureBias = objc.RegisterName("minExposureBias")
-	_aVExposureBiasRangeSelMaxExposureBias = objc.RegisterName("maxExposureBias")
+	_aVExposureBiasRangeSelMinExposureBias      = objc.RegisterName("minExposureBias")
+	_aVExposureBiasRangeSelMaxExposureBias      = objc.RegisterName("maxExposureBias")
 )
 
 func AVExposureBiasRangeFromID(id objc.ID) *AVExposureBiasRange {
@@ -49,4 +49,3 @@ func (o *AVExposureBiasRange) MaxExposureBias() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _aVExposureBiasRangeSelMaxExposureBias)
 	return _ret
 }
-

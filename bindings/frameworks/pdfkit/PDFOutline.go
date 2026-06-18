@@ -18,23 +18,23 @@ type PDFOutline struct {
 }
 
 var (
-	_clsPDFOutline = _objcClass("PDFOutline")
-	_pDFOutlineSelInit = objc.RegisterName("init")
-	_pDFOutlineSelChildAtIndex = objc.RegisterName("childAtIndex:")
+	_clsPDFOutline                   = _objcClass("PDFOutline")
+	_pDFOutlineSelInit               = objc.RegisterName("init")
+	_pDFOutlineSelChildAtIndex       = objc.RegisterName("childAtIndex:")
 	_pDFOutlineSelInsertChildAtIndex = objc.RegisterName("insertChild:atIndex:")
-	_pDFOutlineSelRemoveFromParent = objc.RegisterName("removeFromParent")
-	_pDFOutlineSelDocument = objc.RegisterName("document")
-	_pDFOutlineSelParent = objc.RegisterName("parent")
-	_pDFOutlineSelNumberOfChildren = objc.RegisterName("numberOfChildren")
-	_pDFOutlineSelIndex = objc.RegisterName("index")
-	_pDFOutlineSelLabel = objc.RegisterName("label")
-	_pDFOutlineSelSetLabel = objc.RegisterName("setLabel:")
-	_pDFOutlineSelIsOpen = objc.RegisterName("isOpen")
-	_pDFOutlineSelSetIsOpen = objc.RegisterName("setIsOpen:")
-	_pDFOutlineSelDestination = objc.RegisterName("destination")
-	_pDFOutlineSelSetDestination = objc.RegisterName("setDestination:")
-	_pDFOutlineSelAction = objc.RegisterName("action")
-	_pDFOutlineSelSetAction = objc.RegisterName("setAction:")
+	_pDFOutlineSelRemoveFromParent   = objc.RegisterName("removeFromParent")
+	_pDFOutlineSelDocument           = objc.RegisterName("document")
+	_pDFOutlineSelParent             = objc.RegisterName("parent")
+	_pDFOutlineSelNumberOfChildren   = objc.RegisterName("numberOfChildren")
+	_pDFOutlineSelIndex              = objc.RegisterName("index")
+	_pDFOutlineSelLabel              = objc.RegisterName("label")
+	_pDFOutlineSelSetLabel           = objc.RegisterName("setLabel:")
+	_pDFOutlineSelIsOpen             = objc.RegisterName("isOpen")
+	_pDFOutlineSelSetIsOpen          = objc.RegisterName("setIsOpen:")
+	_pDFOutlineSelDestination        = objc.RegisterName("destination")
+	_pDFOutlineSelSetDestination     = objc.RegisterName("setDestination:")
+	_pDFOutlineSelAction             = objc.RegisterName("action")
+	_pDFOutlineSelSetAction          = objc.RegisterName("setAction:")
 )
 
 func PDFOutlineFromID(id objc.ID) *PDFOutline {
@@ -49,13 +49,17 @@ func PDFOutlineFromID(id objc.ID) *PDFOutline {
 
 func (o *PDFOutline) Init() *PDFOutline {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFOutlineSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFOutlineFromID(_ret)
 }
 
 func (o *PDFOutline) ChildAtIndex(index uint) *PDFOutline {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFOutlineSelChildAtIndex, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFOutlineFromID(_ret)
 }
 
@@ -69,7 +73,9 @@ func (o *PDFOutline) RemoveFromParent() {
 
 func (o *PDFOutline) Document() *PDFDocument {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFOutlineSelDocument)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFDocumentFromID(_ret)
 }
 
@@ -90,7 +96,9 @@ func (o *PDFOutline) Index() uint {
 
 func (o *PDFOutline) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFOutlineSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -109,7 +117,9 @@ func (o *PDFOutline) SetIsOpen(isOpen bool) {
 
 func (o *PDFOutline) Destination() *PDFDestination {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFOutlineSelDestination)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFDestinationFromID(_ret)
 }
 
@@ -125,4 +135,3 @@ func (o *PDFOutline) Action() unsafe.Pointer {
 func (o *PDFOutline) SetAction(action unsafe.Pointer) {
 	o.Ptr().Send(_pDFOutlineSelSetAction, action)
 }
-

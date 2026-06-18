@@ -69,7 +69,9 @@ func (x *ImageIntegral) WithLabel(label string) *ImageIntegral {
 	return x
 }
 
-func (x *ImageIntegral) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageIntegral) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
 func (x *ImageIntegral) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
 
@@ -84,4 +86,3 @@ type ImageIntegralable interface {
 }
 
 var _ ImageIntegralable = (*ImageIntegral)(nil)
-

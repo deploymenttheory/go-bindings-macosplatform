@@ -16,7 +16,9 @@ type MTROccupancySensingClusterOccupancyChangedEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTROccupancySensingClusterOccupancyChangedEvent].
-func (x *MTROccupancySensingClusterOccupancyChangedEvent) Unwrap() *raw.MTROccupancySensingClusterOccupancyChangedEvent { return x.inner }
+func (x *MTROccupancySensingClusterOccupancyChangedEvent) Unwrap() *raw.MTROccupancySensingClusterOccupancyChangedEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -61,4 +63,3 @@ type MTROccupancySensingClusterOccupancyChangedEventable interface {
 }
 
 var _ MTROccupancySensingClusterOccupancyChangedEventable = (*MTROccupancySensingClusterOccupancyChangedEvent)(nil)
-

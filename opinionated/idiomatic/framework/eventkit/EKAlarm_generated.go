@@ -196,4 +196,3 @@ type Alarmable interface {
 }
 
 var _ Alarmable = (*Alarm)(nil)
-

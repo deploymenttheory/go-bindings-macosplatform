@@ -54,4 +54,3 @@ type Matchable interface {
 }
 
 var _ Matchable = (*Match)(nil)
-

@@ -94,4 +94,3 @@ type CustomContentable interface {
 }
 
 var _ CustomContentable = (*CustomContent)(nil)
-

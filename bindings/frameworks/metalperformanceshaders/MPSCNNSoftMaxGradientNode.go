@@ -18,7 +18,7 @@ type MPSCNNSoftMaxGradientNode struct {
 }
 
 var (
-	_clsMPSCNNSoftMaxGradientNode = _objcClass("MPSCNNSoftMaxGradientNode")
+	_clsMPSCNNSoftMaxGradientNode                                               = _objcClass("MPSCNNSoftMaxGradientNode")
 	_mPSCNNSoftMaxGradientNodeSelNodeWithSourceGradientSourceImageGradientState = objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:")
 	_mPSCNNSoftMaxGradientNodeSelInitWithSourceGradientSourceImageGradientState = objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:")
 )
@@ -35,13 +35,16 @@ func MPSCNNSoftMaxGradientNodeFromID(id objc.ID) *MPSCNNSoftMaxGradientNode {
 
 func MPSCNNSoftMaxGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient *mpsneuralnetwork.MPSNNImageNode, sourceImage *mpsneuralnetwork.MPSNNImageNode, gradientState *mpsneuralnetwork.MPSNNGradientStateNode) *MPSCNNSoftMaxGradientNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNSoftMaxGradientNode), _mPSCNNSoftMaxGradientNodeSelNodeWithSourceGradientSourceImageGradientState, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNSoftMaxGradientNodeFromID(_ret)
 }
 
 func (o *MPSCNNSoftMaxGradientNode) InitWithSourceGradientSourceImageGradientState(sourceGradient *mpsneuralnetwork.MPSNNImageNode, sourceImage *mpsneuralnetwork.MPSNNImageNode, gradientState *mpsneuralnetwork.MPSNNGradientStateNode) *MPSCNNSoftMaxGradientNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNSoftMaxGradientNodeSelInitWithSourceGradientSourceImageGradientState, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNSoftMaxGradientNodeFromID(_ret)
 }
-

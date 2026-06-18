@@ -172,4 +172,3 @@ func KIOSurfaceWidth() uintptr {
 	ptr, _ := purego.Dlsym(_iosurfaceLib, "kIOSurfaceWidth")
 	return ptr
 }
-

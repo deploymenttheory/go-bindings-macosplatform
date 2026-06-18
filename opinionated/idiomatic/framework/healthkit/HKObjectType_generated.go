@@ -60,4 +60,3 @@ type ObjectTypeable interface {
 }
 
 var _ ObjectTypeable = (*ObjectType)(nil)
-

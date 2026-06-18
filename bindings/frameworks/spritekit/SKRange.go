@@ -16,18 +16,18 @@ type SKRange struct {
 }
 
 var (
-	_clsSKRange = _objcClass("SKRange")
-	_sKRangeSelInitWithLowerLimitUpperLimit = objc.RegisterName("initWithLowerLimit:upperLimit:")
+	_clsSKRange                              = _objcClass("SKRange")
+	_sKRangeSelInitWithLowerLimitUpperLimit  = objc.RegisterName("initWithLowerLimit:upperLimit:")
 	_sKRangeSelRangeWithLowerLimitUpperLimit = objc.RegisterName("rangeWithLowerLimit:upperLimit:")
-	_sKRangeSelRangeWithLowerLimit = objc.RegisterName("rangeWithLowerLimit:")
-	_sKRangeSelRangeWithUpperLimit = objc.RegisterName("rangeWithUpperLimit:")
-	_sKRangeSelRangeWithConstantValue = objc.RegisterName("rangeWithConstantValue:")
-	_sKRangeSelRangeWithValueVariance = objc.RegisterName("rangeWithValue:variance:")
-	_sKRangeSelRangeWithNoLimits = objc.RegisterName("rangeWithNoLimits")
-	_sKRangeSelLowerLimit = objc.RegisterName("lowerLimit")
-	_sKRangeSelSetLowerLimit = objc.RegisterName("setLowerLimit:")
-	_sKRangeSelUpperLimit = objc.RegisterName("upperLimit")
-	_sKRangeSelSetUpperLimit = objc.RegisterName("setUpperLimit:")
+	_sKRangeSelRangeWithLowerLimit           = objc.RegisterName("rangeWithLowerLimit:")
+	_sKRangeSelRangeWithUpperLimit           = objc.RegisterName("rangeWithUpperLimit:")
+	_sKRangeSelRangeWithConstantValue        = objc.RegisterName("rangeWithConstantValue:")
+	_sKRangeSelRangeWithValueVariance        = objc.RegisterName("rangeWithValue:variance:")
+	_sKRangeSelRangeWithNoLimits             = objc.RegisterName("rangeWithNoLimits")
+	_sKRangeSelLowerLimit                    = objc.RegisterName("lowerLimit")
+	_sKRangeSelSetLowerLimit                 = objc.RegisterName("setLowerLimit:")
+	_sKRangeSelUpperLimit                    = objc.RegisterName("upperLimit")
+	_sKRangeSelSetUpperLimit                 = objc.RegisterName("setUpperLimit:")
 )
 
 func SKRangeFromID(id objc.ID) *SKRange {
@@ -42,43 +42,57 @@ func SKRangeFromID(id objc.ID) *SKRange {
 
 func (o *SKRange) InitWithLowerLimitUpperLimit(lower float64, upper float64) *SKRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKRangeSelInitWithLowerLimitUpperLimit, lower, upper)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKRangeFromID(_ret)
 }
 
 func SKRangeRangeWithLowerLimitUpperLimit(lower float64, upper float64) *SKRange {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKRange), _sKRangeSelRangeWithLowerLimitUpperLimit, lower, upper)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKRangeFromID(_ret)
 }
 
 func SKRangeRangeWithLowerLimit(lower float64) *SKRange {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKRange), _sKRangeSelRangeWithLowerLimit, lower)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKRangeFromID(_ret)
 }
 
 func SKRangeRangeWithUpperLimit(upper float64) *SKRange {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKRange), _sKRangeSelRangeWithUpperLimit, upper)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKRangeFromID(_ret)
 }
 
 func SKRangeRangeWithConstantValue(value float64) *SKRange {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKRange), _sKRangeSelRangeWithConstantValue, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKRangeFromID(_ret)
 }
 
 func SKRangeRangeWithValueVariance(value float64, variance float64) *SKRange {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKRange), _sKRangeSelRangeWithValueVariance, value, variance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKRangeFromID(_ret)
 }
 
 func SKRangeRangeWithNoLimits() *SKRange {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKRange), _sKRangeSelRangeWithNoLimits)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKRangeFromID(_ret)
 }
 
@@ -99,4 +113,3 @@ func (o *SKRange) UpperLimit() float64 {
 func (o *SKRange) SetUpperLimit(upperLimit float64) {
 	o.Ptr().Send(_sKRangeSelSetUpperLimit, upperLimit)
 }
-

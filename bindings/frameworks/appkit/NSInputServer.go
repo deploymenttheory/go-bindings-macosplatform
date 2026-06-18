@@ -17,7 +17,7 @@ type NSInputServer struct {
 }
 
 var (
-	_clsNSInputServer = _objcClass("NSInputServer")
+	_clsNSInputServer                     = _objcClass("NSInputServer")
 	_nSInputServerSelInitWithDelegateName = objc.RegisterName("initWithDelegate:name:")
 )
 
@@ -34,7 +34,8 @@ func NSInputServerFromID(id objc.ID) *NSInputServer {
 // Deprecated: since macOS 10.6.
 func (o *NSInputServer) InitWithDelegateName(delegate objc.ID, name *foundation.NSString) *NSInputServer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSInputServerSelInitWithDelegateName, delegate, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSInputServerFromID(_ret)
 }
-

@@ -25,4 +25,3 @@ func MTRNetworkCommissioningClusterNetworkInfoFromID(id objc.ID) *MTRNetworkComm
 	purego.Track(o)
 	return o
 }
-

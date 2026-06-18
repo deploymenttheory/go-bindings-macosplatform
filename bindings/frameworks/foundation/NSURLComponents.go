@@ -15,59 +15,59 @@ type NSURLComponents struct {
 }
 
 var (
-	_clsNSURLComponents = _objcClass("NSURLComponents")
-	_nSURLComponentsSelInit = objc.RegisterName("init")
-	_nSURLComponentsSelInitWithURLResolvingAgainstBaseURL = objc.RegisterName("initWithURL:resolvingAgainstBaseURL:")
-	_nSURLComponentsSelComponentsWithURLResolvingAgainstBaseURL = objc.RegisterName("componentsWithURL:resolvingAgainstBaseURL:")
-	_nSURLComponentsSelInitWithString = objc.RegisterName("initWithString:")
-	_nSURLComponentsSelComponentsWithString = objc.RegisterName("componentsWithString:")
-	_nSURLComponentsSelInitWithStringEncodingInvalidCharacters = objc.RegisterName("initWithString:encodingInvalidCharacters:")
+	_clsNSURLComponents                                              = _objcClass("NSURLComponents")
+	_nSURLComponentsSelInit                                          = objc.RegisterName("init")
+	_nSURLComponentsSelInitWithURLResolvingAgainstBaseURL            = objc.RegisterName("initWithURL:resolvingAgainstBaseURL:")
+	_nSURLComponentsSelComponentsWithURLResolvingAgainstBaseURL      = objc.RegisterName("componentsWithURL:resolvingAgainstBaseURL:")
+	_nSURLComponentsSelInitWithString                                = objc.RegisterName("initWithString:")
+	_nSURLComponentsSelComponentsWithString                          = objc.RegisterName("componentsWithString:")
+	_nSURLComponentsSelInitWithStringEncodingInvalidCharacters       = objc.RegisterName("initWithString:encodingInvalidCharacters:")
 	_nSURLComponentsSelComponentsWithStringEncodingInvalidCharacters = objc.RegisterName("componentsWithString:encodingInvalidCharacters:")
-	_nSURLComponentsSelURLRelativeToURL = objc.RegisterName("URLRelativeToURL:")
-	_nSURLComponentsSelURL = objc.RegisterName("URL")
-	_nSURLComponentsSelString = objc.RegisterName("string")
-	_nSURLComponentsSelScheme = objc.RegisterName("scheme")
-	_nSURLComponentsSelSetScheme = objc.RegisterName("setScheme:")
-	_nSURLComponentsSelUser = objc.RegisterName("user")
-	_nSURLComponentsSelSetUser = objc.RegisterName("setUser:")
-	_nSURLComponentsSelPassword = objc.RegisterName("password")
-	_nSURLComponentsSelSetPassword = objc.RegisterName("setPassword:")
-	_nSURLComponentsSelHost = objc.RegisterName("host")
-	_nSURLComponentsSelSetHost = objc.RegisterName("setHost:")
-	_nSURLComponentsSelPort = objc.RegisterName("port")
-	_nSURLComponentsSelSetPort = objc.RegisterName("setPort:")
-	_nSURLComponentsSelPath = objc.RegisterName("path")
-	_nSURLComponentsSelSetPath = objc.RegisterName("setPath:")
-	_nSURLComponentsSelQuery = objc.RegisterName("query")
-	_nSURLComponentsSelSetQuery = objc.RegisterName("setQuery:")
-	_nSURLComponentsSelFragment = objc.RegisterName("fragment")
-	_nSURLComponentsSelSetFragment = objc.RegisterName("setFragment:")
-	_nSURLComponentsSelPercentEncodedUser = objc.RegisterName("percentEncodedUser")
-	_nSURLComponentsSelSetPercentEncodedUser = objc.RegisterName("setPercentEncodedUser:")
-	_nSURLComponentsSelPercentEncodedPassword = objc.RegisterName("percentEncodedPassword")
-	_nSURLComponentsSelSetPercentEncodedPassword = objc.RegisterName("setPercentEncodedPassword:")
-	_nSURLComponentsSelPercentEncodedHost = objc.RegisterName("percentEncodedHost")
-	_nSURLComponentsSelSetPercentEncodedHost = objc.RegisterName("setPercentEncodedHost:")
-	_nSURLComponentsSelPercentEncodedPath = objc.RegisterName("percentEncodedPath")
-	_nSURLComponentsSelSetPercentEncodedPath = objc.RegisterName("setPercentEncodedPath:")
-	_nSURLComponentsSelPercentEncodedQuery = objc.RegisterName("percentEncodedQuery")
-	_nSURLComponentsSelSetPercentEncodedQuery = objc.RegisterName("setPercentEncodedQuery:")
-	_nSURLComponentsSelPercentEncodedFragment = objc.RegisterName("percentEncodedFragment")
-	_nSURLComponentsSelSetPercentEncodedFragment = objc.RegisterName("setPercentEncodedFragment:")
-	_nSURLComponentsSelEncodedHost = objc.RegisterName("encodedHost")
-	_nSURLComponentsSelSetEncodedHost = objc.RegisterName("setEncodedHost:")
-	_nSURLComponentsSelRangeOfScheme = objc.RegisterName("rangeOfScheme")
-	_nSURLComponentsSelRangeOfUser = objc.RegisterName("rangeOfUser")
-	_nSURLComponentsSelRangeOfPassword = objc.RegisterName("rangeOfPassword")
-	_nSURLComponentsSelRangeOfHost = objc.RegisterName("rangeOfHost")
-	_nSURLComponentsSelRangeOfPort = objc.RegisterName("rangeOfPort")
-	_nSURLComponentsSelRangeOfPath = objc.RegisterName("rangeOfPath")
-	_nSURLComponentsSelRangeOfQuery = objc.RegisterName("rangeOfQuery")
-	_nSURLComponentsSelRangeOfFragment = objc.RegisterName("rangeOfFragment")
-	_nSURLComponentsSelQueryItems = objc.RegisterName("queryItems")
-	_nSURLComponentsSelSetQueryItems = objc.RegisterName("setQueryItems:")
-	_nSURLComponentsSelPercentEncodedQueryItems = objc.RegisterName("percentEncodedQueryItems")
-	_nSURLComponentsSelSetPercentEncodedQueryItems = objc.RegisterName("setPercentEncodedQueryItems:")
+	_nSURLComponentsSelURLRelativeToURL                              = objc.RegisterName("URLRelativeToURL:")
+	_nSURLComponentsSelURL                                           = objc.RegisterName("URL")
+	_nSURLComponentsSelString                                        = objc.RegisterName("string")
+	_nSURLComponentsSelScheme                                        = objc.RegisterName("scheme")
+	_nSURLComponentsSelSetScheme                                     = objc.RegisterName("setScheme:")
+	_nSURLComponentsSelUser                                          = objc.RegisterName("user")
+	_nSURLComponentsSelSetUser                                       = objc.RegisterName("setUser:")
+	_nSURLComponentsSelPassword                                      = objc.RegisterName("password")
+	_nSURLComponentsSelSetPassword                                   = objc.RegisterName("setPassword:")
+	_nSURLComponentsSelHost                                          = objc.RegisterName("host")
+	_nSURLComponentsSelSetHost                                       = objc.RegisterName("setHost:")
+	_nSURLComponentsSelPort                                          = objc.RegisterName("port")
+	_nSURLComponentsSelSetPort                                       = objc.RegisterName("setPort:")
+	_nSURLComponentsSelPath                                          = objc.RegisterName("path")
+	_nSURLComponentsSelSetPath                                       = objc.RegisterName("setPath:")
+	_nSURLComponentsSelQuery                                         = objc.RegisterName("query")
+	_nSURLComponentsSelSetQuery                                      = objc.RegisterName("setQuery:")
+	_nSURLComponentsSelFragment                                      = objc.RegisterName("fragment")
+	_nSURLComponentsSelSetFragment                                   = objc.RegisterName("setFragment:")
+	_nSURLComponentsSelPercentEncodedUser                            = objc.RegisterName("percentEncodedUser")
+	_nSURLComponentsSelSetPercentEncodedUser                         = objc.RegisterName("setPercentEncodedUser:")
+	_nSURLComponentsSelPercentEncodedPassword                        = objc.RegisterName("percentEncodedPassword")
+	_nSURLComponentsSelSetPercentEncodedPassword                     = objc.RegisterName("setPercentEncodedPassword:")
+	_nSURLComponentsSelPercentEncodedHost                            = objc.RegisterName("percentEncodedHost")
+	_nSURLComponentsSelSetPercentEncodedHost                         = objc.RegisterName("setPercentEncodedHost:")
+	_nSURLComponentsSelPercentEncodedPath                            = objc.RegisterName("percentEncodedPath")
+	_nSURLComponentsSelSetPercentEncodedPath                         = objc.RegisterName("setPercentEncodedPath:")
+	_nSURLComponentsSelPercentEncodedQuery                           = objc.RegisterName("percentEncodedQuery")
+	_nSURLComponentsSelSetPercentEncodedQuery                        = objc.RegisterName("setPercentEncodedQuery:")
+	_nSURLComponentsSelPercentEncodedFragment                        = objc.RegisterName("percentEncodedFragment")
+	_nSURLComponentsSelSetPercentEncodedFragment                     = objc.RegisterName("setPercentEncodedFragment:")
+	_nSURLComponentsSelEncodedHost                                   = objc.RegisterName("encodedHost")
+	_nSURLComponentsSelSetEncodedHost                                = objc.RegisterName("setEncodedHost:")
+	_nSURLComponentsSelRangeOfScheme                                 = objc.RegisterName("rangeOfScheme")
+	_nSURLComponentsSelRangeOfUser                                   = objc.RegisterName("rangeOfUser")
+	_nSURLComponentsSelRangeOfPassword                               = objc.RegisterName("rangeOfPassword")
+	_nSURLComponentsSelRangeOfHost                                   = objc.RegisterName("rangeOfHost")
+	_nSURLComponentsSelRangeOfPort                                   = objc.RegisterName("rangeOfPort")
+	_nSURLComponentsSelRangeOfPath                                   = objc.RegisterName("rangeOfPath")
+	_nSURLComponentsSelRangeOfQuery                                  = objc.RegisterName("rangeOfQuery")
+	_nSURLComponentsSelRangeOfFragment                               = objc.RegisterName("rangeOfFragment")
+	_nSURLComponentsSelQueryItems                                    = objc.RegisterName("queryItems")
+	_nSURLComponentsSelSetQueryItems                                 = objc.RegisterName("setQueryItems:")
+	_nSURLComponentsSelPercentEncodedQueryItems                      = objc.RegisterName("percentEncodedQueryItems")
+	_nSURLComponentsSelSetPercentEncodedQueryItems                   = objc.RegisterName("setPercentEncodedQueryItems:")
 )
 
 func NSURLComponentsFromID(id objc.ID) *NSURLComponents {
@@ -82,69 +82,91 @@ func NSURLComponentsFromID(id objc.ID) *NSURLComponents {
 
 func (o *NSURLComponents) Init() *NSURLComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLComponentsFromID(_ret)
 }
 
 func (o *NSURLComponents) InitWithURLResolvingAgainstBaseURL(url *NSURL, resolve bool) *NSURLComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelInitWithURLResolvingAgainstBaseURL, url.Ptr(), resolve)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLComponentsFromID(_ret)
 }
 
 func NSURLComponentsComponentsWithURLResolvingAgainstBaseURL(url *NSURL, resolve bool) *NSURLComponents {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLComponents), _nSURLComponentsSelComponentsWithURLResolvingAgainstBaseURL, url.Ptr(), resolve)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLComponentsFromID(_ret)
 }
 
 func (o *NSURLComponents) InitWithString(uRLString *NSString) *NSURLComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelInitWithString, uRLString.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLComponentsFromID(_ret)
 }
 
 func NSURLComponentsComponentsWithString(uRLString *NSString) *NSURLComponents {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLComponents), _nSURLComponentsSelComponentsWithString, uRLString.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLComponentsFromID(_ret)
 }
 
 // Initializes an `NSURLComponents` with a URL string and the option to add (or skip) IDNA- and percent-encoding of invalid characters. If `encodingInvalidCharacters` is false, and the URL string is invalid according to RFC 3986, `nil` is returned. If `encodingInvalidCharacters` is true, `NSURLComponents` will try to encode the string to create a valid URL. If the URL string is still invalid after encoding, `nil` is returned. - Parameter URLString: The URL string. - Parameter encodingInvalidCharacters: True if `NSURLComponents` should try to encode an invalid URL string, false otherwise. - Returns: An `NSURLComponents` instance for a valid URL, or `nil` if the URL is invalid.
 func (o *NSURLComponents) InitWithStringEncodingInvalidCharacters(uRLString *NSString, encodingInvalidCharacters bool) *NSURLComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelInitWithStringEncodingInvalidCharacters, uRLString.Ptr(), encodingInvalidCharacters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLComponentsFromID(_ret)
 }
 
 // Initializes and returns a newly created `NSURLComponents` with a URL string and the option to add (or skip) IDNA- and percent-encoding of invalid characters. If `encodingInvalidCharacters` is false, and the URL string is invalid according to RFC 3986, `nil` is returned. If `encodingInvalidCharacters` is true, `NSURLComponents` will try to encode the string to create a valid URL. If the URL string is still invalid after encoding, nil is returned. - Parameter URLString: The URL string. - Parameter encodingInvalidCharacters: True if `NSURLComponents` should try to encode an invalid URL string, false otherwise. - Returns: An `NSURLComponents` instance for a valid URL, or `nil` if the URL is invalid.
 func NSURLComponentsComponentsWithStringEncodingInvalidCharacters(uRLString *NSString, encodingInvalidCharacters bool) *NSURLComponents {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLComponents), _nSURLComponentsSelComponentsWithStringEncodingInvalidCharacters, uRLString.Ptr(), encodingInvalidCharacters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLComponentsFromID(_ret)
 }
 
 func (o *NSURLComponents) URLRelativeToURL(baseURL *NSURL) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelURLRelativeToURL, baseURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func (o *NSURLComponents) URL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func (o *NSURLComponents) String() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSURLComponents) Scheme() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelScheme)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -154,7 +176,9 @@ func (o *NSURLComponents) SetScheme(scheme *NSString) {
 
 func (o *NSURLComponents) User() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelUser)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -164,7 +188,9 @@ func (o *NSURLComponents) SetUser(user *NSString) {
 
 func (o *NSURLComponents) Password() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelPassword)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -174,7 +200,9 @@ func (o *NSURLComponents) SetPassword(password *NSString) {
 
 func (o *NSURLComponents) Host() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelHost)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -184,7 +212,9 @@ func (o *NSURLComponents) SetHost(host *NSString) {
 
 func (o *NSURLComponents) Port() *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelPort)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
@@ -194,7 +224,9 @@ func (o *NSURLComponents) SetPort(port *NSNumber) {
 
 func (o *NSURLComponents) Path() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -204,7 +236,9 @@ func (o *NSURLComponents) SetPath(path *NSString) {
 
 func (o *NSURLComponents) Query() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelQuery)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -214,7 +248,9 @@ func (o *NSURLComponents) SetQuery(query *NSString) {
 
 func (o *NSURLComponents) Fragment() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelFragment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -224,7 +260,9 @@ func (o *NSURLComponents) SetFragment(fragment *NSString) {
 
 func (o *NSURLComponents) PercentEncodedUser() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelPercentEncodedUser)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -234,7 +272,9 @@ func (o *NSURLComponents) SetPercentEncodedUser(percentEncodedUser *NSString) {
 
 func (o *NSURLComponents) PercentEncodedPassword() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelPercentEncodedPassword)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -245,7 +285,9 @@ func (o *NSURLComponents) SetPercentEncodedPassword(percentEncodedPassword *NSSt
 // Deprecated: Use encodedHost instead
 func (o *NSURLComponents) PercentEncodedHost() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelPercentEncodedHost)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -257,7 +299,9 @@ func (o *NSURLComponents) SetPercentEncodedHost(percentEncodedHost *NSString) {
 // Deprecated: Use encodedHost instead
 func (o *NSURLComponents) PercentEncodedPath() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelPercentEncodedPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -268,7 +312,9 @@ func (o *NSURLComponents) SetPercentEncodedPath(percentEncodedPath *NSString) {
 // Deprecated: Use encodedHost instead
 func (o *NSURLComponents) PercentEncodedQuery() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelPercentEncodedQuery)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -279,7 +325,9 @@ func (o *NSURLComponents) SetPercentEncodedQuery(percentEncodedQuery *NSString) 
 // Deprecated: Use encodedHost instead
 func (o *NSURLComponents) PercentEncodedFragment() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelPercentEncodedFragment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -289,7 +337,9 @@ func (o *NSURLComponents) SetPercentEncodedFragment(percentEncodedFragment *NSSt
 
 func (o *NSURLComponents) EncodedHost() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelEncodedHost)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -339,7 +389,9 @@ func (o *NSURLComponents) RangeOfFragment() NSRange {
 
 func (o *NSURLComponents) QueryItems() *NSArray[*NSURLQueryItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelQueryItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSURLQueryItem](_ret)
 }
 
@@ -349,11 +401,12 @@ func (o *NSURLComponents) SetQueryItems(queryItems *NSArray[*NSURLQueryItem]) {
 
 func (o *NSURLComponents) PercentEncodedQueryItems() *NSArray[*NSURLQueryItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelPercentEncodedQueryItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSURLQueryItem](_ret)
 }
 
 func (o *NSURLComponents) SetPercentEncodedQueryItems(percentEncodedQueryItems *NSArray[*NSURLQueryItem]) {
 	o.Ptr().Send(_nSURLComponentsSelSetPercentEncodedQueryItems, percentEncodedQueryItems.Ptr())
 }
-

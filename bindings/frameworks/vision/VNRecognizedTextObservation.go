@@ -16,7 +16,7 @@ type VNRecognizedTextObservation struct {
 }
 
 var (
-	_clsVNRecognizedTextObservation = _objcClass("VNRecognizedTextObservation")
+	_clsVNRecognizedTextObservation              = _objcClass("VNRecognizedTextObservation")
 	_vNRecognizedTextObservationSelTopCandidates = objc.RegisterName("topCandidates:")
 )
 
@@ -33,7 +33,8 @@ func VNRecognizedTextObservationFromID(id objc.ID) *VNRecognizedTextObservation 
 // @brief Returns the top N candidates sorted by decreasing confidence score @discussion This will return no more than N but can be less than N candidates. The maximum number of candidates returned cannot exceed 10 candidates.
 func (o *VNRecognizedTextObservation) TopCandidates(maxCandidateCount uint) *foundation.NSArray[*VNRecognizedText] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNRecognizedTextObservationSelTopCandidates, maxCandidateCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VNRecognizedText](_ret)
 }
-

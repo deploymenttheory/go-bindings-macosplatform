@@ -480,4 +480,3 @@ type DDDeviceable interface {
 }
 
 var _ DDDeviceable = (*DDDevice)(nil)
-

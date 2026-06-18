@@ -145,4 +145,3 @@ func SCNVector4ToFloat4(v raw.SCNVector4) unsafe.Pointer {
 func SCNVector4ToGLKVector4(vector raw.SCNVector4) unsafe.Pointer {
 	return raw.SCNVector4ToGLKVector4(vector)
 }
-

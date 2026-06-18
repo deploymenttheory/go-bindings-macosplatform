@@ -18,14 +18,14 @@ type MTRUnitTestingClusterTestEnumsResponseParams struct {
 }
 
 var (
-	_clsMTRUnitTestingClusterTestEnumsResponseParams = _objcClass("MTRUnitTestingClusterTestEnumsResponseParams")
+	_clsMTRUnitTestingClusterTestEnumsResponseParams                           = _objcClass("MTRUnitTestingClusterTestEnumsResponseParams")
 	_mTRUnitTestingClusterTestEnumsResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRUnitTestingClusterTestEnumsResponseParamsSelArg1 = objc.RegisterName("arg1")
-	_mTRUnitTestingClusterTestEnumsResponseParamsSelSetArg1 = objc.RegisterName("setArg1:")
-	_mTRUnitTestingClusterTestEnumsResponseParamsSelArg2 = objc.RegisterName("arg2")
-	_mTRUnitTestingClusterTestEnumsResponseParamsSelSetArg2 = objc.RegisterName("setArg2:")
-	_mTRUnitTestingClusterTestEnumsResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRUnitTestingClusterTestEnumsResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRUnitTestingClusterTestEnumsResponseParamsSelArg1                       = objc.RegisterName("arg1")
+	_mTRUnitTestingClusterTestEnumsResponseParamsSelSetArg1                    = objc.RegisterName("setArg1:")
+	_mTRUnitTestingClusterTestEnumsResponseParamsSelArg2                       = objc.RegisterName("arg2")
+	_mTRUnitTestingClusterTestEnumsResponseParamsSelSetArg2                    = objc.RegisterName("setArg2:")
+	_mTRUnitTestingClusterTestEnumsResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRUnitTestingClusterTestEnumsResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
 )
 
 func MTRUnitTestingClusterTestEnumsResponseParamsFromID(id objc.ID) *MTRUnitTestingClusterTestEnumsResponseParams {
@@ -42,7 +42,9 @@ func MTRUnitTestingClusterTestEnumsResponseParamsFromID(id objc.ID) *MTRUnitTest
 func (o *MTRUnitTestingClusterTestEnumsResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRUnitTestingClusterTestEnumsResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestEnumsResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -51,7 +53,9 @@ func (o *MTRUnitTestingClusterTestEnumsResponseParams) InitWithResponseValueErro
 
 func (o *MTRUnitTestingClusterTestEnumsResponseParams) Arg1() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestEnumsResponseParamsSelArg1)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *MTRUnitTestingClusterTestEnumsResponseParams) SetArg1(arg1 *foundation.
 
 func (o *MTRUnitTestingClusterTestEnumsResponseParams) Arg2() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestEnumsResponseParamsSelArg2)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -72,11 +78,12 @@ func (o *MTRUnitTestingClusterTestEnumsResponseParams) SetArg2(arg2 *foundation.
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRUnitTestingClusterTestEnumsResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestEnumsResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRUnitTestingClusterTestEnumsResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
 	o.Ptr().Send(_mTRUnitTestingClusterTestEnumsResponseParamsSelSetTimedInvokeTimeoutMs, timedInvokeTimeoutMs.Ptr())
 }
-

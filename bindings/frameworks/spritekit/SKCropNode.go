@@ -17,8 +17,8 @@ type SKCropNode struct {
 }
 
 var (
-	_clsSKCropNode = _objcClass("SKCropNode")
-	_sKCropNodeSelMaskNode = objc.RegisterName("maskNode")
+	_clsSKCropNode            = _objcClass("SKCropNode")
+	_sKCropNodeSelMaskNode    = objc.RegisterName("maskNode")
 	_sKCropNodeSelSetMaskNode = objc.RegisterName("setMaskNode:")
 )
 
@@ -34,11 +34,12 @@ func SKCropNodeFromID(id objc.ID) *SKCropNode {
 
 func (o *SKCropNode) MaskNode() *SKNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKCropNodeSelMaskNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKNodeFromID(_ret)
 }
 
 func (o *SKCropNode) SetMaskNode(maskNode *SKNode) {
 	o.Ptr().Send(_sKCropNodeSelSetMaskNode, maskNode.Ptr())
 }
-

@@ -17,7 +17,9 @@ type NNGramMatrixCalculationGradientNode struct {
 }
 
 // Unwrap returns the underlying [raw.MPSNNGramMatrixCalculationGradientNode].
-func (x *NNGramMatrixCalculationGradientNode) Unwrap() *raw.MPSNNGramMatrixCalculationGradientNode { return x.inner }
+func (x *NNGramMatrixCalculationGradientNode) Unwrap() *raw.MPSNNGramMatrixCalculationGradientNode {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -62,9 +64,13 @@ func (x *NNGramMatrixCalculationGradientNode) Alpha() float32 {
 	return x.inner.Alpha()
 }
 
-func (x *NNGramMatrixCalculationGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
+func (x *NNGramMatrixCalculationGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode {
+	return &x.inner.MPSNNGradientFilterNode
+}
 
-func (x *NNGramMatrixCalculationGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
+func (x *NNGramMatrixCalculationGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode
+}
 
 // NNGramMatrixCalculationGradientNodeable is the interface implemented by [NNGramMatrixCalculationGradientNode], for mocking and DI.
 type NNGramMatrixCalculationGradientNodeable interface {
@@ -75,4 +81,3 @@ type NNGramMatrixCalculationGradientNodeable interface {
 }
 
 var _ NNGramMatrixCalculationGradientNodeable = (*NNGramMatrixCalculationGradientNode)(nil)
-

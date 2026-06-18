@@ -137,4 +137,3 @@ type NNNeuronDescriptorable interface {
 }
 
 var _ NNNeuronDescriptorable = (*NNNeuronDescriptor)(nil)
-

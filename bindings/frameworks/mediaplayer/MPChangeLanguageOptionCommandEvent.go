@@ -15,9 +15,9 @@ type MPChangeLanguageOptionCommandEvent struct {
 }
 
 var (
-	_clsMPChangeLanguageOptionCommandEvent = _objcClass("MPChangeLanguageOptionCommandEvent")
+	_clsMPChangeLanguageOptionCommandEvent               = _objcClass("MPChangeLanguageOptionCommandEvent")
 	_mPChangeLanguageOptionCommandEventSelLanguageOption = objc.RegisterName("languageOption")
-	_mPChangeLanguageOptionCommandEventSelSetting = objc.RegisterName("setting")
+	_mPChangeLanguageOptionCommandEventSelSetting        = objc.RegisterName("setting")
 )
 
 func MPChangeLanguageOptionCommandEventFromID(id objc.ID) *MPChangeLanguageOptionCommandEvent {
@@ -33,7 +33,9 @@ func MPChangeLanguageOptionCommandEventFromID(id objc.ID) *MPChangeLanguageOptio
 // The requested language option to change. The supplied language option may be the Automatic Legible Language Option which would mean that best legible language option based on user preferences is being requested. See MPNowPlayingInfoLanguageOption isAutomaticLegibleLanguageOption
 func (o *MPChangeLanguageOptionCommandEvent) LanguageOption() *MPNowPlayingInfoLanguageOption {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPChangeLanguageOptionCommandEventSelLanguageOption)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPNowPlayingInfoLanguageOptionFromID(_ret)
 }
 
@@ -42,4 +44,3 @@ func (o *MPChangeLanguageOptionCommandEvent) Setting() MPChangeLanguageOptionSet
 	_ret := objc.Send[MPChangeLanguageOptionSetting](o.Ptr(), _mPChangeLanguageOptionCommandEventSelSetting)
 	return _ret
 }
-

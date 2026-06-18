@@ -74,7 +74,9 @@ func (x *FragmentedAssetMinder) Assets() []*Asset {
 	})
 }
 
-func (x *FragmentedAssetMinder) asFragmentedAssetMinder() *raw.AVFragmentedAssetMinder { return x.inner }
+func (x *FragmentedAssetMinder) asFragmentedAssetMinder() *raw.AVFragmentedAssetMinder {
+	return x.inner
+}
 
 // FragmentedAssetMinderable is the interface implemented by [FragmentedAssetMinder], for mocking and DI.
 type FragmentedAssetMinderable interface {
@@ -88,4 +90,3 @@ type FragmentedAssetMinderable interface {
 }
 
 var _ FragmentedAssetMinderable = (*FragmentedAssetMinder)(nil)
-

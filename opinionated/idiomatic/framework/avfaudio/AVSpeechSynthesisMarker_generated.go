@@ -182,4 +182,3 @@ type SpeechSynthesisMarkerable interface {
 }
 
 var _ SpeechSynthesisMarkerable = (*SpeechSynthesisMarker)(nil)
-

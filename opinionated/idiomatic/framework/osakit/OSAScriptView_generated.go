@@ -180,4 +180,3 @@ type ScriptViewable interface {
 }
 
 var _ ScriptViewable = (*ScriptView)(nil)
-

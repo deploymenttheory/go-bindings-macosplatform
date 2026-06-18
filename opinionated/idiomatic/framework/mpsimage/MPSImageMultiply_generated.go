@@ -110,9 +110,13 @@ func (x *ImageMultiply) WithClipRect(clipRect metal.MTLRegion) *ImageMultiply {
 	return x
 }
 
-func (x *ImageMultiply) asImageArithmetic() *raw.MPSImageArithmetic { return &x.inner.MPSImageArithmetic }
+func (x *ImageMultiply) asImageArithmetic() *raw.MPSImageArithmetic {
+	return &x.inner.MPSImageArithmetic
+}
 
-func (x *ImageMultiply) asBinaryImageKernel() *raw.MPSBinaryImageKernel { return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel }
+func (x *ImageMultiply) asBinaryImageKernel() *raw.MPSBinaryImageKernel {
+	return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel
+}
 
 // ImageMultiplyable is the interface implemented by [ImageMultiply], for mocking and DI.
 type ImageMultiplyable interface {
@@ -132,4 +136,3 @@ type ImageMultiplyable interface {
 }
 
 var _ ImageMultiplyable = (*ImageMultiply)(nil)
-

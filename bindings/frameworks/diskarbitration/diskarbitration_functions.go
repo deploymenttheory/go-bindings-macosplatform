@@ -12,45 +12,45 @@ import (
 )
 
 var (
-	_fnDAApprovalSessionCreate func(unsafe.Pointer) unsafe.Pointer
-	_fnDAApprovalSessionGetTypeID func() uint
-	_fnDAApprovalSessionScheduleWithRunLoop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnDAApprovalSessionUnscheduleFromRunLoop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnDADiskClaim func(unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnDADiskCopyDescription func(unsafe.Pointer) unsafe.Pointer
-	_fnDADiskCopyIOMedia func(unsafe.Pointer) uint
-	_fnDADiskCopyWholeDisk func(unsafe.Pointer) unsafe.Pointer
-	_fnDADiskCreateFromBSDName func(unsafe.Pointer, unsafe.Pointer, string) unsafe.Pointer
-	_fnDADiskCreateFromIOMedia func(unsafe.Pointer, unsafe.Pointer, uint) unsafe.Pointer
-	_fnDADiskCreateFromVolumePath func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnDADiskEject func(unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer)
-	_fnDADiskGetBSDName func(unsafe.Pointer) string
-	_fnDADiskGetOptions func(unsafe.Pointer) uint
-	_fnDADiskGetTypeID func() uint
-	_fnDADiskIsClaimed func(unsafe.Pointer) uint8
-	_fnDADiskMount func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer)
-	_fnDADiskMountWithArguments func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnDADiskRename func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer)
-	_fnDADiskSetOptions func(unsafe.Pointer, uint, uint8) int
-	_fnDADiskUnclaim func(unsafe.Pointer)
-	_fnDADiskUnmount func(unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer)
-	_fnDADissenterCreate func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
-	_fnDADissenterGetStatus func(unsafe.Pointer) int
-	_fnDADissenterGetStatusString func(unsafe.Pointer) unsafe.Pointer
-	_fnDARegisterDiskAppearedCallback func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnDAApprovalSessionCreate                  func(unsafe.Pointer) unsafe.Pointer
+	_fnDAApprovalSessionGetTypeID               func() uint
+	_fnDAApprovalSessionScheduleWithRunLoop     func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnDAApprovalSessionUnscheduleFromRunLoop   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnDADiskClaim                              func(unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnDADiskCopyDescription                    func(unsafe.Pointer) unsafe.Pointer
+	_fnDADiskCopyIOMedia                        func(unsafe.Pointer) uint
+	_fnDADiskCopyWholeDisk                      func(unsafe.Pointer) unsafe.Pointer
+	_fnDADiskCreateFromBSDName                  func(unsafe.Pointer, unsafe.Pointer, string) unsafe.Pointer
+	_fnDADiskCreateFromIOMedia                  func(unsafe.Pointer, unsafe.Pointer, uint) unsafe.Pointer
+	_fnDADiskCreateFromVolumePath               func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnDADiskEject                              func(unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer)
+	_fnDADiskGetBSDName                         func(unsafe.Pointer) string
+	_fnDADiskGetOptions                         func(unsafe.Pointer) uint
+	_fnDADiskGetTypeID                          func() uint
+	_fnDADiskIsClaimed                          func(unsafe.Pointer) uint8
+	_fnDADiskMount                              func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer)
+	_fnDADiskMountWithArguments                 func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnDADiskRename                             func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer)
+	_fnDADiskSetOptions                         func(unsafe.Pointer, uint, uint8) int
+	_fnDADiskUnclaim                            func(unsafe.Pointer)
+	_fnDADiskUnmount                            func(unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer)
+	_fnDADissenterCreate                        func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
+	_fnDADissenterGetStatus                     func(unsafe.Pointer) int
+	_fnDADissenterGetStatusString               func(unsafe.Pointer) unsafe.Pointer
+	_fnDARegisterDiskAppearedCallback           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 	_fnDARegisterDiskDescriptionChangedCallback func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnDARegisterDiskDisappearedCallback func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnDARegisterDiskEjectApprovalCallback func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnDARegisterDiskMountApprovalCallback func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnDARegisterDiskPeekCallback func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer)
-	_fnDARegisterDiskUnmountApprovalCallback func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnDASessionCreate func(unsafe.Pointer) unsafe.Pointer
-	_fnDASessionGetTypeID func() uint
-	_fnDASessionScheduleWithRunLoop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnDASessionSetDispatchQueue func(unsafe.Pointer, objc.ID)
-	_fnDASessionUnscheduleFromRunLoop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnDAUnregisterApprovalCallback func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnDAUnregisterCallback func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnDARegisterDiskDisappearedCallback        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnDARegisterDiskEjectApprovalCallback      func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnDARegisterDiskMountApprovalCallback      func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnDARegisterDiskPeekCallback               func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer)
+	_fnDARegisterDiskUnmountApprovalCallback    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnDASessionCreate                          func(unsafe.Pointer) unsafe.Pointer
+	_fnDASessionGetTypeID                       func() uint
+	_fnDASessionScheduleWithRunLoop             func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnDASessionSetDispatchQueue                func(unsafe.Pointer, objc.ID)
+	_fnDASessionUnscheduleFromRunLoop           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnDAUnregisterApprovalCallback             func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnDAUnregisterCallback                     func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 )
 
 func DAApprovalSessionCreate(allocator unsafe.Pointer) unsafe.Pointer {
@@ -208,4 +208,3 @@ func DAUnregisterApprovalCallback(session unsafe.Pointer, callback unsafe.Pointe
 func DAUnregisterCallback(session unsafe.Pointer, callback unsafe.Pointer, context_ unsafe.Pointer) {
 	_fnDAUnregisterCallback(session, callback, context_)
 }
-

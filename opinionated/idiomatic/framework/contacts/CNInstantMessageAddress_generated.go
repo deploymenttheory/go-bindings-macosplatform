@@ -64,4 +64,3 @@ type InstantMessageAddressable interface {
 }
 
 var _ InstantMessageAddressable = (*InstantMessageAddress)(nil)
-

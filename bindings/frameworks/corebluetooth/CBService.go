@@ -16,11 +16,11 @@ type CBService struct {
 }
 
 var (
-	_clsCBService = _objcClass("CBService")
-	_cBServiceSelPeripheral = objc.RegisterName("peripheral")
-	_cBServiceSelIsPrimary = objc.RegisterName("isPrimary")
+	_clsCBService                 = _objcClass("CBService")
+	_cBServiceSelPeripheral       = objc.RegisterName("peripheral")
+	_cBServiceSelIsPrimary        = objc.RegisterName("isPrimary")
 	_cBServiceSelIncludedServices = objc.RegisterName("includedServices")
-	_cBServiceSelCharacteristics = objc.RegisterName("characteristics")
+	_cBServiceSelCharacteristics  = objc.RegisterName("characteristics")
 )
 
 func CBServiceFromID(id objc.ID) *CBService {
@@ -36,7 +36,9 @@ func CBServiceFromID(id objc.ID) *CBService {
 // @property peripheral @discussion A back-pointer to the peripheral this service belongs to.
 func (o *CBService) Peripheral() *CBPeripheral {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBServiceSelPeripheral)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CBPeripheralFromID(_ret)
 }
 
@@ -49,14 +51,17 @@ func (o *CBService) IsPrimary() bool {
 // @property includedServices @discussion A list of included CBServices that have so far been discovered in this service.
 func (o *CBService) IncludedServices() *foundation.NSArray[*CBService] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBServiceSelIncludedServices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CBService](_ret)
 }
 
 // @property characteristics @discussion A list of CBCharacteristics that have so far been discovered in this service.
 func (o *CBService) Characteristics() *foundation.NSArray[*CBCharacteristic] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBServiceSelCharacteristics)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CBCharacteristic](_ret)
 }
-

@@ -16,9 +16,9 @@ type CKSyncEnginePendingDatabaseChange struct {
 }
 
 var (
-	_clsCKSyncEnginePendingDatabaseChange = _objcClass("CKSyncEnginePendingDatabaseChange")
+	_clsCKSyncEnginePendingDatabaseChange       = _objcClass("CKSyncEnginePendingDatabaseChange")
 	_cKSyncEnginePendingDatabaseChangeSelZoneID = objc.RegisterName("zoneID")
-	_cKSyncEnginePendingDatabaseChangeSelType = objc.RegisterName("type")
+	_cKSyncEnginePendingDatabaseChangeSelType   = objc.RegisterName("type")
 )
 
 func CKSyncEnginePendingDatabaseChangeFromID(id objc.ID) *CKSyncEnginePendingDatabaseChange {
@@ -34,7 +34,9 @@ func CKSyncEnginePendingDatabaseChangeFromID(id objc.ID) *CKSyncEnginePendingDat
 // The identifier of the record zone to change.
 func (o *CKSyncEnginePendingDatabaseChange) ZoneID() *CKRecordZoneID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEnginePendingDatabaseChangeSelZoneID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKRecordZoneIDFromID(_ret)
 }
 
@@ -43,4 +45,3 @@ func (o *CKSyncEnginePendingDatabaseChange) Type() CKSyncEnginePendingDatabaseCh
 	_ret := objc.Send[CKSyncEnginePendingDatabaseChangeType](o.Ptr(), _cKSyncEnginePendingDatabaseChangeSelType)
 	return _ret
 }
-

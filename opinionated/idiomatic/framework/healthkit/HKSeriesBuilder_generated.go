@@ -49,4 +49,3 @@ type SeriesBuilderable interface {
 }
 
 var _ SeriesBuilderable = (*SeriesBuilder)(nil)
-

@@ -16,21 +16,21 @@ type SCContentSharingPicker struct {
 }
 
 var (
-	_clsSCContentSharingPicker = _objcClass("SCContentSharingPicker")
-	_sCContentSharingPickerSelAddObserver = objc.RegisterName("addObserver:")
-	_sCContentSharingPickerSelRemoveObserver = objc.RegisterName("removeObserver:")
-	_sCContentSharingPickerSelSetConfigurationForStream = objc.RegisterName("setConfiguration:forStream:")
-	_sCContentSharingPickerSelPresent = objc.RegisterName("present")
-	_sCContentSharingPickerSelPresentPickerUsingContentStyle = objc.RegisterName("presentPickerUsingContentStyle:")
-	_sCContentSharingPickerSelPresentPickerForStream = objc.RegisterName("presentPickerForStream:")
+	_clsSCContentSharingPicker                                        = _objcClass("SCContentSharingPicker")
+	_sCContentSharingPickerSelAddObserver                             = objc.RegisterName("addObserver:")
+	_sCContentSharingPickerSelRemoveObserver                          = objc.RegisterName("removeObserver:")
+	_sCContentSharingPickerSelSetConfigurationForStream               = objc.RegisterName("setConfiguration:forStream:")
+	_sCContentSharingPickerSelPresent                                 = objc.RegisterName("present")
+	_sCContentSharingPickerSelPresentPickerUsingContentStyle          = objc.RegisterName("presentPickerUsingContentStyle:")
+	_sCContentSharingPickerSelPresentPickerForStream                  = objc.RegisterName("presentPickerForStream:")
 	_sCContentSharingPickerSelPresentPickerForStreamUsingContentStyle = objc.RegisterName("presentPickerForStream:usingContentStyle:")
-	_sCContentSharingPickerSelSharedPicker = objc.RegisterName("sharedPicker")
-	_sCContentSharingPickerSelDefaultConfiguration = objc.RegisterName("defaultConfiguration")
-	_sCContentSharingPickerSelSetDefaultConfiguration = objc.RegisterName("setDefaultConfiguration:")
-	_sCContentSharingPickerSelMaximumStreamCount = objc.RegisterName("maximumStreamCount")
-	_sCContentSharingPickerSelSetMaximumStreamCount = objc.RegisterName("setMaximumStreamCount:")
-	_sCContentSharingPickerSelIsActive = objc.RegisterName("isActive")
-	_sCContentSharingPickerSelSetActive = objc.RegisterName("setActive:")
+	_sCContentSharingPickerSelSharedPicker                            = objc.RegisterName("sharedPicker")
+	_sCContentSharingPickerSelDefaultConfiguration                    = objc.RegisterName("defaultConfiguration")
+	_sCContentSharingPickerSelSetDefaultConfiguration                 = objc.RegisterName("setDefaultConfiguration:")
+	_sCContentSharingPickerSelMaximumStreamCount                      = objc.RegisterName("maximumStreamCount")
+	_sCContentSharingPickerSelSetMaximumStreamCount                   = objc.RegisterName("setMaximumStreamCount:")
+	_sCContentSharingPickerSelIsActive                                = objc.RegisterName("isActive")
+	_sCContentSharingPickerSelSetActive                               = objc.RegisterName("setActive:")
 )
 
 func SCContentSharingPickerFromID(id objc.ID) *SCContentSharingPicker {
@@ -81,7 +81,9 @@ func (o *SCContentSharingPicker) PresentPickerForStreamUsingContentStyle(stream 
 // @abstract sharedPicker the singleton shared picker for the application
 func SCContentSharingPickerSharedPicker() *SCContentSharingPicker {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCContentSharingPicker), _sCContentSharingPickerSelSharedPicker)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCContentSharingPickerFromID(_ret)
 }
 
@@ -98,7 +100,9 @@ func (o *SCContentSharingPicker) SetDefaultConfiguration(defaultConfiguration *S
 // @abstract maximumStreamCount An integer value that, if set, limits when Control Center will show the UI to present a picker with no associated stream. If set to 0, Control Center will never ever show UI to present a picker without an associated stream.
 func (o *SCContentSharingPicker) MaximumStreamCount() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCContentSharingPickerSelMaximumStreamCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -115,4 +119,3 @@ func (o *SCContentSharingPicker) IsActive() bool {
 func (o *SCContentSharingPicker) SetActive(active bool) {
 	o.Ptr().Send(_sCContentSharingPickerSelSetActive, active)
 }
-

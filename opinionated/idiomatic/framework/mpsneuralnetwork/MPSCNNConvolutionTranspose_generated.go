@@ -250,4 +250,3 @@ type CNNConvolutionTransposeable interface {
 }
 
 var _ CNNConvolutionTransposeable = (*CNNConvolutionTranspose)(nil)
-

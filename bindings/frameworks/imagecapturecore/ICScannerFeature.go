@@ -16,11 +16,11 @@ type ICScannerFeature struct {
 }
 
 var (
-	_clsICScannerFeature = _objcClass("ICScannerFeature")
-	_iCScannerFeatureSelType = objc.RegisterName("type")
-	_iCScannerFeatureSelInternalName = objc.RegisterName("internalName")
+	_clsICScannerFeature                  = _objcClass("ICScannerFeature")
+	_iCScannerFeatureSelType              = objc.RegisterName("type")
+	_iCScannerFeatureSelInternalName      = objc.RegisterName("internalName")
 	_iCScannerFeatureSelHumanReadableName = objc.RegisterName("humanReadableName")
-	_iCScannerFeatureSelTooltip = objc.RegisterName("tooltip")
+	_iCScannerFeatureSelTooltip           = objc.RegisterName("tooltip")
 )
 
 func ICScannerFeatureFromID(id objc.ID) *ICScannerFeature {
@@ -42,21 +42,26 @@ func (o *ICScannerFeature) Type() ICScannerFeatureType {
 // @property internalName @abstract ￼The internal name of this feature.
 func (o *ICScannerFeature) InternalName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCScannerFeatureSelInternalName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property humanReadableName @abstract The human readable name of this feature.
 func (o *ICScannerFeature) HumanReadableName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCScannerFeatureSelHumanReadableName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property tooltip @abstract ￼Tooltip text describing the feature.
 func (o *ICScannerFeature) Tooltip() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCScannerFeatureSelTooltip)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

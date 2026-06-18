@@ -18,11 +18,11 @@ type VNFeaturePrintObservation struct {
 }
 
 var (
-	_clsVNFeaturePrintObservation = _objcClass("VNFeaturePrintObservation")
+	_clsVNFeaturePrintObservation                                              = _objcClass("VNFeaturePrintObservation")
 	_vNFeaturePrintObservationSelComputeDistanceToFeaturePrintObservationError = objc.RegisterName("computeDistance:toFeaturePrintObservation:error:")
-	_vNFeaturePrintObservationSelElementType = objc.RegisterName("elementType")
-	_vNFeaturePrintObservationSelElementCount = objc.RegisterName("elementCount")
-	_vNFeaturePrintObservationSelData = objc.RegisterName("data")
+	_vNFeaturePrintObservationSelElementType                                   = objc.RegisterName("elementType")
+	_vNFeaturePrintObservationSelElementCount                                  = objc.RegisterName("elementCount")
+	_vNFeaturePrintObservationSelData                                          = objc.RegisterName("data")
 )
 
 func VNFeaturePrintObservationFromID(id objc.ID) *VNFeaturePrintObservation {
@@ -60,7 +60,8 @@ func (o *VNFeaturePrintObservation) ElementCount() uint {
 // @brief The feature print data.
 func (o *VNFeaturePrintObservation) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNFeaturePrintObservationSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

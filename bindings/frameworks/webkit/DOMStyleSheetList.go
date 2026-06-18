@@ -15,8 +15,8 @@ type DOMStyleSheetList struct {
 }
 
 var (
-	_clsDOMStyleSheetList = _objcClass("DOMStyleSheetList")
-	_dOMStyleSheetListSelItem = objc.RegisterName("item:")
+	_clsDOMStyleSheetList       = _objcClass("DOMStyleSheetList")
+	_dOMStyleSheetListSelItem   = objc.RegisterName("item:")
 	_dOMStyleSheetListSelLength = objc.RegisterName("length")
 )
 
@@ -32,7 +32,9 @@ func DOMStyleSheetListFromID(id objc.ID) *DOMStyleSheetList {
 
 func (o *DOMStyleSheetList) Item(index uint) *DOMStyleSheet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMStyleSheetListSelItem, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMStyleSheetFromID(_ret)
 }
 
@@ -40,4 +42,3 @@ func (o *DOMStyleSheetList) Length() uint {
 	_ret := objc.Send[uint](o.Ptr(), _dOMStyleSheetListSelLength)
 	return _ret
 }
-

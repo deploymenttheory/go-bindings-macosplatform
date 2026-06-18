@@ -272,4 +272,3 @@ func EndpointWithHostnamePort(hostname string, port string) *NWHostEndpoint {
 	}
 	return &NWHostEndpoint{inner: _r}
 }
-

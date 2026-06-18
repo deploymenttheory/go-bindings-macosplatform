@@ -16,10 +16,10 @@ type MTL4StitchedFunctionDescriptor struct {
 }
 
 var (
-	_clsMTL4StitchedFunctionDescriptor = _objcClass("MTL4StitchedFunctionDescriptor")
-	_mTL4StitchedFunctionDescriptorSelFunctionGraph = objc.RegisterName("functionGraph")
-	_mTL4StitchedFunctionDescriptorSelSetFunctionGraph = objc.RegisterName("setFunctionGraph:")
-	_mTL4StitchedFunctionDescriptorSelFunctionDescriptors = objc.RegisterName("functionDescriptors")
+	_clsMTL4StitchedFunctionDescriptor                       = _objcClass("MTL4StitchedFunctionDescriptor")
+	_mTL4StitchedFunctionDescriptorSelFunctionGraph          = objc.RegisterName("functionGraph")
+	_mTL4StitchedFunctionDescriptorSelSetFunctionGraph       = objc.RegisterName("setFunctionGraph:")
+	_mTL4StitchedFunctionDescriptorSelFunctionDescriptors    = objc.RegisterName("functionDescriptors")
 	_mTL4StitchedFunctionDescriptorSelSetFunctionDescriptors = objc.RegisterName("setFunctionDescriptors:")
 )
 
@@ -36,7 +36,9 @@ func MTL4StitchedFunctionDescriptorFromID(id objc.ID) *MTL4StitchedFunctionDescr
 // Sets the graph representing how to stitch functions together.
 func (o *MTL4StitchedFunctionDescriptor) FunctionGraph() *MTLFunctionStitchingGraph {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4StitchedFunctionDescriptorSelFunctionGraph)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLFunctionStitchingGraphFromID(_ret)
 }
 
@@ -47,11 +49,12 @@ func (o *MTL4StitchedFunctionDescriptor) SetFunctionGraph(functionGraph *MTLFunc
 // Configures an array of function descriptors with references to functions that contribute to the stitching process.
 func (o *MTL4StitchedFunctionDescriptor) FunctionDescriptors() *foundation.NSArray[*MTL4FunctionDescriptor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4StitchedFunctionDescriptorSelFunctionDescriptors)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MTL4FunctionDescriptor](_ret)
 }
 
 func (o *MTL4StitchedFunctionDescriptor) SetFunctionDescriptors(functionDescriptors *foundation.NSArray[*MTL4FunctionDescriptor]) {
 	o.Ptr().Send(_mTL4StitchedFunctionDescriptorSelSetFunctionDescriptors, functionDescriptors.Ptr())
 }
-

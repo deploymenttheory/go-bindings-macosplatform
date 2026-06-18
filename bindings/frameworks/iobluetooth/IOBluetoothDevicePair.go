@@ -16,16 +16,16 @@ type IOBluetoothDevicePair struct {
 }
 
 var (
-	_clsIOBluetoothDevicePair = _objcClass("IOBluetoothDevicePair")
-	_iOBluetoothDevicePairSelPairWithDevice = objc.RegisterName("pairWithDevice:")
-	_iOBluetoothDevicePairSelStart = objc.RegisterName("start")
-	_iOBluetoothDevicePairSelStop = objc.RegisterName("stop")
-	_iOBluetoothDevicePairSelDevice = objc.RegisterName("device")
-	_iOBluetoothDevicePairSelSetDevice = objc.RegisterName("setDevice:")
-	_iOBluetoothDevicePairSelReplyPINCodePINCode = objc.RegisterName("replyPINCode:PINCode:")
+	_clsIOBluetoothDevicePair                      = _objcClass("IOBluetoothDevicePair")
+	_iOBluetoothDevicePairSelPairWithDevice        = objc.RegisterName("pairWithDevice:")
+	_iOBluetoothDevicePairSelStart                 = objc.RegisterName("start")
+	_iOBluetoothDevicePairSelStop                  = objc.RegisterName("stop")
+	_iOBluetoothDevicePairSelDevice                = objc.RegisterName("device")
+	_iOBluetoothDevicePairSelSetDevice             = objc.RegisterName("setDevice:")
+	_iOBluetoothDevicePairSelReplyPINCodePINCode   = objc.RegisterName("replyPINCode:PINCode:")
 	_iOBluetoothDevicePairSelReplyUserConfirmation = objc.RegisterName("replyUserConfirmation:")
-	_iOBluetoothDevicePairSelDelegate = objc.RegisterName("delegate")
-	_iOBluetoothDevicePairSelSetDelegate = objc.RegisterName("setDelegate:")
+	_iOBluetoothDevicePairSelDelegate              = objc.RegisterName("delegate")
+	_iOBluetoothDevicePairSelSetDelegate           = objc.RegisterName("setDelegate:")
 )
 
 func IOBluetoothDevicePairFromID(id objc.ID) *IOBluetoothDevicePair {
@@ -40,7 +40,9 @@ func IOBluetoothDevicePairFromID(id objc.ID) *IOBluetoothDevicePair {
 
 func IOBluetoothDevicePairPairWithDevice(device *IOBluetoothDevice) *IOBluetoothDevicePair {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothDevicePair), _iOBluetoothDevicePairSelPairWithDevice, device.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothDevicePairFromID(_ret)
 }
 
@@ -55,7 +57,9 @@ func (o *IOBluetoothDevicePair) Stop() {
 
 func (o *IOBluetoothDevicePair) Device() *IOBluetoothDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDevicePairSelDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothDeviceFromID(_ret)
 }
 
@@ -79,4 +83,3 @@ func (o *IOBluetoothDevicePair) Delegate() objc.ID {
 func (o *IOBluetoothDevicePair) SetDelegate(delegate objc.ID) {
 	o.Ptr().Send(_iOBluetoothDevicePairSelSetDelegate, delegate)
 }
-

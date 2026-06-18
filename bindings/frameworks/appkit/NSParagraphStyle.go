@@ -16,31 +16,31 @@ type NSParagraphStyle struct {
 }
 
 var (
-	_clsNSParagraphStyle = _objcClass("NSParagraphStyle")
-	_nSParagraphStyleSelDefaultWritingDirectionForLanguage = objc.RegisterName("defaultWritingDirectionForLanguage:")
-	_nSParagraphStyleSelDefaultParagraphStyle = objc.RegisterName("defaultParagraphStyle")
-	_nSParagraphStyleSelLineSpacing = objc.RegisterName("lineSpacing")
-	_nSParagraphStyleSelParagraphSpacing = objc.RegisterName("paragraphSpacing")
-	_nSParagraphStyleSelHeadIndent = objc.RegisterName("headIndent")
-	_nSParagraphStyleSelTailIndent = objc.RegisterName("tailIndent")
-	_nSParagraphStyleSelFirstLineHeadIndent = objc.RegisterName("firstLineHeadIndent")
-	_nSParagraphStyleSelMinimumLineHeight = objc.RegisterName("minimumLineHeight")
-	_nSParagraphStyleSelMaximumLineHeight = objc.RegisterName("maximumLineHeight")
-	_nSParagraphStyleSelLineBreakMode = objc.RegisterName("lineBreakMode")
-	_nSParagraphStyleSelBaseWritingDirection = objc.RegisterName("baseWritingDirection")
-	_nSParagraphStyleSelLineHeightMultiple = objc.RegisterName("lineHeightMultiple")
-	_nSParagraphStyleSelParagraphSpacingBefore = objc.RegisterName("paragraphSpacingBefore")
-	_nSParagraphStyleSelHyphenationFactor = objc.RegisterName("hyphenationFactor")
-	_nSParagraphStyleSelUsesDefaultHyphenation = objc.RegisterName("usesDefaultHyphenation")
-	_nSParagraphStyleSelTabStops = objc.RegisterName("tabStops")
-	_nSParagraphStyleSelDefaultTabInterval = objc.RegisterName("defaultTabInterval")
-	_nSParagraphStyleSelTextLists = objc.RegisterName("textLists")
+	_clsNSParagraphStyle                                     = _objcClass("NSParagraphStyle")
+	_nSParagraphStyleSelDefaultWritingDirectionForLanguage   = objc.RegisterName("defaultWritingDirectionForLanguage:")
+	_nSParagraphStyleSelDefaultParagraphStyle                = objc.RegisterName("defaultParagraphStyle")
+	_nSParagraphStyleSelLineSpacing                          = objc.RegisterName("lineSpacing")
+	_nSParagraphStyleSelParagraphSpacing                     = objc.RegisterName("paragraphSpacing")
+	_nSParagraphStyleSelHeadIndent                           = objc.RegisterName("headIndent")
+	_nSParagraphStyleSelTailIndent                           = objc.RegisterName("tailIndent")
+	_nSParagraphStyleSelFirstLineHeadIndent                  = objc.RegisterName("firstLineHeadIndent")
+	_nSParagraphStyleSelMinimumLineHeight                    = objc.RegisterName("minimumLineHeight")
+	_nSParagraphStyleSelMaximumLineHeight                    = objc.RegisterName("maximumLineHeight")
+	_nSParagraphStyleSelLineBreakMode                        = objc.RegisterName("lineBreakMode")
+	_nSParagraphStyleSelBaseWritingDirection                 = objc.RegisterName("baseWritingDirection")
+	_nSParagraphStyleSelLineHeightMultiple                   = objc.RegisterName("lineHeightMultiple")
+	_nSParagraphStyleSelParagraphSpacingBefore               = objc.RegisterName("paragraphSpacingBefore")
+	_nSParagraphStyleSelHyphenationFactor                    = objc.RegisterName("hyphenationFactor")
+	_nSParagraphStyleSelUsesDefaultHyphenation               = objc.RegisterName("usesDefaultHyphenation")
+	_nSParagraphStyleSelTabStops                             = objc.RegisterName("tabStops")
+	_nSParagraphStyleSelDefaultTabInterval                   = objc.RegisterName("defaultTabInterval")
+	_nSParagraphStyleSelTextLists                            = objc.RegisterName("textLists")
 	_nSParagraphStyleSelAllowsDefaultTighteningForTruncation = objc.RegisterName("allowsDefaultTighteningForTruncation")
-	_nSParagraphStyleSelLineBreakStrategy = objc.RegisterName("lineBreakStrategy")
-	_nSParagraphStyleSelAlignment = objc.RegisterName("alignment")
-	_nSParagraphStyleSelTighteningFactorForTruncation = objc.RegisterName("tighteningFactorForTruncation")
-	_nSParagraphStyleSelTextBlocks = objc.RegisterName("textBlocks")
-	_nSParagraphStyleSelHeaderLevel = objc.RegisterName("headerLevel")
+	_nSParagraphStyleSelLineBreakStrategy                    = objc.RegisterName("lineBreakStrategy")
+	_nSParagraphStyleSelAlignment                            = objc.RegisterName("alignment")
+	_nSParagraphStyleSelTighteningFactorForTruncation        = objc.RegisterName("tighteningFactorForTruncation")
+	_nSParagraphStyleSelTextBlocks                           = objc.RegisterName("textBlocks")
+	_nSParagraphStyleSelHeaderLevel                          = objc.RegisterName("headerLevel")
 )
 
 func NSParagraphStyleFromID(id objc.ID) *NSParagraphStyle {
@@ -60,7 +60,9 @@ func NSParagraphStyleDefaultWritingDirectionForLanguage(languageName *foundation
 
 func NSParagraphStyleDefaultParagraphStyle() *NSParagraphStyle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSParagraphStyle), _nSParagraphStyleSelDefaultParagraphStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSParagraphStyleFromID(_ret)
 }
 
@@ -131,7 +133,9 @@ func (o *NSParagraphStyle) UsesDefaultHyphenation() bool {
 
 func (o *NSParagraphStyle) TabStops() *foundation.NSArray[*NSTextTab] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSParagraphStyleSelTabStops)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSTextTab](_ret)
 }
 
@@ -142,7 +146,9 @@ func (o *NSParagraphStyle) DefaultTabInterval() float64 {
 
 func (o *NSParagraphStyle) TextLists() *foundation.NSArray[*NSTextList] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSParagraphStyleSelTextLists)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSTextList](_ret)
 }
 
@@ -168,7 +174,9 @@ func (o *NSParagraphStyle) TighteningFactorForTruncation() float32 {
 
 func (o *NSParagraphStyle) TextBlocks() *foundation.NSArray[*NSTextBlock] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSParagraphStyleSelTextBlocks)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSTextBlock](_ret)
 }
 
@@ -176,4 +184,3 @@ func (o *NSParagraphStyle) HeaderLevel() int {
 	_ret := objc.Send[int](o.Ptr(), _nSParagraphStyleSelHeaderLevel)
 	return _ret
 }
-

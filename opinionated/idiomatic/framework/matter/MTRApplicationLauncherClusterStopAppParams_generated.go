@@ -16,7 +16,9 @@ type MTRApplicationLauncherClusterStopAppParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRApplicationLauncherClusterStopAppParams].
-func (x *MTRApplicationLauncherClusterStopAppParams) Unwrap() *raw.MTRApplicationLauncherClusterStopAppParams { return x.inner }
+func (x *MTRApplicationLauncherClusterStopAppParams) Unwrap() *raw.MTRApplicationLauncherClusterStopAppParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -103,4 +105,3 @@ type MTRApplicationLauncherClusterStopAppParamsable interface {
 }
 
 var _ MTRApplicationLauncherClusterStopAppParamsable = (*MTRApplicationLauncherClusterStopAppParams)(nil)
-

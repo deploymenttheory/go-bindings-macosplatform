@@ -20,32 +20,32 @@ type CAMetalLayer struct {
 }
 
 var (
-	_clsCAMetalLayer = _objcClass("CAMetalLayer")
-	_cAMetalLayerSelNextDrawable = objc.RegisterName("nextDrawable")
-	_cAMetalLayerSelDevice = objc.RegisterName("device")
-	_cAMetalLayerSelSetDevice = objc.RegisterName("setDevice:")
-	_cAMetalLayerSelPreferredDevice = objc.RegisterName("preferredDevice")
-	_cAMetalLayerSelPixelFormat = objc.RegisterName("pixelFormat")
-	_cAMetalLayerSelSetPixelFormat = objc.RegisterName("setPixelFormat:")
-	_cAMetalLayerSelFramebufferOnly = objc.RegisterName("framebufferOnly")
-	_cAMetalLayerSelSetFramebufferOnly = objc.RegisterName("setFramebufferOnly:")
-	_cAMetalLayerSelDrawableSize = objc.RegisterName("drawableSize")
-	_cAMetalLayerSelSetDrawableSize = objc.RegisterName("setDrawableSize:")
-	_cAMetalLayerSelMaximumDrawableCount = objc.RegisterName("maximumDrawableCount")
-	_cAMetalLayerSelSetMaximumDrawableCount = objc.RegisterName("setMaximumDrawableCount:")
-	_cAMetalLayerSelPresentsWithTransaction = objc.RegisterName("presentsWithTransaction")
-	_cAMetalLayerSelSetPresentsWithTransaction = objc.RegisterName("setPresentsWithTransaction:")
-	_cAMetalLayerSelColorspace = objc.RegisterName("colorspace")
-	_cAMetalLayerSelSetColorspace = objc.RegisterName("setColorspace:")
-	_cAMetalLayerSelEDRMetadata = objc.RegisterName("EDRMetadata")
-	_cAMetalLayerSelSetEDRMetadata = objc.RegisterName("setEDRMetadata:")
-	_cAMetalLayerSelDisplaySyncEnabled = objc.RegisterName("displaySyncEnabled")
-	_cAMetalLayerSelSetDisplaySyncEnabled = objc.RegisterName("setDisplaySyncEnabled:")
-	_cAMetalLayerSelAllowsNextDrawableTimeout = objc.RegisterName("allowsNextDrawableTimeout")
+	_clsCAMetalLayer                             = _objcClass("CAMetalLayer")
+	_cAMetalLayerSelNextDrawable                 = objc.RegisterName("nextDrawable")
+	_cAMetalLayerSelDevice                       = objc.RegisterName("device")
+	_cAMetalLayerSelSetDevice                    = objc.RegisterName("setDevice:")
+	_cAMetalLayerSelPreferredDevice              = objc.RegisterName("preferredDevice")
+	_cAMetalLayerSelPixelFormat                  = objc.RegisterName("pixelFormat")
+	_cAMetalLayerSelSetPixelFormat               = objc.RegisterName("setPixelFormat:")
+	_cAMetalLayerSelFramebufferOnly              = objc.RegisterName("framebufferOnly")
+	_cAMetalLayerSelSetFramebufferOnly           = objc.RegisterName("setFramebufferOnly:")
+	_cAMetalLayerSelDrawableSize                 = objc.RegisterName("drawableSize")
+	_cAMetalLayerSelSetDrawableSize              = objc.RegisterName("setDrawableSize:")
+	_cAMetalLayerSelMaximumDrawableCount         = objc.RegisterName("maximumDrawableCount")
+	_cAMetalLayerSelSetMaximumDrawableCount      = objc.RegisterName("setMaximumDrawableCount:")
+	_cAMetalLayerSelPresentsWithTransaction      = objc.RegisterName("presentsWithTransaction")
+	_cAMetalLayerSelSetPresentsWithTransaction   = objc.RegisterName("setPresentsWithTransaction:")
+	_cAMetalLayerSelColorspace                   = objc.RegisterName("colorspace")
+	_cAMetalLayerSelSetColorspace                = objc.RegisterName("setColorspace:")
+	_cAMetalLayerSelEDRMetadata                  = objc.RegisterName("EDRMetadata")
+	_cAMetalLayerSelSetEDRMetadata               = objc.RegisterName("setEDRMetadata:")
+	_cAMetalLayerSelDisplaySyncEnabled           = objc.RegisterName("displaySyncEnabled")
+	_cAMetalLayerSelSetDisplaySyncEnabled        = objc.RegisterName("setDisplaySyncEnabled:")
+	_cAMetalLayerSelAllowsNextDrawableTimeout    = objc.RegisterName("allowsNextDrawableTimeout")
 	_cAMetalLayerSelSetAllowsNextDrawableTimeout = objc.RegisterName("setAllowsNextDrawableTimeout:")
-	_cAMetalLayerSelDeveloperHUDProperties = objc.RegisterName("developerHUDProperties")
-	_cAMetalLayerSelSetDeveloperHUDProperties = objc.RegisterName("setDeveloperHUDProperties:")
-	_cAMetalLayerSelResidencySet = objc.RegisterName("residencySet")
+	_cAMetalLayerSelDeveloperHUDProperties       = objc.RegisterName("developerHUDProperties")
+	_cAMetalLayerSelSetDeveloperHUDProperties    = objc.RegisterName("setDeveloperHUDProperties:")
+	_cAMetalLayerSelResidencySet                 = objc.RegisterName("residencySet")
 )
 
 func CAMetalLayerFromID(id objc.ID) *CAMetalLayer {
@@ -133,7 +133,9 @@ func (o *CAMetalLayer) SetColorspace(colorspace unsafe.Pointer) {
 
 func (o *CAMetalLayer) EDRMetadata() *CAEDRMetadata {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cAMetalLayerSelEDRMetadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CAEDRMetadataFromID(_ret)
 }
 
@@ -172,4 +174,3 @@ func (o *CAMetalLayer) ResidencySet() metal.MTLResidencySet {
 	_ret := objc.Send[metal.MTLResidencySet](o.Ptr(), _cAMetalLayerSelResidencySet)
 	return _ret
 }
-

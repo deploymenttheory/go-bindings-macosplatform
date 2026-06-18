@@ -16,13 +16,13 @@ type ASAuthorizationPlatformPublicKeyCredentialAssertionRequest struct {
 }
 
 var (
-	_clsASAuthorizationPlatformPublicKeyCredentialAssertionRequest = _objcClass("ASAuthorizationPlatformPublicKeyCredentialAssertionRequest")
-	_aSAuthorizationPlatformPublicKeyCredentialAssertionRequestSelAllowedCredentials = objc.RegisterName("allowedCredentials")
+	_clsASAuthorizationPlatformPublicKeyCredentialAssertionRequest                      = _objcClass("ASAuthorizationPlatformPublicKeyCredentialAssertionRequest")
+	_aSAuthorizationPlatformPublicKeyCredentialAssertionRequestSelAllowedCredentials    = objc.RegisterName("allowedCredentials")
 	_aSAuthorizationPlatformPublicKeyCredentialAssertionRequestSelSetAllowedCredentials = objc.RegisterName("setAllowedCredentials:")
-	_aSAuthorizationPlatformPublicKeyCredentialAssertionRequestSelLargeBlob = objc.RegisterName("largeBlob")
-	_aSAuthorizationPlatformPublicKeyCredentialAssertionRequestSelSetLargeBlob = objc.RegisterName("setLargeBlob:")
-	_aSAuthorizationPlatformPublicKeyCredentialAssertionRequestSelPrf = objc.RegisterName("prf")
-	_aSAuthorizationPlatformPublicKeyCredentialAssertionRequestSelSetPrf = objc.RegisterName("setPrf:")
+	_aSAuthorizationPlatformPublicKeyCredentialAssertionRequestSelLargeBlob             = objc.RegisterName("largeBlob")
+	_aSAuthorizationPlatformPublicKeyCredentialAssertionRequestSelSetLargeBlob          = objc.RegisterName("setLargeBlob:")
+	_aSAuthorizationPlatformPublicKeyCredentialAssertionRequestSelPrf                   = objc.RegisterName("prf")
+	_aSAuthorizationPlatformPublicKeyCredentialAssertionRequestSelSetPrf                = objc.RegisterName("setPrf:")
 )
 
 func ASAuthorizationPlatformPublicKeyCredentialAssertionRequestFromID(id objc.ID) *ASAuthorizationPlatformPublicKeyCredentialAssertionRequest {
@@ -38,7 +38,9 @@ func ASAuthorizationPlatformPublicKeyCredentialAssertionRequestFromID(id objc.ID
 // @abstract A list of credentials to allow for this request. If this ilist is nonempty, only credentials matching the provided descriptors can be used to sign in.
 func (o *ASAuthorizationPlatformPublicKeyCredentialAssertionRequest) AllowedCredentials() *foundation.NSArray[*ASAuthorizationPlatformPublicKeyCredentialDescriptor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPlatformPublicKeyCredentialAssertionRequestSelAllowedCredentials)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*ASAuthorizationPlatformPublicKeyCredentialDescriptor](_ret)
 }
 
@@ -48,7 +50,9 @@ func (o *ASAuthorizationPlatformPublicKeyCredentialAssertionRequest) SetAllowedC
 
 func (o *ASAuthorizationPlatformPublicKeyCredentialAssertionRequest) LargeBlob() *ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPlatformPublicKeyCredentialAssertionRequestSelLargeBlob)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationPublicKeyCredentialLargeBlobAssertionInputFromID(_ret)
 }
 
@@ -58,11 +62,12 @@ func (o *ASAuthorizationPlatformPublicKeyCredentialAssertionRequest) SetLargeBlo
 
 func (o *ASAuthorizationPlatformPublicKeyCredentialAssertionRequest) Prf() *ASAuthorizationPublicKeyCredentialPRFAssertionInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPlatformPublicKeyCredentialAssertionRequestSelPrf)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationPublicKeyCredentialPRFAssertionInputFromID(_ret)
 }
 
 func (o *ASAuthorizationPlatformPublicKeyCredentialAssertionRequest) SetPrf(prf *ASAuthorizationPublicKeyCredentialPRFAssertionInput) {
 	o.Ptr().Send(_aSAuthorizationPlatformPublicKeyCredentialAssertionRequestSelSetPrf, prf.Ptr())
 }
-

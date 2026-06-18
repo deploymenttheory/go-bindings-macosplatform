@@ -17,7 +17,9 @@ type RAWProcessorPixelBufferManager struct {
 }
 
 // Unwrap returns the underlying [raw.MERAWProcessorPixelBufferManager].
-func (x *RAWProcessorPixelBufferManager) Unwrap() *raw.MERAWProcessorPixelBufferManager { return x.inner }
+func (x *RAWProcessorPixelBufferManager) Unwrap() *raw.MERAWProcessorPixelBufferManager {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -68,4 +70,3 @@ type RAWProcessorPixelBufferManagerable interface {
 }
 
 var _ RAWProcessorPixelBufferManagerable = (*RAWProcessorPixelBufferManager)(nil)
-

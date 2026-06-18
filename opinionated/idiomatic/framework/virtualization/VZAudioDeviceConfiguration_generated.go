@@ -35,7 +35,9 @@ func NewAudioDeviceConfiguration() *AudioDeviceConfiguration {
 	return &AudioDeviceConfiguration{inner: raw.VZAudioDeviceConfigurationFromID(_id)}
 }
 
-func (x *AudioDeviceConfiguration) asAudioDeviceConfiguration() *raw.VZAudioDeviceConfiguration { return x.inner }
+func (x *AudioDeviceConfiguration) asAudioDeviceConfiguration() *raw.VZAudioDeviceConfiguration {
+	return x.inner
+}
 
 // AudioDeviceConfigurationable is the interface implemented by [AudioDeviceConfiguration], for mocking and DI.
 type AudioDeviceConfigurationable interface {
@@ -43,4 +45,3 @@ type AudioDeviceConfigurationable interface {
 }
 
 var _ AudioDeviceConfigurationable = (*AudioDeviceConfiguration)(nil)
-

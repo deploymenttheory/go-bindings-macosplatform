@@ -16,16 +16,16 @@ type MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams struct {
 }
 
 var (
-	_clsMTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams = _objcClass("MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams")
-	_mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsSelSsid = objc.RegisterName("ssid")
-	_mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsSelSetSsid = objc.RegisterName("setSsid:")
-	_mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsSelCredentials = objc.RegisterName("credentials")
-	_mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsSelSetCredentials = objc.RegisterName("setCredentials:")
-	_mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsSelBreadcrumb = objc.RegisterName("breadcrumb")
-	_mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsSelSetBreadcrumb = objc.RegisterName("setBreadcrumb:")
-	_mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams                               = _objcClass("MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams")
+	_mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsSelSsid                           = objc.RegisterName("ssid")
+	_mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsSelSetSsid                        = objc.RegisterName("setSsid:")
+	_mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsSelCredentials                    = objc.RegisterName("credentials")
+	_mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsSelSetCredentials                 = objc.RegisterName("setCredentials:")
+	_mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsSelBreadcrumb                     = objc.RegisterName("breadcrumb")
+	_mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsSelSetBreadcrumb                  = objc.RegisterName("setBreadcrumb:")
+	_mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -41,7 +41,9 @@ func MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsFromID(id objc.ID
 
 func (o *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) Ssid() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsSelSsid)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -51,7 +53,9 @@ func (o *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) SetSsid(ssi
 
 func (o *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) Credentials() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsSelCredentials)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) SetCredenti
 
 func (o *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) Breadcrumb() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsSelBreadcrumb)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -72,7 +78,9 @@ func (o *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) SetBreadcru
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -83,11 +91,12 @@ func (o *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) SetTimedInv
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

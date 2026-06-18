@@ -1075,4 +1075,3 @@ func (e AVB17221AEMCommandType) String() string {
 		return fmt.Sprintf("AVB17221AEMCommandType(%d)", int64(e))
 	}
 }
-

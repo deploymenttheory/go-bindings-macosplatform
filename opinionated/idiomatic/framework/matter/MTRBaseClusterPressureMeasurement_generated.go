@@ -19,7 +19,9 @@ type MTRBaseClusterPressureMeasurement struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterPressureMeasurement].
-func (x *MTRBaseClusterPressureMeasurement) Unwrap() *raw.MTRBaseClusterPressureMeasurement { return x.inner }
+func (x *MTRBaseClusterPressureMeasurement) Unwrap() *raw.MTRBaseClusterPressureMeasurement {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -1163,9 +1165,13 @@ func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeClusterRevisionWit
 	}
 }
 
-func (x *MTRBaseClusterPressureMeasurement) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterPressureMeasurement) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterPressureMeasurement) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterPressureMeasurement) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterPressureMeasurementable is the interface implemented by [MTRBaseClusterPressureMeasurement], for mocking and DI.
 type MTRBaseClusterPressureMeasurementable interface {
@@ -1229,4 +1235,3 @@ type MTRBaseClusterPressureMeasurementable interface {
 }
 
 var _ MTRBaseClusterPressureMeasurementable = (*MTRBaseClusterPressureMeasurement)(nil)
-

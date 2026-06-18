@@ -18,16 +18,16 @@ type AVExternalStorageDevice struct {
 }
 
 var (
-	_clsAVExternalStorageDevice = _objcClass("AVExternalStorageDevice")
+	_clsAVExternalStorageDevice                                         = _objcClass("AVExternalStorageDevice")
 	_aVExternalStorageDeviceSelNextAvailableURLsWithPathExtensionsError = objc.RegisterName("nextAvailableURLsWithPathExtensions:error:")
-	_aVExternalStorageDeviceSelDisplayName = objc.RegisterName("displayName")
-	_aVExternalStorageDeviceSelFreeSize = objc.RegisterName("freeSize")
-	_aVExternalStorageDeviceSelTotalSize = objc.RegisterName("totalSize")
-	_aVExternalStorageDeviceSelIsConnected = objc.RegisterName("isConnected")
-	_aVExternalStorageDeviceSelUuid = objc.RegisterName("uuid")
-	_aVExternalStorageDeviceSelIsNotRecommendedForCaptureUse = objc.RegisterName("isNotRecommendedForCaptureUse")
-	_aVExternalStorageDeviceSelRequestAccessWithCompletionHandler = objc.RegisterName("requestAccessWithCompletionHandler:")
-	_aVExternalStorageDeviceSelAuthorizationStatus = objc.RegisterName("authorizationStatus")
+	_aVExternalStorageDeviceSelDisplayName                              = objc.RegisterName("displayName")
+	_aVExternalStorageDeviceSelFreeSize                                 = objc.RegisterName("freeSize")
+	_aVExternalStorageDeviceSelTotalSize                                = objc.RegisterName("totalSize")
+	_aVExternalStorageDeviceSelIsConnected                              = objc.RegisterName("isConnected")
+	_aVExternalStorageDeviceSelUuid                                     = objc.RegisterName("uuid")
+	_aVExternalStorageDeviceSelIsNotRecommendedForCaptureUse            = objc.RegisterName("isNotRecommendedForCaptureUse")
+	_aVExternalStorageDeviceSelRequestAccessWithCompletionHandler       = objc.RegisterName("requestAccessWithCompletionHandler:")
+	_aVExternalStorageDeviceSelAuthorizationStatus                      = objc.RegisterName("authorizationStatus")
 )
 
 func AVExternalStorageDeviceFromID(id objc.ID) *AVExternalStorageDevice {
@@ -53,7 +53,9 @@ func (o *AVExternalStorageDevice) NextAvailableURLsWithPathExtensionsError(exten
 // @property displayName @abstract Display name of the external storage device. @discussion This property can be used for displaying the name of an external storage device in a user interface. Will return nil if we fail to extract information from external storage device.
 func (o *AVExternalStorageDevice) DisplayName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVExternalStorageDeviceSelDisplayName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -78,7 +80,9 @@ func (o *AVExternalStorageDevice) IsConnected() bool {
 // @property uuid @abstract A unique identifier for external storage device. @discussion This property can be used to select a specific external storage device with ImageCapture framework APIs to read media assets. Will return nil if we fail to extract information from external storage device. For example the string value of this property will match the value from [ICDevice UUIDString].
 func (o *AVExternalStorageDevice) Uuid() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVExternalStorageDeviceSelUuid)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
 
@@ -105,4 +109,3 @@ func AVExternalStorageDeviceAuthorizationStatus() AVAuthorizationStatus {
 	_ret := objc.Send[AVAuthorizationStatus](objc.ID(_clsAVExternalStorageDevice), _aVExternalStorageDeviceSelAuthorizationStatus)
 	return _ret
 }
-

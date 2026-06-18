@@ -26,4 +26,3 @@ func GCControllerInputStateFromID(id objc.ID) *GCControllerInputState {
 	purego.Track(o)
 	return o
 }
-

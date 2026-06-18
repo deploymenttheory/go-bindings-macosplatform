@@ -18,29 +18,29 @@ type MTRClusterGeneralDiagnostics struct {
 }
 
 var (
-	_clsMTRClusterGeneralDiagnostics = _objcClass("MTRClusterGeneralDiagnostics")
-	_mTRClusterGeneralDiagnosticsSelTestEventTriggerWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("testEventTriggerWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterGeneralDiagnosticsSelTimeSnapshotWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("timeSnapshotWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterGeneralDiagnosticsSelTimeSnapshotWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("timeSnapshotWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterGeneralDiagnosticsSelPayloadTestRequestWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("payloadTestRequestWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterGeneralDiagnosticsSelReadAttributeNetworkInterfacesWithParams = objc.RegisterName("readAttributeNetworkInterfacesWithParams:")
-	_mTRClusterGeneralDiagnosticsSelReadAttributeRebootCountWithParams = objc.RegisterName("readAttributeRebootCountWithParams:")
-	_mTRClusterGeneralDiagnosticsSelReadAttributeUpTimeWithParams = objc.RegisterName("readAttributeUpTimeWithParams:")
-	_mTRClusterGeneralDiagnosticsSelReadAttributeTotalOperationalHoursWithParams = objc.RegisterName("readAttributeTotalOperationalHoursWithParams:")
-	_mTRClusterGeneralDiagnosticsSelReadAttributeBootReasonWithParams = objc.RegisterName("readAttributeBootReasonWithParams:")
-	_mTRClusterGeneralDiagnosticsSelReadAttributeActiveHardwareFaultsWithParams = objc.RegisterName("readAttributeActiveHardwareFaultsWithParams:")
-	_mTRClusterGeneralDiagnosticsSelReadAttributeActiveRadioFaultsWithParams = objc.RegisterName("readAttributeActiveRadioFaultsWithParams:")
-	_mTRClusterGeneralDiagnosticsSelReadAttributeActiveNetworkFaultsWithParams = objc.RegisterName("readAttributeActiveNetworkFaultsWithParams:")
-	_mTRClusterGeneralDiagnosticsSelReadAttributeTestEventTriggersEnabledWithParams = objc.RegisterName("readAttributeTestEventTriggersEnabledWithParams:")
-	_mTRClusterGeneralDiagnosticsSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterGeneralDiagnosticsSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterGeneralDiagnosticsSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterGeneralDiagnosticsSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterGeneralDiagnosticsSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterGeneralDiagnosticsSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterGeneralDiagnosticsSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_clsMTRClusterGeneralDiagnostics                                                                               = _objcClass("MTRClusterGeneralDiagnostics")
+	_mTRClusterGeneralDiagnosticsSelTestEventTriggerWithParamsExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("testEventTriggerWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterGeneralDiagnosticsSelTimeSnapshotWithParamsExpectedValuesExpectedValueIntervalCompletion            = objc.RegisterName("timeSnapshotWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterGeneralDiagnosticsSelTimeSnapshotWithExpectedValuesExpectedValueIntervalCompletion                  = objc.RegisterName("timeSnapshotWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterGeneralDiagnosticsSelPayloadTestRequestWithParamsExpectedValuesExpectedValueIntervalCompletion      = objc.RegisterName("payloadTestRequestWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterGeneralDiagnosticsSelReadAttributeNetworkInterfacesWithParams                                       = objc.RegisterName("readAttributeNetworkInterfacesWithParams:")
+	_mTRClusterGeneralDiagnosticsSelReadAttributeRebootCountWithParams                                             = objc.RegisterName("readAttributeRebootCountWithParams:")
+	_mTRClusterGeneralDiagnosticsSelReadAttributeUpTimeWithParams                                                  = objc.RegisterName("readAttributeUpTimeWithParams:")
+	_mTRClusterGeneralDiagnosticsSelReadAttributeTotalOperationalHoursWithParams                                   = objc.RegisterName("readAttributeTotalOperationalHoursWithParams:")
+	_mTRClusterGeneralDiagnosticsSelReadAttributeBootReasonWithParams                                              = objc.RegisterName("readAttributeBootReasonWithParams:")
+	_mTRClusterGeneralDiagnosticsSelReadAttributeActiveHardwareFaultsWithParams                                    = objc.RegisterName("readAttributeActiveHardwareFaultsWithParams:")
+	_mTRClusterGeneralDiagnosticsSelReadAttributeActiveRadioFaultsWithParams                                       = objc.RegisterName("readAttributeActiveRadioFaultsWithParams:")
+	_mTRClusterGeneralDiagnosticsSelReadAttributeActiveNetworkFaultsWithParams                                     = objc.RegisterName("readAttributeActiveNetworkFaultsWithParams:")
+	_mTRClusterGeneralDiagnosticsSelReadAttributeTestEventTriggersEnabledWithParams                                = objc.RegisterName("readAttributeTestEventTriggersEnabledWithParams:")
+	_mTRClusterGeneralDiagnosticsSelReadAttributeGeneratedCommandListWithParams                                    = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterGeneralDiagnosticsSelReadAttributeAcceptedCommandListWithParams                                     = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterGeneralDiagnosticsSelReadAttributeAttributeListWithParams                                           = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterGeneralDiagnosticsSelReadAttributeFeatureMapWithParams                                              = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterGeneralDiagnosticsSelReadAttributeClusterRevisionWithParams                                         = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterGeneralDiagnosticsSelInitWithDeviceEndpointIDQueue                                                  = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterGeneralDiagnosticsSelInitWithDeviceEndpointQueue                                                    = objc.RegisterName("initWithDevice:endpoint:queue:")
 	_mTRClusterGeneralDiagnosticsSelTestEventTriggerWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("testEventTriggerWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterGeneralDiagnosticsSelReadAttributeBootReasonsWithParams = objc.RegisterName("readAttributeBootReasonsWithParams:")
+	_mTRClusterGeneralDiagnosticsSelReadAttributeBootReasonsWithParams                                             = objc.RegisterName("readAttributeBootReasonsWithParams:")
 )
 
 func MTRClusterGeneralDiagnosticsFromID(id objc.ID) *MTRClusterGeneralDiagnostics {
@@ -179,13 +179,17 @@ func (o *MTRClusterGeneralDiagnostics) ReadAttributeClusterRevisionWithParams(pa
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterGeneralDiagnostics) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterGeneralDiagnostics {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterGeneralDiagnosticsSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterGeneralDiagnosticsFromID(_ret)
 }
 
 func (o *MTRClusterGeneralDiagnostics) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterGeneralDiagnostics {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterGeneralDiagnosticsSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterGeneralDiagnosticsFromID(_ret)
 }
 
@@ -204,4 +208,3 @@ func (o *MTRClusterGeneralDiagnostics) ReadAttributeBootReasonsWithParams(params
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterGeneralDiagnosticsSelReadAttributeBootReasonsWithParams, params.Ptr())
 	return _ret
 }
-

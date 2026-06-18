@@ -15,9 +15,9 @@ type NSAutoreleasePool struct {
 }
 
 var (
-	_clsNSAutoreleasePool = _objcClass("NSAutoreleasePool")
+	_clsNSAutoreleasePool          = _objcClass("NSAutoreleasePool")
 	_nSAutoreleasePoolSelAddObject = objc.RegisterName("addObject:")
-	_nSAutoreleasePoolSelDrain = objc.RegisterName("drain")
+	_nSAutoreleasePoolSelDrain     = objc.RegisterName("drain")
 )
 
 func NSAutoreleasePoolFromID(id objc.ID) *NSAutoreleasePool {
@@ -41,4 +41,3 @@ func (o *NSAutoreleasePool) AddObject(anObject objc.ID) {
 func (o *NSAutoreleasePool) Drain() {
 	o.Ptr().Send(_nSAutoreleasePoolSelDrain)
 }
-

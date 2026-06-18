@@ -18,16 +18,16 @@ type CKFetchShareParticipantsOperation struct {
 }
 
 var (
-	_clsCKFetchShareParticipantsOperation = _objcClass("CKFetchShareParticipantsOperation")
-	_cKFetchShareParticipantsOperationSelInit = objc.RegisterName("init")
-	_cKFetchShareParticipantsOperationSelInitWithUserIdentityLookupInfos = objc.RegisterName("initWithUserIdentityLookupInfos:")
-	_cKFetchShareParticipantsOperationSelUserIdentityLookupInfos = objc.RegisterName("userIdentityLookupInfos")
-	_cKFetchShareParticipantsOperationSelSetUserIdentityLookupInfos = objc.RegisterName("setUserIdentityLookupInfos:")
-	_cKFetchShareParticipantsOperationSelShareParticipantFetchedBlock = objc.RegisterName("shareParticipantFetchedBlock")
-	_cKFetchShareParticipantsOperationSelSetShareParticipantFetchedBlock = objc.RegisterName("setShareParticipantFetchedBlock:")
-	_cKFetchShareParticipantsOperationSelPerShareParticipantCompletionBlock = objc.RegisterName("perShareParticipantCompletionBlock")
-	_cKFetchShareParticipantsOperationSelSetPerShareParticipantCompletionBlock = objc.RegisterName("setPerShareParticipantCompletionBlock:")
-	_cKFetchShareParticipantsOperationSelFetchShareParticipantsCompletionBlock = objc.RegisterName("fetchShareParticipantsCompletionBlock")
+	_clsCKFetchShareParticipantsOperation                                         = _objcClass("CKFetchShareParticipantsOperation")
+	_cKFetchShareParticipantsOperationSelInit                                     = objc.RegisterName("init")
+	_cKFetchShareParticipantsOperationSelInitWithUserIdentityLookupInfos          = objc.RegisterName("initWithUserIdentityLookupInfos:")
+	_cKFetchShareParticipantsOperationSelUserIdentityLookupInfos                  = objc.RegisterName("userIdentityLookupInfos")
+	_cKFetchShareParticipantsOperationSelSetUserIdentityLookupInfos               = objc.RegisterName("setUserIdentityLookupInfos:")
+	_cKFetchShareParticipantsOperationSelShareParticipantFetchedBlock             = objc.RegisterName("shareParticipantFetchedBlock")
+	_cKFetchShareParticipantsOperationSelSetShareParticipantFetchedBlock          = objc.RegisterName("setShareParticipantFetchedBlock:")
+	_cKFetchShareParticipantsOperationSelPerShareParticipantCompletionBlock       = objc.RegisterName("perShareParticipantCompletionBlock")
+	_cKFetchShareParticipantsOperationSelSetPerShareParticipantCompletionBlock    = objc.RegisterName("setPerShareParticipantCompletionBlock:")
+	_cKFetchShareParticipantsOperationSelFetchShareParticipantsCompletionBlock    = objc.RegisterName("fetchShareParticipantsCompletionBlock")
 	_cKFetchShareParticipantsOperationSelSetFetchShareParticipantsCompletionBlock = objc.RegisterName("setFetchShareParticipantsCompletionBlock:")
 )
 
@@ -41,24 +41,30 @@ func CKFetchShareParticipantsOperationFromID(id objc.ID) *CKFetchShareParticipan
 	return o
 }
 
-// Creates an empty operation. You can use this operation only once. - Note: If you don't set ``CKFetchShareParticipantsOperation/userIdentityLookupInfos`` prior to executing the operation, it returns immediately with no results.
+// Creates an empty operation. You can use this operation only once. - Note: If you don't set “CKFetchShareParticipantsOperation/userIdentityLookupInfos“ prior to executing the operation, it returns immediately with no results.
 func (o *CKFetchShareParticipantsOperation) Init() *CKFetchShareParticipantsOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchShareParticipantsOperationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKFetchShareParticipantsOperationFromID(_ret)
 }
 
-// Creates an operation for generating share participants from the specified user data. - Parameters: - userIdentityLookupInfos: The user data for the participants. If you specify `nil`, you must assign a value to the ``CKFetchShareParticipantsOperation/userIdentityLookupInfos`` property before you execute this operation. After you create the operation, assign a handler to the ``CKFetchShareParticipantsOperation/fetchShareParticipantsCompletionBlock`` property to process the results.
+// Creates an operation for generating share participants from the specified user data. - Parameters: - userIdentityLookupInfos: The user data for the participants. If you specify `nil`, you must assign a value to the “CKFetchShareParticipantsOperation/userIdentityLookupInfos“ property before you execute this operation. After you create the operation, assign a handler to the “CKFetchShareParticipantsOperation/fetchShareParticipantsCompletionBlock“ property to process the results.
 func (o *CKFetchShareParticipantsOperation) InitWithUserIdentityLookupInfos(userIdentityLookupInfos *foundation.NSArray[*CKUserIdentityLookupInfo]) *CKFetchShareParticipantsOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchShareParticipantsOperationSelInitWithUserIdentityLookupInfos, userIdentityLookupInfos.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKFetchShareParticipantsOperationFromID(_ret)
 }
 
-// The user data for the participants. Use this property to view or change the participants user data. If you intend to specify or change the value of this property, do so before you execute the operation or submit it to a queue. - Note: If you don't set ``CKFetchShareParticipantsOperation/userIdentityLookupInfos`` prior to executing the operation, it returns immediately with no results.
+// The user data for the participants. Use this property to view or change the participants user data. If you intend to specify or change the value of this property, do so before you execute the operation or submit it to a queue. - Note: If you don't set “CKFetchShareParticipantsOperation/userIdentityLookupInfos“ prior to executing the operation, it returns immediately with no results.
 func (o *CKFetchShareParticipantsOperation) UserIdentityLookupInfos() *foundation.NSArray[*CKUserIdentityLookupInfo] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchShareParticipantsOperationSelUserIdentityLookupInfos)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CKUserIdentityLookupInfo](_ret)
 }
 
@@ -66,7 +72,7 @@ func (o *CKFetchShareParticipantsOperation) SetUserIdentityLookupInfos(userIdent
 	o.Ptr().Send(_cKFetchShareParticipantsOperationSelSetUserIdentityLookupInfos, userIdentityLookupInfos.Ptr())
 }
 
-// The closure to execute as the operation generates individual participants. The closure returns no value and takes the following parameters: - The participant that the operation generates. The operation executes this closure once for each item of user data in the ``CKFetchShareParticipantsOperation/userIdentityLookupInfos`` property. Each time the closure executes, it executes serially with respect to the other closures of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+// The closure to execute as the operation generates individual participants. The closure returns no value and takes the following parameters: - The participant that the operation generates. The operation executes this closure once for each item of user data in the “CKFetchShareParticipantsOperation/userIdentityLookupInfos“ property. Each time the closure executes, it executes serially with respect to the other closures of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
 // Deprecated: Use perShareParticipantCompletionBlock instead, which surfaces per-share-participant errors
 func (o *CKFetchShareParticipantsOperation) ShareParticipantFetchedBlock() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _cKFetchShareParticipantsOperationSelShareParticipantFetchedBlock)
@@ -88,7 +94,7 @@ func (o *CKFetchShareParticipantsOperation) SetShareParticipantFetchedBlock(shar
 	o.Ptr().Send(_cKFetchShareParticipantsOperationSelSetShareParticipantFetchedBlock, __block_shareParticipantFetchedBlock)
 }
 
-// The closure to execute as the operation generates individual participants. The closure returns no value and takes the following parameters: - The lookup info of the share participant. - The generated share participant, or `nil` if CloudKit can't generate the share participant. - If CloudKit can't generate the share participant, this parameter provides information about the failure; otherwise, it's `nil`. The operation executes this closure once for each item of user data in the ``CKFetchShareParticipantsOperation/userIdentityLookupInfos`` property. Each time the closure executes, it executes serially with respect to the other closures of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+// The closure to execute as the operation generates individual participants. The closure returns no value and takes the following parameters: - The lookup info of the share participant. - The generated share participant, or `nil` if CloudKit can't generate the share participant. - If CloudKit can't generate the share participant, this parameter provides information about the failure; otherwise, it's `nil`. The operation executes this closure once for each item of user data in the “CKFetchShareParticipantsOperation/userIdentityLookupInfos“ property. Each time the closure executes, it executes serially with respect to the other closures of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
 func (o *CKFetchShareParticipantsOperation) PerShareParticipantCompletionBlock() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _cKFetchShareParticipantsOperationSelPerShareParticipantCompletionBlock)
 	return _ret
@@ -111,7 +117,7 @@ func (o *CKFetchShareParticipantsOperation) SetPerShareParticipantCompletionBloc
 	o.Ptr().Send(_cKFetchShareParticipantsOperationSelSetPerShareParticipantCompletionBlock, __block_perShareParticipantCompletionBlock)
 }
 
-// The closure to execute when the operation finishes. The closure returns no value and takes the following parameter: - An error that contains information about a problem, or `nil` if CloudKit successfully generates the participants. The operation executes this closure only once. The closure executes on a background queue, so any tasks that require access to the main queue must dispatch accordingly. The closure reports an error of type ``CKError/Code/partialFailure`` when it can't generate some of the participants. The `userInfo` dictionary of the error contains a ``CKPartialErrorsByItemIDKey`` key that has a dictionary as its value. The keys of the dictionary identify the participants that CloudKit can't generate, and the corresponding values are errors that contain information about the failures. Set this property's value before you execute the operation or submit it to a queue.
+// The closure to execute when the operation finishes. The closure returns no value and takes the following parameter: - An error that contains information about a problem, or `nil` if CloudKit successfully generates the participants. The operation executes this closure only once. The closure executes on a background queue, so any tasks that require access to the main queue must dispatch accordingly. The closure reports an error of type “CKError/Code/partialFailure“ when it can't generate some of the participants. The `userInfo` dictionary of the error contains a “CKPartialErrorsByItemIDKey“ key that has a dictionary as its value. The keys of the dictionary identify the participants that CloudKit can't generate, and the corresponding values are errors that contain information about the failures. Set this property's value before you execute the operation or submit it to a queue.
 func (o *CKFetchShareParticipantsOperation) FetchShareParticipantsCompletionBlock() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _cKFetchShareParticipantsOperationSelFetchShareParticipantsCompletionBlock)
 	return _ret
@@ -127,4 +133,3 @@ func (o *CKFetchShareParticipantsOperation) SetFetchShareParticipantsCompletionB
 	}
 	o.Ptr().Send(_cKFetchShareParticipantsOperationSelSetFetchShareParticipantsCompletionBlock, __block_fetchShareParticipantsCompletionBlock)
 }
-

@@ -17,7 +17,9 @@ type MTRThreadNetworkDirectoryClusterThreadNetworkStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRThreadNetworkDirectoryClusterThreadNetworkStruct].
-func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) Unwrap() *raw.MTRThreadNetworkDirectoryClusterThreadNetworkStruct { return x.inner }
+func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) Unwrap() *raw.MTRThreadNetworkDirectoryClusterThreadNetworkStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -123,4 +125,3 @@ type MTRThreadNetworkDirectoryClusterThreadNetworkStructable interface {
 }
 
 var _ MTRThreadNetworkDirectoryClusterThreadNetworkStructable = (*MTRThreadNetworkDirectoryClusterThreadNetworkStruct)(nil)
-

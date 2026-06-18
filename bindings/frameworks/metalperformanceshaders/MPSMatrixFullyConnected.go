@@ -22,24 +22,24 @@ type MPSMatrixFullyConnected struct {
 }
 
 var (
-	_clsMPSMatrixFullyConnected = _objcClass("MPSMatrixFullyConnected")
-	_mPSMatrixFullyConnectedSelSetNeuronTypeParameterAParameterBParameterC = objc.RegisterName("setNeuronType:parameterA:parameterB:parameterC:")
-	_mPSMatrixFullyConnectedSelNeuronType = objc.RegisterName("neuronType")
-	_mPSMatrixFullyConnectedSelNeuronParameterA = objc.RegisterName("neuronParameterA")
-	_mPSMatrixFullyConnectedSelNeuronParameterB = objc.RegisterName("neuronParameterB")
-	_mPSMatrixFullyConnectedSelNeuronParameterC = objc.RegisterName("neuronParameterC")
-	_mPSMatrixFullyConnectedSelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsMPSMatrixFullyConnected                                                                   = _objcClass("MPSMatrixFullyConnected")
+	_mPSMatrixFullyConnectedSelSetNeuronTypeParameterAParameterBParameterC                        = objc.RegisterName("setNeuronType:parameterA:parameterB:parameterC:")
+	_mPSMatrixFullyConnectedSelNeuronType                                                         = objc.RegisterName("neuronType")
+	_mPSMatrixFullyConnectedSelNeuronParameterA                                                   = objc.RegisterName("neuronParameterA")
+	_mPSMatrixFullyConnectedSelNeuronParameterB                                                   = objc.RegisterName("neuronParameterB")
+	_mPSMatrixFullyConnectedSelNeuronParameterC                                                   = objc.RegisterName("neuronParameterC")
+	_mPSMatrixFullyConnectedSelInitWithDevice                                                     = objc.RegisterName("initWithDevice:")
 	_mPSMatrixFullyConnectedSelEncodeToCommandBufferInputMatrixWeightMatrixBiasVectorResultMatrix = objc.RegisterName("encodeToCommandBuffer:inputMatrix:weightMatrix:biasVector:resultMatrix:")
-	_mPSMatrixFullyConnectedSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSMatrixFullyConnectedSelCopyWithZoneDevice = objc.RegisterName("copyWithZone:device:")
-	_mPSMatrixFullyConnectedSelSourceNumberOfFeatureVectors = objc.RegisterName("sourceNumberOfFeatureVectors")
-	_mPSMatrixFullyConnectedSelSetSourceNumberOfFeatureVectors = objc.RegisterName("setSourceNumberOfFeatureVectors:")
-	_mPSMatrixFullyConnectedSelSourceInputFeatureChannels = objc.RegisterName("sourceInputFeatureChannels")
-	_mPSMatrixFullyConnectedSelSetSourceInputFeatureChannels = objc.RegisterName("setSourceInputFeatureChannels:")
-	_mPSMatrixFullyConnectedSelSourceOutputFeatureChannels = objc.RegisterName("sourceOutputFeatureChannels")
-	_mPSMatrixFullyConnectedSelSetSourceOutputFeatureChannels = objc.RegisterName("setSourceOutputFeatureChannels:")
-	_mPSMatrixFullyConnectedSelAlpha = objc.RegisterName("alpha")
-	_mPSMatrixFullyConnectedSelSetAlpha = objc.RegisterName("setAlpha:")
+	_mPSMatrixFullyConnectedSelInitWithCoderDevice                                                = objc.RegisterName("initWithCoder:device:")
+	_mPSMatrixFullyConnectedSelCopyWithZoneDevice                                                 = objc.RegisterName("copyWithZone:device:")
+	_mPSMatrixFullyConnectedSelSourceNumberOfFeatureVectors                                       = objc.RegisterName("sourceNumberOfFeatureVectors")
+	_mPSMatrixFullyConnectedSelSetSourceNumberOfFeatureVectors                                    = objc.RegisterName("setSourceNumberOfFeatureVectors:")
+	_mPSMatrixFullyConnectedSelSourceInputFeatureChannels                                         = objc.RegisterName("sourceInputFeatureChannels")
+	_mPSMatrixFullyConnectedSelSetSourceInputFeatureChannels                                      = objc.RegisterName("setSourceInputFeatureChannels:")
+	_mPSMatrixFullyConnectedSelSourceOutputFeatureChannels                                        = objc.RegisterName("sourceOutputFeatureChannels")
+	_mPSMatrixFullyConnectedSelSetSourceOutputFeatureChannels                                     = objc.RegisterName("setSourceOutputFeatureChannels:")
+	_mPSMatrixFullyConnectedSelAlpha                                                              = objc.RegisterName("alpha")
+	_mPSMatrixFullyConnectedSelSetAlpha                                                           = objc.RegisterName("setAlpha:")
 )
 
 func MPSMatrixFullyConnectedFromID(id objc.ID) *MPSMatrixFullyConnected {
@@ -83,7 +83,9 @@ func (o *MPSMatrixFullyConnected) NeuronParameterC() float32 {
 
 func (o *MPSMatrixFullyConnected) InitWithDevice(device metal.MTLDevice) *MPSMatrixFullyConnected {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixFullyConnectedSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixFullyConnectedFromID(_ret)
 }
 
@@ -95,7 +97,9 @@ func (o *MPSMatrixFullyConnected) EncodeToCommandBufferInputMatrixWeightMatrixBi
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSMatrixFullyConnected @param      device      The MTLDevice on which to make the MPSMatrixFullyConnected object. @return     A new MPSMatrixFullyConnected object, or nil if failure.
 func (o *MPSMatrixFullyConnected) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSMatrixFullyConnected {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixFullyConnectedSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixFullyConnectedFromID(_ret)
 }
 
@@ -144,4 +148,3 @@ func (o *MPSMatrixFullyConnected) Alpha() float64 {
 func (o *MPSMatrixFullyConnected) SetAlpha(alpha float64) {
 	o.Ptr().Send(_mPSMatrixFullyConnectedSelSetAlpha, alpha)
 }
-

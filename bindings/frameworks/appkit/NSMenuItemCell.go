@@ -17,28 +17,28 @@ type NSMenuItemCell struct {
 }
 
 var (
-	_clsNSMenuItemCell = _objcClass("NSMenuItemCell")
-	_nSMenuItemCellSelInitTextCell = objc.RegisterName("initTextCell:")
-	_nSMenuItemCellSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSMenuItemCellSelCalcSize = objc.RegisterName("calcSize")
-	_nSMenuItemCellSelStateImageRectForBounds = objc.RegisterName("stateImageRectForBounds:")
-	_nSMenuItemCellSelKeyEquivalentRectForBounds = objc.RegisterName("keyEquivalentRectForBounds:")
-	_nSMenuItemCellSelDrawSeparatorItemWithFrameInView = objc.RegisterName("drawSeparatorItemWithFrame:inView:")
-	_nSMenuItemCellSelDrawStateImageWithFrameInView = objc.RegisterName("drawStateImageWithFrame:inView:")
-	_nSMenuItemCellSelDrawImageWithFrameInView = objc.RegisterName("drawImageWithFrame:inView:")
-	_nSMenuItemCellSelDrawTitleWithFrameInView = objc.RegisterName("drawTitleWithFrame:inView:")
-	_nSMenuItemCellSelDrawKeyEquivalentWithFrameInView = objc.RegisterName("drawKeyEquivalentWithFrame:inView:")
+	_clsNSMenuItemCell                                       = _objcClass("NSMenuItemCell")
+	_nSMenuItemCellSelInitTextCell                           = objc.RegisterName("initTextCell:")
+	_nSMenuItemCellSelInitWithCoder                          = objc.RegisterName("initWithCoder:")
+	_nSMenuItemCellSelCalcSize                               = objc.RegisterName("calcSize")
+	_nSMenuItemCellSelStateImageRectForBounds                = objc.RegisterName("stateImageRectForBounds:")
+	_nSMenuItemCellSelKeyEquivalentRectForBounds             = objc.RegisterName("keyEquivalentRectForBounds:")
+	_nSMenuItemCellSelDrawSeparatorItemWithFrameInView       = objc.RegisterName("drawSeparatorItemWithFrame:inView:")
+	_nSMenuItemCellSelDrawStateImageWithFrameInView          = objc.RegisterName("drawStateImageWithFrame:inView:")
+	_nSMenuItemCellSelDrawImageWithFrameInView               = objc.RegisterName("drawImageWithFrame:inView:")
+	_nSMenuItemCellSelDrawTitleWithFrameInView               = objc.RegisterName("drawTitleWithFrame:inView:")
+	_nSMenuItemCellSelDrawKeyEquivalentWithFrameInView       = objc.RegisterName("drawKeyEquivalentWithFrame:inView:")
 	_nSMenuItemCellSelDrawBorderAndBackgroundWithFrameInView = objc.RegisterName("drawBorderAndBackgroundWithFrame:inView:")
-	_nSMenuItemCellSelMenuItem = objc.RegisterName("menuItem")
-	_nSMenuItemCellSelSetMenuItem = objc.RegisterName("setMenuItem:")
-	_nSMenuItemCellSelNeedsSizing = objc.RegisterName("needsSizing")
-	_nSMenuItemCellSelSetNeedsSizing = objc.RegisterName("setNeedsSizing:")
-	_nSMenuItemCellSelNeedsDisplay = objc.RegisterName("needsDisplay")
-	_nSMenuItemCellSelSetNeedsDisplay = objc.RegisterName("setNeedsDisplay:")
-	_nSMenuItemCellSelStateImageWidth = objc.RegisterName("stateImageWidth")
-	_nSMenuItemCellSelImageWidth = objc.RegisterName("imageWidth")
-	_nSMenuItemCellSelTitleWidth = objc.RegisterName("titleWidth")
-	_nSMenuItemCellSelKeyEquivalentWidth = objc.RegisterName("keyEquivalentWidth")
+	_nSMenuItemCellSelMenuItem                               = objc.RegisterName("menuItem")
+	_nSMenuItemCellSelSetMenuItem                            = objc.RegisterName("setMenuItem:")
+	_nSMenuItemCellSelNeedsSizing                            = objc.RegisterName("needsSizing")
+	_nSMenuItemCellSelSetNeedsSizing                         = objc.RegisterName("setNeedsSizing:")
+	_nSMenuItemCellSelNeedsDisplay                           = objc.RegisterName("needsDisplay")
+	_nSMenuItemCellSelSetNeedsDisplay                        = objc.RegisterName("setNeedsDisplay:")
+	_nSMenuItemCellSelStateImageWidth                        = objc.RegisterName("stateImageWidth")
+	_nSMenuItemCellSelImageWidth                             = objc.RegisterName("imageWidth")
+	_nSMenuItemCellSelTitleWidth                             = objc.RegisterName("titleWidth")
+	_nSMenuItemCellSelKeyEquivalentWidth                     = objc.RegisterName("keyEquivalentWidth")
 )
 
 func NSMenuItemCellFromID(id objc.ID) *NSMenuItemCell {
@@ -53,13 +53,17 @@ func NSMenuItemCellFromID(id objc.ID) *NSMenuItemCell {
 
 func (o *NSMenuItemCell) InitTextCell(string_ *foundation.NSString) *NSMenuItemCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemCellSelInitTextCell, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuItemCellFromID(_ret)
 }
 
 func (o *NSMenuItemCell) InitWithCoder(coder *foundation.NSCoder) *NSMenuItemCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemCellSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuItemCellFromID(_ret)
 }
 
@@ -103,7 +107,9 @@ func (o *NSMenuItemCell) DrawBorderAndBackgroundWithFrameInView(cellFrame corefo
 
 func (o *NSMenuItemCell) MenuItem() *NSMenuItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemCellSelMenuItem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuItemFromID(_ret)
 }
 
@@ -148,4 +154,3 @@ func (o *NSMenuItemCell) KeyEquivalentWidth() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSMenuItemCellSelKeyEquivalentWidth)
 	return _ret
 }
-

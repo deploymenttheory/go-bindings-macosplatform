@@ -15,8 +15,8 @@ type HKSeriesType struct {
 }
 
 var (
-	_clsHKSeriesType = _objcClass("HKSeriesType")
-	_hKSeriesTypeSelWorkoutRouteType = objc.RegisterName("workoutRouteType")
+	_clsHKSeriesType                    = _objcClass("HKSeriesType")
+	_hKSeriesTypeSelWorkoutRouteType    = objc.RegisterName("workoutRouteType")
 	_hKSeriesTypeSelHeartbeatSeriesType = objc.RegisterName("heartbeatSeriesType")
 )
 
@@ -32,13 +32,16 @@ func HKSeriesTypeFromID(id objc.ID) *HKSeriesType {
 
 func HKSeriesTypeWorkoutRouteType() *HKSeriesType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKSeriesType), _hKSeriesTypeSelWorkoutRouteType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKSeriesTypeFromID(_ret)
 }
 
 func HKSeriesTypeHeartbeatSeriesType() *HKSeriesType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKSeriesType), _hKSeriesTypeSelHeartbeatSeriesType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKSeriesTypeFromID(_ret)
 }
-

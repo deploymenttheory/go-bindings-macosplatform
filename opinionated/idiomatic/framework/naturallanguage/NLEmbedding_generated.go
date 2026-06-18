@@ -143,4 +143,3 @@ type Embeddingable interface {
 }
 
 var _ Embeddingable = (*Embedding)(nil)
-

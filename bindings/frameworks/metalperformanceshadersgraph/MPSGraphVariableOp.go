@@ -18,8 +18,8 @@ type MPSGraphVariableOp struct {
 }
 
 var (
-	_clsMPSGraphVariableOp = _objcClass("MPSGraphVariableOp")
-	_mPSGraphVariableOpSelShape = objc.RegisterName("shape")
+	_clsMPSGraphVariableOp         = _objcClass("MPSGraphVariableOp")
+	_mPSGraphVariableOpSelShape    = objc.RegisterName("shape")
 	_mPSGraphVariableOpSelDataType = objc.RegisterName("dataType")
 )
 
@@ -44,4 +44,3 @@ func (o *MPSGraphVariableOp) DataType() mpscore.MPSDataType {
 	_ret := objc.Send[mpscore.MPSDataType](o.Ptr(), _mPSGraphVariableOpSelDataType)
 	return _ret
 }
-

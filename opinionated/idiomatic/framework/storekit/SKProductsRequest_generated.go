@@ -52,4 +52,3 @@ type ProductsRequestable interface {
 }
 
 var _ ProductsRequestable = (*ProductsRequest)(nil)
-

@@ -62,4 +62,3 @@ type Storefrontable interface {
 }
 
 var _ Storefrontable = (*Storefront)(nil)
-

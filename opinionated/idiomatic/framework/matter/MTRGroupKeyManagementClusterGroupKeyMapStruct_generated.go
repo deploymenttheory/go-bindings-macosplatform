@@ -16,7 +16,9 @@ type MTRGroupKeyManagementClusterGroupKeyMapStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRGroupKeyManagementClusterGroupKeyMapStruct].
-func (x *MTRGroupKeyManagementClusterGroupKeyMapStruct) Unwrap() *raw.MTRGroupKeyManagementClusterGroupKeyMapStruct { return x.inner }
+func (x *MTRGroupKeyManagementClusterGroupKeyMapStruct) Unwrap() *raw.MTRGroupKeyManagementClusterGroupKeyMapStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -99,4 +101,3 @@ type MTRGroupKeyManagementClusterGroupKeyMapStructable interface {
 }
 
 var _ MTRGroupKeyManagementClusterGroupKeyMapStructable = (*MTRGroupKeyManagementClusterGroupKeyMapStruct)(nil)
-

@@ -105,4 +105,3 @@ type ScreenSaverViewable interface {
 }
 
 var _ ScreenSaverViewable = (*ScreenSaverView)(nil)
-

@@ -16,17 +16,17 @@ type CKAllowedSharingOptions struct {
 }
 
 var (
-	_clsCKAllowedSharingOptions = _objcClass("CKAllowedSharingOptions")
+	_clsCKAllowedSharingOptions                                                                           = _objcClass("CKAllowedSharingOptions")
 	_cKAllowedSharingOptionsSelInitWithAllowedParticipantPermissionOptionsAllowedParticipantAccessOptions = objc.RegisterName("initWithAllowedParticipantPermissionOptions:allowedParticipantAccessOptions:")
-	_cKAllowedSharingOptionsSelAllowedParticipantPermissionOptions = objc.RegisterName("allowedParticipantPermissionOptions")
-	_cKAllowedSharingOptionsSelSetAllowedParticipantPermissionOptions = objc.RegisterName("setAllowedParticipantPermissionOptions:")
-	_cKAllowedSharingOptionsSelAllowedParticipantAccessOptions = objc.RegisterName("allowedParticipantAccessOptions")
-	_cKAllowedSharingOptionsSelSetAllowedParticipantAccessOptions = objc.RegisterName("setAllowedParticipantAccessOptions:")
-	_cKAllowedSharingOptionsSelAllowsParticipantsToInviteOthers = objc.RegisterName("allowsParticipantsToInviteOthers")
-	_cKAllowedSharingOptionsSelSetAllowsParticipantsToInviteOthers = objc.RegisterName("setAllowsParticipantsToInviteOthers:")
-	_cKAllowedSharingOptionsSelStandardOptions = objc.RegisterName("standardOptions")
-	_cKAllowedSharingOptionsSelAllowsAccessRequests = objc.RegisterName("allowsAccessRequests")
-	_cKAllowedSharingOptionsSelSetAllowsAccessRequests = objc.RegisterName("setAllowsAccessRequests:")
+	_cKAllowedSharingOptionsSelAllowedParticipantPermissionOptions                                        = objc.RegisterName("allowedParticipantPermissionOptions")
+	_cKAllowedSharingOptionsSelSetAllowedParticipantPermissionOptions                                     = objc.RegisterName("setAllowedParticipantPermissionOptions:")
+	_cKAllowedSharingOptionsSelAllowedParticipantAccessOptions                                            = objc.RegisterName("allowedParticipantAccessOptions")
+	_cKAllowedSharingOptionsSelSetAllowedParticipantAccessOptions                                         = objc.RegisterName("setAllowedParticipantAccessOptions:")
+	_cKAllowedSharingOptionsSelAllowsParticipantsToInviteOthers                                           = objc.RegisterName("allowsParticipantsToInviteOthers")
+	_cKAllowedSharingOptionsSelSetAllowsParticipantsToInviteOthers                                        = objc.RegisterName("setAllowsParticipantsToInviteOthers:")
+	_cKAllowedSharingOptionsSelStandardOptions                                                            = objc.RegisterName("standardOptions")
+	_cKAllowedSharingOptionsSelAllowsAccessRequests                                                       = objc.RegisterName("allowsAccessRequests")
+	_cKAllowedSharingOptionsSelSetAllowsAccessRequests                                                    = objc.RegisterName("setAllowsAccessRequests:")
 )
 
 func CKAllowedSharingOptionsFromID(id objc.ID) *CKAllowedSharingOptions {
@@ -39,10 +39,12 @@ func CKAllowedSharingOptionsFromID(id objc.ID) *CKAllowedSharingOptions {
 	return o
 }
 
-// Creates and initializes an allowed sharing options object. - Parameters: - allowedParticipantPermissionOptions: The ``CKSharingParticipantPermissionOption`` setting. - allowedParticipantAccessOptions: The ``CKSharingParticipantAccessOption`` setting.
+// Creates and initializes an allowed sharing options object. - Parameters: - allowedParticipantPermissionOptions: The “CKSharingParticipantPermissionOption“ setting. - allowedParticipantAccessOptions: The “CKSharingParticipantAccessOption“ setting.
 func (o *CKAllowedSharingOptions) InitWithAllowedParticipantPermissionOptionsAllowedParticipantAccessOptions(allowedParticipantPermissionOptions CKSharingParticipantPermissionOption, allowedParticipantAccessOptions CKSharingParticipantAccessOption) *CKAllowedSharingOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKAllowedSharingOptionsSelInitWithAllowedParticipantPermissionOptionsAllowedParticipantAccessOptions, allowedParticipantPermissionOptions, allowedParticipantAccessOptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKAllowedSharingOptionsFromID(_ret)
 }
 
@@ -66,7 +68,7 @@ func (o *CKAllowedSharingOptions) SetAllowedParticipantAccessOptions(allowedPart
 	o.Ptr().Send(_cKAllowedSharingOptionsSelSetAllowedParticipantAccessOptions, allowedParticipantAccessOptions)
 }
 
-// Default value is NO. If set, the system sharing UI allows the user to choose whether added participants can invite others to the share. CloudKit returns shares with ``CKShare/ParticipantRole/administrator-enum.case`` participants as read-only to devices running OS versions prior to this role being introduced. CloudKit returns administrator participants on such read-only shares as ``CKShare/ParticipantRole/privateUser-enum.case``.
+// Default value is NO. If set, the system sharing UI allows the user to choose whether added participants can invite others to the share. CloudKit returns shares with “CKShare/ParticipantRole/administrator-enum.case“ participants as read-only to devices running OS versions prior to this role being introduced. CloudKit returns administrator participants on such read-only shares as “CKShare/ParticipantRole/privateUser-enum.case“.
 func (o *CKAllowedSharingOptions) AllowsParticipantsToInviteOthers() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cKAllowedSharingOptionsSelAllowsParticipantsToInviteOthers)
 	return _ret
@@ -76,10 +78,12 @@ func (o *CKAllowedSharingOptions) SetAllowsParticipantsToInviteOthers(allowsPart
 	o.Ptr().Send(_cKAllowedSharingOptionsSelSetAllowsParticipantsToInviteOthers, allowsParticipantsToInviteOthers)
 }
 
-// An object set to the most permissive sharing options. The `standardOptions` has ``CKAllowedSharingOptions/allowedParticipantPermissionOptions`` set to ``CKSharingParticipantPermissionOption/any`` and ``CKAllowedSharingOptions/allowedParticipantAccessOptions`` set to ``CKSharingParticipantAccessOption/any``.
+// An object set to the most permissive sharing options. The `standardOptions` has “CKAllowedSharingOptions/allowedParticipantPermissionOptions“ set to “CKSharingParticipantPermissionOption/any“ and “CKAllowedSharingOptions/allowedParticipantAccessOptions“ set to “CKSharingParticipantAccessOption/any“.
 func CKAllowedSharingOptionsStandardOptions() *CKAllowedSharingOptions {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCKAllowedSharingOptions), _cKAllowedSharingOptionsSelStandardOptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKAllowedSharingOptionsFromID(_ret)
 }
 
@@ -92,4 +96,3 @@ func (o *CKAllowedSharingOptions) AllowsAccessRequests() bool {
 func (o *CKAllowedSharingOptions) SetAllowsAccessRequests(allowsAccessRequests bool) {
 	o.Ptr().Send(_cKAllowedSharingOptionsSelSetAllowsAccessRequests, allowsAccessRequests)
 }
-

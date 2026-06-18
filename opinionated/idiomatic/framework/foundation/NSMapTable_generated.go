@@ -126,4 +126,3 @@ type MapTableable interface {
 }
 
 var _ MapTableable = (*MapTable)(nil)
-

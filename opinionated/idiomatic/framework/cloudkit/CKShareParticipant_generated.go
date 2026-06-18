@@ -119,4 +119,3 @@ type ShareParticipantable interface {
 }
 
 var _ ShareParticipantable = (*ShareParticipant)(nil)
-

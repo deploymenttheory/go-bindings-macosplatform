@@ -12,35 +12,44 @@ import (
 // @const kvImageDecodeArray_16Q12Format @abstract Predefined decode array constant to use with 16Q12 formatted data @discussion 16Q12 data is a signed 16-bit fixed point integer. The format is implicitly divided by 2**12 to give a range of [-8,8)  (SHRT_MIN/4096,SHRT_MAX/4096). The type is present to allow 8-bit content to be converted into other colorspaces and operated on without undue loss of precision or loss of color gamut due to clamping. This constant is "magic" in the sense that it is identified by address. Copying the values here will cause a CG format to be instead interpreted as a _unsigned_ 16 bit format. 16Q12 pixels do not follow CG image format conventions in two respects. The format is signed. The alpha channel is subject to the decode array transform too, meaning that 0 is transparent and 4096 opaque. Consequently, ALL buffers that use this format must be tagged with the kvImageDecodeArray_16Q12Format decode array.
 func KvImageDecodeArray_16Q12Format() *float64 {
 	ptr, _ := purego.Dlsym(_vimageLib, "kvImageDecodeArray_16Q12Format")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**float64)(unsafe.Pointer(ptr))
 }
 
 // @const      kvImage_ARGBToYpCbCrMatrix_ITU_R_601_4 @abstract   RGB->Y'CbCr conversion matrix for ITU-Recommendation BT.601-4
 func KvImage_ARGBToYpCbCrMatrix_ITU_R_601_4() *VImageARGBToYpCbCrMatrix {
 	ptr, _ := purego.Dlsym(_vimageLib, "kvImage_ARGBToYpCbCrMatrix_ITU_R_601_4")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**VImageARGBToYpCbCrMatrix)(unsafe.Pointer(ptr))
 }
 
 // @const      kvImage_ARGBToYpCbCrMatrix_ITU_R_709_2 @abstract   RGB->Y'CbCr conversion matrix for ITU-Recommendation BT.709-2
 func KvImage_ARGBToYpCbCrMatrix_ITU_R_709_2() *VImageARGBToYpCbCrMatrix {
 	ptr, _ := purego.Dlsym(_vimageLib, "kvImage_ARGBToYpCbCrMatrix_ITU_R_709_2")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**VImageARGBToYpCbCrMatrix)(unsafe.Pointer(ptr))
 }
 
 // @const      kvImage_YpCbCrToARGBMatrix_ITU_R_601_4 @abstract   Y'CbCr->RGB conversion matrix for ITU-Recommendation BT.601-4
 func KvImage_YpCbCrToARGBMatrix_ITU_R_601_4() *VImageYpCbCrToARGBMatrix {
 	ptr, _ := purego.Dlsym(_vimageLib, "kvImage_YpCbCrToARGBMatrix_ITU_R_601_4")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**VImageYpCbCrToARGBMatrix)(unsafe.Pointer(ptr))
 }
 
 // @const      kvImage_YpCbCrToARGBMatrix_ITU_R_709_2 @abstract   Y'CbCr->RGB conversion matrix for ITU-Recommendation BT.709-2
 func KvImage_YpCbCrToARGBMatrix_ITU_R_709_2() *VImageYpCbCrToARGBMatrix {
 	ptr, _ := purego.Dlsym(_vimageLib, "kvImage_YpCbCrToARGBMatrix_ITU_R_709_2")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**VImageYpCbCrToARGBMatrix)(unsafe.Pointer(ptr))
 }
-

@@ -11,4 +11,3 @@ func CMErrorDomain() uintptr {
 	ptr, _ := purego.Dlsym(_coremotionLib, "CMErrorDomain")
 	return ptr
 }
-

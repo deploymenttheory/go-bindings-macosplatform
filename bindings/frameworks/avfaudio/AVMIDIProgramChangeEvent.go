@@ -15,10 +15,10 @@ type AVMIDIProgramChangeEvent struct {
 }
 
 var (
-	_clsAVMIDIProgramChangeEvent = _objcClass("AVMIDIProgramChangeEvent")
+	_clsAVMIDIProgramChangeEvent                             = _objcClass("AVMIDIProgramChangeEvent")
 	_aVMIDIProgramChangeEventSelInitWithChannelProgramNumber = objc.RegisterName("initWithChannel:programNumber:")
-	_aVMIDIProgramChangeEventSelProgramNumber = objc.RegisterName("programNumber")
-	_aVMIDIProgramChangeEventSelSetProgramNumber = objc.RegisterName("setProgramNumber:")
+	_aVMIDIProgramChangeEventSelProgramNumber                = objc.RegisterName("programNumber")
+	_aVMIDIProgramChangeEventSelSetProgramNumber             = objc.RegisterName("setProgramNumber:")
 )
 
 func AVMIDIProgramChangeEventFromID(id objc.ID) *AVMIDIProgramChangeEvent {
@@ -34,7 +34,9 @@ func AVMIDIProgramChangeEventFromID(id objc.ID) *AVMIDIProgramChangeEvent {
 // @method initWithChannel:programNumber: @abstract Initialize the event with a channel and a program number. @param channel The MIDI channel for the message.  Range: 0-15. @param programNumber The program number to be sent.  Range: 0-127. @discussion Per the General MIDI specification, the actual instrument that is chosen will depend on optional AVMIDIControlChangeMessageTypeBankSelect events sent prior to this program change.
 func (o *AVMIDIProgramChangeEvent) InitWithChannelProgramNumber(channel uint, programNumber uint) *AVMIDIProgramChangeEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMIDIProgramChangeEventSelInitWithChannelProgramNumber, channel, programNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMIDIProgramChangeEventFromID(_ret)
 }
 
@@ -46,4 +48,3 @@ func (o *AVMIDIProgramChangeEvent) ProgramNumber() uint {
 func (o *AVMIDIProgramChangeEvent) SetProgramNumber(programNumber uint) {
 	o.Ptr().Send(_aVMIDIProgramChangeEventSelSetProgramNumber, programNumber)
 }
-

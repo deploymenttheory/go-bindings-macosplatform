@@ -25,4 +25,3 @@ func MTRNetworkCommissioningClusterThreadInterfaceScanResultFromID(id objc.ID) *
 	purego.Track(o)
 	return o
 }
-

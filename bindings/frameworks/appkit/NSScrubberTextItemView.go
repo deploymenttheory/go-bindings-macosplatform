@@ -16,10 +16,10 @@ type NSScrubberTextItemView struct {
 }
 
 var (
-	_clsNSScrubberTextItemView = _objcClass("NSScrubberTextItemView")
+	_clsNSScrubberTextItemView          = _objcClass("NSScrubberTextItemView")
 	_nSScrubberTextItemViewSelTextField = objc.RegisterName("textField")
-	_nSScrubberTextItemViewSelTitle = objc.RegisterName("title")
-	_nSScrubberTextItemViewSelSetTitle = objc.RegisterName("setTitle:")
+	_nSScrubberTextItemViewSelTitle     = objc.RegisterName("title")
+	_nSScrubberTextItemViewSelSetTitle  = objc.RegisterName("setTitle:")
 )
 
 func NSScrubberTextItemViewFromID(id objc.ID) *NSScrubberTextItemView {
@@ -34,17 +34,20 @@ func NSScrubberTextItemViewFromID(id objc.ID) *NSScrubberTextItemView {
 
 func (o *NSScrubberTextItemView) TextField() *NSTextField {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberTextItemViewSelTextField)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextFieldFromID(_ret)
 }
 
 func (o *NSScrubberTextItemView) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberTextItemViewSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSScrubberTextItemView) SetTitle(title *foundation.NSString) {
 	o.Ptr().Send(_nSScrubberTextItemViewSelSetTitle, title.Ptr())
 }
-

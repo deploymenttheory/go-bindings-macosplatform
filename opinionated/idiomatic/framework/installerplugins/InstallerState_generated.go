@@ -103,4 +103,3 @@ type InstallerStateable interface {
 }
 
 var _ InstallerStateable = (*InstallerState)(nil)
-

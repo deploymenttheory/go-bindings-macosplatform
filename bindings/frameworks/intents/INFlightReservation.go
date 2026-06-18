@@ -16,11 +16,11 @@ type INFlightReservation struct {
 }
 
 var (
-	_clsINFlightReservation = _objcClass("INFlightReservation")
+	_clsINFlightReservation                                                                                                                    = _objcClass("INFlightReservation")
 	_iNFlightReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatFlight = objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:reservedSeat:flight:")
-	_iNFlightReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatFlight = objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:reservedSeat:flight:")
-	_iNFlightReservationSelReservedSeat = objc.RegisterName("reservedSeat")
-	_iNFlightReservationSelFlight = objc.RegisterName("flight")
+	_iNFlightReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatFlight    = objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:reservedSeat:flight:")
+	_iNFlightReservationSelReservedSeat                                                                                                        = objc.RegisterName("reservedSeat")
+	_iNFlightReservationSelFlight                                                                                                              = objc.RegisterName("flight")
 )
 
 func INFlightReservationFromID(id objc.ID) *INFlightReservation {
@@ -35,25 +35,32 @@ func INFlightReservationFromID(id objc.ID) *INFlightReservation {
 
 func (o *INFlightReservation) InitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatFlight(itemReference *INSpeakableString, reservationNumber *foundation.NSString, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName *foundation.NSString, actions *foundation.NSArray[*INReservationAction], uRL *foundation.NSURL, reservedSeat *INSeat, flight *INFlight) *INFlightReservation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNFlightReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatFlight, itemReference.Ptr(), reservationNumber.Ptr(), bookingTime.Ptr(), reservationStatus, reservationHolderName.Ptr(), actions.Ptr(), uRL.Ptr(), reservedSeat.Ptr(), flight.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INFlightReservationFromID(_ret)
 }
 
 func (o *INFlightReservation) InitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatFlight(itemReference *INSpeakableString, reservationNumber *foundation.NSString, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName *foundation.NSString, actions *foundation.NSArray[*INReservationAction], reservedSeat *INSeat, flight *INFlight) *INFlightReservation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNFlightReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatFlight, itemReference.Ptr(), reservationNumber.Ptr(), bookingTime.Ptr(), reservationStatus, reservationHolderName.Ptr(), actions.Ptr(), reservedSeat.Ptr(), flight.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INFlightReservationFromID(_ret)
 }
 
 func (o *INFlightReservation) ReservedSeat() *INSeat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNFlightReservationSelReservedSeat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INSeatFromID(_ret)
 }
 
 func (o *INFlightReservation) Flight() *INFlight {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNFlightReservationSelFlight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INFlightFromID(_ret)
 }
-

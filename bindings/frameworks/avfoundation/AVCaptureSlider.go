@@ -16,21 +16,21 @@ type AVCaptureSlider struct {
 }
 
 var (
-	_clsAVCaptureSlider = _objcClass("AVCaptureSlider")
-	_aVCaptureSliderSelInitWithLocalizedTitleSymbolNameMinValueMaxValue = objc.RegisterName("initWithLocalizedTitle:symbolName:minValue:maxValue:")
+	_clsAVCaptureSlider                                                     = _objcClass("AVCaptureSlider")
+	_aVCaptureSliderSelInitWithLocalizedTitleSymbolNameMinValueMaxValue     = objc.RegisterName("initWithLocalizedTitle:symbolName:minValue:maxValue:")
 	_aVCaptureSliderSelInitWithLocalizedTitleSymbolNameMinValueMaxValueStep = objc.RegisterName("initWithLocalizedTitle:symbolName:minValue:maxValue:step:")
-	_aVCaptureSliderSelInitWithLocalizedTitleSymbolNameValues = objc.RegisterName("initWithLocalizedTitle:symbolName:values:")
-	_aVCaptureSliderSelSetActionQueueAction = objc.RegisterName("setActionQueue:action:")
-	_aVCaptureSliderSelValue = objc.RegisterName("value")
-	_aVCaptureSliderSelSetValue = objc.RegisterName("setValue:")
-	_aVCaptureSliderSelLocalizedValueFormat = objc.RegisterName("localizedValueFormat")
-	_aVCaptureSliderSelSetLocalizedValueFormat = objc.RegisterName("setLocalizedValueFormat:")
-	_aVCaptureSliderSelProminentValues = objc.RegisterName("prominentValues")
-	_aVCaptureSliderSelSetProminentValues = objc.RegisterName("setProminentValues:")
-	_aVCaptureSliderSelLocalizedTitle = objc.RegisterName("localizedTitle")
-	_aVCaptureSliderSelSymbolName = objc.RegisterName("symbolName")
-	_aVCaptureSliderSelAccessibilityIdentifier = objc.RegisterName("accessibilityIdentifier")
-	_aVCaptureSliderSelSetAccessibilityIdentifier = objc.RegisterName("setAccessibilityIdentifier:")
+	_aVCaptureSliderSelInitWithLocalizedTitleSymbolNameValues               = objc.RegisterName("initWithLocalizedTitle:symbolName:values:")
+	_aVCaptureSliderSelSetActionQueueAction                                 = objc.RegisterName("setActionQueue:action:")
+	_aVCaptureSliderSelValue                                                = objc.RegisterName("value")
+	_aVCaptureSliderSelSetValue                                             = objc.RegisterName("setValue:")
+	_aVCaptureSliderSelLocalizedValueFormat                                 = objc.RegisterName("localizedValueFormat")
+	_aVCaptureSliderSelSetLocalizedValueFormat                              = objc.RegisterName("setLocalizedValueFormat:")
+	_aVCaptureSliderSelProminentValues                                      = objc.RegisterName("prominentValues")
+	_aVCaptureSliderSelSetProminentValues                                   = objc.RegisterName("setProminentValues:")
+	_aVCaptureSliderSelLocalizedTitle                                       = objc.RegisterName("localizedTitle")
+	_aVCaptureSliderSelSymbolName                                           = objc.RegisterName("symbolName")
+	_aVCaptureSliderSelAccessibilityIdentifier                              = objc.RegisterName("accessibilityIdentifier")
+	_aVCaptureSliderSelSetAccessibilityIdentifier                           = objc.RegisterName("setAccessibilityIdentifier:")
 )
 
 func AVCaptureSliderFromID(id objc.ID) *AVCaptureSlider {
@@ -46,21 +46,27 @@ func AVCaptureSliderFromID(id objc.ID) *AVCaptureSlider {
 // @method initWithLocalizedTitle:symbolName:minValue:maxValue: @abstract Initializes an `AVCaptureSlider` as a continuous slider between `minValue` and `maxValue`. @param localizedTitle A localized string that describes the slider's `action`. @param symbolName The name of a symbol to represent the slider. @param minValue The minimum value the slider can have. `minValue` must be less than `maxValue`, otherwise an `NSInvalidArgumentException` is thrown. @param maxValue The maximum value the slider can have. `maxValue` must be greater than `minValue`, otherwise an `NSInvalidArgumentException` is thrown. @result An `AVCaptureSlider` instance as a continuous slider between `minValue` and `maxValue`. @discussion Continuous sliders are used when any value in the range `minValue...maxValue` is supported.
 func (o *AVCaptureSlider) InitWithLocalizedTitleSymbolNameMinValueMaxValue(localizedTitle *foundation.NSString, symbolName *foundation.NSString, minValue float32, maxValue float32) *AVCaptureSlider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureSliderSelInitWithLocalizedTitleSymbolNameMinValueMaxValue, localizedTitle.Ptr(), symbolName.Ptr(), minValue, maxValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureSliderFromID(_ret)
 }
 
 // @method initWithLocalizedTitle:symbolName:minValue:maxValue:step: @abstract Initializes an `AVCaptureSlider` as a discrete slider where the valid values are between `minValue` and `maxValue` with `step` distance between each value. @param localizedTitle A localized string that describes the slider's `action`. @param symbolName The name of a symbol to represent the slider. @param minValue The minimum value the slider can have. `minValue` must be less than `maxValue`, otherwise an `NSInvalidArgumentException` is thrown. @param maxValue The maximum value the slider can have. `maxValue` must be greater than `minValue`, otherwise an `NSInvalidArgumentException` is thrown. @param step The distance between each valid value. `step` must be greater than 0, otherwise an `NSInvalidArgumentException` is thrown. @result An `AVCaptureSlider` instance as a discrete slider where the valid values are between `minValue` and `maxValue` with `step` distance between each value. @discussion Discrete sliders are used when only specific values are valid.
 func (o *AVCaptureSlider) InitWithLocalizedTitleSymbolNameMinValueMaxValueStep(localizedTitle *foundation.NSString, symbolName *foundation.NSString, minValue float32, maxValue float32, step float32) *AVCaptureSlider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureSliderSelInitWithLocalizedTitleSymbolNameMinValueMaxValueStep, localizedTitle.Ptr(), symbolName.Ptr(), minValue, maxValue, step)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureSliderFromID(_ret)
 }
 
 // @method initWithLocalizedTitle:symbolName:values: @abstract Initializes an `AVCaptureSlider` as a discrete slider where `values` contains the valid values. @param localizedTitle A localized string that describes the slider's `action`. @param symbolName The name of a symbol to represent the slider. @param values The only values the slider can have. @result An `AVCaptureSlider` instance as a discrete slider where `values` contains the valid values. @discussion Discrete sliders are used when only specific values are valid.
 func (o *AVCaptureSlider) InitWithLocalizedTitleSymbolNameValues(localizedTitle *foundation.NSString, symbolName *foundation.NSString, values *foundation.NSArray[*foundation.NSNumber]) *AVCaptureSlider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureSliderSelInitWithLocalizedTitleSymbolNameValues, localizedTitle.Ptr(), symbolName.Ptr(), values)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureSliderFromID(_ret)
 }
 
@@ -89,7 +95,9 @@ func (o *AVCaptureSlider) SetValue(value float32) {
 // @property localizedValueFormat @abstract A localized string defining the presentation of the slider's value. @discussion To modify the presentation of the slider's value, set `localizedValueFormat` to a format string to display the slider's value with any annotation. The format string may only contain `%@` and no other placeholders like `%d`, `%s`, etc. Invalid format strings will result in the value's default presentation. Examples of valid format strings are: - `%@%%` for "40%" - `%@ fps` for "60 fps" - `+ %@` for "+ 20"
 func (o *AVCaptureSlider) LocalizedValueFormat() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureSliderSelLocalizedValueFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -110,25 +118,30 @@ func (o *AVCaptureSlider) SetProminentValues(prominentValues *foundation.NSArray
 // @property localizedTitle @abstract A localized string that describes the slider's `action`.
 func (o *AVCaptureSlider) LocalizedTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureSliderSelLocalizedTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property symbolName @abstract The name of a symbol to represent the slider.
 func (o *AVCaptureSlider) SymbolName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureSliderSelSymbolName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property accessibilityIdentifier @abstract A string that identifies the slider.
 func (o *AVCaptureSlider) AccessibilityIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureSliderSelAccessibilityIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *AVCaptureSlider) SetAccessibilityIdentifier(accessibilityIdentifier *foundation.NSString) {
 	o.Ptr().Send(_aVCaptureSliderSelSetAccessibilityIdentifier, accessibilityIdentifier.Ptr())
 }
-

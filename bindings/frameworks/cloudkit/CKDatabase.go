@@ -18,21 +18,21 @@ type CKDatabase struct {
 }
 
 var (
-	_clsCKDatabase = _objcClass("CKDatabase")
-	_cKDatabaseSelAddOperation = objc.RegisterName("addOperation:")
-	_cKDatabaseSelDatabaseScope = objc.RegisterName("databaseScope")
-	_cKDatabaseSelFetchRecordWithIDCompletionHandler = objc.RegisterName("fetchRecordWithID:completionHandler:")
-	_cKDatabaseSelSaveRecordCompletionHandler = objc.RegisterName("saveRecord:completionHandler:")
-	_cKDatabaseSelDeleteRecordWithIDCompletionHandler = objc.RegisterName("deleteRecordWithID:completionHandler:")
-	_cKDatabaseSelPerformQueryInZoneWithIDCompletionHandler = objc.RegisterName("performQuery:inZoneWithID:completionHandler:")
-	_cKDatabaseSelFetchAllRecordZonesWithCompletionHandler = objc.RegisterName("fetchAllRecordZonesWithCompletionHandler:")
-	_cKDatabaseSelFetchRecordZoneWithIDCompletionHandler = objc.RegisterName("fetchRecordZoneWithID:completionHandler:")
-	_cKDatabaseSelSaveRecordZoneCompletionHandler = objc.RegisterName("saveRecordZone:completionHandler:")
-	_cKDatabaseSelDeleteRecordZoneWithIDCompletionHandler = objc.RegisterName("deleteRecordZoneWithID:completionHandler:")
-	_cKDatabaseSelFetchSubscriptionWithIDCompletionHandler = objc.RegisterName("fetchSubscriptionWithID:completionHandler:")
+	_clsCKDatabase                                           = _objcClass("CKDatabase")
+	_cKDatabaseSelAddOperation                               = objc.RegisterName("addOperation:")
+	_cKDatabaseSelDatabaseScope                              = objc.RegisterName("databaseScope")
+	_cKDatabaseSelFetchRecordWithIDCompletionHandler         = objc.RegisterName("fetchRecordWithID:completionHandler:")
+	_cKDatabaseSelSaveRecordCompletionHandler                = objc.RegisterName("saveRecord:completionHandler:")
+	_cKDatabaseSelDeleteRecordWithIDCompletionHandler        = objc.RegisterName("deleteRecordWithID:completionHandler:")
+	_cKDatabaseSelPerformQueryInZoneWithIDCompletionHandler  = objc.RegisterName("performQuery:inZoneWithID:completionHandler:")
+	_cKDatabaseSelFetchAllRecordZonesWithCompletionHandler   = objc.RegisterName("fetchAllRecordZonesWithCompletionHandler:")
+	_cKDatabaseSelFetchRecordZoneWithIDCompletionHandler     = objc.RegisterName("fetchRecordZoneWithID:completionHandler:")
+	_cKDatabaseSelSaveRecordZoneCompletionHandler            = objc.RegisterName("saveRecordZone:completionHandler:")
+	_cKDatabaseSelDeleteRecordZoneWithIDCompletionHandler    = objc.RegisterName("deleteRecordZoneWithID:completionHandler:")
+	_cKDatabaseSelFetchSubscriptionWithIDCompletionHandler   = objc.RegisterName("fetchSubscriptionWithID:completionHandler:")
 	_cKDatabaseSelFetchAllSubscriptionsWithCompletionHandler = objc.RegisterName("fetchAllSubscriptionsWithCompletionHandler:")
-	_cKDatabaseSelSaveSubscriptionCompletionHandler = objc.RegisterName("saveSubscription:completionHandler:")
-	_cKDatabaseSelDeleteSubscriptionWithIDCompletionHandler = objc.RegisterName("deleteSubscriptionWithID:completionHandler:")
+	_cKDatabaseSelSaveSubscriptionCompletionHandler          = objc.RegisterName("saveSubscription:completionHandler:")
+	_cKDatabaseSelDeleteSubscriptionWithIDCompletionHandler  = objc.RegisterName("deleteSubscriptionWithID:completionHandler:")
 )
 
 func CKDatabaseFromID(id objc.ID) *CKDatabase {
@@ -45,7 +45,7 @@ func CKDatabaseFromID(id objc.ID) *CKDatabase {
 	return o
 }
 
-// Executes the specified operation in the current database. - Parameters: - operation: The operation to execute. Configure the operation fully before you call this method. Prior to the operation executing, CloudKit sets its ``CKDatabaseOperation/database`` property to the current database. The operation executes at the priority and quality of service (QoS) that you specify using the <doc://com.apple.documentation/documentation/foundation/operation/queuepriority-swift.property> and <doc://com.apple.documentation/documentation/foundation/operation/qualityofservice> properties.
+// Executes the specified operation in the current database. - Parameters: - operation: The operation to execute. Configure the operation fully before you call this method. Prior to the operation executing, CloudKit sets its “CKDatabaseOperation/database“ property to the current database. The operation executes at the priority and quality of service (QoS) that you specify using the <doc://com.apple.documentation/documentation/foundation/operation/queuepriority-swift.property> and <doc://com.apple.documentation/documentation/foundation/operation/qualityofservice> properties.
 func (o *CKDatabase) AddOperation(operation *CKDatabaseOperation) {
 	o.Ptr().Send(_cKDatabaseSelAddOperation, operation.Ptr())
 }
@@ -55,7 +55,7 @@ func (o *CKDatabase) DatabaseScope() CKDatabaseScope {
 	return _ret
 }
 
-// Fetches a specific record. - Parameters: - recordID: The identifier of the record to fetch. - completionHandler: The closure to execute with the fetch results. The completion handler takes the following parameters: - The requested record, or `nil` if CloudKit can't provide that record. - An error if a problem occurs, or `nil` if the fetch completes successfully. For information on a more convenient way to fetch specific records, see ``CKDatabase/records(for:desiredKeys:)``.
+// Fetches a specific record. - Parameters: - recordID: The identifier of the record to fetch. - completionHandler: The closure to execute with the fetch results. The completion handler takes the following parameters: - The requested record, or `nil` if CloudKit can't provide that record. - An error if a problem occurs, or `nil` if the fetch completes successfully. For information on a more convenient way to fetch specific records, see “CKDatabase/records(for:desiredKeys:)“.
 func (o *CKDatabase) FetchRecordWithIDCompletionHandler(recordID *CKRecordID, completionHandler func(*CKRecord, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -70,7 +70,7 @@ func (o *CKDatabase) FetchRecordWithIDCompletionHandler(recordID *CKRecordID, co
 	o.Ptr().Send(_cKDatabaseSelFetchRecordWithIDCompletionHandler, recordID.Ptr(), __block_completionHandler)
 }
 
-// Saves a specific record. - Parameters: - record: The record to save. - completionHandler: The closure to execute after CloudKit saves the record. The completion handler takes the following parameters: - The saved record (as it appears on the server), or `nil` if there's an error. - An error if a problem occurs, or `nil` if CloudKit successfully saves the record. The save succeeds only when the specified record is new, or is a more recent version than the one on the server. For information on a more convenient way to save records, see ``CKDatabase/modifyRecords(saving:deleting:savePolicy:atomically:)``.
+// Saves a specific record. - Parameters: - record: The record to save. - completionHandler: The closure to execute after CloudKit saves the record. The completion handler takes the following parameters: - The saved record (as it appears on the server), or `nil` if there's an error. - An error if a problem occurs, or `nil` if CloudKit successfully saves the record. The save succeeds only when the specified record is new, or is a more recent version than the one on the server. For information on a more convenient way to save records, see “CKDatabase/modifyRecords(saving:deleting:savePolicy:atomically:)“.
 func (o *CKDatabase) SaveRecordCompletionHandler(record *CKRecord, completionHandler func(*CKRecord, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -85,7 +85,7 @@ func (o *CKDatabase) SaveRecordCompletionHandler(record *CKRecord, completionHan
 	o.Ptr().Send(_cKDatabaseSelSaveRecordCompletionHandler, record.Ptr(), __block_completionHandler)
 }
 
-// Deletes a specific record. - Parameters: - recordID: The identifier of the record to delete. - completionHandler: The closure to execute after CloudKit deletes the record. The completion handler takes the following parameters: - The identifier of the deleted record, or `nil` if there's an error. - An error if a problem occurs, or `nil` if CloudKit successfully deletes the record. Deleting a record may cause additional deletions if other records in the database reference the deleted record. CloudKit doesn't provide the identifiers of any additional records it deletes. For information on a more convenient way to delete records, see ``CKDatabase/modifyRecords(saving:deleting:savePolicy:atomically:)``.
+// Deletes a specific record. - Parameters: - recordID: The identifier of the record to delete. - completionHandler: The closure to execute after CloudKit deletes the record. The completion handler takes the following parameters: - The identifier of the deleted record, or `nil` if there's an error. - An error if a problem occurs, or `nil` if CloudKit successfully deletes the record. Deleting a record may cause additional deletions if other records in the database reference the deleted record. CloudKit doesn't provide the identifiers of any additional records it deletes. For information on a more convenient way to delete records, see “CKDatabase/modifyRecords(saving:deleting:savePolicy:atomically:)“.
 func (o *CKDatabase) DeleteRecordWithIDCompletionHandler(recordID *CKRecordID, completionHandler func(*CKRecordID, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -100,7 +100,7 @@ func (o *CKDatabase) DeleteRecordWithIDCompletionHandler(recordID *CKRecordID, c
 	o.Ptr().Send(_cKDatabaseSelDeleteRecordWithIDCompletionHandler, recordID.Ptr(), __block_completionHandler)
 }
 
-// Searches for records matching a predicate in the specified record zone. - Parameters: - query: The query that contains the search parameters. For more information, see ``CKQuery``. - zoneID: The identifier of the record zone to search. If you're searching a shared database, provide a record zone identifier; otherwise, you can specify `nil` to search all record zones in the database. - completionHandler: The closure to execute with the search results. The completion handler takes the following parameters: - The records that match the specified query, or `nil` if there's an error. - An error if a problem occurs, or `nil` if CloudKit completes the search successfully. For information on a more convenient way to search a database, see ``CKDatabase/records(matching:inZoneWith:desiredKeys:resultsLimit:)``.
+// Searches for records matching a predicate in the specified record zone. - Parameters: - query: The query that contains the search parameters. For more information, see “CKQuery“. - zoneID: The identifier of the record zone to search. If you're searching a shared database, provide a record zone identifier; otherwise, you can specify `nil` to search all record zones in the database. - completionHandler: The closure to execute with the search results. The completion handler takes the following parameters: - The records that match the specified query, or `nil` if there's an error. - An error if a problem occurs, or `nil` if CloudKit completes the search successfully. For information on a more convenient way to search a database, see “CKDatabase/records(matching:inZoneWith:desiredKeys:resultsLimit:)“.
 func (o *CKDatabase) PerformQueryInZoneWithIDCompletionHandler(query *CKQuery, zoneID *CKRecordZoneID, completionHandler func(*foundation.NSArray[*CKRecord], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -130,7 +130,7 @@ func (o *CKDatabase) FetchAllRecordZonesWithCompletionHandler(completionHandler 
 	o.Ptr().Send(_cKDatabaseSelFetchAllRecordZonesWithCompletionHandler, __block_completionHandler)
 }
 
-// Fetches a specific record zone. - Parameters: - zoneID: The identifier of the record zone to fetch. - completionHandler: The closure to execute with the fetch results. The completion handler takes the following parameters: - The fetched record zone, or `nil` if there's an error. - An error if a problem occurs, or `nil` if CloudKit successfully fetches the specified record zone. For information on a more convenient way to fetch specific record zones, see ``CKDatabase/recordZones(for:)`` in Swift or ``CKFetchRecordZonesOperation`` in Objective-C.
+// Fetches a specific record zone. - Parameters: - zoneID: The identifier of the record zone to fetch. - completionHandler: The closure to execute with the fetch results. The completion handler takes the following parameters: - The fetched record zone, or `nil` if there's an error. - An error if a problem occurs, or `nil` if CloudKit successfully fetches the specified record zone. For information on a more convenient way to fetch specific record zones, see “CKDatabase/recordZones(for:)“ in Swift or “CKFetchRecordZonesOperation“ in Objective-C.
 func (o *CKDatabase) FetchRecordZoneWithIDCompletionHandler(zoneID *CKRecordZoneID, completionHandler func(*CKRecordZone, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -145,7 +145,7 @@ func (o *CKDatabase) FetchRecordZoneWithIDCompletionHandler(zoneID *CKRecordZone
 	o.Ptr().Send(_cKDatabaseSelFetchRecordZoneWithIDCompletionHandler, zoneID.Ptr(), __block_completionHandler)
 }
 
-// Saves a specific record zone. - Parameters: - zone: The record zone to save. - completionHandler: The closure to execute after CloudKit saves the record. The completion handler takes the following parameters: - The saved record zone (as it appears on the server), or `nil` if there's an error. - An error if a problem occurs, or `nil` if CloudKit successfully saves the record zone. For information on a more convenient way to save record zones, see ``CKDatabase/modifyRecordZones(saving:deleting:)``.
+// Saves a specific record zone. - Parameters: - zone: The record zone to save. - completionHandler: The closure to execute after CloudKit saves the record. The completion handler takes the following parameters: - The saved record zone (as it appears on the server), or `nil` if there's an error. - An error if a problem occurs, or `nil` if CloudKit successfully saves the record zone. For information on a more convenient way to save record zones, see “CKDatabase/modifyRecordZones(saving:deleting:)“.
 func (o *CKDatabase) SaveRecordZoneCompletionHandler(zone *CKRecordZone, completionHandler func(*CKRecordZone, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -160,7 +160,7 @@ func (o *CKDatabase) SaveRecordZoneCompletionHandler(zone *CKRecordZone, complet
 	o.Ptr().Send(_cKDatabaseSelSaveRecordZoneCompletionHandler, zone.Ptr(), __block_completionHandler)
 }
 
-// Deletes a specific record zone. - Parameters: - zoneID: The identifier of the record zone to delete. - completionHandler: The closure to execute after CloudKit deletes the record zone. - Warning: Deleting a record zone is a permanent action that deletes every record in that zone. You can't restore a deleted record zone. The completion handler takes the following parameters: - The identifier of the deleted record zone, or `nil` if there's an error. - An error if a problem occurs, or `nil` if CloudKit successfully deletes the record zone. For information on a more convenient way to delete record zones, see ``CKDatabase/modifyRecordZones(saving:deleting:)``.
+// Deletes a specific record zone. - Parameters: - zoneID: The identifier of the record zone to delete. - completionHandler: The closure to execute after CloudKit deletes the record zone. - Warning: Deleting a record zone is a permanent action that deletes every record in that zone. You can't restore a deleted record zone. The completion handler takes the following parameters: - The identifier of the deleted record zone, or `nil` if there's an error. - An error if a problem occurs, or `nil` if CloudKit successfully deletes the record zone. For information on a more convenient way to delete record zones, see “CKDatabase/modifyRecordZones(saving:deleting:)“.
 func (o *CKDatabase) DeleteRecordZoneWithIDCompletionHandler(zoneID *CKRecordZoneID, completionHandler func(*CKRecordZoneID, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -175,7 +175,7 @@ func (o *CKDatabase) DeleteRecordZoneWithIDCompletionHandler(zoneID *CKRecordZon
 	o.Ptr().Send(_cKDatabaseSelDeleteRecordZoneWithIDCompletionHandler, zoneID.Ptr(), __block_completionHandler)
 }
 
-// Fetches a specific subscription and delivers it to a completion handler. - Parameters: - subscriptionID: The identifier of the subscription to fetch. - completionHandler: The block to execute with the fetch results. The completion handler takes the following parameters: - term `subscription`: The requested subscription, or `nil` if CloudKit can't provide that subscription. - term `error`: An error if a problem occurs, or `nil` if the fetch completes successfully. For information on a more configurable way to fetch specific subscriptions, see ``CKFetchSubscriptionsOperation``.
+// Fetches a specific subscription and delivers it to a completion handler. - Parameters: - subscriptionID: The identifier of the subscription to fetch. - completionHandler: The block to execute with the fetch results. The completion handler takes the following parameters: - term `subscription`: The requested subscription, or `nil` if CloudKit can't provide that subscription. - term `error`: An error if a problem occurs, or `nil` if the fetch completes successfully. For information on a more configurable way to fetch specific subscriptions, see “CKFetchSubscriptionsOperation“.
 func (o *CKDatabase) FetchSubscriptionWithIDCompletionHandler(subscriptionID *foundation.NSString, completionHandler func(*CKSubscription, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -190,7 +190,7 @@ func (o *CKDatabase) FetchSubscriptionWithIDCompletionHandler(subscriptionID *fo
 	o.Ptr().Send(_cKDatabaseSelFetchSubscriptionWithIDCompletionHandler, subscriptionID.Ptr(), __block_completionHandler)
 }
 
-// Fetches all subscriptions from the current database. - Parameters: - completionHandler: The closure to execute with the fetch results. The completion handler takes the following parameters: - The database's subscriptions, or `nil` if CloudKit can't provide the subscriptions. - An error if a problem occurs, or `nil` if the fetch completes successfully. For information on a more configurable way to fetch all subscriptions from a specific database, see ``CKFetchSubscriptionsOperation/fetchAllSubscriptionsOperation()``.
+// Fetches all subscriptions from the current database. - Parameters: - completionHandler: The closure to execute with the fetch results. The completion handler takes the following parameters: - The database's subscriptions, or `nil` if CloudKit can't provide the subscriptions. - An error if a problem occurs, or `nil` if the fetch completes successfully. For information on a more configurable way to fetch all subscriptions from a specific database, see “CKFetchSubscriptionsOperation/fetchAllSubscriptionsOperation()“.
 func (o *CKDatabase) FetchAllSubscriptionsWithCompletionHandler(completionHandler func(*foundation.NSArray[*CKSubscription], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -205,7 +205,7 @@ func (o *CKDatabase) FetchAllSubscriptionsWithCompletionHandler(completionHandle
 	o.Ptr().Send(_cKDatabaseSelFetchAllSubscriptionsWithCompletionHandler, __block_completionHandler)
 }
 
-// Saves a specific subscription. - Parameters: - subscription: The subscription to save. - completionHandler: The closure to execute after CloudKit saves the subscription. The completion handler takes the following parameters: - The saved subscription (as it appears on the server), or `nil` if there's an error. - An error if a problem occurs, or `nil` if CloudKit successfully saves the subscription. For information on a more convenient way to save subscriptions, see ``CKDatabase/modifySubscriptions(saving:deleting:)``.
+// Saves a specific subscription. - Parameters: - subscription: The subscription to save. - completionHandler: The closure to execute after CloudKit saves the subscription. The completion handler takes the following parameters: - The saved subscription (as it appears on the server), or `nil` if there's an error. - An error if a problem occurs, or `nil` if CloudKit successfully saves the subscription. For information on a more convenient way to save subscriptions, see “CKDatabase/modifySubscriptions(saving:deleting:)“.
 func (o *CKDatabase) SaveSubscriptionCompletionHandler(subscription *CKSubscription, completionHandler func(*CKSubscription, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -220,7 +220,7 @@ func (o *CKDatabase) SaveSubscriptionCompletionHandler(subscription *CKSubscript
 	o.Ptr().Send(_cKDatabaseSelSaveSubscriptionCompletionHandler, subscription.Ptr(), __block_completionHandler)
 }
 
-// Deletes a specific subscription and delivers the deleted subscription's identifier to a completion handler. - Parameters: - subscriptionID: The identifier of the subscription to delete. - completionHandler: The block to execute after CloudKit deletes the subscription. The completion handler takes the following parameters: - term `subscriptionID`: The identifier of the deleted subscription, or `nil` if there's an error. - term `error`: An error if a problem occurs, or `nil` if CloudKit successfully deletes the subscription. For information on a more configurable way to delete subscriptions, see ``CKModifySubscriptionsOperation``.
+// Deletes a specific subscription and delivers the deleted subscription's identifier to a completion handler. - Parameters: - subscriptionID: The identifier of the subscription to delete. - completionHandler: The block to execute after CloudKit deletes the subscription. The completion handler takes the following parameters: - term `subscriptionID`: The identifier of the deleted subscription, or `nil` if there's an error. - term `error`: An error if a problem occurs, or `nil` if CloudKit successfully deletes the subscription. For information on a more configurable way to delete subscriptions, see “CKModifySubscriptionsOperation“.
 func (o *CKDatabase) DeleteSubscriptionWithIDCompletionHandler(subscriptionID *foundation.NSString, completionHandler func(*foundation.NSString, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -234,4 +234,3 @@ func (o *CKDatabase) DeleteSubscriptionWithIDCompletionHandler(subscriptionID *f
 	}
 	o.Ptr().Send(_cKDatabaseSelDeleteSubscriptionWithIDCompletionHandler, subscriptionID.Ptr(), __block_completionHandler)
 }
-

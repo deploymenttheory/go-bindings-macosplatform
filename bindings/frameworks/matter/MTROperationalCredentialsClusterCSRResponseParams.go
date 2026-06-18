@@ -18,14 +18,14 @@ type MTROperationalCredentialsClusterCSRResponseParams struct {
 }
 
 var (
-	_clsMTROperationalCredentialsClusterCSRResponseParams = _objcClass("MTROperationalCredentialsClusterCSRResponseParams")
+	_clsMTROperationalCredentialsClusterCSRResponseParams                           = _objcClass("MTROperationalCredentialsClusterCSRResponseParams")
 	_mTROperationalCredentialsClusterCSRResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTROperationalCredentialsClusterCSRResponseParamsSelNocsrElements = objc.RegisterName("nocsrElements")
-	_mTROperationalCredentialsClusterCSRResponseParamsSelSetNocsrElements = objc.RegisterName("setNocsrElements:")
-	_mTROperationalCredentialsClusterCSRResponseParamsSelAttestationSignature = objc.RegisterName("attestationSignature")
-	_mTROperationalCredentialsClusterCSRResponseParamsSelSetAttestationSignature = objc.RegisterName("setAttestationSignature:")
-	_mTROperationalCredentialsClusterCSRResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTROperationalCredentialsClusterCSRResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTROperationalCredentialsClusterCSRResponseParamsSelNocsrElements              = objc.RegisterName("nocsrElements")
+	_mTROperationalCredentialsClusterCSRResponseParamsSelSetNocsrElements           = objc.RegisterName("setNocsrElements:")
+	_mTROperationalCredentialsClusterCSRResponseParamsSelAttestationSignature       = objc.RegisterName("attestationSignature")
+	_mTROperationalCredentialsClusterCSRResponseParamsSelSetAttestationSignature    = objc.RegisterName("setAttestationSignature:")
+	_mTROperationalCredentialsClusterCSRResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTROperationalCredentialsClusterCSRResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
 )
 
 func MTROperationalCredentialsClusterCSRResponseParamsFromID(id objc.ID) *MTROperationalCredentialsClusterCSRResponseParams {
@@ -42,7 +42,9 @@ func MTROperationalCredentialsClusterCSRResponseParamsFromID(id objc.ID) *MTROpe
 func (o *MTROperationalCredentialsClusterCSRResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTROperationalCredentialsClusterCSRResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterCSRResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -51,7 +53,9 @@ func (o *MTROperationalCredentialsClusterCSRResponseParams) InitWithResponseValu
 
 func (o *MTROperationalCredentialsClusterCSRResponseParams) NocsrElements() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterCSRResponseParamsSelNocsrElements)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *MTROperationalCredentialsClusterCSRResponseParams) SetNocsrElements(noc
 
 func (o *MTROperationalCredentialsClusterCSRResponseParams) AttestationSignature() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterCSRResponseParamsSelAttestationSignature)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -72,11 +78,12 @@ func (o *MTROperationalCredentialsClusterCSRResponseParams) SetAttestationSignat
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTROperationalCredentialsClusterCSRResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterCSRResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTROperationalCredentialsClusterCSRResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
 	o.Ptr().Send(_mTROperationalCredentialsClusterCSRResponseParamsSelSetTimedInvokeTimeoutMs, timedInvokeTimeoutMs.Ptr())
 }
-

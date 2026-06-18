@@ -16,9 +16,9 @@ type WKWebsiteDataRecord struct {
 }
 
 var (
-	_clsWKWebsiteDataRecord = _objcClass("WKWebsiteDataRecord")
+	_clsWKWebsiteDataRecord            = _objcClass("WKWebsiteDataRecord")
 	_wKWebsiteDataRecordSelDisplayName = objc.RegisterName("displayName")
-	_wKWebsiteDataRecordSelDataTypes = objc.RegisterName("dataTypes")
+	_wKWebsiteDataRecordSelDataTypes   = objc.RegisterName("dataTypes")
 )
 
 func WKWebsiteDataRecordFromID(id objc.ID) *WKWebsiteDataRecord {
@@ -34,7 +34,9 @@ func WKWebsiteDataRecordFromID(id objc.ID) *WKWebsiteDataRecord {
 // @abstract The display name for the data record. This is usually the domain name.
 func (o *WKWebsiteDataRecord) DisplayName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebsiteDataRecordSelDisplayName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -43,4 +45,3 @@ func (o *WKWebsiteDataRecord) DataTypes() *foundation.NSSet[*foundation.NSString
 	_ret := objc.Send[*foundation.NSSet[*foundation.NSString]](o.Ptr(), _wKWebsiteDataRecordSelDataTypes)
 	return _ret
 }
-

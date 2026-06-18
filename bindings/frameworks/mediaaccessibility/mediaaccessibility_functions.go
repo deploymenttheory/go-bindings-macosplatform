@@ -12,39 +12,39 @@ import (
 var (
 	// @function MAAudibleMediaCopyPreferredCharacteristics @abstract User preference for audible media characteristic @result An array containing the preferred order of media characteristics for audible media.
 	_fnMAAudibleMediaCopyPreferredCharacteristics func() unsafe.Pointer
-	_fnMACaptionAppearanceAddSelectedLanguage func(MACaptionAppearanceDomain, unsafe.Pointer) bool
+	_fnMACaptionAppearanceAddSelectedLanguage     func(MACaptionAppearanceDomain, unsafe.Pointer) bool
 	// @function MACaptionAppearanceCopyActiveProfileID @abstract Gets the currently-selected caption drawing profileID system wide. @result The currently-selected profileID.
 	_fnMACaptionAppearanceCopyActiveProfileID func() unsafe.Pointer
 	_fnMACaptionAppearanceCopyBackgroundColor func(MACaptionAppearanceDomain, *MACaptionAppearanceBehavior) unsafe.Pointer
 	// @function MACaptionAppearanceCopyFontForStyle @abstract User font preference for the specified style. @param domain Preference domain, see  @link MACaptionAppearanceDomain @/link. @param behavior (see @link MACaptionAppearanceBehavior @/link) @param fontStyle Font style, see  @link MACaptionAppearanceFontStyle @/link. @result User font preference for the specified style.
-	_fnMACaptionAppearanceCopyFontDescriptorForStyle func(MACaptionAppearanceDomain, *MACaptionAppearanceBehavior, MACaptionAppearanceFontStyle) unsafe.Pointer
-	_fnMACaptionAppearanceCopyForegroundColor func(MACaptionAppearanceDomain, *MACaptionAppearanceBehavior) unsafe.Pointer
+	_fnMACaptionAppearanceCopyFontDescriptorForStyle                  func(MACaptionAppearanceDomain, *MACaptionAppearanceBehavior, MACaptionAppearanceFontStyle) unsafe.Pointer
+	_fnMACaptionAppearanceCopyForegroundColor                         func(MACaptionAppearanceDomain, *MACaptionAppearanceBehavior) unsafe.Pointer
 	_fnMACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics func(MACaptionAppearanceDomain) unsafe.Pointer
 	// @function MACaptionAppearanceCopyProfileIDs @abstract Copies all system and user defined profiles, each represented by a CFString containing a non-human-readable ID @result An array of strings where each string represents a unique caption profile ID.
 	_fnMACaptionAppearanceCopyProfileIDs func() unsafe.Pointer
 	// @function MACaptionAppearanceCopyProfileName @abstract Copies the human-readable name of a profileID @param profileID The profileID to copy the name of @result A human-readable name of the provided profileID
-	_fnMACaptionAppearanceCopyProfileName func(unsafe.Pointer) unsafe.Pointer
+	_fnMACaptionAppearanceCopyProfileName       func(unsafe.Pointer) unsafe.Pointer
 	_fnMACaptionAppearanceCopySelectedLanguages func(MACaptionAppearanceDomain) unsafe.Pointer
-	_fnMACaptionAppearanceCopyWindowColor func(MACaptionAppearanceDomain, *MACaptionAppearanceBehavior) unsafe.Pointer
+	_fnMACaptionAppearanceCopyWindowColor       func(MACaptionAppearanceDomain, *MACaptionAppearanceBehavior) unsafe.Pointer
 	// @function MACaptionAppearanceDidDisplayCaptions @abstract Called by clients to inform accessibility products that captions have been displayed onscreen. @param strings An array of CFStringRef or CFAttributedStringRef objects that represent the text that is being displayed. An empty array is used to indicate that no captions are being displayed.
 	_fnMACaptionAppearanceDidDisplayCaptions func(unsafe.Pointer)
 	// @function MACaptionAppearanceExecuteBlockForProfileID @abstract Executes a block of code as if the provided profileID was active. This is used in cases such as a need to get the fonts and colors of a profileID without changing the currently selected profileID. @param profileID The profileID which will appear active when executing the block @param aBlock the block of code to execute
-	_fnMACaptionAppearanceExecuteBlockForProfileID func(unsafe.Pointer, objc.Block)
-	_fnMACaptionAppearanceGetBackgroundOpacity func(MACaptionAppearanceDomain, *MACaptionAppearanceBehavior) float64
-	_fnMACaptionAppearanceGetDisplayType func(MACaptionAppearanceDomain) MACaptionAppearanceDisplayType
-	_fnMACaptionAppearanceGetForegroundOpacity func(MACaptionAppearanceDomain, *MACaptionAppearanceBehavior) float64
-	_fnMACaptionAppearanceGetRelativeCharacterSize func(MACaptionAppearanceDomain, *MACaptionAppearanceBehavior) float64
-	_fnMACaptionAppearanceGetTextEdgeStyle func(MACaptionAppearanceDomain, *MACaptionAppearanceBehavior) MACaptionAppearanceTextEdgeStyle
-	_fnMACaptionAppearanceGetWindowOpacity func(MACaptionAppearanceDomain, *MACaptionAppearanceBehavior) float64
+	_fnMACaptionAppearanceExecuteBlockForProfileID     func(unsafe.Pointer, objc.Block)
+	_fnMACaptionAppearanceGetBackgroundOpacity         func(MACaptionAppearanceDomain, *MACaptionAppearanceBehavior) float64
+	_fnMACaptionAppearanceGetDisplayType               func(MACaptionAppearanceDomain) MACaptionAppearanceDisplayType
+	_fnMACaptionAppearanceGetForegroundOpacity         func(MACaptionAppearanceDomain, *MACaptionAppearanceBehavior) float64
+	_fnMACaptionAppearanceGetRelativeCharacterSize     func(MACaptionAppearanceDomain, *MACaptionAppearanceBehavior) float64
+	_fnMACaptionAppearanceGetTextEdgeStyle             func(MACaptionAppearanceDomain, *MACaptionAppearanceBehavior) MACaptionAppearanceTextEdgeStyle
+	_fnMACaptionAppearanceGetWindowOpacity             func(MACaptionAppearanceDomain, *MACaptionAppearanceBehavior) float64
 	_fnMACaptionAppearanceGetWindowRoundedCornerRadius func(MACaptionAppearanceDomain, *MACaptionAppearanceBehavior) float64
-	_fnMACaptionAppearanceIsCustomized func(MACaptionAppearanceDomain) bool
+	_fnMACaptionAppearanceIsCustomized                 func(MACaptionAppearanceDomain) bool
 	// @function MACaptionAppearanceSetActiveProfileID @abstract Sets the currently-selected caption drawing profileID system wide. Behavior is undefined if NULL or an invalid profileID is provided @param profileID The profileID to make active.
 	_fnMACaptionAppearanceSetActiveProfileID func(unsafe.Pointer)
-	_fnMACaptionAppearanceSetDisplayType func(MACaptionAppearanceDomain, MACaptionAppearanceDisplayType)
-	_fnMADimFlashingLightsEnabled func() bool
-	_fnMAImageCaptioningCopyCaption func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnMAImageCaptioningCopyMetadataTagPath func() unsafe.Pointer
-	_fnMAImageCaptioningSetCaption func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	_fnMACaptionAppearanceSetDisplayType     func(MACaptionAppearanceDomain, MACaptionAppearanceDisplayType)
+	_fnMADimFlashingLightsEnabled            func() bool
+	_fnMAImageCaptioningCopyCaption          func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnMAImageCaptioningCopyMetadataTagPath  func() unsafe.Pointer
+	_fnMAImageCaptioningSetCaption           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
 )
 
 // @function MAAudibleMediaCopyPreferredCharacteristics @abstract User preference for audible media characteristic @result An array containing the preferred order of media characteristics for audible media.
@@ -169,4 +169,3 @@ func MAImageCaptioningCopyMetadataTagPath() unsafe.Pointer {
 func MAImageCaptioningSetCaption(url unsafe.Pointer, string_ unsafe.Pointer, error_ unsafe.Pointer) bool {
 	return _fnMAImageCaptioningSetCaption(url, string_, error_)
 }
-

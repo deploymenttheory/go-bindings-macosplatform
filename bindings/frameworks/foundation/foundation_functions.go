@@ -12,193 +12,193 @@ import (
 )
 
 var (
-	_fnCFBridgingRelease func(unsafe.Pointer) unsafe.Pointer
-	_fnCFBridgingRetain func(objc.ID) unsafe.Pointer
-	_fnNSAllHashTableObjects func(*NSHashTable[objc.ID]) *NSArray[objc.ID]
-	_fnNSAllMapTableKeys func(*NSMapTable[objc.ID, objc.ID]) *NSArray[objc.ID]
-	_fnNSAllMapTableValues func(*NSMapTable[objc.ID, objc.ID]) *NSArray[objc.ID]
-	_fnNSAllocateCollectable func(uint, uint) unsafe.Pointer
-	_fnNSAllocateMemoryPages func(uint) unsafe.Pointer
-	_fnNSAllocateObject func(objc.Class, uint, unsafe.Pointer) objc.ID
-	_fnNSClassFromString func(objc.ID) objc.Class
-	_fnNSCompareHashTables func(*NSHashTable[objc.ID], *NSHashTable[objc.ID]) bool
-	_fnNSCompareMapTables func(*NSMapTable[objc.ID, objc.ID], *NSMapTable[objc.ID, objc.ID]) bool
-	_fnNSContainsRect func(corefoundation.CGRect, corefoundation.CGRect) bool
+	_fnCFBridgingRelease            func(unsafe.Pointer) unsafe.Pointer
+	_fnCFBridgingRetain             func(objc.ID) unsafe.Pointer
+	_fnNSAllHashTableObjects        func(*NSHashTable[objc.ID]) *NSArray[objc.ID]
+	_fnNSAllMapTableKeys            func(*NSMapTable[objc.ID, objc.ID]) *NSArray[objc.ID]
+	_fnNSAllMapTableValues          func(*NSMapTable[objc.ID, objc.ID]) *NSArray[objc.ID]
+	_fnNSAllocateCollectable        func(uint, uint) unsafe.Pointer
+	_fnNSAllocateMemoryPages        func(uint) unsafe.Pointer
+	_fnNSAllocateObject             func(objc.Class, uint, unsafe.Pointer) objc.ID
+	_fnNSClassFromString            func(objc.ID) objc.Class
+	_fnNSCompareHashTables          func(*NSHashTable[objc.ID], *NSHashTable[objc.ID]) bool
+	_fnNSCompareMapTables           func(*NSMapTable[objc.ID, objc.ID], *NSMapTable[objc.ID, objc.ID]) bool
+	_fnNSContainsRect               func(corefoundation.CGRect, corefoundation.CGRect) bool
 	_fnNSConvertHostDoubleToSwapped func(float64) NSSwappedDouble
-	_fnNSConvertHostFloatToSwapped func(float32) NSSwappedFloat
+	_fnNSConvertHostFloatToSwapped  func(float32) NSSwappedFloat
 	_fnNSConvertSwappedDoubleToHost func(NSSwappedDouble) float64
-	_fnNSConvertSwappedFloatToHost func(NSSwappedFloat) float32
-	_fnNSCopyHashTableWithZone func(*NSHashTable[objc.ID], unsafe.Pointer) *NSHashTable[objc.ID]
-	_fnNSCopyMapTableWithZone func(*NSMapTable[objc.ID, objc.ID], unsafe.Pointer) unsafe.Pointer
-	_fnNSCopyMemoryPages func(unsafe.Pointer, unsafe.Pointer, uint)
-// Deprecated: Not supported
-	_fnNSCopyObject func(objc.ID, uint, unsafe.Pointer) objc.ID
-	_fnNSCountHashTable func(*NSHashTable[objc.ID]) uint
-	_fnNSCountMapTable func(*NSMapTable[objc.ID, objc.ID]) uint
-	_fnNSCreateHashTable func(NSHashTableCallBacks, uint) *NSHashTable[objc.ID]
-	_fnNSCreateHashTableWithZone func(NSHashTableCallBacks, uint, unsafe.Pointer) *NSHashTable[objc.ID]
-	_fnNSCreateMapTable func(NSMapTableKeyCallBacks, NSMapTableValueCallBacks, uint) unsafe.Pointer
-	_fnNSCreateMapTableWithZone func(NSMapTableKeyCallBacks, NSMapTableValueCallBacks, uint, unsafe.Pointer) unsafe.Pointer
-	_fnNSCreateZone func(uint, uint, bool) unsafe.Pointer
-	_fnNSDeallocateMemoryPages func(unsafe.Pointer, uint)
-	_fnNSDeallocateObject func(objc.ID)
-	_fnNSDecimalAdd func(*NSDecimal, *NSDecimal, *NSDecimal, NSRoundingMode) NSCalculationError
-	_fnNSDecimalCompact func(*NSDecimal)
-	_fnNSDecimalCompare func(*NSDecimal, *NSDecimal) NSComparisonResult
-	_fnNSDecimalCopy func(*NSDecimal, *NSDecimal)
-	_fnNSDecimalDivide func(*NSDecimal, *NSDecimal, *NSDecimal, NSRoundingMode) NSCalculationError
-	_fnNSDecimalIsNotANumber func(*NSDecimal) bool
-	_fnNSDecimalMultiply func(*NSDecimal, *NSDecimal, *NSDecimal, NSRoundingMode) NSCalculationError
-	_fnNSDecimalMultiplyByPowerOf10 func(*NSDecimal, *NSDecimal, int16, NSRoundingMode) NSCalculationError
-	_fnNSDecimalNormalize func(*NSDecimal, *NSDecimal, NSRoundingMode) NSCalculationError
-	_fnNSDecimalPower func(*NSDecimal, *NSDecimal, uint, NSRoundingMode) NSCalculationError
-	_fnNSDecimalRound func(*NSDecimal, *NSDecimal, int, NSRoundingMode)
-	_fnNSDecimalString func(*NSDecimal, objc.ID) objc.ID
-	_fnNSDecimalSubtract func(*NSDecimal, *NSDecimal, *NSDecimal, NSRoundingMode) NSCalculationError
+	_fnNSConvertSwappedFloatToHost  func(NSSwappedFloat) float32
+	_fnNSCopyHashTableWithZone      func(*NSHashTable[objc.ID], unsafe.Pointer) *NSHashTable[objc.ID]
+	_fnNSCopyMapTableWithZone       func(*NSMapTable[objc.ID, objc.ID], unsafe.Pointer) unsafe.Pointer
+	_fnNSCopyMemoryPages            func(unsafe.Pointer, unsafe.Pointer, uint)
+	// Deprecated: Not supported
+	_fnNSCopyObject                    func(objc.ID, uint, unsafe.Pointer) objc.ID
+	_fnNSCountHashTable                func(*NSHashTable[objc.ID]) uint
+	_fnNSCountMapTable                 func(*NSMapTable[objc.ID, objc.ID]) uint
+	_fnNSCreateHashTable               func(NSHashTableCallBacks, uint) *NSHashTable[objc.ID]
+	_fnNSCreateHashTableWithZone       func(NSHashTableCallBacks, uint, unsafe.Pointer) *NSHashTable[objc.ID]
+	_fnNSCreateMapTable                func(NSMapTableKeyCallBacks, NSMapTableValueCallBacks, uint) unsafe.Pointer
+	_fnNSCreateMapTableWithZone        func(NSMapTableKeyCallBacks, NSMapTableValueCallBacks, uint, unsafe.Pointer) unsafe.Pointer
+	_fnNSCreateZone                    func(uint, uint, bool) unsafe.Pointer
+	_fnNSDeallocateMemoryPages         func(unsafe.Pointer, uint)
+	_fnNSDeallocateObject              func(objc.ID)
+	_fnNSDecimalAdd                    func(*NSDecimal, *NSDecimal, *NSDecimal, NSRoundingMode) NSCalculationError
+	_fnNSDecimalCompact                func(*NSDecimal)
+	_fnNSDecimalCompare                func(*NSDecimal, *NSDecimal) NSComparisonResult
+	_fnNSDecimalCopy                   func(*NSDecimal, *NSDecimal)
+	_fnNSDecimalDivide                 func(*NSDecimal, *NSDecimal, *NSDecimal, NSRoundingMode) NSCalculationError
+	_fnNSDecimalIsNotANumber           func(*NSDecimal) bool
+	_fnNSDecimalMultiply               func(*NSDecimal, *NSDecimal, *NSDecimal, NSRoundingMode) NSCalculationError
+	_fnNSDecimalMultiplyByPowerOf10    func(*NSDecimal, *NSDecimal, int16, NSRoundingMode) NSCalculationError
+	_fnNSDecimalNormalize              func(*NSDecimal, *NSDecimal, NSRoundingMode) NSCalculationError
+	_fnNSDecimalPower                  func(*NSDecimal, *NSDecimal, uint, NSRoundingMode) NSCalculationError
+	_fnNSDecimalRound                  func(*NSDecimal, *NSDecimal, int, NSRoundingMode)
+	_fnNSDecimalString                 func(*NSDecimal, objc.ID) objc.ID
+	_fnNSDecimalSubtract               func(*NSDecimal, *NSDecimal, *NSDecimal, NSRoundingMode) NSCalculationError
 	_fnNSDecrementExtraRefCountWasZero func(objc.ID) bool
-	_fnNSDefaultMallocZone func() unsafe.Pointer
-	_fnNSDivideRect func(corefoundation.CGRect, *corefoundation.CGRect, *corefoundation.CGRect, float64, NSRectEdge)
-	_fnNSEdgeInsetsEqual func(NSEdgeInsets, NSEdgeInsets) bool
-	_fnNSEdgeInsetsMake func(float64, float64, float64, float64) NSEdgeInsets
-	_fnNSEndHashTableEnumeration func(*NSHashEnumerator)
-	_fnNSEndMapTableEnumeration func(*NSMapEnumerator)
-	_fnNSEnumerateHashTable func(*NSHashTable[objc.ID]) NSHashEnumerator
-	_fnNSEnumerateMapTable func(*NSMapTable[objc.ID, objc.ID]) NSMapEnumerator
-	_fnNSEqualPoints func(corefoundation.CGPoint, corefoundation.CGPoint) bool
-	_fnNSEqualRanges func(NSRange, NSRange) bool
-	_fnNSEqualRects func(corefoundation.CGRect, corefoundation.CGRect) bool
-	_fnNSEqualSizes func(corefoundation.CGSize, corefoundation.CGSize) bool
-	_fnNSExtraRefCount func(objc.ID) uint
-	_fnNSFileTypeForHFSTypeCode func(uint) objc.ID
-	_fnNSFreeHashTable func(*NSHashTable[objc.ID])
-	_fnNSFreeMapTable func(*NSMapTable[objc.ID, objc.ID])
-	_fnNSFullUserName func() objc.ID
-	_fnNSGetSizeAndAlignment func(string, *uint, *uint) string
-	_fnNSGetUncaughtExceptionHandler func() unsafe.Pointer
-	_fnNSHFSTypeCodeFromFileType func(objc.ID) uint
-	_fnNSHFSTypeOfFile func(objc.ID) objc.ID
-	_fnNSHashGet func(*NSHashTable[objc.ID], unsafe.Pointer) unsafe.Pointer
-	_fnNSHashInsert func(*NSHashTable[objc.ID], unsafe.Pointer)
-	_fnNSHashInsertIfAbsent func(*NSHashTable[objc.ID], unsafe.Pointer) unsafe.Pointer
-	_fnNSHashInsertKnownAbsent func(*NSHashTable[objc.ID], unsafe.Pointer)
-	_fnNSHashRemove func(*NSHashTable[objc.ID], unsafe.Pointer)
-	_fnNSHeight func(corefoundation.CGRect) float64
-	_fnNSHomeDirectory func() objc.ID
-	_fnNSHomeDirectoryForUser func(objc.ID) objc.ID
-	_fnNSHostByteOrder func() int
-// Deprecated: Not supported
-	_fnNSIncrementExtraRefCount func(objc.ID)
-	_fnNSInsetRect func(corefoundation.CGRect, float64, float64) corefoundation.CGRect
-	_fnNSIntegralRect func(corefoundation.CGRect) corefoundation.CGRect
+	_fnNSDefaultMallocZone             func() unsafe.Pointer
+	_fnNSDivideRect                    func(corefoundation.CGRect, *corefoundation.CGRect, *corefoundation.CGRect, float64, NSRectEdge)
+	_fnNSEdgeInsetsEqual               func(NSEdgeInsets, NSEdgeInsets) bool
+	_fnNSEdgeInsetsMake                func(float64, float64, float64, float64) NSEdgeInsets
+	_fnNSEndHashTableEnumeration       func(*NSHashEnumerator)
+	_fnNSEndMapTableEnumeration        func(*NSMapEnumerator)
+	_fnNSEnumerateHashTable            func(*NSHashTable[objc.ID]) NSHashEnumerator
+	_fnNSEnumerateMapTable             func(*NSMapTable[objc.ID, objc.ID]) NSMapEnumerator
+	_fnNSEqualPoints                   func(corefoundation.CGPoint, corefoundation.CGPoint) bool
+	_fnNSEqualRanges                   func(NSRange, NSRange) bool
+	_fnNSEqualRects                    func(corefoundation.CGRect, corefoundation.CGRect) bool
+	_fnNSEqualSizes                    func(corefoundation.CGSize, corefoundation.CGSize) bool
+	_fnNSExtraRefCount                 func(objc.ID) uint
+	_fnNSFileTypeForHFSTypeCode        func(uint) objc.ID
+	_fnNSFreeHashTable                 func(*NSHashTable[objc.ID])
+	_fnNSFreeMapTable                  func(*NSMapTable[objc.ID, objc.ID])
+	_fnNSFullUserName                  func() objc.ID
+	_fnNSGetSizeAndAlignment           func(string, *uint, *uint) string
+	_fnNSGetUncaughtExceptionHandler   func() unsafe.Pointer
+	_fnNSHFSTypeCodeFromFileType       func(objc.ID) uint
+	_fnNSHFSTypeOfFile                 func(objc.ID) objc.ID
+	_fnNSHashGet                       func(*NSHashTable[objc.ID], unsafe.Pointer) unsafe.Pointer
+	_fnNSHashInsert                    func(*NSHashTable[objc.ID], unsafe.Pointer)
+	_fnNSHashInsertIfAbsent            func(*NSHashTable[objc.ID], unsafe.Pointer) unsafe.Pointer
+	_fnNSHashInsertKnownAbsent         func(*NSHashTable[objc.ID], unsafe.Pointer)
+	_fnNSHashRemove                    func(*NSHashTable[objc.ID], unsafe.Pointer)
+	_fnNSHeight                        func(corefoundation.CGRect) float64
+	_fnNSHomeDirectory                 func() objc.ID
+	_fnNSHomeDirectoryForUser          func(objc.ID) objc.ID
+	_fnNSHostByteOrder                 func() int
+	// Deprecated: Not supported
+	_fnNSIncrementExtraRefCount  func(objc.ID)
+	_fnNSInsetRect               func(corefoundation.CGRect, float64, float64) corefoundation.CGRect
+	_fnNSIntegralRect            func(corefoundation.CGRect) corefoundation.CGRect
 	_fnNSIntegralRectWithOptions func(corefoundation.CGRect, NSAlignmentOptions) corefoundation.CGRect
-	_fnNSIntersectionRange func(NSRange, NSRange) NSRange
-	_fnNSIntersectionRect func(corefoundation.CGRect, corefoundation.CGRect) corefoundation.CGRect
-	_fnNSIntersectsRect func(corefoundation.CGRect, corefoundation.CGRect) bool
-	_fnNSIsEmptyRect func(corefoundation.CGRect) bool
-	_fnNSLocationInRange func(uint, NSRange) bool
-	_fnNSLogPageSize func() uint
-	_fnNSLogv func(objc.ID, string)
-	_fnNSMakeCollectable func(unsafe.Pointer) unsafe.Pointer
-	_fnNSMakePoint func(float64, float64) corefoundation.CGPoint
-	_fnNSMakeRange func(uint, uint) NSRange
-	_fnNSMakeRect func(float64, float64, float64, float64) corefoundation.CGRect
-	_fnNSMakeSize func(float64, float64) corefoundation.CGSize
-	_fnNSMapGet func(*NSMapTable[objc.ID, objc.ID], unsafe.Pointer) unsafe.Pointer
-	_fnNSMapInsert func(*NSMapTable[objc.ID, objc.ID], unsafe.Pointer, unsafe.Pointer)
-	_fnNSMapInsertIfAbsent func(*NSMapTable[objc.ID, objc.ID], unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnNSMapInsertKnownAbsent func(*NSMapTable[objc.ID, objc.ID], unsafe.Pointer, unsafe.Pointer)
-	_fnNSMapMember func(*NSMapTable[objc.ID, objc.ID], unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
-	_fnNSMapRemove func(*NSMapTable[objc.ID, objc.ID], unsafe.Pointer)
-	_fnNSMaxRange func(NSRange) uint
-	_fnNSMaxX func(corefoundation.CGRect) float64
-	_fnNSMaxY func(corefoundation.CGRect) float64
-	_fnNSMidX func(corefoundation.CGRect) float64
-	_fnNSMidY func(corefoundation.CGRect) float64
-	_fnNSMinX func(corefoundation.CGRect) float64
-	_fnNSMinY func(corefoundation.CGRect) float64
-	_fnNSMouseInRect func(corefoundation.CGPoint, corefoundation.CGRect, bool) bool
-	_fnNSNextHashEnumeratorItem func(*NSHashEnumerator) unsafe.Pointer
-	_fnNSNextMapEnumeratorPair func(*NSMapEnumerator, unsafe.Pointer, unsafe.Pointer) bool
-	_fnNSOffsetRect func(corefoundation.CGRect, float64, float64) corefoundation.CGRect
-	_fnNSOpenStepRootDirectory func() objc.ID
-	_fnNSPageSize func() uint
-	_fnNSPointFromCGPoint func(corefoundation.CGPoint) corefoundation.CGPoint
-	_fnNSPointFromString func(objc.ID) corefoundation.CGPoint
-	_fnNSPointInRect func(corefoundation.CGPoint, corefoundation.CGRect) bool
-	_fnNSPointToCGPoint func(corefoundation.CGPoint) corefoundation.CGPoint
-	_fnNSProtocolFromString func(objc.ID) unsafe.Pointer
-	_fnNSRangeFromString func(objc.ID) NSRange
-// Deprecated: Use NSProcessInfo instead
-	_fnNSRealMemoryAvailable func() uint
-	_fnNSReallocateCollectable func(unsafe.Pointer, uint, uint) unsafe.Pointer
-	_fnNSRectFromCGRect func(corefoundation.CGRect) corefoundation.CGRect
-	_fnNSRectFromString func(objc.ID) corefoundation.CGRect
-	_fnNSRectToCGRect func(corefoundation.CGRect) corefoundation.CGRect
-	_fnNSRecycleZone func(unsafe.Pointer)
-	_fnNSResetHashTable func(*NSHashTable[objc.ID])
-	_fnNSResetMapTable func(*NSMapTable[objc.ID, objc.ID])
-	_fnNSRoundDownToMultipleOfPageSize func(uint) uint
-	_fnNSRoundUpToMultipleOfPageSize func(uint) uint
+	_fnNSIntersectionRange       func(NSRange, NSRange) NSRange
+	_fnNSIntersectionRect        func(corefoundation.CGRect, corefoundation.CGRect) corefoundation.CGRect
+	_fnNSIntersectsRect          func(corefoundation.CGRect, corefoundation.CGRect) bool
+	_fnNSIsEmptyRect             func(corefoundation.CGRect) bool
+	_fnNSLocationInRange         func(uint, NSRange) bool
+	_fnNSLogPageSize             func() uint
+	_fnNSLogv                    func(objc.ID, string)
+	_fnNSMakeCollectable         func(unsafe.Pointer) unsafe.Pointer
+	_fnNSMakePoint               func(float64, float64) corefoundation.CGPoint
+	_fnNSMakeRange               func(uint, uint) NSRange
+	_fnNSMakeRect                func(float64, float64, float64, float64) corefoundation.CGRect
+	_fnNSMakeSize                func(float64, float64) corefoundation.CGSize
+	_fnNSMapGet                  func(*NSMapTable[objc.ID, objc.ID], unsafe.Pointer) unsafe.Pointer
+	_fnNSMapInsert               func(*NSMapTable[objc.ID, objc.ID], unsafe.Pointer, unsafe.Pointer)
+	_fnNSMapInsertIfAbsent       func(*NSMapTable[objc.ID, objc.ID], unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnNSMapInsertKnownAbsent    func(*NSMapTable[objc.ID, objc.ID], unsafe.Pointer, unsafe.Pointer)
+	_fnNSMapMember               func(*NSMapTable[objc.ID, objc.ID], unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	_fnNSMapRemove               func(*NSMapTable[objc.ID, objc.ID], unsafe.Pointer)
+	_fnNSMaxRange                func(NSRange) uint
+	_fnNSMaxX                    func(corefoundation.CGRect) float64
+	_fnNSMaxY                    func(corefoundation.CGRect) float64
+	_fnNSMidX                    func(corefoundation.CGRect) float64
+	_fnNSMidY                    func(corefoundation.CGRect) float64
+	_fnNSMinX                    func(corefoundation.CGRect) float64
+	_fnNSMinY                    func(corefoundation.CGRect) float64
+	_fnNSMouseInRect             func(corefoundation.CGPoint, corefoundation.CGRect, bool) bool
+	_fnNSNextHashEnumeratorItem  func(*NSHashEnumerator) unsafe.Pointer
+	_fnNSNextMapEnumeratorPair   func(*NSMapEnumerator, unsafe.Pointer, unsafe.Pointer) bool
+	_fnNSOffsetRect              func(corefoundation.CGRect, float64, float64) corefoundation.CGRect
+	_fnNSOpenStepRootDirectory   func() objc.ID
+	_fnNSPageSize                func() uint
+	_fnNSPointFromCGPoint        func(corefoundation.CGPoint) corefoundation.CGPoint
+	_fnNSPointFromString         func(objc.ID) corefoundation.CGPoint
+	_fnNSPointInRect             func(corefoundation.CGPoint, corefoundation.CGRect) bool
+	_fnNSPointToCGPoint          func(corefoundation.CGPoint) corefoundation.CGPoint
+	_fnNSProtocolFromString      func(objc.ID) unsafe.Pointer
+	_fnNSRangeFromString         func(objc.ID) NSRange
+	// Deprecated: Use NSProcessInfo instead
+	_fnNSRealMemoryAvailable               func() uint
+	_fnNSReallocateCollectable             func(unsafe.Pointer, uint, uint) unsafe.Pointer
+	_fnNSRectFromCGRect                    func(corefoundation.CGRect) corefoundation.CGRect
+	_fnNSRectFromString                    func(objc.ID) corefoundation.CGRect
+	_fnNSRectToCGRect                      func(corefoundation.CGRect) corefoundation.CGRect
+	_fnNSRecycleZone                       func(unsafe.Pointer)
+	_fnNSResetHashTable                    func(*NSHashTable[objc.ID])
+	_fnNSResetMapTable                     func(*NSMapTable[objc.ID, objc.ID])
+	_fnNSRoundDownToMultipleOfPageSize     func(uint) uint
+	_fnNSRoundUpToMultipleOfPageSize       func(uint) uint
 	_fnNSSearchPathForDirectoriesInDomains func(NSSearchPathDirectory, NSSearchPathDomainMask, bool) objc.ID
-	_fnNSSelectorFromString func(objc.ID) objc.SEL
-	_fnNSSetUncaughtExceptionHandler func(unsafe.Pointer)
-	_fnNSSetZoneName func(unsafe.Pointer, objc.ID)
-// Deprecated: Not supported
-	_fnNSShouldRetainWithZone func(objc.ID, unsafe.Pointer) bool
-	_fnNSSizeFromCGSize func(corefoundation.CGSize) corefoundation.CGSize
-	_fnNSSizeFromString func(objc.ID) corefoundation.CGSize
-	_fnNSSizeToCGSize func(corefoundation.CGSize) corefoundation.CGSize
-	_fnNSStringFromClass func(objc.Class) objc.ID
-	_fnNSStringFromHashTable func(*NSHashTable[objc.ID]) objc.ID
-	_fnNSStringFromMapTable func(*NSMapTable[objc.ID, objc.ID]) objc.ID
-	_fnNSStringFromPoint func(corefoundation.CGPoint) objc.ID
-	_fnNSStringFromProtocol func(unsafe.Pointer) objc.ID
-	_fnNSStringFromRange func(NSRange) objc.ID
-	_fnNSStringFromRect func(corefoundation.CGRect) objc.ID
-	_fnNSStringFromSelector func(objc.SEL) objc.ID
-	_fnNSStringFromSize func(corefoundation.CGSize) objc.ID
-	_fnNSSwapBigDoubleToHost func(NSSwappedDouble) float64
-	_fnNSSwapBigFloatToHost func(NSSwappedFloat) float32
-	_fnNSSwapBigIntToHost func(uint) uint
-	_fnNSSwapBigLongLongToHost func(uint64) uint64
-	_fnNSSwapBigLongToHost func(uint) uint
-	_fnNSSwapBigShortToHost func(uint16) uint16
-	_fnNSSwapDouble func(NSSwappedDouble) NSSwappedDouble
-	_fnNSSwapFloat func(NSSwappedFloat) NSSwappedFloat
-	_fnNSSwapHostDoubleToBig func(float64) NSSwappedDouble
-	_fnNSSwapHostDoubleToLittle func(float64) NSSwappedDouble
-	_fnNSSwapHostFloatToBig func(float32) NSSwappedFloat
-	_fnNSSwapHostFloatToLittle func(float32) NSSwappedFloat
-	_fnNSSwapHostIntToBig func(uint) uint
-	_fnNSSwapHostIntToLittle func(uint) uint
-	_fnNSSwapHostLongLongToBig func(uint64) uint64
+	_fnNSSelectorFromString                func(objc.ID) objc.SEL
+	_fnNSSetUncaughtExceptionHandler       func(unsafe.Pointer)
+	_fnNSSetZoneName                       func(unsafe.Pointer, objc.ID)
+	// Deprecated: Not supported
+	_fnNSShouldRetainWithZone     func(objc.ID, unsafe.Pointer) bool
+	_fnNSSizeFromCGSize           func(corefoundation.CGSize) corefoundation.CGSize
+	_fnNSSizeFromString           func(objc.ID) corefoundation.CGSize
+	_fnNSSizeToCGSize             func(corefoundation.CGSize) corefoundation.CGSize
+	_fnNSStringFromClass          func(objc.Class) objc.ID
+	_fnNSStringFromHashTable      func(*NSHashTable[objc.ID]) objc.ID
+	_fnNSStringFromMapTable       func(*NSMapTable[objc.ID, objc.ID]) objc.ID
+	_fnNSStringFromPoint          func(corefoundation.CGPoint) objc.ID
+	_fnNSStringFromProtocol       func(unsafe.Pointer) objc.ID
+	_fnNSStringFromRange          func(NSRange) objc.ID
+	_fnNSStringFromRect           func(corefoundation.CGRect) objc.ID
+	_fnNSStringFromSelector       func(objc.SEL) objc.ID
+	_fnNSStringFromSize           func(corefoundation.CGSize) objc.ID
+	_fnNSSwapBigDoubleToHost      func(NSSwappedDouble) float64
+	_fnNSSwapBigFloatToHost       func(NSSwappedFloat) float32
+	_fnNSSwapBigIntToHost         func(uint) uint
+	_fnNSSwapBigLongLongToHost    func(uint64) uint64
+	_fnNSSwapBigLongToHost        func(uint) uint
+	_fnNSSwapBigShortToHost       func(uint16) uint16
+	_fnNSSwapDouble               func(NSSwappedDouble) NSSwappedDouble
+	_fnNSSwapFloat                func(NSSwappedFloat) NSSwappedFloat
+	_fnNSSwapHostDoubleToBig      func(float64) NSSwappedDouble
+	_fnNSSwapHostDoubleToLittle   func(float64) NSSwappedDouble
+	_fnNSSwapHostFloatToBig       func(float32) NSSwappedFloat
+	_fnNSSwapHostFloatToLittle    func(float32) NSSwappedFloat
+	_fnNSSwapHostIntToBig         func(uint) uint
+	_fnNSSwapHostIntToLittle      func(uint) uint
+	_fnNSSwapHostLongLongToBig    func(uint64) uint64
 	_fnNSSwapHostLongLongToLittle func(uint64) uint64
-	_fnNSSwapHostLongToBig func(uint) uint
-	_fnNSSwapHostLongToLittle func(uint) uint
-	_fnNSSwapHostShortToBig func(uint16) uint16
-	_fnNSSwapHostShortToLittle func(uint16) uint16
-	_fnNSSwapInt func(uint) uint
-	_fnNSSwapLittleDoubleToHost func(NSSwappedDouble) float64
-	_fnNSSwapLittleFloatToHost func(NSSwappedFloat) float32
-	_fnNSSwapLittleIntToHost func(uint) uint
+	_fnNSSwapHostLongToBig        func(uint) uint
+	_fnNSSwapHostLongToLittle     func(uint) uint
+	_fnNSSwapHostShortToBig       func(uint16) uint16
+	_fnNSSwapHostShortToLittle    func(uint16) uint16
+	_fnNSSwapInt                  func(uint) uint
+	_fnNSSwapLittleDoubleToHost   func(NSSwappedDouble) float64
+	_fnNSSwapLittleFloatToHost    func(NSSwappedFloat) float32
+	_fnNSSwapLittleIntToHost      func(uint) uint
 	_fnNSSwapLittleLongLongToHost func(uint64) uint64
-	_fnNSSwapLittleLongToHost func(uint) uint
-	_fnNSSwapLittleShortToHost func(uint16) uint16
-	_fnNSSwapLong func(uint) uint
-	_fnNSSwapLongLong func(uint64) uint64
-	_fnNSSwapShort func(uint16) uint16
-	_fnNSTemporaryDirectory func() objc.ID
-	_fnNSUnionRange func(NSRange, NSRange) NSRange
-	_fnNSUnionRect func(corefoundation.CGRect, corefoundation.CGRect) corefoundation.CGRect
-	_fnNSUserName func() objc.ID
-	_fnNSWidth func(corefoundation.CGRect) float64
-	_fnNSZoneCalloc func(unsafe.Pointer, uint, uint) unsafe.Pointer
-	_fnNSZoneFree func(unsafe.Pointer, unsafe.Pointer)
-	_fnNSZoneFromPointer func(unsafe.Pointer) unsafe.Pointer
-	_fnNSZoneMalloc func(unsafe.Pointer, uint) unsafe.Pointer
-	_fnNSZoneName func(unsafe.Pointer) objc.ID
-	_fnNSZoneRealloc func(unsafe.Pointer, unsafe.Pointer, uint) unsafe.Pointer
-// Deprecated: Not supported
+	_fnNSSwapLittleLongToHost     func(uint) uint
+	_fnNSSwapLittleShortToHost    func(uint16) uint16
+	_fnNSSwapLong                 func(uint) uint
+	_fnNSSwapLongLong             func(uint64) uint64
+	_fnNSSwapShort                func(uint16) uint16
+	_fnNSTemporaryDirectory       func() objc.ID
+	_fnNSUnionRange               func(NSRange, NSRange) NSRange
+	_fnNSUnionRect                func(corefoundation.CGRect, corefoundation.CGRect) corefoundation.CGRect
+	_fnNSUserName                 func() objc.ID
+	_fnNSWidth                    func(corefoundation.CGRect) float64
+	_fnNSZoneCalloc               func(unsafe.Pointer, uint, uint) unsafe.Pointer
+	_fnNSZoneFree                 func(unsafe.Pointer, unsafe.Pointer)
+	_fnNSZoneFromPointer          func(unsafe.Pointer) unsafe.Pointer
+	_fnNSZoneMalloc               func(unsafe.Pointer, uint) unsafe.Pointer
+	_fnNSZoneName                 func(unsafe.Pointer) objc.ID
+	_fnNSZoneRealloc              func(unsafe.Pointer, unsafe.Pointer, uint) unsafe.Pointer
+	// Deprecated: Not supported
 	_fnNXReadNSObjectFromCoder func(objc.ID) objc.ID
 	// Returns the class name of a given object. @param obj An Objective-C object. @return The name of the class of which \e obj is an instance.
 	_object_getClassName func(objc.ID) string
@@ -377,7 +377,9 @@ func NSDecimalRound(result *NSDecimal, number *NSDecimal, scale int, roundingMod
 
 func NSDecimalString(dcm *NSDecimal, locale objc.ID) *NSString {
 	_ret := _fnNSDecimalString(dcm, locale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -443,7 +445,9 @@ func NSExtraRefCount(object objc.ID) uint {
 
 func NSFileTypeForHFSTypeCode(hfsFileTypeCode uint) *NSString {
 	_ret := _fnNSFileTypeForHFSTypeCode(hfsFileTypeCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -457,7 +461,9 @@ func NSFreeMapTable(table *NSMapTable[objc.ID, objc.ID]) {
 
 func NSFullUserName() *NSString {
 	_ret := _fnNSFullUserName()
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -475,7 +481,9 @@ func NSHFSTypeCodeFromFileType(fileTypeString *NSString) uint {
 
 func NSHFSTypeOfFile(fullFilePath *NSString) *NSString {
 	_ret := _fnNSHFSTypeOfFile(fullFilePath.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -505,13 +513,17 @@ func NSHeight(aRect corefoundation.CGRect) float64 {
 
 func NSHomeDirectory() *NSString {
 	_ret := _fnNSHomeDirectory()
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func NSHomeDirectoryForUser(userName *NSString) *NSString {
 	_ret := _fnNSHomeDirectoryForUser(userName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -654,7 +666,9 @@ func NSOffsetRect(aRect corefoundation.CGRect, dX float64, dY float64) corefound
 
 func NSOpenStepRootDirectory() *NSString {
 	_ret := _fnNSOpenStepRootDirectory()
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -729,7 +743,9 @@ func NSRoundUpToMultipleOfPageSize(bytes_ uint) uint {
 
 func NSSearchPathForDirectoriesInDomains(directory NSSearchPathDirectory, domainMask NSSearchPathDomainMask, expandTilde bool) *NSArray[*NSString] {
 	_ret := _fnNSSearchPathForDirectoriesInDomains(directory, domainMask, expandTilde)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -764,55 +780,73 @@ func NSSizeToCGSize(nssize corefoundation.CGSize) corefoundation.CGSize {
 
 func NSStringFromClass(aClass objc.Class) *NSString {
 	_ret := _fnNSStringFromClass(aClass)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func NSStringFromHashTable(table *NSHashTable[objc.ID]) *NSString {
 	_ret := _fnNSStringFromHashTable(table)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func NSStringFromMapTable(table *NSMapTable[objc.ID, objc.ID]) *NSString {
 	_ret := _fnNSStringFromMapTable(table)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func NSStringFromPoint(aPoint corefoundation.CGPoint) *NSString {
 	_ret := _fnNSStringFromPoint(aPoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func NSStringFromProtocol(proto unsafe.Pointer) *NSString {
 	_ret := _fnNSStringFromProtocol(proto)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func NSStringFromRange(range_ NSRange) *NSString {
 	_ret := _fnNSStringFromRange(range_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func NSStringFromRect(aRect corefoundation.CGRect) *NSString {
 	_ret := _fnNSStringFromRect(aRect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func NSStringFromSelector(aSelector objc.SEL) *NSString {
 	_ret := _fnNSStringFromSelector(aSelector)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func NSStringFromSize(aSize corefoundation.CGSize) *NSString {
 	_ret := _fnNSStringFromSize(aSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -938,7 +972,9 @@ func NSSwapShort(inv uint16) uint16 {
 
 func NSTemporaryDirectory() *NSString {
 	_ret := _fnNSTemporaryDirectory()
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -952,7 +988,9 @@ func NSUnionRect(aRect corefoundation.CGRect, bRect corefoundation.CGRect) coref
 
 func NSUserName() *NSString {
 	_ret := _fnNSUserName()
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -978,7 +1016,9 @@ func NSZoneMalloc(zone unsafe.Pointer, size uint) unsafe.Pointer {
 
 func NSZoneName(zone unsafe.Pointer) *NSString {
 	_ret := _fnNSZoneName(zone)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -989,7 +1029,9 @@ func NSZoneRealloc(zone unsafe.Pointer, ptr unsafe.Pointer, size uint) unsafe.Po
 // Deprecated: Not supported
 func NXReadNSObjectFromCoder(decoder *NSCoder) *NSObject {
 	_ret := _fnNXReadNSObjectFromCoder(decoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSObjectFromID(_ret)
 }
 
@@ -1028,4 +1070,3 @@ func SelIsMapped(sel objc.SEL) bool {
 func SelRegisterName(str string) objc.SEL {
 	return _sel_registerName(str)
 }
-

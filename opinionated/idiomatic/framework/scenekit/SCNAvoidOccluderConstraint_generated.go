@@ -144,4 +144,3 @@ type AvoidOccluderConstraintable interface {
 }
 
 var _ AvoidOccluderConstraintable = (*AvoidOccluderConstraint)(nil)
-

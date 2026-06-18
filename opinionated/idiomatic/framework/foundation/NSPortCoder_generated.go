@@ -97,4 +97,3 @@ type PortCoderable interface {
 }
 
 var _ PortCoderable = (*PortCoder)(nil)
-

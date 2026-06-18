@@ -17,15 +17,15 @@ type NSDraggingImageComponent struct {
 }
 
 var (
-	_clsNSDraggingImageComponent = _objcClass("NSDraggingImageComponent")
+	_clsNSDraggingImageComponent                              = _objcClass("NSDraggingImageComponent")
 	_nSDraggingImageComponentSelDraggingImageComponentWithKey = objc.RegisterName("draggingImageComponentWithKey:")
-	_nSDraggingImageComponentSelInitWithKey = objc.RegisterName("initWithKey:")
-	_nSDraggingImageComponentSelKey = objc.RegisterName("key")
-	_nSDraggingImageComponentSelSetKey = objc.RegisterName("setKey:")
-	_nSDraggingImageComponentSelContents = objc.RegisterName("contents")
-	_nSDraggingImageComponentSelSetContents = objc.RegisterName("setContents:")
-	_nSDraggingImageComponentSelFrame = objc.RegisterName("frame")
-	_nSDraggingImageComponentSelSetFrame = objc.RegisterName("setFrame:")
+	_nSDraggingImageComponentSelInitWithKey                   = objc.RegisterName("initWithKey:")
+	_nSDraggingImageComponentSelKey                           = objc.RegisterName("key")
+	_nSDraggingImageComponentSelSetKey                        = objc.RegisterName("setKey:")
+	_nSDraggingImageComponentSelContents                      = objc.RegisterName("contents")
+	_nSDraggingImageComponentSelSetContents                   = objc.RegisterName("setContents:")
+	_nSDraggingImageComponentSelFrame                         = objc.RegisterName("frame")
+	_nSDraggingImageComponentSelSetFrame                      = objc.RegisterName("setFrame:")
 )
 
 func NSDraggingImageComponentFromID(id objc.ID) *NSDraggingImageComponent {
@@ -40,19 +40,25 @@ func NSDraggingImageComponentFromID(id objc.ID) *NSDraggingImageComponent {
 
 func NSDraggingImageComponentDraggingImageComponentWithKey(key *foundation.NSString) *NSDraggingImageComponent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDraggingImageComponent), _nSDraggingImageComponentSelDraggingImageComponentWithKey, key.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDraggingImageComponentFromID(_ret)
 }
 
 func (o *NSDraggingImageComponent) InitWithKey(key *foundation.NSString) *NSDraggingImageComponent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDraggingImageComponentSelInitWithKey, key.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDraggingImageComponentFromID(_ret)
 }
 
 func (o *NSDraggingImageComponent) Key() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDraggingImageComponentSelKey)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -77,4 +83,3 @@ func (o *NSDraggingImageComponent) Frame() corefoundation.CGRect {
 func (o *NSDraggingImageComponent) SetFrame(frame corefoundation.CGRect) {
 	o.Ptr().Send(_nSDraggingImageComponentSelSetFrame, frame)
 }
-

@@ -16,11 +16,15 @@ type MTRUnitTestingClusterTestNestedStructArgumentRequestParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRUnitTestingClusterTestNestedStructArgumentRequestParams].
-func (x *MTRUnitTestingClusterTestNestedStructArgumentRequestParams) Unwrap() *raw.MTRUnitTestingClusterTestNestedStructArgumentRequestParams { return x.inner }
+func (x *MTRUnitTestingClusterTestNestedStructArgumentRequestParams) Unwrap() *raw.MTRUnitTestingClusterTestNestedStructArgumentRequestParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRUnitTestingClusterTestNestedStructArgumentRequestParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRUnitTestingClusterTestNestedStructArgumentRequestParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRUnitTestingClusterTestNestedStructArgumentRequestParamsFromID adopts an existing object pointer as a MTRUnitTestingClusterTestNestedStructArgumentRequestParams (nil for 0).
 func MTRUnitTestingClusterTestNestedStructArgumentRequestParamsFromID(id objc.ID) *MTRUnitTestingClusterTestNestedStructArgumentRequestParams {
@@ -88,7 +92,9 @@ func (x *MTRUnitTestingClusterTestNestedStructArgumentRequestParams) SetServerSi
 	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
 }
 
-func (x *MTRUnitTestingClusterTestNestedStructArgumentRequestParams) asMTRUnitTestingClusterTestNestedStructArgumentRequestParams() *raw.MTRUnitTestingClusterTestNestedStructArgumentRequestParams { return x.inner }
+func (x *MTRUnitTestingClusterTestNestedStructArgumentRequestParams) asMTRUnitTestingClusterTestNestedStructArgumentRequestParams() *raw.MTRUnitTestingClusterTestNestedStructArgumentRequestParams {
+	return x.inner
+}
 
 // MTRUnitTestingClusterTestNestedStructArgumentRequestParamsable is the interface implemented by [MTRUnitTestingClusterTestNestedStructArgumentRequestParams], for mocking and DI.
 type MTRUnitTestingClusterTestNestedStructArgumentRequestParamsable interface {
@@ -105,4 +111,3 @@ type MTRUnitTestingClusterTestNestedStructArgumentRequestParamsable interface {
 }
 
 var _ MTRUnitTestingClusterTestNestedStructArgumentRequestParamsable = (*MTRUnitTestingClusterTestNestedStructArgumentRequestParams)(nil)
-

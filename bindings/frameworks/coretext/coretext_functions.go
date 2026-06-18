@@ -12,207 +12,207 @@ import (
 )
 
 var (
-	_fnCTFontCollectionCopyExclusionDescriptors func(unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCollectionCopyFontAttribute func(unsafe.Pointer, unsafe.Pointer, CTFontCollectionCopyOptions) unsafe.Pointer
-	_fnCTFontCollectionCopyFontAttributes func(unsafe.Pointer, unsafe.Pointer, CTFontCollectionCopyOptions) unsafe.Pointer
-	_fnCTFontCollectionCopyQueryDescriptors func(unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCollectionCreateCopyWithFontDescriptors func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCollectionCreateFromAvailableFonts func(unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCollectionCreateMatchingFontDescriptors func(unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCollectionCreateMatchingFontDescriptorsForFamily func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCollectionCopyExclusionDescriptors                        func(unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCollectionCopyFontAttribute                               func(unsafe.Pointer, unsafe.Pointer, CTFontCollectionCopyOptions) unsafe.Pointer
+	_fnCTFontCollectionCopyFontAttributes                              func(unsafe.Pointer, unsafe.Pointer, CTFontCollectionCopyOptions) unsafe.Pointer
+	_fnCTFontCollectionCopyQueryDescriptors                            func(unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCollectionCreateCopyWithFontDescriptors                   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCollectionCreateFromAvailableFonts                        func(unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCollectionCreateMatchingFontDescriptors                   func(unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCollectionCreateMatchingFontDescriptorsForFamily          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_fnCTFontCollectionCreateMatchingFontDescriptorsSortedWithCallback func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCollectionCreateMatchingFontDescriptorsWithOptions func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCollectionCreateMutableCopy func(unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCollectionCreateWithFontDescriptors func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCollectionGetTypeID func() uint
-	_fnCTFontCollectionSetExclusionDescriptors func(unsafe.Pointer, unsafe.Pointer)
-	_fnCTFontCollectionSetQueryDescriptors func(unsafe.Pointer, unsafe.Pointer)
-	_fnCTFontCopyAttribute func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCopyAvailableTables func(unsafe.Pointer, CTFontTableOptions) unsafe.Pointer
-	_fnCTFontCopyCharacterSet func(unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCopyDefaultCascadeListForLanguages func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCopyDisplayName func(unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCopyFamilyName func(unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCopyFeatureSettings func(unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCopyFeatures func(unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCopyFontDescriptor func(unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCopyFullName func(unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCopyGraphicsFont func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCopyLocalizedName func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCopyName func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCopyNameForGlyph func(unsafe.Pointer, uint16) unsafe.Pointer
-	_fnCTFontCopyPostScriptName func(unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCopySupportedLanguages func(unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCopyTable func(unsafe.Pointer, uint, CTFontTableOptions) unsafe.Pointer
-	_fnCTFontCopyTraits func(unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCopyVariation func(unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCopyVariationAxes func(unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCreateCopyWithAttributes func(unsafe.Pointer, float64, *corefoundation.CGAffineTransform, unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCreateCopyWithFamily func(unsafe.Pointer, float64, *corefoundation.CGAffineTransform, unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCreateCopyWithSymbolicTraits func(unsafe.Pointer, float64, *corefoundation.CGAffineTransform, CTFontSymbolicTraits, CTFontSymbolicTraits) unsafe.Pointer
-	_fnCTFontCreateForString func(unsafe.Pointer, unsafe.Pointer, corefoundation.CFRange) unsafe.Pointer
-	_fnCTFontCreateForStringWithLanguage func(unsafe.Pointer, unsafe.Pointer, corefoundation.CFRange, unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCreatePathForGlyph func(unsafe.Pointer, uint16, *corefoundation.CGAffineTransform) unsafe.Pointer
-	_fnCTFontCreateUIFontForLanguage func(CTFontUIFontType, float64, unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCreateWithFontDescriptor func(unsafe.Pointer, float64, *corefoundation.CGAffineTransform) unsafe.Pointer
-	_fnCTFontCreateWithFontDescriptorAndOptions func(unsafe.Pointer, float64, *corefoundation.CGAffineTransform, CTFontOptions) unsafe.Pointer
-	_fnCTFontCreateWithGraphicsFont func(unsafe.Pointer, float64, *corefoundation.CGAffineTransform, unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCreateWithName func(unsafe.Pointer, float64, *corefoundation.CGAffineTransform) unsafe.Pointer
-	_fnCTFontCreateWithNameAndOptions func(unsafe.Pointer, float64, *corefoundation.CGAffineTransform, CTFontOptions) unsafe.Pointer
-	_fnCTFontCreateWithPlatformFont func(uint, float64, *corefoundation.CGAffineTransform, unsafe.Pointer) unsafe.Pointer
-	_fnCTFontCreateWithQuickdrawInstance func(*uint8, int16, uint8, float64) unsafe.Pointer
-	_fnCTFontDescriptorCopyAttribute func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCTFontDescriptorCopyAttributes func(unsafe.Pointer) unsafe.Pointer
-	_fnCTFontDescriptorCopyLocalizedAttribute func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCTFontDescriptorCreateCopyWithAttributes func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCTFontDescriptorCreateCopyWithFamily func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCTFontDescriptorCreateCopyWithFeature func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCTFontDescriptorCreateCopyWithSymbolicTraits func(unsafe.Pointer, CTFontSymbolicTraits, CTFontSymbolicTraits) unsafe.Pointer
-	_fnCTFontDescriptorCreateCopyWithVariation func(unsafe.Pointer, unsafe.Pointer, float64) unsafe.Pointer
-	_fnCTFontDescriptorCreateMatchingFontDescriptor func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCTFontDescriptorCreateMatchingFontDescriptors func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCTFontDescriptorCreateWithAttributes func(unsafe.Pointer) unsafe.Pointer
-	_fnCTFontDescriptorCreateWithNameAndSize func(unsafe.Pointer, float64) unsafe.Pointer
-	_fnCTFontDescriptorGetTypeID func() uint
-	_fnCTFontDescriptorMatchFontDescriptorsWithProgressHandler func(unsafe.Pointer, unsafe.Pointer, objc.Block) bool
-	_fnCTFontDrawGlyphs func(unsafe.Pointer, *uint16, *corefoundation.CGPoint, uint, unsafe.Pointer)
-	_fnCTFontDrawImageFromAdaptiveImageProviderAtPoint func(unsafe.Pointer, CTAdaptiveImageProviding, corefoundation.CGPoint, unsafe.Pointer)
-	_fnCTFontGetAdvancesForGlyphs func(unsafe.Pointer, CTFontOrientation, *uint16, *corefoundation.CGSize, int) float64
-	_fnCTFontGetAscent func(unsafe.Pointer) float64
-	_fnCTFontGetBoundingBox func(unsafe.Pointer) corefoundation.CGRect
-	_fnCTFontGetBoundingRectsForGlyphs func(unsafe.Pointer, CTFontOrientation, *uint16, *corefoundation.CGRect, int) corefoundation.CGRect
-	_fnCTFontGetCapHeight func(unsafe.Pointer) float64
-	_fnCTFontGetDescent func(unsafe.Pointer) float64
-	_fnCTFontGetGlyphCount func(unsafe.Pointer) int
-	_fnCTFontGetGlyphWithName func(unsafe.Pointer, unsafe.Pointer) uint16
-	_fnCTFontGetGlyphsForCharacters func(unsafe.Pointer, *uint16, *uint16, int) bool
-	_fnCTFontGetLeading func(unsafe.Pointer) float64
-	_fnCTFontGetLigatureCaretPositions func(unsafe.Pointer, uint16, *float64, int) int
-	_fnCTFontGetMatrix func(unsafe.Pointer) corefoundation.CGAffineTransform
-	_fnCTFontGetOpticalBoundsForGlyphs func(unsafe.Pointer, *uint16, *corefoundation.CGRect, int, uint) corefoundation.CGRect
-	_fnCTFontGetPlatformFont func(unsafe.Pointer, unsafe.Pointer) uint
-	_fnCTFontGetSize func(unsafe.Pointer) float64
-	_fnCTFontGetSlantAngle func(unsafe.Pointer) float64
-	_fnCTFontGetStringEncoding func(unsafe.Pointer) uint
-	_fnCTFontGetSymbolicTraits func(unsafe.Pointer) CTFontSymbolicTraits
-	_fnCTFontGetTypeID func() uint
-	_fnCTFontGetTypographicBoundsForAdaptiveImageProvider func(unsafe.Pointer, CTAdaptiveImageProviding) corefoundation.CGRect
-	_fnCTFontGetUIFontType func(unsafe.Pointer) CTFontUIFontType
-	_fnCTFontGetUnderlinePosition func(unsafe.Pointer) float64
-	_fnCTFontGetUnderlineThickness func(unsafe.Pointer) float64
-	_fnCTFontGetUnitsPerEm func(unsafe.Pointer) uint
-	_fnCTFontGetVerticalTranslationsForGlyphs func(unsafe.Pointer, *uint16, *corefoundation.CGSize, int)
-	_fnCTFontGetXHeight func(unsafe.Pointer) float64
-	_fnCTFontHasTable func(unsafe.Pointer, uint) bool
-	_fnCTFontManagerCompareFontFamilyNames func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) corefoundation.CFComparisonResult
-	_fnCTFontManagerCopyAvailableFontFamilyNames func() unsafe.Pointer
-	_fnCTFontManagerCopyAvailableFontURLs func() unsafe.Pointer
-	_fnCTFontManagerCopyAvailablePostScriptNames func() unsafe.Pointer
-	_fnCTFontManagerCreateFontDescriptorFromData func(unsafe.Pointer) unsafe.Pointer
-	_fnCTFontManagerCreateFontDescriptorsFromData func(unsafe.Pointer) unsafe.Pointer
-	_fnCTFontManagerCreateFontDescriptorsFromURL func(unsafe.Pointer) unsafe.Pointer
-	_fnCTFontManagerCreateFontRequestRunLoopSource func(int, objc.Block) unsafe.Pointer
-	_fnCTFontManagerEnableFontDescriptors func(unsafe.Pointer, bool)
-	_fnCTFontManagerGetAutoActivationSetting func(unsafe.Pointer) CTFontManagerAutoActivationSetting
-	_fnCTFontManagerGetScopeForURL func(unsafe.Pointer) CTFontManagerScope
-	_fnCTFontManagerIsSupportedFont func(unsafe.Pointer) bool
-	_fnCTFontManagerRegisterFontDescriptors func(unsafe.Pointer, CTFontManagerScope, bool, objc.Block)
-	_fnCTFontManagerRegisterFontURLs func(unsafe.Pointer, CTFontManagerScope, bool, objc.Block)
-	_fnCTFontManagerRegisterFontsForURL func(unsafe.Pointer, CTFontManagerScope, unsafe.Pointer) bool
-	_fnCTFontManagerRegisterFontsForURLs func(unsafe.Pointer, CTFontManagerScope, unsafe.Pointer) bool
-	_fnCTFontManagerRegisterGraphicsFont func(unsafe.Pointer, unsafe.Pointer) bool
-	_fnCTFontManagerSetAutoActivationSetting func(unsafe.Pointer, CTFontManagerAutoActivationSetting)
-	_fnCTFontManagerUnregisterFontDescriptors func(unsafe.Pointer, CTFontManagerScope, objc.Block)
-	_fnCTFontManagerUnregisterFontURLs func(unsafe.Pointer, CTFontManagerScope, objc.Block)
-	_fnCTFontManagerUnregisterFontsForURL func(unsafe.Pointer, CTFontManagerScope, unsafe.Pointer) bool
-	_fnCTFontManagerUnregisterFontsForURLs func(unsafe.Pointer, CTFontManagerScope, unsafe.Pointer) bool
-	_fnCTFontManagerUnregisterGraphicsFont func(unsafe.Pointer, unsafe.Pointer) bool
-	_fnCTFrameDraw func(unsafe.Pointer, unsafe.Pointer)
-	_fnCTFrameGetFrameAttributes func(unsafe.Pointer) unsafe.Pointer
-	_fnCTFrameGetLineOrigins func(unsafe.Pointer, corefoundation.CFRange, *corefoundation.CGPoint)
-	_fnCTFrameGetLines func(unsafe.Pointer) unsafe.Pointer
-	_fnCTFrameGetPath func(unsafe.Pointer) unsafe.Pointer
-	_fnCTFrameGetStringRange func(unsafe.Pointer) corefoundation.CFRange
-	_fnCTFrameGetTypeID func() uint
-	_fnCTFrameGetVisibleStringRange func(unsafe.Pointer) corefoundation.CFRange
-	_fnCTFramesetterCreateFrame func(unsafe.Pointer, corefoundation.CFRange, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCTFramesetterCreateWithAttributedString func(unsafe.Pointer) unsafe.Pointer
-	_fnCTFramesetterCreateWithTypesetter func(unsafe.Pointer) unsafe.Pointer
-	_fnCTFramesetterGetTypeID func() uint
-	_fnCTFramesetterGetTypesetter func(unsafe.Pointer) unsafe.Pointer
-	_fnCTFramesetterSuggestFrameSizeWithConstraints func(unsafe.Pointer, corefoundation.CFRange, unsafe.Pointer, corefoundation.CGSize, *corefoundation.CFRange) corefoundation.CGSize
-	_fnCTGetCoreTextVersion func() uint32
-	_fnCTGlyphInfoCreateWithCharacterIdentifier func(uint16, CTCharacterCollection, unsafe.Pointer) unsafe.Pointer
-	_fnCTGlyphInfoCreateWithGlyph func(uint16, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCTGlyphInfoCreateWithGlyphName func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCTGlyphInfoGetCharacterCollection func(unsafe.Pointer) CTCharacterCollection
-	_fnCTGlyphInfoGetCharacterIdentifier func(unsafe.Pointer) uint16
-	_fnCTGlyphInfoGetGlyph func(unsafe.Pointer) uint16
-	_fnCTGlyphInfoGetGlyphName func(unsafe.Pointer) unsafe.Pointer
-	_fnCTGlyphInfoGetTypeID func() uint
-	_fnCTLineCreateJustifiedLine func(unsafe.Pointer, float64, float64) unsafe.Pointer
-	_fnCTLineCreateTruncatedLine func(unsafe.Pointer, float64, CTLineTruncationType, unsafe.Pointer) unsafe.Pointer
-	_fnCTLineCreateWithAttributedString func(unsafe.Pointer) unsafe.Pointer
-	_fnCTLineDraw func(unsafe.Pointer, unsafe.Pointer)
-	_fnCTLineEnumerateCaretOffsets func(unsafe.Pointer, objc.Block)
-	_fnCTLineGetBoundsWithOptions func(unsafe.Pointer, CTLineBoundsOptions) corefoundation.CGRect
-	_fnCTLineGetGlyphCount func(unsafe.Pointer) int
-	_fnCTLineGetGlyphRuns func(unsafe.Pointer) unsafe.Pointer
-	_fnCTLineGetImageBounds func(unsafe.Pointer, unsafe.Pointer) corefoundation.CGRect
-	_fnCTLineGetOffsetForStringIndex func(unsafe.Pointer, int, *float64) float64
-	_fnCTLineGetPenOffsetForFlush func(unsafe.Pointer, float64, float64) float64
-	_fnCTLineGetStringIndexForPosition func(unsafe.Pointer, corefoundation.CGPoint) int
-	_fnCTLineGetStringRange func(unsafe.Pointer) corefoundation.CFRange
-	_fnCTLineGetTrailingWhitespaceWidth func(unsafe.Pointer) float64
-	_fnCTLineGetTypeID func() uint
-	_fnCTLineGetTypographicBounds func(unsafe.Pointer, *float64, *float64, *float64) float64
-	_fnCTParagraphStyleCreate func(*CTParagraphStyleSetting, uint) unsafe.Pointer
-	_fnCTParagraphStyleCreateCopy func(unsafe.Pointer) unsafe.Pointer
-	_fnCTParagraphStyleGetTypeID func() uint
-	_fnCTParagraphStyleGetValueForSpecifier func(unsafe.Pointer, CTParagraphStyleSpecifier, uint, unsafe.Pointer) bool
-	_fnCTRubyAnnotationCreate func(CTRubyAlignment, CTRubyOverhang, float64, unsafe.Pointer) unsafe.Pointer
-	_fnCTRubyAnnotationCreateCopy func(unsafe.Pointer) unsafe.Pointer
-	_fnCTRubyAnnotationCreateWithAttributes func(CTRubyAlignment, CTRubyOverhang, CTRubyPosition, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCTRubyAnnotationGetAlignment func(unsafe.Pointer) CTRubyAlignment
-	_fnCTRubyAnnotationGetOverhang func(unsafe.Pointer) CTRubyOverhang
-	_fnCTRubyAnnotationGetSizeFactor func(unsafe.Pointer) float64
-	_fnCTRubyAnnotationGetTextForPosition func(unsafe.Pointer, CTRubyPosition) unsafe.Pointer
-	_fnCTRubyAnnotationGetTypeID func() uint
-	_fnCTRunDelegateCreate func(*CTRunDelegateCallbacks, unsafe.Pointer) unsafe.Pointer
-	_fnCTRunDelegateGetRefCon func(unsafe.Pointer) unsafe.Pointer
-	_fnCTRunDelegateGetTypeID func() uint
-	_fnCTRunDraw func(unsafe.Pointer, unsafe.Pointer, corefoundation.CFRange)
-	_fnCTRunGetAdvances func(unsafe.Pointer, corefoundation.CFRange, *corefoundation.CGSize)
-	_fnCTRunGetAdvancesPtr func(unsafe.Pointer) *corefoundation.CGSize
-	_fnCTRunGetAttributes func(unsafe.Pointer) unsafe.Pointer
-	_fnCTRunGetBaseAdvancesAndOrigins func(unsafe.Pointer, corefoundation.CFRange, *corefoundation.CGSize, *corefoundation.CGPoint)
-	_fnCTRunGetGlyphCount func(unsafe.Pointer) int
-	_fnCTRunGetGlyphs func(unsafe.Pointer, corefoundation.CFRange, *uint16)
-	_fnCTRunGetGlyphsPtr func(unsafe.Pointer) *uint16
-	_fnCTRunGetImageBounds func(unsafe.Pointer, unsafe.Pointer, corefoundation.CFRange) corefoundation.CGRect
-	_fnCTRunGetPositions func(unsafe.Pointer, corefoundation.CFRange, *corefoundation.CGPoint)
-	_fnCTRunGetPositionsPtr func(unsafe.Pointer) *corefoundation.CGPoint
-	_fnCTRunGetStatus func(unsafe.Pointer) CTRunStatus
-	_fnCTRunGetStringIndices func(unsafe.Pointer, corefoundation.CFRange, *int)
-	_fnCTRunGetStringIndicesPtr func(unsafe.Pointer) *int
-	_fnCTRunGetStringRange func(unsafe.Pointer) corefoundation.CFRange
-	_fnCTRunGetTextMatrix func(unsafe.Pointer) corefoundation.CGAffineTransform
-	_fnCTRunGetTypeID func() uint
-	_fnCTRunGetTypographicBounds func(unsafe.Pointer, corefoundation.CFRange, *float64, *float64, *float64) float64
-	_fnCTTextTabCreate func(CTTextAlignment, float64, unsafe.Pointer) unsafe.Pointer
-	_fnCTTextTabGetAlignment func(unsafe.Pointer) CTTextAlignment
-	_fnCTTextTabGetLocation func(unsafe.Pointer) float64
-	_fnCTTextTabGetOptions func(unsafe.Pointer) unsafe.Pointer
-	_fnCTTextTabGetTypeID func() uint
-	_fnCTTypesetterCreateLine func(unsafe.Pointer, corefoundation.CFRange) unsafe.Pointer
-	_fnCTTypesetterCreateLineWithOffset func(unsafe.Pointer, corefoundation.CFRange, float64) unsafe.Pointer
-	_fnCTTypesetterCreateWithAttributedString func(unsafe.Pointer) unsafe.Pointer
-	_fnCTTypesetterCreateWithAttributedStringAndOptions func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCTTypesetterGetTypeID func() uint
-	_fnCTTypesetterSuggestClusterBreak func(unsafe.Pointer, int, float64) int
-	_fnCTTypesetterSuggestClusterBreakWithOffset func(unsafe.Pointer, int, float64, float64) int
-	_fnCTTypesetterSuggestLineBreak func(unsafe.Pointer, int, float64) int
-	_fnCTTypesetterSuggestLineBreakWithOffset func(unsafe.Pointer, int, float64, float64) int
+	_fnCTFontCollectionCreateMatchingFontDescriptorsWithOptions        func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCollectionCreateMutableCopy                               func(unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCollectionCreateWithFontDescriptors                       func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCollectionGetTypeID                                       func() uint
+	_fnCTFontCollectionSetExclusionDescriptors                         func(unsafe.Pointer, unsafe.Pointer)
+	_fnCTFontCollectionSetQueryDescriptors                             func(unsafe.Pointer, unsafe.Pointer)
+	_fnCTFontCopyAttribute                                             func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCopyAvailableTables                                       func(unsafe.Pointer, CTFontTableOptions) unsafe.Pointer
+	_fnCTFontCopyCharacterSet                                          func(unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCopyDefaultCascadeListForLanguages                        func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCopyDisplayName                                           func(unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCopyFamilyName                                            func(unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCopyFeatureSettings                                       func(unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCopyFeatures                                              func(unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCopyFontDescriptor                                        func(unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCopyFullName                                              func(unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCopyGraphicsFont                                          func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCopyLocalizedName                                         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCopyName                                                  func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCopyNameForGlyph                                          func(unsafe.Pointer, uint16) unsafe.Pointer
+	_fnCTFontCopyPostScriptName                                        func(unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCopySupportedLanguages                                    func(unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCopyTable                                                 func(unsafe.Pointer, uint, CTFontTableOptions) unsafe.Pointer
+	_fnCTFontCopyTraits                                                func(unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCopyVariation                                             func(unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCopyVariationAxes                                         func(unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCreateCopyWithAttributes                                  func(unsafe.Pointer, float64, *corefoundation.CGAffineTransform, unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCreateCopyWithFamily                                      func(unsafe.Pointer, float64, *corefoundation.CGAffineTransform, unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCreateCopyWithSymbolicTraits                              func(unsafe.Pointer, float64, *corefoundation.CGAffineTransform, CTFontSymbolicTraits, CTFontSymbolicTraits) unsafe.Pointer
+	_fnCTFontCreateForString                                           func(unsafe.Pointer, unsafe.Pointer, corefoundation.CFRange) unsafe.Pointer
+	_fnCTFontCreateForStringWithLanguage                               func(unsafe.Pointer, unsafe.Pointer, corefoundation.CFRange, unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCreatePathForGlyph                                        func(unsafe.Pointer, uint16, *corefoundation.CGAffineTransform) unsafe.Pointer
+	_fnCTFontCreateUIFontForLanguage                                   func(CTFontUIFontType, float64, unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCreateWithFontDescriptor                                  func(unsafe.Pointer, float64, *corefoundation.CGAffineTransform) unsafe.Pointer
+	_fnCTFontCreateWithFontDescriptorAndOptions                        func(unsafe.Pointer, float64, *corefoundation.CGAffineTransform, CTFontOptions) unsafe.Pointer
+	_fnCTFontCreateWithGraphicsFont                                    func(unsafe.Pointer, float64, *corefoundation.CGAffineTransform, unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCreateWithName                                            func(unsafe.Pointer, float64, *corefoundation.CGAffineTransform) unsafe.Pointer
+	_fnCTFontCreateWithNameAndOptions                                  func(unsafe.Pointer, float64, *corefoundation.CGAffineTransform, CTFontOptions) unsafe.Pointer
+	_fnCTFontCreateWithPlatformFont                                    func(uint, float64, *corefoundation.CGAffineTransform, unsafe.Pointer) unsafe.Pointer
+	_fnCTFontCreateWithQuickdrawInstance                               func(*uint8, int16, uint8, float64) unsafe.Pointer
+	_fnCTFontDescriptorCopyAttribute                                   func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCTFontDescriptorCopyAttributes                                  func(unsafe.Pointer) unsafe.Pointer
+	_fnCTFontDescriptorCopyLocalizedAttribute                          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCTFontDescriptorCreateCopyWithAttributes                        func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCTFontDescriptorCreateCopyWithFamily                            func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCTFontDescriptorCreateCopyWithFeature                           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCTFontDescriptorCreateCopyWithSymbolicTraits                    func(unsafe.Pointer, CTFontSymbolicTraits, CTFontSymbolicTraits) unsafe.Pointer
+	_fnCTFontDescriptorCreateCopyWithVariation                         func(unsafe.Pointer, unsafe.Pointer, float64) unsafe.Pointer
+	_fnCTFontDescriptorCreateMatchingFontDescriptor                    func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCTFontDescriptorCreateMatchingFontDescriptors                   func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCTFontDescriptorCreateWithAttributes                            func(unsafe.Pointer) unsafe.Pointer
+	_fnCTFontDescriptorCreateWithNameAndSize                           func(unsafe.Pointer, float64) unsafe.Pointer
+	_fnCTFontDescriptorGetTypeID                                       func() uint
+	_fnCTFontDescriptorMatchFontDescriptorsWithProgressHandler         func(unsafe.Pointer, unsafe.Pointer, objc.Block) bool
+	_fnCTFontDrawGlyphs                                                func(unsafe.Pointer, *uint16, *corefoundation.CGPoint, uint, unsafe.Pointer)
+	_fnCTFontDrawImageFromAdaptiveImageProviderAtPoint                 func(unsafe.Pointer, CTAdaptiveImageProviding, corefoundation.CGPoint, unsafe.Pointer)
+	_fnCTFontGetAdvancesForGlyphs                                      func(unsafe.Pointer, CTFontOrientation, *uint16, *corefoundation.CGSize, int) float64
+	_fnCTFontGetAscent                                                 func(unsafe.Pointer) float64
+	_fnCTFontGetBoundingBox                                            func(unsafe.Pointer) corefoundation.CGRect
+	_fnCTFontGetBoundingRectsForGlyphs                                 func(unsafe.Pointer, CTFontOrientation, *uint16, *corefoundation.CGRect, int) corefoundation.CGRect
+	_fnCTFontGetCapHeight                                              func(unsafe.Pointer) float64
+	_fnCTFontGetDescent                                                func(unsafe.Pointer) float64
+	_fnCTFontGetGlyphCount                                             func(unsafe.Pointer) int
+	_fnCTFontGetGlyphWithName                                          func(unsafe.Pointer, unsafe.Pointer) uint16
+	_fnCTFontGetGlyphsForCharacters                                    func(unsafe.Pointer, *uint16, *uint16, int) bool
+	_fnCTFontGetLeading                                                func(unsafe.Pointer) float64
+	_fnCTFontGetLigatureCaretPositions                                 func(unsafe.Pointer, uint16, *float64, int) int
+	_fnCTFontGetMatrix                                                 func(unsafe.Pointer) corefoundation.CGAffineTransform
+	_fnCTFontGetOpticalBoundsForGlyphs                                 func(unsafe.Pointer, *uint16, *corefoundation.CGRect, int, uint) corefoundation.CGRect
+	_fnCTFontGetPlatformFont                                           func(unsafe.Pointer, unsafe.Pointer) uint
+	_fnCTFontGetSize                                                   func(unsafe.Pointer) float64
+	_fnCTFontGetSlantAngle                                             func(unsafe.Pointer) float64
+	_fnCTFontGetStringEncoding                                         func(unsafe.Pointer) uint
+	_fnCTFontGetSymbolicTraits                                         func(unsafe.Pointer) CTFontSymbolicTraits
+	_fnCTFontGetTypeID                                                 func() uint
+	_fnCTFontGetTypographicBoundsForAdaptiveImageProvider              func(unsafe.Pointer, CTAdaptiveImageProviding) corefoundation.CGRect
+	_fnCTFontGetUIFontType                                             func(unsafe.Pointer) CTFontUIFontType
+	_fnCTFontGetUnderlinePosition                                      func(unsafe.Pointer) float64
+	_fnCTFontGetUnderlineThickness                                     func(unsafe.Pointer) float64
+	_fnCTFontGetUnitsPerEm                                             func(unsafe.Pointer) uint
+	_fnCTFontGetVerticalTranslationsForGlyphs                          func(unsafe.Pointer, *uint16, *corefoundation.CGSize, int)
+	_fnCTFontGetXHeight                                                func(unsafe.Pointer) float64
+	_fnCTFontHasTable                                                  func(unsafe.Pointer, uint) bool
+	_fnCTFontManagerCompareFontFamilyNames                             func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) corefoundation.CFComparisonResult
+	_fnCTFontManagerCopyAvailableFontFamilyNames                       func() unsafe.Pointer
+	_fnCTFontManagerCopyAvailableFontURLs                              func() unsafe.Pointer
+	_fnCTFontManagerCopyAvailablePostScriptNames                       func() unsafe.Pointer
+	_fnCTFontManagerCreateFontDescriptorFromData                       func(unsafe.Pointer) unsafe.Pointer
+	_fnCTFontManagerCreateFontDescriptorsFromData                      func(unsafe.Pointer) unsafe.Pointer
+	_fnCTFontManagerCreateFontDescriptorsFromURL                       func(unsafe.Pointer) unsafe.Pointer
+	_fnCTFontManagerCreateFontRequestRunLoopSource                     func(int, objc.Block) unsafe.Pointer
+	_fnCTFontManagerEnableFontDescriptors                              func(unsafe.Pointer, bool)
+	_fnCTFontManagerGetAutoActivationSetting                           func(unsafe.Pointer) CTFontManagerAutoActivationSetting
+	_fnCTFontManagerGetScopeForURL                                     func(unsafe.Pointer) CTFontManagerScope
+	_fnCTFontManagerIsSupportedFont                                    func(unsafe.Pointer) bool
+	_fnCTFontManagerRegisterFontDescriptors                            func(unsafe.Pointer, CTFontManagerScope, bool, objc.Block)
+	_fnCTFontManagerRegisterFontURLs                                   func(unsafe.Pointer, CTFontManagerScope, bool, objc.Block)
+	_fnCTFontManagerRegisterFontsForURL                                func(unsafe.Pointer, CTFontManagerScope, unsafe.Pointer) bool
+	_fnCTFontManagerRegisterFontsForURLs                               func(unsafe.Pointer, CTFontManagerScope, unsafe.Pointer) bool
+	_fnCTFontManagerRegisterGraphicsFont                               func(unsafe.Pointer, unsafe.Pointer) bool
+	_fnCTFontManagerSetAutoActivationSetting                           func(unsafe.Pointer, CTFontManagerAutoActivationSetting)
+	_fnCTFontManagerUnregisterFontDescriptors                          func(unsafe.Pointer, CTFontManagerScope, objc.Block)
+	_fnCTFontManagerUnregisterFontURLs                                 func(unsafe.Pointer, CTFontManagerScope, objc.Block)
+	_fnCTFontManagerUnregisterFontsForURL                              func(unsafe.Pointer, CTFontManagerScope, unsafe.Pointer) bool
+	_fnCTFontManagerUnregisterFontsForURLs                             func(unsafe.Pointer, CTFontManagerScope, unsafe.Pointer) bool
+	_fnCTFontManagerUnregisterGraphicsFont                             func(unsafe.Pointer, unsafe.Pointer) bool
+	_fnCTFrameDraw                                                     func(unsafe.Pointer, unsafe.Pointer)
+	_fnCTFrameGetFrameAttributes                                       func(unsafe.Pointer) unsafe.Pointer
+	_fnCTFrameGetLineOrigins                                           func(unsafe.Pointer, corefoundation.CFRange, *corefoundation.CGPoint)
+	_fnCTFrameGetLines                                                 func(unsafe.Pointer) unsafe.Pointer
+	_fnCTFrameGetPath                                                  func(unsafe.Pointer) unsafe.Pointer
+	_fnCTFrameGetStringRange                                           func(unsafe.Pointer) corefoundation.CFRange
+	_fnCTFrameGetTypeID                                                func() uint
+	_fnCTFrameGetVisibleStringRange                                    func(unsafe.Pointer) corefoundation.CFRange
+	_fnCTFramesetterCreateFrame                                        func(unsafe.Pointer, corefoundation.CFRange, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCTFramesetterCreateWithAttributedString                         func(unsafe.Pointer) unsafe.Pointer
+	_fnCTFramesetterCreateWithTypesetter                               func(unsafe.Pointer) unsafe.Pointer
+	_fnCTFramesetterGetTypeID                                          func() uint
+	_fnCTFramesetterGetTypesetter                                      func(unsafe.Pointer) unsafe.Pointer
+	_fnCTFramesetterSuggestFrameSizeWithConstraints                    func(unsafe.Pointer, corefoundation.CFRange, unsafe.Pointer, corefoundation.CGSize, *corefoundation.CFRange) corefoundation.CGSize
+	_fnCTGetCoreTextVersion                                            func() uint32
+	_fnCTGlyphInfoCreateWithCharacterIdentifier                        func(uint16, CTCharacterCollection, unsafe.Pointer) unsafe.Pointer
+	_fnCTGlyphInfoCreateWithGlyph                                      func(uint16, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCTGlyphInfoCreateWithGlyphName                                  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCTGlyphInfoGetCharacterCollection                               func(unsafe.Pointer) CTCharacterCollection
+	_fnCTGlyphInfoGetCharacterIdentifier                               func(unsafe.Pointer) uint16
+	_fnCTGlyphInfoGetGlyph                                             func(unsafe.Pointer) uint16
+	_fnCTGlyphInfoGetGlyphName                                         func(unsafe.Pointer) unsafe.Pointer
+	_fnCTGlyphInfoGetTypeID                                            func() uint
+	_fnCTLineCreateJustifiedLine                                       func(unsafe.Pointer, float64, float64) unsafe.Pointer
+	_fnCTLineCreateTruncatedLine                                       func(unsafe.Pointer, float64, CTLineTruncationType, unsafe.Pointer) unsafe.Pointer
+	_fnCTLineCreateWithAttributedString                                func(unsafe.Pointer) unsafe.Pointer
+	_fnCTLineDraw                                                      func(unsafe.Pointer, unsafe.Pointer)
+	_fnCTLineEnumerateCaretOffsets                                     func(unsafe.Pointer, objc.Block)
+	_fnCTLineGetBoundsWithOptions                                      func(unsafe.Pointer, CTLineBoundsOptions) corefoundation.CGRect
+	_fnCTLineGetGlyphCount                                             func(unsafe.Pointer) int
+	_fnCTLineGetGlyphRuns                                              func(unsafe.Pointer) unsafe.Pointer
+	_fnCTLineGetImageBounds                                            func(unsafe.Pointer, unsafe.Pointer) corefoundation.CGRect
+	_fnCTLineGetOffsetForStringIndex                                   func(unsafe.Pointer, int, *float64) float64
+	_fnCTLineGetPenOffsetForFlush                                      func(unsafe.Pointer, float64, float64) float64
+	_fnCTLineGetStringIndexForPosition                                 func(unsafe.Pointer, corefoundation.CGPoint) int
+	_fnCTLineGetStringRange                                            func(unsafe.Pointer) corefoundation.CFRange
+	_fnCTLineGetTrailingWhitespaceWidth                                func(unsafe.Pointer) float64
+	_fnCTLineGetTypeID                                                 func() uint
+	_fnCTLineGetTypographicBounds                                      func(unsafe.Pointer, *float64, *float64, *float64) float64
+	_fnCTParagraphStyleCreate                                          func(*CTParagraphStyleSetting, uint) unsafe.Pointer
+	_fnCTParagraphStyleCreateCopy                                      func(unsafe.Pointer) unsafe.Pointer
+	_fnCTParagraphStyleGetTypeID                                       func() uint
+	_fnCTParagraphStyleGetValueForSpecifier                            func(unsafe.Pointer, CTParagraphStyleSpecifier, uint, unsafe.Pointer) bool
+	_fnCTRubyAnnotationCreate                                          func(CTRubyAlignment, CTRubyOverhang, float64, unsafe.Pointer) unsafe.Pointer
+	_fnCTRubyAnnotationCreateCopy                                      func(unsafe.Pointer) unsafe.Pointer
+	_fnCTRubyAnnotationCreateWithAttributes                            func(CTRubyAlignment, CTRubyOverhang, CTRubyPosition, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCTRubyAnnotationGetAlignment                                    func(unsafe.Pointer) CTRubyAlignment
+	_fnCTRubyAnnotationGetOverhang                                     func(unsafe.Pointer) CTRubyOverhang
+	_fnCTRubyAnnotationGetSizeFactor                                   func(unsafe.Pointer) float64
+	_fnCTRubyAnnotationGetTextForPosition                              func(unsafe.Pointer, CTRubyPosition) unsafe.Pointer
+	_fnCTRubyAnnotationGetTypeID                                       func() uint
+	_fnCTRunDelegateCreate                                             func(*CTRunDelegateCallbacks, unsafe.Pointer) unsafe.Pointer
+	_fnCTRunDelegateGetRefCon                                          func(unsafe.Pointer) unsafe.Pointer
+	_fnCTRunDelegateGetTypeID                                          func() uint
+	_fnCTRunDraw                                                       func(unsafe.Pointer, unsafe.Pointer, corefoundation.CFRange)
+	_fnCTRunGetAdvances                                                func(unsafe.Pointer, corefoundation.CFRange, *corefoundation.CGSize)
+	_fnCTRunGetAdvancesPtr                                             func(unsafe.Pointer) *corefoundation.CGSize
+	_fnCTRunGetAttributes                                              func(unsafe.Pointer) unsafe.Pointer
+	_fnCTRunGetBaseAdvancesAndOrigins                                  func(unsafe.Pointer, corefoundation.CFRange, *corefoundation.CGSize, *corefoundation.CGPoint)
+	_fnCTRunGetGlyphCount                                              func(unsafe.Pointer) int
+	_fnCTRunGetGlyphs                                                  func(unsafe.Pointer, corefoundation.CFRange, *uint16)
+	_fnCTRunGetGlyphsPtr                                               func(unsafe.Pointer) *uint16
+	_fnCTRunGetImageBounds                                             func(unsafe.Pointer, unsafe.Pointer, corefoundation.CFRange) corefoundation.CGRect
+	_fnCTRunGetPositions                                               func(unsafe.Pointer, corefoundation.CFRange, *corefoundation.CGPoint)
+	_fnCTRunGetPositionsPtr                                            func(unsafe.Pointer) *corefoundation.CGPoint
+	_fnCTRunGetStatus                                                  func(unsafe.Pointer) CTRunStatus
+	_fnCTRunGetStringIndices                                           func(unsafe.Pointer, corefoundation.CFRange, *int)
+	_fnCTRunGetStringIndicesPtr                                        func(unsafe.Pointer) *int
+	_fnCTRunGetStringRange                                             func(unsafe.Pointer) corefoundation.CFRange
+	_fnCTRunGetTextMatrix                                              func(unsafe.Pointer) corefoundation.CGAffineTransform
+	_fnCTRunGetTypeID                                                  func() uint
+	_fnCTRunGetTypographicBounds                                       func(unsafe.Pointer, corefoundation.CFRange, *float64, *float64, *float64) float64
+	_fnCTTextTabCreate                                                 func(CTTextAlignment, float64, unsafe.Pointer) unsafe.Pointer
+	_fnCTTextTabGetAlignment                                           func(unsafe.Pointer) CTTextAlignment
+	_fnCTTextTabGetLocation                                            func(unsafe.Pointer) float64
+	_fnCTTextTabGetOptions                                             func(unsafe.Pointer) unsafe.Pointer
+	_fnCTTextTabGetTypeID                                              func() uint
+	_fnCTTypesetterCreateLine                                          func(unsafe.Pointer, corefoundation.CFRange) unsafe.Pointer
+	_fnCTTypesetterCreateLineWithOffset                                func(unsafe.Pointer, corefoundation.CFRange, float64) unsafe.Pointer
+	_fnCTTypesetterCreateWithAttributedString                          func(unsafe.Pointer) unsafe.Pointer
+	_fnCTTypesetterCreateWithAttributedStringAndOptions                func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCTTypesetterGetTypeID                                           func() uint
+	_fnCTTypesetterSuggestClusterBreak                                 func(unsafe.Pointer, int, float64) int
+	_fnCTTypesetterSuggestClusterBreakWithOffset                       func(unsafe.Pointer, int, float64, float64) int
+	_fnCTTypesetterSuggestLineBreak                                    func(unsafe.Pointer, int, float64) int
+	_fnCTTypesetterSuggestLineBreakWithOffset                          func(unsafe.Pointer, int, float64, float64) int
 )
 
 func CTFontCollectionCopyExclusionDescriptors(collection unsafe.Pointer) unsafe.Pointer {
@@ -1067,4 +1067,3 @@ func CTTypesetterSuggestLineBreak(typesetter unsafe.Pointer, startIndex int, wid
 func CTTypesetterSuggestLineBreakWithOffset(typesetter unsafe.Pointer, startIndex int, width float64, offset float64) int {
 	return _fnCTTypesetterSuggestLineBreakWithOffset(typesetter, startIndex, width, offset)
 }
-

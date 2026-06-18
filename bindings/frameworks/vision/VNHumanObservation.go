@@ -15,7 +15,7 @@ type VNHumanObservation struct {
 }
 
 var (
-	_clsVNHumanObservation = _objcClass("VNHumanObservation")
+	_clsVNHumanObservation              = _objcClass("VNHumanObservation")
 	_vNHumanObservationSelUpperBodyOnly = objc.RegisterName("upperBodyOnly")
 )
 
@@ -33,4 +33,3 @@ func (o *VNHumanObservation) UpperBodyOnly() bool {
 	_ret := objc.Send[bool](o.Ptr(), _vNHumanObservationSelUpperBodyOnly)
 	return _ret
 }
-

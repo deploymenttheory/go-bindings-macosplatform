@@ -62,4 +62,3 @@ type TransformRotateOpable interface {
 }
 
 var _ TransformRotateOpable = (*TransformRotateOp)(nil)
-

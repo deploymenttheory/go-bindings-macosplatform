@@ -16,7 +16,9 @@ type MTRTestClusterClusterTestEnumsResponseParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRTestClusterClusterTestEnumsResponseParams].
-func (x *MTRTestClusterClusterTestEnumsResponseParams) Unwrap() *raw.MTRTestClusterClusterTestEnumsResponseParams { return x.inner }
+func (x *MTRTestClusterClusterTestEnumsResponseParams) Unwrap() *raw.MTRTestClusterClusterTestEnumsResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -54,7 +56,9 @@ func (x *MTRTestClusterClusterTestEnumsResponseParams) WithTimedInvokeTimeoutMs(
 	return x
 }
 
-func (x *MTRTestClusterClusterTestEnumsResponseParams) asMTRUnitTestingClusterTestEnumsResponseParams() *raw.MTRUnitTestingClusterTestEnumsResponseParams { return &x.inner.MTRUnitTestingClusterTestEnumsResponseParams }
+func (x *MTRTestClusterClusterTestEnumsResponseParams) asMTRUnitTestingClusterTestEnumsResponseParams() *raw.MTRUnitTestingClusterTestEnumsResponseParams {
+	return &x.inner.MTRUnitTestingClusterTestEnumsResponseParams
+}
 
 // MTRTestClusterClusterTestEnumsResponseParamsable is the interface implemented by [MTRTestClusterClusterTestEnumsResponseParams], for mocking and DI.
 type MTRTestClusterClusterTestEnumsResponseParamsable interface {
@@ -65,4 +69,3 @@ type MTRTestClusterClusterTestEnumsResponseParamsable interface {
 }
 
 var _ MTRTestClusterClusterTestEnumsResponseParamsable = (*MTRTestClusterClusterTestEnumsResponseParams)(nil)
-

@@ -55,9 +55,13 @@ func (x *ArrayMultiaryGradientKernel) EncodeToCommandBufferSourceArraysSourceGra
 	x.inner.EncodeToCommandBufferSourceArraysSourceGradientGradientStateDestinationArray(cmdBuf, sources, gradient, state, destination)
 }
 
-func (x *ArrayMultiaryGradientKernel) asArrayMultiaryGradientKernel() *raw.MPSNDArrayMultiaryGradientKernel { return x.inner }
+func (x *ArrayMultiaryGradientKernel) asArrayMultiaryGradientKernel() *raw.MPSNDArrayMultiaryGradientKernel {
+	return x.inner
+}
 
-func (x *ArrayMultiaryGradientKernel) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryBase }
+func (x *ArrayMultiaryGradientKernel) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase {
+	return &x.inner.MPSNDArrayMultiaryBase
+}
 
 // ArrayMultiaryGradientKernelable is the interface implemented by [ArrayMultiaryGradientKernel], for mocking and DI.
 type ArrayMultiaryGradientKernelable interface {
@@ -68,4 +72,3 @@ type ArrayMultiaryGradientKernelable interface {
 }
 
 var _ ArrayMultiaryGradientKernelable = (*ArrayMultiaryGradientKernel)(nil)
-

@@ -16,12 +16,12 @@ type MTRWaterHeaterManagementClusterBoostParams struct {
 }
 
 var (
-	_clsMTRWaterHeaterManagementClusterBoostParams = _objcClass("MTRWaterHeaterManagementClusterBoostParams")
-	_mTRWaterHeaterManagementClusterBoostParamsSelBoostInfo = objc.RegisterName("boostInfo")
-	_mTRWaterHeaterManagementClusterBoostParamsSelSetBoostInfo = objc.RegisterName("setBoostInfo:")
-	_mTRWaterHeaterManagementClusterBoostParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRWaterHeaterManagementClusterBoostParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRWaterHeaterManagementClusterBoostParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRWaterHeaterManagementClusterBoostParams                               = _objcClass("MTRWaterHeaterManagementClusterBoostParams")
+	_mTRWaterHeaterManagementClusterBoostParamsSelBoostInfo                      = objc.RegisterName("boostInfo")
+	_mTRWaterHeaterManagementClusterBoostParamsSelSetBoostInfo                   = objc.RegisterName("setBoostInfo:")
+	_mTRWaterHeaterManagementClusterBoostParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRWaterHeaterManagementClusterBoostParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRWaterHeaterManagementClusterBoostParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRWaterHeaterManagementClusterBoostParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -37,7 +37,9 @@ func MTRWaterHeaterManagementClusterBoostParamsFromID(id objc.ID) *MTRWaterHeate
 
 func (o *MTRWaterHeaterManagementClusterBoostParams) BoostInfo() *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRWaterHeaterManagementClusterBoostParamsSelBoostInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructFromID(_ret)
 }
 
@@ -48,7 +50,9 @@ func (o *MTRWaterHeaterManagementClusterBoostParams) SetBoostInfo(boostInfo *MTR
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRWaterHeaterManagementClusterBoostParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRWaterHeaterManagementClusterBoostParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,11 +63,12 @@ func (o *MTRWaterHeaterManagementClusterBoostParams) SetTimedInvokeTimeoutMs(tim
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRWaterHeaterManagementClusterBoostParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRWaterHeaterManagementClusterBoostParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRWaterHeaterManagementClusterBoostParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRWaterHeaterManagementClusterBoostParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

@@ -26,4 +26,3 @@ func MPSImageLaplacianPyramidSubtractFromID(id objc.ID) *MPSImageLaplacianPyrami
 	purego.Track(o)
 	return o
 }
-

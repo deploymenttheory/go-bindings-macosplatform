@@ -16,17 +16,17 @@ type AXDataSeriesDescriptor struct {
 }
 
 var (
-	_clsAXDataSeriesDescriptor = _objcClass("AXDataSeriesDescriptor")
-	_aXDataSeriesDescriptorSelInitWithNameIsContinuousDataPoints = objc.RegisterName("initWithName:isContinuous:dataPoints:")
+	_clsAXDataSeriesDescriptor                                             = _objcClass("AXDataSeriesDescriptor")
+	_aXDataSeriesDescriptorSelInitWithNameIsContinuousDataPoints           = objc.RegisterName("initWithName:isContinuous:dataPoints:")
 	_aXDataSeriesDescriptorSelInitWithAttributedNameIsContinuousDataPoints = objc.RegisterName("initWithAttributedName:isContinuous:dataPoints:")
-	_aXDataSeriesDescriptorSelName = objc.RegisterName("name")
-	_aXDataSeriesDescriptorSelSetName = objc.RegisterName("setName:")
-	_aXDataSeriesDescriptorSelAttributedName = objc.RegisterName("attributedName")
-	_aXDataSeriesDescriptorSelSetAttributedName = objc.RegisterName("setAttributedName:")
-	_aXDataSeriesDescriptorSelIsContinuous = objc.RegisterName("isContinuous")
-	_aXDataSeriesDescriptorSelSetIsContinuous = objc.RegisterName("setIsContinuous:")
-	_aXDataSeriesDescriptorSelDataPoints = objc.RegisterName("dataPoints")
-	_aXDataSeriesDescriptorSelSetDataPoints = objc.RegisterName("setDataPoints:")
+	_aXDataSeriesDescriptorSelName                                         = objc.RegisterName("name")
+	_aXDataSeriesDescriptorSelSetName                                      = objc.RegisterName("setName:")
+	_aXDataSeriesDescriptorSelAttributedName                               = objc.RegisterName("attributedName")
+	_aXDataSeriesDescriptorSelSetAttributedName                            = objc.RegisterName("setAttributedName:")
+	_aXDataSeriesDescriptorSelIsContinuous                                 = objc.RegisterName("isContinuous")
+	_aXDataSeriesDescriptorSelSetIsContinuous                              = objc.RegisterName("setIsContinuous:")
+	_aXDataSeriesDescriptorSelDataPoints                                   = objc.RegisterName("dataPoints")
+	_aXDataSeriesDescriptorSelSetDataPoints                                = objc.RegisterName("setDataPoints:")
 )
 
 func AXDataSeriesDescriptorFromID(id objc.ID) *AXDataSeriesDescriptor {
@@ -41,20 +41,26 @@ func AXDataSeriesDescriptorFromID(id objc.ID) *AXDataSeriesDescriptor {
 
 func (o *AXDataSeriesDescriptor) InitWithNameIsContinuousDataPoints(name *foundation.NSString, isContinuous bool, dataPoints *foundation.NSArray[*AXDataPoint]) *AXDataSeriesDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXDataSeriesDescriptorSelInitWithNameIsContinuousDataPoints, name.Ptr(), isContinuous, dataPoints.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXDataSeriesDescriptorFromID(_ret)
 }
 
 func (o *AXDataSeriesDescriptor) InitWithAttributedNameIsContinuousDataPoints(attributedName *foundation.NSAttributedString, isContinuous bool, dataPoints *foundation.NSArray[*AXDataPoint]) *AXDataSeriesDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXDataSeriesDescriptorSelInitWithAttributedNameIsContinuousDataPoints, attributedName.Ptr(), isContinuous, dataPoints.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXDataSeriesDescriptorFromID(_ret)
 }
 
 // The name or title of this data series.
 func (o *AXDataSeriesDescriptor) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXDataSeriesDescriptorSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -65,7 +71,9 @@ func (o *AXDataSeriesDescriptor) SetName(name *foundation.NSString) {
 // An attributed version of the name of this data series. When set, this will be used instead of `name`.
 func (o *AXDataSeriesDescriptor) AttributedName() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXDataSeriesDescriptorSelAttributedName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
@@ -86,11 +94,12 @@ func (o *AXDataSeriesDescriptor) SetIsContinuous(isContinuous bool) {
 // The data points that make up the series.
 func (o *AXDataSeriesDescriptor) DataPoints() *foundation.NSArray[*AXDataPoint] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXDataSeriesDescriptorSelDataPoints)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AXDataPoint](_ret)
 }
 
 func (o *AXDataSeriesDescriptor) SetDataPoints(dataPoints *foundation.NSArray[*AXDataPoint]) {
 	o.Ptr().Send(_aXDataSeriesDescriptorSelSetDataPoints, dataPoints.Ptr())
 }
-

@@ -17,12 +17,12 @@ type IKImageEditPanel struct {
 }
 
 var (
-	_clsIKImageEditPanel = _objcClass("IKImageEditPanel")
+	_clsIKImageEditPanel                     = _objcClass("IKImageEditPanel")
 	_iKImageEditPanelSelSharedImageEditPanel = objc.RegisterName("sharedImageEditPanel")
-	_iKImageEditPanelSelReloadData = objc.RegisterName("reloadData")
-	_iKImageEditPanelSelDataSource = objc.RegisterName("dataSource")
-	_iKImageEditPanelSelSetDataSource = objc.RegisterName("setDataSource:")
-	_iKImageEditPanelSelFilterArray = objc.RegisterName("filterArray")
+	_iKImageEditPanelSelReloadData           = objc.RegisterName("reloadData")
+	_iKImageEditPanelSelDataSource           = objc.RegisterName("dataSource")
+	_iKImageEditPanelSelSetDataSource        = objc.RegisterName("setDataSource:")
+	_iKImageEditPanelSelFilterArray          = objc.RegisterName("filterArray")
 )
 
 func IKImageEditPanelFromID(id objc.ID) *IKImageEditPanel {
@@ -61,4 +61,3 @@ func (o *IKImageEditPanel) FilterArray() *foundation.NSArray[objc.ID] {
 	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _iKImageEditPanelSelFilterArray)
 	return _ret
 }
-

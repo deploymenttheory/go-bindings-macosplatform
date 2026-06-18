@@ -43,4 +43,3 @@ type MusicEventable interface {
 }
 
 var _ MusicEventable = (*MusicEvent)(nil)
-

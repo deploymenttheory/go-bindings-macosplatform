@@ -28,4 +28,3 @@ type VNRequestProgressProviding interface {
 type VNRequestRevisionProviding interface {
 	RequestRevision() uint
 }
-

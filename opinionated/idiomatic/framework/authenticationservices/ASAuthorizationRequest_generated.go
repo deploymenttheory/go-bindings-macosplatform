@@ -49,4 +49,3 @@ type AuthorizationRequestable interface {
 }
 
 var _ AuthorizationRequestable = (*AuthorizationRequest)(nil)
-

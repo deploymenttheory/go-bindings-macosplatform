@@ -18,7 +18,9 @@ type DiscoverAllUserIdentitiesOperation struct {
 }
 
 // Unwrap returns the underlying [raw.CKDiscoverAllUserIdentitiesOperation].
-func (x *DiscoverAllUserIdentitiesOperation) Unwrap() *raw.CKDiscoverAllUserIdentitiesOperation { return x.inner }
+func (x *DiscoverAllUserIdentitiesOperation) Unwrap() *raw.CKDiscoverAllUserIdentitiesOperation {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -149,7 +151,9 @@ func (x *DiscoverAllUserIdentitiesOperation) SetDiscoverAllUserIdentitiesComplet
 	}
 }
 
-func (x *DiscoverAllUserIdentitiesOperation) asOperation() *raw.CKOperation { return &x.inner.CKOperation }
+func (x *DiscoverAllUserIdentitiesOperation) asOperation() *raw.CKOperation {
+	return &x.inner.CKOperation
+}
 
 // DiscoverAllUserIdentitiesOperationable is the interface implemented by [DiscoverAllUserIdentitiesOperation], for mocking and DI.
 type DiscoverAllUserIdentitiesOperationable interface {
@@ -171,4 +175,3 @@ type DiscoverAllUserIdentitiesOperationable interface {
 }
 
 var _ DiscoverAllUserIdentitiesOperationable = (*DiscoverAllUserIdentitiesOperation)(nil)
-

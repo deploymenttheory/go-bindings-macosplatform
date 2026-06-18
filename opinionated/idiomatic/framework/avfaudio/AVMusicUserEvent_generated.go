@@ -51,4 +51,3 @@ type MusicUserEventable interface {
 }
 
 var _ MusicUserEventable = (*MusicUserEvent)(nil)
-

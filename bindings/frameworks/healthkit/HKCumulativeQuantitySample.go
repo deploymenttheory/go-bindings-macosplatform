@@ -15,7 +15,7 @@ type HKCumulativeQuantitySample struct {
 }
 
 var (
-	_clsHKCumulativeQuantitySample = _objcClass("HKCumulativeQuantitySample")
+	_clsHKCumulativeQuantitySample            = _objcClass("HKCumulativeQuantitySample")
 	_hKCumulativeQuantitySampleSelSumQuantity = objc.RegisterName("sumQuantity")
 )
 
@@ -31,7 +31,8 @@ func HKCumulativeQuantitySampleFromID(id objc.ID) *HKCumulativeQuantitySample {
 
 func (o *HKCumulativeQuantitySample) SumQuantity() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKCumulativeQuantitySampleSelSumQuantity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
-

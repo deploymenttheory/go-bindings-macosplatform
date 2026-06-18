@@ -16,10 +16,10 @@ type EKVirtualConferenceRoomTypeDescriptor struct {
 }
 
 var (
-	_clsEKVirtualConferenceRoomTypeDescriptor = _objcClass("EKVirtualConferenceRoomTypeDescriptor")
+	_clsEKVirtualConferenceRoomTypeDescriptor                        = _objcClass("EKVirtualConferenceRoomTypeDescriptor")
 	_eKVirtualConferenceRoomTypeDescriptorSelInitWithTitleIdentifier = objc.RegisterName("initWithTitle:identifier:")
-	_eKVirtualConferenceRoomTypeDescriptorSelTitle = objc.RegisterName("title")
-	_eKVirtualConferenceRoomTypeDescriptorSelIdentifier = objc.RegisterName("identifier")
+	_eKVirtualConferenceRoomTypeDescriptorSelTitle                   = objc.RegisterName("title")
+	_eKVirtualConferenceRoomTypeDescriptorSelIdentifier              = objc.RegisterName("identifier")
 )
 
 func EKVirtualConferenceRoomTypeDescriptorFromID(id objc.ID) *EKVirtualConferenceRoomTypeDescriptor {
@@ -35,19 +35,24 @@ func EKVirtualConferenceRoomTypeDescriptorFromID(id objc.ID) *EKVirtualConferenc
 // @method     initWithTitle:identifier: @abstract   Initializes an instance of EKVirtualConferenceRoomTypeDescriptor. @param      title       A user-readable title describing this room type. This string will be displayed in UI. @param      identifier  An EKVirtualConferenceRoomTypeIdentifier that your extension can use to distinguish this room type from the other room types that your extension provides. This is chosen by your extension and is passed back to your extension if the user chooses to create a virtual conference of the associated room type.
 func (o *EKVirtualConferenceRoomTypeDescriptor) InitWithTitleIdentifier(title *foundation.NSString, identifier *foundation.NSString) *EKVirtualConferenceRoomTypeDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKVirtualConferenceRoomTypeDescriptorSelInitWithTitleIdentifier, title.Ptr(), identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EKVirtualConferenceRoomTypeDescriptorFromID(_ret)
 }
 
 func (o *EKVirtualConferenceRoomTypeDescriptor) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKVirtualConferenceRoomTypeDescriptorSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *EKVirtualConferenceRoomTypeDescriptor) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKVirtualConferenceRoomTypeDescriptorSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

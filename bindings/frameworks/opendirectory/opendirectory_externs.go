@@ -50,4 +50,3 @@ func ODTrustTypeUsingCredentials() uintptr {
 	ptr, _ := purego.Dlsym(_opendirectoryLib, "ODTrustTypeUsingCredentials")
 	return ptr
 }
-

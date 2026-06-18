@@ -16,12 +16,12 @@ type AVPlayerItemMetadataOutput struct {
 }
 
 var (
-	_clsAVPlayerItemMetadataOutput = _objcClass("AVPlayerItemMetadataOutput")
-	_aVPlayerItemMetadataOutputSelInitWithIdentifiers = objc.RegisterName("initWithIdentifiers:")
-	_aVPlayerItemMetadataOutputSelSetDelegateQueue = objc.RegisterName("setDelegate:queue:")
-	_aVPlayerItemMetadataOutputSelDelegate = objc.RegisterName("delegate")
-	_aVPlayerItemMetadataOutputSelDelegateQueue = objc.RegisterName("delegateQueue")
-	_aVPlayerItemMetadataOutputSelAdvanceIntervalForDelegateInvocation = objc.RegisterName("advanceIntervalForDelegateInvocation")
+	_clsAVPlayerItemMetadataOutput                                        = _objcClass("AVPlayerItemMetadataOutput")
+	_aVPlayerItemMetadataOutputSelInitWithIdentifiers                     = objc.RegisterName("initWithIdentifiers:")
+	_aVPlayerItemMetadataOutputSelSetDelegateQueue                        = objc.RegisterName("setDelegate:queue:")
+	_aVPlayerItemMetadataOutputSelDelegate                                = objc.RegisterName("delegate")
+	_aVPlayerItemMetadataOutputSelDelegateQueue                           = objc.RegisterName("delegateQueue")
+	_aVPlayerItemMetadataOutputSelAdvanceIntervalForDelegateInvocation    = objc.RegisterName("advanceIntervalForDelegateInvocation")
 	_aVPlayerItemMetadataOutputSelSetAdvanceIntervalForDelegateInvocation = objc.RegisterName("setAdvanceIntervalForDelegateInvocation:")
 )
 
@@ -38,7 +38,9 @@ func AVPlayerItemMetadataOutputFromID(id objc.ID) *AVPlayerItemMetadataOutput {
 // @method			initWithIdentifiers: @abstract		Creates an instance of AVPlayerItemMetadataOutput. @param			identifiers A array of metadata identifiers indicating the metadata items that the output should provide. @discussion See AVMetadataIdentifiers.h for publicly defined metadata identifiers. Pass nil to receive all of the timed metadata from all enabled AVPlayerItemTracks that carry timed metadata.
 func (o *AVPlayerItemMetadataOutput) InitWithIdentifiers(identifiers *foundation.NSArray[*foundation.NSString]) *AVPlayerItemMetadataOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemMetadataOutputSelInitWithIdentifiers, identifiers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerItemMetadataOutputFromID(_ret)
 }
 
@@ -56,7 +58,9 @@ func (o *AVPlayerItemMetadataOutput) Delegate() AVPlayerItemMetadataOutputPushDe
 // @property		delegateQueue @abstract		The dispatch queue on which messages are sent to the delegate. @discussion This property is not key-value observable.
 func (o *AVPlayerItemMetadataOutput) DelegateQueue() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemMetadataOutputSelDelegateQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
@@ -69,4 +73,3 @@ func (o *AVPlayerItemMetadataOutput) AdvanceIntervalForDelegateInvocation() floa
 func (o *AVPlayerItemMetadataOutput) SetAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) {
 	o.Ptr().Send(_aVPlayerItemMetadataOutputSelSetAdvanceIntervalForDelegateInvocation, advanceIntervalForDelegateInvocation)
 }
-

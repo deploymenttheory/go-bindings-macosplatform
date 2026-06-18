@@ -16,8 +16,8 @@ type MTLVertexBufferLayoutDescriptorArray struct {
 }
 
 var (
-	_clsMTLVertexBufferLayoutDescriptorArray = _objcClass("MTLVertexBufferLayoutDescriptorArray")
-	_mTLVertexBufferLayoutDescriptorArraySelObjectAtIndexedSubscript = objc.RegisterName("objectAtIndexedSubscript:")
+	_clsMTLVertexBufferLayoutDescriptorArray                            = _objcClass("MTLVertexBufferLayoutDescriptorArray")
+	_mTLVertexBufferLayoutDescriptorArraySelObjectAtIndexedSubscript    = objc.RegisterName("objectAtIndexedSubscript:")
 	_mTLVertexBufferLayoutDescriptorArraySelSetObjectAtIndexedSubscript = objc.RegisterName("setObject:atIndexedSubscript:")
 )
 
@@ -33,11 +33,12 @@ func MTLVertexBufferLayoutDescriptorArrayFromID(id objc.ID) *MTLVertexBufferLayo
 
 func (o *MTLVertexBufferLayoutDescriptorArray) ObjectAtIndexedSubscript(index uint) *MTLVertexBufferLayoutDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLVertexBufferLayoutDescriptorArraySelObjectAtIndexedSubscript, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLVertexBufferLayoutDescriptorFromID(_ret)
 }
 
 func (o *MTLVertexBufferLayoutDescriptorArray) SetObjectAtIndexedSubscript(bufferDesc *MTLVertexBufferLayoutDescriptor, index uint) {
 	o.Ptr().Send(_mTLVertexBufferLayoutDescriptorArraySelSetObjectAtIndexedSubscript, bufferDesc.Ptr(), index)
 }
-

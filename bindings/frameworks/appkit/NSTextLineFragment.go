@@ -19,18 +19,18 @@ type NSTextLineFragment struct {
 }
 
 var (
-	_clsNSTextLineFragment = _objcClass("NSTextLineFragment")
-	_nSTextLineFragmentSelInitWithAttributedStringRange = objc.RegisterName("initWithAttributedString:range:")
-	_nSTextLineFragmentSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSTextLineFragmentSelInitWithStringAttributesRange = objc.RegisterName("initWithString:attributes:range:")
-	_nSTextLineFragmentSelDrawAtPointInContext = objc.RegisterName("drawAtPoint:inContext:")
-	_nSTextLineFragmentSelLocationForCharacterAtIndex = objc.RegisterName("locationForCharacterAtIndex:")
-	_nSTextLineFragmentSelCharacterIndexForPoint = objc.RegisterName("characterIndexForPoint:")
+	_clsNSTextLineFragment                                       = _objcClass("NSTextLineFragment")
+	_nSTextLineFragmentSelInitWithAttributedStringRange          = objc.RegisterName("initWithAttributedString:range:")
+	_nSTextLineFragmentSelInitWithCoder                          = objc.RegisterName("initWithCoder:")
+	_nSTextLineFragmentSelInitWithStringAttributesRange          = objc.RegisterName("initWithString:attributes:range:")
+	_nSTextLineFragmentSelDrawAtPointInContext                   = objc.RegisterName("drawAtPoint:inContext:")
+	_nSTextLineFragmentSelLocationForCharacterAtIndex            = objc.RegisterName("locationForCharacterAtIndex:")
+	_nSTextLineFragmentSelCharacterIndexForPoint                 = objc.RegisterName("characterIndexForPoint:")
 	_nSTextLineFragmentSelFractionOfDistanceThroughGlyphForPoint = objc.RegisterName("fractionOfDistanceThroughGlyphForPoint:")
-	_nSTextLineFragmentSelAttributedString = objc.RegisterName("attributedString")
-	_nSTextLineFragmentSelCharacterRange = objc.RegisterName("characterRange")
-	_nSTextLineFragmentSelTypographicBounds = objc.RegisterName("typographicBounds")
-	_nSTextLineFragmentSelGlyphOrigin = objc.RegisterName("glyphOrigin")
+	_nSTextLineFragmentSelAttributedString                       = objc.RegisterName("attributedString")
+	_nSTextLineFragmentSelCharacterRange                         = objc.RegisterName("characterRange")
+	_nSTextLineFragmentSelTypographicBounds                      = objc.RegisterName("typographicBounds")
+	_nSTextLineFragmentSelGlyphOrigin                            = objc.RegisterName("glyphOrigin")
 )
 
 func NSTextLineFragmentFromID(id objc.ID) *NSTextLineFragment {
@@ -45,19 +45,25 @@ func NSTextLineFragmentFromID(id objc.ID) *NSTextLineFragment {
 
 func (o *NSTextLineFragment) InitWithAttributedStringRange(attributedString *foundation.NSAttributedString, range_ foundation.NSRange) *NSTextLineFragment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLineFragmentSelInitWithAttributedStringRange, attributedString.Ptr(), range_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextLineFragmentFromID(_ret)
 }
 
 func (o *NSTextLineFragment) InitWithCoder(aDecoder *foundation.NSCoder) *NSTextLineFragment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLineFragmentSelInitWithCoder, aDecoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextLineFragmentFromID(_ret)
 }
 
 func (o *NSTextLineFragment) InitWithStringAttributesRange(string_ *foundation.NSString, attributes *foundation.NSDictionary[*foundation.NSString, objc.ID], range_ foundation.NSRange) *NSTextLineFragment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLineFragmentSelInitWithStringAttributesRange, string_.Ptr(), attributes, range_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextLineFragmentFromID(_ret)
 }
 
@@ -82,7 +88,9 @@ func (o *NSTextLineFragment) FractionOfDistanceThroughGlyphForPoint(point corefo
 
 func (o *NSTextLineFragment) AttributedString() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLineFragmentSelAttributedString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
@@ -100,4 +108,3 @@ func (o *NSTextLineFragment) GlyphOrigin() corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSTextLineFragmentSelGlyphOrigin)
 	return _ret
 }
-

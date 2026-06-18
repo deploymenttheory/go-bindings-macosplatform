@@ -85,4 +85,3 @@ type AudioFileAnalyzerable interface {
 }
 
 var _ AudioFileAnalyzerable = (*AudioFileAnalyzer)(nil)
-

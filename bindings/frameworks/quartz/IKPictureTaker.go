@@ -18,17 +18,17 @@ type IKPictureTaker struct {
 }
 
 var (
-	_clsIKPictureTaker = _objcClass("IKPictureTaker")
-	_iKPictureTakerSelPictureTaker = objc.RegisterName("pictureTaker")
-	_iKPictureTakerSelRunModal = objc.RegisterName("runModal")
-	_iKPictureTakerSelBeginPictureTakerWithDelegateDidEndSelectorContextInfo = objc.RegisterName("beginPictureTakerWithDelegate:didEndSelector:contextInfo:")
+	_clsIKPictureTaker                                                                     = _objcClass("IKPictureTaker")
+	_iKPictureTakerSelPictureTaker                                                         = objc.RegisterName("pictureTaker")
+	_iKPictureTakerSelRunModal                                                             = objc.RegisterName("runModal")
+	_iKPictureTakerSelBeginPictureTakerWithDelegateDidEndSelectorContextInfo               = objc.RegisterName("beginPictureTakerWithDelegate:didEndSelector:contextInfo:")
 	_iKPictureTakerSelBeginPictureTakerSheetForWindowWithDelegateDidEndSelectorContextInfo = objc.RegisterName("beginPictureTakerSheetForWindow:withDelegate:didEndSelector:contextInfo:")
-	_iKPictureTakerSelPopUpRecentsMenuForViewWithDelegateDidEndSelectorContextInfo = objc.RegisterName("popUpRecentsMenuForView:withDelegate:didEndSelector:contextInfo:")
-	_iKPictureTakerSelSetInputImage = objc.RegisterName("setInputImage:")
-	_iKPictureTakerSelInputImage = objc.RegisterName("inputImage")
-	_iKPictureTakerSelOutputImage = objc.RegisterName("outputImage")
-	_iKPictureTakerSelSetMirroring = objc.RegisterName("setMirroring:")
-	_iKPictureTakerSelMirroring = objc.RegisterName("mirroring")
+	_iKPictureTakerSelPopUpRecentsMenuForViewWithDelegateDidEndSelectorContextInfo         = objc.RegisterName("popUpRecentsMenuForView:withDelegate:didEndSelector:contextInfo:")
+	_iKPictureTakerSelSetInputImage                                                        = objc.RegisterName("setInputImage:")
+	_iKPictureTakerSelInputImage                                                           = objc.RegisterName("inputImage")
+	_iKPictureTakerSelOutputImage                                                          = objc.RegisterName("outputImage")
+	_iKPictureTakerSelSetMirroring                                                         = objc.RegisterName("setMirroring:")
+	_iKPictureTakerSelMirroring                                                            = objc.RegisterName("mirroring")
 )
 
 func IKPictureTakerFromID(id objc.ID) *IKPictureTaker {
@@ -76,14 +76,18 @@ func (o *IKPictureTaker) SetInputImage(image *appkit.NSImage) {
 // @method inputImage @abstract return the original PictureTaker's input-image. @discussion The input image is never modified by the PictureTaker.
 func (o *IKPictureTaker) InputImage() *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKPictureTakerSelInputImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSImageFromID(_ret)
 }
 
 // @method outputImage @abstract return the edited image.
 func (o *IKPictureTaker) OutputImage() *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKPictureTakerSelOutputImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSImageFromID(_ret)
 }
 
@@ -97,4 +101,3 @@ func (o *IKPictureTaker) Mirroring() bool {
 	_ret := objc.Send[bool](o.Ptr(), _iKPictureTakerSelMirroring)
 	return _ret
 }
-

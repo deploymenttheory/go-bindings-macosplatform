@@ -18,7 +18,7 @@ type NETransparentProxyManager struct {
 }
 
 var (
-	_clsNETransparentProxyManager = _objcClass("NETransparentProxyManager")
+	_clsNETransparentProxyManager                                            = _objcClass("NETransparentProxyManager")
 	_nETransparentProxyManagerSelLoadAllFromPreferencesWithCompletionHandler = objc.RegisterName("loadAllFromPreferencesWithCompletionHandler:")
 )
 
@@ -46,4 +46,3 @@ func NETransparentProxyManagerLoadAllFromPreferencesWithCompletionHandler(comple
 	}
 	objc.ID(_clsNETransparentProxyManager).Send(_nETransparentProxyManagerSelLoadAllFromPreferencesWithCompletionHandler, __block_completionHandler)
 }
-

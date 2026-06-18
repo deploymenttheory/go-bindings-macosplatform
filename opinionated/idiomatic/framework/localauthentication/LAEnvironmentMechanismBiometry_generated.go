@@ -61,7 +61,9 @@ func (x *EnvironmentMechanismBiometry) BuiltInSensorInaccessible() bool {
 	return x.inner.BuiltInSensorInaccessible()
 }
 
-func (x *EnvironmentMechanismBiometry) asEnvironmentMechanism() *raw.LAEnvironmentMechanism { return &x.inner.LAEnvironmentMechanism }
+func (x *EnvironmentMechanismBiometry) asEnvironmentMechanism() *raw.LAEnvironmentMechanism {
+	return &x.inner.LAEnvironmentMechanism
+}
 
 // EnvironmentMechanismBiometryable is the interface implemented by [EnvironmentMechanismBiometry], for mocking and DI.
 type EnvironmentMechanismBiometryable interface {
@@ -74,4 +76,3 @@ type EnvironmentMechanismBiometryable interface {
 }
 
 var _ EnvironmentMechanismBiometryable = (*EnvironmentMechanismBiometry)(nil)
-

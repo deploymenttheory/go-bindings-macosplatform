@@ -18,13 +18,13 @@ type SCScreenshotOutput struct {
 }
 
 var (
-	_clsSCScreenshotOutput = _objcClass("SCScreenshotOutput")
-	_sCScreenshotOutputSelSdrImage = objc.RegisterName("sdrImage")
+	_clsSCScreenshotOutput            = _objcClass("SCScreenshotOutput")
+	_sCScreenshotOutputSelSdrImage    = objc.RegisterName("sdrImage")
 	_sCScreenshotOutputSelSetSdrImage = objc.RegisterName("setSdrImage:")
-	_sCScreenshotOutputSelHdrImage = objc.RegisterName("hdrImage")
+	_sCScreenshotOutputSelHdrImage    = objc.RegisterName("hdrImage")
 	_sCScreenshotOutputSelSetHdrImage = objc.RegisterName("setHdrImage:")
-	_sCScreenshotOutputSelFileURL = objc.RegisterName("fileURL")
-	_sCScreenshotOutputSelSetFileURL = objc.RegisterName("setFileURL:")
+	_sCScreenshotOutputSelFileURL     = objc.RegisterName("fileURL")
+	_sCScreenshotOutputSelSetFileURL  = objc.RegisterName("setFileURL:")
 )
 
 func SCScreenshotOutputFromID(id objc.ID) *SCScreenshotOutput {
@@ -60,11 +60,12 @@ func (o *SCScreenshotOutput) SetHdrImage(hdrImage unsafe.Pointer) {
 // @abstract SCScreenshotOutput property to specify the location where the image was saved.  If a fileURL in the screenshot configuration was not specified, then the fileURL will be nil
 func (o *SCScreenshotOutput) FileURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCScreenshotOutputSelFileURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *SCScreenshotOutput) SetFileURL(fileURL *foundation.NSURL) {
 	o.Ptr().Send(_sCScreenshotOutputSelSetFileURL, fileURL.Ptr())
 }
-

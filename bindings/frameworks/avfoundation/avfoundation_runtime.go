@@ -14,8 +14,8 @@ import (
 
 var (
 	_avfoundationLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce        sync.Once
+	_failedSymbols   = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -51,13 +51,27 @@ func _loadLibrary() {
 	_register("AVCaptionDimensionMake", func() { purego.RegisterLibFunc(&_fnAVCaptionDimensionMake, _avfoundationLib, "AVCaptionDimensionMake") })
 	_register("AVCaptionPointMake", func() { purego.RegisterLibFunc(&_fnAVCaptionPointMake, _avfoundationLib, "AVCaptionPointMake") })
 	_register("AVCaptionSizeMake", func() { purego.RegisterLibFunc(&_fnAVCaptionSizeMake, _avfoundationLib, "AVCaptionSizeMake") })
-	_register("AVCaptureReactionSystemImageNameForType", func() { purego.RegisterLibFunc(&_fnAVCaptureReactionSystemImageNameForType, _avfoundationLib, "AVCaptureReactionSystemImageNameForType") })
-	_register("AVCaptureTimecodeAdvancedByFrames", func() { purego.RegisterLibFunc(&_fnAVCaptureTimecodeAdvancedByFrames, _avfoundationLib, "AVCaptureTimecodeAdvancedByFrames") })
-	_register("AVCaptureTimecodeCreateMetadataSampleBufferAssociatedWithPresentationTimeStamp", func() { purego.RegisterLibFunc(&_fnAVCaptureTimecodeCreateMetadataSampleBufferAssociatedWithPresentationTimeStamp, _avfoundationLib, "AVCaptureTimecodeCreateMetadataSampleBufferAssociatedWithPresentationTimeStamp") })
-	_register("AVCaptureTimecodeCreateMetadataSampleBufferForDuration", func() { purego.RegisterLibFunc(&_fnAVCaptureTimecodeCreateMetadataSampleBufferForDuration, _avfoundationLib, "AVCaptureTimecodeCreateMetadataSampleBufferForDuration") })
-	_register("AVMakeRectWithAspectRatioInsideRect", func() { purego.RegisterLibFunc(&_fnAVMakeRectWithAspectRatioInsideRect, _avfoundationLib, "AVMakeRectWithAspectRatioInsideRect") })
-	_register("AVSampleBufferAttachContentKey", func() { purego.RegisterLibFunc(&_fnAVSampleBufferAttachContentKey, _avfoundationLib, "AVSampleBufferAttachContentKey") })
-	_register("CMTagCollectionCreateWithVideoOutputPreset", func() { purego.RegisterLibFunc(&_fnCMTagCollectionCreateWithVideoOutputPreset, _avfoundationLib, "CMTagCollectionCreateWithVideoOutputPreset") })
+	_register("AVCaptureReactionSystemImageNameForType", func() {
+		purego.RegisterLibFunc(&_fnAVCaptureReactionSystemImageNameForType, _avfoundationLib, "AVCaptureReactionSystemImageNameForType")
+	})
+	_register("AVCaptureTimecodeAdvancedByFrames", func() {
+		purego.RegisterLibFunc(&_fnAVCaptureTimecodeAdvancedByFrames, _avfoundationLib, "AVCaptureTimecodeAdvancedByFrames")
+	})
+	_register("AVCaptureTimecodeCreateMetadataSampleBufferAssociatedWithPresentationTimeStamp", func() {
+		purego.RegisterLibFunc(&_fnAVCaptureTimecodeCreateMetadataSampleBufferAssociatedWithPresentationTimeStamp, _avfoundationLib, "AVCaptureTimecodeCreateMetadataSampleBufferAssociatedWithPresentationTimeStamp")
+	})
+	_register("AVCaptureTimecodeCreateMetadataSampleBufferForDuration", func() {
+		purego.RegisterLibFunc(&_fnAVCaptureTimecodeCreateMetadataSampleBufferForDuration, _avfoundationLib, "AVCaptureTimecodeCreateMetadataSampleBufferForDuration")
+	})
+	_register("AVMakeRectWithAspectRatioInsideRect", func() {
+		purego.RegisterLibFunc(&_fnAVMakeRectWithAspectRatioInsideRect, _avfoundationLib, "AVMakeRectWithAspectRatioInsideRect")
+	})
+	_register("AVSampleBufferAttachContentKey", func() {
+		purego.RegisterLibFunc(&_fnAVSampleBufferAttachContentKey, _avfoundationLib, "AVSampleBufferAttachContentKey")
+	})
+	_register("CMTagCollectionCreateWithVideoOutputPreset", func() {
+		purego.RegisterLibFunc(&_fnCMTagCollectionCreateWithVideoOutputPreset, _avfoundationLib, "CMTagCollectionCreateWithVideoOutputPreset")
+	})
 }
 
 func init() {

@@ -70,4 +70,3 @@ type YOLOLossLayerable interface {
 }
 
 var _ YOLOLossLayerable = (*YOLOLossLayer)(nil)
-

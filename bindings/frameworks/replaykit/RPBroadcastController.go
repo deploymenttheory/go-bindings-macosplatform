@@ -18,16 +18,16 @@ type RPBroadcastController struct {
 }
 
 var (
-	_clsRPBroadcastController = _objcClass("RPBroadcastController")
-	_rPBroadcastControllerSelPauseBroadcast = objc.RegisterName("pauseBroadcast")
-	_rPBroadcastControllerSelResumeBroadcast = objc.RegisterName("resumeBroadcast")
+	_clsRPBroadcastController                           = _objcClass("RPBroadcastController")
+	_rPBroadcastControllerSelPauseBroadcast             = objc.RegisterName("pauseBroadcast")
+	_rPBroadcastControllerSelResumeBroadcast            = objc.RegisterName("resumeBroadcast")
 	_rPBroadcastControllerSelFinishBroadcastWithHandler = objc.RegisterName("finishBroadcastWithHandler:")
-	_rPBroadcastControllerSelIsBroadcasting = objc.RegisterName("isBroadcasting")
-	_rPBroadcastControllerSelIsPaused = objc.RegisterName("isPaused")
-	_rPBroadcastControllerSelBroadcastURL = objc.RegisterName("broadcastURL")
-	_rPBroadcastControllerSelServiceInfo = objc.RegisterName("serviceInfo")
-	_rPBroadcastControllerSelDelegate = objc.RegisterName("delegate")
-	_rPBroadcastControllerSelSetDelegate = objc.RegisterName("setDelegate:")
+	_rPBroadcastControllerSelIsBroadcasting             = objc.RegisterName("isBroadcasting")
+	_rPBroadcastControllerSelIsPaused                   = objc.RegisterName("isPaused")
+	_rPBroadcastControllerSelBroadcastURL               = objc.RegisterName("broadcastURL")
+	_rPBroadcastControllerSelServiceInfo                = objc.RegisterName("serviceInfo")
+	_rPBroadcastControllerSelDelegate                   = objc.RegisterName("delegate")
+	_rPBroadcastControllerSelSetDelegate                = objc.RegisterName("setDelegate:")
 )
 
 func RPBroadcastControllerFromID(id objc.ID) *RPBroadcastController {
@@ -71,7 +71,9 @@ func (o *RPBroadcastController) IsPaused() bool {
 
 func (o *RPBroadcastController) BroadcastURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _rPBroadcastControllerSelBroadcastURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -88,4 +90,3 @@ func (o *RPBroadcastController) Delegate() RPBroadcastControllerDelegate {
 func (o *RPBroadcastController) SetDelegate(delegate RPBroadcastControllerDelegate) {
 	o.Ptr().Send(_rPBroadcastControllerSelSetDelegate, delegate)
 }
-

@@ -14,39 +14,39 @@ type TW_ARRAY struct {
 }
 
 type TW_AUDIOINFO struct {
-	Name [256]uint8
+	Name     [256]uint8
 	Reserved uint
 }
 
 type TW_CALLBACK struct {
 	CallBackProc string
-	RefCon string
-	Message int16
+	RefCon       string
+	Message      int16
 }
 
 type TW_CAPABILITY struct {
-	Cap uint16
-	ConType uint16
+	Cap        uint16
+	ConType    uint16
 	HContainer string
 }
 
 type TW_CAPEXT struct {
-	Cap uint16
+	Cap        uint16
 	Properties uint16
 }
 
 type TW_CIECOLOR struct {
-	ColorSpace uint16
-	LowEndian int16
+	ColorSpace      uint16
+	LowEndian       int16
 	DeviceDependent int16
-	VersionNumber int
-	StageABC TW_TRANSFORMSTAGE
-	StageLMN TW_TRANSFORMSTAGE
-	WhitePoint TW_CIEPOINT
-	BlackPoint TW_CIEPOINT
-	WhitePaper TW_CIEPOINT
-	BlackInk TW_CIEPOINT
-	Samples [1]TW_FIX32
+	VersionNumber   int
+	StageABC        TW_TRANSFORMSTAGE
+	StageLMN        TW_TRANSFORMSTAGE
+	WhitePoint      TW_CIEPOINT
+	BlackPoint      TW_CIEPOINT
+	WhitePaper      TW_CIEPOINT
+	BlackInk        TW_CIEPOINT
+	Samples         [1]TW_FIX32
 }
 
 type TW_CIEPOINT struct {
@@ -57,85 +57,85 @@ type TW_CIEPOINT struct {
 
 type TW_CUSTOMDSDATA struct {
 	InfoLength uint
-	HData string
+	HData      string
 }
 
 type TW_DECODEFUNCTION struct {
-	StartIn TW_FIX32
-	BreakIn TW_FIX32
-	EndIn TW_FIX32
-	StartOut TW_FIX32
-	BreakOut TW_FIX32
-	EndOut TW_FIX32
-	Gamma TW_FIX32
+	StartIn     TW_FIX32
+	BreakIn     TW_FIX32
+	EndIn       TW_FIX32
+	StartOut    TW_FIX32
+	BreakOut    TW_FIX32
+	EndOut      TW_FIX32
+	Gamma       TW_FIX32
 	SampleCount TW_FIX32
 }
 
 type TW_DEVICEEVENT struct {
-	Event uint
-	DeviceName [256]uint8
-	BatteryMinutes uint
-	BatteryPercentage int16
-	PowerSupply int
-	XResolution TW_FIX32
-	YResolution TW_FIX32
-	FlashUsed2 uint
-	AutomaticCapture uint
+	Event                  uint
+	DeviceName             [256]uint8
+	BatteryMinutes         uint
+	BatteryPercentage      int16
+	PowerSupply            int
+	XResolution            TW_FIX32
+	YResolution            TW_FIX32
+	FlashUsed2             uint
+	AutomaticCapture       uint
 	TimeBeforeFirstCapture uint
-	TimeBetweenCaptures uint
+	TimeBetweenCaptures    uint
 }
 
 type TW_ELEMENT8 struct {
-	Index uint8
+	Index    uint8
 	Channel1 uint8
 	Channel2 uint8
 	Channel3 uint8
 }
 
 type TW_ENUMERATION struct {
-	ItemType uint16
-	NumItems uint
+	ItemType     uint16
+	NumItems     uint
 	CurrentIndex uint
 	DefaultIndex uint
-	ItemList [1]uint8
+	ItemList     [1]uint8
 }
 
 type TW_EVENT struct {
-	PEvent string
+	PEvent    string
 	TWMessage uint16
 }
 
 type TW_EXTIMAGEINFO struct {
 	NumInfos uint
-	Info [1]TW_INFO
+	Info     [1]TW_INFO
 }
 
 type TW_FILESYSTEM struct {
-	InputName [256]uint8
-	OutputName [256]uint8
-	Context string
-	Recursive int
-	FileType int
-	Size uint
-	CreateTimeDate [34]uint8
+	InputName        [256]uint8
+	OutputName       [256]uint8
+	Context          string
+	Recursive        int
+	FileType         int
+	Size             uint
+	CreateTimeDate   [34]uint8
 	ModifiedTimeDate [34]uint8
-	FreeSpace uint
-	NewImageSize int
-	NumberOfFiles uint
+	FreeSpace        uint
+	NewImageSize     int
+	NumberOfFiles    uint
 	NumberOfSnippets uint
-	DeviceGroupMask uint
-	Reserved [508]int8
+	DeviceGroupMask  uint
+	Reserved         [508]int8
 }
 
 type TW_FIX32 struct {
 	Whole int16
-	Frac uint16
+	Frac  uint16
 }
 
 type TW_FRAME struct {
-	Left TW_FIX32
-	Top TW_FIX32
-	Right TW_FIX32
+	Left   TW_FIX32
+	Top    TW_FIX32
+	Right  TW_FIX32
 	Bottom TW_FIX32
 }
 
@@ -144,103 +144,103 @@ type TW_GRAYRESPONSE struct {
 }
 
 type TW_IDENTITY struct {
-	Id string
-	Version TW_VERSION
-	ProtocolMajor uint16
-	ProtocolMinor uint16
+	Id              string
+	Version         TW_VERSION
+	ProtocolMajor   uint16
+	ProtocolMinor   uint16
 	SupportedGroups uint
-	Manufacturer [34]uint8
-	ProductFamily [34]uint8
-	ProductName [34]uint8
+	Manufacturer    [34]uint8
+	ProductFamily   [34]uint8
+	ProductName     [34]uint8
 }
 
 type TW_IMAGEINFO struct {
-	XResolution TW_FIX32
-	YResolution TW_FIX32
-	ImageWidth int
-	ImageLength int
+	XResolution     TW_FIX32
+	YResolution     TW_FIX32
+	ImageWidth      int
+	ImageLength     int
 	SamplesPerPixel int16
-	BitsPerSample [8]int16
-	BitsPerPixel int16
-	Planar uint16
-	PixelType int16
-	Compression uint16
+	BitsPerSample   [8]int16
+	BitsPerPixel    int16
+	Planar          uint16
+	PixelType       int16
+	Compression     uint16
 }
 
 type TW_IMAGELAYOUT struct {
-	Frame TW_FRAME
+	Frame          TW_FRAME
 	DocumentNumber uint
-	PageNumber uint
-	FrameNumber uint
+	PageNumber     uint
+	FrameNumber    uint
 }
 
 type TW_IMAGEMEMXFER struct {
-	Compression uint16
-	BytesPerRow uint
-	Columns uint
-	Rows uint
-	XOffset uint
-	YOffset uint
+	Compression  uint16
+	BytesPerRow  uint
+	Columns      uint
+	Rows         uint
+	XOffset      uint
+	YOffset      uint
 	BytesWritten uint
-	Memory TW_MEMORY
+	Memory       TW_MEMORY
 }
 
 type TW_INFO struct {
-	InfoID uint16
+	InfoID   uint16
 	ItemType uint16
 	NumItems uint16
 	CondCode uint16
-	Item uint
+	Item     uint
 }
 
 type TW_JPEGCOMPRESSION struct {
-	ColorSpace uint16
-	SubSampling uint
-	NumComponents uint16
+	ColorSpace       uint16
+	SubSampling      uint
+	NumComponents    uint16
 	RestartFrequency uint16
-	QuantMap [4]uint16
-	QuantTable [4]TW_MEMORY
-	HuffmanMap [4]uint16
-	HuffmanDC [2]TW_MEMORY
-	HuffmanAC [2]TW_MEMORY
+	QuantMap         [4]uint16
+	QuantTable       [4]TW_MEMORY
+	HuffmanMap       [4]uint16
+	HuffmanDC        [2]TW_MEMORY
+	HuffmanAC        [2]TW_MEMORY
 }
 
 type TW_MEMORY struct {
-	Flags uint
+	Flags  uint
 	Length uint
 	TheMem string
 }
 
 type TW_ONEVALUE struct {
 	ItemType uint16
-	Item uint
+	Item     uint
 }
 
 type TW_PALETTE8 struct {
-	NumColors uint16
+	NumColors   uint16
 	PaletteType uint16
-	Colors [256]TW_ELEMENT8
+	Colors      [256]TW_ELEMENT8
 }
 
 type TW_PASSTHRU struct {
-	PCommand string
-	CommandBytes uint
-	Direction int
-	PData string
-	DataBytes uint
+	PCommand        string
+	CommandBytes    uint
+	Direction       int
+	PData           string
+	DataBytes       uint
 	DataBytesXfered uint
 }
 
 type TW_PENDINGXFERS struct {
-	Count uint16
+	Count         uint16
 	TW_JOBCONTROL unsafe.Pointer
 }
 
 type TW_RANGE struct {
-	ItemType uint16
-	MinValue uint
-	MaxValue uint
-	StepSize uint
+	ItemType     uint16
+	MinValue     uint
+	MaxValue     uint
+	StepSize     uint
 	DefaultValue uint
 	CurrentValue uint
 }
@@ -251,62 +251,62 @@ type TW_RGBRESPONSE struct {
 
 type TW_SETUPAUDIOFILEXFER struct {
 	FileName [256]uint8
-	Format uint16
-	VRefNum int16
+	Format   uint16
+	VRefNum  int16
 }
 
 type TW_SETUPFILEXFER struct {
 	FileName [256]uint8
-	Format uint16
-	VRefNum int16
+	Format   uint16
+	VRefNum  int16
 }
 
 type TW_SETUPFILEXFER2 struct {
-	FileName string
+	FileName     string
 	FileNameType uint16
-	Format uint16
-	VRefNum int16
-	ParID uint
+	Format       uint16
+	VRefNum      int16
+	ParID        uint
 }
 
 type TW_SETUPMEMXFER struct {
 	MinBufSize uint
 	MaxBufSize uint
-	Preferred uint
+	Preferred  uint
 }
 
 type TW_STATUS struct {
 	ConditionCode uint16
-	Reserved uint16
+	Reserved      uint16
 }
 
 type TW_TRANSFORMSTAGE struct {
 	Decode [3]TW_DECODEFUNCTION
-	Mix [3][3]TW_FIX32
+	Mix    [3][3]TW_FIX32
 }
 
 type TW_TWUNKDSENTRYPARAMS struct {
-	DestFlag int8
-	Dest TW_IDENTITY
-	DataGroup int
+	DestFlag    int8
+	Dest        TW_IDENTITY
+	DataGroup   int
 	DataArgType int16
-	Message int16
-	PDataSize int
+	Message     int16
+	PDataSize   int
 }
 
 type TW_TWUNKDSENTRYRETURN struct {
-	ReturnCode uint16
+	ReturnCode    uint16
 	ConditionCode uint16
-	PDataSize int
+	PDataSize     int
 }
 
 type TW_TWUNKIDENTITY struct {
 	Identity TW_IDENTITY
-	DsPath [256]uint8
+	DsPath   [256]uint8
 }
 
 type TW_USERINTERFACE struct {
-	ShowUI uint16
+	ShowUI  uint16
 	ModalUI uint16
 	HParent string
 }
@@ -315,8 +315,8 @@ type TW_VERSION struct {
 	MajorNum uint16
 	MinorNum uint16
 	Language uint16
-	Country uint16
-	Info [34]uint8
+	Country  uint16
+	Info     [34]uint8
 }
 
 // PTWARRAY is an opaque pointer to TW_ARRAY (C typedef pTW_ARRAY).
@@ -444,4 +444,3 @@ type PTWUSERINTERFACE = *TW_USERINTERFACE
 
 // PTWVERSION is an opaque pointer to TW_VERSION (C typedef pTW_VERSION).
 type PTWVERSION = *TW_VERSION
-

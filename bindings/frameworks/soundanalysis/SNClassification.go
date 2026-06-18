@@ -16,7 +16,7 @@ type SNClassification struct {
 }
 
 var (
-	_clsSNClassification = _objcClass("SNClassification")
+	_clsSNClassification           = _objcClass("SNClassification")
 	_sNClassificationSelIdentifier = objc.RegisterName("identifier")
 	_sNClassificationSelConfidence = objc.RegisterName("confidence")
 )
@@ -34,7 +34,9 @@ func SNClassificationFromID(id objc.ID) *SNClassification {
 // The identifier of a classification request. An example classification could be a string like 'laughter' or 'applause'. The string is defined in the model that was used for the classification. Usually these are technical labels that are not localized and not meant to be used directly to be presented to an end user in the UI.
 func (o *SNClassification) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sNClassificationSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -43,4 +45,3 @@ func (o *SNClassification) Confidence() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _sNClassificationSelConfidence)
 	return _ret
 }
-

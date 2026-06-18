@@ -75,4 +75,3 @@ type RestaurantReservationable interface {
 }
 
 var _ RestaurantReservationable = (*RestaurantReservation)(nil)
-

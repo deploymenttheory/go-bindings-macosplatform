@@ -12,7 +12,7 @@ import (
 type EKAlarmProximity int64
 
 const (
-	EKAlarmProximityNone EKAlarmProximity = 0
+	EKAlarmProximityNone  EKAlarmProximity = 0
 	EKAlarmProximityEnter EKAlarmProximity = 1
 	EKAlarmProximityLeave EKAlarmProximity = 2
 )
@@ -33,10 +33,10 @@ func (e EKAlarmProximity) String() string {
 type EKAlarmType int64
 
 const (
-	EKAlarmTypeDisplay EKAlarmType = 0
-	EKAlarmTypeAudio EKAlarmType = 1
+	EKAlarmTypeDisplay   EKAlarmType = 0
+	EKAlarmTypeAudio     EKAlarmType = 1
 	EKAlarmTypeProcedure EKAlarmType = 2
-	EKAlarmTypeEmail EKAlarmType = 3
+	EKAlarmTypeEmail     EKAlarmType = 3
 )
 
 func (e EKAlarmType) String() string {
@@ -58,11 +58,11 @@ type EKAuthorizationStatus int64
 
 const (
 	EKAuthorizationStatusNotDetermined EKAuthorizationStatus = 0
-	EKAuthorizationStatusRestricted EKAuthorizationStatus = 1
-	EKAuthorizationStatusDenied EKAuthorizationStatus = 2
-	EKAuthorizationStatusFullAccess EKAuthorizationStatus = 3
-	EKAuthorizationStatusWriteOnly EKAuthorizationStatus = 4
-	EKAuthorizationStatusAuthorized EKAuthorizationStatus = 3
+	EKAuthorizationStatusRestricted    EKAuthorizationStatus = 1
+	EKAuthorizationStatusDenied        EKAuthorizationStatus = 2
+	EKAuthorizationStatusFullAccess    EKAuthorizationStatus = 3
+	EKAuthorizationStatusWriteOnly     EKAuthorizationStatus = 4
+	EKAuthorizationStatusAuthorized    EKAuthorizationStatus = 3
 )
 
 func (e EKAuthorizationStatus) String() string {
@@ -86,10 +86,10 @@ func (e EKAuthorizationStatus) String() string {
 type EKCalendarEventAvailabilityMask uint64
 
 const (
-	EKCalendarEventAvailabilityNone EKCalendarEventAvailabilityMask = 0
-	EKCalendarEventAvailabilityBusy EKCalendarEventAvailabilityMask = 1
-	EKCalendarEventAvailabilityFree EKCalendarEventAvailabilityMask = 2
-	EKCalendarEventAvailabilityTentative EKCalendarEventAvailabilityMask = 4
+	EKCalendarEventAvailabilityNone        EKCalendarEventAvailabilityMask = 0
+	EKCalendarEventAvailabilityBusy        EKCalendarEventAvailabilityMask = 1
+	EKCalendarEventAvailabilityFree        EKCalendarEventAvailabilityMask = 2
+	EKCalendarEventAvailabilityTentative   EKCalendarEventAvailabilityMask = 4
 	EKCalendarEventAvailabilityUnavailable EKCalendarEventAvailabilityMask = 8
 )
 
@@ -116,11 +116,11 @@ func (e EKCalendarEventAvailabilityMask) String() string {
 type EKCalendarType int64
 
 const (
-	EKCalendarTypeLocal EKCalendarType = 0
-	EKCalendarTypeCalDAV EKCalendarType = 1
-	EKCalendarTypeExchange EKCalendarType = 2
+	EKCalendarTypeLocal        EKCalendarType = 0
+	EKCalendarTypeCalDAV       EKCalendarType = 1
+	EKCalendarTypeExchange     EKCalendarType = 2
 	EKCalendarTypeSubscription EKCalendarType = 3
-	EKCalendarTypeBirthday EKCalendarType = 4
+	EKCalendarTypeBirthday     EKCalendarType = 4
 )
 
 func (e EKCalendarType) String() string {
@@ -144,7 +144,7 @@ func (e EKCalendarType) String() string {
 type EKEntityMask uint64
 
 const (
-	EKEntityMaskEvent EKEntityMask = 1
+	EKEntityMaskEvent    EKEntityMask = 1
 	EKEntityMaskReminder EKEntityMask = 2
 )
 
@@ -165,7 +165,7 @@ func (e EKEntityMask) String() string {
 type EKEntityType uint64
 
 const (
-	EKEntityTypeEvent EKEntityType = 0
+	EKEntityTypeEvent    EKEntityType = 0
 	EKEntityTypeReminder EKEntityType = 1
 )
 
@@ -184,10 +184,10 @@ type EKEventAvailability int64
 
 const (
 	EKEventAvailabilityNotSupported EKEventAvailability = -1
-	EKEventAvailabilityBusy EKEventAvailability = 0
-	EKEventAvailabilityFree EKEventAvailability = 1
-	EKEventAvailabilityTentative EKEventAvailability = 2
-	EKEventAvailabilityUnavailable EKEventAvailability = 3
+	EKEventAvailabilityBusy         EKEventAvailability = 0
+	EKEventAvailabilityFree         EKEventAvailability = 1
+	EKEventAvailabilityTentative    EKEventAvailability = 2
+	EKEventAvailabilityUnavailable  EKEventAvailability = 3
 )
 
 func (e EKEventAvailability) String() string {
@@ -210,10 +210,10 @@ func (e EKEventAvailability) String() string {
 type EKEventStatus int64
 
 const (
-	EKEventStatusNone EKEventStatus = 0
+	EKEventStatusNone      EKEventStatus = 0
 	EKEventStatusConfirmed EKEventStatus = 1
 	EKEventStatusTentative EKEventStatus = 2
-	EKEventStatusCanceled EKEventStatus = 3
+	EKEventStatusCanceled  EKEventStatus = 3
 )
 
 func (e EKEventStatus) String() string {
@@ -234,10 +234,10 @@ func (e EKEventStatus) String() string {
 type EKParticipantRole int64
 
 const (
-	EKParticipantRoleUnknown EKParticipantRole = 0
-	EKParticipantRoleRequired EKParticipantRole = 1
-	EKParticipantRoleOptional EKParticipantRole = 2
-	EKParticipantRoleChair EKParticipantRole = 3
+	EKParticipantRoleUnknown        EKParticipantRole = 0
+	EKParticipantRoleRequired       EKParticipantRole = 1
+	EKParticipantRoleOptional       EKParticipantRole = 2
+	EKParticipantRoleChair          EKParticipantRole = 3
 	EKParticipantRoleNonParticipant EKParticipantRole = 4
 )
 
@@ -261,10 +261,10 @@ func (e EKParticipantRole) String() string {
 type EKParticipantStatus int64
 
 const (
-	EKParticipantStatusUnknown EKParticipantStatus = 0
-	EKParticipantStatusPending EKParticipantStatus = 1
-	EKParticipantStatusAccepted EKParticipantStatus = 2
-	EKParticipantStatusDeclined EKParticipantStatus = 3
+	EKParticipantStatusUnknown   EKParticipantStatus = 0
+	EKParticipantStatusPending   EKParticipantStatus = 1
+	EKParticipantStatusAccepted  EKParticipantStatus = 2
+	EKParticipantStatusDeclined  EKParticipantStatus = 3
 	EKParticipantStatusTentative EKParticipantStatus = 4
 	EKParticipantStatusDelegated EKParticipantStatus = 5
 	EKParticipantStatusCompleted EKParticipantStatus = 6
@@ -297,11 +297,11 @@ func (e EKParticipantStatus) String() string {
 type EKParticipantType int64
 
 const (
-	EKParticipantTypeUnknown EKParticipantType = 0
-	EKParticipantTypePerson EKParticipantType = 1
-	EKParticipantTypeRoom EKParticipantType = 2
+	EKParticipantTypeUnknown  EKParticipantType = 0
+	EKParticipantTypePerson   EKParticipantType = 1
+	EKParticipantTypeRoom     EKParticipantType = 2
 	EKParticipantTypeResource EKParticipantType = 3
-	EKParticipantTypeGroup EKParticipantType = 4
+	EKParticipantTypeGroup    EKParticipantType = 4
 )
 
 func (e EKParticipantType) String() string {
@@ -324,10 +324,10 @@ func (e EKParticipantType) String() string {
 type EKRecurrenceFrequency int64
 
 const (
-	EKRecurrenceFrequencyDaily EKRecurrenceFrequency = 0
-	EKRecurrenceFrequencyWeekly EKRecurrenceFrequency = 1
+	EKRecurrenceFrequencyDaily   EKRecurrenceFrequency = 0
+	EKRecurrenceFrequencyWeekly  EKRecurrenceFrequency = 1
 	EKRecurrenceFrequencyMonthly EKRecurrenceFrequency = 2
-	EKRecurrenceFrequencyYearly EKRecurrenceFrequency = 3
+	EKRecurrenceFrequencyYearly  EKRecurrenceFrequency = 3
 )
 
 func (e EKRecurrenceFrequency) String() string {
@@ -348,12 +348,12 @@ func (e EKRecurrenceFrequency) String() string {
 type EKSourceType int64
 
 const (
-	EKSourceTypeLocal EKSourceType = 0
-	EKSourceTypeExchange EKSourceType = 1
-	EKSourceTypeCalDAV EKSourceType = 2
-	EKSourceTypeMobileMe EKSourceType = 3
+	EKSourceTypeLocal      EKSourceType = 0
+	EKSourceTypeExchange   EKSourceType = 1
+	EKSourceTypeCalDAV     EKSourceType = 2
+	EKSourceTypeMobileMe   EKSourceType = 3
 	EKSourceTypeSubscribed EKSourceType = 4
-	EKSourceTypeBirthdays EKSourceType = 5
+	EKSourceTypeBirthdays  EKSourceType = 5
 )
 
 func (e EKSourceType) String() string {
@@ -378,7 +378,7 @@ func (e EKSourceType) String() string {
 type EKSpan int64
 
 const (
-	EKSpanThisEvent EKSpan = 0
+	EKSpanThisEvent    EKSpan = 0
 	EKSpanFutureEvents EKSpan = 1
 )
 
@@ -396,20 +396,20 @@ func (e EKSpan) String() string {
 type EKWeekday int64
 
 const (
-	EKWeekdaySunday EKWeekday = 1
-	EKWeekdayMonday EKWeekday = 2
-	EKWeekdayTuesday EKWeekday = 3
+	EKWeekdaySunday    EKWeekday = 1
+	EKWeekdayMonday    EKWeekday = 2
+	EKWeekdayTuesday   EKWeekday = 3
 	EKWeekdayWednesday EKWeekday = 4
-	EKWeekdayThursday EKWeekday = 5
-	EKWeekdayFriday EKWeekday = 6
-	EKWeekdaySaturday EKWeekday = 7
-	EKSunday EKWeekday = 1
-	EKMonday EKWeekday = 2
-	EKTuesday EKWeekday = 3
-	EKWednesday EKWeekday = 4
-	EKThursday EKWeekday = 5
-	EKFriday EKWeekday = 6
-	EKSaturday EKWeekday = 7
+	EKWeekdayThursday  EKWeekday = 5
+	EKWeekdayFriday    EKWeekday = 6
+	EKWeekdaySaturday  EKWeekday = 7
+	EKSunday           EKWeekday = 1
+	EKMonday           EKWeekday = 2
+	EKTuesday          EKWeekday = 3
+	EKWednesday        EKWeekday = 4
+	EKThursday         EKWeekday = 5
+	EKFriday           EKWeekday = 6
+	EKSaturday         EKWeekday = 7
 )
 
 func (e EKWeekday) String() string {
@@ -432,4 +432,3 @@ func (e EKWeekday) String() string {
 		return fmt.Sprintf("EKWeekday(%d)", int64(e))
 	}
 }
-

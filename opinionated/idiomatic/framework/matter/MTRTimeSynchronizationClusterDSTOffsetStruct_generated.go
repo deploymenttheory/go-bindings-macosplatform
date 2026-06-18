@@ -16,7 +16,9 @@ type MTRTimeSynchronizationClusterDSTOffsetStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRTimeSynchronizationClusterDSTOffsetStruct].
-func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) Unwrap() *raw.MTRTimeSynchronizationClusterDSTOffsetStruct { return x.inner }
+func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) Unwrap() *raw.MTRTimeSynchronizationClusterDSTOffsetStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -84,7 +86,9 @@ func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) SetValidUntil(validUntil 
 	x.inner.SetValidUntil(validUntil)
 }
 
-func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) asMTRTimeSynchronizationClusterDSTOffsetStruct() *raw.MTRTimeSynchronizationClusterDSTOffsetStruct { return x.inner }
+func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) asMTRTimeSynchronizationClusterDSTOffsetStruct() *raw.MTRTimeSynchronizationClusterDSTOffsetStruct {
+	return x.inner
+}
 
 // MTRTimeSynchronizationClusterDSTOffsetStructable is the interface implemented by [MTRTimeSynchronizationClusterDSTOffsetStruct], for mocking and DI.
 type MTRTimeSynchronizationClusterDSTOffsetStructable interface {
@@ -101,4 +105,3 @@ type MTRTimeSynchronizationClusterDSTOffsetStructable interface {
 }
 
 var _ MTRTimeSynchronizationClusterDSTOffsetStructable = (*MTRTimeSynchronizationClusterDSTOffsetStruct)(nil)
-

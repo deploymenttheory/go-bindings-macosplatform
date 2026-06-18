@@ -20,18 +20,18 @@ type PKDrawing struct {
 }
 
 var (
-	_clsPKDrawing = _objcClass("PKDrawing")
-	_pKDrawingSelInit = objc.RegisterName("init")
-	_pKDrawingSelInitWithStrokes = objc.RegisterName("initWithStrokes:")
-	_pKDrawingSelInitWithDataError = objc.RegisterName("initWithData:error:")
-	_pKDrawingSelDataRepresentation = objc.RegisterName("dataRepresentation")
-	_pKDrawingSelImageFromRectScale = objc.RegisterName("imageFromRect:scale:")
+	_clsPKDrawing                           = _objcClass("PKDrawing")
+	_pKDrawingSelInit                       = objc.RegisterName("init")
+	_pKDrawingSelInitWithStrokes            = objc.RegisterName("initWithStrokes:")
+	_pKDrawingSelInitWithDataError          = objc.RegisterName("initWithData:error:")
+	_pKDrawingSelDataRepresentation         = objc.RegisterName("dataRepresentation")
+	_pKDrawingSelImageFromRectScale         = objc.RegisterName("imageFromRect:scale:")
 	_pKDrawingSelDrawingByApplyingTransform = objc.RegisterName("drawingByApplyingTransform:")
-	_pKDrawingSelDrawingByAppendingDrawing = objc.RegisterName("drawingByAppendingDrawing:")
-	_pKDrawingSelDrawingByAppendingStrokes = objc.RegisterName("drawingByAppendingStrokes:")
-	_pKDrawingSelStrokes = objc.RegisterName("strokes")
-	_pKDrawingSelBounds = objc.RegisterName("bounds")
-	_pKDrawingSelRequiredContentVersion = objc.RegisterName("requiredContentVersion")
+	_pKDrawingSelDrawingByAppendingDrawing  = objc.RegisterName("drawingByAppendingDrawing:")
+	_pKDrawingSelDrawingByAppendingStrokes  = objc.RegisterName("drawingByAppendingStrokes:")
+	_pKDrawingSelStrokes                    = objc.RegisterName("strokes")
+	_pKDrawingSelBounds                     = objc.RegisterName("bounds")
+	_pKDrawingSelRequiredContentVersion     = objc.RegisterName("requiredContentVersion")
 )
 
 func PKDrawingFromID(id objc.ID) *PKDrawing {
@@ -47,14 +47,18 @@ func PKDrawingFromID(id objc.ID) *PKDrawing {
 // Initializes and returns a blank drawing.
 func (o *PKDrawing) Init() *PKDrawing {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDrawingSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKDrawingFromID(_ret)
 }
 
 // Initializes a drawing with an array of strokes.
 func (o *PKDrawing) InitWithStrokes(strokes *foundation.NSArray[*PKStroke]) *PKDrawing {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDrawingSelInitWithStrokes, strokes.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKDrawingFromID(_ret)
 }
 
@@ -62,7 +66,9 @@ func (o *PKDrawing) InitWithStrokes(strokes *foundation.NSArray[*PKStroke]) *PKD
 func (o *PKDrawing) InitWithDataError(data *foundation.NSData) (*PKDrawing, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDrawingSelInitWithDataError, data.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -72,41 +78,53 @@ func (o *PKDrawing) InitWithDataError(data *foundation.NSData) (*PKDrawing, erro
 // Generate a data representation of the drawing. @return A NSData object containing a representation of the drawing.
 func (o *PKDrawing) DataRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDrawingSelDataRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *PKDrawing) ImageFromRectScale(rect corefoundation.CGRect, scale float64) *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDrawingSelImageFromRectScale, rect, scale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSImageFromID(_ret)
 }
 
 // Returns a new drawing with `transform` applied. @param transform The transform to apply to this drawing. @return A new copy of this drawing with `transform` applied.
 func (o *PKDrawing) DrawingByApplyingTransform(transform corefoundation.CGAffineTransform) *PKDrawing {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDrawingSelDrawingByApplyingTransform, transform)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKDrawingFromID(_ret)
 }
 
 // Returns a new drawing by appending the contents of `drawing` on top of the receiver’s contents. @param drawing The drawing to append. @return A new copy of this drawing with `drawing` appended onto it.
 func (o *PKDrawing) DrawingByAppendingDrawing(drawing *PKDrawing) *PKDrawing {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDrawingSelDrawingByAppendingDrawing, drawing.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKDrawingFromID(_ret)
 }
 
 // Create a new drawing by appending an array of strokes to this drawing. This is a convenience method, to quickly add strokes to a drawing. @param strokes The strokes to append. @return A new copy of this drawing with `strokes` appended onto it.
 func (o *PKDrawing) DrawingByAppendingStrokes(strokes *foundation.NSArray[*PKStroke]) *PKDrawing {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDrawingSelDrawingByAppendingStrokes, strokes.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKDrawingFromID(_ret)
 }
 
 // The strokes that this drawing contains.
 func (o *PKDrawing) Strokes() *foundation.NSArray[*PKStroke] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDrawingSelStrokes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PKStroke](_ret)
 }
 
@@ -121,4 +139,3 @@ func (o *PKDrawing) RequiredContentVersion() PKContentVersion {
 	_ret := objc.Send[PKContentVersion](o.Ptr(), _pKDrawingSelRequiredContentVersion)
 	return _ret
 }
-

@@ -78,4 +78,3 @@ type URLTextureable interface {
 }
 
 var _ URLTextureable = (*URLTexture)(nil)
-

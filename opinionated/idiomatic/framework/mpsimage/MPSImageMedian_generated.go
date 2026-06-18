@@ -69,7 +69,9 @@ func (x *ImageMedian) KernelDiameter() uint {
 	return x.inner.KernelDiameter()
 }
 
-func (x *ImageMedian) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageMedian) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
 // ImageMedianable is the interface implemented by [ImageMedian], for mocking and DI.
 type ImageMedianable interface {
@@ -81,4 +83,3 @@ type ImageMedianable interface {
 }
 
 var _ ImageMedianable = (*ImageMedian)(nil)
-

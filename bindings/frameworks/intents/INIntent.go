@@ -16,16 +16,16 @@ type INIntent struct {
 }
 
 var (
-	_clsINIntent = _objcClass("INIntent")
-	_iNIntentSelSetImageForParameterNamed = objc.RegisterName("setImage:forParameterNamed:")
-	_iNIntentSelImageForParameterNamed = objc.RegisterName("imageForParameterNamed:")
-	_iNIntentSelKeyImage = objc.RegisterName("keyImage")
-	_iNIntentSelIdentifier = objc.RegisterName("identifier")
-	_iNIntentSelIntentDescription = objc.RegisterName("intentDescription")
-	_iNIntentSelSuggestedInvocationPhrase = objc.RegisterName("suggestedInvocationPhrase")
+	_clsINIntent                             = _objcClass("INIntent")
+	_iNIntentSelSetImageForParameterNamed    = objc.RegisterName("setImage:forParameterNamed:")
+	_iNIntentSelImageForParameterNamed       = objc.RegisterName("imageForParameterNamed:")
+	_iNIntentSelKeyImage                     = objc.RegisterName("keyImage")
+	_iNIntentSelIdentifier                   = objc.RegisterName("identifier")
+	_iNIntentSelIntentDescription            = objc.RegisterName("intentDescription")
+	_iNIntentSelSuggestedInvocationPhrase    = objc.RegisterName("suggestedInvocationPhrase")
 	_iNIntentSelSetSuggestedInvocationPhrase = objc.RegisterName("setSuggestedInvocationPhrase:")
-	_iNIntentSelDonationMetadata = objc.RegisterName("donationMetadata")
-	_iNIntentSelSetDonationMetadata = objc.RegisterName("setDonationMetadata:")
+	_iNIntentSelDonationMetadata             = objc.RegisterName("donationMetadata")
+	_iNIntentSelSetDonationMetadata          = objc.RegisterName("setDonationMetadata:")
 )
 
 func INIntentFromID(id objc.ID) *INIntent {
@@ -44,31 +44,41 @@ func (o *INIntent) SetImageForParameterNamed(image *INImage, parameterName *foun
 
 func (o *INIntent) ImageForParameterNamed(parameterName *foundation.NSString) *INImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNIntentSelImageForParameterNamed, parameterName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INImageFromID(_ret)
 }
 
 func (o *INIntent) KeyImage() *INImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNIntentSelKeyImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INImageFromID(_ret)
 }
 
 func (o *INIntent) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNIntentSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INIntent) IntentDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNIntentSelIntentDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INIntent) SuggestedInvocationPhrase() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNIntentSelSuggestedInvocationPhrase)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -78,11 +88,12 @@ func (o *INIntent) SetSuggestedInvocationPhrase(suggestedInvocationPhrase *found
 
 func (o *INIntent) DonationMetadata() *INIntentDonationMetadata {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNIntentSelDonationMetadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INIntentDonationMetadataFromID(_ret)
 }
 
 func (o *INIntent) SetDonationMetadata(donationMetadata *INIntentDonationMetadata) {
 	o.Ptr().Send(_iNIntentSelSetDonationMetadata, donationMetadata.Ptr())
 }
-

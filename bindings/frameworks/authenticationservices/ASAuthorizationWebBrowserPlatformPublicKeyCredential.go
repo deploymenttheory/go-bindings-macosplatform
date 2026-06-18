@@ -16,12 +16,12 @@ type ASAuthorizationWebBrowserPlatformPublicKeyCredential struct {
 }
 
 var (
-	_clsASAuthorizationWebBrowserPlatformPublicKeyCredential = _objcClass("ASAuthorizationWebBrowserPlatformPublicKeyCredential")
-	_aSAuthorizationWebBrowserPlatformPublicKeyCredentialSelName = objc.RegisterName("name")
-	_aSAuthorizationWebBrowserPlatformPublicKeyCredentialSelCustomTitle = objc.RegisterName("customTitle")
+	_clsASAuthorizationWebBrowserPlatformPublicKeyCredential             = _objcClass("ASAuthorizationWebBrowserPlatformPublicKeyCredential")
+	_aSAuthorizationWebBrowserPlatformPublicKeyCredentialSelName         = objc.RegisterName("name")
+	_aSAuthorizationWebBrowserPlatformPublicKeyCredentialSelCustomTitle  = objc.RegisterName("customTitle")
 	_aSAuthorizationWebBrowserPlatformPublicKeyCredentialSelRelyingParty = objc.RegisterName("relyingParty")
 	_aSAuthorizationWebBrowserPlatformPublicKeyCredentialSelCredentialID = objc.RegisterName("credentialID")
-	_aSAuthorizationWebBrowserPlatformPublicKeyCredentialSelUserHandle = objc.RegisterName("userHandle")
+	_aSAuthorizationWebBrowserPlatformPublicKeyCredentialSelUserHandle   = objc.RegisterName("userHandle")
 	_aSAuthorizationWebBrowserPlatformPublicKeyCredentialSelProviderName = objc.RegisterName("providerName")
 )
 
@@ -38,42 +38,53 @@ func ASAuthorizationWebBrowserPlatformPublicKeyCredentialFromID(id objc.ID) *ASA
 // The user name of the saved credential.
 func (o *ASAuthorizationWebBrowserPlatformPublicKeyCredential) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationWebBrowserPlatformPublicKeyCredentialSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // A user-specified title for the credential.
 func (o *ASAuthorizationWebBrowserPlatformPublicKeyCredential) CustomTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationWebBrowserPlatformPublicKeyCredentialSelCustomTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The "relying party" (generally website) the credential was saved for.
 func (o *ASAuthorizationWebBrowserPlatformPublicKeyCredential) RelyingParty() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationWebBrowserPlatformPublicKeyCredentialSelRelyingParty)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // A unique identifier for this credential.
 func (o *ASAuthorizationWebBrowserPlatformPublicKeyCredential) CredentialID() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationWebBrowserPlatformPublicKeyCredentialSelCredentialID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // A unique identifier for the user account associated with this credential. One account may have multiple associated credentials.
 func (o *ASAuthorizationWebBrowserPlatformPublicKeyCredential) UserHandle() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationWebBrowserPlatformPublicKeyCredentialSelUserHandle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // The localized name of the credential provider that provided this passkey.
 func (o *ASAuthorizationWebBrowserPlatformPublicKeyCredential) ProviderName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationWebBrowserPlatformPublicKeyCredentialSelProviderName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

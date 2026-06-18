@@ -17,21 +17,21 @@ type MPSMatrixRandomDistributionDescriptor struct {
 }
 
 var (
-	_clsMPSMatrixRandomDistributionDescriptor = _objcClass("MPSMatrixRandomDistributionDescriptor")
-	_mPSMatrixRandomDistributionDescriptorSelUniformDistributionDescriptorWithMinimumMaximum = objc.RegisterName("uniformDistributionDescriptorWithMinimum:maximum:")
-	_mPSMatrixRandomDistributionDescriptorSelNormalDistributionDescriptorWithMeanStandardDeviation = objc.RegisterName("normalDistributionDescriptorWithMean:standardDeviation:")
+	_clsMPSMatrixRandomDistributionDescriptor                                                                    = _objcClass("MPSMatrixRandomDistributionDescriptor")
+	_mPSMatrixRandomDistributionDescriptorSelUniformDistributionDescriptorWithMinimumMaximum                     = objc.RegisterName("uniformDistributionDescriptorWithMinimum:maximum:")
+	_mPSMatrixRandomDistributionDescriptorSelNormalDistributionDescriptorWithMeanStandardDeviation               = objc.RegisterName("normalDistributionDescriptorWithMean:standardDeviation:")
 	_mPSMatrixRandomDistributionDescriptorSelNormalDistributionDescriptorWithMeanStandardDeviationMinimumMaximum = objc.RegisterName("normalDistributionDescriptorWithMean:standardDeviation:minimum:maximum:")
-	_mPSMatrixRandomDistributionDescriptorSelDefaultDistributionDescriptor = objc.RegisterName("defaultDistributionDescriptor")
-	_mPSMatrixRandomDistributionDescriptorSelDistributionType = objc.RegisterName("distributionType")
-	_mPSMatrixRandomDistributionDescriptorSelSetDistributionType = objc.RegisterName("setDistributionType:")
-	_mPSMatrixRandomDistributionDescriptorSelMinimum = objc.RegisterName("minimum")
-	_mPSMatrixRandomDistributionDescriptorSelSetMinimum = objc.RegisterName("setMinimum:")
-	_mPSMatrixRandomDistributionDescriptorSelMaximum = objc.RegisterName("maximum")
-	_mPSMatrixRandomDistributionDescriptorSelSetMaximum = objc.RegisterName("setMaximum:")
-	_mPSMatrixRandomDistributionDescriptorSelMean = objc.RegisterName("mean")
-	_mPSMatrixRandomDistributionDescriptorSelSetMean = objc.RegisterName("setMean:")
-	_mPSMatrixRandomDistributionDescriptorSelStandardDeviation = objc.RegisterName("standardDeviation")
-	_mPSMatrixRandomDistributionDescriptorSelSetStandardDeviation = objc.RegisterName("setStandardDeviation:")
+	_mPSMatrixRandomDistributionDescriptorSelDefaultDistributionDescriptor                                       = objc.RegisterName("defaultDistributionDescriptor")
+	_mPSMatrixRandomDistributionDescriptorSelDistributionType                                                    = objc.RegisterName("distributionType")
+	_mPSMatrixRandomDistributionDescriptorSelSetDistributionType                                                 = objc.RegisterName("setDistributionType:")
+	_mPSMatrixRandomDistributionDescriptorSelMinimum                                                             = objc.RegisterName("minimum")
+	_mPSMatrixRandomDistributionDescriptorSelSetMinimum                                                          = objc.RegisterName("setMinimum:")
+	_mPSMatrixRandomDistributionDescriptorSelMaximum                                                             = objc.RegisterName("maximum")
+	_mPSMatrixRandomDistributionDescriptorSelSetMaximum                                                          = objc.RegisterName("setMaximum:")
+	_mPSMatrixRandomDistributionDescriptorSelMean                                                                = objc.RegisterName("mean")
+	_mPSMatrixRandomDistributionDescriptorSelSetMean                                                             = objc.RegisterName("setMean:")
+	_mPSMatrixRandomDistributionDescriptorSelStandardDeviation                                                   = objc.RegisterName("standardDeviation")
+	_mPSMatrixRandomDistributionDescriptorSelSetStandardDeviation                                                = objc.RegisterName("setStandardDeviation:")
 )
 
 func MPSMatrixRandomDistributionDescriptorFromID(id objc.ID) *MPSMatrixRandomDistributionDescriptor {
@@ -47,28 +47,36 @@ func MPSMatrixRandomDistributionDescriptorFromID(id objc.ID) *MPSMatrixRandomDis
 // @abstract  Make a descriptor for a uniform distribution of floating point values in the range [minimum, maximum). @param     minimum  The lower bound of the range. @param     maximum  The upper bound of the range. @return    A valid MPSMatrixRandomDistribution object or nil, if failure.
 func MPSMatrixRandomDistributionDescriptorUniformDistributionDescriptorWithMinimumMaximum(minimum float32, maximum float32) *mpsmatrix.MPSMatrixRandomDistributionDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSMatrixRandomDistributionDescriptor), _mPSMatrixRandomDistributionDescriptorSelUniformDistributionDescriptorWithMinimumMaximum, minimum, maximum)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsmatrix.MPSMatrixRandomDistributionDescriptorFromID(_ret)
 }
 
 // @abstract Make a descriptor for a normal distribution of floating point values. @param    mean    The mean of the distribution @param    standardDeviation   The standard deviation of the distribution. @return   A valid MPSMatrixRandomDistribution object or nil if failure.
 func MPSMatrixRandomDistributionDescriptorNormalDistributionDescriptorWithMeanStandardDeviation(mean float32, standardDeviation float32) *mpsmatrix.MPSMatrixRandomDistributionDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSMatrixRandomDistributionDescriptor), _mPSMatrixRandomDistributionDescriptorSelNormalDistributionDescriptorWithMeanStandardDeviation, mean, standardDeviation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsmatrix.MPSMatrixRandomDistributionDescriptorFromID(_ret)
 }
 
 // @abstract Make a descriptor for a truncated normal distribution of floating point values. @param    mean    The mean of the distribution @param    standardDeviation   The standard deviation of the distribution. @param    minimum The lower bound of the distribution @param    maximum The upper bound of the distribution @return   A valid MPSMatrixRandomDistribution object or nil if failure.
 func MPSMatrixRandomDistributionDescriptorNormalDistributionDescriptorWithMeanStandardDeviationMinimumMaximum(mean float32, standardDeviation float32, minimum float32, maximum float32) *mpsmatrix.MPSMatrixRandomDistributionDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSMatrixRandomDistributionDescriptor), _mPSMatrixRandomDistributionDescriptorSelNormalDistributionDescriptorWithMeanStandardDeviationMinimumMaximum, mean, standardDeviation, minimum, maximum)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsmatrix.MPSMatrixRandomDistributionDescriptorFromID(_ret)
 }
 
 // @abstract  Make a descriptor for a default distribution. @return    A valid MPSMatrixRandomDistribution object or nil, if failure.
 func MPSMatrixRandomDistributionDescriptorDefaultDistributionDescriptor() *mpsmatrix.MPSMatrixRandomDistributionDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSMatrixRandomDistributionDescriptor), _mPSMatrixRandomDistributionDescriptorSelDefaultDistributionDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsmatrix.MPSMatrixRandomDistributionDescriptorFromID(_ret)
 }
 
@@ -121,4 +129,3 @@ func (o *MPSMatrixRandomDistributionDescriptor) StandardDeviation() float32 {
 func (o *MPSMatrixRandomDistributionDescriptor) SetStandardDeviation(standardDeviation float32) {
 	o.Ptr().Send(_mPSMatrixRandomDistributionDescriptorSelSetStandardDeviation, standardDeviation)
 }
-

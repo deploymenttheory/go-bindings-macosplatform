@@ -16,8 +16,8 @@ type AVAssetSegmentReport struct {
 }
 
 var (
-	_clsAVAssetSegmentReport = _objcClass("AVAssetSegmentReport")
-	_aVAssetSegmentReportSelSegmentType = objc.RegisterName("segmentType")
+	_clsAVAssetSegmentReport             = _objcClass("AVAssetSegmentReport")
+	_aVAssetSegmentReportSelSegmentType  = objc.RegisterName("segmentType")
 	_aVAssetSegmentReportSelTrackReports = objc.RegisterName("trackReports")
 )
 
@@ -40,7 +40,8 @@ func (o *AVAssetSegmentReport) SegmentType() AVAssetSegmentType {
 // @property	trackReports @abstract	Provides an array of AVAssetSegmentTrackReport in the segment data.
 func (o *AVAssetSegmentReport) TrackReports() *foundation.NSArray[*AVAssetSegmentTrackReport] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetSegmentReportSelTrackReports)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVAssetSegmentTrackReport](_ret)
 }
-

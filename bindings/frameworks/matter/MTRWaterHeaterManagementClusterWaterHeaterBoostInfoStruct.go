@@ -16,19 +16,19 @@ type MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct struct {
 }
 
 var (
-	_clsMTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct = _objcClass("MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct")
-	_mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructSelDuration = objc.RegisterName("duration")
-	_mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructSelSetDuration = objc.RegisterName("setDuration:")
-	_mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructSelOneShot = objc.RegisterName("oneShot")
-	_mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructSelSetOneShot = objc.RegisterName("setOneShot:")
-	_mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructSelEmergencyBoost = objc.RegisterName("emergencyBoost")
-	_mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructSelSetEmergencyBoost = objc.RegisterName("setEmergencyBoost:")
-	_mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructSelTemporarySetpoint = objc.RegisterName("temporarySetpoint")
+	_clsMTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct                     = _objcClass("MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct")
+	_mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructSelDuration             = objc.RegisterName("duration")
+	_mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructSelSetDuration          = objc.RegisterName("setDuration:")
+	_mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructSelOneShot              = objc.RegisterName("oneShot")
+	_mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructSelSetOneShot           = objc.RegisterName("setOneShot:")
+	_mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructSelEmergencyBoost       = objc.RegisterName("emergencyBoost")
+	_mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructSelSetEmergencyBoost    = objc.RegisterName("setEmergencyBoost:")
+	_mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructSelTemporarySetpoint    = objc.RegisterName("temporarySetpoint")
 	_mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructSelSetTemporarySetpoint = objc.RegisterName("setTemporarySetpoint:")
-	_mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructSelTargetPercentage = objc.RegisterName("targetPercentage")
-	_mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructSelSetTargetPercentage = objc.RegisterName("setTargetPercentage:")
-	_mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructSelTargetReheat = objc.RegisterName("targetReheat")
-	_mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructSelSetTargetReheat = objc.RegisterName("setTargetReheat:")
+	_mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructSelTargetPercentage     = objc.RegisterName("targetPercentage")
+	_mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructSelSetTargetPercentage  = objc.RegisterName("setTargetPercentage:")
+	_mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructSelTargetReheat         = objc.RegisterName("targetReheat")
+	_mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructSelSetTargetReheat      = objc.RegisterName("setTargetReheat:")
 )
 
 func MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructFromID(id objc.ID) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
@@ -43,7 +43,9 @@ func MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructFromID(id objc.ID)
 
 func (o *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) Duration() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructSelDuration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -53,7 +55,9 @@ func (o *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) SetDuration(
 
 func (o *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) OneShot() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructSelOneShot)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -63,7 +67,9 @@ func (o *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) SetOneShot(o
 
 func (o *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) EmergencyBoost() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructSelEmergencyBoost)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -73,7 +79,9 @@ func (o *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) SetEmergency
 
 func (o *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) TemporarySetpoint() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructSelTemporarySetpoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -83,7 +91,9 @@ func (o *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) SetTemporary
 
 func (o *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) TargetPercentage() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructSelTargetPercentage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -93,11 +103,12 @@ func (o *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) SetTargetPer
 
 func (o *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) TargetReheat() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructSelTargetReheat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) SetTargetReheat(targetReheat *foundation.NSNumber) {
 	o.Ptr().Send(_mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructSelSetTargetReheat, targetReheat.Ptr())
 }
-

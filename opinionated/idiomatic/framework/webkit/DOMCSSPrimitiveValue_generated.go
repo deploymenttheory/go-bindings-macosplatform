@@ -113,7 +113,9 @@ func (x *DOMCSSPrimitiveValue) asDOMCSSValue() *raw.DOMCSSValue { return &x.inne
 
 func (x *DOMCSSPrimitiveValue) asDOMObject() *raw.DOMObject { return &x.inner.DOMCSSValue.DOMObject }
 
-func (x *DOMCSSPrimitiveValue) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMCSSValue.DOMObject.WebScriptObject }
+func (x *DOMCSSPrimitiveValue) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMCSSValue.DOMObject.WebScriptObject
+}
 
 // DOMCSSPrimitiveValueable is the interface implemented by [DOMCSSPrimitiveValue], for mocking and DI.
 type DOMCSSPrimitiveValueable interface {
@@ -132,4 +134,3 @@ type DOMCSSPrimitiveValueable interface {
 }
 
 var _ DOMCSSPrimitiveValueable = (*DOMCSSPrimitiveValue)(nil)
-

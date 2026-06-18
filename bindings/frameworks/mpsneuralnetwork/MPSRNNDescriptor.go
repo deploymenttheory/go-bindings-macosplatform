@@ -16,17 +16,17 @@ type MPSRNNDescriptor struct {
 }
 
 var (
-	_clsMPSRNNDescriptor = _objcClass("MPSRNNDescriptor")
-	_mPSRNNDescriptorSelInputFeatureChannels = objc.RegisterName("inputFeatureChannels")
-	_mPSRNNDescriptorSelSetInputFeatureChannels = objc.RegisterName("setInputFeatureChannels:")
-	_mPSRNNDescriptorSelOutputFeatureChannels = objc.RegisterName("outputFeatureChannels")
-	_mPSRNNDescriptorSelSetOutputFeatureChannels = objc.RegisterName("setOutputFeatureChannels:")
-	_mPSRNNDescriptorSelUseLayerInputUnitTransformMode = objc.RegisterName("useLayerInputUnitTransformMode")
+	_clsMPSRNNDescriptor                                  = _objcClass("MPSRNNDescriptor")
+	_mPSRNNDescriptorSelInputFeatureChannels              = objc.RegisterName("inputFeatureChannels")
+	_mPSRNNDescriptorSelSetInputFeatureChannels           = objc.RegisterName("setInputFeatureChannels:")
+	_mPSRNNDescriptorSelOutputFeatureChannels             = objc.RegisterName("outputFeatureChannels")
+	_mPSRNNDescriptorSelSetOutputFeatureChannels          = objc.RegisterName("setOutputFeatureChannels:")
+	_mPSRNNDescriptorSelUseLayerInputUnitTransformMode    = objc.RegisterName("useLayerInputUnitTransformMode")
 	_mPSRNNDescriptorSelSetUseLayerInputUnitTransformMode = objc.RegisterName("setUseLayerInputUnitTransformMode:")
-	_mPSRNNDescriptorSelUseFloat32Weights = objc.RegisterName("useFloat32Weights")
-	_mPSRNNDescriptorSelSetUseFloat32Weights = objc.RegisterName("setUseFloat32Weights:")
-	_mPSRNNDescriptorSelLayerSequenceDirection = objc.RegisterName("layerSequenceDirection")
-	_mPSRNNDescriptorSelSetLayerSequenceDirection = objc.RegisterName("setLayerSequenceDirection:")
+	_mPSRNNDescriptorSelUseFloat32Weights                 = objc.RegisterName("useFloat32Weights")
+	_mPSRNNDescriptorSelSetUseFloat32Weights              = objc.RegisterName("setUseFloat32Weights:")
+	_mPSRNNDescriptorSelLayerSequenceDirection            = objc.RegisterName("layerSequenceDirection")
+	_mPSRNNDescriptorSelSetLayerSequenceDirection         = objc.RegisterName("setLayerSequenceDirection:")
 )
 
 func MPSRNNDescriptorFromID(id objc.ID) *MPSRNNDescriptor {
@@ -88,4 +88,3 @@ func (o *MPSRNNDescriptor) LayerSequenceDirection() MPSRNNSequenceDirection {
 func (o *MPSRNNDescriptor) SetLayerSequenceDirection(layerSequenceDirection MPSRNNSequenceDirection) {
 	o.Ptr().Send(_mPSRNNDescriptorSelSetLayerSequenceDirection, layerSequenceDirection)
 }
-

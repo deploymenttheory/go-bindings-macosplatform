@@ -18,7 +18,9 @@ type ArrayBinaryPrimaryGradientKernel struct {
 }
 
 // Unwrap returns the underlying [raw.MPSNDArrayBinaryPrimaryGradientKernel].
-func (x *ArrayBinaryPrimaryGradientKernel) Unwrap() *raw.MPSNDArrayBinaryPrimaryGradientKernel { return x.inner }
+func (x *ArrayBinaryPrimaryGradientKernel) Unwrap() *raw.MPSNDArrayBinaryPrimaryGradientKernel {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -55,11 +57,17 @@ func (x *ArrayBinaryPrimaryGradientKernel) EncodeToCommandBufferPrimarySourceArr
 	x.inner.EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientStateDestinationArray(cmdBuf, primarySourceArray, secondarySourceArray, gradient, state, destination)
 }
 
-func (x *ArrayBinaryPrimaryGradientKernel) asArrayBinaryPrimaryGradientKernel() *raw.MPSNDArrayBinaryPrimaryGradientKernel { return x.inner }
+func (x *ArrayBinaryPrimaryGradientKernel) asArrayBinaryPrimaryGradientKernel() *raw.MPSNDArrayBinaryPrimaryGradientKernel {
+	return x.inner
+}
 
-func (x *ArrayBinaryPrimaryGradientKernel) asArrayMultiaryGradientKernel() *raw.MPSNDArrayMultiaryGradientKernel { return &x.inner.MPSNDArrayMultiaryGradientKernel }
+func (x *ArrayBinaryPrimaryGradientKernel) asArrayMultiaryGradientKernel() *raw.MPSNDArrayMultiaryGradientKernel {
+	return &x.inner.MPSNDArrayMultiaryGradientKernel
+}
 
-func (x *ArrayBinaryPrimaryGradientKernel) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase }
+func (x *ArrayBinaryPrimaryGradientKernel) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase {
+	return &x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase
+}
 
 // ArrayBinaryPrimaryGradientKernelable is the interface implemented by [ArrayBinaryPrimaryGradientKernel], for mocking and DI.
 type ArrayBinaryPrimaryGradientKernelable interface {
@@ -70,4 +78,3 @@ type ArrayBinaryPrimaryGradientKernelable interface {
 }
 
 var _ ArrayBinaryPrimaryGradientKernelable = (*ArrayBinaryPrimaryGradientKernel)(nil)
-

@@ -15,7 +15,9 @@ type VertexAttributeDescriptorArray struct {
 }
 
 // Unwrap returns the underlying [raw.MTLVertexAttributeDescriptorArray].
-func (x *VertexAttributeDescriptorArray) Unwrap() *raw.MTLVertexAttributeDescriptorArray { return x.inner }
+func (x *VertexAttributeDescriptorArray) Unwrap() *raw.MTLVertexAttributeDescriptorArray {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -57,4 +59,3 @@ type VertexAttributeDescriptorArrayable interface {
 }
 
 var _ VertexAttributeDescriptorArrayable = (*VertexAttributeDescriptorArray)(nil)
-

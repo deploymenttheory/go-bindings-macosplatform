@@ -1091,4 +1091,3 @@ type Cameraable interface {
 }
 
 var _ Cameraable = (*Camera)(nil)
-

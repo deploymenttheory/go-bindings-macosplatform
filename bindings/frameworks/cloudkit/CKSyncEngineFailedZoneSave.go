@@ -18,9 +18,9 @@ type CKSyncEngineFailedZoneSave struct {
 }
 
 var (
-	_clsCKSyncEngineFailedZoneSave = _objcClass("CKSyncEngineFailedZoneSave")
+	_clsCKSyncEngineFailedZoneSave           = _objcClass("CKSyncEngineFailedZoneSave")
 	_cKSyncEngineFailedZoneSaveSelRecordZone = objc.RegisterName("recordZone")
-	_cKSyncEngineFailedZoneSaveSelError = objc.RegisterName("error")
+	_cKSyncEngineFailedZoneSaveSelError      = objc.RegisterName("error")
 )
 
 func CKSyncEngineFailedZoneSaveFromID(id objc.ID) *CKSyncEngineFailedZoneSave {
@@ -36,7 +36,9 @@ func CKSyncEngineFailedZoneSaveFromID(id objc.ID) *CKSyncEngineFailedZoneSave {
 // The record zone that CloudKit is unable to modify.
 func (o *CKSyncEngineFailedZoneSave) RecordZone() *CKRecordZone {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineFailedZoneSaveSelRecordZone)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKRecordZoneFromID(_ret)
 }
 
@@ -45,4 +47,3 @@ func (o *CKSyncEngineFailedZoneSave) Error() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cKSyncEngineFailedZoneSaveSelError)
 	return _ret
 }
-

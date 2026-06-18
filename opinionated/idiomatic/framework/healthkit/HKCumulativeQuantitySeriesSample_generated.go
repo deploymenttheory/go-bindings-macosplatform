@@ -15,7 +15,9 @@ type CumulativeQuantitySeriesSample struct {
 }
 
 // Unwrap returns the underlying [raw.HKCumulativeQuantitySeriesSample].
-func (x *CumulativeQuantitySeriesSample) Unwrap() *raw.HKCumulativeQuantitySeriesSample { return x.inner }
+func (x *CumulativeQuantitySeriesSample) Unwrap() *raw.HKCumulativeQuantitySeriesSample {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -44,13 +46,21 @@ func (x *CumulativeQuantitySeriesSample) Sum() *Quantity {
 	return &Quantity{inner: _r}
 }
 
-func (x *CumulativeQuantitySeriesSample) asCumulativeQuantitySample() *raw.HKCumulativeQuantitySample { return &x.inner.HKCumulativeQuantitySample }
+func (x *CumulativeQuantitySeriesSample) asCumulativeQuantitySample() *raw.HKCumulativeQuantitySample {
+	return &x.inner.HKCumulativeQuantitySample
+}
 
-func (x *CumulativeQuantitySeriesSample) asQuantitySample() *raw.HKQuantitySample { return &x.inner.HKCumulativeQuantitySample.HKQuantitySample }
+func (x *CumulativeQuantitySeriesSample) asQuantitySample() *raw.HKQuantitySample {
+	return &x.inner.HKCumulativeQuantitySample.HKQuantitySample
+}
 
-func (x *CumulativeQuantitySeriesSample) asSample() *raw.HKSample { return &x.inner.HKCumulativeQuantitySample.HKQuantitySample.HKSample }
+func (x *CumulativeQuantitySeriesSample) asSample() *raw.HKSample {
+	return &x.inner.HKCumulativeQuantitySample.HKQuantitySample.HKSample
+}
 
-func (x *CumulativeQuantitySeriesSample) asObject() *raw.HKObject { return &x.inner.HKCumulativeQuantitySample.HKQuantitySample.HKSample.HKObject }
+func (x *CumulativeQuantitySeriesSample) asObject() *raw.HKObject {
+	return &x.inner.HKCumulativeQuantitySample.HKQuantitySample.HKSample.HKObject
+}
 
 // CumulativeQuantitySeriesSampleable is the interface implemented by [CumulativeQuantitySeriesSample], for mocking and DI.
 type CumulativeQuantitySeriesSampleable interface {
@@ -59,4 +69,3 @@ type CumulativeQuantitySeriesSampleable interface {
 }
 
 var _ CumulativeQuantitySeriesSampleable = (*CumulativeQuantitySeriesSample)(nil)
-

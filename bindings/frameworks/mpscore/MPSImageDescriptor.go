@@ -17,26 +17,26 @@ type MPSImageDescriptor struct {
 }
 
 var (
-	_clsMPSImageDescriptor = _objcClass("MPSImageDescriptor")
-	_mPSImageDescriptorSelImageDescriptorWithChannelFormatWidthHeightFeatureChannels = objc.RegisterName("imageDescriptorWithChannelFormat:width:height:featureChannels:")
+	_clsMPSImageDescriptor                                                                              = _objcClass("MPSImageDescriptor")
+	_mPSImageDescriptorSelImageDescriptorWithChannelFormatWidthHeightFeatureChannels                    = objc.RegisterName("imageDescriptorWithChannelFormat:width:height:featureChannels:")
 	_mPSImageDescriptorSelImageDescriptorWithChannelFormatWidthHeightFeatureChannelsNumberOfImagesUsage = objc.RegisterName("imageDescriptorWithChannelFormat:width:height:featureChannels:numberOfImages:usage:")
-	_mPSImageDescriptorSelWidth = objc.RegisterName("width")
-	_mPSImageDescriptorSelSetWidth = objc.RegisterName("setWidth:")
-	_mPSImageDescriptorSelHeight = objc.RegisterName("height")
-	_mPSImageDescriptorSelSetHeight = objc.RegisterName("setHeight:")
-	_mPSImageDescriptorSelFeatureChannels = objc.RegisterName("featureChannels")
-	_mPSImageDescriptorSelSetFeatureChannels = objc.RegisterName("setFeatureChannels:")
-	_mPSImageDescriptorSelNumberOfImages = objc.RegisterName("numberOfImages")
-	_mPSImageDescriptorSelSetNumberOfImages = objc.RegisterName("setNumberOfImages:")
-	_mPSImageDescriptorSelPixelFormat = objc.RegisterName("pixelFormat")
-	_mPSImageDescriptorSelChannelFormat = objc.RegisterName("channelFormat")
-	_mPSImageDescriptorSelSetChannelFormat = objc.RegisterName("setChannelFormat:")
-	_mPSImageDescriptorSelCpuCacheMode = objc.RegisterName("cpuCacheMode")
-	_mPSImageDescriptorSelSetCpuCacheMode = objc.RegisterName("setCpuCacheMode:")
-	_mPSImageDescriptorSelStorageMode = objc.RegisterName("storageMode")
-	_mPSImageDescriptorSelSetStorageMode = objc.RegisterName("setStorageMode:")
-	_mPSImageDescriptorSelUsage = objc.RegisterName("usage")
-	_mPSImageDescriptorSelSetUsage = objc.RegisterName("setUsage:")
+	_mPSImageDescriptorSelWidth                                                                         = objc.RegisterName("width")
+	_mPSImageDescriptorSelSetWidth                                                                      = objc.RegisterName("setWidth:")
+	_mPSImageDescriptorSelHeight                                                                        = objc.RegisterName("height")
+	_mPSImageDescriptorSelSetHeight                                                                     = objc.RegisterName("setHeight:")
+	_mPSImageDescriptorSelFeatureChannels                                                               = objc.RegisterName("featureChannels")
+	_mPSImageDescriptorSelSetFeatureChannels                                                            = objc.RegisterName("setFeatureChannels:")
+	_mPSImageDescriptorSelNumberOfImages                                                                = objc.RegisterName("numberOfImages")
+	_mPSImageDescriptorSelSetNumberOfImages                                                             = objc.RegisterName("setNumberOfImages:")
+	_mPSImageDescriptorSelPixelFormat                                                                   = objc.RegisterName("pixelFormat")
+	_mPSImageDescriptorSelChannelFormat                                                                 = objc.RegisterName("channelFormat")
+	_mPSImageDescriptorSelSetChannelFormat                                                              = objc.RegisterName("setChannelFormat:")
+	_mPSImageDescriptorSelCpuCacheMode                                                                  = objc.RegisterName("cpuCacheMode")
+	_mPSImageDescriptorSelSetCpuCacheMode                                                               = objc.RegisterName("setCpuCacheMode:")
+	_mPSImageDescriptorSelStorageMode                                                                   = objc.RegisterName("storageMode")
+	_mPSImageDescriptorSelSetStorageMode                                                                = objc.RegisterName("setStorageMode:")
+	_mPSImageDescriptorSelUsage                                                                         = objc.RegisterName("usage")
+	_mPSImageDescriptorSelSetUsage                                                                      = objc.RegisterName("setUsage:")
 )
 
 func MPSImageDescriptorFromID(id objc.ID) *MPSImageDescriptor {
@@ -52,14 +52,18 @@ func MPSImageDescriptorFromID(id objc.ID) *MPSImageDescriptor {
 // @abstract   Create a MPSImageDescriptor for a single read/write cnn image.
 func MPSImageDescriptorImageDescriptorWithChannelFormatWidthHeightFeatureChannels(channelFormat MPSImageFeatureChannelFormat, width uint, height uint, featureChannels uint) *MPSImageDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSImageDescriptor), _mPSImageDescriptorSelImageDescriptorWithChannelFormatWidthHeightFeatureChannels, channelFormat, width, height, featureChannels)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageDescriptorFromID(_ret)
 }
 
 // @abstract   Create a MPSImageDescriptor for a read/write cnn image with option to set usage and batch size (numberOfImages).
 func MPSImageDescriptorImageDescriptorWithChannelFormatWidthHeightFeatureChannelsNumberOfImagesUsage(channelFormat MPSImageFeatureChannelFormat, width uint, height uint, featureChannels uint, numberOfImages uint, usage metal.MTLTextureUsage) *MPSImageDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSImageDescriptor), _mPSImageDescriptorSelImageDescriptorWithChannelFormatWidthHeightFeatureChannelsNumberOfImagesUsage, channelFormat, width, height, featureChannels, numberOfImages, usage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageDescriptorFromID(_ret)
 }
 
@@ -148,4 +152,3 @@ func (o *MPSImageDescriptor) Usage() metal.MTLTextureUsage {
 func (o *MPSImageDescriptor) SetUsage(usage metal.MTLTextureUsage) {
 	o.Ptr().Send(_mPSImageDescriptorSelSetUsage, usage)
 }
-

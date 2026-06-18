@@ -47,4 +47,3 @@ type OctreeNodeable interface {
 }
 
 var _ OctreeNodeable = (*OctreeNode)(nil)
-

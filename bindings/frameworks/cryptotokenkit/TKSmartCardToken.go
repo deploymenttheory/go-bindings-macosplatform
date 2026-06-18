@@ -16,9 +16,9 @@ type TKSmartCardToken struct {
 }
 
 var (
-	_clsTKSmartCardToken = _objcClass("TKSmartCardToken")
+	_clsTKSmartCardToken                                          = _objcClass("TKSmartCardToken")
 	_tKSmartCardTokenSelInitWithSmartCardAIDInstanceIDTokenDriver = objc.RegisterName("initWithSmartCard:AID:instanceID:tokenDriver:")
-	_tKSmartCardTokenSelAID = objc.RegisterName("AID")
+	_tKSmartCardTokenSelAID                                       = objc.RegisterName("AID")
 )
 
 func TKSmartCardTokenFromID(id objc.ID) *TKSmartCardToken {
@@ -34,14 +34,17 @@ func TKSmartCardTokenFromID(id objc.ID) *TKSmartCardToken {
 // @discussion Initializes token instance with specified attributes. @param smartCard TKSmartCard instance representing connection to SmartCard on which the intance should operate. @param AID ISO7816-4 application ID which is preselected on the card. @param instanceID Unique, persistent identifier of this token.  This is typically implemented by some kind of SmartCard serial number. @param tokenDriver associated driver which initiated creation of this token.
 func (o *TKSmartCardToken) InitWithSmartCardAIDInstanceIDTokenDriver(smartCard *TKSmartCard, aID *foundation.NSData, instanceID *foundation.NSString, tokenDriver *TKSmartCardTokenDriver) *TKSmartCardToken {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardTokenSelInitWithSmartCardAIDInstanceIDTokenDriver, smartCard.Ptr(), aID.Ptr(), instanceID.Ptr(), tokenDriver.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return TKSmartCardTokenFromID(_ret)
 }
 
 // @discussion This is AID which is specified in extension's plist NSExtensionAttributes as @c com.apple.ctk.aid attribute. If the attribute specifies array of multiple AIDs, this parameter represents AID which was found on the card and is already preselected.  If @c com.apple.ctk.aid is not present, no application is automatically preselected and value of this property is nil.
 func (o *TKSmartCardToken) AID() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardTokenSelAID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

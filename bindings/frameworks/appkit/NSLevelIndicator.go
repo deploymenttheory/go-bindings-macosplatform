@@ -16,41 +16,41 @@ type NSLevelIndicator struct {
 }
 
 var (
-	_clsNSLevelIndicator = _objcClass("NSLevelIndicator")
-	_nSLevelIndicatorSelTickMarkValueAtIndex = objc.RegisterName("tickMarkValueAtIndex:")
-	_nSLevelIndicatorSelRectOfTickMarkAtIndex = objc.RegisterName("rectOfTickMarkAtIndex:")
-	_nSLevelIndicatorSelLevelIndicatorStyle = objc.RegisterName("levelIndicatorStyle")
-	_nSLevelIndicatorSelSetLevelIndicatorStyle = objc.RegisterName("setLevelIndicatorStyle:")
-	_nSLevelIndicatorSelIsEditable = objc.RegisterName("isEditable")
-	_nSLevelIndicatorSelSetEditable = objc.RegisterName("setEditable:")
-	_nSLevelIndicatorSelMinValue = objc.RegisterName("minValue")
-	_nSLevelIndicatorSelSetMinValue = objc.RegisterName("setMinValue:")
-	_nSLevelIndicatorSelMaxValue = objc.RegisterName("maxValue")
-	_nSLevelIndicatorSelSetMaxValue = objc.RegisterName("setMaxValue:")
-	_nSLevelIndicatorSelWarningValue = objc.RegisterName("warningValue")
-	_nSLevelIndicatorSelSetWarningValue = objc.RegisterName("setWarningValue:")
-	_nSLevelIndicatorSelCriticalValue = objc.RegisterName("criticalValue")
-	_nSLevelIndicatorSelSetCriticalValue = objc.RegisterName("setCriticalValue:")
-	_nSLevelIndicatorSelTickMarkPosition = objc.RegisterName("tickMarkPosition")
-	_nSLevelIndicatorSelSetTickMarkPosition = objc.RegisterName("setTickMarkPosition:")
-	_nSLevelIndicatorSelNumberOfTickMarks = objc.RegisterName("numberOfTickMarks")
-	_nSLevelIndicatorSelSetNumberOfTickMarks = objc.RegisterName("setNumberOfTickMarks:")
-	_nSLevelIndicatorSelNumberOfMajorTickMarks = objc.RegisterName("numberOfMajorTickMarks")
-	_nSLevelIndicatorSelSetNumberOfMajorTickMarks = objc.RegisterName("setNumberOfMajorTickMarks:")
-	_nSLevelIndicatorSelFillColor = objc.RegisterName("fillColor")
-	_nSLevelIndicatorSelSetFillColor = objc.RegisterName("setFillColor:")
-	_nSLevelIndicatorSelWarningFillColor = objc.RegisterName("warningFillColor")
-	_nSLevelIndicatorSelSetWarningFillColor = objc.RegisterName("setWarningFillColor:")
-	_nSLevelIndicatorSelCriticalFillColor = objc.RegisterName("criticalFillColor")
-	_nSLevelIndicatorSelSetCriticalFillColor = objc.RegisterName("setCriticalFillColor:")
-	_nSLevelIndicatorSelDrawsTieredCapacityLevels = objc.RegisterName("drawsTieredCapacityLevels")
+	_clsNSLevelIndicator                             = _objcClass("NSLevelIndicator")
+	_nSLevelIndicatorSelTickMarkValueAtIndex         = objc.RegisterName("tickMarkValueAtIndex:")
+	_nSLevelIndicatorSelRectOfTickMarkAtIndex        = objc.RegisterName("rectOfTickMarkAtIndex:")
+	_nSLevelIndicatorSelLevelIndicatorStyle          = objc.RegisterName("levelIndicatorStyle")
+	_nSLevelIndicatorSelSetLevelIndicatorStyle       = objc.RegisterName("setLevelIndicatorStyle:")
+	_nSLevelIndicatorSelIsEditable                   = objc.RegisterName("isEditable")
+	_nSLevelIndicatorSelSetEditable                  = objc.RegisterName("setEditable:")
+	_nSLevelIndicatorSelMinValue                     = objc.RegisterName("minValue")
+	_nSLevelIndicatorSelSetMinValue                  = objc.RegisterName("setMinValue:")
+	_nSLevelIndicatorSelMaxValue                     = objc.RegisterName("maxValue")
+	_nSLevelIndicatorSelSetMaxValue                  = objc.RegisterName("setMaxValue:")
+	_nSLevelIndicatorSelWarningValue                 = objc.RegisterName("warningValue")
+	_nSLevelIndicatorSelSetWarningValue              = objc.RegisterName("setWarningValue:")
+	_nSLevelIndicatorSelCriticalValue                = objc.RegisterName("criticalValue")
+	_nSLevelIndicatorSelSetCriticalValue             = objc.RegisterName("setCriticalValue:")
+	_nSLevelIndicatorSelTickMarkPosition             = objc.RegisterName("tickMarkPosition")
+	_nSLevelIndicatorSelSetTickMarkPosition          = objc.RegisterName("setTickMarkPosition:")
+	_nSLevelIndicatorSelNumberOfTickMarks            = objc.RegisterName("numberOfTickMarks")
+	_nSLevelIndicatorSelSetNumberOfTickMarks         = objc.RegisterName("setNumberOfTickMarks:")
+	_nSLevelIndicatorSelNumberOfMajorTickMarks       = objc.RegisterName("numberOfMajorTickMarks")
+	_nSLevelIndicatorSelSetNumberOfMajorTickMarks    = objc.RegisterName("setNumberOfMajorTickMarks:")
+	_nSLevelIndicatorSelFillColor                    = objc.RegisterName("fillColor")
+	_nSLevelIndicatorSelSetFillColor                 = objc.RegisterName("setFillColor:")
+	_nSLevelIndicatorSelWarningFillColor             = objc.RegisterName("warningFillColor")
+	_nSLevelIndicatorSelSetWarningFillColor          = objc.RegisterName("setWarningFillColor:")
+	_nSLevelIndicatorSelCriticalFillColor            = objc.RegisterName("criticalFillColor")
+	_nSLevelIndicatorSelSetCriticalFillColor         = objc.RegisterName("setCriticalFillColor:")
+	_nSLevelIndicatorSelDrawsTieredCapacityLevels    = objc.RegisterName("drawsTieredCapacityLevels")
 	_nSLevelIndicatorSelSetDrawsTieredCapacityLevels = objc.RegisterName("setDrawsTieredCapacityLevels:")
-	_nSLevelIndicatorSelPlaceholderVisibility = objc.RegisterName("placeholderVisibility")
-	_nSLevelIndicatorSelSetPlaceholderVisibility = objc.RegisterName("setPlaceholderVisibility:")
-	_nSLevelIndicatorSelRatingImage = objc.RegisterName("ratingImage")
-	_nSLevelIndicatorSelSetRatingImage = objc.RegisterName("setRatingImage:")
-	_nSLevelIndicatorSelRatingPlaceholderImage = objc.RegisterName("ratingPlaceholderImage")
-	_nSLevelIndicatorSelSetRatingPlaceholderImage = objc.RegisterName("setRatingPlaceholderImage:")
+	_nSLevelIndicatorSelPlaceholderVisibility        = objc.RegisterName("placeholderVisibility")
+	_nSLevelIndicatorSelSetPlaceholderVisibility     = objc.RegisterName("setPlaceholderVisibility:")
+	_nSLevelIndicatorSelRatingImage                  = objc.RegisterName("ratingImage")
+	_nSLevelIndicatorSelSetRatingImage               = objc.RegisterName("setRatingImage:")
+	_nSLevelIndicatorSelRatingPlaceholderImage       = objc.RegisterName("ratingPlaceholderImage")
+	_nSLevelIndicatorSelSetRatingPlaceholderImage    = objc.RegisterName("setRatingPlaceholderImage:")
 )
 
 func NSLevelIndicatorFromID(id objc.ID) *NSLevelIndicator {
@@ -157,7 +157,9 @@ func (o *NSLevelIndicator) SetNumberOfMajorTickMarks(numberOfMajorTickMarks int)
 // Sets the fill color used by Continuous and Discrete Capacity indicators when drawing the "normal" state, and by the rating indicator when drawing stars. The default value is a system-defined color which may vary between level indicator styles and OS releases.
 func (o *NSLevelIndicator) FillColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLevelIndicatorSelFillColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -169,7 +171,9 @@ func (o *NSLevelIndicator) SetFillColor(fillColor *NSColor) {
 // Sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the "warning" threshold. The default value is a system-defined color which may vary between level indicator styles and OS releases.
 func (o *NSLevelIndicator) WarningFillColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLevelIndicatorSelWarningFillColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -181,7 +185,9 @@ func (o *NSLevelIndicator) SetWarningFillColor(warningFillColor *NSColor) {
 // Sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the "critical" threshold. The default value is a system-defined color which may vary between level indicator styles and OS releases.
 func (o *NSLevelIndicator) CriticalFillColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLevelIndicatorSelCriticalFillColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -213,7 +219,9 @@ func (o *NSLevelIndicator) SetPlaceholderVisibility(placeholderVisibility NSLeve
 // Sets the image used by the rating indicator style in place of the default star image. The default value is `nil`.
 func (o *NSLevelIndicator) RatingImage() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLevelIndicatorSelRatingImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -224,11 +232,12 @@ func (o *NSLevelIndicator) SetRatingImage(ratingImage *NSImage) {
 
 func (o *NSLevelIndicator) RatingPlaceholderImage() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLevelIndicatorSelRatingPlaceholderImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
 func (o *NSLevelIndicator) SetRatingPlaceholderImage(ratingPlaceholderImage *NSImage) {
 	o.Ptr().Send(_nSLevelIndicatorSelSetRatingPlaceholderImage, ratingPlaceholderImage.Ptr())
 }
-

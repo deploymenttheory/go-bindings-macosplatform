@@ -17,79 +17,79 @@ type NSText struct {
 }
 
 var (
-	_clsNSText = _objcClass("NSText")
-	_nSTextSelInitWithFrame = objc.RegisterName("initWithFrame:")
-	_nSTextSelInitWithCoder = objc.RegisterName("initWithCoder:")
+	_clsNSText                                   = _objcClass("NSText")
+	_nSTextSelInitWithFrame                      = objc.RegisterName("initWithFrame:")
+	_nSTextSelInitWithCoder                      = objc.RegisterName("initWithCoder:")
 	_nSTextSelReplaceCharactersInRangeWithString = objc.RegisterName("replaceCharactersInRange:withString:")
-	_nSTextSelReplaceCharactersInRangeWithRTF = objc.RegisterName("replaceCharactersInRange:withRTF:")
-	_nSTextSelReplaceCharactersInRangeWithRTFD = objc.RegisterName("replaceCharactersInRange:withRTFD:")
-	_nSTextSelRTFFromRange = objc.RegisterName("RTFFromRange:")
-	_nSTextSelRTFDFromRange = objc.RegisterName("RTFDFromRange:")
-	_nSTextSelWriteRTFDToFileAtomically = objc.RegisterName("writeRTFDToFile:atomically:")
-	_nSTextSelReadRTFDFromFile = objc.RegisterName("readRTFDFromFile:")
-	_nSTextSelScrollRangeToVisible = objc.RegisterName("scrollRangeToVisible:")
-	_nSTextSelSetTextColorRange = objc.RegisterName("setTextColor:range:")
-	_nSTextSelSetFontRange = objc.RegisterName("setFont:range:")
-	_nSTextSelSizeToFit = objc.RegisterName("sizeToFit")
-	_nSTextSelCopy = objc.RegisterName("copy:")
-	_nSTextSelCopyFont = objc.RegisterName("copyFont:")
-	_nSTextSelCopyRuler = objc.RegisterName("copyRuler:")
-	_nSTextSelCut = objc.RegisterName("cut:")
-	_nSTextSelDelete = objc.RegisterName("delete:")
-	_nSTextSelPaste = objc.RegisterName("paste:")
-	_nSTextSelPasteFont = objc.RegisterName("pasteFont:")
-	_nSTextSelPasteRuler = objc.RegisterName("pasteRuler:")
-	_nSTextSelSelectAll = objc.RegisterName("selectAll:")
-	_nSTextSelChangeFont = objc.RegisterName("changeFont:")
-	_nSTextSelAlignLeft = objc.RegisterName("alignLeft:")
-	_nSTextSelAlignRight = objc.RegisterName("alignRight:")
-	_nSTextSelAlignCenter = objc.RegisterName("alignCenter:")
-	_nSTextSelSubscript = objc.RegisterName("subscript:")
-	_nSTextSelSuperscript = objc.RegisterName("superscript:")
-	_nSTextSelUnderline = objc.RegisterName("underline:")
-	_nSTextSelUnscript = objc.RegisterName("unscript:")
-	_nSTextSelShowGuessPanel = objc.RegisterName("showGuessPanel:")
-	_nSTextSelCheckSpelling = objc.RegisterName("checkSpelling:")
-	_nSTextSelToggleRuler = objc.RegisterName("toggleRuler:")
-	_nSTextSelString = objc.RegisterName("string")
-	_nSTextSelSetString = objc.RegisterName("setString:")
-	_nSTextSelDelegate = objc.RegisterName("delegate")
-	_nSTextSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSTextSelIsEditable = objc.RegisterName("isEditable")
-	_nSTextSelSetEditable = objc.RegisterName("setEditable:")
-	_nSTextSelIsSelectable = objc.RegisterName("isSelectable")
-	_nSTextSelSetSelectable = objc.RegisterName("setSelectable:")
-	_nSTextSelIsRichText = objc.RegisterName("isRichText")
-	_nSTextSelSetRichText = objc.RegisterName("setRichText:")
-	_nSTextSelImportsGraphics = objc.RegisterName("importsGraphics")
-	_nSTextSelSetImportsGraphics = objc.RegisterName("setImportsGraphics:")
-	_nSTextSelIsFieldEditor = objc.RegisterName("isFieldEditor")
-	_nSTextSelSetFieldEditor = objc.RegisterName("setFieldEditor:")
-	_nSTextSelUsesFontPanel = objc.RegisterName("usesFontPanel")
-	_nSTextSelSetUsesFontPanel = objc.RegisterName("setUsesFontPanel:")
-	_nSTextSelDrawsBackground = objc.RegisterName("drawsBackground")
-	_nSTextSelSetDrawsBackground = objc.RegisterName("setDrawsBackground:")
-	_nSTextSelBackgroundColor = objc.RegisterName("backgroundColor")
-	_nSTextSelSetBackgroundColor = objc.RegisterName("setBackgroundColor:")
-	_nSTextSelIsRulerVisible = objc.RegisterName("isRulerVisible")
-	_nSTextSelSelectedRange = objc.RegisterName("selectedRange")
-	_nSTextSelSetSelectedRange = objc.RegisterName("setSelectedRange:")
-	_nSTextSelFont = objc.RegisterName("font")
-	_nSTextSelSetFont = objc.RegisterName("setFont:")
-	_nSTextSelTextColor = objc.RegisterName("textColor")
-	_nSTextSelSetTextColor = objc.RegisterName("setTextColor:")
-	_nSTextSelAlignment = objc.RegisterName("alignment")
-	_nSTextSelSetAlignment = objc.RegisterName("setAlignment:")
-	_nSTextSelBaseWritingDirection = objc.RegisterName("baseWritingDirection")
-	_nSTextSelSetBaseWritingDirection = objc.RegisterName("setBaseWritingDirection:")
-	_nSTextSelMaxSize = objc.RegisterName("maxSize")
-	_nSTextSelSetMaxSize = objc.RegisterName("setMaxSize:")
-	_nSTextSelMinSize = objc.RegisterName("minSize")
-	_nSTextSelSetMinSize = objc.RegisterName("setMinSize:")
-	_nSTextSelIsHorizontallyResizable = objc.RegisterName("isHorizontallyResizable")
-	_nSTextSelSetHorizontallyResizable = objc.RegisterName("setHorizontallyResizable:")
-	_nSTextSelIsVerticallyResizable = objc.RegisterName("isVerticallyResizable")
-	_nSTextSelSetVerticallyResizable = objc.RegisterName("setVerticallyResizable:")
+	_nSTextSelReplaceCharactersInRangeWithRTF    = objc.RegisterName("replaceCharactersInRange:withRTF:")
+	_nSTextSelReplaceCharactersInRangeWithRTFD   = objc.RegisterName("replaceCharactersInRange:withRTFD:")
+	_nSTextSelRTFFromRange                       = objc.RegisterName("RTFFromRange:")
+	_nSTextSelRTFDFromRange                      = objc.RegisterName("RTFDFromRange:")
+	_nSTextSelWriteRTFDToFileAtomically          = objc.RegisterName("writeRTFDToFile:atomically:")
+	_nSTextSelReadRTFDFromFile                   = objc.RegisterName("readRTFDFromFile:")
+	_nSTextSelScrollRangeToVisible               = objc.RegisterName("scrollRangeToVisible:")
+	_nSTextSelSetTextColorRange                  = objc.RegisterName("setTextColor:range:")
+	_nSTextSelSetFontRange                       = objc.RegisterName("setFont:range:")
+	_nSTextSelSizeToFit                          = objc.RegisterName("sizeToFit")
+	_nSTextSelCopy                               = objc.RegisterName("copy:")
+	_nSTextSelCopyFont                           = objc.RegisterName("copyFont:")
+	_nSTextSelCopyRuler                          = objc.RegisterName("copyRuler:")
+	_nSTextSelCut                                = objc.RegisterName("cut:")
+	_nSTextSelDelete                             = objc.RegisterName("delete:")
+	_nSTextSelPaste                              = objc.RegisterName("paste:")
+	_nSTextSelPasteFont                          = objc.RegisterName("pasteFont:")
+	_nSTextSelPasteRuler                         = objc.RegisterName("pasteRuler:")
+	_nSTextSelSelectAll                          = objc.RegisterName("selectAll:")
+	_nSTextSelChangeFont                         = objc.RegisterName("changeFont:")
+	_nSTextSelAlignLeft                          = objc.RegisterName("alignLeft:")
+	_nSTextSelAlignRight                         = objc.RegisterName("alignRight:")
+	_nSTextSelAlignCenter                        = objc.RegisterName("alignCenter:")
+	_nSTextSelSubscript                          = objc.RegisterName("subscript:")
+	_nSTextSelSuperscript                        = objc.RegisterName("superscript:")
+	_nSTextSelUnderline                          = objc.RegisterName("underline:")
+	_nSTextSelUnscript                           = objc.RegisterName("unscript:")
+	_nSTextSelShowGuessPanel                     = objc.RegisterName("showGuessPanel:")
+	_nSTextSelCheckSpelling                      = objc.RegisterName("checkSpelling:")
+	_nSTextSelToggleRuler                        = objc.RegisterName("toggleRuler:")
+	_nSTextSelString                             = objc.RegisterName("string")
+	_nSTextSelSetString                          = objc.RegisterName("setString:")
+	_nSTextSelDelegate                           = objc.RegisterName("delegate")
+	_nSTextSelSetDelegate                        = objc.RegisterName("setDelegate:")
+	_nSTextSelIsEditable                         = objc.RegisterName("isEditable")
+	_nSTextSelSetEditable                        = objc.RegisterName("setEditable:")
+	_nSTextSelIsSelectable                       = objc.RegisterName("isSelectable")
+	_nSTextSelSetSelectable                      = objc.RegisterName("setSelectable:")
+	_nSTextSelIsRichText                         = objc.RegisterName("isRichText")
+	_nSTextSelSetRichText                        = objc.RegisterName("setRichText:")
+	_nSTextSelImportsGraphics                    = objc.RegisterName("importsGraphics")
+	_nSTextSelSetImportsGraphics                 = objc.RegisterName("setImportsGraphics:")
+	_nSTextSelIsFieldEditor                      = objc.RegisterName("isFieldEditor")
+	_nSTextSelSetFieldEditor                     = objc.RegisterName("setFieldEditor:")
+	_nSTextSelUsesFontPanel                      = objc.RegisterName("usesFontPanel")
+	_nSTextSelSetUsesFontPanel                   = objc.RegisterName("setUsesFontPanel:")
+	_nSTextSelDrawsBackground                    = objc.RegisterName("drawsBackground")
+	_nSTextSelSetDrawsBackground                 = objc.RegisterName("setDrawsBackground:")
+	_nSTextSelBackgroundColor                    = objc.RegisterName("backgroundColor")
+	_nSTextSelSetBackgroundColor                 = objc.RegisterName("setBackgroundColor:")
+	_nSTextSelIsRulerVisible                     = objc.RegisterName("isRulerVisible")
+	_nSTextSelSelectedRange                      = objc.RegisterName("selectedRange")
+	_nSTextSelSetSelectedRange                   = objc.RegisterName("setSelectedRange:")
+	_nSTextSelFont                               = objc.RegisterName("font")
+	_nSTextSelSetFont                            = objc.RegisterName("setFont:")
+	_nSTextSelTextColor                          = objc.RegisterName("textColor")
+	_nSTextSelSetTextColor                       = objc.RegisterName("setTextColor:")
+	_nSTextSelAlignment                          = objc.RegisterName("alignment")
+	_nSTextSelSetAlignment                       = objc.RegisterName("setAlignment:")
+	_nSTextSelBaseWritingDirection               = objc.RegisterName("baseWritingDirection")
+	_nSTextSelSetBaseWritingDirection            = objc.RegisterName("setBaseWritingDirection:")
+	_nSTextSelMaxSize                            = objc.RegisterName("maxSize")
+	_nSTextSelSetMaxSize                         = objc.RegisterName("setMaxSize:")
+	_nSTextSelMinSize                            = objc.RegisterName("minSize")
+	_nSTextSelSetMinSize                         = objc.RegisterName("setMinSize:")
+	_nSTextSelIsHorizontallyResizable            = objc.RegisterName("isHorizontallyResizable")
+	_nSTextSelSetHorizontallyResizable           = objc.RegisterName("setHorizontallyResizable:")
+	_nSTextSelIsVerticallyResizable              = objc.RegisterName("isVerticallyResizable")
+	_nSTextSelSetVerticallyResizable             = objc.RegisterName("setVerticallyResizable:")
 )
 
 func NSTextFromID(id objc.ID) *NSText {
@@ -104,13 +104,17 @@ func NSTextFromID(id objc.ID) *NSText {
 
 func (o *NSText) InitWithFrame(frameRect corefoundation.CGRect) *NSText {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelInitWithFrame, frameRect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextFromID(_ret)
 }
 
 func (o *NSText) InitWithCoder(coder *foundation.NSCoder) *NSText {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextFromID(_ret)
 }
 
@@ -128,13 +132,17 @@ func (o *NSText) ReplaceCharactersInRangeWithRTFD(range_ foundation.NSRange, rtf
 
 func (o *NSText) RTFFromRange(range_ foundation.NSRange) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelRTFFromRange, range_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *NSText) RTFDFromRange(range_ foundation.NSRange) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelRTFDFromRange, range_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -246,7 +254,9 @@ func (o *NSText) ToggleRuler(sender objc.ID) {
 
 func (o *NSText) String() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -328,7 +338,9 @@ func (o *NSText) SetDrawsBackground(drawsBackground bool) {
 
 func (o *NSText) BackgroundColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelBackgroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -352,7 +364,9 @@ func (o *NSText) SetSelectedRange(selectedRange foundation.NSRange) {
 
 func (o *NSText) Font() *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelFont)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
@@ -362,7 +376,9 @@ func (o *NSText) SetFont(font *NSFont) {
 
 func (o *NSText) TextColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelTextColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -423,4 +439,3 @@ func (o *NSText) IsVerticallyResizable() bool {
 func (o *NSText) SetVerticallyResizable(verticallyResizable bool) {
 	o.Ptr().Send(_nSTextSelSetVerticallyResizable, verticallyResizable)
 }
-

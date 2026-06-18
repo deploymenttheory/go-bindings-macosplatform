@@ -79,7 +79,9 @@ func (x *ArrayMultiaryKernel) EncodeToCommandEncoderCommandBufferSourceArraysDes
 
 func (x *ArrayMultiaryKernel) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel { return x.inner }
 
-func (x *ArrayMultiaryKernel) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryBase }
+func (x *ArrayMultiaryKernel) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase {
+	return &x.inner.MPSNDArrayMultiaryBase
+}
 
 // ArrayMultiaryKernelable is the interface implemented by [ArrayMultiaryKernel], for mocking and DI.
 type ArrayMultiaryKernelable interface {
@@ -93,4 +95,3 @@ type ArrayMultiaryKernelable interface {
 }
 
 var _ ArrayMultiaryKernelable = (*ArrayMultiaryKernel)(nil)
-

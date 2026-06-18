@@ -18,13 +18,13 @@ type VNDetectBarcodesRequest struct {
 }
 
 var (
-	_clsVNDetectBarcodesRequest = _objcClass("VNDetectBarcodesRequest")
+	_clsVNDetectBarcodesRequest                                   = _objcClass("VNDetectBarcodesRequest")
 	_vNDetectBarcodesRequestSelSupportedSymbologiesAndReturnError = objc.RegisterName("supportedSymbologiesAndReturnError:")
-	_vNDetectBarcodesRequestSelSupportedSymbologies = objc.RegisterName("supportedSymbologies")
-	_vNDetectBarcodesRequestSelSymbologies = objc.RegisterName("symbologies")
-	_vNDetectBarcodesRequestSelSetSymbologies = objc.RegisterName("setSymbologies:")
-	_vNDetectBarcodesRequestSelCoalesceCompositeSymbologies = objc.RegisterName("coalesceCompositeSymbologies")
-	_vNDetectBarcodesRequestSelSetCoalesceCompositeSymbologies = objc.RegisterName("setCoalesceCompositeSymbologies:")
+	_vNDetectBarcodesRequestSelSupportedSymbologies               = objc.RegisterName("supportedSymbologies")
+	_vNDetectBarcodesRequestSelSymbologies                        = objc.RegisterName("symbologies")
+	_vNDetectBarcodesRequestSelSetSymbologies                     = objc.RegisterName("setSymbologies:")
+	_vNDetectBarcodesRequestSelCoalesceCompositeSymbologies       = objc.RegisterName("coalesceCompositeSymbologies")
+	_vNDetectBarcodesRequestSelSetCoalesceCompositeSymbologies    = objc.RegisterName("setCoalesceCompositeSymbologies:")
 )
 
 func VNDetectBarcodesRequestFromID(id objc.ID) *VNDetectBarcodesRequest {
@@ -73,4 +73,3 @@ func (o *VNDetectBarcodesRequest) CoalesceCompositeSymbologies() bool {
 func (o *VNDetectBarcodesRequest) SetCoalesceCompositeSymbologies(coalesceCompositeSymbologies bool) {
 	o.Ptr().Send(_vNDetectBarcodesRequestSelSetCoalesceCompositeSymbologies, coalesceCompositeSymbologies)
 }
-

@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_tkLib uintptr
-	_loadOnce sync.Once
+	_tkLib         uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -95,7 +95,9 @@ func _loadLibrary() {
 	_register("Tk_CreateAnonymousWindow", func() { purego.RegisterLibFunc(&_fnTk_CreateAnonymousWindow, _tkLib, "Tk_CreateAnonymousWindow") })
 	_register("Tk_CreateBinding", func() { purego.RegisterLibFunc(&_fnTk_CreateBinding, _tkLib, "Tk_CreateBinding") })
 	_register("Tk_CreateBindingTable", func() { purego.RegisterLibFunc(&_fnTk_CreateBindingTable, _tkLib, "Tk_CreateBindingTable") })
-	_register("Tk_CreateClientMessageHandler", func() { purego.RegisterLibFunc(&_fnTk_CreateClientMessageHandler, _tkLib, "Tk_CreateClientMessageHandler") })
+	_register("Tk_CreateClientMessageHandler", func() {
+		purego.RegisterLibFunc(&_fnTk_CreateClientMessageHandler, _tkLib, "Tk_CreateClientMessageHandler")
+	})
 	_register("Tk_CreateConsoleWindow", func() { purego.RegisterLibFunc(&_fnTk_CreateConsoleWindow, _tkLib, "Tk_CreateConsoleWindow") })
 	_register("Tk_CreateErrorHandler", func() { purego.RegisterLibFunc(&_fnTk_CreateErrorHandler, _tkLib, "Tk_CreateErrorHandler") })
 	_register("Tk_CreateEventHandler", func() { purego.RegisterLibFunc(&_fnTk_CreateEventHandler, _tkLib, "Tk_CreateEventHandler") })
@@ -103,7 +105,9 @@ func _loadLibrary() {
 	_register("Tk_CreateImageType", func() { purego.RegisterLibFunc(&_fnTk_CreateImageType, _tkLib, "Tk_CreateImageType") })
 	_register("Tk_CreateItemType", func() { purego.RegisterLibFunc(&_fnTk_CreateItemType, _tkLib, "Tk_CreateItemType") })
 	_register("Tk_CreateOldImageType", func() { purego.RegisterLibFunc(&_fnTk_CreateOldImageType, _tkLib, "Tk_CreateOldImageType") })
-	_register("Tk_CreateOldPhotoImageFormat", func() { purego.RegisterLibFunc(&_fnTk_CreateOldPhotoImageFormat, _tkLib, "Tk_CreateOldPhotoImageFormat") })
+	_register("Tk_CreateOldPhotoImageFormat", func() {
+		purego.RegisterLibFunc(&_fnTk_CreateOldPhotoImageFormat, _tkLib, "Tk_CreateOldPhotoImageFormat")
+	})
 	_register("Tk_CreateOptionTable", func() { purego.RegisterLibFunc(&_fnTk_CreateOptionTable, _tkLib, "Tk_CreateOptionTable") })
 	_register("Tk_CreateOutline", func() { purego.RegisterLibFunc(&_fnTk_CreateOutline, _tkLib, "Tk_CreateOutline") })
 	_register("Tk_CreatePhotoImageFormat", func() { purego.RegisterLibFunc(&_fnTk_CreatePhotoImageFormat, _tkLib, "Tk_CreatePhotoImageFormat") })
@@ -117,7 +121,9 @@ func _loadLibrary() {
 	_register("Tk_DeleteAllBindings", func() { purego.RegisterLibFunc(&_fnTk_DeleteAllBindings, _tkLib, "Tk_DeleteAllBindings") })
 	_register("Tk_DeleteBinding", func() { purego.RegisterLibFunc(&_fnTk_DeleteBinding, _tkLib, "Tk_DeleteBinding") })
 	_register("Tk_DeleteBindingTable", func() { purego.RegisterLibFunc(&_fnTk_DeleteBindingTable, _tkLib, "Tk_DeleteBindingTable") })
-	_register("Tk_DeleteClientMessageHandler", func() { purego.RegisterLibFunc(&_fnTk_DeleteClientMessageHandler, _tkLib, "Tk_DeleteClientMessageHandler") })
+	_register("Tk_DeleteClientMessageHandler", func() {
+		purego.RegisterLibFunc(&_fnTk_DeleteClientMessageHandler, _tkLib, "Tk_DeleteClientMessageHandler")
+	})
 	_register("Tk_DeleteErrorHandler", func() { purego.RegisterLibFunc(&_fnTk_DeleteErrorHandler, _tkLib, "Tk_DeleteErrorHandler") })
 	_register("Tk_DeleteEventHandler", func() { purego.RegisterLibFunc(&_fnTk_DeleteEventHandler, _tkLib, "Tk_DeleteEventHandler") })
 	_register("Tk_DeleteGenericHandler", func() { purego.RegisterLibFunc(&_fnTk_DeleteGenericHandler, _tkLib, "Tk_DeleteGenericHandler") })
@@ -260,11 +266,17 @@ func _loadLibrary() {
 	_register("Tk_PhotoGetImage", func() { purego.RegisterLibFunc(&_fnTk_PhotoGetImage, _tkLib, "Tk_PhotoGetImage") })
 	_register("Tk_PhotoGetSize", func() { purego.RegisterLibFunc(&_fnTk_PhotoGetSize, _tkLib, "Tk_PhotoGetSize") })
 	_register("Tk_PhotoPutBlock", func() { purego.RegisterLibFunc(&_fnTk_PhotoPutBlock, _tkLib, "Tk_PhotoPutBlock") })
-	_register("Tk_PhotoPutBlock_NoComposite", func() { purego.RegisterLibFunc(&_fnTk_PhotoPutBlock_NoComposite, _tkLib, "Tk_PhotoPutBlock_NoComposite") })
+	_register("Tk_PhotoPutBlock_NoComposite", func() {
+		purego.RegisterLibFunc(&_fnTk_PhotoPutBlock_NoComposite, _tkLib, "Tk_PhotoPutBlock_NoComposite")
+	})
 	_register("Tk_PhotoPutBlock_Panic", func() { purego.RegisterLibFunc(&_fnTk_PhotoPutBlock_Panic, _tkLib, "Tk_PhotoPutBlock_Panic") })
 	_register("Tk_PhotoPutZoomedBlock", func() { purego.RegisterLibFunc(&_fnTk_PhotoPutZoomedBlock, _tkLib, "Tk_PhotoPutZoomedBlock") })
-	_register("Tk_PhotoPutZoomedBlock_NoComposite", func() { purego.RegisterLibFunc(&_fnTk_PhotoPutZoomedBlock_NoComposite, _tkLib, "Tk_PhotoPutZoomedBlock_NoComposite") })
-	_register("Tk_PhotoPutZoomedBlock_Panic", func() { purego.RegisterLibFunc(&_fnTk_PhotoPutZoomedBlock_Panic, _tkLib, "Tk_PhotoPutZoomedBlock_Panic") })
+	_register("Tk_PhotoPutZoomedBlock_NoComposite", func() {
+		purego.RegisterLibFunc(&_fnTk_PhotoPutZoomedBlock_NoComposite, _tkLib, "Tk_PhotoPutZoomedBlock_NoComposite")
+	})
+	_register("Tk_PhotoPutZoomedBlock_Panic", func() {
+		purego.RegisterLibFunc(&_fnTk_PhotoPutZoomedBlock_Panic, _tkLib, "Tk_PhotoPutZoomedBlock_Panic")
+	})
 	_register("Tk_PhotoSetSize", func() { purego.RegisterLibFunc(&_fnTk_PhotoSetSize, _tkLib, "Tk_PhotoSetSize") })
 	_register("Tk_PhotoSetSize_Panic", func() { purego.RegisterLibFunc(&_fnTk_PhotoSetSize_Panic, _tkLib, "Tk_PhotoSetSize_Panic") })
 	_register("Tk_PointToChar", func() { purego.RegisterLibFunc(&_fnTk_PointToChar, _tkLib, "Tk_PointToChar") })
@@ -301,7 +313,9 @@ func _loadLibrary() {
 	_register("Tk_SetOptions", func() { purego.RegisterLibFunc(&_fnTk_SetOptions, _tkLib, "Tk_SetOptions") })
 	_register("Tk_SetTSOrigin", func() { purego.RegisterLibFunc(&_fnTk_SetTSOrigin, _tkLib, "Tk_SetTSOrigin") })
 	_register("Tk_SetWindowBackground", func() { purego.RegisterLibFunc(&_fnTk_SetWindowBackground, _tkLib, "Tk_SetWindowBackground") })
-	_register("Tk_SetWindowBackgroundPixmap", func() { purego.RegisterLibFunc(&_fnTk_SetWindowBackgroundPixmap, _tkLib, "Tk_SetWindowBackgroundPixmap") })
+	_register("Tk_SetWindowBackgroundPixmap", func() {
+		purego.RegisterLibFunc(&_fnTk_SetWindowBackgroundPixmap, _tkLib, "Tk_SetWindowBackgroundPixmap")
+	})
 	_register("Tk_SetWindowBorder", func() { purego.RegisterLibFunc(&_fnTk_SetWindowBorder, _tkLib, "Tk_SetWindowBorder") })
 	_register("Tk_SetWindowBorderPixmap", func() { purego.RegisterLibFunc(&_fnTk_SetWindowBorderPixmap, _tkLib, "Tk_SetWindowBorderPixmap") })
 	_register("Tk_SetWindowBorderWidth", func() { purego.RegisterLibFunc(&_fnTk_SetWindowBorderWidth, _tkLib, "Tk_SetWindowBorderWidth") })

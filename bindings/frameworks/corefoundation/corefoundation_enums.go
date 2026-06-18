@@ -11,62 +11,94 @@ import (
 type CFCalendarUnit int64
 
 const (
-	KCFCalendarUnitEra CFCalendarUnit = 2
-	KCFCalendarUnitYear CFCalendarUnit = 4
-	KCFCalendarUnitMonth CFCalendarUnit = 8
-	KCFCalendarUnitDay CFCalendarUnit = 16
-	KCFCalendarUnitHour CFCalendarUnit = 32
-	KCFCalendarUnitMinute CFCalendarUnit = 64
-	KCFCalendarUnitSecond CFCalendarUnit = 128
-	KCFCalendarUnitWeek CFCalendarUnit = 256
-	KCFCalendarUnitWeekday CFCalendarUnit = 512
-	KCFCalendarUnitWeekdayOrdinal CFCalendarUnit = 1024
-	KCFCalendarUnitQuarter CFCalendarUnit = 2048
-	KCFCalendarUnitWeekOfMonth CFCalendarUnit = 4096
-	KCFCalendarUnitWeekOfYear CFCalendarUnit = 8192
+	KCFCalendarUnitEra               CFCalendarUnit = 2
+	KCFCalendarUnitYear              CFCalendarUnit = 4
+	KCFCalendarUnitMonth             CFCalendarUnit = 8
+	KCFCalendarUnitDay               CFCalendarUnit = 16
+	KCFCalendarUnitHour              CFCalendarUnit = 32
+	KCFCalendarUnitMinute            CFCalendarUnit = 64
+	KCFCalendarUnitSecond            CFCalendarUnit = 128
+	KCFCalendarUnitWeek              CFCalendarUnit = 256
+	KCFCalendarUnitWeekday           CFCalendarUnit = 512
+	KCFCalendarUnitWeekdayOrdinal    CFCalendarUnit = 1024
+	KCFCalendarUnitQuarter           CFCalendarUnit = 2048
+	KCFCalendarUnitWeekOfMonth       CFCalendarUnit = 4096
+	KCFCalendarUnitWeekOfYear        CFCalendarUnit = 8192
 	KCFCalendarUnitYearForWeekOfYear CFCalendarUnit = 16384
-	KCFCalendarUnitDayOfYear CFCalendarUnit = 65536
+	KCFCalendarUnitDayOfYear         CFCalendarUnit = 65536
 )
 
 func (e CFCalendarUnit) String() string {
 	var parts []string
-	if e&KCFCalendarUnitEra != 0 { parts = append(parts, "KCFCalendarUnitEra") }
-	if e&KCFCalendarUnitYear != 0 { parts = append(parts, "KCFCalendarUnitYear") }
-	if e&KCFCalendarUnitMonth != 0 { parts = append(parts, "KCFCalendarUnitMonth") }
-	if e&KCFCalendarUnitDay != 0 { parts = append(parts, "KCFCalendarUnitDay") }
-	if e&KCFCalendarUnitHour != 0 { parts = append(parts, "KCFCalendarUnitHour") }
-	if e&KCFCalendarUnitMinute != 0 { parts = append(parts, "KCFCalendarUnitMinute") }
-	if e&KCFCalendarUnitSecond != 0 { parts = append(parts, "KCFCalendarUnitSecond") }
-	if e&KCFCalendarUnitWeek != 0 { parts = append(parts, "KCFCalendarUnitWeek") }
-	if e&KCFCalendarUnitWeekday != 0 { parts = append(parts, "KCFCalendarUnitWeekday") }
-	if e&KCFCalendarUnitWeekdayOrdinal != 0 { parts = append(parts, "KCFCalendarUnitWeekdayOrdinal") }
-	if e&KCFCalendarUnitQuarter != 0 { parts = append(parts, "KCFCalendarUnitQuarter") }
-	if e&KCFCalendarUnitWeekOfMonth != 0 { parts = append(parts, "KCFCalendarUnitWeekOfMonth") }
-	if e&KCFCalendarUnitWeekOfYear != 0 { parts = append(parts, "KCFCalendarUnitWeekOfYear") }
-	if e&KCFCalendarUnitYearForWeekOfYear != 0 { parts = append(parts, "KCFCalendarUnitYearForWeekOfYear") }
-	if e&KCFCalendarUnitDayOfYear != 0 { parts = append(parts, "KCFCalendarUnitDayOfYear") }
-	if len(parts) == 0 { return "0" }
+	if e&KCFCalendarUnitEra != 0 {
+		parts = append(parts, "KCFCalendarUnitEra")
+	}
+	if e&KCFCalendarUnitYear != 0 {
+		parts = append(parts, "KCFCalendarUnitYear")
+	}
+	if e&KCFCalendarUnitMonth != 0 {
+		parts = append(parts, "KCFCalendarUnitMonth")
+	}
+	if e&KCFCalendarUnitDay != 0 {
+		parts = append(parts, "KCFCalendarUnitDay")
+	}
+	if e&KCFCalendarUnitHour != 0 {
+		parts = append(parts, "KCFCalendarUnitHour")
+	}
+	if e&KCFCalendarUnitMinute != 0 {
+		parts = append(parts, "KCFCalendarUnitMinute")
+	}
+	if e&KCFCalendarUnitSecond != 0 {
+		parts = append(parts, "KCFCalendarUnitSecond")
+	}
+	if e&KCFCalendarUnitWeek != 0 {
+		parts = append(parts, "KCFCalendarUnitWeek")
+	}
+	if e&KCFCalendarUnitWeekday != 0 {
+		parts = append(parts, "KCFCalendarUnitWeekday")
+	}
+	if e&KCFCalendarUnitWeekdayOrdinal != 0 {
+		parts = append(parts, "KCFCalendarUnitWeekdayOrdinal")
+	}
+	if e&KCFCalendarUnitQuarter != 0 {
+		parts = append(parts, "KCFCalendarUnitQuarter")
+	}
+	if e&KCFCalendarUnitWeekOfMonth != 0 {
+		parts = append(parts, "KCFCalendarUnitWeekOfMonth")
+	}
+	if e&KCFCalendarUnitWeekOfYear != 0 {
+		parts = append(parts, "KCFCalendarUnitWeekOfYear")
+	}
+	if e&KCFCalendarUnitYearForWeekOfYear != 0 {
+		parts = append(parts, "KCFCalendarUnitYearForWeekOfYear")
+	}
+	if e&KCFCalendarUnitDayOfYear != 0 {
+		parts = append(parts, "KCFCalendarUnitDayOfYear")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type CFCharacterSetPredefinedSet int64
 
 const (
-	KCFCharacterSetControl CFCharacterSetPredefinedSet = 1
-	KCFCharacterSetWhitespace CFCharacterSetPredefinedSet = 2
+	KCFCharacterSetControl              CFCharacterSetPredefinedSet = 1
+	KCFCharacterSetWhitespace           CFCharacterSetPredefinedSet = 2
 	KCFCharacterSetWhitespaceAndNewline CFCharacterSetPredefinedSet = 3
-	KCFCharacterSetDecimalDigit CFCharacterSetPredefinedSet = 4
-	KCFCharacterSetLetter CFCharacterSetPredefinedSet = 5
-	KCFCharacterSetLowercaseLetter CFCharacterSetPredefinedSet = 6
-	KCFCharacterSetUppercaseLetter CFCharacterSetPredefinedSet = 7
-	KCFCharacterSetNonBase CFCharacterSetPredefinedSet = 8
-	KCFCharacterSetDecomposable CFCharacterSetPredefinedSet = 9
-	KCFCharacterSetAlphaNumeric CFCharacterSetPredefinedSet = 10
-	KCFCharacterSetPunctuation CFCharacterSetPredefinedSet = 11
-	KCFCharacterSetCapitalizedLetter CFCharacterSetPredefinedSet = 13
-	KCFCharacterSetSymbol CFCharacterSetPredefinedSet = 14
-	KCFCharacterSetNewline CFCharacterSetPredefinedSet = 15
-	KCFCharacterSetIllegal CFCharacterSetPredefinedSet = 12
+	KCFCharacterSetDecimalDigit         CFCharacterSetPredefinedSet = 4
+	KCFCharacterSetLetter               CFCharacterSetPredefinedSet = 5
+	KCFCharacterSetLowercaseLetter      CFCharacterSetPredefinedSet = 6
+	KCFCharacterSetUppercaseLetter      CFCharacterSetPredefinedSet = 7
+	KCFCharacterSetNonBase              CFCharacterSetPredefinedSet = 8
+	KCFCharacterSetDecomposable         CFCharacterSetPredefinedSet = 9
+	KCFCharacterSetAlphaNumeric         CFCharacterSetPredefinedSet = 10
+	KCFCharacterSetPunctuation          CFCharacterSetPredefinedSet = 11
+	KCFCharacterSetCapitalizedLetter    CFCharacterSetPredefinedSet = 13
+	KCFCharacterSetSymbol               CFCharacterSetPredefinedSet = 14
+	KCFCharacterSetNewline              CFCharacterSetPredefinedSet = 15
+	KCFCharacterSetIllegal              CFCharacterSetPredefinedSet = 12
 )
 
 func (e CFCharacterSetPredefinedSet) String() string {
@@ -109,8 +141,8 @@ func (e CFCharacterSetPredefinedSet) String() string {
 type CFComparisonResult int64
 
 const (
-	KCFCompareLessThan CFComparisonResult = -1
-	KCFCompareEqualTo CFComparisonResult = 0
+	KCFCompareLessThan    CFComparisonResult = -1
+	KCFCompareEqualTo     CFComparisonResult = 0
 	KCFCompareGreaterThan CFComparisonResult = 1
 )
 
@@ -131,25 +163,31 @@ type CFDataSearchFlags int64
 
 const (
 	KCFDataSearchBackwards CFDataSearchFlags = 1
-	KCFDataSearchAnchored CFDataSearchFlags = 2
+	KCFDataSearchAnchored  CFDataSearchFlags = 2
 )
 
 func (e CFDataSearchFlags) String() string {
 	var parts []string
-	if e&KCFDataSearchBackwards != 0 { parts = append(parts, "KCFDataSearchBackwards") }
-	if e&KCFDataSearchAnchored != 0 { parts = append(parts, "KCFDataSearchAnchored") }
-	if len(parts) == 0 { return "0" }
+	if e&KCFDataSearchBackwards != 0 {
+		parts = append(parts, "KCFDataSearchBackwards")
+	}
+	if e&KCFDataSearchAnchored != 0 {
+		parts = append(parts, "KCFDataSearchAnchored")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type CFDateFormatterStyle int64
 
 const (
-	KCFDateFormatterNoStyle CFDateFormatterStyle = 0
-	KCFDateFormatterShortStyle CFDateFormatterStyle = 1
+	KCFDateFormatterNoStyle     CFDateFormatterStyle = 0
+	KCFDateFormatterShortStyle  CFDateFormatterStyle = 1
 	KCFDateFormatterMediumStyle CFDateFormatterStyle = 2
-	KCFDateFormatterLongStyle CFDateFormatterStyle = 3
-	KCFDateFormatterFullStyle CFDateFormatterStyle = 4
+	KCFDateFormatterLongStyle   CFDateFormatterStyle = 3
+	KCFDateFormatterFullStyle   CFDateFormatterStyle = 4
 )
 
 func (e CFDateFormatterStyle) String() string {
@@ -172,94 +210,154 @@ func (e CFDateFormatterStyle) String() string {
 type CFFileSecurityClearOptions int64
 
 const (
-	KCFFileSecurityClearOwner CFFileSecurityClearOptions = 1
-	KCFFileSecurityClearGroup CFFileSecurityClearOptions = 2
-	KCFFileSecurityClearMode CFFileSecurityClearOptions = 4
-	KCFFileSecurityClearOwnerUUID CFFileSecurityClearOptions = 8
-	KCFFileSecurityClearGroupUUID CFFileSecurityClearOptions = 16
+	KCFFileSecurityClearOwner             CFFileSecurityClearOptions = 1
+	KCFFileSecurityClearGroup             CFFileSecurityClearOptions = 2
+	KCFFileSecurityClearMode              CFFileSecurityClearOptions = 4
+	KCFFileSecurityClearOwnerUUID         CFFileSecurityClearOptions = 8
+	KCFFileSecurityClearGroupUUID         CFFileSecurityClearOptions = 16
 	KCFFileSecurityClearAccessControlList CFFileSecurityClearOptions = 32
 )
 
 func (e CFFileSecurityClearOptions) String() string {
 	var parts []string
-	if e&KCFFileSecurityClearOwner != 0 { parts = append(parts, "KCFFileSecurityClearOwner") }
-	if e&KCFFileSecurityClearGroup != 0 { parts = append(parts, "KCFFileSecurityClearGroup") }
-	if e&KCFFileSecurityClearMode != 0 { parts = append(parts, "KCFFileSecurityClearMode") }
-	if e&KCFFileSecurityClearOwnerUUID != 0 { parts = append(parts, "KCFFileSecurityClearOwnerUUID") }
-	if e&KCFFileSecurityClearGroupUUID != 0 { parts = append(parts, "KCFFileSecurityClearGroupUUID") }
-	if e&KCFFileSecurityClearAccessControlList != 0 { parts = append(parts, "KCFFileSecurityClearAccessControlList") }
-	if len(parts) == 0 { return "0" }
+	if e&KCFFileSecurityClearOwner != 0 {
+		parts = append(parts, "KCFFileSecurityClearOwner")
+	}
+	if e&KCFFileSecurityClearGroup != 0 {
+		parts = append(parts, "KCFFileSecurityClearGroup")
+	}
+	if e&KCFFileSecurityClearMode != 0 {
+		parts = append(parts, "KCFFileSecurityClearMode")
+	}
+	if e&KCFFileSecurityClearOwnerUUID != 0 {
+		parts = append(parts, "KCFFileSecurityClearOwnerUUID")
+	}
+	if e&KCFFileSecurityClearGroupUUID != 0 {
+		parts = append(parts, "KCFFileSecurityClearGroupUUID")
+	}
+	if e&KCFFileSecurityClearAccessControlList != 0 {
+		parts = append(parts, "KCFFileSecurityClearAccessControlList")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type CFGregorianUnitFlags int64
 
 const (
-	KCFGregorianUnitsYears CFGregorianUnitFlags = 1
-	KCFGregorianUnitsMonths CFGregorianUnitFlags = 2
-	KCFGregorianUnitsDays CFGregorianUnitFlags = 4
-	KCFGregorianUnitsHours CFGregorianUnitFlags = 8
+	KCFGregorianUnitsYears   CFGregorianUnitFlags = 1
+	KCFGregorianUnitsMonths  CFGregorianUnitFlags = 2
+	KCFGregorianUnitsDays    CFGregorianUnitFlags = 4
+	KCFGregorianUnitsHours   CFGregorianUnitFlags = 8
 	KCFGregorianUnitsMinutes CFGregorianUnitFlags = 16
 	KCFGregorianUnitsSeconds CFGregorianUnitFlags = 32
-	KCFGregorianAllUnits CFGregorianUnitFlags = 16777215
+	KCFGregorianAllUnits     CFGregorianUnitFlags = 16777215
 )
 
 func (e CFGregorianUnitFlags) String() string {
 	var parts []string
-	if e&KCFGregorianUnitsYears != 0 { parts = append(parts, "KCFGregorianUnitsYears") }
-	if e&KCFGregorianUnitsMonths != 0 { parts = append(parts, "KCFGregorianUnitsMonths") }
-	if e&KCFGregorianUnitsDays != 0 { parts = append(parts, "KCFGregorianUnitsDays") }
-	if e&KCFGregorianUnitsHours != 0 { parts = append(parts, "KCFGregorianUnitsHours") }
-	if e&KCFGregorianUnitsMinutes != 0 { parts = append(parts, "KCFGregorianUnitsMinutes") }
-	if e&KCFGregorianUnitsSeconds != 0 { parts = append(parts, "KCFGregorianUnitsSeconds") }
-	if e&KCFGregorianAllUnits != 0 { parts = append(parts, "KCFGregorianAllUnits") }
-	if len(parts) == 0 { return "0" }
+	if e&KCFGregorianUnitsYears != 0 {
+		parts = append(parts, "KCFGregorianUnitsYears")
+	}
+	if e&KCFGregorianUnitsMonths != 0 {
+		parts = append(parts, "KCFGregorianUnitsMonths")
+	}
+	if e&KCFGregorianUnitsDays != 0 {
+		parts = append(parts, "KCFGregorianUnitsDays")
+	}
+	if e&KCFGregorianUnitsHours != 0 {
+		parts = append(parts, "KCFGregorianUnitsHours")
+	}
+	if e&KCFGregorianUnitsMinutes != 0 {
+		parts = append(parts, "KCFGregorianUnitsMinutes")
+	}
+	if e&KCFGregorianUnitsSeconds != 0 {
+		parts = append(parts, "KCFGregorianUnitsSeconds")
+	}
+	if e&KCFGregorianAllUnits != 0 {
+		parts = append(parts, "KCFGregorianAllUnits")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type CFISO8601DateFormatOptions int64
 
 const (
-	KCFISO8601DateFormatWithYear CFISO8601DateFormatOptions = 1
-	KCFISO8601DateFormatWithMonth CFISO8601DateFormatOptions = 2
-	KCFISO8601DateFormatWithWeekOfYear CFISO8601DateFormatOptions = 4
-	KCFISO8601DateFormatWithDay CFISO8601DateFormatOptions = 16
-	KCFISO8601DateFormatWithTime CFISO8601DateFormatOptions = 32
-	KCFISO8601DateFormatWithTimeZone CFISO8601DateFormatOptions = 64
-	KCFISO8601DateFormatWithSpaceBetweenDateAndTime CFISO8601DateFormatOptions = 128
-	KCFISO8601DateFormatWithDashSeparatorInDate CFISO8601DateFormatOptions = 256
-	KCFISO8601DateFormatWithColonSeparatorInTime CFISO8601DateFormatOptions = 512
+	KCFISO8601DateFormatWithYear                     CFISO8601DateFormatOptions = 1
+	KCFISO8601DateFormatWithMonth                    CFISO8601DateFormatOptions = 2
+	KCFISO8601DateFormatWithWeekOfYear               CFISO8601DateFormatOptions = 4
+	KCFISO8601DateFormatWithDay                      CFISO8601DateFormatOptions = 16
+	KCFISO8601DateFormatWithTime                     CFISO8601DateFormatOptions = 32
+	KCFISO8601DateFormatWithTimeZone                 CFISO8601DateFormatOptions = 64
+	KCFISO8601DateFormatWithSpaceBetweenDateAndTime  CFISO8601DateFormatOptions = 128
+	KCFISO8601DateFormatWithDashSeparatorInDate      CFISO8601DateFormatOptions = 256
+	KCFISO8601DateFormatWithColonSeparatorInTime     CFISO8601DateFormatOptions = 512
 	KCFISO8601DateFormatWithColonSeparatorInTimeZone CFISO8601DateFormatOptions = 1024
-	KCFISO8601DateFormatWithFractionalSeconds CFISO8601DateFormatOptions = 2048
-	KCFISO8601DateFormatWithFullDate CFISO8601DateFormatOptions = 275
-	KCFISO8601DateFormatWithFullTime CFISO8601DateFormatOptions = 1632
-	KCFISO8601DateFormatWithInternetDateTime CFISO8601DateFormatOptions = 1907
+	KCFISO8601DateFormatWithFractionalSeconds        CFISO8601DateFormatOptions = 2048
+	KCFISO8601DateFormatWithFullDate                 CFISO8601DateFormatOptions = 275
+	KCFISO8601DateFormatWithFullTime                 CFISO8601DateFormatOptions = 1632
+	KCFISO8601DateFormatWithInternetDateTime         CFISO8601DateFormatOptions = 1907
 )
 
 func (e CFISO8601DateFormatOptions) String() string {
 	var parts []string
-	if e&KCFISO8601DateFormatWithYear != 0 { parts = append(parts, "KCFISO8601DateFormatWithYear") }
-	if e&KCFISO8601DateFormatWithMonth != 0 { parts = append(parts, "KCFISO8601DateFormatWithMonth") }
-	if e&KCFISO8601DateFormatWithWeekOfYear != 0 { parts = append(parts, "KCFISO8601DateFormatWithWeekOfYear") }
-	if e&KCFISO8601DateFormatWithDay != 0 { parts = append(parts, "KCFISO8601DateFormatWithDay") }
-	if e&KCFISO8601DateFormatWithTime != 0 { parts = append(parts, "KCFISO8601DateFormatWithTime") }
-	if e&KCFISO8601DateFormatWithTimeZone != 0 { parts = append(parts, "KCFISO8601DateFormatWithTimeZone") }
-	if e&KCFISO8601DateFormatWithSpaceBetweenDateAndTime != 0 { parts = append(parts, "KCFISO8601DateFormatWithSpaceBetweenDateAndTime") }
-	if e&KCFISO8601DateFormatWithDashSeparatorInDate != 0 { parts = append(parts, "KCFISO8601DateFormatWithDashSeparatorInDate") }
-	if e&KCFISO8601DateFormatWithColonSeparatorInTime != 0 { parts = append(parts, "KCFISO8601DateFormatWithColonSeparatorInTime") }
-	if e&KCFISO8601DateFormatWithColonSeparatorInTimeZone != 0 { parts = append(parts, "KCFISO8601DateFormatWithColonSeparatorInTimeZone") }
-	if e&KCFISO8601DateFormatWithFractionalSeconds != 0 { parts = append(parts, "KCFISO8601DateFormatWithFractionalSeconds") }
-	if e&KCFISO8601DateFormatWithFullDate != 0 { parts = append(parts, "KCFISO8601DateFormatWithFullDate") }
-	if e&KCFISO8601DateFormatWithFullTime != 0 { parts = append(parts, "KCFISO8601DateFormatWithFullTime") }
-	if e&KCFISO8601DateFormatWithInternetDateTime != 0 { parts = append(parts, "KCFISO8601DateFormatWithInternetDateTime") }
-	if len(parts) == 0 { return "0" }
+	if e&KCFISO8601DateFormatWithYear != 0 {
+		parts = append(parts, "KCFISO8601DateFormatWithYear")
+	}
+	if e&KCFISO8601DateFormatWithMonth != 0 {
+		parts = append(parts, "KCFISO8601DateFormatWithMonth")
+	}
+	if e&KCFISO8601DateFormatWithWeekOfYear != 0 {
+		parts = append(parts, "KCFISO8601DateFormatWithWeekOfYear")
+	}
+	if e&KCFISO8601DateFormatWithDay != 0 {
+		parts = append(parts, "KCFISO8601DateFormatWithDay")
+	}
+	if e&KCFISO8601DateFormatWithTime != 0 {
+		parts = append(parts, "KCFISO8601DateFormatWithTime")
+	}
+	if e&KCFISO8601DateFormatWithTimeZone != 0 {
+		parts = append(parts, "KCFISO8601DateFormatWithTimeZone")
+	}
+	if e&KCFISO8601DateFormatWithSpaceBetweenDateAndTime != 0 {
+		parts = append(parts, "KCFISO8601DateFormatWithSpaceBetweenDateAndTime")
+	}
+	if e&KCFISO8601DateFormatWithDashSeparatorInDate != 0 {
+		parts = append(parts, "KCFISO8601DateFormatWithDashSeparatorInDate")
+	}
+	if e&KCFISO8601DateFormatWithColonSeparatorInTime != 0 {
+		parts = append(parts, "KCFISO8601DateFormatWithColonSeparatorInTime")
+	}
+	if e&KCFISO8601DateFormatWithColonSeparatorInTimeZone != 0 {
+		parts = append(parts, "KCFISO8601DateFormatWithColonSeparatorInTimeZone")
+	}
+	if e&KCFISO8601DateFormatWithFractionalSeconds != 0 {
+		parts = append(parts, "KCFISO8601DateFormatWithFractionalSeconds")
+	}
+	if e&KCFISO8601DateFormatWithFullDate != 0 {
+		parts = append(parts, "KCFISO8601DateFormatWithFullDate")
+	}
+	if e&KCFISO8601DateFormatWithFullTime != 0 {
+		parts = append(parts, "KCFISO8601DateFormatWithFullTime")
+	}
+	if e&KCFISO8601DateFormatWithInternetDateTime != 0 {
+		parts = append(parts, "KCFISO8601DateFormatWithInternetDateTime")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type CFLocaleLanguageDirection int64
 
 const (
-	KCFLocaleLanguageDirectionUnknown CFLocaleLanguageDirection = 0
+	KCFLocaleLanguageDirectionUnknown     CFLocaleLanguageDirection = 0
 	KCFLocaleLanguageDirectionLeftToRight CFLocaleLanguageDirection = 1
 	KCFLocaleLanguageDirectionRightToLeft CFLocaleLanguageDirection = 2
 	KCFLocaleLanguageDirectionTopToBottom CFLocaleLanguageDirection = 3
@@ -286,9 +384,9 @@ func (e CFLocaleLanguageDirection) String() string {
 type CFNotificationSuspensionBehavior int64
 
 const (
-	CFNotificationSuspensionBehaviorDrop CFNotificationSuspensionBehavior = 1
-	CFNotificationSuspensionBehaviorCoalesce CFNotificationSuspensionBehavior = 2
-	CFNotificationSuspensionBehaviorHold CFNotificationSuspensionBehavior = 3
+	CFNotificationSuspensionBehaviorDrop               CFNotificationSuspensionBehavior = 1
+	CFNotificationSuspensionBehaviorCoalesce           CFNotificationSuspensionBehavior = 2
+	CFNotificationSuspensionBehaviorHold               CFNotificationSuspensionBehavior = 3
 	CFNotificationSuspensionBehaviorDeliverImmediately CFNotificationSuspensionBehavior = 4
 )
 
@@ -315,8 +413,12 @@ const (
 
 func (e CFNumberFormatterOptionFlags) String() string {
 	var parts []string
-	if e&KCFNumberFormatterParseIntegersOnly != 0 { parts = append(parts, "KCFNumberFormatterParseIntegersOnly") }
-	if len(parts) == 0 { return "0" }
+	if e&KCFNumberFormatterParseIntegersOnly != 0 {
+		parts = append(parts, "KCFNumberFormatterParseIntegersOnly")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -324,9 +426,9 @@ type CFNumberFormatterPadPosition int64
 
 const (
 	KCFNumberFormatterPadBeforePrefix CFNumberFormatterPadPosition = 0
-	KCFNumberFormatterPadAfterPrefix CFNumberFormatterPadPosition = 1
+	KCFNumberFormatterPadAfterPrefix  CFNumberFormatterPadPosition = 1
 	KCFNumberFormatterPadBeforeSuffix CFNumberFormatterPadPosition = 2
-	KCFNumberFormatterPadAfterSuffix CFNumberFormatterPadPosition = 3
+	KCFNumberFormatterPadAfterSuffix  CFNumberFormatterPadPosition = 3
 )
 
 func (e CFNumberFormatterPadPosition) String() string {
@@ -347,13 +449,13 @@ func (e CFNumberFormatterPadPosition) String() string {
 type CFNumberFormatterRoundingMode int64
 
 const (
-	KCFNumberFormatterRoundCeiling CFNumberFormatterRoundingMode = 0
-	KCFNumberFormatterRoundFloor CFNumberFormatterRoundingMode = 1
-	KCFNumberFormatterRoundDown CFNumberFormatterRoundingMode = 2
-	KCFNumberFormatterRoundUp CFNumberFormatterRoundingMode = 3
+	KCFNumberFormatterRoundCeiling  CFNumberFormatterRoundingMode = 0
+	KCFNumberFormatterRoundFloor    CFNumberFormatterRoundingMode = 1
+	KCFNumberFormatterRoundDown     CFNumberFormatterRoundingMode = 2
+	KCFNumberFormatterRoundUp       CFNumberFormatterRoundingMode = 3
 	KCFNumberFormatterRoundHalfEven CFNumberFormatterRoundingMode = 4
 	KCFNumberFormatterRoundHalfDown CFNumberFormatterRoundingMode = 5
-	KCFNumberFormatterRoundHalfUp CFNumberFormatterRoundingMode = 6
+	KCFNumberFormatterRoundHalfUp   CFNumberFormatterRoundingMode = 6
 )
 
 func (e CFNumberFormatterRoundingMode) String() string {
@@ -380,15 +482,15 @@ func (e CFNumberFormatterRoundingMode) String() string {
 type CFNumberFormatterStyle int64
 
 const (
-	KCFNumberFormatterNoStyle CFNumberFormatterStyle = 0
-	KCFNumberFormatterDecimalStyle CFNumberFormatterStyle = 1
-	KCFNumberFormatterCurrencyStyle CFNumberFormatterStyle = 2
-	KCFNumberFormatterPercentStyle CFNumberFormatterStyle = 3
-	KCFNumberFormatterScientificStyle CFNumberFormatterStyle = 4
-	KCFNumberFormatterSpellOutStyle CFNumberFormatterStyle = 5
-	KCFNumberFormatterOrdinalStyle CFNumberFormatterStyle = 6
-	KCFNumberFormatterCurrencyISOCodeStyle CFNumberFormatterStyle = 8
-	KCFNumberFormatterCurrencyPluralStyle CFNumberFormatterStyle = 9
+	KCFNumberFormatterNoStyle                 CFNumberFormatterStyle = 0
+	KCFNumberFormatterDecimalStyle            CFNumberFormatterStyle = 1
+	KCFNumberFormatterCurrencyStyle           CFNumberFormatterStyle = 2
+	KCFNumberFormatterPercentStyle            CFNumberFormatterStyle = 3
+	KCFNumberFormatterScientificStyle         CFNumberFormatterStyle = 4
+	KCFNumberFormatterSpellOutStyle           CFNumberFormatterStyle = 5
+	KCFNumberFormatterOrdinalStyle            CFNumberFormatterStyle = 6
+	KCFNumberFormatterCurrencyISOCodeStyle    CFNumberFormatterStyle = 8
+	KCFNumberFormatterCurrencyPluralStyle     CFNumberFormatterStyle = 9
 	KCFNumberFormatterCurrencyAccountingStyle CFNumberFormatterStyle = 10
 )
 
@@ -422,23 +524,23 @@ func (e CFNumberFormatterStyle) String() string {
 type CFNumberType int64
 
 const (
-	KCFNumberSInt8Type CFNumberType = 1
-	KCFNumberSInt16Type CFNumberType = 2
-	KCFNumberSInt32Type CFNumberType = 3
-	KCFNumberSInt64Type CFNumberType = 4
-	KCFNumberFloat32Type CFNumberType = 5
-	KCFNumberFloat64Type CFNumberType = 6
-	KCFNumberCharType CFNumberType = 7
-	KCFNumberShortType CFNumberType = 8
-	KCFNumberIntType CFNumberType = 9
-	KCFNumberLongType CFNumberType = 10
-	KCFNumberLongLongType CFNumberType = 11
-	KCFNumberFloatType CFNumberType = 12
-	KCFNumberDoubleType CFNumberType = 13
-	KCFNumberCFIndexType CFNumberType = 14
+	KCFNumberSInt8Type     CFNumberType = 1
+	KCFNumberSInt16Type    CFNumberType = 2
+	KCFNumberSInt32Type    CFNumberType = 3
+	KCFNumberSInt64Type    CFNumberType = 4
+	KCFNumberFloat32Type   CFNumberType = 5
+	KCFNumberFloat64Type   CFNumberType = 6
+	KCFNumberCharType      CFNumberType = 7
+	KCFNumberShortType     CFNumberType = 8
+	KCFNumberIntType       CFNumberType = 9
+	KCFNumberLongType      CFNumberType = 10
+	KCFNumberLongLongType  CFNumberType = 11
+	KCFNumberFloatType     CFNumberType = 12
+	KCFNumberDoubleType    CFNumberType = 13
+	KCFNumberCFIndexType   CFNumberType = 14
 	KCFNumberNSIntegerType CFNumberType = 15
-	KCFNumberCGFloatType CFNumberType = 16
-	KCFNumberMaxType CFNumberType = 16
+	KCFNumberCGFloatType   CFNumberType = 16
+	KCFNumberMaxType       CFNumberType = 16
 )
 
 func (e CFNumberType) String() string {
@@ -483,8 +585,8 @@ func (e CFNumberType) String() string {
 type CFPropertyListFormat int64
 
 const (
-	KCFPropertyListOpenStepFormat CFPropertyListFormat = 1
-	KCFPropertyListXMLFormat_v1_0 CFPropertyListFormat = 100
+	KCFPropertyListOpenStepFormat    CFPropertyListFormat = 1
+	KCFPropertyListXMLFormat_v1_0    CFPropertyListFormat = 100
 	KCFPropertyListBinaryFormat_v1_0 CFPropertyListFormat = 200
 )
 
@@ -504,50 +606,72 @@ func (e CFPropertyListFormat) String() string {
 type CFPropertyListMutabilityOptions int64
 
 const (
-	KCFPropertyListImmutable CFPropertyListMutabilityOptions = 0
-	KCFPropertyListMutableContainers CFPropertyListMutabilityOptions = 1
+	KCFPropertyListImmutable                  CFPropertyListMutabilityOptions = 0
+	KCFPropertyListMutableContainers          CFPropertyListMutabilityOptions = 1
 	KCFPropertyListMutableContainersAndLeaves CFPropertyListMutabilityOptions = 2
 )
 
 func (e CFPropertyListMutabilityOptions) String() string {
 	var parts []string
-	if e&KCFPropertyListMutableContainers != 0 { parts = append(parts, "KCFPropertyListMutableContainers") }
-	if e&KCFPropertyListMutableContainersAndLeaves != 0 { parts = append(parts, "KCFPropertyListMutableContainersAndLeaves") }
-	if len(parts) == 0 { return "0" }
+	if e&KCFPropertyListMutableContainers != 0 {
+		parts = append(parts, "KCFPropertyListMutableContainers")
+	}
+	if e&KCFPropertyListMutableContainersAndLeaves != 0 {
+		parts = append(parts, "KCFPropertyListMutableContainersAndLeaves")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type CFRunLoopActivity int64
 
 const (
-	KCFRunLoopEntry CFRunLoopActivity = 1
-	KCFRunLoopBeforeTimers CFRunLoopActivity = 2
+	KCFRunLoopEntry         CFRunLoopActivity = 1
+	KCFRunLoopBeforeTimers  CFRunLoopActivity = 2
 	KCFRunLoopBeforeSources CFRunLoopActivity = 4
 	KCFRunLoopBeforeWaiting CFRunLoopActivity = 32
-	KCFRunLoopAfterWaiting CFRunLoopActivity = 64
-	KCFRunLoopExit CFRunLoopActivity = 128
+	KCFRunLoopAfterWaiting  CFRunLoopActivity = 64
+	KCFRunLoopExit          CFRunLoopActivity = 128
 	KCFRunLoopAllActivities CFRunLoopActivity = 268435455
 )
 
 func (e CFRunLoopActivity) String() string {
 	var parts []string
-	if e&KCFRunLoopEntry != 0 { parts = append(parts, "KCFRunLoopEntry") }
-	if e&KCFRunLoopBeforeTimers != 0 { parts = append(parts, "KCFRunLoopBeforeTimers") }
-	if e&KCFRunLoopBeforeSources != 0 { parts = append(parts, "KCFRunLoopBeforeSources") }
-	if e&KCFRunLoopBeforeWaiting != 0 { parts = append(parts, "KCFRunLoopBeforeWaiting") }
-	if e&KCFRunLoopAfterWaiting != 0 { parts = append(parts, "KCFRunLoopAfterWaiting") }
-	if e&KCFRunLoopExit != 0 { parts = append(parts, "KCFRunLoopExit") }
-	if e&KCFRunLoopAllActivities != 0 { parts = append(parts, "KCFRunLoopAllActivities") }
-	if len(parts) == 0 { return "0" }
+	if e&KCFRunLoopEntry != 0 {
+		parts = append(parts, "KCFRunLoopEntry")
+	}
+	if e&KCFRunLoopBeforeTimers != 0 {
+		parts = append(parts, "KCFRunLoopBeforeTimers")
+	}
+	if e&KCFRunLoopBeforeSources != 0 {
+		parts = append(parts, "KCFRunLoopBeforeSources")
+	}
+	if e&KCFRunLoopBeforeWaiting != 0 {
+		parts = append(parts, "KCFRunLoopBeforeWaiting")
+	}
+	if e&KCFRunLoopAfterWaiting != 0 {
+		parts = append(parts, "KCFRunLoopAfterWaiting")
+	}
+	if e&KCFRunLoopExit != 0 {
+		parts = append(parts, "KCFRunLoopExit")
+	}
+	if e&KCFRunLoopAllActivities != 0 {
+		parts = append(parts, "KCFRunLoopAllActivities")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type CFRunLoopRunResult int64
 
 const (
-	KCFRunLoopRunFinished CFRunLoopRunResult = 1
-	KCFRunLoopRunStopped CFRunLoopRunResult = 2
-	KCFRunLoopRunTimedOut CFRunLoopRunResult = 3
+	KCFRunLoopRunFinished      CFRunLoopRunResult = 1
+	KCFRunLoopRunStopped       CFRunLoopRunResult = 2
+	KCFRunLoopRunTimedOut      CFRunLoopRunResult = 3
 	KCFRunLoopRunHandledSource CFRunLoopRunResult = 4
 )
 
@@ -569,22 +693,34 @@ func (e CFRunLoopRunResult) String() string {
 type CFSocketCallBackType int64
 
 const (
-	KCFSocketNoCallBack CFSocketCallBackType = 0
-	KCFSocketReadCallBack CFSocketCallBackType = 1
-	KCFSocketAcceptCallBack CFSocketCallBackType = 2
-	KCFSocketDataCallBack CFSocketCallBackType = 3
+	KCFSocketNoCallBack      CFSocketCallBackType = 0
+	KCFSocketReadCallBack    CFSocketCallBackType = 1
+	KCFSocketAcceptCallBack  CFSocketCallBackType = 2
+	KCFSocketDataCallBack    CFSocketCallBackType = 3
 	KCFSocketConnectCallBack CFSocketCallBackType = 4
-	KCFSocketWriteCallBack CFSocketCallBackType = 8
+	KCFSocketWriteCallBack   CFSocketCallBackType = 8
 )
 
 func (e CFSocketCallBackType) String() string {
 	var parts []string
-	if e&KCFSocketReadCallBack != 0 { parts = append(parts, "KCFSocketReadCallBack") }
-	if e&KCFSocketAcceptCallBack != 0 { parts = append(parts, "KCFSocketAcceptCallBack") }
-	if e&KCFSocketDataCallBack != 0 { parts = append(parts, "KCFSocketDataCallBack") }
-	if e&KCFSocketConnectCallBack != 0 { parts = append(parts, "KCFSocketConnectCallBack") }
-	if e&KCFSocketWriteCallBack != 0 { parts = append(parts, "KCFSocketWriteCallBack") }
-	if len(parts) == 0 { return "0" }
+	if e&KCFSocketReadCallBack != 0 {
+		parts = append(parts, "KCFSocketReadCallBack")
+	}
+	if e&KCFSocketAcceptCallBack != 0 {
+		parts = append(parts, "KCFSocketAcceptCallBack")
+	}
+	if e&KCFSocketDataCallBack != 0 {
+		parts = append(parts, "KCFSocketDataCallBack")
+	}
+	if e&KCFSocketConnectCallBack != 0 {
+		parts = append(parts, "KCFSocketConnectCallBack")
+	}
+	if e&KCFSocketWriteCallBack != 0 {
+		parts = append(parts, "KCFSocketWriteCallBack")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -592,7 +728,7 @@ type CFSocketError int64
 
 const (
 	KCFSocketSuccess CFSocketError = 0
-	KCFSocketError CFSocketError = -1
+	KCFSocketError   CFSocketError = -1
 	KCFSocketTimeout CFSocketError = -2
 )
 
@@ -612,8 +748,8 @@ func (e CFSocketError) String() string {
 type CFStreamErrorDomain int64
 
 const (
-	KCFStreamErrorDomainCustom CFStreamErrorDomain = -1
-	KCFStreamErrorDomainPOSIX CFStreamErrorDomain = 1
+	KCFStreamErrorDomainCustom      CFStreamErrorDomain = -1
+	KCFStreamErrorDomainPOSIX       CFStreamErrorDomain = 1
 	KCFStreamErrorDomainMacOSStatus CFStreamErrorDomain = 2
 )
 
@@ -633,22 +769,34 @@ func (e CFStreamErrorDomain) String() string {
 type CFStreamEventType int64
 
 const (
-	KCFStreamEventNone CFStreamEventType = 0
-	KCFStreamEventOpenCompleted CFStreamEventType = 1
+	KCFStreamEventNone              CFStreamEventType = 0
+	KCFStreamEventOpenCompleted     CFStreamEventType = 1
 	KCFStreamEventHasBytesAvailable CFStreamEventType = 2
-	KCFStreamEventCanAcceptBytes CFStreamEventType = 4
-	KCFStreamEventErrorOccurred CFStreamEventType = 8
-	KCFStreamEventEndEncountered CFStreamEventType = 16
+	KCFStreamEventCanAcceptBytes    CFStreamEventType = 4
+	KCFStreamEventErrorOccurred     CFStreamEventType = 8
+	KCFStreamEventEndEncountered    CFStreamEventType = 16
 )
 
 func (e CFStreamEventType) String() string {
 	var parts []string
-	if e&KCFStreamEventOpenCompleted != 0 { parts = append(parts, "KCFStreamEventOpenCompleted") }
-	if e&KCFStreamEventHasBytesAvailable != 0 { parts = append(parts, "KCFStreamEventHasBytesAvailable") }
-	if e&KCFStreamEventCanAcceptBytes != 0 { parts = append(parts, "KCFStreamEventCanAcceptBytes") }
-	if e&KCFStreamEventErrorOccurred != 0 { parts = append(parts, "KCFStreamEventErrorOccurred") }
-	if e&KCFStreamEventEndEncountered != 0 { parts = append(parts, "KCFStreamEventEndEncountered") }
-	if len(parts) == 0 { return "0" }
+	if e&KCFStreamEventOpenCompleted != 0 {
+		parts = append(parts, "KCFStreamEventOpenCompleted")
+	}
+	if e&KCFStreamEventHasBytesAvailable != 0 {
+		parts = append(parts, "KCFStreamEventHasBytesAvailable")
+	}
+	if e&KCFStreamEventCanAcceptBytes != 0 {
+		parts = append(parts, "KCFStreamEventCanAcceptBytes")
+	}
+	if e&KCFStreamEventErrorOccurred != 0 {
+		parts = append(parts, "KCFStreamEventErrorOccurred")
+	}
+	if e&KCFStreamEventEndEncountered != 0 {
+		parts = append(parts, "KCFStreamEventEndEncountered")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -657,12 +805,12 @@ type CFStreamStatus int64
 const (
 	KCFStreamStatusNotOpen CFStreamStatus = 0
 	KCFStreamStatusOpening CFStreamStatus = 1
-	KCFStreamStatusOpen CFStreamStatus = 2
+	KCFStreamStatusOpen    CFStreamStatus = 2
 	KCFStreamStatusReading CFStreamStatus = 3
 	KCFStreamStatusWriting CFStreamStatus = 4
-	KCFStreamStatusAtEnd CFStreamStatus = 5
-	KCFStreamStatusClosed CFStreamStatus = 6
-	KCFStreamStatusError CFStreamStatus = 7
+	KCFStreamStatusAtEnd   CFStreamStatus = 5
+	KCFStreamStatusClosed  CFStreamStatus = 6
+	KCFStreamStatusError   CFStreamStatus = 7
 )
 
 func (e CFStreamStatus) String() string {
@@ -691,20 +839,20 @@ func (e CFStreamStatus) String() string {
 type CFStringBuiltInEncodings int64
 
 const (
-	KCFStringEncodingMacRoman CFStringBuiltInEncodings = 0
+	KCFStringEncodingMacRoman      CFStringBuiltInEncodings = 0
 	KCFStringEncodingWindowsLatin1 CFStringBuiltInEncodings = 1280
-	KCFStringEncodingISOLatin1 CFStringBuiltInEncodings = 513
+	KCFStringEncodingISOLatin1     CFStringBuiltInEncodings = 513
 	KCFStringEncodingNextStepLatin CFStringBuiltInEncodings = 2817
-	KCFStringEncodingASCII CFStringBuiltInEncodings = 1536
-	KCFStringEncodingUnicode CFStringBuiltInEncodings = 256
-	KCFStringEncodingUTF8 CFStringBuiltInEncodings = 134217984
+	KCFStringEncodingASCII         CFStringBuiltInEncodings = 1536
+	KCFStringEncodingUnicode       CFStringBuiltInEncodings = 256
+	KCFStringEncodingUTF8          CFStringBuiltInEncodings = 134217984
 	KCFStringEncodingNonLossyASCII CFStringBuiltInEncodings = 3071
-	KCFStringEncodingUTF16 CFStringBuiltInEncodings = 256
-	KCFStringEncodingUTF16BE CFStringBuiltInEncodings = 268435712
-	KCFStringEncodingUTF16LE CFStringBuiltInEncodings = 335544576
-	KCFStringEncodingUTF32 CFStringBuiltInEncodings = 201326848
-	KCFStringEncodingUTF32BE CFStringBuiltInEncodings = 402653440
-	KCFStringEncodingUTF32LE CFStringBuiltInEncodings = 469762304
+	KCFStringEncodingUTF16         CFStringBuiltInEncodings = 256
+	KCFStringEncodingUTF16BE       CFStringBuiltInEncodings = 268435712
+	KCFStringEncodingUTF16LE       CFStringBuiltInEncodings = 335544576
+	KCFStringEncodingUTF32         CFStringBuiltInEncodings = 201326848
+	KCFStringEncodingUTF32BE       CFStringBuiltInEncodings = 402653440
+	KCFStringEncodingUTF32LE       CFStringBuiltInEncodings = 469762304
 )
 
 func (e CFStringBuiltInEncodings) String() string {
@@ -743,164 +891,184 @@ func (e CFStringBuiltInEncodings) String() string {
 type CFStringCompareFlags int64
 
 const (
-	KCFCompareCaseInsensitive CFStringCompareFlags = 1
-	KCFCompareBackwards CFStringCompareFlags = 4
-	KCFCompareAnchored CFStringCompareFlags = 8
-	KCFCompareNonliteral CFStringCompareFlags = 16
-	KCFCompareLocalized CFStringCompareFlags = 32
-	KCFCompareNumerically CFStringCompareFlags = 64
+	KCFCompareCaseInsensitive      CFStringCompareFlags = 1
+	KCFCompareBackwards            CFStringCompareFlags = 4
+	KCFCompareAnchored             CFStringCompareFlags = 8
+	KCFCompareNonliteral           CFStringCompareFlags = 16
+	KCFCompareLocalized            CFStringCompareFlags = 32
+	KCFCompareNumerically          CFStringCompareFlags = 64
 	KCFCompareDiacriticInsensitive CFStringCompareFlags = 128
-	KCFCompareWidthInsensitive CFStringCompareFlags = 256
-	KCFCompareForcedOrdering CFStringCompareFlags = 512
+	KCFCompareWidthInsensitive     CFStringCompareFlags = 256
+	KCFCompareForcedOrdering       CFStringCompareFlags = 512
 )
 
 func (e CFStringCompareFlags) String() string {
 	var parts []string
-	if e&KCFCompareCaseInsensitive != 0 { parts = append(parts, "KCFCompareCaseInsensitive") }
-	if e&KCFCompareBackwards != 0 { parts = append(parts, "KCFCompareBackwards") }
-	if e&KCFCompareAnchored != 0 { parts = append(parts, "KCFCompareAnchored") }
-	if e&KCFCompareNonliteral != 0 { parts = append(parts, "KCFCompareNonliteral") }
-	if e&KCFCompareLocalized != 0 { parts = append(parts, "KCFCompareLocalized") }
-	if e&KCFCompareNumerically != 0 { parts = append(parts, "KCFCompareNumerically") }
-	if e&KCFCompareDiacriticInsensitive != 0 { parts = append(parts, "KCFCompareDiacriticInsensitive") }
-	if e&KCFCompareWidthInsensitive != 0 { parts = append(parts, "KCFCompareWidthInsensitive") }
-	if e&KCFCompareForcedOrdering != 0 { parts = append(parts, "KCFCompareForcedOrdering") }
-	if len(parts) == 0 { return "0" }
+	if e&KCFCompareCaseInsensitive != 0 {
+		parts = append(parts, "KCFCompareCaseInsensitive")
+	}
+	if e&KCFCompareBackwards != 0 {
+		parts = append(parts, "KCFCompareBackwards")
+	}
+	if e&KCFCompareAnchored != 0 {
+		parts = append(parts, "KCFCompareAnchored")
+	}
+	if e&KCFCompareNonliteral != 0 {
+		parts = append(parts, "KCFCompareNonliteral")
+	}
+	if e&KCFCompareLocalized != 0 {
+		parts = append(parts, "KCFCompareLocalized")
+	}
+	if e&KCFCompareNumerically != 0 {
+		parts = append(parts, "KCFCompareNumerically")
+	}
+	if e&KCFCompareDiacriticInsensitive != 0 {
+		parts = append(parts, "KCFCompareDiacriticInsensitive")
+	}
+	if e&KCFCompareWidthInsensitive != 0 {
+		parts = append(parts, "KCFCompareWidthInsensitive")
+	}
+	if e&KCFCompareForcedOrdering != 0 {
+		parts = append(parts, "KCFCompareForcedOrdering")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type CFStringEncodings int64
 
 const (
-	KCFStringEncodingMacJapanese CFStringEncodings = 1
-	KCFStringEncodingMacChineseTrad CFStringEncodings = 2
-	KCFStringEncodingMacKorean CFStringEncodings = 3
-	KCFStringEncodingMacArabic CFStringEncodings = 4
-	KCFStringEncodingMacHebrew CFStringEncodings = 5
-	KCFStringEncodingMacGreek CFStringEncodings = 6
-	KCFStringEncodingMacCyrillic CFStringEncodings = 7
-	KCFStringEncodingMacDevanagari CFStringEncodings = 9
-	KCFStringEncodingMacGurmukhi CFStringEncodings = 10
-	KCFStringEncodingMacGujarati CFStringEncodings = 11
-	KCFStringEncodingMacOriya CFStringEncodings = 12
-	KCFStringEncodingMacBengali CFStringEncodings = 13
-	KCFStringEncodingMacTamil CFStringEncodings = 14
-	KCFStringEncodingMacTelugu CFStringEncodings = 15
-	KCFStringEncodingMacKannada CFStringEncodings = 16
-	KCFStringEncodingMacMalayalam CFStringEncodings = 17
-	KCFStringEncodingMacSinhalese CFStringEncodings = 18
-	KCFStringEncodingMacBurmese CFStringEncodings = 19
-	KCFStringEncodingMacKhmer CFStringEncodings = 20
-	KCFStringEncodingMacThai CFStringEncodings = 21
-	KCFStringEncodingMacLaotian CFStringEncodings = 22
-	KCFStringEncodingMacGeorgian CFStringEncodings = 23
-	KCFStringEncodingMacArmenian CFStringEncodings = 24
-	KCFStringEncodingMacChineseSimp CFStringEncodings = 25
-	KCFStringEncodingMacTibetan CFStringEncodings = 26
-	KCFStringEncodingMacMongolian CFStringEncodings = 27
-	KCFStringEncodingMacEthiopic CFStringEncodings = 28
-	KCFStringEncodingMacCentralEurRoman CFStringEncodings = 29
-	KCFStringEncodingMacVietnamese CFStringEncodings = 30
-	KCFStringEncodingMacExtArabic CFStringEncodings = 31
-	KCFStringEncodingMacSymbol CFStringEncodings = 33
-	KCFStringEncodingMacDingbats CFStringEncodings = 34
-	KCFStringEncodingMacTurkish CFStringEncodings = 35
-	KCFStringEncodingMacCroatian CFStringEncodings = 36
-	KCFStringEncodingMacIcelandic CFStringEncodings = 37
-	KCFStringEncodingMacRomanian CFStringEncodings = 38
-	KCFStringEncodingMacCeltic CFStringEncodings = 39
-	KCFStringEncodingMacGaelic CFStringEncodings = 40
-	KCFStringEncodingMacFarsi CFStringEncodings = 140
-	KCFStringEncodingMacUkrainian CFStringEncodings = 152
-	KCFStringEncodingMacInuit CFStringEncodings = 236
-	KCFStringEncodingMacVT100 CFStringEncodings = 252
-	KCFStringEncodingMacHFS CFStringEncodings = 255
-	KCFStringEncodingISOLatin2 CFStringEncodings = 514
-	KCFStringEncodingISOLatin3 CFStringEncodings = 515
-	KCFStringEncodingISOLatin4 CFStringEncodings = 516
-	KCFStringEncodingISOLatinCyrillic CFStringEncodings = 517
-	KCFStringEncodingISOLatinArabic CFStringEncodings = 518
-	KCFStringEncodingISOLatinGreek CFStringEncodings = 519
-	KCFStringEncodingISOLatinHebrew CFStringEncodings = 520
-	KCFStringEncodingISOLatin5 CFStringEncodings = 521
-	KCFStringEncodingISOLatin6 CFStringEncodings = 522
-	KCFStringEncodingISOLatinThai CFStringEncodings = 523
-	KCFStringEncodingISOLatin7 CFStringEncodings = 525
-	KCFStringEncodingISOLatin8 CFStringEncodings = 526
-	KCFStringEncodingISOLatin9 CFStringEncodings = 527
-	KCFStringEncodingISOLatin10 CFStringEncodings = 528
-	KCFStringEncodingDOSLatinUS CFStringEncodings = 1024
-	KCFStringEncodingDOSGreek CFStringEncodings = 1029
-	KCFStringEncodingDOSBalticRim CFStringEncodings = 1030
-	KCFStringEncodingDOSLatin1 CFStringEncodings = 1040
-	KCFStringEncodingDOSGreek1 CFStringEncodings = 1041
-	KCFStringEncodingDOSLatin2 CFStringEncodings = 1042
-	KCFStringEncodingDOSCyrillic CFStringEncodings = 1043
-	KCFStringEncodingDOSTurkish CFStringEncodings = 1044
-	KCFStringEncodingDOSPortuguese CFStringEncodings = 1045
-	KCFStringEncodingDOSIcelandic CFStringEncodings = 1046
-	KCFStringEncodingDOSHebrew CFStringEncodings = 1047
-	KCFStringEncodingDOSCanadianFrench CFStringEncodings = 1048
-	KCFStringEncodingDOSArabic CFStringEncodings = 1049
-	KCFStringEncodingDOSNordic CFStringEncodings = 1050
-	KCFStringEncodingDOSRussian CFStringEncodings = 1051
-	KCFStringEncodingDOSGreek2 CFStringEncodings = 1052
-	KCFStringEncodingDOSThai CFStringEncodings = 1053
-	KCFStringEncodingDOSJapanese CFStringEncodings = 1056
-	KCFStringEncodingDOSChineseSimplif CFStringEncodings = 1057
-	KCFStringEncodingDOSKorean CFStringEncodings = 1058
-	KCFStringEncodingDOSChineseTrad CFStringEncodings = 1059
-	KCFStringEncodingWindowsLatin2 CFStringEncodings = 1281
-	KCFStringEncodingWindowsCyrillic CFStringEncodings = 1282
-	KCFStringEncodingWindowsGreek CFStringEncodings = 1283
-	KCFStringEncodingWindowsLatin5 CFStringEncodings = 1284
-	KCFStringEncodingWindowsHebrew CFStringEncodings = 1285
-	KCFStringEncodingWindowsArabic CFStringEncodings = 1286
-	KCFStringEncodingWindowsBalticRim CFStringEncodings = 1287
-	KCFStringEncodingWindowsVietnamese CFStringEncodings = 1288
-	KCFStringEncodingWindowsKoreanJohab CFStringEncodings = 1296
-	KCFStringEncodingANSEL CFStringEncodings = 1537
-	KCFStringEncodingJIS_X0201_76 CFStringEncodings = 1568
-	KCFStringEncodingJIS_X0208_83 CFStringEncodings = 1569
-	KCFStringEncodingJIS_X0208_90 CFStringEncodings = 1570
-	KCFStringEncodingJIS_X0212_90 CFStringEncodings = 1571
-	KCFStringEncodingJIS_C6226_78 CFStringEncodings = 1572
-	KCFStringEncodingShiftJIS_X0213 CFStringEncodings = 1576
+	KCFStringEncodingMacJapanese             CFStringEncodings = 1
+	KCFStringEncodingMacChineseTrad          CFStringEncodings = 2
+	KCFStringEncodingMacKorean               CFStringEncodings = 3
+	KCFStringEncodingMacArabic               CFStringEncodings = 4
+	KCFStringEncodingMacHebrew               CFStringEncodings = 5
+	KCFStringEncodingMacGreek                CFStringEncodings = 6
+	KCFStringEncodingMacCyrillic             CFStringEncodings = 7
+	KCFStringEncodingMacDevanagari           CFStringEncodings = 9
+	KCFStringEncodingMacGurmukhi             CFStringEncodings = 10
+	KCFStringEncodingMacGujarati             CFStringEncodings = 11
+	KCFStringEncodingMacOriya                CFStringEncodings = 12
+	KCFStringEncodingMacBengali              CFStringEncodings = 13
+	KCFStringEncodingMacTamil                CFStringEncodings = 14
+	KCFStringEncodingMacTelugu               CFStringEncodings = 15
+	KCFStringEncodingMacKannada              CFStringEncodings = 16
+	KCFStringEncodingMacMalayalam            CFStringEncodings = 17
+	KCFStringEncodingMacSinhalese            CFStringEncodings = 18
+	KCFStringEncodingMacBurmese              CFStringEncodings = 19
+	KCFStringEncodingMacKhmer                CFStringEncodings = 20
+	KCFStringEncodingMacThai                 CFStringEncodings = 21
+	KCFStringEncodingMacLaotian              CFStringEncodings = 22
+	KCFStringEncodingMacGeorgian             CFStringEncodings = 23
+	KCFStringEncodingMacArmenian             CFStringEncodings = 24
+	KCFStringEncodingMacChineseSimp          CFStringEncodings = 25
+	KCFStringEncodingMacTibetan              CFStringEncodings = 26
+	KCFStringEncodingMacMongolian            CFStringEncodings = 27
+	KCFStringEncodingMacEthiopic             CFStringEncodings = 28
+	KCFStringEncodingMacCentralEurRoman      CFStringEncodings = 29
+	KCFStringEncodingMacVietnamese           CFStringEncodings = 30
+	KCFStringEncodingMacExtArabic            CFStringEncodings = 31
+	KCFStringEncodingMacSymbol               CFStringEncodings = 33
+	KCFStringEncodingMacDingbats             CFStringEncodings = 34
+	KCFStringEncodingMacTurkish              CFStringEncodings = 35
+	KCFStringEncodingMacCroatian             CFStringEncodings = 36
+	KCFStringEncodingMacIcelandic            CFStringEncodings = 37
+	KCFStringEncodingMacRomanian             CFStringEncodings = 38
+	KCFStringEncodingMacCeltic               CFStringEncodings = 39
+	KCFStringEncodingMacGaelic               CFStringEncodings = 40
+	KCFStringEncodingMacFarsi                CFStringEncodings = 140
+	KCFStringEncodingMacUkrainian            CFStringEncodings = 152
+	KCFStringEncodingMacInuit                CFStringEncodings = 236
+	KCFStringEncodingMacVT100                CFStringEncodings = 252
+	KCFStringEncodingMacHFS                  CFStringEncodings = 255
+	KCFStringEncodingISOLatin2               CFStringEncodings = 514
+	KCFStringEncodingISOLatin3               CFStringEncodings = 515
+	KCFStringEncodingISOLatin4               CFStringEncodings = 516
+	KCFStringEncodingISOLatinCyrillic        CFStringEncodings = 517
+	KCFStringEncodingISOLatinArabic          CFStringEncodings = 518
+	KCFStringEncodingISOLatinGreek           CFStringEncodings = 519
+	KCFStringEncodingISOLatinHebrew          CFStringEncodings = 520
+	KCFStringEncodingISOLatin5               CFStringEncodings = 521
+	KCFStringEncodingISOLatin6               CFStringEncodings = 522
+	KCFStringEncodingISOLatinThai            CFStringEncodings = 523
+	KCFStringEncodingISOLatin7               CFStringEncodings = 525
+	KCFStringEncodingISOLatin8               CFStringEncodings = 526
+	KCFStringEncodingISOLatin9               CFStringEncodings = 527
+	KCFStringEncodingISOLatin10              CFStringEncodings = 528
+	KCFStringEncodingDOSLatinUS              CFStringEncodings = 1024
+	KCFStringEncodingDOSGreek                CFStringEncodings = 1029
+	KCFStringEncodingDOSBalticRim            CFStringEncodings = 1030
+	KCFStringEncodingDOSLatin1               CFStringEncodings = 1040
+	KCFStringEncodingDOSGreek1               CFStringEncodings = 1041
+	KCFStringEncodingDOSLatin2               CFStringEncodings = 1042
+	KCFStringEncodingDOSCyrillic             CFStringEncodings = 1043
+	KCFStringEncodingDOSTurkish              CFStringEncodings = 1044
+	KCFStringEncodingDOSPortuguese           CFStringEncodings = 1045
+	KCFStringEncodingDOSIcelandic            CFStringEncodings = 1046
+	KCFStringEncodingDOSHebrew               CFStringEncodings = 1047
+	KCFStringEncodingDOSCanadianFrench       CFStringEncodings = 1048
+	KCFStringEncodingDOSArabic               CFStringEncodings = 1049
+	KCFStringEncodingDOSNordic               CFStringEncodings = 1050
+	KCFStringEncodingDOSRussian              CFStringEncodings = 1051
+	KCFStringEncodingDOSGreek2               CFStringEncodings = 1052
+	KCFStringEncodingDOSThai                 CFStringEncodings = 1053
+	KCFStringEncodingDOSJapanese             CFStringEncodings = 1056
+	KCFStringEncodingDOSChineseSimplif       CFStringEncodings = 1057
+	KCFStringEncodingDOSKorean               CFStringEncodings = 1058
+	KCFStringEncodingDOSChineseTrad          CFStringEncodings = 1059
+	KCFStringEncodingWindowsLatin2           CFStringEncodings = 1281
+	KCFStringEncodingWindowsCyrillic         CFStringEncodings = 1282
+	KCFStringEncodingWindowsGreek            CFStringEncodings = 1283
+	KCFStringEncodingWindowsLatin5           CFStringEncodings = 1284
+	KCFStringEncodingWindowsHebrew           CFStringEncodings = 1285
+	KCFStringEncodingWindowsArabic           CFStringEncodings = 1286
+	KCFStringEncodingWindowsBalticRim        CFStringEncodings = 1287
+	KCFStringEncodingWindowsVietnamese       CFStringEncodings = 1288
+	KCFStringEncodingWindowsKoreanJohab      CFStringEncodings = 1296
+	KCFStringEncodingANSEL                   CFStringEncodings = 1537
+	KCFStringEncodingJIS_X0201_76            CFStringEncodings = 1568
+	KCFStringEncodingJIS_X0208_83            CFStringEncodings = 1569
+	KCFStringEncodingJIS_X0208_90            CFStringEncodings = 1570
+	KCFStringEncodingJIS_X0212_90            CFStringEncodings = 1571
+	KCFStringEncodingJIS_C6226_78            CFStringEncodings = 1572
+	KCFStringEncodingShiftJIS_X0213          CFStringEncodings = 1576
 	KCFStringEncodingShiftJIS_X0213_MenKuTen CFStringEncodings = 1577
-	KCFStringEncodingGB_2312_80 CFStringEncodings = 1584
-	KCFStringEncodingGBK_95 CFStringEncodings = 1585
-	KCFStringEncodingGB_18030_2000 CFStringEncodings = 1586
-	KCFStringEncodingKSC_5601_87 CFStringEncodings = 1600
-	KCFStringEncodingKSC_5601_92_Johab CFStringEncodings = 1601
-	KCFStringEncodingCNS_11643_92_P1 CFStringEncodings = 1617
-	KCFStringEncodingCNS_11643_92_P2 CFStringEncodings = 1618
-	KCFStringEncodingCNS_11643_92_P3 CFStringEncodings = 1619
-	KCFStringEncodingISO_2022_JP CFStringEncodings = 2080
-	KCFStringEncodingISO_2022_JP_2 CFStringEncodings = 2081
-	KCFStringEncodingISO_2022_JP_1 CFStringEncodings = 2082
-	KCFStringEncodingISO_2022_JP_3 CFStringEncodings = 2083
-	KCFStringEncodingISO_2022_CN CFStringEncodings = 2096
-	KCFStringEncodingISO_2022_CN_EXT CFStringEncodings = 2097
-	KCFStringEncodingISO_2022_KR CFStringEncodings = 2112
-	KCFStringEncodingEUC_JP CFStringEncodings = 2336
-	KCFStringEncodingEUC_CN CFStringEncodings = 2352
-	KCFStringEncodingEUC_TW CFStringEncodings = 2353
-	KCFStringEncodingEUC_KR CFStringEncodings = 2368
-	KCFStringEncodingShiftJIS CFStringEncodings = 2561
-	KCFStringEncodingKOI8_R CFStringEncodings = 2562
-	KCFStringEncodingBig5 CFStringEncodings = 2563
-	KCFStringEncodingMacRomanLatin1 CFStringEncodings = 2564
-	KCFStringEncodingHZ_GB_2312 CFStringEncodings = 2565
-	KCFStringEncodingBig5_HKSCS_1999 CFStringEncodings = 2566
-	KCFStringEncodingVISCII CFStringEncodings = 2567
-	KCFStringEncodingKOI8_U CFStringEncodings = 2568
-	KCFStringEncodingBig5_E CFStringEncodings = 2569
-	KCFStringEncodingNextStepJapanese CFStringEncodings = 2818
-	KCFStringEncodingEBCDIC_US CFStringEncodings = 3073
-	KCFStringEncodingEBCDIC_CP037 CFStringEncodings = 3074
-	KCFStringEncodingUTF7 CFStringEncodings = 67109120
-	KCFStringEncodingUTF7_IMAP CFStringEncodings = 2576
-	KCFStringEncodingShiftJIS_X0213_00 CFStringEncodings = 1576
+	KCFStringEncodingGB_2312_80              CFStringEncodings = 1584
+	KCFStringEncodingGBK_95                  CFStringEncodings = 1585
+	KCFStringEncodingGB_18030_2000           CFStringEncodings = 1586
+	KCFStringEncodingKSC_5601_87             CFStringEncodings = 1600
+	KCFStringEncodingKSC_5601_92_Johab       CFStringEncodings = 1601
+	KCFStringEncodingCNS_11643_92_P1         CFStringEncodings = 1617
+	KCFStringEncodingCNS_11643_92_P2         CFStringEncodings = 1618
+	KCFStringEncodingCNS_11643_92_P3         CFStringEncodings = 1619
+	KCFStringEncodingISO_2022_JP             CFStringEncodings = 2080
+	KCFStringEncodingISO_2022_JP_2           CFStringEncodings = 2081
+	KCFStringEncodingISO_2022_JP_1           CFStringEncodings = 2082
+	KCFStringEncodingISO_2022_JP_3           CFStringEncodings = 2083
+	KCFStringEncodingISO_2022_CN             CFStringEncodings = 2096
+	KCFStringEncodingISO_2022_CN_EXT         CFStringEncodings = 2097
+	KCFStringEncodingISO_2022_KR             CFStringEncodings = 2112
+	KCFStringEncodingEUC_JP                  CFStringEncodings = 2336
+	KCFStringEncodingEUC_CN                  CFStringEncodings = 2352
+	KCFStringEncodingEUC_TW                  CFStringEncodings = 2353
+	KCFStringEncodingEUC_KR                  CFStringEncodings = 2368
+	KCFStringEncodingShiftJIS                CFStringEncodings = 2561
+	KCFStringEncodingKOI8_R                  CFStringEncodings = 2562
+	KCFStringEncodingBig5                    CFStringEncodings = 2563
+	KCFStringEncodingMacRomanLatin1          CFStringEncodings = 2564
+	KCFStringEncodingHZ_GB_2312              CFStringEncodings = 2565
+	KCFStringEncodingBig5_HKSCS_1999         CFStringEncodings = 2566
+	KCFStringEncodingVISCII                  CFStringEncodings = 2567
+	KCFStringEncodingKOI8_U                  CFStringEncodings = 2568
+	KCFStringEncodingBig5_E                  CFStringEncodings = 2569
+	KCFStringEncodingNextStepJapanese        CFStringEncodings = 2818
+	KCFStringEncodingEBCDIC_US               CFStringEncodings = 3073
+	KCFStringEncodingEBCDIC_CP037            CFStringEncodings = 3074
+	KCFStringEncodingUTF7                    CFStringEncodings = 67109120
+	KCFStringEncodingUTF7_IMAP               CFStringEncodings = 2576
+	KCFStringEncodingShiftJIS_X0213_00       CFStringEncodings = 1576
 )
 
 func (e CFStringEncodings) String() string {
@@ -1169,9 +1337,9 @@ func (e CFStringEncodings) String() string {
 type CFStringNormalizationForm int64
 
 const (
-	KCFStringNormalizationFormD CFStringNormalizationForm = 0
+	KCFStringNormalizationFormD  CFStringNormalizationForm = 0
 	KCFStringNormalizationFormKD CFStringNormalizationForm = 1
-	KCFStringNormalizationFormC CFStringNormalizationForm = 2
+	KCFStringNormalizationFormC  CFStringNormalizationForm = 2
 	KCFStringNormalizationFormKC CFStringNormalizationForm = 3
 )
 
@@ -1193,38 +1361,52 @@ func (e CFStringNormalizationForm) String() string {
 type CFStringTokenizerTokenType int64
 
 const (
-	KCFStringTokenizerTokenNone CFStringTokenizerTokenType = 0
+	KCFStringTokenizerTokenNone   CFStringTokenizerTokenType = 0
 	KCFStringTokenizerTokenNormal CFStringTokenizerTokenType = 1
 	// Compound token which may contain subtokens but with no derived subtokens. Its subtokens can be obtained by calling CFStringTokenizerGetCurrentSubTokens.
 	KCFStringTokenizerTokenHasSubTokensMask CFStringTokenizerTokenType = 2
 	// Compound token which may contain derived subtokens. Its subtokens and derived subtokens can be obtained by calling CFStringTokenizerGetCurrentSubTokens.
 	KCFStringTokenizerTokenHasDerivedSubTokensMask CFStringTokenizerTokenType = 4
-	KCFStringTokenizerTokenHasHasNumbersMask CFStringTokenizerTokenType = 8
-	KCFStringTokenizerTokenHasNonLettersMask CFStringTokenizerTokenType = 16
-	KCFStringTokenizerTokenIsCJWordMask CFStringTokenizerTokenType = 32
+	KCFStringTokenizerTokenHasHasNumbersMask       CFStringTokenizerTokenType = 8
+	KCFStringTokenizerTokenHasNonLettersMask       CFStringTokenizerTokenType = 16
+	KCFStringTokenizerTokenIsCJWordMask            CFStringTokenizerTokenType = 32
 )
 
 func (e CFStringTokenizerTokenType) String() string {
 	var parts []string
-	if e&KCFStringTokenizerTokenNormal != 0 { parts = append(parts, "KCFStringTokenizerTokenNormal") }
-	if e&KCFStringTokenizerTokenHasSubTokensMask != 0 { parts = append(parts, "KCFStringTokenizerTokenHasSubTokensMask") }
-	if e&KCFStringTokenizerTokenHasDerivedSubTokensMask != 0 { parts = append(parts, "KCFStringTokenizerTokenHasDerivedSubTokensMask") }
-	if e&KCFStringTokenizerTokenHasHasNumbersMask != 0 { parts = append(parts, "KCFStringTokenizerTokenHasHasNumbersMask") }
-	if e&KCFStringTokenizerTokenHasNonLettersMask != 0 { parts = append(parts, "KCFStringTokenizerTokenHasNonLettersMask") }
-	if e&KCFStringTokenizerTokenIsCJWordMask != 0 { parts = append(parts, "KCFStringTokenizerTokenIsCJWordMask") }
-	if len(parts) == 0 { return "0" }
+	if e&KCFStringTokenizerTokenNormal != 0 {
+		parts = append(parts, "KCFStringTokenizerTokenNormal")
+	}
+	if e&KCFStringTokenizerTokenHasSubTokensMask != 0 {
+		parts = append(parts, "KCFStringTokenizerTokenHasSubTokensMask")
+	}
+	if e&KCFStringTokenizerTokenHasDerivedSubTokensMask != 0 {
+		parts = append(parts, "KCFStringTokenizerTokenHasDerivedSubTokensMask")
+	}
+	if e&KCFStringTokenizerTokenHasHasNumbersMask != 0 {
+		parts = append(parts, "KCFStringTokenizerTokenHasHasNumbersMask")
+	}
+	if e&KCFStringTokenizerTokenHasNonLettersMask != 0 {
+		parts = append(parts, "KCFStringTokenizerTokenHasNonLettersMask")
+	}
+	if e&KCFStringTokenizerTokenIsCJWordMask != 0 {
+		parts = append(parts, "KCFStringTokenizerTokenIsCJWordMask")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type CFTimeZoneNameStyle int64
 
 const (
-	KCFTimeZoneNameStyleStandard CFTimeZoneNameStyle = 0
-	KCFTimeZoneNameStyleShortStandard CFTimeZoneNameStyle = 1
-	KCFTimeZoneNameStyleDaylightSaving CFTimeZoneNameStyle = 2
+	KCFTimeZoneNameStyleStandard            CFTimeZoneNameStyle = 0
+	KCFTimeZoneNameStyleShortStandard       CFTimeZoneNameStyle = 1
+	KCFTimeZoneNameStyleDaylightSaving      CFTimeZoneNameStyle = 2
 	KCFTimeZoneNameStyleShortDaylightSaving CFTimeZoneNameStyle = 3
-	KCFTimeZoneNameStyleGeneric CFTimeZoneNameStyle = 4
-	KCFTimeZoneNameStyleShortGeneric CFTimeZoneNameStyle = 5
+	KCFTimeZoneNameStyleGeneric             CFTimeZoneNameStyle = 4
+	KCFTimeZoneNameStyleShortGeneric        CFTimeZoneNameStyle = 5
 )
 
 func (e CFTimeZoneNameStyle) String() string {
@@ -1249,64 +1431,92 @@ func (e CFTimeZoneNameStyle) String() string {
 type CFURLBookmarkCreationOptions int64
 
 const (
-	KCFURLBookmarkCreationMinimalBookmarkMask CFURLBookmarkCreationOptions = 512
-	KCFURLBookmarkCreationSuitableForBookmarkFile CFURLBookmarkCreationOptions = 1024
-	KCFURLBookmarkCreationWithSecurityScope CFURLBookmarkCreationOptions = 2048
+	KCFURLBookmarkCreationMinimalBookmarkMask              CFURLBookmarkCreationOptions = 512
+	KCFURLBookmarkCreationSuitableForBookmarkFile          CFURLBookmarkCreationOptions = 1024
+	KCFURLBookmarkCreationWithSecurityScope                CFURLBookmarkCreationOptions = 2048
 	KCFURLBookmarkCreationSecurityScopeAllowOnlyReadAccess CFURLBookmarkCreationOptions = 4096
-	KCFURLBookmarkCreationWithoutImplicitSecurityScope CFURLBookmarkCreationOptions = 536870912
-	KCFURLBookmarkCreationPreferFileIDResolutionMask CFURLBookmarkCreationOptions = 256
+	KCFURLBookmarkCreationWithoutImplicitSecurityScope     CFURLBookmarkCreationOptions = 536870912
+	KCFURLBookmarkCreationPreferFileIDResolutionMask       CFURLBookmarkCreationOptions = 256
 )
 
 func (e CFURLBookmarkCreationOptions) String() string {
 	var parts []string
-	if e&KCFURLBookmarkCreationMinimalBookmarkMask != 0 { parts = append(parts, "KCFURLBookmarkCreationMinimalBookmarkMask") }
-	if e&KCFURLBookmarkCreationSuitableForBookmarkFile != 0 { parts = append(parts, "KCFURLBookmarkCreationSuitableForBookmarkFile") }
-	if e&KCFURLBookmarkCreationWithSecurityScope != 0 { parts = append(parts, "KCFURLBookmarkCreationWithSecurityScope") }
-	if e&KCFURLBookmarkCreationSecurityScopeAllowOnlyReadAccess != 0 { parts = append(parts, "KCFURLBookmarkCreationSecurityScopeAllowOnlyReadAccess") }
-	if e&KCFURLBookmarkCreationWithoutImplicitSecurityScope != 0 { parts = append(parts, "KCFURLBookmarkCreationWithoutImplicitSecurityScope") }
-	if e&KCFURLBookmarkCreationPreferFileIDResolutionMask != 0 { parts = append(parts, "KCFURLBookmarkCreationPreferFileIDResolutionMask") }
-	if len(parts) == 0 { return "0" }
+	if e&KCFURLBookmarkCreationMinimalBookmarkMask != 0 {
+		parts = append(parts, "KCFURLBookmarkCreationMinimalBookmarkMask")
+	}
+	if e&KCFURLBookmarkCreationSuitableForBookmarkFile != 0 {
+		parts = append(parts, "KCFURLBookmarkCreationSuitableForBookmarkFile")
+	}
+	if e&KCFURLBookmarkCreationWithSecurityScope != 0 {
+		parts = append(parts, "KCFURLBookmarkCreationWithSecurityScope")
+	}
+	if e&KCFURLBookmarkCreationSecurityScopeAllowOnlyReadAccess != 0 {
+		parts = append(parts, "KCFURLBookmarkCreationSecurityScopeAllowOnlyReadAccess")
+	}
+	if e&KCFURLBookmarkCreationWithoutImplicitSecurityScope != 0 {
+		parts = append(parts, "KCFURLBookmarkCreationWithoutImplicitSecurityScope")
+	}
+	if e&KCFURLBookmarkCreationPreferFileIDResolutionMask != 0 {
+		parts = append(parts, "KCFURLBookmarkCreationPreferFileIDResolutionMask")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type CFURLBookmarkResolutionOptions int64
 
 const (
-	KCFURLBookmarkResolutionWithoutUIMask CFURLBookmarkResolutionOptions = 256
-	KCFURLBookmarkResolutionWithoutMountingMask CFURLBookmarkResolutionOptions = 512
-	KCFURLBookmarkResolutionWithSecurityScope CFURLBookmarkResolutionOptions = 1024
+	KCFURLBookmarkResolutionWithoutUIMask                 CFURLBookmarkResolutionOptions = 256
+	KCFURLBookmarkResolutionWithoutMountingMask           CFURLBookmarkResolutionOptions = 512
+	KCFURLBookmarkResolutionWithSecurityScope             CFURLBookmarkResolutionOptions = 1024
 	KCFURLBookmarkResolutionWithoutImplicitStartAccessing CFURLBookmarkResolutionOptions = 32768
-	KCFBookmarkResolutionWithoutUIMask CFURLBookmarkResolutionOptions = 256
-	KCFBookmarkResolutionWithoutMountingMask CFURLBookmarkResolutionOptions = 512
+	KCFBookmarkResolutionWithoutUIMask                    CFURLBookmarkResolutionOptions = 256
+	KCFBookmarkResolutionWithoutMountingMask              CFURLBookmarkResolutionOptions = 512
 )
 
 func (e CFURLBookmarkResolutionOptions) String() string {
 	var parts []string
-	if e&KCFURLBookmarkResolutionWithoutUIMask != 0 { parts = append(parts, "KCFURLBookmarkResolutionWithoutUIMask") }
-	if e&KCFURLBookmarkResolutionWithoutMountingMask != 0 { parts = append(parts, "KCFURLBookmarkResolutionWithoutMountingMask") }
-	if e&KCFURLBookmarkResolutionWithSecurityScope != 0 { parts = append(parts, "KCFURLBookmarkResolutionWithSecurityScope") }
-	if e&KCFURLBookmarkResolutionWithoutImplicitStartAccessing != 0 { parts = append(parts, "KCFURLBookmarkResolutionWithoutImplicitStartAccessing") }
-	if e&KCFBookmarkResolutionWithoutUIMask != 0 { parts = append(parts, "KCFBookmarkResolutionWithoutUIMask") }
-	if e&KCFBookmarkResolutionWithoutMountingMask != 0 { parts = append(parts, "KCFBookmarkResolutionWithoutMountingMask") }
-	if len(parts) == 0 { return "0" }
+	if e&KCFURLBookmarkResolutionWithoutUIMask != 0 {
+		parts = append(parts, "KCFURLBookmarkResolutionWithoutUIMask")
+	}
+	if e&KCFURLBookmarkResolutionWithoutMountingMask != 0 {
+		parts = append(parts, "KCFURLBookmarkResolutionWithoutMountingMask")
+	}
+	if e&KCFURLBookmarkResolutionWithSecurityScope != 0 {
+		parts = append(parts, "KCFURLBookmarkResolutionWithSecurityScope")
+	}
+	if e&KCFURLBookmarkResolutionWithoutImplicitStartAccessing != 0 {
+		parts = append(parts, "KCFURLBookmarkResolutionWithoutImplicitStartAccessing")
+	}
+	if e&KCFBookmarkResolutionWithoutUIMask != 0 {
+		parts = append(parts, "KCFBookmarkResolutionWithoutUIMask")
+	}
+	if e&KCFBookmarkResolutionWithoutMountingMask != 0 {
+		parts = append(parts, "KCFBookmarkResolutionWithoutMountingMask")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type CFURLComponentType int64
 
 const (
-	KCFURLComponentScheme CFURLComponentType = 1
-	KCFURLComponentNetLocation CFURLComponentType = 2
-	KCFURLComponentPath CFURLComponentType = 3
+	KCFURLComponentScheme            CFURLComponentType = 1
+	KCFURLComponentNetLocation       CFURLComponentType = 2
+	KCFURLComponentPath              CFURLComponentType = 3
 	KCFURLComponentResourceSpecifier CFURLComponentType = 4
-	KCFURLComponentUser CFURLComponentType = 5
-	KCFURLComponentPassword CFURLComponentType = 6
-	KCFURLComponentUserInfo CFURLComponentType = 7
-	KCFURLComponentHost CFURLComponentType = 8
-	KCFURLComponentPort CFURLComponentType = 9
-	KCFURLComponentParameterString CFURLComponentType = 10
-	KCFURLComponentQuery CFURLComponentType = 11
-	KCFURLComponentFragment CFURLComponentType = 12
+	KCFURLComponentUser              CFURLComponentType = 5
+	KCFURLComponentPassword          CFURLComponentType = 6
+	KCFURLComponentUserInfo          CFURLComponentType = 7
+	KCFURLComponentHost              CFURLComponentType = 8
+	KCFURLComponentPort              CFURLComponentType = 9
+	KCFURLComponentParameterString   CFURLComponentType = 10
+	KCFURLComponentQuery             CFURLComponentType = 11
+	KCFURLComponentFragment          CFURLComponentType = 12
 )
 
 func (e CFURLComponentType) String() string {
@@ -1343,35 +1553,51 @@ func (e CFURLComponentType) String() string {
 type CFURLEnumeratorOptions int64
 
 const (
-	KCFURLEnumeratorDefaultBehavior CFURLEnumeratorOptions = 0
-	KCFURLEnumeratorDescendRecursively CFURLEnumeratorOptions = 1
-	KCFURLEnumeratorSkipInvisibles CFURLEnumeratorOptions = 2
-	KCFURLEnumeratorGenerateFileReferenceURLs CFURLEnumeratorOptions = 4
-	KCFURLEnumeratorSkipPackageContents CFURLEnumeratorOptions = 8
-	KCFURLEnumeratorIncludeDirectoriesPreOrder CFURLEnumeratorOptions = 16
+	KCFURLEnumeratorDefaultBehavior             CFURLEnumeratorOptions = 0
+	KCFURLEnumeratorDescendRecursively          CFURLEnumeratorOptions = 1
+	KCFURLEnumeratorSkipInvisibles              CFURLEnumeratorOptions = 2
+	KCFURLEnumeratorGenerateFileReferenceURLs   CFURLEnumeratorOptions = 4
+	KCFURLEnumeratorSkipPackageContents         CFURLEnumeratorOptions = 8
+	KCFURLEnumeratorIncludeDirectoriesPreOrder  CFURLEnumeratorOptions = 16
 	KCFURLEnumeratorIncludeDirectoriesPostOrder CFURLEnumeratorOptions = 32
-	KCFURLEnumeratorGenerateRelativePathURLs CFURLEnumeratorOptions = 64
+	KCFURLEnumeratorGenerateRelativePathURLs    CFURLEnumeratorOptions = 64
 )
 
 func (e CFURLEnumeratorOptions) String() string {
 	var parts []string
-	if e&KCFURLEnumeratorDescendRecursively != 0 { parts = append(parts, "KCFURLEnumeratorDescendRecursively") }
-	if e&KCFURLEnumeratorSkipInvisibles != 0 { parts = append(parts, "KCFURLEnumeratorSkipInvisibles") }
-	if e&KCFURLEnumeratorGenerateFileReferenceURLs != 0 { parts = append(parts, "KCFURLEnumeratorGenerateFileReferenceURLs") }
-	if e&KCFURLEnumeratorSkipPackageContents != 0 { parts = append(parts, "KCFURLEnumeratorSkipPackageContents") }
-	if e&KCFURLEnumeratorIncludeDirectoriesPreOrder != 0 { parts = append(parts, "KCFURLEnumeratorIncludeDirectoriesPreOrder") }
-	if e&KCFURLEnumeratorIncludeDirectoriesPostOrder != 0 { parts = append(parts, "KCFURLEnumeratorIncludeDirectoriesPostOrder") }
-	if e&KCFURLEnumeratorGenerateRelativePathURLs != 0 { parts = append(parts, "KCFURLEnumeratorGenerateRelativePathURLs") }
-	if len(parts) == 0 { return "0" }
+	if e&KCFURLEnumeratorDescendRecursively != 0 {
+		parts = append(parts, "KCFURLEnumeratorDescendRecursively")
+	}
+	if e&KCFURLEnumeratorSkipInvisibles != 0 {
+		parts = append(parts, "KCFURLEnumeratorSkipInvisibles")
+	}
+	if e&KCFURLEnumeratorGenerateFileReferenceURLs != 0 {
+		parts = append(parts, "KCFURLEnumeratorGenerateFileReferenceURLs")
+	}
+	if e&KCFURLEnumeratorSkipPackageContents != 0 {
+		parts = append(parts, "KCFURLEnumeratorSkipPackageContents")
+	}
+	if e&KCFURLEnumeratorIncludeDirectoriesPreOrder != 0 {
+		parts = append(parts, "KCFURLEnumeratorIncludeDirectoriesPreOrder")
+	}
+	if e&KCFURLEnumeratorIncludeDirectoriesPostOrder != 0 {
+		parts = append(parts, "KCFURLEnumeratorIncludeDirectoriesPostOrder")
+	}
+	if e&KCFURLEnumeratorGenerateRelativePathURLs != 0 {
+		parts = append(parts, "KCFURLEnumeratorGenerateRelativePathURLs")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type CFURLEnumeratorResult int64
 
 const (
-	KCFURLEnumeratorSuccess CFURLEnumeratorResult = 1
-	KCFURLEnumeratorEnd CFURLEnumeratorResult = 2
-	KCFURLEnumeratorError CFURLEnumeratorResult = 3
+	KCFURLEnumeratorSuccess                   CFURLEnumeratorResult = 1
+	KCFURLEnumeratorEnd                       CFURLEnumeratorResult = 2
+	KCFURLEnumeratorError                     CFURLEnumeratorResult = 3
 	KCFURLEnumeratorDirectoryPostOrderSuccess CFURLEnumeratorResult = 4
 )
 
@@ -1394,15 +1620,15 @@ func (e CFURLEnumeratorResult) String() string {
 type CFURLError int64
 
 const (
-	KCFURLUnknownError CFURLError = -10
-	KCFURLUnknownSchemeError CFURLError = -11
-	KCFURLResourceNotFoundError CFURLError = -12
+	KCFURLUnknownError                 CFURLError = -10
+	KCFURLUnknownSchemeError           CFURLError = -11
+	KCFURLResourceNotFoundError        CFURLError = -12
 	KCFURLResourceAccessViolationError CFURLError = -13
-	KCFURLRemoteHostUnavailableError CFURLError = -14
-	KCFURLImproperArgumentsError CFURLError = -15
-	KCFURLUnknownPropertyKeyError CFURLError = -16
-	KCFURLPropertyKeyUnavailableError CFURLError = -17
-	KCFURLTimeoutError CFURLError = -18
+	KCFURLRemoteHostUnavailableError   CFURLError = -14
+	KCFURLImproperArgumentsError       CFURLError = -15
+	KCFURLUnknownPropertyKeyError      CFURLError = -16
+	KCFURLPropertyKeyUnavailableError  CFURLError = -17
+	KCFURLTimeoutError                 CFURLError = -18
 )
 
 func (e CFURLError) String() string {
@@ -1433,8 +1659,8 @@ func (e CFURLError) String() string {
 type CFURLPathStyle int64
 
 const (
-	KCFURLPOSIXPathStyle CFURLPathStyle = 0
-	KCFURLHFSPathStyle CFURLPathStyle = 1
+	KCFURLPOSIXPathStyle   CFURLPathStyle = 0
+	KCFURLHFSPathStyle     CFURLPathStyle = 1
 	KCFURLWindowsPathStyle CFURLPathStyle = 2
 )
 
@@ -1454,11 +1680,11 @@ func (e CFURLPathStyle) String() string {
 type CFXMLEntityTypeCode int64
 
 const (
-	KCFXMLEntityTypeParameter CFXMLEntityTypeCode = 0
+	KCFXMLEntityTypeParameter      CFXMLEntityTypeCode = 0
 	KCFXMLEntityTypeParsedInternal CFXMLEntityTypeCode = 1
 	KCFXMLEntityTypeParsedExternal CFXMLEntityTypeCode = 2
-	KCFXMLEntityTypeUnparsed CFXMLEntityTypeCode = 3
-	KCFXMLEntityTypeCharacter CFXMLEntityTypeCode = 4
+	KCFXMLEntityTypeUnparsed       CFXMLEntityTypeCode = 3
+	KCFXMLEntityTypeCharacter      CFXMLEntityTypeCode = 4
 )
 
 func (e CFXMLEntityTypeCode) String() string {
@@ -1481,20 +1707,20 @@ func (e CFXMLEntityTypeCode) String() string {
 type CFXMLNodeTypeCode int64
 
 const (
-	KCFXMLNodeTypeDocument CFXMLNodeTypeCode = 1
-	KCFXMLNodeTypeElement CFXMLNodeTypeCode = 2
-	KCFXMLNodeTypeAttribute CFXMLNodeTypeCode = 3
-	KCFXMLNodeTypeProcessingInstruction CFXMLNodeTypeCode = 4
-	KCFXMLNodeTypeComment CFXMLNodeTypeCode = 5
-	KCFXMLNodeTypeText CFXMLNodeTypeCode = 6
-	KCFXMLNodeTypeCDATASection CFXMLNodeTypeCode = 7
-	KCFXMLNodeTypeDocumentFragment CFXMLNodeTypeCode = 8
-	KCFXMLNodeTypeEntity CFXMLNodeTypeCode = 9
-	KCFXMLNodeTypeEntityReference CFXMLNodeTypeCode = 10
-	KCFXMLNodeTypeDocumentType CFXMLNodeTypeCode = 11
-	KCFXMLNodeTypeWhitespace CFXMLNodeTypeCode = 12
-	KCFXMLNodeTypeNotation CFXMLNodeTypeCode = 13
-	KCFXMLNodeTypeElementTypeDeclaration CFXMLNodeTypeCode = 14
+	KCFXMLNodeTypeDocument                 CFXMLNodeTypeCode = 1
+	KCFXMLNodeTypeElement                  CFXMLNodeTypeCode = 2
+	KCFXMLNodeTypeAttribute                CFXMLNodeTypeCode = 3
+	KCFXMLNodeTypeProcessingInstruction    CFXMLNodeTypeCode = 4
+	KCFXMLNodeTypeComment                  CFXMLNodeTypeCode = 5
+	KCFXMLNodeTypeText                     CFXMLNodeTypeCode = 6
+	KCFXMLNodeTypeCDATASection             CFXMLNodeTypeCode = 7
+	KCFXMLNodeTypeDocumentFragment         CFXMLNodeTypeCode = 8
+	KCFXMLNodeTypeEntity                   CFXMLNodeTypeCode = 9
+	KCFXMLNodeTypeEntityReference          CFXMLNodeTypeCode = 10
+	KCFXMLNodeTypeDocumentType             CFXMLNodeTypeCode = 11
+	KCFXMLNodeTypeWhitespace               CFXMLNodeTypeCode = 12
+	KCFXMLNodeTypeNotation                 CFXMLNodeTypeCode = 13
+	KCFXMLNodeTypeElementTypeDeclaration   CFXMLNodeTypeCode = 14
 	KCFXMLNodeTypeAttributeListDeclaration CFXMLNodeTypeCode = 15
 )
 
@@ -1538,72 +1764,124 @@ func (e CFXMLNodeTypeCode) String() string {
 type CFXMLParserOptions int64
 
 const (
-	KCFXMLParserValidateDocument CFXMLParserOptions = 1
-	KCFXMLParserSkipMetaData CFXMLParserOptions = 2
+	KCFXMLParserValidateDocument        CFXMLParserOptions = 1
+	KCFXMLParserSkipMetaData            CFXMLParserOptions = 2
 	KCFXMLParserReplacePhysicalEntities CFXMLParserOptions = 4
-	KCFXMLParserSkipWhitespace CFXMLParserOptions = 8
+	KCFXMLParserSkipWhitespace          CFXMLParserOptions = 8
 	KCFXMLParserResolveExternalEntities CFXMLParserOptions = 16
-	KCFXMLParserAddImpliedAttributes CFXMLParserOptions = 32
-	KCFXMLParserAllOptions CFXMLParserOptions = 16777215
-	KCFXMLParserNoOptions CFXMLParserOptions = 0
+	KCFXMLParserAddImpliedAttributes    CFXMLParserOptions = 32
+	KCFXMLParserAllOptions              CFXMLParserOptions = 16777215
+	KCFXMLParserNoOptions               CFXMLParserOptions = 0
 )
 
 func (e CFXMLParserOptions) String() string {
 	var parts []string
-	if e&KCFXMLParserValidateDocument != 0 { parts = append(parts, "KCFXMLParserValidateDocument") }
-	if e&KCFXMLParserSkipMetaData != 0 { parts = append(parts, "KCFXMLParserSkipMetaData") }
-	if e&KCFXMLParserReplacePhysicalEntities != 0 { parts = append(parts, "KCFXMLParserReplacePhysicalEntities") }
-	if e&KCFXMLParserSkipWhitespace != 0 { parts = append(parts, "KCFXMLParserSkipWhitespace") }
-	if e&KCFXMLParserResolveExternalEntities != 0 { parts = append(parts, "KCFXMLParserResolveExternalEntities") }
-	if e&KCFXMLParserAddImpliedAttributes != 0 { parts = append(parts, "KCFXMLParserAddImpliedAttributes") }
-	if e&KCFXMLParserAllOptions != 0 { parts = append(parts, "KCFXMLParserAllOptions") }
-	if len(parts) == 0 { return "0" }
+	if e&KCFXMLParserValidateDocument != 0 {
+		parts = append(parts, "KCFXMLParserValidateDocument")
+	}
+	if e&KCFXMLParserSkipMetaData != 0 {
+		parts = append(parts, "KCFXMLParserSkipMetaData")
+	}
+	if e&KCFXMLParserReplacePhysicalEntities != 0 {
+		parts = append(parts, "KCFXMLParserReplacePhysicalEntities")
+	}
+	if e&KCFXMLParserSkipWhitespace != 0 {
+		parts = append(parts, "KCFXMLParserSkipWhitespace")
+	}
+	if e&KCFXMLParserResolveExternalEntities != 0 {
+		parts = append(parts, "KCFXMLParserResolveExternalEntities")
+	}
+	if e&KCFXMLParserAddImpliedAttributes != 0 {
+		parts = append(parts, "KCFXMLParserAddImpliedAttributes")
+	}
+	if e&KCFXMLParserAllOptions != 0 {
+		parts = append(parts, "KCFXMLParserAllOptions")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type CFXMLParserStatusCode int64
 
 const (
-	KCFXMLStatusParseNotBegun CFXMLParserStatusCode = -2
-	KCFXMLStatusParseInProgress CFXMLParserStatusCode = -1
-	KCFXMLStatusParseSuccessful CFXMLParserStatusCode = 0
-	KCFXMLErrorUnexpectedEOF CFXMLParserStatusCode = 1
-	KCFXMLErrorUnknownEncoding CFXMLParserStatusCode = 2
-	KCFXMLErrorEncodingConversionFailure CFXMLParserStatusCode = 3
+	KCFXMLStatusParseNotBegun                 CFXMLParserStatusCode = -2
+	KCFXMLStatusParseInProgress               CFXMLParserStatusCode = -1
+	KCFXMLStatusParseSuccessful               CFXMLParserStatusCode = 0
+	KCFXMLErrorUnexpectedEOF                  CFXMLParserStatusCode = 1
+	KCFXMLErrorUnknownEncoding                CFXMLParserStatusCode = 2
+	KCFXMLErrorEncodingConversionFailure      CFXMLParserStatusCode = 3
 	KCFXMLErrorMalformedProcessingInstruction CFXMLParserStatusCode = 4
-	KCFXMLErrorMalformedDTD CFXMLParserStatusCode = 5
-	KCFXMLErrorMalformedName CFXMLParserStatusCode = 6
-	KCFXMLErrorMalformedCDSect CFXMLParserStatusCode = 7
-	KCFXMLErrorMalformedCloseTag CFXMLParserStatusCode = 8
-	KCFXMLErrorMalformedStartTag CFXMLParserStatusCode = 9
-	KCFXMLErrorMalformedDocument CFXMLParserStatusCode = 10
-	KCFXMLErrorElementlessDocument CFXMLParserStatusCode = 11
-	KCFXMLErrorMalformedComment CFXMLParserStatusCode = 12
-	KCFXMLErrorMalformedCharacterReference CFXMLParserStatusCode = 13
-	KCFXMLErrorMalformedParsedCharacterData CFXMLParserStatusCode = 14
-	KCFXMLErrorNoData CFXMLParserStatusCode = 15
+	KCFXMLErrorMalformedDTD                   CFXMLParserStatusCode = 5
+	KCFXMLErrorMalformedName                  CFXMLParserStatusCode = 6
+	KCFXMLErrorMalformedCDSect                CFXMLParserStatusCode = 7
+	KCFXMLErrorMalformedCloseTag              CFXMLParserStatusCode = 8
+	KCFXMLErrorMalformedStartTag              CFXMLParserStatusCode = 9
+	KCFXMLErrorMalformedDocument              CFXMLParserStatusCode = 10
+	KCFXMLErrorElementlessDocument            CFXMLParserStatusCode = 11
+	KCFXMLErrorMalformedComment               CFXMLParserStatusCode = 12
+	KCFXMLErrorMalformedCharacterReference    CFXMLParserStatusCode = 13
+	KCFXMLErrorMalformedParsedCharacterData   CFXMLParserStatusCode = 14
+	KCFXMLErrorNoData                         CFXMLParserStatusCode = 15
 )
 
 func (e CFXMLParserStatusCode) String() string {
 	var parts []string
-	if e&KCFXMLStatusParseNotBegun != 0 { parts = append(parts, "KCFXMLStatusParseNotBegun") }
-	if e&KCFXMLStatusParseInProgress != 0 { parts = append(parts, "KCFXMLStatusParseInProgress") }
-	if e&KCFXMLErrorUnexpectedEOF != 0 { parts = append(parts, "KCFXMLErrorUnexpectedEOF") }
-	if e&KCFXMLErrorUnknownEncoding != 0 { parts = append(parts, "KCFXMLErrorUnknownEncoding") }
-	if e&KCFXMLErrorEncodingConversionFailure != 0 { parts = append(parts, "KCFXMLErrorEncodingConversionFailure") }
-	if e&KCFXMLErrorMalformedProcessingInstruction != 0 { parts = append(parts, "KCFXMLErrorMalformedProcessingInstruction") }
-	if e&KCFXMLErrorMalformedDTD != 0 { parts = append(parts, "KCFXMLErrorMalformedDTD") }
-	if e&KCFXMLErrorMalformedName != 0 { parts = append(parts, "KCFXMLErrorMalformedName") }
-	if e&KCFXMLErrorMalformedCDSect != 0 { parts = append(parts, "KCFXMLErrorMalformedCDSect") }
-	if e&KCFXMLErrorMalformedCloseTag != 0 { parts = append(parts, "KCFXMLErrorMalformedCloseTag") }
-	if e&KCFXMLErrorMalformedStartTag != 0 { parts = append(parts, "KCFXMLErrorMalformedStartTag") }
-	if e&KCFXMLErrorMalformedDocument != 0 { parts = append(parts, "KCFXMLErrorMalformedDocument") }
-	if e&KCFXMLErrorElementlessDocument != 0 { parts = append(parts, "KCFXMLErrorElementlessDocument") }
-	if e&KCFXMLErrorMalformedComment != 0 { parts = append(parts, "KCFXMLErrorMalformedComment") }
-	if e&KCFXMLErrorMalformedCharacterReference != 0 { parts = append(parts, "KCFXMLErrorMalformedCharacterReference") }
-	if e&KCFXMLErrorMalformedParsedCharacterData != 0 { parts = append(parts, "KCFXMLErrorMalformedParsedCharacterData") }
-	if e&KCFXMLErrorNoData != 0 { parts = append(parts, "KCFXMLErrorNoData") }
-	if len(parts) == 0 { return "0" }
+	if e&KCFXMLStatusParseNotBegun != 0 {
+		parts = append(parts, "KCFXMLStatusParseNotBegun")
+	}
+	if e&KCFXMLStatusParseInProgress != 0 {
+		parts = append(parts, "KCFXMLStatusParseInProgress")
+	}
+	if e&KCFXMLErrorUnexpectedEOF != 0 {
+		parts = append(parts, "KCFXMLErrorUnexpectedEOF")
+	}
+	if e&KCFXMLErrorUnknownEncoding != 0 {
+		parts = append(parts, "KCFXMLErrorUnknownEncoding")
+	}
+	if e&KCFXMLErrorEncodingConversionFailure != 0 {
+		parts = append(parts, "KCFXMLErrorEncodingConversionFailure")
+	}
+	if e&KCFXMLErrorMalformedProcessingInstruction != 0 {
+		parts = append(parts, "KCFXMLErrorMalformedProcessingInstruction")
+	}
+	if e&KCFXMLErrorMalformedDTD != 0 {
+		parts = append(parts, "KCFXMLErrorMalformedDTD")
+	}
+	if e&KCFXMLErrorMalformedName != 0 {
+		parts = append(parts, "KCFXMLErrorMalformedName")
+	}
+	if e&KCFXMLErrorMalformedCDSect != 0 {
+		parts = append(parts, "KCFXMLErrorMalformedCDSect")
+	}
+	if e&KCFXMLErrorMalformedCloseTag != 0 {
+		parts = append(parts, "KCFXMLErrorMalformedCloseTag")
+	}
+	if e&KCFXMLErrorMalformedStartTag != 0 {
+		parts = append(parts, "KCFXMLErrorMalformedStartTag")
+	}
+	if e&KCFXMLErrorMalformedDocument != 0 {
+		parts = append(parts, "KCFXMLErrorMalformedDocument")
+	}
+	if e&KCFXMLErrorElementlessDocument != 0 {
+		parts = append(parts, "KCFXMLErrorElementlessDocument")
+	}
+	if e&KCFXMLErrorMalformedComment != 0 {
+		parts = append(parts, "KCFXMLErrorMalformedComment")
+	}
+	if e&KCFXMLErrorMalformedCharacterReference != 0 {
+		parts = append(parts, "KCFXMLErrorMalformedCharacterReference")
+	}
+	if e&KCFXMLErrorMalformedParsedCharacterData != 0 {
+		parts = append(parts, "KCFXMLErrorMalformedParsedCharacterData")
+	}
+	if e&KCFXMLErrorNoData != 0 {
+		parts = append(parts, "KCFXMLErrorNoData")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1634,9 +1912,9 @@ func (e CGRectEdge) String() string {
 type __CFByteOrder int64
 
 const (
-	CFByteOrderUnknown __CFByteOrder = 0
+	CFByteOrderUnknown      __CFByteOrder = 0
 	CFByteOrderLittleEndian __CFByteOrder = 1
-	CFByteOrderBigEndian __CFByteOrder = 2
+	CFByteOrderBigEndian    __CFByteOrder = 2
 )
 
 func (e __CFByteOrder) String() string {
@@ -1656,8 +1934,8 @@ type Acl_entry_id_t int64
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
-	ACL_NEXT_ENTRY Acl_entry_id_t = -1
-	ACL_LAST_ENTRY Acl_entry_id_t = -2
+	ACL_NEXT_ENTRY  Acl_entry_id_t = -1
+	ACL_LAST_ENTRY  Acl_entry_id_t = -2
 )
 
 func (e Acl_entry_id_t) String() string {
@@ -1676,13 +1954,13 @@ func (e Acl_entry_id_t) String() string {
 type Acl_flag_t int64
 
 const (
-	ACL_FLAG_DEFER_INHERIT Acl_flag_t = 1
-	ACL_FLAG_NO_INHERIT Acl_flag_t = 131072
-	ACL_ENTRY_INHERITED Acl_flag_t = 16
-	ACL_ENTRY_FILE_INHERIT Acl_flag_t = 32
+	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
+	ACL_FLAG_NO_INHERIT         Acl_flag_t = 131072
+	ACL_ENTRY_INHERITED         Acl_flag_t = 16
+	ACL_ENTRY_FILE_INHERIT      Acl_flag_t = 32
 	ACL_ENTRY_DIRECTORY_INHERIT Acl_flag_t = 64
-	ACL_ENTRY_LIMIT_INHERIT Acl_flag_t = 128
-	ACL_ENTRY_ONLY_INHERIT Acl_flag_t = 256
+	ACL_ENTRY_LIMIT_INHERIT     Acl_flag_t = 128
+	ACL_ENTRY_ONLY_INHERIT      Acl_flag_t = 256
 )
 
 func (e Acl_flag_t) String() string {
@@ -1709,24 +1987,24 @@ func (e Acl_flag_t) String() string {
 type Acl_perm_t int64
 
 const (
-	ACL_READ_DATA Acl_perm_t = 2
-	ACL_LIST_DIRECTORY Acl_perm_t = 2
-	ACL_WRITE_DATA Acl_perm_t = 4
-	ACL_ADD_FILE Acl_perm_t = 4
-	ACL_EXECUTE Acl_perm_t = 8
-	ACL_SEARCH Acl_perm_t = 8
-	ACL_DELETE Acl_perm_t = 16
-	ACL_APPEND_DATA Acl_perm_t = 32
-	ACL_ADD_SUBDIRECTORY Acl_perm_t = 32
-	ACL_DELETE_CHILD Acl_perm_t = 64
-	ACL_READ_ATTRIBUTES Acl_perm_t = 128
-	ACL_WRITE_ATTRIBUTES Acl_perm_t = 256
-	ACL_READ_EXTATTRIBUTES Acl_perm_t = 512
+	ACL_READ_DATA           Acl_perm_t = 2
+	ACL_LIST_DIRECTORY      Acl_perm_t = 2
+	ACL_WRITE_DATA          Acl_perm_t = 4
+	ACL_ADD_FILE            Acl_perm_t = 4
+	ACL_EXECUTE             Acl_perm_t = 8
+	ACL_SEARCH              Acl_perm_t = 8
+	ACL_DELETE              Acl_perm_t = 16
+	ACL_APPEND_DATA         Acl_perm_t = 32
+	ACL_ADD_SUBDIRECTORY    Acl_perm_t = 32
+	ACL_DELETE_CHILD        Acl_perm_t = 64
+	ACL_READ_ATTRIBUTES     Acl_perm_t = 128
+	ACL_WRITE_ATTRIBUTES    Acl_perm_t = 256
+	ACL_READ_EXTATTRIBUTES  Acl_perm_t = 512
 	ACL_WRITE_EXTATTRIBUTES Acl_perm_t = 1024
-	ACL_READ_SECURITY Acl_perm_t = 2048
-	ACL_WRITE_SECURITY Acl_perm_t = 4096
-	ACL_CHANGE_OWNER Acl_perm_t = 8192
-	ACL_SYNCHRONIZE Acl_perm_t = 1048576
+	ACL_READ_SECURITY       Acl_perm_t = 2048
+	ACL_WRITE_SECURITY      Acl_perm_t = 4096
+	ACL_CHANGE_OWNER        Acl_perm_t = 8192
+	ACL_SYNCHRONIZE         Acl_perm_t = 1048576
 )
 
 func (e Acl_perm_t) String() string {
@@ -1767,9 +2045,9 @@ func (e Acl_perm_t) String() string {
 type Acl_tag_t int64
 
 const (
-	ACL_UNDEFINED_TAG Acl_tag_t = 0
+	ACL_UNDEFINED_TAG  Acl_tag_t = 0
 	ACL_EXTENDED_ALLOW Acl_tag_t = 1
-	ACL_EXTENDED_DENY Acl_tag_t = 2
+	ACL_EXTENDED_DENY  Acl_tag_t = 2
 )
 
 func (e Acl_tag_t) String() string {
@@ -1789,12 +2067,12 @@ type Acl_type_t int64
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
-	ACL_TYPE_ACCESS Acl_type_t = 0
-	ACL_TYPE_DEFAULT Acl_type_t = 1
-	ACL_TYPE_AFS Acl_type_t = 2
-	ACL_TYPE_CODA Acl_type_t = 3
-	ACL_TYPE_NTFS Acl_type_t = 4
-	ACL_TYPE_NWFS Acl_type_t = 5
+	ACL_TYPE_ACCESS   Acl_type_t = 0
+	ACL_TYPE_DEFAULT  Acl_type_t = 1
+	ACL_TYPE_AFS      Acl_type_t = 2
+	ACL_TYPE_CODA     Acl_type_t = 3
+	ACL_TYPE_NTFS     Acl_type_t = 4
+	ACL_TYPE_NWFS     Acl_type_t = 5
 )
 
 func (e Acl_type_t) String() string {
@@ -1821,14 +2099,14 @@ func (e Acl_type_t) String() string {
 type Clockid_t int64
 
 const (
-	_CLOCK_REALTIME Clockid_t = 0
-	_CLOCK_MONOTONIC Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW Clockid_t = 4
+	_CLOCK_REALTIME             Clockid_t = 0
+	_CLOCK_MONOTONIC            Clockid_t = 6
+	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
 	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID Clockid_t = 16
+	_CLOCK_UPTIME_RAW           Clockid_t = 8
+	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
+	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
+	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
 )
 
 func (e Clockid_t) String() string {
@@ -1857,9 +2135,9 @@ func (e Clockid_t) String() string {
 type Dispatch_autorelease_frequency_t uint64
 
 const (
-	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT Dispatch_autorelease_frequency_t = 0
+	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT   Dispatch_autorelease_frequency_t = 0
 	DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM Dispatch_autorelease_frequency_t = 1
-	DISPATCH_AUTORELEASE_FREQUENCY_NEVER Dispatch_autorelease_frequency_t = 2
+	DISPATCH_AUTORELEASE_FREQUENCY_NEVER     Dispatch_autorelease_frequency_t = 2
 )
 
 func (e Dispatch_autorelease_frequency_t) String() string {
@@ -1878,36 +2156,50 @@ func (e Dispatch_autorelease_frequency_t) String() string {
 type Dispatch_block_flags_t uint64
 
 const (
-	DISPATCH_BLOCK_BARRIER Dispatch_block_flags_t = 1
-	DISPATCH_BLOCK_DETACHED Dispatch_block_flags_t = 2
-	DISPATCH_BLOCK_ASSIGN_CURRENT Dispatch_block_flags_t = 4
-	DISPATCH_BLOCK_NO_QOS_CLASS Dispatch_block_flags_t = 8
+	DISPATCH_BLOCK_BARRIER           Dispatch_block_flags_t = 1
+	DISPATCH_BLOCK_DETACHED          Dispatch_block_flags_t = 2
+	DISPATCH_BLOCK_ASSIGN_CURRENT    Dispatch_block_flags_t = 4
+	DISPATCH_BLOCK_NO_QOS_CLASS      Dispatch_block_flags_t = 8
 	DISPATCH_BLOCK_INHERIT_QOS_CLASS Dispatch_block_flags_t = 16
 	DISPATCH_BLOCK_ENFORCE_QOS_CLASS Dispatch_block_flags_t = 32
 )
 
 func (e Dispatch_block_flags_t) String() string {
 	var parts []string
-	if e&DISPATCH_BLOCK_BARRIER != 0 { parts = append(parts, "DISPATCH_BLOCK_BARRIER") }
-	if e&DISPATCH_BLOCK_DETACHED != 0 { parts = append(parts, "DISPATCH_BLOCK_DETACHED") }
-	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 { parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT") }
-	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS") }
-	if len(parts) == 0 { return "0" }
+	if e&DISPATCH_BLOCK_BARRIER != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_BARRIER")
+	}
+	if e&DISPATCH_BLOCK_DETACHED != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_DETACHED")
+	}
+	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT")
+	}
+	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Filesec_property_t int64
 
 const (
-	FILESEC_OWNER Filesec_property_t = 1
-	FILESEC_GROUP Filesec_property_t = 2
-	FILESEC_UUID Filesec_property_t = 3
-	FILESEC_MODE Filesec_property_t = 4
-	FILESEC_ACL Filesec_property_t = 5
-	FILESEC_GRPUUID Filesec_property_t = 6
-	FILESEC_ACL_RAW Filesec_property_t = 100
+	FILESEC_OWNER         Filesec_property_t = 1
+	FILESEC_GROUP         Filesec_property_t = 2
+	FILESEC_UUID          Filesec_property_t = 3
+	FILESEC_MODE          Filesec_property_t = 4
+	FILESEC_ACL           Filesec_property_t = 5
+	FILESEC_GRPUUID       Filesec_property_t = 6
+	FILESEC_ACL_RAW       Filesec_property_t = 100
 	FILESEC_ACL_ALLOCSIZE Filesec_property_t = 101
 )
 
@@ -1937,8 +2229,8 @@ func (e Filesec_property_t) String() string {
 type Idtype_t int64
 
 const (
-	P_ALL Idtype_t = 0
-	P_PID Idtype_t = 1
+	P_ALL  Idtype_t = 0
+	P_PID  Idtype_t = 1
 	P_PGID Idtype_t = 2
 )
 
@@ -1958,26 +2250,42 @@ func (e Idtype_t) String() string {
 type Mpo_flags_t int64
 
 const (
-	MPO_PORT Mpo_flags_t = 0
-	MPO_SERVICE_PORT Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT Mpo_flags_t = 2048
-	MPO_REPLY_PORT Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT Mpo_flags_t = 32768
+	MPO_PORT                            Mpo_flags_t = 0
+	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
+	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
+	MPO_REPLY_PORT                      Mpo_flags_t = 4096
+	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
+	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
+	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
 	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
 )
 
 func (e Mpo_flags_t) String() string {
 	var parts []string
-	if e&MPO_SERVICE_PORT != 0 { parts = append(parts, "MPO_SERVICE_PORT") }
-	if e&MPO_CONNECTION_PORT != 0 { parts = append(parts, "MPO_CONNECTION_PORT") }
-	if e&MPO_REPLY_PORT != 0 { parts = append(parts, "MPO_REPLY_PORT") }
-	if e&MPO_WEAK_REPLY_PORT != 0 { parts = append(parts, "MPO_WEAK_REPLY_PORT") }
-	if e&MPO_NOTIFICATION_PORT != 0 { parts = append(parts, "MPO_NOTIFICATION_PORT") }
-	if e&MPO_EXCEPTION_PORT != 0 { parts = append(parts, "MPO_EXCEPTION_PORT") }
-	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 { parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY") }
-	if len(parts) == 0 { return "0" }
+	if e&MPO_SERVICE_PORT != 0 {
+		parts = append(parts, "MPO_SERVICE_PORT")
+	}
+	if e&MPO_CONNECTION_PORT != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT")
+	}
+	if e&MPO_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_REPLY_PORT")
+	}
+	if e&MPO_WEAK_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_WEAK_REPLY_PORT")
+	}
+	if e&MPO_NOTIFICATION_PORT != 0 {
+		parts = append(parts, "MPO_NOTIFICATION_PORT")
+	}
+	if e&MPO_EXCEPTION_PORT != 0 {
+		parts = append(parts, "MPO_EXCEPTION_PORT")
+	}
+	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1999,27 +2307,27 @@ func (e Os_clockid_t) String() string {
 type Ptrauth_key int64
 
 const (
-	Ptrauth_key_none Ptrauth_key = -1
-	Ptrauth_key_asia Ptrauth_key = 0
-	Ptrauth_key_asib Ptrauth_key = 1
-	Ptrauth_key_asda Ptrauth_key = 2
-	Ptrauth_key_asdb Ptrauth_key = 3
+	Ptrauth_key_none                     Ptrauth_key = -1
+	Ptrauth_key_asia                     Ptrauth_key = 0
+	Ptrauth_key_asib                     Ptrauth_key = 1
+	Ptrauth_key_asda                     Ptrauth_key = 2
+	Ptrauth_key_asdb                     Ptrauth_key = 3
 	Ptrauth_key_process_independent_code Ptrauth_key = 0
-	Ptrauth_key_process_dependent_code Ptrauth_key = 1
+	Ptrauth_key_process_dependent_code   Ptrauth_key = 1
 	Ptrauth_key_process_independent_data Ptrauth_key = 2
-	Ptrauth_key_process_dependent_data Ptrauth_key = 3
-	Ptrauth_key_return_address Ptrauth_key = 1
-	Ptrauth_key_frame_pointer Ptrauth_key = 3
-	Ptrauth_key_function_pointer Ptrauth_key = 0
-	Ptrauth_key_block_function Ptrauth_key = 0
-	Ptrauth_key_cxx_vtable_pointer Ptrauth_key = 2
-	Ptrauth_key_method_list_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_isa_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_super_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_sel_pointer Ptrauth_key = 3
-	Ptrauth_key_objc_class_ro_pointer Ptrauth_key = 2
+	Ptrauth_key_process_dependent_data   Ptrauth_key = 3
+	Ptrauth_key_return_address           Ptrauth_key = 1
+	Ptrauth_key_frame_pointer            Ptrauth_key = 3
+	Ptrauth_key_function_pointer         Ptrauth_key = 0
+	Ptrauth_key_block_function           Ptrauth_key = 0
+	Ptrauth_key_cxx_vtable_pointer       Ptrauth_key = 2
+	Ptrauth_key_method_list_pointer      Ptrauth_key = 2
+	Ptrauth_key_objc_isa_pointer         Ptrauth_key = 2
+	Ptrauth_key_objc_super_pointer       Ptrauth_key = 2
+	Ptrauth_key_objc_sel_pointer         Ptrauth_key = 3
+	Ptrauth_key_objc_class_ro_pointer    Ptrauth_key = 2
 	Ptrauth_key_block_descriptor_pointer Ptrauth_key = 2
-	Ptrauth_key_init_fini_pointer Ptrauth_key = 0
+	Ptrauth_key_init_fini_pointer        Ptrauth_key = 0
 )
 
 func (e Ptrauth_key) String() string {
@@ -2043,11 +2351,11 @@ type Qos_class_t uint32
 
 const (
 	QOS_CLASS_USER_INTERACTIVE Qos_class_t = 33
-	QOS_CLASS_USER_INITIATED Qos_class_t = 25
-	QOS_CLASS_DEFAULT Qos_class_t = 21
-	QOS_CLASS_UTILITY Qos_class_t = 17
-	QOS_CLASS_BACKGROUND Qos_class_t = 9
-	QOS_CLASS_UNSPECIFIED Qos_class_t = 0
+	QOS_CLASS_USER_INITIATED   Qos_class_t = 25
+	QOS_CLASS_DEFAULT          Qos_class_t = 21
+	QOS_CLASS_UTILITY          Qos_class_t = 17
+	QOS_CLASS_BACKGROUND       Qos_class_t = 9
+	QOS_CLASS_UNSPECIFIED      Qos_class_t = 0
 )
 
 func (e Qos_class_t) String() string {
@@ -2070,10 +2378,10 @@ func (e Qos_class_t) String() string {
 }
 
 const (
-	KCFBundleExecutableArchitectureARM64 = 16777228
-	KCFBundleExecutableArchitectureI386 = 7
-	KCFBundleExecutableArchitecturePPC = 18
-	KCFBundleExecutableArchitecturePPC64 = 16777234
+	KCFBundleExecutableArchitectureARM64  = 16777228
+	KCFBundleExecutableArchitectureI386   = 7
+	KCFBundleExecutableArchitecturePPC    = 18
+	KCFBundleExecutableArchitecturePPC64  = 16777234
 	KCFBundleExecutableArchitectureX86_64 = 16777223
 )
 
@@ -2082,55 +2390,55 @@ const (
 )
 
 const (
-	KCFFileDescriptorReadCallBack = 1
+	KCFFileDescriptorReadCallBack  = 1
 	KCFFileDescriptorWriteCallBack = 2
 )
 
 const (
 	KCFMessagePortBecameInvalidError = -5
-	KCFMessagePortIsInvalid = -3
-	KCFMessagePortReceiveTimeout = -2
-	KCFMessagePortSendTimeout = -1
-	KCFMessagePortSuccess = 0
-	KCFMessagePortTransportError = -4
+	KCFMessagePortIsInvalid          = -3
+	KCFMessagePortReceiveTimeout     = -2
+	KCFMessagePortSendTimeout        = -1
+	KCFMessagePortSuccess            = 0
+	KCFMessagePortTransportError     = -4
 )
 
 const (
 	KCFNotificationDeliverImmediately = 1
-	KCFNotificationPostToAllSessions = 2
+	KCFNotificationPostToAllSessions  = 2
 )
 
 const (
-	KCFPropertyListReadCorruptError = 3840
-	KCFPropertyListReadStreamError = 3842
+	KCFPropertyListReadCorruptError        = 3840
+	KCFPropertyListReadStreamError         = 3842
 	KCFPropertyListReadUnknownVersionError = 3841
-	KCFPropertyListWriteStreamError = 3851
+	KCFPropertyListWriteStreamError        = 3851
 )
 
 const (
 	KCFSocketAutomaticallyReenableAcceptCallBack = 2
-	KCFSocketAutomaticallyReenableDataCallBack = 3
-	KCFSocketAutomaticallyReenableReadCallBack = 1
-	KCFSocketAutomaticallyReenableWriteCallBack = 8
-	KCFSocketCloseOnInvalidate = 128
-	KCFSocketLeaveErrors = 64
+	KCFSocketAutomaticallyReenableDataCallBack   = 3
+	KCFSocketAutomaticallyReenableReadCallBack   = 1
+	KCFSocketAutomaticallyReenableWriteCallBack  = 8
+	KCFSocketCloseOnInvalidate                   = 128
+	KCFSocketLeaveErrors                         = 64
 )
 
 const (
-	KCFStringTokenizerAttributeLanguage = 131072
+	KCFStringTokenizerAttributeLanguage           = 131072
 	KCFStringTokenizerAttributeLatinTranscription = 65536
-	KCFStringTokenizerUnitLineBreak = 3
-	KCFStringTokenizerUnitParagraph = 2
-	KCFStringTokenizerUnitSentence = 1
-	KCFStringTokenizerUnitWord = 0
-	KCFStringTokenizerUnitWordBoundary = 4
+	KCFStringTokenizerUnitLineBreak               = 3
+	KCFStringTokenizerUnitParagraph               = 2
+	KCFStringTokenizerUnitSentence                = 1
+	KCFStringTokenizerUnitWord                    = 0
+	KCFStringTokenizerUnitWordBoundary            = 4
 )
 
 const (
 	KCFUserNotificationAlternateResponse = 1
-	KCFUserNotificationCancelResponse = 3
-	KCFUserNotificationDefaultResponse = 0
-	KCFUserNotificationOtherResponse = 2
+	KCFUserNotificationCancelResponse    = 3
+	KCFUserNotificationDefaultResponse   = 0
+	KCFUserNotificationOtherResponse     = 2
 )
 
 const (
@@ -2140,12 +2448,11 @@ const (
 
 const (
 	KCFUserNotificationCautionAlertLevel = 2
-	KCFUserNotificationNoteAlertLevel = 1
-	KCFUserNotificationPlainAlertLevel = 3
-	KCFUserNotificationStopAlertLevel = 0
+	KCFUserNotificationNoteAlertLevel    = 1
+	KCFUserNotificationPlainAlertLevel   = 3
+	KCFUserNotificationStopAlertLevel    = 0
 )
 
 const (
 	KCFXMLNodeCurrentVersion = 1
 )
-

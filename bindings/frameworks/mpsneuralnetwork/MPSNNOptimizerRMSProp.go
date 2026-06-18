@@ -18,16 +18,16 @@ type MPSNNOptimizerRMSProp struct {
 }
 
 var (
-	_clsMPSNNOptimizerRMSProp = _objcClass("MPSNNOptimizerRMSProp")
-	_mPSNNOptimizerRMSPropSelInitWithDeviceLearningRate = objc.RegisterName("initWithDevice:learningRate:")
-	_mPSNNOptimizerRMSPropSelInitWithDeviceDecayEpsilonOptimizerDescriptor = objc.RegisterName("initWithDevice:decay:epsilon:optimizerDescriptor:")
-	_mPSNNOptimizerRMSPropSelEncodeToCommandBufferInputGradientVectorInputValuesVectorInputSumOfSquaresVectorResultValuesVector = objc.RegisterName("encodeToCommandBuffer:inputGradientVector:inputValuesVector:inputSumOfSquaresVector:resultValuesVector:")
-	_mPSNNOptimizerRMSPropSelEncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputSumOfSquaresMatrixResultValuesMatrix = objc.RegisterName("encodeToCommandBuffer:inputGradientMatrix:inputValuesMatrix:inputSumOfSquaresMatrix:resultValuesMatrix:")
-	_mPSNNOptimizerRMSPropSelEncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputSumOfSquaresVectorsResultState = objc.RegisterName("encodeToCommandBuffer:convolutionGradientState:convolutionSourceState:inputSumOfSquaresVectors:resultState:")
-	_mPSNNOptimizerRMSPropSelEncodeToCommandBufferBatchNormalizationStateInputSumOfSquaresVectorsResultState = objc.RegisterName("encodeToCommandBuffer:batchNormalizationState:inputSumOfSquaresVectors:resultState:")
+	_clsMPSNNOptimizerRMSProp                                                                                                                     = _objcClass("MPSNNOptimizerRMSProp")
+	_mPSNNOptimizerRMSPropSelInitWithDeviceLearningRate                                                                                           = objc.RegisterName("initWithDevice:learningRate:")
+	_mPSNNOptimizerRMSPropSelInitWithDeviceDecayEpsilonOptimizerDescriptor                                                                        = objc.RegisterName("initWithDevice:decay:epsilon:optimizerDescriptor:")
+	_mPSNNOptimizerRMSPropSelEncodeToCommandBufferInputGradientVectorInputValuesVectorInputSumOfSquaresVectorResultValuesVector                   = objc.RegisterName("encodeToCommandBuffer:inputGradientVector:inputValuesVector:inputSumOfSquaresVector:resultValuesVector:")
+	_mPSNNOptimizerRMSPropSelEncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputSumOfSquaresMatrixResultValuesMatrix                   = objc.RegisterName("encodeToCommandBuffer:inputGradientMatrix:inputValuesMatrix:inputSumOfSquaresMatrix:resultValuesMatrix:")
+	_mPSNNOptimizerRMSPropSelEncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputSumOfSquaresVectorsResultState               = objc.RegisterName("encodeToCommandBuffer:convolutionGradientState:convolutionSourceState:inputSumOfSquaresVectors:resultState:")
+	_mPSNNOptimizerRMSPropSelEncodeToCommandBufferBatchNormalizationStateInputSumOfSquaresVectorsResultState                                      = objc.RegisterName("encodeToCommandBuffer:batchNormalizationState:inputSumOfSquaresVectors:resultState:")
 	_mPSNNOptimizerRMSPropSelEncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputSumOfSquaresVectorsResultState = objc.RegisterName("encodeToCommandBuffer:batchNormalizationGradientState:batchNormalizationSourceState:inputSumOfSquaresVectors:resultState:")
-	_mPSNNOptimizerRMSPropSelDecay = objc.RegisterName("decay")
-	_mPSNNOptimizerRMSPropSelEpsilon = objc.RegisterName("epsilon")
+	_mPSNNOptimizerRMSPropSelDecay                                                                                                                = objc.RegisterName("decay")
+	_mPSNNOptimizerRMSPropSelEpsilon                                                                                                              = objc.RegisterName("epsilon")
 )
 
 func MPSNNOptimizerRMSPropFromID(id objc.ID) *MPSNNOptimizerRMSProp {
@@ -43,14 +43,18 @@ func MPSNNOptimizerRMSPropFromID(id objc.ID) *MPSNNOptimizerRMSProp {
 // @abstract   Convenience initialization for the RMSProp update @param      device                     The device on which the kernel will execute. @param      learningRate               The learningRate which will be applied @return     A valid MPSNNOptimizerRMSProp object or nil, if failure.
 func (o *MPSNNOptimizerRMSProp) InitWithDeviceLearningRate(device metal.MTLDevice, learningRate float32) *MPSNNOptimizerRMSProp {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNOptimizerRMSPropSelInitWithDeviceLearningRate, device, learningRate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNOptimizerRMSPropFromID(_ret)
 }
 
 // @abstract   Full initialization for the rmsProp update @param      device                     The device on which the kernel will execute. @param      decay                      The decay to update sumOfSquares @param      epsilon                    The epsilon which will be applied @param      optimizerDescriptor        The optimizerDescriptor which will have a bunch of properties to be applied @return     A valid MPSNNOptimizerRMSProp object or nil, if failure.
 func (o *MPSNNOptimizerRMSProp) InitWithDeviceDecayEpsilonOptimizerDescriptor(device metal.MTLDevice, decay float64, epsilon float32, optimizerDescriptor *MPSNNOptimizerDescriptor) *MPSNNOptimizerRMSProp {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNOptimizerRMSPropSelInitWithDeviceDecayEpsilonOptimizerDescriptor, device, decay, epsilon, optimizerDescriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNOptimizerRMSPropFromID(_ret)
 }
 
@@ -89,4 +93,3 @@ func (o *MPSNNOptimizerRMSProp) Epsilon() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _mPSNNOptimizerRMSPropSelEpsilon)
 	return _ret
 }
-

@@ -15,20 +15,20 @@ type MPSCNNLocalContrastNormalizationNode struct {
 }
 
 var (
-	_clsMPSCNNLocalContrastNormalizationNode = _objcClass("MPSCNNLocalContrastNormalizationNode")
+	_clsMPSCNNLocalContrastNormalizationNode                         = _objcClass("MPSCNNLocalContrastNormalizationNode")
 	_mPSCNNLocalContrastNormalizationNodeSelNodeWithSourceKernelSize = objc.RegisterName("nodeWithSource:kernelSize:")
 	_mPSCNNLocalContrastNormalizationNodeSelInitWithSourceKernelSize = objc.RegisterName("initWithSource:kernelSize:")
-	_mPSCNNLocalContrastNormalizationNodeSelInitWithSource = objc.RegisterName("initWithSource:")
-	_mPSCNNLocalContrastNormalizationNodeSelPm = objc.RegisterName("pm")
-	_mPSCNNLocalContrastNormalizationNodeSelSetPm = objc.RegisterName("setPm:")
-	_mPSCNNLocalContrastNormalizationNodeSelPs = objc.RegisterName("ps")
-	_mPSCNNLocalContrastNormalizationNodeSelSetPs = objc.RegisterName("setPs:")
-	_mPSCNNLocalContrastNormalizationNodeSelP0 = objc.RegisterName("p0")
-	_mPSCNNLocalContrastNormalizationNodeSelSetP0 = objc.RegisterName("setP0:")
-	_mPSCNNLocalContrastNormalizationNodeSelKernelWidth = objc.RegisterName("kernelWidth")
-	_mPSCNNLocalContrastNormalizationNodeSelSetKernelWidth = objc.RegisterName("setKernelWidth:")
-	_mPSCNNLocalContrastNormalizationNodeSelKernelHeight = objc.RegisterName("kernelHeight")
-	_mPSCNNLocalContrastNormalizationNodeSelSetKernelHeight = objc.RegisterName("setKernelHeight:")
+	_mPSCNNLocalContrastNormalizationNodeSelInitWithSource           = objc.RegisterName("initWithSource:")
+	_mPSCNNLocalContrastNormalizationNodeSelPm                       = objc.RegisterName("pm")
+	_mPSCNNLocalContrastNormalizationNodeSelSetPm                    = objc.RegisterName("setPm:")
+	_mPSCNNLocalContrastNormalizationNodeSelPs                       = objc.RegisterName("ps")
+	_mPSCNNLocalContrastNormalizationNodeSelSetPs                    = objc.RegisterName("setPs:")
+	_mPSCNNLocalContrastNormalizationNodeSelP0                       = objc.RegisterName("p0")
+	_mPSCNNLocalContrastNormalizationNodeSelSetP0                    = objc.RegisterName("setP0:")
+	_mPSCNNLocalContrastNormalizationNodeSelKernelWidth              = objc.RegisterName("kernelWidth")
+	_mPSCNNLocalContrastNormalizationNodeSelSetKernelWidth           = objc.RegisterName("setKernelWidth:")
+	_mPSCNNLocalContrastNormalizationNodeSelKernelHeight             = objc.RegisterName("kernelHeight")
+	_mPSCNNLocalContrastNormalizationNodeSelSetKernelHeight          = objc.RegisterName("setKernelHeight:")
 )
 
 func MPSCNNLocalContrastNormalizationNodeFromID(id objc.ID) *MPSCNNLocalContrastNormalizationNode {
@@ -43,19 +43,25 @@ func MPSCNNLocalContrastNormalizationNodeFromID(id objc.ID) *MPSCNNLocalContrast
 
 func MPSCNNLocalContrastNormalizationNodeNodeWithSourceKernelSize(sourceNode *MPSNNImageNode, kernelSize uint) *MPSCNNLocalContrastNormalizationNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNLocalContrastNormalizationNode), _mPSCNNLocalContrastNormalizationNodeSelNodeWithSourceKernelSize, sourceNode.Ptr(), kernelSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNLocalContrastNormalizationNodeFromID(_ret)
 }
 
 func (o *MPSCNNLocalContrastNormalizationNode) InitWithSourceKernelSize(sourceNode *MPSNNImageNode, kernelSize uint) *MPSCNNLocalContrastNormalizationNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNLocalContrastNormalizationNodeSelInitWithSourceKernelSize, sourceNode.Ptr(), kernelSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNLocalContrastNormalizationNodeFromID(_ret)
 }
 
 func (o *MPSCNNLocalContrastNormalizationNode) InitWithSource(sourceNode *MPSNNImageNode) *MPSCNNLocalContrastNormalizationNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNLocalContrastNormalizationNodeSelInitWithSource, sourceNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNLocalContrastNormalizationNodeFromID(_ret)
 }
 
@@ -103,4 +109,3 @@ func (o *MPSCNNLocalContrastNormalizationNode) KernelHeight() uint {
 func (o *MPSCNNLocalContrastNormalizationNode) SetKernelHeight(kernelHeight uint) {
 	o.Ptr().Send(_mPSCNNLocalContrastNormalizationNodeSelSetKernelHeight, kernelHeight)
 }
-

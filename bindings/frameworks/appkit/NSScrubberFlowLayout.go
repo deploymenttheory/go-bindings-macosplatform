@@ -17,12 +17,12 @@ type NSScrubberFlowLayout struct {
 }
 
 var (
-	_clsNSScrubberFlowLayout = _objcClass("NSScrubberFlowLayout")
+	_clsNSScrubberFlowLayout                                  = _objcClass("NSScrubberFlowLayout")
 	_nSScrubberFlowLayoutSelInvalidateLayoutForItemsAtIndexes = objc.RegisterName("invalidateLayoutForItemsAtIndexes:")
-	_nSScrubberFlowLayoutSelItemSpacing = objc.RegisterName("itemSpacing")
-	_nSScrubberFlowLayoutSelSetItemSpacing = objc.RegisterName("setItemSpacing:")
-	_nSScrubberFlowLayoutSelItemSize = objc.RegisterName("itemSize")
-	_nSScrubberFlowLayoutSelSetItemSize = objc.RegisterName("setItemSize:")
+	_nSScrubberFlowLayoutSelItemSpacing                       = objc.RegisterName("itemSpacing")
+	_nSScrubberFlowLayoutSelSetItemSpacing                    = objc.RegisterName("setItemSpacing:")
+	_nSScrubberFlowLayoutSelItemSize                          = objc.RegisterName("itemSize")
+	_nSScrubberFlowLayoutSelSetItemSize                       = objc.RegisterName("setItemSize:")
 )
 
 func NSScrubberFlowLayoutFromID(id objc.ID) *NSScrubberFlowLayout {
@@ -60,4 +60,3 @@ func (o *NSScrubberFlowLayout) ItemSize() corefoundation.CGSize {
 func (o *NSScrubberFlowLayout) SetItemSize(itemSize corefoundation.CGSize) {
 	o.Ptr().Send(_nSScrubberFlowLayoutSelSetItemSize, itemSize)
 }
-

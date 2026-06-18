@@ -16,25 +16,25 @@ type HKObjectType struct {
 }
 
 var (
-	_clsHKObjectType = _objcClass("HKObjectType")
-	_hKObjectTypeSelQuantityTypeForIdentifier = objc.RegisterName("quantityTypeForIdentifier:")
-	_hKObjectTypeSelCategoryTypeForIdentifier = objc.RegisterName("categoryTypeForIdentifier:")
-	_hKObjectTypeSelCharacteristicTypeForIdentifier = objc.RegisterName("characteristicTypeForIdentifier:")
-	_hKObjectTypeSelCorrelationTypeForIdentifier = objc.RegisterName("correlationTypeForIdentifier:")
-	_hKObjectTypeSelDocumentTypeForIdentifier = objc.RegisterName("documentTypeForIdentifier:")
+	_clsHKObjectType                                  = _objcClass("HKObjectType")
+	_hKObjectTypeSelQuantityTypeForIdentifier         = objc.RegisterName("quantityTypeForIdentifier:")
+	_hKObjectTypeSelCategoryTypeForIdentifier         = objc.RegisterName("categoryTypeForIdentifier:")
+	_hKObjectTypeSelCharacteristicTypeForIdentifier   = objc.RegisterName("characteristicTypeForIdentifier:")
+	_hKObjectTypeSelCorrelationTypeForIdentifier      = objc.RegisterName("correlationTypeForIdentifier:")
+	_hKObjectTypeSelDocumentTypeForIdentifier         = objc.RegisterName("documentTypeForIdentifier:")
 	_hKObjectTypeSelScoredAssessmentTypeForIdentifier = objc.RegisterName("scoredAssessmentTypeForIdentifier:")
-	_hKObjectTypeSelSeriesTypeForIdentifier = objc.RegisterName("seriesTypeForIdentifier:")
-	_hKObjectTypeSelWorkoutType = objc.RegisterName("workoutType")
-	_hKObjectTypeSelActivitySummaryType = objc.RegisterName("activitySummaryType")
-	_hKObjectTypeSelAudiogramSampleType = objc.RegisterName("audiogramSampleType")
-	_hKObjectTypeSelElectrocardiogramType = objc.RegisterName("electrocardiogramType")
-	_hKObjectTypeSelMedicationDoseEventType = objc.RegisterName("medicationDoseEventType")
-	_hKObjectTypeSelVisionPrescriptionType = objc.RegisterName("visionPrescriptionType")
-	_hKObjectTypeSelStateOfMindType = objc.RegisterName("stateOfMindType")
-	_hKObjectTypeSelUserAnnotatedMedicationType = objc.RegisterName("userAnnotatedMedicationType")
-	_hKObjectTypeSelRequiresPerObjectAuthorization = objc.RegisterName("requiresPerObjectAuthorization")
-	_hKObjectTypeSelIdentifier = objc.RegisterName("identifier")
-	_hKObjectTypeSelClinicalTypeForIdentifier = objc.RegisterName("clinicalTypeForIdentifier:")
+	_hKObjectTypeSelSeriesTypeForIdentifier           = objc.RegisterName("seriesTypeForIdentifier:")
+	_hKObjectTypeSelWorkoutType                       = objc.RegisterName("workoutType")
+	_hKObjectTypeSelActivitySummaryType               = objc.RegisterName("activitySummaryType")
+	_hKObjectTypeSelAudiogramSampleType               = objc.RegisterName("audiogramSampleType")
+	_hKObjectTypeSelElectrocardiogramType             = objc.RegisterName("electrocardiogramType")
+	_hKObjectTypeSelMedicationDoseEventType           = objc.RegisterName("medicationDoseEventType")
+	_hKObjectTypeSelVisionPrescriptionType            = objc.RegisterName("visionPrescriptionType")
+	_hKObjectTypeSelStateOfMindType                   = objc.RegisterName("stateOfMindType")
+	_hKObjectTypeSelUserAnnotatedMedicationType       = objc.RegisterName("userAnnotatedMedicationType")
+	_hKObjectTypeSelRequiresPerObjectAuthorization    = objc.RegisterName("requiresPerObjectAuthorization")
+	_hKObjectTypeSelIdentifier                        = objc.RegisterName("identifier")
+	_hKObjectTypeSelClinicalTypeForIdentifier         = objc.RegisterName("clinicalTypeForIdentifier:")
 )
 
 func HKObjectTypeFromID(id objc.ID) *HKObjectType {
@@ -49,91 +49,121 @@ func HKObjectTypeFromID(id objc.ID) *HKObjectType {
 
 func HKObjectTypeQuantityTypeForIdentifier(identifier *foundation.NSString) *HKQuantityType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKObjectType), _hKObjectTypeSelQuantityTypeForIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityTypeFromID(_ret)
 }
 
 func HKObjectTypeCategoryTypeForIdentifier(identifier *foundation.NSString) *HKCategoryType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKObjectType), _hKObjectTypeSelCategoryTypeForIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKCategoryTypeFromID(_ret)
 }
 
 func HKObjectTypeCharacteristicTypeForIdentifier(identifier *foundation.NSString) *HKCharacteristicType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKObjectType), _hKObjectTypeSelCharacteristicTypeForIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKCharacteristicTypeFromID(_ret)
 }
 
 func HKObjectTypeCorrelationTypeForIdentifier(identifier *foundation.NSString) *HKCorrelationType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKObjectType), _hKObjectTypeSelCorrelationTypeForIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKCorrelationTypeFromID(_ret)
 }
 
 func HKObjectTypeDocumentTypeForIdentifier(identifier *foundation.NSString) *HKDocumentType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKObjectType), _hKObjectTypeSelDocumentTypeForIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKDocumentTypeFromID(_ret)
 }
 
 func HKObjectTypeScoredAssessmentTypeForIdentifier(identifier *foundation.NSString) *HKScoredAssessmentType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKObjectType), _hKObjectTypeSelScoredAssessmentTypeForIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKScoredAssessmentTypeFromID(_ret)
 }
 
 func HKObjectTypeSeriesTypeForIdentifier(identifier *foundation.NSString) *HKSeriesType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKObjectType), _hKObjectTypeSelSeriesTypeForIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKSeriesTypeFromID(_ret)
 }
 
 func HKObjectTypeWorkoutType() *HKWorkoutType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKObjectType), _hKObjectTypeSelWorkoutType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKWorkoutTypeFromID(_ret)
 }
 
 func HKObjectTypeActivitySummaryType() *HKActivitySummaryType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKObjectType), _hKObjectTypeSelActivitySummaryType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKActivitySummaryTypeFromID(_ret)
 }
 
 func HKObjectTypeAudiogramSampleType() *HKAudiogramSampleType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKObjectType), _hKObjectTypeSelAudiogramSampleType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKAudiogramSampleTypeFromID(_ret)
 }
 
 func HKObjectTypeElectrocardiogramType() *HKElectrocardiogramType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKObjectType), _hKObjectTypeSelElectrocardiogramType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKElectrocardiogramTypeFromID(_ret)
 }
 
 func HKObjectTypeMedicationDoseEventType() *HKMedicationDoseEventType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKObjectType), _hKObjectTypeSelMedicationDoseEventType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKMedicationDoseEventTypeFromID(_ret)
 }
 
 func HKObjectTypeVisionPrescriptionType() *HKPrescriptionType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKObjectType), _hKObjectTypeSelVisionPrescriptionType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKPrescriptionTypeFromID(_ret)
 }
 
 func HKObjectTypeStateOfMindType() *HKStateOfMindType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKObjectType), _hKObjectTypeSelStateOfMindType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKStateOfMindTypeFromID(_ret)
 }
 
 func HKObjectTypeUserAnnotatedMedicationType() *HKUserAnnotatedMedicationType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKObjectType), _hKObjectTypeSelUserAnnotatedMedicationType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKUserAnnotatedMedicationTypeFromID(_ret)
 }
 
@@ -146,13 +176,16 @@ func (o *HKObjectType) RequiresPerObjectAuthorization() bool {
 // @property      identifier @abstract      A unique string identifying a type of health object. @discussion    See HKTypeIdentifiers.h for possible values.
 func (o *HKObjectType) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKObjectTypeSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func HKObjectTypeClinicalTypeForIdentifier(identifier *foundation.NSString) *HKClinicalType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKObjectType), _hKObjectTypeSelClinicalTypeForIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKClinicalTypeFromID(_ret)
 }
-

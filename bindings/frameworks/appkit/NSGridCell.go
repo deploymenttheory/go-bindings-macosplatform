@@ -16,19 +16,19 @@ type NSGridCell struct {
 }
 
 var (
-	_clsNSGridCell = _objcClass("NSGridCell")
-	_nSGridCellSelContentView = objc.RegisterName("contentView")
-	_nSGridCellSelSetContentView = objc.RegisterName("setContentView:")
-	_nSGridCellSelEmptyContentView = objc.RegisterName("emptyContentView")
-	_nSGridCellSelRow = objc.RegisterName("row")
-	_nSGridCellSelColumn = objc.RegisterName("column")
-	_nSGridCellSelXPlacement = objc.RegisterName("xPlacement")
-	_nSGridCellSelSetXPlacement = objc.RegisterName("setXPlacement:")
-	_nSGridCellSelYPlacement = objc.RegisterName("yPlacement")
-	_nSGridCellSelSetYPlacement = objc.RegisterName("setYPlacement:")
-	_nSGridCellSelRowAlignment = objc.RegisterName("rowAlignment")
-	_nSGridCellSelSetRowAlignment = objc.RegisterName("setRowAlignment:")
-	_nSGridCellSelCustomPlacementConstraints = objc.RegisterName("customPlacementConstraints")
+	_clsNSGridCell                              = _objcClass("NSGridCell")
+	_nSGridCellSelContentView                   = objc.RegisterName("contentView")
+	_nSGridCellSelSetContentView                = objc.RegisterName("setContentView:")
+	_nSGridCellSelEmptyContentView              = objc.RegisterName("emptyContentView")
+	_nSGridCellSelRow                           = objc.RegisterName("row")
+	_nSGridCellSelColumn                        = objc.RegisterName("column")
+	_nSGridCellSelXPlacement                    = objc.RegisterName("xPlacement")
+	_nSGridCellSelSetXPlacement                 = objc.RegisterName("setXPlacement:")
+	_nSGridCellSelYPlacement                    = objc.RegisterName("yPlacement")
+	_nSGridCellSelSetYPlacement                 = objc.RegisterName("setYPlacement:")
+	_nSGridCellSelRowAlignment                  = objc.RegisterName("rowAlignment")
+	_nSGridCellSelSetRowAlignment               = objc.RegisterName("setRowAlignment:")
+	_nSGridCellSelCustomPlacementConstraints    = objc.RegisterName("customPlacementConstraints")
 	_nSGridCellSelSetCustomPlacementConstraints = objc.RegisterName("setCustomPlacementConstraints:")
 )
 
@@ -44,7 +44,9 @@ func NSGridCellFromID(id objc.ID) *NSGridCell {
 
 func (o *NSGridCell) ContentView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridCellSelContentView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -54,19 +56,25 @@ func (o *NSGridCell) SetContentView(contentView *NSView) {
 
 func NSGridCellEmptyContentView() *NSView {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSGridCell), _nSGridCellSelEmptyContentView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
 func (o *NSGridCell) Row() *NSGridRow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridCellSelRow)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGridRowFromID(_ret)
 }
 
 func (o *NSGridCell) Column() *NSGridColumn {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridCellSelColumn)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGridColumnFromID(_ret)
 }
 
@@ -99,11 +107,12 @@ func (o *NSGridCell) SetRowAlignment(rowAlignment NSGridRowAlignment) {
 
 func (o *NSGridCell) CustomPlacementConstraints() *foundation.NSArray[*NSLayoutConstraint] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridCellSelCustomPlacementConstraints)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSLayoutConstraint](_ret)
 }
 
 func (o *NSGridCell) SetCustomPlacementConstraints(customPlacementConstraints *foundation.NSArray[*NSLayoutConstraint]) {
 	o.Ptr().Send(_nSGridCellSelSetCustomPlacementConstraints, customPlacementConstraints.Ptr())
 }
-

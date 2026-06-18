@@ -16,18 +16,18 @@ type MTRMicrowaveOvenControlClusterSetCookingParametersParams struct {
 }
 
 var (
-	_clsMTRMicrowaveOvenControlClusterSetCookingParametersParams = _objcClass("MTRMicrowaveOvenControlClusterSetCookingParametersParams")
-	_mTRMicrowaveOvenControlClusterSetCookingParametersParamsSelCookMode = objc.RegisterName("cookMode")
-	_mTRMicrowaveOvenControlClusterSetCookingParametersParamsSelSetCookMode = objc.RegisterName("setCookMode:")
-	_mTRMicrowaveOvenControlClusterSetCookingParametersParamsSelCookTime = objc.RegisterName("cookTime")
-	_mTRMicrowaveOvenControlClusterSetCookingParametersParamsSelSetCookTime = objc.RegisterName("setCookTime:")
-	_mTRMicrowaveOvenControlClusterSetCookingParametersParamsSelPowerSetting = objc.RegisterName("powerSetting")
-	_mTRMicrowaveOvenControlClusterSetCookingParametersParamsSelSetPowerSetting = objc.RegisterName("setPowerSetting:")
-	_mTRMicrowaveOvenControlClusterSetCookingParametersParamsSelStartAfterSetting = objc.RegisterName("startAfterSetting")
-	_mTRMicrowaveOvenControlClusterSetCookingParametersParamsSelSetStartAfterSetting = objc.RegisterName("setStartAfterSetting:")
-	_mTRMicrowaveOvenControlClusterSetCookingParametersParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRMicrowaveOvenControlClusterSetCookingParametersParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRMicrowaveOvenControlClusterSetCookingParametersParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRMicrowaveOvenControlClusterSetCookingParametersParams                               = _objcClass("MTRMicrowaveOvenControlClusterSetCookingParametersParams")
+	_mTRMicrowaveOvenControlClusterSetCookingParametersParamsSelCookMode                       = objc.RegisterName("cookMode")
+	_mTRMicrowaveOvenControlClusterSetCookingParametersParamsSelSetCookMode                    = objc.RegisterName("setCookMode:")
+	_mTRMicrowaveOvenControlClusterSetCookingParametersParamsSelCookTime                       = objc.RegisterName("cookTime")
+	_mTRMicrowaveOvenControlClusterSetCookingParametersParamsSelSetCookTime                    = objc.RegisterName("setCookTime:")
+	_mTRMicrowaveOvenControlClusterSetCookingParametersParamsSelPowerSetting                   = objc.RegisterName("powerSetting")
+	_mTRMicrowaveOvenControlClusterSetCookingParametersParamsSelSetPowerSetting                = objc.RegisterName("setPowerSetting:")
+	_mTRMicrowaveOvenControlClusterSetCookingParametersParamsSelStartAfterSetting              = objc.RegisterName("startAfterSetting")
+	_mTRMicrowaveOvenControlClusterSetCookingParametersParamsSelSetStartAfterSetting           = objc.RegisterName("setStartAfterSetting:")
+	_mTRMicrowaveOvenControlClusterSetCookingParametersParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRMicrowaveOvenControlClusterSetCookingParametersParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRMicrowaveOvenControlClusterSetCookingParametersParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRMicrowaveOvenControlClusterSetCookingParametersParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -43,7 +43,9 @@ func MTRMicrowaveOvenControlClusterSetCookingParametersParamsFromID(id objc.ID) 
 
 func (o *MTRMicrowaveOvenControlClusterSetCookingParametersParams) CookMode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMicrowaveOvenControlClusterSetCookingParametersParamsSelCookMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -53,7 +55,9 @@ func (o *MTRMicrowaveOvenControlClusterSetCookingParametersParams) SetCookMode(c
 
 func (o *MTRMicrowaveOvenControlClusterSetCookingParametersParams) CookTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMicrowaveOvenControlClusterSetCookingParametersParamsSelCookTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -63,7 +67,9 @@ func (o *MTRMicrowaveOvenControlClusterSetCookingParametersParams) SetCookTime(c
 
 func (o *MTRMicrowaveOvenControlClusterSetCookingParametersParams) PowerSetting() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMicrowaveOvenControlClusterSetCookingParametersParamsSelPowerSetting)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -73,7 +79,9 @@ func (o *MTRMicrowaveOvenControlClusterSetCookingParametersParams) SetPowerSetti
 
 func (o *MTRMicrowaveOvenControlClusterSetCookingParametersParams) StartAfterSetting() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMicrowaveOvenControlClusterSetCookingParametersParamsSelStartAfterSetting)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -84,7 +92,9 @@ func (o *MTRMicrowaveOvenControlClusterSetCookingParametersParams) SetStartAfter
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRMicrowaveOvenControlClusterSetCookingParametersParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMicrowaveOvenControlClusterSetCookingParametersParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -95,11 +105,12 @@ func (o *MTRMicrowaveOvenControlClusterSetCookingParametersParams) SetTimedInvok
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRMicrowaveOvenControlClusterSetCookingParametersParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMicrowaveOvenControlClusterSetCookingParametersParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRMicrowaveOvenControlClusterSetCookingParametersParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRMicrowaveOvenControlClusterSetCookingParametersParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

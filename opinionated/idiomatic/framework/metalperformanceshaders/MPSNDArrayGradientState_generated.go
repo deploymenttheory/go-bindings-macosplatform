@@ -59,4 +59,3 @@ type NDArrayGradientStateable interface {
 }
 
 var _ NDArrayGradientStateable = (*NDArrayGradientState)(nil)
-

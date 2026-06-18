@@ -26,4 +26,3 @@ func CKSyncEngineStateSerializationFromID(id objc.ID) *CKSyncEngineStateSerializ
 	purego.Track(o)
 	return o
 }
-

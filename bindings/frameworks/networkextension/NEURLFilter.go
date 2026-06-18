@@ -16,7 +16,7 @@ type NEURLFilter struct {
 }
 
 var (
-	_clsNEURLFilter = _objcClass("NEURLFilter")
+	_clsNEURLFilter                               = _objcClass("NEURLFilter")
 	_nEURLFilterSelVerdictForURLCompletionHandler = objc.RegisterName("verdictForURL:completionHandler:")
 )
 
@@ -41,4 +41,3 @@ func NEURLFilterVerdictForURLCompletionHandler(url *foundation.NSURL, completion
 	}
 	objc.ID(_clsNEURLFilter).Send(_nEURLFilterSelVerdictForURLCompletionHandler, url.Ptr(), __block_completionHandler)
 }
-

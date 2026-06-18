@@ -16,16 +16,16 @@ type ASPasskeyRegistrationCredential struct {
 }
 
 var (
-	_clsASPasskeyRegistrationCredential = _objcClass("ASPasskeyRegistrationCredential")
-	_aSPasskeyRegistrationCredentialSelInitWithRelyingPartyClientDataHashCredentialIDAttestationObject = objc.RegisterName("initWithRelyingParty:clientDataHash:credentialID:attestationObject:")
+	_clsASPasskeyRegistrationCredential                                                                               = _objcClass("ASPasskeyRegistrationCredential")
+	_aSPasskeyRegistrationCredentialSelInitWithRelyingPartyClientDataHashCredentialIDAttestationObject                = objc.RegisterName("initWithRelyingParty:clientDataHash:credentialID:attestationObject:")
 	_aSPasskeyRegistrationCredentialSelInitWithRelyingPartyClientDataHashCredentialIDAttestationObjectExtensionOutput = objc.RegisterName("initWithRelyingParty:clientDataHash:credentialID:attestationObject:extensionOutput:")
-	_aSPasskeyRegistrationCredentialSelCredentialWithRelyingPartyClientDataHashCredentialIDAttestationObject = objc.RegisterName("credentialWithRelyingParty:clientDataHash:credentialID:attestationObject:")
-	_aSPasskeyRegistrationCredentialSelRelyingParty = objc.RegisterName("relyingParty")
-	_aSPasskeyRegistrationCredentialSelClientDataHash = objc.RegisterName("clientDataHash")
-	_aSPasskeyRegistrationCredentialSelCredentialID = objc.RegisterName("credentialID")
-	_aSPasskeyRegistrationCredentialSelAttestationObject = objc.RegisterName("attestationObject")
-	_aSPasskeyRegistrationCredentialSelExtensionOutput = objc.RegisterName("extensionOutput")
-	_aSPasskeyRegistrationCredentialSelSetExtensionOutput = objc.RegisterName("setExtensionOutput:")
+	_aSPasskeyRegistrationCredentialSelCredentialWithRelyingPartyClientDataHashCredentialIDAttestationObject          = objc.RegisterName("credentialWithRelyingParty:clientDataHash:credentialID:attestationObject:")
+	_aSPasskeyRegistrationCredentialSelRelyingParty                                                                   = objc.RegisterName("relyingParty")
+	_aSPasskeyRegistrationCredentialSelClientDataHash                                                                 = objc.RegisterName("clientDataHash")
+	_aSPasskeyRegistrationCredentialSelCredentialID                                                                   = objc.RegisterName("credentialID")
+	_aSPasskeyRegistrationCredentialSelAttestationObject                                                              = objc.RegisterName("attestationObject")
+	_aSPasskeyRegistrationCredentialSelExtensionOutput                                                                = objc.RegisterName("extensionOutput")
+	_aSPasskeyRegistrationCredentialSelSetExtensionOutput                                                             = objc.RegisterName("setExtensionOutput:")
 )
 
 func ASPasskeyRegistrationCredentialFromID(id objc.ID) *ASPasskeyRegistrationCredential {
@@ -41,60 +41,75 @@ func ASPasskeyRegistrationCredentialFromID(id objc.ID) *ASPasskeyRegistrationCre
 // @abstract Initializes an ASPasskeyRegistrationCredential object. @param relyingParty The relying party identifier associated with this passkey. @param clientDataHash The JSON encoded client data for this registration result. @param credentialID The unique identifier for this passkey. @param attestationObject The attestation object for this passkey registration result.
 func (o *ASPasskeyRegistrationCredential) InitWithRelyingPartyClientDataHashCredentialIDAttestationObject(relyingParty *foundation.NSString, clientDataHash *foundation.NSData, credentialID *foundation.NSData, attestationObject *foundation.NSData) *ASPasskeyRegistrationCredential {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyRegistrationCredentialSelInitWithRelyingPartyClientDataHashCredentialIDAttestationObject, relyingParty.Ptr(), clientDataHash.Ptr(), credentialID.Ptr(), attestationObject.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASPasskeyRegistrationCredentialFromID(_ret)
 }
 
 // @abstract Initializes an ASPasskeyRegistrationCredential object. @param relyingParty The relying party identifier associated with this passkey. @param clientDataHash The JSON encoded client data for this registration result. @param credentialID The unique identifier for this passkey. @param attestationObject The attestation object for this passkey registration result. @param extensionOutput The output of WebAuthn extensions processed by the credential provider.
 func (o *ASPasskeyRegistrationCredential) InitWithRelyingPartyClientDataHashCredentialIDAttestationObjectExtensionOutput(relyingParty *foundation.NSString, clientDataHash *foundation.NSData, credentialID *foundation.NSData, attestationObject *foundation.NSData, extensionOutput *ASPasskeyRegistrationCredentialExtensionOutput) *ASPasskeyRegistrationCredential {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyRegistrationCredentialSelInitWithRelyingPartyClientDataHashCredentialIDAttestationObjectExtensionOutput, relyingParty.Ptr(), clientDataHash.Ptr(), credentialID.Ptr(), attestationObject.Ptr(), extensionOutput.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASPasskeyRegistrationCredentialFromID(_ret)
 }
 
 // @abstract Creates and initializes an ASPasskeyRegistrationCredential object. @param relyingParty The relying party identifier associated with this passkey. @param clientDataHash The JSON encoded client data for this registration result. @param credentialID The unique identifier for this passkey. @param attestationObject The attestation object for this passkey registration result.
 func ASPasskeyRegistrationCredentialCredentialWithRelyingPartyClientDataHashCredentialIDAttestationObject(relyingParty *foundation.NSString, clientDataHash *foundation.NSData, credentialID *foundation.NSData, attestationObject *foundation.NSData) *ASPasskeyRegistrationCredential {
 	_ret := objc.Send[objc.ID](objc.ID(_clsASPasskeyRegistrationCredential), _aSPasskeyRegistrationCredentialSelCredentialWithRelyingPartyClientDataHashCredentialIDAttestationObject, relyingParty.Ptr(), clientDataHash.Ptr(), credentialID.Ptr(), attestationObject.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASPasskeyRegistrationCredentialFromID(_ret)
 }
 
 // @abstract The relying party identifier associated with this passkey.
 func (o *ASPasskeyRegistrationCredential) RelyingParty() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyRegistrationCredentialSelRelyingParty)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract The hash of the client data for this registration result.
 func (o *ASPasskeyRegistrationCredential) ClientDataHash() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyRegistrationCredentialSelClientDataHash)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @abstract The raw credential identifier of this passkey.
 func (o *ASPasskeyRegistrationCredential) CredentialID() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyRegistrationCredentialSelCredentialID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @abstract The attestation object for this passkey registration result.
 func (o *ASPasskeyRegistrationCredential) AttestationObject() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyRegistrationCredentialSelAttestationObject)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @abstract The outputs for WebAuthn extensions processed by the credential provider.
 func (o *ASPasskeyRegistrationCredential) ExtensionOutput() *ASPasskeyRegistrationCredentialExtensionOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyRegistrationCredentialSelExtensionOutput)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASPasskeyRegistrationCredentialExtensionOutputFromID(_ret)
 }
 
 func (o *ASPasskeyRegistrationCredential) SetExtensionOutput(extensionOutput *ASPasskeyRegistrationCredentialExtensionOutput) {
 	o.Ptr().Send(_aSPasskeyRegistrationCredentialSelSetExtensionOutput, extensionOutput.Ptr())
 }
-

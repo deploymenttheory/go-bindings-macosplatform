@@ -76,13 +76,16 @@ func CSSuggestionHighlightAttributeName() uintptr {
 
 func CoreSpotlightVersionNumber() float64 {
 	ptr, _ := purego.Dlsym(_corespotlightLib, "CoreSpotlightVersionNumber")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func CoreSpotlightVersionString() []unsafe.Pointer {
 	ptr, _ := purego.Dlsym(_corespotlightLib, "CoreSpotlightVersionString")
-	if ptr == 0 { return []unsafe.Pointer{} }
+	if ptr == 0 {
+		return []unsafe.Pointer{}
+	}
 	return *(*[]unsafe.Pointer)(unsafe.Pointer(ptr))
 }
-

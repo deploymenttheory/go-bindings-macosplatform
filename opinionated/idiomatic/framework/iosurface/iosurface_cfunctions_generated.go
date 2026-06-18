@@ -264,4 +264,3 @@ func IOSurfaceSetValues(buffer unsafe.Pointer, keysAndValues unsafe.Pointer) {
 func IOSurfaceUnlock(buffer unsafe.Pointer, options raw.IOSurfaceLockOptions, seed *uint32) int {
 	return raw.IOSurfaceUnlock(buffer, options, seed)
 }
-

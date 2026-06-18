@@ -137,4 +137,3 @@ type MTRBindingClusterTargetStructable interface {
 }
 
 var _ MTRBindingClusterTargetStructable = (*MTRBindingClusterTargetStruct)(nil)
-

@@ -15,14 +15,14 @@ type NSUnitDuration struct {
 }
 
 var (
-	_clsNSUnitDuration = _objcClass("NSUnitDuration")
-	_nSUnitDurationSelHours = objc.RegisterName("hours")
-	_nSUnitDurationSelMinutes = objc.RegisterName("minutes")
-	_nSUnitDurationSelSeconds = objc.RegisterName("seconds")
+	_clsNSUnitDuration             = _objcClass("NSUnitDuration")
+	_nSUnitDurationSelHours        = objc.RegisterName("hours")
+	_nSUnitDurationSelMinutes      = objc.RegisterName("minutes")
+	_nSUnitDurationSelSeconds      = objc.RegisterName("seconds")
 	_nSUnitDurationSelMilliseconds = objc.RegisterName("milliseconds")
 	_nSUnitDurationSelMicroseconds = objc.RegisterName("microseconds")
-	_nSUnitDurationSelNanoseconds = objc.RegisterName("nanoseconds")
-	_nSUnitDurationSelPicoseconds = objc.RegisterName("picoseconds")
+	_nSUnitDurationSelNanoseconds  = objc.RegisterName("nanoseconds")
+	_nSUnitDurationSelPicoseconds  = objc.RegisterName("picoseconds")
 )
 
 func NSUnitDurationFromID(id objc.ID) *NSUnitDuration {
@@ -37,43 +37,56 @@ func NSUnitDurationFromID(id objc.ID) *NSUnitDuration {
 
 func NSUnitDurationHours() *NSUnitDuration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitDuration), _nSUnitDurationSelHours)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitDurationFromID(_ret)
 }
 
 func NSUnitDurationMinutes() *NSUnitDuration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitDuration), _nSUnitDurationSelMinutes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitDurationFromID(_ret)
 }
 
 func NSUnitDurationSeconds() *NSUnitDuration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitDuration), _nSUnitDurationSelSeconds)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitDurationFromID(_ret)
 }
 
 func NSUnitDurationMilliseconds() *NSUnitDuration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitDuration), _nSUnitDurationSelMilliseconds)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitDurationFromID(_ret)
 }
 
 func NSUnitDurationMicroseconds() *NSUnitDuration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitDuration), _nSUnitDurationSelMicroseconds)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitDurationFromID(_ret)
 }
 
 func NSUnitDurationNanoseconds() *NSUnitDuration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitDuration), _nSUnitDurationSelNanoseconds)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitDurationFromID(_ret)
 }
 
 func NSUnitDurationPicoseconds() *NSUnitDuration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitDuration), _nSUnitDurationSelPicoseconds)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitDurationFromID(_ret)
 }
-

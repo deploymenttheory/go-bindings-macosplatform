@@ -65,4 +65,3 @@ type RenderInfoable interface {
 }
 
 var _ RenderInfoable = (*RenderInfo)(nil)
-

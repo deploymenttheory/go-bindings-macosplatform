@@ -16,29 +16,29 @@ type MTRElectricalPowerMeasurementClusterMeasurementRangeStruct struct {
 }
 
 var (
-	_clsMTRElectricalPowerMeasurementClusterMeasurementRangeStruct = _objcClass("MTRElectricalPowerMeasurementClusterMeasurementRangeStruct")
-	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelMeasurementType = objc.RegisterName("measurementType")
+	_clsMTRElectricalPowerMeasurementClusterMeasurementRangeStruct                   = _objcClass("MTRElectricalPowerMeasurementClusterMeasurementRangeStruct")
+	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelMeasurementType    = objc.RegisterName("measurementType")
 	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelSetMeasurementType = objc.RegisterName("setMeasurementType:")
-	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelMin = objc.RegisterName("min")
-	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelSetMin = objc.RegisterName("setMin:")
-	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelMax = objc.RegisterName("max")
-	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelSetMax = objc.RegisterName("setMax:")
-	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelStartTimestamp = objc.RegisterName("startTimestamp")
-	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelSetStartTimestamp = objc.RegisterName("setStartTimestamp:")
-	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelEndTimestamp = objc.RegisterName("endTimestamp")
-	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelSetEndTimestamp = objc.RegisterName("setEndTimestamp:")
-	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelMinTimestamp = objc.RegisterName("minTimestamp")
-	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelSetMinTimestamp = objc.RegisterName("setMinTimestamp:")
-	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelMaxTimestamp = objc.RegisterName("maxTimestamp")
-	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelSetMaxTimestamp = objc.RegisterName("setMaxTimestamp:")
-	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelStartSystime = objc.RegisterName("startSystime")
-	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelSetStartSystime = objc.RegisterName("setStartSystime:")
-	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelEndSystime = objc.RegisterName("endSystime")
-	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelSetEndSystime = objc.RegisterName("setEndSystime:")
-	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelMinSystime = objc.RegisterName("minSystime")
-	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelSetMinSystime = objc.RegisterName("setMinSystime:")
-	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelMaxSystime = objc.RegisterName("maxSystime")
-	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelSetMaxSystime = objc.RegisterName("setMaxSystime:")
+	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelMin                = objc.RegisterName("min")
+	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelSetMin             = objc.RegisterName("setMin:")
+	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelMax                = objc.RegisterName("max")
+	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelSetMax             = objc.RegisterName("setMax:")
+	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelStartTimestamp     = objc.RegisterName("startTimestamp")
+	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelSetStartTimestamp  = objc.RegisterName("setStartTimestamp:")
+	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelEndTimestamp       = objc.RegisterName("endTimestamp")
+	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelSetEndTimestamp    = objc.RegisterName("setEndTimestamp:")
+	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelMinTimestamp       = objc.RegisterName("minTimestamp")
+	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelSetMinTimestamp    = objc.RegisterName("setMinTimestamp:")
+	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelMaxTimestamp       = objc.RegisterName("maxTimestamp")
+	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelSetMaxTimestamp    = objc.RegisterName("setMaxTimestamp:")
+	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelStartSystime       = objc.RegisterName("startSystime")
+	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelSetStartSystime    = objc.RegisterName("setStartSystime:")
+	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelEndSystime         = objc.RegisterName("endSystime")
+	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelSetEndSystime      = objc.RegisterName("setEndSystime:")
+	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelMinSystime         = objc.RegisterName("minSystime")
+	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelSetMinSystime      = objc.RegisterName("setMinSystime:")
+	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelMaxSystime         = objc.RegisterName("maxSystime")
+	_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelSetMaxSystime      = objc.RegisterName("setMaxSystime:")
 )
 
 func MTRElectricalPowerMeasurementClusterMeasurementRangeStructFromID(id objc.ID) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct {
@@ -53,7 +53,9 @@ func MTRElectricalPowerMeasurementClusterMeasurementRangeStructFromID(id objc.ID
 
 func (o *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) MeasurementType() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelMeasurementType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -63,7 +65,9 @@ func (o *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetMeasurem
 
 func (o *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) Min() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelMin)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -73,7 +77,9 @@ func (o *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetMin(min 
 
 func (o *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) Max() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelMax)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -83,7 +89,9 @@ func (o *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetMax(max 
 
 func (o *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) StartTimestamp() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelStartTimestamp)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -93,7 +101,9 @@ func (o *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetStartTim
 
 func (o *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) EndTimestamp() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelEndTimestamp)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -103,7 +113,9 @@ func (o *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetEndTimes
 
 func (o *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) MinTimestamp() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelMinTimestamp)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -113,7 +125,9 @@ func (o *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetMinTimes
 
 func (o *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) MaxTimestamp() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelMaxTimestamp)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -123,7 +137,9 @@ func (o *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetMaxTimes
 
 func (o *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) StartSystime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelStartSystime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -133,7 +149,9 @@ func (o *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetStartSys
 
 func (o *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) EndSystime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelEndSystime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -143,7 +161,9 @@ func (o *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetEndSysti
 
 func (o *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) MinSystime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelMinSystime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -153,11 +173,12 @@ func (o *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetMinSysti
 
 func (o *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) MaxSystime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelMaxSystime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetMaxSystime(maxSystime *foundation.NSNumber) {
 	o.Ptr().Send(_mTRElectricalPowerMeasurementClusterMeasurementRangeStructSelSetMaxSystime, maxSystime.Ptr())
 }
-

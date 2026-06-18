@@ -88,4 +88,3 @@ type MatrixRandomMTGP32able interface {
 }
 
 var _ MatrixRandomMTGP32able = (*MatrixRandomMTGP32)(nil)
-

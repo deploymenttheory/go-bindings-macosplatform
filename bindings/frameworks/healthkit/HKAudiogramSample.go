@@ -16,10 +16,10 @@ type HKAudiogramSample struct {
 }
 
 var (
-	_clsHKAudiogramSample = _objcClass("HKAudiogramSample")
-	_hKAudiogramSampleSelAudiogramSampleWithSensitivityPointsStartDateEndDateMetadata = objc.RegisterName("audiogramSampleWithSensitivityPoints:startDate:endDate:metadata:")
+	_clsHKAudiogramSample                                                                   = _objcClass("HKAudiogramSample")
+	_hKAudiogramSampleSelAudiogramSampleWithSensitivityPointsStartDateEndDateMetadata       = objc.RegisterName("audiogramSampleWithSensitivityPoints:startDate:endDate:metadata:")
 	_hKAudiogramSampleSelAudiogramSampleWithSensitivityPointsStartDateEndDateDeviceMetadata = objc.RegisterName("audiogramSampleWithSensitivityPoints:startDate:endDate:device:metadata:")
-	_hKAudiogramSampleSelSensitivityPoints = objc.RegisterName("sensitivityPoints")
+	_hKAudiogramSampleSelSensitivityPoints                                                  = objc.RegisterName("sensitivityPoints")
 )
 
 func HKAudiogramSampleFromID(id objc.ID) *HKAudiogramSample {
@@ -35,21 +35,26 @@ func HKAudiogramSampleFromID(id objc.ID) *HKAudiogramSample {
 // @method                   audiogramSampleWithSensitivityPoints:startDate:endDate:metadata: @abstract                 Creates a new audiogram sample with the specified attributes. @param sensitivityPoints  Sensitivity data associated with the sample, with a maximum limit of 30 points. Frequencies must be unique, and ordered ascending. @param startDate          The start date for the hearing test. @param endDate            The end date for the hearing test. @param metadata           Optional meta data associated with the sample. @return                   A new instance of an audiogram sample.
 func HKAudiogramSampleAudiogramSampleWithSensitivityPointsStartDateEndDateMetadata(sensitivityPoints *foundation.NSArray[*HKAudiogramSensitivityPoint], startDate *foundation.NSDate, endDate *foundation.NSDate, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKAudiogramSample {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKAudiogramSample), _hKAudiogramSampleSelAudiogramSampleWithSensitivityPointsStartDateEndDateMetadata, sensitivityPoints.Ptr(), startDate.Ptr(), endDate.Ptr(), metadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKAudiogramSampleFromID(_ret)
 }
 
 // @method                   audiogramSampleWithSensitivityPoints:startDate:endDate:device:metadata: @abstract                 Creates a new audiogram sample with the specified attributes. @param sensitivityPoints  Sensitivity data associated with the sample, with a maximum limit of 30 points. Frequencies must be unique, and ordered ascending. @param startDate          The start date of the hearing test. @param endDate            The end date of the hearing test. @param device             The device that generated the sample data. @param metadata           Optional metadata associated with the sample. @return                   A new instance of an audiogram sample.
 func HKAudiogramSampleAudiogramSampleWithSensitivityPointsStartDateEndDateDeviceMetadata(sensitivityPoints *foundation.NSArray[*HKAudiogramSensitivityPoint], startDate *foundation.NSDate, endDate *foundation.NSDate, device *HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKAudiogramSample {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKAudiogramSample), _hKAudiogramSampleSelAudiogramSampleWithSensitivityPointsStartDateEndDateDeviceMetadata, sensitivityPoints.Ptr(), startDate.Ptr(), endDate.Ptr(), device.Ptr(), metadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKAudiogramSampleFromID(_ret)
 }
 
 // @property  sensitivityPoints @abstract  The hearing sensitivity readings associated with a hearing test.
 func (o *HKAudiogramSample) SensitivityPoints() *foundation.NSArray[*HKAudiogramSensitivityPoint] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKAudiogramSampleSelSensitivityPoints)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*HKAudiogramSensitivityPoint](_ret)
 }
-

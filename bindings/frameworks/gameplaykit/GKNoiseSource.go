@@ -28,4 +28,3 @@ func GKNoiseSourceFromID(id objc.ID) *GKNoiseSource {
 	purego.Track(o)
 	return o
 }
-

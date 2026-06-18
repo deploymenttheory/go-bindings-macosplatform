@@ -16,11 +16,11 @@ type AXMathExpressionFenced struct {
 }
 
 var (
-	_clsAXMathExpressionFenced = _objcClass("AXMathExpressionFenced")
+	_clsAXMathExpressionFenced                                         = _objcClass("AXMathExpressionFenced")
 	_aXMathExpressionFencedSelInitWithExpressionsOpenStringCloseString = objc.RegisterName("initWithExpressions:openString:closeString:")
-	_aXMathExpressionFencedSelExpressions = objc.RegisterName("expressions")
-	_aXMathExpressionFencedSelOpenString = objc.RegisterName("openString")
-	_aXMathExpressionFencedSelCloseString = objc.RegisterName("closeString")
+	_aXMathExpressionFencedSelExpressions                              = objc.RegisterName("expressions")
+	_aXMathExpressionFencedSelOpenString                               = objc.RegisterName("openString")
+	_aXMathExpressionFencedSelCloseString                              = objc.RegisterName("closeString")
 )
 
 func AXMathExpressionFencedFromID(id objc.ID) *AXMathExpressionFenced {
@@ -35,25 +35,32 @@ func AXMathExpressionFencedFromID(id objc.ID) *AXMathExpressionFenced {
 
 func (o *AXMathExpressionFenced) InitWithExpressionsOpenStringCloseString(expressions *foundation.NSArray[*AXMathExpression], openString *foundation.NSString, closeString *foundation.NSString) *AXMathExpressionFenced {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXMathExpressionFencedSelInitWithExpressionsOpenStringCloseString, expressions.Ptr(), openString.Ptr(), closeString.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXMathExpressionFencedFromID(_ret)
 }
 
 func (o *AXMathExpressionFenced) Expressions() *foundation.NSArray[*AXMathExpression] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXMathExpressionFencedSelExpressions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AXMathExpression](_ret)
 }
 
 func (o *AXMathExpressionFenced) OpenString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXMathExpressionFencedSelOpenString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *AXMathExpressionFenced) CloseString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXMathExpressionFencedSelCloseString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

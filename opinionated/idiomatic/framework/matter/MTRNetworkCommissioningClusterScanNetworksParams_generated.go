@@ -16,7 +16,9 @@ type MTRNetworkCommissioningClusterScanNetworksParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRNetworkCommissioningClusterScanNetworksParams].
-func (x *MTRNetworkCommissioningClusterScanNetworksParams) Unwrap() *raw.MTRNetworkCommissioningClusterScanNetworksParams { return x.inner }
+func (x *MTRNetworkCommissioningClusterScanNetworksParams) Unwrap() *raw.MTRNetworkCommissioningClusterScanNetworksParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -118,4 +120,3 @@ type MTRNetworkCommissioningClusterScanNetworksParamsable interface {
 }
 
 var _ MTRNetworkCommissioningClusterScanNetworksParamsable = (*MTRNetworkCommissioningClusterScanNetworksParams)(nil)
-

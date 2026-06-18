@@ -35,7 +35,9 @@ func NewHostAudioInputStreamSource() *HostAudioInputStreamSource {
 	return &HostAudioInputStreamSource{inner: raw.VZHostAudioInputStreamSourceFromID(_id)}
 }
 
-func (x *HostAudioInputStreamSource) asAudioInputStreamSource() *raw.VZAudioInputStreamSource { return &x.inner.VZAudioInputStreamSource }
+func (x *HostAudioInputStreamSource) asAudioInputStreamSource() *raw.VZAudioInputStreamSource {
+	return &x.inner.VZAudioInputStreamSource
+}
 
 // HostAudioInputStreamSourceable is the interface implemented by [HostAudioInputStreamSource], for mocking and DI.
 type HostAudioInputStreamSourceable interface {
@@ -43,4 +45,3 @@ type HostAudioInputStreamSourceable interface {
 }
 
 var _ HostAudioInputStreamSourceable = (*HostAudioInputStreamSource)(nil)
-

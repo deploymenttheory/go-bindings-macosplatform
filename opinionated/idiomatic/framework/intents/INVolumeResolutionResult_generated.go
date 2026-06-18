@@ -35,7 +35,9 @@ func NewVolumeResolutionResult() *VolumeResolutionResult {
 	return &VolumeResolutionResult{inner: raw.INVolumeResolutionResultFromID(_id)}
 }
 
-func (x *VolumeResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
+func (x *VolumeResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
+	return &x.inner.INIntentResolutionResult
+}
 
 // VolumeResolutionResultable is the interface implemented by [VolumeResolutionResult], for mocking and DI.
 type VolumeResolutionResultable interface {
@@ -43,4 +45,3 @@ type VolumeResolutionResultable interface {
 }
 
 var _ VolumeResolutionResultable = (*VolumeResolutionResult)(nil)
-

@@ -15,10 +15,10 @@ type NSSymbolDrawOnEffect struct {
 }
 
 var (
-	_clsNSSymbolDrawOnEffect = _objcClass("NSSymbolDrawOnEffect")
-	_nSSymbolDrawOnEffectSelEffect = objc.RegisterName("effect")
-	_nSSymbolDrawOnEffectSelEffectWithByLayer = objc.RegisterName("effectWithByLayer")
-	_nSSymbolDrawOnEffectSelEffectWithWholeSymbol = objc.RegisterName("effectWithWholeSymbol")
+	_clsNSSymbolDrawOnEffect                       = _objcClass("NSSymbolDrawOnEffect")
+	_nSSymbolDrawOnEffectSelEffect                 = objc.RegisterName("effect")
+	_nSSymbolDrawOnEffectSelEffectWithByLayer      = objc.RegisterName("effectWithByLayer")
+	_nSSymbolDrawOnEffectSelEffectWithWholeSymbol  = objc.RegisterName("effectWithWholeSymbol")
 	_nSSymbolDrawOnEffectSelEffectWithIndividually = objc.RegisterName("effectWithIndividually")
 )
 
@@ -35,28 +35,35 @@ func NSSymbolDrawOnEffectFromID(id objc.ID) *NSSymbolDrawOnEffect {
 // The default draw on effect, determined by the system.
 func NSSymbolDrawOnEffectEffect() *NSSymbolDrawOnEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolDrawOnEffect), _nSSymbolDrawOnEffectSelEffect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolDrawOnEffectFromID(_ret)
 }
 
 // Returns a copy of the effect requesting an animation that applies separately to each motion group.
 func (o *NSSymbolDrawOnEffect) EffectWithByLayer() *NSSymbolDrawOnEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolDrawOnEffectSelEffectWithByLayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolDrawOnEffectFromID(_ret)
 }
 
 // Returns a copy of the effect requesting an animation that applies to all motion groups simultaneously.
 func (o *NSSymbolDrawOnEffect) EffectWithWholeSymbol() *NSSymbolDrawOnEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolDrawOnEffectSelEffectWithWholeSymbol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolDrawOnEffectFromID(_ret)
 }
 
 // Returns a copy of the effect requesting an animation that applies separately to each motion group, where only one motion group is active at a time.
 func (o *NSSymbolDrawOnEffect) EffectWithIndividually() *NSSymbolDrawOnEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolDrawOnEffectSelEffectWithIndividually)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolDrawOnEffectFromID(_ret)
 }
-

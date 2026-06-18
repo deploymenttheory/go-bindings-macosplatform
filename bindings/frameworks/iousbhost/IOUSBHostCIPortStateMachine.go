@@ -20,23 +20,23 @@ type IOUSBHostCIPortStateMachine struct {
 }
 
 var (
-	_clsIOUSBHostCIPortStateMachine = _objcClass("IOUSBHostCIPortStateMachine")
-	_iOUSBHostCIPortStateMachineSelInitWithInterfacePortNumberError = objc.RegisterName("initWithInterface:portNumber:error:")
-	_iOUSBHostCIPortStateMachineSelInspectCommandError = objc.RegisterName("inspectCommand:error:")
-	_iOUSBHostCIPortStateMachineSelRespondToCommandStatusError = objc.RegisterName("respondToCommand:status:error:")
+	_clsIOUSBHostCIPortStateMachine                                                = _objcClass("IOUSBHostCIPortStateMachine")
+	_iOUSBHostCIPortStateMachineSelInitWithInterfacePortNumberError                = objc.RegisterName("initWithInterface:portNumber:error:")
+	_iOUSBHostCIPortStateMachineSelInspectCommandError                             = objc.RegisterName("inspectCommand:error:")
+	_iOUSBHostCIPortStateMachineSelRespondToCommandStatusError                     = objc.RegisterName("respondToCommand:status:error:")
 	_iOUSBHostCIPortStateMachineSelUpdateLinkStateSpeedInhibitLinkStateChangeError = objc.RegisterName("updateLinkState:speed:inhibitLinkStateChange:error:")
-	_iOUSBHostCIPortStateMachineSelPortNumber = objc.RegisterName("portNumber")
-	_iOUSBHostCIPortStateMachineSelPortState = objc.RegisterName("portState")
-	_iOUSBHostCIPortStateMachineSelPortStatus = objc.RegisterName("portStatus")
-	_iOUSBHostCIPortStateMachineSelControllerInterface = objc.RegisterName("controllerInterface")
-	_iOUSBHostCIPortStateMachineSelPowered = objc.RegisterName("powered")
-	_iOUSBHostCIPortStateMachineSelSetPowered = objc.RegisterName("setPowered:")
-	_iOUSBHostCIPortStateMachineSelConnected = objc.RegisterName("connected")
-	_iOUSBHostCIPortStateMachineSelSetConnected = objc.RegisterName("setConnected:")
-	_iOUSBHostCIPortStateMachineSelOvercurrent = objc.RegisterName("overcurrent")
-	_iOUSBHostCIPortStateMachineSelSetOvercurrent = objc.RegisterName("setOvercurrent:")
-	_iOUSBHostCIPortStateMachineSelLinkState = objc.RegisterName("linkState")
-	_iOUSBHostCIPortStateMachineSelSpeed = objc.RegisterName("speed")
+	_iOUSBHostCIPortStateMachineSelPortNumber                                      = objc.RegisterName("portNumber")
+	_iOUSBHostCIPortStateMachineSelPortState                                       = objc.RegisterName("portState")
+	_iOUSBHostCIPortStateMachineSelPortStatus                                      = objc.RegisterName("portStatus")
+	_iOUSBHostCIPortStateMachineSelControllerInterface                             = objc.RegisterName("controllerInterface")
+	_iOUSBHostCIPortStateMachineSelPowered                                         = objc.RegisterName("powered")
+	_iOUSBHostCIPortStateMachineSelSetPowered                                      = objc.RegisterName("setPowered:")
+	_iOUSBHostCIPortStateMachineSelConnected                                       = objc.RegisterName("connected")
+	_iOUSBHostCIPortStateMachineSelSetConnected                                    = objc.RegisterName("setConnected:")
+	_iOUSBHostCIPortStateMachineSelOvercurrent                                     = objc.RegisterName("overcurrent")
+	_iOUSBHostCIPortStateMachineSelSetOvercurrent                                  = objc.RegisterName("setOvercurrent:")
+	_iOUSBHostCIPortStateMachineSelLinkState                                       = objc.RegisterName("linkState")
+	_iOUSBHostCIPortStateMachineSelSpeed                                           = objc.RegisterName("speed")
 )
 
 func IOUSBHostCIPortStateMachineFromID(id objc.ID) *IOUSBHostCIPortStateMachine {
@@ -53,7 +53,9 @@ func IOUSBHostCIPortStateMachineFromID(id objc.ID) *IOUSBHostCIPortStateMachine 
 func (o *IOUSBHostCIPortStateMachine) InitWithInterfacePortNumberError(interface_ *IOUSBHostControllerInterface, portNumber uint) (*IOUSBHostCIPortStateMachine, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostCIPortStateMachineSelInitWithInterfacePortNumberError, interface_.Ptr(), portNumber, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -106,7 +108,9 @@ func (o *IOUSBHostCIPortStateMachine) PortStatus() uint32 {
 
 func (o *IOUSBHostCIPortStateMachine) ControllerInterface() *IOUSBHostControllerInterface {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostCIPortStateMachineSelControllerInterface)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOUSBHostControllerInterfaceFromID(_ret)
 }
 
@@ -149,4 +153,3 @@ func (o *IOUSBHostCIPortStateMachine) Speed() IOUSBHostCIDeviceSpeed {
 	_ret := objc.Send[IOUSBHostCIDeviceSpeed](o.Ptr(), _iOUSBHostCIPortStateMachineSelSpeed)
 	return _ret
 }
-

@@ -15,7 +15,7 @@ type NSUnitIlluminance struct {
 }
 
 var (
-	_clsNSUnitIlluminance = _objcClass("NSUnitIlluminance")
+	_clsNSUnitIlluminance    = _objcClass("NSUnitIlluminance")
 	_nSUnitIlluminanceSelLux = objc.RegisterName("lux")
 )
 
@@ -31,7 +31,8 @@ func NSUnitIlluminanceFromID(id objc.ID) *NSUnitIlluminance {
 
 func NSUnitIlluminanceLux() *NSUnitIlluminance {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitIlluminance), _nSUnitIlluminanceSelLux)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitIlluminanceFromID(_ret)
 }
-

@@ -15,11 +15,15 @@ type MTRPumpConfigurationAndControlClusterSystemPressureHighEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRPumpConfigurationAndControlClusterSystemPressureHighEvent].
-func (x *MTRPumpConfigurationAndControlClusterSystemPressureHighEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterSystemPressureHighEvent { return x.inner }
+func (x *MTRPumpConfigurationAndControlClusterSystemPressureHighEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterSystemPressureHighEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRPumpConfigurationAndControlClusterSystemPressureHighEvent) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRPumpConfigurationAndControlClusterSystemPressureHighEvent) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRPumpConfigurationAndControlClusterSystemPressureHighEventFromID adopts an existing object pointer as a MTRPumpConfigurationAndControlClusterSystemPressureHighEvent (nil for 0).
 func MTRPumpConfigurationAndControlClusterSystemPressureHighEventFromID(id objc.ID) *MTRPumpConfigurationAndControlClusterSystemPressureHighEvent {
@@ -41,4 +45,3 @@ type MTRPumpConfigurationAndControlClusterSystemPressureHighEventable interface 
 }
 
 var _ MTRPumpConfigurationAndControlClusterSystemPressureHighEventable = (*MTRPumpConfigurationAndControlClusterSystemPressureHighEvent)(nil)
-

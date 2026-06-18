@@ -47,4 +47,3 @@ type ActivityMoveModeObjectable interface {
 }
 
 var _ ActivityMoveModeObjectable = (*ActivityMoveModeObject)(nil)
-

@@ -147,4 +147,3 @@ type NDArrayMultiaryBaseable interface {
 }
 
 var _ NDArrayMultiaryBaseable = (*NDArrayMultiaryBase)(nil)
-

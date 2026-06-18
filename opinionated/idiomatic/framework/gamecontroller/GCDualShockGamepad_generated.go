@@ -74,9 +74,13 @@ func (x *DualShockGamepad) TouchpadSecondary() *ControllerDirectionPad {
 	return &ControllerDirectionPad{inner: _r}
 }
 
-func (x *DualShockGamepad) asExtendedGamepad() *raw.GCExtendedGamepad { return &x.inner.GCExtendedGamepad }
+func (x *DualShockGamepad) asExtendedGamepad() *raw.GCExtendedGamepad {
+	return &x.inner.GCExtendedGamepad
+}
 
-func (x *DualShockGamepad) asPhysicalInputProfile() *raw.GCPhysicalInputProfile { return &x.inner.GCExtendedGamepad.GCPhysicalInputProfile }
+func (x *DualShockGamepad) asPhysicalInputProfile() *raw.GCPhysicalInputProfile {
+	return &x.inner.GCExtendedGamepad.GCPhysicalInputProfile
+}
 
 // DualShockGamepadable is the interface implemented by [DualShockGamepad], for mocking and DI.
 type DualShockGamepadable interface {
@@ -89,4 +93,3 @@ type DualShockGamepadable interface {
 }
 
 var _ DualShockGamepadable = (*DualShockGamepad)(nil)
-

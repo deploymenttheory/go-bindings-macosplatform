@@ -16,11 +16,11 @@ type NEFlowMetaData struct {
 }
 
 var (
-	_clsNEFlowMetaData = _objcClass("NEFlowMetaData")
-	_nEFlowMetaDataSelSourceAppUniqueIdentifier = objc.RegisterName("sourceAppUniqueIdentifier")
+	_clsNEFlowMetaData                           = _objcClass("NEFlowMetaData")
+	_nEFlowMetaDataSelSourceAppUniqueIdentifier  = objc.RegisterName("sourceAppUniqueIdentifier")
 	_nEFlowMetaDataSelSourceAppSigningIdentifier = objc.RegisterName("sourceAppSigningIdentifier")
-	_nEFlowMetaDataSelSourceAppAuditToken = objc.RegisterName("sourceAppAuditToken")
-	_nEFlowMetaDataSelFilterFlowIdentifier = objc.RegisterName("filterFlowIdentifier")
+	_nEFlowMetaDataSelSourceAppAuditToken        = objc.RegisterName("sourceAppAuditToken")
+	_nEFlowMetaDataSelFilterFlowIdentifier       = objc.RegisterName("filterFlowIdentifier")
 )
 
 func NEFlowMetaDataFromID(id objc.ID) *NEFlowMetaData {
@@ -36,28 +36,35 @@ func NEFlowMetaDataFromID(id objc.ID) *NEFlowMetaData {
 // @property sourceAppUniqueIdentifier @discussion A byte string that uniquely identifies the binary for each build of the source application of the flow. The data object may be empty in cases where the flow originates from a system process.
 func (o *NEFlowMetaData) SourceAppUniqueIdentifier() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFlowMetaDataSelSourceAppUniqueIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @property sourceAppSigningIdentifier @discussion A string containing the signing identifier (almost always equivalent to the bundle identifier) of the source app of the flow. The string may be empty in cases where the flow originates from a system process.
 func (o *NEFlowMetaData) SourceAppSigningIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFlowMetaDataSelSourceAppSigningIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property sourceAppAuditToken @discussion Audit token of the source application of the flow.
 func (o *NEFlowMetaData) SourceAppAuditToken() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFlowMetaDataSelSourceAppAuditToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @property filterFlowIdentifier @discussion The identifier of the content filter flow corresponding to this flow.
 func (o *NEFlowMetaData) FilterFlowIdentifier() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFlowMetaDataSelFilterFlowIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
-

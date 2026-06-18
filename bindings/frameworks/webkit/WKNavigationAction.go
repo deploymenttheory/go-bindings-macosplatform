@@ -17,15 +17,15 @@ type WKNavigationAction struct {
 }
 
 var (
-	_clsWKNavigationAction = _objcClass("WKNavigationAction")
-	_wKNavigationActionSelSourceFrame = objc.RegisterName("sourceFrame")
-	_wKNavigationActionSelTargetFrame = objc.RegisterName("targetFrame")
-	_wKNavigationActionSelNavigationType = objc.RegisterName("navigationType")
-	_wKNavigationActionSelRequest = objc.RegisterName("request")
-	_wKNavigationActionSelShouldPerformDownload = objc.RegisterName("shouldPerformDownload")
+	_clsWKNavigationAction                          = _objcClass("WKNavigationAction")
+	_wKNavigationActionSelSourceFrame               = objc.RegisterName("sourceFrame")
+	_wKNavigationActionSelTargetFrame               = objc.RegisterName("targetFrame")
+	_wKNavigationActionSelNavigationType            = objc.RegisterName("navigationType")
+	_wKNavigationActionSelRequest                   = objc.RegisterName("request")
+	_wKNavigationActionSelShouldPerformDownload     = objc.RegisterName("shouldPerformDownload")
 	_wKNavigationActionSelIsContentRuleListRedirect = objc.RegisterName("isContentRuleListRedirect")
-	_wKNavigationActionSelModifierFlags = objc.RegisterName("modifierFlags")
-	_wKNavigationActionSelButtonNumber = objc.RegisterName("buttonNumber")
+	_wKNavigationActionSelModifierFlags             = objc.RegisterName("modifierFlags")
+	_wKNavigationActionSelButtonNumber              = objc.RegisterName("buttonNumber")
 )
 
 func WKNavigationActionFromID(id objc.ID) *WKNavigationAction {
@@ -41,14 +41,18 @@ func WKNavigationActionFromID(id objc.ID) *WKNavigationAction {
 // @abstract The frame requesting the navigation.
 func (o *WKNavigationAction) SourceFrame() *WKFrameInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKNavigationActionSelSourceFrame)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKFrameInfoFromID(_ret)
 }
 
 // @abstract The target frame, or nil if this is a new window navigation.
 func (o *WKNavigationAction) TargetFrame() *WKFrameInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKNavigationActionSelTargetFrame)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKFrameInfoFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *WKNavigationAction) NavigationType() WKNavigationType {
 // @abstract The navigation's request.
 func (o *WKNavigationAction) Request() *foundation.NSURLRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKNavigationActionSelRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLRequestFromID(_ret)
 }
 
@@ -88,4 +94,3 @@ func (o *WKNavigationAction) ButtonNumber() int {
 	_ret := objc.Send[int](o.Ptr(), _wKNavigationActionSelButtonNumber)
 	return _ret
 }
-

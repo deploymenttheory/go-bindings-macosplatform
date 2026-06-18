@@ -15,7 +15,9 @@ type VirtioNetworkDeviceConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.VZVirtioNetworkDeviceConfiguration].
-func (x *VirtioNetworkDeviceConfiguration) Unwrap() *raw.VZVirtioNetworkDeviceConfiguration { return x.inner }
+func (x *VirtioNetworkDeviceConfiguration) Unwrap() *raw.VZVirtioNetworkDeviceConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -47,7 +49,9 @@ func (x *VirtioNetworkDeviceConfiguration) WithAttachment(attachment NetworkDevi
 	return x
 }
 
-func (x *VirtioNetworkDeviceConfiguration) asNetworkDeviceConfiguration() *raw.VZNetworkDeviceConfiguration { return &x.inner.VZNetworkDeviceConfiguration }
+func (x *VirtioNetworkDeviceConfiguration) asNetworkDeviceConfiguration() *raw.VZNetworkDeviceConfiguration {
+	return &x.inner.VZNetworkDeviceConfiguration
+}
 
 // VirtioNetworkDeviceConfigurationable is the interface implemented by [VirtioNetworkDeviceConfiguration], for mocking and DI.
 type VirtioNetworkDeviceConfigurationable interface {
@@ -57,4 +61,3 @@ type VirtioNetworkDeviceConfigurationable interface {
 }
 
 var _ VirtioNetworkDeviceConfigurationable = (*VirtioNetworkDeviceConfiguration)(nil)
-

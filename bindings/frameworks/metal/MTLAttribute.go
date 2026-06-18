@@ -16,12 +16,12 @@ type MTLAttribute struct {
 }
 
 var (
-	_clsMTLAttribute = _objcClass("MTLAttribute")
-	_mTLAttributeSelName = objc.RegisterName("name")
-	_mTLAttributeSelAttributeIndex = objc.RegisterName("attributeIndex")
-	_mTLAttributeSelAttributeType = objc.RegisterName("attributeType")
-	_mTLAttributeSelIsActive = objc.RegisterName("isActive")
-	_mTLAttributeSelIsPatchData = objc.RegisterName("isPatchData")
+	_clsMTLAttribute                        = _objcClass("MTLAttribute")
+	_mTLAttributeSelName                    = objc.RegisterName("name")
+	_mTLAttributeSelAttributeIndex          = objc.RegisterName("attributeIndex")
+	_mTLAttributeSelAttributeType           = objc.RegisterName("attributeType")
+	_mTLAttributeSelIsActive                = objc.RegisterName("isActive")
+	_mTLAttributeSelIsPatchData             = objc.RegisterName("isPatchData")
 	_mTLAttributeSelIsPatchControlPointData = objc.RegisterName("isPatchControlPointData")
 )
 
@@ -37,7 +37,9 @@ func MTLAttributeFromID(id objc.ID) *MTLAttribute {
 
 func (o *MTLAttribute) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLAttributeSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -65,4 +67,3 @@ func (o *MTLAttribute) IsPatchControlPointData() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mTLAttributeSelIsPatchControlPointData)
 	return _ret
 }
-

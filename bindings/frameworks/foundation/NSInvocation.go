@@ -17,22 +17,22 @@ type NSInvocation struct {
 }
 
 var (
-	_clsNSInvocation = _objcClass("NSInvocation")
+	_clsNSInvocation                              = _objcClass("NSInvocation")
 	_nSInvocationSelInvocationWithMethodSignature = objc.RegisterName("invocationWithMethodSignature:")
-	_nSInvocationSelRetainArguments = objc.RegisterName("retainArguments")
-	_nSInvocationSelGetReturnValue = objc.RegisterName("getReturnValue:")
-	_nSInvocationSelSetReturnValue = objc.RegisterName("setReturnValue:")
-	_nSInvocationSelGetArgumentAtIndex = objc.RegisterName("getArgument:atIndex:")
-	_nSInvocationSelSetArgumentAtIndex = objc.RegisterName("setArgument:atIndex:")
-	_nSInvocationSelInvoke = objc.RegisterName("invoke")
-	_nSInvocationSelInvokeWithTarget = objc.RegisterName("invokeWithTarget:")
-	_nSInvocationSelInvokeUsingIMP = objc.RegisterName("invokeUsingIMP:")
-	_nSInvocationSelMethodSignature = objc.RegisterName("methodSignature")
-	_nSInvocationSelArgumentsRetained = objc.RegisterName("argumentsRetained")
-	_nSInvocationSelTarget = objc.RegisterName("target")
-	_nSInvocationSelSetTarget = objc.RegisterName("setTarget:")
-	_nSInvocationSelSelector = objc.RegisterName("selector")
-	_nSInvocationSelSetSelector = objc.RegisterName("setSelector:")
+	_nSInvocationSelRetainArguments               = objc.RegisterName("retainArguments")
+	_nSInvocationSelGetReturnValue                = objc.RegisterName("getReturnValue:")
+	_nSInvocationSelSetReturnValue                = objc.RegisterName("setReturnValue:")
+	_nSInvocationSelGetArgumentAtIndex            = objc.RegisterName("getArgument:atIndex:")
+	_nSInvocationSelSetArgumentAtIndex            = objc.RegisterName("setArgument:atIndex:")
+	_nSInvocationSelInvoke                        = objc.RegisterName("invoke")
+	_nSInvocationSelInvokeWithTarget              = objc.RegisterName("invokeWithTarget:")
+	_nSInvocationSelInvokeUsingIMP                = objc.RegisterName("invokeUsingIMP:")
+	_nSInvocationSelMethodSignature               = objc.RegisterName("methodSignature")
+	_nSInvocationSelArgumentsRetained             = objc.RegisterName("argumentsRetained")
+	_nSInvocationSelTarget                        = objc.RegisterName("target")
+	_nSInvocationSelSetTarget                     = objc.RegisterName("setTarget:")
+	_nSInvocationSelSelector                      = objc.RegisterName("selector")
+	_nSInvocationSelSetSelector                   = objc.RegisterName("setSelector:")
 )
 
 func NSInvocationFromID(id objc.ID) *NSInvocation {
@@ -47,7 +47,9 @@ func NSInvocationFromID(id objc.ID) *NSInvocation {
 
 func NSInvocationInvocationWithMethodSignature(sig *NSMethodSignature) *NSInvocation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSInvocation), _nSInvocationSelInvocationWithMethodSignature, sig.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSInvocationFromID(_ret)
 }
 
@@ -85,7 +87,9 @@ func (o *NSInvocation) InvokeUsingIMP(imp unsafe.Pointer) {
 
 func (o *NSInvocation) MethodSignature() *NSMethodSignature {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSInvocationSelMethodSignature)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMethodSignatureFromID(_ret)
 }
 
@@ -111,4 +115,3 @@ func (o *NSInvocation) Selector() objc.SEL {
 func (o *NSInvocation) SetSelector(selector objc.SEL) {
 	o.Ptr().Send(_nSInvocationSelSetSelector, selector)
 }
-

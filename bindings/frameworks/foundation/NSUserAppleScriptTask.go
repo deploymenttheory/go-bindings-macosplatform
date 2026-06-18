@@ -17,7 +17,7 @@ type NSUserAppleScriptTask struct {
 }
 
 var (
-	_clsNSUserAppleScriptTask = _objcClass("NSUserAppleScriptTask")
+	_clsNSUserAppleScriptTask                                       = _objcClass("NSUserAppleScriptTask")
 	_nSUserAppleScriptTaskSelExecuteWithAppleEventCompletionHandler = objc.RegisterName("executeWithAppleEvent:completionHandler:")
 )
 
@@ -44,4 +44,3 @@ func (o *NSUserAppleScriptTask) ExecuteWithAppleEventCompletionHandler(event *NS
 	}
 	o.Ptr().Send(_nSUserAppleScriptTaskSelExecuteWithAppleEventCompletionHandler, event.Ptr(), __block_handler)
 }
-

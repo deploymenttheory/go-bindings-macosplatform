@@ -25,4 +25,3 @@ func MTRTestClusterClusterBooleanResponseParamsFromID(id objc.ID) *MTRTestCluste
 	purego.Track(o)
 	return o
 }
-

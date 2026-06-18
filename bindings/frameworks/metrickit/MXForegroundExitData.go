@@ -16,13 +16,13 @@ type MXForegroundExitData struct {
 }
 
 var (
-	_clsMXForegroundExitData = _objcClass("MXForegroundExitData")
-	_mXForegroundExitDataSelCumulativeNormalAppExitCount = objc.RegisterName("cumulativeNormalAppExitCount")
+	_clsMXForegroundExitData                                       = _objcClass("MXForegroundExitData")
+	_mXForegroundExitDataSelCumulativeNormalAppExitCount           = objc.RegisterName("cumulativeNormalAppExitCount")
 	_mXForegroundExitDataSelCumulativeMemoryResourceLimitExitCount = objc.RegisterName("cumulativeMemoryResourceLimitExitCount")
-	_mXForegroundExitDataSelCumulativeBadAccessExitCount = objc.RegisterName("cumulativeBadAccessExitCount")
-	_mXForegroundExitDataSelCumulativeAbnormalExitCount = objc.RegisterName("cumulativeAbnormalExitCount")
-	_mXForegroundExitDataSelCumulativeIllegalInstructionExitCount = objc.RegisterName("cumulativeIllegalInstructionExitCount")
-	_mXForegroundExitDataSelCumulativeAppWatchdogExitCount = objc.RegisterName("cumulativeAppWatchdogExitCount")
+	_mXForegroundExitDataSelCumulativeBadAccessExitCount           = objc.RegisterName("cumulativeBadAccessExitCount")
+	_mXForegroundExitDataSelCumulativeAbnormalExitCount            = objc.RegisterName("cumulativeAbnormalExitCount")
+	_mXForegroundExitDataSelCumulativeIllegalInstructionExitCount  = objc.RegisterName("cumulativeIllegalInstructionExitCount")
+	_mXForegroundExitDataSelCumulativeAppWatchdogExitCount         = objc.RegisterName("cumulativeAppWatchdogExitCount")
 )
 
 func MXForegroundExitDataFromID(id objc.ID) *MXForegroundExitData {
@@ -70,4 +70,3 @@ func (o *MXForegroundExitData) CumulativeAppWatchdogExitCount() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mXForegroundExitDataSelCumulativeAppWatchdogExitCount)
 	return _ret
 }
-

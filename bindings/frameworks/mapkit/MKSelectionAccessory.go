@@ -16,7 +16,7 @@ type MKSelectionAccessory struct {
 }
 
 var (
-	_clsMKSelectionAccessory = _objcClass("MKSelectionAccessory")
+	_clsMKSelectionAccessory                                   = _objcClass("MKSelectionAccessory")
 	_mKSelectionAccessorySelMapItemDetailWithPresentationStyle = objc.RegisterName("mapItemDetailWithPresentationStyle:")
 )
 
@@ -32,7 +32,8 @@ func MKSelectionAccessoryFromID(id objc.ID) *MKSelectionAccessory {
 
 func MKSelectionAccessoryMapItemDetailWithPresentationStyle(presentationStyle *MKMapItemDetailSelectionAccessoryPresentationStyle) *MKSelectionAccessory {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKSelectionAccessory), _mKSelectionAccessorySelMapItemDetailWithPresentationStyle, presentationStyle.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKSelectionAccessoryFromID(_ret)
 }
-

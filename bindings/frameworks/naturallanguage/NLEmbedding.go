@@ -18,33 +18,33 @@ type NLEmbedding struct {
 }
 
 var (
-	_clsNLEmbedding = _objcClass("NLEmbedding")
-	_nLEmbeddingSelWordEmbeddingForLanguage = objc.RegisterName("wordEmbeddingForLanguage:")
-	_nLEmbeddingSelWordEmbeddingForLanguageRevision = objc.RegisterName("wordEmbeddingForLanguage:revision:")
-	_nLEmbeddingSelSentenceEmbeddingForLanguage = objc.RegisterName("sentenceEmbeddingForLanguage:")
-	_nLEmbeddingSelSentenceEmbeddingForLanguageRevision = objc.RegisterName("sentenceEmbeddingForLanguage:revision:")
-	_nLEmbeddingSelEmbeddingWithContentsOfURLError = objc.RegisterName("embeddingWithContentsOfURL:error:")
-	_nLEmbeddingSelContainsString = objc.RegisterName("containsString:")
-	_nLEmbeddingSelDistanceBetweenStringAndStringDistanceType = objc.RegisterName("distanceBetweenString:andString:distanceType:")
-	_nLEmbeddingSelEnumerateNeighborsForStringMaximumCountDistanceTypeUsing = objc.RegisterName("enumerateNeighborsForString:maximumCount:distanceType:usingBlock:")
+	_clsNLEmbedding                                                                        = _objcClass("NLEmbedding")
+	_nLEmbeddingSelWordEmbeddingForLanguage                                                = objc.RegisterName("wordEmbeddingForLanguage:")
+	_nLEmbeddingSelWordEmbeddingForLanguageRevision                                        = objc.RegisterName("wordEmbeddingForLanguage:revision:")
+	_nLEmbeddingSelSentenceEmbeddingForLanguage                                            = objc.RegisterName("sentenceEmbeddingForLanguage:")
+	_nLEmbeddingSelSentenceEmbeddingForLanguageRevision                                    = objc.RegisterName("sentenceEmbeddingForLanguage:revision:")
+	_nLEmbeddingSelEmbeddingWithContentsOfURLError                                         = objc.RegisterName("embeddingWithContentsOfURL:error:")
+	_nLEmbeddingSelContainsString                                                          = objc.RegisterName("containsString:")
+	_nLEmbeddingSelDistanceBetweenStringAndStringDistanceType                              = objc.RegisterName("distanceBetweenString:andString:distanceType:")
+	_nLEmbeddingSelEnumerateNeighborsForStringMaximumCountDistanceTypeUsing                = objc.RegisterName("enumerateNeighborsForString:maximumCount:distanceType:usingBlock:")
 	_nLEmbeddingSelEnumerateNeighborsForStringMaximumCountMaximumDistanceDistanceTypeUsing = objc.RegisterName("enumerateNeighborsForString:maximumCount:maximumDistance:distanceType:usingBlock:")
-	_nLEmbeddingSelNeighborsForStringMaximumCountDistanceType = objc.RegisterName("neighborsForString:maximumCount:distanceType:")
-	_nLEmbeddingSelNeighborsForStringMaximumCountMaximumDistanceDistanceType = objc.RegisterName("neighborsForString:maximumCount:maximumDistance:distanceType:")
-	_nLEmbeddingSelVectorForString = objc.RegisterName("vectorForString:")
-	_nLEmbeddingSelGetVectorForString = objc.RegisterName("getVector:forString:")
-	_nLEmbeddingSelEnumerateNeighborsForVectorMaximumCountDistanceTypeUsing = objc.RegisterName("enumerateNeighborsForVector:maximumCount:distanceType:usingBlock:")
+	_nLEmbeddingSelNeighborsForStringMaximumCountDistanceType                              = objc.RegisterName("neighborsForString:maximumCount:distanceType:")
+	_nLEmbeddingSelNeighborsForStringMaximumCountMaximumDistanceDistanceType               = objc.RegisterName("neighborsForString:maximumCount:maximumDistance:distanceType:")
+	_nLEmbeddingSelVectorForString                                                         = objc.RegisterName("vectorForString:")
+	_nLEmbeddingSelGetVectorForString                                                      = objc.RegisterName("getVector:forString:")
+	_nLEmbeddingSelEnumerateNeighborsForVectorMaximumCountDistanceTypeUsing                = objc.RegisterName("enumerateNeighborsForVector:maximumCount:distanceType:usingBlock:")
 	_nLEmbeddingSelEnumerateNeighborsForVectorMaximumCountMaximumDistanceDistanceTypeUsing = objc.RegisterName("enumerateNeighborsForVector:maximumCount:maximumDistance:distanceType:usingBlock:")
-	_nLEmbeddingSelNeighborsForVectorMaximumCountDistanceType = objc.RegisterName("neighborsForVector:maximumCount:distanceType:")
-	_nLEmbeddingSelNeighborsForVectorMaximumCountMaximumDistanceDistanceType = objc.RegisterName("neighborsForVector:maximumCount:maximumDistance:distanceType:")
-	_nLEmbeddingSelSupportedRevisionsForLanguage = objc.RegisterName("supportedRevisionsForLanguage:")
-	_nLEmbeddingSelCurrentRevisionForLanguage = objc.RegisterName("currentRevisionForLanguage:")
-	_nLEmbeddingSelSupportedSentenceEmbeddingRevisionsForLanguage = objc.RegisterName("supportedSentenceEmbeddingRevisionsForLanguage:")
-	_nLEmbeddingSelCurrentSentenceEmbeddingRevisionForLanguage = objc.RegisterName("currentSentenceEmbeddingRevisionForLanguage:")
-	_nLEmbeddingSelWriteEmbeddingForDictionaryLanguageRevisionToURLError = objc.RegisterName("writeEmbeddingForDictionary:language:revision:toURL:error:")
-	_nLEmbeddingSelDimension = objc.RegisterName("dimension")
-	_nLEmbeddingSelVocabularySize = objc.RegisterName("vocabularySize")
-	_nLEmbeddingSelLanguage = objc.RegisterName("language")
-	_nLEmbeddingSelRevision = objc.RegisterName("revision")
+	_nLEmbeddingSelNeighborsForVectorMaximumCountDistanceType                              = objc.RegisterName("neighborsForVector:maximumCount:distanceType:")
+	_nLEmbeddingSelNeighborsForVectorMaximumCountMaximumDistanceDistanceType               = objc.RegisterName("neighborsForVector:maximumCount:maximumDistance:distanceType:")
+	_nLEmbeddingSelSupportedRevisionsForLanguage                                           = objc.RegisterName("supportedRevisionsForLanguage:")
+	_nLEmbeddingSelCurrentRevisionForLanguage                                              = objc.RegisterName("currentRevisionForLanguage:")
+	_nLEmbeddingSelSupportedSentenceEmbeddingRevisionsForLanguage                          = objc.RegisterName("supportedSentenceEmbeddingRevisionsForLanguage:")
+	_nLEmbeddingSelCurrentSentenceEmbeddingRevisionForLanguage                             = objc.RegisterName("currentSentenceEmbeddingRevisionForLanguage:")
+	_nLEmbeddingSelWriteEmbeddingForDictionaryLanguageRevisionToURLError                   = objc.RegisterName("writeEmbeddingForDictionary:language:revision:toURL:error:")
+	_nLEmbeddingSelDimension                                                               = objc.RegisterName("dimension")
+	_nLEmbeddingSelVocabularySize                                                          = objc.RegisterName("vocabularySize")
+	_nLEmbeddingSelLanguage                                                                = objc.RegisterName("language")
+	_nLEmbeddingSelRevision                                                                = objc.RegisterName("revision")
 )
 
 func NLEmbeddingFromID(id objc.ID) *NLEmbedding {
@@ -59,32 +59,42 @@ func NLEmbeddingFromID(id objc.ID) *NLEmbedding {
 
 func NLEmbeddingWordEmbeddingForLanguage(language *foundation.NSString) *NLEmbedding {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNLEmbedding), _nLEmbeddingSelWordEmbeddingForLanguage, language.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NLEmbeddingFromID(_ret)
 }
 
 func NLEmbeddingWordEmbeddingForLanguageRevision(language *foundation.NSString, revision uint) *NLEmbedding {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNLEmbedding), _nLEmbeddingSelWordEmbeddingForLanguageRevision, language.Ptr(), revision)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NLEmbeddingFromID(_ret)
 }
 
 func NLEmbeddingSentenceEmbeddingForLanguage(language *foundation.NSString) *NLEmbedding {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNLEmbedding), _nLEmbeddingSelSentenceEmbeddingForLanguage, language.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NLEmbeddingFromID(_ret)
 }
 
 func NLEmbeddingSentenceEmbeddingForLanguageRevision(language *foundation.NSString, revision uint) *NLEmbedding {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNLEmbedding), _nLEmbeddingSelSentenceEmbeddingForLanguageRevision, language.Ptr(), revision)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NLEmbeddingFromID(_ret)
 }
 
 func NLEmbeddingEmbeddingWithContentsOfURLError(url *foundation.NSURL) (*NLEmbedding, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNLEmbedding), _nLEmbeddingSelEmbeddingWithContentsOfURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -189,7 +199,9 @@ func (o *NLEmbedding) NeighborsForVectorMaximumCountMaximumDistanceDistanceType(
 
 func NLEmbeddingSupportedRevisionsForLanguage(language *foundation.NSString) *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNLEmbedding), _nLEmbeddingSelSupportedRevisionsForLanguage, language.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
@@ -200,7 +212,9 @@ func NLEmbeddingCurrentRevisionForLanguage(language *foundation.NSString) uint {
 
 func NLEmbeddingSupportedSentenceEmbeddingRevisionsForLanguage(language *foundation.NSString) *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNLEmbedding), _nLEmbeddingSelSupportedSentenceEmbeddingRevisionsForLanguage, language.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
@@ -230,7 +244,9 @@ func (o *NLEmbedding) VocabularySize() uint {
 
 func (o *NLEmbedding) Language() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLEmbeddingSelLanguage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -238,4 +254,3 @@ func (o *NLEmbedding) Revision() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nLEmbeddingSelRevision)
 	return _ret
 }
-

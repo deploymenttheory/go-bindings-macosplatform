@@ -118,4 +118,3 @@ type TableViewRowActionable interface {
 }
 
 var _ TableViewRowActionable = (*TableViewRowAction)(nil)
-

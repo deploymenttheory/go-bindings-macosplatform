@@ -18,14 +18,14 @@ type ASAuthorizationProviderExtensionUserLoginConfiguration struct {
 }
 
 var (
-	_clsASAuthorizationProviderExtensionUserLoginConfiguration = _objcClass("ASAuthorizationProviderExtensionUserLoginConfiguration")
-	_aSAuthorizationProviderExtensionUserLoginConfigurationSelInitWithLoginUserName = objc.RegisterName("initWithLoginUserName:")
+	_clsASAuthorizationProviderExtensionUserLoginConfiguration                                                    = _objcClass("ASAuthorizationProviderExtensionUserLoginConfiguration")
+	_aSAuthorizationProviderExtensionUserLoginConfigurationSelInitWithLoginUserName                               = objc.RegisterName("initWithLoginUserName:")
 	_aSAuthorizationProviderExtensionUserLoginConfigurationSelSetCustomAssertionRequestHeaderClaimsReturningError = objc.RegisterName("setCustomAssertionRequestHeaderClaims:returningError:")
-	_aSAuthorizationProviderExtensionUserLoginConfigurationSelSetCustomAssertionRequestBodyClaimsReturningError = objc.RegisterName("setCustomAssertionRequestBodyClaims:returningError:")
-	_aSAuthorizationProviderExtensionUserLoginConfigurationSelSetCustomLoginRequestHeaderClaimsReturningError = objc.RegisterName("setCustomLoginRequestHeaderClaims:returningError:")
-	_aSAuthorizationProviderExtensionUserLoginConfigurationSelSetCustomLoginRequestBodyClaimsReturningError = objc.RegisterName("setCustomLoginRequestBodyClaims:returningError:")
-	_aSAuthorizationProviderExtensionUserLoginConfigurationSelLoginUserName = objc.RegisterName("loginUserName")
-	_aSAuthorizationProviderExtensionUserLoginConfigurationSelSetLoginUserName = objc.RegisterName("setLoginUserName:")
+	_aSAuthorizationProviderExtensionUserLoginConfigurationSelSetCustomAssertionRequestBodyClaimsReturningError   = objc.RegisterName("setCustomAssertionRequestBodyClaims:returningError:")
+	_aSAuthorizationProviderExtensionUserLoginConfigurationSelSetCustomLoginRequestHeaderClaimsReturningError     = objc.RegisterName("setCustomLoginRequestHeaderClaims:returningError:")
+	_aSAuthorizationProviderExtensionUserLoginConfigurationSelSetCustomLoginRequestBodyClaimsReturningError       = objc.RegisterName("setCustomLoginRequestBodyClaims:returningError:")
+	_aSAuthorizationProviderExtensionUserLoginConfigurationSelLoginUserName                                       = objc.RegisterName("loginUserName")
+	_aSAuthorizationProviderExtensionUserLoginConfigurationSelSetLoginUserName                                    = objc.RegisterName("setLoginUserName:")
 )
 
 func ASAuthorizationProviderExtensionUserLoginConfigurationFromID(id objc.ID) *ASAuthorizationProviderExtensionUserLoginConfiguration {
@@ -40,7 +40,9 @@ func ASAuthorizationProviderExtensionUserLoginConfigurationFromID(id objc.ID) *A
 
 func (o *ASAuthorizationProviderExtensionUserLoginConfiguration) InitWithLoginUserName(loginUserName *foundation.NSString) *ASAuthorizationProviderExtensionUserLoginConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionUserLoginConfigurationSelInitWithLoginUserName, loginUserName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationProviderExtensionUserLoginConfigurationFromID(_ret)
 }
 
@@ -87,11 +89,12 @@ func (o *ASAuthorizationProviderExtensionUserLoginConfiguration) SetCustomLoginR
 // @abstract The user name to use when authenticating with the identity provider.
 func (o *ASAuthorizationProviderExtensionUserLoginConfiguration) LoginUserName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionUserLoginConfigurationSelLoginUserName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *ASAuthorizationProviderExtensionUserLoginConfiguration) SetLoginUserName(loginUserName *foundation.NSString) {
 	o.Ptr().Send(_aSAuthorizationProviderExtensionUserLoginConfigurationSelSetLoginUserName, loginUserName.Ptr())
 }
-

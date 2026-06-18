@@ -18,10 +18,10 @@ type MTRRVCOperationalStateClusterOperationalCommandResponseParams struct {
 }
 
 var (
-	_clsMTRRVCOperationalStateClusterOperationalCommandResponseParams = _objcClass("MTRRVCOperationalStateClusterOperationalCommandResponseParams")
+	_clsMTRRVCOperationalStateClusterOperationalCommandResponseParams                           = _objcClass("MTRRVCOperationalStateClusterOperationalCommandResponseParams")
 	_mTRRVCOperationalStateClusterOperationalCommandResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRRVCOperationalStateClusterOperationalCommandResponseParamsSelCommandResponseState = objc.RegisterName("commandResponseState")
-	_mTRRVCOperationalStateClusterOperationalCommandResponseParamsSelSetCommandResponseState = objc.RegisterName("setCommandResponseState:")
+	_mTRRVCOperationalStateClusterOperationalCommandResponseParamsSelCommandResponseState       = objc.RegisterName("commandResponseState")
+	_mTRRVCOperationalStateClusterOperationalCommandResponseParamsSelSetCommandResponseState    = objc.RegisterName("setCommandResponseState:")
 )
 
 func MTRRVCOperationalStateClusterOperationalCommandResponseParamsFromID(id objc.ID) *MTRRVCOperationalStateClusterOperationalCommandResponseParams {
@@ -38,7 +38,9 @@ func MTRRVCOperationalStateClusterOperationalCommandResponseParamsFromID(id objc
 func (o *MTRRVCOperationalStateClusterOperationalCommandResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRRVCOperationalStateClusterOperationalCommandResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRRVCOperationalStateClusterOperationalCommandResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -47,11 +49,12 @@ func (o *MTRRVCOperationalStateClusterOperationalCommandResponseParams) InitWith
 
 func (o *MTRRVCOperationalStateClusterOperationalCommandResponseParams) CommandResponseState() *MTRRVCOperationalStateClusterErrorStateStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRRVCOperationalStateClusterOperationalCommandResponseParamsSelCommandResponseState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRRVCOperationalStateClusterErrorStateStructFromID(_ret)
 }
 
 func (o *MTRRVCOperationalStateClusterOperationalCommandResponseParams) SetCommandResponseState(commandResponseState *MTRRVCOperationalStateClusterErrorStateStruct) {
 	o.Ptr().Send(_mTRRVCOperationalStateClusterOperationalCommandResponseParamsSelSetCommandResponseState, commandResponseState.Ptr())
 }
-

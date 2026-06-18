@@ -16,13 +16,13 @@ type AVCapturePhotoOutputReadinessCoordinator struct {
 }
 
 var (
-	_clsAVCapturePhotoOutputReadinessCoordinator = _objcClass("AVCapturePhotoOutputReadinessCoordinator")
-	_aVCapturePhotoOutputReadinessCoordinatorSelInitWithPhotoOutput = objc.RegisterName("initWithPhotoOutput:")
-	_aVCapturePhotoOutputReadinessCoordinatorSelStartTrackingCaptureRequestUsingPhotoSettings = objc.RegisterName("startTrackingCaptureRequestUsingPhotoSettings:")
+	_clsAVCapturePhotoOutputReadinessCoordinator                                                     = _objcClass("AVCapturePhotoOutputReadinessCoordinator")
+	_aVCapturePhotoOutputReadinessCoordinatorSelInitWithPhotoOutput                                  = objc.RegisterName("initWithPhotoOutput:")
+	_aVCapturePhotoOutputReadinessCoordinatorSelStartTrackingCaptureRequestUsingPhotoSettings        = objc.RegisterName("startTrackingCaptureRequestUsingPhotoSettings:")
 	_aVCapturePhotoOutputReadinessCoordinatorSelStopTrackingCaptureRequestUsingPhotoSettingsUniqueID = objc.RegisterName("stopTrackingCaptureRequestUsingPhotoSettingsUniqueID:")
-	_aVCapturePhotoOutputReadinessCoordinatorSelDelegate = objc.RegisterName("delegate")
-	_aVCapturePhotoOutputReadinessCoordinatorSelSetDelegate = objc.RegisterName("setDelegate:")
-	_aVCapturePhotoOutputReadinessCoordinatorSelCaptureReadiness = objc.RegisterName("captureReadiness")
+	_aVCapturePhotoOutputReadinessCoordinatorSelDelegate                                             = objc.RegisterName("delegate")
+	_aVCapturePhotoOutputReadinessCoordinatorSelSetDelegate                                          = objc.RegisterName("setDelegate:")
+	_aVCapturePhotoOutputReadinessCoordinatorSelCaptureReadiness                                     = objc.RegisterName("captureReadiness")
 )
 
 func AVCapturePhotoOutputReadinessCoordinatorFromID(id objc.ID) *AVCapturePhotoOutputReadinessCoordinator {
@@ -37,7 +37,9 @@ func AVCapturePhotoOutputReadinessCoordinatorFromID(id objc.ID) *AVCapturePhotoO
 
 func (o *AVCapturePhotoOutputReadinessCoordinator) InitWithPhotoOutput(photoOutput *AVCapturePhotoOutput) *AVCapturePhotoOutputReadinessCoordinator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCapturePhotoOutputReadinessCoordinatorSelInitWithPhotoOutput, photoOutput.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCapturePhotoOutputReadinessCoordinatorFromID(_ret)
 }
 
@@ -66,4 +68,3 @@ func (o *AVCapturePhotoOutputReadinessCoordinator) CaptureReadiness() AVCaptureP
 	_ret := objc.Send[AVCapturePhotoOutputCaptureReadiness](o.Ptr(), _aVCapturePhotoOutputReadinessCoordinatorSelCaptureReadiness)
 	return _ret
 }
-

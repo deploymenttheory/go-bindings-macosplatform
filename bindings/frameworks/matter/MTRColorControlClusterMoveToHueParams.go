@@ -16,20 +16,20 @@ type MTRColorControlClusterMoveToHueParams struct {
 }
 
 var (
-	_clsMTRColorControlClusterMoveToHueParams = _objcClass("MTRColorControlClusterMoveToHueParams")
-	_mTRColorControlClusterMoveToHueParamsSelHue = objc.RegisterName("hue")
-	_mTRColorControlClusterMoveToHueParamsSelSetHue = objc.RegisterName("setHue:")
-	_mTRColorControlClusterMoveToHueParamsSelDirection = objc.RegisterName("direction")
-	_mTRColorControlClusterMoveToHueParamsSelSetDirection = objc.RegisterName("setDirection:")
-	_mTRColorControlClusterMoveToHueParamsSelTransitionTime = objc.RegisterName("transitionTime")
-	_mTRColorControlClusterMoveToHueParamsSelSetTransitionTime = objc.RegisterName("setTransitionTime:")
-	_mTRColorControlClusterMoveToHueParamsSelOptionsMask = objc.RegisterName("optionsMask")
-	_mTRColorControlClusterMoveToHueParamsSelSetOptionsMask = objc.RegisterName("setOptionsMask:")
-	_mTRColorControlClusterMoveToHueParamsSelOptionsOverride = objc.RegisterName("optionsOverride")
-	_mTRColorControlClusterMoveToHueParamsSelSetOptionsOverride = objc.RegisterName("setOptionsOverride:")
-	_mTRColorControlClusterMoveToHueParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRColorControlClusterMoveToHueParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRColorControlClusterMoveToHueParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRColorControlClusterMoveToHueParams                               = _objcClass("MTRColorControlClusterMoveToHueParams")
+	_mTRColorControlClusterMoveToHueParamsSelHue                            = objc.RegisterName("hue")
+	_mTRColorControlClusterMoveToHueParamsSelSetHue                         = objc.RegisterName("setHue:")
+	_mTRColorControlClusterMoveToHueParamsSelDirection                      = objc.RegisterName("direction")
+	_mTRColorControlClusterMoveToHueParamsSelSetDirection                   = objc.RegisterName("setDirection:")
+	_mTRColorControlClusterMoveToHueParamsSelTransitionTime                 = objc.RegisterName("transitionTime")
+	_mTRColorControlClusterMoveToHueParamsSelSetTransitionTime              = objc.RegisterName("setTransitionTime:")
+	_mTRColorControlClusterMoveToHueParamsSelOptionsMask                    = objc.RegisterName("optionsMask")
+	_mTRColorControlClusterMoveToHueParamsSelSetOptionsMask                 = objc.RegisterName("setOptionsMask:")
+	_mTRColorControlClusterMoveToHueParamsSelOptionsOverride                = objc.RegisterName("optionsOverride")
+	_mTRColorControlClusterMoveToHueParamsSelSetOptionsOverride             = objc.RegisterName("setOptionsOverride:")
+	_mTRColorControlClusterMoveToHueParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRColorControlClusterMoveToHueParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRColorControlClusterMoveToHueParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRColorControlClusterMoveToHueParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -45,7 +45,9 @@ func MTRColorControlClusterMoveToHueParamsFromID(id objc.ID) *MTRColorControlClu
 
 func (o *MTRColorControlClusterMoveToHueParams) Hue() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRColorControlClusterMoveToHueParamsSelHue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -55,7 +57,9 @@ func (o *MTRColorControlClusterMoveToHueParams) SetHue(hue *foundation.NSNumber)
 
 func (o *MTRColorControlClusterMoveToHueParams) Direction() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRColorControlClusterMoveToHueParamsSelDirection)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -65,7 +69,9 @@ func (o *MTRColorControlClusterMoveToHueParams) SetDirection(direction *foundati
 
 func (o *MTRColorControlClusterMoveToHueParams) TransitionTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRColorControlClusterMoveToHueParamsSelTransitionTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -75,7 +81,9 @@ func (o *MTRColorControlClusterMoveToHueParams) SetTransitionTime(transitionTime
 
 func (o *MTRColorControlClusterMoveToHueParams) OptionsMask() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRColorControlClusterMoveToHueParamsSelOptionsMask)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -85,7 +93,9 @@ func (o *MTRColorControlClusterMoveToHueParams) SetOptionsMask(optionsMask *foun
 
 func (o *MTRColorControlClusterMoveToHueParams) OptionsOverride() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRColorControlClusterMoveToHueParamsSelOptionsOverride)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -96,7 +106,9 @@ func (o *MTRColorControlClusterMoveToHueParams) SetOptionsOverride(optionsOverri
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRColorControlClusterMoveToHueParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRColorControlClusterMoveToHueParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -107,11 +119,12 @@ func (o *MTRColorControlClusterMoveToHueParams) SetTimedInvokeTimeoutMs(timedInv
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRColorControlClusterMoveToHueParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRColorControlClusterMoveToHueParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRColorControlClusterMoveToHueParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRColorControlClusterMoveToHueParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

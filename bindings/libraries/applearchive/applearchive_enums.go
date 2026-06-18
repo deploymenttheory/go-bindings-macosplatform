@@ -10,10 +10,10 @@ import "fmt"
 type AAACEQualifierTypes int64
 
 const (
-	AA_ACE_QUALIFIER_TYPE_USER AAACEQualifierTypes = 85
+	AA_ACE_QUALIFIER_TYPE_USER  AAACEQualifierTypes = 85
 	AA_ACE_QUALIFIER_TYPE_GROUP AAACEQualifierTypes = 71
-	AA_ACE_QUALIFIER_TYPE_SID AAACEQualifierTypes = 83
-	AA_ACE_QUALIFIER_TYPE_UUID AAACEQualifierTypes = 73
+	AA_ACE_QUALIFIER_TYPE_SID   AAACEQualifierTypes = 83
+	AA_ACE_QUALIFIER_TYPE_UUID  AAACEQualifierTypes = 73
 )
 
 func (i AAACEQualifierTypes) String() string {
@@ -64,11 +64,11 @@ func (i AAACEQualifierTypes) isMultiValue() bool {
 type AACompressionAlgorithms int64
 
 const (
-	AA_COMPRESSION_ALGORITHM_NONE AACompressionAlgorithms = 0
-	AA_COMPRESSION_ALGORITHM_LZ4 AACompressionAlgorithms = 256
-	AA_COMPRESSION_ALGORITHM_ZLIB AACompressionAlgorithms = 1285
-	AA_COMPRESSION_ALGORITHM_LZMA AACompressionAlgorithms = 774
-	AA_COMPRESSION_ALGORITHM_LZFSE AACompressionAlgorithms = 2049
+	AA_COMPRESSION_ALGORITHM_NONE     AACompressionAlgorithms = 0
+	AA_COMPRESSION_ALGORITHM_LZ4      AACompressionAlgorithms = 256
+	AA_COMPRESSION_ALGORITHM_ZLIB     AACompressionAlgorithms = 1285
+	AA_COMPRESSION_ALGORITHM_LZMA     AACompressionAlgorithms = 774
+	AA_COMPRESSION_ALGORITHM_LZFSE    AACompressionAlgorithms = 2049
 	AA_COMPRESSION_ALGORITHM_LZBITMAP AACompressionAlgorithms = 1794
 )
 
@@ -246,16 +246,16 @@ func (i AAEntryMessages) isMultiValue() bool {
 type AAEntryTypes int64
 
 const (
-	AA_ENTRY_TYPE_REG AAEntryTypes = 70
-	AA_ENTRY_TYPE_DIR AAEntryTypes = 68
-	AA_ENTRY_TYPE_LNK AAEntryTypes = 76
-	AA_ENTRY_TYPE_FIFO AAEntryTypes = 80
-	AA_ENTRY_TYPE_CHR AAEntryTypes = 67
-	AA_ENTRY_TYPE_BLK AAEntryTypes = 66
-	AA_ENTRY_TYPE_SOCK AAEntryTypes = 83
-	AA_ENTRY_TYPE_WHT AAEntryTypes = 87
-	AA_ENTRY_TYPE_DOOR AAEntryTypes = 82
-	AA_ENTRY_TYPE_PORT AAEntryTypes = 84
+	AA_ENTRY_TYPE_REG      AAEntryTypes = 70
+	AA_ENTRY_TYPE_DIR      AAEntryTypes = 68
+	AA_ENTRY_TYPE_LNK      AAEntryTypes = 76
+	AA_ENTRY_TYPE_FIFO     AAEntryTypes = 80
+	AA_ENTRY_TYPE_CHR      AAEntryTypes = 67
+	AA_ENTRY_TYPE_BLK      AAEntryTypes = 66
+	AA_ENTRY_TYPE_SOCK     AAEntryTypes = 83
+	AA_ENTRY_TYPE_WHT      AAEntryTypes = 87
+	AA_ENTRY_TYPE_DOOR     AAEntryTypes = 82
+	AA_ENTRY_TYPE_PORT     AAEntryTypes = 84
 	AA_ENTRY_TYPE_METADATA AAEntryTypes = 77
 )
 
@@ -335,12 +335,12 @@ func (i AAEntryTypes) isMultiValue() bool {
 type AAFieldTypes int64
 
 const (
-	AA_FIELD_TYPE_FLAG AAFieldTypes = 0
-	AA_FIELD_TYPE_UINT AAFieldTypes = 1
-	AA_FIELD_TYPE_STRING AAFieldTypes = 2
-	AA_FIELD_TYPE_HASH AAFieldTypes = 3
+	AA_FIELD_TYPE_FLAG     AAFieldTypes = 0
+	AA_FIELD_TYPE_UINT     AAFieldTypes = 1
+	AA_FIELD_TYPE_STRING   AAFieldTypes = 2
+	AA_FIELD_TYPE_HASH     AAFieldTypes = 3
 	AA_FIELD_TYPE_TIMESPEC AAFieldTypes = 4
-	AA_FIELD_TYPE_BLOB AAFieldTypes = 5
+	AA_FIELD_TYPE_BLOB     AAFieldTypes = 5
 )
 
 func (i AAFieldTypes) String() string {
@@ -520,8 +520,8 @@ func (i AAFlags) isMultiValue() bool {
 type AAHashFunctions int64
 
 const (
-	AA_HASH_FUNCTION_CRC32 AAHashFunctions = 1
-	AA_HASH_FUNCTION_SHA1 AAHashFunctions = 2
+	AA_HASH_FUNCTION_CRC32  AAHashFunctions = 1
+	AA_HASH_FUNCTION_SHA1   AAHashFunctions = 2
 	AA_HASH_FUNCTION_SHA256 AAHashFunctions = 3
 	AA_HASH_FUNCTION_SHA384 AAHashFunctions = 4
 	AA_HASH_FUNCTION_SHA512 AAHashFunctions = 5
@@ -579,8 +579,8 @@ func (i AAHashFunctions) isMultiValue() bool {
 type AEAContextFieldRepresentations int64
 
 const (
-	AEA_CONTEXT_FIELD_REPRESENTATION_RAW AEAContextFieldRepresentations = 0
-	AEA_CONTEXT_FIELD_REPRESENTATION_X963 AEAContextFieldRepresentations = 1
+	AEA_CONTEXT_FIELD_REPRESENTATION_RAW      AEAContextFieldRepresentations = 0
+	AEA_CONTEXT_FIELD_REPRESENTATION_X963     AEAContextFieldRepresentations = 1
 	AEA_CONTEXT_FIELD_REPRESENTATION_GENERATE AEAContextFieldRepresentations = 2
 )
 
@@ -628,20 +628,20 @@ func (i AEAContextFieldRepresentations) isMultiValue() bool {
 type AEAContextFieldValues int64
 
 const (
-	AEA_CONTEXT_CIPHERSUITE_HKDF_SHA256_HMAC AEAContextFieldValues = 0
+	AEA_CONTEXT_CIPHERSUITE_HKDF_SHA256_HMAC        AEAContextFieldValues = 0
 	AEA_CONTEXT_CIPHERSUITE_HKDF_SHA256_AESCTR_HMAC AEAContextFieldValues = 1
-	AEA_CONTEXT_SIGNATURE_NONE AEAContextFieldValues = 0
-	AEA_CONTEXT_SIGNATURE_ECDSA_P256 AEAContextFieldValues = 1
-	AEA_CONTEXT_ENCRYPTION_NONE AEAContextFieldValues = 0
-	AEA_CONTEXT_ENCRYPTION_SYMMETRIC AEAContextFieldValues = 1
-	AEA_CONTEXT_ENCRYPTION_ECDHE_P256 AEAContextFieldValues = 2
-	AEA_CONTEXT_ENCRYPTION_SCRYPT AEAContextFieldValues = 3
-	AEA_CONTEXT_CHECKSUM_NONE AEAContextFieldValues = 0
-	AEA_CONTEXT_CHECKSUM_MURMURHASH64 AEAContextFieldValues = 1
-	AEA_CONTEXT_CHECKSUM_SHA256 AEAContextFieldValues = 2
-	AEA_CONTEXT_PADDING_NONE AEAContextFieldValues = 0
-	AEA_CONTEXT_PADDING_ADAPTIVE AEAContextFieldValues = 1
-	AEA_CONTEXT_PADDING_MIN_SIZE AEAContextFieldValues = 16
+	AEA_CONTEXT_SIGNATURE_NONE                      AEAContextFieldValues = 0
+	AEA_CONTEXT_SIGNATURE_ECDSA_P256                AEAContextFieldValues = 1
+	AEA_CONTEXT_ENCRYPTION_NONE                     AEAContextFieldValues = 0
+	AEA_CONTEXT_ENCRYPTION_SYMMETRIC                AEAContextFieldValues = 1
+	AEA_CONTEXT_ENCRYPTION_ECDHE_P256               AEAContextFieldValues = 2
+	AEA_CONTEXT_ENCRYPTION_SCRYPT                   AEAContextFieldValues = 3
+	AEA_CONTEXT_CHECKSUM_NONE                       AEAContextFieldValues = 0
+	AEA_CONTEXT_CHECKSUM_MURMURHASH64               AEAContextFieldValues = 1
+	AEA_CONTEXT_CHECKSUM_SHA256                     AEAContextFieldValues = 2
+	AEA_CONTEXT_PADDING_NONE                        AEAContextFieldValues = 0
+	AEA_CONTEXT_PADDING_ADAPTIVE                    AEAContextFieldValues = 1
+	AEA_CONTEXT_PADDING_MIN_SIZE                    AEAContextFieldValues = 16
 )
 
 func (i AEAContextFieldValues) String() string {
@@ -714,24 +714,24 @@ func (i AEAContextFieldValues) isMultiValue() bool {
 type AEAContextFields int64
 
 const (
-	AEA_CONTEXT_FIELD_PROFILE AEAContextFields = 0
-	AEA_CONTEXT_FIELD_PADDING_SIZE AEAContextFields = 1
-	AEA_CONTEXT_FIELD_CHECKSUM_MODE AEAContextFields = 2
-	AEA_CONTEXT_FIELD_COMPRESSION_ALGORITHM AEAContextFields = 3
-	AEA_CONTEXT_FIELD_COMPRESSION_BLOCK_SIZE AEAContextFields = 4
-	AEA_CONTEXT_FIELD_AUTH_DATA AEAContextFields = 5
-	AEA_CONTEXT_FIELD_MAIN_KEY AEAContextFields = 6
-	AEA_CONTEXT_FIELD_SIGNING_PUBLIC_KEY AEAContextFields = 7
-	AEA_CONTEXT_FIELD_SIGNING_PRIVATE_KEY AEAContextFields = 8
-	AEA_CONTEXT_FIELD_SYMMETRIC_KEY AEAContextFields = 9
-	AEA_CONTEXT_FIELD_RECIPIENT_PUBLIC_KEY AEAContextFields = 10
-	AEA_CONTEXT_FIELD_RECIPIENT_PRIVATE_KEY AEAContextFields = 11
+	AEA_CONTEXT_FIELD_PROFILE                  AEAContextFields = 0
+	AEA_CONTEXT_FIELD_PADDING_SIZE             AEAContextFields = 1
+	AEA_CONTEXT_FIELD_CHECKSUM_MODE            AEAContextFields = 2
+	AEA_CONTEXT_FIELD_COMPRESSION_ALGORITHM    AEAContextFields = 3
+	AEA_CONTEXT_FIELD_COMPRESSION_BLOCK_SIZE   AEAContextFields = 4
+	AEA_CONTEXT_FIELD_AUTH_DATA                AEAContextFields = 5
+	AEA_CONTEXT_FIELD_MAIN_KEY                 AEAContextFields = 6
+	AEA_CONTEXT_FIELD_SIGNING_PUBLIC_KEY       AEAContextFields = 7
+	AEA_CONTEXT_FIELD_SIGNING_PRIVATE_KEY      AEAContextFields = 8
+	AEA_CONTEXT_FIELD_SYMMETRIC_KEY            AEAContextFields = 9
+	AEA_CONTEXT_FIELD_RECIPIENT_PUBLIC_KEY     AEAContextFields = 10
+	AEA_CONTEXT_FIELD_RECIPIENT_PRIVATE_KEY    AEAContextFields = 11
 	AEA_CONTEXT_FIELD_SIGNATURE_ENCRYPTION_KEY AEAContextFields = 12
-	AEA_CONTEXT_FIELD_RAW_SIZE AEAContextFields = 13
-	AEA_CONTEXT_FIELD_CONTAINER_SIZE AEAContextFields = 14
-	AEA_CONTEXT_FIELD_BLOCKS_PER_CLUSTER AEAContextFields = 17
-	AEA_CONTEXT_FIELD_ARCHIVE_IDENTIFIER AEAContextFields = 18
-	AEA_CONTEXT_FIELD_PASSWORD AEAContextFields = 19
+	AEA_CONTEXT_FIELD_RAW_SIZE                 AEAContextFields = 13
+	AEA_CONTEXT_FIELD_CONTAINER_SIZE           AEAContextFields = 14
+	AEA_CONTEXT_FIELD_BLOCKS_PER_CLUSTER       AEAContextFields = 17
+	AEA_CONTEXT_FIELD_ARCHIVE_IDENTIFIER       AEAContextFields = 18
+	AEA_CONTEXT_FIELD_PASSWORD                 AEAContextFields = 19
 )
 
 func (i AEAContextFields) String() string {
@@ -838,12 +838,12 @@ func (i AEAContextFields) isMultiValue() bool {
 type AEAProfiles int64
 
 const (
-	AEA_PROFILE__HKDF_SHA256_HMAC__NONE__ECDSA_P256 AEAProfiles = 0
-	AEA_PROFILE__HKDF_SHA256_AESCTR_HMAC__SYMMETRIC__NONE AEAProfiles = 1
-	AEA_PROFILE__HKDF_SHA256_AESCTR_HMAC__SYMMETRIC__ECDSA_P256 AEAProfiles = 2
-	AEA_PROFILE__HKDF_SHA256_AESCTR_HMAC__ECDHE_P256__NONE AEAProfiles = 3
+	AEA_PROFILE__HKDF_SHA256_HMAC__NONE__ECDSA_P256              AEAProfiles = 0
+	AEA_PROFILE__HKDF_SHA256_AESCTR_HMAC__SYMMETRIC__NONE        AEAProfiles = 1
+	AEA_PROFILE__HKDF_SHA256_AESCTR_HMAC__SYMMETRIC__ECDSA_P256  AEAProfiles = 2
+	AEA_PROFILE__HKDF_SHA256_AESCTR_HMAC__ECDHE_P256__NONE       AEAProfiles = 3
 	AEA_PROFILE__HKDF_SHA256_AESCTR_HMAC__ECDHE_P256__ECDSA_P256 AEAProfiles = 4
-	AEA_PROFILE__HKDF_SHA256_AESCTR_HMAC__SCRYPT__NONE AEAProfiles = 5
+	AEA_PROFILE__HKDF_SHA256_AESCTR_HMAC__SCRYPT__NONE           AEAProfiles = 5
 )
 
 func (i AEAProfiles) String() string {
@@ -902,14 +902,14 @@ func (i AEAProfiles) isMultiValue() bool {
 type Clockid_t int64
 
 const (
-	_CLOCK_REALTIME Clockid_t = 0
-	_CLOCK_MONOTONIC Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW Clockid_t = 4
+	_CLOCK_REALTIME             Clockid_t = 0
+	_CLOCK_MONOTONIC            Clockid_t = 6
+	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
 	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID Clockid_t = 16
+	_CLOCK_UPTIME_RAW           Clockid_t = 8
+	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
+	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
+	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
 )
 
 func (i Clockid_t) String() string {
@@ -976,13 +976,13 @@ func (i Clockid_t) isMultiValue() bool {
 type Filesec_property_t int64
 
 const (
-	FILESEC_OWNER Filesec_property_t = 1
-	FILESEC_GROUP Filesec_property_t = 2
-	FILESEC_UUID Filesec_property_t = 3
-	FILESEC_MODE Filesec_property_t = 4
-	FILESEC_ACL Filesec_property_t = 5
-	FILESEC_GRPUUID Filesec_property_t = 6
-	FILESEC_ACL_RAW Filesec_property_t = 100
+	FILESEC_OWNER         Filesec_property_t = 1
+	FILESEC_GROUP         Filesec_property_t = 2
+	FILESEC_UUID          Filesec_property_t = 3
+	FILESEC_MODE          Filesec_property_t = 4
+	FILESEC_ACL           Filesec_property_t = 5
+	FILESEC_GRPUUID       Filesec_property_t = 6
+	FILESEC_ACL_RAW       Filesec_property_t = 100
 	FILESEC_ACL_ALLOCSIZE Filesec_property_t = 101
 )
 
@@ -1045,4 +1045,3 @@ func SerializeFilesec_property_t(values []Filesec_property_t) []string {
 func (i Filesec_property_t) isMultiValue() bool {
 	return false
 }
-

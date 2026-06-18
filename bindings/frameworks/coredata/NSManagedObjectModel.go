@@ -18,31 +18,31 @@ type NSManagedObjectModel struct {
 }
 
 var (
-	_clsNSManagedObjectModel = _objcClass("NSManagedObjectModel")
-	_nSManagedObjectModelSelMergedModelFromBundles = objc.RegisterName("mergedModelFromBundles:")
-	_nSManagedObjectModelSelModelByMergingModels = objc.RegisterName("modelByMergingModels:")
-	_nSManagedObjectModelSelInit = objc.RegisterName("init")
-	_nSManagedObjectModelSelInitWithContentsOfURL = objc.RegisterName("initWithContentsOfURL:")
-	_nSManagedObjectModelSelEntitiesForConfiguration = objc.RegisterName("entitiesForConfiguration:")
-	_nSManagedObjectModelSelSetEntitiesForConfiguration = objc.RegisterName("setEntities:forConfiguration:")
-	_nSManagedObjectModelSelSetFetchRequestTemplateForName = objc.RegisterName("setFetchRequestTemplate:forName:")
-	_nSManagedObjectModelSelFetchRequestTemplateForName = objc.RegisterName("fetchRequestTemplateForName:")
+	_clsNSManagedObjectModel                                                      = _objcClass("NSManagedObjectModel")
+	_nSManagedObjectModelSelMergedModelFromBundles                                = objc.RegisterName("mergedModelFromBundles:")
+	_nSManagedObjectModelSelModelByMergingModels                                  = objc.RegisterName("modelByMergingModels:")
+	_nSManagedObjectModelSelInit                                                  = objc.RegisterName("init")
+	_nSManagedObjectModelSelInitWithContentsOfURL                                 = objc.RegisterName("initWithContentsOfURL:")
+	_nSManagedObjectModelSelEntitiesForConfiguration                              = objc.RegisterName("entitiesForConfiguration:")
+	_nSManagedObjectModelSelSetEntitiesForConfiguration                           = objc.RegisterName("setEntities:forConfiguration:")
+	_nSManagedObjectModelSelSetFetchRequestTemplateForName                        = objc.RegisterName("setFetchRequestTemplate:forName:")
+	_nSManagedObjectModelSelFetchRequestTemplateForName                           = objc.RegisterName("fetchRequestTemplateForName:")
 	_nSManagedObjectModelSelFetchRequestFromTemplateWithNameSubstitutionVariables = objc.RegisterName("fetchRequestFromTemplateWithName:substitutionVariables:")
-	_nSManagedObjectModelSelMergedModelFromBundlesForStoreMetadata = objc.RegisterName("mergedModelFromBundles:forStoreMetadata:")
-	_nSManagedObjectModelSelModelByMergingModelsForStoreMetadata = objc.RegisterName("modelByMergingModels:forStoreMetadata:")
-	_nSManagedObjectModelSelIsConfigurationCompatibleWithStoreMetadata = objc.RegisterName("isConfiguration:compatibleWithStoreMetadata:")
-	_nSManagedObjectModelSelChecksumsForVersionedModelAtURLError = objc.RegisterName("checksumsForVersionedModelAtURL:error:")
-	_nSManagedObjectModelSelEntitiesByName = objc.RegisterName("entitiesByName")
-	_nSManagedObjectModelSelEntities = objc.RegisterName("entities")
-	_nSManagedObjectModelSelSetEntities = objc.RegisterName("setEntities:")
-	_nSManagedObjectModelSelConfigurations = objc.RegisterName("configurations")
-	_nSManagedObjectModelSelLocalizationDictionary = objc.RegisterName("localizationDictionary")
-	_nSManagedObjectModelSelSetLocalizationDictionary = objc.RegisterName("setLocalizationDictionary:")
-	_nSManagedObjectModelSelFetchRequestTemplatesByName = objc.RegisterName("fetchRequestTemplatesByName")
-	_nSManagedObjectModelSelVersionIdentifiers = objc.RegisterName("versionIdentifiers")
-	_nSManagedObjectModelSelSetVersionIdentifiers = objc.RegisterName("setVersionIdentifiers:")
-	_nSManagedObjectModelSelEntityVersionHashesByName = objc.RegisterName("entityVersionHashesByName")
-	_nSManagedObjectModelSelVersionChecksum = objc.RegisterName("versionChecksum")
+	_nSManagedObjectModelSelMergedModelFromBundlesForStoreMetadata                = objc.RegisterName("mergedModelFromBundles:forStoreMetadata:")
+	_nSManagedObjectModelSelModelByMergingModelsForStoreMetadata                  = objc.RegisterName("modelByMergingModels:forStoreMetadata:")
+	_nSManagedObjectModelSelIsConfigurationCompatibleWithStoreMetadata            = objc.RegisterName("isConfiguration:compatibleWithStoreMetadata:")
+	_nSManagedObjectModelSelChecksumsForVersionedModelAtURLError                  = objc.RegisterName("checksumsForVersionedModelAtURL:error:")
+	_nSManagedObjectModelSelEntitiesByName                                        = objc.RegisterName("entitiesByName")
+	_nSManagedObjectModelSelEntities                                              = objc.RegisterName("entities")
+	_nSManagedObjectModelSelSetEntities                                           = objc.RegisterName("setEntities:")
+	_nSManagedObjectModelSelConfigurations                                        = objc.RegisterName("configurations")
+	_nSManagedObjectModelSelLocalizationDictionary                                = objc.RegisterName("localizationDictionary")
+	_nSManagedObjectModelSelSetLocalizationDictionary                             = objc.RegisterName("setLocalizationDictionary:")
+	_nSManagedObjectModelSelFetchRequestTemplatesByName                           = objc.RegisterName("fetchRequestTemplatesByName")
+	_nSManagedObjectModelSelVersionIdentifiers                                    = objc.RegisterName("versionIdentifiers")
+	_nSManagedObjectModelSelSetVersionIdentifiers                                 = objc.RegisterName("setVersionIdentifiers:")
+	_nSManagedObjectModelSelEntityVersionHashesByName                             = objc.RegisterName("entityVersionHashesByName")
+	_nSManagedObjectModelSelVersionChecksum                                       = objc.RegisterName("versionChecksum")
 )
 
 func NSManagedObjectModelFromID(id objc.ID) *NSManagedObjectModel {
@@ -57,31 +57,41 @@ func NSManagedObjectModelFromID(id objc.ID) *NSManagedObjectModel {
 
 func NSManagedObjectModelMergedModelFromBundles(bundles *foundation.NSArray[*foundation.NSBundle]) *NSManagedObjectModel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSManagedObjectModel), _nSManagedObjectModelSelMergedModelFromBundles, bundles)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectModelFromID(_ret)
 }
 
 func NSManagedObjectModelModelByMergingModels(models *foundation.NSArray[*NSManagedObjectModel]) *NSManagedObjectModel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSManagedObjectModel), _nSManagedObjectModelSelModelByMergingModels, models.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectModelFromID(_ret)
 }
 
 func (o *NSManagedObjectModel) Init() *NSManagedObjectModel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectModelSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectModelFromID(_ret)
 }
 
 func (o *NSManagedObjectModel) InitWithContentsOfURL(url *foundation.NSURL) *NSManagedObjectModel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectModelSelInitWithContentsOfURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectModelFromID(_ret)
 }
 
 func (o *NSManagedObjectModel) EntitiesForConfiguration(configuration *foundation.NSString) *foundation.NSArray[*NSEntityDescription] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectModelSelEntitiesForConfiguration, configuration.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSEntityDescription](_ret)
 }
 
@@ -105,13 +115,17 @@ func (o *NSManagedObjectModel) FetchRequestFromTemplateWithNameSubstitutionVaria
 
 func NSManagedObjectModelMergedModelFromBundlesForStoreMetadata(bundles *foundation.NSArray[*foundation.NSBundle], metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NSManagedObjectModel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSManagedObjectModel), _nSManagedObjectModelSelMergedModelFromBundlesForStoreMetadata, bundles, metadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectModelFromID(_ret)
 }
 
 func NSManagedObjectModelModelByMergingModelsForStoreMetadata(models *foundation.NSArray[*NSManagedObjectModel], metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NSManagedObjectModel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSManagedObjectModel), _nSManagedObjectModelSelModelByMergingModelsForStoreMetadata, models.Ptr(), metadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectModelFromID(_ret)
 }
 
@@ -136,7 +150,9 @@ func (o *NSManagedObjectModel) EntitiesByName() *foundation.NSDictionary[*founda
 
 func (o *NSManagedObjectModel) Entities() *foundation.NSArray[*NSEntityDescription] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectModelSelEntities)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSEntityDescription](_ret)
 }
 
@@ -179,7 +195,8 @@ func (o *NSManagedObjectModel) EntityVersionHashesByName() *foundation.NSDiction
 
 func (o *NSManagedObjectModel) VersionChecksum() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectModelSelVersionChecksum)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

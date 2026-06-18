@@ -692,4 +692,3 @@ type RAWFilterable interface {
 }
 
 var _ RAWFilterable = (*RAWFilter)(nil)
-

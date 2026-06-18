@@ -12,7 +12,7 @@ type GLKLightingType int64
 
 const (
 	GLKLightingTypePerVertex GLKLightingType = 0
-	GLKLightingTypePerPixel GLKLightingType = 1
+	GLKLightingTypePerPixel  GLKLightingType = 1
 )
 
 func (e GLKLightingType) String() string {
@@ -29,9 +29,9 @@ func (e GLKLightingType) String() string {
 type GLKTextureEnvMode int64
 
 const (
-	GLKTextureEnvModeReplace GLKTextureEnvMode = 0
+	GLKTextureEnvModeReplace  GLKTextureEnvMode = 0
 	GLKTextureEnvModeModulate GLKTextureEnvMode = 1
-	GLKTextureEnvModeDecal GLKTextureEnvMode = 2
+	GLKTextureEnvModeDecal    GLKTextureEnvMode = 2
 )
 
 func (e GLKTextureEnvMode) String() string {
@@ -50,9 +50,9 @@ func (e GLKTextureEnvMode) String() string {
 type GLKTextureInfoAlphaState int64
 
 const (
-	GLKTextureInfoAlphaStateNone GLKTextureInfoAlphaState = 0
+	GLKTextureInfoAlphaStateNone             GLKTextureInfoAlphaState = 0
 	GLKTextureInfoAlphaStateNonPremultiplied GLKTextureInfoAlphaState = 1
-	GLKTextureInfoAlphaStatePremultiplied GLKTextureInfoAlphaState = 2
+	GLKTextureInfoAlphaStatePremultiplied    GLKTextureInfoAlphaState = 2
 )
 
 func (e GLKTextureInfoAlphaState) String() string {
@@ -71,8 +71,8 @@ func (e GLKTextureInfoAlphaState) String() string {
 type GLKTextureInfoOrigin int64
 
 const (
-	GLKTextureInfoOriginUnknown GLKTextureInfoOrigin = 0
-	GLKTextureInfoOriginTopLeft GLKTextureInfoOrigin = 1
+	GLKTextureInfoOriginUnknown    GLKTextureInfoOrigin = 0
+	GLKTextureInfoOriginTopLeft    GLKTextureInfoOrigin = 1
 	GLKTextureInfoOriginBottomLeft GLKTextureInfoOrigin = 2
 )
 
@@ -92,9 +92,9 @@ func (e GLKTextureInfoOrigin) String() string {
 type GLKTextureTarget int64
 
 const (
-	GLKTextureTarget2D GLKTextureTarget = 3553
+	GLKTextureTarget2D      GLKTextureTarget = 3553
 	GLKTextureTargetCubeMap GLKTextureTarget = 34067
-	GLKTextureTargetCt GLKTextureTarget = 2
+	GLKTextureTargetCt      GLKTextureTarget = 2
 )
 
 func (e GLKTextureTarget) String() string {
@@ -109,4 +109,3 @@ func (e GLKTextureTarget) String() string {
 		return fmt.Sprintf("GLKTextureTarget(%d)", int64(e))
 	}
 }
-

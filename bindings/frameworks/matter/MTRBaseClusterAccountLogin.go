@@ -18,47 +18,47 @@ type MTRBaseClusterAccountLogin struct {
 }
 
 var (
-	_clsMTRBaseClusterAccountLogin = _objcClass("MTRBaseClusterAccountLogin")
-	_mTRBaseClusterAccountLoginSelGetSetupPINWithParamsCompletion = objc.RegisterName("getSetupPINWithParams:completion:")
-	_mTRBaseClusterAccountLoginSelLoginWithParamsCompletion = objc.RegisterName("loginWithParams:completion:")
-	_mTRBaseClusterAccountLoginSelLogoutWithParamsCompletion = objc.RegisterName("logoutWithParams:completion:")
-	_mTRBaseClusterAccountLoginSelLogoutWithCompletion = objc.RegisterName("logoutWithCompletion:")
-	_mTRBaseClusterAccountLoginSelReadAttributeGeneratedCommandListWithCompletion = objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:")
-	_mTRBaseClusterAccountLoginSelSubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterAccountLoginSelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeGeneratedCommandListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterAccountLoginSelReadAttributeAcceptedCommandListWithCompletion = objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:")
-	_mTRBaseClusterAccountLoginSelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterAccountLoginSelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeAcceptedCommandListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterAccountLoginSelReadAttributeAttributeListWithCompletion = objc.RegisterName("readAttributeAttributeListWithCompletion:")
-	_mTRBaseClusterAccountLoginSelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterAccountLoginSelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeAttributeListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterAccountLoginSelReadAttributeFeatureMapWithCompletion = objc.RegisterName("readAttributeFeatureMapWithCompletion:")
-	_mTRBaseClusterAccountLoginSelSubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterAccountLoginSelReadAttributeFeatureMapWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeFeatureMapWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterAccountLoginSelReadAttributeClusterRevisionWithCompletion = objc.RegisterName("readAttributeClusterRevisionWithCompletion:")
-	_mTRBaseClusterAccountLoginSelSubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterAccountLoginSelReadAttributeClusterRevisionWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeClusterRevisionWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterAccountLoginSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRBaseClusterAccountLoginSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
-	_mTRBaseClusterAccountLoginSelGetSetupPINWithParamsCompletionHandler = objc.RegisterName("getSetupPINWithParams:completionHandler:")
-	_mTRBaseClusterAccountLoginSelLoginWithParamsCompletionHandler = objc.RegisterName("loginWithParams:completionHandler:")
-	_mTRBaseClusterAccountLoginSelLogoutWithParamsCompletionHandler = objc.RegisterName("logoutWithParams:completionHandler:")
-	_mTRBaseClusterAccountLoginSelLogoutWithCompletionHandler = objc.RegisterName("logoutWithCompletionHandler:")
-	_mTRBaseClusterAccountLoginSelReadAttributeGeneratedCommandListWithCompletionHandler = objc.RegisterName("readAttributeGeneratedCommandListWithCompletionHandler:")
+	_clsMTRBaseClusterAccountLogin                                                                                                           = _objcClass("MTRBaseClusterAccountLogin")
+	_mTRBaseClusterAccountLoginSelGetSetupPINWithParamsCompletion                                                                            = objc.RegisterName("getSetupPINWithParams:completion:")
+	_mTRBaseClusterAccountLoginSelLoginWithParamsCompletion                                                                                  = objc.RegisterName("loginWithParams:completion:")
+	_mTRBaseClusterAccountLoginSelLogoutWithParamsCompletion                                                                                 = objc.RegisterName("logoutWithParams:completion:")
+	_mTRBaseClusterAccountLoginSelLogoutWithCompletion                                                                                       = objc.RegisterName("logoutWithCompletion:")
+	_mTRBaseClusterAccountLoginSelReadAttributeGeneratedCommandListWithCompletion                                                            = objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:")
+	_mTRBaseClusterAccountLoginSelSubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler                       = objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterAccountLoginSelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion                              = objc.RegisterName("readAttributeGeneratedCommandListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterAccountLoginSelReadAttributeAcceptedCommandListWithCompletion                                                             = objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:")
+	_mTRBaseClusterAccountLoginSelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler                        = objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterAccountLoginSelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion                               = objc.RegisterName("readAttributeAcceptedCommandListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterAccountLoginSelReadAttributeAttributeListWithCompletion                                                                   = objc.RegisterName("readAttributeAttributeListWithCompletion:")
+	_mTRBaseClusterAccountLoginSelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler                              = objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterAccountLoginSelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion                                     = objc.RegisterName("readAttributeAttributeListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterAccountLoginSelReadAttributeFeatureMapWithCompletion                                                                      = objc.RegisterName("readAttributeFeatureMapWithCompletion:")
+	_mTRBaseClusterAccountLoginSelSubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler                                 = objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterAccountLoginSelReadAttributeFeatureMapWithClusterStateCacheEndpointQueueCompletion                                        = objc.RegisterName("readAttributeFeatureMapWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterAccountLoginSelReadAttributeClusterRevisionWithCompletion                                                                 = objc.RegisterName("readAttributeClusterRevisionWithCompletion:")
+	_mTRBaseClusterAccountLoginSelSubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler                            = objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterAccountLoginSelReadAttributeClusterRevisionWithClusterStateCacheEndpointQueueCompletion                                   = objc.RegisterName("readAttributeClusterRevisionWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterAccountLoginSelInitWithDeviceEndpointIDQueue                                                                              = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRBaseClusterAccountLoginSelInitWithDeviceEndpointQueue                                                                                = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRBaseClusterAccountLoginSelGetSetupPINWithParamsCompletionHandler                                                                     = objc.RegisterName("getSetupPINWithParams:completionHandler:")
+	_mTRBaseClusterAccountLoginSelLoginWithParamsCompletionHandler                                                                           = objc.RegisterName("loginWithParams:completionHandler:")
+	_mTRBaseClusterAccountLoginSelLogoutWithParamsCompletionHandler                                                                          = objc.RegisterName("logoutWithParams:completionHandler:")
+	_mTRBaseClusterAccountLoginSelLogoutWithCompletionHandler                                                                                = objc.RegisterName("logoutWithCompletionHandler:")
+	_mTRBaseClusterAccountLoginSelReadAttributeGeneratedCommandListWithCompletionHandler                                                     = objc.RegisterName("readAttributeGeneratedCommandListWithCompletionHandler:")
 	_mTRBaseClusterAccountLoginSelSubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterAccountLoginSelReadAttributeGeneratedCommandListWithAttributeCacheEndpointQueueCompletionHandler = objc.RegisterName("readAttributeGeneratedCommandListWithAttributeCache:endpoint:queue:completionHandler:")
-	_mTRBaseClusterAccountLoginSelReadAttributeAcceptedCommandListWithCompletionHandler = objc.RegisterName("readAttributeAcceptedCommandListWithCompletionHandler:")
-	_mTRBaseClusterAccountLoginSelSubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterAccountLoginSelReadAttributeAcceptedCommandListWithAttributeCacheEndpointQueueCompletionHandler = objc.RegisterName("readAttributeAcceptedCommandListWithAttributeCache:endpoint:queue:completionHandler:")
-	_mTRBaseClusterAccountLoginSelReadAttributeAttributeListWithCompletionHandler = objc.RegisterName("readAttributeAttributeListWithCompletionHandler:")
-	_mTRBaseClusterAccountLoginSelSubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterAccountLoginSelReadAttributeAttributeListWithAttributeCacheEndpointQueueCompletionHandler = objc.RegisterName("readAttributeAttributeListWithAttributeCache:endpoint:queue:completionHandler:")
-	_mTRBaseClusterAccountLoginSelReadAttributeFeatureMapWithCompletionHandler = objc.RegisterName("readAttributeFeatureMapWithCompletionHandler:")
-	_mTRBaseClusterAccountLoginSelSubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterAccountLoginSelReadAttributeFeatureMapWithAttributeCacheEndpointQueueCompletionHandler = objc.RegisterName("readAttributeFeatureMapWithAttributeCache:endpoint:queue:completionHandler:")
-	_mTRBaseClusterAccountLoginSelReadAttributeClusterRevisionWithCompletionHandler = objc.RegisterName("readAttributeClusterRevisionWithCompletionHandler:")
-	_mTRBaseClusterAccountLoginSelSubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterAccountLoginSelReadAttributeClusterRevisionWithAttributeCacheEndpointQueueCompletionHandler = objc.RegisterName("readAttributeClusterRevisionWithAttributeCache:endpoint:queue:completionHandler:")
+	_mTRBaseClusterAccountLoginSelReadAttributeGeneratedCommandListWithAttributeCacheEndpointQueueCompletionHandler                          = objc.RegisterName("readAttributeGeneratedCommandListWithAttributeCache:endpoint:queue:completionHandler:")
+	_mTRBaseClusterAccountLoginSelReadAttributeAcceptedCommandListWithCompletionHandler                                                      = objc.RegisterName("readAttributeAcceptedCommandListWithCompletionHandler:")
+	_mTRBaseClusterAccountLoginSelSubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler  = objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterAccountLoginSelReadAttributeAcceptedCommandListWithAttributeCacheEndpointQueueCompletionHandler                           = objc.RegisterName("readAttributeAcceptedCommandListWithAttributeCache:endpoint:queue:completionHandler:")
+	_mTRBaseClusterAccountLoginSelReadAttributeAttributeListWithCompletionHandler                                                            = objc.RegisterName("readAttributeAttributeListWithCompletionHandler:")
+	_mTRBaseClusterAccountLoginSelSubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler        = objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterAccountLoginSelReadAttributeAttributeListWithAttributeCacheEndpointQueueCompletionHandler                                 = objc.RegisterName("readAttributeAttributeListWithAttributeCache:endpoint:queue:completionHandler:")
+	_mTRBaseClusterAccountLoginSelReadAttributeFeatureMapWithCompletionHandler                                                               = objc.RegisterName("readAttributeFeatureMapWithCompletionHandler:")
+	_mTRBaseClusterAccountLoginSelSubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler           = objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterAccountLoginSelReadAttributeFeatureMapWithAttributeCacheEndpointQueueCompletionHandler                                    = objc.RegisterName("readAttributeFeatureMapWithAttributeCache:endpoint:queue:completionHandler:")
+	_mTRBaseClusterAccountLoginSelReadAttributeClusterRevisionWithCompletionHandler                                                          = objc.RegisterName("readAttributeClusterRevisionWithCompletionHandler:")
+	_mTRBaseClusterAccountLoginSelSubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler      = objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterAccountLoginSelReadAttributeClusterRevisionWithAttributeCacheEndpointQueueCompletionHandler                               = objc.RegisterName("readAttributeClusterRevisionWithAttributeCache:endpoint:queue:completionHandler:")
 )
 
 func MTRBaseClusterAccountLoginFromID(id objc.ID) *MTRBaseClusterAccountLogin {
@@ -279,13 +279,17 @@ func MTRBaseClusterAccountLoginReadAttributeClusterRevisionWithClusterStateCache
 // For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func (o *MTRBaseClusterAccountLogin) InitWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterAccountLogin {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBaseClusterAccountLoginSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRBaseClusterAccountLoginFromID(_ret)
 }
 
 func (o *MTRBaseClusterAccountLogin) InitWithDeviceEndpointQueue(device *MTRBaseDevice, endpoint uint16, queue *foundation.NSObject) *MTRBaseClusterAccountLogin {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBaseClusterAccountLoginSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRBaseClusterAccountLoginFromID(_ret)
 }
 
@@ -490,4 +494,3 @@ func MTRBaseClusterAccountLoginReadAttributeClusterRevisionWithAttributeCacheEnd
 	}
 	objc.ID(_clsMTRBaseClusterAccountLogin).Send(_mTRBaseClusterAccountLoginSelReadAttributeClusterRevisionWithAttributeCacheEndpointQueueCompletionHandler, attributeCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), __block_completionHandler)
 }
-

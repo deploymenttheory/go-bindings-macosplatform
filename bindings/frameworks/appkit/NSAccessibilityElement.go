@@ -17,11 +17,11 @@ type NSAccessibilityElement struct {
 }
 
 var (
-	_clsNSAccessibilityElement = _objcClass("NSAccessibilityElement")
+	_clsNSAccessibilityElement                                             = _objcClass("NSAccessibilityElement")
 	_nSAccessibilityElementSelAccessibilityElementWithRoleFrameLabelParent = objc.RegisterName("accessibilityElementWithRole:frame:label:parent:")
-	_nSAccessibilityElementSelAccessibilityAddChildElement = objc.RegisterName("accessibilityAddChildElement:")
-	_nSAccessibilityElementSelAccessibilityFrameInParentSpace = objc.RegisterName("accessibilityFrameInParentSpace")
-	_nSAccessibilityElementSelSetAccessibilityFrameInParentSpace = objc.RegisterName("setAccessibilityFrameInParentSpace:")
+	_nSAccessibilityElementSelAccessibilityAddChildElement                 = objc.RegisterName("accessibilityAddChildElement:")
+	_nSAccessibilityElementSelAccessibilityFrameInParentSpace              = objc.RegisterName("accessibilityFrameInParentSpace")
+	_nSAccessibilityElementSelSetAccessibilityFrameInParentSpace           = objc.RegisterName("setAccessibilityFrameInParentSpace:")
 )
 
 func NSAccessibilityElementFromID(id objc.ID) *NSAccessibilityElement {
@@ -51,4 +51,3 @@ func (o *NSAccessibilityElement) AccessibilityFrameInParentSpace() corefoundatio
 func (o *NSAccessibilityElement) SetAccessibilityFrameInParentSpace(accessibilityFrameInParentSpace corefoundation.CGRect) {
 	o.Ptr().Send(_nSAccessibilityElementSelSetAccessibilityFrameInParentSpace, accessibilityFrameInParentSpace)
 }
-

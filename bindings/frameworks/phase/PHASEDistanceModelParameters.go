@@ -16,8 +16,8 @@ type PHASEDistanceModelParameters struct {
 }
 
 var (
-	_clsPHASEDistanceModelParameters = _objcClass("PHASEDistanceModelParameters")
-	_pHASEDistanceModelParametersSelFadeOutParameters = objc.RegisterName("fadeOutParameters")
+	_clsPHASEDistanceModelParameters                     = _objcClass("PHASEDistanceModelParameters")
+	_pHASEDistanceModelParametersSelFadeOutParameters    = objc.RegisterName("fadeOutParameters")
 	_pHASEDistanceModelParametersSelSetFadeOutParameters = objc.RegisterName("setFadeOutParameters:")
 )
 
@@ -33,11 +33,12 @@ func PHASEDistanceModelParametersFromID(id objc.ID) *PHASEDistanceModelParameter
 
 func (o *PHASEDistanceModelParameters) FadeOutParameters() *PHASEDistanceModelFadeOutParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEDistanceModelParametersSelFadeOutParameters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEDistanceModelFadeOutParametersFromID(_ret)
 }
 
 func (o *PHASEDistanceModelParameters) SetFadeOutParameters(fadeOutParameters *PHASEDistanceModelFadeOutParameters) {
 	o.Ptr().Send(_pHASEDistanceModelParametersSelSetFadeOutParameters, fadeOutParameters.Ptr())
 }
-

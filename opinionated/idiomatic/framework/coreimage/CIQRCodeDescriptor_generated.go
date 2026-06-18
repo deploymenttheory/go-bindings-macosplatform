@@ -57,7 +57,9 @@ func (x *QRCodeDescriptor) ErrorCorrectionLevel() raw.CIQRCodeErrorCorrectionLev
 	return x.inner.ErrorCorrectionLevel()
 }
 
-func (x *QRCodeDescriptor) asBarcodeDescriptor() *raw.CIBarcodeDescriptor { return &x.inner.CIBarcodeDescriptor }
+func (x *QRCodeDescriptor) asBarcodeDescriptor() *raw.CIBarcodeDescriptor {
+	return &x.inner.CIBarcodeDescriptor
+}
 
 // QRCodeDescriptorable is the interface implemented by [QRCodeDescriptor], for mocking and DI.
 type QRCodeDescriptorable interface {
@@ -69,4 +71,3 @@ type QRCodeDescriptorable interface {
 }
 
 var _ QRCodeDescriptorable = (*QRCodeDescriptor)(nil)
-

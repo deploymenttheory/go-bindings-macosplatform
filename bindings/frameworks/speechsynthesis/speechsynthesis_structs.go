@@ -11,20 +11,20 @@ import (
 
 type DelimiterInfo struct {
 	StartDelimiter [2]uint8
-	EndDelimiter [2]uint8
+	EndDelimiter   [2]uint8
 }
 
 type PhonemeDescriptor struct {
 	PhonemeCount int16
-	ThePhonemes [1]PhonemeInfo
+	ThePhonemes  [1]PhonemeInfo
 }
 
 type PhonemeInfo struct {
-	Opcode int16
-	PhStr [16]uint8
-	ExampleStr [32]uint8
+	Opcode      int16
+	PhStr       [16]uint8
+	ExampleStr  [32]uint8
 	HiliteStart int16
-	HiliteEnd int16
+	HiliteEnd   int16
 }
 
 type SpeechChannelRecord struct {
@@ -32,7 +32,7 @@ type SpeechChannelRecord struct {
 }
 
 type SpeechErrorInfo struct {
-	Count int16
+	Count  int16
 	Oldest int16
 	OldPos int
 	Newest int16
@@ -40,46 +40,45 @@ type SpeechErrorInfo struct {
 }
 
 type SpeechStatusInfo struct {
-	OutputBusy uint8
-	OutputPaused uint8
+	OutputBusy     uint8
+	OutputPaused   uint8
 	InputBytesLeft int
-	PhonemeCode int16
+	PhonemeCode    int16
 }
 
 type SpeechVersionInfo struct {
-	SynthType uint
-	SynthSubType uint
+	SynthType         uint
+	SynthSubType      uint
 	SynthManufacturer uint
-	SynthFlags int
-	SynthVersion unsafe.Pointer
+	SynthFlags        int
+	SynthVersion      unsafe.Pointer
 }
 
 type SpeechXtndData struct {
 	SynthCreator uint
-	SynthData [2]uint8
+	SynthData    [2]uint8
 }
 
 type VoiceDescription struct {
-	Length int
-	Voice VoiceSpec
-	Version int
-	Name [64]uint8
-	Comment [256]uint8
-	Gender int16
-	Age int16
-	Script int16
+	Length   int
+	Voice    VoiceSpec
+	Version  int
+	Name     [64]uint8
+	Comment  [256]uint8
+	Gender   int16
+	Age      int16
+	Script   int16
 	Language int16
-	Region int16
+	Region   int16
 	Reserved [4]int
 }
 
 type VoiceFileInfo struct {
 	FileSpec carboncore.FSSpec
-	ResID int16
+	ResID    int16
 }
 
 type VoiceSpec struct {
 	Creator uint
-	Id uint
+	Id      uint
 }
-

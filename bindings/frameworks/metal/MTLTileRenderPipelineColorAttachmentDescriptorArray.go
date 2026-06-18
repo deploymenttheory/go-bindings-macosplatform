@@ -16,8 +16,8 @@ type MTLTileRenderPipelineColorAttachmentDescriptorArray struct {
 }
 
 var (
-	_clsMTLTileRenderPipelineColorAttachmentDescriptorArray = _objcClass("MTLTileRenderPipelineColorAttachmentDescriptorArray")
-	_mTLTileRenderPipelineColorAttachmentDescriptorArraySelObjectAtIndexedSubscript = objc.RegisterName("objectAtIndexedSubscript:")
+	_clsMTLTileRenderPipelineColorAttachmentDescriptorArray                            = _objcClass("MTLTileRenderPipelineColorAttachmentDescriptorArray")
+	_mTLTileRenderPipelineColorAttachmentDescriptorArraySelObjectAtIndexedSubscript    = objc.RegisterName("objectAtIndexedSubscript:")
 	_mTLTileRenderPipelineColorAttachmentDescriptorArraySelSetObjectAtIndexedSubscript = objc.RegisterName("setObject:atIndexedSubscript:")
 )
 
@@ -33,11 +33,12 @@ func MTLTileRenderPipelineColorAttachmentDescriptorArrayFromID(id objc.ID) *MTLT
 
 func (o *MTLTileRenderPipelineColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *MTLTileRenderPipelineColorAttachmentDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLTileRenderPipelineColorAttachmentDescriptorArraySelObjectAtIndexedSubscript, attachmentIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLTileRenderPipelineColorAttachmentDescriptorFromID(_ret)
 }
 
 func (o *MTLTileRenderPipelineColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *MTLTileRenderPipelineColorAttachmentDescriptor, attachmentIndex uint) {
 	o.Ptr().Send(_mTLTileRenderPipelineColorAttachmentDescriptorArraySelSetObjectAtIndexedSubscript, attachment.Ptr(), attachmentIndex)
 }
-

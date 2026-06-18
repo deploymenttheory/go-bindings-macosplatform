@@ -192,11 +192,17 @@ func (x *CNNPoolingAverageGradient) SetZeroPadSizeY(zeroPadSizeY uint) {
 	x.inner.SetZeroPadSizeY(zeroPadSizeY)
 }
 
-func (x *CNNPoolingAverageGradient) asCNNPoolingGradient() *raw.MPSCNNPoolingGradient { return &x.inner.MPSCNNPoolingGradient }
+func (x *CNNPoolingAverageGradient) asCNNPoolingGradient() *raw.MPSCNNPoolingGradient {
+	return &x.inner.MPSCNNPoolingGradient
+}
 
-func (x *CNNPoolingAverageGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel { return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel }
+func (x *CNNPoolingAverageGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel
+}
 
-func (x *CNNPoolingAverageGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *CNNPoolingAverageGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
 // CNNPoolingAverageGradientable is the interface implemented by [CNNPoolingAverageGradient], for mocking and DI.
 type CNNPoolingAverageGradientable interface {
@@ -229,4 +235,3 @@ type CNNPoolingAverageGradientable interface {
 }
 
 var _ CNNPoolingAverageGradientable = (*CNNPoolingAverageGradient)(nil)
-

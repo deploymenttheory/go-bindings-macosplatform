@@ -16,10 +16,10 @@ type DOMRGBColor struct {
 }
 
 var (
-	_clsDOMRGBColor = _objcClass("DOMRGBColor")
-	_dOMRGBColorSelRed = objc.RegisterName("red")
+	_clsDOMRGBColor      = _objcClass("DOMRGBColor")
+	_dOMRGBColorSelRed   = objc.RegisterName("red")
 	_dOMRGBColorSelGreen = objc.RegisterName("green")
-	_dOMRGBColorSelBlue = objc.RegisterName("blue")
+	_dOMRGBColorSelBlue  = objc.RegisterName("blue")
 	_dOMRGBColorSelAlpha = objc.RegisterName("alpha")
 	_dOMRGBColorSelColor = objc.RegisterName("color")
 )
@@ -36,31 +36,40 @@ func DOMRGBColorFromID(id objc.ID) *DOMRGBColor {
 
 func (o *DOMRGBColor) Red() *DOMCSSPrimitiveValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMRGBColorSelRed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMCSSPrimitiveValueFromID(_ret)
 }
 
 func (o *DOMRGBColor) Green() *DOMCSSPrimitiveValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMRGBColorSelGreen)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMCSSPrimitiveValueFromID(_ret)
 }
 
 func (o *DOMRGBColor) Blue() *DOMCSSPrimitiveValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMRGBColorSelBlue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMCSSPrimitiveValueFromID(_ret)
 }
 
 func (o *DOMRGBColor) Alpha() *DOMCSSPrimitiveValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMRGBColorSelAlpha)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMCSSPrimitiveValueFromID(_ret)
 }
 
 func (o *DOMRGBColor) Color() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMRGBColorSelColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
-

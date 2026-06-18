@@ -16,9 +16,9 @@ type MTRCommandPath struct {
 }
 
 var (
-	_clsMTRCommandPath = _objcClass("MTRCommandPath")
+	_clsMTRCommandPath                                            = _objcClass("MTRCommandPath")
 	_mTRCommandPathSelCommandPathWithEndpointIDClusterIDCommandID = objc.RegisterName("commandPathWithEndpointID:clusterID:commandID:")
-	_mTRCommandPathSelCommand = objc.RegisterName("command")
+	_mTRCommandPathSelCommand                                     = objc.RegisterName("command")
 	_mTRCommandPathSelCommandPathWithEndpointIdClusterIdCommandId = objc.RegisterName("commandPathWithEndpointId:clusterId:commandId:")
 )
 
@@ -34,19 +34,24 @@ func MTRCommandPathFromID(id objc.ID) *MTRCommandPath {
 
 func MTRCommandPathCommandPathWithEndpointIDClusterIDCommandID(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, commandID *foundation.NSNumber) *MTRCommandPath {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRCommandPath), _mTRCommandPathSelCommandPathWithEndpointIDClusterIDCommandID, endpointID.Ptr(), clusterID.Ptr(), commandID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRCommandPathFromID(_ret)
 }
 
 func (o *MTRCommandPath) Command() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommandPathSelCommand)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func MTRCommandPathCommandPathWithEndpointIdClusterIdCommandId(endpointId *foundation.NSNumber, clusterId *foundation.NSNumber, commandId *foundation.NSNumber) *MTRCommandPath {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRCommandPath), _mTRCommandPathSelCommandPathWithEndpointIdClusterIdCommandId, endpointId.Ptr(), clusterId.Ptr(), commandId.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRCommandPathFromID(_ret)
 }
-

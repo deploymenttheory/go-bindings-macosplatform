@@ -83,9 +83,13 @@ func (x *MTRClusterMessages) ReadAttributeClusterRevisionWithParams(params *raw.
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterMessages) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterMessages) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterMessages) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterMessages) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterMessagesable is the interface implemented by [MTRClusterMessages], for mocking and DI.
 type MTRClusterMessagesable interface {
@@ -102,4 +106,3 @@ type MTRClusterMessagesable interface {
 }
 
 var _ MTRClusterMessagesable = (*MTRClusterMessages)(nil)
-

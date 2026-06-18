@@ -16,14 +16,14 @@ type AVAssetReaderOutputCaptionAdaptor struct {
 }
 
 var (
-	_clsAVAssetReaderOutputCaptionAdaptor = _objcClass("AVAssetReaderOutputCaptionAdaptor")
+	_clsAVAssetReaderOutputCaptionAdaptor                                                          = _objcClass("AVAssetReaderOutputCaptionAdaptor")
 	_aVAssetReaderOutputCaptionAdaptorSelAssetReaderOutputCaptionAdaptorWithAssetReaderTrackOutput = objc.RegisterName("assetReaderOutputCaptionAdaptorWithAssetReaderTrackOutput:")
-	_aVAssetReaderOutputCaptionAdaptorSelInitWithAssetReaderTrackOutput = objc.RegisterName("initWithAssetReaderTrackOutput:")
-	_aVAssetReaderOutputCaptionAdaptorSelNextCaptionGroup = objc.RegisterName("nextCaptionGroup")
-	_aVAssetReaderOutputCaptionAdaptorSelCaptionsNotPresentInPreviousGroupsInCaptionGroup = objc.RegisterName("captionsNotPresentInPreviousGroupsInCaptionGroup:")
-	_aVAssetReaderOutputCaptionAdaptorSelAssetReaderTrackOutput = objc.RegisterName("assetReaderTrackOutput")
-	_aVAssetReaderOutputCaptionAdaptorSelValidationDelegate = objc.RegisterName("validationDelegate")
-	_aVAssetReaderOutputCaptionAdaptorSelSetValidationDelegate = objc.RegisterName("setValidationDelegate:")
+	_aVAssetReaderOutputCaptionAdaptorSelInitWithAssetReaderTrackOutput                            = objc.RegisterName("initWithAssetReaderTrackOutput:")
+	_aVAssetReaderOutputCaptionAdaptorSelNextCaptionGroup                                          = objc.RegisterName("nextCaptionGroup")
+	_aVAssetReaderOutputCaptionAdaptorSelCaptionsNotPresentInPreviousGroupsInCaptionGroup          = objc.RegisterName("captionsNotPresentInPreviousGroupsInCaptionGroup:")
+	_aVAssetReaderOutputCaptionAdaptorSelAssetReaderTrackOutput                                    = objc.RegisterName("assetReaderTrackOutput")
+	_aVAssetReaderOutputCaptionAdaptorSelValidationDelegate                                        = objc.RegisterName("validationDelegate")
+	_aVAssetReaderOutputCaptionAdaptorSelSetValidationDelegate                                     = objc.RegisterName("setValidationDelegate:")
 )
 
 func AVAssetReaderOutputCaptionAdaptorFromID(id objc.ID) *AVAssetReaderOutputCaptionAdaptor {
@@ -39,35 +39,45 @@ func AVAssetReaderOutputCaptionAdaptorFromID(id objc.ID) *AVAssetReaderOutputCap
 // @method assetReaderOutputCaptionAdaptorWithAssetReaderTrackOutput: @abstract Creates a new caption adaptor for reading from the given track output. @param trackOutput The track output from which to read captions. @result A new instance of AVAssetReaderOutputCaptionAdaptor, configured to read captions from the given AVAssetReaderTrackOutput. @discussion It is an error to pass nil to this method.
 func AVAssetReaderOutputCaptionAdaptorAssetReaderOutputCaptionAdaptorWithAssetReaderTrackOutput(trackOutput *AVAssetReaderTrackOutput) *AVAssetReaderOutputCaptionAdaptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetReaderOutputCaptionAdaptor), _aVAssetReaderOutputCaptionAdaptorSelAssetReaderOutputCaptionAdaptorWithAssetReaderTrackOutput, trackOutput.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetReaderOutputCaptionAdaptorFromID(_ret)
 }
 
 // @method initWithAssetReaderTrackOutput: @abstract Creates a new caption adaptor for reading from the given track output. @param trackOutput The track output from which to read captions. @result A new instance of AVAssetReaderOutputCaptionAdaptor, configured to read captions from the given AVAssetReaderTrackOutput. @discussion It is an error to pass nil to this method.
 func (o *AVAssetReaderOutputCaptionAdaptor) InitWithAssetReaderTrackOutput(trackOutput *AVAssetReaderTrackOutput) *AVAssetReaderOutputCaptionAdaptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetReaderOutputCaptionAdaptorSelInitWithAssetReaderTrackOutput, trackOutput.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetReaderOutputCaptionAdaptorFromID(_ret)
 }
 
 // @method nextCaptionGroup @abstract Returns the next caption. @result An instance of AVCaption representing the next caption. @discussion The method returns the next caption group. This method throws an exception if the track output is not attached to an asset reader and reading has not yet begun.
 func (o *AVAssetReaderOutputCaptionAdaptor) NextCaptionGroup() *AVCaptionGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetReaderOutputCaptionAdaptorSelNextCaptionGroup)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptionGroupFromID(_ret)
 }
 
 // @method captionsNotPresentInPreviousGroupsInCaptionGroup: @abstract Returns the set of captions that are present in the given group but were not present in any group previously vended by calls to -nextCaptionGroup: on the receiver. @param captionGroup The group containing the captions of interest. @result An array of AVCaption objects. @discussion The returned array contains the set of captions in the given group whose time ranges have the same start time as the group.  This method is provided as a convenience for clients who want to process captions one-by-one and do not need a complete view of the set of captions active at a given time.
 func (o *AVAssetReaderOutputCaptionAdaptor) CaptionsNotPresentInPreviousGroupsInCaptionGroup(captionGroup *AVCaptionGroup) *foundation.NSArray[*AVCaption] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetReaderOutputCaptionAdaptorSelCaptionsNotPresentInPreviousGroupsInCaptionGroup, captionGroup.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVCaption](_ret)
 }
 
 // @property assetReaderTrackOutput @abstract The track output used to create the receiver.
 func (o *AVAssetReaderOutputCaptionAdaptor) AssetReaderTrackOutput() *AVAssetReaderTrackOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetReaderOutputCaptionAdaptorSelAssetReaderTrackOutput)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetReaderTrackOutputFromID(_ret)
 }
 
@@ -79,4 +89,3 @@ func (o *AVAssetReaderOutputCaptionAdaptor) ValidationDelegate() AVAssetReaderCa
 func (o *AVAssetReaderOutputCaptionAdaptor) SetValidationDelegate(validationDelegate AVAssetReaderCaptionValidationHandling) {
 	o.Ptr().Send(_aVAssetReaderOutputCaptionAdaptorSelSetValidationDelegate, validationDelegate)
 }
-

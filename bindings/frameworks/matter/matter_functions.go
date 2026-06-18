@@ -13,7 +13,7 @@ var (
 	// Resolve Matter attribute IDs into a descriptive string. For unknown IDs, a string '<Unknown clusterID %d>' (if the cluster ID is not known) or '<Unknown attributeID %d>' (if the cluster ID is known but the attribute ID is not known) will be returned.
 	_fnMTRAttributeNameForID func(MTRClusterIDType, MTRAttributeIDType) objc.ID
 	// Resolve Matter cluster IDs into a descriptive string. For unknown IDs, a string '<Unknown clusterID %d>' will be returned.
-	_fnMTRClusterNameForID func(MTRClusterIDType) objc.ID
+	_fnMTRClusterNameForID               func(MTRClusterIDType) objc.ID
 	_fnMTRDeviceControllerStorageClasses func() *foundation.NSSet[objc.Class]
 	// Resolve Matter event IDs into a descriptive string. For unknown IDs, a string '<Unknown clusterID %d>' (if the cluster ID is not known) or '<Unknown eventID %d>' (if the cluster ID is known but the event ID is not known) will be returned.
 	_fnMTREventNameForID func(MTRClusterIDType, MTREventIDType) objc.ID
@@ -30,14 +30,18 @@ var (
 // Resolve Matter attribute IDs into a descriptive string. For unknown IDs, a string '<Unknown clusterID %d>' (if the cluster ID is not known) or '<Unknown attributeID %d>' (if the cluster ID is known but the attribute ID is not known) will be returned.
 func MTRAttributeNameForID(clusterID MTRClusterIDType, attributeID MTRAttributeIDType) *foundation.NSString {
 	_ret := _fnMTRAttributeNameForID(clusterID, attributeID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Resolve Matter cluster IDs into a descriptive string. For unknown IDs, a string '<Unknown clusterID %d>' will be returned.
 func MTRClusterNameForID(clusterID MTRClusterIDType) *foundation.NSString {
 	_ret := _fnMTRClusterNameForID(clusterID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -48,21 +52,27 @@ func MTRDeviceControllerStorageClasses() *foundation.NSSet[objc.Class] {
 // Resolve Matter event IDs into a descriptive string. For unknown IDs, a string '<Unknown clusterID %d>' (if the cluster ID is not known) or '<Unknown eventID %d>' (if the cluster ID is known but the event ID is not known) will be returned.
 func MTREventNameForID(clusterID MTRClusterIDType, eventID MTREventIDType) *foundation.NSString {
 	_ret := _fnMTREventNameForID(clusterID, eventID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Resolve Matter request (client to server) command IDs into a descriptive string. For unknown IDs, a string '<Unknown clusterID %d>' (if the cluster ID is not known) or '<Unknown commandID %d>' (if the cluster ID is known but the command ID is not known) will be returned.
 func MTRRequestCommandNameForID(clusterID MTRClusterIDType, commandID MTRCommandIDType) *foundation.NSString {
 	_ret := _fnMTRRequestCommandNameForID(clusterID, commandID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Resolve Matter response (server to client) command IDs into a descriptive string. For unknown IDs, a string '<Unknown clusterID %d>' (if the cluster ID is not known) or '<Unknown commandID %d>' (if the cluster ID is known but the command ID is not known) will be returned.
 func MTRResponseCommandNameForID(clusterID MTRClusterIDType, commandID MTRCommandIDType) *foundation.NSString {
 	_ret := _fnMTRResponseCommandNameForID(clusterID, commandID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -88,4 +98,3 @@ func MTRSetLogCallback(logTypeThreshold MTRLogType, callback func(MTRLogType, *f
 func MTRSetMessageReliabilityParameters(idleRetransmitMs *foundation.NSNumber, activeRetransmitMs *foundation.NSNumber, activeThresholdMs *foundation.NSNumber, additionalRetransmitDelayMs *foundation.NSNumber) {
 	_fnMTRSetMessageReliabilityParameters(idleRetransmitMs.Ptr(), activeRetransmitMs.Ptr(), activeThresholdMs.Ptr(), additionalRetransmitDelayMs.Ptr())
 }
-

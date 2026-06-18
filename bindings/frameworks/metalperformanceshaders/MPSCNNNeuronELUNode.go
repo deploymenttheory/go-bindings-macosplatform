@@ -18,10 +18,10 @@ type MPSCNNNeuronELUNode struct {
 }
 
 var (
-	_clsMPSCNNNeuronELUNode = _objcClass("MPSCNNNeuronELUNode")
+	_clsMPSCNNNeuronELUNode                = _objcClass("MPSCNNNeuronELUNode")
 	_mPSCNNNeuronELUNodeSelNodeWithSourceA = objc.RegisterName("nodeWithSource:a:")
-	_mPSCNNNeuronELUNodeSelNodeWithSource = objc.RegisterName("nodeWithSource:")
-	_mPSCNNNeuronELUNodeSelInitWithSource = objc.RegisterName("initWithSource:")
+	_mPSCNNNeuronELUNodeSelNodeWithSource  = objc.RegisterName("nodeWithSource:")
+	_mPSCNNNeuronELUNodeSelInitWithSource  = objc.RegisterName("initWithSource:")
 	_mPSCNNNeuronELUNodeSelInitWithSourceA = objc.RegisterName("initWithSource:a:")
 )
 
@@ -37,27 +37,34 @@ func MPSCNNNeuronELUNodeFromID(id objc.ID) *MPSCNNNeuronELUNode {
 
 func MPSCNNNeuronELUNodeNodeWithSourceA(sourceNode *mpsneuralnetwork.MPSNNImageNode, a float32) *MPSCNNNeuronELUNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNNeuronELUNode), _mPSCNNNeuronELUNodeSelNodeWithSourceA, sourceNode.Ptr(), a)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronELUNodeFromID(_ret)
 }
 
 // @abstract Create an autoreleased node with default values for parameters a & b
 func MPSCNNNeuronELUNodeNodeWithSource(sourceNode *mpsneuralnetwork.MPSNNImageNode) *MPSCNNNeuronELUNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNNeuronELUNode), _mPSCNNNeuronELUNodeSelNodeWithSource, sourceNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronELUNodeFromID(_ret)
 }
 
 // @abstract Init a node with default values for parameters a & b
 func (o *MPSCNNNeuronELUNode) InitWithSource(sourceNode *mpsneuralnetwork.MPSNNImageNode) *MPSCNNNeuronELUNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronELUNodeSelInitWithSource, sourceNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronELUNodeFromID(_ret)
 }
 
 func (o *MPSCNNNeuronELUNode) InitWithSourceA(sourceNode *mpsneuralnetwork.MPSNNImageNode, a float32) *MPSCNNNeuronELUNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronELUNodeSelInitWithSourceA, sourceNode.Ptr(), a)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronELUNodeFromID(_ret)
 }
-

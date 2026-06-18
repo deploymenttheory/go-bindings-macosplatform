@@ -245,4 +245,3 @@ func MPSGraphStencilOpDescriptorDescriptorWithPaddingStyle(paddingStyle raw.MPSG
 	}
 	return &GraphStencilOpDescriptor{inner: _r}
 }
-

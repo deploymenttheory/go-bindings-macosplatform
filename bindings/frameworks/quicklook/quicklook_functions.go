@@ -14,113 +14,113 @@ import (
 
 var (
 	// @function QLPreviewRequestCopyContentUTI @abstract Returns the UTI for the preview request. @param preview The preview request. @result The UTI of the content being previewed, NULL if not available.
-// Deprecated: Use a QLPreviewingController in a Preview Extension to provide previews for your file types.
+	// Deprecated: Use a QLPreviewingController in a Preview Extension to provide previews for your file types.
 	_fnQLPreviewRequestCopyContentUTI func(unsafe.Pointer) unsafe.Pointer
 	// @function QLPreviewRequestCopyOptions @abstract Returns the desired options for the preview request. @param preview The preview request. @result The desired options for the preview request.
-// Deprecated: Use a QLPreviewingController in a Preview Extension to provide previews for your file types.
+	// Deprecated: Use a QLPreviewingController in a Preview Extension to provide previews for your file types.
 	_fnQLPreviewRequestCopyOptions func(unsafe.Pointer) unsafe.Pointer
 	// @function QLPreviewRequestCopyURL @abstract Returns the url of the file for the preview request. @param preview The preview request. @result The url of the file for the preview request.
-// Deprecated: Use a QLPreviewingController in a Preview Extension to provide previews for your file types.
+	// Deprecated: Use a QLPreviewingController in a Preview Extension to provide previews for your file types.
 	_fnQLPreviewRequestCopyURL func(unsafe.Pointer) unsafe.Pointer
 	// @function QLPreviewRequestCreateContext @abstract Creates a context to draw the preview in. Context should be flushed with QLPreviewRequestFlushContext() @param preview The preview request. @param size The size of the context. @param isBitmap true if preview is bitmap-based. @param properties Additional properties for the preview response.
-// Deprecated: Use a QLPreviewingController in a Preview Extension to provide previews for your file types.
+	// Deprecated: Use a QLPreviewingController in a Preview Extension to provide previews for your file types.
 	_fnQLPreviewRequestCreateContext func(unsafe.Pointer, corefoundation.CGSize, uint8, unsafe.Pointer) unsafe.Pointer
 	// @function QLPreviewRequestCreatePDFContext @abstract Creates a PDF context to draw the preview in, likely to be multi-pages. Context should be flushed with QLPreviewRequestFlushContext() @param preview The preview request. @param mediaBox The media box of the context. see CGPDFContextCreate(). @param auxiliaryInfo The PDF auxiliary info. see CGPDFContextCreate(). @param properties Additional properties for the preview response.
-// Deprecated: Use a QLPreviewingController in a Preview Extension to provide previews for your file types.
+	// Deprecated: Use a QLPreviewingController in a Preview Extension to provide previews for your file types.
 	_fnQLPreviewRequestCreatePDFContext func(unsafe.Pointer, *corefoundation.CGRect, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use a QLPreviewingController in a Preview Extension to provide previews for your file types.
+	// Deprecated: Use a QLPreviewingController in a Preview Extension to provide previews for your file types.
 	_fnQLPreviewRequestFlushContext func(unsafe.Pointer, unsafe.Pointer)
 	// @function QLPreviewRequestGetDocumentObject @abstract Get the object previously stored with QLPreviewRequestSetDocumentObject. @param preview The preview request. @result The object representing the document
-// Deprecated: Use a QLPreviewingController in a Preview Extension to provide previews for your file types.
+	// Deprecated: Use a QLPreviewingController in a Preview Extension to provide previews for your file types.
 	_fnQLPreviewRequestGetDocumentObject func(unsafe.Pointer) unsafe.Pointer
 	// @function QLPreviewRequestGetGeneratorBundle @abstract Gets the preview request generator bundle. @param preview The preview request.
-// Deprecated: Use a QLPreviewingController in a Preview Extension to provide previews for your file types.
+	// Deprecated: Use a QLPreviewingController in a Preview Extension to provide previews for your file types.
 	_fnQLPreviewRequestGetGeneratorBundle func(unsafe.Pointer) unsafe.Pointer
 	// @function QLPreviewRequestGetTypeID @abstract Returns the CoreFoundation type ID for QLPreviewRequests.
-// Deprecated: Use a QLPreviewingController in a Preview Extension to provide previews for your file types.
+	// Deprecated: Use a QLPreviewingController in a Preview Extension to provide previews for your file types.
 	_fnQLPreviewRequestGetTypeID func() uint
 	// @function QLPreviewRequestIsCancelled @abstract Returns wether the preview request was cancelled or not. @param preview The preview request. @result true if the request was cancelled.
-// Deprecated: Use a QLPreviewingController in a Preview Extension to provide previews for your file types.
+	// Deprecated: Use a QLPreviewingController in a Preview Extension to provide previews for your file types.
 	_fnQLPreviewRequestIsCancelled func(unsafe.Pointer) uint8
 	// @function QLPreviewRequestSetDataRepresentation @abstract Sets the preview response with the provided data. @param preview The preview request. @param data The content data. @param contentTypeUTI The contentTypeUTI for the preview representation. @param properties Additional properties for the preview response. @discussion Currently supported UTIs are: kUTTypeImage, kUTTypePDF, kUTTypeHTML, kUTTypeXML, kUTTypePlainText, kUTTypeRTF, kUTTypeMovie, kUTTypeAudio, and "org.khronos.collada.digital-asset-exchange" (from OSX 10.9)
-// Deprecated: Use a QLPreviewingController in a Preview Extension to provide previews for your file types.
+	// Deprecated: Use a QLPreviewingController in a Preview Extension to provide previews for your file types.
 	_fnQLPreviewRequestSetDataRepresentation func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 	// @function QLPreviewRequestSetDocumentObject @abstract Store some object in preview request. @param preview The preview request. @param object The object representing the document @param callbacks Callbacks to retain/release/etc. the object. @discussion You can only call this function once per request.
-// Deprecated: Use a QLPreviewingController in a Preview Extension to provide previews for your file types.
+	// Deprecated: Use a QLPreviewingController in a Preview Extension to provide previews for your file types.
 	_fnQLPreviewRequestSetDocumentObject func(unsafe.Pointer, unsafe.Pointer, *corefoundation.CFArrayCallBacks)
 	// @function QLPreviewRequestSetURLRepresentation @abstract Sets the preview request response with contents at url. @param preview The preview request. @param url The url to the preview response. @param contentTypeUTI The contentTypeUTI for the preview representation. @param properties Additional properties for the preview response. @discussion Currently supported UTIs are: kUTTypeImage, kUTTypePDF, kUTTypeHTML, kUTTypeXML, kUTTypePlainText, kUTTypeRTF, kUTTypeRTFD, kUTTypeMovie, kUTTypeAudio, and "org.khronos.collada.digital-asset-exchange" (from OSX 10.9)
-// Deprecated: Use a QLPreviewingController in a Preview Extension to provide previews for your file types.
+	// Deprecated: Use a QLPreviewingController in a Preview Extension to provide previews for your file types.
 	_fnQLPreviewRequestSetURLRepresentation func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-// Deprecated: Use [QLThumbnailGenerator cancelRequest:] in QuickLookThumbnailing.
+	// Deprecated: Use [QLThumbnailGenerator cancelRequest:] in QuickLookThumbnailing.
 	_fnQLThumbnailCancel func(unsafe.Pointer)
-// Deprecated: Use QuickLookThumbnailing for thumbnails.
+	// Deprecated: Use QuickLookThumbnailing for thumbnails.
 	_fnQLThumbnailCopyDocumentURL func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use QuickLookThumbnailing for thumbnails.
+	// Deprecated: Use QuickLookThumbnailing for thumbnails.
 	_fnQLThumbnailCopyImage func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use QuickLookThumbnailing for thumbnails.
+	// Deprecated: Use QuickLookThumbnailing for thumbnails.
 	_fnQLThumbnailCopyOptions func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use QLThumbnailGenerationRequest in QuickLookThumbnailing to generate thumbnails.
+	// Deprecated: Use QLThumbnailGenerationRequest in QuickLookThumbnailing to generate thumbnails.
 	_fnQLThumbnailCreate func(unsafe.Pointer, unsafe.Pointer, corefoundation.CGSize, unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use QLThumbnailGenerator in QuickLookThumbnailing to generate thumbnails.
+	// Deprecated: Use QLThumbnailGenerator in QuickLookThumbnailing to generate thumbnails.
 	_fnQLThumbnailDispatchAsync func(unsafe.Pointer, objc.ID, objc.Block)
-// Deprecated: Use QuickLookThumbnailing for thumbnails.
+	// Deprecated: Use QuickLookThumbnailing for thumbnails.
 	_fnQLThumbnailGetContentRect func(unsafe.Pointer) corefoundation.CGRect
-// Deprecated: Use QLThumbnailGenerationRequest in QuickLookThumbnailing.
+	// Deprecated: Use QLThumbnailGenerationRequest in QuickLookThumbnailing.
 	_fnQLThumbnailGetMaximumSize func(unsafe.Pointer) corefoundation.CGSize
-// Deprecated: Use QuickLookThumbnailing for thumbnails.
+	// Deprecated: Use QuickLookThumbnailing for thumbnails.
 	_fnQLThumbnailGetTypeID func() uint
 	// @function QLThumbnailImageCreate @abstract Creates a thumbnail for the designated file. Returns NULL if Quick Look does not support this file type. @param allocator The allocator to use to create the image. @param url The URL to the file. @param maxThumbnailSize The maximum desired size. @param options See options below. @result The thumbnail image. NULL if not available. @discussion QLThumbnailImageCreate() does not replace IconServices. Also QLThumbnailImageCreate() will block until the thumbnail is generated so you should consider calling it in a thread.
-// Deprecated: Use QuickLookThumbnailing to generate thumbnails for files.
+	// Deprecated: Use QuickLookThumbnailing to generate thumbnails for files.
 	_fnQLThumbnailImageCreate func(unsafe.Pointer, unsafe.Pointer, corefoundation.CGSize, unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use QuickLookThumbnailing for thumbnails.
+	// Deprecated: Use QuickLookThumbnailing for thumbnails.
 	_fnQLThumbnailIsCancelled func(unsafe.Pointer) uint8
 	// @function QLThumbnailRequestCopyContentUTI @abstract Returns the UTI for the thumbnail request. @param thumbnail The thumbnail request. @result The UTI of the content being thumbnailed, NULL if not available.
-// Deprecated: Use a QLFileThumbnailRequest in a Thumbnail Extension to provide thumbnails for your file types.
+	// Deprecated: Use a QLFileThumbnailRequest in a Thumbnail Extension to provide thumbnails for your file types.
 	_fnQLThumbnailRequestCopyContentUTI func(unsafe.Pointer) unsafe.Pointer
 	// @function QLThumbnailRequestCopyOptions @abstract Returns the desired options for the thumbnail request. @param thumbnail The thumbnail request. @result The desired options for the thumbnail request.
-// Deprecated: Use a QLFileThumbnailRequest in a Thumbnail Extension to provide thumbnails for your file types.
+	// Deprecated: Use a QLFileThumbnailRequest in a Thumbnail Extension to provide thumbnails for your file types.
 	_fnQLThumbnailRequestCopyOptions func(unsafe.Pointer) unsafe.Pointer
 	// @function QLThumbnailRequestCopyURL @abstract Returns the url of the file for the thumbnail request. @param thumbnail The thumbnail request. @result The url of the file for the thumbnail request.
-// Deprecated: Use a QLFileThumbnailRequest in a Thumbnail Extension to provide thumbnails for your file types.
+	// Deprecated: Use a QLFileThumbnailRequest in a Thumbnail Extension to provide thumbnails for your file types.
 	_fnQLThumbnailRequestCopyURL func(unsafe.Pointer) unsafe.Pointer
 	// @function QLThumbnailRequestCreateContext @abstract Creates a graphic context to draw the thumbnail response in. @param thumbnail The thumbnail request. @param size Size in points of the context for the thumbnail response. @param isBitmap True if thumbnail contents is based on bitmap. size will then be interpreted as pixels, not points. @param properties See possible properties below. @result A graphic context to draw to. @discussion Once the thumbnail is fully drawn, you should call QLThumbnailRequestFlushContext().
-// Deprecated: Use a QLThumbnailReply in a Thumbnail Extension to provide thumbnails for your file types.
+	// Deprecated: Use a QLThumbnailReply in a Thumbnail Extension to provide thumbnails for your file types.
 	_fnQLThumbnailRequestCreateContext func(unsafe.Pointer, corefoundation.CGSize, uint8, unsafe.Pointer) unsafe.Pointer
 	// @function QLThumbnailRequestFlushContext @abstract Flushes the graphic context and creates the thumbnail image response. @param thumbnail The thumbnail request. @param context The graphic context created by QLThumbnailRequestCreateContext().
-// Deprecated: Use a QLThumbnailReply in a Thumbnail Extension to provide thumbnails for your file types.
+	// Deprecated: Use a QLThumbnailReply in a Thumbnail Extension to provide thumbnails for your file types.
 	_fnQLThumbnailRequestFlushContext func(unsafe.Pointer, unsafe.Pointer)
 	// @function QLThumbnailRequestGetDocumentObject @abstract Get the object previously stored with QLThumbnailRequestSetDocumentObject. @param thumbnail The thumbnail request. @result The object representing the document
-// Deprecated: Use a QLFileThumbnailRequest in a Thumbnail Extension to provide thumbnails for your file types.
+	// Deprecated: Use a QLFileThumbnailRequest in a Thumbnail Extension to provide thumbnails for your file types.
 	_fnQLThumbnailRequestGetDocumentObject func(unsafe.Pointer) unsafe.Pointer
 	// @function QLThumbnailRequestGetGeneratorBundle @abstract Get the thumbnail request generator bundle. @param thumbnail The thumbnail request.
-// Deprecated: Use a QLFileThumbnailRequest in a Thumbnail Extension to provide thumbnails for your file types.
+	// Deprecated: Use a QLFileThumbnailRequest in a Thumbnail Extension to provide thumbnails for your file types.
 	_fnQLThumbnailRequestGetGeneratorBundle func(unsafe.Pointer) unsafe.Pointer
 	// @function QLThumbnailRequestGetMaximumSize @abstract Returns the maximum desired size (in points) for the thumbnail request. @param thumbnail The thumbnail request. @result The maximum desired size (in points) for the thumbnail request.
-// Deprecated: Use a QLFileThumbnailRequest in a Thumbnail Extension to provide thumbnails for your file types.
+	// Deprecated: Use a QLFileThumbnailRequest in a Thumbnail Extension to provide thumbnails for your file types.
 	_fnQLThumbnailRequestGetMaximumSize func(unsafe.Pointer) corefoundation.CGSize
 	// @function QLThumbnailRequestGetTypeID @abstract Returns the CoreFoundation type ID for QLThumbnailRequests.
-// Deprecated: Use a QLFileThumbnailRequest in a Thumbnail Extension to provide thumbnails for your file types.
+	// Deprecated: Use a QLFileThumbnailRequest in a Thumbnail Extension to provide thumbnails for your file types.
 	_fnQLThumbnailRequestGetTypeID func() uint
 	// @function QLThumbnailRequestIsCancelled @abstract Returns wether the thumbnail request was cancelled or not. @param thumbnail The thumbnail request. @result true if the request was cancelled.
-// Deprecated: Use a QLFileThumbnailRequest in a Thumbnail Extension to provide thumbnails for your file types.
+	// Deprecated: Use a QLFileThumbnailRequest in a Thumbnail Extension to provide thumbnails for your file types.
 	_fnQLThumbnailRequestIsCancelled func(unsafe.Pointer) uint8
 	// @function QLThumbnailRequestSetDocumentObject @abstract Store some object in thumbnail request. @param thumbnail The thumbnail request. @param object The object representing the document @param callbacks Callbacks to retain/release/etc. the object. @discussion You can only call this function once per request.
-// Deprecated: Use a QLFileThumbnailRequest in a Thumbnail Extension to provide thumbnails for your file types.
+	// Deprecated: Use a QLFileThumbnailRequest in a Thumbnail Extension to provide thumbnails for your file types.
 	_fnQLThumbnailRequestSetDocumentObject func(unsafe.Pointer, unsafe.Pointer, *corefoundation.CFArrayCallBacks)
 	// @function QLThumbnailRequestSetImage @abstract Sets the thumbnail request response to image. @param thumbnail The thumbnail request. @param image The thumbnail image response. @param properties See possible properties below.
-// Deprecated: Use a QLThumbnailReply in a Thumbnail Extension to provide thumbnails for your file types
+	// Deprecated: Use a QLThumbnailReply in a Thumbnail Extension to provide thumbnails for your file types
 	_fnQLThumbnailRequestSetImage func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 	// @function QLThumbnailRequestSetImageAtURL @abstract Sets the thumbnail request response to the image contained at url. @param thumbnail The thumbnail request. @param url The url to the thumbnail image response. @param properties Currently unused.
-// Deprecated: Use a QLThumbnailReply in a Thumbnail Extension to provide thumbnails for your file types.
+	// Deprecated: Use a QLThumbnailReply in a Thumbnail Extension to provide thumbnails for your file types.
 	_fnQLThumbnailRequestSetImageAtURL func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 	// @function QLThumbnailRequestSetImageWithData @abstract Sets the thumbnail request response to image data. @param thumbnail The thumbnail request. @param data The thumbnail image response as data. The image format should be supported by ImageIO @param properties See possible properties below. Additional useful properties: kCGImageSourceTypeIdentifierHint (see ImageIO documentation).
-// Deprecated: Use a QLThumbnailReply in a Thumbnail Extension to provide thumbnails for your file types.
+	// Deprecated: Use a QLThumbnailReply in a Thumbnail Extension to provide thumbnails for your file types.
 	_fnQLThumbnailRequestSetImageWithData func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 	// @function QLThumbnailRequestSetThumbnailWithDataRepresentation @abstract Sets the thumbnail request response to the image produced by the equivalent preview representation. @param thumbnail The thumbnail request. @param data The content data. @param contentTypeUTI The contentTypeUTI for the preview representation. @param previewProperties Additional properties for the preview response. @param properties Currently unused. @discussion Currently supported UTIs are: none. This call only works if your generator is set to be run in the main thread
-// Deprecated: Use a QLThumbnailReply in a Thumbnail Extension to provide thumbnails for your file types.
+	// Deprecated: Use a QLThumbnailReply in a Thumbnail Extension to provide thumbnails for your file types.
 	_fnQLThumbnailRequestSetThumbnailWithDataRepresentation func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 	// @function QLThumbnailRequestSetThumbnailWithURLRepresentation @abstract Sets the thumbnail request response to the image produced by the equivalent preview representation. @param thumbnail The thumbnail request. @param url The url to the preview response. @param contentTypeUTI The contentTypeUTI for the preview representation. @param properties Additional properties for the preview response. @discussion Currently supported UTIs are: none. This call only works if your generator is set to be run in the main thread
-// Deprecated: Use a QLThumbnailReply in a Thumbnail Extension to provide thumbnails for your file types.
+	// Deprecated: Use a QLThumbnailReply in a Thumbnail Extension to provide thumbnails for your file types.
 	_fnQLThumbnailRequestSetThumbnailWithURLRepresentation func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 )
 
@@ -359,4 +359,3 @@ func QLThumbnailRequestSetThumbnailWithDataRepresentation(thumbnail unsafe.Point
 func QLThumbnailRequestSetThumbnailWithURLRepresentation(thumbnail unsafe.Pointer, url unsafe.Pointer, contentTypeUTI unsafe.Pointer, previewProperties unsafe.Pointer, properties unsafe.Pointer) {
 	_fnQLThumbnailRequestSetThumbnailWithURLRepresentation(thumbnail, url, contentTypeUTI, previewProperties, properties)
 }
-

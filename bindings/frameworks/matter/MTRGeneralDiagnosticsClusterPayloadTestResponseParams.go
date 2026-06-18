@@ -18,10 +18,10 @@ type MTRGeneralDiagnosticsClusterPayloadTestResponseParams struct {
 }
 
 var (
-	_clsMTRGeneralDiagnosticsClusterPayloadTestResponseParams = _objcClass("MTRGeneralDiagnosticsClusterPayloadTestResponseParams")
+	_clsMTRGeneralDiagnosticsClusterPayloadTestResponseParams                           = _objcClass("MTRGeneralDiagnosticsClusterPayloadTestResponseParams")
 	_mTRGeneralDiagnosticsClusterPayloadTestResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRGeneralDiagnosticsClusterPayloadTestResponseParamsSelPayload = objc.RegisterName("payload")
-	_mTRGeneralDiagnosticsClusterPayloadTestResponseParamsSelSetPayload = objc.RegisterName("setPayload:")
+	_mTRGeneralDiagnosticsClusterPayloadTestResponseParamsSelPayload                    = objc.RegisterName("payload")
+	_mTRGeneralDiagnosticsClusterPayloadTestResponseParamsSelSetPayload                 = objc.RegisterName("setPayload:")
 )
 
 func MTRGeneralDiagnosticsClusterPayloadTestResponseParamsFromID(id objc.ID) *MTRGeneralDiagnosticsClusterPayloadTestResponseParams {
@@ -38,7 +38,9 @@ func MTRGeneralDiagnosticsClusterPayloadTestResponseParamsFromID(id objc.ID) *MT
 func (o *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRGeneralDiagnosticsClusterPayloadTestResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralDiagnosticsClusterPayloadTestResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -47,11 +49,12 @@ func (o *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) InitWithResponse
 
 func (o *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) Payload() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralDiagnosticsClusterPayloadTestResponseParamsSelPayload)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) SetPayload(payload *foundation.NSData) {
 	o.Ptr().Send(_mTRGeneralDiagnosticsClusterPayloadTestResponseParamsSelSetPayload, payload.Ptr())
 }
-

@@ -71,4 +71,3 @@ type SampleBufferGeneratorable interface {
 }
 
 var _ SampleBufferGeneratorable = (*SampleBufferGenerator)(nil)
-

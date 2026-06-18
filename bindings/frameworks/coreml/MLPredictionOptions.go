@@ -16,10 +16,10 @@ type MLPredictionOptions struct {
 }
 
 var (
-	_clsMLPredictionOptions = _objcClass("MLPredictionOptions")
-	_mLPredictionOptionsSelUsesCPUOnly = objc.RegisterName("usesCPUOnly")
-	_mLPredictionOptionsSelSetUsesCPUOnly = objc.RegisterName("setUsesCPUOnly:")
-	_mLPredictionOptionsSelOutputBackings = objc.RegisterName("outputBackings")
+	_clsMLPredictionOptions                  = _objcClass("MLPredictionOptions")
+	_mLPredictionOptionsSelUsesCPUOnly       = objc.RegisterName("usesCPUOnly")
+	_mLPredictionOptionsSelSetUsesCPUOnly    = objc.RegisterName("setUsesCPUOnly:")
+	_mLPredictionOptionsSelOutputBackings    = objc.RegisterName("outputBackings")
 	_mLPredictionOptionsSelSetOutputBackings = objc.RegisterName("setOutputBackings:")
 )
 
@@ -54,4 +54,3 @@ func (o *MLPredictionOptions) OutputBackings() *foundation.NSDictionary[*foundat
 func (o *MLPredictionOptions) SetOutputBackings(outputBackings *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	o.Ptr().Send(_mLPredictionOptionsSelSetOutputBackings, outputBackings)
 }
-

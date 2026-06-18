@@ -61,4 +61,3 @@ type Descriptorable interface {
 }
 
 var _ Descriptorable = (*Descriptor)(nil)
-

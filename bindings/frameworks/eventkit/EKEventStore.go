@@ -18,45 +18,45 @@ type EKEventStore struct {
 }
 
 var (
-	_clsEKEventStore = _objcClass("EKEventStore")
-	_eKEventStoreSelAuthorizationStatusForEntityType = objc.RegisterName("authorizationStatusForEntityType:")
-	_eKEventStoreSelInitWithAccessToEntityTypes = objc.RegisterName("initWithAccessToEntityTypes:")
-	_eKEventStoreSelInit = objc.RegisterName("init")
-	_eKEventStoreSelInitWithSources = objc.RegisterName("initWithSources:")
-	_eKEventStoreSelRequestFullAccessToEventsWithCompletion = objc.RegisterName("requestFullAccessToEventsWithCompletion:")
-	_eKEventStoreSelRequestWriteOnlyAccessToEventsWithCompletion = objc.RegisterName("requestWriteOnlyAccessToEventsWithCompletion:")
-	_eKEventStoreSelRequestFullAccessToRemindersWithCompletion = objc.RegisterName("requestFullAccessToRemindersWithCompletion:")
-	_eKEventStoreSelRequestAccessToEntityTypeCompletion = objc.RegisterName("requestAccessToEntityType:completion:")
-	_eKEventStoreSelSourceWithIdentifier = objc.RegisterName("sourceWithIdentifier:")
-	_eKEventStoreSelCalendarsForEntityType = objc.RegisterName("calendarsForEntityType:")
-	_eKEventStoreSelDefaultCalendarForNewReminders = objc.RegisterName("defaultCalendarForNewReminders")
-	_eKEventStoreSelCalendarWithIdentifier = objc.RegisterName("calendarWithIdentifier:")
-	_eKEventStoreSelSaveCalendarCommitError = objc.RegisterName("saveCalendar:commit:error:")
-	_eKEventStoreSelRemoveCalendarCommitError = objc.RegisterName("removeCalendar:commit:error:")
-	_eKEventStoreSelCalendarItemWithIdentifier = objc.RegisterName("calendarItemWithIdentifier:")
-	_eKEventStoreSelCalendarItemsWithExternalIdentifier = objc.RegisterName("calendarItemsWithExternalIdentifier:")
-	_eKEventStoreSelSaveEventSpanError = objc.RegisterName("saveEvent:span:error:")
-	_eKEventStoreSelRemoveEventSpanError = objc.RegisterName("removeEvent:span:error:")
-	_eKEventStoreSelSaveEventSpanCommitError = objc.RegisterName("saveEvent:span:commit:error:")
-	_eKEventStoreSelRemoveEventSpanCommitError = objc.RegisterName("removeEvent:span:commit:error:")
-	_eKEventStoreSelEventWithIdentifier = objc.RegisterName("eventWithIdentifier:")
-	_eKEventStoreSelEventsMatchingPredicate = objc.RegisterName("eventsMatchingPredicate:")
-	_eKEventStoreSelEnumerateEventsMatchingPredicateUsing = objc.RegisterName("enumerateEventsMatchingPredicate:usingBlock:")
-	_eKEventStoreSelPredicateForEventsWithStartDateEndDateCalendars = objc.RegisterName("predicateForEventsWithStartDate:endDate:calendars:")
-	_eKEventStoreSelSaveReminderCommitError = objc.RegisterName("saveReminder:commit:error:")
-	_eKEventStoreSelRemoveReminderCommitError = objc.RegisterName("removeReminder:commit:error:")
-	_eKEventStoreSelFetchRemindersMatchingPredicateCompletion = objc.RegisterName("fetchRemindersMatchingPredicate:completion:")
-	_eKEventStoreSelCancelFetchRequest = objc.RegisterName("cancelFetchRequest:")
-	_eKEventStoreSelPredicateForRemindersInCalendars = objc.RegisterName("predicateForRemindersInCalendars:")
-	_eKEventStoreSelPredicateForIncompleteRemindersWithDueDateStartingEndingCalendars = objc.RegisterName("predicateForIncompleteRemindersWithDueDateStarting:ending:calendars:")
+	_clsEKEventStore                                                                        = _objcClass("EKEventStore")
+	_eKEventStoreSelAuthorizationStatusForEntityType                                        = objc.RegisterName("authorizationStatusForEntityType:")
+	_eKEventStoreSelInitWithAccessToEntityTypes                                             = objc.RegisterName("initWithAccessToEntityTypes:")
+	_eKEventStoreSelInit                                                                    = objc.RegisterName("init")
+	_eKEventStoreSelInitWithSources                                                         = objc.RegisterName("initWithSources:")
+	_eKEventStoreSelRequestFullAccessToEventsWithCompletion                                 = objc.RegisterName("requestFullAccessToEventsWithCompletion:")
+	_eKEventStoreSelRequestWriteOnlyAccessToEventsWithCompletion                            = objc.RegisterName("requestWriteOnlyAccessToEventsWithCompletion:")
+	_eKEventStoreSelRequestFullAccessToRemindersWithCompletion                              = objc.RegisterName("requestFullAccessToRemindersWithCompletion:")
+	_eKEventStoreSelRequestAccessToEntityTypeCompletion                                     = objc.RegisterName("requestAccessToEntityType:completion:")
+	_eKEventStoreSelSourceWithIdentifier                                                    = objc.RegisterName("sourceWithIdentifier:")
+	_eKEventStoreSelCalendarsForEntityType                                                  = objc.RegisterName("calendarsForEntityType:")
+	_eKEventStoreSelDefaultCalendarForNewReminders                                          = objc.RegisterName("defaultCalendarForNewReminders")
+	_eKEventStoreSelCalendarWithIdentifier                                                  = objc.RegisterName("calendarWithIdentifier:")
+	_eKEventStoreSelSaveCalendarCommitError                                                 = objc.RegisterName("saveCalendar:commit:error:")
+	_eKEventStoreSelRemoveCalendarCommitError                                               = objc.RegisterName("removeCalendar:commit:error:")
+	_eKEventStoreSelCalendarItemWithIdentifier                                              = objc.RegisterName("calendarItemWithIdentifier:")
+	_eKEventStoreSelCalendarItemsWithExternalIdentifier                                     = objc.RegisterName("calendarItemsWithExternalIdentifier:")
+	_eKEventStoreSelSaveEventSpanError                                                      = objc.RegisterName("saveEvent:span:error:")
+	_eKEventStoreSelRemoveEventSpanError                                                    = objc.RegisterName("removeEvent:span:error:")
+	_eKEventStoreSelSaveEventSpanCommitError                                                = objc.RegisterName("saveEvent:span:commit:error:")
+	_eKEventStoreSelRemoveEventSpanCommitError                                              = objc.RegisterName("removeEvent:span:commit:error:")
+	_eKEventStoreSelEventWithIdentifier                                                     = objc.RegisterName("eventWithIdentifier:")
+	_eKEventStoreSelEventsMatchingPredicate                                                 = objc.RegisterName("eventsMatchingPredicate:")
+	_eKEventStoreSelEnumerateEventsMatchingPredicateUsing                                   = objc.RegisterName("enumerateEventsMatchingPredicate:usingBlock:")
+	_eKEventStoreSelPredicateForEventsWithStartDateEndDateCalendars                         = objc.RegisterName("predicateForEventsWithStartDate:endDate:calendars:")
+	_eKEventStoreSelSaveReminderCommitError                                                 = objc.RegisterName("saveReminder:commit:error:")
+	_eKEventStoreSelRemoveReminderCommitError                                               = objc.RegisterName("removeReminder:commit:error:")
+	_eKEventStoreSelFetchRemindersMatchingPredicateCompletion                               = objc.RegisterName("fetchRemindersMatchingPredicate:completion:")
+	_eKEventStoreSelCancelFetchRequest                                                      = objc.RegisterName("cancelFetchRequest:")
+	_eKEventStoreSelPredicateForRemindersInCalendars                                        = objc.RegisterName("predicateForRemindersInCalendars:")
+	_eKEventStoreSelPredicateForIncompleteRemindersWithDueDateStartingEndingCalendars       = objc.RegisterName("predicateForIncompleteRemindersWithDueDateStarting:ending:calendars:")
 	_eKEventStoreSelPredicateForCompletedRemindersWithCompletionDateStartingEndingCalendars = objc.RegisterName("predicateForCompletedRemindersWithCompletionDateStarting:ending:calendars:")
-	_eKEventStoreSelCommit = objc.RegisterName("commit:")
-	_eKEventStoreSelReset = objc.RegisterName("reset")
-	_eKEventStoreSelRefreshSourcesIfNecessary = objc.RegisterName("refreshSourcesIfNecessary")
-	_eKEventStoreSelEventStoreIdentifier = objc.RegisterName("eventStoreIdentifier")
-	_eKEventStoreSelDelegateSources = objc.RegisterName("delegateSources")
-	_eKEventStoreSelSources = objc.RegisterName("sources")
-	_eKEventStoreSelDefaultCalendarForNewEvents = objc.RegisterName("defaultCalendarForNewEvents")
+	_eKEventStoreSelCommit                                                                  = objc.RegisterName("commit:")
+	_eKEventStoreSelReset                                                                   = objc.RegisterName("reset")
+	_eKEventStoreSelRefreshSourcesIfNecessary                                               = objc.RegisterName("refreshSourcesIfNecessary")
+	_eKEventStoreSelEventStoreIdentifier                                                    = objc.RegisterName("eventStoreIdentifier")
+	_eKEventStoreSelDelegateSources                                                         = objc.RegisterName("delegateSources")
+	_eKEventStoreSelSources                                                                 = objc.RegisterName("sources")
+	_eKEventStoreSelDefaultCalendarForNewEvents                                             = objc.RegisterName("defaultCalendarForNewEvents")
 )
 
 func EKEventStoreFromID(id objc.ID) *EKEventStore {
@@ -90,7 +90,9 @@ func (o *EKEventStore) Init() objc.ID {
 // @method     initWithSources: @abstract   Creates a new event store that only includes items and calendars for a subset of sources. @param      sources The sources you want this event store to recognize. This may include delegate sources.
 func (o *EKEventStore) InitWithSources(sources *foundation.NSArray[*EKSource]) *EKEventStore {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelInitWithSources, sources.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EKEventStoreFromID(_ret)
 }
 
@@ -142,28 +144,36 @@ func (o *EKEventStore) RequestAccessToEntityTypeCompletion(entityType EKEntityTy
 // @method     sourceWithIdentifier: @abstract   Returns a source with a specified identifier.
 func (o *EKEventStore) SourceWithIdentifier(identifier *foundation.NSString) *EKSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelSourceWithIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EKSourceFromID(_ret)
 }
 
 // @method     calendarsForEntityType @abstract   Returns calendars that support a given entity type (reminders, events)
 func (o *EKEventStore) CalendarsForEntityType(entityType EKEntityType) *foundation.NSArray[*EKCalendar] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelCalendarsForEntityType, entityType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*EKCalendar](_ret)
 }
 
 // @method     defaultCalendarForNewReminders @abstract   Returns the calendar that reminders should be added to by default. @discussion This may be nil if there is no default calendar for new reminders.
 func (o *EKEventStore) DefaultCalendarForNewReminders() *EKCalendar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelDefaultCalendarForNewReminders)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EKCalendarFromID(_ret)
 }
 
 // @method     calendarWithIdentifier: @abstract   Returns a calendar with a specified identifier.
 func (o *EKEventStore) CalendarWithIdentifier(identifier *foundation.NSString) *EKCalendar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelCalendarWithIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EKCalendarFromID(_ret)
 }
 
@@ -190,14 +200,18 @@ func (o *EKEventStore) RemoveCalendarCommitError(calendar *EKCalendar, commit bo
 // @method     calendarItemWithIdentifier: @abstract   Returns either a reminder or the first occurrence of an event.
 func (o *EKEventStore) CalendarItemWithIdentifier(identifier *foundation.NSString) *EKCalendarItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelCalendarItemWithIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EKCalendarItemFromID(_ret)
 }
 
 // @method     calendarItemsWithExternalIdentifier: @abstract   Returns either matching reminders or the first occurrences of any events matching the given external identifier. @discussion This method returns a set of EKEvents or EKReminders with the given external identifier. Due to reasons discussed in -[EKCalendarItem calendarItemExternalIdentifier], there may be more than one matching calendar item. @param      externalIdentifier  The value obtained from EKCalendarItem's calendarItemExternalIdentifier property @result     An unsorted array of EKCalendarItem instances
 func (o *EKEventStore) CalendarItemsWithExternalIdentifier(externalIdentifier *foundation.NSString) *foundation.NSArray[*EKCalendarItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelCalendarItemsWithExternalIdentifier, externalIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*EKCalendarItem](_ret)
 }
 
@@ -242,14 +256,18 @@ func (o *EKEventStore) RemoveEventSpanCommitError(event *EKEvent, span EKSpan, c
 // @method     eventWithIdentifier: @abstract   Returns the first occurrence of an event matching the given event identifier. @param      identifier   The eventIdentifier to search for. @result     An EKEvent object, or nil if not found.
 func (o *EKEventStore) EventWithIdentifier(identifier *foundation.NSString) *EKEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelEventWithIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EKEventFromID(_ret)
 }
 
 // @method     eventsMatchingPredicate: @abstract   Searches for events that match the given predicate. @discussion This call executes a search for the events indicated by the predicate passed to it. It is synchronous. If you want async behavior, you should either use dispatch_async or NSOperation to run the query someplace other than the main thread, and then funnel the array back to the main thread. @param      predicate   The predicate to invoke. If this predicate was not created with the predicate creation functions in this class, an exception is raised. @result     An array of EKEvent objects, or nil. There is no guaranteed order to the events.
 func (o *EKEventStore) EventsMatchingPredicate(predicate *foundation.NSPredicate) *foundation.NSArray[*EKEvent] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelEventsMatchingPredicate, predicate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*EKEvent](_ret)
 }
 
@@ -271,7 +289,9 @@ func (o *EKEventStore) EnumerateEventsMatchingPredicateUsing(predicate *foundati
 // @method     predicateForEventsWithStartDate:endDate:calendars: @abstract   Creates a predicate for use with eventsMatchingPredicate or enumerateEventsMatchingPredicate:usingBlock:. @discussion Creates a simple query predicate to search for events within a certain date range. At present, this will return events in the default time zone ([NSTimeZone defaultTimeZone]). For performance reasons, this method will only return events within a four year timespan. If the date range between the startDate and endDate is greater than four years, then it will be shortened to the first four years. @param      startDate   The start date. @param      endDate     The end date. @param      calendars   The calendars to search for events in, or nil to search all calendars.
 func (o *EKEventStore) PredicateForEventsWithStartDateEndDateCalendars(startDate *foundation.NSDate, endDate *foundation.NSDate, calendars *foundation.NSArray[*EKCalendar]) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelPredicateForEventsWithStartDateEndDateCalendars, startDate.Ptr(), endDate.Ptr(), calendars.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
@@ -319,21 +339,27 @@ func (o *EKEventStore) CancelFetchRequest(fetchIdentifier objc.ID) {
 // @method     predicateForRemindersInCalendars: @abstract   Fetch all reminders in a set of calendars. @discussion You can pass nil for calendars to fetch from all available calendars.
 func (o *EKEventStore) PredicateForRemindersInCalendars(calendars *foundation.NSArray[*EKCalendar]) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelPredicateForRemindersInCalendars, calendars.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
 // @method     predicateForIncompleteRemindersWithDueDateStarting:ending:calendars: @abstract   Fetch incomplete reminders in a set of calendars. @discussion You can use this method to search for incomplete reminders due in a range. You can pass nil for start date to find all reminders due before endDate. You can pass nil for both start and end date to get all incomplete reminders in the specified calendars. You can pass nil for calendars to fetch from all available calendars.
 func (o *EKEventStore) PredicateForIncompleteRemindersWithDueDateStartingEndingCalendars(startDate *foundation.NSDate, endDate *foundation.NSDate, calendars *foundation.NSArray[*EKCalendar]) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelPredicateForIncompleteRemindersWithDueDateStartingEndingCalendars, startDate.Ptr(), endDate.Ptr(), calendars.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
 // @method     predicateForCompletedRemindersWithCompletionDateStarting:ending:calendars: @abstract   Fetch completed reminders in a set of calendars. @discussion You can use this method to search for reminders completed between a range of dates. You can pass nil for start date to find all reminders completed before endDate. You can pass nil for both start and end date to get all completed reminders in the specified calendars. You can pass nil for calendars to fetch from all available calendars.
 func (o *EKEventStore) PredicateForCompletedRemindersWithCompletionDateStartingEndingCalendars(startDate *foundation.NSDate, endDate *foundation.NSDate, calendars *foundation.NSArray[*EKCalendar]) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelPredicateForCompletedRemindersWithCompletionDateStartingEndingCalendars, startDate.Ptr(), endDate.Ptr(), calendars.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
@@ -360,28 +386,35 @@ func (o *EKEventStore) RefreshSourcesIfNecessary() {
 // @property   eventStoreIdentifier @abstract   Returns a unique identifier string representing this calendar store.
 func (o *EKEventStore) EventStoreIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelEventStoreIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property   delegateSources @abstract   Returns an unordered array of sources for all available delegates.
 func (o *EKEventStore) DelegateSources() *foundation.NSArray[*EKSource] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelDelegateSources)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*EKSource](_ret)
 }
 
 // @property   sources @abstract   Returns an unordered array of sources.
 func (o *EKEventStore) Sources() *foundation.NSArray[*EKSource] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelSources)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*EKSource](_ret)
 }
 
 // @property   defaultCalendarForNewEvents @abstract   Returns the calendar that events should be added to by default. @discussion This may be nil if there is no default calendar for new events.
 func (o *EKEventStore) DefaultCalendarForNewEvents() *EKCalendar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelDefaultCalendarForNewEvents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EKCalendarFromID(_ret)
 }
-

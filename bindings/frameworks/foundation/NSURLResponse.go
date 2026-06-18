@@ -15,13 +15,13 @@ type NSURLResponse struct {
 }
 
 var (
-	_clsNSURLResponse = _objcClass("NSURLResponse")
+	_clsNSURLResponse                                                         = _objcClass("NSURLResponse")
 	_nSURLResponseSelInitWithURLMIMETypeExpectedContentLengthTextEncodingName = objc.RegisterName("initWithURL:MIMEType:expectedContentLength:textEncodingName:")
-	_nSURLResponseSelURL = objc.RegisterName("URL")
-	_nSURLResponseSelMIMEType = objc.RegisterName("MIMEType")
-	_nSURLResponseSelExpectedContentLength = objc.RegisterName("expectedContentLength")
-	_nSURLResponseSelTextEncodingName = objc.RegisterName("textEncodingName")
-	_nSURLResponseSelSuggestedFilename = objc.RegisterName("suggestedFilename")
+	_nSURLResponseSelURL                                                      = objc.RegisterName("URL")
+	_nSURLResponseSelMIMEType                                                 = objc.RegisterName("MIMEType")
+	_nSURLResponseSelExpectedContentLength                                    = objc.RegisterName("expectedContentLength")
+	_nSURLResponseSelTextEncodingName                                         = objc.RegisterName("textEncodingName")
+	_nSURLResponseSelSuggestedFilename                                        = objc.RegisterName("suggestedFilename")
 )
 
 func NSURLResponseFromID(id objc.ID) *NSURLResponse {
@@ -37,21 +37,27 @@ func NSURLResponseFromID(id objc.ID) *NSURLResponse {
 // @method initWithURL:MIMEType:expectedContentLength:textEncodingName: @abstract Initialize an NSURLResponse with the provided values. @param URL the URL @param MIMEType the MIME content type of the response @param length the expected content length of the associated data @param name the name of the text encoding for the associated data, if applicable, else nil @result The initialized NSURLResponse. @discussion This is the designated initializer for NSURLResponse.
 func (o *NSURLResponse) InitWithURLMIMETypeExpectedContentLengthTextEncodingName(uRL *NSURL, mIMEType *NSString, length int, name *NSString) *NSURLResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLResponseSelInitWithURLMIMETypeExpectedContentLengthTextEncodingName, uRL.Ptr(), mIMEType.Ptr(), length, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLResponseFromID(_ret)
 }
 
 // @abstract Returns the URL of the receiver. @result The URL of the receiver.
 func (o *NSURLResponse) URL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLResponseSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 // @abstract Returns the MIME type of the receiver. @discussion The MIME type is based on the information provided from an origin source. However, that value may be changed or corrected by a protocol implementation if it can be determined that the origin server or source reported the information incorrectly or imprecisely. An attempt to guess the MIME type may be made if the origin source did not report any such information. @result The MIME type of the receiver.
 func (o *NSURLResponse) MIMEType() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLResponseSelMIMEType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -64,14 +70,17 @@ func (o *NSURLResponse) ExpectedContentLength() int64 {
 // @abstract Returns the name of the text encoding of the receiver. @discussion This name will be the actual string reported by the origin source during the course of performing a protocol-specific URL load. Clients can inspect this string and convert it to an NSStringEncoding or CFStringEncoding using the methods and functions made available in the appropriate framework. @result The name of the text encoding of the receiver, or nil if no text encoding was specified.
 func (o *NSURLResponse) TextEncodingName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLResponseSelTextEncodingName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // @abstract Returns a suggested filename if the resource were saved to disk. @discussion The method first checks if the server has specified a filename using the content disposition header. If no valid filename is specified using that mechanism, this method checks the last path component of the URL. If no valid filename can be obtained using the last path component, this method uses the URL's host as the filename. If the URL's host can't be converted to a valid filename, the filename "unknown" is used. In most cases, this method appends the proper file extension based on the MIME type. This method always returns a valid filename. @result A suggested filename to use if saving the resource to disk.
 func (o *NSURLResponse) SuggestedFilename() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLResponseSelSuggestedFilename)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
-

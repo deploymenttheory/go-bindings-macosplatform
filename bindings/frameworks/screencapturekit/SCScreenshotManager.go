@@ -19,12 +19,12 @@ type SCScreenshotManager struct {
 }
 
 var (
-	_clsSCScreenshotManager = _objcClass("SCScreenshotManager")
+	_clsSCScreenshotManager                                                            = _objcClass("SCScreenshotManager")
 	_sCScreenshotManagerSelCaptureSampleBufferWithFilterConfigurationCompletionHandler = objc.RegisterName("captureSampleBufferWithFilter:configuration:completionHandler:")
-	_sCScreenshotManagerSelCaptureImageWithFilterConfigurationCompletionHandler = objc.RegisterName("captureImageWithFilter:configuration:completionHandler:")
-	_sCScreenshotManagerSelCaptureImageInRectCompletionHandler = objc.RegisterName("captureImageInRect:completionHandler:")
-	_sCScreenshotManagerSelCaptureScreenshotWithFilterConfigurationCompletionHandler = objc.RegisterName("captureScreenshotWithFilter:configuration:completionHandler:")
-	_sCScreenshotManagerSelCaptureScreenshotWithRectConfigurationCompletionHandler = objc.RegisterName("captureScreenshotWithRect:configuration:completionHandler:")
+	_sCScreenshotManagerSelCaptureImageWithFilterConfigurationCompletionHandler        = objc.RegisterName("captureImageWithFilter:configuration:completionHandler:")
+	_sCScreenshotManagerSelCaptureImageInRectCompletionHandler                         = objc.RegisterName("captureImageInRect:completionHandler:")
+	_sCScreenshotManagerSelCaptureScreenshotWithFilterConfigurationCompletionHandler   = objc.RegisterName("captureScreenshotWithFilter:configuration:completionHandler:")
+	_sCScreenshotManagerSelCaptureScreenshotWithRectConfigurationCompletionHandler     = objc.RegisterName("captureScreenshotWithRect:configuration:completionHandler:")
 )
 
 func SCScreenshotManagerFromID(id objc.ID) *SCScreenshotManager {
@@ -102,4 +102,3 @@ func SCScreenshotManagerCaptureScreenshotWithRectConfigurationCompletionHandler(
 	}
 	objc.ID(_clsSCScreenshotManager).Send(_sCScreenshotManagerSelCaptureScreenshotWithRectConfigurationCompletionHandler, rect, config.Ptr(), __block_completionHandler)
 }
-

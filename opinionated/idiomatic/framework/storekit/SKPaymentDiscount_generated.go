@@ -86,4 +86,3 @@ type PaymentDiscountable interface {
 }
 
 var _ PaymentDiscountable = (*PaymentDiscount)(nil)
-

@@ -18,19 +18,19 @@ type AVB17221EntityDiscovery struct {
 }
 
 var (
-	_clsAVB17221EntityDiscovery = _objcClass("AVB17221EntityDiscovery")
-	_aVB17221EntityDiscoverySelInitWithInterfaceName = objc.RegisterName("initWithInterfaceName:")
-	_aVB17221EntityDiscoverySelPrimeIterators = objc.RegisterName("primeIterators")
-	_aVB17221EntityDiscoverySelDiscoverEntities = objc.RegisterName("discoverEntities")
-	_aVB17221EntityDiscoverySelDiscoverEntity = objc.RegisterName("discoverEntity:")
-	_aVB17221EntityDiscoverySelAddLocalEntityError = objc.RegisterName("addLocalEntity:error:")
-	_aVB17221EntityDiscoverySelRemoveLocalEntityError = objc.RegisterName("removeLocalEntity:error:")
+	_clsAVB17221EntityDiscovery                                                    = _objcClass("AVB17221EntityDiscovery")
+	_aVB17221EntityDiscoverySelInitWithInterfaceName                               = objc.RegisterName("initWithInterfaceName:")
+	_aVB17221EntityDiscoverySelPrimeIterators                                      = objc.RegisterName("primeIterators")
+	_aVB17221EntityDiscoverySelDiscoverEntities                                    = objc.RegisterName("discoverEntities")
+	_aVB17221EntityDiscoverySelDiscoverEntity                                      = objc.RegisterName("discoverEntity:")
+	_aVB17221EntityDiscoverySelAddLocalEntityError                                 = objc.RegisterName("addLocalEntity:error:")
+	_aVB17221EntityDiscoverySelRemoveLocalEntityError                              = objc.RegisterName("removeLocalEntity:error:")
 	_aVB17221EntityDiscoverySelChangeEntityWithEntityIDToNewGPTPGrandmasterIDError = objc.RegisterName("changeEntityWithEntityID:toNewGPTPGrandmasterID:error:")
-	_aVB17221EntityDiscoverySelInterfaceName = objc.RegisterName("interfaceName")
-	_aVB17221EntityDiscoverySelSetInterfaceName = objc.RegisterName("setInterfaceName:")
-	_aVB17221EntityDiscoverySelInterface = objc.RegisterName("interface")
-	_aVB17221EntityDiscoverySelDiscoveryDelegate = objc.RegisterName("discoveryDelegate")
-	_aVB17221EntityDiscoverySelSetDiscoveryDelegate = objc.RegisterName("setDiscoveryDelegate:")
+	_aVB17221EntityDiscoverySelInterfaceName                                       = objc.RegisterName("interfaceName")
+	_aVB17221EntityDiscoverySelSetInterfaceName                                    = objc.RegisterName("setInterfaceName:")
+	_aVB17221EntityDiscoverySelInterface                                           = objc.RegisterName("interface")
+	_aVB17221EntityDiscoverySelDiscoveryDelegate                                   = objc.RegisterName("discoveryDelegate")
+	_aVB17221EntityDiscoverySelSetDiscoveryDelegate                                = objc.RegisterName("setDiscoveryDelegate:")
 )
 
 func AVB17221EntityDiscoveryFromID(id objc.ID) *AVB17221EntityDiscovery {
@@ -46,7 +46,9 @@ func AVB17221EntityDiscoveryFromID(id objc.ID) *AVB17221EntityDiscovery {
 // @method		initWithInterfaceName: @abstract	Initializes the receiver with a particular interface name. @param		anInterfaceName	The BSD interface name for the interface to perform discovery on. @result		The initialized receiver.
 func (o *AVB17221EntityDiscovery) InitWithInterfaceName(anInterfaceName *foundation.NSString) *AVB17221EntityDiscovery {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVB17221EntityDiscoverySelInitWithInterfaceName, anInterfaceName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVB17221EntityDiscoveryFromID(_ret)
 }
 
@@ -100,7 +102,9 @@ func (o *AVB17221EntityDiscovery) ChangeEntityWithEntityIDToNewGPTPGrandmasterID
 // @property	interfaceName @abstract	The BSD interface name for the interface that discovery is being performed on.
 func (o *AVB17221EntityDiscovery) InterfaceName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVB17221EntityDiscoverySelInterfaceName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -111,7 +115,9 @@ func (o *AVB17221EntityDiscovery) SetInterfaceName(interfaceName *foundation.NSS
 // @property	interface @abstract	The AVBInterface object which owns this object. This may be nil if it was not created by an instance of AVBInterface
 func (o *AVB17221EntityDiscovery) Interface() *AVBInterface {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVB17221EntityDiscoverySelInterface)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVBInterfaceFromID(_ret)
 }
 
@@ -124,4 +130,3 @@ func (o *AVB17221EntityDiscovery) DiscoveryDelegate() AVB17221EntityDiscoveryDel
 func (o *AVB17221EntityDiscovery) SetDiscoveryDelegate(discoveryDelegate AVB17221EntityDiscoveryDelegate) {
 	o.Ptr().Send(_aVB17221EntityDiscoverySelSetDiscoveryDelegate, discoveryDelegate)
 }
-

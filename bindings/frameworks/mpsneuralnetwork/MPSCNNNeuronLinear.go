@@ -16,7 +16,7 @@ type MPSCNNNeuronLinear struct {
 }
 
 var (
-	_clsMPSCNNNeuronLinear = _objcClass("MPSCNNNeuronLinear")
+	_clsMPSCNNNeuronLinear                 = _objcClass("MPSCNNNeuronLinear")
 	_mPSCNNNeuronLinearSelInitWithDeviceAB = objc.RegisterName("initWithDevice:a:b:")
 )
 
@@ -33,7 +33,8 @@ func MPSCNNNeuronLinearFromID(id objc.ID) *MPSCNNNeuronLinear {
 // @abstract  Initialize the linear neuron filter @param     device   The device the filter will run on @param     a        Filter property "a". See class discussion. @param     b        Filter property "b". See class discussion. @return    A valid MPSCNNNeuronLinear object or nil, if failure.
 func (o *MPSCNNNeuronLinear) InitWithDeviceAB(device metal.MTLDevice, a float32, b float32) *MPSCNNNeuronLinear {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronLinearSelInitWithDeviceAB, device, a, b)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronLinearFromID(_ret)
 }
-

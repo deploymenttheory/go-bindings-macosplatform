@@ -43,4 +43,3 @@ type ArrayGradientStateable interface {
 }
 
 var _ ArrayGradientStateable = (*ArrayGradientState)(nil)
-

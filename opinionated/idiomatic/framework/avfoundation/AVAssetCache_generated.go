@@ -66,4 +66,3 @@ type AssetCacheable interface {
 }
 
 var _ AssetCacheable = (*AssetCache)(nil)
-

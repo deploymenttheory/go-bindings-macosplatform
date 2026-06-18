@@ -41,4 +41,3 @@ type ArcadeServiceable interface {
 }
 
 var _ ArcadeServiceable = (*ArcadeService)(nil)
-

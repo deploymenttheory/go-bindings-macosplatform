@@ -16,29 +16,29 @@ type NSTouchBar struct {
 }
 
 var (
-	_clsNSTouchBar = _objcClass("NSTouchBar")
-	_nSTouchBarSelInit = objc.RegisterName("init")
-	_nSTouchBarSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSTouchBarSelItemForIdentifier = objc.RegisterName("itemForIdentifier:")
-	_nSTouchBarSelCustomizationIdentifier = objc.RegisterName("customizationIdentifier")
-	_nSTouchBarSelSetCustomizationIdentifier = objc.RegisterName("setCustomizationIdentifier:")
-	_nSTouchBarSelCustomizationAllowedItemIdentifiers = objc.RegisterName("customizationAllowedItemIdentifiers")
-	_nSTouchBarSelSetCustomizationAllowedItemIdentifiers = objc.RegisterName("setCustomizationAllowedItemIdentifiers:")
-	_nSTouchBarSelCustomizationRequiredItemIdentifiers = objc.RegisterName("customizationRequiredItemIdentifiers")
-	_nSTouchBarSelSetCustomizationRequiredItemIdentifiers = objc.RegisterName("setCustomizationRequiredItemIdentifiers:")
-	_nSTouchBarSelDefaultItemIdentifiers = objc.RegisterName("defaultItemIdentifiers")
-	_nSTouchBarSelSetDefaultItemIdentifiers = objc.RegisterName("setDefaultItemIdentifiers:")
-	_nSTouchBarSelItemIdentifiers = objc.RegisterName("itemIdentifiers")
-	_nSTouchBarSelPrincipalItemIdentifier = objc.RegisterName("principalItemIdentifier")
-	_nSTouchBarSelSetPrincipalItemIdentifier = objc.RegisterName("setPrincipalItemIdentifier:")
-	_nSTouchBarSelEscapeKeyReplacementItemIdentifier = objc.RegisterName("escapeKeyReplacementItemIdentifier")
-	_nSTouchBarSelSetEscapeKeyReplacementItemIdentifier = objc.RegisterName("setEscapeKeyReplacementItemIdentifier:")
-	_nSTouchBarSelTemplateItems = objc.RegisterName("templateItems")
-	_nSTouchBarSelSetTemplateItems = objc.RegisterName("setTemplateItems:")
-	_nSTouchBarSelDelegate = objc.RegisterName("delegate")
-	_nSTouchBarSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSTouchBarSelIsVisible = objc.RegisterName("isVisible")
-	_nSTouchBarSelIsAutomaticCustomizeTouchBarMenuItemEnabled = objc.RegisterName("isAutomaticCustomizeTouchBarMenuItemEnabled")
+	_clsNSTouchBar                                             = _objcClass("NSTouchBar")
+	_nSTouchBarSelInit                                         = objc.RegisterName("init")
+	_nSTouchBarSelInitWithCoder                                = objc.RegisterName("initWithCoder:")
+	_nSTouchBarSelItemForIdentifier                            = objc.RegisterName("itemForIdentifier:")
+	_nSTouchBarSelCustomizationIdentifier                      = objc.RegisterName("customizationIdentifier")
+	_nSTouchBarSelSetCustomizationIdentifier                   = objc.RegisterName("setCustomizationIdentifier:")
+	_nSTouchBarSelCustomizationAllowedItemIdentifiers          = objc.RegisterName("customizationAllowedItemIdentifiers")
+	_nSTouchBarSelSetCustomizationAllowedItemIdentifiers       = objc.RegisterName("setCustomizationAllowedItemIdentifiers:")
+	_nSTouchBarSelCustomizationRequiredItemIdentifiers         = objc.RegisterName("customizationRequiredItemIdentifiers")
+	_nSTouchBarSelSetCustomizationRequiredItemIdentifiers      = objc.RegisterName("setCustomizationRequiredItemIdentifiers:")
+	_nSTouchBarSelDefaultItemIdentifiers                       = objc.RegisterName("defaultItemIdentifiers")
+	_nSTouchBarSelSetDefaultItemIdentifiers                    = objc.RegisterName("setDefaultItemIdentifiers:")
+	_nSTouchBarSelItemIdentifiers                              = objc.RegisterName("itemIdentifiers")
+	_nSTouchBarSelPrincipalItemIdentifier                      = objc.RegisterName("principalItemIdentifier")
+	_nSTouchBarSelSetPrincipalItemIdentifier                   = objc.RegisterName("setPrincipalItemIdentifier:")
+	_nSTouchBarSelEscapeKeyReplacementItemIdentifier           = objc.RegisterName("escapeKeyReplacementItemIdentifier")
+	_nSTouchBarSelSetEscapeKeyReplacementItemIdentifier        = objc.RegisterName("setEscapeKeyReplacementItemIdentifier:")
+	_nSTouchBarSelTemplateItems                                = objc.RegisterName("templateItems")
+	_nSTouchBarSelSetTemplateItems                             = objc.RegisterName("setTemplateItems:")
+	_nSTouchBarSelDelegate                                     = objc.RegisterName("delegate")
+	_nSTouchBarSelSetDelegate                                  = objc.RegisterName("setDelegate:")
+	_nSTouchBarSelIsVisible                                    = objc.RegisterName("isVisible")
+	_nSTouchBarSelIsAutomaticCustomizeTouchBarMenuItemEnabled  = objc.RegisterName("isAutomaticCustomizeTouchBarMenuItemEnabled")
 	_nSTouchBarSelSetAutomaticCustomizeTouchBarMenuItemEnabled = objc.RegisterName("setAutomaticCustomizeTouchBarMenuItemEnabled:")
 )
 
@@ -54,25 +54,33 @@ func NSTouchBarFromID(id objc.ID) *NSTouchBar {
 
 func (o *NSTouchBar) Init() *NSTouchBar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTouchBarFromID(_ret)
 }
 
 func (o *NSTouchBar) InitWithCoder(coder *foundation.NSCoder) *NSTouchBar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTouchBarFromID(_ret)
 }
 
 func (o *NSTouchBar) ItemForIdentifier(identifier *foundation.NSString) *NSTouchBarItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelItemForIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTouchBarItemFromID(_ret)
 }
 
 func (o *NSTouchBar) CustomizationIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelCustomizationIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -114,7 +122,9 @@ func (o *NSTouchBar) ItemIdentifiers() *foundation.NSArray[*foundation.NSString]
 
 func (o *NSTouchBar) PrincipalItemIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelPrincipalItemIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -124,7 +134,9 @@ func (o *NSTouchBar) SetPrincipalItemIdentifier(principalItemIdentifier *foundat
 
 func (o *NSTouchBar) EscapeKeyReplacementItemIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelEscapeKeyReplacementItemIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -134,7 +146,9 @@ func (o *NSTouchBar) SetEscapeKeyReplacementItemIdentifier(escapeKeyReplacementI
 
 func (o *NSTouchBar) TemplateItems() *foundation.NSSet[*NSTouchBarItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelTemplateItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*NSTouchBarItem](_ret)
 }
 
@@ -164,4 +178,3 @@ func NSTouchBarIsAutomaticCustomizeTouchBarMenuItemEnabled() bool {
 func NSTouchBarSetAutomaticCustomizeTouchBarMenuItemEnabled(automaticCustomizeTouchBarMenuItemEnabled bool) {
 	objc.ID(_clsNSTouchBar).Send(_nSTouchBarSelSetAutomaticCustomizeTouchBarMenuItemEnabled, automaticCustomizeTouchBarMenuItemEnabled)
 }
-

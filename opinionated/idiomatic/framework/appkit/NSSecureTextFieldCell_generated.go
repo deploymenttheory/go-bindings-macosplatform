@@ -86,7 +86,9 @@ func (x *SecureTextFieldCell) WithAllowedInputSourceLocales(items ...*foundation
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -377,9 +379,13 @@ func (x *SecureTextFieldCell) SetEchosBullets(echosBullets bool) {
 
 func (x *SecureTextFieldCell) asTextFieldCell() *raw.NSTextFieldCell { return &x.inner.NSTextFieldCell }
 
-func (x *SecureTextFieldCell) asActionCell() *raw.NSActionCell { return &x.inner.NSTextFieldCell.NSActionCell }
+func (x *SecureTextFieldCell) asActionCell() *raw.NSActionCell {
+	return &x.inner.NSTextFieldCell.NSActionCell
+}
 
-func (x *SecureTextFieldCell) asCell() *raw.NSCell { return &x.inner.NSTextFieldCell.NSActionCell.NSCell }
+func (x *SecureTextFieldCell) asCell() *raw.NSCell {
+	return &x.inner.NSTextFieldCell.NSActionCell.NSCell
+}
 
 // SecureTextFieldCellable is the interface implemented by [SecureTextFieldCell], for mocking and DI.
 type SecureTextFieldCellable interface {
@@ -442,4 +448,3 @@ type SecureTextFieldCellable interface {
 }
 
 var _ SecureTextFieldCellable = (*SecureTextFieldCell)(nil)
-

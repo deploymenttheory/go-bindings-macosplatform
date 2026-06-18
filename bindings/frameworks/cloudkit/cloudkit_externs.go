@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
-// A notification that a container posts when the status of an iCloud account changes. Create an instance of ``CKContainer`` to receive this notification. The container posts the notification using an arbitrary queue. Use the ``CKContainer/accountStatus(completionHandler:)`` method to obtain the account's status.
+// A notification that a container posts when the status of an iCloud account changes. Create an instance of “CKContainer“ to receive this notification. The container posts the notification using an arbitrary queue. Use the “CKContainer/accountStatus(completionHandler:)“ method to obtain the account's status.
 func CKAccountChangedNotification() uintptr {
 	ptr, _ := purego.Dlsym(_cloudkitLib, "CKAccountChangedNotification")
 	return ptr
@@ -29,13 +29,13 @@ func CKErrorDomain() uintptr {
 	return ptr
 }
 
-// The key to retrieve the number of seconds to wait before you retry a request. An <doc://com.apple.documentation/documentation/foundation/nsnumber> that contains the number of seconds until you can retry a request. CloudKit adds this key to the error's <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary when the error code is ``CKError/Code/serviceUnavailable`` or ``CKError/Code/requestRateLimited``.
+// The key to retrieve the number of seconds to wait before you retry a request. An <doc://com.apple.documentation/documentation/foundation/nsnumber> that contains the number of seconds until you can retry a request. CloudKit adds this key to the error's <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary when the error code is “CKError/Code/serviceUnavailable“ or “CKError/Code/requestRateLimited“.
 func CKErrorRetryAfterKey() uintptr {
 	ptr, _ := purego.Dlsym(_cloudkitLib, "CKErrorRetryAfterKey")
 	return ptr
 }
 
-// The key that determines whether CloudKit deletes a record zone because of a user action. An <doc://com.apple.documentation/documentation/foundation/nsnumber> that represents a Boolean value you use to determine whether a user action causes CloudKit to delete a record zone. CloudKit adds this key to the error's `userInfo` dictionary when the error code is ``CKError/Code/zoneNotFound``.
+// The key that determines whether CloudKit deletes a record zone because of a user action. An <doc://com.apple.documentation/documentation/foundation/nsnumber> that represents a Boolean value you use to determine whether a user action causes CloudKit to delete a record zone. CloudKit adds this key to the error's `userInfo` dictionary when the error code is “CKError/Code/zoneNotFound“.
 func CKErrorUserDidResetEncryptedDataKey() uintptr {
 	ptr, _ := purego.Dlsym(_cloudkitLib, "CKErrorUserDidResetEncryptedDataKey")
 	return ptr
@@ -48,16 +48,18 @@ func CKOwnerDefaultName() uintptr {
 	return ptr
 }
 
-// The key to retrieve partial errors. The value of this key is a dictionary that maps an item ID to an error. The type of each ID depends on where the error occurs. For example, if you receive a partial error when modifying a record, the ID is an instance of ``CKRecord/ID`` that corresponds to the record that CloudKit can't modify.
+// The key to retrieve partial errors. The value of this key is a dictionary that maps an item ID to an error. The type of each ID depends on where the error occurs. For example, if you receive a partial error when modifying a record, the ID is an instance of “CKRecord/ID“ that corresponds to the record that CloudKit can't modify.
 func CKPartialErrorsByItemIDKey() uintptr {
 	ptr, _ := purego.Dlsym(_cloudkitLib, "CKPartialErrorsByItemIDKey")
 	return ptr
 }
 
-// A constant value that represents the maximum number of results CloudKit retrieves. The value of this constant doesn't correspond to the actual number of records. CloudKit dynamically determines the actual number according to various conditions at runtime. This constant is the ``CKQueryOperation/resultsLimit`` property's default value.
+// A constant value that represents the maximum number of results CloudKit retrieves. The value of this constant doesn't correspond to the actual number of records. CloudKit dynamically determines the actual number according to various conditions at runtime. This constant is the “CKQueryOperation/resultsLimit“ property's default value.
 func CKQueryOperationMaximumResults() uint {
 	ptr, _ := purego.Dlsym(_cloudkitLib, "CKQueryOperationMaximumResults")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*uint)(unsafe.Pointer(ptr))
 }
 
@@ -103,7 +105,7 @@ func CKRecordModificationDateKey() uintptr {
 	return ptr
 }
 
-// The name of a share record that manages a shared record zone. When you create an instance of ``CKShare`` for sharing a record zone, CloudKit automatically assigns this constant as the ``CKRecord/ID/recordName`` element of the share record's ``CKRecord/recordID``. After you save the share record to iCloud, you can fetch it by reconstructing the record ID using this constant, as the following example shows: ```swift func fetchShare( forZone zone: CKRecordZone, completion: @escaping (Result<CKShare, any Error>) -> Void ) { let database = CKContainer.default().privateCloudDatabase // Use the 'CKRecordNameZoneWideShare' constant to create the record ID. let recordID = CKRecord.ID(recordName: CKRecordNameZoneWideShare, zoneID: zone.zoneID) // Fetch the share record from the specified record zone. database.fetch(withRecordID: recordID) { share, error in if let error = error { // If the fetch fails, inform the caller. completion(.failure(error)) } else if let share = share as? CKShare { // Otherwise, pass the fetched share record to the // completion handler. completion(.success(share)) } else { fatalError("Unable to fetch record with ID: \(recordID)") } } } ```
+// The name of a share record that manages a shared record zone. When you create an instance of “CKShare“ for sharing a record zone, CloudKit automatically assigns this constant as the “CKRecord/ID/recordName“ element of the share record's “CKRecord/recordID“. After you save the share record to iCloud, you can fetch it by reconstructing the record ID using this constant, as the following example shows: ```swift func fetchShare( forZone zone: CKRecordZone, completion: @escaping (Result<CKShare, any Error>) -> Void ) { let database = CKContainer.default().privateCloudDatabase // Use the 'CKRecordNameZoneWideShare' constant to create the record ID. let recordID = CKRecord.ID(recordName: CKRecordNameZoneWideShare, zoneID: zone.zoneID) // Fetch the share record from the specified record zone. database.fetch(withRecordID: recordID) { share, error in if let error = error { // If the fetch fails, inform the caller. completion(.failure(error)) } else if let share = share as? CKShare { // Otherwise, pass the fetched share record to the // completion handler. completion(.success(share)) } else { fatalError("Unable to fetch record with ID: \(recordID)") } } } ```
 func CKRecordNameZoneWideShare() uintptr {
 	ptr, _ := purego.Dlsym(_cloudkitLib, "CKRecordNameZoneWideShare")
 	return ptr
@@ -112,7 +114,9 @@ func CKRecordNameZoneWideShare() uintptr {
 // The key constant that a record uses for its CKRecord.parent.
 func CKRecordParentKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_cloudkitLib, "CKRecordParentKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -125,21 +129,27 @@ func CKRecordRecordIDKey() uintptr {
 // The key constant that a record uses for its CKRecord.share.
 func CKRecordShareKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_cloudkitLib, "CKRecordShareKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // The system type that identifies a share record.
 func CKRecordTypeShare() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_cloudkitLib, "CKRecordTypeShare")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // The system type that identifies a user record. CloudKit automatically creates a user record for each unique user of the app. User records are empty initially. You can add data to the user record using the same rules that apply for all records. Specifically, you must specify a consistent type of data for a particular field name in all user records. However, you can't create new user records using this record type and you can't query for records of this type. To locate user records, you must know the ID of the user record or use the methods that CKContainer provides to discover user records.
 func CKRecordTypeUserRecord() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_cloudkitLib, "CKRecordTypeUserRecord")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -152,21 +162,26 @@ func CKRecordZoneDefaultName() uintptr {
 // The system field key for the share's thumbnail image data. This predefined key is part of the `CKRecordTypeShare` schema.  It is used by the out of process UI flow to send a share, and as part of the share acceptance flow.  It is an optional value on a `CKShare` record.
 func CKShareThumbnailImageDataKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_cloudkitLib, "CKShareThumbnailImageDataKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // The system field key for the share's title. This predefined key is part of the `CKRecordTypeShare` schema. The out of process UI flow uses this key to send a share, and as part of the share acceptance flow. It is an optional value on a `CKShare` record.
 func CKShareTitleKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_cloudkitLib, "CKShareTitleKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // The system field key for the share's type. This predefined key is part of the `CKRecordTypeShare` schema.  It is used by the out of process UI flow to send a share, and as part of the share acceptance flow.  It is an optional value on a `CKShare` record.
 func CKShareTypeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_cloudkitLib, "CKShareTypeKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
-

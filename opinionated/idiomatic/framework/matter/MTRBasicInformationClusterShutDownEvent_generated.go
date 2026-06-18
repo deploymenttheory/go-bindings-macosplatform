@@ -15,7 +15,9 @@ type MTRBasicInformationClusterShutDownEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBasicInformationClusterShutDownEvent].
-func (x *MTRBasicInformationClusterShutDownEvent) Unwrap() *raw.MTRBasicInformationClusterShutDownEvent { return x.inner }
+func (x *MTRBasicInformationClusterShutDownEvent) Unwrap() *raw.MTRBasicInformationClusterShutDownEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -35,7 +37,9 @@ func NewMTRBasicInformationClusterShutDownEvent() *MTRBasicInformationClusterShu
 	return &MTRBasicInformationClusterShutDownEvent{inner: raw.MTRBasicInformationClusterShutDownEventFromID(_id)}
 }
 
-func (x *MTRBasicInformationClusterShutDownEvent) asMTRBasicInformationClusterShutDownEvent() *raw.MTRBasicInformationClusterShutDownEvent { return x.inner }
+func (x *MTRBasicInformationClusterShutDownEvent) asMTRBasicInformationClusterShutDownEvent() *raw.MTRBasicInformationClusterShutDownEvent {
+	return x.inner
+}
 
 // MTRBasicInformationClusterShutDownEventable is the interface implemented by [MTRBasicInformationClusterShutDownEvent], for mocking and DI.
 type MTRBasicInformationClusterShutDownEventable interface {
@@ -43,4 +47,3 @@ type MTRBasicInformationClusterShutDownEventable interface {
 }
 
 var _ MTRBasicInformationClusterShutDownEventable = (*MTRBasicInformationClusterShutDownEvent)(nil)
-

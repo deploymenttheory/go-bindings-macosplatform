@@ -19,10 +19,10 @@ type GKGridGraphNode struct {
 }
 
 var (
-	_clsGKGridGraphNode = _objcClass("GKGridGraphNode")
+	_clsGKGridGraphNode                     = _objcClass("GKGridGraphNode")
 	_gKGridGraphNodeSelNodeWithGridPosition = objc.RegisterName("nodeWithGridPosition:")
 	_gKGridGraphNodeSelInitWithGridPosition = objc.RegisterName("initWithGridPosition:")
-	_gKGridGraphNodeSelGridPosition = objc.RegisterName("gridPosition")
+	_gKGridGraphNodeSelGridPosition         = objc.RegisterName("gridPosition")
 )
 
 func GKGridGraphNodeFromID(id objc.ID) *GKGridGraphNode {
@@ -37,13 +37,17 @@ func GKGridGraphNodeFromID(id objc.ID) *GKGridGraphNode {
 
 func GKGridGraphNodeNodeWithGridPosition(gridPosition unsafe.Pointer) *GKGridGraphNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGridGraphNode), _gKGridGraphNodeSelNodeWithGridPosition, gridPosition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGridGraphNodeFromID(_ret)
 }
 
 func (o *GKGridGraphNode) InitWithGridPosition(gridPosition unsafe.Pointer) *GKGridGraphNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGridGraphNodeSelInitWithGridPosition, gridPosition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGridGraphNodeFromID(_ret)
 }
 
@@ -51,4 +55,3 @@ func (o *GKGridGraphNode) GridPosition() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _gKGridGraphNodeSelGridPosition)
 	return _ret
 }
-

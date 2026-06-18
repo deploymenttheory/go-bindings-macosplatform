@@ -286,4 +286,3 @@ func ValueWithJSValueRefInContext(value unsafe.Pointer, context_ *raw.JSContext)
 	}
 	return &Value{inner: _r}
 }
-

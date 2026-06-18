@@ -16,11 +16,11 @@ type UNNotificationRequest struct {
 }
 
 var (
-	_clsUNNotificationRequest = _objcClass("UNNotificationRequest")
+	_clsUNNotificationRequest                                    = _objcClass("UNNotificationRequest")
 	_uNNotificationRequestSelRequestWithIdentifierContentTrigger = objc.RegisterName("requestWithIdentifier:content:trigger:")
-	_uNNotificationRequestSelIdentifier = objc.RegisterName("identifier")
-	_uNNotificationRequestSelContent = objc.RegisterName("content")
-	_uNNotificationRequestSelTrigger = objc.RegisterName("trigger")
+	_uNNotificationRequestSelIdentifier                          = objc.RegisterName("identifier")
+	_uNNotificationRequestSelContent                             = objc.RegisterName("content")
+	_uNNotificationRequestSelTrigger                             = objc.RegisterName("trigger")
 )
 
 func UNNotificationRequestFromID(id objc.ID) *UNNotificationRequest {
@@ -35,25 +35,32 @@ func UNNotificationRequestFromID(id objc.ID) *UNNotificationRequest {
 
 func UNNotificationRequestRequestWithIdentifierContentTrigger(identifier *foundation.NSString, content *UNNotificationContent, trigger *UNNotificationTrigger) *UNNotificationRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationRequest), _uNNotificationRequestSelRequestWithIdentifierContentTrigger, identifier.Ptr(), content.Ptr(), trigger.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UNNotificationRequestFromID(_ret)
 }
 
 func (o *UNNotificationRequest) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNNotificationRequestSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *UNNotificationRequest) Content() *UNNotificationContent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNNotificationRequestSelContent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UNNotificationContentFromID(_ret)
 }
 
 func (o *UNNotificationRequest) Trigger() *UNNotificationTrigger {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNNotificationRequestSelTrigger)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UNNotificationTriggerFromID(_ret)
 }
-

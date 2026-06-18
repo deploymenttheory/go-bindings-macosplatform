@@ -17,14 +17,14 @@ type INBoatTrip struct {
 }
 
 var (
-	_clsINBoatTrip = _objcClass("INBoatTrip")
+	_clsINBoatTrip                                                                                                       = _objcClass("INBoatTrip")
 	_iNBoatTripSelInitWithProviderBoatNameBoatNumberTripDurationDepartureBoatTerminalLocationArrivalBoatTerminalLocation = objc.RegisterName("initWithProvider:boatName:boatNumber:tripDuration:departureBoatTerminalLocation:arrivalBoatTerminalLocation:")
-	_iNBoatTripSelProvider = objc.RegisterName("provider")
-	_iNBoatTripSelBoatName = objc.RegisterName("boatName")
-	_iNBoatTripSelBoatNumber = objc.RegisterName("boatNumber")
-	_iNBoatTripSelTripDuration = objc.RegisterName("tripDuration")
-	_iNBoatTripSelDepartureBoatTerminalLocation = objc.RegisterName("departureBoatTerminalLocation")
-	_iNBoatTripSelArrivalBoatTerminalLocation = objc.RegisterName("arrivalBoatTerminalLocation")
+	_iNBoatTripSelProvider                                                                                               = objc.RegisterName("provider")
+	_iNBoatTripSelBoatName                                                                                               = objc.RegisterName("boatName")
+	_iNBoatTripSelBoatNumber                                                                                             = objc.RegisterName("boatNumber")
+	_iNBoatTripSelTripDuration                                                                                           = objc.RegisterName("tripDuration")
+	_iNBoatTripSelDepartureBoatTerminalLocation                                                                          = objc.RegisterName("departureBoatTerminalLocation")
+	_iNBoatTripSelArrivalBoatTerminalLocation                                                                            = objc.RegisterName("arrivalBoatTerminalLocation")
 )
 
 func INBoatTripFromID(id objc.ID) *INBoatTrip {
@@ -39,43 +39,56 @@ func INBoatTripFromID(id objc.ID) *INBoatTrip {
 
 func (o *INBoatTrip) InitWithProviderBoatNameBoatNumberTripDurationDepartureBoatTerminalLocationArrivalBoatTerminalLocation(provider *foundation.NSString, boatName *foundation.NSString, boatNumber *foundation.NSString, tripDuration *INDateComponentsRange, departureBoatTerminalLocation *corelocation.CLPlacemark, arrivalBoatTerminalLocation *corelocation.CLPlacemark) *INBoatTrip {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNBoatTripSelInitWithProviderBoatNameBoatNumberTripDurationDepartureBoatTerminalLocationArrivalBoatTerminalLocation, provider.Ptr(), boatName.Ptr(), boatNumber.Ptr(), tripDuration.Ptr(), departureBoatTerminalLocation.Ptr(), arrivalBoatTerminalLocation.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INBoatTripFromID(_ret)
 }
 
 func (o *INBoatTrip) Provider() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNBoatTripSelProvider)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INBoatTrip) BoatName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNBoatTripSelBoatName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INBoatTrip) BoatNumber() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNBoatTripSelBoatNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INBoatTrip) TripDuration() *INDateComponentsRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNBoatTripSelTripDuration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INDateComponentsRangeFromID(_ret)
 }
 
 func (o *INBoatTrip) DepartureBoatTerminalLocation() *corelocation.CLPlacemark {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNBoatTripSelDepartureBoatTerminalLocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return corelocation.CLPlacemarkFromID(_ret)
 }
 
 func (o *INBoatTrip) ArrivalBoatTerminalLocation() *corelocation.CLPlacemark {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNBoatTripSelArrivalBoatTerminalLocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return corelocation.CLPlacemarkFromID(_ret)
 }
-

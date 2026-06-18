@@ -92,7 +92,9 @@ func (x *EffectPropertyMaterial) SetShininess(shininess float32) {
 	x.inner.SetShininess(shininess)
 }
 
-func (x *EffectPropertyMaterial) asEffectProperty() *raw.GLKEffectProperty { return &x.inner.GLKEffectProperty }
+func (x *EffectPropertyMaterial) asEffectProperty() *raw.GLKEffectProperty {
+	return &x.inner.GLKEffectProperty
+}
 
 // EffectPropertyMaterialable is the interface implemented by [EffectPropertyMaterial], for mocking and DI.
 type EffectPropertyMaterialable interface {
@@ -111,4 +113,3 @@ type EffectPropertyMaterialable interface {
 }
 
 var _ EffectPropertyMaterialable = (*EffectPropertyMaterial)(nil)
-

@@ -47,4 +47,3 @@ type DictionaryConstraintable interface {
 }
 
 var _ DictionaryConstraintable = (*DictionaryConstraint)(nil)
-

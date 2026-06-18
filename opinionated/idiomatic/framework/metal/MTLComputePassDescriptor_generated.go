@@ -70,4 +70,3 @@ type ComputePassDescriptorable interface {
 }
 
 var _ ComputePassDescriptorable = (*ComputePassDescriptor)(nil)
-

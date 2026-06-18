@@ -1538,9 +1538,13 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributeClusterRevisionWithMinInter
 	}
 }
 
-func (x *MTRBaseClusterFanControl) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterFanControl) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterFanControl) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterFanControl) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterFanControlable is the interface implemented by [MTRBaseClusterFanControl], for mocking and DI.
 type MTRBaseClusterFanControlable interface {
@@ -1641,4 +1645,3 @@ type MTRBaseClusterFanControlable interface {
 }
 
 var _ MTRBaseClusterFanControlable = (*MTRBaseClusterFanControl)(nil)
-

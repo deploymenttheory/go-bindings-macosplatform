@@ -16,11 +16,11 @@ type MTRTimeSynchronizationClusterTimeZoneStatusEvent struct {
 }
 
 var (
-	_clsMTRTimeSynchronizationClusterTimeZoneStatusEvent = _objcClass("MTRTimeSynchronizationClusterTimeZoneStatusEvent")
-	_mTRTimeSynchronizationClusterTimeZoneStatusEventSelOffset = objc.RegisterName("offset")
+	_clsMTRTimeSynchronizationClusterTimeZoneStatusEvent          = _objcClass("MTRTimeSynchronizationClusterTimeZoneStatusEvent")
+	_mTRTimeSynchronizationClusterTimeZoneStatusEventSelOffset    = objc.RegisterName("offset")
 	_mTRTimeSynchronizationClusterTimeZoneStatusEventSelSetOffset = objc.RegisterName("setOffset:")
-	_mTRTimeSynchronizationClusterTimeZoneStatusEventSelName = objc.RegisterName("name")
-	_mTRTimeSynchronizationClusterTimeZoneStatusEventSelSetName = objc.RegisterName("setName:")
+	_mTRTimeSynchronizationClusterTimeZoneStatusEventSelName      = objc.RegisterName("name")
+	_mTRTimeSynchronizationClusterTimeZoneStatusEventSelSetName   = objc.RegisterName("setName:")
 )
 
 func MTRTimeSynchronizationClusterTimeZoneStatusEventFromID(id objc.ID) *MTRTimeSynchronizationClusterTimeZoneStatusEvent {
@@ -35,7 +35,9 @@ func MTRTimeSynchronizationClusterTimeZoneStatusEventFromID(id objc.ID) *MTRTime
 
 func (o *MTRTimeSynchronizationClusterTimeZoneStatusEvent) Offset() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRTimeSynchronizationClusterTimeZoneStatusEventSelOffset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRTimeSynchronizationClusterTimeZoneStatusEvent) SetOffset(offset *fou
 
 func (o *MTRTimeSynchronizationClusterTimeZoneStatusEvent) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRTimeSynchronizationClusterTimeZoneStatusEventSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTRTimeSynchronizationClusterTimeZoneStatusEvent) SetName(name *foundation.NSString) {
 	o.Ptr().Send(_mTRTimeSynchronizationClusterTimeZoneStatusEventSelSetName, name.Ptr())
 }
-

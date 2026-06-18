@@ -5,6 +5,5 @@ package avkit
 
 type AVLegibleMediaOptionsMenuState struct {
 	Enabled bool
-	Reason AVLegibleMediaOptionsMenuStateChangeReason
+	Reason  AVLegibleMediaOptionsMenuStateChangeReason
 }
-

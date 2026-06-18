@@ -13,8 +13,8 @@ type VZDiskImageCachingMode int64
 
 const (
 	VZDiskImageCachingModeAutomatic VZDiskImageCachingMode = 0
-	VZDiskImageCachingModeUncached VZDiskImageCachingMode = 1
-	VZDiskImageCachingModeCached VZDiskImageCachingMode = 2
+	VZDiskImageCachingModeUncached  VZDiskImageCachingMode = 1
+	VZDiskImageCachingModeCached    VZDiskImageCachingMode = 2
 )
 
 func (e VZDiskImageCachingMode) String() string {
@@ -186,4 +186,3 @@ func (e VZVirtualMachineState) String() string {
 		return fmt.Sprintf("VZVirtualMachineState(%d)", int64(e))
 	}
 }
-

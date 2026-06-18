@@ -16,9 +16,9 @@ type AVDelegatingPlaybackCoordinatorPlayCommand struct {
 }
 
 var (
-	_clsAVDelegatingPlaybackCoordinatorPlayCommand = _objcClass("AVDelegatingPlaybackCoordinatorPlayCommand")
-	_aVDelegatingPlaybackCoordinatorPlayCommandSelRate = objc.RegisterName("rate")
-	_aVDelegatingPlaybackCoordinatorPlayCommandSelItemTime = objc.RegisterName("itemTime")
+	_clsAVDelegatingPlaybackCoordinatorPlayCommand              = _objcClass("AVDelegatingPlaybackCoordinatorPlayCommand")
+	_aVDelegatingPlaybackCoordinatorPlayCommandSelRate          = objc.RegisterName("rate")
+	_aVDelegatingPlaybackCoordinatorPlayCommandSelItemTime      = objc.RegisterName("itemTime")
 	_aVDelegatingPlaybackCoordinatorPlayCommandSelHostClockTime = objc.RegisterName("hostClockTime")
 )
 
@@ -49,4 +49,3 @@ func (o *AVDelegatingPlaybackCoordinatorPlayCommand) HostClockTime() coremedia.C
 	_ret := objc.Send[coremedia.CMTime](o.Ptr(), _aVDelegatingPlaybackCoordinatorPlayCommandSelHostClockTime)
 	return _ret
 }
-

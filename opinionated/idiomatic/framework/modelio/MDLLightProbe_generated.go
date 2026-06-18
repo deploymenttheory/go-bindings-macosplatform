@@ -134,4 +134,3 @@ type LightProbeable interface {
 }
 
 var _ LightProbeable = (*LightProbe)(nil)
-

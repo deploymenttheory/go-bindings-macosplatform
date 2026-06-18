@@ -76,7 +76,9 @@ func (x *MetricDownloadSummaryEvent) Variants() []*AssetVariant {
 	})
 }
 
-func (x *MetricDownloadSummaryEvent) asMetricEvent() *raw.AVMetricEvent { return &x.inner.AVMetricEvent }
+func (x *MetricDownloadSummaryEvent) asMetricEvent() *raw.AVMetricEvent {
+	return &x.inner.AVMetricEvent
+}
 
 // MetricDownloadSummaryEventable is the interface implemented by [MetricDownloadSummaryEvent], for mocking and DI.
 type MetricDownloadSummaryEventable interface {
@@ -90,4 +92,3 @@ type MetricDownloadSummaryEventable interface {
 }
 
 var _ MetricDownloadSummaryEventable = (*MetricDownloadSummaryEvent)(nil)
-

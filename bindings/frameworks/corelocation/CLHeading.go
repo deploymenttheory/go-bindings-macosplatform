@@ -18,14 +18,14 @@ type CLHeading struct {
 }
 
 var (
-	_clsCLHeading = _objcClass("CLHeading")
+	_clsCLHeading                = _objcClass("CLHeading")
 	_cLHeadingSelMagneticHeading = objc.RegisterName("magneticHeading")
-	_cLHeadingSelTrueHeading = objc.RegisterName("trueHeading")
+	_cLHeadingSelTrueHeading     = objc.RegisterName("trueHeading")
 	_cLHeadingSelHeadingAccuracy = objc.RegisterName("headingAccuracy")
-	_cLHeadingSelX = objc.RegisterName("x")
-	_cLHeadingSelY = objc.RegisterName("y")
-	_cLHeadingSelZ = objc.RegisterName("z")
-	_cLHeadingSelTimestamp = objc.RegisterName("timestamp")
+	_cLHeadingSelX               = objc.RegisterName("x")
+	_cLHeadingSelY               = objc.RegisterName("y")
+	_cLHeadingSelZ               = objc.RegisterName("z")
+	_cLHeadingSelTimestamp       = objc.RegisterName("timestamp")
 )
 
 func CLHeadingFromID(id objc.ID) *CLHeading {
@@ -70,7 +70,8 @@ func (o *CLHeading) Z() float64 {
 
 func (o *CLHeading) Timestamp() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLHeadingSelTimestamp)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
-

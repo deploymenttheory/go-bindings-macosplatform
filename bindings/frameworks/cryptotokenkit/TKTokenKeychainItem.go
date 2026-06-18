@@ -16,13 +16,13 @@ type TKTokenKeychainItem struct {
 }
 
 var (
-	_clsTKTokenKeychainItem = _objcClass("TKTokenKeychainItem")
+	_clsTKTokenKeychainItem                 = _objcClass("TKTokenKeychainItem")
 	_tKTokenKeychainItemSelInitWithObjectID = objc.RegisterName("initWithObjectID:")
-	_tKTokenKeychainItemSelObjectID = objc.RegisterName("objectID")
-	_tKTokenKeychainItemSelLabel = objc.RegisterName("label")
-	_tKTokenKeychainItemSelSetLabel = objc.RegisterName("setLabel:")
-	_tKTokenKeychainItemSelConstraints = objc.RegisterName("constraints")
-	_tKTokenKeychainItemSelSetConstraints = objc.RegisterName("setConstraints:")
+	_tKTokenKeychainItemSelObjectID         = objc.RegisterName("objectID")
+	_tKTokenKeychainItemSelLabel            = objc.RegisterName("label")
+	_tKTokenKeychainItemSelSetLabel         = objc.RegisterName("setLabel:")
+	_tKTokenKeychainItemSelConstraints      = objc.RegisterName("constraints")
+	_tKTokenKeychainItemSelSetConstraints   = objc.RegisterName("setConstraints:")
 )
 
 func TKTokenKeychainItemFromID(id objc.ID) *TKTokenKeychainItem {
@@ -38,7 +38,9 @@ func TKTokenKeychainItemFromID(id objc.ID) *TKTokenKeychainItem {
 // @brief Initializes item with objectID.
 func (o *TKTokenKeychainItem) InitWithObjectID(objectID objc.ID) *TKTokenKeychainItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenKeychainItemSelInitWithObjectID, objectID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return TKTokenKeychainItemFromID(_ret)
 }
 
@@ -51,7 +53,9 @@ func (o *TKTokenKeychainItem) ObjectID() objc.ID {
 // @discussion Contains the user-visible label for this item.  This property is an equivalent of kSecAttrLabel in SecItem.h
 func (o *TKTokenKeychainItem) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenKeychainItemSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -68,4 +72,3 @@ func (o *TKTokenKeychainItem) Constraints() *foundation.NSDictionary[*foundation
 func (o *TKTokenKeychainItem) SetConstraints(constraints *foundation.NSDictionary[*foundation.NSNumber, objc.ID]) {
 	o.Ptr().Send(_tKTokenKeychainItemSelSetConstraints, constraints)
 }
-

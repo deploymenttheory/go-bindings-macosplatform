@@ -18,19 +18,19 @@ type PHASEObject struct {
 }
 
 var (
-	_clsPHASEObject = _objcClass("PHASEObject")
-	_pHASEObjectSelInitWithEngine = objc.RegisterName("initWithEngine:")
-	_pHASEObjectSelAddChildError = objc.RegisterName("addChild:error:")
-	_pHASEObjectSelRemoveChild = objc.RegisterName("removeChild:")
-	_pHASEObjectSelRemoveChildren = objc.RegisterName("removeChildren")
-	_pHASEObjectSelParent = objc.RegisterName("parent")
-	_pHASEObjectSelChildren = objc.RegisterName("children")
-	_pHASEObjectSelRight = objc.RegisterName("right")
-	_pHASEObjectSelUp = objc.RegisterName("up")
-	_pHASEObjectSelForward = objc.RegisterName("forward")
-	_pHASEObjectSelTransform = objc.RegisterName("transform")
-	_pHASEObjectSelSetTransform = objc.RegisterName("setTransform:")
-	_pHASEObjectSelWorldTransform = objc.RegisterName("worldTransform")
+	_clsPHASEObject                  = _objcClass("PHASEObject")
+	_pHASEObjectSelInitWithEngine    = objc.RegisterName("initWithEngine:")
+	_pHASEObjectSelAddChildError     = objc.RegisterName("addChild:error:")
+	_pHASEObjectSelRemoveChild       = objc.RegisterName("removeChild:")
+	_pHASEObjectSelRemoveChildren    = objc.RegisterName("removeChildren")
+	_pHASEObjectSelParent            = objc.RegisterName("parent")
+	_pHASEObjectSelChildren          = objc.RegisterName("children")
+	_pHASEObjectSelRight             = objc.RegisterName("right")
+	_pHASEObjectSelUp                = objc.RegisterName("up")
+	_pHASEObjectSelForward           = objc.RegisterName("forward")
+	_pHASEObjectSelTransform         = objc.RegisterName("transform")
+	_pHASEObjectSelSetTransform      = objc.RegisterName("setTransform:")
+	_pHASEObjectSelWorldTransform    = objc.RegisterName("worldTransform")
 	_pHASEObjectSelSetWorldTransform = objc.RegisterName("setWorldTransform:")
 )
 
@@ -47,7 +47,9 @@ func PHASEObjectFromID(id objc.ID) *PHASEObject {
 // @method initWithEngine: @abstract Initialize a new object.
 func (o *PHASEObject) InitWithEngine(engine *PHASEEngine) *PHASEObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEObjectSelInitWithEngine, engine.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEObjectFromID(_ret)
 }
 
@@ -74,14 +76,18 @@ func (o *PHASEObject) RemoveChildren() {
 // @property parent @abstract The parent of this object, or nil if this object doesn't have a parent object.
 func (o *PHASEObject) Parent() *PHASEObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEObjectSelParent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEObjectFromID(_ret)
 }
 
 // @property children @abstract The children of this object.
 func (o *PHASEObject) Children() *foundation.NSArray[*PHASEObject] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEObjectSelChildren)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PHASEObject](_ret)
 }
 
@@ -122,4 +128,3 @@ func (o *PHASEObject) WorldTransform() unsafe.Pointer {
 func (o *PHASEObject) SetWorldTransform(worldTransform unsafe.Pointer) {
 	o.Ptr().Send(_pHASEObjectSelSetWorldTransform, worldTransform)
 }
-

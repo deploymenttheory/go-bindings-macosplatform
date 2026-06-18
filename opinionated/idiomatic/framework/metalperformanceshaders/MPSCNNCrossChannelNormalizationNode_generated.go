@@ -17,7 +17,9 @@ type CNNCrossChannelNormalizationNode struct {
 }
 
 // Unwrap returns the underlying [raw.MPSCNNCrossChannelNormalizationNode].
-func (x *CNNCrossChannelNormalizationNode) Unwrap() *raw.MPSCNNCrossChannelNormalizationNode { return x.inner }
+func (x *CNNCrossChannelNormalizationNode) Unwrap() *raw.MPSCNNCrossChannelNormalizationNode {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -91,9 +93,13 @@ func (x *CNNCrossChannelNormalizationNode) SetKernelSizeInFeatureChannels(kernel
 	x.inner.SetKernelSizeInFeatureChannels(kernelSizeInFeatureChannels)
 }
 
-func (x *CNNCrossChannelNormalizationNode) asCNNNormalizationNode() *mpsneuralnetwork.MPSCNNNormalizationNode { return &x.inner.MPSCNNNormalizationNode }
+func (x *CNNCrossChannelNormalizationNode) asCNNNormalizationNode() *mpsneuralnetwork.MPSCNNNormalizationNode {
+	return &x.inner.MPSCNNNormalizationNode
+}
 
-func (x *CNNCrossChannelNormalizationNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSCNNNormalizationNode.MPSNNFilterNode }
+func (x *CNNCrossChannelNormalizationNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSCNNNormalizationNode.MPSNNFilterNode
+}
 
 // CNNCrossChannelNormalizationNodeable is the interface implemented by [CNNCrossChannelNormalizationNode], for mocking and DI.
 type CNNCrossChannelNormalizationNodeable interface {
@@ -109,4 +115,3 @@ type CNNCrossChannelNormalizationNodeable interface {
 }
 
 var _ CNNCrossChannelNormalizationNodeable = (*CNNCrossChannelNormalizationNode)(nil)
-

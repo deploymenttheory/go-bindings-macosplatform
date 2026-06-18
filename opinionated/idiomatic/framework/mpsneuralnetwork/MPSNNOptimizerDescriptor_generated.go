@@ -182,4 +182,3 @@ type NNOptimizerDescriptorable interface {
 }
 
 var _ NNOptimizerDescriptorable = (*NNOptimizerDescriptor)(nil)
-

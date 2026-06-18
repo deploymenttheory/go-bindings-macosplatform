@@ -16,8 +16,8 @@ type MPSNDArrayStridedSlice struct {
 }
 
 var (
-	_clsMPSNDArrayStridedSlice = _objcClass("MPSNDArrayStridedSlice")
-	_mPSNDArrayStridedSliceSelStrides = objc.RegisterName("strides")
+	_clsMPSNDArrayStridedSlice           = _objcClass("MPSNDArrayStridedSlice")
+	_mPSNDArrayStridedSliceSelStrides    = objc.RegisterName("strides")
 	_mPSNDArrayStridedSliceSelSetStrides = objc.RegisterName("setStrides:")
 )
 
@@ -40,4 +40,3 @@ func (o *MPSNDArrayStridedSlice) Strides() mpsndarray.MPSNDArrayOffsets {
 func (o *MPSNDArrayStridedSlice) SetStrides(strides mpsndarray.MPSNDArrayOffsets) {
 	o.Ptr().Send(_mPSNDArrayStridedSliceSelSetStrides, strides)
 }
-

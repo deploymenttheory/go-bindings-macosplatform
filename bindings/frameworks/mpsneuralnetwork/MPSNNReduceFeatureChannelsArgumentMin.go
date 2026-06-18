@@ -17,8 +17,8 @@ type MPSNNReduceFeatureChannelsArgumentMin struct {
 }
 
 var (
-	_clsMPSNNReduceFeatureChannelsArgumentMin = _objcClass("MPSNNReduceFeatureChannelsArgumentMin")
-	_mPSNNReduceFeatureChannelsArgumentMinSelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsMPSNNReduceFeatureChannelsArgumentMin                    = _objcClass("MPSNNReduceFeatureChannelsArgumentMin")
+	_mPSNNReduceFeatureChannelsArgumentMinSelInitWithDevice      = objc.RegisterName("initWithDevice:")
 	_mPSNNReduceFeatureChannelsArgumentMinSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
 )
 
@@ -34,14 +34,17 @@ func MPSNNReduceFeatureChannelsArgumentMinFromID(id objc.ID) *MPSNNReduceFeature
 
 func (o *MPSNNReduceFeatureChannelsArgumentMin) InitWithDevice(device metal.MTLDevice) *MPSNNReduceFeatureChannelsArgumentMin {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNReduceFeatureChannelsArgumentMinSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNReduceFeatureChannelsArgumentMinFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSCNNPooling @param      device      The MTLDevice on which to make the MPSCNNPooling @return     A new MPSNNReduceFeatureChannelsArgumentMin object, or nil if failure.
 func (o *MPSNNReduceFeatureChannelsArgumentMin) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSNNReduceFeatureChannelsArgumentMin {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNReduceFeatureChannelsArgumentMinSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNReduceFeatureChannelsArgumentMinFromID(_ret)
 }
-

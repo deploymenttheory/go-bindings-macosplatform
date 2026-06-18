@@ -20,18 +20,18 @@ type CNDetection struct {
 }
 
 var (
-	_clsCNDetection = _objcClass("CNDetection")
-	_cNDetectionSelInitWithTimeDetectionTypeNormalizedRectFocusDisparity = objc.RegisterName("initWithTime:detectionType:normalizedRect:focusDisparity:")
-	_cNDetectionSelIsValidDetectionID = objc.RegisterName("isValidDetectionID:")
-	_cNDetectionSelIsValidDetectionGroupID = objc.RegisterName("isValidDetectionGroupID:")
-	_cNDetectionSelAccessibilityLabelForDetectionType = objc.RegisterName("accessibilityLabelForDetectionType:")
+	_clsCNDetection                                                                    = _objcClass("CNDetection")
+	_cNDetectionSelInitWithTimeDetectionTypeNormalizedRectFocusDisparity               = objc.RegisterName("initWithTime:detectionType:normalizedRect:focusDisparity:")
+	_cNDetectionSelIsValidDetectionID                                                  = objc.RegisterName("isValidDetectionID:")
+	_cNDetectionSelIsValidDetectionGroupID                                             = objc.RegisterName("isValidDetectionGroupID:")
+	_cNDetectionSelAccessibilityLabelForDetectionType                                  = objc.RegisterName("accessibilityLabelForDetectionType:")
 	_cNDetectionSelDisparityInNormalizedRectSourceDisparityDetectionTypePriorDisparity = objc.RegisterName("disparityInNormalizedRect:sourceDisparity:detectionType:priorDisparity:")
-	_cNDetectionSelTime = objc.RegisterName("time")
-	_cNDetectionSelDetectionType = objc.RegisterName("detectionType")
-	_cNDetectionSelNormalizedRect = objc.RegisterName("normalizedRect")
-	_cNDetectionSelFocusDisparity = objc.RegisterName("focusDisparity")
-	_cNDetectionSelDetectionID = objc.RegisterName("detectionID")
-	_cNDetectionSelDetectionGroupID = objc.RegisterName("detectionGroupID")
+	_cNDetectionSelTime                                                                = objc.RegisterName("time")
+	_cNDetectionSelDetectionType                                                       = objc.RegisterName("detectionType")
+	_cNDetectionSelNormalizedRect                                                      = objc.RegisterName("normalizedRect")
+	_cNDetectionSelFocusDisparity                                                      = objc.RegisterName("focusDisparity")
+	_cNDetectionSelDetectionID                                                         = objc.RegisterName("detectionID")
+	_cNDetectionSelDetectionGroupID                                                    = objc.RegisterName("detectionGroupID")
 )
 
 func CNDetectionFromID(id objc.ID) *CNDetection {
@@ -47,7 +47,9 @@ func CNDetectionFromID(id objc.ID) *CNDetection {
 // Initialize a cinematic detection. For playback and edit, most detections are obtained by from the cinematic script rather than being created. However, if you need to add a custom track, you can build an array of detections to create one. Any detections you create will not have a valid detectionID until the custom track is added to the cinematic script. Doing so will return the assigned detectionID. Any detections newly obtained from the cinematic script will have their assigned detectionID. - Parameters: - time: the presentation time of the frame in which the detection occurred - detectionType: the type of object that was detected (face, torso, cat, dog, etc.) - normalizedRect: the rectangle within the image where the object occurs, normalized such that (0.0, 0.0) is the top-left and (1.0, 1.0) is the bottom-right - focusDisparity: the disparity to use in order to focus on the object (use the static `disparity` method to compute if unknown)
 func (o *CNDetection) InitWithTimeDetectionTypeNormalizedRectFocusDisparity(time_ coremedia.CMTime, detectionType CNDetectionType, normalizedRect corefoundation.CGRect, focusDisparity float32) *CNDetection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNDetectionSelInitWithTimeDetectionTypeNormalizedRectFocusDisparity, time_, detectionType, normalizedRect, focusDisparity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNDetectionFromID(_ret)
 }
 
@@ -66,7 +68,9 @@ func CNDetectionIsValidDetectionGroupID(detectionGroupID int64) bool {
 // A localized accessibility label converting a specific detection type into a broad category (person, pet, etc.).
 func CNDetectionAccessibilityLabelForDetectionType(detectionType CNDetectionType) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNDetection), _cNDetectionSelAccessibilityLabelForDetectionType, detectionType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -111,4 +115,3 @@ func (o *CNDetection) DetectionGroupID() int64 {
 	_ret := objc.Send[int64](o.Ptr(), _cNDetectionSelDetectionGroupID)
 	return _ret
 }
-

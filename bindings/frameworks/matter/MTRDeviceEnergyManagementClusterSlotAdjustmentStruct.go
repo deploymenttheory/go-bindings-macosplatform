@@ -16,13 +16,13 @@ type MTRDeviceEnergyManagementClusterSlotAdjustmentStruct struct {
 }
 
 var (
-	_clsMTRDeviceEnergyManagementClusterSlotAdjustmentStruct = _objcClass("MTRDeviceEnergyManagementClusterSlotAdjustmentStruct")
-	_mTRDeviceEnergyManagementClusterSlotAdjustmentStructSelSlotIndex = objc.RegisterName("slotIndex")
-	_mTRDeviceEnergyManagementClusterSlotAdjustmentStructSelSetSlotIndex = objc.RegisterName("setSlotIndex:")
-	_mTRDeviceEnergyManagementClusterSlotAdjustmentStructSelNominalPower = objc.RegisterName("nominalPower")
+	_clsMTRDeviceEnergyManagementClusterSlotAdjustmentStruct                = _objcClass("MTRDeviceEnergyManagementClusterSlotAdjustmentStruct")
+	_mTRDeviceEnergyManagementClusterSlotAdjustmentStructSelSlotIndex       = objc.RegisterName("slotIndex")
+	_mTRDeviceEnergyManagementClusterSlotAdjustmentStructSelSetSlotIndex    = objc.RegisterName("setSlotIndex:")
+	_mTRDeviceEnergyManagementClusterSlotAdjustmentStructSelNominalPower    = objc.RegisterName("nominalPower")
 	_mTRDeviceEnergyManagementClusterSlotAdjustmentStructSelSetNominalPower = objc.RegisterName("setNominalPower:")
-	_mTRDeviceEnergyManagementClusterSlotAdjustmentStructSelDuration = objc.RegisterName("duration")
-	_mTRDeviceEnergyManagementClusterSlotAdjustmentStructSelSetDuration = objc.RegisterName("setDuration:")
+	_mTRDeviceEnergyManagementClusterSlotAdjustmentStructSelDuration        = objc.RegisterName("duration")
+	_mTRDeviceEnergyManagementClusterSlotAdjustmentStructSelSetDuration     = objc.RegisterName("setDuration:")
 )
 
 func MTRDeviceEnergyManagementClusterSlotAdjustmentStructFromID(id objc.ID) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct {
@@ -37,7 +37,9 @@ func MTRDeviceEnergyManagementClusterSlotAdjustmentStructFromID(id objc.ID) *MTR
 
 func (o *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) SlotIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterSlotAdjustmentStructSelSlotIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) SetSlotIndex(slot
 
 func (o *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) NominalPower() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterSlotAdjustmentStructSelNominalPower)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) SetNominalPower(n
 
 func (o *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) Duration() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterSlotAdjustmentStructSelDuration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) SetDuration(duration *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDeviceEnergyManagementClusterSlotAdjustmentStructSelSetDuration, duration.Ptr())
 }
-

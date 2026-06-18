@@ -96,11 +96,17 @@ func (x *NNMultiplicationGradientNode) WithLabel(label string) *NNMultiplication
 	return x
 }
 
-func (x *NNMultiplicationGradientNode) asNNArithmeticGradientNode() *raw.MPSNNArithmeticGradientNode { return &x.inner.MPSNNArithmeticGradientNode }
+func (x *NNMultiplicationGradientNode) asNNArithmeticGradientNode() *raw.MPSNNArithmeticGradientNode {
+	return &x.inner.MPSNNArithmeticGradientNode
+}
 
-func (x *NNMultiplicationGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode { return &x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode }
+func (x *NNMultiplicationGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode {
+	return &x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode
+}
 
-func (x *NNMultiplicationGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode }
+func (x *NNMultiplicationGradientNode) asNNFilterNode() *raw.MPSNNFilterNode {
+	return &x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode
+}
 
 // NNMultiplicationGradientNodeable is the interface implemented by [NNMultiplicationGradientNode], for mocking and DI.
 type NNMultiplicationGradientNodeable interface {
@@ -118,4 +124,3 @@ type NNMultiplicationGradientNodeable interface {
 }
 
 var _ NNMultiplicationGradientNodeable = (*NNMultiplicationGradientNode)(nil)
-

@@ -15,11 +15,15 @@ type MTRTimeSynchronizationClusterMissingTrustedTimeSourceEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRTimeSynchronizationClusterMissingTrustedTimeSourceEvent].
-func (x *MTRTimeSynchronizationClusterMissingTrustedTimeSourceEvent) Unwrap() *raw.MTRTimeSynchronizationClusterMissingTrustedTimeSourceEvent { return x.inner }
+func (x *MTRTimeSynchronizationClusterMissingTrustedTimeSourceEvent) Unwrap() *raw.MTRTimeSynchronizationClusterMissingTrustedTimeSourceEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRTimeSynchronizationClusterMissingTrustedTimeSourceEvent) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRTimeSynchronizationClusterMissingTrustedTimeSourceEvent) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRTimeSynchronizationClusterMissingTrustedTimeSourceEventFromID adopts an existing object pointer as a MTRTimeSynchronizationClusterMissingTrustedTimeSourceEvent (nil for 0).
 func MTRTimeSynchronizationClusterMissingTrustedTimeSourceEventFromID(id objc.ID) *MTRTimeSynchronizationClusterMissingTrustedTimeSourceEvent {
@@ -41,4 +45,3 @@ type MTRTimeSynchronizationClusterMissingTrustedTimeSourceEventable interface {
 }
 
 var _ MTRTimeSynchronizationClusterMissingTrustedTimeSourceEventable = (*MTRTimeSynchronizationClusterMissingTrustedTimeSourceEvent)(nil)
-

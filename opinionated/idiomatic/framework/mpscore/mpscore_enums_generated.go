@@ -13,12 +13,12 @@ import (
 type MPSAliasingStrategy uint64
 
 const (
-	MPSAliasingStrategyDefault MPSAliasingStrategy = 0
-	MPSAliasingStrategyDontCare MPSAliasingStrategy = 0
-	MPSAliasingStrategyShallAlias MPSAliasingStrategy = 1
-	MPSAliasingStrategyShallNotAlias MPSAliasingStrategy = 2
-	MPSAliasingStrategyAliasingReserved MPSAliasingStrategy = 3
-	MPSAliasingStrategyPreferTemporaryMemory MPSAliasingStrategy = 4
+	MPSAliasingStrategyDefault                  MPSAliasingStrategy = 0
+	MPSAliasingStrategyDontCare                 MPSAliasingStrategy = 0
+	MPSAliasingStrategyShallAlias               MPSAliasingStrategy = 1
+	MPSAliasingStrategyShallNotAlias            MPSAliasingStrategy = 2
+	MPSAliasingStrategyAliasingReserved         MPSAliasingStrategy = 3
+	MPSAliasingStrategyPreferTemporaryMemory    MPSAliasingStrategy = 4
 	MPSAliasingStrategyPreferNonTemporaryMemory MPSAliasingStrategy = 8
 )
 
@@ -66,34 +66,34 @@ func (e MPSDataLayout) String() string {
 type MPSDataType int64
 
 const (
-	MPSDataTypeInvalid MPSDataType = 0
-	MPSDataTypeFloatBit MPSDataType = 268435456
-	MPSDataTypeFloat32 MPSDataType = 268435488
-	MPSDataTypeFloat16 MPSDataType = 268435472
-	MPSDataTypeComplexBit MPSDataType = 16777216
-	MPSDataTypeComplexFloat32 MPSDataType = 285212736
-	MPSDataTypeComplexFloat16 MPSDataType = 285212704
-	MPSDataTypeSignedBit MPSDataType = 536870912
-	MPSDataTypeIntBit MPSDataType = 536870912
-	MPSDataTypeInt2 MPSDataType = 536870914
-	MPSDataTypeInt4 MPSDataType = 536870916
-	MPSDataTypeInt8 MPSDataType = 536870920
-	MPSDataTypeInt16 MPSDataType = 536870928
-	MPSDataTypeInt32 MPSDataType = 536870944
-	MPSDataTypeInt64 MPSDataType = 536870976
-	MPSDataTypeUInt2 MPSDataType = 2
-	MPSDataTypeUInt4 MPSDataType = 4
-	MPSDataTypeUInt8 MPSDataType = 8
-	MPSDataTypeUInt16 MPSDataType = 16
-	MPSDataTypeUInt32 MPSDataType = 32
-	MPSDataTypeUInt64 MPSDataType = 64
+	MPSDataTypeInvalid              MPSDataType = 0
+	MPSDataTypeFloatBit             MPSDataType = 268435456
+	MPSDataTypeFloat32              MPSDataType = 268435488
+	MPSDataTypeFloat16              MPSDataType = 268435472
+	MPSDataTypeComplexBit           MPSDataType = 16777216
+	MPSDataTypeComplexFloat32       MPSDataType = 285212736
+	MPSDataTypeComplexFloat16       MPSDataType = 285212704
+	MPSDataTypeSignedBit            MPSDataType = 536870912
+	MPSDataTypeIntBit               MPSDataType = 536870912
+	MPSDataTypeInt2                 MPSDataType = 536870914
+	MPSDataTypeInt4                 MPSDataType = 536870916
+	MPSDataTypeInt8                 MPSDataType = 536870920
+	MPSDataTypeInt16                MPSDataType = 536870928
+	MPSDataTypeInt32                MPSDataType = 536870944
+	MPSDataTypeInt64                MPSDataType = 536870976
+	MPSDataTypeUInt2                MPSDataType = 2
+	MPSDataTypeUInt4                MPSDataType = 4
+	MPSDataTypeUInt8                MPSDataType = 8
+	MPSDataTypeUInt16               MPSDataType = 16
+	MPSDataTypeUInt32               MPSDataType = 32
+	MPSDataTypeUInt64               MPSDataType = 64
 	MPSDataTypeAlternateEncodingBit MPSDataType = 2147483648
-	MPSDataTypeBool MPSDataType = 2147483656
-	MPSDataTypeBFloat16 MPSDataType = 2415919120
-	MPSDataTypeComplexBFloat16 MPSDataType = 2432696352
-	MPSDataTypeNormalizedBit MPSDataType = 1073741824
-	MPSDataTypeUnorm1 MPSDataType = 1073741825
-	MPSDataTypeUnorm8 MPSDataType = 1073741832
+	MPSDataTypeBool                 MPSDataType = 2147483656
+	MPSDataTypeBFloat16             MPSDataType = 2415919120
+	MPSDataTypeComplexBFloat16      MPSDataType = 2432696352
+	MPSDataTypeNormalizedBit        MPSDataType = 1073741824
+	MPSDataTypeUnorm1               MPSDataType = 1073741825
+	MPSDataTypeUnorm8               MPSDataType = 1073741832
 )
 
 func (e MPSDataType) String() string {
@@ -172,7 +172,7 @@ const (
 	MPSImageFeatureChannelFormatFloat32 MPSImageFeatureChannelFormat = 4
 	// Reserved for later expansion
 	MPSImageFeatureChannelFormat_reserved0 MPSImageFeatureChannelFormat = 5
-	MPSImageFeatureChannelFormatCount MPSImageFeatureChannelFormat = 6
+	MPSImageFeatureChannelFormatCount      MPSImageFeatureChannelFormat = 6
 )
 
 func (e MPSImageFeatureChannelFormat) String() string {
@@ -241,10 +241,10 @@ type MPSPurgeableState uint64
 
 const (
 	MPSPurgeableStateAllocationDeferred MPSPurgeableState = 0
-	MPSPurgeableStateKeepCurrent MPSPurgeableState = 1
-	MPSPurgeableStateNonVolatile MPSPurgeableState = 2
-	MPSPurgeableStateVolatile MPSPurgeableState = 3
-	MPSPurgeableStateEmpty MPSPurgeableState = 4
+	MPSPurgeableStateKeepCurrent        MPSPurgeableState = 1
+	MPSPurgeableStateNonVolatile        MPSPurgeableState = 2
+	MPSPurgeableStateVolatile           MPSPurgeableState = 3
+	MPSPurgeableStateEmpty              MPSPurgeableState = 4
 )
 
 func (e MPSPurgeableState) String() string {
@@ -267,8 +267,8 @@ func (e MPSPurgeableState) String() string {
 type MPSStateResourceType uint64
 
 const (
-	MPSStateResourceTypeNone MPSStateResourceType = 0
-	MPSStateResourceTypeBuffer MPSStateResourceType = 1
+	MPSStateResourceTypeNone    MPSStateResourceType = 0
+	MPSStateResourceTypeBuffer  MPSStateResourceType = 1
 	MPSStateResourceTypeTexture MPSStateResourceType = 2
 )
 
@@ -284,4 +284,3 @@ func (e MPSStateResourceType) String() string {
 		return fmt.Sprintf("MPSStateResourceType(%d)", int64(e))
 	}
 }
-

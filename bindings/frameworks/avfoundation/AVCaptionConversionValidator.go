@@ -17,15 +17,15 @@ type AVCaptionConversionValidator struct {
 }
 
 var (
-	_clsAVCaptionConversionValidator = _objcClass("AVCaptionConversionValidator")
+	_clsAVCaptionConversionValidator                                                                  = _objcClass("AVCaptionConversionValidator")
 	_aVCaptionConversionValidatorSelCaptionConversionValidatorWithCaptionsTimeRangeConversionSettings = objc.RegisterName("captionConversionValidatorWithCaptions:timeRange:conversionSettings:")
-	_aVCaptionConversionValidatorSelInitWithCaptionsTimeRangeConversionSettings = objc.RegisterName("initWithCaptions:timeRange:conversionSettings:")
-	_aVCaptionConversionValidatorSelValidateCaptionConversionWithWarningHandler = objc.RegisterName("validateCaptionConversionWithWarningHandler:")
-	_aVCaptionConversionValidatorSelStopValidating = objc.RegisterName("stopValidating")
-	_aVCaptionConversionValidatorSelStatus = objc.RegisterName("status")
-	_aVCaptionConversionValidatorSelCaptions = objc.RegisterName("captions")
-	_aVCaptionConversionValidatorSelTimeRange = objc.RegisterName("timeRange")
-	_aVCaptionConversionValidatorSelWarnings = objc.RegisterName("warnings")
+	_aVCaptionConversionValidatorSelInitWithCaptionsTimeRangeConversionSettings                       = objc.RegisterName("initWithCaptions:timeRange:conversionSettings:")
+	_aVCaptionConversionValidatorSelValidateCaptionConversionWithWarningHandler                       = objc.RegisterName("validateCaptionConversionWithWarningHandler:")
+	_aVCaptionConversionValidatorSelStopValidating                                                    = objc.RegisterName("stopValidating")
+	_aVCaptionConversionValidatorSelStatus                                                            = objc.RegisterName("status")
+	_aVCaptionConversionValidatorSelCaptions                                                          = objc.RegisterName("captions")
+	_aVCaptionConversionValidatorSelTimeRange                                                         = objc.RegisterName("timeRange")
+	_aVCaptionConversionValidatorSelWarnings                                                          = objc.RegisterName("warnings")
 )
 
 func AVCaptionConversionValidatorFromID(id objc.ID) *AVCaptionConversionValidator {
@@ -41,14 +41,18 @@ func AVCaptionConversionValidatorFromID(id objc.ID) *AVCaptionConversionValidato
 // @method        captionConversionValidatorWithCaptions:startTime:conversionSettings: @abstract      Returns an instance of AVCaptionConversionValidator that can validate an array of captions for a specific conversion operation and warn about problems that are encountered. @param         captions The array of captions to be validated. @param         timeRange The timeRange of the media timeline into which the specified captions must be integrated. See the timeRange property for further details. @param         conversionSettings Describes the conversion operation for which the captions are to be validated. @result        A new instance of AVCaptionConversionValidator configured to perform the specified validation. @discussion    This method throws an exception if the conversion setting's AVCaptionMediaTypeKey is not equal to AVMediaTypeClosedCaption, or if its AVCaptionMediaSubTypeKey is not equal to kCMClosedCaptionFormatType_CEA608.
 func AVCaptionConversionValidatorCaptionConversionValidatorWithCaptionsTimeRangeConversionSettings(captions *foundation.NSArray[*AVCaption], timeRange coremedia.CMTimeRange, conversionSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVCaptionConversionValidator {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptionConversionValidator), _aVCaptionConversionValidatorSelCaptionConversionValidatorWithCaptionsTimeRangeConversionSettings, captions.Ptr(), timeRange, conversionSettings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptionConversionValidatorFromID(_ret)
 }
 
 // @method        initWithCaptions:startTime:conversionSettings: @abstract      Returns an instance of AVCaptionConversionValidator that can validate an array of captions for a specific conversion operation and warn about problems that are encountered. @param         captions The array of captions for which the validation is requested. @param         timeRange The timeRange of the media timeline into which the specified captions must be integrated. See the timeRange property for further details. @param         conversionSettings Describes the conversion operation for which the captions are to be validated. @result        A new instance of AVCaptionConversionValidator configured to perform the specified validation.
 func (o *AVCaptionConversionValidator) InitWithCaptionsTimeRangeConversionSettings(captions *foundation.NSArray[*AVCaption], timeRange coremedia.CMTimeRange, conversionSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVCaptionConversionValidator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptionConversionValidatorSelInitWithCaptionsTimeRangeConversionSettings, captions.Ptr(), timeRange, conversionSettings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptionConversionValidatorFromID(_ret)
 }
 
@@ -81,7 +85,9 @@ func (o *AVCaptionConversionValidator) Status() AVCaptionConversionValidatorStat
 // @property      captions @abstract      The array of captions to be validated for the specified conversion operation.
 func (o *AVCaptionConversionValidator) Captions() *foundation.NSArray[*AVCaption] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptionConversionValidatorSelCaptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVCaption](_ret)
 }
 
@@ -94,7 +100,8 @@ func (o *AVCaptionConversionValidator) TimeRange() coremedia.CMTimeRange {
 // @property      warnings @abstract      Provides the collection of warnings for problems that have been encountered. While the value of status is AVCaptionConversionValidatorStatusValidating, the count of warnings may increase.
 func (o *AVCaptionConversionValidator) Warnings() *foundation.NSArray[*AVCaptionConversionWarning] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptionConversionValidatorSelWarnings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVCaptionConversionWarning](_ret)
 }
-

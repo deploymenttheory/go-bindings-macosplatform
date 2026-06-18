@@ -17,43 +17,43 @@ type WKWebViewConfiguration struct {
 }
 
 var (
-	_clsWKWebViewConfiguration = _objcClass("WKWebViewConfiguration")
-	_wKWebViewConfigurationSelSetURLSchemeHandlerForURLScheme = objc.RegisterName("setURLSchemeHandler:forURLScheme:")
-	_wKWebViewConfigurationSelUrlSchemeHandlerForURLScheme = objc.RegisterName("urlSchemeHandlerForURLScheme:")
-	_wKWebViewConfigurationSelProcessPool = objc.RegisterName("processPool")
-	_wKWebViewConfigurationSelSetProcessPool = objc.RegisterName("setProcessPool:")
-	_wKWebViewConfigurationSelPreferences = objc.RegisterName("preferences")
-	_wKWebViewConfigurationSelSetPreferences = objc.RegisterName("setPreferences:")
-	_wKWebViewConfigurationSelUserContentController = objc.RegisterName("userContentController")
-	_wKWebViewConfigurationSelSetUserContentController = objc.RegisterName("setUserContentController:")
-	_wKWebViewConfigurationSelWebExtensionController = objc.RegisterName("webExtensionController")
-	_wKWebViewConfigurationSelSetWebExtensionController = objc.RegisterName("setWebExtensionController:")
-	_wKWebViewConfigurationSelWebsiteDataStore = objc.RegisterName("websiteDataStore")
-	_wKWebViewConfigurationSelSetWebsiteDataStore = objc.RegisterName("setWebsiteDataStore:")
-	_wKWebViewConfigurationSelSuppressesIncrementalRendering = objc.RegisterName("suppressesIncrementalRendering")
-	_wKWebViewConfigurationSelSetSuppressesIncrementalRendering = objc.RegisterName("setSuppressesIncrementalRendering:")
-	_wKWebViewConfigurationSelApplicationNameForUserAgent = objc.RegisterName("applicationNameForUserAgent")
-	_wKWebViewConfigurationSelSetApplicationNameForUserAgent = objc.RegisterName("setApplicationNameForUserAgent:")
-	_wKWebViewConfigurationSelAllowsAirPlayForMediaPlayback = objc.RegisterName("allowsAirPlayForMediaPlayback")
-	_wKWebViewConfigurationSelSetAllowsAirPlayForMediaPlayback = objc.RegisterName("setAllowsAirPlayForMediaPlayback:")
-	_wKWebViewConfigurationSelShowsSystemScreenTimeBlockingView = objc.RegisterName("showsSystemScreenTimeBlockingView")
-	_wKWebViewConfigurationSelSetShowsSystemScreenTimeBlockingView = objc.RegisterName("setShowsSystemScreenTimeBlockingView:")
-	_wKWebViewConfigurationSelUpgradeKnownHostsToHTTPS = objc.RegisterName("upgradeKnownHostsToHTTPS")
-	_wKWebViewConfigurationSelSetUpgradeKnownHostsToHTTPS = objc.RegisterName("setUpgradeKnownHostsToHTTPS:")
-	_wKWebViewConfigurationSelMediaTypesRequiringUserActionForPlayback = objc.RegisterName("mediaTypesRequiringUserActionForPlayback")
+	_clsWKWebViewConfiguration                                            = _objcClass("WKWebViewConfiguration")
+	_wKWebViewConfigurationSelSetURLSchemeHandlerForURLScheme             = objc.RegisterName("setURLSchemeHandler:forURLScheme:")
+	_wKWebViewConfigurationSelUrlSchemeHandlerForURLScheme                = objc.RegisterName("urlSchemeHandlerForURLScheme:")
+	_wKWebViewConfigurationSelProcessPool                                 = objc.RegisterName("processPool")
+	_wKWebViewConfigurationSelSetProcessPool                              = objc.RegisterName("setProcessPool:")
+	_wKWebViewConfigurationSelPreferences                                 = objc.RegisterName("preferences")
+	_wKWebViewConfigurationSelSetPreferences                              = objc.RegisterName("setPreferences:")
+	_wKWebViewConfigurationSelUserContentController                       = objc.RegisterName("userContentController")
+	_wKWebViewConfigurationSelSetUserContentController                    = objc.RegisterName("setUserContentController:")
+	_wKWebViewConfigurationSelWebExtensionController                      = objc.RegisterName("webExtensionController")
+	_wKWebViewConfigurationSelSetWebExtensionController                   = objc.RegisterName("setWebExtensionController:")
+	_wKWebViewConfigurationSelWebsiteDataStore                            = objc.RegisterName("websiteDataStore")
+	_wKWebViewConfigurationSelSetWebsiteDataStore                         = objc.RegisterName("setWebsiteDataStore:")
+	_wKWebViewConfigurationSelSuppressesIncrementalRendering              = objc.RegisterName("suppressesIncrementalRendering")
+	_wKWebViewConfigurationSelSetSuppressesIncrementalRendering           = objc.RegisterName("setSuppressesIncrementalRendering:")
+	_wKWebViewConfigurationSelApplicationNameForUserAgent                 = objc.RegisterName("applicationNameForUserAgent")
+	_wKWebViewConfigurationSelSetApplicationNameForUserAgent              = objc.RegisterName("setApplicationNameForUserAgent:")
+	_wKWebViewConfigurationSelAllowsAirPlayForMediaPlayback               = objc.RegisterName("allowsAirPlayForMediaPlayback")
+	_wKWebViewConfigurationSelSetAllowsAirPlayForMediaPlayback            = objc.RegisterName("setAllowsAirPlayForMediaPlayback:")
+	_wKWebViewConfigurationSelShowsSystemScreenTimeBlockingView           = objc.RegisterName("showsSystemScreenTimeBlockingView")
+	_wKWebViewConfigurationSelSetShowsSystemScreenTimeBlockingView        = objc.RegisterName("setShowsSystemScreenTimeBlockingView:")
+	_wKWebViewConfigurationSelUpgradeKnownHostsToHTTPS                    = objc.RegisterName("upgradeKnownHostsToHTTPS")
+	_wKWebViewConfigurationSelSetUpgradeKnownHostsToHTTPS                 = objc.RegisterName("setUpgradeKnownHostsToHTTPS:")
+	_wKWebViewConfigurationSelMediaTypesRequiringUserActionForPlayback    = objc.RegisterName("mediaTypesRequiringUserActionForPlayback")
 	_wKWebViewConfigurationSelSetMediaTypesRequiringUserActionForPlayback = objc.RegisterName("setMediaTypesRequiringUserActionForPlayback:")
-	_wKWebViewConfigurationSelDefaultWebpagePreferences = objc.RegisterName("defaultWebpagePreferences")
-	_wKWebViewConfigurationSelSetDefaultWebpagePreferences = objc.RegisterName("setDefaultWebpagePreferences:")
-	_wKWebViewConfigurationSelLimitsNavigationsToAppBoundDomains = objc.RegisterName("limitsNavigationsToAppBoundDomains")
-	_wKWebViewConfigurationSelSetLimitsNavigationsToAppBoundDomains = objc.RegisterName("setLimitsNavigationsToAppBoundDomains:")
-	_wKWebViewConfigurationSelAllowsInlinePredictions = objc.RegisterName("allowsInlinePredictions")
-	_wKWebViewConfigurationSelSetAllowsInlinePredictions = objc.RegisterName("setAllowsInlinePredictions:")
-	_wKWebViewConfigurationSelUserInterfaceDirectionPolicy = objc.RegisterName("userInterfaceDirectionPolicy")
-	_wKWebViewConfigurationSelSetUserInterfaceDirectionPolicy = objc.RegisterName("setUserInterfaceDirectionPolicy:")
-	_wKWebViewConfigurationSelSupportsAdaptiveImageGlyph = objc.RegisterName("supportsAdaptiveImageGlyph")
-	_wKWebViewConfigurationSelSetSupportsAdaptiveImageGlyph = objc.RegisterName("setSupportsAdaptiveImageGlyph:")
-	_wKWebViewConfigurationSelWritingToolsBehavior = objc.RegisterName("writingToolsBehavior")
-	_wKWebViewConfigurationSelSetWritingToolsBehavior = objc.RegisterName("setWritingToolsBehavior:")
+	_wKWebViewConfigurationSelDefaultWebpagePreferences                   = objc.RegisterName("defaultWebpagePreferences")
+	_wKWebViewConfigurationSelSetDefaultWebpagePreferences                = objc.RegisterName("setDefaultWebpagePreferences:")
+	_wKWebViewConfigurationSelLimitsNavigationsToAppBoundDomains          = objc.RegisterName("limitsNavigationsToAppBoundDomains")
+	_wKWebViewConfigurationSelSetLimitsNavigationsToAppBoundDomains       = objc.RegisterName("setLimitsNavigationsToAppBoundDomains:")
+	_wKWebViewConfigurationSelAllowsInlinePredictions                     = objc.RegisterName("allowsInlinePredictions")
+	_wKWebViewConfigurationSelSetAllowsInlinePredictions                  = objc.RegisterName("setAllowsInlinePredictions:")
+	_wKWebViewConfigurationSelUserInterfaceDirectionPolicy                = objc.RegisterName("userInterfaceDirectionPolicy")
+	_wKWebViewConfigurationSelSetUserInterfaceDirectionPolicy             = objc.RegisterName("setUserInterfaceDirectionPolicy:")
+	_wKWebViewConfigurationSelSupportsAdaptiveImageGlyph                  = objc.RegisterName("supportsAdaptiveImageGlyph")
+	_wKWebViewConfigurationSelSetSupportsAdaptiveImageGlyph               = objc.RegisterName("setSupportsAdaptiveImageGlyph:")
+	_wKWebViewConfigurationSelWritingToolsBehavior                        = objc.RegisterName("writingToolsBehavior")
+	_wKWebViewConfigurationSelSetWritingToolsBehavior                     = objc.RegisterName("setWritingToolsBehavior:")
 )
 
 func WKWebViewConfigurationFromID(id objc.ID) *WKWebViewConfiguration {
@@ -79,7 +79,9 @@ func (o *WKWebViewConfiguration) UrlSchemeHandlerForURLScheme(urlScheme *foundat
 // Deprecated: Creating and using multiple instances of WKProcessPool no longer has any effect.
 func (o *WKWebViewConfiguration) ProcessPool() *WKProcessPool {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewConfigurationSelProcessPool)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKProcessPoolFromID(_ret)
 }
 
@@ -92,7 +94,9 @@ func (o *WKWebViewConfiguration) SetProcessPool(processPool *WKProcessPool) {
 // Deprecated: Creating and using multiple instances of WKProcessPool no longer has any effect.
 func (o *WKWebViewConfiguration) Preferences() *WKPreferences {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewConfigurationSelPreferences)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKPreferencesFromID(_ret)
 }
 
@@ -103,7 +107,9 @@ func (o *WKWebViewConfiguration) SetPreferences(preferences *WKPreferences) {
 // @abstract The user content controller to associate with the web view.
 func (o *WKWebViewConfiguration) UserContentController() *WKUserContentController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewConfigurationSelUserContentController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKUserContentControllerFromID(_ret)
 }
 
@@ -114,7 +120,9 @@ func (o *WKWebViewConfiguration) SetUserContentController(userContentController 
 // @abstract The web extension controller to associate with the web view.
 func (o *WKWebViewConfiguration) WebExtensionController() *WKWebExtensionController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewConfigurationSelWebExtensionController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebExtensionControllerFromID(_ret)
 }
 
@@ -125,7 +133,9 @@ func (o *WKWebViewConfiguration) SetWebExtensionController(webExtensionControlle
 // @abstract The website data store to be used by the web view.
 func (o *WKWebViewConfiguration) WebsiteDataStore() *WKWebsiteDataStore {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewConfigurationSelWebsiteDataStore)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebsiteDataStoreFromID(_ret)
 }
 
@@ -146,7 +156,9 @@ func (o *WKWebViewConfiguration) SetSuppressesIncrementalRendering(suppressesInc
 // @abstract The name of the application as used in the user agent string.
 func (o *WKWebViewConfiguration) ApplicationNameForUserAgent() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewConfigurationSelApplicationNameForUserAgent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -196,7 +208,9 @@ func (o *WKWebViewConfiguration) SetMediaTypesRequiringUserActionForPlayback(med
 // @abstract The set of default webpage preferences to use when loading and rendering content. @discussion These default webpage preferences are additionally passed to the navigation delegate in -webView:decidePolicyForNavigationAction:preferences:decisionHandler:.
 func (o *WKWebViewConfiguration) DefaultWebpagePreferences() *WKWebpagePreferences {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewConfigurationSelDefaultWebpagePreferences)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebpagePreferencesFromID(_ret)
 }
 
@@ -252,4 +266,3 @@ func (o *WKWebViewConfiguration) WritingToolsBehavior() appkit.NSWritingToolsBeh
 func (o *WKWebViewConfiguration) SetWritingToolsBehavior(writingToolsBehavior appkit.NSWritingToolsBehavior) {
 	o.Ptr().Send(_wKWebViewConfigurationSelSetWritingToolsBehavior, writingToolsBehavior)
 }
-

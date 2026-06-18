@@ -17,7 +17,9 @@ type MTL4SpecializedFunctionDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTL4SpecializedFunctionDescriptor].
-func (x *MTL4SpecializedFunctionDescriptor) Unwrap() *raw.MTL4SpecializedFunctionDescriptor { return x.inner }
+func (x *MTL4SpecializedFunctionDescriptor) Unwrap() *raw.MTL4SpecializedFunctionDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -97,7 +99,9 @@ func (x *MTL4SpecializedFunctionDescriptor) SetConstantValues(constantValues *ra
 	x.inner.SetConstantValues(constantValues)
 }
 
-func (x *MTL4SpecializedFunctionDescriptor) asMTL4FunctionDescriptor() *raw.MTL4FunctionDescriptor { return &x.inner.MTL4FunctionDescriptor }
+func (x *MTL4SpecializedFunctionDescriptor) asMTL4FunctionDescriptor() *raw.MTL4FunctionDescriptor {
+	return &x.inner.MTL4FunctionDescriptor
+}
 
 // MTL4SpecializedFunctionDescriptorable is the interface implemented by [MTL4SpecializedFunctionDescriptor], for mocking and DI.
 type MTL4SpecializedFunctionDescriptorable interface {
@@ -114,4 +118,3 @@ type MTL4SpecializedFunctionDescriptorable interface {
 }
 
 var _ MTL4SpecializedFunctionDescriptorable = (*MTL4SpecializedFunctionDescriptor)(nil)
-

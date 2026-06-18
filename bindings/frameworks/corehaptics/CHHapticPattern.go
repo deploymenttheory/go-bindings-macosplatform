@@ -18,13 +18,13 @@ type CHHapticPattern struct {
 }
 
 var (
-	_clsCHHapticPattern = _objcClass("CHHapticPattern")
-	_cHHapticPatternSelInitWithEventsParametersError = objc.RegisterName("initWithEvents:parameters:error:")
+	_clsCHHapticPattern                                   = _objcClass("CHHapticPattern")
+	_cHHapticPatternSelInitWithEventsParametersError      = objc.RegisterName("initWithEvents:parameters:error:")
 	_cHHapticPatternSelInitWithEventsParameterCurvesError = objc.RegisterName("initWithEvents:parameterCurves:error:")
-	_cHHapticPatternSelInitWithDictionaryError = objc.RegisterName("initWithDictionary:error:")
-	_cHHapticPatternSelInitWithContentsOfURLError = objc.RegisterName("initWithContentsOfURL:error:")
-	_cHHapticPatternSelExportDictionaryAndReturnError = objc.RegisterName("exportDictionaryAndReturnError:")
-	_cHHapticPatternSelDuration = objc.RegisterName("duration")
+	_cHHapticPatternSelInitWithDictionaryError            = objc.RegisterName("initWithDictionary:error:")
+	_cHHapticPatternSelInitWithContentsOfURLError         = objc.RegisterName("initWithContentsOfURL:error:")
+	_cHHapticPatternSelExportDictionaryAndReturnError     = objc.RegisterName("exportDictionaryAndReturnError:")
+	_cHHapticPatternSelDuration                           = objc.RegisterName("duration")
 )
 
 func CHHapticPatternFromID(id objc.ID) *CHHapticPattern {
@@ -41,7 +41,9 @@ func CHHapticPatternFromID(id objc.ID) *CHHapticPattern {
 func (o *CHHapticPattern) InitWithEventsParametersError(events *foundation.NSArray[*CHHapticEvent], parameters *foundation.NSArray[*CHHapticDynamicParameter]) (*CHHapticPattern, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticPatternSelInitWithEventsParametersError, events.Ptr(), parameters.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -52,7 +54,9 @@ func (o *CHHapticPattern) InitWithEventsParametersError(events *foundation.NSArr
 func (o *CHHapticPattern) InitWithEventsParameterCurvesError(events *foundation.NSArray[*CHHapticEvent], parameterCurves *foundation.NSArray[*CHHapticParameterCurve]) (*CHHapticPattern, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticPatternSelInitWithEventsParameterCurvesError, events.Ptr(), parameterCurves.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -63,7 +67,9 @@ func (o *CHHapticPattern) InitWithEventsParameterCurvesError(events *foundation.
 func (o *CHHapticPattern) InitWithDictionaryError(patternDict *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*CHHapticPattern, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticPatternSelInitWithDictionaryError, patternDict, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -74,7 +80,9 @@ func (o *CHHapticPattern) InitWithDictionaryError(patternDict *foundation.NSDict
 func (o *CHHapticPattern) InitWithContentsOfURLError(ahapURL *foundation.NSURL) (*CHHapticPattern, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticPatternSelInitWithContentsOfURLError, ahapURL.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -96,4 +104,3 @@ func (o *CHHapticPattern) Duration() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _cHHapticPatternSelDuration)
 	return _ret
 }
-

@@ -26,4 +26,3 @@ func MDLMeshBufferDataAllocatorFromID(id objc.ID) *MDLMeshBufferDataAllocator {
 	purego.Track(o)
 	return o
 }
-

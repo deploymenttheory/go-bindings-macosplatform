@@ -85,7 +85,9 @@ func (x *MatrixRandomPhilox) WithLabel(label string) *MatrixRandomPhilox {
 	return x
 }
 
-func (x *MatrixRandomPhilox) asMatrixRandom() *mpsmatrix.MPSMatrixRandom { return &x.inner.MPSMatrixRandom }
+func (x *MatrixRandomPhilox) asMatrixRandom() *mpsmatrix.MPSMatrixRandom {
+	return &x.inner.MPSMatrixRandom
+}
 
 func (x *MatrixRandomPhilox) asKernel() *mpscore.MPSKernel { return &x.inner.MPSMatrixRandom.MPSKernel }
 
@@ -99,4 +101,3 @@ type MatrixRandomPhiloxable interface {
 }
 
 var _ MatrixRandomPhiloxable = (*MatrixRandomPhilox)(nil)
-

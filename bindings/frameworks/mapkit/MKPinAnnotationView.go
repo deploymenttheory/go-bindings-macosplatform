@@ -17,16 +17,16 @@ type MKPinAnnotationView struct {
 }
 
 var (
-	_clsMKPinAnnotationView = _objcClass("MKPinAnnotationView")
-	_mKPinAnnotationViewSelRedPinColor = objc.RegisterName("redPinColor")
-	_mKPinAnnotationViewSelGreenPinColor = objc.RegisterName("greenPinColor")
-	_mKPinAnnotationViewSelPurplePinColor = objc.RegisterName("purplePinColor")
-	_mKPinAnnotationViewSelPinTintColor = objc.RegisterName("pinTintColor")
+	_clsMKPinAnnotationView                = _objcClass("MKPinAnnotationView")
+	_mKPinAnnotationViewSelRedPinColor     = objc.RegisterName("redPinColor")
+	_mKPinAnnotationViewSelGreenPinColor   = objc.RegisterName("greenPinColor")
+	_mKPinAnnotationViewSelPurplePinColor  = objc.RegisterName("purplePinColor")
+	_mKPinAnnotationViewSelPinTintColor    = objc.RegisterName("pinTintColor")
 	_mKPinAnnotationViewSelSetPinTintColor = objc.RegisterName("setPinTintColor:")
-	_mKPinAnnotationViewSelAnimatesDrop = objc.RegisterName("animatesDrop")
+	_mKPinAnnotationViewSelAnimatesDrop    = objc.RegisterName("animatesDrop")
 	_mKPinAnnotationViewSelSetAnimatesDrop = objc.RegisterName("setAnimatesDrop:")
-	_mKPinAnnotationViewSelPinColor = objc.RegisterName("pinColor")
-	_mKPinAnnotationViewSelSetPinColor = objc.RegisterName("setPinColor:")
+	_mKPinAnnotationViewSelPinColor        = objc.RegisterName("pinColor")
+	_mKPinAnnotationViewSelSetPinColor     = objc.RegisterName("setPinColor:")
 )
 
 func MKPinAnnotationViewFromID(id objc.ID) *MKPinAnnotationView {
@@ -41,25 +41,33 @@ func MKPinAnnotationViewFromID(id objc.ID) *MKPinAnnotationView {
 
 func MKPinAnnotationViewRedPinColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKPinAnnotationView), _mKPinAnnotationViewSelRedPinColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
 func MKPinAnnotationViewGreenPinColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKPinAnnotationView), _mKPinAnnotationViewSelGreenPinColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
 func MKPinAnnotationViewPurplePinColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKPinAnnotationView), _mKPinAnnotationViewSelPurplePinColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
 func (o *MKPinAnnotationView) PinTintColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKPinAnnotationViewSelPinTintColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -86,4 +94,3 @@ func (o *MKPinAnnotationView) PinColor() MKPinAnnotationColor {
 func (o *MKPinAnnotationView) SetPinColor(pinColor MKPinAnnotationColor) {
 	o.Ptr().Send(_mKPinAnnotationViewSelSetPinColor, pinColor)
 }
-

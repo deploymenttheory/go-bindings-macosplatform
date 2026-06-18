@@ -15,7 +15,7 @@ type VZHostAudioInputStreamSource struct {
 }
 
 var (
-	_clsVZHostAudioInputStreamSource = _objcClass("VZHostAudioInputStreamSource")
+	_clsVZHostAudioInputStreamSource     = _objcClass("VZHostAudioInputStreamSource")
 	_vZHostAudioInputStreamSourceSelInit = objc.RegisterName("init")
 )
 
@@ -31,7 +31,8 @@ func VZHostAudioInputStreamSourceFromID(id objc.ID) *VZHostAudioInputStreamSourc
 
 func (o *VZHostAudioInputStreamSource) Init() *VZHostAudioInputStreamSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZHostAudioInputStreamSourceSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZHostAudioInputStreamSourceFromID(_ret)
 }
-

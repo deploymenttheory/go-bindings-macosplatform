@@ -16,10 +16,10 @@ type GKTurnBasedExchangeReply struct {
 }
 
 var (
-	_clsGKTurnBasedExchangeReply = _objcClass("GKTurnBasedExchangeReply")
+	_clsGKTurnBasedExchangeReply          = _objcClass("GKTurnBasedExchangeReply")
 	_gKTurnBasedExchangeReplySelRecipient = objc.RegisterName("recipient")
-	_gKTurnBasedExchangeReplySelMessage = objc.RegisterName("message")
-	_gKTurnBasedExchangeReplySelData = objc.RegisterName("data")
+	_gKTurnBasedExchangeReplySelMessage   = objc.RegisterName("message")
+	_gKTurnBasedExchangeReplySelData      = objc.RegisterName("data")
 	_gKTurnBasedExchangeReplySelReplyDate = objc.RegisterName("replyDate")
 )
 
@@ -35,25 +35,32 @@ func GKTurnBasedExchangeReplyFromID(id objc.ID) *GKTurnBasedExchangeReply {
 
 func (o *GKTurnBasedExchangeReply) Recipient() *GKTurnBasedParticipant {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKTurnBasedExchangeReplySelRecipient)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKTurnBasedParticipantFromID(_ret)
 }
 
 func (o *GKTurnBasedExchangeReply) Message() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKTurnBasedExchangeReplySelMessage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *GKTurnBasedExchangeReply) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKTurnBasedExchangeReplySelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *GKTurnBasedExchangeReply) ReplyDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKTurnBasedExchangeReplySelReplyDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
-

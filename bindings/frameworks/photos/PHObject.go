@@ -16,7 +16,7 @@ type PHObject struct {
 }
 
 var (
-	_clsPHObject = _objcClass("PHObject")
+	_clsPHObject                = _objcClass("PHObject")
 	_pHObjectSelLocalIdentifier = objc.RegisterName("localIdentifier")
 )
 
@@ -32,7 +32,8 @@ func PHObjectFromID(id objc.ID) *PHObject {
 
 func (o *PHObject) LocalIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHObjectSelLocalIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

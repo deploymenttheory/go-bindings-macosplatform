@@ -70,9 +70,13 @@ func (x *AssetCreationRequest) AddResourceWithTypeDataOptions(type_ raw.PHAssetR
 	x.inner.AddResourceWithTypeDataOptions(type_, data, options)
 }
 
-func (x *AssetCreationRequest) asAssetChangeRequest() *raw.PHAssetChangeRequest { return &x.inner.PHAssetChangeRequest }
+func (x *AssetCreationRequest) asAssetChangeRequest() *raw.PHAssetChangeRequest {
+	return &x.inner.PHAssetChangeRequest
+}
 
-func (x *AssetCreationRequest) asChangeRequest() *raw.PHChangeRequest { return &x.inner.PHAssetChangeRequest.PHChangeRequest }
+func (x *AssetCreationRequest) asChangeRequest() *raw.PHChangeRequest {
+	return &x.inner.PHAssetChangeRequest.PHChangeRequest
+}
 
 // AssetCreationRequestable is the interface implemented by [AssetCreationRequest], for mocking and DI.
 type AssetCreationRequestable interface {
@@ -86,4 +90,3 @@ type AssetCreationRequestable interface {
 }
 
 var _ AssetCreationRequestable = (*AssetCreationRequest)(nil)
-

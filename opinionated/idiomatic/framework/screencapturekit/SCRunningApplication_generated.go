@@ -68,4 +68,3 @@ type RunningApplicationable interface {
 }
 
 var _ RunningApplicationable = (*RunningApplication)(nil)
-

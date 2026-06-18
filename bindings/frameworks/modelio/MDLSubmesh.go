@@ -16,22 +16,22 @@ type MDLSubmesh struct {
 }
 
 var (
-	_clsMDLSubmesh = _objcClass("MDLSubmesh")
-	_mDLSubmeshSelInitWithNameIndexBufferIndexCountIndexTypeGeometryTypeMaterial = objc.RegisterName("initWithName:indexBuffer:indexCount:indexType:geometryType:material:")
-	_mDLSubmeshSelInitWithIndexBufferIndexCountIndexTypeGeometryTypeMaterial = objc.RegisterName("initWithIndexBuffer:indexCount:indexType:geometryType:material:")
+	_clsMDLSubmesh                                                                       = _objcClass("MDLSubmesh")
+	_mDLSubmeshSelInitWithNameIndexBufferIndexCountIndexTypeGeometryTypeMaterial         = objc.RegisterName("initWithName:indexBuffer:indexCount:indexType:geometryType:material:")
+	_mDLSubmeshSelInitWithIndexBufferIndexCountIndexTypeGeometryTypeMaterial             = objc.RegisterName("initWithIndexBuffer:indexCount:indexType:geometryType:material:")
 	_mDLSubmeshSelInitWithNameIndexBufferIndexCountIndexTypeGeometryTypeMaterialTopology = objc.RegisterName("initWithName:indexBuffer:indexCount:indexType:geometryType:material:topology:")
-	_mDLSubmeshSelInitWithMDLSubmeshIndexTypeGeometryType = objc.RegisterName("initWithMDLSubmesh:indexType:geometryType:")
-	_mDLSubmeshSelIndexBufferAsIndexType = objc.RegisterName("indexBufferAsIndexType:")
-	_mDLSubmeshSelIndexBuffer = objc.RegisterName("indexBuffer")
-	_mDLSubmeshSelIndexCount = objc.RegisterName("indexCount")
-	_mDLSubmeshSelIndexType = objc.RegisterName("indexType")
-	_mDLSubmeshSelGeometryType = objc.RegisterName("geometryType")
-	_mDLSubmeshSelMaterial = objc.RegisterName("material")
-	_mDLSubmeshSelSetMaterial = objc.RegisterName("setMaterial:")
-	_mDLSubmeshSelTopology = objc.RegisterName("topology")
-	_mDLSubmeshSelSetTopology = objc.RegisterName("setTopology:")
-	_mDLSubmeshSelName = objc.RegisterName("name")
-	_mDLSubmeshSelSetName = objc.RegisterName("setName:")
+	_mDLSubmeshSelInitWithMDLSubmeshIndexTypeGeometryType                                = objc.RegisterName("initWithMDLSubmesh:indexType:geometryType:")
+	_mDLSubmeshSelIndexBufferAsIndexType                                                 = objc.RegisterName("indexBufferAsIndexType:")
+	_mDLSubmeshSelIndexBuffer                                                            = objc.RegisterName("indexBuffer")
+	_mDLSubmeshSelIndexCount                                                             = objc.RegisterName("indexCount")
+	_mDLSubmeshSelIndexType                                                              = objc.RegisterName("indexType")
+	_mDLSubmeshSelGeometryType                                                           = objc.RegisterName("geometryType")
+	_mDLSubmeshSelMaterial                                                               = objc.RegisterName("material")
+	_mDLSubmeshSelSetMaterial                                                            = objc.RegisterName("setMaterial:")
+	_mDLSubmeshSelTopology                                                               = objc.RegisterName("topology")
+	_mDLSubmeshSelSetTopology                                                            = objc.RegisterName("setTopology:")
+	_mDLSubmeshSelName                                                                   = objc.RegisterName("name")
+	_mDLSubmeshSelSetName                                                                = objc.RegisterName("setName:")
 )
 
 func MDLSubmeshFromID(id objc.ID) *MDLSubmesh {
@@ -47,28 +47,36 @@ func MDLSubmeshFromID(id objc.ID) *MDLSubmesh {
 // @method initWithName:indexBuffer:indexCount:indexType:geometryType:material: @abstract Initialize submesh with all data necessary to make properties valid
 func (o *MDLSubmesh) InitWithNameIndexBufferIndexCountIndexTypeGeometryTypeMaterial(name *foundation.NSString, indexBuffer MDLMeshBuffer, indexCount uint, indexType MDLIndexBitDepth, geometryType MDLGeometryType, material *MDLMaterial) *MDLSubmesh {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLSubmeshSelInitWithNameIndexBufferIndexCountIndexTypeGeometryTypeMaterial, name.Ptr(), indexBuffer, indexCount, indexType, geometryType, material.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLSubmeshFromID(_ret)
 }
 
 // @method initWithIndexBuffer:indexCount:indexType:geometryType:material: @abstract Initialize submesh with all data necessary to make properties valid
 func (o *MDLSubmesh) InitWithIndexBufferIndexCountIndexTypeGeometryTypeMaterial(indexBuffer MDLMeshBuffer, indexCount uint, indexType MDLIndexBitDepth, geometryType MDLGeometryType, material *MDLMaterial) *MDLSubmesh {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLSubmeshSelInitWithIndexBufferIndexCountIndexTypeGeometryTypeMaterial, indexBuffer, indexCount, indexType, geometryType, material.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLSubmeshFromID(_ret)
 }
 
 // @method initWithIndexBuffer:indexCount:indexType:faceTopologyBuffer:geometryType:material: @abstract Initialize submesh with all data necessary to make properties valid @discussion The geometry type will typically be MDLGeometryTypeVariableTopology, if other types are used the faceTopologyBuffer contents should reflect that.
 func (o *MDLSubmesh) InitWithNameIndexBufferIndexCountIndexTypeGeometryTypeMaterialTopology(name *foundation.NSString, indexBuffer MDLMeshBuffer, indexCount uint, indexType MDLIndexBitDepth, geometryType MDLGeometryType, material *MDLMaterial, topology *MDLSubmeshTopology) *MDLSubmesh {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLSubmeshSelInitWithNameIndexBufferIndexCountIndexTypeGeometryTypeMaterialTopology, name.Ptr(), indexBuffer, indexCount, indexType, geometryType, material.Ptr(), topology.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLSubmeshFromID(_ret)
 }
 
 // @method initWithMDLSubmesh:indexType:geometryType: @abstract Initialize submesh using another submesh as input. @discussion the resulting submesh will have a new index type if necessary. If a conversion from the source submesh's geometry type to the requested geometry type is possible, conversion will be performed. Otherwise nil will be returned.
 func (o *MDLSubmesh) InitWithMDLSubmeshIndexTypeGeometryType(submesh *MDLSubmesh, indexType MDLIndexBitDepth, geometryType MDLGeometryType) *MDLSubmesh {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLSubmeshSelInitWithMDLSubmeshIndexTypeGeometryType, submesh.Ptr(), indexType, geometryType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLSubmeshFromID(_ret)
 }
 
@@ -104,7 +112,9 @@ func (o *MDLSubmesh) GeometryType() MDLGeometryType {
 // @property material @abstract Material to apply when rendering this object
 func (o *MDLSubmesh) Material() *MDLMaterial {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLSubmeshSelMaterial)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMaterialFromID(_ret)
 }
 
@@ -115,7 +125,9 @@ func (o *MDLSubmesh) SetMaterial(material *MDLMaterial) {
 // @property topology @abstract Topology data structure for use with MDLGeometryTypeVariableTopology @discussion ignored for geometry types other than MDLGeometryTypeVariableTopology. A submesh of type MDLGeometryTypeVariableTopology with no topology data is an empty submesh.
 func (o *MDLSubmesh) Topology() *MDLSubmeshTopology {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLSubmeshSelTopology)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLSubmeshTopologyFromID(_ret)
 }
 
@@ -126,11 +138,12 @@ func (o *MDLSubmesh) SetTopology(topology *MDLSubmeshTopology) {
 // @property name @abstract Identifying name for this object
 func (o *MDLSubmesh) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLSubmeshSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MDLSubmesh) SetName(name *foundation.NSString) {
 	o.Ptr().Send(_mDLSubmeshSelSetName, name.Ptr())
 }
-

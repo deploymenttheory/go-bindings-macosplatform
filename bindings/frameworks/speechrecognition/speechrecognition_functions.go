@@ -8,48 +8,48 @@ import (
 )
 
 var (
-	_fnDisposeSRCallBackUPP func(unsafe.Pointer)
-	_fnInvokeSRCallBackUPP func(*SRCallBackStruct, unsafe.Pointer)
-	_fnNewSRCallBackUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnSRAddLanguageObject func(unsafe.Pointer, unsafe.Pointer) int16
-	_fnSRAddText func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) int16
-	_fnSRCancelRecognition func(unsafe.Pointer) int16
-	_fnSRChangeLanguageObject func(unsafe.Pointer, unsafe.Pointer, int) int16
-	_fnSRCloseRecognitionSystem func(unsafe.Pointer) int16
-	_fnSRContinueRecognition func(unsafe.Pointer) int16
-	_fnSRCountItems func(unsafe.Pointer, *int64) int16
-	_fnSRDrawRecognizedText func(unsafe.Pointer, unsafe.Pointer, int) int16
-	_fnSRDrawText func(unsafe.Pointer, unsafe.Pointer, int) int16
-	_fnSREmptyLanguageObject func(unsafe.Pointer) int16
-	_fnSRGetIndexedItem func(unsafe.Pointer, unsafe.Pointer, int) int16
-	_fnSRGetLanguageModel func(unsafe.Pointer, unsafe.Pointer) int16
-	_fnSRGetProperty func(unsafe.Pointer, uint, unsafe.Pointer, *int) int16
-	_fnSRGetReference func(unsafe.Pointer, unsafe.Pointer) int16
-	_fnSRIdle func() int16
-	_fnSRNewLanguageModel func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int) int16
+	_fnDisposeSRCallBackUPP            func(unsafe.Pointer)
+	_fnInvokeSRCallBackUPP             func(*SRCallBackStruct, unsafe.Pointer)
+	_fnNewSRCallBackUPP                func(unsafe.Pointer) unsafe.Pointer
+	_fnSRAddLanguageObject             func(unsafe.Pointer, unsafe.Pointer) int16
+	_fnSRAddText                       func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) int16
+	_fnSRCancelRecognition             func(unsafe.Pointer) int16
+	_fnSRChangeLanguageObject          func(unsafe.Pointer, unsafe.Pointer, int) int16
+	_fnSRCloseRecognitionSystem        func(unsafe.Pointer) int16
+	_fnSRContinueRecognition           func(unsafe.Pointer) int16
+	_fnSRCountItems                    func(unsafe.Pointer, *int64) int16
+	_fnSRDrawRecognizedText            func(unsafe.Pointer, unsafe.Pointer, int) int16
+	_fnSRDrawText                      func(unsafe.Pointer, unsafe.Pointer, int) int16
+	_fnSREmptyLanguageObject           func(unsafe.Pointer) int16
+	_fnSRGetIndexedItem                func(unsafe.Pointer, unsafe.Pointer, int) int16
+	_fnSRGetLanguageModel              func(unsafe.Pointer, unsafe.Pointer) int16
+	_fnSRGetProperty                   func(unsafe.Pointer, uint, unsafe.Pointer, *int) int16
+	_fnSRGetReference                  func(unsafe.Pointer, unsafe.Pointer) int16
+	_fnSRIdle                          func() int16
+	_fnSRNewLanguageModel              func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int) int16
 	_fnSRNewLanguageObjectFromDataFile func(unsafe.Pointer, unsafe.Pointer, int16) int16
-	_fnSRNewLanguageObjectFromHandle func(unsafe.Pointer, unsafe.Pointer, *string) int16
-	_fnSRNewPath func(unsafe.Pointer, unsafe.Pointer) int16
-	_fnSRNewPhrase func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int) int16
-	_fnSRNewRecognizer func(unsafe.Pointer, unsafe.Pointer, uint) int16
-	_fnSRNewWord func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int) int16
-	_fnSROpenRecognitionSystem func(unsafe.Pointer, uint) int16
-	_fnSRProcessBegin func(unsafe.Pointer, uint8) int16
-	_fnSRProcessEnd func(unsafe.Pointer, uint8) int16
+	_fnSRNewLanguageObjectFromHandle   func(unsafe.Pointer, unsafe.Pointer, *string) int16
+	_fnSRNewPath                       func(unsafe.Pointer, unsafe.Pointer) int16
+	_fnSRNewPhrase                     func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int) int16
+	_fnSRNewRecognizer                 func(unsafe.Pointer, unsafe.Pointer, uint) int16
+	_fnSRNewWord                       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int) int16
+	_fnSROpenRecognitionSystem         func(unsafe.Pointer, uint) int16
+	_fnSRProcessBegin                  func(unsafe.Pointer, uint8) int16
+	_fnSRProcessEnd                    func(unsafe.Pointer, uint8) int16
 	_fnSRPutLanguageObjectIntoDataFile func(unsafe.Pointer, int16) int16
-	_fnSRPutLanguageObjectIntoHandle func(unsafe.Pointer, *string) int16
-	_fnSRReleaseObject func(unsafe.Pointer) int16
-	_fnSRRemoveIndexedItem func(unsafe.Pointer, int) int16
-	_fnSRRemoveLanguageObject func(unsafe.Pointer, unsafe.Pointer) int16
-	_fnSRSetIndexedItem func(unsafe.Pointer, unsafe.Pointer, int) int16
-	_fnSRSetLanguageModel func(unsafe.Pointer, unsafe.Pointer) int16
-	_fnSRSetProperty func(unsafe.Pointer, uint, unsafe.Pointer, int) int16
-	_fnSRSpeakAndDrawText func(unsafe.Pointer, unsafe.Pointer, int) int16
-	_fnSRSpeakText func(unsafe.Pointer, unsafe.Pointer, int) int16
-	_fnSRSpeechBusy func(unsafe.Pointer) uint8
-	_fnSRStartListening func(unsafe.Pointer) int16
-	_fnSRStopListening func(unsafe.Pointer) int16
-	_fnSRStopSpeech func(unsafe.Pointer) int16
+	_fnSRPutLanguageObjectIntoHandle   func(unsafe.Pointer, *string) int16
+	_fnSRReleaseObject                 func(unsafe.Pointer) int16
+	_fnSRRemoveIndexedItem             func(unsafe.Pointer, int) int16
+	_fnSRRemoveLanguageObject          func(unsafe.Pointer, unsafe.Pointer) int16
+	_fnSRSetIndexedItem                func(unsafe.Pointer, unsafe.Pointer, int) int16
+	_fnSRSetLanguageModel              func(unsafe.Pointer, unsafe.Pointer) int16
+	_fnSRSetProperty                   func(unsafe.Pointer, uint, unsafe.Pointer, int) int16
+	_fnSRSpeakAndDrawText              func(unsafe.Pointer, unsafe.Pointer, int) int16
+	_fnSRSpeakText                     func(unsafe.Pointer, unsafe.Pointer, int) int16
+	_fnSRSpeechBusy                    func(unsafe.Pointer) uint8
+	_fnSRStartListening                func(unsafe.Pointer) int16
+	_fnSRStopListening                 func(unsafe.Pointer) int16
+	_fnSRStopSpeech                    func(unsafe.Pointer) int16
 )
 
 func DisposeSRCallBackUPP(userUPP unsafe.Pointer) {
@@ -219,4 +219,3 @@ func SRStopListening(recognizer unsafe.Pointer) int16 {
 func SRStopSpeech(recognizer unsafe.Pointer) int16 {
 	return _fnSRStopSpeech(recognizer)
 }
-

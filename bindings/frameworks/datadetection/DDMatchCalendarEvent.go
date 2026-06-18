@@ -18,12 +18,12 @@ type DDMatchCalendarEvent struct {
 }
 
 var (
-	_clsDDMatchCalendarEvent = _objcClass("DDMatchCalendarEvent")
-	_dDMatchCalendarEventSelIsAllDay = objc.RegisterName("isAllDay")
-	_dDMatchCalendarEventSelStartDate = objc.RegisterName("startDate")
+	_clsDDMatchCalendarEvent              = _objcClass("DDMatchCalendarEvent")
+	_dDMatchCalendarEventSelIsAllDay      = objc.RegisterName("isAllDay")
+	_dDMatchCalendarEventSelStartDate     = objc.RegisterName("startDate")
 	_dDMatchCalendarEventSelStartTimeZone = objc.RegisterName("startTimeZone")
-	_dDMatchCalendarEventSelEndDate = objc.RegisterName("endDate")
-	_dDMatchCalendarEventSelEndTimeZone = objc.RegisterName("endTimeZone")
+	_dDMatchCalendarEventSelEndDate       = objc.RegisterName("endDate")
+	_dDMatchCalendarEventSelEndTimeZone   = objc.RegisterName("endTimeZone")
 )
 
 func DDMatchCalendarEventFromID(id objc.ID) *DDMatchCalendarEvent {
@@ -45,28 +45,35 @@ func (o *DDMatchCalendarEvent) IsAllDay() bool {
 // A date that represents the start of the event.
 func (o *DDMatchCalendarEvent) StartDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDMatchCalendarEventSelStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // The time zone for the event’s start date.
 func (o *DDMatchCalendarEvent) StartTimeZone() *foundation.NSTimeZone {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDMatchCalendarEventSelStartTimeZone)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSTimeZoneFromID(_ret)
 }
 
 // A date that represents the end of the event.
 func (o *DDMatchCalendarEvent) EndDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDMatchCalendarEventSelEndDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // The time zone for the event’s end date.
 func (o *DDMatchCalendarEvent) EndTimeZone() *foundation.NSTimeZone {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDMatchCalendarEventSelEndTimeZone)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSTimeZoneFromID(_ret)
 }
-

@@ -54,4 +54,3 @@ type UnitElectricChargeable interface {
 }
 
 var _ UnitElectricChargeable = (*UnitElectricCharge)(nil)
-

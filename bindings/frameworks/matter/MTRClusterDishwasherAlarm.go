@@ -18,19 +18,19 @@ type MTRClusterDishwasherAlarm struct {
 }
 
 var (
-	_clsMTRClusterDishwasherAlarm = _objcClass("MTRClusterDishwasherAlarm")
-	_mTRClusterDishwasherAlarmSelResetWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("resetWithParams:expectedValues:expectedValueInterval:completion:")
+	_clsMTRClusterDishwasherAlarm                                                                           = _objcClass("MTRClusterDishwasherAlarm")
+	_mTRClusterDishwasherAlarmSelResetWithParamsExpectedValuesExpectedValueIntervalCompletion               = objc.RegisterName("resetWithParams:expectedValues:expectedValueInterval:completion:")
 	_mTRClusterDishwasherAlarmSelModifyEnabledAlarmsWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("modifyEnabledAlarmsWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterDishwasherAlarmSelReadAttributeMaskWithParams = objc.RegisterName("readAttributeMaskWithParams:")
-	_mTRClusterDishwasherAlarmSelReadAttributeLatchWithParams = objc.RegisterName("readAttributeLatchWithParams:")
-	_mTRClusterDishwasherAlarmSelReadAttributeStateWithParams = objc.RegisterName("readAttributeStateWithParams:")
-	_mTRClusterDishwasherAlarmSelReadAttributeSupportedWithParams = objc.RegisterName("readAttributeSupportedWithParams:")
-	_mTRClusterDishwasherAlarmSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterDishwasherAlarmSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterDishwasherAlarmSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterDishwasherAlarmSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterDishwasherAlarmSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterDishwasherAlarmSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterDishwasherAlarmSelReadAttributeMaskWithParams                                                = objc.RegisterName("readAttributeMaskWithParams:")
+	_mTRClusterDishwasherAlarmSelReadAttributeLatchWithParams                                               = objc.RegisterName("readAttributeLatchWithParams:")
+	_mTRClusterDishwasherAlarmSelReadAttributeStateWithParams                                               = objc.RegisterName("readAttributeStateWithParams:")
+	_mTRClusterDishwasherAlarmSelReadAttributeSupportedWithParams                                           = objc.RegisterName("readAttributeSupportedWithParams:")
+	_mTRClusterDishwasherAlarmSelReadAttributeGeneratedCommandListWithParams                                = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterDishwasherAlarmSelReadAttributeAcceptedCommandListWithParams                                 = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterDishwasherAlarmSelReadAttributeAttributeListWithParams                                       = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterDishwasherAlarmSelReadAttributeFeatureMapWithParams                                          = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterDishwasherAlarmSelReadAttributeClusterRevisionWithParams                                     = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterDishwasherAlarmSelInitWithDeviceEndpointIDQueue                                              = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterDishwasherAlarmFromID(id objc.ID) *MTRClusterDishwasherAlarm {
@@ -113,7 +113,8 @@ func (o *MTRClusterDishwasherAlarm) ReadAttributeClusterRevisionWithParams(param
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterDishwasherAlarm) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterDishwasherAlarm {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterDishwasherAlarmSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterDishwasherAlarmFromID(_ret)
 }
-

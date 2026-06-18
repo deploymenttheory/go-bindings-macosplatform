@@ -12,15 +12,14 @@ type OpaqueSRSpeechObject struct{}
 
 type SRCallBackParam struct {
 	CallBack unsafe.Pointer
-	RefCon unsafe.Pointer
+	RefCon   unsafe.Pointer
 }
 
 type SRCallBackStruct struct {
-	What uint
-	Message int
+	What     uint
+	Message  int
 	Instance unsafe.Pointer
-	Status int16
-	Flags int16
-	RefCon unsafe.Pointer
+	Status   int16
+	Flags    int16
+	RefCon   unsafe.Pointer
 }
-

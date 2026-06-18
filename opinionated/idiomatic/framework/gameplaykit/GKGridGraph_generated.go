@@ -94,4 +94,3 @@ type GridGraphable interface {
 }
 
 var _ GridGraphable = (*GridGraph)(nil)
-

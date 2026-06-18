@@ -113,11 +113,17 @@ func (x *NNReduceColumnMin) WithLabel(label string) *NNReduceColumnMin {
 	return x
 }
 
-func (x *NNReduceColumnMin) asNNReduceUnary() *mpsneuralnetwork.MPSNNReduceUnary { return &x.inner.MPSNNReduceUnary }
+func (x *NNReduceColumnMin) asNNReduceUnary() *mpsneuralnetwork.MPSNNReduceUnary {
+	return &x.inner.MPSNNReduceUnary
+}
 
-func (x *NNReduceColumnMin) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
+func (x *NNReduceColumnMin) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel
+}
 
-func (x *NNReduceColumnMin) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel }
+func (x *NNReduceColumnMin) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel
+}
 
 // NNReduceColumnMinable is the interface implemented by [NNReduceColumnMin], for mocking and DI.
 type NNReduceColumnMinable interface {
@@ -136,4 +142,3 @@ type NNReduceColumnMinable interface {
 }
 
 var _ NNReduceColumnMinable = (*NNReduceColumnMin)(nil)
-

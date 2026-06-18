@@ -17,4 +17,3 @@ func RequestTrackingAuthorizationWithCompletionHandler(completion func(raw.ATTra
 func TrackingAuthorizationStatus() raw.ATTrackingManagerAuthorizationStatus {
 	return raw.ATTrackingManagerTrackingAuthorizationStatus()
 }
-

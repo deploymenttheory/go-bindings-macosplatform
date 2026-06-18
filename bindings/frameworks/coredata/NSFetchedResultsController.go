@@ -18,23 +18,23 @@ type NSFetchedResultsController[ResultType purego.AnyObject] struct {
 }
 
 var (
-	_clsNSFetchedResultsController = _objcClass("NSFetchedResultsController")
+	_clsNSFetchedResultsController                                                                    = _objcClass("NSFetchedResultsController")
 	_nSFetchedResultsControllerSelInitWithFetchRequestManagedObjectContextSectionNameKeyPathCacheName = objc.RegisterName("initWithFetchRequest:managedObjectContext:sectionNameKeyPath:cacheName:")
-	_nSFetchedResultsControllerSelPerformFetch = objc.RegisterName("performFetch:")
-	_nSFetchedResultsControllerSelDeleteCacheWithName = objc.RegisterName("deleteCacheWithName:")
-	_nSFetchedResultsControllerSelObjectAtIndexPath = objc.RegisterName("objectAtIndexPath:")
-	_nSFetchedResultsControllerSelIndexPathForObject = objc.RegisterName("indexPathForObject:")
-	_nSFetchedResultsControllerSelSectionIndexTitleForSectionName = objc.RegisterName("sectionIndexTitleForSectionName:")
-	_nSFetchedResultsControllerSelSectionForSectionIndexTitleAtIndex = objc.RegisterName("sectionForSectionIndexTitle:atIndex:")
-	_nSFetchedResultsControllerSelFetchRequest = objc.RegisterName("fetchRequest")
-	_nSFetchedResultsControllerSelManagedObjectContext = objc.RegisterName("managedObjectContext")
-	_nSFetchedResultsControllerSelSectionNameKeyPath = objc.RegisterName("sectionNameKeyPath")
-	_nSFetchedResultsControllerSelCacheName = objc.RegisterName("cacheName")
-	_nSFetchedResultsControllerSelDelegate = objc.RegisterName("delegate")
-	_nSFetchedResultsControllerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSFetchedResultsControllerSelFetchedObjects = objc.RegisterName("fetchedObjects")
-	_nSFetchedResultsControllerSelSectionIndexTitles = objc.RegisterName("sectionIndexTitles")
-	_nSFetchedResultsControllerSelSections = objc.RegisterName("sections")
+	_nSFetchedResultsControllerSelPerformFetch                                                        = objc.RegisterName("performFetch:")
+	_nSFetchedResultsControllerSelDeleteCacheWithName                                                 = objc.RegisterName("deleteCacheWithName:")
+	_nSFetchedResultsControllerSelObjectAtIndexPath                                                   = objc.RegisterName("objectAtIndexPath:")
+	_nSFetchedResultsControllerSelIndexPathForObject                                                  = objc.RegisterName("indexPathForObject:")
+	_nSFetchedResultsControllerSelSectionIndexTitleForSectionName                                     = objc.RegisterName("sectionIndexTitleForSectionName:")
+	_nSFetchedResultsControllerSelSectionForSectionIndexTitleAtIndex                                  = objc.RegisterName("sectionForSectionIndexTitle:atIndex:")
+	_nSFetchedResultsControllerSelFetchRequest                                                        = objc.RegisterName("fetchRequest")
+	_nSFetchedResultsControllerSelManagedObjectContext                                                = objc.RegisterName("managedObjectContext")
+	_nSFetchedResultsControllerSelSectionNameKeyPath                                                  = objc.RegisterName("sectionNameKeyPath")
+	_nSFetchedResultsControllerSelCacheName                                                           = objc.RegisterName("cacheName")
+	_nSFetchedResultsControllerSelDelegate                                                            = objc.RegisterName("delegate")
+	_nSFetchedResultsControllerSelSetDelegate                                                         = objc.RegisterName("setDelegate:")
+	_nSFetchedResultsControllerSelFetchedObjects                                                      = objc.RegisterName("fetchedObjects")
+	_nSFetchedResultsControllerSelSectionIndexTitles                                                  = objc.RegisterName("sectionIndexTitles")
+	_nSFetchedResultsControllerSelSections                                                            = objc.RegisterName("sections")
 )
 
 func NSFetchedResultsControllerFromID[ResultType purego.AnyObject](id objc.ID) *NSFetchedResultsController[ResultType] {
@@ -49,7 +49,9 @@ func NSFetchedResultsControllerFromID[ResultType purego.AnyObject](id objc.ID) *
 
 func (o *NSFetchedResultsController[ResultType]) InitWithFetchRequestManagedObjectContextSectionNameKeyPathCacheName(fetchRequest *NSFetchRequest[ResultType], context_ *NSManagedObjectContext, sectionNameKeyPath *foundation.NSString, name *foundation.NSString) *NSFetchedResultsController[ResultType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchedResultsControllerSelInitWithFetchRequestManagedObjectContextSectionNameKeyPathCacheName, fetchRequest.Ptr(), context_.Ptr(), sectionNameKeyPath.Ptr(), name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFetchedResultsControllerFromID[ResultType](_ret)
 }
 
@@ -73,13 +75,17 @@ func (o *NSFetchedResultsController[ResultType]) ObjectAtIndexPath(indexPath *fo
 
 func (o *NSFetchedResultsController[ResultType]) IndexPathForObject(object ResultType) *foundation.NSIndexPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchedResultsControllerSelIndexPathForObject, object)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexPathFromID(_ret)
 }
 
 func (o *NSFetchedResultsController[ResultType]) SectionIndexTitleForSectionName(sectionName *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchedResultsControllerSelSectionIndexTitleForSectionName, sectionName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -90,25 +96,33 @@ func (o *NSFetchedResultsController[ResultType]) SectionForSectionIndexTitleAtIn
 
 func (o *NSFetchedResultsController[ResultType]) FetchRequest() *NSFetchRequest[ResultType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchedResultsControllerSelFetchRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFetchRequestFromID[ResultType](_ret)
 }
 
 func (o *NSFetchedResultsController[ResultType]) ManagedObjectContext() *NSManagedObjectContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchedResultsControllerSelManagedObjectContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectContextFromID(_ret)
 }
 
 func (o *NSFetchedResultsController[ResultType]) SectionNameKeyPath() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchedResultsControllerSelSectionNameKeyPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSFetchedResultsController[ResultType]) CacheName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchedResultsControllerSelCacheName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -123,7 +137,9 @@ func (o *NSFetchedResultsController[ResultType]) SetDelegate(delegate NSFetchedR
 
 func (o *NSFetchedResultsController[ResultType]) FetchedObjects() *foundation.NSArray[ResultType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchedResultsControllerSelFetchedObjects)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[ResultType](_ret)
 }
 
@@ -134,7 +150,8 @@ func (o *NSFetchedResultsController[ResultType]) SectionIndexTitles() *foundatio
 
 func (o *NSFetchedResultsController[ResultType]) Sections() *foundation.NSArray[NSFetchedResultsSectionInfo] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchedResultsControllerSelSections)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[NSFetchedResultsSectionInfo](_ret)
 }
-

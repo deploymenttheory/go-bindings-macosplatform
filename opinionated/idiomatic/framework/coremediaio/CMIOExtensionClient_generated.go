@@ -65,4 +65,3 @@ type ExtensionClientable interface {
 }
 
 var _ ExtensionClientable = (*ExtensionClient)(nil)
-

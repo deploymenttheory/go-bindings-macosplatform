@@ -89,4 +89,3 @@ type DatabaseSubscriptionable interface {
 }
 
 var _ DatabaseSubscriptionable = (*DatabaseSubscription)(nil)
-

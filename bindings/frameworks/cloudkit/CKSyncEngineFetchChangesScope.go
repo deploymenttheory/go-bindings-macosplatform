@@ -16,12 +16,12 @@ type CKSyncEngineFetchChangesScope struct {
 }
 
 var (
-	_clsCKSyncEngineFetchChangesScope = _objcClass("CKSyncEngineFetchChangesScope")
-	_cKSyncEngineFetchChangesScopeSelInitWithZoneIDs = objc.RegisterName("initWithZoneIDs:")
+	_clsCKSyncEngineFetchChangesScope                        = _objcClass("CKSyncEngineFetchChangesScope")
+	_cKSyncEngineFetchChangesScopeSelInitWithZoneIDs         = objc.RegisterName("initWithZoneIDs:")
 	_cKSyncEngineFetchChangesScopeSelInitWithExcludedZoneIDs = objc.RegisterName("initWithExcludedZoneIDs:")
-	_cKSyncEngineFetchChangesScopeSelContainsZoneID = objc.RegisterName("containsZoneID:")
-	_cKSyncEngineFetchChangesScopeSelZoneIDs = objc.RegisterName("zoneIDs")
-	_cKSyncEngineFetchChangesScopeSelExcludedZoneIDs = objc.RegisterName("excludedZoneIDs")
+	_cKSyncEngineFetchChangesScopeSelContainsZoneID          = objc.RegisterName("containsZoneID:")
+	_cKSyncEngineFetchChangesScopeSelZoneIDs                 = objc.RegisterName("zoneIDs")
+	_cKSyncEngineFetchChangesScopeSelExcludedZoneIDs         = objc.RegisterName("excludedZoneIDs")
 )
 
 func CKSyncEngineFetchChangesScopeFromID(id objc.ID) *CKSyncEngineFetchChangesScope {
@@ -37,14 +37,18 @@ func CKSyncEngineFetchChangesScopeFromID(id objc.ID) *CKSyncEngineFetchChangesSc
 // Creates a scope that includes only the specified set of zones.
 func (o *CKSyncEngineFetchChangesScope) InitWithZoneIDs(zoneIDs *foundation.NSSet[*CKRecordZoneID]) *CKSyncEngineFetchChangesScope {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineFetchChangesScopeSelInitWithZoneIDs, zoneIDs.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKSyncEngineFetchChangesScopeFromID(_ret)
 }
 
 // Creates a scope that includes all zones except the specified excluded zones.
 func (o *CKSyncEngineFetchChangesScope) InitWithExcludedZoneIDs(zoneIDs *foundation.NSSet[*CKRecordZoneID]) *CKSyncEngineFetchChangesScope {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineFetchChangesScopeSelInitWithExcludedZoneIDs, zoneIDs.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKSyncEngineFetchChangesScopeFromID(_ret)
 }
 
@@ -57,14 +61,17 @@ func (o *CKSyncEngineFetchChangesScope) ContainsZoneID(zoneID *CKRecordZoneID) b
 // A specific set of zone IDs to include in the scope. For example, if you want to fetch changes for a specific set of zones, you can specify them here. If `nil`, this scope includes all zones except those in `excludedZoneIDs`.
 func (o *CKSyncEngineFetchChangesScope) ZoneIDs() *foundation.NSSet[*CKRecordZoneID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineFetchChangesScopeSelZoneIDs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*CKRecordZoneID](_ret)
 }
 
 // A specific set of zone IDs to exclude from this scope. If you know that you don't want to fetch changes for a particular set of zones, you can set those zones here.
 func (o *CKSyncEngineFetchChangesScope) ExcludedZoneIDs() *foundation.NSSet[*CKRecordZoneID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineFetchChangesScopeSelExcludedZoneIDs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*CKRecordZoneID](_ret)
 }
-

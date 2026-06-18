@@ -26,4 +26,3 @@ func MEExtensionViewControllerFromID(id objc.ID) *MEExtensionViewController {
 	purego.Track(o)
 	return o
 }
-

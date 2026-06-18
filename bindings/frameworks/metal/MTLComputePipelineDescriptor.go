@@ -16,37 +16,37 @@ type MTLComputePipelineDescriptor struct {
 }
 
 var (
-	_clsMTLComputePipelineDescriptor = _objcClass("MTLComputePipelineDescriptor")
-	_mTLComputePipelineDescriptorSelReset = objc.RegisterName("reset")
-	_mTLComputePipelineDescriptorSelLabel = objc.RegisterName("label")
-	_mTLComputePipelineDescriptorSelSetLabel = objc.RegisterName("setLabel:")
-	_mTLComputePipelineDescriptorSelComputeFunction = objc.RegisterName("computeFunction")
-	_mTLComputePipelineDescriptorSelSetComputeFunction = objc.RegisterName("setComputeFunction:")
-	_mTLComputePipelineDescriptorSelThreadGroupSizeIsMultipleOfThreadExecutionWidth = objc.RegisterName("threadGroupSizeIsMultipleOfThreadExecutionWidth")
+	_clsMTLComputePipelineDescriptor                                                   = _objcClass("MTLComputePipelineDescriptor")
+	_mTLComputePipelineDescriptorSelReset                                              = objc.RegisterName("reset")
+	_mTLComputePipelineDescriptorSelLabel                                              = objc.RegisterName("label")
+	_mTLComputePipelineDescriptorSelSetLabel                                           = objc.RegisterName("setLabel:")
+	_mTLComputePipelineDescriptorSelComputeFunction                                    = objc.RegisterName("computeFunction")
+	_mTLComputePipelineDescriptorSelSetComputeFunction                                 = objc.RegisterName("setComputeFunction:")
+	_mTLComputePipelineDescriptorSelThreadGroupSizeIsMultipleOfThreadExecutionWidth    = objc.RegisterName("threadGroupSizeIsMultipleOfThreadExecutionWidth")
 	_mTLComputePipelineDescriptorSelSetThreadGroupSizeIsMultipleOfThreadExecutionWidth = objc.RegisterName("setThreadGroupSizeIsMultipleOfThreadExecutionWidth:")
-	_mTLComputePipelineDescriptorSelMaxTotalThreadsPerThreadgroup = objc.RegisterName("maxTotalThreadsPerThreadgroup")
-	_mTLComputePipelineDescriptorSelSetMaxTotalThreadsPerThreadgroup = objc.RegisterName("setMaxTotalThreadsPerThreadgroup:")
-	_mTLComputePipelineDescriptorSelStageInputDescriptor = objc.RegisterName("stageInputDescriptor")
-	_mTLComputePipelineDescriptorSelSetStageInputDescriptor = objc.RegisterName("setStageInputDescriptor:")
-	_mTLComputePipelineDescriptorSelBuffers = objc.RegisterName("buffers")
-	_mTLComputePipelineDescriptorSelSupportIndirectCommandBuffers = objc.RegisterName("supportIndirectCommandBuffers")
-	_mTLComputePipelineDescriptorSelSetSupportIndirectCommandBuffers = objc.RegisterName("setSupportIndirectCommandBuffers:")
-	_mTLComputePipelineDescriptorSelInsertLibraries = objc.RegisterName("insertLibraries")
-	_mTLComputePipelineDescriptorSelSetInsertLibraries = objc.RegisterName("setInsertLibraries:")
-	_mTLComputePipelineDescriptorSelPreloadedLibraries = objc.RegisterName("preloadedLibraries")
-	_mTLComputePipelineDescriptorSelSetPreloadedLibraries = objc.RegisterName("setPreloadedLibraries:")
-	_mTLComputePipelineDescriptorSelBinaryArchives = objc.RegisterName("binaryArchives")
-	_mTLComputePipelineDescriptorSelSetBinaryArchives = objc.RegisterName("setBinaryArchives:")
-	_mTLComputePipelineDescriptorSelLinkedFunctions = objc.RegisterName("linkedFunctions")
-	_mTLComputePipelineDescriptorSelSetLinkedFunctions = objc.RegisterName("setLinkedFunctions:")
-	_mTLComputePipelineDescriptorSelSupportAddingBinaryFunctions = objc.RegisterName("supportAddingBinaryFunctions")
-	_mTLComputePipelineDescriptorSelSetSupportAddingBinaryFunctions = objc.RegisterName("setSupportAddingBinaryFunctions:")
-	_mTLComputePipelineDescriptorSelMaxCallStackDepth = objc.RegisterName("maxCallStackDepth")
-	_mTLComputePipelineDescriptorSelSetMaxCallStackDepth = objc.RegisterName("setMaxCallStackDepth:")
-	_mTLComputePipelineDescriptorSelShaderValidation = objc.RegisterName("shaderValidation")
-	_mTLComputePipelineDescriptorSelSetShaderValidation = objc.RegisterName("setShaderValidation:")
-	_mTLComputePipelineDescriptorSelRequiredThreadsPerThreadgroup = objc.RegisterName("requiredThreadsPerThreadgroup")
-	_mTLComputePipelineDescriptorSelSetRequiredThreadsPerThreadgroup = objc.RegisterName("setRequiredThreadsPerThreadgroup:")
+	_mTLComputePipelineDescriptorSelMaxTotalThreadsPerThreadgroup                      = objc.RegisterName("maxTotalThreadsPerThreadgroup")
+	_mTLComputePipelineDescriptorSelSetMaxTotalThreadsPerThreadgroup                   = objc.RegisterName("setMaxTotalThreadsPerThreadgroup:")
+	_mTLComputePipelineDescriptorSelStageInputDescriptor                               = objc.RegisterName("stageInputDescriptor")
+	_mTLComputePipelineDescriptorSelSetStageInputDescriptor                            = objc.RegisterName("setStageInputDescriptor:")
+	_mTLComputePipelineDescriptorSelBuffers                                            = objc.RegisterName("buffers")
+	_mTLComputePipelineDescriptorSelSupportIndirectCommandBuffers                      = objc.RegisterName("supportIndirectCommandBuffers")
+	_mTLComputePipelineDescriptorSelSetSupportIndirectCommandBuffers                   = objc.RegisterName("setSupportIndirectCommandBuffers:")
+	_mTLComputePipelineDescriptorSelInsertLibraries                                    = objc.RegisterName("insertLibraries")
+	_mTLComputePipelineDescriptorSelSetInsertLibraries                                 = objc.RegisterName("setInsertLibraries:")
+	_mTLComputePipelineDescriptorSelPreloadedLibraries                                 = objc.RegisterName("preloadedLibraries")
+	_mTLComputePipelineDescriptorSelSetPreloadedLibraries                              = objc.RegisterName("setPreloadedLibraries:")
+	_mTLComputePipelineDescriptorSelBinaryArchives                                     = objc.RegisterName("binaryArchives")
+	_mTLComputePipelineDescriptorSelSetBinaryArchives                                  = objc.RegisterName("setBinaryArchives:")
+	_mTLComputePipelineDescriptorSelLinkedFunctions                                    = objc.RegisterName("linkedFunctions")
+	_mTLComputePipelineDescriptorSelSetLinkedFunctions                                 = objc.RegisterName("setLinkedFunctions:")
+	_mTLComputePipelineDescriptorSelSupportAddingBinaryFunctions                       = objc.RegisterName("supportAddingBinaryFunctions")
+	_mTLComputePipelineDescriptorSelSetSupportAddingBinaryFunctions                    = objc.RegisterName("setSupportAddingBinaryFunctions:")
+	_mTLComputePipelineDescriptorSelMaxCallStackDepth                                  = objc.RegisterName("maxCallStackDepth")
+	_mTLComputePipelineDescriptorSelSetMaxCallStackDepth                               = objc.RegisterName("setMaxCallStackDepth:")
+	_mTLComputePipelineDescriptorSelShaderValidation                                   = objc.RegisterName("shaderValidation")
+	_mTLComputePipelineDescriptorSelSetShaderValidation                                = objc.RegisterName("setShaderValidation:")
+	_mTLComputePipelineDescriptorSelRequiredThreadsPerThreadgroup                      = objc.RegisterName("requiredThreadsPerThreadgroup")
+	_mTLComputePipelineDescriptorSelSetRequiredThreadsPerThreadgroup                   = objc.RegisterName("setRequiredThreadsPerThreadgroup:")
 )
 
 func MTLComputePipelineDescriptorFromID(id objc.ID) *MTLComputePipelineDescriptor {
@@ -67,7 +67,9 @@ func (o *MTLComputePipelineDescriptor) Reset() {
 // @property label @abstract A string to help identify this object.
 func (o *MTLComputePipelineDescriptor) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLComputePipelineDescriptorSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -108,7 +110,9 @@ func (o *MTLComputePipelineDescriptor) SetMaxTotalThreadsPerThreadgroup(maxTotal
 // @property computeDataDescriptor @abstract An MTLStageInputOutputDescriptor to fetch data from buffers
 func (o *MTLComputePipelineDescriptor) StageInputDescriptor() *MTLStageInputOutputDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLComputePipelineDescriptorSelStageInputDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLStageInputOutputDescriptorFromID(_ret)
 }
 
@@ -119,7 +123,9 @@ func (o *MTLComputePipelineDescriptor) SetStageInputDescriptor(stageInputDescrip
 // @property buffers @abstract Optional properties for each buffer binding used by the compute function.
 func (o *MTLComputePipelineDescriptor) Buffers() *MTLPipelineBufferDescriptorArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLComputePipelineDescriptorSelBuffers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLPipelineBufferDescriptorArrayFromID(_ret)
 }
 
@@ -137,7 +143,9 @@ func (o *MTLComputePipelineDescriptor) SetSupportIndirectCommandBuffers(supportI
 // Deprecated: since macOS 12.0.
 func (o *MTLComputePipelineDescriptor) InsertLibraries() *foundation.NSArray[MTLDynamicLibrary] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLComputePipelineDescriptorSelInsertLibraries)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTLDynamicLibrary](_ret)
 }
 
@@ -149,7 +157,9 @@ func (o *MTLComputePipelineDescriptor) SetInsertLibraries(insertLibraries *found
 // @property preloadedLibraries @abstract The set of MTLDynamicLibrary to use to resolve external symbols before considering symbols from dependent MTLDynamicLibrary. @discussion Typical workflows use the libraries property of MTLCompileOptions to record dependent libraries at compile time without having to use preloadedLibraries. This property can be used to override symbols from dependent libraries for experimentation or evaluating alternative implementations. It can also be used to provide dynamic libraries that are dynamically created (for example, from source) that have no stable installName that can be used to automatically load from the file system. @see MTLDynamicLibrary
 func (o *MTLComputePipelineDescriptor) PreloadedLibraries() *foundation.NSArray[MTLDynamicLibrary] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLComputePipelineDescriptorSelPreloadedLibraries)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTLDynamicLibrary](_ret)
 }
 
@@ -160,7 +170,9 @@ func (o *MTLComputePipelineDescriptor) SetPreloadedLibraries(preloadedLibraries 
 // @property binaryArchives @abstract The set of MTLBinaryArchive to search for compiled code when creating the pipeline state. @discussion Accelerate pipeline state creation by providing archives of compiled code such that no compilation needs to happen on the fast path. @see MTLBinaryArchive
 func (o *MTLComputePipelineDescriptor) BinaryArchives() *foundation.NSArray[MTLBinaryArchive] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLComputePipelineDescriptorSelBinaryArchives)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTLBinaryArchive](_ret)
 }
 
@@ -171,7 +183,9 @@ func (o *MTLComputePipelineDescriptor) SetBinaryArchives(binaryArchives *foundat
 // @property linkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the compute function. @see MTLLinkedFunctions
 func (o *MTLComputePipelineDescriptor) LinkedFunctions() *MTLLinkedFunctions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLComputePipelineDescriptorSelLinkedFunctions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLLinkedFunctionsFromID(_ret)
 }
 
@@ -221,4 +235,3 @@ func (o *MTLComputePipelineDescriptor) RequiredThreadsPerThreadgroup() MTLSize {
 func (o *MTLComputePipelineDescriptor) SetRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup MTLSize) {
 	o.Ptr().Send(_mTLComputePipelineDescriptorSelSetRequiredThreadsPerThreadgroup, requiredThreadsPerThreadgroup)
 }
-

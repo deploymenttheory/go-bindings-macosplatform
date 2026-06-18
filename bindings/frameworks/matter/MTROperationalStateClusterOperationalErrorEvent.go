@@ -16,8 +16,8 @@ type MTROperationalStateClusterOperationalErrorEvent struct {
 }
 
 var (
-	_clsMTROperationalStateClusterOperationalErrorEvent = _objcClass("MTROperationalStateClusterOperationalErrorEvent")
-	_mTROperationalStateClusterOperationalErrorEventSelErrorState = objc.RegisterName("errorState")
+	_clsMTROperationalStateClusterOperationalErrorEvent              = _objcClass("MTROperationalStateClusterOperationalErrorEvent")
+	_mTROperationalStateClusterOperationalErrorEventSelErrorState    = objc.RegisterName("errorState")
 	_mTROperationalStateClusterOperationalErrorEventSelSetErrorState = objc.RegisterName("setErrorState:")
 )
 
@@ -33,11 +33,12 @@ func MTROperationalStateClusterOperationalErrorEventFromID(id objc.ID) *MTROpera
 
 func (o *MTROperationalStateClusterOperationalErrorEvent) ErrorState() *MTROperationalStateClusterErrorStateStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalStateClusterOperationalErrorEventSelErrorState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTROperationalStateClusterErrorStateStructFromID(_ret)
 }
 
 func (o *MTROperationalStateClusterOperationalErrorEvent) SetErrorState(errorState *MTROperationalStateClusterErrorStateStruct) {
 	o.Ptr().Send(_mTROperationalStateClusterOperationalErrorEventSelSetErrorState, errorState.Ptr())
 }
-

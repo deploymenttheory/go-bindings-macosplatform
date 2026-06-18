@@ -16,12 +16,12 @@ type WKUserScript struct {
 }
 
 var (
-	_clsWKUserScript = _objcClass("WKUserScript")
-	_wKUserScriptSelInitWithSourceInjectionTimeForMainFrameOnly = objc.RegisterName("initWithSource:injectionTime:forMainFrameOnly:")
+	_clsWKUserScript                                                          = _objcClass("WKUserScript")
+	_wKUserScriptSelInitWithSourceInjectionTimeForMainFrameOnly               = objc.RegisterName("initWithSource:injectionTime:forMainFrameOnly:")
 	_wKUserScriptSelInitWithSourceInjectionTimeForMainFrameOnlyInContentWorld = objc.RegisterName("initWithSource:injectionTime:forMainFrameOnly:inContentWorld:")
-	_wKUserScriptSelSource = objc.RegisterName("source")
-	_wKUserScriptSelInjectionTime = objc.RegisterName("injectionTime")
-	_wKUserScriptSelIsForMainFrameOnly = objc.RegisterName("isForMainFrameOnly")
+	_wKUserScriptSelSource                                                    = objc.RegisterName("source")
+	_wKUserScriptSelInjectionTime                                             = objc.RegisterName("injectionTime")
+	_wKUserScriptSelIsForMainFrameOnly                                        = objc.RegisterName("isForMainFrameOnly")
 )
 
 func WKUserScriptFromID(id objc.ID) *WKUserScript {
@@ -37,20 +37,26 @@ func WKUserScriptFromID(id objc.ID) *WKUserScript {
 // @abstract Returns an initialized user script that can be added to a @link WKUserContentController @/link. @param source The script source. @param injectionTime When the script should be injected. @param forMainFrameOnly Whether the script should be injected into all frames or just the main frame. @discussion Calling this method is the same as calling `initWithSource:injectionTime:forMainFrameOnly:inContentWorld:` with a `contentWorld` value of `WKContentWorld.pageWorld`
 func (o *WKUserScript) InitWithSourceInjectionTimeForMainFrameOnly(source *foundation.NSString, injectionTime WKUserScriptInjectionTime, forMainFrameOnly bool) *WKUserScript {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKUserScriptSelInitWithSourceInjectionTimeForMainFrameOnly, source.Ptr(), injectionTime, forMainFrameOnly)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKUserScriptFromID(_ret)
 }
 
 // @abstract Returns an initialized user script that can be added to a @link WKUserContentController @/link. @param source The script source. @param injectionTime When the script should be injected. @param forMainFrameOnly Whether the script should be injected into all frames or just the main frame. @param contentWorld The WKContentWorld in which to inject the script.
 func (o *WKUserScript) InitWithSourceInjectionTimeForMainFrameOnlyInContentWorld(source *foundation.NSString, injectionTime WKUserScriptInjectionTime, forMainFrameOnly bool, contentWorld *WKContentWorld) *WKUserScript {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKUserScriptSelInitWithSourceInjectionTimeForMainFrameOnlyInContentWorld, source.Ptr(), injectionTime, forMainFrameOnly, contentWorld.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKUserScriptFromID(_ret)
 }
 
 func (o *WKUserScript) Source() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKUserScriptSelSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -63,4 +69,3 @@ func (o *WKUserScript) IsForMainFrameOnly() bool {
 	_ret := objc.Send[bool](o.Ptr(), _wKUserScriptSelIsForMainFrameOnly)
 	return _ret
 }
-

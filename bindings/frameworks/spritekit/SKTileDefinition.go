@@ -19,37 +19,37 @@ type SKTileDefinition struct {
 }
 
 var (
-	_clsSKTileDefinition = _objcClass("SKTileDefinition")
-	_sKTileDefinitionSelTileDefinitionWithTexture = objc.RegisterName("tileDefinitionWithTexture:")
-	_sKTileDefinitionSelTileDefinitionWithTextureSize = objc.RegisterName("tileDefinitionWithTexture:size:")
-	_sKTileDefinitionSelTileDefinitionWithTextureNormalTextureSize = objc.RegisterName("tileDefinitionWithTexture:normalTexture:size:")
-	_sKTileDefinitionSelTileDefinitionWithTexturesSizeTimePerFrame = objc.RegisterName("tileDefinitionWithTextures:size:timePerFrame:")
+	_clsSKTileDefinition                                                         = _objcClass("SKTileDefinition")
+	_sKTileDefinitionSelTileDefinitionWithTexture                                = objc.RegisterName("tileDefinitionWithTexture:")
+	_sKTileDefinitionSelTileDefinitionWithTextureSize                            = objc.RegisterName("tileDefinitionWithTexture:size:")
+	_sKTileDefinitionSelTileDefinitionWithTextureNormalTextureSize               = objc.RegisterName("tileDefinitionWithTexture:normalTexture:size:")
+	_sKTileDefinitionSelTileDefinitionWithTexturesSizeTimePerFrame               = objc.RegisterName("tileDefinitionWithTextures:size:timePerFrame:")
 	_sKTileDefinitionSelTileDefinitionWithTexturesNormalTexturesSizeTimePerFrame = objc.RegisterName("tileDefinitionWithTextures:normalTextures:size:timePerFrame:")
-	_sKTileDefinitionSelInitWithTexture = objc.RegisterName("initWithTexture:")
-	_sKTileDefinitionSelInitWithTextureSize = objc.RegisterName("initWithTexture:size:")
-	_sKTileDefinitionSelInitWithTextureNormalTextureSize = objc.RegisterName("initWithTexture:normalTexture:size:")
-	_sKTileDefinitionSelInitWithTexturesSizeTimePerFrame = objc.RegisterName("initWithTextures:size:timePerFrame:")
-	_sKTileDefinitionSelInitWithTexturesNormalTexturesSizeTimePerFrame = objc.RegisterName("initWithTextures:normalTextures:size:timePerFrame:")
-	_sKTileDefinitionSelTextures = objc.RegisterName("textures")
-	_sKTileDefinitionSelSetTextures = objc.RegisterName("setTextures:")
-	_sKTileDefinitionSelNormalTextures = objc.RegisterName("normalTextures")
-	_sKTileDefinitionSelSetNormalTextures = objc.RegisterName("setNormalTextures:")
-	_sKTileDefinitionSelUserData = objc.RegisterName("userData")
-	_sKTileDefinitionSelSetUserData = objc.RegisterName("setUserData:")
-	_sKTileDefinitionSelName = objc.RegisterName("name")
-	_sKTileDefinitionSelSetName = objc.RegisterName("setName:")
-	_sKTileDefinitionSelSize = objc.RegisterName("size")
-	_sKTileDefinitionSelSetSize = objc.RegisterName("setSize:")
-	_sKTileDefinitionSelTimePerFrame = objc.RegisterName("timePerFrame")
-	_sKTileDefinitionSelSetTimePerFrame = objc.RegisterName("setTimePerFrame:")
-	_sKTileDefinitionSelPlacementWeight = objc.RegisterName("placementWeight")
-	_sKTileDefinitionSelSetPlacementWeight = objc.RegisterName("setPlacementWeight:")
-	_sKTileDefinitionSelRotation = objc.RegisterName("rotation")
-	_sKTileDefinitionSelSetRotation = objc.RegisterName("setRotation:")
-	_sKTileDefinitionSelFlipVertically = objc.RegisterName("flipVertically")
-	_sKTileDefinitionSelSetFlipVertically = objc.RegisterName("setFlipVertically:")
-	_sKTileDefinitionSelFlipHorizontally = objc.RegisterName("flipHorizontally")
-	_sKTileDefinitionSelSetFlipHorizontally = objc.RegisterName("setFlipHorizontally:")
+	_sKTileDefinitionSelInitWithTexture                                          = objc.RegisterName("initWithTexture:")
+	_sKTileDefinitionSelInitWithTextureSize                                      = objc.RegisterName("initWithTexture:size:")
+	_sKTileDefinitionSelInitWithTextureNormalTextureSize                         = objc.RegisterName("initWithTexture:normalTexture:size:")
+	_sKTileDefinitionSelInitWithTexturesSizeTimePerFrame                         = objc.RegisterName("initWithTextures:size:timePerFrame:")
+	_sKTileDefinitionSelInitWithTexturesNormalTexturesSizeTimePerFrame           = objc.RegisterName("initWithTextures:normalTextures:size:timePerFrame:")
+	_sKTileDefinitionSelTextures                                                 = objc.RegisterName("textures")
+	_sKTileDefinitionSelSetTextures                                              = objc.RegisterName("setTextures:")
+	_sKTileDefinitionSelNormalTextures                                           = objc.RegisterName("normalTextures")
+	_sKTileDefinitionSelSetNormalTextures                                        = objc.RegisterName("setNormalTextures:")
+	_sKTileDefinitionSelUserData                                                 = objc.RegisterName("userData")
+	_sKTileDefinitionSelSetUserData                                              = objc.RegisterName("setUserData:")
+	_sKTileDefinitionSelName                                                     = objc.RegisterName("name")
+	_sKTileDefinitionSelSetName                                                  = objc.RegisterName("setName:")
+	_sKTileDefinitionSelSize                                                     = objc.RegisterName("size")
+	_sKTileDefinitionSelSetSize                                                  = objc.RegisterName("setSize:")
+	_sKTileDefinitionSelTimePerFrame                                             = objc.RegisterName("timePerFrame")
+	_sKTileDefinitionSelSetTimePerFrame                                          = objc.RegisterName("setTimePerFrame:")
+	_sKTileDefinitionSelPlacementWeight                                          = objc.RegisterName("placementWeight")
+	_sKTileDefinitionSelSetPlacementWeight                                       = objc.RegisterName("setPlacementWeight:")
+	_sKTileDefinitionSelRotation                                                 = objc.RegisterName("rotation")
+	_sKTileDefinitionSelSetRotation                                              = objc.RegisterName("setRotation:")
+	_sKTileDefinitionSelFlipVertically                                           = objc.RegisterName("flipVertically")
+	_sKTileDefinitionSelSetFlipVertically                                        = objc.RegisterName("setFlipVertically:")
+	_sKTileDefinitionSelFlipHorizontally                                         = objc.RegisterName("flipHorizontally")
+	_sKTileDefinitionSelSetFlipHorizontally                                      = objc.RegisterName("setFlipHorizontally:")
 )
 
 func SKTileDefinitionFromID(id objc.ID) *SKTileDefinition {
@@ -65,77 +65,99 @@ func SKTileDefinitionFromID(id objc.ID) *SKTileDefinition {
 // Create a tile definition with an SKTexture, and set its size to the SKTexture's width/height. @param texture the texture to reference for size and content
 func SKTileDefinitionTileDefinitionWithTexture(texture *SKTexture) *SKTileDefinition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTileDefinition), _sKTileDefinitionSelTileDefinitionWithTexture, texture.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileDefinitionFromID(_ret)
 }
 
 // Create a tile definition with an SKTexture and the specified size. @param texture the texture to reference for content @param size the size of the tile in points
 func SKTileDefinitionTileDefinitionWithTextureSize(texture *SKTexture, size corefoundation.CGSize) *SKTileDefinition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTileDefinition), _sKTileDefinitionSelTileDefinitionWithTextureSize, texture.Ptr(), size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileDefinitionFromID(_ret)
 }
 
 // Create a tile definition with an SKTexture and the specified size. @param texture the texture to reference for content @param normalTexture the normal texture to use for generating normals for lighting @param size the size of the tile in points
 func SKTileDefinitionTileDefinitionWithTextureNormalTextureSize(texture *SKTexture, normalTexture *SKTexture, size corefoundation.CGSize) *SKTileDefinition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTileDefinition), _sKTileDefinitionSelTileDefinitionWithTextureNormalTextureSize, texture.Ptr(), normalTexture.Ptr(), size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileDefinitionFromID(_ret)
 }
 
 // Create an animated tile definition with an array of SKTextures, the specified size, and the length of time each texture should be displayed for in the animation. @param textures the textures to reference for animated content @param size the size of the tile in points @param timePerFrame the duration, in seconds, that each texture in the textures array is displayed before switching to the next texture in the sequence
 func SKTileDefinitionTileDefinitionWithTexturesSizeTimePerFrame(textures *foundation.NSArray[*SKTexture], size corefoundation.CGSize, timePerFrame float64) *SKTileDefinition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTileDefinition), _sKTileDefinitionSelTileDefinitionWithTexturesSizeTimePerFrame, textures.Ptr(), size, timePerFrame)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileDefinitionFromID(_ret)
 }
 
 // Create an animated tile definition with an array of SKTextures, the specified size, and the length of time each texture should be displayed for in the animation. @param textures the textures to reference for animated content @param normalTextures the normal textures to use for generating normals for lighting @param size the size of the tile in points @param timePerFrame the duration, in seconds, that each texture in the textures array is displayed before switching to the next texture in the sequence
 func SKTileDefinitionTileDefinitionWithTexturesNormalTexturesSizeTimePerFrame(textures *foundation.NSArray[*SKTexture], normalTextures *foundation.NSArray[*SKTexture], size corefoundation.CGSize, timePerFrame float64) *SKTileDefinition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTileDefinition), _sKTileDefinitionSelTileDefinitionWithTexturesNormalTexturesSizeTimePerFrame, textures.Ptr(), normalTextures.Ptr(), size, timePerFrame)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileDefinitionFromID(_ret)
 }
 
 // Initilize a tile definition with an SKTexture, and set its size to the SKTexture's width/height. @param texture the texture to reference for size and content
 func (o *SKTileDefinition) InitWithTexture(texture *SKTexture) *SKTileDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileDefinitionSelInitWithTexture, texture.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileDefinitionFromID(_ret)
 }
 
 // Initilize a tile definition with an SKTexture and the specified size. @param texture the texture to reference for content @param size the size of the tile in points
 func (o *SKTileDefinition) InitWithTextureSize(texture *SKTexture, size corefoundation.CGSize) *SKTileDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileDefinitionSelInitWithTextureSize, texture.Ptr(), size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileDefinitionFromID(_ret)
 }
 
 // Initilize a tile definition with an SKTexture and the specified size. @param texture the texture to reference for content @param normalTexture the normal texture to use for generating normals for lighting @param size the size of the tile in points
 func (o *SKTileDefinition) InitWithTextureNormalTextureSize(texture *SKTexture, normalTexture *SKTexture, size corefoundation.CGSize) *SKTileDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileDefinitionSelInitWithTextureNormalTextureSize, texture.Ptr(), normalTexture.Ptr(), size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileDefinitionFromID(_ret)
 }
 
 // Initilize an animated tile definition with an array of SKTextures, the specified size, and the length of time each texture should be displayed for in the animation. @param textures the textures to reference for animated content @param size the size of the tile in points @param timePerFrame the duration, in seconds, that each texture in the textures array is displayed before switching to the next texture in the sequence
 func (o *SKTileDefinition) InitWithTexturesSizeTimePerFrame(textures *foundation.NSArray[*SKTexture], size corefoundation.CGSize, timePerFrame float64) *SKTileDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileDefinitionSelInitWithTexturesSizeTimePerFrame, textures.Ptr(), size, timePerFrame)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileDefinitionFromID(_ret)
 }
 
 // Initilize an animated tile definition with an array of SKTextures, the specified size, and the length of time each texture should be displayed for in the animation. @param textures the textures to reference for animated content @param normalTextures the normal textures to use for generating normals for lighting @param size the size of the tile in points @param timePerFrame the duration, in seconds, that each texture in the textures array is displayed before switching to the next texture in the sequence
 func (o *SKTileDefinition) InitWithTexturesNormalTexturesSizeTimePerFrame(textures *foundation.NSArray[*SKTexture], normalTextures *foundation.NSArray[*SKTexture], size corefoundation.CGSize, timePerFrame float64) *SKTileDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileDefinitionSelInitWithTexturesNormalTexturesSizeTimePerFrame, textures.Ptr(), normalTextures.Ptr(), size, timePerFrame)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileDefinitionFromID(_ret)
 }
 
 // The textures used to draw the tile. Non-animated tiles use only one texture. When more than one texture is present, the tile will swap through them in sequence, showing each for the duration specified in the timePerFrame property. After displaying the last texture in the array, the sequence is repeated from the first texture.
 func (o *SKTileDefinition) Textures() *foundation.NSArray[*SKTexture] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileDefinitionSelTextures)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SKTexture](_ret)
 }
 
@@ -146,7 +168,9 @@ func (o *SKTileDefinition) SetTextures(textures *foundation.NSArray[*SKTexture])
 // The textures to use for generating normals that lights use to light this tile. These will only be used if the tile is lit by at least one light. Each normal texture corresponds to a texture in the textures property.
 func (o *SKTileDefinition) NormalTextures() *foundation.NSArray[*SKTexture] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileDefinitionSelNormalTextures)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SKTexture](_ret)
 }
 
@@ -167,7 +191,9 @@ func (o *SKTileDefinition) SetUserData(userData *foundation.NSMutableDictionary[
 // Client-assignable name for the tile definition. Defaults to nil.
 func (o *SKTileDefinition) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileDefinitionSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -234,4 +260,3 @@ func (o *SKTileDefinition) FlipHorizontally() bool {
 func (o *SKTileDefinition) SetFlipHorizontally(flipHorizontally bool) {
 	o.Ptr().Send(_sKTileDefinitionSelSetFlipHorizontally, flipHorizontally)
 }
-

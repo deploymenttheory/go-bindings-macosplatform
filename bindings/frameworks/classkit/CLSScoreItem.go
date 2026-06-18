@@ -16,12 +16,12 @@ type CLSScoreItem struct {
 }
 
 var (
-	_clsCLSScoreItem = _objcClass("CLSScoreItem")
+	_clsCLSScoreItem                                     = _objcClass("CLSScoreItem")
 	_cLSScoreItemSelInitWithIdentifierTitleScoreMaxScore = objc.RegisterName("initWithIdentifier:title:score:maxScore:")
-	_cLSScoreItemSelScore = objc.RegisterName("score")
-	_cLSScoreItemSelSetScore = objc.RegisterName("setScore:")
-	_cLSScoreItemSelMaxScore = objc.RegisterName("maxScore")
-	_cLSScoreItemSelSetMaxScore = objc.RegisterName("setMaxScore:")
+	_cLSScoreItemSelScore                                = objc.RegisterName("score")
+	_cLSScoreItemSelSetScore                             = objc.RegisterName("setScore:")
+	_cLSScoreItemSelMaxScore                             = objc.RegisterName("maxScore")
+	_cLSScoreItemSelSetMaxScore                          = objc.RegisterName("setMaxScore:")
 )
 
 func CLSScoreItemFromID(id objc.ID) *CLSScoreItem {
@@ -37,7 +37,9 @@ func CLSScoreItemFromID(id objc.ID) *CLSScoreItem {
 // @abstract      Create a score item with identifiers, title, score and maximum score. @param         identifier      An identifier that is unique within activity. @param         title           Title of score. Ex @em Biology- Cellular Division Quiz @param         score           The score the user received. @param         maxScore        The maximum score possible.
 func (o *CLSScoreItem) InitWithIdentifierTitleScoreMaxScore(identifier *foundation.NSString, title *foundation.NSString, score float64, maxScore float64) *CLSScoreItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSScoreItemSelInitWithIdentifierTitleScoreMaxScore, identifier.Ptr(), title.Ptr(), score, maxScore)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLSScoreItemFromID(_ret)
 }
 
@@ -60,4 +62,3 @@ func (o *CLSScoreItem) MaxScore() float64 {
 func (o *CLSScoreItem) SetMaxScore(maxScore float64) {
 	o.Ptr().Send(_cLSScoreItemSelSetMaxScore, maxScore)
 }
-

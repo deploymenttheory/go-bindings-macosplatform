@@ -16,8 +16,8 @@ type MPSkipIntervalCommand struct {
 }
 
 var (
-	_clsMPSkipIntervalCommand = _objcClass("MPSkipIntervalCommand")
-	_mPSkipIntervalCommandSelPreferredIntervals = objc.RegisterName("preferredIntervals")
+	_clsMPSkipIntervalCommand                      = _objcClass("MPSkipIntervalCommand")
+	_mPSkipIntervalCommandSelPreferredIntervals    = objc.RegisterName("preferredIntervals")
 	_mPSkipIntervalCommandSelSetPreferredIntervals = objc.RegisterName("setPreferredIntervals:")
 )
 
@@ -39,4 +39,3 @@ func (o *MPSkipIntervalCommand) PreferredIntervals() *foundation.NSArray[*founda
 func (o *MPSkipIntervalCommand) SetPreferredIntervals(preferredIntervals *foundation.NSArray[*foundation.NSNumber]) {
 	o.Ptr().Send(_mPSkipIntervalCommandSelSetPreferredIntervals, preferredIntervals)
 }
-

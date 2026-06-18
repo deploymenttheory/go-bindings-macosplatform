@@ -57,11 +57,17 @@ func (x *AudioUnitVarispeed) SetRate(rate float32) {
 	x.inner.SetRate(rate)
 }
 
-func (x *AudioUnitVarispeed) asAudioUnitTimeEffect() *raw.AVAudioUnitTimeEffect { return &x.inner.AVAudioUnitTimeEffect }
+func (x *AudioUnitVarispeed) asAudioUnitTimeEffect() *raw.AVAudioUnitTimeEffect {
+	return &x.inner.AVAudioUnitTimeEffect
+}
 
-func (x *AudioUnitVarispeed) asAudioUnit() *raw.AVAudioUnit { return &x.inner.AVAudioUnitTimeEffect.AVAudioUnit }
+func (x *AudioUnitVarispeed) asAudioUnit() *raw.AVAudioUnit {
+	return &x.inner.AVAudioUnitTimeEffect.AVAudioUnit
+}
 
-func (x *AudioUnitVarispeed) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAudioUnitTimeEffect.AVAudioUnit.AVAudioNode }
+func (x *AudioUnitVarispeed) asAudioNode() *raw.AVAudioNode {
+	return &x.inner.AVAudioUnitTimeEffect.AVAudioUnit.AVAudioNode
+}
 
 // AudioUnitVarispeedable is the interface implemented by [AudioUnitVarispeed], for mocking and DI.
 type AudioUnitVarispeedable interface {
@@ -73,4 +79,3 @@ type AudioUnitVarispeedable interface {
 }
 
 var _ AudioUnitVarispeedable = (*AudioUnitVarispeed)(nil)
-

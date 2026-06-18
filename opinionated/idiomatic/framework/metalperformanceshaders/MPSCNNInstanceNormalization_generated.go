@@ -153,9 +153,13 @@ func (x *CNNInstanceNormalization) DataSource() mpsneuralnetwork.MPSCNNInstanceN
 	return x.inner.DataSource()
 }
 
-func (x *CNNInstanceNormalization) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNKernel }
+func (x *CNNInstanceNormalization) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNKernel
+}
 
-func (x *CNNInstanceNormalization) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
+func (x *CNNInstanceNormalization) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNKernel.MPSKernel
+}
 
 // CNNInstanceNormalizationable is the interface implemented by [CNNInstanceNormalization], for mocking and DI.
 type CNNInstanceNormalizationable interface {
@@ -182,4 +186,3 @@ type CNNInstanceNormalizationable interface {
 }
 
 var _ CNNInstanceNormalizationable = (*CNNInstanceNormalization)(nil)
-

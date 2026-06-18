@@ -170,4 +170,3 @@ type TransformStackable interface {
 }
 
 var _ TransformStackable = (*TransformStack)(nil)
-

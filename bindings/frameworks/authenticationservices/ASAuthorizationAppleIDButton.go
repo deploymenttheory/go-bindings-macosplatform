@@ -16,11 +16,11 @@ type ASAuthorizationAppleIDButton struct {
 }
 
 var (
-	_clsASAuthorizationAppleIDButton = _objcClass("ASAuthorizationAppleIDButton")
-	_aSAuthorizationAppleIDButtonSelButtonWithTypeStyle = objc.RegisterName("buttonWithType:style:")
+	_clsASAuthorizationAppleIDButton                                                        = _objcClass("ASAuthorizationAppleIDButton")
+	_aSAuthorizationAppleIDButtonSelButtonWithTypeStyle                                     = objc.RegisterName("buttonWithType:style:")
 	_aSAuthorizationAppleIDButtonSelInitWithAuthorizationButtonTypeAuthorizationButtonStyle = objc.RegisterName("initWithAuthorizationButtonType:authorizationButtonStyle:")
-	_aSAuthorizationAppleIDButtonSelCornerRadius = objc.RegisterName("cornerRadius")
-	_aSAuthorizationAppleIDButtonSelSetCornerRadius = objc.RegisterName("setCornerRadius:")
+	_aSAuthorizationAppleIDButtonSelCornerRadius                                            = objc.RegisterName("cornerRadius")
+	_aSAuthorizationAppleIDButtonSelSetCornerRadius                                         = objc.RegisterName("setCornerRadius:")
 )
 
 func ASAuthorizationAppleIDButtonFromID(id objc.ID) *ASAuthorizationAppleIDButton {
@@ -35,13 +35,17 @@ func ASAuthorizationAppleIDButtonFromID(id objc.ID) *ASAuthorizationAppleIDButto
 
 func ASAuthorizationAppleIDButtonButtonWithTypeStyle(type_ ASAuthorizationAppleIDButtonType, style ASAuthorizationAppleIDButtonStyle) *ASAuthorizationAppleIDButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsASAuthorizationAppleIDButton), _aSAuthorizationAppleIDButtonSelButtonWithTypeStyle, type_, style)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationAppleIDButtonFromID(_ret)
 }
 
 func (o *ASAuthorizationAppleIDButton) InitWithAuthorizationButtonTypeAuthorizationButtonStyle(type_ ASAuthorizationAppleIDButtonType, style ASAuthorizationAppleIDButtonStyle) *ASAuthorizationAppleIDButton {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationAppleIDButtonSelInitWithAuthorizationButtonTypeAuthorizationButtonStyle, type_, style)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationAppleIDButtonFromID(_ret)
 }
 
@@ -53,4 +57,3 @@ func (o *ASAuthorizationAppleIDButton) CornerRadius() float64 {
 func (o *ASAuthorizationAppleIDButton) SetCornerRadius(cornerRadius float64) {
 	o.Ptr().Send(_aSAuthorizationAppleIDButtonSelSetCornerRadius, cornerRadius)
 }
-

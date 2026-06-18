@@ -128,4 +128,3 @@ type AppAttestServiceable interface {
 }
 
 var _ AppAttestServiceable = (*AppAttestService)(nil)
-

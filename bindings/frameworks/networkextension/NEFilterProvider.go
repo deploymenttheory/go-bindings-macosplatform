@@ -17,11 +17,11 @@ type NEFilterProvider struct {
 }
 
 var (
-	_clsNEFilterProvider = _objcClass("NEFilterProvider")
-	_nEFilterProviderSelStartFilterWithCompletionHandler = objc.RegisterName("startFilterWithCompletionHandler:")
+	_clsNEFilterProvider                                      = _objcClass("NEFilterProvider")
+	_nEFilterProviderSelStartFilterWithCompletionHandler      = objc.RegisterName("startFilterWithCompletionHandler:")
 	_nEFilterProviderSelStopFilterWithReasonCompletionHandler = objc.RegisterName("stopFilterWithReason:completionHandler:")
-	_nEFilterProviderSelHandleReport = objc.RegisterName("handleReport:")
-	_nEFilterProviderSelFilterConfiguration = objc.RegisterName("filterConfiguration")
+	_nEFilterProviderSelHandleReport                          = objc.RegisterName("handleReport:")
+	_nEFilterProviderSelFilterConfiguration                   = objc.RegisterName("filterConfiguration")
 )
 
 func NEFilterProviderFromID(id objc.ID) *NEFilterProvider {
@@ -66,7 +66,8 @@ func (o *NEFilterProvider) HandleReport(report *NEFilterReport) {
 // @property filterConfiguration @discussion An NEContentFilterConfiguration object containing the current filter configuration. The value of this property can change during the lifetime of a filter. Filter implementations can use KVO to be notified when the configuration changes.
 func (o *NEFilterProvider) FilterConfiguration() *NEFilterProviderConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFilterProviderSelFilterConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEFilterProviderConfigurationFromID(_ret)
 }
-

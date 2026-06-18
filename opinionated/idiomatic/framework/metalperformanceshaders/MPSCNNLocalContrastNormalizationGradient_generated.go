@@ -19,7 +19,9 @@ type CNNLocalContrastNormalizationGradient struct {
 }
 
 // Unwrap returns the underlying [raw.MPSCNNLocalContrastNormalizationGradient].
-func (x *CNNLocalContrastNormalizationGradient) Unwrap() *raw.MPSCNNLocalContrastNormalizationGradient { return x.inner }
+func (x *CNNLocalContrastNormalizationGradient) Unwrap() *raw.MPSCNNLocalContrastNormalizationGradient {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -263,11 +265,17 @@ func (x *CNNLocalContrastNormalizationGradient) SetPs(ps float32) {
 	x.inner.SetPs(ps)
 }
 
-func (x *CNNLocalContrastNormalizationGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
+func (x *CNNLocalContrastNormalizationGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNGradientKernel
+}
 
-func (x *CNNLocalContrastNormalizationGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *CNNLocalContrastNormalizationGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
-func (x *CNNLocalContrastNormalizationGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel }
+func (x *CNNLocalContrastNormalizationGradient) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel
+}
 
 // CNNLocalContrastNormalizationGradientable is the interface implemented by [CNNLocalContrastNormalizationGradient], for mocking and DI.
 type CNNLocalContrastNormalizationGradientable interface {
@@ -313,4 +321,3 @@ type CNNLocalContrastNormalizationGradientable interface {
 }
 
 var _ CNNLocalContrastNormalizationGradientable = (*CNNLocalContrastNormalizationGradient)(nil)
-

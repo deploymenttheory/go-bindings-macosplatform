@@ -16,9 +16,9 @@ type AXBrailleTranslationResult struct {
 }
 
 var (
-	_clsAXBrailleTranslationResult = _objcClass("AXBrailleTranslationResult")
+	_clsAXBrailleTranslationResult             = _objcClass("AXBrailleTranslationResult")
 	_aXBrailleTranslationResultSelResultString = objc.RegisterName("resultString")
-	_aXBrailleTranslationResultSelLocationMap = objc.RegisterName("locationMap")
+	_aXBrailleTranslationResultSelLocationMap  = objc.RegisterName("locationMap")
 )
 
 func AXBrailleTranslationResultFromID(id objc.ID) *AXBrailleTranslationResult {
@@ -34,7 +34,9 @@ func AXBrailleTranslationResultFromID(id objc.ID) *AXBrailleTranslationResult {
 // The resulting string after translation or back-translation.
 func (o *AXBrailleTranslationResult) ResultString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXBrailleTranslationResultSelResultString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -43,4 +45,3 @@ func (o *AXBrailleTranslationResult) LocationMap() *foundation.NSArray[*foundati
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aXBrailleTranslationResultSelLocationMap)
 	return _ret
 }
-

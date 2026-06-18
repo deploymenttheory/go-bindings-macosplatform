@@ -16,7 +16,9 @@ type MTRRVCRunModeClusterChangeToModeParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRRVCRunModeClusterChangeToModeParams].
-func (x *MTRRVCRunModeClusterChangeToModeParams) Unwrap() *raw.MTRRVCRunModeClusterChangeToModeParams { return x.inner }
+func (x *MTRRVCRunModeClusterChangeToModeParams) Unwrap() *raw.MTRRVCRunModeClusterChangeToModeParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -99,4 +101,3 @@ type MTRRVCRunModeClusterChangeToModeParamsable interface {
 }
 
 var _ MTRRVCRunModeClusterChangeToModeParamsable = (*MTRRVCRunModeClusterChangeToModeParams)(nil)
-

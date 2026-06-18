@@ -25,4 +25,3 @@ func MTRTestClusterClusterTestListInt8UArgumentRequestParamsFromID(id objc.ID) *
 	purego.Track(o)
 	return o
 }
-

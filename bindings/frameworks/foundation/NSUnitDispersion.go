@@ -15,7 +15,7 @@ type NSUnitDispersion struct {
 }
 
 var (
-	_clsNSUnitDispersion = _objcClass("NSUnitDispersion")
+	_clsNSUnitDispersion                = _objcClass("NSUnitDispersion")
 	_nSUnitDispersionSelPartsPerMillion = objc.RegisterName("partsPerMillion")
 )
 
@@ -31,7 +31,8 @@ func NSUnitDispersionFromID(id objc.ID) *NSUnitDispersion {
 
 func NSUnitDispersionPartsPerMillion() *NSUnitDispersion {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitDispersion), _nSUnitDispersionSelPartsPerMillion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitDispersionFromID(_ret)
 }
-

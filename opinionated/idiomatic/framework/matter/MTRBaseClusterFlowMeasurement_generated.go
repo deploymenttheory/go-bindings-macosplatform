@@ -683,9 +683,13 @@ func (x *MTRBaseClusterFlowMeasurement) SubscribeAttributeClusterRevisionWithMin
 	}
 }
 
-func (x *MTRBaseClusterFlowMeasurement) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterFlowMeasurement) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterFlowMeasurement) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterFlowMeasurement) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterFlowMeasurementable is the interface implemented by [MTRBaseClusterFlowMeasurement], for mocking and DI.
 type MTRBaseClusterFlowMeasurementable interface {
@@ -729,4 +733,3 @@ type MTRBaseClusterFlowMeasurementable interface {
 }
 
 var _ MTRBaseClusterFlowMeasurementable = (*MTRBaseClusterFlowMeasurement)(nil)
-

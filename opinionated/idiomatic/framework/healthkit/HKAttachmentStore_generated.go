@@ -117,4 +117,3 @@ type AttachmentStoreable interface {
 }
 
 var _ AttachmentStoreable = (*AttachmentStore)(nil)
-

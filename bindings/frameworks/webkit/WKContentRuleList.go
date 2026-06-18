@@ -16,7 +16,7 @@ type WKContentRuleList struct {
 }
 
 var (
-	_clsWKContentRuleList = _objcClass("WKContentRuleList")
+	_clsWKContentRuleList           = _objcClass("WKContentRuleList")
 	_wKContentRuleListSelIdentifier = objc.RegisterName("identifier")
 )
 
@@ -32,7 +32,8 @@ func WKContentRuleListFromID(id objc.ID) *WKContentRuleList {
 
 func (o *WKContentRuleList) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKContentRuleListSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

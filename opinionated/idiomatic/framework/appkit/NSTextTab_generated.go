@@ -74,4 +74,3 @@ type TextTabable interface {
 }
 
 var _ TextTabable = (*TextTab)(nil)
-

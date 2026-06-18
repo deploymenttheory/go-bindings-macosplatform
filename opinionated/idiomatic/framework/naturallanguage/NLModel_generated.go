@@ -81,4 +81,3 @@ type Modelable interface {
 }
 
 var _ Modelable = (*Model)(nil)
-

@@ -18,7 +18,9 @@ type SampleBufferRenderSynchronizer struct {
 }
 
 // Unwrap returns the underlying [raw.AVSampleBufferRenderSynchronizer].
-func (x *SampleBufferRenderSynchronizer) Unwrap() *raw.AVSampleBufferRenderSynchronizer { return x.inner }
+func (x *SampleBufferRenderSynchronizer) Unwrap() *raw.AVSampleBufferRenderSynchronizer {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -154,4 +156,3 @@ type SampleBufferRenderSynchronizerable interface {
 }
 
 var _ SampleBufferRenderSynchronizerable = (*SampleBufferRenderSynchronizer)(nil)
-

@@ -8,157 +8,157 @@ import (
 )
 
 type AsscEntry struct {
-	FontSize int16
+	FontSize  int16
 	FontStyle int16
-	FontID int16
+	FontID    int16
 }
 
 type BitMap struct {
 	BaseAddr string
 	RowBytes int16
-	Bounds unsafe.Pointer
+	Bounds   unsafe.Pointer
 }
 
 type CM2Header struct {
-	Size uint
-	CMMType uint
-	ProfileVersion uint
-	ProfileClass uint
-	DataColorSpace uint
+	Size                   uint
+	CMMType                uint
+	ProfileVersion         uint
+	ProfileClass           uint
+	DataColorSpace         uint
 	ProfileConnectionSpace uint
-	DateTime CMDateTime
-	CS2profileSignature uint
-	Platform uint
-	Flags uint
-	DeviceManufacturer uint
-	DeviceModel uint
-	DeviceAttributes [2]uint
-	RenderingIntent uint
-	White CMFixedXYZColor
-	Creator uint
-	Reserved [44]int8
+	DateTime               CMDateTime
+	CS2profileSignature    uint
+	Platform               uint
+	Flags                  uint
+	DeviceManufacturer     uint
+	DeviceModel            uint
+	DeviceAttributes       [2]uint
+	RenderingIntent        uint
+	White                  CMFixedXYZColor
+	Creator                uint
+	Reserved               [44]int8
 }
 
 type CM2Profile struct {
-	Header CM2Header
+	Header   CM2Header
 	TagTable CMTagElemTable
 	ElemData [1]int8
 }
 
 type CM4Header struct {
-	Size uint
-	CMMType uint
-	ProfileVersion uint
-	ProfileClass uint
-	DataColorSpace uint
+	Size                   uint
+	CMMType                uint
+	ProfileVersion         uint
+	ProfileClass           uint
+	DataColorSpace         uint
 	ProfileConnectionSpace uint
-	DateTime CMDateTime
-	CS2profileSignature uint
-	Platform uint
-	Flags uint
-	DeviceManufacturer uint
-	DeviceModel uint
-	DeviceAttributes [2]uint
-	RenderingIntent uint
-	White CMFixedXYZColor
-	Creator uint
-	Digest [16]uint8
-	Reserved [28]int8
+	DateTime               CMDateTime
+	CS2profileSignature    uint
+	Platform               uint
+	Flags                  uint
+	DeviceManufacturer     uint
+	DeviceModel            uint
+	DeviceAttributes       [2]uint
+	RenderingIntent        uint
+	White                  CMFixedXYZColor
+	Creator                uint
+	Digest                 [16]uint8
+	Reserved               [28]int8
 }
 
 type CMAdaptationMatrixType struct {
-	TypeDescriptor uint
-	Reserved uint
+	TypeDescriptor   uint
+	Reserved         uint
 	AdaptationMatrix [9]int
 }
 
 type CMBitmap struct {
-	Image string
-	Width uint
-	Height uint
-	RowBytes uint
+	Image     string
+	Width     uint
+	Height    uint
+	RowBytes  uint
 	PixelSize uint
-	Space uint
-	User1 uint
-	User2 uint
+	Space     uint
+	User1     uint
+	User2     uint
 }
 
 type CMBufferLocation struct {
 	Buffer unsafe.Pointer
-	Size uint
+	Size   uint
 }
 
 type CMCMYColor struct {
-	Cyan uint16
+	Cyan    uint16
 	Magenta uint16
-	Yellow uint16
+	Yellow  uint16
 }
 
 type CMCMYKColor struct {
-	Cyan uint16
+	Cyan    uint16
 	Magenta uint16
-	Yellow uint16
-	Black uint16
+	Yellow  uint16
+	Black   uint16
 }
 
 type CMConcatProfileSet struct {
-	KeyIndex uint16
-	Count uint16
+	KeyIndex   uint16
+	Count      uint16
 	ProfileSet [1]unsafe.Pointer
 }
 
 type CMCurveType struct {
 	TypeDescriptor uint
-	Reserved uint
-	CountValue uint
-	Data [1]uint16
+	Reserved       uint
+	CountValue     uint
+	Data           [1]uint16
 }
 
 type CMDataType struct {
 	TypeDescriptor uint
-	Reserved uint
-	DataFlag uint
-	Data [1]int8
+	Reserved       uint
+	DataFlag       uint
+	Data           [1]int8
 }
 
 type CMDateTime struct {
-	Year uint16
-	Month uint16
+	Year          uint16
+	Month         uint16
 	DayOfTheMonth uint16
-	Hours uint16
-	Minutes uint16
-	Seconds uint16
+	Hours         uint16
+	Minutes       uint16
+	Seconds       uint16
 }
 
 type CMDateTimeType struct {
 	TypeDescriptor uint
-	Reserved uint
-	DateTime CMDateTime
+	Reserved       uint
+	DateTime       CMDateTime
 }
 
 type CMDeviceInfo struct {
-	DataVersion uint
-	DeviceClass uint
-	DeviceID uint
-	DeviceScope CMDeviceScope
-	DeviceState uint
+	DataVersion      uint
+	DeviceClass      uint
+	DeviceID         uint
+	DeviceScope      CMDeviceScope
+	DeviceState      uint
 	DefaultProfileID uint
-	DeviceName unsafe.Pointer
-	ProfileCount uint
-	Reserved uint
+	DeviceName       unsafe.Pointer
+	ProfileCount     uint
+	Reserved         uint
 }
 
 type CMDeviceProfileArray struct {
 	ProfileCount uint
-	Profiles [1]CMDeviceProfileInfo
+	Profiles     [1]CMDeviceProfileInfo
 }
 
 type CMDeviceProfileInfo struct {
 	DataVersion uint
-	ProfileID uint
-	ProfileLoc CMProfileLocation
+	ProfileID   uint
+	ProfileLoc  CMProfileLocation
 	ProfileName unsafe.Pointer
-	Reserved uint
+	Reserved    uint
 }
 
 type CMDeviceScope struct {
@@ -179,14 +179,14 @@ type CMFixedXYZColor struct {
 
 // @struct     CMFloatBitmap @abstract       A new struture that defines and arbritrary map of float color values. @discussion     The struture defines a pixel array of dimensions [height][width][chans] where 'chans' is the number of channels in the colorspace plus an optional one for alpha. The actual memory pointed to by the structure can contain a variety of possible arrangements. The actual data values can be chuncky or planar. The channels can by in any order. <PRE> Examples: a) float* p contains a 640w by 480h bitmap of chunky RGB data CMFloatBitmap map = { 0,         // version {p, p+1, p+2},       // base addrs of R,G,B 480, 640,            // height, width 640*3,               // rowStride 3,                   // colStride cmRGBData, kCMFloatBitmapFlagsNone}; b) float* p contains a 640w by 480h bitmap of chunky BGRA data CMFloatBitmap map = { 0,         // version {p+2, p+1, p, p+3},  // base addrs of R,G,B,A 480, 640,            // height, width 640*4,               // rowStride 3,                   // colStride cmRGBData, kCMFloatBitmapFlagsAlpha}; c) float* p contains a 640w by 480h bitmap of planar CMYK data CMFloatBitmap map = { 0,        // version {p, p+640*480 , p+2*640*480 , p+3*640*480}, 480, 640,           // height, width 640,                // rowStride 1,                  // colStride cmCMYKData, kCMFloatBitmapFlagsNone}; </PRE> @field      version     The version number of this structure to allow for future expansion. Should contain 0 for now. @field      buffers     The base address for each channel in canonical order. The canonical order for RGB is R,G,B. CMYK is C,M,Y,K etc. A maximum of sixteen channels is supported. Another way to think of this is buffers[c] = &(pixelArray[0][0][c]) @field      height      The height (in pixels) of the bitmap. @field      width       The width (in pixels) of the bitmap. @field      rowStride   The number of floats to skip to move from one row to the next. This is typically (width*chans) for chunky pixel buffers or (width) for planar. Can be negative if the image is vertically flipped. @field      colStride   The number of floats to skip to move from one column to the next. This is typically (chans) for chunky pixel buffers or (1) for planar. Can be negative if the image is horizontally flipped. @field      space       The colorspace of the data (e.g cmRGBdata cmCMYKData) @field      flags       Holds bits to specify the alpha type of the data. The remaining bits are reserved for future use.
 type CMFloatBitmap struct {
-	Version uint
-	Buffers [16]*float32
-	Height uint
-	Width uint
+	Version   uint
+	Buffers   [16]*float32
+	Height    uint
+	Width     uint
 	RowStride int
 	ColStride int
-	Space uint
-	Flags CMFloatBitmapFlags
+	Space     uint
+	Flags     CMFloatBitmapFlags
 }
 
 type CMGrayColor struct {
@@ -194,15 +194,15 @@ type CMGrayColor struct {
 }
 
 type CMHLSColor struct {
-	Hue uint16
-	Lightness uint16
+	Hue        uint16
+	Lightness  uint16
 	Saturation uint16
 }
 
 type CMHSVColor struct {
-	Hue uint16
+	Hue        uint16
 	Saturation uint16
-	Value uint16
+	Value      uint16
 }
 
 type CMHandleLocation struct {
@@ -211,7 +211,7 @@ type CMHandleLocation struct {
 
 type CMIntentCRDVMSize struct {
 	RenderingIntent uint
-	VMSize uint
+	VMSize          uint
 }
 
 type CMLabColor struct {
@@ -221,27 +221,27 @@ type CMLabColor struct {
 }
 
 type CMLut16Type struct {
-	TypeDescriptor uint
-	Reserved uint
-	InputChannels uint8
-	OutputChannels uint8
-	GridPoints uint8
-	Reserved2 uint8
-	Matrix [3][3]int
-	InputTableEntries uint16
+	TypeDescriptor     uint
+	Reserved           uint
+	InputChannels      uint8
+	OutputChannels     uint8
+	GridPoints         uint8
+	Reserved2          uint8
+	Matrix             [3][3]int
+	InputTableEntries  uint16
 	OutputTableEntries uint16
-	InputTable [1]uint16
+	InputTable         [1]uint16
 }
 
 type CMLut8Type struct {
 	TypeDescriptor uint
-	Reserved uint
-	InputChannels uint8
+	Reserved       uint
+	InputChannels  uint8
 	OutputChannels uint8
-	GridPoints uint8
-	Reserved2 uint8
-	Matrix [3][3]int
-	InputTable [1]uint8
+	GridPoints     uint8
+	Reserved2      uint8
+	Matrix         [3][3]int
+	InputTable     [1]uint8
 }
 
 type CMLuvColor struct {
@@ -251,78 +251,78 @@ type CMLuvColor struct {
 }
 
 type CMMInfo struct {
-	DataSize uint
-	CMMType uint
-	CMMMfr uint
-	CMMVersion uint
-	ASCIIName [32]uint8
-	ASCIIDesc [256]uint8
+	DataSize         uint
+	CMMType          uint
+	CMMMfr           uint
+	CMMVersion       uint
+	ASCIIName        [32]uint8
+	ASCIIDesc        [256]uint8
 	UniCodeNameCount uint
-	UniCodeName [32]uint16
+	UniCodeName      [32]uint16
 	UniCodeDescCount uint
-	UniCodeDesc [256]uint16
+	UniCodeDesc      [256]uint16
 }
 
 type CMMakeAndModel struct {
-	Manufacturer uint
-	Model uint
-	SerialNumber uint
+	Manufacturer    uint
+	Model           uint
+	SerialNumber    uint
 	ManufactureDate uint
-	Reserved1 uint
-	Reserved2 uint
-	Reserved3 uint
-	Reserved4 uint
+	Reserved1       uint
+	Reserved2       uint
+	Reserved3       uint
+	Reserved4       uint
 }
 
 type CMMakeAndModelType struct {
 	TypeDescriptor uint
-	Reserved uint
-	MakeAndModel CMMakeAndModel
+	Reserved       uint
+	MakeAndModel   CMMakeAndModel
 }
 
 type CMMeasurementType struct {
-	TypeDescriptor uint
-	Reserved uint
+	TypeDescriptor   uint
+	Reserved         uint
 	StandardObserver uint
-	BackingXYZ CMFixedXYZColor
-	Geometry uint
-	Flare uint
-	Illuminant uint
+	BackingXYZ       CMFixedXYZColor
+	Geometry         uint
+	Flare            uint
+	Illuminant       uint
 }
 
 type CMMultiFunctCLUTType struct {
 	GridPoints [16]uint8
-	EntrySize uint8
-	Reserved [3]uint8
-	Data [2]uint8
+	EntrySize  uint8
+	Reserved   [3]uint8
+	Data       [2]uint8
 }
 
 type CMMultiFunctLutType struct {
 	TypeDescriptor uint
-	Reserved uint
-	InputChannels uint8
+	Reserved       uint
+	InputChannels  uint8
 	OutputChannels uint8
-	Reserved2 uint16
-	OffsetBcurves uint
-	OffsetMatrix uint
-	OffsetMcurves uint
-	OffsetCLUT uint
-	OffsetAcurves uint
-	Data [1]uint8
+	Reserved2      uint16
+	OffsetBcurves  uint
+	OffsetMatrix   uint
+	OffsetMcurves  uint
+	OffsetCLUT     uint
+	OffsetAcurves  uint
+	Data           [1]uint8
 }
 
 type CMMultiLocalizedUniCodeEntryRec struct {
 	LanguageCode [2]int8
-	RegionCode [2]int8
-	TextLength uint
-	TextOffset uint
+	RegionCode   [2]int8
+	TextLength   uint
+	TextOffset   uint
 }
 
 type CMMultiLocalizedUniCodeType struct {
 	TypeDescriptor uint
-	Reserved uint
-	EntryCount uint
-	EntrySize uint
+	Reserved       uint
+	EntryCount     uint
+	EntrySize      uint
 }
 
 type CMMultichannel5Color struct {
@@ -346,64 +346,64 @@ type CMNamedColor struct {
 }
 
 type CMNamedColor2EntryType struct {
-	RootName [32]uint8
-	PCSColorCoords [3]uint16
+	RootName          [32]uint8
+	PCSColorCoords    [3]uint16
 	DeviceColorCoords [1]uint16
 }
 
 type CMNamedColor2Type struct {
-	TypeDescriptor uint
-	Reserved uint
-	VendorFlag uint
-	Count uint
+	TypeDescriptor     uint
+	Reserved           uint
+	VendorFlag         uint
+	Count              uint
 	DeviceChannelCount uint
-	PrefixName [32]uint8
-	SuffixName [32]uint8
-	Data [1]int8
+	PrefixName         [32]uint8
+	SuffixName         [32]uint8
+	Data               [1]int8
 }
 
 type CMNamedColorType struct {
 	TypeDescriptor uint
-	Reserved uint
-	VendorFlag uint
-	Count uint
-	PrefixName [1]uint8
+	Reserved       uint
+	VendorFlag     uint
+	Count          uint
+	PrefixName     [1]uint8
 }
 
 type CMNativeDisplayInfo struct {
-	DataSize uint
-	RedPhosphor CMFixedXYColor
-	GreenPhosphor CMFixedXYColor
-	BluePhosphor CMFixedXYColor
-	WhitePoint CMFixedXYColor
-	RedGammaValue int
+	DataSize        uint
+	RedPhosphor     CMFixedXYColor
+	GreenPhosphor   CMFixedXYColor
+	BluePhosphor    CMFixedXYColor
+	WhitePoint      CMFixedXYColor
+	RedGammaValue   int
 	GreenGammaValue int
-	BlueGammaValue int
-	GammaChannels uint16
+	BlueGammaValue  int
+	GammaChannels   uint16
 	GammaEntryCount uint16
-	GammaEntrySize uint16
-	GammaData [1]int8
+	GammaEntrySize  uint16
+	GammaData       [1]int8
 }
 
 type CMNativeDisplayInfoType struct {
-	TypeDescriptor uint
-	Reserved uint
+	TypeDescriptor    uint
+	Reserved          uint
 	NativeDisplayInfo CMNativeDisplayInfo
 }
 
 type CMPS2CRDVMSizeType struct {
 	TypeDescriptor uint
-	Reserved uint
-	Count uint
-	IntentCRD [1]CMIntentCRDVMSize
+	Reserved       uint
+	Count          uint
+	IntentCRD      [1]CMIntentCRDVMSize
 }
 
 type CMParametricCurveType struct {
 	TypeDescriptor uint
-	Reserved uint
-	FunctionType uint16
-	Reserved2 uint16
-	Value [1]int
+	Reserved       uint
+	FunctionType   uint16
+	Reserved2      uint16
+	Value          [1]int
 }
 
 type CMPathLocation struct {
@@ -411,165 +411,165 @@ type CMPathLocation struct {
 }
 
 type CMProfileIterateData struct {
-	DataVersion uint
-	Header CM2Header
-	Code int16
-	Name [256]uint8
-	Location CMProfileLocation
+	DataVersion      uint
+	Header           CM2Header
+	Code             int16
+	Name             [256]uint8
+	Location         CMProfileLocation
 	UniCodeNameCount uint
-	UniCodeName *uint16
-	AsciiName *uint8
-	MakeAndModel *CMMakeAndModel
-	Digest *[16]uint8
+	UniCodeName      *uint16
+	AsciiName        *uint8
+	MakeAndModel     *CMMakeAndModel
+	Digest           *[16]uint8
 }
 
 type CMProfileLocation struct {
 	LocType int16
-	U unsafe.Pointer
+	U       unsafe.Pointer
 }
 
 type CMProfileSequenceDescType struct {
 	TypeDescriptor uint
-	Reserved uint
-	Count uint
-	Data [1]int8
+	Reserved       uint
+	Count          uint
+	Data           [1]int8
 }
 
 type CMRGBColor struct {
-	Red uint16
+	Red   uint16
 	Green uint16
-	Blue uint16
+	Blue  uint16
 }
 
 type CMS15Fixed16ArrayType struct {
 	TypeDescriptor uint
-	Reserved uint
-	Value [1]int
+	Reserved       uint
+	Value          [1]int
 }
 
 type CMScreeningChannelRec struct {
-	Frequency int
-	Angle int
+	Frequency    int
+	Angle        int
 	SpotFunction uint
 }
 
 type CMScreeningType struct {
 	TypeDescriptor uint
-	Reserved uint
-	ScreeningFlag uint
-	ChannelCount uint
-	ChannelInfo [1]CMScreeningChannelRec
+	Reserved       uint
+	ScreeningFlag  uint
+	ChannelCount   uint
+	ChannelInfo    [1]CMScreeningChannelRec
 }
 
 type CMSignatureType struct {
 	TypeDescriptor uint
-	Reserved uint
-	Signature uint
+	Reserved       uint
+	Signature      uint
 }
 
 type CMTagElemTable struct {
-	Count uint
+	Count   uint
 	TagList [1]CMTagRecord
 }
 
 type CMTagRecord struct {
-	Tag uint
+	Tag           uint
 	ElementOffset uint
-	ElementSize uint
+	ElementSize   uint
 }
 
 type CMTextDescriptionType struct {
 	TypeDescriptor uint
-	Reserved uint
-	ASCIICount uint
-	ASCIIName [2]uint8
+	Reserved       uint
+	ASCIICount     uint
+	ASCIIName      [2]uint8
 }
 
 type CMTextType struct {
 	TypeDescriptor uint
-	Reserved uint
-	Text [1]uint8
+	Reserved       uint
+	Text           [1]uint8
 }
 
 type CMU16Fixed16ArrayType struct {
 	TypeDescriptor uint
-	Reserved uint
-	Value [1]uint
+	Reserved       uint
+	Value          [1]uint
 }
 
 type CMUInt16ArrayType struct {
 	TypeDescriptor uint
-	Reserved uint
-	Value [1]uint16
+	Reserved       uint
+	Value          [1]uint16
 }
 
 type CMUInt32ArrayType struct {
 	TypeDescriptor uint
-	Reserved uint
-	Value [1]uint
+	Reserved       uint
+	Value          [1]uint
 }
 
 type CMUInt64ArrayType struct {
 	TypeDescriptor uint
-	Reserved uint
-	Value [1]uint
+	Reserved       uint
+	Value          [1]uint
 }
 
 type CMUInt8ArrayType struct {
 	TypeDescriptor uint
-	Reserved uint
-	Value [1]uint8
+	Reserved       uint
+	Value          [1]uint8
 }
 
 type CMUcrBgType struct {
 	TypeDescriptor uint
-	Reserved uint
-	UcrCount uint
-	UcrValues [1]uint16
+	Reserved       uint
+	UcrCount       uint
+	UcrValues      [1]uint16
 }
 
 type CMUnicodeTextType struct {
 	TypeDescriptor uint
-	Reserved uint
-	Text [1]uint16
+	Reserved       uint
+	Text           [1]uint16
 }
 
 type CMVideoCardGamma struct {
 	TagType uint
-	U unsafe.Pointer
+	U       unsafe.Pointer
 }
 
 type CMVideoCardGammaFormula struct {
-	RedGamma int
-	RedMin int
-	RedMax int
+	RedGamma   int
+	RedMin     int
+	RedMax     int
 	GreenGamma int
-	GreenMin int
-	GreenMax int
-	BlueGamma int
-	BlueMin int
-	BlueMax int
+	GreenMin   int
+	GreenMax   int
+	BlueGamma  int
+	BlueMin    int
+	BlueMax    int
 }
 
 type CMVideoCardGammaTable struct {
-	Channels uint16
+	Channels   uint16
 	EntryCount uint16
-	EntrySize uint16
-	Data [1]int8
+	EntrySize  uint16
+	Data       [1]int8
 }
 
 type CMVideoCardGammaType struct {
 	TypeDescriptor uint
-	Reserved uint
-	Gamma CMVideoCardGamma
+	Reserved       uint
+	Gamma          CMVideoCardGamma
 }
 
 type CMViewingConditionsType struct {
 	TypeDescriptor uint
-	Reserved uint
-	Illuminant CMFixedXYZColor
-	Surround CMFixedXYZColor
-	StdIlluminant uint
+	Reserved       uint
+	Illuminant     CMFixedXYZColor
+	Surround       CMFixedXYZColor
+	StdIlluminant  uint
 }
 
 type CMXYZColor struct {
@@ -580,76 +580,76 @@ type CMXYZColor struct {
 
 type CMXYZType struct {
 	TypeDescriptor uint
-	Reserved uint
-	XYZ [1]CMFixedXYZColor
+	Reserved       uint
+	XYZ            [1]CMFixedXYZColor
 }
 
 type CMYxyColor struct {
 	CapY uint16
-	X uint16
-	Y uint16
+	X    uint16
+	Y    uint16
 }
 
 type CQDProcs struct {
-	TextProc unsafe.Pointer
-	LineProc unsafe.Pointer
-	RectProc unsafe.Pointer
-	RRectProc unsafe.Pointer
-	OvalProc unsafe.Pointer
-	ArcProc unsafe.Pointer
-	PolyProc unsafe.Pointer
-	RgnProc unsafe.Pointer
-	BitsProc unsafe.Pointer
-	CommentProc unsafe.Pointer
-	TxMeasProc unsafe.Pointer
-	GetPicProc unsafe.Pointer
-	PutPicProc unsafe.Pointer
-	OpcodeProc unsafe.Pointer
-	NewProc1 unsafe.Pointer
-	GlyphsProc unsafe.Pointer
+	TextProc          unsafe.Pointer
+	LineProc          unsafe.Pointer
+	RectProc          unsafe.Pointer
+	RRectProc         unsafe.Pointer
+	OvalProc          unsafe.Pointer
+	ArcProc           unsafe.Pointer
+	PolyProc          unsafe.Pointer
+	RgnProc           unsafe.Pointer
+	BitsProc          unsafe.Pointer
+	CommentProc       unsafe.Pointer
+	TxMeasProc        unsafe.Pointer
+	GetPicProc        unsafe.Pointer
+	PutPicProc        unsafe.Pointer
+	OpcodeProc        unsafe.Pointer
+	NewProc1          unsafe.Pointer
+	GlyphsProc        unsafe.Pointer
 	PrinterStatusProc unsafe.Pointer
-	NewProc4 unsafe.Pointer
-	NewProc5 unsafe.Pointer
-	NewProc6 unsafe.Pointer
+	NewProc4          unsafe.Pointer
+	NewProc5          unsafe.Pointer
+	NewProc6          unsafe.Pointer
 }
 
 type ColorSpec struct {
 	Value int16
-	Rgb RGBColor
+	Rgb   RGBColor
 }
 
 type ColorTable struct {
-	CtSeed int
+	CtSeed  int
 	CtFlags int16
-	CtSize int16
+	CtSize  int16
 	CtTable [1]ColorSpec
 }
 
 type FMInput struct {
-	Family int16
-	Size int16
-	Face uint8
+	Family   int16
+	Size     int16
+	Face     uint8
 	NeedBits uint8
-	Device int16
-	Numer unsafe.Pointer
-	Denom unsafe.Pointer
+	Device   int16
+	Numer    unsafe.Pointer
+	Denom    unsafe.Pointer
 }
 
 type FamRec struct {
-	FfFlags int16
-	FfFamID int16
+	FfFlags     int16
+	FfFamID     int16
 	FfFirstChar int16
-	FfLastChar int16
-	FfAscent int16
-	FfDescent int16
-	FfLeading int16
-	FfWidMax int16
-	FfWTabOff int
-	FfKernOff int
-	FfStylOff int
-	FfProperty [9]int16
-	FfIntl [2]int16
-	FfVersion int16
+	FfLastChar  int16
+	FfAscent    int16
+	FfDescent   int16
+	FfLeading   int16
+	FfWidMax    int16
+	FfWTabOff   int
+	FfKernOff   int
+	FfStylOff   int
+	FfProperty  [9]int16
+	FfIntl      [2]int16
+	FfVersion   int16
 }
 
 type FontAssoc struct {
@@ -657,47 +657,47 @@ type FontAssoc struct {
 }
 
 type FontInfo struct {
-	Ascent int16
+	Ascent  int16
 	Descent int16
-	WidMax int16
+	WidMax  int16
 	Leading int16
 }
 
 type FontRec struct {
-	FontType int16
-	FirstChar int16
-	LastChar int16
-	WidMax int16
-	KernMax int16
-	NDescent int16
-	FRectWidth int16
+	FontType    int16
+	FirstChar   int16
+	LastChar    int16
+	WidMax      int16
+	KernMax     int16
+	NDescent    int16
+	FRectWidth  int16
 	FRectHeight int16
-	OwTLoc uint16
-	Ascent int16
-	Descent int16
-	Leading int16
-	RowWords int16
+	OwTLoc      uint16
+	Ascent      int16
+	Descent     int16
+	Leading     int16
+	RowWords    int16
 }
 
 type GDevice struct {
-	GdRefNum int16
-	GdID int16
-	GdType int16
-	GdITable *string
-	GdResPref int16
+	GdRefNum     int16
+	GdID         int16
+	GdType       int16
+	GdITable     *string
+	GdResPref    int16
 	GdSearchProc *string
-	GdCompProc *string
-	GdFlags int16
-	GdPMap **PixMap
-	GdRefCon int
-	GdNextGD **GDevice
-	GdRect unsafe.Pointer
-	GdMode int
-	GdCCBytes int16
-	GdCCDepth int16
-	GdCCXData *string
-	GdCCXMask *string
-	GdExt *string
+	GdCompProc   *string
+	GdFlags      int16
+	GdPMap       **PixMap
+	GdRefCon     int
+	GdNextGD     **GDevice
+	GdRect       unsafe.Pointer
+	GdMode       int
+	GdCCBytes    int16
+	GdCCDepth    int16
+	GdCCXData    *string
+	GdCCXMask    *string
+	GdExt        *string
 }
 
 type GrafPort struct {
@@ -705,14 +705,14 @@ type GrafPort struct {
 }
 
 type KernEntry struct {
-	KernStyle int16
+	KernStyle  int16
 	KernLength int16
 }
 
 type KernPair struct {
-	KernFirst int8
+	KernFirst  int8
 	KernSecond int8
-	KernWidth int16
+	KernWidth  int16
 }
 
 type KernTable struct {
@@ -720,36 +720,36 @@ type KernTable struct {
 }
 
 type MacPolygon struct {
-	PolySize int16
-	PolyBBox unsafe.Pointer
+	PolySize   int16
+	PolyBBox   unsafe.Pointer
 	PolyPoints [1]unsafe.Pointer
 }
 
 type NCMConcatProfileSet struct {
-	Cmm uint
-	Flags uint
-	FlagsMask uint
+	Cmm          uint
+	Flags        uint
+	FlagsMask    uint
 	ProfileCount uint
 	ProfileSpecs [1]NCMConcatProfileSpec
 }
 
 type NCMConcatProfileSpec struct {
 	RenderingIntent uint
-	TransformTag uint
-	Profile unsafe.Pointer
+	TransformTag    uint
+	Profile         unsafe.Pointer
 }
 
 type NCMDeviceProfileInfo struct {
-	DataVersion uint
-	ProfileID uint
-	ProfileLoc CMProfileLocation
-	ProfileName unsafe.Pointer
+	DataVersion  uint
+	ProfileID    uint
+	ProfileLoc   CMProfileLocation
+	ProfileName  unsafe.Pointer
 	ProfileScope CMDeviceScope
-	Reserved uint
+	Reserved     uint
 }
 
 type NameTable struct {
-	StringCount int16
+	StringCount  int16
 	BaseFontName [256]uint8
 }
 
@@ -772,10 +772,10 @@ type OpaqueRgnHandle struct{}
 type OpaqueWindowPtr struct{}
 
 type OpenCPicParams struct {
-	SrcRect unsafe.Pointer
-	HRes int
-	VRes int
-	Version int16
+	SrcRect   unsafe.Pointer
+	HRes      int
+	VRes      int
+	Version   int16
 	Reserved1 int16
 	Reserved2 int
 }
@@ -785,49 +785,49 @@ type Pattern struct {
 }
 
 type Picture struct {
-	PicSize int16
+	PicSize  int16
 	PicFrame unsafe.Pointer
 }
 
 type PixMap struct {
-	BaseAddr string
-	RowBytes int16
-	Bounds unsafe.Pointer
-	PmVersion int16
-	PackType int16
-	PackSize int
-	HRes int
-	VRes int
-	PixelType int16
-	PixelSize int16
-	CmpCount int16
-	CmpSize int16
+	BaseAddr    string
+	RowBytes    int16
+	Bounds      unsafe.Pointer
+	PmVersion   int16
+	PackType    int16
+	PackSize    int
+	HRes        int
+	VRes        int
+	PixelType   int16
+	PixelSize   int16
+	CmpCount    int16
+	CmpSize     int16
 	PixelFormat uint
-	PmTable **ColorTable
-	PmExt unsafe.Pointer
+	PmTable     **ColorTable
+	PmExt       unsafe.Pointer
 }
 
 type PixPat struct {
-	PatType int16
-	PatMap **PixMap
-	PatData *string
-	PatXData *string
+	PatType   int16
+	PatMap    **PixMap
+	PatData   *string
+	PatXData  *string
 	PatXValid int16
-	PatXMap *string
-	Pat1Data Pattern
+	PatXMap   *string
+	Pat1Data  Pattern
 }
 
 type RGBColor struct {
-	Red uint16
+	Red   uint16
 	Green uint16
-	Blue uint16
+	Blue  uint16
 }
 
 type StyleTable struct {
 	FontClass int16
-	Offset int
-	Reserved int
-	Indexes [48]int8
+	Offset    int
+	Reserved  int
+	Indexes   [48]int8
 }
 
 type VDGammaRecord struct {
@@ -851,4 +851,3 @@ type CMMultiFunctLutA2BType = CMMultiFunctLutType
 
 // CMMultiFunctLutB2AType is an alias for CMMultiFunctLutType (C typedef CMMultiFunctLutB2AType).
 type CMMultiFunctLutB2AType = CMMultiFunctLutType
-

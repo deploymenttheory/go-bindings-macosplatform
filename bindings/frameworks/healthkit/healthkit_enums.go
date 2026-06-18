@@ -11,7 +11,7 @@ import (
 type HKActivityMoveMode int64
 
 const (
-	HKActivityMoveModeActiveEnergy HKActivityMoveMode = 1
+	HKActivityMoveModeActiveEnergy  HKActivityMoveMode = 1
 	HKActivityMoveModeAppleMoveTime HKActivityMoveMode = 2
 )
 
@@ -48,7 +48,7 @@ type HKAppleSleepingBreathingDisturbancesClassification int64
 
 const (
 	HKAppleSleepingBreathingDisturbancesClassificationNotElevated HKAppleSleepingBreathingDisturbancesClassification = 0
-	HKAppleSleepingBreathingDisturbancesClassificationElevated HKAppleSleepingBreathingDisturbancesClassification = 1
+	HKAppleSleepingBreathingDisturbancesClassificationElevated    HKAppleSleepingBreathingDisturbancesClassification = 1
 )
 
 func (e HKAppleSleepingBreathingDisturbancesClassification) String() string {
@@ -65,8 +65,8 @@ func (e HKAppleSleepingBreathingDisturbancesClassification) String() string {
 type HKAppleWalkingSteadinessClassification int64
 
 const (
-	HKAppleWalkingSteadinessClassificationOK HKAppleWalkingSteadinessClassification = 1
-	HKAppleWalkingSteadinessClassificationLow HKAppleWalkingSteadinessClassification = 2
+	HKAppleWalkingSteadinessClassificationOK      HKAppleWalkingSteadinessClassification = 1
+	HKAppleWalkingSteadinessClassificationLow     HKAppleWalkingSteadinessClassification = 2
 	HKAppleWalkingSteadinessClassificationVeryLow HKAppleWalkingSteadinessClassification = 3
 )
 
@@ -101,7 +101,7 @@ func (e HKAudiogramConductionType) String() string {
 type HKAudiogramSensitivityTestSide int64
 
 const (
-	HKAudiogramSensitivityTestSideLeft HKAudiogramSensitivityTestSide = 0
+	HKAudiogramSensitivityTestSideLeft  HKAudiogramSensitivityTestSide = 0
 	HKAudiogramSensitivityTestSideRight HKAudiogramSensitivityTestSide = 1
 )
 
@@ -119,9 +119,9 @@ func (e HKAudiogramSensitivityTestSide) String() string {
 type HKAuthorizationRequestStatus int64
 
 const (
-	HKAuthorizationRequestStatusUnknown HKAuthorizationRequestStatus = 0
+	HKAuthorizationRequestStatusUnknown       HKAuthorizationRequestStatus = 0
 	HKAuthorizationRequestStatusShouldRequest HKAuthorizationRequestStatus = 1
-	HKAuthorizationRequestStatusUnnecessary HKAuthorizationRequestStatus = 2
+	HKAuthorizationRequestStatusUnnecessary   HKAuthorizationRequestStatus = 2
 )
 
 func (e HKAuthorizationRequestStatus) String() string {
@@ -140,8 +140,8 @@ func (e HKAuthorizationRequestStatus) String() string {
 type HKAuthorizationStatus int64
 
 const (
-	HKAuthorizationStatusNotDetermined HKAuthorizationStatus = 0
-	HKAuthorizationStatusSharingDenied HKAuthorizationStatus = 1
+	HKAuthorizationStatusNotDetermined     HKAuthorizationStatus = 0
+	HKAuthorizationStatusSharingDenied     HKAuthorizationStatus = 1
 	HKAuthorizationStatusSharingAuthorized HKAuthorizationStatus = 2
 )
 
@@ -163,8 +163,8 @@ type HKBiologicalSex int64
 const (
 	HKBiologicalSexNotSet HKBiologicalSex = 0
 	HKBiologicalSexFemale HKBiologicalSex = 1
-	HKBiologicalSexMale HKBiologicalSex = 2
-	HKBiologicalSexOther HKBiologicalSex = 3
+	HKBiologicalSexMale   HKBiologicalSex = 2
+	HKBiologicalSexOther  HKBiologicalSex = 3
 )
 
 func (e HKBiologicalSex) String() string {
@@ -185,7 +185,7 @@ func (e HKBiologicalSex) String() string {
 type HKBloodGlucoseMealTime int64
 
 const (
-	HKBloodGlucoseMealTimePreprandial HKBloodGlucoseMealTime = 1
+	HKBloodGlucoseMealTimePreprandial  HKBloodGlucoseMealTime = 1
 	HKBloodGlucoseMealTimePostprandial HKBloodGlucoseMealTime = 2
 )
 
@@ -203,15 +203,15 @@ func (e HKBloodGlucoseMealTime) String() string {
 type HKBloodType int64
 
 const (
-	HKBloodTypeNotSet HKBloodType = 0
-	HKBloodTypeAPositive HKBloodType = 1
-	HKBloodTypeANegative HKBloodType = 2
-	HKBloodTypeBPositive HKBloodType = 3
-	HKBloodTypeBNegative HKBloodType = 4
+	HKBloodTypeNotSet     HKBloodType = 0
+	HKBloodTypeAPositive  HKBloodType = 1
+	HKBloodTypeANegative  HKBloodType = 2
+	HKBloodTypeBPositive  HKBloodType = 3
+	HKBloodTypeBNegative  HKBloodType = 4
 	HKBloodTypeABPositive HKBloodType = 5
 	HKBloodTypeABNegative HKBloodType = 6
-	HKBloodTypeOPositive HKBloodType = 7
-	HKBloodTypeONegative HKBloodType = 8
+	HKBloodTypeOPositive  HKBloodType = 7
+	HKBloodTypeONegative  HKBloodType = 8
 )
 
 func (e HKBloodType) String() string {
@@ -242,18 +242,18 @@ func (e HKBloodType) String() string {
 type HKBodyTemperatureSensorLocation int64
 
 const (
-	HKBodyTemperatureSensorLocationOther HKBodyTemperatureSensorLocation = 0
-	HKBodyTemperatureSensorLocationArmpit HKBodyTemperatureSensorLocation = 1
-	HKBodyTemperatureSensorLocationBody HKBodyTemperatureSensorLocation = 2
-	HKBodyTemperatureSensorLocationEar HKBodyTemperatureSensorLocation = 3
-	HKBodyTemperatureSensorLocationFinger HKBodyTemperatureSensorLocation = 4
+	HKBodyTemperatureSensorLocationOther            HKBodyTemperatureSensorLocation = 0
+	HKBodyTemperatureSensorLocationArmpit           HKBodyTemperatureSensorLocation = 1
+	HKBodyTemperatureSensorLocationBody             HKBodyTemperatureSensorLocation = 2
+	HKBodyTemperatureSensorLocationEar              HKBodyTemperatureSensorLocation = 3
+	HKBodyTemperatureSensorLocationFinger           HKBodyTemperatureSensorLocation = 4
 	HKBodyTemperatureSensorLocationGastroIntestinal HKBodyTemperatureSensorLocation = 5
-	HKBodyTemperatureSensorLocationMouth HKBodyTemperatureSensorLocation = 6
-	HKBodyTemperatureSensorLocationRectum HKBodyTemperatureSensorLocation = 7
-	HKBodyTemperatureSensorLocationToe HKBodyTemperatureSensorLocation = 8
-	HKBodyTemperatureSensorLocationEarDrum HKBodyTemperatureSensorLocation = 9
-	HKBodyTemperatureSensorLocationTemporalArtery HKBodyTemperatureSensorLocation = 10
-	HKBodyTemperatureSensorLocationForehead HKBodyTemperatureSensorLocation = 11
+	HKBodyTemperatureSensorLocationMouth            HKBodyTemperatureSensorLocation = 6
+	HKBodyTemperatureSensorLocationRectum           HKBodyTemperatureSensorLocation = 7
+	HKBodyTemperatureSensorLocationToe              HKBodyTemperatureSensorLocation = 8
+	HKBodyTemperatureSensorLocationEarDrum          HKBodyTemperatureSensorLocation = 9
+	HKBodyTemperatureSensorLocationTemporalArtery   HKBodyTemperatureSensorLocation = 10
+	HKBodyTemperatureSensorLocationForehead         HKBodyTemperatureSensorLocation = 11
 )
 
 func (e HKBodyTemperatureSensorLocation) String() string {
@@ -306,9 +306,9 @@ type HKCategoryValueAppetiteChanges int64
 
 const (
 	HKCategoryValueAppetiteChangesUnspecified HKCategoryValueAppetiteChanges = 0
-	HKCategoryValueAppetiteChangesNoChange HKCategoryValueAppetiteChanges = 1
-	HKCategoryValueAppetiteChangesDecreased HKCategoryValueAppetiteChanges = 2
-	HKCategoryValueAppetiteChangesIncreased HKCategoryValueAppetiteChanges = 3
+	HKCategoryValueAppetiteChangesNoChange    HKCategoryValueAppetiteChanges = 1
+	HKCategoryValueAppetiteChangesDecreased   HKCategoryValueAppetiteChanges = 2
+	HKCategoryValueAppetiteChangesIncreased   HKCategoryValueAppetiteChanges = 3
 )
 
 func (e HKCategoryValueAppetiteChanges) String() string {
@@ -330,7 +330,7 @@ type HKCategoryValueAppleStandHour int64
 
 const (
 	HKCategoryValueAppleStandHourStood HKCategoryValueAppleStandHour = 0
-	HKCategoryValueAppleStandHourIdle HKCategoryValueAppleStandHour = 1
+	HKCategoryValueAppleStandHourIdle  HKCategoryValueAppleStandHour = 1
 )
 
 func (e HKCategoryValueAppleStandHour) String() string {
@@ -347,10 +347,10 @@ func (e HKCategoryValueAppleStandHour) String() string {
 type HKCategoryValueAppleWalkingSteadinessEvent int64
 
 const (
-	HKCategoryValueAppleWalkingSteadinessEventInitialLow HKCategoryValueAppleWalkingSteadinessEvent = 1
+	HKCategoryValueAppleWalkingSteadinessEventInitialLow     HKCategoryValueAppleWalkingSteadinessEvent = 1
 	HKCategoryValueAppleWalkingSteadinessEventInitialVeryLow HKCategoryValueAppleWalkingSteadinessEvent = 2
-	HKCategoryValueAppleWalkingSteadinessEventRepeatLow HKCategoryValueAppleWalkingSteadinessEvent = 3
-	HKCategoryValueAppleWalkingSteadinessEventRepeatVeryLow HKCategoryValueAppleWalkingSteadinessEvent = 4
+	HKCategoryValueAppleWalkingSteadinessEventRepeatLow      HKCategoryValueAppleWalkingSteadinessEvent = 3
+	HKCategoryValueAppleWalkingSteadinessEventRepeatVeryLow  HKCategoryValueAppleWalkingSteadinessEvent = 4
 )
 
 func (e HKCategoryValueAppleWalkingSteadinessEvent) String() string {
@@ -386,10 +386,10 @@ func (e HKCategoryValueAudioExposureEvent) String() string {
 type HKCategoryValueCervicalMucusQuality int64
 
 const (
-	HKCategoryValueCervicalMucusQualityDry HKCategoryValueCervicalMucusQuality = 1
-	HKCategoryValueCervicalMucusQualitySticky HKCategoryValueCervicalMucusQuality = 2
-	HKCategoryValueCervicalMucusQualityCreamy HKCategoryValueCervicalMucusQuality = 3
-	HKCategoryValueCervicalMucusQualityWatery HKCategoryValueCervicalMucusQuality = 4
+	HKCategoryValueCervicalMucusQualityDry      HKCategoryValueCervicalMucusQuality = 1
+	HKCategoryValueCervicalMucusQualitySticky   HKCategoryValueCervicalMucusQuality = 2
+	HKCategoryValueCervicalMucusQualityCreamy   HKCategoryValueCervicalMucusQuality = 3
+	HKCategoryValueCervicalMucusQualityWatery   HKCategoryValueCervicalMucusQuality = 4
 	HKCategoryValueCervicalMucusQualityEggWhite HKCategoryValueCervicalMucusQuality = 5
 )
 
@@ -413,13 +413,13 @@ func (e HKCategoryValueCervicalMucusQuality) String() string {
 type HKCategoryValueContraceptive int64
 
 const (
-	HKCategoryValueContraceptiveUnspecified HKCategoryValueContraceptive = 1
-	HKCategoryValueContraceptiveImplant HKCategoryValueContraceptive = 2
-	HKCategoryValueContraceptiveInjection HKCategoryValueContraceptive = 3
+	HKCategoryValueContraceptiveUnspecified        HKCategoryValueContraceptive = 1
+	HKCategoryValueContraceptiveImplant            HKCategoryValueContraceptive = 2
+	HKCategoryValueContraceptiveInjection          HKCategoryValueContraceptive = 3
 	HKCategoryValueContraceptiveIntrauterineDevice HKCategoryValueContraceptive = 4
-	HKCategoryValueContraceptiveIntravaginalRing HKCategoryValueContraceptive = 5
-	HKCategoryValueContraceptiveOral HKCategoryValueContraceptive = 6
-	HKCategoryValueContraceptivePatch HKCategoryValueContraceptive = 7
+	HKCategoryValueContraceptiveIntravaginalRing   HKCategoryValueContraceptive = 5
+	HKCategoryValueContraceptiveOral               HKCategoryValueContraceptive = 6
+	HKCategoryValueContraceptivePatch              HKCategoryValueContraceptive = 7
 )
 
 func (e HKCategoryValueContraceptive) String() string {
@@ -493,10 +493,10 @@ type HKCategoryValueMenstrualFlow int64
 
 const (
 	HKCategoryValueMenstrualFlowUnspecified HKCategoryValueMenstrualFlow = 1
-	HKCategoryValueMenstrualFlowLight HKCategoryValueMenstrualFlow = 2
-	HKCategoryValueMenstrualFlowMedium HKCategoryValueMenstrualFlow = 3
-	HKCategoryValueMenstrualFlowHeavy HKCategoryValueMenstrualFlow = 4
-	HKCategoryValueMenstrualFlowNone HKCategoryValueMenstrualFlow = 5
+	HKCategoryValueMenstrualFlowLight       HKCategoryValueMenstrualFlow = 2
+	HKCategoryValueMenstrualFlowMedium      HKCategoryValueMenstrualFlow = 3
+	HKCategoryValueMenstrualFlowHeavy       HKCategoryValueMenstrualFlow = 4
+	HKCategoryValueMenstrualFlowNone        HKCategoryValueMenstrualFlow = 5
 )
 
 func (e HKCategoryValueMenstrualFlow) String() string {
@@ -519,11 +519,11 @@ func (e HKCategoryValueMenstrualFlow) String() string {
 type HKCategoryValueOvulationTestResult int64
 
 const (
-	HKCategoryValueOvulationTestResultNegative HKCategoryValueOvulationTestResult = 1
+	HKCategoryValueOvulationTestResultNegative                HKCategoryValueOvulationTestResult = 1
 	HKCategoryValueOvulationTestResultLuteinizingHormoneSurge HKCategoryValueOvulationTestResult = 2
-	HKCategoryValueOvulationTestResultPositive HKCategoryValueOvulationTestResult = 2
-	HKCategoryValueOvulationTestResultIndeterminate HKCategoryValueOvulationTestResult = 3
-	HKCategoryValueOvulationTestResultEstrogenSurge HKCategoryValueOvulationTestResult = 4
+	HKCategoryValueOvulationTestResultPositive                HKCategoryValueOvulationTestResult = 2
+	HKCategoryValueOvulationTestResultIndeterminate           HKCategoryValueOvulationTestResult = 3
+	HKCategoryValueOvulationTestResultEstrogenSurge           HKCategoryValueOvulationTestResult = 4
 )
 
 func (e HKCategoryValueOvulationTestResult) String() string {
@@ -544,8 +544,8 @@ func (e HKCategoryValueOvulationTestResult) String() string {
 type HKCategoryValuePregnancyTestResult int64
 
 const (
-	HKCategoryValuePregnancyTestResultNegative HKCategoryValuePregnancyTestResult = 1
-	HKCategoryValuePregnancyTestResultPositive HKCategoryValuePregnancyTestResult = 2
+	HKCategoryValuePregnancyTestResultNegative      HKCategoryValuePregnancyTestResult = 1
+	HKCategoryValuePregnancyTestResultPositive      HKCategoryValuePregnancyTestResult = 2
 	HKCategoryValuePregnancyTestResultIndeterminate HKCategoryValuePregnancyTestResult = 3
 )
 
@@ -565,7 +565,7 @@ func (e HKCategoryValuePregnancyTestResult) String() string {
 type HKCategoryValuePresence int64
 
 const (
-	HKCategoryValuePresencePresent HKCategoryValuePresence = 0
+	HKCategoryValuePresencePresent    HKCategoryValuePresence = 0
 	HKCategoryValuePresenceNotPresent HKCategoryValuePresence = 1
 )
 
@@ -583,8 +583,8 @@ func (e HKCategoryValuePresence) String() string {
 type HKCategoryValueProgesteroneTestResult int64
 
 const (
-	HKCategoryValueProgesteroneTestResultNegative HKCategoryValueProgesteroneTestResult = 1
-	HKCategoryValueProgesteroneTestResultPositive HKCategoryValueProgesteroneTestResult = 2
+	HKCategoryValueProgesteroneTestResultNegative      HKCategoryValueProgesteroneTestResult = 1
+	HKCategoryValueProgesteroneTestResultPositive      HKCategoryValueProgesteroneTestResult = 2
 	HKCategoryValueProgesteroneTestResultIndeterminate HKCategoryValueProgesteroneTestResult = 3
 )
 
@@ -605,10 +605,10 @@ type HKCategoryValueSeverity int64
 
 const (
 	HKCategoryValueSeverityUnspecified HKCategoryValueSeverity = 0
-	HKCategoryValueSeverityNotPresent HKCategoryValueSeverity = 1
-	HKCategoryValueSeverityMild HKCategoryValueSeverity = 2
-	HKCategoryValueSeverityModerate HKCategoryValueSeverity = 3
-	HKCategoryValueSeveritySevere HKCategoryValueSeverity = 4
+	HKCategoryValueSeverityNotPresent  HKCategoryValueSeverity = 1
+	HKCategoryValueSeverityMild        HKCategoryValueSeverity = 2
+	HKCategoryValueSeverityModerate    HKCategoryValueSeverity = 3
+	HKCategoryValueSeveritySevere      HKCategoryValueSeverity = 4
 )
 
 func (e HKCategoryValueSeverity) String() string {
@@ -631,13 +631,13 @@ func (e HKCategoryValueSeverity) String() string {
 type HKCategoryValueSleepAnalysis int64
 
 const (
-	HKCategoryValueSleepAnalysisInBed HKCategoryValueSleepAnalysis = 0
+	HKCategoryValueSleepAnalysisInBed             HKCategoryValueSleepAnalysis = 0
 	HKCategoryValueSleepAnalysisAsleepUnspecified HKCategoryValueSleepAnalysis = 1
-	HKCategoryValueSleepAnalysisAsleep HKCategoryValueSleepAnalysis = 1
-	HKCategoryValueSleepAnalysisAwake HKCategoryValueSleepAnalysis = 2
-	HKCategoryValueSleepAnalysisAsleepCore HKCategoryValueSleepAnalysis = 3
-	HKCategoryValueSleepAnalysisAsleepDeep HKCategoryValueSleepAnalysis = 4
-	HKCategoryValueSleepAnalysisAsleepREM HKCategoryValueSleepAnalysis = 5
+	HKCategoryValueSleepAnalysisAsleep            HKCategoryValueSleepAnalysis = 1
+	HKCategoryValueSleepAnalysisAwake             HKCategoryValueSleepAnalysis = 2
+	HKCategoryValueSleepAnalysisAsleepCore        HKCategoryValueSleepAnalysis = 3
+	HKCategoryValueSleepAnalysisAsleepDeep        HKCategoryValueSleepAnalysis = 4
+	HKCategoryValueSleepAnalysisAsleepREM         HKCategoryValueSleepAnalysis = 5
 )
 
 func (e HKCategoryValueSleepAnalysis) String() string {
@@ -663,10 +663,10 @@ type HKCategoryValueVaginalBleeding int64
 
 const (
 	HKCategoryValueVaginalBleedingUnspecified HKCategoryValueVaginalBleeding = 1
-	HKCategoryValueVaginalBleedingLight HKCategoryValueVaginalBleeding = 2
-	HKCategoryValueVaginalBleedingMedium HKCategoryValueVaginalBleeding = 3
-	HKCategoryValueVaginalBleedingHeavy HKCategoryValueVaginalBleeding = 4
-	HKCategoryValueVaginalBleedingNone HKCategoryValueVaginalBleeding = 5
+	HKCategoryValueVaginalBleedingLight       HKCategoryValueVaginalBleeding = 2
+	HKCategoryValueVaginalBleedingMedium      HKCategoryValueVaginalBleeding = 3
+	HKCategoryValueVaginalBleedingHeavy       HKCategoryValueVaginalBleeding = 4
+	HKCategoryValueVaginalBleedingNone        HKCategoryValueVaginalBleeding = 5
 )
 
 func (e HKCategoryValueVaginalBleeding) String() string {
@@ -691,8 +691,8 @@ type HKCyclingFunctionalThresholdPowerTestType int64
 const (
 	HKCyclingFunctionalThresholdPowerTestTypeMaxExercise60Minute HKCyclingFunctionalThresholdPowerTestType = 1
 	HKCyclingFunctionalThresholdPowerTestTypeMaxExercise20Minute HKCyclingFunctionalThresholdPowerTestType = 2
-	HKCyclingFunctionalThresholdPowerTestTypeRampTest HKCyclingFunctionalThresholdPowerTestType = 3
-	HKCyclingFunctionalThresholdPowerTestTypePredictionExercise HKCyclingFunctionalThresholdPowerTestType = 4
+	HKCyclingFunctionalThresholdPowerTestTypeRampTest            HKCyclingFunctionalThresholdPowerTestType = 3
+	HKCyclingFunctionalThresholdPowerTestTypePredictionExercise  HKCyclingFunctionalThresholdPowerTestType = 4
 )
 
 func (e HKCyclingFunctionalThresholdPowerTestType) String() string {
@@ -714,8 +714,8 @@ type HKDevicePlacementSide int64
 
 const (
 	HKDevicePlacementSideUnknown HKDevicePlacementSide = 0
-	HKDevicePlacementSideLeft HKDevicePlacementSide = 1
-	HKDevicePlacementSideRight HKDevicePlacementSide = 2
+	HKDevicePlacementSideLeft    HKDevicePlacementSide = 1
+	HKDevicePlacementSideRight   HKDevicePlacementSide = 2
 	HKDevicePlacementSideCentral HKDevicePlacementSide = 3
 )
 
@@ -737,14 +737,14 @@ func (e HKDevicePlacementSide) String() string {
 type HKElectrocardiogramClassification int64
 
 const (
-	HKElectrocardiogramClassificationNotSet HKElectrocardiogramClassification = 0
-	HKElectrocardiogramClassificationSinusRhythm HKElectrocardiogramClassification = 1
-	HKElectrocardiogramClassificationAtrialFibrillation HKElectrocardiogramClassification = 2
-	HKElectrocardiogramClassificationInconclusiveLowHeartRate HKElectrocardiogramClassification = 3
+	HKElectrocardiogramClassificationNotSet                    HKElectrocardiogramClassification = 0
+	HKElectrocardiogramClassificationSinusRhythm               HKElectrocardiogramClassification = 1
+	HKElectrocardiogramClassificationAtrialFibrillation        HKElectrocardiogramClassification = 2
+	HKElectrocardiogramClassificationInconclusiveLowHeartRate  HKElectrocardiogramClassification = 3
 	HKElectrocardiogramClassificationInconclusiveHighHeartRate HKElectrocardiogramClassification = 4
-	HKElectrocardiogramClassificationInconclusivePoorReading HKElectrocardiogramClassification = 5
-	HKElectrocardiogramClassificationInconclusiveOther HKElectrocardiogramClassification = 6
-	HKElectrocardiogramClassificationUnrecognized HKElectrocardiogramClassification = 100
+	HKElectrocardiogramClassificationInconclusivePoorReading   HKElectrocardiogramClassification = 5
+	HKElectrocardiogramClassificationInconclusiveOther         HKElectrocardiogramClassification = 6
+	HKElectrocardiogramClassificationUnrecognized              HKElectrocardiogramClassification = 100
 )
 
 func (e HKElectrocardiogramClassification) String() string {
@@ -788,8 +788,8 @@ func (e HKElectrocardiogramLead) String() string {
 type HKElectrocardiogramSymptomsStatus int64
 
 const (
-	HKElectrocardiogramSymptomsStatusNotSet HKElectrocardiogramSymptomsStatus = 0
-	HKElectrocardiogramSymptomsStatusNone HKElectrocardiogramSymptomsStatus = 1
+	HKElectrocardiogramSymptomsStatusNotSet  HKElectrocardiogramSymptomsStatus = 0
+	HKElectrocardiogramSymptomsStatusNone    HKElectrocardiogramSymptomsStatus = 1
 	HKElectrocardiogramSymptomsStatusPresent HKElectrocardiogramSymptomsStatus = 2
 )
 
@@ -809,23 +809,23 @@ func (e HKElectrocardiogramSymptomsStatus) String() string {
 type HKErrorCode int64
 
 const (
-	HKUnknownError HKErrorCode = 0
-	HKNoError HKErrorCode = 0
-	HKErrorHealthDataUnavailable HKErrorCode = 1
-	HKErrorHealthDataRestricted HKErrorCode = 2
-	HKErrorInvalidArgument HKErrorCode = 3
-	HKErrorAuthorizationDenied HKErrorCode = 4
-	HKErrorAuthorizationNotDetermined HKErrorCode = 5
-	HKErrorDatabaseInaccessible HKErrorCode = 6
-	HKErrorUserCanceled HKErrorCode = 7
-	HKErrorAnotherWorkoutSessionStarted HKErrorCode = 8
-	HKErrorUserExitedWorkoutSession HKErrorCode = 9
-	HKErrorRequiredAuthorizationDenied HKErrorCode = 10
-	HKErrorNoData HKErrorCode = 11
-	HKErrorWorkoutActivityNotAllowed HKErrorCode = 12
-	HKErrorDataSizeExceeded HKErrorCode = 13
+	HKUnknownError                            HKErrorCode = 0
+	HKNoError                                 HKErrorCode = 0
+	HKErrorHealthDataUnavailable              HKErrorCode = 1
+	HKErrorHealthDataRestricted               HKErrorCode = 2
+	HKErrorInvalidArgument                    HKErrorCode = 3
+	HKErrorAuthorizationDenied                HKErrorCode = 4
+	HKErrorAuthorizationNotDetermined         HKErrorCode = 5
+	HKErrorDatabaseInaccessible               HKErrorCode = 6
+	HKErrorUserCanceled                       HKErrorCode = 7
+	HKErrorAnotherWorkoutSessionStarted       HKErrorCode = 8
+	HKErrorUserExitedWorkoutSession           HKErrorCode = 9
+	HKErrorRequiredAuthorizationDenied        HKErrorCode = 10
+	HKErrorNoData                             HKErrorCode = 11
+	HKErrorWorkoutActivityNotAllowed          HKErrorCode = 12
+	HKErrorDataSizeExceeded                   HKErrorCode = 13
 	HKErrorBackgroundWorkoutSessionNotAllowed HKErrorCode = 14
-	HKErrorNotPermissibleForGuestUserMode HKErrorCode = 15
+	HKErrorNotPermissibleForGuestUserMode     HKErrorCode = 15
 )
 
 func (e HKErrorCode) String() string {
@@ -871,12 +871,12 @@ type HKFitzpatrickSkinType int64
 
 const (
 	HKFitzpatrickSkinTypeNotSet HKFitzpatrickSkinType = 0
-	HKFitzpatrickSkinTypeI HKFitzpatrickSkinType = 1
-	HKFitzpatrickSkinTypeII HKFitzpatrickSkinType = 2
-	HKFitzpatrickSkinTypeIII HKFitzpatrickSkinType = 3
-	HKFitzpatrickSkinTypeIV HKFitzpatrickSkinType = 4
-	HKFitzpatrickSkinTypeV HKFitzpatrickSkinType = 5
-	HKFitzpatrickSkinTypeVI HKFitzpatrickSkinType = 6
+	HKFitzpatrickSkinTypeI      HKFitzpatrickSkinType = 1
+	HKFitzpatrickSkinTypeII     HKFitzpatrickSkinType = 2
+	HKFitzpatrickSkinTypeIII    HKFitzpatrickSkinType = 3
+	HKFitzpatrickSkinTypeIV     HKFitzpatrickSkinType = 4
+	HKFitzpatrickSkinTypeV      HKFitzpatrickSkinType = 5
+	HKFitzpatrickSkinTypeVI     HKFitzpatrickSkinType = 6
 )
 
 func (e HKFitzpatrickSkinType) String() string {
@@ -903,10 +903,10 @@ func (e HKFitzpatrickSkinType) String() string {
 type HKGAD7AssessmentAnswer int64
 
 const (
-	HKGAD7AssessmentAnswerNotAtAll HKGAD7AssessmentAnswer = 0
-	HKGAD7AssessmentAnswerSeveralDays HKGAD7AssessmentAnswer = 1
+	HKGAD7AssessmentAnswerNotAtAll            HKGAD7AssessmentAnswer = 0
+	HKGAD7AssessmentAnswerSeveralDays         HKGAD7AssessmentAnswer = 1
 	HKGAD7AssessmentAnswerMoreThanHalfTheDays HKGAD7AssessmentAnswer = 2
-	HKGAD7AssessmentAnswerNearlyEveryDay HKGAD7AssessmentAnswer = 3
+	HKGAD7AssessmentAnswerNearlyEveryDay      HKGAD7AssessmentAnswer = 3
 )
 
 func (e HKGAD7AssessmentAnswer) String() string {
@@ -928,9 +928,9 @@ type HKGAD7AssessmentRisk int64
 
 const (
 	HKGAD7AssessmentRiskNoneToMinimal HKGAD7AssessmentRisk = 1
-	HKGAD7AssessmentRiskMild HKGAD7AssessmentRisk = 2
-	HKGAD7AssessmentRiskModerate HKGAD7AssessmentRisk = 3
-	HKGAD7AssessmentRiskSevere HKGAD7AssessmentRisk = 4
+	HKGAD7AssessmentRiskMild          HKGAD7AssessmentRisk = 2
+	HKGAD7AssessmentRiskModerate      HKGAD7AssessmentRisk = 3
+	HKGAD7AssessmentRiskSevere        HKGAD7AssessmentRisk = 4
 )
 
 func (e HKGAD7AssessmentRisk) String() string {
@@ -951,9 +951,9 @@ func (e HKGAD7AssessmentRisk) String() string {
 type HKHeartRateMotionContext int64
 
 const (
-	HKHeartRateMotionContextNotSet HKHeartRateMotionContext = 0
+	HKHeartRateMotionContextNotSet    HKHeartRateMotionContext = 0
 	HKHeartRateMotionContextSedentary HKHeartRateMotionContext = 1
-	HKHeartRateMotionContextActive HKHeartRateMotionContext = 2
+	HKHeartRateMotionContextActive    HKHeartRateMotionContext = 2
 )
 
 func (e HKHeartRateMotionContext) String() string {
@@ -972,9 +972,9 @@ func (e HKHeartRateMotionContext) String() string {
 type HKHeartRateRecoveryTestType int64
 
 const (
-	HKHeartRateRecoveryTestTypeMaxExercise HKHeartRateRecoveryTestType = 1
+	HKHeartRateRecoveryTestTypeMaxExercise              HKHeartRateRecoveryTestType = 1
 	HKHeartRateRecoveryTestTypePredictionSubMaxExercise HKHeartRateRecoveryTestType = 2
-	HKHeartRateRecoveryTestTypePredictionNonExercise HKHeartRateRecoveryTestType = 3
+	HKHeartRateRecoveryTestTypePredictionNonExercise    HKHeartRateRecoveryTestType = 3
 )
 
 func (e HKHeartRateRecoveryTestType) String() string {
@@ -993,13 +993,13 @@ func (e HKHeartRateRecoveryTestType) String() string {
 type HKHeartRateSensorLocation int64
 
 const (
-	HKHeartRateSensorLocationOther HKHeartRateSensorLocation = 0
-	HKHeartRateSensorLocationChest HKHeartRateSensorLocation = 1
-	HKHeartRateSensorLocationWrist HKHeartRateSensorLocation = 2
-	HKHeartRateSensorLocationFinger HKHeartRateSensorLocation = 3
-	HKHeartRateSensorLocationHand HKHeartRateSensorLocation = 4
+	HKHeartRateSensorLocationOther   HKHeartRateSensorLocation = 0
+	HKHeartRateSensorLocationChest   HKHeartRateSensorLocation = 1
+	HKHeartRateSensorLocationWrist   HKHeartRateSensorLocation = 2
+	HKHeartRateSensorLocationFinger  HKHeartRateSensorLocation = 3
+	HKHeartRateSensorLocationHand    HKHeartRateSensorLocation = 4
 	HKHeartRateSensorLocationEarLobe HKHeartRateSensorLocation = 5
-	HKHeartRateSensorLocationFoot HKHeartRateSensorLocation = 6
+	HKHeartRateSensorLocationFoot    HKHeartRateSensorLocation = 6
 )
 
 func (e HKHeartRateSensorLocation) String() string {
@@ -1100,20 +1100,20 @@ func (e HKMedicationDoseEventScheduleType) String() string {
 type HKMetricPrefix int64
 
 const (
-	HKMetricPrefixNone HKMetricPrefix = 0
+	HKMetricPrefixNone  HKMetricPrefix = 0
 	HKMetricPrefixFemto HKMetricPrefix = 13
-	HKMetricPrefixPico HKMetricPrefix = 1
-	HKMetricPrefixNano HKMetricPrefix = 2
+	HKMetricPrefixPico  HKMetricPrefix = 1
+	HKMetricPrefixNano  HKMetricPrefix = 2
 	HKMetricPrefixMicro HKMetricPrefix = 3
 	HKMetricPrefixMilli HKMetricPrefix = 4
 	HKMetricPrefixCenti HKMetricPrefix = 5
-	HKMetricPrefixDeci HKMetricPrefix = 6
-	HKMetricPrefixDeca HKMetricPrefix = 7
+	HKMetricPrefixDeci  HKMetricPrefix = 6
+	HKMetricPrefixDeca  HKMetricPrefix = 7
 	HKMetricPrefixHecto HKMetricPrefix = 8
-	HKMetricPrefixKilo HKMetricPrefix = 9
-	HKMetricPrefixMega HKMetricPrefix = 10
-	HKMetricPrefixGiga HKMetricPrefix = 11
-	HKMetricPrefixTera HKMetricPrefix = 12
+	HKMetricPrefixKilo  HKMetricPrefix = 9
+	HKMetricPrefixMega  HKMetricPrefix = 10
+	HKMetricPrefixGiga  HKMetricPrefix = 11
+	HKMetricPrefixTera  HKMetricPrefix = 12
 )
 
 func (e HKMetricPrefix) String() string {
@@ -1154,11 +1154,11 @@ func (e HKMetricPrefix) String() string {
 type HKPHQ9AssessmentAnswer int64
 
 const (
-	HKPHQ9AssessmentAnswerNotAtAll HKPHQ9AssessmentAnswer = 0
-	HKPHQ9AssessmentAnswerSeveralDays HKPHQ9AssessmentAnswer = 1
+	HKPHQ9AssessmentAnswerNotAtAll            HKPHQ9AssessmentAnswer = 0
+	HKPHQ9AssessmentAnswerSeveralDays         HKPHQ9AssessmentAnswer = 1
 	HKPHQ9AssessmentAnswerMoreThanHalfTheDays HKPHQ9AssessmentAnswer = 2
-	HKPHQ9AssessmentAnswerNearlyEveryDay HKPHQ9AssessmentAnswer = 3
-	HKPHQ9AssessmentAnswerPreferNotToAnswer HKPHQ9AssessmentAnswer = 4
+	HKPHQ9AssessmentAnswerNearlyEveryDay      HKPHQ9AssessmentAnswer = 3
+	HKPHQ9AssessmentAnswerPreferNotToAnswer   HKPHQ9AssessmentAnswer = 4
 )
 
 func (e HKPHQ9AssessmentAnswer) String() string {
@@ -1181,11 +1181,11 @@ func (e HKPHQ9AssessmentAnswer) String() string {
 type HKPHQ9AssessmentRisk int64
 
 const (
-	HKPHQ9AssessmentRiskNoneToMinimal HKPHQ9AssessmentRisk = 1
-	HKPHQ9AssessmentRiskMild HKPHQ9AssessmentRisk = 2
-	HKPHQ9AssessmentRiskModerate HKPHQ9AssessmentRisk = 3
+	HKPHQ9AssessmentRiskNoneToMinimal    HKPHQ9AssessmentRisk = 1
+	HKPHQ9AssessmentRiskMild             HKPHQ9AssessmentRisk = 2
+	HKPHQ9AssessmentRiskModerate         HKPHQ9AssessmentRisk = 3
 	HKPHQ9AssessmentRiskModeratelySevere HKPHQ9AssessmentRisk = 4
-	HKPHQ9AssessmentRiskSevere HKPHQ9AssessmentRisk = 5
+	HKPHQ9AssessmentRiskSevere           HKPHQ9AssessmentRisk = 5
 )
 
 func (e HKPHQ9AssessmentRisk) String() string {
@@ -1209,7 +1209,7 @@ type HKPhysicalEffortEstimationType int64
 
 const (
 	HKPhysicalEffortEstimationTypeActivityLookup HKPhysicalEffortEstimationType = 1
-	HKPhysicalEffortEstimationTypeDeviceSensed HKPhysicalEffortEstimationType = 2
+	HKPhysicalEffortEstimationTypeDeviceSensed   HKPhysicalEffortEstimationType = 2
 )
 
 func (e HKPhysicalEffortEstimationType) String() string {
@@ -1227,10 +1227,10 @@ type HKPrismBase int64
 
 const (
 	HKPrismBaseNone HKPrismBase = 0
-	HKPrismBaseUp HKPrismBase = 1
+	HKPrismBaseUp   HKPrismBase = 1
 	HKPrismBaseDown HKPrismBase = 2
-	HKPrismBaseIn HKPrismBase = 3
-	HKPrismBaseOut HKPrismBase = 4
+	HKPrismBaseIn   HKPrismBase = 3
+	HKPrismBaseOut  HKPrismBase = 4
 )
 
 func (e HKPrismBase) String() string {
@@ -1253,10 +1253,10 @@ func (e HKPrismBase) String() string {
 type HKQuantityAggregationStyle int64
 
 const (
-	HKQuantityAggregationStyleCumulative HKQuantityAggregationStyle = 0
-	HKQuantityAggregationStyleDiscreteArithmetic HKQuantityAggregationStyle = 1
-	HKQuantityAggregationStyleDiscrete HKQuantityAggregationStyle = 1
-	HKQuantityAggregationStyleDiscreteTemporallyWeighted HKQuantityAggregationStyle = 2
+	HKQuantityAggregationStyleCumulative                        HKQuantityAggregationStyle = 0
+	HKQuantityAggregationStyleDiscreteArithmetic                HKQuantityAggregationStyle = 1
+	HKQuantityAggregationStyleDiscrete                          HKQuantityAggregationStyle = 1
+	HKQuantityAggregationStyleDiscreteTemporallyWeighted        HKQuantityAggregationStyle = 2
 	HKQuantityAggregationStyleDiscreteEquivalentContinuousLevel HKQuantityAggregationStyle = 3
 )
 
@@ -1278,40 +1278,46 @@ func (e HKQuantityAggregationStyle) String() string {
 type HKQueryOptions uint64
 
 const (
-	HKQueryOptionNone HKQueryOptions = 0
+	HKQueryOptionNone            HKQueryOptions = 0
 	HKQueryOptionStrictStartDate HKQueryOptions = 1
-	HKQueryOptionStrictEndDate HKQueryOptions = 2
+	HKQueryOptionStrictEndDate   HKQueryOptions = 2
 )
 
 func (e HKQueryOptions) String() string {
 	var parts []string
-	if e&HKQueryOptionStrictStartDate != 0 { parts = append(parts, "HKQueryOptionStrictStartDate") }
-	if e&HKQueryOptionStrictEndDate != 0 { parts = append(parts, "HKQueryOptionStrictEndDate") }
-	if len(parts) == 0 { return "0" }
+	if e&HKQueryOptionStrictStartDate != 0 {
+		parts = append(parts, "HKQueryOptionStrictStartDate")
+	}
+	if e&HKQueryOptionStrictEndDate != 0 {
+		parts = append(parts, "HKQueryOptionStrictEndDate")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type HKStateOfMindAssociation int64
 
 const (
-	HKStateOfMindAssociationCommunity HKStateOfMindAssociation = 1
+	HKStateOfMindAssociationCommunity     HKStateOfMindAssociation = 1
 	HKStateOfMindAssociationCurrentEvents HKStateOfMindAssociation = 2
-	HKStateOfMindAssociationDating HKStateOfMindAssociation = 3
-	HKStateOfMindAssociationEducation HKStateOfMindAssociation = 4
-	HKStateOfMindAssociationFamily HKStateOfMindAssociation = 5
-	HKStateOfMindAssociationFitness HKStateOfMindAssociation = 6
-	HKStateOfMindAssociationFriends HKStateOfMindAssociation = 7
-	HKStateOfMindAssociationHealth HKStateOfMindAssociation = 8
-	HKStateOfMindAssociationHobbies HKStateOfMindAssociation = 9
-	HKStateOfMindAssociationIdentity HKStateOfMindAssociation = 10
-	HKStateOfMindAssociationMoney HKStateOfMindAssociation = 11
-	HKStateOfMindAssociationPartner HKStateOfMindAssociation = 12
-	HKStateOfMindAssociationSelfCare HKStateOfMindAssociation = 13
-	HKStateOfMindAssociationSpirituality HKStateOfMindAssociation = 14
-	HKStateOfMindAssociationTasks HKStateOfMindAssociation = 15
-	HKStateOfMindAssociationTravel HKStateOfMindAssociation = 16
-	HKStateOfMindAssociationWork HKStateOfMindAssociation = 17
-	HKStateOfMindAssociationWeather HKStateOfMindAssociation = 18
+	HKStateOfMindAssociationDating        HKStateOfMindAssociation = 3
+	HKStateOfMindAssociationEducation     HKStateOfMindAssociation = 4
+	HKStateOfMindAssociationFamily        HKStateOfMindAssociation = 5
+	HKStateOfMindAssociationFitness       HKStateOfMindAssociation = 6
+	HKStateOfMindAssociationFriends       HKStateOfMindAssociation = 7
+	HKStateOfMindAssociationHealth        HKStateOfMindAssociation = 8
+	HKStateOfMindAssociationHobbies       HKStateOfMindAssociation = 9
+	HKStateOfMindAssociationIdentity      HKStateOfMindAssociation = 10
+	HKStateOfMindAssociationMoney         HKStateOfMindAssociation = 11
+	HKStateOfMindAssociationPartner       HKStateOfMindAssociation = 12
+	HKStateOfMindAssociationSelfCare      HKStateOfMindAssociation = 13
+	HKStateOfMindAssociationSpirituality  HKStateOfMindAssociation = 14
+	HKStateOfMindAssociationTasks         HKStateOfMindAssociation = 15
+	HKStateOfMindAssociationTravel        HKStateOfMindAssociation = 16
+	HKStateOfMindAssociationWork          HKStateOfMindAssociation = 17
+	HKStateOfMindAssociationWeather       HKStateOfMindAssociation = 18
 )
 
 func (e HKStateOfMindAssociation) String() string {
@@ -1361,7 +1367,7 @@ type HKStateOfMindKind int64
 
 const (
 	HKStateOfMindKindMomentaryEmotion HKStateOfMindKind = 1
-	HKStateOfMindKindDailyMood HKStateOfMindKind = 2
+	HKStateOfMindKindDailyMood        HKStateOfMindKind = 2
 )
 
 func (e HKStateOfMindKind) String() string {
@@ -1378,44 +1384,44 @@ func (e HKStateOfMindKind) String() string {
 type HKStateOfMindLabel int64
 
 const (
-	HKStateOfMindLabelAmazed HKStateOfMindLabel = 1
-	HKStateOfMindLabelAmused HKStateOfMindLabel = 2
-	HKStateOfMindLabelAngry HKStateOfMindLabel = 3
-	HKStateOfMindLabelAnxious HKStateOfMindLabel = 4
-	HKStateOfMindLabelAshamed HKStateOfMindLabel = 5
-	HKStateOfMindLabelBrave HKStateOfMindLabel = 6
-	HKStateOfMindLabelCalm HKStateOfMindLabel = 7
-	HKStateOfMindLabelContent HKStateOfMindLabel = 8
+	HKStateOfMindLabelAmazed       HKStateOfMindLabel = 1
+	HKStateOfMindLabelAmused       HKStateOfMindLabel = 2
+	HKStateOfMindLabelAngry        HKStateOfMindLabel = 3
+	HKStateOfMindLabelAnxious      HKStateOfMindLabel = 4
+	HKStateOfMindLabelAshamed      HKStateOfMindLabel = 5
+	HKStateOfMindLabelBrave        HKStateOfMindLabel = 6
+	HKStateOfMindLabelCalm         HKStateOfMindLabel = 7
+	HKStateOfMindLabelContent      HKStateOfMindLabel = 8
 	HKStateOfMindLabelDisappointed HKStateOfMindLabel = 9
-	HKStateOfMindLabelDiscouraged HKStateOfMindLabel = 10
-	HKStateOfMindLabelDisgusted HKStateOfMindLabel = 11
-	HKStateOfMindLabelEmbarrassed HKStateOfMindLabel = 12
-	HKStateOfMindLabelExcited HKStateOfMindLabel = 13
-	HKStateOfMindLabelFrustrated HKStateOfMindLabel = 14
-	HKStateOfMindLabelGrateful HKStateOfMindLabel = 15
-	HKStateOfMindLabelGuilty HKStateOfMindLabel = 16
-	HKStateOfMindLabelHappy HKStateOfMindLabel = 17
-	HKStateOfMindLabelHopeless HKStateOfMindLabel = 18
-	HKStateOfMindLabelIrritated HKStateOfMindLabel = 19
-	HKStateOfMindLabelJealous HKStateOfMindLabel = 20
-	HKStateOfMindLabelJoyful HKStateOfMindLabel = 21
-	HKStateOfMindLabelLonely HKStateOfMindLabel = 22
-	HKStateOfMindLabelPassionate HKStateOfMindLabel = 23
-	HKStateOfMindLabelPeaceful HKStateOfMindLabel = 24
-	HKStateOfMindLabelProud HKStateOfMindLabel = 25
-	HKStateOfMindLabelRelieved HKStateOfMindLabel = 26
-	HKStateOfMindLabelSad HKStateOfMindLabel = 27
-	HKStateOfMindLabelScared HKStateOfMindLabel = 28
-	HKStateOfMindLabelStressed HKStateOfMindLabel = 29
-	HKStateOfMindLabelSurprised HKStateOfMindLabel = 30
-	HKStateOfMindLabelWorried HKStateOfMindLabel = 31
-	HKStateOfMindLabelAnnoyed HKStateOfMindLabel = 32
-	HKStateOfMindLabelConfident HKStateOfMindLabel = 33
-	HKStateOfMindLabelDrained HKStateOfMindLabel = 34
-	HKStateOfMindLabelHopeful HKStateOfMindLabel = 35
-	HKStateOfMindLabelIndifferent HKStateOfMindLabel = 36
-	HKStateOfMindLabelOverwhelmed HKStateOfMindLabel = 37
-	HKStateOfMindLabelSatisfied HKStateOfMindLabel = 38
+	HKStateOfMindLabelDiscouraged  HKStateOfMindLabel = 10
+	HKStateOfMindLabelDisgusted    HKStateOfMindLabel = 11
+	HKStateOfMindLabelEmbarrassed  HKStateOfMindLabel = 12
+	HKStateOfMindLabelExcited      HKStateOfMindLabel = 13
+	HKStateOfMindLabelFrustrated   HKStateOfMindLabel = 14
+	HKStateOfMindLabelGrateful     HKStateOfMindLabel = 15
+	HKStateOfMindLabelGuilty       HKStateOfMindLabel = 16
+	HKStateOfMindLabelHappy        HKStateOfMindLabel = 17
+	HKStateOfMindLabelHopeless     HKStateOfMindLabel = 18
+	HKStateOfMindLabelIrritated    HKStateOfMindLabel = 19
+	HKStateOfMindLabelJealous      HKStateOfMindLabel = 20
+	HKStateOfMindLabelJoyful       HKStateOfMindLabel = 21
+	HKStateOfMindLabelLonely       HKStateOfMindLabel = 22
+	HKStateOfMindLabelPassionate   HKStateOfMindLabel = 23
+	HKStateOfMindLabelPeaceful     HKStateOfMindLabel = 24
+	HKStateOfMindLabelProud        HKStateOfMindLabel = 25
+	HKStateOfMindLabelRelieved     HKStateOfMindLabel = 26
+	HKStateOfMindLabelSad          HKStateOfMindLabel = 27
+	HKStateOfMindLabelScared       HKStateOfMindLabel = 28
+	HKStateOfMindLabelStressed     HKStateOfMindLabel = 29
+	HKStateOfMindLabelSurprised    HKStateOfMindLabel = 30
+	HKStateOfMindLabelWorried      HKStateOfMindLabel = 31
+	HKStateOfMindLabelAnnoyed      HKStateOfMindLabel = 32
+	HKStateOfMindLabelConfident    HKStateOfMindLabel = 33
+	HKStateOfMindLabelDrained      HKStateOfMindLabel = 34
+	HKStateOfMindLabelHopeful      HKStateOfMindLabel = 35
+	HKStateOfMindLabelIndifferent  HKStateOfMindLabel = 36
+	HKStateOfMindLabelOverwhelmed  HKStateOfMindLabel = 37
+	HKStateOfMindLabelSatisfied    HKStateOfMindLabel = 38
 )
 
 func (e HKStateOfMindLabel) String() string {
@@ -1504,13 +1510,13 @@ func (e HKStateOfMindLabel) String() string {
 type HKStateOfMindValenceClassification int64
 
 const (
-	HKStateOfMindValenceClassificationVeryUnpleasant HKStateOfMindValenceClassification = 1
-	HKStateOfMindValenceClassificationUnpleasant HKStateOfMindValenceClassification = 2
+	HKStateOfMindValenceClassificationVeryUnpleasant     HKStateOfMindValenceClassification = 1
+	HKStateOfMindValenceClassificationUnpleasant         HKStateOfMindValenceClassification = 2
 	HKStateOfMindValenceClassificationSlightlyUnpleasant HKStateOfMindValenceClassification = 3
-	HKStateOfMindValenceClassificationNeutral HKStateOfMindValenceClassification = 4
-	HKStateOfMindValenceClassificationSlightlyPleasant HKStateOfMindValenceClassification = 5
-	HKStateOfMindValenceClassificationPleasant HKStateOfMindValenceClassification = 6
-	HKStateOfMindValenceClassificationVeryPleasant HKStateOfMindValenceClassification = 7
+	HKStateOfMindValenceClassificationNeutral            HKStateOfMindValenceClassification = 4
+	HKStateOfMindValenceClassificationSlightlyPleasant   HKStateOfMindValenceClassification = 5
+	HKStateOfMindValenceClassificationPleasant           HKStateOfMindValenceClassification = 6
+	HKStateOfMindValenceClassificationVeryPleasant       HKStateOfMindValenceClassification = 7
 )
 
 func (e HKStateOfMindValenceClassification) String() string {
@@ -1537,41 +1543,59 @@ func (e HKStateOfMindValenceClassification) String() string {
 type HKStatisticsOptions uint64
 
 const (
-	HKStatisticsOptionNone HKStatisticsOptions = 0
-	HKStatisticsOptionSeparateBySource HKStatisticsOptions = 1
-	HKStatisticsOptionDiscreteAverage HKStatisticsOptions = 2
-	HKStatisticsOptionDiscreteMin HKStatisticsOptions = 4
-	HKStatisticsOptionDiscreteMax HKStatisticsOptions = 8
-	HKStatisticsOptionCumulativeSum HKStatisticsOptions = 16
-	HKStatisticsOptionMostRecent HKStatisticsOptions = 32
+	HKStatisticsOptionNone               HKStatisticsOptions = 0
+	HKStatisticsOptionSeparateBySource   HKStatisticsOptions = 1
+	HKStatisticsOptionDiscreteAverage    HKStatisticsOptions = 2
+	HKStatisticsOptionDiscreteMin        HKStatisticsOptions = 4
+	HKStatisticsOptionDiscreteMax        HKStatisticsOptions = 8
+	HKStatisticsOptionCumulativeSum      HKStatisticsOptions = 16
+	HKStatisticsOptionMostRecent         HKStatisticsOptions = 32
 	HKStatisticsOptionDiscreteMostRecent HKStatisticsOptions = 32
-	HKStatisticsOptionDuration HKStatisticsOptions = 64
+	HKStatisticsOptionDuration           HKStatisticsOptions = 64
 )
 
 func (e HKStatisticsOptions) String() string {
 	var parts []string
-	if e&HKStatisticsOptionSeparateBySource != 0 { parts = append(parts, "HKStatisticsOptionSeparateBySource") }
-	if e&HKStatisticsOptionDiscreteAverage != 0 { parts = append(parts, "HKStatisticsOptionDiscreteAverage") }
-	if e&HKStatisticsOptionDiscreteMin != 0 { parts = append(parts, "HKStatisticsOptionDiscreteMin") }
-	if e&HKStatisticsOptionDiscreteMax != 0 { parts = append(parts, "HKStatisticsOptionDiscreteMax") }
-	if e&HKStatisticsOptionCumulativeSum != 0 { parts = append(parts, "HKStatisticsOptionCumulativeSum") }
-	if e&HKStatisticsOptionMostRecent != 0 { parts = append(parts, "HKStatisticsOptionMostRecent") }
-	if e&HKStatisticsOptionDiscreteMostRecent != 0 { parts = append(parts, "HKStatisticsOptionDiscreteMostRecent") }
-	if e&HKStatisticsOptionDuration != 0 { parts = append(parts, "HKStatisticsOptionDuration") }
-	if len(parts) == 0 { return "0" }
+	if e&HKStatisticsOptionSeparateBySource != 0 {
+		parts = append(parts, "HKStatisticsOptionSeparateBySource")
+	}
+	if e&HKStatisticsOptionDiscreteAverage != 0 {
+		parts = append(parts, "HKStatisticsOptionDiscreteAverage")
+	}
+	if e&HKStatisticsOptionDiscreteMin != 0 {
+		parts = append(parts, "HKStatisticsOptionDiscreteMin")
+	}
+	if e&HKStatisticsOptionDiscreteMax != 0 {
+		parts = append(parts, "HKStatisticsOptionDiscreteMax")
+	}
+	if e&HKStatisticsOptionCumulativeSum != 0 {
+		parts = append(parts, "HKStatisticsOptionCumulativeSum")
+	}
+	if e&HKStatisticsOptionMostRecent != 0 {
+		parts = append(parts, "HKStatisticsOptionMostRecent")
+	}
+	if e&HKStatisticsOptionDiscreteMostRecent != 0 {
+		parts = append(parts, "HKStatisticsOptionDiscreteMostRecent")
+	}
+	if e&HKStatisticsOptionDuration != 0 {
+		parts = append(parts, "HKStatisticsOptionDuration")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type HKSwimmingStrokeStyle int64
 
 const (
-	HKSwimmingStrokeStyleUnknown HKSwimmingStrokeStyle = 0
-	HKSwimmingStrokeStyleMixed HKSwimmingStrokeStyle = 1
-	HKSwimmingStrokeStyleFreestyle HKSwimmingStrokeStyle = 2
-	HKSwimmingStrokeStyleBackstroke HKSwimmingStrokeStyle = 3
+	HKSwimmingStrokeStyleUnknown      HKSwimmingStrokeStyle = 0
+	HKSwimmingStrokeStyleMixed        HKSwimmingStrokeStyle = 1
+	HKSwimmingStrokeStyleFreestyle    HKSwimmingStrokeStyle = 2
+	HKSwimmingStrokeStyleBackstroke   HKSwimmingStrokeStyle = 3
 	HKSwimmingStrokeStyleBreaststroke HKSwimmingStrokeStyle = 4
-	HKSwimmingStrokeStyleButterfly HKSwimmingStrokeStyle = 5
-	HKSwimmingStrokeStyleKickboard HKSwimmingStrokeStyle = 6
+	HKSwimmingStrokeStyleButterfly    HKSwimmingStrokeStyle = 5
+	HKSwimmingStrokeStyleKickboard    HKSwimmingStrokeStyle = 6
 )
 
 func (e HKSwimmingStrokeStyle) String() string {
@@ -1599,9 +1623,9 @@ type HKUpdateFrequency int64
 
 const (
 	HKUpdateFrequencyImmediate HKUpdateFrequency = 1
-	HKUpdateFrequencyHourly HKUpdateFrequency = 2
-	HKUpdateFrequencyDaily HKUpdateFrequency = 3
-	HKUpdateFrequencyWeekly HKUpdateFrequency = 4
+	HKUpdateFrequencyHourly    HKUpdateFrequency = 2
+	HKUpdateFrequencyDaily     HKUpdateFrequency = 3
+	HKUpdateFrequencyWeekly    HKUpdateFrequency = 4
 )
 
 func (e HKUpdateFrequency) String() string {
@@ -1622,9 +1646,9 @@ func (e HKUpdateFrequency) String() string {
 type HKUserMotionContext int64
 
 const (
-	HKUserMotionContextNotSet HKUserMotionContext = 0
+	HKUserMotionContextNotSet     HKUserMotionContext = 0
 	HKUserMotionContextStationary HKUserMotionContext = 1
-	HKUserMotionContextActive HKUserMotionContext = 2
+	HKUserMotionContextActive     HKUserMotionContext = 2
 )
 
 func (e HKUserMotionContext) String() string {
@@ -1643,10 +1667,10 @@ func (e HKUserMotionContext) String() string {
 type HKVO2MaxTestType int64
 
 const (
-	HKVO2MaxTestTypeMaxExercise HKVO2MaxTestType = 1
+	HKVO2MaxTestTypeMaxExercise              HKVO2MaxTestType = 1
 	HKVO2MaxTestTypePredictionSubMaxExercise HKVO2MaxTestType = 2
-	HKVO2MaxTestTypePredictionNonExercise HKVO2MaxTestType = 3
-	HKVO2MaxTestTypePredictionStepTest HKVO2MaxTestType = 4
+	HKVO2MaxTestTypePredictionNonExercise    HKVO2MaxTestType = 3
+	HKVO2MaxTestTypePredictionStepTest       HKVO2MaxTestType = 4
 )
 
 func (e HKVO2MaxTestType) String() string {
@@ -1667,7 +1691,7 @@ func (e HKVO2MaxTestType) String() string {
 type HKVisionEye int64
 
 const (
-	HKVisionEyeLeft HKVisionEye = 1
+	HKVisionEyeLeft  HKVisionEye = 1
 	HKVisionEyeRight HKVisionEye = 2
 )
 
@@ -1685,7 +1709,7 @@ func (e HKVisionEye) String() string {
 type HKVisionPrescriptionType uint64
 
 const (
-	HKVisionPrescriptionTypeGlasses HKVisionPrescriptionType = 1
+	HKVisionPrescriptionTypeGlasses  HKVisionPrescriptionType = 1
 	HKVisionPrescriptionTypeContacts HKVisionPrescriptionType = 2
 )
 
@@ -1704,7 +1728,7 @@ type HKWaterSalinity int64
 
 const (
 	HKWaterSalinityFreshWater HKWaterSalinity = 1
-	HKWaterSalinitySaltWater HKWaterSalinity = 2
+	HKWaterSalinitySaltWater  HKWaterSalinity = 2
 )
 
 func (e HKWaterSalinity) String() string {
@@ -1721,34 +1745,34 @@ func (e HKWaterSalinity) String() string {
 type HKWeatherCondition int64
 
 const (
-	HKWeatherConditionNone HKWeatherCondition = 0
-	HKWeatherConditionClear HKWeatherCondition = 1
-	HKWeatherConditionFair HKWeatherCondition = 2
-	HKWeatherConditionPartlyCloudy HKWeatherCondition = 3
-	HKWeatherConditionMostlyCloudy HKWeatherCondition = 4
-	HKWeatherConditionCloudy HKWeatherCondition = 5
-	HKWeatherConditionFoggy HKWeatherCondition = 6
-	HKWeatherConditionHaze HKWeatherCondition = 7
-	HKWeatherConditionWindy HKWeatherCondition = 8
-	HKWeatherConditionBlustery HKWeatherCondition = 9
-	HKWeatherConditionSmoky HKWeatherCondition = 10
-	HKWeatherConditionDust HKWeatherCondition = 11
-	HKWeatherConditionSnow HKWeatherCondition = 12
-	HKWeatherConditionHail HKWeatherCondition = 13
-	HKWeatherConditionSleet HKWeatherCondition = 14
-	HKWeatherConditionFreezingDrizzle HKWeatherCondition = 15
-	HKWeatherConditionFreezingRain HKWeatherCondition = 16
-	HKWeatherConditionMixedRainAndHail HKWeatherCondition = 17
-	HKWeatherConditionMixedRainAndSnow HKWeatherCondition = 18
+	HKWeatherConditionNone              HKWeatherCondition = 0
+	HKWeatherConditionClear             HKWeatherCondition = 1
+	HKWeatherConditionFair              HKWeatherCondition = 2
+	HKWeatherConditionPartlyCloudy      HKWeatherCondition = 3
+	HKWeatherConditionMostlyCloudy      HKWeatherCondition = 4
+	HKWeatherConditionCloudy            HKWeatherCondition = 5
+	HKWeatherConditionFoggy             HKWeatherCondition = 6
+	HKWeatherConditionHaze              HKWeatherCondition = 7
+	HKWeatherConditionWindy             HKWeatherCondition = 8
+	HKWeatherConditionBlustery          HKWeatherCondition = 9
+	HKWeatherConditionSmoky             HKWeatherCondition = 10
+	HKWeatherConditionDust              HKWeatherCondition = 11
+	HKWeatherConditionSnow              HKWeatherCondition = 12
+	HKWeatherConditionHail              HKWeatherCondition = 13
+	HKWeatherConditionSleet             HKWeatherCondition = 14
+	HKWeatherConditionFreezingDrizzle   HKWeatherCondition = 15
+	HKWeatherConditionFreezingRain      HKWeatherCondition = 16
+	HKWeatherConditionMixedRainAndHail  HKWeatherCondition = 17
+	HKWeatherConditionMixedRainAndSnow  HKWeatherCondition = 18
 	HKWeatherConditionMixedRainAndSleet HKWeatherCondition = 19
 	HKWeatherConditionMixedSnowAndSleet HKWeatherCondition = 20
-	HKWeatherConditionDrizzle HKWeatherCondition = 21
-	HKWeatherConditionScatteredShowers HKWeatherCondition = 22
-	HKWeatherConditionShowers HKWeatherCondition = 23
-	HKWeatherConditionThunderstorms HKWeatherCondition = 24
-	HKWeatherConditionTropicalStorm HKWeatherCondition = 25
-	HKWeatherConditionHurricane HKWeatherCondition = 26
-	HKWeatherConditionTornado HKWeatherCondition = 27
+	HKWeatherConditionDrizzle           HKWeatherCondition = 21
+	HKWeatherConditionScatteredShowers  HKWeatherCondition = 22
+	HKWeatherConditionShowers           HKWeatherCondition = 23
+	HKWeatherConditionThunderstorms     HKWeatherCondition = 24
+	HKWeatherConditionTropicalStorm     HKWeatherCondition = 25
+	HKWeatherConditionHurricane         HKWeatherCondition = 26
+	HKWeatherConditionTornado           HKWeatherCondition = 27
 )
 
 func (e HKWeatherCondition) String() string {
@@ -1818,8 +1842,8 @@ type HKWheelchairUse int64
 
 const (
 	HKWheelchairUseNotSet HKWheelchairUse = 0
-	HKWheelchairUseNo HKWheelchairUse = 1
-	HKWheelchairUseYes HKWheelchairUse = 2
+	HKWheelchairUseNo     HKWheelchairUse = 1
+	HKWheelchairUseYes    HKWheelchairUse = 2
 )
 
 func (e HKWheelchairUse) String() string {
@@ -1838,90 +1862,90 @@ func (e HKWheelchairUse) String() string {
 type HKWorkoutActivityType uint64
 
 const (
-	HKWorkoutActivityTypeAmericanFootball HKWorkoutActivityType = 1
-	HKWorkoutActivityTypeArchery HKWorkoutActivityType = 2
-	HKWorkoutActivityTypeAustralianFootball HKWorkoutActivityType = 3
-	HKWorkoutActivityTypeBadminton HKWorkoutActivityType = 4
-	HKWorkoutActivityTypeBaseball HKWorkoutActivityType = 5
-	HKWorkoutActivityTypeBasketball HKWorkoutActivityType = 6
-	HKWorkoutActivityTypeBowling HKWorkoutActivityType = 7
-	HKWorkoutActivityTypeBoxing HKWorkoutActivityType = 8
-	HKWorkoutActivityTypeClimbing HKWorkoutActivityType = 9
-	HKWorkoutActivityTypeCricket HKWorkoutActivityType = 10
-	HKWorkoutActivityTypeCrossTraining HKWorkoutActivityType = 11
-	HKWorkoutActivityTypeCurling HKWorkoutActivityType = 12
-	HKWorkoutActivityTypeCycling HKWorkoutActivityType = 13
-	HKWorkoutActivityTypeDance HKWorkoutActivityType = 14
-	HKWorkoutActivityTypeDanceInspiredTraining HKWorkoutActivityType = 15
-	HKWorkoutActivityTypeElliptical HKWorkoutActivityType = 16
-	HKWorkoutActivityTypeEquestrianSports HKWorkoutActivityType = 17
-	HKWorkoutActivityTypeFencing HKWorkoutActivityType = 18
-	HKWorkoutActivityTypeFishing HKWorkoutActivityType = 19
-	HKWorkoutActivityTypeFunctionalStrengthTraining HKWorkoutActivityType = 20
-	HKWorkoutActivityTypeGolf HKWorkoutActivityType = 21
-	HKWorkoutActivityTypeGymnastics HKWorkoutActivityType = 22
-	HKWorkoutActivityTypeHandball HKWorkoutActivityType = 23
-	HKWorkoutActivityTypeHiking HKWorkoutActivityType = 24
-	HKWorkoutActivityTypeHockey HKWorkoutActivityType = 25
-	HKWorkoutActivityTypeHunting HKWorkoutActivityType = 26
-	HKWorkoutActivityTypeLacrosse HKWorkoutActivityType = 27
-	HKWorkoutActivityTypeMartialArts HKWorkoutActivityType = 28
-	HKWorkoutActivityTypeMindAndBody HKWorkoutActivityType = 29
-	HKWorkoutActivityTypeMixedMetabolicCardioTraining HKWorkoutActivityType = 30
-	HKWorkoutActivityTypePaddleSports HKWorkoutActivityType = 31
-	HKWorkoutActivityTypePlay HKWorkoutActivityType = 32
-	HKWorkoutActivityTypePreparationAndRecovery HKWorkoutActivityType = 33
-	HKWorkoutActivityTypeRacquetball HKWorkoutActivityType = 34
-	HKWorkoutActivityTypeRowing HKWorkoutActivityType = 35
-	HKWorkoutActivityTypeRugby HKWorkoutActivityType = 36
-	HKWorkoutActivityTypeRunning HKWorkoutActivityType = 37
-	HKWorkoutActivityTypeSailing HKWorkoutActivityType = 38
-	HKWorkoutActivityTypeSkatingSports HKWorkoutActivityType = 39
-	HKWorkoutActivityTypeSnowSports HKWorkoutActivityType = 40
-	HKWorkoutActivityTypeSoccer HKWorkoutActivityType = 41
-	HKWorkoutActivityTypeSoftball HKWorkoutActivityType = 42
-	HKWorkoutActivityTypeSquash HKWorkoutActivityType = 43
-	HKWorkoutActivityTypeStairClimbing HKWorkoutActivityType = 44
-	HKWorkoutActivityTypeSurfingSports HKWorkoutActivityType = 45
-	HKWorkoutActivityTypeSwimming HKWorkoutActivityType = 46
-	HKWorkoutActivityTypeTableTennis HKWorkoutActivityType = 47
-	HKWorkoutActivityTypeTennis HKWorkoutActivityType = 48
-	HKWorkoutActivityTypeTrackAndField HKWorkoutActivityType = 49
-	HKWorkoutActivityTypeTraditionalStrengthTraining HKWorkoutActivityType = 50
-	HKWorkoutActivityTypeVolleyball HKWorkoutActivityType = 51
-	HKWorkoutActivityTypeWalking HKWorkoutActivityType = 52
-	HKWorkoutActivityTypeWaterFitness HKWorkoutActivityType = 53
-	HKWorkoutActivityTypeWaterPolo HKWorkoutActivityType = 54
-	HKWorkoutActivityTypeWaterSports HKWorkoutActivityType = 55
-	HKWorkoutActivityTypeWrestling HKWorkoutActivityType = 56
-	HKWorkoutActivityTypeYoga HKWorkoutActivityType = 57
-	HKWorkoutActivityTypeBarre HKWorkoutActivityType = 58
-	HKWorkoutActivityTypeCoreTraining HKWorkoutActivityType = 59
-	HKWorkoutActivityTypeCrossCountrySkiing HKWorkoutActivityType = 60
-	HKWorkoutActivityTypeDownhillSkiing HKWorkoutActivityType = 61
-	HKWorkoutActivityTypeFlexibility HKWorkoutActivityType = 62
+	HKWorkoutActivityTypeAmericanFootball              HKWorkoutActivityType = 1
+	HKWorkoutActivityTypeArchery                       HKWorkoutActivityType = 2
+	HKWorkoutActivityTypeAustralianFootball            HKWorkoutActivityType = 3
+	HKWorkoutActivityTypeBadminton                     HKWorkoutActivityType = 4
+	HKWorkoutActivityTypeBaseball                      HKWorkoutActivityType = 5
+	HKWorkoutActivityTypeBasketball                    HKWorkoutActivityType = 6
+	HKWorkoutActivityTypeBowling                       HKWorkoutActivityType = 7
+	HKWorkoutActivityTypeBoxing                        HKWorkoutActivityType = 8
+	HKWorkoutActivityTypeClimbing                      HKWorkoutActivityType = 9
+	HKWorkoutActivityTypeCricket                       HKWorkoutActivityType = 10
+	HKWorkoutActivityTypeCrossTraining                 HKWorkoutActivityType = 11
+	HKWorkoutActivityTypeCurling                       HKWorkoutActivityType = 12
+	HKWorkoutActivityTypeCycling                       HKWorkoutActivityType = 13
+	HKWorkoutActivityTypeDance                         HKWorkoutActivityType = 14
+	HKWorkoutActivityTypeDanceInspiredTraining         HKWorkoutActivityType = 15
+	HKWorkoutActivityTypeElliptical                    HKWorkoutActivityType = 16
+	HKWorkoutActivityTypeEquestrianSports              HKWorkoutActivityType = 17
+	HKWorkoutActivityTypeFencing                       HKWorkoutActivityType = 18
+	HKWorkoutActivityTypeFishing                       HKWorkoutActivityType = 19
+	HKWorkoutActivityTypeFunctionalStrengthTraining    HKWorkoutActivityType = 20
+	HKWorkoutActivityTypeGolf                          HKWorkoutActivityType = 21
+	HKWorkoutActivityTypeGymnastics                    HKWorkoutActivityType = 22
+	HKWorkoutActivityTypeHandball                      HKWorkoutActivityType = 23
+	HKWorkoutActivityTypeHiking                        HKWorkoutActivityType = 24
+	HKWorkoutActivityTypeHockey                        HKWorkoutActivityType = 25
+	HKWorkoutActivityTypeHunting                       HKWorkoutActivityType = 26
+	HKWorkoutActivityTypeLacrosse                      HKWorkoutActivityType = 27
+	HKWorkoutActivityTypeMartialArts                   HKWorkoutActivityType = 28
+	HKWorkoutActivityTypeMindAndBody                   HKWorkoutActivityType = 29
+	HKWorkoutActivityTypeMixedMetabolicCardioTraining  HKWorkoutActivityType = 30
+	HKWorkoutActivityTypePaddleSports                  HKWorkoutActivityType = 31
+	HKWorkoutActivityTypePlay                          HKWorkoutActivityType = 32
+	HKWorkoutActivityTypePreparationAndRecovery        HKWorkoutActivityType = 33
+	HKWorkoutActivityTypeRacquetball                   HKWorkoutActivityType = 34
+	HKWorkoutActivityTypeRowing                        HKWorkoutActivityType = 35
+	HKWorkoutActivityTypeRugby                         HKWorkoutActivityType = 36
+	HKWorkoutActivityTypeRunning                       HKWorkoutActivityType = 37
+	HKWorkoutActivityTypeSailing                       HKWorkoutActivityType = 38
+	HKWorkoutActivityTypeSkatingSports                 HKWorkoutActivityType = 39
+	HKWorkoutActivityTypeSnowSports                    HKWorkoutActivityType = 40
+	HKWorkoutActivityTypeSoccer                        HKWorkoutActivityType = 41
+	HKWorkoutActivityTypeSoftball                      HKWorkoutActivityType = 42
+	HKWorkoutActivityTypeSquash                        HKWorkoutActivityType = 43
+	HKWorkoutActivityTypeStairClimbing                 HKWorkoutActivityType = 44
+	HKWorkoutActivityTypeSurfingSports                 HKWorkoutActivityType = 45
+	HKWorkoutActivityTypeSwimming                      HKWorkoutActivityType = 46
+	HKWorkoutActivityTypeTableTennis                   HKWorkoutActivityType = 47
+	HKWorkoutActivityTypeTennis                        HKWorkoutActivityType = 48
+	HKWorkoutActivityTypeTrackAndField                 HKWorkoutActivityType = 49
+	HKWorkoutActivityTypeTraditionalStrengthTraining   HKWorkoutActivityType = 50
+	HKWorkoutActivityTypeVolleyball                    HKWorkoutActivityType = 51
+	HKWorkoutActivityTypeWalking                       HKWorkoutActivityType = 52
+	HKWorkoutActivityTypeWaterFitness                  HKWorkoutActivityType = 53
+	HKWorkoutActivityTypeWaterPolo                     HKWorkoutActivityType = 54
+	HKWorkoutActivityTypeWaterSports                   HKWorkoutActivityType = 55
+	HKWorkoutActivityTypeWrestling                     HKWorkoutActivityType = 56
+	HKWorkoutActivityTypeYoga                          HKWorkoutActivityType = 57
+	HKWorkoutActivityTypeBarre                         HKWorkoutActivityType = 58
+	HKWorkoutActivityTypeCoreTraining                  HKWorkoutActivityType = 59
+	HKWorkoutActivityTypeCrossCountrySkiing            HKWorkoutActivityType = 60
+	HKWorkoutActivityTypeDownhillSkiing                HKWorkoutActivityType = 61
+	HKWorkoutActivityTypeFlexibility                   HKWorkoutActivityType = 62
 	HKWorkoutActivityTypeHighIntensityIntervalTraining HKWorkoutActivityType = 63
-	HKWorkoutActivityTypeJumpRope HKWorkoutActivityType = 64
-	HKWorkoutActivityTypeKickboxing HKWorkoutActivityType = 65
-	HKWorkoutActivityTypePilates HKWorkoutActivityType = 66
-	HKWorkoutActivityTypeSnowboarding HKWorkoutActivityType = 67
-	HKWorkoutActivityTypeStairs HKWorkoutActivityType = 68
-	HKWorkoutActivityTypeStepTraining HKWorkoutActivityType = 69
-	HKWorkoutActivityTypeWheelchairWalkPace HKWorkoutActivityType = 70
-	HKWorkoutActivityTypeWheelchairRunPace HKWorkoutActivityType = 71
-	HKWorkoutActivityTypeTaiChi HKWorkoutActivityType = 72
-	HKWorkoutActivityTypeMixedCardio HKWorkoutActivityType = 73
-	HKWorkoutActivityTypeHandCycling HKWorkoutActivityType = 74
-	HKWorkoutActivityTypeDiscSports HKWorkoutActivityType = 75
-	HKWorkoutActivityTypeFitnessGaming HKWorkoutActivityType = 76
-	HKWorkoutActivityTypeCardioDance HKWorkoutActivityType = 77
-	HKWorkoutActivityTypeSocialDance HKWorkoutActivityType = 78
-	HKWorkoutActivityTypePickleball HKWorkoutActivityType = 79
-	HKWorkoutActivityTypeCooldown HKWorkoutActivityType = 80
-	HKWorkoutActivityTypeSwimBikeRun HKWorkoutActivityType = 82
-	HKWorkoutActivityTypeTransition HKWorkoutActivityType = 83
-	HKWorkoutActivityTypeUnderwaterDiving HKWorkoutActivityType = 84
-	HKWorkoutActivityTypeOther HKWorkoutActivityType = 3000
+	HKWorkoutActivityTypeJumpRope                      HKWorkoutActivityType = 64
+	HKWorkoutActivityTypeKickboxing                    HKWorkoutActivityType = 65
+	HKWorkoutActivityTypePilates                       HKWorkoutActivityType = 66
+	HKWorkoutActivityTypeSnowboarding                  HKWorkoutActivityType = 67
+	HKWorkoutActivityTypeStairs                        HKWorkoutActivityType = 68
+	HKWorkoutActivityTypeStepTraining                  HKWorkoutActivityType = 69
+	HKWorkoutActivityTypeWheelchairWalkPace            HKWorkoutActivityType = 70
+	HKWorkoutActivityTypeWheelchairRunPace             HKWorkoutActivityType = 71
+	HKWorkoutActivityTypeTaiChi                        HKWorkoutActivityType = 72
+	HKWorkoutActivityTypeMixedCardio                   HKWorkoutActivityType = 73
+	HKWorkoutActivityTypeHandCycling                   HKWorkoutActivityType = 74
+	HKWorkoutActivityTypeDiscSports                    HKWorkoutActivityType = 75
+	HKWorkoutActivityTypeFitnessGaming                 HKWorkoutActivityType = 76
+	HKWorkoutActivityTypeCardioDance                   HKWorkoutActivityType = 77
+	HKWorkoutActivityTypeSocialDance                   HKWorkoutActivityType = 78
+	HKWorkoutActivityTypePickleball                    HKWorkoutActivityType = 79
+	HKWorkoutActivityTypeCooldown                      HKWorkoutActivityType = 80
+	HKWorkoutActivityTypeSwimBikeRun                   HKWorkoutActivityType = 82
+	HKWorkoutActivityTypeTransition                    HKWorkoutActivityType = 83
+	HKWorkoutActivityTypeUnderwaterDiving              HKWorkoutActivityType = 84
+	HKWorkoutActivityTypeOther                         HKWorkoutActivityType = 3000
 )
 
 func (e HKWorkoutActivityType) String() string {
@@ -2102,7 +2126,7 @@ func (e HKWorkoutActivityType) String() string {
 type HKWorkoutEffortRelationshipQueryOptions int64
 
 const (
-	HKWorkoutEffortRelationshipQueryOptionsDefault HKWorkoutEffortRelationshipQueryOptions = 0
+	HKWorkoutEffortRelationshipQueryOptionsDefault      HKWorkoutEffortRelationshipQueryOptions = 0
 	HKWorkoutEffortRelationshipQueryOptionsMostRelevant HKWorkoutEffortRelationshipQueryOptions = 1
 )
 
@@ -2120,13 +2144,13 @@ func (e HKWorkoutEffortRelationshipQueryOptions) String() string {
 type HKWorkoutEventType int64
 
 const (
-	HKWorkoutEventTypePause HKWorkoutEventType = 1
-	HKWorkoutEventTypeResume HKWorkoutEventType = 2
-	HKWorkoutEventTypeLap HKWorkoutEventType = 3
-	HKWorkoutEventTypeMarker HKWorkoutEventType = 4
-	HKWorkoutEventTypeMotionPaused HKWorkoutEventType = 5
-	HKWorkoutEventTypeMotionResumed HKWorkoutEventType = 6
-	HKWorkoutEventTypeSegment HKWorkoutEventType = 7
+	HKWorkoutEventTypePause                HKWorkoutEventType = 1
+	HKWorkoutEventTypeResume               HKWorkoutEventType = 2
+	HKWorkoutEventTypeLap                  HKWorkoutEventType = 3
+	HKWorkoutEventTypeMarker               HKWorkoutEventType = 4
+	HKWorkoutEventTypeMotionPaused         HKWorkoutEventType = 5
+	HKWorkoutEventTypeMotionResumed        HKWorkoutEventType = 6
+	HKWorkoutEventTypeSegment              HKWorkoutEventType = 7
 	HKWorkoutEventTypePauseOrResumeRequest HKWorkoutEventType = 8
 )
 
@@ -2157,7 +2181,7 @@ type HKWorkoutSessionLocationType int64
 
 const (
 	HKWorkoutSessionLocationTypeUnknown HKWorkoutSessionLocationType = 1
-	HKWorkoutSessionLocationTypeIndoor HKWorkoutSessionLocationType = 2
+	HKWorkoutSessionLocationTypeIndoor  HKWorkoutSessionLocationType = 2
 	HKWorkoutSessionLocationTypeOutdoor HKWorkoutSessionLocationType = 3
 )
 
@@ -2178,11 +2202,11 @@ type HKWorkoutSessionState int64
 
 const (
 	HKWorkoutSessionStateNotStarted HKWorkoutSessionState = 1
-	HKWorkoutSessionStateRunning HKWorkoutSessionState = 2
-	HKWorkoutSessionStateEnded HKWorkoutSessionState = 3
-	HKWorkoutSessionStatePaused HKWorkoutSessionState = 4
-	HKWorkoutSessionStatePrepared HKWorkoutSessionState = 5
-	HKWorkoutSessionStateStopped HKWorkoutSessionState = 6
+	HKWorkoutSessionStateRunning    HKWorkoutSessionState = 2
+	HKWorkoutSessionStateEnded      HKWorkoutSessionState = 3
+	HKWorkoutSessionStatePaused     HKWorkoutSessionState = 4
+	HKWorkoutSessionStatePrepared   HKWorkoutSessionState = 5
+	HKWorkoutSessionStateStopped    HKWorkoutSessionState = 6
 )
 
 func (e HKWorkoutSessionState) String() string {
@@ -2207,7 +2231,7 @@ func (e HKWorkoutSessionState) String() string {
 type HKWorkoutSessionType int64
 
 const (
-	HKWorkoutSessionTypePrimary HKWorkoutSessionType = 0
+	HKWorkoutSessionTypePrimary  HKWorkoutSessionType = 0
 	HKWorkoutSessionTypeMirrored HKWorkoutSessionType = 1
 )
 
@@ -2225,8 +2249,8 @@ func (e HKWorkoutSessionType) String() string {
 type HKWorkoutSwimmingLocationType int64
 
 const (
-	HKWorkoutSwimmingLocationTypeUnknown HKWorkoutSwimmingLocationType = 0
-	HKWorkoutSwimmingLocationTypePool HKWorkoutSwimmingLocationType = 1
+	HKWorkoutSwimmingLocationTypeUnknown   HKWorkoutSwimmingLocationType = 0
+	HKWorkoutSwimmingLocationTypePool      HKWorkoutSwimmingLocationType = 1
 	HKWorkoutSwimmingLocationTypeOpenWater HKWorkoutSwimmingLocationType = 2
 )
 
@@ -2247,7 +2271,7 @@ func (e HKWorkoutSwimmingLocationType) String() string {
 type MDLabelDomain int64
 
 const (
-	KMDLabelUserDomain MDLabelDomain = 0
+	KMDLabelUserDomain  MDLabelDomain = 0
 	KMDLabelLocalDomain MDLabelDomain = 1
 )
 
@@ -2265,8 +2289,8 @@ func (e MDLabelDomain) String() string {
 type MDQueryOptionFlags int64
 
 const (
-	KMDQuerySynchronous MDQueryOptionFlags = 1
-	KMDQueryWantsUpdates MDQueryOptionFlags = 4
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
 	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
 )
 
@@ -2303,8 +2327,8 @@ type Acl_entry_id_t int64
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
-	ACL_NEXT_ENTRY Acl_entry_id_t = -1
-	ACL_LAST_ENTRY Acl_entry_id_t = -2
+	ACL_NEXT_ENTRY  Acl_entry_id_t = -1
+	ACL_LAST_ENTRY  Acl_entry_id_t = -2
 )
 
 func (e Acl_entry_id_t) String() string {
@@ -2323,13 +2347,13 @@ func (e Acl_entry_id_t) String() string {
 type Acl_flag_t int64
 
 const (
-	ACL_FLAG_DEFER_INHERIT Acl_flag_t = 1
-	ACL_FLAG_NO_INHERIT Acl_flag_t = 131072
-	ACL_ENTRY_INHERITED Acl_flag_t = 16
-	ACL_ENTRY_FILE_INHERIT Acl_flag_t = 32
+	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
+	ACL_FLAG_NO_INHERIT         Acl_flag_t = 131072
+	ACL_ENTRY_INHERITED         Acl_flag_t = 16
+	ACL_ENTRY_FILE_INHERIT      Acl_flag_t = 32
 	ACL_ENTRY_DIRECTORY_INHERIT Acl_flag_t = 64
-	ACL_ENTRY_LIMIT_INHERIT Acl_flag_t = 128
-	ACL_ENTRY_ONLY_INHERIT Acl_flag_t = 256
+	ACL_ENTRY_LIMIT_INHERIT     Acl_flag_t = 128
+	ACL_ENTRY_ONLY_INHERIT      Acl_flag_t = 256
 )
 
 func (e Acl_flag_t) String() string {
@@ -2356,24 +2380,24 @@ func (e Acl_flag_t) String() string {
 type Acl_perm_t int64
 
 const (
-	ACL_READ_DATA Acl_perm_t = 2
-	ACL_LIST_DIRECTORY Acl_perm_t = 2
-	ACL_WRITE_DATA Acl_perm_t = 4
-	ACL_ADD_FILE Acl_perm_t = 4
-	ACL_EXECUTE Acl_perm_t = 8
-	ACL_SEARCH Acl_perm_t = 8
-	ACL_DELETE Acl_perm_t = 16
-	ACL_APPEND_DATA Acl_perm_t = 32
-	ACL_ADD_SUBDIRECTORY Acl_perm_t = 32
-	ACL_DELETE_CHILD Acl_perm_t = 64
-	ACL_READ_ATTRIBUTES Acl_perm_t = 128
-	ACL_WRITE_ATTRIBUTES Acl_perm_t = 256
-	ACL_READ_EXTATTRIBUTES Acl_perm_t = 512
+	ACL_READ_DATA           Acl_perm_t = 2
+	ACL_LIST_DIRECTORY      Acl_perm_t = 2
+	ACL_WRITE_DATA          Acl_perm_t = 4
+	ACL_ADD_FILE            Acl_perm_t = 4
+	ACL_EXECUTE             Acl_perm_t = 8
+	ACL_SEARCH              Acl_perm_t = 8
+	ACL_DELETE              Acl_perm_t = 16
+	ACL_APPEND_DATA         Acl_perm_t = 32
+	ACL_ADD_SUBDIRECTORY    Acl_perm_t = 32
+	ACL_DELETE_CHILD        Acl_perm_t = 64
+	ACL_READ_ATTRIBUTES     Acl_perm_t = 128
+	ACL_WRITE_ATTRIBUTES    Acl_perm_t = 256
+	ACL_READ_EXTATTRIBUTES  Acl_perm_t = 512
 	ACL_WRITE_EXTATTRIBUTES Acl_perm_t = 1024
-	ACL_READ_SECURITY Acl_perm_t = 2048
-	ACL_WRITE_SECURITY Acl_perm_t = 4096
-	ACL_CHANGE_OWNER Acl_perm_t = 8192
-	ACL_SYNCHRONIZE Acl_perm_t = 1048576
+	ACL_READ_SECURITY       Acl_perm_t = 2048
+	ACL_WRITE_SECURITY      Acl_perm_t = 4096
+	ACL_CHANGE_OWNER        Acl_perm_t = 8192
+	ACL_SYNCHRONIZE         Acl_perm_t = 1048576
 )
 
 func (e Acl_perm_t) String() string {
@@ -2414,9 +2438,9 @@ func (e Acl_perm_t) String() string {
 type Acl_tag_t int64
 
 const (
-	ACL_UNDEFINED_TAG Acl_tag_t = 0
+	ACL_UNDEFINED_TAG  Acl_tag_t = 0
 	ACL_EXTENDED_ALLOW Acl_tag_t = 1
-	ACL_EXTENDED_DENY Acl_tag_t = 2
+	ACL_EXTENDED_DENY  Acl_tag_t = 2
 )
 
 func (e Acl_tag_t) String() string {
@@ -2436,12 +2460,12 @@ type Acl_type_t int64
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
-	ACL_TYPE_ACCESS Acl_type_t = 0
-	ACL_TYPE_DEFAULT Acl_type_t = 1
-	ACL_TYPE_AFS Acl_type_t = 2
-	ACL_TYPE_CODA Acl_type_t = 3
-	ACL_TYPE_NTFS Acl_type_t = 4
-	ACL_TYPE_NWFS Acl_type_t = 5
+	ACL_TYPE_ACCESS   Acl_type_t = 0
+	ACL_TYPE_DEFAULT  Acl_type_t = 1
+	ACL_TYPE_AFS      Acl_type_t = 2
+	ACL_TYPE_CODA     Acl_type_t = 3
+	ACL_TYPE_NTFS     Acl_type_t = 4
+	ACL_TYPE_NWFS     Acl_type_t = 5
 )
 
 func (e Acl_type_t) String() string {
@@ -2468,14 +2492,14 @@ func (e Acl_type_t) String() string {
 type Clockid_t int64
 
 const (
-	_CLOCK_REALTIME Clockid_t = 0
-	_CLOCK_MONOTONIC Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW Clockid_t = 4
+	_CLOCK_REALTIME             Clockid_t = 0
+	_CLOCK_MONOTONIC            Clockid_t = 6
+	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
 	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID Clockid_t = 16
+	_CLOCK_UPTIME_RAW           Clockid_t = 8
+	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
+	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
+	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
 )
 
 func (e Clockid_t) String() string {
@@ -2504,9 +2528,9 @@ func (e Clockid_t) String() string {
 type Dispatch_autorelease_frequency_t uint64
 
 const (
-	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT Dispatch_autorelease_frequency_t = 0
+	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT   Dispatch_autorelease_frequency_t = 0
 	DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM Dispatch_autorelease_frequency_t = 1
-	DISPATCH_AUTORELEASE_FREQUENCY_NEVER Dispatch_autorelease_frequency_t = 2
+	DISPATCH_AUTORELEASE_FREQUENCY_NEVER     Dispatch_autorelease_frequency_t = 2
 )
 
 func (e Dispatch_autorelease_frequency_t) String() string {
@@ -2525,36 +2549,50 @@ func (e Dispatch_autorelease_frequency_t) String() string {
 type Dispatch_block_flags_t uint64
 
 const (
-	DISPATCH_BLOCK_BARRIER Dispatch_block_flags_t = 1
-	DISPATCH_BLOCK_DETACHED Dispatch_block_flags_t = 2
-	DISPATCH_BLOCK_ASSIGN_CURRENT Dispatch_block_flags_t = 4
-	DISPATCH_BLOCK_NO_QOS_CLASS Dispatch_block_flags_t = 8
+	DISPATCH_BLOCK_BARRIER           Dispatch_block_flags_t = 1
+	DISPATCH_BLOCK_DETACHED          Dispatch_block_flags_t = 2
+	DISPATCH_BLOCK_ASSIGN_CURRENT    Dispatch_block_flags_t = 4
+	DISPATCH_BLOCK_NO_QOS_CLASS      Dispatch_block_flags_t = 8
 	DISPATCH_BLOCK_INHERIT_QOS_CLASS Dispatch_block_flags_t = 16
 	DISPATCH_BLOCK_ENFORCE_QOS_CLASS Dispatch_block_flags_t = 32
 )
 
 func (e Dispatch_block_flags_t) String() string {
 	var parts []string
-	if e&DISPATCH_BLOCK_BARRIER != 0 { parts = append(parts, "DISPATCH_BLOCK_BARRIER") }
-	if e&DISPATCH_BLOCK_DETACHED != 0 { parts = append(parts, "DISPATCH_BLOCK_DETACHED") }
-	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 { parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT") }
-	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS") }
-	if len(parts) == 0 { return "0" }
+	if e&DISPATCH_BLOCK_BARRIER != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_BARRIER")
+	}
+	if e&DISPATCH_BLOCK_DETACHED != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_DETACHED")
+	}
+	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT")
+	}
+	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Filesec_property_t int64
 
 const (
-	FILESEC_OWNER Filesec_property_t = 1
-	FILESEC_GROUP Filesec_property_t = 2
-	FILESEC_UUID Filesec_property_t = 3
-	FILESEC_MODE Filesec_property_t = 4
-	FILESEC_ACL Filesec_property_t = 5
-	FILESEC_GRPUUID Filesec_property_t = 6
-	FILESEC_ACL_RAW Filesec_property_t = 100
+	FILESEC_OWNER         Filesec_property_t = 1
+	FILESEC_GROUP         Filesec_property_t = 2
+	FILESEC_UUID          Filesec_property_t = 3
+	FILESEC_MODE          Filesec_property_t = 4
+	FILESEC_ACL           Filesec_property_t = 5
+	FILESEC_GRPUUID       Filesec_property_t = 6
+	FILESEC_ACL_RAW       Filesec_property_t = 100
 	FILESEC_ACL_ALLOCSIZE Filesec_property_t = 101
 )
 
@@ -2584,8 +2622,8 @@ func (e Filesec_property_t) String() string {
 type Idtype_t int64
 
 const (
-	P_ALL Idtype_t = 0
-	P_PID Idtype_t = 1
+	P_ALL  Idtype_t = 0
+	P_PID  Idtype_t = 1
 	P_PGID Idtype_t = 2
 )
 
@@ -2605,62 +2643,62 @@ func (e Idtype_t) String() string {
 type Ipc_info_object_type_t int64
 
 const (
-	IPC_OTYPE_NONE Ipc_info_object_type_t = 0
-	IPC_OTYPE_THREAD_CONTROL Ipc_info_object_type_t = 1
-	IPC_OTYPE_TASK_CONTROL Ipc_info_object_type_t = 2
-	IPC_OTYPE_HOST Ipc_info_object_type_t = 3
-	IPC_OTYPE_HOST_PRIV Ipc_info_object_type_t = 4
-	IPC_OTYPE_PROCESSOR Ipc_info_object_type_t = 5
-	IPC_OTYPE_PROCESSOR_SET Ipc_info_object_type_t = 6
-	IPC_OTYPE_PROCESSOR_SET_NAME Ipc_info_object_type_t = 7
-	IPC_OTYPE_TIMER Ipc_info_object_type_t = 8
-	IPC_OTYPE_PORT_SUBST_ONCE Ipc_info_object_type_t = 9
-	IPC_OTYPE_MIG Ipc_info_object_type_t = 10
-	IPC_OTYPE_MEMORY_OBJECT Ipc_info_object_type_t = 11
-	IPC_OTYPE_XMM_PAGER Ipc_info_object_type_t = 12
-	IPC_OTYPE_XMM_KERNEL Ipc_info_object_type_t = 13
-	IPC_OTYPE_XMM_REPLY Ipc_info_object_type_t = 14
-	IPC_OTYPE_UND_REPLY Ipc_info_object_type_t = 15
-	IPC_OTYPE_HOST_NOTIFY Ipc_info_object_type_t = 16
-	IPC_OTYPE_HOST_SECURITY Ipc_info_object_type_t = 17
-	IPC_OTYPE_LEDGER Ipc_info_object_type_t = 18
-	IPC_OTYPE_MAIN_DEVICE Ipc_info_object_type_t = 19
-	IPC_OTYPE_TASK_NAME Ipc_info_object_type_t = 20
-	IPC_OTYPE_SUBSYSTEM Ipc_info_object_type_t = 21
-	IPC_OTYPE_IO_DONE_QUEUE Ipc_info_object_type_t = 22
-	IPC_OTYPE_SEMAPHORE Ipc_info_object_type_t = 23
-	IPC_OTYPE_LOCK_SET Ipc_info_object_type_t = 24
-	IPC_OTYPE_CLOCK Ipc_info_object_type_t = 25
-	IPC_OTYPE_CLOCK_CTRL Ipc_info_object_type_t = 26
-	IPC_OTYPE_IOKIT_IDENT Ipc_info_object_type_t = 27
-	IPC_OTYPE_NAMED_ENTRY Ipc_info_object_type_t = 28
-	IPC_OTYPE_IOKIT_CONNECT Ipc_info_object_type_t = 29
-	IPC_OTYPE_IOKIT_OBJECT Ipc_info_object_type_t = 30
-	IPC_OTYPE_UPL Ipc_info_object_type_t = 31
-	IPC_OTYPE_MEM_OBJ_CONTROL Ipc_info_object_type_t = 32
-	IPC_OTYPE_AU_SESSIONPORT Ipc_info_object_type_t = 33
-	IPC_OTYPE_FILEPORT Ipc_info_object_type_t = 34
-	IPC_OTYPE_LABELH Ipc_info_object_type_t = 35
-	IPC_OTYPE_TASK_RESUME Ipc_info_object_type_t = 36
-	IPC_OTYPE_VOUCHER Ipc_info_object_type_t = 37
+	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
+	IPC_OTYPE_THREAD_CONTROL       Ipc_info_object_type_t = 1
+	IPC_OTYPE_TASK_CONTROL         Ipc_info_object_type_t = 2
+	IPC_OTYPE_HOST                 Ipc_info_object_type_t = 3
+	IPC_OTYPE_HOST_PRIV            Ipc_info_object_type_t = 4
+	IPC_OTYPE_PROCESSOR            Ipc_info_object_type_t = 5
+	IPC_OTYPE_PROCESSOR_SET        Ipc_info_object_type_t = 6
+	IPC_OTYPE_PROCESSOR_SET_NAME   Ipc_info_object_type_t = 7
+	IPC_OTYPE_TIMER                Ipc_info_object_type_t = 8
+	IPC_OTYPE_PORT_SUBST_ONCE      Ipc_info_object_type_t = 9
+	IPC_OTYPE_MIG                  Ipc_info_object_type_t = 10
+	IPC_OTYPE_MEMORY_OBJECT        Ipc_info_object_type_t = 11
+	IPC_OTYPE_XMM_PAGER            Ipc_info_object_type_t = 12
+	IPC_OTYPE_XMM_KERNEL           Ipc_info_object_type_t = 13
+	IPC_OTYPE_XMM_REPLY            Ipc_info_object_type_t = 14
+	IPC_OTYPE_UND_REPLY            Ipc_info_object_type_t = 15
+	IPC_OTYPE_HOST_NOTIFY          Ipc_info_object_type_t = 16
+	IPC_OTYPE_HOST_SECURITY        Ipc_info_object_type_t = 17
+	IPC_OTYPE_LEDGER               Ipc_info_object_type_t = 18
+	IPC_OTYPE_MAIN_DEVICE          Ipc_info_object_type_t = 19
+	IPC_OTYPE_TASK_NAME            Ipc_info_object_type_t = 20
+	IPC_OTYPE_SUBSYSTEM            Ipc_info_object_type_t = 21
+	IPC_OTYPE_IO_DONE_QUEUE        Ipc_info_object_type_t = 22
+	IPC_OTYPE_SEMAPHORE            Ipc_info_object_type_t = 23
+	IPC_OTYPE_LOCK_SET             Ipc_info_object_type_t = 24
+	IPC_OTYPE_CLOCK                Ipc_info_object_type_t = 25
+	IPC_OTYPE_CLOCK_CTRL           Ipc_info_object_type_t = 26
+	IPC_OTYPE_IOKIT_IDENT          Ipc_info_object_type_t = 27
+	IPC_OTYPE_NAMED_ENTRY          Ipc_info_object_type_t = 28
+	IPC_OTYPE_IOKIT_CONNECT        Ipc_info_object_type_t = 29
+	IPC_OTYPE_IOKIT_OBJECT         Ipc_info_object_type_t = 30
+	IPC_OTYPE_UPL                  Ipc_info_object_type_t = 31
+	IPC_OTYPE_MEM_OBJ_CONTROL      Ipc_info_object_type_t = 32
+	IPC_OTYPE_AU_SESSIONPORT       Ipc_info_object_type_t = 33
+	IPC_OTYPE_FILEPORT             Ipc_info_object_type_t = 34
+	IPC_OTYPE_LABELH               Ipc_info_object_type_t = 35
+	IPC_OTYPE_TASK_RESUME          Ipc_info_object_type_t = 36
+	IPC_OTYPE_VOUCHER              Ipc_info_object_type_t = 37
 	IPC_OTYPE_VOUCHER_ATTR_CONTROL Ipc_info_object_type_t = 38
-	IPC_OTYPE_WORK_INTERVAL Ipc_info_object_type_t = 39
-	IPC_OTYPE_UX_HANDLER Ipc_info_object_type_t = 40
-	IPC_OTYPE_UEXT_OBJECT Ipc_info_object_type_t = 41
-	IPC_OTYPE_ARCADE_REG Ipc_info_object_type_t = 42
-	IPC_OTYPE_EVENTLINK Ipc_info_object_type_t = 43
-	IPC_OTYPE_TASK_INSPECT Ipc_info_object_type_t = 44
-	IPC_OTYPE_TASK_READ Ipc_info_object_type_t = 45
-	IPC_OTYPE_THREAD_INSPECT Ipc_info_object_type_t = 46
-	IPC_OTYPE_THREAD_READ Ipc_info_object_type_t = 47
-	IPC_OTYPE_SUID_CRED Ipc_info_object_type_t = 48
-	IPC_OTYPE_HYPERVISOR Ipc_info_object_type_t = 49
-	IPC_OTYPE_TASK_ID_TOKEN Ipc_info_object_type_t = 50
-	IPC_OTYPE_TASK_FATAL Ipc_info_object_type_t = 51
-	IPC_OTYPE_KCDATA Ipc_info_object_type_t = 52
-	IPC_OTYPE_EXCLAVES_RESOURCE Ipc_info_object_type_t = 53
-	IPC_OTYPE_THREAD_RESUME Ipc_info_object_type_t = 54
-	IPC_OTYPE_UNKNOWN Ipc_info_object_type_t = 4294967295
+	IPC_OTYPE_WORK_INTERVAL        Ipc_info_object_type_t = 39
+	IPC_OTYPE_UX_HANDLER           Ipc_info_object_type_t = 40
+	IPC_OTYPE_UEXT_OBJECT          Ipc_info_object_type_t = 41
+	IPC_OTYPE_ARCADE_REG           Ipc_info_object_type_t = 42
+	IPC_OTYPE_EVENTLINK            Ipc_info_object_type_t = 43
+	IPC_OTYPE_TASK_INSPECT         Ipc_info_object_type_t = 44
+	IPC_OTYPE_TASK_READ            Ipc_info_object_type_t = 45
+	IPC_OTYPE_THREAD_INSPECT       Ipc_info_object_type_t = 46
+	IPC_OTYPE_THREAD_READ          Ipc_info_object_type_t = 47
+	IPC_OTYPE_SUID_CRED            Ipc_info_object_type_t = 48
+	IPC_OTYPE_HYPERVISOR           Ipc_info_object_type_t = 49
+	IPC_OTYPE_TASK_ID_TOKEN        Ipc_info_object_type_t = 50
+	IPC_OTYPE_TASK_FATAL           Ipc_info_object_type_t = 51
+	IPC_OTYPE_KCDATA               Ipc_info_object_type_t = 52
+	IPC_OTYPE_EXCLAVES_RESOURCE    Ipc_info_object_type_t = 53
+	IPC_OTYPE_THREAD_RESUME        Ipc_info_object_type_t = 54
+	IPC_OTYPE_UNKNOWN              Ipc_info_object_type_t = 4294967295
 )
 
 func (e Ipc_info_object_type_t) String() string {
@@ -2786,15 +2824,15 @@ type Launch_data_type_t int64
 
 const (
 	LAUNCH_DATA_DICTIONARY Launch_data_type_t = 1
-	LAUNCH_DATA_ARRAY Launch_data_type_t = 2
-	LAUNCH_DATA_FD Launch_data_type_t = 3
-	LAUNCH_DATA_INTEGER Launch_data_type_t = 4
-	LAUNCH_DATA_REAL Launch_data_type_t = 5
-	LAUNCH_DATA_BOOL Launch_data_type_t = 6
-	LAUNCH_DATA_STRING Launch_data_type_t = 7
-	LAUNCH_DATA_OPAQUE Launch_data_type_t = 8
-	LAUNCH_DATA_ERRNO Launch_data_type_t = 9
-	LAUNCH_DATA_MACHPORT Launch_data_type_t = 10
+	LAUNCH_DATA_ARRAY      Launch_data_type_t = 2
+	LAUNCH_DATA_FD         Launch_data_type_t = 3
+	LAUNCH_DATA_INTEGER    Launch_data_type_t = 4
+	LAUNCH_DATA_REAL       Launch_data_type_t = 5
+	LAUNCH_DATA_BOOL       Launch_data_type_t = 6
+	LAUNCH_DATA_STRING     Launch_data_type_t = 7
+	LAUNCH_DATA_OPAQUE     Launch_data_type_t = 8
+	LAUNCH_DATA_ERRNO      Launch_data_type_t = 9
+	LAUNCH_DATA_MACHPORT   Launch_data_type_t = 10
 )
 
 func (e Launch_data_type_t) String() string {
@@ -2832,7 +2870,9 @@ const (
 
 func (e Mach_vm_range_flags_t) String() string {
 	var parts []string
-	if len(parts) == 0 { return "0" }
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -2840,7 +2880,7 @@ type Mach_vm_range_flavor_t int64
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
-	MACH_VM_RANGE_FLAVOR_V1 Mach_vm_range_flavor_t = 1
+	MACH_VM_RANGE_FLAVOR_V1      Mach_vm_range_flavor_t = 1
 )
 
 func (e Mach_vm_range_flavor_t) String() string {
@@ -2858,8 +2898,8 @@ type Mach_vm_range_tag_t int64
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
-	MACH_VM_RANGE_DATA Mach_vm_range_tag_t = 1
-	MACH_VM_RANGE_FIXED Mach_vm_range_tag_t = 2
+	MACH_VM_RANGE_DATA    Mach_vm_range_tag_t = 1
+	MACH_VM_RANGE_FIXED   Mach_vm_range_tag_t = 2
 )
 
 func (e Mach_vm_range_tag_t) String() string {
@@ -2878,26 +2918,42 @@ func (e Mach_vm_range_tag_t) String() string {
 type Mpo_flags_t int64
 
 const (
-	MPO_PORT Mpo_flags_t = 0
-	MPO_SERVICE_PORT Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT Mpo_flags_t = 2048
-	MPO_REPLY_PORT Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT Mpo_flags_t = 32768
+	MPO_PORT                            Mpo_flags_t = 0
+	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
+	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
+	MPO_REPLY_PORT                      Mpo_flags_t = 4096
+	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
+	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
+	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
 	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
 )
 
 func (e Mpo_flags_t) String() string {
 	var parts []string
-	if e&MPO_SERVICE_PORT != 0 { parts = append(parts, "MPO_SERVICE_PORT") }
-	if e&MPO_CONNECTION_PORT != 0 { parts = append(parts, "MPO_CONNECTION_PORT") }
-	if e&MPO_REPLY_PORT != 0 { parts = append(parts, "MPO_REPLY_PORT") }
-	if e&MPO_WEAK_REPLY_PORT != 0 { parts = append(parts, "MPO_WEAK_REPLY_PORT") }
-	if e&MPO_NOTIFICATION_PORT != 0 { parts = append(parts, "MPO_NOTIFICATION_PORT") }
-	if e&MPO_EXCEPTION_PORT != 0 { parts = append(parts, "MPO_EXCEPTION_PORT") }
-	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 { parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY") }
-	if len(parts) == 0 { return "0" }
+	if e&MPO_SERVICE_PORT != 0 {
+		parts = append(parts, "MPO_SERVICE_PORT")
+	}
+	if e&MPO_CONNECTION_PORT != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT")
+	}
+	if e&MPO_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_REPLY_PORT")
+	}
+	if e&MPO_WEAK_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_WEAK_REPLY_PORT")
+	}
+	if e&MPO_NOTIFICATION_PORT != 0 {
+		parts = append(parts, "MPO_NOTIFICATION_PORT")
+	}
+	if e&MPO_EXCEPTION_PORT != 0 {
+		parts = append(parts, "MPO_EXCEPTION_PORT")
+	}
+	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -2919,27 +2975,27 @@ func (e Os_clockid_t) String() string {
 type Ptrauth_key int64
 
 const (
-	Ptrauth_key_none Ptrauth_key = -1
-	Ptrauth_key_asia Ptrauth_key = 0
-	Ptrauth_key_asib Ptrauth_key = 1
-	Ptrauth_key_asda Ptrauth_key = 2
-	Ptrauth_key_asdb Ptrauth_key = 3
+	Ptrauth_key_none                     Ptrauth_key = -1
+	Ptrauth_key_asia                     Ptrauth_key = 0
+	Ptrauth_key_asib                     Ptrauth_key = 1
+	Ptrauth_key_asda                     Ptrauth_key = 2
+	Ptrauth_key_asdb                     Ptrauth_key = 3
 	Ptrauth_key_process_independent_code Ptrauth_key = 0
-	Ptrauth_key_process_dependent_code Ptrauth_key = 1
+	Ptrauth_key_process_dependent_code   Ptrauth_key = 1
 	Ptrauth_key_process_independent_data Ptrauth_key = 2
-	Ptrauth_key_process_dependent_data Ptrauth_key = 3
-	Ptrauth_key_return_address Ptrauth_key = 1
-	Ptrauth_key_frame_pointer Ptrauth_key = 3
-	Ptrauth_key_function_pointer Ptrauth_key = 0
-	Ptrauth_key_block_function Ptrauth_key = 0
-	Ptrauth_key_cxx_vtable_pointer Ptrauth_key = 2
-	Ptrauth_key_method_list_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_isa_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_super_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_sel_pointer Ptrauth_key = 3
-	Ptrauth_key_objc_class_ro_pointer Ptrauth_key = 2
+	Ptrauth_key_process_dependent_data   Ptrauth_key = 3
+	Ptrauth_key_return_address           Ptrauth_key = 1
+	Ptrauth_key_frame_pointer            Ptrauth_key = 3
+	Ptrauth_key_function_pointer         Ptrauth_key = 0
+	Ptrauth_key_block_function           Ptrauth_key = 0
+	Ptrauth_key_cxx_vtable_pointer       Ptrauth_key = 2
+	Ptrauth_key_method_list_pointer      Ptrauth_key = 2
+	Ptrauth_key_objc_isa_pointer         Ptrauth_key = 2
+	Ptrauth_key_objc_super_pointer       Ptrauth_key = 2
+	Ptrauth_key_objc_sel_pointer         Ptrauth_key = 3
+	Ptrauth_key_objc_class_ro_pointer    Ptrauth_key = 2
 	Ptrauth_key_block_descriptor_pointer Ptrauth_key = 2
-	Ptrauth_key_init_fini_pointer Ptrauth_key = 0
+	Ptrauth_key_init_fini_pointer        Ptrauth_key = 0
 )
 
 func (e Ptrauth_key) String() string {
@@ -2963,11 +3019,11 @@ type Qos_class_t uint32
 
 const (
 	QOS_CLASS_USER_INTERACTIVE Qos_class_t = 33
-	QOS_CLASS_USER_INITIATED Qos_class_t = 25
-	QOS_CLASS_DEFAULT Qos_class_t = 21
-	QOS_CLASS_UTILITY Qos_class_t = 17
-	QOS_CLASS_BACKGROUND Qos_class_t = 9
-	QOS_CLASS_UNSPECIFIED Qos_class_t = 0
+	QOS_CLASS_USER_INITIATED   Qos_class_t = 25
+	QOS_CLASS_DEFAULT          Qos_class_t = 21
+	QOS_CLASS_UTILITY          Qos_class_t = 17
+	QOS_CLASS_BACKGROUND       Qos_class_t = 9
+	QOS_CLASS_UNSPECIFIED      Qos_class_t = 0
 )
 
 func (e Qos_class_t) String() string {
@@ -2992,22 +3048,22 @@ func (e Qos_class_t) String() string {
 type Virtual_memory_guard_exception_code_t int64
 
 const (
-	KGUARD_EXC_DEALLOC_GAP Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
 )
@@ -3058,34 +3114,47 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 type Xpc_listener_create_flags_t int64
 
 const (
-	XPC_LISTENER_CREATE_NONE Xpc_listener_create_flags_t = 0
-	XPC_LISTENER_CREATE_INACTIVE Xpc_listener_create_flags_t = 1
-	XPC_LISTENER_CREATE_FORCE_MACH Xpc_listener_create_flags_t = 2
+	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
+	XPC_LISTENER_CREATE_INACTIVE         Xpc_listener_create_flags_t = 1
+	XPC_LISTENER_CREATE_FORCE_MACH       Xpc_listener_create_flags_t = 2
 	XPC_LISTENER_CREATE_FORCE_XPCSERVICE Xpc_listener_create_flags_t = 4
 )
 
 func (e Xpc_listener_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_LISTENER_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE") }
-	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH") }
-	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_LISTENER_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Xpc_session_create_flags_t int64
 
 const (
-	XPC_SESSION_CREATE_NONE Xpc_session_create_flags_t = 0
-	XPC_SESSION_CREATE_INACTIVE Xpc_session_create_flags_t = 1
+	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0
+	XPC_SESSION_CREATE_INACTIVE        Xpc_session_create_flags_t = 1
 	XPC_SESSION_CREATE_MACH_PRIVILEGED Xpc_session_create_flags_t = 2
 )
 
 func (e Xpc_session_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_SESSION_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_SESSION_CREATE_INACTIVE") }
-	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 { parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_SESSION_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_INACTIVE")
+	}
+	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
-

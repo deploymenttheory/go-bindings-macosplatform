@@ -102,4 +102,3 @@ type MutableStringable interface {
 }
 
 var _ MutableStringable = (*MutableString)(nil)
-

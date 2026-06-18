@@ -16,7 +16,7 @@ type PHASEDefinition struct {
 }
 
 var (
-	_clsPHASEDefinition = _objcClass("PHASEDefinition")
+	_clsPHASEDefinition           = _objcClass("PHASEDefinition")
 	_pHASEDefinitionSelIdentifier = objc.RegisterName("identifier")
 )
 
@@ -32,7 +32,8 @@ func PHASEDefinitionFromID(id objc.ID) *PHASEDefinition {
 
 func (o *PHASEDefinition) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEDefinitionSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

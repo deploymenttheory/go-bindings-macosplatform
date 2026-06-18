@@ -18,10 +18,10 @@ type VZFileSerialPortAttachment struct {
 }
 
 var (
-	_clsVZFileSerialPortAttachment = _objcClass("VZFileSerialPortAttachment")
+	_clsVZFileSerialPortAttachment                       = _objcClass("VZFileSerialPortAttachment")
 	_vZFileSerialPortAttachmentSelInitWithURLAppendError = objc.RegisterName("initWithURL:append:error:")
-	_vZFileSerialPortAttachmentSelURL = objc.RegisterName("URL")
-	_vZFileSerialPortAttachmentSelAppend = objc.RegisterName("append")
+	_vZFileSerialPortAttachmentSelURL                    = objc.RegisterName("URL")
+	_vZFileSerialPortAttachmentSelAppend                 = objc.RegisterName("append")
 )
 
 func VZFileSerialPortAttachmentFromID(id objc.ID) *VZFileSerialPortAttachment {
@@ -38,7 +38,9 @@ func VZFileSerialPortAttachmentFromID(id objc.ID) *VZFileSerialPortAttachment {
 func (o *VZFileSerialPortAttachment) InitWithURLAppendError(url *foundation.NSURL, shouldAppend bool) (*VZFileSerialPortAttachment, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZFileSerialPortAttachmentSelInitWithURLAppendError, url.Ptr(), shouldAppend, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -48,7 +50,9 @@ func (o *VZFileSerialPortAttachment) InitWithURLAppendError(url *foundation.NSUR
 // @abstract The URL of the file for the attachment on the local file system.
 func (o *VZFileSerialPortAttachment) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZFileSerialPortAttachmentSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -57,4 +61,3 @@ func (o *VZFileSerialPortAttachment) Append() bool {
 	_ret := objc.Send[bool](o.Ptr(), _vZFileSerialPortAttachmentSelAppend)
 	return _ret
 }
-

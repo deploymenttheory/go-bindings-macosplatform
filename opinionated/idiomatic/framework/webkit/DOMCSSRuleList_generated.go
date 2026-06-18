@@ -51,7 +51,9 @@ func (x *DOMCSSRuleList) Length() uint {
 
 func (x *DOMCSSRuleList) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
-func (x *DOMCSSRuleList) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+func (x *DOMCSSRuleList) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMObject.WebScriptObject
+}
 
 // DOMCSSRuleListable is the interface implemented by [DOMCSSRuleList], for mocking and DI.
 type DOMCSSRuleListable interface {
@@ -61,4 +63,3 @@ type DOMCSSRuleListable interface {
 }
 
 var _ DOMCSSRuleListable = (*DOMCSSRuleList)(nil)
-

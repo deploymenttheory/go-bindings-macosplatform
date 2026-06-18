@@ -77,4 +77,3 @@ type CredentialServiceIdentifierable interface {
 }
 
 var _ CredentialServiceIdentifierable = (*CredentialServiceIdentifier)(nil)
-

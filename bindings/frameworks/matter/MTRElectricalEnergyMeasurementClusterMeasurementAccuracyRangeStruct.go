@@ -16,23 +16,23 @@ type MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct struct 
 }
 
 var (
-	_clsMTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct = _objcClass("MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct")
-	_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelRangeMin = objc.RegisterName("rangeMin")
-	_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelSetRangeMin = objc.RegisterName("setRangeMin:")
-	_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelRangeMax = objc.RegisterName("rangeMax")
-	_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelSetRangeMax = objc.RegisterName("setRangeMax:")
-	_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelPercentMax = objc.RegisterName("percentMax")
-	_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelSetPercentMax = objc.RegisterName("setPercentMax:")
-	_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelPercentMin = objc.RegisterName("percentMin")
-	_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelSetPercentMin = objc.RegisterName("setPercentMin:")
-	_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelPercentTypical = objc.RegisterName("percentTypical")
+	_clsMTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct                  = _objcClass("MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct")
+	_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelRangeMin          = objc.RegisterName("rangeMin")
+	_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelSetRangeMin       = objc.RegisterName("setRangeMin:")
+	_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelRangeMax          = objc.RegisterName("rangeMax")
+	_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelSetRangeMax       = objc.RegisterName("setRangeMax:")
+	_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelPercentMax        = objc.RegisterName("percentMax")
+	_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelSetPercentMax     = objc.RegisterName("setPercentMax:")
+	_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelPercentMin        = objc.RegisterName("percentMin")
+	_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelSetPercentMin     = objc.RegisterName("setPercentMin:")
+	_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelPercentTypical    = objc.RegisterName("percentTypical")
 	_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelSetPercentTypical = objc.RegisterName("setPercentTypical:")
-	_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelFixedMax = objc.RegisterName("fixedMax")
-	_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelSetFixedMax = objc.RegisterName("setFixedMax:")
-	_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelFixedMin = objc.RegisterName("fixedMin")
-	_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelSetFixedMin = objc.RegisterName("setFixedMin:")
-	_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelFixedTypical = objc.RegisterName("fixedTypical")
-	_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelSetFixedTypical = objc.RegisterName("setFixedTypical:")
+	_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelFixedMax          = objc.RegisterName("fixedMax")
+	_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelSetFixedMax       = objc.RegisterName("setFixedMax:")
+	_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelFixedMin          = objc.RegisterName("fixedMin")
+	_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelSetFixedMin       = objc.RegisterName("setFixedMin:")
+	_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelFixedTypical      = objc.RegisterName("fixedTypical")
+	_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelSetFixedTypical   = objc.RegisterName("setFixedTypical:")
 )
 
 func MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructFromID(id objc.ID) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct {
@@ -47,7 +47,9 @@ func MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructFromID(i
 
 func (o *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) RangeMin() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelRangeMin)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -57,7 +59,9 @@ func (o *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) Se
 
 func (o *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) RangeMax() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelRangeMax)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -67,7 +71,9 @@ func (o *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) Se
 
 func (o *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) PercentMax() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelPercentMax)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -77,7 +83,9 @@ func (o *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) Se
 
 func (o *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) PercentMin() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelPercentMin)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -87,7 +95,9 @@ func (o *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) Se
 
 func (o *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) PercentTypical() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelPercentTypical)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -97,7 +107,9 @@ func (o *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) Se
 
 func (o *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) FixedMax() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelFixedMax)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -107,7 +119,9 @@ func (o *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) Se
 
 func (o *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) FixedMin() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelFixedMin)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -117,11 +131,12 @@ func (o *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) Se
 
 func (o *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) FixedTypical() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelFixedTypical)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) SetFixedTypical(fixedTypical *foundation.NSNumber) {
 	o.Ptr().Send(_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructSelSetFixedTypical, fixedTypical.Ptr())
 }
-

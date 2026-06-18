@@ -86,4 +86,3 @@ type MDLTransformOp interface {
 	IsInverseOp() bool
 	Name() *foundation.NSString
 }
-

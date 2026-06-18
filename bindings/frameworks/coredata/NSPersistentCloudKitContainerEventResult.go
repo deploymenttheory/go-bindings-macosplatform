@@ -15,8 +15,8 @@ type NSPersistentCloudKitContainerEventResult struct {
 }
 
 var (
-	_clsNSPersistentCloudKitContainerEventResult = _objcClass("NSPersistentCloudKitContainerEventResult")
-	_nSPersistentCloudKitContainerEventResultSelResult = objc.RegisterName("result")
+	_clsNSPersistentCloudKitContainerEventResult           = _objcClass("NSPersistentCloudKitContainerEventResult")
+	_nSPersistentCloudKitContainerEventResultSelResult     = objc.RegisterName("result")
 	_nSPersistentCloudKitContainerEventResultSelResultType = objc.RegisterName("resultType")
 )
 
@@ -39,4 +39,3 @@ func (o *NSPersistentCloudKitContainerEventResult) ResultType() NSPersistentClou
 	_ret := objc.Send[NSPersistentCloudKitContainerEventResultType](o.Ptr(), _nSPersistentCloudKitContainerEventResultSelResultType)
 	return _ret
 }
-

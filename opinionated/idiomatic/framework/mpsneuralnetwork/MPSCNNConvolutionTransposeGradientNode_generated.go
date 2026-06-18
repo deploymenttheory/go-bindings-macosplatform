@@ -16,7 +16,9 @@ type CNNConvolutionTransposeGradientNode struct {
 }
 
 // Unwrap returns the underlying [raw.MPSCNNConvolutionTransposeGradientNode].
-func (x *CNNConvolutionTransposeGradientNode) Unwrap() *raw.MPSCNNConvolutionTransposeGradientNode { return x.inner }
+func (x *CNNConvolutionTransposeGradientNode) Unwrap() *raw.MPSCNNConvolutionTransposeGradientNode {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -49,11 +51,17 @@ func (x *CNNConvolutionTransposeGradientNode) WithLabel(label string) *CNNConvol
 	return x
 }
 
-func (x *CNNConvolutionTransposeGradientNode) asCNNConvolutionGradientNode() *raw.MPSCNNConvolutionGradientNode { return &x.inner.MPSCNNConvolutionGradientNode }
+func (x *CNNConvolutionTransposeGradientNode) asCNNConvolutionGradientNode() *raw.MPSCNNConvolutionGradientNode {
+	return &x.inner.MPSCNNConvolutionGradientNode
+}
 
-func (x *CNNConvolutionTransposeGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode { return &x.inner.MPSCNNConvolutionGradientNode.MPSNNGradientFilterNode }
+func (x *CNNConvolutionTransposeGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode {
+	return &x.inner.MPSCNNConvolutionGradientNode.MPSNNGradientFilterNode
+}
 
-func (x *CNNConvolutionTransposeGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSCNNConvolutionGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode }
+func (x *CNNConvolutionTransposeGradientNode) asNNFilterNode() *raw.MPSNNFilterNode {
+	return &x.inner.MPSCNNConvolutionGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode
+}
 
 // CNNConvolutionTransposeGradientNodeable is the interface implemented by [CNNConvolutionTransposeGradientNode], for mocking and DI.
 type CNNConvolutionTransposeGradientNodeable interface {
@@ -63,4 +71,3 @@ type CNNConvolutionTransposeGradientNodeable interface {
 }
 
 var _ CNNConvolutionTransposeGradientNodeable = (*CNNConvolutionTransposeGradientNode)(nil)
-

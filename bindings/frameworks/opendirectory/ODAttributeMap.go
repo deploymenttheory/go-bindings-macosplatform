@@ -16,19 +16,19 @@ type ODAttributeMap struct {
 }
 
 var (
-	_clsODAttributeMap = _objcClass("ODAttributeMap")
-	_oDAttributeMapSelAttributeMapWithValue = objc.RegisterName("attributeMapWithValue:")
-	_oDAttributeMapSelAttributeMapWithStaticValue = objc.RegisterName("attributeMapWithStaticValue:")
-	_oDAttributeMapSelSetStaticValue = objc.RegisterName("setStaticValue:")
-	_oDAttributeMapSelSetVariableSubstitution = objc.RegisterName("setVariableSubstitution:")
-	_oDAttributeMapSelCustomQueryFunction = objc.RegisterName("customQueryFunction")
-	_oDAttributeMapSelSetCustomQueryFunction = objc.RegisterName("setCustomQueryFunction:")
-	_oDAttributeMapSelCustomTranslationFunction = objc.RegisterName("customTranslationFunction")
+	_clsODAttributeMap                             = _objcClass("ODAttributeMap")
+	_oDAttributeMapSelAttributeMapWithValue        = objc.RegisterName("attributeMapWithValue:")
+	_oDAttributeMapSelAttributeMapWithStaticValue  = objc.RegisterName("attributeMapWithStaticValue:")
+	_oDAttributeMapSelSetStaticValue               = objc.RegisterName("setStaticValue:")
+	_oDAttributeMapSelSetVariableSubstitution      = objc.RegisterName("setVariableSubstitution:")
+	_oDAttributeMapSelCustomQueryFunction          = objc.RegisterName("customQueryFunction")
+	_oDAttributeMapSelSetCustomQueryFunction       = objc.RegisterName("setCustomQueryFunction:")
+	_oDAttributeMapSelCustomTranslationFunction    = objc.RegisterName("customTranslationFunction")
 	_oDAttributeMapSelSetCustomTranslationFunction = objc.RegisterName("setCustomTranslationFunction:")
-	_oDAttributeMapSelCustomAttributes = objc.RegisterName("customAttributes")
-	_oDAttributeMapSelSetCustomAttributes = objc.RegisterName("setCustomAttributes:")
-	_oDAttributeMapSelValue = objc.RegisterName("value")
-	_oDAttributeMapSelSetValue = objc.RegisterName("setValue:")
+	_oDAttributeMapSelCustomAttributes             = objc.RegisterName("customAttributes")
+	_oDAttributeMapSelSetCustomAttributes          = objc.RegisterName("setCustomAttributes:")
+	_oDAttributeMapSelValue                        = objc.RegisterName("value")
+	_oDAttributeMapSelSetValue                     = objc.RegisterName("setValue:")
 )
 
 func ODAttributeMapFromID(id objc.ID) *ODAttributeMap {
@@ -44,14 +44,18 @@ func ODAttributeMapFromID(id objc.ID) *ODAttributeMap {
 // @method attributeMapWithValue: @abstract Returns an initialized and autoreleased ODAttributeMap object with the given value mapped. @discussion Returns an initialized and autoreleased ODAttributeMap object with the given value mapped.
 func ODAttributeMapAttributeMapWithValue(value *foundation.NSString) *ODAttributeMap {
 	_ret := objc.Send[objc.ID](objc.ID(_clsODAttributeMap), _oDAttributeMapSelAttributeMapWithValue, value.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ODAttributeMapFromID(_ret)
 }
 
 // @method attributeMapWithStaticValue: @abstract Returns an initialized and autoreleased ODAttributeMap object with the given static value. @discussion Returns an initialized and autoreleased ODAttributeMap object with the given static value.
 func ODAttributeMapAttributeMapWithStaticValue(staticValue *foundation.NSString) *ODAttributeMap {
 	_ret := objc.Send[objc.ID](objc.ID(_clsODAttributeMap), _oDAttributeMapSelAttributeMapWithStaticValue, staticValue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ODAttributeMapFromID(_ret)
 }
 
@@ -67,7 +71,9 @@ func (o *ODAttributeMap) SetVariableSubstitution(variableSubstitution *foundatio
 
 func (o *ODAttributeMap) CustomQueryFunction() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDAttributeMapSelCustomQueryFunction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -77,7 +83,9 @@ func (o *ODAttributeMap) SetCustomQueryFunction(customQueryFunction *foundation.
 
 func (o *ODAttributeMap) CustomTranslationFunction() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDAttributeMapSelCustomTranslationFunction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -96,11 +104,12 @@ func (o *ODAttributeMap) SetCustomAttributes(customAttributes *foundation.NSArra
 
 func (o *ODAttributeMap) Value() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDAttributeMapSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *ODAttributeMap) SetValue(value *foundation.NSString) {
 	o.Ptr().Send(_oDAttributeMapSelSetValue, value.Ptr())
 }
-

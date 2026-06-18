@@ -16,7 +16,9 @@ type UserInterfaceCompressionOptions struct {
 }
 
 // Unwrap returns the underlying [raw.NSUserInterfaceCompressionOptions].
-func (x *UserInterfaceCompressionOptions) Unwrap() *raw.NSUserInterfaceCompressionOptions { return x.inner }
+func (x *UserInterfaceCompressionOptions) Unwrap() *raw.NSUserInterfaceCompressionOptions {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -101,4 +103,3 @@ type UserInterfaceCompressionOptionsable interface {
 }
 
 var _ UserInterfaceCompressionOptionsable = (*UserInterfaceCompressionOptions)(nil)
-

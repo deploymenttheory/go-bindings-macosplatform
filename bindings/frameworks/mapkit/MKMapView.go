@@ -20,105 +20,105 @@ type MKMapView struct {
 }
 
 var (
-	_clsMKMapView = _objcClass("MKMapView")
-	_mKMapViewSelSetRegionAnimated = objc.RegisterName("setRegion:animated:")
-	_mKMapViewSelSetCenterCoordinateAnimated = objc.RegisterName("setCenterCoordinate:animated:")
-	_mKMapViewSelRegionThatFits = objc.RegisterName("regionThatFits:")
-	_mKMapViewSelSetVisibleMapRectAnimated = objc.RegisterName("setVisibleMapRect:animated:")
-	_mKMapViewSelMapRectThatFits = objc.RegisterName("mapRectThatFits:")
-	_mKMapViewSelSetVisibleMapRectEdgePaddingAnimated = objc.RegisterName("setVisibleMapRect:edgePadding:animated:")
-	_mKMapViewSelMapRectThatFitsEdgePadding = objc.RegisterName("mapRectThatFits:edgePadding:")
-	_mKMapViewSelSetCameraAnimated = objc.RegisterName("setCamera:animated:")
-	_mKMapViewSelSetCameraZoomRangeAnimated = objc.RegisterName("setCameraZoomRange:animated:")
-	_mKMapViewSelSetCameraBoundaryAnimated = objc.RegisterName("setCameraBoundary:animated:")
-	_mKMapViewSelConvertCoordinateToPointToView = objc.RegisterName("convertCoordinate:toPointToView:")
-	_mKMapViewSelConvertPointToCoordinateFromView = objc.RegisterName("convertPoint:toCoordinateFromView:")
-	_mKMapViewSelConvertRegionToRectToView = objc.RegisterName("convertRegion:toRectToView:")
-	_mKMapViewSelConvertRectToRegionFromView = objc.RegisterName("convertRect:toRegionFromView:")
-	_mKMapViewSelSetUserTrackingModeAnimated = objc.RegisterName("setUserTrackingMode:animated:")
-	_mKMapViewSelAddAnnotation = objc.RegisterName("addAnnotation:")
-	_mKMapViewSelAddAnnotations = objc.RegisterName("addAnnotations:")
-	_mKMapViewSelRemoveAnnotation = objc.RegisterName("removeAnnotation:")
-	_mKMapViewSelRemoveAnnotations = objc.RegisterName("removeAnnotations:")
-	_mKMapViewSelAnnotationsInMapRect = objc.RegisterName("annotationsInMapRect:")
-	_mKMapViewSelViewForAnnotation = objc.RegisterName("viewForAnnotation:")
-	_mKMapViewSelDequeueReusableAnnotationViewWithIdentifier = objc.RegisterName("dequeueReusableAnnotationViewWithIdentifier:")
+	_clsMKMapView                                                         = _objcClass("MKMapView")
+	_mKMapViewSelSetRegionAnimated                                        = objc.RegisterName("setRegion:animated:")
+	_mKMapViewSelSetCenterCoordinateAnimated                              = objc.RegisterName("setCenterCoordinate:animated:")
+	_mKMapViewSelRegionThatFits                                           = objc.RegisterName("regionThatFits:")
+	_mKMapViewSelSetVisibleMapRectAnimated                                = objc.RegisterName("setVisibleMapRect:animated:")
+	_mKMapViewSelMapRectThatFits                                          = objc.RegisterName("mapRectThatFits:")
+	_mKMapViewSelSetVisibleMapRectEdgePaddingAnimated                     = objc.RegisterName("setVisibleMapRect:edgePadding:animated:")
+	_mKMapViewSelMapRectThatFitsEdgePadding                               = objc.RegisterName("mapRectThatFits:edgePadding:")
+	_mKMapViewSelSetCameraAnimated                                        = objc.RegisterName("setCamera:animated:")
+	_mKMapViewSelSetCameraZoomRangeAnimated                               = objc.RegisterName("setCameraZoomRange:animated:")
+	_mKMapViewSelSetCameraBoundaryAnimated                                = objc.RegisterName("setCameraBoundary:animated:")
+	_mKMapViewSelConvertCoordinateToPointToView                           = objc.RegisterName("convertCoordinate:toPointToView:")
+	_mKMapViewSelConvertPointToCoordinateFromView                         = objc.RegisterName("convertPoint:toCoordinateFromView:")
+	_mKMapViewSelConvertRegionToRectToView                                = objc.RegisterName("convertRegion:toRectToView:")
+	_mKMapViewSelConvertRectToRegionFromView                              = objc.RegisterName("convertRect:toRegionFromView:")
+	_mKMapViewSelSetUserTrackingModeAnimated                              = objc.RegisterName("setUserTrackingMode:animated:")
+	_mKMapViewSelAddAnnotation                                            = objc.RegisterName("addAnnotation:")
+	_mKMapViewSelAddAnnotations                                           = objc.RegisterName("addAnnotations:")
+	_mKMapViewSelRemoveAnnotation                                         = objc.RegisterName("removeAnnotation:")
+	_mKMapViewSelRemoveAnnotations                                        = objc.RegisterName("removeAnnotations:")
+	_mKMapViewSelAnnotationsInMapRect                                     = objc.RegisterName("annotationsInMapRect:")
+	_mKMapViewSelViewForAnnotation                                        = objc.RegisterName("viewForAnnotation:")
+	_mKMapViewSelDequeueReusableAnnotationViewWithIdentifier              = objc.RegisterName("dequeueReusableAnnotationViewWithIdentifier:")
 	_mKMapViewSelDequeueReusableAnnotationViewWithIdentifierForAnnotation = objc.RegisterName("dequeueReusableAnnotationViewWithIdentifier:forAnnotation:")
-	_mKMapViewSelRegisterClassForAnnotationViewWithReuseIdentifier = objc.RegisterName("registerClass:forAnnotationViewWithReuseIdentifier:")
-	_mKMapViewSelSelectAnnotationAnimated = objc.RegisterName("selectAnnotation:animated:")
-	_mKMapViewSelDeselectAnnotationAnimated = objc.RegisterName("deselectAnnotation:animated:")
-	_mKMapViewSelShowAnnotationsAnimated = objc.RegisterName("showAnnotations:animated:")
-	_mKMapViewSelDelegate = objc.RegisterName("delegate")
-	_mKMapViewSelSetDelegate = objc.RegisterName("setDelegate:")
-	_mKMapViewSelMapType = objc.RegisterName("mapType")
-	_mKMapViewSelSetMapType = objc.RegisterName("setMapType:")
-	_mKMapViewSelPreferredConfiguration = objc.RegisterName("preferredConfiguration")
-	_mKMapViewSelSetPreferredConfiguration = objc.RegisterName("setPreferredConfiguration:")
-	_mKMapViewSelRegion = objc.RegisterName("region")
-	_mKMapViewSelSetRegion = objc.RegisterName("setRegion:")
-	_mKMapViewSelCenterCoordinate = objc.RegisterName("centerCoordinate")
-	_mKMapViewSelSetCenterCoordinate = objc.RegisterName("setCenterCoordinate:")
-	_mKMapViewSelVisibleMapRect = objc.RegisterName("visibleMapRect")
-	_mKMapViewSelSetVisibleMapRect = objc.RegisterName("setVisibleMapRect:")
-	_mKMapViewSelCamera = objc.RegisterName("camera")
-	_mKMapViewSelSetCamera = objc.RegisterName("setCamera:")
-	_mKMapViewSelCameraZoomRange = objc.RegisterName("cameraZoomRange")
-	_mKMapViewSelSetCameraZoomRange = objc.RegisterName("setCameraZoomRange:")
-	_mKMapViewSelCameraBoundary = objc.RegisterName("cameraBoundary")
-	_mKMapViewSelSetCameraBoundary = objc.RegisterName("setCameraBoundary:")
-	_mKMapViewSelIsZoomEnabled = objc.RegisterName("isZoomEnabled")
-	_mKMapViewSelSetZoomEnabled = objc.RegisterName("setZoomEnabled:")
-	_mKMapViewSelIsScrollEnabled = objc.RegisterName("isScrollEnabled")
-	_mKMapViewSelSetScrollEnabled = objc.RegisterName("setScrollEnabled:")
-	_mKMapViewSelIsRotateEnabled = objc.RegisterName("isRotateEnabled")
-	_mKMapViewSelSetRotateEnabled = objc.RegisterName("setRotateEnabled:")
-	_mKMapViewSelIsPitchEnabled = objc.RegisterName("isPitchEnabled")
-	_mKMapViewSelSetPitchEnabled = objc.RegisterName("setPitchEnabled:")
-	_mKMapViewSelShowsUserTrackingButton = objc.RegisterName("showsUserTrackingButton")
-	_mKMapViewSelSetShowsUserTrackingButton = objc.RegisterName("setShowsUserTrackingButton:")
-	_mKMapViewSelPitchButtonVisibility = objc.RegisterName("pitchButtonVisibility")
-	_mKMapViewSelSetPitchButtonVisibility = objc.RegisterName("setPitchButtonVisibility:")
-	_mKMapViewSelShowsPitchControl = objc.RegisterName("showsPitchControl")
-	_mKMapViewSelSetShowsPitchControl = objc.RegisterName("setShowsPitchControl:")
-	_mKMapViewSelShowsZoomControls = objc.RegisterName("showsZoomControls")
-	_mKMapViewSelSetShowsZoomControls = objc.RegisterName("setShowsZoomControls:")
-	_mKMapViewSelShowsCompass = objc.RegisterName("showsCompass")
-	_mKMapViewSelSetShowsCompass = objc.RegisterName("setShowsCompass:")
-	_mKMapViewSelShowsScale = objc.RegisterName("showsScale")
-	_mKMapViewSelSetShowsScale = objc.RegisterName("setShowsScale:")
-	_mKMapViewSelPointOfInterestFilter = objc.RegisterName("pointOfInterestFilter")
-	_mKMapViewSelSetPointOfInterestFilter = objc.RegisterName("setPointOfInterestFilter:")
-	_mKMapViewSelShowsPointsOfInterest = objc.RegisterName("showsPointsOfInterest")
-	_mKMapViewSelSetShowsPointsOfInterest = objc.RegisterName("setShowsPointsOfInterest:")
-	_mKMapViewSelShowsBuildings = objc.RegisterName("showsBuildings")
-	_mKMapViewSelSetShowsBuildings = objc.RegisterName("setShowsBuildings:")
-	_mKMapViewSelShowsTraffic = objc.RegisterName("showsTraffic")
-	_mKMapViewSelSetShowsTraffic = objc.RegisterName("setShowsTraffic:")
-	_mKMapViewSelShowsUserLocation = objc.RegisterName("showsUserLocation")
-	_mKMapViewSelSetShowsUserLocation = objc.RegisterName("setShowsUserLocation:")
-	_mKMapViewSelUserLocation = objc.RegisterName("userLocation")
-	_mKMapViewSelUserTrackingMode = objc.RegisterName("userTrackingMode")
-	_mKMapViewSelSetUserTrackingMode = objc.RegisterName("setUserTrackingMode:")
-	_mKMapViewSelIsUserLocationVisible = objc.RegisterName("isUserLocationVisible")
-	_mKMapViewSelAnnotations = objc.RegisterName("annotations")
-	_mKMapViewSelSelectedAnnotations = objc.RegisterName("selectedAnnotations")
-	_mKMapViewSelSetSelectedAnnotations = objc.RegisterName("setSelectedAnnotations:")
-	_mKMapViewSelAnnotationVisibleRect = objc.RegisterName("annotationVisibleRect")
-	_mKMapViewSelAddOverlayLevel = objc.RegisterName("addOverlay:level:")
-	_mKMapViewSelAddOverlaysLevel = objc.RegisterName("addOverlays:level:")
-	_mKMapViewSelRemoveOverlay = objc.RegisterName("removeOverlay:")
-	_mKMapViewSelRemoveOverlays = objc.RegisterName("removeOverlays:")
-	_mKMapViewSelInsertOverlayAtIndexLevel = objc.RegisterName("insertOverlay:atIndex:level:")
-	_mKMapViewSelInsertOverlayAboveOverlay = objc.RegisterName("insertOverlay:aboveOverlay:")
-	_mKMapViewSelInsertOverlayBelowOverlay = objc.RegisterName("insertOverlay:belowOverlay:")
-	_mKMapViewSelExchangeOverlayWithOverlay = objc.RegisterName("exchangeOverlay:withOverlay:")
-	_mKMapViewSelOverlaysInLevel = objc.RegisterName("overlaysInLevel:")
-	_mKMapViewSelRendererForOverlay = objc.RegisterName("rendererForOverlay:")
-	_mKMapViewSelAddOverlay = objc.RegisterName("addOverlay:")
-	_mKMapViewSelAddOverlays = objc.RegisterName("addOverlays:")
-	_mKMapViewSelInsertOverlayAtIndex = objc.RegisterName("insertOverlay:atIndex:")
-	_mKMapViewSelExchangeOverlayAtIndexWithOverlayAtIndex = objc.RegisterName("exchangeOverlayAtIndex:withOverlayAtIndex:")
-	_mKMapViewSelOverlays = objc.RegisterName("overlays")
+	_mKMapViewSelRegisterClassForAnnotationViewWithReuseIdentifier        = objc.RegisterName("registerClass:forAnnotationViewWithReuseIdentifier:")
+	_mKMapViewSelSelectAnnotationAnimated                                 = objc.RegisterName("selectAnnotation:animated:")
+	_mKMapViewSelDeselectAnnotationAnimated                               = objc.RegisterName("deselectAnnotation:animated:")
+	_mKMapViewSelShowAnnotationsAnimated                                  = objc.RegisterName("showAnnotations:animated:")
+	_mKMapViewSelDelegate                                                 = objc.RegisterName("delegate")
+	_mKMapViewSelSetDelegate                                              = objc.RegisterName("setDelegate:")
+	_mKMapViewSelMapType                                                  = objc.RegisterName("mapType")
+	_mKMapViewSelSetMapType                                               = objc.RegisterName("setMapType:")
+	_mKMapViewSelPreferredConfiguration                                   = objc.RegisterName("preferredConfiguration")
+	_mKMapViewSelSetPreferredConfiguration                                = objc.RegisterName("setPreferredConfiguration:")
+	_mKMapViewSelRegion                                                   = objc.RegisterName("region")
+	_mKMapViewSelSetRegion                                                = objc.RegisterName("setRegion:")
+	_mKMapViewSelCenterCoordinate                                         = objc.RegisterName("centerCoordinate")
+	_mKMapViewSelSetCenterCoordinate                                      = objc.RegisterName("setCenterCoordinate:")
+	_mKMapViewSelVisibleMapRect                                           = objc.RegisterName("visibleMapRect")
+	_mKMapViewSelSetVisibleMapRect                                        = objc.RegisterName("setVisibleMapRect:")
+	_mKMapViewSelCamera                                                   = objc.RegisterName("camera")
+	_mKMapViewSelSetCamera                                                = objc.RegisterName("setCamera:")
+	_mKMapViewSelCameraZoomRange                                          = objc.RegisterName("cameraZoomRange")
+	_mKMapViewSelSetCameraZoomRange                                       = objc.RegisterName("setCameraZoomRange:")
+	_mKMapViewSelCameraBoundary                                           = objc.RegisterName("cameraBoundary")
+	_mKMapViewSelSetCameraBoundary                                        = objc.RegisterName("setCameraBoundary:")
+	_mKMapViewSelIsZoomEnabled                                            = objc.RegisterName("isZoomEnabled")
+	_mKMapViewSelSetZoomEnabled                                           = objc.RegisterName("setZoomEnabled:")
+	_mKMapViewSelIsScrollEnabled                                          = objc.RegisterName("isScrollEnabled")
+	_mKMapViewSelSetScrollEnabled                                         = objc.RegisterName("setScrollEnabled:")
+	_mKMapViewSelIsRotateEnabled                                          = objc.RegisterName("isRotateEnabled")
+	_mKMapViewSelSetRotateEnabled                                         = objc.RegisterName("setRotateEnabled:")
+	_mKMapViewSelIsPitchEnabled                                           = objc.RegisterName("isPitchEnabled")
+	_mKMapViewSelSetPitchEnabled                                          = objc.RegisterName("setPitchEnabled:")
+	_mKMapViewSelShowsUserTrackingButton                                  = objc.RegisterName("showsUserTrackingButton")
+	_mKMapViewSelSetShowsUserTrackingButton                               = objc.RegisterName("setShowsUserTrackingButton:")
+	_mKMapViewSelPitchButtonVisibility                                    = objc.RegisterName("pitchButtonVisibility")
+	_mKMapViewSelSetPitchButtonVisibility                                 = objc.RegisterName("setPitchButtonVisibility:")
+	_mKMapViewSelShowsPitchControl                                        = objc.RegisterName("showsPitchControl")
+	_mKMapViewSelSetShowsPitchControl                                     = objc.RegisterName("setShowsPitchControl:")
+	_mKMapViewSelShowsZoomControls                                        = objc.RegisterName("showsZoomControls")
+	_mKMapViewSelSetShowsZoomControls                                     = objc.RegisterName("setShowsZoomControls:")
+	_mKMapViewSelShowsCompass                                             = objc.RegisterName("showsCompass")
+	_mKMapViewSelSetShowsCompass                                          = objc.RegisterName("setShowsCompass:")
+	_mKMapViewSelShowsScale                                               = objc.RegisterName("showsScale")
+	_mKMapViewSelSetShowsScale                                            = objc.RegisterName("setShowsScale:")
+	_mKMapViewSelPointOfInterestFilter                                    = objc.RegisterName("pointOfInterestFilter")
+	_mKMapViewSelSetPointOfInterestFilter                                 = objc.RegisterName("setPointOfInterestFilter:")
+	_mKMapViewSelShowsPointsOfInterest                                    = objc.RegisterName("showsPointsOfInterest")
+	_mKMapViewSelSetShowsPointsOfInterest                                 = objc.RegisterName("setShowsPointsOfInterest:")
+	_mKMapViewSelShowsBuildings                                           = objc.RegisterName("showsBuildings")
+	_mKMapViewSelSetShowsBuildings                                        = objc.RegisterName("setShowsBuildings:")
+	_mKMapViewSelShowsTraffic                                             = objc.RegisterName("showsTraffic")
+	_mKMapViewSelSetShowsTraffic                                          = objc.RegisterName("setShowsTraffic:")
+	_mKMapViewSelShowsUserLocation                                        = objc.RegisterName("showsUserLocation")
+	_mKMapViewSelSetShowsUserLocation                                     = objc.RegisterName("setShowsUserLocation:")
+	_mKMapViewSelUserLocation                                             = objc.RegisterName("userLocation")
+	_mKMapViewSelUserTrackingMode                                         = objc.RegisterName("userTrackingMode")
+	_mKMapViewSelSetUserTrackingMode                                      = objc.RegisterName("setUserTrackingMode:")
+	_mKMapViewSelIsUserLocationVisible                                    = objc.RegisterName("isUserLocationVisible")
+	_mKMapViewSelAnnotations                                              = objc.RegisterName("annotations")
+	_mKMapViewSelSelectedAnnotations                                      = objc.RegisterName("selectedAnnotations")
+	_mKMapViewSelSetSelectedAnnotations                                   = objc.RegisterName("setSelectedAnnotations:")
+	_mKMapViewSelAnnotationVisibleRect                                    = objc.RegisterName("annotationVisibleRect")
+	_mKMapViewSelAddOverlayLevel                                          = objc.RegisterName("addOverlay:level:")
+	_mKMapViewSelAddOverlaysLevel                                         = objc.RegisterName("addOverlays:level:")
+	_mKMapViewSelRemoveOverlay                                            = objc.RegisterName("removeOverlay:")
+	_mKMapViewSelRemoveOverlays                                           = objc.RegisterName("removeOverlays:")
+	_mKMapViewSelInsertOverlayAtIndexLevel                                = objc.RegisterName("insertOverlay:atIndex:level:")
+	_mKMapViewSelInsertOverlayAboveOverlay                                = objc.RegisterName("insertOverlay:aboveOverlay:")
+	_mKMapViewSelInsertOverlayBelowOverlay                                = objc.RegisterName("insertOverlay:belowOverlay:")
+	_mKMapViewSelExchangeOverlayWithOverlay                               = objc.RegisterName("exchangeOverlay:withOverlay:")
+	_mKMapViewSelOverlaysInLevel                                          = objc.RegisterName("overlaysInLevel:")
+	_mKMapViewSelRendererForOverlay                                       = objc.RegisterName("rendererForOverlay:")
+	_mKMapViewSelAddOverlay                                               = objc.RegisterName("addOverlay:")
+	_mKMapViewSelAddOverlays                                              = objc.RegisterName("addOverlays:")
+	_mKMapViewSelInsertOverlayAtIndex                                     = objc.RegisterName("insertOverlay:atIndex:")
+	_mKMapViewSelExchangeOverlayAtIndexWithOverlayAtIndex                 = objc.RegisterName("exchangeOverlayAtIndex:withOverlayAtIndex:")
+	_mKMapViewSelOverlays                                                 = objc.RegisterName("overlays")
 )
 
 func MKMapViewFromID(id objc.ID) *MKMapView {
@@ -216,25 +216,33 @@ func (o *MKMapView) RemoveAnnotations(annotations *foundation.NSArray[MKAnnotati
 
 func (o *MKMapView) AnnotationsInMapRect(mapRect MKMapRect) *foundation.NSSet[MKAnnotation] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelAnnotationsInMapRect, mapRect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[MKAnnotation](_ret)
 }
 
 func (o *MKMapView) ViewForAnnotation(annotation MKAnnotation) *MKAnnotationView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelViewForAnnotation, annotation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKAnnotationViewFromID(_ret)
 }
 
 func (o *MKMapView) DequeueReusableAnnotationViewWithIdentifier(identifier *foundation.NSString) *MKAnnotationView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelDequeueReusableAnnotationViewWithIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKAnnotationViewFromID(_ret)
 }
 
 func (o *MKMapView) DequeueReusableAnnotationViewWithIdentifierForAnnotation(identifier *foundation.NSString, annotation MKAnnotation) *MKAnnotationView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelDequeueReusableAnnotationViewWithIdentifierForAnnotation, identifier.Ptr(), annotation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKAnnotationViewFromID(_ret)
 }
 
@@ -276,7 +284,9 @@ func (o *MKMapView) SetMapType(mapType MKMapType) {
 
 func (o *MKMapView) PreferredConfiguration() *MKMapConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelPreferredConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapConfigurationFromID(_ret)
 }
 
@@ -313,7 +323,9 @@ func (o *MKMapView) SetVisibleMapRect(visibleMapRect MKMapRect) {
 
 func (o *MKMapView) Camera() *MKMapCamera {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelCamera)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapCameraFromID(_ret)
 }
 
@@ -323,7 +335,9 @@ func (o *MKMapView) SetCamera(camera *MKMapCamera) {
 
 func (o *MKMapView) CameraZoomRange() *MKMapCameraZoomRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelCameraZoomRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapCameraZoomRangeFromID(_ret)
 }
 
@@ -333,7 +347,9 @@ func (o *MKMapView) SetCameraZoomRange(cameraZoomRange *MKMapCameraZoomRange) {
 
 func (o *MKMapView) CameraBoundary() *MKMapCameraBoundary {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelCameraBoundary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapCameraBoundaryFromID(_ret)
 }
 
@@ -434,7 +450,9 @@ func (o *MKMapView) SetShowsScale(showsScale bool) {
 // Deprecated: Use pointOfInterestFilter on respective MKMapConfiguration
 func (o *MKMapView) PointOfInterestFilter() *MKPointOfInterestFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelPointOfInterestFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPointOfInterestFilterFromID(_ret)
 }
 
@@ -488,7 +506,9 @@ func (o *MKMapView) SetShowsUserLocation(showsUserLocation bool) {
 
 func (o *MKMapView) UserLocation() *MKUserLocation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelUserLocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKUserLocationFromID(_ret)
 }
 
@@ -508,13 +528,17 @@ func (o *MKMapView) IsUserLocationVisible() bool {
 
 func (o *MKMapView) Annotations() *foundation.NSArray[MKAnnotation] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelAnnotations)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MKAnnotation](_ret)
 }
 
 func (o *MKMapView) SelectedAnnotations() *foundation.NSArray[MKAnnotation] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelSelectedAnnotations)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MKAnnotation](_ret)
 }
 
@@ -561,13 +585,17 @@ func (o *MKMapView) ExchangeOverlayWithOverlay(overlay1 MKOverlay, overlay2 MKOv
 
 func (o *MKMapView) OverlaysInLevel(level MKOverlayLevel) *foundation.NSArray[MKOverlay] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelOverlaysInLevel, level)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MKOverlay](_ret)
 }
 
 func (o *MKMapView) RendererForOverlay(overlay MKOverlay) *MKOverlayRenderer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelRendererForOverlay, overlay)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKOverlayRendererFromID(_ret)
 }
 
@@ -589,7 +617,8 @@ func (o *MKMapView) ExchangeOverlayAtIndexWithOverlayAtIndex(index1 uint, index2
 
 func (o *MKMapView) Overlays() *foundation.NSArray[MKOverlay] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelOverlays)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MKOverlay](_ret)
 }
-

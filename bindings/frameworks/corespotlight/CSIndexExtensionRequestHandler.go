@@ -26,4 +26,3 @@ func CSIndexExtensionRequestHandlerFromID(id objc.ID) *CSIndexExtensionRequestHa
 	purego.Track(o)
 	return o
 }
-

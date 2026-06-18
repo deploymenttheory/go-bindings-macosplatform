@@ -18,12 +18,12 @@ type SACrashDetectionManager struct {
 }
 
 var (
-	_clsSACrashDetectionManager = _objcClass("SACrashDetectionManager")
+	_clsSACrashDetectionManager                                          = _objcClass("SACrashDetectionManager")
 	_sACrashDetectionManagerSelRequestAuthorizationWithCompletionHandler = objc.RegisterName("requestAuthorizationWithCompletionHandler:")
-	_sACrashDetectionManagerSelIsAvailable = objc.RegisterName("isAvailable")
-	_sACrashDetectionManagerSelAuthorizationStatus = objc.RegisterName("authorizationStatus")
-	_sACrashDetectionManagerSelDelegate = objc.RegisterName("delegate")
-	_sACrashDetectionManagerSelSetDelegate = objc.RegisterName("setDelegate:")
+	_sACrashDetectionManagerSelIsAvailable                               = objc.RegisterName("isAvailable")
+	_sACrashDetectionManagerSelAuthorizationStatus                       = objc.RegisterName("authorizationStatus")
+	_sACrashDetectionManagerSelDelegate                                  = objc.RegisterName("delegate")
+	_sACrashDetectionManagerSelSetDelegate                               = objc.RegisterName("setDelegate:")
 )
 
 func SACrashDetectionManagerFromID(id objc.ID) *SACrashDetectionManager {
@@ -69,4 +69,3 @@ func (o *SACrashDetectionManager) Delegate() SACrashDetectionDelegate {
 func (o *SACrashDetectionManager) SetDelegate(delegate SACrashDetectionDelegate) {
 	o.Ptr().Send(_sACrashDetectionManagerSelSetDelegate, delegate)
 }
-

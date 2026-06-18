@@ -16,7 +16,9 @@ type CredentialProviderViewController struct {
 }
 
 // Unwrap returns the underlying [raw.ASCredentialProviderViewController].
-func (x *CredentialProviderViewController) Unwrap() *raw.ASCredentialProviderViewController { return x.inner }
+func (x *CredentialProviderViewController) Unwrap() *raw.ASCredentialProviderViewController {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -126,4 +128,3 @@ type CredentialProviderViewControllerable interface {
 }
 
 var _ CredentialProviderViewControllerable = (*CredentialProviderViewController)(nil)
-

@@ -76,4 +76,3 @@ type UserScriptTaskable interface {
 }
 
 var _ UserScriptTaskable = (*UserScriptTask)(nil)
-

@@ -18,19 +18,19 @@ type GKGoal struct {
 }
 
 var (
-	_clsGKGoal = _objcClass("GKGoal")
-	_gKGoalSelGoalToSeekAgent = objc.RegisterName("goalToSeekAgent:")
-	_gKGoalSelGoalToFleeAgent = objc.RegisterName("goalToFleeAgent:")
-	_gKGoalSelGoalToAvoidObstaclesMaxPredictionTime = objc.RegisterName("goalToAvoidObstacles:maxPredictionTime:")
-	_gKGoalSelGoalToAvoidAgentsMaxPredictionTime = objc.RegisterName("goalToAvoidAgents:maxPredictionTime:")
+	_clsGKGoal                                            = _objcClass("GKGoal")
+	_gKGoalSelGoalToSeekAgent                             = objc.RegisterName("goalToSeekAgent:")
+	_gKGoalSelGoalToFleeAgent                             = objc.RegisterName("goalToFleeAgent:")
+	_gKGoalSelGoalToAvoidObstaclesMaxPredictionTime       = objc.RegisterName("goalToAvoidObstacles:maxPredictionTime:")
+	_gKGoalSelGoalToAvoidAgentsMaxPredictionTime          = objc.RegisterName("goalToAvoidAgents:maxPredictionTime:")
 	_gKGoalSelGoalToSeparateFromAgentsMaxDistanceMaxAngle = objc.RegisterName("goalToSeparateFromAgents:maxDistance:maxAngle:")
-	_gKGoalSelGoalToAlignWithAgentsMaxDistanceMaxAngle = objc.RegisterName("goalToAlignWithAgents:maxDistance:maxAngle:")
-	_gKGoalSelGoalToCohereWithAgentsMaxDistanceMaxAngle = objc.RegisterName("goalToCohereWithAgents:maxDistance:maxAngle:")
-	_gKGoalSelGoalToReachTargetSpeed = objc.RegisterName("goalToReachTargetSpeed:")
-	_gKGoalSelGoalToWander = objc.RegisterName("goalToWander:")
-	_gKGoalSelGoalToInterceptAgentMaxPredictionTime = objc.RegisterName("goalToInterceptAgent:maxPredictionTime:")
-	_gKGoalSelGoalToFollowPathMaxPredictionTimeForward = objc.RegisterName("goalToFollowPath:maxPredictionTime:forward:")
-	_gKGoalSelGoalToStayOnPathMaxPredictionTime = objc.RegisterName("goalToStayOnPath:maxPredictionTime:")
+	_gKGoalSelGoalToAlignWithAgentsMaxDistanceMaxAngle    = objc.RegisterName("goalToAlignWithAgents:maxDistance:maxAngle:")
+	_gKGoalSelGoalToCohereWithAgentsMaxDistanceMaxAngle   = objc.RegisterName("goalToCohereWithAgents:maxDistance:maxAngle:")
+	_gKGoalSelGoalToReachTargetSpeed                      = objc.RegisterName("goalToReachTargetSpeed:")
+	_gKGoalSelGoalToWander                                = objc.RegisterName("goalToWander:")
+	_gKGoalSelGoalToInterceptAgentMaxPredictionTime       = objc.RegisterName("goalToInterceptAgent:maxPredictionTime:")
+	_gKGoalSelGoalToFollowPathMaxPredictionTimeForward    = objc.RegisterName("goalToFollowPath:maxPredictionTime:forward:")
+	_gKGoalSelGoalToStayOnPathMaxPredictionTime           = objc.RegisterName("goalToStayOnPath:maxPredictionTime:")
 )
 
 func GKGoalFromID(id objc.ID) *GKGoal {
@@ -46,84 +46,107 @@ func GKGoalFromID(id objc.ID) *GKGoal {
 // Creates a goal to move toward the agent @param agent the agent to seek
 func GKGoalGoalToSeekAgent(agent *GKAgent) *GKGoal {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGoal), _gKGoalSelGoalToSeekAgent, agent.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGoalFromID(_ret)
 }
 
 // Creates a goal to move away from the agent @param agent the agent to flee from
 func GKGoalGoalToFleeAgent(agent *GKAgent) *GKGoal {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGoal), _gKGoalSelGoalToFleeAgent, agent.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGoalFromID(_ret)
 }
 
 // Creates a goal to avoid colliding with a group of agents without taking into account those agents' momentum @param maxPredictionTime how far ahead in the future, in seconds, should we look for potential collisions
 func GKGoalGoalToAvoidObstaclesMaxPredictionTime(obstacles *foundation.NSArray[*GKObstacle], maxPredictionTime float64) *GKGoal {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGoal), _gKGoalSelGoalToAvoidObstaclesMaxPredictionTime, obstacles.Ptr(), maxPredictionTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGoalFromID(_ret)
 }
 
 // Creates a goal to avoid colliding with a group of agents taking into account those agent's momentum @param maxPredictionTime how far ahead in the future, in seconds, should we look for potential collisions
 func GKGoalGoalToAvoidAgentsMaxPredictionTime(agents *foundation.NSArray[*GKAgent], maxPredictionTime float64) *GKGoal {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGoal), _gKGoalSelGoalToAvoidAgentsMaxPredictionTime, agents.Ptr(), maxPredictionTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGoalFromID(_ret)
 }
 
 // Creates a goal that tries to repel this agent away from the other agents and attempts to prevent overlap @param maxDistance the distance between agents before repelling happens @param maxAngle the angle, in radians, between this agent's foward and the vector toward the other agent before the repelling happens
 func GKGoalGoalToSeparateFromAgentsMaxDistanceMaxAngle(agents *foundation.NSArray[*GKAgent], maxDistance float32, maxAngle float32) *GKGoal {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGoal), _gKGoalSelGoalToSeparateFromAgentsMaxDistanceMaxAngle, agents.Ptr(), maxDistance, maxAngle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGoalFromID(_ret)
 }
 
 // Creates a goal to align this agent's orientation with the average orientation of the group of agents. @param maxDistance the distance between agents before alignment happens @param maxAngle the angle, in radians, between this agent's foward and the vector toward the other agent before alignment happens
 func GKGoalGoalToAlignWithAgentsMaxDistanceMaxAngle(agents *foundation.NSArray[*GKAgent], maxDistance float32, maxAngle float32) *GKGoal {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGoal), _gKGoalSelGoalToAlignWithAgentsMaxDistanceMaxAngle, agents.Ptr(), maxDistance, maxAngle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGoalFromID(_ret)
 }
 
 // Creates a goal to seek the average position of the group of agents. @param maxDistance the distance between agents before cohesion happens @param maxAngle the angle between this agent's foward and the vector toward the other agent before cohesion happens
 func GKGoalGoalToCohereWithAgentsMaxDistanceMaxAngle(agents *foundation.NSArray[*GKAgent], maxDistance float32, maxAngle float32) *GKGoal {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGoal), _gKGoalSelGoalToCohereWithAgentsMaxDistanceMaxAngle, agents.Ptr(), maxDistance, maxAngle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGoalFromID(_ret)
 }
 
 // Creates a goal that attempts to change our momentum to reach the target speed @param targetSpeed the target speed
 func GKGoalGoalToReachTargetSpeed(targetSpeed float32) *GKGoal {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGoal), _gKGoalSelGoalToReachTargetSpeed, targetSpeed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGoalFromID(_ret)
 }
 
 // Creates a goal that will make the agent appear to wander, aimlessly moving forward and turning randomly @param speed the speed at which to wander
 func GKGoalGoalToWander(speed float32) *GKGoal {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGoal), _gKGoalSelGoalToWander, speed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGoalFromID(_ret)
 }
 
 // Creates a goal that will attempt to intercept another target agent taking into account that agent's momentum @param target agent to intercept @param maxPredictionTime how far ahead in the future, in seconds, should we look for potential intercepts
 func GKGoalGoalToInterceptAgentMaxPredictionTime(target *GKAgent, maxPredictionTime float64) *GKGoal {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGoal), _gKGoalSelGoalToInterceptAgentMaxPredictionTime, target.Ptr(), maxPredictionTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGoalFromID(_ret)
 }
 
 // Creates a goal that will attempt to follow the given path @param path the path to follow @param maxPredictionTime how far ahead in the future, in seconds, should we look for potential intercepts @param forward direction to follow the path. forward = NO is reverse
 func GKGoalGoalToFollowPathMaxPredictionTimeForward(path *GKPath, maxPredictionTime float64, forward bool) *GKGoal {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGoal), _gKGoalSelGoalToFollowPathMaxPredictionTimeForward, path.Ptr(), maxPredictionTime, forward)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGoalFromID(_ret)
 }
 
 // Creates a goal that will attempt to stay on the given path @param path the path to follow @param maxPredictionTime how far ahead in the future, in seconds, should we look for potential intercepts
 func GKGoalGoalToStayOnPathMaxPredictionTime(path *GKPath, maxPredictionTime float64) *GKGoal {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGoal), _gKGoalSelGoalToStayOnPathMaxPredictionTime, path.Ptr(), maxPredictionTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGoalFromID(_ret)
 }
-

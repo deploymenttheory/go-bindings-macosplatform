@@ -17,4 +17,3 @@ type AccelerationStructureProvider interface {
 type PolygonAccelerationStructureProvider interface {
 	asPolygonAccelerationStructure() *raw.MPSPolygonAccelerationStructure
 }
-

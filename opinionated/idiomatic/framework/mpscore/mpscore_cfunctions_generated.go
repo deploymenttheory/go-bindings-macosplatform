@@ -90,4 +90,3 @@ func MPSStateBatchSynchronize(batch unsafe.Pointer, cmdBuf metal.MTLCommandBuffe
 func BuiltinClz(arg uint) int {
 	return raw.BuiltinClz(arg)
 }
-

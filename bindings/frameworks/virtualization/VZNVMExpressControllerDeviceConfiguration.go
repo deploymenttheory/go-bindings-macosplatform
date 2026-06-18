@@ -15,7 +15,7 @@ type VZNVMExpressControllerDeviceConfiguration struct {
 }
 
 var (
-	_clsVZNVMExpressControllerDeviceConfiguration = _objcClass("VZNVMExpressControllerDeviceConfiguration")
+	_clsVZNVMExpressControllerDeviceConfiguration                   = _objcClass("VZNVMExpressControllerDeviceConfiguration")
 	_vZNVMExpressControllerDeviceConfigurationSelInitWithAttachment = objc.RegisterName("initWithAttachment:")
 )
 
@@ -32,7 +32,8 @@ func VZNVMExpressControllerDeviceConfigurationFromID(id objc.ID) *VZNVMExpressCo
 // @abstract Initialize a VZNVMExpressControllerDeviceConfiguration with a device attachment. @param attachment The storage device attachment. This defines how the virtualized device operates on the host side. @see VZDiskImageStorageDeviceAttachment
 func (o *VZNVMExpressControllerDeviceConfiguration) InitWithAttachment(attachment *VZStorageDeviceAttachment) *VZNVMExpressControllerDeviceConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZNVMExpressControllerDeviceConfigurationSelInitWithAttachment, attachment.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZNVMExpressControllerDeviceConfigurationFromID(_ret)
 }
-

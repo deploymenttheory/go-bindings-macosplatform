@@ -14,8 +14,8 @@ import (
 
 var (
 	_coremediaioLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce       sync.Once
+	_failedSymbols  = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -48,25 +48,53 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("CMIODeviceProcessAVCCommand", func() { purego.RegisterLibFunc(&_fnCMIODeviceProcessAVCCommand, _coremediaioLib, "CMIODeviceProcessAVCCommand") })
-	_register("CMIODeviceProcessRS422Command", func() { purego.RegisterLibFunc(&_fnCMIODeviceProcessRS422Command, _coremediaioLib, "CMIODeviceProcessRS422Command") })
+	_register("CMIODeviceProcessAVCCommand", func() {
+		purego.RegisterLibFunc(&_fnCMIODeviceProcessAVCCommand, _coremediaioLib, "CMIODeviceProcessAVCCommand")
+	})
+	_register("CMIODeviceProcessRS422Command", func() {
+		purego.RegisterLibFunc(&_fnCMIODeviceProcessRS422Command, _coremediaioLib, "CMIODeviceProcessRS422Command")
+	})
 	_register("CMIODeviceStartStream", func() { purego.RegisterLibFunc(&_fnCMIODeviceStartStream, _coremediaioLib, "CMIODeviceStartStream") })
 	_register("CMIODeviceStopStream", func() { purego.RegisterLibFunc(&_fnCMIODeviceStopStream, _coremediaioLib, "CMIODeviceStopStream") })
-	_register("CMIOObjectAddPropertyListener", func() { purego.RegisterLibFunc(&_fnCMIOObjectAddPropertyListener, _coremediaioLib, "CMIOObjectAddPropertyListener") })
-	_register("CMIOObjectAddPropertyListenerBlock", func() { purego.RegisterLibFunc(&_fnCMIOObjectAddPropertyListenerBlock, _coremediaioLib, "CMIOObjectAddPropertyListenerBlock") })
-	_register("CMIOObjectGetPropertyData", func() { purego.RegisterLibFunc(&_fnCMIOObjectGetPropertyData, _coremediaioLib, "CMIOObjectGetPropertyData") })
-	_register("CMIOObjectGetPropertyDataSize", func() { purego.RegisterLibFunc(&_fnCMIOObjectGetPropertyDataSize, _coremediaioLib, "CMIOObjectGetPropertyDataSize") })
+	_register("CMIOObjectAddPropertyListener", func() {
+		purego.RegisterLibFunc(&_fnCMIOObjectAddPropertyListener, _coremediaioLib, "CMIOObjectAddPropertyListener")
+	})
+	_register("CMIOObjectAddPropertyListenerBlock", func() {
+		purego.RegisterLibFunc(&_fnCMIOObjectAddPropertyListenerBlock, _coremediaioLib, "CMIOObjectAddPropertyListenerBlock")
+	})
+	_register("CMIOObjectGetPropertyData", func() {
+		purego.RegisterLibFunc(&_fnCMIOObjectGetPropertyData, _coremediaioLib, "CMIOObjectGetPropertyData")
+	})
+	_register("CMIOObjectGetPropertyDataSize", func() {
+		purego.RegisterLibFunc(&_fnCMIOObjectGetPropertyDataSize, _coremediaioLib, "CMIOObjectGetPropertyDataSize")
+	})
 	_register("CMIOObjectHasProperty", func() { purego.RegisterLibFunc(&_fnCMIOObjectHasProperty, _coremediaioLib, "CMIOObjectHasProperty") })
-	_register("CMIOObjectIsPropertySettable", func() { purego.RegisterLibFunc(&_fnCMIOObjectIsPropertySettable, _coremediaioLib, "CMIOObjectIsPropertySettable") })
-	_register("CMIOObjectRemovePropertyListener", func() { purego.RegisterLibFunc(&_fnCMIOObjectRemovePropertyListener, _coremediaioLib, "CMIOObjectRemovePropertyListener") })
-	_register("CMIOObjectRemovePropertyListenerBlock", func() { purego.RegisterLibFunc(&_fnCMIOObjectRemovePropertyListenerBlock, _coremediaioLib, "CMIOObjectRemovePropertyListenerBlock") })
-	_register("CMIOObjectSetPropertyData", func() { purego.RegisterLibFunc(&_fnCMIOObjectSetPropertyData, _coremediaioLib, "CMIOObjectSetPropertyData") })
+	_register("CMIOObjectIsPropertySettable", func() {
+		purego.RegisterLibFunc(&_fnCMIOObjectIsPropertySettable, _coremediaioLib, "CMIOObjectIsPropertySettable")
+	})
+	_register("CMIOObjectRemovePropertyListener", func() {
+		purego.RegisterLibFunc(&_fnCMIOObjectRemovePropertyListener, _coremediaioLib, "CMIOObjectRemovePropertyListener")
+	})
+	_register("CMIOObjectRemovePropertyListenerBlock", func() {
+		purego.RegisterLibFunc(&_fnCMIOObjectRemovePropertyListenerBlock, _coremediaioLib, "CMIOObjectRemovePropertyListenerBlock")
+	})
+	_register("CMIOObjectSetPropertyData", func() {
+		purego.RegisterLibFunc(&_fnCMIOObjectSetPropertyData, _coremediaioLib, "CMIOObjectSetPropertyData")
+	})
 	_register("CMIOObjectShow", func() { purego.RegisterLibFunc(&_fnCMIOObjectShow, _coremediaioLib, "CMIOObjectShow") })
-	_register("CMIOStreamClockConvertHostTimeToDeviceTime", func() { purego.RegisterLibFunc(&_fnCMIOStreamClockConvertHostTimeToDeviceTime, _coremediaioLib, "CMIOStreamClockConvertHostTimeToDeviceTime") })
+	_register("CMIOStreamClockConvertHostTimeToDeviceTime", func() {
+		purego.RegisterLibFunc(&_fnCMIOStreamClockConvertHostTimeToDeviceTime, _coremediaioLib, "CMIOStreamClockConvertHostTimeToDeviceTime")
+	})
 	_register("CMIOStreamClockCreate", func() { purego.RegisterLibFunc(&_fnCMIOStreamClockCreate, _coremediaioLib, "CMIOStreamClockCreate") })
-	_register("CMIOStreamClockInvalidate", func() { purego.RegisterLibFunc(&_fnCMIOStreamClockInvalidate, _coremediaioLib, "CMIOStreamClockInvalidate") })
-	_register("CMIOStreamClockPostTimingEvent", func() { purego.RegisterLibFunc(&_fnCMIOStreamClockPostTimingEvent, _coremediaioLib, "CMIOStreamClockPostTimingEvent") })
-	_register("CMIOStreamCopyBufferQueue", func() { purego.RegisterLibFunc(&_fnCMIOStreamCopyBufferQueue, _coremediaioLib, "CMIOStreamCopyBufferQueue") })
+	_register("CMIOStreamClockInvalidate", func() {
+		purego.RegisterLibFunc(&_fnCMIOStreamClockInvalidate, _coremediaioLib, "CMIOStreamClockInvalidate")
+	})
+	_register("CMIOStreamClockPostTimingEvent", func() {
+		purego.RegisterLibFunc(&_fnCMIOStreamClockPostTimingEvent, _coremediaioLib, "CMIOStreamClockPostTimingEvent")
+	})
+	_register("CMIOStreamCopyBufferQueue", func() {
+		purego.RegisterLibFunc(&_fnCMIOStreamCopyBufferQueue, _coremediaioLib, "CMIOStreamCopyBufferQueue")
+	})
 	_register("CMIOStreamDeckCueTo", func() { purego.RegisterLibFunc(&_fnCMIOStreamDeckCueTo, _coremediaioLib, "CMIOStreamDeckCueTo") })
 	_register("CMIOStreamDeckJog", func() { purego.RegisterLibFunc(&_fnCMIOStreamDeckJog, _coremediaioLib, "CMIOStreamDeckJog") })
 	_register("CMIOStreamDeckPlay", func() { purego.RegisterLibFunc(&_fnCMIOStreamDeckPlay, _coremediaioLib, "CMIOStreamDeckPlay") })

@@ -18,32 +18,32 @@ type MTRClusterValveConfigurationAndControl struct {
 }
 
 var (
-	_clsMTRClusterValveConfigurationAndControl = _objcClass("MTRClusterValveConfigurationAndControl")
-	_mTRClusterValveConfigurationAndControlSelOpenWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("openWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterValveConfigurationAndControlSelOpenWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("openWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterValveConfigurationAndControlSelCloseWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("closeWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterValveConfigurationAndControlSelCloseWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("closeWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterValveConfigurationAndControlSelReadAttributeOpenDurationWithParams = objc.RegisterName("readAttributeOpenDurationWithParams:")
-	_mTRClusterValveConfigurationAndControlSelReadAttributeDefaultOpenDurationWithParams = objc.RegisterName("readAttributeDefaultOpenDurationWithParams:")
-	_mTRClusterValveConfigurationAndControlSelWriteAttributeDefaultOpenDurationWithValueExpectedValueInterval = objc.RegisterName("writeAttributeDefaultOpenDurationWithValue:expectedValueInterval:")
+	_clsMTRClusterValveConfigurationAndControl                                                                      = _objcClass("MTRClusterValveConfigurationAndControl")
+	_mTRClusterValveConfigurationAndControlSelOpenWithParamsExpectedValuesExpectedValueIntervalCompletion           = objc.RegisterName("openWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterValveConfigurationAndControlSelOpenWithExpectedValuesExpectedValueIntervalCompletion                 = objc.RegisterName("openWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterValveConfigurationAndControlSelCloseWithParamsExpectedValuesExpectedValueIntervalCompletion          = objc.RegisterName("closeWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterValveConfigurationAndControlSelCloseWithExpectedValuesExpectedValueIntervalCompletion                = objc.RegisterName("closeWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterValveConfigurationAndControlSelReadAttributeOpenDurationWithParams                                   = objc.RegisterName("readAttributeOpenDurationWithParams:")
+	_mTRClusterValveConfigurationAndControlSelReadAttributeDefaultOpenDurationWithParams                            = objc.RegisterName("readAttributeDefaultOpenDurationWithParams:")
+	_mTRClusterValveConfigurationAndControlSelWriteAttributeDefaultOpenDurationWithValueExpectedValueInterval       = objc.RegisterName("writeAttributeDefaultOpenDurationWithValue:expectedValueInterval:")
 	_mTRClusterValveConfigurationAndControlSelWriteAttributeDefaultOpenDurationWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeDefaultOpenDurationWithValue:expectedValueInterval:params:")
-	_mTRClusterValveConfigurationAndControlSelReadAttributeAutoCloseTimeWithParams = objc.RegisterName("readAttributeAutoCloseTimeWithParams:")
-	_mTRClusterValveConfigurationAndControlSelReadAttributeRemainingDurationWithParams = objc.RegisterName("readAttributeRemainingDurationWithParams:")
-	_mTRClusterValveConfigurationAndControlSelReadAttributeCurrentStateWithParams = objc.RegisterName("readAttributeCurrentStateWithParams:")
-	_mTRClusterValveConfigurationAndControlSelReadAttributeTargetStateWithParams = objc.RegisterName("readAttributeTargetStateWithParams:")
-	_mTRClusterValveConfigurationAndControlSelReadAttributeCurrentLevelWithParams = objc.RegisterName("readAttributeCurrentLevelWithParams:")
-	_mTRClusterValveConfigurationAndControlSelReadAttributeTargetLevelWithParams = objc.RegisterName("readAttributeTargetLevelWithParams:")
-	_mTRClusterValveConfigurationAndControlSelReadAttributeDefaultOpenLevelWithParams = objc.RegisterName("readAttributeDefaultOpenLevelWithParams:")
-	_mTRClusterValveConfigurationAndControlSelWriteAttributeDefaultOpenLevelWithValueExpectedValueInterval = objc.RegisterName("writeAttributeDefaultOpenLevelWithValue:expectedValueInterval:")
-	_mTRClusterValveConfigurationAndControlSelWriteAttributeDefaultOpenLevelWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeDefaultOpenLevelWithValue:expectedValueInterval:params:")
-	_mTRClusterValveConfigurationAndControlSelReadAttributeValveFaultWithParams = objc.RegisterName("readAttributeValveFaultWithParams:")
-	_mTRClusterValveConfigurationAndControlSelReadAttributeLevelStepWithParams = objc.RegisterName("readAttributeLevelStepWithParams:")
-	_mTRClusterValveConfigurationAndControlSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterValveConfigurationAndControlSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterValveConfigurationAndControlSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterValveConfigurationAndControlSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterValveConfigurationAndControlSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterValveConfigurationAndControlSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterValveConfigurationAndControlSelReadAttributeAutoCloseTimeWithParams                                  = objc.RegisterName("readAttributeAutoCloseTimeWithParams:")
+	_mTRClusterValveConfigurationAndControlSelReadAttributeRemainingDurationWithParams                              = objc.RegisterName("readAttributeRemainingDurationWithParams:")
+	_mTRClusterValveConfigurationAndControlSelReadAttributeCurrentStateWithParams                                   = objc.RegisterName("readAttributeCurrentStateWithParams:")
+	_mTRClusterValveConfigurationAndControlSelReadAttributeTargetStateWithParams                                    = objc.RegisterName("readAttributeTargetStateWithParams:")
+	_mTRClusterValveConfigurationAndControlSelReadAttributeCurrentLevelWithParams                                   = objc.RegisterName("readAttributeCurrentLevelWithParams:")
+	_mTRClusterValveConfigurationAndControlSelReadAttributeTargetLevelWithParams                                    = objc.RegisterName("readAttributeTargetLevelWithParams:")
+	_mTRClusterValveConfigurationAndControlSelReadAttributeDefaultOpenLevelWithParams                               = objc.RegisterName("readAttributeDefaultOpenLevelWithParams:")
+	_mTRClusterValveConfigurationAndControlSelWriteAttributeDefaultOpenLevelWithValueExpectedValueInterval          = objc.RegisterName("writeAttributeDefaultOpenLevelWithValue:expectedValueInterval:")
+	_mTRClusterValveConfigurationAndControlSelWriteAttributeDefaultOpenLevelWithValueExpectedValueIntervalParams    = objc.RegisterName("writeAttributeDefaultOpenLevelWithValue:expectedValueInterval:params:")
+	_mTRClusterValveConfigurationAndControlSelReadAttributeValveFaultWithParams                                     = objc.RegisterName("readAttributeValveFaultWithParams:")
+	_mTRClusterValveConfigurationAndControlSelReadAttributeLevelStepWithParams                                      = objc.RegisterName("readAttributeLevelStepWithParams:")
+	_mTRClusterValveConfigurationAndControlSelReadAttributeGeneratedCommandListWithParams                           = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterValveConfigurationAndControlSelReadAttributeAcceptedCommandListWithParams                            = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterValveConfigurationAndControlSelReadAttributeAttributeListWithParams                                  = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterValveConfigurationAndControlSelReadAttributeFeatureMapWithParams                                     = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterValveConfigurationAndControlSelReadAttributeClusterRevisionWithParams                                = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterValveConfigurationAndControlSelInitWithDeviceEndpointIDQueue                                         = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterValveConfigurationAndControlFromID(id objc.ID) *MTRClusterValveConfigurationAndControl {
@@ -199,7 +199,8 @@ func (o *MTRClusterValveConfigurationAndControl) ReadAttributeClusterRevisionWit
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterValveConfigurationAndControl) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterValveConfigurationAndControl {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterValveConfigurationAndControlSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterValveConfigurationAndControlFromID(_ret)
 }
-

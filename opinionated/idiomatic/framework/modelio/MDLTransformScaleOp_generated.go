@@ -62,4 +62,3 @@ type TransformScaleOpable interface {
 }
 
 var _ TransformScaleOpable = (*TransformScaleOp)(nil)
-

@@ -90,9 +90,13 @@ func (x *MTRClusterLowPower) SleepWithExpectedValuesExpectedValueIntervalComplet
 	x.inner.SleepWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, completionHandler)
 }
 
-func (x *MTRClusterLowPower) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterLowPower) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterLowPower) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterLowPower) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterLowPowerable is the interface implemented by [MTRClusterLowPower], for mocking and DI.
 type MTRClusterLowPowerable interface {
@@ -109,4 +113,3 @@ type MTRClusterLowPowerable interface {
 }
 
 var _ MTRClusterLowPowerable = (*MTRClusterLowPower)(nil)
-

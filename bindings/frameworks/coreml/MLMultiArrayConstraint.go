@@ -16,9 +16,9 @@ type MLMultiArrayConstraint struct {
 }
 
 var (
-	_clsMLMultiArrayConstraint = _objcClass("MLMultiArrayConstraint")
-	_mLMultiArrayConstraintSelShape = objc.RegisterName("shape")
-	_mLMultiArrayConstraintSelDataType = objc.RegisterName("dataType")
+	_clsMLMultiArrayConstraint                = _objcClass("MLMultiArrayConstraint")
+	_mLMultiArrayConstraintSelShape           = objc.RegisterName("shape")
+	_mLMultiArrayConstraintSelDataType        = objc.RegisterName("dataType")
 	_mLMultiArrayConstraintSelShapeConstraint = objc.RegisterName("shapeConstraint")
 )
 
@@ -44,7 +44,8 @@ func (o *MLMultiArrayConstraint) DataType() MLMultiArrayDataType {
 
 func (o *MLMultiArrayConstraint) ShapeConstraint() *MLMultiArrayShapeConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLMultiArrayConstraintSelShapeConstraint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLMultiArrayShapeConstraintFromID(_ret)
 }
-

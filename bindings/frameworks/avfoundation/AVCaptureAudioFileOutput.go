@@ -16,15 +16,15 @@ type AVCaptureAudioFileOutput struct {
 }
 
 var (
-	_clsAVCaptureAudioFileOutput = _objcClass("AVCaptureAudioFileOutput")
-	_aVCaptureAudioFileOutputSelInit = objc.RegisterName("init")
-	_aVCaptureAudioFileOutputSelNew = objc.RegisterName("new")
-	_aVCaptureAudioFileOutputSelAvailableOutputFileTypes = objc.RegisterName("availableOutputFileTypes")
+	_clsAVCaptureAudioFileOutput                                                             = _objcClass("AVCaptureAudioFileOutput")
+	_aVCaptureAudioFileOutputSelInit                                                         = objc.RegisterName("init")
+	_aVCaptureAudioFileOutputSelNew                                                          = objc.RegisterName("new")
+	_aVCaptureAudioFileOutputSelAvailableOutputFileTypes                                     = objc.RegisterName("availableOutputFileTypes")
 	_aVCaptureAudioFileOutputSelStartRecordingToOutputFileURLOutputFileTypeRecordingDelegate = objc.RegisterName("startRecordingToOutputFileURL:outputFileType:recordingDelegate:")
-	_aVCaptureAudioFileOutputSelMetadata = objc.RegisterName("metadata")
-	_aVCaptureAudioFileOutputSelSetMetadata = objc.RegisterName("setMetadata:")
-	_aVCaptureAudioFileOutputSelAudioSettings = objc.RegisterName("audioSettings")
-	_aVCaptureAudioFileOutputSelSetAudioSettings = objc.RegisterName("setAudioSettings:")
+	_aVCaptureAudioFileOutputSelMetadata                                                     = objc.RegisterName("metadata")
+	_aVCaptureAudioFileOutputSelSetMetadata                                                  = objc.RegisterName("setMetadata:")
+	_aVCaptureAudioFileOutputSelAudioSettings                                                = objc.RegisterName("audioSettings")
+	_aVCaptureAudioFileOutputSelSetAudioSettings                                             = objc.RegisterName("setAudioSettings:")
 )
 
 func AVCaptureAudioFileOutputFromID(id objc.ID) *AVCaptureAudioFileOutput {
@@ -39,7 +39,9 @@ func AVCaptureAudioFileOutputFromID(id objc.ID) *AVCaptureAudioFileOutput {
 
 func (o *AVCaptureAudioFileOutput) Init() *AVCaptureAudioFileOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureAudioFileOutputSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureAudioFileOutputFromID(_ret)
 }
 
@@ -62,7 +64,9 @@ func (o *AVCaptureAudioFileOutput) StartRecordingToOutputFileURLOutputFileTypeRe
 // @property metadata @abstract A collection of metadata to be written to the receiver's output files. @discussion The value of this property is an array of AVMetadataItem objects representing the collection of top-level metadata to be written in each output file. Only ID3 v2.2, v2.3, or v2.4 style metadata items are supported.
 func (o *AVCaptureAudioFileOutput) Metadata() *foundation.NSArray[*AVMetadataItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureAudioFileOutputSelMetadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVMetadataItem](_ret)
 }
 
@@ -79,4 +83,3 @@ func (o *AVCaptureAudioFileOutput) AudioSettings() *foundation.NSDictionary[*fou
 func (o *AVCaptureAudioFileOutput) SetAudioSettings(audioSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	o.Ptr().Send(_aVCaptureAudioFileOutputSelSetAudioSettings, audioSettings)
 }
-

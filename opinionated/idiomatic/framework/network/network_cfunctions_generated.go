@@ -2186,4 +2186,3 @@ func NwWsResponseGetSelectedSubprotocol(response *foundation.NSObject) string {
 func NwWsResponseGetStatus(response *foundation.NSObject) avrouting.Nw_ws_response_status_t {
 	return raw.NwWsResponseGetStatus(response)
 }
-

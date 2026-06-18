@@ -37,7 +37,7 @@ type VSOriginatingDeviceCategory int64
 
 const (
 	VSOriginatingDeviceCategoryMobile VSOriginatingDeviceCategory = 0
-	VSOriginatingDeviceCategoryOther VSOriginatingDeviceCategory = 1
+	VSOriginatingDeviceCategoryOther  VSOriginatingDeviceCategory = 1
 )
 
 func (e VSOriginatingDeviceCategory) String() string {
@@ -54,9 +54,9 @@ func (e VSOriginatingDeviceCategory) String() string {
 type VSSubscriptionAccessLevel int64
 
 const (
-	VSSubscriptionAccessLevelUnknown VSSubscriptionAccessLevel = 0
+	VSSubscriptionAccessLevelUnknown         VSSubscriptionAccessLevel = 0
 	VSSubscriptionAccessLevelFreeWithAccount VSSubscriptionAccessLevel = 1
-	VSSubscriptionAccessLevelPaid VSSubscriptionAccessLevel = 2
+	VSSubscriptionAccessLevelPaid            VSSubscriptionAccessLevel = 2
 )
 
 func (e VSSubscriptionAccessLevel) String() string {
@@ -76,7 +76,7 @@ func (e VSSubscriptionAccessLevel) String() string {
 type VSUserAccountQueryOptions int64
 
 const (
-	VSUserAccountQueryNone VSUserAccountQueryOptions = 0
+	VSUserAccountQueryNone       VSUserAccountQueryOptions = 0
 	VSUserAccountQueryAllDevices VSUserAccountQueryOptions = 1
 )
 
@@ -108,4 +108,3 @@ func (e VSUserAccountType) String() string {
 		return fmt.Sprintf("VSUserAccountType(%d)", int64(e))
 	}
 }
-

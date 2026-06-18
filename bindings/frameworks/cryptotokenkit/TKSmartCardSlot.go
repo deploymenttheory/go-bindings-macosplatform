@@ -16,12 +16,12 @@ type TKSmartCardSlot struct {
 }
 
 var (
-	_clsTKSmartCardSlot = _objcClass("TKSmartCardSlot")
-	_tKSmartCardSlotSelMakeSmartCard = objc.RegisterName("makeSmartCard")
-	_tKSmartCardSlotSelState = objc.RegisterName("state")
-	_tKSmartCardSlotSelATR = objc.RegisterName("ATR")
-	_tKSmartCardSlotSelName = objc.RegisterName("name")
-	_tKSmartCardSlotSelMaxInputLength = objc.RegisterName("maxInputLength")
+	_clsTKSmartCardSlot                = _objcClass("TKSmartCardSlot")
+	_tKSmartCardSlotSelMakeSmartCard   = objc.RegisterName("makeSmartCard")
+	_tKSmartCardSlotSelState           = objc.RegisterName("state")
+	_tKSmartCardSlotSelATR             = objc.RegisterName("ATR")
+	_tKSmartCardSlotSelName            = objc.RegisterName("name")
+	_tKSmartCardSlotSelMaxInputLength  = objc.RegisterName("maxInputLength")
 	_tKSmartCardSlotSelMaxOutputLength = objc.RegisterName("maxOutputLength")
 )
 
@@ -38,7 +38,9 @@ func TKSmartCardSlotFromID(id objc.ID) *TKSmartCardSlot {
 // Creates new object representing currently inserted and valid card. @discussion It is possible to instantiate multiple objects for single card, exclusivity is handled by sessions on the level of created SmartCard objects. @return Newly created SmartCard object, or nil if slot does not contain valid card.
 func (o *TKSmartCardSlot) MakeSmartCard() *TKSmartCard {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardSlotSelMakeSmartCard)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return TKSmartCardFromID(_ret)
 }
 
@@ -51,14 +53,18 @@ func (o *TKSmartCardSlot) State() TKSmartCardSlotState {
 // ATR of the inserted SmartCard, or nil if no or mute SmartCard is inserted.
 func (o *TKSmartCardSlot) ATR() *TKSmartCardATR {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardSlotSelATR)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return TKSmartCardATRFromID(_ret)
 }
 
 // Name of the SmartCard reader slot.
 func (o *TKSmartCardSlot) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardSlotSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -73,4 +79,3 @@ func (o *TKSmartCardSlot) MaxOutputLength() int {
 	_ret := objc.Send[int](o.Ptr(), _tKSmartCardSlotSelMaxOutputLength)
 	return _ret
 }
-

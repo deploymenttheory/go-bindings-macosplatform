@@ -53,7 +53,9 @@ func (x *AddPassMetadataPreview) LocalizedDescription() string {
 	return purego.GoString(_r.Ptr())
 }
 
-func (x *AddPassMetadataPreview) asAddPassMetadataPreview() *raw.PKAddPassMetadataPreview { return x.inner }
+func (x *AddPassMetadataPreview) asAddPassMetadataPreview() *raw.PKAddPassMetadataPreview {
+	return x.inner
+}
 
 // AddPassMetadataPreviewable is the interface implemented by [AddPassMetadataPreview], for mocking and DI.
 type AddPassMetadataPreviewable interface {
@@ -63,4 +65,3 @@ type AddPassMetadataPreviewable interface {
 }
 
 var _ AddPassMetadataPreviewable = (*AddPassMetadataPreview)(nil)
-

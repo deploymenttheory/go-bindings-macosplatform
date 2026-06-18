@@ -79,4 +79,3 @@ type CustomMediaSelectionSchemeable interface {
 }
 
 var _ CustomMediaSelectionSchemeable = (*CustomMediaSelectionScheme)(nil)
-

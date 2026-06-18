@@ -114,4 +114,3 @@ type PICTImageRepable interface {
 }
 
 var _ PICTImageRepable = (*PICTImageRep)(nil)
-

@@ -21,20 +21,20 @@ type MPSMatrixFullyConnectedGradient struct {
 }
 
 var (
-	_clsMPSMatrixFullyConnectedGradient = _objcClass("MPSMatrixFullyConnectedGradient")
-	_mPSMatrixFullyConnectedGradientSelInitWithDevice = objc.RegisterName("initWithDevice:")
-	_mPSMatrixFullyConnectedGradientSelEncodeGradientForDataToCommandBufferGradientMatrixWeightMatrixResultGradientForDataMatrix = objc.RegisterName("encodeGradientForDataToCommandBuffer:gradientMatrix:weightMatrix:resultGradientForDataMatrix:")
+	_clsMPSMatrixFullyConnectedGradient                                                                                                                                = _objcClass("MPSMatrixFullyConnectedGradient")
+	_mPSMatrixFullyConnectedGradientSelInitWithDevice                                                                                                                  = objc.RegisterName("initWithDevice:")
+	_mPSMatrixFullyConnectedGradientSelEncodeGradientForDataToCommandBufferGradientMatrixWeightMatrixResultGradientForDataMatrix                                       = objc.RegisterName("encodeGradientForDataToCommandBuffer:gradientMatrix:weightMatrix:resultGradientForDataMatrix:")
 	_mPSMatrixFullyConnectedGradientSelEncodeGradientForWeightsAndBiasToCommandBufferGradientMatrixInputMatrixResultGradientForWeightMatrixResultGradientForBiasVector = objc.RegisterName("encodeGradientForWeightsAndBiasToCommandBuffer:gradientMatrix:inputMatrix:resultGradientForWeightMatrix:resultGradientForBiasVector:")
-	_mPSMatrixFullyConnectedGradientSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSMatrixFullyConnectedGradientSelCopyWithZoneDevice = objc.RegisterName("copyWithZone:device:")
-	_mPSMatrixFullyConnectedGradientSelSourceNumberOfFeatureVectors = objc.RegisterName("sourceNumberOfFeatureVectors")
-	_mPSMatrixFullyConnectedGradientSelSetSourceNumberOfFeatureVectors = objc.RegisterName("setSourceNumberOfFeatureVectors:")
-	_mPSMatrixFullyConnectedGradientSelSourceOutputFeatureChannels = objc.RegisterName("sourceOutputFeatureChannels")
-	_mPSMatrixFullyConnectedGradientSelSetSourceOutputFeatureChannels = objc.RegisterName("setSourceOutputFeatureChannels:")
-	_mPSMatrixFullyConnectedGradientSelSourceInputFeatureChannels = objc.RegisterName("sourceInputFeatureChannels")
-	_mPSMatrixFullyConnectedGradientSelSetSourceInputFeatureChannels = objc.RegisterName("setSourceInputFeatureChannels:")
-	_mPSMatrixFullyConnectedGradientSelAlpha = objc.RegisterName("alpha")
-	_mPSMatrixFullyConnectedGradientSelSetAlpha = objc.RegisterName("setAlpha:")
+	_mPSMatrixFullyConnectedGradientSelInitWithCoderDevice                                                                                                             = objc.RegisterName("initWithCoder:device:")
+	_mPSMatrixFullyConnectedGradientSelCopyWithZoneDevice                                                                                                              = objc.RegisterName("copyWithZone:device:")
+	_mPSMatrixFullyConnectedGradientSelSourceNumberOfFeatureVectors                                                                                                    = objc.RegisterName("sourceNumberOfFeatureVectors")
+	_mPSMatrixFullyConnectedGradientSelSetSourceNumberOfFeatureVectors                                                                                                 = objc.RegisterName("setSourceNumberOfFeatureVectors:")
+	_mPSMatrixFullyConnectedGradientSelSourceOutputFeatureChannels                                                                                                     = objc.RegisterName("sourceOutputFeatureChannels")
+	_mPSMatrixFullyConnectedGradientSelSetSourceOutputFeatureChannels                                                                                                  = objc.RegisterName("setSourceOutputFeatureChannels:")
+	_mPSMatrixFullyConnectedGradientSelSourceInputFeatureChannels                                                                                                      = objc.RegisterName("sourceInputFeatureChannels")
+	_mPSMatrixFullyConnectedGradientSelSetSourceInputFeatureChannels                                                                                                   = objc.RegisterName("setSourceInputFeatureChannels:")
+	_mPSMatrixFullyConnectedGradientSelAlpha                                                                                                                           = objc.RegisterName("alpha")
+	_mPSMatrixFullyConnectedGradientSelSetAlpha                                                                                                                        = objc.RegisterName("setAlpha:")
 )
 
 func MPSMatrixFullyConnectedGradientFromID(id objc.ID) *MPSMatrixFullyConnectedGradient {
@@ -49,7 +49,9 @@ func MPSMatrixFullyConnectedGradientFromID(id objc.ID) *MPSMatrixFullyConnectedG
 
 func (o *MPSMatrixFullyConnectedGradient) InitWithDevice(device metal.MTLDevice) *MPSMatrixFullyConnectedGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixFullyConnectedGradientSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixFullyConnectedGradientFromID(_ret)
 }
 
@@ -66,7 +68,9 @@ func (o *MPSMatrixFullyConnectedGradient) EncodeGradientForWeightsAndBiasToComma
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSMatrixFullyConnectedGradient @param      device      The MTLDevice on which to make the MPSMatrixFullyConnectedGradient object. @return     A new MPSMatrixFullyConnected object, or nil if failure.
 func (o *MPSMatrixFullyConnectedGradient) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSMatrixFullyConnectedGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixFullyConnectedGradientSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixFullyConnectedGradientFromID(_ret)
 }
 
@@ -115,4 +119,3 @@ func (o *MPSMatrixFullyConnectedGradient) Alpha() float64 {
 func (o *MPSMatrixFullyConnectedGradient) SetAlpha(alpha float64) {
 	o.Ptr().Send(_mPSMatrixFullyConnectedGradientSelSetAlpha, alpha)
 }
-

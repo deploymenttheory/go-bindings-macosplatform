@@ -18,12 +18,12 @@ type MTRRVCRunModeClusterChangeToModeResponseParams struct {
 }
 
 var (
-	_clsMTRRVCRunModeClusterChangeToModeResponseParams = _objcClass("MTRRVCRunModeClusterChangeToModeResponseParams")
+	_clsMTRRVCRunModeClusterChangeToModeResponseParams                           = _objcClass("MTRRVCRunModeClusterChangeToModeResponseParams")
 	_mTRRVCRunModeClusterChangeToModeResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRRVCRunModeClusterChangeToModeResponseParamsSelStatus = objc.RegisterName("status")
-	_mTRRVCRunModeClusterChangeToModeResponseParamsSelSetStatus = objc.RegisterName("setStatus:")
-	_mTRRVCRunModeClusterChangeToModeResponseParamsSelStatusText = objc.RegisterName("statusText")
-	_mTRRVCRunModeClusterChangeToModeResponseParamsSelSetStatusText = objc.RegisterName("setStatusText:")
+	_mTRRVCRunModeClusterChangeToModeResponseParamsSelStatus                     = objc.RegisterName("status")
+	_mTRRVCRunModeClusterChangeToModeResponseParamsSelSetStatus                  = objc.RegisterName("setStatus:")
+	_mTRRVCRunModeClusterChangeToModeResponseParamsSelStatusText                 = objc.RegisterName("statusText")
+	_mTRRVCRunModeClusterChangeToModeResponseParamsSelSetStatusText              = objc.RegisterName("setStatusText:")
 )
 
 func MTRRVCRunModeClusterChangeToModeResponseParamsFromID(id objc.ID) *MTRRVCRunModeClusterChangeToModeResponseParams {
@@ -40,7 +40,9 @@ func MTRRVCRunModeClusterChangeToModeResponseParamsFromID(id objc.ID) *MTRRVCRun
 func (o *MTRRVCRunModeClusterChangeToModeResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRRVCRunModeClusterChangeToModeResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRRVCRunModeClusterChangeToModeResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -49,7 +51,9 @@ func (o *MTRRVCRunModeClusterChangeToModeResponseParams) InitWithResponseValueEr
 
 func (o *MTRRVCRunModeClusterChangeToModeResponseParams) Status() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRRVCRunModeClusterChangeToModeResponseParamsSelStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,11 +63,12 @@ func (o *MTRRVCRunModeClusterChangeToModeResponseParams) SetStatus(status *found
 
 func (o *MTRRVCRunModeClusterChangeToModeResponseParams) StatusText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRRVCRunModeClusterChangeToModeResponseParamsSelStatusText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTRRVCRunModeClusterChangeToModeResponseParams) SetStatusText(statusText *foundation.NSString) {
 	o.Ptr().Send(_mTRRVCRunModeClusterChangeToModeResponseParamsSelSetStatusText, statusText.Ptr())
 }
-

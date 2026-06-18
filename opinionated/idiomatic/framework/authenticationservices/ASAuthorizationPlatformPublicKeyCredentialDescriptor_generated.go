@@ -16,7 +16,9 @@ type AuthorizationPlatformPublicKeyCredentialDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor].
-func (x *AuthorizationPlatformPublicKeyCredentialDescriptor) Unwrap() *raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor { return x.inner }
+func (x *AuthorizationPlatformPublicKeyCredentialDescriptor) Unwrap() *raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -43,4 +45,3 @@ type AuthorizationPlatformPublicKeyCredentialDescriptorable interface {
 }
 
 var _ AuthorizationPlatformPublicKeyCredentialDescriptorable = (*AuthorizationPlatformPublicKeyCredentialDescriptor)(nil)
-

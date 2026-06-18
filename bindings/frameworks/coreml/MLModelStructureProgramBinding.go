@@ -16,8 +16,8 @@ type MLModelStructureProgramBinding struct {
 }
 
 var (
-	_clsMLModelStructureProgramBinding = _objcClass("MLModelStructureProgramBinding")
-	_mLModelStructureProgramBindingSelName = objc.RegisterName("name")
+	_clsMLModelStructureProgramBinding      = _objcClass("MLModelStructureProgramBinding")
+	_mLModelStructureProgramBindingSelName  = objc.RegisterName("name")
 	_mLModelStructureProgramBindingSelValue = objc.RegisterName("value")
 )
 
@@ -34,14 +34,17 @@ func MLModelStructureProgramBindingFromID(id objc.ID) *MLModelStructureProgramBi
 // The name of the variable in the Program.
 func (o *MLModelStructureProgramBinding) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelStructureProgramBindingSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The compile time constant value in the Program.
 func (o *MLModelStructureProgramBinding) Value() *MLModelStructureProgramValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelStructureProgramBindingSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLModelStructureProgramValueFromID(_ret)
 }
-

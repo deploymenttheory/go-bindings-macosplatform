@@ -16,7 +16,9 @@ type MTROtaSoftwareUpdateProviderClusterQueryImageParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTROtaSoftwareUpdateProviderClusterQueryImageParams].
-func (x *MTROtaSoftwareUpdateProviderClusterQueryImageParams) Unwrap() *raw.MTROtaSoftwareUpdateProviderClusterQueryImageParams { return x.inner }
+func (x *MTROtaSoftwareUpdateProviderClusterQueryImageParams) Unwrap() *raw.MTROtaSoftwareUpdateProviderClusterQueryImageParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -102,7 +104,9 @@ func (x *MTROtaSoftwareUpdateProviderClusterQueryImageParams) WithProductId(prod
 	return x
 }
 
-func (x *MTROtaSoftwareUpdateProviderClusterQueryImageParams) asMTROTASoftwareUpdateProviderClusterQueryImageParams() *raw.MTROTASoftwareUpdateProviderClusterQueryImageParams { return &x.inner.MTROTASoftwareUpdateProviderClusterQueryImageParams }
+func (x *MTROtaSoftwareUpdateProviderClusterQueryImageParams) asMTROTASoftwareUpdateProviderClusterQueryImageParams() *raw.MTROTASoftwareUpdateProviderClusterQueryImageParams {
+	return &x.inner.MTROTASoftwareUpdateProviderClusterQueryImageParams
+}
 
 // MTROtaSoftwareUpdateProviderClusterQueryImageParamsable is the interface implemented by [MTROtaSoftwareUpdateProviderClusterQueryImageParams], for mocking and DI.
 type MTROtaSoftwareUpdateProviderClusterQueryImageParamsable interface {
@@ -121,4 +125,3 @@ type MTROtaSoftwareUpdateProviderClusterQueryImageParamsable interface {
 }
 
 var _ MTROtaSoftwareUpdateProviderClusterQueryImageParamsable = (*MTROtaSoftwareUpdateProviderClusterQueryImageParams)(nil)
-

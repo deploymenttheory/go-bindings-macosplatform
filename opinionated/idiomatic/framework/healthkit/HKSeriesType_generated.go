@@ -45,4 +45,3 @@ type SeriesTypeable interface {
 }
 
 var _ SeriesTypeable = (*SeriesType)(nil)
-

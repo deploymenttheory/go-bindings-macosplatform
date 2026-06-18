@@ -198,4 +198,3 @@ type Parameterable interface {
 }
 
 var _ Parameterable = (*Parameter)(nil)
-

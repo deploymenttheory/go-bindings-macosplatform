@@ -21,12 +21,12 @@ type EXHostViewController struct {
 }
 
 var (
-	_clsEXHostViewController = _objcClass("EXHostViewController")
+	_clsEXHostViewController                           = _objcClass("EXHostViewController")
 	_eXHostViewControllerSelMakeXPCConnectionWithError = objc.RegisterName("makeXPCConnectionWithError:")
-	_eXHostViewControllerSelDelegate = objc.RegisterName("delegate")
-	_eXHostViewControllerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_eXHostViewControllerSelPlaceholderView = objc.RegisterName("placeholderView")
-	_eXHostViewControllerSelSetPlaceholderView = objc.RegisterName("setPlaceholderView:")
+	_eXHostViewControllerSelDelegate                   = objc.RegisterName("delegate")
+	_eXHostViewControllerSelSetDelegate                = objc.RegisterName("setDelegate:")
+	_eXHostViewControllerSelPlaceholderView            = objc.RegisterName("placeholderView")
+	_eXHostViewControllerSelSetPlaceholderView         = objc.RegisterName("setPlaceholderView:")
 )
 
 func EXHostViewControllerFromID(id objc.ID) *EXHostViewController {
@@ -39,11 +39,13 @@ func EXHostViewControllerFromID(id objc.ID) *EXHostViewController {
 	return o
 }
 
-// Initiates an XPC connection to the app extension’s scene. Call this method from your delegate's ``EXHostViewControllerDelegate/hostViewControllerDidActivate:`` method to initiate a scene-specific connection to the app extension. - Returns: An object representing the connection.
+// Initiates an XPC connection to the app extension’s scene. Call this method from your delegate's “EXHostViewControllerDelegate/hostViewControllerDidActivate:“ method to initiate a scene-specific connection to the app extension. - Returns: An object representing the connection.
 func (o *EXHostViewController) MakeXPCConnectionWithError() (*foundation.NSXPCConnection, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _eXHostViewControllerSelMakeXPCConnectionWithError, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -63,11 +65,12 @@ func (o *EXHostViewController) SetDelegate(delegate EXHostViewControllerDelegate
 // The view to display when the view controller has no app extension content to display.
 func (o *EXHostViewController) PlaceholderView() *appkit.NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eXHostViewControllerSelPlaceholderView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSViewFromID(_ret)
 }
 
 func (o *EXHostViewController) SetPlaceholderView(placeholderView *appkit.NSView) {
 	o.Ptr().Send(_eXHostViewControllerSelSetPlaceholderView, placeholderView.Ptr())
 }
-

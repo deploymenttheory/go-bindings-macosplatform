@@ -86,4 +86,3 @@ type MotionActivityable interface {
 }
 
 var _ MotionActivityable = (*MotionActivity)(nil)
-

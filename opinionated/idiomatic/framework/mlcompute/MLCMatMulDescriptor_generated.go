@@ -59,4 +59,3 @@ type MatMulDescriptorable interface {
 }
 
 var _ MatMulDescriptorable = (*MatMulDescriptor)(nil)
-

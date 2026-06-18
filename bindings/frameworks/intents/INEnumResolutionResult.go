@@ -15,8 +15,8 @@ type INEnumResolutionResult struct {
 }
 
 var (
-	_clsINEnumResolutionResult = _objcClass("INEnumResolutionResult")
-	_iNEnumResolutionResultSelSuccessWithResolvedValue = objc.RegisterName("successWithResolvedValue:")
+	_clsINEnumResolutionResult                                       = _objcClass("INEnumResolutionResult")
+	_iNEnumResolutionResultSelSuccessWithResolvedValue               = objc.RegisterName("successWithResolvedValue:")
 	_iNEnumResolutionResultSelConfirmationRequiredWithValueToConfirm = objc.RegisterName("confirmationRequiredWithValueToConfirm:")
 )
 
@@ -32,13 +32,16 @@ func INEnumResolutionResultFromID(id objc.ID) *INEnumResolutionResult {
 
 func INEnumResolutionResultSuccessWithResolvedValue(resolvedValue int) *INEnumResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINEnumResolutionResult), _iNEnumResolutionResultSelSuccessWithResolvedValue, resolvedValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INEnumResolutionResultFromID(_ret)
 }
 
 func INEnumResolutionResultConfirmationRequiredWithValueToConfirm(valueToConfirm int) *INEnumResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINEnumResolutionResult), _iNEnumResolutionResultSelConfirmationRequiredWithValueToConfirm, valueToConfirm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INEnumResolutionResultFromID(_ret)
 }
-

@@ -62,4 +62,3 @@ type AutoreleasePoolable interface {
 }
 
 var _ AutoreleasePoolable = (*AutoreleasePool)(nil)
-

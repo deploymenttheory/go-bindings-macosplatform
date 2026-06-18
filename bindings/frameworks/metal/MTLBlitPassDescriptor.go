@@ -16,8 +16,8 @@ type MTLBlitPassDescriptor struct {
 }
 
 var (
-	_clsMTLBlitPassDescriptor = _objcClass("MTLBlitPassDescriptor")
-	_mTLBlitPassDescriptorSelBlitPassDescriptor = objc.RegisterName("blitPassDescriptor")
+	_clsMTLBlitPassDescriptor                        = _objcClass("MTLBlitPassDescriptor")
+	_mTLBlitPassDescriptorSelBlitPassDescriptor      = objc.RegisterName("blitPassDescriptor")
 	_mTLBlitPassDescriptorSelSampleBufferAttachments = objc.RegisterName("sampleBufferAttachments")
 )
 
@@ -34,13 +34,16 @@ func MTLBlitPassDescriptorFromID(id objc.ID) *MTLBlitPassDescriptor {
 // @method blitPassDescriptor @abstract Create an autoreleased default frame buffer descriptor
 func MTLBlitPassDescriptorBlitPassDescriptor() *MTLBlitPassDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLBlitPassDescriptor), _mTLBlitPassDescriptorSelBlitPassDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLBlitPassDescriptorFromID(_ret)
 }
 
 func (o *MTLBlitPassDescriptor) SampleBufferAttachments() *MTLBlitPassSampleBufferAttachmentDescriptorArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLBlitPassDescriptorSelSampleBufferAttachments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLBlitPassSampleBufferAttachmentDescriptorArrayFromID(_ret)
 }
-

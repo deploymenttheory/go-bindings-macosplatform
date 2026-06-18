@@ -17,24 +17,24 @@ type CalRecurrenceRule struct {
 }
 
 var (
-	_clsCalRecurrenceRule = _objcClass("CalRecurrenceRule")
-	_calRecurrenceRuleSelInitDailyRecurrenceWithIntervalEnd = objc.RegisterName("initDailyRecurrenceWithInterval:end:")
-	_calRecurrenceRuleSelInitWeeklyRecurrenceWithIntervalEnd = objc.RegisterName("initWeeklyRecurrenceWithInterval:end:")
-	_calRecurrenceRuleSelInitWeeklyRecurrenceWithIntervalForDaysOfTheWeekEnd = objc.RegisterName("initWeeklyRecurrenceWithInterval:forDaysOfTheWeek:end:")
-	_calRecurrenceRuleSelInitMonthlyRecurrenceWithIntervalEnd = objc.RegisterName("initMonthlyRecurrenceWithInterval:end:")
-	_calRecurrenceRuleSelInitMonthlyRecurrenceWithIntervalForDaysOfTheMonthEnd = objc.RegisterName("initMonthlyRecurrenceWithInterval:forDaysOfTheMonth:end:")
-	_calRecurrenceRuleSelInitMonthlyRecurrenceWithIntervalForDayOfTheWeekForWeekOfTheMonthEnd = objc.RegisterName("initMonthlyRecurrenceWithInterval:forDayOfTheWeek:forWeekOfTheMonth:end:")
-	_calRecurrenceRuleSelInitYearlyRecurrenceWithIntervalEnd = objc.RegisterName("initYearlyRecurrenceWithInterval:end:")
-	_calRecurrenceRuleSelInitYearlyRecurrenceWithIntervalForMonthsOfTheYearEnd = objc.RegisterName("initYearlyRecurrenceWithInterval:forMonthsOfTheYear:end:")
+	_clsCalRecurrenceRule                                                                                      = _objcClass("CalRecurrenceRule")
+	_calRecurrenceRuleSelInitDailyRecurrenceWithIntervalEnd                                                    = objc.RegisterName("initDailyRecurrenceWithInterval:end:")
+	_calRecurrenceRuleSelInitWeeklyRecurrenceWithIntervalEnd                                                   = objc.RegisterName("initWeeklyRecurrenceWithInterval:end:")
+	_calRecurrenceRuleSelInitWeeklyRecurrenceWithIntervalForDaysOfTheWeekEnd                                   = objc.RegisterName("initWeeklyRecurrenceWithInterval:forDaysOfTheWeek:end:")
+	_calRecurrenceRuleSelInitMonthlyRecurrenceWithIntervalEnd                                                  = objc.RegisterName("initMonthlyRecurrenceWithInterval:end:")
+	_calRecurrenceRuleSelInitMonthlyRecurrenceWithIntervalForDaysOfTheMonthEnd                                 = objc.RegisterName("initMonthlyRecurrenceWithInterval:forDaysOfTheMonth:end:")
+	_calRecurrenceRuleSelInitMonthlyRecurrenceWithIntervalForDayOfTheWeekForWeekOfTheMonthEnd                  = objc.RegisterName("initMonthlyRecurrenceWithInterval:forDayOfTheWeek:forWeekOfTheMonth:end:")
+	_calRecurrenceRuleSelInitYearlyRecurrenceWithIntervalEnd                                                   = objc.RegisterName("initYearlyRecurrenceWithInterval:end:")
+	_calRecurrenceRuleSelInitYearlyRecurrenceWithIntervalForMonthsOfTheYearEnd                                 = objc.RegisterName("initYearlyRecurrenceWithInterval:forMonthsOfTheYear:end:")
 	_calRecurrenceRuleSelInitYearlyRecurrenceWithIntervalForDayOfTheWeekForWeekOfTheMonthForMonthsOfTheYearEnd = objc.RegisterName("initYearlyRecurrenceWithInterval:forDayOfTheWeek:forWeekOfTheMonth:forMonthsOfTheYear:end:")
-	_calRecurrenceRuleSelRecurrenceEnd = objc.RegisterName("recurrenceEnd")
-	_calRecurrenceRuleSelRecurrenceType = objc.RegisterName("recurrenceType")
-	_calRecurrenceRuleSelRecurrenceInterval = objc.RegisterName("recurrenceInterval")
-	_calRecurrenceRuleSelFirstDayOfTheWeek = objc.RegisterName("firstDayOfTheWeek")
-	_calRecurrenceRuleSelDaysOfTheWeek = objc.RegisterName("daysOfTheWeek")
-	_calRecurrenceRuleSelDaysOfTheMonth = objc.RegisterName("daysOfTheMonth")
-	_calRecurrenceRuleSelNthWeekDaysOfTheMonth = objc.RegisterName("nthWeekDaysOfTheMonth")
-	_calRecurrenceRuleSelMonthsOfTheYear = objc.RegisterName("monthsOfTheYear")
+	_calRecurrenceRuleSelRecurrenceEnd                                                                         = objc.RegisterName("recurrenceEnd")
+	_calRecurrenceRuleSelRecurrenceType                                                                        = objc.RegisterName("recurrenceType")
+	_calRecurrenceRuleSelRecurrenceInterval                                                                    = objc.RegisterName("recurrenceInterval")
+	_calRecurrenceRuleSelFirstDayOfTheWeek                                                                     = objc.RegisterName("firstDayOfTheWeek")
+	_calRecurrenceRuleSelDaysOfTheWeek                                                                         = objc.RegisterName("daysOfTheWeek")
+	_calRecurrenceRuleSelDaysOfTheMonth                                                                        = objc.RegisterName("daysOfTheMonth")
+	_calRecurrenceRuleSelNthWeekDaysOfTheMonth                                                                 = objc.RegisterName("nthWeekDaysOfTheMonth")
+	_calRecurrenceRuleSelMonthsOfTheYear                                                                       = objc.RegisterName("monthsOfTheYear")
 )
 
 func CalRecurrenceRuleFromID(id objc.ID) *CalRecurrenceRule {
@@ -104,7 +104,9 @@ func (o *CalRecurrenceRule) InitYearlyRecurrenceWithIntervalForDayOfTheWeekForWe
 // Deprecated: since macOS 10.8.
 func (o *CalRecurrenceRule) RecurrenceEnd() *CalRecurrenceEnd {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calRecurrenceRuleSelRecurrenceEnd)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CalRecurrenceEndFromID(_ret)
 }
 
@@ -149,4 +151,3 @@ func (o *CalRecurrenceRule) MonthsOfTheYear() *foundation.NSArray[objc.ID] {
 	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _calRecurrenceRuleSelMonthsOfTheYear)
 	return _ret
 }
-

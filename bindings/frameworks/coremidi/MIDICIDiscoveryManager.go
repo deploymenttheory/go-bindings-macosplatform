@@ -16,8 +16,8 @@ type MIDICIDiscoveryManager struct {
 }
 
 var (
-	_clsMIDICIDiscoveryManager = _objcClass("MIDICIDiscoveryManager")
-	_mIDICIDiscoveryManagerSelSharedInstance = objc.RegisterName("sharedInstance")
+	_clsMIDICIDiscoveryManager                    = _objcClass("MIDICIDiscoveryManager")
+	_mIDICIDiscoveryManagerSelSharedInstance      = objc.RegisterName("sharedInstance")
 	_mIDICIDiscoveryManagerSelDiscoverWithHandler = objc.RegisterName("discoverWithHandler:")
 )
 
@@ -33,7 +33,9 @@ func MIDICIDiscoveryManagerFromID(id objc.ID) *MIDICIDiscoveryManager {
 
 func MIDICIDiscoveryManagerSharedInstance() *MIDICIDiscoveryManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMIDICIDiscoveryManager), _mIDICIDiscoveryManagerSelSharedInstance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MIDICIDiscoveryManagerFromID(_ret)
 }
 
@@ -50,4 +52,3 @@ func (o *MIDICIDiscoveryManager) DiscoverWithHandler(completedHandler func(*foun
 	}
 	o.Ptr().Send(_mIDICIDiscoveryManagerSelDiscoverWithHandler, __block_completedHandler)
 }
-

@@ -17,7 +17,9 @@ type MTRWaterHeaterModeClusterModeOptionStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRWaterHeaterModeClusterModeOptionStruct].
-func (x *MTRWaterHeaterModeClusterModeOptionStruct) Unwrap() *raw.MTRWaterHeaterModeClusterModeOptionStruct { return x.inner }
+func (x *MTRWaterHeaterModeClusterModeOptionStruct) Unwrap() *raw.MTRWaterHeaterModeClusterModeOptionStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -97,4 +99,3 @@ type MTRWaterHeaterModeClusterModeOptionStructable interface {
 }
 
 var _ MTRWaterHeaterModeClusterModeOptionStructable = (*MTRWaterHeaterModeClusterModeOptionStruct)(nil)
-

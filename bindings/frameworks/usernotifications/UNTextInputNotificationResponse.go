@@ -16,7 +16,7 @@ type UNTextInputNotificationResponse struct {
 }
 
 var (
-	_clsUNTextInputNotificationResponse = _objcClass("UNTextInputNotificationResponse")
+	_clsUNTextInputNotificationResponse         = _objcClass("UNTextInputNotificationResponse")
 	_uNTextInputNotificationResponseSelUserText = objc.RegisterName("userText")
 )
 
@@ -32,7 +32,8 @@ func UNTextInputNotificationResponseFromID(id objc.ID) *UNTextInputNotificationR
 
 func (o *UNTextInputNotificationResponse) UserText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNTextInputNotificationResponseSelUserText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

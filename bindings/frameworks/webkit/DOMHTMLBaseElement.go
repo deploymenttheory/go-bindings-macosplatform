@@ -16,10 +16,10 @@ type DOMHTMLBaseElement struct {
 }
 
 var (
-	_clsDOMHTMLBaseElement = _objcClass("DOMHTMLBaseElement")
-	_dOMHTMLBaseElementSelHref = objc.RegisterName("href")
-	_dOMHTMLBaseElementSelSetHref = objc.RegisterName("setHref:")
-	_dOMHTMLBaseElementSelTarget = objc.RegisterName("target")
+	_clsDOMHTMLBaseElement          = _objcClass("DOMHTMLBaseElement")
+	_dOMHTMLBaseElementSelHref      = objc.RegisterName("href")
+	_dOMHTMLBaseElementSelSetHref   = objc.RegisterName("setHref:")
+	_dOMHTMLBaseElementSelTarget    = objc.RegisterName("target")
 	_dOMHTMLBaseElementSelSetTarget = objc.RegisterName("setTarget:")
 )
 
@@ -35,7 +35,9 @@ func DOMHTMLBaseElementFromID(id objc.ID) *DOMHTMLBaseElement {
 
 func (o *DOMHTMLBaseElement) Href() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLBaseElementSelHref)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *DOMHTMLBaseElement) SetHref(href *foundation.NSString) {
 
 func (o *DOMHTMLBaseElement) Target() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLBaseElementSelTarget)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLBaseElement) SetTarget(target *foundation.NSString) {
 	o.Ptr().Send(_dOMHTMLBaseElementSelSetTarget, target.Ptr())
 }
-

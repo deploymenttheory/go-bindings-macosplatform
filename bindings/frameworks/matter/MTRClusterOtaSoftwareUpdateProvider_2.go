@@ -18,10 +18,10 @@ type MTRClusterOtaSoftwareUpdateProvider struct {
 }
 
 var (
-	_clsMTRClusterOtaSoftwareUpdateProvider = _objcClass("MTRClusterOtaSoftwareUpdateProvider")
-	_mTRClusterOtaSoftwareUpdateProviderSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
-	_mTRClusterOtaSoftwareUpdateProviderSelQueryImageWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("queryImageWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterOtaSoftwareUpdateProviderSelApplyUpdateRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("applyUpdateRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_clsMTRClusterOtaSoftwareUpdateProvider                                                                                  = _objcClass("MTRClusterOtaSoftwareUpdateProvider")
+	_mTRClusterOtaSoftwareUpdateProviderSelInitWithDeviceEndpointQueue                                                       = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterOtaSoftwareUpdateProviderSelQueryImageWithParamsExpectedValuesExpectedValueIntervalCompletionHandler          = objc.RegisterName("queryImageWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterOtaSoftwareUpdateProviderSelApplyUpdateRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler  = objc.RegisterName("applyUpdateRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
 	_mTRClusterOtaSoftwareUpdateProviderSelNotifyUpdateAppliedWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("notifyUpdateAppliedWithParams:expectedValues:expectedValueInterval:completionHandler:")
 )
 
@@ -37,7 +37,9 @@ func MTRClusterOtaSoftwareUpdateProviderFromID(id objc.ID) *MTRClusterOtaSoftwar
 
 func (o *MTRClusterOtaSoftwareUpdateProvider) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterOtaSoftwareUpdateProvider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterOtaSoftwareUpdateProviderSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterOtaSoftwareUpdateProviderFromID(_ret)
 }
 
@@ -79,4 +81,3 @@ func (o *MTRClusterOtaSoftwareUpdateProvider) NotifyUpdateAppliedWithParamsExpec
 	}
 	o.Ptr().Send(_mTRClusterOtaSoftwareUpdateProviderSelNotifyUpdateAppliedWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
-

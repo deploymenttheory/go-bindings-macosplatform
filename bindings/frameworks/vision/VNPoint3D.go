@@ -18,9 +18,9 @@ type VNPoint3D struct {
 }
 
 var (
-	_clsVNPoint3D = _objcClass("VNPoint3D")
+	_clsVNPoint3D                 = _objcClass("VNPoint3D")
 	_vNPoint3DSelInitWithPosition = objc.RegisterName("initWithPosition:")
-	_vNPoint3DSelPosition = objc.RegisterName("position")
+	_vNPoint3DSelPosition         = objc.RegisterName("position")
 )
 
 func VNPoint3DFromID(id objc.ID) *VNPoint3D {
@@ -35,7 +35,9 @@ func VNPoint3DFromID(id objc.ID) *VNPoint3D {
 
 func (o *VNPoint3D) InitWithPosition(position unsafe.Pointer) *VNPoint3D {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNPoint3DSelInitWithPosition, position)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNPoint3DFromID(_ret)
 }
 
@@ -43,4 +45,3 @@ func (o *VNPoint3D) Position() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _vNPoint3DSelPosition)
 	return _ret
 }
-

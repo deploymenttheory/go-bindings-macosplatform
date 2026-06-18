@@ -17,7 +17,7 @@ type HKHeartbeatSeriesQuery struct {
 }
 
 var (
-	_clsHKHeartbeatSeriesQuery = _objcClass("HKHeartbeatSeriesQuery")
+	_clsHKHeartbeatSeriesQuery                                   = _objcClass("HKHeartbeatSeriesQuery")
 	_hKHeartbeatSeriesQuerySelInitWithHeartbeatSeriesDataHandler = objc.RegisterName("initWithHeartbeatSeries:dataHandler:")
 )
 
@@ -44,7 +44,8 @@ func (o *HKHeartbeatSeriesQuery) InitWithHeartbeatSeriesDataHandler(heartbeatSer
 		defer __block_dataHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKHeartbeatSeriesQuerySelInitWithHeartbeatSeriesDataHandler, heartbeatSeries.Ptr(), __block_dataHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKHeartbeatSeriesQueryFromID(_ret)
 }
-

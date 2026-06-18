@@ -26,4 +26,3 @@ func SCNPhysicsBehaviorFromID(id objc.ID) *SCNPhysicsBehavior {
 	purego.Track(o)
 	return o
 }
-

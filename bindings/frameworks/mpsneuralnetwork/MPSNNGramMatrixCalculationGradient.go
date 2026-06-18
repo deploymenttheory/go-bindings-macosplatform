@@ -17,12 +17,12 @@ type MPSNNGramMatrixCalculationGradient struct {
 }
 
 var (
-	_clsMPSNNGramMatrixCalculationGradient = _objcClass("MPSNNGramMatrixCalculationGradient")
+	_clsMPSNNGramMatrixCalculationGradient                    = _objcClass("MPSNNGramMatrixCalculationGradient")
 	_mPSNNGramMatrixCalculationGradientSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
 	_mPSNNGramMatrixCalculationGradientSelInitWithDeviceAlpha = objc.RegisterName("initWithDevice:alpha:")
-	_mPSNNGramMatrixCalculationGradientSelInitWithDevice = objc.RegisterName("initWithDevice:")
-	_mPSNNGramMatrixCalculationGradientSelAlpha = objc.RegisterName("alpha")
-	_mPSNNGramMatrixCalculationGradientSelSetAlpha = objc.RegisterName("setAlpha:")
+	_mPSNNGramMatrixCalculationGradientSelInitWithDevice      = objc.RegisterName("initWithDevice:")
+	_mPSNNGramMatrixCalculationGradientSelAlpha               = objc.RegisterName("alpha")
+	_mPSNNGramMatrixCalculationGradientSelSetAlpha            = objc.RegisterName("setAlpha:")
 )
 
 func MPSNNGramMatrixCalculationGradientFromID(id objc.ID) *MPSNNGramMatrixCalculationGradient {
@@ -38,21 +38,27 @@ func MPSNNGramMatrixCalculationGradientFromID(id objc.ID) *MPSNNGramMatrixCalcul
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSNNGramMatrixCalculationGradient) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSNNGramMatrixCalculationGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNGramMatrixCalculationGradientSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNGramMatrixCalculationGradientFromID(_ret)
 }
 
 // @abstract   Initializes a MPSNNGramMatrixCalculationGradient kernel. @param      device      The MTLDevice on which this MPSNNGramMatrixCalculationGradient filter will be used. @param      alpha       Scaling factor for the output. NOTE: the value for alpha is automatically adjusted by the @ref MPSNNGradientState when it is provided in the encode call. @return     A valid MPSNNGramMatrixCalculationGradient object or nil, if failure.
 func (o *MPSNNGramMatrixCalculationGradient) InitWithDeviceAlpha(device metal.MTLDevice, alpha float32) *MPSNNGramMatrixCalculationGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNGramMatrixCalculationGradientSelInitWithDeviceAlpha, device, alpha)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNGramMatrixCalculationGradientFromID(_ret)
 }
 
 // @abstract   Initializes a MPSNNGramMatrixCalculationGradient kernel with scaling factor alpha = 1.0f. @param      device      The MTLDevice on which this MPSNNGramMatrixCalculationGradient filter will be used. @return     A valid MPSNNGramMatrixCalculationGradient object or nil, if failure.
 func (o *MPSNNGramMatrixCalculationGradient) InitWithDevice(device metal.MTLDevice) *MPSNNGramMatrixCalculationGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNGramMatrixCalculationGradientSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNGramMatrixCalculationGradientFromID(_ret)
 }
 
@@ -65,4 +71,3 @@ func (o *MPSNNGramMatrixCalculationGradient) Alpha() float32 {
 func (o *MPSNNGramMatrixCalculationGradient) SetAlpha(alpha float32) {
 	o.Ptr().Send(_mPSNNGramMatrixCalculationGradientSelSetAlpha, alpha)
 }
-

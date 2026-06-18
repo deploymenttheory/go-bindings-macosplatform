@@ -19,15 +19,15 @@ type CNDecision struct {
 }
 
 var (
-	_clsCNDecision = _objcClass("CNDecision")
-	_cNDecisionSelInitWithTimeDetectionIDStrong = objc.RegisterName("initWithTime:detectionID:strong:")
+	_clsCNDecision                                   = _objcClass("CNDecision")
+	_cNDecisionSelInitWithTimeDetectionIDStrong      = objc.RegisterName("initWithTime:detectionID:strong:")
 	_cNDecisionSelInitWithTimeDetectionGroupIDStrong = objc.RegisterName("initWithTime:detectionGroupID:strong:")
-	_cNDecisionSelTime = objc.RegisterName("time")
-	_cNDecisionSelDetectionID = objc.RegisterName("detectionID")
-	_cNDecisionSelDetectionGroupID = objc.RegisterName("detectionGroupID")
-	_cNDecisionSelIsUserDecision = objc.RegisterName("isUserDecision")
-	_cNDecisionSelIsGroupDecision = objc.RegisterName("isGroupDecision")
-	_cNDecisionSelIsStrongDecision = objc.RegisterName("isStrongDecision")
+	_cNDecisionSelTime                               = objc.RegisterName("time")
+	_cNDecisionSelDetectionID                        = objc.RegisterName("detectionID")
+	_cNDecisionSelDetectionGroupID                   = objc.RegisterName("detectionGroupID")
+	_cNDecisionSelIsUserDecision                     = objc.RegisterName("isUserDecision")
+	_cNDecisionSelIsGroupDecision                    = objc.RegisterName("isGroupDecision")
+	_cNDecisionSelIsStrongDecision                   = objc.RegisterName("isStrongDecision")
 )
 
 func CNDecisionFromID(id objc.ID) *CNDecision {
@@ -43,14 +43,18 @@ func CNDecisionFromID(id objc.ID) *CNDecision {
 // Make a decision to focus on the detection with the given detectionID. A strong decision keeps focus for as long as possible.
 func (o *CNDecision) InitWithTimeDetectionIDStrong(time_ coremedia.CMTime, detectionID int64, isStrong bool) *CNDecision {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNDecisionSelInitWithTimeDetectionIDStrong, time_, detectionID, isStrong)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNDecisionFromID(_ret)
 }
 
 // Make a decision to focus on the best among those detections with the same detectionGroupID. A strong decision keeps focus for as long as possible.
 func (o *CNDecision) InitWithTimeDetectionGroupIDStrong(time_ coremedia.CMTime, detectionGroupID int64, isStrong bool) *CNDecision {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNDecisionSelInitWithTimeDetectionGroupIDStrong, time_, detectionGroupID, isStrong)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNDecisionFromID(_ret)
 }
 
@@ -89,4 +93,3 @@ func (o *CNDecision) IsStrongDecision() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cNDecisionSelIsStrongDecision)
 	return _ret
 }
-

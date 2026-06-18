@@ -16,9 +16,9 @@ type ASAuthorizationSecurityKeyPublicKeyCredentialRegistration struct {
 }
 
 var (
-	_clsASAuthorizationSecurityKeyPublicKeyCredentialRegistration = _objcClass("ASAuthorizationSecurityKeyPublicKeyCredentialRegistration")
+	_clsASAuthorizationSecurityKeyPublicKeyCredentialRegistration           = _objcClass("ASAuthorizationSecurityKeyPublicKeyCredentialRegistration")
 	_aSAuthorizationSecurityKeyPublicKeyCredentialRegistrationSelTransports = objc.RegisterName("transports")
-	_aSAuthorizationSecurityKeyPublicKeyCredentialRegistrationSelPrf = objc.RegisterName("prf")
+	_aSAuthorizationSecurityKeyPublicKeyCredentialRegistrationSelPrf        = objc.RegisterName("prf")
 )
 
 func ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationFromID(id objc.ID) *ASAuthorizationSecurityKeyPublicKeyCredentialRegistration {
@@ -39,7 +39,8 @@ func (o *ASAuthorizationSecurityKeyPublicKeyCredentialRegistration) Transports()
 
 func (o *ASAuthorizationSecurityKeyPublicKeyCredentialRegistration) Prf() *ASAuthorizationPublicKeyCredentialPRFRegistrationOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationSecurityKeyPublicKeyCredentialRegistrationSelPrf)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationPublicKeyCredentialPRFRegistrationOutputFromID(_ret)
 }
-

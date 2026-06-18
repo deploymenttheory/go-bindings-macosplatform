@@ -54,7 +54,9 @@ func (x *MTRAccessControlClusterTarget) WithDeviceType(deviceType *foundation.NS
 	return x
 }
 
-func (x *MTRAccessControlClusterTarget) asMTRAccessControlClusterAccessControlTargetStruct() *raw.MTRAccessControlClusterAccessControlTargetStruct { return &x.inner.MTRAccessControlClusterAccessControlTargetStruct }
+func (x *MTRAccessControlClusterTarget) asMTRAccessControlClusterAccessControlTargetStruct() *raw.MTRAccessControlClusterAccessControlTargetStruct {
+	return &x.inner.MTRAccessControlClusterAccessControlTargetStruct
+}
 
 // MTRAccessControlClusterTargetable is the interface implemented by [MTRAccessControlClusterTarget], for mocking and DI.
 type MTRAccessControlClusterTargetable interface {
@@ -65,4 +67,3 @@ type MTRAccessControlClusterTargetable interface {
 }
 
 var _ MTRAccessControlClusterTargetable = (*MTRAccessControlClusterTarget)(nil)
-

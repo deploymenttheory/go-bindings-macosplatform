@@ -18,12 +18,12 @@ type AVVideoCompositionInstruction struct {
 }
 
 var (
-	_clsAVVideoCompositionInstruction = _objcClass("AVVideoCompositionInstruction")
-	_aVVideoCompositionInstructionSelBackgroundColor = objc.RegisterName("backgroundColor")
-	_aVVideoCompositionInstructionSelLayerInstructions = objc.RegisterName("layerInstructions")
-	_aVVideoCompositionInstructionSelEnablePostProcessing = objc.RegisterName("enablePostProcessing")
-	_aVVideoCompositionInstructionSelRequiredSourceTrackIDs = objc.RegisterName("requiredSourceTrackIDs")
-	_aVVideoCompositionInstructionSelPassthroughTrackID = objc.RegisterName("passthroughTrackID")
+	_clsAVVideoCompositionInstruction                                 = _objcClass("AVVideoCompositionInstruction")
+	_aVVideoCompositionInstructionSelBackgroundColor                  = objc.RegisterName("backgroundColor")
+	_aVVideoCompositionInstructionSelLayerInstructions                = objc.RegisterName("layerInstructions")
+	_aVVideoCompositionInstructionSelEnablePostProcessing             = objc.RegisterName("enablePostProcessing")
+	_aVVideoCompositionInstructionSelRequiredSourceTrackIDs           = objc.RegisterName("requiredSourceTrackIDs")
+	_aVVideoCompositionInstructionSelPassthroughTrackID               = objc.RegisterName("passthroughTrackID")
 	_aVVideoCompositionInstructionSelRequiredSourceSampleDataTrackIDs = objc.RegisterName("requiredSourceSampleDataTrackIDs")
 )
 
@@ -46,7 +46,9 @@ func (o *AVVideoCompositionInstruction) BackgroundColor() unsafe.Pointer {
 // Provides an array of instances of AVVideoCompositionLayerInstruction that specify how video frames from source tracks should be layered and composed. Tracks are layered in the composition according to the top-to-bottom order of the layerInstructions array; the track with trackID of the first instruction in the array will be layered on top, with the track with the trackID of the second instruction immediately underneath, etc. If this key is nil, the output will be a fill of the background color.
 func (o *AVVideoCompositionInstruction) LayerInstructions() *foundation.NSArray[*AVVideoCompositionLayerInstruction] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVVideoCompositionInstructionSelLayerInstructions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVVideoCompositionLayerInstruction](_ret)
 }
 
@@ -73,4 +75,3 @@ func (o *AVVideoCompositionInstruction) RequiredSourceSampleDataTrackIDs() *foun
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aVVideoCompositionInstructionSelRequiredSourceSampleDataTrackIDs)
 	return _ret
 }
-

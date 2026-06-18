@@ -16,10 +16,10 @@ type EPDeveloperTool struct {
 }
 
 var (
-	_clsEPDeveloperTool = _objcClass("EPDeveloperTool")
-	_ePDeveloperToolSelInit = objc.RegisterName("init")
+	_clsEPDeveloperTool                                                = _objcClass("EPDeveloperTool")
+	_ePDeveloperToolSelInit                                            = objc.RegisterName("init")
 	_ePDeveloperToolSelRequestDeveloperToolAccessWithCompletionHandler = objc.RegisterName("requestDeveloperToolAccessWithCompletionHandler:")
-	_ePDeveloperToolSelAuthorizationStatus = objc.RegisterName("authorizationStatus")
+	_ePDeveloperToolSelAuthorizationStatus                             = objc.RegisterName("authorizationStatus")
 )
 
 func EPDeveloperToolFromID(id objc.ID) *EPDeveloperTool {
@@ -35,7 +35,9 @@ func EPDeveloperToolFromID(id objc.ID) *EPDeveloperTool {
 // Initializes the object to manage the lifetime of the XPC connection. The XPC connection remains for the lifecycle of the object and deallocation is required to trigger the teardown of the XPC connection.
 func (o *EPDeveloperTool) Init() *EPDeveloperTool {
 	_ret := objc.Send[objc.ID](o.Ptr(), _ePDeveloperToolSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EPDeveloperToolFromID(_ret)
 }
 
@@ -56,4 +58,3 @@ func (o *EPDeveloperTool) AuthorizationStatus() EPDeveloperToolStatus {
 	_ret := objc.Send[EPDeveloperToolStatus](o.Ptr(), _ePDeveloperToolSelAuthorizationStatus)
 	return _ret
 }
-

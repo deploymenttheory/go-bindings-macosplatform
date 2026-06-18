@@ -16,11 +16,11 @@ type NSScrubberProportionalLayout struct {
 }
 
 var (
-	_clsNSScrubberProportionalLayout = _objcClass("NSScrubberProportionalLayout")
+	_clsNSScrubberProportionalLayout                             = _objcClass("NSScrubberProportionalLayout")
 	_nSScrubberProportionalLayoutSelInitWithNumberOfVisibleItems = objc.RegisterName("initWithNumberOfVisibleItems:")
-	_nSScrubberProportionalLayoutSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSScrubberProportionalLayoutSelNumberOfVisibleItems = objc.RegisterName("numberOfVisibleItems")
-	_nSScrubberProportionalLayoutSelSetNumberOfVisibleItems = objc.RegisterName("setNumberOfVisibleItems:")
+	_nSScrubberProportionalLayoutSelInitWithCoder                = objc.RegisterName("initWithCoder:")
+	_nSScrubberProportionalLayoutSelNumberOfVisibleItems         = objc.RegisterName("numberOfVisibleItems")
+	_nSScrubberProportionalLayoutSelSetNumberOfVisibleItems      = objc.RegisterName("setNumberOfVisibleItems:")
 )
 
 func NSScrubberProportionalLayoutFromID(id objc.ID) *NSScrubberProportionalLayout {
@@ -35,13 +35,17 @@ func NSScrubberProportionalLayoutFromID(id objc.ID) *NSScrubberProportionalLayou
 
 func (o *NSScrubberProportionalLayout) InitWithNumberOfVisibleItems(numberOfVisibleItems int) *NSScrubberProportionalLayout {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberProportionalLayoutSelInitWithNumberOfVisibleItems, numberOfVisibleItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrubberProportionalLayoutFromID(_ret)
 }
 
 func (o *NSScrubberProportionalLayout) InitWithCoder(coder *foundation.NSCoder) *NSScrubberProportionalLayout {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberProportionalLayoutSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrubberProportionalLayoutFromID(_ret)
 }
 
@@ -55,4 +59,3 @@ func (o *NSScrubberProportionalLayout) NumberOfVisibleItems() int {
 func (o *NSScrubberProportionalLayout) SetNumberOfVisibleItems(numberOfVisibleItems int) {
 	o.Ptr().Send(_nSScrubberProportionalLayoutSelSetNumberOfVisibleItems, numberOfVisibleItems)
 }
-

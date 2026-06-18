@@ -17,27 +17,27 @@ type NSSearchField struct {
 }
 
 var (
-	_clsNSSearchField = _objcClass("NSSearchField")
-	_nSSearchFieldSelSearchTextBounds = objc.RegisterName("searchTextBounds")
-	_nSSearchFieldSelSearchButtonBounds = objc.RegisterName("searchButtonBounds")
-	_nSSearchFieldSelCancelButtonBounds = objc.RegisterName("cancelButtonBounds")
-	_nSSearchFieldSelRecentSearches = objc.RegisterName("recentSearches")
-	_nSSearchFieldSelSetRecentSearches = objc.RegisterName("setRecentSearches:")
-	_nSSearchFieldSelRecentsAutosaveName = objc.RegisterName("recentsAutosaveName")
-	_nSSearchFieldSelSetRecentsAutosaveName = objc.RegisterName("setRecentsAutosaveName:")
-	_nSSearchFieldSelSearchMenuTemplate = objc.RegisterName("searchMenuTemplate")
-	_nSSearchFieldSelSetSearchMenuTemplate = objc.RegisterName("setSearchMenuTemplate:")
-	_nSSearchFieldSelSendsWholeSearchString = objc.RegisterName("sendsWholeSearchString")
-	_nSSearchFieldSelSetSendsWholeSearchString = objc.RegisterName("setSendsWholeSearchString:")
-	_nSSearchFieldSelMaximumRecents = objc.RegisterName("maximumRecents")
-	_nSSearchFieldSelSetMaximumRecents = objc.RegisterName("setMaximumRecents:")
-	_nSSearchFieldSelSendsSearchStringImmediately = objc.RegisterName("sendsSearchStringImmediately")
+	_clsNSSearchField                                = _objcClass("NSSearchField")
+	_nSSearchFieldSelSearchTextBounds                = objc.RegisterName("searchTextBounds")
+	_nSSearchFieldSelSearchButtonBounds              = objc.RegisterName("searchButtonBounds")
+	_nSSearchFieldSelCancelButtonBounds              = objc.RegisterName("cancelButtonBounds")
+	_nSSearchFieldSelRecentSearches                  = objc.RegisterName("recentSearches")
+	_nSSearchFieldSelSetRecentSearches               = objc.RegisterName("setRecentSearches:")
+	_nSSearchFieldSelRecentsAutosaveName             = objc.RegisterName("recentsAutosaveName")
+	_nSSearchFieldSelSetRecentsAutosaveName          = objc.RegisterName("setRecentsAutosaveName:")
+	_nSSearchFieldSelSearchMenuTemplate              = objc.RegisterName("searchMenuTemplate")
+	_nSSearchFieldSelSetSearchMenuTemplate           = objc.RegisterName("setSearchMenuTemplate:")
+	_nSSearchFieldSelSendsWholeSearchString          = objc.RegisterName("sendsWholeSearchString")
+	_nSSearchFieldSelSetSendsWholeSearchString       = objc.RegisterName("setSendsWholeSearchString:")
+	_nSSearchFieldSelMaximumRecents                  = objc.RegisterName("maximumRecents")
+	_nSSearchFieldSelSetMaximumRecents               = objc.RegisterName("setMaximumRecents:")
+	_nSSearchFieldSelSendsSearchStringImmediately    = objc.RegisterName("sendsSearchStringImmediately")
 	_nSSearchFieldSelSetSendsSearchStringImmediately = objc.RegisterName("setSendsSearchStringImmediately:")
-	_nSSearchFieldSelRectForSearchTextWhenCentered = objc.RegisterName("rectForSearchTextWhenCentered:")
+	_nSSearchFieldSelRectForSearchTextWhenCentered   = objc.RegisterName("rectForSearchTextWhenCentered:")
 	_nSSearchFieldSelRectForSearchButtonWhenCentered = objc.RegisterName("rectForSearchButtonWhenCentered:")
 	_nSSearchFieldSelRectForCancelButtonWhenCentered = objc.RegisterName("rectForCancelButtonWhenCentered:")
-	_nSSearchFieldSelCentersPlaceholder = objc.RegisterName("centersPlaceholder")
-	_nSSearchFieldSelSetCentersPlaceholder = objc.RegisterName("setCentersPlaceholder:")
+	_nSSearchFieldSelCentersPlaceholder              = objc.RegisterName("centersPlaceholder")
+	_nSSearchFieldSelSetCentersPlaceholder           = objc.RegisterName("setCentersPlaceholder:")
 )
 
 func NSSearchFieldFromID(id objc.ID) *NSSearchField {
@@ -76,7 +76,9 @@ func (o *NSSearchField) SetRecentSearches(recentSearches *foundation.NSArray[*fo
 
 func (o *NSSearchField) RecentsAutosaveName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchFieldSelRecentsAutosaveName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -86,7 +88,9 @@ func (o *NSSearchField) SetRecentsAutosaveName(recentsAutosaveName *foundation.N
 
 func (o *NSSearchField) SearchMenuTemplate() *NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchFieldSelSearchMenuTemplate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuFromID(_ret)
 }
 
@@ -149,4 +153,3 @@ func (o *NSSearchField) CentersPlaceholder() bool {
 func (o *NSSearchField) SetCentersPlaceholder(centersPlaceholder bool) {
 	o.Ptr().Send(_nSSearchFieldSelSetCentersPlaceholder, centersPlaceholder)
 }
-

@@ -250,9 +250,13 @@ func (x *MTRBaseClusterRVCRunMode) SubscribeAttributeClusterRevisionWithParamsSu
 	}
 }
 
-func (x *MTRBaseClusterRVCRunMode) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterRVCRunMode) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterRVCRunMode) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterRVCRunMode) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterRVCRunModeable is the interface implemented by [MTRBaseClusterRVCRunMode], for mocking and DI.
 type MTRBaseClusterRVCRunModeable interface {
@@ -275,4 +279,3 @@ type MTRBaseClusterRVCRunModeable interface {
 }
 
 var _ MTRBaseClusterRVCRunModeable = (*MTRBaseClusterRVCRunMode)(nil)
-

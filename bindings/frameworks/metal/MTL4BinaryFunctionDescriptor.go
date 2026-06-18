@@ -16,13 +16,13 @@ type MTL4BinaryFunctionDescriptor struct {
 }
 
 var (
-	_clsMTL4BinaryFunctionDescriptor = _objcClass("MTL4BinaryFunctionDescriptor")
-	_mTL4BinaryFunctionDescriptorSelName = objc.RegisterName("name")
-	_mTL4BinaryFunctionDescriptorSelSetName = objc.RegisterName("setName:")
-	_mTL4BinaryFunctionDescriptorSelFunctionDescriptor = objc.RegisterName("functionDescriptor")
+	_clsMTL4BinaryFunctionDescriptor                      = _objcClass("MTL4BinaryFunctionDescriptor")
+	_mTL4BinaryFunctionDescriptorSelName                  = objc.RegisterName("name")
+	_mTL4BinaryFunctionDescriptorSelSetName               = objc.RegisterName("setName:")
+	_mTL4BinaryFunctionDescriptorSelFunctionDescriptor    = objc.RegisterName("functionDescriptor")
 	_mTL4BinaryFunctionDescriptorSelSetFunctionDescriptor = objc.RegisterName("setFunctionDescriptor:")
-	_mTL4BinaryFunctionDescriptorSelOptions = objc.RegisterName("options")
-	_mTL4BinaryFunctionDescriptorSelSetOptions = objc.RegisterName("setOptions:")
+	_mTL4BinaryFunctionDescriptorSelOptions               = objc.RegisterName("options")
+	_mTL4BinaryFunctionDescriptorSelSetOptions            = objc.RegisterName("setOptions:")
 )
 
 func MTL4BinaryFunctionDescriptorFromID(id objc.ID) *MTL4BinaryFunctionDescriptor {
@@ -35,10 +35,12 @@ func MTL4BinaryFunctionDescriptorFromID(id objc.ID) *MTL4BinaryFunctionDescripto
 	return o
 }
 
-// Associates a string that uniquely identifies a binary function. You can use this property to look up a corresponding binary function by name in a ``MTL4Archive`` instance.
+// Associates a string that uniquely identifies a binary function. You can use this property to look up a corresponding binary function by name in a “MTL4Archive“ instance.
 func (o *MTL4BinaryFunctionDescriptor) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4BinaryFunctionDescriptorSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTL4BinaryFunctionDescriptor) SetName(name *foundation.NSString) {
 // Provides the function descriptor corresponding to the function to compile into a binary function.
 func (o *MTL4BinaryFunctionDescriptor) FunctionDescriptor() *MTL4FunctionDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4BinaryFunctionDescriptorSelFunctionDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTL4FunctionDescriptorFromID(_ret)
 }
 
@@ -66,4 +70,3 @@ func (o *MTL4BinaryFunctionDescriptor) Options() MTL4BinaryFunctionOptions {
 func (o *MTL4BinaryFunctionDescriptor) SetOptions(options MTL4BinaryFunctionOptions) {
 	o.Ptr().Send(_mTL4BinaryFunctionDescriptorSelSetOptions, options)
 }
-

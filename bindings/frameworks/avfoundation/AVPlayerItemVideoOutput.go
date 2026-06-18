@@ -19,15 +19,15 @@ type AVPlayerItemVideoOutput struct {
 }
 
 var (
-	_clsAVPlayerItemVideoOutput = _objcClass("AVPlayerItemVideoOutput")
-	_aVPlayerItemVideoOutputSelInitWithPixelBufferAttributes = objc.RegisterName("initWithPixelBufferAttributes:")
-	_aVPlayerItemVideoOutputSelInitWithOutputSettings = objc.RegisterName("initWithOutputSettings:")
-	_aVPlayerItemVideoOutputSelHasNewPixelBufferForItemTime = objc.RegisterName("hasNewPixelBufferForItemTime:")
-	_aVPlayerItemVideoOutputSelCopyPixelBufferForItemTimeItemTimeForDisplay = objc.RegisterName("copyPixelBufferForItemTime:itemTimeForDisplay:")
-	_aVPlayerItemVideoOutputSelSetDelegateQueue = objc.RegisterName("setDelegate:queue:")
+	_clsAVPlayerItemVideoOutput                                                        = _objcClass("AVPlayerItemVideoOutput")
+	_aVPlayerItemVideoOutputSelInitWithPixelBufferAttributes                           = objc.RegisterName("initWithPixelBufferAttributes:")
+	_aVPlayerItemVideoOutputSelInitWithOutputSettings                                  = objc.RegisterName("initWithOutputSettings:")
+	_aVPlayerItemVideoOutputSelHasNewPixelBufferForItemTime                            = objc.RegisterName("hasNewPixelBufferForItemTime:")
+	_aVPlayerItemVideoOutputSelCopyPixelBufferForItemTimeItemTimeForDisplay            = objc.RegisterName("copyPixelBufferForItemTime:itemTimeForDisplay:")
+	_aVPlayerItemVideoOutputSelSetDelegateQueue                                        = objc.RegisterName("setDelegate:queue:")
 	_aVPlayerItemVideoOutputSelRequestNotificationOfMediaDataChangeWithAdvanceInterval = objc.RegisterName("requestNotificationOfMediaDataChangeWithAdvanceInterval:")
-	_aVPlayerItemVideoOutputSelDelegate = objc.RegisterName("delegate")
-	_aVPlayerItemVideoOutputSelDelegateQueue = objc.RegisterName("delegateQueue")
+	_aVPlayerItemVideoOutputSelDelegate                                                = objc.RegisterName("delegate")
+	_aVPlayerItemVideoOutputSelDelegateQueue                                           = objc.RegisterName("delegateQueue")
 )
 
 func AVPlayerItemVideoOutputFromID(id objc.ID) *AVPlayerItemVideoOutput {
@@ -42,13 +42,17 @@ func AVPlayerItemVideoOutputFromID(id objc.ID) *AVPlayerItemVideoOutput {
 
 func (o *AVPlayerItemVideoOutput) InitWithPixelBufferAttributes(pixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVPlayerItemVideoOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemVideoOutputSelInitWithPixelBufferAttributes, pixelBufferAttributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerItemVideoOutputFromID(_ret)
 }
 
 func (o *AVPlayerItemVideoOutput) InitWithOutputSettings(outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVPlayerItemVideoOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemVideoOutputSelInitWithOutputSettings, outputSettings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerItemVideoOutputFromID(_ret)
 }
 
@@ -78,7 +82,8 @@ func (o *AVPlayerItemVideoOutput) Delegate() AVPlayerItemOutputPullDelegate {
 
 func (o *AVPlayerItemVideoOutput) DelegateQueue() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemVideoOutputSelDelegateQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
-

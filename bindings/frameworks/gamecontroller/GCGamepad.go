@@ -16,18 +16,18 @@ type GCGamepad struct {
 }
 
 var (
-	_clsGCGamepad = _objcClass("GCGamepad")
-	_gCGamepadSelSaveSnapshot = objc.RegisterName("saveSnapshot")
-	_gCGamepadSelController = objc.RegisterName("controller")
-	_gCGamepadSelValueChangedHandler = objc.RegisterName("valueChangedHandler")
+	_clsGCGamepad                       = _objcClass("GCGamepad")
+	_gCGamepadSelSaveSnapshot           = objc.RegisterName("saveSnapshot")
+	_gCGamepadSelController             = objc.RegisterName("controller")
+	_gCGamepadSelValueChangedHandler    = objc.RegisterName("valueChangedHandler")
 	_gCGamepadSelSetValueChangedHandler = objc.RegisterName("setValueChangedHandler:")
-	_gCGamepadSelDpad = objc.RegisterName("dpad")
-	_gCGamepadSelButtonA = objc.RegisterName("buttonA")
-	_gCGamepadSelButtonB = objc.RegisterName("buttonB")
-	_gCGamepadSelButtonX = objc.RegisterName("buttonX")
-	_gCGamepadSelButtonY = objc.RegisterName("buttonY")
-	_gCGamepadSelLeftShoulder = objc.RegisterName("leftShoulder")
-	_gCGamepadSelRightShoulder = objc.RegisterName("rightShoulder")
+	_gCGamepadSelDpad                   = objc.RegisterName("dpad")
+	_gCGamepadSelButtonA                = objc.RegisterName("buttonA")
+	_gCGamepadSelButtonB                = objc.RegisterName("buttonB")
+	_gCGamepadSelButtonX                = objc.RegisterName("buttonX")
+	_gCGamepadSelButtonY                = objc.RegisterName("buttonY")
+	_gCGamepadSelLeftShoulder           = objc.RegisterName("leftShoulder")
+	_gCGamepadSelRightShoulder          = objc.RegisterName("rightShoulder")
 )
 
 func GCGamepadFromID(id objc.ID) *GCGamepad {
@@ -43,14 +43,18 @@ func GCGamepadFromID(id objc.ID) *GCGamepad {
 // Polls the state vector of the controller and saves it to a snapshot. The snapshot is stored in a device independent format that can be serialized and used at a later date. This is useful for features such as quality assurance, save game or replay functionality among many. If your application is heavily multithreaded this may also be useful to guarantee atomicity of input handling as a snapshot will not change based on user input once it is taken.
 func (o *GCGamepad) SaveSnapshot() *GCGamepadSnapshot {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCGamepadSelSaveSnapshot)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCGamepadSnapshotFromID(_ret)
 }
 
 // A profile keeps a reference to the controller that this profile is mapping input from.
 func (o *GCGamepad) Controller() *GCController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCGamepadSelController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerFromID(_ret)
 }
 
@@ -79,46 +83,59 @@ func (o *GCGamepad) SetValueChangedHandler(valueChangedHandler func(*GCGamepad, 
 // Required to be analog in the Standard profile. All the elements of this directional input are thus analog.
 func (o *GCGamepad) Dpad() *GCControllerDirectionPad {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCGamepadSelDpad)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerDirectionPadFromID(_ret)
 }
 
 // All face buttons are required to be analog in the Standard profile. These must be arranged in the diamond pattern given below: Y / \ X   B \ / A
 func (o *GCGamepad) ButtonA() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCGamepadSelButtonA)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
 func (o *GCGamepad) ButtonB() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCGamepadSelButtonB)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
 func (o *GCGamepad) ButtonX() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCGamepadSelButtonX)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
 func (o *GCGamepad) ButtonY() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCGamepadSelButtonY)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
 // Shoulder buttons are required to be analog inputs.
 func (o *GCGamepad) LeftShoulder() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCGamepadSelLeftShoulder)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
 // Shoulder buttons are required to be analog inputs.
 func (o *GCGamepad) RightShoulder() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCGamepadSelRightShoulder)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
-

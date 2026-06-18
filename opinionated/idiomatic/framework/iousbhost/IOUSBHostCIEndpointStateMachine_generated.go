@@ -106,4 +106,3 @@ type HostCIEndpointStateMachineable interface {
 }
 
 var _ HostCIEndpointStateMachineable = (*HostCIEndpointStateMachine)(nil)
-

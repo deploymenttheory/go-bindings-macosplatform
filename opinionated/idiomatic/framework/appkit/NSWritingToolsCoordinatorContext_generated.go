@@ -16,7 +16,9 @@ type WritingToolsCoordinatorContext struct {
 }
 
 // Unwrap returns the underlying [raw.NSWritingToolsCoordinatorContext].
-func (x *WritingToolsCoordinatorContext) Unwrap() *raw.NSWritingToolsCoordinatorContext { return x.inner }
+func (x *WritingToolsCoordinatorContext) Unwrap() *raw.NSWritingToolsCoordinatorContext {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -67,4 +69,3 @@ type WritingToolsCoordinatorContextable interface {
 }
 
 var _ WritingToolsCoordinatorContextable = (*WritingToolsCoordinatorContext)(nil)
-

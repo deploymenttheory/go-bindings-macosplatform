@@ -16,36 +16,36 @@ type NSPickerTouchBarItem struct {
 }
 
 var (
-	_clsNSPickerTouchBarItem = _objcClass("NSPickerTouchBarItem")
+	_clsNSPickerTouchBarItem                                                                = _objcClass("NSPickerTouchBarItem")
 	_nSPickerTouchBarItemSelPickerTouchBarItemWithIdentifierLabelsSelectionModeTargetAction = objc.RegisterName("pickerTouchBarItemWithIdentifier:labels:selectionMode:target:action:")
 	_nSPickerTouchBarItemSelPickerTouchBarItemWithIdentifierImagesSelectionModeTargetAction = objc.RegisterName("pickerTouchBarItemWithIdentifier:images:selectionMode:target:action:")
-	_nSPickerTouchBarItemSelSetImageAtIndex = objc.RegisterName("setImage:atIndex:")
-	_nSPickerTouchBarItemSelImageAtIndex = objc.RegisterName("imageAtIndex:")
-	_nSPickerTouchBarItemSelSetLabelAtIndex = objc.RegisterName("setLabel:atIndex:")
-	_nSPickerTouchBarItemSelLabelAtIndex = objc.RegisterName("labelAtIndex:")
-	_nSPickerTouchBarItemSelSetEnabledAtIndex = objc.RegisterName("setEnabled:atIndex:")
-	_nSPickerTouchBarItemSelIsEnabledAtIndex = objc.RegisterName("isEnabledAtIndex:")
-	_nSPickerTouchBarItemSelControlRepresentation = objc.RegisterName("controlRepresentation")
-	_nSPickerTouchBarItemSelSetControlRepresentation = objc.RegisterName("setControlRepresentation:")
-	_nSPickerTouchBarItemSelCollapsedRepresentationLabel = objc.RegisterName("collapsedRepresentationLabel")
-	_nSPickerTouchBarItemSelSetCollapsedRepresentationLabel = objc.RegisterName("setCollapsedRepresentationLabel:")
-	_nSPickerTouchBarItemSelCollapsedRepresentationImage = objc.RegisterName("collapsedRepresentationImage")
-	_nSPickerTouchBarItemSelSetCollapsedRepresentationImage = objc.RegisterName("setCollapsedRepresentationImage:")
-	_nSPickerTouchBarItemSelSelectedIndex = objc.RegisterName("selectedIndex")
-	_nSPickerTouchBarItemSelSetSelectedIndex = objc.RegisterName("setSelectedIndex:")
-	_nSPickerTouchBarItemSelSelectionColor = objc.RegisterName("selectionColor")
-	_nSPickerTouchBarItemSelSetSelectionColor = objc.RegisterName("setSelectionColor:")
-	_nSPickerTouchBarItemSelSelectionMode = objc.RegisterName("selectionMode")
-	_nSPickerTouchBarItemSelSetSelectionMode = objc.RegisterName("setSelectionMode:")
-	_nSPickerTouchBarItemSelNumberOfOptions = objc.RegisterName("numberOfOptions")
-	_nSPickerTouchBarItemSelSetNumberOfOptions = objc.RegisterName("setNumberOfOptions:")
-	_nSPickerTouchBarItemSelTarget = objc.RegisterName("target")
-	_nSPickerTouchBarItemSelSetTarget = objc.RegisterName("setTarget:")
-	_nSPickerTouchBarItemSelAction = objc.RegisterName("action")
-	_nSPickerTouchBarItemSelSetAction = objc.RegisterName("setAction:")
-	_nSPickerTouchBarItemSelIsEnabled = objc.RegisterName("isEnabled")
-	_nSPickerTouchBarItemSelSetEnabled = objc.RegisterName("setEnabled:")
-	_nSPickerTouchBarItemSelSetCustomizationLabel = objc.RegisterName("setCustomizationLabel:")
+	_nSPickerTouchBarItemSelSetImageAtIndex                                                 = objc.RegisterName("setImage:atIndex:")
+	_nSPickerTouchBarItemSelImageAtIndex                                                    = objc.RegisterName("imageAtIndex:")
+	_nSPickerTouchBarItemSelSetLabelAtIndex                                                 = objc.RegisterName("setLabel:atIndex:")
+	_nSPickerTouchBarItemSelLabelAtIndex                                                    = objc.RegisterName("labelAtIndex:")
+	_nSPickerTouchBarItemSelSetEnabledAtIndex                                               = objc.RegisterName("setEnabled:atIndex:")
+	_nSPickerTouchBarItemSelIsEnabledAtIndex                                                = objc.RegisterName("isEnabledAtIndex:")
+	_nSPickerTouchBarItemSelControlRepresentation                                           = objc.RegisterName("controlRepresentation")
+	_nSPickerTouchBarItemSelSetControlRepresentation                                        = objc.RegisterName("setControlRepresentation:")
+	_nSPickerTouchBarItemSelCollapsedRepresentationLabel                                    = objc.RegisterName("collapsedRepresentationLabel")
+	_nSPickerTouchBarItemSelSetCollapsedRepresentationLabel                                 = objc.RegisterName("setCollapsedRepresentationLabel:")
+	_nSPickerTouchBarItemSelCollapsedRepresentationImage                                    = objc.RegisterName("collapsedRepresentationImage")
+	_nSPickerTouchBarItemSelSetCollapsedRepresentationImage                                 = objc.RegisterName("setCollapsedRepresentationImage:")
+	_nSPickerTouchBarItemSelSelectedIndex                                                   = objc.RegisterName("selectedIndex")
+	_nSPickerTouchBarItemSelSetSelectedIndex                                                = objc.RegisterName("setSelectedIndex:")
+	_nSPickerTouchBarItemSelSelectionColor                                                  = objc.RegisterName("selectionColor")
+	_nSPickerTouchBarItemSelSetSelectionColor                                               = objc.RegisterName("setSelectionColor:")
+	_nSPickerTouchBarItemSelSelectionMode                                                   = objc.RegisterName("selectionMode")
+	_nSPickerTouchBarItemSelSetSelectionMode                                                = objc.RegisterName("setSelectionMode:")
+	_nSPickerTouchBarItemSelNumberOfOptions                                                 = objc.RegisterName("numberOfOptions")
+	_nSPickerTouchBarItemSelSetNumberOfOptions                                              = objc.RegisterName("setNumberOfOptions:")
+	_nSPickerTouchBarItemSelTarget                                                          = objc.RegisterName("target")
+	_nSPickerTouchBarItemSelSetTarget                                                       = objc.RegisterName("setTarget:")
+	_nSPickerTouchBarItemSelAction                                                          = objc.RegisterName("action")
+	_nSPickerTouchBarItemSelSetAction                                                       = objc.RegisterName("setAction:")
+	_nSPickerTouchBarItemSelIsEnabled                                                       = objc.RegisterName("isEnabled")
+	_nSPickerTouchBarItemSelSetEnabled                                                      = objc.RegisterName("setEnabled:")
+	_nSPickerTouchBarItemSelSetCustomizationLabel                                           = objc.RegisterName("setCustomizationLabel:")
 )
 
 func NSPickerTouchBarItemFromID(id objc.ID) *NSPickerTouchBarItem {
@@ -60,13 +60,17 @@ func NSPickerTouchBarItemFromID(id objc.ID) *NSPickerTouchBarItem {
 
 func NSPickerTouchBarItemPickerTouchBarItemWithIdentifierLabelsSelectionModeTargetAction(identifier *foundation.NSString, labels *foundation.NSArray[*foundation.NSString], selectionMode NSPickerTouchBarItemSelectionMode, target objc.ID, action objc.SEL) *NSPickerTouchBarItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPickerTouchBarItem), _nSPickerTouchBarItemSelPickerTouchBarItemWithIdentifierLabelsSelectionModeTargetAction, identifier.Ptr(), labels, selectionMode, target, action)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPickerTouchBarItemFromID(_ret)
 }
 
 func NSPickerTouchBarItemPickerTouchBarItemWithIdentifierImagesSelectionModeTargetAction(identifier *foundation.NSString, images *foundation.NSArray[*NSImage], selectionMode NSPickerTouchBarItemSelectionMode, target objc.ID, action objc.SEL) *NSPickerTouchBarItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPickerTouchBarItem), _nSPickerTouchBarItemSelPickerTouchBarItemWithIdentifierImagesSelectionModeTargetAction, identifier.Ptr(), images.Ptr(), selectionMode, target, action)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPickerTouchBarItemFromID(_ret)
 }
 
@@ -76,7 +80,9 @@ func (o *NSPickerTouchBarItem) SetImageAtIndex(image *NSImage, index int) {
 
 func (o *NSPickerTouchBarItem) ImageAtIndex(index int) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPickerTouchBarItemSelImageAtIndex, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -86,7 +92,9 @@ func (o *NSPickerTouchBarItem) SetLabelAtIndex(label *foundation.NSString, index
 
 func (o *NSPickerTouchBarItem) LabelAtIndex(index int) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPickerTouchBarItemSelLabelAtIndex, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -110,7 +118,9 @@ func (o *NSPickerTouchBarItem) SetControlRepresentation(controlRepresentation NS
 
 func (o *NSPickerTouchBarItem) CollapsedRepresentationLabel() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPickerTouchBarItemSelCollapsedRepresentationLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -120,7 +130,9 @@ func (o *NSPickerTouchBarItem) SetCollapsedRepresentationLabel(collapsedRepresen
 
 func (o *NSPickerTouchBarItem) CollapsedRepresentationImage() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPickerTouchBarItemSelCollapsedRepresentationImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -139,7 +151,9 @@ func (o *NSPickerTouchBarItem) SetSelectedIndex(selectedIndex int) {
 
 func (o *NSPickerTouchBarItem) SelectionColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPickerTouchBarItemSelSelectionColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -195,4 +209,3 @@ func (o *NSPickerTouchBarItem) SetEnabled(enabled bool) {
 func (o *NSPickerTouchBarItem) SetCustomizationLabel(customizationLabel *foundation.NSString) {
 	o.Ptr().Send(_nSPickerTouchBarItemSelSetCustomizationLabel, customizationLabel.Ptr())
 }
-

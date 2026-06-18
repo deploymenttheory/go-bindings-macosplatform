@@ -50,4 +50,3 @@ type ChatButtonable interface {
 }
 
 var _ ChatButtonable = (*ChatButton)(nil)
-

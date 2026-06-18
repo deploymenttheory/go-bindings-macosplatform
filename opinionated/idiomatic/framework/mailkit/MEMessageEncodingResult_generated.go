@@ -65,4 +65,3 @@ type MessageEncodingResultable interface {
 }
 
 var _ MessageEncodingResultable = (*MessageEncodingResult)(nil)
-

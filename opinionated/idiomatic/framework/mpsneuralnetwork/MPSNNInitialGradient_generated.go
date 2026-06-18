@@ -102,4 +102,3 @@ type NNInitialGradientable interface {
 }
 
 var _ NNInitialGradientable = (*NNInitialGradient)(nil)
-

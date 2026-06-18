@@ -17,41 +17,41 @@ type NSOutlineView struct {
 }
 
 var (
-	_clsNSOutlineView = _objcClass("NSOutlineView")
-	_nSOutlineViewSelIsExpandable = objc.RegisterName("isExpandable:")
-	_nSOutlineViewSelNumberOfChildrenOfItem = objc.RegisterName("numberOfChildrenOfItem:")
-	_nSOutlineViewSelChildOfItem = objc.RegisterName("child:ofItem:")
-	_nSOutlineViewSelExpandItemExpandChildren = objc.RegisterName("expandItem:expandChildren:")
-	_nSOutlineViewSelExpandItem = objc.RegisterName("expandItem:")
-	_nSOutlineViewSelCollapseItemCollapseChildren = objc.RegisterName("collapseItem:collapseChildren:")
-	_nSOutlineViewSelCollapseItem = objc.RegisterName("collapseItem:")
-	_nSOutlineViewSelReloadItemReloadChildren = objc.RegisterName("reloadItem:reloadChildren:")
-	_nSOutlineViewSelReloadItem = objc.RegisterName("reloadItem:")
-	_nSOutlineViewSelParentForItem = objc.RegisterName("parentForItem:")
-	_nSOutlineViewSelChildIndexForItem = objc.RegisterName("childIndexForItem:")
-	_nSOutlineViewSelItemAtRow = objc.RegisterName("itemAtRow:")
-	_nSOutlineViewSelRowForItem = objc.RegisterName("rowForItem:")
-	_nSOutlineViewSelLevelForItem = objc.RegisterName("levelForItem:")
-	_nSOutlineViewSelLevelForRow = objc.RegisterName("levelForRow:")
-	_nSOutlineViewSelIsItemExpanded = objc.RegisterName("isItemExpanded:")
-	_nSOutlineViewSelFrameOfOutlineCellAtRow = objc.RegisterName("frameOfOutlineCellAtRow:")
-	_nSOutlineViewSelSetDropItemDropChildIndex = objc.RegisterName("setDropItem:dropChildIndex:")
+	_clsNSOutlineView                                            = _objcClass("NSOutlineView")
+	_nSOutlineViewSelIsExpandable                                = objc.RegisterName("isExpandable:")
+	_nSOutlineViewSelNumberOfChildrenOfItem                      = objc.RegisterName("numberOfChildrenOfItem:")
+	_nSOutlineViewSelChildOfItem                                 = objc.RegisterName("child:ofItem:")
+	_nSOutlineViewSelExpandItemExpandChildren                    = objc.RegisterName("expandItem:expandChildren:")
+	_nSOutlineViewSelExpandItem                                  = objc.RegisterName("expandItem:")
+	_nSOutlineViewSelCollapseItemCollapseChildren                = objc.RegisterName("collapseItem:collapseChildren:")
+	_nSOutlineViewSelCollapseItem                                = objc.RegisterName("collapseItem:")
+	_nSOutlineViewSelReloadItemReloadChildren                    = objc.RegisterName("reloadItem:reloadChildren:")
+	_nSOutlineViewSelReloadItem                                  = objc.RegisterName("reloadItem:")
+	_nSOutlineViewSelParentForItem                               = objc.RegisterName("parentForItem:")
+	_nSOutlineViewSelChildIndexForItem                           = objc.RegisterName("childIndexForItem:")
+	_nSOutlineViewSelItemAtRow                                   = objc.RegisterName("itemAtRow:")
+	_nSOutlineViewSelRowForItem                                  = objc.RegisterName("rowForItem:")
+	_nSOutlineViewSelLevelForItem                                = objc.RegisterName("levelForItem:")
+	_nSOutlineViewSelLevelForRow                                 = objc.RegisterName("levelForRow:")
+	_nSOutlineViewSelIsItemExpanded                              = objc.RegisterName("isItemExpanded:")
+	_nSOutlineViewSelFrameOfOutlineCellAtRow                     = objc.RegisterName("frameOfOutlineCellAtRow:")
+	_nSOutlineViewSelSetDropItemDropChildIndex                   = objc.RegisterName("setDropItem:dropChildIndex:")
 	_nSOutlineViewSelShouldCollapseAutoExpandedItemsForDeposited = objc.RegisterName("shouldCollapseAutoExpandedItemsForDeposited:")
-	_nSOutlineViewSelInsertItemsAtIndexesInParentWithAnimation = objc.RegisterName("insertItemsAtIndexes:inParent:withAnimation:")
-	_nSOutlineViewSelRemoveItemsAtIndexesInParentWithAnimation = objc.RegisterName("removeItemsAtIndexes:inParent:withAnimation:")
-	_nSOutlineViewSelMoveItemAtIndexInParentToIndexInParent = objc.RegisterName("moveItemAtIndex:inParent:toIndex:inParent:")
-	_nSOutlineViewSelOutlineTableColumn = objc.RegisterName("outlineTableColumn")
-	_nSOutlineViewSelSetOutlineTableColumn = objc.RegisterName("setOutlineTableColumn:")
-	_nSOutlineViewSelIndentationPerLevel = objc.RegisterName("indentationPerLevel")
-	_nSOutlineViewSelSetIndentationPerLevel = objc.RegisterName("setIndentationPerLevel:")
-	_nSOutlineViewSelIndentationMarkerFollowsCell = objc.RegisterName("indentationMarkerFollowsCell")
-	_nSOutlineViewSelSetIndentationMarkerFollowsCell = objc.RegisterName("setIndentationMarkerFollowsCell:")
-	_nSOutlineViewSelAutoresizesOutlineColumn = objc.RegisterName("autoresizesOutlineColumn")
-	_nSOutlineViewSelSetAutoresizesOutlineColumn = objc.RegisterName("setAutoresizesOutlineColumn:")
-	_nSOutlineViewSelAutosaveExpandedItems = objc.RegisterName("autosaveExpandedItems")
-	_nSOutlineViewSelSetAutosaveExpandedItems = objc.RegisterName("setAutosaveExpandedItems:")
-	_nSOutlineViewSelStronglyReferencesItems = objc.RegisterName("stronglyReferencesItems")
-	_nSOutlineViewSelSetStronglyReferencesItems = objc.RegisterName("setStronglyReferencesItems:")
+	_nSOutlineViewSelInsertItemsAtIndexesInParentWithAnimation   = objc.RegisterName("insertItemsAtIndexes:inParent:withAnimation:")
+	_nSOutlineViewSelRemoveItemsAtIndexesInParentWithAnimation   = objc.RegisterName("removeItemsAtIndexes:inParent:withAnimation:")
+	_nSOutlineViewSelMoveItemAtIndexInParentToIndexInParent      = objc.RegisterName("moveItemAtIndex:inParent:toIndex:inParent:")
+	_nSOutlineViewSelOutlineTableColumn                          = objc.RegisterName("outlineTableColumn")
+	_nSOutlineViewSelSetOutlineTableColumn                       = objc.RegisterName("setOutlineTableColumn:")
+	_nSOutlineViewSelIndentationPerLevel                         = objc.RegisterName("indentationPerLevel")
+	_nSOutlineViewSelSetIndentationPerLevel                      = objc.RegisterName("setIndentationPerLevel:")
+	_nSOutlineViewSelIndentationMarkerFollowsCell                = objc.RegisterName("indentationMarkerFollowsCell")
+	_nSOutlineViewSelSetIndentationMarkerFollowsCell             = objc.RegisterName("setIndentationMarkerFollowsCell:")
+	_nSOutlineViewSelAutoresizesOutlineColumn                    = objc.RegisterName("autoresizesOutlineColumn")
+	_nSOutlineViewSelSetAutoresizesOutlineColumn                 = objc.RegisterName("setAutoresizesOutlineColumn:")
+	_nSOutlineViewSelAutosaveExpandedItems                       = objc.RegisterName("autosaveExpandedItems")
+	_nSOutlineViewSelSetAutosaveExpandedItems                    = objc.RegisterName("setAutosaveExpandedItems:")
+	_nSOutlineViewSelStronglyReferencesItems                     = objc.RegisterName("stronglyReferencesItems")
+	_nSOutlineViewSelSetStronglyReferencesItems                  = objc.RegisterName("setStronglyReferencesItems:")
 )
 
 func NSOutlineViewFromID(id objc.ID) *NSOutlineView {
@@ -166,7 +166,9 @@ func (o *NSOutlineView) MoveItemAtIndexInParentToIndexInParent(fromIndex int, ol
 
 func (o *NSOutlineView) OutlineTableColumn() *NSTableColumn {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOutlineViewSelOutlineTableColumn)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTableColumnFromID(_ret)
 }
 
@@ -218,4 +220,3 @@ func (o *NSOutlineView) StronglyReferencesItems() bool {
 func (o *NSOutlineView) SetStronglyReferencesItems(stronglyReferencesItems bool) {
 	o.Ptr().Send(_nSOutlineViewSelSetStronglyReferencesItems, stronglyReferencesItems)
 }
-

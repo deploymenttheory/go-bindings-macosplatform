@@ -56,13 +56,21 @@ func (x *NDArrayStridedSliceGradient) WithLabel(label string) *NDArrayStridedSli
 	return x
 }
 
-func (x *NDArrayStridedSliceGradient) asNDArrayUnaryGradientKernel() *mpsndarray.MPSNDArrayUnaryGradientKernel { return &x.inner.MPSNDArrayUnaryGradientKernel }
+func (x *NDArrayStridedSliceGradient) asNDArrayUnaryGradientKernel() *mpsndarray.MPSNDArrayUnaryGradientKernel {
+	return &x.inner.MPSNDArrayUnaryGradientKernel
+}
 
-func (x *NDArrayStridedSliceGradient) asNDArrayMultiaryGradientKernel() *mpsndarray.MPSNDArrayMultiaryGradientKernel { return &x.inner.MPSNDArrayUnaryGradientKernel.MPSNDArrayMultiaryGradientKernel }
+func (x *NDArrayStridedSliceGradient) asNDArrayMultiaryGradientKernel() *mpsndarray.MPSNDArrayMultiaryGradientKernel {
+	return &x.inner.MPSNDArrayUnaryGradientKernel.MPSNDArrayMultiaryGradientKernel
+}
 
-func (x *NDArrayStridedSliceGradient) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayUnaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase }
+func (x *NDArrayStridedSliceGradient) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase {
+	return &x.inner.MPSNDArrayUnaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase
+}
 
-func (x *NDArrayStridedSliceGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNDArrayUnaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.MPSKernel }
+func (x *NDArrayStridedSliceGradient) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSNDArrayUnaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.MPSKernel
+}
 
 // NDArrayStridedSliceGradientable is the interface implemented by [NDArrayStridedSliceGradient], for mocking and DI.
 type NDArrayStridedSliceGradientable interface {
@@ -73,4 +81,3 @@ type NDArrayStridedSliceGradientable interface {
 }
 
 var _ NDArrayStridedSliceGradientable = (*NDArrayStridedSliceGradient)(nil)
-

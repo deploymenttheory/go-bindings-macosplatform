@@ -16,7 +16,9 @@ type MTRUnitTestingClusterNestedStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRUnitTestingClusterNestedStruct].
-func (x *MTRUnitTestingClusterNestedStruct) Unwrap() *raw.MTRUnitTestingClusterNestedStruct { return x.inner }
+func (x *MTRUnitTestingClusterNestedStruct) Unwrap() *raw.MTRUnitTestingClusterNestedStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -88,7 +90,9 @@ func (x *MTRUnitTestingClusterNestedStruct) SetC(c *raw.MTRUnitTestingClusterSim
 	x.inner.SetC(c)
 }
 
-func (x *MTRUnitTestingClusterNestedStruct) asMTRUnitTestingClusterNestedStruct() *raw.MTRUnitTestingClusterNestedStruct { return x.inner }
+func (x *MTRUnitTestingClusterNestedStruct) asMTRUnitTestingClusterNestedStruct() *raw.MTRUnitTestingClusterNestedStruct {
+	return x.inner
+}
 
 // MTRUnitTestingClusterNestedStructable is the interface implemented by [MTRUnitTestingClusterNestedStruct], for mocking and DI.
 type MTRUnitTestingClusterNestedStructable interface {
@@ -105,4 +109,3 @@ type MTRUnitTestingClusterNestedStructable interface {
 }
 
 var _ MTRUnitTestingClusterNestedStructable = (*MTRUnitTestingClusterNestedStruct)(nil)
-

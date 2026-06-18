@@ -18,25 +18,25 @@ type MTRClusterModeSelect struct {
 }
 
 var (
-	_clsMTRClusterModeSelect = _objcClass("MTRClusterModeSelect")
-	_mTRClusterModeSelectSelChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("changeToModeWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterModeSelectSelReadAttributeDescriptionWithParams = objc.RegisterName("readAttributeDescriptionWithParams:")
-	_mTRClusterModeSelectSelReadAttributeStandardNamespaceWithParams = objc.RegisterName("readAttributeStandardNamespaceWithParams:")
-	_mTRClusterModeSelectSelReadAttributeSupportedModesWithParams = objc.RegisterName("readAttributeSupportedModesWithParams:")
-	_mTRClusterModeSelectSelReadAttributeCurrentModeWithParams = objc.RegisterName("readAttributeCurrentModeWithParams:")
-	_mTRClusterModeSelectSelReadAttributeStartUpModeWithParams = objc.RegisterName("readAttributeStartUpModeWithParams:")
-	_mTRClusterModeSelectSelWriteAttributeStartUpModeWithValueExpectedValueInterval = objc.RegisterName("writeAttributeStartUpModeWithValue:expectedValueInterval:")
-	_mTRClusterModeSelectSelWriteAttributeStartUpModeWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeStartUpModeWithValue:expectedValueInterval:params:")
-	_mTRClusterModeSelectSelReadAttributeOnModeWithParams = objc.RegisterName("readAttributeOnModeWithParams:")
-	_mTRClusterModeSelectSelWriteAttributeOnModeWithValueExpectedValueInterval = objc.RegisterName("writeAttributeOnModeWithValue:expectedValueInterval:")
-	_mTRClusterModeSelectSelWriteAttributeOnModeWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeOnModeWithValue:expectedValueInterval:params:")
-	_mTRClusterModeSelectSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterModeSelectSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterModeSelectSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterModeSelectSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterModeSelectSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterModeSelectSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterModeSelectSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_clsMTRClusterModeSelect                                                                           = _objcClass("MTRClusterModeSelect")
+	_mTRClusterModeSelectSelChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("changeToModeWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterModeSelectSelReadAttributeDescriptionWithParams                                         = objc.RegisterName("readAttributeDescriptionWithParams:")
+	_mTRClusterModeSelectSelReadAttributeStandardNamespaceWithParams                                   = objc.RegisterName("readAttributeStandardNamespaceWithParams:")
+	_mTRClusterModeSelectSelReadAttributeSupportedModesWithParams                                      = objc.RegisterName("readAttributeSupportedModesWithParams:")
+	_mTRClusterModeSelectSelReadAttributeCurrentModeWithParams                                         = objc.RegisterName("readAttributeCurrentModeWithParams:")
+	_mTRClusterModeSelectSelReadAttributeStartUpModeWithParams                                         = objc.RegisterName("readAttributeStartUpModeWithParams:")
+	_mTRClusterModeSelectSelWriteAttributeStartUpModeWithValueExpectedValueInterval                    = objc.RegisterName("writeAttributeStartUpModeWithValue:expectedValueInterval:")
+	_mTRClusterModeSelectSelWriteAttributeStartUpModeWithValueExpectedValueIntervalParams              = objc.RegisterName("writeAttributeStartUpModeWithValue:expectedValueInterval:params:")
+	_mTRClusterModeSelectSelReadAttributeOnModeWithParams                                              = objc.RegisterName("readAttributeOnModeWithParams:")
+	_mTRClusterModeSelectSelWriteAttributeOnModeWithValueExpectedValueInterval                         = objc.RegisterName("writeAttributeOnModeWithValue:expectedValueInterval:")
+	_mTRClusterModeSelectSelWriteAttributeOnModeWithValueExpectedValueIntervalParams                   = objc.RegisterName("writeAttributeOnModeWithValue:expectedValueInterval:params:")
+	_mTRClusterModeSelectSelReadAttributeGeneratedCommandListWithParams                                = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterModeSelectSelReadAttributeAcceptedCommandListWithParams                                 = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterModeSelectSelReadAttributeAttributeListWithParams                                       = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterModeSelectSelReadAttributeFeatureMapWithParams                                          = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterModeSelectSelReadAttributeClusterRevisionWithParams                                     = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterModeSelectSelInitWithDeviceEndpointIDQueue                                              = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterModeSelectSelInitWithDeviceEndpointQueue                                                = objc.RegisterName("initWithDevice:endpoint:queue:")
 	_mTRClusterModeSelectSelChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("changeToModeWithParams:expectedValues:expectedValueInterval:completionHandler:")
 )
 
@@ -135,13 +135,17 @@ func (o *MTRClusterModeSelect) ReadAttributeClusterRevisionWithParams(params *MT
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterModeSelect) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterModeSelect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterModeSelectSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterModeSelectFromID(_ret)
 }
 
 func (o *MTRClusterModeSelect) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterModeSelect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterModeSelectSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterModeSelectFromID(_ret)
 }
 
@@ -155,4 +159,3 @@ func (o *MTRClusterModeSelect) ChangeToModeWithParamsExpectedValuesExpectedValue
 	}
 	o.Ptr().Send(_mTRClusterModeSelectSelChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
-

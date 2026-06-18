@@ -43,4 +43,3 @@ type FetchRequestable interface {
 }
 
 var _ FetchRequestable = (*FetchRequest)(nil)
-

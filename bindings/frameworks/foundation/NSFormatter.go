@@ -15,12 +15,12 @@ type NSFormatter struct {
 }
 
 var (
-	_clsNSFormatter = _objcClass("NSFormatter")
-	_nSFormatterSelStringForObjectValue = objc.RegisterName("stringForObjectValue:")
-	_nSFormatterSelAttributedStringForObjectValueWithDefaultAttributes = objc.RegisterName("attributedStringForObjectValue:withDefaultAttributes:")
-	_nSFormatterSelEditingStringForObjectValue = objc.RegisterName("editingStringForObjectValue:")
-	_nSFormatterSelGetObjectValueForStringErrorDescription = objc.RegisterName("getObjectValue:forString:errorDescription:")
-	_nSFormatterSelIsPartialStringValidNewEditingStringErrorDescription = objc.RegisterName("isPartialStringValid:newEditingString:errorDescription:")
+	_clsNSFormatter                                                                                             = _objcClass("NSFormatter")
+	_nSFormatterSelStringForObjectValue                                                                         = objc.RegisterName("stringForObjectValue:")
+	_nSFormatterSelAttributedStringForObjectValueWithDefaultAttributes                                          = objc.RegisterName("attributedStringForObjectValue:withDefaultAttributes:")
+	_nSFormatterSelEditingStringForObjectValue                                                                  = objc.RegisterName("editingStringForObjectValue:")
+	_nSFormatterSelGetObjectValueForStringErrorDescription                                                      = objc.RegisterName("getObjectValue:forString:errorDescription:")
+	_nSFormatterSelIsPartialStringValidNewEditingStringErrorDescription                                         = objc.RegisterName("isPartialStringValid:newEditingString:errorDescription:")
 	_nSFormatterSelIsPartialStringValidProposedSelectedRangeOriginalStringOriginalSelectedRangeErrorDescription = objc.RegisterName("isPartialStringValid:proposedSelectedRange:originalString:originalSelectedRange:errorDescription:")
 )
 
@@ -36,19 +36,25 @@ func NSFormatterFromID(id objc.ID) *NSFormatter {
 
 func (o *NSFormatter) StringForObjectValue(obj objc.ID) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFormatterSelStringForObjectValue, obj)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSFormatter) AttributedStringForObjectValueWithDefaultAttributes(obj objc.ID, attrs *NSDictionary[*NSString, objc.ID]) *NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFormatterSelAttributedStringForObjectValueWithDefaultAttributes, obj, attrs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAttributedStringFromID(_ret)
 }
 
 func (o *NSFormatter) EditingStringForObjectValue(obj objc.ID) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFormatterSelEditingStringForObjectValue, obj)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -66,4 +72,3 @@ func (o *NSFormatter) IsPartialStringValidProposedSelectedRangeOriginalStringOri
 	_ret := objc.Send[bool](o.Ptr(), _nSFormatterSelIsPartialStringValidProposedSelectedRangeOriginalStringOriginalSelectedRangeErrorDescription, partialStringPtr.Ptr(), proposedSelRangePtr, origString.Ptr(), origSelRange, error_.Ptr())
 	return _ret
 }
-

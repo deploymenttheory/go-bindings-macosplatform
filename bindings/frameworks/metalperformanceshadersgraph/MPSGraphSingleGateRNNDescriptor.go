@@ -15,16 +15,16 @@ type MPSGraphSingleGateRNNDescriptor struct {
 }
 
 var (
-	_clsMPSGraphSingleGateRNNDescriptor = _objcClass("MPSGraphSingleGateRNNDescriptor")
-	_mPSGraphSingleGateRNNDescriptorSelDescriptor = objc.RegisterName("descriptor")
-	_mPSGraphSingleGateRNNDescriptorSelReverse = objc.RegisterName("reverse")
-	_mPSGraphSingleGateRNNDescriptorSelSetReverse = objc.RegisterName("setReverse:")
-	_mPSGraphSingleGateRNNDescriptorSelBidirectional = objc.RegisterName("bidirectional")
+	_clsMPSGraphSingleGateRNNDescriptor                 = _objcClass("MPSGraphSingleGateRNNDescriptor")
+	_mPSGraphSingleGateRNNDescriptorSelDescriptor       = objc.RegisterName("descriptor")
+	_mPSGraphSingleGateRNNDescriptorSelReverse          = objc.RegisterName("reverse")
+	_mPSGraphSingleGateRNNDescriptorSelSetReverse       = objc.RegisterName("setReverse:")
+	_mPSGraphSingleGateRNNDescriptorSelBidirectional    = objc.RegisterName("bidirectional")
 	_mPSGraphSingleGateRNNDescriptorSelSetBidirectional = objc.RegisterName("setBidirectional:")
-	_mPSGraphSingleGateRNNDescriptorSelTraining = objc.RegisterName("training")
-	_mPSGraphSingleGateRNNDescriptorSelSetTraining = objc.RegisterName("setTraining:")
-	_mPSGraphSingleGateRNNDescriptorSelActivation = objc.RegisterName("activation")
-	_mPSGraphSingleGateRNNDescriptorSelSetActivation = objc.RegisterName("setActivation:")
+	_mPSGraphSingleGateRNNDescriptorSelTraining         = objc.RegisterName("training")
+	_mPSGraphSingleGateRNNDescriptorSelSetTraining      = objc.RegisterName("setTraining:")
+	_mPSGraphSingleGateRNNDescriptorSelActivation       = objc.RegisterName("activation")
+	_mPSGraphSingleGateRNNDescriptorSelSetActivation    = objc.RegisterName("setActivation:")
 )
 
 func MPSGraphSingleGateRNNDescriptorFromID(id objc.ID) *MPSGraphSingleGateRNNDescriptor {
@@ -40,7 +40,9 @@ func MPSGraphSingleGateRNNDescriptorFromID(id objc.ID) *MPSGraphSingleGateRNNDes
 // Creates a single gate RNN descriptor with default values.
 func MPSGraphSingleGateRNNDescriptorDescriptor() *MPSGraphSingleGateRNNDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphSingleGateRNNDescriptor), _mPSGraphSingleGateRNNDescriptorSelDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSGraphSingleGateRNNDescriptorFromID(_ret)
 }
 
@@ -83,4 +85,3 @@ func (o *MPSGraphSingleGateRNNDescriptor) Activation() MPSGraphRNNActivation {
 func (o *MPSGraphSingleGateRNNDescriptor) SetActivation(activation MPSGraphRNNActivation) {
 	o.Ptr().Send(_mPSGraphSingleGateRNNDescriptorSelSetActivation, activation)
 }
-

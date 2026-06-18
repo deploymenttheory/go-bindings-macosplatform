@@ -80,4 +80,3 @@ type MTROnOffClusterToggleParamsable interface {
 }
 
 var _ MTROnOffClusterToggleParamsable = (*MTROnOffClusterToggleParams)(nil)
-

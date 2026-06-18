@@ -56,4 +56,3 @@ type CameraFolderable interface {
 }
 
 var _ CameraFolderable = (*CameraFolder)(nil)
-

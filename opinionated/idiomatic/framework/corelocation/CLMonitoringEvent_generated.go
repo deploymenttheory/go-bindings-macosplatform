@@ -135,4 +135,3 @@ type MonitoringEventable interface {
 }
 
 var _ MonitoringEventable = (*MonitoringEvent)(nil)
-

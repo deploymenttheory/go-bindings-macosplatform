@@ -16,10 +16,10 @@ type INGetReservationDetailsIntent struct {
 }
 
 var (
-	_clsINGetReservationDetailsIntent = _objcClass("INGetReservationDetailsIntent")
+	_clsINGetReservationDetailsIntent                                                               = _objcClass("INGetReservationDetailsIntent")
 	_iNGetReservationDetailsIntentSelInitWithReservationContainerReferenceReservationItemReferences = objc.RegisterName("initWithReservationContainerReference:reservationItemReferences:")
-	_iNGetReservationDetailsIntentSelReservationContainerReference = objc.RegisterName("reservationContainerReference")
-	_iNGetReservationDetailsIntentSelReservationItemReferences = objc.RegisterName("reservationItemReferences")
+	_iNGetReservationDetailsIntentSelReservationContainerReference                                  = objc.RegisterName("reservationContainerReference")
+	_iNGetReservationDetailsIntentSelReservationItemReferences                                      = objc.RegisterName("reservationItemReferences")
 )
 
 func INGetReservationDetailsIntentFromID(id objc.ID) *INGetReservationDetailsIntent {
@@ -34,19 +34,24 @@ func INGetReservationDetailsIntentFromID(id objc.ID) *INGetReservationDetailsInt
 
 func (o *INGetReservationDetailsIntent) InitWithReservationContainerReferenceReservationItemReferences(reservationContainerReference *INSpeakableString, reservationItemReferences *foundation.NSArray[*INSpeakableString]) *INGetReservationDetailsIntent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNGetReservationDetailsIntentSelInitWithReservationContainerReferenceReservationItemReferences, reservationContainerReference.Ptr(), reservationItemReferences.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INGetReservationDetailsIntentFromID(_ret)
 }
 
 func (o *INGetReservationDetailsIntent) ReservationContainerReference() *INSpeakableString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNGetReservationDetailsIntentSelReservationContainerReference)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INSpeakableStringFromID(_ret)
 }
 
 func (o *INGetReservationDetailsIntent) ReservationItemReferences() *foundation.NSArray[*INSpeakableString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNGetReservationDetailsIntentSelReservationItemReferences)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*INSpeakableString](_ret)
 }
-

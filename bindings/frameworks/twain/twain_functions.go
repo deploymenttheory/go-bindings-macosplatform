@@ -5,7 +5,7 @@ package twain
 
 var (
 	_fnDSM_Entry func(*TW_IDENTITY, *TW_IDENTITY, uint, uint16, uint16, string) uint16
-	_fnDS_Entry func(*TW_IDENTITY, uint, uint16, uint16, string) uint16
+	_fnDS_Entry  func(*TW_IDENTITY, uint, uint16, uint16, string) uint16
 )
 
 func DSM_Entry(pOrigin *TW_IDENTITY, pDest *TW_IDENTITY, dG uint, dAT uint16, mSG uint16, pData string) uint16 {
@@ -15,4 +15,3 @@ func DSM_Entry(pOrigin *TW_IDENTITY, pDest *TW_IDENTITY, dG uint, dAT uint16, mS
 func DS_Entry(pOrigin *TW_IDENTITY, dG uint, dAT uint16, mSG uint16, pData string) uint16 {
 	return _fnDS_Entry(pOrigin, dG, dAT, mSG, pData)
 }
-

@@ -16,10 +16,10 @@ type VZGenericMachineIdentifier struct {
 }
 
 var (
-	_clsVZGenericMachineIdentifier = _objcClass("VZGenericMachineIdentifier")
-	_vZGenericMachineIdentifierSelInit = objc.RegisterName("init")
+	_clsVZGenericMachineIdentifier                           = _objcClass("VZGenericMachineIdentifier")
+	_vZGenericMachineIdentifierSelInit                       = objc.RegisterName("init")
 	_vZGenericMachineIdentifierSelInitWithDataRepresentation = objc.RegisterName("initWithDataRepresentation:")
-	_vZGenericMachineIdentifierSelDataRepresentation = objc.RegisterName("dataRepresentation")
+	_vZGenericMachineIdentifierSelDataRepresentation         = objc.RegisterName("dataRepresentation")
 )
 
 func VZGenericMachineIdentifierFromID(id objc.ID) *VZGenericMachineIdentifier {
@@ -35,20 +35,25 @@ func VZGenericMachineIdentifierFromID(id objc.ID) *VZGenericMachineIdentifier {
 // @abstract Create a new unique machine identifier.
 func (o *VZGenericMachineIdentifier) Init() *VZGenericMachineIdentifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZGenericMachineIdentifierSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZGenericMachineIdentifierFromID(_ret)
 }
 
 // @abstract Get the machine identifier described by the specified data representation. @param dataRepresentation The opaque data representation of the machine identifier to be obtained. @return A unique identifier identical to the one that generated the dataRepresentation, or nil if the data is invalid. @see VZGenericMachineIdentifier.dataRepresentation
 func (o *VZGenericMachineIdentifier) InitWithDataRepresentation(dataRepresentation *foundation.NSData) *VZGenericMachineIdentifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZGenericMachineIdentifierSelInitWithDataRepresentation, dataRepresentation.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZGenericMachineIdentifierFromID(_ret)
 }
 
 func (o *VZGenericMachineIdentifier) DataRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZGenericMachineIdentifierSelDataRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

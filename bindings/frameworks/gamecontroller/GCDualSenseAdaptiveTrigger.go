@@ -15,17 +15,17 @@ type GCDualSenseAdaptiveTrigger struct {
 }
 
 var (
-	_clsGCDualSenseAdaptiveTrigger = _objcClass("GCDualSenseAdaptiveTrigger")
+	_clsGCDualSenseAdaptiveTrigger                                                                         = _objcClass("GCDualSenseAdaptiveTrigger")
 	_gCDualSenseAdaptiveTriggerSelSetModeSlopeFeedbackWithStartPositionEndPositionStartStrengthEndStrength = objc.RegisterName("setModeSlopeFeedbackWithStartPosition:endPosition:startStrength:endStrength:")
-	_gCDualSenseAdaptiveTriggerSelSetModeFeedbackWithStartPositionResistiveStrength = objc.RegisterName("setModeFeedbackWithStartPosition:resistiveStrength:")
-	_gCDualSenseAdaptiveTriggerSelSetModeFeedbackWithResistiveStrengths = objc.RegisterName("setModeFeedbackWithResistiveStrengths:")
-	_gCDualSenseAdaptiveTriggerSelSetModeWeaponWithStartPositionEndPositionResistiveStrength = objc.RegisterName("setModeWeaponWithStartPosition:endPosition:resistiveStrength:")
-	_gCDualSenseAdaptiveTriggerSelSetModeVibrationWithStartPositionAmplitudeFrequency = objc.RegisterName("setModeVibrationWithStartPosition:amplitude:frequency:")
-	_gCDualSenseAdaptiveTriggerSelSetModeVibrationWithAmplitudesFrequency = objc.RegisterName("setModeVibrationWithAmplitudes:frequency:")
-	_gCDualSenseAdaptiveTriggerSelSetModeOff = objc.RegisterName("setModeOff")
-	_gCDualSenseAdaptiveTriggerSelMode = objc.RegisterName("mode")
-	_gCDualSenseAdaptiveTriggerSelStatus = objc.RegisterName("status")
-	_gCDualSenseAdaptiveTriggerSelArmPosition = objc.RegisterName("armPosition")
+	_gCDualSenseAdaptiveTriggerSelSetModeFeedbackWithStartPositionResistiveStrength                        = objc.RegisterName("setModeFeedbackWithStartPosition:resistiveStrength:")
+	_gCDualSenseAdaptiveTriggerSelSetModeFeedbackWithResistiveStrengths                                    = objc.RegisterName("setModeFeedbackWithResistiveStrengths:")
+	_gCDualSenseAdaptiveTriggerSelSetModeWeaponWithStartPositionEndPositionResistiveStrength               = objc.RegisterName("setModeWeaponWithStartPosition:endPosition:resistiveStrength:")
+	_gCDualSenseAdaptiveTriggerSelSetModeVibrationWithStartPositionAmplitudeFrequency                      = objc.RegisterName("setModeVibrationWithStartPosition:amplitude:frequency:")
+	_gCDualSenseAdaptiveTriggerSelSetModeVibrationWithAmplitudesFrequency                                  = objc.RegisterName("setModeVibrationWithAmplitudes:frequency:")
+	_gCDualSenseAdaptiveTriggerSelSetModeOff                                                               = objc.RegisterName("setModeOff")
+	_gCDualSenseAdaptiveTriggerSelMode                                                                     = objc.RegisterName("mode")
+	_gCDualSenseAdaptiveTriggerSelStatus                                                                   = objc.RegisterName("status")
+	_gCDualSenseAdaptiveTriggerSelArmPosition                                                              = objc.RegisterName("armPosition")
 )
 
 func GCDualSenseAdaptiveTriggerFromID(id objc.ID) *GCDualSenseAdaptiveTrigger {
@@ -90,4 +90,3 @@ func (o *GCDualSenseAdaptiveTrigger) ArmPosition() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _gCDualSenseAdaptiveTriggerSelArmPosition)
 	return _ret
 }
-

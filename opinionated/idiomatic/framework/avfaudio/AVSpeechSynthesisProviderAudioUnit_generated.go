@@ -18,7 +18,9 @@ type SpeechSynthesisProviderAudioUnit struct {
 }
 
 // Unwrap returns the underlying [raw.AVSpeechSynthesisProviderAudioUnit].
-func (x *SpeechSynthesisProviderAudioUnit) Unwrap() *raw.AVSpeechSynthesisProviderAudioUnit { return x.inner }
+func (x *SpeechSynthesisProviderAudioUnit) Unwrap() *raw.AVSpeechSynthesisProviderAudioUnit {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -45,7 +47,9 @@ func (x *SpeechSynthesisProviderAudioUnit) WithSpeechVoices(items ...*raw.AVSpee
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.AVSpeechSynthesisProviderVoice](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -110,4 +114,3 @@ type SpeechSynthesisProviderAudioUnitable interface {
 }
 
 var _ SpeechSynthesisProviderAudioUnitable = (*SpeechSynthesisProviderAudioUnit)(nil)
-

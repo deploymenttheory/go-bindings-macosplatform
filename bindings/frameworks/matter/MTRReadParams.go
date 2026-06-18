@@ -16,15 +16,15 @@ type MTRReadParams struct {
 }
 
 var (
-	_clsMTRReadParams = _objcClass("MTRReadParams")
-	_mTRReadParamsSelShouldFilterByFabric = objc.RegisterName("shouldFilterByFabric")
-	_mTRReadParamsSelSetFilterByFabric = objc.RegisterName("setFilterByFabric:")
-	_mTRReadParamsSelMinEventNumber = objc.RegisterName("minEventNumber")
-	_mTRReadParamsSelSetMinEventNumber = objc.RegisterName("setMinEventNumber:")
+	_clsMTRReadParams                                        = _objcClass("MTRReadParams")
+	_mTRReadParamsSelShouldFilterByFabric                    = objc.RegisterName("shouldFilterByFabric")
+	_mTRReadParamsSelSetFilterByFabric                       = objc.RegisterName("setFilterByFabric:")
+	_mTRReadParamsSelMinEventNumber                          = objc.RegisterName("minEventNumber")
+	_mTRReadParamsSelSetMinEventNumber                       = objc.RegisterName("setMinEventNumber:")
 	_mTRReadParamsSelShouldAssumeUnknownAttributesReportable = objc.RegisterName("shouldAssumeUnknownAttributesReportable")
-	_mTRReadParamsSelSetAssumeUnknownAttributesReportable = objc.RegisterName("setAssumeUnknownAttributesReportable:")
-	_mTRReadParamsSelFabricFiltered = objc.RegisterName("fabricFiltered")
-	_mTRReadParamsSelSetFabricFiltered = objc.RegisterName("setFabricFiltered:")
+	_mTRReadParamsSelSetAssumeUnknownAttributesReportable    = objc.RegisterName("setAssumeUnknownAttributesReportable:")
+	_mTRReadParamsSelFabricFiltered                          = objc.RegisterName("fabricFiltered")
+	_mTRReadParamsSelSetFabricFiltered                       = objc.RegisterName("setFabricFiltered:")
 )
 
 func MTRReadParamsFromID(id objc.ID) *MTRReadParams {
@@ -49,7 +49,9 @@ func (o *MTRReadParams) SetFilterByFabric(filterByFabric bool) {
 // Sets a filter for which events will be reported in the read/subscribe interaction. If nil (the default value), all of the queued events will be reported from lowest to highest event number. If not nil, queued events with an event number smaller than minEventNumber will not be reported.
 func (o *MTRReadParams) MinEventNumber() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRReadParamsSelMinEventNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -69,11 +71,12 @@ func (o *MTRReadParams) SetAssumeUnknownAttributesReportable(assumeUnknownAttrib
 
 func (o *MTRReadParams) FabricFiltered() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRReadParamsSelFabricFiltered)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRReadParams) SetFabricFiltered(fabricFiltered *foundation.NSNumber) {
 	o.Ptr().Send(_mTRReadParamsSelSetFabricFiltered, fabricFiltered.Ptr())
 }
-

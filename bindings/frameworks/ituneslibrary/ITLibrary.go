@@ -18,23 +18,23 @@ type ITLibrary struct {
 }
 
 var (
-	_clsITLibrary = _objcClass("ITLibrary")
-	_iTLibrarySelLibraryWithAPIVersionError = objc.RegisterName("libraryWithAPIVersion:error:")
+	_clsITLibrary                                  = _objcClass("ITLibrary")
+	_iTLibrarySelLibraryWithAPIVersionError        = objc.RegisterName("libraryWithAPIVersion:error:")
 	_iTLibrarySelLibraryWithAPIVersionOptionsError = objc.RegisterName("libraryWithAPIVersion:options:error:")
-	_iTLibrarySelInitWithAPIVersionError = objc.RegisterName("initWithAPIVersion:error:")
-	_iTLibrarySelInitWithAPIVersionOptionsError = objc.RegisterName("initWithAPIVersion:options:error:")
-	_iTLibrarySelArtworkForMediaFile = objc.RegisterName("artworkForMediaFile:")
-	_iTLibrarySelReloadData = objc.RegisterName("reloadData")
-	_iTLibrarySelUnloadData = objc.RegisterName("unloadData")
-	_iTLibrarySelApplicationVersion = objc.RegisterName("applicationVersion")
-	_iTLibrarySelFeatures = objc.RegisterName("features")
-	_iTLibrarySelApiMajorVersion = objc.RegisterName("apiMajorVersion")
-	_iTLibrarySelApiMinorVersion = objc.RegisterName("apiMinorVersion")
-	_iTLibrarySelMediaFolderLocation = objc.RegisterName("mediaFolderLocation")
-	_iTLibrarySelMusicFolderLocation = objc.RegisterName("musicFolderLocation")
-	_iTLibrarySelShouldShowContentRating = objc.RegisterName("shouldShowContentRating")
-	_iTLibrarySelAllMediaItems = objc.RegisterName("allMediaItems")
-	_iTLibrarySelAllPlaylists = objc.RegisterName("allPlaylists")
+	_iTLibrarySelInitWithAPIVersionError           = objc.RegisterName("initWithAPIVersion:error:")
+	_iTLibrarySelInitWithAPIVersionOptionsError    = objc.RegisterName("initWithAPIVersion:options:error:")
+	_iTLibrarySelArtworkForMediaFile               = objc.RegisterName("artworkForMediaFile:")
+	_iTLibrarySelReloadData                        = objc.RegisterName("reloadData")
+	_iTLibrarySelUnloadData                        = objc.RegisterName("unloadData")
+	_iTLibrarySelApplicationVersion                = objc.RegisterName("applicationVersion")
+	_iTLibrarySelFeatures                          = objc.RegisterName("features")
+	_iTLibrarySelApiMajorVersion                   = objc.RegisterName("apiMajorVersion")
+	_iTLibrarySelApiMinorVersion                   = objc.RegisterName("apiMinorVersion")
+	_iTLibrarySelMediaFolderLocation               = objc.RegisterName("mediaFolderLocation")
+	_iTLibrarySelMusicFolderLocation               = objc.RegisterName("musicFolderLocation")
+	_iTLibrarySelShouldShowContentRating           = objc.RegisterName("shouldShowContentRating")
+	_iTLibrarySelAllMediaItems                     = objc.RegisterName("allMediaItems")
+	_iTLibrarySelAllPlaylists                      = objc.RegisterName("allPlaylists")
 )
 
 func ITLibraryFromID(id objc.ID) *ITLibrary {
@@ -51,7 +51,9 @@ func ITLibraryFromID(id objc.ID) *ITLibrary {
 func ITLibraryLibraryWithAPIVersionError(requestedAPIVersion *foundation.NSString) (*ITLibrary, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsITLibrary), _iTLibrarySelLibraryWithAPIVersionError, requestedAPIVersion.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -62,7 +64,9 @@ func ITLibraryLibraryWithAPIVersionError(requestedAPIVersion *foundation.NSStrin
 func ITLibraryLibraryWithAPIVersionOptionsError(requestedAPIVersion *foundation.NSString, options ITLibInitOptions) (*ITLibrary, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsITLibrary), _iTLibrarySelLibraryWithAPIVersionOptionsError, requestedAPIVersion.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -73,7 +77,9 @@ func ITLibraryLibraryWithAPIVersionOptionsError(requestedAPIVersion *foundation.
 func (o *ITLibrary) InitWithAPIVersionError(requestedAPIVersion *foundation.NSString) (*ITLibrary, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibrarySelInitWithAPIVersionError, requestedAPIVersion.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -84,7 +90,9 @@ func (o *ITLibrary) InitWithAPIVersionError(requestedAPIVersion *foundation.NSSt
 func (o *ITLibrary) InitWithAPIVersionOptionsError(requestedAPIVersion *foundation.NSString, options ITLibInitOptions) (*ITLibrary, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibrarySelInitWithAPIVersionOptionsError, requestedAPIVersion.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -94,7 +102,9 @@ func (o *ITLibrary) InitWithAPIVersionOptionsError(requestedAPIVersion *foundati
 // @abstract Retrieves the artwork from a media file. @param mediaFileURL The URL of the media file whose artwork should be extracted. @return A ITLibArtwork instance represeting the media file artwork, or nil if the artwork was not found or could not be extracted.
 func (o *ITLibrary) ArtworkForMediaFile(mediaFileURL *foundation.NSURL) *ITLibArtwork {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibrarySelArtworkForMediaFile, mediaFileURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ITLibArtworkFromID(_ret)
 }
 
@@ -112,7 +122,9 @@ func (o *ITLibrary) UnloadData() {
 // @abstract The version of iTunes being accessed.
 func (o *ITLibrary) ApplicationVersion() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibrarySelApplicationVersion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -143,7 +155,9 @@ func (o *ITLibrary) MediaFolderLocation() unsafe.Pointer {
 // @abstract The location of the iTunes music folder. Replaced by mediaFolderLocation.
 func (o *ITLibrary) MusicFolderLocation() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibrarySelMusicFolderLocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -156,14 +170,17 @@ func (o *ITLibrary) ShouldShowContentRating() bool {
 // @abstract All media items in the library.
 func (o *ITLibrary) AllMediaItems() *foundation.NSArray[*ITLibMediaItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibrarySelAllMediaItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*ITLibMediaItem](_ret)
 }
 
 // @abstract All playlists in the library.
 func (o *ITLibrary) AllPlaylists() *foundation.NSArray[*ITLibPlaylist] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibrarySelAllPlaylists)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*ITLibPlaylist](_ret)
 }
-

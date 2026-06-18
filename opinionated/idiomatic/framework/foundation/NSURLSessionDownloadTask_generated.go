@@ -108,7 +108,9 @@ func (x *URLSessionDownloadTask) CancelByProducingResumeData(ctx context.Context
 	}
 }
 
-func (x *URLSessionDownloadTask) asURLSessionTask() *raw.NSURLSessionTask { return &x.inner.NSURLSessionTask }
+func (x *URLSessionDownloadTask) asURLSessionTask() *raw.NSURLSessionTask {
+	return &x.inner.NSURLSessionTask
+}
 
 func (x *URLSessionDownloadTask) asObject() *raw.NSObject { return &x.inner.NSURLSessionTask.NSObject }
 
@@ -127,4 +129,3 @@ type URLSessionDownloadTaskable interface {
 }
 
 var _ URLSessionDownloadTaskable = (*URLSessionDownloadTask)(nil)
-

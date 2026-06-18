@@ -93,9 +93,13 @@ func (x *ImageStatisticsMinAndMax) SetClipRectSource(clipRectSource metal.MTLReg
 	x.inner.SetClipRectSource(clipRectSource)
 }
 
-func (x *ImageStatisticsMinAndMax) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageStatisticsMinAndMax) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
-func (x *ImageStatisticsMinAndMax) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
+func (x *ImageStatisticsMinAndMax) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSUnaryImageKernel.MPSKernel
+}
 
 // ImageStatisticsMinAndMaxable is the interface implemented by [ImageStatisticsMinAndMax], for mocking and DI.
 type ImageStatisticsMinAndMaxable interface {
@@ -111,4 +115,3 @@ type ImageStatisticsMinAndMaxable interface {
 }
 
 var _ ImageStatisticsMinAndMaxable = (*ImageStatisticsMinAndMax)(nil)
-

@@ -17,12 +17,12 @@ type NSXPCCoder struct {
 }
 
 var (
-	_clsNSXPCCoder = _objcClass("NSXPCCoder")
-	_nSXPCCoderSelEncodeXPCObjectForKey = objc.RegisterName("encodeXPCObject:forKey:")
+	_clsNSXPCCoder                            = _objcClass("NSXPCCoder")
+	_nSXPCCoderSelEncodeXPCObjectForKey       = objc.RegisterName("encodeXPCObject:forKey:")
 	_nSXPCCoderSelDecodeXPCObjectOfTypeForKey = objc.RegisterName("decodeXPCObjectOfType:forKey:")
-	_nSXPCCoderSelUserInfo = objc.RegisterName("userInfo")
-	_nSXPCCoderSelSetUserInfo = objc.RegisterName("setUserInfo:")
-	_nSXPCCoderSelConnection = objc.RegisterName("connection")
+	_nSXPCCoderSelUserInfo                    = objc.RegisterName("userInfo")
+	_nSXPCCoderSelSetUserInfo                 = objc.RegisterName("setUserInfo:")
+	_nSXPCCoderSelConnection                  = objc.RegisterName("connection")
 )
 
 func NSXPCCoderFromID(id objc.ID) *NSXPCCoder {
@@ -41,7 +41,9 @@ func (o *NSXPCCoder) EncodeXPCObjectForKey(xpcObject *NSObject, key *NSString) {
 
 func (o *NSXPCCoder) DecodeXPCObjectOfTypeForKey(type_ unsafe.Pointer, key *NSString) *NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXPCCoderSelDecodeXPCObjectOfTypeForKey, type_, key.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSObjectFromID(_ret)
 }
 
@@ -56,7 +58,8 @@ func (o *NSXPCCoder) SetUserInfo(userInfo NSObjectProtocol) {
 
 func (o *NSXPCCoder) Connection() *NSXPCConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXPCCoderSelConnection)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXPCConnectionFromID(_ret)
 }
-

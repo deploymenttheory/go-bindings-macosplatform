@@ -41,4 +41,3 @@ type NotificationSoundable interface {
 }
 
 var _ NotificationSoundable = (*NotificationSound)(nil)
-

@@ -15,7 +15,9 @@ type ResourceStatePassSampleBufferAttachmentDescriptorArray struct {
 }
 
 // Unwrap returns the underlying [raw.MTLResourceStatePassSampleBufferAttachmentDescriptorArray].
-func (x *ResourceStatePassSampleBufferAttachmentDescriptorArray) Unwrap() *raw.MTLResourceStatePassSampleBufferAttachmentDescriptorArray { return x.inner }
+func (x *ResourceStatePassSampleBufferAttachmentDescriptorArray) Unwrap() *raw.MTLResourceStatePassSampleBufferAttachmentDescriptorArray {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -57,4 +59,3 @@ type ResourceStatePassSampleBufferAttachmentDescriptorArrayable interface {
 }
 
 var _ ResourceStatePassSampleBufferAttachmentDescriptorArrayable = (*ResourceStatePassSampleBufferAttachmentDescriptorArray)(nil)
-

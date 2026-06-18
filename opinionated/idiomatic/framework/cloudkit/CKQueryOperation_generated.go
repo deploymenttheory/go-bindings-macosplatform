@@ -84,7 +84,9 @@ func (x *QueryOperation) WithDesiredKeys(items ...*foundation.NSString) *QueryOp
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -302,9 +304,13 @@ func (x *QueryOperation) SetQueryCompletionBlock(ctx context.Context) (*QueryCur
 	}
 }
 
-func (x *QueryOperation) asDatabaseOperation() *raw.CKDatabaseOperation { return &x.inner.CKDatabaseOperation }
+func (x *QueryOperation) asDatabaseOperation() *raw.CKDatabaseOperation {
+	return &x.inner.CKDatabaseOperation
+}
 
-func (x *QueryOperation) asOperation() *raw.CKOperation { return &x.inner.CKDatabaseOperation.CKOperation }
+func (x *QueryOperation) asOperation() *raw.CKOperation {
+	return &x.inner.CKDatabaseOperation.CKOperation
+}
 
 // QueryOperationable is the interface implemented by [QueryOperation], for mocking and DI.
 type QueryOperationable interface {
@@ -345,4 +351,3 @@ type QueryOperationable interface {
 }
 
 var _ QueryOperationable = (*QueryOperation)(nil)
-

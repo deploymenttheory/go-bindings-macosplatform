@@ -17,21 +17,21 @@ type NSGradient struct {
 }
 
 var (
-	_clsNSGradient = _objcClass("NSGradient")
-	_nSGradientSelInitWithStartingColorEndingColor = objc.RegisterName("initWithStartingColor:endingColor:")
-	_nSGradientSelInitWithColors = objc.RegisterName("initWithColors:")
-	_nSGradientSelInitWithColorsAtLocationsColorSpace = objc.RegisterName("initWithColors:atLocations:colorSpace:")
-	_nSGradientSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSGradientSelDrawFromPointToPointOptions = objc.RegisterName("drawFromPoint:toPoint:options:")
-	_nSGradientSelDrawInRectAngle = objc.RegisterName("drawInRect:angle:")
-	_nSGradientSelDrawInBezierPathAngle = objc.RegisterName("drawInBezierPath:angle:")
+	_clsNSGradient                                          = _objcClass("NSGradient")
+	_nSGradientSelInitWithStartingColorEndingColor          = objc.RegisterName("initWithStartingColor:endingColor:")
+	_nSGradientSelInitWithColors                            = objc.RegisterName("initWithColors:")
+	_nSGradientSelInitWithColorsAtLocationsColorSpace       = objc.RegisterName("initWithColors:atLocations:colorSpace:")
+	_nSGradientSelInitWithCoder                             = objc.RegisterName("initWithCoder:")
+	_nSGradientSelDrawFromPointToPointOptions               = objc.RegisterName("drawFromPoint:toPoint:options:")
+	_nSGradientSelDrawInRectAngle                           = objc.RegisterName("drawInRect:angle:")
+	_nSGradientSelDrawInBezierPathAngle                     = objc.RegisterName("drawInBezierPath:angle:")
 	_nSGradientSelDrawFromCenterRadiusToCenterRadiusOptions = objc.RegisterName("drawFromCenter:radius:toCenter:radius:options:")
-	_nSGradientSelDrawInRectRelativeCenterPosition = objc.RegisterName("drawInRect:relativeCenterPosition:")
-	_nSGradientSelDrawInBezierPathRelativeCenterPosition = objc.RegisterName("drawInBezierPath:relativeCenterPosition:")
-	_nSGradientSelGetColorLocationAtIndex = objc.RegisterName("getColor:location:atIndex:")
-	_nSGradientSelInterpolatedColorAtLocation = objc.RegisterName("interpolatedColorAtLocation:")
-	_nSGradientSelColorSpace = objc.RegisterName("colorSpace")
-	_nSGradientSelNumberOfColorStops = objc.RegisterName("numberOfColorStops")
+	_nSGradientSelDrawInRectRelativeCenterPosition          = objc.RegisterName("drawInRect:relativeCenterPosition:")
+	_nSGradientSelDrawInBezierPathRelativeCenterPosition    = objc.RegisterName("drawInBezierPath:relativeCenterPosition:")
+	_nSGradientSelGetColorLocationAtIndex                   = objc.RegisterName("getColor:location:atIndex:")
+	_nSGradientSelInterpolatedColorAtLocation               = objc.RegisterName("interpolatedColorAtLocation:")
+	_nSGradientSelColorSpace                                = objc.RegisterName("colorSpace")
+	_nSGradientSelNumberOfColorStops                        = objc.RegisterName("numberOfColorStops")
 )
 
 func NSGradientFromID(id objc.ID) *NSGradient {
@@ -46,25 +46,33 @@ func NSGradientFromID(id objc.ID) *NSGradient {
 
 func (o *NSGradient) InitWithStartingColorEndingColor(startingColor *NSColor, endingColor *NSColor) *NSGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGradientSelInitWithStartingColorEndingColor, startingColor.Ptr(), endingColor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGradientFromID(_ret)
 }
 
 func (o *NSGradient) InitWithColors(colorArray *foundation.NSArray[*NSColor]) *NSGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGradientSelInitWithColors, colorArray.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGradientFromID(_ret)
 }
 
 func (o *NSGradient) InitWithColorsAtLocationsColorSpace(colorArray *foundation.NSArray[*NSColor], locations *float64, colorSpace *NSColorSpace) *NSGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGradientSelInitWithColorsAtLocationsColorSpace, colorArray.Ptr(), locations, colorSpace.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGradientFromID(_ret)
 }
 
 func (o *NSGradient) InitWithCoder(coder *foundation.NSCoder) *NSGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGradientSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGradientFromID(_ret)
 }
 
@@ -98,13 +106,17 @@ func (o *NSGradient) GetColorLocationAtIndex(color *NSColor, location *float64, 
 
 func (o *NSGradient) InterpolatedColorAtLocation(location float64) *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGradientSelInterpolatedColorAtLocation, location)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
 func (o *NSGradient) ColorSpace() *NSColorSpace {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGradientSelColorSpace)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorSpaceFromID(_ret)
 }
 
@@ -112,4 +124,3 @@ func (o *NSGradient) NumberOfColorStops() int {
 	_ret := objc.Send[int](o.Ptr(), _nSGradientSelNumberOfColorStops)
 	return _ret
 }
-

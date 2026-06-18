@@ -16,14 +16,14 @@ type PKSecureElementPass struct {
 }
 
 var (
-	_clsPKSecureElementPass = _objcClass("PKSecureElementPass")
-	_pKSecureElementPassSelPrimaryAccountIdentifier = objc.RegisterName("primaryAccountIdentifier")
+	_clsPKSecureElementPass                           = _objcClass("PKSecureElementPass")
+	_pKSecureElementPassSelPrimaryAccountIdentifier   = objc.RegisterName("primaryAccountIdentifier")
 	_pKSecureElementPassSelPrimaryAccountNumberSuffix = objc.RegisterName("primaryAccountNumberSuffix")
-	_pKSecureElementPassSelDeviceAccountIdentifier = objc.RegisterName("deviceAccountIdentifier")
-	_pKSecureElementPassSelDeviceAccountNumberSuffix = objc.RegisterName("deviceAccountNumberSuffix")
-	_pKSecureElementPassSelPassActivationState = objc.RegisterName("passActivationState")
-	_pKSecureElementPassSelDevicePassIdentifier = objc.RegisterName("devicePassIdentifier")
-	_pKSecureElementPassSelPairedTerminalIdentifier = objc.RegisterName("pairedTerminalIdentifier")
+	_pKSecureElementPassSelDeviceAccountIdentifier    = objc.RegisterName("deviceAccountIdentifier")
+	_pKSecureElementPassSelDeviceAccountNumberSuffix  = objc.RegisterName("deviceAccountNumberSuffix")
+	_pKSecureElementPassSelPassActivationState        = objc.RegisterName("passActivationState")
+	_pKSecureElementPassSelDevicePassIdentifier       = objc.RegisterName("devicePassIdentifier")
+	_pKSecureElementPassSelPairedTerminalIdentifier   = objc.RegisterName("pairedTerminalIdentifier")
 )
 
 func PKSecureElementPassFromID(id objc.ID) *PKSecureElementPass {
@@ -38,25 +38,33 @@ func PKSecureElementPassFromID(id objc.ID) *PKSecureElementPass {
 
 func (o *PKSecureElementPass) PrimaryAccountIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKSecureElementPassSelPrimaryAccountIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKSecureElementPass) PrimaryAccountNumberSuffix() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKSecureElementPassSelPrimaryAccountNumberSuffix)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKSecureElementPass) DeviceAccountIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKSecureElementPassSelDeviceAccountIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKSecureElementPass) DeviceAccountNumberSuffix() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKSecureElementPassSelDeviceAccountNumberSuffix)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -67,13 +75,16 @@ func (o *PKSecureElementPass) PassActivationState() PKSecureElementPassActivatio
 
 func (o *PKSecureElementPass) DevicePassIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKSecureElementPassSelDevicePassIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKSecureElementPass) PairedTerminalIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKSecureElementPassSelPairedTerminalIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

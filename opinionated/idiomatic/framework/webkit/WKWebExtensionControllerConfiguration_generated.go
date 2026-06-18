@@ -16,7 +16,9 @@ type WKWebExtensionControllerConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.WKWebExtensionControllerConfiguration].
-func (x *WKWebExtensionControllerConfiguration) Unwrap() *raw.WKWebExtensionControllerConfiguration { return x.inner }
+func (x *WKWebExtensionControllerConfiguration) Unwrap() *raw.WKWebExtensionControllerConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -100,4 +102,3 @@ type WKWebExtensionControllerConfigurationable interface {
 }
 
 var _ WKWebExtensionControllerConfigurationable = (*WKWebExtensionControllerConfiguration)(nil)
-

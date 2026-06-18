@@ -69,4 +69,3 @@ type SampleBufferGeneratorBatchable interface {
 }
 
 var _ SampleBufferGeneratorBatchable = (*SampleBufferGeneratorBatch)(nil)
-

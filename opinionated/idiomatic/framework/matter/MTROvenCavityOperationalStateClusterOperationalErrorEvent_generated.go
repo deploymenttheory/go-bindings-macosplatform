@@ -15,11 +15,15 @@ type MTROvenCavityOperationalStateClusterOperationalErrorEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTROvenCavityOperationalStateClusterOperationalErrorEvent].
-func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) Unwrap() *raw.MTROvenCavityOperationalStateClusterOperationalErrorEvent { return x.inner }
+func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) Unwrap() *raw.MTROvenCavityOperationalStateClusterOperationalErrorEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTROvenCavityOperationalStateClusterOperationalErrorEventFromID adopts an existing object pointer as a MTROvenCavityOperationalStateClusterOperationalErrorEvent (nil for 0).
 func MTROvenCavityOperationalStateClusterOperationalErrorEventFromID(id objc.ID) *MTROvenCavityOperationalStateClusterOperationalErrorEvent {
@@ -64,4 +68,3 @@ type MTROvenCavityOperationalStateClusterOperationalErrorEventable interface {
 }
 
 var _ MTROvenCavityOperationalStateClusterOperationalErrorEventable = (*MTROvenCavityOperationalStateClusterOperationalErrorEvent)(nil)
-

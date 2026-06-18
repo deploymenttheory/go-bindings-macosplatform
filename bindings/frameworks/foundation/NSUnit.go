@@ -15,7 +15,7 @@ type NSUnit struct {
 }
 
 var (
-	_clsNSUnit = _objcClass("NSUnit")
+	_clsNSUnit       = _objcClass("NSUnit")
 	_nSUnitSelSymbol = objc.RegisterName("symbol")
 )
 
@@ -31,7 +31,8 @@ func NSUnitFromID(id objc.ID) *NSUnit {
 
 func (o *NSUnit) Symbol() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUnitSelSymbol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
-

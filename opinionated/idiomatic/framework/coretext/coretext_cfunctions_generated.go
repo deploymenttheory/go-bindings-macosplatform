@@ -1014,4 +1014,3 @@ func CTTypesetterSuggestLineBreak(typesetter unsafe.Pointer, startIndex int, wid
 func CTTypesetterSuggestLineBreakWithOffset(typesetter unsafe.Pointer, startIndex int, width float64, offset float64) int {
 	return raw.CTTypesetterSuggestLineBreakWithOffset(typesetter, startIndex, width, offset)
 }
-

@@ -15,9 +15,9 @@ type VNVideoProcessorFrameRateCadence struct {
 }
 
 var (
-	_clsVNVideoProcessorFrameRateCadence = _objcClass("VNVideoProcessorFrameRateCadence")
+	_clsVNVideoProcessorFrameRateCadence                  = _objcClass("VNVideoProcessorFrameRateCadence")
 	_vNVideoProcessorFrameRateCadenceSelInitWithFrameRate = objc.RegisterName("initWithFrameRate:")
-	_vNVideoProcessorFrameRateCadenceSelFrameRate = objc.RegisterName("frameRate")
+	_vNVideoProcessorFrameRateCadenceSelFrameRate         = objc.RegisterName("frameRate")
 )
 
 func VNVideoProcessorFrameRateCadenceFromID(id objc.ID) *VNVideoProcessorFrameRateCadence {
@@ -32,7 +32,9 @@ func VNVideoProcessorFrameRateCadenceFromID(id objc.ID) *VNVideoProcessorFrameRa
 
 func (o *VNVideoProcessorFrameRateCadence) InitWithFrameRate(frameRate int) *VNVideoProcessorFrameRateCadence {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNVideoProcessorFrameRateCadenceSelInitWithFrameRate, frameRate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNVideoProcessorFrameRateCadenceFromID(_ret)
 }
 
@@ -40,4 +42,3 @@ func (o *VNVideoProcessorFrameRateCadence) FrameRate() int {
 	_ret := objc.Send[int](o.Ptr(), _vNVideoProcessorFrameRateCadenceSelFrameRate)
 	return _ret
 }
-

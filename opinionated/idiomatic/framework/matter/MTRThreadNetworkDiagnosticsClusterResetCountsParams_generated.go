@@ -16,7 +16,9 @@ type MTRThreadNetworkDiagnosticsClusterResetCountsParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRThreadNetworkDiagnosticsClusterResetCountsParams].
-func (x *MTRThreadNetworkDiagnosticsClusterResetCountsParams) Unwrap() *raw.MTRThreadNetworkDiagnosticsClusterResetCountsParams { return x.inner }
+func (x *MTRThreadNetworkDiagnosticsClusterResetCountsParams) Unwrap() *raw.MTRThreadNetworkDiagnosticsClusterResetCountsParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -80,4 +82,3 @@ type MTRThreadNetworkDiagnosticsClusterResetCountsParamsable interface {
 }
 
 var _ MTRThreadNetworkDiagnosticsClusterResetCountsParamsable = (*MTRThreadNetworkDiagnosticsClusterResetCountsParams)(nil)
-

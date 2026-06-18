@@ -17,4 +17,3 @@ type UMPEndpointProvider interface {
 type UMPFunctionBlockProvider interface {
 	asUMPFunctionBlock() *raw.MIDIUMPFunctionBlock
 }
-

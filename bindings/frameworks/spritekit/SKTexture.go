@@ -23,28 +23,28 @@ type SKTexture struct {
 }
 
 var (
-	_clsSKTexture = _objcClass("SKTexture")
-	_sKTextureSelTextureWithImageNamed = objc.RegisterName("textureWithImageNamed:")
-	_sKTextureSelTextureWithRectInTexture = objc.RegisterName("textureWithRect:inTexture:")
-	_sKTextureSelTextureVectorNoiseWithSmoothnessSize = objc.RegisterName("textureVectorNoiseWithSmoothness:size:")
-	_sKTextureSelTextureNoiseWithSmoothnessSizeGrayscale = objc.RegisterName("textureNoiseWithSmoothness:size:grayscale:")
-	_sKTextureSelTextureWithCGImage = objc.RegisterName("textureWithCGImage:")
-	_sKTextureSelTextureWithImage = objc.RegisterName("textureWithImage:")
-	_sKTextureSelTextureWithDataSize = objc.RegisterName("textureWithData:size:")
-	_sKTextureSelTextureWithDataSizeFlipped = objc.RegisterName("textureWithData:size:flipped:")
-	_sKTextureSelTextureWithDataSizeRowLengthAlignment = objc.RegisterName("textureWithData:size:rowLength:alignment:")
-	_sKTextureSelTextureByApplyingCIFilter = objc.RegisterName("textureByApplyingCIFilter:")
-	_sKTextureSelTextureByGeneratingNormalMap = objc.RegisterName("textureByGeneratingNormalMap")
+	_clsSKTexture                                                   = _objcClass("SKTexture")
+	_sKTextureSelTextureWithImageNamed                              = objc.RegisterName("textureWithImageNamed:")
+	_sKTextureSelTextureWithRectInTexture                           = objc.RegisterName("textureWithRect:inTexture:")
+	_sKTextureSelTextureVectorNoiseWithSmoothnessSize               = objc.RegisterName("textureVectorNoiseWithSmoothness:size:")
+	_sKTextureSelTextureNoiseWithSmoothnessSizeGrayscale            = objc.RegisterName("textureNoiseWithSmoothness:size:grayscale:")
+	_sKTextureSelTextureWithCGImage                                 = objc.RegisterName("textureWithCGImage:")
+	_sKTextureSelTextureWithImage                                   = objc.RegisterName("textureWithImage:")
+	_sKTextureSelTextureWithDataSize                                = objc.RegisterName("textureWithData:size:")
+	_sKTextureSelTextureWithDataSizeFlipped                         = objc.RegisterName("textureWithData:size:flipped:")
+	_sKTextureSelTextureWithDataSizeRowLengthAlignment              = objc.RegisterName("textureWithData:size:rowLength:alignment:")
+	_sKTextureSelTextureByApplyingCIFilter                          = objc.RegisterName("textureByApplyingCIFilter:")
+	_sKTextureSelTextureByGeneratingNormalMap                       = objc.RegisterName("textureByGeneratingNormalMap")
 	_sKTextureSelTextureByGeneratingNormalMapWithSmoothnessContrast = objc.RegisterName("textureByGeneratingNormalMapWithSmoothness:contrast:")
-	_sKTextureSelTextureRect = objc.RegisterName("textureRect")
-	_sKTextureSelSize = objc.RegisterName("size")
-	_sKTextureSelCGImage = objc.RegisterName("CGImage")
-	_sKTextureSelPreloadTexturesWithCompletionHandler = objc.RegisterName("preloadTextures:withCompletionHandler:")
-	_sKTextureSelPreloadWithCompletionHandler = objc.RegisterName("preloadWithCompletionHandler:")
-	_sKTextureSelFilteringMode = objc.RegisterName("filteringMode")
-	_sKTextureSelSetFilteringMode = objc.RegisterName("setFilteringMode:")
-	_sKTextureSelUsesMipmaps = objc.RegisterName("usesMipmaps")
-	_sKTextureSelSetUsesMipmaps = objc.RegisterName("setUsesMipmaps:")
+	_sKTextureSelTextureRect                                        = objc.RegisterName("textureRect")
+	_sKTextureSelSize                                               = objc.RegisterName("size")
+	_sKTextureSelCGImage                                            = objc.RegisterName("CGImage")
+	_sKTextureSelPreloadTexturesWithCompletionHandler               = objc.RegisterName("preloadTextures:withCompletionHandler:")
+	_sKTextureSelPreloadWithCompletionHandler                       = objc.RegisterName("preloadWithCompletionHandler:")
+	_sKTextureSelFilteringMode                                      = objc.RegisterName("filteringMode")
+	_sKTextureSelSetFilteringMode                                   = objc.RegisterName("setFilteringMode:")
+	_sKTextureSelUsesMipmaps                                        = objc.RegisterName("usesMipmaps")
+	_sKTextureSelSetUsesMipmaps                                     = objc.RegisterName("setUsesMipmaps:")
 )
 
 func SKTextureFromID(id objc.ID) *SKTexture {
@@ -60,82 +60,106 @@ func SKTextureFromID(id objc.ID) *SKTexture {
 // Create a texture from an image file. Behaves similar to imageNamed: in UIImage or NSImage @param name the name or path of the image to load.
 func SKTextureTextureWithImageNamed(name *foundation.NSString) *SKTexture {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTexture), _sKTextureSelTextureWithImageNamed, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTextureFromID(_ret)
 }
 
 // Create a texture that is a subrect of an existing texture. See textureRect property for details. @param rect the source rectangle to use in creating a logical copy of the given texture. @param texture the existing texture to reference in the copy.
 func SKTextureTextureWithRectInTexture(rect corefoundation.CGRect, texture *SKTexture) *SKTexture {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTexture), _sKTextureSelTextureWithRectInTexture, rect, texture.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTextureFromID(_ret)
 }
 
 // Create a texture containing directional noise. The RGBA values in this texture can be used as a normal map or as direction possibly with length. XYZ are a three dimensional direction, and A is a magnitude. @param size the size of the resulting texture. @param smoothness how similar neighboring pixels are. A value of zero is like static, one is smooth.
 func SKTextureTextureVectorNoiseWithSmoothnessSize(smoothness float64, size corefoundation.CGSize) *SKTexture {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTexture), _sKTextureSelTextureVectorNoiseWithSmoothnessSize, smoothness, size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTextureFromID(_ret)
 }
 
 // Create a texture containing colored noise. The noise texture is tileable with itself. @param size the size of the resulting texture. @param smoothness how similar neighboring pixels are. A value of zero is like static, one is smooth. @param grayscale if YES, RGB and A will all be the same. If no, RGB and A will all be different. A is not pre-multiplied, because the intent is that if you read a texel in a shader, all four values will be exactly the same value if grayscale, or four different, uncorrelated values if not grayscale.
 func SKTextureTextureNoiseWithSmoothnessSizeGrayscale(smoothness float64, size corefoundation.CGSize, grayscale bool) *SKTexture {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTexture), _sKTextureSelTextureNoiseWithSmoothnessSizeGrayscale, smoothness, size, grayscale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTextureFromID(_ret)
 }
 
 // Create a texture from a CGImageRef. @param image the CGImageRef to create the texture from
 func SKTextureTextureWithCGImage(image unsafe.Pointer) *SKTexture {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTexture), _sKTextureSelTextureWithCGImage, image)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTextureFromID(_ret)
 }
 
 func SKTextureTextureWithImage(image *appkit.NSImage) *SKTexture {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTexture), _sKTextureSelTextureWithImage, image.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTextureFromID(_ret)
 }
 
 // Create new texture with bitmap RGBA data in unsigned bytes. Data is copied once, additional changes to the data does not affect the texture. All pixel data is assumed to be premultiplied alpha. @param pixelData the pixelData to read in creating the texture. @param size the dimensions of the pixelData given.
 func SKTextureTextureWithDataSize(pixelData *foundation.NSData, size corefoundation.CGSize) *SKTexture {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTexture), _sKTextureSelTextureWithDataSize, pixelData.Ptr(), size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTextureFromID(_ret)
 }
 
 func SKTextureTextureWithDataSizeFlipped(pixelData *foundation.NSData, size corefoundation.CGSize, flipped bool) *SKTexture {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTexture), _sKTextureSelTextureWithDataSizeFlipped, pixelData.Ptr(), size, flipped)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTextureFromID(_ret)
 }
 
 // Create new texture with bitmap RGBA data in unsigned bytes using a custom row length and row alignment. Data is copied once, additional changes to the data does not affect the texture. All pixel data is assumed to be premultiplied alpha. @param pixelData the data to use @param size the size in texels @param rowLength the length of each row in pixels (allows byte row pitches greater than the width for aligned data) @param alignment the byte alignment of the data, provide 0 for tightly packed data.
 func SKTextureTextureWithDataSizeRowLengthAlignment(pixelData *foundation.NSData, size corefoundation.CGSize, rowLength uint, alignment uint) *SKTexture {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTexture), _sKTextureSelTextureWithDataSizeRowLengthAlignment, pixelData.Ptr(), size, rowLength, alignment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTextureFromID(_ret)
 }
 
 // Create new texture by applying a CIFilter to an existing one. Any CIFilter that requires only a single "inputImage" and produces an "outputImage" is allowed. @param filter the CI filter to apply in the copy.
 func (o *SKTexture) TextureByApplyingCIFilter(filter *coreimage.CIFilter) *SKTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTextureSelTextureByApplyingCIFilter, filter.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTextureFromID(_ret)
 }
 
 // Create new texture by generating a normal map texture.
 func (o *SKTexture) TextureByGeneratingNormalMap() *SKTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTextureSelTextureByGeneratingNormalMap)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTextureFromID(_ret)
 }
 
 // Create new texture by generating a normal map texture. @param smoothness the smooth level of the generated normal map. @param contrast  the scale applied to the generated normal map.
 func (o *SKTexture) TextureByGeneratingNormalMapWithSmoothnessContrast(smoothness float64, contrast float64) *SKTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTextureSelTextureByGeneratingNormalMapWithSmoothnessContrast, smoothness, contrast)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTextureFromID(_ret)
 }
 
@@ -200,4 +224,3 @@ func (o *SKTexture) UsesMipmaps() bool {
 func (o *SKTexture) SetUsesMipmaps(usesMipmaps bool) {
 	o.Ptr().Send(_sKTextureSelSetUsesMipmaps, usesMipmaps)
 }
-

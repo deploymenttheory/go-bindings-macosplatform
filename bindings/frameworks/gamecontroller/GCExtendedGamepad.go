@@ -15,28 +15,28 @@ type GCExtendedGamepad struct {
 }
 
 var (
-	_clsGCExtendedGamepad = _objcClass("GCExtendedGamepad")
-	_gCExtendedGamepadSelSaveSnapshot = objc.RegisterName("saveSnapshot")
+	_clsGCExtendedGamepad                            = _objcClass("GCExtendedGamepad")
+	_gCExtendedGamepadSelSaveSnapshot                = objc.RegisterName("saveSnapshot")
 	_gCExtendedGamepadSelSetStateFromExtendedGamepad = objc.RegisterName("setStateFromExtendedGamepad:")
-	_gCExtendedGamepadSelController = objc.RegisterName("controller")
-	_gCExtendedGamepadSelValueChangedHandler = objc.RegisterName("valueChangedHandler")
-	_gCExtendedGamepadSelSetValueChangedHandler = objc.RegisterName("setValueChangedHandler:")
-	_gCExtendedGamepadSelDpad = objc.RegisterName("dpad")
-	_gCExtendedGamepadSelButtonA = objc.RegisterName("buttonA")
-	_gCExtendedGamepadSelButtonB = objc.RegisterName("buttonB")
-	_gCExtendedGamepadSelButtonX = objc.RegisterName("buttonX")
-	_gCExtendedGamepadSelButtonY = objc.RegisterName("buttonY")
-	_gCExtendedGamepadSelButtonMenu = objc.RegisterName("buttonMenu")
-	_gCExtendedGamepadSelButtonOptions = objc.RegisterName("buttonOptions")
-	_gCExtendedGamepadSelButtonHome = objc.RegisterName("buttonHome")
-	_gCExtendedGamepadSelLeftThumbstick = objc.RegisterName("leftThumbstick")
-	_gCExtendedGamepadSelRightThumbstick = objc.RegisterName("rightThumbstick")
-	_gCExtendedGamepadSelLeftShoulder = objc.RegisterName("leftShoulder")
-	_gCExtendedGamepadSelRightShoulder = objc.RegisterName("rightShoulder")
-	_gCExtendedGamepadSelLeftTrigger = objc.RegisterName("leftTrigger")
-	_gCExtendedGamepadSelRightTrigger = objc.RegisterName("rightTrigger")
-	_gCExtendedGamepadSelLeftThumbstickButton = objc.RegisterName("leftThumbstickButton")
-	_gCExtendedGamepadSelRightThumbstickButton = objc.RegisterName("rightThumbstickButton")
+	_gCExtendedGamepadSelController                  = objc.RegisterName("controller")
+	_gCExtendedGamepadSelValueChangedHandler         = objc.RegisterName("valueChangedHandler")
+	_gCExtendedGamepadSelSetValueChangedHandler      = objc.RegisterName("setValueChangedHandler:")
+	_gCExtendedGamepadSelDpad                        = objc.RegisterName("dpad")
+	_gCExtendedGamepadSelButtonA                     = objc.RegisterName("buttonA")
+	_gCExtendedGamepadSelButtonB                     = objc.RegisterName("buttonB")
+	_gCExtendedGamepadSelButtonX                     = objc.RegisterName("buttonX")
+	_gCExtendedGamepadSelButtonY                     = objc.RegisterName("buttonY")
+	_gCExtendedGamepadSelButtonMenu                  = objc.RegisterName("buttonMenu")
+	_gCExtendedGamepadSelButtonOptions               = objc.RegisterName("buttonOptions")
+	_gCExtendedGamepadSelButtonHome                  = objc.RegisterName("buttonHome")
+	_gCExtendedGamepadSelLeftThumbstick              = objc.RegisterName("leftThumbstick")
+	_gCExtendedGamepadSelRightThumbstick             = objc.RegisterName("rightThumbstick")
+	_gCExtendedGamepadSelLeftShoulder                = objc.RegisterName("leftShoulder")
+	_gCExtendedGamepadSelRightShoulder               = objc.RegisterName("rightShoulder")
+	_gCExtendedGamepadSelLeftTrigger                 = objc.RegisterName("leftTrigger")
+	_gCExtendedGamepadSelRightTrigger                = objc.RegisterName("rightTrigger")
+	_gCExtendedGamepadSelLeftThumbstickButton        = objc.RegisterName("leftThumbstickButton")
+	_gCExtendedGamepadSelRightThumbstickButton       = objc.RegisterName("rightThumbstickButton")
 )
 
 func GCExtendedGamepadFromID(id objc.ID) *GCExtendedGamepad {
@@ -53,7 +53,9 @@ func GCExtendedGamepadFromID(id objc.ID) *GCExtendedGamepad {
 // Deprecated: Use the -[GCController capture] method instead
 func (o *GCExtendedGamepad) SaveSnapshot() *GCExtendedGamepadSnapshot {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCExtendedGamepadSelSaveSnapshot)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCExtendedGamepadSnapshotFromID(_ret)
 }
 
@@ -65,7 +67,9 @@ func (o *GCExtendedGamepad) SetStateFromExtendedGamepad(extendedGamepad *GCExten
 // A profile keeps a reference to the controller that this profile is mapping input from.
 func (o *GCExtendedGamepad) Controller() *GCController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCExtendedGamepadSelController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerFromID(_ret)
 }
 
@@ -94,107 +98,138 @@ func (o *GCExtendedGamepad) SetValueChangedHandler(valueChangedHandler func(*GCE
 // Required to be analog in the Extended profile. All the elements of this directional input are thus analog.
 func (o *GCExtendedGamepad) Dpad() *GCControllerDirectionPad {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCExtendedGamepadSelDpad)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerDirectionPadFromID(_ret)
 }
 
 // All face buttons are required to be analog in the Extended profile. These must be arranged in the diamond pattern given below: Y / \ X   B \ / A
 func (o *GCExtendedGamepad) ButtonA() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCExtendedGamepadSelButtonA)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
 func (o *GCExtendedGamepad) ButtonB() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCExtendedGamepadSelButtonB)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
 func (o *GCExtendedGamepad) ButtonX() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCExtendedGamepadSelButtonX)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
 func (o *GCExtendedGamepad) ButtonY() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCExtendedGamepadSelButtonY)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
 // Button menu is the primary menu button, and should be used to enter the main menu and pause the game.
 func (o *GCExtendedGamepad) ButtonMenu() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCExtendedGamepadSelButtonMenu)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
 // Button options is the secondary menu button. It should be used to enter a secondary menu, such as graphics and sound configuration, and pause the game.
 func (o *GCExtendedGamepad) ButtonOptions() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCExtendedGamepadSelButtonOptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
 // Button home is a special menu button. If the system does not consume button home events, they will be passed to your application and should be used to enter a secondary menu, and pause the game.
 func (o *GCExtendedGamepad) ButtonHome() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCExtendedGamepadSelButtonHome)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
 // A thumbstick is a 2-axis control that is physically required to be analog. All the elements of this directional input are thus analog.
 func (o *GCExtendedGamepad) LeftThumbstick() *GCControllerDirectionPad {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCExtendedGamepadSelLeftThumbstick)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerDirectionPadFromID(_ret)
 }
 
 // A thumbstick is a 2-axis control that is physically required to be analog. All the elements of this directional input are thus analog.
 func (o *GCExtendedGamepad) RightThumbstick() *GCControllerDirectionPad {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCExtendedGamepadSelRightThumbstick)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerDirectionPadFromID(_ret)
 }
 
 // Shoulder buttons are required to be analog inputs.
 func (o *GCExtendedGamepad) LeftShoulder() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCExtendedGamepadSelLeftShoulder)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
 // Shoulder buttons are required to be analog inputs.
 func (o *GCExtendedGamepad) RightShoulder() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCExtendedGamepadSelRightShoulder)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
 // Triggers are required to be analog inputs. Common uses would be acceleration and decelleration in a driving game for example.
 func (o *GCExtendedGamepad) LeftTrigger() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCExtendedGamepadSelLeftTrigger)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
 func (o *GCExtendedGamepad) RightTrigger() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCExtendedGamepadSelRightTrigger)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
 // A thumbstick may also have a clickable component, which is treated as a non-analog button.
 func (o *GCExtendedGamepad) LeftThumbstickButton() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCExtendedGamepadSelLeftThumbstickButton)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
 func (o *GCExtendedGamepad) RightThumbstickButton() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCExtendedGamepadSelRightThumbstickButton)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
-

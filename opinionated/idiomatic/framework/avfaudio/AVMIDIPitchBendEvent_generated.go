@@ -58,9 +58,13 @@ func (x *MIDIPitchBendEvent) SetValue(value uint) {
 	x.inner.SetValue(value)
 }
 
-func (x *MIDIPitchBendEvent) asMIDIChannelEvent() *raw.AVMIDIChannelEvent { return &x.inner.AVMIDIChannelEvent }
+func (x *MIDIPitchBendEvent) asMIDIChannelEvent() *raw.AVMIDIChannelEvent {
+	return &x.inner.AVMIDIChannelEvent
+}
 
-func (x *MIDIPitchBendEvent) asMusicEvent() *raw.AVMusicEvent { return &x.inner.AVMIDIChannelEvent.AVMusicEvent }
+func (x *MIDIPitchBendEvent) asMusicEvent() *raw.AVMusicEvent {
+	return &x.inner.AVMIDIChannelEvent.AVMusicEvent
+}
 
 // MIDIPitchBendEventable is the interface implemented by [MIDIPitchBendEvent], for mocking and DI.
 type MIDIPitchBendEventable interface {
@@ -72,4 +76,3 @@ type MIDIPitchBendEventable interface {
 }
 
 var _ MIDIPitchBendEventable = (*MIDIPitchBendEvent)(nil)
-

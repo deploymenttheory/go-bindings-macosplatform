@@ -17,16 +17,16 @@ type NSURLSessionStreamTask struct {
 }
 
 var (
-	_clsNSURLSessionStreamTask = _objcClass("NSURLSessionStreamTask")
+	_clsNSURLSessionStreamTask                                                     = _objcClass("NSURLSessionStreamTask")
 	_nSURLSessionStreamTaskSelReadDataOfMinLengthMaxLengthTimeoutCompletionHandler = objc.RegisterName("readDataOfMinLength:maxLength:timeout:completionHandler:")
-	_nSURLSessionStreamTaskSelWriteDataTimeoutCompletionHandler = objc.RegisterName("writeData:timeout:completionHandler:")
-	_nSURLSessionStreamTaskSelCaptureStreams = objc.RegisterName("captureStreams")
-	_nSURLSessionStreamTaskSelCloseWrite = objc.RegisterName("closeWrite")
-	_nSURLSessionStreamTaskSelCloseRead = objc.RegisterName("closeRead")
-	_nSURLSessionStreamTaskSelStartSecureConnection = objc.RegisterName("startSecureConnection")
-	_nSURLSessionStreamTaskSelStopSecureConnection = objc.RegisterName("stopSecureConnection")
-	_nSURLSessionStreamTaskSelInit = objc.RegisterName("init")
-	_nSURLSessionStreamTaskSelNew = objc.RegisterName("new")
+	_nSURLSessionStreamTaskSelWriteDataTimeoutCompletionHandler                    = objc.RegisterName("writeData:timeout:completionHandler:")
+	_nSURLSessionStreamTaskSelCaptureStreams                                       = objc.RegisterName("captureStreams")
+	_nSURLSessionStreamTaskSelCloseWrite                                           = objc.RegisterName("closeWrite")
+	_nSURLSessionStreamTaskSelCloseRead                                            = objc.RegisterName("closeRead")
+	_nSURLSessionStreamTaskSelStartSecureConnection                                = objc.RegisterName("startSecureConnection")
+	_nSURLSessionStreamTaskSelStopSecureConnection                                 = objc.RegisterName("stopSecureConnection")
+	_nSURLSessionStreamTaskSelInit                                                 = objc.RegisterName("init")
+	_nSURLSessionStreamTaskSelNew                                                  = objc.RegisterName("new")
 )
 
 func NSURLSessionStreamTaskFromID(id objc.ID) *NSURLSessionStreamTask {
@@ -85,7 +85,9 @@ func (o *NSURLSessionStreamTask) StopSecureConnection() {
 // Deprecated: Please use -[NSURLSession streamTaskWithHostName:port:] or other NSURLSession methods to create instances
 func (o *NSURLSessionStreamTask) Init() *NSURLSessionStreamTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionStreamTaskSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionStreamTaskFromID(_ret)
 }
 
@@ -94,4 +96,3 @@ func NSURLSessionStreamTaskNew() *NSURLSessionStreamTask {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLSessionStreamTask), _nSURLSessionStreamTaskSelNew)
 	return NSURLSessionStreamTaskFromID(_ret)
 }
-

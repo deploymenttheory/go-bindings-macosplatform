@@ -12,10 +12,10 @@ import (
 type MIDICIDeviceType int64
 
 const (
-	KMIDICIDeviceTypeUnknown MIDICIDeviceType = 0
+	KMIDICIDeviceTypeUnknown     MIDICIDeviceType = 0
 	KMIDICIDeviceTypeLegacyMIDI1 MIDICIDeviceType = 1
-	KMIDICIDeviceTypeVirtual MIDICIDeviceType = 2
-	KMIDICIDeviceTypeUSBMIDI MIDICIDeviceType = 3
+	KMIDICIDeviceTypeVirtual     MIDICIDeviceType = 2
+	KMIDICIDeviceTypeUSBMIDI     MIDICIDeviceType = 3
 )
 
 func (e MIDICIDeviceType) String() string {
@@ -37,9 +37,9 @@ type MIDICIProfileType int64
 
 const (
 	KMIDICIProfileTypeSingleChannel MIDICIProfileType = 1
-	KMIDICIProfileTypeGroup MIDICIProfileType = 2
+	KMIDICIProfileTypeGroup         MIDICIProfileType = 2
 	KMIDICIProfileTypeFunctionBlock MIDICIProfileType = 3
-	KMIDICIProfileTypeMultichannel MIDICIProfileType = 4
+	KMIDICIProfileTypeMultichannel  MIDICIProfileType = 4
 )
 
 func (e MIDICIProfileType) String() string {
@@ -60,16 +60,16 @@ func (e MIDICIProfileType) String() string {
 type MIDIMessageType uint32
 
 const (
-	KMIDIMessageTypeUtility MIDIMessageType = 0
-	KMIDIMessageTypeSystem MIDIMessageType = 1
+	KMIDIMessageTypeUtility       MIDIMessageType = 0
+	KMIDIMessageTypeSystem        MIDIMessageType = 1
 	KMIDIMessageTypeChannelVoice1 MIDIMessageType = 2
-	KMIDIMessageTypeSysEx MIDIMessageType = 3
+	KMIDIMessageTypeSysEx         MIDIMessageType = 3
 	KMIDIMessageTypeChannelVoice2 MIDIMessageType = 4
-	KMIDIMessageTypeData128 MIDIMessageType = 5
-	KMIDIMessageTypeFlexData MIDIMessageType = 13
-	KMIDIMessageTypeUnknownF MIDIMessageType = 15
-	KMIDIMessageTypeStream MIDIMessageType = 15
-	KMIDIMessageTypeInvalid MIDIMessageType = 255
+	KMIDIMessageTypeData128       MIDIMessageType = 5
+	KMIDIMessageTypeFlexData      MIDIMessageType = 13
+	KMIDIMessageTypeUnknownF      MIDIMessageType = 15
+	KMIDIMessageTypeStream        MIDIMessageType = 15
+	KMIDIMessageTypeInvalid       MIDIMessageType = 255
 )
 
 func (e MIDIMessageType) String() string {
@@ -100,9 +100,9 @@ func (e MIDIMessageType) String() string {
 type MIDINetworkConnectionPolicy uint64
 
 const (
-	MIDINetworkConnectionPolicy_NoOne MIDINetworkConnectionPolicy = 0
+	MIDINetworkConnectionPolicy_NoOne              MIDINetworkConnectionPolicy = 0
 	MIDINetworkConnectionPolicy_HostsInContactList MIDINetworkConnectionPolicy = 1
-	MIDINetworkConnectionPolicy_Anyone MIDINetworkConnectionPolicy = 2
+	MIDINetworkConnectionPolicy_Anyone             MIDINetworkConnectionPolicy = 2
 )
 
 func (e MIDINetworkConnectionPolicy) String() string {
@@ -121,14 +121,14 @@ func (e MIDINetworkConnectionPolicy) String() string {
 type MIDIObjectType int64
 
 const (
-	KMIDIObjectType_Other MIDIObjectType = -1
-	KMIDIObjectType_Device MIDIObjectType = 0
-	KMIDIObjectType_Entity MIDIObjectType = 1
-	KMIDIObjectType_Source MIDIObjectType = 2
-	KMIDIObjectType_Destination MIDIObjectType = 3
-	KMIDIObjectType_ExternalDevice MIDIObjectType = 16
-	KMIDIObjectType_ExternalEntity MIDIObjectType = 17
-	KMIDIObjectType_ExternalSource MIDIObjectType = 18
+	KMIDIObjectType_Other               MIDIObjectType = -1
+	KMIDIObjectType_Device              MIDIObjectType = 0
+	KMIDIObjectType_Entity              MIDIObjectType = 1
+	KMIDIObjectType_Source              MIDIObjectType = 2
+	KMIDIObjectType_Destination         MIDIObjectType = 3
+	KMIDIObjectType_ExternalDevice      MIDIObjectType = 16
+	KMIDIObjectType_ExternalEntity      MIDIObjectType = 17
+	KMIDIObjectType_ExternalSource      MIDIObjectType = 18
 	KMIDIObjectType_ExternalDestination MIDIObjectType = 19
 )
 
@@ -178,10 +178,10 @@ func (e MIDIProtocolID) String() string {
 type MIDIUMPCIObjectBackingType int64
 
 const (
-	KMIDIUMPCIObjectBackingTypeUnknown MIDIUMPCIObjectBackingType = 0
-	KMIDIUMPCIObjectBackingTypeVirtual MIDIUMPCIObjectBackingType = 1
+	KMIDIUMPCIObjectBackingTypeUnknown      MIDIUMPCIObjectBackingType = 0
+	KMIDIUMPCIObjectBackingTypeVirtual      MIDIUMPCIObjectBackingType = 1
 	KMIDIUMPCIObjectBackingTypeDriverDevice MIDIUMPCIObjectBackingType = 2
-	KMIDIUMPCIObjectBackingTypeUSBMIDI MIDIUMPCIObjectBackingType = 3
+	KMIDIUMPCIObjectBackingTypeUSBMIDI      MIDIUMPCIObjectBackingType = 3
 )
 
 func (e MIDIUMPCIObjectBackingType) String() string {
@@ -202,9 +202,9 @@ func (e MIDIUMPCIObjectBackingType) String() string {
 type MIDIUMPFunctionBlockDirection int64
 
 const (
-	KMIDIUMPFunctionBlockDirectionUnknown MIDIUMPFunctionBlockDirection = 0
-	KMIDIUMPFunctionBlockDirectionInput MIDIUMPFunctionBlockDirection = 1
-	KMIDIUMPFunctionBlockDirectionOutput MIDIUMPFunctionBlockDirection = 2
+	KMIDIUMPFunctionBlockDirectionUnknown       MIDIUMPFunctionBlockDirection = 0
+	KMIDIUMPFunctionBlockDirectionInput         MIDIUMPFunctionBlockDirection = 1
+	KMIDIUMPFunctionBlockDirectionOutput        MIDIUMPFunctionBlockDirection = 2
 	KMIDIUMPFunctionBlockDirectionBidirectional MIDIUMPFunctionBlockDirection = 3
 )
 
@@ -226,9 +226,9 @@ func (e MIDIUMPFunctionBlockDirection) String() string {
 type MIDIUMPFunctionBlockMIDI1Info int64
 
 const (
-	KMIDIUMPFunctionBlockMIDI1InfoNotMIDI1 MIDIUMPFunctionBlockMIDI1Info = 0
+	KMIDIUMPFunctionBlockMIDI1InfoNotMIDI1              MIDIUMPFunctionBlockMIDI1Info = 0
 	KMIDIUMPFunctionBlockMIDI1InfoUnrestrictedBandwidth MIDIUMPFunctionBlockMIDI1Info = 1
-	KMIDIUMPFunctionBlockMIDI1InfoRestrictedBandwidth MIDIUMPFunctionBlockMIDI1Info = 2
+	KMIDIUMPFunctionBlockMIDI1InfoRestrictedBandwidth   MIDIUMPFunctionBlockMIDI1Info = 2
 )
 
 func (e MIDIUMPFunctionBlockMIDI1Info) String() string {
@@ -247,9 +247,9 @@ func (e MIDIUMPFunctionBlockMIDI1Info) String() string {
 type MIDIUMPFunctionBlockUIHint int64
 
 const (
-	KMIDIUMPFunctionBlockUIHintUnknown MIDIUMPFunctionBlockUIHint = 0
-	KMIDIUMPFunctionBlockUIHintReceiver MIDIUMPFunctionBlockUIHint = 1
-	KMIDIUMPFunctionBlockUIHintSender MIDIUMPFunctionBlockUIHint = 2
+	KMIDIUMPFunctionBlockUIHintUnknown        MIDIUMPFunctionBlockUIHint = 0
+	KMIDIUMPFunctionBlockUIHintReceiver       MIDIUMPFunctionBlockUIHint = 1
+	KMIDIUMPFunctionBlockUIHintSender         MIDIUMPFunctionBlockUIHint = 2
 	KMIDIUMPFunctionBlockUIHintSenderReceiver MIDIUMPFunctionBlockUIHint = 3
 )
 
@@ -293,10 +293,10 @@ func (e MIDIUMPProtocolOptions) String() string {
 type UMPStreamMessageFormat int64
 
 const (
-	KUMPStreamMessageFormatComplete UMPStreamMessageFormat = 0
-	KUMPStreamMessageFormatStart UMPStreamMessageFormat = 1
+	KUMPStreamMessageFormatComplete   UMPStreamMessageFormat = 0
+	KUMPStreamMessageFormatStart      UMPStreamMessageFormat = 1
 	KUMPStreamMessageFormatContinuing UMPStreamMessageFormat = 2
-	KUMPStreamMessageFormatEnd UMPStreamMessageFormat = 3
+	KUMPStreamMessageFormatEnd        UMPStreamMessageFormat = 3
 )
 
 func (e UMPStreamMessageFormat) String() string {
@@ -317,18 +317,18 @@ func (e UMPStreamMessageFormat) String() string {
 type UMPStreamMessageStatus uint32
 
 const (
-	KUMPStreamMessageStatusEndpointDiscovery UMPStreamMessageStatus = 0
-	KUMPStreamMessageStatusEndpointInfoNotification UMPStreamMessageStatus = 1
-	KUMPStreamMessageStatusDeviceIdentityNotification UMPStreamMessageStatus = 2
-	KUMPStreamMessageStatusEndpointNameNotification UMPStreamMessageStatus = 3
-	KUMPStreamMessageStatusProductInstanceIDNotification UMPStreamMessageStatus = 4
-	KUMPStreamMessageStatusStreamConfigurationRequest UMPStreamMessageStatus = 5
+	KUMPStreamMessageStatusEndpointDiscovery               UMPStreamMessageStatus = 0
+	KUMPStreamMessageStatusEndpointInfoNotification        UMPStreamMessageStatus = 1
+	KUMPStreamMessageStatusDeviceIdentityNotification      UMPStreamMessageStatus = 2
+	KUMPStreamMessageStatusEndpointNameNotification        UMPStreamMessageStatus = 3
+	KUMPStreamMessageStatusProductInstanceIDNotification   UMPStreamMessageStatus = 4
+	KUMPStreamMessageStatusStreamConfigurationRequest      UMPStreamMessageStatus = 5
 	KUMPStreamMessageStatusStreamConfigurationNotification UMPStreamMessageStatus = 6
-	KUMPStreamMessageStatusFunctionBlockDiscovery UMPStreamMessageStatus = 16
-	KUMPStreamMessageStatusFunctionBlockInfoNotification UMPStreamMessageStatus = 17
-	KUMPStreamMessageStatusFunctionBlockNameNotification UMPStreamMessageStatus = 18
-	KUMPStreamMessageStatusStartOfClip UMPStreamMessageStatus = 32
-	KUMPStreamMessageStatusEndOfClip UMPStreamMessageStatus = 33
+	KUMPStreamMessageStatusFunctionBlockDiscovery          UMPStreamMessageStatus = 16
+	KUMPStreamMessageStatusFunctionBlockInfoNotification   UMPStreamMessageStatus = 17
+	KUMPStreamMessageStatusFunctionBlockNameNotification   UMPStreamMessageStatus = 18
+	KUMPStreamMessageStatusStartOfClip                     UMPStreamMessageStatus = 32
+	KUMPStreamMessageStatusEndOfClip                       UMPStreamMessageStatus = 33
 )
 
 func (e UMPStreamMessageStatus) String() string {
@@ -361,4 +361,3 @@ func (e UMPStreamMessageStatus) String() string {
 		return fmt.Sprintf("UMPStreamMessageStatus(%d)", int64(e))
 	}
 }
-

@@ -58,4 +58,3 @@ type NEFilterRuleable interface {
 }
 
 var _ NEFilterRuleable = (*NEFilterRule)(nil)
-

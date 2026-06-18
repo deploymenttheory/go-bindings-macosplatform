@@ -11,7 +11,7 @@ import (
 type CHHapticEngineFinishedAction int64
 
 const (
-	CHHapticEngineFinishedActionStopEngine CHHapticEngineFinishedAction = 1
+	CHHapticEngineFinishedActionStopEngine         CHHapticEngineFinishedAction = 1
 	CHHapticEngineFinishedActionLeaveEngineRunning CHHapticEngineFinishedAction = 2
 )
 
@@ -29,13 +29,13 @@ func (e CHHapticEngineFinishedAction) String() string {
 type CHHapticEngineStoppedReason int64
 
 const (
-	CHHapticEngineStoppedReasonAudioSessionInterrupt CHHapticEngineStoppedReason = 1
-	CHHapticEngineStoppedReasonApplicationSuspended CHHapticEngineStoppedReason = 2
-	CHHapticEngineStoppedReasonIdleTimeout CHHapticEngineStoppedReason = 3
-	CHHapticEngineStoppedReasonNotifyWhenFinished CHHapticEngineStoppedReason = 4
-	CHHapticEngineStoppedReasonEngineDestroyed CHHapticEngineStoppedReason = 5
+	CHHapticEngineStoppedReasonAudioSessionInterrupt    CHHapticEngineStoppedReason = 1
+	CHHapticEngineStoppedReasonApplicationSuspended     CHHapticEngineStoppedReason = 2
+	CHHapticEngineStoppedReasonIdleTimeout              CHHapticEngineStoppedReason = 3
+	CHHapticEngineStoppedReasonNotifyWhenFinished       CHHapticEngineStoppedReason = 4
+	CHHapticEngineStoppedReasonEngineDestroyed          CHHapticEngineStoppedReason = 5
 	CHHapticEngineStoppedReasonGameControllerDisconnect CHHapticEngineStoppedReason = 6
-	CHHapticEngineStoppedReasonSystemError CHHapticEngineStoppedReason = -1
+	CHHapticEngineStoppedReasonSystemError              CHHapticEngineStoppedReason = -1
 )
 
 func (e CHHapticEngineStoppedReason) String() string {
@@ -58,4 +58,3 @@ func (e CHHapticEngineStoppedReason) String() string {
 		return fmt.Sprintf("CHHapticEngineStoppedReason(%d)", int64(e))
 	}
 }
-

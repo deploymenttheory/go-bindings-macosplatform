@@ -213,7 +213,9 @@ func (x *AttributeDescription) SetAllowsCloudEncryption(allowsCloudEncryption bo
 
 func (x *AttributeDescription) asAttributeDescription() *raw.NSAttributeDescription { return x.inner }
 
-func (x *AttributeDescription) asPropertyDescription() *raw.NSPropertyDescription { return &x.inner.NSPropertyDescription }
+func (x *AttributeDescription) asPropertyDescription() *raw.NSPropertyDescription {
+	return &x.inner.NSPropertyDescription
+}
 
 // AttributeDescriptionable is the interface implemented by [AttributeDescription], for mocking and DI.
 type AttributeDescriptionable interface {
@@ -251,4 +253,3 @@ type AttributeDescriptionable interface {
 }
 
 var _ AttributeDescriptionable = (*AttributeDescription)(nil)
-

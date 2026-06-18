@@ -17,9 +17,9 @@ type MPSCNNBinaryFullyConnectedNode struct {
 }
 
 var (
-	_clsMPSCNNBinaryFullyConnectedNode = _objcClass("MPSCNNBinaryFullyConnectedNode")
-	_mPSCNNBinaryFullyConnectedNodeSelNodeWithSourceWeightsScaleValueTypeFlags = objc.RegisterName("nodeWithSource:weights:scaleValue:type:flags:")
-	_mPSCNNBinaryFullyConnectedNodeSelInitWithSourceWeightsScaleValueTypeFlags = objc.RegisterName("initWithSource:weights:scaleValue:type:flags:")
+	_clsMPSCNNBinaryFullyConnectedNode                                                                                           = _objcClass("MPSCNNBinaryFullyConnectedNode")
+	_mPSCNNBinaryFullyConnectedNodeSelNodeWithSourceWeightsScaleValueTypeFlags                                                   = objc.RegisterName("nodeWithSource:weights:scaleValue:type:flags:")
+	_mPSCNNBinaryFullyConnectedNodeSelInitWithSourceWeightsScaleValueTypeFlags                                                   = objc.RegisterName("initWithSource:weights:scaleValue:type:flags:")
 	_mPSCNNBinaryFullyConnectedNodeSelNodeWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags = objc.RegisterName("nodeWithSource:weights:outputBiasTerms:outputScaleTerms:inputBiasTerms:inputScaleTerms:type:flags:")
 	_mPSCNNBinaryFullyConnectedNodeSelInitWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags = objc.RegisterName("initWithSource:weights:outputBiasTerms:outputScaleTerms:inputBiasTerms:inputScaleTerms:type:flags:")
 )
@@ -37,28 +37,35 @@ func MPSCNNBinaryFullyConnectedNodeFromID(id objc.ID) *MPSCNNBinaryFullyConnecte
 // @abstract   Init an autoreleased node representing a MPSCNNBinaryFullyConnected kernel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      weights                 A pointer to a valid object conforming to the MPSCNNConvolutionDataSource protocol. This object is provided by you to encapsulate storage for convolution weights and biases. @param      scaleValue              A floating point value used to scale the entire convolution. @param      type                    What kind of binarization strategy is to be used. @param      flags                   See documentation of MPSCNNBinaryConvolutionFlags. @return     A new MPSNNFilter node for a MPSCNNBinaryFullyConnected kernel.
 func MPSCNNBinaryFullyConnectedNodeNodeWithSourceWeightsScaleValueTypeFlags(sourceNode *MPSNNImageNode, weights MPSCNNConvolutionDataSource, scaleValue float32, type_ MPSCNNBinaryConvolutionType, flags MPSCNNBinaryConvolutionFlags) *MPSCNNBinaryFullyConnectedNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNBinaryFullyConnectedNode), _mPSCNNBinaryFullyConnectedNodeSelNodeWithSourceWeightsScaleValueTypeFlags, sourceNode.Ptr(), weights, scaleValue, type_, flags)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNBinaryFullyConnectedNodeFromID(_ret)
 }
 
 // @abstract   Init a node representing a MPSCNNBinaryFullyConnected kernel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      weights                 A pointer to a valid object conforming to the MPSCNNConvolutionDataSource protocol. This object is provided by you to encapsulate storage for convolution weights and biases. @param      scaleValue              A floating point value used to scale the entire convolution. @param      type                    What kind of binarization strategy is to be used. @param      flags                   See documentation of MPSCNNBinaryConvolutionFlags. @return     A new MPSNNFilter node for a MPSCNNBinaryFullyConnected kernel.
 func (o *MPSCNNBinaryFullyConnectedNode) InitWithSourceWeightsScaleValueTypeFlags(sourceNode *MPSNNImageNode, weights MPSCNNConvolutionDataSource, scaleValue float32, type_ MPSCNNBinaryConvolutionType, flags MPSCNNBinaryConvolutionFlags) *MPSCNNBinaryFullyConnectedNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNBinaryFullyConnectedNodeSelInitWithSourceWeightsScaleValueTypeFlags, sourceNode.Ptr(), weights, scaleValue, type_, flags)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNBinaryFullyConnectedNodeFromID(_ret)
 }
 
 // @abstract   Init an autoreleased node representing a MPSCNNBinaryFullyConnected kernel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      weights                 A pointer to a valid object conforming to the MPSCNNConvolutionDataSource protocol. This object is provided by you to encapsulate storage for convolution weights and biases. @param      outputBiasTerms         A pointer to bias terms to be applied to the convolution output. See MPSCNNBinaryConvolution for more details. @param      outputScaleTerms        A pointer to scale terms to be applied to binary convolution results per output feature channel. See MPSCNNBinaryConvolution for more details. @param      inputBiasTerms          A pointer to offset terms to be applied to the input before convolution and before input scaling. See MPSCNNBinaryConvolution for more details. @param      inputScaleTerms         A pointer to scale terms to be applied to the input before convolution, but after input biasing. See MPSCNNBinaryConvolution for more details. @param      type                    What kind of binarization strategy is to be used. @param      flags                   See documentation of MPSCNNBinaryConvolutionFlags. @return     A new MPSNNFilter node for a MPSCNNBinaryFullyConnected kernel.
 func MPSCNNBinaryFullyConnectedNodeNodeWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags(sourceNode *MPSNNImageNode, weights MPSCNNConvolutionDataSource, outputBiasTerms *float32, outputScaleTerms *float32, inputBiasTerms *float32, inputScaleTerms *float32, type_ MPSCNNBinaryConvolutionType, flags MPSCNNBinaryConvolutionFlags) *MPSCNNBinaryFullyConnectedNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNBinaryFullyConnectedNode), _mPSCNNBinaryFullyConnectedNodeSelNodeWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags, sourceNode.Ptr(), weights, outputBiasTerms, outputScaleTerms, inputBiasTerms, inputScaleTerms, type_, flags)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNBinaryFullyConnectedNodeFromID(_ret)
 }
 
 // @abstract   Init a node representing a MPSCNNBinaryFullyConnected kernel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      weights                 A pointer to a valid object conforming to the MPSCNNConvolutionDataSource protocol. This object is provided by you to encapsulate storage for convolution weights and biases. @param      outputBiasTerms         A pointer to bias terms to be applied to the convolution output. See MPSCNNBinaryConvolution for more details. @param      outputScaleTerms        A pointer to scale terms to be applied to binary convolution results per output feature channel. See MPSCNNBinaryConvolution for more details. @param      inputBiasTerms          A pointer to offset terms to be applied to the input before convolution and before input scaling. See MPSCNNBinaryConvolution for more details. @param      inputScaleTerms         A pointer to scale terms to be applied to the input before convolution, but after input biasing. See MPSCNNBinaryConvolution for more details. @param      type                    What kind of binarization strategy is to be used. @param      flags                   See documentation of MPSCNNBinaryConvolutionFlags. @return     A new MPSNNFilter node for a MPSCNNBinaryFullyConnected kernel.
 func (o *MPSCNNBinaryFullyConnectedNode) InitWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags(sourceNode *MPSNNImageNode, weights MPSCNNConvolutionDataSource, outputBiasTerms *float32, outputScaleTerms *float32, inputBiasTerms *float32, inputScaleTerms *float32, type_ MPSCNNBinaryConvolutionType, flags MPSCNNBinaryConvolutionFlags) *MPSCNNBinaryFullyConnectedNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNBinaryFullyConnectedNodeSelInitWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags, sourceNode.Ptr(), weights, outputBiasTerms, outputScaleTerms, inputBiasTerms, inputScaleTerms, type_, flags)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNBinaryFullyConnectedNodeFromID(_ret)
 }
-

@@ -68,4 +68,3 @@ func MTLFXTemporalScalerDescriptorSupportsDevice(device metal.MTLDevice) bool {
 func MTLFXTemporalScalerDescriptorSupportsMetal4FX(device metal.MTLDevice) bool {
 	return raw.MTLFXTemporalScalerDescriptorSupportsMetal4FX(device)
 }
-

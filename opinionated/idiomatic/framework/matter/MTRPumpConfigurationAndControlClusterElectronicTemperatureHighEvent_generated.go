@@ -15,11 +15,15 @@ type MTRPumpConfigurationAndControlClusterElectronicTemperatureHighEvent struct 
 }
 
 // Unwrap returns the underlying [raw.MTRPumpConfigurationAndControlClusterElectronicTemperatureHighEvent].
-func (x *MTRPumpConfigurationAndControlClusterElectronicTemperatureHighEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterElectronicTemperatureHighEvent { return x.inner }
+func (x *MTRPumpConfigurationAndControlClusterElectronicTemperatureHighEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterElectronicTemperatureHighEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRPumpConfigurationAndControlClusterElectronicTemperatureHighEvent) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRPumpConfigurationAndControlClusterElectronicTemperatureHighEvent) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRPumpConfigurationAndControlClusterElectronicTemperatureHighEventFromID adopts an existing object pointer as a MTRPumpConfigurationAndControlClusterElectronicTemperatureHighEvent (nil for 0).
 func MTRPumpConfigurationAndControlClusterElectronicTemperatureHighEventFromID(id objc.ID) *MTRPumpConfigurationAndControlClusterElectronicTemperatureHighEvent {
@@ -41,4 +45,3 @@ type MTRPumpConfigurationAndControlClusterElectronicTemperatureHighEventable int
 }
 
 var _ MTRPumpConfigurationAndControlClusterElectronicTemperatureHighEventable = (*MTRPumpConfigurationAndControlClusterElectronicTemperatureHighEvent)(nil)
-

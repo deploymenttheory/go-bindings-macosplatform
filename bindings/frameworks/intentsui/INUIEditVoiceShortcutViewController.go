@@ -17,10 +17,10 @@ type INUIEditVoiceShortcutViewController struct {
 }
 
 var (
-	_clsINUIEditVoiceShortcutViewController = _objcClass("INUIEditVoiceShortcutViewController")
+	_clsINUIEditVoiceShortcutViewController                      = _objcClass("INUIEditVoiceShortcutViewController")
 	_iNUIEditVoiceShortcutViewControllerSelInitWithVoiceShortcut = objc.RegisterName("initWithVoiceShortcut:")
-	_iNUIEditVoiceShortcutViewControllerSelDelegate = objc.RegisterName("delegate")
-	_iNUIEditVoiceShortcutViewControllerSelSetDelegate = objc.RegisterName("setDelegate:")
+	_iNUIEditVoiceShortcutViewControllerSelDelegate              = objc.RegisterName("delegate")
+	_iNUIEditVoiceShortcutViewControllerSelSetDelegate           = objc.RegisterName("setDelegate:")
 )
 
 func INUIEditVoiceShortcutViewControllerFromID(id objc.ID) *INUIEditVoiceShortcutViewController {
@@ -36,7 +36,9 @@ func INUIEditVoiceShortcutViewControllerFromID(id objc.ID) *INUIEditVoiceShortcu
 // @param voiceShortcut The voice shortcut to be edited.
 func (o *INUIEditVoiceShortcutViewController) InitWithVoiceShortcut(voiceShortcut *intents.INVoiceShortcut) *INUIEditVoiceShortcutViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNUIEditVoiceShortcutViewControllerSelInitWithVoiceShortcut, voiceShortcut.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INUIEditVoiceShortcutViewControllerFromID(_ret)
 }
 
@@ -48,4 +50,3 @@ func (o *INUIEditVoiceShortcutViewController) Delegate() INUIEditVoiceShortcutVi
 func (o *INUIEditVoiceShortcutViewController) SetDelegate(delegate INUIEditVoiceShortcutViewControllerDelegate) {
 	o.Ptr().Send(_iNUIEditVoiceShortcutViewControllerSelSetDelegate, delegate)
 }
-

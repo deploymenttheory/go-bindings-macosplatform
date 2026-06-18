@@ -56,4 +56,3 @@ type GraphicsDeviceable interface {
 }
 
 var _ GraphicsDeviceable = (*GraphicsDevice)(nil)
-

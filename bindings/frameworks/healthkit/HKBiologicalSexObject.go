@@ -16,7 +16,7 @@ type HKBiologicalSexObject struct {
 }
 
 var (
-	_clsHKBiologicalSexObject = _objcClass("HKBiologicalSexObject")
+	_clsHKBiologicalSexObject              = _objcClass("HKBiologicalSexObject")
 	_hKBiologicalSexObjectSelBiologicalSex = objc.RegisterName("biologicalSex")
 )
 
@@ -34,4 +34,3 @@ func (o *HKBiologicalSexObject) BiologicalSex() HKBiologicalSex {
 	_ret := objc.Send[HKBiologicalSex](o.Ptr(), _hKBiologicalSexObjectSelBiologicalSex)
 	return _ret
 }
-

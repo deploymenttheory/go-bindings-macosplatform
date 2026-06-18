@@ -6,4 +6,3 @@ package shazamkit
 // SHSessionDelegate wraps the ObjC protocol SHSessionDelegate.
 type SHSessionDelegate interface {
 }
-

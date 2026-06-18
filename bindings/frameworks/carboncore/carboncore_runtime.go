@@ -14,7 +14,7 @@ import (
 
 var (
 	_carboncoreLib uintptr
-	_loadOnce sync.Once
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -49,7 +49,9 @@ func _loadLibrary() {
 		return
 	}
 	_register("AbsoluteDeltaToDuration", func() { purego.RegisterLibFunc(&_fnAbsoluteDeltaToDuration, _carboncoreLib, "AbsoluteDeltaToDuration") })
-	_register("AbsoluteDeltaToNanoseconds", func() { purego.RegisterLibFunc(&_fnAbsoluteDeltaToNanoseconds, _carboncoreLib, "AbsoluteDeltaToNanoseconds") })
+	_register("AbsoluteDeltaToNanoseconds", func() {
+		purego.RegisterLibFunc(&_fnAbsoluteDeltaToNanoseconds, _carboncoreLib, "AbsoluteDeltaToNanoseconds")
+	})
 	_register("AbsoluteToDuration", func() { purego.RegisterLibFunc(&_fnAbsoluteToDuration, _carboncoreLib, "AbsoluteToDuration") })
 	_register("AbsoluteToNanoseconds", func() { purego.RegisterLibFunc(&_fnAbsoluteToNanoseconds, _carboncoreLib, "AbsoluteToNanoseconds") })
 	_register("AddAbsoluteToAbsolute", func() { purego.RegisterLibFunc(&_fnAddAbsoluteToAbsolute, _carboncoreLib, "AddAbsoluteToAbsolute") })
@@ -60,7 +62,9 @@ func _loadLibrary() {
 	_register("AddCollectionItemHdl", func() { purego.RegisterLibFunc(&_fnAddCollectionItemHdl, _carboncoreLib, "AddCollectionItemHdl") })
 	_register("AddDurationToAbsolute", func() { purego.RegisterLibFunc(&_fnAddDurationToAbsolute, _carboncoreLib, "AddDurationToAbsolute") })
 	_register("AddFolderDescriptor", func() { purego.RegisterLibFunc(&_fnAddFolderDescriptor, _carboncoreLib, "AddFolderDescriptor") })
-	_register("AddNanosecondsToAbsolute", func() { purego.RegisterLibFunc(&_fnAddNanosecondsToAbsolute, _carboncoreLib, "AddNanosecondsToAbsolute") })
+	_register("AddNanosecondsToAbsolute", func() {
+		purego.RegisterLibFunc(&_fnAddNanosecondsToAbsolute, _carboncoreLib, "AddNanosecondsToAbsolute")
+	})
 	_register("AddResource", func() { purego.RegisterLibFunc(&_fnAddResource, _carboncoreLib, "AddResource") })
 	_register("BitAnd", func() { purego.RegisterLibFunc(&_fnBitAnd, _carboncoreLib, "BitAnd") })
 	_register("BitAndAtomic", func() { purego.RegisterLibFunc(&_fnBitAndAtomic, _carboncoreLib, "BitAndAtomic") })
@@ -83,19 +87,37 @@ func _loadLibrary() {
 	_register("CSBackupSetItemExcluded", func() { purego.RegisterLibFunc(&_fnCSBackupSetItemExcluded, _carboncoreLib, "CSBackupSetItemExcluded") })
 	_register("CSCopyMachineName", func() { purego.RegisterLibFunc(&_fnCSCopyMachineName, _carboncoreLib, "CSCopyMachineName") })
 	_register("CSCopyUserName", func() { purego.RegisterLibFunc(&_fnCSCopyUserName, _carboncoreLib, "CSCopyUserName") })
-	_register("CSDiskSpaceCancelRecovery", func() { purego.RegisterLibFunc(&_fnCSDiskSpaceCancelRecovery, _carboncoreLib, "CSDiskSpaceCancelRecovery") })
-	_register("CSDiskSpaceGetRecoveryEstimate", func() { purego.RegisterLibFunc(&_fnCSDiskSpaceGetRecoveryEstimate, _carboncoreLib, "CSDiskSpaceGetRecoveryEstimate") })
-	_register("CSDiskSpaceStartRecovery", func() { purego.RegisterLibFunc(&_fnCSDiskSpaceStartRecovery, _carboncoreLib, "CSDiskSpaceStartRecovery") })
-	_register("CSGetComponentsThreadMode", func() { purego.RegisterLibFunc(&_fnCSGetComponentsThreadMode, _carboncoreLib, "CSGetComponentsThreadMode") })
-	_register("CSSetComponentsThreadMode", func() { purego.RegisterLibFunc(&_fnCSSetComponentsThreadMode, _carboncoreLib, "CSSetComponentsThreadMode") })
+	_register("CSDiskSpaceCancelRecovery", func() {
+		purego.RegisterLibFunc(&_fnCSDiskSpaceCancelRecovery, _carboncoreLib, "CSDiskSpaceCancelRecovery")
+	})
+	_register("CSDiskSpaceGetRecoveryEstimate", func() {
+		purego.RegisterLibFunc(&_fnCSDiskSpaceGetRecoveryEstimate, _carboncoreLib, "CSDiskSpaceGetRecoveryEstimate")
+	})
+	_register("CSDiskSpaceStartRecovery", func() {
+		purego.RegisterLibFunc(&_fnCSDiskSpaceStartRecovery, _carboncoreLib, "CSDiskSpaceStartRecovery")
+	})
+	_register("CSGetComponentsThreadMode", func() {
+		purego.RegisterLibFunc(&_fnCSGetComponentsThreadMode, _carboncoreLib, "CSGetComponentsThreadMode")
+	})
+	_register("CSSetComponentsThreadMode", func() {
+		purego.RegisterLibFunc(&_fnCSSetComponentsThreadMode, _carboncoreLib, "CSSetComponentsThreadMode")
+	})
 	_register("CallComponentCanDo", func() { purego.RegisterLibFunc(&_fnCallComponentCanDo, _carboncoreLib, "CallComponentCanDo") })
 	_register("CallComponentClose", func() { purego.RegisterLibFunc(&_fnCallComponentClose, _carboncoreLib, "CallComponentClose") })
 	_register("CallComponentDispatch", func() { purego.RegisterLibFunc(&_fnCallComponentDispatch, _carboncoreLib, "CallComponentDispatch") })
 	_register("CallComponentFunction", func() { purego.RegisterLibFunc(&_fnCallComponentFunction, _carboncoreLib, "CallComponentFunction") })
-	_register("CallComponentFunctionWithStorage", func() { purego.RegisterLibFunc(&_fnCallComponentFunctionWithStorage, _carboncoreLib, "CallComponentFunctionWithStorage") })
-	_register("CallComponentFunctionWithStorageProcInfo", func() { purego.RegisterLibFunc(&_fnCallComponentFunctionWithStorageProcInfo, _carboncoreLib, "CallComponentFunctionWithStorageProcInfo") })
-	_register("CallComponentGetMPWorkFunction", func() { purego.RegisterLibFunc(&_fnCallComponentGetMPWorkFunction, _carboncoreLib, "CallComponentGetMPWorkFunction") })
-	_register("CallComponentGetPublicResource", func() { purego.RegisterLibFunc(&_fnCallComponentGetPublicResource, _carboncoreLib, "CallComponentGetPublicResource") })
+	_register("CallComponentFunctionWithStorage", func() {
+		purego.RegisterLibFunc(&_fnCallComponentFunctionWithStorage, _carboncoreLib, "CallComponentFunctionWithStorage")
+	})
+	_register("CallComponentFunctionWithStorageProcInfo", func() {
+		purego.RegisterLibFunc(&_fnCallComponentFunctionWithStorageProcInfo, _carboncoreLib, "CallComponentFunctionWithStorageProcInfo")
+	})
+	_register("CallComponentGetMPWorkFunction", func() {
+		purego.RegisterLibFunc(&_fnCallComponentGetMPWorkFunction, _carboncoreLib, "CallComponentGetMPWorkFunction")
+	})
+	_register("CallComponentGetPublicResource", func() {
+		purego.RegisterLibFunc(&_fnCallComponentGetPublicResource, _carboncoreLib, "CallComponentGetPublicResource")
+	})
 	_register("CallComponentOpen", func() { purego.RegisterLibFunc(&_fnCallComponentOpen, _carboncoreLib, "CallComponentOpen") })
 	_register("CallComponentRegister", func() { purego.RegisterLibFunc(&_fnCallComponentRegister, _carboncoreLib, "CallComponentRegister") })
 	_register("CallComponentTarget", func() { purego.RegisterLibFunc(&_fnCallComponentTarget, _carboncoreLib, "CallComponentTarget") })
@@ -111,16 +133,30 @@ func _loadLibrary() {
 	_register("CloseResFile", func() { purego.RegisterLibFunc(&_fnCloseResFile, _carboncoreLib, "CloseResFile") })
 	_register("CollectionTagExists", func() { purego.RegisterLibFunc(&_fnCollectionTagExists, _carboncoreLib, "CollectionTagExists") })
 	_register("CompareAndSwap", func() { purego.RegisterLibFunc(&_fnCompareAndSwap, _carboncoreLib, "CompareAndSwap") })
-	_register("ConvertFromPStringToUnicode", func() { purego.RegisterLibFunc(&_fnConvertFromPStringToUnicode, _carboncoreLib, "ConvertFromPStringToUnicode") })
-	_register("ConvertFromTextToUnicode", func() { purego.RegisterLibFunc(&_fnConvertFromTextToUnicode, _carboncoreLib, "ConvertFromTextToUnicode") })
-	_register("ConvertFromUnicodeToPString", func() { purego.RegisterLibFunc(&_fnConvertFromUnicodeToPString, _carboncoreLib, "ConvertFromUnicodeToPString") })
-	_register("ConvertFromUnicodeToScriptCodeRun", func() { purego.RegisterLibFunc(&_fnConvertFromUnicodeToScriptCodeRun, _carboncoreLib, "ConvertFromUnicodeToScriptCodeRun") })
-	_register("ConvertFromUnicodeToText", func() { purego.RegisterLibFunc(&_fnConvertFromUnicodeToText, _carboncoreLib, "ConvertFromUnicodeToText") })
-	_register("ConvertFromUnicodeToTextRun", func() { purego.RegisterLibFunc(&_fnConvertFromUnicodeToTextRun, _carboncoreLib, "ConvertFromUnicodeToTextRun") })
+	_register("ConvertFromPStringToUnicode", func() {
+		purego.RegisterLibFunc(&_fnConvertFromPStringToUnicode, _carboncoreLib, "ConvertFromPStringToUnicode")
+	})
+	_register("ConvertFromTextToUnicode", func() {
+		purego.RegisterLibFunc(&_fnConvertFromTextToUnicode, _carboncoreLib, "ConvertFromTextToUnicode")
+	})
+	_register("ConvertFromUnicodeToPString", func() {
+		purego.RegisterLibFunc(&_fnConvertFromUnicodeToPString, _carboncoreLib, "ConvertFromUnicodeToPString")
+	})
+	_register("ConvertFromUnicodeToScriptCodeRun", func() {
+		purego.RegisterLibFunc(&_fnConvertFromUnicodeToScriptCodeRun, _carboncoreLib, "ConvertFromUnicodeToScriptCodeRun")
+	})
+	_register("ConvertFromUnicodeToText", func() {
+		purego.RegisterLibFunc(&_fnConvertFromUnicodeToText, _carboncoreLib, "ConvertFromUnicodeToText")
+	})
+	_register("ConvertFromUnicodeToTextRun", func() {
+		purego.RegisterLibFunc(&_fnConvertFromUnicodeToTextRun, _carboncoreLib, "ConvertFromUnicodeToTextRun")
+	})
 	_register("CopyCollection", func() { purego.RegisterLibFunc(&_fnCopyCollection, _carboncoreLib, "CopyCollection") })
 	_register("CoreEndianFlipData", func() { purego.RegisterLibFunc(&_fnCoreEndianFlipData, _carboncoreLib, "CoreEndianFlipData") })
 	_register("CoreEndianGetFlipper", func() { purego.RegisterLibFunc(&_fnCoreEndianGetFlipper, _carboncoreLib, "CoreEndianGetFlipper") })
-	_register("CoreEndianInstallFlipper", func() { purego.RegisterLibFunc(&_fnCoreEndianInstallFlipper, _carboncoreLib, "CoreEndianInstallFlipper") })
+	_register("CoreEndianInstallFlipper", func() {
+		purego.RegisterLibFunc(&_fnCoreEndianInstallFlipper, _carboncoreLib, "CoreEndianInstallFlipper")
+	})
 	_register("Count1Resources", func() { purego.RegisterLibFunc(&_fnCount1Resources, _carboncoreLib, "Count1Resources") })
 	_register("Count1Types", func() { purego.RegisterLibFunc(&_fnCount1Types, _carboncoreLib, "Count1Types") })
 	_register("CountCollectionItems", func() { purego.RegisterLibFunc(&_fnCountCollectionItems, _carboncoreLib, "CountCollectionItems") })
@@ -129,18 +165,30 @@ func _loadLibrary() {
 	_register("CountComponentInstances", func() { purego.RegisterLibFunc(&_fnCountComponentInstances, _carboncoreLib, "CountComponentInstances") })
 	_register("CountComponents", func() { purego.RegisterLibFunc(&_fnCountComponents, _carboncoreLib, "CountComponents") })
 	_register("CountResources", func() { purego.RegisterLibFunc(&_fnCountResources, _carboncoreLib, "CountResources") })
-	_register("CountTaggedCollectionItems", func() { purego.RegisterLibFunc(&_fnCountTaggedCollectionItems, _carboncoreLib, "CountTaggedCollectionItems") })
+	_register("CountTaggedCollectionItems", func() {
+		purego.RegisterLibFunc(&_fnCountTaggedCollectionItems, _carboncoreLib, "CountTaggedCollectionItems")
+	})
 	_register("CountTypes", func() { purego.RegisterLibFunc(&_fnCountTypes, _carboncoreLib, "CountTypes") })
 	_register("CountUnicodeMappings", func() { purego.RegisterLibFunc(&_fnCountUnicodeMappings, _carboncoreLib, "CountUnicodeMappings") })
 	_register("CreateTextEncoding", func() { purego.RegisterLibFunc(&_fnCreateTextEncoding, _carboncoreLib, "CreateTextEncoding") })
 	_register("CreateTextToUnicodeInfo", func() { purego.RegisterLibFunc(&_fnCreateTextToUnicodeInfo, _carboncoreLib, "CreateTextToUnicodeInfo") })
-	_register("CreateTextToUnicodeInfoByEncoding", func() { purego.RegisterLibFunc(&_fnCreateTextToUnicodeInfoByEncoding, _carboncoreLib, "CreateTextToUnicodeInfoByEncoding") })
+	_register("CreateTextToUnicodeInfoByEncoding", func() {
+		purego.RegisterLibFunc(&_fnCreateTextToUnicodeInfoByEncoding, _carboncoreLib, "CreateTextToUnicodeInfoByEncoding")
+	})
 	_register("CreateThreadPool", func() { purego.RegisterLibFunc(&_fnCreateThreadPool, _carboncoreLib, "CreateThreadPool") })
 	_register("CreateUnicodeToTextInfo", func() { purego.RegisterLibFunc(&_fnCreateUnicodeToTextInfo, _carboncoreLib, "CreateUnicodeToTextInfo") })
-	_register("CreateUnicodeToTextInfoByEncoding", func() { purego.RegisterLibFunc(&_fnCreateUnicodeToTextInfoByEncoding, _carboncoreLib, "CreateUnicodeToTextInfoByEncoding") })
-	_register("CreateUnicodeToTextRunInfo", func() { purego.RegisterLibFunc(&_fnCreateUnicodeToTextRunInfo, _carboncoreLib, "CreateUnicodeToTextRunInfo") })
-	_register("CreateUnicodeToTextRunInfoByEncoding", func() { purego.RegisterLibFunc(&_fnCreateUnicodeToTextRunInfoByEncoding, _carboncoreLib, "CreateUnicodeToTextRunInfoByEncoding") })
-	_register("CreateUnicodeToTextRunInfoByScriptCode", func() { purego.RegisterLibFunc(&_fnCreateUnicodeToTextRunInfoByScriptCode, _carboncoreLib, "CreateUnicodeToTextRunInfoByScriptCode") })
+	_register("CreateUnicodeToTextInfoByEncoding", func() {
+		purego.RegisterLibFunc(&_fnCreateUnicodeToTextInfoByEncoding, _carboncoreLib, "CreateUnicodeToTextInfoByEncoding")
+	})
+	_register("CreateUnicodeToTextRunInfo", func() {
+		purego.RegisterLibFunc(&_fnCreateUnicodeToTextRunInfo, _carboncoreLib, "CreateUnicodeToTextRunInfo")
+	})
+	_register("CreateUnicodeToTextRunInfoByEncoding", func() {
+		purego.RegisterLibFunc(&_fnCreateUnicodeToTextRunInfoByEncoding, _carboncoreLib, "CreateUnicodeToTextRunInfoByEncoding")
+	})
+	_register("CreateUnicodeToTextRunInfoByScriptCode", func() {
+		purego.RegisterLibFunc(&_fnCreateUnicodeToTextRunInfoByScriptCode, _carboncoreLib, "CreateUnicodeToTextRunInfoByScriptCode")
+	})
 	_register("CurResFile", func() { purego.RegisterLibFunc(&_fnCurResFile, _carboncoreLib, "CurResFile") })
 	_register("DebugAssert", func() { purego.RegisterLibFunc(&_fnDebugAssert, _carboncoreLib, "DebugAssert") })
 	_register("DecrementAtomic", func() { purego.RegisterLibFunc(&_fnDecrementAtomic, _carboncoreLib, "DecrementAtomic") })
@@ -152,49 +200,99 @@ func _loadLibrary() {
 	_register("Dequeue", func() { purego.RegisterLibFunc(&_fnDequeue, _carboncoreLib, "Dequeue") })
 	_register("DetachResource", func() { purego.RegisterLibFunc(&_fnDetachResource, _carboncoreLib, "DetachResource") })
 	_register("DetachResourceFile", func() { purego.RegisterLibFunc(&_fnDetachResourceFile, _carboncoreLib, "DetachResourceFile") })
-	_register("DetermineIfPathIsEnclosedByFolder", func() { purego.RegisterLibFunc(&_fnDetermineIfPathIsEnclosedByFolder, _carboncoreLib, "DetermineIfPathIsEnclosedByFolder") })
+	_register("DetermineIfPathIsEnclosedByFolder", func() {
+		purego.RegisterLibFunc(&_fnDetermineIfPathIsEnclosedByFolder, _carboncoreLib, "DetermineIfPathIsEnclosedByFolder")
+	})
 	_register("DisposeCollection", func() { purego.RegisterLibFunc(&_fnDisposeCollection, _carboncoreLib, "DisposeCollection") })
-	_register("DisposeCollectionExceptionUPP", func() { purego.RegisterLibFunc(&_fnDisposeCollectionExceptionUPP, _carboncoreLib, "DisposeCollectionExceptionUPP") })
-	_register("DisposeCollectionFlattenUPP", func() { purego.RegisterLibFunc(&_fnDisposeCollectionFlattenUPP, _carboncoreLib, "DisposeCollectionFlattenUPP") })
-	_register("DisposeComponentFunctionUPP", func() { purego.RegisterLibFunc(&_fnDisposeComponentFunctionUPP, _carboncoreLib, "DisposeComponentFunctionUPP") })
-	_register("DisposeComponentMPWorkFunctionUPP", func() { purego.RegisterLibFunc(&_fnDisposeComponentMPWorkFunctionUPP, _carboncoreLib, "DisposeComponentMPWorkFunctionUPP") })
-	_register("DisposeComponentRoutineUPP", func() { purego.RegisterLibFunc(&_fnDisposeComponentRoutineUPP, _carboncoreLib, "DisposeComponentRoutineUPP") })
-	_register("DisposeDebugAssertOutputHandlerUPP", func() { purego.RegisterLibFunc(&_fnDisposeDebugAssertOutputHandlerUPP, _carboncoreLib, "DisposeDebugAssertOutputHandlerUPP") })
+	_register("DisposeCollectionExceptionUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeCollectionExceptionUPP, _carboncoreLib, "DisposeCollectionExceptionUPP")
+	})
+	_register("DisposeCollectionFlattenUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeCollectionFlattenUPP, _carboncoreLib, "DisposeCollectionFlattenUPP")
+	})
+	_register("DisposeComponentFunctionUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeComponentFunctionUPP, _carboncoreLib, "DisposeComponentFunctionUPP")
+	})
+	_register("DisposeComponentMPWorkFunctionUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeComponentMPWorkFunctionUPP, _carboncoreLib, "DisposeComponentMPWorkFunctionUPP")
+	})
+	_register("DisposeComponentRoutineUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeComponentRoutineUPP, _carboncoreLib, "DisposeComponentRoutineUPP")
+	})
+	_register("DisposeDebugAssertOutputHandlerUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeDebugAssertOutputHandlerUPP, _carboncoreLib, "DisposeDebugAssertOutputHandlerUPP")
+	})
 	_register("DisposeDebugComponent", func() { purego.RegisterLibFunc(&_fnDisposeDebugComponent, _carboncoreLib, "DisposeDebugComponent") })
-	_register("DisposeDebugComponentCallbackUPP", func() { purego.RegisterLibFunc(&_fnDisposeDebugComponentCallbackUPP, _carboncoreLib, "DisposeDebugComponentCallbackUPP") })
-	_register("DisposeDebuggerDisposeThreadUPP", func() { purego.RegisterLibFunc(&_fnDisposeDebuggerDisposeThreadUPP, _carboncoreLib, "DisposeDebuggerDisposeThreadUPP") })
-	_register("DisposeDebuggerNewThreadUPP", func() { purego.RegisterLibFunc(&_fnDisposeDebuggerNewThreadUPP, _carboncoreLib, "DisposeDebuggerNewThreadUPP") })
-	_register("DisposeDebuggerThreadSchedulerUPP", func() { purego.RegisterLibFunc(&_fnDisposeDebuggerThreadSchedulerUPP, _carboncoreLib, "DisposeDebuggerThreadSchedulerUPP") })
+	_register("DisposeDebugComponentCallbackUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeDebugComponentCallbackUPP, _carboncoreLib, "DisposeDebugComponentCallbackUPP")
+	})
+	_register("DisposeDebuggerDisposeThreadUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeDebuggerDisposeThreadUPP, _carboncoreLib, "DisposeDebuggerDisposeThreadUPP")
+	})
+	_register("DisposeDebuggerNewThreadUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeDebuggerNewThreadUPP, _carboncoreLib, "DisposeDebuggerNewThreadUPP")
+	})
+	_register("DisposeDebuggerThreadSchedulerUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeDebuggerThreadSchedulerUPP, _carboncoreLib, "DisposeDebuggerThreadSchedulerUPP")
+	})
 	_register("DisposeDeferredTaskUPP", func() { purego.RegisterLibFunc(&_fnDisposeDeferredTaskUPP, _carboncoreLib, "DisposeDeferredTaskUPP") })
-	_register("DisposeExceptionHandlerUPP", func() { purego.RegisterLibFunc(&_fnDisposeExceptionHandlerUPP, _carboncoreLib, "DisposeExceptionHandlerUPP") })
-	_register("DisposeFNSubscriptionUPP", func() { purego.RegisterLibFunc(&_fnDisposeFNSubscriptionUPP, _carboncoreLib, "DisposeFNSubscriptionUPP") })
+	_register("DisposeExceptionHandlerUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeExceptionHandlerUPP, _carboncoreLib, "DisposeExceptionHandlerUPP")
+	})
+	_register("DisposeFNSubscriptionUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeFNSubscriptionUPP, _carboncoreLib, "DisposeFNSubscriptionUPP")
+	})
 	_register("DisposeFSVolumeEjectUPP", func() { purego.RegisterLibFunc(&_fnDisposeFSVolumeEjectUPP, _carboncoreLib, "DisposeFSVolumeEjectUPP") })
 	_register("DisposeFSVolumeMountUPP", func() { purego.RegisterLibFunc(&_fnDisposeFSVolumeMountUPP, _carboncoreLib, "DisposeFSVolumeMountUPP") })
-	_register("DisposeFSVolumeUnmountUPP", func() { purego.RegisterLibFunc(&_fnDisposeFSVolumeUnmountUPP, _carboncoreLib, "DisposeFSVolumeUnmountUPP") })
-	_register("DisposeFolderManagerNotificationUPP", func() { purego.RegisterLibFunc(&_fnDisposeFolderManagerNotificationUPP, _carboncoreLib, "DisposeFolderManagerNotificationUPP") })
-	_register("DisposeGetMissingComponentResourceUPP", func() { purego.RegisterLibFunc(&_fnDisposeGetMissingComponentResourceUPP, _carboncoreLib, "DisposeGetMissingComponentResourceUPP") })
+	_register("DisposeFSVolumeUnmountUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeFSVolumeUnmountUPP, _carboncoreLib, "DisposeFSVolumeUnmountUPP")
+	})
+	_register("DisposeFolderManagerNotificationUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeFolderManagerNotificationUPP, _carboncoreLib, "DisposeFolderManagerNotificationUPP")
+	})
+	_register("DisposeGetMissingComponentResourceUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeGetMissingComponentResourceUPP, _carboncoreLib, "DisposeGetMissingComponentResourceUPP")
+	})
 	_register("DisposeHandle", func() { purego.RegisterLibFunc(&_fnDisposeHandle, _carboncoreLib, "DisposeHandle") })
 	_register("DisposeIOCompletionUPP", func() { purego.RegisterLibFunc(&_fnDisposeIOCompletionUPP, _carboncoreLib, "DisposeIOCompletionUPP") })
-	_register("DisposeIndexToUCStringUPP", func() { purego.RegisterLibFunc(&_fnDisposeIndexToUCStringUPP, _carboncoreLib, "DisposeIndexToUCStringUPP") })
+	_register("DisposeIndexToUCStringUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeIndexToUCStringUPP, _carboncoreLib, "DisposeIndexToUCStringUPP")
+	})
 	_register("DisposePtr", func() { purego.RegisterLibFunc(&_fnDisposePtr, _carboncoreLib, "DisposePtr") })
 	_register("DisposeResErrUPP", func() { purego.RegisterLibFunc(&_fnDisposeResErrUPP, _carboncoreLib, "DisposeResErrUPP") })
-	_register("DisposeSelectorFunctionUPP", func() { purego.RegisterLibFunc(&_fnDisposeSelectorFunctionUPP, _carboncoreLib, "DisposeSelectorFunctionUPP") })
-	_register("DisposeTextToUnicodeInfo", func() { purego.RegisterLibFunc(&_fnDisposeTextToUnicodeInfo, _carboncoreLib, "DisposeTextToUnicodeInfo") })
+	_register("DisposeSelectorFunctionUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeSelectorFunctionUPP, _carboncoreLib, "DisposeSelectorFunctionUPP")
+	})
+	_register("DisposeTextToUnicodeInfo", func() {
+		purego.RegisterLibFunc(&_fnDisposeTextToUnicodeInfo, _carboncoreLib, "DisposeTextToUnicodeInfo")
+	})
 	_register("DisposeThread", func() { purego.RegisterLibFunc(&_fnDisposeThread, _carboncoreLib, "DisposeThread") })
 	_register("DisposeThreadEntryUPP", func() { purego.RegisterLibFunc(&_fnDisposeThreadEntryUPP, _carboncoreLib, "DisposeThreadEntryUPP") })
-	_register("DisposeThreadSchedulerUPP", func() { purego.RegisterLibFunc(&_fnDisposeThreadSchedulerUPP, _carboncoreLib, "DisposeThreadSchedulerUPP") })
+	_register("DisposeThreadSchedulerUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeThreadSchedulerUPP, _carboncoreLib, "DisposeThreadSchedulerUPP")
+	})
 	_register("DisposeThreadSwitchUPP", func() { purego.RegisterLibFunc(&_fnDisposeThreadSwitchUPP, _carboncoreLib, "DisposeThreadSwitchUPP") })
-	_register("DisposeThreadTerminationUPP", func() { purego.RegisterLibFunc(&_fnDisposeThreadTerminationUPP, _carboncoreLib, "DisposeThreadTerminationUPP") })
+	_register("DisposeThreadTerminationUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeThreadTerminationUPP, _carboncoreLib, "DisposeThreadTerminationUPP")
+	})
 	_register("DisposeTimerUPP", func() { purego.RegisterLibFunc(&_fnDisposeTimerUPP, _carboncoreLib, "DisposeTimerUPP") })
-	_register("DisposeUnicodeToTextFallbackUPP", func() { purego.RegisterLibFunc(&_fnDisposeUnicodeToTextFallbackUPP, _carboncoreLib, "DisposeUnicodeToTextFallbackUPP") })
-	_register("DisposeUnicodeToTextInfo", func() { purego.RegisterLibFunc(&_fnDisposeUnicodeToTextInfo, _carboncoreLib, "DisposeUnicodeToTextInfo") })
-	_register("DisposeUnicodeToTextRunInfo", func() { purego.RegisterLibFunc(&_fnDisposeUnicodeToTextRunInfo, _carboncoreLib, "DisposeUnicodeToTextRunInfo") })
+	_register("DisposeUnicodeToTextFallbackUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeUnicodeToTextFallbackUPP, _carboncoreLib, "DisposeUnicodeToTextFallbackUPP")
+	})
+	_register("DisposeUnicodeToTextInfo", func() {
+		purego.RegisterLibFunc(&_fnDisposeUnicodeToTextInfo, _carboncoreLib, "DisposeUnicodeToTextInfo")
+	})
+	_register("DisposeUnicodeToTextRunInfo", func() {
+		purego.RegisterLibFunc(&_fnDisposeUnicodeToTextRunInfo, _carboncoreLib, "DisposeUnicodeToTextRunInfo")
+	})
 	_register("DurationToAbsolute", func() { purego.RegisterLibFunc(&_fnDurationToAbsolute, _carboncoreLib, "DurationToAbsolute") })
 	_register("DurationToNanoseconds", func() { purego.RegisterLibFunc(&_fnDurationToNanoseconds, _carboncoreLib, "DurationToNanoseconds") })
 	_register("EmptyCollection", func() { purego.RegisterLibFunc(&_fnEmptyCollection, _carboncoreLib, "EmptyCollection") })
 	_register("EmptyHandle", func() { purego.RegisterLibFunc(&_fnEmptyHandle, _carboncoreLib, "EmptyHandle") })
 	_register("Enqueue", func() { purego.RegisterLibFunc(&_fnEnqueue, _carboncoreLib, "Enqueue") })
-	_register("FNGetDirectoryForSubscription", func() { purego.RegisterLibFunc(&_fnFNGetDirectoryForSubscription, _carboncoreLib, "FNGetDirectoryForSubscription") })
+	_register("FNGetDirectoryForSubscription", func() {
+		purego.RegisterLibFunc(&_fnFNGetDirectoryForSubscription, _carboncoreLib, "FNGetDirectoryForSubscription")
+	})
 	_register("FNNotify", func() { purego.RegisterLibFunc(&_fnFNNotify, _carboncoreLib, "FNNotify") })
 	_register("FNNotifyAll", func() { purego.RegisterLibFunc(&_fnFNNotifyAll, _carboncoreLib, "FNNotifyAll") })
 	_register("FNNotifyByPath", func() { purego.RegisterLibFunc(&_fnFNNotifyByPath, _carboncoreLib, "FNNotifyByPath") })
@@ -213,44 +311,78 @@ func _loadLibrary() {
 	_register("FSCopyObjectAsync", func() { purego.RegisterLibFunc(&_fnFSCopyObjectAsync, _carboncoreLib, "FSCopyObjectAsync") })
 	_register("FSCopyObjectSync", func() { purego.RegisterLibFunc(&_fnFSCopyObjectSync, _carboncoreLib, "FSCopyObjectSync") })
 	_register("FSCopyURLForVolume", func() { purego.RegisterLibFunc(&_fnFSCopyURLForVolume, _carboncoreLib, "FSCopyURLForVolume") })
-	_register("FSCreateDirectoryUnicode", func() { purego.RegisterLibFunc(&_fnFSCreateDirectoryUnicode, _carboncoreLib, "FSCreateDirectoryUnicode") })
-	_register("FSCreateFileAndOpenForkUnicode", func() { purego.RegisterLibFunc(&_fnFSCreateFileAndOpenForkUnicode, _carboncoreLib, "FSCreateFileAndOpenForkUnicode") })
+	_register("FSCreateDirectoryUnicode", func() {
+		purego.RegisterLibFunc(&_fnFSCreateDirectoryUnicode, _carboncoreLib, "FSCreateDirectoryUnicode")
+	})
+	_register("FSCreateFileAndOpenForkUnicode", func() {
+		purego.RegisterLibFunc(&_fnFSCreateFileAndOpenForkUnicode, _carboncoreLib, "FSCreateFileAndOpenForkUnicode")
+	})
 	_register("FSCreateFileUnicode", func() { purego.RegisterLibFunc(&_fnFSCreateFileUnicode, _carboncoreLib, "FSCreateFileUnicode") })
 	_register("FSCreateFork", func() { purego.RegisterLibFunc(&_fnFSCreateFork, _carboncoreLib, "FSCreateFork") })
 	_register("FSCreateResFile", func() { purego.RegisterLibFunc(&_fnFSCreateResFile, _carboncoreLib, "FSCreateResFile") })
 	_register("FSCreateResourceFile", func() { purego.RegisterLibFunc(&_fnFSCreateResourceFile, _carboncoreLib, "FSCreateResourceFile") })
 	_register("FSCreateResourceFork", func() { purego.RegisterLibFunc(&_fnFSCreateResourceFork, _carboncoreLib, "FSCreateResourceFork") })
-	_register("FSCreateStringFromHFSUniStr", func() { purego.RegisterLibFunc(&_fnFSCreateStringFromHFSUniStr, _carboncoreLib, "FSCreateStringFromHFSUniStr") })
+	_register("FSCreateStringFromHFSUniStr", func() {
+		purego.RegisterLibFunc(&_fnFSCreateStringFromHFSUniStr, _carboncoreLib, "FSCreateStringFromHFSUniStr")
+	})
 	_register("FSCreateVolumeOperation", func() { purego.RegisterLibFunc(&_fnFSCreateVolumeOperation, _carboncoreLib, "FSCreateVolumeOperation") })
 	_register("FSDeleteFork", func() { purego.RegisterLibFunc(&_fnFSDeleteFork, _carboncoreLib, "FSDeleteFork") })
 	_register("FSDeleteObject", func() { purego.RegisterLibFunc(&_fnFSDeleteObject, _carboncoreLib, "FSDeleteObject") })
-	_register("FSDetermineIfRefIsEnclosedByFolder", func() { purego.RegisterLibFunc(&_fnFSDetermineIfRefIsEnclosedByFolder, _carboncoreLib, "FSDetermineIfRefIsEnclosedByFolder") })
-	_register("FSDisposeVolumeOperation", func() { purego.RegisterLibFunc(&_fnFSDisposeVolumeOperation, _carboncoreLib, "FSDisposeVolumeOperation") })
+	_register("FSDetermineIfRefIsEnclosedByFolder", func() {
+		purego.RegisterLibFunc(&_fnFSDetermineIfRefIsEnclosedByFolder, _carboncoreLib, "FSDetermineIfRefIsEnclosedByFolder")
+	})
+	_register("FSDisposeVolumeOperation", func() {
+		purego.RegisterLibFunc(&_fnFSDisposeVolumeOperation, _carboncoreLib, "FSDisposeVolumeOperation")
+	})
 	_register("FSEjectVolumeAsync", func() { purego.RegisterLibFunc(&_fnFSEjectVolumeAsync, _carboncoreLib, "FSEjectVolumeAsync") })
 	_register("FSEjectVolumeSync", func() { purego.RegisterLibFunc(&_fnFSEjectVolumeSync, _carboncoreLib, "FSEjectVolumeSync") })
 	_register("FSExchangeObjects", func() { purego.RegisterLibFunc(&_fnFSExchangeObjects, _carboncoreLib, "FSExchangeObjects") })
 	_register("FSFileOperationCancel", func() { purego.RegisterLibFunc(&_fnFSFileOperationCancel, _carboncoreLib, "FSFileOperationCancel") })
-	_register("FSFileOperationCopyStatus", func() { purego.RegisterLibFunc(&_fnFSFileOperationCopyStatus, _carboncoreLib, "FSFileOperationCopyStatus") })
+	_register("FSFileOperationCopyStatus", func() {
+		purego.RegisterLibFunc(&_fnFSFileOperationCopyStatus, _carboncoreLib, "FSFileOperationCopyStatus")
+	})
 	_register("FSFileOperationCreate", func() { purego.RegisterLibFunc(&_fnFSFileOperationCreate, _carboncoreLib, "FSFileOperationCreate") })
-	_register("FSFileOperationGetTypeID", func() { purego.RegisterLibFunc(&_fnFSFileOperationGetTypeID, _carboncoreLib, "FSFileOperationGetTypeID") })
-	_register("FSFileOperationScheduleWithRunLoop", func() { purego.RegisterLibFunc(&_fnFSFileOperationScheduleWithRunLoop, _carboncoreLib, "FSFileOperationScheduleWithRunLoop") })
-	_register("FSFileOperationUnscheduleFromRunLoop", func() { purego.RegisterLibFunc(&_fnFSFileOperationUnscheduleFromRunLoop, _carboncoreLib, "FSFileOperationUnscheduleFromRunLoop") })
-	_register("FSFileSecurityCopyAccessControlList", func() { purego.RegisterLibFunc(&_fnFSFileSecurityCopyAccessControlList, _carboncoreLib, "FSFileSecurityCopyAccessControlList") })
+	_register("FSFileOperationGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnFSFileOperationGetTypeID, _carboncoreLib, "FSFileOperationGetTypeID")
+	})
+	_register("FSFileOperationScheduleWithRunLoop", func() {
+		purego.RegisterLibFunc(&_fnFSFileOperationScheduleWithRunLoop, _carboncoreLib, "FSFileOperationScheduleWithRunLoop")
+	})
+	_register("FSFileOperationUnscheduleFromRunLoop", func() {
+		purego.RegisterLibFunc(&_fnFSFileOperationUnscheduleFromRunLoop, _carboncoreLib, "FSFileOperationUnscheduleFromRunLoop")
+	})
+	_register("FSFileSecurityCopyAccessControlList", func() {
+		purego.RegisterLibFunc(&_fnFSFileSecurityCopyAccessControlList, _carboncoreLib, "FSFileSecurityCopyAccessControlList")
+	})
 	_register("FSFileSecurityCreate", func() { purego.RegisterLibFunc(&_fnFSFileSecurityCreate, _carboncoreLib, "FSFileSecurityCreate") })
-	_register("FSFileSecurityCreateWithFSPermissionInfo", func() { purego.RegisterLibFunc(&_fnFSFileSecurityCreateWithFSPermissionInfo, _carboncoreLib, "FSFileSecurityCreateWithFSPermissionInfo") })
+	_register("FSFileSecurityCreateWithFSPermissionInfo", func() {
+		purego.RegisterLibFunc(&_fnFSFileSecurityCreateWithFSPermissionInfo, _carboncoreLib, "FSFileSecurityCreateWithFSPermissionInfo")
+	})
 	_register("FSFileSecurityGetGroup", func() { purego.RegisterLibFunc(&_fnFSFileSecurityGetGroup, _carboncoreLib, "FSFileSecurityGetGroup") })
-	_register("FSFileSecurityGetGroupUUID", func() { purego.RegisterLibFunc(&_fnFSFileSecurityGetGroupUUID, _carboncoreLib, "FSFileSecurityGetGroupUUID") })
+	_register("FSFileSecurityGetGroupUUID", func() {
+		purego.RegisterLibFunc(&_fnFSFileSecurityGetGroupUUID, _carboncoreLib, "FSFileSecurityGetGroupUUID")
+	})
 	_register("FSFileSecurityGetMode", func() { purego.RegisterLibFunc(&_fnFSFileSecurityGetMode, _carboncoreLib, "FSFileSecurityGetMode") })
 	_register("FSFileSecurityGetOwner", func() { purego.RegisterLibFunc(&_fnFSFileSecurityGetOwner, _carboncoreLib, "FSFileSecurityGetOwner") })
-	_register("FSFileSecurityGetOwnerUUID", func() { purego.RegisterLibFunc(&_fnFSFileSecurityGetOwnerUUID, _carboncoreLib, "FSFileSecurityGetOwnerUUID") })
+	_register("FSFileSecurityGetOwnerUUID", func() {
+		purego.RegisterLibFunc(&_fnFSFileSecurityGetOwnerUUID, _carboncoreLib, "FSFileSecurityGetOwnerUUID")
+	})
 	_register("FSFileSecurityGetTypeID", func() { purego.RegisterLibFunc(&_fnFSFileSecurityGetTypeID, _carboncoreLib, "FSFileSecurityGetTypeID") })
-	_register("FSFileSecurityRefCreateCopy", func() { purego.RegisterLibFunc(&_fnFSFileSecurityRefCreateCopy, _carboncoreLib, "FSFileSecurityRefCreateCopy") })
-	_register("FSFileSecuritySetAccessControlList", func() { purego.RegisterLibFunc(&_fnFSFileSecuritySetAccessControlList, _carboncoreLib, "FSFileSecuritySetAccessControlList") })
+	_register("FSFileSecurityRefCreateCopy", func() {
+		purego.RegisterLibFunc(&_fnFSFileSecurityRefCreateCopy, _carboncoreLib, "FSFileSecurityRefCreateCopy")
+	})
+	_register("FSFileSecuritySetAccessControlList", func() {
+		purego.RegisterLibFunc(&_fnFSFileSecuritySetAccessControlList, _carboncoreLib, "FSFileSecuritySetAccessControlList")
+	})
 	_register("FSFileSecuritySetGroup", func() { purego.RegisterLibFunc(&_fnFSFileSecuritySetGroup, _carboncoreLib, "FSFileSecuritySetGroup") })
-	_register("FSFileSecuritySetGroupUUID", func() { purego.RegisterLibFunc(&_fnFSFileSecuritySetGroupUUID, _carboncoreLib, "FSFileSecuritySetGroupUUID") })
+	_register("FSFileSecuritySetGroupUUID", func() {
+		purego.RegisterLibFunc(&_fnFSFileSecuritySetGroupUUID, _carboncoreLib, "FSFileSecuritySetGroupUUID")
+	})
 	_register("FSFileSecuritySetMode", func() { purego.RegisterLibFunc(&_fnFSFileSecuritySetMode, _carboncoreLib, "FSFileSecuritySetMode") })
 	_register("FSFileSecuritySetOwner", func() { purego.RegisterLibFunc(&_fnFSFileSecuritySetOwner, _carboncoreLib, "FSFileSecuritySetOwner") })
-	_register("FSFileSecuritySetOwnerUUID", func() { purego.RegisterLibFunc(&_fnFSFileSecuritySetOwnerUUID, _carboncoreLib, "FSFileSecuritySetOwnerUUID") })
+	_register("FSFileSecuritySetOwnerUUID", func() {
+		purego.RegisterLibFunc(&_fnFSFileSecuritySetOwnerUUID, _carboncoreLib, "FSFileSecuritySetOwnerUUID")
+	})
 	_register("FSFindFolder", func() { purego.RegisterLibFunc(&_fnFSFindFolder, _carboncoreLib, "FSFindFolder") })
 	_register("FSFlushFork", func() { purego.RegisterLibFunc(&_fnFSFlushFork, _carboncoreLib, "FSFlushFork") })
 	_register("FSFlushVolume", func() { purego.RegisterLibFunc(&_fnFSFlushVolume, _carboncoreLib, "FSFlushVolume") })
@@ -264,14 +396,20 @@ func _loadLibrary() {
 	_register("FSGetForkCBInfo", func() { purego.RegisterLibFunc(&_fnFSGetForkCBInfo, _carboncoreLib, "FSGetForkCBInfo") })
 	_register("FSGetForkPosition", func() { purego.RegisterLibFunc(&_fnFSGetForkPosition, _carboncoreLib, "FSGetForkPosition") })
 	_register("FSGetForkSize", func() { purego.RegisterLibFunc(&_fnFSGetForkSize, _carboncoreLib, "FSGetForkSize") })
-	_register("FSGetHFSUniStrFromString", func() { purego.RegisterLibFunc(&_fnFSGetHFSUniStrFromString, _carboncoreLib, "FSGetHFSUniStrFromString") })
+	_register("FSGetHFSUniStrFromString", func() {
+		purego.RegisterLibFunc(&_fnFSGetHFSUniStrFromString, _carboncoreLib, "FSGetHFSUniStrFromString")
+	})
 	_register("FSGetResourceForkName", func() { purego.RegisterLibFunc(&_fnFSGetResourceForkName, _carboncoreLib, "FSGetResourceForkName") })
-	_register("FSGetTemporaryDirectoryForReplaceObject", func() { purego.RegisterLibFunc(&_fnFSGetTemporaryDirectoryForReplaceObject, _carboncoreLib, "FSGetTemporaryDirectoryForReplaceObject") })
+	_register("FSGetTemporaryDirectoryForReplaceObject", func() {
+		purego.RegisterLibFunc(&_fnFSGetTemporaryDirectoryForReplaceObject, _carboncoreLib, "FSGetTemporaryDirectoryForReplaceObject")
+	})
 	_register("FSGetVolumeForDADisk", func() { purego.RegisterLibFunc(&_fnFSGetVolumeForDADisk, _carboncoreLib, "FSGetVolumeForDADisk") })
 	_register("FSGetVolumeForDiskID", func() { purego.RegisterLibFunc(&_fnFSGetVolumeForDiskID, _carboncoreLib, "FSGetVolumeForDiskID") })
 	_register("FSGetVolumeInfo", func() { purego.RegisterLibFunc(&_fnFSGetVolumeInfo, _carboncoreLib, "FSGetVolumeInfo") })
 	_register("FSGetVolumeMountInfo", func() { purego.RegisterLibFunc(&_fnFSGetVolumeMountInfo, _carboncoreLib, "FSGetVolumeMountInfo") })
-	_register("FSGetVolumeMountInfoSize", func() { purego.RegisterLibFunc(&_fnFSGetVolumeMountInfoSize, _carboncoreLib, "FSGetVolumeMountInfoSize") })
+	_register("FSGetVolumeMountInfoSize", func() {
+		purego.RegisterLibFunc(&_fnFSGetVolumeMountInfoSize, _carboncoreLib, "FSGetVolumeMountInfoSize")
+	})
 	_register("FSGetVolumeParms", func() { purego.RegisterLibFunc(&_fnFSGetVolumeParms, _carboncoreLib, "FSGetVolumeParms") })
 	_register("FSIsAliasFile", func() { purego.RegisterLibFunc(&_fnFSIsAliasFile, _carboncoreLib, "FSIsAliasFile") })
 	_register("FSIsFSRefValid", func() { purego.RegisterLibFunc(&_fnFSIsFSRefValid, _carboncoreLib, "FSIsFSRefValid") })
@@ -281,17 +419,23 @@ func _loadLibrary() {
 	_register("FSMatchAliasBulk", func() { purego.RegisterLibFunc(&_fnFSMatchAliasBulk, _carboncoreLib, "FSMatchAliasBulk") })
 	_register("FSMountLocalVolumeAsync", func() { purego.RegisterLibFunc(&_fnFSMountLocalVolumeAsync, _carboncoreLib, "FSMountLocalVolumeAsync") })
 	_register("FSMountLocalVolumeSync", func() { purego.RegisterLibFunc(&_fnFSMountLocalVolumeSync, _carboncoreLib, "FSMountLocalVolumeSync") })
-	_register("FSMountServerVolumeAsync", func() { purego.RegisterLibFunc(&_fnFSMountServerVolumeAsync, _carboncoreLib, "FSMountServerVolumeAsync") })
+	_register("FSMountServerVolumeAsync", func() {
+		purego.RegisterLibFunc(&_fnFSMountServerVolumeAsync, _carboncoreLib, "FSMountServerVolumeAsync")
+	})
 	_register("FSMountServerVolumeSync", func() { purego.RegisterLibFunc(&_fnFSMountServerVolumeSync, _carboncoreLib, "FSMountServerVolumeSync") })
 	_register("FSMoveObject", func() { purego.RegisterLibFunc(&_fnFSMoveObject, _carboncoreLib, "FSMoveObject") })
 	_register("FSMoveObjectAsync", func() { purego.RegisterLibFunc(&_fnFSMoveObjectAsync, _carboncoreLib, "FSMoveObjectAsync") })
 	_register("FSMoveObjectSync", func() { purego.RegisterLibFunc(&_fnFSMoveObjectSync, _carboncoreLib, "FSMoveObjectSync") })
-	_register("FSMoveObjectToTrashAsync", func() { purego.RegisterLibFunc(&_fnFSMoveObjectToTrashAsync, _carboncoreLib, "FSMoveObjectToTrashAsync") })
+	_register("FSMoveObjectToTrashAsync", func() {
+		purego.RegisterLibFunc(&_fnFSMoveObjectToTrashAsync, _carboncoreLib, "FSMoveObjectToTrashAsync")
+	})
 	_register("FSMoveObjectToTrashSync", func() { purego.RegisterLibFunc(&_fnFSMoveObjectToTrashSync, _carboncoreLib, "FSMoveObjectToTrashSync") })
 	_register("FSNewAlias", func() { purego.RegisterLibFunc(&_fnFSNewAlias, _carboncoreLib, "FSNewAlias") })
 	_register("FSNewAliasFromPath", func() { purego.RegisterLibFunc(&_fnFSNewAliasFromPath, _carboncoreLib, "FSNewAliasFromPath") })
 	_register("FSNewAliasMinimal", func() { purego.RegisterLibFunc(&_fnFSNewAliasMinimal, _carboncoreLib, "FSNewAliasMinimal") })
-	_register("FSNewAliasMinimalUnicode", func() { purego.RegisterLibFunc(&_fnFSNewAliasMinimalUnicode, _carboncoreLib, "FSNewAliasMinimalUnicode") })
+	_register("FSNewAliasMinimalUnicode", func() {
+		purego.RegisterLibFunc(&_fnFSNewAliasMinimalUnicode, _carboncoreLib, "FSNewAliasMinimalUnicode")
+	})
 	_register("FSNewAliasUnicode", func() { purego.RegisterLibFunc(&_fnFSNewAliasUnicode, _carboncoreLib, "FSNewAliasUnicode") })
 	_register("FSOpenFork", func() { purego.RegisterLibFunc(&_fnFSOpenFork, _carboncoreLib, "FSOpenFork") })
 	_register("FSOpenIterator", func() { purego.RegisterLibFunc(&_fnFSOpenIterator, _carboncoreLib, "FSOpenIterator") })
@@ -300,14 +444,24 @@ func _loadLibrary() {
 	_register("FSOpenResourceFile", func() { purego.RegisterLibFunc(&_fnFSOpenResourceFile, _carboncoreLib, "FSOpenResourceFile") })
 	_register("FSPathCopyObjectAsync", func() { purego.RegisterLibFunc(&_fnFSPathCopyObjectAsync, _carboncoreLib, "FSPathCopyObjectAsync") })
 	_register("FSPathCopyObjectSync", func() { purego.RegisterLibFunc(&_fnFSPathCopyObjectSync, _carboncoreLib, "FSPathCopyObjectSync") })
-	_register("FSPathFileOperationCopyStatus", func() { purego.RegisterLibFunc(&_fnFSPathFileOperationCopyStatus, _carboncoreLib, "FSPathFileOperationCopyStatus") })
-	_register("FSPathGetTemporaryDirectoryForReplaceObject", func() { purego.RegisterLibFunc(&_fnFSPathGetTemporaryDirectoryForReplaceObject, _carboncoreLib, "FSPathGetTemporaryDirectoryForReplaceObject") })
+	_register("FSPathFileOperationCopyStatus", func() {
+		purego.RegisterLibFunc(&_fnFSPathFileOperationCopyStatus, _carboncoreLib, "FSPathFileOperationCopyStatus")
+	})
+	_register("FSPathGetTemporaryDirectoryForReplaceObject", func() {
+		purego.RegisterLibFunc(&_fnFSPathGetTemporaryDirectoryForReplaceObject, _carboncoreLib, "FSPathGetTemporaryDirectoryForReplaceObject")
+	})
 	_register("FSPathMakeRef", func() { purego.RegisterLibFunc(&_fnFSPathMakeRef, _carboncoreLib, "FSPathMakeRef") })
-	_register("FSPathMakeRefWithOptions", func() { purego.RegisterLibFunc(&_fnFSPathMakeRefWithOptions, _carboncoreLib, "FSPathMakeRefWithOptions") })
+	_register("FSPathMakeRefWithOptions", func() {
+		purego.RegisterLibFunc(&_fnFSPathMakeRefWithOptions, _carboncoreLib, "FSPathMakeRefWithOptions")
+	})
 	_register("FSPathMoveObjectAsync", func() { purego.RegisterLibFunc(&_fnFSPathMoveObjectAsync, _carboncoreLib, "FSPathMoveObjectAsync") })
 	_register("FSPathMoveObjectSync", func() { purego.RegisterLibFunc(&_fnFSPathMoveObjectSync, _carboncoreLib, "FSPathMoveObjectSync") })
-	_register("FSPathMoveObjectToTrashAsync", func() { purego.RegisterLibFunc(&_fnFSPathMoveObjectToTrashAsync, _carboncoreLib, "FSPathMoveObjectToTrashAsync") })
-	_register("FSPathMoveObjectToTrashSync", func() { purego.RegisterLibFunc(&_fnFSPathMoveObjectToTrashSync, _carboncoreLib, "FSPathMoveObjectToTrashSync") })
+	_register("FSPathMoveObjectToTrashAsync", func() {
+		purego.RegisterLibFunc(&_fnFSPathMoveObjectToTrashAsync, _carboncoreLib, "FSPathMoveObjectToTrashAsync")
+	})
+	_register("FSPathMoveObjectToTrashSync", func() {
+		purego.RegisterLibFunc(&_fnFSPathMoveObjectToTrashSync, _carboncoreLib, "FSPathMoveObjectToTrashSync")
+	})
 	_register("FSPathReplaceObject", func() { purego.RegisterLibFunc(&_fnFSPathReplaceObject, _carboncoreLib, "FSPathReplaceObject") })
 	_register("FSReadFork", func() { purego.RegisterLibFunc(&_fnFSReadFork, _carboncoreLib, "FSReadFork") })
 	_register("FSRefMakePath", func() { purego.RegisterLibFunc(&_fnFSRefMakePath, _carboncoreLib, "FSRefMakePath") })
@@ -315,10 +469,16 @@ func _loadLibrary() {
 	_register("FSReplaceObject", func() { purego.RegisterLibFunc(&_fnFSReplaceObject, _carboncoreLib, "FSReplaceObject") })
 	_register("FSResolveAlias", func() { purego.RegisterLibFunc(&_fnFSResolveAlias, _carboncoreLib, "FSResolveAlias") })
 	_register("FSResolveAliasFile", func() { purego.RegisterLibFunc(&_fnFSResolveAliasFile, _carboncoreLib, "FSResolveAliasFile") })
-	_register("FSResolveAliasFileWithMountFlags", func() { purego.RegisterLibFunc(&_fnFSResolveAliasFileWithMountFlags, _carboncoreLib, "FSResolveAliasFileWithMountFlags") })
-	_register("FSResolveAliasWithMountFlags", func() { purego.RegisterLibFunc(&_fnFSResolveAliasWithMountFlags, _carboncoreLib, "FSResolveAliasWithMountFlags") })
+	_register("FSResolveAliasFileWithMountFlags", func() {
+		purego.RegisterLibFunc(&_fnFSResolveAliasFileWithMountFlags, _carboncoreLib, "FSResolveAliasFileWithMountFlags")
+	})
+	_register("FSResolveAliasWithMountFlags", func() {
+		purego.RegisterLibFunc(&_fnFSResolveAliasWithMountFlags, _carboncoreLib, "FSResolveAliasWithMountFlags")
+	})
 	_register("FSResolveNodeID", func() { purego.RegisterLibFunc(&_fnFSResolveNodeID, _carboncoreLib, "FSResolveNodeID") })
-	_register("FSResourceFileAlreadyOpen", func() { purego.RegisterLibFunc(&_fnFSResourceFileAlreadyOpen, _carboncoreLib, "FSResourceFileAlreadyOpen") })
+	_register("FSResourceFileAlreadyOpen", func() {
+		purego.RegisterLibFunc(&_fnFSResourceFileAlreadyOpen, _carboncoreLib, "FSResourceFileAlreadyOpen")
+	})
 	_register("FSSetCatalogInfo", func() { purego.RegisterLibFunc(&_fnFSSetCatalogInfo, _carboncoreLib, "FSSetCatalogInfo") })
 	_register("FSSetForkPosition", func() { purego.RegisterLibFunc(&_fnFSSetForkPosition, _carboncoreLib, "FSSetForkPosition") })
 	_register("FSSetForkSize", func() { purego.RegisterLibFunc(&_fnFSSetForkSize, _carboncoreLib, "FSSetForkSize") })
@@ -342,7 +502,9 @@ func _loadLibrary() {
 	_register("FixRound", func() { purego.RegisterLibFunc(&_fnFixRound, _carboncoreLib, "FixRound") })
 	_register("FlattenCollection", func() { purego.RegisterLibFunc(&_fnFlattenCollection, _carboncoreLib, "FlattenCollection") })
 	_register("FlattenCollectionToHdl", func() { purego.RegisterLibFunc(&_fnFlattenCollectionToHdl, _carboncoreLib, "FlattenCollectionToHdl") })
-	_register("FlattenPartialCollection", func() { purego.RegisterLibFunc(&_fnFlattenPartialCollection, _carboncoreLib, "FlattenPartialCollection") })
+	_register("FlattenPartialCollection", func() {
+		purego.RegisterLibFunc(&_fnFlattenPartialCollection, _carboncoreLib, "FlattenPartialCollection")
+	})
 	_register("Frac2Fix", func() { purego.RegisterLibFunc(&_fnFrac2Fix, _carboncoreLib, "Frac2Fix") })
 	_register("Frac2X", func() { purego.RegisterLibFunc(&_fnFrac2X, _carboncoreLib, "Frac2X") })
 	_register("FracCos", func() { purego.RegisterLibFunc(&_fnFracCos, _carboncoreLib, "FracCos") })
@@ -359,38 +521,66 @@ func _loadLibrary() {
 	_register("GetAliasSizeFromPtr", func() { purego.RegisterLibFunc(&_fnGetAliasSizeFromPtr, _carboncoreLib, "GetAliasSizeFromPtr") })
 	_register("GetAliasUserType", func() { purego.RegisterLibFunc(&_fnGetAliasUserType, _carboncoreLib, "GetAliasUserType") })
 	_register("GetAliasUserTypeFromPtr", func() { purego.RegisterLibFunc(&_fnGetAliasUserTypeFromPtr, _carboncoreLib, "GetAliasUserTypeFromPtr") })
-	_register("GetCollectionDefaultAttributes", func() { purego.RegisterLibFunc(&_fnGetCollectionDefaultAttributes, _carboncoreLib, "GetCollectionDefaultAttributes") })
-	_register("GetCollectionExceptionProc", func() { purego.RegisterLibFunc(&_fnGetCollectionExceptionProc, _carboncoreLib, "GetCollectionExceptionProc") })
+	_register("GetCollectionDefaultAttributes", func() {
+		purego.RegisterLibFunc(&_fnGetCollectionDefaultAttributes, _carboncoreLib, "GetCollectionDefaultAttributes")
+	})
+	_register("GetCollectionExceptionProc", func() {
+		purego.RegisterLibFunc(&_fnGetCollectionExceptionProc, _carboncoreLib, "GetCollectionExceptionProc")
+	})
 	_register("GetCollectionItem", func() { purego.RegisterLibFunc(&_fnGetCollectionItem, _carboncoreLib, "GetCollectionItem") })
 	_register("GetCollectionItemHdl", func() { purego.RegisterLibFunc(&_fnGetCollectionItemHdl, _carboncoreLib, "GetCollectionItemHdl") })
 	_register("GetCollectionItemInfo", func() { purego.RegisterLibFunc(&_fnGetCollectionItemInfo, _carboncoreLib, "GetCollectionItemInfo") })
-	_register("GetCollectionRetainCount", func() { purego.RegisterLibFunc(&_fnGetCollectionRetainCount, _carboncoreLib, "GetCollectionRetainCount") })
+	_register("GetCollectionRetainCount", func() {
+		purego.RegisterLibFunc(&_fnGetCollectionRetainCount, _carboncoreLib, "GetCollectionRetainCount")
+	})
 	_register("GetComponentIndString", func() { purego.RegisterLibFunc(&_fnGetComponentIndString, _carboncoreLib, "GetComponentIndString") })
 	_register("GetComponentInfo", func() { purego.RegisterLibFunc(&_fnGetComponentInfo, _carboncoreLib, "GetComponentInfo") })
-	_register("GetComponentInstanceError", func() { purego.RegisterLibFunc(&_fnGetComponentInstanceError, _carboncoreLib, "GetComponentInstanceError") })
-	_register("GetComponentInstanceStorage", func() { purego.RegisterLibFunc(&_fnGetComponentInstanceStorage, _carboncoreLib, "GetComponentInstanceStorage") })
+	_register("GetComponentInstanceError", func() {
+		purego.RegisterLibFunc(&_fnGetComponentInstanceError, _carboncoreLib, "GetComponentInstanceError")
+	})
+	_register("GetComponentInstanceStorage", func() {
+		purego.RegisterLibFunc(&_fnGetComponentInstanceStorage, _carboncoreLib, "GetComponentInstanceStorage")
+	})
 	_register("GetComponentListModSeed", func() { purego.RegisterLibFunc(&_fnGetComponentListModSeed, _carboncoreLib, "GetComponentListModSeed") })
-	_register("GetComponentPublicIndString", func() { purego.RegisterLibFunc(&_fnGetComponentPublicIndString, _carboncoreLib, "GetComponentPublicIndString") })
-	_register("GetComponentPublicResource", func() { purego.RegisterLibFunc(&_fnGetComponentPublicResource, _carboncoreLib, "GetComponentPublicResource") })
-	_register("GetComponentPublicResourceList", func() { purego.RegisterLibFunc(&_fnGetComponentPublicResourceList, _carboncoreLib, "GetComponentPublicResourceList") })
+	_register("GetComponentPublicIndString", func() {
+		purego.RegisterLibFunc(&_fnGetComponentPublicIndString, _carboncoreLib, "GetComponentPublicIndString")
+	})
+	_register("GetComponentPublicResource", func() {
+		purego.RegisterLibFunc(&_fnGetComponentPublicResource, _carboncoreLib, "GetComponentPublicResource")
+	})
+	_register("GetComponentPublicResourceList", func() {
+		purego.RegisterLibFunc(&_fnGetComponentPublicResourceList, _carboncoreLib, "GetComponentPublicResourceList")
+	})
 	_register("GetComponentRefcon", func() { purego.RegisterLibFunc(&_fnGetComponentRefcon, _carboncoreLib, "GetComponentRefcon") })
 	_register("GetComponentResource", func() { purego.RegisterLibFunc(&_fnGetComponentResource, _carboncoreLib, "GetComponentResource") })
 	_register("GetComponentTypeModSeed", func() { purego.RegisterLibFunc(&_fnGetComponentTypeModSeed, _carboncoreLib, "GetComponentTypeModSeed") })
 	_register("GetCurrentThread", func() { purego.RegisterLibFunc(&_fnGetCurrentThread, _carboncoreLib, "GetCurrentThread") })
 	_register("GetDebugComponentInfo", func() { purego.RegisterLibFunc(&_fnGetDebugComponentInfo, _carboncoreLib, "GetDebugComponentInfo") })
 	_register("GetDebugOptionInfo", func() { purego.RegisterLibFunc(&_fnGetDebugOptionInfo, _carboncoreLib, "GetDebugOptionInfo") })
-	_register("GetDefaultThreadStackSize", func() { purego.RegisterLibFunc(&_fnGetDefaultThreadStackSize, _carboncoreLib, "GetDefaultThreadStackSize") })
+	_register("GetDefaultThreadStackSize", func() {
+		purego.RegisterLibFunc(&_fnGetDefaultThreadStackSize, _carboncoreLib, "GetDefaultThreadStackSize")
+	})
 	_register("GetFolderNameUnicode", func() { purego.RegisterLibFunc(&_fnGetFolderNameUnicode, _carboncoreLib, "GetFolderNameUnicode") })
 	_register("GetFolderTypes", func() { purego.RegisterLibFunc(&_fnGetFolderTypes, _carboncoreLib, "GetFolderTypes") })
 	_register("GetHandleSize", func() { purego.RegisterLibFunc(&_fnGetHandleSize, _carboncoreLib, "GetHandleSize") })
 	_register("GetIndResource", func() { purego.RegisterLibFunc(&_fnGetIndResource, _carboncoreLib, "GetIndResource") })
 	_register("GetIndType", func() { purego.RegisterLibFunc(&_fnGetIndType, _carboncoreLib, "GetIndType") })
-	_register("GetIndexedCollectionItem", func() { purego.RegisterLibFunc(&_fnGetIndexedCollectionItem, _carboncoreLib, "GetIndexedCollectionItem") })
-	_register("GetIndexedCollectionItemHdl", func() { purego.RegisterLibFunc(&_fnGetIndexedCollectionItemHdl, _carboncoreLib, "GetIndexedCollectionItemHdl") })
-	_register("GetIndexedCollectionItemInfo", func() { purego.RegisterLibFunc(&_fnGetIndexedCollectionItemInfo, _carboncoreLib, "GetIndexedCollectionItemInfo") })
+	_register("GetIndexedCollectionItem", func() {
+		purego.RegisterLibFunc(&_fnGetIndexedCollectionItem, _carboncoreLib, "GetIndexedCollectionItem")
+	})
+	_register("GetIndexedCollectionItemHdl", func() {
+		purego.RegisterLibFunc(&_fnGetIndexedCollectionItemHdl, _carboncoreLib, "GetIndexedCollectionItemHdl")
+	})
+	_register("GetIndexedCollectionItemInfo", func() {
+		purego.RegisterLibFunc(&_fnGetIndexedCollectionItemInfo, _carboncoreLib, "GetIndexedCollectionItemInfo")
+	})
 	_register("GetIndexedCollectionTag", func() { purego.RegisterLibFunc(&_fnGetIndexedCollectionTag, _carboncoreLib, "GetIndexedCollectionTag") })
-	_register("GetMacOSStatusCommentString", func() { purego.RegisterLibFunc(&_fnGetMacOSStatusCommentString, _carboncoreLib, "GetMacOSStatusCommentString") })
-	_register("GetMacOSStatusErrorString", func() { purego.RegisterLibFunc(&_fnGetMacOSStatusErrorString, _carboncoreLib, "GetMacOSStatusErrorString") })
+	_register("GetMacOSStatusCommentString", func() {
+		purego.RegisterLibFunc(&_fnGetMacOSStatusCommentString, _carboncoreLib, "GetMacOSStatusCommentString")
+	})
+	_register("GetMacOSStatusErrorString", func() {
+		purego.RegisterLibFunc(&_fnGetMacOSStatusErrorString, _carboncoreLib, "GetMacOSStatusErrorString")
+	})
 	_register("GetMaxResourceSize", func() { purego.RegisterLibFunc(&_fnGetMaxResourceSize, _carboncoreLib, "GetMaxResourceSize") })
 	_register("GetNamedResource", func() { purego.RegisterLibFunc(&_fnGetNamedResource, _carboncoreLib, "GetNamedResource") })
 	_register("GetNewCollection", func() { purego.RegisterLibFunc(&_fnGetNewCollection, _carboncoreLib, "GetNewCollection") })
@@ -402,18 +592,28 @@ func _loadLibrary() {
 	_register("GetResInfo", func() { purego.RegisterLibFunc(&_fnGetResInfo, _carboncoreLib, "GetResInfo") })
 	_register("GetResource", func() { purego.RegisterLibFunc(&_fnGetResource, _carboncoreLib, "GetResource") })
 	_register("GetResourceSizeOnDisk", func() { purego.RegisterLibFunc(&_fnGetResourceSizeOnDisk, _carboncoreLib, "GetResourceSizeOnDisk") })
-	_register("GetScriptInfoFromTextEncoding", func() { purego.RegisterLibFunc(&_fnGetScriptInfoFromTextEncoding, _carboncoreLib, "GetScriptInfoFromTextEncoding") })
-	_register("GetScriptManagerVariable", func() { purego.RegisterLibFunc(&_fnGetScriptManagerVariable, _carboncoreLib, "GetScriptManagerVariable") })
+	_register("GetScriptInfoFromTextEncoding", func() {
+		purego.RegisterLibFunc(&_fnGetScriptInfoFromTextEncoding, _carboncoreLib, "GetScriptInfoFromTextEncoding")
+	})
+	_register("GetScriptManagerVariable", func() {
+		purego.RegisterLibFunc(&_fnGetScriptManagerVariable, _carboncoreLib, "GetScriptManagerVariable")
+	})
 	_register("GetTaggedCollectionItem", func() { purego.RegisterLibFunc(&_fnGetTaggedCollectionItem, _carboncoreLib, "GetTaggedCollectionItem") })
-	_register("GetTaggedCollectionItemInfo", func() { purego.RegisterLibFunc(&_fnGetTaggedCollectionItemInfo, _carboncoreLib, "GetTaggedCollectionItemInfo") })
+	_register("GetTaggedCollectionItemInfo", func() {
+		purego.RegisterLibFunc(&_fnGetTaggedCollectionItemInfo, _carboncoreLib, "GetTaggedCollectionItemInfo")
+	})
 	_register("GetTextEncodingBase", func() { purego.RegisterLibFunc(&_fnGetTextEncodingBase, _carboncoreLib, "GetTextEncodingBase") })
 	_register("GetTextEncodingFormat", func() { purego.RegisterLibFunc(&_fnGetTextEncodingFormat, _carboncoreLib, "GetTextEncodingFormat") })
-	_register("GetTextEncodingFromScriptInfo", func() { purego.RegisterLibFunc(&_fnGetTextEncodingFromScriptInfo, _carboncoreLib, "GetTextEncodingFromScriptInfo") })
+	_register("GetTextEncodingFromScriptInfo", func() {
+		purego.RegisterLibFunc(&_fnGetTextEncodingFromScriptInfo, _carboncoreLib, "GetTextEncodingFromScriptInfo")
+	})
 	_register("GetTextEncodingName", func() { purego.RegisterLibFunc(&_fnGetTextEncodingName, _carboncoreLib, "GetTextEncodingName") })
 	_register("GetTextEncodingVariant", func() { purego.RegisterLibFunc(&_fnGetTextEncodingVariant, _carboncoreLib, "GetTextEncodingVariant") })
 	_register("GetThreadCurrentTaskRef", func() { purego.RegisterLibFunc(&_fnGetThreadCurrentTaskRef, _carboncoreLib, "GetThreadCurrentTaskRef") })
 	_register("GetThreadState", func() { purego.RegisterLibFunc(&_fnGetThreadState, _carboncoreLib, "GetThreadState") })
-	_register("GetThreadStateGivenTaskRef", func() { purego.RegisterLibFunc(&_fnGetThreadStateGivenTaskRef, _carboncoreLib, "GetThreadStateGivenTaskRef") })
+	_register("GetThreadStateGivenTaskRef", func() {
+		purego.RegisterLibFunc(&_fnGetThreadStateGivenTaskRef, _carboncoreLib, "GetThreadStateGivenTaskRef")
+	})
 	_register("GetTopResourceFile", func() { purego.RegisterLibFunc(&_fnGetTopResourceFile, _carboncoreLib, "GetTopResourceFile") })
 	_register("HClrRBit", func() { purego.RegisterLibFunc(&_fnHClrRBit, _carboncoreLib, "HClrRBit") })
 	_register("HGetState", func() { purego.RegisterLibFunc(&_fnHGetState, _carboncoreLib, "HGetState") })
@@ -432,38 +632,78 @@ func _loadLibrary() {
 	_register("InsTime", func() { purego.RegisterLibFunc(&_fnInsTime, _carboncoreLib, "InsTime") })
 	_register("InsXTime", func() { purego.RegisterLibFunc(&_fnInsXTime, _carboncoreLib, "InsXTime") })
 	_register("InsertResourceFile", func() { purego.RegisterLibFunc(&_fnInsertResourceFile, _carboncoreLib, "InsertResourceFile") })
-	_register("InstallDebugAssertOutputHandler", func() { purego.RegisterLibFunc(&_fnInstallDebugAssertOutputHandler, _carboncoreLib, "InstallDebugAssertOutputHandler") })
+	_register("InstallDebugAssertOutputHandler", func() {
+		purego.RegisterLibFunc(&_fnInstallDebugAssertOutputHandler, _carboncoreLib, "InstallDebugAssertOutputHandler")
+	})
 	_register("InstallExceptionHandler", func() { purego.RegisterLibFunc(&_fnInstallExceptionHandler, _carboncoreLib, "InstallExceptionHandler") })
 	_register("InstallTimeTask", func() { purego.RegisterLibFunc(&_fnInstallTimeTask, _carboncoreLib, "InstallTimeTask") })
 	_register("InstallXTimeTask", func() { purego.RegisterLibFunc(&_fnInstallXTimeTask, _carboncoreLib, "InstallXTimeTask") })
-	_register("InvalidateFolderDescriptorCache", func() { purego.RegisterLibFunc(&_fnInvalidateFolderDescriptorCache, _carboncoreLib, "InvalidateFolderDescriptorCache") })
-	_register("InvokeCollectionExceptionUPP", func() { purego.RegisterLibFunc(&_fnInvokeCollectionExceptionUPP, _carboncoreLib, "InvokeCollectionExceptionUPP") })
-	_register("InvokeCollectionFlattenUPP", func() { purego.RegisterLibFunc(&_fnInvokeCollectionFlattenUPP, _carboncoreLib, "InvokeCollectionFlattenUPP") })
-	_register("InvokeComponentMPWorkFunctionUPP", func() { purego.RegisterLibFunc(&_fnInvokeComponentMPWorkFunctionUPP, _carboncoreLib, "InvokeComponentMPWorkFunctionUPP") })
-	_register("InvokeComponentRoutineUPP", func() { purego.RegisterLibFunc(&_fnInvokeComponentRoutineUPP, _carboncoreLib, "InvokeComponentRoutineUPP") })
-	_register("InvokeDebugAssertOutputHandlerUPP", func() { purego.RegisterLibFunc(&_fnInvokeDebugAssertOutputHandlerUPP, _carboncoreLib, "InvokeDebugAssertOutputHandlerUPP") })
-	_register("InvokeDebugComponentCallbackUPP", func() { purego.RegisterLibFunc(&_fnInvokeDebugComponentCallbackUPP, _carboncoreLib, "InvokeDebugComponentCallbackUPP") })
-	_register("InvokeDebuggerDisposeThreadUPP", func() { purego.RegisterLibFunc(&_fnInvokeDebuggerDisposeThreadUPP, _carboncoreLib, "InvokeDebuggerDisposeThreadUPP") })
-	_register("InvokeDebuggerNewThreadUPP", func() { purego.RegisterLibFunc(&_fnInvokeDebuggerNewThreadUPP, _carboncoreLib, "InvokeDebuggerNewThreadUPP") })
-	_register("InvokeDebuggerThreadSchedulerUPP", func() { purego.RegisterLibFunc(&_fnInvokeDebuggerThreadSchedulerUPP, _carboncoreLib, "InvokeDebuggerThreadSchedulerUPP") })
+	_register("InvalidateFolderDescriptorCache", func() {
+		purego.RegisterLibFunc(&_fnInvalidateFolderDescriptorCache, _carboncoreLib, "InvalidateFolderDescriptorCache")
+	})
+	_register("InvokeCollectionExceptionUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeCollectionExceptionUPP, _carboncoreLib, "InvokeCollectionExceptionUPP")
+	})
+	_register("InvokeCollectionFlattenUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeCollectionFlattenUPP, _carboncoreLib, "InvokeCollectionFlattenUPP")
+	})
+	_register("InvokeComponentMPWorkFunctionUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeComponentMPWorkFunctionUPP, _carboncoreLib, "InvokeComponentMPWorkFunctionUPP")
+	})
+	_register("InvokeComponentRoutineUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeComponentRoutineUPP, _carboncoreLib, "InvokeComponentRoutineUPP")
+	})
+	_register("InvokeDebugAssertOutputHandlerUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeDebugAssertOutputHandlerUPP, _carboncoreLib, "InvokeDebugAssertOutputHandlerUPP")
+	})
+	_register("InvokeDebugComponentCallbackUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeDebugComponentCallbackUPP, _carboncoreLib, "InvokeDebugComponentCallbackUPP")
+	})
+	_register("InvokeDebuggerDisposeThreadUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeDebuggerDisposeThreadUPP, _carboncoreLib, "InvokeDebuggerDisposeThreadUPP")
+	})
+	_register("InvokeDebuggerNewThreadUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeDebuggerNewThreadUPP, _carboncoreLib, "InvokeDebuggerNewThreadUPP")
+	})
+	_register("InvokeDebuggerThreadSchedulerUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeDebuggerThreadSchedulerUPP, _carboncoreLib, "InvokeDebuggerThreadSchedulerUPP")
+	})
 	_register("InvokeDeferredTaskUPP", func() { purego.RegisterLibFunc(&_fnInvokeDeferredTaskUPP, _carboncoreLib, "InvokeDeferredTaskUPP") })
-	_register("InvokeExceptionHandlerUPP", func() { purego.RegisterLibFunc(&_fnInvokeExceptionHandlerUPP, _carboncoreLib, "InvokeExceptionHandlerUPP") })
+	_register("InvokeExceptionHandlerUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeExceptionHandlerUPP, _carboncoreLib, "InvokeExceptionHandlerUPP")
+	})
 	_register("InvokeFNSubscriptionUPP", func() { purego.RegisterLibFunc(&_fnInvokeFNSubscriptionUPP, _carboncoreLib, "InvokeFNSubscriptionUPP") })
 	_register("InvokeFSVolumeEjectUPP", func() { purego.RegisterLibFunc(&_fnInvokeFSVolumeEjectUPP, _carboncoreLib, "InvokeFSVolumeEjectUPP") })
 	_register("InvokeFSVolumeMountUPP", func() { purego.RegisterLibFunc(&_fnInvokeFSVolumeMountUPP, _carboncoreLib, "InvokeFSVolumeMountUPP") })
-	_register("InvokeFSVolumeUnmountUPP", func() { purego.RegisterLibFunc(&_fnInvokeFSVolumeUnmountUPP, _carboncoreLib, "InvokeFSVolumeUnmountUPP") })
-	_register("InvokeFolderManagerNotificationUPP", func() { purego.RegisterLibFunc(&_fnInvokeFolderManagerNotificationUPP, _carboncoreLib, "InvokeFolderManagerNotificationUPP") })
-	_register("InvokeGetMissingComponentResourceUPP", func() { purego.RegisterLibFunc(&_fnInvokeGetMissingComponentResourceUPP, _carboncoreLib, "InvokeGetMissingComponentResourceUPP") })
+	_register("InvokeFSVolumeUnmountUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeFSVolumeUnmountUPP, _carboncoreLib, "InvokeFSVolumeUnmountUPP")
+	})
+	_register("InvokeFolderManagerNotificationUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeFolderManagerNotificationUPP, _carboncoreLib, "InvokeFolderManagerNotificationUPP")
+	})
+	_register("InvokeGetMissingComponentResourceUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeGetMissingComponentResourceUPP, _carboncoreLib, "InvokeGetMissingComponentResourceUPP")
+	})
 	_register("InvokeIOCompletionUPP", func() { purego.RegisterLibFunc(&_fnInvokeIOCompletionUPP, _carboncoreLib, "InvokeIOCompletionUPP") })
-	_register("InvokeIndexToUCStringUPP", func() { purego.RegisterLibFunc(&_fnInvokeIndexToUCStringUPP, _carboncoreLib, "InvokeIndexToUCStringUPP") })
+	_register("InvokeIndexToUCStringUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeIndexToUCStringUPP, _carboncoreLib, "InvokeIndexToUCStringUPP")
+	})
 	_register("InvokeResErrUPP", func() { purego.RegisterLibFunc(&_fnInvokeResErrUPP, _carboncoreLib, "InvokeResErrUPP") })
-	_register("InvokeSelectorFunctionUPP", func() { purego.RegisterLibFunc(&_fnInvokeSelectorFunctionUPP, _carboncoreLib, "InvokeSelectorFunctionUPP") })
+	_register("InvokeSelectorFunctionUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeSelectorFunctionUPP, _carboncoreLib, "InvokeSelectorFunctionUPP")
+	})
 	_register("InvokeThreadEntryUPP", func() { purego.RegisterLibFunc(&_fnInvokeThreadEntryUPP, _carboncoreLib, "InvokeThreadEntryUPP") })
-	_register("InvokeThreadSchedulerUPP", func() { purego.RegisterLibFunc(&_fnInvokeThreadSchedulerUPP, _carboncoreLib, "InvokeThreadSchedulerUPP") })
+	_register("InvokeThreadSchedulerUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeThreadSchedulerUPP, _carboncoreLib, "InvokeThreadSchedulerUPP")
+	})
 	_register("InvokeThreadSwitchUPP", func() { purego.RegisterLibFunc(&_fnInvokeThreadSwitchUPP, _carboncoreLib, "InvokeThreadSwitchUPP") })
-	_register("InvokeThreadTerminationUPP", func() { purego.RegisterLibFunc(&_fnInvokeThreadTerminationUPP, _carboncoreLib, "InvokeThreadTerminationUPP") })
+	_register("InvokeThreadTerminationUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeThreadTerminationUPP, _carboncoreLib, "InvokeThreadTerminationUPP")
+	})
 	_register("InvokeTimerUPP", func() { purego.RegisterLibFunc(&_fnInvokeTimerUPP, _carboncoreLib, "InvokeTimerUPP") })
-	_register("InvokeUnicodeToTextFallbackUPP", func() { purego.RegisterLibFunc(&_fnInvokeUnicodeToTextFallbackUPP, _carboncoreLib, "InvokeUnicodeToTextFallbackUPP") })
+	_register("InvokeUnicodeToTextFallbackUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeUnicodeToTextFallbackUPP, _carboncoreLib, "InvokeUnicodeToTextFallbackUPP")
+	})
 	_register("IsHandleValid", func() { purego.RegisterLibFunc(&_fnIsHandleValid, _carboncoreLib, "IsHandleValid") })
 	_register("IsHeapValid", func() { purego.RegisterLibFunc(&_fnIsHeapValid, _carboncoreLib, "IsHeapValid") })
 	_register("IsMetric", func() { purego.RegisterLibFunc(&_fnIsMetric, _carboncoreLib, "IsMetric") })
@@ -491,21 +731,37 @@ func _loadLibrary() {
 	_register("LocaleCountNames", func() { purego.RegisterLibFunc(&_fnLocaleCountNames, _carboncoreLib, "LocaleCountNames") })
 	_register("LocaleGetIndName", func() { purego.RegisterLibFunc(&_fnLocaleGetIndName, _carboncoreLib, "LocaleGetIndName") })
 	_register("LocaleGetName", func() { purego.RegisterLibFunc(&_fnLocaleGetName, _carboncoreLib, "LocaleGetName") })
-	_register("LocaleOperationCountLocales", func() { purego.RegisterLibFunc(&_fnLocaleOperationCountLocales, _carboncoreLib, "LocaleOperationCountLocales") })
-	_register("LocaleOperationCountNames", func() { purego.RegisterLibFunc(&_fnLocaleOperationCountNames, _carboncoreLib, "LocaleOperationCountNames") })
-	_register("LocaleOperationGetIndName", func() { purego.RegisterLibFunc(&_fnLocaleOperationGetIndName, _carboncoreLib, "LocaleOperationGetIndName") })
-	_register("LocaleOperationGetLocales", func() { purego.RegisterLibFunc(&_fnLocaleOperationGetLocales, _carboncoreLib, "LocaleOperationGetLocales") })
+	_register("LocaleOperationCountLocales", func() {
+		purego.RegisterLibFunc(&_fnLocaleOperationCountLocales, _carboncoreLib, "LocaleOperationCountLocales")
+	})
+	_register("LocaleOperationCountNames", func() {
+		purego.RegisterLibFunc(&_fnLocaleOperationCountNames, _carboncoreLib, "LocaleOperationCountNames")
+	})
+	_register("LocaleOperationGetIndName", func() {
+		purego.RegisterLibFunc(&_fnLocaleOperationGetIndName, _carboncoreLib, "LocaleOperationGetIndName")
+	})
+	_register("LocaleOperationGetLocales", func() {
+		purego.RegisterLibFunc(&_fnLocaleOperationGetLocales, _carboncoreLib, "LocaleOperationGetLocales")
+	})
 	_register("LocaleOperationGetName", func() { purego.RegisterLibFunc(&_fnLocaleOperationGetName, _carboncoreLib, "LocaleOperationGetName") })
-	_register("LocaleRefFromLangOrRegionCode", func() { purego.RegisterLibFunc(&_fnLocaleRefFromLangOrRegionCode, _carboncoreLib, "LocaleRefFromLangOrRegionCode") })
-	_register("LocaleRefFromLocaleString", func() { purego.RegisterLibFunc(&_fnLocaleRefFromLocaleString, _carboncoreLib, "LocaleRefFromLocaleString") })
+	_register("LocaleRefFromLangOrRegionCode", func() {
+		purego.RegisterLibFunc(&_fnLocaleRefFromLangOrRegionCode, _carboncoreLib, "LocaleRefFromLangOrRegionCode")
+	})
+	_register("LocaleRefFromLocaleString", func() {
+		purego.RegisterLibFunc(&_fnLocaleRefFromLocaleString, _carboncoreLib, "LocaleRefFromLocaleString")
+	})
 	_register("LocaleRefGetPartString", func() { purego.RegisterLibFunc(&_fnLocaleRefGetPartString, _carboncoreLib, "LocaleRefGetPartString") })
-	_register("LocaleStringToLangAndRegionCodes", func() { purego.RegisterLibFunc(&_fnLocaleStringToLangAndRegionCodes, _carboncoreLib, "LocaleStringToLangAndRegionCodes") })
+	_register("LocaleStringToLangAndRegionCodes", func() {
+		purego.RegisterLibFunc(&_fnLocaleStringToLangAndRegionCodes, _carboncoreLib, "LocaleStringToLangAndRegionCodes")
+	})
 	_register("Long2Fix", func() { purego.RegisterLibFunc(&_fnLong2Fix, _carboncoreLib, "Long2Fix") })
 	_register("LongDoubleToSInt64", func() { purego.RegisterLibFunc(&_fnLongDoubleToSInt64, _carboncoreLib, "LongDoubleToSInt64") })
 	_register("LongDoubleToUInt64", func() { purego.RegisterLibFunc(&_fnLongDoubleToUInt64, _carboncoreLib, "LongDoubleToUInt64") })
 	_register("MPAllocate", func() { purego.RegisterLibFunc(&_fnMPAllocate, _carboncoreLib, "MPAllocate") })
 	_register("MPAllocateAligned", func() { purego.RegisterLibFunc(&_fnMPAllocateAligned, _carboncoreLib, "MPAllocateAligned") })
-	_register("MPAllocateTaskStorageIndex", func() { purego.RegisterLibFunc(&_fnMPAllocateTaskStorageIndex, _carboncoreLib, "MPAllocateTaskStorageIndex") })
+	_register("MPAllocateTaskStorageIndex", func() {
+		purego.RegisterLibFunc(&_fnMPAllocateTaskStorageIndex, _carboncoreLib, "MPAllocateTaskStorageIndex")
+	})
 	_register("MPArmTimer", func() { purego.RegisterLibFunc(&_fnMPArmTimer, _carboncoreLib, "MPArmTimer") })
 	_register("MPBlockClear", func() { purego.RegisterLibFunc(&_fnMPBlockClear, _carboncoreLib, "MPBlockClear") })
 	_register("MPBlockCopy", func() { purego.RegisterLibFunc(&_fnMPBlockCopy, _carboncoreLib, "MPBlockCopy") })
@@ -519,7 +775,9 @@ func _loadLibrary() {
 	_register("MPCreateTask", func() { purego.RegisterLibFunc(&_fnMPCreateTask, _carboncoreLib, "MPCreateTask") })
 	_register("MPCreateTimer", func() { purego.RegisterLibFunc(&_fnMPCreateTimer, _carboncoreLib, "MPCreateTimer") })
 	_register("MPCurrentTaskID", func() { purego.RegisterLibFunc(&_fnMPCurrentTaskID, _carboncoreLib, "MPCurrentTaskID") })
-	_register("MPDeallocateTaskStorageIndex", func() { purego.RegisterLibFunc(&_fnMPDeallocateTaskStorageIndex, _carboncoreLib, "MPDeallocateTaskStorageIndex") })
+	_register("MPDeallocateTaskStorageIndex", func() {
+		purego.RegisterLibFunc(&_fnMPDeallocateTaskStorageIndex, _carboncoreLib, "MPDeallocateTaskStorageIndex")
+	})
 	_register("MPDelayUntil", func() { purego.RegisterLibFunc(&_fnMPDelayUntil, _carboncoreLib, "MPDelayUntil") })
 	_register("MPDeleteCriticalRegion", func() { purego.RegisterLibFunc(&_fnMPDeleteCriticalRegion, _carboncoreLib, "MPDeleteCriticalRegion") })
 	_register("MPDeleteEvent", func() { purego.RegisterLibFunc(&_fnMPDeleteEvent, _carboncoreLib, "MPDeleteEvent") })
@@ -538,7 +796,9 @@ func _loadLibrary() {
 	_register("MPGetNextTaskID", func() { purego.RegisterLibFunc(&_fnMPGetNextTaskID, _carboncoreLib, "MPGetNextTaskID") })
 	_register("MPGetTaskStorageValue", func() { purego.RegisterLibFunc(&_fnMPGetTaskStorageValue, _carboncoreLib, "MPGetTaskStorageValue") })
 	_register("MPModifyNotification", func() { purego.RegisterLibFunc(&_fnMPModifyNotification, _carboncoreLib, "MPModifyNotification") })
-	_register("MPModifyNotificationParameters", func() { purego.RegisterLibFunc(&_fnMPModifyNotificationParameters, _carboncoreLib, "MPModifyNotificationParameters") })
+	_register("MPModifyNotificationParameters", func() {
+		purego.RegisterLibFunc(&_fnMPModifyNotificationParameters, _carboncoreLib, "MPModifyNotificationParameters")
+	})
 	_register("MPNotifyQueue", func() { purego.RegisterLibFunc(&_fnMPNotifyQueue, _carboncoreLib, "MPNotifyQueue") })
 	_register("MPProcessors", func() { purego.RegisterLibFunc(&_fnMPProcessors, _carboncoreLib, "MPProcessors") })
 	_register("MPProcessorsScheduled", func() { purego.RegisterLibFunc(&_fnMPProcessorsScheduled, _carboncoreLib, "MPProcessorsScheduled") })
@@ -569,18 +829,30 @@ func _loadLibrary() {
 	_register("NanosecondsToDuration", func() { purego.RegisterLibFunc(&_fnNanosecondsToDuration, _carboncoreLib, "NanosecondsToDuration") })
 	_register("NearestMacTextEncodings", func() { purego.RegisterLibFunc(&_fnNearestMacTextEncodings, _carboncoreLib, "NearestMacTextEncodings") })
 	_register("NewCollection", func() { purego.RegisterLibFunc(&_fnNewCollection, _carboncoreLib, "NewCollection") })
-	_register("NewCollectionExceptionUPP", func() { purego.RegisterLibFunc(&_fnNewCollectionExceptionUPP, _carboncoreLib, "NewCollectionExceptionUPP") })
+	_register("NewCollectionExceptionUPP", func() {
+		purego.RegisterLibFunc(&_fnNewCollectionExceptionUPP, _carboncoreLib, "NewCollectionExceptionUPP")
+	})
 	_register("NewCollectionFlattenUPP", func() { purego.RegisterLibFunc(&_fnNewCollectionFlattenUPP, _carboncoreLib, "NewCollectionFlattenUPP") })
 	_register("NewComponentFunctionUPP", func() { purego.RegisterLibFunc(&_fnNewComponentFunctionUPP, _carboncoreLib, "NewComponentFunctionUPP") })
-	_register("NewComponentMPWorkFunctionUPP", func() { purego.RegisterLibFunc(&_fnNewComponentMPWorkFunctionUPP, _carboncoreLib, "NewComponentMPWorkFunctionUPP") })
+	_register("NewComponentMPWorkFunctionUPP", func() {
+		purego.RegisterLibFunc(&_fnNewComponentMPWorkFunctionUPP, _carboncoreLib, "NewComponentMPWorkFunctionUPP")
+	})
 	_register("NewComponentRoutineUPP", func() { purego.RegisterLibFunc(&_fnNewComponentRoutineUPP, _carboncoreLib, "NewComponentRoutineUPP") })
-	_register("NewDebugAssertOutputHandlerUPP", func() { purego.RegisterLibFunc(&_fnNewDebugAssertOutputHandlerUPP, _carboncoreLib, "NewDebugAssertOutputHandlerUPP") })
+	_register("NewDebugAssertOutputHandlerUPP", func() {
+		purego.RegisterLibFunc(&_fnNewDebugAssertOutputHandlerUPP, _carboncoreLib, "NewDebugAssertOutputHandlerUPP")
+	})
 	_register("NewDebugComponent", func() { purego.RegisterLibFunc(&_fnNewDebugComponent, _carboncoreLib, "NewDebugComponent") })
-	_register("NewDebugComponentCallbackUPP", func() { purego.RegisterLibFunc(&_fnNewDebugComponentCallbackUPP, _carboncoreLib, "NewDebugComponentCallbackUPP") })
+	_register("NewDebugComponentCallbackUPP", func() {
+		purego.RegisterLibFunc(&_fnNewDebugComponentCallbackUPP, _carboncoreLib, "NewDebugComponentCallbackUPP")
+	})
 	_register("NewDebugOption", func() { purego.RegisterLibFunc(&_fnNewDebugOption, _carboncoreLib, "NewDebugOption") })
-	_register("NewDebuggerDisposeThreadUPP", func() { purego.RegisterLibFunc(&_fnNewDebuggerDisposeThreadUPP, _carboncoreLib, "NewDebuggerDisposeThreadUPP") })
+	_register("NewDebuggerDisposeThreadUPP", func() {
+		purego.RegisterLibFunc(&_fnNewDebuggerDisposeThreadUPP, _carboncoreLib, "NewDebuggerDisposeThreadUPP")
+	})
 	_register("NewDebuggerNewThreadUPP", func() { purego.RegisterLibFunc(&_fnNewDebuggerNewThreadUPP, _carboncoreLib, "NewDebuggerNewThreadUPP") })
-	_register("NewDebuggerThreadSchedulerUPP", func() { purego.RegisterLibFunc(&_fnNewDebuggerThreadSchedulerUPP, _carboncoreLib, "NewDebuggerThreadSchedulerUPP") })
+	_register("NewDebuggerThreadSchedulerUPP", func() {
+		purego.RegisterLibFunc(&_fnNewDebuggerThreadSchedulerUPP, _carboncoreLib, "NewDebuggerThreadSchedulerUPP")
+	})
 	_register("NewDeferredTaskUPP", func() { purego.RegisterLibFunc(&_fnNewDeferredTaskUPP, _carboncoreLib, "NewDeferredTaskUPP") })
 	_register("NewEmptyHandle", func() { purego.RegisterLibFunc(&_fnNewEmptyHandle, _carboncoreLib, "NewEmptyHandle") })
 	_register("NewExceptionHandlerUPP", func() { purego.RegisterLibFunc(&_fnNewExceptionHandlerUPP, _carboncoreLib, "NewExceptionHandlerUPP") })
@@ -588,9 +860,13 @@ func _loadLibrary() {
 	_register("NewFSVolumeEjectUPP", func() { purego.RegisterLibFunc(&_fnNewFSVolumeEjectUPP, _carboncoreLib, "NewFSVolumeEjectUPP") })
 	_register("NewFSVolumeMountUPP", func() { purego.RegisterLibFunc(&_fnNewFSVolumeMountUPP, _carboncoreLib, "NewFSVolumeMountUPP") })
 	_register("NewFSVolumeUnmountUPP", func() { purego.RegisterLibFunc(&_fnNewFSVolumeUnmountUPP, _carboncoreLib, "NewFSVolumeUnmountUPP") })
-	_register("NewFolderManagerNotificationUPP", func() { purego.RegisterLibFunc(&_fnNewFolderManagerNotificationUPP, _carboncoreLib, "NewFolderManagerNotificationUPP") })
+	_register("NewFolderManagerNotificationUPP", func() {
+		purego.RegisterLibFunc(&_fnNewFolderManagerNotificationUPP, _carboncoreLib, "NewFolderManagerNotificationUPP")
+	})
 	_register("NewGestaltValue", func() { purego.RegisterLibFunc(&_fnNewGestaltValue, _carboncoreLib, "NewGestaltValue") })
-	_register("NewGetMissingComponentResourceUPP", func() { purego.RegisterLibFunc(&_fnNewGetMissingComponentResourceUPP, _carboncoreLib, "NewGetMissingComponentResourceUPP") })
+	_register("NewGetMissingComponentResourceUPP", func() {
+		purego.RegisterLibFunc(&_fnNewGetMissingComponentResourceUPP, _carboncoreLib, "NewGetMissingComponentResourceUPP")
+	})
 	_register("NewHandle", func() { purego.RegisterLibFunc(&_fnNewHandle, _carboncoreLib, "NewHandle") })
 	_register("NewHandleClear", func() { purego.RegisterLibFunc(&_fnNewHandleClear, _carboncoreLib, "NewHandleClear") })
 	_register("NewIOCompletionUPP", func() { purego.RegisterLibFunc(&_fnNewIOCompletionUPP, _carboncoreLib, "NewIOCompletionUPP") })
@@ -605,7 +881,9 @@ func _loadLibrary() {
 	_register("NewThreadSwitchUPP", func() { purego.RegisterLibFunc(&_fnNewThreadSwitchUPP, _carboncoreLib, "NewThreadSwitchUPP") })
 	_register("NewThreadTerminationUPP", func() { purego.RegisterLibFunc(&_fnNewThreadTerminationUPP, _carboncoreLib, "NewThreadTerminationUPP") })
 	_register("NewTimerUPP", func() { purego.RegisterLibFunc(&_fnNewTimerUPP, _carboncoreLib, "NewTimerUPP") })
-	_register("NewUnicodeToTextFallbackUPP", func() { purego.RegisterLibFunc(&_fnNewUnicodeToTextFallbackUPP, _carboncoreLib, "NewUnicodeToTextFallbackUPP") })
+	_register("NewUnicodeToTextFallbackUPP", func() {
+		purego.RegisterLibFunc(&_fnNewUnicodeToTextFallbackUPP, _carboncoreLib, "NewUnicodeToTextFallbackUPP")
+	})
 	_register("OpenAComponent", func() { purego.RegisterLibFunc(&_fnOpenAComponent, _carboncoreLib, "OpenAComponent") })
 	_register("OpenAComponentResFile", func() { purego.RegisterLibFunc(&_fnOpenAComponentResFile, _carboncoreLib, "OpenAComponentResFile") })
 	_register("OpenADefaultComponent", func() { purego.RegisterLibFunc(&_fnOpenADefaultComponent, _carboncoreLib, "OpenADefaultComponent") })
@@ -622,11 +900,21 @@ func _loadLibrary() {
 	_register("PBCloseIteratorSync", func() { purego.RegisterLibFunc(&_fnPBCloseIteratorSync, _carboncoreLib, "PBCloseIteratorSync") })
 	_register("PBCompareFSRefsAsync", func() { purego.RegisterLibFunc(&_fnPBCompareFSRefsAsync, _carboncoreLib, "PBCompareFSRefsAsync") })
 	_register("PBCompareFSRefsSync", func() { purego.RegisterLibFunc(&_fnPBCompareFSRefsSync, _carboncoreLib, "PBCompareFSRefsSync") })
-	_register("PBCreateDirectoryUnicodeAsync", func() { purego.RegisterLibFunc(&_fnPBCreateDirectoryUnicodeAsync, _carboncoreLib, "PBCreateDirectoryUnicodeAsync") })
-	_register("PBCreateDirectoryUnicodeSync", func() { purego.RegisterLibFunc(&_fnPBCreateDirectoryUnicodeSync, _carboncoreLib, "PBCreateDirectoryUnicodeSync") })
-	_register("PBCreateFileAndOpenForkUnicodeAsync", func() { purego.RegisterLibFunc(&_fnPBCreateFileAndOpenForkUnicodeAsync, _carboncoreLib, "PBCreateFileAndOpenForkUnicodeAsync") })
-	_register("PBCreateFileAndOpenForkUnicodeSync", func() { purego.RegisterLibFunc(&_fnPBCreateFileAndOpenForkUnicodeSync, _carboncoreLib, "PBCreateFileAndOpenForkUnicodeSync") })
-	_register("PBCreateFileUnicodeAsync", func() { purego.RegisterLibFunc(&_fnPBCreateFileUnicodeAsync, _carboncoreLib, "PBCreateFileUnicodeAsync") })
+	_register("PBCreateDirectoryUnicodeAsync", func() {
+		purego.RegisterLibFunc(&_fnPBCreateDirectoryUnicodeAsync, _carboncoreLib, "PBCreateDirectoryUnicodeAsync")
+	})
+	_register("PBCreateDirectoryUnicodeSync", func() {
+		purego.RegisterLibFunc(&_fnPBCreateDirectoryUnicodeSync, _carboncoreLib, "PBCreateDirectoryUnicodeSync")
+	})
+	_register("PBCreateFileAndOpenForkUnicodeAsync", func() {
+		purego.RegisterLibFunc(&_fnPBCreateFileAndOpenForkUnicodeAsync, _carboncoreLib, "PBCreateFileAndOpenForkUnicodeAsync")
+	})
+	_register("PBCreateFileAndOpenForkUnicodeSync", func() {
+		purego.RegisterLibFunc(&_fnPBCreateFileAndOpenForkUnicodeSync, _carboncoreLib, "PBCreateFileAndOpenForkUnicodeSync")
+	})
+	_register("PBCreateFileUnicodeAsync", func() {
+		purego.RegisterLibFunc(&_fnPBCreateFileUnicodeAsync, _carboncoreLib, "PBCreateFileUnicodeAsync")
+	})
 	_register("PBCreateFileUnicodeSync", func() { purego.RegisterLibFunc(&_fnPBCreateFileUnicodeSync, _carboncoreLib, "PBCreateFileUnicodeSync") })
 	_register("PBCreateForkAsync", func() { purego.RegisterLibFunc(&_fnPBCreateForkAsync, _carboncoreLib, "PBCreateForkAsync") })
 	_register("PBCreateForkSync", func() { purego.RegisterLibFunc(&_fnPBCreateForkSync, _carboncoreLib, "PBCreateForkSync") })
@@ -645,8 +933,12 @@ func _loadLibrary() {
 	_register("PBFlushVolumeAsync", func() { purego.RegisterLibFunc(&_fnPBFlushVolumeAsync, _carboncoreLib, "PBFlushVolumeAsync") })
 	_register("PBFlushVolumeSync", func() { purego.RegisterLibFunc(&_fnPBFlushVolumeSync, _carboncoreLib, "PBFlushVolumeSync") })
 	_register("PBGetCatalogInfoAsync", func() { purego.RegisterLibFunc(&_fnPBGetCatalogInfoAsync, _carboncoreLib, "PBGetCatalogInfoAsync") })
-	_register("PBGetCatalogInfoBulkAsync", func() { purego.RegisterLibFunc(&_fnPBGetCatalogInfoBulkAsync, _carboncoreLib, "PBGetCatalogInfoBulkAsync") })
-	_register("PBGetCatalogInfoBulkSync", func() { purego.RegisterLibFunc(&_fnPBGetCatalogInfoBulkSync, _carboncoreLib, "PBGetCatalogInfoBulkSync") })
+	_register("PBGetCatalogInfoBulkAsync", func() {
+		purego.RegisterLibFunc(&_fnPBGetCatalogInfoBulkAsync, _carboncoreLib, "PBGetCatalogInfoBulkAsync")
+	})
+	_register("PBGetCatalogInfoBulkSync", func() {
+		purego.RegisterLibFunc(&_fnPBGetCatalogInfoBulkSync, _carboncoreLib, "PBGetCatalogInfoBulkSync")
+	})
 	_register("PBGetCatalogInfoSync", func() { purego.RegisterLibFunc(&_fnPBGetCatalogInfoSync, _carboncoreLib, "PBGetCatalogInfoSync") })
 	_register("PBGetForkCBInfoAsync", func() { purego.RegisterLibFunc(&_fnPBGetForkCBInfoAsync, _carboncoreLib, "PBGetForkCBInfoAsync") })
 	_register("PBGetForkCBInfoSync", func() { purego.RegisterLibFunc(&_fnPBGetForkCBInfoSync, _carboncoreLib, "PBGetForkCBInfoSync") })
@@ -712,29 +1004,49 @@ func _loadLibrary() {
 	_register("ReallocateHandle", func() { purego.RegisterLibFunc(&_fnReallocateHandle, _carboncoreLib, "ReallocateHandle") })
 	_register("RecoverHandle", func() { purego.RegisterLibFunc(&_fnRecoverHandle, _carboncoreLib, "RecoverHandle") })
 	_register("RegisterComponent", func() { purego.RegisterLibFunc(&_fnRegisterComponent, _carboncoreLib, "RegisterComponent") })
-	_register("RegisterComponentFileRef", func() { purego.RegisterLibFunc(&_fnRegisterComponentFileRef, _carboncoreLib, "RegisterComponentFileRef") })
-	_register("RegisterComponentFileRefEntries", func() { purego.RegisterLibFunc(&_fnRegisterComponentFileRefEntries, _carboncoreLib, "RegisterComponentFileRefEntries") })
-	_register("RegisterComponentResource", func() { purego.RegisterLibFunc(&_fnRegisterComponentResource, _carboncoreLib, "RegisterComponentResource") })
-	_register("RegisterComponentResourceFile", func() { purego.RegisterLibFunc(&_fnRegisterComponentResourceFile, _carboncoreLib, "RegisterComponentResourceFile") })
+	_register("RegisterComponentFileRef", func() {
+		purego.RegisterLibFunc(&_fnRegisterComponentFileRef, _carboncoreLib, "RegisterComponentFileRef")
+	})
+	_register("RegisterComponentFileRefEntries", func() {
+		purego.RegisterLibFunc(&_fnRegisterComponentFileRefEntries, _carboncoreLib, "RegisterComponentFileRefEntries")
+	})
+	_register("RegisterComponentResource", func() {
+		purego.RegisterLibFunc(&_fnRegisterComponentResource, _carboncoreLib, "RegisterComponentResource")
+	})
+	_register("RegisterComponentResourceFile", func() {
+		purego.RegisterLibFunc(&_fnRegisterComponentResourceFile, _carboncoreLib, "RegisterComponentResourceFile")
+	})
 	_register("ReleaseCollection", func() { purego.RegisterLibFunc(&_fnReleaseCollection, _carboncoreLib, "ReleaseCollection") })
 	_register("ReleaseFolder", func() { purego.RegisterLibFunc(&_fnReleaseFolder, _carboncoreLib, "ReleaseFolder") })
 	_register("ReleaseResource", func() { purego.RegisterLibFunc(&_fnReleaseResource, _carboncoreLib, "ReleaseResource") })
 	_register("RemoveCollectionItem", func() { purego.RegisterLibFunc(&_fnRemoveCollectionItem, _carboncoreLib, "RemoveCollectionItem") })
 	_register("RemoveFolderDescriptor", func() { purego.RegisterLibFunc(&_fnRemoveFolderDescriptor, _carboncoreLib, "RemoveFolderDescriptor") })
-	_register("RemoveIndexedCollectionItem", func() { purego.RegisterLibFunc(&_fnRemoveIndexedCollectionItem, _carboncoreLib, "RemoveIndexedCollectionItem") })
+	_register("RemoveIndexedCollectionItem", func() {
+		purego.RegisterLibFunc(&_fnRemoveIndexedCollectionItem, _carboncoreLib, "RemoveIndexedCollectionItem")
+	})
 	_register("RemoveResource", func() { purego.RegisterLibFunc(&_fnRemoveResource, _carboncoreLib, "RemoveResource") })
 	_register("RemoveTimeTask", func() { purego.RegisterLibFunc(&_fnRemoveTimeTask, _carboncoreLib, "RemoveTimeTask") })
 	_register("ReplaceGestaltValue", func() { purego.RegisterLibFunc(&_fnReplaceGestaltValue, _carboncoreLib, "ReplaceGestaltValue") })
-	_register("ReplaceIndexedCollectionItem", func() { purego.RegisterLibFunc(&_fnReplaceIndexedCollectionItem, _carboncoreLib, "ReplaceIndexedCollectionItem") })
-	_register("ReplaceIndexedCollectionItemHdl", func() { purego.RegisterLibFunc(&_fnReplaceIndexedCollectionItemHdl, _carboncoreLib, "ReplaceIndexedCollectionItemHdl") })
+	_register("ReplaceIndexedCollectionItem", func() {
+		purego.RegisterLibFunc(&_fnReplaceIndexedCollectionItem, _carboncoreLib, "ReplaceIndexedCollectionItem")
+	})
+	_register("ReplaceIndexedCollectionItemHdl", func() {
+		purego.RegisterLibFunc(&_fnReplaceIndexedCollectionItemHdl, _carboncoreLib, "ReplaceIndexedCollectionItemHdl")
+	})
 	_register("ResError", func() { purego.RegisterLibFunc(&_fnResError, _carboncoreLib, "ResError") })
 	_register("ResetTextToUnicodeInfo", func() { purego.RegisterLibFunc(&_fnResetTextToUnicodeInfo, _carboncoreLib, "ResetTextToUnicodeInfo") })
 	_register("ResetUnicodeToTextInfo", func() { purego.RegisterLibFunc(&_fnResetUnicodeToTextInfo, _carboncoreLib, "ResetUnicodeToTextInfo") })
-	_register("ResetUnicodeToTextRunInfo", func() { purego.RegisterLibFunc(&_fnResetUnicodeToTextRunInfo, _carboncoreLib, "ResetUnicodeToTextRunInfo") })
+	_register("ResetUnicodeToTextRunInfo", func() {
+		purego.RegisterLibFunc(&_fnResetUnicodeToTextRunInfo, _carboncoreLib, "ResetUnicodeToTextRunInfo")
+	})
 	_register("ResolveComponentAlias", func() { purego.RegisterLibFunc(&_fnResolveComponentAlias, _carboncoreLib, "ResolveComponentAlias") })
-	_register("ResolveDefaultTextEncoding", func() { purego.RegisterLibFunc(&_fnResolveDefaultTextEncoding, _carboncoreLib, "ResolveDefaultTextEncoding") })
+	_register("ResolveDefaultTextEncoding", func() {
+		purego.RegisterLibFunc(&_fnResolveDefaultTextEncoding, _carboncoreLib, "ResolveDefaultTextEncoding")
+	})
 	_register("RetainCollection", func() { purego.RegisterLibFunc(&_fnRetainCollection, _carboncoreLib, "RetainCollection") })
-	_register("RevertTextEncodingToScriptInfo", func() { purego.RegisterLibFunc(&_fnRevertTextEncodingToScriptInfo, _carboncoreLib, "RevertTextEncodingToScriptInfo") })
+	_register("RevertTextEncodingToScriptInfo", func() {
+		purego.RegisterLibFunc(&_fnRevertTextEncodingToScriptInfo, _carboncoreLib, "RevertTextEncodingToScriptInfo")
+	})
 	_register("RmvTime", func() { purego.RegisterLibFunc(&_fnRmvTime, _carboncoreLib, "RmvTime") })
 	_register("S32Set", func() { purego.RegisterLibFunc(&_fnS32Set, _carboncoreLib, "S32Set") })
 	_register("S64Absolute", func() { purego.RegisterLibFunc(&_fnS64Absolute, _carboncoreLib, "S64Absolute") })
@@ -765,20 +1077,36 @@ func _loadLibrary() {
 	_register("SInt64ToWide", func() { purego.RegisterLibFunc(&_fnSInt64ToWide, _carboncoreLib, "SInt64ToWide") })
 	_register("SetAliasUserType", func() { purego.RegisterLibFunc(&_fnSetAliasUserType, _carboncoreLib, "SetAliasUserType") })
 	_register("SetAliasUserTypeWithPtr", func() { purego.RegisterLibFunc(&_fnSetAliasUserTypeWithPtr, _carboncoreLib, "SetAliasUserTypeWithPtr") })
-	_register("SetCollectionDefaultAttributes", func() { purego.RegisterLibFunc(&_fnSetCollectionDefaultAttributes, _carboncoreLib, "SetCollectionDefaultAttributes") })
-	_register("SetCollectionExceptionProc", func() { purego.RegisterLibFunc(&_fnSetCollectionExceptionProc, _carboncoreLib, "SetCollectionExceptionProc") })
+	_register("SetCollectionDefaultAttributes", func() {
+		purego.RegisterLibFunc(&_fnSetCollectionDefaultAttributes, _carboncoreLib, "SetCollectionDefaultAttributes")
+	})
+	_register("SetCollectionExceptionProc", func() {
+		purego.RegisterLibFunc(&_fnSetCollectionExceptionProc, _carboncoreLib, "SetCollectionExceptionProc")
+	})
 	_register("SetCollectionItemInfo", func() { purego.RegisterLibFunc(&_fnSetCollectionItemInfo, _carboncoreLib, "SetCollectionItemInfo") })
-	_register("SetComponentInstanceError", func() { purego.RegisterLibFunc(&_fnSetComponentInstanceError, _carboncoreLib, "SetComponentInstanceError") })
-	_register("SetComponentInstanceStorage", func() { purego.RegisterLibFunc(&_fnSetComponentInstanceStorage, _carboncoreLib, "SetComponentInstanceStorage") })
+	_register("SetComponentInstanceError", func() {
+		purego.RegisterLibFunc(&_fnSetComponentInstanceError, _carboncoreLib, "SetComponentInstanceError")
+	})
+	_register("SetComponentInstanceStorage", func() {
+		purego.RegisterLibFunc(&_fnSetComponentInstanceStorage, _carboncoreLib, "SetComponentInstanceStorage")
+	})
 	_register("SetComponentRefcon", func() { purego.RegisterLibFunc(&_fnSetComponentRefcon, _carboncoreLib, "SetComponentRefcon") })
 	_register("SetDebugOptionValue", func() { purego.RegisterLibFunc(&_fnSetDebugOptionValue, _carboncoreLib, "SetDebugOptionValue") })
-	_register("SetDebuggerNotificationProcs", func() { purego.RegisterLibFunc(&_fnSetDebuggerNotificationProcs, _carboncoreLib, "SetDebuggerNotificationProcs") })
+	_register("SetDebuggerNotificationProcs", func() {
+		purego.RegisterLibFunc(&_fnSetDebuggerNotificationProcs, _carboncoreLib, "SetDebuggerNotificationProcs")
+	})
 	_register("SetDefaultComponent", func() { purego.RegisterLibFunc(&_fnSetDefaultComponent, _carboncoreLib, "SetDefaultComponent") })
-	_register("SetFallbackUnicodeToText", func() { purego.RegisterLibFunc(&_fnSetFallbackUnicodeToText, _carboncoreLib, "SetFallbackUnicodeToText") })
-	_register("SetFallbackUnicodeToTextRun", func() { purego.RegisterLibFunc(&_fnSetFallbackUnicodeToTextRun, _carboncoreLib, "SetFallbackUnicodeToTextRun") })
+	_register("SetFallbackUnicodeToText", func() {
+		purego.RegisterLibFunc(&_fnSetFallbackUnicodeToText, _carboncoreLib, "SetFallbackUnicodeToText")
+	})
+	_register("SetFallbackUnicodeToTextRun", func() {
+		purego.RegisterLibFunc(&_fnSetFallbackUnicodeToTextRun, _carboncoreLib, "SetFallbackUnicodeToTextRun")
+	})
 	_register("SetGestaltValue", func() { purego.RegisterLibFunc(&_fnSetGestaltValue, _carboncoreLib, "SetGestaltValue") })
 	_register("SetHandleSize", func() { purego.RegisterLibFunc(&_fnSetHandleSize, _carboncoreLib, "SetHandleSize") })
-	_register("SetIndexedCollectionItemInfo", func() { purego.RegisterLibFunc(&_fnSetIndexedCollectionItemInfo, _carboncoreLib, "SetIndexedCollectionItemInfo") })
+	_register("SetIndexedCollectionItemInfo", func() {
+		purego.RegisterLibFunc(&_fnSetIndexedCollectionItemInfo, _carboncoreLib, "SetIndexedCollectionItemInfo")
+	})
 	_register("SetPtrSize", func() { purego.RegisterLibFunc(&_fnSetPtrSize, _carboncoreLib, "SetPtrSize") })
 	_register("SetResAttrs", func() { purego.RegisterLibFunc(&_fnSetResAttrs, _carboncoreLib, "SetResAttrs") })
 	_register("SetResFileAttrs", func() { purego.RegisterLibFunc(&_fnSetResFileAttrs, _carboncoreLib, "SetResFileAttrs") })
@@ -786,48 +1114,96 @@ func _loadLibrary() {
 	_register("SetResLoad", func() { purego.RegisterLibFunc(&_fnSetResLoad, _carboncoreLib, "SetResLoad") })
 	_register("SetResPurge", func() { purego.RegisterLibFunc(&_fnSetResPurge, _carboncoreLib, "SetResPurge") })
 	_register("SetResourceSize", func() { purego.RegisterLibFunc(&_fnSetResourceSize, _carboncoreLib, "SetResourceSize") })
-	_register("SetScriptManagerVariable", func() { purego.RegisterLibFunc(&_fnSetScriptManagerVariable, _carboncoreLib, "SetScriptManagerVariable") })
-	_register("SetThreadReadyGivenTaskRef", func() { purego.RegisterLibFunc(&_fnSetThreadReadyGivenTaskRef, _carboncoreLib, "SetThreadReadyGivenTaskRef") })
+	_register("SetScriptManagerVariable", func() {
+		purego.RegisterLibFunc(&_fnSetScriptManagerVariable, _carboncoreLib, "SetScriptManagerVariable")
+	})
+	_register("SetThreadReadyGivenTaskRef", func() {
+		purego.RegisterLibFunc(&_fnSetThreadReadyGivenTaskRef, _carboncoreLib, "SetThreadReadyGivenTaskRef")
+	})
 	_register("SetThreadScheduler", func() { purego.RegisterLibFunc(&_fnSetThreadScheduler, _carboncoreLib, "SetThreadScheduler") })
 	_register("SetThreadState", func() { purego.RegisterLibFunc(&_fnSetThreadState, _carboncoreLib, "SetThreadState") })
-	_register("SetThreadStateEndCritical", func() { purego.RegisterLibFunc(&_fnSetThreadStateEndCritical, _carboncoreLib, "SetThreadStateEndCritical") })
+	_register("SetThreadStateEndCritical", func() {
+		purego.RegisterLibFunc(&_fnSetThreadStateEndCritical, _carboncoreLib, "SetThreadStateEndCritical")
+	})
 	_register("SetThreadSwitcher", func() { purego.RegisterLibFunc(&_fnSetThreadSwitcher, _carboncoreLib, "SetThreadSwitcher") })
 	_register("SetThreadTerminator", func() { purego.RegisterLibFunc(&_fnSetThreadTerminator, _carboncoreLib, "SetThreadTerminator") })
 	_register("SubAbsoluteFromAbsolute", func() { purego.RegisterLibFunc(&_fnSubAbsoluteFromAbsolute, _carboncoreLib, "SubAbsoluteFromAbsolute") })
 	_register("SubDurationFromAbsolute", func() { purego.RegisterLibFunc(&_fnSubDurationFromAbsolute, _carboncoreLib, "SubDurationFromAbsolute") })
-	_register("SubNanosecondsFromAbsolute", func() { purego.RegisterLibFunc(&_fnSubNanosecondsFromAbsolute, _carboncoreLib, "SubNanosecondsFromAbsolute") })
+	_register("SubNanosecondsFromAbsolute", func() {
+		purego.RegisterLibFunc(&_fnSubNanosecondsFromAbsolute, _carboncoreLib, "SubNanosecondsFromAbsolute")
+	})
 	_register("SysError", func() { purego.RegisterLibFunc(&_fnSysError, _carboncoreLib, "SysError") })
-	_register("TECClearConverterContextInfo", func() { purego.RegisterLibFunc(&_fnTECClearConverterContextInfo, _carboncoreLib, "TECClearConverterContextInfo") })
-	_register("TECClearSnifferContextInfo", func() { purego.RegisterLibFunc(&_fnTECClearSnifferContextInfo, _carboncoreLib, "TECClearSnifferContextInfo") })
+	_register("TECClearConverterContextInfo", func() {
+		purego.RegisterLibFunc(&_fnTECClearConverterContextInfo, _carboncoreLib, "TECClearConverterContextInfo")
+	})
+	_register("TECClearSnifferContextInfo", func() {
+		purego.RegisterLibFunc(&_fnTECClearSnifferContextInfo, _carboncoreLib, "TECClearSnifferContextInfo")
+	})
 	_register("TECConvertText", func() { purego.RegisterLibFunc(&_fnTECConvertText, _carboncoreLib, "TECConvertText") })
-	_register("TECConvertTextToMultipleEncodings", func() { purego.RegisterLibFunc(&_fnTECConvertTextToMultipleEncodings, _carboncoreLib, "TECConvertTextToMultipleEncodings") })
-	_register("TECCopyTextEncodingInternetNameAndMIB", func() { purego.RegisterLibFunc(&_fnTECCopyTextEncodingInternetNameAndMIB, _carboncoreLib, "TECCopyTextEncodingInternetNameAndMIB") })
-	_register("TECCountAvailableSniffers", func() { purego.RegisterLibFunc(&_fnTECCountAvailableSniffers, _carboncoreLib, "TECCountAvailableSniffers") })
-	_register("TECCountAvailableTextEncodings", func() { purego.RegisterLibFunc(&_fnTECCountAvailableTextEncodings, _carboncoreLib, "TECCountAvailableTextEncodings") })
-	_register("TECCountDestinationTextEncodings", func() { purego.RegisterLibFunc(&_fnTECCountDestinationTextEncodings, _carboncoreLib, "TECCountDestinationTextEncodings") })
-	_register("TECCountDirectTextEncodingConversions", func() { purego.RegisterLibFunc(&_fnTECCountDirectTextEncodingConversions, _carboncoreLib, "TECCountDirectTextEncodingConversions") })
-	_register("TECCountMailTextEncodings", func() { purego.RegisterLibFunc(&_fnTECCountMailTextEncodings, _carboncoreLib, "TECCountMailTextEncodings") })
-	_register("TECCountSubTextEncodings", func() { purego.RegisterLibFunc(&_fnTECCountSubTextEncodings, _carboncoreLib, "TECCountSubTextEncodings") })
-	_register("TECCountWebTextEncodings", func() { purego.RegisterLibFunc(&_fnTECCountWebTextEncodings, _carboncoreLib, "TECCountWebTextEncodings") })
+	_register("TECConvertTextToMultipleEncodings", func() {
+		purego.RegisterLibFunc(&_fnTECConvertTextToMultipleEncodings, _carboncoreLib, "TECConvertTextToMultipleEncodings")
+	})
+	_register("TECCopyTextEncodingInternetNameAndMIB", func() {
+		purego.RegisterLibFunc(&_fnTECCopyTextEncodingInternetNameAndMIB, _carboncoreLib, "TECCopyTextEncodingInternetNameAndMIB")
+	})
+	_register("TECCountAvailableSniffers", func() {
+		purego.RegisterLibFunc(&_fnTECCountAvailableSniffers, _carboncoreLib, "TECCountAvailableSniffers")
+	})
+	_register("TECCountAvailableTextEncodings", func() {
+		purego.RegisterLibFunc(&_fnTECCountAvailableTextEncodings, _carboncoreLib, "TECCountAvailableTextEncodings")
+	})
+	_register("TECCountDestinationTextEncodings", func() {
+		purego.RegisterLibFunc(&_fnTECCountDestinationTextEncodings, _carboncoreLib, "TECCountDestinationTextEncodings")
+	})
+	_register("TECCountDirectTextEncodingConversions", func() {
+		purego.RegisterLibFunc(&_fnTECCountDirectTextEncodingConversions, _carboncoreLib, "TECCountDirectTextEncodingConversions")
+	})
+	_register("TECCountMailTextEncodings", func() {
+		purego.RegisterLibFunc(&_fnTECCountMailTextEncodings, _carboncoreLib, "TECCountMailTextEncodings")
+	})
+	_register("TECCountSubTextEncodings", func() {
+		purego.RegisterLibFunc(&_fnTECCountSubTextEncodings, _carboncoreLib, "TECCountSubTextEncodings")
+	})
+	_register("TECCountWebTextEncodings", func() {
+		purego.RegisterLibFunc(&_fnTECCountWebTextEncodings, _carboncoreLib, "TECCountWebTextEncodings")
+	})
 	_register("TECCreateConverter", func() { purego.RegisterLibFunc(&_fnTECCreateConverter, _carboncoreLib, "TECCreateConverter") })
-	_register("TECCreateConverterFromPath", func() { purego.RegisterLibFunc(&_fnTECCreateConverterFromPath, _carboncoreLib, "TECCreateConverterFromPath") })
-	_register("TECCreateOneToManyConverter", func() { purego.RegisterLibFunc(&_fnTECCreateOneToManyConverter, _carboncoreLib, "TECCreateOneToManyConverter") })
+	_register("TECCreateConverterFromPath", func() {
+		purego.RegisterLibFunc(&_fnTECCreateConverterFromPath, _carboncoreLib, "TECCreateConverterFromPath")
+	})
+	_register("TECCreateOneToManyConverter", func() {
+		purego.RegisterLibFunc(&_fnTECCreateOneToManyConverter, _carboncoreLib, "TECCreateOneToManyConverter")
+	})
 	_register("TECCreateSniffer", func() { purego.RegisterLibFunc(&_fnTECCreateSniffer, _carboncoreLib, "TECCreateSniffer") })
 	_register("TECDisposeConverter", func() { purego.RegisterLibFunc(&_fnTECDisposeConverter, _carboncoreLib, "TECDisposeConverter") })
 	_register("TECDisposeSniffer", func() { purego.RegisterLibFunc(&_fnTECDisposeSniffer, _carboncoreLib, "TECDisposeSniffer") })
-	_register("TECFlushMultipleEncodings", func() { purego.RegisterLibFunc(&_fnTECFlushMultipleEncodings, _carboncoreLib, "TECFlushMultipleEncodings") })
+	_register("TECFlushMultipleEncodings", func() {
+		purego.RegisterLibFunc(&_fnTECFlushMultipleEncodings, _carboncoreLib, "TECFlushMultipleEncodings")
+	})
 	_register("TECFlushText", func() { purego.RegisterLibFunc(&_fnTECFlushText, _carboncoreLib, "TECFlushText") })
 	_register("TECGetAvailableSniffers", func() { purego.RegisterLibFunc(&_fnTECGetAvailableSniffers, _carboncoreLib, "TECGetAvailableSniffers") })
-	_register("TECGetAvailableTextEncodings", func() { purego.RegisterLibFunc(&_fnTECGetAvailableTextEncodings, _carboncoreLib, "TECGetAvailableTextEncodings") })
-	_register("TECGetDestinationTextEncodings", func() { purego.RegisterLibFunc(&_fnTECGetDestinationTextEncodings, _carboncoreLib, "TECGetDestinationTextEncodings") })
-	_register("TECGetDirectTextEncodingConversions", func() { purego.RegisterLibFunc(&_fnTECGetDirectTextEncodingConversions, _carboncoreLib, "TECGetDirectTextEncodingConversions") })
+	_register("TECGetAvailableTextEncodings", func() {
+		purego.RegisterLibFunc(&_fnTECGetAvailableTextEncodings, _carboncoreLib, "TECGetAvailableTextEncodings")
+	})
+	_register("TECGetDestinationTextEncodings", func() {
+		purego.RegisterLibFunc(&_fnTECGetDestinationTextEncodings, _carboncoreLib, "TECGetDestinationTextEncodings")
+	})
+	_register("TECGetDirectTextEncodingConversions", func() {
+		purego.RegisterLibFunc(&_fnTECGetDirectTextEncodingConversions, _carboncoreLib, "TECGetDirectTextEncodingConversions")
+	})
 	_register("TECGetEncodingList", func() { purego.RegisterLibFunc(&_fnTECGetEncodingList, _carboncoreLib, "TECGetEncodingList") })
 	_register("TECGetInfo", func() { purego.RegisterLibFunc(&_fnTECGetInfo, _carboncoreLib, "TECGetInfo") })
 	_register("TECGetMailTextEncodings", func() { purego.RegisterLibFunc(&_fnTECGetMailTextEncodings, _carboncoreLib, "TECGetMailTextEncodings") })
 	_register("TECGetSubTextEncodings", func() { purego.RegisterLibFunc(&_fnTECGetSubTextEncodings, _carboncoreLib, "TECGetSubTextEncodings") })
-	_register("TECGetTextEncodingFromInternetName", func() { purego.RegisterLibFunc(&_fnTECGetTextEncodingFromInternetName, _carboncoreLib, "TECGetTextEncodingFromInternetName") })
-	_register("TECGetTextEncodingFromInternetNameOrMIB", func() { purego.RegisterLibFunc(&_fnTECGetTextEncodingFromInternetNameOrMIB, _carboncoreLib, "TECGetTextEncodingFromInternetNameOrMIB") })
-	_register("TECGetTextEncodingInternetName", func() { purego.RegisterLibFunc(&_fnTECGetTextEncodingInternetName, _carboncoreLib, "TECGetTextEncodingInternetName") })
+	_register("TECGetTextEncodingFromInternetName", func() {
+		purego.RegisterLibFunc(&_fnTECGetTextEncodingFromInternetName, _carboncoreLib, "TECGetTextEncodingFromInternetName")
+	})
+	_register("TECGetTextEncodingFromInternetNameOrMIB", func() {
+		purego.RegisterLibFunc(&_fnTECGetTextEncodingFromInternetNameOrMIB, _carboncoreLib, "TECGetTextEncodingFromInternetNameOrMIB")
+	})
+	_register("TECGetTextEncodingInternetName", func() {
+		purego.RegisterLibFunc(&_fnTECGetTextEncodingInternetName, _carboncoreLib, "TECGetTextEncodingInternetName")
+	})
 	_register("TECGetWebTextEncodings", func() { purego.RegisterLibFunc(&_fnTECGetWebTextEncodings, _carboncoreLib, "TECGetWebTextEncodings") })
 	_register("TECSetBasicOptions", func() { purego.RegisterLibFunc(&_fnTECSetBasicOptions, _carboncoreLib, "TECSetBasicOptions") })
 	_register("TECSniffTextEncoding", func() { purego.RegisterLibFunc(&_fnTECSniffTextEncoding, _carboncoreLib, "TECSniffTextEncoding") })
@@ -839,8 +1215,12 @@ func _loadLibrary() {
 	_register("ThreadCurrentStackSpace", func() { purego.RegisterLibFunc(&_fnThreadCurrentStackSpace, _carboncoreLib, "ThreadCurrentStackSpace") })
 	_register("ThreadEndCritical", func() { purego.RegisterLibFunc(&_fnThreadEndCritical, _carboncoreLib, "ThreadEndCritical") })
 	_register("TickCount", func() { purego.RegisterLibFunc(&_fnTickCount, _carboncoreLib, "TickCount") })
-	_register("TruncateForTextToUnicode", func() { purego.RegisterLibFunc(&_fnTruncateForTextToUnicode, _carboncoreLib, "TruncateForTextToUnicode") })
-	_register("TruncateForUnicodeToText", func() { purego.RegisterLibFunc(&_fnTruncateForUnicodeToText, _carboncoreLib, "TruncateForUnicodeToText") })
+	_register("TruncateForTextToUnicode", func() {
+		purego.RegisterLibFunc(&_fnTruncateForTextToUnicode, _carboncoreLib, "TruncateForTextToUnicode")
+	})
+	_register("TruncateForUnicodeToText", func() {
+		purego.RegisterLibFunc(&_fnTruncateForUnicodeToText, _carboncoreLib, "TruncateForUnicodeToText")
+	})
 	_register("U32SetU", func() { purego.RegisterLibFunc(&_fnU32SetU, _carboncoreLib, "U32SetU") })
 	_register("U64Add", func() { purego.RegisterLibFunc(&_fnU64Add, _carboncoreLib, "U64Add") })
 	_register("U64And", func() { purego.RegisterLibFunc(&_fnU64And, _carboncoreLib, "U64And") })
@@ -866,37 +1246,71 @@ func _loadLibrary() {
 	_register("UCCompareText", func() { purego.RegisterLibFunc(&_fnUCCompareText, _carboncoreLib, "UCCompareText") })
 	_register("UCCompareTextDefault", func() { purego.RegisterLibFunc(&_fnUCCompareTextDefault, _carboncoreLib, "UCCompareTextDefault") })
 	_register("UCCompareTextNoLocale", func() { purego.RegisterLibFunc(&_fnUCCompareTextNoLocale, _carboncoreLib, "UCCompareTextNoLocale") })
-	_register("UCConvertCFAbsoluteTimeToLongDateTime", func() { purego.RegisterLibFunc(&_fnUCConvertCFAbsoluteTimeToLongDateTime, _carboncoreLib, "UCConvertCFAbsoluteTimeToLongDateTime") })
-	_register("UCConvertCFAbsoluteTimeToSeconds", func() { purego.RegisterLibFunc(&_fnUCConvertCFAbsoluteTimeToSeconds, _carboncoreLib, "UCConvertCFAbsoluteTimeToSeconds") })
-	_register("UCConvertCFAbsoluteTimeToUTCDateTime", func() { purego.RegisterLibFunc(&_fnUCConvertCFAbsoluteTimeToUTCDateTime, _carboncoreLib, "UCConvertCFAbsoluteTimeToUTCDateTime") })
-	_register("UCConvertLongDateTimeToCFAbsoluteTime", func() { purego.RegisterLibFunc(&_fnUCConvertLongDateTimeToCFAbsoluteTime, _carboncoreLib, "UCConvertLongDateTimeToCFAbsoluteTime") })
-	_register("UCConvertSecondsToCFAbsoluteTime", func() { purego.RegisterLibFunc(&_fnUCConvertSecondsToCFAbsoluteTime, _carboncoreLib, "UCConvertSecondsToCFAbsoluteTime") })
-	_register("UCConvertUTCDateTimeToCFAbsoluteTime", func() { purego.RegisterLibFunc(&_fnUCConvertUTCDateTimeToCFAbsoluteTime, _carboncoreLib, "UCConvertUTCDateTimeToCFAbsoluteTime") })
+	_register("UCConvertCFAbsoluteTimeToLongDateTime", func() {
+		purego.RegisterLibFunc(&_fnUCConvertCFAbsoluteTimeToLongDateTime, _carboncoreLib, "UCConvertCFAbsoluteTimeToLongDateTime")
+	})
+	_register("UCConvertCFAbsoluteTimeToSeconds", func() {
+		purego.RegisterLibFunc(&_fnUCConvertCFAbsoluteTimeToSeconds, _carboncoreLib, "UCConvertCFAbsoluteTimeToSeconds")
+	})
+	_register("UCConvertCFAbsoluteTimeToUTCDateTime", func() {
+		purego.RegisterLibFunc(&_fnUCConvertCFAbsoluteTimeToUTCDateTime, _carboncoreLib, "UCConvertCFAbsoluteTimeToUTCDateTime")
+	})
+	_register("UCConvertLongDateTimeToCFAbsoluteTime", func() {
+		purego.RegisterLibFunc(&_fnUCConvertLongDateTimeToCFAbsoluteTime, _carboncoreLib, "UCConvertLongDateTimeToCFAbsoluteTime")
+	})
+	_register("UCConvertSecondsToCFAbsoluteTime", func() {
+		purego.RegisterLibFunc(&_fnUCConvertSecondsToCFAbsoluteTime, _carboncoreLib, "UCConvertSecondsToCFAbsoluteTime")
+	})
+	_register("UCConvertUTCDateTimeToCFAbsoluteTime", func() {
+		purego.RegisterLibFunc(&_fnUCConvertUTCDateTimeToCFAbsoluteTime, _carboncoreLib, "UCConvertUTCDateTimeToCFAbsoluteTime")
+	})
 	_register("UCCreateCollator", func() { purego.RegisterLibFunc(&_fnUCCreateCollator, _carboncoreLib, "UCCreateCollator") })
-	_register("UCCreateTextBreakLocator", func() { purego.RegisterLibFunc(&_fnUCCreateTextBreakLocator, _carboncoreLib, "UCCreateTextBreakLocator") })
+	_register("UCCreateTextBreakLocator", func() {
+		purego.RegisterLibFunc(&_fnUCCreateTextBreakLocator, _carboncoreLib, "UCCreateTextBreakLocator")
+	})
 	_register("UCDisposeCollator", func() { purego.RegisterLibFunc(&_fnUCDisposeCollator, _carboncoreLib, "UCDisposeCollator") })
-	_register("UCDisposeTextBreakLocator", func() { purego.RegisterLibFunc(&_fnUCDisposeTextBreakLocator, _carboncoreLib, "UCDisposeTextBreakLocator") })
+	_register("UCDisposeTextBreakLocator", func() {
+		purego.RegisterLibFunc(&_fnUCDisposeTextBreakLocator, _carboncoreLib, "UCDisposeTextBreakLocator")
+	})
 	_register("UCFindTextBreak", func() { purego.RegisterLibFunc(&_fnUCFindTextBreak, _carboncoreLib, "UCFindTextBreak") })
 	_register("UCGetCharProperty", func() { purego.RegisterLibFunc(&_fnUCGetCharProperty, _carboncoreLib, "UCGetCharProperty") })
 	_register("UCGetCollationKey", func() { purego.RegisterLibFunc(&_fnUCGetCollationKey, _carboncoreLib, "UCGetCollationKey") })
-	_register("UCGetUnicodeScalarValueForSurrogatePair", func() { purego.RegisterLibFunc(&_fnUCGetUnicodeScalarValueForSurrogatePair, _carboncoreLib, "UCGetUnicodeScalarValueForSurrogatePair") })
-	_register("UCIsSurrogateHighCharacter", func() { purego.RegisterLibFunc(&_fnUCIsSurrogateHighCharacter, _carboncoreLib, "UCIsSurrogateHighCharacter") })
-	_register("UCIsSurrogateLowCharacter", func() { purego.RegisterLibFunc(&_fnUCIsSurrogateLowCharacter, _carboncoreLib, "UCIsSurrogateLowCharacter") })
+	_register("UCGetUnicodeScalarValueForSurrogatePair", func() {
+		purego.RegisterLibFunc(&_fnUCGetUnicodeScalarValueForSurrogatePair, _carboncoreLib, "UCGetUnicodeScalarValueForSurrogatePair")
+	})
+	_register("UCIsSurrogateHighCharacter", func() {
+		purego.RegisterLibFunc(&_fnUCIsSurrogateHighCharacter, _carboncoreLib, "UCIsSurrogateHighCharacter")
+	})
+	_register("UCIsSurrogateLowCharacter", func() {
+		purego.RegisterLibFunc(&_fnUCIsSurrogateLowCharacter, _carboncoreLib, "UCIsSurrogateLowCharacter")
+	})
 	_register("UCKeyTranslate", func() { purego.RegisterLibFunc(&_fnUCKeyTranslate, _carboncoreLib, "UCKeyTranslate") })
-	_register("UCTypeSelectAddKeyToSelector", func() { purego.RegisterLibFunc(&_fnUCTypeSelectAddKeyToSelector, _carboncoreLib, "UCTypeSelectAddKeyToSelector") })
+	_register("UCTypeSelectAddKeyToSelector", func() {
+		purego.RegisterLibFunc(&_fnUCTypeSelectAddKeyToSelector, _carboncoreLib, "UCTypeSelectAddKeyToSelector")
+	})
 	_register("UCTypeSelectCompare", func() { purego.RegisterLibFunc(&_fnUCTypeSelectCompare, _carboncoreLib, "UCTypeSelectCompare") })
-	_register("UCTypeSelectCreateSelector", func() { purego.RegisterLibFunc(&_fnUCTypeSelectCreateSelector, _carboncoreLib, "UCTypeSelectCreateSelector") })
+	_register("UCTypeSelectCreateSelector", func() {
+		purego.RegisterLibFunc(&_fnUCTypeSelectCreateSelector, _carboncoreLib, "UCTypeSelectCreateSelector")
+	})
 	_register("UCTypeSelectFindItem", func() { purego.RegisterLibFunc(&_fnUCTypeSelectFindItem, _carboncoreLib, "UCTypeSelectFindItem") })
-	_register("UCTypeSelectFlushSelectorData", func() { purego.RegisterLibFunc(&_fnUCTypeSelectFlushSelectorData, _carboncoreLib, "UCTypeSelectFlushSelectorData") })
-	_register("UCTypeSelectReleaseSelector", func() { purego.RegisterLibFunc(&_fnUCTypeSelectReleaseSelector, _carboncoreLib, "UCTypeSelectReleaseSelector") })
+	_register("UCTypeSelectFlushSelectorData", func() {
+		purego.RegisterLibFunc(&_fnUCTypeSelectFlushSelectorData, _carboncoreLib, "UCTypeSelectFlushSelectorData")
+	})
+	_register("UCTypeSelectReleaseSelector", func() {
+		purego.RegisterLibFunc(&_fnUCTypeSelectReleaseSelector, _carboncoreLib, "UCTypeSelectReleaseSelector")
+	})
 	_register("UCTypeSelectWalkList", func() { purego.RegisterLibFunc(&_fnUCTypeSelectWalkList, _carboncoreLib, "UCTypeSelectWalkList") })
-	_register("UCTypeSelectWouldResetBuffer", func() { purego.RegisterLibFunc(&_fnUCTypeSelectWouldResetBuffer, _carboncoreLib, "UCTypeSelectWouldResetBuffer") })
+	_register("UCTypeSelectWouldResetBuffer", func() {
+		purego.RegisterLibFunc(&_fnUCTypeSelectWouldResetBuffer, _carboncoreLib, "UCTypeSelectWouldResetBuffer")
+	})
 	_register("UInt64ToLongDouble", func() { purego.RegisterLibFunc(&_fnUInt64ToLongDouble, _carboncoreLib, "UInt64ToLongDouble") })
 	_register("UInt64ToSInt64", func() { purego.RegisterLibFunc(&_fnUInt64ToSInt64, _carboncoreLib, "UInt64ToSInt64") })
 	_register("UInt64ToUnsignedWide", func() { purego.RegisterLibFunc(&_fnUInt64ToUnsignedWide, _carboncoreLib, "UInt64ToUnsignedWide") })
 	_register("UncaptureComponent", func() { purego.RegisterLibFunc(&_fnUncaptureComponent, _carboncoreLib, "UncaptureComponent") })
 	_register("UnflattenCollection", func() { purego.RegisterLibFunc(&_fnUnflattenCollection, _carboncoreLib, "UnflattenCollection") })
-	_register("UnflattenCollectionFromHdl", func() { purego.RegisterLibFunc(&_fnUnflattenCollectionFromHdl, _carboncoreLib, "UnflattenCollectionFromHdl") })
+	_register("UnflattenCollectionFromHdl", func() {
+		purego.RegisterLibFunc(&_fnUnflattenCollectionFromHdl, _carboncoreLib, "UnflattenCollectionFromHdl")
+	})
 	_register("Unique1ID", func() { purego.RegisterLibFunc(&_fnUnique1ID, _carboncoreLib, "Unique1ID") })
 	_register("UniqueID", func() { purego.RegisterLibFunc(&_fnUniqueID, _carboncoreLib, "UniqueID") })
 	_register("UnregisterComponent", func() { purego.RegisterLibFunc(&_fnUnregisterComponent, _carboncoreLib, "UnregisterComponent") })
@@ -904,7 +1318,9 @@ func _loadLibrary() {
 	_register("UnsignedWideToUInt64", func() { purego.RegisterLibFunc(&_fnUnsignedWideToUInt64, _carboncoreLib, "UnsignedWideToUInt64") })
 	_register("UpTime", func() { purego.RegisterLibFunc(&_fnUpTime, _carboncoreLib, "UpTime") })
 	_register("UpdateResFile", func() { purego.RegisterLibFunc(&_fnUpdateResFile, _carboncoreLib, "UpdateResFile") })
-	_register("UpgradeScriptInfoToTextEncoding", func() { purego.RegisterLibFunc(&_fnUpgradeScriptInfoToTextEncoding, _carboncoreLib, "UpgradeScriptInfoToTextEncoding") })
+	_register("UpgradeScriptInfoToTextEncoding", func() {
+		purego.RegisterLibFunc(&_fnUpgradeScriptInfoToTextEncoding, _carboncoreLib, "UpgradeScriptInfoToTextEncoding")
+	})
 	_register("UseResFile", func() { purego.RegisterLibFunc(&_fnUseResFile, _carboncoreLib, "UseResFile") })
 	_register("WideAdd", func() { purego.RegisterLibFunc(&_fnWideAdd, _carboncoreLib, "WideAdd") })
 	_register("WideBitShift", func() { purego.RegisterLibFunc(&_fnWideBitShift, _carboncoreLib, "WideBitShift") })

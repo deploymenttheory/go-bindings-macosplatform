@@ -74,4 +74,3 @@ type Airlineable interface {
 }
 
 var _ Airlineable = (*Airline)(nil)
-

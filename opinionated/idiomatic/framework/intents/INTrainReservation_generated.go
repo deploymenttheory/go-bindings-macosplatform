@@ -72,4 +72,3 @@ type TrainReservationable interface {
 }
 
 var _ TrainReservationable = (*TrainReservation)(nil)
-

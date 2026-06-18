@@ -105,7 +105,9 @@ func (x *MTRCommissioningParameters) WithExtraAttributesToRead(items ...*raw.MTR
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.MTRAttributeRequestPath](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -349,4 +351,3 @@ type MTRCommissioningParametersable interface {
 }
 
 var _ MTRCommissioningParametersable = (*MTRCommissioningParameters)(nil)
-

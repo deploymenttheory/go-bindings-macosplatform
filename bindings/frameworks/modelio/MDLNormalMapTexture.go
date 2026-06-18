@@ -16,7 +16,7 @@ type MDLNormalMapTexture struct {
 }
 
 var (
-	_clsMDLNormalMapTexture = _objcClass("MDLNormalMapTexture")
+	_clsMDLNormalMapTexture                                                           = _objcClass("MDLNormalMapTexture")
 	_mDLNormalMapTextureSelInitByGeneratingNormalMapWithTextureNameSmoothnessContrast = objc.RegisterName("initByGeneratingNormalMapWithTexture:name:smoothness:contrast:")
 )
 
@@ -32,7 +32,8 @@ func MDLNormalMapTextureFromID(id objc.ID) *MDLNormalMapTexture {
 
 func (o *MDLNormalMapTexture) InitByGeneratingNormalMapWithTextureNameSmoothnessContrast(sourceTexture *MDLTexture, name *foundation.NSString, smoothness float32, contrast float32) *MDLNormalMapTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLNormalMapTextureSelInitByGeneratingNormalMapWithTextureNameSmoothnessContrast, sourceTexture.Ptr(), name.Ptr(), smoothness, contrast)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLNormalMapTextureFromID(_ret)
 }
-

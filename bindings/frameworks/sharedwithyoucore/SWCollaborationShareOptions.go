@@ -16,16 +16,16 @@ type SWCollaborationShareOptions struct {
 }
 
 var (
-	_clsSWCollaborationShareOptions = _objcClass("SWCollaborationShareOptions")
-	_sWCollaborationShareOptionsSelInitWithOptionsGroupsSummary = objc.RegisterName("initWithOptionsGroups:summary:")
-	_sWCollaborationShareOptionsSelInitWithOptionsGroups = objc.RegisterName("initWithOptionsGroups:")
+	_clsSWCollaborationShareOptions                                     = _objcClass("SWCollaborationShareOptions")
+	_sWCollaborationShareOptionsSelInitWithOptionsGroupsSummary         = objc.RegisterName("initWithOptionsGroups:summary:")
+	_sWCollaborationShareOptionsSelInitWithOptionsGroups                = objc.RegisterName("initWithOptionsGroups:")
 	_sWCollaborationShareOptionsSelShareOptionsWithOptionsGroupsSummary = objc.RegisterName("shareOptionsWithOptionsGroups:summary:")
-	_sWCollaborationShareOptionsSelShareOptionsWithOptionsGroups = objc.RegisterName("shareOptionsWithOptionsGroups:")
-	_sWCollaborationShareOptionsSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_sWCollaborationShareOptionsSelOptionsGroups = objc.RegisterName("optionsGroups")
-	_sWCollaborationShareOptionsSelSetOptionsGroups = objc.RegisterName("setOptionsGroups:")
-	_sWCollaborationShareOptionsSelSummary = objc.RegisterName("summary")
-	_sWCollaborationShareOptionsSelSetSummary = objc.RegisterName("setSummary:")
+	_sWCollaborationShareOptionsSelShareOptionsWithOptionsGroups        = objc.RegisterName("shareOptionsWithOptionsGroups:")
+	_sWCollaborationShareOptionsSelInitWithCoder                        = objc.RegisterName("initWithCoder:")
+	_sWCollaborationShareOptionsSelOptionsGroups                        = objc.RegisterName("optionsGroups")
+	_sWCollaborationShareOptionsSelSetOptionsGroups                     = objc.RegisterName("setOptionsGroups:")
+	_sWCollaborationShareOptionsSelSummary                              = objc.RegisterName("summary")
+	_sWCollaborationShareOptionsSelSetSummary                           = objc.RegisterName("setSummary:")
 )
 
 func SWCollaborationShareOptionsFromID(id objc.ID) *SWCollaborationShareOptions {
@@ -41,40 +41,52 @@ func SWCollaborationShareOptionsFromID(id objc.ID) *SWCollaborationShareOptions 
 // @abstract Initializes a shareOptions object to represent the available collaboration options for the document and a summary of the selected options @param optionsGroups SWCollaborationOptionsGroups to customize how the collaboration will be shared @param summary localized string to summarize the selected collaboration options
 func (o *SWCollaborationShareOptions) InitWithOptionsGroupsSummary(optionsGroups *foundation.NSArray[*SWCollaborationOptionsGroup], summary *foundation.NSString) *SWCollaborationShareOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationShareOptionsSelInitWithOptionsGroupsSummary, optionsGroups.Ptr(), summary.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SWCollaborationShareOptionsFromID(_ret)
 }
 
 // @abstract Initializes a shareOptions object to represent the available collaboration options for the document and the default summary string "Share Options" @param optionsGroups SWCollaborationOptionsGroups to customize how the collaboration will be shared
 func (o *SWCollaborationShareOptions) InitWithOptionsGroups(optionsGroups *foundation.NSArray[*SWCollaborationOptionsGroup]) *SWCollaborationShareOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationShareOptionsSelInitWithOptionsGroups, optionsGroups.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SWCollaborationShareOptionsFromID(_ret)
 }
 
 // @abstract Creates a shareOptions object to represent the available collaboration options for the document and a summary of the selected options @param optionsGroups SWCollaborationOptionsGroups to customize how the collaboration will be shared @param summary localized string to summarize the selected collaboration options
 func SWCollaborationShareOptionsShareOptionsWithOptionsGroupsSummary(optionsGroups *foundation.NSArray[*SWCollaborationOptionsGroup], summary *foundation.NSString) *SWCollaborationShareOptions {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSWCollaborationShareOptions), _sWCollaborationShareOptionsSelShareOptionsWithOptionsGroupsSummary, optionsGroups.Ptr(), summary.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SWCollaborationShareOptionsFromID(_ret)
 }
 
 func SWCollaborationShareOptionsShareOptionsWithOptionsGroups(optionsGroups *foundation.NSArray[*SWCollaborationOptionsGroup]) *SWCollaborationShareOptions {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSWCollaborationShareOptions), _sWCollaborationShareOptionsSelShareOptionsWithOptionsGroups, optionsGroups.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SWCollaborationShareOptionsFromID(_ret)
 }
 
 func (o *SWCollaborationShareOptions) InitWithCoder(coder *foundation.NSCoder) *SWCollaborationShareOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationShareOptionsSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SWCollaborationShareOptionsFromID(_ret)
 }
 
 // @abstract SWCollaborationOptionsGroups to customize how the collaboration will be shared
 func (o *SWCollaborationShareOptions) OptionsGroups() *foundation.NSArray[*SWCollaborationOptionsGroup] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationShareOptionsSelOptionsGroups)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SWCollaborationOptionsGroup](_ret)
 }
 
@@ -85,11 +97,12 @@ func (o *SWCollaborationShareOptions) SetOptionsGroups(optionsGroups *foundation
 // @abstract Localized string to summarize the selected collaboration options. If nil, "Share Options" will be displayed by default.
 func (o *SWCollaborationShareOptions) Summary() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationShareOptionsSelSummary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *SWCollaborationShareOptions) SetSummary(summary *foundation.NSString) {
 	o.Ptr().Send(_sWCollaborationShareOptionsSelSetSummary, summary.Ptr())
 }
-

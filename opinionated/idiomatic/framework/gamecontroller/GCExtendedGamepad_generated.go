@@ -226,7 +226,9 @@ func (x *ExtendedGamepad) RightThumbstickButton() *ControllerButtonInput {
 
 func (x *ExtendedGamepad) asExtendedGamepad() *raw.GCExtendedGamepad { return x.inner }
 
-func (x *ExtendedGamepad) asPhysicalInputProfile() *raw.GCPhysicalInputProfile { return &x.inner.GCPhysicalInputProfile }
+func (x *ExtendedGamepad) asPhysicalInputProfile() *raw.GCPhysicalInputProfile {
+	return &x.inner.GCPhysicalInputProfile
+}
 
 // ExtendedGamepadable is the interface implemented by [ExtendedGamepad], for mocking and DI.
 type ExtendedGamepadable interface {
@@ -257,4 +259,3 @@ type ExtendedGamepadable interface {
 }
 
 var _ ExtendedGamepadable = (*ExtendedGamepad)(nil)
-

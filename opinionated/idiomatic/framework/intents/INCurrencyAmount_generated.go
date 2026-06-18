@@ -60,4 +60,3 @@ type CurrencyAmountable interface {
 }
 
 var _ CurrencyAmountable = (*CurrencyAmount)(nil)
-

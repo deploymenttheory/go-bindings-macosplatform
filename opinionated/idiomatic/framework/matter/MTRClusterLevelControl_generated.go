@@ -300,9 +300,13 @@ func (x *MTRClusterLevelControl) MoveToClosestFrequencyWithParamsExpectedValuesE
 	x.inner.MoveToClosestFrequencyWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
 }
 
-func (x *MTRClusterLevelControl) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterLevelControl) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterLevelControl) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterLevelControl) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterLevelControlable is the interface implemented by [MTRClusterLevelControl], for mocking and DI.
 type MTRClusterLevelControlable interface {
@@ -361,4 +365,3 @@ type MTRClusterLevelControlable interface {
 }
 
 var _ MTRClusterLevelControlable = (*MTRClusterLevelControl)(nil)
-

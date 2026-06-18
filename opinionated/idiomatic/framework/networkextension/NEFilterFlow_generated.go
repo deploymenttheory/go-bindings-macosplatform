@@ -74,4 +74,3 @@ type NEFilterFlowable interface {
 }
 
 var _ NEFilterFlowable = (*NEFilterFlow)(nil)
-

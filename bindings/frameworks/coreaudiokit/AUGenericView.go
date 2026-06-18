@@ -17,12 +17,12 @@ type AUGenericView struct {
 }
 
 var (
-	_clsAUGenericView = _objcClass("AUGenericView")
-	_aUGenericViewSelInitWithAudioUnit = objc.RegisterName("initWithAudioUnit:")
+	_clsAUGenericView                              = _objcClass("AUGenericView")
+	_aUGenericViewSelInitWithAudioUnit             = objc.RegisterName("initWithAudioUnit:")
 	_aUGenericViewSelInitWithAudioUnitDisplayFlags = objc.RegisterName("initWithAudioUnit:displayFlags:")
-	_aUGenericViewSelAudioUnit = objc.RegisterName("audioUnit")
-	_aUGenericViewSelShowsExpertParameters = objc.RegisterName("showsExpertParameters")
-	_aUGenericViewSelSetShowsExpertParameters = objc.RegisterName("setShowsExpertParameters:")
+	_aUGenericViewSelAudioUnit                     = objc.RegisterName("audioUnit")
+	_aUGenericViewSelShowsExpertParameters         = objc.RegisterName("showsExpertParameters")
+	_aUGenericViewSelSetShowsExpertParameters      = objc.RegisterName("setShowsExpertParameters:")
 )
 
 func AUGenericViewFromID(id objc.ID) *AUGenericView {
@@ -38,14 +38,18 @@ func AUGenericViewFromID(id objc.ID) *AUGenericView {
 // @method initWithAudioUnit: @abstract initializer used to create the view for a specific audio unit @param au  The Audio Unit associated with the view @result  Returns the newly created view object
 func (o *AUGenericView) InitWithAudioUnit(au *carboncore.ComponentInstanceRecord) *AUGenericView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUGenericViewSelInitWithAudioUnit, au)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AUGenericViewFromID(_ret)
 }
 
 // @method initWithAudioUnit:displayFlags: @abstract initializer used to create the view for a specific audio unit with a parameter for view flags @param au  The Audio Unit associated with the view @param inFlags  The flags specifying display properties (multiple flags can be combined using the or '|' operator) @result  Returns the newly created view object
 func (o *AUGenericView) InitWithAudioUnitDisplayFlags(inAudioUnit *carboncore.ComponentInstanceRecord, inFlags AUGenericViewDisplayFlags) *AUGenericView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUGenericViewSelInitWithAudioUnitDisplayFlags, inAudioUnit, inFlags)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AUGenericViewFromID(_ret)
 }
 
@@ -62,4 +66,3 @@ func (o *AUGenericView) ShowsExpertParameters() bool {
 func (o *AUGenericView) SetShowsExpertParameters(showsExpertParameters bool) {
 	o.Ptr().Send(_aUGenericViewSelSetShowsExpertParameters, showsExpertParameters)
 }
-

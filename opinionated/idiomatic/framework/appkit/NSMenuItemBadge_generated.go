@@ -80,4 +80,3 @@ type MenuItemBadgeable interface {
 }
 
 var _ MenuItemBadgeable = (*MenuItemBadge)(nil)
-

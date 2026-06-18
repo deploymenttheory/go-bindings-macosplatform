@@ -130,4 +130,3 @@ type Drawingable interface {
 }
 
 var _ Drawingable = (*Drawing)(nil)
-

@@ -11,4 +11,3 @@ func SAErrorDomain() uintptr {
 	ptr, _ := purego.Dlsym(_safetykitLib, "SAErrorDomain")
 	return ptr
 }
-

@@ -15,13 +15,13 @@ type MLCFullyConnectedLayer struct {
 }
 
 var (
-	_clsMLCFullyConnectedLayer = _objcClass("MLCFullyConnectedLayer")
+	_clsMLCFullyConnectedLayer                                 = _objcClass("MLCFullyConnectedLayer")
 	_mLCFullyConnectedLayerSelLayerWithWeightsBiasesDescriptor = objc.RegisterName("layerWithWeights:biases:descriptor:")
-	_mLCFullyConnectedLayerSelDescriptor = objc.RegisterName("descriptor")
-	_mLCFullyConnectedLayerSelWeights = objc.RegisterName("weights")
-	_mLCFullyConnectedLayerSelBiases = objc.RegisterName("biases")
-	_mLCFullyConnectedLayerSelWeightsParameter = objc.RegisterName("weightsParameter")
-	_mLCFullyConnectedLayerSelBiasesParameter = objc.RegisterName("biasesParameter")
+	_mLCFullyConnectedLayerSelDescriptor                       = objc.RegisterName("descriptor")
+	_mLCFullyConnectedLayerSelWeights                          = objc.RegisterName("weights")
+	_mLCFullyConnectedLayerSelBiases                           = objc.RegisterName("biases")
+	_mLCFullyConnectedLayerSelWeightsParameter                 = objc.RegisterName("weightsParameter")
+	_mLCFullyConnectedLayerSelBiasesParameter                  = objc.RegisterName("biasesParameter")
 )
 
 func MLCFullyConnectedLayerFromID(id objc.ID) *MLCFullyConnectedLayer {
@@ -37,42 +37,53 @@ func MLCFullyConnectedLayerFromID(id objc.ID) *MLCFullyConnectedLayer {
 // @abstract   Create a fully connected layer @param      weights        The weights tensor @param      biases         The bias tensor @param      descriptor     The convolution descriptor @return     A new fully connected layer
 func MLCFullyConnectedLayerLayerWithWeightsBiasesDescriptor(weights *MLCTensor, biases *MLCTensor, descriptor *MLCConvolutionDescriptor) *MLCFullyConnectedLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCFullyConnectedLayer), _mLCFullyConnectedLayerSelLayerWithWeightsBiasesDescriptor, weights.Ptr(), biases.Ptr(), descriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCFullyConnectedLayerFromID(_ret)
 }
 
 // @property   descriptor @abstract   The convolution descriptor
 func (o *MLCFullyConnectedLayer) Descriptor() *MLCConvolutionDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCFullyConnectedLayerSelDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCConvolutionDescriptorFromID(_ret)
 }
 
 // @property   weights @abstract   The weights tensor used by the convolution layer
 func (o *MLCFullyConnectedLayer) Weights() *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCFullyConnectedLayerSelWeights)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @property   biases @abstract   The bias tensor used by the convolution layer
 func (o *MLCFullyConnectedLayer) Biases() *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCFullyConnectedLayerSelBiases)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @property   weightsParameter @abstract   The weights tensor parameter used for optimizer update
 func (o *MLCFullyConnectedLayer) WeightsParameter() *MLCTensorParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCFullyConnectedLayerSelWeightsParameter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorParameterFromID(_ret)
 }
 
 // @property   biasesParameter @abstract   The bias tensor parameter used for optimizer update
 func (o *MLCFullyConnectedLayer) BiasesParameter() *MLCTensorParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCFullyConnectedLayerSelBiasesParameter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorParameterFromID(_ret)
 }
-

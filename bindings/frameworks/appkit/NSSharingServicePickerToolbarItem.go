@@ -15,8 +15,8 @@ type NSSharingServicePickerToolbarItem struct {
 }
 
 var (
-	_clsNSSharingServicePickerToolbarItem = _objcClass("NSSharingServicePickerToolbarItem")
-	_nSSharingServicePickerToolbarItemSelDelegate = objc.RegisterName("delegate")
+	_clsNSSharingServicePickerToolbarItem            = _objcClass("NSSharingServicePickerToolbarItem")
+	_nSSharingServicePickerToolbarItemSelDelegate    = objc.RegisterName("delegate")
 	_nSSharingServicePickerToolbarItemSelSetDelegate = objc.RegisterName("setDelegate:")
 )
 
@@ -38,4 +38,3 @@ func (o *NSSharingServicePickerToolbarItem) Delegate() NSSharingServicePickerToo
 func (o *NSSharingServicePickerToolbarItem) SetDelegate(delegate NSSharingServicePickerToolbarItemDelegate) {
 	o.Ptr().Send(_nSSharingServicePickerToolbarItemSelSetDelegate, delegate)
 }
-

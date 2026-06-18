@@ -16,13 +16,13 @@ type MDLTextureSampler struct {
 }
 
 var (
-	_clsMDLTextureSampler = _objcClass("MDLTextureSampler")
-	_mDLTextureSamplerSelTexture = objc.RegisterName("texture")
-	_mDLTextureSamplerSelSetTexture = objc.RegisterName("setTexture:")
-	_mDLTextureSamplerSelHardwareFilter = objc.RegisterName("hardwareFilter")
+	_clsMDLTextureSampler                  = _objcClass("MDLTextureSampler")
+	_mDLTextureSamplerSelTexture           = objc.RegisterName("texture")
+	_mDLTextureSamplerSelSetTexture        = objc.RegisterName("setTexture:")
+	_mDLTextureSamplerSelHardwareFilter    = objc.RegisterName("hardwareFilter")
 	_mDLTextureSamplerSelSetHardwareFilter = objc.RegisterName("setHardwareFilter:")
-	_mDLTextureSamplerSelTransform = objc.RegisterName("transform")
-	_mDLTextureSamplerSelSetTransform = objc.RegisterName("setTransform:")
+	_mDLTextureSamplerSelTransform         = objc.RegisterName("transform")
+	_mDLTextureSamplerSelSetTransform      = objc.RegisterName("setTransform:")
 )
 
 func MDLTextureSamplerFromID(id objc.ID) *MDLTextureSampler {
@@ -37,7 +37,9 @@ func MDLTextureSamplerFromID(id objc.ID) *MDLTextureSampler {
 
 func (o *MDLTextureSampler) Texture() *MDLTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTextureSamplerSelTexture)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLTextureFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MDLTextureSampler) SetTexture(texture *MDLTexture) {
 
 func (o *MDLTextureSampler) HardwareFilter() *MDLTextureFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTextureSamplerSelHardwareFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLTextureFilterFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *MDLTextureSampler) SetHardwareFilter(hardwareFilter *MDLTextureFilter) 
 
 func (o *MDLTextureSampler) Transform() *MDLTransform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTextureSamplerSelTransform)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLTransformFromID(_ret)
 }
 
 func (o *MDLTextureSampler) SetTransform(transform *MDLTransform) {
 	o.Ptr().Send(_mDLTextureSamplerSelSetTransform, transform.Ptr())
 }
-

@@ -17,7 +17,7 @@ type MPSNNConcatenationGradientNode struct {
 }
 
 var (
-	_clsMPSNNConcatenationGradientNode = _objcClass("MPSNNConcatenationGradientNode")
+	_clsMPSNNConcatenationGradientNode                                               = _objcClass("MPSNNConcatenationGradientNode")
 	_mPSNNConcatenationGradientNodeSelNodeWithSourceGradientSourceImageGradientState = objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:")
 	_mPSNNConcatenationGradientNodeSelInitWithSourceGradientSourceImageGradientState = objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:")
 )
@@ -35,14 +35,17 @@ func MPSNNConcatenationGradientNodeFromID(id objc.ID) *MPSNNConcatenationGradien
 // @abstract       create a MPSNNConcatenationGradientNode @discussion     Generally you should use [MPSNNConcatenationNode gradientFiltersWithSources:] instead. @param          gradientSourceNode  The gradient image functioning as input for the operator @param          sourceImage         The particular input image to the concatentation, if any, that the slice corresponds with @param          gradientState       The gradient state produced by the concatenation filter, consumed by this filter
 func MPSNNConcatenationGradientNodeNodeWithSourceGradientSourceImageGradientState(gradientSourceNode *MPSNNImageNode, sourceImage *MPSNNImageNode, gradientState *MPSNNGradientStateNode) *MPSNNConcatenationGradientNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNConcatenationGradientNode), _mPSNNConcatenationGradientNodeSelNodeWithSourceGradientSourceImageGradientState, gradientSourceNode.Ptr(), sourceImage.Ptr(), gradientState.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNConcatenationGradientNodeFromID(_ret)
 }
 
 // @abstract       Init a MPSNNConcatenationGradientNode @discussion     Generally you should use [MPSNNConcatenationNode gradientFiltersWithSources:] instead. @param          gradientSourceNode  The gradient image functioning as input for the operator @param          sourceImage         The particular input image to the concatentation, if any, that the slice corresponds with @param          gradientState       The gradient state produced by the concatenation filter, consumed by this filter
 func (o *MPSNNConcatenationGradientNode) InitWithSourceGradientSourceImageGradientState(gradientSourceNode *MPSNNImageNode, sourceImage *MPSNNImageNode, gradientState *MPSNNGradientStateNode) *MPSNNConcatenationGradientNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNConcatenationGradientNodeSelInitWithSourceGradientSourceImageGradientState, gradientSourceNode.Ptr(), sourceImage.Ptr(), gradientState.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNConcatenationGradientNodeFromID(_ret)
 }
-

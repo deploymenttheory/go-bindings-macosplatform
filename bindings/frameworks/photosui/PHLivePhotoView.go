@@ -18,23 +18,23 @@ type PHLivePhotoView struct {
 }
 
 var (
-	_clsPHLivePhotoView = _objcClass("PHLivePhotoView")
+	_clsPHLivePhotoView                       = _objcClass("PHLivePhotoView")
 	_pHLivePhotoViewSelStartPlaybackWithStyle = objc.RegisterName("startPlaybackWithStyle:")
-	_pHLivePhotoViewSelStopPlayback = objc.RegisterName("stopPlayback")
-	_pHLivePhotoViewSelStopPlaybackAnimated = objc.RegisterName("stopPlaybackAnimated:")
-	_pHLivePhotoViewSelDelegate = objc.RegisterName("delegate")
-	_pHLivePhotoViewSelSetDelegate = objc.RegisterName("setDelegate:")
-	_pHLivePhotoViewSelLivePhoto = objc.RegisterName("livePhoto")
-	_pHLivePhotoViewSelSetLivePhoto = objc.RegisterName("setLivePhoto:")
-	_pHLivePhotoViewSelContentMode = objc.RegisterName("contentMode")
-	_pHLivePhotoViewSelSetContentMode = objc.RegisterName("setContentMode:")
-	_pHLivePhotoViewSelContentsRect = objc.RegisterName("contentsRect")
-	_pHLivePhotoViewSelSetContentsRect = objc.RegisterName("setContentsRect:")
-	_pHLivePhotoViewSelAudioVolume = objc.RegisterName("audioVolume")
-	_pHLivePhotoViewSelSetAudioVolume = objc.RegisterName("setAudioVolume:")
-	_pHLivePhotoViewSelIsMuted = objc.RegisterName("isMuted")
-	_pHLivePhotoViewSelSetMuted = objc.RegisterName("setMuted:")
-	_pHLivePhotoViewSelLivePhotoBadgeView = objc.RegisterName("livePhotoBadgeView")
+	_pHLivePhotoViewSelStopPlayback           = objc.RegisterName("stopPlayback")
+	_pHLivePhotoViewSelStopPlaybackAnimated   = objc.RegisterName("stopPlaybackAnimated:")
+	_pHLivePhotoViewSelDelegate               = objc.RegisterName("delegate")
+	_pHLivePhotoViewSelSetDelegate            = objc.RegisterName("setDelegate:")
+	_pHLivePhotoViewSelLivePhoto              = objc.RegisterName("livePhoto")
+	_pHLivePhotoViewSelSetLivePhoto           = objc.RegisterName("setLivePhoto:")
+	_pHLivePhotoViewSelContentMode            = objc.RegisterName("contentMode")
+	_pHLivePhotoViewSelSetContentMode         = objc.RegisterName("setContentMode:")
+	_pHLivePhotoViewSelContentsRect           = objc.RegisterName("contentsRect")
+	_pHLivePhotoViewSelSetContentsRect        = objc.RegisterName("setContentsRect:")
+	_pHLivePhotoViewSelAudioVolume            = objc.RegisterName("audioVolume")
+	_pHLivePhotoViewSelSetAudioVolume         = objc.RegisterName("setAudioVolume:")
+	_pHLivePhotoViewSelIsMuted                = objc.RegisterName("isMuted")
+	_pHLivePhotoViewSelSetMuted               = objc.RegisterName("setMuted:")
+	_pHLivePhotoViewSelLivePhotoBadgeView     = objc.RegisterName("livePhotoBadgeView")
 )
 
 func PHLivePhotoViewFromID(id objc.ID) *PHLivePhotoView {
@@ -73,7 +73,9 @@ func (o *PHLivePhotoView) SetDelegate(delegate PHLivePhotoViewDelegate) {
 // Live photo displayed in the receiver.
 func (o *PHLivePhotoView) LivePhoto() *photos.PHLivePhoto {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHLivePhotoViewSelLivePhoto)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return photos.PHLivePhotoFromID(_ret)
 }
 
@@ -128,7 +130,8 @@ func (o *PHLivePhotoView) SetMuted(muted bool) {
 // Directly access the livePhotoBadge in cases where it should be added to a different place in the view hierarchy and not the live photo view. This can be useful when the live photo view is added to a scroll view.
 func (o *PHLivePhotoView) LivePhotoBadgeView() *appkit.NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHLivePhotoViewSelLivePhotoBadgeView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSViewFromID(_ret)
 }
-

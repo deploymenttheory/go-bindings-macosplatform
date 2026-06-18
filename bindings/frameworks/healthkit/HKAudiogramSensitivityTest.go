@@ -18,13 +18,13 @@ type HKAudiogramSensitivityTest struct {
 }
 
 var (
-	_clsHKAudiogramSensitivityTest = _objcClass("HKAudiogramSensitivityTest")
+	_clsHKAudiogramSensitivityTest                                                    = _objcClass("HKAudiogramSensitivityTest")
 	_hKAudiogramSensitivityTestSelInitWithSensitivityTypeMaskedSideClampingRangeError = objc.RegisterName("initWithSensitivity:type:masked:side:clampingRange:error:")
-	_hKAudiogramSensitivityTestSelSensitivity = objc.RegisterName("sensitivity")
-	_hKAudiogramSensitivityTestSelType = objc.RegisterName("type")
-	_hKAudiogramSensitivityTestSelMasked = objc.RegisterName("masked")
-	_hKAudiogramSensitivityTestSelSide = objc.RegisterName("side")
-	_hKAudiogramSensitivityTestSelClampingRange = objc.RegisterName("clampingRange")
+	_hKAudiogramSensitivityTestSelSensitivity                                         = objc.RegisterName("sensitivity")
+	_hKAudiogramSensitivityTestSelType                                                = objc.RegisterName("type")
+	_hKAudiogramSensitivityTestSelMasked                                              = objc.RegisterName("masked")
+	_hKAudiogramSensitivityTestSelSide                                                = objc.RegisterName("side")
+	_hKAudiogramSensitivityTestSelClampingRange                                       = objc.RegisterName("clampingRange")
 )
 
 func HKAudiogramSensitivityTestFromID(id objc.ID) *HKAudiogramSensitivityTest {
@@ -41,7 +41,9 @@ func HKAudiogramSensitivityTestFromID(id objc.ID) *HKAudiogramSensitivityTest {
 func (o *HKAudiogramSensitivityTest) InitWithSensitivityTypeMaskedSideClampingRangeError(sensitivity *HKQuantity, type_ HKAudiogramConductionType, masked bool, side HKAudiogramSensitivityTestSide, clampingRange *HKAudiogramSensitivityPointClampingRange) (*HKAudiogramSensitivityTest, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKAudiogramSensitivityTestSelInitWithSensitivityTypeMaskedSideClampingRangeError, sensitivity.Ptr(), type_, masked, side, clampingRange.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -51,7 +53,9 @@ func (o *HKAudiogramSensitivityTest) InitWithSensitivityTypeMaskedSideClampingRa
 // @property      sensitivity @abstract      Ear sensitivity measured in dB from a baseline of 0 dB. Reduced hearing sensitivity corresponds to an increase from 0 dB. The unit of measurement is `HKUnit.decibelHearingLevelUnit` or "dBHL".
 func (o *HKAudiogramSensitivityTest) Sensitivity() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKAudiogramSensitivityTestSelSensitivity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
@@ -76,7 +80,8 @@ func (o *HKAudiogramSensitivityTest) Side() HKAudiogramSensitivityTestSide {
 // @property      clampingRange @abstract      If present, indicates that the range within which the sensitivity point should be clamped.
 func (o *HKAudiogramSensitivityTest) ClampingRange() *HKAudiogramSensitivityPointClampingRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKAudiogramSensitivityTestSelClampingRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKAudiogramSensitivityPointClampingRangeFromID(_ret)
 }
-

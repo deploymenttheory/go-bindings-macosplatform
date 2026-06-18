@@ -3584,4 +3584,3 @@ func CGWindowServerCFMachPort() unsafe.Pointer {
 func CGWindowServerCreateServerPort() unsafe.Pointer {
 	return raw.CGWindowServerCreateServerPort()
 }
-

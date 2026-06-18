@@ -23,14 +23,14 @@ type CNObjectTracker struct {
 }
 
 var (
-	_clsCNObjectTracker = _objcClass("CNObjectTracker")
-	_cNObjectTrackerSelInitWithCommandQueue = objc.RegisterName("initWithCommandQueue:")
-	_cNObjectTrackerSelFindObjectAtPointSourceImage = objc.RegisterName("findObjectAtPoint:sourceImage:")
+	_clsCNObjectTracker                                                = _objcClass("CNObjectTracker")
+	_cNObjectTrackerSelInitWithCommandQueue                            = objc.RegisterName("initWithCommandQueue:")
+	_cNObjectTrackerSelFindObjectAtPointSourceImage                    = objc.RegisterName("findObjectAtPoint:sourceImage:")
 	_cNObjectTrackerSelStartTrackingAtWithinSourceImageSourceDisparity = objc.RegisterName("startTrackingAt:within:sourceImage:sourceDisparity:")
-	_cNObjectTrackerSelContinueTrackingAtSourceImageSourceDisparity = objc.RegisterName("continueTrackingAt:sourceImage:sourceDisparity:")
-	_cNObjectTrackerSelFinishDetectionTrack = objc.RegisterName("finishDetectionTrack")
-	_cNObjectTrackerSelResetDetectionTrack = objc.RegisterName("resetDetectionTrack")
-	_cNObjectTrackerSelIsSupported = objc.RegisterName("isSupported")
+	_cNObjectTrackerSelContinueTrackingAtSourceImageSourceDisparity    = objc.RegisterName("continueTrackingAt:sourceImage:sourceDisparity:")
+	_cNObjectTrackerSelFinishDetectionTrack                            = objc.RegisterName("finishDetectionTrack")
+	_cNObjectTrackerSelResetDetectionTrack                             = objc.RegisterName("resetDetectionTrack")
+	_cNObjectTrackerSelIsSupported                                     = objc.RegisterName("isSupported")
 )
 
 func CNObjectTrackerFromID(id objc.ID) *CNObjectTracker {
@@ -46,14 +46,18 @@ func CNObjectTrackerFromID(id objc.ID) *CNObjectTracker {
 // Create a new detection track builder. - Parameters: - commandQueue: the command queue of a metal device to which commands should be submitted to perform work
 func (o *CNObjectTracker) InitWithCommandQueue(commandQueue metal.MTLCommandQueue) *CNObjectTracker {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNObjectTrackerSelInitWithCommandQueue, commandQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNObjectTrackerFromID(_ret)
 }
 
 // Find the bounds of an object at the given point. Can be used to convert a normalized point in an image to a rectangle that can be used to start tracking. - Parameters: - point: location of object in image in normalized coordinates where (0.0, 0.0) is the upper left corner, and (1.0, 1.0) is the lower right - sourceImage: pixel buffer containing the image - Returns: A prediction, which includes bounds that can be used to start tracking, or `nil` if no discernible object is detected.
 func (o *CNObjectTracker) FindObjectAtPointSourceImage(point corefoundation.CGPoint, sourceImage unsafe.Pointer) *CNBoundsPrediction {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNObjectTrackerSelFindObjectAtPointSourceImage, point, sourceImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNBoundsPredictionFromID(_ret)
 }
 
@@ -66,14 +70,18 @@ func (o *CNObjectTracker) StartTrackingAtWithinSourceImageSourceDisparity(time_ 
 // Continue tracking an object for which tracking has started, and add a new detection to the detection track being built. - Parameters: - time: the presentation time of the frame to be added to the detection track - Returns: a prediction of where the object is in the source image
 func (o *CNObjectTracker) ContinueTrackingAtSourceImageSourceDisparity(time_ coremedia.CMTime, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer) *CNBoundsPrediction {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNObjectTrackerSelContinueTrackingAtSourceImageSourceDisparity, time_, sourceImage, sourceDisparity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNBoundsPredictionFromID(_ret)
 }
 
 // Finish constructing the detection track and return it. - Returns: a detection track which tracks the object
 func (o *CNObjectTracker) FinishDetectionTrack() *CNDetectionTrack {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNObjectTrackerSelFinishDetectionTrack)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNDetectionTrackFromID(_ret)
 }
 
@@ -87,4 +95,3 @@ func CNObjectTrackerIsSupported() bool {
 	_ret := objc.Send[bool](objc.ID(_clsCNObjectTracker), _cNObjectTrackerSelIsSupported)
 	return _ret
 }
-

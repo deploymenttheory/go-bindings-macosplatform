@@ -22,31 +22,31 @@ type IOBluetoothServiceBrowserController struct {
 }
 
 var (
-	_clsIOBluetoothServiceBrowserController = _objcClass("IOBluetoothServiceBrowserController")
-	_iOBluetoothServiceBrowserControllerSelServiceBrowserController = objc.RegisterName("serviceBrowserController:")
-	_iOBluetoothServiceBrowserControllerSelBrowseDevicesOptions = objc.RegisterName("browseDevices:options:")
-	_iOBluetoothServiceBrowserControllerSelBrowseDevicesAsSheetForWindowOptionsWindow = objc.RegisterName("browseDevicesAsSheetForWindow:options:window:")
-	_iOBluetoothServiceBrowserControllerSelWithServiceBrowserControllerRef = objc.RegisterName("withServiceBrowserControllerRef:")
-	_iOBluetoothServiceBrowserControllerSelGetServiceBrowserControllerRef = objc.RegisterName("getServiceBrowserControllerRef")
-	_iOBluetoothServiceBrowserControllerSelDiscover = objc.RegisterName("discover:")
-	_iOBluetoothServiceBrowserControllerSelDiscoverAsSheetForWindowWithRecord = objc.RegisterName("discoverAsSheetForWindow:withRecord:")
-	_iOBluetoothServiceBrowserControllerSelDiscoverWithDeviceAttributesServiceListServiceRecord = objc.RegisterName("discoverWithDeviceAttributes:serviceList:serviceRecord:")
-	_iOBluetoothServiceBrowserControllerSelSetOptions = objc.RegisterName("setOptions:")
-	_iOBluetoothServiceBrowserControllerSelRunModal = objc.RegisterName("runModal")
+	_clsIOBluetoothServiceBrowserController                                                               = _objcClass("IOBluetoothServiceBrowserController")
+	_iOBluetoothServiceBrowserControllerSelServiceBrowserController                                       = objc.RegisterName("serviceBrowserController:")
+	_iOBluetoothServiceBrowserControllerSelBrowseDevicesOptions                                           = objc.RegisterName("browseDevices:options:")
+	_iOBluetoothServiceBrowserControllerSelBrowseDevicesAsSheetForWindowOptionsWindow                     = objc.RegisterName("browseDevicesAsSheetForWindow:options:window:")
+	_iOBluetoothServiceBrowserControllerSelWithServiceBrowserControllerRef                                = objc.RegisterName("withServiceBrowserControllerRef:")
+	_iOBluetoothServiceBrowserControllerSelGetServiceBrowserControllerRef                                 = objc.RegisterName("getServiceBrowserControllerRef")
+	_iOBluetoothServiceBrowserControllerSelDiscover                                                       = objc.RegisterName("discover:")
+	_iOBluetoothServiceBrowserControllerSelDiscoverAsSheetForWindowWithRecord                             = objc.RegisterName("discoverAsSheetForWindow:withRecord:")
+	_iOBluetoothServiceBrowserControllerSelDiscoverWithDeviceAttributesServiceListServiceRecord           = objc.RegisterName("discoverWithDeviceAttributes:serviceList:serviceRecord:")
+	_iOBluetoothServiceBrowserControllerSelSetOptions                                                     = objc.RegisterName("setOptions:")
+	_iOBluetoothServiceBrowserControllerSelRunModal                                                       = objc.RegisterName("runModal")
 	_iOBluetoothServiceBrowserControllerSelBeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo = objc.RegisterName("beginSheetModalForWindow:modalDelegate:didEndSelector:contextInfo:")
-	_iOBluetoothServiceBrowserControllerSelGetResults = objc.RegisterName("getResults")
-	_iOBluetoothServiceBrowserControllerSelGetOptions = objc.RegisterName("getOptions")
-	_iOBluetoothServiceBrowserControllerSelSetSearchAttributes = objc.RegisterName("setSearchAttributes:")
-	_iOBluetoothServiceBrowserControllerSelGetSearchAttributes = objc.RegisterName("getSearchAttributes")
-	_iOBluetoothServiceBrowserControllerSelAddAllowedUUID = objc.RegisterName("addAllowedUUID:")
-	_iOBluetoothServiceBrowserControllerSelAddAllowedUUIDArray = objc.RegisterName("addAllowedUUIDArray:")
-	_iOBluetoothServiceBrowserControllerSelClearAllowedUUIDs = objc.RegisterName("clearAllowedUUIDs")
-	_iOBluetoothServiceBrowserControllerSelSetTitle = objc.RegisterName("setTitle:")
-	_iOBluetoothServiceBrowserControllerSelGetTitle = objc.RegisterName("getTitle")
-	_iOBluetoothServiceBrowserControllerSelSetDescriptionText = objc.RegisterName("setDescriptionText:")
-	_iOBluetoothServiceBrowserControllerSelGetDescriptionText = objc.RegisterName("getDescriptionText")
-	_iOBluetoothServiceBrowserControllerSelSetPrompt = objc.RegisterName("setPrompt:")
-	_iOBluetoothServiceBrowserControllerSelGetPrompt = objc.RegisterName("getPrompt")
+	_iOBluetoothServiceBrowserControllerSelGetResults                                                     = objc.RegisterName("getResults")
+	_iOBluetoothServiceBrowserControllerSelGetOptions                                                     = objc.RegisterName("getOptions")
+	_iOBluetoothServiceBrowserControllerSelSetSearchAttributes                                            = objc.RegisterName("setSearchAttributes:")
+	_iOBluetoothServiceBrowserControllerSelGetSearchAttributes                                            = objc.RegisterName("getSearchAttributes")
+	_iOBluetoothServiceBrowserControllerSelAddAllowedUUID                                                 = objc.RegisterName("addAllowedUUID:")
+	_iOBluetoothServiceBrowserControllerSelAddAllowedUUIDArray                                            = objc.RegisterName("addAllowedUUIDArray:")
+	_iOBluetoothServiceBrowserControllerSelClearAllowedUUIDs                                              = objc.RegisterName("clearAllowedUUIDs")
+	_iOBluetoothServiceBrowserControllerSelSetTitle                                                       = objc.RegisterName("setTitle:")
+	_iOBluetoothServiceBrowserControllerSelGetTitle                                                       = objc.RegisterName("getTitle")
+	_iOBluetoothServiceBrowserControllerSelSetDescriptionText                                             = objc.RegisterName("setDescriptionText:")
+	_iOBluetoothServiceBrowserControllerSelGetDescriptionText                                             = objc.RegisterName("getDescriptionText")
+	_iOBluetoothServiceBrowserControllerSelSetPrompt                                                      = objc.RegisterName("setPrompt:")
+	_iOBluetoothServiceBrowserControllerSelGetPrompt                                                      = objc.RegisterName("getPrompt")
 )
 
 func IOBluetoothServiceBrowserControllerFromID(id objc.ID) *IOBluetoothServiceBrowserController {
@@ -62,7 +62,9 @@ func IOBluetoothServiceBrowserControllerFromID(id objc.ID) *IOBluetoothServiceBr
 // @method	serviceBrowserController: @abstract	Allocator work Bluetooth Service Browser window controller. @param		inOptions	Bit field for options to set in the newly allocated controller.  Currently no options are available. @result		a new instance of the IOBluetoothServiceBrowserController Controller, nil if unsuccessful. @discussion
 func IOBluetoothServiceBrowserControllerServiceBrowserController(inOptions uint32) *IOBluetoothServiceBrowserController {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothServiceBrowserController), _iOBluetoothServiceBrowserControllerSelServiceBrowserController, inOptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothServiceBrowserControllerFromID(_ret)
 }
 
@@ -81,7 +83,9 @@ func IOBluetoothServiceBrowserControllerBrowseDevicesAsSheetForWindowOptionsWind
 // @method	withServiceBrowserControllerRef: @abstract	Method call to convert an IOBluetoothServiceBrowserControllerRef into an IOBluetoothServiceBrowserController *. @param	serviceBrowserControllerRef IOBluetoothServiceBrowserControllerRef for which an IOBluetoothServiceBrowserController * is desired. @result		Returns the IOBluetoothServiceBrowserController * for the given IOBluetoothServiceBrowserControllerRef.
 func IOBluetoothServiceBrowserControllerWithServiceBrowserControllerRef(serviceBrowserControllerRef unsafe.Pointer) *IOBluetoothServiceBrowserController {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothServiceBrowserController), _iOBluetoothServiceBrowserControllerSelWithServiceBrowserControllerRef, serviceBrowserControllerRef)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothServiceBrowserControllerFromID(_ret)
 }
 
@@ -161,7 +165,9 @@ func (o *IOBluetoothServiceBrowserController) SetTitle(windowTitle *foundation.N
 
 func (o *IOBluetoothServiceBrowserController) GetTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothServiceBrowserControllerSelGetTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -171,7 +177,9 @@ func (o *IOBluetoothServiceBrowserController) SetDescriptionText(descriptionText
 
 func (o *IOBluetoothServiceBrowserController) GetDescriptionText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothServiceBrowserControllerSelGetDescriptionText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -181,7 +189,8 @@ func (o *IOBluetoothServiceBrowserController) SetPrompt(prompt *foundation.NSStr
 
 func (o *IOBluetoothServiceBrowserController) GetPrompt() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothServiceBrowserControllerSelGetPrompt)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

@@ -16,11 +16,11 @@ type HKQuantity struct {
 }
 
 var (
-	_clsHKQuantity = _objcClass("HKQuantity")
+	_clsHKQuantity                            = _objcClass("HKQuantity")
 	_hKQuantitySelQuantityWithUnitDoubleValue = objc.RegisterName("quantityWithUnit:doubleValue:")
-	_hKQuantitySelIsCompatibleWithUnit = objc.RegisterName("isCompatibleWithUnit:")
-	_hKQuantitySelDoubleValueForUnit = objc.RegisterName("doubleValueForUnit:")
-	_hKQuantitySelCompare = objc.RegisterName("compare:")
+	_hKQuantitySelIsCompatibleWithUnit        = objc.RegisterName("isCompatibleWithUnit:")
+	_hKQuantitySelDoubleValueForUnit          = objc.RegisterName("doubleValueForUnit:")
+	_hKQuantitySelCompare                     = objc.RegisterName("compare:")
 )
 
 func HKQuantityFromID(id objc.ID) *HKQuantity {
@@ -36,7 +36,9 @@ func HKQuantityFromID(id objc.ID) *HKQuantity {
 // @method        quantityWithUnit:doubleValue: @abstract      Returns a new object representing a quantity measurement with the given unit.
 func HKQuantityQuantityWithUnitDoubleValue(unit *HKUnit, value float64) *HKQuantity {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuantity), _hKQuantitySelQuantityWithUnitDoubleValue, unit.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
@@ -57,4 +59,3 @@ func (o *HKQuantity) Compare(quantity *HKQuantity) foundation.NSComparisonResult
 	_ret := objc.Send[foundation.NSComparisonResult](o.Ptr(), _hKQuantitySelCompare, quantity.Ptr())
 	return _ret
 }
-

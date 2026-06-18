@@ -125,4 +125,3 @@ func NewNColorChangedUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
 func SetFontInfoForSelection(iStyleType uint, iNumStyles uint, iStyles unsafe.Pointer, iFPEventTarget unsafe.Pointer) int {
 	return raw.SetFontInfoForSelection(iStyleType, iNumStyles, iStyles, iFPEventTarget)
 }
-

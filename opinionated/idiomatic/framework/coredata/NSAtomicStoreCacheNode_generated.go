@@ -72,4 +72,3 @@ type AtomicStoreCacheNodeable interface {
 }
 
 var _ AtomicStoreCacheNodeable = (*AtomicStoreCacheNode)(nil)
-

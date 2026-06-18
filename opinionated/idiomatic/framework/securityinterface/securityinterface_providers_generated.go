@@ -12,4 +12,3 @@ import (
 type CertificatePanelProvider interface {
 	asCertificatePanel() *raw.SFCertificatePanel
 }
-

@@ -52,7 +52,9 @@ func (x *SplitViewController) WithSplitViewItems(items ...*raw.NSSplitViewItem) 
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSSplitViewItem](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -98,7 +100,9 @@ func (x *SplitViewController) WithChildViewControllers(items ...ViewControllerPr
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asViewController().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asViewController().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSViewController](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -247,9 +251,13 @@ func (x *SplitViewController) ToggleInspector(sender objc.ID) {
 	x.inner.ToggleInspector(sender)
 }
 
-func (x *SplitViewController) asViewController() *raw.NSViewController { return &x.inner.NSViewController }
+func (x *SplitViewController) asViewController() *raw.NSViewController {
+	return &x.inner.NSViewController
+}
 
-func (x *SplitViewController) asResponder() *raw.NSResponder { return &x.inner.NSViewController.NSResponder }
+func (x *SplitViewController) asResponder() *raw.NSResponder {
+	return &x.inner.NSViewController.NSResponder
+}
 
 // SplitViewControllerable is the interface implemented by [SplitViewController], for mocking and DI.
 type SplitViewControllerable interface {
@@ -289,4 +297,3 @@ type SplitViewControllerable interface {
 }
 
 var _ SplitViewControllerable = (*SplitViewController)(nil)
-

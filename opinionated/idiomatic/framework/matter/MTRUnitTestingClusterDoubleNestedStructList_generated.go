@@ -16,7 +16,9 @@ type MTRUnitTestingClusterDoubleNestedStructList struct {
 }
 
 // Unwrap returns the underlying [raw.MTRUnitTestingClusterDoubleNestedStructList].
-func (x *MTRUnitTestingClusterDoubleNestedStructList) Unwrap() *raw.MTRUnitTestingClusterDoubleNestedStructList { return x.inner }
+func (x *MTRUnitTestingClusterDoubleNestedStructList) Unwrap() *raw.MTRUnitTestingClusterDoubleNestedStructList {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -46,7 +48,9 @@ func (x *MTRUnitTestingClusterDoubleNestedStructList) SetA(a *foundation.NSArray
 	x.inner.SetA(a)
 }
 
-func (x *MTRUnitTestingClusterDoubleNestedStructList) asMTRUnitTestingClusterDoubleNestedStructList() *raw.MTRUnitTestingClusterDoubleNestedStructList { return x.inner }
+func (x *MTRUnitTestingClusterDoubleNestedStructList) asMTRUnitTestingClusterDoubleNestedStructList() *raw.MTRUnitTestingClusterDoubleNestedStructList {
+	return x.inner
+}
 
 // MTRUnitTestingClusterDoubleNestedStructListable is the interface implemented by [MTRUnitTestingClusterDoubleNestedStructList], for mocking and DI.
 type MTRUnitTestingClusterDoubleNestedStructListable interface {
@@ -56,4 +60,3 @@ type MTRUnitTestingClusterDoubleNestedStructListable interface {
 }
 
 var _ MTRUnitTestingClusterDoubleNestedStructListable = (*MTRUnitTestingClusterDoubleNestedStructList)(nil)
-

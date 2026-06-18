@@ -140,4 +140,3 @@ type Gradientable interface {
 }
 
 var _ Gradientable = (*Gradient)(nil)
-

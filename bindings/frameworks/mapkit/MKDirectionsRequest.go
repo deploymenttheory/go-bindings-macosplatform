@@ -16,25 +16,25 @@ type MKDirectionsRequest struct {
 }
 
 var (
-	_clsMKDirectionsRequest = _objcClass("MKDirectionsRequest")
-	_mKDirectionsRequestSelSetSource = objc.RegisterName("setSource:")
-	_mKDirectionsRequestSelSetDestination = objc.RegisterName("setDestination:")
-	_mKDirectionsRequestSelSource = objc.RegisterName("source")
-	_mKDirectionsRequestSelDestination = objc.RegisterName("destination")
-	_mKDirectionsRequestSelTransportType = objc.RegisterName("transportType")
-	_mKDirectionsRequestSelSetTransportType = objc.RegisterName("setTransportType:")
-	_mKDirectionsRequestSelRequestsAlternateRoutes = objc.RegisterName("requestsAlternateRoutes")
+	_clsMKDirectionsRequest                           = _objcClass("MKDirectionsRequest")
+	_mKDirectionsRequestSelSetSource                  = objc.RegisterName("setSource:")
+	_mKDirectionsRequestSelSetDestination             = objc.RegisterName("setDestination:")
+	_mKDirectionsRequestSelSource                     = objc.RegisterName("source")
+	_mKDirectionsRequestSelDestination                = objc.RegisterName("destination")
+	_mKDirectionsRequestSelTransportType              = objc.RegisterName("transportType")
+	_mKDirectionsRequestSelSetTransportType           = objc.RegisterName("setTransportType:")
+	_mKDirectionsRequestSelRequestsAlternateRoutes    = objc.RegisterName("requestsAlternateRoutes")
 	_mKDirectionsRequestSelSetRequestsAlternateRoutes = objc.RegisterName("setRequestsAlternateRoutes:")
-	_mKDirectionsRequestSelDepartureDate = objc.RegisterName("departureDate")
-	_mKDirectionsRequestSelSetDepartureDate = objc.RegisterName("setDepartureDate:")
-	_mKDirectionsRequestSelArrivalDate = objc.RegisterName("arrivalDate")
-	_mKDirectionsRequestSelSetArrivalDate = objc.RegisterName("setArrivalDate:")
-	_mKDirectionsRequestSelTollPreference = objc.RegisterName("tollPreference")
-	_mKDirectionsRequestSelSetTollPreference = objc.RegisterName("setTollPreference:")
-	_mKDirectionsRequestSelHighwayPreference = objc.RegisterName("highwayPreference")
-	_mKDirectionsRequestSelSetHighwayPreference = objc.RegisterName("setHighwayPreference:")
-	_mKDirectionsRequestSelInitWithContentsOfURL = objc.RegisterName("initWithContentsOfURL:")
-	_mKDirectionsRequestSelIsDirectionsRequestURL = objc.RegisterName("isDirectionsRequestURL:")
+	_mKDirectionsRequestSelDepartureDate              = objc.RegisterName("departureDate")
+	_mKDirectionsRequestSelSetDepartureDate           = objc.RegisterName("setDepartureDate:")
+	_mKDirectionsRequestSelArrivalDate                = objc.RegisterName("arrivalDate")
+	_mKDirectionsRequestSelSetArrivalDate             = objc.RegisterName("setArrivalDate:")
+	_mKDirectionsRequestSelTollPreference             = objc.RegisterName("tollPreference")
+	_mKDirectionsRequestSelSetTollPreference          = objc.RegisterName("setTollPreference:")
+	_mKDirectionsRequestSelHighwayPreference          = objc.RegisterName("highwayPreference")
+	_mKDirectionsRequestSelSetHighwayPreference       = objc.RegisterName("setHighwayPreference:")
+	_mKDirectionsRequestSelInitWithContentsOfURL      = objc.RegisterName("initWithContentsOfURL:")
+	_mKDirectionsRequestSelIsDirectionsRequestURL     = objc.RegisterName("isDirectionsRequestURL:")
 )
 
 func MKDirectionsRequestFromID(id objc.ID) *MKDirectionsRequest {
@@ -57,13 +57,17 @@ func (o *MKDirectionsRequest) SetDestination(destination *MKMapItem) {
 
 func (o *MKDirectionsRequest) Source() *MKMapItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKDirectionsRequestSelSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapItemFromID(_ret)
 }
 
 func (o *MKDirectionsRequest) Destination() *MKMapItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKDirectionsRequestSelDestination)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapItemFromID(_ret)
 }
 
@@ -87,7 +91,9 @@ func (o *MKDirectionsRequest) SetRequestsAlternateRoutes(requestsAlternateRoutes
 
 func (o *MKDirectionsRequest) DepartureDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKDirectionsRequestSelDepartureDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -97,7 +103,9 @@ func (o *MKDirectionsRequest) SetDepartureDate(departureDate *foundation.NSDate)
 
 func (o *MKDirectionsRequest) ArrivalDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKDirectionsRequestSelArrivalDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -125,7 +133,9 @@ func (o *MKDirectionsRequest) SetHighwayPreference(highwayPreference MKDirection
 
 func (o *MKDirectionsRequest) InitWithContentsOfURL(url *foundation.NSURL) *MKDirectionsRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKDirectionsRequestSelInitWithContentsOfURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKDirectionsRequestFromID(_ret)
 }
 
@@ -133,4 +143,3 @@ func MKDirectionsRequestIsDirectionsRequestURL(url *foundation.NSURL) bool {
 	_ret := objc.Send[bool](objc.ID(_clsMKDirectionsRequest), _mKDirectionsRequestSelIsDirectionsRequestURL, url.Ptr())
 	return _ret
 }
-

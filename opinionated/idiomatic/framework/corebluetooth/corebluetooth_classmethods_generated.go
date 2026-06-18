@@ -55,4 +55,3 @@ func UUIDWithNSUUID(theUUID *foundation.NSUUID) *UUID {
 	}
 	return &UUID{inner: _r}
 }
-

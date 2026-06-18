@@ -18,12 +18,12 @@ type AVCaptionFormatConformer struct {
 }
 
 var (
-	_clsAVCaptionFormatConformer = _objcClass("AVCaptionFormatConformer")
+	_clsAVCaptionFormatConformer                                             = _objcClass("AVCaptionFormatConformer")
 	_aVCaptionFormatConformerSelCaptionFormatConformerWithConversionSettings = objc.RegisterName("captionFormatConformerWithConversionSettings:")
-	_aVCaptionFormatConformerSelInitWithConversionSettings = objc.RegisterName("initWithConversionSettings:")
-	_aVCaptionFormatConformerSelConformedCaptionForCaptionError = objc.RegisterName("conformedCaptionForCaption:error:")
-	_aVCaptionFormatConformerSelConformsCaptionsToTimeRange = objc.RegisterName("conformsCaptionsToTimeRange")
-	_aVCaptionFormatConformerSelSetConformsCaptionsToTimeRange = objc.RegisterName("setConformsCaptionsToTimeRange:")
+	_aVCaptionFormatConformerSelInitWithConversionSettings                   = objc.RegisterName("initWithConversionSettings:")
+	_aVCaptionFormatConformerSelConformedCaptionForCaptionError              = objc.RegisterName("conformedCaptionForCaption:error:")
+	_aVCaptionFormatConformerSelConformsCaptionsToTimeRange                  = objc.RegisterName("conformsCaptionsToTimeRange")
+	_aVCaptionFormatConformerSelSetConformsCaptionsToTimeRange               = objc.RegisterName("setConformsCaptionsToTimeRange:")
 )
 
 func AVCaptionFormatConformerFromID(id objc.ID) *AVCaptionFormatConformer {
@@ -39,14 +39,18 @@ func AVCaptionFormatConformerFromID(id objc.ID) *AVCaptionFormatConformer {
 // @method	captionFormatConformerWithConversionSettings:conversionSettings: @abstract	Returns an instance of AVCaptionFormatConformer that can convert a canonical caption to conform to a specific format. @param		conversionSettings Describes the conversion operation for which the caption is to be conformed. @result	A new instance of AVCaptionFormatConformer configured to perform the specified conversion.
 func AVCaptionFormatConformerCaptionFormatConformerWithConversionSettings(conversionSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVCaptionFormatConformer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptionFormatConformer), _aVCaptionFormatConformerSelCaptionFormatConformerWithConversionSettings, conversionSettings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptionFormatConformerFromID(_ret)
 }
 
 // @method	initWithConversionSettings:conversionSettings: @abstract	Returns an instance of AVCaptionFormatConformer that can convert a canonical caption to conform to a specific format. @param		conversionSettings Describes the conversion operation for which the caption is to be conformed. @result	A new instance of AVCaptionFormatConformer configured to perform the specified conversion. @discussion This method throws an exception if the conversion setting's AVCaptionMediaTypeKey is not equal to AVMediaTypeClosedCaption, or if its AVCaptionMediaSubTypeKey is not equal to kCMClosedCaptionFormatType_CEA608.
 func (o *AVCaptionFormatConformer) InitWithConversionSettings(conversionSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVCaptionFormatConformer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptionFormatConformerSelInitWithConversionSettings, conversionSettings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptionFormatConformerFromID(_ret)
 }
 
@@ -54,7 +58,9 @@ func (o *AVCaptionFormatConformer) InitWithConversionSettings(conversionSettings
 func (o *AVCaptionFormatConformer) ConformedCaptionForCaptionError(caption *AVCaption) (*AVCaption, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptionFormatConformerSelConformedCaptionForCaptionError, caption.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -70,4 +76,3 @@ func (o *AVCaptionFormatConformer) ConformsCaptionsToTimeRange() bool {
 func (o *AVCaptionFormatConformer) SetConformsCaptionsToTimeRange(conformsCaptionsToTimeRange bool) {
 	o.Ptr().Send(_aVCaptionFormatConformerSelSetConformsCaptionsToTimeRange, conformsCaptionsToTimeRange)
 }
-

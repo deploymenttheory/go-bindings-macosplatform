@@ -18,9 +18,9 @@ type MTRManualSetupPayloadParser struct {
 }
 
 var (
-	_clsMTRManualSetupPayloadParser = _objcClass("MTRManualSetupPayloadParser")
+	_clsMTRManualSetupPayloadParser                                    = _objcClass("MTRManualSetupPayloadParser")
 	_mTRManualSetupPayloadParserSelInitWithDecimalStringRepresentation = objc.RegisterName("initWithDecimalStringRepresentation:")
-	_mTRManualSetupPayloadParserSelPopulatePayload = objc.RegisterName("populatePayload:")
+	_mTRManualSetupPayloadParserSelPopulatePayload                     = objc.RegisterName("populatePayload:")
 )
 
 func MTRManualSetupPayloadParserFromID(id objc.ID) *MTRManualSetupPayloadParser {
@@ -35,17 +35,20 @@ func MTRManualSetupPayloadParserFromID(id objc.ID) *MTRManualSetupPayloadParser 
 
 func (o *MTRManualSetupPayloadParser) InitWithDecimalStringRepresentation(decimalStringRepresentation *foundation.NSString) *MTRManualSetupPayloadParser {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRManualSetupPayloadParserSelInitWithDecimalStringRepresentation, decimalStringRepresentation.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRManualSetupPayloadParserFromID(_ret)
 }
 
 func (o *MTRManualSetupPayloadParser) PopulatePayload() (*MTRSetupPayload, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRManualSetupPayloadParserSelPopulatePayload, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return MTRSetupPayloadFromID(_ret), nil
 }
-

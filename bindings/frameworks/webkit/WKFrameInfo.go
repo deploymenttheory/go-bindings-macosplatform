@@ -16,11 +16,11 @@ type WKFrameInfo struct {
 }
 
 var (
-	_clsWKFrameInfo = _objcClass("WKFrameInfo")
-	_wKFrameInfoSelIsMainFrame = objc.RegisterName("isMainFrame")
-	_wKFrameInfoSelRequest = objc.RegisterName("request")
+	_clsWKFrameInfo               = _objcClass("WKFrameInfo")
+	_wKFrameInfoSelIsMainFrame    = objc.RegisterName("isMainFrame")
+	_wKFrameInfoSelRequest        = objc.RegisterName("request")
 	_wKFrameInfoSelSecurityOrigin = objc.RegisterName("securityOrigin")
-	_wKFrameInfoSelWebView = objc.RegisterName("webView")
+	_wKFrameInfoSelWebView        = objc.RegisterName("webView")
 )
 
 func WKFrameInfoFromID(id objc.ID) *WKFrameInfo {
@@ -42,21 +42,26 @@ func (o *WKFrameInfo) IsMainFrame() bool {
 // @abstract The frame's current request.
 func (o *WKFrameInfo) Request() *foundation.NSURLRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKFrameInfoSelRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLRequestFromID(_ret)
 }
 
 // @abstract The frame's current security origin.
 func (o *WKFrameInfo) SecurityOrigin() *WKSecurityOrigin {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKFrameInfoSelSecurityOrigin)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKSecurityOriginFromID(_ret)
 }
 
 // @abstract The web view of the webpage that contains this frame.
 func (o *WKFrameInfo) WebView() *WKWebView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKFrameInfoSelWebView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebViewFromID(_ret)
 }
-

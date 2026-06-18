@@ -16,34 +16,34 @@ type NSTextStorage struct {
 }
 
 var (
-	_clsNSTextStorage = _objcClass("NSTextStorage")
-	_nSTextStorageSelAddLayoutManager = objc.RegisterName("addLayoutManager:")
-	_nSTextStorageSelRemoveLayoutManager = objc.RegisterName("removeLayoutManager:")
-	_nSTextStorageSelEditedRangeChangeInLength = objc.RegisterName("edited:range:changeInLength:")
-	_nSTextStorageSelProcessEditing = objc.RegisterName("processEditing")
-	_nSTextStorageSelInvalidateAttributesInRange = objc.RegisterName("invalidateAttributesInRange:")
+	_clsNSTextStorage                                = _objcClass("NSTextStorage")
+	_nSTextStorageSelAddLayoutManager                = objc.RegisterName("addLayoutManager:")
+	_nSTextStorageSelRemoveLayoutManager             = objc.RegisterName("removeLayoutManager:")
+	_nSTextStorageSelEditedRangeChangeInLength       = objc.RegisterName("edited:range:changeInLength:")
+	_nSTextStorageSelProcessEditing                  = objc.RegisterName("processEditing")
+	_nSTextStorageSelInvalidateAttributesInRange     = objc.RegisterName("invalidateAttributesInRange:")
 	_nSTextStorageSelEnsureAttributesAreFixedInRange = objc.RegisterName("ensureAttributesAreFixedInRange:")
-	_nSTextStorageSelLayoutManagers = objc.RegisterName("layoutManagers")
-	_nSTextStorageSelEditedMask = objc.RegisterName("editedMask")
-	_nSTextStorageSelEditedRange = objc.RegisterName("editedRange")
-	_nSTextStorageSelChangeInLength = objc.RegisterName("changeInLength")
-	_nSTextStorageSelDelegate = objc.RegisterName("delegate")
-	_nSTextStorageSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSTextStorageSelFixesAttributesLazily = objc.RegisterName("fixesAttributesLazily")
-	_nSTextStorageSelTextStorageObserver = objc.RegisterName("textStorageObserver")
-	_nSTextStorageSelSetTextStorageObserver = objc.RegisterName("setTextStorageObserver:")
-	_nSTextStorageSelAttributeRuns = objc.RegisterName("attributeRuns")
-	_nSTextStorageSelSetAttributeRuns = objc.RegisterName("setAttributeRuns:")
-	_nSTextStorageSelParagraphs = objc.RegisterName("paragraphs")
-	_nSTextStorageSelSetParagraphs = objc.RegisterName("setParagraphs:")
-	_nSTextStorageSelWords = objc.RegisterName("words")
-	_nSTextStorageSelSetWords = objc.RegisterName("setWords:")
-	_nSTextStorageSelCharacters = objc.RegisterName("characters")
-	_nSTextStorageSelSetCharacters = objc.RegisterName("setCharacters:")
-	_nSTextStorageSelFont = objc.RegisterName("font")
-	_nSTextStorageSelSetFont = objc.RegisterName("setFont:")
-	_nSTextStorageSelForegroundColor = objc.RegisterName("foregroundColor")
-	_nSTextStorageSelSetForegroundColor = objc.RegisterName("setForegroundColor:")
+	_nSTextStorageSelLayoutManagers                  = objc.RegisterName("layoutManagers")
+	_nSTextStorageSelEditedMask                      = objc.RegisterName("editedMask")
+	_nSTextStorageSelEditedRange                     = objc.RegisterName("editedRange")
+	_nSTextStorageSelChangeInLength                  = objc.RegisterName("changeInLength")
+	_nSTextStorageSelDelegate                        = objc.RegisterName("delegate")
+	_nSTextStorageSelSetDelegate                     = objc.RegisterName("setDelegate:")
+	_nSTextStorageSelFixesAttributesLazily           = objc.RegisterName("fixesAttributesLazily")
+	_nSTextStorageSelTextStorageObserver             = objc.RegisterName("textStorageObserver")
+	_nSTextStorageSelSetTextStorageObserver          = objc.RegisterName("setTextStorageObserver:")
+	_nSTextStorageSelAttributeRuns                   = objc.RegisterName("attributeRuns")
+	_nSTextStorageSelSetAttributeRuns                = objc.RegisterName("setAttributeRuns:")
+	_nSTextStorageSelParagraphs                      = objc.RegisterName("paragraphs")
+	_nSTextStorageSelSetParagraphs                   = objc.RegisterName("setParagraphs:")
+	_nSTextStorageSelWords                           = objc.RegisterName("words")
+	_nSTextStorageSelSetWords                        = objc.RegisterName("setWords:")
+	_nSTextStorageSelCharacters                      = objc.RegisterName("characters")
+	_nSTextStorageSelSetCharacters                   = objc.RegisterName("setCharacters:")
+	_nSTextStorageSelFont                            = objc.RegisterName("font")
+	_nSTextStorageSelSetFont                         = objc.RegisterName("setFont:")
+	_nSTextStorageSelForegroundColor                 = objc.RegisterName("foregroundColor")
+	_nSTextStorageSelSetForegroundColor              = objc.RegisterName("setForegroundColor:")
 )
 
 func NSTextStorageFromID(id objc.ID) *NSTextStorage {
@@ -82,7 +82,9 @@ func (o *NSTextStorage) EnsureAttributesAreFixedInRange(range_ foundation.NSRang
 
 func (o *NSTextStorage) LayoutManagers() *foundation.NSArray[*NSLayoutManager] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextStorageSelLayoutManagers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSLayoutManager](_ret)
 }
 
@@ -126,7 +128,9 @@ func (o *NSTextStorage) SetTextStorageObserver(textStorageObserver NSTextStorage
 
 func (o *NSTextStorage) AttributeRuns() *foundation.NSArray[*NSTextStorage] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextStorageSelAttributeRuns)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSTextStorage](_ret)
 }
 
@@ -136,7 +140,9 @@ func (o *NSTextStorage) SetAttributeRuns(attributeRuns *foundation.NSArray[*NSTe
 
 func (o *NSTextStorage) Paragraphs() *foundation.NSArray[*NSTextStorage] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextStorageSelParagraphs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSTextStorage](_ret)
 }
 
@@ -146,7 +152,9 @@ func (o *NSTextStorage) SetParagraphs(paragraphs *foundation.NSArray[*NSTextStor
 
 func (o *NSTextStorage) Words() *foundation.NSArray[*NSTextStorage] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextStorageSelWords)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSTextStorage](_ret)
 }
 
@@ -156,7 +164,9 @@ func (o *NSTextStorage) SetWords(words *foundation.NSArray[*NSTextStorage]) {
 
 func (o *NSTextStorage) Characters() *foundation.NSArray[*NSTextStorage] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextStorageSelCharacters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSTextStorage](_ret)
 }
 
@@ -166,7 +176,9 @@ func (o *NSTextStorage) SetCharacters(characters *foundation.NSArray[*NSTextStor
 
 func (o *NSTextStorage) Font() *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextStorageSelFont)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
@@ -176,11 +188,12 @@ func (o *NSTextStorage) SetFont(font *NSFont) {
 
 func (o *NSTextStorage) ForegroundColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextStorageSelForegroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
 func (o *NSTextStorage) SetForegroundColor(foregroundColor *NSColor) {
 	o.Ptr().Send(_nSTextStorageSelSetForegroundColor, foregroundColor.Ptr())
 }
-

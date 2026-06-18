@@ -322,4 +322,3 @@ type RayIntersectorable interface {
 }
 
 var _ RayIntersectorable = (*RayIntersector)(nil)
-

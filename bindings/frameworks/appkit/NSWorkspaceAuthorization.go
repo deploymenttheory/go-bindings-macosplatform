@@ -26,4 +26,3 @@ func NSWorkspaceAuthorizationFromID(id objc.ID) *NSWorkspaceAuthorization {
 	purego.Track(o)
 	return o
 }
-

@@ -271,4 +271,3 @@ type SliderTouchBarItemable interface {
 }
 
 var _ SliderTouchBarItemable = (*SliderTouchBarItem)(nil)
-

@@ -15,8 +15,8 @@ type AVMIDIChannelEvent struct {
 }
 
 var (
-	_clsAVMIDIChannelEvent = _objcClass("AVMIDIChannelEvent")
-	_aVMIDIChannelEventSelChannel = objc.RegisterName("channel")
+	_clsAVMIDIChannelEvent           = _objcClass("AVMIDIChannelEvent")
+	_aVMIDIChannelEventSelChannel    = objc.RegisterName("channel")
 	_aVMIDIChannelEventSelSetChannel = objc.RegisterName("setChannel:")
 )
 
@@ -38,4 +38,3 @@ func (o *AVMIDIChannelEvent) Channel() uint {
 func (o *AVMIDIChannelEvent) SetChannel(channel uint) {
 	o.Ptr().Send(_aVMIDIChannelEventSelSetChannel, channel)
 }
-

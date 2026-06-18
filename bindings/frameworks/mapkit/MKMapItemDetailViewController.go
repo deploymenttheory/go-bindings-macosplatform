@@ -16,13 +16,13 @@ type MKMapItemDetailViewController struct {
 }
 
 var (
-	_clsMKMapItemDetailViewController = _objcClass("MKMapItemDetailViewController")
+	_clsMKMapItemDetailViewController                           = _objcClass("MKMapItemDetailViewController")
 	_mKMapItemDetailViewControllerSelInitWithMapItemDisplaysMap = objc.RegisterName("initWithMapItem:displaysMap:")
-	_mKMapItemDetailViewControllerSelInitWithMapItem = objc.RegisterName("initWithMapItem:")
-	_mKMapItemDetailViewControllerSelMapItem = objc.RegisterName("mapItem")
-	_mKMapItemDetailViewControllerSelSetMapItem = objc.RegisterName("setMapItem:")
-	_mKMapItemDetailViewControllerSelDelegate = objc.RegisterName("delegate")
-	_mKMapItemDetailViewControllerSelSetDelegate = objc.RegisterName("setDelegate:")
+	_mKMapItemDetailViewControllerSelInitWithMapItem            = objc.RegisterName("initWithMapItem:")
+	_mKMapItemDetailViewControllerSelMapItem                    = objc.RegisterName("mapItem")
+	_mKMapItemDetailViewControllerSelSetMapItem                 = objc.RegisterName("setMapItem:")
+	_mKMapItemDetailViewControllerSelDelegate                   = objc.RegisterName("delegate")
+	_mKMapItemDetailViewControllerSelSetDelegate                = objc.RegisterName("setDelegate:")
 )
 
 func MKMapItemDetailViewControllerFromID(id objc.ID) *MKMapItemDetailViewController {
@@ -37,19 +37,25 @@ func MKMapItemDetailViewControllerFromID(id objc.ID) *MKMapItemDetailViewControl
 
 func (o *MKMapItemDetailViewController) InitWithMapItemDisplaysMap(mapItem *MKMapItem, displaysMap bool) *MKMapItemDetailViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapItemDetailViewControllerSelInitWithMapItemDisplaysMap, mapItem.Ptr(), displaysMap)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapItemDetailViewControllerFromID(_ret)
 }
 
 func (o *MKMapItemDetailViewController) InitWithMapItem(mapItem *MKMapItem) *MKMapItemDetailViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapItemDetailViewControllerSelInitWithMapItem, mapItem.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapItemDetailViewControllerFromID(_ret)
 }
 
 func (o *MKMapItemDetailViewController) MapItem() *MKMapItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapItemDetailViewControllerSelMapItem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapItemFromID(_ret)
 }
 
@@ -65,4 +71,3 @@ func (o *MKMapItemDetailViewController) Delegate() MKMapItemDetailViewController
 func (o *MKMapItemDetailViewController) SetDelegate(delegate MKMapItemDetailViewControllerDelegate) {
 	o.Ptr().Send(_mKMapItemDetailViewControllerSelSetDelegate, delegate)
 }
-

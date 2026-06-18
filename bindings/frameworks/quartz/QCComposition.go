@@ -16,13 +16,13 @@ type QCComposition struct {
 }
 
 var (
-	_clsQCComposition = _objcClass("QCComposition")
+	_clsQCComposition                    = _objcClass("QCComposition")
 	_qCCompositionSelCompositionWithFile = objc.RegisterName("compositionWithFile:")
 	_qCCompositionSelCompositionWithData = objc.RegisterName("compositionWithData:")
-	_qCCompositionSelProtocols = objc.RegisterName("protocols")
-	_qCCompositionSelAttributes = objc.RegisterName("attributes")
-	_qCCompositionSelInputKeys = objc.RegisterName("inputKeys")
-	_qCCompositionSelOutputKeys = objc.RegisterName("outputKeys")
+	_qCCompositionSelProtocols           = objc.RegisterName("protocols")
+	_qCCompositionSelAttributes          = objc.RegisterName("attributes")
+	_qCCompositionSelInputKeys           = objc.RegisterName("inputKeys")
+	_qCCompositionSelOutputKeys          = objc.RegisterName("outputKeys")
 )
 
 func QCCompositionFromID(id objc.ID) *QCComposition {
@@ -37,13 +37,17 @@ func QCCompositionFromID(id objc.ID) *QCComposition {
 
 func QCCompositionCompositionWithFile(path *foundation.NSString) *QCComposition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsQCComposition), _qCCompositionSelCompositionWithFile, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return QCCompositionFromID(_ret)
 }
 
 func QCCompositionCompositionWithData(data *foundation.NSData) *QCComposition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsQCComposition), _qCCompositionSelCompositionWithData, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return QCCompositionFromID(_ret)
 }
 
@@ -66,4 +70,3 @@ func (o *QCComposition) OutputKeys() *foundation.NSArray[objc.ID] {
 	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _qCCompositionSelOutputKeys)
 	return _ret
 }
-

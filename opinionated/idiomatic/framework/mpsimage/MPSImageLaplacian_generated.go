@@ -71,7 +71,9 @@ func (x *ImageLaplacian) SetBias(bias float32) {
 	x.inner.SetBias(bias)
 }
 
-func (x *ImageLaplacian) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageLaplacian) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
 // ImageLaplacianable is the interface implemented by [ImageLaplacian], for mocking and DI.
 type ImageLaplacianable interface {
@@ -85,4 +87,3 @@ type ImageLaplacianable interface {
 }
 
 var _ ImageLaplacianable = (*ImageLaplacian)(nil)
-

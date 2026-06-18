@@ -100,4 +100,3 @@ type URLResponseable interface {
 }
 
 var _ URLResponseable = (*URLResponse)(nil)
-

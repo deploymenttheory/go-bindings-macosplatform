@@ -19,7 +19,9 @@ type MTRBaseClusterGroupKeyManagement struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterGroupKeyManagement].
-func (x *MTRBaseClusterGroupKeyManagement) Unwrap() *raw.MTRBaseClusterGroupKeyManagement { return x.inner }
+func (x *MTRBaseClusterGroupKeyManagement) Unwrap() *raw.MTRBaseClusterGroupKeyManagement {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -701,9 +703,13 @@ func (x *MTRBaseClusterGroupKeyManagement) SubscribeAttributeClusterRevisionWith
 	}
 }
 
-func (x *MTRBaseClusterGroupKeyManagement) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterGroupKeyManagement) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterGroupKeyManagement) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterGroupKeyManagement) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterGroupKeyManagementable is the interface implemented by [MTRBaseClusterGroupKeyManagement], for mocking and DI.
 type MTRBaseClusterGroupKeyManagementable interface {
@@ -760,4 +766,3 @@ type MTRBaseClusterGroupKeyManagementable interface {
 }
 
 var _ MTRBaseClusterGroupKeyManagementable = (*MTRBaseClusterGroupKeyManagement)(nil)
-

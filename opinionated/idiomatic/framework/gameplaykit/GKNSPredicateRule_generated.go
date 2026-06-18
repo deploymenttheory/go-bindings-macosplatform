@@ -58,4 +58,3 @@ type NSPredicateRuleable interface {
 }
 
 var _ NSPredicateRuleable = (*NSPredicateRule)(nil)
-

@@ -16,12 +16,12 @@ type VTOpticalFlowParameters struct {
 }
 
 var (
-	_clsVTOpticalFlowParameters = _objcClass("VTOpticalFlowParameters")
+	_clsVTOpticalFlowParameters                                                                 = _objcClass("VTOpticalFlowParameters")
 	_vTOpticalFlowParametersSelInitWithSourceFrameNextFrameSubmissionModeDestinationOpticalFlow = objc.RegisterName("initWithSourceFrame:nextFrame:submissionMode:destinationOpticalFlow:")
-	_vTOpticalFlowParametersSelSourceFrame = objc.RegisterName("sourceFrame")
-	_vTOpticalFlowParametersSelNextFrame = objc.RegisterName("nextFrame")
-	_vTOpticalFlowParametersSelSubmissionMode = objc.RegisterName("submissionMode")
-	_vTOpticalFlowParametersSelDestinationOpticalFlow = objc.RegisterName("destinationOpticalFlow")
+	_vTOpticalFlowParametersSelSourceFrame                                                      = objc.RegisterName("sourceFrame")
+	_vTOpticalFlowParametersSelNextFrame                                                        = objc.RegisterName("nextFrame")
+	_vTOpticalFlowParametersSelSubmissionMode                                                   = objc.RegisterName("submissionMode")
+	_vTOpticalFlowParametersSelDestinationOpticalFlow                                           = objc.RegisterName("destinationOpticalFlow")
 )
 
 func VTOpticalFlowParametersFromID(id objc.ID) *VTOpticalFlowParameters {
@@ -34,24 +34,30 @@ func VTOpticalFlowParametersFromID(id objc.ID) *VTOpticalFlowParameters {
 	return o
 }
 
-// Creates a new optical flow parameters object. Returns `nil` if `sourceFrame` or `nextFrame` is `nil`, or if `sourceFrame` and `nextFrame` have different pixel formats. - Parameters: - sourceFrame: Current source frame; must be non `nil`. - nextFrame: Next source frame in presentation time order. - submissionMode: Provides a hint to let the processor know whether you are submitting frames in presentation sequence. For more information about supported modes see ``VTOpticalFlowParametersSubmissionMode``. - destinationOpticalFlow: User allocated `VTFrameProcessorOpticalFlow` that receives the results.
+// Creates a new optical flow parameters object. Returns `nil` if `sourceFrame` or `nextFrame` is `nil`, or if `sourceFrame` and `nextFrame` have different pixel formats. - Parameters: - sourceFrame: Current source frame; must be non `nil`. - nextFrame: Next source frame in presentation time order. - submissionMode: Provides a hint to let the processor know whether you are submitting frames in presentation sequence. For more information about supported modes see “VTOpticalFlowParametersSubmissionMode“. - destinationOpticalFlow: User allocated `VTFrameProcessorOpticalFlow` that receives the results.
 func (o *VTOpticalFlowParameters) InitWithSourceFrameNextFrameSubmissionModeDestinationOpticalFlow(sourceFrame *VTFrameProcessorFrame, nextFrame *VTFrameProcessorFrame, submissionMode VTOpticalFlowParametersSubmissionMode, destinationOpticalFlow *VTFrameProcessorOpticalFlow) *VTOpticalFlowParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTOpticalFlowParametersSelInitWithSourceFrameNextFrameSubmissionModeDestinationOpticalFlow, sourceFrame.Ptr(), nextFrame.Ptr(), submissionMode, destinationOpticalFlow.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VTOpticalFlowParametersFromID(_ret)
 }
 
 // Current source frame, which must be non `nil`.
 func (o *VTOpticalFlowParameters) SourceFrame() *VTFrameProcessorFrame {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTOpticalFlowParametersSelSourceFrame)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VTFrameProcessorFrameFromID(_ret)
 }
 
 // The next source frame in presentation time order.
 func (o *VTOpticalFlowParameters) NextFrame() *VTFrameProcessorFrame {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTOpticalFlowParametersSelNextFrame)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VTFrameProcessorFrameFromID(_ret)
 }
 
@@ -64,7 +70,8 @@ func (o *VTOpticalFlowParameters) SubmissionMode() VTOpticalFlowParametersSubmis
 // Output optical flow calculated by the processor.
 func (o *VTOpticalFlowParameters) DestinationOpticalFlow() *VTFrameProcessorOpticalFlow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTOpticalFlowParametersSelDestinationOpticalFlow)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VTFrameProcessorOpticalFlowFromID(_ret)
 }
-

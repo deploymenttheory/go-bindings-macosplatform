@@ -16,12 +16,12 @@ type NSSliderAccessory struct {
 }
 
 var (
-	_clsNSSliderAccessory = _objcClass("NSSliderAccessory")
+	_clsNSSliderAccessory                   = _objcClass("NSSliderAccessory")
 	_nSSliderAccessorySelAccessoryWithImage = objc.RegisterName("accessoryWithImage:")
-	_nSSliderAccessorySelBehavior = objc.RegisterName("behavior")
-	_nSSliderAccessorySelSetBehavior = objc.RegisterName("setBehavior:")
-	_nSSliderAccessorySelIsEnabled = objc.RegisterName("isEnabled")
-	_nSSliderAccessorySelSetEnabled = objc.RegisterName("setEnabled:")
+	_nSSliderAccessorySelBehavior           = objc.RegisterName("behavior")
+	_nSSliderAccessorySelSetBehavior        = objc.RegisterName("setBehavior:")
+	_nSSliderAccessorySelIsEnabled          = objc.RegisterName("isEnabled")
+	_nSSliderAccessorySelSetEnabled         = objc.RegisterName("setEnabled:")
 )
 
 func NSSliderAccessoryFromID(id objc.ID) *NSSliderAccessory {
@@ -36,14 +36,18 @@ func NSSliderAccessoryFromID(id objc.ID) *NSSliderAccessory {
 
 func NSSliderAccessoryAccessoryWithImage(image *NSImage) *NSSliderAccessory {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSliderAccessory), _nSSliderAccessorySelAccessoryWithImage, image.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSliderAccessoryFromID(_ret)
 }
 
 // The effect on interaction with the accessory. The default value is `automaticBehavior`.
 func (o *NSSliderAccessory) Behavior() *NSSliderAccessoryBehavior {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderAccessorySelBehavior)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSliderAccessoryBehaviorFromID(_ret)
 }
 
@@ -60,4 +64,3 @@ func (o *NSSliderAccessory) IsEnabled() bool {
 func (o *NSSliderAccessory) SetEnabled(enabled bool) {
 	o.Ptr().Send(_nSSliderAccessorySelSetEnabled, enabled)
 }
-

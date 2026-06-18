@@ -18,11 +18,11 @@ type MTRAttributeReport struct {
 }
 
 var (
-	_clsMTRAttributeReport = _objcClass("MTRAttributeReport")
+	_clsMTRAttributeReport                           = _objcClass("MTRAttributeReport")
 	_mTRAttributeReportSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRAttributeReportSelPath = objc.RegisterName("path")
-	_mTRAttributeReportSelValue = objc.RegisterName("value")
-	_mTRAttributeReportSelError = objc.RegisterName("error")
+	_mTRAttributeReportSelPath                       = objc.RegisterName("path")
+	_mTRAttributeReportSelValue                      = objc.RegisterName("value")
+	_mTRAttributeReportSelError                      = objc.RegisterName("error")
 )
 
 func MTRAttributeReportFromID(id objc.ID) *MTRAttributeReport {
@@ -39,7 +39,9 @@ func MTRAttributeReportFromID(id objc.ID) *MTRAttributeReport {
 func (o *MTRAttributeReport) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRAttributeReport, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAttributeReportSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -48,7 +50,9 @@ func (o *MTRAttributeReport) InitWithResponseValueError(responseValue *foundatio
 
 func (o *MTRAttributeReport) Path() *MTRAttributePath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAttributeReportSelPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRAttributePathFromID(_ret)
 }
 
@@ -63,4 +67,3 @@ func (o *MTRAttributeReport) Error() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mTRAttributeReportSelError)
 	return _ret
 }
-

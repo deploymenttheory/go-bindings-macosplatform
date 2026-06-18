@@ -15,40 +15,40 @@ type NSProcessInfo struct {
 }
 
 var (
-	_clsNSProcessInfo = _objcClass("NSProcessInfo")
-	_nSProcessInfoSelOperatingSystem = objc.RegisterName("operatingSystem")
-	_nSProcessInfoSelOperatingSystemName = objc.RegisterName("operatingSystemName")
-	_nSProcessInfoSelIsOperatingSystemAtLeastVersion = objc.RegisterName("isOperatingSystemAtLeastVersion:")
-	_nSProcessInfoSelDisableSuddenTermination = objc.RegisterName("disableSuddenTermination")
-	_nSProcessInfoSelEnableSuddenTermination = objc.RegisterName("enableSuddenTermination")
-	_nSProcessInfoSelDisableAutomaticTermination = objc.RegisterName("disableAutomaticTermination:")
-	_nSProcessInfoSelEnableAutomaticTermination = objc.RegisterName("enableAutomaticTermination:")
-	_nSProcessInfoSelProcessInfo = objc.RegisterName("processInfo")
-	_nSProcessInfoSelEnvironment = objc.RegisterName("environment")
-	_nSProcessInfoSelArguments = objc.RegisterName("arguments")
-	_nSProcessInfoSelHostName = objc.RegisterName("hostName")
-	_nSProcessInfoSelProcessName = objc.RegisterName("processName")
-	_nSProcessInfoSelSetProcessName = objc.RegisterName("setProcessName:")
-	_nSProcessInfoSelProcessIdentifier = objc.RegisterName("processIdentifier")
-	_nSProcessInfoSelGloballyUniqueString = objc.RegisterName("globallyUniqueString")
-	_nSProcessInfoSelOperatingSystemVersionString = objc.RegisterName("operatingSystemVersionString")
-	_nSProcessInfoSelOperatingSystemVersion = objc.RegisterName("operatingSystemVersion")
-	_nSProcessInfoSelProcessorCount = objc.RegisterName("processorCount")
-	_nSProcessInfoSelActiveProcessorCount = objc.RegisterName("activeProcessorCount")
-	_nSProcessInfoSelPhysicalMemory = objc.RegisterName("physicalMemory")
-	_nSProcessInfoSelSystemUptime = objc.RegisterName("systemUptime")
-	_nSProcessInfoSelAutomaticTerminationSupportEnabled = objc.RegisterName("automaticTerminationSupportEnabled")
+	_clsNSProcessInfo                                      = _objcClass("NSProcessInfo")
+	_nSProcessInfoSelOperatingSystem                       = objc.RegisterName("operatingSystem")
+	_nSProcessInfoSelOperatingSystemName                   = objc.RegisterName("operatingSystemName")
+	_nSProcessInfoSelIsOperatingSystemAtLeastVersion       = objc.RegisterName("isOperatingSystemAtLeastVersion:")
+	_nSProcessInfoSelDisableSuddenTermination              = objc.RegisterName("disableSuddenTermination")
+	_nSProcessInfoSelEnableSuddenTermination               = objc.RegisterName("enableSuddenTermination")
+	_nSProcessInfoSelDisableAutomaticTermination           = objc.RegisterName("disableAutomaticTermination:")
+	_nSProcessInfoSelEnableAutomaticTermination            = objc.RegisterName("enableAutomaticTermination:")
+	_nSProcessInfoSelProcessInfo                           = objc.RegisterName("processInfo")
+	_nSProcessInfoSelEnvironment                           = objc.RegisterName("environment")
+	_nSProcessInfoSelArguments                             = objc.RegisterName("arguments")
+	_nSProcessInfoSelHostName                              = objc.RegisterName("hostName")
+	_nSProcessInfoSelProcessName                           = objc.RegisterName("processName")
+	_nSProcessInfoSelSetProcessName                        = objc.RegisterName("setProcessName:")
+	_nSProcessInfoSelProcessIdentifier                     = objc.RegisterName("processIdentifier")
+	_nSProcessInfoSelGloballyUniqueString                  = objc.RegisterName("globallyUniqueString")
+	_nSProcessInfoSelOperatingSystemVersionString          = objc.RegisterName("operatingSystemVersionString")
+	_nSProcessInfoSelOperatingSystemVersion                = objc.RegisterName("operatingSystemVersion")
+	_nSProcessInfoSelProcessorCount                        = objc.RegisterName("processorCount")
+	_nSProcessInfoSelActiveProcessorCount                  = objc.RegisterName("activeProcessorCount")
+	_nSProcessInfoSelPhysicalMemory                        = objc.RegisterName("physicalMemory")
+	_nSProcessInfoSelSystemUptime                          = objc.RegisterName("systemUptime")
+	_nSProcessInfoSelAutomaticTerminationSupportEnabled    = objc.RegisterName("automaticTerminationSupportEnabled")
 	_nSProcessInfoSelSetAutomaticTerminationSupportEnabled = objc.RegisterName("setAutomaticTerminationSupportEnabled:")
-	_nSProcessInfoSelBeginActivityWithOptionsReason = objc.RegisterName("beginActivityWithOptions:reason:")
-	_nSProcessInfoSelEndActivity = objc.RegisterName("endActivity:")
+	_nSProcessInfoSelBeginActivityWithOptionsReason        = objc.RegisterName("beginActivityWithOptions:reason:")
+	_nSProcessInfoSelEndActivity                           = objc.RegisterName("endActivity:")
 	_nSProcessInfoSelPerformActivityWithOptionsReasonUsing = objc.RegisterName("performActivityWithOptions:reason:usingBlock:")
-	_nSProcessInfoSelUserName = objc.RegisterName("userName")
-	_nSProcessInfoSelFullUserName = objc.RegisterName("fullUserName")
-	_nSProcessInfoSelThermalState = objc.RegisterName("thermalState")
-	_nSProcessInfoSelIsLowPowerModeEnabled = objc.RegisterName("isLowPowerModeEnabled")
-	_nSProcessInfoSelIsMacCatalystApp = objc.RegisterName("isMacCatalystApp")
-	_nSProcessInfoSelIsiOSAppOnMac = objc.RegisterName("isiOSAppOnMac")
-	_nSProcessInfoSelIsiOSAppOnVision = objc.RegisterName("isiOSAppOnVision")
+	_nSProcessInfoSelUserName                              = objc.RegisterName("userName")
+	_nSProcessInfoSelFullUserName                          = objc.RegisterName("fullUserName")
+	_nSProcessInfoSelThermalState                          = objc.RegisterName("thermalState")
+	_nSProcessInfoSelIsLowPowerModeEnabled                 = objc.RegisterName("isLowPowerModeEnabled")
+	_nSProcessInfoSelIsMacCatalystApp                      = objc.RegisterName("isMacCatalystApp")
+	_nSProcessInfoSelIsiOSAppOnMac                         = objc.RegisterName("isiOSAppOnMac")
+	_nSProcessInfoSelIsiOSAppOnVision                      = objc.RegisterName("isiOSAppOnVision")
 )
 
 func NSProcessInfoFromID(id objc.ID) *NSProcessInfo {
@@ -70,7 +70,9 @@ func (o *NSProcessInfo) OperatingSystem() uint {
 // Deprecated: -operatingSystemName always returns NSMACHOperatingSystem, use -operatingSystemVersionString instead
 func (o *NSProcessInfo) OperatingSystemName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProcessInfoSelOperatingSystemName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -97,31 +99,41 @@ func (o *NSProcessInfo) EnableAutomaticTermination(reason *NSString) {
 
 func NSProcessInfoProcessInfo() *NSProcessInfo {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSProcessInfo), _nSProcessInfoSelProcessInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSProcessInfoFromID(_ret)
 }
 
 func (o *NSProcessInfo) Environment() *NSDictionary[*NSString, *NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProcessInfoSelEnvironment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDictionaryFromID[*NSString, *NSString](_ret)
 }
 
 func (o *NSProcessInfo) Arguments() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProcessInfoSelArguments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSProcessInfo) HostName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProcessInfoSelHostName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSProcessInfo) ProcessName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProcessInfoSelProcessName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -136,14 +148,18 @@ func (o *NSProcessInfo) ProcessIdentifier() int {
 
 func (o *NSProcessInfo) GloballyUniqueString() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProcessInfoSelGloballyUniqueString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // Deprecated: -operatingSystemName always returns NSMACHOperatingSystem, use -operatingSystemVersionString instead
 func (o *NSProcessInfo) OperatingSystemVersionString() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProcessInfoSelOperatingSystemVersionString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -203,13 +219,17 @@ func (o *NSProcessInfo) PerformActivityWithOptionsReasonUsing(options NSActivity
 
 func (o *NSProcessInfo) UserName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProcessInfoSelUserName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSProcessInfo) FullUserName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProcessInfoSelFullUserName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -237,4 +257,3 @@ func (o *NSProcessInfo) IsiOSAppOnVision() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSProcessInfoSelIsiOSAppOnVision)
 	return _ret
 }
-

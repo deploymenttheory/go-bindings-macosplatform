@@ -174,7 +174,9 @@ func (x *PhysicallyPlausibleLight) SetAttenuationEndDistance(attenuationEndDista
 	x.inner.SetAttenuationEndDistance(attenuationEndDistance)
 }
 
-func (x *PhysicallyPlausibleLight) asPhysicallyPlausibleLight() *raw.MDLPhysicallyPlausibleLight { return x.inner }
+func (x *PhysicallyPlausibleLight) asPhysicallyPlausibleLight() *raw.MDLPhysicallyPlausibleLight {
+	return x.inner
+}
 
 func (x *PhysicallyPlausibleLight) asLight() *raw.MDLLight { return &x.inner.MDLLight }
 
@@ -211,4 +213,3 @@ type PhysicallyPlausibleLightable interface {
 }
 
 var _ PhysicallyPlausibleLightable = (*PhysicallyPlausibleLight)(nil)
-

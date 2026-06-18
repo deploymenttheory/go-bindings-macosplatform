@@ -45,4 +45,3 @@ func KMADimFlashingLightsChangedNotification() uintptr {
 	ptr, _ := purego.Dlsym(_mediaaccessibilityLib, "kMADimFlashingLightsChangedNotification")
 	return ptr
 }
-

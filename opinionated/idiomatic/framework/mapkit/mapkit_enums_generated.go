@@ -13,12 +13,12 @@ import (
 type MKAddressFilterOption uint64
 
 const (
-	MKAddressFilterOptionCountry MKAddressFilterOption = 1
-	MKAddressFilterOptionAdministrativeArea MKAddressFilterOption = 2
+	MKAddressFilterOptionCountry               MKAddressFilterOption = 1
+	MKAddressFilterOptionAdministrativeArea    MKAddressFilterOption = 2
 	MKAddressFilterOptionSubAdministrativeArea MKAddressFilterOption = 4
-	MKAddressFilterOptionLocality MKAddressFilterOption = 8
-	MKAddressFilterOptionSubLocality MKAddressFilterOption = 16
-	MKAddressFilterOptionPostalCode MKAddressFilterOption = 32
+	MKAddressFilterOptionLocality              MKAddressFilterOption = 8
+	MKAddressFilterOptionSubLocality           MKAddressFilterOption = 16
+	MKAddressFilterOptionPostalCode            MKAddressFilterOption = 32
 )
 
 func (e MKAddressFilterOption) String() string {
@@ -51,8 +51,8 @@ type MKAddressRepresentationsContextStyle int64
 
 const (
 	MKAddressRepresentationsContextStyleAutomatic MKAddressRepresentationsContextStyle = 0
-	MKAddressRepresentationsContextStyleShort MKAddressRepresentationsContextStyle = 1
-	MKAddressRepresentationsContextStyleFull MKAddressRepresentationsContextStyle = 2
+	MKAddressRepresentationsContextStyleShort     MKAddressRepresentationsContextStyle = 1
+	MKAddressRepresentationsContextStyleFull      MKAddressRepresentationsContextStyle = 2
 )
 
 func (e MKAddressRepresentationsContextStyle) String() string {
@@ -72,8 +72,8 @@ type MKAnnotationViewCollisionMode int64
 
 const (
 	MKAnnotationViewCollisionModeRectangle MKAnnotationViewCollisionMode = 0
-	MKAnnotationViewCollisionModeCircle MKAnnotationViewCollisionMode = 1
-	MKAnnotationViewCollisionModeNone MKAnnotationViewCollisionMode = 2
+	MKAnnotationViewCollisionModeCircle    MKAnnotationViewCollisionMode = 1
+	MKAnnotationViewCollisionModeNone      MKAnnotationViewCollisionMode = 2
 )
 
 func (e MKAnnotationViewCollisionMode) String() string {
@@ -92,11 +92,11 @@ func (e MKAnnotationViewCollisionMode) String() string {
 type MKAnnotationViewDragState uint64
 
 const (
-	MKAnnotationViewDragStateNone MKAnnotationViewDragState = 0
-	MKAnnotationViewDragStateStarting MKAnnotationViewDragState = 1
-	MKAnnotationViewDragStateDragging MKAnnotationViewDragState = 2
+	MKAnnotationViewDragStateNone      MKAnnotationViewDragState = 0
+	MKAnnotationViewDragStateStarting  MKAnnotationViewDragState = 1
+	MKAnnotationViewDragStateDragging  MKAnnotationViewDragState = 2
 	MKAnnotationViewDragStateCanceling MKAnnotationViewDragState = 3
-	MKAnnotationViewDragStateEnding MKAnnotationViewDragState = 4
+	MKAnnotationViewDragStateEnding    MKAnnotationViewDragState = 4
 )
 
 func (e MKAnnotationViewDragState) String() string {
@@ -119,7 +119,7 @@ func (e MKAnnotationViewDragState) String() string {
 type MKDirectionsRoutePreference int64
 
 const (
-	MKDirectionsRoutePreferenceAny MKDirectionsRoutePreference = 0
+	MKDirectionsRoutePreferenceAny   MKDirectionsRoutePreference = 0
 	MKDirectionsRoutePreferenceAvoid MKDirectionsRoutePreference = 1
 )
 
@@ -139,10 +139,10 @@ type MKDirectionsTransportType uint64
 
 const (
 	MKDirectionsTransportTypeAutomobile MKDirectionsTransportType = 1
-	MKDirectionsTransportTypeWalking MKDirectionsTransportType = 2
-	MKDirectionsTransportTypeTransit MKDirectionsTransportType = 4
-	MKDirectionsTransportTypeCycling MKDirectionsTransportType = 8
-	MKDirectionsTransportTypeAny MKDirectionsTransportType = 268435455
+	MKDirectionsTransportTypeWalking    MKDirectionsTransportType = 2
+	MKDirectionsTransportTypeTransit    MKDirectionsTransportType = 4
+	MKDirectionsTransportTypeCycling    MKDirectionsTransportType = 8
+	MKDirectionsTransportTypeAny        MKDirectionsTransportType = 268435455
 )
 
 func (e MKDirectionsTransportType) String() string {
@@ -171,9 +171,9 @@ func (e MKDirectionsTransportType) String() string {
 type MKDistanceFormatterUnitStyle uint64
 
 const (
-	MKDistanceFormatterUnitStyleDefault MKDistanceFormatterUnitStyle = 0
+	MKDistanceFormatterUnitStyleDefault     MKDistanceFormatterUnitStyle = 0
 	MKDistanceFormatterUnitStyleAbbreviated MKDistanceFormatterUnitStyle = 1
-	MKDistanceFormatterUnitStyleFull MKDistanceFormatterUnitStyle = 2
+	MKDistanceFormatterUnitStyleFull        MKDistanceFormatterUnitStyle = 2
 )
 
 func (e MKDistanceFormatterUnitStyle) String() string {
@@ -192,9 +192,9 @@ func (e MKDistanceFormatterUnitStyle) String() string {
 type MKDistanceFormatterUnits uint64
 
 const (
-	MKDistanceFormatterUnitsDefault MKDistanceFormatterUnits = 0
-	MKDistanceFormatterUnitsMetric MKDistanceFormatterUnits = 1
-	MKDistanceFormatterUnitsImperial MKDistanceFormatterUnits = 2
+	MKDistanceFormatterUnitsDefault           MKDistanceFormatterUnits = 0
+	MKDistanceFormatterUnitsMetric            MKDistanceFormatterUnits = 1
+	MKDistanceFormatterUnitsImperial          MKDistanceFormatterUnits = 2
 	MKDistanceFormatterUnitsImperialWithYards MKDistanceFormatterUnits = 3
 )
 
@@ -217,8 +217,8 @@ type MKFeatureVisibility int64
 
 const (
 	MKFeatureVisibilityAdaptive MKFeatureVisibility = 0
-	MKFeatureVisibilityHidden MKFeatureVisibility = 1
-	MKFeatureVisibilityVisible MKFeatureVisibility = 2
+	MKFeatureVisibilityHidden   MKFeatureVisibility = 1
+	MKFeatureVisibilityVisible  MKFeatureVisibility = 2
 )
 
 func (e MKFeatureVisibility) String() string {
@@ -239,9 +239,9 @@ type MKLocalSearchCompleterResultType uint64
 
 const (
 	// Deprecated: Use MKLocalSearchCompleterResultType
-	MKLocalSearchCompleterResultTypeAddress MKLocalSearchCompleterResultType = 1
+	MKLocalSearchCompleterResultTypeAddress         MKLocalSearchCompleterResultType = 1
 	MKLocalSearchCompleterResultTypePointOfInterest MKLocalSearchCompleterResultType = 2
-	MKLocalSearchCompleterResultTypeQuery MKLocalSearchCompleterResultType = 4
+	MKLocalSearchCompleterResultTypeQuery           MKLocalSearchCompleterResultType = 4
 	MKLocalSearchCompleterResultTypePhysicalFeature MKLocalSearchCompleterResultType = 8
 )
 
@@ -268,7 +268,7 @@ func (e MKLocalSearchCompleterResultType) String() string {
 type MKLocalSearchRegionPriority int64
 
 const (
-	MKLocalSearchRegionPriorityDefault MKLocalSearchRegionPriority = 0
+	MKLocalSearchRegionPriorityDefault  MKLocalSearchRegionPriority = 0
 	MKLocalSearchRegionPriorityRequired MKLocalSearchRegionPriority = 1
 )
 
@@ -287,7 +287,7 @@ func (e MKLocalSearchRegionPriority) String() string {
 type MKLocalSearchResultType uint64
 
 const (
-	MKLocalSearchResultTypeAddress MKLocalSearchResultType = 1
+	MKLocalSearchResultTypeAddress         MKLocalSearchResultType = 1
 	MKLocalSearchResultTypePointOfInterest MKLocalSearchResultType = 2
 	MKLocalSearchResultTypePhysicalFeature MKLocalSearchResultType = 4
 )
@@ -312,8 +312,8 @@ func (e MKLocalSearchResultType) String() string {
 type MKLookAroundBadgePosition int64
 
 const (
-	MKLookAroundBadgePositionTopLeading MKLookAroundBadgePosition = 0
-	MKLookAroundBadgePositionTopTrailing MKLookAroundBadgePosition = 1
+	MKLookAroundBadgePositionTopLeading     MKLookAroundBadgePosition = 0
+	MKLookAroundBadgePositionTopTrailing    MKLookAroundBadgePosition = 1
 	MKLookAroundBadgePositionBottomTrailing MKLookAroundBadgePosition = 2
 )
 
@@ -333,7 +333,7 @@ func (e MKLookAroundBadgePosition) String() string {
 type MKMapElevationStyle int64
 
 const (
-	MKMapElevationStyleFlat MKMapElevationStyle = 0
+	MKMapElevationStyleFlat      MKMapElevationStyle = 0
 	MKMapElevationStyleRealistic MKMapElevationStyle = 1
 )
 
@@ -352,8 +352,8 @@ type MKMapItemDetailSelectionAccessoryCalloutStyle int64
 
 const (
 	MKMapItemDetailSelectionAccessoryCalloutStyleAutomatic MKMapItemDetailSelectionAccessoryCalloutStyle = 0
-	MKMapItemDetailSelectionAccessoryCalloutStyleFull MKMapItemDetailSelectionAccessoryCalloutStyle = 1
-	MKMapItemDetailSelectionAccessoryCalloutStyleCompact MKMapItemDetailSelectionAccessoryCalloutStyle = 2
+	MKMapItemDetailSelectionAccessoryCalloutStyleFull      MKMapItemDetailSelectionAccessoryCalloutStyle = 1
+	MKMapItemDetailSelectionAccessoryCalloutStyleCompact   MKMapItemDetailSelectionAccessoryCalloutStyle = 2
 )
 
 func (e MKMapItemDetailSelectionAccessoryCalloutStyle) String() string {
@@ -372,12 +372,12 @@ func (e MKMapItemDetailSelectionAccessoryCalloutStyle) String() string {
 type MKMapType uint64
 
 const (
-	MKMapTypeStandard MKMapType = 0
-	MKMapTypeSatellite MKMapType = 1
-	MKMapTypeHybrid MKMapType = 2
+	MKMapTypeStandard         MKMapType = 0
+	MKMapTypeSatellite        MKMapType = 1
+	MKMapTypeHybrid           MKMapType = 2
 	MKMapTypeSatelliteFlyover MKMapType = 3
-	MKMapTypeHybridFlyover MKMapType = 4
-	MKMapTypeMutedStandard MKMapType = 5
+	MKMapTypeHybridFlyover    MKMapType = 4
+	MKMapTypeMutedStandard    MKMapType = 5
 )
 
 func (e MKMapType) String() string {
@@ -402,7 +402,7 @@ func (e MKMapType) String() string {
 type MKOverlayLevel int64
 
 const (
-	MKOverlayLevelAboveRoads MKOverlayLevel = 0
+	MKOverlayLevelAboveRoads  MKOverlayLevel = 0
 	MKOverlayLevelAboveLabels MKOverlayLevel = 1
 )
 
@@ -420,8 +420,8 @@ func (e MKOverlayLevel) String() string {
 type MKPinAnnotationColor uint64
 
 const (
-	MKPinAnnotationColorRed MKPinAnnotationColor = 0
-	MKPinAnnotationColorGreen MKPinAnnotationColor = 1
+	MKPinAnnotationColorRed    MKPinAnnotationColor = 0
+	MKPinAnnotationColorGreen  MKPinAnnotationColor = 1
 	MKPinAnnotationColorPurple MKPinAnnotationColor = 2
 )
 
@@ -443,7 +443,7 @@ type MKSearchCompletionFilterType int64
 
 const (
 	MKSearchCompletionFilterTypeLocationsAndQueries MKSearchCompletionFilterType = 0
-	MKSearchCompletionFilterTypeLocationsOnly MKSearchCompletionFilterType = 1
+	MKSearchCompletionFilterTypeLocationsOnly       MKSearchCompletionFilterType = 1
 )
 
 func (e MKSearchCompletionFilterType) String() string {
@@ -461,7 +461,7 @@ type MKStandardMapEmphasisStyle int64
 
 const (
 	MKStandardMapEmphasisStyleDefault MKStandardMapEmphasisStyle = 0
-	MKStandardMapEmphasisStyleMuted MKStandardMapEmphasisStyle = 1
+	MKStandardMapEmphasisStyleMuted   MKStandardMapEmphasisStyle = 1
 )
 
 func (e MKStandardMapEmphasisStyle) String() string {
@@ -478,7 +478,7 @@ func (e MKStandardMapEmphasisStyle) String() string {
 type MKUserTrackingMode int64
 
 const (
-	MKUserTrackingModeNone MKUserTrackingMode = 0
+	MKUserTrackingModeNone   MKUserTrackingMode = 0
 	MKUserTrackingModeFollow MKUserTrackingMode = 1
 )
 
@@ -492,4 +492,3 @@ func (e MKUserTrackingMode) String() string {
 		return fmt.Sprintf("MKUserTrackingMode(%d)", int64(e))
 	}
 }
-

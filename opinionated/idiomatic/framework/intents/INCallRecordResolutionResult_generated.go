@@ -35,9 +35,13 @@ func NewCallRecordResolutionResult() *CallRecordResolutionResult {
 	return &CallRecordResolutionResult{inner: raw.INCallRecordResolutionResultFromID(_id)}
 }
 
-func (x *CallRecordResolutionResult) asCallRecordResolutionResult() *raw.INCallRecordResolutionResult { return x.inner }
+func (x *CallRecordResolutionResult) asCallRecordResolutionResult() *raw.INCallRecordResolutionResult {
+	return x.inner
+}
 
-func (x *CallRecordResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
+func (x *CallRecordResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
+	return &x.inner.INIntentResolutionResult
+}
 
 // CallRecordResolutionResultable is the interface implemented by [CallRecordResolutionResult], for mocking and DI.
 type CallRecordResolutionResultable interface {
@@ -45,4 +49,3 @@ type CallRecordResolutionResultable interface {
 }
 
 var _ CallRecordResolutionResultable = (*CallRecordResolutionResult)(nil)
-

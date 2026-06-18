@@ -17,7 +17,7 @@ type MPSImageReduceColumnMin struct {
 }
 
 var (
-	_clsMPSImageReduceColumnMin = _objcClass("MPSImageReduceColumnMin")
+	_clsMPSImageReduceColumnMin               = _objcClass("MPSImageReduceColumnMin")
 	_mPSImageReduceColumnMinSelInitWithDevice = objc.RegisterName("initWithDevice:")
 )
 
@@ -33,7 +33,8 @@ func MPSImageReduceColumnMinFromID(id objc.ID) *MPSImageReduceColumnMin {
 
 func (o *MPSImageReduceColumnMin) InitWithDevice(device metal.MTLDevice) *MPSImageReduceColumnMin {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageReduceColumnMinSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageReduceColumnMinFromID(_ret)
 }
-

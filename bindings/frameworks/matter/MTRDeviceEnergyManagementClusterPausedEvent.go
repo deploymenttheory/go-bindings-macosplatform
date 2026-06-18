@@ -26,4 +26,3 @@ func MTRDeviceEnergyManagementClusterPausedEventFromID(id objc.ID) *MTRDeviceEne
 	purego.Track(o)
 	return o
 }
-

@@ -71,4 +71,3 @@ type ModelStructureable interface {
 }
 
 var _ ModelStructureable = (*ModelStructure)(nil)
-

@@ -41,4 +41,3 @@ func Sandbox_free_error(errorbuf string) {
 	C.sandbox_fn_sandbox_free_error(_cstr_errorbuf, &_exc)
 	cgo.RaiseIfException(_exc)
 }
-

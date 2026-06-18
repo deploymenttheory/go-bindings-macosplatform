@@ -96,4 +96,3 @@ type Predicateable interface {
 }
 
 var _ Predicateable = (*Predicate)(nil)
-

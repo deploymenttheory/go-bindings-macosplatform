@@ -42,4 +42,3 @@ type Mediumable interface {
 }
 
 var _ Mediumable = (*Medium)(nil)
-

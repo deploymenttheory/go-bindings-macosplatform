@@ -25,4 +25,3 @@ func MPSMatrixLogSoftMaxFromID(id objc.ID) *MPSMatrixLogSoftMax {
 	purego.Track(o)
 	return o
 }
-

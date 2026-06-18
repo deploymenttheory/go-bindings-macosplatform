@@ -115,9 +115,13 @@ func (x *NNDivisionNode) WithLabel(label string) *NNDivisionNode {
 	return x
 }
 
-func (x *NNDivisionNode) asNNBinaryArithmeticNode() *mpsneuralnetwork.MPSNNBinaryArithmeticNode { return &x.inner.MPSNNBinaryArithmeticNode }
+func (x *NNDivisionNode) asNNBinaryArithmeticNode() *mpsneuralnetwork.MPSNNBinaryArithmeticNode {
+	return &x.inner.MPSNNBinaryArithmeticNode
+}
 
-func (x *NNDivisionNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode }
+func (x *NNDivisionNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode
+}
 
 // NNDivisionNodeable is the interface implemented by [NNDivisionNode], for mocking and DI.
 type NNDivisionNodeable interface {
@@ -138,4 +142,3 @@ type NNDivisionNodeable interface {
 }
 
 var _ NNDivisionNodeable = (*NNDivisionNode)(nil)
-

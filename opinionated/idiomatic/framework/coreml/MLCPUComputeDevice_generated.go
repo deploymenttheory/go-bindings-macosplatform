@@ -41,4 +41,3 @@ type CPUComputeDeviceable interface {
 }
 
 var _ CPUComputeDeviceable = (*CPUComputeDevice)(nil)
-

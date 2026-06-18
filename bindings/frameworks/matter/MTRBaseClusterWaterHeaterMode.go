@@ -18,30 +18,30 @@ type MTRBaseClusterWaterHeaterMode struct {
 }
 
 var (
-	_clsMTRBaseClusterWaterHeaterMode = _objcClass("MTRBaseClusterWaterHeaterMode")
-	_mTRBaseClusterWaterHeaterModeSelChangeToModeWithParamsCompletion = objc.RegisterName("changeToModeWithParams:completion:")
-	_mTRBaseClusterWaterHeaterModeSelReadAttributeSupportedModesWithCompletion = objc.RegisterName("readAttributeSupportedModesWithCompletion:")
-	_mTRBaseClusterWaterHeaterModeSelSubscribeAttributeSupportedModesWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeSupportedModesWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterWaterHeaterModeSelReadAttributeSupportedModesWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeSupportedModesWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterWaterHeaterModeSelReadAttributeCurrentModeWithCompletion = objc.RegisterName("readAttributeCurrentModeWithCompletion:")
-	_mTRBaseClusterWaterHeaterModeSelSubscribeAttributeCurrentModeWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeCurrentModeWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterWaterHeaterModeSelReadAttributeCurrentModeWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeCurrentModeWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterWaterHeaterModeSelReadAttributeGeneratedCommandListWithCompletion = objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:")
+	_clsMTRBaseClusterWaterHeaterMode                                                                                     = _objcClass("MTRBaseClusterWaterHeaterMode")
+	_mTRBaseClusterWaterHeaterModeSelChangeToModeWithParamsCompletion                                                     = objc.RegisterName("changeToModeWithParams:completion:")
+	_mTRBaseClusterWaterHeaterModeSelReadAttributeSupportedModesWithCompletion                                            = objc.RegisterName("readAttributeSupportedModesWithCompletion:")
+	_mTRBaseClusterWaterHeaterModeSelSubscribeAttributeSupportedModesWithParamsSubscriptionEstablishedReportHandler       = objc.RegisterName("subscribeAttributeSupportedModesWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterWaterHeaterModeSelReadAttributeSupportedModesWithClusterStateCacheEndpointQueueCompletion              = objc.RegisterName("readAttributeSupportedModesWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterWaterHeaterModeSelReadAttributeCurrentModeWithCompletion                                               = objc.RegisterName("readAttributeCurrentModeWithCompletion:")
+	_mTRBaseClusterWaterHeaterModeSelSubscribeAttributeCurrentModeWithParamsSubscriptionEstablishedReportHandler          = objc.RegisterName("subscribeAttributeCurrentModeWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterWaterHeaterModeSelReadAttributeCurrentModeWithClusterStateCacheEndpointQueueCompletion                 = objc.RegisterName("readAttributeCurrentModeWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterWaterHeaterModeSelReadAttributeGeneratedCommandListWithCompletion                                      = objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:")
 	_mTRBaseClusterWaterHeaterModeSelSubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterWaterHeaterModeSelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeGeneratedCommandListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterWaterHeaterModeSelReadAttributeAcceptedCommandListWithCompletion = objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:")
-	_mTRBaseClusterWaterHeaterModeSelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterWaterHeaterModeSelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeAcceptedCommandListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterWaterHeaterModeSelReadAttributeAttributeListWithCompletion = objc.RegisterName("readAttributeAttributeListWithCompletion:")
-	_mTRBaseClusterWaterHeaterModeSelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterWaterHeaterModeSelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeAttributeListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterWaterHeaterModeSelReadAttributeFeatureMapWithCompletion = objc.RegisterName("readAttributeFeatureMapWithCompletion:")
-	_mTRBaseClusterWaterHeaterModeSelSubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterWaterHeaterModeSelReadAttributeFeatureMapWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeFeatureMapWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterWaterHeaterModeSelReadAttributeClusterRevisionWithCompletion = objc.RegisterName("readAttributeClusterRevisionWithCompletion:")
-	_mTRBaseClusterWaterHeaterModeSelSubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterWaterHeaterModeSelReadAttributeClusterRevisionWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeClusterRevisionWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterWaterHeaterModeSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRBaseClusterWaterHeaterModeSelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion        = objc.RegisterName("readAttributeGeneratedCommandListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterWaterHeaterModeSelReadAttributeAcceptedCommandListWithCompletion                                       = objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:")
+	_mTRBaseClusterWaterHeaterModeSelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler  = objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterWaterHeaterModeSelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion         = objc.RegisterName("readAttributeAcceptedCommandListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterWaterHeaterModeSelReadAttributeAttributeListWithCompletion                                             = objc.RegisterName("readAttributeAttributeListWithCompletion:")
+	_mTRBaseClusterWaterHeaterModeSelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler        = objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterWaterHeaterModeSelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion               = objc.RegisterName("readAttributeAttributeListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterWaterHeaterModeSelReadAttributeFeatureMapWithCompletion                                                = objc.RegisterName("readAttributeFeatureMapWithCompletion:")
+	_mTRBaseClusterWaterHeaterModeSelSubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler           = objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterWaterHeaterModeSelReadAttributeFeatureMapWithClusterStateCacheEndpointQueueCompletion                  = objc.RegisterName("readAttributeFeatureMapWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterWaterHeaterModeSelReadAttributeClusterRevisionWithCompletion                                           = objc.RegisterName("readAttributeClusterRevisionWithCompletion:")
+	_mTRBaseClusterWaterHeaterModeSelSubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler      = objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterWaterHeaterModeSelReadAttributeClusterRevisionWithClusterStateCacheEndpointQueueCompletion             = objc.RegisterName("readAttributeClusterRevisionWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterWaterHeaterModeSelInitWithDeviceEndpointIDQueue                                                        = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRBaseClusterWaterHeaterModeFromID(id objc.ID) *MTRBaseClusterWaterHeaterMode {
@@ -295,7 +295,8 @@ func MTRBaseClusterWaterHeaterModeReadAttributeClusterRevisionWithClusterStateCa
 // For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func (o *MTRBaseClusterWaterHeaterMode) InitWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterWaterHeaterMode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBaseClusterWaterHeaterModeSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRBaseClusterWaterHeaterModeFromID(_ret)
 }
-

@@ -17,7 +17,9 @@ type CNNPoolingAverageGradientNode struct {
 }
 
 // Unwrap returns the underlying [raw.MPSCNNPoolingAverageGradientNode].
-func (x *CNNPoolingAverageGradientNode) Unwrap() *raw.MPSCNNPoolingAverageGradientNode { return x.inner }
+func (x *CNNPoolingAverageGradientNode) Unwrap() *raw.MPSCNNPoolingAverageGradientNode {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -49,11 +51,17 @@ func (x *CNNPoolingAverageGradientNode) WithLabel(label string) *CNNPoolingAvera
 	return x
 }
 
-func (x *CNNPoolingAverageGradientNode) asCNNPoolingGradientNode() *mpsneuralnetwork.MPSCNNPoolingGradientNode { return &x.inner.MPSCNNPoolingGradientNode }
+func (x *CNNPoolingAverageGradientNode) asCNNPoolingGradientNode() *mpsneuralnetwork.MPSCNNPoolingGradientNode {
+	return &x.inner.MPSCNNPoolingGradientNode
+}
 
-func (x *CNNPoolingAverageGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode { return &x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode }
+func (x *CNNPoolingAverageGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode {
+	return &x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode
+}
 
-func (x *CNNPoolingAverageGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode }
+func (x *CNNPoolingAverageGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode
+}
 
 // CNNPoolingAverageGradientNodeable is the interface implemented by [CNNPoolingAverageGradientNode], for mocking and DI.
 type CNNPoolingAverageGradientNodeable interface {
@@ -63,4 +71,3 @@ type CNNPoolingAverageGradientNodeable interface {
 }
 
 var _ CNNPoolingAverageGradientNodeable = (*CNNPoolingAverageGradientNode)(nil)
-

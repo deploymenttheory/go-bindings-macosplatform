@@ -13,45 +13,45 @@ import (
 )
 
 var (
-	_fnMKCoordinateForMapPoint func(MKMapPoint) unsafe.Pointer
-	_fnMKCoordinateRegionForMapRect func(MKMapRect) MKCoordinateRegion
-	_fnMKCoordinateRegionMake func(unsafe.Pointer, MKCoordinateSpan) MKCoordinateRegion
+	_fnMKCoordinateForMapPoint            func(MKMapPoint) unsafe.Pointer
+	_fnMKCoordinateRegionForMapRect       func(MKMapRect) MKCoordinateRegion
+	_fnMKCoordinateRegionMake             func(unsafe.Pointer, MKCoordinateSpan) MKCoordinateRegion
 	_fnMKCoordinateRegionMakeWithDistance func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) MKCoordinateRegion
-	_fnMKCoordinateSpanMake func(unsafe.Pointer, unsafe.Pointer) MKCoordinateSpan
-	_fnMKMapPointEqualToPoint func(MKMapPoint, MKMapPoint) bool
-	_fnMKMapPointForCoordinate func(unsafe.Pointer) MKMapPoint
-	_fnMKMapPointMake func(float64, float64) MKMapPoint
-	_fnMKMapPointsPerMeterAtLatitude func(unsafe.Pointer) float64
-	_fnMKMapRectContainsPoint func(MKMapRect, MKMapPoint) bool
-	_fnMKMapRectContainsRect func(MKMapRect, MKMapRect) bool
-	_fnMKMapRectDivide func(MKMapRect, *MKMapRect, *MKMapRect, float64, corefoundation.CGRectEdge)
-	_fnMKMapRectEqualToRect func(MKMapRect, MKMapRect) bool
-	_fnMKMapRectGetHeight func(MKMapRect) float64
-	_fnMKMapRectGetMaxX func(MKMapRect) float64
-	_fnMKMapRectGetMaxY func(MKMapRect) float64
-	_fnMKMapRectGetMidX func(MKMapRect) float64
-	_fnMKMapRectGetMidY func(MKMapRect) float64
-	_fnMKMapRectGetMinX func(MKMapRect) float64
-	_fnMKMapRectGetMinY func(MKMapRect) float64
-	_fnMKMapRectGetWidth func(MKMapRect) float64
-	_fnMKMapRectInset func(MKMapRect, float64, float64) MKMapRect
-	_fnMKMapRectIntersection func(MKMapRect, MKMapRect) MKMapRect
-	_fnMKMapRectIntersectsRect func(MKMapRect, MKMapRect) bool
-	_fnMKMapRectIsEmpty func(MKMapRect) bool
-	_fnMKMapRectIsNull func(MKMapRect) bool
-	_fnMKMapRectMake func(float64, float64, float64, float64) MKMapRect
-	_fnMKMapRectOffset func(MKMapRect, float64, float64) MKMapRect
-	_fnMKMapRectRemainder func(MKMapRect) MKMapRect
-	_fnMKMapRectSpans180thMeridian func(MKMapRect) bool
-	_fnMKMapRectUnion func(MKMapRect, MKMapRect) MKMapRect
-	_fnMKMapSizeEqualToSize func(MKMapSize, MKMapSize) bool
-	_fnMKMapSizeMake func(float64, float64) MKMapSize
-	_fnMKMetersBetweenMapPoints func(MKMapPoint, MKMapPoint) unsafe.Pointer
-	_fnMKMetersPerMapPointAtLatitude func(unsafe.Pointer) unsafe.Pointer
-	_fnMKRoadWidthAtZoomScale func(float64) float64
-	_fnMKStringFromMapPoint func(MKMapPoint) objc.ID
-	_fnMKStringFromMapRect func(MKMapRect) objc.ID
-	_fnMKStringFromMapSize func(MKMapSize) objc.ID
+	_fnMKCoordinateSpanMake               func(unsafe.Pointer, unsafe.Pointer) MKCoordinateSpan
+	_fnMKMapPointEqualToPoint             func(MKMapPoint, MKMapPoint) bool
+	_fnMKMapPointForCoordinate            func(unsafe.Pointer) MKMapPoint
+	_fnMKMapPointMake                     func(float64, float64) MKMapPoint
+	_fnMKMapPointsPerMeterAtLatitude      func(unsafe.Pointer) float64
+	_fnMKMapRectContainsPoint             func(MKMapRect, MKMapPoint) bool
+	_fnMKMapRectContainsRect              func(MKMapRect, MKMapRect) bool
+	_fnMKMapRectDivide                    func(MKMapRect, *MKMapRect, *MKMapRect, float64, corefoundation.CGRectEdge)
+	_fnMKMapRectEqualToRect               func(MKMapRect, MKMapRect) bool
+	_fnMKMapRectGetHeight                 func(MKMapRect) float64
+	_fnMKMapRectGetMaxX                   func(MKMapRect) float64
+	_fnMKMapRectGetMaxY                   func(MKMapRect) float64
+	_fnMKMapRectGetMidX                   func(MKMapRect) float64
+	_fnMKMapRectGetMidY                   func(MKMapRect) float64
+	_fnMKMapRectGetMinX                   func(MKMapRect) float64
+	_fnMKMapRectGetMinY                   func(MKMapRect) float64
+	_fnMKMapRectGetWidth                  func(MKMapRect) float64
+	_fnMKMapRectInset                     func(MKMapRect, float64, float64) MKMapRect
+	_fnMKMapRectIntersection              func(MKMapRect, MKMapRect) MKMapRect
+	_fnMKMapRectIntersectsRect            func(MKMapRect, MKMapRect) bool
+	_fnMKMapRectIsEmpty                   func(MKMapRect) bool
+	_fnMKMapRectIsNull                    func(MKMapRect) bool
+	_fnMKMapRectMake                      func(float64, float64, float64, float64) MKMapRect
+	_fnMKMapRectOffset                    func(MKMapRect, float64, float64) MKMapRect
+	_fnMKMapRectRemainder                 func(MKMapRect) MKMapRect
+	_fnMKMapRectSpans180thMeridian        func(MKMapRect) bool
+	_fnMKMapRectUnion                     func(MKMapRect, MKMapRect) MKMapRect
+	_fnMKMapSizeEqualToSize               func(MKMapSize, MKMapSize) bool
+	_fnMKMapSizeMake                      func(float64, float64) MKMapSize
+	_fnMKMetersBetweenMapPoints           func(MKMapPoint, MKMapPoint) unsafe.Pointer
+	_fnMKMetersPerMapPointAtLatitude      func(unsafe.Pointer) unsafe.Pointer
+	_fnMKRoadWidthAtZoomScale             func(float64) float64
+	_fnMKStringFromMapPoint               func(MKMapPoint) objc.ID
+	_fnMKStringFromMapRect                func(MKMapRect) objc.ID
+	_fnMKStringFromMapSize                func(MKMapSize) objc.ID
 )
 
 func MKCoordinateForMapPoint(mapPoint MKMapPoint) unsafe.Pointer {
@@ -200,19 +200,24 @@ func MKRoadWidthAtZoomScale(zoomScale float64) float64 {
 
 func MKStringFromMapPoint(point MKMapPoint) *foundation.NSString {
 	_ret := _fnMKStringFromMapPoint(point)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func MKStringFromMapRect(rect MKMapRect) *foundation.NSString {
 	_ret := _fnMKStringFromMapRect(rect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func MKStringFromMapSize(size MKMapSize) *foundation.NSString {
 	_ret := _fnMKStringFromMapSize(size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

@@ -12,45 +12,45 @@ import (
 )
 
 var (
-	_ar_anchor_get_identifier func(objc.ID, *uint8)
-	_ar_anchor_get_origin_from_anchor_transform func(objc.ID) unsafe.Pointer
-	_ar_anchor_get_timestamp func(objc.ID) float64
-	_ar_authorization_result_get_authorization_type func(objc.ID) Ar_authorization_type_t
-	_ar_authorization_result_get_status func(objc.ID) Ar_authorization_status_t
-	_ar_authorization_results_enumerate_results func(objc.ID, objc.Block)
-	_ar_authorization_results_enumerate_results_f func(objc.ID, unsafe.Pointer, unsafe.Pointer)
-	_ar_authorization_results_get_count func(objc.ID) uint
-	_ar_data_provider_get_required_authorization_type func(objc.ID) Ar_authorization_type_t
-	_ar_data_provider_get_state func(objc.ID) Ar_data_provider_state_t
-	_ar_data_providers_add_data_provider func(objc.ID, objc.ID)
-	_ar_data_providers_add_data_providers func(objc.ID, objc.ID)
-	_ar_data_providers_create func() unsafe.Pointer
-	_ar_data_providers_enumerate_data_providers func(objc.ID, objc.Block)
-	_ar_data_providers_enumerate_data_providers_f func(objc.ID, unsafe.Pointer, unsafe.Pointer)
-	_ar_data_providers_get_count func(objc.ID) uint
-	_ar_data_providers_remove_data_provider func(objc.ID, objc.ID)
-	_ar_data_providers_remove_data_providers func(objc.ID, objc.ID)
-	_ar_device_anchor_create func() unsafe.Pointer
-	_ar_device_anchor_get_identifier func(objc.ID, *uint8)
-	_ar_device_anchor_get_origin_from_anchor_transform func(objc.ID) unsafe.Pointer
-	_ar_device_anchor_get_timestamp func(objc.ID) float64
-	_ar_device_anchor_get_tracking_state func(objc.ID) Ar_device_anchor_tracking_state_t
-	_ar_device_anchor_is_tracked func(objc.ID) bool
-	_ar_error_copy_cf_error func(objc.ID) unsafe.Pointer
-	_ar_error_get_error_code func(objc.ID) int
-	_ar_release func(unsafe.Pointer)
-	_ar_retain func(unsafe.Pointer) unsafe.Pointer
-	_ar_session_copy_data_providers func(objc.ID) unsafe.Pointer
-	_ar_session_create_with_device func(objc.ID) objc.ID
-	_ar_session_run func(objc.ID, objc.ID)
-	_ar_session_set_data_provider_state_change_handler func(objc.ID, objc.ID, objc.Block)
-	_ar_session_set_data_provider_state_change_handler_f func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer)
-	_ar_session_stop func(objc.ID)
-	_ar_trackable_anchor_is_tracked func(objc.ID) bool
-	_ar_world_tracking_configuration_create func() unsafe.Pointer
-	_ar_world_tracking_provider_create func(objc.ID) unsafe.Pointer
-	_ar_world_tracking_provider_get_required_authorization_type func() Ar_authorization_type_t
-	_ar_world_tracking_provider_is_supported func() bool
+	_ar_anchor_get_identifier                                    func(objc.ID, *uint8)
+	_ar_anchor_get_origin_from_anchor_transform                  func(objc.ID) unsafe.Pointer
+	_ar_anchor_get_timestamp                                     func(objc.ID) float64
+	_ar_authorization_result_get_authorization_type              func(objc.ID) Ar_authorization_type_t
+	_ar_authorization_result_get_status                          func(objc.ID) Ar_authorization_status_t
+	_ar_authorization_results_enumerate_results                  func(objc.ID, objc.Block)
+	_ar_authorization_results_enumerate_results_f                func(objc.ID, unsafe.Pointer, unsafe.Pointer)
+	_ar_authorization_results_get_count                          func(objc.ID) uint
+	_ar_data_provider_get_required_authorization_type            func(objc.ID) Ar_authorization_type_t
+	_ar_data_provider_get_state                                  func(objc.ID) Ar_data_provider_state_t
+	_ar_data_providers_add_data_provider                         func(objc.ID, objc.ID)
+	_ar_data_providers_add_data_providers                        func(objc.ID, objc.ID)
+	_ar_data_providers_create                                    func() unsafe.Pointer
+	_ar_data_providers_enumerate_data_providers                  func(objc.ID, objc.Block)
+	_ar_data_providers_enumerate_data_providers_f                func(objc.ID, unsafe.Pointer, unsafe.Pointer)
+	_ar_data_providers_get_count                                 func(objc.ID) uint
+	_ar_data_providers_remove_data_provider                      func(objc.ID, objc.ID)
+	_ar_data_providers_remove_data_providers                     func(objc.ID, objc.ID)
+	_ar_device_anchor_create                                     func() unsafe.Pointer
+	_ar_device_anchor_get_identifier                             func(objc.ID, *uint8)
+	_ar_device_anchor_get_origin_from_anchor_transform           func(objc.ID) unsafe.Pointer
+	_ar_device_anchor_get_timestamp                              func(objc.ID) float64
+	_ar_device_anchor_get_tracking_state                         func(objc.ID) Ar_device_anchor_tracking_state_t
+	_ar_device_anchor_is_tracked                                 func(objc.ID) bool
+	_ar_error_copy_cf_error                                      func(objc.ID) unsafe.Pointer
+	_ar_error_get_error_code                                     func(objc.ID) int
+	_ar_release                                                  func(unsafe.Pointer)
+	_ar_retain                                                   func(unsafe.Pointer) unsafe.Pointer
+	_ar_session_copy_data_providers                              func(objc.ID) unsafe.Pointer
+	_ar_session_create_with_device                               func(objc.ID) objc.ID
+	_ar_session_run                                              func(objc.ID, objc.ID)
+	_ar_session_set_data_provider_state_change_handler           func(objc.ID, objc.ID, objc.Block)
+	_ar_session_set_data_provider_state_change_handler_f         func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer)
+	_ar_session_stop                                             func(objc.ID)
+	_ar_trackable_anchor_is_tracked                              func(objc.ID) bool
+	_ar_world_tracking_configuration_create                      func() unsafe.Pointer
+	_ar_world_tracking_provider_create                           func(objc.ID) unsafe.Pointer
+	_ar_world_tracking_provider_get_required_authorization_type  func() Ar_authorization_type_t
+	_ar_world_tracking_provider_is_supported                     func() bool
 	_ar_world_tracking_provider_query_device_anchor_at_timestamp func(objc.ID, float64, objc.ID) Ar_device_anchor_query_status_t
 )
 
@@ -222,7 +222,9 @@ func ArSessionCopyDataProviders(session *foundation.NSObject) unsafe.Pointer {
 // C function: ar_session_create_with_device
 func ArSessionCreateWithDevice(device *foundation.NSObject) *foundation.NSObject {
 	_ret := _ar_session_create_with_device(device.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
@@ -291,4 +293,3 @@ func ArWorldTrackingProviderIsSupported() bool {
 func ArWorldTrackingProviderQueryDeviceAnchorAtTimestamp(world_tracking_provider *foundation.NSObject, timestamp float64, device_anchor *foundation.NSObject) Ar_device_anchor_query_status_t {
 	return _ar_world_tracking_provider_query_device_anchor_at_timestamp(world_tracking_provider.Ptr(), timestamp, device_anchor.Ptr())
 }
-

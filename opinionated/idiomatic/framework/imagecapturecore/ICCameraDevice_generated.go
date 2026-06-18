@@ -276,4 +276,3 @@ type CameraDeviceable interface {
 }
 
 var _ CameraDeviceable = (*CameraDevice)(nil)
-

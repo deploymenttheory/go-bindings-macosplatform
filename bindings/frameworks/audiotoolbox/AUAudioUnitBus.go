@@ -19,26 +19,26 @@ type AUAudioUnitBus struct {
 }
 
 var (
-	_clsAUAudioUnitBus = _objcClass("AUAudioUnitBus")
-	_aUAudioUnitBusSelSetFormatError = objc.RegisterName("setFormat:error:")
-	_aUAudioUnitBusSelFormat = objc.RegisterName("format")
-	_aUAudioUnitBusSelShouldAllocateBuffer = objc.RegisterName("shouldAllocateBuffer")
-	_aUAudioUnitBusSelSetShouldAllocateBuffer = objc.RegisterName("setShouldAllocateBuffer:")
-	_aUAudioUnitBusSelIsEnabled = objc.RegisterName("isEnabled")
-	_aUAudioUnitBusSelSetEnabled = objc.RegisterName("setEnabled:")
-	_aUAudioUnitBusSelName = objc.RegisterName("name")
-	_aUAudioUnitBusSelSetName = objc.RegisterName("setName:")
-	_aUAudioUnitBusSelIndex = objc.RegisterName("index")
-	_aUAudioUnitBusSelBusType = objc.RegisterName("busType")
-	_aUAudioUnitBusSelOwnerAudioUnit = objc.RegisterName("ownerAudioUnit")
-	_aUAudioUnitBusSelSupportedChannelLayoutTags = objc.RegisterName("supportedChannelLayoutTags")
-	_aUAudioUnitBusSelContextPresentationLatency = objc.RegisterName("contextPresentationLatency")
+	_clsAUAudioUnitBus                              = _objcClass("AUAudioUnitBus")
+	_aUAudioUnitBusSelSetFormatError                = objc.RegisterName("setFormat:error:")
+	_aUAudioUnitBusSelFormat                        = objc.RegisterName("format")
+	_aUAudioUnitBusSelShouldAllocateBuffer          = objc.RegisterName("shouldAllocateBuffer")
+	_aUAudioUnitBusSelSetShouldAllocateBuffer       = objc.RegisterName("setShouldAllocateBuffer:")
+	_aUAudioUnitBusSelIsEnabled                     = objc.RegisterName("isEnabled")
+	_aUAudioUnitBusSelSetEnabled                    = objc.RegisterName("setEnabled:")
+	_aUAudioUnitBusSelName                          = objc.RegisterName("name")
+	_aUAudioUnitBusSelSetName                       = objc.RegisterName("setName:")
+	_aUAudioUnitBusSelIndex                         = objc.RegisterName("index")
+	_aUAudioUnitBusSelBusType                       = objc.RegisterName("busType")
+	_aUAudioUnitBusSelOwnerAudioUnit                = objc.RegisterName("ownerAudioUnit")
+	_aUAudioUnitBusSelSupportedChannelLayoutTags    = objc.RegisterName("supportedChannelLayoutTags")
+	_aUAudioUnitBusSelContextPresentationLatency    = objc.RegisterName("contextPresentationLatency")
 	_aUAudioUnitBusSelSetContextPresentationLatency = objc.RegisterName("setContextPresentationLatency:")
-	_aUAudioUnitBusSelInitWithFormatError = objc.RegisterName("initWithFormat:error:")
-	_aUAudioUnitBusSelSupportedChannelCounts = objc.RegisterName("supportedChannelCounts")
-	_aUAudioUnitBusSelSetSupportedChannelCounts = objc.RegisterName("setSupportedChannelCounts:")
-	_aUAudioUnitBusSelMaximumChannelCount = objc.RegisterName("maximumChannelCount")
-	_aUAudioUnitBusSelSetMaximumChannelCount = objc.RegisterName("setMaximumChannelCount:")
+	_aUAudioUnitBusSelInitWithFormatError           = objc.RegisterName("initWithFormat:error:")
+	_aUAudioUnitBusSelSupportedChannelCounts        = objc.RegisterName("supportedChannelCounts")
+	_aUAudioUnitBusSelSetSupportedChannelCounts     = objc.RegisterName("setSupportedChannelCounts:")
+	_aUAudioUnitBusSelMaximumChannelCount           = objc.RegisterName("maximumChannelCount")
+	_aUAudioUnitBusSelSetMaximumChannelCount        = objc.RegisterName("setMaximumChannelCount:")
 )
 
 func AUAudioUnitBusFromID(id objc.ID) *AUAudioUnitBus {
@@ -64,7 +64,9 @@ func (o *AUAudioUnitBus) SetFormatError(format *avfaudio.AVAudioFormat) (bool, e
 // @property	format @brief		The audio format and channel layout of audio being transferred on the bus. @discussion Bridged to the v2 property kAudioUnitProperty_StreamFormat.
 func (o *AUAudioUnitBus) Format() *avfaudio.AVAudioFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitBusSelFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return avfaudio.AVAudioFormatFromID(_ret)
 }
 
@@ -91,7 +93,9 @@ func (o *AUAudioUnitBus) SetEnabled(enabled bool) {
 // @property	name @brief		A name for the bus. Can be set by host.
 func (o *AUAudioUnitBus) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitBusSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -114,7 +118,9 @@ func (o *AUAudioUnitBus) BusType() AUAudioUnitBusType {
 // @property   ownerAudioUnit @brief      The audio unit that owns the bus.
 func (o *AUAudioUnitBus) OwnerAudioUnit() *AUAudioUnit {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitBusSelOwnerAudioUnit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AUAudioUnitFromID(_ret)
 }
 
@@ -138,7 +144,9 @@ func (o *AUAudioUnitBus) SetContextPresentationLatency(contextPresentationLatenc
 func (o *AUAudioUnitBus) InitWithFormatError(format *avfaudio.AVAudioFormat) (*AUAudioUnitBus, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitBusSelInitWithFormatError, format.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -164,4 +172,3 @@ func (o *AUAudioUnitBus) MaximumChannelCount() uint32 {
 func (o *AUAudioUnitBus) SetMaximumChannelCount(maximumChannelCount uint32) {
 	o.Ptr().Send(_aUAudioUnitBusSelSetMaximumChannelCount, maximumChannelCount)
 }
-

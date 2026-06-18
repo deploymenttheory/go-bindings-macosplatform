@@ -16,7 +16,9 @@ type MTROperationalCredentialsClusterAttestationRequestParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTROperationalCredentialsClusterAttestationRequestParams].
-func (x *MTROperationalCredentialsClusterAttestationRequestParams) Unwrap() *raw.MTROperationalCredentialsClusterAttestationRequestParams { return x.inner }
+func (x *MTROperationalCredentialsClusterAttestationRequestParams) Unwrap() *raw.MTROperationalCredentialsClusterAttestationRequestParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -99,4 +101,3 @@ type MTROperationalCredentialsClusterAttestationRequestParamsable interface {
 }
 
 var _ MTROperationalCredentialsClusterAttestationRequestParamsable = (*MTROperationalCredentialsClusterAttestationRequestParams)(nil)
-

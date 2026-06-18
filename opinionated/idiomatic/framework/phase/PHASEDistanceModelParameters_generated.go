@@ -55,7 +55,9 @@ func (x *DistanceModelParameters) SetFadeOutParameters(fadeOutParameters *raw.PH
 	x.inner.SetFadeOutParameters(fadeOutParameters)
 }
 
-func (x *DistanceModelParameters) asDistanceModelParameters() *raw.PHASEDistanceModelParameters { return x.inner }
+func (x *DistanceModelParameters) asDistanceModelParameters() *raw.PHASEDistanceModelParameters {
+	return x.inner
+}
 
 // DistanceModelParametersable is the interface implemented by [DistanceModelParameters], for mocking and DI.
 type DistanceModelParametersable interface {
@@ -66,4 +68,3 @@ type DistanceModelParametersable interface {
 }
 
 var _ DistanceModelParametersable = (*DistanceModelParameters)(nil)
-

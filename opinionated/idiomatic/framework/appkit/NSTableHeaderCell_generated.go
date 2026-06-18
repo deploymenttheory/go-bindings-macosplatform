@@ -81,7 +81,9 @@ func (x *TableHeaderCell) WithAllowedInputSourceLocales(items ...*foundation.NSS
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -372,7 +374,9 @@ func (x *TableHeaderCell) SortIndicatorRectForBounds(rect corefoundation.CGRect)
 
 func (x *TableHeaderCell) asTextFieldCell() *raw.NSTextFieldCell { return &x.inner.NSTextFieldCell }
 
-func (x *TableHeaderCell) asActionCell() *raw.NSActionCell { return &x.inner.NSTextFieldCell.NSActionCell }
+func (x *TableHeaderCell) asActionCell() *raw.NSActionCell {
+	return &x.inner.NSTextFieldCell.NSActionCell
+}
 
 func (x *TableHeaderCell) asCell() *raw.NSCell { return &x.inner.NSTextFieldCell.NSActionCell.NSCell }
 
@@ -436,4 +440,3 @@ type TableHeaderCellable interface {
 }
 
 var _ TableHeaderCellable = (*TableHeaderCell)(nil)
-

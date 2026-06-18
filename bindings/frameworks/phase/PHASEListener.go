@@ -15,11 +15,11 @@ type PHASEListener struct {
 }
 
 var (
-	_clsPHASEListener = _objcClass("PHASEListener")
-	_pHASEListenerSelInitWithEngine = objc.RegisterName("initWithEngine:")
-	_pHASEListenerSelGain = objc.RegisterName("gain")
-	_pHASEListenerSelSetGain = objc.RegisterName("setGain:")
-	_pHASEListenerSelAutomaticHeadTrackingFlags = objc.RegisterName("automaticHeadTrackingFlags")
+	_clsPHASEListener                              = _objcClass("PHASEListener")
+	_pHASEListenerSelInitWithEngine                = objc.RegisterName("initWithEngine:")
+	_pHASEListenerSelGain                          = objc.RegisterName("gain")
+	_pHASEListenerSelSetGain                       = objc.RegisterName("setGain:")
+	_pHASEListenerSelAutomaticHeadTrackingFlags    = objc.RegisterName("automaticHeadTrackingFlags")
 	_pHASEListenerSelSetAutomaticHeadTrackingFlags = objc.RegisterName("setAutomaticHeadTrackingFlags:")
 )
 
@@ -36,7 +36,9 @@ func PHASEListenerFromID(id objc.ID) *PHASEListener {
 // @method initWithEngine: @abstract Initialize a new listener.
 func (o *PHASEListener) InitWithEngine(engine *PHASEEngine) *PHASEListener {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEListenerSelInitWithEngine, engine.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEListenerFromID(_ret)
 }
 
@@ -60,4 +62,3 @@ func (o *PHASEListener) AutomaticHeadTrackingFlags() PHASEAutomaticHeadTrackingF
 func (o *PHASEListener) SetAutomaticHeadTrackingFlags(automaticHeadTrackingFlags PHASEAutomaticHeadTrackingFlags) {
 	o.Ptr().Send(_pHASEListenerSelSetAutomaticHeadTrackingFlags, automaticHeadTrackingFlags)
 }
-

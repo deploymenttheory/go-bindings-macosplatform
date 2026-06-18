@@ -15,7 +15,9 @@ type NNArithmeticGradientStateNode struct {
 }
 
 // Unwrap returns the underlying [raw.MPSNNArithmeticGradientStateNode].
-func (x *NNArithmeticGradientStateNode) Unwrap() *raw.MPSNNArithmeticGradientStateNode { return x.inner }
+func (x *NNArithmeticGradientStateNode) Unwrap() *raw.MPSNNArithmeticGradientStateNode {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -53,9 +55,13 @@ func (x *NNArithmeticGradientStateNode) WithSynchronizeResource(synchronizeResou
 	return x
 }
 
-func (x *NNArithmeticGradientStateNode) asNNBinaryGradientStateNode() *raw.MPSNNBinaryGradientStateNode { return &x.inner.MPSNNBinaryGradientStateNode }
+func (x *NNArithmeticGradientStateNode) asNNBinaryGradientStateNode() *raw.MPSNNBinaryGradientStateNode {
+	return &x.inner.MPSNNBinaryGradientStateNode
+}
 
-func (x *NNArithmeticGradientStateNode) asNNStateNode() *raw.MPSNNStateNode { return &x.inner.MPSNNBinaryGradientStateNode.MPSNNStateNode }
+func (x *NNArithmeticGradientStateNode) asNNStateNode() *raw.MPSNNStateNode {
+	return &x.inner.MPSNNBinaryGradientStateNode.MPSNNStateNode
+}
 
 // NNArithmeticGradientStateNodeable is the interface implemented by [NNArithmeticGradientStateNode], for mocking and DI.
 type NNArithmeticGradientStateNodeable interface {
@@ -66,4 +72,3 @@ type NNArithmeticGradientStateNodeable interface {
 }
 
 var _ NNArithmeticGradientStateNodeable = (*NNArithmeticGradientStateNode)(nil)
-

@@ -16,8 +16,8 @@ type MTRGeneralDiagnosticsClusterBootReasonEvent struct {
 }
 
 var (
-	_clsMTRGeneralDiagnosticsClusterBootReasonEvent = _objcClass("MTRGeneralDiagnosticsClusterBootReasonEvent")
-	_mTRGeneralDiagnosticsClusterBootReasonEventSelBootReason = objc.RegisterName("bootReason")
+	_clsMTRGeneralDiagnosticsClusterBootReasonEvent              = _objcClass("MTRGeneralDiagnosticsClusterBootReasonEvent")
+	_mTRGeneralDiagnosticsClusterBootReasonEventSelBootReason    = objc.RegisterName("bootReason")
 	_mTRGeneralDiagnosticsClusterBootReasonEventSelSetBootReason = objc.RegisterName("setBootReason:")
 )
 
@@ -33,11 +33,12 @@ func MTRGeneralDiagnosticsClusterBootReasonEventFromID(id objc.ID) *MTRGeneralDi
 
 func (o *MTRGeneralDiagnosticsClusterBootReasonEvent) BootReason() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralDiagnosticsClusterBootReasonEventSelBootReason)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRGeneralDiagnosticsClusterBootReasonEvent) SetBootReason(bootReason *foundation.NSNumber) {
 	o.Ptr().Send(_mTRGeneralDiagnosticsClusterBootReasonEventSelSetBootReason, bootReason.Ptr())
 }
-

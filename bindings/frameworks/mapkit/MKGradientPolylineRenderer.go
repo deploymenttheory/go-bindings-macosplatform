@@ -17,10 +17,10 @@ type MKGradientPolylineRenderer struct {
 }
 
 var (
-	_clsMKGradientPolylineRenderer = _objcClass("MKGradientPolylineRenderer")
+	_clsMKGradientPolylineRenderer                     = _objcClass("MKGradientPolylineRenderer")
 	_mKGradientPolylineRendererSelSetColorsAtLocations = objc.RegisterName("setColors:atLocations:")
-	_mKGradientPolylineRendererSelLocations = objc.RegisterName("locations")
-	_mKGradientPolylineRendererSelColors = objc.RegisterName("colors")
+	_mKGradientPolylineRendererSelLocations            = objc.RegisterName("locations")
+	_mKGradientPolylineRendererSelColors               = objc.RegisterName("colors")
 )
 
 func MKGradientPolylineRendererFromID(id objc.ID) *MKGradientPolylineRenderer {
@@ -46,4 +46,3 @@ func (o *MKGradientPolylineRenderer) Colors() *foundation.NSArray[*appkit.NSColo
 	_ret := objc.Send[*foundation.NSArray[*appkit.NSColor]](o.Ptr(), _mKGradientPolylineRendererSelColors)
 	return _ret
 }
-

@@ -60,4 +60,3 @@ type EventViewControllerable interface {
 }
 
 var _ EventViewControllerable = (*EventViewController)(nil)
-

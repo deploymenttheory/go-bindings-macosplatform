@@ -15,29 +15,29 @@ type NSHashTable[ObjectType purego.AnyObject] struct {
 }
 
 var (
-	_clsNSHashTable = _objcClass("NSHashTable")
-	_nSHashTableSelInitWithOptionsCapacity = objc.RegisterName("initWithOptions:capacity:")
+	_clsNSHashTable                                 = _objcClass("NSHashTable")
+	_nSHashTableSelInitWithOptionsCapacity          = objc.RegisterName("initWithOptions:capacity:")
 	_nSHashTableSelInitWithPointerFunctionsCapacity = objc.RegisterName("initWithPointerFunctions:capacity:")
-	_nSHashTableSelHashTableWithOptions = objc.RegisterName("hashTableWithOptions:")
-	_nSHashTableSelHashTableWithWeakObjects = objc.RegisterName("hashTableWithWeakObjects")
-	_nSHashTableSelWeakObjectsHashTable = objc.RegisterName("weakObjectsHashTable")
-	_nSHashTableSelMember = objc.RegisterName("member:")
-	_nSHashTableSelObjectEnumerator = objc.RegisterName("objectEnumerator")
-	_nSHashTableSelAddObject = objc.RegisterName("addObject:")
-	_nSHashTableSelRemoveObject = objc.RegisterName("removeObject:")
-	_nSHashTableSelRemoveAllObjects = objc.RegisterName("removeAllObjects")
-	_nSHashTableSelContainsObject = objc.RegisterName("containsObject:")
-	_nSHashTableSelIntersectsHashTable = objc.RegisterName("intersectsHashTable:")
-	_nSHashTableSelIsEqualToHashTable = objc.RegisterName("isEqualToHashTable:")
-	_nSHashTableSelIsSubsetOfHashTable = objc.RegisterName("isSubsetOfHashTable:")
-	_nSHashTableSelIntersectHashTable = objc.RegisterName("intersectHashTable:")
-	_nSHashTableSelUnionHashTable = objc.RegisterName("unionHashTable:")
-	_nSHashTableSelMinusHashTable = objc.RegisterName("minusHashTable:")
-	_nSHashTableSelPointerFunctions = objc.RegisterName("pointerFunctions")
-	_nSHashTableSelCount = objc.RegisterName("count")
-	_nSHashTableSelAllObjects = objc.RegisterName("allObjects")
-	_nSHashTableSelAnyObject = objc.RegisterName("anyObject")
-	_nSHashTableSelSetRepresentation = objc.RegisterName("setRepresentation")
+	_nSHashTableSelHashTableWithOptions             = objc.RegisterName("hashTableWithOptions:")
+	_nSHashTableSelHashTableWithWeakObjects         = objc.RegisterName("hashTableWithWeakObjects")
+	_nSHashTableSelWeakObjectsHashTable             = objc.RegisterName("weakObjectsHashTable")
+	_nSHashTableSelMember                           = objc.RegisterName("member:")
+	_nSHashTableSelObjectEnumerator                 = objc.RegisterName("objectEnumerator")
+	_nSHashTableSelAddObject                        = objc.RegisterName("addObject:")
+	_nSHashTableSelRemoveObject                     = objc.RegisterName("removeObject:")
+	_nSHashTableSelRemoveAllObjects                 = objc.RegisterName("removeAllObjects")
+	_nSHashTableSelContainsObject                   = objc.RegisterName("containsObject:")
+	_nSHashTableSelIntersectsHashTable              = objc.RegisterName("intersectsHashTable:")
+	_nSHashTableSelIsEqualToHashTable               = objc.RegisterName("isEqualToHashTable:")
+	_nSHashTableSelIsSubsetOfHashTable              = objc.RegisterName("isSubsetOfHashTable:")
+	_nSHashTableSelIntersectHashTable               = objc.RegisterName("intersectHashTable:")
+	_nSHashTableSelUnionHashTable                   = objc.RegisterName("unionHashTable:")
+	_nSHashTableSelMinusHashTable                   = objc.RegisterName("minusHashTable:")
+	_nSHashTableSelPointerFunctions                 = objc.RegisterName("pointerFunctions")
+	_nSHashTableSelCount                            = objc.RegisterName("count")
+	_nSHashTableSelAllObjects                       = objc.RegisterName("allObjects")
+	_nSHashTableSelAnyObject                        = objc.RegisterName("anyObject")
+	_nSHashTableSelSetRepresentation                = objc.RegisterName("setRepresentation")
 )
 
 func NSHashTableFromID[ObjectType purego.AnyObject](id objc.ID) *NSHashTable[ObjectType] {
@@ -52,19 +52,25 @@ func NSHashTableFromID[ObjectType purego.AnyObject](id objc.ID) *NSHashTable[Obj
 
 func (o *NSHashTable[ObjectType]) InitWithOptionsCapacity(options NSPointerFunctionsOptions, initialCapacity uint) *NSHashTable[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSHashTableSelInitWithOptionsCapacity, options, initialCapacity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSHashTableFromID[ObjectType](_ret)
 }
 
 func (o *NSHashTable[ObjectType]) InitWithPointerFunctionsCapacity(functions *NSPointerFunctions, initialCapacity uint) *NSHashTable[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSHashTableSelInitWithPointerFunctionsCapacity, functions.Ptr(), initialCapacity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSHashTableFromID[ObjectType](_ret)
 }
 
 func NSHashTableHashTableWithOptions(options NSPointerFunctionsOptions) *NSHashTable[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSHashTable), _nSHashTableSelHashTableWithOptions, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSHashTableFromID[objc.ID](_ret)
 }
 
@@ -76,7 +82,9 @@ func NSHashTableHashTableWithWeakObjects() objc.ID {
 
 func NSHashTableWeakObjectsHashTable() *NSHashTable[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSHashTable), _nSHashTableSelWeakObjectsHashTable)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSHashTableFromID[objc.ID](_ret)
 }
 
@@ -87,7 +95,9 @@ func (o *NSHashTable[ObjectType]) Member(object ObjectType) ObjectType {
 
 func (o *NSHashTable[ObjectType]) ObjectEnumerator() *NSEnumerator[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSHashTableSelObjectEnumerator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEnumeratorFromID[ObjectType](_ret)
 }
 
@@ -137,7 +147,9 @@ func (o *NSHashTable[ObjectType]) MinusHashTable(other *NSHashTable[ObjectType])
 
 func (o *NSHashTable[ObjectType]) PointerFunctions() *NSPointerFunctions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSHashTableSelPointerFunctions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPointerFunctionsFromID(_ret)
 }
 
@@ -148,7 +160,9 @@ func (o *NSHashTable[ObjectType]) Count() uint {
 
 func (o *NSHashTable[ObjectType]) AllObjects() *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSHashTableSelAllObjects)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[ObjectType](_ret)
 }
 
@@ -159,7 +173,8 @@ func (o *NSHashTable[ObjectType]) AnyObject() ObjectType {
 
 func (o *NSHashTable[ObjectType]) SetRepresentation() *NSSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSHashTableSelSetRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSetFromID[ObjectType](_ret)
 }
-

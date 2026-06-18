@@ -105,7 +105,9 @@ func (x *MutableDictionary) SetObjectForKeyedSubscript(obj objc.ID, key raw.NSCo
 	x.inner.SetObjectForKeyedSubscript(obj, key)
 }
 
-func (x *MutableDictionary) asDictionary() *raw.NSDictionary[objc.ID, objc.ID] { return &x.inner.NSDictionary }
+func (x *MutableDictionary) asDictionary() *raw.NSDictionary[objc.ID, objc.ID] {
+	return &x.inner.NSDictionary
+}
 
 func (x *MutableDictionary) asObject() *raw.NSObject { return &x.inner.NSDictionary.NSObject }
 
@@ -130,4 +132,3 @@ type MutableDictionaryable interface {
 }
 
 var _ MutableDictionaryable = (*MutableDictionary)(nil)
-

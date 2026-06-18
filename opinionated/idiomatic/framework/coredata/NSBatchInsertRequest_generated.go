@@ -87,7 +87,9 @@ func (x *BatchInsertRequest) WithObjectsToInsert(items ...*foundation.NSDictiona
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[objc.ID](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -121,7 +123,9 @@ func (x *BatchInsertRequest) WithAffectedStores(items ...PersistentStoreProvider
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asPersistentStore().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asPersistentStore().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSPersistentStore](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -188,7 +192,9 @@ func (x *BatchInsertRequest) SetResultType(resultType raw.NSBatchInsertRequestRe
 	x.inner.SetResultType(resultType)
 }
 
-func (x *BatchInsertRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest { return &x.inner.NSPersistentStoreRequest }
+func (x *BatchInsertRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest {
+	return &x.inner.NSPersistentStoreRequest
+}
 
 // BatchInsertRequestable is the interface implemented by [BatchInsertRequest], for mocking and DI.
 type BatchInsertRequestable interface {
@@ -211,4 +217,3 @@ type BatchInsertRequestable interface {
 }
 
 var _ BatchInsertRequestable = (*BatchInsertRequest)(nil)
-

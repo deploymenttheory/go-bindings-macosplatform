@@ -16,10 +16,10 @@ type ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor struct {
 }
 
 var (
-	_clsASAuthorizationSecurityKeyPublicKeyCredentialDescriptor = _objcClass("ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor")
+	_clsASAuthorizationSecurityKeyPublicKeyCredentialDescriptor                               = _objcClass("ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor")
 	_aSAuthorizationSecurityKeyPublicKeyCredentialDescriptorSelInitWithCredentialIDTransports = objc.RegisterName("initWithCredentialID:transports:")
-	_aSAuthorizationSecurityKeyPublicKeyCredentialDescriptorSelTransports = objc.RegisterName("transports")
-	_aSAuthorizationSecurityKeyPublicKeyCredentialDescriptorSelSetTransports = objc.RegisterName("setTransports:")
+	_aSAuthorizationSecurityKeyPublicKeyCredentialDescriptorSelTransports                     = objc.RegisterName("transports")
+	_aSAuthorizationSecurityKeyPublicKeyCredentialDescriptorSelSetTransports                  = objc.RegisterName("setTransports:")
 )
 
 func ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorFromID(id objc.ID) *ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor {
@@ -34,7 +34,9 @@ func ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorFromID(id objc.ID) *
 
 func (o *ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor) InitWithCredentialIDTransports(credentialID *foundation.NSData, allowedTransports *foundation.NSArray[*foundation.NSString]) *ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationSecurityKeyPublicKeyCredentialDescriptorSelInitWithCredentialIDTransports, credentialID.Ptr(), allowedTransports)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorFromID(_ret)
 }
 
@@ -47,4 +49,3 @@ func (o *ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor) Transports() *
 func (o *ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor) SetTransports(transports *foundation.NSArray[*foundation.NSString]) {
 	o.Ptr().Send(_aSAuthorizationSecurityKeyPublicKeyCredentialDescriptorSelSetTransports, transports)
 }
-

@@ -16,18 +16,18 @@ type MTRClusterFlowMeasurement struct {
 }
 
 var (
-	_clsMTRClusterFlowMeasurement = _objcClass("MTRClusterFlowMeasurement")
-	_mTRClusterFlowMeasurementSelReadAttributeMeasuredValueWithParams = objc.RegisterName("readAttributeMeasuredValueWithParams:")
-	_mTRClusterFlowMeasurementSelReadAttributeMinMeasuredValueWithParams = objc.RegisterName("readAttributeMinMeasuredValueWithParams:")
-	_mTRClusterFlowMeasurementSelReadAttributeMaxMeasuredValueWithParams = objc.RegisterName("readAttributeMaxMeasuredValueWithParams:")
-	_mTRClusterFlowMeasurementSelReadAttributeToleranceWithParams = objc.RegisterName("readAttributeToleranceWithParams:")
+	_clsMTRClusterFlowMeasurement                                            = _objcClass("MTRClusterFlowMeasurement")
+	_mTRClusterFlowMeasurementSelReadAttributeMeasuredValueWithParams        = objc.RegisterName("readAttributeMeasuredValueWithParams:")
+	_mTRClusterFlowMeasurementSelReadAttributeMinMeasuredValueWithParams     = objc.RegisterName("readAttributeMinMeasuredValueWithParams:")
+	_mTRClusterFlowMeasurementSelReadAttributeMaxMeasuredValueWithParams     = objc.RegisterName("readAttributeMaxMeasuredValueWithParams:")
+	_mTRClusterFlowMeasurementSelReadAttributeToleranceWithParams            = objc.RegisterName("readAttributeToleranceWithParams:")
 	_mTRClusterFlowMeasurementSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterFlowMeasurementSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterFlowMeasurementSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterFlowMeasurementSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterFlowMeasurementSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterFlowMeasurementSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterFlowMeasurementSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterFlowMeasurementSelReadAttributeAcceptedCommandListWithParams  = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterFlowMeasurementSelReadAttributeAttributeListWithParams        = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterFlowMeasurementSelReadAttributeFeatureMapWithParams           = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterFlowMeasurementSelReadAttributeClusterRevisionWithParams      = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterFlowMeasurementSelInitWithDeviceEndpointIDQueue               = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterFlowMeasurementSelInitWithDeviceEndpointQueue                 = objc.RegisterName("initWithDevice:endpoint:queue:")
 )
 
 func MTRClusterFlowMeasurementFromID(id objc.ID) *MTRClusterFlowMeasurement {
@@ -88,13 +88,16 @@ func (o *MTRClusterFlowMeasurement) ReadAttributeClusterRevisionWithParams(param
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func (o *MTRClusterFlowMeasurement) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterFlowMeasurement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterFlowMeasurementSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterFlowMeasurementFromID(_ret)
 }
 
 func (o *MTRClusterFlowMeasurement) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterFlowMeasurement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterFlowMeasurementSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterFlowMeasurementFromID(_ret)
 }
-

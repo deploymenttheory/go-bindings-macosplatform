@@ -46,7 +46,9 @@ func (x *VertexDescriptor) WithAttributes(items ...*raw.MDLVertexAttribute) *Ver
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSMutableArrayFromID[*raw.MDLVertexAttribute](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -62,7 +64,9 @@ func (x *VertexDescriptor) WithLayouts(items ...*raw.MDLVertexBufferLayout) *Ver
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSMutableArrayFromID[*raw.MDLVertexBufferLayout](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -155,4 +159,3 @@ type VertexDescriptorable interface {
 }
 
 var _ VertexDescriptorable = (*VertexDescriptor)(nil)
-

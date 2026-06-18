@@ -17,7 +17,9 @@ type MTRTimeSynchronizationClusterSetDefaultNTPParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRTimeSynchronizationClusterSetDefaultNTPParams].
-func (x *MTRTimeSynchronizationClusterSetDefaultNTPParams) Unwrap() *raw.MTRTimeSynchronizationClusterSetDefaultNTPParams { return x.inner }
+func (x *MTRTimeSynchronizationClusterSetDefaultNTPParams) Unwrap() *raw.MTRTimeSynchronizationClusterSetDefaultNTPParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -104,4 +106,3 @@ type MTRTimeSynchronizationClusterSetDefaultNTPParamsable interface {
 }
 
 var _ MTRTimeSynchronizationClusterSetDefaultNTPParamsable = (*MTRTimeSynchronizationClusterSetDefaultNTPParams)(nil)
-

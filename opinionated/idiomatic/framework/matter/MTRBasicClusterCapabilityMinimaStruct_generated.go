@@ -16,7 +16,9 @@ type MTRBasicClusterCapabilityMinimaStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBasicClusterCapabilityMinimaStruct].
-func (x *MTRBasicClusterCapabilityMinimaStruct) Unwrap() *raw.MTRBasicClusterCapabilityMinimaStruct { return x.inner }
+func (x *MTRBasicClusterCapabilityMinimaStruct) Unwrap() *raw.MTRBasicClusterCapabilityMinimaStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -48,7 +50,9 @@ func (x *MTRBasicClusterCapabilityMinimaStruct) WithSubscriptionsPerFabric(subsc
 	return x
 }
 
-func (x *MTRBasicClusterCapabilityMinimaStruct) asMTRBasicInformationClusterCapabilityMinimaStruct() *raw.MTRBasicInformationClusterCapabilityMinimaStruct { return &x.inner.MTRBasicInformationClusterCapabilityMinimaStruct }
+func (x *MTRBasicClusterCapabilityMinimaStruct) asMTRBasicInformationClusterCapabilityMinimaStruct() *raw.MTRBasicInformationClusterCapabilityMinimaStruct {
+	return &x.inner.MTRBasicInformationClusterCapabilityMinimaStruct
+}
 
 // MTRBasicClusterCapabilityMinimaStructable is the interface implemented by [MTRBasicClusterCapabilityMinimaStruct], for mocking and DI.
 type MTRBasicClusterCapabilityMinimaStructable interface {
@@ -58,4 +62,3 @@ type MTRBasicClusterCapabilityMinimaStructable interface {
 }
 
 var _ MTRBasicClusterCapabilityMinimaStructable = (*MTRBasicClusterCapabilityMinimaStruct)(nil)
-

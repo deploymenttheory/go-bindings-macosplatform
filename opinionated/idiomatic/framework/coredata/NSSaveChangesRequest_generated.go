@@ -45,7 +45,9 @@ func (x *SaveChangesRequest) WithAffectedStores(items ...PersistentStoreProvider
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asPersistentStore().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asPersistentStore().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSPersistentStore](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -74,7 +76,9 @@ func (x *SaveChangesRequest) LockedObjects() *foundation.NSSet[*raw.NSManagedObj
 	return x.inner.LockedObjects()
 }
 
-func (x *SaveChangesRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest { return &x.inner.NSPersistentStoreRequest }
+func (x *SaveChangesRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest {
+	return &x.inner.NSPersistentStoreRequest
+}
 
 // SaveChangesRequestable is the interface implemented by [SaveChangesRequest], for mocking and DI.
 type SaveChangesRequestable interface {
@@ -87,4 +91,3 @@ type SaveChangesRequestable interface {
 }
 
 var _ SaveChangesRequestable = (*SaveChangesRequest)(nil)
-

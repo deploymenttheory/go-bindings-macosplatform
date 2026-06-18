@@ -86,4 +86,3 @@ type Decisionable interface {
 }
 
 var _ Decisionable = (*Decision)(nil)
-

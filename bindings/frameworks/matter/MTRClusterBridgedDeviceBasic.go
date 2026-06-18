@@ -16,7 +16,7 @@ type MTRClusterBridgedDeviceBasic struct {
 }
 
 var (
-	_clsMTRClusterBridgedDeviceBasic = _objcClass("MTRClusterBridgedDeviceBasic")
+	_clsMTRClusterBridgedDeviceBasic                            = _objcClass("MTRClusterBridgedDeviceBasic")
 	_mTRClusterBridgedDeviceBasicSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
 )
 
@@ -32,7 +32,8 @@ func MTRClusterBridgedDeviceBasicFromID(id objc.ID) *MTRClusterBridgedDeviceBasi
 
 func (o *MTRClusterBridgedDeviceBasic) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterBridgedDeviceBasic {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterBridgedDeviceBasicSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterBridgedDeviceBasicFromID(_ret)
 }
-

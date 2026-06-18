@@ -16,20 +16,20 @@ type DRMSF struct {
 }
 
 var (
-	_clsDRMSF = _objcClass("DRMSF")
-	_dRMSFSelMsf = objc.RegisterName("msf")
-	_dRMSFSelMsfWithFrames = objc.RegisterName("msfWithFrames:")
-	_dRMSFSelMsfWithString = objc.RegisterName("msfWithString:")
-	_dRMSFSelInitWithFrames = objc.RegisterName("initWithFrames:")
-	_dRMSFSelInitWithString = objc.RegisterName("initWithString:")
-	_dRMSFSelMinutes = objc.RegisterName("minutes")
-	_dRMSFSelSeconds = objc.RegisterName("seconds")
-	_dRMSFSelFrames = objc.RegisterName("frames")
-	_dRMSFSelSectors = objc.RegisterName("sectors")
-	_dRMSFSelMsfByAdding = objc.RegisterName("msfByAdding:")
-	_dRMSFSelMsfBySubtracting = objc.RegisterName("msfBySubtracting:")
+	_clsDRMSF                      = _objcClass("DRMSF")
+	_dRMSFSelMsf                   = objc.RegisterName("msf")
+	_dRMSFSelMsfWithFrames         = objc.RegisterName("msfWithFrames:")
+	_dRMSFSelMsfWithString         = objc.RegisterName("msfWithString:")
+	_dRMSFSelInitWithFrames        = objc.RegisterName("initWithFrames:")
+	_dRMSFSelInitWithString        = objc.RegisterName("initWithString:")
+	_dRMSFSelMinutes               = objc.RegisterName("minutes")
+	_dRMSFSelSeconds               = objc.RegisterName("seconds")
+	_dRMSFSelFrames                = objc.RegisterName("frames")
+	_dRMSFSelSectors               = objc.RegisterName("sectors")
+	_dRMSFSelMsfByAdding           = objc.RegisterName("msfByAdding:")
+	_dRMSFSelMsfBySubtracting      = objc.RegisterName("msfBySubtracting:")
 	_dRMSFSelDescriptionWithFormat = objc.RegisterName("descriptionWithFormat:")
-	_dRMSFSelIsEqualToMSF = objc.RegisterName("isEqualToMSF:")
+	_dRMSFSelIsEqualToMSF          = objc.RegisterName("isEqualToMSF:")
 )
 
 func DRMSFFromID(id objc.ID) *DRMSF {
@@ -45,21 +45,27 @@ func DRMSFFromID(id objc.ID) *DRMSF {
 // @method		msf @abstract	Creates an msf object with no length/time. @result		An autoreleased DRMSF object.
 func DRMSFMsf() *DRMSF {
 	_ret := objc.Send[objc.ID](objc.ID(_clsDRMSF), _dRMSFSelMsf)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DRMSFFromID(_ret)
 }
 
 // @method		msfWithFrames @abstract	Creates an msf object whose length is frames. @result		An autoreleased DRMSF object.
 func DRMSFMsfWithFrames(frames uint) *DRMSF {
 	_ret := objc.Send[objc.ID](objc.ID(_clsDRMSF), _dRMSFSelMsfWithFrames, frames)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DRMSFFromID(_ret)
 }
 
 // @method		msfWithString @abstract	Creates an msf object initialized to the value represented by string @result		An autoreleased DRMSF object.
 func DRMSFMsfWithString(string_ *foundation.NSString) *DRMSF {
 	_ret := objc.Send[objc.ID](objc.ID(_clsDRMSF), _dRMSFSelMsfWithString, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DRMSFFromID(_ret)
 }
 
@@ -102,21 +108,27 @@ func (o *DRMSF) Sectors() uint {
 // @method		msfByAdding @abstract	Adds an msf to the receiver. @param		msf	The msf to add to the receiver @result		A new DRMSF object totalling the sum of the reciever and msf
 func (o *DRMSF) MsfByAdding(msf *DRMSF) *DRMSF {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dRMSFSelMsfByAdding, msf.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DRMSFFromID(_ret)
 }
 
 // @method		msfBySubtracting @abstract	Subtracts an msf to the receiver. @param		msf	The msf to subtract from the receiver @result		A new DRMSF object totalling the difference of the reciever and msf
 func (o *DRMSF) MsfBySubtracting(msf *DRMSF) *DRMSF {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dRMSFSelMsfBySubtracting, msf.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DRMSFFromID(_ret)
 }
 
 // @method		descriptionWithFormat @abstract	Returns a textual representation of the receiver. @discussion	The format string is very similar to a printf-style format string with %-escaped formatting characters. <ul> <li>%%	A "%" character</li> <li>%m	Minutes as a decimal number</li> <li>%s	Seconds as a decimal number</li> <li>%f	Frames as a decimal number</li> </ul> In addition to these formatting characters an optional length specifier can come between then % and the formatting character. This length specifier will force the field in question to be at least that wide. For example a format specifier of "%02m:%02s" will cause a DRMSF object representing 3 minutes 9 seconds to be formatted as "03:09". A formatter is aware of and respects rounding. If a bit of the msf is not zero, but the format does not display that value, the next higher value will be increased by one to reflect that. Extending our example above, an DRMSF with a value of 3 minutes, 9 seconds, 15 frames using a format specfier of "%02m:%02s", will be formatted as "03:10" since the 15 frames rounds up the seconds to the next value @param		format	The format of the description string. @result		NSString containing a textual representation of the object utilizing the specified format.
 func (o *DRMSF) DescriptionWithFormat(format *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dRMSFSelDescriptionWithFormat, format.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -125,4 +137,3 @@ func (o *DRMSF) IsEqualToMSF(otherDRMSF *DRMSF) bool {
 	_ret := objc.Send[bool](o.Ptr(), _dRMSFSelIsEqualToMSF, otherDRMSF.Ptr())
 	return _ret
 }
-

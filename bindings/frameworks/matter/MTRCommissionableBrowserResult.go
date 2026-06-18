@@ -16,11 +16,11 @@ type MTRCommissionableBrowserResult struct {
 }
 
 var (
-	_clsMTRCommissionableBrowserResult = _objcClass("MTRCommissionableBrowserResult")
-	_mTRCommissionableBrowserResultSelInstanceName = objc.RegisterName("instanceName")
-	_mTRCommissionableBrowserResultSelVendorID = objc.RegisterName("vendorID")
-	_mTRCommissionableBrowserResultSelProductID = objc.RegisterName("productID")
-	_mTRCommissionableBrowserResultSelDiscriminator = objc.RegisterName("discriminator")
+	_clsMTRCommissionableBrowserResult                  = _objcClass("MTRCommissionableBrowserResult")
+	_mTRCommissionableBrowserResultSelInstanceName      = objc.RegisterName("instanceName")
+	_mTRCommissionableBrowserResultSelVendorID          = objc.RegisterName("vendorID")
+	_mTRCommissionableBrowserResultSelProductID         = objc.RegisterName("productID")
+	_mTRCommissionableBrowserResultSelDiscriminator     = objc.RegisterName("discriminator")
 	_mTRCommissionableBrowserResultSelCommissioningMode = objc.RegisterName("commissioningMode")
 )
 
@@ -37,28 +37,36 @@ func MTRCommissionableBrowserResultFromID(id objc.ID) *MTRCommissionableBrowserR
 // For a node advertising over DNS-SD, the instance name is a dynamic, pseudo-randomly selected, 64-bit temporary unique identifier, expressed as a fixed-length sixteen-character hexadecimal string, encoded as ASCII text using capital letters. For a node advertising over Bluetooth Low Energy, the instance name is always "BLE".
 func (o *MTRCommissionableBrowserResult) InstanceName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissionableBrowserResultSelInstanceName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // A 16-bit unsigned value identifying the device manufacturer.
 func (o *MTRCommissionableBrowserResult) VendorID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissionableBrowserResultSelVendorID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // A 16-bit unsigned value identifying the product.
 func (o *MTRCommissionableBrowserResult) ProductID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissionableBrowserResultSelProductID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // A 12-bit value matching the field of the same name in MTRSetupPayload.
 func (o *MTRCommissionableBrowserResult) Discriminator() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissionableBrowserResultSelDiscriminator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -67,4 +75,3 @@ func (o *MTRCommissionableBrowserResult) CommissioningMode() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mTRCommissionableBrowserResultSelCommissioningMode)
 	return _ret
 }
-

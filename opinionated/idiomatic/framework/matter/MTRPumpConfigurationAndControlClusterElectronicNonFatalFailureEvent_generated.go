@@ -15,11 +15,15 @@ type MTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEvent struct 
 }
 
 // Unwrap returns the underlying [raw.MTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEvent].
-func (x *MTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEvent { return x.inner }
+func (x *MTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEvent) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEvent) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEventFromID adopts an existing object pointer as a MTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEvent (nil for 0).
 func MTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEventFromID(id objc.ID) *MTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEvent {
@@ -41,4 +45,3 @@ type MTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEventable int
 }
 
 var _ MTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEventable = (*MTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEvent)(nil)
-

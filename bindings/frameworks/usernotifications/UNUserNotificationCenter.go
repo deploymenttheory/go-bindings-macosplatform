@@ -18,23 +18,23 @@ type UNUserNotificationCenter struct {
 }
 
 var (
-	_clsUNUserNotificationCenter = _objcClass("UNUserNotificationCenter")
-	_uNUserNotificationCenterSelCurrentNotificationCenter = objc.RegisterName("currentNotificationCenter")
-	_uNUserNotificationCenterSelRequestAuthorizationWithOptionsCompletionHandler = objc.RegisterName("requestAuthorizationWithOptions:completionHandler:")
-	_uNUserNotificationCenterSelSetNotificationCategories = objc.RegisterName("setNotificationCategories:")
-	_uNUserNotificationCenterSelGetNotificationCategoriesWithCompletionHandler = objc.RegisterName("getNotificationCategoriesWithCompletionHandler:")
-	_uNUserNotificationCenterSelGetNotificationSettingsWithCompletionHandler = objc.RegisterName("getNotificationSettingsWithCompletionHandler:")
-	_uNUserNotificationCenterSelAddNotificationRequestWithCompletionHandler = objc.RegisterName("addNotificationRequest:withCompletionHandler:")
+	_clsUNUserNotificationCenter                                                    = _objcClass("UNUserNotificationCenter")
+	_uNUserNotificationCenterSelCurrentNotificationCenter                           = objc.RegisterName("currentNotificationCenter")
+	_uNUserNotificationCenterSelRequestAuthorizationWithOptionsCompletionHandler    = objc.RegisterName("requestAuthorizationWithOptions:completionHandler:")
+	_uNUserNotificationCenterSelSetNotificationCategories                           = objc.RegisterName("setNotificationCategories:")
+	_uNUserNotificationCenterSelGetNotificationCategoriesWithCompletionHandler      = objc.RegisterName("getNotificationCategoriesWithCompletionHandler:")
+	_uNUserNotificationCenterSelGetNotificationSettingsWithCompletionHandler        = objc.RegisterName("getNotificationSettingsWithCompletionHandler:")
+	_uNUserNotificationCenterSelAddNotificationRequestWithCompletionHandler         = objc.RegisterName("addNotificationRequest:withCompletionHandler:")
 	_uNUserNotificationCenterSelGetPendingNotificationRequestsWithCompletionHandler = objc.RegisterName("getPendingNotificationRequestsWithCompletionHandler:")
-	_uNUserNotificationCenterSelRemovePendingNotificationRequestsWithIdentifiers = objc.RegisterName("removePendingNotificationRequestsWithIdentifiers:")
-	_uNUserNotificationCenterSelRemoveAllPendingNotificationRequests = objc.RegisterName("removeAllPendingNotificationRequests")
-	_uNUserNotificationCenterSelGetDeliveredNotificationsWithCompletionHandler = objc.RegisterName("getDeliveredNotificationsWithCompletionHandler:")
-	_uNUserNotificationCenterSelRemoveDeliveredNotificationsWithIdentifiers = objc.RegisterName("removeDeliveredNotificationsWithIdentifiers:")
-	_uNUserNotificationCenterSelRemoveAllDeliveredNotifications = objc.RegisterName("removeAllDeliveredNotifications")
-	_uNUserNotificationCenterSelSetBadgeCountWithCompletionHandler = objc.RegisterName("setBadgeCount:withCompletionHandler:")
-	_uNUserNotificationCenterSelDelegate = objc.RegisterName("delegate")
-	_uNUserNotificationCenterSelSetDelegate = objc.RegisterName("setDelegate:")
-	_uNUserNotificationCenterSelSupportsContentExtensions = objc.RegisterName("supportsContentExtensions")
+	_uNUserNotificationCenterSelRemovePendingNotificationRequestsWithIdentifiers    = objc.RegisterName("removePendingNotificationRequestsWithIdentifiers:")
+	_uNUserNotificationCenterSelRemoveAllPendingNotificationRequests                = objc.RegisterName("removeAllPendingNotificationRequests")
+	_uNUserNotificationCenterSelGetDeliveredNotificationsWithCompletionHandler      = objc.RegisterName("getDeliveredNotificationsWithCompletionHandler:")
+	_uNUserNotificationCenterSelRemoveDeliveredNotificationsWithIdentifiers         = objc.RegisterName("removeDeliveredNotificationsWithIdentifiers:")
+	_uNUserNotificationCenterSelRemoveAllDeliveredNotifications                     = objc.RegisterName("removeAllDeliveredNotifications")
+	_uNUserNotificationCenterSelSetBadgeCountWithCompletionHandler                  = objc.RegisterName("setBadgeCount:withCompletionHandler:")
+	_uNUserNotificationCenterSelDelegate                                            = objc.RegisterName("delegate")
+	_uNUserNotificationCenterSelSetDelegate                                         = objc.RegisterName("setDelegate:")
+	_uNUserNotificationCenterSelSupportsContentExtensions                           = objc.RegisterName("supportsContentExtensions")
 )
 
 func UNUserNotificationCenterFromID(id objc.ID) *UNUserNotificationCenter {
@@ -49,7 +49,9 @@ func UNUserNotificationCenterFromID(id objc.ID) *UNUserNotificationCenter {
 
 func UNUserNotificationCenterCurrentNotificationCenter() *UNUserNotificationCenter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNUserNotificationCenter), _uNUserNotificationCenterSelCurrentNotificationCenter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UNUserNotificationCenterFromID(_ret)
 }
 
@@ -175,4 +177,3 @@ func (o *UNUserNotificationCenter) SupportsContentExtensions() bool {
 	_ret := objc.Send[bool](o.Ptr(), _uNUserNotificationCenterSelSupportsContentExtensions)
 	return _ret
 }
-

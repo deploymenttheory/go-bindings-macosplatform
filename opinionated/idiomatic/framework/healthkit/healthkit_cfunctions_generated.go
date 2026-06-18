@@ -44,4 +44,3 @@ func HKCategoryValueSleepAnalysisAsleepValues() *foundation.NSSet[*foundation.NS
 func HKStateOfMindValenceClassificationForValence(valence float64) *foundation.NSNumber {
 	return raw.HKStateOfMindValenceClassificationForValence(valence)
 }
-

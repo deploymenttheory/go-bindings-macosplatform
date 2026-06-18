@@ -14,42 +14,53 @@ import (
 // @const PHASEAssetErrorDomain @abstract The NSErrorDomain for PHASE Asset errors
 func PHASEAssetErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_phaseLib, "PHASEAssetErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @const PHASEErrorDomain @abstract The NSErrorDomain for general PHASE errors
 func PHASEErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_phaseLib, "PHASEErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @const PHASESoundEventErrorDomain @abstract The NSErrorDomain for PHASE sound event errors.
 func PHASESoundEventErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_phaseLib, "PHASESoundEventErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant PHASESpatialCategoryDirectPathTransmission
 func PHASESpatialCategoryDirectPathTransmission() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_phaseLib, "PHASESpatialCategoryDirectPathTransmission")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant PHASEEarlyReflections
 func PHASESpatialCategoryEarlyReflections() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_phaseLib, "PHASESpatialCategoryEarlyReflections")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant PHASELateReverb
 func PHASESpatialCategoryLateReverb() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_phaseLib, "PHASESpatialCategoryLateReverb")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
-

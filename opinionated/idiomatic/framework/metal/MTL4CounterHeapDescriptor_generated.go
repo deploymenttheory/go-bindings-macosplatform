@@ -79,4 +79,3 @@ type MTL4CounterHeapDescriptorable interface {
 }
 
 var _ MTL4CounterHeapDescriptorable = (*MTL4CounterHeapDescriptor)(nil)
-

@@ -16,8 +16,8 @@ type RPBroadcastHandler struct {
 }
 
 var (
-	_clsRPBroadcastHandler = _objcClass("RPBroadcastHandler")
-	_rPBroadcastHandlerSelUpdateServiceInfo = objc.RegisterName("updateServiceInfo:")
+	_clsRPBroadcastHandler                   = _objcClass("RPBroadcastHandler")
+	_rPBroadcastHandlerSelUpdateServiceInfo  = objc.RegisterName("updateServiceInfo:")
 	_rPBroadcastHandlerSelUpdateBroadcastURL = objc.RegisterName("updateBroadcastURL:")
 )
 
@@ -40,4 +40,3 @@ func (o *RPBroadcastHandler) UpdateServiceInfo(serviceInfo *foundation.NSDiction
 func (o *RPBroadcastHandler) UpdateBroadcastURL(broadcastURL *foundation.NSURL) {
 	o.Ptr().Send(_rPBroadcastHandlerSelUpdateBroadcastURL, broadcastURL.Ptr())
 }
-

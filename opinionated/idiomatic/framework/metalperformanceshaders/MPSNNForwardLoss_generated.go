@@ -240,4 +240,3 @@ type NNForwardLossable interface {
 }
 
 var _ NNForwardLossable = (*NNForwardLoss)(nil)
-

@@ -22,4 +22,3 @@ type SWHighlightEvent interface {
 	foundation.NSCopying
 	HighlightURL() *foundation.NSURL
 }
-

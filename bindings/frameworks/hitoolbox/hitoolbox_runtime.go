@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_hitoolboxLib uintptr
-	_loadOnce sync.Once
+	_hitoolboxLib  uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -58,15 +58,21 @@ func _loadLibrary() {
 	_register("AESend", func() { purego.RegisterLibFunc(&_fnAESend, _hitoolboxLib, "AESend") })
 	_register("AESetInteractionAllowed", func() { purego.RegisterLibFunc(&_fnAESetInteractionAllowed, _hitoolboxLib, "AESetInteractionAllowed") })
 	_register("AESetTheCurrentEvent", func() { purego.RegisterLibFunc(&_fnAESetTheCurrentEvent, _hitoolboxLib, "AESetTheCurrentEvent") })
-	_register("AESuspendTheCurrentEvent", func() { purego.RegisterLibFunc(&_fnAESuspendTheCurrentEvent, _hitoolboxLib, "AESuspendTheCurrentEvent") })
-	_register("AcquireFirstMatchingEventInQueue", func() { purego.RegisterLibFunc(&_fnAcquireFirstMatchingEventInQueue, _hitoolboxLib, "AcquireFirstMatchingEventInQueue") })
+	_register("AESuspendTheCurrentEvent", func() {
+		purego.RegisterLibFunc(&_fnAESuspendTheCurrentEvent, _hitoolboxLib, "AESuspendTheCurrentEvent")
+	})
+	_register("AcquireFirstMatchingEventInQueue", func() {
+		purego.RegisterLibFunc(&_fnAcquireFirstMatchingEventInQueue, _hitoolboxLib, "AcquireFirstMatchingEventInQueue")
+	})
 	_register("AddEventTypesToHandler", func() { purego.RegisterLibFunc(&_fnAddEventTypesToHandler, _hitoolboxLib, "AddEventTypesToHandler") })
 	_register("Button", func() { purego.RegisterLibFunc(&_fnButton, _hitoolboxLib, "Button") })
 	_register("CMPluginExamineContext", func() { purego.RegisterLibFunc(&_fnCMPluginExamineContext, _hitoolboxLib, "CMPluginExamineContext") })
 	_register("CMPluginHandleSelection", func() { purego.RegisterLibFunc(&_fnCMPluginHandleSelection, _hitoolboxLib, "CMPluginHandleSelection") })
 	_register("CMPluginPostMenuCleanup", func() { purego.RegisterLibFunc(&_fnCMPluginPostMenuCleanup, _hitoolboxLib, "CMPluginPostMenuCleanup") })
 	_register("CallNextEventHandler", func() { purego.RegisterLibFunc(&_fnCallNextEventHandler, _hitoolboxLib, "CallNextEventHandler") })
-	_register("CheckEventQueueForUserCancel", func() { purego.RegisterLibFunc(&_fnCheckEventQueueForUserCancel, _hitoolboxLib, "CheckEventQueueForUserCancel") })
+	_register("CheckEventQueueForUserCancel", func() {
+		purego.RegisterLibFunc(&_fnCheckEventQueueForUserCancel, _hitoolboxLib, "CheckEventQueueForUserCancel")
+	})
 	_register("CopyEvent", func() { purego.RegisterLibFunc(&_fnCopyEvent, _hitoolboxLib, "CopyEvent") })
 	_register("CopyEventAs", func() { purego.RegisterLibFunc(&_fnCopyEventAs, _hitoolboxLib, "CopyEventAs") })
 	_register("CopyEventCGEvent", func() { purego.RegisterLibFunc(&_fnCopyEventCGEvent, _hitoolboxLib, "CopyEventCGEvent") })
@@ -75,108 +81,226 @@ func _loadLibrary() {
 	_register("CreateEvent", func() { purego.RegisterLibFunc(&_fnCreateEvent, _hitoolboxLib, "CreateEvent") })
 	_register("CreateEventWithCGEvent", func() { purego.RegisterLibFunc(&_fnCreateEventWithCGEvent, _hitoolboxLib, "CreateEventWithCGEvent") })
 	_register("DebugPrintEvent", func() { purego.RegisterLibFunc(&_fnDebugPrintEvent, _hitoolboxLib, "DebugPrintEvent") })
-	_register("DebugPrintMainEventQueue", func() { purego.RegisterLibFunc(&_fnDebugPrintMainEventQueue, _hitoolboxLib, "DebugPrintMainEventQueue") })
+	_register("DebugPrintMainEventQueue", func() {
+		purego.RegisterLibFunc(&_fnDebugPrintMainEventQueue, _hitoolboxLib, "DebugPrintMainEventQueue")
+	})
 	_register("DisableSecureEventInput", func() { purego.RegisterLibFunc(&_fnDisableSecureEventInput, _hitoolboxLib, "DisableSecureEventInput") })
 	_register("DisposeAEFilterUPP", func() { purego.RegisterLibFunc(&_fnDisposeAEFilterUPP, _hitoolboxLib, "DisposeAEFilterUPP") })
 	_register("DisposeAEIdleUPP", func() { purego.RegisterLibFunc(&_fnDisposeAEIdleUPP, _hitoolboxLib, "DisposeAEIdleUPP") })
 	_register("DisposeCaretHookUPP", func() { purego.RegisterLibFunc(&_fnDisposeCaretHookUPP, _hitoolboxLib, "DisposeCaretHookUPP") })
 	_register("DisposeControlActionUPP", func() { purego.RegisterLibFunc(&_fnDisposeControlActionUPP, _hitoolboxLib, "DisposeControlActionUPP") })
-	_register("DisposeControlEditTextValidationUPP", func() { purego.RegisterLibFunc(&_fnDisposeControlEditTextValidationUPP, _hitoolboxLib, "DisposeControlEditTextValidationUPP") })
-	_register("DisposeControlKeyFilterUPP", func() { purego.RegisterLibFunc(&_fnDisposeControlKeyFilterUPP, _hitoolboxLib, "DisposeControlKeyFilterUPP") })
-	_register("DisposeControlUserPaneActivateUPP", func() { purego.RegisterLibFunc(&_fnDisposeControlUserPaneActivateUPP, _hitoolboxLib, "DisposeControlUserPaneActivateUPP") })
-	_register("DisposeControlUserPaneDrawUPP", func() { purego.RegisterLibFunc(&_fnDisposeControlUserPaneDrawUPP, _hitoolboxLib, "DisposeControlUserPaneDrawUPP") })
-	_register("DisposeControlUserPaneFocusUPP", func() { purego.RegisterLibFunc(&_fnDisposeControlUserPaneFocusUPP, _hitoolboxLib, "DisposeControlUserPaneFocusUPP") })
-	_register("DisposeControlUserPaneHitTestUPP", func() { purego.RegisterLibFunc(&_fnDisposeControlUserPaneHitTestUPP, _hitoolboxLib, "DisposeControlUserPaneHitTestUPP") })
-	_register("DisposeControlUserPaneIdleUPP", func() { purego.RegisterLibFunc(&_fnDisposeControlUserPaneIdleUPP, _hitoolboxLib, "DisposeControlUserPaneIdleUPP") })
-	_register("DisposeControlUserPaneKeyDownUPP", func() { purego.RegisterLibFunc(&_fnDisposeControlUserPaneKeyDownUPP, _hitoolboxLib, "DisposeControlUserPaneKeyDownUPP") })
-	_register("DisposeControlUserPaneTrackingUPP", func() { purego.RegisterLibFunc(&_fnDisposeControlUserPaneTrackingUPP, _hitoolboxLib, "DisposeControlUserPaneTrackingUPP") })
-	_register("DisposeDataBrowserAcceptDragUPP", func() { purego.RegisterLibFunc(&_fnDisposeDataBrowserAcceptDragUPP, _hitoolboxLib, "DisposeDataBrowserAcceptDragUPP") })
-	_register("DisposeDataBrowserAddDragItemUPP", func() { purego.RegisterLibFunc(&_fnDisposeDataBrowserAddDragItemUPP, _hitoolboxLib, "DisposeDataBrowserAddDragItemUPP") })
-	_register("DisposeDataBrowserDrawItemUPP", func() { purego.RegisterLibFunc(&_fnDisposeDataBrowserDrawItemUPP, _hitoolboxLib, "DisposeDataBrowserDrawItemUPP") })
-	_register("DisposeDataBrowserEditItemUPP", func() { purego.RegisterLibFunc(&_fnDisposeDataBrowserEditItemUPP, _hitoolboxLib, "DisposeDataBrowserEditItemUPP") })
-	_register("DisposeDataBrowserGetContextualMenuUPP", func() { purego.RegisterLibFunc(&_fnDisposeDataBrowserGetContextualMenuUPP, _hitoolboxLib, "DisposeDataBrowserGetContextualMenuUPP") })
-	_register("DisposeDataBrowserHitTestUPP", func() { purego.RegisterLibFunc(&_fnDisposeDataBrowserHitTestUPP, _hitoolboxLib, "DisposeDataBrowserHitTestUPP") })
-	_register("DisposeDataBrowserItemAcceptDragUPP", func() { purego.RegisterLibFunc(&_fnDisposeDataBrowserItemAcceptDragUPP, _hitoolboxLib, "DisposeDataBrowserItemAcceptDragUPP") })
-	_register("DisposeDataBrowserItemCompareUPP", func() { purego.RegisterLibFunc(&_fnDisposeDataBrowserItemCompareUPP, _hitoolboxLib, "DisposeDataBrowserItemCompareUPP") })
-	_register("DisposeDataBrowserItemDataUPP", func() { purego.RegisterLibFunc(&_fnDisposeDataBrowserItemDataUPP, _hitoolboxLib, "DisposeDataBrowserItemDataUPP") })
-	_register("DisposeDataBrowserItemDragRgnUPP", func() { purego.RegisterLibFunc(&_fnDisposeDataBrowserItemDragRgnUPP, _hitoolboxLib, "DisposeDataBrowserItemDragRgnUPP") })
-	_register("DisposeDataBrowserItemHelpContentUPP", func() { purego.RegisterLibFunc(&_fnDisposeDataBrowserItemHelpContentUPP, _hitoolboxLib, "DisposeDataBrowserItemHelpContentUPP") })
-	_register("DisposeDataBrowserItemNotificationUPP", func() { purego.RegisterLibFunc(&_fnDisposeDataBrowserItemNotificationUPP, _hitoolboxLib, "DisposeDataBrowserItemNotificationUPP") })
-	_register("DisposeDataBrowserItemNotificationWithItemUPP", func() { purego.RegisterLibFunc(&_fnDisposeDataBrowserItemNotificationWithItemUPP, _hitoolboxLib, "DisposeDataBrowserItemNotificationWithItemUPP") })
-	_register("DisposeDataBrowserItemReceiveDragUPP", func() { purego.RegisterLibFunc(&_fnDisposeDataBrowserItemReceiveDragUPP, _hitoolboxLib, "DisposeDataBrowserItemReceiveDragUPP") })
-	_register("DisposeDataBrowserItemUPP", func() { purego.RegisterLibFunc(&_fnDisposeDataBrowserItemUPP, _hitoolboxLib, "DisposeDataBrowserItemUPP") })
-	_register("DisposeDataBrowserPostProcessDragUPP", func() { purego.RegisterLibFunc(&_fnDisposeDataBrowserPostProcessDragUPP, _hitoolboxLib, "DisposeDataBrowserPostProcessDragUPP") })
-	_register("DisposeDataBrowserReceiveDragUPP", func() { purego.RegisterLibFunc(&_fnDisposeDataBrowserReceiveDragUPP, _hitoolboxLib, "DisposeDataBrowserReceiveDragUPP") })
-	_register("DisposeDataBrowserSelectContextualMenuUPP", func() { purego.RegisterLibFunc(&_fnDisposeDataBrowserSelectContextualMenuUPP, _hitoolboxLib, "DisposeDataBrowserSelectContextualMenuUPP") })
-	_register("DisposeDataBrowserTrackingUPP", func() { purego.RegisterLibFunc(&_fnDisposeDataBrowserTrackingUPP, _hitoolboxLib, "DisposeDataBrowserTrackingUPP") })
+	_register("DisposeControlEditTextValidationUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeControlEditTextValidationUPP, _hitoolboxLib, "DisposeControlEditTextValidationUPP")
+	})
+	_register("DisposeControlKeyFilterUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeControlKeyFilterUPP, _hitoolboxLib, "DisposeControlKeyFilterUPP")
+	})
+	_register("DisposeControlUserPaneActivateUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeControlUserPaneActivateUPP, _hitoolboxLib, "DisposeControlUserPaneActivateUPP")
+	})
+	_register("DisposeControlUserPaneDrawUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeControlUserPaneDrawUPP, _hitoolboxLib, "DisposeControlUserPaneDrawUPP")
+	})
+	_register("DisposeControlUserPaneFocusUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeControlUserPaneFocusUPP, _hitoolboxLib, "DisposeControlUserPaneFocusUPP")
+	})
+	_register("DisposeControlUserPaneHitTestUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeControlUserPaneHitTestUPP, _hitoolboxLib, "DisposeControlUserPaneHitTestUPP")
+	})
+	_register("DisposeControlUserPaneIdleUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeControlUserPaneIdleUPP, _hitoolboxLib, "DisposeControlUserPaneIdleUPP")
+	})
+	_register("DisposeControlUserPaneKeyDownUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeControlUserPaneKeyDownUPP, _hitoolboxLib, "DisposeControlUserPaneKeyDownUPP")
+	})
+	_register("DisposeControlUserPaneTrackingUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeControlUserPaneTrackingUPP, _hitoolboxLib, "DisposeControlUserPaneTrackingUPP")
+	})
+	_register("DisposeDataBrowserAcceptDragUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeDataBrowserAcceptDragUPP, _hitoolboxLib, "DisposeDataBrowserAcceptDragUPP")
+	})
+	_register("DisposeDataBrowserAddDragItemUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeDataBrowserAddDragItemUPP, _hitoolboxLib, "DisposeDataBrowserAddDragItemUPP")
+	})
+	_register("DisposeDataBrowserDrawItemUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeDataBrowserDrawItemUPP, _hitoolboxLib, "DisposeDataBrowserDrawItemUPP")
+	})
+	_register("DisposeDataBrowserEditItemUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeDataBrowserEditItemUPP, _hitoolboxLib, "DisposeDataBrowserEditItemUPP")
+	})
+	_register("DisposeDataBrowserGetContextualMenuUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeDataBrowserGetContextualMenuUPP, _hitoolboxLib, "DisposeDataBrowserGetContextualMenuUPP")
+	})
+	_register("DisposeDataBrowserHitTestUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeDataBrowserHitTestUPP, _hitoolboxLib, "DisposeDataBrowserHitTestUPP")
+	})
+	_register("DisposeDataBrowserItemAcceptDragUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeDataBrowserItemAcceptDragUPP, _hitoolboxLib, "DisposeDataBrowserItemAcceptDragUPP")
+	})
+	_register("DisposeDataBrowserItemCompareUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeDataBrowserItemCompareUPP, _hitoolboxLib, "DisposeDataBrowserItemCompareUPP")
+	})
+	_register("DisposeDataBrowserItemDataUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeDataBrowserItemDataUPP, _hitoolboxLib, "DisposeDataBrowserItemDataUPP")
+	})
+	_register("DisposeDataBrowserItemDragRgnUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeDataBrowserItemDragRgnUPP, _hitoolboxLib, "DisposeDataBrowserItemDragRgnUPP")
+	})
+	_register("DisposeDataBrowserItemHelpContentUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeDataBrowserItemHelpContentUPP, _hitoolboxLib, "DisposeDataBrowserItemHelpContentUPP")
+	})
+	_register("DisposeDataBrowserItemNotificationUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeDataBrowserItemNotificationUPP, _hitoolboxLib, "DisposeDataBrowserItemNotificationUPP")
+	})
+	_register("DisposeDataBrowserItemNotificationWithItemUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeDataBrowserItemNotificationWithItemUPP, _hitoolboxLib, "DisposeDataBrowserItemNotificationWithItemUPP")
+	})
+	_register("DisposeDataBrowserItemReceiveDragUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeDataBrowserItemReceiveDragUPP, _hitoolboxLib, "DisposeDataBrowserItemReceiveDragUPP")
+	})
+	_register("DisposeDataBrowserItemUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeDataBrowserItemUPP, _hitoolboxLib, "DisposeDataBrowserItemUPP")
+	})
+	_register("DisposeDataBrowserPostProcessDragUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeDataBrowserPostProcessDragUPP, _hitoolboxLib, "DisposeDataBrowserPostProcessDragUPP")
+	})
+	_register("DisposeDataBrowserReceiveDragUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeDataBrowserReceiveDragUPP, _hitoolboxLib, "DisposeDataBrowserReceiveDragUPP")
+	})
+	_register("DisposeDataBrowserSelectContextualMenuUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeDataBrowserSelectContextualMenuUPP, _hitoolboxLib, "DisposeDataBrowserSelectContextualMenuUPP")
+	})
+	_register("DisposeDataBrowserTrackingUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeDataBrowserTrackingUPP, _hitoolboxLib, "DisposeDataBrowserTrackingUPP")
+	})
 	_register("DisposeDragDrawingUPP", func() { purego.RegisterLibFunc(&_fnDisposeDragDrawingUPP, _hitoolboxLib, "DisposeDragDrawingUPP") })
 	_register("DisposeDragInputUPP", func() { purego.RegisterLibFunc(&_fnDisposeDragInputUPP, _hitoolboxLib, "DisposeDragInputUPP") })
-	_register("DisposeDragReceiveHandlerUPP", func() { purego.RegisterLibFunc(&_fnDisposeDragReceiveHandlerUPP, _hitoolboxLib, "DisposeDragReceiveHandlerUPP") })
+	_register("DisposeDragReceiveHandlerUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeDragReceiveHandlerUPP, _hitoolboxLib, "DisposeDragReceiveHandlerUPP")
+	})
 	_register("DisposeDragSendDataUPP", func() { purego.RegisterLibFunc(&_fnDisposeDragSendDataUPP, _hitoolboxLib, "DisposeDragSendDataUPP") })
-	_register("DisposeDragTrackingHandlerUPP", func() { purego.RegisterLibFunc(&_fnDisposeDragTrackingHandlerUPP, _hitoolboxLib, "DisposeDragTrackingHandlerUPP") })
+	_register("DisposeDragTrackingHandlerUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeDragTrackingHandlerUPP, _hitoolboxLib, "DisposeDragTrackingHandlerUPP")
+	})
 	_register("DisposeDrawHookUPP", func() { purego.RegisterLibFunc(&_fnDisposeDrawHookUPP, _hitoolboxLib, "DisposeDrawHookUPP") })
 	_register("DisposeEOLHookUPP", func() { purego.RegisterLibFunc(&_fnDisposeEOLHookUPP, _hitoolboxLib, "DisposeEOLHookUPP") })
-	_register("DisposeEditUnicodePostUpdateUPP", func() { purego.RegisterLibFunc(&_fnDisposeEditUnicodePostUpdateUPP, _hitoolboxLib, "DisposeEditUnicodePostUpdateUPP") })
-	_register("DisposeEventComparatorUPP", func() { purego.RegisterLibFunc(&_fnDisposeEventComparatorUPP, _hitoolboxLib, "DisposeEventComparatorUPP") })
+	_register("DisposeEditUnicodePostUpdateUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeEditUnicodePostUpdateUPP, _hitoolboxLib, "DisposeEditUnicodePostUpdateUPP")
+	})
+	_register("DisposeEventComparatorUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeEventComparatorUPP, _hitoolboxLib, "DisposeEventComparatorUPP")
+	})
 	_register("DisposeEventHandlerUPP", func() { purego.RegisterLibFunc(&_fnDisposeEventHandlerUPP, _hitoolboxLib, "DisposeEventHandlerUPP") })
-	_register("DisposeEventLoopIdleTimerUPP", func() { purego.RegisterLibFunc(&_fnDisposeEventLoopIdleTimerUPP, _hitoolboxLib, "DisposeEventLoopIdleTimerUPP") })
-	_register("DisposeEventLoopTimerUPP", func() { purego.RegisterLibFunc(&_fnDisposeEventLoopTimerUPP, _hitoolboxLib, "DisposeEventLoopTimerUPP") })
+	_register("DisposeEventLoopIdleTimerUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeEventLoopIdleTimerUPP, _hitoolboxLib, "DisposeEventLoopIdleTimerUPP")
+	})
+	_register("DisposeEventLoopTimerUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeEventLoopTimerUPP, _hitoolboxLib, "DisposeEventLoopTimerUPP")
+	})
 	_register("DisposeGetScrapDataUPP", func() { purego.RegisterLibFunc(&_fnDisposeGetScrapDataUPP, _hitoolboxLib, "DisposeGetScrapDataUPP") })
-	_register("DisposeHMControlContentUPP", func() { purego.RegisterLibFunc(&_fnDisposeHMControlContentUPP, _hitoolboxLib, "DisposeHMControlContentUPP") })
-	_register("DisposeHMMenuItemContentUPP", func() { purego.RegisterLibFunc(&_fnDisposeHMMenuItemContentUPP, _hitoolboxLib, "DisposeHMMenuItemContentUPP") })
-	_register("DisposeHMMenuTitleContentUPP", func() { purego.RegisterLibFunc(&_fnDisposeHMMenuTitleContentUPP, _hitoolboxLib, "DisposeHMMenuTitleContentUPP") })
-	_register("DisposeHMWindowContentUPP", func() { purego.RegisterLibFunc(&_fnDisposeHMWindowContentUPP, _hitoolboxLib, "DisposeHMWindowContentUPP") })
+	_register("DisposeHMControlContentUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeHMControlContentUPP, _hitoolboxLib, "DisposeHMControlContentUPP")
+	})
+	_register("DisposeHMMenuItemContentUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeHMMenuItemContentUPP, _hitoolboxLib, "DisposeHMMenuItemContentUPP")
+	})
+	_register("DisposeHMMenuTitleContentUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeHMMenuTitleContentUPP, _hitoolboxLib, "DisposeHMMenuTitleContentUPP")
+	})
+	_register("DisposeHMWindowContentUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeHMWindowContentUPP, _hitoolboxLib, "DisposeHMWindowContentUPP")
+	})
 	_register("DisposeHighHookUPP", func() { purego.RegisterLibFunc(&_fnDisposeHighHookUPP, _hitoolboxLib, "DisposeHighHookUPP") })
 	_register("DisposeHitTestHookUPP", func() { purego.RegisterLibFunc(&_fnDisposeHitTestHookUPP, _hitoolboxLib, "DisposeHitTestHookUPP") })
 	_register("DisposeListClickLoopUPP", func() { purego.RegisterLibFunc(&_fnDisposeListClickLoopUPP, _hitoolboxLib, "DisposeListClickLoopUPP") })
 	_register("DisposeListDefUPP", func() { purego.RegisterLibFunc(&_fnDisposeListDefUPP, _hitoolboxLib, "DisposeListDefUPP") })
 	_register("DisposeListSearchUPP", func() { purego.RegisterLibFunc(&_fnDisposeListSearchUPP, _hitoolboxLib, "DisposeListSearchUPP") })
-	_register("DisposeMenuItemDrawingUPP", func() { purego.RegisterLibFunc(&_fnDisposeMenuItemDrawingUPP, _hitoolboxLib, "DisposeMenuItemDrawingUPP") })
-	_register("DisposeMenuTitleDrawingUPP", func() { purego.RegisterLibFunc(&_fnDisposeMenuTitleDrawingUPP, _hitoolboxLib, "DisposeMenuTitleDrawingUPP") })
+	_register("DisposeMenuItemDrawingUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeMenuItemDrawingUPP, _hitoolboxLib, "DisposeMenuItemDrawingUPP")
+	})
+	_register("DisposeMenuTitleDrawingUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeMenuTitleDrawingUPP, _hitoolboxLib, "DisposeMenuTitleDrawingUPP")
+	})
 	_register("DisposeModalFilterUPP", func() { purego.RegisterLibFunc(&_fnDisposeModalFilterUPP, _hitoolboxLib, "DisposeModalFilterUPP") })
 	_register("DisposeModalFilterYDUPP", func() { purego.RegisterLibFunc(&_fnDisposeModalFilterYDUPP, _hitoolboxLib, "DisposeModalFilterYDUPP") })
 	_register("DisposeNMUPP", func() { purego.RegisterLibFunc(&_fnDisposeNMUPP, _hitoolboxLib, "DisposeNMUPP") })
 	_register("DisposeNWidthHookUPP", func() { purego.RegisterLibFunc(&_fnDisposeNWidthHookUPP, _hitoolboxLib, "DisposeNWidthHookUPP") })
-	_register("DisposeScrapPromiseKeeperUPP", func() { purego.RegisterLibFunc(&_fnDisposeScrapPromiseKeeperUPP, _hitoolboxLib, "DisposeScrapPromiseKeeperUPP") })
+	_register("DisposeScrapPromiseKeeperUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeScrapPromiseKeeperUPP, _hitoolboxLib, "DisposeScrapPromiseKeeperUPP")
+	})
 	_register("DisposeTEClickLoopUPP", func() { purego.RegisterLibFunc(&_fnDisposeTEClickLoopUPP, _hitoolboxLib, "DisposeTEClickLoopUPP") })
 	_register("DisposeTEDoTextUPP", func() { purego.RegisterLibFunc(&_fnDisposeTEDoTextUPP, _hitoolboxLib, "DisposeTEDoTextUPP") })
 	_register("DisposeTEFindWordUPP", func() { purego.RegisterLibFunc(&_fnDisposeTEFindWordUPP, _hitoolboxLib, "DisposeTEFindWordUPP") })
 	_register("DisposeTERecalcUPP", func() { purego.RegisterLibFunc(&_fnDisposeTERecalcUPP, _hitoolboxLib, "DisposeTERecalcUPP") })
-	_register("DisposeTSMTEPostUpdateUPP", func() { purego.RegisterLibFunc(&_fnDisposeTSMTEPostUpdateUPP, _hitoolboxLib, "DisposeTSMTEPostUpdateUPP") })
-	_register("DisposeTSMTEPreUpdateUPP", func() { purego.RegisterLibFunc(&_fnDisposeTSMTEPreUpdateUPP, _hitoolboxLib, "DisposeTSMTEPreUpdateUPP") })
-	_register("DisposeTXNActionKeyMapperUPP", func() { purego.RegisterLibFunc(&_fnDisposeTXNActionKeyMapperUPP, _hitoolboxLib, "DisposeTXNActionKeyMapperUPP") })
-	_register("DisposeTXNActionNameMapperUPP", func() { purego.RegisterLibFunc(&_fnDisposeTXNActionNameMapperUPP, _hitoolboxLib, "DisposeTXNActionNameMapperUPP") })
-	_register("DisposeTXNContextualMenuSetupUPP", func() { purego.RegisterLibFunc(&_fnDisposeTXNContextualMenuSetupUPP, _hitoolboxLib, "DisposeTXNContextualMenuSetupUPP") })
+	_register("DisposeTSMTEPostUpdateUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeTSMTEPostUpdateUPP, _hitoolboxLib, "DisposeTSMTEPostUpdateUPP")
+	})
+	_register("DisposeTSMTEPreUpdateUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeTSMTEPreUpdateUPP, _hitoolboxLib, "DisposeTSMTEPreUpdateUPP")
+	})
+	_register("DisposeTXNActionKeyMapperUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeTXNActionKeyMapperUPP, _hitoolboxLib, "DisposeTXNActionKeyMapperUPP")
+	})
+	_register("DisposeTXNActionNameMapperUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeTXNActionNameMapperUPP, _hitoolboxLib, "DisposeTXNActionNameMapperUPP")
+	})
+	_register("DisposeTXNContextualMenuSetupUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeTXNContextualMenuSetupUPP, _hitoolboxLib, "DisposeTXNContextualMenuSetupUPP")
+	})
 	_register("DisposeTXNFindUPP", func() { purego.RegisterLibFunc(&_fnDisposeTXNFindUPP, _hitoolboxLib, "DisposeTXNFindUPP") })
 	_register("DisposeTXNScrollInfoUPP", func() { purego.RegisterLibFunc(&_fnDisposeTXNScrollInfoUPP, _hitoolboxLib, "DisposeTXNScrollInfoUPP") })
 	_register("DisposeTextWidthHookUPP", func() { purego.RegisterLibFunc(&_fnDisposeTextWidthHookUPP, _hitoolboxLib, "DisposeTextWidthHookUPP") })
-	_register("DisposeThemeButtonDrawUPP", func() { purego.RegisterLibFunc(&_fnDisposeThemeButtonDrawUPP, _hitoolboxLib, "DisposeThemeButtonDrawUPP") })
+	_register("DisposeThemeButtonDrawUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeThemeButtonDrawUPP, _hitoolboxLib, "DisposeThemeButtonDrawUPP")
+	})
 	_register("DisposeThemeEraseUPP", func() { purego.RegisterLibFunc(&_fnDisposeThemeEraseUPP, _hitoolboxLib, "DisposeThemeEraseUPP") })
 	_register("DisposeThemeIteratorUPP", func() { purego.RegisterLibFunc(&_fnDisposeThemeIteratorUPP, _hitoolboxLib, "DisposeThemeIteratorUPP") })
-	_register("DisposeThemeTabTitleDrawUPP", func() { purego.RegisterLibFunc(&_fnDisposeThemeTabTitleDrawUPP, _hitoolboxLib, "DisposeThemeTabTitleDrawUPP") })
+	_register("DisposeThemeTabTitleDrawUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeThemeTabTitleDrawUPP, _hitoolboxLib, "DisposeThemeTabTitleDrawUPP")
+	})
 	_register("DisposeUserItemUPP", func() { purego.RegisterLibFunc(&_fnDisposeUserItemUPP, _hitoolboxLib, "DisposeUserItemUPP") })
 	_register("DisposeWidthHookUPP", func() { purego.RegisterLibFunc(&_fnDisposeWidthHookUPP, _hitoolboxLib, "DisposeWidthHookUPP") })
 	_register("DisposeWindowPaintUPP", func() { purego.RegisterLibFunc(&_fnDisposeWindowPaintUPP, _hitoolboxLib, "DisposeWindowPaintUPP") })
-	_register("DisposeWindowTitleDrawingUPP", func() { purego.RegisterLibFunc(&_fnDisposeWindowTitleDrawingUPP, _hitoolboxLib, "DisposeWindowTitleDrawingUPP") })
+	_register("DisposeWindowTitleDrawingUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeWindowTitleDrawingUPP, _hitoolboxLib, "DisposeWindowTitleDrawingUPP")
+	})
 	_register("EnableSecureEventInput", func() { purego.RegisterLibFunc(&_fnEnableSecureEventInput, _hitoolboxLib, "EnableSecureEventInput") })
-	_register("FindSpecificEventInQueue", func() { purego.RegisterLibFunc(&_fnFindSpecificEventInQueue, _hitoolboxLib, "FindSpecificEventInQueue") })
+	_register("FindSpecificEventInQueue", func() {
+		purego.RegisterLibFunc(&_fnFindSpecificEventInQueue, _hitoolboxLib, "FindSpecificEventInQueue")
+	})
 	_register("FlushEventQueue", func() { purego.RegisterLibFunc(&_fnFlushEventQueue, _hitoolboxLib, "FlushEventQueue") })
 	_register("FlushEvents", func() { purego.RegisterLibFunc(&_fnFlushEvents, _hitoolboxLib, "FlushEvents") })
-	_register("FlushEventsMatchingListFromQueue", func() { purego.RegisterLibFunc(&_fnFlushEventsMatchingListFromQueue, _hitoolboxLib, "FlushEventsMatchingListFromQueue") })
-	_register("FlushSpecificEventsFromQueue", func() { purego.RegisterLibFunc(&_fnFlushSpecificEventsFromQueue, _hitoolboxLib, "FlushSpecificEventsFromQueue") })
-	_register("GetApplicationEventTarget", func() { purego.RegisterLibFunc(&_fnGetApplicationEventTarget, _hitoolboxLib, "GetApplicationEventTarget") })
-	_register("GetApplicationTextEncoding", func() { purego.RegisterLibFunc(&_fnGetApplicationTextEncoding, _hitoolboxLib, "GetApplicationTextEncoding") })
-	_register("GetCFRunLoopFromEventLoop", func() { purego.RegisterLibFunc(&_fnGetCFRunLoopFromEventLoop, _hitoolboxLib, "GetCFRunLoopFromEventLoop") })
+	_register("FlushEventsMatchingListFromQueue", func() {
+		purego.RegisterLibFunc(&_fnFlushEventsMatchingListFromQueue, _hitoolboxLib, "FlushEventsMatchingListFromQueue")
+	})
+	_register("FlushSpecificEventsFromQueue", func() {
+		purego.RegisterLibFunc(&_fnFlushSpecificEventsFromQueue, _hitoolboxLib, "FlushSpecificEventsFromQueue")
+	})
+	_register("GetApplicationEventTarget", func() {
+		purego.RegisterLibFunc(&_fnGetApplicationEventTarget, _hitoolboxLib, "GetApplicationEventTarget")
+	})
+	_register("GetApplicationTextEncoding", func() {
+		purego.RegisterLibFunc(&_fnGetApplicationTextEncoding, _hitoolboxLib, "GetApplicationTextEncoding")
+	})
+	_register("GetCFRunLoopFromEventLoop", func() {
+		purego.RegisterLibFunc(&_fnGetCFRunLoopFromEventLoop, _hitoolboxLib, "GetCFRunLoopFromEventLoop")
+	})
 	_register("GetCurrentButtonState", func() { purego.RegisterLibFunc(&_fnGetCurrentButtonState, _hitoolboxLib, "GetCurrentButtonState") })
 	_register("GetCurrentEvent", func() { purego.RegisterLibFunc(&_fnGetCurrentEvent, _hitoolboxLib, "GetCurrentEvent") })
-	_register("GetCurrentEventButtonState", func() { purego.RegisterLibFunc(&_fnGetCurrentEventButtonState, _hitoolboxLib, "GetCurrentEventButtonState") })
-	_register("GetCurrentEventKeyModifiers", func() { purego.RegisterLibFunc(&_fnGetCurrentEventKeyModifiers, _hitoolboxLib, "GetCurrentEventKeyModifiers") })
+	_register("GetCurrentEventButtonState", func() {
+		purego.RegisterLibFunc(&_fnGetCurrentEventButtonState, _hitoolboxLib, "GetCurrentEventButtonState")
+	})
+	_register("GetCurrentEventKeyModifiers", func() {
+		purego.RegisterLibFunc(&_fnGetCurrentEventKeyModifiers, _hitoolboxLib, "GetCurrentEventKeyModifiers")
+	})
 	_register("GetCurrentEventLoop", func() { purego.RegisterLibFunc(&_fnGetCurrentEventLoop, _hitoolboxLib, "GetCurrentEventLoop") })
 	_register("GetCurrentEventQueue", func() { purego.RegisterLibFunc(&_fnGetCurrentEventQueue, _hitoolboxLib, "GetCurrentEventQueue") })
 	_register("GetCurrentEventTime", func() { purego.RegisterLibFunc(&_fnGetCurrentEventTime, _hitoolboxLib, "GetCurrentEventTime") })
 	_register("GetCurrentKeyModifiers", func() { purego.RegisterLibFunc(&_fnGetCurrentKeyModifiers, _hitoolboxLib, "GetCurrentKeyModifiers") })
 	_register("GetEventClass", func() { purego.RegisterLibFunc(&_fnGetEventClass, _hitoolboxLib, "GetEventClass") })
-	_register("GetEventDispatcherTarget", func() { purego.RegisterLibFunc(&_fnGetEventDispatcherTarget, _hitoolboxLib, "GetEventDispatcherTarget") })
+	_register("GetEventDispatcherTarget", func() {
+		purego.RegisterLibFunc(&_fnGetEventDispatcherTarget, _hitoolboxLib, "GetEventDispatcherTarget")
+	})
 	_register("GetEventKind", func() { purego.RegisterLibFunc(&_fnGetEventKind, _hitoolboxLib, "GetEventKind") })
 	_register("GetEventMonitorTarget", func() { purego.RegisterLibFunc(&_fnGetEventMonitorTarget, _hitoolboxLib, "GetEventMonitorTarget") })
 	_register("GetEventParameter", func() { purego.RegisterLibFunc(&_fnGetEventParameter, _hitoolboxLib, "GetEventParameter") })
@@ -190,25 +314,37 @@ func _loadLibrary() {
 	_register("GetSymbolicHotKeyMode", func() { purego.RegisterLibFunc(&_fnGetSymbolicHotKeyMode, _hitoolboxLib, "GetSymbolicHotKeyMode") })
 	_register("GetSystemUIMode", func() { purego.RegisterLibFunc(&_fnGetSystemUIMode, _hitoolboxLib, "GetSystemUIMode") })
 	_register("GetThemeMenuItemExtra", func() { purego.RegisterLibFunc(&_fnGetThemeMenuItemExtra, _hitoolboxLib, "GetThemeMenuItemExtra") })
-	_register("GetThemeMenuSeparatorHeight", func() { purego.RegisterLibFunc(&_fnGetThemeMenuSeparatorHeight, _hitoolboxLib, "GetThemeMenuSeparatorHeight") })
+	_register("GetThemeMenuSeparatorHeight", func() {
+		purego.RegisterLibFunc(&_fnGetThemeMenuSeparatorHeight, _hitoolboxLib, "GetThemeMenuSeparatorHeight")
+	})
 	_register("GetThemeMenuTitleExtra", func() { purego.RegisterLibFunc(&_fnGetThemeMenuTitleExtra, _hitoolboxLib, "GetThemeMenuTitleExtra") })
 	_register("GetThemeMetric", func() { purego.RegisterLibFunc(&_fnGetThemeMetric, _hitoolboxLib, "GetThemeMetric") })
 	_register("HIDictionaryWindowShow", func() { purego.RegisterLibFunc(&_fnHIDictionaryWindowShow, _hitoolboxLib, "HIDictionaryWindowShow") })
 	_register("HIGetMousePosition", func() { purego.RegisterLibFunc(&_fnHIGetMousePosition, _hitoolboxLib, "HIGetMousePosition") })
-	_register("HIMouseTrackingGetParameters", func() { purego.RegisterLibFunc(&_fnHIMouseTrackingGetParameters, _hitoolboxLib, "HIMouseTrackingGetParameters") })
+	_register("HIMouseTrackingGetParameters", func() {
+		purego.RegisterLibFunc(&_fnHIMouseTrackingGetParameters, _hitoolboxLib, "HIMouseTrackingGetParameters")
+	})
 	_register("HIObjectAddDelegate", func() { purego.RegisterLibFunc(&_fnHIObjectAddDelegate, _hitoolboxLib, "HIObjectAddDelegate") })
 	_register("HIObjectCopyClassID", func() { purego.RegisterLibFunc(&_fnHIObjectCopyClassID, _hitoolboxLib, "HIObjectCopyClassID") })
 	_register("HIObjectCopyDelegates", func() { purego.RegisterLibFunc(&_fnHIObjectCopyDelegates, _hitoolboxLib, "HIObjectCopyDelegates") })
 	_register("HIObjectCreate", func() { purego.RegisterLibFunc(&_fnHIObjectCreate, _hitoolboxLib, "HIObjectCreate") })
-	_register("HIObjectCreateFromBundle", func() { purego.RegisterLibFunc(&_fnHIObjectCreateFromBundle, _hitoolboxLib, "HIObjectCreateFromBundle") })
+	_register("HIObjectCreateFromBundle", func() {
+		purego.RegisterLibFunc(&_fnHIObjectCreateFromBundle, _hitoolboxLib, "HIObjectCreateFromBundle")
+	})
 	_register("HIObjectDynamicCast", func() { purego.RegisterLibFunc(&_fnHIObjectDynamicCast, _hitoolboxLib, "HIObjectDynamicCast") })
 	_register("HIObjectFromEventTarget", func() { purego.RegisterLibFunc(&_fnHIObjectFromEventTarget, _hitoolboxLib, "HIObjectFromEventTarget") })
-	_register("HIObjectGetEventHandlerObject", func() { purego.RegisterLibFunc(&_fnHIObjectGetEventHandlerObject, _hitoolboxLib, "HIObjectGetEventHandlerObject") })
+	_register("HIObjectGetEventHandlerObject", func() {
+		purego.RegisterLibFunc(&_fnHIObjectGetEventHandlerObject, _hitoolboxLib, "HIObjectGetEventHandlerObject")
+	})
 	_register("HIObjectGetEventTarget", func() { purego.RegisterLibFunc(&_fnHIObjectGetEventTarget, _hitoolboxLib, "HIObjectGetEventTarget") })
-	_register("HIObjectIsArchivingIgnored", func() { purego.RegisterLibFunc(&_fnHIObjectIsArchivingIgnored, _hitoolboxLib, "HIObjectIsArchivingIgnored") })
+	_register("HIObjectIsArchivingIgnored", func() {
+		purego.RegisterLibFunc(&_fnHIObjectIsArchivingIgnored, _hitoolboxLib, "HIObjectIsArchivingIgnored")
+	})
 	_register("HIObjectIsOfClass", func() { purego.RegisterLibFunc(&_fnHIObjectIsOfClass, _hitoolboxLib, "HIObjectIsOfClass") })
 	_register("HIObjectPrintDebugInfo", func() { purego.RegisterLibFunc(&_fnHIObjectPrintDebugInfo, _hitoolboxLib, "HIObjectPrintDebugInfo") })
-	_register("HIObjectRegisterSubclass", func() { purego.RegisterLibFunc(&_fnHIObjectRegisterSubclass, _hitoolboxLib, "HIObjectRegisterSubclass") })
+	_register("HIObjectRegisterSubclass", func() {
+		purego.RegisterLibFunc(&_fnHIObjectRegisterSubclass, _hitoolboxLib, "HIObjectRegisterSubclass")
+	})
 	_register("HIObjectRemoveDelegate", func() { purego.RegisterLibFunc(&_fnHIObjectRemoveDelegate, _hitoolboxLib, "HIObjectRemoveDelegate") })
 	_register("HIObjectUnregisterClass", func() { purego.RegisterLibFunc(&_fnHIObjectUnregisterClass, _hitoolboxLib, "HIObjectUnregisterClass") })
 	_register("HIPointConvert", func() { purego.RegisterLibFunc(&_fnHIPointConvert, _hitoolboxLib, "HIPointConvert") })
@@ -217,10 +353,14 @@ func _loadLibrary() {
 	_register("HISizeConvert", func() { purego.RegisterLibFunc(&_fnHISizeConvert, _hitoolboxLib, "HISizeConvert") })
 	_register("HIThemeApplyBackground", func() { purego.RegisterLibFunc(&_fnHIThemeApplyBackground, _hitoolboxLib, "HIThemeApplyBackground") })
 	_register("HIThemeBeginFocus", func() { purego.RegisterLibFunc(&_fnHIThemeBeginFocus, _hitoolboxLib, "HIThemeBeginFocus") })
-	_register("HIThemeBrushCreateCGColor", func() { purego.RegisterLibFunc(&_fnHIThemeBrushCreateCGColor, _hitoolboxLib, "HIThemeBrushCreateCGColor") })
+	_register("HIThemeBrushCreateCGColor", func() {
+		purego.RegisterLibFunc(&_fnHIThemeBrushCreateCGColor, _hitoolboxLib, "HIThemeBrushCreateCGColor")
+	})
 	_register("HIThemeDrawBackground", func() { purego.RegisterLibFunc(&_fnHIThemeDrawBackground, _hitoolboxLib, "HIThemeDrawBackground") })
 	_register("HIThemeDrawButton", func() { purego.RegisterLibFunc(&_fnHIThemeDrawButton, _hitoolboxLib, "HIThemeDrawButton") })
-	_register("HIThemeDrawChasingArrows", func() { purego.RegisterLibFunc(&_fnHIThemeDrawChasingArrows, _hitoolboxLib, "HIThemeDrawChasingArrows") })
+	_register("HIThemeDrawChasingArrows", func() {
+		purego.RegisterLibFunc(&_fnHIThemeDrawChasingArrows, _hitoolboxLib, "HIThemeDrawChasingArrows")
+	})
 	_register("HIThemeDrawFocusRect", func() { purego.RegisterLibFunc(&_fnHIThemeDrawFocusRect, _hitoolboxLib, "HIThemeDrawFocusRect") })
 	_register("HIThemeDrawFrame", func() { purego.RegisterLibFunc(&_fnHIThemeDrawFrame, _hitoolboxLib, "HIThemeDrawFrame") })
 	_register("HIThemeDrawGenericWell", func() { purego.RegisterLibFunc(&_fnHIThemeDrawGenericWell, _hitoolboxLib, "HIThemeDrawGenericWell") })
@@ -228,50 +368,92 @@ func _loadLibrary() {
 	_register("HIThemeDrawGroupBox", func() { purego.RegisterLibFunc(&_fnHIThemeDrawGroupBox, _hitoolboxLib, "HIThemeDrawGroupBox") })
 	_register("HIThemeDrawGrowBox", func() { purego.RegisterLibFunc(&_fnHIThemeDrawGrowBox, _hitoolboxLib, "HIThemeDrawGrowBox") })
 	_register("HIThemeDrawHeader", func() { purego.RegisterLibFunc(&_fnHIThemeDrawHeader, _hitoolboxLib, "HIThemeDrawHeader") })
-	_register("HIThemeDrawMenuBackground", func() { purego.RegisterLibFunc(&_fnHIThemeDrawMenuBackground, _hitoolboxLib, "HIThemeDrawMenuBackground") })
-	_register("HIThemeDrawMenuBarBackground", func() { purego.RegisterLibFunc(&_fnHIThemeDrawMenuBarBackground, _hitoolboxLib, "HIThemeDrawMenuBarBackground") })
+	_register("HIThemeDrawMenuBackground", func() {
+		purego.RegisterLibFunc(&_fnHIThemeDrawMenuBackground, _hitoolboxLib, "HIThemeDrawMenuBackground")
+	})
+	_register("HIThemeDrawMenuBarBackground", func() {
+		purego.RegisterLibFunc(&_fnHIThemeDrawMenuBarBackground, _hitoolboxLib, "HIThemeDrawMenuBarBackground")
+	})
 	_register("HIThemeDrawMenuItem", func() { purego.RegisterLibFunc(&_fnHIThemeDrawMenuItem, _hitoolboxLib, "HIThemeDrawMenuItem") })
-	_register("HIThemeDrawMenuSeparator", func() { purego.RegisterLibFunc(&_fnHIThemeDrawMenuSeparator, _hitoolboxLib, "HIThemeDrawMenuSeparator") })
+	_register("HIThemeDrawMenuSeparator", func() {
+		purego.RegisterLibFunc(&_fnHIThemeDrawMenuSeparator, _hitoolboxLib, "HIThemeDrawMenuSeparator")
+	})
 	_register("HIThemeDrawMenuTitle", func() { purego.RegisterLibFunc(&_fnHIThemeDrawMenuTitle, _hitoolboxLib, "HIThemeDrawMenuTitle") })
 	_register("HIThemeDrawPaneSplitter", func() { purego.RegisterLibFunc(&_fnHIThemeDrawPaneSplitter, _hitoolboxLib, "HIThemeDrawPaneSplitter") })
 	_register("HIThemeDrawPlacard", func() { purego.RegisterLibFunc(&_fnHIThemeDrawPlacard, _hitoolboxLib, "HIThemeDrawPlacard") })
 	_register("HIThemeDrawPopupArrow", func() { purego.RegisterLibFunc(&_fnHIThemeDrawPopupArrow, _hitoolboxLib, "HIThemeDrawPopupArrow") })
-	_register("HIThemeDrawScrollBarDelimiters", func() { purego.RegisterLibFunc(&_fnHIThemeDrawScrollBarDelimiters, _hitoolboxLib, "HIThemeDrawScrollBarDelimiters") })
+	_register("HIThemeDrawScrollBarDelimiters", func() {
+		purego.RegisterLibFunc(&_fnHIThemeDrawScrollBarDelimiters, _hitoolboxLib, "HIThemeDrawScrollBarDelimiters")
+	})
 	_register("HIThemeDrawSegment", func() { purego.RegisterLibFunc(&_fnHIThemeDrawSegment, _hitoolboxLib, "HIThemeDrawSegment") })
 	_register("HIThemeDrawSeparator", func() { purego.RegisterLibFunc(&_fnHIThemeDrawSeparator, _hitoolboxLib, "HIThemeDrawSeparator") })
 	_register("HIThemeDrawTab", func() { purego.RegisterLibFunc(&_fnHIThemeDrawTab, _hitoolboxLib, "HIThemeDrawTab") })
 	_register("HIThemeDrawTabPane", func() { purego.RegisterLibFunc(&_fnHIThemeDrawTabPane, _hitoolboxLib, "HIThemeDrawTabPane") })
 	_register("HIThemeDrawTextBox", func() { purego.RegisterLibFunc(&_fnHIThemeDrawTextBox, _hitoolboxLib, "HIThemeDrawTextBox") })
 	_register("HIThemeDrawTickMark", func() { purego.RegisterLibFunc(&_fnHIThemeDrawTickMark, _hitoolboxLib, "HIThemeDrawTickMark") })
-	_register("HIThemeDrawTitleBarWidget", func() { purego.RegisterLibFunc(&_fnHIThemeDrawTitleBarWidget, _hitoolboxLib, "HIThemeDrawTitleBarWidget") })
+	_register("HIThemeDrawTitleBarWidget", func() {
+		purego.RegisterLibFunc(&_fnHIThemeDrawTitleBarWidget, _hitoolboxLib, "HIThemeDrawTitleBarWidget")
+	})
 	_register("HIThemeDrawTrack", func() { purego.RegisterLibFunc(&_fnHIThemeDrawTrack, _hitoolboxLib, "HIThemeDrawTrack") })
-	_register("HIThemeDrawTrackTickMarks", func() { purego.RegisterLibFunc(&_fnHIThemeDrawTrackTickMarks, _hitoolboxLib, "HIThemeDrawTrackTickMarks") })
+	_register("HIThemeDrawTrackTickMarks", func() {
+		purego.RegisterLibFunc(&_fnHIThemeDrawTrackTickMarks, _hitoolboxLib, "HIThemeDrawTrackTickMarks")
+	})
 	_register("HIThemeDrawWindowFrame", func() { purego.RegisterLibFunc(&_fnHIThemeDrawWindowFrame, _hitoolboxLib, "HIThemeDrawWindowFrame") })
 	_register("HIThemeEndFocus", func() { purego.RegisterLibFunc(&_fnHIThemeEndFocus, _hitoolboxLib, "HIThemeEndFocus") })
-	_register("HIThemeGetButtonBackgroundBounds", func() { purego.RegisterLibFunc(&_fnHIThemeGetButtonBackgroundBounds, _hitoolboxLib, "HIThemeGetButtonBackgroundBounds") })
-	_register("HIThemeGetButtonContentBounds", func() { purego.RegisterLibFunc(&_fnHIThemeGetButtonContentBounds, _hitoolboxLib, "HIThemeGetButtonContentBounds") })
+	_register("HIThemeGetButtonBackgroundBounds", func() {
+		purego.RegisterLibFunc(&_fnHIThemeGetButtonBackgroundBounds, _hitoolboxLib, "HIThemeGetButtonBackgroundBounds")
+	})
+	_register("HIThemeGetButtonContentBounds", func() {
+		purego.RegisterLibFunc(&_fnHIThemeGetButtonContentBounds, _hitoolboxLib, "HIThemeGetButtonContentBounds")
+	})
 	_register("HIThemeGetButtonShape", func() { purego.RegisterLibFunc(&_fnHIThemeGetButtonShape, _hitoolboxLib, "HIThemeGetButtonShape") })
 	_register("HIThemeGetGrowBoxBounds", func() { purego.RegisterLibFunc(&_fnHIThemeGetGrowBoxBounds, _hitoolboxLib, "HIThemeGetGrowBoxBounds") })
-	_register("HIThemeGetMenuBackgroundShape", func() { purego.RegisterLibFunc(&_fnHIThemeGetMenuBackgroundShape, _hitoolboxLib, "HIThemeGetMenuBackgroundShape") })
-	_register("HIThemeGetScrollBarTrackRect", func() { purego.RegisterLibFunc(&_fnHIThemeGetScrollBarTrackRect, _hitoolboxLib, "HIThemeGetScrollBarTrackRect") })
+	_register("HIThemeGetMenuBackgroundShape", func() {
+		purego.RegisterLibFunc(&_fnHIThemeGetMenuBackgroundShape, _hitoolboxLib, "HIThemeGetMenuBackgroundShape")
+	})
+	_register("HIThemeGetScrollBarTrackRect", func() {
+		purego.RegisterLibFunc(&_fnHIThemeGetScrollBarTrackRect, _hitoolboxLib, "HIThemeGetScrollBarTrackRect")
+	})
 	_register("HIThemeGetTabDrawShape", func() { purego.RegisterLibFunc(&_fnHIThemeGetTabDrawShape, _hitoolboxLib, "HIThemeGetTabDrawShape") })
-	_register("HIThemeGetTabPaneContentShape", func() { purego.RegisterLibFunc(&_fnHIThemeGetTabPaneContentShape, _hitoolboxLib, "HIThemeGetTabPaneContentShape") })
-	_register("HIThemeGetTabPaneDrawShape", func() { purego.RegisterLibFunc(&_fnHIThemeGetTabPaneDrawShape, _hitoolboxLib, "HIThemeGetTabPaneDrawShape") })
+	_register("HIThemeGetTabPaneContentShape", func() {
+		purego.RegisterLibFunc(&_fnHIThemeGetTabPaneContentShape, _hitoolboxLib, "HIThemeGetTabPaneContentShape")
+	})
+	_register("HIThemeGetTabPaneDrawShape", func() {
+		purego.RegisterLibFunc(&_fnHIThemeGetTabPaneDrawShape, _hitoolboxLib, "HIThemeGetTabPaneDrawShape")
+	})
 	_register("HIThemeGetTabShape", func() { purego.RegisterLibFunc(&_fnHIThemeGetTabShape, _hitoolboxLib, "HIThemeGetTabShape") })
-	_register("HIThemeGetTextColorForThemeBrush", func() { purego.RegisterLibFunc(&_fnHIThemeGetTextColorForThemeBrush, _hitoolboxLib, "HIThemeGetTextColorForThemeBrush") })
-	_register("HIThemeGetTextDimensions", func() { purego.RegisterLibFunc(&_fnHIThemeGetTextDimensions, _hitoolboxLib, "HIThemeGetTextDimensions") })
+	_register("HIThemeGetTextColorForThemeBrush", func() {
+		purego.RegisterLibFunc(&_fnHIThemeGetTextColorForThemeBrush, _hitoolboxLib, "HIThemeGetTextColorForThemeBrush")
+	})
+	_register("HIThemeGetTextDimensions", func() {
+		purego.RegisterLibFunc(&_fnHIThemeGetTextDimensions, _hitoolboxLib, "HIThemeGetTextDimensions")
+	})
 	_register("HIThemeGetTrackBounds", func() { purego.RegisterLibFunc(&_fnHIThemeGetTrackBounds, _hitoolboxLib, "HIThemeGetTrackBounds") })
 	_register("HIThemeGetTrackDragRect", func() { purego.RegisterLibFunc(&_fnHIThemeGetTrackDragRect, _hitoolboxLib, "HIThemeGetTrackDragRect") })
-	_register("HIThemeGetTrackLiveValue", func() { purego.RegisterLibFunc(&_fnHIThemeGetTrackLiveValue, _hitoolboxLib, "HIThemeGetTrackLiveValue") })
-	_register("HIThemeGetTrackPartBounds", func() { purego.RegisterLibFunc(&_fnHIThemeGetTrackPartBounds, _hitoolboxLib, "HIThemeGetTrackPartBounds") })
+	_register("HIThemeGetTrackLiveValue", func() {
+		purego.RegisterLibFunc(&_fnHIThemeGetTrackLiveValue, _hitoolboxLib, "HIThemeGetTrackLiveValue")
+	})
+	_register("HIThemeGetTrackPartBounds", func() {
+		purego.RegisterLibFunc(&_fnHIThemeGetTrackPartBounds, _hitoolboxLib, "HIThemeGetTrackPartBounds")
+	})
 	_register("HIThemeGetTrackParts", func() { purego.RegisterLibFunc(&_fnHIThemeGetTrackParts, _hitoolboxLib, "HIThemeGetTrackParts") })
-	_register("HIThemeGetTrackThumbPositionFromBounds", func() { purego.RegisterLibFunc(&_fnHIThemeGetTrackThumbPositionFromBounds, _hitoolboxLib, "HIThemeGetTrackThumbPositionFromBounds") })
-	_register("HIThemeGetTrackThumbPositionFromOffset", func() { purego.RegisterLibFunc(&_fnHIThemeGetTrackThumbPositionFromOffset, _hitoolboxLib, "HIThemeGetTrackThumbPositionFromOffset") })
-	_register("HIThemeGetTrackThumbShape", func() { purego.RegisterLibFunc(&_fnHIThemeGetTrackThumbShape, _hitoolboxLib, "HIThemeGetTrackThumbShape") })
+	_register("HIThemeGetTrackThumbPositionFromBounds", func() {
+		purego.RegisterLibFunc(&_fnHIThemeGetTrackThumbPositionFromBounds, _hitoolboxLib, "HIThemeGetTrackThumbPositionFromBounds")
+	})
+	_register("HIThemeGetTrackThumbPositionFromOffset", func() {
+		purego.RegisterLibFunc(&_fnHIThemeGetTrackThumbPositionFromOffset, _hitoolboxLib, "HIThemeGetTrackThumbPositionFromOffset")
+	})
+	_register("HIThemeGetTrackThumbShape", func() {
+		purego.RegisterLibFunc(&_fnHIThemeGetTrackThumbShape, _hitoolboxLib, "HIThemeGetTrackThumbShape")
+	})
 	_register("HIThemeGetUIFontType", func() { purego.RegisterLibFunc(&_fnHIThemeGetUIFontType, _hitoolboxLib, "HIThemeGetUIFontType") })
-	_register("HIThemeGetWindowRegionHit", func() { purego.RegisterLibFunc(&_fnHIThemeGetWindowRegionHit, _hitoolboxLib, "HIThemeGetWindowRegionHit") })
+	_register("HIThemeGetWindowRegionHit", func() {
+		purego.RegisterLibFunc(&_fnHIThemeGetWindowRegionHit, _hitoolboxLib, "HIThemeGetWindowRegionHit")
+	})
 	_register("HIThemeGetWindowShape", func() { purego.RegisterLibFunc(&_fnHIThemeGetWindowShape, _hitoolboxLib, "HIThemeGetWindowShape") })
-	_register("HIThemeHitTestScrollBarArrows", func() { purego.RegisterLibFunc(&_fnHIThemeHitTestScrollBarArrows, _hitoolboxLib, "HIThemeHitTestScrollBarArrows") })
+	_register("HIThemeHitTestScrollBarArrows", func() {
+		purego.RegisterLibFunc(&_fnHIThemeHitTestScrollBarArrows, _hitoolboxLib, "HIThemeHitTestScrollBarArrows")
+	})
 	_register("HIThemeHitTestTrack", func() { purego.RegisterLibFunc(&_fnHIThemeHitTestTrack, _hitoolboxLib, "HIThemeHitTestTrack") })
 	_register("HIThemeSetFill", func() { purego.RegisterLibFunc(&_fnHIThemeSetFill, _hitoolboxLib, "HIThemeSetFill") })
 	_register("HIThemeSetStroke", func() { purego.RegisterLibFunc(&_fnHIThemeSetStroke, _hitoolboxLib, "HIThemeSetStroke") })
@@ -282,86 +464,182 @@ func _loadLibrary() {
 	_register("InvokeAEIdleUPP", func() { purego.RegisterLibFunc(&_fnInvokeAEIdleUPP, _hitoolboxLib, "InvokeAEIdleUPP") })
 	_register("InvokeCaretHookUPP", func() { purego.RegisterLibFunc(&_fnInvokeCaretHookUPP, _hitoolboxLib, "InvokeCaretHookUPP") })
 	_register("InvokeControlActionUPP", func() { purego.RegisterLibFunc(&_fnInvokeControlActionUPP, _hitoolboxLib, "InvokeControlActionUPP") })
-	_register("InvokeControlEditTextValidationUPP", func() { purego.RegisterLibFunc(&_fnInvokeControlEditTextValidationUPP, _hitoolboxLib, "InvokeControlEditTextValidationUPP") })
-	_register("InvokeControlKeyFilterUPP", func() { purego.RegisterLibFunc(&_fnInvokeControlKeyFilterUPP, _hitoolboxLib, "InvokeControlKeyFilterUPP") })
-	_register("InvokeControlUserPaneActivateUPP", func() { purego.RegisterLibFunc(&_fnInvokeControlUserPaneActivateUPP, _hitoolboxLib, "InvokeControlUserPaneActivateUPP") })
-	_register("InvokeControlUserPaneDrawUPP", func() { purego.RegisterLibFunc(&_fnInvokeControlUserPaneDrawUPP, _hitoolboxLib, "InvokeControlUserPaneDrawUPP") })
-	_register("InvokeControlUserPaneFocusUPP", func() { purego.RegisterLibFunc(&_fnInvokeControlUserPaneFocusUPP, _hitoolboxLib, "InvokeControlUserPaneFocusUPP") })
-	_register("InvokeControlUserPaneHitTestUPP", func() { purego.RegisterLibFunc(&_fnInvokeControlUserPaneHitTestUPP, _hitoolboxLib, "InvokeControlUserPaneHitTestUPP") })
-	_register("InvokeControlUserPaneIdleUPP", func() { purego.RegisterLibFunc(&_fnInvokeControlUserPaneIdleUPP, _hitoolboxLib, "InvokeControlUserPaneIdleUPP") })
-	_register("InvokeControlUserPaneKeyDownUPP", func() { purego.RegisterLibFunc(&_fnInvokeControlUserPaneKeyDownUPP, _hitoolboxLib, "InvokeControlUserPaneKeyDownUPP") })
-	_register("InvokeControlUserPaneTrackingUPP", func() { purego.RegisterLibFunc(&_fnInvokeControlUserPaneTrackingUPP, _hitoolboxLib, "InvokeControlUserPaneTrackingUPP") })
-	_register("InvokeDataBrowserAcceptDragUPP", func() { purego.RegisterLibFunc(&_fnInvokeDataBrowserAcceptDragUPP, _hitoolboxLib, "InvokeDataBrowserAcceptDragUPP") })
-	_register("InvokeDataBrowserAddDragItemUPP", func() { purego.RegisterLibFunc(&_fnInvokeDataBrowserAddDragItemUPP, _hitoolboxLib, "InvokeDataBrowserAddDragItemUPP") })
-	_register("InvokeDataBrowserDrawItemUPP", func() { purego.RegisterLibFunc(&_fnInvokeDataBrowserDrawItemUPP, _hitoolboxLib, "InvokeDataBrowserDrawItemUPP") })
-	_register("InvokeDataBrowserEditItemUPP", func() { purego.RegisterLibFunc(&_fnInvokeDataBrowserEditItemUPP, _hitoolboxLib, "InvokeDataBrowserEditItemUPP") })
-	_register("InvokeDataBrowserGetContextualMenuUPP", func() { purego.RegisterLibFunc(&_fnInvokeDataBrowserGetContextualMenuUPP, _hitoolboxLib, "InvokeDataBrowserGetContextualMenuUPP") })
-	_register("InvokeDataBrowserHitTestUPP", func() { purego.RegisterLibFunc(&_fnInvokeDataBrowserHitTestUPP, _hitoolboxLib, "InvokeDataBrowserHitTestUPP") })
-	_register("InvokeDataBrowserItemAcceptDragUPP", func() { purego.RegisterLibFunc(&_fnInvokeDataBrowserItemAcceptDragUPP, _hitoolboxLib, "InvokeDataBrowserItemAcceptDragUPP") })
-	_register("InvokeDataBrowserItemCompareUPP", func() { purego.RegisterLibFunc(&_fnInvokeDataBrowserItemCompareUPP, _hitoolboxLib, "InvokeDataBrowserItemCompareUPP") })
-	_register("InvokeDataBrowserItemDataUPP", func() { purego.RegisterLibFunc(&_fnInvokeDataBrowserItemDataUPP, _hitoolboxLib, "InvokeDataBrowserItemDataUPP") })
-	_register("InvokeDataBrowserItemDragRgnUPP", func() { purego.RegisterLibFunc(&_fnInvokeDataBrowserItemDragRgnUPP, _hitoolboxLib, "InvokeDataBrowserItemDragRgnUPP") })
-	_register("InvokeDataBrowserItemHelpContentUPP", func() { purego.RegisterLibFunc(&_fnInvokeDataBrowserItemHelpContentUPP, _hitoolboxLib, "InvokeDataBrowserItemHelpContentUPP") })
-	_register("InvokeDataBrowserItemNotificationUPP", func() { purego.RegisterLibFunc(&_fnInvokeDataBrowserItemNotificationUPP, _hitoolboxLib, "InvokeDataBrowserItemNotificationUPP") })
-	_register("InvokeDataBrowserItemNotificationWithItemUPP", func() { purego.RegisterLibFunc(&_fnInvokeDataBrowserItemNotificationWithItemUPP, _hitoolboxLib, "InvokeDataBrowserItemNotificationWithItemUPP") })
-	_register("InvokeDataBrowserItemReceiveDragUPP", func() { purego.RegisterLibFunc(&_fnInvokeDataBrowserItemReceiveDragUPP, _hitoolboxLib, "InvokeDataBrowserItemReceiveDragUPP") })
-	_register("InvokeDataBrowserItemUPP", func() { purego.RegisterLibFunc(&_fnInvokeDataBrowserItemUPP, _hitoolboxLib, "InvokeDataBrowserItemUPP") })
-	_register("InvokeDataBrowserPostProcessDragUPP", func() { purego.RegisterLibFunc(&_fnInvokeDataBrowserPostProcessDragUPP, _hitoolboxLib, "InvokeDataBrowserPostProcessDragUPP") })
-	_register("InvokeDataBrowserReceiveDragUPP", func() { purego.RegisterLibFunc(&_fnInvokeDataBrowserReceiveDragUPP, _hitoolboxLib, "InvokeDataBrowserReceiveDragUPP") })
-	_register("InvokeDataBrowserSelectContextualMenuUPP", func() { purego.RegisterLibFunc(&_fnInvokeDataBrowserSelectContextualMenuUPP, _hitoolboxLib, "InvokeDataBrowserSelectContextualMenuUPP") })
-	_register("InvokeDataBrowserTrackingUPP", func() { purego.RegisterLibFunc(&_fnInvokeDataBrowserTrackingUPP, _hitoolboxLib, "InvokeDataBrowserTrackingUPP") })
+	_register("InvokeControlEditTextValidationUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeControlEditTextValidationUPP, _hitoolboxLib, "InvokeControlEditTextValidationUPP")
+	})
+	_register("InvokeControlKeyFilterUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeControlKeyFilterUPP, _hitoolboxLib, "InvokeControlKeyFilterUPP")
+	})
+	_register("InvokeControlUserPaneActivateUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeControlUserPaneActivateUPP, _hitoolboxLib, "InvokeControlUserPaneActivateUPP")
+	})
+	_register("InvokeControlUserPaneDrawUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeControlUserPaneDrawUPP, _hitoolboxLib, "InvokeControlUserPaneDrawUPP")
+	})
+	_register("InvokeControlUserPaneFocusUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeControlUserPaneFocusUPP, _hitoolboxLib, "InvokeControlUserPaneFocusUPP")
+	})
+	_register("InvokeControlUserPaneHitTestUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeControlUserPaneHitTestUPP, _hitoolboxLib, "InvokeControlUserPaneHitTestUPP")
+	})
+	_register("InvokeControlUserPaneIdleUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeControlUserPaneIdleUPP, _hitoolboxLib, "InvokeControlUserPaneIdleUPP")
+	})
+	_register("InvokeControlUserPaneKeyDownUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeControlUserPaneKeyDownUPP, _hitoolboxLib, "InvokeControlUserPaneKeyDownUPP")
+	})
+	_register("InvokeControlUserPaneTrackingUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeControlUserPaneTrackingUPP, _hitoolboxLib, "InvokeControlUserPaneTrackingUPP")
+	})
+	_register("InvokeDataBrowserAcceptDragUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeDataBrowserAcceptDragUPP, _hitoolboxLib, "InvokeDataBrowserAcceptDragUPP")
+	})
+	_register("InvokeDataBrowserAddDragItemUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeDataBrowserAddDragItemUPP, _hitoolboxLib, "InvokeDataBrowserAddDragItemUPP")
+	})
+	_register("InvokeDataBrowserDrawItemUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeDataBrowserDrawItemUPP, _hitoolboxLib, "InvokeDataBrowserDrawItemUPP")
+	})
+	_register("InvokeDataBrowserEditItemUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeDataBrowserEditItemUPP, _hitoolboxLib, "InvokeDataBrowserEditItemUPP")
+	})
+	_register("InvokeDataBrowserGetContextualMenuUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeDataBrowserGetContextualMenuUPP, _hitoolboxLib, "InvokeDataBrowserGetContextualMenuUPP")
+	})
+	_register("InvokeDataBrowserHitTestUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeDataBrowserHitTestUPP, _hitoolboxLib, "InvokeDataBrowserHitTestUPP")
+	})
+	_register("InvokeDataBrowserItemAcceptDragUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeDataBrowserItemAcceptDragUPP, _hitoolboxLib, "InvokeDataBrowserItemAcceptDragUPP")
+	})
+	_register("InvokeDataBrowserItemCompareUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeDataBrowserItemCompareUPP, _hitoolboxLib, "InvokeDataBrowserItemCompareUPP")
+	})
+	_register("InvokeDataBrowserItemDataUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeDataBrowserItemDataUPP, _hitoolboxLib, "InvokeDataBrowserItemDataUPP")
+	})
+	_register("InvokeDataBrowserItemDragRgnUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeDataBrowserItemDragRgnUPP, _hitoolboxLib, "InvokeDataBrowserItemDragRgnUPP")
+	})
+	_register("InvokeDataBrowserItemHelpContentUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeDataBrowserItemHelpContentUPP, _hitoolboxLib, "InvokeDataBrowserItemHelpContentUPP")
+	})
+	_register("InvokeDataBrowserItemNotificationUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeDataBrowserItemNotificationUPP, _hitoolboxLib, "InvokeDataBrowserItemNotificationUPP")
+	})
+	_register("InvokeDataBrowserItemNotificationWithItemUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeDataBrowserItemNotificationWithItemUPP, _hitoolboxLib, "InvokeDataBrowserItemNotificationWithItemUPP")
+	})
+	_register("InvokeDataBrowserItemReceiveDragUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeDataBrowserItemReceiveDragUPP, _hitoolboxLib, "InvokeDataBrowserItemReceiveDragUPP")
+	})
+	_register("InvokeDataBrowserItemUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeDataBrowserItemUPP, _hitoolboxLib, "InvokeDataBrowserItemUPP")
+	})
+	_register("InvokeDataBrowserPostProcessDragUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeDataBrowserPostProcessDragUPP, _hitoolboxLib, "InvokeDataBrowserPostProcessDragUPP")
+	})
+	_register("InvokeDataBrowserReceiveDragUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeDataBrowserReceiveDragUPP, _hitoolboxLib, "InvokeDataBrowserReceiveDragUPP")
+	})
+	_register("InvokeDataBrowserSelectContextualMenuUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeDataBrowserSelectContextualMenuUPP, _hitoolboxLib, "InvokeDataBrowserSelectContextualMenuUPP")
+	})
+	_register("InvokeDataBrowserTrackingUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeDataBrowserTrackingUPP, _hitoolboxLib, "InvokeDataBrowserTrackingUPP")
+	})
 	_register("InvokeDragDrawingUPP", func() { purego.RegisterLibFunc(&_fnInvokeDragDrawingUPP, _hitoolboxLib, "InvokeDragDrawingUPP") })
 	_register("InvokeDragInputUPP", func() { purego.RegisterLibFunc(&_fnInvokeDragInputUPP, _hitoolboxLib, "InvokeDragInputUPP") })
-	_register("InvokeDragReceiveHandlerUPP", func() { purego.RegisterLibFunc(&_fnInvokeDragReceiveHandlerUPP, _hitoolboxLib, "InvokeDragReceiveHandlerUPP") })
+	_register("InvokeDragReceiveHandlerUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeDragReceiveHandlerUPP, _hitoolboxLib, "InvokeDragReceiveHandlerUPP")
+	})
 	_register("InvokeDragSendDataUPP", func() { purego.RegisterLibFunc(&_fnInvokeDragSendDataUPP, _hitoolboxLib, "InvokeDragSendDataUPP") })
-	_register("InvokeDragTrackingHandlerUPP", func() { purego.RegisterLibFunc(&_fnInvokeDragTrackingHandlerUPP, _hitoolboxLib, "InvokeDragTrackingHandlerUPP") })
+	_register("InvokeDragTrackingHandlerUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeDragTrackingHandlerUPP, _hitoolboxLib, "InvokeDragTrackingHandlerUPP")
+	})
 	_register("InvokeDrawHookUPP", func() { purego.RegisterLibFunc(&_fnInvokeDrawHookUPP, _hitoolboxLib, "InvokeDrawHookUPP") })
 	_register("InvokeEOLHookUPP", func() { purego.RegisterLibFunc(&_fnInvokeEOLHookUPP, _hitoolboxLib, "InvokeEOLHookUPP") })
-	_register("InvokeEditUnicodePostUpdateUPP", func() { purego.RegisterLibFunc(&_fnInvokeEditUnicodePostUpdateUPP, _hitoolboxLib, "InvokeEditUnicodePostUpdateUPP") })
-	_register("InvokeEventComparatorUPP", func() { purego.RegisterLibFunc(&_fnInvokeEventComparatorUPP, _hitoolboxLib, "InvokeEventComparatorUPP") })
+	_register("InvokeEditUnicodePostUpdateUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeEditUnicodePostUpdateUPP, _hitoolboxLib, "InvokeEditUnicodePostUpdateUPP")
+	})
+	_register("InvokeEventComparatorUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeEventComparatorUPP, _hitoolboxLib, "InvokeEventComparatorUPP")
+	})
 	_register("InvokeEventHandlerUPP", func() { purego.RegisterLibFunc(&_fnInvokeEventHandlerUPP, _hitoolboxLib, "InvokeEventHandlerUPP") })
-	_register("InvokeEventLoopIdleTimerUPP", func() { purego.RegisterLibFunc(&_fnInvokeEventLoopIdleTimerUPP, _hitoolboxLib, "InvokeEventLoopIdleTimerUPP") })
+	_register("InvokeEventLoopIdleTimerUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeEventLoopIdleTimerUPP, _hitoolboxLib, "InvokeEventLoopIdleTimerUPP")
+	})
 	_register("InvokeEventLoopTimerUPP", func() { purego.RegisterLibFunc(&_fnInvokeEventLoopTimerUPP, _hitoolboxLib, "InvokeEventLoopTimerUPP") })
 	_register("InvokeGetScrapDataUPP", func() { purego.RegisterLibFunc(&_fnInvokeGetScrapDataUPP, _hitoolboxLib, "InvokeGetScrapDataUPP") })
-	_register("InvokeHMControlContentUPP", func() { purego.RegisterLibFunc(&_fnInvokeHMControlContentUPP, _hitoolboxLib, "InvokeHMControlContentUPP") })
-	_register("InvokeHMMenuItemContentUPP", func() { purego.RegisterLibFunc(&_fnInvokeHMMenuItemContentUPP, _hitoolboxLib, "InvokeHMMenuItemContentUPP") })
-	_register("InvokeHMMenuTitleContentUPP", func() { purego.RegisterLibFunc(&_fnInvokeHMMenuTitleContentUPP, _hitoolboxLib, "InvokeHMMenuTitleContentUPP") })
-	_register("InvokeHMWindowContentUPP", func() { purego.RegisterLibFunc(&_fnInvokeHMWindowContentUPP, _hitoolboxLib, "InvokeHMWindowContentUPP") })
+	_register("InvokeHMControlContentUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeHMControlContentUPP, _hitoolboxLib, "InvokeHMControlContentUPP")
+	})
+	_register("InvokeHMMenuItemContentUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeHMMenuItemContentUPP, _hitoolboxLib, "InvokeHMMenuItemContentUPP")
+	})
+	_register("InvokeHMMenuTitleContentUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeHMMenuTitleContentUPP, _hitoolboxLib, "InvokeHMMenuTitleContentUPP")
+	})
+	_register("InvokeHMWindowContentUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeHMWindowContentUPP, _hitoolboxLib, "InvokeHMWindowContentUPP")
+	})
 	_register("InvokeHighHookUPP", func() { purego.RegisterLibFunc(&_fnInvokeHighHookUPP, _hitoolboxLib, "InvokeHighHookUPP") })
 	_register("InvokeHitTestHookUPP", func() { purego.RegisterLibFunc(&_fnInvokeHitTestHookUPP, _hitoolboxLib, "InvokeHitTestHookUPP") })
 	_register("InvokeListClickLoopUPP", func() { purego.RegisterLibFunc(&_fnInvokeListClickLoopUPP, _hitoolboxLib, "InvokeListClickLoopUPP") })
 	_register("InvokeListDefUPP", func() { purego.RegisterLibFunc(&_fnInvokeListDefUPP, _hitoolboxLib, "InvokeListDefUPP") })
 	_register("InvokeListSearchUPP", func() { purego.RegisterLibFunc(&_fnInvokeListSearchUPP, _hitoolboxLib, "InvokeListSearchUPP") })
-	_register("InvokeMenuItemDrawingUPP", func() { purego.RegisterLibFunc(&_fnInvokeMenuItemDrawingUPP, _hitoolboxLib, "InvokeMenuItemDrawingUPP") })
-	_register("InvokeMenuTitleDrawingUPP", func() { purego.RegisterLibFunc(&_fnInvokeMenuTitleDrawingUPP, _hitoolboxLib, "InvokeMenuTitleDrawingUPP") })
+	_register("InvokeMenuItemDrawingUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeMenuItemDrawingUPP, _hitoolboxLib, "InvokeMenuItemDrawingUPP")
+	})
+	_register("InvokeMenuTitleDrawingUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeMenuTitleDrawingUPP, _hitoolboxLib, "InvokeMenuTitleDrawingUPP")
+	})
 	_register("InvokeModalFilterUPP", func() { purego.RegisterLibFunc(&_fnInvokeModalFilterUPP, _hitoolboxLib, "InvokeModalFilterUPP") })
 	_register("InvokeModalFilterYDUPP", func() { purego.RegisterLibFunc(&_fnInvokeModalFilterYDUPP, _hitoolboxLib, "InvokeModalFilterYDUPP") })
 	_register("InvokeNMUPP", func() { purego.RegisterLibFunc(&_fnInvokeNMUPP, _hitoolboxLib, "InvokeNMUPP") })
 	_register("InvokeNWidthHookUPP", func() { purego.RegisterLibFunc(&_fnInvokeNWidthHookUPP, _hitoolboxLib, "InvokeNWidthHookUPP") })
-	_register("InvokeScrapPromiseKeeperUPP", func() { purego.RegisterLibFunc(&_fnInvokeScrapPromiseKeeperUPP, _hitoolboxLib, "InvokeScrapPromiseKeeperUPP") })
+	_register("InvokeScrapPromiseKeeperUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeScrapPromiseKeeperUPP, _hitoolboxLib, "InvokeScrapPromiseKeeperUPP")
+	})
 	_register("InvokeTEClickLoopUPP", func() { purego.RegisterLibFunc(&_fnInvokeTEClickLoopUPP, _hitoolboxLib, "InvokeTEClickLoopUPP") })
 	_register("InvokeTEDoTextUPP", func() { purego.RegisterLibFunc(&_fnInvokeTEDoTextUPP, _hitoolboxLib, "InvokeTEDoTextUPP") })
 	_register("InvokeTEFindWordUPP", func() { purego.RegisterLibFunc(&_fnInvokeTEFindWordUPP, _hitoolboxLib, "InvokeTEFindWordUPP") })
 	_register("InvokeTERecalcUPP", func() { purego.RegisterLibFunc(&_fnInvokeTERecalcUPP, _hitoolboxLib, "InvokeTERecalcUPP") })
-	_register("InvokeTSMTEPostUpdateUPP", func() { purego.RegisterLibFunc(&_fnInvokeTSMTEPostUpdateUPP, _hitoolboxLib, "InvokeTSMTEPostUpdateUPP") })
+	_register("InvokeTSMTEPostUpdateUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeTSMTEPostUpdateUPP, _hitoolboxLib, "InvokeTSMTEPostUpdateUPP")
+	})
 	_register("InvokeTSMTEPreUpdateUPP", func() { purego.RegisterLibFunc(&_fnInvokeTSMTEPreUpdateUPP, _hitoolboxLib, "InvokeTSMTEPreUpdateUPP") })
-	_register("InvokeTXNActionKeyMapperUPP", func() { purego.RegisterLibFunc(&_fnInvokeTXNActionKeyMapperUPP, _hitoolboxLib, "InvokeTXNActionKeyMapperUPP") })
-	_register("InvokeTXNActionNameMapperUPP", func() { purego.RegisterLibFunc(&_fnInvokeTXNActionNameMapperUPP, _hitoolboxLib, "InvokeTXNActionNameMapperUPP") })
-	_register("InvokeTXNContextualMenuSetupUPP", func() { purego.RegisterLibFunc(&_fnInvokeTXNContextualMenuSetupUPP, _hitoolboxLib, "InvokeTXNContextualMenuSetupUPP") })
+	_register("InvokeTXNActionKeyMapperUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeTXNActionKeyMapperUPP, _hitoolboxLib, "InvokeTXNActionKeyMapperUPP")
+	})
+	_register("InvokeTXNActionNameMapperUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeTXNActionNameMapperUPP, _hitoolboxLib, "InvokeTXNActionNameMapperUPP")
+	})
+	_register("InvokeTXNContextualMenuSetupUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeTXNContextualMenuSetupUPP, _hitoolboxLib, "InvokeTXNContextualMenuSetupUPP")
+	})
 	_register("InvokeTXNFindUPP", func() { purego.RegisterLibFunc(&_fnInvokeTXNFindUPP, _hitoolboxLib, "InvokeTXNFindUPP") })
 	_register("InvokeTXNScrollInfoUPP", func() { purego.RegisterLibFunc(&_fnInvokeTXNScrollInfoUPP, _hitoolboxLib, "InvokeTXNScrollInfoUPP") })
 	_register("InvokeTextWidthHookUPP", func() { purego.RegisterLibFunc(&_fnInvokeTextWidthHookUPP, _hitoolboxLib, "InvokeTextWidthHookUPP") })
-	_register("InvokeThemeButtonDrawUPP", func() { purego.RegisterLibFunc(&_fnInvokeThemeButtonDrawUPP, _hitoolboxLib, "InvokeThemeButtonDrawUPP") })
+	_register("InvokeThemeButtonDrawUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeThemeButtonDrawUPP, _hitoolboxLib, "InvokeThemeButtonDrawUPP")
+	})
 	_register("InvokeThemeEraseUPP", func() { purego.RegisterLibFunc(&_fnInvokeThemeEraseUPP, _hitoolboxLib, "InvokeThemeEraseUPP") })
 	_register("InvokeThemeIteratorUPP", func() { purego.RegisterLibFunc(&_fnInvokeThemeIteratorUPP, _hitoolboxLib, "InvokeThemeIteratorUPP") })
-	_register("InvokeThemeTabTitleDrawUPP", func() { purego.RegisterLibFunc(&_fnInvokeThemeTabTitleDrawUPP, _hitoolboxLib, "InvokeThemeTabTitleDrawUPP") })
+	_register("InvokeThemeTabTitleDrawUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeThemeTabTitleDrawUPP, _hitoolboxLib, "InvokeThemeTabTitleDrawUPP")
+	})
 	_register("InvokeUserItemUPP", func() { purego.RegisterLibFunc(&_fnInvokeUserItemUPP, _hitoolboxLib, "InvokeUserItemUPP") })
 	_register("InvokeWidthHookUPP", func() { purego.RegisterLibFunc(&_fnInvokeWidthHookUPP, _hitoolboxLib, "InvokeWidthHookUPP") })
 	_register("InvokeWindowPaintUPP", func() { purego.RegisterLibFunc(&_fnInvokeWindowPaintUPP, _hitoolboxLib, "InvokeWindowPaintUPP") })
-	_register("InvokeWindowTitleDrawingUPP", func() { purego.RegisterLibFunc(&_fnInvokeWindowTitleDrawingUPP, _hitoolboxLib, "InvokeWindowTitleDrawingUPP") })
+	_register("InvokeWindowTitleDrawingUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeWindowTitleDrawingUPP, _hitoolboxLib, "InvokeWindowTitleDrawingUPP")
+	})
 	_register("IsCmdChar", func() { purego.RegisterLibFunc(&_fnIsCmdChar, _hitoolboxLib, "IsCmdChar") })
 	_register("IsEventInQueue", func() { purego.RegisterLibFunc(&_fnIsEventInQueue, _hitoolboxLib, "IsEventInQueue") })
-	_register("IsSecureEventInputEnabled", func() { purego.RegisterLibFunc(&_fnIsSecureEventInputEnabled, _hitoolboxLib, "IsSecureEventInputEnabled") })
+	_register("IsSecureEventInputEnabled", func() {
+		purego.RegisterLibFunc(&_fnIsSecureEventInputEnabled, _hitoolboxLib, "IsSecureEventInputEnabled")
+	})
 	_register("IsUserCancelEventRef", func() { purego.RegisterLibFunc(&_fnIsUserCancelEventRef, _hitoolboxLib, "IsUserCancelEventRef") })
 	_register("KBGetLayoutType", func() { purego.RegisterLibFunc(&_fnKBGetLayoutType, _hitoolboxLib, "KBGetLayoutType") })
 	_register("LMGetKbdLast", func() { purego.RegisterLibFunc(&_fnLMGetKbdLast, _hitoolboxLib, "LMGetKbdLast") })
@@ -372,50 +650,112 @@ func _loadLibrary() {
 	_register("NewAEIdleUPP", func() { purego.RegisterLibFunc(&_fnNewAEIdleUPP, _hitoolboxLib, "NewAEIdleUPP") })
 	_register("NewCaretHookUPP", func() { purego.RegisterLibFunc(&_fnNewCaretHookUPP, _hitoolboxLib, "NewCaretHookUPP") })
 	_register("NewControlActionUPP", func() { purego.RegisterLibFunc(&_fnNewControlActionUPP, _hitoolboxLib, "NewControlActionUPP") })
-	_register("NewControlEditTextValidationUPP", func() { purego.RegisterLibFunc(&_fnNewControlEditTextValidationUPP, _hitoolboxLib, "NewControlEditTextValidationUPP") })
+	_register("NewControlEditTextValidationUPP", func() {
+		purego.RegisterLibFunc(&_fnNewControlEditTextValidationUPP, _hitoolboxLib, "NewControlEditTextValidationUPP")
+	})
 	_register("NewControlKeyFilterUPP", func() { purego.RegisterLibFunc(&_fnNewControlKeyFilterUPP, _hitoolboxLib, "NewControlKeyFilterUPP") })
-	_register("NewControlUserPaneActivateUPP", func() { purego.RegisterLibFunc(&_fnNewControlUserPaneActivateUPP, _hitoolboxLib, "NewControlUserPaneActivateUPP") })
-	_register("NewControlUserPaneDrawUPP", func() { purego.RegisterLibFunc(&_fnNewControlUserPaneDrawUPP, _hitoolboxLib, "NewControlUserPaneDrawUPP") })
-	_register("NewControlUserPaneFocusUPP", func() { purego.RegisterLibFunc(&_fnNewControlUserPaneFocusUPP, _hitoolboxLib, "NewControlUserPaneFocusUPP") })
-	_register("NewControlUserPaneHitTestUPP", func() { purego.RegisterLibFunc(&_fnNewControlUserPaneHitTestUPP, _hitoolboxLib, "NewControlUserPaneHitTestUPP") })
-	_register("NewControlUserPaneIdleUPP", func() { purego.RegisterLibFunc(&_fnNewControlUserPaneIdleUPP, _hitoolboxLib, "NewControlUserPaneIdleUPP") })
-	_register("NewControlUserPaneKeyDownUPP", func() { purego.RegisterLibFunc(&_fnNewControlUserPaneKeyDownUPP, _hitoolboxLib, "NewControlUserPaneKeyDownUPP") })
-	_register("NewControlUserPaneTrackingUPP", func() { purego.RegisterLibFunc(&_fnNewControlUserPaneTrackingUPP, _hitoolboxLib, "NewControlUserPaneTrackingUPP") })
-	_register("NewDataBrowserAcceptDragUPP", func() { purego.RegisterLibFunc(&_fnNewDataBrowserAcceptDragUPP, _hitoolboxLib, "NewDataBrowserAcceptDragUPP") })
-	_register("NewDataBrowserAddDragItemUPP", func() { purego.RegisterLibFunc(&_fnNewDataBrowserAddDragItemUPP, _hitoolboxLib, "NewDataBrowserAddDragItemUPP") })
-	_register("NewDataBrowserDrawItemUPP", func() { purego.RegisterLibFunc(&_fnNewDataBrowserDrawItemUPP, _hitoolboxLib, "NewDataBrowserDrawItemUPP") })
-	_register("NewDataBrowserEditItemUPP", func() { purego.RegisterLibFunc(&_fnNewDataBrowserEditItemUPP, _hitoolboxLib, "NewDataBrowserEditItemUPP") })
-	_register("NewDataBrowserGetContextualMenuUPP", func() { purego.RegisterLibFunc(&_fnNewDataBrowserGetContextualMenuUPP, _hitoolboxLib, "NewDataBrowserGetContextualMenuUPP") })
-	_register("NewDataBrowserHitTestUPP", func() { purego.RegisterLibFunc(&_fnNewDataBrowserHitTestUPP, _hitoolboxLib, "NewDataBrowserHitTestUPP") })
-	_register("NewDataBrowserItemAcceptDragUPP", func() { purego.RegisterLibFunc(&_fnNewDataBrowserItemAcceptDragUPP, _hitoolboxLib, "NewDataBrowserItemAcceptDragUPP") })
-	_register("NewDataBrowserItemCompareUPP", func() { purego.RegisterLibFunc(&_fnNewDataBrowserItemCompareUPP, _hitoolboxLib, "NewDataBrowserItemCompareUPP") })
-	_register("NewDataBrowserItemDataUPP", func() { purego.RegisterLibFunc(&_fnNewDataBrowserItemDataUPP, _hitoolboxLib, "NewDataBrowserItemDataUPP") })
-	_register("NewDataBrowserItemDragRgnUPP", func() { purego.RegisterLibFunc(&_fnNewDataBrowserItemDragRgnUPP, _hitoolboxLib, "NewDataBrowserItemDragRgnUPP") })
-	_register("NewDataBrowserItemHelpContentUPP", func() { purego.RegisterLibFunc(&_fnNewDataBrowserItemHelpContentUPP, _hitoolboxLib, "NewDataBrowserItemHelpContentUPP") })
-	_register("NewDataBrowserItemNotificationUPP", func() { purego.RegisterLibFunc(&_fnNewDataBrowserItemNotificationUPP, _hitoolboxLib, "NewDataBrowserItemNotificationUPP") })
-	_register("NewDataBrowserItemNotificationWithItemUPP", func() { purego.RegisterLibFunc(&_fnNewDataBrowserItemNotificationWithItemUPP, _hitoolboxLib, "NewDataBrowserItemNotificationWithItemUPP") })
-	_register("NewDataBrowserItemReceiveDragUPP", func() { purego.RegisterLibFunc(&_fnNewDataBrowserItemReceiveDragUPP, _hitoolboxLib, "NewDataBrowserItemReceiveDragUPP") })
+	_register("NewControlUserPaneActivateUPP", func() {
+		purego.RegisterLibFunc(&_fnNewControlUserPaneActivateUPP, _hitoolboxLib, "NewControlUserPaneActivateUPP")
+	})
+	_register("NewControlUserPaneDrawUPP", func() {
+		purego.RegisterLibFunc(&_fnNewControlUserPaneDrawUPP, _hitoolboxLib, "NewControlUserPaneDrawUPP")
+	})
+	_register("NewControlUserPaneFocusUPP", func() {
+		purego.RegisterLibFunc(&_fnNewControlUserPaneFocusUPP, _hitoolboxLib, "NewControlUserPaneFocusUPP")
+	})
+	_register("NewControlUserPaneHitTestUPP", func() {
+		purego.RegisterLibFunc(&_fnNewControlUserPaneHitTestUPP, _hitoolboxLib, "NewControlUserPaneHitTestUPP")
+	})
+	_register("NewControlUserPaneIdleUPP", func() {
+		purego.RegisterLibFunc(&_fnNewControlUserPaneIdleUPP, _hitoolboxLib, "NewControlUserPaneIdleUPP")
+	})
+	_register("NewControlUserPaneKeyDownUPP", func() {
+		purego.RegisterLibFunc(&_fnNewControlUserPaneKeyDownUPP, _hitoolboxLib, "NewControlUserPaneKeyDownUPP")
+	})
+	_register("NewControlUserPaneTrackingUPP", func() {
+		purego.RegisterLibFunc(&_fnNewControlUserPaneTrackingUPP, _hitoolboxLib, "NewControlUserPaneTrackingUPP")
+	})
+	_register("NewDataBrowserAcceptDragUPP", func() {
+		purego.RegisterLibFunc(&_fnNewDataBrowserAcceptDragUPP, _hitoolboxLib, "NewDataBrowserAcceptDragUPP")
+	})
+	_register("NewDataBrowserAddDragItemUPP", func() {
+		purego.RegisterLibFunc(&_fnNewDataBrowserAddDragItemUPP, _hitoolboxLib, "NewDataBrowserAddDragItemUPP")
+	})
+	_register("NewDataBrowserDrawItemUPP", func() {
+		purego.RegisterLibFunc(&_fnNewDataBrowserDrawItemUPP, _hitoolboxLib, "NewDataBrowserDrawItemUPP")
+	})
+	_register("NewDataBrowserEditItemUPP", func() {
+		purego.RegisterLibFunc(&_fnNewDataBrowserEditItemUPP, _hitoolboxLib, "NewDataBrowserEditItemUPP")
+	})
+	_register("NewDataBrowserGetContextualMenuUPP", func() {
+		purego.RegisterLibFunc(&_fnNewDataBrowserGetContextualMenuUPP, _hitoolboxLib, "NewDataBrowserGetContextualMenuUPP")
+	})
+	_register("NewDataBrowserHitTestUPP", func() {
+		purego.RegisterLibFunc(&_fnNewDataBrowserHitTestUPP, _hitoolboxLib, "NewDataBrowserHitTestUPP")
+	})
+	_register("NewDataBrowserItemAcceptDragUPP", func() {
+		purego.RegisterLibFunc(&_fnNewDataBrowserItemAcceptDragUPP, _hitoolboxLib, "NewDataBrowserItemAcceptDragUPP")
+	})
+	_register("NewDataBrowserItemCompareUPP", func() {
+		purego.RegisterLibFunc(&_fnNewDataBrowserItemCompareUPP, _hitoolboxLib, "NewDataBrowserItemCompareUPP")
+	})
+	_register("NewDataBrowserItemDataUPP", func() {
+		purego.RegisterLibFunc(&_fnNewDataBrowserItemDataUPP, _hitoolboxLib, "NewDataBrowserItemDataUPP")
+	})
+	_register("NewDataBrowserItemDragRgnUPP", func() {
+		purego.RegisterLibFunc(&_fnNewDataBrowserItemDragRgnUPP, _hitoolboxLib, "NewDataBrowserItemDragRgnUPP")
+	})
+	_register("NewDataBrowserItemHelpContentUPP", func() {
+		purego.RegisterLibFunc(&_fnNewDataBrowserItemHelpContentUPP, _hitoolboxLib, "NewDataBrowserItemHelpContentUPP")
+	})
+	_register("NewDataBrowserItemNotificationUPP", func() {
+		purego.RegisterLibFunc(&_fnNewDataBrowserItemNotificationUPP, _hitoolboxLib, "NewDataBrowserItemNotificationUPP")
+	})
+	_register("NewDataBrowserItemNotificationWithItemUPP", func() {
+		purego.RegisterLibFunc(&_fnNewDataBrowserItemNotificationWithItemUPP, _hitoolboxLib, "NewDataBrowserItemNotificationWithItemUPP")
+	})
+	_register("NewDataBrowserItemReceiveDragUPP", func() {
+		purego.RegisterLibFunc(&_fnNewDataBrowserItemReceiveDragUPP, _hitoolboxLib, "NewDataBrowserItemReceiveDragUPP")
+	})
 	_register("NewDataBrowserItemUPP", func() { purego.RegisterLibFunc(&_fnNewDataBrowserItemUPP, _hitoolboxLib, "NewDataBrowserItemUPP") })
-	_register("NewDataBrowserPostProcessDragUPP", func() { purego.RegisterLibFunc(&_fnNewDataBrowserPostProcessDragUPP, _hitoolboxLib, "NewDataBrowserPostProcessDragUPP") })
-	_register("NewDataBrowserReceiveDragUPP", func() { purego.RegisterLibFunc(&_fnNewDataBrowserReceiveDragUPP, _hitoolboxLib, "NewDataBrowserReceiveDragUPP") })
-	_register("NewDataBrowserSelectContextualMenuUPP", func() { purego.RegisterLibFunc(&_fnNewDataBrowserSelectContextualMenuUPP, _hitoolboxLib, "NewDataBrowserSelectContextualMenuUPP") })
-	_register("NewDataBrowserTrackingUPP", func() { purego.RegisterLibFunc(&_fnNewDataBrowserTrackingUPP, _hitoolboxLib, "NewDataBrowserTrackingUPP") })
+	_register("NewDataBrowserPostProcessDragUPP", func() {
+		purego.RegisterLibFunc(&_fnNewDataBrowserPostProcessDragUPP, _hitoolboxLib, "NewDataBrowserPostProcessDragUPP")
+	})
+	_register("NewDataBrowserReceiveDragUPP", func() {
+		purego.RegisterLibFunc(&_fnNewDataBrowserReceiveDragUPP, _hitoolboxLib, "NewDataBrowserReceiveDragUPP")
+	})
+	_register("NewDataBrowserSelectContextualMenuUPP", func() {
+		purego.RegisterLibFunc(&_fnNewDataBrowserSelectContextualMenuUPP, _hitoolboxLib, "NewDataBrowserSelectContextualMenuUPP")
+	})
+	_register("NewDataBrowserTrackingUPP", func() {
+		purego.RegisterLibFunc(&_fnNewDataBrowserTrackingUPP, _hitoolboxLib, "NewDataBrowserTrackingUPP")
+	})
 	_register("NewDragDrawingUPP", func() { purego.RegisterLibFunc(&_fnNewDragDrawingUPP, _hitoolboxLib, "NewDragDrawingUPP") })
 	_register("NewDragInputUPP", func() { purego.RegisterLibFunc(&_fnNewDragInputUPP, _hitoolboxLib, "NewDragInputUPP") })
-	_register("NewDragReceiveHandlerUPP", func() { purego.RegisterLibFunc(&_fnNewDragReceiveHandlerUPP, _hitoolboxLib, "NewDragReceiveHandlerUPP") })
+	_register("NewDragReceiveHandlerUPP", func() {
+		purego.RegisterLibFunc(&_fnNewDragReceiveHandlerUPP, _hitoolboxLib, "NewDragReceiveHandlerUPP")
+	})
 	_register("NewDragSendDataUPP", func() { purego.RegisterLibFunc(&_fnNewDragSendDataUPP, _hitoolboxLib, "NewDragSendDataUPP") })
-	_register("NewDragTrackingHandlerUPP", func() { purego.RegisterLibFunc(&_fnNewDragTrackingHandlerUPP, _hitoolboxLib, "NewDragTrackingHandlerUPP") })
+	_register("NewDragTrackingHandlerUPP", func() {
+		purego.RegisterLibFunc(&_fnNewDragTrackingHandlerUPP, _hitoolboxLib, "NewDragTrackingHandlerUPP")
+	})
 	_register("NewDrawHookUPP", func() { purego.RegisterLibFunc(&_fnNewDrawHookUPP, _hitoolboxLib, "NewDrawHookUPP") })
 	_register("NewEOLHookUPP", func() { purego.RegisterLibFunc(&_fnNewEOLHookUPP, _hitoolboxLib, "NewEOLHookUPP") })
-	_register("NewEditUnicodePostUpdateUPP", func() { purego.RegisterLibFunc(&_fnNewEditUnicodePostUpdateUPP, _hitoolboxLib, "NewEditUnicodePostUpdateUPP") })
+	_register("NewEditUnicodePostUpdateUPP", func() {
+		purego.RegisterLibFunc(&_fnNewEditUnicodePostUpdateUPP, _hitoolboxLib, "NewEditUnicodePostUpdateUPP")
+	})
 	_register("NewEventComparatorUPP", func() { purego.RegisterLibFunc(&_fnNewEventComparatorUPP, _hitoolboxLib, "NewEventComparatorUPP") })
 	_register("NewEventHandlerUPP", func() { purego.RegisterLibFunc(&_fnNewEventHandlerUPP, _hitoolboxLib, "NewEventHandlerUPP") })
-	_register("NewEventLoopIdleTimerUPP", func() { purego.RegisterLibFunc(&_fnNewEventLoopIdleTimerUPP, _hitoolboxLib, "NewEventLoopIdleTimerUPP") })
+	_register("NewEventLoopIdleTimerUPP", func() {
+		purego.RegisterLibFunc(&_fnNewEventLoopIdleTimerUPP, _hitoolboxLib, "NewEventLoopIdleTimerUPP")
+	})
 	_register("NewEventLoopTimerUPP", func() { purego.RegisterLibFunc(&_fnNewEventLoopTimerUPP, _hitoolboxLib, "NewEventLoopTimerUPP") })
 	_register("NewGetScrapDataUPP", func() { purego.RegisterLibFunc(&_fnNewGetScrapDataUPP, _hitoolboxLib, "NewGetScrapDataUPP") })
 	_register("NewHMControlContentUPP", func() { purego.RegisterLibFunc(&_fnNewHMControlContentUPP, _hitoolboxLib, "NewHMControlContentUPP") })
 	_register("NewHMMenuItemContentUPP", func() { purego.RegisterLibFunc(&_fnNewHMMenuItemContentUPP, _hitoolboxLib, "NewHMMenuItemContentUPP") })
-	_register("NewHMMenuTitleContentUPP", func() { purego.RegisterLibFunc(&_fnNewHMMenuTitleContentUPP, _hitoolboxLib, "NewHMMenuTitleContentUPP") })
+	_register("NewHMMenuTitleContentUPP", func() {
+		purego.RegisterLibFunc(&_fnNewHMMenuTitleContentUPP, _hitoolboxLib, "NewHMMenuTitleContentUPP")
+	})
 	_register("NewHMWindowContentUPP", func() { purego.RegisterLibFunc(&_fnNewHMWindowContentUPP, _hitoolboxLib, "NewHMWindowContentUPP") })
 	_register("NewHighHookUPP", func() { purego.RegisterLibFunc(&_fnNewHighHookUPP, _hitoolboxLib, "NewHighHookUPP") })
 	_register("NewHitTestHookUPP", func() { purego.RegisterLibFunc(&_fnNewHitTestHookUPP, _hitoolboxLib, "NewHitTestHookUPP") })
@@ -428,16 +768,24 @@ func _loadLibrary() {
 	_register("NewModalFilterYDUPP", func() { purego.RegisterLibFunc(&_fnNewModalFilterYDUPP, _hitoolboxLib, "NewModalFilterYDUPP") })
 	_register("NewNMUPP", func() { purego.RegisterLibFunc(&_fnNewNMUPP, _hitoolboxLib, "NewNMUPP") })
 	_register("NewNWidthHookUPP", func() { purego.RegisterLibFunc(&_fnNewNWidthHookUPP, _hitoolboxLib, "NewNWidthHookUPP") })
-	_register("NewScrapPromiseKeeperUPP", func() { purego.RegisterLibFunc(&_fnNewScrapPromiseKeeperUPP, _hitoolboxLib, "NewScrapPromiseKeeperUPP") })
+	_register("NewScrapPromiseKeeperUPP", func() {
+		purego.RegisterLibFunc(&_fnNewScrapPromiseKeeperUPP, _hitoolboxLib, "NewScrapPromiseKeeperUPP")
+	})
 	_register("NewTEClickLoopUPP", func() { purego.RegisterLibFunc(&_fnNewTEClickLoopUPP, _hitoolboxLib, "NewTEClickLoopUPP") })
 	_register("NewTEDoTextUPP", func() { purego.RegisterLibFunc(&_fnNewTEDoTextUPP, _hitoolboxLib, "NewTEDoTextUPP") })
 	_register("NewTEFindWordUPP", func() { purego.RegisterLibFunc(&_fnNewTEFindWordUPP, _hitoolboxLib, "NewTEFindWordUPP") })
 	_register("NewTERecalcUPP", func() { purego.RegisterLibFunc(&_fnNewTERecalcUPP, _hitoolboxLib, "NewTERecalcUPP") })
 	_register("NewTSMTEPostUpdateUPP", func() { purego.RegisterLibFunc(&_fnNewTSMTEPostUpdateUPP, _hitoolboxLib, "NewTSMTEPostUpdateUPP") })
 	_register("NewTSMTEPreUpdateUPP", func() { purego.RegisterLibFunc(&_fnNewTSMTEPreUpdateUPP, _hitoolboxLib, "NewTSMTEPreUpdateUPP") })
-	_register("NewTXNActionKeyMapperUPP", func() { purego.RegisterLibFunc(&_fnNewTXNActionKeyMapperUPP, _hitoolboxLib, "NewTXNActionKeyMapperUPP") })
-	_register("NewTXNActionNameMapperUPP", func() { purego.RegisterLibFunc(&_fnNewTXNActionNameMapperUPP, _hitoolboxLib, "NewTXNActionNameMapperUPP") })
-	_register("NewTXNContextualMenuSetupUPP", func() { purego.RegisterLibFunc(&_fnNewTXNContextualMenuSetupUPP, _hitoolboxLib, "NewTXNContextualMenuSetupUPP") })
+	_register("NewTXNActionKeyMapperUPP", func() {
+		purego.RegisterLibFunc(&_fnNewTXNActionKeyMapperUPP, _hitoolboxLib, "NewTXNActionKeyMapperUPP")
+	})
+	_register("NewTXNActionNameMapperUPP", func() {
+		purego.RegisterLibFunc(&_fnNewTXNActionNameMapperUPP, _hitoolboxLib, "NewTXNActionNameMapperUPP")
+	})
+	_register("NewTXNContextualMenuSetupUPP", func() {
+		purego.RegisterLibFunc(&_fnNewTXNContextualMenuSetupUPP, _hitoolboxLib, "NewTXNContextualMenuSetupUPP")
+	})
 	_register("NewTXNFindUPP", func() { purego.RegisterLibFunc(&_fnNewTXNFindUPP, _hitoolboxLib, "NewTXNFindUPP") })
 	_register("NewTXNScrollInfoUPP", func() { purego.RegisterLibFunc(&_fnNewTXNScrollInfoUPP, _hitoolboxLib, "NewTXNScrollInfoUPP") })
 	_register("NewTextWidthHookUPP", func() { purego.RegisterLibFunc(&_fnNewTextWidthHookUPP, _hitoolboxLib, "NewTextWidthHookUPP") })
@@ -448,7 +796,9 @@ func _loadLibrary() {
 	_register("NewUserItemUPP", func() { purego.RegisterLibFunc(&_fnNewUserItemUPP, _hitoolboxLib, "NewUserItemUPP") })
 	_register("NewWidthHookUPP", func() { purego.RegisterLibFunc(&_fnNewWidthHookUPP, _hitoolboxLib, "NewWidthHookUPP") })
 	_register("NewWindowPaintUPP", func() { purego.RegisterLibFunc(&_fnNewWindowPaintUPP, _hitoolboxLib, "NewWindowPaintUPP") })
-	_register("NewWindowTitleDrawingUPP", func() { purego.RegisterLibFunc(&_fnNewWindowTitleDrawingUPP, _hitoolboxLib, "NewWindowTitleDrawingUPP") })
+	_register("NewWindowTitleDrawingUPP", func() {
+		purego.RegisterLibFunc(&_fnNewWindowTitleDrawingUPP, _hitoolboxLib, "NewWindowTitleDrawingUPP")
+	})
 	_register("PopSymbolicHotKeyMode", func() { purego.RegisterLibFunc(&_fnPopSymbolicHotKeyMode, _hitoolboxLib, "PopSymbolicHotKeyMode") })
 	_register("PostEventToQueue", func() { purego.RegisterLibFunc(&_fnPostEventToQueue, _hitoolboxLib, "PostEventToQueue") })
 	_register("ProcessHICommand", func() { purego.RegisterLibFunc(&_fnProcessHICommand, _hitoolboxLib, "ProcessHICommand") })
@@ -461,34 +811,62 @@ func _loadLibrary() {
 	_register("RemoveEventHandler", func() { purego.RegisterLibFunc(&_fnRemoveEventHandler, _hitoolboxLib, "RemoveEventHandler") })
 	_register("RemoveEventLoopTimer", func() { purego.RegisterLibFunc(&_fnRemoveEventLoopTimer, _hitoolboxLib, "RemoveEventLoopTimer") })
 	_register("RemoveEventParameter", func() { purego.RegisterLibFunc(&_fnRemoveEventParameter, _hitoolboxLib, "RemoveEventParameter") })
-	_register("RemoveEventTypesFromHandler", func() { purego.RegisterLibFunc(&_fnRemoveEventTypesFromHandler, _hitoolboxLib, "RemoveEventTypesFromHandler") })
+	_register("RemoveEventTypesFromHandler", func() {
+		purego.RegisterLibFunc(&_fnRemoveEventTypesFromHandler, _hitoolboxLib, "RemoveEventTypesFromHandler")
+	})
 	_register("RetainEvent", func() { purego.RegisterLibFunc(&_fnRetainEvent, _hitoolboxLib, "RetainEvent") })
 	_register("RunCurrentEventLoop", func() { purego.RegisterLibFunc(&_fnRunCurrentEventLoop, _hitoolboxLib, "RunCurrentEventLoop") })
 	_register("SendEventToEventTarget", func() { purego.RegisterLibFunc(&_fnSendEventToEventTarget, _hitoolboxLib, "SendEventToEventTarget") })
-	_register("SendEventToEventTargetWithOptions", func() { purego.RegisterLibFunc(&_fnSendEventToEventTargetWithOptions, _hitoolboxLib, "SendEventToEventTargetWithOptions") })
-	_register("SetEventLoopTimerNextFireTime", func() { purego.RegisterLibFunc(&_fnSetEventLoopTimerNextFireTime, _hitoolboxLib, "SetEventLoopTimerNextFireTime") })
+	_register("SendEventToEventTargetWithOptions", func() {
+		purego.RegisterLibFunc(&_fnSendEventToEventTargetWithOptions, _hitoolboxLib, "SendEventToEventTargetWithOptions")
+	})
+	_register("SetEventLoopTimerNextFireTime", func() {
+		purego.RegisterLibFunc(&_fnSetEventLoopTimerNextFireTime, _hitoolboxLib, "SetEventLoopTimerNextFireTime")
+	})
 	_register("SetEventParameter", func() { purego.RegisterLibFunc(&_fnSetEventParameter, _hitoolboxLib, "SetEventParameter") })
 	_register("SetEventTime", func() { purego.RegisterLibFunc(&_fnSetEventTime, _hitoolboxLib, "SetEventTime") })
 	_register("SetSystemUIMode", func() { purego.RegisterLibFunc(&_fnSetSystemUIMode, _hitoolboxLib, "SetSystemUIMode") })
-	_register("TISCopyCurrentASCIICapableKeyboardInputSource", func() { purego.RegisterLibFunc(&_fnTISCopyCurrentASCIICapableKeyboardInputSource, _hitoolboxLib, "TISCopyCurrentASCIICapableKeyboardInputSource") })
-	_register("TISCopyCurrentASCIICapableKeyboardLayoutInputSource", func() { purego.RegisterLibFunc(&_fnTISCopyCurrentASCIICapableKeyboardLayoutInputSource, _hitoolboxLib, "TISCopyCurrentASCIICapableKeyboardLayoutInputSource") })
-	_register("TISCopyCurrentKeyboardInputSource", func() { purego.RegisterLibFunc(&_fnTISCopyCurrentKeyboardInputSource, _hitoolboxLib, "TISCopyCurrentKeyboardInputSource") })
-	_register("TISCopyCurrentKeyboardLayoutInputSource", func() { purego.RegisterLibFunc(&_fnTISCopyCurrentKeyboardLayoutInputSource, _hitoolboxLib, "TISCopyCurrentKeyboardLayoutInputSource") })
-	_register("TISCopyInputMethodKeyboardLayoutOverride", func() { purego.RegisterLibFunc(&_fnTISCopyInputMethodKeyboardLayoutOverride, _hitoolboxLib, "TISCopyInputMethodKeyboardLayoutOverride") })
-	_register("TISCopyInputSourceForLanguage", func() { purego.RegisterLibFunc(&_fnTISCopyInputSourceForLanguage, _hitoolboxLib, "TISCopyInputSourceForLanguage") })
-	_register("TISCreateASCIICapableInputSourceList", func() { purego.RegisterLibFunc(&_fnTISCreateASCIICapableInputSourceList, _hitoolboxLib, "TISCreateASCIICapableInputSourceList") })
-	_register("TISCreateInputSourceList", func() { purego.RegisterLibFunc(&_fnTISCreateInputSourceList, _hitoolboxLib, "TISCreateInputSourceList") })
+	_register("TISCopyCurrentASCIICapableKeyboardInputSource", func() {
+		purego.RegisterLibFunc(&_fnTISCopyCurrentASCIICapableKeyboardInputSource, _hitoolboxLib, "TISCopyCurrentASCIICapableKeyboardInputSource")
+	})
+	_register("TISCopyCurrentASCIICapableKeyboardLayoutInputSource", func() {
+		purego.RegisterLibFunc(&_fnTISCopyCurrentASCIICapableKeyboardLayoutInputSource, _hitoolboxLib, "TISCopyCurrentASCIICapableKeyboardLayoutInputSource")
+	})
+	_register("TISCopyCurrentKeyboardInputSource", func() {
+		purego.RegisterLibFunc(&_fnTISCopyCurrentKeyboardInputSource, _hitoolboxLib, "TISCopyCurrentKeyboardInputSource")
+	})
+	_register("TISCopyCurrentKeyboardLayoutInputSource", func() {
+		purego.RegisterLibFunc(&_fnTISCopyCurrentKeyboardLayoutInputSource, _hitoolboxLib, "TISCopyCurrentKeyboardLayoutInputSource")
+	})
+	_register("TISCopyInputMethodKeyboardLayoutOverride", func() {
+		purego.RegisterLibFunc(&_fnTISCopyInputMethodKeyboardLayoutOverride, _hitoolboxLib, "TISCopyInputMethodKeyboardLayoutOverride")
+	})
+	_register("TISCopyInputSourceForLanguage", func() {
+		purego.RegisterLibFunc(&_fnTISCopyInputSourceForLanguage, _hitoolboxLib, "TISCopyInputSourceForLanguage")
+	})
+	_register("TISCreateASCIICapableInputSourceList", func() {
+		purego.RegisterLibFunc(&_fnTISCreateASCIICapableInputSourceList, _hitoolboxLib, "TISCreateASCIICapableInputSourceList")
+	})
+	_register("TISCreateInputSourceList", func() {
+		purego.RegisterLibFunc(&_fnTISCreateInputSourceList, _hitoolboxLib, "TISCreateInputSourceList")
+	})
 	_register("TISDeselectInputSource", func() { purego.RegisterLibFunc(&_fnTISDeselectInputSource, _hitoolboxLib, "TISDeselectInputSource") })
 	_register("TISDisableInputSource", func() { purego.RegisterLibFunc(&_fnTISDisableInputSource, _hitoolboxLib, "TISDisableInputSource") })
 	_register("TISEnableInputSource", func() { purego.RegisterLibFunc(&_fnTISEnableInputSource, _hitoolboxLib, "TISEnableInputSource") })
-	_register("TISGetInputSourceProperty", func() { purego.RegisterLibFunc(&_fnTISGetInputSourceProperty, _hitoolboxLib, "TISGetInputSourceProperty") })
+	_register("TISGetInputSourceProperty", func() {
+		purego.RegisterLibFunc(&_fnTISGetInputSourceProperty, _hitoolboxLib, "TISGetInputSourceProperty")
+	})
 	_register("TISInputSourceGetTypeID", func() { purego.RegisterLibFunc(&_fnTISInputSourceGetTypeID, _hitoolboxLib, "TISInputSourceGetTypeID") })
 	_register("TISRegisterInputSource", func() { purego.RegisterLibFunc(&_fnTISRegisterInputSource, _hitoolboxLib, "TISRegisterInputSource") })
 	_register("TISSelectInputSource", func() { purego.RegisterLibFunc(&_fnTISSelectInputSource, _hitoolboxLib, "TISSelectInputSource") })
-	_register("TISSetInputMethodKeyboardLayoutOverride", func() { purego.RegisterLibFunc(&_fnTISSetInputMethodKeyboardLayoutOverride, _hitoolboxLib, "TISSetInputMethodKeyboardLayoutOverride") })
+	_register("TISSetInputMethodKeyboardLayoutOverride", func() {
+		purego.RegisterLibFunc(&_fnTISSetInputMethodKeyboardLayoutOverride, _hitoolboxLib, "TISSetInputMethodKeyboardLayoutOverride")
+	})
 	_register("TSMGetActiveDocument", func() { purego.RegisterLibFunc(&_fnTSMGetActiveDocument, _hitoolboxLib, "TSMGetActiveDocument") })
 	_register("TSMGetDocumentProperty", func() { purego.RegisterLibFunc(&_fnTSMGetDocumentProperty, _hitoolboxLib, "TSMGetDocumentProperty") })
-	_register("TSMRemoveDocumentProperty", func() { purego.RegisterLibFunc(&_fnTSMRemoveDocumentProperty, _hitoolboxLib, "TSMRemoveDocumentProperty") })
+	_register("TSMRemoveDocumentProperty", func() {
+		purego.RegisterLibFunc(&_fnTSMRemoveDocumentProperty, _hitoolboxLib, "TSMRemoveDocumentProperty")
+	})
 	_register("TSMSetDocumentProperty", func() { purego.RegisterLibFunc(&_fnTSMSetDocumentProperty, _hitoolboxLib, "TSMSetDocumentProperty") })
 	_register("UnregisterEventHotKey", func() { purego.RegisterLibFunc(&_fnUnregisterEventHotKey, _hitoolboxLib, "UnregisterEventHotKey") })
 }

@@ -16,11 +16,11 @@ type MTREndpointInfo struct {
 }
 
 var (
-	_clsMTREndpointInfo = _objcClass("MTREndpointInfo")
-	_mTREndpointInfoSelEndpointID = objc.RegisterName("endpointID")
+	_clsMTREndpointInfo            = _objcClass("MTREndpointInfo")
+	_mTREndpointInfoSelEndpointID  = objc.RegisterName("endpointID")
 	_mTREndpointInfoSelDeviceTypes = objc.RegisterName("deviceTypes")
-	_mTREndpointInfoSelPartsList = objc.RegisterName("partsList")
-	_mTREndpointInfoSelChildren = objc.RegisterName("children")
+	_mTREndpointInfoSelPartsList   = objc.RegisterName("partsList")
+	_mTREndpointInfoSelChildren    = objc.RegisterName("children")
 )
 
 func MTREndpointInfoFromID(id objc.ID) *MTREndpointInfo {
@@ -35,13 +35,17 @@ func MTREndpointInfoFromID(id objc.ID) *MTREndpointInfo {
 
 func (o *MTREndpointInfo) EndpointID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREndpointInfoSelEndpointID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTREndpointInfo) DeviceTypes() *foundation.NSArray[*MTRDeviceTypeRevision] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREndpointInfoSelDeviceTypes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MTRDeviceTypeRevision](_ret)
 }
 
@@ -53,7 +57,8 @@ func (o *MTREndpointInfo) PartsList() *foundation.NSArray[*foundation.NSNumber] 
 // The direct children of this endpoint. This excludes indirect descendants even if they are listed in the PartsList attribute of this endpoint due to the Full-Family Pattern being used. Refer to Endpoint Composition Patterns in the Matter specification for details.
 func (o *MTREndpointInfo) Children() *foundation.NSArray[*MTREndpointInfo] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREndpointInfoSelChildren)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MTREndpointInfo](_ret)
 }
-

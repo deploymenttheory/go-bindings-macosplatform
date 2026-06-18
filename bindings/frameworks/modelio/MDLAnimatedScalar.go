@@ -15,15 +15,15 @@ type MDLAnimatedScalar struct {
 }
 
 var (
-	_clsMDLAnimatedScalar = _objcClass("MDLAnimatedScalar")
-	_mDLAnimatedScalarSelSetFloatAtTime = objc.RegisterName("setFloat:atTime:")
-	_mDLAnimatedScalarSelSetDoubleAtTime = objc.RegisterName("setDouble:atTime:")
-	_mDLAnimatedScalarSelFloatAtTime = objc.RegisterName("floatAtTime:")
-	_mDLAnimatedScalarSelDoubleAtTime = objc.RegisterName("doubleAtTime:")
-	_mDLAnimatedScalarSelResetWithFloatArrayAtTimesCount = objc.RegisterName("resetWithFloatArray:atTimes:count:")
+	_clsMDLAnimatedScalar                                 = _objcClass("MDLAnimatedScalar")
+	_mDLAnimatedScalarSelSetFloatAtTime                   = objc.RegisterName("setFloat:atTime:")
+	_mDLAnimatedScalarSelSetDoubleAtTime                  = objc.RegisterName("setDouble:atTime:")
+	_mDLAnimatedScalarSelFloatAtTime                      = objc.RegisterName("floatAtTime:")
+	_mDLAnimatedScalarSelDoubleAtTime                     = objc.RegisterName("doubleAtTime:")
+	_mDLAnimatedScalarSelResetWithFloatArrayAtTimesCount  = objc.RegisterName("resetWithFloatArray:atTimes:count:")
 	_mDLAnimatedScalarSelResetWithDoubleArrayAtTimesCount = objc.RegisterName("resetWithDoubleArray:atTimes:count:")
-	_mDLAnimatedScalarSelGetFloatArrayMaxCount = objc.RegisterName("getFloatArray:maxCount:")
-	_mDLAnimatedScalarSelGetDoubleArrayMaxCount = objc.RegisterName("getDoubleArray:maxCount:")
+	_mDLAnimatedScalarSelGetFloatArrayMaxCount            = objc.RegisterName("getFloatArray:maxCount:")
+	_mDLAnimatedScalarSelGetDoubleArrayMaxCount           = objc.RegisterName("getDoubleArray:maxCount:")
 )
 
 func MDLAnimatedScalarFromID(id objc.ID) *MDLAnimatedScalar {
@@ -71,4 +71,3 @@ func (o *MDLAnimatedScalar) GetDoubleArrayMaxCount(valuesArray *float64, maxCoun
 	_ret := objc.Send[uint](o.Ptr(), _mDLAnimatedScalarSelGetDoubleArrayMaxCount, valuesArray, maxCount)
 	return _ret
 }
-

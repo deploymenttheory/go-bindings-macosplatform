@@ -86,4 +86,3 @@ type RandomDistributionable interface {
 }
 
 var _ RandomDistributionable = (*RandomDistribution)(nil)
-

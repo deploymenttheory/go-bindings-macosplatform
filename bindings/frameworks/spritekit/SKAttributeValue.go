@@ -18,20 +18,20 @@ type SKAttributeValue struct {
 }
 
 var (
-	_clsSKAttributeValue = _objcClass("SKAttributeValue")
-	_sKAttributeValueSelValueWithFloat = objc.RegisterName("valueWithFloat:")
+	_clsSKAttributeValue                      = _objcClass("SKAttributeValue")
+	_sKAttributeValueSelValueWithFloat        = objc.RegisterName("valueWithFloat:")
 	_sKAttributeValueSelValueWithVectorFloat2 = objc.RegisterName("valueWithVectorFloat2:")
 	_sKAttributeValueSelValueWithVectorFloat3 = objc.RegisterName("valueWithVectorFloat3:")
 	_sKAttributeValueSelValueWithVectorFloat4 = objc.RegisterName("valueWithVectorFloat4:")
-	_sKAttributeValueSelInit = objc.RegisterName("init")
-	_sKAttributeValueSelFloatValue = objc.RegisterName("floatValue")
-	_sKAttributeValueSelSetFloatValue = objc.RegisterName("setFloatValue:")
-	_sKAttributeValueSelVectorFloat2Value = objc.RegisterName("vectorFloat2Value")
-	_sKAttributeValueSelSetVectorFloat2Value = objc.RegisterName("setVectorFloat2Value:")
-	_sKAttributeValueSelVectorFloat3Value = objc.RegisterName("vectorFloat3Value")
-	_sKAttributeValueSelSetVectorFloat3Value = objc.RegisterName("setVectorFloat3Value:")
-	_sKAttributeValueSelVectorFloat4Value = objc.RegisterName("vectorFloat4Value")
-	_sKAttributeValueSelSetVectorFloat4Value = objc.RegisterName("setVectorFloat4Value:")
+	_sKAttributeValueSelInit                  = objc.RegisterName("init")
+	_sKAttributeValueSelFloatValue            = objc.RegisterName("floatValue")
+	_sKAttributeValueSelSetFloatValue         = objc.RegisterName("setFloatValue:")
+	_sKAttributeValueSelVectorFloat2Value     = objc.RegisterName("vectorFloat2Value")
+	_sKAttributeValueSelSetVectorFloat2Value  = objc.RegisterName("setVectorFloat2Value:")
+	_sKAttributeValueSelVectorFloat3Value     = objc.RegisterName("vectorFloat3Value")
+	_sKAttributeValueSelSetVectorFloat3Value  = objc.RegisterName("setVectorFloat3Value:")
+	_sKAttributeValueSelVectorFloat4Value     = objc.RegisterName("vectorFloat4Value")
+	_sKAttributeValueSelSetVectorFloat4Value  = objc.RegisterName("setVectorFloat4Value:")
 )
 
 func SKAttributeValueFromID(id objc.ID) *SKAttributeValue {
@@ -46,31 +46,41 @@ func SKAttributeValueFromID(id objc.ID) *SKAttributeValue {
 
 func SKAttributeValueValueWithFloat(value float32) *SKAttributeValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKAttributeValue), _sKAttributeValueSelValueWithFloat, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKAttributeValueFromID(_ret)
 }
 
 func SKAttributeValueValueWithVectorFloat2(value unsafe.Pointer) *SKAttributeValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKAttributeValue), _sKAttributeValueSelValueWithVectorFloat2, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKAttributeValueFromID(_ret)
 }
 
 func SKAttributeValueValueWithVectorFloat3(value unsafe.Pointer) *SKAttributeValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKAttributeValue), _sKAttributeValueSelValueWithVectorFloat3, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKAttributeValueFromID(_ret)
 }
 
 func SKAttributeValueValueWithVectorFloat4(value unsafe.Pointer) *SKAttributeValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKAttributeValue), _sKAttributeValueSelValueWithVectorFloat4, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKAttributeValueFromID(_ret)
 }
 
 func (o *SKAttributeValue) Init() *SKAttributeValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKAttributeValueSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKAttributeValueFromID(_ret)
 }
 
@@ -109,4 +119,3 @@ func (o *SKAttributeValue) VectorFloat4Value() unsafe.Pointer {
 func (o *SKAttributeValue) SetVectorFloat4Value(vectorFloat4Value unsafe.Pointer) {
 	o.Ptr().Send(_sKAttributeValueSelSetVectorFloat4Value, vectorFloat4Value)
 }
-

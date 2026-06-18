@@ -16,7 +16,7 @@ type MPSNDArrayLUTDequantize struct {
 }
 
 var (
-	_clsMPSNDArrayLUTDequantize = _objcClass("MPSNDArrayLUTDequantize")
+	_clsMPSNDArrayLUTDequantize               = _objcClass("MPSNDArrayLUTDequantize")
 	_mPSNDArrayLUTDequantizeSelInitWithDevice = objc.RegisterName("initWithDevice:")
 )
 
@@ -32,7 +32,8 @@ func MPSNDArrayLUTDequantizeFromID(id objc.ID) *MPSNDArrayLUTDequantize {
 
 func (o *MPSNDArrayLUTDequantize) InitWithDevice(device metal.MTLDevice) *MPSNDArrayLUTDequantize {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayLUTDequantizeSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNDArrayLUTDequantizeFromID(_ret)
 }
-

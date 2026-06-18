@@ -18,10 +18,10 @@ type PHLivePhoto struct {
 }
 
 var (
-	_clsPHLivePhoto = _objcClass("PHLivePhoto")
+	_clsPHLivePhoto                                                                                       = _objcClass("PHLivePhoto")
 	_pHLivePhotoSelRequestLivePhotoWithResourceFileURLsPlaceholderImageTargetSizeContentModeResultHandler = objc.RegisterName("requestLivePhotoWithResourceFileURLs:placeholderImage:targetSize:contentMode:resultHandler:")
-	_pHLivePhotoSelCancelLivePhotoRequestWithRequestID = objc.RegisterName("cancelLivePhotoRequestWithRequestID:")
-	_pHLivePhotoSelSize = objc.RegisterName("size")
+	_pHLivePhotoSelCancelLivePhotoRequestWithRequestID                                                    = objc.RegisterName("cancelLivePhotoRequestWithRequestID:")
+	_pHLivePhotoSelSize                                                                                   = objc.RegisterName("size")
 )
 
 func PHLivePhotoFromID(id objc.ID) *PHLivePhoto {
@@ -49,4 +49,3 @@ func (o *PHLivePhoto) Size() corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _pHLivePhotoSelSize)
 	return _ret
 }
-

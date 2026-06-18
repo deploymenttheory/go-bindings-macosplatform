@@ -18,20 +18,20 @@ type ISyncManager struct {
 }
 
 var (
-	_clsISyncManager = _objcClass("ISyncManager")
-	_iSyncManagerSelSharedManager = objc.RegisterName("sharedManager")
-	_iSyncManagerSelIsEnabled = objc.RegisterName("isEnabled")
-	_iSyncManagerSelSyncDisabledReason = objc.RegisterName("syncDisabledReason")
-	_iSyncManagerSelClientWithIdentifier = objc.RegisterName("clientWithIdentifier:")
-	_iSyncManagerSelRegisterClientWithIdentifierDescriptionFilePath = objc.RegisterName("registerClientWithIdentifier:descriptionFilePath:")
-	_iSyncManagerSelUnregisterClient = objc.RegisterName("unregisterClient:")
-	_iSyncManagerSelRegisterSchemaWithBundlePath = objc.RegisterName("registerSchemaWithBundlePath:")
-	_iSyncManagerSelUnregisterSchemaWithName = objc.RegisterName("unregisterSchemaWithName:")
-	_iSyncManagerSelClientWithIdentifierNeedsSyncing = objc.RegisterName("clientWithIdentifier:needsSyncing:")
+	_clsISyncManager                                                                 = _objcClass("ISyncManager")
+	_iSyncManagerSelSharedManager                                                    = objc.RegisterName("sharedManager")
+	_iSyncManagerSelIsEnabled                                                        = objc.RegisterName("isEnabled")
+	_iSyncManagerSelSyncDisabledReason                                               = objc.RegisterName("syncDisabledReason")
+	_iSyncManagerSelClientWithIdentifier                                             = objc.RegisterName("clientWithIdentifier:")
+	_iSyncManagerSelRegisterClientWithIdentifierDescriptionFilePath                  = objc.RegisterName("registerClientWithIdentifier:descriptionFilePath:")
+	_iSyncManagerSelUnregisterClient                                                 = objc.RegisterName("unregisterClient:")
+	_iSyncManagerSelRegisterSchemaWithBundlePath                                     = objc.RegisterName("registerSchemaWithBundlePath:")
+	_iSyncManagerSelUnregisterSchemaWithName                                         = objc.RegisterName("unregisterSchemaWithName:")
+	_iSyncManagerSelClientWithIdentifierNeedsSyncing                                 = objc.RegisterName("clientWithIdentifier:needsSyncing:")
 	_iSyncManagerSelSnapshotOfRecordsInTruthWithEntityNamesUsingIdentifiersForClient = objc.RegisterName("snapshotOfRecordsInTruthWithEntityNames:usingIdentifiersForClient:")
-	_iSyncManagerSelAddRequestMode = objc.RegisterName("addRequestMode:")
-	_iSyncManagerSelRemoveRequestMode = objc.RegisterName("removeRequestMode:")
-	_iSyncManagerSelRequestModes = objc.RegisterName("requestModes")
+	_iSyncManagerSelAddRequestMode                                                   = objc.RegisterName("addRequestMode:")
+	_iSyncManagerSelRemoveRequestMode                                                = objc.RegisterName("removeRequestMode:")
+	_iSyncManagerSelRequestModes                                                     = objc.RegisterName("requestModes")
 )
 
 func ISyncManagerFromID(id objc.ID) *ISyncManager {
@@ -47,7 +47,9 @@ func ISyncManagerFromID(id objc.ID) *ISyncManager {
 // Deprecated: since macOS 10.7.
 func ISyncManagerSharedManager() *ISyncManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsISyncManager), _iSyncManagerSelSharedManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ISyncManagerFromID(_ret)
 }
 
@@ -66,14 +68,18 @@ func (o *ISyncManager) SyncDisabledReason() unsafe.Pointer {
 // Deprecated: since macOS 10.7.
 func (o *ISyncManager) ClientWithIdentifier(clientId *foundation.NSString) *ISyncClient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncManagerSelClientWithIdentifier, clientId.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ISyncClientFromID(_ret)
 }
 
 // Deprecated: since macOS 10.7.
 func (o *ISyncManager) RegisterClientWithIdentifierDescriptionFilePath(clientId *foundation.NSString, descriptionFilePath *foundation.NSString) *ISyncClient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncManagerSelRegisterClientWithIdentifierDescriptionFilePath, clientId.Ptr(), descriptionFilePath.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ISyncClientFromID(_ret)
 }
 
@@ -101,7 +107,9 @@ func (o *ISyncManager) ClientWithIdentifierNeedsSyncing(clientId *foundation.NSS
 // Deprecated: since macOS 10.7.
 func (o *ISyncManager) SnapshotOfRecordsInTruthWithEntityNamesUsingIdentifiersForClient(entityNames *foundation.NSArray[objc.ID], client *ISyncClient) *ISyncRecordSnapshot {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncManagerSelSnapshotOfRecordsInTruthWithEntityNamesUsingIdentifiersForClient, entityNames, client.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ISyncRecordSnapshotFromID(_ret)
 }
 
@@ -120,4 +128,3 @@ func (o *ISyncManager) RequestModes() *foundation.NSArray[objc.ID] {
 	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _iSyncManagerSelRequestModes)
 	return _ret
 }
-

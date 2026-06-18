@@ -47,4 +47,3 @@ type SteeringWheelElementable interface {
 }
 
 var _ SteeringWheelElementable = (*SteeringWheelElement)(nil)
-

@@ -22,23 +22,23 @@ type MPSMatrixNeuronGradient struct {
 }
 
 var (
-	_clsMPSMatrixNeuronGradient = _objcClass("MPSMatrixNeuronGradient")
-	_mPSMatrixNeuronGradientSelSetNeuronTypeParameterAParameterBParameterC = objc.RegisterName("setNeuronType:parameterA:parameterB:parameterC:")
-	_mPSMatrixNeuronGradientSelNeuronType = objc.RegisterName("neuronType")
-	_mPSMatrixNeuronGradientSelNeuronParameterA = objc.RegisterName("neuronParameterA")
-	_mPSMatrixNeuronGradientSelNeuronParameterB = objc.RegisterName("neuronParameterB")
-	_mPSMatrixNeuronGradientSelNeuronParameterC = objc.RegisterName("neuronParameterC")
-	_mPSMatrixNeuronGradientSelSetNeuronToPReLUWithParametersA = objc.RegisterName("setNeuronToPReLUWithParametersA:")
-	_mPSMatrixNeuronGradientSelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsMPSMatrixNeuronGradient                                                                                                               = _objcClass("MPSMatrixNeuronGradient")
+	_mPSMatrixNeuronGradientSelSetNeuronTypeParameterAParameterBParameterC                                                                    = objc.RegisterName("setNeuronType:parameterA:parameterB:parameterC:")
+	_mPSMatrixNeuronGradientSelNeuronType                                                                                                     = objc.RegisterName("neuronType")
+	_mPSMatrixNeuronGradientSelNeuronParameterA                                                                                               = objc.RegisterName("neuronParameterA")
+	_mPSMatrixNeuronGradientSelNeuronParameterB                                                                                               = objc.RegisterName("neuronParameterB")
+	_mPSMatrixNeuronGradientSelNeuronParameterC                                                                                               = objc.RegisterName("neuronParameterC")
+	_mPSMatrixNeuronGradientSelSetNeuronToPReLUWithParametersA                                                                                = objc.RegisterName("setNeuronToPReLUWithParametersA:")
+	_mPSMatrixNeuronGradientSelInitWithDevice                                                                                                 = objc.RegisterName("initWithDevice:")
 	_mPSMatrixNeuronGradientSelEncodeToCommandBufferGradientMatrixInputMatrixBiasVectorResultGradientForDataMatrixResultGradientForBiasVector = objc.RegisterName("encodeToCommandBuffer:gradientMatrix:inputMatrix:biasVector:resultGradientForDataMatrix:resultGradientForBiasVector:")
-	_mPSMatrixNeuronGradientSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSMatrixNeuronGradientSelCopyWithZoneDevice = objc.RegisterName("copyWithZone:device:")
-	_mPSMatrixNeuronGradientSelSourceNumberOfFeatureVectors = objc.RegisterName("sourceNumberOfFeatureVectors")
-	_mPSMatrixNeuronGradientSelSetSourceNumberOfFeatureVectors = objc.RegisterName("setSourceNumberOfFeatureVectors:")
-	_mPSMatrixNeuronGradientSelSourceInputFeatureChannels = objc.RegisterName("sourceInputFeatureChannels")
-	_mPSMatrixNeuronGradientSelSetSourceInputFeatureChannels = objc.RegisterName("setSourceInputFeatureChannels:")
-	_mPSMatrixNeuronGradientSelAlpha = objc.RegisterName("alpha")
-	_mPSMatrixNeuronGradientSelSetAlpha = objc.RegisterName("setAlpha:")
+	_mPSMatrixNeuronGradientSelInitWithCoderDevice                                                                                            = objc.RegisterName("initWithCoder:device:")
+	_mPSMatrixNeuronGradientSelCopyWithZoneDevice                                                                                             = objc.RegisterName("copyWithZone:device:")
+	_mPSMatrixNeuronGradientSelSourceNumberOfFeatureVectors                                                                                   = objc.RegisterName("sourceNumberOfFeatureVectors")
+	_mPSMatrixNeuronGradientSelSetSourceNumberOfFeatureVectors                                                                                = objc.RegisterName("setSourceNumberOfFeatureVectors:")
+	_mPSMatrixNeuronGradientSelSourceInputFeatureChannels                                                                                     = objc.RegisterName("sourceInputFeatureChannels")
+	_mPSMatrixNeuronGradientSelSetSourceInputFeatureChannels                                                                                  = objc.RegisterName("setSourceInputFeatureChannels:")
+	_mPSMatrixNeuronGradientSelAlpha                                                                                                          = objc.RegisterName("alpha")
+	_mPSMatrixNeuronGradientSelSetAlpha                                                                                                       = objc.RegisterName("setAlpha:")
 )
 
 func MPSMatrixNeuronGradientFromID(id objc.ID) *MPSMatrixNeuronGradient {
@@ -87,7 +87,9 @@ func (o *MPSMatrixNeuronGradient) SetNeuronToPReLUWithParametersA(a *foundation.
 
 func (o *MPSMatrixNeuronGradient) InitWithDevice(device metal.MTLDevice) *MPSMatrixNeuronGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixNeuronGradientSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixNeuronGradientFromID(_ret)
 }
 
@@ -99,7 +101,9 @@ func (o *MPSMatrixNeuronGradient) EncodeToCommandBufferGradientMatrixInputMatrix
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSMatrixNeuronGradient @param      device      The MTLDevice on which to make the MPSMatrixNeuronGradient object. @return     A new MPSMatrixNeuronGradient object, or nil if failure.
 func (o *MPSMatrixNeuronGradient) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSMatrixNeuronGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixNeuronGradientSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixNeuronGradientFromID(_ret)
 }
 
@@ -138,4 +142,3 @@ func (o *MPSMatrixNeuronGradient) Alpha() float64 {
 func (o *MPSMatrixNeuronGradient) SetAlpha(alpha float64) {
 	o.Ptr().Send(_mPSMatrixNeuronGradientSelSetAlpha, alpha)
 }
-

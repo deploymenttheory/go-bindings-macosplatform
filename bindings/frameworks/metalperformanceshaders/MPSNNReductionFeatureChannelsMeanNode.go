@@ -26,4 +26,3 @@ func MPSNNReductionFeatureChannelsMeanNodeFromID(id objc.ID) *MPSNNReductionFeat
 	purego.Track(o)
 	return o
 }
-

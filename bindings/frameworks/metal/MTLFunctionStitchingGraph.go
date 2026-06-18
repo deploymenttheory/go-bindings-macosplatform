@@ -16,16 +16,16 @@ type MTLFunctionStitchingGraph struct {
 }
 
 var (
-	_clsMTLFunctionStitchingGraph = _objcClass("MTLFunctionStitchingGraph")
+	_clsMTLFunctionStitchingGraph                                              = _objcClass("MTLFunctionStitchingGraph")
 	_mTLFunctionStitchingGraphSelInitWithFunctionNameNodesOutputNodeAttributes = objc.RegisterName("initWithFunctionName:nodes:outputNode:attributes:")
-	_mTLFunctionStitchingGraphSelFunctionName = objc.RegisterName("functionName")
-	_mTLFunctionStitchingGraphSelSetFunctionName = objc.RegisterName("setFunctionName:")
-	_mTLFunctionStitchingGraphSelNodes = objc.RegisterName("nodes")
-	_mTLFunctionStitchingGraphSelSetNodes = objc.RegisterName("setNodes:")
-	_mTLFunctionStitchingGraphSelOutputNode = objc.RegisterName("outputNode")
-	_mTLFunctionStitchingGraphSelSetOutputNode = objc.RegisterName("setOutputNode:")
-	_mTLFunctionStitchingGraphSelAttributes = objc.RegisterName("attributes")
-	_mTLFunctionStitchingGraphSelSetAttributes = objc.RegisterName("setAttributes:")
+	_mTLFunctionStitchingGraphSelFunctionName                                  = objc.RegisterName("functionName")
+	_mTLFunctionStitchingGraphSelSetFunctionName                               = objc.RegisterName("setFunctionName:")
+	_mTLFunctionStitchingGraphSelNodes                                         = objc.RegisterName("nodes")
+	_mTLFunctionStitchingGraphSelSetNodes                                      = objc.RegisterName("setNodes:")
+	_mTLFunctionStitchingGraphSelOutputNode                                    = objc.RegisterName("outputNode")
+	_mTLFunctionStitchingGraphSelSetOutputNode                                 = objc.RegisterName("setOutputNode:")
+	_mTLFunctionStitchingGraphSelAttributes                                    = objc.RegisterName("attributes")
+	_mTLFunctionStitchingGraphSelSetAttributes                                 = objc.RegisterName("setAttributes:")
 )
 
 func MTLFunctionStitchingGraphFromID(id objc.ID) *MTLFunctionStitchingGraph {
@@ -40,13 +40,17 @@ func MTLFunctionStitchingGraphFromID(id objc.ID) *MTLFunctionStitchingGraph {
 
 func (o *MTLFunctionStitchingGraph) InitWithFunctionNameNodesOutputNodeAttributes(functionName *foundation.NSString, nodes *foundation.NSArray[*MTLFunctionStitchingFunctionNode], outputNode *MTLFunctionStitchingFunctionNode, attributes *foundation.NSArray[MTLFunctionStitchingAttribute]) *MTLFunctionStitchingGraph {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLFunctionStitchingGraphSelInitWithFunctionNameNodesOutputNodeAttributes, functionName.Ptr(), nodes.Ptr(), outputNode.Ptr(), attributes.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLFunctionStitchingGraphFromID(_ret)
 }
 
 func (o *MTLFunctionStitchingGraph) FunctionName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLFunctionStitchingGraphSelFunctionName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -56,7 +60,9 @@ func (o *MTLFunctionStitchingGraph) SetFunctionName(functionName *foundation.NSS
 
 func (o *MTLFunctionStitchingGraph) Nodes() *foundation.NSArray[*MTLFunctionStitchingFunctionNode] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLFunctionStitchingGraphSelNodes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MTLFunctionStitchingFunctionNode](_ret)
 }
 
@@ -66,7 +72,9 @@ func (o *MTLFunctionStitchingGraph) SetNodes(nodes *foundation.NSArray[*MTLFunct
 
 func (o *MTLFunctionStitchingGraph) OutputNode() *MTLFunctionStitchingFunctionNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLFunctionStitchingGraphSelOutputNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLFunctionStitchingFunctionNodeFromID(_ret)
 }
 
@@ -76,11 +84,12 @@ func (o *MTLFunctionStitchingGraph) SetOutputNode(outputNode *MTLFunctionStitchi
 
 func (o *MTLFunctionStitchingGraph) Attributes() *foundation.NSArray[MTLFunctionStitchingAttribute] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLFunctionStitchingGraphSelAttributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTLFunctionStitchingAttribute](_ret)
 }
 
 func (o *MTLFunctionStitchingGraph) SetAttributes(attributes *foundation.NSArray[MTLFunctionStitchingAttribute]) {
 	o.Ptr().Send(_mTLFunctionStitchingGraphSelSetAttributes, attributes.Ptr())
 }
-

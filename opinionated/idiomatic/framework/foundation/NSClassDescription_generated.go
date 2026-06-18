@@ -52,4 +52,3 @@ type ClassDescriptionable interface {
 }
 
 var _ ClassDescriptionable = (*ClassDescription)(nil)
-

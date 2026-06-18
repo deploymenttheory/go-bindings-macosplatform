@@ -17,7 +17,9 @@ type MTRActionsClusterEndpointListStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRActionsClusterEndpointListStruct].
-func (x *MTRActionsClusterEndpointListStruct) Unwrap() *raw.MTRActionsClusterEndpointListStruct { return x.inner }
+func (x *MTRActionsClusterEndpointListStruct) Unwrap() *raw.MTRActionsClusterEndpointListStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -116,4 +118,3 @@ type MTRActionsClusterEndpointListStructable interface {
 }
 
 var _ MTRActionsClusterEndpointListStructable = (*MTRActionsClusterEndpointListStruct)(nil)
-

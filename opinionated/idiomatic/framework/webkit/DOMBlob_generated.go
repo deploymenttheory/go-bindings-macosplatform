@@ -53,4 +53,3 @@ type DOMBlobable interface {
 }
 
 var _ DOMBlobable = (*DOMBlob)(nil)
-

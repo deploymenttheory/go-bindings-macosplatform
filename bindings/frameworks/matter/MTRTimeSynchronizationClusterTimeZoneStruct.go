@@ -16,13 +16,13 @@ type MTRTimeSynchronizationClusterTimeZoneStruct struct {
 }
 
 var (
-	_clsMTRTimeSynchronizationClusterTimeZoneStruct = _objcClass("MTRTimeSynchronizationClusterTimeZoneStruct")
-	_mTRTimeSynchronizationClusterTimeZoneStructSelOffset = objc.RegisterName("offset")
-	_mTRTimeSynchronizationClusterTimeZoneStructSelSetOffset = objc.RegisterName("setOffset:")
-	_mTRTimeSynchronizationClusterTimeZoneStructSelValidAt = objc.RegisterName("validAt")
+	_clsMTRTimeSynchronizationClusterTimeZoneStruct           = _objcClass("MTRTimeSynchronizationClusterTimeZoneStruct")
+	_mTRTimeSynchronizationClusterTimeZoneStructSelOffset     = objc.RegisterName("offset")
+	_mTRTimeSynchronizationClusterTimeZoneStructSelSetOffset  = objc.RegisterName("setOffset:")
+	_mTRTimeSynchronizationClusterTimeZoneStructSelValidAt    = objc.RegisterName("validAt")
 	_mTRTimeSynchronizationClusterTimeZoneStructSelSetValidAt = objc.RegisterName("setValidAt:")
-	_mTRTimeSynchronizationClusterTimeZoneStructSelName = objc.RegisterName("name")
-	_mTRTimeSynchronizationClusterTimeZoneStructSelSetName = objc.RegisterName("setName:")
+	_mTRTimeSynchronizationClusterTimeZoneStructSelName       = objc.RegisterName("name")
+	_mTRTimeSynchronizationClusterTimeZoneStructSelSetName    = objc.RegisterName("setName:")
 )
 
 func MTRTimeSynchronizationClusterTimeZoneStructFromID(id objc.ID) *MTRTimeSynchronizationClusterTimeZoneStruct {
@@ -37,7 +37,9 @@ func MTRTimeSynchronizationClusterTimeZoneStructFromID(id objc.ID) *MTRTimeSynch
 
 func (o *MTRTimeSynchronizationClusterTimeZoneStruct) Offset() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRTimeSynchronizationClusterTimeZoneStructSelOffset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTRTimeSynchronizationClusterTimeZoneStruct) SetOffset(offset *foundati
 
 func (o *MTRTimeSynchronizationClusterTimeZoneStruct) ValidAt() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRTimeSynchronizationClusterTimeZoneStructSelValidAt)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *MTRTimeSynchronizationClusterTimeZoneStruct) SetValidAt(validAt *founda
 
 func (o *MTRTimeSynchronizationClusterTimeZoneStruct) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRTimeSynchronizationClusterTimeZoneStructSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTRTimeSynchronizationClusterTimeZoneStruct) SetName(name *foundation.NSString) {
 	o.Ptr().Send(_mTRTimeSynchronizationClusterTimeZoneStructSelSetName, name.Ptr())
 }
-

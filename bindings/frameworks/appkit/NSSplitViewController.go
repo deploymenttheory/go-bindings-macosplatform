@@ -17,25 +17,25 @@ type NSSplitViewController struct {
 }
 
 var (
-	_clsNSSplitViewController = _objcClass("NSSplitViewController")
-	_nSSplitViewControllerSelAddSplitViewItem = objc.RegisterName("addSplitViewItem:")
-	_nSSplitViewControllerSelInsertSplitViewItemAtIndex = objc.RegisterName("insertSplitViewItem:atIndex:")
-	_nSSplitViewControllerSelRemoveSplitViewItem = objc.RegisterName("removeSplitViewItem:")
-	_nSSplitViewControllerSelSplitViewItemForViewController = objc.RegisterName("splitViewItemForViewController:")
-	_nSSplitViewControllerSelValidateUserInterfaceItem = objc.RegisterName("validateUserInterfaceItem:")
-	_nSSplitViewControllerSelSplitViewCanCollapseSubview = objc.RegisterName("splitView:canCollapseSubview:")
+	_clsNSSplitViewController                                                             = _objcClass("NSSplitViewController")
+	_nSSplitViewControllerSelAddSplitViewItem                                             = objc.RegisterName("addSplitViewItem:")
+	_nSSplitViewControllerSelInsertSplitViewItemAtIndex                                   = objc.RegisterName("insertSplitViewItem:atIndex:")
+	_nSSplitViewControllerSelRemoveSplitViewItem                                          = objc.RegisterName("removeSplitViewItem:")
+	_nSSplitViewControllerSelSplitViewItemForViewController                               = objc.RegisterName("splitViewItemForViewController:")
+	_nSSplitViewControllerSelValidateUserInterfaceItem                                    = objc.RegisterName("validateUserInterfaceItem:")
+	_nSSplitViewControllerSelSplitViewCanCollapseSubview                                  = objc.RegisterName("splitView:canCollapseSubview:")
 	_nSSplitViewControllerSelSplitViewShouldCollapseSubviewForDoubleClickOnDividerAtIndex = objc.RegisterName("splitView:shouldCollapseSubview:forDoubleClickOnDividerAtIndex:")
-	_nSSplitViewControllerSelSplitViewShouldHideDividerAtIndex = objc.RegisterName("splitView:shouldHideDividerAtIndex:")
-	_nSSplitViewControllerSelSplitViewEffectiveRectForDrawnRectOfDividerAtIndex = objc.RegisterName("splitView:effectiveRect:forDrawnRect:ofDividerAtIndex:")
-	_nSSplitViewControllerSelSplitViewAdditionalEffectiveRectOfDividerAtIndex = objc.RegisterName("splitView:additionalEffectiveRectOfDividerAtIndex:")
-	_nSSplitViewControllerSelSplitView = objc.RegisterName("splitView")
-	_nSSplitViewControllerSelSetSplitView = objc.RegisterName("setSplitView:")
-	_nSSplitViewControllerSelSplitViewItems = objc.RegisterName("splitViewItems")
-	_nSSplitViewControllerSelSetSplitViewItems = objc.RegisterName("setSplitViewItems:")
-	_nSSplitViewControllerSelMinimumThicknessForInlineSidebars = objc.RegisterName("minimumThicknessForInlineSidebars")
-	_nSSplitViewControllerSelSetMinimumThicknessForInlineSidebars = objc.RegisterName("setMinimumThicknessForInlineSidebars:")
-	_nSSplitViewControllerSelToggleSidebar = objc.RegisterName("toggleSidebar:")
-	_nSSplitViewControllerSelToggleInspector = objc.RegisterName("toggleInspector:")
+	_nSSplitViewControllerSelSplitViewShouldHideDividerAtIndex                            = objc.RegisterName("splitView:shouldHideDividerAtIndex:")
+	_nSSplitViewControllerSelSplitViewEffectiveRectForDrawnRectOfDividerAtIndex           = objc.RegisterName("splitView:effectiveRect:forDrawnRect:ofDividerAtIndex:")
+	_nSSplitViewControllerSelSplitViewAdditionalEffectiveRectOfDividerAtIndex             = objc.RegisterName("splitView:additionalEffectiveRectOfDividerAtIndex:")
+	_nSSplitViewControllerSelSplitView                                                    = objc.RegisterName("splitView")
+	_nSSplitViewControllerSelSetSplitView                                                 = objc.RegisterName("setSplitView:")
+	_nSSplitViewControllerSelSplitViewItems                                               = objc.RegisterName("splitViewItems")
+	_nSSplitViewControllerSelSetSplitViewItems                                            = objc.RegisterName("setSplitViewItems:")
+	_nSSplitViewControllerSelMinimumThicknessForInlineSidebars                            = objc.RegisterName("minimumThicknessForInlineSidebars")
+	_nSSplitViewControllerSelSetMinimumThicknessForInlineSidebars                         = objc.RegisterName("setMinimumThicknessForInlineSidebars:")
+	_nSSplitViewControllerSelToggleSidebar                                                = objc.RegisterName("toggleSidebar:")
+	_nSSplitViewControllerSelToggleInspector                                              = objc.RegisterName("toggleInspector:")
 )
 
 func NSSplitViewControllerFromID(id objc.ID) *NSSplitViewController {
@@ -66,7 +66,9 @@ func (o *NSSplitViewController) RemoveSplitViewItem(splitViewItem *NSSplitViewIt
 // Returns the corresponding SplitViewItem for a given child ViewController. \param viewController The ViewController to look up. \return The corresponding SplitViewItem. Returns nil if \c viewController is not a child of the SplitViewController.
 func (o *NSSplitViewController) SplitViewItemForViewController(viewController *NSViewController) *NSSplitViewItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSplitViewControllerSelSplitViewItemForViewController, viewController.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSplitViewItemFromID(_ret)
 }
 
@@ -108,7 +110,9 @@ func (o *NSSplitViewController) SplitViewAdditionalEffectiveRectOfDividerAtIndex
 // The split view managed by the SplitViewController. This can be used to customize view properties such as the dividerStyle, vertical, and autosaveName. It is not guaranteed to be the same view as the receivers 'view' property. The default created splitView is vertical with a dividerStyle of \c NSSplitViewDividerStyleThin. To provide a custom NSSplitView, set the splitView property anytime before self.viewLoaded is YES.
 func (o *NSSplitViewController) SplitView() *NSSplitView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSplitViewControllerSelSplitView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSplitViewFromID(_ret)
 }
 
@@ -120,7 +124,9 @@ func (o *NSSplitViewController) SetSplitView(splitView *NSSplitView) {
 // The array of SplitViewItems that correspond to the current child view controllers. After a child view controller is added to the receiving splitViewController, a NSSplitViewItem with the default values will be created for it. Once the child is removed, its corresponding splitViewItem will be removed from the splitViewItems array. Setting this will call through to \c -insertSplitViewItem:atIndex and \c -removeSplitViewItem: for items that are new or need removal.
 func (o *NSSplitViewController) SplitViewItems() *foundation.NSArray[*NSSplitViewItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSplitViewControllerSelSplitViewItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSSplitViewItem](_ret)
 }
 
@@ -149,4 +155,3 @@ func (o *NSSplitViewController) ToggleSidebar(sender objc.ID) {
 func (o *NSSplitViewController) ToggleInspector(sender objc.ID) {
 	o.Ptr().Send(_nSSplitViewControllerSelToggleInspector, sender)
 }
-

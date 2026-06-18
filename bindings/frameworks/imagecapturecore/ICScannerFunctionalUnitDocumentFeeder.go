@@ -17,20 +17,20 @@ type ICScannerFunctionalUnitDocumentFeeder struct {
 }
 
 var (
-	_clsICScannerFunctionalUnitDocumentFeeder = _objcClass("ICScannerFunctionalUnitDocumentFeeder")
-	_iCScannerFunctionalUnitDocumentFeederSelSupportedDocumentTypes = objc.RegisterName("supportedDocumentTypes")
-	_iCScannerFunctionalUnitDocumentFeederSelDocumentType = objc.RegisterName("documentType")
-	_iCScannerFunctionalUnitDocumentFeederSelSetDocumentType = objc.RegisterName("setDocumentType:")
-	_iCScannerFunctionalUnitDocumentFeederSelDocumentSize = objc.RegisterName("documentSize")
-	_iCScannerFunctionalUnitDocumentFeederSelSupportsDuplexScanning = objc.RegisterName("supportsDuplexScanning")
-	_iCScannerFunctionalUnitDocumentFeederSelDuplexScanningEnabled = objc.RegisterName("duplexScanningEnabled")
+	_clsICScannerFunctionalUnitDocumentFeeder                         = _objcClass("ICScannerFunctionalUnitDocumentFeeder")
+	_iCScannerFunctionalUnitDocumentFeederSelSupportedDocumentTypes   = objc.RegisterName("supportedDocumentTypes")
+	_iCScannerFunctionalUnitDocumentFeederSelDocumentType             = objc.RegisterName("documentType")
+	_iCScannerFunctionalUnitDocumentFeederSelSetDocumentType          = objc.RegisterName("setDocumentType:")
+	_iCScannerFunctionalUnitDocumentFeederSelDocumentSize             = objc.RegisterName("documentSize")
+	_iCScannerFunctionalUnitDocumentFeederSelSupportsDuplexScanning   = objc.RegisterName("supportsDuplexScanning")
+	_iCScannerFunctionalUnitDocumentFeederSelDuplexScanningEnabled    = objc.RegisterName("duplexScanningEnabled")
 	_iCScannerFunctionalUnitDocumentFeederSelSetDuplexScanningEnabled = objc.RegisterName("setDuplexScanningEnabled:")
-	_iCScannerFunctionalUnitDocumentFeederSelDocumentLoaded = objc.RegisterName("documentLoaded")
-	_iCScannerFunctionalUnitDocumentFeederSelOddPageOrientation = objc.RegisterName("oddPageOrientation")
-	_iCScannerFunctionalUnitDocumentFeederSelSetOddPageOrientation = objc.RegisterName("setOddPageOrientation:")
-	_iCScannerFunctionalUnitDocumentFeederSelEvenPageOrientation = objc.RegisterName("evenPageOrientation")
-	_iCScannerFunctionalUnitDocumentFeederSelSetEvenPageOrientation = objc.RegisterName("setEvenPageOrientation:")
-	_iCScannerFunctionalUnitDocumentFeederSelReverseFeederPageOrder = objc.RegisterName("reverseFeederPageOrder")
+	_iCScannerFunctionalUnitDocumentFeederSelDocumentLoaded           = objc.RegisterName("documentLoaded")
+	_iCScannerFunctionalUnitDocumentFeederSelOddPageOrientation       = objc.RegisterName("oddPageOrientation")
+	_iCScannerFunctionalUnitDocumentFeederSelSetOddPageOrientation    = objc.RegisterName("setOddPageOrientation:")
+	_iCScannerFunctionalUnitDocumentFeederSelEvenPageOrientation      = objc.RegisterName("evenPageOrientation")
+	_iCScannerFunctionalUnitDocumentFeederSelSetEvenPageOrientation   = objc.RegisterName("setEvenPageOrientation:")
+	_iCScannerFunctionalUnitDocumentFeederSelReverseFeederPageOrder   = objc.RegisterName("reverseFeederPageOrder")
 )
 
 func ICScannerFunctionalUnitDocumentFeederFromID(id objc.ID) *ICScannerFunctionalUnitDocumentFeeder {
@@ -46,7 +46,9 @@ func ICScannerFunctionalUnitDocumentFeederFromID(id objc.ID) *ICScannerFunctiona
 // @property supportedDocumentTypes @abstract ￼Supported document types. The values in this set are valid values defined by ICScannerDocumentType.
 func (o *ICScannerFunctionalUnitDocumentFeeder) SupportedDocumentTypes() *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCScannerFunctionalUnitDocumentFeederSelSupportedDocumentTypes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
@@ -113,4 +115,3 @@ func (o *ICScannerFunctionalUnitDocumentFeeder) ReverseFeederPageOrder() bool {
 	_ret := objc.Send[bool](o.Ptr(), _iCScannerFunctionalUnitDocumentFeederSelReverseFeederPageOrder)
 	return _ret
 }
-

@@ -258,7 +258,9 @@ func (x *CNNArithmetic) SetMaximumValue(maximumValue float32) {
 
 func (x *CNNArithmetic) asCNNArithmetic() *raw.MPSCNNArithmetic { return x.inner }
 
-func (x *CNNArithmetic) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNBinaryKernel }
+func (x *CNNArithmetic) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNBinaryKernel
+}
 
 // CNNArithmeticable is the interface implemented by [CNNArithmetic], for mocking and DI.
 type CNNArithmeticable interface {
@@ -305,4 +307,3 @@ type CNNArithmeticable interface {
 }
 
 var _ CNNArithmeticable = (*CNNArithmetic)(nil)
-

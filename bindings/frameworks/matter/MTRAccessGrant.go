@@ -16,14 +16,14 @@ type MTRAccessGrant struct {
 }
 
 var (
-	_clsMTRAccessGrant = _objcClass("MTRAccessGrant")
-	_mTRAccessGrantSelAccessGrantForNodeIDPrivilege = objc.RegisterName("accessGrantForNodeID:privilege:")
+	_clsMTRAccessGrant                                            = _objcClass("MTRAccessGrant")
+	_mTRAccessGrantSelAccessGrantForNodeIDPrivilege               = objc.RegisterName("accessGrantForNodeID:privilege:")
 	_mTRAccessGrantSelAccessGrantForCASEAuthenticatedTagPrivilege = objc.RegisterName("accessGrantForCASEAuthenticatedTag:privilege:")
-	_mTRAccessGrantSelAccessGrantForGroupIDPrivilege = objc.RegisterName("accessGrantForGroupID:privilege:")
-	_mTRAccessGrantSelAccessGrantForAllNodesWithPrivilege = objc.RegisterName("accessGrantForAllNodesWithPrivilege:")
-	_mTRAccessGrantSelSubjectID = objc.RegisterName("subjectID")
-	_mTRAccessGrantSelGrantedPrivilege = objc.RegisterName("grantedPrivilege")
-	_mTRAccessGrantSelAuthenticationMode = objc.RegisterName("authenticationMode")
+	_mTRAccessGrantSelAccessGrantForGroupIDPrivilege              = objc.RegisterName("accessGrantForGroupID:privilege:")
+	_mTRAccessGrantSelAccessGrantForAllNodesWithPrivilege         = objc.RegisterName("accessGrantForAllNodesWithPrivilege:")
+	_mTRAccessGrantSelSubjectID                                   = objc.RegisterName("subjectID")
+	_mTRAccessGrantSelGrantedPrivilege                            = objc.RegisterName("grantedPrivilege")
+	_mTRAccessGrantSelAuthenticationMode                          = objc.RegisterName("authenticationMode")
 )
 
 func MTRAccessGrantFromID(id objc.ID) *MTRAccessGrant {
@@ -39,35 +39,45 @@ func MTRAccessGrantFromID(id objc.ID) *MTRAccessGrant {
 // Grant access at the provided level to a specific node on the fabric.  The provided nodeID must be an operational node identifier.
 func MTRAccessGrantAccessGrantForNodeIDPrivilege(nodeID *foundation.NSNumber, privilege MTRAccessControlEntryPrivilege) *MTRAccessGrant {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRAccessGrant), _mTRAccessGrantSelAccessGrantForNodeIDPrivilege, nodeID.Ptr(), privilege)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRAccessGrantFromID(_ret)
 }
 
 // Grant access to any node on the fabric that has a matching CASE Authenticated Tag in its operational certificate.  The provided caseAuthenticatedTag must be a 32-bit unsigned integer with lower 16 bits not 0, per the Matter specification.
 func MTRAccessGrantAccessGrantForCASEAuthenticatedTagPrivilege(caseAuthenticatedTag *foundation.NSNumber, privilege MTRAccessControlEntryPrivilege) *MTRAccessGrant {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRAccessGrant), _mTRAccessGrantSelAccessGrantForCASEAuthenticatedTagPrivilege, caseAuthenticatedTag.Ptr(), privilege)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRAccessGrantFromID(_ret)
 }
 
 // Grant access to any node on the fabric that is communicating with us via group messages sent to the given group.  The provided groupID must be a valid group identifier in the range 1-65535.
 func MTRAccessGrantAccessGrantForGroupIDPrivilege(groupID *foundation.NSNumber, privilege MTRAccessControlEntryPrivilege) *MTRAccessGrant {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRAccessGrant), _mTRAccessGrantSelAccessGrantForGroupIDPrivilege, groupID.Ptr(), privilege)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRAccessGrantFromID(_ret)
 }
 
 // Grant access to any node on the fabric, as long as it's communicating with us over a unicast authenticated channel.
 func MTRAccessGrantAccessGrantForAllNodesWithPrivilege(privilege MTRAccessControlEntryPrivilege) *MTRAccessGrant {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRAccessGrant), _mTRAccessGrantSelAccessGrantForAllNodesWithPrivilege, privilege)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRAccessGrantFromID(_ret)
 }
 
 // The matter access control subject ID that access has been granted for.  Nil when access has been granted for all subjects (e.g. via initForAllNodesWithPrivilege).
 func (o *MTRAccessGrant) SubjectID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAccessGrantSelSubjectID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -82,4 +92,3 @@ func (o *MTRAccessGrant) AuthenticationMode() MTRAccessControlEntryAuthMode {
 	_ret := objc.Send[MTRAccessControlEntryAuthMode](o.Ptr(), _mTRAccessGrantSelAuthenticationMode)
 	return _ret
 }
-

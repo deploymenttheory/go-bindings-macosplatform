@@ -18,11 +18,11 @@ type VZDiskBlockDeviceStorageDeviceAttachment struct {
 }
 
 var (
-	_clsVZDiskBlockDeviceStorageDeviceAttachment = _objcClass("VZDiskBlockDeviceStorageDeviceAttachment")
+	_clsVZDiskBlockDeviceStorageDeviceAttachment                                                   = _objcClass("VZDiskBlockDeviceStorageDeviceAttachment")
 	_vZDiskBlockDeviceStorageDeviceAttachmentSelInitWithFileHandleReadOnlySynchronizationModeError = objc.RegisterName("initWithFileHandle:readOnly:synchronizationMode:error:")
-	_vZDiskBlockDeviceStorageDeviceAttachmentSelFileHandle = objc.RegisterName("fileHandle")
-	_vZDiskBlockDeviceStorageDeviceAttachmentSelIsReadOnly = objc.RegisterName("isReadOnly")
-	_vZDiskBlockDeviceStorageDeviceAttachmentSelSynchronizationMode = objc.RegisterName("synchronizationMode")
+	_vZDiskBlockDeviceStorageDeviceAttachmentSelFileHandle                                         = objc.RegisterName("fileHandle")
+	_vZDiskBlockDeviceStorageDeviceAttachmentSelIsReadOnly                                         = objc.RegisterName("isReadOnly")
+	_vZDiskBlockDeviceStorageDeviceAttachmentSelSynchronizationMode                                = objc.RegisterName("synchronizationMode")
 )
 
 func VZDiskBlockDeviceStorageDeviceAttachmentFromID(id objc.ID) *VZDiskBlockDeviceStorageDeviceAttachment {
@@ -39,7 +39,9 @@ func VZDiskBlockDeviceStorageDeviceAttachmentFromID(id objc.ID) *VZDiskBlockDevi
 func (o *VZDiskBlockDeviceStorageDeviceAttachment) InitWithFileHandleReadOnlySynchronizationModeError(fileHandle *foundation.NSFileHandle, readOnly bool, synchronizationMode VZDiskSynchronizationMode) (*VZDiskBlockDeviceStorageDeviceAttachment, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZDiskBlockDeviceStorageDeviceAttachmentSelInitWithFileHandleReadOnlySynchronizationModeError, fileHandle.Ptr(), readOnly, synchronizationMode, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -49,7 +51,9 @@ func (o *VZDiskBlockDeviceStorageDeviceAttachment) InitWithFileHandleReadOnlySyn
 // @abstract File handle to the underlying disk used for storage by the attachment.
 func (o *VZDiskBlockDeviceStorageDeviceAttachment) FileHandle() *foundation.NSFileHandle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZDiskBlockDeviceStorageDeviceAttachmentSelFileHandle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSFileHandleFromID(_ret)
 }
 
@@ -64,4 +68,3 @@ func (o *VZDiskBlockDeviceStorageDeviceAttachment) SynchronizationMode() VZDiskS
 	_ret := objc.Send[VZDiskSynchronizationMode](o.Ptr(), _vZDiskBlockDeviceStorageDeviceAttachmentSelSynchronizationMode)
 	return _ret
 }
-

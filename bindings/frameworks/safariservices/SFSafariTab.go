@@ -16,13 +16,13 @@ type SFSafariTab struct {
 }
 
 var (
-	_clsSFSafariTab = _objcClass("SFSafariTab")
-	_sFSafariTabSelGetActivePageWithCompletionHandler = objc.RegisterName("getActivePageWithCompletionHandler:")
-	_sFSafariTabSelGetPagesWithCompletionHandler = objc.RegisterName("getPagesWithCompletionHandler:")
+	_clsSFSafariTab                                         = _objcClass("SFSafariTab")
+	_sFSafariTabSelGetActivePageWithCompletionHandler       = objc.RegisterName("getActivePageWithCompletionHandler:")
+	_sFSafariTabSelGetPagesWithCompletionHandler            = objc.RegisterName("getPagesWithCompletionHandler:")
 	_sFSafariTabSelGetContainingWindowWithCompletionHandler = objc.RegisterName("getContainingWindowWithCompletionHandler:")
-	_sFSafariTabSelActivateWithCompletionHandler = objc.RegisterName("activateWithCompletionHandler:")
-	_sFSafariTabSelNavigateToURL = objc.RegisterName("navigateToURL:")
-	_sFSafariTabSelClose = objc.RegisterName("close")
+	_sFSafariTabSelActivateWithCompletionHandler            = objc.RegisterName("activateWithCompletionHandler:")
+	_sFSafariTabSelNavigateToURL                            = objc.RegisterName("navigateToURL:")
+	_sFSafariTabSelClose                                    = objc.RegisterName("close")
 )
 
 func SFSafariTabFromID(id objc.ID) *SFSafariTab {
@@ -101,4 +101,3 @@ func (o *SFSafariTab) NavigateToURL(url *foundation.NSURL) {
 func (o *SFSafariTab) Close() {
 	o.Ptr().Send(_sFSafariTabSelClose)
 }
-

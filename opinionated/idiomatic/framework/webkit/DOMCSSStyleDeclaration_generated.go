@@ -1850,7 +1850,9 @@ func (x *DOMCSSStyleDeclaration) SetZIndex(zIndex string) {
 
 func (x *DOMCSSStyleDeclaration) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
-func (x *DOMCSSStyleDeclaration) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+func (x *DOMCSSStyleDeclaration) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMObject.WebScriptObject
+}
 
 // DOMCSSStyleDeclarationable is the interface implemented by [DOMCSSStyleDeclaration], for mocking and DI.
 type DOMCSSStyleDeclarationable interface {
@@ -2116,4 +2118,3 @@ type DOMCSSStyleDeclarationable interface {
 }
 
 var _ DOMCSSStyleDeclarationable = (*DOMCSSStyleDeclaration)(nil)
-

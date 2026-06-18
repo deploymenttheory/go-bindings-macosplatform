@@ -1829,4 +1829,3 @@ func KSCValNetSMBNetBIOSNodeTypePeer() uintptr {
 	ptr, _ := purego.Dlsym(_systemconfigurationLib, "kSCValNetSMBNetBIOSNodeTypePeer")
 	return ptr
 }
-

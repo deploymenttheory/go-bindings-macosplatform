@@ -18,21 +18,21 @@ type WebHistory struct {
 }
 
 var (
-	_clsWebHistory = _objcClass("WebHistory")
-	_webHistorySelOptionalSharedHistory = objc.RegisterName("optionalSharedHistory")
-	_webHistorySelSetOptionalSharedHistory = objc.RegisterName("setOptionalSharedHistory:")
-	_webHistorySelLoadFromURLError = objc.RegisterName("loadFromURL:error:")
-	_webHistorySelSaveToURLError = objc.RegisterName("saveToURL:error:")
-	_webHistorySelAddItems = objc.RegisterName("addItems:")
-	_webHistorySelRemoveItems = objc.RegisterName("removeItems:")
-	_webHistorySelRemoveAllItems = objc.RegisterName("removeAllItems")
+	_clsWebHistory                             = _objcClass("WebHistory")
+	_webHistorySelOptionalSharedHistory        = objc.RegisterName("optionalSharedHistory")
+	_webHistorySelSetOptionalSharedHistory     = objc.RegisterName("setOptionalSharedHistory:")
+	_webHistorySelLoadFromURLError             = objc.RegisterName("loadFromURL:error:")
+	_webHistorySelSaveToURLError               = objc.RegisterName("saveToURL:error:")
+	_webHistorySelAddItems                     = objc.RegisterName("addItems:")
+	_webHistorySelRemoveItems                  = objc.RegisterName("removeItems:")
+	_webHistorySelRemoveAllItems               = objc.RegisterName("removeAllItems")
 	_webHistorySelOrderedItemsLastVisitedOnDay = objc.RegisterName("orderedItemsLastVisitedOnDay:")
-	_webHistorySelItemForURL = objc.RegisterName("itemForURL:")
-	_webHistorySelOrderedLastVisitedDays = objc.RegisterName("orderedLastVisitedDays")
-	_webHistorySelHistoryItemLimit = objc.RegisterName("historyItemLimit")
-	_webHistorySelSetHistoryItemLimit = objc.RegisterName("setHistoryItemLimit:")
-	_webHistorySelHistoryAgeInDaysLimit = objc.RegisterName("historyAgeInDaysLimit")
-	_webHistorySelSetHistoryAgeInDaysLimit = objc.RegisterName("setHistoryAgeInDaysLimit:")
+	_webHistorySelItemForURL                   = objc.RegisterName("itemForURL:")
+	_webHistorySelOrderedLastVisitedDays       = objc.RegisterName("orderedLastVisitedDays")
+	_webHistorySelHistoryItemLimit             = objc.RegisterName("historyItemLimit")
+	_webHistorySelSetHistoryItemLimit          = objc.RegisterName("setHistoryItemLimit:")
+	_webHistorySelHistoryAgeInDaysLimit        = objc.RegisterName("historyAgeInDaysLimit")
+	_webHistorySelSetHistoryAgeInDaysLimit     = objc.RegisterName("setHistoryAgeInDaysLimit:")
 )
 
 func WebHistoryFromID(id objc.ID) *WebHistory {
@@ -48,7 +48,9 @@ func WebHistoryFromID(id objc.ID) *WebHistory {
 // @method optionalSharedHistory @abstract Returns a shared WebHistory instance initialized with the default history file. @result A WebHistory object.
 func WebHistoryOptionalSharedHistory() *WebHistory {
 	_ret := objc.Send[objc.ID](objc.ID(_clsWebHistory), _webHistorySelOptionalSharedHistory)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebHistoryFromID(_ret)
 }
 
@@ -100,7 +102,9 @@ func (o *WebHistory) OrderedItemsLastVisitedOnDay(calendarDate *foundation.NSCal
 // @method itemForURL: @abstract Get an item for a specific URL @param URL The URL of the history item to search for @result Returns an item matching the URL
 func (o *WebHistory) ItemForURL(uRL *foundation.NSURL) *WebHistoryItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webHistorySelItemForURL, uRL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebHistoryItemFromID(_ret)
 }
 
@@ -129,4 +133,3 @@ func (o *WebHistory) HistoryAgeInDaysLimit() int {
 func (o *WebHistory) SetHistoryAgeInDaysLimit(historyAgeInDaysLimit int) {
 	o.Ptr().Send(_webHistorySelSetHistoryAgeInDaysLimit, historyAgeInDaysLimit)
 }
-

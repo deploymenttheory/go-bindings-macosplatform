@@ -296,4 +296,3 @@ type XPCConnectionable interface {
 }
 
 var _ XPCConnectionable = (*XPCConnection)(nil)
-

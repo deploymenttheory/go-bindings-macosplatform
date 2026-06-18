@@ -15,7 +15,9 @@ type IndirectCommandBufferDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTLIndirectCommandBufferDescriptor].
-func (x *IndirectCommandBufferDescriptor) Unwrap() *raw.MTLIndirectCommandBufferDescriptor { return x.inner }
+func (x *IndirectCommandBufferDescriptor) Unwrap() *raw.MTLIndirectCommandBufferDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -402,4 +404,3 @@ type IndirectCommandBufferDescriptorable interface {
 }
 
 var _ IndirectCommandBufferDescriptorable = (*IndirectCommandBufferDescriptor)(nil)
-

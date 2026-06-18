@@ -11,41 +11,41 @@ import (
 )
 
 type CalibratorInfo struct {
-	DataSize uint
-	DisplayID uint
+	DataSize            uint
+	DisplayID           uint
 	ProfileLocationSize uint
-	ProfileLocationPtr *qd.CMProfileLocation
-	EventProc unsafe.Pointer
-	IsGood uint8
+	ProfileLocationPtr  *qd.CMProfileLocation
+	EventProc           unsafe.Pointer
+	IsGood              uint8
 }
 
 type FontSelectionQDStyle struct {
-	Version uint
+	Version  uint
 	Instance ats.FMFontFamilyInstance
-	Size int16
+	Size     int16
 	HasColor uint8
 	Reserved uint8
-	Color qd.RGBColor
+	Color    qd.RGBColor
 }
 
 type NColorPickerInfo struct {
-	TheColor NPMColor
-	DstProfile unsafe.Pointer
-	Flags uint
-	PlaceWhere int16
-	DialogOrigin unsafe.Pointer
-	PickerType uint
-	ColorProc unsafe.Pointer
-	ColorProcData unsafe.Pointer
-	Prompt [256]uint8
-	MInfo PickerMenuItemInfo
+	TheColor       NPMColor
+	DstProfile     unsafe.Pointer
+	Flags          uint
+	PlaceWhere     int16
+	DialogOrigin   unsafe.Pointer
+	PickerType     uint
+	ColorProc      unsafe.Pointer
+	ColorProcData  unsafe.Pointer
+	Prompt         [256]uint8
+	MInfo          PickerMenuItemInfo
 	NewColorChosen uint8
-	Reserved uint8
+	Reserved       uint8
 }
 
 type NPMColor struct {
 	Profile unsafe.Pointer
-	Color unsafe.Pointer
+	Color   unsafe.Pointer
 }
 
 // OpaqueFCFontDescriptorRef is an opaque type.
@@ -56,10 +56,9 @@ type OpaquePicker struct{}
 
 type PickerMenuItemInfo struct {
 	EditMenuID int16
-	CutItem int16
-	CopyItem int16
-	PasteItem int16
-	ClearItem int16
-	UndoItem int16
+	CutItem    int16
+	CopyItem   int16
+	PasteItem  int16
+	ClearItem  int16
+	UndoItem   int16
 }
-

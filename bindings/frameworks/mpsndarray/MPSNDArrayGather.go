@@ -15,8 +15,8 @@ type MPSNDArrayGather struct {
 }
 
 var (
-	_clsMPSNDArrayGather = _objcClass("MPSNDArrayGather")
-	_mPSNDArrayGatherSelAxis = objc.RegisterName("axis")
+	_clsMPSNDArrayGather        = _objcClass("MPSNDArrayGather")
+	_mPSNDArrayGatherSelAxis    = objc.RegisterName("axis")
 	_mPSNDArrayGatherSelSetAxis = objc.RegisterName("setAxis:")
 )
 
@@ -39,4 +39,3 @@ func (o *MPSNDArrayGather) Axis() uint {
 func (o *MPSNDArrayGather) SetAxis(axis uint) {
 	o.Ptr().Send(_mPSNDArrayGatherSelSetAxis, axis)
 }
-

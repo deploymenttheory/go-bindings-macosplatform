@@ -51,4 +51,3 @@ type ImageSymbolConfigurationable interface {
 }
 
 var _ ImageSymbolConfigurationable = (*ImageSymbolConfiguration)(nil)
-

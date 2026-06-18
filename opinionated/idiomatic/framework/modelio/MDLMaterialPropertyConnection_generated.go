@@ -62,4 +62,3 @@ type MaterialPropertyConnectionable interface {
 }
 
 var _ MaterialPropertyConnectionable = (*MaterialPropertyConnection)(nil)
-

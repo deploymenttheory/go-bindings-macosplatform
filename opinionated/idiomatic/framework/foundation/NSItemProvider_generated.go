@@ -234,4 +234,3 @@ type ItemProviderable interface {
 }
 
 var _ ItemProviderable = (*ItemProvider)(nil)
-

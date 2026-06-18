@@ -18,33 +18,33 @@ type MTRClusterWiFiNetworkDiagnostics struct {
 }
 
 var (
-	_clsMTRClusterWiFiNetworkDiagnostics = _objcClass("MTRClusterWiFiNetworkDiagnostics")
-	_mTRClusterWiFiNetworkDiagnosticsSelResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("resetCountsWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterWiFiNetworkDiagnosticsSelResetCountsWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("resetCountsWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeBSSIDWithParams = objc.RegisterName("readAttributeBSSIDWithParams:")
-	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeSecurityTypeWithParams = objc.RegisterName("readAttributeSecurityTypeWithParams:")
-	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeWiFiVersionWithParams = objc.RegisterName("readAttributeWiFiVersionWithParams:")
-	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeChannelNumberWithParams = objc.RegisterName("readAttributeChannelNumberWithParams:")
-	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeRSSIWithParams = objc.RegisterName("readAttributeRSSIWithParams:")
-	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeBeaconLostCountWithParams = objc.RegisterName("readAttributeBeaconLostCountWithParams:")
-	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeBeaconRxCountWithParams = objc.RegisterName("readAttributeBeaconRxCountWithParams:")
-	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributePacketMulticastRxCountWithParams = objc.RegisterName("readAttributePacketMulticastRxCountWithParams:")
-	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributePacketMulticastTxCountWithParams = objc.RegisterName("readAttributePacketMulticastTxCountWithParams:")
-	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributePacketUnicastRxCountWithParams = objc.RegisterName("readAttributePacketUnicastRxCountWithParams:")
-	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributePacketUnicastTxCountWithParams = objc.RegisterName("readAttributePacketUnicastTxCountWithParams:")
-	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeCurrentMaxRateWithParams = objc.RegisterName("readAttributeCurrentMaxRateWithParams:")
-	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeOverrunCountWithParams = objc.RegisterName("readAttributeOverrunCountWithParams:")
-	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterWiFiNetworkDiagnosticsSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterWiFiNetworkDiagnosticsSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_clsMTRClusterWiFiNetworkDiagnostics                                                                          = _objcClass("MTRClusterWiFiNetworkDiagnostics")
+	_mTRClusterWiFiNetworkDiagnosticsSelResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("resetCountsWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterWiFiNetworkDiagnosticsSelResetCountsWithExpectedValuesExpectedValueIntervalCompletion              = objc.RegisterName("resetCountsWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeBSSIDWithParams                                              = objc.RegisterName("readAttributeBSSIDWithParams:")
+	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeSecurityTypeWithParams                                       = objc.RegisterName("readAttributeSecurityTypeWithParams:")
+	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeWiFiVersionWithParams                                        = objc.RegisterName("readAttributeWiFiVersionWithParams:")
+	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeChannelNumberWithParams                                      = objc.RegisterName("readAttributeChannelNumberWithParams:")
+	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeRSSIWithParams                                               = objc.RegisterName("readAttributeRSSIWithParams:")
+	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeBeaconLostCountWithParams                                    = objc.RegisterName("readAttributeBeaconLostCountWithParams:")
+	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeBeaconRxCountWithParams                                      = objc.RegisterName("readAttributeBeaconRxCountWithParams:")
+	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributePacketMulticastRxCountWithParams                             = objc.RegisterName("readAttributePacketMulticastRxCountWithParams:")
+	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributePacketMulticastTxCountWithParams                             = objc.RegisterName("readAttributePacketMulticastTxCountWithParams:")
+	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributePacketUnicastRxCountWithParams                               = objc.RegisterName("readAttributePacketUnicastRxCountWithParams:")
+	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributePacketUnicastTxCountWithParams                               = objc.RegisterName("readAttributePacketUnicastTxCountWithParams:")
+	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeCurrentMaxRateWithParams                                     = objc.RegisterName("readAttributeCurrentMaxRateWithParams:")
+	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeOverrunCountWithParams                                       = objc.RegisterName("readAttributeOverrunCountWithParams:")
+	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeGeneratedCommandListWithParams                               = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeAcceptedCommandListWithParams                                = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeAttributeListWithParams                                      = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeFeatureMapWithParams                                         = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeClusterRevisionWithParams                                    = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterWiFiNetworkDiagnosticsSelInitWithDeviceEndpointIDQueue                                             = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterWiFiNetworkDiagnosticsSelInitWithDeviceEndpointQueue                                               = objc.RegisterName("initWithDevice:endpoint:queue:")
 	_mTRClusterWiFiNetworkDiagnosticsSelResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("resetCountsWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterWiFiNetworkDiagnosticsSelResetCountsWithExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("resetCountsWithExpectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeBssidWithParams = objc.RegisterName("readAttributeBssidWithParams:")
-	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeRssiWithParams = objc.RegisterName("readAttributeRssiWithParams:")
+	_mTRClusterWiFiNetworkDiagnosticsSelResetCountsWithExpectedValuesExpectedValueIntervalCompletionHandler       = objc.RegisterName("resetCountsWithExpectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeBssidWithParams                                              = objc.RegisterName("readAttributeBssidWithParams:")
+	_mTRClusterWiFiNetworkDiagnosticsSelReadAttributeRssiWithParams                                               = objc.RegisterName("readAttributeRssiWithParams:")
 )
 
 func MTRClusterWiFiNetworkDiagnosticsFromID(id objc.ID) *MTRClusterWiFiNetworkDiagnostics {
@@ -172,13 +172,17 @@ func (o *MTRClusterWiFiNetworkDiagnostics) ReadAttributeClusterRevisionWithParam
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterWiFiNetworkDiagnostics) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterWiFiNetworkDiagnostics {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterWiFiNetworkDiagnosticsSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterWiFiNetworkDiagnosticsFromID(_ret)
 }
 
 func (o *MTRClusterWiFiNetworkDiagnostics) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterWiFiNetworkDiagnostics {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterWiFiNetworkDiagnosticsSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterWiFiNetworkDiagnosticsFromID(_ret)
 }
 
@@ -213,4 +217,3 @@ func (o *MTRClusterWiFiNetworkDiagnostics) ReadAttributeRssiWithParams(params *M
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterWiFiNetworkDiagnosticsSelReadAttributeRssiWithParams, params.Ptr())
 	return _ret
 }
-

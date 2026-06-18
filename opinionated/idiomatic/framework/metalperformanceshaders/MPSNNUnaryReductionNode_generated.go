@@ -67,7 +67,9 @@ func (x *NNUnaryReductionNode) SetClipRectSource(clipRectSource metal.MTLRegion)
 	x.inner.SetClipRectSource(clipRectSource)
 }
 
-func (x *NNUnaryReductionNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+func (x *NNUnaryReductionNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNFilterNode
+}
 
 // NNUnaryReductionNodeable is the interface implemented by [NNUnaryReductionNode], for mocking and DI.
 type NNUnaryReductionNodeable interface {
@@ -80,4 +82,3 @@ type NNUnaryReductionNodeable interface {
 }
 
 var _ NNUnaryReductionNodeable = (*NNUnaryReductionNode)(nil)
-

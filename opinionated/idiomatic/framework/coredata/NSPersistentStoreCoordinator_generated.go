@@ -307,4 +307,3 @@ type PersistentStoreCoordinatorable interface {
 }
 
 var _ PersistentStoreCoordinatorable = (*PersistentStoreCoordinator)(nil)
-

@@ -16,12 +16,12 @@ type MTLAttributeDescriptor struct {
 }
 
 var (
-	_clsMTLAttributeDescriptor = _objcClass("MTLAttributeDescriptor")
-	_mTLAttributeDescriptorSelFormat = objc.RegisterName("format")
-	_mTLAttributeDescriptorSelSetFormat = objc.RegisterName("setFormat:")
-	_mTLAttributeDescriptorSelOffset = objc.RegisterName("offset")
-	_mTLAttributeDescriptorSelSetOffset = objc.RegisterName("setOffset:")
-	_mTLAttributeDescriptorSelBufferIndex = objc.RegisterName("bufferIndex")
+	_clsMTLAttributeDescriptor               = _objcClass("MTLAttributeDescriptor")
+	_mTLAttributeDescriptorSelFormat         = objc.RegisterName("format")
+	_mTLAttributeDescriptorSelSetFormat      = objc.RegisterName("setFormat:")
+	_mTLAttributeDescriptorSelOffset         = objc.RegisterName("offset")
+	_mTLAttributeDescriptorSelSetOffset      = objc.RegisterName("setOffset:")
+	_mTLAttributeDescriptorSelBufferIndex    = objc.RegisterName("bufferIndex")
 	_mTLAttributeDescriptorSelSetBufferIndex = objc.RegisterName("setBufferIndex:")
 )
 
@@ -61,4 +61,3 @@ func (o *MTLAttributeDescriptor) BufferIndex() uint {
 func (o *MTLAttributeDescriptor) SetBufferIndex(bufferIndex uint) {
 	o.Ptr().Send(_mTLAttributeDescriptorSelSetBufferIndex, bufferIndex)
 }
-

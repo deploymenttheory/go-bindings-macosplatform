@@ -325,4 +325,3 @@ type MutableURLRequestable interface {
 }
 
 var _ MutableURLRequestable = (*MutableURLRequest)(nil)
-

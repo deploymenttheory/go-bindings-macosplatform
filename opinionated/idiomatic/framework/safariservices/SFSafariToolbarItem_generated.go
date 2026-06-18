@@ -79,4 +79,3 @@ type SafariToolbarItemable interface {
 }
 
 var _ SafariToolbarItemable = (*SafariToolbarItem)(nil)
-

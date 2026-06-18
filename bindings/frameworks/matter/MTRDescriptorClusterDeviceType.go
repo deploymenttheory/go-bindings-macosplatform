@@ -25,4 +25,3 @@ func MTRDescriptorClusterDeviceTypeFromID(id objc.ID) *MTRDescriptorClusterDevic
 	purego.Track(o)
 	return o
 }
-

@@ -61,7 +61,9 @@ func (x *EffectPropertyTransform) NormalMatrix() unsafe.Pointer {
 	return x.inner.NormalMatrix()
 }
 
-func (x *EffectPropertyTransform) asEffectProperty() *raw.GLKEffectProperty { return &x.inner.GLKEffectProperty }
+func (x *EffectPropertyTransform) asEffectProperty() *raw.GLKEffectProperty {
+	return &x.inner.GLKEffectProperty
+}
 
 // EffectPropertyTransformable is the interface implemented by [EffectPropertyTransform], for mocking and DI.
 type EffectPropertyTransformable interface {
@@ -74,4 +76,3 @@ type EffectPropertyTransformable interface {
 }
 
 var _ EffectPropertyTransformable = (*EffectPropertyTransform)(nil)
-

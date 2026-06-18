@@ -16,32 +16,32 @@ type NSPathControl struct {
 }
 
 var (
-	_clsNSPathControl = _objcClass("NSPathControl")
+	_clsNSPathControl                                       = _objcClass("NSPathControl")
 	_nSPathControlSelSetDraggingSourceOperationMaskForLocal = objc.RegisterName("setDraggingSourceOperationMask:forLocal:")
-	_nSPathControlSelIsEditable = objc.RegisterName("isEditable")
-	_nSPathControlSelSetEditable = objc.RegisterName("setEditable:")
-	_nSPathControlSelAllowedTypes = objc.RegisterName("allowedTypes")
-	_nSPathControlSelSetAllowedTypes = objc.RegisterName("setAllowedTypes:")
-	_nSPathControlSelPlaceholderString = objc.RegisterName("placeholderString")
-	_nSPathControlSelSetPlaceholderString = objc.RegisterName("setPlaceholderString:")
-	_nSPathControlSelPlaceholderAttributedString = objc.RegisterName("placeholderAttributedString")
-	_nSPathControlSelSetPlaceholderAttributedString = objc.RegisterName("setPlaceholderAttributedString:")
-	_nSPathControlSelURL = objc.RegisterName("URL")
-	_nSPathControlSelSetURL = objc.RegisterName("setURL:")
-	_nSPathControlSelDoubleAction = objc.RegisterName("doubleAction")
-	_nSPathControlSelSetDoubleAction = objc.RegisterName("setDoubleAction:")
-	_nSPathControlSelPathStyle = objc.RegisterName("pathStyle")
-	_nSPathControlSelSetPathStyle = objc.RegisterName("setPathStyle:")
-	_nSPathControlSelClickedPathItem = objc.RegisterName("clickedPathItem")
-	_nSPathControlSelPathItems = objc.RegisterName("pathItems")
-	_nSPathControlSelSetPathItems = objc.RegisterName("setPathItems:")
-	_nSPathControlSelBackgroundColor = objc.RegisterName("backgroundColor")
-	_nSPathControlSelSetBackgroundColor = objc.RegisterName("setBackgroundColor:")
-	_nSPathControlSelDelegate = objc.RegisterName("delegate")
-	_nSPathControlSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSPathControlSelClickedPathComponentCell = objc.RegisterName("clickedPathComponentCell")
-	_nSPathControlSelPathComponentCells = objc.RegisterName("pathComponentCells")
-	_nSPathControlSelSetPathComponentCells = objc.RegisterName("setPathComponentCells:")
+	_nSPathControlSelIsEditable                             = objc.RegisterName("isEditable")
+	_nSPathControlSelSetEditable                            = objc.RegisterName("setEditable:")
+	_nSPathControlSelAllowedTypes                           = objc.RegisterName("allowedTypes")
+	_nSPathControlSelSetAllowedTypes                        = objc.RegisterName("setAllowedTypes:")
+	_nSPathControlSelPlaceholderString                      = objc.RegisterName("placeholderString")
+	_nSPathControlSelSetPlaceholderString                   = objc.RegisterName("setPlaceholderString:")
+	_nSPathControlSelPlaceholderAttributedString            = objc.RegisterName("placeholderAttributedString")
+	_nSPathControlSelSetPlaceholderAttributedString         = objc.RegisterName("setPlaceholderAttributedString:")
+	_nSPathControlSelURL                                    = objc.RegisterName("URL")
+	_nSPathControlSelSetURL                                 = objc.RegisterName("setURL:")
+	_nSPathControlSelDoubleAction                           = objc.RegisterName("doubleAction")
+	_nSPathControlSelSetDoubleAction                        = objc.RegisterName("setDoubleAction:")
+	_nSPathControlSelPathStyle                              = objc.RegisterName("pathStyle")
+	_nSPathControlSelSetPathStyle                           = objc.RegisterName("setPathStyle:")
+	_nSPathControlSelClickedPathItem                        = objc.RegisterName("clickedPathItem")
+	_nSPathControlSelPathItems                              = objc.RegisterName("pathItems")
+	_nSPathControlSelSetPathItems                           = objc.RegisterName("setPathItems:")
+	_nSPathControlSelBackgroundColor                        = objc.RegisterName("backgroundColor")
+	_nSPathControlSelSetBackgroundColor                     = objc.RegisterName("setBackgroundColor:")
+	_nSPathControlSelDelegate                               = objc.RegisterName("delegate")
+	_nSPathControlSelSetDelegate                            = objc.RegisterName("setDelegate:")
+	_nSPathControlSelClickedPathComponentCell               = objc.RegisterName("clickedPathComponentCell")
+	_nSPathControlSelPathComponentCells                     = objc.RegisterName("pathComponentCells")
+	_nSPathControlSelSetPathComponentCells                  = objc.RegisterName("setPathComponentCells:")
 )
 
 func NSPathControlFromID(id objc.ID) *NSPathControl {
@@ -78,7 +78,9 @@ func (o *NSPathControl) SetAllowedTypes(allowedTypes *foundation.NSArray[*founda
 
 func (o *NSPathControl) PlaceholderString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathControlSelPlaceholderString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -88,7 +90,9 @@ func (o *NSPathControl) SetPlaceholderString(placeholderString *foundation.NSStr
 
 func (o *NSPathControl) PlaceholderAttributedString() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathControlSelPlaceholderAttributedString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
@@ -98,7 +102,9 @@ func (o *NSPathControl) SetPlaceholderAttributedString(placeholderAttributedStri
 
 func (o *NSPathControl) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathControlSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -126,13 +132,17 @@ func (o *NSPathControl) SetPathStyle(pathStyle NSPathStyle) {
 
 func (o *NSPathControl) ClickedPathItem() *NSPathControlItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathControlSelClickedPathItem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPathControlItemFromID(_ret)
 }
 
 func (o *NSPathControl) PathItems() *foundation.NSArray[*NSPathControlItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathControlSelPathItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSPathControlItem](_ret)
 }
 
@@ -142,7 +152,9 @@ func (o *NSPathControl) SetPathItems(pathItems *foundation.NSArray[*NSPathContro
 
 func (o *NSPathControl) BackgroundColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathControlSelBackgroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -162,14 +174,18 @@ func (o *NSPathControl) SetDelegate(delegate NSPathControlDelegate) {
 // Deprecated: Use the clickedPathItem property instead
 func (o *NSPathControl) ClickedPathComponentCell() *NSPathComponentCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathControlSelClickedPathComponentCell)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPathComponentCellFromID(_ret)
 }
 
 // Deprecated: Use the pathItems property instead
 func (o *NSPathControl) PathComponentCells() *foundation.NSArray[*NSPathComponentCell] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathControlSelPathComponentCells)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSPathComponentCell](_ret)
 }
 
@@ -177,4 +193,3 @@ func (o *NSPathControl) PathComponentCells() *foundation.NSArray[*NSPathComponen
 func (o *NSPathControl) SetPathComponentCells(cells *foundation.NSArray[*NSPathComponentCell]) {
 	o.Ptr().Send(_nSPathControlSelSetPathComponentCells, cells.Ptr())
 }
-

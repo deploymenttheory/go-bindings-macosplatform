@@ -16,12 +16,12 @@ type PHASEGroupPresetSetting struct {
 }
 
 var (
-	_clsPHASEGroupPresetSetting = _objcClass("PHASEGroupPresetSetting")
+	_clsPHASEGroupPresetSetting                                           = _objcClass("PHASEGroupPresetSetting")
 	_pHASEGroupPresetSettingSelInitWithGainRateGainCurveTypeRateCurveType = objc.RegisterName("initWithGain:rate:gainCurveType:rateCurveType:")
-	_pHASEGroupPresetSettingSelGain = objc.RegisterName("gain")
-	_pHASEGroupPresetSettingSelRate = objc.RegisterName("rate")
-	_pHASEGroupPresetSettingSelGainCurveType = objc.RegisterName("gainCurveType")
-	_pHASEGroupPresetSettingSelRateCurveType = objc.RegisterName("rateCurveType")
+	_pHASEGroupPresetSettingSelGain                                       = objc.RegisterName("gain")
+	_pHASEGroupPresetSettingSelRate                                       = objc.RegisterName("rate")
+	_pHASEGroupPresetSettingSelGainCurveType                              = objc.RegisterName("gainCurveType")
+	_pHASEGroupPresetSettingSelRateCurveType                              = objc.RegisterName("rateCurveType")
 )
 
 func PHASEGroupPresetSettingFromID(id objc.ID) *PHASEGroupPresetSetting {
@@ -37,7 +37,9 @@ func PHASEGroupPresetSettingFromID(id objc.ID) *PHASEGroupPresetSetting {
 // @method initWithGain:rate:gainCurveType:rateCurveType @abstract Initialize the PHASEGroupPresetSetting object with an existing PHASEGroup object. @param gain The main gain setting to apply to the group. Values are clamped to the range [0, 1]. Default value is 1. @param rate The playback rate setting to apply to the group. Values are clamped to the range [0.25, 4]. Default value is 1. @param gainCurveType The type of curve to apply to the gain as the preset changes to this new setting. @param rateCurveType The type of curve to apply to the rate as the preset changes to this new setting.
 func (o *PHASEGroupPresetSetting) InitWithGainRateGainCurveTypeRateCurveType(gain float64, rate float64, gainCurveType PHASECurveType, rateCurveType PHASECurveType) *PHASEGroupPresetSetting {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEGroupPresetSettingSelInitWithGainRateGainCurveTypeRateCurveType, gain, rate, gainCurveType, rateCurveType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEGroupPresetSettingFromID(_ret)
 }
 
@@ -64,4 +66,3 @@ func (o *PHASEGroupPresetSetting) RateCurveType() PHASECurveType {
 	_ret := objc.Send[PHASECurveType](o.Ptr(), _pHASEGroupPresetSettingSelRateCurveType)
 	return _ret
 }
-

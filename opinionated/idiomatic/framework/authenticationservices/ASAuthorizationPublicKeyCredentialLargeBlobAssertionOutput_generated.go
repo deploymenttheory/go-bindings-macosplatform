@@ -16,7 +16,9 @@ type AuthorizationPublicKeyCredentialLargeBlobAssertionOutput struct {
 }
 
 // Unwrap returns the underlying [raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput].
-func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) Unwrap() *raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput { return x.inner }
+func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) Unwrap() *raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -54,4 +56,3 @@ type AuthorizationPublicKeyCredentialLargeBlobAssertionOutputable interface {
 }
 
 var _ AuthorizationPublicKeyCredentialLargeBlobAssertionOutputable = (*AuthorizationPublicKeyCredentialLargeBlobAssertionOutput)(nil)
-

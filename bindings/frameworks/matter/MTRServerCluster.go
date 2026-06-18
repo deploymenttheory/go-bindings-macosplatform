@@ -16,16 +16,16 @@ type MTRServerCluster struct {
 }
 
 var (
-	_clsMTRServerCluster = _objcClass("MTRServerCluster")
+	_clsMTRServerCluster                          = _objcClass("MTRServerCluster")
 	_mTRServerClusterSelInitWithClusterIDRevision = objc.RegisterName("initWithClusterID:revision:")
-	_mTRServerClusterSelAddAccessGrant = objc.RegisterName("addAccessGrant:")
-	_mTRServerClusterSelRemoveAccessGrant = objc.RegisterName("removeAccessGrant:")
-	_mTRServerClusterSelAddAttribute = objc.RegisterName("addAttribute:")
-	_mTRServerClusterSelNewDescriptorCluster = objc.RegisterName("newDescriptorCluster")
-	_mTRServerClusterSelClusterID = objc.RegisterName("clusterID")
-	_mTRServerClusterSelClusterRevision = objc.RegisterName("clusterRevision")
-	_mTRServerClusterSelAccessGrants = objc.RegisterName("accessGrants")
-	_mTRServerClusterSelAttributes = objc.RegisterName("attributes")
+	_mTRServerClusterSelAddAccessGrant            = objc.RegisterName("addAccessGrant:")
+	_mTRServerClusterSelRemoveAccessGrant         = objc.RegisterName("removeAccessGrant:")
+	_mTRServerClusterSelAddAttribute              = objc.RegisterName("addAttribute:")
+	_mTRServerClusterSelNewDescriptorCluster      = objc.RegisterName("newDescriptorCluster")
+	_mTRServerClusterSelClusterID                 = objc.RegisterName("clusterID")
+	_mTRServerClusterSelClusterRevision           = objc.RegisterName("clusterRevision")
+	_mTRServerClusterSelAccessGrants              = objc.RegisterName("accessGrants")
+	_mTRServerClusterSelAttributes                = objc.RegisterName("attributes")
 )
 
 func MTRServerClusterFromID(id objc.ID) *MTRServerCluster {
@@ -41,7 +41,9 @@ func MTRServerClusterFromID(id objc.ID) *MTRServerCluster {
 // The provided clusterID must not be MTRClusterIDTypeDescriptorID; see newDescriptorCluster. Otherwise, it must be a valid cluster identifier.  That means: * In the range 0-0x7FFF for standard clusters. * In the range 0xVVVVFC00-0xVVVVFFFE for vendor-specific clusters, where VVVV is the vendor identifier. The provided revision must be in the range 1-65535.
 func (o *MTRServerCluster) InitWithClusterIDRevision(clusterID *foundation.NSNumber, revision *foundation.NSNumber) *MTRServerCluster {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRServerClusterSelInitWithClusterIDRevision, clusterID.Ptr(), revision.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRServerClusterFromID(_ret)
 }
 
@@ -69,27 +71,34 @@ func MTRServerClusterNewDescriptorCluster() *MTRServerCluster {
 
 func (o *MTRServerCluster) ClusterID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRServerClusterSelClusterID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRServerCluster) ClusterRevision() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRServerClusterSelClusterRevision)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // The list of entities that are allowed to access this cluster instance.  This list is in addition to any endpoint-wide access grants that exist. Defaults to empty list, which means no additional access grants.
 func (o *MTRServerCluster) AccessGrants() *foundation.NSArray[*MTRAccessGrant] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRServerClusterSelAccessGrants)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MTRAccessGrant](_ret)
 }
 
 // The list of attributes supported by the cluster.
 func (o *MTRServerCluster) Attributes() *foundation.NSArray[*MTRServerAttribute] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRServerClusterSelAttributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MTRServerAttribute](_ret)
 }
-

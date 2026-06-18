@@ -116,9 +116,13 @@ func (x *MutableAttributedString) AppendLocalizedFormat(format *raw.NSAttributed
 	x.inner.AppendLocalizedFormat(format)
 }
 
-func (x *MutableAttributedString) asAttributedString() *raw.NSAttributedString { return &x.inner.NSAttributedString }
+func (x *MutableAttributedString) asAttributedString() *raw.NSAttributedString {
+	return &x.inner.NSAttributedString
+}
 
-func (x *MutableAttributedString) asObject() *raw.NSObject { return &x.inner.NSAttributedString.NSObject }
+func (x *MutableAttributedString) asObject() *raw.NSObject {
+	return &x.inner.NSAttributedString.NSObject
+}
 
 // MutableAttributedStringable is the interface implemented by [MutableAttributedString], for mocking and DI.
 type MutableAttributedStringable interface {
@@ -141,4 +145,3 @@ type MutableAttributedStringable interface {
 }
 
 var _ MutableAttributedStringable = (*MutableAttributedString)(nil)
-

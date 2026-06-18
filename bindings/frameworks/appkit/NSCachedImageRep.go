@@ -17,11 +17,11 @@ type NSCachedImageRep struct {
 }
 
 var (
-	_clsNSCachedImageRep = _objcClass("NSCachedImageRep")
-	_nSCachedImageRepSelInitWithWindowRect = objc.RegisterName("initWithWindow:rect:")
+	_clsNSCachedImageRep                               = _objcClass("NSCachedImageRep")
+	_nSCachedImageRepSelInitWithWindowRect             = objc.RegisterName("initWithWindow:rect:")
 	_nSCachedImageRepSelInitWithSizeDepthSeparateAlpha = objc.RegisterName("initWithSize:depth:separate:alpha:")
-	_nSCachedImageRepSelWindow = objc.RegisterName("window")
-	_nSCachedImageRepSelRect = objc.RegisterName("rect")
+	_nSCachedImageRepSelWindow                         = objc.RegisterName("window")
+	_nSCachedImageRepSelRect                           = objc.RegisterName("rect")
 )
 
 func NSCachedImageRepFromID(id objc.ID) *NSCachedImageRep {
@@ -49,7 +49,9 @@ func (o *NSCachedImageRep) InitWithSizeDepthSeparateAlpha(size corefoundation.CG
 // Deprecated: since macOS 10.6.
 func (o *NSCachedImageRep) Window() *NSWindow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCachedImageRepSelWindow)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWindowFromID(_ret)
 }
 
@@ -58,4 +60,3 @@ func (o *NSCachedImageRep) Rect() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSCachedImageRepSelRect)
 	return _ret
 }
-

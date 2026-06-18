@@ -15,17 +15,17 @@ type NSMutableString struct {
 }
 
 var (
-	_clsNSMutableString = _objcClass("NSMutableString")
-	_nSMutableStringSelReplaceCharactersInRangeWithString = objc.RegisterName("replaceCharactersInRange:withString:")
-	_nSMutableStringSelInsertStringAtIndex = objc.RegisterName("insertString:atIndex:")
-	_nSMutableStringSelDeleteCharactersInRange = objc.RegisterName("deleteCharactersInRange:")
-	_nSMutableStringSelAppendString = objc.RegisterName("appendString:")
-	_nSMutableStringSelAppendFormat = objc.RegisterName("appendFormat:")
-	_nSMutableStringSelSetString = objc.RegisterName("setString:")
+	_clsNSMutableString                                                 = _objcClass("NSMutableString")
+	_nSMutableStringSelReplaceCharactersInRangeWithString               = objc.RegisterName("replaceCharactersInRange:withString:")
+	_nSMutableStringSelInsertStringAtIndex                              = objc.RegisterName("insertString:atIndex:")
+	_nSMutableStringSelDeleteCharactersInRange                          = objc.RegisterName("deleteCharactersInRange:")
+	_nSMutableStringSelAppendString                                     = objc.RegisterName("appendString:")
+	_nSMutableStringSelAppendFormat                                     = objc.RegisterName("appendFormat:")
+	_nSMutableStringSelSetString                                        = objc.RegisterName("setString:")
 	_nSMutableStringSelReplaceOccurrencesOfStringWithStringOptionsRange = objc.RegisterName("replaceOccurrencesOfString:withString:options:range:")
-	_nSMutableStringSelApplyTransformReverseRangeUpdatedRange = objc.RegisterName("applyTransform:reverse:range:updatedRange:")
-	_nSMutableStringSelInitWithCapacity = objc.RegisterName("initWithCapacity:")
-	_nSMutableStringSelStringWithCapacity = objc.RegisterName("stringWithCapacity:")
+	_nSMutableStringSelApplyTransformReverseRangeUpdatedRange           = objc.RegisterName("applyTransform:reverse:range:updatedRange:")
+	_nSMutableStringSelInitWithCapacity                                 = objc.RegisterName("initWithCapacity:")
+	_nSMutableStringSelStringWithCapacity                               = objc.RegisterName("stringWithCapacity:")
 )
 
 func NSMutableStringFromID(id objc.ID) *NSMutableString {
@@ -74,13 +74,16 @@ func (o *NSMutableString) ApplyTransformReverseRangeUpdatedRange(transform *NSSt
 
 func (o *NSMutableString) InitWithCapacity(capacity uint) *NSMutableString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableStringSelInitWithCapacity, capacity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableStringFromID(_ret)
 }
 
 func NSMutableStringStringWithCapacity(capacity uint) *NSMutableString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableString), _nSMutableStringSelStringWithCapacity, capacity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableStringFromID(_ret)
 }
-

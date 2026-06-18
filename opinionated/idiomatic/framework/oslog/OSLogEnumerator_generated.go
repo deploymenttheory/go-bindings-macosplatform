@@ -41,4 +41,3 @@ type LogEnumeratorable interface {
 }
 
 var _ LogEnumeratorable = (*LogEnumerator)(nil)
-

@@ -247,4 +247,3 @@ type IOBluetoothHandsFreeable interface {
 }
 
 var _ IOBluetoothHandsFreeable = (*IOBluetoothHandsFree)(nil)
-

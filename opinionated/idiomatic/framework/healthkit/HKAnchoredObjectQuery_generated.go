@@ -79,4 +79,3 @@ type AnchoredObjectQueryable interface {
 }
 
 var _ AnchoredObjectQueryable = (*AnchoredObjectQuery)(nil)
-

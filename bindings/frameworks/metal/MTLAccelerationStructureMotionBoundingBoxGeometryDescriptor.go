@@ -16,14 +16,14 @@ type MTLAccelerationStructureMotionBoundingBoxGeometryDescriptor struct {
 }
 
 var (
-	_clsMTLAccelerationStructureMotionBoundingBoxGeometryDescriptor = _objcClass("MTLAccelerationStructureMotionBoundingBoxGeometryDescriptor")
-	_mTLAccelerationStructureMotionBoundingBoxGeometryDescriptorSelDescriptor = objc.RegisterName("descriptor")
-	_mTLAccelerationStructureMotionBoundingBoxGeometryDescriptorSelBoundingBoxBuffers = objc.RegisterName("boundingBoxBuffers")
+	_clsMTLAccelerationStructureMotionBoundingBoxGeometryDescriptor                      = _objcClass("MTLAccelerationStructureMotionBoundingBoxGeometryDescriptor")
+	_mTLAccelerationStructureMotionBoundingBoxGeometryDescriptorSelDescriptor            = objc.RegisterName("descriptor")
+	_mTLAccelerationStructureMotionBoundingBoxGeometryDescriptorSelBoundingBoxBuffers    = objc.RegisterName("boundingBoxBuffers")
 	_mTLAccelerationStructureMotionBoundingBoxGeometryDescriptorSelSetBoundingBoxBuffers = objc.RegisterName("setBoundingBoxBuffers:")
-	_mTLAccelerationStructureMotionBoundingBoxGeometryDescriptorSelBoundingBoxStride = objc.RegisterName("boundingBoxStride")
-	_mTLAccelerationStructureMotionBoundingBoxGeometryDescriptorSelSetBoundingBoxStride = objc.RegisterName("setBoundingBoxStride:")
-	_mTLAccelerationStructureMotionBoundingBoxGeometryDescriptorSelBoundingBoxCount = objc.RegisterName("boundingBoxCount")
-	_mTLAccelerationStructureMotionBoundingBoxGeometryDescriptorSelSetBoundingBoxCount = objc.RegisterName("setBoundingBoxCount:")
+	_mTLAccelerationStructureMotionBoundingBoxGeometryDescriptorSelBoundingBoxStride     = objc.RegisterName("boundingBoxStride")
+	_mTLAccelerationStructureMotionBoundingBoxGeometryDescriptorSelSetBoundingBoxStride  = objc.RegisterName("setBoundingBoxStride:")
+	_mTLAccelerationStructureMotionBoundingBoxGeometryDescriptorSelBoundingBoxCount      = objc.RegisterName("boundingBoxCount")
+	_mTLAccelerationStructureMotionBoundingBoxGeometryDescriptorSelSetBoundingBoxCount   = objc.RegisterName("setBoundingBoxCount:")
 )
 
 func MTLAccelerationStructureMotionBoundingBoxGeometryDescriptorFromID(id objc.ID) *MTLAccelerationStructureMotionBoundingBoxGeometryDescriptor {
@@ -38,14 +38,18 @@ func MTLAccelerationStructureMotionBoundingBoxGeometryDescriptorFromID(id objc.I
 
 func MTLAccelerationStructureMotionBoundingBoxGeometryDescriptorDescriptor() *MTLAccelerationStructureMotionBoundingBoxGeometryDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLAccelerationStructureMotionBoundingBoxGeometryDescriptor), _mTLAccelerationStructureMotionBoundingBoxGeometryDescriptorSelDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLAccelerationStructureMotionBoundingBoxGeometryDescriptorFromID(_ret)
 }
 
 // @brief Bounding box buffer containing MTLAxisAlignedBoundingBoxes similar to what MTLAccelerationStructureBoundingBoxGeometryDescriptor has but array of the values.
 func (o *MTLAccelerationStructureMotionBoundingBoxGeometryDescriptor) BoundingBoxBuffers() *foundation.NSArray[*MTLMotionKeyframeData] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLAccelerationStructureMotionBoundingBoxGeometryDescriptorSelBoundingBoxBuffers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MTLMotionKeyframeData](_ret)
 }
 
@@ -72,4 +76,3 @@ func (o *MTLAccelerationStructureMotionBoundingBoxGeometryDescriptor) BoundingBo
 func (o *MTLAccelerationStructureMotionBoundingBoxGeometryDescriptor) SetBoundingBoxCount(boundingBoxCount uint) {
 	o.Ptr().Send(_mTLAccelerationStructureMotionBoundingBoxGeometryDescriptorSelSetBoundingBoxCount, boundingBoxCount)
 }
-

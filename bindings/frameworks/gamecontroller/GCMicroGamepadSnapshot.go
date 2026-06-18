@@ -17,11 +17,11 @@ type GCMicroGamepadSnapshot struct {
 }
 
 var (
-	_clsGCMicroGamepadSnapshot = _objcClass("GCMicroGamepadSnapshot")
-	_gCMicroGamepadSnapshotSelInitWithSnapshotData = objc.RegisterName("initWithSnapshotData:")
+	_clsGCMicroGamepadSnapshot                               = _objcClass("GCMicroGamepadSnapshot")
+	_gCMicroGamepadSnapshotSelInitWithSnapshotData           = objc.RegisterName("initWithSnapshotData:")
 	_gCMicroGamepadSnapshotSelInitWithControllerSnapshotData = objc.RegisterName("initWithController:snapshotData:")
-	_gCMicroGamepadSnapshotSelSnapshotData = objc.RegisterName("snapshotData")
-	_gCMicroGamepadSnapshotSelSetSnapshotData = objc.RegisterName("setSnapshotData:")
+	_gCMicroGamepadSnapshotSelSnapshotData                   = objc.RegisterName("snapshotData")
+	_gCMicroGamepadSnapshotSelSetSnapshotData                = objc.RegisterName("setSnapshotData:")
 )
 
 func GCMicroGamepadSnapshotFromID(id objc.ID) *GCMicroGamepadSnapshot {
@@ -36,24 +36,29 @@ func GCMicroGamepadSnapshotFromID(id objc.ID) *GCMicroGamepadSnapshot {
 
 func (o *GCMicroGamepadSnapshot) InitWithSnapshotData(data *foundation.NSData) *GCMicroGamepadSnapshot {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCMicroGamepadSnapshotSelInitWithSnapshotData, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCMicroGamepadSnapshotFromID(_ret)
 }
 
 func (o *GCMicroGamepadSnapshot) InitWithControllerSnapshotData(controller *GCController, data *foundation.NSData) *GCMicroGamepadSnapshot {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCMicroGamepadSnapshotSelInitWithControllerSnapshotData, controller.Ptr(), data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCMicroGamepadSnapshotFromID(_ret)
 }
 
 // Deprecated: Use the -[GCController controllerWithMicroGamepad] method instead
 func (o *GCMicroGamepadSnapshot) SnapshotData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCMicroGamepadSnapshotSelSnapshotData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *GCMicroGamepadSnapshot) SetSnapshotData(snapshotData *foundation.NSData) {
 	o.Ptr().Send(_gCMicroGamepadSnapshotSelSetSnapshotData, snapshotData.Ptr())
 }
-

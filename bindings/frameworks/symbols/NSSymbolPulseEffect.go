@@ -15,9 +15,9 @@ type NSSymbolPulseEffect struct {
 }
 
 var (
-	_clsNSSymbolPulseEffect = _objcClass("NSSymbolPulseEffect")
-	_nSSymbolPulseEffectSelEffect = objc.RegisterName("effect")
-	_nSSymbolPulseEffectSelEffectWithByLayer = objc.RegisterName("effectWithByLayer")
+	_clsNSSymbolPulseEffect                      = _objcClass("NSSymbolPulseEffect")
+	_nSSymbolPulseEffectSelEffect                = objc.RegisterName("effect")
+	_nSSymbolPulseEffectSelEffectWithByLayer     = objc.RegisterName("effectWithByLayer")
 	_nSSymbolPulseEffectSelEffectWithWholeSymbol = objc.RegisterName("effectWithWholeSymbol")
 )
 
@@ -34,21 +34,26 @@ func NSSymbolPulseEffectFromID(id objc.ID) *NSSymbolPulseEffect {
 // The default pulse effect, determined by the system.
 func NSSymbolPulseEffectEffect() *NSSymbolPulseEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolPulseEffect), _nSSymbolPulseEffectSelEffect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolPulseEffectFromID(_ret)
 }
 
 // Returns a copy of the effect that only animates annotated pulse layers.
 func (o *NSSymbolPulseEffect) EffectWithByLayer() *NSSymbolPulseEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolPulseEffectSelEffectWithByLayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolPulseEffectFromID(_ret)
 }
 
 // Returns a copy of the effect that animates all layers of the symbol simultaneously.
 func (o *NSSymbolPulseEffect) EffectWithWholeSymbol() *NSSymbolPulseEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolPulseEffectSelEffectWithWholeSymbol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolPulseEffectFromID(_ret)
 }
-

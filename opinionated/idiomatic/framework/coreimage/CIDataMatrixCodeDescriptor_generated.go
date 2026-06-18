@@ -57,7 +57,9 @@ func (x *DataMatrixCodeDescriptor) EccVersion() raw.CIDataMatrixCodeECCVersion {
 	return x.inner.EccVersion()
 }
 
-func (x *DataMatrixCodeDescriptor) asBarcodeDescriptor() *raw.CIBarcodeDescriptor { return &x.inner.CIBarcodeDescriptor }
+func (x *DataMatrixCodeDescriptor) asBarcodeDescriptor() *raw.CIBarcodeDescriptor {
+	return &x.inner.CIBarcodeDescriptor
+}
 
 // DataMatrixCodeDescriptorable is the interface implemented by [DataMatrixCodeDescriptor], for mocking and DI.
 type DataMatrixCodeDescriptorable interface {
@@ -69,4 +71,3 @@ type DataMatrixCodeDescriptorable interface {
 }
 
 var _ DataMatrixCodeDescriptorable = (*DataMatrixCodeDescriptor)(nil)
-

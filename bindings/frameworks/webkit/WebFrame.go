@@ -19,29 +19,29 @@ type WebFrame struct {
 }
 
 var (
-	_clsWebFrame = _objcClass("WebFrame")
-	_webFrameSelInitWithNameWebFrameViewWebView = objc.RegisterName("initWithName:webFrameView:webView:")
-	_webFrameSelLoadRequest = objc.RegisterName("loadRequest:")
-	_webFrameSelLoadDataMIMETypeTextEncodingNameBaseURL = objc.RegisterName("loadData:MIMEType:textEncodingName:baseURL:")
-	_webFrameSelLoadHTMLStringBaseURL = objc.RegisterName("loadHTMLString:baseURL:")
+	_clsWebFrame                                                = _objcClass("WebFrame")
+	_webFrameSelInitWithNameWebFrameViewWebView                 = objc.RegisterName("initWithName:webFrameView:webView:")
+	_webFrameSelLoadRequest                                     = objc.RegisterName("loadRequest:")
+	_webFrameSelLoadDataMIMETypeTextEncodingNameBaseURL         = objc.RegisterName("loadData:MIMEType:textEncodingName:baseURL:")
+	_webFrameSelLoadHTMLStringBaseURL                           = objc.RegisterName("loadHTMLString:baseURL:")
 	_webFrameSelLoadAlternateHTMLStringBaseURLForUnreachableURL = objc.RegisterName("loadAlternateHTMLString:baseURL:forUnreachableURL:")
-	_webFrameSelLoadArchive = objc.RegisterName("loadArchive:")
-	_webFrameSelStopLoading = objc.RegisterName("stopLoading")
-	_webFrameSelReload = objc.RegisterName("reload")
-	_webFrameSelReloadFromOrigin = objc.RegisterName("reloadFromOrigin")
-	_webFrameSelFindFrameNamed = objc.RegisterName("findFrameNamed:")
-	_webFrameSelName = objc.RegisterName("name")
-	_webFrameSelWebView = objc.RegisterName("webView")
-	_webFrameSelFrameView = objc.RegisterName("frameView")
-	_webFrameSelDOMDocument = objc.RegisterName("DOMDocument")
-	_webFrameSelFrameElement = objc.RegisterName("frameElement")
-	_webFrameSelDataSource = objc.RegisterName("dataSource")
-	_webFrameSelProvisionalDataSource = objc.RegisterName("provisionalDataSource")
-	_webFrameSelParentFrame = objc.RegisterName("parentFrame")
-	_webFrameSelChildFrames = objc.RegisterName("childFrames")
-	_webFrameSelWindowObject = objc.RegisterName("windowObject")
-	_webFrameSelGlobalContext = objc.RegisterName("globalContext")
-	_webFrameSelJavaScriptContext = objc.RegisterName("javaScriptContext")
+	_webFrameSelLoadArchive                                     = objc.RegisterName("loadArchive:")
+	_webFrameSelStopLoading                                     = objc.RegisterName("stopLoading")
+	_webFrameSelReload                                          = objc.RegisterName("reload")
+	_webFrameSelReloadFromOrigin                                = objc.RegisterName("reloadFromOrigin")
+	_webFrameSelFindFrameNamed                                  = objc.RegisterName("findFrameNamed:")
+	_webFrameSelName                                            = objc.RegisterName("name")
+	_webFrameSelWebView                                         = objc.RegisterName("webView")
+	_webFrameSelFrameView                                       = objc.RegisterName("frameView")
+	_webFrameSelDOMDocument                                     = objc.RegisterName("DOMDocument")
+	_webFrameSelFrameElement                                    = objc.RegisterName("frameElement")
+	_webFrameSelDataSource                                      = objc.RegisterName("dataSource")
+	_webFrameSelProvisionalDataSource                           = objc.RegisterName("provisionalDataSource")
+	_webFrameSelParentFrame                                     = objc.RegisterName("parentFrame")
+	_webFrameSelChildFrames                                     = objc.RegisterName("childFrames")
+	_webFrameSelWindowObject                                    = objc.RegisterName("windowObject")
+	_webFrameSelGlobalContext                                   = objc.RegisterName("globalContext")
+	_webFrameSelJavaScriptContext                               = objc.RegisterName("javaScriptContext")
 )
 
 func WebFrameFromID(id objc.ID) *WebFrame {
@@ -57,7 +57,9 @@ func WebFrameFromID(id objc.ID) *WebFrame {
 // @method initWithName:webFrameView:webView: @abstract The designated initializer of WebFrame. @discussion WebFrames are normally created for you by the WebView.  You should not need to invoke this method directly. @param name The name of the frame. @param view The WebFrameView for the frame. @param webView The WebView that manages the frame. @result Returns an initialized WebFrame.
 func (o *WebFrame) InitWithNameWebFrameViewWebView(name *foundation.NSString, view *WebFrameView, webView *WebView) *WebFrame {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webFrameSelInitWithNameWebFrameViewWebView, name.Ptr(), view.Ptr(), webView.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebFrameFromID(_ret)
 }
 
@@ -104,63 +106,81 @@ func (o *WebFrame) ReloadFromOrigin() {
 // @method findFrameNamed: @discussion This method returns a frame with the given name. findFrameNamed returns self for _self and _current, the parent frame for _parent and the main frame for _top. findFrameNamed returns self for _parent and _top if the receiver is the mainFrame. findFrameNamed first searches from the current frame to all descending frames then the rest of the frames in the WebView. If still not found, findFrameNamed searches the frames of the other WebViews. @param name The name of the frame to find. @result The frame matching the provided name. nil if the frame is not found.
 func (o *WebFrame) FindFrameNamed(name *foundation.NSString) *WebFrame {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webFrameSelFindFrameNamed, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebFrameFromID(_ret)
 }
 
 // @property name @abstract The frame name.
 func (o *WebFrame) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webFrameSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property webView @abstract The WebView for the document that includes this frame.
 func (o *WebFrame) WebView() *WebView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webFrameSelWebView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebViewFromID(_ret)
 }
 
 // @property frameView @abstract The WebFrameView for this frame.
 func (o *WebFrame) FrameView() *WebFrameView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webFrameSelFrameView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebFrameViewFromID(_ret)
 }
 
 // @property DOMDocument @abstract The DOM document of the frame. @description Returns nil if the frame does not contain a DOM document such as a standalone image.
 func (o *WebFrame) DOMDocument() *DOMDocument {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webFrameSelDOMDocument)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMDocumentFromID(_ret)
 }
 
 // @property frameElement @abstract The frame element of the frame. @description The class of the result is either DOMHTMLFrameElement, DOMHTMLIFrameElement or DOMHTMLObjectElement. Returns nil if the frame is the main frame since there is no frame element for the frame in this case.
 func (o *WebFrame) FrameElement() *DOMHTMLElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webFrameSelFrameElement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMHTMLElementFromID(_ret)
 }
 
 // @property dataSource @abstract The datasource for this frame. @discussion Returns the committed data source.  Will return nil if the provisional data source hasn't yet been loaded.
 func (o *WebFrame) DataSource() *WebDataSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webFrameSelDataSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebDataSourceFromID(_ret)
 }
 
 // @property provisionalDataSource @abstract The provisional datasource of this frame. @discussion Will return the provisional data source.  The provisional data source will be nil if no data source has been set on the frame, or the data source has successfully transitioned to the committed data source.
 func (o *WebFrame) ProvisionalDataSource() *WebDataSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webFrameSelProvisionalDataSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebDataSourceFromID(_ret)
 }
 
 // @property parentFrame @abstract The frame containing this frame, or nil if this is a top level frame.
 func (o *WebFrame) ParentFrame() *WebFrame {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webFrameSelParentFrame)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebFrameFromID(_ret)
 }
 
@@ -173,7 +193,9 @@ func (o *WebFrame) ChildFrames() *foundation.NSArray[objc.ID] {
 // @property windowObject @abstract The WebScriptObject representing the frame's JavaScript window object.
 func (o *WebFrame) WindowObject() *WebScriptObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webFrameSelWindowObject)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebScriptObjectFromID(_ret)
 }
 
@@ -186,7 +208,8 @@ func (o *WebFrame) GlobalContext() unsafe.Pointer {
 // @property javaScriptContext @abstract The frame's global JavaScript execution context. @discussion Use this method to bridge between the WebKit and Objective-C JavaScriptCore API.
 func (o *WebFrame) JavaScriptContext() *javascriptcore.JSContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webFrameSelJavaScriptContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return javascriptcore.JSContextFromID(_ret)
 }
-

@@ -247,4 +247,3 @@ type MutableOrderedSetable interface {
 }
 
 var _ MutableOrderedSetable = (*MutableOrderedSet)(nil)
-

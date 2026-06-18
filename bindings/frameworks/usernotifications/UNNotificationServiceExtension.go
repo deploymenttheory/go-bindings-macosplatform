@@ -16,9 +16,9 @@ type UNNotificationServiceExtension struct {
 }
 
 var (
-	_clsUNNotificationServiceExtension = _objcClass("UNNotificationServiceExtension")
+	_clsUNNotificationServiceExtension                                                = _objcClass("UNNotificationServiceExtension")
 	_uNNotificationServiceExtensionSelDidReceiveNotificationRequestWithContentHandler = objc.RegisterName("didReceiveNotificationRequest:withContentHandler:")
-	_uNNotificationServiceExtensionSelServiceExtensionTimeWillExpire = objc.RegisterName("serviceExtensionTimeWillExpire")
+	_uNNotificationServiceExtensionSelServiceExtensionTimeWillExpire                  = objc.RegisterName("serviceExtensionTimeWillExpire")
 )
 
 func UNNotificationServiceExtensionFromID(id objc.ID) *UNNotificationServiceExtension {
@@ -48,4 +48,3 @@ func (o *UNNotificationServiceExtension) DidReceiveNotificationRequestWithConten
 func (o *UNNotificationServiceExtension) ServiceExtensionTimeWillExpire() {
 	o.Ptr().Send(_uNNotificationServiceExtensionSelServiceExtensionTimeWillExpire)
 }
-

@@ -128,11 +128,17 @@ func (x *NDArrayBinaryKernel) SecondaryDilationRates() mpsndarray.MPSNDArraySize
 	return x.inner.SecondaryDilationRates()
 }
 
-func (x *NDArrayBinaryKernel) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel { return &x.inner.MPSNDArrayMultiaryKernel }
+func (x *NDArrayBinaryKernel) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel {
+	return &x.inner.MPSNDArrayMultiaryKernel
+}
 
-func (x *NDArrayBinaryKernel) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
+func (x *NDArrayBinaryKernel) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase {
+	return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase
+}
 
-func (x *NDArrayBinaryKernel) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel }
+func (x *NDArrayBinaryKernel) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel
+}
 
 // NDArrayBinaryKernelable is the interface implemented by [NDArrayBinaryKernel], for mocking and DI.
 type NDArrayBinaryKernelable interface {
@@ -157,4 +163,3 @@ type NDArrayBinaryKernelable interface {
 }
 
 var _ NDArrayBinaryKernelable = (*NDArrayBinaryKernel)(nil)
-

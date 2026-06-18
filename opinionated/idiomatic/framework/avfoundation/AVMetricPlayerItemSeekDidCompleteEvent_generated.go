@@ -15,7 +15,9 @@ type MetricPlayerItemSeekDidCompleteEvent struct {
 }
 
 // Unwrap returns the underlying [raw.AVMetricPlayerItemSeekDidCompleteEvent].
-func (x *MetricPlayerItemSeekDidCompleteEvent) Unwrap() *raw.AVMetricPlayerItemSeekDidCompleteEvent { return x.inner }
+func (x *MetricPlayerItemSeekDidCompleteEvent) Unwrap() *raw.AVMetricPlayerItemSeekDidCompleteEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -40,9 +42,13 @@ func (x *MetricPlayerItemSeekDidCompleteEvent) DidSeekInBuffer() bool {
 	return x.inner.DidSeekInBuffer()
 }
 
-func (x *MetricPlayerItemSeekDidCompleteEvent) asMetricPlayerItemRateChangeEvent() *raw.AVMetricPlayerItemRateChangeEvent { return &x.inner.AVMetricPlayerItemRateChangeEvent }
+func (x *MetricPlayerItemSeekDidCompleteEvent) asMetricPlayerItemRateChangeEvent() *raw.AVMetricPlayerItemRateChangeEvent {
+	return &x.inner.AVMetricPlayerItemRateChangeEvent
+}
 
-func (x *MetricPlayerItemSeekDidCompleteEvent) asMetricEvent() *raw.AVMetricEvent { return &x.inner.AVMetricPlayerItemRateChangeEvent.AVMetricEvent }
+func (x *MetricPlayerItemSeekDidCompleteEvent) asMetricEvent() *raw.AVMetricEvent {
+	return &x.inner.AVMetricPlayerItemRateChangeEvent.AVMetricEvent
+}
 
 // MetricPlayerItemSeekDidCompleteEventable is the interface implemented by [MetricPlayerItemSeekDidCompleteEvent], for mocking and DI.
 type MetricPlayerItemSeekDidCompleteEventable interface {
@@ -51,4 +57,3 @@ type MetricPlayerItemSeekDidCompleteEventable interface {
 }
 
 var _ MetricPlayerItemSeekDidCompleteEventable = (*MetricPlayerItemSeekDidCompleteEvent)(nil)
-

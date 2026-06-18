@@ -17,13 +17,17 @@ func KFontPanelATSUFontIDKey() objc.ID { return purego.CFConstant(raw.KFontPanel
 func KFontPanelVariationAxesKey() objc.ID { return purego.CFConstant(raw.KFontPanelVariationAxesKey()) }
 
 // KFontPanelVariationValuesKey returns the value of the CoreFoundation reference constant kFontPanelVariationValuesKey as an objc.ID.
-func KFontPanelVariationValuesKey() objc.ID { return purego.CFConstant(raw.KFontPanelVariationValuesKey()) }
+func KFontPanelVariationValuesKey() objc.ID {
+	return purego.CFConstant(raw.KFontPanelVariationValuesKey())
+}
 
 // KFontPanelFeatureTypesKey returns the value of the CoreFoundation reference constant kFontPanelFeatureTypesKey as an objc.ID.
 func KFontPanelFeatureTypesKey() objc.ID { return purego.CFConstant(raw.KFontPanelFeatureTypesKey()) }
 
 // KFontPanelFeatureSelectorsKey returns the value of the CoreFoundation reference constant kFontPanelFeatureSelectorsKey as an objc.ID.
-func KFontPanelFeatureSelectorsKey() objc.ID { return purego.CFConstant(raw.KFontPanelFeatureSelectorsKey()) }
+func KFontPanelFeatureSelectorsKey() objc.ID {
+	return purego.CFConstant(raw.KFontPanelFeatureSelectorsKey())
+}
 
 // KFontPanelAttributesKey returns the value of the CoreFoundation reference constant kFontPanelAttributesKey as an objc.ID.
 func KFontPanelAttributesKey() objc.ID { return purego.CFConstant(raw.KFontPanelAttributesKey()) }
@@ -32,16 +36,24 @@ func KFontPanelAttributesKey() objc.ID { return purego.CFConstant(raw.KFontPanel
 func KFontPanelAttributeTagsKey() objc.ID { return purego.CFConstant(raw.KFontPanelAttributeTagsKey()) }
 
 // KFontPanelAttributeSizesKey returns the value of the CoreFoundation reference constant kFontPanelAttributeSizesKey as an objc.ID.
-func KFontPanelAttributeSizesKey() objc.ID { return purego.CFConstant(raw.KFontPanelAttributeSizesKey()) }
+func KFontPanelAttributeSizesKey() objc.ID {
+	return purego.CFConstant(raw.KFontPanelAttributeSizesKey())
+}
 
 // KFontPanelAttributeValuesKey returns the value of the CoreFoundation reference constant kFontPanelAttributeValuesKey as an objc.ID.
-func KFontPanelAttributeValuesKey() objc.ID { return purego.CFConstant(raw.KFontPanelAttributeValuesKey()) }
+func KFontPanelAttributeValuesKey() objc.ID {
+	return purego.CFConstant(raw.KFontPanelAttributeValuesKey())
+}
 
 // KFontPanelMouseTrackingState returns the value of the CoreFoundation reference constant kFontPanelMouseTrackingState as an objc.ID.
-func KFontPanelMouseTrackingState() objc.ID { return purego.CFConstant(raw.KFontPanelMouseTrackingState()) }
+func KFontPanelMouseTrackingState() objc.ID {
+	return purego.CFConstant(raw.KFontPanelMouseTrackingState())
+}
 
 // KFontPanelBackgroundColorAttributeName returns the value of the CoreFoundation reference constant kFontPanelBackgroundColorAttributeName as an objc.ID.
-func KFontPanelBackgroundColorAttributeName() objc.ID { return purego.CFConstant(raw.KFontPanelBackgroundColorAttributeName()) }
+func KFontPanelBackgroundColorAttributeName() objc.ID {
+	return purego.CFConstant(raw.KFontPanelBackgroundColorAttributeName())
+}
 
 // KFCFontFamilyAttribute returns the value of the CoreFoundation reference constant kFCFontFamilyAttribute as an objc.ID.
 func KFCFontFamilyAttribute() objc.ID { return purego.CFConstant(raw.KFCFontFamilyAttribute()) }
@@ -56,8 +68,9 @@ func KFCFontFaceAttribute() objc.ID { return purego.CFConstant(raw.KFCFontFaceAt
 func KFCFontSizeAttribute() objc.ID { return purego.CFConstant(raw.KFCFontSizeAttribute()) }
 
 // KFCFontVisibleNameAttribute returns the value of the CoreFoundation reference constant kFCFontVisibleNameAttribute as an objc.ID.
-func KFCFontVisibleNameAttribute() objc.ID { return purego.CFConstant(raw.KFCFontVisibleNameAttribute()) }
+func KFCFontVisibleNameAttribute() objc.ID {
+	return purego.CFConstant(raw.KFCFontVisibleNameAttribute())
+}
 
 // KFCFontCGColorAttribute returns the value of the CoreFoundation reference constant kFCFontCGColorAttribute as an objc.ID.
 func KFCFontCGColorAttribute() objc.ID { return purego.CFConstant(raw.KFCFontCGColorAttribute()) }
-

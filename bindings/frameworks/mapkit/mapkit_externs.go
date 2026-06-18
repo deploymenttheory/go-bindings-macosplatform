@@ -88,19 +88,25 @@ func MKMapItemTypeIdentifier() uintptr {
 
 func MKMapRectNull() MKMapRect {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKMapRectNull")
-	if ptr == 0 { return MKMapRect{} }
+	if ptr == 0 {
+		return MKMapRect{}
+	}
 	return *(*MKMapRect)(unsafe.Pointer(ptr))
 }
 
 func MKMapRectWorld() MKMapRect {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKMapRectWorld")
-	if ptr == 0 { return MKMapRect{} }
+	if ptr == 0 {
+		return MKMapRect{}
+	}
 	return *(*MKMapRect)(unsafe.Pointer(ptr))
 }
 
 func MKMapSizeWorld() MKMapSize {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKMapSizeWorld")
-	if ptr == 0 { return MKMapSize{} }
+	if ptr == 0 {
+		return MKMapSize{}
+	}
 	return *(*MKMapSize)(unsafe.Pointer(ptr))
 }
 
@@ -116,439 +122,585 @@ func MKMapViewDefaultClusterAnnotationViewReuseIdentifier() uintptr {
 
 func MKPointOfInterestCategoryATM() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryATM")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryAirport() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryAirport")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryAmusementPark() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryAmusementPark")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryAnimalService() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryAnimalService")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryAquarium() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryAquarium")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryAutomotiveRepair() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryAutomotiveRepair")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryBakery() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryBakery")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryBank() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryBank")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryBaseball() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryBaseball")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryBasketball() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryBasketball")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryBeach() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryBeach")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryBeauty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryBeauty")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryBowling() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryBowling")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryBrewery() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryBrewery")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryCafe() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryCafe")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryCampground() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryCampground")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryCarRental() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryCarRental")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryCastle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryCastle")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryConventionCenter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryConventionCenter")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryDistillery() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryDistillery")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryEVCharger() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryEVCharger")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryFairground() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryFairground")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryFireStation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryFireStation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryFishing() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryFishing")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryFitnessCenter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryFitnessCenter")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryFoodMarket() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryFoodMarket")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryFortress() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryFortress")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryGasStation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryGasStation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryGoKart() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryGoKart")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryGolf() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryGolf")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryHiking() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryHiking")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryHospital() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryHospital")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryHotel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryHotel")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryKayaking() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryKayaking")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryLandmark() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryLandmark")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryLaundry() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryLaundry")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryLibrary() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryLibrary")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryMailbox() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryMailbox")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryMarina() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryMarina")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryMiniGolf() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryMiniGolf")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryMovieTheater() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryMovieTheater")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryMuseum() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryMuseum")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryMusicVenue() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryMusicVenue")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryNationalMonument() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryNationalMonument")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryNationalPark() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryNationalPark")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryNightlife() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryNightlife")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryPark() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryPark")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryParking() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryParking")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryPharmacy() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryPharmacy")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryPlanetarium() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryPlanetarium")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryPolice() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryPolice")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryPostOffice() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryPostOffice")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryPublicTransport() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryPublicTransport")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryRVPark() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryRVPark")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryRestaurant() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryRestaurant")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryRestroom() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryRestroom")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryRockClimbing() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryRockClimbing")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategorySchool() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategorySchool")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategorySkatePark() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategorySkatePark")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategorySkating() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategorySkating")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategorySkiing() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategorySkiing")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategorySoccer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategorySoccer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategorySpa() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategorySpa")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryStadium() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryStadium")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryStore() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryStore")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategorySurfing() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategorySurfing")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategorySwimming() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategorySwimming")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryTennis() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryTennis")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryTheater() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryTheater")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryUniversity() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryUniversity")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryVolleyball() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryVolleyball")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryWinery() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryWinery")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MKPointOfInterestCategoryZoo() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointOfInterestCategoryZoo")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -556,4 +708,3 @@ func MKPointsOfInterestRequestMaxRadius() uintptr {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKPointsOfInterestRequestMaxRadius")
 	return ptr
 }
-

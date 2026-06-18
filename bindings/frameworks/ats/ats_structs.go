@@ -13,30 +13,30 @@ import (
 type ATSFontFamilyIterator_ struct{}
 
 type ATSFontFilter struct {
-	Version uint
+	Version        uint
 	FilterSelector ATSFontFilterSelector
-	Filter unsafe.Pointer
+	Filter         unsafe.Pointer
 }
 
 // ATSFontIterator_ is an opaque type.
 type ATSFontIterator_ struct{}
 
 type ATSFontMetrics struct {
-	Version uint
-	Ascent float64
-	Descent float64
-	Leading float64
-	AvgAdvanceWidth float64
-	MaxAdvanceWidth float64
-	MinLeftSideBearing float64
+	Version             uint
+	Ascent              float64
+	Descent             float64
+	Leading             float64
+	AvgAdvanceWidth     float64
+	MaxAdvanceWidth     float64
+	MinLeftSideBearing  float64
 	MinRightSideBearing float64
-	StemWidth float64
-	StemHeight float64
-	CapHeight float64
-	XHeight float64
-	ItalicAngle float64
-	UnderlinePosition float64
-	UnderlineThickness float64
+	StemWidth           float64
+	StemHeight          float64
+	CapHeight           float64
+	XHeight             float64
+	ItalicAngle         float64
+	UnderlinePosition   float64
+	UnderlineThickness  float64
 }
 
 // ATSFontNotificationInfoRef_ is an opaque type.
@@ -47,63 +47,63 @@ type ATSFontNotificationRef_ struct{}
 
 type ATSFontQuerySourceContext struct {
 	Version uint
-	RefCon unsafe.Pointer
-	Retain unsafe.Pointer
+	RefCon  unsafe.Pointer
+	Retain  unsafe.Pointer
 	Release unsafe.Pointer
 }
 
 type ATSGlyphIdealMetrics struct {
-	Advance corefoundation.CGPoint
-	SideBearing corefoundation.CGPoint
+	Advance          corefoundation.CGPoint
+	SideBearing      corefoundation.CGPoint
 	OtherSideBearing corefoundation.CGPoint
 }
 
 type ATSGlyphScreenMetrics struct {
-	DeviceAdvance corefoundation.CGPoint
-	TopLeft corefoundation.CGPoint
-	Height uint
-	Width uint
-	SideBearing corefoundation.CGPoint
+	DeviceAdvance    corefoundation.CGPoint
+	TopLeft          corefoundation.CGPoint
+	Height           uint
+	Width            uint
+	SideBearing      corefoundation.CGPoint
 	OtherSideBearing corefoundation.CGPoint
 }
 
 type ATSJustWidthDeltaEntryOverride struct {
-	BeforeGrowLimit int
+	BeforeGrowLimit   int
 	BeforeShrinkLimit int
-	AfterGrowLimit int
-	AfterShrinkLimit int
-	GrowFlags uint16
-	ShrinkFlags uint16
+	AfterGrowLimit    int
+	AfterShrinkLimit  int
+	GrowFlags         uint16
+	ShrinkFlags       uint16
 }
 
 type ATSLayoutRecord struct {
-	GlyphID uint16
-	Flags uint
+	GlyphID        uint16
+	Flags          uint
 	OriginalOffset uint
-	RealPos int
+	RealPos        int
 }
 
 type ATSTrapezoid struct {
-	UpperLeft unsafe.Pointer
+	UpperLeft  unsafe.Pointer
 	UpperRight unsafe.Pointer
 	LowerRight unsafe.Pointer
-	LowerLeft unsafe.Pointer
+	LowerLeft  unsafe.Pointer
 }
 
 type ATSUCurvePath struct {
-	Vectors uint
+	Vectors     uint
 	ControlBits [1]uint
-	Vector [1]corefoundation.CGPoint
+	Vector      [1]corefoundation.CGPoint
 }
 
 type ATSUCurvePaths struct {
 	Contours uint
-	Contour [1]ATSUCurvePath
+	Contour  [1]ATSUCurvePath
 }
 
 type FMFontFamilyInstance struct {
 	FontFamily int16
-	FontStyle int16
+	FontStyle  int16
 }
 
 type FMFontFamilyInstanceIterator struct {
@@ -117,4 +117,3 @@ type FMFontFamilyIterator struct {
 type FMFontIterator struct {
 	Reserved [16]uint
 }
-

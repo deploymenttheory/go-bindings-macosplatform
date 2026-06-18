@@ -18,35 +18,35 @@ type MTRClusterOperationalCredentials struct {
 }
 
 var (
-	_clsMTRClusterOperationalCredentials = _objcClass("MTRClusterOperationalCredentials")
-	_mTRClusterOperationalCredentialsSelAttestationRequestWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("attestationRequestWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterOperationalCredentialsSelCertificateChainRequestWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("certificateChainRequestWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterOperationalCredentialsSelCSRRequestWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("CSRRequestWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterOperationalCredentialsSelAddNOCWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("addNOCWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterOperationalCredentialsSelUpdateNOCWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("updateNOCWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterOperationalCredentialsSelUpdateFabricLabelWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("updateFabricLabelWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterOperationalCredentialsSelRemoveFabricWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("removeFabricWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterOperationalCredentialsSelAddTrustedRootCertificateWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("addTrustedRootCertificateWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterOperationalCredentialsSelReadAttributeNOCsWithParams = objc.RegisterName("readAttributeNOCsWithParams:")
-	_mTRClusterOperationalCredentialsSelReadAttributeFabricsWithParams = objc.RegisterName("readAttributeFabricsWithParams:")
-	_mTRClusterOperationalCredentialsSelReadAttributeSupportedFabricsWithParams = objc.RegisterName("readAttributeSupportedFabricsWithParams:")
-	_mTRClusterOperationalCredentialsSelReadAttributeCommissionedFabricsWithParams = objc.RegisterName("readAttributeCommissionedFabricsWithParams:")
-	_mTRClusterOperationalCredentialsSelReadAttributeTrustedRootCertificatesWithParams = objc.RegisterName("readAttributeTrustedRootCertificatesWithParams:")
-	_mTRClusterOperationalCredentialsSelReadAttributeCurrentFabricIndexWithParams = objc.RegisterName("readAttributeCurrentFabricIndexWithParams:")
-	_mTRClusterOperationalCredentialsSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterOperationalCredentialsSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterOperationalCredentialsSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterOperationalCredentialsSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterOperationalCredentialsSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterOperationalCredentialsSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterOperationalCredentialsSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
-	_mTRClusterOperationalCredentialsSelAttestationRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("attestationRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterOperationalCredentialsSelCertificateChainRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("certificateChainRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterOperationalCredentialsSelCSRRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("CSRRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterOperationalCredentialsSelAddNOCWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("addNOCWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterOperationalCredentialsSelUpdateNOCWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("updateNOCWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterOperationalCredentialsSelUpdateFabricLabelWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("updateFabricLabelWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterOperationalCredentialsSelRemoveFabricWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("removeFabricWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_clsMTRClusterOperationalCredentials                                                                                        = _objcClass("MTRClusterOperationalCredentials")
+	_mTRClusterOperationalCredentialsSelAttestationRequestWithParamsExpectedValuesExpectedValueIntervalCompletion               = objc.RegisterName("attestationRequestWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterOperationalCredentialsSelCertificateChainRequestWithParamsExpectedValuesExpectedValueIntervalCompletion          = objc.RegisterName("certificateChainRequestWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterOperationalCredentialsSelCSRRequestWithParamsExpectedValuesExpectedValueIntervalCompletion                       = objc.RegisterName("CSRRequestWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterOperationalCredentialsSelAddNOCWithParamsExpectedValuesExpectedValueIntervalCompletion                           = objc.RegisterName("addNOCWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterOperationalCredentialsSelUpdateNOCWithParamsExpectedValuesExpectedValueIntervalCompletion                        = objc.RegisterName("updateNOCWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterOperationalCredentialsSelUpdateFabricLabelWithParamsExpectedValuesExpectedValueIntervalCompletion                = objc.RegisterName("updateFabricLabelWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterOperationalCredentialsSelRemoveFabricWithParamsExpectedValuesExpectedValueIntervalCompletion                     = objc.RegisterName("removeFabricWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterOperationalCredentialsSelAddTrustedRootCertificateWithParamsExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("addTrustedRootCertificateWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterOperationalCredentialsSelReadAttributeNOCsWithParams                                                             = objc.RegisterName("readAttributeNOCsWithParams:")
+	_mTRClusterOperationalCredentialsSelReadAttributeFabricsWithParams                                                          = objc.RegisterName("readAttributeFabricsWithParams:")
+	_mTRClusterOperationalCredentialsSelReadAttributeSupportedFabricsWithParams                                                 = objc.RegisterName("readAttributeSupportedFabricsWithParams:")
+	_mTRClusterOperationalCredentialsSelReadAttributeCommissionedFabricsWithParams                                              = objc.RegisterName("readAttributeCommissionedFabricsWithParams:")
+	_mTRClusterOperationalCredentialsSelReadAttributeTrustedRootCertificatesWithParams                                          = objc.RegisterName("readAttributeTrustedRootCertificatesWithParams:")
+	_mTRClusterOperationalCredentialsSelReadAttributeCurrentFabricIndexWithParams                                               = objc.RegisterName("readAttributeCurrentFabricIndexWithParams:")
+	_mTRClusterOperationalCredentialsSelReadAttributeGeneratedCommandListWithParams                                             = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterOperationalCredentialsSelReadAttributeAcceptedCommandListWithParams                                              = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterOperationalCredentialsSelReadAttributeAttributeListWithParams                                                    = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterOperationalCredentialsSelReadAttributeFeatureMapWithParams                                                       = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterOperationalCredentialsSelReadAttributeClusterRevisionWithParams                                                  = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterOperationalCredentialsSelInitWithDeviceEndpointIDQueue                                                           = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterOperationalCredentialsSelInitWithDeviceEndpointQueue                                                             = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterOperationalCredentialsSelAttestationRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler        = objc.RegisterName("attestationRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterOperationalCredentialsSelCertificateChainRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler   = objc.RegisterName("certificateChainRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterOperationalCredentialsSelCSRRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler                = objc.RegisterName("CSRRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterOperationalCredentialsSelAddNOCWithParamsExpectedValuesExpectedValueIntervalCompletionHandler                    = objc.RegisterName("addNOCWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterOperationalCredentialsSelUpdateNOCWithParamsExpectedValuesExpectedValueIntervalCompletionHandler                 = objc.RegisterName("updateNOCWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterOperationalCredentialsSelUpdateFabricLabelWithParamsExpectedValuesExpectedValueIntervalCompletionHandler         = objc.RegisterName("updateFabricLabelWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterOperationalCredentialsSelRemoveFabricWithParamsExpectedValuesExpectedValueIntervalCompletionHandler              = objc.RegisterName("removeFabricWithParams:expectedValues:expectedValueInterval:completionHandler:")
 	_mTRClusterOperationalCredentialsSelAddTrustedRootCertificateWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("addTrustedRootCertificateWithParams:expectedValues:expectedValueInterval:completionHandler:")
 )
 
@@ -227,13 +227,17 @@ func (o *MTRClusterOperationalCredentials) ReadAttributeClusterRevisionWithParam
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterOperationalCredentials) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterOperationalCredentials {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterOperationalCredentialsSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterOperationalCredentialsFromID(_ret)
 }
 
 func (o *MTRClusterOperationalCredentials) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterOperationalCredentials {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterOperationalCredentialsSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterOperationalCredentialsFromID(_ret)
 }
 
@@ -345,4 +349,3 @@ func (o *MTRClusterOperationalCredentials) AddTrustedRootCertificateWithParamsEx
 	}
 	o.Ptr().Send(_mTRClusterOperationalCredentialsSelAddTrustedRootCertificateWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
-

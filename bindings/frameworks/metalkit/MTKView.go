@@ -22,57 +22,57 @@ type MTKView struct {
 }
 
 var (
-	_clsMTKView = _objcClass("MTKView")
-	_mTKViewSelInitWithFrameDevice = objc.RegisterName("initWithFrame:device:")
-	_mTKViewSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_mTKViewSelReleaseDrawables = objc.RegisterName("releaseDrawables")
-	_mTKViewSelDraw = objc.RegisterName("draw")
-	_mTKViewSelDelegate = objc.RegisterName("delegate")
-	_mTKViewSelSetDelegate = objc.RegisterName("setDelegate:")
-	_mTKViewSelDevice = objc.RegisterName("device")
-	_mTKViewSelSetDevice = objc.RegisterName("setDevice:")
-	_mTKViewSelCurrentDrawable = objc.RegisterName("currentDrawable")
-	_mTKViewSelFramebufferOnly = objc.RegisterName("framebufferOnly")
-	_mTKViewSelSetFramebufferOnly = objc.RegisterName("setFramebufferOnly:")
-	_mTKViewSelDepthStencilAttachmentTextureUsage = objc.RegisterName("depthStencilAttachmentTextureUsage")
-	_mTKViewSelSetDepthStencilAttachmentTextureUsage = objc.RegisterName("setDepthStencilAttachmentTextureUsage:")
-	_mTKViewSelMultisampleColorAttachmentTextureUsage = objc.RegisterName("multisampleColorAttachmentTextureUsage")
+	_clsMTKView                                          = _objcClass("MTKView")
+	_mTKViewSelInitWithFrameDevice                       = objc.RegisterName("initWithFrame:device:")
+	_mTKViewSelInitWithCoder                             = objc.RegisterName("initWithCoder:")
+	_mTKViewSelReleaseDrawables                          = objc.RegisterName("releaseDrawables")
+	_mTKViewSelDraw                                      = objc.RegisterName("draw")
+	_mTKViewSelDelegate                                  = objc.RegisterName("delegate")
+	_mTKViewSelSetDelegate                               = objc.RegisterName("setDelegate:")
+	_mTKViewSelDevice                                    = objc.RegisterName("device")
+	_mTKViewSelSetDevice                                 = objc.RegisterName("setDevice:")
+	_mTKViewSelCurrentDrawable                           = objc.RegisterName("currentDrawable")
+	_mTKViewSelFramebufferOnly                           = objc.RegisterName("framebufferOnly")
+	_mTKViewSelSetFramebufferOnly                        = objc.RegisterName("setFramebufferOnly:")
+	_mTKViewSelDepthStencilAttachmentTextureUsage        = objc.RegisterName("depthStencilAttachmentTextureUsage")
+	_mTKViewSelSetDepthStencilAttachmentTextureUsage     = objc.RegisterName("setDepthStencilAttachmentTextureUsage:")
+	_mTKViewSelMultisampleColorAttachmentTextureUsage    = objc.RegisterName("multisampleColorAttachmentTextureUsage")
 	_mTKViewSelSetMultisampleColorAttachmentTextureUsage = objc.RegisterName("setMultisampleColorAttachmentTextureUsage:")
-	_mTKViewSelPresentsWithTransaction = objc.RegisterName("presentsWithTransaction")
-	_mTKViewSelSetPresentsWithTransaction = objc.RegisterName("setPresentsWithTransaction:")
-	_mTKViewSelColorPixelFormat = objc.RegisterName("colorPixelFormat")
-	_mTKViewSelSetColorPixelFormat = objc.RegisterName("setColorPixelFormat:")
-	_mTKViewSelDepthStencilPixelFormat = objc.RegisterName("depthStencilPixelFormat")
-	_mTKViewSelSetDepthStencilPixelFormat = objc.RegisterName("setDepthStencilPixelFormat:")
-	_mTKViewSelDepthStencilStorageMode = objc.RegisterName("depthStencilStorageMode")
-	_mTKViewSelSetDepthStencilStorageMode = objc.RegisterName("setDepthStencilStorageMode:")
-	_mTKViewSelSampleCount = objc.RegisterName("sampleCount")
-	_mTKViewSelSetSampleCount = objc.RegisterName("setSampleCount:")
-	_mTKViewSelClearColor = objc.RegisterName("clearColor")
-	_mTKViewSelSetClearColor = objc.RegisterName("setClearColor:")
-	_mTKViewSelClearDepth = objc.RegisterName("clearDepth")
-	_mTKViewSelSetClearDepth = objc.RegisterName("setClearDepth:")
-	_mTKViewSelClearStencil = objc.RegisterName("clearStencil")
-	_mTKViewSelSetClearStencil = objc.RegisterName("setClearStencil:")
-	_mTKViewSelDepthStencilTexture = objc.RegisterName("depthStencilTexture")
-	_mTKViewSelMultisampleColorTexture = objc.RegisterName("multisampleColorTexture")
-	_mTKViewSelCurrentRenderPassDescriptor = objc.RegisterName("currentRenderPassDescriptor")
-	_mTKViewSelCurrentMTL4RenderPassDescriptor = objc.RegisterName("currentMTL4RenderPassDescriptor")
-	_mTKViewSelPreferredFramesPerSecond = objc.RegisterName("preferredFramesPerSecond")
-	_mTKViewSelSetPreferredFramesPerSecond = objc.RegisterName("setPreferredFramesPerSecond:")
-	_mTKViewSelEnableSetNeedsDisplay = objc.RegisterName("enableSetNeedsDisplay")
-	_mTKViewSelSetEnableSetNeedsDisplay = objc.RegisterName("setEnableSetNeedsDisplay:")
-	_mTKViewSelAutoResizeDrawable = objc.RegisterName("autoResizeDrawable")
-	_mTKViewSelSetAutoResizeDrawable = objc.RegisterName("setAutoResizeDrawable:")
-	_mTKViewSelDrawableSize = objc.RegisterName("drawableSize")
-	_mTKViewSelSetDrawableSize = objc.RegisterName("setDrawableSize:")
-	_mTKViewSelPreferredDrawableSize = objc.RegisterName("preferredDrawableSize")
-	_mTKViewSelPreferredDevice = objc.RegisterName("preferredDevice")
-	_mTKViewSelIsPaused = objc.RegisterName("isPaused")
-	_mTKViewSelSetPaused = objc.RegisterName("setPaused:")
-	_mTKViewSelColorspace = objc.RegisterName("colorspace")
-	_mTKViewSelSetColorspace = objc.RegisterName("setColorspace:")
-	_mTKViewSelResidencySet = objc.RegisterName("residencySet")
+	_mTKViewSelPresentsWithTransaction                   = objc.RegisterName("presentsWithTransaction")
+	_mTKViewSelSetPresentsWithTransaction                = objc.RegisterName("setPresentsWithTransaction:")
+	_mTKViewSelColorPixelFormat                          = objc.RegisterName("colorPixelFormat")
+	_mTKViewSelSetColorPixelFormat                       = objc.RegisterName("setColorPixelFormat:")
+	_mTKViewSelDepthStencilPixelFormat                   = objc.RegisterName("depthStencilPixelFormat")
+	_mTKViewSelSetDepthStencilPixelFormat                = objc.RegisterName("setDepthStencilPixelFormat:")
+	_mTKViewSelDepthStencilStorageMode                   = objc.RegisterName("depthStencilStorageMode")
+	_mTKViewSelSetDepthStencilStorageMode                = objc.RegisterName("setDepthStencilStorageMode:")
+	_mTKViewSelSampleCount                               = objc.RegisterName("sampleCount")
+	_mTKViewSelSetSampleCount                            = objc.RegisterName("setSampleCount:")
+	_mTKViewSelClearColor                                = objc.RegisterName("clearColor")
+	_mTKViewSelSetClearColor                             = objc.RegisterName("setClearColor:")
+	_mTKViewSelClearDepth                                = objc.RegisterName("clearDepth")
+	_mTKViewSelSetClearDepth                             = objc.RegisterName("setClearDepth:")
+	_mTKViewSelClearStencil                              = objc.RegisterName("clearStencil")
+	_mTKViewSelSetClearStencil                           = objc.RegisterName("setClearStencil:")
+	_mTKViewSelDepthStencilTexture                       = objc.RegisterName("depthStencilTexture")
+	_mTKViewSelMultisampleColorTexture                   = objc.RegisterName("multisampleColorTexture")
+	_mTKViewSelCurrentRenderPassDescriptor               = objc.RegisterName("currentRenderPassDescriptor")
+	_mTKViewSelCurrentMTL4RenderPassDescriptor           = objc.RegisterName("currentMTL4RenderPassDescriptor")
+	_mTKViewSelPreferredFramesPerSecond                  = objc.RegisterName("preferredFramesPerSecond")
+	_mTKViewSelSetPreferredFramesPerSecond               = objc.RegisterName("setPreferredFramesPerSecond:")
+	_mTKViewSelEnableSetNeedsDisplay                     = objc.RegisterName("enableSetNeedsDisplay")
+	_mTKViewSelSetEnableSetNeedsDisplay                  = objc.RegisterName("setEnableSetNeedsDisplay:")
+	_mTKViewSelAutoResizeDrawable                        = objc.RegisterName("autoResizeDrawable")
+	_mTKViewSelSetAutoResizeDrawable                     = objc.RegisterName("setAutoResizeDrawable:")
+	_mTKViewSelDrawableSize                              = objc.RegisterName("drawableSize")
+	_mTKViewSelSetDrawableSize                           = objc.RegisterName("setDrawableSize:")
+	_mTKViewSelPreferredDrawableSize                     = objc.RegisterName("preferredDrawableSize")
+	_mTKViewSelPreferredDevice                           = objc.RegisterName("preferredDevice")
+	_mTKViewSelIsPaused                                  = objc.RegisterName("isPaused")
+	_mTKViewSelSetPaused                                 = objc.RegisterName("setPaused:")
+	_mTKViewSelColorspace                                = objc.RegisterName("colorspace")
+	_mTKViewSelSetColorspace                             = objc.RegisterName("setColorspace:")
+	_mTKViewSelResidencySet                              = objc.RegisterName("residencySet")
 )
 
 func MTKViewFromID(id objc.ID) *MTKView {
@@ -88,14 +88,18 @@ func MTKViewFromID(id objc.ID) *MTKView {
 // @method initWithFrame:device @abstract Initalize the view with a frame and device @param frameRect The frame rectangle for the created view object. @param device The MTLDevice to be used by the view to create Metal objects
 func (o *MTKView) InitWithFrameDevice(frameRect corefoundation.CGRect, device metal.MTLDevice) *MTKView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTKViewSelInitWithFrameDevice, frameRect, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTKViewFromID(_ret)
 }
 
 // @method initWithCoder: @abstract Returns a view initalized from data in a given unarchiver @param coder An unarchiver object
 func (o *MTKView) InitWithCoder(coder *foundation.NSCoder) *MTKView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTKViewSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTKViewFromID(_ret)
 }
 
@@ -260,14 +264,18 @@ func (o *MTKView) MultisampleColorTexture() metal.MTLTexture {
 // @property currentRenderPassDescriptor @abstract A render pass descriptor generated from the currentDrawable's texture and the view's depth, stencil, and sample buffers and clear values. @discussion This is a convience property.  The view does not use this descriptor and there is no requirement for an app to use this descriptor.
 func (o *MTKView) CurrentRenderPassDescriptor() *metal.MTLRenderPassDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTKViewSelCurrentRenderPassDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return metal.MTLRenderPassDescriptorFromID(_ret)
 }
 
 // @property currentMTL4RenderPassDescriptor @abstract A render pass descriptor generated from the currentDrawable's texture and the view's depth, stencil, and sample buffers and clear values. @discussion This is a convience property.  The view does not use this descriptor and there is no requirement for an app to use this descriptor.
 func (o *MTKView) CurrentMTL4RenderPassDescriptor() *metal.MTL4RenderPassDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTKViewSelCurrentMTL4RenderPassDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return metal.MTL4RenderPassDescriptorFromID(_ret)
 }
 
@@ -348,4 +356,3 @@ func (o *MTKView) ResidencySet() metal.MTLResidencySet {
 	_ret := objc.Send[metal.MTLResidencySet](o.Ptr(), _mTKViewSelResidencySet)
 	return _ret
 }
-

@@ -66,4 +66,3 @@ type Suggestionable interface {
 }
 
 var _ Suggestionable = (*Suggestion)(nil)
-

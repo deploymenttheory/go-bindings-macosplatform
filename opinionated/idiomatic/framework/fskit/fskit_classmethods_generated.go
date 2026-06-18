@@ -162,4 +162,3 @@ func UsableButLimitedProbeResult() *ProbeResult {
 	}
 	return &ProbeResult{inner: _r}
 }
-

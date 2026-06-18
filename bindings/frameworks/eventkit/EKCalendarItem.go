@@ -16,36 +16,36 @@ type EKCalendarItem struct {
 }
 
 var (
-	_clsEKCalendarItem = _objcClass("EKCalendarItem")
-	_eKCalendarItemSelAddAlarm = objc.RegisterName("addAlarm:")
-	_eKCalendarItemSelRemoveAlarm = objc.RegisterName("removeAlarm:")
-	_eKCalendarItemSelAddRecurrenceRule = objc.RegisterName("addRecurrenceRule:")
-	_eKCalendarItemSelRemoveRecurrenceRule = objc.RegisterName("removeRecurrenceRule:")
-	_eKCalendarItemSelCalendar = objc.RegisterName("calendar")
-	_eKCalendarItemSelSetCalendar = objc.RegisterName("setCalendar:")
-	_eKCalendarItemSelCalendarItemIdentifier = objc.RegisterName("calendarItemIdentifier")
+	_clsEKCalendarItem                               = _objcClass("EKCalendarItem")
+	_eKCalendarItemSelAddAlarm                       = objc.RegisterName("addAlarm:")
+	_eKCalendarItemSelRemoveAlarm                    = objc.RegisterName("removeAlarm:")
+	_eKCalendarItemSelAddRecurrenceRule              = objc.RegisterName("addRecurrenceRule:")
+	_eKCalendarItemSelRemoveRecurrenceRule           = objc.RegisterName("removeRecurrenceRule:")
+	_eKCalendarItemSelCalendar                       = objc.RegisterName("calendar")
+	_eKCalendarItemSelSetCalendar                    = objc.RegisterName("setCalendar:")
+	_eKCalendarItemSelCalendarItemIdentifier         = objc.RegisterName("calendarItemIdentifier")
 	_eKCalendarItemSelCalendarItemExternalIdentifier = objc.RegisterName("calendarItemExternalIdentifier")
-	_eKCalendarItemSelTitle = objc.RegisterName("title")
-	_eKCalendarItemSelSetTitle = objc.RegisterName("setTitle:")
-	_eKCalendarItemSelLocation = objc.RegisterName("location")
-	_eKCalendarItemSelSetLocation = objc.RegisterName("setLocation:")
-	_eKCalendarItemSelNotes = objc.RegisterName("notes")
-	_eKCalendarItemSelSetNotes = objc.RegisterName("setNotes:")
-	_eKCalendarItemSelURL = objc.RegisterName("URL")
-	_eKCalendarItemSelSetURL = objc.RegisterName("setURL:")
-	_eKCalendarItemSelLastModifiedDate = objc.RegisterName("lastModifiedDate")
-	_eKCalendarItemSelCreationDate = objc.RegisterName("creationDate")
-	_eKCalendarItemSelTimeZone = objc.RegisterName("timeZone")
-	_eKCalendarItemSelSetTimeZone = objc.RegisterName("setTimeZone:")
-	_eKCalendarItemSelHasAlarms = objc.RegisterName("hasAlarms")
-	_eKCalendarItemSelHasRecurrenceRules = objc.RegisterName("hasRecurrenceRules")
-	_eKCalendarItemSelHasAttendees = objc.RegisterName("hasAttendees")
-	_eKCalendarItemSelHasNotes = objc.RegisterName("hasNotes")
-	_eKCalendarItemSelAttendees = objc.RegisterName("attendees")
-	_eKCalendarItemSelAlarms = objc.RegisterName("alarms")
-	_eKCalendarItemSelSetAlarms = objc.RegisterName("setAlarms:")
-	_eKCalendarItemSelRecurrenceRules = objc.RegisterName("recurrenceRules")
-	_eKCalendarItemSelSetRecurrenceRules = objc.RegisterName("setRecurrenceRules:")
+	_eKCalendarItemSelTitle                          = objc.RegisterName("title")
+	_eKCalendarItemSelSetTitle                       = objc.RegisterName("setTitle:")
+	_eKCalendarItemSelLocation                       = objc.RegisterName("location")
+	_eKCalendarItemSelSetLocation                    = objc.RegisterName("setLocation:")
+	_eKCalendarItemSelNotes                          = objc.RegisterName("notes")
+	_eKCalendarItemSelSetNotes                       = objc.RegisterName("setNotes:")
+	_eKCalendarItemSelURL                            = objc.RegisterName("URL")
+	_eKCalendarItemSelSetURL                         = objc.RegisterName("setURL:")
+	_eKCalendarItemSelLastModifiedDate               = objc.RegisterName("lastModifiedDate")
+	_eKCalendarItemSelCreationDate                   = objc.RegisterName("creationDate")
+	_eKCalendarItemSelTimeZone                       = objc.RegisterName("timeZone")
+	_eKCalendarItemSelSetTimeZone                    = objc.RegisterName("setTimeZone:")
+	_eKCalendarItemSelHasAlarms                      = objc.RegisterName("hasAlarms")
+	_eKCalendarItemSelHasRecurrenceRules             = objc.RegisterName("hasRecurrenceRules")
+	_eKCalendarItemSelHasAttendees                   = objc.RegisterName("hasAttendees")
+	_eKCalendarItemSelHasNotes                       = objc.RegisterName("hasNotes")
+	_eKCalendarItemSelAttendees                      = objc.RegisterName("attendees")
+	_eKCalendarItemSelAlarms                         = objc.RegisterName("alarms")
+	_eKCalendarItemSelSetAlarms                      = objc.RegisterName("setAlarms:")
+	_eKCalendarItemSelRecurrenceRules                = objc.RegisterName("recurrenceRules")
+	_eKCalendarItemSelSetRecurrenceRules             = objc.RegisterName("setRecurrenceRules:")
 )
 
 func EKCalendarItemFromID(id objc.ID) *EKCalendarItem {
@@ -79,7 +79,9 @@ func (o *EKCalendarItem) RemoveRecurrenceRule(rule *EKRecurrenceRule) {
 // @property calendar @abstract The calendar that this calendar item belongs to. @discussion This will be nil for new calendar items until you set it.
 func (o *EKCalendarItem) Calendar() *EKCalendar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKCalendarItemSelCalendar)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EKCalendarFromID(_ret)
 }
 
@@ -90,21 +92,27 @@ func (o *EKCalendarItem) SetCalendar(calendar *EKCalendar) {
 // @property   calendarItemIdentifier @abstract   A unique identifier for a calendar item. @discussion Item identifiers are not sync-proof in that a full sync will lose this identifier, so you should always have a back up plan for dealing with a reminder that is no longer fetchable by this property, e.g. by title, etc. Use [EKEventStore calendarItemWithIdentifier:] to look up the item by this value.
 func (o *EKCalendarItem) CalendarItemIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKCalendarItemSelCalendarItemIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property   calendarItemExternalIdentifier @abstract   A server-provided identifier for this calendar item @discussion This identifier, provided by the server, allows you to reference the same event or reminder across multiple devices. For calendars stored locally on the device, including the birthday calendar, it simply passes through to calendarItemIdentifier. This identifier is unique as of creation for every calendar item.  However, there are some cases where duplicate copies of a calendar item can exist in the same database, including: - A calendar item was imported from an ICS file into multiple calendars - An event was created in a calendar shared with the user and the user was also invited to the event - The user is a delegate of a calendar that also has this event - A subscribed calendar was added to multiple accounts In such cases, you should choose between calendar items based on other factors, such as the calendar or source. This identifier is the same for all occurrences of a recurring event. If you wish to differentiate between occurrences, you may want to use the start date. This may be nil for new calendar items that do not yet belong to a calendar. In addition, there are two caveats for Exchange-based calendars: - This identifier will be different between EventKit on iOS versus OS X - This identifier will be different between devices for EKReminders
 func (o *EKCalendarItem) CalendarItemExternalIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKCalendarItemSelCalendarItemExternalIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property title @abstract The title of this calendar item. @discussion This will be an empty string for new calendar items until you set it.
 func (o *EKCalendarItem) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKCalendarItemSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -114,7 +122,9 @@ func (o *EKCalendarItem) SetTitle(title *foundation.NSString) {
 
 func (o *EKCalendarItem) Location() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKCalendarItemSelLocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -124,7 +134,9 @@ func (o *EKCalendarItem) SetLocation(location *foundation.NSString) {
 
 func (o *EKCalendarItem) Notes() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKCalendarItemSelNotes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -134,7 +146,9 @@ func (o *EKCalendarItem) SetNotes(notes *foundation.NSString) {
 
 func (o *EKCalendarItem) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKCalendarItemSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -144,19 +158,25 @@ func (o *EKCalendarItem) SetURL(uRL *foundation.NSURL) {
 
 func (o *EKCalendarItem) LastModifiedDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKCalendarItemSelLastModifiedDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *EKCalendarItem) CreationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKCalendarItemSelCreationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *EKCalendarItem) TimeZone() *foundation.NSTimeZone {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKCalendarItemSelTimeZone)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSTimeZoneFromID(_ret)
 }
 
@@ -186,13 +206,17 @@ func (o *EKCalendarItem) HasNotes() bool {
 
 func (o *EKCalendarItem) Attendees() *foundation.NSArray[*EKParticipant] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKCalendarItemSelAttendees)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*EKParticipant](_ret)
 }
 
 func (o *EKCalendarItem) Alarms() *foundation.NSArray[*EKAlarm] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKCalendarItemSelAlarms)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*EKAlarm](_ret)
 }
 
@@ -203,11 +227,12 @@ func (o *EKCalendarItem) SetAlarms(alarms *foundation.NSArray[*EKAlarm]) {
 // @property   recurrenceRules @abstract   An array of EKRecurrenceRules, or nil if none.
 func (o *EKCalendarItem) RecurrenceRules() *foundation.NSArray[*EKRecurrenceRule] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKCalendarItemSelRecurrenceRules)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*EKRecurrenceRule](_ret)
 }
 
 func (o *EKCalendarItem) SetRecurrenceRules(recurrenceRules *foundation.NSArray[*EKRecurrenceRule]) {
 	o.Ptr().Send(_eKCalendarItemSelSetRecurrenceRules, recurrenceRules.Ptr())
 }
-

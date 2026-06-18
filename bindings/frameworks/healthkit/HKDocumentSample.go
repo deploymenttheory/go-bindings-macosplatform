@@ -15,7 +15,7 @@ type HKDocumentSample struct {
 }
 
 var (
-	_clsHKDocumentSample = _objcClass("HKDocumentSample")
+	_clsHKDocumentSample             = _objcClass("HKDocumentSample")
 	_hKDocumentSampleSelDocumentType = objc.RegisterName("documentType")
 )
 
@@ -31,7 +31,8 @@ func HKDocumentSampleFromID(id objc.ID) *HKDocumentSample {
 
 func (o *HKDocumentSample) DocumentType() *HKDocumentType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKDocumentSampleSelDocumentType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKDocumentTypeFromID(_ret)
 }
-

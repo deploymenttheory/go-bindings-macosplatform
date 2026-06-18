@@ -21,63 +21,63 @@ type IKImageBrowserView struct {
 }
 
 var (
-	_clsIKImageBrowserView = _objcClass("IKImageBrowserView")
-	_iKImageBrowserViewSelInitWithFrame = objc.RegisterName("initWithFrame:")
-	_iKImageBrowserViewSelReloadData = objc.RegisterName("reloadData")
-	_iKImageBrowserViewSelDataSource = objc.RegisterName("dataSource")
-	_iKImageBrowserViewSelSetDataSource = objc.RegisterName("setDataSource:")
-	_iKImageBrowserViewSelDelegate = objc.RegisterName("delegate")
-	_iKImageBrowserViewSelSetDelegate = objc.RegisterName("setDelegate:")
-	_iKImageBrowserViewSelSetCellsStyleMask = objc.RegisterName("setCellsStyleMask:")
-	_iKImageBrowserViewSelCellsStyleMask = objc.RegisterName("cellsStyleMask")
-	_iKImageBrowserViewSelSetConstrainsToOriginalSize = objc.RegisterName("setConstrainsToOriginalSize:")
-	_iKImageBrowserViewSelConstrainsToOriginalSize = objc.RegisterName("constrainsToOriginalSize")
-	_iKImageBrowserViewSelSetBackgroundLayer = objc.RegisterName("setBackgroundLayer:")
-	_iKImageBrowserViewSelBackgroundLayer = objc.RegisterName("backgroundLayer")
-	_iKImageBrowserViewSelSetForegroundLayer = objc.RegisterName("setForegroundLayer:")
-	_iKImageBrowserViewSelForegroundLayer = objc.RegisterName("foregroundLayer")
-	_iKImageBrowserViewSelNewCellForRepresentedItem = objc.RegisterName("newCellForRepresentedItem:")
-	_iKImageBrowserViewSelCellForItemAtIndex = objc.RegisterName("cellForItemAtIndex:")
-	_iKImageBrowserViewSelSetZoomValue = objc.RegisterName("setZoomValue:")
-	_iKImageBrowserViewSelZoomValue = objc.RegisterName("zoomValue")
-	_iKImageBrowserViewSelSetContentResizingMask = objc.RegisterName("setContentResizingMask:")
-	_iKImageBrowserViewSelContentResizingMask = objc.RegisterName("contentResizingMask")
-	_iKImageBrowserViewSelScrollIndexToVisible = objc.RegisterName("scrollIndexToVisible:")
-	_iKImageBrowserViewSelSetCellSize = objc.RegisterName("setCellSize:")
-	_iKImageBrowserViewSelCellSize = objc.RegisterName("cellSize")
-	_iKImageBrowserViewSelIntercellSpacing = objc.RegisterName("intercellSpacing")
-	_iKImageBrowserViewSelSetIntercellSpacing = objc.RegisterName("setIntercellSpacing:")
-	_iKImageBrowserViewSelIndexOfItemAtPoint = objc.RegisterName("indexOfItemAtPoint:")
-	_iKImageBrowserViewSelItemFrameAtIndex = objc.RegisterName("itemFrameAtIndex:")
-	_iKImageBrowserViewSelVisibleItemIndexes = objc.RegisterName("visibleItemIndexes")
-	_iKImageBrowserViewSelRowIndexesInRect = objc.RegisterName("rowIndexesInRect:")
-	_iKImageBrowserViewSelColumnIndexesInRect = objc.RegisterName("columnIndexesInRect:")
-	_iKImageBrowserViewSelRectOfColumn = objc.RegisterName("rectOfColumn:")
-	_iKImageBrowserViewSelRectOfRow = objc.RegisterName("rectOfRow:")
-	_iKImageBrowserViewSelNumberOfRows = objc.RegisterName("numberOfRows")
-	_iKImageBrowserViewSelNumberOfColumns = objc.RegisterName("numberOfColumns")
-	_iKImageBrowserViewSelSetCanControlQuickLookPanel = objc.RegisterName("setCanControlQuickLookPanel:")
-	_iKImageBrowserViewSelCanControlQuickLookPanel = objc.RegisterName("canControlQuickLookPanel")
-	_iKImageBrowserViewSelSelectionIndexes = objc.RegisterName("selectionIndexes")
+	_clsIKImageBrowserView                                        = _objcClass("IKImageBrowserView")
+	_iKImageBrowserViewSelInitWithFrame                           = objc.RegisterName("initWithFrame:")
+	_iKImageBrowserViewSelReloadData                              = objc.RegisterName("reloadData")
+	_iKImageBrowserViewSelDataSource                              = objc.RegisterName("dataSource")
+	_iKImageBrowserViewSelSetDataSource                           = objc.RegisterName("setDataSource:")
+	_iKImageBrowserViewSelDelegate                                = objc.RegisterName("delegate")
+	_iKImageBrowserViewSelSetDelegate                             = objc.RegisterName("setDelegate:")
+	_iKImageBrowserViewSelSetCellsStyleMask                       = objc.RegisterName("setCellsStyleMask:")
+	_iKImageBrowserViewSelCellsStyleMask                          = objc.RegisterName("cellsStyleMask")
+	_iKImageBrowserViewSelSetConstrainsToOriginalSize             = objc.RegisterName("setConstrainsToOriginalSize:")
+	_iKImageBrowserViewSelConstrainsToOriginalSize                = objc.RegisterName("constrainsToOriginalSize")
+	_iKImageBrowserViewSelSetBackgroundLayer                      = objc.RegisterName("setBackgroundLayer:")
+	_iKImageBrowserViewSelBackgroundLayer                         = objc.RegisterName("backgroundLayer")
+	_iKImageBrowserViewSelSetForegroundLayer                      = objc.RegisterName("setForegroundLayer:")
+	_iKImageBrowserViewSelForegroundLayer                         = objc.RegisterName("foregroundLayer")
+	_iKImageBrowserViewSelNewCellForRepresentedItem               = objc.RegisterName("newCellForRepresentedItem:")
+	_iKImageBrowserViewSelCellForItemAtIndex                      = objc.RegisterName("cellForItemAtIndex:")
+	_iKImageBrowserViewSelSetZoomValue                            = objc.RegisterName("setZoomValue:")
+	_iKImageBrowserViewSelZoomValue                               = objc.RegisterName("zoomValue")
+	_iKImageBrowserViewSelSetContentResizingMask                  = objc.RegisterName("setContentResizingMask:")
+	_iKImageBrowserViewSelContentResizingMask                     = objc.RegisterName("contentResizingMask")
+	_iKImageBrowserViewSelScrollIndexToVisible                    = objc.RegisterName("scrollIndexToVisible:")
+	_iKImageBrowserViewSelSetCellSize                             = objc.RegisterName("setCellSize:")
+	_iKImageBrowserViewSelCellSize                                = objc.RegisterName("cellSize")
+	_iKImageBrowserViewSelIntercellSpacing                        = objc.RegisterName("intercellSpacing")
+	_iKImageBrowserViewSelSetIntercellSpacing                     = objc.RegisterName("setIntercellSpacing:")
+	_iKImageBrowserViewSelIndexOfItemAtPoint                      = objc.RegisterName("indexOfItemAtPoint:")
+	_iKImageBrowserViewSelItemFrameAtIndex                        = objc.RegisterName("itemFrameAtIndex:")
+	_iKImageBrowserViewSelVisibleItemIndexes                      = objc.RegisterName("visibleItemIndexes")
+	_iKImageBrowserViewSelRowIndexesInRect                        = objc.RegisterName("rowIndexesInRect:")
+	_iKImageBrowserViewSelColumnIndexesInRect                     = objc.RegisterName("columnIndexesInRect:")
+	_iKImageBrowserViewSelRectOfColumn                            = objc.RegisterName("rectOfColumn:")
+	_iKImageBrowserViewSelRectOfRow                               = objc.RegisterName("rectOfRow:")
+	_iKImageBrowserViewSelNumberOfRows                            = objc.RegisterName("numberOfRows")
+	_iKImageBrowserViewSelNumberOfColumns                         = objc.RegisterName("numberOfColumns")
+	_iKImageBrowserViewSelSetCanControlQuickLookPanel             = objc.RegisterName("setCanControlQuickLookPanel:")
+	_iKImageBrowserViewSelCanControlQuickLookPanel                = objc.RegisterName("canControlQuickLookPanel")
+	_iKImageBrowserViewSelSelectionIndexes                        = objc.RegisterName("selectionIndexes")
 	_iKImageBrowserViewSelSetSelectionIndexesByExtendingSelection = objc.RegisterName("setSelectionIndexes:byExtendingSelection:")
-	_iKImageBrowserViewSelSetAllowsMultipleSelection = objc.RegisterName("setAllowsMultipleSelection:")
-	_iKImageBrowserViewSelAllowsMultipleSelection = objc.RegisterName("allowsMultipleSelection")
-	_iKImageBrowserViewSelSetAllowsEmptySelection = objc.RegisterName("setAllowsEmptySelection:")
-	_iKImageBrowserViewSelAllowsEmptySelection = objc.RegisterName("allowsEmptySelection")
-	_iKImageBrowserViewSelSetAllowsReordering = objc.RegisterName("setAllowsReordering:")
-	_iKImageBrowserViewSelAllowsReordering = objc.RegisterName("allowsReordering")
-	_iKImageBrowserViewSelSetAnimates = objc.RegisterName("setAnimates:")
-	_iKImageBrowserViewSelAnimates = objc.RegisterName("animates")
-	_iKImageBrowserViewSelExpandGroupAtIndex = objc.RegisterName("expandGroupAtIndex:")
-	_iKImageBrowserViewSelCollapseGroupAtIndex = objc.RegisterName("collapseGroupAtIndex:")
-	_iKImageBrowserViewSelIsGroupExpandedAtIndex = objc.RegisterName("isGroupExpandedAtIndex:")
-	_iKImageBrowserViewSelSetDraggingDestinationDelegate = objc.RegisterName("setDraggingDestinationDelegate:")
-	_iKImageBrowserViewSelDraggingDestinationDelegate = objc.RegisterName("draggingDestinationDelegate")
-	_iKImageBrowserViewSelIndexAtLocationOfDroppedItem = objc.RegisterName("indexAtLocationOfDroppedItem")
-	_iKImageBrowserViewSelDropOperation = objc.RegisterName("dropOperation")
-	_iKImageBrowserViewSelSetAllowsDroppingOnItems = objc.RegisterName("setAllowsDroppingOnItems:")
-	_iKImageBrowserViewSelAllowsDroppingOnItems = objc.RegisterName("allowsDroppingOnItems")
-	_iKImageBrowserViewSelSetDropIndexDropOperation = objc.RegisterName("setDropIndex:dropOperation:")
+	_iKImageBrowserViewSelSetAllowsMultipleSelection              = objc.RegisterName("setAllowsMultipleSelection:")
+	_iKImageBrowserViewSelAllowsMultipleSelection                 = objc.RegisterName("allowsMultipleSelection")
+	_iKImageBrowserViewSelSetAllowsEmptySelection                 = objc.RegisterName("setAllowsEmptySelection:")
+	_iKImageBrowserViewSelAllowsEmptySelection                    = objc.RegisterName("allowsEmptySelection")
+	_iKImageBrowserViewSelSetAllowsReordering                     = objc.RegisterName("setAllowsReordering:")
+	_iKImageBrowserViewSelAllowsReordering                        = objc.RegisterName("allowsReordering")
+	_iKImageBrowserViewSelSetAnimates                             = objc.RegisterName("setAnimates:")
+	_iKImageBrowserViewSelAnimates                                = objc.RegisterName("animates")
+	_iKImageBrowserViewSelExpandGroupAtIndex                      = objc.RegisterName("expandGroupAtIndex:")
+	_iKImageBrowserViewSelCollapseGroupAtIndex                    = objc.RegisterName("collapseGroupAtIndex:")
+	_iKImageBrowserViewSelIsGroupExpandedAtIndex                  = objc.RegisterName("isGroupExpandedAtIndex:")
+	_iKImageBrowserViewSelSetDraggingDestinationDelegate          = objc.RegisterName("setDraggingDestinationDelegate:")
+	_iKImageBrowserViewSelDraggingDestinationDelegate             = objc.RegisterName("draggingDestinationDelegate")
+	_iKImageBrowserViewSelIndexAtLocationOfDroppedItem            = objc.RegisterName("indexAtLocationOfDroppedItem")
+	_iKImageBrowserViewSelDropOperation                           = objc.RegisterName("dropOperation")
+	_iKImageBrowserViewSelSetAllowsDroppingOnItems                = objc.RegisterName("setAllowsDroppingOnItems:")
+	_iKImageBrowserViewSelAllowsDroppingOnItems                   = objc.RegisterName("allowsDroppingOnItems")
+	_iKImageBrowserViewSelSetDropIndexDropOperation               = objc.RegisterName("setDropIndex:dropOperation:")
 )
 
 func IKImageBrowserViewFromID(id objc.ID) *IKImageBrowserView {
@@ -151,7 +151,9 @@ func (o *IKImageBrowserView) SetBackgroundLayer(aLayer *quartzcore.CALayer) {
 // @method backgroundLayer @abstract Provides the receiver�s background layer.
 func (o *IKImageBrowserView) BackgroundLayer() *quartzcore.CALayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKImageBrowserViewSelBackgroundLayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return quartzcore.CALayerFromID(_ret)
 }
 
@@ -163,7 +165,9 @@ func (o *IKImageBrowserView) SetForegroundLayer(aLayer *quartzcore.CALayer) {
 // @method foregroundLayer @abstract Provides the receiver�s foreground layer.
 func (o *IKImageBrowserView) ForegroundLayer() *quartzcore.CALayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKImageBrowserViewSelForegroundLayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return quartzcore.CALayerFromID(_ret)
 }
 
@@ -176,7 +180,9 @@ func (o *IKImageBrowserView) NewCellForRepresentedItem(anItem objc.ID) *IKImageB
 // @method cellForItemAtIndex: @abstract Returns the cell at the specified index. @discussion Subclasses must not override this method.
 func (o *IKImageBrowserView) CellForItemAtIndex(index uint) *IKImageBrowserCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKImageBrowserViewSelCellForItemAtIndex, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IKImageBrowserCellFromID(_ret)
 }
 
@@ -244,21 +250,27 @@ func (o *IKImageBrowserView) ItemFrameAtIndex(index int) corefoundation.CGRect {
 // @method visibleItemIndexes @abstract Returns indexes of the receiver�s currently visible items.
 func (o *IKImageBrowserView) VisibleItemIndexes() *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKImageBrowserViewSelVisibleItemIndexes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
 // @method rowIndexesInRect: @abstract Returns the indexes of the receiver�s rows that intersect the specified rectangle.
 func (o *IKImageBrowserView) RowIndexesInRect(rect corefoundation.CGRect) *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKImageBrowserViewSelRowIndexesInRect, rect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
 // @method columnIndexesInRect: @abstract Returns the indexes of the receiver�s columns that intersect the specified rectangle.
 func (o *IKImageBrowserView) ColumnIndexesInRect(rect corefoundation.CGRect) *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKImageBrowserViewSelColumnIndexesInRect, rect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
@@ -300,7 +312,9 @@ func (o *IKImageBrowserView) CanControlQuickLookPanel() bool {
 // @method selectionIndexes @abstract Returns the indexes of the selected cells
 func (o *IKImageBrowserView) SelectionIndexes() *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKImageBrowserViewSelSelectionIndexes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
@@ -406,4 +420,3 @@ func (o *IKImageBrowserView) AllowsDroppingOnItems() bool {
 func (o *IKImageBrowserView) SetDropIndexDropOperation(index int, operation quartz.IKImageBrowserDropOperation) {
 	o.Ptr().Send(_iKImageBrowserViewSelSetDropIndexDropOperation, index, operation)
 }
-

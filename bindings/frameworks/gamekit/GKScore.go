@@ -20,33 +20,33 @@ type GKScore struct {
 }
 
 var (
-	_clsGKScore = _objcClass("GKScore")
-	_gKScoreSelInitWithLeaderboardIdentifier = objc.RegisterName("initWithLeaderboardIdentifier:")
-	_gKScoreSelInitWithLeaderboardIdentifierPlayer = objc.RegisterName("initWithLeaderboardIdentifier:player:")
-	_gKScoreSelReportScoresWithCompletionHandler = objc.RegisterName("reportScores:withCompletionHandler:")
-	_gKScoreSelValue = objc.RegisterName("value")
-	_gKScoreSelSetValue = objc.RegisterName("setValue:")
-	_gKScoreSelFormattedValue = objc.RegisterName("formattedValue")
-	_gKScoreSelLeaderboardIdentifier = objc.RegisterName("leaderboardIdentifier")
-	_gKScoreSelSetLeaderboardIdentifier = objc.RegisterName("setLeaderboardIdentifier:")
-	_gKScoreSelContext = objc.RegisterName("context")
-	_gKScoreSelSetContext = objc.RegisterName("setContext:")
-	_gKScoreSelDate = objc.RegisterName("date")
-	_gKScoreSelPlayer = objc.RegisterName("player")
-	_gKScoreSelRank = objc.RegisterName("rank")
-	_gKScoreSelShouldSetDefaultLeaderboard = objc.RegisterName("shouldSetDefaultLeaderboard")
-	_gKScoreSelSetShouldSetDefaultLeaderboard = objc.RegisterName("setShouldSetDefaultLeaderboard:")
-	_gKScoreSelReportScoreWithCompletionHandler = objc.RegisterName("reportScoreWithCompletionHandler:")
-	_gKScoreSelInitWithCategory = objc.RegisterName("initWithCategory:")
-	_gKScoreSelCategory = objc.RegisterName("category")
-	_gKScoreSelSetCategory = objc.RegisterName("setCategory:")
-	_gKScoreSelInitWithLeaderboardIdentifierForPlayer = objc.RegisterName("initWithLeaderboardIdentifier:forPlayer:")
-	_gKScoreSelPlayerID = objc.RegisterName("playerID")
-	_gKScoreSelReportScoresWithEligibleChallengesWithCompletionHandler = objc.RegisterName("reportScores:withEligibleChallenges:withCompletionHandler:")
+	_clsGKScore                                                                   = _objcClass("GKScore")
+	_gKScoreSelInitWithLeaderboardIdentifier                                      = objc.RegisterName("initWithLeaderboardIdentifier:")
+	_gKScoreSelInitWithLeaderboardIdentifierPlayer                                = objc.RegisterName("initWithLeaderboardIdentifier:player:")
+	_gKScoreSelReportScoresWithCompletionHandler                                  = objc.RegisterName("reportScores:withCompletionHandler:")
+	_gKScoreSelValue                                                              = objc.RegisterName("value")
+	_gKScoreSelSetValue                                                           = objc.RegisterName("setValue:")
+	_gKScoreSelFormattedValue                                                     = objc.RegisterName("formattedValue")
+	_gKScoreSelLeaderboardIdentifier                                              = objc.RegisterName("leaderboardIdentifier")
+	_gKScoreSelSetLeaderboardIdentifier                                           = objc.RegisterName("setLeaderboardIdentifier:")
+	_gKScoreSelContext                                                            = objc.RegisterName("context")
+	_gKScoreSelSetContext                                                         = objc.RegisterName("setContext:")
+	_gKScoreSelDate                                                               = objc.RegisterName("date")
+	_gKScoreSelPlayer                                                             = objc.RegisterName("player")
+	_gKScoreSelRank                                                               = objc.RegisterName("rank")
+	_gKScoreSelShouldSetDefaultLeaderboard                                        = objc.RegisterName("shouldSetDefaultLeaderboard")
+	_gKScoreSelSetShouldSetDefaultLeaderboard                                     = objc.RegisterName("setShouldSetDefaultLeaderboard:")
+	_gKScoreSelReportScoreWithCompletionHandler                                   = objc.RegisterName("reportScoreWithCompletionHandler:")
+	_gKScoreSelInitWithCategory                                                   = objc.RegisterName("initWithCategory:")
+	_gKScoreSelCategory                                                           = objc.RegisterName("category")
+	_gKScoreSelSetCategory                                                        = objc.RegisterName("setCategory:")
+	_gKScoreSelInitWithLeaderboardIdentifierForPlayer                             = objc.RegisterName("initWithLeaderboardIdentifier:forPlayer:")
+	_gKScoreSelPlayerID                                                           = objc.RegisterName("playerID")
+	_gKScoreSelReportScoresWithEligibleChallengesWithCompletionHandler            = objc.RegisterName("reportScores:withEligibleChallenges:withCompletionHandler:")
 	_gKScoreSelReportLeaderboardScoresWithEligibleChallengesWithCompletionHandler = objc.RegisterName("reportLeaderboardScores:withEligibleChallenges:withCompletionHandler:")
-	_gKScoreSelIssueChallengeToPlayersMessage = objc.RegisterName("issueChallengeToPlayers:message:")
-	_gKScoreSelChallengeComposeControllerWithMessagePlayersCompletionHandler = objc.RegisterName("challengeComposeControllerWithMessage:players:completionHandler:")
-	_gKScoreSelChallengeComposeControllerWithMessagePlayersCompletion = objc.RegisterName("challengeComposeControllerWithMessage:players:completion:")
+	_gKScoreSelIssueChallengeToPlayersMessage                                     = objc.RegisterName("issueChallengeToPlayers:message:")
+	_gKScoreSelChallengeComposeControllerWithMessagePlayersCompletionHandler      = objc.RegisterName("challengeComposeControllerWithMessage:players:completionHandler:")
+	_gKScoreSelChallengeComposeControllerWithMessagePlayersCompletion             = objc.RegisterName("challengeComposeControllerWithMessage:players:completion:")
 )
 
 func GKScoreFromID(id objc.ID) *GKScore {
@@ -63,7 +63,9 @@ func GKScoreFromID(id objc.ID) *GKScore {
 // Deprecated: since macOS 11.0.
 func (o *GKScore) InitWithLeaderboardIdentifier(identifier *foundation.NSString) *GKScore {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKScoreSelInitWithLeaderboardIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKScoreFromID(_ret)
 }
 
@@ -71,7 +73,9 @@ func (o *GKScore) InitWithLeaderboardIdentifier(identifier *foundation.NSString)
 // Deprecated: since macOS 11.0.
 func (o *GKScore) InitWithLeaderboardIdentifierPlayer(identifier *foundation.NSString, player *GKPlayer) *GKScore {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKScoreSelInitWithLeaderboardIdentifierPlayer, identifier.Ptr(), player.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKScoreFromID(_ret)
 }
 
@@ -102,7 +106,9 @@ func (o *GKScore) SetValue(value int64) {
 // The score formatted as a string, localized with a label
 func (o *GKScore) FormattedValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKScoreSelFormattedValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -110,7 +116,9 @@ func (o *GKScore) FormattedValue() *foundation.NSString {
 // Deprecated: since macOS 11.0.
 func (o *GKScore) LeaderboardIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKScoreSelLeaderboardIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -135,7 +143,9 @@ func (o *GKScore) SetContext(context_ uint64) {
 // Deprecated: since macOS 11.0.
 func (o *GKScore) Date() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKScoreSelDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -143,7 +153,9 @@ func (o *GKScore) Date() *foundation.NSDate {
 // Deprecated: since macOS 11.0.
 func (o *GKScore) Player() *GKPlayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKScoreSelPlayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKPlayerFromID(_ret)
 }
 
@@ -181,14 +193,18 @@ func (o *GKScore) ReportScoreWithCompletionHandler(completionHandler func(unsafe
 // Deprecated: since macOS 10.10.
 func (o *GKScore) InitWithCategory(category *foundation.NSString) *GKScore {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKScoreSelInitWithCategory, category.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKScoreFromID(_ret)
 }
 
 // Deprecated: since macOS 10.10.
 func (o *GKScore) Category() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKScoreSelCategory)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -201,14 +217,18 @@ func (o *GKScore) SetCategory(category *foundation.NSString) {
 // Deprecated: since macOS 10.10.
 func (o *GKScore) InitWithLeaderboardIdentifierForPlayer(identifier *foundation.NSString, playerID *foundation.NSString) *GKScore {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKScoreSelInitWithLeaderboardIdentifierForPlayer, identifier.Ptr(), playerID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKScoreFromID(_ret)
 }
 
 // Deprecated: since macOS 10.10.
 func (o *GKScore) PlayerID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKScoreSelPlayerID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -246,7 +266,9 @@ func (o *GKScore) IssueChallengeToPlayersMessage(playerIDs *foundation.NSArray[*
 // Deprecated: since macOS 14.0.
 func (o *GKScore) ChallengeComposeControllerWithMessagePlayersCompletionHandler(message *foundation.NSString, players *foundation.NSArray[*GKPlayer], completionHandler objc.Block) *appkit.NSViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKScoreSelChallengeComposeControllerWithMessagePlayersCompletionHandler, message.Ptr(), players.Ptr(), completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSViewControllerFromID(_ret)
 }
 
@@ -266,7 +288,8 @@ func (o *GKScore) ChallengeComposeControllerWithMessagePlayersCompletion(message
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKScoreSelChallengeComposeControllerWithMessagePlayersCompletion, message.Ptr(), players.Ptr(), __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSViewControllerFromID(_ret)
 }
-

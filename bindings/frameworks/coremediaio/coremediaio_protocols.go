@@ -33,4 +33,3 @@ type CMIOExtensionStreamSource interface {
 	Formats() *foundation.NSArray[*CMIOExtensionStreamFormat]
 	AvailableProperties() *foundation.NSSet[*foundation.NSString]
 }
-

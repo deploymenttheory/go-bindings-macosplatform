@@ -41,4 +41,3 @@ type NotificationBannerable interface {
 }
 
 var _ NotificationBannerable = (*NotificationBanner)(nil)
-

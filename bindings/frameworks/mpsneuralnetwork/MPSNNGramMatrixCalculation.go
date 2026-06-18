@@ -17,12 +17,12 @@ type MPSNNGramMatrixCalculation struct {
 }
 
 var (
-	_clsMPSNNGramMatrixCalculation = _objcClass("MPSNNGramMatrixCalculation")
+	_clsMPSNNGramMatrixCalculation                    = _objcClass("MPSNNGramMatrixCalculation")
 	_mPSNNGramMatrixCalculationSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
 	_mPSNNGramMatrixCalculationSelInitWithDeviceAlpha = objc.RegisterName("initWithDevice:alpha:")
-	_mPSNNGramMatrixCalculationSelInitWithDevice = objc.RegisterName("initWithDevice:")
-	_mPSNNGramMatrixCalculationSelAlpha = objc.RegisterName("alpha")
-	_mPSNNGramMatrixCalculationSelSetAlpha = objc.RegisterName("setAlpha:")
+	_mPSNNGramMatrixCalculationSelInitWithDevice      = objc.RegisterName("initWithDevice:")
+	_mPSNNGramMatrixCalculationSelAlpha               = objc.RegisterName("alpha")
+	_mPSNNGramMatrixCalculationSelSetAlpha            = objc.RegisterName("setAlpha:")
 )
 
 func MPSNNGramMatrixCalculationFromID(id objc.ID) *MPSNNGramMatrixCalculation {
@@ -38,21 +38,27 @@ func MPSNNGramMatrixCalculationFromID(id objc.ID) *MPSNNGramMatrixCalculation {
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSNNGramMatrixCalculation) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSNNGramMatrixCalculation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNGramMatrixCalculationSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNGramMatrixCalculationFromID(_ret)
 }
 
 // @abstract   Initializes a MPSNNGramMatrixCalculation kernel. @param      device      The MTLDevice on which this MPSNNGramMatrixCalculation filter will be used. @param      alpha       Scaling factor for the output. @return     A valid MPSNNGramMatrixCalculation object or nil, if failure.
 func (o *MPSNNGramMatrixCalculation) InitWithDeviceAlpha(device metal.MTLDevice, alpha float32) *MPSNNGramMatrixCalculation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNGramMatrixCalculationSelInitWithDeviceAlpha, device, alpha)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNGramMatrixCalculationFromID(_ret)
 }
 
 // @abstract   Initializes a MPSNNGramMatrixCalculation kernel with scaling factor alpha = 1.0f. @param      device      The MTLDevice on which this MPSNNGramMatrixCalculation filter will be used. @return     A valid MPSNNGramMatrixCalculation object or nil, if failure.
 func (o *MPSNNGramMatrixCalculation) InitWithDevice(device metal.MTLDevice) *MPSNNGramMatrixCalculation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNGramMatrixCalculationSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNGramMatrixCalculationFromID(_ret)
 }
 
@@ -65,4 +71,3 @@ func (o *MPSNNGramMatrixCalculation) Alpha() float32 {
 func (o *MPSNNGramMatrixCalculation) SetAlpha(alpha float32) {
 	o.Ptr().Send(_mPSNNGramMatrixCalculationSelSetAlpha, alpha)
 }
-

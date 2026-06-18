@@ -16,13 +16,13 @@ type AEAssessmentApplication struct {
 }
 
 var (
-	_clsAEAssessmentApplication = _objcClass("AEAssessmentApplication")
-	_aEAssessmentApplicationSelInitWithBundleIdentifier = objc.RegisterName("initWithBundleIdentifier:")
+	_clsAEAssessmentApplication                                       = _objcClass("AEAssessmentApplication")
+	_aEAssessmentApplicationSelInitWithBundleIdentifier               = objc.RegisterName("initWithBundleIdentifier:")
 	_aEAssessmentApplicationSelInitWithBundleIdentifierTeamIdentifier = objc.RegisterName("initWithBundleIdentifier:teamIdentifier:")
-	_aEAssessmentApplicationSelBundleIdentifier = objc.RegisterName("bundleIdentifier")
-	_aEAssessmentApplicationSelTeamIdentifier = objc.RegisterName("teamIdentifier")
-	_aEAssessmentApplicationSelRequiresSignatureValidation = objc.RegisterName("requiresSignatureValidation")
-	_aEAssessmentApplicationSelSetRequiresSignatureValidation = objc.RegisterName("setRequiresSignatureValidation:")
+	_aEAssessmentApplicationSelBundleIdentifier                       = objc.RegisterName("bundleIdentifier")
+	_aEAssessmentApplicationSelTeamIdentifier                         = objc.RegisterName("teamIdentifier")
+	_aEAssessmentApplicationSelRequiresSignatureValidation            = objc.RegisterName("requiresSignatureValidation")
+	_aEAssessmentApplicationSelSetRequiresSignatureValidation         = objc.RegisterName("setRequiresSignatureValidation:")
 )
 
 func AEAssessmentApplicationFromID(id objc.ID) *AEAssessmentApplication {
@@ -37,25 +37,33 @@ func AEAssessmentApplicationFromID(id objc.ID) *AEAssessmentApplication {
 
 func (o *AEAssessmentApplication) InitWithBundleIdentifier(bundleIdentifier *foundation.NSString) *AEAssessmentApplication {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aEAssessmentApplicationSelInitWithBundleIdentifier, bundleIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AEAssessmentApplicationFromID(_ret)
 }
 
 func (o *AEAssessmentApplication) InitWithBundleIdentifierTeamIdentifier(bundleIdentifier *foundation.NSString, teamIdentifier *foundation.NSString) *AEAssessmentApplication {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aEAssessmentApplicationSelInitWithBundleIdentifierTeamIdentifier, bundleIdentifier.Ptr(), teamIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AEAssessmentApplicationFromID(_ret)
 }
 
 func (o *AEAssessmentApplication) BundleIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aEAssessmentApplicationSelBundleIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *AEAssessmentApplication) TeamIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aEAssessmentApplicationSelTeamIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -67,4 +75,3 @@ func (o *AEAssessmentApplication) RequiresSignatureValidation() bool {
 func (o *AEAssessmentApplication) SetRequiresSignatureValidation(requiresSignatureValidation bool) {
 	o.Ptr().Send(_aEAssessmentApplicationSelSetRequiresSignatureValidation, requiresSignatureValidation)
 }
-

@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_helpLib uintptr
-	_loadOnce sync.Once
+	_helpLib       uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 

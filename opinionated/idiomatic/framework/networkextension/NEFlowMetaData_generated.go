@@ -71,4 +71,3 @@ type NEFlowMetaDataable interface {
 }
 
 var _ NEFlowMetaDataable = (*NEFlowMetaData)(nil)
-

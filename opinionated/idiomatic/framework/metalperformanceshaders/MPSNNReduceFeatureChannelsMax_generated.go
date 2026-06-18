@@ -113,11 +113,17 @@ func (x *NNReduceFeatureChannelsMax) WithLabel(label string) *NNReduceFeatureCha
 	return x
 }
 
-func (x *NNReduceFeatureChannelsMax) asNNReduceUnary() *mpsneuralnetwork.MPSNNReduceUnary { return &x.inner.MPSNNReduceUnary }
+func (x *NNReduceFeatureChannelsMax) asNNReduceUnary() *mpsneuralnetwork.MPSNNReduceUnary {
+	return &x.inner.MPSNNReduceUnary
+}
 
-func (x *NNReduceFeatureChannelsMax) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
+func (x *NNReduceFeatureChannelsMax) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel
+}
 
-func (x *NNReduceFeatureChannelsMax) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel }
+func (x *NNReduceFeatureChannelsMax) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel
+}
 
 // NNReduceFeatureChannelsMaxable is the interface implemented by [NNReduceFeatureChannelsMax], for mocking and DI.
 type NNReduceFeatureChannelsMaxable interface {
@@ -136,4 +142,3 @@ type NNReduceFeatureChannelsMaxable interface {
 }
 
 var _ NNReduceFeatureChannelsMaxable = (*NNReduceFeatureChannelsMax)(nil)
-

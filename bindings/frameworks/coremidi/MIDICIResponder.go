@@ -18,15 +18,15 @@ type MIDICIResponder struct {
 }
 
 var (
-	_clsMIDICIResponder = _objcClass("MIDICIResponder")
+	_clsMIDICIResponder                                                                = _objcClass("MIDICIResponder")
 	_mIDICIResponderSelInitWithDeviceInfoProfileDelegateProfileStatesSupportProperties = objc.RegisterName("initWithDeviceInfo:profileDelegate:profileStates:supportProperties:")
-	_mIDICIResponderSelNotifyProfileOnChannelIsEnabled = objc.RegisterName("notifyProfile:onChannel:isEnabled:")
-	_mIDICIResponderSelSendProfileOnChannelProfileData = objc.RegisterName("sendProfile:onChannel:profileData:")
-	_mIDICIResponderSelStart = objc.RegisterName("start")
-	_mIDICIResponderSelStop = objc.RegisterName("stop")
-	_mIDICIResponderSelInitiators = objc.RegisterName("initiators")
-	_mIDICIResponderSelProfileDelegate = objc.RegisterName("profileDelegate")
-	_mIDICIResponderSelDeviceInfo = objc.RegisterName("deviceInfo")
+	_mIDICIResponderSelNotifyProfileOnChannelIsEnabled                                 = objc.RegisterName("notifyProfile:onChannel:isEnabled:")
+	_mIDICIResponderSelSendProfileOnChannelProfileData                                 = objc.RegisterName("sendProfile:onChannel:profileData:")
+	_mIDICIResponderSelStart                                                           = objc.RegisterName("start")
+	_mIDICIResponderSelStop                                                            = objc.RegisterName("stop")
+	_mIDICIResponderSelInitiators                                                      = objc.RegisterName("initiators")
+	_mIDICIResponderSelProfileDelegate                                                 = objc.RegisterName("profileDelegate")
+	_mIDICIResponderSelDeviceInfo                                                      = objc.RegisterName("deviceInfo")
 )
 
 func MIDICIResponderFromID(id objc.ID) *MIDICIResponder {
@@ -41,7 +41,9 @@ func MIDICIResponderFromID(id objc.ID) *MIDICIResponder {
 
 func (o *MIDICIResponder) InitWithDeviceInfoProfileDelegateProfileStatesSupportProperties(deviceInfo *MIDICIDeviceInfo, delegate MIDICIProfileResponderDelegate, profileList unsafe.Pointer, propertiesSupported bool) *MIDICIResponder {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICIResponderSelInitWithDeviceInfoProfileDelegateProfileStatesSupportProperties, deviceInfo.Ptr(), delegate, profileList, propertiesSupported)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MIDICIResponderFromID(_ret)
 }
 
@@ -76,7 +78,8 @@ func (o *MIDICIResponder) ProfileDelegate() MIDICIProfileResponderDelegate {
 
 func (o *MIDICIResponder) DeviceInfo() *MIDICIDeviceInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICIResponderSelDeviceInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MIDICIDeviceInfoFromID(_ret)
 }
-

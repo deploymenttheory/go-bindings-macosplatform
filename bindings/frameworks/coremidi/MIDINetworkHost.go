@@ -16,16 +16,16 @@ type MIDINetworkHost struct {
 }
 
 var (
-	_clsMIDINetworkHost = _objcClass("MIDINetworkHost")
-	_mIDINetworkHostSelHostWithNameAddressPort = objc.RegisterName("hostWithName:address:port:")
-	_mIDINetworkHostSelHostWithNameNetService = objc.RegisterName("hostWithName:netService:")
+	_clsMIDINetworkHost                                           = _objcClass("MIDINetworkHost")
+	_mIDINetworkHostSelHostWithNameAddressPort                    = objc.RegisterName("hostWithName:address:port:")
+	_mIDINetworkHostSelHostWithNameNetService                     = objc.RegisterName("hostWithName:netService:")
 	_mIDINetworkHostSelHostWithNameNetServiceNameNetServiceDomain = objc.RegisterName("hostWithName:netServiceName:netServiceDomain:")
-	_mIDINetworkHostSelHasSameAddressAs = objc.RegisterName("hasSameAddressAs:")
-	_mIDINetworkHostSelName = objc.RegisterName("name")
-	_mIDINetworkHostSelAddress = objc.RegisterName("address")
-	_mIDINetworkHostSelPort = objc.RegisterName("port")
-	_mIDINetworkHostSelNetServiceName = objc.RegisterName("netServiceName")
-	_mIDINetworkHostSelNetServiceDomain = objc.RegisterName("netServiceDomain")
+	_mIDINetworkHostSelHasSameAddressAs                           = objc.RegisterName("hasSameAddressAs:")
+	_mIDINetworkHostSelName                                       = objc.RegisterName("name")
+	_mIDINetworkHostSelAddress                                    = objc.RegisterName("address")
+	_mIDINetworkHostSelPort                                       = objc.RegisterName("port")
+	_mIDINetworkHostSelNetServiceName                             = objc.RegisterName("netServiceName")
+	_mIDINetworkHostSelNetServiceDomain                           = objc.RegisterName("netServiceDomain")
 )
 
 func MIDINetworkHostFromID(id objc.ID) *MIDINetworkHost {
@@ -40,19 +40,25 @@ func MIDINetworkHostFromID(id objc.ID) *MIDINetworkHost {
 
 func MIDINetworkHostHostWithNameAddressPort(name *foundation.NSString, address *foundation.NSString, port uint) *MIDINetworkHost {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMIDINetworkHost), _mIDINetworkHostSelHostWithNameAddressPort, name.Ptr(), address.Ptr(), port)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MIDINetworkHostFromID(_ret)
 }
 
 func MIDINetworkHostHostWithNameNetService(name *foundation.NSString, netService *foundation.NSNetService) *MIDINetworkHost {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMIDINetworkHost), _mIDINetworkHostSelHostWithNameNetService, name.Ptr(), netService.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MIDINetworkHostFromID(_ret)
 }
 
 func MIDINetworkHostHostWithNameNetServiceNameNetServiceDomain(name *foundation.NSString, netServiceName *foundation.NSString, netServiceDomain *foundation.NSString) *MIDINetworkHost {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMIDINetworkHost), _mIDINetworkHostSelHostWithNameNetServiceNameNetServiceDomain, name.Ptr(), netServiceName.Ptr(), netServiceDomain.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MIDINetworkHostFromID(_ret)
 }
 
@@ -63,13 +69,17 @@ func (o *MIDINetworkHost) HasSameAddressAs(other *MIDINetworkHost) bool {
 
 func (o *MIDINetworkHost) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDINetworkHostSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MIDINetworkHost) Address() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDINetworkHostSelAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -80,13 +90,16 @@ func (o *MIDINetworkHost) Port() uint {
 
 func (o *MIDINetworkHost) NetServiceName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDINetworkHostSelNetServiceName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MIDINetworkHost) NetServiceDomain() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDINetworkHostSelNetServiceDomain)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

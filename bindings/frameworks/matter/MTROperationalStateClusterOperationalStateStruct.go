@@ -16,10 +16,10 @@ type MTROperationalStateClusterOperationalStateStruct struct {
 }
 
 var (
-	_clsMTROperationalStateClusterOperationalStateStruct = _objcClass("MTROperationalStateClusterOperationalStateStruct")
-	_mTROperationalStateClusterOperationalStateStructSelOperationalStateID = objc.RegisterName("operationalStateID")
-	_mTROperationalStateClusterOperationalStateStructSelSetOperationalStateID = objc.RegisterName("setOperationalStateID:")
-	_mTROperationalStateClusterOperationalStateStructSelOperationalStateLabel = objc.RegisterName("operationalStateLabel")
+	_clsMTROperationalStateClusterOperationalStateStruct                         = _objcClass("MTROperationalStateClusterOperationalStateStruct")
+	_mTROperationalStateClusterOperationalStateStructSelOperationalStateID       = objc.RegisterName("operationalStateID")
+	_mTROperationalStateClusterOperationalStateStructSelSetOperationalStateID    = objc.RegisterName("setOperationalStateID:")
+	_mTROperationalStateClusterOperationalStateStructSelOperationalStateLabel    = objc.RegisterName("operationalStateLabel")
 	_mTROperationalStateClusterOperationalStateStructSelSetOperationalStateLabel = objc.RegisterName("setOperationalStateLabel:")
 )
 
@@ -35,7 +35,9 @@ func MTROperationalStateClusterOperationalStateStructFromID(id objc.ID) *MTROper
 
 func (o *MTROperationalStateClusterOperationalStateStruct) OperationalStateID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalStateClusterOperationalStateStructSelOperationalStateID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTROperationalStateClusterOperationalStateStruct) SetOperationalStateID
 
 func (o *MTROperationalStateClusterOperationalStateStruct) OperationalStateLabel() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalStateClusterOperationalStateStructSelOperationalStateLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTROperationalStateClusterOperationalStateStruct) SetOperationalStateLabel(operationalStateLabel *foundation.NSString) {
 	o.Ptr().Send(_mTROperationalStateClusterOperationalStateStructSelSetOperationalStateLabel, operationalStateLabel.Ptr())
 }
-

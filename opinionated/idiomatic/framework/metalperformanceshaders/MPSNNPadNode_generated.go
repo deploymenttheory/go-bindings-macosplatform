@@ -67,7 +67,9 @@ func (x *NNPadNode) SetFillValue(fillValue float32) {
 	x.inner.SetFillValue(fillValue)
 }
 
-func (x *NNPadNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+func (x *NNPadNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNFilterNode
+}
 
 // NNPadNodeable is the interface implemented by [NNPadNode], for mocking and DI.
 type NNPadNodeable interface {
@@ -80,4 +82,3 @@ type NNPadNodeable interface {
 }
 
 var _ NNPadNodeable = (*NNPadNode)(nil)
-

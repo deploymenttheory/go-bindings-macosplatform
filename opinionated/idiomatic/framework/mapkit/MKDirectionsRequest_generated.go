@@ -203,4 +203,3 @@ type DirectionsRequestable interface {
 }
 
 var _ DirectionsRequestable = (*DirectionsRequest)(nil)
-

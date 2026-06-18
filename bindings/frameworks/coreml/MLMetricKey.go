@@ -15,9 +15,9 @@ type MLMetricKey struct {
 }
 
 var (
-	_clsMLMetricKey = _objcClass("MLMetricKey")
-	_mLMetricKeySelLossValue = objc.RegisterName("lossValue")
-	_mLMetricKeySelEpochIndex = objc.RegisterName("epochIndex")
+	_clsMLMetricKey               = _objcClass("MLMetricKey")
+	_mLMetricKeySelLossValue      = objc.RegisterName("lossValue")
+	_mLMetricKeySelEpochIndex     = objc.RegisterName("epochIndex")
 	_mLMetricKeySelMiniBatchIndex = objc.RegisterName("miniBatchIndex")
 )
 
@@ -33,19 +33,24 @@ func MLMetricKeyFromID(id objc.ID) *MLMetricKey {
 
 func MLMetricKeyLossValue() *MLMetricKey {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLMetricKey), _mLMetricKeySelLossValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLMetricKeyFromID(_ret)
 }
 
 func MLMetricKeyEpochIndex() *MLMetricKey {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLMetricKey), _mLMetricKeySelEpochIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLMetricKeyFromID(_ret)
 }
 
 func MLMetricKeyMiniBatchIndex() *MLMetricKey {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLMetricKey), _mLMetricKeySelMiniBatchIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLMetricKeyFromID(_ret)
 }
-

@@ -16,13 +16,13 @@ type MTREnergyEVSEClusterChargingTargetStruct struct {
 }
 
 var (
-	_clsMTREnergyEVSEClusterChargingTargetStruct = _objcClass("MTREnergyEVSEClusterChargingTargetStruct")
-	_mTREnergyEVSEClusterChargingTargetStructSelTargetTimeMinutesPastMidnight = objc.RegisterName("targetTimeMinutesPastMidnight")
+	_clsMTREnergyEVSEClusterChargingTargetStruct                                 = _objcClass("MTREnergyEVSEClusterChargingTargetStruct")
+	_mTREnergyEVSEClusterChargingTargetStructSelTargetTimeMinutesPastMidnight    = objc.RegisterName("targetTimeMinutesPastMidnight")
 	_mTREnergyEVSEClusterChargingTargetStructSelSetTargetTimeMinutesPastMidnight = objc.RegisterName("setTargetTimeMinutesPastMidnight:")
-	_mTREnergyEVSEClusterChargingTargetStructSelTargetSoC = objc.RegisterName("targetSoC")
-	_mTREnergyEVSEClusterChargingTargetStructSelSetTargetSoC = objc.RegisterName("setTargetSoC:")
-	_mTREnergyEVSEClusterChargingTargetStructSelAddedEnergy = objc.RegisterName("addedEnergy")
-	_mTREnergyEVSEClusterChargingTargetStructSelSetAddedEnergy = objc.RegisterName("setAddedEnergy:")
+	_mTREnergyEVSEClusterChargingTargetStructSelTargetSoC                        = objc.RegisterName("targetSoC")
+	_mTREnergyEVSEClusterChargingTargetStructSelSetTargetSoC                     = objc.RegisterName("setTargetSoC:")
+	_mTREnergyEVSEClusterChargingTargetStructSelAddedEnergy                      = objc.RegisterName("addedEnergy")
+	_mTREnergyEVSEClusterChargingTargetStructSelSetAddedEnergy                   = objc.RegisterName("setAddedEnergy:")
 )
 
 func MTREnergyEVSEClusterChargingTargetStructFromID(id objc.ID) *MTREnergyEVSEClusterChargingTargetStruct {
@@ -37,7 +37,9 @@ func MTREnergyEVSEClusterChargingTargetStructFromID(id objc.ID) *MTREnergyEVSECl
 
 func (o *MTREnergyEVSEClusterChargingTargetStruct) TargetTimeMinutesPastMidnight() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREnergyEVSEClusterChargingTargetStructSelTargetTimeMinutesPastMidnight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTREnergyEVSEClusterChargingTargetStruct) SetTargetTimeMinutesPastMidni
 
 func (o *MTREnergyEVSEClusterChargingTargetStruct) TargetSoC() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREnergyEVSEClusterChargingTargetStructSelTargetSoC)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *MTREnergyEVSEClusterChargingTargetStruct) SetTargetSoC(targetSoC *found
 
 func (o *MTREnergyEVSEClusterChargingTargetStruct) AddedEnergy() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREnergyEVSEClusterChargingTargetStructSelAddedEnergy)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTREnergyEVSEClusterChargingTargetStruct) SetAddedEnergy(addedEnergy *foundation.NSNumber) {
 	o.Ptr().Send(_mTREnergyEVSEClusterChargingTargetStructSelSetAddedEnergy, addedEnergy.Ptr())
 }
-

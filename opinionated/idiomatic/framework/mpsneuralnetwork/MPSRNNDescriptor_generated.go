@@ -138,4 +138,3 @@ type RNNDescriptorable interface {
 }
 
 var _ RNNDescriptorable = (*RNNDescriptor)(nil)
-

@@ -16,10 +16,10 @@ type UNTimeIntervalNotificationTrigger struct {
 }
 
 var (
-	_clsUNTimeIntervalNotificationTrigger = _objcClass("UNTimeIntervalNotificationTrigger")
+	_clsUNTimeIntervalNotificationTrigger                               = _objcClass("UNTimeIntervalNotificationTrigger")
 	_uNTimeIntervalNotificationTriggerSelTriggerWithTimeIntervalRepeats = objc.RegisterName("triggerWithTimeInterval:repeats:")
-	_uNTimeIntervalNotificationTriggerSelNextTriggerDate = objc.RegisterName("nextTriggerDate")
-	_uNTimeIntervalNotificationTriggerSelTimeInterval = objc.RegisterName("timeInterval")
+	_uNTimeIntervalNotificationTriggerSelNextTriggerDate                = objc.RegisterName("nextTriggerDate")
+	_uNTimeIntervalNotificationTriggerSelTimeInterval                   = objc.RegisterName("timeInterval")
 )
 
 func UNTimeIntervalNotificationTriggerFromID(id objc.ID) *UNTimeIntervalNotificationTrigger {
@@ -34,13 +34,17 @@ func UNTimeIntervalNotificationTriggerFromID(id objc.ID) *UNTimeIntervalNotifica
 
 func UNTimeIntervalNotificationTriggerTriggerWithTimeIntervalRepeats(timeInterval float64, repeats bool) *UNTimeIntervalNotificationTrigger {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNTimeIntervalNotificationTrigger), _uNTimeIntervalNotificationTriggerSelTriggerWithTimeIntervalRepeats, timeInterval, repeats)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UNTimeIntervalNotificationTriggerFromID(_ret)
 }
 
 func (o *UNTimeIntervalNotificationTrigger) NextTriggerDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNTimeIntervalNotificationTriggerSelNextTriggerDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -48,4 +52,3 @@ func (o *UNTimeIntervalNotificationTrigger) TimeInterval() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _uNTimeIntervalNotificationTriggerSelTimeInterval)
 	return _ret
 }
-

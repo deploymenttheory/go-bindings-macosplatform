@@ -25,4 +25,3 @@ func MTRAccessControlClusterTargetFromID(id objc.ID) *MTRAccessControlClusterTar
 	purego.Track(o)
 	return o
 }
-

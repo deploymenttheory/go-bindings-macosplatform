@@ -222,4 +222,3 @@ type AssessmentConfigurationable interface {
 }
 
 var _ AssessmentConfigurationable = (*AssessmentConfiguration)(nil)
-

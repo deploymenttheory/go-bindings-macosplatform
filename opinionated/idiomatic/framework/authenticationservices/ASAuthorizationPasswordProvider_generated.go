@@ -51,4 +51,3 @@ type AuthorizationPasswordProviderable interface {
 }
 
 var _ AuthorizationPasswordProviderable = (*AuthorizationPasswordProvider)(nil)
-

@@ -53,4 +53,3 @@ type MeshBufferZoneDefaultable interface {
 }
 
 var _ MeshBufferZoneDefaultable = (*MeshBufferZoneDefault)(nil)
-

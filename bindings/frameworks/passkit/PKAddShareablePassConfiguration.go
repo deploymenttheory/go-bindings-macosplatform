@@ -18,12 +18,12 @@ type PKAddShareablePassConfiguration struct {
 }
 
 var (
-	_clsPKAddShareablePassConfiguration = _objcClass("PKAddShareablePassConfiguration")
+	_clsPKAddShareablePassConfiguration                                                                                = _objcClass("PKAddShareablePassConfiguration")
 	_pKAddShareablePassConfigurationSelConfigurationForPassMetadataProvisioningPolicyIdentifierPrimaryActionCompletion = objc.RegisterName("configurationForPassMetadata:provisioningPolicyIdentifier:primaryAction:completion:")
-	_pKAddShareablePassConfigurationSelConfigurationForPassMetadataPrimaryActionCompletion = objc.RegisterName("configurationForPassMetadata:primaryAction:completion:")
-	_pKAddShareablePassConfigurationSelPrimaryAction = objc.RegisterName("primaryAction")
-	_pKAddShareablePassConfigurationSelCredentialsMetadata = objc.RegisterName("credentialsMetadata")
-	_pKAddShareablePassConfigurationSelProvisioningPolicyIdentifier = objc.RegisterName("provisioningPolicyIdentifier")
+	_pKAddShareablePassConfigurationSelConfigurationForPassMetadataPrimaryActionCompletion                             = objc.RegisterName("configurationForPassMetadata:primaryAction:completion:")
+	_pKAddShareablePassConfigurationSelPrimaryAction                                                                   = objc.RegisterName("primaryAction")
+	_pKAddShareablePassConfigurationSelCredentialsMetadata                                                             = objc.RegisterName("credentialsMetadata")
+	_pKAddShareablePassConfigurationSelProvisioningPolicyIdentifier                                                    = objc.RegisterName("provisioningPolicyIdentifier")
 )
 
 func PKAddShareablePassConfigurationFromID(id objc.ID) *PKAddShareablePassConfiguration {
@@ -71,13 +71,16 @@ func (o *PKAddShareablePassConfiguration) PrimaryAction() PKAddShareablePassConf
 
 func (o *PKAddShareablePassConfiguration) CredentialsMetadata() *foundation.NSArray[*PKShareablePassMetadata] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddShareablePassConfigurationSelCredentialsMetadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PKShareablePassMetadata](_ret)
 }
 
 func (o *PKAddShareablePassConfiguration) ProvisioningPolicyIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddShareablePassConfigurationSelProvisioningPolicyIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

@@ -199,7 +199,9 @@ func (x *NNReduceBinary) SetSecondaryOffset(secondaryOffset mpscore.MPSOffset) {
 	x.inner.SetSecondaryOffset(secondaryOffset)
 }
 
-func (x *NNReduceBinary) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNBinaryKernel }
+func (x *NNReduceBinary) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNBinaryKernel
+}
 
 func (x *NNReduceBinary) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNBinaryKernel.MPSKernel }
 
@@ -237,4 +239,3 @@ type NNReduceBinaryable interface {
 }
 
 var _ NNReduceBinaryable = (*NNReduceBinary)(nil)
-

@@ -22,58 +22,58 @@ type IKImageView struct {
 }
 
 var (
-	_clsIKImageView = _objcClass("IKImageView")
-	_iKImageViewSelSetImageImageProperties = objc.RegisterName("setImage:imageProperties:")
-	_iKImageViewSelSetImageWithURL = objc.RegisterName("setImageWithURL:")
-	_iKImageViewSelImage = objc.RegisterName("image")
-	_iKImageViewSelImageSize = objc.RegisterName("imageSize")
-	_iKImageViewSelImageProperties = objc.RegisterName("imageProperties")
-	_iKImageViewSelSetRotationAngleCenterPoint = objc.RegisterName("setRotationAngle:centerPoint:")
-	_iKImageViewSelRotateImageLeft = objc.RegisterName("rotateImageLeft:")
-	_iKImageViewSelRotateImageRight = objc.RegisterName("rotateImageRight:")
-	_iKImageViewSelSetImageZoomFactorCenterPoint = objc.RegisterName("setImageZoomFactor:centerPoint:")
-	_iKImageViewSelZoomImageToRect = objc.RegisterName("zoomImageToRect:")
-	_iKImageViewSelZoomImageToFit = objc.RegisterName("zoomImageToFit:")
-	_iKImageViewSelZoomImageToActualSize = objc.RegisterName("zoomImageToActualSize:")
-	_iKImageViewSelZoomIn = objc.RegisterName("zoomIn:")
-	_iKImageViewSelZoomOut = objc.RegisterName("zoomOut:")
-	_iKImageViewSelFlipImageHorizontal = objc.RegisterName("flipImageHorizontal:")
-	_iKImageViewSelFlipImageVertical = objc.RegisterName("flipImageVertical:")
-	_iKImageViewSelCrop = objc.RegisterName("crop:")
-	_iKImageViewSelSetOverlayForType = objc.RegisterName("setOverlay:forType:")
-	_iKImageViewSelOverlayForType = objc.RegisterName("overlayForType:")
-	_iKImageViewSelScrollToPoint = objc.RegisterName("scrollToPoint:")
-	_iKImageViewSelScrollToRect = objc.RegisterName("scrollToRect:")
-	_iKImageViewSelConvertViewPointToImagePoint = objc.RegisterName("convertViewPointToImagePoint:")
-	_iKImageViewSelConvertViewRectToImageRect = objc.RegisterName("convertViewRectToImageRect:")
-	_iKImageViewSelConvertImagePointToViewPoint = objc.RegisterName("convertImagePointToViewPoint:")
-	_iKImageViewSelConvertImageRectToViewRect = objc.RegisterName("convertImageRectToViewRect:")
-	_iKImageViewSelDelegate = objc.RegisterName("delegate")
-	_iKImageViewSelSetDelegate = objc.RegisterName("setDelegate:")
-	_iKImageViewSelZoomFactor = objc.RegisterName("zoomFactor")
-	_iKImageViewSelSetZoomFactor = objc.RegisterName("setZoomFactor:")
-	_iKImageViewSelRotationAngle = objc.RegisterName("rotationAngle")
-	_iKImageViewSelSetRotationAngle = objc.RegisterName("setRotationAngle:")
-	_iKImageViewSelCurrentToolMode = objc.RegisterName("currentToolMode")
-	_iKImageViewSelSetCurrentToolMode = objc.RegisterName("setCurrentToolMode:")
-	_iKImageViewSelAutoresizes = objc.RegisterName("autoresizes")
-	_iKImageViewSelSetAutoresizes = objc.RegisterName("setAutoresizes:")
-	_iKImageViewSelHasHorizontalScroller = objc.RegisterName("hasHorizontalScroller")
-	_iKImageViewSelSetHasHorizontalScroller = objc.RegisterName("setHasHorizontalScroller:")
-	_iKImageViewSelHasVerticalScroller = objc.RegisterName("hasVerticalScroller")
-	_iKImageViewSelSetHasVerticalScroller = objc.RegisterName("setHasVerticalScroller:")
-	_iKImageViewSelAutohidesScrollers = objc.RegisterName("autohidesScrollers")
-	_iKImageViewSelSetAutohidesScrollers = objc.RegisterName("setAutohidesScrollers:")
-	_iKImageViewSelSupportsDragAndDrop = objc.RegisterName("supportsDragAndDrop")
-	_iKImageViewSelSetSupportsDragAndDrop = objc.RegisterName("setSupportsDragAndDrop:")
-	_iKImageViewSelEditable = objc.RegisterName("editable")
-	_iKImageViewSelSetEditable = objc.RegisterName("setEditable:")
-	_iKImageViewSelDoubleClickOpensImageEditPanel = objc.RegisterName("doubleClickOpensImageEditPanel")
+	_clsIKImageView                                  = _objcClass("IKImageView")
+	_iKImageViewSelSetImageImageProperties           = objc.RegisterName("setImage:imageProperties:")
+	_iKImageViewSelSetImageWithURL                   = objc.RegisterName("setImageWithURL:")
+	_iKImageViewSelImage                             = objc.RegisterName("image")
+	_iKImageViewSelImageSize                         = objc.RegisterName("imageSize")
+	_iKImageViewSelImageProperties                   = objc.RegisterName("imageProperties")
+	_iKImageViewSelSetRotationAngleCenterPoint       = objc.RegisterName("setRotationAngle:centerPoint:")
+	_iKImageViewSelRotateImageLeft                   = objc.RegisterName("rotateImageLeft:")
+	_iKImageViewSelRotateImageRight                  = objc.RegisterName("rotateImageRight:")
+	_iKImageViewSelSetImageZoomFactorCenterPoint     = objc.RegisterName("setImageZoomFactor:centerPoint:")
+	_iKImageViewSelZoomImageToRect                   = objc.RegisterName("zoomImageToRect:")
+	_iKImageViewSelZoomImageToFit                    = objc.RegisterName("zoomImageToFit:")
+	_iKImageViewSelZoomImageToActualSize             = objc.RegisterName("zoomImageToActualSize:")
+	_iKImageViewSelZoomIn                            = objc.RegisterName("zoomIn:")
+	_iKImageViewSelZoomOut                           = objc.RegisterName("zoomOut:")
+	_iKImageViewSelFlipImageHorizontal               = objc.RegisterName("flipImageHorizontal:")
+	_iKImageViewSelFlipImageVertical                 = objc.RegisterName("flipImageVertical:")
+	_iKImageViewSelCrop                              = objc.RegisterName("crop:")
+	_iKImageViewSelSetOverlayForType                 = objc.RegisterName("setOverlay:forType:")
+	_iKImageViewSelOverlayForType                    = objc.RegisterName("overlayForType:")
+	_iKImageViewSelScrollToPoint                     = objc.RegisterName("scrollToPoint:")
+	_iKImageViewSelScrollToRect                      = objc.RegisterName("scrollToRect:")
+	_iKImageViewSelConvertViewPointToImagePoint      = objc.RegisterName("convertViewPointToImagePoint:")
+	_iKImageViewSelConvertViewRectToImageRect        = objc.RegisterName("convertViewRectToImageRect:")
+	_iKImageViewSelConvertImagePointToViewPoint      = objc.RegisterName("convertImagePointToViewPoint:")
+	_iKImageViewSelConvertImageRectToViewRect        = objc.RegisterName("convertImageRectToViewRect:")
+	_iKImageViewSelDelegate                          = objc.RegisterName("delegate")
+	_iKImageViewSelSetDelegate                       = objc.RegisterName("setDelegate:")
+	_iKImageViewSelZoomFactor                        = objc.RegisterName("zoomFactor")
+	_iKImageViewSelSetZoomFactor                     = objc.RegisterName("setZoomFactor:")
+	_iKImageViewSelRotationAngle                     = objc.RegisterName("rotationAngle")
+	_iKImageViewSelSetRotationAngle                  = objc.RegisterName("setRotationAngle:")
+	_iKImageViewSelCurrentToolMode                   = objc.RegisterName("currentToolMode")
+	_iKImageViewSelSetCurrentToolMode                = objc.RegisterName("setCurrentToolMode:")
+	_iKImageViewSelAutoresizes                       = objc.RegisterName("autoresizes")
+	_iKImageViewSelSetAutoresizes                    = objc.RegisterName("setAutoresizes:")
+	_iKImageViewSelHasHorizontalScroller             = objc.RegisterName("hasHorizontalScroller")
+	_iKImageViewSelSetHasHorizontalScroller          = objc.RegisterName("setHasHorizontalScroller:")
+	_iKImageViewSelHasVerticalScroller               = objc.RegisterName("hasVerticalScroller")
+	_iKImageViewSelSetHasVerticalScroller            = objc.RegisterName("setHasVerticalScroller:")
+	_iKImageViewSelAutohidesScrollers                = objc.RegisterName("autohidesScrollers")
+	_iKImageViewSelSetAutohidesScrollers             = objc.RegisterName("setAutohidesScrollers:")
+	_iKImageViewSelSupportsDragAndDrop               = objc.RegisterName("supportsDragAndDrop")
+	_iKImageViewSelSetSupportsDragAndDrop            = objc.RegisterName("setSupportsDragAndDrop:")
+	_iKImageViewSelEditable                          = objc.RegisterName("editable")
+	_iKImageViewSelSetEditable                       = objc.RegisterName("setEditable:")
+	_iKImageViewSelDoubleClickOpensImageEditPanel    = objc.RegisterName("doubleClickOpensImageEditPanel")
 	_iKImageViewSelSetDoubleClickOpensImageEditPanel = objc.RegisterName("setDoubleClickOpensImageEditPanel:")
-	_iKImageViewSelImageCorrection = objc.RegisterName("imageCorrection")
-	_iKImageViewSelSetImageCorrection = objc.RegisterName("setImageCorrection:")
-	_iKImageViewSelBackgroundColor = objc.RegisterName("backgroundColor")
-	_iKImageViewSelSetBackgroundColor = objc.RegisterName("setBackgroundColor:")
+	_iKImageViewSelImageCorrection                   = objc.RegisterName("imageCorrection")
+	_iKImageViewSelSetImageCorrection                = objc.RegisterName("setImageCorrection:")
+	_iKImageViewSelBackgroundColor                   = objc.RegisterName("backgroundColor")
+	_iKImageViewSelSetBackgroundColor                = objc.RegisterName("setBackgroundColor:")
 )
 
 func IKImageViewFromID(id objc.ID) *IKImageView {
@@ -182,7 +182,9 @@ func (o *IKImageView) SetOverlayForType(layer *quartzcore.CALayer, layerType *fo
 // @method overlayForType: @abstract Returns the overlay (Core Animation layer) for the image or the image background.
 func (o *IKImageView) OverlayForType(layerType *foundation.NSString) *quartzcore.CALayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKImageViewSelOverlayForType, layerType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return quartzcore.CALayerFromID(_ret)
 }
 
@@ -253,7 +255,9 @@ func (o *IKImageView) SetRotationAngle(rotationAngle float64) {
 // @property currentToolMode @abstract Specifies the current tool mode for the image view.
 func (o *IKImageView) CurrentToolMode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKImageViewSelCurrentToolMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -334,7 +338,9 @@ func (o *IKImageView) SetDoubleClickOpensImageEditPanel(doubleClickOpensImageEdi
 // @property imageCorrection @abstract Specifies a Core Image filter for image correction.
 func (o *IKImageView) ImageCorrection() *coreimage.CIFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKImageViewSelImageCorrection)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return coreimage.CIFilterFromID(_ret)
 }
 
@@ -345,11 +351,12 @@ func (o *IKImageView) SetImageCorrection(imageCorrection *coreimage.CIFilter) {
 // @property backgroundColor @abstract Specifies the background color for the image view.
 func (o *IKImageView) BackgroundColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKImageViewSelBackgroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
 func (o *IKImageView) SetBackgroundColor(backgroundColor *appkit.NSColor) {
 	o.Ptr().Send(_iKImageViewSelSetBackgroundColor, backgroundColor.Ptr())
 }
-

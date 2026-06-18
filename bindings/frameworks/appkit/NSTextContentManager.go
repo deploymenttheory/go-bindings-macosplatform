@@ -18,25 +18,25 @@ type NSTextContentManager struct {
 }
 
 var (
-	_clsNSTextContentManager = _objcClass("NSTextContentManager")
-	_nSTextContentManagerSelInit = objc.RegisterName("init")
-	_nSTextContentManagerSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSTextContentManagerSelAddTextLayoutManager = objc.RegisterName("addTextLayoutManager:")
-	_nSTextContentManagerSelRemoveTextLayoutManager = objc.RegisterName("removeTextLayoutManager:")
-	_nSTextContentManagerSelSynchronizeTextLayoutManagers = objc.RegisterName("synchronizeTextLayoutManagers:")
-	_nSTextContentManagerSelTextElementsForRange = objc.RegisterName("textElementsForRange:")
-	_nSTextContentManagerSelPerformEditingTransactionUsing = objc.RegisterName("performEditingTransactionUsingBlock:")
-	_nSTextContentManagerSelRecordEditActionInRangeNewTextRange = objc.RegisterName("recordEditActionInRange:newTextRange:")
-	_nSTextContentManagerSelDelegate = objc.RegisterName("delegate")
-	_nSTextContentManagerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSTextContentManagerSelTextLayoutManagers = objc.RegisterName("textLayoutManagers")
-	_nSTextContentManagerSelPrimaryTextLayoutManager = objc.RegisterName("primaryTextLayoutManager")
-	_nSTextContentManagerSelSetPrimaryTextLayoutManager = objc.RegisterName("setPrimaryTextLayoutManager:")
-	_nSTextContentManagerSelHasEditingTransaction = objc.RegisterName("hasEditingTransaction")
-	_nSTextContentManagerSelAutomaticallySynchronizesTextLayoutManagers = objc.RegisterName("automaticallySynchronizesTextLayoutManagers")
+	_clsNSTextContentManager                                               = _objcClass("NSTextContentManager")
+	_nSTextContentManagerSelInit                                           = objc.RegisterName("init")
+	_nSTextContentManagerSelInitWithCoder                                  = objc.RegisterName("initWithCoder:")
+	_nSTextContentManagerSelAddTextLayoutManager                           = objc.RegisterName("addTextLayoutManager:")
+	_nSTextContentManagerSelRemoveTextLayoutManager                        = objc.RegisterName("removeTextLayoutManager:")
+	_nSTextContentManagerSelSynchronizeTextLayoutManagers                  = objc.RegisterName("synchronizeTextLayoutManagers:")
+	_nSTextContentManagerSelTextElementsForRange                           = objc.RegisterName("textElementsForRange:")
+	_nSTextContentManagerSelPerformEditingTransactionUsing                 = objc.RegisterName("performEditingTransactionUsingBlock:")
+	_nSTextContentManagerSelRecordEditActionInRangeNewTextRange            = objc.RegisterName("recordEditActionInRange:newTextRange:")
+	_nSTextContentManagerSelDelegate                                       = objc.RegisterName("delegate")
+	_nSTextContentManagerSelSetDelegate                                    = objc.RegisterName("setDelegate:")
+	_nSTextContentManagerSelTextLayoutManagers                             = objc.RegisterName("textLayoutManagers")
+	_nSTextContentManagerSelPrimaryTextLayoutManager                       = objc.RegisterName("primaryTextLayoutManager")
+	_nSTextContentManagerSelSetPrimaryTextLayoutManager                    = objc.RegisterName("setPrimaryTextLayoutManager:")
+	_nSTextContentManagerSelHasEditingTransaction                          = objc.RegisterName("hasEditingTransaction")
+	_nSTextContentManagerSelAutomaticallySynchronizesTextLayoutManagers    = objc.RegisterName("automaticallySynchronizesTextLayoutManagers")
 	_nSTextContentManagerSelSetAutomaticallySynchronizesTextLayoutManagers = objc.RegisterName("setAutomaticallySynchronizesTextLayoutManagers:")
-	_nSTextContentManagerSelAutomaticallySynchronizesToBackingStore = objc.RegisterName("automaticallySynchronizesToBackingStore")
-	_nSTextContentManagerSelSetAutomaticallySynchronizesToBackingStore = objc.RegisterName("setAutomaticallySynchronizesToBackingStore:")
+	_nSTextContentManagerSelAutomaticallySynchronizesToBackingStore        = objc.RegisterName("automaticallySynchronizesToBackingStore")
+	_nSTextContentManagerSelSetAutomaticallySynchronizesToBackingStore     = objc.RegisterName("setAutomaticallySynchronizesToBackingStore:")
 )
 
 func NSTextContentManagerFromID(id objc.ID) *NSTextContentManager {
@@ -51,13 +51,17 @@ func NSTextContentManagerFromID(id objc.ID) *NSTextContentManager {
 
 func (o *NSTextContentManager) Init() *NSTextContentManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContentManagerSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextContentManagerFromID(_ret)
 }
 
 func (o *NSTextContentManager) InitWithCoder(coder *foundation.NSCoder) *NSTextContentManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContentManagerSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextContentManagerFromID(_ret)
 }
 
@@ -82,7 +86,9 @@ func (o *NSTextContentManager) SynchronizeTextLayoutManagers(completionHandler f
 
 func (o *NSTextContentManager) TextElementsForRange(range_ *NSTextRange) *foundation.NSArray[*NSTextElement] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContentManagerSelTextElementsForRange, range_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSTextElement](_ret)
 }
 
@@ -112,13 +118,17 @@ func (o *NSTextContentManager) SetDelegate(delegate NSTextContentManagerDelegate
 
 func (o *NSTextContentManager) TextLayoutManagers() *foundation.NSArray[*NSTextLayoutManager] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContentManagerSelTextLayoutManagers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSTextLayoutManager](_ret)
 }
 
 func (o *NSTextContentManager) PrimaryTextLayoutManager() *NSTextLayoutManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContentManagerSelPrimaryTextLayoutManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextLayoutManagerFromID(_ret)
 }
 
@@ -148,4 +158,3 @@ func (o *NSTextContentManager) AutomaticallySynchronizesToBackingStore() bool {
 func (o *NSTextContentManager) SetAutomaticallySynchronizesToBackingStore(automaticallySynchronizesToBackingStore bool) {
 	o.Ptr().Send(_nSTextContentManagerSelSetAutomaticallySynchronizesToBackingStore, automaticallySynchronizesToBackingStore)
 }
-

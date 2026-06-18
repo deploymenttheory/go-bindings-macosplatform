@@ -16,34 +16,34 @@ type AVPlayerItemAccessLogEvent struct {
 }
 
 var (
-	_clsAVPlayerItemAccessLogEvent = _objcClass("AVPlayerItemAccessLogEvent")
-	_aVPlayerItemAccessLogEventSelNumberOfSegmentsDownloaded = objc.RegisterName("numberOfSegmentsDownloaded")
-	_aVPlayerItemAccessLogEventSelNumberOfMediaRequests = objc.RegisterName("numberOfMediaRequests")
-	_aVPlayerItemAccessLogEventSelPlaybackStartDate = objc.RegisterName("playbackStartDate")
-	_aVPlayerItemAccessLogEventSelURI = objc.RegisterName("URI")
-	_aVPlayerItemAccessLogEventSelServerAddress = objc.RegisterName("serverAddress")
-	_aVPlayerItemAccessLogEventSelNumberOfServerAddressChanges = objc.RegisterName("numberOfServerAddressChanges")
-	_aVPlayerItemAccessLogEventSelPlaybackSessionID = objc.RegisterName("playbackSessionID")
-	_aVPlayerItemAccessLogEventSelPlaybackStartOffset = objc.RegisterName("playbackStartOffset")
-	_aVPlayerItemAccessLogEventSelSegmentsDownloadedDuration = objc.RegisterName("segmentsDownloadedDuration")
-	_aVPlayerItemAccessLogEventSelDurationWatched = objc.RegisterName("durationWatched")
-	_aVPlayerItemAccessLogEventSelNumberOfStalls = objc.RegisterName("numberOfStalls")
-	_aVPlayerItemAccessLogEventSelNumberOfBytesTransferred = objc.RegisterName("numberOfBytesTransferred")
-	_aVPlayerItemAccessLogEventSelTransferDuration = objc.RegisterName("transferDuration")
-	_aVPlayerItemAccessLogEventSelObservedBitrate = objc.RegisterName("observedBitrate")
-	_aVPlayerItemAccessLogEventSelIndicatedBitrate = objc.RegisterName("indicatedBitrate")
-	_aVPlayerItemAccessLogEventSelIndicatedAverageBitrate = objc.RegisterName("indicatedAverageBitrate")
-	_aVPlayerItemAccessLogEventSelAverageVideoBitrate = objc.RegisterName("averageVideoBitrate")
-	_aVPlayerItemAccessLogEventSelAverageAudioBitrate = objc.RegisterName("averageAudioBitrate")
-	_aVPlayerItemAccessLogEventSelNumberOfDroppedVideoFrames = objc.RegisterName("numberOfDroppedVideoFrames")
-	_aVPlayerItemAccessLogEventSelStartupTime = objc.RegisterName("startupTime")
-	_aVPlayerItemAccessLogEventSelDownloadOverdue = objc.RegisterName("downloadOverdue")
-	_aVPlayerItemAccessLogEventSelObservedMaxBitrate = objc.RegisterName("observedMaxBitrate")
-	_aVPlayerItemAccessLogEventSelObservedMinBitrate = objc.RegisterName("observedMinBitrate")
+	_clsAVPlayerItemAccessLogEvent                                 = _objcClass("AVPlayerItemAccessLogEvent")
+	_aVPlayerItemAccessLogEventSelNumberOfSegmentsDownloaded       = objc.RegisterName("numberOfSegmentsDownloaded")
+	_aVPlayerItemAccessLogEventSelNumberOfMediaRequests            = objc.RegisterName("numberOfMediaRequests")
+	_aVPlayerItemAccessLogEventSelPlaybackStartDate                = objc.RegisterName("playbackStartDate")
+	_aVPlayerItemAccessLogEventSelURI                              = objc.RegisterName("URI")
+	_aVPlayerItemAccessLogEventSelServerAddress                    = objc.RegisterName("serverAddress")
+	_aVPlayerItemAccessLogEventSelNumberOfServerAddressChanges     = objc.RegisterName("numberOfServerAddressChanges")
+	_aVPlayerItemAccessLogEventSelPlaybackSessionID                = objc.RegisterName("playbackSessionID")
+	_aVPlayerItemAccessLogEventSelPlaybackStartOffset              = objc.RegisterName("playbackStartOffset")
+	_aVPlayerItemAccessLogEventSelSegmentsDownloadedDuration       = objc.RegisterName("segmentsDownloadedDuration")
+	_aVPlayerItemAccessLogEventSelDurationWatched                  = objc.RegisterName("durationWatched")
+	_aVPlayerItemAccessLogEventSelNumberOfStalls                   = objc.RegisterName("numberOfStalls")
+	_aVPlayerItemAccessLogEventSelNumberOfBytesTransferred         = objc.RegisterName("numberOfBytesTransferred")
+	_aVPlayerItemAccessLogEventSelTransferDuration                 = objc.RegisterName("transferDuration")
+	_aVPlayerItemAccessLogEventSelObservedBitrate                  = objc.RegisterName("observedBitrate")
+	_aVPlayerItemAccessLogEventSelIndicatedBitrate                 = objc.RegisterName("indicatedBitrate")
+	_aVPlayerItemAccessLogEventSelIndicatedAverageBitrate          = objc.RegisterName("indicatedAverageBitrate")
+	_aVPlayerItemAccessLogEventSelAverageVideoBitrate              = objc.RegisterName("averageVideoBitrate")
+	_aVPlayerItemAccessLogEventSelAverageAudioBitrate              = objc.RegisterName("averageAudioBitrate")
+	_aVPlayerItemAccessLogEventSelNumberOfDroppedVideoFrames       = objc.RegisterName("numberOfDroppedVideoFrames")
+	_aVPlayerItemAccessLogEventSelStartupTime                      = objc.RegisterName("startupTime")
+	_aVPlayerItemAccessLogEventSelDownloadOverdue                  = objc.RegisterName("downloadOverdue")
+	_aVPlayerItemAccessLogEventSelObservedMaxBitrate               = objc.RegisterName("observedMaxBitrate")
+	_aVPlayerItemAccessLogEventSelObservedMinBitrate               = objc.RegisterName("observedMinBitrate")
 	_aVPlayerItemAccessLogEventSelObservedBitrateStandardDeviation = objc.RegisterName("observedBitrateStandardDeviation")
-	_aVPlayerItemAccessLogEventSelPlaybackType = objc.RegisterName("playbackType")
-	_aVPlayerItemAccessLogEventSelMediaRequestsWWAN = objc.RegisterName("mediaRequestsWWAN")
-	_aVPlayerItemAccessLogEventSelSwitchBitrate = objc.RegisterName("switchBitrate")
+	_aVPlayerItemAccessLogEventSelPlaybackType                     = objc.RegisterName("playbackType")
+	_aVPlayerItemAccessLogEventSelMediaRequestsWWAN                = objc.RegisterName("mediaRequestsWWAN")
+	_aVPlayerItemAccessLogEventSelSwitchBitrate                    = objc.RegisterName("switchBitrate")
 )
 
 func AVPlayerItemAccessLogEventFromID(id objc.ID) *AVPlayerItemAccessLogEvent {
@@ -72,21 +72,27 @@ func (o *AVPlayerItemAccessLogEvent) NumberOfMediaRequests() int {
 // The date/time at which playback began for this event. Can be nil. If nil is returned the date is unknown. Corresponds to "date". This property is not observable.
 func (o *AVPlayerItemAccessLogEvent) PlaybackStartDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemAccessLogEventSelPlaybackStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // The URI of the playback item. Can be nil. If nil is returned the URI is unknown. Corresponds to "uri". This property is not observable.
 func (o *AVPlayerItemAccessLogEvent) URI() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemAccessLogEventSelURI)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The IP address of the server that was the source of the last delivered media segment. Can be nil. If nil is returned the address is unknown. Can be either an IPv4 or IPv6 address. Corresponds to "s-ip". This property is not observable.
 func (o *AVPlayerItemAccessLogEvent) ServerAddress() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemAccessLogEventSelServerAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -99,7 +105,9 @@ func (o *AVPlayerItemAccessLogEvent) NumberOfServerAddressChanges() int {
 // A GUID that identifies the playback session. This value is used in HTTP requests. Can be nil. If nil is returned the GUID is unknown. Corresponds to "cs-guid". This property is not observable.
 func (o *AVPlayerItemAccessLogEvent) PlaybackSessionID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemAccessLogEventSelPlaybackSessionID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -210,7 +218,9 @@ func (o *AVPlayerItemAccessLogEvent) ObservedBitrateStandardDeviation() float64 
 // Playback type (LIVE, VOD, FILE). If nil is returned the playback type is unknown. Corresponds to "s-playback-type". This property is not observable.
 func (o *AVPlayerItemAccessLogEvent) PlaybackType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemAccessLogEventSelPlaybackType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -225,4 +235,3 @@ func (o *AVPlayerItemAccessLogEvent) SwitchBitrate() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _aVPlayerItemAccessLogEventSelSwitchBitrate)
 	return _ret
 }
-

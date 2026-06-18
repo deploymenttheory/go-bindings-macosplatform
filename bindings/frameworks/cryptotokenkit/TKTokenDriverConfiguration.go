@@ -16,12 +16,12 @@ type TKTokenDriverConfiguration struct {
 }
 
 var (
-	_clsTKTokenDriverConfiguration = _objcClass("TKTokenDriverConfiguration")
-	_tKTokenDriverConfigurationSelAddTokenConfigurationForTokenInstanceID = objc.RegisterName("addTokenConfigurationForTokenInstanceID:")
+	_clsTKTokenDriverConfiguration                                           = _objcClass("TKTokenDriverConfiguration")
+	_tKTokenDriverConfigurationSelAddTokenConfigurationForTokenInstanceID    = objc.RegisterName("addTokenConfigurationForTokenInstanceID:")
 	_tKTokenDriverConfigurationSelRemoveTokenConfigurationForTokenInstanceID = objc.RegisterName("removeTokenConfigurationForTokenInstanceID:")
-	_tKTokenDriverConfigurationSelDriverConfigurations = objc.RegisterName("driverConfigurations")
-	_tKTokenDriverConfigurationSelClassID = objc.RegisterName("classID")
-	_tKTokenDriverConfigurationSelTokenConfigurations = objc.RegisterName("tokenConfigurations")
+	_tKTokenDriverConfigurationSelDriverConfigurations                       = objc.RegisterName("driverConfigurations")
+	_tKTokenDriverConfigurationSelClassID                                    = objc.RegisterName("classID")
+	_tKTokenDriverConfigurationSelTokenConfigurations                        = objc.RegisterName("tokenConfigurations")
 )
 
 func TKTokenDriverConfigurationFromID(id objc.ID) *TKTokenDriverConfiguration {
@@ -37,7 +37,9 @@ func TKTokenDriverConfigurationFromID(id objc.ID) *TKTokenDriverConfiguration {
 // Creates new configuration object for token with specified instanceID and adds it into tokenConfigurations dictionary. If configuration with specified instanceID already exists, it is replaced with new empty configuration.
 func (o *TKTokenDriverConfiguration) AddTokenConfigurationForTokenInstanceID(instanceID *foundation.NSString) *TKTokenConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenDriverConfigurationSelAddTokenConfigurationForTokenInstanceID, instanceID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return TKTokenConfigurationFromID(_ret)
 }
 
@@ -55,7 +57,9 @@ func TKTokenDriverConfigurationDriverConfigurations() *foundation.NSDictionary[*
 // ClassID of the token configuration. ClassID is taken from @p com.apple.ctk.class-id token extension attribute.
 func (o *TKTokenDriverConfiguration) ClassID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenDriverConfigurationSelClassID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -64,4 +68,3 @@ func (o *TKTokenDriverConfiguration) TokenConfigurations() *foundation.NSDiction
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *TKTokenConfiguration]](o.Ptr(), _tKTokenDriverConfigurationSelTokenConfigurations)
 	return _ret
 }
-

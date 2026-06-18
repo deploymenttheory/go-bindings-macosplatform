@@ -16,18 +16,18 @@ type MDLVertexDescriptor struct {
 }
 
 var (
-	_clsMDLVertexDescriptor = _objcClass("MDLVertexDescriptor")
+	_clsMDLVertexDescriptor                         = _objcClass("MDLVertexDescriptor")
 	_mDLVertexDescriptorSelInitWithVertexDescriptor = objc.RegisterName("initWithVertexDescriptor:")
-	_mDLVertexDescriptorSelAttributeNamed = objc.RegisterName("attributeNamed:")
-	_mDLVertexDescriptorSelAddOrReplaceAttribute = objc.RegisterName("addOrReplaceAttribute:")
-	_mDLVertexDescriptorSelRemoveAttributeNamed = objc.RegisterName("removeAttributeNamed:")
-	_mDLVertexDescriptorSelReset = objc.RegisterName("reset")
-	_mDLVertexDescriptorSelSetPackedStrides = objc.RegisterName("setPackedStrides")
-	_mDLVertexDescriptorSelSetPackedOffsets = objc.RegisterName("setPackedOffsets")
-	_mDLVertexDescriptorSelAttributes = objc.RegisterName("attributes")
-	_mDLVertexDescriptorSelSetAttributes = objc.RegisterName("setAttributes:")
-	_mDLVertexDescriptorSelLayouts = objc.RegisterName("layouts")
-	_mDLVertexDescriptorSelSetLayouts = objc.RegisterName("setLayouts:")
+	_mDLVertexDescriptorSelAttributeNamed           = objc.RegisterName("attributeNamed:")
+	_mDLVertexDescriptorSelAddOrReplaceAttribute    = objc.RegisterName("addOrReplaceAttribute:")
+	_mDLVertexDescriptorSelRemoveAttributeNamed     = objc.RegisterName("removeAttributeNamed:")
+	_mDLVertexDescriptorSelReset                    = objc.RegisterName("reset")
+	_mDLVertexDescriptorSelSetPackedStrides         = objc.RegisterName("setPackedStrides")
+	_mDLVertexDescriptorSelSetPackedOffsets         = objc.RegisterName("setPackedOffsets")
+	_mDLVertexDescriptorSelAttributes               = objc.RegisterName("attributes")
+	_mDLVertexDescriptorSelSetAttributes            = objc.RegisterName("setAttributes:")
+	_mDLVertexDescriptorSelLayouts                  = objc.RegisterName("layouts")
+	_mDLVertexDescriptorSelSetLayouts               = objc.RegisterName("setLayouts:")
 )
 
 func MDLVertexDescriptorFromID(id objc.ID) *MDLVertexDescriptor {
@@ -43,14 +43,18 @@ func MDLVertexDescriptorFromID(id objc.ID) *MDLVertexDescriptor {
 // @method initVertexDescriptor: @abstract Initializes the object with values from supplied vertexDescriptor @discussion This performs a deep copy of all data in the supplied descriptor.
 func (o *MDLVertexDescriptor) InitWithVertexDescriptor(vertexDescriptor *MDLVertexDescriptor) *MDLVertexDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLVertexDescriptorSelInitWithVertexDescriptor, vertexDescriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLVertexDescriptorFromID(_ret)
 }
 
 // @method attributeNamed: @abstract Retrieves the attribute with the given name @return The attribute with the supplied name or nil if attribute with the given name does not exist in the descriptor object
 func (o *MDLVertexDescriptor) AttributeNamed(name *foundation.NSString) *MDLVertexAttribute {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLVertexDescriptorSelAttributeNamed, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLVertexAttributeFromID(_ret)
 }
 
@@ -82,7 +86,9 @@ func (o *MDLVertexDescriptor) SetPackedOffsets() {
 // @property attributes @abstract An array of MDLVertexAttribute objects @discussion ay describing the current attribute state of vertex buffers in an MDLMesh mesh
 func (o *MDLVertexDescriptor) Attributes() *foundation.NSMutableArray[*MDLVertexAttribute] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLVertexDescriptorSelAttributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSMutableArrayFromID[*MDLVertexAttribute](_ret)
 }
 
@@ -93,11 +99,12 @@ func (o *MDLVertexDescriptor) SetAttributes(attributes *foundation.NSMutableArra
 // @property layouts @abstract An array of MDLVertexBufferLayout @discussion An array describing the current layout state of vertex buffers in an MDLMesh mesh
 func (o *MDLVertexDescriptor) Layouts() *foundation.NSMutableArray[*MDLVertexBufferLayout] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLVertexDescriptorSelLayouts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSMutableArrayFromID[*MDLVertexBufferLayout](_ret)
 }
 
 func (o *MDLVertexDescriptor) SetLayouts(layouts *foundation.NSMutableArray[*MDLVertexBufferLayout]) {
 	o.Ptr().Send(_mDLVertexDescriptorSelSetLayouts, layouts.Ptr())
 }
-

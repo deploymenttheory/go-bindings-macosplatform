@@ -16,21 +16,21 @@ type NSAffineTransform struct {
 }
 
 var (
-	_clsNSAffineTransform = _objcClass("NSAffineTransform")
-	_nSAffineTransformSelTransform = objc.RegisterName("transform")
-	_nSAffineTransformSelInitWithTransform = objc.RegisterName("initWithTransform:")
-	_nSAffineTransformSelInit = objc.RegisterName("init")
-	_nSAffineTransformSelTranslateXByYBy = objc.RegisterName("translateXBy:yBy:")
-	_nSAffineTransformSelRotateByDegrees = objc.RegisterName("rotateByDegrees:")
-	_nSAffineTransformSelRotateByRadians = objc.RegisterName("rotateByRadians:")
-	_nSAffineTransformSelScaleBy = objc.RegisterName("scaleBy:")
-	_nSAffineTransformSelScaleXByYBy = objc.RegisterName("scaleXBy:yBy:")
-	_nSAffineTransformSelInvert = objc.RegisterName("invert")
-	_nSAffineTransformSelAppendTransform = objc.RegisterName("appendTransform:")
-	_nSAffineTransformSelPrependTransform = objc.RegisterName("prependTransform:")
-	_nSAffineTransformSelTransformPoint = objc.RegisterName("transformPoint:")
-	_nSAffineTransformSelTransformSize = objc.RegisterName("transformSize:")
-	_nSAffineTransformSelTransformStruct = objc.RegisterName("transformStruct")
+	_clsNSAffineTransform                   = _objcClass("NSAffineTransform")
+	_nSAffineTransformSelTransform          = objc.RegisterName("transform")
+	_nSAffineTransformSelInitWithTransform  = objc.RegisterName("initWithTransform:")
+	_nSAffineTransformSelInit               = objc.RegisterName("init")
+	_nSAffineTransformSelTranslateXByYBy    = objc.RegisterName("translateXBy:yBy:")
+	_nSAffineTransformSelRotateByDegrees    = objc.RegisterName("rotateByDegrees:")
+	_nSAffineTransformSelRotateByRadians    = objc.RegisterName("rotateByRadians:")
+	_nSAffineTransformSelScaleBy            = objc.RegisterName("scaleBy:")
+	_nSAffineTransformSelScaleXByYBy        = objc.RegisterName("scaleXBy:yBy:")
+	_nSAffineTransformSelInvert             = objc.RegisterName("invert")
+	_nSAffineTransformSelAppendTransform    = objc.RegisterName("appendTransform:")
+	_nSAffineTransformSelPrependTransform   = objc.RegisterName("prependTransform:")
+	_nSAffineTransformSelTransformPoint     = objc.RegisterName("transformPoint:")
+	_nSAffineTransformSelTransformSize      = objc.RegisterName("transformSize:")
+	_nSAffineTransformSelTransformStruct    = objc.RegisterName("transformStruct")
 	_nSAffineTransformSelSetTransformStruct = objc.RegisterName("setTransformStruct:")
 )
 
@@ -46,19 +46,25 @@ func NSAffineTransformFromID(id objc.ID) *NSAffineTransform {
 
 func NSAffineTransformTransform() *NSAffineTransform {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAffineTransform), _nSAffineTransformSelTransform)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAffineTransformFromID(_ret)
 }
 
 func (o *NSAffineTransform) InitWithTransform(transform *NSAffineTransform) *NSAffineTransform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAffineTransformSelInitWithTransform, transform.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAffineTransformFromID(_ret)
 }
 
 func (o *NSAffineTransform) Init() *NSAffineTransform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAffineTransformSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAffineTransformFromID(_ret)
 }
 
@@ -112,4 +118,3 @@ func (o *NSAffineTransform) TransformStruct() NSAffineTransformStruct {
 func (o *NSAffineTransform) SetTransformStruct(transformStruct NSAffineTransformStruct) {
 	o.Ptr().Send(_nSAffineTransformSelSetTransformStruct, transformStruct)
 }
-

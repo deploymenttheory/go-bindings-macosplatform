@@ -45,7 +45,9 @@ func (x *KeyframeAnimation) WithKeyTimes(items ...*foundation.NSNumber) *Keyfram
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -61,7 +63,9 @@ func (x *KeyframeAnimation) WithTimingFunctions(items ...*raw.CAMediaTimingFunct
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.CAMediaTimingFunction](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -83,7 +87,9 @@ func (x *KeyframeAnimation) WithTensionValues(items ...*foundation.NSNumber) *Ke
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -99,7 +105,9 @@ func (x *KeyframeAnimation) WithContinuityValues(items ...*foundation.NSNumber) 
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -115,7 +123,9 @@ func (x *KeyframeAnimation) WithBiasValues(items ...*foundation.NSNumber) *Keyfr
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -306,9 +316,13 @@ func (x *KeyframeAnimation) SetRotationMode(rotationMode *foundation.NSString) {
 	x.inner.SetRotationMode(rotationMode)
 }
 
-func (x *KeyframeAnimation) asPropertyAnimation() *raw.CAPropertyAnimation { return &x.inner.CAPropertyAnimation }
+func (x *KeyframeAnimation) asPropertyAnimation() *raw.CAPropertyAnimation {
+	return &x.inner.CAPropertyAnimation
+}
 
-func (x *KeyframeAnimation) asAnimation() *raw.CAAnimation { return &x.inner.CAPropertyAnimation.CAAnimation }
+func (x *KeyframeAnimation) asAnimation() *raw.CAAnimation {
+	return &x.inner.CAPropertyAnimation.CAAnimation
+}
 
 // KeyframeAnimationable is the interface implemented by [KeyframeAnimation], for mocking and DI.
 type KeyframeAnimationable interface {
@@ -349,4 +363,3 @@ type KeyframeAnimationable interface {
 }
 
 var _ KeyframeAnimationable = (*KeyframeAnimation)(nil)
-

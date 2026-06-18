@@ -16,9 +16,9 @@ type SWHighlight struct {
 }
 
 var (
-	_clsSWHighlight = _objcClass("SWHighlight")
+	_clsSWHighlight           = _objcClass("SWHighlight")
 	_sWHighlightSelIdentifier = objc.RegisterName("identifier")
-	_sWHighlightSelURL = objc.RegisterName("URL")
+	_sWHighlightSelURL        = objc.RegisterName("URL")
 )
 
 func SWHighlightFromID(id objc.ID) *SWHighlight {
@@ -40,7 +40,8 @@ func (o *SWHighlight) Identifier() objc.ID {
 // @abstract The surfaced content URL
 func (o *SWHighlight) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWHighlightSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
-

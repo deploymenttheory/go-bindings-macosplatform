@@ -6,4 +6,3 @@ package javascriptcore
 // JSExport wraps the ObjC protocol JSExport.
 type JSExport interface {
 }
-

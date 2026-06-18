@@ -18,13 +18,13 @@ type SFSpeechRecognitionTask struct {
 }
 
 var (
-	_clsSFSpeechRecognitionTask = _objcClass("SFSpeechRecognitionTask")
-	_sFSpeechRecognitionTaskSelFinish = objc.RegisterName("finish")
-	_sFSpeechRecognitionTaskSelCancel = objc.RegisterName("cancel")
-	_sFSpeechRecognitionTaskSelState = objc.RegisterName("state")
+	_clsSFSpeechRecognitionTask            = _objcClass("SFSpeechRecognitionTask")
+	_sFSpeechRecognitionTaskSelFinish      = objc.RegisterName("finish")
+	_sFSpeechRecognitionTaskSelCancel      = objc.RegisterName("cancel")
+	_sFSpeechRecognitionTaskSelState       = objc.RegisterName("state")
 	_sFSpeechRecognitionTaskSelIsFinishing = objc.RegisterName("isFinishing")
 	_sFSpeechRecognitionTaskSelIsCancelled = objc.RegisterName("isCancelled")
-	_sFSpeechRecognitionTaskSelError = objc.RegisterName("error")
+	_sFSpeechRecognitionTaskSelError       = objc.RegisterName("error")
 )
 
 func SFSpeechRecognitionTaskFromID(id objc.ID) *SFSpeechRecognitionTask {
@@ -46,7 +46,7 @@ func (o *SFSpeechRecognitionTask) Cancel() {
 	o.Ptr().Send(_sFSpeechRecognitionTaskSelCancel)
 }
 
-// The current state of the speech recognition task. Check the value of this property to get the state of the in-progress speech recognition session. For valid values, see ``SFSpeechRecognitionTaskState``.
+// The current state of the speech recognition task. Check the value of this property to get the state of the in-progress speech recognition session. For valid values, see “SFSpeechRecognitionTaskState“.
 func (o *SFSpeechRecognitionTask) State() SFSpeechRecognitionTaskState {
 	_ret := objc.Send[SFSpeechRecognitionTaskState](o.Ptr(), _sFSpeechRecognitionTaskSelState)
 	return _ret
@@ -69,4 +69,3 @@ func (o *SFSpeechRecognitionTask) Error() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sFSpeechRecognitionTaskSelError)
 	return _ret
 }
-

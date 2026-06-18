@@ -11,9 +11,9 @@ import (
 type SKDocumentIndexState int64
 
 const (
-	KSKDocumentStateNotIndexed SKDocumentIndexState = 0
-	KSKDocumentStateIndexed SKDocumentIndexState = 1
-	KSKDocumentStateAddPending SKDocumentIndexState = 2
+	KSKDocumentStateNotIndexed    SKDocumentIndexState = 0
+	KSKDocumentStateIndexed       SKDocumentIndexState = 1
+	KSKDocumentStateAddPending    SKDocumentIndexState = 2
 	KSKDocumentStateDeletePending SKDocumentIndexState = 3
 )
 
@@ -35,9 +35,9 @@ func (e SKDocumentIndexState) String() string {
 type SKIndexType int64
 
 const (
-	KSKIndexUnknown SKIndexType = 0
-	KSKIndexInverted SKIndexType = 1
-	KSKIndexVector SKIndexType = 2
+	KSKIndexUnknown        SKIndexType = 0
+	KSKIndexInverted       SKIndexType = 1
+	KSKIndexVector         SKIndexType = 2
 	KSKIndexInvertedVector SKIndexType = 3
 )
 
@@ -59,10 +59,10 @@ func (e SKIndexType) String() string {
 type SKSearchType int64
 
 const (
-	KSKSearchRanked SKSearchType = 0
-	KSKSearchBooleanRanked SKSearchType = 1
+	KSKSearchRanked         SKSearchType = 0
+	KSKSearchBooleanRanked  SKSearchType = 1
 	KSKSearchRequiredRanked SKSearchType = 2
-	KSKSearchPrefixRanked SKSearchType = 3
+	KSKSearchPrefixRanked   SKSearchType = 3
 )
 
 func (e SKSearchType) String() string {
@@ -79,4 +79,3 @@ func (e SKSearchType) String() string {
 		return fmt.Sprintf("SKSearchType(%d)", int64(e))
 	}
 }
-

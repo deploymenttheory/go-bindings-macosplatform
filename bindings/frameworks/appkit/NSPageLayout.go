@@ -18,20 +18,20 @@ type NSPageLayout struct {
 }
 
 var (
-	_clsNSPageLayout = _objcClass("NSPageLayout")
-	_nSPageLayoutSelPageLayout = objc.RegisterName("pageLayout")
-	_nSPageLayoutSelAddAccessoryController = objc.RegisterName("addAccessoryController:")
-	_nSPageLayoutSelRemoveAccessoryController = objc.RegisterName("removeAccessoryController:")
-	_nSPageLayoutSelBeginSheetUsingPrintInfoOnWindowCompletionHandler = objc.RegisterName("beginSheetUsingPrintInfo:onWindow:completionHandler:")
+	_clsNSPageLayout                                                                       = _objcClass("NSPageLayout")
+	_nSPageLayoutSelPageLayout                                                             = objc.RegisterName("pageLayout")
+	_nSPageLayoutSelAddAccessoryController                                                 = objc.RegisterName("addAccessoryController:")
+	_nSPageLayoutSelRemoveAccessoryController                                              = objc.RegisterName("removeAccessoryController:")
+	_nSPageLayoutSelBeginSheetUsingPrintInfoOnWindowCompletionHandler                      = objc.RegisterName("beginSheetUsingPrintInfo:onWindow:completionHandler:")
 	_nSPageLayoutSelBeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo = objc.RegisterName("beginSheetWithPrintInfo:modalForWindow:delegate:didEndSelector:contextInfo:")
-	_nSPageLayoutSelRunModalWithPrintInfo = objc.RegisterName("runModalWithPrintInfo:")
-	_nSPageLayoutSelRunModal = objc.RegisterName("runModal")
-	_nSPageLayoutSelAccessoryControllers = objc.RegisterName("accessoryControllers")
-	_nSPageLayoutSelPrintInfo = objc.RegisterName("printInfo")
-	_nSPageLayoutSelSetAccessoryView = objc.RegisterName("setAccessoryView:")
-	_nSPageLayoutSelAccessoryView = objc.RegisterName("accessoryView")
-	_nSPageLayoutSelReadPrintInfo = objc.RegisterName("readPrintInfo")
-	_nSPageLayoutSelWritePrintInfo = objc.RegisterName("writePrintInfo")
+	_nSPageLayoutSelRunModalWithPrintInfo                                                  = objc.RegisterName("runModalWithPrintInfo:")
+	_nSPageLayoutSelRunModal                                                               = objc.RegisterName("runModal")
+	_nSPageLayoutSelAccessoryControllers                                                   = objc.RegisterName("accessoryControllers")
+	_nSPageLayoutSelPrintInfo                                                              = objc.RegisterName("printInfo")
+	_nSPageLayoutSelSetAccessoryView                                                       = objc.RegisterName("setAccessoryView:")
+	_nSPageLayoutSelAccessoryView                                                          = objc.RegisterName("accessoryView")
+	_nSPageLayoutSelReadPrintInfo                                                          = objc.RegisterName("readPrintInfo")
+	_nSPageLayoutSelWritePrintInfo                                                         = objc.RegisterName("writePrintInfo")
 )
 
 func NSPageLayoutFromID(id objc.ID) *NSPageLayout {
@@ -46,7 +46,9 @@ func NSPageLayoutFromID(id objc.ID) *NSPageLayout {
 
 func NSPageLayoutPageLayout() *NSPageLayout {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPageLayout), _nSPageLayoutSelPageLayout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPageLayoutFromID(_ret)
 }
 
@@ -87,13 +89,17 @@ func (o *NSPageLayout) RunModal() int {
 
 func (o *NSPageLayout) AccessoryControllers() *foundation.NSArray[*NSViewController] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPageLayoutSelAccessoryControllers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSViewController](_ret)
 }
 
 func (o *NSPageLayout) PrintInfo() *NSPrintInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPageLayoutSelPrintInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPrintInfoFromID(_ret)
 }
 
@@ -105,7 +111,9 @@ func (o *NSPageLayout) SetAccessoryView(accessoryView *NSView) {
 // Deprecated: since macOS 10.5.
 func (o *NSPageLayout) AccessoryView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPageLayoutSelAccessoryView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -118,4 +126,3 @@ func (o *NSPageLayout) ReadPrintInfo() {
 func (o *NSPageLayout) WritePrintInfo() {
 	o.Ptr().Send(_nSPageLayoutSelWritePrintInfo)
 }
-

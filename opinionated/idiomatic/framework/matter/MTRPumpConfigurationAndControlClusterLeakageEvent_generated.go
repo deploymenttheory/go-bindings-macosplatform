@@ -15,7 +15,9 @@ type MTRPumpConfigurationAndControlClusterLeakageEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRPumpConfigurationAndControlClusterLeakageEvent].
-func (x *MTRPumpConfigurationAndControlClusterLeakageEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterLeakageEvent { return x.inner }
+func (x *MTRPumpConfigurationAndControlClusterLeakageEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterLeakageEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -41,4 +43,3 @@ type MTRPumpConfigurationAndControlClusterLeakageEventable interface {
 }
 
 var _ MTRPumpConfigurationAndControlClusterLeakageEventable = (*MTRPumpConfigurationAndControlClusterLeakageEvent)(nil)
-

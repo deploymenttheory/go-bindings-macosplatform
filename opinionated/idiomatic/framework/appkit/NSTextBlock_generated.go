@@ -187,4 +187,3 @@ type TextBlockable interface {
 }
 
 var _ TextBlockable = (*TextBlock)(nil)
-

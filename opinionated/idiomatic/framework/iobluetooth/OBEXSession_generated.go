@@ -194,4 +194,3 @@ type OBEXSessionable interface {
 }
 
 var _ OBEXSessionable = (*OBEXSession)(nil)
-

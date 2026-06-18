@@ -408,4 +408,3 @@ type UserActivityable interface {
 }
 
 var _ UserActivityable = (*UserActivity)(nil)
-

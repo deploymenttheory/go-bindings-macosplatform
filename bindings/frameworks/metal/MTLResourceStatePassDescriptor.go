@@ -16,9 +16,9 @@ type MTLResourceStatePassDescriptor struct {
 }
 
 var (
-	_clsMTLResourceStatePassDescriptor = _objcClass("MTLResourceStatePassDescriptor")
+	_clsMTLResourceStatePassDescriptor                            = _objcClass("MTLResourceStatePassDescriptor")
 	_mTLResourceStatePassDescriptorSelResourceStatePassDescriptor = objc.RegisterName("resourceStatePassDescriptor")
-	_mTLResourceStatePassDescriptorSelSampleBufferAttachments = objc.RegisterName("sampleBufferAttachments")
+	_mTLResourceStatePassDescriptorSelSampleBufferAttachments     = objc.RegisterName("sampleBufferAttachments")
 )
 
 func MTLResourceStatePassDescriptorFromID(id objc.ID) *MTLResourceStatePassDescriptor {
@@ -34,13 +34,16 @@ func MTLResourceStatePassDescriptorFromID(id objc.ID) *MTLResourceStatePassDescr
 // @method resourceStatePassDescriptor @abstract Create an autoreleased default frame buffer descriptor
 func MTLResourceStatePassDescriptorResourceStatePassDescriptor() *MTLResourceStatePassDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLResourceStatePassDescriptor), _mTLResourceStatePassDescriptorSelResourceStatePassDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLResourceStatePassDescriptorFromID(_ret)
 }
 
 func (o *MTLResourceStatePassDescriptor) SampleBufferAttachments() *MTLResourceStatePassSampleBufferAttachmentDescriptorArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLResourceStatePassDescriptorSelSampleBufferAttachments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLResourceStatePassSampleBufferAttachmentDescriptorArrayFromID(_ret)
 }
-

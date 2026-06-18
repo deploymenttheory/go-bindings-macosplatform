@@ -44,9 +44,13 @@ func (x *ArrayLUTDequantize) WithDestinationArrayAllocator(destinationArrayAlloc
 	return x
 }
 
-func (x *ArrayLUTDequantize) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel { return &x.inner.MPSNDArrayMultiaryKernel }
+func (x *ArrayLUTDequantize) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel {
+	return &x.inner.MPSNDArrayMultiaryKernel
+}
 
-func (x *ArrayLUTDequantize) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
+func (x *ArrayLUTDequantize) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase {
+	return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase
+}
 
 // ArrayLUTDequantizeable is the interface implemented by [ArrayLUTDequantize], for mocking and DI.
 type ArrayLUTDequantizeable interface {
@@ -55,4 +59,3 @@ type ArrayLUTDequantizeable interface {
 }
 
 var _ ArrayLUTDequantizeable = (*ArrayLUTDequantize)(nil)
-

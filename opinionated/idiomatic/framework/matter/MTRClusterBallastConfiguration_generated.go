@@ -254,9 +254,13 @@ func (x *MTRClusterBallastConfiguration) WriteAttributeIntrinsicBalanceFactorWit
 	x.inner.WriteAttributeIntrinsicBalanceFactorWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
 }
 
-func (x *MTRClusterBallastConfiguration) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterBallastConfiguration) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterBallastConfiguration) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterBallastConfiguration) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterBallastConfigurationable is the interface implemented by [MTRClusterBallastConfiguration], for mocking and DI.
 type MTRClusterBallastConfigurationable interface {
@@ -306,4 +310,3 @@ type MTRClusterBallastConfigurationable interface {
 }
 
 var _ MTRClusterBallastConfigurationable = (*MTRClusterBallastConfiguration)(nil)
-

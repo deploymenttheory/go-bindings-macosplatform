@@ -16,31 +16,31 @@ type SCNPhysicsVehicleWheel struct {
 }
 
 var (
-	_clsSCNPhysicsVehicleWheel = _objcClass("SCNPhysicsVehicleWheel")
-	_sCNPhysicsVehicleWheelSelWheelWithNode = objc.RegisterName("wheelWithNode:")
-	_sCNPhysicsVehicleWheelSelNode = objc.RegisterName("node")
-	_sCNPhysicsVehicleWheelSelSuspensionStiffness = objc.RegisterName("suspensionStiffness")
-	_sCNPhysicsVehicleWheelSelSetSuspensionStiffness = objc.RegisterName("setSuspensionStiffness:")
-	_sCNPhysicsVehicleWheelSelSuspensionCompression = objc.RegisterName("suspensionCompression")
-	_sCNPhysicsVehicleWheelSelSetSuspensionCompression = objc.RegisterName("setSuspensionCompression:")
-	_sCNPhysicsVehicleWheelSelSuspensionDamping = objc.RegisterName("suspensionDamping")
-	_sCNPhysicsVehicleWheelSelSetSuspensionDamping = objc.RegisterName("setSuspensionDamping:")
-	_sCNPhysicsVehicleWheelSelMaximumSuspensionTravel = objc.RegisterName("maximumSuspensionTravel")
+	_clsSCNPhysicsVehicleWheel                           = _objcClass("SCNPhysicsVehicleWheel")
+	_sCNPhysicsVehicleWheelSelWheelWithNode              = objc.RegisterName("wheelWithNode:")
+	_sCNPhysicsVehicleWheelSelNode                       = objc.RegisterName("node")
+	_sCNPhysicsVehicleWheelSelSuspensionStiffness        = objc.RegisterName("suspensionStiffness")
+	_sCNPhysicsVehicleWheelSelSetSuspensionStiffness     = objc.RegisterName("setSuspensionStiffness:")
+	_sCNPhysicsVehicleWheelSelSuspensionCompression      = objc.RegisterName("suspensionCompression")
+	_sCNPhysicsVehicleWheelSelSetSuspensionCompression   = objc.RegisterName("setSuspensionCompression:")
+	_sCNPhysicsVehicleWheelSelSuspensionDamping          = objc.RegisterName("suspensionDamping")
+	_sCNPhysicsVehicleWheelSelSetSuspensionDamping       = objc.RegisterName("setSuspensionDamping:")
+	_sCNPhysicsVehicleWheelSelMaximumSuspensionTravel    = objc.RegisterName("maximumSuspensionTravel")
 	_sCNPhysicsVehicleWheelSelSetMaximumSuspensionTravel = objc.RegisterName("setMaximumSuspensionTravel:")
-	_sCNPhysicsVehicleWheelSelFrictionSlip = objc.RegisterName("frictionSlip")
-	_sCNPhysicsVehicleWheelSelSetFrictionSlip = objc.RegisterName("setFrictionSlip:")
-	_sCNPhysicsVehicleWheelSelMaximumSuspensionForce = objc.RegisterName("maximumSuspensionForce")
-	_sCNPhysicsVehicleWheelSelSetMaximumSuspensionForce = objc.RegisterName("setMaximumSuspensionForce:")
-	_sCNPhysicsVehicleWheelSelConnectionPosition = objc.RegisterName("connectionPosition")
-	_sCNPhysicsVehicleWheelSelSetConnectionPosition = objc.RegisterName("setConnectionPosition:")
-	_sCNPhysicsVehicleWheelSelSteeringAxis = objc.RegisterName("steeringAxis")
-	_sCNPhysicsVehicleWheelSelSetSteeringAxis = objc.RegisterName("setSteeringAxis:")
-	_sCNPhysicsVehicleWheelSelAxle = objc.RegisterName("axle")
-	_sCNPhysicsVehicleWheelSelSetAxle = objc.RegisterName("setAxle:")
-	_sCNPhysicsVehicleWheelSelRadius = objc.RegisterName("radius")
-	_sCNPhysicsVehicleWheelSelSetRadius = objc.RegisterName("setRadius:")
-	_sCNPhysicsVehicleWheelSelSuspensionRestLength = objc.RegisterName("suspensionRestLength")
-	_sCNPhysicsVehicleWheelSelSetSuspensionRestLength = objc.RegisterName("setSuspensionRestLength:")
+	_sCNPhysicsVehicleWheelSelFrictionSlip               = objc.RegisterName("frictionSlip")
+	_sCNPhysicsVehicleWheelSelSetFrictionSlip            = objc.RegisterName("setFrictionSlip:")
+	_sCNPhysicsVehicleWheelSelMaximumSuspensionForce     = objc.RegisterName("maximumSuspensionForce")
+	_sCNPhysicsVehicleWheelSelSetMaximumSuspensionForce  = objc.RegisterName("setMaximumSuspensionForce:")
+	_sCNPhysicsVehicleWheelSelConnectionPosition         = objc.RegisterName("connectionPosition")
+	_sCNPhysicsVehicleWheelSelSetConnectionPosition      = objc.RegisterName("setConnectionPosition:")
+	_sCNPhysicsVehicleWheelSelSteeringAxis               = objc.RegisterName("steeringAxis")
+	_sCNPhysicsVehicleWheelSelSetSteeringAxis            = objc.RegisterName("setSteeringAxis:")
+	_sCNPhysicsVehicleWheelSelAxle                       = objc.RegisterName("axle")
+	_sCNPhysicsVehicleWheelSelSetAxle                    = objc.RegisterName("setAxle:")
+	_sCNPhysicsVehicleWheelSelRadius                     = objc.RegisterName("radius")
+	_sCNPhysicsVehicleWheelSelSetRadius                  = objc.RegisterName("setRadius:")
+	_sCNPhysicsVehicleWheelSelSuspensionRestLength       = objc.RegisterName("suspensionRestLength")
+	_sCNPhysicsVehicleWheelSelSetSuspensionRestLength    = objc.RegisterName("setSuspensionRestLength:")
 )
 
 func SCNPhysicsVehicleWheelFromID(id objc.ID) *SCNPhysicsVehicleWheel {
@@ -55,13 +55,17 @@ func SCNPhysicsVehicleWheelFromID(id objc.ID) *SCNPhysicsVehicleWheel {
 
 func SCNPhysicsVehicleWheelWheelWithNode(node *SCNNode) *SCNPhysicsVehicleWheel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsVehicleWheel), _sCNPhysicsVehicleWheelSelWheelWithNode, node.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsVehicleWheelFromID(_ret)
 }
 
 func (o *SCNPhysicsVehicleWheel) Node() *SCNNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNPhysicsVehicleWheelSelNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNNodeFromID(_ret)
 }
 
@@ -163,4 +167,3 @@ func (o *SCNPhysicsVehicleWheel) SuspensionRestLength() float64 {
 func (o *SCNPhysicsVehicleWheel) SetSuspensionRestLength(suspensionRestLength float64) {
 	o.Ptr().Send(_sCNPhysicsVehicleWheelSelSetSuspensionRestLength, suspensionRestLength)
 }
-

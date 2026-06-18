@@ -75,7 +75,9 @@ func (x *NetworkDeviceConfiguration) SetAttachment(attachment *raw.VZNetworkDevi
 	x.inner.SetAttachment(attachment)
 }
 
-func (x *NetworkDeviceConfiguration) asNetworkDeviceConfiguration() *raw.VZNetworkDeviceConfiguration { return x.inner }
+func (x *NetworkDeviceConfiguration) asNetworkDeviceConfiguration() *raw.VZNetworkDeviceConfiguration {
+	return x.inner
+}
 
 // NetworkDeviceConfigurationable is the interface implemented by [NetworkDeviceConfiguration], for mocking and DI.
 type NetworkDeviceConfigurationable interface {
@@ -89,4 +91,3 @@ type NetworkDeviceConfigurationable interface {
 }
 
 var _ NetworkDeviceConfigurationable = (*NetworkDeviceConfiguration)(nil)
-

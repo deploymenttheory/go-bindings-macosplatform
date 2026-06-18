@@ -76,4 +76,3 @@ type HTTPURLResponseable interface {
 }
 
 var _ HTTPURLResponseable = (*HTTPURLResponse)(nil)
-

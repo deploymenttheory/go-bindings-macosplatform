@@ -19,36 +19,36 @@ type PHAsset struct {
 }
 
 var (
-	_clsPHAsset = _objcClass("PHAsset")
-	_pHAssetSelCanPerformEditOperation = objc.RegisterName("canPerformEditOperation:")
-	_pHAssetSelFetchAssetsInAssetCollectionOptions = objc.RegisterName("fetchAssetsInAssetCollection:options:")
-	_pHAssetSelFetchAssetsWithLocalIdentifiersOptions = objc.RegisterName("fetchAssetsWithLocalIdentifiers:options:")
-	_pHAssetSelFetchKeyAssetsInAssetCollectionOptions = objc.RegisterName("fetchKeyAssetsInAssetCollection:options:")
-	_pHAssetSelFetchAssetsWithBurstIdentifierOptions = objc.RegisterName("fetchAssetsWithBurstIdentifier:options:")
-	_pHAssetSelFetchAssetsWithOptions = objc.RegisterName("fetchAssetsWithOptions:")
-	_pHAssetSelFetchAssetsWithMediaTypeOptions = objc.RegisterName("fetchAssetsWithMediaType:options:")
-	_pHAssetSelPlaybackStyle = objc.RegisterName("playbackStyle")
-	_pHAssetSelMediaType = objc.RegisterName("mediaType")
-	_pHAssetSelMediaSubtypes = objc.RegisterName("mediaSubtypes")
-	_pHAssetSelContentType = objc.RegisterName("contentType")
-	_pHAssetSelPixelWidth = objc.RegisterName("pixelWidth")
-	_pHAssetSelPixelHeight = objc.RegisterName("pixelHeight")
-	_pHAssetSelCreationDate = objc.RegisterName("creationDate")
-	_pHAssetSelModificationDate = objc.RegisterName("modificationDate")
-	_pHAssetSelAddedDate = objc.RegisterName("addedDate")
-	_pHAssetSelLocation = objc.RegisterName("location")
-	_pHAssetSelDuration = objc.RegisterName("duration")
-	_pHAssetSelIsHidden = objc.RegisterName("isHidden")
-	_pHAssetSelIsFavorite = objc.RegisterName("isFavorite")
-	_pHAssetSelIsSyncFailureHidden = objc.RegisterName("isSyncFailureHidden")
-	_pHAssetSelBurstIdentifier = objc.RegisterName("burstIdentifier")
-	_pHAssetSelBurstSelectionTypes = objc.RegisterName("burstSelectionTypes")
-	_pHAssetSelRepresentsBurst = objc.RegisterName("representsBurst")
-	_pHAssetSelSourceType = objc.RegisterName("sourceType")
-	_pHAssetSelHasAdjustments = objc.RegisterName("hasAdjustments")
-	_pHAssetSelAdjustmentFormatIdentifier = objc.RegisterName("adjustmentFormatIdentifier")
+	_clsPHAsset                                                       = _objcClass("PHAsset")
+	_pHAssetSelCanPerformEditOperation                                = objc.RegisterName("canPerformEditOperation:")
+	_pHAssetSelFetchAssetsInAssetCollectionOptions                    = objc.RegisterName("fetchAssetsInAssetCollection:options:")
+	_pHAssetSelFetchAssetsWithLocalIdentifiersOptions                 = objc.RegisterName("fetchAssetsWithLocalIdentifiers:options:")
+	_pHAssetSelFetchKeyAssetsInAssetCollectionOptions                 = objc.RegisterName("fetchKeyAssetsInAssetCollection:options:")
+	_pHAssetSelFetchAssetsWithBurstIdentifierOptions                  = objc.RegisterName("fetchAssetsWithBurstIdentifier:options:")
+	_pHAssetSelFetchAssetsWithOptions                                 = objc.RegisterName("fetchAssetsWithOptions:")
+	_pHAssetSelFetchAssetsWithMediaTypeOptions                        = objc.RegisterName("fetchAssetsWithMediaType:options:")
+	_pHAssetSelPlaybackStyle                                          = objc.RegisterName("playbackStyle")
+	_pHAssetSelMediaType                                              = objc.RegisterName("mediaType")
+	_pHAssetSelMediaSubtypes                                          = objc.RegisterName("mediaSubtypes")
+	_pHAssetSelContentType                                            = objc.RegisterName("contentType")
+	_pHAssetSelPixelWidth                                             = objc.RegisterName("pixelWidth")
+	_pHAssetSelPixelHeight                                            = objc.RegisterName("pixelHeight")
+	_pHAssetSelCreationDate                                           = objc.RegisterName("creationDate")
+	_pHAssetSelModificationDate                                       = objc.RegisterName("modificationDate")
+	_pHAssetSelAddedDate                                              = objc.RegisterName("addedDate")
+	_pHAssetSelLocation                                               = objc.RegisterName("location")
+	_pHAssetSelDuration                                               = objc.RegisterName("duration")
+	_pHAssetSelIsHidden                                               = objc.RegisterName("isHidden")
+	_pHAssetSelIsFavorite                                             = objc.RegisterName("isFavorite")
+	_pHAssetSelIsSyncFailureHidden                                    = objc.RegisterName("isSyncFailureHidden")
+	_pHAssetSelBurstIdentifier                                        = objc.RegisterName("burstIdentifier")
+	_pHAssetSelBurstSelectionTypes                                    = objc.RegisterName("burstSelectionTypes")
+	_pHAssetSelRepresentsBurst                                        = objc.RegisterName("representsBurst")
+	_pHAssetSelSourceType                                             = objc.RegisterName("sourceType")
+	_pHAssetSelHasAdjustments                                         = objc.RegisterName("hasAdjustments")
+	_pHAssetSelAdjustmentFormatIdentifier                             = objc.RegisterName("adjustmentFormatIdentifier")
 	_pHAssetSelRequestContentEditingInputWithOptionsCompletionHandler = objc.RegisterName("requestContentEditingInputWithOptions:completionHandler:")
-	_pHAssetSelCancelContentEditingInputRequest = objc.RegisterName("cancelContentEditingInputRequest:")
+	_pHAssetSelCancelContentEditingInputRequest                       = objc.RegisterName("cancelContentEditingInputRequest:")
 )
 
 func PHAssetFromID(id objc.ID) *PHAsset {
@@ -68,37 +68,49 @@ func (o *PHAsset) CanPerformEditOperation(editOperation PHAssetEditOperation) bo
 
 func PHAssetFetchAssetsInAssetCollectionOptions(assetCollection *PHAssetCollection, options *PHFetchOptions) *PHFetchResult[*PHAsset] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAsset), _pHAssetSelFetchAssetsInAssetCollectionOptions, assetCollection.Ptr(), options.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHFetchResultFromID[*PHAsset](_ret)
 }
 
 func PHAssetFetchAssetsWithLocalIdentifiersOptions(identifiers *foundation.NSArray[*foundation.NSString], options *PHFetchOptions) *PHFetchResult[*PHAsset] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAsset), _pHAssetSelFetchAssetsWithLocalIdentifiersOptions, identifiers, options.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHFetchResultFromID[*PHAsset](_ret)
 }
 
 func PHAssetFetchKeyAssetsInAssetCollectionOptions(assetCollection *PHAssetCollection, options *PHFetchOptions) *PHFetchResult[*PHAsset] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAsset), _pHAssetSelFetchKeyAssetsInAssetCollectionOptions, assetCollection.Ptr(), options.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHFetchResultFromID[*PHAsset](_ret)
 }
 
 func PHAssetFetchAssetsWithBurstIdentifierOptions(burstIdentifier *foundation.NSString, options *PHFetchOptions) *PHFetchResult[*PHAsset] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAsset), _pHAssetSelFetchAssetsWithBurstIdentifierOptions, burstIdentifier.Ptr(), options.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHFetchResultFromID[*PHAsset](_ret)
 }
 
 func PHAssetFetchAssetsWithOptions(options *PHFetchOptions) *PHFetchResult[*PHAsset] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAsset), _pHAssetSelFetchAssetsWithOptions, options.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHFetchResultFromID[*PHAsset](_ret)
 }
 
 func PHAssetFetchAssetsWithMediaTypeOptions(mediaType PHAssetMediaType, options *PHFetchOptions) *PHFetchResult[*PHAsset] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAsset), _pHAssetSelFetchAssetsWithMediaTypeOptions, mediaType, options.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHFetchResultFromID[*PHAsset](_ret)
 }
 
@@ -120,7 +132,9 @@ func (o *PHAsset) MediaSubtypes() PHAssetMediaSubtype {
 // The type of image or video data that is presented for the asset
 func (o *PHAsset) ContentType() *uniformtypeidentifiers.UTType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHAssetSelContentType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return uniformtypeidentifiers.UTTypeFromID(_ret)
 }
 
@@ -137,21 +151,27 @@ func (o *PHAsset) PixelHeight() uint {
 // The date and time of this asset's creation (can be updated by the user)
 func (o *PHAsset) CreationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHAssetSelCreationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // The date and time of the last modification to this asset or one of its properties
 func (o *PHAsset) ModificationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHAssetSelModificationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // The date and time this asset was added to the photo library (from the device that was used to add this asset)
 func (o *PHAsset) AddedDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHAssetSelAddedDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -183,7 +203,9 @@ func (o *PHAsset) IsSyncFailureHidden() bool {
 
 func (o *PHAsset) BurstIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHAssetSelBurstIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -209,7 +231,9 @@ func (o *PHAsset) HasAdjustments() bool {
 
 func (o *PHAsset) AdjustmentFormatIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHAssetSelAdjustmentFormatIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -221,4 +245,3 @@ func (o *PHAsset) RequestContentEditingInputWithOptionsCompletionHandler(options
 func (o *PHAsset) CancelContentEditingInputRequest(requestID uint) {
 	o.Ptr().Send(_pHAssetSelCancelContentEditingInputRequest, requestID)
 }
-

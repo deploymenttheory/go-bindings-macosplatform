@@ -78,4 +78,3 @@ func CGLRetainPBuffer(pbuffer unsafe.Pointer) unsafe.Pointer {
 func CGLRetainPixelFormat(pix unsafe.Pointer) unsafe.Pointer {
 	return raw.CGLRetainPixelFormat(pix)
 }
-

@@ -19,17 +19,17 @@ type WebScriptObject struct {
 }
 
 var (
-	_clsWebScriptObject = _objcClass("WebScriptObject")
-	_webScriptObjectSelThrowException = objc.RegisterName("throwException:")
-	_webScriptObjectSelJSObject = objc.RegisterName("JSObject")
+	_clsWebScriptObject                                 = _objcClass("WebScriptObject")
+	_webScriptObjectSelThrowException                   = objc.RegisterName("throwException:")
+	_webScriptObjectSelJSObject                         = objc.RegisterName("JSObject")
 	_webScriptObjectSelCallWebScriptMethodWithArguments = objc.RegisterName("callWebScriptMethod:withArguments:")
-	_webScriptObjectSelEvaluateWebScript = objc.RegisterName("evaluateWebScript:")
-	_webScriptObjectSelRemoveWebScriptKey = objc.RegisterName("removeWebScriptKey:")
-	_webScriptObjectSelStringRepresentation = objc.RegisterName("stringRepresentation")
-	_webScriptObjectSelWebScriptValueAtIndex = objc.RegisterName("webScriptValueAtIndex:")
-	_webScriptObjectSelSetWebScriptValueAtIndexValue = objc.RegisterName("setWebScriptValueAtIndex:value:")
-	_webScriptObjectSelSetException = objc.RegisterName("setException:")
-	_webScriptObjectSelJSValue = objc.RegisterName("JSValue")
+	_webScriptObjectSelEvaluateWebScript                = objc.RegisterName("evaluateWebScript:")
+	_webScriptObjectSelRemoveWebScriptKey               = objc.RegisterName("removeWebScriptKey:")
+	_webScriptObjectSelStringRepresentation             = objc.RegisterName("stringRepresentation")
+	_webScriptObjectSelWebScriptValueAtIndex            = objc.RegisterName("webScriptValueAtIndex:")
+	_webScriptObjectSelSetWebScriptValueAtIndexValue    = objc.RegisterName("setWebScriptValueAtIndex:value:")
+	_webScriptObjectSelSetException                     = objc.RegisterName("setException:")
+	_webScriptObjectSelJSValue                          = objc.RegisterName("JSValue")
 )
 
 func WebScriptObjectFromID(id objc.ID) *WebScriptObject {
@@ -74,7 +74,9 @@ func (o *WebScriptObject) RemoveWebScriptKey(name *foundation.NSString) {
 // @method stringRepresentation @discussion Converts the target object to a string representation. The coercion of non string objects type is dependent on the script environment. @result Returns the string representation of the object.
 func (o *WebScriptObject) StringRepresentation() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webScriptObjectSelStringRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -97,7 +99,8 @@ func (o *WebScriptObject) SetException(description *foundation.NSString) {
 // @method JSValue @result The equivalent Objective-C JSValue for this WebScriptObject. @discussion Use this method to bridge between the WebScriptObject and JavaScriptCore Objective-C APIs.
 func (o *WebScriptObject) JSValue() *javascriptcore.JSValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webScriptObjectSelJSValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return javascriptcore.JSValueFromID(_ret)
 }
-

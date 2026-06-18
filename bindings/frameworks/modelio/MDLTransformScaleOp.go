@@ -16,8 +16,8 @@ type MDLTransformScaleOp struct {
 }
 
 var (
-	_clsMDLTransformScaleOp = _objcClass("MDLTransformScaleOp")
-	_mDLTransformScaleOpSelName = objc.RegisterName("name")
+	_clsMDLTransformScaleOp              = _objcClass("MDLTransformScaleOp")
+	_mDLTransformScaleOpSelName          = objc.RegisterName("name")
 	_mDLTransformScaleOpSelAnimatedValue = objc.RegisterName("animatedValue")
 )
 
@@ -33,13 +33,16 @@ func MDLTransformScaleOpFromID(id objc.ID) *MDLTransformScaleOp {
 
 func (o *MDLTransformScaleOp) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTransformScaleOpSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MDLTransformScaleOp) AnimatedValue() *MDLAnimatedVector3 {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTransformScaleOpSelAnimatedValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLAnimatedVector3FromID(_ret)
 }
-

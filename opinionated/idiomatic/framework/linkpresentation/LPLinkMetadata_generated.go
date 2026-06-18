@@ -180,4 +180,3 @@ type LinkMetadataable interface {
 }
 
 var _ LinkMetadataable = (*LinkMetadata)(nil)
-

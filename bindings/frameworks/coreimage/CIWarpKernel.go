@@ -17,8 +17,8 @@ type CIWarpKernel struct {
 }
 
 var (
-	_clsCIWarpKernel = _objcClass("CIWarpKernel")
-	_cIWarpKernelSelKernelWithString = objc.RegisterName("kernelWithString:")
+	_clsCIWarpKernel                                              = _objcClass("CIWarpKernel")
+	_cIWarpKernelSelKernelWithString                              = objc.RegisterName("kernelWithString:")
 	_cIWarpKernelSelApplyWithExtentRoiCallbackInputImageArguments = objc.RegisterName("applyWithExtent:roiCallback:inputImage:arguments:")
 )
 
@@ -34,13 +34,16 @@ func CIWarpKernelFromID(id objc.ID) *CIWarpKernel {
 
 func CIWarpKernelKernelWithString(string_ *foundation.NSString) *CIWarpKernel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIWarpKernel), _cIWarpKernelSelKernelWithString, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIWarpKernelFromID(_ret)
 }
 
 func (o *CIWarpKernel) ApplyWithExtentRoiCallbackInputImageArguments(extent corefoundation.CGRect, callback objc.Block, image *CIImage, args *foundation.NSArray[objc.ID]) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIWarpKernelSelApplyWithExtentRoiCallbackInputImageArguments, extent, callback, image.Ptr(), args)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIImageFromID(_ret)
 }
-

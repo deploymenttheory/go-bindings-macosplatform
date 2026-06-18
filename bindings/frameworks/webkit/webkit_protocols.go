@@ -163,4 +163,3 @@ type WebResourceLoadDelegate interface {
 // WebUIDelegate wraps the ObjC protocol WebUIDelegate.
 type WebUIDelegate interface {
 }
-

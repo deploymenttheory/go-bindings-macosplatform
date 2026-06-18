@@ -18,23 +18,23 @@ type IOBluetoothPairingController struct {
 }
 
 var (
-	_clsIOBluetoothPairingController = _objcClass("IOBluetoothPairingController")
-	_iOBluetoothPairingControllerSelPairingController = objc.RegisterName("pairingController")
-	_iOBluetoothPairingControllerSelRunModal = objc.RegisterName("runModal")
-	_iOBluetoothPairingControllerSelGetResults = objc.RegisterName("getResults")
-	_iOBluetoothPairingControllerSelSetOptions = objc.RegisterName("setOptions:")
-	_iOBluetoothPairingControllerSelGetOptions = objc.RegisterName("getOptions")
+	_clsIOBluetoothPairingController                    = _objcClass("IOBluetoothPairingController")
+	_iOBluetoothPairingControllerSelPairingController   = objc.RegisterName("pairingController")
+	_iOBluetoothPairingControllerSelRunModal            = objc.RegisterName("runModal")
+	_iOBluetoothPairingControllerSelGetResults          = objc.RegisterName("getResults")
+	_iOBluetoothPairingControllerSelSetOptions          = objc.RegisterName("setOptions:")
+	_iOBluetoothPairingControllerSelGetOptions          = objc.RegisterName("getOptions")
 	_iOBluetoothPairingControllerSelSetSearchAttributes = objc.RegisterName("setSearchAttributes:")
 	_iOBluetoothPairingControllerSelGetSearchAttributes = objc.RegisterName("getSearchAttributes")
-	_iOBluetoothPairingControllerSelAddAllowedUUID = objc.RegisterName("addAllowedUUID:")
+	_iOBluetoothPairingControllerSelAddAllowedUUID      = objc.RegisterName("addAllowedUUID:")
 	_iOBluetoothPairingControllerSelAddAllowedUUIDArray = objc.RegisterName("addAllowedUUIDArray:")
-	_iOBluetoothPairingControllerSelClearAllowedUUIDs = objc.RegisterName("clearAllowedUUIDs")
-	_iOBluetoothPairingControllerSelSetTitle = objc.RegisterName("setTitle:")
-	_iOBluetoothPairingControllerSelGetTitle = objc.RegisterName("getTitle")
-	_iOBluetoothPairingControllerSelSetDescriptionText = objc.RegisterName("setDescriptionText:")
-	_iOBluetoothPairingControllerSelGetDescriptionText = objc.RegisterName("getDescriptionText")
-	_iOBluetoothPairingControllerSelSetPrompt = objc.RegisterName("setPrompt:")
-	_iOBluetoothPairingControllerSelGetPrompt = objc.RegisterName("getPrompt")
+	_iOBluetoothPairingControllerSelClearAllowedUUIDs   = objc.RegisterName("clearAllowedUUIDs")
+	_iOBluetoothPairingControllerSelSetTitle            = objc.RegisterName("setTitle:")
+	_iOBluetoothPairingControllerSelGetTitle            = objc.RegisterName("getTitle")
+	_iOBluetoothPairingControllerSelSetDescriptionText  = objc.RegisterName("setDescriptionText:")
+	_iOBluetoothPairingControllerSelGetDescriptionText  = objc.RegisterName("getDescriptionText")
+	_iOBluetoothPairingControllerSelSetPrompt           = objc.RegisterName("setPrompt:")
+	_iOBluetoothPairingControllerSelGetPrompt           = objc.RegisterName("getPrompt")
 )
 
 func IOBluetoothPairingControllerFromID(id objc.ID) *IOBluetoothPairingController {
@@ -50,7 +50,9 @@ func IOBluetoothPairingControllerFromID(id objc.ID) *IOBluetoothPairingControlle
 // @method	pairingController @abstract @discussion	Method call to instantiate a new IOBluetoothPairingController object. @result		An IOBluetoothPairingController instance.  Call runPanelWithAttributes Success - a new instance of the Pairing Controller Failure	- nil
 func IOBluetoothPairingControllerPairingController() *IOBluetoothPairingController {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothPairingController), _iOBluetoothPairingControllerSelPairingController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothPairingControllerFromID(_ret)
 }
 
@@ -100,7 +102,9 @@ func (o *IOBluetoothPairingController) SetTitle(windowTitle *foundation.NSString
 
 func (o *IOBluetoothPairingController) GetTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothPairingControllerSelGetTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -110,7 +114,9 @@ func (o *IOBluetoothPairingController) SetDescriptionText(descriptionText *found
 
 func (o *IOBluetoothPairingController) GetDescriptionText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothPairingControllerSelGetDescriptionText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -120,7 +126,8 @@ func (o *IOBluetoothPairingController) SetPrompt(prompt *foundation.NSString) {
 
 func (o *IOBluetoothPairingController) GetPrompt() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothPairingControllerSelGetPrompt)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

@@ -16,12 +16,12 @@ type PHASENumericPair struct {
 }
 
 var (
-	_clsPHASENumericPair = _objcClass("PHASENumericPair")
+	_clsPHASENumericPair                              = _objcClass("PHASENumericPair")
 	_pHASENumericPairSelInitWithFirstValueSecondValue = objc.RegisterName("initWithFirstValue:secondValue:")
-	_pHASENumericPairSelFirst = objc.RegisterName("first")
-	_pHASENumericPairSelSetFirst = objc.RegisterName("setFirst:")
-	_pHASENumericPairSelSecond = objc.RegisterName("second")
-	_pHASENumericPairSelSetSecond = objc.RegisterName("setSecond:")
+	_pHASENumericPairSelFirst                         = objc.RegisterName("first")
+	_pHASENumericPairSelSetFirst                      = objc.RegisterName("setFirst:")
+	_pHASENumericPairSelSecond                        = objc.RegisterName("second")
+	_pHASENumericPairSelSetSecond                     = objc.RegisterName("setSecond:")
 )
 
 func PHASENumericPairFromID(id objc.ID) *PHASENumericPair {
@@ -37,7 +37,9 @@ func PHASENumericPairFromID(id objc.ID) *PHASENumericPair {
 // @method initWithFirstValue:secondValue @abstract Initialize a numeric pair with a first and second value. @param first The first value in the pair. @param second The second value in the pair. @return A new pair.
 func (o *PHASENumericPair) InitWithFirstValueSecondValue(first float64, second float64) *PHASENumericPair {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASENumericPairSelInitWithFirstValueSecondValue, first, second)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASENumericPairFromID(_ret)
 }
 
@@ -60,4 +62,3 @@ func (o *PHASENumericPair) Second() float64 {
 func (o *PHASENumericPair) SetSecond(second float64) {
 	o.Ptr().Send(_pHASENumericPairSelSetSecond, second)
 }
-

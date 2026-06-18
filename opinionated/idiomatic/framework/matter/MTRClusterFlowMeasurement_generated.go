@@ -89,9 +89,13 @@ func (x *MTRClusterFlowMeasurement) ReadAttributeClusterRevisionWithParams(param
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterFlowMeasurement) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterFlowMeasurement) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterFlowMeasurement) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterFlowMeasurement) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterFlowMeasurementable is the interface implemented by [MTRClusterFlowMeasurement], for mocking and DI.
 type MTRClusterFlowMeasurementable interface {
@@ -108,4 +112,3 @@ type MTRClusterFlowMeasurementable interface {
 }
 
 var _ MTRClusterFlowMeasurementable = (*MTRClusterFlowMeasurement)(nil)
-

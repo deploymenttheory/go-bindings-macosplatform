@@ -16,11 +16,11 @@ type CBGroupIdentity struct {
 }
 
 var (
-	_clsCBGroupIdentity = _objcClass("CBGroupIdentity")
+	_clsCBGroupIdentity                                   = _objcClass("CBGroupIdentity")
 	_cBGroupIdentitySelGroupIdentityWithPosixGIDAuthority = objc.RegisterName("groupIdentityWithPosixGID:authority:")
-	_cBGroupIdentitySelPosixGID = objc.RegisterName("posixGID")
-	_cBGroupIdentitySelMembers = objc.RegisterName("members")
-	_cBGroupIdentitySelMemberIdentities = objc.RegisterName("memberIdentities")
+	_cBGroupIdentitySelPosixGID                           = objc.RegisterName("posixGID")
+	_cBGroupIdentitySelMembers                            = objc.RegisterName("members")
+	_cBGroupIdentitySelMemberIdentities                   = objc.RegisterName("memberIdentities")
 )
 
 func CBGroupIdentityFromID(id objc.ID) *CBGroupIdentity {
@@ -36,7 +36,9 @@ func CBGroupIdentityFromID(id objc.ID) *CBGroupIdentity {
 // Returns the group identity with the given POSIX GID in the specified identity authority. - Parameters: - gid: The GID of the group identity you are searching for. - authority: An identity authority in which to search for the group identity. - Returns: The group identity object with the given GID in the specified identity authority, or `nil` if no identity exists with the specified GID. ## See Also - [Identity Services Programming Guide](https://developer.apple.com/library/archive/documentation/Networking/Conceptual/IdentityServices_ProgGuide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40004490)
 func CBGroupIdentityGroupIdentityWithPosixGIDAuthority(gid uint, authority *CBIdentityAuthority) *CBGroupIdentity {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCBGroupIdentity), _cBGroupIdentitySelGroupIdentityWithPosixGIDAuthority, gid, authority.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CBGroupIdentityFromID(_ret)
 }
 
@@ -55,7 +57,8 @@ func (o *CBGroupIdentity) Members() *foundation.NSArray[objc.ID] {
 
 func (o *CBGroupIdentity) MemberIdentities() *foundation.NSArray[*CBIdentity] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBGroupIdentitySelMemberIdentities)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CBIdentity](_ret)
 }
-

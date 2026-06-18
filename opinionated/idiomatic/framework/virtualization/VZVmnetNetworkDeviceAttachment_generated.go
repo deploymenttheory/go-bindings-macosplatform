@@ -42,7 +42,9 @@ func (x *VmnetNetworkDeviceAttachment) Network() unsafe.Pointer {
 	return x.inner.Network()
 }
 
-func (x *VmnetNetworkDeviceAttachment) asNetworkDeviceAttachment() *raw.VZNetworkDeviceAttachment { return &x.inner.VZNetworkDeviceAttachment }
+func (x *VmnetNetworkDeviceAttachment) asNetworkDeviceAttachment() *raw.VZNetworkDeviceAttachment {
+	return &x.inner.VZNetworkDeviceAttachment
+}
 
 // VmnetNetworkDeviceAttachmentable is the interface implemented by [VmnetNetworkDeviceAttachment], for mocking and DI.
 type VmnetNetworkDeviceAttachmentable interface {
@@ -51,4 +53,3 @@ type VmnetNetworkDeviceAttachmentable interface {
 }
 
 var _ VmnetNetworkDeviceAttachmentable = (*VmnetNetworkDeviceAttachment)(nil)
-

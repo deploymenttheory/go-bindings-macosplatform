@@ -16,11 +16,11 @@ type NSFetchRequestExpression struct {
 }
 
 var (
-	_clsNSFetchRequestExpression = _objcClass("NSFetchRequestExpression")
+	_clsNSFetchRequestExpression                                   = _objcClass("NSFetchRequestExpression")
 	_nSFetchRequestExpressionSelExpressionForFetchContextCountOnly = objc.RegisterName("expressionForFetch:context:countOnly:")
-	_nSFetchRequestExpressionSelRequestExpression = objc.RegisterName("requestExpression")
-	_nSFetchRequestExpressionSelContextExpression = objc.RegisterName("contextExpression")
-	_nSFetchRequestExpressionSelIsCountOnlyRequest = objc.RegisterName("isCountOnlyRequest")
+	_nSFetchRequestExpressionSelRequestExpression                  = objc.RegisterName("requestExpression")
+	_nSFetchRequestExpressionSelContextExpression                  = objc.RegisterName("contextExpression")
+	_nSFetchRequestExpressionSelIsCountOnlyRequest                 = objc.RegisterName("isCountOnlyRequest")
 )
 
 func NSFetchRequestExpressionFromID(id objc.ID) *NSFetchRequestExpression {
@@ -35,19 +35,25 @@ func NSFetchRequestExpressionFromID(id objc.ID) *NSFetchRequestExpression {
 
 func NSFetchRequestExpressionExpressionForFetchContextCountOnly(fetch *foundation.NSExpression, context_ *foundation.NSExpression, countFlag bool) *foundation.NSExpression {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFetchRequestExpression), _nSFetchRequestExpressionSelExpressionForFetchContextCountOnly, fetch.Ptr(), context_.Ptr(), countFlag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSExpressionFromID(_ret)
 }
 
 func (o *NSFetchRequestExpression) RequestExpression() *foundation.NSExpression {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchRequestExpressionSelRequestExpression)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSExpressionFromID(_ret)
 }
 
 func (o *NSFetchRequestExpression) ContextExpression() *foundation.NSExpression {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchRequestExpressionSelContextExpression)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSExpressionFromID(_ret)
 }
 
@@ -55,4 +61,3 @@ func (o *NSFetchRequestExpression) IsCountOnlyRequest() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFetchRequestExpressionSelIsCountOnlyRequest)
 	return _ret
 }
-

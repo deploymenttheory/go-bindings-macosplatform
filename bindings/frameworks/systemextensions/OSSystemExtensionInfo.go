@@ -16,9 +16,9 @@ type OSSystemExtensionInfo struct {
 }
 
 var (
-	_clsOSSystemExtensionInfo = _objcClass("OSSystemExtensionInfo")
-	_oSSystemExtensionInfoSelBundleIdentifier = objc.RegisterName("bundleIdentifier")
-	_oSSystemExtensionInfoSelBundleVersion = objc.RegisterName("bundleVersion")
+	_clsOSSystemExtensionInfo                   = _objcClass("OSSystemExtensionInfo")
+	_oSSystemExtensionInfoSelBundleIdentifier   = objc.RegisterName("bundleIdentifier")
+	_oSSystemExtensionInfoSelBundleVersion      = objc.RegisterName("bundleVersion")
 	_oSSystemExtensionInfoSelBundleShortVersion = objc.RegisterName("bundleShortVersion")
 )
 
@@ -35,21 +35,26 @@ func OSSystemExtensionInfoFromID(id objc.ID) *OSSystemExtensionInfo {
 // @brief The bundle identifier of the extension (CFBundleIdentifier)
 func (o *OSSystemExtensionInfo) BundleIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSSystemExtensionInfoSelBundleIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @brief The bundle version of the extension (CFBundleVersion)
 func (o *OSSystemExtensionInfo) BundleVersion() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSSystemExtensionInfoSelBundleVersion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @brief The bundle short version string of the extension (CFBundleShortVersionString)
 func (o *OSSystemExtensionInfo) BundleShortVersion() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSSystemExtensionInfoSelBundleShortVersion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

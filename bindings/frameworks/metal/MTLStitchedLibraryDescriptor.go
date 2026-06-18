@@ -16,15 +16,15 @@ type MTLStitchedLibraryDescriptor struct {
 }
 
 var (
-	_clsMTLStitchedLibraryDescriptor = _objcClass("MTLStitchedLibraryDescriptor")
-	_mTLStitchedLibraryDescriptorSelFunctionGraphs = objc.RegisterName("functionGraphs")
+	_clsMTLStitchedLibraryDescriptor                  = _objcClass("MTLStitchedLibraryDescriptor")
+	_mTLStitchedLibraryDescriptorSelFunctionGraphs    = objc.RegisterName("functionGraphs")
 	_mTLStitchedLibraryDescriptorSelSetFunctionGraphs = objc.RegisterName("setFunctionGraphs:")
-	_mTLStitchedLibraryDescriptorSelFunctions = objc.RegisterName("functions")
-	_mTLStitchedLibraryDescriptorSelSetFunctions = objc.RegisterName("setFunctions:")
-	_mTLStitchedLibraryDescriptorSelBinaryArchives = objc.RegisterName("binaryArchives")
+	_mTLStitchedLibraryDescriptorSelFunctions         = objc.RegisterName("functions")
+	_mTLStitchedLibraryDescriptorSelSetFunctions      = objc.RegisterName("setFunctions:")
+	_mTLStitchedLibraryDescriptorSelBinaryArchives    = objc.RegisterName("binaryArchives")
 	_mTLStitchedLibraryDescriptorSelSetBinaryArchives = objc.RegisterName("setBinaryArchives:")
-	_mTLStitchedLibraryDescriptorSelOptions = objc.RegisterName("options")
-	_mTLStitchedLibraryDescriptorSelSetOptions = objc.RegisterName("setOptions:")
+	_mTLStitchedLibraryDescriptorSelOptions           = objc.RegisterName("options")
+	_mTLStitchedLibraryDescriptorSelSetOptions        = objc.RegisterName("setOptions:")
 )
 
 func MTLStitchedLibraryDescriptorFromID(id objc.ID) *MTLStitchedLibraryDescriptor {
@@ -39,7 +39,9 @@ func MTLStitchedLibraryDescriptorFromID(id objc.ID) *MTLStitchedLibraryDescripto
 
 func (o *MTLStitchedLibraryDescriptor) FunctionGraphs() *foundation.NSArray[*MTLFunctionStitchingGraph] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLStitchedLibraryDescriptorSelFunctionGraphs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MTLFunctionStitchingGraph](_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTLStitchedLibraryDescriptor) SetFunctionGraphs(functionGraphs *foundat
 
 func (o *MTLStitchedLibraryDescriptor) Functions() *foundation.NSArray[MTLFunction] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLStitchedLibraryDescriptorSelFunctions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTLFunction](_ret)
 }
 
@@ -60,7 +64,9 @@ func (o *MTLStitchedLibraryDescriptor) SetFunctions(functions *foundation.NSArra
 // @property binaryArchives @abstract The array of archives to be searched. @discussion Binary archives to be searched for precompiled stitched libraries during the compilation of this library.
 func (o *MTLStitchedLibraryDescriptor) BinaryArchives() *foundation.NSArray[MTLBinaryArchive] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLStitchedLibraryDescriptorSelBinaryArchives)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTLBinaryArchive](_ret)
 }
 
@@ -77,4 +83,3 @@ func (o *MTLStitchedLibraryDescriptor) Options() MTLStitchedLibraryOptions {
 func (o *MTLStitchedLibraryDescriptor) SetOptions(options MTLStitchedLibraryOptions) {
 	o.Ptr().Send(_mTLStitchedLibraryDescriptorSelSetOptions, options)
 }
-

@@ -18,15 +18,15 @@ type MKReverseGeocodingRequest struct {
 }
 
 var (
-	_clsMKReverseGeocodingRequest = _objcClass("MKReverseGeocodingRequest")
-	_mKReverseGeocodingRequestSelInitWithLocation = objc.RegisterName("initWithLocation:")
+	_clsMKReverseGeocodingRequest                                 = _objcClass("MKReverseGeocodingRequest")
+	_mKReverseGeocodingRequestSelInitWithLocation                 = objc.RegisterName("initWithLocation:")
 	_mKReverseGeocodingRequestSelGetMapItemsWithCompletionHandler = objc.RegisterName("getMapItemsWithCompletionHandler:")
-	_mKReverseGeocodingRequestSelCancel = objc.RegisterName("cancel")
-	_mKReverseGeocodingRequestSelIsCancelled = objc.RegisterName("isCancelled")
-	_mKReverseGeocodingRequestSelIsLoading = objc.RegisterName("isLoading")
-	_mKReverseGeocodingRequestSelLocation = objc.RegisterName("location")
-	_mKReverseGeocodingRequestSelPreferredLocale = objc.RegisterName("preferredLocale")
-	_mKReverseGeocodingRequestSelSetPreferredLocale = objc.RegisterName("setPreferredLocale:")
+	_mKReverseGeocodingRequestSelCancel                           = objc.RegisterName("cancel")
+	_mKReverseGeocodingRequestSelIsCancelled                      = objc.RegisterName("isCancelled")
+	_mKReverseGeocodingRequestSelIsLoading                        = objc.RegisterName("isLoading")
+	_mKReverseGeocodingRequestSelLocation                         = objc.RegisterName("location")
+	_mKReverseGeocodingRequestSelPreferredLocale                  = objc.RegisterName("preferredLocale")
+	_mKReverseGeocodingRequestSelSetPreferredLocale               = objc.RegisterName("setPreferredLocale:")
 )
 
 func MKReverseGeocodingRequestFromID(id objc.ID) *MKReverseGeocodingRequest {
@@ -41,7 +41,9 @@ func MKReverseGeocodingRequestFromID(id objc.ID) *MKReverseGeocodingRequest {
 
 func (o *MKReverseGeocodingRequest) InitWithLocation(location unsafe.Pointer) *MKReverseGeocodingRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKReverseGeocodingRequestSelInitWithLocation, location)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKReverseGeocodingRequestFromID(_ret)
 }
 
@@ -80,11 +82,12 @@ func (o *MKReverseGeocodingRequest) Location() unsafe.Pointer {
 
 func (o *MKReverseGeocodingRequest) PreferredLocale() *foundation.NSLocale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKReverseGeocodingRequestSelPreferredLocale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSLocaleFromID(_ret)
 }
 
 func (o *MKReverseGeocodingRequest) SetPreferredLocale(preferredLocale *foundation.NSLocale) {
 	o.Ptr().Send(_mKReverseGeocodingRequestSelSetPreferredLocale, preferredLocale.Ptr())
 }
-

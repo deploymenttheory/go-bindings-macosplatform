@@ -17,28 +17,28 @@ type NSTextBlock struct {
 }
 
 var (
-	_clsNSTextBlock = _objcClass("NSTextBlock")
-	_nSTextBlockSelInit = objc.RegisterName("init")
-	_nSTextBlockSelSetValueTypeForDimension = objc.RegisterName("setValue:type:forDimension:")
-	_nSTextBlockSelValueForDimension = objc.RegisterName("valueForDimension:")
-	_nSTextBlockSelValueTypeForDimension = objc.RegisterName("valueTypeForDimension:")
-	_nSTextBlockSelSetContentWidthType = objc.RegisterName("setContentWidth:type:")
-	_nSTextBlockSelSetWidthTypeForLayerEdge = objc.RegisterName("setWidth:type:forLayer:edge:")
-	_nSTextBlockSelSetWidthTypeForLayer = objc.RegisterName("setWidth:type:forLayer:")
-	_nSTextBlockSelWidthForLayerEdge = objc.RegisterName("widthForLayer:edge:")
-	_nSTextBlockSelWidthValueTypeForLayerEdge = objc.RegisterName("widthValueTypeForLayer:edge:")
-	_nSTextBlockSelSetBorderColorForEdge = objc.RegisterName("setBorderColor:forEdge:")
-	_nSTextBlockSelSetBorderColor = objc.RegisterName("setBorderColor:")
-	_nSTextBlockSelBorderColorForEdge = objc.RegisterName("borderColorForEdge:")
-	_nSTextBlockSelRectForLayoutAtPointInRectTextContainerCharacterRange = objc.RegisterName("rectForLayoutAtPoint:inRect:textContainer:characterRange:")
+	_clsNSTextBlock                                                          = _objcClass("NSTextBlock")
+	_nSTextBlockSelInit                                                      = objc.RegisterName("init")
+	_nSTextBlockSelSetValueTypeForDimension                                  = objc.RegisterName("setValue:type:forDimension:")
+	_nSTextBlockSelValueForDimension                                         = objc.RegisterName("valueForDimension:")
+	_nSTextBlockSelValueTypeForDimension                                     = objc.RegisterName("valueTypeForDimension:")
+	_nSTextBlockSelSetContentWidthType                                       = objc.RegisterName("setContentWidth:type:")
+	_nSTextBlockSelSetWidthTypeForLayerEdge                                  = objc.RegisterName("setWidth:type:forLayer:edge:")
+	_nSTextBlockSelSetWidthTypeForLayer                                      = objc.RegisterName("setWidth:type:forLayer:")
+	_nSTextBlockSelWidthForLayerEdge                                         = objc.RegisterName("widthForLayer:edge:")
+	_nSTextBlockSelWidthValueTypeForLayerEdge                                = objc.RegisterName("widthValueTypeForLayer:edge:")
+	_nSTextBlockSelSetBorderColorForEdge                                     = objc.RegisterName("setBorderColor:forEdge:")
+	_nSTextBlockSelSetBorderColor                                            = objc.RegisterName("setBorderColor:")
+	_nSTextBlockSelBorderColorForEdge                                        = objc.RegisterName("borderColorForEdge:")
+	_nSTextBlockSelRectForLayoutAtPointInRectTextContainerCharacterRange     = objc.RegisterName("rectForLayoutAtPoint:inRect:textContainer:characterRange:")
 	_nSTextBlockSelBoundsRectForContentRectInRectTextContainerCharacterRange = objc.RegisterName("boundsRectForContentRect:inRect:textContainer:characterRange:")
-	_nSTextBlockSelDrawBackgroundWithFrameInViewCharacterRangeLayoutManager = objc.RegisterName("drawBackgroundWithFrame:inView:characterRange:layoutManager:")
-	_nSTextBlockSelContentWidth = objc.RegisterName("contentWidth")
-	_nSTextBlockSelContentWidthValueType = objc.RegisterName("contentWidthValueType")
-	_nSTextBlockSelVerticalAlignment = objc.RegisterName("verticalAlignment")
-	_nSTextBlockSelSetVerticalAlignment = objc.RegisterName("setVerticalAlignment:")
-	_nSTextBlockSelBackgroundColor = objc.RegisterName("backgroundColor")
-	_nSTextBlockSelSetBackgroundColor = objc.RegisterName("setBackgroundColor:")
+	_nSTextBlockSelDrawBackgroundWithFrameInViewCharacterRangeLayoutManager  = objc.RegisterName("drawBackgroundWithFrame:inView:characterRange:layoutManager:")
+	_nSTextBlockSelContentWidth                                              = objc.RegisterName("contentWidth")
+	_nSTextBlockSelContentWidthValueType                                     = objc.RegisterName("contentWidthValueType")
+	_nSTextBlockSelVerticalAlignment                                         = objc.RegisterName("verticalAlignment")
+	_nSTextBlockSelSetVerticalAlignment                                      = objc.RegisterName("setVerticalAlignment:")
+	_nSTextBlockSelBackgroundColor                                           = objc.RegisterName("backgroundColor")
+	_nSTextBlockSelSetBackgroundColor                                        = objc.RegisterName("setBackgroundColor:")
 )
 
 func NSTextBlockFromID(id objc.ID) *NSTextBlock {
@@ -53,7 +53,9 @@ func NSTextBlockFromID(id objc.ID) *NSTextBlock {
 
 func (o *NSTextBlock) Init() *NSTextBlock {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextBlockSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextBlockFromID(_ret)
 }
 
@@ -103,7 +105,9 @@ func (o *NSTextBlock) SetBorderColor(color *NSColor) {
 
 func (o *NSTextBlock) BorderColorForEdge(edge foundation.NSRectEdge) *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextBlockSelBorderColorForEdge, edge)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -142,11 +146,12 @@ func (o *NSTextBlock) SetVerticalAlignment(verticalAlignment NSTextBlockVertical
 
 func (o *NSTextBlock) BackgroundColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextBlockSelBackgroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
 func (o *NSTextBlock) SetBackgroundColor(backgroundColor *NSColor) {
 	o.Ptr().Send(_nSTextBlockSelSetBackgroundColor, backgroundColor.Ptr())
 }
-

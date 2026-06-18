@@ -15,16 +15,16 @@ type MTLArrayType struct {
 }
 
 var (
-	_clsMTLArrayType = _objcClass("MTLArrayType")
-	_mTLArrayTypeSelElementStructType = objc.RegisterName("elementStructType")
-	_mTLArrayTypeSelElementArrayType = objc.RegisterName("elementArrayType")
+	_clsMTLArrayType                            = _objcClass("MTLArrayType")
+	_mTLArrayTypeSelElementStructType           = objc.RegisterName("elementStructType")
+	_mTLArrayTypeSelElementArrayType            = objc.RegisterName("elementArrayType")
 	_mTLArrayTypeSelElementTextureReferenceType = objc.RegisterName("elementTextureReferenceType")
-	_mTLArrayTypeSelElementPointerType = objc.RegisterName("elementPointerType")
-	_mTLArrayTypeSelElementTensorReferenceType = objc.RegisterName("elementTensorReferenceType")
-	_mTLArrayTypeSelElementType = objc.RegisterName("elementType")
-	_mTLArrayTypeSelArrayLength = objc.RegisterName("arrayLength")
-	_mTLArrayTypeSelStride = objc.RegisterName("stride")
-	_mTLArrayTypeSelArgumentIndexStride = objc.RegisterName("argumentIndexStride")
+	_mTLArrayTypeSelElementPointerType          = objc.RegisterName("elementPointerType")
+	_mTLArrayTypeSelElementTensorReferenceType  = objc.RegisterName("elementTensorReferenceType")
+	_mTLArrayTypeSelElementType                 = objc.RegisterName("elementType")
+	_mTLArrayTypeSelArrayLength                 = objc.RegisterName("arrayLength")
+	_mTLArrayTypeSelStride                      = objc.RegisterName("stride")
+	_mTLArrayTypeSelArgumentIndexStride         = objc.RegisterName("argumentIndexStride")
 )
 
 func MTLArrayTypeFromID(id objc.ID) *MTLArrayType {
@@ -39,32 +39,42 @@ func MTLArrayTypeFromID(id objc.ID) *MTLArrayType {
 
 func (o *MTLArrayType) ElementStructType() *MTLStructType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLArrayTypeSelElementStructType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLStructTypeFromID(_ret)
 }
 
 func (o *MTLArrayType) ElementArrayType() *MTLArrayType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLArrayTypeSelElementArrayType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLArrayTypeFromID(_ret)
 }
 
 func (o *MTLArrayType) ElementTextureReferenceType() *MTLTextureReferenceType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLArrayTypeSelElementTextureReferenceType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLTextureReferenceTypeFromID(_ret)
 }
 
 func (o *MTLArrayType) ElementPointerType() *MTLPointerType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLArrayTypeSelElementPointerType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLPointerTypeFromID(_ret)
 }
 
 // Provides a description of the underlying tensor type when this array holds tensors as its elements. - Returns: A description of the tensor type that this array holds, or `nil` if this struct member doesn't hold a tensor.
 func (o *MTLArrayType) ElementTensorReferenceType() *MTLTensorReferenceType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLArrayTypeSelElementTensorReferenceType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLTensorReferenceTypeFromID(_ret)
 }
 
@@ -87,4 +97,3 @@ func (o *MTLArrayType) ArgumentIndexStride() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mTLArrayTypeSelArgumentIndexStride)
 	return _ret
 }
-

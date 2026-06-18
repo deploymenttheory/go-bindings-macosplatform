@@ -26,4 +26,3 @@ func NSSymbolEffectFromID(id objc.ID) *NSSymbolEffect {
 	purego.Track(o)
 	return o
 }
-

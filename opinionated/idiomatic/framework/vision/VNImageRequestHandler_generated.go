@@ -144,4 +144,3 @@ type ImageRequestHandlerable interface {
 }
 
 var _ ImageRequestHandlerable = (*ImageRequestHandler)(nil)
-

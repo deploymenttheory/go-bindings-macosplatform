@@ -17,7 +17,9 @@ type VirtioBlockDeviceConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.VZVirtioBlockDeviceConfiguration].
-func (x *VirtioBlockDeviceConfiguration) Unwrap() *raw.VZVirtioBlockDeviceConfiguration { return x.inner }
+func (x *VirtioBlockDeviceConfiguration) Unwrap() *raw.VZVirtioBlockDeviceConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -58,7 +60,9 @@ func (x *VirtioBlockDeviceConfiguration) SetBlockDeviceIdentifier(blockDeviceIde
 	x.inner.SetBlockDeviceIdentifier(foundation.NSStringStringWithUTF8String(blockDeviceIdentifier))
 }
 
-func (x *VirtioBlockDeviceConfiguration) asStorageDeviceConfiguration() *raw.VZStorageDeviceConfiguration { return &x.inner.VZStorageDeviceConfiguration }
+func (x *VirtioBlockDeviceConfiguration) asStorageDeviceConfiguration() *raw.VZStorageDeviceConfiguration {
+	return &x.inner.VZStorageDeviceConfiguration
+}
 
 // VirtioBlockDeviceConfigurationable is the interface implemented by [VirtioBlockDeviceConfiguration], for mocking and DI.
 type VirtioBlockDeviceConfigurationable interface {
@@ -69,4 +73,3 @@ type VirtioBlockDeviceConfigurationable interface {
 }
 
 var _ VirtioBlockDeviceConfigurationable = (*VirtioBlockDeviceConfiguration)(nil)
-

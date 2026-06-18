@@ -73,4 +73,3 @@ type StringDrawingContextable interface {
 }
 
 var _ StringDrawingContextable = (*StringDrawingContext)(nil)
-

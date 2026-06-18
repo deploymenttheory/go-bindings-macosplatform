@@ -16,12 +16,12 @@ type NSCollectionLayoutSpacing struct {
 }
 
 var (
-	_clsNSCollectionLayoutSpacing = _objcClass("NSCollectionLayoutSpacing")
-	_nSCollectionLayoutSpacingSelFlexibleSpacing = objc.RegisterName("flexibleSpacing:")
-	_nSCollectionLayoutSpacingSelFixedSpacing = objc.RegisterName("fixedSpacing:")
-	_nSCollectionLayoutSpacingSelSpacing = objc.RegisterName("spacing")
+	_clsNSCollectionLayoutSpacing                  = _objcClass("NSCollectionLayoutSpacing")
+	_nSCollectionLayoutSpacingSelFlexibleSpacing   = objc.RegisterName("flexibleSpacing:")
+	_nSCollectionLayoutSpacingSelFixedSpacing      = objc.RegisterName("fixedSpacing:")
+	_nSCollectionLayoutSpacingSelSpacing           = objc.RegisterName("spacing")
 	_nSCollectionLayoutSpacingSelIsFlexibleSpacing = objc.RegisterName("isFlexibleSpacing")
-	_nSCollectionLayoutSpacingSelIsFixedSpacing = objc.RegisterName("isFixedSpacing")
+	_nSCollectionLayoutSpacingSelIsFixedSpacing    = objc.RegisterName("isFixedSpacing")
 )
 
 func NSCollectionLayoutSpacingFromID(id objc.ID) *NSCollectionLayoutSpacing {
@@ -36,13 +36,17 @@ func NSCollectionLayoutSpacingFromID(id objc.ID) *NSCollectionLayoutSpacing {
 
 func NSCollectionLayoutSpacingFlexibleSpacing(flexibleSpacing float64) *NSCollectionLayoutSpacing {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutSpacing), _nSCollectionLayoutSpacingSelFlexibleSpacing, flexibleSpacing)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutSpacingFromID(_ret)
 }
 
 func NSCollectionLayoutSpacingFixedSpacing(fixedSpacing float64) *NSCollectionLayoutSpacing {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutSpacing), _nSCollectionLayoutSpacingSelFixedSpacing, fixedSpacing)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutSpacingFromID(_ret)
 }
 
@@ -60,4 +64,3 @@ func (o *NSCollectionLayoutSpacing) IsFixedSpacing() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSCollectionLayoutSpacingSelIsFixedSpacing)
 	return _ret
 }
-

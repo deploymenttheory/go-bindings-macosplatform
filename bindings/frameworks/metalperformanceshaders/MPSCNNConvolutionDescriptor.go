@@ -19,40 +19,40 @@ type MPSCNNConvolutionDescriptor struct {
 }
 
 var (
-	_clsMPSCNNConvolutionDescriptor = _objcClass("MPSCNNConvolutionDescriptor")
-	_mPSCNNConvolutionDescriptorSelEncodeWithCoder = objc.RegisterName("encodeWithCoder:")
-	_mPSCNNConvolutionDescriptorSelInitWithCoder = objc.RegisterName("initWithCoder:")
+	_clsMPSCNNConvolutionDescriptor                                                                                                         = _objcClass("MPSCNNConvolutionDescriptor")
+	_mPSCNNConvolutionDescriptorSelEncodeWithCoder                                                                                          = objc.RegisterName("encodeWithCoder:")
+	_mPSCNNConvolutionDescriptorSelInitWithCoder                                                                                            = objc.RegisterName("initWithCoder:")
 	_mPSCNNConvolutionDescriptorSelCnnConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelsOutputFeatureChannelsNeuronFilter = objc.RegisterName("cnnConvolutionDescriptorWithKernelWidth:kernelHeight:inputFeatureChannels:outputFeatureChannels:neuronFilter:")
-	_mPSCNNConvolutionDescriptorSelCnnConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelsOutputFeatureChannels = objc.RegisterName("cnnConvolutionDescriptorWithKernelWidth:kernelHeight:inputFeatureChannels:outputFeatureChannels:")
-	_mPSCNNConvolutionDescriptorSelSetBatchNormalizationParametersForInferenceWithMeanVarianceGammaBetaEpsilon = objc.RegisterName("setBatchNormalizationParametersForInferenceWithMean:variance:gamma:beta:epsilon:")
-	_mPSCNNConvolutionDescriptorSelSetNeuronTypeParameterAParameterB = objc.RegisterName("setNeuronType:parameterA:parameterB:")
-	_mPSCNNConvolutionDescriptorSelNeuronType = objc.RegisterName("neuronType")
-	_mPSCNNConvolutionDescriptorSelNeuronParameterA = objc.RegisterName("neuronParameterA")
-	_mPSCNNConvolutionDescriptorSelNeuronParameterB = objc.RegisterName("neuronParameterB")
-	_mPSCNNConvolutionDescriptorSelSetNeuronToPReLUWithParametersA = objc.RegisterName("setNeuronToPReLUWithParametersA:")
-	_mPSCNNConvolutionDescriptorSelKernelWidth = objc.RegisterName("kernelWidth")
-	_mPSCNNConvolutionDescriptorSelSetKernelWidth = objc.RegisterName("setKernelWidth:")
-	_mPSCNNConvolutionDescriptorSelKernelHeight = objc.RegisterName("kernelHeight")
-	_mPSCNNConvolutionDescriptorSelSetKernelHeight = objc.RegisterName("setKernelHeight:")
-	_mPSCNNConvolutionDescriptorSelInputFeatureChannels = objc.RegisterName("inputFeatureChannels")
-	_mPSCNNConvolutionDescriptorSelSetInputFeatureChannels = objc.RegisterName("setInputFeatureChannels:")
-	_mPSCNNConvolutionDescriptorSelOutputFeatureChannels = objc.RegisterName("outputFeatureChannels")
-	_mPSCNNConvolutionDescriptorSelSetOutputFeatureChannels = objc.RegisterName("setOutputFeatureChannels:")
-	_mPSCNNConvolutionDescriptorSelStrideInPixelsX = objc.RegisterName("strideInPixelsX")
-	_mPSCNNConvolutionDescriptorSelSetStrideInPixelsX = objc.RegisterName("setStrideInPixelsX:")
-	_mPSCNNConvolutionDescriptorSelStrideInPixelsY = objc.RegisterName("strideInPixelsY")
-	_mPSCNNConvolutionDescriptorSelSetStrideInPixelsY = objc.RegisterName("setStrideInPixelsY:")
-	_mPSCNNConvolutionDescriptorSelGroups = objc.RegisterName("groups")
-	_mPSCNNConvolutionDescriptorSelSetGroups = objc.RegisterName("setGroups:")
-	_mPSCNNConvolutionDescriptorSelDilationRateX = objc.RegisterName("dilationRateX")
-	_mPSCNNConvolutionDescriptorSelSetDilationRateX = objc.RegisterName("setDilationRateX:")
-	_mPSCNNConvolutionDescriptorSelDilationRateY = objc.RegisterName("dilationRateY")
-	_mPSCNNConvolutionDescriptorSelSetDilationRateY = objc.RegisterName("setDilationRateY:")
-	_mPSCNNConvolutionDescriptorSelFusedNeuronDescriptor = objc.RegisterName("fusedNeuronDescriptor")
-	_mPSCNNConvolutionDescriptorSelSetFusedNeuronDescriptor = objc.RegisterName("setFusedNeuronDescriptor:")
-	_mPSCNNConvolutionDescriptorSelNeuron = objc.RegisterName("neuron")
-	_mPSCNNConvolutionDescriptorSelSetNeuron = objc.RegisterName("setNeuron:")
-	_mPSCNNConvolutionDescriptorSelSupportsSecureCoding = objc.RegisterName("supportsSecureCoding")
+	_mPSCNNConvolutionDescriptorSelCnnConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelsOutputFeatureChannels             = objc.RegisterName("cnnConvolutionDescriptorWithKernelWidth:kernelHeight:inputFeatureChannels:outputFeatureChannels:")
+	_mPSCNNConvolutionDescriptorSelSetBatchNormalizationParametersForInferenceWithMeanVarianceGammaBetaEpsilon                              = objc.RegisterName("setBatchNormalizationParametersForInferenceWithMean:variance:gamma:beta:epsilon:")
+	_mPSCNNConvolutionDescriptorSelSetNeuronTypeParameterAParameterB                                                                        = objc.RegisterName("setNeuronType:parameterA:parameterB:")
+	_mPSCNNConvolutionDescriptorSelNeuronType                                                                                               = objc.RegisterName("neuronType")
+	_mPSCNNConvolutionDescriptorSelNeuronParameterA                                                                                         = objc.RegisterName("neuronParameterA")
+	_mPSCNNConvolutionDescriptorSelNeuronParameterB                                                                                         = objc.RegisterName("neuronParameterB")
+	_mPSCNNConvolutionDescriptorSelSetNeuronToPReLUWithParametersA                                                                          = objc.RegisterName("setNeuronToPReLUWithParametersA:")
+	_mPSCNNConvolutionDescriptorSelKernelWidth                                                                                              = objc.RegisterName("kernelWidth")
+	_mPSCNNConvolutionDescriptorSelSetKernelWidth                                                                                           = objc.RegisterName("setKernelWidth:")
+	_mPSCNNConvolutionDescriptorSelKernelHeight                                                                                             = objc.RegisterName("kernelHeight")
+	_mPSCNNConvolutionDescriptorSelSetKernelHeight                                                                                          = objc.RegisterName("setKernelHeight:")
+	_mPSCNNConvolutionDescriptorSelInputFeatureChannels                                                                                     = objc.RegisterName("inputFeatureChannels")
+	_mPSCNNConvolutionDescriptorSelSetInputFeatureChannels                                                                                  = objc.RegisterName("setInputFeatureChannels:")
+	_mPSCNNConvolutionDescriptorSelOutputFeatureChannels                                                                                    = objc.RegisterName("outputFeatureChannels")
+	_mPSCNNConvolutionDescriptorSelSetOutputFeatureChannels                                                                                 = objc.RegisterName("setOutputFeatureChannels:")
+	_mPSCNNConvolutionDescriptorSelStrideInPixelsX                                                                                          = objc.RegisterName("strideInPixelsX")
+	_mPSCNNConvolutionDescriptorSelSetStrideInPixelsX                                                                                       = objc.RegisterName("setStrideInPixelsX:")
+	_mPSCNNConvolutionDescriptorSelStrideInPixelsY                                                                                          = objc.RegisterName("strideInPixelsY")
+	_mPSCNNConvolutionDescriptorSelSetStrideInPixelsY                                                                                       = objc.RegisterName("setStrideInPixelsY:")
+	_mPSCNNConvolutionDescriptorSelGroups                                                                                                   = objc.RegisterName("groups")
+	_mPSCNNConvolutionDescriptorSelSetGroups                                                                                                = objc.RegisterName("setGroups:")
+	_mPSCNNConvolutionDescriptorSelDilationRateX                                                                                            = objc.RegisterName("dilationRateX")
+	_mPSCNNConvolutionDescriptorSelSetDilationRateX                                                                                         = objc.RegisterName("setDilationRateX:")
+	_mPSCNNConvolutionDescriptorSelDilationRateY                                                                                            = objc.RegisterName("dilationRateY")
+	_mPSCNNConvolutionDescriptorSelSetDilationRateY                                                                                         = objc.RegisterName("setDilationRateY:")
+	_mPSCNNConvolutionDescriptorSelFusedNeuronDescriptor                                                                                    = objc.RegisterName("fusedNeuronDescriptor")
+	_mPSCNNConvolutionDescriptorSelSetFusedNeuronDescriptor                                                                                 = objc.RegisterName("setFusedNeuronDescriptor:")
+	_mPSCNNConvolutionDescriptorSelNeuron                                                                                                   = objc.RegisterName("neuron")
+	_mPSCNNConvolutionDescriptorSelSetNeuron                                                                                                = objc.RegisterName("setNeuron:")
+	_mPSCNNConvolutionDescriptorSelSupportsSecureCoding                                                                                     = objc.RegisterName("supportsSecureCoding")
 )
 
 func MPSCNNConvolutionDescriptorFromID(id objc.ID) *MPSCNNConvolutionDescriptor {
@@ -73,21 +73,27 @@ func (o *MPSCNNConvolutionDescriptor) EncodeWithCoder(aCoder *foundation.NSCoder
 // @abstract <NSSecureCoding> support
 func (o *MPSCNNConvolutionDescriptor) InitWithCoder(aDecoder *foundation.NSCoder) *MPSCNNConvolutionDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionDescriptorSelInitWithCoder, aDecoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNConvolutionDescriptorFromID(_ret)
 }
 
 // @abstract   This method is deprecated. Please use neuronType, neuronParameterA and neuronParameterB properites to fuse neuron with convolution. @param      kernelWidth             The width of the filter window.  Must be > 0. Large values will take a long time. @param      kernelHeight            The height of the filter window.   Must be > 0. Large values will take a long time. @param      inputFeatureChannels    The number of feature channels in the input image. Must be >= 1. @param      outputFeatureChannels   The number of feature channels in the output image. Must be >= 1. @param      neuronFilter            An optional neuron filter that can be applied to the output of convolution. @return     A valid MPSCNNConvolutionDescriptor object or nil, if failure.
 func MPSCNNConvolutionDescriptorCnnConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelsOutputFeatureChannelsNeuronFilter(kernelWidth uint, kernelHeight uint, inputFeatureChannels uint, outputFeatureChannels uint, neuronFilter *mpsneuralnetwork.MPSCNNNeuron) *MPSCNNConvolutionDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNConvolutionDescriptor), _mPSCNNConvolutionDescriptorSelCnnConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelsOutputFeatureChannelsNeuronFilter, kernelWidth, kernelHeight, inputFeatureChannels, outputFeatureChannels, neuronFilter.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNConvolutionDescriptorFromID(_ret)
 }
 
 // @abstract   Creates a convolution descriptor. @param      kernelWidth             The width of the filter window.  Must be > 0. Large values will take a long time. @param      kernelHeight            The height of the filter window.   Must be > 0. Large values will take a long time. @param      inputFeatureChannels    The number of feature channels in the input image. Must be >= 1. @param      outputFeatureChannels   The number of feature channels in the output image. Must be >= 1. @return     A valid MPSCNNConvolutionDescriptor object or nil, if failure.
 func MPSCNNConvolutionDescriptorCnnConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelsOutputFeatureChannels(kernelWidth uint, kernelHeight uint, inputFeatureChannels uint, outputFeatureChannels uint) *MPSCNNConvolutionDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNConvolutionDescriptor), _mPSCNNConvolutionDescriptorSelCnnConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelsOutputFeatureChannels, kernelWidth, kernelHeight, inputFeatureChannels, outputFeatureChannels)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNConvolutionDescriptorFromID(_ret)
 }
 
@@ -217,7 +223,9 @@ func (o *MPSCNNConvolutionDescriptor) SetDilationRateY(dilationRateY uint) {
 // @property   fusedNeuronDescriptor @discussion This mathod can be used to add a neuron activation funtion of given type with associated scalar parameters A and B that are shared across all output channels. Neuron activation fucntion is applied to output of convolution. This is a per-pixel operation that is fused with convolution kernel itself for best performance. Note that this method can only be used to fuse neuron of kind for which parameters A and B are shared across all channels of convoution output. It is an error to call this method for neuron activation functions like MPSCNNNeuronTypePReLU, which require per-channel parameter values. For those kind of neuron activation functions, use appropriate setter functions. Default is descriptor with neuronType MPSCNNNeuronTypeNone. Note: in certain cases the neuron descriptor will be cached by the MPSNNGraph or the MPSCNNConvolution. If the neuron type changes after either is made, behavior is undefined.
 func (o *MPSCNNConvolutionDescriptor) FusedNeuronDescriptor() *mpsneuralnetwork.MPSNNNeuronDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionDescriptorSelFusedNeuronDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsneuralnetwork.MPSNNNeuronDescriptorFromID(_ret)
 }
 
@@ -242,4 +250,3 @@ func MPSCNNConvolutionDescriptorSupportsSecureCoding() bool {
 	_ret := objc.Send[bool](objc.ID(_clsMPSCNNConvolutionDescriptor), _mPSCNNConvolutionDescriptorSelSupportsSecureCoding)
 	return _ret
 }
-

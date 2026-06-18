@@ -14,10 +14,10 @@ type AuthorizationExternalForm struct {
 
 // @typedef AuthorizationItem Each AuthorizationItem describes a single string-named item with optional parameter value. The value must be contiguous memory of valueLength bytes; internal structure is defined separately for each name. @field name name of the item, as an AuthorizationString. Mandatory. @field valueLength Number of bytes in parameter value. Must be 0 if no parameter value. @field value Pointer to the optional parameter value associated with name. Must be NULL if no parameter value. @field flags Reserved field. Must be set to 0 on creation. Do not modify after that.
 type AuthorizationItem struct {
-	Name string
+	Name        string
 	ValueLength uint
-	Value unsafe.Pointer
-	Flags uint
+	Value       unsafe.Pointer
+	Flags       uint
 }
 
 // @typedef AuthorizationItemSet An AuthorizationItemSet structure represents a set of zero or more AuthorizationItems.  Since it is a set it should not contain any identical AuthorizationItems. @field count Number of items identified by items. @field items Pointer to an array of items.
@@ -31,63 +31,63 @@ type AuthorizationItemSet struct {
 type AuthorizationOpaqueRef struct{}
 
 type CSSM_APPLE_CL_CSR_REQUEST struct {
-	SubjectNameX509 *CssmX509Name
-	SignatureAlg uint32
-	SignatureOid CssmData
-	CspHand int
-	SubjectPublicKey *CssmKey
+	SubjectNameX509   *CssmX509Name
+	SignatureAlg      uint32
+	SignatureOid      CssmData
+	CspHand           int
+	SubjectPublicKey  *CssmKey
 	SubjectPrivateKey *CssmKey
-	ChallengeString string
+	ChallengeString   string
 }
 
 type CSSM_APPLE_TP_ACTION_DATA struct {
-	Version uint32
+	Version     uint32
 	ActionFlags uint32
 }
 
 type CSSM_APPLE_TP_CERT_REQUEST struct {
-	CspHand int
-	ClHand int
-	SerialNumber uint32
-	NumSubjectNames uint32
-	SubjectNames *CSSM_APPLE_TP_NAME_OID
-	NumIssuerNames uint32
-	IssuerNames *CSSM_APPLE_TP_NAME_OID
-	IssuerNameX509 *CssmX509Name
-	CertPublicKey *CssmKey
+	CspHand          int
+	ClHand           int
+	SerialNumber     uint32
+	NumSubjectNames  uint32
+	SubjectNames     *CSSM_APPLE_TP_NAME_OID
+	NumIssuerNames   uint32
+	IssuerNames      *CSSM_APPLE_TP_NAME_OID
+	IssuerNameX509   *CssmX509Name
+	CertPublicKey    *CssmKey
 	IssuerPrivateKey *CssmKey
-	SignatureAlg uint32
-	SignatureOid CssmData
-	NotBefore uint32
-	NotAfter uint32
-	NumExtensions uint32
-	Extensions *CE_DataAndType
-	ChallengeString string
+	SignatureAlg     uint32
+	SignatureOid     CssmData
+	NotBefore        uint32
+	NotAfter         uint32
+	NumExtensions    uint32
+	Extensions       *CE_DataAndType
+	ChallengeString  string
 }
 
 type CSSM_APPLE_TP_CRL_OPTIONS struct {
-	Version uint32
+	Version  uint32
 	CrlFlags uint32
 	CrlStore *CssmDlDbHandle
 }
 
 type CSSM_APPLE_TP_NAME_OID struct {
 	String string
-	Oid *CssmData
+	Oid    *CssmData
 }
 
 type CSSM_APPLE_TP_SMIME_OPTIONS struct {
-	Version uint32
-	IntendedUsage uint16
+	Version        uint32
+	IntendedUsage  uint16
 	SenderEmailLen uint32
-	SenderEmail string
+	SenderEmail    string
 }
 
 type CSSM_APPLE_TP_SSL_OPTIONS struct {
-	Version uint32
+	Version       uint32
 	ServerNameLen uint32
-	ServerName string
-	Flags uint32
+	ServerName    string
+	Flags         uint32
 }
 
 type CSSM_TP_APPLE_EVIDENCE_HEADER struct {
@@ -95,20 +95,20 @@ type CSSM_TP_APPLE_EVIDENCE_HEADER struct {
 }
 
 type CSSM_TP_APPLE_EVIDENCE_INFO struct {
-	StatusBits uint32
+	StatusBits     uint32
 	NumStatusCodes uint32
-	StatusCodes *int32
-	Index uint32
-	DlDbHandle CssmDlDbHandle
-	UniqueRecord *CssmDbUniqueRecord
+	StatusCodes    *int32
+	Index          uint32
+	DlDbHandle     CssmDlDbHandle
+	UniqueRecord   *CssmDbUniqueRecord
 }
 
 type CSSM_TUPLE struct {
-	Issuer CssmList
-	Subject CssmList
-	Delegate int32
+	Issuer           CssmList
+	Subject          CssmList
+	Delegate         int32
 	AuthorizationTag CssmList
-	ValidityPeriod CssmList
+	ValidityPeriod   CssmList
 }
 
 // @typedef SecPolicySearchRef @abstract A reference to an opaque policy search structure.
@@ -127,78 +127,78 @@ type OpaqueSecTransformImplementation struct{}
 type SSLContext struct{}
 
 type SecAsn1AlgId struct {
-	Algorithm CssmData
+	Algorithm  CssmData
 	Parameters CssmData
 }
 
 type SecAsn1PubKeyInfo struct {
-	Algorithm SecAsn1AlgId
+	Algorithm        SecAsn1AlgId
 	SubjectPublicKey CssmData
 }
 
 type SecAsn1Template_struct struct {
-	Kind uint32
+	Kind   uint32
 	Offset uint32
-	Sub unsafe.Pointer
-	Size uint32
+	Sub    unsafe.Pointer
+	Size   uint32
 }
 
 type SecItemImportExportKeyParameters struct {
-	Version uint32
-	Flags SecKeyImportExportFlags
-	Passphrase unsafe.Pointer
-	AlertTitle unsafe.Pointer
-	AlertPrompt unsafe.Pointer
-	AccessRef unsafe.Pointer
-	KeyUsage unsafe.Pointer
+	Version       uint32
+	Flags         SecKeyImportExportFlags
+	Passphrase    unsafe.Pointer
+	AlertTitle    unsafe.Pointer
+	AlertPrompt   unsafe.Pointer
+	AccessRef     unsafe.Pointer
+	KeyUsage      unsafe.Pointer
 	KeyAttributes unsafe.Pointer
 }
 
 type SecKeyImportExportParameters struct {
-	Version uint32
-	Flags SecKeyImportExportFlags
-	Passphrase unsafe.Pointer
-	AlertTitle unsafe.Pointer
-	AlertPrompt unsafe.Pointer
-	AccessRef unsafe.Pointer
-	KeyUsage uint32
+	Version       uint32
+	Flags         SecKeyImportExportFlags
+	Passphrase    unsafe.Pointer
+	AlertTitle    unsafe.Pointer
+	AlertPrompt   unsafe.Pointer
+	AccessRef     unsafe.Pointer
+	KeyUsage      uint32
 	KeyAttributes uint32
 }
 
 // @struct SecKeychainAttribute @abstract Contains keychain attributes. @field tag A 4-byte attribute tag. @field length The length of the buffer pointed to by data. @field data A pointer to the attribute data.
 type SecKeychainAttribute struct {
-	Tag uint
+	Tag    uint
 	Length uint
-	Data unsafe.Pointer
+	Data   unsafe.Pointer
 }
 
 // @typedef SecKeychainAttributeInfo @abstract Represents an attribute. @field count The number of tag-format pairs in the respective arrays. @field tag A pointer to the first attribute tag in the array. @field format A pointer to the first CSSM_DB_ATTRIBUTE_FORMAT in the array. @discussion Each tag and format item form a pair.
 type SecKeychainAttributeInfo struct {
-	Count uint
-	Tag *uint
+	Count  uint
+	Tag    *uint
 	Format *uint
 }
 
 // @typedef SecKeychainAttributeList @abstract Represents a list of keychain attributes. @field count An unsigned 32-bit integer that represents the number of keychain attributes in the array. @field attr A pointer to the first keychain attribute in the array.
 type SecKeychainAttributeList struct {
 	Count uint
-	Attr *SecKeychainAttribute
+	Attr  *SecKeychainAttribute
 }
 
 // @typedef SecKeychainCallbackInfo @abstract Contains information about a keychain event. @field version The version of this structure. @field item A reference to the keychain item associated with this event, if any. Note that some events do not involve a particular keychain item. @field keychain A reference to the keychain in which the event occurred. @field pid The id of the process that generated this event. @discussion The SecKeychainCallbackInfo type represents a structure that contains information about the keychain event for which your application is being notified. For information on how to write a keychain event callback function, see SecKeychainCallback.
 type SecKeychainCallbackInfo struct {
-	Version uint
-	Item unsafe.Pointer
+	Version  uint
+	Item     unsafe.Pointer
 	Keychain unsafe.Pointer
-	Pid int
+	Pid      int
 }
 
 // @typedef SecKeychainSettings @abstract Contains keychain settings. @field version An unsigned 32-bit integer representing the keychain version. @field lockOnSleep A boolean value indicating whether the keychain locks when the system sleeps. @field useLockInterval A boolean value indicating whether the keychain automatically locks after a certain period of time. @field lockInterval An unsigned 32-bit integer representing the number of seconds before the keychain locks.
 type SecKeychainSettings struct {
-	Version uint
-	LockOnSleep uint8
+	Version         uint
+	LockOnSleep     uint8
 	UseLockInterval uint8
-	LockInterval uint
+	LockInterval    uint
 }
 
 // C struct: _CMSDecoder
@@ -211,173 +211,173 @@ type CMSEncoder struct{}
 
 // C struct: __CE_AccessDescription
 type CEAccessDescription struct {
-	AccessMethod CssmData
+	AccessMethod   CssmData
 	AccessLocation CE_GeneralName
 }
 
 // C struct: __CE_AuthorityInfoAccess
 type CEAuthorityInfoAccess struct {
 	NumAccessDescriptions uint32
-	AccessDescriptions *CE_AccessDescription
+	AccessDescriptions    *CE_AccessDescription
 }
 
 // C struct: __CE_AuthorityKeyID
 type CEAuthorityKeyID struct {
 	KeyIdentifierPresent int32
-	KeyIdentifier CssmData
-	GeneralNamesPresent int32
-	GeneralNames *CE_GeneralNames
-	SerialNumberPresent int32
-	SerialNumber CssmData
+	KeyIdentifier        CssmData
+	GeneralNamesPresent  int32
+	GeneralNames         *CE_GeneralNames
+	SerialNumberPresent  int32
+	SerialNumber         CssmData
 }
 
 // C struct: __CE_BasicConstraints
 type CEBasicConstraints struct {
-	CA int32
+	CA                       int32
 	PathLenConstraintPresent int32
-	PathLenConstraint uint32
+	PathLenConstraint        uint32
 }
 
 // C struct: __CE_CRLDistPointsSyntax
 type CECRLDistPointsSyntax struct {
 	NumDistPoints uint32
-	DistPoints *CE_CRLDistributionPoint
+	DistPoints    *CE_CRLDistributionPoint
 }
 
 // C struct: __CE_CRLDistributionPoint
 type CECRLDistributionPoint struct {
-	DistPointName *CE_DistributionPointName
+	DistPointName  *CE_DistributionPointName
 	ReasonsPresent int32
-	Reasons uint8
-	CrlIssuer *CE_GeneralNames
+	Reasons        uint8
+	CrlIssuer      *CE_GeneralNames
 }
 
 // C struct: __CE_CertPolicies
 type CECertPolicies struct {
 	NumPolicies uint32
-	Policies *CE_PolicyInformation
+	Policies    *CE_PolicyInformation
 }
 
 // C struct: __CE_DataAndType
 type CEDataAndType struct {
-	Type __CE_DataType
+	Type      __CE_DataType
 	Extension unsafe.Pointer
-	Critical int32
+	Critical  int32
 }
 
 // C struct: __CE_DistributionPointName
 type CEDistributionPointName struct {
 	NameType __CE_CrlDistributionPointNameType
-	Dpn unsafe.Pointer
+	Dpn      unsafe.Pointer
 }
 
 // C struct: __CE_ExtendedKeyUsage
 type CEExtendedKeyUsage struct {
 	NumPurposes uint32
-	Purposes *CssmData
+	Purposes    *CssmData
 }
 
 // C struct: __CE_GeneralName
 type CEGeneralName struct {
-	NameType __CE_GeneralNameType
+	NameType   __CE_GeneralNameType
 	BerEncoded int32
-	Name CssmData
+	Name       CssmData
 }
 
 // C struct: __CE_GeneralNames
 type CEGeneralNames struct {
-	NumNames uint32
+	NumNames    uint32
 	GeneralName *CE_GeneralName
 }
 
 // C struct: __CE_GeneralSubtree
 type CEGeneralSubtree struct {
-	Base *CE_GeneralNames
-	Minimum uint32
+	Base           *CE_GeneralNames
+	Minimum        uint32
 	MaximumPresent int32
-	Maximum uint32
+	Maximum        uint32
 }
 
 // C struct: __CE_GeneralSubtrees
 type CEGeneralSubtrees struct {
 	NumSubtrees uint32
-	Subtrees *CE_GeneralSubtree
+	Subtrees    *CE_GeneralSubtree
 }
 
 // C struct: __CE_IssuingDistributionPoint
 type CEIssuingDistributionPoint struct {
-	DistPointName *CE_DistributionPointName
-	OnlyUserCertsPresent int32
-	OnlyUserCerts int32
-	OnlyCACertsPresent int32
-	OnlyCACerts int32
+	DistPointName          *CE_DistributionPointName
+	OnlyUserCertsPresent   int32
+	OnlyUserCerts          int32
+	OnlyCACertsPresent     int32
+	OnlyCACerts            int32
 	OnlySomeReasonsPresent int32
-	OnlySomeReasons uint8
-	IndirectCrlPresent int32
-	IndirectCrl int32
+	OnlySomeReasons        uint8
+	IndirectCrlPresent     int32
+	IndirectCrl            int32
 }
 
 // C struct: __CE_NameConstraints
 type CENameConstraints struct {
 	Permitted *CE_GeneralSubtrees
-	Excluded *CE_GeneralSubtrees
+	Excluded  *CE_GeneralSubtrees
 }
 
 // C struct: __CE_OtherName
 type CEOtherName struct {
 	TypeId CssmData
-	Value CssmData
+	Value  CssmData
 }
 
 // C struct: __CE_PolicyConstraints
 type CEPolicyConstraints struct {
 	RequireExplicitPolicyPresent int32
-	RequireExplicitPolicy uint32
-	InhibitPolicyMappingPresent int32
-	InhibitPolicyMapping uint32
+	RequireExplicitPolicy        uint32
+	InhibitPolicyMappingPresent  int32
+	InhibitPolicyMapping         uint32
 }
 
 // C struct: __CE_PolicyInformation
 type CEPolicyInformation struct {
-	CertPolicyId CssmData
+	CertPolicyId        CssmData
 	NumPolicyQualifiers uint32
-	PolicyQualifiers *CE_PolicyQualifierInfo
+	PolicyQualifiers    *CE_PolicyQualifierInfo
 }
 
 // C struct: __CE_PolicyMapping
 type CEPolicyMapping struct {
-	IssuerDomainPolicy CssmData
+	IssuerDomainPolicy  CssmData
 	SubjectDomainPolicy CssmData
 }
 
 // C struct: __CE_PolicyMappings
 type CEPolicyMappings struct {
 	NumPolicyMappings uint32
-	PolicyMappings *CE_PolicyMapping
+	PolicyMappings    *CE_PolicyMapping
 }
 
 // C struct: __CE_PolicyQualifierInfo
 type CEPolicyQualifierInfo struct {
 	PolicyQualifierId CssmData
-	Qualifier CssmData
+	Qualifier         CssmData
 }
 
 // C struct: __CE_QC_Statement
 type CEQCStatement struct {
-	StatementId CssmData
+	StatementId   CssmData
 	SemanticsInfo *CE_SemanticsInformation
-	OtherInfo *CssmData
+	OtherInfo     *CssmData
 }
 
 // C struct: __CE_QC_Statements
 type CEQCStatements struct {
 	NumQCStatements uint32
-	QcStatements *CE_QC_Statement
+	QcStatements    *CE_QC_Statement
 }
 
 // C struct: __CE_SemanticsInformation
 type CESemanticsInformation struct {
-	SemanticsIdentifier *CssmData
+	SemanticsIdentifier         *CssmData
 	NameRegistrationAuthorities *CE_GeneralNames
 }
 
@@ -468,66 +468,66 @@ type SecTrustedApplication struct{}
 
 // C struct: cssm_access_credentials
 type CssmAccessCredentials struct {
-	EntryTag [68]int8
+	EntryTag  [68]int8
 	BaseCerts CssmBaseCerts
-	Samples CssmSamplegroup
-	Callback unsafe.Pointer
+	Samples   CssmSamplegroup
+	Callback  unsafe.Pointer
 	CallerCtx unsafe.Pointer
 }
 
 // C struct: cssm_acl_edit
 type CssmAclEdit struct {
-	EditMode uint32
+	EditMode       uint32
 	OldEntryHandle int
-	NewEntry *CssmAclEntryInput
+	NewEntry       *CssmAclEntryInput
 }
 
 // C struct: cssm_acl_entry_info
 type CssmAclEntryInfo struct {
 	EntryPublicInfo CssmAclEntryPrototype
-	EntryHandle int
+	EntryHandle     int
 }
 
 // C struct: cssm_acl_entry_input
 type CssmAclEntryInput struct {
-	Prototype CssmAclEntryPrototype
-	Callback unsafe.Pointer
+	Prototype     CssmAclEntryPrototype
+	Callback      unsafe.Pointer
 	CallerContext unsafe.Pointer
 }
 
 // C struct: cssm_acl_entry_prototype
 type CssmAclEntryPrototype struct {
-	TypedSubject CssmList
-	Delegate int32
+	TypedSubject  CssmList
+	Delegate      int32
 	Authorization CssmAuthorizationgroup
-	TimeRange CssmAclValidityPeriod
-	EntryTag [68]int8
+	TimeRange     CssmAclValidityPeriod
+	EntryTag      [68]int8
 }
 
 // C struct: cssm_acl_keychain_prompt_selector
 type CssmAclKeychainPromptSelector struct {
 	Version uint16
-	Flags uint16
+	Flags   uint16
 }
 
 // C struct: cssm_acl_owner_prototype
 type CssmAclOwnerPrototype struct {
 	TypedSubject CssmList
-	Delegate int32
+	Delegate     int32
 }
 
 // C struct: cssm_acl_process_subject_selector
 type CssmAclProcessSubjectSelector struct {
 	Version uint16
-	Mask uint16
-	Uid uint32
-	Gid uint32
+	Mask    uint16
+	Uid     uint32
+	Gid     uint32
 }
 
 // C struct: cssm_acl_validity_period
 type CssmAclValidityPeriod struct {
 	StartDate CssmData
-	EndDate CssmData
+	EndDate   CssmData
 }
 
 // C struct: cssm_applecspdl_db_change_password_parameters
@@ -548,84 +548,84 @@ type CssmApplecspdlDbSettingsParameters struct {
 
 // C struct: cssm_appledl_open_parameters
 type CssmAppledlOpenParameters struct {
-	Length uint32
-	Version uint32
+	Length     uint32
+	Version    uint32
 	AutoCommit int32
-	Mask uint32
-	Mode uint16
+	Mask       uint32
+	Mode       uint16
 }
 
 // C struct: cssm_authorizationgroup
 type CssmAuthorizationgroup struct {
 	NumberOfAuthTags uint32
-	AuthTags *int32
+	AuthTags         *int32
 }
 
 // C struct: cssm_base_certs
 type CssmBaseCerts struct {
 	TPHandle int
 	CLHandle int
-	Certs CssmCertgroup
+	Certs    CssmCertgroup
 }
 
 // C struct: cssm_cert_bundle
 type CssmCertBundle struct {
 	BundleHeader CssmCertBundleHeader
-	Bundle CssmData
+	Bundle       CssmData
 }
 
 // C struct: cssm_cert_bundle_header
 type CssmCertBundleHeader struct {
-	BundleType uint32
+	BundleType     uint32
 	BundleEncoding uint32
 }
 
 // C struct: cssm_cert_pair
 type CssmCertPair struct {
 	EncodedCert CssmEncodedCert
-	ParsedCert CssmParsedCert
+	ParsedCert  CssmParsedCert
 }
 
 // C struct: cssm_certgroup
 type CssmCertgroup struct {
-	CertType uint32
-	CertEncoding uint32
-	NumCerts uint32
-	GroupList unsafe.Pointer
+	CertType      uint32
+	CertEncoding  uint32
+	NumCerts      uint32
+	GroupList     unsafe.Pointer
 	CertGroupType uint32
-	Reserved unsafe.Pointer
+	Reserved      unsafe.Pointer
 }
 
 // C struct: cssm_context
 type CssmContext struct {
-	ContextType uint32
-	AlgorithmType uint32
-	NumberOfAttributes uint32
-	ContextAttributes *CssmContextAttribute
-	CSPHandle int
-	Privileged int32
+	ContextType          uint32
+	AlgorithmType        uint32
+	NumberOfAttributes   uint32
+	ContextAttributes    *CssmContextAttribute
+	CSPHandle            int
+	Privileged           int32
 	EncryptionProhibited uint32
-	WorkFactor uint32
-	Reserved uint32
+	WorkFactor           uint32
+	Reserved             uint32
 }
 
 // C struct: cssm_context_attribute
 type CssmContextAttribute struct {
-	AttributeType uint32
+	AttributeType   uint32
 	AttributeLength uint32
-	Attribute unsafe.Pointer
+	Attribute       unsafe.Pointer
 }
 
 // C struct: cssm_crl_pair
 type CssmCrlPair struct {
 	EncodedCrl CssmEncodedCrl
-	ParsedCrl CssmParsedCrl
+	ParsedCrl  CssmParsedCrl
 }
 
 // C struct: cssm_crlgroup
 type CssmCrlgroup struct {
-	CrlType uint32
-	CrlEncoding uint32
+	CrlType      uint32
+	CrlEncoding  uint32
 	NumberOfCrls uint32
 	GroupCrlList unsafe.Pointer
 	CrlGroupType uint32
@@ -633,119 +633,119 @@ type CssmCrlgroup struct {
 
 // C struct: cssm_crypto_data
 type CssmCryptoData struct {
-	Param CssmData
-	Callback unsafe.Pointer
+	Param     CssmData
+	Callback  unsafe.Pointer
 	CallerCtx unsafe.Pointer
 }
 
 // C struct: cssm_csp_operational_statistics
 type CssmCspOperationalStatistics struct {
-	UserAuthenticated int32
-	DeviceFlags uint32
-	TokenMaxSessionCount uint32
-	TokenOpenedSessionCount uint32
-	TokenMaxRWSessionCount uint32
+	UserAuthenticated         int32
+	DeviceFlags               uint32
+	TokenMaxSessionCount      uint32
+	TokenOpenedSessionCount   uint32
+	TokenMaxRWSessionCount    uint32
 	TokenOpenedRWSessionCount uint32
-	TokenTotalPublicMem uint32
-	TokenFreePublicMem uint32
-	TokenTotalPrivateMem uint32
-	TokenFreePrivateMem uint32
+	TokenTotalPublicMem       uint32
+	TokenFreePublicMem        uint32
+	TokenTotalPrivateMem      uint32
+	TokenFreePrivateMem       uint32
 }
 
 // Deprecated: SecAsn1 is not supported
 // C struct: cssm_data
 type CssmData struct {
 	Length uint
-	Data *uint8
+	Data   *uint8
 }
 
 // C struct: cssm_date
 type CssmDate struct {
-	Year [4]uint8
+	Year  [4]uint8
 	Month [2]uint8
-	Day [2]uint8
+	Day   [2]uint8
 }
 
 // C struct: cssm_db_attribute_data
 type CssmDbAttributeData struct {
-	Info CssmDbAttributeInfo
+	Info           CssmDbAttributeInfo
 	NumberOfValues uint32
-	Value *CssmData
+	Value          *CssmData
 }
 
 // C struct: cssm_db_attribute_info
 type CssmDbAttributeInfo struct {
 	AttributeNameFormat uint32
-	Label unsafe.Pointer
-	AttributeFormat uint32
+	Label               unsafe.Pointer
+	AttributeFormat     uint32
 }
 
 // C struct: cssm_db_index_info
 type CssmDbIndexInfo struct {
-	IndexType uint32
+	IndexType           uint32
 	IndexedDataLocation uint32
-	Info CssmDbAttributeInfo
+	Info                CssmDbAttributeInfo
 }
 
 // C struct: cssm_db_parsing_module_info
 type CssmDbParsingModuleInfo struct {
-	RecordType uint32
+	RecordType          uint32
 	ModuleSubserviceUid CssmSubserviceUid
 }
 
 // C struct: cssm_db_record_attribute_data
 type CssmDbRecordAttributeData struct {
-	DataRecordType uint32
+	DataRecordType      uint32
 	SemanticInformation uint32
-	NumberOfAttributes uint32
-	AttributeData *CssmDbAttributeData
+	NumberOfAttributes  uint32
+	AttributeData       *CssmDbAttributeData
 }
 
 // C struct: cssm_db_record_attribute_info
 type CssmDbRecordAttributeInfo struct {
-	DataRecordType uint32
+	DataRecordType     uint32
 	NumberOfAttributes uint32
-	AttributeInfo *CssmDbAttributeInfo
+	AttributeInfo      *CssmDbAttributeInfo
 }
 
 // C struct: cssm_db_record_index_info
 type CssmDbRecordIndexInfo struct {
-	DataRecordType uint32
+	DataRecordType  uint32
 	NumberOfIndexes uint32
-	IndexInfo *CssmDbIndexInfo
+	IndexInfo       *CssmDbIndexInfo
 }
 
 // C struct: cssm_db_schema_attribute_info
 type CssmDbSchemaAttributeInfo struct {
-	AttributeId uint32
-	AttributeName string
+	AttributeId     uint32
+	AttributeName   string
 	AttributeNameID CssmData
-	DataType uint32
+	DataType        uint32
 }
 
 // C struct: cssm_db_schema_index_info
 type CssmDbSchemaIndexInfo struct {
-	AttributeId uint32
-	IndexId uint32
-	IndexType uint32
+	AttributeId         uint32
+	IndexId             uint32
+	IndexType           uint32
 	IndexedDataLocation uint32
 }
 
 // C struct: cssm_db_unique_record
 type CssmDbUniqueRecord struct {
-	RecordLocator CssmDbIndexInfo
+	RecordLocator    CssmDbIndexInfo
 	RecordIdentifier CssmData
 }
 
 // C struct: cssm_dbinfo
 type CssmDbinfo struct {
-	NumberOfRecordTypes uint32
+	NumberOfRecordTypes   uint32
 	DefaultParsingModules *CssmDbParsingModuleInfo
-	RecordAttributeNames *CssmDbRecordAttributeInfo
-	RecordIndexes *CssmDbRecordIndexInfo
-	IsLocal int32
-	AccessPath string
-	Reserved unsafe.Pointer
+	RecordAttributeNames  *CssmDbRecordAttributeInfo
+	RecordIndexes         *CssmDbRecordIndexInfo
+	IsLocal               int32
+	AccessPath            string
+	Reserved              unsafe.Pointer
 }
 
 // C struct: cssm_dl_db_handle
@@ -767,39 +767,39 @@ type CssmDlPkcs11Attributes struct {
 
 // C struct: cssm_encoded_cert
 type CssmEncodedCert struct {
-	CertType uint32
+	CertType     uint32
 	CertEncoding uint32
-	CertBlob CssmData
+	CertBlob     CssmData
 }
 
 // C struct: cssm_encoded_crl
 type CssmEncodedCrl struct {
-	CrlType uint32
+	CrlType     uint32
 	CrlEncoding uint32
-	CrlBlob CssmData
+	CrlBlob     CssmData
 }
 
 // C struct: cssm_evidence
 type CssmEvidence struct {
 	EvidenceForm uint32
-	Evidence unsafe.Pointer
+	Evidence     unsafe.Pointer
 }
 
 // C struct: cssm_field
 type CssmField struct {
-	FieldOid CssmData
+	FieldOid   CssmData
 	FieldValue CssmData
 }
 
 // C struct: cssm_fieldgroup
 type CssmFieldgroup struct {
 	NumberOfFields int
-	Fields *CssmField
+	Fields         *CssmField
 }
 
 // C struct: cssm_func_name_addr
 type CssmFuncNameAddr struct {
-	Name [68]int8
+	Name    [68]int8
 	Address unsafe.Pointer
 }
 
@@ -820,175 +820,175 @@ type CssmKeaDeriveParams struct {
 // C struct: cssm_key
 type CssmKey struct {
 	KeyHeader CssmKeyheader
-	KeyData CssmData
+	KeyData   CssmData
 }
 
 // C struct: cssm_key_size
 type CssmKeySize struct {
-	LogicalKeySizeInBits uint32
+	LogicalKeySizeInBits   uint32
 	EffectiveKeySizeInBits uint32
 }
 
 // C struct: cssm_keyheader
 type CssmKeyheader struct {
-	HeaderVersion uint32
-	CspId CssmGuid
-	BlobType uint32
-	Format uint32
-	AlgorithmId uint32
-	KeyClass uint32
+	HeaderVersion        uint32
+	CspId                CssmGuid
+	BlobType             uint32
+	Format               uint32
+	AlgorithmId          uint32
+	KeyClass             uint32
 	LogicalKeySizeInBits uint32
-	KeyAttr uint32
-	KeyUsage uint32
-	StartDate CssmDate
-	EndDate CssmDate
-	WrapAlgorithmId uint32
-	WrapMode uint32
-	Reserved uint32
+	KeyAttr              uint32
+	KeyUsage             uint32
+	StartDate            CssmDate
+	EndDate              CssmDate
+	WrapAlgorithmId      uint32
+	WrapMode             uint32
+	Reserved             uint32
 }
 
 // C struct: cssm_kr_name
 type CssmKrName struct {
-	Type uint8
+	Type   uint8
 	Length uint8
-	Name string
+	Name   string
 }
 
 // C struct: cssm_kr_policy_info
 type CssmKrPolicyInfo struct {
-	KrbNotAllowed int32
+	KrbNotAllowed   int32
 	NumberOfEntries uint32
-	PolicyEntry *CssmKrPolicyListItem
+	PolicyEntry     *CssmKrPolicyListItem
 }
 
 // C struct: cssm_kr_policy_list_item
 type CssmKrPolicyListItem struct {
-	Next unsafe.Pointer
-	AlgorithmId uint32
-	Mode uint32
+	Next         unsafe.Pointer
+	AlgorithmId  uint32
+	Mode         uint32
 	MaxKeyLength uint32
-	MaxRounds uint32
-	WorkFactor uint8
-	PolicyFlags uint32
-	AlgClass uint32
+	MaxRounds    uint32
+	WorkFactor   uint8
+	PolicyFlags  uint32
+	AlgClass     uint32
 }
 
 // C struct: cssm_kr_profile
 type CssmKrProfile struct {
-	UserName CssmKrName
-	UserCertificate *CssmCertgroup
-	KRSCertChain *CssmCertgroup
-	LE_KRANum uint8
-	LE_KRACertChainList *CssmCertgroup
-	ENT_KRANum uint8
-	ENT_KRACertChainList *CssmCertgroup
-	INDIV_KRANum uint8
-	INDIV_KRACertChainList *CssmCertgroup
+	UserName                 CssmKrName
+	UserCertificate          *CssmCertgroup
+	KRSCertChain             *CssmCertgroup
+	LE_KRANum                uint8
+	LE_KRACertChainList      *CssmCertgroup
+	ENT_KRANum               uint8
+	ENT_KRACertChainList     *CssmCertgroup
+	INDIV_KRANum             uint8
+	INDIV_KRACertChainList   *CssmCertgroup
 	INDIV_AuthenticationInfo *CssmData
-	KRSPFlags uint32
-	KRSPExtensions *CssmData
+	KRSPFlags                uint32
+	KRSPExtensions           *CssmData
 }
 
 // C struct: cssm_kr_wrappedproductinfo
 type CssmKrWrappedproductinfo struct {
-	StandardVersion CssmVersion
+	StandardVersion     CssmVersion
 	StandardDescription [68]int8
-	ProductVersion CssmVersion
-	ProductDescription [68]int8
-	ProductVendor [68]int8
-	ProductFlags uint32
+	ProductVersion      CssmVersion
+	ProductDescription  [68]int8
+	ProductVendor       [68]int8
+	ProductFlags        uint32
 }
 
 // C struct: cssm_krsubservice
 type CssmKrsubservice struct {
-	SubServiceId uint32
-	Description string
+	SubServiceId   uint32
+	Description    string
 	WrappedProduct CssmKrWrappedproductinfo
 }
 
 // C struct: cssm_list
 type CssmList struct {
 	ListType uint32
-	Head *CssmListElement
-	Tail *CssmListElement
+	Head     *CssmListElement
+	Tail     *CssmListElement
 }
 
 // C struct: cssm_list_element
 type CssmListElement struct {
 	NextElement *CssmListElement
-	WordID int32
+	WordID      int32
 	ElementType uint32
-	Element unsafe.Pointer
+	Element     unsafe.Pointer
 }
 
 // C struct: cssm_manager_event_notification
 type CssmManagerEventNotification struct {
 	DestinationModuleManagerType uint32
-	SourceModuleManagerType uint32
-	Event uint32
-	EventId uint32
-	EventData CssmData
+	SourceModuleManagerType      uint32
+	Event                        uint32
+	EventId                      uint32
+	EventData                    CssmData
 }
 
 // C struct: cssm_manager_registration_info
 type CssmManagerRegistrationInfo struct {
-	Initialize unsafe.Pointer
-	Terminate unsafe.Pointer
-	RegisterDispatchTable unsafe.Pointer
+	Initialize              unsafe.Pointer
+	Terminate               unsafe.Pointer
+	RegisterDispatchTable   unsafe.Pointer
 	DeregisterDispatchTable unsafe.Pointer
-	EventNotifyManager unsafe.Pointer
-	RefreshFunctionTable unsafe.Pointer
+	EventNotifyManager      unsafe.Pointer
+	RefreshFunctionTable    unsafe.Pointer
 }
 
 // C struct: cssm_memory_funcs
 type CssmMemoryFuncs struct {
-	Malloc_func unsafe.Pointer
-	Free_func unsafe.Pointer
+	Malloc_func  unsafe.Pointer
+	Free_func    unsafe.Pointer
 	Realloc_func unsafe.Pointer
-	Calloc_func unsafe.Pointer
-	AllocRef unsafe.Pointer
+	Calloc_func  unsafe.Pointer
+	AllocRef     unsafe.Pointer
 }
 
 // C struct: cssm_module_funcs
 type CssmModuleFuncs struct {
-	ServiceType uint32
+	ServiceType          uint32
 	NumberOfServiceFuncs uint32
-	ServiceFuncs unsafe.Pointer
+	ServiceFuncs         unsafe.Pointer
 }
 
 // C struct: cssm_name_list
 type CssmNameList struct {
 	NumStrings uint32
-	String string
+	String     string
 }
 
 // C struct: cssm_net_address
 type CssmNetAddress struct {
 	AddressType uint32
-	Address CssmData
+	Address     CssmData
 }
 
 // C struct: cssm_parsed_cert
 type CssmParsedCert struct {
-	CertType uint32
+	CertType         uint32
 	ParsedCertFormat uint32
-	ParsedCert unsafe.Pointer
+	ParsedCert       unsafe.Pointer
 }
 
 // C struct: cssm_parsed_crl
 type CssmParsedCrl struct {
-	CrlType uint32
+	CrlType         uint32
 	ParsedCrlFormat uint32
-	ParsedCrl unsafe.Pointer
+	ParsedCrl       unsafe.Pointer
 }
 
 // C struct: cssm_pkcs1_oaep_params
 type CssmPkcs1OaepParams struct {
 	HashAlgorithm uint32
-	HashParams CssmData
-	MGF uint32
-	MGFParams CssmData
-	PSource uint32
+	HashParams    CssmData
+	MGF           uint32
+	MGFParams     CssmData
+	PSource       uint32
 	PSourceParams CssmData
 }
 
@@ -1000,18 +1000,18 @@ type CssmPkcs5Pbkdf1Params struct {
 
 // C struct: cssm_pkcs5_pbkdf2_params
 type CssmPkcs5Pbkdf2Params struct {
-	Passphrase CssmData
+	Passphrase           CssmData
 	PseudoRandomFunction uint32
 }
 
 // C struct: cssm_query
 type CssmQuery struct {
-	RecordType uint32
-	Conjunctive uint32
+	RecordType             uint32
+	Conjunctive            uint32
 	NumSelectionPredicates uint32
-	SelectionPredicate *CssmSelectionPredicate
-	QueryLimits CssmQueryLimits
-	QueryFlags uint32
+	SelectionPredicate     *CssmSelectionPredicate
+	QueryLimits            CssmQueryLimits
+	QueryFlags             uint32
 }
 
 // C struct: cssm_query_limits
@@ -1022,7 +1022,7 @@ type CssmQueryLimits struct {
 
 // C struct: cssm_query_size_data
 type CssmQuerySizeData struct {
-	SizeInputBlock uint32
+	SizeInputBlock  uint32
 	SizeOutputBlock uint32
 }
 
@@ -1034,26 +1034,26 @@ type CssmRange struct {
 
 // C struct: cssm_resource_control_context
 type CssmResourceControlContext struct {
-	AccessCred *CssmAccessCredentials
+	AccessCred      *CssmAccessCredentials
 	InitialAclEntry CssmAclEntryInput
 }
 
 // C struct: cssm_sample
 type CssmSample struct {
 	TypedSample CssmList
-	Verifier *CssmSubserviceUid
+	Verifier    *CssmSubserviceUid
 }
 
 // C struct: cssm_samplegroup
 type CssmSamplegroup struct {
 	NumberOfSamples uint32
-	Samples *CssmSample
+	Samples         *CssmSample
 }
 
 // C struct: cssm_selection_predicate
 type CssmSelectionPredicate struct {
 	DbOperator uint32
-	Attribute CssmDbAttributeData
+	Attribute  CssmDbAttributeData
 }
 
 // C struct: cssm_spi_ac_funcs
@@ -1064,364 +1064,364 @@ type CssmSpiAcFuncs struct {
 
 // C struct: cssm_spi_cl_funcs
 type CssmSpiClFuncs struct {
-	CertCreateTemplate unsafe.Pointer
-	CertGetAllTemplateFields unsafe.Pointer
-	CertSign unsafe.Pointer
-	CertVerify unsafe.Pointer
-	CertVerifyWithKey unsafe.Pointer
-	CertGetFirstFieldValue unsafe.Pointer
-	CertGetNextFieldValue unsafe.Pointer
-	CertAbortQuery unsafe.Pointer
-	CertGetKeyInfo unsafe.Pointer
-	CertGetAllFields unsafe.Pointer
-	FreeFields unsafe.Pointer
-	FreeFieldValue unsafe.Pointer
-	CertCache unsafe.Pointer
+	CertCreateTemplate           unsafe.Pointer
+	CertGetAllTemplateFields     unsafe.Pointer
+	CertSign                     unsafe.Pointer
+	CertVerify                   unsafe.Pointer
+	CertVerifyWithKey            unsafe.Pointer
+	CertGetFirstFieldValue       unsafe.Pointer
+	CertGetNextFieldValue        unsafe.Pointer
+	CertAbortQuery               unsafe.Pointer
+	CertGetKeyInfo               unsafe.Pointer
+	CertGetAllFields             unsafe.Pointer
+	FreeFields                   unsafe.Pointer
+	FreeFieldValue               unsafe.Pointer
+	CertCache                    unsafe.Pointer
 	CertGetFirstCachedFieldValue unsafe.Pointer
-	CertGetNextCachedFieldValue unsafe.Pointer
-	CertAbortCache unsafe.Pointer
-	CertGroupToSignedBundle unsafe.Pointer
-	CertGroupFromVerifiedBundle unsafe.Pointer
-	CertDescribeFormat unsafe.Pointer
-	CrlCreateTemplate unsafe.Pointer
-	CrlSetFields unsafe.Pointer
-	CrlAddCert unsafe.Pointer
-	CrlRemoveCert unsafe.Pointer
-	CrlSign unsafe.Pointer
-	CrlVerify unsafe.Pointer
-	CrlVerifyWithKey unsafe.Pointer
-	IsCertInCrl unsafe.Pointer
-	CrlGetFirstFieldValue unsafe.Pointer
-	CrlGetNextFieldValue unsafe.Pointer
-	CrlAbortQuery unsafe.Pointer
-	CrlGetAllFields unsafe.Pointer
-	CrlCache unsafe.Pointer
-	IsCertInCachedCrl unsafe.Pointer
-	CrlGetFirstCachedFieldValue unsafe.Pointer
-	CrlGetNextCachedFieldValue unsafe.Pointer
-	CrlGetAllCachedRecordFields unsafe.Pointer
-	CrlAbortCache unsafe.Pointer
-	CrlDescribeFormat unsafe.Pointer
-	PassThrough unsafe.Pointer
+	CertGetNextCachedFieldValue  unsafe.Pointer
+	CertAbortCache               unsafe.Pointer
+	CertGroupToSignedBundle      unsafe.Pointer
+	CertGroupFromVerifiedBundle  unsafe.Pointer
+	CertDescribeFormat           unsafe.Pointer
+	CrlCreateTemplate            unsafe.Pointer
+	CrlSetFields                 unsafe.Pointer
+	CrlAddCert                   unsafe.Pointer
+	CrlRemoveCert                unsafe.Pointer
+	CrlSign                      unsafe.Pointer
+	CrlVerify                    unsafe.Pointer
+	CrlVerifyWithKey             unsafe.Pointer
+	IsCertInCrl                  unsafe.Pointer
+	CrlGetFirstFieldValue        unsafe.Pointer
+	CrlGetNextFieldValue         unsafe.Pointer
+	CrlAbortQuery                unsafe.Pointer
+	CrlGetAllFields              unsafe.Pointer
+	CrlCache                     unsafe.Pointer
+	IsCertInCachedCrl            unsafe.Pointer
+	CrlGetFirstCachedFieldValue  unsafe.Pointer
+	CrlGetNextCachedFieldValue   unsafe.Pointer
+	CrlGetAllCachedRecordFields  unsafe.Pointer
+	CrlAbortCache                unsafe.Pointer
+	CrlDescribeFormat            unsafe.Pointer
+	PassThrough                  unsafe.Pointer
 }
 
 // C struct: cssm_spi_csp_funcs
 type CssmSpiCspFuncs struct {
-	EventNotify unsafe.Pointer
-	QuerySize unsafe.Pointer
-	SignData unsafe.Pointer
-	SignDataInit unsafe.Pointer
-	SignDataUpdate unsafe.Pointer
-	SignDataFinal unsafe.Pointer
-	VerifyData unsafe.Pointer
-	VerifyDataInit unsafe.Pointer
-	VerifyDataUpdate unsafe.Pointer
-	VerifyDataFinal unsafe.Pointer
-	DigestData unsafe.Pointer
-	DigestDataInit unsafe.Pointer
-	DigestDataUpdate unsafe.Pointer
-	DigestDataClone unsafe.Pointer
-	DigestDataFinal unsafe.Pointer
-	GenerateMac unsafe.Pointer
-	GenerateMacInit unsafe.Pointer
-	GenerateMacUpdate unsafe.Pointer
-	GenerateMacFinal unsafe.Pointer
-	VerifyMac unsafe.Pointer
-	VerifyMacInit unsafe.Pointer
-	VerifyMacUpdate unsafe.Pointer
-	VerifyMacFinal unsafe.Pointer
-	EncryptData unsafe.Pointer
-	EncryptDataInit unsafe.Pointer
-	EncryptDataUpdate unsafe.Pointer
-	EncryptDataFinal unsafe.Pointer
-	DecryptData unsafe.Pointer
-	DecryptDataInit unsafe.Pointer
-	DecryptDataUpdate unsafe.Pointer
-	DecryptDataFinal unsafe.Pointer
-	QueryKeySizeInBits unsafe.Pointer
-	GenerateKey unsafe.Pointer
-	GenerateKeyPair unsafe.Pointer
-	GenerateRandom unsafe.Pointer
-	GenerateAlgorithmParams unsafe.Pointer
-	WrapKey unsafe.Pointer
-	UnwrapKey unsafe.Pointer
-	DeriveKey unsafe.Pointer
-	FreeKey unsafe.Pointer
-	PassThrough unsafe.Pointer
-	Login unsafe.Pointer
-	Logout unsafe.Pointer
-	ChangeLoginAcl unsafe.Pointer
+	EventNotify                   unsafe.Pointer
+	QuerySize                     unsafe.Pointer
+	SignData                      unsafe.Pointer
+	SignDataInit                  unsafe.Pointer
+	SignDataUpdate                unsafe.Pointer
+	SignDataFinal                 unsafe.Pointer
+	VerifyData                    unsafe.Pointer
+	VerifyDataInit                unsafe.Pointer
+	VerifyDataUpdate              unsafe.Pointer
+	VerifyDataFinal               unsafe.Pointer
+	DigestData                    unsafe.Pointer
+	DigestDataInit                unsafe.Pointer
+	DigestDataUpdate              unsafe.Pointer
+	DigestDataClone               unsafe.Pointer
+	DigestDataFinal               unsafe.Pointer
+	GenerateMac                   unsafe.Pointer
+	GenerateMacInit               unsafe.Pointer
+	GenerateMacUpdate             unsafe.Pointer
+	GenerateMacFinal              unsafe.Pointer
+	VerifyMac                     unsafe.Pointer
+	VerifyMacInit                 unsafe.Pointer
+	VerifyMacUpdate               unsafe.Pointer
+	VerifyMacFinal                unsafe.Pointer
+	EncryptData                   unsafe.Pointer
+	EncryptDataInit               unsafe.Pointer
+	EncryptDataUpdate             unsafe.Pointer
+	EncryptDataFinal              unsafe.Pointer
+	DecryptData                   unsafe.Pointer
+	DecryptDataInit               unsafe.Pointer
+	DecryptDataUpdate             unsafe.Pointer
+	DecryptDataFinal              unsafe.Pointer
+	QueryKeySizeInBits            unsafe.Pointer
+	GenerateKey                   unsafe.Pointer
+	GenerateKeyPair               unsafe.Pointer
+	GenerateRandom                unsafe.Pointer
+	GenerateAlgorithmParams       unsafe.Pointer
+	WrapKey                       unsafe.Pointer
+	UnwrapKey                     unsafe.Pointer
+	DeriveKey                     unsafe.Pointer
+	FreeKey                       unsafe.Pointer
+	PassThrough                   unsafe.Pointer
+	Login                         unsafe.Pointer
+	Logout                        unsafe.Pointer
+	ChangeLoginAcl                unsafe.Pointer
 	ObtainPrivateKeyFromPublicKey unsafe.Pointer
-	RetrieveUniqueId unsafe.Pointer
-	RetrieveCounter unsafe.Pointer
-	VerifyDevice unsafe.Pointer
-	GetTimeValue unsafe.Pointer
-	GetOperationalStatistics unsafe.Pointer
-	GetLoginAcl unsafe.Pointer
-	GetKeyAcl unsafe.Pointer
-	ChangeKeyAcl unsafe.Pointer
-	GetKeyOwner unsafe.Pointer
-	ChangeKeyOwner unsafe.Pointer
-	GetLoginOwner unsafe.Pointer
-	ChangeLoginOwner unsafe.Pointer
+	RetrieveUniqueId              unsafe.Pointer
+	RetrieveCounter               unsafe.Pointer
+	VerifyDevice                  unsafe.Pointer
+	GetTimeValue                  unsafe.Pointer
+	GetOperationalStatistics      unsafe.Pointer
+	GetLoginAcl                   unsafe.Pointer
+	GetKeyAcl                     unsafe.Pointer
+	ChangeKeyAcl                  unsafe.Pointer
+	GetKeyOwner                   unsafe.Pointer
+	ChangeKeyOwner                unsafe.Pointer
+	GetLoginOwner                 unsafe.Pointer
+	ChangeLoginOwner              unsafe.Pointer
 }
 
 // C struct: cssm_spi_dl_funcs
 type CssmSpiDlFuncs struct {
-	DbOpen unsafe.Pointer
-	DbClose unsafe.Pointer
-	DbCreate unsafe.Pointer
-	DbDelete unsafe.Pointer
-	CreateRelation unsafe.Pointer
-	DestroyRelation unsafe.Pointer
-	Authenticate unsafe.Pointer
-	GetDbAcl unsafe.Pointer
-	ChangeDbAcl unsafe.Pointer
-	GetDbOwner unsafe.Pointer
-	ChangeDbOwner unsafe.Pointer
-	GetDbNames unsafe.Pointer
-	GetDbNameFromHandle unsafe.Pointer
-	FreeNameList unsafe.Pointer
-	DataInsert unsafe.Pointer
-	DataDelete unsafe.Pointer
-	DataModify unsafe.Pointer
-	DataGetFirst unsafe.Pointer
-	DataGetNext unsafe.Pointer
-	DataAbortQuery unsafe.Pointer
+	DbOpen                    unsafe.Pointer
+	DbClose                   unsafe.Pointer
+	DbCreate                  unsafe.Pointer
+	DbDelete                  unsafe.Pointer
+	CreateRelation            unsafe.Pointer
+	DestroyRelation           unsafe.Pointer
+	Authenticate              unsafe.Pointer
+	GetDbAcl                  unsafe.Pointer
+	ChangeDbAcl               unsafe.Pointer
+	GetDbOwner                unsafe.Pointer
+	ChangeDbOwner             unsafe.Pointer
+	GetDbNames                unsafe.Pointer
+	GetDbNameFromHandle       unsafe.Pointer
+	FreeNameList              unsafe.Pointer
+	DataInsert                unsafe.Pointer
+	DataDelete                unsafe.Pointer
+	DataModify                unsafe.Pointer
+	DataGetFirst              unsafe.Pointer
+	DataGetNext               unsafe.Pointer
+	DataAbortQuery            unsafe.Pointer
 	DataGetFromUniqueRecordId unsafe.Pointer
-	FreeUniqueRecord unsafe.Pointer
-	PassThrough unsafe.Pointer
+	FreeUniqueRecord          unsafe.Pointer
+	PassThrough               unsafe.Pointer
 }
 
 // C struct: cssm_spi_kr_funcs
 type CssmSpiKrFuncs struct {
-	RegistrationRequest unsafe.Pointer
-	RegistrationRetrieve unsafe.Pointer
+	RegistrationRequest    unsafe.Pointer
+	RegistrationRetrieve   unsafe.Pointer
 	GenerateRecoveryFields unsafe.Pointer
-	ProcessRecoveryFields unsafe.Pointer
-	RecoveryRequest unsafe.Pointer
-	RecoveryRetrieve unsafe.Pointer
-	GetRecoveredObject unsafe.Pointer
-	RecoveryRequestAbort unsafe.Pointer
-	PassThrough unsafe.Pointer
+	ProcessRecoveryFields  unsafe.Pointer
+	RecoveryRequest        unsafe.Pointer
+	RecoveryRetrieve       unsafe.Pointer
+	GetRecoveredObject     unsafe.Pointer
+	RecoveryRequestAbort   unsafe.Pointer
+	PassThrough            unsafe.Pointer
 }
 
 // C struct: cssm_spi_tp_funcs
 type CssmSpiTpFuncs struct {
-	SubmitCredRequest unsafe.Pointer
-	RetrieveCredResult unsafe.Pointer
-	ConfirmCredResult unsafe.Pointer
-	ReceiveConfirmation unsafe.Pointer
-	CertReclaimKey unsafe.Pointer
-	CertReclaimAbort unsafe.Pointer
-	FormRequest unsafe.Pointer
-	FormSubmit unsafe.Pointer
-	CertGroupVerify unsafe.Pointer
-	CertCreateTemplate unsafe.Pointer
-	CertGetAllTemplateFields unsafe.Pointer
-	CertSign unsafe.Pointer
-	CrlVerify unsafe.Pointer
-	CrlCreateTemplate unsafe.Pointer
-	CertRevoke unsafe.Pointer
+	SubmitCredRequest         unsafe.Pointer
+	RetrieveCredResult        unsafe.Pointer
+	ConfirmCredResult         unsafe.Pointer
+	ReceiveConfirmation       unsafe.Pointer
+	CertReclaimKey            unsafe.Pointer
+	CertReclaimAbort          unsafe.Pointer
+	FormRequest               unsafe.Pointer
+	FormSubmit                unsafe.Pointer
+	CertGroupVerify           unsafe.Pointer
+	CertCreateTemplate        unsafe.Pointer
+	CertGetAllTemplateFields  unsafe.Pointer
+	CertSign                  unsafe.Pointer
+	CrlVerify                 unsafe.Pointer
+	CrlCreateTemplate         unsafe.Pointer
+	CertRevoke                unsafe.Pointer
 	CertRemoveFromCrlTemplate unsafe.Pointer
-	CrlSign unsafe.Pointer
-	ApplyCrlToDb unsafe.Pointer
-	CertGroupConstruct unsafe.Pointer
-	CertGroupPrune unsafe.Pointer
-	CertGroupToTupleGroup unsafe.Pointer
-	TupleGroupToCertGroup unsafe.Pointer
-	PassThrough unsafe.Pointer
+	CrlSign                   unsafe.Pointer
+	ApplyCrlToDb              unsafe.Pointer
+	CertGroupConstruct        unsafe.Pointer
+	CertGroupPrune            unsafe.Pointer
+	CertGroupToTupleGroup     unsafe.Pointer
+	TupleGroupToCertGroup     unsafe.Pointer
+	PassThrough               unsafe.Pointer
 }
 
 // C struct: cssm_state_funcs
 type CssmStateFuncs struct {
-	Cssm_GetAttachFunctions unsafe.Pointer
-	Cssm_ReleaseAttachFunctions unsafe.Pointer
-	Cssm_GetAppMemoryFunctions unsafe.Pointer
-	Cssm_IsFuncCallValid unsafe.Pointer
+	Cssm_GetAttachFunctions        unsafe.Pointer
+	Cssm_ReleaseAttachFunctions    unsafe.Pointer
+	Cssm_GetAppMemoryFunctions     unsafe.Pointer
+	Cssm_IsFuncCallValid           unsafe.Pointer
 	Cssm_DeregisterManagerServices unsafe.Pointer
 	Cssm_DeliverModuleManagerEvent unsafe.Pointer
 }
 
 // C struct: cssm_subservice_uid
 type CssmSubserviceUid struct {
-	Guid CssmGuid
-	Version CssmVersion
-	SubserviceId uint32
+	Guid           CssmGuid
+	Version        CssmVersion
+	SubserviceId   uint32
 	SubserviceType uint32
 }
 
 // C struct: cssm_tp_authority_id
 type CssmTpAuthorityId struct {
-	AuthorityCert *CssmData
+	AuthorityCert     *CssmData
 	AuthorityLocation *CssmNetAddress
 }
 
 // C struct: cssm_tp_callerauth_context
 type CssmTpCallerauthContext struct {
-	Policy CssmTpPolicyinfo
-	VerifyTime string
-	VerificationAbortOn uint32
+	Policy                   CssmTpPolicyinfo
+	VerifyTime               string
+	VerificationAbortOn      uint32
 	CallbackWithVerifiedCert unsafe.Pointer
-	NumberOfAnchorCerts uint32
-	AnchorCerts *CssmData
-	DBList *CssmDlDbList
-	CallerCredentials *CssmAccessCredentials
+	NumberOfAnchorCerts      uint32
+	AnchorCerts              *CssmData
+	DBList                   *CssmDlDbList
+	CallerCredentials        *CssmAccessCredentials
 }
 
 // C struct: cssm_tp_certchange_input
 type CssmTpCertchangeInput struct {
-	Action uint32
-	Reason uint32
-	CLHandle int
-	Cert *CssmData
-	ChangeInfo *CssmField
-	StartTime string
+	Action            uint32
+	Reason            uint32
+	CLHandle          int
+	Cert              *CssmData
+	ChangeInfo        *CssmField
+	StartTime         string
 	CallerCredentials *CssmAccessCredentials
 }
 
 // C struct: cssm_tp_certchange_output
 type CssmTpCertchangeOutput struct {
 	ActionStatus uint32
-	RevokeInfo CssmField
+	RevokeInfo   CssmField
 }
 
 // C struct: cssm_tp_certissue_input
 type CssmTpCertissueInput struct {
-	CSPSubserviceUid CssmSubserviceUid
-	CLHandle int
-	NumberOfTemplateFields uint32
-	SubjectCertFields *CssmField
-	MoreServiceRequests uint32
+	CSPSubserviceUid        CssmSubserviceUid
+	CLHandle                int
+	NumberOfTemplateFields  uint32
+	SubjectCertFields       *CssmField
+	MoreServiceRequests     uint32
 	NumberOfServiceControls uint32
-	ServiceControls *CssmField
-	UserCredentials *CssmAccessCredentials
+	ServiceControls         *CssmField
+	UserCredentials         *CssmAccessCredentials
 }
 
 // C struct: cssm_tp_certissue_output
 type CssmTpCertissueOutput struct {
-	IssueStatus uint32
-	CertGroup *CssmCertgroup
+	IssueStatus              uint32
+	CertGroup                *CssmCertgroup
 	PerformedServiceRequests uint32
 }
 
 // C struct: cssm_tp_certnotarize_input
 type CssmTpCertnotarizeInput struct {
-	CLHandle int
-	NumberOfFields uint32
-	MoreFields *CssmField
-	SignScope *CssmField
-	ScopeSize uint32
-	MoreServiceRequests uint32
+	CLHandle                int
+	NumberOfFields          uint32
+	MoreFields              *CssmField
+	SignScope               *CssmField
+	ScopeSize               uint32
+	MoreServiceRequests     uint32
 	NumberOfServiceControls uint32
-	ServiceControls *CssmField
-	UserCredentials *CssmAccessCredentials
+	ServiceControls         *CssmField
+	UserCredentials         *CssmAccessCredentials
 }
 
 // C struct: cssm_tp_certnotarize_output
 type CssmTpCertnotarizeOutput struct {
-	NotarizeStatus uint32
-	NotarizedCertGroup *CssmCertgroup
+	NotarizeStatus           uint32
+	NotarizedCertGroup       *CssmCertgroup
 	PerformedServiceRequests uint32
 }
 
 // C struct: cssm_tp_certreclaim_input
 type CssmTpCertreclaimInput struct {
-	CLHandle int
+	CLHandle                int
 	NumberOfSelectionFields uint32
-	SelectionFields *CssmField
-	UserCredentials *CssmAccessCredentials
+	SelectionFields         *CssmField
+	UserCredentials         *CssmAccessCredentials
 }
 
 // C struct: cssm_tp_certreclaim_output
 type CssmTpCertreclaimOutput struct {
-	ReclaimStatus uint32
+	ReclaimStatus      uint32
 	ReclaimedCertGroup *CssmCertgroup
-	KeyCacheHandle uint64
+	KeyCacheHandle     uint64
 }
 
 // C struct: cssm_tp_certverify_input
 type CssmTpCertverifyInput struct {
-	CLHandle int
-	Cert *CssmData
+	CLHandle      int
+	Cert          *CssmData
 	VerifyContext *CssmTpVerifyContext
 }
 
 // C struct: cssm_tp_certverify_output
 type CssmTpCertverifyOutput struct {
-	VerifyStatus uint32
+	VerifyStatus     uint32
 	NumberOfEvidence uint32
-	Evidence *CssmEvidence
+	Evidence         *CssmEvidence
 }
 
 // C struct: cssm_tp_confirm_response
 type CssmTpConfirmResponse struct {
 	NumberOfResponses uint32
-	Responses *uint32
+	Responses         *uint32
 }
 
 // C struct: cssm_tp_crlissue_input
 type CssmTpCrlissueInput struct {
-	CLHandle int
-	CrlIdentifier uint32
-	CrlThisTime string
-	PolicyIdentifier *CssmField
+	CLHandle          int
+	CrlIdentifier     uint32
+	CrlThisTime       string
+	PolicyIdentifier  *CssmField
 	CallerCredentials *CssmAccessCredentials
 }
 
 // C struct: cssm_tp_crlissue_output
 type CssmTpCrlissueOutput struct {
 	IssueStatus uint32
-	Crl *CssmEncodedCrl
+	Crl         *CssmEncodedCrl
 	CrlNextTime string
 }
 
 // C struct: cssm_tp_policyinfo
 type CssmTpPolicyinfo struct {
 	NumberOfPolicyIds uint32
-	PolicyIds *CssmField
-	PolicyControl unsafe.Pointer
+	PolicyIds         *CssmField
+	PolicyControl     unsafe.Pointer
 }
 
 // C struct: cssm_tp_request_set
 type CssmTpRequestSet struct {
 	NumberOfRequests uint32
-	Requests unsafe.Pointer
+	Requests         unsafe.Pointer
 }
 
 // C struct: cssm_tp_result_set
 type CssmTpResultSet struct {
 	NumberOfResults uint32
-	Results unsafe.Pointer
+	Results         unsafe.Pointer
 }
 
 // C struct: cssm_tp_verify_context
 type CssmTpVerifyContext struct {
-	Action uint32
+	Action     uint32
 	ActionData CssmData
-	Crls CssmCrlgroup
-	Cred *CssmTpCallerauthContext
+	Crls       CssmCrlgroup
+	Cred       *CssmTpCallerauthContext
 }
 
 // C struct: cssm_tp_verify_context_result
 type CssmTpVerifyContextResult struct {
 	NumberOfEvidences uint32
-	Evidence *CssmEvidence
+	Evidence          *CssmEvidence
 }
 
 // C struct: cssm_tuplegroup
 type CssmTuplegroup struct {
 	NumberOfTuples uint32
-	Tuples *CSSM_TUPLE
+	Tuples         *CSSM_TUPLE
 }
 
 // C struct: cssm_upcalls
 type CssmUpcalls struct {
-	Malloc_func unsafe.Pointer
-	Free_func unsafe.Pointer
-	Realloc_func unsafe.Pointer
-	Calloc_func unsafe.Pointer
-	CcToHandle_func unsafe.Pointer
+	Malloc_func        unsafe.Pointer
+	Free_func          unsafe.Pointer
+	Realloc_func       unsafe.Pointer
+	Calloc_func        unsafe.Pointer
+	CcToHandle_func    unsafe.Pointer
 	GetModuleInfo_func unsafe.Pointer
 }
 
@@ -1433,111 +1433,111 @@ type CssmVersion struct {
 
 // C struct: cssm_x509_extension
 type CssmX509Extension struct {
-	ExtnId CssmData
+	ExtnId   CssmData
 	Critical int32
-	Format Extension_data_format
-	Value unsafe.Pointer
+	Format   Extension_data_format
+	Value    unsafe.Pointer
 	BERvalue CssmData
 }
 
 // C struct: cssm_x509_extensionTagAndValue
 type CssmX509ExtensionTagAndValue struct {
-	Type uint8
+	Type  uint8
 	Value CssmData
 }
 
 // C struct: cssm_x509_extensions
 type CssmX509Extensions struct {
 	NumberOfExtensions uint32
-	Extensions *CssmX509Extension
+	Extensions         *CssmX509Extension
 }
 
 // C struct: cssm_x509_name
 type CssmX509Name struct {
-	NumberOfRDNs uint32
+	NumberOfRDNs              uint32
 	RelativeDistinguishedName *CssmX509Rdn
 }
 
 // C struct: cssm_x509_rdn
 type CssmX509Rdn struct {
-	NumberOfPairs uint32
+	NumberOfPairs         uint32
 	AttributeTypeAndValue *CssmX509TypeValuePair
 }
 
 // C struct: cssm_x509_revoked_cert_entry
 type CssmX509RevokedCertEntry struct {
 	CertificateSerialNumber CssmData
-	RevocationDate CssmX509Time
-	Extensions CssmX509Extensions
+	RevocationDate          CssmX509Time
+	Extensions              CssmX509Extensions
 }
 
 // C struct: cssm_x509_revoked_cert_list
 type CssmX509RevokedCertList struct {
 	NumberOfRevokedCertEntries uint32
-	RevokedCertEntry *CssmX509RevokedCertEntry
+	RevokedCertEntry           *CssmX509RevokedCertEntry
 }
 
 // C struct: cssm_x509_signature
 type CssmX509Signature struct {
 	AlgorithmIdentifier SecAsn1AlgId
-	Encrypted CssmData
+	Encrypted           CssmData
 }
 
 // C struct: cssm_x509_signed_certificate
 type CssmX509SignedCertificate struct {
 	Certificate CssmX509TbsCertificate
-	Signature CssmX509Signature
+	Signature   CssmX509Signature
 }
 
 // C struct: cssm_x509_signed_crl
 type CssmX509SignedCrl struct {
 	TbsCertList CssmX509TbsCertlist
-	Signature CssmX509Signature
+	Signature   CssmX509Signature
 }
 
 // C struct: cssm_x509_tbs_certificate
 type CssmX509TbsCertificate struct {
-	Version CssmData
-	SerialNumber CssmData
-	Signature SecAsn1AlgId
-	Issuer CssmX509Name
-	Validity X509Validity
-	Subject CssmX509Name
-	SubjectPublicKeyInfo SecAsn1PubKeyInfo
-	IssuerUniqueIdentifier CssmData
+	Version                 CssmData
+	SerialNumber            CssmData
+	Signature               SecAsn1AlgId
+	Issuer                  CssmX509Name
+	Validity                X509Validity
+	Subject                 CssmX509Name
+	SubjectPublicKeyInfo    SecAsn1PubKeyInfo
+	IssuerUniqueIdentifier  CssmData
 	SubjectUniqueIdentifier CssmData
-	Extensions CssmX509Extensions
+	Extensions              CssmX509Extensions
 }
 
 // C struct: cssm_x509_tbs_certlist
 type CssmX509TbsCertlist struct {
-	Version CssmData
-	Signature SecAsn1AlgId
-	Issuer CssmX509Name
-	ThisUpdate CssmX509Time
-	NextUpdate CssmX509Time
+	Version             CssmData
+	Signature           SecAsn1AlgId
+	Issuer              CssmX509Name
+	ThisUpdate          CssmX509Time
+	NextUpdate          CssmX509Time
 	RevokedCertificates *CssmX509RevokedCertList
-	Extensions CssmX509Extensions
+	Extensions          CssmX509Extensions
 }
 
 // C struct: cssm_x509_time
 type CssmX509Time struct {
 	TimeType uint8
-	Time CssmData
+	Time     CssmData
 }
 
 // C struct: cssm_x509_type_value_pair
 type CssmX509TypeValuePair struct {
-	Type CssmData
+	Type      CssmData
 	ValueType uint8
-	Value CssmData
+	Value     CssmData
 }
 
 // C struct: cssm_x509ext_basicConstraints
 type CssmX509extBasicConstraints struct {
-	CA int32
+	CA                       int32
 	PathLenConstraintPresent int32
-	PathLenConstraint uint32
+	PathLenConstraint        uint32
 }
 
 // C struct: cssm_x509ext_pair
@@ -1555,38 +1555,38 @@ type CssmX509extPolicyInfo struct {
 // C struct: cssm_x509ext_policyQualifierInfo
 type CssmX509extPolicyQualifierInfo struct {
 	PolicyQualifierId CssmData
-	Value CssmData
+	Value             CssmData
 }
 
 // C struct: cssm_x509ext_policyQualifiers
 type CssmX509extPolicyQualifiers struct {
 	NumberOfPolicyQualifiers uint32
-	PolicyQualifier *CssmX509extPolicyQualifierInfo
+	PolicyQualifier          *CssmX509extPolicyQualifierInfo
 }
 
 // C struct: mds_funcs
 type MdsFuncs struct {
-	DbOpen unsafe.Pointer
-	DbClose unsafe.Pointer
-	GetDbNames unsafe.Pointer
-	GetDbNameFromHandle unsafe.Pointer
-	FreeNameList unsafe.Pointer
-	DataInsert unsafe.Pointer
-	DataDelete unsafe.Pointer
-	DataModify unsafe.Pointer
-	DataGetFirst unsafe.Pointer
-	DataGetNext unsafe.Pointer
-	DataAbortQuery unsafe.Pointer
+	DbOpen                    unsafe.Pointer
+	DbClose                   unsafe.Pointer
+	GetDbNames                unsafe.Pointer
+	GetDbNameFromHandle       unsafe.Pointer
+	FreeNameList              unsafe.Pointer
+	DataInsert                unsafe.Pointer
+	DataDelete                unsafe.Pointer
+	DataModify                unsafe.Pointer
+	DataGetFirst              unsafe.Pointer
+	DataGetNext               unsafe.Pointer
+	DataAbortQuery            unsafe.Pointer
 	DataGetFromUniqueRecordId unsafe.Pointer
-	FreeUniqueRecord unsafe.Pointer
-	CreateRelation unsafe.Pointer
-	DestroyRelation unsafe.Pointer
+	FreeUniqueRecord          unsafe.Pointer
+	CreateRelation            unsafe.Pointer
+	DestroyRelation           unsafe.Pointer
 }
 
 // C struct: x509_validity
 type X509Validity struct {
 	NotBefore CssmX509Time
-	NotAfter CssmX509Time
+	NotAfter  CssmX509Time
 }
 
 // CE_AccessDescription is an alias for __CE_AccessDescription (C typedef CE_AccessDescription).
@@ -2446,4 +2446,3 @@ type SecAsn1Oid = CssmData
 
 // SecAsn1Template is an alias for SecAsn1Template_struct (C typedef SecAsn1Template).
 type SecAsn1Template = SecAsn1Template_struct
-

@@ -193,4 +193,3 @@ type UserLocationViewable interface {
 }
 
 var _ UserLocationViewable = (*UserLocationView)(nil)
-

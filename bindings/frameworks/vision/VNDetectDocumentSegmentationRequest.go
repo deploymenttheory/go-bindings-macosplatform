@@ -25,4 +25,3 @@ func VNDetectDocumentSegmentationRequestFromID(id objc.ID) *VNDetectDocumentSegm
 	purego.Track(o)
 	return o
 }
-

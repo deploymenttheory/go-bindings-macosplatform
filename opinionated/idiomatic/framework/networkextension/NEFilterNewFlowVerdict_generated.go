@@ -57,7 +57,9 @@ func (x *NEFilterNewFlowVerdict) SetStatisticsReportFrequency(statisticsReportFr
 	x.inner.SetStatisticsReportFrequency(statisticsReportFrequency)
 }
 
-func (x *NEFilterNewFlowVerdict) asNEFilterVerdict() *raw.NEFilterVerdict { return &x.inner.NEFilterVerdict }
+func (x *NEFilterNewFlowVerdict) asNEFilterVerdict() *raw.NEFilterVerdict {
+	return &x.inner.NEFilterVerdict
+}
 
 // NEFilterNewFlowVerdictable is the interface implemented by [NEFilterNewFlowVerdict], for mocking and DI.
 type NEFilterNewFlowVerdictable interface {
@@ -69,4 +71,3 @@ type NEFilterNewFlowVerdictable interface {
 }
 
 var _ NEFilterNewFlowVerdictable = (*NEFilterNewFlowVerdict)(nil)
-

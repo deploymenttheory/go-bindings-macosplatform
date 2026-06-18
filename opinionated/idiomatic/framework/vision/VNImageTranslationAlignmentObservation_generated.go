@@ -16,7 +16,9 @@ type ImageTranslationAlignmentObservation struct {
 }
 
 // Unwrap returns the underlying [raw.VNImageTranslationAlignmentObservation].
-func (x *ImageTranslationAlignmentObservation) Unwrap() *raw.VNImageTranslationAlignmentObservation { return x.inner }
+func (x *ImageTranslationAlignmentObservation) Unwrap() *raw.VNImageTranslationAlignmentObservation {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -41,9 +43,13 @@ func (x *ImageTranslationAlignmentObservation) AlignmentTransform() corefoundati
 	return x.inner.AlignmentTransform()
 }
 
-func (x *ImageTranslationAlignmentObservation) asImageAlignmentObservation() *raw.VNImageAlignmentObservation { return &x.inner.VNImageAlignmentObservation }
+func (x *ImageTranslationAlignmentObservation) asImageAlignmentObservation() *raw.VNImageAlignmentObservation {
+	return &x.inner.VNImageAlignmentObservation
+}
 
-func (x *ImageTranslationAlignmentObservation) asObservation() *raw.VNObservation { return &x.inner.VNImageAlignmentObservation.VNObservation }
+func (x *ImageTranslationAlignmentObservation) asObservation() *raw.VNObservation {
+	return &x.inner.VNImageAlignmentObservation.VNObservation
+}
 
 // ImageTranslationAlignmentObservationable is the interface implemented by [ImageTranslationAlignmentObservation], for mocking and DI.
 type ImageTranslationAlignmentObservationable interface {
@@ -52,4 +58,3 @@ type ImageTranslationAlignmentObservationable interface {
 }
 
 var _ ImageTranslationAlignmentObservationable = (*ImageTranslationAlignmentObservation)(nil)
-

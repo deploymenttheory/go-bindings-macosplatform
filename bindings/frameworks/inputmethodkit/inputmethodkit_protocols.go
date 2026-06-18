@@ -31,4 +31,3 @@ type IMKStateSetting interface {
 	RecognizedEvents(sender objc.ID) uint
 	ShowPreferences(sender objc.ID)
 }
-

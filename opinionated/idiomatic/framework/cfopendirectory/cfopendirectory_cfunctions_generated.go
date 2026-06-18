@@ -94,4 +94,3 @@ func ODRecordWillPasswordExpire(record unsafe.Pointer, willExpireIn uint64) bool
 func ODSessionGetTypeID() uint {
 	return raw.ODSessionGetTypeID()
 }
-

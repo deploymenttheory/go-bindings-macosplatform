@@ -17,4 +17,3 @@ type ActivityItemProvider interface {
 type ObjectProvider interface {
 	asObject() *raw.CLSObject
 }
-

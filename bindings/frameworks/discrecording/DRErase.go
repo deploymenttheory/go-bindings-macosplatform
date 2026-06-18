@@ -16,16 +16,16 @@ type DRErase struct {
 }
 
 var (
-	_clsDRErase = _objcClass("DRErase")
+	_clsDRErase               = _objcClass("DRErase")
 	_dREraseSelEraseForDevice = objc.RegisterName("eraseForDevice:")
 	_dREraseSelInitWithDevice = objc.RegisterName("initWithDevice:")
-	_dREraseSelStart = objc.RegisterName("start")
-	_dREraseSelStatus = objc.RegisterName("status")
-	_dREraseSelProperties = objc.RegisterName("properties")
-	_dREraseSelSetProperties = objc.RegisterName("setProperties:")
-	_dREraseSelDevice = objc.RegisterName("device")
-	_dREraseSelEraseType = objc.RegisterName("eraseType")
-	_dREraseSelSetEraseType = objc.RegisterName("setEraseType:")
+	_dREraseSelStart          = objc.RegisterName("start")
+	_dREraseSelStatus         = objc.RegisterName("status")
+	_dREraseSelProperties     = objc.RegisterName("properties")
+	_dREraseSelSetProperties  = objc.RegisterName("setProperties:")
+	_dREraseSelDevice         = objc.RegisterName("device")
+	_dREraseSelEraseType      = objc.RegisterName("eraseType")
+	_dREraseSelSetEraseType   = objc.RegisterName("setEraseType:")
 )
 
 func DREraseFromID(id objc.ID) *DRErase {
@@ -41,7 +41,9 @@ func DREraseFromID(id objc.ID) *DRErase {
 // @method			eraseForDevice: @abstract		Creates and returns an erase object. @discussion		An erase object created with this method is ready to erase media. @param 			device	Device to use for the erase. @result  		An autoreleased DRErase object.
 func DREraseEraseForDevice(device *DRDevice) *DRErase {
 	_ret := objc.Send[objc.ID](objc.ID(_clsDRErase), _dREraseSelEraseForDevice, device.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DREraseFromID(_ret)
 }
 
@@ -76,14 +78,18 @@ func (o *DRErase) SetProperties(properties *foundation.NSDictionary[objc.ID, obj
 // @method 		device @abstract		Returns the device being used for the erase. @result  		The DRDevice the erase will use.
 func (o *DRErase) Device() *DRDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dREraseSelDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DRDeviceFromID(_ret)
 }
 
 // @method			eraseType @abstract		Returns the type of erase to be performed. @result			An NSString
 func (o *DRErase) EraseType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dREraseSelEraseType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -91,4 +97,3 @@ func (o *DRErase) EraseType() *foundation.NSString {
 func (o *DRErase) SetEraseType(type_ *foundation.NSString) {
 	o.Ptr().Send(_dREraseSelSetEraseType, type_.Ptr())
 }
-

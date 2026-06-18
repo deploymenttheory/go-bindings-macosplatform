@@ -18,17 +18,17 @@ type HKVerifiableClinicalRecord struct {
 }
 
 var (
-	_clsHKVerifiableClinicalRecord = _objcClass("HKVerifiableClinicalRecord")
-	_hKVerifiableClinicalRecordSelRecordTypes = objc.RegisterName("recordTypes")
-	_hKVerifiableClinicalRecordSelIssuerIdentifier = objc.RegisterName("issuerIdentifier")
-	_hKVerifiableClinicalRecordSelSubject = objc.RegisterName("subject")
-	_hKVerifiableClinicalRecordSelIssuedDate = objc.RegisterName("issuedDate")
-	_hKVerifiableClinicalRecordSelRelevantDate = objc.RegisterName("relevantDate")
-	_hKVerifiableClinicalRecordSelExpirationDate = objc.RegisterName("expirationDate")
-	_hKVerifiableClinicalRecordSelItemNames = objc.RegisterName("itemNames")
-	_hKVerifiableClinicalRecordSelSourceType = objc.RegisterName("sourceType")
+	_clsHKVerifiableClinicalRecord                   = _objcClass("HKVerifiableClinicalRecord")
+	_hKVerifiableClinicalRecordSelRecordTypes        = objc.RegisterName("recordTypes")
+	_hKVerifiableClinicalRecordSelIssuerIdentifier   = objc.RegisterName("issuerIdentifier")
+	_hKVerifiableClinicalRecordSelSubject            = objc.RegisterName("subject")
+	_hKVerifiableClinicalRecordSelIssuedDate         = objc.RegisterName("issuedDate")
+	_hKVerifiableClinicalRecordSelRelevantDate       = objc.RegisterName("relevantDate")
+	_hKVerifiableClinicalRecordSelExpirationDate     = objc.RegisterName("expirationDate")
+	_hKVerifiableClinicalRecordSelItemNames          = objc.RegisterName("itemNames")
+	_hKVerifiableClinicalRecordSelSourceType         = objc.RegisterName("sourceType")
 	_hKVerifiableClinicalRecordSelDataRepresentation = objc.RegisterName("dataRepresentation")
-	_hKVerifiableClinicalRecordSelJWSRepresentation = objc.RegisterName("JWSRepresentation")
+	_hKVerifiableClinicalRecordSelJWSRepresentation  = objc.RegisterName("JWSRepresentation")
 )
 
 func HKVerifiableClinicalRecordFromID(id objc.ID) *HKVerifiableClinicalRecord {
@@ -50,35 +50,45 @@ func (o *HKVerifiableClinicalRecord) RecordTypes() *foundation.NSArray[*foundati
 // @property      issuerIdentifier @abstract      The identifier for the issuer of this record.
 func (o *HKVerifiableClinicalRecord) IssuerIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKVerifiableClinicalRecordSelIssuerIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property      subject @abstract      The subject of this record.
 func (o *HKVerifiableClinicalRecord) Subject() *HKVerifiableClinicalRecordSubject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKVerifiableClinicalRecordSelSubject)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKVerifiableClinicalRecordSubjectFromID(_ret)
 }
 
 // @property      issuedDate @abstract      The date this record was issued.
 func (o *HKVerifiableClinicalRecord) IssuedDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKVerifiableClinicalRecordSelIssuedDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // @property      relevantDate @abstract      A date most relevant to this record, like when a vaccine was administered or a test was performed.
 func (o *HKVerifiableClinicalRecord) RelevantDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKVerifiableClinicalRecordSelRelevantDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // @property      expirationDate @abstract      The date this record expires.
 func (o *HKVerifiableClinicalRecord) ExpirationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKVerifiableClinicalRecordSelExpirationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -91,14 +101,18 @@ func (o *HKVerifiableClinicalRecord) ItemNames() *foundation.NSArray[*foundation
 // @property      sourceType @abstract      The type of the source leading to this verifiable record.
 func (o *HKVerifiableClinicalRecord) SourceType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKVerifiableClinicalRecordSelSourceType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property      dataRepresentation @abstract      The record's data representation, determined by source type.
 func (o *HKVerifiableClinicalRecord) DataRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKVerifiableClinicalRecordSelDataRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -107,4 +121,3 @@ func (o *HKVerifiableClinicalRecord) JWSRepresentation() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _hKVerifiableClinicalRecordSelJWSRepresentation)
 	return _ret
 }
-

@@ -16,12 +16,12 @@ type MDLMaterialPropertyNode struct {
 }
 
 var (
-	_clsMDLMaterialPropertyNode = _objcClass("MDLMaterialPropertyNode")
+	_clsMDLMaterialPropertyNode                                        = _objcClass("MDLMaterialPropertyNode")
 	_mDLMaterialPropertyNodeSelInitWithInputsOutputsEvaluationFunction = objc.RegisterName("initWithInputs:outputs:evaluationFunction:")
-	_mDLMaterialPropertyNodeSelEvaluationFunction = objc.RegisterName("evaluationFunction")
-	_mDLMaterialPropertyNodeSelSetEvaluationFunction = objc.RegisterName("setEvaluationFunction:")
-	_mDLMaterialPropertyNodeSelInputs = objc.RegisterName("inputs")
-	_mDLMaterialPropertyNodeSelOutputs = objc.RegisterName("outputs")
+	_mDLMaterialPropertyNodeSelEvaluationFunction                      = objc.RegisterName("evaluationFunction")
+	_mDLMaterialPropertyNodeSelSetEvaluationFunction                   = objc.RegisterName("setEvaluationFunction:")
+	_mDLMaterialPropertyNodeSelInputs                                  = objc.RegisterName("inputs")
+	_mDLMaterialPropertyNodeSelOutputs                                 = objc.RegisterName("outputs")
 )
 
 func MDLMaterialPropertyNodeFromID(id objc.ID) *MDLMaterialPropertyNode {
@@ -46,7 +46,9 @@ func (o *MDLMaterialPropertyNode) InitWithInputsOutputsEvaluationFunction(inputs
 		defer __block_function.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertyNodeSelInitWithInputsOutputsEvaluationFunction, inputs.Ptr(), outputs.Ptr(), __block_function)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMaterialPropertyNodeFromID(_ret)
 }
 
@@ -71,13 +73,16 @@ func (o *MDLMaterialPropertyNode) SetEvaluationFunction(evaluationFunction func(
 
 func (o *MDLMaterialPropertyNode) Inputs() *foundation.NSArray[*MDLMaterialProperty] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertyNodeSelInputs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MDLMaterialProperty](_ret)
 }
 
 func (o *MDLMaterialPropertyNode) Outputs() *foundation.NSArray[*MDLMaterialProperty] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertyNodeSelOutputs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MDLMaterialProperty](_ret)
 }
-

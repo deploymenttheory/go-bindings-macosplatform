@@ -26,4 +26,3 @@ func NSPersistentHistoryTokenFromID(id objc.ID) *NSPersistentHistoryToken {
 	purego.Track(o)
 	return o
 }
-

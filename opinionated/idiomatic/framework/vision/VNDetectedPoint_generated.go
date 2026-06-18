@@ -51,4 +51,3 @@ type DetectedPointable interface {
 }
 
 var _ DetectedPointable = (*DetectedPoint)(nil)
-

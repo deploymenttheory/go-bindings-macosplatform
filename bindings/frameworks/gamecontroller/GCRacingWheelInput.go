@@ -15,8 +15,8 @@ type GCRacingWheelInput struct {
 }
 
 var (
-	_clsGCRacingWheelInput = _objcClass("GCRacingWheelInput")
-	_gCRacingWheelInputSelCapture = objc.RegisterName("capture")
+	_clsGCRacingWheelInput               = _objcClass("GCRacingWheelInput")
+	_gCRacingWheelInputSelCapture        = objc.RegisterName("capture")
 	_gCRacingWheelInputSelNextInputState = objc.RegisterName("nextInputState")
 )
 
@@ -33,13 +33,16 @@ func GCRacingWheelInputFromID(id objc.ID) *GCRacingWheelInput {
 // Polls the current state vector of the racing wheel input and saves it to a new instance.
 func (o *GCRacingWheelInput) Capture() *GCRacingWheelInputState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCRacingWheelInputSelCapture)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCRacingWheelInputStateFromID(_ret)
 }
 
 func (o *GCRacingWheelInput) NextInputState() *GCRacingWheelInputState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCRacingWheelInputSelNextInputState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCRacingWheelInputStateFromID(_ret)
 }
-

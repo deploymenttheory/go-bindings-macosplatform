@@ -81,4 +81,3 @@ type FileNameable interface {
 }
 
 var _ FileNameable = (*FileName)(nil)
-

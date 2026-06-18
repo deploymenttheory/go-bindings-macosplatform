@@ -15,10 +15,10 @@ type NSMenuToolbarItem struct {
 }
 
 var (
-	_clsNSMenuToolbarItem = _objcClass("NSMenuToolbarItem")
-	_nSMenuToolbarItemSelMenu = objc.RegisterName("menu")
-	_nSMenuToolbarItemSelSetMenu = objc.RegisterName("setMenu:")
-	_nSMenuToolbarItemSelShowsIndicator = objc.RegisterName("showsIndicator")
+	_clsNSMenuToolbarItem                  = _objcClass("NSMenuToolbarItem")
+	_nSMenuToolbarItemSelMenu              = objc.RegisterName("menu")
+	_nSMenuToolbarItemSelSetMenu           = objc.RegisterName("setMenu:")
+	_nSMenuToolbarItemSelShowsIndicator    = objc.RegisterName("showsIndicator")
 	_nSMenuToolbarItemSelSetShowsIndicator = objc.RegisterName("setShowsIndicator:")
 )
 
@@ -34,7 +34,9 @@ func NSMenuToolbarItemFromID(id objc.ID) *NSMenuToolbarItem {
 
 func (o *NSMenuToolbarItem) Menu() *NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuToolbarItemSelMenu)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuFromID(_ret)
 }
 
@@ -50,4 +52,3 @@ func (o *NSMenuToolbarItem) ShowsIndicator() bool {
 func (o *NSMenuToolbarItem) SetShowsIndicator(showsIndicator bool) {
 	o.Ptr().Send(_nSMenuToolbarItemSelSetShowsIndicator, showsIndicator)
 }
-

@@ -21,20 +21,20 @@ type MPSNDArrayMultiaryBase struct {
 }
 
 var (
-	_clsMPSNDArrayMultiaryBase = _objcClass("MPSNDArrayMultiaryBase")
-	_mPSNDArrayMultiaryBaseSelOffsetsAtSourceIndex = objc.RegisterName("offsetsAtSourceIndex:")
-	_mPSNDArrayMultiaryBaseSelEdgeModeAtSourceIndex = objc.RegisterName("edgeModeAtSourceIndex:")
-	_mPSNDArrayMultiaryBaseSelKernelSizesForSourceIndex = objc.RegisterName("kernelSizesForSourceIndex:")
-	_mPSNDArrayMultiaryBaseSelStridesForSourceIndex = objc.RegisterName("stridesForSourceIndex:")
-	_mPSNDArrayMultiaryBaseSelDilationRatesForSourceIndex = objc.RegisterName("dilationRatesForSourceIndex:")
-	_mPSNDArrayMultiaryBaseSelInitWithDeviceSourceCount = objc.RegisterName("initWithDevice:sourceCount:")
-	_mPSNDArrayMultiaryBaseSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSNDArrayMultiaryBaseSelEncodeWithCoder = objc.RegisterName("encodeWithCoder:")
-	_mPSNDArrayMultiaryBaseSelCopyWithZoneDevice = objc.RegisterName("copyWithZone:device:")
+	_clsMPSNDArrayMultiaryBase                                                       = _objcClass("MPSNDArrayMultiaryBase")
+	_mPSNDArrayMultiaryBaseSelOffsetsAtSourceIndex                                   = objc.RegisterName("offsetsAtSourceIndex:")
+	_mPSNDArrayMultiaryBaseSelEdgeModeAtSourceIndex                                  = objc.RegisterName("edgeModeAtSourceIndex:")
+	_mPSNDArrayMultiaryBaseSelKernelSizesForSourceIndex                              = objc.RegisterName("kernelSizesForSourceIndex:")
+	_mPSNDArrayMultiaryBaseSelStridesForSourceIndex                                  = objc.RegisterName("stridesForSourceIndex:")
+	_mPSNDArrayMultiaryBaseSelDilationRatesForSourceIndex                            = objc.RegisterName("dilationRatesForSourceIndex:")
+	_mPSNDArrayMultiaryBaseSelInitWithDeviceSourceCount                              = objc.RegisterName("initWithDevice:sourceCount:")
+	_mPSNDArrayMultiaryBaseSelInitWithCoderDevice                                    = objc.RegisterName("initWithCoder:device:")
+	_mPSNDArrayMultiaryBaseSelEncodeWithCoder                                        = objc.RegisterName("encodeWithCoder:")
+	_mPSNDArrayMultiaryBaseSelCopyWithZoneDevice                                     = objc.RegisterName("copyWithZone:device:")
 	_mPSNDArrayMultiaryBaseSelResultStateForSourceArraysSourceStatesDestinationArray = objc.RegisterName("resultStateForSourceArrays:sourceStates:destinationArray:")
-	_mPSNDArrayMultiaryBaseSelDestinationArrayDescriptorForSourceArraysSourceState = objc.RegisterName("destinationArrayDescriptorForSourceArrays:sourceState:")
-	_mPSNDArrayMultiaryBaseSelDestinationArrayAllocator = objc.RegisterName("destinationArrayAllocator")
-	_mPSNDArrayMultiaryBaseSelSetDestinationArrayAllocator = objc.RegisterName("setDestinationArrayAllocator:")
+	_mPSNDArrayMultiaryBaseSelDestinationArrayDescriptorForSourceArraysSourceState   = objc.RegisterName("destinationArrayDescriptorForSourceArrays:sourceState:")
+	_mPSNDArrayMultiaryBaseSelDestinationArrayAllocator                              = objc.RegisterName("destinationArrayAllocator")
+	_mPSNDArrayMultiaryBaseSelSetDestinationArrayAllocator                           = objc.RegisterName("setDestinationArrayAllocator:")
 )
 
 func MPSNDArrayMultiaryBaseFromID(id objc.ID) *MPSNDArrayMultiaryBase {
@@ -80,14 +80,18 @@ func (o *MPSNDArrayMultiaryBase) DilationRatesForSourceIndex(sourceIndex uint) m
 // @abstract   Initialize a MPSNDArrayMultiaryKernel @param      device  The device on which the kernel will run @param      count   The maximum number of NDArrays read by the kernel @return     A valid MPSNDArrayMultiaryKernel, or nil if allocation failure.
 func (o *MPSNDArrayMultiaryBase) InitWithDeviceSourceCount(device metal.MTLDevice, count uint) *MPSNDArrayMultiaryBase {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayMultiaryBaseSelInitWithDeviceSourceCount, device, count)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNDArrayMultiaryBaseFromID(_ret)
 }
 
 // @abstract   Initialize a MPSNDArrayMultiaryKernel from a NSCoder @param      coder   The NSCoder that contains the serialized object @param      device  The device on which the kernel will run @return     A valid MPSNDArrayMultiaryKernel, or nil if allocation failure.
 func (o *MPSNDArrayMultiaryBase) InitWithCoderDevice(coder *foundation.NSCoder, device metal.MTLDevice) *MPSNDArrayMultiaryBase {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayMultiaryBaseSelInitWithCoderDevice, coder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNDArrayMultiaryBaseFromID(_ret)
 }
 
@@ -104,14 +108,18 @@ func (o *MPSNDArrayMultiaryBase) CopyWithZoneDevice(zone unsafe.Pointer, device 
 
 func (o *MPSNDArrayMultiaryBase) ResultStateForSourceArraysSourceStatesDestinationArray(sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], sourceStates *foundation.NSArray[*mpscore.MPSState], destinationArray *mpscore.MPSNDArray) *mpscore.MPSState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayMultiaryBaseSelResultStateForSourceArraysSourceStatesDestinationArray, sourceArrays, sourceStates, destinationArray.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpscore.MPSStateFromID(_ret)
 }
 
 // @abstract   Return a descriptor suitable for allocating a NSArray to receive the result @discussion The object properties (kernelSize, offsets, edgeMode, etc.) should be properly configured as if the -encode call was about to be made, before this method is called. Those properties may affect the results. @param      sources     The list of sources passed into the -encode call @param      state       The source state object, if any passed to the -encode call @return     a valid MPSNDArrayDescriptor that may be used to create a MPSNDArray to used to hold the results of this kernel.
 func (o *MPSNDArrayMultiaryBase) DestinationArrayDescriptorForSourceArraysSourceState(sources *foundation.NSArray[*mpscore.MPSNDArray], state *mpscore.MPSState) *mpscore.MPSNDArrayDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayMultiaryBaseSelDestinationArrayDescriptorForSourceArraysSourceState, sources, state.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpscore.MPSNDArrayDescriptorFromID(_ret)
 }
 
@@ -124,4 +132,3 @@ func (o *MPSNDArrayMultiaryBase) DestinationArrayAllocator() mpscore.MPSNDArrayA
 func (o *MPSNDArrayMultiaryBase) SetDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) {
 	o.Ptr().Send(_mPSNDArrayMultiaryBaseSelSetDestinationArrayAllocator, destinationArrayAllocator)
 }
-

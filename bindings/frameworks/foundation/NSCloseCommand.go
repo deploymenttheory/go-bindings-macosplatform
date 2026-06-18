@@ -15,7 +15,7 @@ type NSCloseCommand struct {
 }
 
 var (
-	_clsNSCloseCommand = _objcClass("NSCloseCommand")
+	_clsNSCloseCommand            = _objcClass("NSCloseCommand")
 	_nSCloseCommandSelSaveOptions = objc.RegisterName("saveOptions")
 )
 
@@ -33,4 +33,3 @@ func (o *NSCloseCommand) SaveOptions() NSSaveOptions {
 	_ret := objc.Send[NSSaveOptions](o.Ptr(), _nSCloseCommandSelSaveOptions)
 	return _ret
 }
-

@@ -169,11 +169,17 @@ func (x *CNNUpsamplingGradient) ScaleFactorY() float64 {
 	return x.inner.ScaleFactorY()
 }
 
-func (x *CNNUpsamplingGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
+func (x *CNNUpsamplingGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNGradientKernel
+}
 
-func (x *CNNUpsamplingGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *CNNUpsamplingGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
-func (x *CNNUpsamplingGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel }
+func (x *CNNUpsamplingGradient) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel
+}
 
 // CNNUpsamplingGradientable is the interface implemented by [CNNUpsamplingGradient], for mocking and DI.
 type CNNUpsamplingGradientable interface {
@@ -203,4 +209,3 @@ type CNNUpsamplingGradientable interface {
 }
 
 var _ CNNUpsamplingGradientable = (*CNNUpsamplingGradient)(nil)
-

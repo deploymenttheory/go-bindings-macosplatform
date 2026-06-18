@@ -18,7 +18,9 @@ type AccelerationStructureMotionTriangleGeometryDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTLAccelerationStructureMotionTriangleGeometryDescriptor].
-func (x *AccelerationStructureMotionTriangleGeometryDescriptor) Unwrap() *raw.MTLAccelerationStructureMotionTriangleGeometryDescriptor { return x.inner }
+func (x *AccelerationStructureMotionTriangleGeometryDescriptor) Unwrap() *raw.MTLAccelerationStructureMotionTriangleGeometryDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -45,7 +47,9 @@ func (x *AccelerationStructureMotionTriangleGeometryDescriptor) WithVertexBuffer
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.MTLMotionKeyframeData](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -262,7 +266,9 @@ func (x *AccelerationStructureMotionTriangleGeometryDescriptor) SetTransformatio
 	x.inner.SetTransformationMatrixLayout(transformationMatrixLayout)
 }
 
-func (x *AccelerationStructureMotionTriangleGeometryDescriptor) asAccelerationStructureGeometryDescriptor() *raw.MTLAccelerationStructureGeometryDescriptor { return &x.inner.MTLAccelerationStructureGeometryDescriptor }
+func (x *AccelerationStructureMotionTriangleGeometryDescriptor) asAccelerationStructureGeometryDescriptor() *raw.MTLAccelerationStructureGeometryDescriptor {
+	return &x.inner.MTLAccelerationStructureGeometryDescriptor
+}
 
 // AccelerationStructureMotionTriangleGeometryDescriptorable is the interface implemented by [AccelerationStructureMotionTriangleGeometryDescriptor], for mocking and DI.
 type AccelerationStructureMotionTriangleGeometryDescriptorable interface {
@@ -308,4 +314,3 @@ type AccelerationStructureMotionTriangleGeometryDescriptorable interface {
 }
 
 var _ AccelerationStructureMotionTriangleGeometryDescriptorable = (*AccelerationStructureMotionTriangleGeometryDescriptor)(nil)
-

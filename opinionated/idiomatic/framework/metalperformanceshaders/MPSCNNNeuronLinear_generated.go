@@ -102,9 +102,13 @@ func (x *CNNNeuronLinear) WithLabel(label string) *CNNNeuronLinear {
 
 func (x *CNNNeuronLinear) asCNNNeuron() *mpsneuralnetwork.MPSCNNNeuron { return &x.inner.MPSCNNNeuron }
 
-func (x *CNNNeuronLinear) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel }
+func (x *CNNNeuronLinear) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNNeuron.MPSCNNKernel
+}
 
-func (x *CNNNeuronLinear) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel }
+func (x *CNNNeuronLinear) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel
+}
 
 // CNNNeuronLinearable is the interface implemented by [CNNNeuronLinear], for mocking and DI.
 type CNNNeuronLinearable interface {
@@ -122,4 +126,3 @@ type CNNNeuronLinearable interface {
 }
 
 var _ CNNNeuronLinearable = (*CNNNeuronLinear)(nil)
-

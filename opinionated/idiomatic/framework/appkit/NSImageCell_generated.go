@@ -416,4 +416,3 @@ type ImageCellable interface {
 }
 
 var _ ImageCellable = (*ImageCell)(nil)
-

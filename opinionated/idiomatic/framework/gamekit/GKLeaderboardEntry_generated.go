@@ -100,4 +100,3 @@ type LeaderboardEntryable interface {
 }
 
 var _ LeaderboardEntryable = (*LeaderboardEntry)(nil)
-

@@ -18,11 +18,11 @@ type CKSystemSharingUIObserver struct {
 }
 
 var (
-	_clsCKSystemSharingUIObserver = _objcClass("CKSystemSharingUIObserver")
-	_cKSystemSharingUIObserverSelInitWithContainer = objc.RegisterName("initWithContainer:")
-	_cKSystemSharingUIObserverSelSystemSharingUIDidSaveShareBlock = objc.RegisterName("systemSharingUIDidSaveShareBlock")
-	_cKSystemSharingUIObserverSelSetSystemSharingUIDidSaveShareBlock = objc.RegisterName("setSystemSharingUIDidSaveShareBlock:")
-	_cKSystemSharingUIObserverSelSystemSharingUIDidStopSharingBlock = objc.RegisterName("systemSharingUIDidStopSharingBlock")
+	_clsCKSystemSharingUIObserver                                      = _objcClass("CKSystemSharingUIObserver")
+	_cKSystemSharingUIObserverSelInitWithContainer                     = objc.RegisterName("initWithContainer:")
+	_cKSystemSharingUIObserverSelSystemSharingUIDidSaveShareBlock      = objc.RegisterName("systemSharingUIDidSaveShareBlock")
+	_cKSystemSharingUIObserverSelSetSystemSharingUIDidSaveShareBlock   = objc.RegisterName("setSystemSharingUIDidSaveShareBlock:")
+	_cKSystemSharingUIObserverSelSystemSharingUIDidStopSharingBlock    = objc.RegisterName("systemSharingUIDidStopSharingBlock")
 	_cKSystemSharingUIObserverSelSetSystemSharingUIDidStopSharingBlock = objc.RegisterName("setSystemSharingUIDidStopSharingBlock:")
 )
 
@@ -36,14 +36,16 @@ func CKSystemSharingUIObserverFromID(id objc.ID) *CKSystemSharingUIObserver {
 	return o
 }
 
-// Creates and initializes an observer using the provided container. - Parameters: - container: The ``CKContainer`` for the sharing observer.
+// Creates and initializes an observer using the provided container. - Parameters: - container: The “CKContainer“ for the sharing observer.
 func (o *CKSystemSharingUIObserver) InitWithContainer(container *CKContainer) *CKSystemSharingUIObserver {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSystemSharingUIObserverSelInitWithContainer, container.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKSystemSharingUIObserverFromID(_ret)
 }
 
-// A callback block the system invokes after the success or failure of a share save by the system sharing UI. Following a successful share save by the system sharing UI in the provided ``CKContainer``, the system invokes this callback with a `nonnull` ``CKRecord/ID``, a `nonnull` share, and a `nil` error. If a save failure occurs due to a per-item error like ``CKError/Code/serverRecordChanged``, the system invokes this callback with a `nonnull` ``CKRecord/ID``, a `nil` share, and a `nonnull` error. Each ``CKSystemSharingUIObserver`` instance has a private serial queue. The system uses this queue for all callback block invocations.
+// A callback block the system invokes after the success or failure of a share save by the system sharing UI. Following a successful share save by the system sharing UI in the provided “CKContainer“, the system invokes this callback with a `nonnull` “CKRecord/ID“, a `nonnull` share, and a `nil` error. If a save failure occurs due to a per-item error like “CKError/Code/serverRecordChanged“, the system invokes this callback with a `nonnull` “CKRecord/ID“, a `nil` share, and a `nonnull` error. Each “CKSystemSharingUIObserver“ instance has a private serial queue. The system uses this queue for all callback block invocations.
 func (o *CKSystemSharingUIObserver) SystemSharingUIDidSaveShareBlock() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _cKSystemSharingUIObserverSelSystemSharingUIDidSaveShareBlock)
 	return _ret
@@ -66,7 +68,7 @@ func (o *CKSystemSharingUIObserver) SetSystemSharingUIDidSaveShareBlock(systemSh
 	o.Ptr().Send(_cKSystemSharingUIObserverSelSetSystemSharingUIDidSaveShareBlock, __block_systemSharingUIDidSaveShareBlock)
 }
 
-// A callback block the system invokes after the success or failure of a share delete by the system sharing UI. The system invokes this block on the success or failure of a ``CKShare`` delete when the user decides to stop sharing through the system sharing UI. Each ``CKSystemSharingUIObserver`` instance has a private serial queue. The system uses this queue for all callback block invocations.
+// A callback block the system invokes after the success or failure of a share delete by the system sharing UI. The system invokes this block on the success or failure of a “CKShare“ delete when the user decides to stop sharing through the system sharing UI. Each “CKSystemSharingUIObserver“ instance has a private serial queue. The system uses this queue for all callback block invocations.
 func (o *CKSystemSharingUIObserver) SystemSharingUIDidStopSharingBlock() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _cKSystemSharingUIObserverSelSystemSharingUIDidStopSharingBlock)
 	return _ret
@@ -85,4 +87,3 @@ func (o *CKSystemSharingUIObserver) SetSystemSharingUIDidStopSharingBlock(system
 	}
 	o.Ptr().Send(_cKSystemSharingUIObserverSelSetSystemSharingUIDidStopSharingBlock, __block_systemSharingUIDidStopSharingBlock)
 }
-

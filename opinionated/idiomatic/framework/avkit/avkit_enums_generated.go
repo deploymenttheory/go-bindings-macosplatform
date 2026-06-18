@@ -12,10 +12,10 @@ import (
 type AVCaptureViewControlsStyle int64
 
 const (
-	AVCaptureViewControlsStyleInline AVCaptureViewControlsStyle = 0
-	AVCaptureViewControlsStyleFloating AVCaptureViewControlsStyle = 1
+	AVCaptureViewControlsStyleInline                AVCaptureViewControlsStyle = 0
+	AVCaptureViewControlsStyleFloating              AVCaptureViewControlsStyle = 1
 	AVCaptureViewControlsStyleInlineDeviceSelection AVCaptureViewControlsStyle = 2
-	AVCaptureViewControlsStyleDefault AVCaptureViewControlsStyle = 0
+	AVCaptureViewControlsStyleDefault               AVCaptureViewControlsStyle = 0
 )
 
 func (e AVCaptureViewControlsStyle) String() string {
@@ -63,9 +63,9 @@ func (e AVDisplayDynamicRange) String() string {
 type AVLegibleMediaOptionsMenuContents int64
 
 const (
-	AVLegibleMediaOptionsMenuContentsLegible AVLegibleMediaOptionsMenuContents = 1
+	AVLegibleMediaOptionsMenuContentsLegible           AVLegibleMediaOptionsMenuContents = 1
 	AVLegibleMediaOptionsMenuContentsCaptionAppearance AVLegibleMediaOptionsMenuContents = 2
-	AVLegibleMediaOptionsMenuContentsAll AVLegibleMediaOptionsMenuContents = 3
+	AVLegibleMediaOptionsMenuContentsAll               AVLegibleMediaOptionsMenuContents = 3
 )
 
 func (e AVLegibleMediaOptionsMenuContents) String() string {
@@ -88,11 +88,11 @@ func (e AVLegibleMediaOptionsMenuContents) String() string {
 type AVPlayerViewControlsStyle int64
 
 const (
-	AVPlayerViewControlsStyleNone AVPlayerViewControlsStyle = 0
-	AVPlayerViewControlsStyleInline AVPlayerViewControlsStyle = 1
+	AVPlayerViewControlsStyleNone     AVPlayerViewControlsStyle = 0
+	AVPlayerViewControlsStyleInline   AVPlayerViewControlsStyle = 1
 	AVPlayerViewControlsStyleFloating AVPlayerViewControlsStyle = 2
-	AVPlayerViewControlsStyleMinimal AVPlayerViewControlsStyle = 3
-	AVPlayerViewControlsStyleDefault AVPlayerViewControlsStyle = 1
+	AVPlayerViewControlsStyleMinimal  AVPlayerViewControlsStyle = 3
+	AVPlayerViewControlsStyleDefault  AVPlayerViewControlsStyle = 1
 )
 
 func (e AVPlayerViewControlsStyle) String() string {
@@ -113,7 +113,7 @@ func (e AVPlayerViewControlsStyle) String() string {
 type AVPlayerViewTrimResult int64
 
 const (
-	AVPlayerViewTrimOKButton AVPlayerViewTrimResult = 0
+	AVPlayerViewTrimOKButton     AVPlayerViewTrimResult = 0
 	AVPlayerViewTrimCancelButton AVPlayerViewTrimResult = 1
 )
 
@@ -131,9 +131,9 @@ func (e AVPlayerViewTrimResult) String() string {
 type AVRoutePickerViewButtonState int64
 
 const (
-	AVRoutePickerViewButtonStateNormal AVRoutePickerViewButtonState = 0
+	AVRoutePickerViewButtonStateNormal            AVRoutePickerViewButtonState = 0
 	AVRoutePickerViewButtonStateNormalHighlighted AVRoutePickerViewButtonState = 1
-	AVRoutePickerViewButtonStateActive AVRoutePickerViewButtonState = 2
+	AVRoutePickerViewButtonStateActive            AVRoutePickerViewButtonState = 2
 	AVRoutePickerViewButtonStateActiveHighlighted AVRoutePickerViewButtonState = 3
 )
 
@@ -156,10 +156,10 @@ func (e AVRoutePickerViewButtonState) String() string {
 type AVVideoFrameAnalysisType uint64
 
 const (
-	AVVideoFrameAnalysisTypeNone AVVideoFrameAnalysisType = 0
-	AVVideoFrameAnalysisTypeDefault AVVideoFrameAnalysisType = 1
-	AVVideoFrameAnalysisTypeText AVVideoFrameAnalysisType = 2
-	AVVideoFrameAnalysisTypeSubject AVVideoFrameAnalysisType = 4
+	AVVideoFrameAnalysisTypeNone         AVVideoFrameAnalysisType = 0
+	AVVideoFrameAnalysisTypeDefault      AVVideoFrameAnalysisType = 1
+	AVVideoFrameAnalysisTypeText         AVVideoFrameAnalysisType = 2
+	AVVideoFrameAnalysisTypeSubject      AVVideoFrameAnalysisType = 4
 	AVVideoFrameAnalysisTypeVisualSearch AVVideoFrameAnalysisType = 8
 )
 
@@ -182,4 +182,3 @@ func (e AVVideoFrameAnalysisType) String() string {
 	}
 	return strings.Join(parts, "|")
 }
-

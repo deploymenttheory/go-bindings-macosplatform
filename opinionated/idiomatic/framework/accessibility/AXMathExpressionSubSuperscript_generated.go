@@ -69,7 +69,9 @@ func (x *MathExpressionSubSuperscript) SuperscriptExpressions() []*MathExpressio
 	})
 }
 
-func (x *MathExpressionSubSuperscript) asMathExpression() *raw.AXMathExpression { return &x.inner.AXMathExpression }
+func (x *MathExpressionSubSuperscript) asMathExpression() *raw.AXMathExpression {
+	return &x.inner.AXMathExpression
+}
 
 // MathExpressionSubSuperscriptable is the interface implemented by [MathExpressionSubSuperscript], for mocking and DI.
 type MathExpressionSubSuperscriptable interface {
@@ -80,4 +82,3 @@ type MathExpressionSubSuperscriptable interface {
 }
 
 var _ MathExpressionSubSuperscriptable = (*MathExpressionSubSuperscript)(nil)
-

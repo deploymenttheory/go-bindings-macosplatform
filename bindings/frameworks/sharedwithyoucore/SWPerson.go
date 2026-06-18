@@ -16,7 +16,7 @@ type SWPerson struct {
 }
 
 var (
-	_clsSWPerson = _objcClass("SWPerson")
+	_clsSWPerson                                                    = _objcClass("SWPerson")
 	_sWPersonSelInitWithHandleIdentityDisplayNameThumbnailImageData = objc.RegisterName("initWithHandle:identity:displayName:thumbnailImageData:")
 )
 
@@ -33,7 +33,8 @@ func SWPersonFromID(id objc.ID) *SWPerson {
 // @abstract An initializer @param handle The phone number or email address for this person. @param identity The identity of this person. @param displayName The name of this person. @param thumbnailImageData Optional thumbnail image data for this person. If nil, this will be inferred by the system.
 func (o *SWPerson) InitWithHandleIdentityDisplayNameThumbnailImageData(handle *foundation.NSString, identity *SWPersonIdentity, displayName *foundation.NSString, thumbnailImageData *foundation.NSData) *SWPerson {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWPersonSelInitWithHandleIdentityDisplayNameThumbnailImageData, handle.Ptr(), identity.Ptr(), displayName.Ptr(), thumbnailImageData.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SWPersonFromID(_ret)
 }
-

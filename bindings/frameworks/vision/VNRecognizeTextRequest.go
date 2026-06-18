@@ -18,21 +18,21 @@ type VNRecognizeTextRequest struct {
 }
 
 var (
-	_clsVNRecognizeTextRequest = _objcClass("VNRecognizeTextRequest")
+	_clsVNRecognizeTextRequest                                                                  = _objcClass("VNRecognizeTextRequest")
 	_vNRecognizeTextRequestSelSupportedRecognitionLanguagesForTextRecognitionLevelRevisionError = objc.RegisterName("supportedRecognitionLanguagesForTextRecognitionLevel:revision:error:")
-	_vNRecognizeTextRequestSelSupportedRecognitionLanguagesAndReturnError = objc.RegisterName("supportedRecognitionLanguagesAndReturnError:")
-	_vNRecognizeTextRequestSelRecognitionLanguages = objc.RegisterName("recognitionLanguages")
-	_vNRecognizeTextRequestSelSetRecognitionLanguages = objc.RegisterName("setRecognitionLanguages:")
-	_vNRecognizeTextRequestSelCustomWords = objc.RegisterName("customWords")
-	_vNRecognizeTextRequestSelSetCustomWords = objc.RegisterName("setCustomWords:")
-	_vNRecognizeTextRequestSelRecognitionLevel = objc.RegisterName("recognitionLevel")
-	_vNRecognizeTextRequestSelSetRecognitionLevel = objc.RegisterName("setRecognitionLevel:")
-	_vNRecognizeTextRequestSelUsesLanguageCorrection = objc.RegisterName("usesLanguageCorrection")
-	_vNRecognizeTextRequestSelSetUsesLanguageCorrection = objc.RegisterName("setUsesLanguageCorrection:")
-	_vNRecognizeTextRequestSelAutomaticallyDetectsLanguage = objc.RegisterName("automaticallyDetectsLanguage")
-	_vNRecognizeTextRequestSelSetAutomaticallyDetectsLanguage = objc.RegisterName("setAutomaticallyDetectsLanguage:")
-	_vNRecognizeTextRequestSelMinimumTextHeight = objc.RegisterName("minimumTextHeight")
-	_vNRecognizeTextRequestSelSetMinimumTextHeight = objc.RegisterName("setMinimumTextHeight:")
+	_vNRecognizeTextRequestSelSupportedRecognitionLanguagesAndReturnError                       = objc.RegisterName("supportedRecognitionLanguagesAndReturnError:")
+	_vNRecognizeTextRequestSelRecognitionLanguages                                              = objc.RegisterName("recognitionLanguages")
+	_vNRecognizeTextRequestSelSetRecognitionLanguages                                           = objc.RegisterName("setRecognitionLanguages:")
+	_vNRecognizeTextRequestSelCustomWords                                                       = objc.RegisterName("customWords")
+	_vNRecognizeTextRequestSelSetCustomWords                                                    = objc.RegisterName("setCustomWords:")
+	_vNRecognizeTextRequestSelRecognitionLevel                                                  = objc.RegisterName("recognitionLevel")
+	_vNRecognizeTextRequestSelSetRecognitionLevel                                               = objc.RegisterName("setRecognitionLevel:")
+	_vNRecognizeTextRequestSelUsesLanguageCorrection                                            = objc.RegisterName("usesLanguageCorrection")
+	_vNRecognizeTextRequestSelSetUsesLanguageCorrection                                         = objc.RegisterName("setUsesLanguageCorrection:")
+	_vNRecognizeTextRequestSelAutomaticallyDetectsLanguage                                      = objc.RegisterName("automaticallyDetectsLanguage")
+	_vNRecognizeTextRequestSelSetAutomaticallyDetectsLanguage                                   = objc.RegisterName("setAutomaticallyDetectsLanguage:")
+	_vNRecognizeTextRequestSelMinimumTextHeight                                                 = objc.RegisterName("minimumTextHeight")
+	_vNRecognizeTextRequestSelSetMinimumTextHeight                                              = objc.RegisterName("setMinimumTextHeight:")
 )
 
 func VNRecognizeTextRequestFromID(id objc.ID) *VNRecognizeTextRequest {
@@ -124,4 +124,3 @@ func (o *VNRecognizeTextRequest) MinimumTextHeight() float32 {
 func (o *VNRecognizeTextRequest) SetMinimumTextHeight(minimumTextHeight float32) {
 	o.Ptr().Send(_vNRecognizeTextRequestSelSetMinimumTextHeight, minimumTextHeight)
 }
-

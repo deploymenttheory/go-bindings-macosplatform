@@ -11,8 +11,8 @@ import (
 type VNBarcodeCompositeType int64
 
 const (
-	VNBarcodeCompositeTypeNone VNBarcodeCompositeType = 0
-	VNBarcodeCompositeTypeLinked VNBarcodeCompositeType = 1
+	VNBarcodeCompositeTypeNone     VNBarcodeCompositeType = 0
+	VNBarcodeCompositeTypeLinked   VNBarcodeCompositeType = 1
 	VNBarcodeCompositeTypeGS1TypeA VNBarcodeCompositeType = 2
 	VNBarcodeCompositeTypeGS1TypeB VNBarcodeCompositeType = 3
 	VNBarcodeCompositeTypeGS1TypeC VNBarcodeCompositeType = 4
@@ -39,8 +39,8 @@ type VNChirality int64
 
 const (
 	VNChiralityUnknown VNChirality = 0
-	VNChiralityLeft VNChirality = -1
-	VNChiralityRight VNChirality = 1
+	VNChiralityLeft    VNChirality = -1
+	VNChiralityRight   VNChirality = 1
 )
 
 func (e VNChirality) String() string {
@@ -60,8 +60,8 @@ type VNElementType uint64
 
 const (
 	VNElementTypeUnknown VNElementType = 0
-	VNElementTypeFloat VNElementType = 1
-	VNElementTypeDouble VNElementType = 2
+	VNElementTypeFloat   VNElementType = 1
+	VNElementTypeDouble  VNElementType = 2
 )
 
 func (e VNElementType) String() string {
@@ -80,9 +80,9 @@ func (e VNElementType) String() string {
 type VNGenerateOpticalFlowRequestComputationAccuracy uint64
 
 const (
-	VNGenerateOpticalFlowRequestComputationAccuracyLow VNGenerateOpticalFlowRequestComputationAccuracy = 0
-	VNGenerateOpticalFlowRequestComputationAccuracyMedium VNGenerateOpticalFlowRequestComputationAccuracy = 1
-	VNGenerateOpticalFlowRequestComputationAccuracyHigh VNGenerateOpticalFlowRequestComputationAccuracy = 2
+	VNGenerateOpticalFlowRequestComputationAccuracyLow      VNGenerateOpticalFlowRequestComputationAccuracy = 0
+	VNGenerateOpticalFlowRequestComputationAccuracyMedium   VNGenerateOpticalFlowRequestComputationAccuracy = 1
+	VNGenerateOpticalFlowRequestComputationAccuracyHigh     VNGenerateOpticalFlowRequestComputationAccuracy = 2
 	VNGenerateOpticalFlowRequestComputationAccuracyVeryHigh VNGenerateOpticalFlowRequestComputationAccuracy = 3
 )
 
@@ -106,7 +106,7 @@ type VNGeneratePersonSegmentationRequestQualityLevel uint64
 const (
 	VNGeneratePersonSegmentationRequestQualityLevelAccurate VNGeneratePersonSegmentationRequestQualityLevel = 0
 	VNGeneratePersonSegmentationRequestQualityLevelBalanced VNGeneratePersonSegmentationRequestQualityLevel = 1
-	VNGeneratePersonSegmentationRequestQualityLevelFast VNGeneratePersonSegmentationRequestQualityLevel = 2
+	VNGeneratePersonSegmentationRequestQualityLevelFast     VNGeneratePersonSegmentationRequestQualityLevel = 2
 )
 
 func (e VNGeneratePersonSegmentationRequestQualityLevel) String() string {
@@ -126,7 +126,7 @@ type VNHumanBodyPose3DObservationHeightEstimation int64
 
 const (
 	VNHumanBodyPose3DObservationHeightEstimationReference VNHumanBodyPose3DObservationHeightEstimation = 0
-	VNHumanBodyPose3DObservationHeightEstimationMeasured VNHumanBodyPose3DObservationHeightEstimation = 1
+	VNHumanBodyPose3DObservationHeightEstimationMeasured  VNHumanBodyPose3DObservationHeightEstimation = 1
 )
 
 func (e VNHumanBodyPose3DObservationHeightEstimation) String() string {
@@ -143,10 +143,10 @@ func (e VNHumanBodyPose3DObservationHeightEstimation) String() string {
 type VNImageCropAndScaleOption uint64
 
 const (
-	VNImageCropAndScaleOptionCenterCrop VNImageCropAndScaleOption = 0
-	VNImageCropAndScaleOptionScaleFit VNImageCropAndScaleOption = 1
-	VNImageCropAndScaleOptionScaleFill VNImageCropAndScaleOption = 2
-	VNImageCropAndScaleOptionScaleFitRotate90CCW VNImageCropAndScaleOption = 257
+	VNImageCropAndScaleOptionCenterCrop           VNImageCropAndScaleOption = 0
+	VNImageCropAndScaleOptionScaleFit             VNImageCropAndScaleOption = 1
+	VNImageCropAndScaleOptionScaleFill            VNImageCropAndScaleOption = 2
+	VNImageCropAndScaleOptionScaleFitRotate90CCW  VNImageCropAndScaleOption = 257
 	VNImageCropAndScaleOptionScaleFillRotate90CCW VNImageCropAndScaleOption = 258
 )
 
@@ -171,8 +171,8 @@ type VNPointsClassification int64
 
 const (
 	VNPointsClassificationDisconnected VNPointsClassification = 0
-	VNPointsClassificationOpenPath VNPointsClassification = 1
-	VNPointsClassificationClosedPath VNPointsClassification = 2
+	VNPointsClassificationOpenPath     VNPointsClassification = 1
+	VNPointsClassificationClosedPath   VNPointsClassification = 2
 )
 
 func (e VNPointsClassification) String() string {
@@ -192,8 +192,8 @@ type VNRequestFaceLandmarksConstellation uint64
 
 const (
 	VNRequestFaceLandmarksConstellationNotDefined VNRequestFaceLandmarksConstellation = 0
-	VNRequestFaceLandmarksConstellation65Points VNRequestFaceLandmarksConstellation = 1
-	VNRequestFaceLandmarksConstellation76Points VNRequestFaceLandmarksConstellation = 2
+	VNRequestFaceLandmarksConstellation65Points   VNRequestFaceLandmarksConstellation = 1
+	VNRequestFaceLandmarksConstellation76Points   VNRequestFaceLandmarksConstellation = 2
 )
 
 func (e VNRequestFaceLandmarksConstellation) String() string {
@@ -213,7 +213,7 @@ type VNRequestTextRecognitionLevel int64
 
 const (
 	VNRequestTextRecognitionLevelAccurate VNRequestTextRecognitionLevel = 0
-	VNRequestTextRecognitionLevelFast VNRequestTextRecognitionLevel = 1
+	VNRequestTextRecognitionLevelFast     VNRequestTextRecognitionLevel = 1
 )
 
 func (e VNRequestTextRecognitionLevel) String() string {
@@ -231,7 +231,7 @@ type VNRequestTrackingLevel uint64
 
 const (
 	VNRequestTrackingLevelAccurate VNRequestTrackingLevel = 0
-	VNRequestTrackingLevelFast VNRequestTrackingLevel = 1
+	VNRequestTrackingLevelFast     VNRequestTrackingLevel = 1
 )
 
 func (e VNRequestTrackingLevel) String() string {
@@ -248,9 +248,9 @@ func (e VNRequestTrackingLevel) String() string {
 type VNTrackOpticalFlowRequestComputationAccuracy uint64
 
 const (
-	VNTrackOpticalFlowRequestComputationAccuracyLow VNTrackOpticalFlowRequestComputationAccuracy = 0
-	VNTrackOpticalFlowRequestComputationAccuracyMedium VNTrackOpticalFlowRequestComputationAccuracy = 1
-	VNTrackOpticalFlowRequestComputationAccuracyHigh VNTrackOpticalFlowRequestComputationAccuracy = 2
+	VNTrackOpticalFlowRequestComputationAccuracyLow      VNTrackOpticalFlowRequestComputationAccuracy = 0
+	VNTrackOpticalFlowRequestComputationAccuracyMedium   VNTrackOpticalFlowRequestComputationAccuracy = 1
+	VNTrackOpticalFlowRequestComputationAccuracyHigh     VNTrackOpticalFlowRequestComputationAccuracy = 2
 	VNTrackOpticalFlowRequestComputationAccuracyVeryHigh VNTrackOpticalFlowRequestComputationAccuracy = 3
 )
 
@@ -268,4 +268,3 @@ func (e VNTrackOpticalFlowRequestComputationAccuracy) String() string {
 		return fmt.Sprintf("VNTrackOpticalFlowRequestComputationAccuracy(%d)", int64(e))
 	}
 }
-

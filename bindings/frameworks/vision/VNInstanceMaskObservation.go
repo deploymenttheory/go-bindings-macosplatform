@@ -18,12 +18,12 @@ type VNInstanceMaskObservation struct {
 }
 
 var (
-	_clsVNInstanceMaskObservation = _objcClass("VNInstanceMaskObservation")
-	_vNInstanceMaskObservationSelGenerateMaskForInstancesError = objc.RegisterName("generateMaskForInstances:error:")
+	_clsVNInstanceMaskObservation                                                                              = _objcClass("VNInstanceMaskObservation")
+	_vNInstanceMaskObservationSelGenerateMaskForInstancesError                                                 = objc.RegisterName("generateMaskForInstances:error:")
 	_vNInstanceMaskObservationSelGenerateMaskedImageOfInstancesFromRequestHandlerCroppedToInstancesExtentError = objc.RegisterName("generateMaskedImageOfInstances:fromRequestHandler:croppedToInstancesExtent:error:")
-	_vNInstanceMaskObservationSelGenerateScaledMaskForImageForInstancesFromRequestHandlerError = objc.RegisterName("generateScaledMaskForImageForInstances:fromRequestHandler:error:")
-	_vNInstanceMaskObservationSelInstanceMask = objc.RegisterName("instanceMask")
-	_vNInstanceMaskObservationSelAllInstances = objc.RegisterName("allInstances")
+	_vNInstanceMaskObservationSelGenerateScaledMaskForImageForInstancesFromRequestHandlerError                 = objc.RegisterName("generateScaledMaskForImageForInstances:fromRequestHandler:error:")
+	_vNInstanceMaskObservationSelInstanceMask                                                                  = objc.RegisterName("instanceMask")
+	_vNInstanceMaskObservationSelAllInstances                                                                  = objc.RegisterName("allInstances")
 )
 
 func VNInstanceMaskObservationFromID(id objc.ID) *VNInstanceMaskObservation {
@@ -75,7 +75,8 @@ func (o *VNInstanceMaskObservation) InstanceMask() unsafe.Pointer {
 // @brief *The IndexSet that encompases all instances except the background
 func (o *VNInstanceMaskObservation) AllInstances() *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNInstanceMaskObservationSelAllInstances)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
-

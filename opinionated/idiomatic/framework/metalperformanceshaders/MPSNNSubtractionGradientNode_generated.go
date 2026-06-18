@@ -97,11 +97,17 @@ func (x *NNSubtractionGradientNode) WithLabel(label string) *NNSubtractionGradie
 	return x
 }
 
-func (x *NNSubtractionGradientNode) asNNArithmeticGradientNode() *mpsneuralnetwork.MPSNNArithmeticGradientNode { return &x.inner.MPSNNArithmeticGradientNode }
+func (x *NNSubtractionGradientNode) asNNArithmeticGradientNode() *mpsneuralnetwork.MPSNNArithmeticGradientNode {
+	return &x.inner.MPSNNArithmeticGradientNode
+}
 
-func (x *NNSubtractionGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode { return &x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode }
+func (x *NNSubtractionGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode {
+	return &x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode
+}
 
-func (x *NNSubtractionGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode }
+func (x *NNSubtractionGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode
+}
 
 // NNSubtractionGradientNodeable is the interface implemented by [NNSubtractionGradientNode], for mocking and DI.
 type NNSubtractionGradientNodeable interface {
@@ -119,4 +125,3 @@ type NNSubtractionGradientNodeable interface {
 }
 
 var _ NNSubtractionGradientNodeable = (*NNSubtractionGradientNode)(nil)
-

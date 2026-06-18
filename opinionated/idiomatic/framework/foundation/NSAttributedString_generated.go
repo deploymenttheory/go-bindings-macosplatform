@@ -209,4 +209,3 @@ type AttributedStringable interface {
 }
 
 var _ AttributedStringable = (*AttributedString)(nil)
-

@@ -15,19 +15,19 @@ type NSPort struct {
 }
 
 var (
-	_clsNSPort = _objcClass("NSPort")
-	_nSPortSelPort = objc.RegisterName("port")
-	_nSPortSelInvalidate = objc.RegisterName("invalidate")
-	_nSPortSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSPortSelDelegate = objc.RegisterName("delegate")
-	_nSPortSelScheduleInRunLoopForMode = objc.RegisterName("scheduleInRunLoop:forMode:")
-	_nSPortSelRemoveFromRunLoopForMode = objc.RegisterName("removeFromRunLoop:forMode:")
-	_nSPortSelSendBeforeDateComponentsFromReserved = objc.RegisterName("sendBeforeDate:components:from:reserved:")
+	_clsNSPort                                          = _objcClass("NSPort")
+	_nSPortSelPort                                      = objc.RegisterName("port")
+	_nSPortSelInvalidate                                = objc.RegisterName("invalidate")
+	_nSPortSelSetDelegate                               = objc.RegisterName("setDelegate:")
+	_nSPortSelDelegate                                  = objc.RegisterName("delegate")
+	_nSPortSelScheduleInRunLoopForMode                  = objc.RegisterName("scheduleInRunLoop:forMode:")
+	_nSPortSelRemoveFromRunLoopForMode                  = objc.RegisterName("removeFromRunLoop:forMode:")
+	_nSPortSelSendBeforeDateComponentsFromReserved      = objc.RegisterName("sendBeforeDate:components:from:reserved:")
 	_nSPortSelSendBeforeDateMsgidComponentsFromReserved = objc.RegisterName("sendBeforeDate:msgid:components:from:reserved:")
-	_nSPortSelAddConnectionToRunLoopForMode = objc.RegisterName("addConnection:toRunLoop:forMode:")
-	_nSPortSelRemoveConnectionFromRunLoopForMode = objc.RegisterName("removeConnection:fromRunLoop:forMode:")
-	_nSPortSelIsValid = objc.RegisterName("isValid")
-	_nSPortSelReservedSpaceLength = objc.RegisterName("reservedSpaceLength")
+	_nSPortSelAddConnectionToRunLoopForMode             = objc.RegisterName("addConnection:toRunLoop:forMode:")
+	_nSPortSelRemoveConnectionFromRunLoopForMode        = objc.RegisterName("removeConnection:fromRunLoop:forMode:")
+	_nSPortSelIsValid                                   = objc.RegisterName("isValid")
+	_nSPortSelReservedSpaceLength                       = objc.RegisterName("reservedSpaceLength")
 )
 
 func NSPortFromID(id objc.ID) *NSPort {
@@ -42,7 +42,9 @@ func NSPortFromID(id objc.ID) *NSPort {
 
 func NSPortPort() *NSPort {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPort), _nSPortSelPort)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPortFromID(_ret)
 }
 
@@ -96,4 +98,3 @@ func (o *NSPort) ReservedSpaceLength() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSPortSelReservedSpaceLength)
 	return _ret
 }
-

@@ -15,7 +15,9 @@ type MTL4PipelineDataSetSerializerDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTL4PipelineDataSetSerializerDescriptor].
-func (x *MTL4PipelineDataSetSerializerDescriptor) Unwrap() *raw.MTL4PipelineDataSetSerializerDescriptor { return x.inner }
+func (x *MTL4PipelineDataSetSerializerDescriptor) Unwrap() *raw.MTL4PipelineDataSetSerializerDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -60,4 +62,3 @@ type MTL4PipelineDataSetSerializerDescriptorable interface {
 }
 
 var _ MTL4PipelineDataSetSerializerDescriptorable = (*MTL4PipelineDataSetSerializerDescriptor)(nil)
-

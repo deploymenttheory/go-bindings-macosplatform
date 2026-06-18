@@ -46,7 +46,9 @@ func (x *CaptureAudioFileOutput) WithMetadata(items ...MetadataItemProvider) *Ca
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asMetadataItem().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asMetadataItem().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.AVMetadataItem](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -122,9 +124,13 @@ func (x *CaptureAudioFileOutput) SetAudioSettings(audioSettings *foundation.NSDi
 	x.inner.SetAudioSettings(audioSettings)
 }
 
-func (x *CaptureAudioFileOutput) asCaptureFileOutput() *raw.AVCaptureFileOutput { return &x.inner.AVCaptureFileOutput }
+func (x *CaptureAudioFileOutput) asCaptureFileOutput() *raw.AVCaptureFileOutput {
+	return &x.inner.AVCaptureFileOutput
+}
 
-func (x *CaptureAudioFileOutput) asCaptureOutput() *raw.AVCaptureOutput { return &x.inner.AVCaptureFileOutput.AVCaptureOutput }
+func (x *CaptureAudioFileOutput) asCaptureOutput() *raw.AVCaptureOutput {
+	return &x.inner.AVCaptureFileOutput.AVCaptureOutput
+}
 
 // CaptureAudioFileOutputable is the interface implemented by [CaptureAudioFileOutput], for mocking and DI.
 type CaptureAudioFileOutputable interface {
@@ -144,4 +150,3 @@ type CaptureAudioFileOutputable interface {
 }
 
 var _ CaptureAudioFileOutputable = (*CaptureAudioFileOutput)(nil)
-

@@ -91,4 +91,3 @@ type RenderingSessionable interface {
 }
 
 var _ RenderingSessionable = (*RenderingSession)(nil)
-

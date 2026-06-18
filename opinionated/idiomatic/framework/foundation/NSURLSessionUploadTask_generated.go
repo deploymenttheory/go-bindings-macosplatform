@@ -108,11 +108,17 @@ func (x *URLSessionUploadTask) CancelByProducingResumeData(ctx context.Context) 
 	}
 }
 
-func (x *URLSessionUploadTask) asURLSessionDataTask() *raw.NSURLSessionDataTask { return &x.inner.NSURLSessionDataTask }
+func (x *URLSessionUploadTask) asURLSessionDataTask() *raw.NSURLSessionDataTask {
+	return &x.inner.NSURLSessionDataTask
+}
 
-func (x *URLSessionUploadTask) asURLSessionTask() *raw.NSURLSessionTask { return &x.inner.NSURLSessionDataTask.NSURLSessionTask }
+func (x *URLSessionUploadTask) asURLSessionTask() *raw.NSURLSessionTask {
+	return &x.inner.NSURLSessionDataTask.NSURLSessionTask
+}
 
-func (x *URLSessionUploadTask) asObject() *raw.NSObject { return &x.inner.NSURLSessionDataTask.NSURLSessionTask.NSObject }
+func (x *URLSessionUploadTask) asObject() *raw.NSObject {
+	return &x.inner.NSURLSessionDataTask.NSURLSessionTask.NSObject
+}
 
 // URLSessionUploadTaskable is the interface implemented by [URLSessionUploadTask], for mocking and DI.
 type URLSessionUploadTaskable interface {
@@ -129,4 +135,3 @@ type URLSessionUploadTaskable interface {
 }
 
 var _ URLSessionUploadTaskable = (*URLSessionUploadTask)(nil)
-

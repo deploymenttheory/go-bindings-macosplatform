@@ -104,4 +104,3 @@ type FrameRateConversionParametersable interface {
 }
 
 var _ FrameRateConversionParametersable = (*FrameRateConversionParameters)(nil)
-

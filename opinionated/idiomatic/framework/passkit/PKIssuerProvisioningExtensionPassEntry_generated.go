@@ -17,7 +17,9 @@ type IssuerProvisioningExtensionPassEntry struct {
 }
 
 // Unwrap returns the underlying [raw.PKIssuerProvisioningExtensionPassEntry].
-func (x *IssuerProvisioningExtensionPassEntry) Unwrap() *raw.PKIssuerProvisioningExtensionPassEntry { return x.inner }
+func (x *IssuerProvisioningExtensionPassEntry) Unwrap() *raw.PKIssuerProvisioningExtensionPassEntry {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -60,7 +62,9 @@ func (x *IssuerProvisioningExtensionPassEntry) Art() unsafe.Pointer {
 	return x.inner.Art()
 }
 
-func (x *IssuerProvisioningExtensionPassEntry) asIssuerProvisioningExtensionPassEntry() *raw.PKIssuerProvisioningExtensionPassEntry { return x.inner }
+func (x *IssuerProvisioningExtensionPassEntry) asIssuerProvisioningExtensionPassEntry() *raw.PKIssuerProvisioningExtensionPassEntry {
+	return x.inner
+}
 
 // IssuerProvisioningExtensionPassEntryable is the interface implemented by [IssuerProvisioningExtensionPassEntry], for mocking and DI.
 type IssuerProvisioningExtensionPassEntryable interface {
@@ -71,4 +75,3 @@ type IssuerProvisioningExtensionPassEntryable interface {
 }
 
 var _ IssuerProvisioningExtensionPassEntryable = (*IssuerProvisioningExtensionPassEntry)(nil)
-

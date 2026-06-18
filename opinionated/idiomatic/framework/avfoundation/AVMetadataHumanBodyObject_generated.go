@@ -35,9 +35,13 @@ func NewMetadataHumanBodyObject() *MetadataHumanBodyObject {
 	return &MetadataHumanBodyObject{inner: raw.AVMetadataHumanBodyObjectFromID(_id)}
 }
 
-func (x *MetadataHumanBodyObject) asMetadataBodyObject() *raw.AVMetadataBodyObject { return &x.inner.AVMetadataBodyObject }
+func (x *MetadataHumanBodyObject) asMetadataBodyObject() *raw.AVMetadataBodyObject {
+	return &x.inner.AVMetadataBodyObject
+}
 
-func (x *MetadataHumanBodyObject) asMetadataObject() *raw.AVMetadataObject { return &x.inner.AVMetadataBodyObject.AVMetadataObject }
+func (x *MetadataHumanBodyObject) asMetadataObject() *raw.AVMetadataObject {
+	return &x.inner.AVMetadataBodyObject.AVMetadataObject
+}
 
 // MetadataHumanBodyObjectable is the interface implemented by [MetadataHumanBodyObject], for mocking and DI.
 type MetadataHumanBodyObjectable interface {
@@ -45,4 +49,3 @@ type MetadataHumanBodyObjectable interface {
 }
 
 var _ MetadataHumanBodyObjectable = (*MetadataHumanBodyObject)(nil)
-

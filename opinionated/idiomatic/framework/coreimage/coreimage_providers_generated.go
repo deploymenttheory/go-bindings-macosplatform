@@ -32,4 +32,3 @@ type FilterProvider interface {
 type KernelProvider interface {
 	asKernel() *raw.CIKernel
 }
-

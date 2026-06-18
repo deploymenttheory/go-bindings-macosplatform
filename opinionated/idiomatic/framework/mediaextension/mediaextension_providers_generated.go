@@ -12,4 +12,3 @@ import (
 type RAWProcessingParameterProvider interface {
 	asRAWProcessingParameter() *raw.MERAWProcessingParameter
 }
-

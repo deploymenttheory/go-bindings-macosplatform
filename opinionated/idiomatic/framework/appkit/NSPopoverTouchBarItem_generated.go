@@ -221,4 +221,3 @@ type PopoverTouchBarItemable interface {
 }
 
 var _ PopoverTouchBarItemable = (*PopoverTouchBarItem)(nil)
-

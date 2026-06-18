@@ -18,13 +18,13 @@ type VZDiskImageStorageDeviceAttachment struct {
 }
 
 var (
-	_clsVZDiskImageStorageDeviceAttachment = _objcClass("VZDiskImageStorageDeviceAttachment")
-	_vZDiskImageStorageDeviceAttachmentSelInitWithURLReadOnlyError = objc.RegisterName("initWithURL:readOnly:error:")
+	_clsVZDiskImageStorageDeviceAttachment                                                       = _objcClass("VZDiskImageStorageDeviceAttachment")
+	_vZDiskImageStorageDeviceAttachmentSelInitWithURLReadOnlyError                               = objc.RegisterName("initWithURL:readOnly:error:")
 	_vZDiskImageStorageDeviceAttachmentSelInitWithURLReadOnlyCachingModeSynchronizationModeError = objc.RegisterName("initWithURL:readOnly:cachingMode:synchronizationMode:error:")
-	_vZDiskImageStorageDeviceAttachmentSelURL = objc.RegisterName("URL")
-	_vZDiskImageStorageDeviceAttachmentSelIsReadOnly = objc.RegisterName("isReadOnly")
-	_vZDiskImageStorageDeviceAttachmentSelCachingMode = objc.RegisterName("cachingMode")
-	_vZDiskImageStorageDeviceAttachmentSelSynchronizationMode = objc.RegisterName("synchronizationMode")
+	_vZDiskImageStorageDeviceAttachmentSelURL                                                    = objc.RegisterName("URL")
+	_vZDiskImageStorageDeviceAttachmentSelIsReadOnly                                             = objc.RegisterName("isReadOnly")
+	_vZDiskImageStorageDeviceAttachmentSelCachingMode                                            = objc.RegisterName("cachingMode")
+	_vZDiskImageStorageDeviceAttachmentSelSynchronizationMode                                    = objc.RegisterName("synchronizationMode")
 )
 
 func VZDiskImageStorageDeviceAttachmentFromID(id objc.ID) *VZDiskImageStorageDeviceAttachment {
@@ -41,7 +41,9 @@ func VZDiskImageStorageDeviceAttachmentFromID(id objc.ID) *VZDiskImageStorageDev
 func (o *VZDiskImageStorageDeviceAttachment) InitWithURLReadOnlyError(url *foundation.NSURL, readOnly bool) (*VZDiskImageStorageDeviceAttachment, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZDiskImageStorageDeviceAttachmentSelInitWithURLReadOnlyError, url.Ptr(), readOnly, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -52,7 +54,9 @@ func (o *VZDiskImageStorageDeviceAttachment) InitWithURLReadOnlyError(url *found
 func (o *VZDiskImageStorageDeviceAttachment) InitWithURLReadOnlyCachingModeSynchronizationModeError(url *foundation.NSURL, readOnly bool, cachingMode VZDiskImageCachingMode, synchronizationMode VZDiskImageSynchronizationMode) (*VZDiskImageStorageDeviceAttachment, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZDiskImageStorageDeviceAttachmentSelInitWithURLReadOnlyCachingModeSynchronizationModeError, url.Ptr(), readOnly, cachingMode, synchronizationMode, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -62,7 +66,9 @@ func (o *VZDiskImageStorageDeviceAttachment) InitWithURLReadOnlyCachingModeSynch
 // @abstract URL of the underlying disk image.
 func (o *VZDiskImageStorageDeviceAttachment) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZDiskImageStorageDeviceAttachmentSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -83,4 +89,3 @@ func (o *VZDiskImageStorageDeviceAttachment) SynchronizationMode() VZDiskImageSy
 	_ret := objc.Send[VZDiskImageSynchronizationMode](o.Ptr(), _vZDiskImageStorageDeviceAttachmentSelSynchronizationMode)
 	return _ret
 }
-

@@ -16,7 +16,9 @@ type MTRDishwasherAlarmClusterNotifyEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRDishwasherAlarmClusterNotifyEvent].
-func (x *MTRDishwasherAlarmClusterNotifyEvent) Unwrap() *raw.MTRDishwasherAlarmClusterNotifyEvent { return x.inner }
+func (x *MTRDishwasherAlarmClusterNotifyEvent) Unwrap() *raw.MTRDishwasherAlarmClusterNotifyEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -118,4 +120,3 @@ type MTRDishwasherAlarmClusterNotifyEventable interface {
 }
 
 var _ MTRDishwasherAlarmClusterNotifyEventable = (*MTRDishwasherAlarmClusterNotifyEvent)(nil)
-

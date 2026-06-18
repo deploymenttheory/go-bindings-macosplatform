@@ -17,12 +17,12 @@ type MKMapItemDetailSelectionAccessoryPresentationStyle struct {
 }
 
 var (
-	_clsMKMapItemDetailSelectionAccessoryPresentationStyle = _objcClass("MKMapItemDetailSelectionAccessoryPresentationStyle")
+	_clsMKMapItemDetailSelectionAccessoryPresentationStyle                                        = _objcClass("MKMapItemDetailSelectionAccessoryPresentationStyle")
 	_mKMapItemDetailSelectionAccessoryPresentationStyleSelAutomaticWithPresentationViewController = objc.RegisterName("automaticWithPresentationViewController:")
-	_mKMapItemDetailSelectionAccessoryPresentationStyleSelCalloutWithCalloutStyle = objc.RegisterName("calloutWithCalloutStyle:")
-	_mKMapItemDetailSelectionAccessoryPresentationStyleSelSheetPresentedFromViewController = objc.RegisterName("sheetPresentedFromViewController:")
-	_mKMapItemDetailSelectionAccessoryPresentationStyleSelCallout = objc.RegisterName("callout")
-	_mKMapItemDetailSelectionAccessoryPresentationStyleSelOpenInMaps = objc.RegisterName("openInMaps")
+	_mKMapItemDetailSelectionAccessoryPresentationStyleSelCalloutWithCalloutStyle                 = objc.RegisterName("calloutWithCalloutStyle:")
+	_mKMapItemDetailSelectionAccessoryPresentationStyleSelSheetPresentedFromViewController        = objc.RegisterName("sheetPresentedFromViewController:")
+	_mKMapItemDetailSelectionAccessoryPresentationStyleSelCallout                                 = objc.RegisterName("callout")
+	_mKMapItemDetailSelectionAccessoryPresentationStyleSelOpenInMaps                              = objc.RegisterName("openInMaps")
 )
 
 func MKMapItemDetailSelectionAccessoryPresentationStyleFromID(id objc.ID) *MKMapItemDetailSelectionAccessoryPresentationStyle {
@@ -37,31 +37,40 @@ func MKMapItemDetailSelectionAccessoryPresentationStyleFromID(id objc.ID) *MKMap
 
 func MKMapItemDetailSelectionAccessoryPresentationStyleAutomaticWithPresentationViewController(presentationViewController *appkit.NSViewController) *MKMapItemDetailSelectionAccessoryPresentationStyle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKMapItemDetailSelectionAccessoryPresentationStyle), _mKMapItemDetailSelectionAccessoryPresentationStyleSelAutomaticWithPresentationViewController, presentationViewController.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapItemDetailSelectionAccessoryPresentationStyleFromID(_ret)
 }
 
 func MKMapItemDetailSelectionAccessoryPresentationStyleCalloutWithCalloutStyle(style MKMapItemDetailSelectionAccessoryCalloutStyle) *MKMapItemDetailSelectionAccessoryPresentationStyle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKMapItemDetailSelectionAccessoryPresentationStyle), _mKMapItemDetailSelectionAccessoryPresentationStyleSelCalloutWithCalloutStyle, style)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapItemDetailSelectionAccessoryPresentationStyleFromID(_ret)
 }
 
 func MKMapItemDetailSelectionAccessoryPresentationStyleSheetPresentedFromViewController(viewController *appkit.NSViewController) *MKMapItemDetailSelectionAccessoryPresentationStyle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKMapItemDetailSelectionAccessoryPresentationStyle), _mKMapItemDetailSelectionAccessoryPresentationStyleSelSheetPresentedFromViewController, viewController.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapItemDetailSelectionAccessoryPresentationStyleFromID(_ret)
 }
 
 func MKMapItemDetailSelectionAccessoryPresentationStyleCallout() *MKMapItemDetailSelectionAccessoryPresentationStyle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKMapItemDetailSelectionAccessoryPresentationStyle), _mKMapItemDetailSelectionAccessoryPresentationStyleSelCallout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapItemDetailSelectionAccessoryPresentationStyleFromID(_ret)
 }
 
 func MKMapItemDetailSelectionAccessoryPresentationStyleOpenInMaps() *MKMapItemDetailSelectionAccessoryPresentationStyle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKMapItemDetailSelectionAccessoryPresentationStyle), _mKMapItemDetailSelectionAccessoryPresentationStyleSelOpenInMaps)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapItemDetailSelectionAccessoryPresentationStyleFromID(_ret)
 }
-

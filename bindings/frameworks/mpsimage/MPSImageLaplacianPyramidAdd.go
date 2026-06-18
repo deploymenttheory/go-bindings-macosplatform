@@ -25,4 +25,3 @@ func MPSImageLaplacianPyramidAddFromID(id objc.ID) *MPSImageLaplacianPyramidAdd 
 	purego.Track(o)
 	return o
 }
-

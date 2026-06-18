@@ -157,4 +157,3 @@ func IsAVBCapableInterfaceNamed(anInterfaceName string) bool {
 func MyEntityID() uint64 {
 	return raw.AVBInterfaceMyEntityID()
 }
-

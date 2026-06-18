@@ -54,4 +54,3 @@ type UnitFrequencyable interface {
 }
 
 var _ UnitFrequencyable = (*UnitFrequency)(nil)
-

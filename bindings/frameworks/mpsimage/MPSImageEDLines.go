@@ -20,25 +20,25 @@ type MPSImageEDLines struct {
 }
 
 var (
-	_clsMPSImageEDLines = _objcClass("MPSImageEDLines")
+	_clsMPSImageEDLines                                                                                                                     = _objcClass("MPSImageEDLines")
 	_mPSImageEDLinesSelInitWithDeviceGaussianSigmaMinLineLengthMaxLinesDetailRatioGradientThresholdLineErrorThresholdMergeLocalityThreshold = objc.RegisterName("initWithDevice:gaussianSigma:minLineLength:maxLines:detailRatio:gradientThreshold:lineErrorThreshold:mergeLocalityThreshold:")
-	_mPSImageEDLinesSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSImageEDLinesSelEncodeToCommandBufferSourceTextureDestinationTextureEndpointBufferEndpointOffset = objc.RegisterName("encodeToCommandBuffer:sourceTexture:destinationTexture:endpointBuffer:endpointOffset:")
-	_mPSImageEDLinesSelClipRectSource = objc.RegisterName("clipRectSource")
-	_mPSImageEDLinesSelSetClipRectSource = objc.RegisterName("setClipRectSource:")
-	_mPSImageEDLinesSelGaussianSigma = objc.RegisterName("gaussianSigma")
-	_mPSImageEDLinesSelMinLineLength = objc.RegisterName("minLineLength")
-	_mPSImageEDLinesSelSetMinLineLength = objc.RegisterName("setMinLineLength:")
-	_mPSImageEDLinesSelMaxLines = objc.RegisterName("maxLines")
-	_mPSImageEDLinesSelSetMaxLines = objc.RegisterName("setMaxLines:")
-	_mPSImageEDLinesSelDetailRatio = objc.RegisterName("detailRatio")
-	_mPSImageEDLinesSelSetDetailRatio = objc.RegisterName("setDetailRatio:")
-	_mPSImageEDLinesSelGradientThreshold = objc.RegisterName("gradientThreshold")
-	_mPSImageEDLinesSelSetGradientThreshold = objc.RegisterName("setGradientThreshold:")
-	_mPSImageEDLinesSelLineErrorThreshold = objc.RegisterName("lineErrorThreshold")
-	_mPSImageEDLinesSelSetLineErrorThreshold = objc.RegisterName("setLineErrorThreshold:")
-	_mPSImageEDLinesSelMergeLocalityThreshold = objc.RegisterName("mergeLocalityThreshold")
-	_mPSImageEDLinesSelSetMergeLocalityThreshold = objc.RegisterName("setMergeLocalityThreshold:")
+	_mPSImageEDLinesSelInitWithCoderDevice                                                                                                  = objc.RegisterName("initWithCoder:device:")
+	_mPSImageEDLinesSelEncodeToCommandBufferSourceTextureDestinationTextureEndpointBufferEndpointOffset                                     = objc.RegisterName("encodeToCommandBuffer:sourceTexture:destinationTexture:endpointBuffer:endpointOffset:")
+	_mPSImageEDLinesSelClipRectSource                                                                                                       = objc.RegisterName("clipRectSource")
+	_mPSImageEDLinesSelSetClipRectSource                                                                                                    = objc.RegisterName("setClipRectSource:")
+	_mPSImageEDLinesSelGaussianSigma                                                                                                        = objc.RegisterName("gaussianSigma")
+	_mPSImageEDLinesSelMinLineLength                                                                                                        = objc.RegisterName("minLineLength")
+	_mPSImageEDLinesSelSetMinLineLength                                                                                                     = objc.RegisterName("setMinLineLength:")
+	_mPSImageEDLinesSelMaxLines                                                                                                             = objc.RegisterName("maxLines")
+	_mPSImageEDLinesSelSetMaxLines                                                                                                          = objc.RegisterName("setMaxLines:")
+	_mPSImageEDLinesSelDetailRatio                                                                                                          = objc.RegisterName("detailRatio")
+	_mPSImageEDLinesSelSetDetailRatio                                                                                                       = objc.RegisterName("setDetailRatio:")
+	_mPSImageEDLinesSelGradientThreshold                                                                                                    = objc.RegisterName("gradientThreshold")
+	_mPSImageEDLinesSelSetGradientThreshold                                                                                                 = objc.RegisterName("setGradientThreshold:")
+	_mPSImageEDLinesSelLineErrorThreshold                                                                                                   = objc.RegisterName("lineErrorThreshold")
+	_mPSImageEDLinesSelSetLineErrorThreshold                                                                                                = objc.RegisterName("setLineErrorThreshold:")
+	_mPSImageEDLinesSelMergeLocalityThreshold                                                                                               = objc.RegisterName("mergeLocalityThreshold")
+	_mPSImageEDLinesSelSetMergeLocalityThreshold                                                                                            = objc.RegisterName("setMergeLocalityThreshold:")
 )
 
 func MPSImageEDLinesFromID(id objc.ID) *MPSImageEDLines {
@@ -54,14 +54,18 @@ func MPSImageEDLinesFromID(id objc.ID) *MPSImageEDLines {
 // @abstract   Initialize an EDLines kernel on a given device with specified parameters. @param      device             The device the filter will run on @param      gaussianSigma     The standard deviation of gaussian blur filter. Gaussian weight, centered at 0, at integer grid i is given as @code w(i) = 1/sqrt(2*pi*sigma) * exp(-i^2/(2*sigma^2)) @endcode If we take cut off at 1% of w(0) (max weight) beyond which weights are considered 0, we have @code ceil (sqrt(-log(0.01)*2)*sigma) ~ ceil(3.7*sigma) @endcode as rough estimate of filter width @param      minLineLength           The minimum length of output line segments. @param      maxLines                      The maximum amount of lines for the EDLines algorithm to output. The size of the endpointBuffer supplied at encode must be >= maxLines * 4 * sizeof(unsigned short) + sizeof(uint32_t). @param      detailRatio                The detailRatio to use in the EDLines algorithm, which inversely effects the number of anchor points @param      gradientThreshold   Any pixel with a gradient below the gradientThreshold will not be considerd an edge @param      lineErrorThreshold  The limit of how much error a line segment can have relative to the edge it represents @param      mergeLocalityThreshold  Determines how many pixels apart two lines can deviate spatially and still be merged. This value is normalized to the diagonal length of the image. @return     A valid object or nil, if failure.
 func (o *MPSImageEDLines) InitWithDeviceGaussianSigmaMinLineLengthMaxLinesDetailRatioGradientThresholdLineErrorThresholdMergeLocalityThreshold(device metal.MTLDevice, gaussianSigma unsafe.Pointer, minLineLength unsafe.Pointer, maxLines uint, detailRatio unsafe.Pointer, gradientThreshold unsafe.Pointer, lineErrorThreshold unsafe.Pointer, mergeLocalityThreshold unsafe.Pointer) *MPSImageEDLines {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageEDLinesSelInitWithDeviceGaussianSigmaMinLineLengthMaxLinesDetailRatioGradientThresholdLineErrorThresholdMergeLocalityThreshold, device, gaussianSigma, minLineLength, maxLines, detailRatio, gradientThreshold, lineErrorThreshold, mergeLocalityThreshold)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageEDLinesFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSImageEDLines) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSImageEDLines {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageEDLinesSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageEDLinesFromID(_ret)
 }
 
@@ -145,4 +149,3 @@ func (o *MPSImageEDLines) MergeLocalityThreshold() float32 {
 func (o *MPSImageEDLines) SetMergeLocalityThreshold(mergeLocalityThreshold float32) {
 	o.Ptr().Send(_mPSImageEDLinesSelSetMergeLocalityThreshold, mergeLocalityThreshold)
 }
-

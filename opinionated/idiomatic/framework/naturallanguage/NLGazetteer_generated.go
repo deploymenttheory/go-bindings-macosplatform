@@ -97,4 +97,3 @@ type Gazetteerable interface {
 }
 
 var _ Gazetteerable = (*Gazetteer)(nil)
-

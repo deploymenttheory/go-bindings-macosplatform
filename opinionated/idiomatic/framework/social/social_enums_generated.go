@@ -11,10 +11,10 @@ import (
 type SLRequestMethod int64
 
 const (
-	SLRequestMethodGET SLRequestMethod = 0
-	SLRequestMethodPOST SLRequestMethod = 1
+	SLRequestMethodGET    SLRequestMethod = 0
+	SLRequestMethodPOST   SLRequestMethod = 1
 	SLRequestMethodDELETE SLRequestMethod = 2
-	SLRequestMethodPUT SLRequestMethod = 3
+	SLRequestMethodPUT    SLRequestMethod = 3
 )
 
 func (e SLRequestMethod) String() string {
@@ -31,4 +31,3 @@ func (e SLRequestMethod) String() string {
 		return fmt.Sprintf("SLRequestMethod(%d)", int64(e))
 	}
 }
-

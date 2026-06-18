@@ -100,11 +100,17 @@ func (x *CNNNeuronAbsolute) WithLabel(label string) *CNNNeuronAbsolute {
 	return x
 }
 
-func (x *CNNNeuronAbsolute) asCNNNeuron() *mpsneuralnetwork.MPSCNNNeuron { return &x.inner.MPSCNNNeuron }
+func (x *CNNNeuronAbsolute) asCNNNeuron() *mpsneuralnetwork.MPSCNNNeuron {
+	return &x.inner.MPSCNNNeuron
+}
 
-func (x *CNNNeuronAbsolute) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel }
+func (x *CNNNeuronAbsolute) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNNeuron.MPSCNNKernel
+}
 
-func (x *CNNNeuronAbsolute) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel }
+func (x *CNNNeuronAbsolute) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel
+}
 
 // CNNNeuronAbsoluteable is the interface implemented by [CNNNeuronAbsolute], for mocking and DI.
 type CNNNeuronAbsoluteable interface {
@@ -122,4 +128,3 @@ type CNNNeuronAbsoluteable interface {
 }
 
 var _ CNNNeuronAbsoluteable = (*CNNNeuronAbsolute)(nil)
-

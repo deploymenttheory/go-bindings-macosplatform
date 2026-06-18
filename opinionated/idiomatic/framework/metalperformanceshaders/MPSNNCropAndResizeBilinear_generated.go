@@ -127,9 +127,13 @@ func (x *NNCropAndResizeBilinear) Regions() *mpscore.MPSRegion {
 	return x.inner.Regions()
 }
 
-func (x *NNCropAndResizeBilinear) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNKernel }
+func (x *NNCropAndResizeBilinear) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNKernel
+}
 
-func (x *NNCropAndResizeBilinear) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
+func (x *NNCropAndResizeBilinear) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNKernel.MPSKernel
+}
 
 // NNCropAndResizeBilinearable is the interface implemented by [NNCropAndResizeBilinear], for mocking and DI.
 type NNCropAndResizeBilinearable interface {
@@ -151,4 +155,3 @@ type NNCropAndResizeBilinearable interface {
 }
 
 var _ NNCropAndResizeBilinearable = (*NNCropAndResizeBilinear)(nil)
-

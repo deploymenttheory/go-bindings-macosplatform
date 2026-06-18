@@ -311,7 +311,9 @@ func (x *ScannerFunctionalUnit) SetOverviewResolution(overviewResolution uint) {
 	x.inner.SetOverviewResolution(overviewResolution)
 }
 
-func (x *ScannerFunctionalUnit) asScannerFunctionalUnit() *raw.ICScannerFunctionalUnit { return x.inner }
+func (x *ScannerFunctionalUnit) asScannerFunctionalUnit() *raw.ICScannerFunctionalUnit {
+	return x.inner
+}
 
 // ScannerFunctionalUnitable is the interface implemented by [ScannerFunctionalUnit], for mocking and DI.
 type ScannerFunctionalUnitable interface {
@@ -369,4 +371,3 @@ type ScannerFunctionalUnitable interface {
 }
 
 var _ ScannerFunctionalUnitable = (*ScannerFunctionalUnit)(nil)
-

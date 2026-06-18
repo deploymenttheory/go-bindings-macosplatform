@@ -319,4 +319,3 @@ func OBEXSessionSetPathResponse(inSessionRef unsafe.Pointer, inResponseOpCode ui
 func OBEXSessionSetServerCallback(inSessionRef unsafe.Pointer, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) int32 {
 	return raw.OBEXSessionSetServerCallback(inSessionRef, inCallback, inUserRefCon)
 }
-

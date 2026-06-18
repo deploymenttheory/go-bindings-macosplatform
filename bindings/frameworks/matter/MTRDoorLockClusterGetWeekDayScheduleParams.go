@@ -16,14 +16,14 @@ type MTRDoorLockClusterGetWeekDayScheduleParams struct {
 }
 
 var (
-	_clsMTRDoorLockClusterGetWeekDayScheduleParams = _objcClass("MTRDoorLockClusterGetWeekDayScheduleParams")
-	_mTRDoorLockClusterGetWeekDayScheduleParamsSelWeekDayIndex = objc.RegisterName("weekDayIndex")
-	_mTRDoorLockClusterGetWeekDayScheduleParamsSelSetWeekDayIndex = objc.RegisterName("setWeekDayIndex:")
-	_mTRDoorLockClusterGetWeekDayScheduleParamsSelUserIndex = objc.RegisterName("userIndex")
-	_mTRDoorLockClusterGetWeekDayScheduleParamsSelSetUserIndex = objc.RegisterName("setUserIndex:")
-	_mTRDoorLockClusterGetWeekDayScheduleParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRDoorLockClusterGetWeekDayScheduleParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRDoorLockClusterGetWeekDayScheduleParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRDoorLockClusterGetWeekDayScheduleParams                               = _objcClass("MTRDoorLockClusterGetWeekDayScheduleParams")
+	_mTRDoorLockClusterGetWeekDayScheduleParamsSelWeekDayIndex                   = objc.RegisterName("weekDayIndex")
+	_mTRDoorLockClusterGetWeekDayScheduleParamsSelSetWeekDayIndex                = objc.RegisterName("setWeekDayIndex:")
+	_mTRDoorLockClusterGetWeekDayScheduleParamsSelUserIndex                      = objc.RegisterName("userIndex")
+	_mTRDoorLockClusterGetWeekDayScheduleParamsSelSetUserIndex                   = objc.RegisterName("setUserIndex:")
+	_mTRDoorLockClusterGetWeekDayScheduleParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRDoorLockClusterGetWeekDayScheduleParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRDoorLockClusterGetWeekDayScheduleParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRDoorLockClusterGetWeekDayScheduleParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -39,7 +39,9 @@ func MTRDoorLockClusterGetWeekDayScheduleParamsFromID(id objc.ID) *MTRDoorLockCl
 
 func (o *MTRDoorLockClusterGetWeekDayScheduleParams) WeekDayIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterGetWeekDayScheduleParamsSelWeekDayIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTRDoorLockClusterGetWeekDayScheduleParams) SetWeekDayIndex(weekDayInde
 
 func (o *MTRDoorLockClusterGetWeekDayScheduleParams) UserIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterGetWeekDayScheduleParamsSelUserIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -60,7 +64,9 @@ func (o *MTRDoorLockClusterGetWeekDayScheduleParams) SetUserIndex(userIndex *fou
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRDoorLockClusterGetWeekDayScheduleParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterGetWeekDayScheduleParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -71,11 +77,12 @@ func (o *MTRDoorLockClusterGetWeekDayScheduleParams) SetTimedInvokeTimeoutMs(tim
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRDoorLockClusterGetWeekDayScheduleParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterGetWeekDayScheduleParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDoorLockClusterGetWeekDayScheduleParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDoorLockClusterGetWeekDayScheduleParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

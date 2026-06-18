@@ -18,22 +18,22 @@ type MTRDiagnosticLogsClusterRetrieveLogsResponseParams struct {
 }
 
 var (
-	_clsMTRDiagnosticLogsClusterRetrieveLogsResponseParams = _objcClass("MTRDiagnosticLogsClusterRetrieveLogsResponseParams")
+	_clsMTRDiagnosticLogsClusterRetrieveLogsResponseParams                           = _objcClass("MTRDiagnosticLogsClusterRetrieveLogsResponseParams")
 	_mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelStatus = objc.RegisterName("status")
-	_mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelSetStatus = objc.RegisterName("setStatus:")
-	_mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelLogContent = objc.RegisterName("logContent")
-	_mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelSetLogContent = objc.RegisterName("setLogContent:")
-	_mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelUtcTimeStamp = objc.RegisterName("utcTimeStamp")
-	_mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelSetUtcTimeStamp = objc.RegisterName("setUtcTimeStamp:")
-	_mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelTimeSinceBoot = objc.RegisterName("timeSinceBoot")
-	_mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelSetTimeSinceBoot = objc.RegisterName("setTimeSinceBoot:")
-	_mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelContent = objc.RegisterName("content")
-	_mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelSetContent = objc.RegisterName("setContent:")
-	_mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelTimeStamp = objc.RegisterName("timeStamp")
-	_mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelSetTimeStamp = objc.RegisterName("setTimeStamp:")
+	_mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelStatus                     = objc.RegisterName("status")
+	_mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelSetStatus                  = objc.RegisterName("setStatus:")
+	_mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelLogContent                 = objc.RegisterName("logContent")
+	_mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelSetLogContent              = objc.RegisterName("setLogContent:")
+	_mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelUtcTimeStamp               = objc.RegisterName("utcTimeStamp")
+	_mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelSetUtcTimeStamp            = objc.RegisterName("setUtcTimeStamp:")
+	_mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelTimeSinceBoot              = objc.RegisterName("timeSinceBoot")
+	_mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelSetTimeSinceBoot           = objc.RegisterName("setTimeSinceBoot:")
+	_mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelContent                    = objc.RegisterName("content")
+	_mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelSetContent                 = objc.RegisterName("setContent:")
+	_mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelTimeStamp                  = objc.RegisterName("timeStamp")
+	_mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelSetTimeStamp               = objc.RegisterName("setTimeStamp:")
 )
 
 func MTRDiagnosticLogsClusterRetrieveLogsResponseParamsFromID(id objc.ID) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams {
@@ -50,7 +50,9 @@ func MTRDiagnosticLogsClusterRetrieveLogsResponseParamsFromID(id objc.ID) *MTRDi
 func (o *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRDiagnosticLogsClusterRetrieveLogsResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -59,7 +61,9 @@ func (o *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) InitWithResponseVal
 
 func (o *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) Status() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -69,7 +73,9 @@ func (o *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) SetStatus(status *f
 
 func (o *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) LogContent() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelLogContent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -79,7 +85,9 @@ func (o *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) SetLogContent(logCo
 
 func (o *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) UtcTimeStamp() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelUtcTimeStamp)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -89,7 +97,9 @@ func (o *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) SetUtcTimeStamp(utc
 
 func (o *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) TimeSinceBoot() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelTimeSinceBoot)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -100,7 +110,9 @@ func (o *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) SetTimeSinceBoot(ti
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -110,7 +122,9 @@ func (o *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) SetTimedInvokeTimeo
 
 func (o *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) Content() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelContent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -120,11 +134,12 @@ func (o *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) SetContent(content 
 
 func (o *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) TimeStamp() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelTimeStamp)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) SetTimeStamp(timeStamp *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDiagnosticLogsClusterRetrieveLogsResponseParamsSelSetTimeStamp, timeStamp.Ptr())
 }
-

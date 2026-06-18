@@ -16,21 +16,21 @@ type NSPageController struct {
 }
 
 var (
-	_clsNSPageController = _objcClass("NSPageController")
+	_clsNSPageController                        = _objcClass("NSPageController")
 	_nSPageControllerSelNavigateForwardToObject = objc.RegisterName("navigateForwardToObject:")
-	_nSPageControllerSelCompleteTransition = objc.RegisterName("completeTransition")
-	_nSPageControllerSelNavigateBack = objc.RegisterName("navigateBack:")
-	_nSPageControllerSelNavigateForward = objc.RegisterName("navigateForward:")
-	_nSPageControllerSelTakeSelectedIndexFrom = objc.RegisterName("takeSelectedIndexFrom:")
-	_nSPageControllerSelDelegate = objc.RegisterName("delegate")
-	_nSPageControllerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSPageControllerSelSelectedViewController = objc.RegisterName("selectedViewController")
-	_nSPageControllerSelTransitionStyle = objc.RegisterName("transitionStyle")
-	_nSPageControllerSelSetTransitionStyle = objc.RegisterName("setTransitionStyle:")
-	_nSPageControllerSelArrangedObjects = objc.RegisterName("arrangedObjects")
-	_nSPageControllerSelSetArrangedObjects = objc.RegisterName("setArrangedObjects:")
-	_nSPageControllerSelSelectedIndex = objc.RegisterName("selectedIndex")
-	_nSPageControllerSelSetSelectedIndex = objc.RegisterName("setSelectedIndex:")
+	_nSPageControllerSelCompleteTransition      = objc.RegisterName("completeTransition")
+	_nSPageControllerSelNavigateBack            = objc.RegisterName("navigateBack:")
+	_nSPageControllerSelNavigateForward         = objc.RegisterName("navigateForward:")
+	_nSPageControllerSelTakeSelectedIndexFrom   = objc.RegisterName("takeSelectedIndexFrom:")
+	_nSPageControllerSelDelegate                = objc.RegisterName("delegate")
+	_nSPageControllerSelSetDelegate             = objc.RegisterName("setDelegate:")
+	_nSPageControllerSelSelectedViewController  = objc.RegisterName("selectedViewController")
+	_nSPageControllerSelTransitionStyle         = objc.RegisterName("transitionStyle")
+	_nSPageControllerSelSetTransitionStyle      = objc.RegisterName("setTransitionStyle:")
+	_nSPageControllerSelArrangedObjects         = objc.RegisterName("arrangedObjects")
+	_nSPageControllerSelSetArrangedObjects      = objc.RegisterName("setArrangedObjects:")
+	_nSPageControllerSelSelectedIndex           = objc.RegisterName("selectedIndex")
+	_nSPageControllerSelSetSelectedIndex        = objc.RegisterName("setSelectedIndex:")
 )
 
 func NSPageControllerFromID(id objc.ID) *NSPageController {
@@ -74,7 +74,9 @@ func (o *NSPageController) SetDelegate(delegate NSPageControllerDelegate) {
 
 func (o *NSPageController) SelectedViewController() *NSViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPageControllerSelSelectedViewController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewControllerFromID(_ret)
 }
 
@@ -104,4 +106,3 @@ func (o *NSPageController) SelectedIndex() int {
 func (o *NSPageController) SetSelectedIndex(selectedIndex int) {
 	o.Ptr().Send(_nSPageControllerSelSetSelectedIndex, selectedIndex)
 }
-

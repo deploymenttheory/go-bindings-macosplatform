@@ -58,4 +58,3 @@ type SyncEngineFailedRecordSaveable interface {
 }
 
 var _ SyncEngineFailedRecordSaveable = (*SyncEngineFailedRecordSave)(nil)
-

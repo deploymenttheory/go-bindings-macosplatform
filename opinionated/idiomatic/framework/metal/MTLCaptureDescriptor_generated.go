@@ -99,4 +99,3 @@ type CaptureDescriptorable interface {
 }
 
 var _ CaptureDescriptorable = (*CaptureDescriptor)(nil)
-

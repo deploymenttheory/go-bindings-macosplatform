@@ -82,4 +82,3 @@ type MorphologyPronounable interface {
 }
 
 var _ MorphologyPronounable = (*MorphologyPronoun)(nil)
-

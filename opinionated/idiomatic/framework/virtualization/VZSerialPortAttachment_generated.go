@@ -43,4 +43,3 @@ type SerialPortAttachmentable interface {
 }
 
 var _ SerialPortAttachmentable = (*SerialPortAttachment)(nil)
-

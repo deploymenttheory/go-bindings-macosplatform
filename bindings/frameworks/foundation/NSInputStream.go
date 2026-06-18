@@ -15,16 +15,16 @@ type NSInputStream struct {
 }
 
 var (
-	_clsNSInputStream = _objcClass("NSInputStream")
-	_nSInputStreamSelReadMaxLength = objc.RegisterName("read:maxLength:")
-	_nSInputStreamSelGetBufferLength = objc.RegisterName("getBuffer:length:")
-	_nSInputStreamSelInitWithData = objc.RegisterName("initWithData:")
-	_nSInputStreamSelInitWithURL = objc.RegisterName("initWithURL:")
-	_nSInputStreamSelHasBytesAvailable = objc.RegisterName("hasBytesAvailable")
-	_nSInputStreamSelInitWithFileAtPath = objc.RegisterName("initWithFileAtPath:")
-	_nSInputStreamSelInputStreamWithData = objc.RegisterName("inputStreamWithData:")
+	_clsNSInputStream                          = _objcClass("NSInputStream")
+	_nSInputStreamSelReadMaxLength             = objc.RegisterName("read:maxLength:")
+	_nSInputStreamSelGetBufferLength           = objc.RegisterName("getBuffer:length:")
+	_nSInputStreamSelInitWithData              = objc.RegisterName("initWithData:")
+	_nSInputStreamSelInitWithURL               = objc.RegisterName("initWithURL:")
+	_nSInputStreamSelHasBytesAvailable         = objc.RegisterName("hasBytesAvailable")
+	_nSInputStreamSelInitWithFileAtPath        = objc.RegisterName("initWithFileAtPath:")
+	_nSInputStreamSelInputStreamWithData       = objc.RegisterName("inputStreamWithData:")
 	_nSInputStreamSelInputStreamWithFileAtPath = objc.RegisterName("inputStreamWithFileAtPath:")
-	_nSInputStreamSelInputStreamWithURL = objc.RegisterName("inputStreamWithURL:")
+	_nSInputStreamSelInputStreamWithURL        = objc.RegisterName("inputStreamWithURL:")
 )
 
 func NSInputStreamFromID(id objc.ID) *NSInputStream {
@@ -49,13 +49,17 @@ func (o *NSInputStream) GetBufferLength(buffer *uint8, len_ *uint) bool {
 
 func (o *NSInputStream) InitWithData(data *NSData) *NSInputStream {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSInputStreamSelInitWithData, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSInputStreamFromID(_ret)
 }
 
 func (o *NSInputStream) InitWithURL(url *NSURL) *NSInputStream {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSInputStreamSelInitWithURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSInputStreamFromID(_ret)
 }
 
@@ -66,25 +70,32 @@ func (o *NSInputStream) HasBytesAvailable() bool {
 
 func (o *NSInputStream) InitWithFileAtPath(path *NSString) *NSInputStream {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSInputStreamSelInitWithFileAtPath, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSInputStreamFromID(_ret)
 }
 
 func NSInputStreamInputStreamWithData(data *NSData) *NSInputStream {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSInputStream), _nSInputStreamSelInputStreamWithData, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSInputStreamFromID(_ret)
 }
 
 func NSInputStreamInputStreamWithFileAtPath(path *NSString) *NSInputStream {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSInputStream), _nSInputStreamSelInputStreamWithFileAtPath, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSInputStreamFromID(_ret)
 }
 
 func NSInputStreamInputStreamWithURL(url *NSURL) *NSInputStream {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSInputStream), _nSInputStreamSelInputStreamWithURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSInputStreamFromID(_ret)
 }
-

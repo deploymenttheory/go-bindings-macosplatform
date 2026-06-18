@@ -16,9 +16,9 @@ type CSLocalizedString struct {
 }
 
 var (
-	_clsCSLocalizedString = _objcClass("CSLocalizedString")
+	_clsCSLocalizedString                         = _objcClass("CSLocalizedString")
 	_cSLocalizedStringSelInitWithLocalizedStrings = objc.RegisterName("initWithLocalizedStrings:")
-	_cSLocalizedStringSelLocalizedString = objc.RegisterName("localizedString")
+	_cSLocalizedStringSelLocalizedString          = objc.RegisterName("localizedString")
 )
 
 func CSLocalizedStringFromID(id objc.ID) *CSLocalizedString {
@@ -33,13 +33,16 @@ func CSLocalizedStringFromID(id objc.ID) *CSLocalizedString {
 
 func (o *CSLocalizedString) InitWithLocalizedStrings(localizedStrings *foundation.NSDictionary[objc.ID, objc.ID]) *CSLocalizedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSLocalizedStringSelInitWithLocalizedStrings, localizedStrings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CSLocalizedStringFromID(_ret)
 }
 
 func (o *CSLocalizedString) LocalizedString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSLocalizedStringSelLocalizedString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

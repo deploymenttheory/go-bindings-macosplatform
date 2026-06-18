@@ -16,8 +16,8 @@ type VNImageBasedRequest struct {
 }
 
 var (
-	_clsVNImageBasedRequest = _objcClass("VNImageBasedRequest")
-	_vNImageBasedRequestSelRegionOfInterest = objc.RegisterName("regionOfInterest")
+	_clsVNImageBasedRequest                    = _objcClass("VNImageBasedRequest")
+	_vNImageBasedRequestSelRegionOfInterest    = objc.RegisterName("regionOfInterest")
 	_vNImageBasedRequestSelSetRegionOfInterest = objc.RegisterName("setRegionOfInterest:")
 )
 
@@ -39,4 +39,3 @@ func (o *VNImageBasedRequest) RegionOfInterest() corefoundation.CGRect {
 func (o *VNImageBasedRequest) SetRegionOfInterest(regionOfInterest corefoundation.CGRect) {
 	o.Ptr().Send(_vNImageBasedRequestSelSetRegionOfInterest, regionOfInterest)
 }
-

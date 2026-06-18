@@ -16,12 +16,12 @@ type NSCollectionViewCompositionalLayoutConfiguration struct {
 }
 
 var (
-	_clsNSCollectionViewCompositionalLayoutConfiguration = _objcClass("NSCollectionViewCompositionalLayoutConfiguration")
-	_nSCollectionViewCompositionalLayoutConfigurationSelScrollDirection = objc.RegisterName("scrollDirection")
-	_nSCollectionViewCompositionalLayoutConfigurationSelSetScrollDirection = objc.RegisterName("setScrollDirection:")
-	_nSCollectionViewCompositionalLayoutConfigurationSelInterSectionSpacing = objc.RegisterName("interSectionSpacing")
-	_nSCollectionViewCompositionalLayoutConfigurationSelSetInterSectionSpacing = objc.RegisterName("setInterSectionSpacing:")
-	_nSCollectionViewCompositionalLayoutConfigurationSelBoundarySupplementaryItems = objc.RegisterName("boundarySupplementaryItems")
+	_clsNSCollectionViewCompositionalLayoutConfiguration                              = _objcClass("NSCollectionViewCompositionalLayoutConfiguration")
+	_nSCollectionViewCompositionalLayoutConfigurationSelScrollDirection               = objc.RegisterName("scrollDirection")
+	_nSCollectionViewCompositionalLayoutConfigurationSelSetScrollDirection            = objc.RegisterName("setScrollDirection:")
+	_nSCollectionViewCompositionalLayoutConfigurationSelInterSectionSpacing           = objc.RegisterName("interSectionSpacing")
+	_nSCollectionViewCompositionalLayoutConfigurationSelSetInterSectionSpacing        = objc.RegisterName("setInterSectionSpacing:")
+	_nSCollectionViewCompositionalLayoutConfigurationSelBoundarySupplementaryItems    = objc.RegisterName("boundarySupplementaryItems")
 	_nSCollectionViewCompositionalLayoutConfigurationSelSetBoundarySupplementaryItems = objc.RegisterName("setBoundarySupplementaryItems:")
 )
 
@@ -55,11 +55,12 @@ func (o *NSCollectionViewCompositionalLayoutConfiguration) SetInterSectionSpacin
 
 func (o *NSCollectionViewCompositionalLayoutConfiguration) BoundarySupplementaryItems() *foundation.NSArray[*NSCollectionLayoutBoundarySupplementaryItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewCompositionalLayoutConfigurationSelBoundarySupplementaryItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSCollectionLayoutBoundarySupplementaryItem](_ret)
 }
 
 func (o *NSCollectionViewCompositionalLayoutConfiguration) SetBoundarySupplementaryItems(boundarySupplementaryItems *foundation.NSArray[*NSCollectionLayoutBoundarySupplementaryItem]) {
 	o.Ptr().Send(_nSCollectionViewCompositionalLayoutConfigurationSelSetBoundarySupplementaryItems, boundarySupplementaryItems.Ptr())
 }
-

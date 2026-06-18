@@ -55,9 +55,13 @@ func (x *SuicaPassProperties) IsGreenCarTicketUsed() bool {
 	return x.inner.IsGreenCarTicketUsed()
 }
 
-func (x *SuicaPassProperties) asTransitPassProperties() *raw.PKTransitPassProperties { return &x.inner.PKTransitPassProperties }
+func (x *SuicaPassProperties) asTransitPassProperties() *raw.PKTransitPassProperties {
+	return &x.inner.PKTransitPassProperties
+}
 
-func (x *SuicaPassProperties) asStoredValuePassProperties() *raw.PKStoredValuePassProperties { return &x.inner.PKTransitPassProperties.PKStoredValuePassProperties }
+func (x *SuicaPassProperties) asStoredValuePassProperties() *raw.PKStoredValuePassProperties {
+	return &x.inner.PKTransitPassProperties.PKStoredValuePassProperties
+}
 
 // SuicaPassPropertiesable is the interface implemented by [SuicaPassProperties], for mocking and DI.
 type SuicaPassPropertiesable interface {
@@ -69,4 +73,3 @@ type SuicaPassPropertiesable interface {
 }
 
 var _ SuicaPassPropertiesable = (*SuicaPassProperties)(nil)
-

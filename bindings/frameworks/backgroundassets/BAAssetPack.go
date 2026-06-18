@@ -16,12 +16,12 @@ type BAAssetPack struct {
 }
 
 var (
-	_clsBAAssetPack = _objcClass("BAAssetPack")
-	_bAAssetPackSelDownload = objc.RegisterName("download")
+	_clsBAAssetPack                          = _objcClass("BAAssetPack")
+	_bAAssetPackSelDownload                  = objc.RegisterName("download")
 	_bAAssetPackSelDownloadForContentRequest = objc.RegisterName("downloadForContentRequest:")
-	_bAAssetPackSelIdentifier = objc.RegisterName("identifier")
-	_bAAssetPackSelDownloadSize = objc.RegisterName("downloadSize")
-	_bAAssetPackSelUserInfo = objc.RegisterName("userInfo")
+	_bAAssetPackSelIdentifier                = objc.RegisterName("identifier")
+	_bAAssetPackSelDownloadSize              = objc.RegisterName("downloadSize")
+	_bAAssetPackSelUserInfo                  = objc.RegisterName("userInfo")
 )
 
 func BAAssetPackFromID(id objc.ID) *BAAssetPack {
@@ -34,24 +34,30 @@ func BAAssetPackFromID(id objc.ID) *BAAssetPack {
 	return o
 }
 
-// Creates a download object for the asset pack that you schedule using a download manager. - Remark: Use this method in your main app; use ``BAAssetPack/downloadForContentRequest:`` instead in your downloader extension.
+// Creates a download object for the asset pack that you schedule using a download manager. - Remark: Use this method in your main app; use “BAAssetPack/downloadForContentRequest:“ instead in your downloader extension.
 func (o *BAAssetPack) Download() *BADownload {
 	_ret := objc.Send[objc.ID](o.Ptr(), _bAAssetPackSelDownload)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return BADownloadFromID(_ret)
 }
 
-// Creates a download object for the asset pack that you schedule using a download manager. - Parameter contentRequest: The content request for the current extension invocation. - Returns: A download object. - Remark: Use this method in your downloader extension; use ``BAAssetPack/download`` instead in your main app.
+// Creates a download object for the asset pack that you schedule using a download manager. - Parameter contentRequest: The content request for the current extension invocation. - Returns: A download object. - Remark: Use this method in your downloader extension; use “BAAssetPack/download“ instead in your main app.
 func (o *BAAssetPack) DownloadForContentRequest(contentRequest BAContentRequest) *BADownload {
 	_ret := objc.Send[objc.ID](o.Ptr(), _bAAssetPackSelDownloadForContentRequest, contentRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return BADownloadFromID(_ret)
 }
 
 // A unique identifier for the asset pack.
 func (o *BAAssetPack) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _bAAssetPackSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -64,7 +70,8 @@ func (o *BAAssetPack) DownloadSize() int {
 // JSON-encoded custom information that’s associated with the asset pack. This property is `nil` for Apple-hosted asset packs.
 func (o *BAAssetPack) UserInfo() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _bAAssetPackSelUserInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

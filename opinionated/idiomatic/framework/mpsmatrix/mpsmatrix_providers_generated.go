@@ -32,4 +32,3 @@ type MatrixSoftMaxGradientProvider interface {
 type MatrixUnaryKernelProvider interface {
 	asMatrixUnaryKernel() *raw.MPSMatrixUnaryKernel
 }
-

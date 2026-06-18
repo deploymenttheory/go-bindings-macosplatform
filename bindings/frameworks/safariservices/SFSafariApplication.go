@@ -19,13 +19,13 @@ type SFSafariApplication struct {
 }
 
 var (
-	_clsSFSafariApplication = _objcClass("SFSafariApplication")
-	_sFSafariApplicationSelGetActiveWindowWithCompletionHandler = objc.RegisterName("getActiveWindowWithCompletionHandler:")
-	_sFSafariApplicationSelGetAllWindowsWithCompletionHandler = objc.RegisterName("getAllWindowsWithCompletionHandler:")
-	_sFSafariApplicationSelOpenWindowWithURLCompletionHandler = objc.RegisterName("openWindowWithURL:completionHandler:")
-	_sFSafariApplicationSelSetToolbarItemsNeedUpdate = objc.RegisterName("setToolbarItemsNeedUpdate")
-	_sFSafariApplicationSelGetHostApplicationWithCompletionHandler = objc.RegisterName("getHostApplicationWithCompletionHandler:")
-	_sFSafariApplicationSelShowPreferencesForExtensionWithIdentifierCompletionHandler = objc.RegisterName("showPreferencesForExtensionWithIdentifier:completionHandler:")
+	_clsSFSafariApplication                                                                          = _objcClass("SFSafariApplication")
+	_sFSafariApplicationSelGetActiveWindowWithCompletionHandler                                      = objc.RegisterName("getActiveWindowWithCompletionHandler:")
+	_sFSafariApplicationSelGetAllWindowsWithCompletionHandler                                        = objc.RegisterName("getAllWindowsWithCompletionHandler:")
+	_sFSafariApplicationSelOpenWindowWithURLCompletionHandler                                        = objc.RegisterName("openWindowWithURL:completionHandler:")
+	_sFSafariApplicationSelSetToolbarItemsNeedUpdate                                                 = objc.RegisterName("setToolbarItemsNeedUpdate")
+	_sFSafariApplicationSelGetHostApplicationWithCompletionHandler                                   = objc.RegisterName("getHostApplicationWithCompletionHandler:")
+	_sFSafariApplicationSelShowPreferencesForExtensionWithIdentifierCompletionHandler                = objc.RegisterName("showPreferencesForExtensionWithIdentifier:completionHandler:")
 	_sFSafariApplicationSelDispatchMessageWithNameToExtensionWithIdentifierUserInfoCompletionHandler = objc.RegisterName("dispatchMessageWithName:toExtensionWithIdentifier:userInfo:completionHandler:")
 )
 
@@ -126,4 +126,3 @@ func SFSafariApplicationDispatchMessageWithNameToExtensionWithIdentifierUserInfo
 	}
 	objc.ID(_clsSFSafariApplication).Send(_sFSafariApplicationSelDispatchMessageWithNameToExtensionWithIdentifierUserInfoCompletionHandler, messageName.Ptr(), identifier.Ptr(), userInfo, __block_completionHandler)
 }
-

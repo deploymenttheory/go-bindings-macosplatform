@@ -51,7 +51,9 @@ func (x *InflectionRuleExplicit) Morphology() *Morphology {
 	return &Morphology{inner: _r}
 }
 
-func (x *InflectionRuleExplicit) asInflectionRule() *raw.NSInflectionRule { return &x.inner.NSInflectionRule }
+func (x *InflectionRuleExplicit) asInflectionRule() *raw.NSInflectionRule {
+	return &x.inner.NSInflectionRule
+}
 
 func (x *InflectionRuleExplicit) asObject() *raw.NSObject { return &x.inner.NSInflectionRule.NSObject }
 
@@ -63,4 +65,3 @@ type InflectionRuleExplicitable interface {
 }
 
 var _ InflectionRuleExplicitable = (*InflectionRuleExplicit)(nil)
-

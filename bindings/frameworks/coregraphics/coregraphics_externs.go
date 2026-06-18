@@ -13,37 +13,49 @@ import (
 
 func CGAffineTransformIdentity() corefoundation.CGAffineTransform {
 	ptr, _ := purego.Dlsym(_coregraphicsLib, "CGAffineTransformIdentity")
-	if ptr == 0 { return corefoundation.CGAffineTransform{} }
+	if ptr == 0 {
+		return corefoundation.CGAffineTransform{}
+	}
 	return *(*corefoundation.CGAffineTransform)(unsafe.Pointer(ptr))
 }
 
 func CGPointZero() corefoundation.CGPoint {
 	ptr, _ := purego.Dlsym(_coregraphicsLib, "CGPointZero")
-	if ptr == 0 { return corefoundation.CGPoint{} }
+	if ptr == 0 {
+		return corefoundation.CGPoint{}
+	}
 	return *(*corefoundation.CGPoint)(unsafe.Pointer(ptr))
 }
 
 func CGRectInfinite() corefoundation.CGRect {
 	ptr, _ := purego.Dlsym(_coregraphicsLib, "CGRectInfinite")
-	if ptr == 0 { return corefoundation.CGRect{} }
+	if ptr == 0 {
+		return corefoundation.CGRect{}
+	}
 	return *(*corefoundation.CGRect)(unsafe.Pointer(ptr))
 }
 
 func CGRectNull() corefoundation.CGRect {
 	ptr, _ := purego.Dlsym(_coregraphicsLib, "CGRectNull")
-	if ptr == 0 { return corefoundation.CGRect{} }
+	if ptr == 0 {
+		return corefoundation.CGRect{}
+	}
 	return *(*corefoundation.CGRect)(unsafe.Pointer(ptr))
 }
 
 func CGRectZero() corefoundation.CGRect {
 	ptr, _ := purego.Dlsym(_coregraphicsLib, "CGRectZero")
-	if ptr == 0 { return corefoundation.CGRect{} }
+	if ptr == 0 {
+		return corefoundation.CGRect{}
+	}
 	return *(*corefoundation.CGRect)(unsafe.Pointer(ptr))
 }
 
 func CGSizeZero() corefoundation.CGSize {
 	ptr, _ := purego.Dlsym(_coregraphicsLib, "CGSizeZero")
-	if ptr == 0 { return corefoundation.CGSize{} }
+	if ptr == 0 {
+		return corefoundation.CGSize{}
+	}
 	return *(*corefoundation.CGSize)(unsafe.Pointer(ptr))
 }
 
@@ -293,7 +305,9 @@ func KCGContentAverageLightLevelNits() uintptr {
 
 func KCGDefaultHDRImageContentHeadroom() float32 {
 	ptr, _ := purego.Dlsym(_coregraphicsLib, "kCGDefaultHDRImageContentHeadroom")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float32)(unsafe.Pointer(ptr))
 }
 
@@ -622,4 +636,3 @@ func KCGWindowWorkspace() uintptr {
 	ptr, _ := purego.Dlsym(_coregraphicsLib, "kCGWindowWorkspace")
 	return ptr
 }
-

@@ -168,4 +168,3 @@ type AVB17221AECPMessageable interface {
 }
 
 var _ AVB17221AECPMessageable = (*AVB17221AECPMessage)(nil)
-

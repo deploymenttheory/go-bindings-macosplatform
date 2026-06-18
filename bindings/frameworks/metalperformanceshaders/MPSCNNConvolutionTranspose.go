@@ -21,32 +21,32 @@ type MPSCNNConvolutionTranspose struct {
 }
 
 var (
-	_clsMPSCNNConvolutionTranspose = _objcClass("MPSCNNConvolutionTranspose")
-	_mPSCNNConvolutionTransposeSelInitWithDeviceWeights = objc.RegisterName("initWithDevice:weights:")
-	_mPSCNNConvolutionTransposeSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSCNNConvolutionTransposeSelEncodeToCommandBufferSourceImageConvolutionGradientState = objc.RegisterName("encodeToCommandBuffer:sourceImage:convolutionGradientState:")
-	_mPSCNNConvolutionTransposeSelEncodeBatchToCommandBufferSourceImagesConvolutionGradientStates = objc.RegisterName("encodeBatchToCommandBuffer:sourceImages:convolutionGradientStates:")
-	_mPSCNNConvolutionTransposeSelEncodeToCommandBufferSourceImageConvolutionGradientStateDestinationImage = objc.RegisterName("encodeToCommandBuffer:sourceImage:convolutionGradientState:destinationImage:")
-	_mPSCNNConvolutionTransposeSelEncodeBatchToCommandBufferSourceImagesConvolutionGradientStatesDestinationImages = objc.RegisterName("encodeBatchToCommandBuffer:sourceImages:convolutionGradientStates:destinationImages:")
-	_mPSCNNConvolutionTransposeSelResultStateForSourceImageSourceStatesDestinationImage = objc.RegisterName("resultStateForSourceImage:sourceStates:destinationImage:")
-	_mPSCNNConvolutionTransposeSelResultStateBatchForSourceImageSourceStatesDestinationImage = objc.RegisterName("resultStateBatchForSourceImage:sourceStates:destinationImage:")
-	_mPSCNNConvolutionTransposeSelTemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage = objc.RegisterName("temporaryResultStateForCommandBuffer:sourceImage:sourceStates:destinationImage:")
-	_mPSCNNConvolutionTransposeSelTemporaryResultStateBatchForCommandBufferSourceImageSourceStatesDestinationImage = objc.RegisterName("temporaryResultStateBatchForCommandBuffer:sourceImage:sourceStates:destinationImage:")
-	_mPSCNNConvolutionTransposeSelReloadWeightsAndBiasesFromDataSource = objc.RegisterName("reloadWeightsAndBiasesFromDataSource")
-	_mPSCNNConvolutionTransposeSelReloadWeightsAndBiasesWithCommandBufferState = objc.RegisterName("reloadWeightsAndBiasesWithCommandBuffer:state:")
-	_mPSCNNConvolutionTransposeSelExportWeightsAndBiasesWithCommandBufferResultStateCanBeTemporary = objc.RegisterName("exportWeightsAndBiasesWithCommandBuffer:resultStateCanBeTemporary:")
-	_mPSCNNConvolutionTransposeSelEncodeToCommandBufferSourceImageConvolutionGradientStateDestinationStateDestinationStateIsTemporary = objc.RegisterName("encodeToCommandBuffer:sourceImage:convolutionGradientState:destinationState:destinationStateIsTemporary:")
+	_clsMPSCNNConvolutionTranspose                                                                                                            = _objcClass("MPSCNNConvolutionTranspose")
+	_mPSCNNConvolutionTransposeSelInitWithDeviceWeights                                                                                       = objc.RegisterName("initWithDevice:weights:")
+	_mPSCNNConvolutionTransposeSelInitWithCoderDevice                                                                                         = objc.RegisterName("initWithCoder:device:")
+	_mPSCNNConvolutionTransposeSelEncodeToCommandBufferSourceImageConvolutionGradientState                                                    = objc.RegisterName("encodeToCommandBuffer:sourceImage:convolutionGradientState:")
+	_mPSCNNConvolutionTransposeSelEncodeBatchToCommandBufferSourceImagesConvolutionGradientStates                                             = objc.RegisterName("encodeBatchToCommandBuffer:sourceImages:convolutionGradientStates:")
+	_mPSCNNConvolutionTransposeSelEncodeToCommandBufferSourceImageConvolutionGradientStateDestinationImage                                    = objc.RegisterName("encodeToCommandBuffer:sourceImage:convolutionGradientState:destinationImage:")
+	_mPSCNNConvolutionTransposeSelEncodeBatchToCommandBufferSourceImagesConvolutionGradientStatesDestinationImages                            = objc.RegisterName("encodeBatchToCommandBuffer:sourceImages:convolutionGradientStates:destinationImages:")
+	_mPSCNNConvolutionTransposeSelResultStateForSourceImageSourceStatesDestinationImage                                                       = objc.RegisterName("resultStateForSourceImage:sourceStates:destinationImage:")
+	_mPSCNNConvolutionTransposeSelResultStateBatchForSourceImageSourceStatesDestinationImage                                                  = objc.RegisterName("resultStateBatchForSourceImage:sourceStates:destinationImage:")
+	_mPSCNNConvolutionTransposeSelTemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage                                 = objc.RegisterName("temporaryResultStateForCommandBuffer:sourceImage:sourceStates:destinationImage:")
+	_mPSCNNConvolutionTransposeSelTemporaryResultStateBatchForCommandBufferSourceImageSourceStatesDestinationImage                            = objc.RegisterName("temporaryResultStateBatchForCommandBuffer:sourceImage:sourceStates:destinationImage:")
+	_mPSCNNConvolutionTransposeSelReloadWeightsAndBiasesFromDataSource                                                                        = objc.RegisterName("reloadWeightsAndBiasesFromDataSource")
+	_mPSCNNConvolutionTransposeSelReloadWeightsAndBiasesWithCommandBufferState                                                                = objc.RegisterName("reloadWeightsAndBiasesWithCommandBuffer:state:")
+	_mPSCNNConvolutionTransposeSelExportWeightsAndBiasesWithCommandBufferResultStateCanBeTemporary                                            = objc.RegisterName("exportWeightsAndBiasesWithCommandBuffer:resultStateCanBeTemporary:")
+	_mPSCNNConvolutionTransposeSelEncodeToCommandBufferSourceImageConvolutionGradientStateDestinationStateDestinationStateIsTemporary         = objc.RegisterName("encodeToCommandBuffer:sourceImage:convolutionGradientState:destinationState:destinationStateIsTemporary:")
 	_mPSCNNConvolutionTransposeSelEncodeBatchToCommandBufferSourceImagesConvolutionGradientStatesDestinationStatesDestinationStateIsTemporary = objc.RegisterName("encodeBatchToCommandBuffer:sourceImages:convolutionGradientStates:destinationStates:destinationStateIsTemporary:")
-	_mPSCNNConvolutionTransposeSelInputFeatureChannels = objc.RegisterName("inputFeatureChannels")
-	_mPSCNNConvolutionTransposeSelOutputFeatureChannels = objc.RegisterName("outputFeatureChannels")
-	_mPSCNNConvolutionTransposeSelKernelOffsetX = objc.RegisterName("kernelOffsetX")
-	_mPSCNNConvolutionTransposeSelSetKernelOffsetX = objc.RegisterName("setKernelOffsetX:")
-	_mPSCNNConvolutionTransposeSelKernelOffsetY = objc.RegisterName("kernelOffsetY")
-	_mPSCNNConvolutionTransposeSelSetKernelOffsetY = objc.RegisterName("setKernelOffsetY:")
-	_mPSCNNConvolutionTransposeSelGroups = objc.RegisterName("groups")
-	_mPSCNNConvolutionTransposeSelAccumulatorPrecisionOption = objc.RegisterName("accumulatorPrecisionOption")
-	_mPSCNNConvolutionTransposeSelSetAccumulatorPrecisionOption = objc.RegisterName("setAccumulatorPrecisionOption:")
-	_mPSCNNConvolutionTransposeSelDataSource = objc.RegisterName("dataSource")
+	_mPSCNNConvolutionTransposeSelInputFeatureChannels                                                                                        = objc.RegisterName("inputFeatureChannels")
+	_mPSCNNConvolutionTransposeSelOutputFeatureChannels                                                                                       = objc.RegisterName("outputFeatureChannels")
+	_mPSCNNConvolutionTransposeSelKernelOffsetX                                                                                               = objc.RegisterName("kernelOffsetX")
+	_mPSCNNConvolutionTransposeSelSetKernelOffsetX                                                                                            = objc.RegisterName("setKernelOffsetX:")
+	_mPSCNNConvolutionTransposeSelKernelOffsetY                                                                                               = objc.RegisterName("kernelOffsetY")
+	_mPSCNNConvolutionTransposeSelSetKernelOffsetY                                                                                            = objc.RegisterName("setKernelOffsetY:")
+	_mPSCNNConvolutionTransposeSelGroups                                                                                                      = objc.RegisterName("groups")
+	_mPSCNNConvolutionTransposeSelAccumulatorPrecisionOption                                                                                  = objc.RegisterName("accumulatorPrecisionOption")
+	_mPSCNNConvolutionTransposeSelSetAccumulatorPrecisionOption                                                                               = objc.RegisterName("setAccumulatorPrecisionOption:")
+	_mPSCNNConvolutionTransposeSelDataSource                                                                                                  = objc.RegisterName("dataSource")
 )
 
 func MPSCNNConvolutionTransposeFromID(id objc.ID) *MPSCNNConvolutionTranspose {
@@ -62,21 +62,27 @@ func MPSCNNConvolutionTransposeFromID(id objc.ID) *MPSCNNConvolutionTranspose {
 // @abstract   Initializes a convolution transpose kernel @param      device                          The MTLDevice on which this MPSCNNConvolutionTranspose filter will be used @param      weights                         A pointer to a object that conforms to the MPSCNNConvolutionDataSource protocol. The MPSCNNConvolutionDataSource protocol declares the methods that an instance of MPSCNNConvolutionTranspose uses to obtain the weights and bias terms for the CNN convolutionTranspose filter. Currently we support only Float32 weights. @return     A valid MPSCNNConvolutionTranspose object.
 func (o *MPSCNNConvolutionTranspose) InitWithDeviceWeights(device metal.MTLDevice, weights mpsneuralnetwork.MPSCNNConvolutionDataSource) *MPSCNNConvolutionTranspose {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionTransposeSelInitWithDeviceWeights, device, weights)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNConvolutionTransposeFromID(_ret)
 }
 
 // @abstract <NSSecureCoding> support
 func (o *MPSCNNConvolutionTranspose) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSCNNConvolutionTranspose {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionTransposeSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNConvolutionTransposeFromID(_ret)
 }
 
 // @abstract       Encode a MPSCNNKernel into a command Buffer. Create a texture to hold the result and return it. @discussion     In the first iteration on this method, encodeToCommandBuffer:sourceImage:destinationImage: some work was left for the developer to do in the form of correctly setting the offset property and sizing the result buffer. With the introduction of the padding policy (see padding property) the filter can do this work itself. If you would like to have some input into what sort of MPSImage (e.g. temporary vs. regular) or what size it is or where it is allocated, you may set the destinationImageAllocator to allocate the image yourself. This method uses the MPSNNPadding padding property to figure out how to size the result image and to set the offset property. See discussion in MPSNeuralNetworkTypes.h. Note: the regular encodeToCommandBuffer:sourceImage: method may be used when no state is needed, such as when the convolution transpose operation is not balanced by a matching convolution object upstream. These encode methods are for auto encoders where each convolution in inference pass is coupled with convolution transpose. In order for convolution transpose to correctly undo the convolution downsampling, MPSCNNConvolutionGradientState produced by convolution is needed by convolution transpose to correctly size destination image. These methods are only useful for inference only network. For training, use encode methods that take MPSCNNConvolutionTransposeGradientState below. @param          commandBuffer       The command buffer @param          sourceImage         A MPSImage to use as the source images for the filter. @param          convolutionGradientState    A valid MPSCNNConvolutionGradientState from the MPSCNNConvoluton counterpart to this MPSCNNConvolutionTranspose. If there is no forward convolution counterpart, pass NULL here. This state affects the sizing the result. @result         A MPSImage or MPSTemporaryImage allocated per the destinationImageAllocator containing the output of the graph. The offset property will be adjusted to reflect the offset used during the encode. The returned image will be automatically released when the command buffer completes. If you want to keep it around for longer, retain the image. (ARC will do this for you if you use it later.)
 func (o *MPSCNNConvolutionTranspose) EncodeToCommandBufferSourceImageConvolutionGradientState(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, convolutionGradientState *mpsneuralnetwork.MPSCNNConvolutionGradientState) *mpscore.MPSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionTransposeSelEncodeToCommandBufferSourceImageConvolutionGradientState, commandBuffer, sourceImage.Ptr(), convolutionGradientState.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpscore.MPSImageFromID(_ret)
 }
 
@@ -96,7 +102,9 @@ func (o *MPSCNNConvolutionTranspose) EncodeBatchToCommandBufferSourceImagesConvo
 // @abstract   Allocate a MPCNNConvolutionTransposeGradientState to hold the results from a -encodeBatchToCommandBuffer... operation @param      sourceImage         The MPSImage consumed by the associated -encode call. @param      sourceStates        The list of MPSCNNConvolutionGradientState consumed by the associated -encode call, for a batch size of 1. In auto encoders, this state is produced by corresponding MPSCNNConvolution. @return     The list of states produced by the -encode call for batch size of 1. -isResultStateReusedAcrossBatch returns YES for MPSCNNConvolutionTranspose so same state is used across entire batch. State object is not reusasable across batches.
 func (o *MPSCNNConvolutionTranspose) ResultStateForSourceImageSourceStatesDestinationImage(sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpsneuralnetwork.MPSCNNConvolutionGradientState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNConvolutionTransposeGradientState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionTransposeSelResultStateForSourceImageSourceStatesDestinationImage, sourceImage.Ptr(), sourceStates, destinationImage.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsneuralnetwork.MPSCNNConvolutionTransposeGradientStateFromID(_ret)
 }
 
@@ -107,7 +115,9 @@ func (o *MPSCNNConvolutionTranspose) ResultStateBatchForSourceImageSourceStatesD
 
 func (o *MPSCNNConvolutionTranspose) TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpsneuralnetwork.MPSCNNConvolutionGradientState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNConvolutionTransposeGradientState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionTransposeSelTemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage, commandBuffer, sourceImage.Ptr(), sourceStates, destinationImage.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsneuralnetwork.MPSCNNConvolutionTransposeGradientStateFromID(_ret)
 }
 
@@ -129,14 +139,18 @@ func (o *MPSCNNConvolutionTranspose) ReloadWeightsAndBiasesWithCommandBufferStat
 // @abstract   GPU side export. Enqueue a kernel to export current weights and biases stored in MPSCNNConvoltionTranspose's internal buffers into weights and biases MTLBuffer returned in MPSCNNConvolutionWeightsAndBiasesState. @param      commandBuffer              Metal command buffer on which export kernel is enqueued. @param      resultStateCanBeTemporary  If FALSE, state returned will be non-temporary. If TRUE, returned state may or may not be temporary. @return     MPSCNNConvolutionWeightsAndBiasesState containing weights and biases buffer to which weights got exported. This state and be temporary or non-temporary depending on the flag resultStateCanBeTemporary
 func (o *MPSCNNConvolutionTranspose) ExportWeightsAndBiasesWithCommandBufferResultStateCanBeTemporary(commandBuffer metal.MTLCommandBuffer, resultStateCanBeTemporary bool) *mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionTransposeSelExportWeightsAndBiasesWithCommandBufferResultStateCanBeTemporary, commandBuffer, resultStateCanBeTemporary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesStateFromID(_ret)
 }
 
 // @abstract        These low level encode functions should be used during training. The first two encode functions, which return destination image on left hand side, takes in MPSCNNConvolutionGradientState that was produced by corresponding MPSCNNConvolution when there is one e.g. auto encoders. This state is used to correctly size destination being returned. These encode methods return MPSCNNConvoltionTransposeGradientState object on auto release pool to be consumed by MPSCNNConvolutionTransposeGradient.
 func (o *MPSCNNConvolutionTranspose) EncodeToCommandBufferSourceImageConvolutionGradientStateDestinationStateDestinationStateIsTemporary(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, convolutionGradientState *mpsneuralnetwork.MPSCNNConvolutionGradientState, outState *mpsneuralnetwork.MPSCNNConvolutionTransposeGradientState, isTemporary bool) *mpscore.MPSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionTransposeSelEncodeToCommandBufferSourceImageConvolutionGradientStateDestinationStateDestinationStateIsTemporary, commandBuffer, sourceImage.Ptr(), convolutionGradientState.Ptr(), outState.Ptr(), isTemporary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpscore.MPSImageFromID(_ret)
 }
 
@@ -199,4 +213,3 @@ func (o *MPSCNNConvolutionTranspose) DataSource() mpsneuralnetwork.MPSCNNConvolu
 	_ret := objc.Send[mpsneuralnetwork.MPSCNNConvolutionDataSource](o.Ptr(), _mPSCNNConvolutionTransposeSelDataSource)
 	return _ret
 }
-

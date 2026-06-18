@@ -68,4 +68,3 @@ type FeaturePrintObservationable interface {
 }
 
 var _ FeaturePrintObservationable = (*FeaturePrintObservation)(nil)
-

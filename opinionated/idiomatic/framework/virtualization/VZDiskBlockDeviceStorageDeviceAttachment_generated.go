@@ -18,7 +18,9 @@ type DiskBlockDeviceStorageDeviceAttachment struct {
 }
 
 // Unwrap returns the underlying [raw.VZDiskBlockDeviceStorageDeviceAttachment].
-func (x *DiskBlockDeviceStorageDeviceAttachment) Unwrap() *raw.VZDiskBlockDeviceStorageDeviceAttachment { return x.inner }
+func (x *DiskBlockDeviceStorageDeviceAttachment) Unwrap() *raw.VZDiskBlockDeviceStorageDeviceAttachment {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -58,7 +60,9 @@ func (x *DiskBlockDeviceStorageDeviceAttachment) SynchronizationMode() raw.VZDis
 	return x.inner.SynchronizationMode()
 }
 
-func (x *DiskBlockDeviceStorageDeviceAttachment) asStorageDeviceAttachment() *raw.VZStorageDeviceAttachment { return &x.inner.VZStorageDeviceAttachment }
+func (x *DiskBlockDeviceStorageDeviceAttachment) asStorageDeviceAttachment() *raw.VZStorageDeviceAttachment {
+	return &x.inner.VZStorageDeviceAttachment
+}
 
 // DiskBlockDeviceStorageDeviceAttachmentable is the interface implemented by [DiskBlockDeviceStorageDeviceAttachment], for mocking and DI.
 type DiskBlockDeviceStorageDeviceAttachmentable interface {
@@ -69,4 +73,3 @@ type DiskBlockDeviceStorageDeviceAttachmentable interface {
 }
 
 var _ DiskBlockDeviceStorageDeviceAttachmentable = (*DiskBlockDeviceStorageDeviceAttachment)(nil)
-

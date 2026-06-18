@@ -58,4 +58,3 @@ type AssetDownloadStorageManagerable interface {
 }
 
 var _ AssetDownloadStorageManagerable = (*AssetDownloadStorageManager)(nil)
-

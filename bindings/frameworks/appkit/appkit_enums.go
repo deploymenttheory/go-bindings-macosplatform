@@ -11,9 +11,9 @@ import (
 type CGLCPContextPriorityRequest int64
 
 const (
-	KCGLCPContextPriorityRequestHigh CGLCPContextPriorityRequest = 0
+	KCGLCPContextPriorityRequestHigh   CGLCPContextPriorityRequest = 0
 	KCGLCPContextPriorityRequestNormal CGLCPContextPriorityRequest = 1
-	KCGLCPContextPriorityRequestLow CGLCPContextPriorityRequest = 2
+	KCGLCPContextPriorityRequestLow    CGLCPContextPriorityRequest = 2
 )
 
 func (e CGLCPContextPriorityRequest) String() string {
@@ -32,10 +32,10 @@ func (e CGLCPContextPriorityRequest) String() string {
 type EvCmd int64
 
 const (
-	EVNOP EvCmd = 0
-	EVHIDE EvCmd = 1
-	EVSHOW EvCmd = 2
-	EVMOVE EvCmd = 3
+	EVNOP   EvCmd = 0
+	EVHIDE  EvCmd = 1
+	EVSHOW  EvCmd = 2
+	EVMOVE  EvCmd = 3
 	EVLEVEL EvCmd = 4
 )
 
@@ -60,7 +60,7 @@ func (e EvCmd) String() string {
 type MDLabelDomain int64
 
 const (
-	KMDLabelUserDomain MDLabelDomain = 0
+	KMDLabelUserDomain  MDLabelDomain = 0
 	KMDLabelLocalDomain MDLabelDomain = 1
 )
 
@@ -78,8 +78,8 @@ func (e MDLabelDomain) String() string {
 type MDQueryOptionFlags int64
 
 const (
-	KMDQuerySynchronous MDQueryOptionFlags = 1
-	KMDQueryWantsUpdates MDQueryOptionFlags = 4
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
 	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
 )
 
@@ -116,8 +116,8 @@ type NSAccessibilityAnnotationPosition int64
 
 const (
 	NSAccessibilityAnnotationPositionFullRange NSAccessibilityAnnotationPosition = 0
-	NSAccessibilityAnnotationPositionStart NSAccessibilityAnnotationPosition = 1
-	NSAccessibilityAnnotationPositionEnd NSAccessibilityAnnotationPosition = 2
+	NSAccessibilityAnnotationPositionStart     NSAccessibilityAnnotationPosition = 1
+	NSAccessibilityAnnotationPositionEnd       NSAccessibilityAnnotationPosition = 2
 )
 
 func (e NSAccessibilityAnnotationPosition) String() string {
@@ -138,7 +138,7 @@ type NSAccessibilityCustomRotorSearchDirection int64
 
 const (
 	NSAccessibilityCustomRotorSearchDirectionPrevious NSAccessibilityCustomRotorSearchDirection = 0
-	NSAccessibilityCustomRotorSearchDirectionNext NSAccessibilityCustomRotorSearchDirection = 1
+	NSAccessibilityCustomRotorSearchDirectionNext     NSAccessibilityCustomRotorSearchDirection = 1
 )
 
 func (e NSAccessibilityCustomRotorSearchDirection) String() string {
@@ -156,28 +156,28 @@ func (e NSAccessibilityCustomRotorSearchDirection) String() string {
 type NSAccessibilityCustomRotorType int64
 
 const (
-	NSAccessibilityCustomRotorTypeCustom NSAccessibilityCustomRotorType = 0
-	NSAccessibilityCustomRotorTypeAny NSAccessibilityCustomRotorType = 1
-	NSAccessibilityCustomRotorTypeAnnotation NSAccessibilityCustomRotorType = 2
-	NSAccessibilityCustomRotorTypeBoldText NSAccessibilityCustomRotorType = 3
-	NSAccessibilityCustomRotorTypeHeading NSAccessibilityCustomRotorType = 4
-	NSAccessibilityCustomRotorTypeHeadingLevel1 NSAccessibilityCustomRotorType = 5
-	NSAccessibilityCustomRotorTypeHeadingLevel2 NSAccessibilityCustomRotorType = 6
-	NSAccessibilityCustomRotorTypeHeadingLevel3 NSAccessibilityCustomRotorType = 7
-	NSAccessibilityCustomRotorTypeHeadingLevel4 NSAccessibilityCustomRotorType = 8
-	NSAccessibilityCustomRotorTypeHeadingLevel5 NSAccessibilityCustomRotorType = 9
-	NSAccessibilityCustomRotorTypeHeadingLevel6 NSAccessibilityCustomRotorType = 10
-	NSAccessibilityCustomRotorTypeImage NSAccessibilityCustomRotorType = 11
-	NSAccessibilityCustomRotorTypeItalicText NSAccessibilityCustomRotorType = 12
-	NSAccessibilityCustomRotorTypeLandmark NSAccessibilityCustomRotorType = 13
-	NSAccessibilityCustomRotorTypeLink NSAccessibilityCustomRotorType = 14
-	NSAccessibilityCustomRotorTypeList NSAccessibilityCustomRotorType = 15
+	NSAccessibilityCustomRotorTypeCustom         NSAccessibilityCustomRotorType = 0
+	NSAccessibilityCustomRotorTypeAny            NSAccessibilityCustomRotorType = 1
+	NSAccessibilityCustomRotorTypeAnnotation     NSAccessibilityCustomRotorType = 2
+	NSAccessibilityCustomRotorTypeBoldText       NSAccessibilityCustomRotorType = 3
+	NSAccessibilityCustomRotorTypeHeading        NSAccessibilityCustomRotorType = 4
+	NSAccessibilityCustomRotorTypeHeadingLevel1  NSAccessibilityCustomRotorType = 5
+	NSAccessibilityCustomRotorTypeHeadingLevel2  NSAccessibilityCustomRotorType = 6
+	NSAccessibilityCustomRotorTypeHeadingLevel3  NSAccessibilityCustomRotorType = 7
+	NSAccessibilityCustomRotorTypeHeadingLevel4  NSAccessibilityCustomRotorType = 8
+	NSAccessibilityCustomRotorTypeHeadingLevel5  NSAccessibilityCustomRotorType = 9
+	NSAccessibilityCustomRotorTypeHeadingLevel6  NSAccessibilityCustomRotorType = 10
+	NSAccessibilityCustomRotorTypeImage          NSAccessibilityCustomRotorType = 11
+	NSAccessibilityCustomRotorTypeItalicText     NSAccessibilityCustomRotorType = 12
+	NSAccessibilityCustomRotorTypeLandmark       NSAccessibilityCustomRotorType = 13
+	NSAccessibilityCustomRotorTypeLink           NSAccessibilityCustomRotorType = 14
+	NSAccessibilityCustomRotorTypeList           NSAccessibilityCustomRotorType = 15
 	NSAccessibilityCustomRotorTypeMisspelledWord NSAccessibilityCustomRotorType = 16
-	NSAccessibilityCustomRotorTypeTable NSAccessibilityCustomRotorType = 17
-	NSAccessibilityCustomRotorTypeTextField NSAccessibilityCustomRotorType = 18
+	NSAccessibilityCustomRotorTypeTable          NSAccessibilityCustomRotorType = 17
+	NSAccessibilityCustomRotorTypeTextField      NSAccessibilityCustomRotorType = 18
 	NSAccessibilityCustomRotorTypeUnderlinedText NSAccessibilityCustomRotorType = 19
-	NSAccessibilityCustomRotorTypeVisitedLink NSAccessibilityCustomRotorType = 20
-	NSAccessibilityCustomRotorTypeAudiograph NSAccessibilityCustomRotorType = 21
+	NSAccessibilityCustomRotorTypeVisitedLink    NSAccessibilityCustomRotorType = 20
+	NSAccessibilityCustomRotorTypeAudiograph     NSAccessibilityCustomRotorType = 21
 )
 
 func (e NSAccessibilityCustomRotorType) String() string {
@@ -234,8 +234,8 @@ func (e NSAccessibilityCustomRotorType) String() string {
 type NSAccessibilityOrientation int64
 
 const (
-	NSAccessibilityOrientationUnknown NSAccessibilityOrientation = 0
-	NSAccessibilityOrientationVertical NSAccessibilityOrientation = 1
+	NSAccessibilityOrientationUnknown    NSAccessibilityOrientation = 0
+	NSAccessibilityOrientationVertical   NSAccessibilityOrientation = 1
 	NSAccessibilityOrientationHorizontal NSAccessibilityOrientation = 2
 )
 
@@ -255,9 +255,9 @@ func (e NSAccessibilityOrientation) String() string {
 type NSAccessibilityPriorityLevel int64
 
 const (
-	NSAccessibilityPriorityLow NSAccessibilityPriorityLevel = 10
+	NSAccessibilityPriorityLow    NSAccessibilityPriorityLevel = 10
 	NSAccessibilityPriorityMedium NSAccessibilityPriorityLevel = 50
-	NSAccessibilityPriorityHigh NSAccessibilityPriorityLevel = 90
+	NSAccessibilityPriorityHigh   NSAccessibilityPriorityLevel = 90
 )
 
 func (e NSAccessibilityPriorityLevel) String() string {
@@ -276,13 +276,13 @@ func (e NSAccessibilityPriorityLevel) String() string {
 type NSAccessibilityRulerMarkerType int64
 
 const (
-	NSAccessibilityRulerMarkerTypeUnknown NSAccessibilityRulerMarkerType = 0
-	NSAccessibilityRulerMarkerTypeTabStopLeft NSAccessibilityRulerMarkerType = 1
-	NSAccessibilityRulerMarkerTypeTabStopRight NSAccessibilityRulerMarkerType = 2
-	NSAccessibilityRulerMarkerTypeTabStopCenter NSAccessibilityRulerMarkerType = 3
-	NSAccessibilityRulerMarkerTypeTabStopDecimal NSAccessibilityRulerMarkerType = 4
-	NSAccessibilityRulerMarkerTypeIndentHead NSAccessibilityRulerMarkerType = 5
-	NSAccessibilityRulerMarkerTypeIndentTail NSAccessibilityRulerMarkerType = 6
+	NSAccessibilityRulerMarkerTypeUnknown         NSAccessibilityRulerMarkerType = 0
+	NSAccessibilityRulerMarkerTypeTabStopLeft     NSAccessibilityRulerMarkerType = 1
+	NSAccessibilityRulerMarkerTypeTabStopRight    NSAccessibilityRulerMarkerType = 2
+	NSAccessibilityRulerMarkerTypeTabStopCenter   NSAccessibilityRulerMarkerType = 3
+	NSAccessibilityRulerMarkerTypeTabStopDecimal  NSAccessibilityRulerMarkerType = 4
+	NSAccessibilityRulerMarkerTypeIndentHead      NSAccessibilityRulerMarkerType = 5
+	NSAccessibilityRulerMarkerTypeIndentTail      NSAccessibilityRulerMarkerType = 6
 	NSAccessibilityRulerMarkerTypeIndentFirstLine NSAccessibilityRulerMarkerType = 7
 )
 
@@ -312,8 +312,8 @@ func (e NSAccessibilityRulerMarkerType) String() string {
 type NSAccessibilitySortDirection int64
 
 const (
-	NSAccessibilitySortDirectionUnknown NSAccessibilitySortDirection = 0
-	NSAccessibilitySortDirectionAscending NSAccessibilitySortDirection = 1
+	NSAccessibilitySortDirectionUnknown    NSAccessibilitySortDirection = 0
+	NSAccessibilitySortDirectionAscending  NSAccessibilitySortDirection = 1
 	NSAccessibilitySortDirectionDescending NSAccessibilitySortDirection = 2
 )
 
@@ -333,11 +333,11 @@ func (e NSAccessibilitySortDirection) String() string {
 type NSAccessibilityUnits int64
 
 const (
-	NSAccessibilityUnitsUnknown NSAccessibilityUnits = 0
-	NSAccessibilityUnitsInches NSAccessibilityUnits = 1
+	NSAccessibilityUnitsUnknown     NSAccessibilityUnits = 0
+	NSAccessibilityUnitsInches      NSAccessibilityUnits = 1
 	NSAccessibilityUnitsCentimeters NSAccessibilityUnits = 2
-	NSAccessibilityUnitsPoints NSAccessibilityUnits = 3
-	NSAccessibilityUnitsPicas NSAccessibilityUnits = 4
+	NSAccessibilityUnitsPoints      NSAccessibilityUnits = 3
+	NSAccessibilityUnitsPicas       NSAccessibilityUnits = 4
 )
 
 func (e NSAccessibilityUnits) String() string {
@@ -385,8 +385,8 @@ func (e NSAlertStyle) String() string {
 type NSAnimationBlockingMode uint64
 
 const (
-	NSAnimationBlocking NSAnimationBlockingMode = 0
-	NSAnimationNonblocking NSAnimationBlockingMode = 1
+	NSAnimationBlocking            NSAnimationBlockingMode = 0
+	NSAnimationNonblocking         NSAnimationBlockingMode = 1
 	NSAnimationNonblockingThreaded NSAnimationBlockingMode = 2
 )
 
@@ -407,9 +407,9 @@ type NSAnimationCurve uint64
 
 const (
 	NSAnimationEaseInOut NSAnimationCurve = 0
-	NSAnimationEaseIn NSAnimationCurve = 1
-	NSAnimationEaseOut NSAnimationCurve = 2
-	NSAnimationLinear NSAnimationCurve = 3
+	NSAnimationEaseIn    NSAnimationCurve = 1
+	NSAnimationEaseOut   NSAnimationCurve = 2
+	NSAnimationLinear    NSAnimationCurve = 3
 )
 
 func (e NSAnimationCurve) String() string {
@@ -432,7 +432,7 @@ type NSAnimationEffect uint64
 
 const (
 	NSAnimationEffectDisappearingItemDefault NSAnimationEffect = 0
-	NSAnimationEffectPoof NSAnimationEffect = 10
+	NSAnimationEffectPoof                    NSAnimationEffect = 10
 )
 
 func (e NSAnimationEffect) String() string {
@@ -458,9 +458,15 @@ const (
 
 func (e NSApplicationActivationOptions) String() string {
 	var parts []string
-	if e&NSApplicationActivateAllWindows != 0 { parts = append(parts, "NSApplicationActivateAllWindows") }
-	if e&NSApplicationActivateIgnoringOtherApps != 0 { parts = append(parts, "NSApplicationActivateIgnoringOtherApps") }
-	if len(parts) == 0 { return "0" }
+	if e&NSApplicationActivateAllWindows != 0 {
+		parts = append(parts, "NSApplicationActivateAllWindows")
+	}
+	if e&NSApplicationActivateIgnoringOtherApps != 0 {
+		parts = append(parts, "NSApplicationActivateIgnoringOtherApps")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -468,8 +474,8 @@ func (e NSApplicationActivationOptions) String() string {
 type NSApplicationActivationPolicy int64
 
 const (
-	NSApplicationActivationPolicyRegular NSApplicationActivationPolicy = 0
-	NSApplicationActivationPolicyAccessory NSApplicationActivationPolicy = 1
+	NSApplicationActivationPolicyRegular    NSApplicationActivationPolicy = 0
+	NSApplicationActivationPolicyAccessory  NSApplicationActivationPolicy = 1
 	NSApplicationActivationPolicyProhibited NSApplicationActivationPolicy = 2
 )
 
@@ -490,7 +496,7 @@ type NSApplicationDelegateReply uint64
 
 const (
 	NSApplicationDelegateReplySuccess NSApplicationDelegateReply = 0
-	NSApplicationDelegateReplyCancel NSApplicationDelegateReply = 1
+	NSApplicationDelegateReplyCancel  NSApplicationDelegateReply = 1
 	NSApplicationDelegateReplyFailure NSApplicationDelegateReply = 2
 )
 
@@ -516,8 +522,12 @@ const (
 
 func (e NSApplicationOcclusionState) String() string {
 	var parts []string
-	if e&NSApplicationOcclusionStateVisible != 0 { parts = append(parts, "NSApplicationOcclusionStateVisible") }
-	if len(parts) == 0 { return "0" }
+	if e&NSApplicationOcclusionStateVisible != 0 {
+		parts = append(parts, "NSApplicationOcclusionStateVisible")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -556,20 +566,48 @@ const (
 
 func (e NSApplicationPresentationOptions) String() string {
 	var parts []string
-	if e&NSApplicationPresentationAutoHideDock != 0 { parts = append(parts, "NSApplicationPresentationAutoHideDock") }
-	if e&NSApplicationPresentationHideDock != 0 { parts = append(parts, "NSApplicationPresentationHideDock") }
-	if e&NSApplicationPresentationAutoHideMenuBar != 0 { parts = append(parts, "NSApplicationPresentationAutoHideMenuBar") }
-	if e&NSApplicationPresentationHideMenuBar != 0 { parts = append(parts, "NSApplicationPresentationHideMenuBar") }
-	if e&NSApplicationPresentationDisableAppleMenu != 0 { parts = append(parts, "NSApplicationPresentationDisableAppleMenu") }
-	if e&NSApplicationPresentationDisableProcessSwitching != 0 { parts = append(parts, "NSApplicationPresentationDisableProcessSwitching") }
-	if e&NSApplicationPresentationDisableForceQuit != 0 { parts = append(parts, "NSApplicationPresentationDisableForceQuit") }
-	if e&NSApplicationPresentationDisableSessionTermination != 0 { parts = append(parts, "NSApplicationPresentationDisableSessionTermination") }
-	if e&NSApplicationPresentationDisableHideApplication != 0 { parts = append(parts, "NSApplicationPresentationDisableHideApplication") }
-	if e&NSApplicationPresentationDisableMenuBarTransparency != 0 { parts = append(parts, "NSApplicationPresentationDisableMenuBarTransparency") }
-	if e&NSApplicationPresentationFullScreen != 0 { parts = append(parts, "NSApplicationPresentationFullScreen") }
-	if e&NSApplicationPresentationAutoHideToolbar != 0 { parts = append(parts, "NSApplicationPresentationAutoHideToolbar") }
-	if e&NSApplicationPresentationDisableCursorLocationAssistance != 0 { parts = append(parts, "NSApplicationPresentationDisableCursorLocationAssistance") }
-	if len(parts) == 0 { return "0" }
+	if e&NSApplicationPresentationAutoHideDock != 0 {
+		parts = append(parts, "NSApplicationPresentationAutoHideDock")
+	}
+	if e&NSApplicationPresentationHideDock != 0 {
+		parts = append(parts, "NSApplicationPresentationHideDock")
+	}
+	if e&NSApplicationPresentationAutoHideMenuBar != 0 {
+		parts = append(parts, "NSApplicationPresentationAutoHideMenuBar")
+	}
+	if e&NSApplicationPresentationHideMenuBar != 0 {
+		parts = append(parts, "NSApplicationPresentationHideMenuBar")
+	}
+	if e&NSApplicationPresentationDisableAppleMenu != 0 {
+		parts = append(parts, "NSApplicationPresentationDisableAppleMenu")
+	}
+	if e&NSApplicationPresentationDisableProcessSwitching != 0 {
+		parts = append(parts, "NSApplicationPresentationDisableProcessSwitching")
+	}
+	if e&NSApplicationPresentationDisableForceQuit != 0 {
+		parts = append(parts, "NSApplicationPresentationDisableForceQuit")
+	}
+	if e&NSApplicationPresentationDisableSessionTermination != 0 {
+		parts = append(parts, "NSApplicationPresentationDisableSessionTermination")
+	}
+	if e&NSApplicationPresentationDisableHideApplication != 0 {
+		parts = append(parts, "NSApplicationPresentationDisableHideApplication")
+	}
+	if e&NSApplicationPresentationDisableMenuBarTransparency != 0 {
+		parts = append(parts, "NSApplicationPresentationDisableMenuBarTransparency")
+	}
+	if e&NSApplicationPresentationFullScreen != 0 {
+		parts = append(parts, "NSApplicationPresentationFullScreen")
+	}
+	if e&NSApplicationPresentationAutoHideToolbar != 0 {
+		parts = append(parts, "NSApplicationPresentationAutoHideToolbar")
+	}
+	if e&NSApplicationPresentationDisableCursorLocationAssistance != 0 {
+		parts = append(parts, "NSApplicationPresentationDisableCursorLocationAssistance")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -577,10 +615,10 @@ func (e NSApplicationPresentationOptions) String() string {
 type NSApplicationPrintReply uint64
 
 const (
-	NSPrintingCancelled NSApplicationPrintReply = 0
-	NSPrintingSuccess NSApplicationPrintReply = 1
+	NSPrintingCancelled  NSApplicationPrintReply = 0
+	NSPrintingSuccess    NSApplicationPrintReply = 1
 	NSPrintingReplyLater NSApplicationPrintReply = 2
-	NSPrintingFailure NSApplicationPrintReply = 3
+	NSPrintingFailure    NSApplicationPrintReply = 3
 )
 
 func (e NSApplicationPrintReply) String() string {
@@ -603,8 +641,8 @@ type NSApplicationTerminateReply uint64
 
 const (
 	NSTerminateCancel NSApplicationTerminateReply = 0
-	NSTerminateNow NSApplicationTerminateReply = 1
-	NSTerminateLater NSApplicationTerminateReply = 2
+	NSTerminateNow    NSApplicationTerminateReply = 1
+	NSTerminateLater  NSApplicationTerminateReply = 2
 )
 
 func (e NSApplicationTerminateReply) String() string {
@@ -623,34 +661,48 @@ func (e NSApplicationTerminateReply) String() string {
 type NSAutoresizingMaskOptions uint64
 
 const (
-	NSViewNotSizable NSAutoresizingMaskOptions = 0
-	NSViewMinXMargin NSAutoresizingMaskOptions = 1
-	NSViewWidthSizable NSAutoresizingMaskOptions = 2
-	NSViewMaxXMargin NSAutoresizingMaskOptions = 4
-	NSViewMinYMargin NSAutoresizingMaskOptions = 8
+	NSViewNotSizable    NSAutoresizingMaskOptions = 0
+	NSViewMinXMargin    NSAutoresizingMaskOptions = 1
+	NSViewWidthSizable  NSAutoresizingMaskOptions = 2
+	NSViewMaxXMargin    NSAutoresizingMaskOptions = 4
+	NSViewMinYMargin    NSAutoresizingMaskOptions = 8
 	NSViewHeightSizable NSAutoresizingMaskOptions = 16
-	NSViewMaxYMargin NSAutoresizingMaskOptions = 32
+	NSViewMaxYMargin    NSAutoresizingMaskOptions = 32
 )
 
 func (e NSAutoresizingMaskOptions) String() string {
 	var parts []string
-	if e&NSViewMinXMargin != 0 { parts = append(parts, "NSViewMinXMargin") }
-	if e&NSViewWidthSizable != 0 { parts = append(parts, "NSViewWidthSizable") }
-	if e&NSViewMaxXMargin != 0 { parts = append(parts, "NSViewMaxXMargin") }
-	if e&NSViewMinYMargin != 0 { parts = append(parts, "NSViewMinYMargin") }
-	if e&NSViewHeightSizable != 0 { parts = append(parts, "NSViewHeightSizable") }
-	if e&NSViewMaxYMargin != 0 { parts = append(parts, "NSViewMaxYMargin") }
-	if len(parts) == 0 { return "0" }
+	if e&NSViewMinXMargin != 0 {
+		parts = append(parts, "NSViewMinXMargin")
+	}
+	if e&NSViewWidthSizable != 0 {
+		parts = append(parts, "NSViewWidthSizable")
+	}
+	if e&NSViewMaxXMargin != 0 {
+		parts = append(parts, "NSViewMaxXMargin")
+	}
+	if e&NSViewMinYMargin != 0 {
+		parts = append(parts, "NSViewMinYMargin")
+	}
+	if e&NSViewHeightSizable != 0 {
+		parts = append(parts, "NSViewHeightSizable")
+	}
+	if e&NSViewMaxYMargin != 0 {
+		parts = append(parts, "NSViewMaxYMargin")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSBackgroundStyle int64
 
 const (
-	NSBackgroundStyleNormal NSBackgroundStyle = 0
+	NSBackgroundStyleNormal     NSBackgroundStyle = 0
 	NSBackgroundStyleEmphasized NSBackgroundStyle = 1
-	NSBackgroundStyleRaised NSBackgroundStyle = 2
-	NSBackgroundStyleLowered NSBackgroundStyle = 3
+	NSBackgroundStyleRaised     NSBackgroundStyle = 2
+	NSBackgroundStyleLowered    NSBackgroundStyle = 3
 )
 
 func (e NSBackgroundStyle) String() string {
@@ -671,9 +723,9 @@ func (e NSBackgroundStyle) String() string {
 type NSBackingStoreType uint64
 
 const (
-	NSBackingStoreRetained NSBackingStoreType = 0
+	NSBackingStoreRetained    NSBackingStoreType = 0
 	NSBackingStoreNonretained NSBackingStoreType = 1
-	NSBackingStoreBuffered NSBackingStoreType = 2
+	NSBackingStoreBuffered    NSBackingStoreType = 2
 )
 
 func (e NSBackingStoreType) String() string {
@@ -717,16 +769,16 @@ const (
 	// A bezel style that is typically used in table rows to display information about the row, such as a count.
 	NSBezelStyleBadge NSBezelStyle = 15
 	// A bezel style with a glass effect
-	NSBezelStyleGlass NSBezelStyle = 16
-	NSBezelStyleShadowlessSquare NSBezelStyle = 6
-	NSBezelStyleTexturedSquare NSBezelStyle = 8
-	NSBezelStyleRounded NSBezelStyle = 1
-	NSBezelStyleRegularSquare NSBezelStyle = 2
-	NSBezelStyleTexturedRounded NSBezelStyle = 11
-	NSBezelStyleRoundRect NSBezelStyle = 12
-	NSBezelStyleRecessed NSBezelStyle = 13
+	NSBezelStyleGlass             NSBezelStyle = 16
+	NSBezelStyleShadowlessSquare  NSBezelStyle = 6
+	NSBezelStyleTexturedSquare    NSBezelStyle = 8
+	NSBezelStyleRounded           NSBezelStyle = 1
+	NSBezelStyleRegularSquare     NSBezelStyle = 2
+	NSBezelStyleTexturedRounded   NSBezelStyle = 11
+	NSBezelStyleRoundRect         NSBezelStyle = 12
+	NSBezelStyleRecessed          NSBezelStyle = 13
 	NSBezelStyleRoundedDisclosure NSBezelStyle = 14
-	NSBezelStyleInline NSBezelStyle = 15
+	NSBezelStyleInline            NSBezelStyle = 15
 )
 
 func (e NSBezelStyle) String() string {
@@ -769,12 +821,12 @@ func (e NSBezelStyle) String() string {
 type NSBezierPathElement uint64
 
 const (
-	NSBezierPathElementMoveTo NSBezierPathElement = 0
-	NSBezierPathElementLineTo NSBezierPathElement = 1
-	NSBezierPathElementCubicCurveTo NSBezierPathElement = 2
-	NSBezierPathElementClosePath NSBezierPathElement = 3
+	NSBezierPathElementMoveTo           NSBezierPathElement = 0
+	NSBezierPathElementLineTo           NSBezierPathElement = 1
+	NSBezierPathElementCubicCurveTo     NSBezierPathElement = 2
+	NSBezierPathElementClosePath        NSBezierPathElement = 3
 	NSBezierPathElementQuadraticCurveTo NSBezierPathElement = 4
-	NSBezierPathElementCurveTo NSBezierPathElement = 2
+	NSBezierPathElementCurveTo          NSBezierPathElement = 2
 )
 
 func (e NSBezierPathElement) String() string {
@@ -797,36 +849,52 @@ func (e NSBezierPathElement) String() string {
 type NSBitmapFormat uint64
 
 const (
-	NSBitmapFormatAlphaFirst NSBitmapFormat = 1
-	NSBitmapFormatAlphaNonpremultiplied NSBitmapFormat = 2
-	NSBitmapFormatFloatingPointSamples NSBitmapFormat = 4
-	NSBitmapFormatSixteenBitLittleEndian NSBitmapFormat = 256
+	NSBitmapFormatAlphaFirst               NSBitmapFormat = 1
+	NSBitmapFormatAlphaNonpremultiplied    NSBitmapFormat = 2
+	NSBitmapFormatFloatingPointSamples     NSBitmapFormat = 4
+	NSBitmapFormatSixteenBitLittleEndian   NSBitmapFormat = 256
 	NSBitmapFormatThirtyTwoBitLittleEndian NSBitmapFormat = 512
-	NSBitmapFormatSixteenBitBigEndian NSBitmapFormat = 1024
-	NSBitmapFormatThirtyTwoBitBigEndian NSBitmapFormat = 2048
+	NSBitmapFormatSixteenBitBigEndian      NSBitmapFormat = 1024
+	NSBitmapFormatThirtyTwoBitBigEndian    NSBitmapFormat = 2048
 )
 
 func (e NSBitmapFormat) String() string {
 	var parts []string
-	if e&NSBitmapFormatAlphaFirst != 0 { parts = append(parts, "NSBitmapFormatAlphaFirst") }
-	if e&NSBitmapFormatAlphaNonpremultiplied != 0 { parts = append(parts, "NSBitmapFormatAlphaNonpremultiplied") }
-	if e&NSBitmapFormatFloatingPointSamples != 0 { parts = append(parts, "NSBitmapFormatFloatingPointSamples") }
-	if e&NSBitmapFormatSixteenBitLittleEndian != 0 { parts = append(parts, "NSBitmapFormatSixteenBitLittleEndian") }
-	if e&NSBitmapFormatThirtyTwoBitLittleEndian != 0 { parts = append(parts, "NSBitmapFormatThirtyTwoBitLittleEndian") }
-	if e&NSBitmapFormatSixteenBitBigEndian != 0 { parts = append(parts, "NSBitmapFormatSixteenBitBigEndian") }
-	if e&NSBitmapFormatThirtyTwoBitBigEndian != 0 { parts = append(parts, "NSBitmapFormatThirtyTwoBitBigEndian") }
-	if len(parts) == 0 { return "0" }
+	if e&NSBitmapFormatAlphaFirst != 0 {
+		parts = append(parts, "NSBitmapFormatAlphaFirst")
+	}
+	if e&NSBitmapFormatAlphaNonpremultiplied != 0 {
+		parts = append(parts, "NSBitmapFormatAlphaNonpremultiplied")
+	}
+	if e&NSBitmapFormatFloatingPointSamples != 0 {
+		parts = append(parts, "NSBitmapFormatFloatingPointSamples")
+	}
+	if e&NSBitmapFormatSixteenBitLittleEndian != 0 {
+		parts = append(parts, "NSBitmapFormatSixteenBitLittleEndian")
+	}
+	if e&NSBitmapFormatThirtyTwoBitLittleEndian != 0 {
+		parts = append(parts, "NSBitmapFormatThirtyTwoBitLittleEndian")
+	}
+	if e&NSBitmapFormatSixteenBitBigEndian != 0 {
+		parts = append(parts, "NSBitmapFormatSixteenBitBigEndian")
+	}
+	if e&NSBitmapFormatThirtyTwoBitBigEndian != 0 {
+		parts = append(parts, "NSBitmapFormatThirtyTwoBitBigEndian")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSBitmapImageFileType uint64
 
 const (
-	NSBitmapImageFileTypeTIFF NSBitmapImageFileType = 0
-	NSBitmapImageFileTypeBMP NSBitmapImageFileType = 1
-	NSBitmapImageFileTypeGIF NSBitmapImageFileType = 2
-	NSBitmapImageFileTypeJPEG NSBitmapImageFileType = 3
-	NSBitmapImageFileTypePNG NSBitmapImageFileType = 4
+	NSBitmapImageFileTypeTIFF     NSBitmapImageFileType = 0
+	NSBitmapImageFileTypeBMP      NSBitmapImageFileType = 1
+	NSBitmapImageFileTypeGIF      NSBitmapImageFileType = 2
+	NSBitmapImageFileTypeJPEG     NSBitmapImageFileType = 3
+	NSBitmapImageFileTypePNG      NSBitmapImageFileType = 4
 	NSBitmapImageFileTypeJPEG2000 NSBitmapImageFileType = 5
 )
 
@@ -852,9 +920,9 @@ func (e NSBitmapImageFileType) String() string {
 type NSBorderType uint64
 
 const (
-	NSNoBorder NSBorderType = 0
-	NSLineBorder NSBorderType = 1
-	NSBezelBorder NSBorderType = 2
+	NSNoBorder     NSBorderType = 0
+	NSLineBorder   NSBorderType = 1
+	NSBezelBorder  NSBorderType = 2
 	NSGrooveBorder NSBorderType = 3
 )
 
@@ -876,9 +944,9 @@ func (e NSBorderType) String() string {
 type NSBoxType uint64
 
 const (
-	NSBoxPrimary NSBoxType = 0
+	NSBoxPrimary   NSBoxType = 0
 	NSBoxSeparator NSBoxType = 2
-	NSBoxCustom NSBoxType = 4
+	NSBoxCustom    NSBoxType = 4
 )
 
 func (e NSBoxType) String() string {
@@ -897,7 +965,7 @@ func (e NSBoxType) String() string {
 type NSBrowserColumnResizingType uint64
 
 const (
-	NSBrowserNoColumnResizing NSBrowserColumnResizingType = 0
+	NSBrowserNoColumnResizing   NSBrowserColumnResizingType = 0
 	NSBrowserAutoColumnResizing NSBrowserColumnResizingType = 1
 	NSBrowserUserColumnResizing NSBrowserColumnResizingType = 2
 )
@@ -918,7 +986,7 @@ func (e NSBrowserColumnResizingType) String() string {
 type NSBrowserDropOperation uint64
 
 const (
-	NSBrowserDropOn NSBrowserDropOperation = 0
+	NSBrowserDropOn    NSBrowserDropOperation = 0
 	NSBrowserDropAbove NSBrowserDropOperation = 1
 )
 
@@ -936,15 +1004,15 @@ func (e NSBrowserDropOperation) String() string {
 type NSButtonType uint64
 
 const (
-	NSButtonTypeMomentaryLight NSButtonType = 0
-	NSButtonTypePushOnPushOff NSButtonType = 1
-	NSButtonTypeToggle NSButtonType = 2
-	NSButtonTypeSwitch NSButtonType = 3
-	NSButtonTypeRadio NSButtonType = 4
-	NSButtonTypeMomentaryChange NSButtonType = 5
-	NSButtonTypeOnOff NSButtonType = 6
-	NSButtonTypeMomentaryPushIn NSButtonType = 7
-	NSButtonTypeAccelerator NSButtonType = 8
+	NSButtonTypeMomentaryLight        NSButtonType = 0
+	NSButtonTypePushOnPushOff         NSButtonType = 1
+	NSButtonTypeToggle                NSButtonType = 2
+	NSButtonTypeSwitch                NSButtonType = 3
+	NSButtonTypeRadio                 NSButtonType = 4
+	NSButtonTypeMomentaryChange       NSButtonType = 5
+	NSButtonTypeOnOff                 NSButtonType = 6
+	NSButtonTypeMomentaryPushIn       NSButtonType = 7
+	NSButtonTypeAccelerator           NSButtonType = 8
 	NSButtonTypeMultiLevelAccelerator NSButtonType = 9
 )
 
@@ -978,23 +1046,23 @@ func (e NSButtonType) String() string {
 type NSCellAttribute uint64
 
 const (
-	NSCellDisabled NSCellAttribute = 0
-	NSCellState NSCellAttribute = 1
-	NSPushInCell NSCellAttribute = 2
-	NSCellEditable NSCellAttribute = 3
-	NSChangeGrayCell NSCellAttribute = 4
-	NSCellHighlighted NSCellAttribute = 5
-	NSCellLightsByContents NSCellAttribute = 6
-	NSCellLightsByGray NSCellAttribute = 7
-	NSChangeBackgroundCell NSCellAttribute = 8
-	NSCellLightsByBackground NSCellAttribute = 9
-	NSCellIsBordered NSCellAttribute = 10
-	NSCellHasOverlappingImage NSCellAttribute = 11
-	NSCellHasImageHorizontal NSCellAttribute = 12
+	NSCellDisabled               NSCellAttribute = 0
+	NSCellState                  NSCellAttribute = 1
+	NSPushInCell                 NSCellAttribute = 2
+	NSCellEditable               NSCellAttribute = 3
+	NSChangeGrayCell             NSCellAttribute = 4
+	NSCellHighlighted            NSCellAttribute = 5
+	NSCellLightsByContents       NSCellAttribute = 6
+	NSCellLightsByGray           NSCellAttribute = 7
+	NSChangeBackgroundCell       NSCellAttribute = 8
+	NSCellLightsByBackground     NSCellAttribute = 9
+	NSCellIsBordered             NSCellAttribute = 10
+	NSCellHasOverlappingImage    NSCellAttribute = 11
+	NSCellHasImageHorizontal     NSCellAttribute = 12
 	NSCellHasImageOnLeftOrBottom NSCellAttribute = 13
-	NSCellChangesContents NSCellAttribute = 14
-	NSCellIsInsetButton NSCellAttribute = 15
-	NSCellAllowsMixedState NSCellAttribute = 16
+	NSCellChangesContents        NSCellAttribute = 14
+	NSCellIsInsetButton          NSCellAttribute = 15
+	NSCellAllowsMixedState       NSCellAttribute = 16
 )
 
 func (e NSCellAttribute) String() string {
@@ -1041,32 +1109,40 @@ func (e NSCellAttribute) String() string {
 type NSCellHitResult uint64
 
 const (
-	NSCellHitNone NSCellHitResult = 0
-	NSCellHitContentArea NSCellHitResult = 1
+	NSCellHitNone             NSCellHitResult = 0
+	NSCellHitContentArea      NSCellHitResult = 1
 	NSCellHitEditableTextArea NSCellHitResult = 2
-	NSCellHitTrackableArea NSCellHitResult = 4
+	NSCellHitTrackableArea    NSCellHitResult = 4
 )
 
 func (e NSCellHitResult) String() string {
 	var parts []string
-	if e&NSCellHitContentArea != 0 { parts = append(parts, "NSCellHitContentArea") }
-	if e&NSCellHitEditableTextArea != 0 { parts = append(parts, "NSCellHitEditableTextArea") }
-	if e&NSCellHitTrackableArea != 0 { parts = append(parts, "NSCellHitTrackableArea") }
-	if len(parts) == 0 { return "0" }
+	if e&NSCellHitContentArea != 0 {
+		parts = append(parts, "NSCellHitContentArea")
+	}
+	if e&NSCellHitEditableTextArea != 0 {
+		parts = append(parts, "NSCellHitEditableTextArea")
+	}
+	if e&NSCellHitTrackableArea != 0 {
+		parts = append(parts, "NSCellHitTrackableArea")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSCellImagePosition uint64
 
 const (
-	NSNoImage NSCellImagePosition = 0
-	NSImageOnly NSCellImagePosition = 1
-	NSImageLeft NSCellImagePosition = 2
-	NSImageRight NSCellImagePosition = 3
-	NSImageBelow NSCellImagePosition = 4
-	NSImageAbove NSCellImagePosition = 5
+	NSNoImage       NSCellImagePosition = 0
+	NSImageOnly     NSCellImagePosition = 1
+	NSImageLeft     NSCellImagePosition = 2
+	NSImageRight    NSCellImagePosition = 3
+	NSImageBelow    NSCellImagePosition = 4
+	NSImageAbove    NSCellImagePosition = 5
 	NSImageOverlaps NSCellImagePosition = 6
-	NSImageLeading NSCellImagePosition = 7
+	NSImageLeading  NSCellImagePosition = 7
 	NSImageTrailing NSCellImagePosition = 8
 )
 
@@ -1098,28 +1174,38 @@ func (e NSCellImagePosition) String() string {
 type NSCellStyleMask uint64
 
 const (
-	NSNoCellMask NSCellStyleMask = 0
-	NSContentsCellMask NSCellStyleMask = 1
-	NSPushInCellMask NSCellStyleMask = 2
-	NSChangeGrayCellMask NSCellStyleMask = 4
+	NSNoCellMask               NSCellStyleMask = 0
+	NSContentsCellMask         NSCellStyleMask = 1
+	NSPushInCellMask           NSCellStyleMask = 2
+	NSChangeGrayCellMask       NSCellStyleMask = 4
 	NSChangeBackgroundCellMask NSCellStyleMask = 8
 )
 
 func (e NSCellStyleMask) String() string {
 	var parts []string
-	if e&NSContentsCellMask != 0 { parts = append(parts, "NSContentsCellMask") }
-	if e&NSPushInCellMask != 0 { parts = append(parts, "NSPushInCellMask") }
-	if e&NSChangeGrayCellMask != 0 { parts = append(parts, "NSChangeGrayCellMask") }
-	if e&NSChangeBackgroundCellMask != 0 { parts = append(parts, "NSChangeBackgroundCellMask") }
-	if len(parts) == 0 { return "0" }
+	if e&NSContentsCellMask != 0 {
+		parts = append(parts, "NSContentsCellMask")
+	}
+	if e&NSPushInCellMask != 0 {
+		parts = append(parts, "NSPushInCellMask")
+	}
+	if e&NSChangeGrayCellMask != 0 {
+		parts = append(parts, "NSChangeGrayCellMask")
+	}
+	if e&NSChangeBackgroundCellMask != 0 {
+		parts = append(parts, "NSChangeBackgroundCellMask")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSCellType uint64
 
 const (
-	NSNullCellType NSCellType = 0
-	NSTextCellType NSCellType = 1
+	NSNullCellType  NSCellType = 0
+	NSTextCellType  NSCellType = 1
 	NSImageCellType NSCellType = 2
 )
 
@@ -1140,11 +1226,11 @@ type NSCharacterCollection uint64
 
 const (
 	NSIdentityMappingCharacterCollection NSCharacterCollection = 0
-	NSAdobeCNS1CharacterCollection NSCharacterCollection = 1
-	NSAdobeGB1CharacterCollection NSCharacterCollection = 2
-	NSAdobeJapan1CharacterCollection NSCharacterCollection = 3
-	NSAdobeJapan2CharacterCollection NSCharacterCollection = 4
-	NSAdobeKorea1CharacterCollection NSCharacterCollection = 5
+	NSAdobeCNS1CharacterCollection       NSCharacterCollection = 1
+	NSAdobeGB1CharacterCollection        NSCharacterCollection = 2
+	NSAdobeJapan1CharacterCollection     NSCharacterCollection = 3
+	NSAdobeJapan2CharacterCollection     NSCharacterCollection = 4
+	NSAdobeKorea1CharacterCollection     NSCharacterCollection = 5
 )
 
 func (e NSCharacterCollection) String() string {
@@ -1183,21 +1269,31 @@ const (
 
 func (e NSCloudKitSharingServiceOptions) String() string {
 	var parts []string
-	if e&NSCloudKitSharingServiceAllowPublic != 0 { parts = append(parts, "NSCloudKitSharingServiceAllowPublic") }
-	if e&NSCloudKitSharingServiceAllowPrivate != 0 { parts = append(parts, "NSCloudKitSharingServiceAllowPrivate") }
-	if e&NSCloudKitSharingServiceAllowReadOnly != 0 { parts = append(parts, "NSCloudKitSharingServiceAllowReadOnly") }
-	if e&NSCloudKitSharingServiceAllowReadWrite != 0 { parts = append(parts, "NSCloudKitSharingServiceAllowReadWrite") }
-	if len(parts) == 0 { return "0" }
+	if e&NSCloudKitSharingServiceAllowPublic != 0 {
+		parts = append(parts, "NSCloudKitSharingServiceAllowPublic")
+	}
+	if e&NSCloudKitSharingServiceAllowPrivate != 0 {
+		parts = append(parts, "NSCloudKitSharingServiceAllowPrivate")
+	}
+	if e&NSCloudKitSharingServiceAllowReadOnly != 0 {
+		parts = append(parts, "NSCloudKitSharingServiceAllowReadOnly")
+	}
+	if e&NSCloudKitSharingServiceAllowReadWrite != 0 {
+		parts = append(parts, "NSCloudKitSharingServiceAllowReadWrite")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSCollectionElementCategory int64
 
 const (
-	NSCollectionElementCategoryItem NSCollectionElementCategory = 0
+	NSCollectionElementCategoryItem              NSCollectionElementCategory = 0
 	NSCollectionElementCategorySupplementaryView NSCollectionElementCategory = 1
-	NSCollectionElementCategoryDecorationView NSCollectionElementCategory = 2
-	NSCollectionElementCategoryInterItemGap NSCollectionElementCategory = 3
+	NSCollectionElementCategoryDecorationView    NSCollectionElementCategory = 2
+	NSCollectionElementCategoryInterItemGap      NSCollectionElementCategory = 3
 )
 
 func (e NSCollectionElementCategory) String() string {
@@ -1218,12 +1314,12 @@ func (e NSCollectionElementCategory) String() string {
 type NSCollectionLayoutSectionOrthogonalScrollingBehavior int64
 
 const (
-	NSCollectionLayoutSectionOrthogonalScrollingBehaviorNone NSCollectionLayoutSectionOrthogonalScrollingBehavior = 0
-	NSCollectionLayoutSectionOrthogonalScrollingBehaviorContinuous NSCollectionLayoutSectionOrthogonalScrollingBehavior = 1
+	NSCollectionLayoutSectionOrthogonalScrollingBehaviorNone                           NSCollectionLayoutSectionOrthogonalScrollingBehavior = 0
+	NSCollectionLayoutSectionOrthogonalScrollingBehaviorContinuous                     NSCollectionLayoutSectionOrthogonalScrollingBehavior = 1
 	NSCollectionLayoutSectionOrthogonalScrollingBehaviorContinuousGroupLeadingBoundary NSCollectionLayoutSectionOrthogonalScrollingBehavior = 2
-	NSCollectionLayoutSectionOrthogonalScrollingBehaviorPaging NSCollectionLayoutSectionOrthogonalScrollingBehavior = 3
-	NSCollectionLayoutSectionOrthogonalScrollingBehaviorGroupPaging NSCollectionLayoutSectionOrthogonalScrollingBehavior = 4
-	NSCollectionLayoutSectionOrthogonalScrollingBehaviorGroupPagingCentered NSCollectionLayoutSectionOrthogonalScrollingBehavior = 5
+	NSCollectionLayoutSectionOrthogonalScrollingBehaviorPaging                         NSCollectionLayoutSectionOrthogonalScrollingBehavior = 3
+	NSCollectionLayoutSectionOrthogonalScrollingBehaviorGroupPaging                    NSCollectionLayoutSectionOrthogonalScrollingBehavior = 4
+	NSCollectionLayoutSectionOrthogonalScrollingBehaviorGroupPagingCentered            NSCollectionLayoutSectionOrthogonalScrollingBehavior = 5
 )
 
 func (e NSCollectionLayoutSectionOrthogonalScrollingBehavior) String() string {
@@ -1251,8 +1347,8 @@ const (
 	NSCollectionUpdateActionInsert NSCollectionUpdateAction = 0
 	NSCollectionUpdateActionDelete NSCollectionUpdateAction = 1
 	NSCollectionUpdateActionReload NSCollectionUpdateAction = 2
-	NSCollectionUpdateActionMove NSCollectionUpdateAction = 3
-	NSCollectionUpdateActionNone NSCollectionUpdateAction = 4
+	NSCollectionUpdateActionMove   NSCollectionUpdateAction = 3
+	NSCollectionUpdateActionNone   NSCollectionUpdateAction = 4
 )
 
 func (e NSCollectionUpdateAction) String() string {
@@ -1275,7 +1371,7 @@ func (e NSCollectionUpdateAction) String() string {
 type NSCollectionViewDropOperation int64
 
 const (
-	NSCollectionViewDropOn NSCollectionViewDropOperation = 0
+	NSCollectionViewDropOn     NSCollectionViewDropOperation = 0
 	NSCollectionViewDropBefore NSCollectionViewDropOperation = 1
 )
 
@@ -1293,10 +1389,10 @@ func (e NSCollectionViewDropOperation) String() string {
 type NSCollectionViewItemHighlightState int64
 
 const (
-	NSCollectionViewItemHighlightNone NSCollectionViewItemHighlightState = 0
-	NSCollectionViewItemHighlightForSelection NSCollectionViewItemHighlightState = 1
+	NSCollectionViewItemHighlightNone           NSCollectionViewItemHighlightState = 0
+	NSCollectionViewItemHighlightForSelection   NSCollectionViewItemHighlightState = 1
 	NSCollectionViewItemHighlightForDeselection NSCollectionViewItemHighlightState = 2
-	NSCollectionViewItemHighlightAsDropTarget NSCollectionViewItemHighlightState = 3
+	NSCollectionViewItemHighlightAsDropTarget   NSCollectionViewItemHighlightState = 3
 )
 
 func (e NSCollectionViewItemHighlightState) String() string {
@@ -1317,7 +1413,7 @@ func (e NSCollectionViewItemHighlightState) String() string {
 type NSCollectionViewScrollDirection int64
 
 const (
-	NSCollectionViewScrollDirectionVertical NSCollectionViewScrollDirection = 0
+	NSCollectionViewScrollDirectionVertical   NSCollectionViewScrollDirection = 0
 	NSCollectionViewScrollDirectionHorizontal NSCollectionViewScrollDirection = 1
 )
 
@@ -1335,47 +1431,69 @@ func (e NSCollectionViewScrollDirection) String() string {
 type NSCollectionViewScrollPosition uint64
 
 const (
-	NSCollectionViewScrollPositionNone NSCollectionViewScrollPosition = 0
-	NSCollectionViewScrollPositionTop NSCollectionViewScrollPosition = 1
-	NSCollectionViewScrollPositionCenteredVertically NSCollectionViewScrollPosition = 2
-	NSCollectionViewScrollPositionBottom NSCollectionViewScrollPosition = 4
+	NSCollectionViewScrollPositionNone                  NSCollectionViewScrollPosition = 0
+	NSCollectionViewScrollPositionTop                   NSCollectionViewScrollPosition = 1
+	NSCollectionViewScrollPositionCenteredVertically    NSCollectionViewScrollPosition = 2
+	NSCollectionViewScrollPositionBottom                NSCollectionViewScrollPosition = 4
 	NSCollectionViewScrollPositionNearestHorizontalEdge NSCollectionViewScrollPosition = 512
-	NSCollectionViewScrollPositionLeft NSCollectionViewScrollPosition = 8
-	NSCollectionViewScrollPositionCenteredHorizontally NSCollectionViewScrollPosition = 16
-	NSCollectionViewScrollPositionRight NSCollectionViewScrollPosition = 32
-	NSCollectionViewScrollPositionLeadingEdge NSCollectionViewScrollPosition = 64
-	NSCollectionViewScrollPositionTrailingEdge NSCollectionViewScrollPosition = 128
-	NSCollectionViewScrollPositionNearestVerticalEdge NSCollectionViewScrollPosition = 256
+	NSCollectionViewScrollPositionLeft                  NSCollectionViewScrollPosition = 8
+	NSCollectionViewScrollPositionCenteredHorizontally  NSCollectionViewScrollPosition = 16
+	NSCollectionViewScrollPositionRight                 NSCollectionViewScrollPosition = 32
+	NSCollectionViewScrollPositionLeadingEdge           NSCollectionViewScrollPosition = 64
+	NSCollectionViewScrollPositionTrailingEdge          NSCollectionViewScrollPosition = 128
+	NSCollectionViewScrollPositionNearestVerticalEdge   NSCollectionViewScrollPosition = 256
 )
 
 func (e NSCollectionViewScrollPosition) String() string {
 	var parts []string
-	if e&NSCollectionViewScrollPositionTop != 0 { parts = append(parts, "NSCollectionViewScrollPositionTop") }
-	if e&NSCollectionViewScrollPositionCenteredVertically != 0 { parts = append(parts, "NSCollectionViewScrollPositionCenteredVertically") }
-	if e&NSCollectionViewScrollPositionBottom != 0 { parts = append(parts, "NSCollectionViewScrollPositionBottom") }
-	if e&NSCollectionViewScrollPositionNearestHorizontalEdge != 0 { parts = append(parts, "NSCollectionViewScrollPositionNearestHorizontalEdge") }
-	if e&NSCollectionViewScrollPositionLeft != 0 { parts = append(parts, "NSCollectionViewScrollPositionLeft") }
-	if e&NSCollectionViewScrollPositionCenteredHorizontally != 0 { parts = append(parts, "NSCollectionViewScrollPositionCenteredHorizontally") }
-	if e&NSCollectionViewScrollPositionRight != 0 { parts = append(parts, "NSCollectionViewScrollPositionRight") }
-	if e&NSCollectionViewScrollPositionLeadingEdge != 0 { parts = append(parts, "NSCollectionViewScrollPositionLeadingEdge") }
-	if e&NSCollectionViewScrollPositionTrailingEdge != 0 { parts = append(parts, "NSCollectionViewScrollPositionTrailingEdge") }
-	if e&NSCollectionViewScrollPositionNearestVerticalEdge != 0 { parts = append(parts, "NSCollectionViewScrollPositionNearestVerticalEdge") }
-	if len(parts) == 0 { return "0" }
+	if e&NSCollectionViewScrollPositionTop != 0 {
+		parts = append(parts, "NSCollectionViewScrollPositionTop")
+	}
+	if e&NSCollectionViewScrollPositionCenteredVertically != 0 {
+		parts = append(parts, "NSCollectionViewScrollPositionCenteredVertically")
+	}
+	if e&NSCollectionViewScrollPositionBottom != 0 {
+		parts = append(parts, "NSCollectionViewScrollPositionBottom")
+	}
+	if e&NSCollectionViewScrollPositionNearestHorizontalEdge != 0 {
+		parts = append(parts, "NSCollectionViewScrollPositionNearestHorizontalEdge")
+	}
+	if e&NSCollectionViewScrollPositionLeft != 0 {
+		parts = append(parts, "NSCollectionViewScrollPositionLeft")
+	}
+	if e&NSCollectionViewScrollPositionCenteredHorizontally != 0 {
+		parts = append(parts, "NSCollectionViewScrollPositionCenteredHorizontally")
+	}
+	if e&NSCollectionViewScrollPositionRight != 0 {
+		parts = append(parts, "NSCollectionViewScrollPositionRight")
+	}
+	if e&NSCollectionViewScrollPositionLeadingEdge != 0 {
+		parts = append(parts, "NSCollectionViewScrollPositionLeadingEdge")
+	}
+	if e&NSCollectionViewScrollPositionTrailingEdge != 0 {
+		parts = append(parts, "NSCollectionViewScrollPositionTrailingEdge")
+	}
+	if e&NSCollectionViewScrollPositionNearestVerticalEdge != 0 {
+		parts = append(parts, "NSCollectionViewScrollPositionNearestVerticalEdge")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSColorPanelMode int64
 
 const (
-	NSColorPanelModeNone NSColorPanelMode = -1
-	NSColorPanelModeGray NSColorPanelMode = 0
-	NSColorPanelModeRGB NSColorPanelMode = 1
-	NSColorPanelModeCMYK NSColorPanelMode = 2
-	NSColorPanelModeHSB NSColorPanelMode = 3
+	NSColorPanelModeNone          NSColorPanelMode = -1
+	NSColorPanelModeGray          NSColorPanelMode = 0
+	NSColorPanelModeRGB           NSColorPanelMode = 1
+	NSColorPanelModeCMYK          NSColorPanelMode = 2
+	NSColorPanelModeHSB           NSColorPanelMode = 3
 	NSColorPanelModeCustomPalette NSColorPanelMode = 4
-	NSColorPanelModeColorList NSColorPanelMode = 5
-	NSColorPanelModeWheel NSColorPanelMode = 6
-	NSColorPanelModeCrayon NSColorPanelMode = 7
+	NSColorPanelModeColorList     NSColorPanelMode = 5
+	NSColorPanelModeWheel         NSColorPanelMode = 6
+	NSColorPanelModeCrayon        NSColorPanelMode = 7
 )
 
 func (e NSColorPanelMode) String() string {
@@ -1406,40 +1524,60 @@ func (e NSColorPanelMode) String() string {
 type NSColorPanelOptions uint64
 
 const (
-	NSColorPanelGrayModeMask NSColorPanelOptions = 1
-	NSColorPanelRGBModeMask NSColorPanelOptions = 2
-	NSColorPanelCMYKModeMask NSColorPanelOptions = 4
-	NSColorPanelHSBModeMask NSColorPanelOptions = 8
+	NSColorPanelGrayModeMask          NSColorPanelOptions = 1
+	NSColorPanelRGBModeMask           NSColorPanelOptions = 2
+	NSColorPanelCMYKModeMask          NSColorPanelOptions = 4
+	NSColorPanelHSBModeMask           NSColorPanelOptions = 8
 	NSColorPanelCustomPaletteModeMask NSColorPanelOptions = 16
-	NSColorPanelColorListModeMask NSColorPanelOptions = 32
-	NSColorPanelWheelModeMask NSColorPanelOptions = 64
-	NSColorPanelCrayonModeMask NSColorPanelOptions = 128
-	NSColorPanelAllModesMask NSColorPanelOptions = 65535
+	NSColorPanelColorListModeMask     NSColorPanelOptions = 32
+	NSColorPanelWheelModeMask         NSColorPanelOptions = 64
+	NSColorPanelCrayonModeMask        NSColorPanelOptions = 128
+	NSColorPanelAllModesMask          NSColorPanelOptions = 65535
 )
 
 func (e NSColorPanelOptions) String() string {
 	var parts []string
-	if e&NSColorPanelGrayModeMask != 0 { parts = append(parts, "NSColorPanelGrayModeMask") }
-	if e&NSColorPanelRGBModeMask != 0 { parts = append(parts, "NSColorPanelRGBModeMask") }
-	if e&NSColorPanelCMYKModeMask != 0 { parts = append(parts, "NSColorPanelCMYKModeMask") }
-	if e&NSColorPanelHSBModeMask != 0 { parts = append(parts, "NSColorPanelHSBModeMask") }
-	if e&NSColorPanelCustomPaletteModeMask != 0 { parts = append(parts, "NSColorPanelCustomPaletteModeMask") }
-	if e&NSColorPanelColorListModeMask != 0 { parts = append(parts, "NSColorPanelColorListModeMask") }
-	if e&NSColorPanelWheelModeMask != 0 { parts = append(parts, "NSColorPanelWheelModeMask") }
-	if e&NSColorPanelCrayonModeMask != 0 { parts = append(parts, "NSColorPanelCrayonModeMask") }
-	if e&NSColorPanelAllModesMask != 0 { parts = append(parts, "NSColorPanelAllModesMask") }
-	if len(parts) == 0 { return "0" }
+	if e&NSColorPanelGrayModeMask != 0 {
+		parts = append(parts, "NSColorPanelGrayModeMask")
+	}
+	if e&NSColorPanelRGBModeMask != 0 {
+		parts = append(parts, "NSColorPanelRGBModeMask")
+	}
+	if e&NSColorPanelCMYKModeMask != 0 {
+		parts = append(parts, "NSColorPanelCMYKModeMask")
+	}
+	if e&NSColorPanelHSBModeMask != 0 {
+		parts = append(parts, "NSColorPanelHSBModeMask")
+	}
+	if e&NSColorPanelCustomPaletteModeMask != 0 {
+		parts = append(parts, "NSColorPanelCustomPaletteModeMask")
+	}
+	if e&NSColorPanelColorListModeMask != 0 {
+		parts = append(parts, "NSColorPanelColorListModeMask")
+	}
+	if e&NSColorPanelWheelModeMask != 0 {
+		parts = append(parts, "NSColorPanelWheelModeMask")
+	}
+	if e&NSColorPanelCrayonModeMask != 0 {
+		parts = append(parts, "NSColorPanelCrayonModeMask")
+	}
+	if e&NSColorPanelAllModesMask != 0 {
+		parts = append(parts, "NSColorPanelAllModesMask")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSColorRenderingIntent int64
 
 const (
-	NSColorRenderingIntentDefault NSColorRenderingIntent = 0
+	NSColorRenderingIntentDefault              NSColorRenderingIntent = 0
 	NSColorRenderingIntentAbsoluteColorimetric NSColorRenderingIntent = 1
 	NSColorRenderingIntentRelativeColorimetric NSColorRenderingIntent = 2
-	NSColorRenderingIntentPerceptual NSColorRenderingIntent = 3
-	NSColorRenderingIntentSaturation NSColorRenderingIntent = 4
+	NSColorRenderingIntentPerceptual           NSColorRenderingIntent = 3
+	NSColorRenderingIntentSaturation           NSColorRenderingIntent = 4
 )
 
 func (e NSColorRenderingIntent) String() string {
@@ -1462,13 +1600,13 @@ func (e NSColorRenderingIntent) String() string {
 type NSColorSpaceModel int64
 
 const (
-	NSColorSpaceModelUnknown NSColorSpaceModel = -1
-	NSColorSpaceModelGray NSColorSpaceModel = 0
-	NSColorSpaceModelRGB NSColorSpaceModel = 1
-	NSColorSpaceModelCMYK NSColorSpaceModel = 2
-	NSColorSpaceModelLAB NSColorSpaceModel = 3
-	NSColorSpaceModelDeviceN NSColorSpaceModel = 4
-	NSColorSpaceModelIndexed NSColorSpaceModel = 5
+	NSColorSpaceModelUnknown   NSColorSpaceModel = -1
+	NSColorSpaceModelGray      NSColorSpaceModel = 0
+	NSColorSpaceModelRGB       NSColorSpaceModel = 1
+	NSColorSpaceModelCMYK      NSColorSpaceModel = 2
+	NSColorSpaceModelLAB       NSColorSpaceModel = 3
+	NSColorSpaceModelDeviceN   NSColorSpaceModel = 4
+	NSColorSpaceModelIndexed   NSColorSpaceModel = 5
 	NSColorSpaceModelPatterned NSColorSpaceModel = 6
 )
 
@@ -1498,11 +1636,11 @@ func (e NSColorSpaceModel) String() string {
 type NSColorSystemEffect int64
 
 const (
-	NSColorSystemEffectNone NSColorSystemEffect = 0
-	NSColorSystemEffectPressed NSColorSystemEffect = 1
+	NSColorSystemEffectNone        NSColorSystemEffect = 0
+	NSColorSystemEffectPressed     NSColorSystemEffect = 1
 	NSColorSystemEffectDeepPressed NSColorSystemEffect = 2
-	NSColorSystemEffectDisabled NSColorSystemEffect = 3
-	NSColorSystemEffectRollover NSColorSystemEffect = 4
+	NSColorSystemEffectDisabled    NSColorSystemEffect = 3
+	NSColorSystemEffectRollover    NSColorSystemEffect = 4
 )
 
 func (e NSColorSystemEffect) String() string {
@@ -1526,8 +1664,8 @@ type NSColorType int64
 
 const (
 	NSColorTypeComponentBased NSColorType = 0
-	NSColorTypePattern NSColorType = 1
-	NSColorTypeCatalog NSColorType = 2
+	NSColorTypePattern        NSColorType = 1
+	NSColorTypeCatalog        NSColorType = 2
 )
 
 func (e NSColorType) String() string {
@@ -1546,8 +1684,8 @@ func (e NSColorType) String() string {
 type NSColorWellStyle int64
 
 const (
-	NSColorWellStyleDefault NSColorWellStyle = 0
-	NSColorWellStyleMinimal NSColorWellStyle = 1
+	NSColorWellStyleDefault  NSColorWellStyle = 0
+	NSColorWellStyleMinimal  NSColorWellStyle = 1
 	NSColorWellStyleExpanded NSColorWellStyle = 2
 )
 
@@ -1587,35 +1725,35 @@ func (e NSComboButtonStyle) String() string {
 type NSCompositingOperation uint64
 
 const (
-	NSCompositingOperationClear NSCompositingOperation = 0
-	NSCompositingOperationCopy NSCompositingOperation = 1
-	NSCompositingOperationSourceOver NSCompositingOperation = 2
-	NSCompositingOperationSourceIn NSCompositingOperation = 3
-	NSCompositingOperationSourceOut NSCompositingOperation = 4
-	NSCompositingOperationSourceAtop NSCompositingOperation = 5
+	NSCompositingOperationClear           NSCompositingOperation = 0
+	NSCompositingOperationCopy            NSCompositingOperation = 1
+	NSCompositingOperationSourceOver      NSCompositingOperation = 2
+	NSCompositingOperationSourceIn        NSCompositingOperation = 3
+	NSCompositingOperationSourceOut       NSCompositingOperation = 4
+	NSCompositingOperationSourceAtop      NSCompositingOperation = 5
 	NSCompositingOperationDestinationOver NSCompositingOperation = 6
-	NSCompositingOperationDestinationIn NSCompositingOperation = 7
-	NSCompositingOperationDestinationOut NSCompositingOperation = 8
+	NSCompositingOperationDestinationIn   NSCompositingOperation = 7
+	NSCompositingOperationDestinationOut  NSCompositingOperation = 8
 	NSCompositingOperationDestinationAtop NSCompositingOperation = 9
-	NSCompositingOperationXOR NSCompositingOperation = 10
-	NSCompositingOperationPlusDarker NSCompositingOperation = 11
-	NSCompositingOperationHighlight NSCompositingOperation = 12
-	NSCompositingOperationPlusLighter NSCompositingOperation = 13
-	NSCompositingOperationMultiply NSCompositingOperation = 14
-	NSCompositingOperationScreen NSCompositingOperation = 15
-	NSCompositingOperationOverlay NSCompositingOperation = 16
-	NSCompositingOperationDarken NSCompositingOperation = 17
-	NSCompositingOperationLighten NSCompositingOperation = 18
-	NSCompositingOperationColorDodge NSCompositingOperation = 19
-	NSCompositingOperationColorBurn NSCompositingOperation = 20
-	NSCompositingOperationSoftLight NSCompositingOperation = 21
-	NSCompositingOperationHardLight NSCompositingOperation = 22
-	NSCompositingOperationDifference NSCompositingOperation = 23
-	NSCompositingOperationExclusion NSCompositingOperation = 24
-	NSCompositingOperationHue NSCompositingOperation = 25
-	NSCompositingOperationSaturation NSCompositingOperation = 26
-	NSCompositingOperationColor NSCompositingOperation = 27
-	NSCompositingOperationLuminosity NSCompositingOperation = 28
+	NSCompositingOperationXOR             NSCompositingOperation = 10
+	NSCompositingOperationPlusDarker      NSCompositingOperation = 11
+	NSCompositingOperationHighlight       NSCompositingOperation = 12
+	NSCompositingOperationPlusLighter     NSCompositingOperation = 13
+	NSCompositingOperationMultiply        NSCompositingOperation = 14
+	NSCompositingOperationScreen          NSCompositingOperation = 15
+	NSCompositingOperationOverlay         NSCompositingOperation = 16
+	NSCompositingOperationDarken          NSCompositingOperation = 17
+	NSCompositingOperationLighten         NSCompositingOperation = 18
+	NSCompositingOperationColorDodge      NSCompositingOperation = 19
+	NSCompositingOperationColorBurn       NSCompositingOperation = 20
+	NSCompositingOperationSoftLight       NSCompositingOperation = 21
+	NSCompositingOperationHardLight       NSCompositingOperation = 22
+	NSCompositingOperationDifference      NSCompositingOperation = 23
+	NSCompositingOperationExclusion       NSCompositingOperation = 24
+	NSCompositingOperationHue             NSCompositingOperation = 25
+	NSCompositingOperationSaturation      NSCompositingOperation = 26
+	NSCompositingOperationColor           NSCompositingOperation = 27
+	NSCompositingOperationLuminosity      NSCompositingOperation = 28
 )
 
 func (e NSCompositingOperation) String() string {
@@ -1687,10 +1825,10 @@ type NSControlBorderShape int64
 
 const (
 	// The control will resolve this to an appropriate shape for the given control size and context
-	NSControlBorderShapeAutomatic NSControlBorderShape = 0
-	NSControlBorderShapeCapsule NSControlBorderShape = 1
+	NSControlBorderShapeAutomatic        NSControlBorderShape = 0
+	NSControlBorderShapeCapsule          NSControlBorderShape = 1
 	NSControlBorderShapeRoundedRectangle NSControlBorderShape = 2
-	NSControlBorderShapeCircle NSControlBorderShape = 3
+	NSControlBorderShapeCircle           NSControlBorderShape = 3
 )
 
 func (e NSControlBorderShape) String() string {
@@ -1712,32 +1850,46 @@ type NSControlCharacterAction int64
 
 const (
 	NSControlCharacterActionZeroAdvancement NSControlCharacterAction = 1
-	NSControlCharacterActionWhitespace NSControlCharacterAction = 2
-	NSControlCharacterActionHorizontalTab NSControlCharacterAction = 4
-	NSControlCharacterActionLineBreak NSControlCharacterAction = 8
-	NSControlCharacterActionParagraphBreak NSControlCharacterAction = 16
-	NSControlCharacterActionContainerBreak NSControlCharacterAction = 32
+	NSControlCharacterActionWhitespace      NSControlCharacterAction = 2
+	NSControlCharacterActionHorizontalTab   NSControlCharacterAction = 4
+	NSControlCharacterActionLineBreak       NSControlCharacterAction = 8
+	NSControlCharacterActionParagraphBreak  NSControlCharacterAction = 16
+	NSControlCharacterActionContainerBreak  NSControlCharacterAction = 32
 )
 
 func (e NSControlCharacterAction) String() string {
 	var parts []string
-	if e&NSControlCharacterActionZeroAdvancement != 0 { parts = append(parts, "NSControlCharacterActionZeroAdvancement") }
-	if e&NSControlCharacterActionWhitespace != 0 { parts = append(parts, "NSControlCharacterActionWhitespace") }
-	if e&NSControlCharacterActionHorizontalTab != 0 { parts = append(parts, "NSControlCharacterActionHorizontalTab") }
-	if e&NSControlCharacterActionLineBreak != 0 { parts = append(parts, "NSControlCharacterActionLineBreak") }
-	if e&NSControlCharacterActionParagraphBreak != 0 { parts = append(parts, "NSControlCharacterActionParagraphBreak") }
-	if e&NSControlCharacterActionContainerBreak != 0 { parts = append(parts, "NSControlCharacterActionContainerBreak") }
-	if len(parts) == 0 { return "0" }
+	if e&NSControlCharacterActionZeroAdvancement != 0 {
+		parts = append(parts, "NSControlCharacterActionZeroAdvancement")
+	}
+	if e&NSControlCharacterActionWhitespace != 0 {
+		parts = append(parts, "NSControlCharacterActionWhitespace")
+	}
+	if e&NSControlCharacterActionHorizontalTab != 0 {
+		parts = append(parts, "NSControlCharacterActionHorizontalTab")
+	}
+	if e&NSControlCharacterActionLineBreak != 0 {
+		parts = append(parts, "NSControlCharacterActionLineBreak")
+	}
+	if e&NSControlCharacterActionParagraphBreak != 0 {
+		parts = append(parts, "NSControlCharacterActionParagraphBreak")
+	}
+	if e&NSControlCharacterActionContainerBreak != 0 {
+		parts = append(parts, "NSControlCharacterActionContainerBreak")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSControlSize uint64
 
 const (
-	NSControlSizeRegular NSControlSize = 0
-	NSControlSizeSmall NSControlSize = 1
-	NSControlSizeMini NSControlSize = 2
-	NSControlSizeLarge NSControlSize = 3
+	NSControlSizeRegular    NSControlSize = 0
+	NSControlSizeSmall      NSControlSize = 1
+	NSControlSizeMini       NSControlSize = 2
+	NSControlSizeLarge      NSControlSize = 3
 	NSControlSizeExtraLarge NSControlSize = 4
 )
 
@@ -1761,10 +1913,10 @@ func (e NSControlSize) String() string {
 type NSControlTint uint64
 
 const (
-	NSDefaultControlTint NSControlTint = 0
-	NSBlueControlTint NSControlTint = 1
+	NSDefaultControlTint  NSControlTint = 0
+	NSBlueControlTint     NSControlTint = 1
 	NSGraphiteControlTint NSControlTint = 6
-	NSClearControlTint NSControlTint = 7
+	NSClearControlTint    NSControlTint = 7
 )
 
 func (e NSControlTint) String() string {
@@ -1785,9 +1937,9 @@ func (e NSControlTint) String() string {
 type NSCorrectionIndicatorType int64
 
 const (
-	NSCorrectionIndicatorTypeDefault NSCorrectionIndicatorType = 0
+	NSCorrectionIndicatorTypeDefault   NSCorrectionIndicatorType = 0
 	NSCorrectionIndicatorTypeReversion NSCorrectionIndicatorType = 1
-	NSCorrectionIndicatorTypeGuesses NSCorrectionIndicatorType = 2
+	NSCorrectionIndicatorTypeGuesses   NSCorrectionIndicatorType = 2
 )
 
 func (e NSCorrectionIndicatorType) String() string {
@@ -1806,11 +1958,11 @@ func (e NSCorrectionIndicatorType) String() string {
 type NSCorrectionResponse int64
 
 const (
-	NSCorrectionResponseNone NSCorrectionResponse = 0
+	NSCorrectionResponseNone     NSCorrectionResponse = 0
 	NSCorrectionResponseAccepted NSCorrectionResponse = 1
 	NSCorrectionResponseRejected NSCorrectionResponse = 2
-	NSCorrectionResponseIgnored NSCorrectionResponse = 3
-	NSCorrectionResponseEdited NSCorrectionResponse = 4
+	NSCorrectionResponseIgnored  NSCorrectionResponse = 3
+	NSCorrectionResponseEdited   NSCorrectionResponse = 4
 	NSCorrectionResponseReverted NSCorrectionResponse = 5
 )
 
@@ -1846,10 +1998,18 @@ const (
 
 func (e NSCursorFrameResizeDirections) String() string {
 	var parts []string
-	if e&NSCursorFrameResizeDirectionsInward != 0 { parts = append(parts, "NSCursorFrameResizeDirectionsInward") }
-	if e&NSCursorFrameResizeDirectionsOutward != 0 { parts = append(parts, "NSCursorFrameResizeDirectionsOutward") }
-	if e&NSCursorFrameResizeDirectionsAll != 0 { parts = append(parts, "NSCursorFrameResizeDirectionsAll") }
-	if len(parts) == 0 { return "0" }
+	if e&NSCursorFrameResizeDirectionsInward != 0 {
+		parts = append(parts, "NSCursorFrameResizeDirectionsInward")
+	}
+	if e&NSCursorFrameResizeDirectionsOutward != 0 {
+		parts = append(parts, "NSCursorFrameResizeDirectionsOutward")
+	}
+	if e&NSCursorFrameResizeDirectionsAll != 0 {
+		parts = append(parts, "NSCursorFrameResizeDirectionsAll")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1900,23 +2060,37 @@ func (e NSCursorFrameResizePosition) String() string {
 type NSDatePickerElementFlags uint64
 
 const (
-	NSDatePickerElementFlagHourMinute NSDatePickerElementFlags = 12
+	NSDatePickerElementFlagHourMinute       NSDatePickerElementFlags = 12
 	NSDatePickerElementFlagHourMinuteSecond NSDatePickerElementFlags = 14
-	NSDatePickerElementFlagTimeZone NSDatePickerElementFlags = 16
-	NSDatePickerElementFlagYearMonth NSDatePickerElementFlags = 192
-	NSDatePickerElementFlagYearMonthDay NSDatePickerElementFlags = 224
-	NSDatePickerElementFlagEra NSDatePickerElementFlags = 256
+	NSDatePickerElementFlagTimeZone         NSDatePickerElementFlags = 16
+	NSDatePickerElementFlagYearMonth        NSDatePickerElementFlags = 192
+	NSDatePickerElementFlagYearMonthDay     NSDatePickerElementFlags = 224
+	NSDatePickerElementFlagEra              NSDatePickerElementFlags = 256
 )
 
 func (e NSDatePickerElementFlags) String() string {
 	var parts []string
-	if e&NSDatePickerElementFlagHourMinute != 0 { parts = append(parts, "NSDatePickerElementFlagHourMinute") }
-	if e&NSDatePickerElementFlagHourMinuteSecond != 0 { parts = append(parts, "NSDatePickerElementFlagHourMinuteSecond") }
-	if e&NSDatePickerElementFlagTimeZone != 0 { parts = append(parts, "NSDatePickerElementFlagTimeZone") }
-	if e&NSDatePickerElementFlagYearMonth != 0 { parts = append(parts, "NSDatePickerElementFlagYearMonth") }
-	if e&NSDatePickerElementFlagYearMonthDay != 0 { parts = append(parts, "NSDatePickerElementFlagYearMonthDay") }
-	if e&NSDatePickerElementFlagEra != 0 { parts = append(parts, "NSDatePickerElementFlagEra") }
-	if len(parts) == 0 { return "0" }
+	if e&NSDatePickerElementFlagHourMinute != 0 {
+		parts = append(parts, "NSDatePickerElementFlagHourMinute")
+	}
+	if e&NSDatePickerElementFlagHourMinuteSecond != 0 {
+		parts = append(parts, "NSDatePickerElementFlagHourMinuteSecond")
+	}
+	if e&NSDatePickerElementFlagTimeZone != 0 {
+		parts = append(parts, "NSDatePickerElementFlagTimeZone")
+	}
+	if e&NSDatePickerElementFlagYearMonth != 0 {
+		parts = append(parts, "NSDatePickerElementFlagYearMonth")
+	}
+	if e&NSDatePickerElementFlagYearMonthDay != 0 {
+		parts = append(parts, "NSDatePickerElementFlagYearMonthDay")
+	}
+	if e&NSDatePickerElementFlagEra != 0 {
+		parts = append(parts, "NSDatePickerElementFlagEra")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1924,7 +2098,7 @@ type NSDatePickerMode uint64
 
 const (
 	NSDatePickerModeSingle NSDatePickerMode = 0
-	NSDatePickerModeRange NSDatePickerMode = 1
+	NSDatePickerModeRange  NSDatePickerMode = 1
 )
 
 func (e NSDatePickerMode) String() string {
@@ -1942,8 +2116,8 @@ type NSDatePickerStyle uint64
 
 const (
 	NSDatePickerStyleTextFieldAndStepper NSDatePickerStyle = 0
-	NSDatePickerStyleClockAndCalendar NSDatePickerStyle = 1
-	NSDatePickerStyleTextField NSDatePickerStyle = 2
+	NSDatePickerStyleClockAndCalendar    NSDatePickerStyle = 1
+	NSDatePickerStyleTextField           NSDatePickerStyle = 2
 )
 
 func (e NSDatePickerStyle) String() string {
@@ -1962,22 +2136,34 @@ func (e NSDatePickerStyle) String() string {
 type NSDirectionalRectEdge uint64
 
 const (
-	NSDirectionalRectEdgeNone NSDirectionalRectEdge = 0
-	NSDirectionalRectEdgeTop NSDirectionalRectEdge = 1
-	NSDirectionalRectEdgeLeading NSDirectionalRectEdge = 2
-	NSDirectionalRectEdgeBottom NSDirectionalRectEdge = 4
+	NSDirectionalRectEdgeNone     NSDirectionalRectEdge = 0
+	NSDirectionalRectEdgeTop      NSDirectionalRectEdge = 1
+	NSDirectionalRectEdgeLeading  NSDirectionalRectEdge = 2
+	NSDirectionalRectEdgeBottom   NSDirectionalRectEdge = 4
 	NSDirectionalRectEdgeTrailing NSDirectionalRectEdge = 8
-	NSDirectionalRectEdgeAll NSDirectionalRectEdge = 15
+	NSDirectionalRectEdgeAll      NSDirectionalRectEdge = 15
 )
 
 func (e NSDirectionalRectEdge) String() string {
 	var parts []string
-	if e&NSDirectionalRectEdgeTop != 0 { parts = append(parts, "NSDirectionalRectEdgeTop") }
-	if e&NSDirectionalRectEdgeLeading != 0 { parts = append(parts, "NSDirectionalRectEdgeLeading") }
-	if e&NSDirectionalRectEdgeBottom != 0 { parts = append(parts, "NSDirectionalRectEdgeBottom") }
-	if e&NSDirectionalRectEdgeTrailing != 0 { parts = append(parts, "NSDirectionalRectEdgeTrailing") }
-	if e&NSDirectionalRectEdgeAll != 0 { parts = append(parts, "NSDirectionalRectEdgeAll") }
-	if len(parts) == 0 { return "0" }
+	if e&NSDirectionalRectEdgeTop != 0 {
+		parts = append(parts, "NSDirectionalRectEdgeTop")
+	}
+	if e&NSDirectionalRectEdgeLeading != 0 {
+		parts = append(parts, "NSDirectionalRectEdgeLeading")
+	}
+	if e&NSDirectionalRectEdgeBottom != 0 {
+		parts = append(parts, "NSDirectionalRectEdgeBottom")
+	}
+	if e&NSDirectionalRectEdgeTrailing != 0 {
+		parts = append(parts, "NSDirectionalRectEdgeTrailing")
+	}
+	if e&NSDirectionalRectEdgeAll != 0 {
+		parts = append(parts, "NSDirectionalRectEdgeAll")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1985,7 +2171,7 @@ type NSDisplayGamut int64
 
 const (
 	NSDisplayGamutSRGB NSDisplayGamut = 1
-	NSDisplayGamutP3 NSDisplayGamut = 2
+	NSDisplayGamutP3   NSDisplayGamut = 2
 )
 
 func (e NSDisplayGamut) String() string {
@@ -2002,13 +2188,13 @@ func (e NSDisplayGamut) String() string {
 type NSDocumentChangeType uint64
 
 const (
-	NSChangeDone NSDocumentChangeType = 0
-	NSChangeUndone NSDocumentChangeType = 1
-	NSChangeRedone NSDocumentChangeType = 5
-	NSChangeCleared NSDocumentChangeType = 2
+	NSChangeDone              NSDocumentChangeType = 0
+	NSChangeUndone            NSDocumentChangeType = 1
+	NSChangeRedone            NSDocumentChangeType = 5
+	NSChangeCleared           NSDocumentChangeType = 2
 	NSChangeReadOtherContents NSDocumentChangeType = 3
-	NSChangeAutosaved NSDocumentChangeType = 4
-	NSChangeDiscardable NSDocumentChangeType = 256
+	NSChangeAutosaved         NSDocumentChangeType = 4
+	NSChangeDiscardable       NSDocumentChangeType = 256
 )
 
 func (e NSDocumentChangeType) String() string {
@@ -2035,30 +2221,50 @@ func (e NSDocumentChangeType) String() string {
 type NSDragOperation uint64
 
 const (
-	NSDragOperationNone NSDragOperation = 0
-	NSDragOperationCopy NSDragOperation = 1
-	NSDragOperationLink NSDragOperation = 2
-	NSDragOperationGeneric NSDragOperation = 4
-	NSDragOperationPrivate NSDragOperation = 8
-	NSDragOperationMove NSDragOperation = 16
-	NSDragOperationDelete NSDragOperation = 32
-	NSDragOperationEvery NSDragOperation = 18446744073709551615
+	NSDragOperationNone         NSDragOperation = 0
+	NSDragOperationCopy         NSDragOperation = 1
+	NSDragOperationLink         NSDragOperation = 2
+	NSDragOperationGeneric      NSDragOperation = 4
+	NSDragOperationPrivate      NSDragOperation = 8
+	NSDragOperationMove         NSDragOperation = 16
+	NSDragOperationDelete       NSDragOperation = 32
+	NSDragOperationEvery        NSDragOperation = 18446744073709551615
 	NSDragOperationAll_Obsolete NSDragOperation = 15
-	NSDragOperationAll NSDragOperation = 15
+	NSDragOperationAll          NSDragOperation = 15
 )
 
 func (e NSDragOperation) String() string {
 	var parts []string
-	if e&NSDragOperationCopy != 0 { parts = append(parts, "NSDragOperationCopy") }
-	if e&NSDragOperationLink != 0 { parts = append(parts, "NSDragOperationLink") }
-	if e&NSDragOperationGeneric != 0 { parts = append(parts, "NSDragOperationGeneric") }
-	if e&NSDragOperationPrivate != 0 { parts = append(parts, "NSDragOperationPrivate") }
-	if e&NSDragOperationMove != 0 { parts = append(parts, "NSDragOperationMove") }
-	if e&NSDragOperationDelete != 0 { parts = append(parts, "NSDragOperationDelete") }
-	if e&NSDragOperationEvery != 0 { parts = append(parts, "NSDragOperationEvery") }
-	if e&NSDragOperationAll_Obsolete != 0 { parts = append(parts, "NSDragOperationAll_Obsolete") }
-	if e&NSDragOperationAll != 0 { parts = append(parts, "NSDragOperationAll") }
-	if len(parts) == 0 { return "0" }
+	if e&NSDragOperationCopy != 0 {
+		parts = append(parts, "NSDragOperationCopy")
+	}
+	if e&NSDragOperationLink != 0 {
+		parts = append(parts, "NSDragOperationLink")
+	}
+	if e&NSDragOperationGeneric != 0 {
+		parts = append(parts, "NSDragOperationGeneric")
+	}
+	if e&NSDragOperationPrivate != 0 {
+		parts = append(parts, "NSDragOperationPrivate")
+	}
+	if e&NSDragOperationMove != 0 {
+		parts = append(parts, "NSDragOperationMove")
+	}
+	if e&NSDragOperationDelete != 0 {
+		parts = append(parts, "NSDragOperationDelete")
+	}
+	if e&NSDragOperationEvery != 0 {
+		parts = append(parts, "NSDragOperationEvery")
+	}
+	if e&NSDragOperationAll_Obsolete != 0 {
+		parts = append(parts, "NSDragOperationAll_Obsolete")
+	}
+	if e&NSDragOperationAll != 0 {
+		parts = append(parts, "NSDragOperationAll")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -2066,7 +2272,7 @@ type NSDraggingContext int64
 
 const (
 	NSDraggingContextOutsideApplication NSDraggingContext = 0
-	NSDraggingContextWithinApplication NSDraggingContext = 1
+	NSDraggingContextWithinApplication  NSDraggingContext = 1
 )
 
 func (e NSDraggingContext) String() string {
@@ -2084,10 +2290,10 @@ type NSDraggingFormation int64
 
 const (
 	NSDraggingFormationDefault NSDraggingFormation = 0
-	NSDraggingFormationNone NSDraggingFormation = 1
-	NSDraggingFormationPile NSDraggingFormation = 2
-	NSDraggingFormationList NSDraggingFormation = 3
-	NSDraggingFormationStack NSDraggingFormation = 4
+	NSDraggingFormationNone    NSDraggingFormation = 1
+	NSDraggingFormationPile    NSDraggingFormation = 2
+	NSDraggingFormationList    NSDraggingFormation = 3
+	NSDraggingFormationStack   NSDraggingFormation = 4
 )
 
 func (e NSDraggingFormation) String() string {
@@ -2110,24 +2316,30 @@ func (e NSDraggingFormation) String() string {
 type NSDraggingItemEnumerationOptions uint64
 
 const (
-	NSDraggingItemEnumerationConcurrent NSDraggingItemEnumerationOptions = 1
+	NSDraggingItemEnumerationConcurrent               NSDraggingItemEnumerationOptions = 1
 	NSDraggingItemEnumerationClearNonenumeratedImages NSDraggingItemEnumerationOptions = 65536
 )
 
 func (e NSDraggingItemEnumerationOptions) String() string {
 	var parts []string
-	if e&NSDraggingItemEnumerationConcurrent != 0 { parts = append(parts, "NSDraggingItemEnumerationConcurrent") }
-	if e&NSDraggingItemEnumerationClearNonenumeratedImages != 0 { parts = append(parts, "NSDraggingItemEnumerationClearNonenumeratedImages") }
-	if len(parts) == 0 { return "0" }
+	if e&NSDraggingItemEnumerationConcurrent != 0 {
+		parts = append(parts, "NSDraggingItemEnumerationConcurrent")
+	}
+	if e&NSDraggingItemEnumerationClearNonenumeratedImages != 0 {
+		parts = append(parts, "NSDraggingItemEnumerationClearNonenumeratedImages")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSDrawerState uint64
 
 const (
-	NSDrawerClosedState NSDrawerState = 0
+	NSDrawerClosedState  NSDrawerState = 0
 	NSDrawerOpeningState NSDrawerState = 1
-	NSDrawerOpenState NSDrawerState = 2
+	NSDrawerOpenState    NSDrawerState = 2
 	NSDrawerClosingState NSDrawerState = 3
 )
 
@@ -2150,26 +2362,34 @@ func (e NSDrawerState) String() string {
 type NSEventButtonMask uint64
 
 const (
-	NSEventButtonMaskPenTip NSEventButtonMask = 1
+	NSEventButtonMaskPenTip       NSEventButtonMask = 1
 	NSEventButtonMaskPenLowerSide NSEventButtonMask = 2
 	NSEventButtonMaskPenUpperSide NSEventButtonMask = 4
 )
 
 func (e NSEventButtonMask) String() string {
 	var parts []string
-	if e&NSEventButtonMaskPenTip != 0 { parts = append(parts, "NSEventButtonMaskPenTip") }
-	if e&NSEventButtonMaskPenLowerSide != 0 { parts = append(parts, "NSEventButtonMaskPenLowerSide") }
-	if e&NSEventButtonMaskPenUpperSide != 0 { parts = append(parts, "NSEventButtonMaskPenUpperSide") }
-	if len(parts) == 0 { return "0" }
+	if e&NSEventButtonMaskPenTip != 0 {
+		parts = append(parts, "NSEventButtonMaskPenTip")
+	}
+	if e&NSEventButtonMaskPenLowerSide != 0 {
+		parts = append(parts, "NSEventButtonMaskPenLowerSide")
+	}
+	if e&NSEventButtonMaskPenUpperSide != 0 {
+		parts = append(parts, "NSEventButtonMaskPenUpperSide")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSEventGestureAxis int64
 
 const (
-	NSEventGestureAxisNone NSEventGestureAxis = 0
+	NSEventGestureAxisNone       NSEventGestureAxis = 0
 	NSEventGestureAxisHorizontal NSEventGestureAxis = 1
-	NSEventGestureAxisVertical NSEventGestureAxis = 2
+	NSEventGestureAxisVertical   NSEventGestureAxis = 2
 )
 
 func (e NSEventGestureAxis) String() string {
@@ -2189,150 +2409,256 @@ func (e NSEventGestureAxis) String() string {
 type NSEventMask uint64
 
 const (
-	NSEventMaskLeftMouseDown NSEventMask = 2
-	NSEventMaskLeftMouseUp NSEventMask = 4
-	NSEventMaskRightMouseDown NSEventMask = 8
-	NSEventMaskRightMouseUp NSEventMask = 16
-	NSEventMaskMouseMoved NSEventMask = 32
-	NSEventMaskLeftMouseDragged NSEventMask = 64
-	NSEventMaskRightMouseDragged NSEventMask = 128
-	NSEventMaskMouseEntered NSEventMask = 256
-	NSEventMaskMouseExited NSEventMask = 512
-	NSEventMaskKeyDown NSEventMask = 1024
-	NSEventMaskKeyUp NSEventMask = 2048
-	NSEventMaskFlagsChanged NSEventMask = 4096
-	NSEventMaskAppKitDefined NSEventMask = 8192
-	NSEventMaskSystemDefined NSEventMask = 16384
+	NSEventMaskLeftMouseDown      NSEventMask = 2
+	NSEventMaskLeftMouseUp        NSEventMask = 4
+	NSEventMaskRightMouseDown     NSEventMask = 8
+	NSEventMaskRightMouseUp       NSEventMask = 16
+	NSEventMaskMouseMoved         NSEventMask = 32
+	NSEventMaskLeftMouseDragged   NSEventMask = 64
+	NSEventMaskRightMouseDragged  NSEventMask = 128
+	NSEventMaskMouseEntered       NSEventMask = 256
+	NSEventMaskMouseExited        NSEventMask = 512
+	NSEventMaskKeyDown            NSEventMask = 1024
+	NSEventMaskKeyUp              NSEventMask = 2048
+	NSEventMaskFlagsChanged       NSEventMask = 4096
+	NSEventMaskAppKitDefined      NSEventMask = 8192
+	NSEventMaskSystemDefined      NSEventMask = 16384
 	NSEventMaskApplicationDefined NSEventMask = 32768
-	NSEventMaskPeriodic NSEventMask = 65536
-	NSEventMaskCursorUpdate NSEventMask = 131072
-	NSEventMaskScrollWheel NSEventMask = 4194304
-	NSEventMaskTabletPoint NSEventMask = 8388608
-	NSEventMaskTabletProximity NSEventMask = 16777216
-	NSEventMaskOtherMouseDown NSEventMask = 33554432
-	NSEventMaskOtherMouseUp NSEventMask = 67108864
-	NSEventMaskOtherMouseDragged NSEventMask = 134217728
-	NSEventMaskGesture NSEventMask = 536870912
-	NSEventMaskMagnify NSEventMask = 1073741824
-	NSEventMaskSwipe NSEventMask = 2147483648
-	NSEventMaskRotate NSEventMask = 262144
-	NSEventMaskBeginGesture NSEventMask = 524288
-	NSEventMaskEndGesture NSEventMask = 1048576
-	NSEventMaskSmartMagnify NSEventMask = 4294967296
-	NSEventMaskPressure NSEventMask = 17179869184
-	NSEventMaskDirectTouch NSEventMask = 137438953472
-	NSEventMaskChangeMode NSEventMask = 274877906944
-	NSEventMaskMouseCancelled NSEventMask = 1099511627776
-	NSEventMaskAny NSEventMask = 18446744073709551615
+	NSEventMaskPeriodic           NSEventMask = 65536
+	NSEventMaskCursorUpdate       NSEventMask = 131072
+	NSEventMaskScrollWheel        NSEventMask = 4194304
+	NSEventMaskTabletPoint        NSEventMask = 8388608
+	NSEventMaskTabletProximity    NSEventMask = 16777216
+	NSEventMaskOtherMouseDown     NSEventMask = 33554432
+	NSEventMaskOtherMouseUp       NSEventMask = 67108864
+	NSEventMaskOtherMouseDragged  NSEventMask = 134217728
+	NSEventMaskGesture            NSEventMask = 536870912
+	NSEventMaskMagnify            NSEventMask = 1073741824
+	NSEventMaskSwipe              NSEventMask = 2147483648
+	NSEventMaskRotate             NSEventMask = 262144
+	NSEventMaskBeginGesture       NSEventMask = 524288
+	NSEventMaskEndGesture         NSEventMask = 1048576
+	NSEventMaskSmartMagnify       NSEventMask = 4294967296
+	NSEventMaskPressure           NSEventMask = 17179869184
+	NSEventMaskDirectTouch        NSEventMask = 137438953472
+	NSEventMaskChangeMode         NSEventMask = 274877906944
+	NSEventMaskMouseCancelled     NSEventMask = 1099511627776
+	NSEventMaskAny                NSEventMask = 18446744073709551615
 )
 
 func (e NSEventMask) String() string {
 	var parts []string
-	if e&NSEventMaskLeftMouseDown != 0 { parts = append(parts, "NSEventMaskLeftMouseDown") }
-	if e&NSEventMaskLeftMouseUp != 0 { parts = append(parts, "NSEventMaskLeftMouseUp") }
-	if e&NSEventMaskRightMouseDown != 0 { parts = append(parts, "NSEventMaskRightMouseDown") }
-	if e&NSEventMaskRightMouseUp != 0 { parts = append(parts, "NSEventMaskRightMouseUp") }
-	if e&NSEventMaskMouseMoved != 0 { parts = append(parts, "NSEventMaskMouseMoved") }
-	if e&NSEventMaskLeftMouseDragged != 0 { parts = append(parts, "NSEventMaskLeftMouseDragged") }
-	if e&NSEventMaskRightMouseDragged != 0 { parts = append(parts, "NSEventMaskRightMouseDragged") }
-	if e&NSEventMaskMouseEntered != 0 { parts = append(parts, "NSEventMaskMouseEntered") }
-	if e&NSEventMaskMouseExited != 0 { parts = append(parts, "NSEventMaskMouseExited") }
-	if e&NSEventMaskKeyDown != 0 { parts = append(parts, "NSEventMaskKeyDown") }
-	if e&NSEventMaskKeyUp != 0 { parts = append(parts, "NSEventMaskKeyUp") }
-	if e&NSEventMaskFlagsChanged != 0 { parts = append(parts, "NSEventMaskFlagsChanged") }
-	if e&NSEventMaskAppKitDefined != 0 { parts = append(parts, "NSEventMaskAppKitDefined") }
-	if e&NSEventMaskSystemDefined != 0 { parts = append(parts, "NSEventMaskSystemDefined") }
-	if e&NSEventMaskApplicationDefined != 0 { parts = append(parts, "NSEventMaskApplicationDefined") }
-	if e&NSEventMaskPeriodic != 0 { parts = append(parts, "NSEventMaskPeriodic") }
-	if e&NSEventMaskCursorUpdate != 0 { parts = append(parts, "NSEventMaskCursorUpdate") }
-	if e&NSEventMaskScrollWheel != 0 { parts = append(parts, "NSEventMaskScrollWheel") }
-	if e&NSEventMaskTabletPoint != 0 { parts = append(parts, "NSEventMaskTabletPoint") }
-	if e&NSEventMaskTabletProximity != 0 { parts = append(parts, "NSEventMaskTabletProximity") }
-	if e&NSEventMaskOtherMouseDown != 0 { parts = append(parts, "NSEventMaskOtherMouseDown") }
-	if e&NSEventMaskOtherMouseUp != 0 { parts = append(parts, "NSEventMaskOtherMouseUp") }
-	if e&NSEventMaskOtherMouseDragged != 0 { parts = append(parts, "NSEventMaskOtherMouseDragged") }
-	if e&NSEventMaskGesture != 0 { parts = append(parts, "NSEventMaskGesture") }
-	if e&NSEventMaskMagnify != 0 { parts = append(parts, "NSEventMaskMagnify") }
-	if e&NSEventMaskSwipe != 0 { parts = append(parts, "NSEventMaskSwipe") }
-	if e&NSEventMaskRotate != 0 { parts = append(parts, "NSEventMaskRotate") }
-	if e&NSEventMaskBeginGesture != 0 { parts = append(parts, "NSEventMaskBeginGesture") }
-	if e&NSEventMaskEndGesture != 0 { parts = append(parts, "NSEventMaskEndGesture") }
-	if e&NSEventMaskSmartMagnify != 0 { parts = append(parts, "NSEventMaskSmartMagnify") }
-	if e&NSEventMaskPressure != 0 { parts = append(parts, "NSEventMaskPressure") }
-	if e&NSEventMaskDirectTouch != 0 { parts = append(parts, "NSEventMaskDirectTouch") }
-	if e&NSEventMaskChangeMode != 0 { parts = append(parts, "NSEventMaskChangeMode") }
-	if e&NSEventMaskMouseCancelled != 0 { parts = append(parts, "NSEventMaskMouseCancelled") }
-	if e&NSEventMaskAny != 0 { parts = append(parts, "NSEventMaskAny") }
-	if len(parts) == 0 { return "0" }
+	if e&NSEventMaskLeftMouseDown != 0 {
+		parts = append(parts, "NSEventMaskLeftMouseDown")
+	}
+	if e&NSEventMaskLeftMouseUp != 0 {
+		parts = append(parts, "NSEventMaskLeftMouseUp")
+	}
+	if e&NSEventMaskRightMouseDown != 0 {
+		parts = append(parts, "NSEventMaskRightMouseDown")
+	}
+	if e&NSEventMaskRightMouseUp != 0 {
+		parts = append(parts, "NSEventMaskRightMouseUp")
+	}
+	if e&NSEventMaskMouseMoved != 0 {
+		parts = append(parts, "NSEventMaskMouseMoved")
+	}
+	if e&NSEventMaskLeftMouseDragged != 0 {
+		parts = append(parts, "NSEventMaskLeftMouseDragged")
+	}
+	if e&NSEventMaskRightMouseDragged != 0 {
+		parts = append(parts, "NSEventMaskRightMouseDragged")
+	}
+	if e&NSEventMaskMouseEntered != 0 {
+		parts = append(parts, "NSEventMaskMouseEntered")
+	}
+	if e&NSEventMaskMouseExited != 0 {
+		parts = append(parts, "NSEventMaskMouseExited")
+	}
+	if e&NSEventMaskKeyDown != 0 {
+		parts = append(parts, "NSEventMaskKeyDown")
+	}
+	if e&NSEventMaskKeyUp != 0 {
+		parts = append(parts, "NSEventMaskKeyUp")
+	}
+	if e&NSEventMaskFlagsChanged != 0 {
+		parts = append(parts, "NSEventMaskFlagsChanged")
+	}
+	if e&NSEventMaskAppKitDefined != 0 {
+		parts = append(parts, "NSEventMaskAppKitDefined")
+	}
+	if e&NSEventMaskSystemDefined != 0 {
+		parts = append(parts, "NSEventMaskSystemDefined")
+	}
+	if e&NSEventMaskApplicationDefined != 0 {
+		parts = append(parts, "NSEventMaskApplicationDefined")
+	}
+	if e&NSEventMaskPeriodic != 0 {
+		parts = append(parts, "NSEventMaskPeriodic")
+	}
+	if e&NSEventMaskCursorUpdate != 0 {
+		parts = append(parts, "NSEventMaskCursorUpdate")
+	}
+	if e&NSEventMaskScrollWheel != 0 {
+		parts = append(parts, "NSEventMaskScrollWheel")
+	}
+	if e&NSEventMaskTabletPoint != 0 {
+		parts = append(parts, "NSEventMaskTabletPoint")
+	}
+	if e&NSEventMaskTabletProximity != 0 {
+		parts = append(parts, "NSEventMaskTabletProximity")
+	}
+	if e&NSEventMaskOtherMouseDown != 0 {
+		parts = append(parts, "NSEventMaskOtherMouseDown")
+	}
+	if e&NSEventMaskOtherMouseUp != 0 {
+		parts = append(parts, "NSEventMaskOtherMouseUp")
+	}
+	if e&NSEventMaskOtherMouseDragged != 0 {
+		parts = append(parts, "NSEventMaskOtherMouseDragged")
+	}
+	if e&NSEventMaskGesture != 0 {
+		parts = append(parts, "NSEventMaskGesture")
+	}
+	if e&NSEventMaskMagnify != 0 {
+		parts = append(parts, "NSEventMaskMagnify")
+	}
+	if e&NSEventMaskSwipe != 0 {
+		parts = append(parts, "NSEventMaskSwipe")
+	}
+	if e&NSEventMaskRotate != 0 {
+		parts = append(parts, "NSEventMaskRotate")
+	}
+	if e&NSEventMaskBeginGesture != 0 {
+		parts = append(parts, "NSEventMaskBeginGesture")
+	}
+	if e&NSEventMaskEndGesture != 0 {
+		parts = append(parts, "NSEventMaskEndGesture")
+	}
+	if e&NSEventMaskSmartMagnify != 0 {
+		parts = append(parts, "NSEventMaskSmartMagnify")
+	}
+	if e&NSEventMaskPressure != 0 {
+		parts = append(parts, "NSEventMaskPressure")
+	}
+	if e&NSEventMaskDirectTouch != 0 {
+		parts = append(parts, "NSEventMaskDirectTouch")
+	}
+	if e&NSEventMaskChangeMode != 0 {
+		parts = append(parts, "NSEventMaskChangeMode")
+	}
+	if e&NSEventMaskMouseCancelled != 0 {
+		parts = append(parts, "NSEventMaskMouseCancelled")
+	}
+	if e&NSEventMaskAny != 0 {
+		parts = append(parts, "NSEventMaskAny")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSEventModifierFlags uint64
 
 const (
-	NSEventModifierFlagCapsLock NSEventModifierFlags = 65536
-	NSEventModifierFlagShift NSEventModifierFlags = 131072
-	NSEventModifierFlagControl NSEventModifierFlags = 262144
-	NSEventModifierFlagOption NSEventModifierFlags = 524288
-	NSEventModifierFlagCommand NSEventModifierFlags = 1048576
-	NSEventModifierFlagNumericPad NSEventModifierFlags = 2097152
-	NSEventModifierFlagHelp NSEventModifierFlags = 4194304
-	NSEventModifierFlagFunction NSEventModifierFlags = 8388608
+	NSEventModifierFlagCapsLock                   NSEventModifierFlags = 65536
+	NSEventModifierFlagShift                      NSEventModifierFlags = 131072
+	NSEventModifierFlagControl                    NSEventModifierFlags = 262144
+	NSEventModifierFlagOption                     NSEventModifierFlags = 524288
+	NSEventModifierFlagCommand                    NSEventModifierFlags = 1048576
+	NSEventModifierFlagNumericPad                 NSEventModifierFlags = 2097152
+	NSEventModifierFlagHelp                       NSEventModifierFlags = 4194304
+	NSEventModifierFlagFunction                   NSEventModifierFlags = 8388608
 	NSEventModifierFlagDeviceIndependentFlagsMask NSEventModifierFlags = 4294901760
 )
 
 func (e NSEventModifierFlags) String() string {
 	var parts []string
-	if e&NSEventModifierFlagCapsLock != 0 { parts = append(parts, "NSEventModifierFlagCapsLock") }
-	if e&NSEventModifierFlagShift != 0 { parts = append(parts, "NSEventModifierFlagShift") }
-	if e&NSEventModifierFlagControl != 0 { parts = append(parts, "NSEventModifierFlagControl") }
-	if e&NSEventModifierFlagOption != 0 { parts = append(parts, "NSEventModifierFlagOption") }
-	if e&NSEventModifierFlagCommand != 0 { parts = append(parts, "NSEventModifierFlagCommand") }
-	if e&NSEventModifierFlagNumericPad != 0 { parts = append(parts, "NSEventModifierFlagNumericPad") }
-	if e&NSEventModifierFlagHelp != 0 { parts = append(parts, "NSEventModifierFlagHelp") }
-	if e&NSEventModifierFlagFunction != 0 { parts = append(parts, "NSEventModifierFlagFunction") }
-	if e&NSEventModifierFlagDeviceIndependentFlagsMask != 0 { parts = append(parts, "NSEventModifierFlagDeviceIndependentFlagsMask") }
-	if len(parts) == 0 { return "0" }
+	if e&NSEventModifierFlagCapsLock != 0 {
+		parts = append(parts, "NSEventModifierFlagCapsLock")
+	}
+	if e&NSEventModifierFlagShift != 0 {
+		parts = append(parts, "NSEventModifierFlagShift")
+	}
+	if e&NSEventModifierFlagControl != 0 {
+		parts = append(parts, "NSEventModifierFlagControl")
+	}
+	if e&NSEventModifierFlagOption != 0 {
+		parts = append(parts, "NSEventModifierFlagOption")
+	}
+	if e&NSEventModifierFlagCommand != 0 {
+		parts = append(parts, "NSEventModifierFlagCommand")
+	}
+	if e&NSEventModifierFlagNumericPad != 0 {
+		parts = append(parts, "NSEventModifierFlagNumericPad")
+	}
+	if e&NSEventModifierFlagHelp != 0 {
+		parts = append(parts, "NSEventModifierFlagHelp")
+	}
+	if e&NSEventModifierFlagFunction != 0 {
+		parts = append(parts, "NSEventModifierFlagFunction")
+	}
+	if e&NSEventModifierFlagDeviceIndependentFlagsMask != 0 {
+		parts = append(parts, "NSEventModifierFlagDeviceIndependentFlagsMask")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSEventPhase uint64
 
 const (
-	NSEventPhaseNone NSEventPhase = 0
-	NSEventPhaseBegan NSEventPhase = 1
+	NSEventPhaseNone       NSEventPhase = 0
+	NSEventPhaseBegan      NSEventPhase = 1
 	NSEventPhaseStationary NSEventPhase = 2
-	NSEventPhaseChanged NSEventPhase = 4
-	NSEventPhaseEnded NSEventPhase = 8
-	NSEventPhaseCancelled NSEventPhase = 16
-	NSEventPhaseMayBegin NSEventPhase = 32
+	NSEventPhaseChanged    NSEventPhase = 4
+	NSEventPhaseEnded      NSEventPhase = 8
+	NSEventPhaseCancelled  NSEventPhase = 16
+	NSEventPhaseMayBegin   NSEventPhase = 32
 )
 
 func (e NSEventPhase) String() string {
 	var parts []string
-	if e&NSEventPhaseBegan != 0 { parts = append(parts, "NSEventPhaseBegan") }
-	if e&NSEventPhaseStationary != 0 { parts = append(parts, "NSEventPhaseStationary") }
-	if e&NSEventPhaseChanged != 0 { parts = append(parts, "NSEventPhaseChanged") }
-	if e&NSEventPhaseEnded != 0 { parts = append(parts, "NSEventPhaseEnded") }
-	if e&NSEventPhaseCancelled != 0 { parts = append(parts, "NSEventPhaseCancelled") }
-	if e&NSEventPhaseMayBegin != 0 { parts = append(parts, "NSEventPhaseMayBegin") }
-	if len(parts) == 0 { return "0" }
+	if e&NSEventPhaseBegan != 0 {
+		parts = append(parts, "NSEventPhaseBegan")
+	}
+	if e&NSEventPhaseStationary != 0 {
+		parts = append(parts, "NSEventPhaseStationary")
+	}
+	if e&NSEventPhaseChanged != 0 {
+		parts = append(parts, "NSEventPhaseChanged")
+	}
+	if e&NSEventPhaseEnded != 0 {
+		parts = append(parts, "NSEventPhaseEnded")
+	}
+	if e&NSEventPhaseCancelled != 0 {
+		parts = append(parts, "NSEventPhaseCancelled")
+	}
+	if e&NSEventPhaseMayBegin != 0 {
+		parts = append(parts, "NSEventPhaseMayBegin")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSEventSubtype int16
 
 const (
-	NSEventSubtypeWindowExposed NSEventSubtype = 0
-	NSEventSubtypeApplicationActivated NSEventSubtype = 1
+	NSEventSubtypeWindowExposed          NSEventSubtype = 0
+	NSEventSubtypeApplicationActivated   NSEventSubtype = 1
 	NSEventSubtypeApplicationDeactivated NSEventSubtype = 2
-	NSEventSubtypeWindowMoved NSEventSubtype = 4
-	NSEventSubtypeScreenChanged NSEventSubtype = 8
-	NSEventSubtypePowerOff NSEventSubtype = 1
-	NSEventSubtypeMouseEvent NSEventSubtype = 0
-	NSEventSubtypeTabletPoint NSEventSubtype = 1
-	NSEventSubtypeTabletProximity NSEventSubtype = 2
-	NSEventSubtypeTouch NSEventSubtype = 3
+	NSEventSubtypeWindowMoved            NSEventSubtype = 4
+	NSEventSubtypeScreenChanged          NSEventSubtype = 8
+	NSEventSubtypePowerOff               NSEventSubtype = 1
+	NSEventSubtypeMouseEvent             NSEventSubtype = 0
+	NSEventSubtypeTabletPoint            NSEventSubtype = 1
+	NSEventSubtypeTabletProximity        NSEventSubtype = 2
+	NSEventSubtypeTouch                  NSEventSubtype = 3
 )
 
 func (e NSEventSubtype) String() string {
@@ -2357,56 +2683,62 @@ func (e NSEventSubtype) String() string {
 type NSEventSwipeTrackingOptions uint64
 
 const (
-	NSEventSwipeTrackingLockDirection NSEventSwipeTrackingOptions = 1
+	NSEventSwipeTrackingLockDirection      NSEventSwipeTrackingOptions = 1
 	NSEventSwipeTrackingClampGestureAmount NSEventSwipeTrackingOptions = 2
 )
 
 func (e NSEventSwipeTrackingOptions) String() string {
 	var parts []string
-	if e&NSEventSwipeTrackingLockDirection != 0 { parts = append(parts, "NSEventSwipeTrackingLockDirection") }
-	if e&NSEventSwipeTrackingClampGestureAmount != 0 { parts = append(parts, "NSEventSwipeTrackingClampGestureAmount") }
-	if len(parts) == 0 { return "0" }
+	if e&NSEventSwipeTrackingLockDirection != 0 {
+		parts = append(parts, "NSEventSwipeTrackingLockDirection")
+	}
+	if e&NSEventSwipeTrackingClampGestureAmount != 0 {
+		parts = append(parts, "NSEventSwipeTrackingClampGestureAmount")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSEventType uint64
 
 const (
-	NSEventTypeLeftMouseDown NSEventType = 1
-	NSEventTypeLeftMouseUp NSEventType = 2
-	NSEventTypeRightMouseDown NSEventType = 3
-	NSEventTypeRightMouseUp NSEventType = 4
-	NSEventTypeMouseMoved NSEventType = 5
-	NSEventTypeLeftMouseDragged NSEventType = 6
-	NSEventTypeRightMouseDragged NSEventType = 7
-	NSEventTypeMouseEntered NSEventType = 8
-	NSEventTypeMouseExited NSEventType = 9
-	NSEventTypeKeyDown NSEventType = 10
-	NSEventTypeKeyUp NSEventType = 11
-	NSEventTypeFlagsChanged NSEventType = 12
-	NSEventTypeAppKitDefined NSEventType = 13
-	NSEventTypeSystemDefined NSEventType = 14
+	NSEventTypeLeftMouseDown      NSEventType = 1
+	NSEventTypeLeftMouseUp        NSEventType = 2
+	NSEventTypeRightMouseDown     NSEventType = 3
+	NSEventTypeRightMouseUp       NSEventType = 4
+	NSEventTypeMouseMoved         NSEventType = 5
+	NSEventTypeLeftMouseDragged   NSEventType = 6
+	NSEventTypeRightMouseDragged  NSEventType = 7
+	NSEventTypeMouseEntered       NSEventType = 8
+	NSEventTypeMouseExited        NSEventType = 9
+	NSEventTypeKeyDown            NSEventType = 10
+	NSEventTypeKeyUp              NSEventType = 11
+	NSEventTypeFlagsChanged       NSEventType = 12
+	NSEventTypeAppKitDefined      NSEventType = 13
+	NSEventTypeSystemDefined      NSEventType = 14
 	NSEventTypeApplicationDefined NSEventType = 15
-	NSEventTypePeriodic NSEventType = 16
-	NSEventTypeCursorUpdate NSEventType = 17
-	NSEventTypeScrollWheel NSEventType = 22
-	NSEventTypeTabletPoint NSEventType = 23
-	NSEventTypeTabletProximity NSEventType = 24
-	NSEventTypeOtherMouseDown NSEventType = 25
-	NSEventTypeOtherMouseUp NSEventType = 26
-	NSEventTypeOtherMouseDragged NSEventType = 27
-	NSEventTypeGesture NSEventType = 29
-	NSEventTypeMagnify NSEventType = 30
-	NSEventTypeSwipe NSEventType = 31
-	NSEventTypeRotate NSEventType = 18
-	NSEventTypeBeginGesture NSEventType = 19
-	NSEventTypeEndGesture NSEventType = 20
-	NSEventTypeSmartMagnify NSEventType = 32
-	NSEventTypeQuickLook NSEventType = 33
-	NSEventTypePressure NSEventType = 34
-	NSEventTypeDirectTouch NSEventType = 37
-	NSEventTypeChangeMode NSEventType = 38
-	NSEventTypeMouseCancelled NSEventType = 40
+	NSEventTypePeriodic           NSEventType = 16
+	NSEventTypeCursorUpdate       NSEventType = 17
+	NSEventTypeScrollWheel        NSEventType = 22
+	NSEventTypeTabletPoint        NSEventType = 23
+	NSEventTypeTabletProximity    NSEventType = 24
+	NSEventTypeOtherMouseDown     NSEventType = 25
+	NSEventTypeOtherMouseUp       NSEventType = 26
+	NSEventTypeOtherMouseDragged  NSEventType = 27
+	NSEventTypeGesture            NSEventType = 29
+	NSEventTypeMagnify            NSEventType = 30
+	NSEventTypeSwipe              NSEventType = 31
+	NSEventTypeRotate             NSEventType = 18
+	NSEventTypeBeginGesture       NSEventType = 19
+	NSEventTypeEndGesture         NSEventType = 20
+	NSEventTypeSmartMagnify       NSEventType = 32
+	NSEventTypeQuickLook          NSEventType = 33
+	NSEventTypePressure           NSEventType = 34
+	NSEventTypeDirectTouch        NSEventType = 37
+	NSEventTypeChangeMode         NSEventType = 38
+	NSEventTypeMouseCancelled     NSEventType = 40
 )
 
 func (e NSEventType) String() string {
@@ -2489,16 +2821,16 @@ func (e NSEventType) String() string {
 type NSFindPanelAction uint64
 
 const (
-	NSFindPanelActionShowFindPanel NSFindPanelAction = 1
-	NSFindPanelActionNext NSFindPanelAction = 2
-	NSFindPanelActionPrevious NSFindPanelAction = 3
-	NSFindPanelActionReplaceAll NSFindPanelAction = 4
-	NSFindPanelActionReplace NSFindPanelAction = 5
-	NSFindPanelActionReplaceAndFind NSFindPanelAction = 6
-	NSFindPanelActionSetFindString NSFindPanelAction = 7
+	NSFindPanelActionShowFindPanel         NSFindPanelAction = 1
+	NSFindPanelActionNext                  NSFindPanelAction = 2
+	NSFindPanelActionPrevious              NSFindPanelAction = 3
+	NSFindPanelActionReplaceAll            NSFindPanelAction = 4
+	NSFindPanelActionReplace               NSFindPanelAction = 5
+	NSFindPanelActionReplaceAndFind        NSFindPanelAction = 6
+	NSFindPanelActionSetFindString         NSFindPanelAction = 7
 	NSFindPanelActionReplaceAllInSelection NSFindPanelAction = 8
-	NSFindPanelActionSelectAll NSFindPanelAction = 9
-	NSFindPanelActionSelectAllInSelection NSFindPanelAction = 10
+	NSFindPanelActionSelectAll             NSFindPanelAction = 9
+	NSFindPanelActionSelectAllInSelection  NSFindPanelAction = 10
 )
 
 func (e NSFindPanelAction) String() string {
@@ -2531,10 +2863,10 @@ func (e NSFindPanelAction) String() string {
 type NSFindPanelSubstringMatchType uint64
 
 const (
-	NSFindPanelSubstringMatchTypeContains NSFindPanelSubstringMatchType = 0
+	NSFindPanelSubstringMatchTypeContains   NSFindPanelSubstringMatchType = 0
 	NSFindPanelSubstringMatchTypeStartsWith NSFindPanelSubstringMatchType = 1
-	NSFindPanelSubstringMatchTypeFullWord NSFindPanelSubstringMatchType = 2
-	NSFindPanelSubstringMatchTypeEndsWith NSFindPanelSubstringMatchType = 3
+	NSFindPanelSubstringMatchTypeFullWord   NSFindPanelSubstringMatchType = 2
+	NSFindPanelSubstringMatchTypeEndsWith   NSFindPanelSubstringMatchType = 3
 )
 
 func (e NSFindPanelSubstringMatchType) String() string {
@@ -2555,7 +2887,7 @@ func (e NSFindPanelSubstringMatchType) String() string {
 type NSFocusRingPlacement uint64
 
 const (
-	NSFocusRingOnly NSFocusRingPlacement = 0
+	NSFocusRingOnly  NSFocusRingPlacement = 0
 	NSFocusRingBelow NSFocusRingPlacement = 1
 	NSFocusRingAbove NSFocusRingPlacement = 2
 )
@@ -2576,8 +2908,8 @@ func (e NSFocusRingPlacement) String() string {
 type NSFocusRingType uint64
 
 const (
-	NSFocusRingTypeDefault NSFocusRingType = 0
-	NSFocusRingTypeNone NSFocusRingType = 1
+	NSFocusRingTypeDefault  NSFocusRingType = 0
+	NSFocusRingTypeNone     NSFocusRingType = 1
 	NSFocusRingTypeExterior NSFocusRingType = 2
 )
 
@@ -2597,13 +2929,13 @@ func (e NSFocusRingType) String() string {
 type NSFontAction uint64
 
 const (
-	NSNoFontChangeAction NSFontAction = 0
-	NSViaPanelFontAction NSFontAction = 1
-	NSAddTraitFontAction NSFontAction = 2
-	NSSizeUpFontAction NSFontAction = 3
-	NSSizeDownFontAction NSFontAction = 4
-	NSHeavierFontAction NSFontAction = 5
-	NSLighterFontAction NSFontAction = 6
+	NSNoFontChangeAction    NSFontAction = 0
+	NSViaPanelFontAction    NSFontAction = 1
+	NSAddTraitFontAction    NSFontAction = 2
+	NSSizeUpFontAction      NSFontAction = 3
+	NSSizeDownFontAction    NSFontAction = 4
+	NSHeavierFontAction     NSFontAction = 5
+	NSLighterFontAction     NSFontAction = 6
 	NSRemoveTraitFontAction NSFontAction = 7
 )
 
@@ -2638,8 +2970,12 @@ const (
 
 func (e NSFontAssetRequestOptions) String() string {
 	var parts []string
-	if e&NSFontAssetRequestOptionUsesStandardUI != 0 { parts = append(parts, "NSFontAssetRequestOptionUsesStandardUI") }
-	if len(parts) == 0 { return "0" }
+	if e&NSFontAssetRequestOptionUsesStandardUI != 0 {
+		parts = append(parts, "NSFontAssetRequestOptionUsesStandardUI")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -2651,107 +2987,183 @@ const (
 
 func (e NSFontCollectionOptions) String() string {
 	var parts []string
-	if e&NSFontCollectionApplicationOnlyMask != 0 { parts = append(parts, "NSFontCollectionApplicationOnlyMask") }
-	if len(parts) == 0 { return "0" }
+	if e&NSFontCollectionApplicationOnlyMask != 0 {
+		parts = append(parts, "NSFontCollectionApplicationOnlyMask")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSFontCollectionVisibility uint64
 
 const (
-	NSFontCollectionVisibilityProcess NSFontCollectionVisibility = 1
-	NSFontCollectionVisibilityUser NSFontCollectionVisibility = 2
+	NSFontCollectionVisibilityProcess  NSFontCollectionVisibility = 1
+	NSFontCollectionVisibilityUser     NSFontCollectionVisibility = 2
 	NSFontCollectionVisibilityComputer NSFontCollectionVisibility = 4
 )
 
 func (e NSFontCollectionVisibility) String() string {
 	var parts []string
-	if e&NSFontCollectionVisibilityProcess != 0 { parts = append(parts, "NSFontCollectionVisibilityProcess") }
-	if e&NSFontCollectionVisibilityUser != 0 { parts = append(parts, "NSFontCollectionVisibilityUser") }
-	if e&NSFontCollectionVisibilityComputer != 0 { parts = append(parts, "NSFontCollectionVisibilityComputer") }
-	if len(parts) == 0 { return "0" }
+	if e&NSFontCollectionVisibilityProcess != 0 {
+		parts = append(parts, "NSFontCollectionVisibilityProcess")
+	}
+	if e&NSFontCollectionVisibilityUser != 0 {
+		parts = append(parts, "NSFontCollectionVisibilityUser")
+	}
+	if e&NSFontCollectionVisibilityComputer != 0 {
+		parts = append(parts, "NSFontCollectionVisibilityComputer")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSFontDescriptorSymbolicTraits int64
 
 const (
-	NSFontDescriptorTraitItalic NSFontDescriptorSymbolicTraits = 1
-	NSFontDescriptorTraitBold NSFontDescriptorSymbolicTraits = 2
-	NSFontDescriptorTraitExpanded NSFontDescriptorSymbolicTraits = 32
-	NSFontDescriptorTraitCondensed NSFontDescriptorSymbolicTraits = 64
-	NSFontDescriptorTraitMonoSpace NSFontDescriptorSymbolicTraits = 1024
-	NSFontDescriptorTraitVertical NSFontDescriptorSymbolicTraits = 2048
-	NSFontDescriptorTraitUIOptimized NSFontDescriptorSymbolicTraits = 4096
-	NSFontDescriptorTraitTightLeading NSFontDescriptorSymbolicTraits = 32768
-	NSFontDescriptorTraitLooseLeading NSFontDescriptorSymbolicTraits = 65536
-	NSFontDescriptorClassOldStyleSerifs NSFontDescriptorSymbolicTraits = 268435456
+	NSFontDescriptorTraitItalic             NSFontDescriptorSymbolicTraits = 1
+	NSFontDescriptorTraitBold               NSFontDescriptorSymbolicTraits = 2
+	NSFontDescriptorTraitExpanded           NSFontDescriptorSymbolicTraits = 32
+	NSFontDescriptorTraitCondensed          NSFontDescriptorSymbolicTraits = 64
+	NSFontDescriptorTraitMonoSpace          NSFontDescriptorSymbolicTraits = 1024
+	NSFontDescriptorTraitVertical           NSFontDescriptorSymbolicTraits = 2048
+	NSFontDescriptorTraitUIOptimized        NSFontDescriptorSymbolicTraits = 4096
+	NSFontDescriptorTraitTightLeading       NSFontDescriptorSymbolicTraits = 32768
+	NSFontDescriptorTraitLooseLeading       NSFontDescriptorSymbolicTraits = 65536
+	NSFontDescriptorClassOldStyleSerifs     NSFontDescriptorSymbolicTraits = 268435456
 	NSFontDescriptorClassTransitionalSerifs NSFontDescriptorSymbolicTraits = 536870912
-	NSFontDescriptorClassModernSerifs NSFontDescriptorSymbolicTraits = 805306368
-	NSFontDescriptorClassClarendonSerifs NSFontDescriptorSymbolicTraits = 1073741824
-	NSFontDescriptorClassSlabSerifs NSFontDescriptorSymbolicTraits = 1342177280
-	NSFontDescriptorClassFreeformSerifs NSFontDescriptorSymbolicTraits = 1879048192
-	NSFontDescriptorClassSansSerif NSFontDescriptorSymbolicTraits = 2147483648
-	NSFontDescriptorClassOrnamentals NSFontDescriptorSymbolicTraits = 2415919104
-	NSFontDescriptorClassScripts NSFontDescriptorSymbolicTraits = 2684354560
-	NSFontDescriptorClassSymbolic NSFontDescriptorSymbolicTraits = 3221225472
+	NSFontDescriptorClassModernSerifs       NSFontDescriptorSymbolicTraits = 805306368
+	NSFontDescriptorClassClarendonSerifs    NSFontDescriptorSymbolicTraits = 1073741824
+	NSFontDescriptorClassSlabSerifs         NSFontDescriptorSymbolicTraits = 1342177280
+	NSFontDescriptorClassFreeformSerifs     NSFontDescriptorSymbolicTraits = 1879048192
+	NSFontDescriptorClassSansSerif          NSFontDescriptorSymbolicTraits = 2147483648
+	NSFontDescriptorClassOrnamentals        NSFontDescriptorSymbolicTraits = 2415919104
+	NSFontDescriptorClassScripts            NSFontDescriptorSymbolicTraits = 2684354560
+	NSFontDescriptorClassSymbolic           NSFontDescriptorSymbolicTraits = 3221225472
 )
 
 func (e NSFontDescriptorSymbolicTraits) String() string {
 	var parts []string
-	if e&NSFontDescriptorTraitItalic != 0 { parts = append(parts, "NSFontDescriptorTraitItalic") }
-	if e&NSFontDescriptorTraitBold != 0 { parts = append(parts, "NSFontDescriptorTraitBold") }
-	if e&NSFontDescriptorTraitExpanded != 0 { parts = append(parts, "NSFontDescriptorTraitExpanded") }
-	if e&NSFontDescriptorTraitCondensed != 0 { parts = append(parts, "NSFontDescriptorTraitCondensed") }
-	if e&NSFontDescriptorTraitMonoSpace != 0 { parts = append(parts, "NSFontDescriptorTraitMonoSpace") }
-	if e&NSFontDescriptorTraitVertical != 0 { parts = append(parts, "NSFontDescriptorTraitVertical") }
-	if e&NSFontDescriptorTraitUIOptimized != 0 { parts = append(parts, "NSFontDescriptorTraitUIOptimized") }
-	if e&NSFontDescriptorTraitTightLeading != 0 { parts = append(parts, "NSFontDescriptorTraitTightLeading") }
-	if e&NSFontDescriptorTraitLooseLeading != 0 { parts = append(parts, "NSFontDescriptorTraitLooseLeading") }
-	if e&NSFontDescriptorClassOldStyleSerifs != 0 { parts = append(parts, "NSFontDescriptorClassOldStyleSerifs") }
-	if e&NSFontDescriptorClassTransitionalSerifs != 0 { parts = append(parts, "NSFontDescriptorClassTransitionalSerifs") }
-	if e&NSFontDescriptorClassModernSerifs != 0 { parts = append(parts, "NSFontDescriptorClassModernSerifs") }
-	if e&NSFontDescriptorClassClarendonSerifs != 0 { parts = append(parts, "NSFontDescriptorClassClarendonSerifs") }
-	if e&NSFontDescriptorClassSlabSerifs != 0 { parts = append(parts, "NSFontDescriptorClassSlabSerifs") }
-	if e&NSFontDescriptorClassFreeformSerifs != 0 { parts = append(parts, "NSFontDescriptorClassFreeformSerifs") }
-	if e&NSFontDescriptorClassSansSerif != 0 { parts = append(parts, "NSFontDescriptorClassSansSerif") }
-	if e&NSFontDescriptorClassOrnamentals != 0 { parts = append(parts, "NSFontDescriptorClassOrnamentals") }
-	if e&NSFontDescriptorClassScripts != 0 { parts = append(parts, "NSFontDescriptorClassScripts") }
-	if e&NSFontDescriptorClassSymbolic != 0 { parts = append(parts, "NSFontDescriptorClassSymbolic") }
-	if len(parts) == 0 { return "0" }
+	if e&NSFontDescriptorTraitItalic != 0 {
+		parts = append(parts, "NSFontDescriptorTraitItalic")
+	}
+	if e&NSFontDescriptorTraitBold != 0 {
+		parts = append(parts, "NSFontDescriptorTraitBold")
+	}
+	if e&NSFontDescriptorTraitExpanded != 0 {
+		parts = append(parts, "NSFontDescriptorTraitExpanded")
+	}
+	if e&NSFontDescriptorTraitCondensed != 0 {
+		parts = append(parts, "NSFontDescriptorTraitCondensed")
+	}
+	if e&NSFontDescriptorTraitMonoSpace != 0 {
+		parts = append(parts, "NSFontDescriptorTraitMonoSpace")
+	}
+	if e&NSFontDescriptorTraitVertical != 0 {
+		parts = append(parts, "NSFontDescriptorTraitVertical")
+	}
+	if e&NSFontDescriptorTraitUIOptimized != 0 {
+		parts = append(parts, "NSFontDescriptorTraitUIOptimized")
+	}
+	if e&NSFontDescriptorTraitTightLeading != 0 {
+		parts = append(parts, "NSFontDescriptorTraitTightLeading")
+	}
+	if e&NSFontDescriptorTraitLooseLeading != 0 {
+		parts = append(parts, "NSFontDescriptorTraitLooseLeading")
+	}
+	if e&NSFontDescriptorClassOldStyleSerifs != 0 {
+		parts = append(parts, "NSFontDescriptorClassOldStyleSerifs")
+	}
+	if e&NSFontDescriptorClassTransitionalSerifs != 0 {
+		parts = append(parts, "NSFontDescriptorClassTransitionalSerifs")
+	}
+	if e&NSFontDescriptorClassModernSerifs != 0 {
+		parts = append(parts, "NSFontDescriptorClassModernSerifs")
+	}
+	if e&NSFontDescriptorClassClarendonSerifs != 0 {
+		parts = append(parts, "NSFontDescriptorClassClarendonSerifs")
+	}
+	if e&NSFontDescriptorClassSlabSerifs != 0 {
+		parts = append(parts, "NSFontDescriptorClassSlabSerifs")
+	}
+	if e&NSFontDescriptorClassFreeformSerifs != 0 {
+		parts = append(parts, "NSFontDescriptorClassFreeformSerifs")
+	}
+	if e&NSFontDescriptorClassSansSerif != 0 {
+		parts = append(parts, "NSFontDescriptorClassSansSerif")
+	}
+	if e&NSFontDescriptorClassOrnamentals != 0 {
+		parts = append(parts, "NSFontDescriptorClassOrnamentals")
+	}
+	if e&NSFontDescriptorClassScripts != 0 {
+		parts = append(parts, "NSFontDescriptorClassScripts")
+	}
+	if e&NSFontDescriptorClassSymbolic != 0 {
+		parts = append(parts, "NSFontDescriptorClassSymbolic")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSFontPanelModeMask uint64
 
 const (
-	NSFontPanelModeMaskFace NSFontPanelModeMask = 1
-	NSFontPanelModeMaskSize NSFontPanelModeMask = 2
-	NSFontPanelModeMaskCollection NSFontPanelModeMask = 4
-	NSFontPanelModeMaskUnderlineEffect NSFontPanelModeMask = 256
+	NSFontPanelModeMaskFace                NSFontPanelModeMask = 1
+	NSFontPanelModeMaskSize                NSFontPanelModeMask = 2
+	NSFontPanelModeMaskCollection          NSFontPanelModeMask = 4
+	NSFontPanelModeMaskUnderlineEffect     NSFontPanelModeMask = 256
 	NSFontPanelModeMaskStrikethroughEffect NSFontPanelModeMask = 512
-	NSFontPanelModeMaskTextColorEffect NSFontPanelModeMask = 1024
+	NSFontPanelModeMaskTextColorEffect     NSFontPanelModeMask = 1024
 	NSFontPanelModeMaskDocumentColorEffect NSFontPanelModeMask = 2048
-	NSFontPanelModeMaskShadowEffect NSFontPanelModeMask = 4096
-	NSFontPanelModeMaskAllEffects NSFontPanelModeMask = 1048320
-	NSFontPanelModesMaskStandardModes NSFontPanelModeMask = 65535
-	NSFontPanelModesMaskAllModes NSFontPanelModeMask = 4294967295
+	NSFontPanelModeMaskShadowEffect        NSFontPanelModeMask = 4096
+	NSFontPanelModeMaskAllEffects          NSFontPanelModeMask = 1048320
+	NSFontPanelModesMaskStandardModes      NSFontPanelModeMask = 65535
+	NSFontPanelModesMaskAllModes           NSFontPanelModeMask = 4294967295
 )
 
 func (e NSFontPanelModeMask) String() string {
 	var parts []string
-	if e&NSFontPanelModeMaskFace != 0 { parts = append(parts, "NSFontPanelModeMaskFace") }
-	if e&NSFontPanelModeMaskSize != 0 { parts = append(parts, "NSFontPanelModeMaskSize") }
-	if e&NSFontPanelModeMaskCollection != 0 { parts = append(parts, "NSFontPanelModeMaskCollection") }
-	if e&NSFontPanelModeMaskUnderlineEffect != 0 { parts = append(parts, "NSFontPanelModeMaskUnderlineEffect") }
-	if e&NSFontPanelModeMaskStrikethroughEffect != 0 { parts = append(parts, "NSFontPanelModeMaskStrikethroughEffect") }
-	if e&NSFontPanelModeMaskTextColorEffect != 0 { parts = append(parts, "NSFontPanelModeMaskTextColorEffect") }
-	if e&NSFontPanelModeMaskDocumentColorEffect != 0 { parts = append(parts, "NSFontPanelModeMaskDocumentColorEffect") }
-	if e&NSFontPanelModeMaskShadowEffect != 0 { parts = append(parts, "NSFontPanelModeMaskShadowEffect") }
-	if e&NSFontPanelModeMaskAllEffects != 0 { parts = append(parts, "NSFontPanelModeMaskAllEffects") }
-	if e&NSFontPanelModesMaskStandardModes != 0 { parts = append(parts, "NSFontPanelModesMaskStandardModes") }
-	if e&NSFontPanelModesMaskAllModes != 0 { parts = append(parts, "NSFontPanelModesMaskAllModes") }
-	if len(parts) == 0 { return "0" }
+	if e&NSFontPanelModeMaskFace != 0 {
+		parts = append(parts, "NSFontPanelModeMaskFace")
+	}
+	if e&NSFontPanelModeMaskSize != 0 {
+		parts = append(parts, "NSFontPanelModeMaskSize")
+	}
+	if e&NSFontPanelModeMaskCollection != 0 {
+		parts = append(parts, "NSFontPanelModeMaskCollection")
+	}
+	if e&NSFontPanelModeMaskUnderlineEffect != 0 {
+		parts = append(parts, "NSFontPanelModeMaskUnderlineEffect")
+	}
+	if e&NSFontPanelModeMaskStrikethroughEffect != 0 {
+		parts = append(parts, "NSFontPanelModeMaskStrikethroughEffect")
+	}
+	if e&NSFontPanelModeMaskTextColorEffect != 0 {
+		parts = append(parts, "NSFontPanelModeMaskTextColorEffect")
+	}
+	if e&NSFontPanelModeMaskDocumentColorEffect != 0 {
+		parts = append(parts, "NSFontPanelModeMaskDocumentColorEffect")
+	}
+	if e&NSFontPanelModeMaskShadowEffect != 0 {
+		parts = append(parts, "NSFontPanelModeMaskShadowEffect")
+	}
+	if e&NSFontPanelModeMaskAllEffects != 0 {
+		parts = append(parts, "NSFontPanelModeMaskAllEffects")
+	}
+	if e&NSFontPanelModesMaskStandardModes != 0 {
+		parts = append(parts, "NSFontPanelModesMaskStandardModes")
+	}
+	if e&NSFontPanelModesMaskAllModes != 0 {
+		parts = append(parts, "NSFontPanelModesMaskAllModes")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -2759,9 +3171,9 @@ func (e NSFontPanelModeMask) String() string {
 type NSFontRenderingMode uint64
 
 const (
-	NSFontDefaultRenderingMode NSFontRenderingMode = 0
-	NSFontAntialiasedRenderingMode NSFontRenderingMode = 1
-	NSFontIntegerAdvancementsRenderingMode NSFontRenderingMode = 2
+	NSFontDefaultRenderingMode                        NSFontRenderingMode = 0
+	NSFontAntialiasedRenderingMode                    NSFontRenderingMode = 1
+	NSFontIntegerAdvancementsRenderingMode            NSFontRenderingMode = 2
 	NSFontAntialiasedIntegerAdvancementsRenderingMode NSFontRenderingMode = 3
 )
 
@@ -2783,47 +3195,73 @@ func (e NSFontRenderingMode) String() string {
 type NSFontTraitMask uint64
 
 const (
-	NSItalicFontMask NSFontTraitMask = 1
-	NSBoldFontMask NSFontTraitMask = 2
-	NSUnboldFontMask NSFontTraitMask = 4
+	NSItalicFontMask                  NSFontTraitMask = 1
+	NSBoldFontMask                    NSFontTraitMask = 2
+	NSUnboldFontMask                  NSFontTraitMask = 4
 	NSNonStandardCharacterSetFontMask NSFontTraitMask = 8
-	NSNarrowFontMask NSFontTraitMask = 16
-	NSExpandedFontMask NSFontTraitMask = 32
-	NSCondensedFontMask NSFontTraitMask = 64
-	NSSmallCapsFontMask NSFontTraitMask = 128
-	NSPosterFontMask NSFontTraitMask = 256
-	NSCompressedFontMask NSFontTraitMask = 512
-	NSFixedPitchFontMask NSFontTraitMask = 1024
-	NSUnitalicFontMask NSFontTraitMask = 16777216
+	NSNarrowFontMask                  NSFontTraitMask = 16
+	NSExpandedFontMask                NSFontTraitMask = 32
+	NSCondensedFontMask               NSFontTraitMask = 64
+	NSSmallCapsFontMask               NSFontTraitMask = 128
+	NSPosterFontMask                  NSFontTraitMask = 256
+	NSCompressedFontMask              NSFontTraitMask = 512
+	NSFixedPitchFontMask              NSFontTraitMask = 1024
+	NSUnitalicFontMask                NSFontTraitMask = 16777216
 )
 
 func (e NSFontTraitMask) String() string {
 	var parts []string
-	if e&NSItalicFontMask != 0 { parts = append(parts, "NSItalicFontMask") }
-	if e&NSBoldFontMask != 0 { parts = append(parts, "NSBoldFontMask") }
-	if e&NSUnboldFontMask != 0 { parts = append(parts, "NSUnboldFontMask") }
-	if e&NSNonStandardCharacterSetFontMask != 0 { parts = append(parts, "NSNonStandardCharacterSetFontMask") }
-	if e&NSNarrowFontMask != 0 { parts = append(parts, "NSNarrowFontMask") }
-	if e&NSExpandedFontMask != 0 { parts = append(parts, "NSExpandedFontMask") }
-	if e&NSCondensedFontMask != 0 { parts = append(parts, "NSCondensedFontMask") }
-	if e&NSSmallCapsFontMask != 0 { parts = append(parts, "NSSmallCapsFontMask") }
-	if e&NSPosterFontMask != 0 { parts = append(parts, "NSPosterFontMask") }
-	if e&NSCompressedFontMask != 0 { parts = append(parts, "NSCompressedFontMask") }
-	if e&NSFixedPitchFontMask != 0 { parts = append(parts, "NSFixedPitchFontMask") }
-	if e&NSUnitalicFontMask != 0 { parts = append(parts, "NSUnitalicFontMask") }
-	if len(parts) == 0 { return "0" }
+	if e&NSItalicFontMask != 0 {
+		parts = append(parts, "NSItalicFontMask")
+	}
+	if e&NSBoldFontMask != 0 {
+		parts = append(parts, "NSBoldFontMask")
+	}
+	if e&NSUnboldFontMask != 0 {
+		parts = append(parts, "NSUnboldFontMask")
+	}
+	if e&NSNonStandardCharacterSetFontMask != 0 {
+		parts = append(parts, "NSNonStandardCharacterSetFontMask")
+	}
+	if e&NSNarrowFontMask != 0 {
+		parts = append(parts, "NSNarrowFontMask")
+	}
+	if e&NSExpandedFontMask != 0 {
+		parts = append(parts, "NSExpandedFontMask")
+	}
+	if e&NSCondensedFontMask != 0 {
+		parts = append(parts, "NSCondensedFontMask")
+	}
+	if e&NSSmallCapsFontMask != 0 {
+		parts = append(parts, "NSSmallCapsFontMask")
+	}
+	if e&NSPosterFontMask != 0 {
+		parts = append(parts, "NSPosterFontMask")
+	}
+	if e&NSCompressedFontMask != 0 {
+		parts = append(parts, "NSCompressedFontMask")
+	}
+	if e&NSFixedPitchFontMask != 0 {
+		parts = append(parts, "NSFixedPitchFontMask")
+	}
+	if e&NSUnitalicFontMask != 0 {
+		parts = append(parts, "NSUnitalicFontMask")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSGestureRecognizerState int64
 
 const (
-	NSGestureRecognizerStatePossible NSGestureRecognizerState = 0
-	NSGestureRecognizerStateBegan NSGestureRecognizerState = 1
-	NSGestureRecognizerStateChanged NSGestureRecognizerState = 2
-	NSGestureRecognizerStateEnded NSGestureRecognizerState = 3
-	NSGestureRecognizerStateCancelled NSGestureRecognizerState = 4
-	NSGestureRecognizerStateFailed NSGestureRecognizerState = 5
+	NSGestureRecognizerStatePossible   NSGestureRecognizerState = 0
+	NSGestureRecognizerStateBegan      NSGestureRecognizerState = 1
+	NSGestureRecognizerStateChanged    NSGestureRecognizerState = 2
+	NSGestureRecognizerStateEnded      NSGestureRecognizerState = 3
+	NSGestureRecognizerStateCancelled  NSGestureRecognizerState = 4
+	NSGestureRecognizerStateFailed     NSGestureRecognizerState = 5
 	NSGestureRecognizerStateRecognized NSGestureRecognizerState = 3
 )
 
@@ -2870,11 +3308,11 @@ func (e NSGlassEffectViewStyle) String() string {
 type NSGlyphInscription uint64
 
 const (
-	NSGlyphInscribeBase NSGlyphInscription = 0
-	NSGlyphInscribeBelow NSGlyphInscription = 1
-	NSGlyphInscribeAbove NSGlyphInscription = 2
+	NSGlyphInscribeBase       NSGlyphInscription = 0
+	NSGlyphInscribeBelow      NSGlyphInscription = 1
+	NSGlyphInscribeAbove      NSGlyphInscription = 2
 	NSGlyphInscribeOverstrike NSGlyphInscription = 3
-	NSGlyphInscribeOverBelow NSGlyphInscription = 4
+	NSGlyphInscribeOverBelow  NSGlyphInscription = 4
 )
 
 func (e NSGlyphInscription) String() string {
@@ -2897,19 +3335,29 @@ func (e NSGlyphInscription) String() string {
 type NSGlyphProperty int64
 
 const (
-	NSGlyphPropertyNull NSGlyphProperty = 1
+	NSGlyphPropertyNull             NSGlyphProperty = 1
 	NSGlyphPropertyControlCharacter NSGlyphProperty = 2
-	NSGlyphPropertyElastic NSGlyphProperty = 4
+	NSGlyphPropertyElastic          NSGlyphProperty = 4
 	NSGlyphPropertyNonBaseCharacter NSGlyphProperty = 8
 )
 
 func (e NSGlyphProperty) String() string {
 	var parts []string
-	if e&NSGlyphPropertyNull != 0 { parts = append(parts, "NSGlyphPropertyNull") }
-	if e&NSGlyphPropertyControlCharacter != 0 { parts = append(parts, "NSGlyphPropertyControlCharacter") }
-	if e&NSGlyphPropertyElastic != 0 { parts = append(parts, "NSGlyphPropertyElastic") }
-	if e&NSGlyphPropertyNonBaseCharacter != 0 { parts = append(parts, "NSGlyphPropertyNonBaseCharacter") }
-	if len(parts) == 0 { return "0" }
+	if e&NSGlyphPropertyNull != 0 {
+		parts = append(parts, "NSGlyphPropertyNull")
+	}
+	if e&NSGlyphPropertyControlCharacter != 0 {
+		parts = append(parts, "NSGlyphPropertyControlCharacter")
+	}
+	if e&NSGlyphPropertyElastic != 0 {
+		parts = append(parts, "NSGlyphPropertyElastic")
+	}
+	if e&NSGlyphPropertyNonBaseCharacter != 0 {
+		parts = append(parts, "NSGlyphPropertyNonBaseCharacter")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -2917,14 +3365,20 @@ type NSGradientDrawingOptions uint64
 
 const (
 	NSGradientDrawsBeforeStartingLocation NSGradientDrawingOptions = 1
-	NSGradientDrawsAfterEndingLocation NSGradientDrawingOptions = 2
+	NSGradientDrawsAfterEndingLocation    NSGradientDrawingOptions = 2
 )
 
 func (e NSGradientDrawingOptions) String() string {
 	var parts []string
-	if e&NSGradientDrawsBeforeStartingLocation != 0 { parts = append(parts, "NSGradientDrawsBeforeStartingLocation") }
-	if e&NSGradientDrawsAfterEndingLocation != 0 { parts = append(parts, "NSGradientDrawsAfterEndingLocation") }
-	if len(parts) == 0 { return "0" }
+	if e&NSGradientDrawsBeforeStartingLocation != 0 {
+		parts = append(parts, "NSGradientDrawsBeforeStartingLocation")
+	}
+	if e&NSGradientDrawsAfterEndingLocation != 0 {
+		parts = append(parts, "NSGradientDrawsAfterEndingLocation")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -2932,11 +3386,11 @@ func (e NSGradientDrawingOptions) String() string {
 type NSGradientType uint64
 
 const (
-	NSGradientNone NSGradientType = 0
-	NSGradientConcaveWeak NSGradientType = 1
+	NSGradientNone          NSGradientType = 0
+	NSGradientConcaveWeak   NSGradientType = 1
 	NSGradientConcaveStrong NSGradientType = 2
-	NSGradientConvexWeak NSGradientType = 3
-	NSGradientConvexStrong NSGradientType = 4
+	NSGradientConvexWeak    NSGradientType = 3
+	NSGradientConvexStrong  NSGradientType = 4
 )
 
 func (e NSGradientType) String() string {
@@ -2960,13 +3414,13 @@ type NSGridCellPlacement int64
 
 const (
 	NSGridCellPlacementInherited NSGridCellPlacement = 0
-	NSGridCellPlacementNone NSGridCellPlacement = 1
-	NSGridCellPlacementLeading NSGridCellPlacement = 2
-	NSGridCellPlacementTop NSGridCellPlacement = 2
-	NSGridCellPlacementTrailing NSGridCellPlacement = 3
-	NSGridCellPlacementBottom NSGridCellPlacement = 3
-	NSGridCellPlacementCenter NSGridCellPlacement = 4
-	NSGridCellPlacementFill NSGridCellPlacement = 5
+	NSGridCellPlacementNone      NSGridCellPlacement = 1
+	NSGridCellPlacementLeading   NSGridCellPlacement = 2
+	NSGridCellPlacementTop       NSGridCellPlacement = 2
+	NSGridCellPlacementTrailing  NSGridCellPlacement = 3
+	NSGridCellPlacementBottom    NSGridCellPlacement = 3
+	NSGridCellPlacementCenter    NSGridCellPlacement = 4
+	NSGridCellPlacementFill      NSGridCellPlacement = 5
 )
 
 func (e NSGridCellPlacement) String() string {
@@ -2991,10 +3445,10 @@ func (e NSGridCellPlacement) String() string {
 type NSGridRowAlignment int64
 
 const (
-	NSGridRowAlignmentInherited NSGridRowAlignment = 0
-	NSGridRowAlignmentNone NSGridRowAlignment = 1
+	NSGridRowAlignmentInherited     NSGridRowAlignment = 0
+	NSGridRowAlignmentNone          NSGridRowAlignment = 1
 	NSGridRowAlignmentFirstBaseline NSGridRowAlignment = 2
-	NSGridRowAlignmentLastBaseline NSGridRowAlignment = 3
+	NSGridRowAlignmentLastBaseline  NSGridRowAlignment = 3
 )
 
 func (e NSGridRowAlignment) String() string {
@@ -3015,8 +3469,8 @@ func (e NSGridRowAlignment) String() string {
 type NSHapticFeedbackPattern int64
 
 const (
-	NSHapticFeedbackPatternGeneric NSHapticFeedbackPattern = 0
-	NSHapticFeedbackPatternAlignment NSHapticFeedbackPattern = 1
+	NSHapticFeedbackPatternGeneric     NSHapticFeedbackPattern = 0
+	NSHapticFeedbackPatternAlignment   NSHapticFeedbackPattern = 1
 	NSHapticFeedbackPatternLevelChange NSHapticFeedbackPattern = 2
 )
 
@@ -3036,8 +3490,8 @@ func (e NSHapticFeedbackPattern) String() string {
 type NSHapticFeedbackPerformanceTime uint64
 
 const (
-	NSHapticFeedbackPerformanceTimeDefault NSHapticFeedbackPerformanceTime = 0
-	NSHapticFeedbackPerformanceTimeNow NSHapticFeedbackPerformanceTime = 1
+	NSHapticFeedbackPerformanceTimeDefault       NSHapticFeedbackPerformanceTime = 0
+	NSHapticFeedbackPerformanceTimeNow           NSHapticFeedbackPerformanceTime = 1
 	NSHapticFeedbackPerformanceTimeDrawCompleted NSHapticFeedbackPerformanceTime = 2
 )
 
@@ -3067,25 +3521,33 @@ const (
 
 func (e NSHorizontalDirections) String() string {
 	var parts []string
-	if e&NSHorizontalDirectionsLeft != 0 { parts = append(parts, "NSHorizontalDirectionsLeft") }
-	if e&NSHorizontalDirectionsRight != 0 { parts = append(parts, "NSHorizontalDirectionsRight") }
-	if e&NSHorizontalDirectionsAll != 0 { parts = append(parts, "NSHorizontalDirectionsAll") }
-	if len(parts) == 0 { return "0" }
+	if e&NSHorizontalDirectionsLeft != 0 {
+		parts = append(parts, "NSHorizontalDirectionsLeft")
+	}
+	if e&NSHorizontalDirectionsRight != 0 {
+		parts = append(parts, "NSHorizontalDirectionsRight")
+	}
+	if e&NSHorizontalDirectionsAll != 0 {
+		parts = append(parts, "NSHorizontalDirectionsAll")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSImageAlignment uint64
 
 const (
-	NSImageAlignCenter NSImageAlignment = 0
-	NSImageAlignTop NSImageAlignment = 1
-	NSImageAlignTopLeft NSImageAlignment = 2
-	NSImageAlignTopRight NSImageAlignment = 3
-	NSImageAlignLeft NSImageAlignment = 4
-	NSImageAlignBottom NSImageAlignment = 5
-	NSImageAlignBottomLeft NSImageAlignment = 6
+	NSImageAlignCenter      NSImageAlignment = 0
+	NSImageAlignTop         NSImageAlignment = 1
+	NSImageAlignTopLeft     NSImageAlignment = 2
+	NSImageAlignTopRight    NSImageAlignment = 3
+	NSImageAlignLeft        NSImageAlignment = 4
+	NSImageAlignBottom      NSImageAlignment = 5
+	NSImageAlignBottomLeft  NSImageAlignment = 6
 	NSImageAlignBottomRight NSImageAlignment = 7
-	NSImageAlignRight NSImageAlignment = 8
+	NSImageAlignRight       NSImageAlignment = 8
 )
 
 func (e NSImageAlignment) String() string {
@@ -3117,9 +3579,9 @@ type NSImageCacheMode uint64
 
 const (
 	NSImageCacheDefault NSImageCacheMode = 0
-	NSImageCacheAlways NSImageCacheMode = 1
-	NSImageCacheBySize NSImageCacheMode = 2
-	NSImageCacheNever NSImageCacheMode = 3
+	NSImageCacheAlways  NSImageCacheMode = 1
+	NSImageCacheBySize  NSImageCacheMode = 2
+	NSImageCacheNever   NSImageCacheMode = 3
 )
 
 func (e NSImageCacheMode) String() string {
@@ -3168,11 +3630,11 @@ func (e NSImageDynamicRange) String() string {
 type NSImageFrameStyle uint64
 
 const (
-	NSImageFrameNone NSImageFrameStyle = 0
-	NSImageFramePhoto NSImageFrameStyle = 1
+	NSImageFrameNone      NSImageFrameStyle = 0
+	NSImageFramePhoto     NSImageFrameStyle = 1
 	NSImageFrameGrayBezel NSImageFrameStyle = 2
-	NSImageFrameGroove NSImageFrameStyle = 3
-	NSImageFrameButton NSImageFrameStyle = 4
+	NSImageFrameGroove    NSImageFrameStyle = 3
+	NSImageFrameButton    NSImageFrameStyle = 4
 )
 
 func (e NSImageFrameStyle) String() string {
@@ -3196,10 +3658,10 @@ type NSImageInterpolation uint64
 
 const (
 	NSImageInterpolationDefault NSImageInterpolation = 0
-	NSImageInterpolationNone NSImageInterpolation = 1
-	NSImageInterpolationLow NSImageInterpolation = 2
-	NSImageInterpolationMedium NSImageInterpolation = 4
-	NSImageInterpolationHigh NSImageInterpolation = 3
+	NSImageInterpolationNone    NSImageInterpolation = 1
+	NSImageInterpolationLow     NSImageInterpolation = 2
+	NSImageInterpolationMedium  NSImageInterpolation = 4
+	NSImageInterpolationHigh    NSImageInterpolation = 3
 )
 
 func (e NSImageInterpolation) String() string {
@@ -3243,11 +3705,11 @@ func (e NSImageLayoutDirection) String() string {
 type NSImageLoadStatus uint64
 
 const (
-	NSImageLoadStatusCompleted NSImageLoadStatus = 0
-	NSImageLoadStatusCancelled NSImageLoadStatus = 1
-	NSImageLoadStatusInvalidData NSImageLoadStatus = 2
+	NSImageLoadStatusCompleted     NSImageLoadStatus = 0
+	NSImageLoadStatusCancelled     NSImageLoadStatus = 1
+	NSImageLoadStatusInvalidData   NSImageLoadStatus = 2
 	NSImageLoadStatusUnexpectedEOF NSImageLoadStatus = 3
-	NSImageLoadStatusReadError NSImageLoadStatus = 4
+	NSImageLoadStatusReadError     NSImageLoadStatus = 4
 )
 
 func (e NSImageLoadStatus) String() string {
@@ -3270,12 +3732,12 @@ func (e NSImageLoadStatus) String() string {
 type NSImageRepLoadStatus int64
 
 const (
-	NSImageRepLoadStatusUnknownType NSImageRepLoadStatus = -1
-	NSImageRepLoadStatusReadingHeader NSImageRepLoadStatus = -2
+	NSImageRepLoadStatusUnknownType     NSImageRepLoadStatus = -1
+	NSImageRepLoadStatusReadingHeader   NSImageRepLoadStatus = -2
 	NSImageRepLoadStatusWillNeedAllData NSImageRepLoadStatus = -3
-	NSImageRepLoadStatusInvalidData NSImageRepLoadStatus = -4
-	NSImageRepLoadStatusUnexpectedEOF NSImageRepLoadStatus = -5
-	NSImageRepLoadStatusCompleted NSImageRepLoadStatus = -6
+	NSImageRepLoadStatusInvalidData     NSImageRepLoadStatus = -4
+	NSImageRepLoadStatusUnexpectedEOF   NSImageRepLoadStatus = -5
+	NSImageRepLoadStatusCompleted       NSImageRepLoadStatus = -6
 )
 
 func (e NSImageRepLoadStatus) String() string {
@@ -3300,7 +3762,7 @@ func (e NSImageRepLoadStatus) String() string {
 type NSImageResizingMode int64
 
 const (
-	NSImageResizingModeTile NSImageResizingMode = 0
+	NSImageResizingModeTile    NSImageResizingMode = 0
 	NSImageResizingModeStretch NSImageResizingMode = 1
 )
 
@@ -3318,13 +3780,13 @@ func (e NSImageResizingMode) String() string {
 type NSImageScaling uint64
 
 const (
-	NSImageScaleProportionallyDown NSImageScaling = 0
-	NSImageScaleAxesIndependently NSImageScaling = 1
-	NSImageScaleNone NSImageScaling = 2
+	NSImageScaleProportionallyDown     NSImageScaling = 0
+	NSImageScaleAxesIndependently      NSImageScaling = 1
+	NSImageScaleNone                   NSImageScaling = 2
 	NSImageScaleProportionallyUpOrDown NSImageScaling = 3
-	NSScaleProportionally NSImageScaling = 0
-	NSScaleToFit NSImageScaling = 1
-	NSScaleNone NSImageScaling = 2
+	NSScaleProportionally              NSImageScaling = 0
+	NSScaleToFit                       NSImageScaling = 1
+	NSScaleNone                        NSImageScaling = 2
 )
 
 func (e NSImageScaling) String() string {
@@ -3369,9 +3831,9 @@ func (e NSImageSymbolColorRenderingMode) String() string {
 type NSImageSymbolScale int64
 
 const (
-	NSImageSymbolScaleSmall NSImageSymbolScale = 1
+	NSImageSymbolScaleSmall  NSImageSymbolScale = 1
 	NSImageSymbolScaleMedium NSImageSymbolScale = 2
-	NSImageSymbolScaleLarge NSImageSymbolScale = 3
+	NSImageSymbolScaleLarge  NSImageSymbolScale = 3
 )
 
 func (e NSImageSymbolScale) String() string {
@@ -3414,19 +3876,19 @@ func (e NSImageSymbolVariableValueMode) String() string {
 type NSLayoutAttribute int64
 
 const (
-	NSLayoutAttributeLeft NSLayoutAttribute = 1
-	NSLayoutAttributeRight NSLayoutAttribute = 2
-	NSLayoutAttributeTop NSLayoutAttribute = 3
-	NSLayoutAttributeBottom NSLayoutAttribute = 4
-	NSLayoutAttributeLeading NSLayoutAttribute = 5
-	NSLayoutAttributeTrailing NSLayoutAttribute = 6
-	NSLayoutAttributeWidth NSLayoutAttribute = 7
-	NSLayoutAttributeHeight NSLayoutAttribute = 8
-	NSLayoutAttributeCenterX NSLayoutAttribute = 9
-	NSLayoutAttributeCenterY NSLayoutAttribute = 10
-	NSLayoutAttributeLastBaseline NSLayoutAttribute = 11
-	NSLayoutAttributeBaseline NSLayoutAttribute = 11
-	NSLayoutAttributeFirstBaseline NSLayoutAttribute = 12
+	NSLayoutAttributeLeft           NSLayoutAttribute = 1
+	NSLayoutAttributeRight          NSLayoutAttribute = 2
+	NSLayoutAttributeTop            NSLayoutAttribute = 3
+	NSLayoutAttributeBottom         NSLayoutAttribute = 4
+	NSLayoutAttributeLeading        NSLayoutAttribute = 5
+	NSLayoutAttributeTrailing       NSLayoutAttribute = 6
+	NSLayoutAttributeWidth          NSLayoutAttribute = 7
+	NSLayoutAttributeHeight         NSLayoutAttribute = 8
+	NSLayoutAttributeCenterX        NSLayoutAttribute = 9
+	NSLayoutAttributeCenterY        NSLayoutAttribute = 10
+	NSLayoutAttributeLastBaseline   NSLayoutAttribute = 11
+	NSLayoutAttributeBaseline       NSLayoutAttribute = 11
+	NSLayoutAttributeFirstBaseline  NSLayoutAttribute = 12
 	NSLayoutAttributeNotAnAttribute NSLayoutAttribute = 0
 )
 
@@ -3467,7 +3929,7 @@ type NSLayoutConstraintOrientation int64
 
 const (
 	NSLayoutConstraintOrientationHorizontal NSLayoutConstraintOrientation = 0
-	NSLayoutConstraintOrientationVertical NSLayoutConstraintOrientation = 1
+	NSLayoutConstraintOrientationVertical   NSLayoutConstraintOrientation = 1
 )
 
 func (e NSLayoutConstraintOrientation) String() string {
@@ -3484,50 +3946,82 @@ func (e NSLayoutConstraintOrientation) String() string {
 type NSLayoutFormatOptions uint64
 
 const (
-	NSLayoutFormatAlignAllLeft NSLayoutFormatOptions = 2
-	NSLayoutFormatAlignAllRight NSLayoutFormatOptions = 4
-	NSLayoutFormatAlignAllTop NSLayoutFormatOptions = 8
-	NSLayoutFormatAlignAllBottom NSLayoutFormatOptions = 16
-	NSLayoutFormatAlignAllLeading NSLayoutFormatOptions = 32
-	NSLayoutFormatAlignAllTrailing NSLayoutFormatOptions = 64
-	NSLayoutFormatAlignAllCenterX NSLayoutFormatOptions = 512
-	NSLayoutFormatAlignAllCenterY NSLayoutFormatOptions = 1024
-	NSLayoutFormatAlignAllLastBaseline NSLayoutFormatOptions = 2048
-	NSLayoutFormatAlignAllFirstBaseline NSLayoutFormatOptions = 4096
-	NSLayoutFormatAlignAllBaseline NSLayoutFormatOptions = 2048
-	NSLayoutFormatAlignmentMask NSLayoutFormatOptions = 65535
+	NSLayoutFormatAlignAllLeft               NSLayoutFormatOptions = 2
+	NSLayoutFormatAlignAllRight              NSLayoutFormatOptions = 4
+	NSLayoutFormatAlignAllTop                NSLayoutFormatOptions = 8
+	NSLayoutFormatAlignAllBottom             NSLayoutFormatOptions = 16
+	NSLayoutFormatAlignAllLeading            NSLayoutFormatOptions = 32
+	NSLayoutFormatAlignAllTrailing           NSLayoutFormatOptions = 64
+	NSLayoutFormatAlignAllCenterX            NSLayoutFormatOptions = 512
+	NSLayoutFormatAlignAllCenterY            NSLayoutFormatOptions = 1024
+	NSLayoutFormatAlignAllLastBaseline       NSLayoutFormatOptions = 2048
+	NSLayoutFormatAlignAllFirstBaseline      NSLayoutFormatOptions = 4096
+	NSLayoutFormatAlignAllBaseline           NSLayoutFormatOptions = 2048
+	NSLayoutFormatAlignmentMask              NSLayoutFormatOptions = 65535
 	NSLayoutFormatDirectionLeadingToTrailing NSLayoutFormatOptions = 0
-	NSLayoutFormatDirectionLeftToRight NSLayoutFormatOptions = 65536
-	NSLayoutFormatDirectionRightToLeft NSLayoutFormatOptions = 131072
-	NSLayoutFormatDirectionMask NSLayoutFormatOptions = 196608
+	NSLayoutFormatDirectionLeftToRight       NSLayoutFormatOptions = 65536
+	NSLayoutFormatDirectionRightToLeft       NSLayoutFormatOptions = 131072
+	NSLayoutFormatDirectionMask              NSLayoutFormatOptions = 196608
 )
 
 func (e NSLayoutFormatOptions) String() string {
 	var parts []string
-	if e&NSLayoutFormatAlignAllLeft != 0 { parts = append(parts, "NSLayoutFormatAlignAllLeft") }
-	if e&NSLayoutFormatAlignAllRight != 0 { parts = append(parts, "NSLayoutFormatAlignAllRight") }
-	if e&NSLayoutFormatAlignAllTop != 0 { parts = append(parts, "NSLayoutFormatAlignAllTop") }
-	if e&NSLayoutFormatAlignAllBottom != 0 { parts = append(parts, "NSLayoutFormatAlignAllBottom") }
-	if e&NSLayoutFormatAlignAllLeading != 0 { parts = append(parts, "NSLayoutFormatAlignAllLeading") }
-	if e&NSLayoutFormatAlignAllTrailing != 0 { parts = append(parts, "NSLayoutFormatAlignAllTrailing") }
-	if e&NSLayoutFormatAlignAllCenterX != 0 { parts = append(parts, "NSLayoutFormatAlignAllCenterX") }
-	if e&NSLayoutFormatAlignAllCenterY != 0 { parts = append(parts, "NSLayoutFormatAlignAllCenterY") }
-	if e&NSLayoutFormatAlignAllLastBaseline != 0 { parts = append(parts, "NSLayoutFormatAlignAllLastBaseline") }
-	if e&NSLayoutFormatAlignAllFirstBaseline != 0 { parts = append(parts, "NSLayoutFormatAlignAllFirstBaseline") }
-	if e&NSLayoutFormatAlignAllBaseline != 0 { parts = append(parts, "NSLayoutFormatAlignAllBaseline") }
-	if e&NSLayoutFormatAlignmentMask != 0 { parts = append(parts, "NSLayoutFormatAlignmentMask") }
-	if e&NSLayoutFormatDirectionLeftToRight != 0 { parts = append(parts, "NSLayoutFormatDirectionLeftToRight") }
-	if e&NSLayoutFormatDirectionRightToLeft != 0 { parts = append(parts, "NSLayoutFormatDirectionRightToLeft") }
-	if e&NSLayoutFormatDirectionMask != 0 { parts = append(parts, "NSLayoutFormatDirectionMask") }
-	if len(parts) == 0 { return "0" }
+	if e&NSLayoutFormatAlignAllLeft != 0 {
+		parts = append(parts, "NSLayoutFormatAlignAllLeft")
+	}
+	if e&NSLayoutFormatAlignAllRight != 0 {
+		parts = append(parts, "NSLayoutFormatAlignAllRight")
+	}
+	if e&NSLayoutFormatAlignAllTop != 0 {
+		parts = append(parts, "NSLayoutFormatAlignAllTop")
+	}
+	if e&NSLayoutFormatAlignAllBottom != 0 {
+		parts = append(parts, "NSLayoutFormatAlignAllBottom")
+	}
+	if e&NSLayoutFormatAlignAllLeading != 0 {
+		parts = append(parts, "NSLayoutFormatAlignAllLeading")
+	}
+	if e&NSLayoutFormatAlignAllTrailing != 0 {
+		parts = append(parts, "NSLayoutFormatAlignAllTrailing")
+	}
+	if e&NSLayoutFormatAlignAllCenterX != 0 {
+		parts = append(parts, "NSLayoutFormatAlignAllCenterX")
+	}
+	if e&NSLayoutFormatAlignAllCenterY != 0 {
+		parts = append(parts, "NSLayoutFormatAlignAllCenterY")
+	}
+	if e&NSLayoutFormatAlignAllLastBaseline != 0 {
+		parts = append(parts, "NSLayoutFormatAlignAllLastBaseline")
+	}
+	if e&NSLayoutFormatAlignAllFirstBaseline != 0 {
+		parts = append(parts, "NSLayoutFormatAlignAllFirstBaseline")
+	}
+	if e&NSLayoutFormatAlignAllBaseline != 0 {
+		parts = append(parts, "NSLayoutFormatAlignAllBaseline")
+	}
+	if e&NSLayoutFormatAlignmentMask != 0 {
+		parts = append(parts, "NSLayoutFormatAlignmentMask")
+	}
+	if e&NSLayoutFormatDirectionLeftToRight != 0 {
+		parts = append(parts, "NSLayoutFormatDirectionLeftToRight")
+	}
+	if e&NSLayoutFormatDirectionRightToLeft != 0 {
+		parts = append(parts, "NSLayoutFormatDirectionRightToLeft")
+	}
+	if e&NSLayoutFormatDirectionMask != 0 {
+		parts = append(parts, "NSLayoutFormatDirectionMask")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSLayoutRelation int64
 
 const (
-	NSLayoutRelationLessThanOrEqual NSLayoutRelation = -1
-	NSLayoutRelationEqual NSLayoutRelation = 0
+	NSLayoutRelationLessThanOrEqual    NSLayoutRelation = -1
+	NSLayoutRelationEqual              NSLayoutRelation = 0
 	NSLayoutRelationGreaterThanOrEqual NSLayoutRelation = 1
 )
 
@@ -3547,8 +4041,8 @@ func (e NSLayoutRelation) String() string {
 type NSLevelIndicatorPlaceholderVisibility int64
 
 const (
-	NSLevelIndicatorPlaceholderVisibilityAutomatic NSLevelIndicatorPlaceholderVisibility = 0
-	NSLevelIndicatorPlaceholderVisibilityAlways NSLevelIndicatorPlaceholderVisibility = 1
+	NSLevelIndicatorPlaceholderVisibilityAutomatic    NSLevelIndicatorPlaceholderVisibility = 0
+	NSLevelIndicatorPlaceholderVisibilityAlways       NSLevelIndicatorPlaceholderVisibility = 1
 	NSLevelIndicatorPlaceholderVisibilityWhileEditing NSLevelIndicatorPlaceholderVisibility = 2
 )
 
@@ -3568,10 +4062,10 @@ func (e NSLevelIndicatorPlaceholderVisibility) String() string {
 type NSLevelIndicatorStyle uint64
 
 const (
-	NSLevelIndicatorStyleRelevancy NSLevelIndicatorStyle = 0
+	NSLevelIndicatorStyleRelevancy          NSLevelIndicatorStyle = 0
 	NSLevelIndicatorStyleContinuousCapacity NSLevelIndicatorStyle = 1
-	NSLevelIndicatorStyleDiscreteCapacity NSLevelIndicatorStyle = 2
-	NSLevelIndicatorStyleRating NSLevelIndicatorStyle = 3
+	NSLevelIndicatorStyleDiscreteCapacity   NSLevelIndicatorStyle = 2
+	NSLevelIndicatorStyleRating             NSLevelIndicatorStyle = 3
 )
 
 func (e NSLevelIndicatorStyle) String() string {
@@ -3592,11 +4086,11 @@ func (e NSLevelIndicatorStyle) String() string {
 type NSLineBreakMode uint64
 
 const (
-	NSLineBreakByWordWrapping NSLineBreakMode = 0
-	NSLineBreakByCharWrapping NSLineBreakMode = 1
-	NSLineBreakByClipping NSLineBreakMode = 2
-	NSLineBreakByTruncatingHead NSLineBreakMode = 3
-	NSLineBreakByTruncatingTail NSLineBreakMode = 4
+	NSLineBreakByWordWrapping     NSLineBreakMode = 0
+	NSLineBreakByCharWrapping     NSLineBreakMode = 1
+	NSLineBreakByClipping         NSLineBreakMode = 2
+	NSLineBreakByTruncatingHead   NSLineBreakMode = 3
+	NSLineBreakByTruncatingTail   NSLineBreakMode = 4
 	NSLineBreakByTruncatingMiddle NSLineBreakMode = 5
 )
 
@@ -3622,26 +4116,34 @@ func (e NSLineBreakMode) String() string {
 type NSLineBreakStrategy uint64
 
 const (
-	NSLineBreakStrategyNone NSLineBreakStrategy = 0
-	NSLineBreakStrategyPushOut NSLineBreakStrategy = 1
+	NSLineBreakStrategyNone               NSLineBreakStrategy = 0
+	NSLineBreakStrategyPushOut            NSLineBreakStrategy = 1
 	NSLineBreakStrategyHangulWordPriority NSLineBreakStrategy = 2
-	NSLineBreakStrategyStandard NSLineBreakStrategy = 65535
+	NSLineBreakStrategyStandard           NSLineBreakStrategy = 65535
 )
 
 func (e NSLineBreakStrategy) String() string {
 	var parts []string
-	if e&NSLineBreakStrategyPushOut != 0 { parts = append(parts, "NSLineBreakStrategyPushOut") }
-	if e&NSLineBreakStrategyHangulWordPriority != 0 { parts = append(parts, "NSLineBreakStrategyHangulWordPriority") }
-	if e&NSLineBreakStrategyStandard != 0 { parts = append(parts, "NSLineBreakStrategyStandard") }
-	if len(parts) == 0 { return "0" }
+	if e&NSLineBreakStrategyPushOut != 0 {
+		parts = append(parts, "NSLineBreakStrategyPushOut")
+	}
+	if e&NSLineBreakStrategyHangulWordPriority != 0 {
+		parts = append(parts, "NSLineBreakStrategyHangulWordPriority")
+	}
+	if e&NSLineBreakStrategyStandard != 0 {
+		parts = append(parts, "NSLineBreakStrategyStandard")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSLineCapStyle uint64
 
 const (
-	NSLineCapStyleButt NSLineCapStyle = 0
-	NSLineCapStyleRound NSLineCapStyle = 1
+	NSLineCapStyleButt   NSLineCapStyle = 0
+	NSLineCapStyleRound  NSLineCapStyle = 1
 	NSLineCapStyleSquare NSLineCapStyle = 2
 )
 
@@ -3683,10 +4185,10 @@ type NSLineMovementDirection uint64
 
 const (
 	NSLineDoesntMove NSLineMovementDirection = 0
-	NSLineMovesLeft NSLineMovementDirection = 1
+	NSLineMovesLeft  NSLineMovementDirection = 1
 	NSLineMovesRight NSLineMovementDirection = 2
-	NSLineMovesDown NSLineMovementDirection = 3
-	NSLineMovesUp NSLineMovementDirection = 4
+	NSLineMovesDown  NSLineMovementDirection = 3
+	NSLineMovesUp    NSLineMovementDirection = 4
 )
 
 func (e NSLineMovementDirection) String() string {
@@ -3709,10 +4211,10 @@ func (e NSLineMovementDirection) String() string {
 type NSLineSweepDirection uint64
 
 const (
-	NSLineSweepLeft NSLineSweepDirection = 0
+	NSLineSweepLeft  NSLineSweepDirection = 0
 	NSLineSweepRight NSLineSweepDirection = 1
-	NSLineSweepDown NSLineSweepDirection = 2
-	NSLineSweepUp NSLineSweepDirection = 3
+	NSLineSweepDown  NSLineSweepDirection = 2
+	NSLineSweepUp    NSLineSweepDirection = 3
 )
 
 func (e NSLineSweepDirection) String() string {
@@ -3733,10 +4235,10 @@ func (e NSLineSweepDirection) String() string {
 type NSMatrixMode uint64
 
 const (
-	NSRadioModeMatrix NSMatrixMode = 0
+	NSRadioModeMatrix     NSMatrixMode = 0
 	NSHighlightModeMatrix NSMatrixMode = 1
-	NSListModeMatrix NSMatrixMode = 2
-	NSTrackModeMatrix NSMatrixMode = 3
+	NSListModeMatrix      NSMatrixMode = 2
+	NSTrackModeMatrix     NSMatrixMode = 3
 )
 
 func (e NSMatrixMode) String() string {
@@ -3765,10 +4267,18 @@ const (
 
 func (e NSMediaLibrary) String() string {
 	var parts []string
-	if e&NSMediaLibraryAudio != 0 { parts = append(parts, "NSMediaLibraryAudio") }
-	if e&NSMediaLibraryImage != 0 { parts = append(parts, "NSMediaLibraryImage") }
-	if e&NSMediaLibraryMovie != 0 { parts = append(parts, "NSMediaLibraryMovie") }
-	if len(parts) == 0 { return "0" }
+	if e&NSMediaLibraryAudio != 0 {
+		parts = append(parts, "NSMediaLibraryAudio")
+	}
+	if e&NSMediaLibraryImage != 0 {
+		parts = append(parts, "NSMediaLibraryImage")
+	}
+	if e&NSMediaLibraryMovie != 0 {
+		parts = append(parts, "NSMediaLibraryMovie")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -3825,23 +4335,37 @@ func (e NSMenuPresentationStyle) String() string {
 type NSMenuProperties uint64
 
 const (
-	NSMenuPropertyItemTitle NSMenuProperties = 1
-	NSMenuPropertyItemAttributedTitle NSMenuProperties = 2
-	NSMenuPropertyItemKeyEquivalent NSMenuProperties = 4
-	NSMenuPropertyItemImage NSMenuProperties = 8
-	NSMenuPropertyItemEnabled NSMenuProperties = 16
+	NSMenuPropertyItemTitle                    NSMenuProperties = 1
+	NSMenuPropertyItemAttributedTitle          NSMenuProperties = 2
+	NSMenuPropertyItemKeyEquivalent            NSMenuProperties = 4
+	NSMenuPropertyItemImage                    NSMenuProperties = 8
+	NSMenuPropertyItemEnabled                  NSMenuProperties = 16
 	NSMenuPropertyItemAccessibilityDescription NSMenuProperties = 32
 )
 
 func (e NSMenuProperties) String() string {
 	var parts []string
-	if e&NSMenuPropertyItemTitle != 0 { parts = append(parts, "NSMenuPropertyItemTitle") }
-	if e&NSMenuPropertyItemAttributedTitle != 0 { parts = append(parts, "NSMenuPropertyItemAttributedTitle") }
-	if e&NSMenuPropertyItemKeyEquivalent != 0 { parts = append(parts, "NSMenuPropertyItemKeyEquivalent") }
-	if e&NSMenuPropertyItemImage != 0 { parts = append(parts, "NSMenuPropertyItemImage") }
-	if e&NSMenuPropertyItemEnabled != 0 { parts = append(parts, "NSMenuPropertyItemEnabled") }
-	if e&NSMenuPropertyItemAccessibilityDescription != 0 { parts = append(parts, "NSMenuPropertyItemAccessibilityDescription") }
-	if len(parts) == 0 { return "0" }
+	if e&NSMenuPropertyItemTitle != 0 {
+		parts = append(parts, "NSMenuPropertyItemTitle")
+	}
+	if e&NSMenuPropertyItemAttributedTitle != 0 {
+		parts = append(parts, "NSMenuPropertyItemAttributedTitle")
+	}
+	if e&NSMenuPropertyItemKeyEquivalent != 0 {
+		parts = append(parts, "NSMenuPropertyItemKeyEquivalent")
+	}
+	if e&NSMenuPropertyItemImage != 0 {
+		parts = append(parts, "NSMenuPropertyItemImage")
+	}
+	if e&NSMenuPropertyItemEnabled != 0 {
+		parts = append(parts, "NSMenuPropertyItemEnabled")
+	}
+	if e&NSMenuPropertyItemAccessibilityDescription != 0 {
+		parts = append(parts, "NSMenuPropertyItemAccessibilityDescription")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -3890,20 +4414,20 @@ func (e NSMultibyteGlyphPacking) String() string {
 type NSOpenGLContextParameter int64
 
 const (
-	NSOpenGLContextParameterSwapInterval NSOpenGLContextParameter = 222
-	NSOpenGLContextParameterSurfaceOrder NSOpenGLContextParameter = 235
-	NSOpenGLContextParameterSurfaceOpacity NSOpenGLContextParameter = 236
-	NSOpenGLContextParameterSurfaceBackingSize NSOpenGLContextParameter = 304
-	NSOpenGLContextParameterReclaimResources NSOpenGLContextParameter = 308
-	NSOpenGLContextParameterCurrentRendererID NSOpenGLContextParameter = 309
-	NSOpenGLContextParameterGPUVertexProcessing NSOpenGLContextParameter = 310
-	NSOpenGLContextParameterGPUFragmentProcessing NSOpenGLContextParameter = 311
-	NSOpenGLContextParameterHasDrawable NSOpenGLContextParameter = 314
-	NSOpenGLContextParameterMPSwapsInFlight NSOpenGLContextParameter = 315
-	NSOpenGLContextParameterSwapRectangle NSOpenGLContextParameter = 200
-	NSOpenGLContextParameterSwapRectangleEnable NSOpenGLContextParameter = 201
-	NSOpenGLContextParameterRasterizationEnable NSOpenGLContextParameter = 221
-	NSOpenGLContextParameterStateValidation NSOpenGLContextParameter = 301
+	NSOpenGLContextParameterSwapInterval           NSOpenGLContextParameter = 222
+	NSOpenGLContextParameterSurfaceOrder           NSOpenGLContextParameter = 235
+	NSOpenGLContextParameterSurfaceOpacity         NSOpenGLContextParameter = 236
+	NSOpenGLContextParameterSurfaceBackingSize     NSOpenGLContextParameter = 304
+	NSOpenGLContextParameterReclaimResources       NSOpenGLContextParameter = 308
+	NSOpenGLContextParameterCurrentRendererID      NSOpenGLContextParameter = 309
+	NSOpenGLContextParameterGPUVertexProcessing    NSOpenGLContextParameter = 310
+	NSOpenGLContextParameterGPUFragmentProcessing  NSOpenGLContextParameter = 311
+	NSOpenGLContextParameterHasDrawable            NSOpenGLContextParameter = 314
+	NSOpenGLContextParameterMPSwapsInFlight        NSOpenGLContextParameter = 315
+	NSOpenGLContextParameterSwapRectangle          NSOpenGLContextParameter = 200
+	NSOpenGLContextParameterSwapRectangleEnable    NSOpenGLContextParameter = 201
+	NSOpenGLContextParameterRasterizationEnable    NSOpenGLContextParameter = 221
+	NSOpenGLContextParameterStateValidation        NSOpenGLContextParameter = 301
 	NSOpenGLContextParameterSurfaceSurfaceVolatile NSOpenGLContextParameter = 306
 )
 
@@ -3948,11 +4472,11 @@ func (e NSOpenGLContextParameter) String() string {
 type NSOpenGLGlobalOption int64
 
 const (
-	NSOpenGLGOFormatCacheSize NSOpenGLGlobalOption = 501
+	NSOpenGLGOFormatCacheSize  NSOpenGLGlobalOption = 501
 	NSOpenGLGOClearFormatCache NSOpenGLGlobalOption = 502
-	NSOpenGLGORetainRenderers NSOpenGLGlobalOption = 503
-	NSOpenGLGOUseBuildCache NSOpenGLGlobalOption = 506
-	NSOpenGLGOResetLibrary NSOpenGLGlobalOption = 504
+	NSOpenGLGORetainRenderers  NSOpenGLGlobalOption = 503
+	NSOpenGLGOUseBuildCache    NSOpenGLGlobalOption = 506
+	NSOpenGLGOResetLibrary     NSOpenGLGlobalOption = 504
 )
 
 func (e NSOpenGLGlobalOption) String() string {
@@ -3975,25 +4499,33 @@ func (e NSOpenGLGlobalOption) String() string {
 type NSPDFPanelOptions int64
 
 const (
-	NSPDFPanelShowsPaperSize NSPDFPanelOptions = 4
-	NSPDFPanelShowsOrientation NSPDFPanelOptions = 8
+	NSPDFPanelShowsPaperSize          NSPDFPanelOptions = 4
+	NSPDFPanelShowsOrientation        NSPDFPanelOptions = 8
 	NSPDFPanelRequestsParentDirectory NSPDFPanelOptions = 16777216
 )
 
 func (e NSPDFPanelOptions) String() string {
 	var parts []string
-	if e&NSPDFPanelShowsPaperSize != 0 { parts = append(parts, "NSPDFPanelShowsPaperSize") }
-	if e&NSPDFPanelShowsOrientation != 0 { parts = append(parts, "NSPDFPanelShowsOrientation") }
-	if e&NSPDFPanelRequestsParentDirectory != 0 { parts = append(parts, "NSPDFPanelRequestsParentDirectory") }
-	if len(parts) == 0 { return "0" }
+	if e&NSPDFPanelShowsPaperSize != 0 {
+		parts = append(parts, "NSPDFPanelShowsPaperSize")
+	}
+	if e&NSPDFPanelShowsOrientation != 0 {
+		parts = append(parts, "NSPDFPanelShowsOrientation")
+	}
+	if e&NSPDFPanelRequestsParentDirectory != 0 {
+		parts = append(parts, "NSPDFPanelRequestsParentDirectory")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSPageControllerTransitionStyle int64
 
 const (
-	NSPageControllerTransitionStyleStackHistory NSPageControllerTransitionStyle = 0
-	NSPageControllerTransitionStyleStackBook NSPageControllerTransitionStyle = 1
+	NSPageControllerTransitionStyleStackHistory    NSPageControllerTransitionStyle = 0
+	NSPageControllerTransitionStyleStackBook       NSPageControllerTransitionStyle = 1
 	NSPageControllerTransitionStyleHorizontalStrip NSPageControllerTransitionStyle = 2
 )
 
@@ -4014,7 +4546,7 @@ type NSPageLayoutResult int64
 
 const (
 	NSPageLayoutResultCancelled NSPageLayoutResult = 0
-	NSPageLayoutResultChanged NSPageLayoutResult = 1
+	NSPageLayoutResultChanged   NSPageLayoutResult = 1
 )
 
 func (e NSPageLayoutResult) String() string {
@@ -4031,7 +4563,7 @@ func (e NSPageLayoutResult) String() string {
 type NSPaperOrientation int64
 
 const (
-	NSPaperOrientationPortrait NSPaperOrientation = 0
+	NSPaperOrientationPortrait  NSPaperOrientation = 0
 	NSPaperOrientationLandscape NSPaperOrientation = 1
 )
 
@@ -4083,26 +4615,38 @@ const (
 
 func (e NSPasteboardContentsOptions) String() string {
 	var parts []string
-	if e&NSPasteboardContentsCurrentHostOnly != 0 { parts = append(parts, "NSPasteboardContentsCurrentHostOnly") }
-	if len(parts) == 0 { return "0" }
+	if e&NSPasteboardContentsCurrentHostOnly != 0 {
+		parts = append(parts, "NSPasteboardContentsCurrentHostOnly")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSPasteboardReadingOptions uint64
 
 const (
-	NSPasteboardReadingAsData NSPasteboardReadingOptions = 0
-	NSPasteboardReadingAsString NSPasteboardReadingOptions = 1
+	NSPasteboardReadingAsData         NSPasteboardReadingOptions = 0
+	NSPasteboardReadingAsString       NSPasteboardReadingOptions = 1
 	NSPasteboardReadingAsPropertyList NSPasteboardReadingOptions = 2
 	NSPasteboardReadingAsKeyedArchive NSPasteboardReadingOptions = 4
 )
 
 func (e NSPasteboardReadingOptions) String() string {
 	var parts []string
-	if e&NSPasteboardReadingAsString != 0 { parts = append(parts, "NSPasteboardReadingAsString") }
-	if e&NSPasteboardReadingAsPropertyList != 0 { parts = append(parts, "NSPasteboardReadingAsPropertyList") }
-	if e&NSPasteboardReadingAsKeyedArchive != 0 { parts = append(parts, "NSPasteboardReadingAsKeyedArchive") }
-	if len(parts) == 0 { return "0" }
+	if e&NSPasteboardReadingAsString != 0 {
+		parts = append(parts, "NSPasteboardReadingAsString")
+	}
+	if e&NSPasteboardReadingAsPropertyList != 0 {
+		parts = append(parts, "NSPasteboardReadingAsPropertyList")
+	}
+	if e&NSPasteboardReadingAsKeyedArchive != 0 {
+		parts = append(parts, "NSPasteboardReadingAsKeyedArchive")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -4114,16 +4658,20 @@ const (
 
 func (e NSPasteboardWritingOptions) String() string {
 	var parts []string
-	if e&NSPasteboardWritingPromised != 0 { parts = append(parts, "NSPasteboardWritingPromised") }
-	if len(parts) == 0 { return "0" }
+	if e&NSPasteboardWritingPromised != 0 {
+		parts = append(parts, "NSPasteboardWritingPromised")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSPathStyle int64
 
 const (
-	NSPathStyleStandard NSPathStyle = 0
-	NSPathStylePopUp NSPathStyle = 2
+	NSPathStyleStandard      NSPathStyle = 0
+	NSPathStylePopUp         NSPathStyle = 2
 	NSPathStyleNavigationBar NSPathStyle = 1
 )
 
@@ -4144,7 +4692,7 @@ type NSPickerTouchBarItemControlRepresentation int64
 
 const (
 	NSPickerTouchBarItemControlRepresentationAutomatic NSPickerTouchBarItemControlRepresentation = 0
-	NSPickerTouchBarItemControlRepresentationExpanded NSPickerTouchBarItemControlRepresentation = 1
+	NSPickerTouchBarItemControlRepresentationExpanded  NSPickerTouchBarItemControlRepresentation = 1
 	NSPickerTouchBarItemControlRepresentationCollapsed NSPickerTouchBarItemControlRepresentation = 2
 )
 
@@ -4187,9 +4735,9 @@ type NSPointingDeviceType uint64
 
 const (
 	NSPointingDeviceTypeUnknown NSPointingDeviceType = 0
-	NSPointingDeviceTypePen NSPointingDeviceType = 1
-	NSPointingDeviceTypeCursor NSPointingDeviceType = 2
-	NSPointingDeviceTypeEraser NSPointingDeviceType = 3
+	NSPointingDeviceTypePen     NSPointingDeviceType = 1
+	NSPointingDeviceTypeCursor  NSPointingDeviceType = 2
+	NSPointingDeviceTypeEraser  NSPointingDeviceType = 3
 )
 
 func (e NSPointingDeviceType) String() string {
@@ -4210,7 +4758,7 @@ func (e NSPointingDeviceType) String() string {
 type NSPopUpArrowPosition uint64
 
 const (
-	NSPopUpNoArrow NSPopUpArrowPosition = 0
+	NSPopUpNoArrow       NSPopUpArrowPosition = 0
 	NSPopUpArrowAtCenter NSPopUpArrowPosition = 1
 	NSPopUpArrowAtBottom NSPopUpArrowPosition = 2
 )
@@ -4254,8 +4802,8 @@ type NSPopoverBehavior int64
 
 const (
 	NSPopoverBehaviorApplicationDefined NSPopoverBehavior = 0
-	NSPopoverBehaviorTransient NSPopoverBehavior = 1
-	NSPopoverBehaviorSemitransient NSPopoverBehavior = 2
+	NSPopoverBehaviorTransient          NSPopoverBehavior = 1
+	NSPopoverBehaviorSemitransient      NSPopoverBehavior = 2
 )
 
 func (e NSPopoverBehavior) String() string {
@@ -4274,13 +4822,13 @@ func (e NSPopoverBehavior) String() string {
 type NSPressureBehavior int64
 
 const (
-	NSPressureBehaviorUnknown NSPressureBehavior = -1
-	NSPressureBehaviorPrimaryDefault NSPressureBehavior = 0
-	NSPressureBehaviorPrimaryClick NSPressureBehavior = 1
-	NSPressureBehaviorPrimaryGeneric NSPressureBehavior = 2
+	NSPressureBehaviorUnknown            NSPressureBehavior = -1
+	NSPressureBehaviorPrimaryDefault     NSPressureBehavior = 0
+	NSPressureBehaviorPrimaryClick       NSPressureBehavior = 1
+	NSPressureBehaviorPrimaryGeneric     NSPressureBehavior = 2
 	NSPressureBehaviorPrimaryAccelerator NSPressureBehavior = 3
-	NSPressureBehaviorPrimaryDeepClick NSPressureBehavior = 5
-	NSPressureBehaviorPrimaryDeepDrag NSPressureBehavior = 6
+	NSPressureBehaviorPrimaryDeepClick   NSPressureBehavior = 5
+	NSPressureBehaviorPrimaryDeepDrag    NSPressureBehavior = 6
 )
 
 func (e NSPressureBehavior) String() string {
@@ -4307,27 +4855,45 @@ func (e NSPressureBehavior) String() string {
 type NSPrintPanelOptions uint64
 
 const (
-	NSPrintPanelShowsCopies NSPrintPanelOptions = 1
-	NSPrintPanelShowsPageRange NSPrintPanelOptions = 2
-	NSPrintPanelShowsPaperSize NSPrintPanelOptions = 4
-	NSPrintPanelShowsOrientation NSPrintPanelOptions = 8
-	NSPrintPanelShowsScaling NSPrintPanelOptions = 16
-	NSPrintPanelShowsPrintSelection NSPrintPanelOptions = 32
+	NSPrintPanelShowsCopies             NSPrintPanelOptions = 1
+	NSPrintPanelShowsPageRange          NSPrintPanelOptions = 2
+	NSPrintPanelShowsPaperSize          NSPrintPanelOptions = 4
+	NSPrintPanelShowsOrientation        NSPrintPanelOptions = 8
+	NSPrintPanelShowsScaling            NSPrintPanelOptions = 16
+	NSPrintPanelShowsPrintSelection     NSPrintPanelOptions = 32
 	NSPrintPanelShowsPageSetupAccessory NSPrintPanelOptions = 256
-	NSPrintPanelShowsPreview NSPrintPanelOptions = 131072
+	NSPrintPanelShowsPreview            NSPrintPanelOptions = 131072
 )
 
 func (e NSPrintPanelOptions) String() string {
 	var parts []string
-	if e&NSPrintPanelShowsCopies != 0 { parts = append(parts, "NSPrintPanelShowsCopies") }
-	if e&NSPrintPanelShowsPageRange != 0 { parts = append(parts, "NSPrintPanelShowsPageRange") }
-	if e&NSPrintPanelShowsPaperSize != 0 { parts = append(parts, "NSPrintPanelShowsPaperSize") }
-	if e&NSPrintPanelShowsOrientation != 0 { parts = append(parts, "NSPrintPanelShowsOrientation") }
-	if e&NSPrintPanelShowsScaling != 0 { parts = append(parts, "NSPrintPanelShowsScaling") }
-	if e&NSPrintPanelShowsPrintSelection != 0 { parts = append(parts, "NSPrintPanelShowsPrintSelection") }
-	if e&NSPrintPanelShowsPageSetupAccessory != 0 { parts = append(parts, "NSPrintPanelShowsPageSetupAccessory") }
-	if e&NSPrintPanelShowsPreview != 0 { parts = append(parts, "NSPrintPanelShowsPreview") }
-	if len(parts) == 0 { return "0" }
+	if e&NSPrintPanelShowsCopies != 0 {
+		parts = append(parts, "NSPrintPanelShowsCopies")
+	}
+	if e&NSPrintPanelShowsPageRange != 0 {
+		parts = append(parts, "NSPrintPanelShowsPageRange")
+	}
+	if e&NSPrintPanelShowsPaperSize != 0 {
+		parts = append(parts, "NSPrintPanelShowsPaperSize")
+	}
+	if e&NSPrintPanelShowsOrientation != 0 {
+		parts = append(parts, "NSPrintPanelShowsOrientation")
+	}
+	if e&NSPrintPanelShowsScaling != 0 {
+		parts = append(parts, "NSPrintPanelShowsScaling")
+	}
+	if e&NSPrintPanelShowsPrintSelection != 0 {
+		parts = append(parts, "NSPrintPanelShowsPrintSelection")
+	}
+	if e&NSPrintPanelShowsPageSetupAccessory != 0 {
+		parts = append(parts, "NSPrintPanelShowsPageSetupAccessory")
+	}
+	if e&NSPrintPanelShowsPreview != 0 {
+		parts = append(parts, "NSPrintPanelShowsPreview")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -4335,7 +4901,7 @@ type NSPrintPanelResult int64
 
 const (
 	NSPrintPanelResultCancelled NSPrintPanelResult = 0
-	NSPrintPanelResultPrinted NSPrintPanelResult = 1
+	NSPrintPanelResultPrinted   NSPrintPanelResult = 1
 )
 
 func (e NSPrintPanelResult) String() string {
@@ -4352,7 +4918,7 @@ func (e NSPrintPanelResult) String() string {
 type NSPrintRenderingQuality int64
 
 const (
-	NSPrintRenderingQualityBest NSPrintRenderingQuality = 0
+	NSPrintRenderingQualityBest       NSPrintRenderingQuality = 0
 	NSPrintRenderingQualityResponsive NSPrintRenderingQuality = 1
 )
 
@@ -4370,9 +4936,9 @@ func (e NSPrintRenderingQuality) String() string {
 type NSPrinterTableStatus uint64
 
 const (
-	NSPrinterTableOK NSPrinterTableStatus = 0
+	NSPrinterTableOK       NSPrinterTableStatus = 0
 	NSPrinterTableNotFound NSPrinterTableStatus = 1
-	NSPrinterTableError NSPrinterTableStatus = 2
+	NSPrinterTableError    NSPrinterTableStatus = 2
 )
 
 func (e NSPrinterTableStatus) String() string {
@@ -4392,7 +4958,7 @@ func (e NSPrinterTableStatus) String() string {
 type NSPrintingOrientation uint64
 
 const (
-	NSPortraitOrientation NSPrintingOrientation = 0
+	NSPortraitOrientation  NSPrintingOrientation = 0
 	NSLandscapeOrientation NSPrintingOrientation = 1
 )
 
@@ -4411,9 +4977,9 @@ type NSPrintingPageOrder int64
 
 const (
 	NSDescendingPageOrder NSPrintingPageOrder = -1
-	NSSpecialPageOrder NSPrintingPageOrder = 0
-	NSAscendingPageOrder NSPrintingPageOrder = 1
-	NSUnknownPageOrder NSPrintingPageOrder = 2
+	NSSpecialPageOrder    NSPrintingPageOrder = 0
+	NSAscendingPageOrder  NSPrintingPageOrder = 1
+	NSUnknownPageOrder    NSPrintingPageOrder = 2
 )
 
 func (e NSPrintingPageOrder) String() string {
@@ -4435,8 +5001,8 @@ type NSPrintingPaginationMode uint64
 
 const (
 	NSPrintingPaginationModeAutomatic NSPrintingPaginationMode = 0
-	NSPrintingPaginationModeFit NSPrintingPaginationMode = 1
-	NSPrintingPaginationModeClip NSPrintingPaginationMode = 2
+	NSPrintingPaginationModeFit       NSPrintingPaginationMode = 1
+	NSPrintingPaginationModeClip      NSPrintingPaginationMode = 2
 )
 
 func (e NSPrintingPaginationMode) String() string {
@@ -4455,7 +5021,7 @@ func (e NSPrintingPaginationMode) String() string {
 type NSProgressIndicatorStyle uint64
 
 const (
-	NSProgressIndicatorStyleBar NSProgressIndicatorStyle = 0
+	NSProgressIndicatorStyleBar      NSProgressIndicatorStyle = 0
 	NSProgressIndicatorStyleSpinning NSProgressIndicatorStyle = 1
 )
 
@@ -4474,10 +5040,10 @@ func (e NSProgressIndicatorStyle) String() string {
 type NSProgressIndicatorThickness uint64
 
 const (
-	NSProgressIndicatorPreferredThickness NSProgressIndicatorThickness = 14
+	NSProgressIndicatorPreferredThickness      NSProgressIndicatorThickness = 14
 	NSProgressIndicatorPreferredSmallThickness NSProgressIndicatorThickness = 10
 	NSProgressIndicatorPreferredLargeThickness NSProgressIndicatorThickness = 18
-	NSProgressIndicatorPreferredAquaThickness NSProgressIndicatorThickness = 12
+	NSProgressIndicatorPreferredAquaThickness  NSProgressIndicatorThickness = 12
 )
 
 func (e NSProgressIndicatorThickness) String() string {
@@ -4498,15 +5064,15 @@ func (e NSProgressIndicatorThickness) String() string {
 type NSRectAlignment int64
 
 const (
-	NSRectAlignmentNone NSRectAlignment = 0
-	NSRectAlignmentTop NSRectAlignment = 1
-	NSRectAlignmentTopLeading NSRectAlignment = 2
-	NSRectAlignmentLeading NSRectAlignment = 3
-	NSRectAlignmentBottomLeading NSRectAlignment = 4
-	NSRectAlignmentBottom NSRectAlignment = 5
+	NSRectAlignmentNone           NSRectAlignment = 0
+	NSRectAlignmentTop            NSRectAlignment = 1
+	NSRectAlignmentTopLeading     NSRectAlignment = 2
+	NSRectAlignmentLeading        NSRectAlignment = 3
+	NSRectAlignmentBottomLeading  NSRectAlignment = 4
+	NSRectAlignmentBottom         NSRectAlignment = 5
 	NSRectAlignmentBottomTrailing NSRectAlignment = 6
-	NSRectAlignmentTrailing NSRectAlignment = 7
-	NSRectAlignmentTopTrailing NSRectAlignment = 8
+	NSRectAlignmentTrailing       NSRectAlignment = 7
+	NSRectAlignmentTopTrailing    NSRectAlignment = 8
 )
 
 func (e NSRectAlignment) String() string {
@@ -4538,7 +5104,7 @@ func (e NSRectAlignment) String() string {
 type NSRemoteNotificationType uint64
 
 const (
-	NSRemoteNotificationTypeNone NSRemoteNotificationType = 0
+	NSRemoteNotificationTypeNone  NSRemoteNotificationType = 0
 	NSRemoteNotificationTypeBadge NSRemoteNotificationType = 1
 	NSRemoteNotificationTypeSound NSRemoteNotificationType = 2
 	NSRemoteNotificationTypeAlert NSRemoteNotificationType = 4
@@ -4546,17 +5112,25 @@ const (
 
 func (e NSRemoteNotificationType) String() string {
 	var parts []string
-	if e&NSRemoteNotificationTypeBadge != 0 { parts = append(parts, "NSRemoteNotificationTypeBadge") }
-	if e&NSRemoteNotificationTypeSound != 0 { parts = append(parts, "NSRemoteNotificationTypeSound") }
-	if e&NSRemoteNotificationTypeAlert != 0 { parts = append(parts, "NSRemoteNotificationTypeAlert") }
-	if len(parts) == 0 { return "0" }
+	if e&NSRemoteNotificationTypeBadge != 0 {
+		parts = append(parts, "NSRemoteNotificationTypeBadge")
+	}
+	if e&NSRemoteNotificationTypeSound != 0 {
+		parts = append(parts, "NSRemoteNotificationTypeSound")
+	}
+	if e&NSRemoteNotificationTypeAlert != 0 {
+		parts = append(parts, "NSRemoteNotificationTypeAlert")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSRequestUserAttentionType uint64
 
 const (
-	NSCriticalRequest NSRequestUserAttentionType = 0
+	NSCriticalRequest      NSRequestUserAttentionType = 0
 	NSInformationalRequest NSRequestUserAttentionType = 10
 )
 
@@ -4574,10 +5148,10 @@ func (e NSRequestUserAttentionType) String() string {
 type NSRuleEditorNestingMode uint64
 
 const (
-	NSRuleEditorNestingModeSingle NSRuleEditorNestingMode = 0
-	NSRuleEditorNestingModeList NSRuleEditorNestingMode = 1
+	NSRuleEditorNestingModeSingle   NSRuleEditorNestingMode = 0
+	NSRuleEditorNestingModeList     NSRuleEditorNestingMode = 1
 	NSRuleEditorNestingModeCompound NSRuleEditorNestingMode = 2
-	NSRuleEditorNestingModeSimple NSRuleEditorNestingMode = 3
+	NSRuleEditorNestingModeSimple   NSRuleEditorNestingMode = 3
 )
 
 func (e NSRuleEditorNestingMode) String() string {
@@ -4598,7 +5172,7 @@ func (e NSRuleEditorNestingMode) String() string {
 type NSRuleEditorRowType uint64
 
 const (
-	NSRuleEditorRowTypeSimple NSRuleEditorRowType = 0
+	NSRuleEditorRowTypeSimple   NSRuleEditorRowType = 0
 	NSRuleEditorRowTypeCompound NSRuleEditorRowType = 1
 )
 
@@ -4617,7 +5191,7 @@ type NSRulerOrientation uint64
 
 const (
 	NSHorizontalRuler NSRulerOrientation = 0
-	NSVerticalRuler NSRulerOrientation = 1
+	NSVerticalRuler   NSRulerOrientation = 1
 )
 
 func (e NSRulerOrientation) String() string {
@@ -4634,13 +5208,13 @@ func (e NSRulerOrientation) String() string {
 type NSSaveOperationType uint64
 
 const (
-	NSSaveOperation NSSaveOperationType = 0
-	NSSaveAsOperation NSSaveOperationType = 1
-	NSSaveToOperation NSSaveOperationType = 2
-	NSAutosaveInPlaceOperation NSSaveOperationType = 4
+	NSSaveOperation              NSSaveOperationType = 0
+	NSSaveAsOperation            NSSaveOperationType = 1
+	NSSaveToOperation            NSSaveOperationType = 2
+	NSAutosaveInPlaceOperation   NSSaveOperationType = 4
 	NSAutosaveElsewhereOperation NSSaveOperationType = 3
-	NSAutosaveAsOperation NSSaveOperationType = 5
-	NSAutosaveOperation NSSaveOperationType = 3
+	NSAutosaveAsOperation        NSSaveOperationType = 5
+	NSAutosaveOperation          NSSaveOperationType = 3
 )
 
 func (e NSSaveOperationType) String() string {
@@ -4666,10 +5240,10 @@ func (e NSSaveOperationType) String() string {
 type NSScrollArrowPosition uint64
 
 const (
-	NSScrollerArrowsMaxEnd NSScrollArrowPosition = 0
-	NSScrollerArrowsMinEnd NSScrollArrowPosition = 1
+	NSScrollerArrowsMaxEnd         NSScrollArrowPosition = 0
+	NSScrollerArrowsMinEnd         NSScrollArrowPosition = 1
 	NSScrollerArrowsDefaultSetting NSScrollArrowPosition = 0
-	NSScrollerArrowsNone NSScrollArrowPosition = 2
+	NSScrollerArrowsNone           NSScrollArrowPosition = 2
 )
 
 func (e NSScrollArrowPosition) String() string {
@@ -4689,8 +5263,8 @@ type NSScrollElasticity int64
 
 const (
 	NSScrollElasticityAutomatic NSScrollElasticity = 0
-	NSScrollElasticityNone NSScrollElasticity = 1
-	NSScrollElasticityAllowed NSScrollElasticity = 2
+	NSScrollElasticityNone      NSScrollElasticity = 1
+	NSScrollElasticityAllowed   NSScrollElasticity = 2
 )
 
 func (e NSScrollElasticity) String() string {
@@ -4710,8 +5284,8 @@ type NSScrollViewFindBarPosition int64
 
 const (
 	NSScrollViewFindBarPositionAboveHorizontalRuler NSScrollViewFindBarPosition = 0
-	NSScrollViewFindBarPositionAboveContent NSScrollViewFindBarPosition = 1
-	NSScrollViewFindBarPositionBelowContent NSScrollViewFindBarPosition = 2
+	NSScrollViewFindBarPositionAboveContent         NSScrollViewFindBarPosition = 1
+	NSScrollViewFindBarPositionBelowContent         NSScrollViewFindBarPosition = 2
 )
 
 func (e NSScrollViewFindBarPosition) String() string {
@@ -4750,8 +5324,8 @@ type NSScrollerKnobStyle int64
 
 const (
 	NSScrollerKnobStyleDefault NSScrollerKnobStyle = 0
-	NSScrollerKnobStyleDark NSScrollerKnobStyle = 1
-	NSScrollerKnobStyleLight NSScrollerKnobStyle = 2
+	NSScrollerKnobStyleDark    NSScrollerKnobStyle = 1
+	NSScrollerKnobStyleLight   NSScrollerKnobStyle = 2
 )
 
 func (e NSScrollerKnobStyle) String() string {
@@ -4771,13 +5345,13 @@ func (e NSScrollerKnobStyle) String() string {
 type NSScrollerPart uint64
 
 const (
-	NSScrollerNoPart NSScrollerPart = 0
+	NSScrollerNoPart        NSScrollerPart = 0
 	NSScrollerDecrementPage NSScrollerPart = 1
-	NSScrollerKnob NSScrollerPart = 2
+	NSScrollerKnob          NSScrollerPart = 2
 	NSScrollerIncrementPage NSScrollerPart = 3
 	NSScrollerDecrementLine NSScrollerPart = 4
 	NSScrollerIncrementLine NSScrollerPart = 5
-	NSScrollerKnobSlot NSScrollerPart = 6
+	NSScrollerKnobSlot      NSScrollerPart = 6
 )
 
 func (e NSScrollerPart) String() string {
@@ -4804,7 +5378,7 @@ func (e NSScrollerPart) String() string {
 type NSScrollerStyle int64
 
 const (
-	NSScrollerStyleLegacy NSScrollerStyle = 0
+	NSScrollerStyleLegacy  NSScrollerStyle = 0
 	NSScrollerStyleOverlay NSScrollerStyle = 1
 )
 
@@ -4823,10 +5397,10 @@ func (e NSScrollerStyle) String() string {
 type NSScrubberAlignment int64
 
 const (
-	NSScrubberAlignmentNone NSScrubberAlignment = 0
-	NSScrubberAlignmentLeading NSScrubberAlignment = 1
+	NSScrubberAlignmentNone     NSScrubberAlignment = 0
+	NSScrubberAlignmentLeading  NSScrubberAlignment = 1
 	NSScrubberAlignmentTrailing NSScrubberAlignment = 2
-	NSScrubberAlignmentCenter NSScrubberAlignment = 3
+	NSScrubberAlignmentCenter   NSScrubberAlignment = 3
 )
 
 func (e NSScrubberAlignment) String() string {
@@ -4849,7 +5423,7 @@ type NSScrubberMode int64
 
 const (
 	NSScrubberModeFixed NSScrubberMode = 0
-	NSScrubberModeFree NSScrubberMode = 1
+	NSScrubberModeFree  NSScrubberMode = 1
 )
 
 func (e NSScrubberMode) String() string {
@@ -4894,14 +5468,14 @@ func (e NSSegmentDistribution) String() string {
 type NSSegmentStyle int64
 
 const (
-	NSSegmentStyleAutomatic NSSegmentStyle = 0
-	NSSegmentStyleRounded NSSegmentStyle = 1
-	NSSegmentStyleRoundRect NSSegmentStyle = 3
-	NSSegmentStyleTexturedSquare NSSegmentStyle = 4
-	NSSegmentStyleSmallSquare NSSegmentStyle = 6
-	NSSegmentStyleSeparated NSSegmentStyle = 8
+	NSSegmentStyleAutomatic       NSSegmentStyle = 0
+	NSSegmentStyleRounded         NSSegmentStyle = 1
+	NSSegmentStyleRoundRect       NSSegmentStyle = 3
+	NSSegmentStyleTexturedSquare  NSSegmentStyle = 4
+	NSSegmentStyleSmallSquare     NSSegmentStyle = 6
+	NSSegmentStyleSeparated       NSSegmentStyle = 8
 	NSSegmentStyleTexturedRounded NSSegmentStyle = 2
-	NSSegmentStyleCapsule NSSegmentStyle = 5
+	NSSegmentStyleCapsule         NSSegmentStyle = 5
 )
 
 func (e NSSegmentStyle) String() string {
@@ -4930,9 +5504,9 @@ func (e NSSegmentStyle) String() string {
 type NSSegmentSwitchTracking uint64
 
 const (
-	NSSegmentSwitchTrackingSelectOne NSSegmentSwitchTracking = 0
-	NSSegmentSwitchTrackingSelectAny NSSegmentSwitchTracking = 1
-	NSSegmentSwitchTrackingMomentary NSSegmentSwitchTracking = 2
+	NSSegmentSwitchTrackingSelectOne            NSSegmentSwitchTracking = 0
+	NSSegmentSwitchTrackingSelectAny            NSSegmentSwitchTracking = 1
+	NSSegmentSwitchTrackingMomentary            NSSegmentSwitchTracking = 2
 	NSSegmentSwitchTrackingMomentaryAccelerator NSSegmentSwitchTracking = 3
 )
 
@@ -4954,7 +5528,7 @@ func (e NSSegmentSwitchTracking) String() string {
 type NSSelectionAffinity uint64
 
 const (
-	NSSelectionAffinityUpstream NSSelectionAffinity = 0
+	NSSelectionAffinityUpstream   NSSelectionAffinity = 0
 	NSSelectionAffinityDownstream NSSelectionAffinity = 1
 )
 
@@ -4972,8 +5546,8 @@ func (e NSSelectionAffinity) String() string {
 type NSSelectionDirection uint64
 
 const (
-	NSDirectSelection NSSelectionDirection = 0
-	NSSelectingNext NSSelectionDirection = 1
+	NSDirectSelection   NSSelectionDirection = 0
+	NSSelectingNext     NSSelectionDirection = 1
 	NSSelectingPrevious NSSelectionDirection = 2
 )
 
@@ -4994,7 +5568,7 @@ type NSSelectionGranularity uint64
 
 const (
 	NSSelectByCharacter NSSelectionGranularity = 0
-	NSSelectByWord NSSelectionGranularity = 1
+	NSSelectByWord      NSSelectionGranularity = 1
 	NSSelectByParagraph NSSelectionGranularity = 2
 )
 
@@ -5014,7 +5588,7 @@ func (e NSSelectionGranularity) String() string {
 type NSSharingCollaborationMode int64
 
 const (
-	NSSharingCollaborationModeSendCopy NSSharingCollaborationMode = 0
+	NSSharingCollaborationModeSendCopy    NSSharingCollaborationMode = 0
 	NSSharingCollaborationModeCollaborate NSSharingCollaborationMode = 1
 )
 
@@ -5057,7 +5631,7 @@ func (e NSSharingContentScope) String() string {
 type NSSliderType uint64
 
 const (
-	NSSliderTypeLinear NSSliderType = 0
+	NSSliderTypeLinear   NSSliderType = 0
 	NSSliderTypeCircular NSSliderType = 1
 )
 
@@ -5076,8 +5650,8 @@ type NSSpeechBoundary uint64
 
 const (
 	NSSpeechImmediateBoundary NSSpeechBoundary = 0
-	NSSpeechWordBoundary NSSpeechBoundary = 1
-	NSSpeechSentenceBoundary NSSpeechBoundary = 2
+	NSSpeechWordBoundary      NSSpeechBoundary = 1
+	NSSpeechSentenceBoundary  NSSpeechBoundary = 2
 )
 
 func (e NSSpeechBoundary) String() string {
@@ -5097,7 +5671,7 @@ type NSSpellingState int64
 
 const (
 	NSSpellingStateSpellingFlag NSSpellingState = 1
-	NSSpellingStateGrammarFlag NSSpellingState = 2
+	NSSpellingStateGrammarFlag  NSSpellingState = 2
 )
 
 func (e NSSpellingState) String() string {
@@ -5114,8 +5688,8 @@ func (e NSSpellingState) String() string {
 type NSSplitViewDividerStyle int64
 
 const (
-	NSSplitViewDividerStyleThick NSSplitViewDividerStyle = 1
-	NSSplitViewDividerStyleThin NSSplitViewDividerStyle = 2
+	NSSplitViewDividerStyleThick        NSSplitViewDividerStyle = 1
+	NSSplitViewDividerStyleThin         NSSplitViewDividerStyle = 2
 	NSSplitViewDividerStylePaneSplitter NSSplitViewDividerStyle = 3
 )
 
@@ -5135,10 +5709,10 @@ func (e NSSplitViewDividerStyle) String() string {
 type NSSplitViewItemBehavior int64
 
 const (
-	NSSplitViewItemBehaviorDefault NSSplitViewItemBehavior = 0
-	NSSplitViewItemBehaviorSidebar NSSplitViewItemBehavior = 1
+	NSSplitViewItemBehaviorDefault     NSSplitViewItemBehavior = 0
+	NSSplitViewItemBehaviorSidebar     NSSplitViewItemBehavior = 1
 	NSSplitViewItemBehaviorContentList NSSplitViewItemBehavior = 2
-	NSSplitViewItemBehaviorInspector NSSplitViewItemBehavior = 3
+	NSSplitViewItemBehaviorInspector   NSSplitViewItemBehavior = 3
 )
 
 func (e NSSplitViewItemBehavior) String() string {
@@ -5187,8 +5761,8 @@ func (e NSSplitViewItemCollapseBehavior) String() string {
 type NSSpringLoadingHighlight int64
 
 const (
-	NSSpringLoadingHighlightNone NSSpringLoadingHighlight = 0
-	NSSpringLoadingHighlightStandard NSSpringLoadingHighlight = 1
+	NSSpringLoadingHighlightNone       NSSpringLoadingHighlight = 0
+	NSSpringLoadingHighlightStandard   NSSpringLoadingHighlight = 1
 	NSSpringLoadingHighlightEmphasized NSSpringLoadingHighlight = 2
 )
 
@@ -5208,18 +5782,26 @@ func (e NSSpringLoadingHighlight) String() string {
 type NSSpringLoadingOptions uint64
 
 const (
-	NSSpringLoadingDisabled NSSpringLoadingOptions = 0
-	NSSpringLoadingEnabled NSSpringLoadingOptions = 1
+	NSSpringLoadingDisabled             NSSpringLoadingOptions = 0
+	NSSpringLoadingEnabled              NSSpringLoadingOptions = 1
 	NSSpringLoadingContinuousActivation NSSpringLoadingOptions = 2
-	NSSpringLoadingNoHover NSSpringLoadingOptions = 8
+	NSSpringLoadingNoHover              NSSpringLoadingOptions = 8
 )
 
 func (e NSSpringLoadingOptions) String() string {
 	var parts []string
-	if e&NSSpringLoadingEnabled != 0 { parts = append(parts, "NSSpringLoadingEnabled") }
-	if e&NSSpringLoadingContinuousActivation != 0 { parts = append(parts, "NSSpringLoadingContinuousActivation") }
-	if e&NSSpringLoadingNoHover != 0 { parts = append(parts, "NSSpringLoadingNoHover") }
-	if len(parts) == 0 { return "0" }
+	if e&NSSpringLoadingEnabled != 0 {
+		parts = append(parts, "NSSpringLoadingEnabled")
+	}
+	if e&NSSpringLoadingContinuousActivation != 0 {
+		parts = append(parts, "NSSpringLoadingContinuousActivation")
+	}
+	if e&NSSpringLoadingNoHover != 0 {
+		parts = append(parts, "NSSpringLoadingNoHover")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -5262,10 +5844,10 @@ func (e NSStackViewDistribution) String() string {
 type NSStackViewGravity int64
 
 const (
-	NSStackViewGravityTop NSStackViewGravity = 1
-	NSStackViewGravityLeading NSStackViewGravity = 1
-	NSStackViewGravityCenter NSStackViewGravity = 2
-	NSStackViewGravityBottom NSStackViewGravity = 3
+	NSStackViewGravityTop      NSStackViewGravity = 1
+	NSStackViewGravityLeading  NSStackViewGravity = 1
+	NSStackViewGravityCenter   NSStackViewGravity = 2
+	NSStackViewGravityBottom   NSStackViewGravity = 3
 	NSStackViewGravityTrailing NSStackViewGravity = 3
 )
 
@@ -5285,55 +5867,77 @@ func (e NSStackViewGravity) String() string {
 type NSStatusItemBehavior uint64
 
 const (
-	NSStatusItemBehaviorRemovalAllowed NSStatusItemBehavior = 2
+	NSStatusItemBehaviorRemovalAllowed       NSStatusItemBehavior = 2
 	NSStatusItemBehaviorTerminationOnRemoval NSStatusItemBehavior = 4
 )
 
 func (e NSStatusItemBehavior) String() string {
 	var parts []string
-	if e&NSStatusItemBehaviorRemovalAllowed != 0 { parts = append(parts, "NSStatusItemBehaviorRemovalAllowed") }
-	if e&NSStatusItemBehaviorTerminationOnRemoval != 0 { parts = append(parts, "NSStatusItemBehaviorTerminationOnRemoval") }
-	if len(parts) == 0 { return "0" }
+	if e&NSStatusItemBehaviorRemovalAllowed != 0 {
+		parts = append(parts, "NSStatusItemBehaviorRemovalAllowed")
+	}
+	if e&NSStatusItemBehaviorTerminationOnRemoval != 0 {
+		parts = append(parts, "NSStatusItemBehaviorTerminationOnRemoval")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSStringDrawingOptions int64
 
 const (
-	NSStringDrawingUsesLineFragmentOrigin NSStringDrawingOptions = 1
-	NSStringDrawingUsesFontLeading NSStringDrawingOptions = 2
-	NSStringDrawingUsesDeviceMetrics NSStringDrawingOptions = 8
+	NSStringDrawingUsesLineFragmentOrigin   NSStringDrawingOptions = 1
+	NSStringDrawingUsesFontLeading          NSStringDrawingOptions = 2
+	NSStringDrawingUsesDeviceMetrics        NSStringDrawingOptions = 8
 	NSStringDrawingTruncatesLastVisibleLine NSStringDrawingOptions = 32
 	// Specifies the behavior for resolving ``NSTextAlignment.natural`` to the visual alignment. When set, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language.
 	NSStringDrawingOptionsResolvesNaturalAlignmentWithBaseWritingDirection NSStringDrawingOptions = 512
-	NSStringDrawingDisableScreenFontSubstitution NSStringDrawingOptions = 4
-	NSStringDrawingOneShot NSStringDrawingOptions = 16
+	NSStringDrawingDisableScreenFontSubstitution                           NSStringDrawingOptions = 4
+	NSStringDrawingOneShot                                                 NSStringDrawingOptions = 16
 )
 
 func (e NSStringDrawingOptions) String() string {
 	var parts []string
-	if e&NSStringDrawingUsesLineFragmentOrigin != 0 { parts = append(parts, "NSStringDrawingUsesLineFragmentOrigin") }
-	if e&NSStringDrawingUsesFontLeading != 0 { parts = append(parts, "NSStringDrawingUsesFontLeading") }
-	if e&NSStringDrawingUsesDeviceMetrics != 0 { parts = append(parts, "NSStringDrawingUsesDeviceMetrics") }
-	if e&NSStringDrawingTruncatesLastVisibleLine != 0 { parts = append(parts, "NSStringDrawingTruncatesLastVisibleLine") }
-	if e&NSStringDrawingOptionsResolvesNaturalAlignmentWithBaseWritingDirection != 0 { parts = append(parts, "NSStringDrawingOptionsResolvesNaturalAlignmentWithBaseWritingDirection") }
-	if e&NSStringDrawingDisableScreenFontSubstitution != 0 { parts = append(parts, "NSStringDrawingDisableScreenFontSubstitution") }
-	if e&NSStringDrawingOneShot != 0 { parts = append(parts, "NSStringDrawingOneShot") }
-	if len(parts) == 0 { return "0" }
+	if e&NSStringDrawingUsesLineFragmentOrigin != 0 {
+		parts = append(parts, "NSStringDrawingUsesLineFragmentOrigin")
+	}
+	if e&NSStringDrawingUsesFontLeading != 0 {
+		parts = append(parts, "NSStringDrawingUsesFontLeading")
+	}
+	if e&NSStringDrawingUsesDeviceMetrics != 0 {
+		parts = append(parts, "NSStringDrawingUsesDeviceMetrics")
+	}
+	if e&NSStringDrawingTruncatesLastVisibleLine != 0 {
+		parts = append(parts, "NSStringDrawingTruncatesLastVisibleLine")
+	}
+	if e&NSStringDrawingOptionsResolvesNaturalAlignmentWithBaseWritingDirection != 0 {
+		parts = append(parts, "NSStringDrawingOptionsResolvesNaturalAlignmentWithBaseWritingDirection")
+	}
+	if e&NSStringDrawingDisableScreenFontSubstitution != 0 {
+		parts = append(parts, "NSStringDrawingDisableScreenFontSubstitution")
+	}
+	if e&NSStringDrawingOneShot != 0 {
+		parts = append(parts, "NSStringDrawingOneShot")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSTIFFCompression uint64
 
 const (
-	NSTIFFCompressionNone NSTIFFCompression = 1
+	NSTIFFCompressionNone      NSTIFFCompression = 1
 	NSTIFFCompressionCCITTFAX3 NSTIFFCompression = 3
 	NSTIFFCompressionCCITTFAX4 NSTIFFCompression = 4
-	NSTIFFCompressionLZW NSTIFFCompression = 5
-	NSTIFFCompressionJPEG NSTIFFCompression = 6
-	NSTIFFCompressionNEXT NSTIFFCompression = 32766
-	NSTIFFCompressionPackBits NSTIFFCompression = 32773
-	NSTIFFCompressionOldJPEG NSTIFFCompression = 32865
+	NSTIFFCompressionLZW       NSTIFFCompression = 5
+	NSTIFFCompressionJPEG      NSTIFFCompression = 6
+	NSTIFFCompressionNEXT      NSTIFFCompression = 32766
+	NSTIFFCompressionPackBits  NSTIFFCompression = 32773
+	NSTIFFCompressionOldJPEG   NSTIFFCompression = 32865
 )
 
 func (e NSTIFFCompression) String() string {
@@ -5362,11 +5966,11 @@ func (e NSTIFFCompression) String() string {
 type NSTabPosition uint64
 
 const (
-	NSTabPositionNone NSTabPosition = 0
-	NSTabPositionTop NSTabPosition = 1
-	NSTabPositionLeft NSTabPosition = 2
+	NSTabPositionNone   NSTabPosition = 0
+	NSTabPositionTop    NSTabPosition = 1
+	NSTabPositionLeft   NSTabPosition = 2
 	NSTabPositionBottom NSTabPosition = 3
-	NSTabPositionRight NSTabPosition = 4
+	NSTabPositionRight  NSTabPosition = 4
 )
 
 func (e NSTabPosition) String() string {
@@ -5389,9 +5993,9 @@ func (e NSTabPosition) String() string {
 type NSTabState uint64
 
 const (
-	NSSelectedTab NSTabState = 0
+	NSSelectedTab   NSTabState = 0
 	NSBackgroundTab NSTabState = 1
-	NSPressedTab NSTabState = 2
+	NSPressedTab    NSTabState = 2
 )
 
 func (e NSTabState) String() string {
@@ -5410,8 +6014,8 @@ func (e NSTabState) String() string {
 type NSTabViewBorderType uint64
 
 const (
-	NSTabViewBorderTypeNone NSTabViewBorderType = 0
-	NSTabViewBorderTypeLine NSTabViewBorderType = 1
+	NSTabViewBorderTypeNone  NSTabViewBorderType = 0
+	NSTabViewBorderTypeLine  NSTabViewBorderType = 1
 	NSTabViewBorderTypeBezel NSTabViewBorderType = 2
 )
 
@@ -5459,13 +6063,13 @@ func (e NSTabViewControllerTabStyle) String() string {
 type NSTabViewType uint64
 
 const (
-	NSTopTabsBezelBorder NSTabViewType = 0
-	NSLeftTabsBezelBorder NSTabViewType = 1
+	NSTopTabsBezelBorder    NSTabViewType = 0
+	NSLeftTabsBezelBorder   NSTabViewType = 1
 	NSBottomTabsBezelBorder NSTabViewType = 2
-	NSRightTabsBezelBorder NSTabViewType = 3
-	NSNoTabsBezelBorder NSTabViewType = 4
-	NSNoTabsLineBorder NSTabViewType = 5
-	NSNoTabsNoBorder NSTabViewType = 6
+	NSRightTabsBezelBorder  NSTabViewType = 3
+	NSNoTabsBezelBorder     NSTabViewType = 4
+	NSNoTabsLineBorder      NSTabViewType = 5
+	NSNoTabsNoBorder        NSTabViewType = 6
 )
 
 func (e NSTabViewType) String() string {
@@ -5492,23 +6096,29 @@ func (e NSTabViewType) String() string {
 type NSTableColumnResizingOptions uint64
 
 const (
-	NSTableColumnNoResizing NSTableColumnResizingOptions = 0
+	NSTableColumnNoResizing       NSTableColumnResizingOptions = 0
 	NSTableColumnAutoresizingMask NSTableColumnResizingOptions = 1
 	NSTableColumnUserResizingMask NSTableColumnResizingOptions = 2
 )
 
 func (e NSTableColumnResizingOptions) String() string {
 	var parts []string
-	if e&NSTableColumnAutoresizingMask != 0 { parts = append(parts, "NSTableColumnAutoresizingMask") }
-	if e&NSTableColumnUserResizingMask != 0 { parts = append(parts, "NSTableColumnUserResizingMask") }
-	if len(parts) == 0 { return "0" }
+	if e&NSTableColumnAutoresizingMask != 0 {
+		parts = append(parts, "NSTableColumnAutoresizingMask")
+	}
+	if e&NSTableColumnUserResizingMask != 0 {
+		parts = append(parts, "NSTableColumnUserResizingMask")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSTableRowActionEdge int64
 
 const (
-	NSTableRowActionEdgeLeading NSTableRowActionEdge = 0
+	NSTableRowActionEdgeLeading  NSTableRowActionEdge = 0
 	NSTableRowActionEdgeTrailing NSTableRowActionEdge = 1
 )
 
@@ -5528,34 +6138,48 @@ type NSTableViewAnimationOptions uint64
 const (
 	NSTableViewAnimationEffectNone NSTableViewAnimationOptions = 0
 	NSTableViewAnimationEffectFade NSTableViewAnimationOptions = 1
-	NSTableViewAnimationEffectGap NSTableViewAnimationOptions = 2
-	NSTableViewAnimationSlideUp NSTableViewAnimationOptions = 16
-	NSTableViewAnimationSlideDown NSTableViewAnimationOptions = 32
-	NSTableViewAnimationSlideLeft NSTableViewAnimationOptions = 48
+	NSTableViewAnimationEffectGap  NSTableViewAnimationOptions = 2
+	NSTableViewAnimationSlideUp    NSTableViewAnimationOptions = 16
+	NSTableViewAnimationSlideDown  NSTableViewAnimationOptions = 32
+	NSTableViewAnimationSlideLeft  NSTableViewAnimationOptions = 48
 	NSTableViewAnimationSlideRight NSTableViewAnimationOptions = 64
 )
 
 func (e NSTableViewAnimationOptions) String() string {
 	var parts []string
-	if e&NSTableViewAnimationEffectFade != 0 { parts = append(parts, "NSTableViewAnimationEffectFade") }
-	if e&NSTableViewAnimationEffectGap != 0 { parts = append(parts, "NSTableViewAnimationEffectGap") }
-	if e&NSTableViewAnimationSlideUp != 0 { parts = append(parts, "NSTableViewAnimationSlideUp") }
-	if e&NSTableViewAnimationSlideDown != 0 { parts = append(parts, "NSTableViewAnimationSlideDown") }
-	if e&NSTableViewAnimationSlideLeft != 0 { parts = append(parts, "NSTableViewAnimationSlideLeft") }
-	if e&NSTableViewAnimationSlideRight != 0 { parts = append(parts, "NSTableViewAnimationSlideRight") }
-	if len(parts) == 0 { return "0" }
+	if e&NSTableViewAnimationEffectFade != 0 {
+		parts = append(parts, "NSTableViewAnimationEffectFade")
+	}
+	if e&NSTableViewAnimationEffectGap != 0 {
+		parts = append(parts, "NSTableViewAnimationEffectGap")
+	}
+	if e&NSTableViewAnimationSlideUp != 0 {
+		parts = append(parts, "NSTableViewAnimationSlideUp")
+	}
+	if e&NSTableViewAnimationSlideDown != 0 {
+		parts = append(parts, "NSTableViewAnimationSlideDown")
+	}
+	if e&NSTableViewAnimationSlideLeft != 0 {
+		parts = append(parts, "NSTableViewAnimationSlideLeft")
+	}
+	if e&NSTableViewAnimationSlideRight != 0 {
+		parts = append(parts, "NSTableViewAnimationSlideRight")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSTableViewColumnAutoresizingStyle uint64
 
 const (
-	NSTableViewNoColumnAutoresizing NSTableViewColumnAutoresizingStyle = 0
-	NSTableViewUniformColumnAutoresizingStyle NSTableViewColumnAutoresizingStyle = 1
-	NSTableViewSequentialColumnAutoresizingStyle NSTableViewColumnAutoresizingStyle = 2
+	NSTableViewNoColumnAutoresizing                     NSTableViewColumnAutoresizingStyle = 0
+	NSTableViewUniformColumnAutoresizingStyle           NSTableViewColumnAutoresizingStyle = 1
+	NSTableViewSequentialColumnAutoresizingStyle        NSTableViewColumnAutoresizingStyle = 2
 	NSTableViewReverseSequentialColumnAutoresizingStyle NSTableViewColumnAutoresizingStyle = 3
-	NSTableViewLastColumnOnlyAutoresizingStyle NSTableViewColumnAutoresizingStyle = 4
-	NSTableViewFirstColumnOnlyAutoresizingStyle NSTableViewColumnAutoresizingStyle = 5
+	NSTableViewLastColumnOnlyAutoresizingStyle          NSTableViewColumnAutoresizingStyle = 4
+	NSTableViewFirstColumnOnlyAutoresizingStyle         NSTableViewColumnAutoresizingStyle = 5
 )
 
 func (e NSTableViewColumnAutoresizingStyle) String() string {
@@ -5580,10 +6204,10 @@ func (e NSTableViewColumnAutoresizingStyle) String() string {
 type NSTableViewDraggingDestinationFeedbackStyle int64
 
 const (
-	NSTableViewDraggingDestinationFeedbackStyleNone NSTableViewDraggingDestinationFeedbackStyle = -1
-	NSTableViewDraggingDestinationFeedbackStyleRegular NSTableViewDraggingDestinationFeedbackStyle = 0
+	NSTableViewDraggingDestinationFeedbackStyleNone       NSTableViewDraggingDestinationFeedbackStyle = -1
+	NSTableViewDraggingDestinationFeedbackStyleRegular    NSTableViewDraggingDestinationFeedbackStyle = 0
 	NSTableViewDraggingDestinationFeedbackStyleSourceList NSTableViewDraggingDestinationFeedbackStyle = 1
-	NSTableViewDraggingDestinationFeedbackStyleGap NSTableViewDraggingDestinationFeedbackStyle = 2
+	NSTableViewDraggingDestinationFeedbackStyleGap        NSTableViewDraggingDestinationFeedbackStyle = 2
 )
 
 func (e NSTableViewDraggingDestinationFeedbackStyle) String() string {
@@ -5604,7 +6228,7 @@ func (e NSTableViewDraggingDestinationFeedbackStyle) String() string {
 type NSTableViewDropOperation uint64
 
 const (
-	NSTableViewDropOn NSTableViewDropOperation = 0
+	NSTableViewDropOn    NSTableViewDropOperation = 0
 	NSTableViewDropAbove NSTableViewDropOperation = 1
 )
 
@@ -5622,25 +6246,33 @@ func (e NSTableViewDropOperation) String() string {
 type NSTableViewGridLineStyle uint64
 
 const (
-	NSTableViewGridNone NSTableViewGridLineStyle = 0
-	NSTableViewSolidVerticalGridLineMask NSTableViewGridLineStyle = 1
-	NSTableViewSolidHorizontalGridLineMask NSTableViewGridLineStyle = 2
+	NSTableViewGridNone                     NSTableViewGridLineStyle = 0
+	NSTableViewSolidVerticalGridLineMask    NSTableViewGridLineStyle = 1
+	NSTableViewSolidHorizontalGridLineMask  NSTableViewGridLineStyle = 2
 	NSTableViewDashedHorizontalGridLineMask NSTableViewGridLineStyle = 8
 )
 
 func (e NSTableViewGridLineStyle) String() string {
 	var parts []string
-	if e&NSTableViewSolidVerticalGridLineMask != 0 { parts = append(parts, "NSTableViewSolidVerticalGridLineMask") }
-	if e&NSTableViewSolidHorizontalGridLineMask != 0 { parts = append(parts, "NSTableViewSolidHorizontalGridLineMask") }
-	if e&NSTableViewDashedHorizontalGridLineMask != 0 { parts = append(parts, "NSTableViewDashedHorizontalGridLineMask") }
-	if len(parts) == 0 { return "0" }
+	if e&NSTableViewSolidVerticalGridLineMask != 0 {
+		parts = append(parts, "NSTableViewSolidVerticalGridLineMask")
+	}
+	if e&NSTableViewSolidHorizontalGridLineMask != 0 {
+		parts = append(parts, "NSTableViewSolidHorizontalGridLineMask")
+	}
+	if e&NSTableViewDashedHorizontalGridLineMask != 0 {
+		parts = append(parts, "NSTableViewDashedHorizontalGridLineMask")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSTableViewRowActionStyle int64
 
 const (
-	NSTableViewRowActionStyleRegular NSTableViewRowActionStyle = 0
+	NSTableViewRowActionStyleRegular     NSTableViewRowActionStyle = 0
 	NSTableViewRowActionStyleDestructive NSTableViewRowActionStyle = 1
 )
 
@@ -5659,10 +6291,10 @@ type NSTableViewRowSizeStyle int64
 
 const (
 	NSTableViewRowSizeStyleDefault NSTableViewRowSizeStyle = -1
-	NSTableViewRowSizeStyleCustom NSTableViewRowSizeStyle = 0
-	NSTableViewRowSizeStyleSmall NSTableViewRowSizeStyle = 1
-	NSTableViewRowSizeStyleMedium NSTableViewRowSizeStyle = 2
-	NSTableViewRowSizeStyleLarge NSTableViewRowSizeStyle = 3
+	NSTableViewRowSizeStyleCustom  NSTableViewRowSizeStyle = 0
+	NSTableViewRowSizeStyleSmall   NSTableViewRowSizeStyle = 1
+	NSTableViewRowSizeStyleMedium  NSTableViewRowSizeStyle = 2
+	NSTableViewRowSizeStyleLarge   NSTableViewRowSizeStyle = 3
 )
 
 func (e NSTableViewRowSizeStyle) String() string {
@@ -5685,8 +6317,8 @@ func (e NSTableViewRowSizeStyle) String() string {
 type NSTableViewSelectionHighlightStyle int64
 
 const (
-	NSTableViewSelectionHighlightStyleNone NSTableViewSelectionHighlightStyle = -1
-	NSTableViewSelectionHighlightStyleRegular NSTableViewSelectionHighlightStyle = 0
+	NSTableViewSelectionHighlightStyleNone       NSTableViewSelectionHighlightStyle = -1
+	NSTableViewSelectionHighlightStyleRegular    NSTableViewSelectionHighlightStyle = 0
 	NSTableViewSelectionHighlightStyleSourceList NSTableViewSelectionHighlightStyle = 1
 )
 
@@ -5706,11 +6338,11 @@ func (e NSTableViewSelectionHighlightStyle) String() string {
 type NSTableViewStyle int64
 
 const (
-	NSTableViewStyleAutomatic NSTableViewStyle = 0
-	NSTableViewStyleFullWidth NSTableViewStyle = 1
-	NSTableViewStyleInset NSTableViewStyle = 2
+	NSTableViewStyleAutomatic  NSTableViewStyle = 0
+	NSTableViewStyleFullWidth  NSTableViewStyle = 1
+	NSTableViewStyleInset      NSTableViewStyle = 2
 	NSTableViewStyleSourceList NSTableViewStyle = 3
-	NSTableViewStylePlain NSTableViewStyle = 4
+	NSTableViewStylePlain      NSTableViewStyle = 4
 )
 
 func (e NSTableViewStyle) String() string {
@@ -5733,9 +6365,9 @@ func (e NSTableViewStyle) String() string {
 type NSTextAlignment int64
 
 const (
-	NSTextAlignmentLeft NSTextAlignment = 0
-	NSTextAlignmentCenter NSTextAlignment = 1
-	NSTextAlignmentRight NSTextAlignment = 2
+	NSTextAlignmentLeft      NSTextAlignment = 0
+	NSTextAlignmentCenter    NSTextAlignment = 1
+	NSTextAlignmentRight     NSTextAlignment = 2
 	NSTextAlignmentJustified NSTextAlignment = 3
 	// Resolved to either ``left`` or ``right`` based on the natural alignment resolution type active in the associated component. There are two types of natural alignment resolution behavior. The natural alignment is resolved based on either the UI language or the base writing direction. The behavior is selected by the ``resolvesNaturalAlignmentWithBaseWritingDirection`` property for ``NSTextLayoutManager``. ``NSStringDrawingOptions.resolvesNaturalAlignmentWithBaseWritingDirection`` specifies the base writing direction based resolution for ``NSStringDrawing``.
 	NSTextAlignmentNatural NSTextAlignment = 4
@@ -5761,10 +6393,10 @@ func (e NSTextAlignment) String() string {
 type NSTextBlockDimension uint64
 
 const (
-	NSTextBlockWidth NSTextBlockDimension = 0
-	NSTextBlockMinimumWidth NSTextBlockDimension = 1
-	NSTextBlockMaximumWidth NSTextBlockDimension = 2
-	NSTextBlockHeight NSTextBlockDimension = 4
+	NSTextBlockWidth         NSTextBlockDimension = 0
+	NSTextBlockMinimumWidth  NSTextBlockDimension = 1
+	NSTextBlockMaximumWidth  NSTextBlockDimension = 2
+	NSTextBlockHeight        NSTextBlockDimension = 4
 	NSTextBlockMinimumHeight NSTextBlockDimension = 5
 	NSTextBlockMaximumHeight NSTextBlockDimension = 6
 )
@@ -5792,8 +6424,8 @@ type NSTextBlockLayer int64
 
 const (
 	NSTextBlockPadding NSTextBlockLayer = -1
-	NSTextBlockBorder NSTextBlockLayer = 0
-	NSTextBlockMargin NSTextBlockLayer = 1
+	NSTextBlockBorder  NSTextBlockLayer = 0
+	NSTextBlockMargin  NSTextBlockLayer = 1
 )
 
 func (e NSTextBlockLayer) String() string {
@@ -5812,7 +6444,7 @@ func (e NSTextBlockLayer) String() string {
 type NSTextBlockValueType uint64
 
 const (
-	NSTextBlockAbsoluteValueType NSTextBlockValueType = 0
+	NSTextBlockAbsoluteValueType   NSTextBlockValueType = 0
 	NSTextBlockPercentageValueType NSTextBlockValueType = 1
 )
 
@@ -5830,9 +6462,9 @@ func (e NSTextBlockValueType) String() string {
 type NSTextBlockVerticalAlignment uint64
 
 const (
-	NSTextBlockTopAlignment NSTextBlockVerticalAlignment = 0
-	NSTextBlockMiddleAlignment NSTextBlockVerticalAlignment = 1
-	NSTextBlockBottomAlignment NSTextBlockVerticalAlignment = 2
+	NSTextBlockTopAlignment      NSTextBlockVerticalAlignment = 0
+	NSTextBlockMiddleAlignment   NSTextBlockVerticalAlignment = 1
+	NSTextBlockBottomAlignment   NSTextBlockVerticalAlignment = 2
 	NSTextBlockBaselineAlignment NSTextBlockVerticalAlignment = 3
 )
 
@@ -5854,28 +6486,32 @@ func (e NSTextBlockVerticalAlignment) String() string {
 type NSTextContentManagerEnumerationOptions uint64
 
 const (
-	NSTextContentManagerEnumerationOptionsNone NSTextContentManagerEnumerationOptions = 0
+	NSTextContentManagerEnumerationOptionsNone    NSTextContentManagerEnumerationOptions = 0
 	NSTextContentManagerEnumerationOptionsReverse NSTextContentManagerEnumerationOptions = 1
 )
 
 func (e NSTextContentManagerEnumerationOptions) String() string {
 	var parts []string
-	if e&NSTextContentManagerEnumerationOptionsReverse != 0 { parts = append(parts, "NSTextContentManagerEnumerationOptionsReverse") }
-	if len(parts) == 0 { return "0" }
+	if e&NSTextContentManagerEnumerationOptionsReverse != 0 {
+		parts = append(parts, "NSTextContentManagerEnumerationOptionsReverse")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSTextCursorAccessoryPlacement int64
 
 const (
-	NSTextCursorAccessoryPlacementUnspecified NSTextCursorAccessoryPlacement = 0
-	NSTextCursorAccessoryPlacementBackward NSTextCursorAccessoryPlacement = 1
-	NSTextCursorAccessoryPlacementForward NSTextCursorAccessoryPlacement = 2
-	NSTextCursorAccessoryPlacementInvisible NSTextCursorAccessoryPlacement = 3
-	NSTextCursorAccessoryPlacementCenter NSTextCursorAccessoryPlacement = 4
-	NSTextCursorAccessoryPlacementOffscreenLeft NSTextCursorAccessoryPlacement = 5
-	NSTextCursorAccessoryPlacementOffscreenTop NSTextCursorAccessoryPlacement = 6
-	NSTextCursorAccessoryPlacementOffscreenRight NSTextCursorAccessoryPlacement = 7
+	NSTextCursorAccessoryPlacementUnspecified     NSTextCursorAccessoryPlacement = 0
+	NSTextCursorAccessoryPlacementBackward        NSTextCursorAccessoryPlacement = 1
+	NSTextCursorAccessoryPlacementForward         NSTextCursorAccessoryPlacement = 2
+	NSTextCursorAccessoryPlacementInvisible       NSTextCursorAccessoryPlacement = 3
+	NSTextCursorAccessoryPlacementCenter          NSTextCursorAccessoryPlacement = 4
+	NSTextCursorAccessoryPlacementOffscreenLeft   NSTextCursorAccessoryPlacement = 5
+	NSTextCursorAccessoryPlacementOffscreenTop    NSTextCursorAccessoryPlacement = 6
+	NSTextCursorAccessoryPlacementOffscreenRight  NSTextCursorAccessoryPlacement = 7
 	NSTextCursorAccessoryPlacementOffscreenBottom NSTextCursorAccessoryPlacement = 8
 )
 
@@ -5907,7 +6543,7 @@ func (e NSTextCursorAccessoryPlacement) String() string {
 type NSTextFieldBezelStyle uint64
 
 const (
-	NSTextFieldSquareBezel NSTextFieldBezelStyle = 0
+	NSTextFieldSquareBezel  NSTextFieldBezelStyle = 0
 	NSTextFieldRoundedBezel NSTextFieldBezelStyle = 1
 )
 
@@ -5925,19 +6561,19 @@ func (e NSTextFieldBezelStyle) String() string {
 type NSTextFinderAction int64
 
 const (
-	NSTextFinderActionShowFindInterface NSTextFinderAction = 1
-	NSTextFinderActionNextMatch NSTextFinderAction = 2
-	NSTextFinderActionPreviousMatch NSTextFinderAction = 3
-	NSTextFinderActionReplaceAll NSTextFinderAction = 4
-	NSTextFinderActionReplace NSTextFinderAction = 5
-	NSTextFinderActionReplaceAndFind NSTextFinderAction = 6
-	NSTextFinderActionSetSearchString NSTextFinderAction = 7
+	NSTextFinderActionShowFindInterface     NSTextFinderAction = 1
+	NSTextFinderActionNextMatch             NSTextFinderAction = 2
+	NSTextFinderActionPreviousMatch         NSTextFinderAction = 3
+	NSTextFinderActionReplaceAll            NSTextFinderAction = 4
+	NSTextFinderActionReplace               NSTextFinderAction = 5
+	NSTextFinderActionReplaceAndFind        NSTextFinderAction = 6
+	NSTextFinderActionSetSearchString       NSTextFinderAction = 7
 	NSTextFinderActionReplaceAllInSelection NSTextFinderAction = 8
-	NSTextFinderActionSelectAll NSTextFinderAction = 9
-	NSTextFinderActionSelectAllInSelection NSTextFinderAction = 10
-	NSTextFinderActionHideFindInterface NSTextFinderAction = 11
-	NSTextFinderActionShowReplaceInterface NSTextFinderAction = 12
-	NSTextFinderActionHideReplaceInterface NSTextFinderAction = 13
+	NSTextFinderActionSelectAll             NSTextFinderAction = 9
+	NSTextFinderActionSelectAllInSelection  NSTextFinderAction = 10
+	NSTextFinderActionHideFindInterface     NSTextFinderAction = 11
+	NSTextFinderActionShowReplaceInterface  NSTextFinderAction = 12
+	NSTextFinderActionHideReplaceInterface  NSTextFinderAction = 13
 )
 
 func (e NSTextFinderAction) String() string {
@@ -5976,10 +6612,10 @@ func (e NSTextFinderAction) String() string {
 type NSTextFinderMatchingType int64
 
 const (
-	NSTextFinderMatchingTypeContains NSTextFinderMatchingType = 0
+	NSTextFinderMatchingTypeContains   NSTextFinderMatchingType = 0
 	NSTextFinderMatchingTypeStartsWith NSTextFinderMatchingType = 1
-	NSTextFinderMatchingTypeFullWord NSTextFinderMatchingType = 2
-	NSTextFinderMatchingTypeEndsWith NSTextFinderMatchingType = 3
+	NSTextFinderMatchingTypeFullWord   NSTextFinderMatchingType = 2
+	NSTextFinderMatchingTypeEndsWith   NSTextFinderMatchingType = 3
 )
 
 func (e NSTextFinderMatchingType) String() string {
@@ -6001,8 +6637,8 @@ type NSTextInputTraitType int64
 
 const (
 	NSTextInputTraitTypeDefault NSTextInputTraitType = 0
-	NSTextInputTraitTypeNo NSTextInputTraitType = 1
-	NSTextInputTraitTypeYes NSTextInputTraitType = 2
+	NSTextInputTraitTypeNo      NSTextInputTraitType = 1
+	NSTextInputTraitTypeYes     NSTextInputTraitType = 2
 )
 
 func (e NSTextInputTraitType) String() string {
@@ -6021,15 +6657,21 @@ func (e NSTextInputTraitType) String() string {
 type NSTextInsertionIndicatorAutomaticModeOptions int64
 
 const (
-	NSTextInsertionIndicatorAutomaticModeOptionsShowEffectsView NSTextInsertionIndicatorAutomaticModeOptions = 1
+	NSTextInsertionIndicatorAutomaticModeOptionsShowEffectsView   NSTextInsertionIndicatorAutomaticModeOptions = 1
 	NSTextInsertionIndicatorAutomaticModeOptionsShowWhileTracking NSTextInsertionIndicatorAutomaticModeOptions = 2
 )
 
 func (e NSTextInsertionIndicatorAutomaticModeOptions) String() string {
 	var parts []string
-	if e&NSTextInsertionIndicatorAutomaticModeOptionsShowEffectsView != 0 { parts = append(parts, "NSTextInsertionIndicatorAutomaticModeOptionsShowEffectsView") }
-	if e&NSTextInsertionIndicatorAutomaticModeOptionsShowWhileTracking != 0 { parts = append(parts, "NSTextInsertionIndicatorAutomaticModeOptionsShowWhileTracking") }
-	if len(parts) == 0 { return "0" }
+	if e&NSTextInsertionIndicatorAutomaticModeOptionsShowEffectsView != 0 {
+		parts = append(parts, "NSTextInsertionIndicatorAutomaticModeOptionsShowEffectsView")
+	}
+	if e&NSTextInsertionIndicatorAutomaticModeOptionsShowWhileTracking != 0 {
+		parts = append(parts, "NSTextInsertionIndicatorAutomaticModeOptionsShowWhileTracking")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -6037,8 +6679,8 @@ type NSTextInsertionIndicatorDisplayMode int64
 
 const (
 	NSTextInsertionIndicatorDisplayModeAutomatic NSTextInsertionIndicatorDisplayMode = 0
-	NSTextInsertionIndicatorDisplayModeHidden NSTextInsertionIndicatorDisplayMode = 1
-	NSTextInsertionIndicatorDisplayModeVisible NSTextInsertionIndicatorDisplayMode = 2
+	NSTextInsertionIndicatorDisplayModeHidden    NSTextInsertionIndicatorDisplayMode = 1
+	NSTextInsertionIndicatorDisplayModeVisible   NSTextInsertionIndicatorDisplayMode = 2
 )
 
 func (e NSTextInsertionIndicatorDisplayMode) String() string {
@@ -6057,30 +6699,40 @@ func (e NSTextInsertionIndicatorDisplayMode) String() string {
 type NSTextLayoutFragmentEnumerationOptions uint64
 
 const (
-	NSTextLayoutFragmentEnumerationOptionsNone NSTextLayoutFragmentEnumerationOptions = 0
-	NSTextLayoutFragmentEnumerationOptionsReverse NSTextLayoutFragmentEnumerationOptions = 1
-	NSTextLayoutFragmentEnumerationOptionsEstimatesSize NSTextLayoutFragmentEnumerationOptions = 2
-	NSTextLayoutFragmentEnumerationOptionsEnsuresLayout NSTextLayoutFragmentEnumerationOptions = 4
+	NSTextLayoutFragmentEnumerationOptionsNone                     NSTextLayoutFragmentEnumerationOptions = 0
+	NSTextLayoutFragmentEnumerationOptionsReverse                  NSTextLayoutFragmentEnumerationOptions = 1
+	NSTextLayoutFragmentEnumerationOptionsEstimatesSize            NSTextLayoutFragmentEnumerationOptions = 2
+	NSTextLayoutFragmentEnumerationOptionsEnsuresLayout            NSTextLayoutFragmentEnumerationOptions = 4
 	NSTextLayoutFragmentEnumerationOptionsEnsuresExtraLineFragment NSTextLayoutFragmentEnumerationOptions = 8
 )
 
 func (e NSTextLayoutFragmentEnumerationOptions) String() string {
 	var parts []string
-	if e&NSTextLayoutFragmentEnumerationOptionsReverse != 0 { parts = append(parts, "NSTextLayoutFragmentEnumerationOptionsReverse") }
-	if e&NSTextLayoutFragmentEnumerationOptionsEstimatesSize != 0 { parts = append(parts, "NSTextLayoutFragmentEnumerationOptionsEstimatesSize") }
-	if e&NSTextLayoutFragmentEnumerationOptionsEnsuresLayout != 0 { parts = append(parts, "NSTextLayoutFragmentEnumerationOptionsEnsuresLayout") }
-	if e&NSTextLayoutFragmentEnumerationOptionsEnsuresExtraLineFragment != 0 { parts = append(parts, "NSTextLayoutFragmentEnumerationOptionsEnsuresExtraLineFragment") }
-	if len(parts) == 0 { return "0" }
+	if e&NSTextLayoutFragmentEnumerationOptionsReverse != 0 {
+		parts = append(parts, "NSTextLayoutFragmentEnumerationOptionsReverse")
+	}
+	if e&NSTextLayoutFragmentEnumerationOptionsEstimatesSize != 0 {
+		parts = append(parts, "NSTextLayoutFragmentEnumerationOptionsEstimatesSize")
+	}
+	if e&NSTextLayoutFragmentEnumerationOptionsEnsuresLayout != 0 {
+		parts = append(parts, "NSTextLayoutFragmentEnumerationOptionsEnsuresLayout")
+	}
+	if e&NSTextLayoutFragmentEnumerationOptionsEnsuresExtraLineFragment != 0 {
+		parts = append(parts, "NSTextLayoutFragmentEnumerationOptionsEnsuresExtraLineFragment")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSTextLayoutFragmentState uint64
 
 const (
-	NSTextLayoutFragmentStateNone NSTextLayoutFragmentState = 0
-	NSTextLayoutFragmentStateEstimatedUsageBounds NSTextLayoutFragmentState = 1
+	NSTextLayoutFragmentStateNone                  NSTextLayoutFragmentState = 0
+	NSTextLayoutFragmentStateEstimatedUsageBounds  NSTextLayoutFragmentState = 1
 	NSTextLayoutFragmentStateCalculatedUsageBounds NSTextLayoutFragmentState = 2
-	NSTextLayoutFragmentStateLayoutAvailable NSTextLayoutFragmentState = 3
+	NSTextLayoutFragmentStateLayoutAvailable       NSTextLayoutFragmentState = 3
 )
 
 func (e NSTextLayoutFragmentState) String() string {
@@ -6101,29 +6753,41 @@ func (e NSTextLayoutFragmentState) String() string {
 type NSTextLayoutManagerSegmentOptions uint64
 
 const (
-	NSTextLayoutManagerSegmentOptionsNone NSTextLayoutManagerSegmentOptions = 0
-	NSTextLayoutManagerSegmentOptionsRangeNotRequired NSTextLayoutManagerSegmentOptions = 1
+	NSTextLayoutManagerSegmentOptionsNone                    NSTextLayoutManagerSegmentOptions = 0
+	NSTextLayoutManagerSegmentOptionsRangeNotRequired        NSTextLayoutManagerSegmentOptions = 1
 	NSTextLayoutManagerSegmentOptionsMiddleFragmentsExcluded NSTextLayoutManagerSegmentOptions = 2
-	NSTextLayoutManagerSegmentOptionsHeadSegmentExtended NSTextLayoutManagerSegmentOptions = 4
-	NSTextLayoutManagerSegmentOptionsTailSegmentExtended NSTextLayoutManagerSegmentOptions = 8
-	NSTextLayoutManagerSegmentOptionsUpstreamAffinity NSTextLayoutManagerSegmentOptions = 16
+	NSTextLayoutManagerSegmentOptionsHeadSegmentExtended     NSTextLayoutManagerSegmentOptions = 4
+	NSTextLayoutManagerSegmentOptionsTailSegmentExtended     NSTextLayoutManagerSegmentOptions = 8
+	NSTextLayoutManagerSegmentOptionsUpstreamAffinity        NSTextLayoutManagerSegmentOptions = 16
 )
 
 func (e NSTextLayoutManagerSegmentOptions) String() string {
 	var parts []string
-	if e&NSTextLayoutManagerSegmentOptionsRangeNotRequired != 0 { parts = append(parts, "NSTextLayoutManagerSegmentOptionsRangeNotRequired") }
-	if e&NSTextLayoutManagerSegmentOptionsMiddleFragmentsExcluded != 0 { parts = append(parts, "NSTextLayoutManagerSegmentOptionsMiddleFragmentsExcluded") }
-	if e&NSTextLayoutManagerSegmentOptionsHeadSegmentExtended != 0 { parts = append(parts, "NSTextLayoutManagerSegmentOptionsHeadSegmentExtended") }
-	if e&NSTextLayoutManagerSegmentOptionsTailSegmentExtended != 0 { parts = append(parts, "NSTextLayoutManagerSegmentOptionsTailSegmentExtended") }
-	if e&NSTextLayoutManagerSegmentOptionsUpstreamAffinity != 0 { parts = append(parts, "NSTextLayoutManagerSegmentOptionsUpstreamAffinity") }
-	if len(parts) == 0 { return "0" }
+	if e&NSTextLayoutManagerSegmentOptionsRangeNotRequired != 0 {
+		parts = append(parts, "NSTextLayoutManagerSegmentOptionsRangeNotRequired")
+	}
+	if e&NSTextLayoutManagerSegmentOptionsMiddleFragmentsExcluded != 0 {
+		parts = append(parts, "NSTextLayoutManagerSegmentOptionsMiddleFragmentsExcluded")
+	}
+	if e&NSTextLayoutManagerSegmentOptionsHeadSegmentExtended != 0 {
+		parts = append(parts, "NSTextLayoutManagerSegmentOptionsHeadSegmentExtended")
+	}
+	if e&NSTextLayoutManagerSegmentOptionsTailSegmentExtended != 0 {
+		parts = append(parts, "NSTextLayoutManagerSegmentOptionsTailSegmentExtended")
+	}
+	if e&NSTextLayoutManagerSegmentOptionsUpstreamAffinity != 0 {
+		parts = append(parts, "NSTextLayoutManagerSegmentOptionsUpstreamAffinity")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSTextLayoutManagerSegmentType int64
 
 const (
-	NSTextLayoutManagerSegmentTypeStandard NSTextLayoutManagerSegmentType = 0
+	NSTextLayoutManagerSegmentTypeStandard  NSTextLayoutManagerSegmentType = 0
 	NSTextLayoutManagerSegmentTypeSelection NSTextLayoutManagerSegmentType = 1
 	NSTextLayoutManagerSegmentTypeHighlight NSTextLayoutManagerSegmentType = 2
 )
@@ -6145,7 +6809,7 @@ type NSTextLayoutOrientation int64
 
 const (
 	NSTextLayoutOrientationHorizontal NSTextLayoutOrientation = 0
-	NSTextLayoutOrientationVertical NSTextLayoutOrientation = 1
+	NSTextLayoutOrientationVertical   NSTextLayoutOrientation = 1
 )
 
 func (e NSTextLayoutOrientation) String() string {
@@ -6167,23 +6831,27 @@ const (
 
 func (e NSTextListOptions) String() string {
 	var parts []string
-	if e&NSTextListPrependEnclosingMarker != 0 { parts = append(parts, "NSTextListPrependEnclosingMarker") }
-	if len(parts) == 0 { return "0" }
+	if e&NSTextListPrependEnclosingMarker != 0 {
+		parts = append(parts, "NSTextListPrependEnclosingMarker")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSTextMovement int64
 
 const (
-	NSTextMovementReturn NSTextMovement = 16
-	NSTextMovementTab NSTextMovement = 17
+	NSTextMovementReturn  NSTextMovement = 16
+	NSTextMovementTab     NSTextMovement = 17
 	NSTextMovementBacktab NSTextMovement = 18
-	NSTextMovementLeft NSTextMovement = 19
-	NSTextMovementRight NSTextMovement = 20
-	NSTextMovementUp NSTextMovement = 21
-	NSTextMovementDown NSTextMovement = 22
-	NSTextMovementCancel NSTextMovement = 23
-	NSTextMovementOther NSTextMovement = 0
+	NSTextMovementLeft    NSTextMovement = 19
+	NSTextMovementRight   NSTextMovement = 20
+	NSTextMovementUp      NSTextMovement = 21
+	NSTextMovementDown    NSTextMovement = 22
+	NSTextMovementCancel  NSTextMovement = 23
+	NSTextMovementOther   NSTextMovement = 0
 )
 
 func (e NSTextMovement) String() string {
@@ -6215,7 +6883,7 @@ type NSTextScalingType int64
 
 const (
 	NSTextScalingStandard NSTextScalingType = 0
-	NSTextScalingiOS NSTextScalingType = 1
+	NSTextScalingiOS      NSTextScalingType = 1
 )
 
 func (e NSTextScalingType) String() string {
@@ -6232,7 +6900,7 @@ func (e NSTextScalingType) String() string {
 type NSTextSelectionAffinity int64
 
 const (
-	NSTextSelectionAffinityUpstream NSTextSelectionAffinity = 0
+	NSTextSelectionAffinityUpstream   NSTextSelectionAffinity = 0
 	NSTextSelectionAffinityDownstream NSTextSelectionAffinity = 1
 )
 
@@ -6251,10 +6919,10 @@ type NSTextSelectionGranularity int64
 
 const (
 	NSTextSelectionGranularityCharacter NSTextSelectionGranularity = 0
-	NSTextSelectionGranularityWord NSTextSelectionGranularity = 1
+	NSTextSelectionGranularityWord      NSTextSelectionGranularity = 1
 	NSTextSelectionGranularityParagraph NSTextSelectionGranularity = 2
-	NSTextSelectionGranularityLine NSTextSelectionGranularity = 3
-	NSTextSelectionGranularitySentence NSTextSelectionGranularity = 4
+	NSTextSelectionGranularityLine      NSTextSelectionGranularity = 3
+	NSTextSelectionGranularitySentence  NSTextSelectionGranularity = 4
 )
 
 func (e NSTextSelectionGranularity) String() string {
@@ -6278,12 +6946,12 @@ type NSTextSelectionNavigationDestination int64
 
 const (
 	NSTextSelectionNavigationDestinationCharacter NSTextSelectionNavigationDestination = 0
-	NSTextSelectionNavigationDestinationWord NSTextSelectionNavigationDestination = 1
-	NSTextSelectionNavigationDestinationLine NSTextSelectionNavigationDestination = 2
-	NSTextSelectionNavigationDestinationSentence NSTextSelectionNavigationDestination = 3
+	NSTextSelectionNavigationDestinationWord      NSTextSelectionNavigationDestination = 1
+	NSTextSelectionNavigationDestinationLine      NSTextSelectionNavigationDestination = 2
+	NSTextSelectionNavigationDestinationSentence  NSTextSelectionNavigationDestination = 3
 	NSTextSelectionNavigationDestinationParagraph NSTextSelectionNavigationDestination = 4
 	NSTextSelectionNavigationDestinationContainer NSTextSelectionNavigationDestination = 5
-	NSTextSelectionNavigationDestinationDocument NSTextSelectionNavigationDestination = 6
+	NSTextSelectionNavigationDestinationDocument  NSTextSelectionNavigationDestination = 6
 )
 
 func (e NSTextSelectionNavigationDestination) String() string {
@@ -6310,12 +6978,12 @@ func (e NSTextSelectionNavigationDestination) String() string {
 type NSTextSelectionNavigationDirection int64
 
 const (
-	NSTextSelectionNavigationDirectionForward NSTextSelectionNavigationDirection = 0
+	NSTextSelectionNavigationDirectionForward  NSTextSelectionNavigationDirection = 0
 	NSTextSelectionNavigationDirectionBackward NSTextSelectionNavigationDirection = 1
-	NSTextSelectionNavigationDirectionRight NSTextSelectionNavigationDirection = 2
-	NSTextSelectionNavigationDirectionLeft NSTextSelectionNavigationDirection = 3
-	NSTextSelectionNavigationDirectionUp NSTextSelectionNavigationDirection = 4
-	NSTextSelectionNavigationDirectionDown NSTextSelectionNavigationDirection = 5
+	NSTextSelectionNavigationDirectionRight    NSTextSelectionNavigationDirection = 2
+	NSTextSelectionNavigationDirectionLeft     NSTextSelectionNavigationDirection = 3
+	NSTextSelectionNavigationDirectionUp       NSTextSelectionNavigationDirection = 4
+	NSTextSelectionNavigationDirectionDown     NSTextSelectionNavigationDirection = 5
 )
 
 func (e NSTextSelectionNavigationDirection) String() string {
@@ -6341,7 +7009,7 @@ type NSTextSelectionNavigationLayoutOrientation int64
 
 const (
 	NSTextSelectionNavigationLayoutOrientationHorizontal NSTextSelectionNavigationLayoutOrientation = 0
-	NSTextSelectionNavigationLayoutOrientationVertical NSTextSelectionNavigationLayoutOrientation = 1
+	NSTextSelectionNavigationLayoutOrientationVertical   NSTextSelectionNavigationLayoutOrientation = 1
 )
 
 func (e NSTextSelectionNavigationLayoutOrientation) String() string {
@@ -6358,17 +7026,25 @@ func (e NSTextSelectionNavigationLayoutOrientation) String() string {
 type NSTextSelectionNavigationModifier uint64
 
 const (
-	NSTextSelectionNavigationModifierExtend NSTextSelectionNavigationModifier = 1
-	NSTextSelectionNavigationModifierVisual NSTextSelectionNavigationModifier = 2
+	NSTextSelectionNavigationModifierExtend   NSTextSelectionNavigationModifier = 1
+	NSTextSelectionNavigationModifierVisual   NSTextSelectionNavigationModifier = 2
 	NSTextSelectionNavigationModifierMultiple NSTextSelectionNavigationModifier = 4
 )
 
 func (e NSTextSelectionNavigationModifier) String() string {
 	var parts []string
-	if e&NSTextSelectionNavigationModifierExtend != 0 { parts = append(parts, "NSTextSelectionNavigationModifierExtend") }
-	if e&NSTextSelectionNavigationModifierVisual != 0 { parts = append(parts, "NSTextSelectionNavigationModifierVisual") }
-	if e&NSTextSelectionNavigationModifierMultiple != 0 { parts = append(parts, "NSTextSelectionNavigationModifierMultiple") }
-	if len(parts) == 0 { return "0" }
+	if e&NSTextSelectionNavigationModifierExtend != 0 {
+		parts = append(parts, "NSTextSelectionNavigationModifierExtend")
+	}
+	if e&NSTextSelectionNavigationModifierVisual != 0 {
+		parts = append(parts, "NSTextSelectionNavigationModifierVisual")
+	}
+	if e&NSTextSelectionNavigationModifierMultiple != 0 {
+		parts = append(parts, "NSTextSelectionNavigationModifierMultiple")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -6399,18 +7075,24 @@ const (
 
 func (e NSTextStorageEditActions) String() string {
 	var parts []string
-	if e&NSTextStorageEditedAttributes != 0 { parts = append(parts, "NSTextStorageEditedAttributes") }
-	if e&NSTextStorageEditedCharacters != 0 { parts = append(parts, "NSTextStorageEditedCharacters") }
-	if len(parts) == 0 { return "0" }
+	if e&NSTextStorageEditedAttributes != 0 {
+		parts = append(parts, "NSTextStorageEditedAttributes")
+	}
+	if e&NSTextStorageEditedCharacters != 0 {
+		parts = append(parts, "NSTextStorageEditedCharacters")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSTextTabType uint64
 
 const (
-	NSLeftTabStopType NSTextTabType = 0
-	NSRightTabStopType NSTextTabType = 1
-	NSCenterTabStopType NSTextTabType = 2
+	NSLeftTabStopType    NSTextTabType = 0
+	NSRightTabStopType   NSTextTabType = 1
+	NSCenterTabStopType  NSTextTabType = 2
 	NSDecimalTabStopType NSTextTabType = 3
 )
 
@@ -6433,7 +7115,7 @@ type NSTextTableLayoutAlgorithm uint64
 
 const (
 	NSTextTableAutomaticLayoutAlgorithm NSTextTableLayoutAlgorithm = 0
-	NSTextTableFixedLayoutAlgorithm NSTextTableLayoutAlgorithm = 1
+	NSTextTableFixedLayoutAlgorithm     NSTextTableLayoutAlgorithm = 1
 )
 
 func (e NSTextTableLayoutAlgorithm) String() string {
@@ -6450,9 +7132,9 @@ func (e NSTextTableLayoutAlgorithm) String() string {
 type NSTickMarkPosition uint64
 
 const (
-	NSTickMarkPositionBelow NSTickMarkPosition = 0
-	NSTickMarkPositionAbove NSTickMarkPosition = 1
-	NSTickMarkPositionLeading NSTickMarkPosition = 1
+	NSTickMarkPositionBelow    NSTickMarkPosition = 0
+	NSTickMarkPositionAbove    NSTickMarkPosition = 1
+	NSTickMarkPositionLeading  NSTickMarkPosition = 1
 	NSTickMarkPositionTrailing NSTickMarkPosition = 0
 )
 
@@ -6472,8 +7154,8 @@ type NSTintProminence int64
 
 const (
 	NSTintProminenceAutomatic NSTintProminence = 0
-	NSTintProminenceNone NSTintProminence = 1
-	NSTintProminencePrimary NSTintProminence = 2
+	NSTintProminenceNone      NSTintProminence = 1
+	NSTintProminencePrimary   NSTintProminence = 2
 	NSTintProminenceSecondary NSTintProminence = 3
 )
 
@@ -6495,12 +7177,12 @@ func (e NSTintProminence) String() string {
 type NSTitlePosition uint64
 
 const (
-	NSNoTitle NSTitlePosition = 0
-	NSAboveTop NSTitlePosition = 1
-	NSAtTop NSTitlePosition = 2
-	NSBelowTop NSTitlePosition = 3
+	NSNoTitle     NSTitlePosition = 0
+	NSAboveTop    NSTitlePosition = 1
+	NSAtTop       NSTitlePosition = 2
+	NSBelowTop    NSTitlePosition = 3
 	NSAboveBottom NSTitlePosition = 4
-	NSAtBottom NSTitlePosition = 5
+	NSAtBottom    NSTitlePosition = 5
 	NSBelowBottom NSTitlePosition = 6
 )
 
@@ -6529,9 +7211,9 @@ type NSTitlebarSeparatorStyle int64
 
 const (
 	NSTitlebarSeparatorStyleAutomatic NSTitlebarSeparatorStyle = 0
-	NSTitlebarSeparatorStyleNone NSTitlebarSeparatorStyle = 1
-	NSTitlebarSeparatorStyleLine NSTitlebarSeparatorStyle = 2
-	NSTitlebarSeparatorStyleShadow NSTitlebarSeparatorStyle = 3
+	NSTitlebarSeparatorStyleNone      NSTitlebarSeparatorStyle = 1
+	NSTitlebarSeparatorStyleLine      NSTitlebarSeparatorStyle = 2
+	NSTitlebarSeparatorStyleShadow    NSTitlebarSeparatorStyle = 3
 )
 
 func (e NSTitlebarSeparatorStyle) String() string {
@@ -6552,10 +7234,10 @@ func (e NSTitlebarSeparatorStyle) String() string {
 type NSTokenStyle uint64
 
 const (
-	NSTokenStyleDefault NSTokenStyle = 0
-	NSTokenStyleNone NSTokenStyle = 1
-	NSTokenStyleRounded NSTokenStyle = 2
-	NSTokenStyleSquared NSTokenStyle = 3
+	NSTokenStyleDefault      NSTokenStyle = 0
+	NSTokenStyleNone         NSTokenStyle = 1
+	NSTokenStyleRounded      NSTokenStyle = 2
+	NSTokenStyleSquared      NSTokenStyle = 3
 	NSTokenStylePlainSquared NSTokenStyle = 4
 )
 
@@ -6579,10 +7261,10 @@ func (e NSTokenStyle) String() string {
 type NSToolbarDisplayMode uint64
 
 const (
-	NSToolbarDisplayModeDefault NSToolbarDisplayMode = 0
+	NSToolbarDisplayModeDefault      NSToolbarDisplayMode = 0
 	NSToolbarDisplayModeIconAndLabel NSToolbarDisplayMode = 1
-	NSToolbarDisplayModeIconOnly NSToolbarDisplayMode = 2
-	NSToolbarDisplayModeLabelOnly NSToolbarDisplayMode = 3
+	NSToolbarDisplayModeIconOnly     NSToolbarDisplayMode = 2
+	NSToolbarDisplayModeLabelOnly    NSToolbarDisplayMode = 3
 )
 
 func (e NSToolbarDisplayMode) String() string {
@@ -6604,7 +7286,7 @@ type NSToolbarItemGroupControlRepresentation int64
 
 const (
 	NSToolbarItemGroupControlRepresentationAutomatic NSToolbarItemGroupControlRepresentation = 0
-	NSToolbarItemGroupControlRepresentationExpanded NSToolbarItemGroupControlRepresentation = 1
+	NSToolbarItemGroupControlRepresentationExpanded  NSToolbarItemGroupControlRepresentation = 1
 	NSToolbarItemGroupControlRepresentationCollapsed NSToolbarItemGroupControlRepresentation = 2
 )
 
@@ -6645,7 +7327,7 @@ func (e NSToolbarItemGroupSelectionMode) String() string {
 type NSToolbarItemStyle int64
 
 const (
-	NSToolbarItemStylePlain NSToolbarItemStyle = 0
+	NSToolbarItemStylePlain     NSToolbarItemStyle = 0
 	NSToolbarItemStyleProminent NSToolbarItemStyle = 1
 )
 
@@ -6666,7 +7348,7 @@ type NSToolbarSizeMode uint64
 const (
 	NSToolbarSizeModeDefault NSToolbarSizeMode = 0
 	NSToolbarSizeModeRegular NSToolbarSizeMode = 1
-	NSToolbarSizeModeSmall NSToolbarSizeMode = 2
+	NSToolbarSizeModeSmall   NSToolbarSizeMode = 2
 )
 
 func (e NSToolbarSizeMode) String() string {
@@ -6685,32 +7367,48 @@ func (e NSToolbarSizeMode) String() string {
 type NSTouchPhase uint64
 
 const (
-	NSTouchPhaseBegan NSTouchPhase = 1
-	NSTouchPhaseMoved NSTouchPhase = 2
+	NSTouchPhaseBegan      NSTouchPhase = 1
+	NSTouchPhaseMoved      NSTouchPhase = 2
 	NSTouchPhaseStationary NSTouchPhase = 4
-	NSTouchPhaseEnded NSTouchPhase = 8
-	NSTouchPhaseCancelled NSTouchPhase = 16
-	NSTouchPhaseTouching NSTouchPhase = 7
-	NSTouchPhaseAny NSTouchPhase = 18446744073709551615
+	NSTouchPhaseEnded      NSTouchPhase = 8
+	NSTouchPhaseCancelled  NSTouchPhase = 16
+	NSTouchPhaseTouching   NSTouchPhase = 7
+	NSTouchPhaseAny        NSTouchPhase = 18446744073709551615
 )
 
 func (e NSTouchPhase) String() string {
 	var parts []string
-	if e&NSTouchPhaseBegan != 0 { parts = append(parts, "NSTouchPhaseBegan") }
-	if e&NSTouchPhaseMoved != 0 { parts = append(parts, "NSTouchPhaseMoved") }
-	if e&NSTouchPhaseStationary != 0 { parts = append(parts, "NSTouchPhaseStationary") }
-	if e&NSTouchPhaseEnded != 0 { parts = append(parts, "NSTouchPhaseEnded") }
-	if e&NSTouchPhaseCancelled != 0 { parts = append(parts, "NSTouchPhaseCancelled") }
-	if e&NSTouchPhaseTouching != 0 { parts = append(parts, "NSTouchPhaseTouching") }
-	if e&NSTouchPhaseAny != 0 { parts = append(parts, "NSTouchPhaseAny") }
-	if len(parts) == 0 { return "0" }
+	if e&NSTouchPhaseBegan != 0 {
+		parts = append(parts, "NSTouchPhaseBegan")
+	}
+	if e&NSTouchPhaseMoved != 0 {
+		parts = append(parts, "NSTouchPhaseMoved")
+	}
+	if e&NSTouchPhaseStationary != 0 {
+		parts = append(parts, "NSTouchPhaseStationary")
+	}
+	if e&NSTouchPhaseEnded != 0 {
+		parts = append(parts, "NSTouchPhaseEnded")
+	}
+	if e&NSTouchPhaseCancelled != 0 {
+		parts = append(parts, "NSTouchPhaseCancelled")
+	}
+	if e&NSTouchPhaseTouching != 0 {
+		parts = append(parts, "NSTouchPhaseTouching")
+	}
+	if e&NSTouchPhaseAny != 0 {
+		parts = append(parts, "NSTouchPhaseAny")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSTouchType int64
 
 const (
-	NSTouchTypeDirect NSTouchType = 0
+	NSTouchTypeDirect   NSTouchType = 0
 	NSTouchTypeIndirect NSTouchType = 1
 )
 
@@ -6728,58 +7426,86 @@ func (e NSTouchType) String() string {
 type NSTouchTypeMask uint64
 
 const (
-	NSTouchTypeMaskDirect NSTouchTypeMask = 1
+	NSTouchTypeMaskDirect   NSTouchTypeMask = 1
 	NSTouchTypeMaskIndirect NSTouchTypeMask = 2
 )
 
 func (e NSTouchTypeMask) String() string {
 	var parts []string
-	if e&NSTouchTypeMaskDirect != 0 { parts = append(parts, "NSTouchTypeMaskDirect") }
-	if e&NSTouchTypeMaskIndirect != 0 { parts = append(parts, "NSTouchTypeMaskIndirect") }
-	if len(parts) == 0 { return "0" }
+	if e&NSTouchTypeMaskDirect != 0 {
+		parts = append(parts, "NSTouchTypeMaskDirect")
+	}
+	if e&NSTouchTypeMaskIndirect != 0 {
+		parts = append(parts, "NSTouchTypeMaskIndirect")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSTrackingAreaOptions uint64
 
 const (
-	NSTrackingMouseEnteredAndExited NSTrackingAreaOptions = 1
-	NSTrackingMouseMoved NSTrackingAreaOptions = 2
-	NSTrackingCursorUpdate NSTrackingAreaOptions = 4
+	NSTrackingMouseEnteredAndExited    NSTrackingAreaOptions = 1
+	NSTrackingMouseMoved               NSTrackingAreaOptions = 2
+	NSTrackingCursorUpdate             NSTrackingAreaOptions = 4
 	NSTrackingActiveWhenFirstResponder NSTrackingAreaOptions = 16
-	NSTrackingActiveInKeyWindow NSTrackingAreaOptions = 32
-	NSTrackingActiveInActiveApp NSTrackingAreaOptions = 64
-	NSTrackingActiveAlways NSTrackingAreaOptions = 128
-	NSTrackingAssumeInside NSTrackingAreaOptions = 256
-	NSTrackingInVisibleRect NSTrackingAreaOptions = 512
-	NSTrackingEnabledDuringMouseDrag NSTrackingAreaOptions = 1024
+	NSTrackingActiveInKeyWindow        NSTrackingAreaOptions = 32
+	NSTrackingActiveInActiveApp        NSTrackingAreaOptions = 64
+	NSTrackingActiveAlways             NSTrackingAreaOptions = 128
+	NSTrackingAssumeInside             NSTrackingAreaOptions = 256
+	NSTrackingInVisibleRect            NSTrackingAreaOptions = 512
+	NSTrackingEnabledDuringMouseDrag   NSTrackingAreaOptions = 1024
 )
 
 func (e NSTrackingAreaOptions) String() string {
 	var parts []string
-	if e&NSTrackingMouseEnteredAndExited != 0 { parts = append(parts, "NSTrackingMouseEnteredAndExited") }
-	if e&NSTrackingMouseMoved != 0 { parts = append(parts, "NSTrackingMouseMoved") }
-	if e&NSTrackingCursorUpdate != 0 { parts = append(parts, "NSTrackingCursorUpdate") }
-	if e&NSTrackingActiveWhenFirstResponder != 0 { parts = append(parts, "NSTrackingActiveWhenFirstResponder") }
-	if e&NSTrackingActiveInKeyWindow != 0 { parts = append(parts, "NSTrackingActiveInKeyWindow") }
-	if e&NSTrackingActiveInActiveApp != 0 { parts = append(parts, "NSTrackingActiveInActiveApp") }
-	if e&NSTrackingActiveAlways != 0 { parts = append(parts, "NSTrackingActiveAlways") }
-	if e&NSTrackingAssumeInside != 0 { parts = append(parts, "NSTrackingAssumeInside") }
-	if e&NSTrackingInVisibleRect != 0 { parts = append(parts, "NSTrackingInVisibleRect") }
-	if e&NSTrackingEnabledDuringMouseDrag != 0 { parts = append(parts, "NSTrackingEnabledDuringMouseDrag") }
-	if len(parts) == 0 { return "0" }
+	if e&NSTrackingMouseEnteredAndExited != 0 {
+		parts = append(parts, "NSTrackingMouseEnteredAndExited")
+	}
+	if e&NSTrackingMouseMoved != 0 {
+		parts = append(parts, "NSTrackingMouseMoved")
+	}
+	if e&NSTrackingCursorUpdate != 0 {
+		parts = append(parts, "NSTrackingCursorUpdate")
+	}
+	if e&NSTrackingActiveWhenFirstResponder != 0 {
+		parts = append(parts, "NSTrackingActiveWhenFirstResponder")
+	}
+	if e&NSTrackingActiveInKeyWindow != 0 {
+		parts = append(parts, "NSTrackingActiveInKeyWindow")
+	}
+	if e&NSTrackingActiveInActiveApp != 0 {
+		parts = append(parts, "NSTrackingActiveInActiveApp")
+	}
+	if e&NSTrackingActiveAlways != 0 {
+		parts = append(parts, "NSTrackingActiveAlways")
+	}
+	if e&NSTrackingAssumeInside != 0 {
+		parts = append(parts, "NSTrackingAssumeInside")
+	}
+	if e&NSTrackingInVisibleRect != 0 {
+		parts = append(parts, "NSTrackingInVisibleRect")
+	}
+	if e&NSTrackingEnabledDuringMouseDrag != 0 {
+		parts = append(parts, "NSTrackingEnabledDuringMouseDrag")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSTypesetterBehavior int64
 
 const (
-	NSTypesetterLatestBehavior NSTypesetterBehavior = -1
-	NSTypesetterOriginalBehavior NSTypesetterBehavior = 0
+	NSTypesetterLatestBehavior                  NSTypesetterBehavior = -1
+	NSTypesetterOriginalBehavior                NSTypesetterBehavior = 0
 	NSTypesetterBehavior_10_2_WithCompatibility NSTypesetterBehavior = 1
-	NSTypesetterBehavior_10_2 NSTypesetterBehavior = 2
-	NSTypesetterBehavior_10_3 NSTypesetterBehavior = 3
-	NSTypesetterBehavior_10_4 NSTypesetterBehavior = 4
+	NSTypesetterBehavior_10_2                   NSTypesetterBehavior = 2
+	NSTypesetterBehavior_10_3                   NSTypesetterBehavior = 3
+	NSTypesetterBehavior_10_4                   NSTypesetterBehavior = 4
 )
 
 func (e NSTypesetterBehavior) String() string {
@@ -6805,60 +7531,92 @@ type NSTypesetterControlCharacterAction uint64
 
 const (
 	NSTypesetterZeroAdvancementAction NSTypesetterControlCharacterAction = 1
-	NSTypesetterWhitespaceAction NSTypesetterControlCharacterAction = 2
-	NSTypesetterHorizontalTabAction NSTypesetterControlCharacterAction = 4
-	NSTypesetterLineBreakAction NSTypesetterControlCharacterAction = 8
-	NSTypesetterParagraphBreakAction NSTypesetterControlCharacterAction = 16
-	NSTypesetterContainerBreakAction NSTypesetterControlCharacterAction = 32
+	NSTypesetterWhitespaceAction      NSTypesetterControlCharacterAction = 2
+	NSTypesetterHorizontalTabAction   NSTypesetterControlCharacterAction = 4
+	NSTypesetterLineBreakAction       NSTypesetterControlCharacterAction = 8
+	NSTypesetterParagraphBreakAction  NSTypesetterControlCharacterAction = 16
+	NSTypesetterContainerBreakAction  NSTypesetterControlCharacterAction = 32
 )
 
 func (e NSTypesetterControlCharacterAction) String() string {
 	var parts []string
-	if e&NSTypesetterZeroAdvancementAction != 0 { parts = append(parts, "NSTypesetterZeroAdvancementAction") }
-	if e&NSTypesetterWhitespaceAction != 0 { parts = append(parts, "NSTypesetterWhitespaceAction") }
-	if e&NSTypesetterHorizontalTabAction != 0 { parts = append(parts, "NSTypesetterHorizontalTabAction") }
-	if e&NSTypesetterLineBreakAction != 0 { parts = append(parts, "NSTypesetterLineBreakAction") }
-	if e&NSTypesetterParagraphBreakAction != 0 { parts = append(parts, "NSTypesetterParagraphBreakAction") }
-	if e&NSTypesetterContainerBreakAction != 0 { parts = append(parts, "NSTypesetterContainerBreakAction") }
-	if len(parts) == 0 { return "0" }
+	if e&NSTypesetterZeroAdvancementAction != 0 {
+		parts = append(parts, "NSTypesetterZeroAdvancementAction")
+	}
+	if e&NSTypesetterWhitespaceAction != 0 {
+		parts = append(parts, "NSTypesetterWhitespaceAction")
+	}
+	if e&NSTypesetterHorizontalTabAction != 0 {
+		parts = append(parts, "NSTypesetterHorizontalTabAction")
+	}
+	if e&NSTypesetterLineBreakAction != 0 {
+		parts = append(parts, "NSTypesetterLineBreakAction")
+	}
+	if e&NSTypesetterParagraphBreakAction != 0 {
+		parts = append(parts, "NSTypesetterParagraphBreakAction")
+	}
+	if e&NSTypesetterContainerBreakAction != 0 {
+		parts = append(parts, "NSTypesetterContainerBreakAction")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSUnderlineStyle int64
 
 const (
-	NSUnderlineStyleNone NSUnderlineStyle = 0
-	NSUnderlineStyleSingle NSUnderlineStyle = 1
-	NSUnderlineStyleThick NSUnderlineStyle = 2
-	NSUnderlineStyleDouble NSUnderlineStyle = 9
-	NSUnderlineStylePatternSolid NSUnderlineStyle = 0
-	NSUnderlineStylePatternDot NSUnderlineStyle = 256
-	NSUnderlineStylePatternDash NSUnderlineStyle = 512
-	NSUnderlineStylePatternDashDot NSUnderlineStyle = 768
+	NSUnderlineStyleNone              NSUnderlineStyle = 0
+	NSUnderlineStyleSingle            NSUnderlineStyle = 1
+	NSUnderlineStyleThick             NSUnderlineStyle = 2
+	NSUnderlineStyleDouble            NSUnderlineStyle = 9
+	NSUnderlineStylePatternSolid      NSUnderlineStyle = 0
+	NSUnderlineStylePatternDot        NSUnderlineStyle = 256
+	NSUnderlineStylePatternDash       NSUnderlineStyle = 512
+	NSUnderlineStylePatternDashDot    NSUnderlineStyle = 768
 	NSUnderlineStylePatternDashDotDot NSUnderlineStyle = 1024
-	NSUnderlineStyleByWord NSUnderlineStyle = 32768
+	NSUnderlineStyleByWord            NSUnderlineStyle = 32768
 )
 
 func (e NSUnderlineStyle) String() string {
 	var parts []string
-	if e&NSUnderlineStyleSingle != 0 { parts = append(parts, "NSUnderlineStyleSingle") }
-	if e&NSUnderlineStyleThick != 0 { parts = append(parts, "NSUnderlineStyleThick") }
-	if e&NSUnderlineStyleDouble != 0 { parts = append(parts, "NSUnderlineStyleDouble") }
-	if e&NSUnderlineStylePatternDot != 0 { parts = append(parts, "NSUnderlineStylePatternDot") }
-	if e&NSUnderlineStylePatternDash != 0 { parts = append(parts, "NSUnderlineStylePatternDash") }
-	if e&NSUnderlineStylePatternDashDot != 0 { parts = append(parts, "NSUnderlineStylePatternDashDot") }
-	if e&NSUnderlineStylePatternDashDotDot != 0 { parts = append(parts, "NSUnderlineStylePatternDashDotDot") }
-	if e&NSUnderlineStyleByWord != 0 { parts = append(parts, "NSUnderlineStyleByWord") }
-	if len(parts) == 0 { return "0" }
+	if e&NSUnderlineStyleSingle != 0 {
+		parts = append(parts, "NSUnderlineStyleSingle")
+	}
+	if e&NSUnderlineStyleThick != 0 {
+		parts = append(parts, "NSUnderlineStyleThick")
+	}
+	if e&NSUnderlineStyleDouble != 0 {
+		parts = append(parts, "NSUnderlineStyleDouble")
+	}
+	if e&NSUnderlineStylePatternDot != 0 {
+		parts = append(parts, "NSUnderlineStylePatternDot")
+	}
+	if e&NSUnderlineStylePatternDash != 0 {
+		parts = append(parts, "NSUnderlineStylePatternDash")
+	}
+	if e&NSUnderlineStylePatternDashDot != 0 {
+		parts = append(parts, "NSUnderlineStylePatternDashDot")
+	}
+	if e&NSUnderlineStylePatternDashDotDot != 0 {
+		parts = append(parts, "NSUnderlineStylePatternDashDotDot")
+	}
+	if e&NSUnderlineStyleByWord != 0 {
+		parts = append(parts, "NSUnderlineStyleByWord")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSUsableScrollerParts uint64
 
 const (
-	NSNoScrollerParts NSUsableScrollerParts = 0
+	NSNoScrollerParts    NSUsableScrollerParts = 0
 	NSOnlyScrollerArrows NSUsableScrollerParts = 1
-	NSAllScrollerParts NSUsableScrollerParts = 2
+	NSAllScrollerParts   NSUsableScrollerParts = 2
 )
 
 func (e NSUsableScrollerParts) String() string {
@@ -6896,7 +7654,7 @@ type NSUserInterfaceLayoutOrientation int64
 
 const (
 	NSUserInterfaceLayoutOrientationHorizontal NSUserInterfaceLayoutOrientation = 0
-	NSUserInterfaceLayoutOrientationVertical NSUserInterfaceLayoutOrientation = 1
+	NSUserInterfaceLayoutOrientationVertical   NSUserInterfaceLayoutOrientation = 1
 )
 
 func (e NSUserInterfaceLayoutOrientation) String() string {
@@ -6923,56 +7681,82 @@ const (
 
 func (e NSVerticalDirections) String() string {
 	var parts []string
-	if e&NSVerticalDirectionsUp != 0 { parts = append(parts, "NSVerticalDirectionsUp") }
-	if e&NSVerticalDirectionsDown != 0 { parts = append(parts, "NSVerticalDirectionsDown") }
-	if e&NSVerticalDirectionsAll != 0 { parts = append(parts, "NSVerticalDirectionsAll") }
-	if len(parts) == 0 { return "0" }
+	if e&NSVerticalDirectionsUp != 0 {
+		parts = append(parts, "NSVerticalDirectionsUp")
+	}
+	if e&NSVerticalDirectionsDown != 0 {
+		parts = append(parts, "NSVerticalDirectionsDown")
+	}
+	if e&NSVerticalDirectionsAll != 0 {
+		parts = append(parts, "NSVerticalDirectionsAll")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSViewControllerTransitionOptions uint64
 
 const (
-	NSViewControllerTransitionNone NSViewControllerTransitionOptions = 0
-	NSViewControllerTransitionCrossfade NSViewControllerTransitionOptions = 1
-	NSViewControllerTransitionSlideUp NSViewControllerTransitionOptions = 16
-	NSViewControllerTransitionSlideDown NSViewControllerTransitionOptions = 32
-	NSViewControllerTransitionSlideLeft NSViewControllerTransitionOptions = 64
-	NSViewControllerTransitionSlideRight NSViewControllerTransitionOptions = 128
-	NSViewControllerTransitionSlideForward NSViewControllerTransitionOptions = 320
-	NSViewControllerTransitionSlideBackward NSViewControllerTransitionOptions = 384
+	NSViewControllerTransitionNone                 NSViewControllerTransitionOptions = 0
+	NSViewControllerTransitionCrossfade            NSViewControllerTransitionOptions = 1
+	NSViewControllerTransitionSlideUp              NSViewControllerTransitionOptions = 16
+	NSViewControllerTransitionSlideDown            NSViewControllerTransitionOptions = 32
+	NSViewControllerTransitionSlideLeft            NSViewControllerTransitionOptions = 64
+	NSViewControllerTransitionSlideRight           NSViewControllerTransitionOptions = 128
+	NSViewControllerTransitionSlideForward         NSViewControllerTransitionOptions = 320
+	NSViewControllerTransitionSlideBackward        NSViewControllerTransitionOptions = 384
 	NSViewControllerTransitionAllowUserInteraction NSViewControllerTransitionOptions = 4096
 )
 
 func (e NSViewControllerTransitionOptions) String() string {
 	var parts []string
-	if e&NSViewControllerTransitionCrossfade != 0 { parts = append(parts, "NSViewControllerTransitionCrossfade") }
-	if e&NSViewControllerTransitionSlideUp != 0 { parts = append(parts, "NSViewControllerTransitionSlideUp") }
-	if e&NSViewControllerTransitionSlideDown != 0 { parts = append(parts, "NSViewControllerTransitionSlideDown") }
-	if e&NSViewControllerTransitionSlideLeft != 0 { parts = append(parts, "NSViewControllerTransitionSlideLeft") }
-	if e&NSViewControllerTransitionSlideRight != 0 { parts = append(parts, "NSViewControllerTransitionSlideRight") }
-	if e&NSViewControllerTransitionSlideForward != 0 { parts = append(parts, "NSViewControllerTransitionSlideForward") }
-	if e&NSViewControllerTransitionSlideBackward != 0 { parts = append(parts, "NSViewControllerTransitionSlideBackward") }
-	if e&NSViewControllerTransitionAllowUserInteraction != 0 { parts = append(parts, "NSViewControllerTransitionAllowUserInteraction") }
-	if len(parts) == 0 { return "0" }
+	if e&NSViewControllerTransitionCrossfade != 0 {
+		parts = append(parts, "NSViewControllerTransitionCrossfade")
+	}
+	if e&NSViewControllerTransitionSlideUp != 0 {
+		parts = append(parts, "NSViewControllerTransitionSlideUp")
+	}
+	if e&NSViewControllerTransitionSlideDown != 0 {
+		parts = append(parts, "NSViewControllerTransitionSlideDown")
+	}
+	if e&NSViewControllerTransitionSlideLeft != 0 {
+		parts = append(parts, "NSViewControllerTransitionSlideLeft")
+	}
+	if e&NSViewControllerTransitionSlideRight != 0 {
+		parts = append(parts, "NSViewControllerTransitionSlideRight")
+	}
+	if e&NSViewControllerTransitionSlideForward != 0 {
+		parts = append(parts, "NSViewControllerTransitionSlideForward")
+	}
+	if e&NSViewControllerTransitionSlideBackward != 0 {
+		parts = append(parts, "NSViewControllerTransitionSlideBackward")
+	}
+	if e&NSViewControllerTransitionAllowUserInteraction != 0 {
+		parts = append(parts, "NSViewControllerTransitionAllowUserInteraction")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSViewLayerContentsPlacement int64
 
 const (
-	NSViewLayerContentsPlacementScaleAxesIndependently NSViewLayerContentsPlacement = 0
-	NSViewLayerContentsPlacementScaleProportionallyToFit NSViewLayerContentsPlacement = 1
+	NSViewLayerContentsPlacementScaleAxesIndependently    NSViewLayerContentsPlacement = 0
+	NSViewLayerContentsPlacementScaleProportionallyToFit  NSViewLayerContentsPlacement = 1
 	NSViewLayerContentsPlacementScaleProportionallyToFill NSViewLayerContentsPlacement = 2
-	NSViewLayerContentsPlacementCenter NSViewLayerContentsPlacement = 3
-	NSViewLayerContentsPlacementTop NSViewLayerContentsPlacement = 4
-	NSViewLayerContentsPlacementTopRight NSViewLayerContentsPlacement = 5
-	NSViewLayerContentsPlacementRight NSViewLayerContentsPlacement = 6
-	NSViewLayerContentsPlacementBottomRight NSViewLayerContentsPlacement = 7
-	NSViewLayerContentsPlacementBottom NSViewLayerContentsPlacement = 8
-	NSViewLayerContentsPlacementBottomLeft NSViewLayerContentsPlacement = 9
-	NSViewLayerContentsPlacementLeft NSViewLayerContentsPlacement = 10
-	NSViewLayerContentsPlacementTopLeft NSViewLayerContentsPlacement = 11
+	NSViewLayerContentsPlacementCenter                    NSViewLayerContentsPlacement = 3
+	NSViewLayerContentsPlacementTop                       NSViewLayerContentsPlacement = 4
+	NSViewLayerContentsPlacementTopRight                  NSViewLayerContentsPlacement = 5
+	NSViewLayerContentsPlacementRight                     NSViewLayerContentsPlacement = 6
+	NSViewLayerContentsPlacementBottomRight               NSViewLayerContentsPlacement = 7
+	NSViewLayerContentsPlacementBottom                    NSViewLayerContentsPlacement = 8
+	NSViewLayerContentsPlacementBottomLeft                NSViewLayerContentsPlacement = 9
+	NSViewLayerContentsPlacementLeft                      NSViewLayerContentsPlacement = 10
+	NSViewLayerContentsPlacementTopLeft                   NSViewLayerContentsPlacement = 11
 )
 
 func (e NSViewLayerContentsPlacement) String() string {
@@ -7009,11 +7793,11 @@ func (e NSViewLayerContentsPlacement) String() string {
 type NSViewLayerContentsRedrawPolicy int64
 
 const (
-	NSViewLayerContentsRedrawNever NSViewLayerContentsRedrawPolicy = 0
+	NSViewLayerContentsRedrawNever             NSViewLayerContentsRedrawPolicy = 0
 	NSViewLayerContentsRedrawOnSetNeedsDisplay NSViewLayerContentsRedrawPolicy = 1
-	NSViewLayerContentsRedrawDuringViewResize NSViewLayerContentsRedrawPolicy = 2
-	NSViewLayerContentsRedrawBeforeViewResize NSViewLayerContentsRedrawPolicy = 3
-	NSViewLayerContentsRedrawCrossfade NSViewLayerContentsRedrawPolicy = 4
+	NSViewLayerContentsRedrawDuringViewResize  NSViewLayerContentsRedrawPolicy = 2
+	NSViewLayerContentsRedrawBeforeViewResize  NSViewLayerContentsRedrawPolicy = 3
+	NSViewLayerContentsRedrawCrossfade         NSViewLayerContentsRedrawPolicy = 4
 )
 
 func (e NSViewLayerContentsRedrawPolicy) String() string {
@@ -7036,9 +7820,9 @@ func (e NSViewLayerContentsRedrawPolicy) String() string {
 type NSViewLayoutRegionAdaptivityAxis int64
 
 const (
-	NSViewLayoutRegionAdaptivityAxisNone NSViewLayoutRegionAdaptivityAxis = 0
+	NSViewLayoutRegionAdaptivityAxisNone       NSViewLayoutRegionAdaptivityAxis = 0
 	NSViewLayoutRegionAdaptivityAxisHorizontal NSViewLayoutRegionAdaptivityAxis = 1
-	NSViewLayoutRegionAdaptivityAxisVertical NSViewLayoutRegionAdaptivityAxis = 2
+	NSViewLayoutRegionAdaptivityAxisVertical   NSViewLayoutRegionAdaptivityAxis = 2
 )
 
 func (e NSViewLayoutRegionAdaptivityAxis) String() string {
@@ -7108,10 +7892,10 @@ const (
 	NSVisualEffectMaterialUnderPageBackground NSVisualEffectMaterial = 22
 	// A default material appropriate for the view's effectiveAppearance.  You should instead choose an appropriate semantic material.
 	NSVisualEffectMaterialAppearanceBased NSVisualEffectMaterial = 0
-	NSVisualEffectMaterialLight NSVisualEffectMaterial = 1
-	NSVisualEffectMaterialDark NSVisualEffectMaterial = 2
-	NSVisualEffectMaterialMediumLight NSVisualEffectMaterial = 8
-	NSVisualEffectMaterialUltraDark NSVisualEffectMaterial = 9
+	NSVisualEffectMaterialLight           NSVisualEffectMaterial = 1
+	NSVisualEffectMaterialDark            NSVisualEffectMaterial = 2
+	NSVisualEffectMaterialMediumLight     NSVisualEffectMaterial = 8
+	NSVisualEffectMaterialUltraDark       NSVisualEffectMaterial = 9
 )
 
 func (e NSVisualEffectMaterial) String() string {
@@ -7205,11 +7989,11 @@ func (e NSWindingRule) String() string {
 type NSWindowAnimationBehavior int64
 
 const (
-	NSWindowAnimationBehaviorDefault NSWindowAnimationBehavior = 0
-	NSWindowAnimationBehaviorNone NSWindowAnimationBehavior = 2
+	NSWindowAnimationBehaviorDefault        NSWindowAnimationBehavior = 0
+	NSWindowAnimationBehaviorNone           NSWindowAnimationBehavior = 2
 	NSWindowAnimationBehaviorDocumentWindow NSWindowAnimationBehavior = 3
-	NSWindowAnimationBehaviorUtilityWindow NSWindowAnimationBehavior = 4
-	NSWindowAnimationBehaviorAlertPanel NSWindowAnimationBehavior = 5
+	NSWindowAnimationBehaviorUtilityWindow  NSWindowAnimationBehavior = 4
+	NSWindowAnimationBehaviorAlertPanel     NSWindowAnimationBehavior = 5
 )
 
 func (e NSWindowAnimationBehavior) String() string {
@@ -7233,9 +8017,9 @@ func (e NSWindowAnimationBehavior) String() string {
 type NSWindowBackingLocation uint64
 
 const (
-	NSWindowBackingLocationDefault NSWindowBackingLocation = 0
+	NSWindowBackingLocationDefault     NSWindowBackingLocation = 0
 	NSWindowBackingLocationVideoMemory NSWindowBackingLocation = 1
-	NSWindowBackingLocationMainMemory NSWindowBackingLocation = 2
+	NSWindowBackingLocationMainMemory  NSWindowBackingLocation = 2
 )
 
 func (e NSWindowBackingLocation) String() string {
@@ -7255,11 +8039,11 @@ func (e NSWindowBackingLocation) String() string {
 type NSWindowButton uint64
 
 const (
-	NSWindowCloseButton NSWindowButton = 0
-	NSWindowMiniaturizeButton NSWindowButton = 1
-	NSWindowZoomButton NSWindowButton = 2
-	NSWindowToolbarButton NSWindowButton = 3
-	NSWindowDocumentIconButton NSWindowButton = 4
+	NSWindowCloseButton            NSWindowButton = 0
+	NSWindowMiniaturizeButton      NSWindowButton = 1
+	NSWindowZoomButton             NSWindowButton = 2
+	NSWindowToolbarButton          NSWindowButton = 3
+	NSWindowDocumentIconButton     NSWindowButton = 4
 	NSWindowDocumentVersionsButton NSWindowButton = 6
 )
 
@@ -7286,50 +8070,82 @@ func (e NSWindowButton) String() string {
 type NSWindowCollectionBehavior uint64
 
 const (
-	NSWindowCollectionBehaviorDefault NSWindowCollectionBehavior = 0
-	NSWindowCollectionBehaviorCanJoinAllSpaces NSWindowCollectionBehavior = 1
-	NSWindowCollectionBehaviorMoveToActiveSpace NSWindowCollectionBehavior = 2
-	NSWindowCollectionBehaviorManaged NSWindowCollectionBehavior = 4
-	NSWindowCollectionBehaviorTransient NSWindowCollectionBehavior = 8
-	NSWindowCollectionBehaviorStationary NSWindowCollectionBehavior = 16
-	NSWindowCollectionBehaviorParticipatesInCycle NSWindowCollectionBehavior = 32
-	NSWindowCollectionBehaviorIgnoresCycle NSWindowCollectionBehavior = 64
-	NSWindowCollectionBehaviorFullScreenPrimary NSWindowCollectionBehavior = 128
-	NSWindowCollectionBehaviorFullScreenAuxiliary NSWindowCollectionBehavior = 256
-	NSWindowCollectionBehaviorFullScreenNone NSWindowCollectionBehavior = 512
-	NSWindowCollectionBehaviorFullScreenAllowsTiling NSWindowCollectionBehavior = 2048
+	NSWindowCollectionBehaviorDefault                   NSWindowCollectionBehavior = 0
+	NSWindowCollectionBehaviorCanJoinAllSpaces          NSWindowCollectionBehavior = 1
+	NSWindowCollectionBehaviorMoveToActiveSpace         NSWindowCollectionBehavior = 2
+	NSWindowCollectionBehaviorManaged                   NSWindowCollectionBehavior = 4
+	NSWindowCollectionBehaviorTransient                 NSWindowCollectionBehavior = 8
+	NSWindowCollectionBehaviorStationary                NSWindowCollectionBehavior = 16
+	NSWindowCollectionBehaviorParticipatesInCycle       NSWindowCollectionBehavior = 32
+	NSWindowCollectionBehaviorIgnoresCycle              NSWindowCollectionBehavior = 64
+	NSWindowCollectionBehaviorFullScreenPrimary         NSWindowCollectionBehavior = 128
+	NSWindowCollectionBehaviorFullScreenAuxiliary       NSWindowCollectionBehavior = 256
+	NSWindowCollectionBehaviorFullScreenNone            NSWindowCollectionBehavior = 512
+	NSWindowCollectionBehaviorFullScreenAllowsTiling    NSWindowCollectionBehavior = 2048
 	NSWindowCollectionBehaviorFullScreenDisallowsTiling NSWindowCollectionBehavior = 4096
-	NSWindowCollectionBehaviorPrimary NSWindowCollectionBehavior = 65536
-	NSWindowCollectionBehaviorAuxiliary NSWindowCollectionBehavior = 131072
-	NSWindowCollectionBehaviorCanJoinAllApplications NSWindowCollectionBehavior = 262144
+	NSWindowCollectionBehaviorPrimary                   NSWindowCollectionBehavior = 65536
+	NSWindowCollectionBehaviorAuxiliary                 NSWindowCollectionBehavior = 131072
+	NSWindowCollectionBehaviorCanJoinAllApplications    NSWindowCollectionBehavior = 262144
 )
 
 func (e NSWindowCollectionBehavior) String() string {
 	var parts []string
-	if e&NSWindowCollectionBehaviorCanJoinAllSpaces != 0 { parts = append(parts, "NSWindowCollectionBehaviorCanJoinAllSpaces") }
-	if e&NSWindowCollectionBehaviorMoveToActiveSpace != 0 { parts = append(parts, "NSWindowCollectionBehaviorMoveToActiveSpace") }
-	if e&NSWindowCollectionBehaviorManaged != 0 { parts = append(parts, "NSWindowCollectionBehaviorManaged") }
-	if e&NSWindowCollectionBehaviorTransient != 0 { parts = append(parts, "NSWindowCollectionBehaviorTransient") }
-	if e&NSWindowCollectionBehaviorStationary != 0 { parts = append(parts, "NSWindowCollectionBehaviorStationary") }
-	if e&NSWindowCollectionBehaviorParticipatesInCycle != 0 { parts = append(parts, "NSWindowCollectionBehaviorParticipatesInCycle") }
-	if e&NSWindowCollectionBehaviorIgnoresCycle != 0 { parts = append(parts, "NSWindowCollectionBehaviorIgnoresCycle") }
-	if e&NSWindowCollectionBehaviorFullScreenPrimary != 0 { parts = append(parts, "NSWindowCollectionBehaviorFullScreenPrimary") }
-	if e&NSWindowCollectionBehaviorFullScreenAuxiliary != 0 { parts = append(parts, "NSWindowCollectionBehaviorFullScreenAuxiliary") }
-	if e&NSWindowCollectionBehaviorFullScreenNone != 0 { parts = append(parts, "NSWindowCollectionBehaviorFullScreenNone") }
-	if e&NSWindowCollectionBehaviorFullScreenAllowsTiling != 0 { parts = append(parts, "NSWindowCollectionBehaviorFullScreenAllowsTiling") }
-	if e&NSWindowCollectionBehaviorFullScreenDisallowsTiling != 0 { parts = append(parts, "NSWindowCollectionBehaviorFullScreenDisallowsTiling") }
-	if e&NSWindowCollectionBehaviorPrimary != 0 { parts = append(parts, "NSWindowCollectionBehaviorPrimary") }
-	if e&NSWindowCollectionBehaviorAuxiliary != 0 { parts = append(parts, "NSWindowCollectionBehaviorAuxiliary") }
-	if e&NSWindowCollectionBehaviorCanJoinAllApplications != 0 { parts = append(parts, "NSWindowCollectionBehaviorCanJoinAllApplications") }
-	if len(parts) == 0 { return "0" }
+	if e&NSWindowCollectionBehaviorCanJoinAllSpaces != 0 {
+		parts = append(parts, "NSWindowCollectionBehaviorCanJoinAllSpaces")
+	}
+	if e&NSWindowCollectionBehaviorMoveToActiveSpace != 0 {
+		parts = append(parts, "NSWindowCollectionBehaviorMoveToActiveSpace")
+	}
+	if e&NSWindowCollectionBehaviorManaged != 0 {
+		parts = append(parts, "NSWindowCollectionBehaviorManaged")
+	}
+	if e&NSWindowCollectionBehaviorTransient != 0 {
+		parts = append(parts, "NSWindowCollectionBehaviorTransient")
+	}
+	if e&NSWindowCollectionBehaviorStationary != 0 {
+		parts = append(parts, "NSWindowCollectionBehaviorStationary")
+	}
+	if e&NSWindowCollectionBehaviorParticipatesInCycle != 0 {
+		parts = append(parts, "NSWindowCollectionBehaviorParticipatesInCycle")
+	}
+	if e&NSWindowCollectionBehaviorIgnoresCycle != 0 {
+		parts = append(parts, "NSWindowCollectionBehaviorIgnoresCycle")
+	}
+	if e&NSWindowCollectionBehaviorFullScreenPrimary != 0 {
+		parts = append(parts, "NSWindowCollectionBehaviorFullScreenPrimary")
+	}
+	if e&NSWindowCollectionBehaviorFullScreenAuxiliary != 0 {
+		parts = append(parts, "NSWindowCollectionBehaviorFullScreenAuxiliary")
+	}
+	if e&NSWindowCollectionBehaviorFullScreenNone != 0 {
+		parts = append(parts, "NSWindowCollectionBehaviorFullScreenNone")
+	}
+	if e&NSWindowCollectionBehaviorFullScreenAllowsTiling != 0 {
+		parts = append(parts, "NSWindowCollectionBehaviorFullScreenAllowsTiling")
+	}
+	if e&NSWindowCollectionBehaviorFullScreenDisallowsTiling != 0 {
+		parts = append(parts, "NSWindowCollectionBehaviorFullScreenDisallowsTiling")
+	}
+	if e&NSWindowCollectionBehaviorPrimary != 0 {
+		parts = append(parts, "NSWindowCollectionBehaviorPrimary")
+	}
+	if e&NSWindowCollectionBehaviorAuxiliary != 0 {
+		parts = append(parts, "NSWindowCollectionBehaviorAuxiliary")
+	}
+	if e&NSWindowCollectionBehaviorCanJoinAllApplications != 0 {
+		parts = append(parts, "NSWindowCollectionBehaviorCanJoinAllApplications")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSWindowDepth int64
 
 const (
-	NSWindowDepthTwentyfourBitRGB NSWindowDepth = 520
-	NSWindowDepthSixtyfourBitRGB NSWindowDepth = 528
+	NSWindowDepthTwentyfourBitRGB            NSWindowDepth = 520
+	NSWindowDepthSixtyfourBitRGB             NSWindowDepth = 528
 	NSWindowDepthOnehundredtwentyeightBitRGB NSWindowDepth = 544
 )
 
@@ -7355,8 +8171,12 @@ const (
 
 func (e NSWindowListOptions) String() string {
 	var parts []string
-	if e&NSWindowListOrderedFrontToBack != 0 { parts = append(parts, "NSWindowListOrderedFrontToBack") }
-	if len(parts) == 0 { return "0" }
+	if e&NSWindowListOrderedFrontToBack != 0 {
+		parts = append(parts, "NSWindowListOrderedFrontToBack")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -7365,14 +8185,20 @@ type NSWindowNumberListOptions uint64
 
 const (
 	NSWindowNumberListAllApplications NSWindowNumberListOptions = 1
-	NSWindowNumberListAllSpaces NSWindowNumberListOptions = 16
+	NSWindowNumberListAllSpaces       NSWindowNumberListOptions = 16
 )
 
 func (e NSWindowNumberListOptions) String() string {
 	var parts []string
-	if e&NSWindowNumberListAllApplications != 0 { parts = append(parts, "NSWindowNumberListAllApplications") }
-	if e&NSWindowNumberListAllSpaces != 0 { parts = append(parts, "NSWindowNumberListAllSpaces") }
-	if len(parts) == 0 { return "0" }
+	if e&NSWindowNumberListAllApplications != 0 {
+		parts = append(parts, "NSWindowNumberListAllApplications")
+	}
+	if e&NSWindowNumberListAllSpaces != 0 {
+		parts = append(parts, "NSWindowNumberListAllSpaces")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -7385,8 +8211,12 @@ const (
 
 func (e NSWindowOcclusionState) String() string {
 	var parts []string
-	if e&NSWindowOcclusionStateVisible != 0 { parts = append(parts, "NSWindowOcclusionStateVisible") }
-	if len(parts) == 0 { return "0" }
+	if e&NSWindowOcclusionStateVisible != 0 {
+		parts = append(parts, "NSWindowOcclusionStateVisible")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -7395,7 +8225,7 @@ type NSWindowOrderingMode int64
 const (
 	NSWindowAbove NSWindowOrderingMode = 1
 	NSWindowBelow NSWindowOrderingMode = -1
-	NSWindowOut NSWindowOrderingMode = 0
+	NSWindowOut   NSWindowOrderingMode = 0
 )
 
 func (e NSWindowOrderingMode) String() string {
@@ -7415,7 +8245,7 @@ func (e NSWindowOrderingMode) String() string {
 type NSWindowSharingType uint64
 
 const (
-	NSWindowSharingNone NSWindowSharingType = 0
+	NSWindowSharingNone     NSWindowSharingType = 0
 	NSWindowSharingReadOnly NSWindowSharingType = 1
 )
 
@@ -7434,36 +8264,62 @@ func (e NSWindowSharingType) String() string {
 type NSWindowStyleMask uint64
 
 const (
-	NSWindowStyleMaskBorderless NSWindowStyleMask = 0
-	NSWindowStyleMaskTitled NSWindowStyleMask = 1
-	NSWindowStyleMaskClosable NSWindowStyleMask = 2
-	NSWindowStyleMaskMiniaturizable NSWindowStyleMask = 4
-	NSWindowStyleMaskResizable NSWindowStyleMask = 8
-	NSWindowStyleMaskTexturedBackground NSWindowStyleMask = 256
+	NSWindowStyleMaskBorderless             NSWindowStyleMask = 0
+	NSWindowStyleMaskTitled                 NSWindowStyleMask = 1
+	NSWindowStyleMaskClosable               NSWindowStyleMask = 2
+	NSWindowStyleMaskMiniaturizable         NSWindowStyleMask = 4
+	NSWindowStyleMaskResizable              NSWindowStyleMask = 8
+	NSWindowStyleMaskTexturedBackground     NSWindowStyleMask = 256
 	NSWindowStyleMaskUnifiedTitleAndToolbar NSWindowStyleMask = 4096
-	NSWindowStyleMaskFullScreen NSWindowStyleMask = 16384
-	NSWindowStyleMaskFullSizeContentView NSWindowStyleMask = 32768
-	NSWindowStyleMaskUtilityWindow NSWindowStyleMask = 16
-	NSWindowStyleMaskDocModalWindow NSWindowStyleMask = 64
-	NSWindowStyleMaskNonactivatingPanel NSWindowStyleMask = 128
-	NSWindowStyleMaskHUDWindow NSWindowStyleMask = 8192
+	NSWindowStyleMaskFullScreen             NSWindowStyleMask = 16384
+	NSWindowStyleMaskFullSizeContentView    NSWindowStyleMask = 32768
+	NSWindowStyleMaskUtilityWindow          NSWindowStyleMask = 16
+	NSWindowStyleMaskDocModalWindow         NSWindowStyleMask = 64
+	NSWindowStyleMaskNonactivatingPanel     NSWindowStyleMask = 128
+	NSWindowStyleMaskHUDWindow              NSWindowStyleMask = 8192
 )
 
 func (e NSWindowStyleMask) String() string {
 	var parts []string
-	if e&NSWindowStyleMaskTitled != 0 { parts = append(parts, "NSWindowStyleMaskTitled") }
-	if e&NSWindowStyleMaskClosable != 0 { parts = append(parts, "NSWindowStyleMaskClosable") }
-	if e&NSWindowStyleMaskMiniaturizable != 0 { parts = append(parts, "NSWindowStyleMaskMiniaturizable") }
-	if e&NSWindowStyleMaskResizable != 0 { parts = append(parts, "NSWindowStyleMaskResizable") }
-	if e&NSWindowStyleMaskTexturedBackground != 0 { parts = append(parts, "NSWindowStyleMaskTexturedBackground") }
-	if e&NSWindowStyleMaskUnifiedTitleAndToolbar != 0 { parts = append(parts, "NSWindowStyleMaskUnifiedTitleAndToolbar") }
-	if e&NSWindowStyleMaskFullScreen != 0 { parts = append(parts, "NSWindowStyleMaskFullScreen") }
-	if e&NSWindowStyleMaskFullSizeContentView != 0 { parts = append(parts, "NSWindowStyleMaskFullSizeContentView") }
-	if e&NSWindowStyleMaskUtilityWindow != 0 { parts = append(parts, "NSWindowStyleMaskUtilityWindow") }
-	if e&NSWindowStyleMaskDocModalWindow != 0 { parts = append(parts, "NSWindowStyleMaskDocModalWindow") }
-	if e&NSWindowStyleMaskNonactivatingPanel != 0 { parts = append(parts, "NSWindowStyleMaskNonactivatingPanel") }
-	if e&NSWindowStyleMaskHUDWindow != 0 { parts = append(parts, "NSWindowStyleMaskHUDWindow") }
-	if len(parts) == 0 { return "0" }
+	if e&NSWindowStyleMaskTitled != 0 {
+		parts = append(parts, "NSWindowStyleMaskTitled")
+	}
+	if e&NSWindowStyleMaskClosable != 0 {
+		parts = append(parts, "NSWindowStyleMaskClosable")
+	}
+	if e&NSWindowStyleMaskMiniaturizable != 0 {
+		parts = append(parts, "NSWindowStyleMaskMiniaturizable")
+	}
+	if e&NSWindowStyleMaskResizable != 0 {
+		parts = append(parts, "NSWindowStyleMaskResizable")
+	}
+	if e&NSWindowStyleMaskTexturedBackground != 0 {
+		parts = append(parts, "NSWindowStyleMaskTexturedBackground")
+	}
+	if e&NSWindowStyleMaskUnifiedTitleAndToolbar != 0 {
+		parts = append(parts, "NSWindowStyleMaskUnifiedTitleAndToolbar")
+	}
+	if e&NSWindowStyleMaskFullScreen != 0 {
+		parts = append(parts, "NSWindowStyleMaskFullScreen")
+	}
+	if e&NSWindowStyleMaskFullSizeContentView != 0 {
+		parts = append(parts, "NSWindowStyleMaskFullSizeContentView")
+	}
+	if e&NSWindowStyleMaskUtilityWindow != 0 {
+		parts = append(parts, "NSWindowStyleMaskUtilityWindow")
+	}
+	if e&NSWindowStyleMaskDocModalWindow != 0 {
+		parts = append(parts, "NSWindowStyleMaskDocModalWindow")
+	}
+	if e&NSWindowStyleMaskNonactivatingPanel != 0 {
+		parts = append(parts, "NSWindowStyleMaskNonactivatingPanel")
+	}
+	if e&NSWindowStyleMaskHUDWindow != 0 {
+		parts = append(parts, "NSWindowStyleMaskHUDWindow")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -7471,8 +8327,8 @@ func (e NSWindowStyleMask) String() string {
 type NSWindowTabbingMode int64
 
 const (
-	NSWindowTabbingModeAutomatic NSWindowTabbingMode = 0
-	NSWindowTabbingModePreferred NSWindowTabbingMode = 1
+	NSWindowTabbingModeAutomatic  NSWindowTabbingMode = 0
+	NSWindowTabbingModePreferred  NSWindowTabbingMode = 1
 	NSWindowTabbingModeDisallowed NSWindowTabbingMode = 2
 )
 
@@ -7494,7 +8350,7 @@ type NSWindowTitleVisibility int64
 
 const (
 	NSWindowTitleVisible NSWindowTitleVisibility = 0
-	NSWindowTitleHidden NSWindowTitleVisibility = 1
+	NSWindowTitleHidden  NSWindowTitleVisibility = 1
 )
 
 func (e NSWindowTitleVisibility) String() string {
@@ -7512,10 +8368,10 @@ func (e NSWindowTitleVisibility) String() string {
 type NSWindowToolbarStyle int64
 
 const (
-	NSWindowToolbarStyleAutomatic NSWindowToolbarStyle = 0
-	NSWindowToolbarStyleExpanded NSWindowToolbarStyle = 1
-	NSWindowToolbarStylePreference NSWindowToolbarStyle = 2
-	NSWindowToolbarStyleUnified NSWindowToolbarStyle = 3
+	NSWindowToolbarStyleAutomatic      NSWindowToolbarStyle = 0
+	NSWindowToolbarStyleExpanded       NSWindowToolbarStyle = 1
+	NSWindowToolbarStylePreference     NSWindowToolbarStyle = 2
+	NSWindowToolbarStyleUnified        NSWindowToolbarStyle = 3
 	NSWindowToolbarStyleUnifiedCompact NSWindowToolbarStyle = 4
 )
 
@@ -7539,8 +8395,8 @@ func (e NSWindowToolbarStyle) String() string {
 type NSWindowUserTabbingPreference int64
 
 const (
-	NSWindowUserTabbingPreferenceManual NSWindowUserTabbingPreference = 0
-	NSWindowUserTabbingPreferenceAlways NSWindowUserTabbingPreference = 1
+	NSWindowUserTabbingPreferenceManual       NSWindowUserTabbingPreference = 0
+	NSWindowUserTabbingPreferenceAlways       NSWindowUserTabbingPreference = 1
 	NSWindowUserTabbingPreferenceInFullScreen NSWindowUserTabbingPreference = 2
 )
 
@@ -7561,8 +8417,8 @@ type NSWorkspaceAuthorizationType int64
 
 const (
 	NSWorkspaceAuthorizationTypeCreateSymbolicLink NSWorkspaceAuthorizationType = 0
-	NSWorkspaceAuthorizationTypeSetAttributes NSWorkspaceAuthorizationType = 1
-	NSWorkspaceAuthorizationTypeReplaceFile NSWorkspaceAuthorizationType = 2
+	NSWorkspaceAuthorizationTypeSetAttributes      NSWorkspaceAuthorizationType = 1
+	NSWorkspaceAuthorizationTypeReplaceFile        NSWorkspaceAuthorizationType = 2
 )
 
 func (e NSWorkspaceAuthorizationType) String() string {
@@ -7582,14 +8438,20 @@ type NSWorkspaceIconCreationOptions uint64
 
 const (
 	NSExcludeQuickDrawElementsIconCreationOption NSWorkspaceIconCreationOptions = 2
-	NSExclude10_4ElementsIconCreationOption NSWorkspaceIconCreationOptions = 4
+	NSExclude10_4ElementsIconCreationOption      NSWorkspaceIconCreationOptions = 4
 )
 
 func (e NSWorkspaceIconCreationOptions) String() string {
 	var parts []string
-	if e&NSExcludeQuickDrawElementsIconCreationOption != 0 { parts = append(parts, "NSExcludeQuickDrawElementsIconCreationOption") }
-	if e&NSExclude10_4ElementsIconCreationOption != 0 { parts = append(parts, "NSExclude10_4ElementsIconCreationOption") }
-	if len(parts) == 0 { return "0" }
+	if e&NSExcludeQuickDrawElementsIconCreationOption != 0 {
+		parts = append(parts, "NSExcludeQuickDrawElementsIconCreationOption")
+	}
+	if e&NSExclude10_4ElementsIconCreationOption != 0 {
+		parts = append(parts, "NSExclude10_4ElementsIconCreationOption")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -7597,42 +8459,68 @@ func (e NSWorkspaceIconCreationOptions) String() string {
 type NSWorkspaceLaunchOptions uint64
 
 const (
-	NSWorkspaceLaunchAndPrint NSWorkspaceLaunchOptions = 2
-	NSWorkspaceLaunchWithErrorPresentation NSWorkspaceLaunchOptions = 64
+	NSWorkspaceLaunchAndPrint                 NSWorkspaceLaunchOptions = 2
+	NSWorkspaceLaunchWithErrorPresentation    NSWorkspaceLaunchOptions = 64
 	NSWorkspaceLaunchInhibitingBackgroundOnly NSWorkspaceLaunchOptions = 128
-	NSWorkspaceLaunchWithoutAddingToRecents NSWorkspaceLaunchOptions = 256
-	NSWorkspaceLaunchWithoutActivation NSWorkspaceLaunchOptions = 512
-	NSWorkspaceLaunchAsync NSWorkspaceLaunchOptions = 65536
-	NSWorkspaceLaunchNewInstance NSWorkspaceLaunchOptions = 524288
-	NSWorkspaceLaunchAndHide NSWorkspaceLaunchOptions = 1048576
-	NSWorkspaceLaunchAndHideOthers NSWorkspaceLaunchOptions = 2097152
-	NSWorkspaceLaunchDefault NSWorkspaceLaunchOptions = 65536
-	NSWorkspaceLaunchAllowingClassicStartup NSWorkspaceLaunchOptions = 131072
-	NSWorkspaceLaunchPreferringClassic NSWorkspaceLaunchOptions = 262144
+	NSWorkspaceLaunchWithoutAddingToRecents   NSWorkspaceLaunchOptions = 256
+	NSWorkspaceLaunchWithoutActivation        NSWorkspaceLaunchOptions = 512
+	NSWorkspaceLaunchAsync                    NSWorkspaceLaunchOptions = 65536
+	NSWorkspaceLaunchNewInstance              NSWorkspaceLaunchOptions = 524288
+	NSWorkspaceLaunchAndHide                  NSWorkspaceLaunchOptions = 1048576
+	NSWorkspaceLaunchAndHideOthers            NSWorkspaceLaunchOptions = 2097152
+	NSWorkspaceLaunchDefault                  NSWorkspaceLaunchOptions = 65536
+	NSWorkspaceLaunchAllowingClassicStartup   NSWorkspaceLaunchOptions = 131072
+	NSWorkspaceLaunchPreferringClassic        NSWorkspaceLaunchOptions = 262144
 )
 
 func (e NSWorkspaceLaunchOptions) String() string {
 	var parts []string
-	if e&NSWorkspaceLaunchAndPrint != 0 { parts = append(parts, "NSWorkspaceLaunchAndPrint") }
-	if e&NSWorkspaceLaunchWithErrorPresentation != 0 { parts = append(parts, "NSWorkspaceLaunchWithErrorPresentation") }
-	if e&NSWorkspaceLaunchInhibitingBackgroundOnly != 0 { parts = append(parts, "NSWorkspaceLaunchInhibitingBackgroundOnly") }
-	if e&NSWorkspaceLaunchWithoutAddingToRecents != 0 { parts = append(parts, "NSWorkspaceLaunchWithoutAddingToRecents") }
-	if e&NSWorkspaceLaunchWithoutActivation != 0 { parts = append(parts, "NSWorkspaceLaunchWithoutActivation") }
-	if e&NSWorkspaceLaunchAsync != 0 { parts = append(parts, "NSWorkspaceLaunchAsync") }
-	if e&NSWorkspaceLaunchNewInstance != 0 { parts = append(parts, "NSWorkspaceLaunchNewInstance") }
-	if e&NSWorkspaceLaunchAndHide != 0 { parts = append(parts, "NSWorkspaceLaunchAndHide") }
-	if e&NSWorkspaceLaunchAndHideOthers != 0 { parts = append(parts, "NSWorkspaceLaunchAndHideOthers") }
-	if e&NSWorkspaceLaunchDefault != 0 { parts = append(parts, "NSWorkspaceLaunchDefault") }
-	if e&NSWorkspaceLaunchAllowingClassicStartup != 0 { parts = append(parts, "NSWorkspaceLaunchAllowingClassicStartup") }
-	if e&NSWorkspaceLaunchPreferringClassic != 0 { parts = append(parts, "NSWorkspaceLaunchPreferringClassic") }
-	if len(parts) == 0 { return "0" }
+	if e&NSWorkspaceLaunchAndPrint != 0 {
+		parts = append(parts, "NSWorkspaceLaunchAndPrint")
+	}
+	if e&NSWorkspaceLaunchWithErrorPresentation != 0 {
+		parts = append(parts, "NSWorkspaceLaunchWithErrorPresentation")
+	}
+	if e&NSWorkspaceLaunchInhibitingBackgroundOnly != 0 {
+		parts = append(parts, "NSWorkspaceLaunchInhibitingBackgroundOnly")
+	}
+	if e&NSWorkspaceLaunchWithoutAddingToRecents != 0 {
+		parts = append(parts, "NSWorkspaceLaunchWithoutAddingToRecents")
+	}
+	if e&NSWorkspaceLaunchWithoutActivation != 0 {
+		parts = append(parts, "NSWorkspaceLaunchWithoutActivation")
+	}
+	if e&NSWorkspaceLaunchAsync != 0 {
+		parts = append(parts, "NSWorkspaceLaunchAsync")
+	}
+	if e&NSWorkspaceLaunchNewInstance != 0 {
+		parts = append(parts, "NSWorkspaceLaunchNewInstance")
+	}
+	if e&NSWorkspaceLaunchAndHide != 0 {
+		parts = append(parts, "NSWorkspaceLaunchAndHide")
+	}
+	if e&NSWorkspaceLaunchAndHideOthers != 0 {
+		parts = append(parts, "NSWorkspaceLaunchAndHideOthers")
+	}
+	if e&NSWorkspaceLaunchDefault != 0 {
+		parts = append(parts, "NSWorkspaceLaunchDefault")
+	}
+	if e&NSWorkspaceLaunchAllowingClassicStartup != 0 {
+		parts = append(parts, "NSWorkspaceLaunchAllowingClassicStartup")
+	}
+	if e&NSWorkspaceLaunchPreferringClassic != 0 {
+		parts = append(parts, "NSWorkspaceLaunchPreferringClassic")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSWritingDirection int64
 
 const (
-	NSWritingDirectionNatural NSWritingDirection = -1
+	NSWritingDirectionNatural     NSWritingDirection = -1
 	NSWritingDirectionLeftToRight NSWritingDirection = 0
 	NSWritingDirectionRightToLeft NSWritingDirection = 1
 )
@@ -7654,7 +8542,7 @@ type NSWritingDirectionFormatType int64
 
 const (
 	NSWritingDirectionEmbedding NSWritingDirectionFormatType = 0
-	NSWritingDirectionOverride NSWritingDirectionFormatType = 2
+	NSWritingDirectionOverride  NSWritingDirectionFormatType = 2
 )
 
 func (e NSWritingDirectionFormatType) String() string {
@@ -7671,10 +8559,10 @@ func (e NSWritingDirectionFormatType) String() string {
 type NSWritingToolsBehavior int64
 
 const (
-	NSWritingToolsBehaviorNone NSWritingToolsBehavior = -1
-	NSWritingToolsBehaviorDefault NSWritingToolsBehavior = 0
+	NSWritingToolsBehaviorNone     NSWritingToolsBehavior = -1
+	NSWritingToolsBehaviorDefault  NSWritingToolsBehavior = 0
 	NSWritingToolsBehaviorComplete NSWritingToolsBehavior = 1
-	NSWritingToolsBehaviorLimited NSWritingToolsBehavior = 2
+	NSWritingToolsBehaviorLimited  NSWritingToolsBehavior = 2
 )
 
 func (e NSWritingToolsBehavior) String() string {
@@ -7692,7 +8580,7 @@ func (e NSWritingToolsBehavior) String() string {
 	}
 }
 
-// Options that indicate how much of your content Writing Tools requested. At the start of any Writing Tools interaction, you provide the text for the system to evaluate from your ``NSWritingToolsCoordinator/Delegate`` object. The request for your content comes with a scope constant that indicates how much of your view’s text to provide.
+// Options that indicate how much of your content Writing Tools requested. At the start of any Writing Tools interaction, you provide the text for the system to evaluate from your “NSWritingToolsCoordinator/Delegate“ object. The request for your content comes with a scope constant that indicates how much of your view’s text to provide.
 type NSWritingToolsCoordinatorContextScope int64
 
 const (
@@ -7717,7 +8605,7 @@ func (e NSWritingToolsCoordinatorContextScope) String() string {
 	}
 }
 
-// The states that indicate the current activity, if any, Writing Tools is performing in your view. Making changes to your view requires several different levels of interaction. Initially, Writing Tools displays its UI and collects information about what the person wants to do. When the person selects an operation, Writing Tools sends the relevant details to a large language model (LLM) and processes the results. It then works with the custom view to integrate any changes into the view’s text storage. During each of these activities, the coordinator reflects what’s happening in its ``NSWritingToolsCoordinator/state`` property. You can use the current state as a guide to making decisions in other parts of your view.
+// The states that indicate the current activity, if any, Writing Tools is performing in your view. Making changes to your view requires several different levels of interaction. Initially, Writing Tools displays its UI and collects information about what the person wants to do. When the person selects an operation, Writing Tools sends the relevant details to a large language model (LLM) and processes the results. It then works with the custom view to integrate any changes into the view’s text storage. During each of these activities, the coordinator reflects what’s happening in its “NSWritingToolsCoordinator/state“ property. You can use the current state as a guide to making decisions in other parts of your view.
 type NSWritingToolsCoordinatorState int64
 
 const (
@@ -7779,7 +8667,7 @@ func (e NSWritingToolsCoordinatorTextAnimation) String() string {
 	}
 }
 
-// Options that indicate whether Writing Tools is animating changes to your view’s text. During an operation, Writing Tools delivers replacement text to the delegate of the active ``NSWritingToolsCoordinator`` object. Depending on the configured experience for your view, it delivers these changes as either interactive or noninteractive replacements. For interactive replacements, Writing Tools animates the change automatically and provides you with the information you need to perform any related animations.
+// Options that indicate whether Writing Tools is animating changes to your view’s text. During an operation, Writing Tools delivers replacement text to the delegate of the active “NSWritingToolsCoordinator“ object. Depending on the configured experience for your view, it delivers these changes as either interactive or noninteractive replacements. For interactive replacements, Writing Tools animates the change automatically and provides you with the information you need to perform any related animations.
 type NSWritingToolsCoordinatorTextReplacementReason int64
 
 const (
@@ -7800,7 +8688,7 @@ func (e NSWritingToolsCoordinatorTextReplacementReason) String() string {
 	}
 }
 
-// Constants that specify the reason you updated your view’s content outside of the Writing Tools workflow. If you modify your view’s text storage while Writing Tools is active, report those changes to your ``NSWritingToolsCoordinator`` object so it can track them correctly. Call the ``NSWritingToolsCoordinator/updateRange(_:with:reason:forContextWithIdentifier:)`` method to report changes that occur inside one of your context objects. Call the ``NSWritingToolsCoordinator/updateForReflowedTextInContextWithIdentifier(_:)`` method for changes that affect the layout of your text, such as text insertions before a context object or changes to your view’s frame rectangle.
+// Constants that specify the reason you updated your view’s content outside of the Writing Tools workflow. If you modify your view’s text storage while Writing Tools is active, report those changes to your “NSWritingToolsCoordinator“ object so it can track them correctly. Call the “NSWritingToolsCoordinator/updateRange(_:with:reason:forContextWithIdentifier:)“ method to report changes that occur inside one of your context objects. Call the “NSWritingToolsCoordinator/updateForReflowedTextInContextWithIdentifier(_:)“ method for changes that affect the layout of your text, such as text insertions before a context object or changes to your view’s frame rectangle.
 type NSWritingToolsCoordinatorTextUpdateReason int64
 
 const (
@@ -7824,30 +8712,42 @@ func (e NSWritingToolsCoordinatorTextUpdateReason) String() string {
 type NSWritingToolsResultOptions uint64
 
 const (
-	NSWritingToolsResultDefault NSWritingToolsResultOptions = 0
-	NSWritingToolsResultPlainText NSWritingToolsResultOptions = 1
-	NSWritingToolsResultRichText NSWritingToolsResultOptions = 2
-	NSWritingToolsResultList NSWritingToolsResultOptions = 4
-	NSWritingToolsResultTable NSWritingToolsResultOptions = 8
+	NSWritingToolsResultDefault            NSWritingToolsResultOptions = 0
+	NSWritingToolsResultPlainText          NSWritingToolsResultOptions = 1
+	NSWritingToolsResultRichText           NSWritingToolsResultOptions = 2
+	NSWritingToolsResultList               NSWritingToolsResultOptions = 4
+	NSWritingToolsResultTable              NSWritingToolsResultOptions = 8
 	NSWritingToolsResultPresentationIntent NSWritingToolsResultOptions = 16
 )
 
 func (e NSWritingToolsResultOptions) String() string {
 	var parts []string
-	if e&NSWritingToolsResultPlainText != 0 { parts = append(parts, "NSWritingToolsResultPlainText") }
-	if e&NSWritingToolsResultRichText != 0 { parts = append(parts, "NSWritingToolsResultRichText") }
-	if e&NSWritingToolsResultList != 0 { parts = append(parts, "NSWritingToolsResultList") }
-	if e&NSWritingToolsResultTable != 0 { parts = append(parts, "NSWritingToolsResultTable") }
-	if e&NSWritingToolsResultPresentationIntent != 0 { parts = append(parts, "NSWritingToolsResultPresentationIntent") }
-	if len(parts) == 0 { return "0" }
+	if e&NSWritingToolsResultPlainText != 0 {
+		parts = append(parts, "NSWritingToolsResultPlainText")
+	}
+	if e&NSWritingToolsResultRichText != 0 {
+		parts = append(parts, "NSWritingToolsResultRichText")
+	}
+	if e&NSWritingToolsResultList != 0 {
+		parts = append(parts, "NSWritingToolsResultList")
+	}
+	if e&NSWritingToolsResultTable != 0 {
+		parts = append(parts, "NSWritingToolsResultTable")
+	}
+	if e&NSWritingToolsResultPresentationIntent != 0 {
+		parts = append(parts, "NSWritingToolsResultPresentationIntent")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NXMouseButton int64
 
 const (
-	NX_OneButton NXMouseButton = 0
-	NX_LeftButton NXMouseButton = 1
+	NX_OneButton   NXMouseButton = 0
+	NX_LeftButton  NXMouseButton = 1
 	NX_RightButton NXMouseButton = 2
 )
 
@@ -7867,7 +8767,7 @@ func (e NXMouseButton) String() string {
 type PMPageToPaperMappingType int64
 
 const (
-	KPMPageToPaperMappingNone PMPageToPaperMappingType = 1
+	KPMPageToPaperMappingNone       PMPageToPaperMappingType = 1
 	KPMPageToPaperMappingScaleToFit PMPageToPaperMappingType = 2
 )
 
@@ -7886,8 +8786,8 @@ type Acl_entry_id_t int64
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
-	ACL_NEXT_ENTRY Acl_entry_id_t = -1
-	ACL_LAST_ENTRY Acl_entry_id_t = -2
+	ACL_NEXT_ENTRY  Acl_entry_id_t = -1
+	ACL_LAST_ENTRY  Acl_entry_id_t = -2
 )
 
 func (e Acl_entry_id_t) String() string {
@@ -7906,13 +8806,13 @@ func (e Acl_entry_id_t) String() string {
 type Acl_flag_t int64
 
 const (
-	ACL_FLAG_DEFER_INHERIT Acl_flag_t = 1
-	ACL_FLAG_NO_INHERIT Acl_flag_t = 131072
-	ACL_ENTRY_INHERITED Acl_flag_t = 16
-	ACL_ENTRY_FILE_INHERIT Acl_flag_t = 32
+	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
+	ACL_FLAG_NO_INHERIT         Acl_flag_t = 131072
+	ACL_ENTRY_INHERITED         Acl_flag_t = 16
+	ACL_ENTRY_FILE_INHERIT      Acl_flag_t = 32
 	ACL_ENTRY_DIRECTORY_INHERIT Acl_flag_t = 64
-	ACL_ENTRY_LIMIT_INHERIT Acl_flag_t = 128
-	ACL_ENTRY_ONLY_INHERIT Acl_flag_t = 256
+	ACL_ENTRY_LIMIT_INHERIT     Acl_flag_t = 128
+	ACL_ENTRY_ONLY_INHERIT      Acl_flag_t = 256
 )
 
 func (e Acl_flag_t) String() string {
@@ -7939,24 +8839,24 @@ func (e Acl_flag_t) String() string {
 type Acl_perm_t int64
 
 const (
-	ACL_READ_DATA Acl_perm_t = 2
-	ACL_LIST_DIRECTORY Acl_perm_t = 2
-	ACL_WRITE_DATA Acl_perm_t = 4
-	ACL_ADD_FILE Acl_perm_t = 4
-	ACL_EXECUTE Acl_perm_t = 8
-	ACL_SEARCH Acl_perm_t = 8
-	ACL_DELETE Acl_perm_t = 16
-	ACL_APPEND_DATA Acl_perm_t = 32
-	ACL_ADD_SUBDIRECTORY Acl_perm_t = 32
-	ACL_DELETE_CHILD Acl_perm_t = 64
-	ACL_READ_ATTRIBUTES Acl_perm_t = 128
-	ACL_WRITE_ATTRIBUTES Acl_perm_t = 256
-	ACL_READ_EXTATTRIBUTES Acl_perm_t = 512
+	ACL_READ_DATA           Acl_perm_t = 2
+	ACL_LIST_DIRECTORY      Acl_perm_t = 2
+	ACL_WRITE_DATA          Acl_perm_t = 4
+	ACL_ADD_FILE            Acl_perm_t = 4
+	ACL_EXECUTE             Acl_perm_t = 8
+	ACL_SEARCH              Acl_perm_t = 8
+	ACL_DELETE              Acl_perm_t = 16
+	ACL_APPEND_DATA         Acl_perm_t = 32
+	ACL_ADD_SUBDIRECTORY    Acl_perm_t = 32
+	ACL_DELETE_CHILD        Acl_perm_t = 64
+	ACL_READ_ATTRIBUTES     Acl_perm_t = 128
+	ACL_WRITE_ATTRIBUTES    Acl_perm_t = 256
+	ACL_READ_EXTATTRIBUTES  Acl_perm_t = 512
 	ACL_WRITE_EXTATTRIBUTES Acl_perm_t = 1024
-	ACL_READ_SECURITY Acl_perm_t = 2048
-	ACL_WRITE_SECURITY Acl_perm_t = 4096
-	ACL_CHANGE_OWNER Acl_perm_t = 8192
-	ACL_SYNCHRONIZE Acl_perm_t = 1048576
+	ACL_READ_SECURITY       Acl_perm_t = 2048
+	ACL_WRITE_SECURITY      Acl_perm_t = 4096
+	ACL_CHANGE_OWNER        Acl_perm_t = 8192
+	ACL_SYNCHRONIZE         Acl_perm_t = 1048576
 )
 
 func (e Acl_perm_t) String() string {
@@ -7997,9 +8897,9 @@ func (e Acl_perm_t) String() string {
 type Acl_tag_t int64
 
 const (
-	ACL_UNDEFINED_TAG Acl_tag_t = 0
+	ACL_UNDEFINED_TAG  Acl_tag_t = 0
 	ACL_EXTENDED_ALLOW Acl_tag_t = 1
-	ACL_EXTENDED_DENY Acl_tag_t = 2
+	ACL_EXTENDED_DENY  Acl_tag_t = 2
 )
 
 func (e Acl_tag_t) String() string {
@@ -8019,12 +8919,12 @@ type Acl_type_t int64
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
-	ACL_TYPE_ACCESS Acl_type_t = 0
-	ACL_TYPE_DEFAULT Acl_type_t = 1
-	ACL_TYPE_AFS Acl_type_t = 2
-	ACL_TYPE_CODA Acl_type_t = 3
-	ACL_TYPE_NTFS Acl_type_t = 4
-	ACL_TYPE_NWFS Acl_type_t = 5
+	ACL_TYPE_ACCESS   Acl_type_t = 0
+	ACL_TYPE_DEFAULT  Acl_type_t = 1
+	ACL_TYPE_AFS      Acl_type_t = 2
+	ACL_TYPE_CODA     Acl_type_t = 3
+	ACL_TYPE_NTFS     Acl_type_t = 4
+	ACL_TYPE_NWFS     Acl_type_t = 5
 )
 
 func (e Acl_type_t) String() string {
@@ -8051,14 +8951,14 @@ func (e Acl_type_t) String() string {
 type Clockid_t int64
 
 const (
-	_CLOCK_REALTIME Clockid_t = 0
-	_CLOCK_MONOTONIC Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW Clockid_t = 4
+	_CLOCK_REALTIME             Clockid_t = 0
+	_CLOCK_MONOTONIC            Clockid_t = 6
+	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
 	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID Clockid_t = 16
+	_CLOCK_UPTIME_RAW           Clockid_t = 8
+	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
+	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
+	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
 )
 
 func (e Clockid_t) String() string {
@@ -8087,9 +8987,9 @@ func (e Clockid_t) String() string {
 type Dispatch_autorelease_frequency_t uint64
 
 const (
-	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT Dispatch_autorelease_frequency_t = 0
+	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT   Dispatch_autorelease_frequency_t = 0
 	DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM Dispatch_autorelease_frequency_t = 1
-	DISPATCH_AUTORELEASE_FREQUENCY_NEVER Dispatch_autorelease_frequency_t = 2
+	DISPATCH_AUTORELEASE_FREQUENCY_NEVER     Dispatch_autorelease_frequency_t = 2
 )
 
 func (e Dispatch_autorelease_frequency_t) String() string {
@@ -8108,36 +9008,50 @@ func (e Dispatch_autorelease_frequency_t) String() string {
 type Dispatch_block_flags_t uint64
 
 const (
-	DISPATCH_BLOCK_BARRIER Dispatch_block_flags_t = 1
-	DISPATCH_BLOCK_DETACHED Dispatch_block_flags_t = 2
-	DISPATCH_BLOCK_ASSIGN_CURRENT Dispatch_block_flags_t = 4
-	DISPATCH_BLOCK_NO_QOS_CLASS Dispatch_block_flags_t = 8
+	DISPATCH_BLOCK_BARRIER           Dispatch_block_flags_t = 1
+	DISPATCH_BLOCK_DETACHED          Dispatch_block_flags_t = 2
+	DISPATCH_BLOCK_ASSIGN_CURRENT    Dispatch_block_flags_t = 4
+	DISPATCH_BLOCK_NO_QOS_CLASS      Dispatch_block_flags_t = 8
 	DISPATCH_BLOCK_INHERIT_QOS_CLASS Dispatch_block_flags_t = 16
 	DISPATCH_BLOCK_ENFORCE_QOS_CLASS Dispatch_block_flags_t = 32
 )
 
 func (e Dispatch_block_flags_t) String() string {
 	var parts []string
-	if e&DISPATCH_BLOCK_BARRIER != 0 { parts = append(parts, "DISPATCH_BLOCK_BARRIER") }
-	if e&DISPATCH_BLOCK_DETACHED != 0 { parts = append(parts, "DISPATCH_BLOCK_DETACHED") }
-	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 { parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT") }
-	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS") }
-	if len(parts) == 0 { return "0" }
+	if e&DISPATCH_BLOCK_BARRIER != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_BARRIER")
+	}
+	if e&DISPATCH_BLOCK_DETACHED != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_DETACHED")
+	}
+	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT")
+	}
+	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Filesec_property_t int64
 
 const (
-	FILESEC_OWNER Filesec_property_t = 1
-	FILESEC_GROUP Filesec_property_t = 2
-	FILESEC_UUID Filesec_property_t = 3
-	FILESEC_MODE Filesec_property_t = 4
-	FILESEC_ACL Filesec_property_t = 5
-	FILESEC_GRPUUID Filesec_property_t = 6
-	FILESEC_ACL_RAW Filesec_property_t = 100
+	FILESEC_OWNER         Filesec_property_t = 1
+	FILESEC_GROUP         Filesec_property_t = 2
+	FILESEC_UUID          Filesec_property_t = 3
+	FILESEC_MODE          Filesec_property_t = 4
+	FILESEC_ACL           Filesec_property_t = 5
+	FILESEC_GRPUUID       Filesec_property_t = 6
+	FILESEC_ACL_RAW       Filesec_property_t = 100
 	FILESEC_ACL_ALLOCSIZE Filesec_property_t = 101
 )
 
@@ -8167,8 +9081,8 @@ func (e Filesec_property_t) String() string {
 type Idtype_t int64
 
 const (
-	P_ALL Idtype_t = 0
-	P_PID Idtype_t = 1
+	P_ALL  Idtype_t = 0
+	P_PID  Idtype_t = 1
 	P_PGID Idtype_t = 2
 )
 
@@ -8188,62 +9102,62 @@ func (e Idtype_t) String() string {
 type Ipc_info_object_type_t int64
 
 const (
-	IPC_OTYPE_NONE Ipc_info_object_type_t = 0
-	IPC_OTYPE_THREAD_CONTROL Ipc_info_object_type_t = 1
-	IPC_OTYPE_TASK_CONTROL Ipc_info_object_type_t = 2
-	IPC_OTYPE_HOST Ipc_info_object_type_t = 3
-	IPC_OTYPE_HOST_PRIV Ipc_info_object_type_t = 4
-	IPC_OTYPE_PROCESSOR Ipc_info_object_type_t = 5
-	IPC_OTYPE_PROCESSOR_SET Ipc_info_object_type_t = 6
-	IPC_OTYPE_PROCESSOR_SET_NAME Ipc_info_object_type_t = 7
-	IPC_OTYPE_TIMER Ipc_info_object_type_t = 8
-	IPC_OTYPE_PORT_SUBST_ONCE Ipc_info_object_type_t = 9
-	IPC_OTYPE_MIG Ipc_info_object_type_t = 10
-	IPC_OTYPE_MEMORY_OBJECT Ipc_info_object_type_t = 11
-	IPC_OTYPE_XMM_PAGER Ipc_info_object_type_t = 12
-	IPC_OTYPE_XMM_KERNEL Ipc_info_object_type_t = 13
-	IPC_OTYPE_XMM_REPLY Ipc_info_object_type_t = 14
-	IPC_OTYPE_UND_REPLY Ipc_info_object_type_t = 15
-	IPC_OTYPE_HOST_NOTIFY Ipc_info_object_type_t = 16
-	IPC_OTYPE_HOST_SECURITY Ipc_info_object_type_t = 17
-	IPC_OTYPE_LEDGER Ipc_info_object_type_t = 18
-	IPC_OTYPE_MAIN_DEVICE Ipc_info_object_type_t = 19
-	IPC_OTYPE_TASK_NAME Ipc_info_object_type_t = 20
-	IPC_OTYPE_SUBSYSTEM Ipc_info_object_type_t = 21
-	IPC_OTYPE_IO_DONE_QUEUE Ipc_info_object_type_t = 22
-	IPC_OTYPE_SEMAPHORE Ipc_info_object_type_t = 23
-	IPC_OTYPE_LOCK_SET Ipc_info_object_type_t = 24
-	IPC_OTYPE_CLOCK Ipc_info_object_type_t = 25
-	IPC_OTYPE_CLOCK_CTRL Ipc_info_object_type_t = 26
-	IPC_OTYPE_IOKIT_IDENT Ipc_info_object_type_t = 27
-	IPC_OTYPE_NAMED_ENTRY Ipc_info_object_type_t = 28
-	IPC_OTYPE_IOKIT_CONNECT Ipc_info_object_type_t = 29
-	IPC_OTYPE_IOKIT_OBJECT Ipc_info_object_type_t = 30
-	IPC_OTYPE_UPL Ipc_info_object_type_t = 31
-	IPC_OTYPE_MEM_OBJ_CONTROL Ipc_info_object_type_t = 32
-	IPC_OTYPE_AU_SESSIONPORT Ipc_info_object_type_t = 33
-	IPC_OTYPE_FILEPORT Ipc_info_object_type_t = 34
-	IPC_OTYPE_LABELH Ipc_info_object_type_t = 35
-	IPC_OTYPE_TASK_RESUME Ipc_info_object_type_t = 36
-	IPC_OTYPE_VOUCHER Ipc_info_object_type_t = 37
+	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
+	IPC_OTYPE_THREAD_CONTROL       Ipc_info_object_type_t = 1
+	IPC_OTYPE_TASK_CONTROL         Ipc_info_object_type_t = 2
+	IPC_OTYPE_HOST                 Ipc_info_object_type_t = 3
+	IPC_OTYPE_HOST_PRIV            Ipc_info_object_type_t = 4
+	IPC_OTYPE_PROCESSOR            Ipc_info_object_type_t = 5
+	IPC_OTYPE_PROCESSOR_SET        Ipc_info_object_type_t = 6
+	IPC_OTYPE_PROCESSOR_SET_NAME   Ipc_info_object_type_t = 7
+	IPC_OTYPE_TIMER                Ipc_info_object_type_t = 8
+	IPC_OTYPE_PORT_SUBST_ONCE      Ipc_info_object_type_t = 9
+	IPC_OTYPE_MIG                  Ipc_info_object_type_t = 10
+	IPC_OTYPE_MEMORY_OBJECT        Ipc_info_object_type_t = 11
+	IPC_OTYPE_XMM_PAGER            Ipc_info_object_type_t = 12
+	IPC_OTYPE_XMM_KERNEL           Ipc_info_object_type_t = 13
+	IPC_OTYPE_XMM_REPLY            Ipc_info_object_type_t = 14
+	IPC_OTYPE_UND_REPLY            Ipc_info_object_type_t = 15
+	IPC_OTYPE_HOST_NOTIFY          Ipc_info_object_type_t = 16
+	IPC_OTYPE_HOST_SECURITY        Ipc_info_object_type_t = 17
+	IPC_OTYPE_LEDGER               Ipc_info_object_type_t = 18
+	IPC_OTYPE_MAIN_DEVICE          Ipc_info_object_type_t = 19
+	IPC_OTYPE_TASK_NAME            Ipc_info_object_type_t = 20
+	IPC_OTYPE_SUBSYSTEM            Ipc_info_object_type_t = 21
+	IPC_OTYPE_IO_DONE_QUEUE        Ipc_info_object_type_t = 22
+	IPC_OTYPE_SEMAPHORE            Ipc_info_object_type_t = 23
+	IPC_OTYPE_LOCK_SET             Ipc_info_object_type_t = 24
+	IPC_OTYPE_CLOCK                Ipc_info_object_type_t = 25
+	IPC_OTYPE_CLOCK_CTRL           Ipc_info_object_type_t = 26
+	IPC_OTYPE_IOKIT_IDENT          Ipc_info_object_type_t = 27
+	IPC_OTYPE_NAMED_ENTRY          Ipc_info_object_type_t = 28
+	IPC_OTYPE_IOKIT_CONNECT        Ipc_info_object_type_t = 29
+	IPC_OTYPE_IOKIT_OBJECT         Ipc_info_object_type_t = 30
+	IPC_OTYPE_UPL                  Ipc_info_object_type_t = 31
+	IPC_OTYPE_MEM_OBJ_CONTROL      Ipc_info_object_type_t = 32
+	IPC_OTYPE_AU_SESSIONPORT       Ipc_info_object_type_t = 33
+	IPC_OTYPE_FILEPORT             Ipc_info_object_type_t = 34
+	IPC_OTYPE_LABELH               Ipc_info_object_type_t = 35
+	IPC_OTYPE_TASK_RESUME          Ipc_info_object_type_t = 36
+	IPC_OTYPE_VOUCHER              Ipc_info_object_type_t = 37
 	IPC_OTYPE_VOUCHER_ATTR_CONTROL Ipc_info_object_type_t = 38
-	IPC_OTYPE_WORK_INTERVAL Ipc_info_object_type_t = 39
-	IPC_OTYPE_UX_HANDLER Ipc_info_object_type_t = 40
-	IPC_OTYPE_UEXT_OBJECT Ipc_info_object_type_t = 41
-	IPC_OTYPE_ARCADE_REG Ipc_info_object_type_t = 42
-	IPC_OTYPE_EVENTLINK Ipc_info_object_type_t = 43
-	IPC_OTYPE_TASK_INSPECT Ipc_info_object_type_t = 44
-	IPC_OTYPE_TASK_READ Ipc_info_object_type_t = 45
-	IPC_OTYPE_THREAD_INSPECT Ipc_info_object_type_t = 46
-	IPC_OTYPE_THREAD_READ Ipc_info_object_type_t = 47
-	IPC_OTYPE_SUID_CRED Ipc_info_object_type_t = 48
-	IPC_OTYPE_HYPERVISOR Ipc_info_object_type_t = 49
-	IPC_OTYPE_TASK_ID_TOKEN Ipc_info_object_type_t = 50
-	IPC_OTYPE_TASK_FATAL Ipc_info_object_type_t = 51
-	IPC_OTYPE_KCDATA Ipc_info_object_type_t = 52
-	IPC_OTYPE_EXCLAVES_RESOURCE Ipc_info_object_type_t = 53
-	IPC_OTYPE_THREAD_RESUME Ipc_info_object_type_t = 54
-	IPC_OTYPE_UNKNOWN Ipc_info_object_type_t = 4294967295
+	IPC_OTYPE_WORK_INTERVAL        Ipc_info_object_type_t = 39
+	IPC_OTYPE_UX_HANDLER           Ipc_info_object_type_t = 40
+	IPC_OTYPE_UEXT_OBJECT          Ipc_info_object_type_t = 41
+	IPC_OTYPE_ARCADE_REG           Ipc_info_object_type_t = 42
+	IPC_OTYPE_EVENTLINK            Ipc_info_object_type_t = 43
+	IPC_OTYPE_TASK_INSPECT         Ipc_info_object_type_t = 44
+	IPC_OTYPE_TASK_READ            Ipc_info_object_type_t = 45
+	IPC_OTYPE_THREAD_INSPECT       Ipc_info_object_type_t = 46
+	IPC_OTYPE_THREAD_READ          Ipc_info_object_type_t = 47
+	IPC_OTYPE_SUID_CRED            Ipc_info_object_type_t = 48
+	IPC_OTYPE_HYPERVISOR           Ipc_info_object_type_t = 49
+	IPC_OTYPE_TASK_ID_TOKEN        Ipc_info_object_type_t = 50
+	IPC_OTYPE_TASK_FATAL           Ipc_info_object_type_t = 51
+	IPC_OTYPE_KCDATA               Ipc_info_object_type_t = 52
+	IPC_OTYPE_EXCLAVES_RESOURCE    Ipc_info_object_type_t = 53
+	IPC_OTYPE_THREAD_RESUME        Ipc_info_object_type_t = 54
+	IPC_OTYPE_UNKNOWN              Ipc_info_object_type_t = 4294967295
 )
 
 func (e Ipc_info_object_type_t) String() string {
@@ -8369,15 +9283,15 @@ type Launch_data_type_t int64
 
 const (
 	LAUNCH_DATA_DICTIONARY Launch_data_type_t = 1
-	LAUNCH_DATA_ARRAY Launch_data_type_t = 2
-	LAUNCH_DATA_FD Launch_data_type_t = 3
-	LAUNCH_DATA_INTEGER Launch_data_type_t = 4
-	LAUNCH_DATA_REAL Launch_data_type_t = 5
-	LAUNCH_DATA_BOOL Launch_data_type_t = 6
-	LAUNCH_DATA_STRING Launch_data_type_t = 7
-	LAUNCH_DATA_OPAQUE Launch_data_type_t = 8
-	LAUNCH_DATA_ERRNO Launch_data_type_t = 9
-	LAUNCH_DATA_MACHPORT Launch_data_type_t = 10
+	LAUNCH_DATA_ARRAY      Launch_data_type_t = 2
+	LAUNCH_DATA_FD         Launch_data_type_t = 3
+	LAUNCH_DATA_INTEGER    Launch_data_type_t = 4
+	LAUNCH_DATA_REAL       Launch_data_type_t = 5
+	LAUNCH_DATA_BOOL       Launch_data_type_t = 6
+	LAUNCH_DATA_STRING     Launch_data_type_t = 7
+	LAUNCH_DATA_OPAQUE     Launch_data_type_t = 8
+	LAUNCH_DATA_ERRNO      Launch_data_type_t = 9
+	LAUNCH_DATA_MACHPORT   Launch_data_type_t = 10
 )
 
 func (e Launch_data_type_t) String() string {
@@ -8415,7 +9329,9 @@ const (
 
 func (e Mach_vm_range_flags_t) String() string {
 	var parts []string
-	if len(parts) == 0 { return "0" }
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -8423,7 +9339,7 @@ type Mach_vm_range_flavor_t int64
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
-	MACH_VM_RANGE_FLAVOR_V1 Mach_vm_range_flavor_t = 1
+	MACH_VM_RANGE_FLAVOR_V1      Mach_vm_range_flavor_t = 1
 )
 
 func (e Mach_vm_range_flavor_t) String() string {
@@ -8441,8 +9357,8 @@ type Mach_vm_range_tag_t int64
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
-	MACH_VM_RANGE_DATA Mach_vm_range_tag_t = 1
-	MACH_VM_RANGE_FIXED Mach_vm_range_tag_t = 2
+	MACH_VM_RANGE_DATA    Mach_vm_range_tag_t = 1
+	MACH_VM_RANGE_FIXED   Mach_vm_range_tag_t = 2
 )
 
 func (e Mach_vm_range_tag_t) String() string {
@@ -8461,26 +9377,42 @@ func (e Mach_vm_range_tag_t) String() string {
 type Mpo_flags_t int64
 
 const (
-	MPO_PORT Mpo_flags_t = 0
-	MPO_SERVICE_PORT Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT Mpo_flags_t = 2048
-	MPO_REPLY_PORT Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT Mpo_flags_t = 32768
+	MPO_PORT                            Mpo_flags_t = 0
+	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
+	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
+	MPO_REPLY_PORT                      Mpo_flags_t = 4096
+	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
+	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
+	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
 	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
 )
 
 func (e Mpo_flags_t) String() string {
 	var parts []string
-	if e&MPO_SERVICE_PORT != 0 { parts = append(parts, "MPO_SERVICE_PORT") }
-	if e&MPO_CONNECTION_PORT != 0 { parts = append(parts, "MPO_CONNECTION_PORT") }
-	if e&MPO_REPLY_PORT != 0 { parts = append(parts, "MPO_REPLY_PORT") }
-	if e&MPO_WEAK_REPLY_PORT != 0 { parts = append(parts, "MPO_WEAK_REPLY_PORT") }
-	if e&MPO_NOTIFICATION_PORT != 0 { parts = append(parts, "MPO_NOTIFICATION_PORT") }
-	if e&MPO_EXCEPTION_PORT != 0 { parts = append(parts, "MPO_EXCEPTION_PORT") }
-	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 { parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY") }
-	if len(parts) == 0 { return "0" }
+	if e&MPO_SERVICE_PORT != 0 {
+		parts = append(parts, "MPO_SERVICE_PORT")
+	}
+	if e&MPO_CONNECTION_PORT != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT")
+	}
+	if e&MPO_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_REPLY_PORT")
+	}
+	if e&MPO_WEAK_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_WEAK_REPLY_PORT")
+	}
+	if e&MPO_NOTIFICATION_PORT != 0 {
+		parts = append(parts, "MPO_NOTIFICATION_PORT")
+	}
+	if e&MPO_EXCEPTION_PORT != 0 {
+		parts = append(parts, "MPO_EXCEPTION_PORT")
+	}
+	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -8502,41 +9434,45 @@ func (e Os_clockid_t) String() string {
 type Os_unfair_lock_flags_t int64
 
 const (
-	OS_UNFAIR_LOCK_FLAG_NONE Os_unfair_lock_flags_t = 0
+	OS_UNFAIR_LOCK_FLAG_NONE          Os_unfair_lock_flags_t = 0
 	OS_UNFAIR_LOCK_FLAG_ADAPTIVE_SPIN Os_unfair_lock_flags_t = 262144
 )
 
 func (e Os_unfair_lock_flags_t) String() string {
 	var parts []string
-	if e&OS_UNFAIR_LOCK_FLAG_ADAPTIVE_SPIN != 0 { parts = append(parts, "OS_UNFAIR_LOCK_FLAG_ADAPTIVE_SPIN") }
-	if len(parts) == 0 { return "0" }
+	if e&OS_UNFAIR_LOCK_FLAG_ADAPTIVE_SPIN != 0 {
+		parts = append(parts, "OS_UNFAIR_LOCK_FLAG_ADAPTIVE_SPIN")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Ptrauth_key int64
 
 const (
-	Ptrauth_key_none Ptrauth_key = -1
-	Ptrauth_key_asia Ptrauth_key = 0
-	Ptrauth_key_asib Ptrauth_key = 1
-	Ptrauth_key_asda Ptrauth_key = 2
-	Ptrauth_key_asdb Ptrauth_key = 3
+	Ptrauth_key_none                     Ptrauth_key = -1
+	Ptrauth_key_asia                     Ptrauth_key = 0
+	Ptrauth_key_asib                     Ptrauth_key = 1
+	Ptrauth_key_asda                     Ptrauth_key = 2
+	Ptrauth_key_asdb                     Ptrauth_key = 3
 	Ptrauth_key_process_independent_code Ptrauth_key = 0
-	Ptrauth_key_process_dependent_code Ptrauth_key = 1
+	Ptrauth_key_process_dependent_code   Ptrauth_key = 1
 	Ptrauth_key_process_independent_data Ptrauth_key = 2
-	Ptrauth_key_process_dependent_data Ptrauth_key = 3
-	Ptrauth_key_return_address Ptrauth_key = 1
-	Ptrauth_key_frame_pointer Ptrauth_key = 3
-	Ptrauth_key_function_pointer Ptrauth_key = 0
-	Ptrauth_key_block_function Ptrauth_key = 0
-	Ptrauth_key_cxx_vtable_pointer Ptrauth_key = 2
-	Ptrauth_key_method_list_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_isa_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_super_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_sel_pointer Ptrauth_key = 3
-	Ptrauth_key_objc_class_ro_pointer Ptrauth_key = 2
+	Ptrauth_key_process_dependent_data   Ptrauth_key = 3
+	Ptrauth_key_return_address           Ptrauth_key = 1
+	Ptrauth_key_frame_pointer            Ptrauth_key = 3
+	Ptrauth_key_function_pointer         Ptrauth_key = 0
+	Ptrauth_key_block_function           Ptrauth_key = 0
+	Ptrauth_key_cxx_vtable_pointer       Ptrauth_key = 2
+	Ptrauth_key_method_list_pointer      Ptrauth_key = 2
+	Ptrauth_key_objc_isa_pointer         Ptrauth_key = 2
+	Ptrauth_key_objc_super_pointer       Ptrauth_key = 2
+	Ptrauth_key_objc_sel_pointer         Ptrauth_key = 3
+	Ptrauth_key_objc_class_ro_pointer    Ptrauth_key = 2
 	Ptrauth_key_block_descriptor_pointer Ptrauth_key = 2
-	Ptrauth_key_init_fini_pointer Ptrauth_key = 0
+	Ptrauth_key_init_fini_pointer        Ptrauth_key = 0
 )
 
 func (e Ptrauth_key) String() string {
@@ -8560,11 +9496,11 @@ type Qos_class_t uint32
 
 const (
 	QOS_CLASS_USER_INTERACTIVE Qos_class_t = 33
-	QOS_CLASS_USER_INITIATED Qos_class_t = 25
-	QOS_CLASS_DEFAULT Qos_class_t = 21
-	QOS_CLASS_UTILITY Qos_class_t = 17
-	QOS_CLASS_BACKGROUND Qos_class_t = 9
-	QOS_CLASS_UNSPECIFIED Qos_class_t = 0
+	QOS_CLASS_USER_INITIATED   Qos_class_t = 25
+	QOS_CLASS_DEFAULT          Qos_class_t = 21
+	QOS_CLASS_UTILITY          Qos_class_t = 17
+	QOS_CLASS_BACKGROUND       Qos_class_t = 9
+	QOS_CLASS_UNSPECIFIED      Qos_class_t = 0
 )
 
 func (e Qos_class_t) String() string {
@@ -8589,22 +9525,22 @@ func (e Qos_class_t) String() string {
 type Virtual_memory_guard_exception_code_t int64
 
 const (
-	KGUARD_EXC_DEALLOC_GAP Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
 )
@@ -8655,59 +9591,73 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 type Xpc_listener_create_flags_t int64
 
 const (
-	XPC_LISTENER_CREATE_NONE Xpc_listener_create_flags_t = 0
-	XPC_LISTENER_CREATE_INACTIVE Xpc_listener_create_flags_t = 1
-	XPC_LISTENER_CREATE_FORCE_MACH Xpc_listener_create_flags_t = 2
+	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
+	XPC_LISTENER_CREATE_INACTIVE         Xpc_listener_create_flags_t = 1
+	XPC_LISTENER_CREATE_FORCE_MACH       Xpc_listener_create_flags_t = 2
 	XPC_LISTENER_CREATE_FORCE_XPCSERVICE Xpc_listener_create_flags_t = 4
 )
 
 func (e Xpc_listener_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_LISTENER_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE") }
-	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH") }
-	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_LISTENER_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Xpc_session_create_flags_t int64
 
 const (
-	XPC_SESSION_CREATE_NONE Xpc_session_create_flags_t = 0
-	XPC_SESSION_CREATE_INACTIVE Xpc_session_create_flags_t = 1
+	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0
+	XPC_SESSION_CREATE_INACTIVE        Xpc_session_create_flags_t = 1
 	XPC_SESSION_CREATE_MACH_PRIVILEGED Xpc_session_create_flags_t = 2
 )
 
 func (e Xpc_session_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_SESSION_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_SESSION_CREATE_INACTIVE") }
-	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 { parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_SESSION_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_INACTIVE")
+	}
+	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 const (
-	NSAccessibilityHourMinuteDateTimeComponentsFlag = 12
+	NSAccessibilityHourMinuteDateTimeComponentsFlag       = 12
 	NSAccessibilityHourMinuteSecondDateTimeComponentsFlag = 14
-	NSAccessibilityYearMonthDateTimeComponentsFlag = 192
-	NSAccessibilityYearMonthDayDateTimeComponentsFlag = 224
+	NSAccessibilityYearMonthDateTimeComponentsFlag        = 192
+	NSAccessibilityYearMonthDayDateTimeComponentsFlag     = 224
 )
 
 const (
 	NSAlertAlternateReturn = 0
-	NSAlertDefaultReturn = 1
-	NSAlertErrorReturn = -2
-	NSAlertOtherReturn = -1
+	NSAlertDefaultReturn   = 1
+	NSAlertErrorReturn     = -2
+	NSAlertOtherReturn     = -1
 )
 
 const (
-	NSAnyType = 0
-	NSDoubleType = 6
-	NSFloatType = 3
-	NSIntType = 1
+	NSAnyType            = 0
+	NSDoubleType         = 6
+	NSFloatType          = 3
+	NSIntType            = 1
 	NSPositiveDoubleType = 7
-	NSPositiveFloatType = 4
-	NSPositiveIntType = 2
+	NSPositiveFloatType  = 4
+	NSPositiveIntType    = 2
 )
 
 const (
@@ -8716,40 +9666,40 @@ const (
 
 const (
 	NSControlGlyph = 16777215
-	NSNullGlyph = 0
+	NSNullGlyph    = 0
 )
 
 const (
-	NSDisplayWindowRunLoopOrdering = 600000
+	NSDisplayWindowRunLoopOrdering    = 600000
 	NSResetCursorRectsRunLoopOrdering = 700000
 )
 
 const (
-	NSBackTabCharacter = 25
-	NSBackspaceCharacter = 8
-	NSCarriageReturnCharacter = 13
-	NSDeleteCharacter = 127
-	NSEnterCharacter = 3
-	NSFormFeedCharacter = 12
-	NSLineSeparatorCharacter = 8232
-	NSNewlineCharacter = 10
+	NSBackTabCharacter            = 25
+	NSBackspaceCharacter          = 8
+	NSCarriageReturnCharacter     = 13
+	NSDeleteCharacter             = 127
+	NSEnterCharacter              = 3
+	NSFormFeedCharacter           = 12
+	NSLineSeparatorCharacter      = 8232
+	NSNewlineCharacter            = 10
 	NSParagraphSeparatorCharacter = 8233
-	NSTabCharacter = 9
+	NSTabCharacter                = 9
 )
 
 const (
-	NSFPCurrentField = 134
+	NSFPCurrentField  = 134
 	NSFPPreviewButton = 131
-	NSFPPreviewField = 128
-	NSFPRevertButton = 130
-	NSFPSetButton = 132
-	NSFPSizeField = 129
-	NSFPSizeTitle = 133
+	NSFPPreviewField  = 128
+	NSFPRevertButton  = 130
+	NSFPSetButton     = 132
+	NSFPSizeField     = 129
+	NSFPSizeTitle     = 133
 )
 
 const (
 	NSFileHandlingPanelCancelButton = 0
-	NSFileHandlingPanelOKButton = 1
+	NSFileHandlingPanelOKButton     = 1
 )
 
 const (
@@ -8757,61 +9707,61 @@ const (
 )
 
 const (
-	NSFontBoldTrait = 2
-	NSFontCondensedTrait = 64
-	NSFontExpandedTrait = 32
-	NSFontItalicTrait = 1
-	NSFontMonoSpaceTrait = 1024
+	NSFontBoldTrait        = 2
+	NSFontCondensedTrait   = 64
+	NSFontExpandedTrait    = 32
+	NSFontItalicTrait      = 1
+	NSFontMonoSpaceTrait   = 1024
 	NSFontUIOptimizedTrait = 4096
-	NSFontVerticalTrait = 2048
+	NSFontVerticalTrait    = 2048
 )
 
 const (
-	NSFontPanelAllEffectsModeMask = 1048320
-	NSFontPanelAllModesMask = 4294967295
-	NSFontPanelCollectionModeMask = 4
+	NSFontPanelAllEffectsModeMask          = 1048320
+	NSFontPanelAllModesMask                = 4294967295
+	NSFontPanelCollectionModeMask          = 4
 	NSFontPanelDocumentColorEffectModeMask = 2048
-	NSFontPanelFaceModeMask = 1
-	NSFontPanelShadowEffectModeMask = 4096
-	NSFontPanelSizeModeMask = 2
-	NSFontPanelStandardModesMask = 65535
+	NSFontPanelFaceModeMask                = 1
+	NSFontPanelShadowEffectModeMask        = 4096
+	NSFontPanelSizeModeMask                = 2
+	NSFontPanelStandardModesMask           = 65535
 	NSFontPanelStrikethroughEffectModeMask = 512
-	NSFontPanelTextColorEffectModeMask = 1024
-	NSFontPanelUnderlineEffectModeMask = 256
+	NSFontPanelTextColorEffectModeMask     = 1024
+	NSFontPanelUnderlineEffectModeMask     = 256
 )
 
 const (
-	NSFontClarendonSerifsClass = 1073741824
-	NSFontFreeformSerifsClass = 1879048192
-	NSFontModernSerifsClass = 805306368
-	NSFontOldStyleSerifsClass = 268435456
-	NSFontOrnamentalsClass = -1879048192
-	NSFontSansSerifClass = -2147483648
-	NSFontScriptsClass = -1610612736
-	NSFontSlabSerifsClass = 1342177280
-	NSFontSymbolicClass = -1073741824
+	NSFontClarendonSerifsClass    = 1073741824
+	NSFontFreeformSerifsClass     = 1879048192
+	NSFontModernSerifsClass       = 805306368
+	NSFontOldStyleSerifsClass     = 268435456
+	NSFontOrnamentalsClass        = -1879048192
+	NSFontSansSerifClass          = -2147483648
+	NSFontScriptsClass            = -1610612736
+	NSFontSlabSerifsClass         = 1342177280
+	NSFontSymbolicClass           = -1073741824
 	NSFontTransitionalSerifsClass = 536870912
-	NSFontUnknownClass = 0
+	NSFontUnknownClass            = 0
 )
 
 const (
 	NSGlyphAttributeBidiLevel = 2
-	NSGlyphAttributeElastic = 1
-	NSGlyphAttributeInscribe = 5
-	NSGlyphAttributeSoft = 0
+	NSGlyphAttributeElastic   = 1
+	NSGlyphAttributeInscribe  = 5
+	NSGlyphAttributeSoft      = 0
 )
 
 const (
 	NSBacktabTextMovement = 18
-	NSCancelTextMovement = 23
-	NSDownTextMovement = 22
+	NSCancelTextMovement  = 23
+	NSDownTextMovement    = 22
 	NSIllegalTextMovement = 0
-	NSLeftTextMovement = 19
-	NSOtherTextMovement = 0
-	NSReturnTextMovement = 16
-	NSRightTextMovement = 20
-	NSTabTextMovement = 17
-	NSUpTextMovement = 21
+	NSLeftTextMovement    = 19
+	NSOtherTextMovement   = 0
+	NSReturnTextMovement  = 16
+	NSRightTextMovement   = 20
+	NSTabTextMovement     = 17
+	NSUpTextMovement      = 21
 )
 
 const (
@@ -8820,67 +9770,67 @@ const (
 
 const (
 	NSMacintoshInterfaceStyle = 3
-	NSNextStepInterfaceStyle = 1
-	NSNoInterfaceStyle = 0
+	NSNextStepInterfaceStyle  = 1
+	NSNoInterfaceStyle        = 0
 	NSWindows95InterfaceStyle = 2
 )
 
 const (
-	NSNoUnderlineStyle = 0
+	NSNoUnderlineStyle     = 0
 	NSSingleUnderlineStyle = 1
 )
 
 const (
 	NSCancelButton = 0
-	NSOKButton = 1
+	NSOKButton     = 1
 )
 
 const (
-	NSOpenGLPFAAccelerated = 73
-	NSOpenGLPFAAcceleratedCompute = 97
-	NSOpenGLPFAAccumSize = 14
-	NSOpenGLPFAAllRenderers = 1
+	NSOpenGLPFAAccelerated           = 73
+	NSOpenGLPFAAcceleratedCompute    = 97
+	NSOpenGLPFAAccumSize             = 14
+	NSOpenGLPFAAllRenderers          = 1
 	NSOpenGLPFAAllowOfflineRenderers = 96
-	NSOpenGLPFAAlphaSize = 11
-	NSOpenGLPFAAuxBuffers = 7
-	NSOpenGLPFAAuxDepthStencil = 57
-	NSOpenGLPFABackingStore = 76
-	NSOpenGLPFAClosestPolicy = 74
-	NSOpenGLPFAColorFloat = 58
-	NSOpenGLPFAColorSize = 8
-	NSOpenGLPFACompliant = 83
-	NSOpenGLPFADepthSize = 12
-	NSOpenGLPFADoubleBuffer = 5
-	NSOpenGLPFAFullScreen = 54
-	NSOpenGLPFAMPSafe = 78
-	NSOpenGLPFAMaximumPolicy = 52
-	NSOpenGLPFAMinimumPolicy = 51
-	NSOpenGLPFAMultiScreen = 81
-	NSOpenGLPFAMultisample = 59
-	NSOpenGLPFANoRecovery = 72
-	NSOpenGLPFAOffScreen = 53
-	NSOpenGLPFAOpenGLProfile = 99
-	NSOpenGLPFAPixelBuffer = 90
-	NSOpenGLPFARemotePixelBuffer = 91
-	NSOpenGLPFARendererID = 70
-	NSOpenGLPFARobust = 75
-	NSOpenGLPFASampleAlpha = 61
-	NSOpenGLPFASampleBuffers = 55
-	NSOpenGLPFASamples = 56
-	NSOpenGLPFAScreenMask = 84
-	NSOpenGLPFASingleRenderer = 71
-	NSOpenGLPFAStencilSize = 13
-	NSOpenGLPFAStereo = 6
-	NSOpenGLPFASupersample = 60
-	NSOpenGLPFATripleBuffer = 3
-	NSOpenGLPFAVirtualScreenCount = 128
-	NSOpenGLPFAWindow = 80
+	NSOpenGLPFAAlphaSize             = 11
+	NSOpenGLPFAAuxBuffers            = 7
+	NSOpenGLPFAAuxDepthStencil       = 57
+	NSOpenGLPFABackingStore          = 76
+	NSOpenGLPFAClosestPolicy         = 74
+	NSOpenGLPFAColorFloat            = 58
+	NSOpenGLPFAColorSize             = 8
+	NSOpenGLPFACompliant             = 83
+	NSOpenGLPFADepthSize             = 12
+	NSOpenGLPFADoubleBuffer          = 5
+	NSOpenGLPFAFullScreen            = 54
+	NSOpenGLPFAMPSafe                = 78
+	NSOpenGLPFAMaximumPolicy         = 52
+	NSOpenGLPFAMinimumPolicy         = 51
+	NSOpenGLPFAMultiScreen           = 81
+	NSOpenGLPFAMultisample           = 59
+	NSOpenGLPFANoRecovery            = 72
+	NSOpenGLPFAOffScreen             = 53
+	NSOpenGLPFAOpenGLProfile         = 99
+	NSOpenGLPFAPixelBuffer           = 90
+	NSOpenGLPFARemotePixelBuffer     = 91
+	NSOpenGLPFARendererID            = 70
+	NSOpenGLPFARobust                = 75
+	NSOpenGLPFASampleAlpha           = 61
+	NSOpenGLPFASampleBuffers         = 55
+	NSOpenGLPFASamples               = 56
+	NSOpenGLPFAScreenMask            = 84
+	NSOpenGLPFASingleRenderer        = 71
+	NSOpenGLPFAStencilSize           = 13
+	NSOpenGLPFAStereo                = 6
+	NSOpenGLPFASupersample           = 60
+	NSOpenGLPFATripleBuffer          = 3
+	NSOpenGLPFAVirtualScreenCount    = 128
+	NSOpenGLPFAWindow                = 80
 )
 
 const (
 	NSOpenGLProfileVersion3_2Core = 12800
 	NSOpenGLProfileVersion4_1Core = 16640
-	NSOpenGLProfileVersionLegacy = 4096
+	NSOpenGLProfileVersionLegacy  = 4096
 )
 
 const (
@@ -8888,133 +9838,132 @@ const (
 )
 
 const (
-	NSRunAbortedResponse = -1001
+	NSRunAbortedResponse   = -1001
 	NSRunContinuesResponse = -1002
-	NSRunStoppedResponse = -1000
+	NSRunStoppedResponse   = -1000
 )
 
 const (
-	NSShowControlGlyphs = 1
+	NSShowControlGlyphs   = 1
 	NSShowInvisibleGlyphs = 2
-	NSWantsBidiLevels = 4
+	NSWantsBidiLevels     = 4
 )
 
 const (
-	NSFontAssetDownloadError = 66304
-	NSFontErrorMaximum = 66335
-	NSFontErrorMinimum = 66304
-	NSPasteboardCommunicationError = 67585
-	NSPasteboardContentsNotAvailableError = 67587
-	NSPasteboardErrorMaximum = 67839
-	NSPasteboardErrorMinimum = 67584
-	NSPasteboardInvalidArgumentError = 67586
-	NSPasteboardMiscellaneousError = 67584
-	NSServiceApplicationLaunchFailedError = 66561
-	NSServiceApplicationNotFoundError = 66560
-	NSServiceErrorMaximum = 66817
-	NSServiceErrorMinimum = 66560
-	NSServiceInvalidPasteboardDataError = 66563
+	NSFontAssetDownloadError                 = 66304
+	NSFontErrorMaximum                       = 66335
+	NSFontErrorMinimum                       = 66304
+	NSPasteboardCommunicationError           = 67585
+	NSPasteboardContentsNotAvailableError    = 67587
+	NSPasteboardErrorMaximum                 = 67839
+	NSPasteboardErrorMinimum                 = 67584
+	NSPasteboardInvalidArgumentError         = 67586
+	NSPasteboardMiscellaneousError           = 67584
+	NSServiceApplicationLaunchFailedError    = 66561
+	NSServiceApplicationNotFoundError        = 66560
+	NSServiceErrorMaximum                    = 66817
+	NSServiceErrorMinimum                    = 66560
+	NSServiceInvalidPasteboardDataError      = 66563
 	NSServiceMalformedServiceDictionaryError = 66564
-	NSServiceMiscellaneousError = 66800
-	NSServiceRequestTimedOutError = 66562
-	NSSharingServiceErrorMaximum = 67327
-	NSSharingServiceErrorMinimum = 67072
-	NSSharingServiceNotConfiguredError = 67072
-	NSTextReadInapplicableDocumentTypeError = 65806
-	NSTextReadWriteErrorMaximum = 66303
-	NSTextReadWriteErrorMinimum = 65792
+	NSServiceMiscellaneousError              = 66800
+	NSServiceRequestTimedOutError            = 66562
+	NSSharingServiceErrorMaximum             = 67327
+	NSSharingServiceErrorMinimum             = 67072
+	NSSharingServiceNotConfiguredError       = 67072
+	NSTextReadInapplicableDocumentTypeError  = 65806
+	NSTextReadWriteErrorMaximum              = 66303
+	NSTextReadWriteErrorMinimum              = 65792
 	NSTextWriteInapplicableDocumentTypeError = 66062
-	NSWindowSharingErrorMaximum = 67466
-	NSWindowSharingErrorMinimum = 67456
-	NSWindowSharingRequestAlreadyRequested = 67456
-	NSWindowSharingRequestNoEligibleSession = 67457
-	NSWindowSharingRequestUnspecifiedError = 67458
-	NSWorkspaceAuthorizationInvalidError = 67328
-	NSWorkspaceErrorMaximum = 67455
-	NSWorkspaceErrorMinimum = 67328
+	NSWindowSharingErrorMaximum              = 67466
+	NSWindowSharingErrorMinimum              = 67456
+	NSWindowSharingRequestAlreadyRequested   = 67456
+	NSWindowSharingRequestNoEligibleSession  = 67457
+	NSWindowSharingRequestUnspecifiedError   = 67458
+	NSWorkspaceAuthorizationInvalidError     = 67328
+	NSWorkspaceErrorMaximum                  = 67455
+	NSWorkspaceErrorMinimum                  = 67328
 )
 
 const (
 	NSTextWritingDirectionEmbedding = 0
-	NSTextWritingDirectionOverride = 2
+	NSTextWritingDirectionOverride  = 2
 )
 
 const (
-	NSBeginFunctionKey = 63274
-	NSBreakFunctionKey = 63282
+	NSBeginFunctionKey        = 63274
+	NSBreakFunctionKey        = 63282
 	NSClearDisplayFunctionKey = 63290
-	NSClearLineFunctionKey = 63289
-	NSDeleteCharFunctionKey = 63294
-	NSDeleteFunctionKey = 63272
-	NSDeleteLineFunctionKey = 63292
-	NSDownArrowFunctionKey = 63233
-	NSEndFunctionKey = 63275
-	NSExecuteFunctionKey = 63298
-	NSF10FunctionKey = 63245
-	NSF11FunctionKey = 63246
-	NSF12FunctionKey = 63247
-	NSF13FunctionKey = 63248
-	NSF14FunctionKey = 63249
-	NSF15FunctionKey = 63250
-	NSF16FunctionKey = 63251
-	NSF17FunctionKey = 63252
-	NSF18FunctionKey = 63253
-	NSF19FunctionKey = 63254
-	NSF1FunctionKey = 63236
-	NSF20FunctionKey = 63255
-	NSF21FunctionKey = 63256
-	NSF22FunctionKey = 63257
-	NSF23FunctionKey = 63258
-	NSF24FunctionKey = 63259
-	NSF25FunctionKey = 63260
-	NSF26FunctionKey = 63261
-	NSF27FunctionKey = 63262
-	NSF28FunctionKey = 63263
-	NSF29FunctionKey = 63264
-	NSF2FunctionKey = 63237
-	NSF30FunctionKey = 63265
-	NSF31FunctionKey = 63266
-	NSF32FunctionKey = 63267
-	NSF33FunctionKey = 63268
-	NSF34FunctionKey = 63269
-	NSF35FunctionKey = 63270
-	NSF3FunctionKey = 63238
-	NSF4FunctionKey = 63239
-	NSF5FunctionKey = 63240
-	NSF6FunctionKey = 63241
-	NSF7FunctionKey = 63242
-	NSF8FunctionKey = 63243
-	NSF9FunctionKey = 63244
-	NSFindFunctionKey = 63301
-	NSHelpFunctionKey = 63302
-	NSHomeFunctionKey = 63273
-	NSInsertCharFunctionKey = 63293
-	NSInsertFunctionKey = 63271
-	NSInsertLineFunctionKey = 63291
-	NSLeftArrowFunctionKey = 63234
-	NSMenuFunctionKey = 63285
-	NSModeSwitchFunctionKey = 63303
-	NSNextFunctionKey = 63296
-	NSPageDownFunctionKey = 63277
-	NSPageUpFunctionKey = 63276
-	NSPauseFunctionKey = 63280
-	NSPrevFunctionKey = 63295
-	NSPrintFunctionKey = 63288
-	NSPrintScreenFunctionKey = 63278
-	NSRedoFunctionKey = 63300
-	NSResetFunctionKey = 63283
-	NSRightArrowFunctionKey = 63235
-	NSScrollLockFunctionKey = 63279
-	NSSelectFunctionKey = 63297
-	NSStopFunctionKey = 63284
-	NSSysReqFunctionKey = 63281
-	NSSystemFunctionKey = 63287
-	NSUndoFunctionKey = 63299
-	NSUpArrowFunctionKey = 63232
-	NSUserFunctionKey = 63286
+	NSClearLineFunctionKey    = 63289
+	NSDeleteCharFunctionKey   = 63294
+	NSDeleteFunctionKey       = 63272
+	NSDeleteLineFunctionKey   = 63292
+	NSDownArrowFunctionKey    = 63233
+	NSEndFunctionKey          = 63275
+	NSExecuteFunctionKey      = 63298
+	NSF10FunctionKey          = 63245
+	NSF11FunctionKey          = 63246
+	NSF12FunctionKey          = 63247
+	NSF13FunctionKey          = 63248
+	NSF14FunctionKey          = 63249
+	NSF15FunctionKey          = 63250
+	NSF16FunctionKey          = 63251
+	NSF17FunctionKey          = 63252
+	NSF18FunctionKey          = 63253
+	NSF19FunctionKey          = 63254
+	NSF1FunctionKey           = 63236
+	NSF20FunctionKey          = 63255
+	NSF21FunctionKey          = 63256
+	NSF22FunctionKey          = 63257
+	NSF23FunctionKey          = 63258
+	NSF24FunctionKey          = 63259
+	NSF25FunctionKey          = 63260
+	NSF26FunctionKey          = 63261
+	NSF27FunctionKey          = 63262
+	NSF28FunctionKey          = 63263
+	NSF29FunctionKey          = 63264
+	NSF2FunctionKey           = 63237
+	NSF30FunctionKey          = 63265
+	NSF31FunctionKey          = 63266
+	NSF32FunctionKey          = 63267
+	NSF33FunctionKey          = 63268
+	NSF34FunctionKey          = 63269
+	NSF35FunctionKey          = 63270
+	NSF3FunctionKey           = 63238
+	NSF4FunctionKey           = 63239
+	NSF5FunctionKey           = 63240
+	NSF6FunctionKey           = 63241
+	NSF7FunctionKey           = 63242
+	NSF8FunctionKey           = 63243
+	NSF9FunctionKey           = 63244
+	NSFindFunctionKey         = 63301
+	NSHelpFunctionKey         = 63302
+	NSHomeFunctionKey         = 63273
+	NSInsertCharFunctionKey   = 63293
+	NSInsertFunctionKey       = 63271
+	NSInsertLineFunctionKey   = 63291
+	NSLeftArrowFunctionKey    = 63234
+	NSMenuFunctionKey         = 63285
+	NSModeSwitchFunctionKey   = 63303
+	NSNextFunctionKey         = 63296
+	NSPageDownFunctionKey     = 63277
+	NSPageUpFunctionKey       = 63276
+	NSPauseFunctionKey        = 63280
+	NSPrevFunctionKey         = 63295
+	NSPrintFunctionKey        = 63288
+	NSPrintScreenFunctionKey  = 63278
+	NSRedoFunctionKey         = 63300
+	NSResetFunctionKey        = 63283
+	NSRightArrowFunctionKey   = 63235
+	NSScrollLockFunctionKey   = 63279
+	NSSelectFunctionKey       = 63297
+	NSStopFunctionKey         = 63284
+	NSSysReqFunctionKey       = 63281
+	NSSystemFunctionKey       = 63287
+	NSUndoFunctionKey         = 63299
+	NSUpArrowFunctionKey      = 63232
+	NSUserFunctionKey         = 63286
 )
 
 const (
 	NSUpdateWindowsRunLoopOrdering = 500000
 )
-

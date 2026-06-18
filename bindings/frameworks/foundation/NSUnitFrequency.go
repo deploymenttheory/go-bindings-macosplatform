@@ -15,15 +15,15 @@ type NSUnitFrequency struct {
 }
 
 var (
-	_clsNSUnitFrequency = _objcClass("NSUnitFrequency")
-	_nSUnitFrequencySelTerahertz = objc.RegisterName("terahertz")
-	_nSUnitFrequencySelGigahertz = objc.RegisterName("gigahertz")
-	_nSUnitFrequencySelMegahertz = objc.RegisterName("megahertz")
-	_nSUnitFrequencySelKilohertz = objc.RegisterName("kilohertz")
-	_nSUnitFrequencySelHertz = objc.RegisterName("hertz")
-	_nSUnitFrequencySelMillihertz = objc.RegisterName("millihertz")
-	_nSUnitFrequencySelMicrohertz = objc.RegisterName("microhertz")
-	_nSUnitFrequencySelNanohertz = objc.RegisterName("nanohertz")
+	_clsNSUnitFrequency                = _objcClass("NSUnitFrequency")
+	_nSUnitFrequencySelTerahertz       = objc.RegisterName("terahertz")
+	_nSUnitFrequencySelGigahertz       = objc.RegisterName("gigahertz")
+	_nSUnitFrequencySelMegahertz       = objc.RegisterName("megahertz")
+	_nSUnitFrequencySelKilohertz       = objc.RegisterName("kilohertz")
+	_nSUnitFrequencySelHertz           = objc.RegisterName("hertz")
+	_nSUnitFrequencySelMillihertz      = objc.RegisterName("millihertz")
+	_nSUnitFrequencySelMicrohertz      = objc.RegisterName("microhertz")
+	_nSUnitFrequencySelNanohertz       = objc.RegisterName("nanohertz")
 	_nSUnitFrequencySelFramesPerSecond = objc.RegisterName("framesPerSecond")
 )
 
@@ -39,55 +39,72 @@ func NSUnitFrequencyFromID(id objc.ID) *NSUnitFrequency {
 
 func NSUnitFrequencyTerahertz() *NSUnitFrequency {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitFrequency), _nSUnitFrequencySelTerahertz)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitFrequencyFromID(_ret)
 }
 
 func NSUnitFrequencyGigahertz() *NSUnitFrequency {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitFrequency), _nSUnitFrequencySelGigahertz)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitFrequencyFromID(_ret)
 }
 
 func NSUnitFrequencyMegahertz() *NSUnitFrequency {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitFrequency), _nSUnitFrequencySelMegahertz)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitFrequencyFromID(_ret)
 }
 
 func NSUnitFrequencyKilohertz() *NSUnitFrequency {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitFrequency), _nSUnitFrequencySelKilohertz)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitFrequencyFromID(_ret)
 }
 
 func NSUnitFrequencyHertz() *NSUnitFrequency {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitFrequency), _nSUnitFrequencySelHertz)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitFrequencyFromID(_ret)
 }
 
 func NSUnitFrequencyMillihertz() *NSUnitFrequency {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitFrequency), _nSUnitFrequencySelMillihertz)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitFrequencyFromID(_ret)
 }
 
 func NSUnitFrequencyMicrohertz() *NSUnitFrequency {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitFrequency), _nSUnitFrequencySelMicrohertz)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitFrequencyFromID(_ret)
 }
 
 func NSUnitFrequencyNanohertz() *NSUnitFrequency {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitFrequency), _nSUnitFrequencySelNanohertz)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitFrequencyFromID(_ret)
 }
 
 func NSUnitFrequencyFramesPerSecond() *NSUnitFrequency {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitFrequency), _nSUnitFrequencySelFramesPerSecond)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitFrequencyFromID(_ret)
 }
-

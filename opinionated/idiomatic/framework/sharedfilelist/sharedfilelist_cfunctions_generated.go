@@ -119,4 +119,3 @@ func LSSharedFileListSetAuthorization(inList unsafe.Pointer, inAuthorization uns
 func LSSharedFileListSetProperty(inList unsafe.Pointer, inPropertyName unsafe.Pointer, inPropertyData unsafe.Pointer) int {
 	return raw.LSSharedFileListSetProperty(inList, inPropertyName, inPropertyData)
 }
-

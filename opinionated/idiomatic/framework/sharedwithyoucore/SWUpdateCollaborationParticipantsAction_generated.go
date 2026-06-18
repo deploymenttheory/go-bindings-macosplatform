@@ -16,7 +16,9 @@ type UpdateCollaborationParticipantsAction struct {
 }
 
 // Unwrap returns the underlying [raw.SWUpdateCollaborationParticipantsAction].
-func (x *UpdateCollaborationParticipantsAction) Unwrap() *raw.SWUpdateCollaborationParticipantsAction { return x.inner }
+func (x *UpdateCollaborationParticipantsAction) Unwrap() *raw.SWUpdateCollaborationParticipantsAction {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -78,4 +80,3 @@ type UpdateCollaborationParticipantsActionable interface {
 }
 
 var _ UpdateCollaborationParticipantsActionable = (*UpdateCollaborationParticipantsAction)(nil)
-

@@ -236,4 +236,3 @@ type BluetoothPasskeyDisplayable interface {
 }
 
 var _ BluetoothPasskeyDisplayable = (*BluetoothPasskeyDisplay)(nil)
-

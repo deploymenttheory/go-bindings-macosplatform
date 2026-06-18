@@ -46,4 +46,3 @@ type PGDisplay interface {
 	ModeList() *foundation.NSArray[*PGDisplayMode]
 	SetModeList(modeList *foundation.NSArray[*PGDisplayMode])
 }
-

@@ -25,4 +25,3 @@ func MTRTargetNavigatorClusterTargetInfoFromID(id objc.ID) *MTRTargetNavigatorCl
 	purego.Track(o)
 	return o
 }
-

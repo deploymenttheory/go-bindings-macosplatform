@@ -88,7 +88,9 @@ func (x *AVB17221AECPAVCMessage) SetCommandResponse(commandResponse *foundation.
 	x.inner.SetCommandResponse(commandResponse)
 }
 
-func (x *AVB17221AECPAVCMessage) asAVB17221AECPMessage() *raw.AVB17221AECPMessage { return &x.inner.AVB17221AECPMessage }
+func (x *AVB17221AECPAVCMessage) asAVB17221AECPMessage() *raw.AVB17221AECPMessage {
+	return &x.inner.AVB17221AECPMessage
+}
 
 // AVB17221AECPAVCMessageable is the interface implemented by [AVB17221AECPAVCMessage], for mocking and DI.
 type AVB17221AECPAVCMessageable interface {
@@ -105,4 +107,3 @@ type AVB17221AECPAVCMessageable interface {
 }
 
 var _ AVB17221AECPAVCMessageable = (*AVB17221AECPAVCMessage)(nil)
-

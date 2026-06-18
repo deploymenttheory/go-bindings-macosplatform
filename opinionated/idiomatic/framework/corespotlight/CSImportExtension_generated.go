@@ -48,4 +48,3 @@ type ImportExtensionable interface {
 }
 
 var _ ImportExtensionable = (*ImportExtension)(nil)
-

@@ -18,23 +18,23 @@ type GKGameCenterViewController struct {
 }
 
 var (
-	_clsGKGameCenterViewController = _objcClass("GKGameCenterViewController")
-	_gKGameCenterViewControllerSelGameCenterDelegate = objc.RegisterName("gameCenterDelegate")
-	_gKGameCenterViewControllerSelSetGameCenterDelegate = objc.RegisterName("setGameCenterDelegate:")
-	_gKGameCenterViewControllerSelInitWithState = objc.RegisterName("initWithState:")
+	_clsGKGameCenterViewController                                          = _objcClass("GKGameCenterViewController")
+	_gKGameCenterViewControllerSelGameCenterDelegate                        = objc.RegisterName("gameCenterDelegate")
+	_gKGameCenterViewControllerSelSetGameCenterDelegate                     = objc.RegisterName("setGameCenterDelegate:")
+	_gKGameCenterViewControllerSelInitWithState                             = objc.RegisterName("initWithState:")
 	_gKGameCenterViewControllerSelInitWithLeaderboardIDPlayerScopeTimeScope = objc.RegisterName("initWithLeaderboardID:playerScope:timeScope:")
-	_gKGameCenterViewControllerSelInitWithLeaderboardPlayerScope = objc.RegisterName("initWithLeaderboard:playerScope:")
-	_gKGameCenterViewControllerSelInitWithLeaderboardSetID = objc.RegisterName("initWithLeaderboardSetID:")
-	_gKGameCenterViewControllerSelInitWithAchievementID = objc.RegisterName("initWithAchievementID:")
-	_gKGameCenterViewControllerSelInitWithPlayer = objc.RegisterName("initWithPlayer:")
-	_gKGameCenterViewControllerSelViewState = objc.RegisterName("viewState")
-	_gKGameCenterViewControllerSelSetViewState = objc.RegisterName("setViewState:")
-	_gKGameCenterViewControllerSelLeaderboardTimeScope = objc.RegisterName("leaderboardTimeScope")
-	_gKGameCenterViewControllerSelSetLeaderboardTimeScope = objc.RegisterName("setLeaderboardTimeScope:")
-	_gKGameCenterViewControllerSelLeaderboardIdentifier = objc.RegisterName("leaderboardIdentifier")
-	_gKGameCenterViewControllerSelSetLeaderboardIdentifier = objc.RegisterName("setLeaderboardIdentifier:")
-	_gKGameCenterViewControllerSelLeaderboardCategory = objc.RegisterName("leaderboardCategory")
-	_gKGameCenterViewControllerSelSetLeaderboardCategory = objc.RegisterName("setLeaderboardCategory:")
+	_gKGameCenterViewControllerSelInitWithLeaderboardPlayerScope            = objc.RegisterName("initWithLeaderboard:playerScope:")
+	_gKGameCenterViewControllerSelInitWithLeaderboardSetID                  = objc.RegisterName("initWithLeaderboardSetID:")
+	_gKGameCenterViewControllerSelInitWithAchievementID                     = objc.RegisterName("initWithAchievementID:")
+	_gKGameCenterViewControllerSelInitWithPlayer                            = objc.RegisterName("initWithPlayer:")
+	_gKGameCenterViewControllerSelViewState                                 = objc.RegisterName("viewState")
+	_gKGameCenterViewControllerSelSetViewState                              = objc.RegisterName("setViewState:")
+	_gKGameCenterViewControllerSelLeaderboardTimeScope                      = objc.RegisterName("leaderboardTimeScope")
+	_gKGameCenterViewControllerSelSetLeaderboardTimeScope                   = objc.RegisterName("setLeaderboardTimeScope:")
+	_gKGameCenterViewControllerSelLeaderboardIdentifier                     = objc.RegisterName("leaderboardIdentifier")
+	_gKGameCenterViewControllerSelSetLeaderboardIdentifier                  = objc.RegisterName("setLeaderboardIdentifier:")
+	_gKGameCenterViewControllerSelLeaderboardCategory                       = objc.RegisterName("leaderboardCategory")
+	_gKGameCenterViewControllerSelSetLeaderboardCategory                    = objc.RegisterName("setLeaderboardCategory:")
 )
 
 func GKGameCenterViewControllerFromID(id objc.ID) *GKGameCenterViewController {
@@ -58,37 +58,49 @@ func (o *GKGameCenterViewController) SetGameCenterDelegate(gameCenterDelegate GK
 
 func (o *GKGameCenterViewController) InitWithState(state GKGameCenterViewControllerState) *GKGameCenterViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameCenterViewControllerSelInitWithState, state)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGameCenterViewControllerFromID(_ret)
 }
 
 func (o *GKGameCenterViewController) InitWithLeaderboardIDPlayerScopeTimeScope(leaderboardID *foundation.NSString, playerScope GKLeaderboardPlayerScope, timeScope GKLeaderboardTimeScope) *GKGameCenterViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameCenterViewControllerSelInitWithLeaderboardIDPlayerScopeTimeScope, leaderboardID.Ptr(), playerScope, timeScope)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGameCenterViewControllerFromID(_ret)
 }
 
 func (o *GKGameCenterViewController) InitWithLeaderboardPlayerScope(leaderboard *GKLeaderboard, playerScope GKLeaderboardPlayerScope) *GKGameCenterViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameCenterViewControllerSelInitWithLeaderboardPlayerScope, leaderboard.Ptr(), playerScope)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGameCenterViewControllerFromID(_ret)
 }
 
 func (o *GKGameCenterViewController) InitWithLeaderboardSetID(leaderboardSetID *foundation.NSString) *GKGameCenterViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameCenterViewControllerSelInitWithLeaderboardSetID, leaderboardSetID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGameCenterViewControllerFromID(_ret)
 }
 
 func (o *GKGameCenterViewController) InitWithAchievementID(achievementID *foundation.NSString) *GKGameCenterViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameCenterViewControllerSelInitWithAchievementID, achievementID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGameCenterViewControllerFromID(_ret)
 }
 
 func (o *GKGameCenterViewController) InitWithPlayer(player *GKPlayer) *GKGameCenterViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameCenterViewControllerSelInitWithPlayer, player.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGameCenterViewControllerFromID(_ret)
 }
 
@@ -117,7 +129,9 @@ func (o *GKGameCenterViewController) SetLeaderboardTimeScope(leaderboardTimeScop
 // Deprecated: since macOS 11.0.
 func (o *GKGameCenterViewController) LeaderboardIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameCenterViewControllerSelLeaderboardIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -129,7 +143,9 @@ func (o *GKGameCenterViewController) SetLeaderboardIdentifier(leaderboardIdentif
 // Deprecated: since macOS 10.10.
 func (o *GKGameCenterViewController) LeaderboardCategory() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameCenterViewControllerSelLeaderboardCategory)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -137,4 +153,3 @@ func (o *GKGameCenterViewController) LeaderboardCategory() *foundation.NSString 
 func (o *GKGameCenterViewController) SetLeaderboardCategory(leaderboardCategory *foundation.NSString) {
 	o.Ptr().Send(_gKGameCenterViewControllerSelSetLeaderboardCategory, leaderboardCategory.Ptr())
 }
-

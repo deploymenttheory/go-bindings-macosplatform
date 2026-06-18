@@ -51,4 +51,3 @@ type MIDISysexEventable interface {
 }
 
 var _ MIDISysexEventable = (*MIDISysexEvent)(nil)
-

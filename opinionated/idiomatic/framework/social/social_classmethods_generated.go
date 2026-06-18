@@ -18,4 +18,3 @@ func RequestForServiceTypeRequestMethodURLParameters(serviceType string, request
 	}
 	return &Request{inner: _r}
 }
-

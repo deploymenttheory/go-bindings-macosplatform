@@ -16,7 +16,7 @@ type TKSimpleTLVRecord struct {
 }
 
 var (
-	_clsTKSimpleTLVRecord = _objcClass("TKSimpleTLVRecord")
+	_clsTKSimpleTLVRecord                 = _objcClass("TKSimpleTLVRecord")
 	_tKSimpleTLVRecordSelInitWithTagValue = objc.RegisterName("initWithTag:value:")
 )
 
@@ -33,7 +33,8 @@ func TKSimpleTLVRecordFromID(id objc.ID) *TKSimpleTLVRecord {
 // Creates TLV record with specified tag and value. @param tag Tag value for the new record. @param value Value for the new record. @return Newly created TLV record.
 func (o *TKSimpleTLVRecord) InitWithTagValue(tag uint8, value *foundation.NSData) *TKSimpleTLVRecord {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSimpleTLVRecordSelInitWithTagValue, tag, value.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return TKSimpleTLVRecordFromID(_ret)
 }
-

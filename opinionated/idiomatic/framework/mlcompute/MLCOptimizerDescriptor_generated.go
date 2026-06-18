@@ -101,4 +101,3 @@ type OptimizerDescriptorable interface {
 }
 
 var _ OptimizerDescriptorable = (*OptimizerDescriptor)(nil)
-

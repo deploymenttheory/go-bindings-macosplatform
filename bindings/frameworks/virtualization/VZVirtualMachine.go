@@ -18,34 +18,34 @@ type VZVirtualMachine struct {
 }
 
 var (
-	_clsVZVirtualMachine = _objcClass("VZVirtualMachine")
-	_vZVirtualMachineSelInitWithConfiguration = objc.RegisterName("initWithConfiguration:")
-	_vZVirtualMachineSelInitWithConfigurationQueue = objc.RegisterName("initWithConfiguration:queue:")
-	_vZVirtualMachineSelStartWithCompletionHandler = objc.RegisterName("startWithCompletionHandler:")
-	_vZVirtualMachineSelStartWithOptionsCompletionHandler = objc.RegisterName("startWithOptions:completionHandler:")
-	_vZVirtualMachineSelStopWithCompletionHandler = objc.RegisterName("stopWithCompletionHandler:")
-	_vZVirtualMachineSelPauseWithCompletionHandler = objc.RegisterName("pauseWithCompletionHandler:")
-	_vZVirtualMachineSelResumeWithCompletionHandler = objc.RegisterName("resumeWithCompletionHandler:")
+	_clsVZVirtualMachine                                            = _objcClass("VZVirtualMachine")
+	_vZVirtualMachineSelInitWithConfiguration                       = objc.RegisterName("initWithConfiguration:")
+	_vZVirtualMachineSelInitWithConfigurationQueue                  = objc.RegisterName("initWithConfiguration:queue:")
+	_vZVirtualMachineSelStartWithCompletionHandler                  = objc.RegisterName("startWithCompletionHandler:")
+	_vZVirtualMachineSelStartWithOptionsCompletionHandler           = objc.RegisterName("startWithOptions:completionHandler:")
+	_vZVirtualMachineSelStopWithCompletionHandler                   = objc.RegisterName("stopWithCompletionHandler:")
+	_vZVirtualMachineSelPauseWithCompletionHandler                  = objc.RegisterName("pauseWithCompletionHandler:")
+	_vZVirtualMachineSelResumeWithCompletionHandler                 = objc.RegisterName("resumeWithCompletionHandler:")
 	_vZVirtualMachineSelRestoreMachineStateFromURLCompletionHandler = objc.RegisterName("restoreMachineStateFromURL:completionHandler:")
-	_vZVirtualMachineSelSaveMachineStateToURLCompletionHandler = objc.RegisterName("saveMachineStateToURL:completionHandler:")
-	_vZVirtualMachineSelRequestStopWithError = objc.RegisterName("requestStopWithError:")
-	_vZVirtualMachineSelQueue = objc.RegisterName("queue")
-	_vZVirtualMachineSelIsSupported = objc.RegisterName("isSupported")
-	_vZVirtualMachineSelState = objc.RegisterName("state")
-	_vZVirtualMachineSelDelegate = objc.RegisterName("delegate")
-	_vZVirtualMachineSelSetDelegate = objc.RegisterName("setDelegate:")
-	_vZVirtualMachineSelCanStart = objc.RegisterName("canStart")
-	_vZVirtualMachineSelCanStop = objc.RegisterName("canStop")
-	_vZVirtualMachineSelCanPause = objc.RegisterName("canPause")
-	_vZVirtualMachineSelCanResume = objc.RegisterName("canResume")
-	_vZVirtualMachineSelCanRequestStop = objc.RegisterName("canRequestStop")
-	_vZVirtualMachineSelConsoleDevices = objc.RegisterName("consoleDevices")
-	_vZVirtualMachineSelDirectorySharingDevices = objc.RegisterName("directorySharingDevices")
-	_vZVirtualMachineSelGraphicsDevices = objc.RegisterName("graphicsDevices")
-	_vZVirtualMachineSelMemoryBalloonDevices = objc.RegisterName("memoryBalloonDevices")
-	_vZVirtualMachineSelNetworkDevices = objc.RegisterName("networkDevices")
-	_vZVirtualMachineSelSocketDevices = objc.RegisterName("socketDevices")
-	_vZVirtualMachineSelUsbControllers = objc.RegisterName("usbControllers")
+	_vZVirtualMachineSelSaveMachineStateToURLCompletionHandler      = objc.RegisterName("saveMachineStateToURL:completionHandler:")
+	_vZVirtualMachineSelRequestStopWithError                        = objc.RegisterName("requestStopWithError:")
+	_vZVirtualMachineSelQueue                                       = objc.RegisterName("queue")
+	_vZVirtualMachineSelIsSupported                                 = objc.RegisterName("isSupported")
+	_vZVirtualMachineSelState                                       = objc.RegisterName("state")
+	_vZVirtualMachineSelDelegate                                    = objc.RegisterName("delegate")
+	_vZVirtualMachineSelSetDelegate                                 = objc.RegisterName("setDelegate:")
+	_vZVirtualMachineSelCanStart                                    = objc.RegisterName("canStart")
+	_vZVirtualMachineSelCanStop                                     = objc.RegisterName("canStop")
+	_vZVirtualMachineSelCanPause                                    = objc.RegisterName("canPause")
+	_vZVirtualMachineSelCanResume                                   = objc.RegisterName("canResume")
+	_vZVirtualMachineSelCanRequestStop                              = objc.RegisterName("canRequestStop")
+	_vZVirtualMachineSelConsoleDevices                              = objc.RegisterName("consoleDevices")
+	_vZVirtualMachineSelDirectorySharingDevices                     = objc.RegisterName("directorySharingDevices")
+	_vZVirtualMachineSelGraphicsDevices                             = objc.RegisterName("graphicsDevices")
+	_vZVirtualMachineSelMemoryBalloonDevices                        = objc.RegisterName("memoryBalloonDevices")
+	_vZVirtualMachineSelNetworkDevices                              = objc.RegisterName("networkDevices")
+	_vZVirtualMachineSelSocketDevices                               = objc.RegisterName("socketDevices")
+	_vZVirtualMachineSelUsbControllers                              = objc.RegisterName("usbControllers")
 )
 
 func VZVirtualMachineFromID(id objc.ID) *VZVirtualMachine {
@@ -61,14 +61,18 @@ func VZVirtualMachineFromID(id objc.ID) *VZVirtualMachine {
 // @abstract Initialize the virtual machine. @discussion This initializer uses the main queue to operate the virtual machine. Every call must be done on the main queue and the callbacks are invoked on the main queue. @param configuration The configuration of the virtual machine. The configuration must be valid. Validation can be performed at runtime with [VZVirtualMachineConfiguration validateWithError:]. The configuration is copied by the initializer.
 func (o *VZVirtualMachine) InitWithConfiguration(configuration *VZVirtualMachineConfiguration) *VZVirtualMachine {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtualMachineSelInitWithConfiguration, configuration.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZVirtualMachineFromID(_ret)
 }
 
 // @abstract Initialize the virtual machine. @param configuration The configuration of the virtual machine. The configuration must be valid. Validation can be performed at runtime with [VZVirtualMachineConfiguration validateWithError:]. The configuration is copied by the initializer. @param queue The serial queue on which the virtual machine operates. Every operation on the virtual machine must be done on that queue. The callbacks and delegate methods are invoked on that queue. If the queue is not serial, the behavior is undefined.
 func (o *VZVirtualMachine) InitWithConfigurationQueue(configuration *VZVirtualMachineConfiguration, queue *foundation.NSObject) *VZVirtualMachine {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtualMachineSelInitWithConfigurationQueue, configuration.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZVirtualMachineFromID(_ret)
 }
 
@@ -169,7 +173,9 @@ func (o *VZVirtualMachine) RequestStopWithError() (bool, error) {
 // @abstract The queue associated with this virtual machine. @discussion This property is a reference to the queue used to create the virtual machine. If no queue was passed, the default queue is the main queue. The property can be accessed from any queue or actor. Other properties or function calls on the VZVirtualMachine must happen on this queue. The completion handlers from the asynchronous functions are also invoked on this queue.
 func (o *VZVirtualMachine) Queue() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtualMachineSelQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
@@ -228,49 +234,62 @@ func (o *VZVirtualMachine) CanRequestStop() bool {
 // @abstract Return the list of console devices configured on this virtual machine. Return an empty array if no console device is configured. @see VZVirtioConsoleDeviceConfiguration @see VZVirtualMachineConfiguration
 func (o *VZVirtualMachine) ConsoleDevices() *foundation.NSArray[*VZConsoleDevice] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtualMachineSelConsoleDevices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VZConsoleDevice](_ret)
 }
 
 // @abstract Return the list of directory sharing devices configured on this virtual machine. Return an empty array if no directory sharing device is configured. @see VZVirtioFileSystemDeviceConfiguration @see VZVirtualMachineConfiguration
 func (o *VZVirtualMachine) DirectorySharingDevices() *foundation.NSArray[*VZDirectorySharingDevice] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtualMachineSelDirectorySharingDevices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VZDirectorySharingDevice](_ret)
 }
 
 // @abstract Return the list of graphics devices configured on this virtual machine. Return an empty array if no graphics device is configured. @see VZGraphicsDeviceConfiguration @see VZVirtualMachineConfiguration
 func (o *VZVirtualMachine) GraphicsDevices() *foundation.NSArray[*VZGraphicsDevice] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtualMachineSelGraphicsDevices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VZGraphicsDevice](_ret)
 }
 
 // @abstract Return the list of memory balloon devices configured on this virtual machine. Return an empty array if no memory balloon device is configured. @see VZVirtioTraditionalMemoryBalloonDeviceConfiguration @see VZVirtualMachineConfiguration
 func (o *VZVirtualMachine) MemoryBalloonDevices() *foundation.NSArray[*VZMemoryBalloonDevice] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtualMachineSelMemoryBalloonDevices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VZMemoryBalloonDevice](_ret)
 }
 
 // @abstract Return the list of network devices configured on this virtual machine. Return an empty array if no network device is configured. @see VZVirtioNetworkDeviceConfiguration @see VZVirtualMachineConfiguration
 func (o *VZVirtualMachine) NetworkDevices() *foundation.NSArray[*VZNetworkDevice] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtualMachineSelNetworkDevices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VZNetworkDevice](_ret)
 }
 
 // @abstract Return the list of socket devices configured on this virtual machine. Return an empty array if no socket device is configured. @see VZVirtioSocketDeviceConfiguration @see VZVirtualMachineConfiguration
 func (o *VZVirtualMachine) SocketDevices() *foundation.NSArray[*VZSocketDevice] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtualMachineSelSocketDevices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VZSocketDevice](_ret)
 }
 
 // @abstract Return the list of USB controllers configured on this virtual machine. Return an empty array if no USB controller is configured. @see VZUSBControllerConfiguration @see VZVirtualMachineConfiguration
 func (o *VZVirtualMachine) UsbControllers() *foundation.NSArray[*VZUSBController] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtualMachineSelUsbControllers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VZUSBController](_ret)
 }
-

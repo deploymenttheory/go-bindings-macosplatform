@@ -207,11 +207,17 @@ func (x *MTRClusterBasicInformation) ReadAttributeClusterRevisionWithParams(para
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterBasicInformation) asMTRClusterBasicInformation() *raw.MTRClusterBasicInformation { return x.inner }
+func (x *MTRClusterBasicInformation) asMTRClusterBasicInformation() *raw.MTRClusterBasicInformation {
+	return x.inner
+}
 
-func (x *MTRClusterBasicInformation) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterBasicInformation) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterBasicInformation) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterBasicInformation) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterBasicInformationable is the interface implemented by [MTRClusterBasicInformation], for mocking and DI.
 type MTRClusterBasicInformationable interface {
@@ -253,4 +259,3 @@ type MTRClusterBasicInformationable interface {
 }
 
 var _ MTRClusterBasicInformationable = (*MTRClusterBasicInformation)(nil)
-

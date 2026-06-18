@@ -14,8 +14,8 @@ import (
 
 var (
 	_addressbookLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce       sync.Once
+	_failedSymbols  = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -48,7 +48,9 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("ABLocalizedPropertyOrLabel", func() { purego.RegisterLibFunc(&_fnABLocalizedPropertyOrLabel, _addressbookLib, "ABLocalizedPropertyOrLabel") })
+	_register("ABLocalizedPropertyOrLabel", func() {
+		purego.RegisterLibFunc(&_fnABLocalizedPropertyOrLabel, _addressbookLib, "ABLocalizedPropertyOrLabel")
+	})
 }
 
 func init() {

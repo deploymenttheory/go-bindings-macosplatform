@@ -18,19 +18,19 @@ type SKEffectNode struct {
 }
 
 var (
-	_clsSKEffectNode = _objcClass("SKEffectNode")
-	_sKEffectNodeSelFilter = objc.RegisterName("filter")
-	_sKEffectNodeSelSetFilter = objc.RegisterName("setFilter:")
-	_sKEffectNodeSelShouldCenterFilter = objc.RegisterName("shouldCenterFilter")
-	_sKEffectNodeSelSetShouldCenterFilter = objc.RegisterName("setShouldCenterFilter:")
-	_sKEffectNodeSelShouldEnableEffects = objc.RegisterName("shouldEnableEffects")
+	_clsSKEffectNode                       = _objcClass("SKEffectNode")
+	_sKEffectNodeSelFilter                 = objc.RegisterName("filter")
+	_sKEffectNodeSelSetFilter              = objc.RegisterName("setFilter:")
+	_sKEffectNodeSelShouldCenterFilter     = objc.RegisterName("shouldCenterFilter")
+	_sKEffectNodeSelSetShouldCenterFilter  = objc.RegisterName("setShouldCenterFilter:")
+	_sKEffectNodeSelShouldEnableEffects    = objc.RegisterName("shouldEnableEffects")
 	_sKEffectNodeSelSetShouldEnableEffects = objc.RegisterName("setShouldEnableEffects:")
-	_sKEffectNodeSelShouldRasterize = objc.RegisterName("shouldRasterize")
-	_sKEffectNodeSelSetShouldRasterize = objc.RegisterName("setShouldRasterize:")
-	_sKEffectNodeSelBlendMode = objc.RegisterName("blendMode")
-	_sKEffectNodeSelSetBlendMode = objc.RegisterName("setBlendMode:")
-	_sKEffectNodeSelShader = objc.RegisterName("shader")
-	_sKEffectNodeSelSetShader = objc.RegisterName("setShader:")
+	_sKEffectNodeSelShouldRasterize        = objc.RegisterName("shouldRasterize")
+	_sKEffectNodeSelSetShouldRasterize     = objc.RegisterName("setShouldRasterize:")
+	_sKEffectNodeSelBlendMode              = objc.RegisterName("blendMode")
+	_sKEffectNodeSelSetBlendMode           = objc.RegisterName("setBlendMode:")
+	_sKEffectNodeSelShader                 = objc.RegisterName("shader")
+	_sKEffectNodeSelSetShader              = objc.RegisterName("setShader:")
 )
 
 func SKEffectNodeFromID(id objc.ID) *SKEffectNode {
@@ -46,7 +46,9 @@ func SKEffectNodeFromID(id objc.ID) *SKEffectNode {
 // A CIFilter to be used as an effect Any CIFilter that requires only a single "inputImage" and produces an "outputImage" is allowed. The filter is applied to all children of the SKEffectNode. If the filter is nil, the children of this node is flattened before being drawn as long as the SKEffectNode is enabled.
 func (o *SKEffectNode) Filter() *coreimage.CIFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKEffectNodeSelFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return coreimage.CIFilterFromID(_ret)
 }
 
@@ -95,11 +97,12 @@ func (o *SKEffectNode) SetBlendMode(blendMode SKBlendMode) {
 
 func (o *SKEffectNode) Shader() *SKShader {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKEffectNodeSelShader)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKShaderFromID(_ret)
 }
 
 func (o *SKEffectNode) SetShader(shader *SKShader) {
 	o.Ptr().Send(_sKEffectNodeSelSetShader, shader.Ptr())
 }
-

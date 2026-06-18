@@ -15,17 +15,17 @@ type AVMetricPlayerItemPlaybackSummaryEvent struct {
 }
 
 var (
-	_clsAVMetricPlayerItemPlaybackSummaryEvent = _objcClass("AVMetricPlayerItemPlaybackSummaryEvent")
-	_aVMetricPlayerItemPlaybackSummaryEventSelErrorEvent = objc.RegisterName("errorEvent")
-	_aVMetricPlayerItemPlaybackSummaryEventSelRecoverableErrorCount = objc.RegisterName("recoverableErrorCount")
-	_aVMetricPlayerItemPlaybackSummaryEventSelStallCount = objc.RegisterName("stallCount")
-	_aVMetricPlayerItemPlaybackSummaryEventSelVariantSwitchCount = objc.RegisterName("variantSwitchCount")
-	_aVMetricPlayerItemPlaybackSummaryEventSelPlaybackDuration = objc.RegisterName("playbackDuration")
-	_aVMetricPlayerItemPlaybackSummaryEventSelMediaResourceRequestCount = objc.RegisterName("mediaResourceRequestCount")
+	_clsAVMetricPlayerItemPlaybackSummaryEvent                             = _objcClass("AVMetricPlayerItemPlaybackSummaryEvent")
+	_aVMetricPlayerItemPlaybackSummaryEventSelErrorEvent                   = objc.RegisterName("errorEvent")
+	_aVMetricPlayerItemPlaybackSummaryEventSelRecoverableErrorCount        = objc.RegisterName("recoverableErrorCount")
+	_aVMetricPlayerItemPlaybackSummaryEventSelStallCount                   = objc.RegisterName("stallCount")
+	_aVMetricPlayerItemPlaybackSummaryEventSelVariantSwitchCount           = objc.RegisterName("variantSwitchCount")
+	_aVMetricPlayerItemPlaybackSummaryEventSelPlaybackDuration             = objc.RegisterName("playbackDuration")
+	_aVMetricPlayerItemPlaybackSummaryEventSelMediaResourceRequestCount    = objc.RegisterName("mediaResourceRequestCount")
 	_aVMetricPlayerItemPlaybackSummaryEventSelTimeSpentRecoveringFromStall = objc.RegisterName("timeSpentRecoveringFromStall")
-	_aVMetricPlayerItemPlaybackSummaryEventSelTimeSpentInInitialStartup = objc.RegisterName("timeSpentInInitialStartup")
-	_aVMetricPlayerItemPlaybackSummaryEventSelTimeWeightedAverageBitrate = objc.RegisterName("timeWeightedAverageBitrate")
-	_aVMetricPlayerItemPlaybackSummaryEventSelTimeWeightedPeakBitrate = objc.RegisterName("timeWeightedPeakBitrate")
+	_aVMetricPlayerItemPlaybackSummaryEventSelTimeSpentInInitialStartup    = objc.RegisterName("timeSpentInInitialStartup")
+	_aVMetricPlayerItemPlaybackSummaryEventSelTimeWeightedAverageBitrate   = objc.RegisterName("timeWeightedAverageBitrate")
+	_aVMetricPlayerItemPlaybackSummaryEventSelTimeWeightedPeakBitrate      = objc.RegisterName("timeWeightedPeakBitrate")
 )
 
 func AVMetricPlayerItemPlaybackSummaryEventFromID(id objc.ID) *AVMetricPlayerItemPlaybackSummaryEvent {
@@ -41,7 +41,9 @@ func AVMetricPlayerItemPlaybackSummaryEventFromID(id objc.ID) *AVMetricPlayerIte
 // Returns the error event if any. If no value is available, returns nil.
 func (o *AVMetricPlayerItemPlaybackSummaryEvent) ErrorEvent() *AVMetricErrorEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricPlayerItemPlaybackSummaryEventSelErrorEvent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMetricErrorEventFromID(_ret)
 }
 
@@ -98,4 +100,3 @@ func (o *AVMetricPlayerItemPlaybackSummaryEvent) TimeWeightedPeakBitrate() int {
 	_ret := objc.Send[int](o.Ptr(), _aVMetricPlayerItemPlaybackSummaryEventSelTimeWeightedPeakBitrate)
 	return _ret
 }
-

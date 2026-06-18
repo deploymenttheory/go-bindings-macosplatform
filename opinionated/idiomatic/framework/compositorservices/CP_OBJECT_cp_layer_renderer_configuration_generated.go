@@ -15,7 +15,9 @@ type _cp_layer_renderer_configuration struct {
 }
 
 // Unwrap returns the underlying [raw.CP_OBJECT_cp_layer_renderer_configuration].
-func (x *_cp_layer_renderer_configuration) Unwrap() *raw.CP_OBJECT_cp_layer_renderer_configuration { return x.inner }
+func (x *_cp_layer_renderer_configuration) Unwrap() *raw.CP_OBJECT_cp_layer_renderer_configuration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -41,4 +43,3 @@ type _cp_layer_renderer_configurationable interface {
 }
 
 var _ _cp_layer_renderer_configurationable = (*_cp_layer_renderer_configuration)(nil)
-

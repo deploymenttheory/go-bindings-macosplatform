@@ -63,7 +63,9 @@ func (x *StoredValuePassProperties) Balances() []*StoredValuePassBalance {
 	})
 }
 
-func (x *StoredValuePassProperties) asStoredValuePassProperties() *raw.PKStoredValuePassProperties { return x.inner }
+func (x *StoredValuePassProperties) asStoredValuePassProperties() *raw.PKStoredValuePassProperties {
+	return x.inner
+}
 
 // StoredValuePassPropertiesable is the interface implemented by [StoredValuePassProperties], for mocking and DI.
 type StoredValuePassPropertiesable interface {
@@ -75,4 +77,3 @@ type StoredValuePassPropertiesable interface {
 }
 
 var _ StoredValuePassPropertiesable = (*StoredValuePassProperties)(nil)
-

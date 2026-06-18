@@ -370,4 +370,3 @@ type SamplerDescriptorable interface {
 }
 
 var _ SamplerDescriptorable = (*SamplerDescriptor)(nil)
-

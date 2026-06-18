@@ -15,7 +15,9 @@ type MTROperationalStateClusterOperationalErrorEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTROperationalStateClusterOperationalErrorEvent].
-func (x *MTROperationalStateClusterOperationalErrorEvent) Unwrap() *raw.MTROperationalStateClusterOperationalErrorEvent { return x.inner }
+func (x *MTROperationalStateClusterOperationalErrorEvent) Unwrap() *raw.MTROperationalStateClusterOperationalErrorEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -64,4 +66,3 @@ type MTROperationalStateClusterOperationalErrorEventable interface {
 }
 
 var _ MTROperationalStateClusterOperationalErrorEventable = (*MTROperationalStateClusterOperationalErrorEvent)(nil)
-

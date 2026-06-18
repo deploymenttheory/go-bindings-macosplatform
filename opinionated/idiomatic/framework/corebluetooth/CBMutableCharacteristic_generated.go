@@ -64,7 +64,9 @@ func (x *MutableCharacteristic) WithDescriptors(items ...DescriptorProvider) *Mu
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asDescriptor().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asDescriptor().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.CBDescriptor](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -109,9 +111,13 @@ func (x *MutableCharacteristic) SetDescriptors(descriptors *foundation.NSArray[*
 	x.inner.SetDescriptors(descriptors)
 }
 
-func (x *MutableCharacteristic) asCharacteristic() *raw.CBCharacteristic { return &x.inner.CBCharacteristic }
+func (x *MutableCharacteristic) asCharacteristic() *raw.CBCharacteristic {
+	return &x.inner.CBCharacteristic
+}
 
-func (x *MutableCharacteristic) asAttribute() *raw.CBAttribute { return &x.inner.CBCharacteristic.CBAttribute }
+func (x *MutableCharacteristic) asAttribute() *raw.CBAttribute {
+	return &x.inner.CBCharacteristic.CBAttribute
+}
 
 // MutableCharacteristicable is the interface implemented by [MutableCharacteristic], for mocking and DI.
 type MutableCharacteristicable interface {
@@ -129,4 +135,3 @@ type MutableCharacteristicable interface {
 }
 
 var _ MutableCharacteristicable = (*MutableCharacteristic)(nil)
-

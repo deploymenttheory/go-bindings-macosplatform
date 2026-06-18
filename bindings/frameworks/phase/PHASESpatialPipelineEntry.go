@@ -16,10 +16,10 @@ type PHASESpatialPipelineEntry struct {
 }
 
 var (
-	_clsPHASESpatialPipelineEntry = _objcClass("PHASESpatialPipelineEntry")
-	_pHASESpatialPipelineEntrySelSendLevel = objc.RegisterName("sendLevel")
-	_pHASESpatialPipelineEntrySelSetSendLevel = objc.RegisterName("setSendLevel:")
-	_pHASESpatialPipelineEntrySelSendLevelMetaParameterDefinition = objc.RegisterName("sendLevelMetaParameterDefinition")
+	_clsPHASESpatialPipelineEntry                                    = _objcClass("PHASESpatialPipelineEntry")
+	_pHASESpatialPipelineEntrySelSendLevel                           = objc.RegisterName("sendLevel")
+	_pHASESpatialPipelineEntrySelSetSendLevel                        = objc.RegisterName("setSendLevel:")
+	_pHASESpatialPipelineEntrySelSendLevelMetaParameterDefinition    = objc.RegisterName("sendLevelMetaParameterDefinition")
 	_pHASESpatialPipelineEntrySelSetSendLevelMetaParameterDefinition = objc.RegisterName("setSendLevelMetaParameterDefinition:")
 )
 
@@ -46,11 +46,12 @@ func (o *PHASESpatialPipelineEntry) SetSendLevel(sendLevel float64) {
 // @property sendLevelMetaParameterDefinition @abstract An optional metaparameter used to drive the send level during playback.
 func (o *PHASESpatialPipelineEntry) SendLevelMetaParameterDefinition() *PHASENumberMetaParameterDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESpatialPipelineEntrySelSendLevelMetaParameterDefinition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASENumberMetaParameterDefinitionFromID(_ret)
 }
 
 func (o *PHASESpatialPipelineEntry) SetSendLevelMetaParameterDefinition(sendLevelMetaParameterDefinition *PHASENumberMetaParameterDefinition) {
 	o.Ptr().Send(_pHASESpatialPipelineEntrySelSetSendLevelMetaParameterDefinition, sendLevelMetaParameterDefinition.Ptr())
 }
-

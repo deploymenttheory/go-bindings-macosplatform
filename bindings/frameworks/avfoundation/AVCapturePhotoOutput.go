@@ -17,39 +17,39 @@ type AVCapturePhotoOutput struct {
 }
 
 var (
-	_clsAVCapturePhotoOutput = _objcClass("AVCapturePhotoOutput")
-	_aVCapturePhotoOutputSelInit = objc.RegisterName("init")
-	_aVCapturePhotoOutputSelNew = objc.RegisterName("new")
-	_aVCapturePhotoOutputSelCapturePhotoWithSettingsDelegate = objc.RegisterName("capturePhotoWithSettings:delegate:")
-	_aVCapturePhotoOutputSelSupportedPhotoPixelFormatTypesForFileType = objc.RegisterName("supportedPhotoPixelFormatTypesForFileType:")
-	_aVCapturePhotoOutputSelSupportedPhotoCodecTypesForFileType = objc.RegisterName("supportedPhotoCodecTypesForFileType:")
-	_aVCapturePhotoOutputSelAvailablePhotoPixelFormatTypes = objc.RegisterName("availablePhotoPixelFormatTypes")
-	_aVCapturePhotoOutputSelAvailablePhotoCodecTypes = objc.RegisterName("availablePhotoCodecTypes")
-	_aVCapturePhotoOutputSelAvailablePhotoFileTypes = objc.RegisterName("availablePhotoFileTypes")
-	_aVCapturePhotoOutputSelMaxPhotoQualityPrioritization = objc.RegisterName("maxPhotoQualityPrioritization")
-	_aVCapturePhotoOutputSelSetMaxPhotoQualityPrioritization = objc.RegisterName("setMaxPhotoQualityPrioritization:")
-	_aVCapturePhotoOutputSelIsFastCapturePrioritizationSupported = objc.RegisterName("isFastCapturePrioritizationSupported")
-	_aVCapturePhotoOutputSelSetFastCapturePrioritizationSupported = objc.RegisterName("setFastCapturePrioritizationSupported:")
-	_aVCapturePhotoOutputSelIsFastCapturePrioritizationEnabled = objc.RegisterName("isFastCapturePrioritizationEnabled")
-	_aVCapturePhotoOutputSelSetFastCapturePrioritizationEnabled = objc.RegisterName("setFastCapturePrioritizationEnabled:")
-	_aVCapturePhotoOutputSelSupportedFlashModes = objc.RegisterName("supportedFlashModes")
-	_aVCapturePhotoOutputSelIsHighResolutionCaptureEnabled = objc.RegisterName("isHighResolutionCaptureEnabled")
-	_aVCapturePhotoOutputSelSetHighResolutionCaptureEnabled = objc.RegisterName("setHighResolutionCaptureEnabled:")
-	_aVCapturePhotoOutputSelMaxPhotoDimensions = objc.RegisterName("maxPhotoDimensions")
-	_aVCapturePhotoOutputSelSetMaxPhotoDimensions = objc.RegisterName("setMaxPhotoDimensions:")
-	_aVCapturePhotoOutputSelPreservesLivePhotoCaptureSuspendedOnSessionStop = objc.RegisterName("preservesLivePhotoCaptureSuspendedOnSessionStop")
+	_clsAVCapturePhotoOutput                                                   = _objcClass("AVCapturePhotoOutput")
+	_aVCapturePhotoOutputSelInit                                               = objc.RegisterName("init")
+	_aVCapturePhotoOutputSelNew                                                = objc.RegisterName("new")
+	_aVCapturePhotoOutputSelCapturePhotoWithSettingsDelegate                   = objc.RegisterName("capturePhotoWithSettings:delegate:")
+	_aVCapturePhotoOutputSelSupportedPhotoPixelFormatTypesForFileType          = objc.RegisterName("supportedPhotoPixelFormatTypesForFileType:")
+	_aVCapturePhotoOutputSelSupportedPhotoCodecTypesForFileType                = objc.RegisterName("supportedPhotoCodecTypesForFileType:")
+	_aVCapturePhotoOutputSelAvailablePhotoPixelFormatTypes                     = objc.RegisterName("availablePhotoPixelFormatTypes")
+	_aVCapturePhotoOutputSelAvailablePhotoCodecTypes                           = objc.RegisterName("availablePhotoCodecTypes")
+	_aVCapturePhotoOutputSelAvailablePhotoFileTypes                            = objc.RegisterName("availablePhotoFileTypes")
+	_aVCapturePhotoOutputSelMaxPhotoQualityPrioritization                      = objc.RegisterName("maxPhotoQualityPrioritization")
+	_aVCapturePhotoOutputSelSetMaxPhotoQualityPrioritization                   = objc.RegisterName("setMaxPhotoQualityPrioritization:")
+	_aVCapturePhotoOutputSelIsFastCapturePrioritizationSupported               = objc.RegisterName("isFastCapturePrioritizationSupported")
+	_aVCapturePhotoOutputSelSetFastCapturePrioritizationSupported              = objc.RegisterName("setFastCapturePrioritizationSupported:")
+	_aVCapturePhotoOutputSelIsFastCapturePrioritizationEnabled                 = objc.RegisterName("isFastCapturePrioritizationEnabled")
+	_aVCapturePhotoOutputSelSetFastCapturePrioritizationEnabled                = objc.RegisterName("setFastCapturePrioritizationEnabled:")
+	_aVCapturePhotoOutputSelSupportedFlashModes                                = objc.RegisterName("supportedFlashModes")
+	_aVCapturePhotoOutputSelIsHighResolutionCaptureEnabled                     = objc.RegisterName("isHighResolutionCaptureEnabled")
+	_aVCapturePhotoOutputSelSetHighResolutionCaptureEnabled                    = objc.RegisterName("setHighResolutionCaptureEnabled:")
+	_aVCapturePhotoOutputSelMaxPhotoDimensions                                 = objc.RegisterName("maxPhotoDimensions")
+	_aVCapturePhotoOutputSelSetMaxPhotoDimensions                              = objc.RegisterName("setMaxPhotoDimensions:")
+	_aVCapturePhotoOutputSelPreservesLivePhotoCaptureSuspendedOnSessionStop    = objc.RegisterName("preservesLivePhotoCaptureSuspendedOnSessionStop")
 	_aVCapturePhotoOutputSelSetPreservesLivePhotoCaptureSuspendedOnSessionStop = objc.RegisterName("setPreservesLivePhotoCaptureSuspendedOnSessionStop:")
-	_aVCapturePhotoOutputSelIsZeroShutterLagSupported = objc.RegisterName("isZeroShutterLagSupported")
-	_aVCapturePhotoOutputSelIsZeroShutterLagEnabled = objc.RegisterName("isZeroShutterLagEnabled")
-	_aVCapturePhotoOutputSelSetZeroShutterLagEnabled = objc.RegisterName("setZeroShutterLagEnabled:")
-	_aVCapturePhotoOutputSelIsResponsiveCaptureSupported = objc.RegisterName("isResponsiveCaptureSupported")
-	_aVCapturePhotoOutputSelIsResponsiveCaptureEnabled = objc.RegisterName("isResponsiveCaptureEnabled")
-	_aVCapturePhotoOutputSelSetResponsiveCaptureEnabled = objc.RegisterName("setResponsiveCaptureEnabled:")
-	_aVCapturePhotoOutputSelCaptureReadiness = objc.RegisterName("captureReadiness")
-	_aVCapturePhotoOutputSelIsConstantColorSupported = objc.RegisterName("isConstantColorSupported")
-	_aVCapturePhotoOutputSelIsConstantColorEnabled = objc.RegisterName("isConstantColorEnabled")
-	_aVCapturePhotoOutputSelSetConstantColorEnabled = objc.RegisterName("setConstantColorEnabled:")
-	_aVCapturePhotoOutputSelIsShutterSoundSuppressionSupported = objc.RegisterName("isShutterSoundSuppressionSupported")
+	_aVCapturePhotoOutputSelIsZeroShutterLagSupported                          = objc.RegisterName("isZeroShutterLagSupported")
+	_aVCapturePhotoOutputSelIsZeroShutterLagEnabled                            = objc.RegisterName("isZeroShutterLagEnabled")
+	_aVCapturePhotoOutputSelSetZeroShutterLagEnabled                           = objc.RegisterName("setZeroShutterLagEnabled:")
+	_aVCapturePhotoOutputSelIsResponsiveCaptureSupported                       = objc.RegisterName("isResponsiveCaptureSupported")
+	_aVCapturePhotoOutputSelIsResponsiveCaptureEnabled                         = objc.RegisterName("isResponsiveCaptureEnabled")
+	_aVCapturePhotoOutputSelSetResponsiveCaptureEnabled                        = objc.RegisterName("setResponsiveCaptureEnabled:")
+	_aVCapturePhotoOutputSelCaptureReadiness                                   = objc.RegisterName("captureReadiness")
+	_aVCapturePhotoOutputSelIsConstantColorSupported                           = objc.RegisterName("isConstantColorSupported")
+	_aVCapturePhotoOutputSelIsConstantColorEnabled                             = objc.RegisterName("isConstantColorEnabled")
+	_aVCapturePhotoOutputSelSetConstantColorEnabled                            = objc.RegisterName("setConstantColorEnabled:")
+	_aVCapturePhotoOutputSelIsShutterSoundSuppressionSupported                 = objc.RegisterName("isShutterSoundSuppressionSupported")
 )
 
 func AVCapturePhotoOutputFromID(id objc.ID) *AVCapturePhotoOutput {
@@ -64,7 +64,9 @@ func AVCapturePhotoOutputFromID(id objc.ID) *AVCapturePhotoOutput {
 
 func (o *AVCapturePhotoOutput) Init() *AVCapturePhotoOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCapturePhotoOutputSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCapturePhotoOutputFromID(_ret)
 }
 
@@ -235,4 +237,3 @@ func (o *AVCapturePhotoOutput) IsShutterSoundSuppressionSupported() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVCapturePhotoOutputSelIsShutterSoundSuppressionSupported)
 	return _ret
 }
-

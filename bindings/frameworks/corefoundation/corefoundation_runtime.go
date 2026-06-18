@@ -14,8 +14,8 @@ import (
 
 var (
 	_corefoundationLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce          sync.Once
+	_failedSymbols     = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -48,25 +48,49 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("CFAbsoluteTimeAddGregorianUnits", func() { purego.RegisterLibFunc(&_fnCFAbsoluteTimeAddGregorianUnits, _corefoundationLib, "CFAbsoluteTimeAddGregorianUnits") })
-	_register("CFAbsoluteTimeGetCurrent", func() { purego.RegisterLibFunc(&_fnCFAbsoluteTimeGetCurrent, _corefoundationLib, "CFAbsoluteTimeGetCurrent") })
-	_register("CFAbsoluteTimeGetDayOfWeek", func() { purego.RegisterLibFunc(&_fnCFAbsoluteTimeGetDayOfWeek, _corefoundationLib, "CFAbsoluteTimeGetDayOfWeek") })
-	_register("CFAbsoluteTimeGetDayOfYear", func() { purego.RegisterLibFunc(&_fnCFAbsoluteTimeGetDayOfYear, _corefoundationLib, "CFAbsoluteTimeGetDayOfYear") })
-	_register("CFAbsoluteTimeGetDifferenceAsGregorianUnits", func() { purego.RegisterLibFunc(&_fnCFAbsoluteTimeGetDifferenceAsGregorianUnits, _corefoundationLib, "CFAbsoluteTimeGetDifferenceAsGregorianUnits") })
-	_register("CFAbsoluteTimeGetGregorianDate", func() { purego.RegisterLibFunc(&_fnCFAbsoluteTimeGetGregorianDate, _corefoundationLib, "CFAbsoluteTimeGetGregorianDate") })
-	_register("CFAbsoluteTimeGetWeekOfYear", func() { purego.RegisterLibFunc(&_fnCFAbsoluteTimeGetWeekOfYear, _corefoundationLib, "CFAbsoluteTimeGetWeekOfYear") })
+	_register("CFAbsoluteTimeAddGregorianUnits", func() {
+		purego.RegisterLibFunc(&_fnCFAbsoluteTimeAddGregorianUnits, _corefoundationLib, "CFAbsoluteTimeAddGregorianUnits")
+	})
+	_register("CFAbsoluteTimeGetCurrent", func() {
+		purego.RegisterLibFunc(&_fnCFAbsoluteTimeGetCurrent, _corefoundationLib, "CFAbsoluteTimeGetCurrent")
+	})
+	_register("CFAbsoluteTimeGetDayOfWeek", func() {
+		purego.RegisterLibFunc(&_fnCFAbsoluteTimeGetDayOfWeek, _corefoundationLib, "CFAbsoluteTimeGetDayOfWeek")
+	})
+	_register("CFAbsoluteTimeGetDayOfYear", func() {
+		purego.RegisterLibFunc(&_fnCFAbsoluteTimeGetDayOfYear, _corefoundationLib, "CFAbsoluteTimeGetDayOfYear")
+	})
+	_register("CFAbsoluteTimeGetDifferenceAsGregorianUnits", func() {
+		purego.RegisterLibFunc(&_fnCFAbsoluteTimeGetDifferenceAsGregorianUnits, _corefoundationLib, "CFAbsoluteTimeGetDifferenceAsGregorianUnits")
+	})
+	_register("CFAbsoluteTimeGetGregorianDate", func() {
+		purego.RegisterLibFunc(&_fnCFAbsoluteTimeGetGregorianDate, _corefoundationLib, "CFAbsoluteTimeGetGregorianDate")
+	})
+	_register("CFAbsoluteTimeGetWeekOfYear", func() {
+		purego.RegisterLibFunc(&_fnCFAbsoluteTimeGetWeekOfYear, _corefoundationLib, "CFAbsoluteTimeGetWeekOfYear")
+	})
 	_register("CFAllocatorAllocate", func() { purego.RegisterLibFunc(&_fnCFAllocatorAllocate, _corefoundationLib, "CFAllocatorAllocate") })
-	_register("CFAllocatorAllocateBytes", func() { purego.RegisterLibFunc(&_fnCFAllocatorAllocateBytes, _corefoundationLib, "CFAllocatorAllocateBytes") })
-	_register("CFAllocatorAllocateTyped", func() { purego.RegisterLibFunc(&_fnCFAllocatorAllocateTyped, _corefoundationLib, "CFAllocatorAllocateTyped") })
+	_register("CFAllocatorAllocateBytes", func() {
+		purego.RegisterLibFunc(&_fnCFAllocatorAllocateBytes, _corefoundationLib, "CFAllocatorAllocateBytes")
+	})
+	_register("CFAllocatorAllocateTyped", func() {
+		purego.RegisterLibFunc(&_fnCFAllocatorAllocateTyped, _corefoundationLib, "CFAllocatorAllocateTyped")
+	})
 	_register("CFAllocatorCreate", func() { purego.RegisterLibFunc(&_fnCFAllocatorCreate, _corefoundationLib, "CFAllocatorCreate") })
 	_register("CFAllocatorDeallocate", func() { purego.RegisterLibFunc(&_fnCFAllocatorDeallocate, _corefoundationLib, "CFAllocatorDeallocate") })
 	_register("CFAllocatorGetContext", func() { purego.RegisterLibFunc(&_fnCFAllocatorGetContext, _corefoundationLib, "CFAllocatorGetContext") })
 	_register("CFAllocatorGetDefault", func() { purego.RegisterLibFunc(&_fnCFAllocatorGetDefault, _corefoundationLib, "CFAllocatorGetDefault") })
-	_register("CFAllocatorGetPreferredSizeForSize", func() { purego.RegisterLibFunc(&_fnCFAllocatorGetPreferredSizeForSize, _corefoundationLib, "CFAllocatorGetPreferredSizeForSize") })
+	_register("CFAllocatorGetPreferredSizeForSize", func() {
+		purego.RegisterLibFunc(&_fnCFAllocatorGetPreferredSizeForSize, _corefoundationLib, "CFAllocatorGetPreferredSizeForSize")
+	})
 	_register("CFAllocatorGetTypeID", func() { purego.RegisterLibFunc(&_fnCFAllocatorGetTypeID, _corefoundationLib, "CFAllocatorGetTypeID") })
 	_register("CFAllocatorReallocate", func() { purego.RegisterLibFunc(&_fnCFAllocatorReallocate, _corefoundationLib, "CFAllocatorReallocate") })
-	_register("CFAllocatorReallocateBytes", func() { purego.RegisterLibFunc(&_fnCFAllocatorReallocateBytes, _corefoundationLib, "CFAllocatorReallocateBytes") })
-	_register("CFAllocatorReallocateTyped", func() { purego.RegisterLibFunc(&_fnCFAllocatorReallocateTyped, _corefoundationLib, "CFAllocatorReallocateTyped") })
+	_register("CFAllocatorReallocateBytes", func() {
+		purego.RegisterLibFunc(&_fnCFAllocatorReallocateBytes, _corefoundationLib, "CFAllocatorReallocateBytes")
+	})
+	_register("CFAllocatorReallocateTyped", func() {
+		purego.RegisterLibFunc(&_fnCFAllocatorReallocateTyped, _corefoundationLib, "CFAllocatorReallocateTyped")
+	})
 	_register("CFAllocatorSetDefault", func() { purego.RegisterLibFunc(&_fnCFAllocatorSetDefault, _corefoundationLib, "CFAllocatorSetDefault") })
 	_register("CFArrayAppendArray", func() { purego.RegisterLibFunc(&_fnCFArrayAppendArray, _corefoundationLib, "CFArrayAppendArray") })
 	_register("CFArrayAppendValue", func() { purego.RegisterLibFunc(&_fnCFArrayAppendValue, _corefoundationLib, "CFArrayAppendValue") })
@@ -76,43 +100,107 @@ func _loadLibrary() {
 	_register("CFArrayCreate", func() { purego.RegisterLibFunc(&_fnCFArrayCreate, _corefoundationLib, "CFArrayCreate") })
 	_register("CFArrayCreateCopy", func() { purego.RegisterLibFunc(&_fnCFArrayCreateCopy, _corefoundationLib, "CFArrayCreateCopy") })
 	_register("CFArrayCreateMutable", func() { purego.RegisterLibFunc(&_fnCFArrayCreateMutable, _corefoundationLib, "CFArrayCreateMutable") })
-	_register("CFArrayCreateMutableCopy", func() { purego.RegisterLibFunc(&_fnCFArrayCreateMutableCopy, _corefoundationLib, "CFArrayCreateMutableCopy") })
-	_register("CFArrayExchangeValuesAtIndices", func() { purego.RegisterLibFunc(&_fnCFArrayExchangeValuesAtIndices, _corefoundationLib, "CFArrayExchangeValuesAtIndices") })
+	_register("CFArrayCreateMutableCopy", func() {
+		purego.RegisterLibFunc(&_fnCFArrayCreateMutableCopy, _corefoundationLib, "CFArrayCreateMutableCopy")
+	})
+	_register("CFArrayExchangeValuesAtIndices", func() {
+		purego.RegisterLibFunc(&_fnCFArrayExchangeValuesAtIndices, _corefoundationLib, "CFArrayExchangeValuesAtIndices")
+	})
 	_register("CFArrayGetCount", func() { purego.RegisterLibFunc(&_fnCFArrayGetCount, _corefoundationLib, "CFArrayGetCount") })
-	_register("CFArrayGetCountOfValue", func() { purego.RegisterLibFunc(&_fnCFArrayGetCountOfValue, _corefoundationLib, "CFArrayGetCountOfValue") })
-	_register("CFArrayGetFirstIndexOfValue", func() { purego.RegisterLibFunc(&_fnCFArrayGetFirstIndexOfValue, _corefoundationLib, "CFArrayGetFirstIndexOfValue") })
-	_register("CFArrayGetLastIndexOfValue", func() { purego.RegisterLibFunc(&_fnCFArrayGetLastIndexOfValue, _corefoundationLib, "CFArrayGetLastIndexOfValue") })
+	_register("CFArrayGetCountOfValue", func() {
+		purego.RegisterLibFunc(&_fnCFArrayGetCountOfValue, _corefoundationLib, "CFArrayGetCountOfValue")
+	})
+	_register("CFArrayGetFirstIndexOfValue", func() {
+		purego.RegisterLibFunc(&_fnCFArrayGetFirstIndexOfValue, _corefoundationLib, "CFArrayGetFirstIndexOfValue")
+	})
+	_register("CFArrayGetLastIndexOfValue", func() {
+		purego.RegisterLibFunc(&_fnCFArrayGetLastIndexOfValue, _corefoundationLib, "CFArrayGetLastIndexOfValue")
+	})
 	_register("CFArrayGetTypeID", func() { purego.RegisterLibFunc(&_fnCFArrayGetTypeID, _corefoundationLib, "CFArrayGetTypeID") })
-	_register("CFArrayGetValueAtIndex", func() { purego.RegisterLibFunc(&_fnCFArrayGetValueAtIndex, _corefoundationLib, "CFArrayGetValueAtIndex") })
+	_register("CFArrayGetValueAtIndex", func() {
+		purego.RegisterLibFunc(&_fnCFArrayGetValueAtIndex, _corefoundationLib, "CFArrayGetValueAtIndex")
+	})
 	_register("CFArrayGetValues", func() { purego.RegisterLibFunc(&_fnCFArrayGetValues, _corefoundationLib, "CFArrayGetValues") })
-	_register("CFArrayInsertValueAtIndex", func() { purego.RegisterLibFunc(&_fnCFArrayInsertValueAtIndex, _corefoundationLib, "CFArrayInsertValueAtIndex") })
-	_register("CFArrayRemoveAllValues", func() { purego.RegisterLibFunc(&_fnCFArrayRemoveAllValues, _corefoundationLib, "CFArrayRemoveAllValues") })
-	_register("CFArrayRemoveValueAtIndex", func() { purego.RegisterLibFunc(&_fnCFArrayRemoveValueAtIndex, _corefoundationLib, "CFArrayRemoveValueAtIndex") })
+	_register("CFArrayInsertValueAtIndex", func() {
+		purego.RegisterLibFunc(&_fnCFArrayInsertValueAtIndex, _corefoundationLib, "CFArrayInsertValueAtIndex")
+	})
+	_register("CFArrayRemoveAllValues", func() {
+		purego.RegisterLibFunc(&_fnCFArrayRemoveAllValues, _corefoundationLib, "CFArrayRemoveAllValues")
+	})
+	_register("CFArrayRemoveValueAtIndex", func() {
+		purego.RegisterLibFunc(&_fnCFArrayRemoveValueAtIndex, _corefoundationLib, "CFArrayRemoveValueAtIndex")
+	})
 	_register("CFArrayReplaceValues", func() { purego.RegisterLibFunc(&_fnCFArrayReplaceValues, _corefoundationLib, "CFArrayReplaceValues") })
-	_register("CFArraySetValueAtIndex", func() { purego.RegisterLibFunc(&_fnCFArraySetValueAtIndex, _corefoundationLib, "CFArraySetValueAtIndex") })
+	_register("CFArraySetValueAtIndex", func() {
+		purego.RegisterLibFunc(&_fnCFArraySetValueAtIndex, _corefoundationLib, "CFArraySetValueAtIndex")
+	})
 	_register("CFArraySortValues", func() { purego.RegisterLibFunc(&_fnCFArraySortValues, _corefoundationLib, "CFArraySortValues") })
-	_register("CFAttributedStringBeginEditing", func() { purego.RegisterLibFunc(&_fnCFAttributedStringBeginEditing, _corefoundationLib, "CFAttributedStringBeginEditing") })
-	_register("CFAttributedStringCreate", func() { purego.RegisterLibFunc(&_fnCFAttributedStringCreate, _corefoundationLib, "CFAttributedStringCreate") })
-	_register("CFAttributedStringCreateCopy", func() { purego.RegisterLibFunc(&_fnCFAttributedStringCreateCopy, _corefoundationLib, "CFAttributedStringCreateCopy") })
-	_register("CFAttributedStringCreateMutable", func() { purego.RegisterLibFunc(&_fnCFAttributedStringCreateMutable, _corefoundationLib, "CFAttributedStringCreateMutable") })
-	_register("CFAttributedStringCreateMutableCopy", func() { purego.RegisterLibFunc(&_fnCFAttributedStringCreateMutableCopy, _corefoundationLib, "CFAttributedStringCreateMutableCopy") })
-	_register("CFAttributedStringCreateWithSubstring", func() { purego.RegisterLibFunc(&_fnCFAttributedStringCreateWithSubstring, _corefoundationLib, "CFAttributedStringCreateWithSubstring") })
-	_register("CFAttributedStringEndEditing", func() { purego.RegisterLibFunc(&_fnCFAttributedStringEndEditing, _corefoundationLib, "CFAttributedStringEndEditing") })
-	_register("CFAttributedStringGetAttribute", func() { purego.RegisterLibFunc(&_fnCFAttributedStringGetAttribute, _corefoundationLib, "CFAttributedStringGetAttribute") })
-	_register("CFAttributedStringGetAttributeAndLongestEffectiveRange", func() { purego.RegisterLibFunc(&_fnCFAttributedStringGetAttributeAndLongestEffectiveRange, _corefoundationLib, "CFAttributedStringGetAttributeAndLongestEffectiveRange") })
-	_register("CFAttributedStringGetAttributes", func() { purego.RegisterLibFunc(&_fnCFAttributedStringGetAttributes, _corefoundationLib, "CFAttributedStringGetAttributes") })
-	_register("CFAttributedStringGetAttributesAndLongestEffectiveRange", func() { purego.RegisterLibFunc(&_fnCFAttributedStringGetAttributesAndLongestEffectiveRange, _corefoundationLib, "CFAttributedStringGetAttributesAndLongestEffectiveRange") })
-	_register("CFAttributedStringGetBidiLevelsAndResolvedDirections", func() { purego.RegisterLibFunc(&_fnCFAttributedStringGetBidiLevelsAndResolvedDirections, _corefoundationLib, "CFAttributedStringGetBidiLevelsAndResolvedDirections") })
-	_register("CFAttributedStringGetLength", func() { purego.RegisterLibFunc(&_fnCFAttributedStringGetLength, _corefoundationLib, "CFAttributedStringGetLength") })
-	_register("CFAttributedStringGetMutableString", func() { purego.RegisterLibFunc(&_fnCFAttributedStringGetMutableString, _corefoundationLib, "CFAttributedStringGetMutableString") })
-	_register("CFAttributedStringGetStatisticalWritingDirections", func() { purego.RegisterLibFunc(&_fnCFAttributedStringGetStatisticalWritingDirections, _corefoundationLib, "CFAttributedStringGetStatisticalWritingDirections") })
-	_register("CFAttributedStringGetString", func() { purego.RegisterLibFunc(&_fnCFAttributedStringGetString, _corefoundationLib, "CFAttributedStringGetString") })
-	_register("CFAttributedStringGetTypeID", func() { purego.RegisterLibFunc(&_fnCFAttributedStringGetTypeID, _corefoundationLib, "CFAttributedStringGetTypeID") })
-	_register("CFAttributedStringRemoveAttribute", func() { purego.RegisterLibFunc(&_fnCFAttributedStringRemoveAttribute, _corefoundationLib, "CFAttributedStringRemoveAttribute") })
-	_register("CFAttributedStringReplaceAttributedString", func() { purego.RegisterLibFunc(&_fnCFAttributedStringReplaceAttributedString, _corefoundationLib, "CFAttributedStringReplaceAttributedString") })
-	_register("CFAttributedStringReplaceString", func() { purego.RegisterLibFunc(&_fnCFAttributedStringReplaceString, _corefoundationLib, "CFAttributedStringReplaceString") })
-	_register("CFAttributedStringSetAttribute", func() { purego.RegisterLibFunc(&_fnCFAttributedStringSetAttribute, _corefoundationLib, "CFAttributedStringSetAttribute") })
-	_register("CFAttributedStringSetAttributes", func() { purego.RegisterLibFunc(&_fnCFAttributedStringSetAttributes, _corefoundationLib, "CFAttributedStringSetAttributes") })
+	_register("CFAttributedStringBeginEditing", func() {
+		purego.RegisterLibFunc(&_fnCFAttributedStringBeginEditing, _corefoundationLib, "CFAttributedStringBeginEditing")
+	})
+	_register("CFAttributedStringCreate", func() {
+		purego.RegisterLibFunc(&_fnCFAttributedStringCreate, _corefoundationLib, "CFAttributedStringCreate")
+	})
+	_register("CFAttributedStringCreateCopy", func() {
+		purego.RegisterLibFunc(&_fnCFAttributedStringCreateCopy, _corefoundationLib, "CFAttributedStringCreateCopy")
+	})
+	_register("CFAttributedStringCreateMutable", func() {
+		purego.RegisterLibFunc(&_fnCFAttributedStringCreateMutable, _corefoundationLib, "CFAttributedStringCreateMutable")
+	})
+	_register("CFAttributedStringCreateMutableCopy", func() {
+		purego.RegisterLibFunc(&_fnCFAttributedStringCreateMutableCopy, _corefoundationLib, "CFAttributedStringCreateMutableCopy")
+	})
+	_register("CFAttributedStringCreateWithSubstring", func() {
+		purego.RegisterLibFunc(&_fnCFAttributedStringCreateWithSubstring, _corefoundationLib, "CFAttributedStringCreateWithSubstring")
+	})
+	_register("CFAttributedStringEndEditing", func() {
+		purego.RegisterLibFunc(&_fnCFAttributedStringEndEditing, _corefoundationLib, "CFAttributedStringEndEditing")
+	})
+	_register("CFAttributedStringGetAttribute", func() {
+		purego.RegisterLibFunc(&_fnCFAttributedStringGetAttribute, _corefoundationLib, "CFAttributedStringGetAttribute")
+	})
+	_register("CFAttributedStringGetAttributeAndLongestEffectiveRange", func() {
+		purego.RegisterLibFunc(&_fnCFAttributedStringGetAttributeAndLongestEffectiveRange, _corefoundationLib, "CFAttributedStringGetAttributeAndLongestEffectiveRange")
+	})
+	_register("CFAttributedStringGetAttributes", func() {
+		purego.RegisterLibFunc(&_fnCFAttributedStringGetAttributes, _corefoundationLib, "CFAttributedStringGetAttributes")
+	})
+	_register("CFAttributedStringGetAttributesAndLongestEffectiveRange", func() {
+		purego.RegisterLibFunc(&_fnCFAttributedStringGetAttributesAndLongestEffectiveRange, _corefoundationLib, "CFAttributedStringGetAttributesAndLongestEffectiveRange")
+	})
+	_register("CFAttributedStringGetBidiLevelsAndResolvedDirections", func() {
+		purego.RegisterLibFunc(&_fnCFAttributedStringGetBidiLevelsAndResolvedDirections, _corefoundationLib, "CFAttributedStringGetBidiLevelsAndResolvedDirections")
+	})
+	_register("CFAttributedStringGetLength", func() {
+		purego.RegisterLibFunc(&_fnCFAttributedStringGetLength, _corefoundationLib, "CFAttributedStringGetLength")
+	})
+	_register("CFAttributedStringGetMutableString", func() {
+		purego.RegisterLibFunc(&_fnCFAttributedStringGetMutableString, _corefoundationLib, "CFAttributedStringGetMutableString")
+	})
+	_register("CFAttributedStringGetStatisticalWritingDirections", func() {
+		purego.RegisterLibFunc(&_fnCFAttributedStringGetStatisticalWritingDirections, _corefoundationLib, "CFAttributedStringGetStatisticalWritingDirections")
+	})
+	_register("CFAttributedStringGetString", func() {
+		purego.RegisterLibFunc(&_fnCFAttributedStringGetString, _corefoundationLib, "CFAttributedStringGetString")
+	})
+	_register("CFAttributedStringGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnCFAttributedStringGetTypeID, _corefoundationLib, "CFAttributedStringGetTypeID")
+	})
+	_register("CFAttributedStringRemoveAttribute", func() {
+		purego.RegisterLibFunc(&_fnCFAttributedStringRemoveAttribute, _corefoundationLib, "CFAttributedStringRemoveAttribute")
+	})
+	_register("CFAttributedStringReplaceAttributedString", func() {
+		purego.RegisterLibFunc(&_fnCFAttributedStringReplaceAttributedString, _corefoundationLib, "CFAttributedStringReplaceAttributedString")
+	})
+	_register("CFAttributedStringReplaceString", func() {
+		purego.RegisterLibFunc(&_fnCFAttributedStringReplaceString, _corefoundationLib, "CFAttributedStringReplaceString")
+	})
+	_register("CFAttributedStringSetAttribute", func() {
+		purego.RegisterLibFunc(&_fnCFAttributedStringSetAttribute, _corefoundationLib, "CFAttributedStringSetAttribute")
+	})
+	_register("CFAttributedStringSetAttributes", func() {
+		purego.RegisterLibFunc(&_fnCFAttributedStringSetAttributes, _corefoundationLib, "CFAttributedStringSetAttributes")
+	})
 	_register("CFAutorelease", func() { purego.RegisterLibFunc(&_fnCFAutorelease, _corefoundationLib, "CFAutorelease") })
 	_register("CFBagAddValue", func() { purego.RegisterLibFunc(&_fnCFBagAddValue, _corefoundationLib, "CFBagAddValue") })
 	_register("CFBagApplyFunction", func() { purego.RegisterLibFunc(&_fnCFBagApplyFunction, _corefoundationLib, "CFBagApplyFunction") })
@@ -120,444 +208,1040 @@ func _loadLibrary() {
 	_register("CFBagCreate", func() { purego.RegisterLibFunc(&_fnCFBagCreate, _corefoundationLib, "CFBagCreate") })
 	_register("CFBagCreateCopy", func() { purego.RegisterLibFunc(&_fnCFBagCreateCopy, _corefoundationLib, "CFBagCreateCopy") })
 	_register("CFBagCreateMutable", func() { purego.RegisterLibFunc(&_fnCFBagCreateMutable, _corefoundationLib, "CFBagCreateMutable") })
-	_register("CFBagCreateMutableCopy", func() { purego.RegisterLibFunc(&_fnCFBagCreateMutableCopy, _corefoundationLib, "CFBagCreateMutableCopy") })
+	_register("CFBagCreateMutableCopy", func() {
+		purego.RegisterLibFunc(&_fnCFBagCreateMutableCopy, _corefoundationLib, "CFBagCreateMutableCopy")
+	})
 	_register("CFBagGetCount", func() { purego.RegisterLibFunc(&_fnCFBagGetCount, _corefoundationLib, "CFBagGetCount") })
 	_register("CFBagGetCountOfValue", func() { purego.RegisterLibFunc(&_fnCFBagGetCountOfValue, _corefoundationLib, "CFBagGetCountOfValue") })
 	_register("CFBagGetTypeID", func() { purego.RegisterLibFunc(&_fnCFBagGetTypeID, _corefoundationLib, "CFBagGetTypeID") })
 	_register("CFBagGetValue", func() { purego.RegisterLibFunc(&_fnCFBagGetValue, _corefoundationLib, "CFBagGetValue") })
-	_register("CFBagGetValueIfPresent", func() { purego.RegisterLibFunc(&_fnCFBagGetValueIfPresent, _corefoundationLib, "CFBagGetValueIfPresent") })
+	_register("CFBagGetValueIfPresent", func() {
+		purego.RegisterLibFunc(&_fnCFBagGetValueIfPresent, _corefoundationLib, "CFBagGetValueIfPresent")
+	})
 	_register("CFBagGetValues", func() { purego.RegisterLibFunc(&_fnCFBagGetValues, _corefoundationLib, "CFBagGetValues") })
 	_register("CFBagRemoveAllValues", func() { purego.RegisterLibFunc(&_fnCFBagRemoveAllValues, _corefoundationLib, "CFBagRemoveAllValues") })
 	_register("CFBagRemoveValue", func() { purego.RegisterLibFunc(&_fnCFBagRemoveValue, _corefoundationLib, "CFBagRemoveValue") })
 	_register("CFBagReplaceValue", func() { purego.RegisterLibFunc(&_fnCFBagReplaceValue, _corefoundationLib, "CFBagReplaceValue") })
 	_register("CFBagSetValue", func() { purego.RegisterLibFunc(&_fnCFBagSetValue, _corefoundationLib, "CFBagSetValue") })
 	_register("CFBinaryHeapAddValue", func() { purego.RegisterLibFunc(&_fnCFBinaryHeapAddValue, _corefoundationLib, "CFBinaryHeapAddValue") })
-	_register("CFBinaryHeapApplyFunction", func() { purego.RegisterLibFunc(&_fnCFBinaryHeapApplyFunction, _corefoundationLib, "CFBinaryHeapApplyFunction") })
-	_register("CFBinaryHeapContainsValue", func() { purego.RegisterLibFunc(&_fnCFBinaryHeapContainsValue, _corefoundationLib, "CFBinaryHeapContainsValue") })
+	_register("CFBinaryHeapApplyFunction", func() {
+		purego.RegisterLibFunc(&_fnCFBinaryHeapApplyFunction, _corefoundationLib, "CFBinaryHeapApplyFunction")
+	})
+	_register("CFBinaryHeapContainsValue", func() {
+		purego.RegisterLibFunc(&_fnCFBinaryHeapContainsValue, _corefoundationLib, "CFBinaryHeapContainsValue")
+	})
 	_register("CFBinaryHeapCreate", func() { purego.RegisterLibFunc(&_fnCFBinaryHeapCreate, _corefoundationLib, "CFBinaryHeapCreate") })
-	_register("CFBinaryHeapCreateCopy", func() { purego.RegisterLibFunc(&_fnCFBinaryHeapCreateCopy, _corefoundationLib, "CFBinaryHeapCreateCopy") })
+	_register("CFBinaryHeapCreateCopy", func() {
+		purego.RegisterLibFunc(&_fnCFBinaryHeapCreateCopy, _corefoundationLib, "CFBinaryHeapCreateCopy")
+	})
 	_register("CFBinaryHeapGetCount", func() { purego.RegisterLibFunc(&_fnCFBinaryHeapGetCount, _corefoundationLib, "CFBinaryHeapGetCount") })
-	_register("CFBinaryHeapGetCountOfValue", func() { purego.RegisterLibFunc(&_fnCFBinaryHeapGetCountOfValue, _corefoundationLib, "CFBinaryHeapGetCountOfValue") })
-	_register("CFBinaryHeapGetMinimum", func() { purego.RegisterLibFunc(&_fnCFBinaryHeapGetMinimum, _corefoundationLib, "CFBinaryHeapGetMinimum") })
-	_register("CFBinaryHeapGetMinimumIfPresent", func() { purego.RegisterLibFunc(&_fnCFBinaryHeapGetMinimumIfPresent, _corefoundationLib, "CFBinaryHeapGetMinimumIfPresent") })
+	_register("CFBinaryHeapGetCountOfValue", func() {
+		purego.RegisterLibFunc(&_fnCFBinaryHeapGetCountOfValue, _corefoundationLib, "CFBinaryHeapGetCountOfValue")
+	})
+	_register("CFBinaryHeapGetMinimum", func() {
+		purego.RegisterLibFunc(&_fnCFBinaryHeapGetMinimum, _corefoundationLib, "CFBinaryHeapGetMinimum")
+	})
+	_register("CFBinaryHeapGetMinimumIfPresent", func() {
+		purego.RegisterLibFunc(&_fnCFBinaryHeapGetMinimumIfPresent, _corefoundationLib, "CFBinaryHeapGetMinimumIfPresent")
+	})
 	_register("CFBinaryHeapGetTypeID", func() { purego.RegisterLibFunc(&_fnCFBinaryHeapGetTypeID, _corefoundationLib, "CFBinaryHeapGetTypeID") })
 	_register("CFBinaryHeapGetValues", func() { purego.RegisterLibFunc(&_fnCFBinaryHeapGetValues, _corefoundationLib, "CFBinaryHeapGetValues") })
-	_register("CFBinaryHeapRemoveAllValues", func() { purego.RegisterLibFunc(&_fnCFBinaryHeapRemoveAllValues, _corefoundationLib, "CFBinaryHeapRemoveAllValues") })
-	_register("CFBinaryHeapRemoveMinimumValue", func() { purego.RegisterLibFunc(&_fnCFBinaryHeapRemoveMinimumValue, _corefoundationLib, "CFBinaryHeapRemoveMinimumValue") })
-	_register("CFBitVectorContainsBit", func() { purego.RegisterLibFunc(&_fnCFBitVectorContainsBit, _corefoundationLib, "CFBitVectorContainsBit") })
+	_register("CFBinaryHeapRemoveAllValues", func() {
+		purego.RegisterLibFunc(&_fnCFBinaryHeapRemoveAllValues, _corefoundationLib, "CFBinaryHeapRemoveAllValues")
+	})
+	_register("CFBinaryHeapRemoveMinimumValue", func() {
+		purego.RegisterLibFunc(&_fnCFBinaryHeapRemoveMinimumValue, _corefoundationLib, "CFBinaryHeapRemoveMinimumValue")
+	})
+	_register("CFBitVectorContainsBit", func() {
+		purego.RegisterLibFunc(&_fnCFBitVectorContainsBit, _corefoundationLib, "CFBitVectorContainsBit")
+	})
 	_register("CFBitVectorCreate", func() { purego.RegisterLibFunc(&_fnCFBitVectorCreate, _corefoundationLib, "CFBitVectorCreate") })
 	_register("CFBitVectorCreateCopy", func() { purego.RegisterLibFunc(&_fnCFBitVectorCreateCopy, _corefoundationLib, "CFBitVectorCreateCopy") })
-	_register("CFBitVectorCreateMutable", func() { purego.RegisterLibFunc(&_fnCFBitVectorCreateMutable, _corefoundationLib, "CFBitVectorCreateMutable") })
-	_register("CFBitVectorCreateMutableCopy", func() { purego.RegisterLibFunc(&_fnCFBitVectorCreateMutableCopy, _corefoundationLib, "CFBitVectorCreateMutableCopy") })
-	_register("CFBitVectorFlipBitAtIndex", func() { purego.RegisterLibFunc(&_fnCFBitVectorFlipBitAtIndex, _corefoundationLib, "CFBitVectorFlipBitAtIndex") })
+	_register("CFBitVectorCreateMutable", func() {
+		purego.RegisterLibFunc(&_fnCFBitVectorCreateMutable, _corefoundationLib, "CFBitVectorCreateMutable")
+	})
+	_register("CFBitVectorCreateMutableCopy", func() {
+		purego.RegisterLibFunc(&_fnCFBitVectorCreateMutableCopy, _corefoundationLib, "CFBitVectorCreateMutableCopy")
+	})
+	_register("CFBitVectorFlipBitAtIndex", func() {
+		purego.RegisterLibFunc(&_fnCFBitVectorFlipBitAtIndex, _corefoundationLib, "CFBitVectorFlipBitAtIndex")
+	})
 	_register("CFBitVectorFlipBits", func() { purego.RegisterLibFunc(&_fnCFBitVectorFlipBits, _corefoundationLib, "CFBitVectorFlipBits") })
-	_register("CFBitVectorGetBitAtIndex", func() { purego.RegisterLibFunc(&_fnCFBitVectorGetBitAtIndex, _corefoundationLib, "CFBitVectorGetBitAtIndex") })
+	_register("CFBitVectorGetBitAtIndex", func() {
+		purego.RegisterLibFunc(&_fnCFBitVectorGetBitAtIndex, _corefoundationLib, "CFBitVectorGetBitAtIndex")
+	})
 	_register("CFBitVectorGetBits", func() { purego.RegisterLibFunc(&_fnCFBitVectorGetBits, _corefoundationLib, "CFBitVectorGetBits") })
 	_register("CFBitVectorGetCount", func() { purego.RegisterLibFunc(&_fnCFBitVectorGetCount, _corefoundationLib, "CFBitVectorGetCount") })
-	_register("CFBitVectorGetCountOfBit", func() { purego.RegisterLibFunc(&_fnCFBitVectorGetCountOfBit, _corefoundationLib, "CFBitVectorGetCountOfBit") })
-	_register("CFBitVectorGetFirstIndexOfBit", func() { purego.RegisterLibFunc(&_fnCFBitVectorGetFirstIndexOfBit, _corefoundationLib, "CFBitVectorGetFirstIndexOfBit") })
-	_register("CFBitVectorGetLastIndexOfBit", func() { purego.RegisterLibFunc(&_fnCFBitVectorGetLastIndexOfBit, _corefoundationLib, "CFBitVectorGetLastIndexOfBit") })
+	_register("CFBitVectorGetCountOfBit", func() {
+		purego.RegisterLibFunc(&_fnCFBitVectorGetCountOfBit, _corefoundationLib, "CFBitVectorGetCountOfBit")
+	})
+	_register("CFBitVectorGetFirstIndexOfBit", func() {
+		purego.RegisterLibFunc(&_fnCFBitVectorGetFirstIndexOfBit, _corefoundationLib, "CFBitVectorGetFirstIndexOfBit")
+	})
+	_register("CFBitVectorGetLastIndexOfBit", func() {
+		purego.RegisterLibFunc(&_fnCFBitVectorGetLastIndexOfBit, _corefoundationLib, "CFBitVectorGetLastIndexOfBit")
+	})
 	_register("CFBitVectorGetTypeID", func() { purego.RegisterLibFunc(&_fnCFBitVectorGetTypeID, _corefoundationLib, "CFBitVectorGetTypeID") })
 	_register("CFBitVectorSetAllBits", func() { purego.RegisterLibFunc(&_fnCFBitVectorSetAllBits, _corefoundationLib, "CFBitVectorSetAllBits") })
-	_register("CFBitVectorSetBitAtIndex", func() { purego.RegisterLibFunc(&_fnCFBitVectorSetBitAtIndex, _corefoundationLib, "CFBitVectorSetBitAtIndex") })
+	_register("CFBitVectorSetBitAtIndex", func() {
+		purego.RegisterLibFunc(&_fnCFBitVectorSetBitAtIndex, _corefoundationLib, "CFBitVectorSetBitAtIndex")
+	})
 	_register("CFBitVectorSetBits", func() { purego.RegisterLibFunc(&_fnCFBitVectorSetBits, _corefoundationLib, "CFBitVectorSetBits") })
 	_register("CFBitVectorSetCount", func() { purego.RegisterLibFunc(&_fnCFBitVectorSetCount, _corefoundationLib, "CFBitVectorSetCount") })
 	_register("CFBooleanGetTypeID", func() { purego.RegisterLibFunc(&_fnCFBooleanGetTypeID, _corefoundationLib, "CFBooleanGetTypeID") })
 	_register("CFBooleanGetValue", func() { purego.RegisterLibFunc(&_fnCFBooleanGetValue, _corefoundationLib, "CFBooleanGetValue") })
-	_register("CFBundleCloseBundleResourceMap", func() { purego.RegisterLibFunc(&_fnCFBundleCloseBundleResourceMap, _corefoundationLib, "CFBundleCloseBundleResourceMap") })
-	_register("CFBundleCopyAuxiliaryExecutableURL", func() { purego.RegisterLibFunc(&_fnCFBundleCopyAuxiliaryExecutableURL, _corefoundationLib, "CFBundleCopyAuxiliaryExecutableURL") })
-	_register("CFBundleCopyBuiltInPlugInsURL", func() { purego.RegisterLibFunc(&_fnCFBundleCopyBuiltInPlugInsURL, _corefoundationLib, "CFBundleCopyBuiltInPlugInsURL") })
-	_register("CFBundleCopyBundleLocalizations", func() { purego.RegisterLibFunc(&_fnCFBundleCopyBundleLocalizations, _corefoundationLib, "CFBundleCopyBundleLocalizations") })
+	_register("CFBundleCloseBundleResourceMap", func() {
+		purego.RegisterLibFunc(&_fnCFBundleCloseBundleResourceMap, _corefoundationLib, "CFBundleCloseBundleResourceMap")
+	})
+	_register("CFBundleCopyAuxiliaryExecutableURL", func() {
+		purego.RegisterLibFunc(&_fnCFBundleCopyAuxiliaryExecutableURL, _corefoundationLib, "CFBundleCopyAuxiliaryExecutableURL")
+	})
+	_register("CFBundleCopyBuiltInPlugInsURL", func() {
+		purego.RegisterLibFunc(&_fnCFBundleCopyBuiltInPlugInsURL, _corefoundationLib, "CFBundleCopyBuiltInPlugInsURL")
+	})
+	_register("CFBundleCopyBundleLocalizations", func() {
+		purego.RegisterLibFunc(&_fnCFBundleCopyBundleLocalizations, _corefoundationLib, "CFBundleCopyBundleLocalizations")
+	})
 	_register("CFBundleCopyBundleURL", func() { purego.RegisterLibFunc(&_fnCFBundleCopyBundleURL, _corefoundationLib, "CFBundleCopyBundleURL") })
-	_register("CFBundleCopyExecutableArchitectures", func() { purego.RegisterLibFunc(&_fnCFBundleCopyExecutableArchitectures, _corefoundationLib, "CFBundleCopyExecutableArchitectures") })
-	_register("CFBundleCopyExecutableArchitecturesForURL", func() { purego.RegisterLibFunc(&_fnCFBundleCopyExecutableArchitecturesForURL, _corefoundationLib, "CFBundleCopyExecutableArchitecturesForURL") })
-	_register("CFBundleCopyExecutableURL", func() { purego.RegisterLibFunc(&_fnCFBundleCopyExecutableURL, _corefoundationLib, "CFBundleCopyExecutableURL") })
-	_register("CFBundleCopyInfoDictionaryForURL", func() { purego.RegisterLibFunc(&_fnCFBundleCopyInfoDictionaryForURL, _corefoundationLib, "CFBundleCopyInfoDictionaryForURL") })
-	_register("CFBundleCopyInfoDictionaryInDirectory", func() { purego.RegisterLibFunc(&_fnCFBundleCopyInfoDictionaryInDirectory, _corefoundationLib, "CFBundleCopyInfoDictionaryInDirectory") })
-	_register("CFBundleCopyLocalizationsForPreferences", func() { purego.RegisterLibFunc(&_fnCFBundleCopyLocalizationsForPreferences, _corefoundationLib, "CFBundleCopyLocalizationsForPreferences") })
-	_register("CFBundleCopyLocalizationsForURL", func() { purego.RegisterLibFunc(&_fnCFBundleCopyLocalizationsForURL, _corefoundationLib, "CFBundleCopyLocalizationsForURL") })
-	_register("CFBundleCopyLocalizedString", func() { purego.RegisterLibFunc(&_fnCFBundleCopyLocalizedString, _corefoundationLib, "CFBundleCopyLocalizedString") })
-	_register("CFBundleCopyLocalizedStringForLocalizations", func() { purego.RegisterLibFunc(&_fnCFBundleCopyLocalizedStringForLocalizations, _corefoundationLib, "CFBundleCopyLocalizedStringForLocalizations") })
-	_register("CFBundleCopyPreferredLocalizationsFromArray", func() { purego.RegisterLibFunc(&_fnCFBundleCopyPreferredLocalizationsFromArray, _corefoundationLib, "CFBundleCopyPreferredLocalizationsFromArray") })
-	_register("CFBundleCopyPrivateFrameworksURL", func() { purego.RegisterLibFunc(&_fnCFBundleCopyPrivateFrameworksURL, _corefoundationLib, "CFBundleCopyPrivateFrameworksURL") })
-	_register("CFBundleCopyResourceURL", func() { purego.RegisterLibFunc(&_fnCFBundleCopyResourceURL, _corefoundationLib, "CFBundleCopyResourceURL") })
-	_register("CFBundleCopyResourceURLForLocalization", func() { purego.RegisterLibFunc(&_fnCFBundleCopyResourceURLForLocalization, _corefoundationLib, "CFBundleCopyResourceURLForLocalization") })
-	_register("CFBundleCopyResourceURLInDirectory", func() { purego.RegisterLibFunc(&_fnCFBundleCopyResourceURLInDirectory, _corefoundationLib, "CFBundleCopyResourceURLInDirectory") })
-	_register("CFBundleCopyResourceURLsOfType", func() { purego.RegisterLibFunc(&_fnCFBundleCopyResourceURLsOfType, _corefoundationLib, "CFBundleCopyResourceURLsOfType") })
-	_register("CFBundleCopyResourceURLsOfTypeForLocalization", func() { purego.RegisterLibFunc(&_fnCFBundleCopyResourceURLsOfTypeForLocalization, _corefoundationLib, "CFBundleCopyResourceURLsOfTypeForLocalization") })
-	_register("CFBundleCopyResourceURLsOfTypeInDirectory", func() { purego.RegisterLibFunc(&_fnCFBundleCopyResourceURLsOfTypeInDirectory, _corefoundationLib, "CFBundleCopyResourceURLsOfTypeInDirectory") })
-	_register("CFBundleCopyResourcesDirectoryURL", func() { purego.RegisterLibFunc(&_fnCFBundleCopyResourcesDirectoryURL, _corefoundationLib, "CFBundleCopyResourcesDirectoryURL") })
-	_register("CFBundleCopySharedFrameworksURL", func() { purego.RegisterLibFunc(&_fnCFBundleCopySharedFrameworksURL, _corefoundationLib, "CFBundleCopySharedFrameworksURL") })
-	_register("CFBundleCopySharedSupportURL", func() { purego.RegisterLibFunc(&_fnCFBundleCopySharedSupportURL, _corefoundationLib, "CFBundleCopySharedSupportURL") })
-	_register("CFBundleCopySupportFilesDirectoryURL", func() { purego.RegisterLibFunc(&_fnCFBundleCopySupportFilesDirectoryURL, _corefoundationLib, "CFBundleCopySupportFilesDirectoryURL") })
+	_register("CFBundleCopyExecutableArchitectures", func() {
+		purego.RegisterLibFunc(&_fnCFBundleCopyExecutableArchitectures, _corefoundationLib, "CFBundleCopyExecutableArchitectures")
+	})
+	_register("CFBundleCopyExecutableArchitecturesForURL", func() {
+		purego.RegisterLibFunc(&_fnCFBundleCopyExecutableArchitecturesForURL, _corefoundationLib, "CFBundleCopyExecutableArchitecturesForURL")
+	})
+	_register("CFBundleCopyExecutableURL", func() {
+		purego.RegisterLibFunc(&_fnCFBundleCopyExecutableURL, _corefoundationLib, "CFBundleCopyExecutableURL")
+	})
+	_register("CFBundleCopyInfoDictionaryForURL", func() {
+		purego.RegisterLibFunc(&_fnCFBundleCopyInfoDictionaryForURL, _corefoundationLib, "CFBundleCopyInfoDictionaryForURL")
+	})
+	_register("CFBundleCopyInfoDictionaryInDirectory", func() {
+		purego.RegisterLibFunc(&_fnCFBundleCopyInfoDictionaryInDirectory, _corefoundationLib, "CFBundleCopyInfoDictionaryInDirectory")
+	})
+	_register("CFBundleCopyLocalizationsForPreferences", func() {
+		purego.RegisterLibFunc(&_fnCFBundleCopyLocalizationsForPreferences, _corefoundationLib, "CFBundleCopyLocalizationsForPreferences")
+	})
+	_register("CFBundleCopyLocalizationsForURL", func() {
+		purego.RegisterLibFunc(&_fnCFBundleCopyLocalizationsForURL, _corefoundationLib, "CFBundleCopyLocalizationsForURL")
+	})
+	_register("CFBundleCopyLocalizedString", func() {
+		purego.RegisterLibFunc(&_fnCFBundleCopyLocalizedString, _corefoundationLib, "CFBundleCopyLocalizedString")
+	})
+	_register("CFBundleCopyLocalizedStringForLocalizations", func() {
+		purego.RegisterLibFunc(&_fnCFBundleCopyLocalizedStringForLocalizations, _corefoundationLib, "CFBundleCopyLocalizedStringForLocalizations")
+	})
+	_register("CFBundleCopyPreferredLocalizationsFromArray", func() {
+		purego.RegisterLibFunc(&_fnCFBundleCopyPreferredLocalizationsFromArray, _corefoundationLib, "CFBundleCopyPreferredLocalizationsFromArray")
+	})
+	_register("CFBundleCopyPrivateFrameworksURL", func() {
+		purego.RegisterLibFunc(&_fnCFBundleCopyPrivateFrameworksURL, _corefoundationLib, "CFBundleCopyPrivateFrameworksURL")
+	})
+	_register("CFBundleCopyResourceURL", func() {
+		purego.RegisterLibFunc(&_fnCFBundleCopyResourceURL, _corefoundationLib, "CFBundleCopyResourceURL")
+	})
+	_register("CFBundleCopyResourceURLForLocalization", func() {
+		purego.RegisterLibFunc(&_fnCFBundleCopyResourceURLForLocalization, _corefoundationLib, "CFBundleCopyResourceURLForLocalization")
+	})
+	_register("CFBundleCopyResourceURLInDirectory", func() {
+		purego.RegisterLibFunc(&_fnCFBundleCopyResourceURLInDirectory, _corefoundationLib, "CFBundleCopyResourceURLInDirectory")
+	})
+	_register("CFBundleCopyResourceURLsOfType", func() {
+		purego.RegisterLibFunc(&_fnCFBundleCopyResourceURLsOfType, _corefoundationLib, "CFBundleCopyResourceURLsOfType")
+	})
+	_register("CFBundleCopyResourceURLsOfTypeForLocalization", func() {
+		purego.RegisterLibFunc(&_fnCFBundleCopyResourceURLsOfTypeForLocalization, _corefoundationLib, "CFBundleCopyResourceURLsOfTypeForLocalization")
+	})
+	_register("CFBundleCopyResourceURLsOfTypeInDirectory", func() {
+		purego.RegisterLibFunc(&_fnCFBundleCopyResourceURLsOfTypeInDirectory, _corefoundationLib, "CFBundleCopyResourceURLsOfTypeInDirectory")
+	})
+	_register("CFBundleCopyResourcesDirectoryURL", func() {
+		purego.RegisterLibFunc(&_fnCFBundleCopyResourcesDirectoryURL, _corefoundationLib, "CFBundleCopyResourcesDirectoryURL")
+	})
+	_register("CFBundleCopySharedFrameworksURL", func() {
+		purego.RegisterLibFunc(&_fnCFBundleCopySharedFrameworksURL, _corefoundationLib, "CFBundleCopySharedFrameworksURL")
+	})
+	_register("CFBundleCopySharedSupportURL", func() {
+		purego.RegisterLibFunc(&_fnCFBundleCopySharedSupportURL, _corefoundationLib, "CFBundleCopySharedSupportURL")
+	})
+	_register("CFBundleCopySupportFilesDirectoryURL", func() {
+		purego.RegisterLibFunc(&_fnCFBundleCopySupportFilesDirectoryURL, _corefoundationLib, "CFBundleCopySupportFilesDirectoryURL")
+	})
 	_register("CFBundleCreate", func() { purego.RegisterLibFunc(&_fnCFBundleCreate, _corefoundationLib, "CFBundleCreate") })
-	_register("CFBundleCreateBundlesFromDirectory", func() { purego.RegisterLibFunc(&_fnCFBundleCreateBundlesFromDirectory, _corefoundationLib, "CFBundleCreateBundlesFromDirectory") })
+	_register("CFBundleCreateBundlesFromDirectory", func() {
+		purego.RegisterLibFunc(&_fnCFBundleCreateBundlesFromDirectory, _corefoundationLib, "CFBundleCreateBundlesFromDirectory")
+	})
 	_register("CFBundleGetAllBundles", func() { purego.RegisterLibFunc(&_fnCFBundleGetAllBundles, _corefoundationLib, "CFBundleGetAllBundles") })
-	_register("CFBundleGetBundleWithIdentifier", func() { purego.RegisterLibFunc(&_fnCFBundleGetBundleWithIdentifier, _corefoundationLib, "CFBundleGetBundleWithIdentifier") })
-	_register("CFBundleGetDataPointerForName", func() { purego.RegisterLibFunc(&_fnCFBundleGetDataPointerForName, _corefoundationLib, "CFBundleGetDataPointerForName") })
-	_register("CFBundleGetDataPointersForNames", func() { purego.RegisterLibFunc(&_fnCFBundleGetDataPointersForNames, _corefoundationLib, "CFBundleGetDataPointersForNames") })
-	_register("CFBundleGetDevelopmentRegion", func() { purego.RegisterLibFunc(&_fnCFBundleGetDevelopmentRegion, _corefoundationLib, "CFBundleGetDevelopmentRegion") })
-	_register("CFBundleGetFunctionPointerForName", func() { purego.RegisterLibFunc(&_fnCFBundleGetFunctionPointerForName, _corefoundationLib, "CFBundleGetFunctionPointerForName") })
-	_register("CFBundleGetFunctionPointersForNames", func() { purego.RegisterLibFunc(&_fnCFBundleGetFunctionPointersForNames, _corefoundationLib, "CFBundleGetFunctionPointersForNames") })
+	_register("CFBundleGetBundleWithIdentifier", func() {
+		purego.RegisterLibFunc(&_fnCFBundleGetBundleWithIdentifier, _corefoundationLib, "CFBundleGetBundleWithIdentifier")
+	})
+	_register("CFBundleGetDataPointerForName", func() {
+		purego.RegisterLibFunc(&_fnCFBundleGetDataPointerForName, _corefoundationLib, "CFBundleGetDataPointerForName")
+	})
+	_register("CFBundleGetDataPointersForNames", func() {
+		purego.RegisterLibFunc(&_fnCFBundleGetDataPointersForNames, _corefoundationLib, "CFBundleGetDataPointersForNames")
+	})
+	_register("CFBundleGetDevelopmentRegion", func() {
+		purego.RegisterLibFunc(&_fnCFBundleGetDevelopmentRegion, _corefoundationLib, "CFBundleGetDevelopmentRegion")
+	})
+	_register("CFBundleGetFunctionPointerForName", func() {
+		purego.RegisterLibFunc(&_fnCFBundleGetFunctionPointerForName, _corefoundationLib, "CFBundleGetFunctionPointerForName")
+	})
+	_register("CFBundleGetFunctionPointersForNames", func() {
+		purego.RegisterLibFunc(&_fnCFBundleGetFunctionPointersForNames, _corefoundationLib, "CFBundleGetFunctionPointersForNames")
+	})
 	_register("CFBundleGetIdentifier", func() { purego.RegisterLibFunc(&_fnCFBundleGetIdentifier, _corefoundationLib, "CFBundleGetIdentifier") })
-	_register("CFBundleGetInfoDictionary", func() { purego.RegisterLibFunc(&_fnCFBundleGetInfoDictionary, _corefoundationLib, "CFBundleGetInfoDictionary") })
-	_register("CFBundleGetLocalInfoDictionary", func() { purego.RegisterLibFunc(&_fnCFBundleGetLocalInfoDictionary, _corefoundationLib, "CFBundleGetLocalInfoDictionary") })
+	_register("CFBundleGetInfoDictionary", func() {
+		purego.RegisterLibFunc(&_fnCFBundleGetInfoDictionary, _corefoundationLib, "CFBundleGetInfoDictionary")
+	})
+	_register("CFBundleGetLocalInfoDictionary", func() {
+		purego.RegisterLibFunc(&_fnCFBundleGetLocalInfoDictionary, _corefoundationLib, "CFBundleGetLocalInfoDictionary")
+	})
 	_register("CFBundleGetMainBundle", func() { purego.RegisterLibFunc(&_fnCFBundleGetMainBundle, _corefoundationLib, "CFBundleGetMainBundle") })
-	_register("CFBundleGetPackageInfo", func() { purego.RegisterLibFunc(&_fnCFBundleGetPackageInfo, _corefoundationLib, "CFBundleGetPackageInfo") })
-	_register("CFBundleGetPackageInfoInDirectory", func() { purego.RegisterLibFunc(&_fnCFBundleGetPackageInfoInDirectory, _corefoundationLib, "CFBundleGetPackageInfoInDirectory") })
+	_register("CFBundleGetPackageInfo", func() {
+		purego.RegisterLibFunc(&_fnCFBundleGetPackageInfo, _corefoundationLib, "CFBundleGetPackageInfo")
+	})
+	_register("CFBundleGetPackageInfoInDirectory", func() {
+		purego.RegisterLibFunc(&_fnCFBundleGetPackageInfoInDirectory, _corefoundationLib, "CFBundleGetPackageInfoInDirectory")
+	})
 	_register("CFBundleGetPlugIn", func() { purego.RegisterLibFunc(&_fnCFBundleGetPlugIn, _corefoundationLib, "CFBundleGetPlugIn") })
 	_register("CFBundleGetTypeID", func() { purego.RegisterLibFunc(&_fnCFBundleGetTypeID, _corefoundationLib, "CFBundleGetTypeID") })
-	_register("CFBundleGetValueForInfoDictionaryKey", func() { purego.RegisterLibFunc(&_fnCFBundleGetValueForInfoDictionaryKey, _corefoundationLib, "CFBundleGetValueForInfoDictionaryKey") })
-	_register("CFBundleGetVersionNumber", func() { purego.RegisterLibFunc(&_fnCFBundleGetVersionNumber, _corefoundationLib, "CFBundleGetVersionNumber") })
-	_register("CFBundleIsArchitectureLoadable", func() { purego.RegisterLibFunc(&_fnCFBundleIsArchitectureLoadable, _corefoundationLib, "CFBundleIsArchitectureLoadable") })
-	_register("CFBundleIsExecutableLoadable", func() { purego.RegisterLibFunc(&_fnCFBundleIsExecutableLoadable, _corefoundationLib, "CFBundleIsExecutableLoadable") })
-	_register("CFBundleIsExecutableLoadableForURL", func() { purego.RegisterLibFunc(&_fnCFBundleIsExecutableLoadableForURL, _corefoundationLib, "CFBundleIsExecutableLoadableForURL") })
-	_register("CFBundleIsExecutableLoaded", func() { purego.RegisterLibFunc(&_fnCFBundleIsExecutableLoaded, _corefoundationLib, "CFBundleIsExecutableLoaded") })
-	_register("CFBundleLoadExecutable", func() { purego.RegisterLibFunc(&_fnCFBundleLoadExecutable, _corefoundationLib, "CFBundleLoadExecutable") })
-	_register("CFBundleLoadExecutableAndReturnError", func() { purego.RegisterLibFunc(&_fnCFBundleLoadExecutableAndReturnError, _corefoundationLib, "CFBundleLoadExecutableAndReturnError") })
-	_register("CFBundleOpenBundleResourceFiles", func() { purego.RegisterLibFunc(&_fnCFBundleOpenBundleResourceFiles, _corefoundationLib, "CFBundleOpenBundleResourceFiles") })
-	_register("CFBundleOpenBundleResourceMap", func() { purego.RegisterLibFunc(&_fnCFBundleOpenBundleResourceMap, _corefoundationLib, "CFBundleOpenBundleResourceMap") })
-	_register("CFBundlePreflightExecutable", func() { purego.RegisterLibFunc(&_fnCFBundlePreflightExecutable, _corefoundationLib, "CFBundlePreflightExecutable") })
-	_register("CFBundleUnloadExecutable", func() { purego.RegisterLibFunc(&_fnCFBundleUnloadExecutable, _corefoundationLib, "CFBundleUnloadExecutable") })
+	_register("CFBundleGetValueForInfoDictionaryKey", func() {
+		purego.RegisterLibFunc(&_fnCFBundleGetValueForInfoDictionaryKey, _corefoundationLib, "CFBundleGetValueForInfoDictionaryKey")
+	})
+	_register("CFBundleGetVersionNumber", func() {
+		purego.RegisterLibFunc(&_fnCFBundleGetVersionNumber, _corefoundationLib, "CFBundleGetVersionNumber")
+	})
+	_register("CFBundleIsArchitectureLoadable", func() {
+		purego.RegisterLibFunc(&_fnCFBundleIsArchitectureLoadable, _corefoundationLib, "CFBundleIsArchitectureLoadable")
+	})
+	_register("CFBundleIsExecutableLoadable", func() {
+		purego.RegisterLibFunc(&_fnCFBundleIsExecutableLoadable, _corefoundationLib, "CFBundleIsExecutableLoadable")
+	})
+	_register("CFBundleIsExecutableLoadableForURL", func() {
+		purego.RegisterLibFunc(&_fnCFBundleIsExecutableLoadableForURL, _corefoundationLib, "CFBundleIsExecutableLoadableForURL")
+	})
+	_register("CFBundleIsExecutableLoaded", func() {
+		purego.RegisterLibFunc(&_fnCFBundleIsExecutableLoaded, _corefoundationLib, "CFBundleIsExecutableLoaded")
+	})
+	_register("CFBundleLoadExecutable", func() {
+		purego.RegisterLibFunc(&_fnCFBundleLoadExecutable, _corefoundationLib, "CFBundleLoadExecutable")
+	})
+	_register("CFBundleLoadExecutableAndReturnError", func() {
+		purego.RegisterLibFunc(&_fnCFBundleLoadExecutableAndReturnError, _corefoundationLib, "CFBundleLoadExecutableAndReturnError")
+	})
+	_register("CFBundleOpenBundleResourceFiles", func() {
+		purego.RegisterLibFunc(&_fnCFBundleOpenBundleResourceFiles, _corefoundationLib, "CFBundleOpenBundleResourceFiles")
+	})
+	_register("CFBundleOpenBundleResourceMap", func() {
+		purego.RegisterLibFunc(&_fnCFBundleOpenBundleResourceMap, _corefoundationLib, "CFBundleOpenBundleResourceMap")
+	})
+	_register("CFBundlePreflightExecutable", func() {
+		purego.RegisterLibFunc(&_fnCFBundlePreflightExecutable, _corefoundationLib, "CFBundlePreflightExecutable")
+	})
+	_register("CFBundleUnloadExecutable", func() {
+		purego.RegisterLibFunc(&_fnCFBundleUnloadExecutable, _corefoundationLib, "CFBundleUnloadExecutable")
+	})
 	_register("CFByteOrderGetCurrent", func() { purego.RegisterLibFunc(&_fnCFByteOrderGetCurrent, _corefoundationLib, "CFByteOrderGetCurrent") })
 	_register("CFCalendarCopyCurrent", func() { purego.RegisterLibFunc(&_fnCFCalendarCopyCurrent, _corefoundationLib, "CFCalendarCopyCurrent") })
 	_register("CFCalendarCopyLocale", func() { purego.RegisterLibFunc(&_fnCFCalendarCopyLocale, _corefoundationLib, "CFCalendarCopyLocale") })
-	_register("CFCalendarCopyTimeZone", func() { purego.RegisterLibFunc(&_fnCFCalendarCopyTimeZone, _corefoundationLib, "CFCalendarCopyTimeZone") })
-	_register("CFCalendarCreateWithIdentifier", func() { purego.RegisterLibFunc(&_fnCFCalendarCreateWithIdentifier, _corefoundationLib, "CFCalendarCreateWithIdentifier") })
-	_register("CFCalendarGetFirstWeekday", func() { purego.RegisterLibFunc(&_fnCFCalendarGetFirstWeekday, _corefoundationLib, "CFCalendarGetFirstWeekday") })
-	_register("CFCalendarGetIdentifier", func() { purego.RegisterLibFunc(&_fnCFCalendarGetIdentifier, _corefoundationLib, "CFCalendarGetIdentifier") })
-	_register("CFCalendarGetMaximumRangeOfUnit", func() { purego.RegisterLibFunc(&_fnCFCalendarGetMaximumRangeOfUnit, _corefoundationLib, "CFCalendarGetMaximumRangeOfUnit") })
-	_register("CFCalendarGetMinimumDaysInFirstWeek", func() { purego.RegisterLibFunc(&_fnCFCalendarGetMinimumDaysInFirstWeek, _corefoundationLib, "CFCalendarGetMinimumDaysInFirstWeek") })
-	_register("CFCalendarGetMinimumRangeOfUnit", func() { purego.RegisterLibFunc(&_fnCFCalendarGetMinimumRangeOfUnit, _corefoundationLib, "CFCalendarGetMinimumRangeOfUnit") })
-	_register("CFCalendarGetOrdinalityOfUnit", func() { purego.RegisterLibFunc(&_fnCFCalendarGetOrdinalityOfUnit, _corefoundationLib, "CFCalendarGetOrdinalityOfUnit") })
-	_register("CFCalendarGetRangeOfUnit", func() { purego.RegisterLibFunc(&_fnCFCalendarGetRangeOfUnit, _corefoundationLib, "CFCalendarGetRangeOfUnit") })
-	_register("CFCalendarGetTimeRangeOfUnit", func() { purego.RegisterLibFunc(&_fnCFCalendarGetTimeRangeOfUnit, _corefoundationLib, "CFCalendarGetTimeRangeOfUnit") })
+	_register("CFCalendarCopyTimeZone", func() {
+		purego.RegisterLibFunc(&_fnCFCalendarCopyTimeZone, _corefoundationLib, "CFCalendarCopyTimeZone")
+	})
+	_register("CFCalendarCreateWithIdentifier", func() {
+		purego.RegisterLibFunc(&_fnCFCalendarCreateWithIdentifier, _corefoundationLib, "CFCalendarCreateWithIdentifier")
+	})
+	_register("CFCalendarGetFirstWeekday", func() {
+		purego.RegisterLibFunc(&_fnCFCalendarGetFirstWeekday, _corefoundationLib, "CFCalendarGetFirstWeekday")
+	})
+	_register("CFCalendarGetIdentifier", func() {
+		purego.RegisterLibFunc(&_fnCFCalendarGetIdentifier, _corefoundationLib, "CFCalendarGetIdentifier")
+	})
+	_register("CFCalendarGetMaximumRangeOfUnit", func() {
+		purego.RegisterLibFunc(&_fnCFCalendarGetMaximumRangeOfUnit, _corefoundationLib, "CFCalendarGetMaximumRangeOfUnit")
+	})
+	_register("CFCalendarGetMinimumDaysInFirstWeek", func() {
+		purego.RegisterLibFunc(&_fnCFCalendarGetMinimumDaysInFirstWeek, _corefoundationLib, "CFCalendarGetMinimumDaysInFirstWeek")
+	})
+	_register("CFCalendarGetMinimumRangeOfUnit", func() {
+		purego.RegisterLibFunc(&_fnCFCalendarGetMinimumRangeOfUnit, _corefoundationLib, "CFCalendarGetMinimumRangeOfUnit")
+	})
+	_register("CFCalendarGetOrdinalityOfUnit", func() {
+		purego.RegisterLibFunc(&_fnCFCalendarGetOrdinalityOfUnit, _corefoundationLib, "CFCalendarGetOrdinalityOfUnit")
+	})
+	_register("CFCalendarGetRangeOfUnit", func() {
+		purego.RegisterLibFunc(&_fnCFCalendarGetRangeOfUnit, _corefoundationLib, "CFCalendarGetRangeOfUnit")
+	})
+	_register("CFCalendarGetTimeRangeOfUnit", func() {
+		purego.RegisterLibFunc(&_fnCFCalendarGetTimeRangeOfUnit, _corefoundationLib, "CFCalendarGetTimeRangeOfUnit")
+	})
 	_register("CFCalendarGetTypeID", func() { purego.RegisterLibFunc(&_fnCFCalendarGetTypeID, _corefoundationLib, "CFCalendarGetTypeID") })
-	_register("CFCalendarSetFirstWeekday", func() { purego.RegisterLibFunc(&_fnCFCalendarSetFirstWeekday, _corefoundationLib, "CFCalendarSetFirstWeekday") })
+	_register("CFCalendarSetFirstWeekday", func() {
+		purego.RegisterLibFunc(&_fnCFCalendarSetFirstWeekday, _corefoundationLib, "CFCalendarSetFirstWeekday")
+	})
 	_register("CFCalendarSetLocale", func() { purego.RegisterLibFunc(&_fnCFCalendarSetLocale, _corefoundationLib, "CFCalendarSetLocale") })
-	_register("CFCalendarSetMinimumDaysInFirstWeek", func() { purego.RegisterLibFunc(&_fnCFCalendarSetMinimumDaysInFirstWeek, _corefoundationLib, "CFCalendarSetMinimumDaysInFirstWeek") })
+	_register("CFCalendarSetMinimumDaysInFirstWeek", func() {
+		purego.RegisterLibFunc(&_fnCFCalendarSetMinimumDaysInFirstWeek, _corefoundationLib, "CFCalendarSetMinimumDaysInFirstWeek")
+	})
 	_register("CFCalendarSetTimeZone", func() { purego.RegisterLibFunc(&_fnCFCalendarSetTimeZone, _corefoundationLib, "CFCalendarSetTimeZone") })
-	_register("CFCharacterSetAddCharactersInRange", func() { purego.RegisterLibFunc(&_fnCFCharacterSetAddCharactersInRange, _corefoundationLib, "CFCharacterSetAddCharactersInRange") })
-	_register("CFCharacterSetAddCharactersInString", func() { purego.RegisterLibFunc(&_fnCFCharacterSetAddCharactersInString, _corefoundationLib, "CFCharacterSetAddCharactersInString") })
-	_register("CFCharacterSetCreateBitmapRepresentation", func() { purego.RegisterLibFunc(&_fnCFCharacterSetCreateBitmapRepresentation, _corefoundationLib, "CFCharacterSetCreateBitmapRepresentation") })
-	_register("CFCharacterSetCreateCopy", func() { purego.RegisterLibFunc(&_fnCFCharacterSetCreateCopy, _corefoundationLib, "CFCharacterSetCreateCopy") })
-	_register("CFCharacterSetCreateInvertedSet", func() { purego.RegisterLibFunc(&_fnCFCharacterSetCreateInvertedSet, _corefoundationLib, "CFCharacterSetCreateInvertedSet") })
-	_register("CFCharacterSetCreateMutable", func() { purego.RegisterLibFunc(&_fnCFCharacterSetCreateMutable, _corefoundationLib, "CFCharacterSetCreateMutable") })
-	_register("CFCharacterSetCreateMutableCopy", func() { purego.RegisterLibFunc(&_fnCFCharacterSetCreateMutableCopy, _corefoundationLib, "CFCharacterSetCreateMutableCopy") })
-	_register("CFCharacterSetCreateWithBitmapRepresentation", func() { purego.RegisterLibFunc(&_fnCFCharacterSetCreateWithBitmapRepresentation, _corefoundationLib, "CFCharacterSetCreateWithBitmapRepresentation") })
-	_register("CFCharacterSetCreateWithCharactersInRange", func() { purego.RegisterLibFunc(&_fnCFCharacterSetCreateWithCharactersInRange, _corefoundationLib, "CFCharacterSetCreateWithCharactersInRange") })
-	_register("CFCharacterSetCreateWithCharactersInString", func() { purego.RegisterLibFunc(&_fnCFCharacterSetCreateWithCharactersInString, _corefoundationLib, "CFCharacterSetCreateWithCharactersInString") })
-	_register("CFCharacterSetGetPredefined", func() { purego.RegisterLibFunc(&_fnCFCharacterSetGetPredefined, _corefoundationLib, "CFCharacterSetGetPredefined") })
-	_register("CFCharacterSetGetTypeID", func() { purego.RegisterLibFunc(&_fnCFCharacterSetGetTypeID, _corefoundationLib, "CFCharacterSetGetTypeID") })
-	_register("CFCharacterSetHasMemberInPlane", func() { purego.RegisterLibFunc(&_fnCFCharacterSetHasMemberInPlane, _corefoundationLib, "CFCharacterSetHasMemberInPlane") })
-	_register("CFCharacterSetIntersect", func() { purego.RegisterLibFunc(&_fnCFCharacterSetIntersect, _corefoundationLib, "CFCharacterSetIntersect") })
+	_register("CFCharacterSetAddCharactersInRange", func() {
+		purego.RegisterLibFunc(&_fnCFCharacterSetAddCharactersInRange, _corefoundationLib, "CFCharacterSetAddCharactersInRange")
+	})
+	_register("CFCharacterSetAddCharactersInString", func() {
+		purego.RegisterLibFunc(&_fnCFCharacterSetAddCharactersInString, _corefoundationLib, "CFCharacterSetAddCharactersInString")
+	})
+	_register("CFCharacterSetCreateBitmapRepresentation", func() {
+		purego.RegisterLibFunc(&_fnCFCharacterSetCreateBitmapRepresentation, _corefoundationLib, "CFCharacterSetCreateBitmapRepresentation")
+	})
+	_register("CFCharacterSetCreateCopy", func() {
+		purego.RegisterLibFunc(&_fnCFCharacterSetCreateCopy, _corefoundationLib, "CFCharacterSetCreateCopy")
+	})
+	_register("CFCharacterSetCreateInvertedSet", func() {
+		purego.RegisterLibFunc(&_fnCFCharacterSetCreateInvertedSet, _corefoundationLib, "CFCharacterSetCreateInvertedSet")
+	})
+	_register("CFCharacterSetCreateMutable", func() {
+		purego.RegisterLibFunc(&_fnCFCharacterSetCreateMutable, _corefoundationLib, "CFCharacterSetCreateMutable")
+	})
+	_register("CFCharacterSetCreateMutableCopy", func() {
+		purego.RegisterLibFunc(&_fnCFCharacterSetCreateMutableCopy, _corefoundationLib, "CFCharacterSetCreateMutableCopy")
+	})
+	_register("CFCharacterSetCreateWithBitmapRepresentation", func() {
+		purego.RegisterLibFunc(&_fnCFCharacterSetCreateWithBitmapRepresentation, _corefoundationLib, "CFCharacterSetCreateWithBitmapRepresentation")
+	})
+	_register("CFCharacterSetCreateWithCharactersInRange", func() {
+		purego.RegisterLibFunc(&_fnCFCharacterSetCreateWithCharactersInRange, _corefoundationLib, "CFCharacterSetCreateWithCharactersInRange")
+	})
+	_register("CFCharacterSetCreateWithCharactersInString", func() {
+		purego.RegisterLibFunc(&_fnCFCharacterSetCreateWithCharactersInString, _corefoundationLib, "CFCharacterSetCreateWithCharactersInString")
+	})
+	_register("CFCharacterSetGetPredefined", func() {
+		purego.RegisterLibFunc(&_fnCFCharacterSetGetPredefined, _corefoundationLib, "CFCharacterSetGetPredefined")
+	})
+	_register("CFCharacterSetGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnCFCharacterSetGetTypeID, _corefoundationLib, "CFCharacterSetGetTypeID")
+	})
+	_register("CFCharacterSetHasMemberInPlane", func() {
+		purego.RegisterLibFunc(&_fnCFCharacterSetHasMemberInPlane, _corefoundationLib, "CFCharacterSetHasMemberInPlane")
+	})
+	_register("CFCharacterSetIntersect", func() {
+		purego.RegisterLibFunc(&_fnCFCharacterSetIntersect, _corefoundationLib, "CFCharacterSetIntersect")
+	})
 	_register("CFCharacterSetInvert", func() { purego.RegisterLibFunc(&_fnCFCharacterSetInvert, _corefoundationLib, "CFCharacterSetInvert") })
-	_register("CFCharacterSetIsCharacterMember", func() { purego.RegisterLibFunc(&_fnCFCharacterSetIsCharacterMember, _corefoundationLib, "CFCharacterSetIsCharacterMember") })
-	_register("CFCharacterSetIsLongCharacterMember", func() { purego.RegisterLibFunc(&_fnCFCharacterSetIsLongCharacterMember, _corefoundationLib, "CFCharacterSetIsLongCharacterMember") })
-	_register("CFCharacterSetIsSupersetOfSet", func() { purego.RegisterLibFunc(&_fnCFCharacterSetIsSupersetOfSet, _corefoundationLib, "CFCharacterSetIsSupersetOfSet") })
-	_register("CFCharacterSetRemoveCharactersInRange", func() { purego.RegisterLibFunc(&_fnCFCharacterSetRemoveCharactersInRange, _corefoundationLib, "CFCharacterSetRemoveCharactersInRange") })
-	_register("CFCharacterSetRemoveCharactersInString", func() { purego.RegisterLibFunc(&_fnCFCharacterSetRemoveCharactersInString, _corefoundationLib, "CFCharacterSetRemoveCharactersInString") })
+	_register("CFCharacterSetIsCharacterMember", func() {
+		purego.RegisterLibFunc(&_fnCFCharacterSetIsCharacterMember, _corefoundationLib, "CFCharacterSetIsCharacterMember")
+	})
+	_register("CFCharacterSetIsLongCharacterMember", func() {
+		purego.RegisterLibFunc(&_fnCFCharacterSetIsLongCharacterMember, _corefoundationLib, "CFCharacterSetIsLongCharacterMember")
+	})
+	_register("CFCharacterSetIsSupersetOfSet", func() {
+		purego.RegisterLibFunc(&_fnCFCharacterSetIsSupersetOfSet, _corefoundationLib, "CFCharacterSetIsSupersetOfSet")
+	})
+	_register("CFCharacterSetRemoveCharactersInRange", func() {
+		purego.RegisterLibFunc(&_fnCFCharacterSetRemoveCharactersInRange, _corefoundationLib, "CFCharacterSetRemoveCharactersInRange")
+	})
+	_register("CFCharacterSetRemoveCharactersInString", func() {
+		purego.RegisterLibFunc(&_fnCFCharacterSetRemoveCharactersInString, _corefoundationLib, "CFCharacterSetRemoveCharactersInString")
+	})
 	_register("CFCharacterSetUnion", func() { purego.RegisterLibFunc(&_fnCFCharacterSetUnion, _corefoundationLib, "CFCharacterSetUnion") })
-	_register("CFConvertDoubleHostToSwapped", func() { purego.RegisterLibFunc(&_fnCFConvertDoubleHostToSwapped, _corefoundationLib, "CFConvertDoubleHostToSwapped") })
-	_register("CFConvertDoubleSwappedToHost", func() { purego.RegisterLibFunc(&_fnCFConvertDoubleSwappedToHost, _corefoundationLib, "CFConvertDoubleSwappedToHost") })
-	_register("CFConvertFloat32HostToSwapped", func() { purego.RegisterLibFunc(&_fnCFConvertFloat32HostToSwapped, _corefoundationLib, "CFConvertFloat32HostToSwapped") })
-	_register("CFConvertFloat32SwappedToHost", func() { purego.RegisterLibFunc(&_fnCFConvertFloat32SwappedToHost, _corefoundationLib, "CFConvertFloat32SwappedToHost") })
-	_register("CFConvertFloat64HostToSwapped", func() { purego.RegisterLibFunc(&_fnCFConvertFloat64HostToSwapped, _corefoundationLib, "CFConvertFloat64HostToSwapped") })
-	_register("CFConvertFloat64SwappedToHost", func() { purego.RegisterLibFunc(&_fnCFConvertFloat64SwappedToHost, _corefoundationLib, "CFConvertFloat64SwappedToHost") })
-	_register("CFConvertFloatHostToSwapped", func() { purego.RegisterLibFunc(&_fnCFConvertFloatHostToSwapped, _corefoundationLib, "CFConvertFloatHostToSwapped") })
-	_register("CFConvertFloatSwappedToHost", func() { purego.RegisterLibFunc(&_fnCFConvertFloatSwappedToHost, _corefoundationLib, "CFConvertFloatSwappedToHost") })
+	_register("CFConvertDoubleHostToSwapped", func() {
+		purego.RegisterLibFunc(&_fnCFConvertDoubleHostToSwapped, _corefoundationLib, "CFConvertDoubleHostToSwapped")
+	})
+	_register("CFConvertDoubleSwappedToHost", func() {
+		purego.RegisterLibFunc(&_fnCFConvertDoubleSwappedToHost, _corefoundationLib, "CFConvertDoubleSwappedToHost")
+	})
+	_register("CFConvertFloat32HostToSwapped", func() {
+		purego.RegisterLibFunc(&_fnCFConvertFloat32HostToSwapped, _corefoundationLib, "CFConvertFloat32HostToSwapped")
+	})
+	_register("CFConvertFloat32SwappedToHost", func() {
+		purego.RegisterLibFunc(&_fnCFConvertFloat32SwappedToHost, _corefoundationLib, "CFConvertFloat32SwappedToHost")
+	})
+	_register("CFConvertFloat64HostToSwapped", func() {
+		purego.RegisterLibFunc(&_fnCFConvertFloat64HostToSwapped, _corefoundationLib, "CFConvertFloat64HostToSwapped")
+	})
+	_register("CFConvertFloat64SwappedToHost", func() {
+		purego.RegisterLibFunc(&_fnCFConvertFloat64SwappedToHost, _corefoundationLib, "CFConvertFloat64SwappedToHost")
+	})
+	_register("CFConvertFloatHostToSwapped", func() {
+		purego.RegisterLibFunc(&_fnCFConvertFloatHostToSwapped, _corefoundationLib, "CFConvertFloatHostToSwapped")
+	})
+	_register("CFConvertFloatSwappedToHost", func() {
+		purego.RegisterLibFunc(&_fnCFConvertFloatSwappedToHost, _corefoundationLib, "CFConvertFloatSwappedToHost")
+	})
 	_register("CFCopyDescription", func() { purego.RegisterLibFunc(&_fnCFCopyDescription, _corefoundationLib, "CFCopyDescription") })
-	_register("CFCopyTypeIDDescription", func() { purego.RegisterLibFunc(&_fnCFCopyTypeIDDescription, _corefoundationLib, "CFCopyTypeIDDescription") })
+	_register("CFCopyTypeIDDescription", func() {
+		purego.RegisterLibFunc(&_fnCFCopyTypeIDDescription, _corefoundationLib, "CFCopyTypeIDDescription")
+	})
 	_register("CFDataAppendBytes", func() { purego.RegisterLibFunc(&_fnCFDataAppendBytes, _corefoundationLib, "CFDataAppendBytes") })
 	_register("CFDataCreate", func() { purego.RegisterLibFunc(&_fnCFDataCreate, _corefoundationLib, "CFDataCreate") })
 	_register("CFDataCreateCopy", func() { purego.RegisterLibFunc(&_fnCFDataCreateCopy, _corefoundationLib, "CFDataCreateCopy") })
 	_register("CFDataCreateMutable", func() { purego.RegisterLibFunc(&_fnCFDataCreateMutable, _corefoundationLib, "CFDataCreateMutable") })
-	_register("CFDataCreateMutableCopy", func() { purego.RegisterLibFunc(&_fnCFDataCreateMutableCopy, _corefoundationLib, "CFDataCreateMutableCopy") })
-	_register("CFDataCreateWithBytesNoCopy", func() { purego.RegisterLibFunc(&_fnCFDataCreateWithBytesNoCopy, _corefoundationLib, "CFDataCreateWithBytesNoCopy") })
+	_register("CFDataCreateMutableCopy", func() {
+		purego.RegisterLibFunc(&_fnCFDataCreateMutableCopy, _corefoundationLib, "CFDataCreateMutableCopy")
+	})
+	_register("CFDataCreateWithBytesNoCopy", func() {
+		purego.RegisterLibFunc(&_fnCFDataCreateWithBytesNoCopy, _corefoundationLib, "CFDataCreateWithBytesNoCopy")
+	})
 	_register("CFDataDeleteBytes", func() { purego.RegisterLibFunc(&_fnCFDataDeleteBytes, _corefoundationLib, "CFDataDeleteBytes") })
 	_register("CFDataFind", func() { purego.RegisterLibFunc(&_fnCFDataFind, _corefoundationLib, "CFDataFind") })
 	_register("CFDataGetBytePtr", func() { purego.RegisterLibFunc(&_fnCFDataGetBytePtr, _corefoundationLib, "CFDataGetBytePtr") })
 	_register("CFDataGetBytes", func() { purego.RegisterLibFunc(&_fnCFDataGetBytes, _corefoundationLib, "CFDataGetBytes") })
 	_register("CFDataGetLength", func() { purego.RegisterLibFunc(&_fnCFDataGetLength, _corefoundationLib, "CFDataGetLength") })
-	_register("CFDataGetMutableBytePtr", func() { purego.RegisterLibFunc(&_fnCFDataGetMutableBytePtr, _corefoundationLib, "CFDataGetMutableBytePtr") })
+	_register("CFDataGetMutableBytePtr", func() {
+		purego.RegisterLibFunc(&_fnCFDataGetMutableBytePtr, _corefoundationLib, "CFDataGetMutableBytePtr")
+	})
 	_register("CFDataGetTypeID", func() { purego.RegisterLibFunc(&_fnCFDataGetTypeID, _corefoundationLib, "CFDataGetTypeID") })
 	_register("CFDataIncreaseLength", func() { purego.RegisterLibFunc(&_fnCFDataIncreaseLength, _corefoundationLib, "CFDataIncreaseLength") })
 	_register("CFDataReplaceBytes", func() { purego.RegisterLibFunc(&_fnCFDataReplaceBytes, _corefoundationLib, "CFDataReplaceBytes") })
 	_register("CFDataSetLength", func() { purego.RegisterLibFunc(&_fnCFDataSetLength, _corefoundationLib, "CFDataSetLength") })
 	_register("CFDateCompare", func() { purego.RegisterLibFunc(&_fnCFDateCompare, _corefoundationLib, "CFDateCompare") })
 	_register("CFDateCreate", func() { purego.RegisterLibFunc(&_fnCFDateCreate, _corefoundationLib, "CFDateCreate") })
-	_register("CFDateFormatterCopyProperty", func() { purego.RegisterLibFunc(&_fnCFDateFormatterCopyProperty, _corefoundationLib, "CFDateFormatterCopyProperty") })
+	_register("CFDateFormatterCopyProperty", func() {
+		purego.RegisterLibFunc(&_fnCFDateFormatterCopyProperty, _corefoundationLib, "CFDateFormatterCopyProperty")
+	})
 	_register("CFDateFormatterCreate", func() { purego.RegisterLibFunc(&_fnCFDateFormatterCreate, _corefoundationLib, "CFDateFormatterCreate") })
-	_register("CFDateFormatterCreateDateFormatFromTemplate", func() { purego.RegisterLibFunc(&_fnCFDateFormatterCreateDateFormatFromTemplate, _corefoundationLib, "CFDateFormatterCreateDateFormatFromTemplate") })
-	_register("CFDateFormatterCreateDateFromString", func() { purego.RegisterLibFunc(&_fnCFDateFormatterCreateDateFromString, _corefoundationLib, "CFDateFormatterCreateDateFromString") })
-	_register("CFDateFormatterCreateISO8601Formatter", func() { purego.RegisterLibFunc(&_fnCFDateFormatterCreateISO8601Formatter, _corefoundationLib, "CFDateFormatterCreateISO8601Formatter") })
-	_register("CFDateFormatterCreateStringWithAbsoluteTime", func() { purego.RegisterLibFunc(&_fnCFDateFormatterCreateStringWithAbsoluteTime, _corefoundationLib, "CFDateFormatterCreateStringWithAbsoluteTime") })
-	_register("CFDateFormatterCreateStringWithDate", func() { purego.RegisterLibFunc(&_fnCFDateFormatterCreateStringWithDate, _corefoundationLib, "CFDateFormatterCreateStringWithDate") })
-	_register("CFDateFormatterGetAbsoluteTimeFromString", func() { purego.RegisterLibFunc(&_fnCFDateFormatterGetAbsoluteTimeFromString, _corefoundationLib, "CFDateFormatterGetAbsoluteTimeFromString") })
-	_register("CFDateFormatterGetDateStyle", func() { purego.RegisterLibFunc(&_fnCFDateFormatterGetDateStyle, _corefoundationLib, "CFDateFormatterGetDateStyle") })
-	_register("CFDateFormatterGetFormat", func() { purego.RegisterLibFunc(&_fnCFDateFormatterGetFormat, _corefoundationLib, "CFDateFormatterGetFormat") })
-	_register("CFDateFormatterGetLocale", func() { purego.RegisterLibFunc(&_fnCFDateFormatterGetLocale, _corefoundationLib, "CFDateFormatterGetLocale") })
-	_register("CFDateFormatterGetTimeStyle", func() { purego.RegisterLibFunc(&_fnCFDateFormatterGetTimeStyle, _corefoundationLib, "CFDateFormatterGetTimeStyle") })
-	_register("CFDateFormatterGetTypeID", func() { purego.RegisterLibFunc(&_fnCFDateFormatterGetTypeID, _corefoundationLib, "CFDateFormatterGetTypeID") })
-	_register("CFDateFormatterSetFormat", func() { purego.RegisterLibFunc(&_fnCFDateFormatterSetFormat, _corefoundationLib, "CFDateFormatterSetFormat") })
-	_register("CFDateFormatterSetProperty", func() { purego.RegisterLibFunc(&_fnCFDateFormatterSetProperty, _corefoundationLib, "CFDateFormatterSetProperty") })
+	_register("CFDateFormatterCreateDateFormatFromTemplate", func() {
+		purego.RegisterLibFunc(&_fnCFDateFormatterCreateDateFormatFromTemplate, _corefoundationLib, "CFDateFormatterCreateDateFormatFromTemplate")
+	})
+	_register("CFDateFormatterCreateDateFromString", func() {
+		purego.RegisterLibFunc(&_fnCFDateFormatterCreateDateFromString, _corefoundationLib, "CFDateFormatterCreateDateFromString")
+	})
+	_register("CFDateFormatterCreateISO8601Formatter", func() {
+		purego.RegisterLibFunc(&_fnCFDateFormatterCreateISO8601Formatter, _corefoundationLib, "CFDateFormatterCreateISO8601Formatter")
+	})
+	_register("CFDateFormatterCreateStringWithAbsoluteTime", func() {
+		purego.RegisterLibFunc(&_fnCFDateFormatterCreateStringWithAbsoluteTime, _corefoundationLib, "CFDateFormatterCreateStringWithAbsoluteTime")
+	})
+	_register("CFDateFormatterCreateStringWithDate", func() {
+		purego.RegisterLibFunc(&_fnCFDateFormatterCreateStringWithDate, _corefoundationLib, "CFDateFormatterCreateStringWithDate")
+	})
+	_register("CFDateFormatterGetAbsoluteTimeFromString", func() {
+		purego.RegisterLibFunc(&_fnCFDateFormatterGetAbsoluteTimeFromString, _corefoundationLib, "CFDateFormatterGetAbsoluteTimeFromString")
+	})
+	_register("CFDateFormatterGetDateStyle", func() {
+		purego.RegisterLibFunc(&_fnCFDateFormatterGetDateStyle, _corefoundationLib, "CFDateFormatterGetDateStyle")
+	})
+	_register("CFDateFormatterGetFormat", func() {
+		purego.RegisterLibFunc(&_fnCFDateFormatterGetFormat, _corefoundationLib, "CFDateFormatterGetFormat")
+	})
+	_register("CFDateFormatterGetLocale", func() {
+		purego.RegisterLibFunc(&_fnCFDateFormatterGetLocale, _corefoundationLib, "CFDateFormatterGetLocale")
+	})
+	_register("CFDateFormatterGetTimeStyle", func() {
+		purego.RegisterLibFunc(&_fnCFDateFormatterGetTimeStyle, _corefoundationLib, "CFDateFormatterGetTimeStyle")
+	})
+	_register("CFDateFormatterGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnCFDateFormatterGetTypeID, _corefoundationLib, "CFDateFormatterGetTypeID")
+	})
+	_register("CFDateFormatterSetFormat", func() {
+		purego.RegisterLibFunc(&_fnCFDateFormatterSetFormat, _corefoundationLib, "CFDateFormatterSetFormat")
+	})
+	_register("CFDateFormatterSetProperty", func() {
+		purego.RegisterLibFunc(&_fnCFDateFormatterSetProperty, _corefoundationLib, "CFDateFormatterSetProperty")
+	})
 	_register("CFDateGetAbsoluteTime", func() { purego.RegisterLibFunc(&_fnCFDateGetAbsoluteTime, _corefoundationLib, "CFDateGetAbsoluteTime") })
-	_register("CFDateGetTimeIntervalSinceDate", func() { purego.RegisterLibFunc(&_fnCFDateGetTimeIntervalSinceDate, _corefoundationLib, "CFDateGetTimeIntervalSinceDate") })
+	_register("CFDateGetTimeIntervalSinceDate", func() {
+		purego.RegisterLibFunc(&_fnCFDateGetTimeIntervalSinceDate, _corefoundationLib, "CFDateGetTimeIntervalSinceDate")
+	})
 	_register("CFDateGetTypeID", func() { purego.RegisterLibFunc(&_fnCFDateGetTypeID, _corefoundationLib, "CFDateGetTypeID") })
 	_register("CFDictionaryAddValue", func() { purego.RegisterLibFunc(&_fnCFDictionaryAddValue, _corefoundationLib, "CFDictionaryAddValue") })
-	_register("CFDictionaryApplyFunction", func() { purego.RegisterLibFunc(&_fnCFDictionaryApplyFunction, _corefoundationLib, "CFDictionaryApplyFunction") })
-	_register("CFDictionaryContainsKey", func() { purego.RegisterLibFunc(&_fnCFDictionaryContainsKey, _corefoundationLib, "CFDictionaryContainsKey") })
-	_register("CFDictionaryContainsValue", func() { purego.RegisterLibFunc(&_fnCFDictionaryContainsValue, _corefoundationLib, "CFDictionaryContainsValue") })
+	_register("CFDictionaryApplyFunction", func() {
+		purego.RegisterLibFunc(&_fnCFDictionaryApplyFunction, _corefoundationLib, "CFDictionaryApplyFunction")
+	})
+	_register("CFDictionaryContainsKey", func() {
+		purego.RegisterLibFunc(&_fnCFDictionaryContainsKey, _corefoundationLib, "CFDictionaryContainsKey")
+	})
+	_register("CFDictionaryContainsValue", func() {
+		purego.RegisterLibFunc(&_fnCFDictionaryContainsValue, _corefoundationLib, "CFDictionaryContainsValue")
+	})
 	_register("CFDictionaryCreate", func() { purego.RegisterLibFunc(&_fnCFDictionaryCreate, _corefoundationLib, "CFDictionaryCreate") })
-	_register("CFDictionaryCreateCopy", func() { purego.RegisterLibFunc(&_fnCFDictionaryCreateCopy, _corefoundationLib, "CFDictionaryCreateCopy") })
-	_register("CFDictionaryCreateMutable", func() { purego.RegisterLibFunc(&_fnCFDictionaryCreateMutable, _corefoundationLib, "CFDictionaryCreateMutable") })
-	_register("CFDictionaryCreateMutableCopy", func() { purego.RegisterLibFunc(&_fnCFDictionaryCreateMutableCopy, _corefoundationLib, "CFDictionaryCreateMutableCopy") })
+	_register("CFDictionaryCreateCopy", func() {
+		purego.RegisterLibFunc(&_fnCFDictionaryCreateCopy, _corefoundationLib, "CFDictionaryCreateCopy")
+	})
+	_register("CFDictionaryCreateMutable", func() {
+		purego.RegisterLibFunc(&_fnCFDictionaryCreateMutable, _corefoundationLib, "CFDictionaryCreateMutable")
+	})
+	_register("CFDictionaryCreateMutableCopy", func() {
+		purego.RegisterLibFunc(&_fnCFDictionaryCreateMutableCopy, _corefoundationLib, "CFDictionaryCreateMutableCopy")
+	})
 	_register("CFDictionaryGetCount", func() { purego.RegisterLibFunc(&_fnCFDictionaryGetCount, _corefoundationLib, "CFDictionaryGetCount") })
-	_register("CFDictionaryGetCountOfKey", func() { purego.RegisterLibFunc(&_fnCFDictionaryGetCountOfKey, _corefoundationLib, "CFDictionaryGetCountOfKey") })
-	_register("CFDictionaryGetCountOfValue", func() { purego.RegisterLibFunc(&_fnCFDictionaryGetCountOfValue, _corefoundationLib, "CFDictionaryGetCountOfValue") })
-	_register("CFDictionaryGetKeysAndValues", func() { purego.RegisterLibFunc(&_fnCFDictionaryGetKeysAndValues, _corefoundationLib, "CFDictionaryGetKeysAndValues") })
+	_register("CFDictionaryGetCountOfKey", func() {
+		purego.RegisterLibFunc(&_fnCFDictionaryGetCountOfKey, _corefoundationLib, "CFDictionaryGetCountOfKey")
+	})
+	_register("CFDictionaryGetCountOfValue", func() {
+		purego.RegisterLibFunc(&_fnCFDictionaryGetCountOfValue, _corefoundationLib, "CFDictionaryGetCountOfValue")
+	})
+	_register("CFDictionaryGetKeysAndValues", func() {
+		purego.RegisterLibFunc(&_fnCFDictionaryGetKeysAndValues, _corefoundationLib, "CFDictionaryGetKeysAndValues")
+	})
 	_register("CFDictionaryGetTypeID", func() { purego.RegisterLibFunc(&_fnCFDictionaryGetTypeID, _corefoundationLib, "CFDictionaryGetTypeID") })
 	_register("CFDictionaryGetValue", func() { purego.RegisterLibFunc(&_fnCFDictionaryGetValue, _corefoundationLib, "CFDictionaryGetValue") })
-	_register("CFDictionaryGetValueIfPresent", func() { purego.RegisterLibFunc(&_fnCFDictionaryGetValueIfPresent, _corefoundationLib, "CFDictionaryGetValueIfPresent") })
-	_register("CFDictionaryRemoveAllValues", func() { purego.RegisterLibFunc(&_fnCFDictionaryRemoveAllValues, _corefoundationLib, "CFDictionaryRemoveAllValues") })
-	_register("CFDictionaryRemoveValue", func() { purego.RegisterLibFunc(&_fnCFDictionaryRemoveValue, _corefoundationLib, "CFDictionaryRemoveValue") })
-	_register("CFDictionaryReplaceValue", func() { purego.RegisterLibFunc(&_fnCFDictionaryReplaceValue, _corefoundationLib, "CFDictionaryReplaceValue") })
+	_register("CFDictionaryGetValueIfPresent", func() {
+		purego.RegisterLibFunc(&_fnCFDictionaryGetValueIfPresent, _corefoundationLib, "CFDictionaryGetValueIfPresent")
+	})
+	_register("CFDictionaryRemoveAllValues", func() {
+		purego.RegisterLibFunc(&_fnCFDictionaryRemoveAllValues, _corefoundationLib, "CFDictionaryRemoveAllValues")
+	})
+	_register("CFDictionaryRemoveValue", func() {
+		purego.RegisterLibFunc(&_fnCFDictionaryRemoveValue, _corefoundationLib, "CFDictionaryRemoveValue")
+	})
+	_register("CFDictionaryReplaceValue", func() {
+		purego.RegisterLibFunc(&_fnCFDictionaryReplaceValue, _corefoundationLib, "CFDictionaryReplaceValue")
+	})
 	_register("CFDictionarySetValue", func() { purego.RegisterLibFunc(&_fnCFDictionarySetValue, _corefoundationLib, "CFDictionarySetValue") })
 	_register("CFEqual", func() { purego.RegisterLibFunc(&_fnCFEqual, _corefoundationLib, "CFEqual") })
-	_register("CFErrorCopyDescription", func() { purego.RegisterLibFunc(&_fnCFErrorCopyDescription, _corefoundationLib, "CFErrorCopyDescription") })
-	_register("CFErrorCopyFailureReason", func() { purego.RegisterLibFunc(&_fnCFErrorCopyFailureReason, _corefoundationLib, "CFErrorCopyFailureReason") })
-	_register("CFErrorCopyRecoverySuggestion", func() { purego.RegisterLibFunc(&_fnCFErrorCopyRecoverySuggestion, _corefoundationLib, "CFErrorCopyRecoverySuggestion") })
+	_register("CFErrorCopyDescription", func() {
+		purego.RegisterLibFunc(&_fnCFErrorCopyDescription, _corefoundationLib, "CFErrorCopyDescription")
+	})
+	_register("CFErrorCopyFailureReason", func() {
+		purego.RegisterLibFunc(&_fnCFErrorCopyFailureReason, _corefoundationLib, "CFErrorCopyFailureReason")
+	})
+	_register("CFErrorCopyRecoverySuggestion", func() {
+		purego.RegisterLibFunc(&_fnCFErrorCopyRecoverySuggestion, _corefoundationLib, "CFErrorCopyRecoverySuggestion")
+	})
 	_register("CFErrorCopyUserInfo", func() { purego.RegisterLibFunc(&_fnCFErrorCopyUserInfo, _corefoundationLib, "CFErrorCopyUserInfo") })
 	_register("CFErrorCreate", func() { purego.RegisterLibFunc(&_fnCFErrorCreate, _corefoundationLib, "CFErrorCreate") })
-	_register("CFErrorCreateWithUserInfoKeysAndValues", func() { purego.RegisterLibFunc(&_fnCFErrorCreateWithUserInfoKeysAndValues, _corefoundationLib, "CFErrorCreateWithUserInfoKeysAndValues") })
+	_register("CFErrorCreateWithUserInfoKeysAndValues", func() {
+		purego.RegisterLibFunc(&_fnCFErrorCreateWithUserInfoKeysAndValues, _corefoundationLib, "CFErrorCreateWithUserInfoKeysAndValues")
+	})
 	_register("CFErrorGetCode", func() { purego.RegisterLibFunc(&_fnCFErrorGetCode, _corefoundationLib, "CFErrorGetCode") })
 	_register("CFErrorGetDomain", func() { purego.RegisterLibFunc(&_fnCFErrorGetDomain, _corefoundationLib, "CFErrorGetDomain") })
 	_register("CFErrorGetTypeID", func() { purego.RegisterLibFunc(&_fnCFErrorGetTypeID, _corefoundationLib, "CFErrorGetTypeID") })
-	_register("CFFileDescriptorCreate", func() { purego.RegisterLibFunc(&_fnCFFileDescriptorCreate, _corefoundationLib, "CFFileDescriptorCreate") })
-	_register("CFFileDescriptorCreateRunLoopSource", func() { purego.RegisterLibFunc(&_fnCFFileDescriptorCreateRunLoopSource, _corefoundationLib, "CFFileDescriptorCreateRunLoopSource") })
-	_register("CFFileDescriptorDisableCallBacks", func() { purego.RegisterLibFunc(&_fnCFFileDescriptorDisableCallBacks, _corefoundationLib, "CFFileDescriptorDisableCallBacks") })
-	_register("CFFileDescriptorEnableCallBacks", func() { purego.RegisterLibFunc(&_fnCFFileDescriptorEnableCallBacks, _corefoundationLib, "CFFileDescriptorEnableCallBacks") })
-	_register("CFFileDescriptorGetContext", func() { purego.RegisterLibFunc(&_fnCFFileDescriptorGetContext, _corefoundationLib, "CFFileDescriptorGetContext") })
-	_register("CFFileDescriptorGetNativeDescriptor", func() { purego.RegisterLibFunc(&_fnCFFileDescriptorGetNativeDescriptor, _corefoundationLib, "CFFileDescriptorGetNativeDescriptor") })
-	_register("CFFileDescriptorGetTypeID", func() { purego.RegisterLibFunc(&_fnCFFileDescriptorGetTypeID, _corefoundationLib, "CFFileDescriptorGetTypeID") })
-	_register("CFFileDescriptorInvalidate", func() { purego.RegisterLibFunc(&_fnCFFileDescriptorInvalidate, _corefoundationLib, "CFFileDescriptorInvalidate") })
-	_register("CFFileDescriptorIsValid", func() { purego.RegisterLibFunc(&_fnCFFileDescriptorIsValid, _corefoundationLib, "CFFileDescriptorIsValid") })
-	_register("CFFileSecurityClearProperties", func() { purego.RegisterLibFunc(&_fnCFFileSecurityClearProperties, _corefoundationLib, "CFFileSecurityClearProperties") })
-	_register("CFFileSecurityCopyAccessControlList", func() { purego.RegisterLibFunc(&_fnCFFileSecurityCopyAccessControlList, _corefoundationLib, "CFFileSecurityCopyAccessControlList") })
-	_register("CFFileSecurityCopyGroupUUID", func() { purego.RegisterLibFunc(&_fnCFFileSecurityCopyGroupUUID, _corefoundationLib, "CFFileSecurityCopyGroupUUID") })
-	_register("CFFileSecurityCopyOwnerUUID", func() { purego.RegisterLibFunc(&_fnCFFileSecurityCopyOwnerUUID, _corefoundationLib, "CFFileSecurityCopyOwnerUUID") })
+	_register("CFFileDescriptorCreate", func() {
+		purego.RegisterLibFunc(&_fnCFFileDescriptorCreate, _corefoundationLib, "CFFileDescriptorCreate")
+	})
+	_register("CFFileDescriptorCreateRunLoopSource", func() {
+		purego.RegisterLibFunc(&_fnCFFileDescriptorCreateRunLoopSource, _corefoundationLib, "CFFileDescriptorCreateRunLoopSource")
+	})
+	_register("CFFileDescriptorDisableCallBacks", func() {
+		purego.RegisterLibFunc(&_fnCFFileDescriptorDisableCallBacks, _corefoundationLib, "CFFileDescriptorDisableCallBacks")
+	})
+	_register("CFFileDescriptorEnableCallBacks", func() {
+		purego.RegisterLibFunc(&_fnCFFileDescriptorEnableCallBacks, _corefoundationLib, "CFFileDescriptorEnableCallBacks")
+	})
+	_register("CFFileDescriptorGetContext", func() {
+		purego.RegisterLibFunc(&_fnCFFileDescriptorGetContext, _corefoundationLib, "CFFileDescriptorGetContext")
+	})
+	_register("CFFileDescriptorGetNativeDescriptor", func() {
+		purego.RegisterLibFunc(&_fnCFFileDescriptorGetNativeDescriptor, _corefoundationLib, "CFFileDescriptorGetNativeDescriptor")
+	})
+	_register("CFFileDescriptorGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnCFFileDescriptorGetTypeID, _corefoundationLib, "CFFileDescriptorGetTypeID")
+	})
+	_register("CFFileDescriptorInvalidate", func() {
+		purego.RegisterLibFunc(&_fnCFFileDescriptorInvalidate, _corefoundationLib, "CFFileDescriptorInvalidate")
+	})
+	_register("CFFileDescriptorIsValid", func() {
+		purego.RegisterLibFunc(&_fnCFFileDescriptorIsValid, _corefoundationLib, "CFFileDescriptorIsValid")
+	})
+	_register("CFFileSecurityClearProperties", func() {
+		purego.RegisterLibFunc(&_fnCFFileSecurityClearProperties, _corefoundationLib, "CFFileSecurityClearProperties")
+	})
+	_register("CFFileSecurityCopyAccessControlList", func() {
+		purego.RegisterLibFunc(&_fnCFFileSecurityCopyAccessControlList, _corefoundationLib, "CFFileSecurityCopyAccessControlList")
+	})
+	_register("CFFileSecurityCopyGroupUUID", func() {
+		purego.RegisterLibFunc(&_fnCFFileSecurityCopyGroupUUID, _corefoundationLib, "CFFileSecurityCopyGroupUUID")
+	})
+	_register("CFFileSecurityCopyOwnerUUID", func() {
+		purego.RegisterLibFunc(&_fnCFFileSecurityCopyOwnerUUID, _corefoundationLib, "CFFileSecurityCopyOwnerUUID")
+	})
 	_register("CFFileSecurityCreate", func() { purego.RegisterLibFunc(&_fnCFFileSecurityCreate, _corefoundationLib, "CFFileSecurityCreate") })
-	_register("CFFileSecurityCreateCopy", func() { purego.RegisterLibFunc(&_fnCFFileSecurityCreateCopy, _corefoundationLib, "CFFileSecurityCreateCopy") })
-	_register("CFFileSecurityGetGroup", func() { purego.RegisterLibFunc(&_fnCFFileSecurityGetGroup, _corefoundationLib, "CFFileSecurityGetGroup") })
+	_register("CFFileSecurityCreateCopy", func() {
+		purego.RegisterLibFunc(&_fnCFFileSecurityCreateCopy, _corefoundationLib, "CFFileSecurityCreateCopy")
+	})
+	_register("CFFileSecurityGetGroup", func() {
+		purego.RegisterLibFunc(&_fnCFFileSecurityGetGroup, _corefoundationLib, "CFFileSecurityGetGroup")
+	})
 	_register("CFFileSecurityGetMode", func() { purego.RegisterLibFunc(&_fnCFFileSecurityGetMode, _corefoundationLib, "CFFileSecurityGetMode") })
-	_register("CFFileSecurityGetOwner", func() { purego.RegisterLibFunc(&_fnCFFileSecurityGetOwner, _corefoundationLib, "CFFileSecurityGetOwner") })
-	_register("CFFileSecurityGetTypeID", func() { purego.RegisterLibFunc(&_fnCFFileSecurityGetTypeID, _corefoundationLib, "CFFileSecurityGetTypeID") })
-	_register("CFFileSecuritySetAccessControlList", func() { purego.RegisterLibFunc(&_fnCFFileSecuritySetAccessControlList, _corefoundationLib, "CFFileSecuritySetAccessControlList") })
-	_register("CFFileSecuritySetGroup", func() { purego.RegisterLibFunc(&_fnCFFileSecuritySetGroup, _corefoundationLib, "CFFileSecuritySetGroup") })
-	_register("CFFileSecuritySetGroupUUID", func() { purego.RegisterLibFunc(&_fnCFFileSecuritySetGroupUUID, _corefoundationLib, "CFFileSecuritySetGroupUUID") })
+	_register("CFFileSecurityGetOwner", func() {
+		purego.RegisterLibFunc(&_fnCFFileSecurityGetOwner, _corefoundationLib, "CFFileSecurityGetOwner")
+	})
+	_register("CFFileSecurityGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnCFFileSecurityGetTypeID, _corefoundationLib, "CFFileSecurityGetTypeID")
+	})
+	_register("CFFileSecuritySetAccessControlList", func() {
+		purego.RegisterLibFunc(&_fnCFFileSecuritySetAccessControlList, _corefoundationLib, "CFFileSecuritySetAccessControlList")
+	})
+	_register("CFFileSecuritySetGroup", func() {
+		purego.RegisterLibFunc(&_fnCFFileSecuritySetGroup, _corefoundationLib, "CFFileSecuritySetGroup")
+	})
+	_register("CFFileSecuritySetGroupUUID", func() {
+		purego.RegisterLibFunc(&_fnCFFileSecuritySetGroupUUID, _corefoundationLib, "CFFileSecuritySetGroupUUID")
+	})
 	_register("CFFileSecuritySetMode", func() { purego.RegisterLibFunc(&_fnCFFileSecuritySetMode, _corefoundationLib, "CFFileSecuritySetMode") })
-	_register("CFFileSecuritySetOwner", func() { purego.RegisterLibFunc(&_fnCFFileSecuritySetOwner, _corefoundationLib, "CFFileSecuritySetOwner") })
-	_register("CFFileSecuritySetOwnerUUID", func() { purego.RegisterLibFunc(&_fnCFFileSecuritySetOwnerUUID, _corefoundationLib, "CFFileSecuritySetOwnerUUID") })
+	_register("CFFileSecuritySetOwner", func() {
+		purego.RegisterLibFunc(&_fnCFFileSecuritySetOwner, _corefoundationLib, "CFFileSecuritySetOwner")
+	})
+	_register("CFFileSecuritySetOwnerUUID", func() {
+		purego.RegisterLibFunc(&_fnCFFileSecuritySetOwnerUUID, _corefoundationLib, "CFFileSecuritySetOwnerUUID")
+	})
 	_register("CFGetAllocator", func() { purego.RegisterLibFunc(&_fnCFGetAllocator, _corefoundationLib, "CFGetAllocator") })
 	_register("CFGetRetainCount", func() { purego.RegisterLibFunc(&_fnCFGetRetainCount, _corefoundationLib, "CFGetRetainCount") })
 	_register("CFGetTypeID", func() { purego.RegisterLibFunc(&_fnCFGetTypeID, _corefoundationLib, "CFGetTypeID") })
-	_register("CFGregorianDateGetAbsoluteTime", func() { purego.RegisterLibFunc(&_fnCFGregorianDateGetAbsoluteTime, _corefoundationLib, "CFGregorianDateGetAbsoluteTime") })
-	_register("CFGregorianDateIsValid", func() { purego.RegisterLibFunc(&_fnCFGregorianDateIsValid, _corefoundationLib, "CFGregorianDateIsValid") })
+	_register("CFGregorianDateGetAbsoluteTime", func() {
+		purego.RegisterLibFunc(&_fnCFGregorianDateGetAbsoluteTime, _corefoundationLib, "CFGregorianDateGetAbsoluteTime")
+	})
+	_register("CFGregorianDateIsValid", func() {
+		purego.RegisterLibFunc(&_fnCFGregorianDateIsValid, _corefoundationLib, "CFGregorianDateIsValid")
+	})
 	_register("CFHash", func() { purego.RegisterLibFunc(&_fnCFHash, _corefoundationLib, "CFHash") })
-	_register("CFLocaleCopyAvailableLocaleIdentifiers", func() { purego.RegisterLibFunc(&_fnCFLocaleCopyAvailableLocaleIdentifiers, _corefoundationLib, "CFLocaleCopyAvailableLocaleIdentifiers") })
-	_register("CFLocaleCopyCommonISOCurrencyCodes", func() { purego.RegisterLibFunc(&_fnCFLocaleCopyCommonISOCurrencyCodes, _corefoundationLib, "CFLocaleCopyCommonISOCurrencyCodes") })
+	_register("CFLocaleCopyAvailableLocaleIdentifiers", func() {
+		purego.RegisterLibFunc(&_fnCFLocaleCopyAvailableLocaleIdentifiers, _corefoundationLib, "CFLocaleCopyAvailableLocaleIdentifiers")
+	})
+	_register("CFLocaleCopyCommonISOCurrencyCodes", func() {
+		purego.RegisterLibFunc(&_fnCFLocaleCopyCommonISOCurrencyCodes, _corefoundationLib, "CFLocaleCopyCommonISOCurrencyCodes")
+	})
 	_register("CFLocaleCopyCurrent", func() { purego.RegisterLibFunc(&_fnCFLocaleCopyCurrent, _corefoundationLib, "CFLocaleCopyCurrent") })
-	_register("CFLocaleCopyDisplayNameForPropertyValue", func() { purego.RegisterLibFunc(&_fnCFLocaleCopyDisplayNameForPropertyValue, _corefoundationLib, "CFLocaleCopyDisplayNameForPropertyValue") })
-	_register("CFLocaleCopyISOCountryCodes", func() { purego.RegisterLibFunc(&_fnCFLocaleCopyISOCountryCodes, _corefoundationLib, "CFLocaleCopyISOCountryCodes") })
-	_register("CFLocaleCopyISOCurrencyCodes", func() { purego.RegisterLibFunc(&_fnCFLocaleCopyISOCurrencyCodes, _corefoundationLib, "CFLocaleCopyISOCurrencyCodes") })
-	_register("CFLocaleCopyISOLanguageCodes", func() { purego.RegisterLibFunc(&_fnCFLocaleCopyISOLanguageCodes, _corefoundationLib, "CFLocaleCopyISOLanguageCodes") })
-	_register("CFLocaleCopyPreferredLanguages", func() { purego.RegisterLibFunc(&_fnCFLocaleCopyPreferredLanguages, _corefoundationLib, "CFLocaleCopyPreferredLanguages") })
+	_register("CFLocaleCopyDisplayNameForPropertyValue", func() {
+		purego.RegisterLibFunc(&_fnCFLocaleCopyDisplayNameForPropertyValue, _corefoundationLib, "CFLocaleCopyDisplayNameForPropertyValue")
+	})
+	_register("CFLocaleCopyISOCountryCodes", func() {
+		purego.RegisterLibFunc(&_fnCFLocaleCopyISOCountryCodes, _corefoundationLib, "CFLocaleCopyISOCountryCodes")
+	})
+	_register("CFLocaleCopyISOCurrencyCodes", func() {
+		purego.RegisterLibFunc(&_fnCFLocaleCopyISOCurrencyCodes, _corefoundationLib, "CFLocaleCopyISOCurrencyCodes")
+	})
+	_register("CFLocaleCopyISOLanguageCodes", func() {
+		purego.RegisterLibFunc(&_fnCFLocaleCopyISOLanguageCodes, _corefoundationLib, "CFLocaleCopyISOLanguageCodes")
+	})
+	_register("CFLocaleCopyPreferredLanguages", func() {
+		purego.RegisterLibFunc(&_fnCFLocaleCopyPreferredLanguages, _corefoundationLib, "CFLocaleCopyPreferredLanguages")
+	})
 	_register("CFLocaleCreate", func() { purego.RegisterLibFunc(&_fnCFLocaleCreate, _corefoundationLib, "CFLocaleCreate") })
-	_register("CFLocaleCreateCanonicalLanguageIdentifierFromString", func() { purego.RegisterLibFunc(&_fnCFLocaleCreateCanonicalLanguageIdentifierFromString, _corefoundationLib, "CFLocaleCreateCanonicalLanguageIdentifierFromString") })
-	_register("CFLocaleCreateCanonicalLocaleIdentifierFromScriptManagerCodes", func() { purego.RegisterLibFunc(&_fnCFLocaleCreateCanonicalLocaleIdentifierFromScriptManagerCodes, _corefoundationLib, "CFLocaleCreateCanonicalLocaleIdentifierFromScriptManagerCodes") })
-	_register("CFLocaleCreateCanonicalLocaleIdentifierFromString", func() { purego.RegisterLibFunc(&_fnCFLocaleCreateCanonicalLocaleIdentifierFromString, _corefoundationLib, "CFLocaleCreateCanonicalLocaleIdentifierFromString") })
-	_register("CFLocaleCreateComponentsFromLocaleIdentifier", func() { purego.RegisterLibFunc(&_fnCFLocaleCreateComponentsFromLocaleIdentifier, _corefoundationLib, "CFLocaleCreateComponentsFromLocaleIdentifier") })
+	_register("CFLocaleCreateCanonicalLanguageIdentifierFromString", func() {
+		purego.RegisterLibFunc(&_fnCFLocaleCreateCanonicalLanguageIdentifierFromString, _corefoundationLib, "CFLocaleCreateCanonicalLanguageIdentifierFromString")
+	})
+	_register("CFLocaleCreateCanonicalLocaleIdentifierFromScriptManagerCodes", func() {
+		purego.RegisterLibFunc(&_fnCFLocaleCreateCanonicalLocaleIdentifierFromScriptManagerCodes, _corefoundationLib, "CFLocaleCreateCanonicalLocaleIdentifierFromScriptManagerCodes")
+	})
+	_register("CFLocaleCreateCanonicalLocaleIdentifierFromString", func() {
+		purego.RegisterLibFunc(&_fnCFLocaleCreateCanonicalLocaleIdentifierFromString, _corefoundationLib, "CFLocaleCreateCanonicalLocaleIdentifierFromString")
+	})
+	_register("CFLocaleCreateComponentsFromLocaleIdentifier", func() {
+		purego.RegisterLibFunc(&_fnCFLocaleCreateComponentsFromLocaleIdentifier, _corefoundationLib, "CFLocaleCreateComponentsFromLocaleIdentifier")
+	})
 	_register("CFLocaleCreateCopy", func() { purego.RegisterLibFunc(&_fnCFLocaleCreateCopy, _corefoundationLib, "CFLocaleCreateCopy") })
-	_register("CFLocaleCreateLocaleIdentifierFromComponents", func() { purego.RegisterLibFunc(&_fnCFLocaleCreateLocaleIdentifierFromComponents, _corefoundationLib, "CFLocaleCreateLocaleIdentifierFromComponents") })
-	_register("CFLocaleCreateLocaleIdentifierFromWindowsLocaleCode", func() { purego.RegisterLibFunc(&_fnCFLocaleCreateLocaleIdentifierFromWindowsLocaleCode, _corefoundationLib, "CFLocaleCreateLocaleIdentifierFromWindowsLocaleCode") })
+	_register("CFLocaleCreateLocaleIdentifierFromComponents", func() {
+		purego.RegisterLibFunc(&_fnCFLocaleCreateLocaleIdentifierFromComponents, _corefoundationLib, "CFLocaleCreateLocaleIdentifierFromComponents")
+	})
+	_register("CFLocaleCreateLocaleIdentifierFromWindowsLocaleCode", func() {
+		purego.RegisterLibFunc(&_fnCFLocaleCreateLocaleIdentifierFromWindowsLocaleCode, _corefoundationLib, "CFLocaleCreateLocaleIdentifierFromWindowsLocaleCode")
+	})
 	_register("CFLocaleGetIdentifier", func() { purego.RegisterLibFunc(&_fnCFLocaleGetIdentifier, _corefoundationLib, "CFLocaleGetIdentifier") })
-	_register("CFLocaleGetLanguageCharacterDirection", func() { purego.RegisterLibFunc(&_fnCFLocaleGetLanguageCharacterDirection, _corefoundationLib, "CFLocaleGetLanguageCharacterDirection") })
-	_register("CFLocaleGetLanguageLineDirection", func() { purego.RegisterLibFunc(&_fnCFLocaleGetLanguageLineDirection, _corefoundationLib, "CFLocaleGetLanguageLineDirection") })
+	_register("CFLocaleGetLanguageCharacterDirection", func() {
+		purego.RegisterLibFunc(&_fnCFLocaleGetLanguageCharacterDirection, _corefoundationLib, "CFLocaleGetLanguageCharacterDirection")
+	})
+	_register("CFLocaleGetLanguageLineDirection", func() {
+		purego.RegisterLibFunc(&_fnCFLocaleGetLanguageLineDirection, _corefoundationLib, "CFLocaleGetLanguageLineDirection")
+	})
 	_register("CFLocaleGetSystem", func() { purego.RegisterLibFunc(&_fnCFLocaleGetSystem, _corefoundationLib, "CFLocaleGetSystem") })
 	_register("CFLocaleGetTypeID", func() { purego.RegisterLibFunc(&_fnCFLocaleGetTypeID, _corefoundationLib, "CFLocaleGetTypeID") })
 	_register("CFLocaleGetValue", func() { purego.RegisterLibFunc(&_fnCFLocaleGetValue, _corefoundationLib, "CFLocaleGetValue") })
-	_register("CFLocaleGetWindowsLocaleCodeFromLocaleIdentifier", func() { purego.RegisterLibFunc(&_fnCFLocaleGetWindowsLocaleCodeFromLocaleIdentifier, _corefoundationLib, "CFLocaleGetWindowsLocaleCodeFromLocaleIdentifier") })
+	_register("CFLocaleGetWindowsLocaleCodeFromLocaleIdentifier", func() {
+		purego.RegisterLibFunc(&_fnCFLocaleGetWindowsLocaleCodeFromLocaleIdentifier, _corefoundationLib, "CFLocaleGetWindowsLocaleCodeFromLocaleIdentifier")
+	})
 	_register("CFMachPortCreate", func() { purego.RegisterLibFunc(&_fnCFMachPortCreate, _corefoundationLib, "CFMachPortCreate") })
-	_register("CFMachPortCreateRunLoopSource", func() { purego.RegisterLibFunc(&_fnCFMachPortCreateRunLoopSource, _corefoundationLib, "CFMachPortCreateRunLoopSource") })
-	_register("CFMachPortCreateWithPort", func() { purego.RegisterLibFunc(&_fnCFMachPortCreateWithPort, _corefoundationLib, "CFMachPortCreateWithPort") })
+	_register("CFMachPortCreateRunLoopSource", func() {
+		purego.RegisterLibFunc(&_fnCFMachPortCreateRunLoopSource, _corefoundationLib, "CFMachPortCreateRunLoopSource")
+	})
+	_register("CFMachPortCreateWithPort", func() {
+		purego.RegisterLibFunc(&_fnCFMachPortCreateWithPort, _corefoundationLib, "CFMachPortCreateWithPort")
+	})
 	_register("CFMachPortGetContext", func() { purego.RegisterLibFunc(&_fnCFMachPortGetContext, _corefoundationLib, "CFMachPortGetContext") })
-	_register("CFMachPortGetInvalidationCallBack", func() { purego.RegisterLibFunc(&_fnCFMachPortGetInvalidationCallBack, _corefoundationLib, "CFMachPortGetInvalidationCallBack") })
+	_register("CFMachPortGetInvalidationCallBack", func() {
+		purego.RegisterLibFunc(&_fnCFMachPortGetInvalidationCallBack, _corefoundationLib, "CFMachPortGetInvalidationCallBack")
+	})
 	_register("CFMachPortGetPort", func() { purego.RegisterLibFunc(&_fnCFMachPortGetPort, _corefoundationLib, "CFMachPortGetPort") })
 	_register("CFMachPortGetTypeID", func() { purego.RegisterLibFunc(&_fnCFMachPortGetTypeID, _corefoundationLib, "CFMachPortGetTypeID") })
 	_register("CFMachPortInvalidate", func() { purego.RegisterLibFunc(&_fnCFMachPortInvalidate, _corefoundationLib, "CFMachPortInvalidate") })
 	_register("CFMachPortIsValid", func() { purego.RegisterLibFunc(&_fnCFMachPortIsValid, _corefoundationLib, "CFMachPortIsValid") })
-	_register("CFMachPortSetInvalidationCallBack", func() { purego.RegisterLibFunc(&_fnCFMachPortSetInvalidationCallBack, _corefoundationLib, "CFMachPortSetInvalidationCallBack") })
+	_register("CFMachPortSetInvalidationCallBack", func() {
+		purego.RegisterLibFunc(&_fnCFMachPortSetInvalidationCallBack, _corefoundationLib, "CFMachPortSetInvalidationCallBack")
+	})
 	_register("CFMakeCollectable", func() { purego.RegisterLibFunc(&_fnCFMakeCollectable, _corefoundationLib, "CFMakeCollectable") })
-	_register("CFMessagePortCreateLocal", func() { purego.RegisterLibFunc(&_fnCFMessagePortCreateLocal, _corefoundationLib, "CFMessagePortCreateLocal") })
-	_register("CFMessagePortCreateRemote", func() { purego.RegisterLibFunc(&_fnCFMessagePortCreateRemote, _corefoundationLib, "CFMessagePortCreateRemote") })
-	_register("CFMessagePortCreateRunLoopSource", func() { purego.RegisterLibFunc(&_fnCFMessagePortCreateRunLoopSource, _corefoundationLib, "CFMessagePortCreateRunLoopSource") })
-	_register("CFMessagePortGetContext", func() { purego.RegisterLibFunc(&_fnCFMessagePortGetContext, _corefoundationLib, "CFMessagePortGetContext") })
-	_register("CFMessagePortGetInvalidationCallBack", func() { purego.RegisterLibFunc(&_fnCFMessagePortGetInvalidationCallBack, _corefoundationLib, "CFMessagePortGetInvalidationCallBack") })
+	_register("CFMessagePortCreateLocal", func() {
+		purego.RegisterLibFunc(&_fnCFMessagePortCreateLocal, _corefoundationLib, "CFMessagePortCreateLocal")
+	})
+	_register("CFMessagePortCreateRemote", func() {
+		purego.RegisterLibFunc(&_fnCFMessagePortCreateRemote, _corefoundationLib, "CFMessagePortCreateRemote")
+	})
+	_register("CFMessagePortCreateRunLoopSource", func() {
+		purego.RegisterLibFunc(&_fnCFMessagePortCreateRunLoopSource, _corefoundationLib, "CFMessagePortCreateRunLoopSource")
+	})
+	_register("CFMessagePortGetContext", func() {
+		purego.RegisterLibFunc(&_fnCFMessagePortGetContext, _corefoundationLib, "CFMessagePortGetContext")
+	})
+	_register("CFMessagePortGetInvalidationCallBack", func() {
+		purego.RegisterLibFunc(&_fnCFMessagePortGetInvalidationCallBack, _corefoundationLib, "CFMessagePortGetInvalidationCallBack")
+	})
 	_register("CFMessagePortGetName", func() { purego.RegisterLibFunc(&_fnCFMessagePortGetName, _corefoundationLib, "CFMessagePortGetName") })
-	_register("CFMessagePortGetTypeID", func() { purego.RegisterLibFunc(&_fnCFMessagePortGetTypeID, _corefoundationLib, "CFMessagePortGetTypeID") })
-	_register("CFMessagePortInvalidate", func() { purego.RegisterLibFunc(&_fnCFMessagePortInvalidate, _corefoundationLib, "CFMessagePortInvalidate") })
+	_register("CFMessagePortGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnCFMessagePortGetTypeID, _corefoundationLib, "CFMessagePortGetTypeID")
+	})
+	_register("CFMessagePortInvalidate", func() {
+		purego.RegisterLibFunc(&_fnCFMessagePortInvalidate, _corefoundationLib, "CFMessagePortInvalidate")
+	})
 	_register("CFMessagePortIsRemote", func() { purego.RegisterLibFunc(&_fnCFMessagePortIsRemote, _corefoundationLib, "CFMessagePortIsRemote") })
 	_register("CFMessagePortIsValid", func() { purego.RegisterLibFunc(&_fnCFMessagePortIsValid, _corefoundationLib, "CFMessagePortIsValid") })
-	_register("CFMessagePortSendRequest", func() { purego.RegisterLibFunc(&_fnCFMessagePortSendRequest, _corefoundationLib, "CFMessagePortSendRequest") })
-	_register("CFMessagePortSetDispatchQueue", func() { purego.RegisterLibFunc(&_fnCFMessagePortSetDispatchQueue, _corefoundationLib, "CFMessagePortSetDispatchQueue") })
-	_register("CFMessagePortSetInvalidationCallBack", func() { purego.RegisterLibFunc(&_fnCFMessagePortSetInvalidationCallBack, _corefoundationLib, "CFMessagePortSetInvalidationCallBack") })
+	_register("CFMessagePortSendRequest", func() {
+		purego.RegisterLibFunc(&_fnCFMessagePortSendRequest, _corefoundationLib, "CFMessagePortSendRequest")
+	})
+	_register("CFMessagePortSetDispatchQueue", func() {
+		purego.RegisterLibFunc(&_fnCFMessagePortSetDispatchQueue, _corefoundationLib, "CFMessagePortSetDispatchQueue")
+	})
+	_register("CFMessagePortSetInvalidationCallBack", func() {
+		purego.RegisterLibFunc(&_fnCFMessagePortSetInvalidationCallBack, _corefoundationLib, "CFMessagePortSetInvalidationCallBack")
+	})
 	_register("CFMessagePortSetName", func() { purego.RegisterLibFunc(&_fnCFMessagePortSetName, _corefoundationLib, "CFMessagePortSetName") })
-	_register("CFNotificationCenterAddObserver", func() { purego.RegisterLibFunc(&_fnCFNotificationCenterAddObserver, _corefoundationLib, "CFNotificationCenterAddObserver") })
-	_register("CFNotificationCenterGetDarwinNotifyCenter", func() { purego.RegisterLibFunc(&_fnCFNotificationCenterGetDarwinNotifyCenter, _corefoundationLib, "CFNotificationCenterGetDarwinNotifyCenter") })
-	_register("CFNotificationCenterGetDistributedCenter", func() { purego.RegisterLibFunc(&_fnCFNotificationCenterGetDistributedCenter, _corefoundationLib, "CFNotificationCenterGetDistributedCenter") })
-	_register("CFNotificationCenterGetLocalCenter", func() { purego.RegisterLibFunc(&_fnCFNotificationCenterGetLocalCenter, _corefoundationLib, "CFNotificationCenterGetLocalCenter") })
-	_register("CFNotificationCenterGetTypeID", func() { purego.RegisterLibFunc(&_fnCFNotificationCenterGetTypeID, _corefoundationLib, "CFNotificationCenterGetTypeID") })
-	_register("CFNotificationCenterPostNotification", func() { purego.RegisterLibFunc(&_fnCFNotificationCenterPostNotification, _corefoundationLib, "CFNotificationCenterPostNotification") })
-	_register("CFNotificationCenterPostNotificationWithOptions", func() { purego.RegisterLibFunc(&_fnCFNotificationCenterPostNotificationWithOptions, _corefoundationLib, "CFNotificationCenterPostNotificationWithOptions") })
-	_register("CFNotificationCenterRemoveEveryObserver", func() { purego.RegisterLibFunc(&_fnCFNotificationCenterRemoveEveryObserver, _corefoundationLib, "CFNotificationCenterRemoveEveryObserver") })
-	_register("CFNotificationCenterRemoveObserver", func() { purego.RegisterLibFunc(&_fnCFNotificationCenterRemoveObserver, _corefoundationLib, "CFNotificationCenterRemoveObserver") })
+	_register("CFNotificationCenterAddObserver", func() {
+		purego.RegisterLibFunc(&_fnCFNotificationCenterAddObserver, _corefoundationLib, "CFNotificationCenterAddObserver")
+	})
+	_register("CFNotificationCenterGetDarwinNotifyCenter", func() {
+		purego.RegisterLibFunc(&_fnCFNotificationCenterGetDarwinNotifyCenter, _corefoundationLib, "CFNotificationCenterGetDarwinNotifyCenter")
+	})
+	_register("CFNotificationCenterGetDistributedCenter", func() {
+		purego.RegisterLibFunc(&_fnCFNotificationCenterGetDistributedCenter, _corefoundationLib, "CFNotificationCenterGetDistributedCenter")
+	})
+	_register("CFNotificationCenterGetLocalCenter", func() {
+		purego.RegisterLibFunc(&_fnCFNotificationCenterGetLocalCenter, _corefoundationLib, "CFNotificationCenterGetLocalCenter")
+	})
+	_register("CFNotificationCenterGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnCFNotificationCenterGetTypeID, _corefoundationLib, "CFNotificationCenterGetTypeID")
+	})
+	_register("CFNotificationCenterPostNotification", func() {
+		purego.RegisterLibFunc(&_fnCFNotificationCenterPostNotification, _corefoundationLib, "CFNotificationCenterPostNotification")
+	})
+	_register("CFNotificationCenterPostNotificationWithOptions", func() {
+		purego.RegisterLibFunc(&_fnCFNotificationCenterPostNotificationWithOptions, _corefoundationLib, "CFNotificationCenterPostNotificationWithOptions")
+	})
+	_register("CFNotificationCenterRemoveEveryObserver", func() {
+		purego.RegisterLibFunc(&_fnCFNotificationCenterRemoveEveryObserver, _corefoundationLib, "CFNotificationCenterRemoveEveryObserver")
+	})
+	_register("CFNotificationCenterRemoveObserver", func() {
+		purego.RegisterLibFunc(&_fnCFNotificationCenterRemoveObserver, _corefoundationLib, "CFNotificationCenterRemoveObserver")
+	})
 	_register("CFNullGetTypeID", func() { purego.RegisterLibFunc(&_fnCFNullGetTypeID, _corefoundationLib, "CFNullGetTypeID") })
 	_register("CFNumberCompare", func() { purego.RegisterLibFunc(&_fnCFNumberCompare, _corefoundationLib, "CFNumberCompare") })
 	_register("CFNumberCreate", func() { purego.RegisterLibFunc(&_fnCFNumberCreate, _corefoundationLib, "CFNumberCreate") })
-	_register("CFNumberFormatterCopyProperty", func() { purego.RegisterLibFunc(&_fnCFNumberFormatterCopyProperty, _corefoundationLib, "CFNumberFormatterCopyProperty") })
-	_register("CFNumberFormatterCreate", func() { purego.RegisterLibFunc(&_fnCFNumberFormatterCreate, _corefoundationLib, "CFNumberFormatterCreate") })
-	_register("CFNumberFormatterCreateNumberFromString", func() { purego.RegisterLibFunc(&_fnCFNumberFormatterCreateNumberFromString, _corefoundationLib, "CFNumberFormatterCreateNumberFromString") })
-	_register("CFNumberFormatterCreateStringWithNumber", func() { purego.RegisterLibFunc(&_fnCFNumberFormatterCreateStringWithNumber, _corefoundationLib, "CFNumberFormatterCreateStringWithNumber") })
-	_register("CFNumberFormatterCreateStringWithValue", func() { purego.RegisterLibFunc(&_fnCFNumberFormatterCreateStringWithValue, _corefoundationLib, "CFNumberFormatterCreateStringWithValue") })
-	_register("CFNumberFormatterGetDecimalInfoForCurrencyCode", func() { purego.RegisterLibFunc(&_fnCFNumberFormatterGetDecimalInfoForCurrencyCode, _corefoundationLib, "CFNumberFormatterGetDecimalInfoForCurrencyCode") })
-	_register("CFNumberFormatterGetFormat", func() { purego.RegisterLibFunc(&_fnCFNumberFormatterGetFormat, _corefoundationLib, "CFNumberFormatterGetFormat") })
-	_register("CFNumberFormatterGetLocale", func() { purego.RegisterLibFunc(&_fnCFNumberFormatterGetLocale, _corefoundationLib, "CFNumberFormatterGetLocale") })
-	_register("CFNumberFormatterGetStyle", func() { purego.RegisterLibFunc(&_fnCFNumberFormatterGetStyle, _corefoundationLib, "CFNumberFormatterGetStyle") })
-	_register("CFNumberFormatterGetTypeID", func() { purego.RegisterLibFunc(&_fnCFNumberFormatterGetTypeID, _corefoundationLib, "CFNumberFormatterGetTypeID") })
-	_register("CFNumberFormatterGetValueFromString", func() { purego.RegisterLibFunc(&_fnCFNumberFormatterGetValueFromString, _corefoundationLib, "CFNumberFormatterGetValueFromString") })
-	_register("CFNumberFormatterSetFormat", func() { purego.RegisterLibFunc(&_fnCFNumberFormatterSetFormat, _corefoundationLib, "CFNumberFormatterSetFormat") })
-	_register("CFNumberFormatterSetProperty", func() { purego.RegisterLibFunc(&_fnCFNumberFormatterSetProperty, _corefoundationLib, "CFNumberFormatterSetProperty") })
+	_register("CFNumberFormatterCopyProperty", func() {
+		purego.RegisterLibFunc(&_fnCFNumberFormatterCopyProperty, _corefoundationLib, "CFNumberFormatterCopyProperty")
+	})
+	_register("CFNumberFormatterCreate", func() {
+		purego.RegisterLibFunc(&_fnCFNumberFormatterCreate, _corefoundationLib, "CFNumberFormatterCreate")
+	})
+	_register("CFNumberFormatterCreateNumberFromString", func() {
+		purego.RegisterLibFunc(&_fnCFNumberFormatterCreateNumberFromString, _corefoundationLib, "CFNumberFormatterCreateNumberFromString")
+	})
+	_register("CFNumberFormatterCreateStringWithNumber", func() {
+		purego.RegisterLibFunc(&_fnCFNumberFormatterCreateStringWithNumber, _corefoundationLib, "CFNumberFormatterCreateStringWithNumber")
+	})
+	_register("CFNumberFormatterCreateStringWithValue", func() {
+		purego.RegisterLibFunc(&_fnCFNumberFormatterCreateStringWithValue, _corefoundationLib, "CFNumberFormatterCreateStringWithValue")
+	})
+	_register("CFNumberFormatterGetDecimalInfoForCurrencyCode", func() {
+		purego.RegisterLibFunc(&_fnCFNumberFormatterGetDecimalInfoForCurrencyCode, _corefoundationLib, "CFNumberFormatterGetDecimalInfoForCurrencyCode")
+	})
+	_register("CFNumberFormatterGetFormat", func() {
+		purego.RegisterLibFunc(&_fnCFNumberFormatterGetFormat, _corefoundationLib, "CFNumberFormatterGetFormat")
+	})
+	_register("CFNumberFormatterGetLocale", func() {
+		purego.RegisterLibFunc(&_fnCFNumberFormatterGetLocale, _corefoundationLib, "CFNumberFormatterGetLocale")
+	})
+	_register("CFNumberFormatterGetStyle", func() {
+		purego.RegisterLibFunc(&_fnCFNumberFormatterGetStyle, _corefoundationLib, "CFNumberFormatterGetStyle")
+	})
+	_register("CFNumberFormatterGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnCFNumberFormatterGetTypeID, _corefoundationLib, "CFNumberFormatterGetTypeID")
+	})
+	_register("CFNumberFormatterGetValueFromString", func() {
+		purego.RegisterLibFunc(&_fnCFNumberFormatterGetValueFromString, _corefoundationLib, "CFNumberFormatterGetValueFromString")
+	})
+	_register("CFNumberFormatterSetFormat", func() {
+		purego.RegisterLibFunc(&_fnCFNumberFormatterSetFormat, _corefoundationLib, "CFNumberFormatterSetFormat")
+	})
+	_register("CFNumberFormatterSetProperty", func() {
+		purego.RegisterLibFunc(&_fnCFNumberFormatterSetProperty, _corefoundationLib, "CFNumberFormatterSetProperty")
+	})
 	_register("CFNumberGetByteSize", func() { purego.RegisterLibFunc(&_fnCFNumberGetByteSize, _corefoundationLib, "CFNumberGetByteSize") })
 	_register("CFNumberGetType", func() { purego.RegisterLibFunc(&_fnCFNumberGetType, _corefoundationLib, "CFNumberGetType") })
 	_register("CFNumberGetTypeID", func() { purego.RegisterLibFunc(&_fnCFNumberGetTypeID, _corefoundationLib, "CFNumberGetTypeID") })
 	_register("CFNumberGetValue", func() { purego.RegisterLibFunc(&_fnCFNumberGetValue, _corefoundationLib, "CFNumberGetValue") })
 	_register("CFNumberIsFloatType", func() { purego.RegisterLibFunc(&_fnCFNumberIsFloatType, _corefoundationLib, "CFNumberIsFloatType") })
-	_register("CFPlugInAddInstanceForFactory", func() { purego.RegisterLibFunc(&_fnCFPlugInAddInstanceForFactory, _corefoundationLib, "CFPlugInAddInstanceForFactory") })
+	_register("CFPlugInAddInstanceForFactory", func() {
+		purego.RegisterLibFunc(&_fnCFPlugInAddInstanceForFactory, _corefoundationLib, "CFPlugInAddInstanceForFactory")
+	})
 	_register("CFPlugInCreate", func() { purego.RegisterLibFunc(&_fnCFPlugInCreate, _corefoundationLib, "CFPlugInCreate") })
-	_register("CFPlugInFindFactoriesForPlugInType", func() { purego.RegisterLibFunc(&_fnCFPlugInFindFactoriesForPlugInType, _corefoundationLib, "CFPlugInFindFactoriesForPlugInType") })
-	_register("CFPlugInFindFactoriesForPlugInTypeInPlugIn", func() { purego.RegisterLibFunc(&_fnCFPlugInFindFactoriesForPlugInTypeInPlugIn, _corefoundationLib, "CFPlugInFindFactoriesForPlugInTypeInPlugIn") })
+	_register("CFPlugInFindFactoriesForPlugInType", func() {
+		purego.RegisterLibFunc(&_fnCFPlugInFindFactoriesForPlugInType, _corefoundationLib, "CFPlugInFindFactoriesForPlugInType")
+	})
+	_register("CFPlugInFindFactoriesForPlugInTypeInPlugIn", func() {
+		purego.RegisterLibFunc(&_fnCFPlugInFindFactoriesForPlugInTypeInPlugIn, _corefoundationLib, "CFPlugInFindFactoriesForPlugInTypeInPlugIn")
+	})
 	_register("CFPlugInGetBundle", func() { purego.RegisterLibFunc(&_fnCFPlugInGetBundle, _corefoundationLib, "CFPlugInGetBundle") })
 	_register("CFPlugInGetTypeID", func() { purego.RegisterLibFunc(&_fnCFPlugInGetTypeID, _corefoundationLib, "CFPlugInGetTypeID") })
-	_register("CFPlugInInstanceCreate", func() { purego.RegisterLibFunc(&_fnCFPlugInInstanceCreate, _corefoundationLib, "CFPlugInInstanceCreate") })
-	_register("CFPlugInInstanceCreateWithInstanceDataSize", func() { purego.RegisterLibFunc(&_fnCFPlugInInstanceCreateWithInstanceDataSize, _corefoundationLib, "CFPlugInInstanceCreateWithInstanceDataSize") })
-	_register("CFPlugInInstanceGetFactoryName", func() { purego.RegisterLibFunc(&_fnCFPlugInInstanceGetFactoryName, _corefoundationLib, "CFPlugInInstanceGetFactoryName") })
-	_register("CFPlugInInstanceGetInstanceData", func() { purego.RegisterLibFunc(&_fnCFPlugInInstanceGetInstanceData, _corefoundationLib, "CFPlugInInstanceGetInstanceData") })
-	_register("CFPlugInInstanceGetInterfaceFunctionTable", func() { purego.RegisterLibFunc(&_fnCFPlugInInstanceGetInterfaceFunctionTable, _corefoundationLib, "CFPlugInInstanceGetInterfaceFunctionTable") })
-	_register("CFPlugInInstanceGetTypeID", func() { purego.RegisterLibFunc(&_fnCFPlugInInstanceGetTypeID, _corefoundationLib, "CFPlugInInstanceGetTypeID") })
-	_register("CFPlugInIsLoadOnDemand", func() { purego.RegisterLibFunc(&_fnCFPlugInIsLoadOnDemand, _corefoundationLib, "CFPlugInIsLoadOnDemand") })
-	_register("CFPlugInRegisterFactoryFunction", func() { purego.RegisterLibFunc(&_fnCFPlugInRegisterFactoryFunction, _corefoundationLib, "CFPlugInRegisterFactoryFunction") })
-	_register("CFPlugInRegisterFactoryFunctionByName", func() { purego.RegisterLibFunc(&_fnCFPlugInRegisterFactoryFunctionByName, _corefoundationLib, "CFPlugInRegisterFactoryFunctionByName") })
-	_register("CFPlugInRegisterPlugInType", func() { purego.RegisterLibFunc(&_fnCFPlugInRegisterPlugInType, _corefoundationLib, "CFPlugInRegisterPlugInType") })
-	_register("CFPlugInRemoveInstanceForFactory", func() { purego.RegisterLibFunc(&_fnCFPlugInRemoveInstanceForFactory, _corefoundationLib, "CFPlugInRemoveInstanceForFactory") })
-	_register("CFPlugInSetLoadOnDemand", func() { purego.RegisterLibFunc(&_fnCFPlugInSetLoadOnDemand, _corefoundationLib, "CFPlugInSetLoadOnDemand") })
-	_register("CFPlugInUnregisterFactory", func() { purego.RegisterLibFunc(&_fnCFPlugInUnregisterFactory, _corefoundationLib, "CFPlugInUnregisterFactory") })
-	_register("CFPlugInUnregisterPlugInType", func() { purego.RegisterLibFunc(&_fnCFPlugInUnregisterPlugInType, _corefoundationLib, "CFPlugInUnregisterPlugInType") })
-	_register("CFPreferencesAddSuitePreferencesToApp", func() { purego.RegisterLibFunc(&_fnCFPreferencesAddSuitePreferencesToApp, _corefoundationLib, "CFPreferencesAddSuitePreferencesToApp") })
-	_register("CFPreferencesAppSynchronize", func() { purego.RegisterLibFunc(&_fnCFPreferencesAppSynchronize, _corefoundationLib, "CFPreferencesAppSynchronize") })
-	_register("CFPreferencesAppValueIsForced", func() { purego.RegisterLibFunc(&_fnCFPreferencesAppValueIsForced, _corefoundationLib, "CFPreferencesAppValueIsForced") })
-	_register("CFPreferencesCopyAppValue", func() { purego.RegisterLibFunc(&_fnCFPreferencesCopyAppValue, _corefoundationLib, "CFPreferencesCopyAppValue") })
-	_register("CFPreferencesCopyApplicationList", func() { purego.RegisterLibFunc(&_fnCFPreferencesCopyApplicationList, _corefoundationLib, "CFPreferencesCopyApplicationList") })
-	_register("CFPreferencesCopyKeyList", func() { purego.RegisterLibFunc(&_fnCFPreferencesCopyKeyList, _corefoundationLib, "CFPreferencesCopyKeyList") })
-	_register("CFPreferencesCopyMultiple", func() { purego.RegisterLibFunc(&_fnCFPreferencesCopyMultiple, _corefoundationLib, "CFPreferencesCopyMultiple") })
-	_register("CFPreferencesCopyValue", func() { purego.RegisterLibFunc(&_fnCFPreferencesCopyValue, _corefoundationLib, "CFPreferencesCopyValue") })
-	_register("CFPreferencesGetAppBooleanValue", func() { purego.RegisterLibFunc(&_fnCFPreferencesGetAppBooleanValue, _corefoundationLib, "CFPreferencesGetAppBooleanValue") })
-	_register("CFPreferencesGetAppIntegerValue", func() { purego.RegisterLibFunc(&_fnCFPreferencesGetAppIntegerValue, _corefoundationLib, "CFPreferencesGetAppIntegerValue") })
-	_register("CFPreferencesRemoveSuitePreferencesFromApp", func() { purego.RegisterLibFunc(&_fnCFPreferencesRemoveSuitePreferencesFromApp, _corefoundationLib, "CFPreferencesRemoveSuitePreferencesFromApp") })
-	_register("CFPreferencesSetAppValue", func() { purego.RegisterLibFunc(&_fnCFPreferencesSetAppValue, _corefoundationLib, "CFPreferencesSetAppValue") })
-	_register("CFPreferencesSetMultiple", func() { purego.RegisterLibFunc(&_fnCFPreferencesSetMultiple, _corefoundationLib, "CFPreferencesSetMultiple") })
+	_register("CFPlugInInstanceCreate", func() {
+		purego.RegisterLibFunc(&_fnCFPlugInInstanceCreate, _corefoundationLib, "CFPlugInInstanceCreate")
+	})
+	_register("CFPlugInInstanceCreateWithInstanceDataSize", func() {
+		purego.RegisterLibFunc(&_fnCFPlugInInstanceCreateWithInstanceDataSize, _corefoundationLib, "CFPlugInInstanceCreateWithInstanceDataSize")
+	})
+	_register("CFPlugInInstanceGetFactoryName", func() {
+		purego.RegisterLibFunc(&_fnCFPlugInInstanceGetFactoryName, _corefoundationLib, "CFPlugInInstanceGetFactoryName")
+	})
+	_register("CFPlugInInstanceGetInstanceData", func() {
+		purego.RegisterLibFunc(&_fnCFPlugInInstanceGetInstanceData, _corefoundationLib, "CFPlugInInstanceGetInstanceData")
+	})
+	_register("CFPlugInInstanceGetInterfaceFunctionTable", func() {
+		purego.RegisterLibFunc(&_fnCFPlugInInstanceGetInterfaceFunctionTable, _corefoundationLib, "CFPlugInInstanceGetInterfaceFunctionTable")
+	})
+	_register("CFPlugInInstanceGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnCFPlugInInstanceGetTypeID, _corefoundationLib, "CFPlugInInstanceGetTypeID")
+	})
+	_register("CFPlugInIsLoadOnDemand", func() {
+		purego.RegisterLibFunc(&_fnCFPlugInIsLoadOnDemand, _corefoundationLib, "CFPlugInIsLoadOnDemand")
+	})
+	_register("CFPlugInRegisterFactoryFunction", func() {
+		purego.RegisterLibFunc(&_fnCFPlugInRegisterFactoryFunction, _corefoundationLib, "CFPlugInRegisterFactoryFunction")
+	})
+	_register("CFPlugInRegisterFactoryFunctionByName", func() {
+		purego.RegisterLibFunc(&_fnCFPlugInRegisterFactoryFunctionByName, _corefoundationLib, "CFPlugInRegisterFactoryFunctionByName")
+	})
+	_register("CFPlugInRegisterPlugInType", func() {
+		purego.RegisterLibFunc(&_fnCFPlugInRegisterPlugInType, _corefoundationLib, "CFPlugInRegisterPlugInType")
+	})
+	_register("CFPlugInRemoveInstanceForFactory", func() {
+		purego.RegisterLibFunc(&_fnCFPlugInRemoveInstanceForFactory, _corefoundationLib, "CFPlugInRemoveInstanceForFactory")
+	})
+	_register("CFPlugInSetLoadOnDemand", func() {
+		purego.RegisterLibFunc(&_fnCFPlugInSetLoadOnDemand, _corefoundationLib, "CFPlugInSetLoadOnDemand")
+	})
+	_register("CFPlugInUnregisterFactory", func() {
+		purego.RegisterLibFunc(&_fnCFPlugInUnregisterFactory, _corefoundationLib, "CFPlugInUnregisterFactory")
+	})
+	_register("CFPlugInUnregisterPlugInType", func() {
+		purego.RegisterLibFunc(&_fnCFPlugInUnregisterPlugInType, _corefoundationLib, "CFPlugInUnregisterPlugInType")
+	})
+	_register("CFPreferencesAddSuitePreferencesToApp", func() {
+		purego.RegisterLibFunc(&_fnCFPreferencesAddSuitePreferencesToApp, _corefoundationLib, "CFPreferencesAddSuitePreferencesToApp")
+	})
+	_register("CFPreferencesAppSynchronize", func() {
+		purego.RegisterLibFunc(&_fnCFPreferencesAppSynchronize, _corefoundationLib, "CFPreferencesAppSynchronize")
+	})
+	_register("CFPreferencesAppValueIsForced", func() {
+		purego.RegisterLibFunc(&_fnCFPreferencesAppValueIsForced, _corefoundationLib, "CFPreferencesAppValueIsForced")
+	})
+	_register("CFPreferencesCopyAppValue", func() {
+		purego.RegisterLibFunc(&_fnCFPreferencesCopyAppValue, _corefoundationLib, "CFPreferencesCopyAppValue")
+	})
+	_register("CFPreferencesCopyApplicationList", func() {
+		purego.RegisterLibFunc(&_fnCFPreferencesCopyApplicationList, _corefoundationLib, "CFPreferencesCopyApplicationList")
+	})
+	_register("CFPreferencesCopyKeyList", func() {
+		purego.RegisterLibFunc(&_fnCFPreferencesCopyKeyList, _corefoundationLib, "CFPreferencesCopyKeyList")
+	})
+	_register("CFPreferencesCopyMultiple", func() {
+		purego.RegisterLibFunc(&_fnCFPreferencesCopyMultiple, _corefoundationLib, "CFPreferencesCopyMultiple")
+	})
+	_register("CFPreferencesCopyValue", func() {
+		purego.RegisterLibFunc(&_fnCFPreferencesCopyValue, _corefoundationLib, "CFPreferencesCopyValue")
+	})
+	_register("CFPreferencesGetAppBooleanValue", func() {
+		purego.RegisterLibFunc(&_fnCFPreferencesGetAppBooleanValue, _corefoundationLib, "CFPreferencesGetAppBooleanValue")
+	})
+	_register("CFPreferencesGetAppIntegerValue", func() {
+		purego.RegisterLibFunc(&_fnCFPreferencesGetAppIntegerValue, _corefoundationLib, "CFPreferencesGetAppIntegerValue")
+	})
+	_register("CFPreferencesRemoveSuitePreferencesFromApp", func() {
+		purego.RegisterLibFunc(&_fnCFPreferencesRemoveSuitePreferencesFromApp, _corefoundationLib, "CFPreferencesRemoveSuitePreferencesFromApp")
+	})
+	_register("CFPreferencesSetAppValue", func() {
+		purego.RegisterLibFunc(&_fnCFPreferencesSetAppValue, _corefoundationLib, "CFPreferencesSetAppValue")
+	})
+	_register("CFPreferencesSetMultiple", func() {
+		purego.RegisterLibFunc(&_fnCFPreferencesSetMultiple, _corefoundationLib, "CFPreferencesSetMultiple")
+	})
 	_register("CFPreferencesSetValue", func() { purego.RegisterLibFunc(&_fnCFPreferencesSetValue, _corefoundationLib, "CFPreferencesSetValue") })
-	_register("CFPreferencesSynchronize", func() { purego.RegisterLibFunc(&_fnCFPreferencesSynchronize, _corefoundationLib, "CFPreferencesSynchronize") })
-	_register("CFPropertyListCreateData", func() { purego.RegisterLibFunc(&_fnCFPropertyListCreateData, _corefoundationLib, "CFPropertyListCreateData") })
-	_register("CFPropertyListCreateDeepCopy", func() { purego.RegisterLibFunc(&_fnCFPropertyListCreateDeepCopy, _corefoundationLib, "CFPropertyListCreateDeepCopy") })
-	_register("CFPropertyListCreateFromStream", func() { purego.RegisterLibFunc(&_fnCFPropertyListCreateFromStream, _corefoundationLib, "CFPropertyListCreateFromStream") })
-	_register("CFPropertyListCreateFromXMLData", func() { purego.RegisterLibFunc(&_fnCFPropertyListCreateFromXMLData, _corefoundationLib, "CFPropertyListCreateFromXMLData") })
-	_register("CFPropertyListCreateWithData", func() { purego.RegisterLibFunc(&_fnCFPropertyListCreateWithData, _corefoundationLib, "CFPropertyListCreateWithData") })
-	_register("CFPropertyListCreateWithStream", func() { purego.RegisterLibFunc(&_fnCFPropertyListCreateWithStream, _corefoundationLib, "CFPropertyListCreateWithStream") })
-	_register("CFPropertyListCreateXMLData", func() { purego.RegisterLibFunc(&_fnCFPropertyListCreateXMLData, _corefoundationLib, "CFPropertyListCreateXMLData") })
+	_register("CFPreferencesSynchronize", func() {
+		purego.RegisterLibFunc(&_fnCFPreferencesSynchronize, _corefoundationLib, "CFPreferencesSynchronize")
+	})
+	_register("CFPropertyListCreateData", func() {
+		purego.RegisterLibFunc(&_fnCFPropertyListCreateData, _corefoundationLib, "CFPropertyListCreateData")
+	})
+	_register("CFPropertyListCreateDeepCopy", func() {
+		purego.RegisterLibFunc(&_fnCFPropertyListCreateDeepCopy, _corefoundationLib, "CFPropertyListCreateDeepCopy")
+	})
+	_register("CFPropertyListCreateFromStream", func() {
+		purego.RegisterLibFunc(&_fnCFPropertyListCreateFromStream, _corefoundationLib, "CFPropertyListCreateFromStream")
+	})
+	_register("CFPropertyListCreateFromXMLData", func() {
+		purego.RegisterLibFunc(&_fnCFPropertyListCreateFromXMLData, _corefoundationLib, "CFPropertyListCreateFromXMLData")
+	})
+	_register("CFPropertyListCreateWithData", func() {
+		purego.RegisterLibFunc(&_fnCFPropertyListCreateWithData, _corefoundationLib, "CFPropertyListCreateWithData")
+	})
+	_register("CFPropertyListCreateWithStream", func() {
+		purego.RegisterLibFunc(&_fnCFPropertyListCreateWithStream, _corefoundationLib, "CFPropertyListCreateWithStream")
+	})
+	_register("CFPropertyListCreateXMLData", func() {
+		purego.RegisterLibFunc(&_fnCFPropertyListCreateXMLData, _corefoundationLib, "CFPropertyListCreateXMLData")
+	})
 	_register("CFPropertyListIsValid", func() { purego.RegisterLibFunc(&_fnCFPropertyListIsValid, _corefoundationLib, "CFPropertyListIsValid") })
 	_register("CFPropertyListWrite", func() { purego.RegisterLibFunc(&_fnCFPropertyListWrite, _corefoundationLib, "CFPropertyListWrite") })
-	_register("CFPropertyListWriteToStream", func() { purego.RegisterLibFunc(&_fnCFPropertyListWriteToStream, _corefoundationLib, "CFPropertyListWriteToStream") })
+	_register("CFPropertyListWriteToStream", func() {
+		purego.RegisterLibFunc(&_fnCFPropertyListWriteToStream, _corefoundationLib, "CFPropertyListWriteToStream")
+	})
 	_register("CFRangeMake", func() { purego.RegisterLibFunc(&_fnCFRangeMake, _corefoundationLib, "CFRangeMake") })
 	_register("CFReadStreamClose", func() { purego.RegisterLibFunc(&_fnCFReadStreamClose, _corefoundationLib, "CFReadStreamClose") })
-	_register("CFReadStreamCopyDispatchQueue", func() { purego.RegisterLibFunc(&_fnCFReadStreamCopyDispatchQueue, _corefoundationLib, "CFReadStreamCopyDispatchQueue") })
+	_register("CFReadStreamCopyDispatchQueue", func() {
+		purego.RegisterLibFunc(&_fnCFReadStreamCopyDispatchQueue, _corefoundationLib, "CFReadStreamCopyDispatchQueue")
+	})
 	_register("CFReadStreamCopyError", func() { purego.RegisterLibFunc(&_fnCFReadStreamCopyError, _corefoundationLib, "CFReadStreamCopyError") })
-	_register("CFReadStreamCopyProperty", func() { purego.RegisterLibFunc(&_fnCFReadStreamCopyProperty, _corefoundationLib, "CFReadStreamCopyProperty") })
-	_register("CFReadStreamCreateWithBytesNoCopy", func() { purego.RegisterLibFunc(&_fnCFReadStreamCreateWithBytesNoCopy, _corefoundationLib, "CFReadStreamCreateWithBytesNoCopy") })
-	_register("CFReadStreamCreateWithFile", func() { purego.RegisterLibFunc(&_fnCFReadStreamCreateWithFile, _corefoundationLib, "CFReadStreamCreateWithFile") })
+	_register("CFReadStreamCopyProperty", func() {
+		purego.RegisterLibFunc(&_fnCFReadStreamCopyProperty, _corefoundationLib, "CFReadStreamCopyProperty")
+	})
+	_register("CFReadStreamCreateWithBytesNoCopy", func() {
+		purego.RegisterLibFunc(&_fnCFReadStreamCreateWithBytesNoCopy, _corefoundationLib, "CFReadStreamCreateWithBytesNoCopy")
+	})
+	_register("CFReadStreamCreateWithFile", func() {
+		purego.RegisterLibFunc(&_fnCFReadStreamCreateWithFile, _corefoundationLib, "CFReadStreamCreateWithFile")
+	})
 	_register("CFReadStreamGetBuffer", func() { purego.RegisterLibFunc(&_fnCFReadStreamGetBuffer, _corefoundationLib, "CFReadStreamGetBuffer") })
 	_register("CFReadStreamGetError", func() { purego.RegisterLibFunc(&_fnCFReadStreamGetError, _corefoundationLib, "CFReadStreamGetError") })
 	_register("CFReadStreamGetStatus", func() { purego.RegisterLibFunc(&_fnCFReadStreamGetStatus, _corefoundationLib, "CFReadStreamGetStatus") })
 	_register("CFReadStreamGetTypeID", func() { purego.RegisterLibFunc(&_fnCFReadStreamGetTypeID, _corefoundationLib, "CFReadStreamGetTypeID") })
-	_register("CFReadStreamHasBytesAvailable", func() { purego.RegisterLibFunc(&_fnCFReadStreamHasBytesAvailable, _corefoundationLib, "CFReadStreamHasBytesAvailable") })
+	_register("CFReadStreamHasBytesAvailable", func() {
+		purego.RegisterLibFunc(&_fnCFReadStreamHasBytesAvailable, _corefoundationLib, "CFReadStreamHasBytesAvailable")
+	})
 	_register("CFReadStreamOpen", func() { purego.RegisterLibFunc(&_fnCFReadStreamOpen, _corefoundationLib, "CFReadStreamOpen") })
 	_register("CFReadStreamRead", func() { purego.RegisterLibFunc(&_fnCFReadStreamRead, _corefoundationLib, "CFReadStreamRead") })
-	_register("CFReadStreamScheduleWithRunLoop", func() { purego.RegisterLibFunc(&_fnCFReadStreamScheduleWithRunLoop, _corefoundationLib, "CFReadStreamScheduleWithRunLoop") })
+	_register("CFReadStreamScheduleWithRunLoop", func() {
+		purego.RegisterLibFunc(&_fnCFReadStreamScheduleWithRunLoop, _corefoundationLib, "CFReadStreamScheduleWithRunLoop")
+	})
 	_register("CFReadStreamSetClient", func() { purego.RegisterLibFunc(&_fnCFReadStreamSetClient, _corefoundationLib, "CFReadStreamSetClient") })
-	_register("CFReadStreamSetDispatchQueue", func() { purego.RegisterLibFunc(&_fnCFReadStreamSetDispatchQueue, _corefoundationLib, "CFReadStreamSetDispatchQueue") })
-	_register("CFReadStreamSetProperty", func() { purego.RegisterLibFunc(&_fnCFReadStreamSetProperty, _corefoundationLib, "CFReadStreamSetProperty") })
-	_register("CFReadStreamUnscheduleFromRunLoop", func() { purego.RegisterLibFunc(&_fnCFReadStreamUnscheduleFromRunLoop, _corefoundationLib, "CFReadStreamUnscheduleFromRunLoop") })
+	_register("CFReadStreamSetDispatchQueue", func() {
+		purego.RegisterLibFunc(&_fnCFReadStreamSetDispatchQueue, _corefoundationLib, "CFReadStreamSetDispatchQueue")
+	})
+	_register("CFReadStreamSetProperty", func() {
+		purego.RegisterLibFunc(&_fnCFReadStreamSetProperty, _corefoundationLib, "CFReadStreamSetProperty")
+	})
+	_register("CFReadStreamUnscheduleFromRunLoop", func() {
+		purego.RegisterLibFunc(&_fnCFReadStreamUnscheduleFromRunLoop, _corefoundationLib, "CFReadStreamUnscheduleFromRunLoop")
+	})
 	_register("CFRelease", func() { purego.RegisterLibFunc(&_fnCFRelease, _corefoundationLib, "CFRelease") })
 	_register("CFRetain", func() { purego.RegisterLibFunc(&_fnCFRetain, _corefoundationLib, "CFRetain") })
-	_register("CFRunLoopAddCommonMode", func() { purego.RegisterLibFunc(&_fnCFRunLoopAddCommonMode, _corefoundationLib, "CFRunLoopAddCommonMode") })
+	_register("CFRunLoopAddCommonMode", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopAddCommonMode, _corefoundationLib, "CFRunLoopAddCommonMode")
+	})
 	_register("CFRunLoopAddObserver", func() { purego.RegisterLibFunc(&_fnCFRunLoopAddObserver, _corefoundationLib, "CFRunLoopAddObserver") })
 	_register("CFRunLoopAddSource", func() { purego.RegisterLibFunc(&_fnCFRunLoopAddSource, _corefoundationLib, "CFRunLoopAddSource") })
 	_register("CFRunLoopAddTimer", func() { purego.RegisterLibFunc(&_fnCFRunLoopAddTimer, _corefoundationLib, "CFRunLoopAddTimer") })
-	_register("CFRunLoopContainsObserver", func() { purego.RegisterLibFunc(&_fnCFRunLoopContainsObserver, _corefoundationLib, "CFRunLoopContainsObserver") })
-	_register("CFRunLoopContainsSource", func() { purego.RegisterLibFunc(&_fnCFRunLoopContainsSource, _corefoundationLib, "CFRunLoopContainsSource") })
-	_register("CFRunLoopContainsTimer", func() { purego.RegisterLibFunc(&_fnCFRunLoopContainsTimer, _corefoundationLib, "CFRunLoopContainsTimer") })
+	_register("CFRunLoopContainsObserver", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopContainsObserver, _corefoundationLib, "CFRunLoopContainsObserver")
+	})
+	_register("CFRunLoopContainsSource", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopContainsSource, _corefoundationLib, "CFRunLoopContainsSource")
+	})
+	_register("CFRunLoopContainsTimer", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopContainsTimer, _corefoundationLib, "CFRunLoopContainsTimer")
+	})
 	_register("CFRunLoopCopyAllModes", func() { purego.RegisterLibFunc(&_fnCFRunLoopCopyAllModes, _corefoundationLib, "CFRunLoopCopyAllModes") })
-	_register("CFRunLoopCopyCurrentMode", func() { purego.RegisterLibFunc(&_fnCFRunLoopCopyCurrentMode, _corefoundationLib, "CFRunLoopCopyCurrentMode") })
+	_register("CFRunLoopCopyCurrentMode", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopCopyCurrentMode, _corefoundationLib, "CFRunLoopCopyCurrentMode")
+	})
 	_register("CFRunLoopGetCurrent", func() { purego.RegisterLibFunc(&_fnCFRunLoopGetCurrent, _corefoundationLib, "CFRunLoopGetCurrent") })
 	_register("CFRunLoopGetMain", func() { purego.RegisterLibFunc(&_fnCFRunLoopGetMain, _corefoundationLib, "CFRunLoopGetMain") })
-	_register("CFRunLoopGetNextTimerFireDate", func() { purego.RegisterLibFunc(&_fnCFRunLoopGetNextTimerFireDate, _corefoundationLib, "CFRunLoopGetNextTimerFireDate") })
+	_register("CFRunLoopGetNextTimerFireDate", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopGetNextTimerFireDate, _corefoundationLib, "CFRunLoopGetNextTimerFireDate")
+	})
 	_register("CFRunLoopGetTypeID", func() { purego.RegisterLibFunc(&_fnCFRunLoopGetTypeID, _corefoundationLib, "CFRunLoopGetTypeID") })
 	_register("CFRunLoopIsWaiting", func() { purego.RegisterLibFunc(&_fnCFRunLoopIsWaiting, _corefoundationLib, "CFRunLoopIsWaiting") })
-	_register("CFRunLoopObserverCreate", func() { purego.RegisterLibFunc(&_fnCFRunLoopObserverCreate, _corefoundationLib, "CFRunLoopObserverCreate") })
-	_register("CFRunLoopObserverCreateWithHandler", func() { purego.RegisterLibFunc(&_fnCFRunLoopObserverCreateWithHandler, _corefoundationLib, "CFRunLoopObserverCreateWithHandler") })
-	_register("CFRunLoopObserverDoesRepeat", func() { purego.RegisterLibFunc(&_fnCFRunLoopObserverDoesRepeat, _corefoundationLib, "CFRunLoopObserverDoesRepeat") })
-	_register("CFRunLoopObserverGetActivities", func() { purego.RegisterLibFunc(&_fnCFRunLoopObserverGetActivities, _corefoundationLib, "CFRunLoopObserverGetActivities") })
-	_register("CFRunLoopObserverGetContext", func() { purego.RegisterLibFunc(&_fnCFRunLoopObserverGetContext, _corefoundationLib, "CFRunLoopObserverGetContext") })
-	_register("CFRunLoopObserverGetOrder", func() { purego.RegisterLibFunc(&_fnCFRunLoopObserverGetOrder, _corefoundationLib, "CFRunLoopObserverGetOrder") })
-	_register("CFRunLoopObserverGetTypeID", func() { purego.RegisterLibFunc(&_fnCFRunLoopObserverGetTypeID, _corefoundationLib, "CFRunLoopObserverGetTypeID") })
-	_register("CFRunLoopObserverInvalidate", func() { purego.RegisterLibFunc(&_fnCFRunLoopObserverInvalidate, _corefoundationLib, "CFRunLoopObserverInvalidate") })
-	_register("CFRunLoopObserverIsValid", func() { purego.RegisterLibFunc(&_fnCFRunLoopObserverIsValid, _corefoundationLib, "CFRunLoopObserverIsValid") })
+	_register("CFRunLoopObserverCreate", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopObserverCreate, _corefoundationLib, "CFRunLoopObserverCreate")
+	})
+	_register("CFRunLoopObserverCreateWithHandler", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopObserverCreateWithHandler, _corefoundationLib, "CFRunLoopObserverCreateWithHandler")
+	})
+	_register("CFRunLoopObserverDoesRepeat", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopObserverDoesRepeat, _corefoundationLib, "CFRunLoopObserverDoesRepeat")
+	})
+	_register("CFRunLoopObserverGetActivities", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopObserverGetActivities, _corefoundationLib, "CFRunLoopObserverGetActivities")
+	})
+	_register("CFRunLoopObserverGetContext", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopObserverGetContext, _corefoundationLib, "CFRunLoopObserverGetContext")
+	})
+	_register("CFRunLoopObserverGetOrder", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopObserverGetOrder, _corefoundationLib, "CFRunLoopObserverGetOrder")
+	})
+	_register("CFRunLoopObserverGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopObserverGetTypeID, _corefoundationLib, "CFRunLoopObserverGetTypeID")
+	})
+	_register("CFRunLoopObserverInvalidate", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopObserverInvalidate, _corefoundationLib, "CFRunLoopObserverInvalidate")
+	})
+	_register("CFRunLoopObserverIsValid", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopObserverIsValid, _corefoundationLib, "CFRunLoopObserverIsValid")
+	})
 	_register("CFRunLoopPerformBlock", func() { purego.RegisterLibFunc(&_fnCFRunLoopPerformBlock, _corefoundationLib, "CFRunLoopPerformBlock") })
-	_register("CFRunLoopRemoveObserver", func() { purego.RegisterLibFunc(&_fnCFRunLoopRemoveObserver, _corefoundationLib, "CFRunLoopRemoveObserver") })
+	_register("CFRunLoopRemoveObserver", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopRemoveObserver, _corefoundationLib, "CFRunLoopRemoveObserver")
+	})
 	_register("CFRunLoopRemoveSource", func() { purego.RegisterLibFunc(&_fnCFRunLoopRemoveSource, _corefoundationLib, "CFRunLoopRemoveSource") })
 	_register("CFRunLoopRemoveTimer", func() { purego.RegisterLibFunc(&_fnCFRunLoopRemoveTimer, _corefoundationLib, "CFRunLoopRemoveTimer") })
 	_register("CFRunLoopRun", func() { purego.RegisterLibFunc(&_fnCFRunLoopRun, _corefoundationLib, "CFRunLoopRun") })
 	_register("CFRunLoopRunInMode", func() { purego.RegisterLibFunc(&_fnCFRunLoopRunInMode, _corefoundationLib, "CFRunLoopRunInMode") })
 	_register("CFRunLoopSourceCreate", func() { purego.RegisterLibFunc(&_fnCFRunLoopSourceCreate, _corefoundationLib, "CFRunLoopSourceCreate") })
-	_register("CFRunLoopSourceGetContext", func() { purego.RegisterLibFunc(&_fnCFRunLoopSourceGetContext, _corefoundationLib, "CFRunLoopSourceGetContext") })
-	_register("CFRunLoopSourceGetOrder", func() { purego.RegisterLibFunc(&_fnCFRunLoopSourceGetOrder, _corefoundationLib, "CFRunLoopSourceGetOrder") })
-	_register("CFRunLoopSourceGetTypeID", func() { purego.RegisterLibFunc(&_fnCFRunLoopSourceGetTypeID, _corefoundationLib, "CFRunLoopSourceGetTypeID") })
-	_register("CFRunLoopSourceInvalidate", func() { purego.RegisterLibFunc(&_fnCFRunLoopSourceInvalidate, _corefoundationLib, "CFRunLoopSourceInvalidate") })
-	_register("CFRunLoopSourceIsValid", func() { purego.RegisterLibFunc(&_fnCFRunLoopSourceIsValid, _corefoundationLib, "CFRunLoopSourceIsValid") })
+	_register("CFRunLoopSourceGetContext", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopSourceGetContext, _corefoundationLib, "CFRunLoopSourceGetContext")
+	})
+	_register("CFRunLoopSourceGetOrder", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopSourceGetOrder, _corefoundationLib, "CFRunLoopSourceGetOrder")
+	})
+	_register("CFRunLoopSourceGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopSourceGetTypeID, _corefoundationLib, "CFRunLoopSourceGetTypeID")
+	})
+	_register("CFRunLoopSourceInvalidate", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopSourceInvalidate, _corefoundationLib, "CFRunLoopSourceInvalidate")
+	})
+	_register("CFRunLoopSourceIsValid", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopSourceIsValid, _corefoundationLib, "CFRunLoopSourceIsValid")
+	})
 	_register("CFRunLoopSourceSignal", func() { purego.RegisterLibFunc(&_fnCFRunLoopSourceSignal, _corefoundationLib, "CFRunLoopSourceSignal") })
 	_register("CFRunLoopStop", func() { purego.RegisterLibFunc(&_fnCFRunLoopStop, _corefoundationLib, "CFRunLoopStop") })
 	_register("CFRunLoopTimerCreate", func() { purego.RegisterLibFunc(&_fnCFRunLoopTimerCreate, _corefoundationLib, "CFRunLoopTimerCreate") })
-	_register("CFRunLoopTimerCreateWithHandler", func() { purego.RegisterLibFunc(&_fnCFRunLoopTimerCreateWithHandler, _corefoundationLib, "CFRunLoopTimerCreateWithHandler") })
-	_register("CFRunLoopTimerDoesRepeat", func() { purego.RegisterLibFunc(&_fnCFRunLoopTimerDoesRepeat, _corefoundationLib, "CFRunLoopTimerDoesRepeat") })
-	_register("CFRunLoopTimerGetContext", func() { purego.RegisterLibFunc(&_fnCFRunLoopTimerGetContext, _corefoundationLib, "CFRunLoopTimerGetContext") })
-	_register("CFRunLoopTimerGetInterval", func() { purego.RegisterLibFunc(&_fnCFRunLoopTimerGetInterval, _corefoundationLib, "CFRunLoopTimerGetInterval") })
-	_register("CFRunLoopTimerGetNextFireDate", func() { purego.RegisterLibFunc(&_fnCFRunLoopTimerGetNextFireDate, _corefoundationLib, "CFRunLoopTimerGetNextFireDate") })
-	_register("CFRunLoopTimerGetOrder", func() { purego.RegisterLibFunc(&_fnCFRunLoopTimerGetOrder, _corefoundationLib, "CFRunLoopTimerGetOrder") })
-	_register("CFRunLoopTimerGetTolerance", func() { purego.RegisterLibFunc(&_fnCFRunLoopTimerGetTolerance, _corefoundationLib, "CFRunLoopTimerGetTolerance") })
-	_register("CFRunLoopTimerGetTypeID", func() { purego.RegisterLibFunc(&_fnCFRunLoopTimerGetTypeID, _corefoundationLib, "CFRunLoopTimerGetTypeID") })
-	_register("CFRunLoopTimerInvalidate", func() { purego.RegisterLibFunc(&_fnCFRunLoopTimerInvalidate, _corefoundationLib, "CFRunLoopTimerInvalidate") })
+	_register("CFRunLoopTimerCreateWithHandler", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopTimerCreateWithHandler, _corefoundationLib, "CFRunLoopTimerCreateWithHandler")
+	})
+	_register("CFRunLoopTimerDoesRepeat", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopTimerDoesRepeat, _corefoundationLib, "CFRunLoopTimerDoesRepeat")
+	})
+	_register("CFRunLoopTimerGetContext", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopTimerGetContext, _corefoundationLib, "CFRunLoopTimerGetContext")
+	})
+	_register("CFRunLoopTimerGetInterval", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopTimerGetInterval, _corefoundationLib, "CFRunLoopTimerGetInterval")
+	})
+	_register("CFRunLoopTimerGetNextFireDate", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopTimerGetNextFireDate, _corefoundationLib, "CFRunLoopTimerGetNextFireDate")
+	})
+	_register("CFRunLoopTimerGetOrder", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopTimerGetOrder, _corefoundationLib, "CFRunLoopTimerGetOrder")
+	})
+	_register("CFRunLoopTimerGetTolerance", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopTimerGetTolerance, _corefoundationLib, "CFRunLoopTimerGetTolerance")
+	})
+	_register("CFRunLoopTimerGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopTimerGetTypeID, _corefoundationLib, "CFRunLoopTimerGetTypeID")
+	})
+	_register("CFRunLoopTimerInvalidate", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopTimerInvalidate, _corefoundationLib, "CFRunLoopTimerInvalidate")
+	})
 	_register("CFRunLoopTimerIsValid", func() { purego.RegisterLibFunc(&_fnCFRunLoopTimerIsValid, _corefoundationLib, "CFRunLoopTimerIsValid") })
-	_register("CFRunLoopTimerSetNextFireDate", func() { purego.RegisterLibFunc(&_fnCFRunLoopTimerSetNextFireDate, _corefoundationLib, "CFRunLoopTimerSetNextFireDate") })
-	_register("CFRunLoopTimerSetTolerance", func() { purego.RegisterLibFunc(&_fnCFRunLoopTimerSetTolerance, _corefoundationLib, "CFRunLoopTimerSetTolerance") })
+	_register("CFRunLoopTimerSetNextFireDate", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopTimerSetNextFireDate, _corefoundationLib, "CFRunLoopTimerSetNextFireDate")
+	})
+	_register("CFRunLoopTimerSetTolerance", func() {
+		purego.RegisterLibFunc(&_fnCFRunLoopTimerSetTolerance, _corefoundationLib, "CFRunLoopTimerSetTolerance")
+	})
 	_register("CFRunLoopWakeUp", func() { purego.RegisterLibFunc(&_fnCFRunLoopWakeUp, _corefoundationLib, "CFRunLoopWakeUp") })
 	_register("CFSetAddValue", func() { purego.RegisterLibFunc(&_fnCFSetAddValue, _corefoundationLib, "CFSetAddValue") })
 	_register("CFSetApplyFunction", func() { purego.RegisterLibFunc(&_fnCFSetApplyFunction, _corefoundationLib, "CFSetApplyFunction") })
@@ -565,12 +1249,16 @@ func _loadLibrary() {
 	_register("CFSetCreate", func() { purego.RegisterLibFunc(&_fnCFSetCreate, _corefoundationLib, "CFSetCreate") })
 	_register("CFSetCreateCopy", func() { purego.RegisterLibFunc(&_fnCFSetCreateCopy, _corefoundationLib, "CFSetCreateCopy") })
 	_register("CFSetCreateMutable", func() { purego.RegisterLibFunc(&_fnCFSetCreateMutable, _corefoundationLib, "CFSetCreateMutable") })
-	_register("CFSetCreateMutableCopy", func() { purego.RegisterLibFunc(&_fnCFSetCreateMutableCopy, _corefoundationLib, "CFSetCreateMutableCopy") })
+	_register("CFSetCreateMutableCopy", func() {
+		purego.RegisterLibFunc(&_fnCFSetCreateMutableCopy, _corefoundationLib, "CFSetCreateMutableCopy")
+	})
 	_register("CFSetGetCount", func() { purego.RegisterLibFunc(&_fnCFSetGetCount, _corefoundationLib, "CFSetGetCount") })
 	_register("CFSetGetCountOfValue", func() { purego.RegisterLibFunc(&_fnCFSetGetCountOfValue, _corefoundationLib, "CFSetGetCountOfValue") })
 	_register("CFSetGetTypeID", func() { purego.RegisterLibFunc(&_fnCFSetGetTypeID, _corefoundationLib, "CFSetGetTypeID") })
 	_register("CFSetGetValue", func() { purego.RegisterLibFunc(&_fnCFSetGetValue, _corefoundationLib, "CFSetGetValue") })
-	_register("CFSetGetValueIfPresent", func() { purego.RegisterLibFunc(&_fnCFSetGetValueIfPresent, _corefoundationLib, "CFSetGetValueIfPresent") })
+	_register("CFSetGetValueIfPresent", func() {
+		purego.RegisterLibFunc(&_fnCFSetGetValueIfPresent, _corefoundationLib, "CFSetGetValueIfPresent")
+	})
 	_register("CFSetGetValues", func() { purego.RegisterLibFunc(&_fnCFSetGetValues, _corefoundationLib, "CFSetGetValues") })
 	_register("CFSetRemoveAllValues", func() { purego.RegisterLibFunc(&_fnCFSetRemoveAllValues, _corefoundationLib, "CFSetRemoveAllValues") })
 	_register("CFSetRemoveValue", func() { purego.RegisterLibFunc(&_fnCFSetRemoveValue, _corefoundationLib, "CFSetRemoveValue") })
@@ -578,173 +1266,391 @@ func _loadLibrary() {
 	_register("CFSetSetValue", func() { purego.RegisterLibFunc(&_fnCFSetSetValue, _corefoundationLib, "CFSetSetValue") })
 	_register("CFShow", func() { purego.RegisterLibFunc(&_fnCFShow, _corefoundationLib, "CFShow") })
 	_register("CFShowStr", func() { purego.RegisterLibFunc(&_fnCFShowStr, _corefoundationLib, "CFShowStr") })
-	_register("CFSocketConnectToAddress", func() { purego.RegisterLibFunc(&_fnCFSocketConnectToAddress, _corefoundationLib, "CFSocketConnectToAddress") })
+	_register("CFSocketConnectToAddress", func() {
+		purego.RegisterLibFunc(&_fnCFSocketConnectToAddress, _corefoundationLib, "CFSocketConnectToAddress")
+	})
 	_register("CFSocketCopyAddress", func() { purego.RegisterLibFunc(&_fnCFSocketCopyAddress, _corefoundationLib, "CFSocketCopyAddress") })
-	_register("CFSocketCopyPeerAddress", func() { purego.RegisterLibFunc(&_fnCFSocketCopyPeerAddress, _corefoundationLib, "CFSocketCopyPeerAddress") })
-	_register("CFSocketCopyRegisteredSocketSignature", func() { purego.RegisterLibFunc(&_fnCFSocketCopyRegisteredSocketSignature, _corefoundationLib, "CFSocketCopyRegisteredSocketSignature") })
-	_register("CFSocketCopyRegisteredValue", func() { purego.RegisterLibFunc(&_fnCFSocketCopyRegisteredValue, _corefoundationLib, "CFSocketCopyRegisteredValue") })
+	_register("CFSocketCopyPeerAddress", func() {
+		purego.RegisterLibFunc(&_fnCFSocketCopyPeerAddress, _corefoundationLib, "CFSocketCopyPeerAddress")
+	})
+	_register("CFSocketCopyRegisteredSocketSignature", func() {
+		purego.RegisterLibFunc(&_fnCFSocketCopyRegisteredSocketSignature, _corefoundationLib, "CFSocketCopyRegisteredSocketSignature")
+	})
+	_register("CFSocketCopyRegisteredValue", func() {
+		purego.RegisterLibFunc(&_fnCFSocketCopyRegisteredValue, _corefoundationLib, "CFSocketCopyRegisteredValue")
+	})
 	_register("CFSocketCreate", func() { purego.RegisterLibFunc(&_fnCFSocketCreate, _corefoundationLib, "CFSocketCreate") })
-	_register("CFSocketCreateConnectedToSocketSignature", func() { purego.RegisterLibFunc(&_fnCFSocketCreateConnectedToSocketSignature, _corefoundationLib, "CFSocketCreateConnectedToSocketSignature") })
-	_register("CFSocketCreateRunLoopSource", func() { purego.RegisterLibFunc(&_fnCFSocketCreateRunLoopSource, _corefoundationLib, "CFSocketCreateRunLoopSource") })
-	_register("CFSocketCreateWithNative", func() { purego.RegisterLibFunc(&_fnCFSocketCreateWithNative, _corefoundationLib, "CFSocketCreateWithNative") })
-	_register("CFSocketCreateWithSocketSignature", func() { purego.RegisterLibFunc(&_fnCFSocketCreateWithSocketSignature, _corefoundationLib, "CFSocketCreateWithSocketSignature") })
-	_register("CFSocketDisableCallBacks", func() { purego.RegisterLibFunc(&_fnCFSocketDisableCallBacks, _corefoundationLib, "CFSocketDisableCallBacks") })
-	_register("CFSocketEnableCallBacks", func() { purego.RegisterLibFunc(&_fnCFSocketEnableCallBacks, _corefoundationLib, "CFSocketEnableCallBacks") })
+	_register("CFSocketCreateConnectedToSocketSignature", func() {
+		purego.RegisterLibFunc(&_fnCFSocketCreateConnectedToSocketSignature, _corefoundationLib, "CFSocketCreateConnectedToSocketSignature")
+	})
+	_register("CFSocketCreateRunLoopSource", func() {
+		purego.RegisterLibFunc(&_fnCFSocketCreateRunLoopSource, _corefoundationLib, "CFSocketCreateRunLoopSource")
+	})
+	_register("CFSocketCreateWithNative", func() {
+		purego.RegisterLibFunc(&_fnCFSocketCreateWithNative, _corefoundationLib, "CFSocketCreateWithNative")
+	})
+	_register("CFSocketCreateWithSocketSignature", func() {
+		purego.RegisterLibFunc(&_fnCFSocketCreateWithSocketSignature, _corefoundationLib, "CFSocketCreateWithSocketSignature")
+	})
+	_register("CFSocketDisableCallBacks", func() {
+		purego.RegisterLibFunc(&_fnCFSocketDisableCallBacks, _corefoundationLib, "CFSocketDisableCallBacks")
+	})
+	_register("CFSocketEnableCallBacks", func() {
+		purego.RegisterLibFunc(&_fnCFSocketEnableCallBacks, _corefoundationLib, "CFSocketEnableCallBacks")
+	})
 	_register("CFSocketGetContext", func() { purego.RegisterLibFunc(&_fnCFSocketGetContext, _corefoundationLib, "CFSocketGetContext") })
-	_register("CFSocketGetDefaultNameRegistryPortNumber", func() { purego.RegisterLibFunc(&_fnCFSocketGetDefaultNameRegistryPortNumber, _corefoundationLib, "CFSocketGetDefaultNameRegistryPortNumber") })
+	_register("CFSocketGetDefaultNameRegistryPortNumber", func() {
+		purego.RegisterLibFunc(&_fnCFSocketGetDefaultNameRegistryPortNumber, _corefoundationLib, "CFSocketGetDefaultNameRegistryPortNumber")
+	})
 	_register("CFSocketGetNative", func() { purego.RegisterLibFunc(&_fnCFSocketGetNative, _corefoundationLib, "CFSocketGetNative") })
-	_register("CFSocketGetSocketFlags", func() { purego.RegisterLibFunc(&_fnCFSocketGetSocketFlags, _corefoundationLib, "CFSocketGetSocketFlags") })
+	_register("CFSocketGetSocketFlags", func() {
+		purego.RegisterLibFunc(&_fnCFSocketGetSocketFlags, _corefoundationLib, "CFSocketGetSocketFlags")
+	})
 	_register("CFSocketGetTypeID", func() { purego.RegisterLibFunc(&_fnCFSocketGetTypeID, _corefoundationLib, "CFSocketGetTypeID") })
 	_register("CFSocketInvalidate", func() { purego.RegisterLibFunc(&_fnCFSocketInvalidate, _corefoundationLib, "CFSocketInvalidate") })
 	_register("CFSocketIsValid", func() { purego.RegisterLibFunc(&_fnCFSocketIsValid, _corefoundationLib, "CFSocketIsValid") })
-	_register("CFSocketRegisterSocketSignature", func() { purego.RegisterLibFunc(&_fnCFSocketRegisterSocketSignature, _corefoundationLib, "CFSocketRegisterSocketSignature") })
+	_register("CFSocketRegisterSocketSignature", func() {
+		purego.RegisterLibFunc(&_fnCFSocketRegisterSocketSignature, _corefoundationLib, "CFSocketRegisterSocketSignature")
+	})
 	_register("CFSocketRegisterValue", func() { purego.RegisterLibFunc(&_fnCFSocketRegisterValue, _corefoundationLib, "CFSocketRegisterValue") })
 	_register("CFSocketSendData", func() { purego.RegisterLibFunc(&_fnCFSocketSendData, _corefoundationLib, "CFSocketSendData") })
 	_register("CFSocketSetAddress", func() { purego.RegisterLibFunc(&_fnCFSocketSetAddress, _corefoundationLib, "CFSocketSetAddress") })
-	_register("CFSocketSetDefaultNameRegistryPortNumber", func() { purego.RegisterLibFunc(&_fnCFSocketSetDefaultNameRegistryPortNumber, _corefoundationLib, "CFSocketSetDefaultNameRegistryPortNumber") })
-	_register("CFSocketSetSocketFlags", func() { purego.RegisterLibFunc(&_fnCFSocketSetSocketFlags, _corefoundationLib, "CFSocketSetSocketFlags") })
+	_register("CFSocketSetDefaultNameRegistryPortNumber", func() {
+		purego.RegisterLibFunc(&_fnCFSocketSetDefaultNameRegistryPortNumber, _corefoundationLib, "CFSocketSetDefaultNameRegistryPortNumber")
+	})
+	_register("CFSocketSetSocketFlags", func() {
+		purego.RegisterLibFunc(&_fnCFSocketSetSocketFlags, _corefoundationLib, "CFSocketSetSocketFlags")
+	})
 	_register("CFSocketUnregister", func() { purego.RegisterLibFunc(&_fnCFSocketUnregister, _corefoundationLib, "CFSocketUnregister") })
-	_register("CFStreamCreateBoundPair", func() { purego.RegisterLibFunc(&_fnCFStreamCreateBoundPair, _corefoundationLib, "CFStreamCreateBoundPair") })
-	_register("CFStreamCreatePairWithPeerSocketSignature", func() { purego.RegisterLibFunc(&_fnCFStreamCreatePairWithPeerSocketSignature, _corefoundationLib, "CFStreamCreatePairWithPeerSocketSignature") })
-	_register("CFStreamCreatePairWithSocket", func() { purego.RegisterLibFunc(&_fnCFStreamCreatePairWithSocket, _corefoundationLib, "CFStreamCreatePairWithSocket") })
-	_register("CFStreamCreatePairWithSocketToHost", func() { purego.RegisterLibFunc(&_fnCFStreamCreatePairWithSocketToHost, _corefoundationLib, "CFStreamCreatePairWithSocketToHost") })
+	_register("CFStreamCreateBoundPair", func() {
+		purego.RegisterLibFunc(&_fnCFStreamCreateBoundPair, _corefoundationLib, "CFStreamCreateBoundPair")
+	})
+	_register("CFStreamCreatePairWithPeerSocketSignature", func() {
+		purego.RegisterLibFunc(&_fnCFStreamCreatePairWithPeerSocketSignature, _corefoundationLib, "CFStreamCreatePairWithPeerSocketSignature")
+	})
+	_register("CFStreamCreatePairWithSocket", func() {
+		purego.RegisterLibFunc(&_fnCFStreamCreatePairWithSocket, _corefoundationLib, "CFStreamCreatePairWithSocket")
+	})
+	_register("CFStreamCreatePairWithSocketToHost", func() {
+		purego.RegisterLibFunc(&_fnCFStreamCreatePairWithSocketToHost, _corefoundationLib, "CFStreamCreatePairWithSocketToHost")
+	})
 	_register("CFStringAppend", func() { purego.RegisterLibFunc(&_fnCFStringAppend, _corefoundationLib, "CFStringAppend") })
 	_register("CFStringAppendCString", func() { purego.RegisterLibFunc(&_fnCFStringAppendCString, _corefoundationLib, "CFStringAppendCString") })
-	_register("CFStringAppendCharacters", func() { purego.RegisterLibFunc(&_fnCFStringAppendCharacters, _corefoundationLib, "CFStringAppendCharacters") })
+	_register("CFStringAppendCharacters", func() {
+		purego.RegisterLibFunc(&_fnCFStringAppendCharacters, _corefoundationLib, "CFStringAppendCharacters")
+	})
 	_register("CFStringAppendFormat", func() { purego.RegisterLibFunc(&_fnCFStringAppendFormat, _corefoundationLib, "CFStringAppendFormat") })
-	_register("CFStringAppendFormatAndArguments", func() { purego.RegisterLibFunc(&_fnCFStringAppendFormatAndArguments, _corefoundationLib, "CFStringAppendFormatAndArguments") })
-	_register("CFStringAppendPascalString", func() { purego.RegisterLibFunc(&_fnCFStringAppendPascalString, _corefoundationLib, "CFStringAppendPascalString") })
+	_register("CFStringAppendFormatAndArguments", func() {
+		purego.RegisterLibFunc(&_fnCFStringAppendFormatAndArguments, _corefoundationLib, "CFStringAppendFormatAndArguments")
+	})
+	_register("CFStringAppendPascalString", func() {
+		purego.RegisterLibFunc(&_fnCFStringAppendPascalString, _corefoundationLib, "CFStringAppendPascalString")
+	})
 	_register("CFStringCapitalize", func() { purego.RegisterLibFunc(&_fnCFStringCapitalize, _corefoundationLib, "CFStringCapitalize") })
 	_register("CFStringCompare", func() { purego.RegisterLibFunc(&_fnCFStringCompare, _corefoundationLib, "CFStringCompare") })
-	_register("CFStringCompareWithOptions", func() { purego.RegisterLibFunc(&_fnCFStringCompareWithOptions, _corefoundationLib, "CFStringCompareWithOptions") })
-	_register("CFStringCompareWithOptionsAndLocale", func() { purego.RegisterLibFunc(&_fnCFStringCompareWithOptionsAndLocale, _corefoundationLib, "CFStringCompareWithOptionsAndLocale") })
-	_register("CFStringConvertEncodingToIANACharSetName", func() { purego.RegisterLibFunc(&_fnCFStringConvertEncodingToIANACharSetName, _corefoundationLib, "CFStringConvertEncodingToIANACharSetName") })
-	_register("CFStringConvertEncodingToNSStringEncoding", func() { purego.RegisterLibFunc(&_fnCFStringConvertEncodingToNSStringEncoding, _corefoundationLib, "CFStringConvertEncodingToNSStringEncoding") })
-	_register("CFStringConvertEncodingToWindowsCodepage", func() { purego.RegisterLibFunc(&_fnCFStringConvertEncodingToWindowsCodepage, _corefoundationLib, "CFStringConvertEncodingToWindowsCodepage") })
-	_register("CFStringConvertIANACharSetNameToEncoding", func() { purego.RegisterLibFunc(&_fnCFStringConvertIANACharSetNameToEncoding, _corefoundationLib, "CFStringConvertIANACharSetNameToEncoding") })
-	_register("CFStringConvertNSStringEncodingToEncoding", func() { purego.RegisterLibFunc(&_fnCFStringConvertNSStringEncodingToEncoding, _corefoundationLib, "CFStringConvertNSStringEncodingToEncoding") })
-	_register("CFStringConvertWindowsCodepageToEncoding", func() { purego.RegisterLibFunc(&_fnCFStringConvertWindowsCodepageToEncoding, _corefoundationLib, "CFStringConvertWindowsCodepageToEncoding") })
-	_register("CFStringCreateArrayBySeparatingStrings", func() { purego.RegisterLibFunc(&_fnCFStringCreateArrayBySeparatingStrings, _corefoundationLib, "CFStringCreateArrayBySeparatingStrings") })
-	_register("CFStringCreateArrayWithFindResults", func() { purego.RegisterLibFunc(&_fnCFStringCreateArrayWithFindResults, _corefoundationLib, "CFStringCreateArrayWithFindResults") })
-	_register("CFStringCreateByCombiningStrings", func() { purego.RegisterLibFunc(&_fnCFStringCreateByCombiningStrings, _corefoundationLib, "CFStringCreateByCombiningStrings") })
+	_register("CFStringCompareWithOptions", func() {
+		purego.RegisterLibFunc(&_fnCFStringCompareWithOptions, _corefoundationLib, "CFStringCompareWithOptions")
+	})
+	_register("CFStringCompareWithOptionsAndLocale", func() {
+		purego.RegisterLibFunc(&_fnCFStringCompareWithOptionsAndLocale, _corefoundationLib, "CFStringCompareWithOptionsAndLocale")
+	})
+	_register("CFStringConvertEncodingToIANACharSetName", func() {
+		purego.RegisterLibFunc(&_fnCFStringConvertEncodingToIANACharSetName, _corefoundationLib, "CFStringConvertEncodingToIANACharSetName")
+	})
+	_register("CFStringConvertEncodingToNSStringEncoding", func() {
+		purego.RegisterLibFunc(&_fnCFStringConvertEncodingToNSStringEncoding, _corefoundationLib, "CFStringConvertEncodingToNSStringEncoding")
+	})
+	_register("CFStringConvertEncodingToWindowsCodepage", func() {
+		purego.RegisterLibFunc(&_fnCFStringConvertEncodingToWindowsCodepage, _corefoundationLib, "CFStringConvertEncodingToWindowsCodepage")
+	})
+	_register("CFStringConvertIANACharSetNameToEncoding", func() {
+		purego.RegisterLibFunc(&_fnCFStringConvertIANACharSetNameToEncoding, _corefoundationLib, "CFStringConvertIANACharSetNameToEncoding")
+	})
+	_register("CFStringConvertNSStringEncodingToEncoding", func() {
+		purego.RegisterLibFunc(&_fnCFStringConvertNSStringEncodingToEncoding, _corefoundationLib, "CFStringConvertNSStringEncodingToEncoding")
+	})
+	_register("CFStringConvertWindowsCodepageToEncoding", func() {
+		purego.RegisterLibFunc(&_fnCFStringConvertWindowsCodepageToEncoding, _corefoundationLib, "CFStringConvertWindowsCodepageToEncoding")
+	})
+	_register("CFStringCreateArrayBySeparatingStrings", func() {
+		purego.RegisterLibFunc(&_fnCFStringCreateArrayBySeparatingStrings, _corefoundationLib, "CFStringCreateArrayBySeparatingStrings")
+	})
+	_register("CFStringCreateArrayWithFindResults", func() {
+		purego.RegisterLibFunc(&_fnCFStringCreateArrayWithFindResults, _corefoundationLib, "CFStringCreateArrayWithFindResults")
+	})
+	_register("CFStringCreateByCombiningStrings", func() {
+		purego.RegisterLibFunc(&_fnCFStringCreateByCombiningStrings, _corefoundationLib, "CFStringCreateByCombiningStrings")
+	})
 	_register("CFStringCreateCopy", func() { purego.RegisterLibFunc(&_fnCFStringCreateCopy, _corefoundationLib, "CFStringCreateCopy") })
-	_register("CFStringCreateExternalRepresentation", func() { purego.RegisterLibFunc(&_fnCFStringCreateExternalRepresentation, _corefoundationLib, "CFStringCreateExternalRepresentation") })
-	_register("CFStringCreateFromExternalRepresentation", func() { purego.RegisterLibFunc(&_fnCFStringCreateFromExternalRepresentation, _corefoundationLib, "CFStringCreateFromExternalRepresentation") })
+	_register("CFStringCreateExternalRepresentation", func() {
+		purego.RegisterLibFunc(&_fnCFStringCreateExternalRepresentation, _corefoundationLib, "CFStringCreateExternalRepresentation")
+	})
+	_register("CFStringCreateFromExternalRepresentation", func() {
+		purego.RegisterLibFunc(&_fnCFStringCreateFromExternalRepresentation, _corefoundationLib, "CFStringCreateFromExternalRepresentation")
+	})
 	_register("CFStringCreateMutable", func() { purego.RegisterLibFunc(&_fnCFStringCreateMutable, _corefoundationLib, "CFStringCreateMutable") })
-	_register("CFStringCreateMutableCopy", func() { purego.RegisterLibFunc(&_fnCFStringCreateMutableCopy, _corefoundationLib, "CFStringCreateMutableCopy") })
-	_register("CFStringCreateMutableWithExternalCharactersNoCopy", func() { purego.RegisterLibFunc(&_fnCFStringCreateMutableWithExternalCharactersNoCopy, _corefoundationLib, "CFStringCreateMutableWithExternalCharactersNoCopy") })
-	_register("CFStringCreateStringWithValidatedFormat", func() { purego.RegisterLibFunc(&_fnCFStringCreateStringWithValidatedFormat, _corefoundationLib, "CFStringCreateStringWithValidatedFormat") })
-	_register("CFStringCreateStringWithValidatedFormatAndArguments", func() { purego.RegisterLibFunc(&_fnCFStringCreateStringWithValidatedFormatAndArguments, _corefoundationLib, "CFStringCreateStringWithValidatedFormatAndArguments") })
-	_register("CFStringCreateWithBytes", func() { purego.RegisterLibFunc(&_fnCFStringCreateWithBytes, _corefoundationLib, "CFStringCreateWithBytes") })
-	_register("CFStringCreateWithBytesNoCopy", func() { purego.RegisterLibFunc(&_fnCFStringCreateWithBytesNoCopy, _corefoundationLib, "CFStringCreateWithBytesNoCopy") })
-	_register("CFStringCreateWithCString", func() { purego.RegisterLibFunc(&_fnCFStringCreateWithCString, _corefoundationLib, "CFStringCreateWithCString") })
-	_register("CFStringCreateWithCStringNoCopy", func() { purego.RegisterLibFunc(&_fnCFStringCreateWithCStringNoCopy, _corefoundationLib, "CFStringCreateWithCStringNoCopy") })
-	_register("CFStringCreateWithCharacters", func() { purego.RegisterLibFunc(&_fnCFStringCreateWithCharacters, _corefoundationLib, "CFStringCreateWithCharacters") })
-	_register("CFStringCreateWithCharactersNoCopy", func() { purego.RegisterLibFunc(&_fnCFStringCreateWithCharactersNoCopy, _corefoundationLib, "CFStringCreateWithCharactersNoCopy") })
-	_register("CFStringCreateWithFileSystemRepresentation", func() { purego.RegisterLibFunc(&_fnCFStringCreateWithFileSystemRepresentation, _corefoundationLib, "CFStringCreateWithFileSystemRepresentation") })
-	_register("CFStringCreateWithFormat", func() { purego.RegisterLibFunc(&_fnCFStringCreateWithFormat, _corefoundationLib, "CFStringCreateWithFormat") })
-	_register("CFStringCreateWithFormatAndArguments", func() { purego.RegisterLibFunc(&_fnCFStringCreateWithFormatAndArguments, _corefoundationLib, "CFStringCreateWithFormatAndArguments") })
-	_register("CFStringCreateWithPascalString", func() { purego.RegisterLibFunc(&_fnCFStringCreateWithPascalString, _corefoundationLib, "CFStringCreateWithPascalString") })
-	_register("CFStringCreateWithPascalStringNoCopy", func() { purego.RegisterLibFunc(&_fnCFStringCreateWithPascalStringNoCopy, _corefoundationLib, "CFStringCreateWithPascalStringNoCopy") })
-	_register("CFStringCreateWithSubstring", func() { purego.RegisterLibFunc(&_fnCFStringCreateWithSubstring, _corefoundationLib, "CFStringCreateWithSubstring") })
+	_register("CFStringCreateMutableCopy", func() {
+		purego.RegisterLibFunc(&_fnCFStringCreateMutableCopy, _corefoundationLib, "CFStringCreateMutableCopy")
+	})
+	_register("CFStringCreateMutableWithExternalCharactersNoCopy", func() {
+		purego.RegisterLibFunc(&_fnCFStringCreateMutableWithExternalCharactersNoCopy, _corefoundationLib, "CFStringCreateMutableWithExternalCharactersNoCopy")
+	})
+	_register("CFStringCreateStringWithValidatedFormat", func() {
+		purego.RegisterLibFunc(&_fnCFStringCreateStringWithValidatedFormat, _corefoundationLib, "CFStringCreateStringWithValidatedFormat")
+	})
+	_register("CFStringCreateStringWithValidatedFormatAndArguments", func() {
+		purego.RegisterLibFunc(&_fnCFStringCreateStringWithValidatedFormatAndArguments, _corefoundationLib, "CFStringCreateStringWithValidatedFormatAndArguments")
+	})
+	_register("CFStringCreateWithBytes", func() {
+		purego.RegisterLibFunc(&_fnCFStringCreateWithBytes, _corefoundationLib, "CFStringCreateWithBytes")
+	})
+	_register("CFStringCreateWithBytesNoCopy", func() {
+		purego.RegisterLibFunc(&_fnCFStringCreateWithBytesNoCopy, _corefoundationLib, "CFStringCreateWithBytesNoCopy")
+	})
+	_register("CFStringCreateWithCString", func() {
+		purego.RegisterLibFunc(&_fnCFStringCreateWithCString, _corefoundationLib, "CFStringCreateWithCString")
+	})
+	_register("CFStringCreateWithCStringNoCopy", func() {
+		purego.RegisterLibFunc(&_fnCFStringCreateWithCStringNoCopy, _corefoundationLib, "CFStringCreateWithCStringNoCopy")
+	})
+	_register("CFStringCreateWithCharacters", func() {
+		purego.RegisterLibFunc(&_fnCFStringCreateWithCharacters, _corefoundationLib, "CFStringCreateWithCharacters")
+	})
+	_register("CFStringCreateWithCharactersNoCopy", func() {
+		purego.RegisterLibFunc(&_fnCFStringCreateWithCharactersNoCopy, _corefoundationLib, "CFStringCreateWithCharactersNoCopy")
+	})
+	_register("CFStringCreateWithFileSystemRepresentation", func() {
+		purego.RegisterLibFunc(&_fnCFStringCreateWithFileSystemRepresentation, _corefoundationLib, "CFStringCreateWithFileSystemRepresentation")
+	})
+	_register("CFStringCreateWithFormat", func() {
+		purego.RegisterLibFunc(&_fnCFStringCreateWithFormat, _corefoundationLib, "CFStringCreateWithFormat")
+	})
+	_register("CFStringCreateWithFormatAndArguments", func() {
+		purego.RegisterLibFunc(&_fnCFStringCreateWithFormatAndArguments, _corefoundationLib, "CFStringCreateWithFormatAndArguments")
+	})
+	_register("CFStringCreateWithPascalString", func() {
+		purego.RegisterLibFunc(&_fnCFStringCreateWithPascalString, _corefoundationLib, "CFStringCreateWithPascalString")
+	})
+	_register("CFStringCreateWithPascalStringNoCopy", func() {
+		purego.RegisterLibFunc(&_fnCFStringCreateWithPascalStringNoCopy, _corefoundationLib, "CFStringCreateWithPascalStringNoCopy")
+	})
+	_register("CFStringCreateWithSubstring", func() {
+		purego.RegisterLibFunc(&_fnCFStringCreateWithSubstring, _corefoundationLib, "CFStringCreateWithSubstring")
+	})
 	_register("CFStringDelete", func() { purego.RegisterLibFunc(&_fnCFStringDelete, _corefoundationLib, "CFStringDelete") })
 	_register("CFStringFind", func() { purego.RegisterLibFunc(&_fnCFStringFind, _corefoundationLib, "CFStringFind") })
-	_register("CFStringFindAndReplace", func() { purego.RegisterLibFunc(&_fnCFStringFindAndReplace, _corefoundationLib, "CFStringFindAndReplace") })
-	_register("CFStringFindCharacterFromSet", func() { purego.RegisterLibFunc(&_fnCFStringFindCharacterFromSet, _corefoundationLib, "CFStringFindCharacterFromSet") })
-	_register("CFStringFindWithOptions", func() { purego.RegisterLibFunc(&_fnCFStringFindWithOptions, _corefoundationLib, "CFStringFindWithOptions") })
-	_register("CFStringFindWithOptionsAndLocale", func() { purego.RegisterLibFunc(&_fnCFStringFindWithOptionsAndLocale, _corefoundationLib, "CFStringFindWithOptionsAndLocale") })
+	_register("CFStringFindAndReplace", func() {
+		purego.RegisterLibFunc(&_fnCFStringFindAndReplace, _corefoundationLib, "CFStringFindAndReplace")
+	})
+	_register("CFStringFindCharacterFromSet", func() {
+		purego.RegisterLibFunc(&_fnCFStringFindCharacterFromSet, _corefoundationLib, "CFStringFindCharacterFromSet")
+	})
+	_register("CFStringFindWithOptions", func() {
+		purego.RegisterLibFunc(&_fnCFStringFindWithOptions, _corefoundationLib, "CFStringFindWithOptions")
+	})
+	_register("CFStringFindWithOptionsAndLocale", func() {
+		purego.RegisterLibFunc(&_fnCFStringFindWithOptionsAndLocale, _corefoundationLib, "CFStringFindWithOptionsAndLocale")
+	})
 	_register("CFStringFold", func() { purego.RegisterLibFunc(&_fnCFStringFold, _corefoundationLib, "CFStringFold") })
 	_register("CFStringGetBytes", func() { purego.RegisterLibFunc(&_fnCFStringGetBytes, _corefoundationLib, "CFStringGetBytes") })
 	_register("CFStringGetCString", func() { purego.RegisterLibFunc(&_fnCFStringGetCString, _corefoundationLib, "CFStringGetCString") })
 	_register("CFStringGetCStringPtr", func() { purego.RegisterLibFunc(&_fnCFStringGetCStringPtr, _corefoundationLib, "CFStringGetCStringPtr") })
-	_register("CFStringGetCharacterAtIndex", func() { purego.RegisterLibFunc(&_fnCFStringGetCharacterAtIndex, _corefoundationLib, "CFStringGetCharacterAtIndex") })
-	_register("CFStringGetCharacterFromInlineBuffer", func() { purego.RegisterLibFunc(&_fnCFStringGetCharacterFromInlineBuffer, _corefoundationLib, "CFStringGetCharacterFromInlineBuffer") })
+	_register("CFStringGetCharacterAtIndex", func() {
+		purego.RegisterLibFunc(&_fnCFStringGetCharacterAtIndex, _corefoundationLib, "CFStringGetCharacterAtIndex")
+	})
+	_register("CFStringGetCharacterFromInlineBuffer", func() {
+		purego.RegisterLibFunc(&_fnCFStringGetCharacterFromInlineBuffer, _corefoundationLib, "CFStringGetCharacterFromInlineBuffer")
+	})
 	_register("CFStringGetCharacters", func() { purego.RegisterLibFunc(&_fnCFStringGetCharacters, _corefoundationLib, "CFStringGetCharacters") })
-	_register("CFStringGetCharactersPtr", func() { purego.RegisterLibFunc(&_fnCFStringGetCharactersPtr, _corefoundationLib, "CFStringGetCharactersPtr") })
-	_register("CFStringGetDoubleValue", func() { purego.RegisterLibFunc(&_fnCFStringGetDoubleValue, _corefoundationLib, "CFStringGetDoubleValue") })
-	_register("CFStringGetFastestEncoding", func() { purego.RegisterLibFunc(&_fnCFStringGetFastestEncoding, _corefoundationLib, "CFStringGetFastestEncoding") })
-	_register("CFStringGetFileSystemRepresentation", func() { purego.RegisterLibFunc(&_fnCFStringGetFileSystemRepresentation, _corefoundationLib, "CFStringGetFileSystemRepresentation") })
-	_register("CFStringGetHyphenationLocationBeforeIndex", func() { purego.RegisterLibFunc(&_fnCFStringGetHyphenationLocationBeforeIndex, _corefoundationLib, "CFStringGetHyphenationLocationBeforeIndex") })
+	_register("CFStringGetCharactersPtr", func() {
+		purego.RegisterLibFunc(&_fnCFStringGetCharactersPtr, _corefoundationLib, "CFStringGetCharactersPtr")
+	})
+	_register("CFStringGetDoubleValue", func() {
+		purego.RegisterLibFunc(&_fnCFStringGetDoubleValue, _corefoundationLib, "CFStringGetDoubleValue")
+	})
+	_register("CFStringGetFastestEncoding", func() {
+		purego.RegisterLibFunc(&_fnCFStringGetFastestEncoding, _corefoundationLib, "CFStringGetFastestEncoding")
+	})
+	_register("CFStringGetFileSystemRepresentation", func() {
+		purego.RegisterLibFunc(&_fnCFStringGetFileSystemRepresentation, _corefoundationLib, "CFStringGetFileSystemRepresentation")
+	})
+	_register("CFStringGetHyphenationLocationBeforeIndex", func() {
+		purego.RegisterLibFunc(&_fnCFStringGetHyphenationLocationBeforeIndex, _corefoundationLib, "CFStringGetHyphenationLocationBeforeIndex")
+	})
 	_register("CFStringGetIntValue", func() { purego.RegisterLibFunc(&_fnCFStringGetIntValue, _corefoundationLib, "CFStringGetIntValue") })
 	_register("CFStringGetLength", func() { purego.RegisterLibFunc(&_fnCFStringGetLength, _corefoundationLib, "CFStringGetLength") })
 	_register("CFStringGetLineBounds", func() { purego.RegisterLibFunc(&_fnCFStringGetLineBounds, _corefoundationLib, "CFStringGetLineBounds") })
-	_register("CFStringGetListOfAvailableEncodings", func() { purego.RegisterLibFunc(&_fnCFStringGetListOfAvailableEncodings, _corefoundationLib, "CFStringGetListOfAvailableEncodings") })
-	_register("CFStringGetLongCharacterForSurrogatePair", func() { purego.RegisterLibFunc(&_fnCFStringGetLongCharacterForSurrogatePair, _corefoundationLib, "CFStringGetLongCharacterForSurrogatePair") })
-	_register("CFStringGetMaximumSizeForEncoding", func() { purego.RegisterLibFunc(&_fnCFStringGetMaximumSizeForEncoding, _corefoundationLib, "CFStringGetMaximumSizeForEncoding") })
-	_register("CFStringGetMaximumSizeOfFileSystemRepresentation", func() { purego.RegisterLibFunc(&_fnCFStringGetMaximumSizeOfFileSystemRepresentation, _corefoundationLib, "CFStringGetMaximumSizeOfFileSystemRepresentation") })
-	_register("CFStringGetMostCompatibleMacStringEncoding", func() { purego.RegisterLibFunc(&_fnCFStringGetMostCompatibleMacStringEncoding, _corefoundationLib, "CFStringGetMostCompatibleMacStringEncoding") })
-	_register("CFStringGetNameOfEncoding", func() { purego.RegisterLibFunc(&_fnCFStringGetNameOfEncoding, _corefoundationLib, "CFStringGetNameOfEncoding") })
-	_register("CFStringGetParagraphBounds", func() { purego.RegisterLibFunc(&_fnCFStringGetParagraphBounds, _corefoundationLib, "CFStringGetParagraphBounds") })
-	_register("CFStringGetPascalString", func() { purego.RegisterLibFunc(&_fnCFStringGetPascalString, _corefoundationLib, "CFStringGetPascalString") })
-	_register("CFStringGetPascalStringPtr", func() { purego.RegisterLibFunc(&_fnCFStringGetPascalStringPtr, _corefoundationLib, "CFStringGetPascalStringPtr") })
-	_register("CFStringGetRangeOfComposedCharactersAtIndex", func() { purego.RegisterLibFunc(&_fnCFStringGetRangeOfComposedCharactersAtIndex, _corefoundationLib, "CFStringGetRangeOfComposedCharactersAtIndex") })
-	_register("CFStringGetSmallestEncoding", func() { purego.RegisterLibFunc(&_fnCFStringGetSmallestEncoding, _corefoundationLib, "CFStringGetSmallestEncoding") })
-	_register("CFStringGetSurrogatePairForLongCharacter", func() { purego.RegisterLibFunc(&_fnCFStringGetSurrogatePairForLongCharacter, _corefoundationLib, "CFStringGetSurrogatePairForLongCharacter") })
-	_register("CFStringGetSystemEncoding", func() { purego.RegisterLibFunc(&_fnCFStringGetSystemEncoding, _corefoundationLib, "CFStringGetSystemEncoding") })
+	_register("CFStringGetListOfAvailableEncodings", func() {
+		purego.RegisterLibFunc(&_fnCFStringGetListOfAvailableEncodings, _corefoundationLib, "CFStringGetListOfAvailableEncodings")
+	})
+	_register("CFStringGetLongCharacterForSurrogatePair", func() {
+		purego.RegisterLibFunc(&_fnCFStringGetLongCharacterForSurrogatePair, _corefoundationLib, "CFStringGetLongCharacterForSurrogatePair")
+	})
+	_register("CFStringGetMaximumSizeForEncoding", func() {
+		purego.RegisterLibFunc(&_fnCFStringGetMaximumSizeForEncoding, _corefoundationLib, "CFStringGetMaximumSizeForEncoding")
+	})
+	_register("CFStringGetMaximumSizeOfFileSystemRepresentation", func() {
+		purego.RegisterLibFunc(&_fnCFStringGetMaximumSizeOfFileSystemRepresentation, _corefoundationLib, "CFStringGetMaximumSizeOfFileSystemRepresentation")
+	})
+	_register("CFStringGetMostCompatibleMacStringEncoding", func() {
+		purego.RegisterLibFunc(&_fnCFStringGetMostCompatibleMacStringEncoding, _corefoundationLib, "CFStringGetMostCompatibleMacStringEncoding")
+	})
+	_register("CFStringGetNameOfEncoding", func() {
+		purego.RegisterLibFunc(&_fnCFStringGetNameOfEncoding, _corefoundationLib, "CFStringGetNameOfEncoding")
+	})
+	_register("CFStringGetParagraphBounds", func() {
+		purego.RegisterLibFunc(&_fnCFStringGetParagraphBounds, _corefoundationLib, "CFStringGetParagraphBounds")
+	})
+	_register("CFStringGetPascalString", func() {
+		purego.RegisterLibFunc(&_fnCFStringGetPascalString, _corefoundationLib, "CFStringGetPascalString")
+	})
+	_register("CFStringGetPascalStringPtr", func() {
+		purego.RegisterLibFunc(&_fnCFStringGetPascalStringPtr, _corefoundationLib, "CFStringGetPascalStringPtr")
+	})
+	_register("CFStringGetRangeOfComposedCharactersAtIndex", func() {
+		purego.RegisterLibFunc(&_fnCFStringGetRangeOfComposedCharactersAtIndex, _corefoundationLib, "CFStringGetRangeOfComposedCharactersAtIndex")
+	})
+	_register("CFStringGetSmallestEncoding", func() {
+		purego.RegisterLibFunc(&_fnCFStringGetSmallestEncoding, _corefoundationLib, "CFStringGetSmallestEncoding")
+	})
+	_register("CFStringGetSurrogatePairForLongCharacter", func() {
+		purego.RegisterLibFunc(&_fnCFStringGetSurrogatePairForLongCharacter, _corefoundationLib, "CFStringGetSurrogatePairForLongCharacter")
+	})
+	_register("CFStringGetSystemEncoding", func() {
+		purego.RegisterLibFunc(&_fnCFStringGetSystemEncoding, _corefoundationLib, "CFStringGetSystemEncoding")
+	})
 	_register("CFStringGetTypeID", func() { purego.RegisterLibFunc(&_fnCFStringGetTypeID, _corefoundationLib, "CFStringGetTypeID") })
 	_register("CFStringHasPrefix", func() { purego.RegisterLibFunc(&_fnCFStringHasPrefix, _corefoundationLib, "CFStringHasPrefix") })
 	_register("CFStringHasSuffix", func() { purego.RegisterLibFunc(&_fnCFStringHasSuffix, _corefoundationLib, "CFStringHasSuffix") })
-	_register("CFStringInitInlineBuffer", func() { purego.RegisterLibFunc(&_fnCFStringInitInlineBuffer, _corefoundationLib, "CFStringInitInlineBuffer") })
+	_register("CFStringInitInlineBuffer", func() {
+		purego.RegisterLibFunc(&_fnCFStringInitInlineBuffer, _corefoundationLib, "CFStringInitInlineBuffer")
+	})
 	_register("CFStringInsert", func() { purego.RegisterLibFunc(&_fnCFStringInsert, _corefoundationLib, "CFStringInsert") })
-	_register("CFStringIsEncodingAvailable", func() { purego.RegisterLibFunc(&_fnCFStringIsEncodingAvailable, _corefoundationLib, "CFStringIsEncodingAvailable") })
-	_register("CFStringIsHyphenationAvailableForLocale", func() { purego.RegisterLibFunc(&_fnCFStringIsHyphenationAvailableForLocale, _corefoundationLib, "CFStringIsHyphenationAvailableForLocale") })
-	_register("CFStringIsSurrogateHighCharacter", func() { purego.RegisterLibFunc(&_fnCFStringIsSurrogateHighCharacter, _corefoundationLib, "CFStringIsSurrogateHighCharacter") })
-	_register("CFStringIsSurrogateLowCharacter", func() { purego.RegisterLibFunc(&_fnCFStringIsSurrogateLowCharacter, _corefoundationLib, "CFStringIsSurrogateLowCharacter") })
+	_register("CFStringIsEncodingAvailable", func() {
+		purego.RegisterLibFunc(&_fnCFStringIsEncodingAvailable, _corefoundationLib, "CFStringIsEncodingAvailable")
+	})
+	_register("CFStringIsHyphenationAvailableForLocale", func() {
+		purego.RegisterLibFunc(&_fnCFStringIsHyphenationAvailableForLocale, _corefoundationLib, "CFStringIsHyphenationAvailableForLocale")
+	})
+	_register("CFStringIsSurrogateHighCharacter", func() {
+		purego.RegisterLibFunc(&_fnCFStringIsSurrogateHighCharacter, _corefoundationLib, "CFStringIsSurrogateHighCharacter")
+	})
+	_register("CFStringIsSurrogateLowCharacter", func() {
+		purego.RegisterLibFunc(&_fnCFStringIsSurrogateLowCharacter, _corefoundationLib, "CFStringIsSurrogateLowCharacter")
+	})
 	_register("CFStringLowercase", func() { purego.RegisterLibFunc(&_fnCFStringLowercase, _corefoundationLib, "CFStringLowercase") })
 	_register("CFStringNormalize", func() { purego.RegisterLibFunc(&_fnCFStringNormalize, _corefoundationLib, "CFStringNormalize") })
 	_register("CFStringPad", func() { purego.RegisterLibFunc(&_fnCFStringPad, _corefoundationLib, "CFStringPad") })
 	_register("CFStringReplace", func() { purego.RegisterLibFunc(&_fnCFStringReplace, _corefoundationLib, "CFStringReplace") })
 	_register("CFStringReplaceAll", func() { purego.RegisterLibFunc(&_fnCFStringReplaceAll, _corefoundationLib, "CFStringReplaceAll") })
-	_register("CFStringSetExternalCharactersNoCopy", func() { purego.RegisterLibFunc(&_fnCFStringSetExternalCharactersNoCopy, _corefoundationLib, "CFStringSetExternalCharactersNoCopy") })
-	_register("CFStringTokenizerAdvanceToNextToken", func() { purego.RegisterLibFunc(&_fnCFStringTokenizerAdvanceToNextToken, _corefoundationLib, "CFStringTokenizerAdvanceToNextToken") })
-	_register("CFStringTokenizerCopyBestStringLanguage", func() { purego.RegisterLibFunc(&_fnCFStringTokenizerCopyBestStringLanguage, _corefoundationLib, "CFStringTokenizerCopyBestStringLanguage") })
-	_register("CFStringTokenizerCopyCurrentTokenAttribute", func() { purego.RegisterLibFunc(&_fnCFStringTokenizerCopyCurrentTokenAttribute, _corefoundationLib, "CFStringTokenizerCopyCurrentTokenAttribute") })
-	_register("CFStringTokenizerCreate", func() { purego.RegisterLibFunc(&_fnCFStringTokenizerCreate, _corefoundationLib, "CFStringTokenizerCreate") })
-	_register("CFStringTokenizerGetCurrentSubTokens", func() { purego.RegisterLibFunc(&_fnCFStringTokenizerGetCurrentSubTokens, _corefoundationLib, "CFStringTokenizerGetCurrentSubTokens") })
-	_register("CFStringTokenizerGetCurrentTokenRange", func() { purego.RegisterLibFunc(&_fnCFStringTokenizerGetCurrentTokenRange, _corefoundationLib, "CFStringTokenizerGetCurrentTokenRange") })
-	_register("CFStringTokenizerGetTypeID", func() { purego.RegisterLibFunc(&_fnCFStringTokenizerGetTypeID, _corefoundationLib, "CFStringTokenizerGetTypeID") })
-	_register("CFStringTokenizerGoToTokenAtIndex", func() { purego.RegisterLibFunc(&_fnCFStringTokenizerGoToTokenAtIndex, _corefoundationLib, "CFStringTokenizerGoToTokenAtIndex") })
-	_register("CFStringTokenizerSetString", func() { purego.RegisterLibFunc(&_fnCFStringTokenizerSetString, _corefoundationLib, "CFStringTokenizerSetString") })
+	_register("CFStringSetExternalCharactersNoCopy", func() {
+		purego.RegisterLibFunc(&_fnCFStringSetExternalCharactersNoCopy, _corefoundationLib, "CFStringSetExternalCharactersNoCopy")
+	})
+	_register("CFStringTokenizerAdvanceToNextToken", func() {
+		purego.RegisterLibFunc(&_fnCFStringTokenizerAdvanceToNextToken, _corefoundationLib, "CFStringTokenizerAdvanceToNextToken")
+	})
+	_register("CFStringTokenizerCopyBestStringLanguage", func() {
+		purego.RegisterLibFunc(&_fnCFStringTokenizerCopyBestStringLanguage, _corefoundationLib, "CFStringTokenizerCopyBestStringLanguage")
+	})
+	_register("CFStringTokenizerCopyCurrentTokenAttribute", func() {
+		purego.RegisterLibFunc(&_fnCFStringTokenizerCopyCurrentTokenAttribute, _corefoundationLib, "CFStringTokenizerCopyCurrentTokenAttribute")
+	})
+	_register("CFStringTokenizerCreate", func() {
+		purego.RegisterLibFunc(&_fnCFStringTokenizerCreate, _corefoundationLib, "CFStringTokenizerCreate")
+	})
+	_register("CFStringTokenizerGetCurrentSubTokens", func() {
+		purego.RegisterLibFunc(&_fnCFStringTokenizerGetCurrentSubTokens, _corefoundationLib, "CFStringTokenizerGetCurrentSubTokens")
+	})
+	_register("CFStringTokenizerGetCurrentTokenRange", func() {
+		purego.RegisterLibFunc(&_fnCFStringTokenizerGetCurrentTokenRange, _corefoundationLib, "CFStringTokenizerGetCurrentTokenRange")
+	})
+	_register("CFStringTokenizerGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnCFStringTokenizerGetTypeID, _corefoundationLib, "CFStringTokenizerGetTypeID")
+	})
+	_register("CFStringTokenizerGoToTokenAtIndex", func() {
+		purego.RegisterLibFunc(&_fnCFStringTokenizerGoToTokenAtIndex, _corefoundationLib, "CFStringTokenizerGoToTokenAtIndex")
+	})
+	_register("CFStringTokenizerSetString", func() {
+		purego.RegisterLibFunc(&_fnCFStringTokenizerSetString, _corefoundationLib, "CFStringTokenizerSetString")
+	})
 	_register("CFStringTransform", func() { purego.RegisterLibFunc(&_fnCFStringTransform, _corefoundationLib, "CFStringTransform") })
 	_register("CFStringTrim", func() { purego.RegisterLibFunc(&_fnCFStringTrim, _corefoundationLib, "CFStringTrim") })
-	_register("CFStringTrimWhitespace", func() { purego.RegisterLibFunc(&_fnCFStringTrimWhitespace, _corefoundationLib, "CFStringTrimWhitespace") })
+	_register("CFStringTrimWhitespace", func() {
+		purego.RegisterLibFunc(&_fnCFStringTrimWhitespace, _corefoundationLib, "CFStringTrimWhitespace")
+	})
 	_register("CFStringUppercase", func() { purego.RegisterLibFunc(&_fnCFStringUppercase, _corefoundationLib, "CFStringUppercase") })
 	_register("CFSwapInt16", func() { purego.RegisterLibFunc(&_fnCFSwapInt16, _corefoundationLib, "CFSwapInt16") })
 	_register("CFSwapInt16BigToHost", func() { purego.RegisterLibFunc(&_fnCFSwapInt16BigToHost, _corefoundationLib, "CFSwapInt16BigToHost") })
 	_register("CFSwapInt16HostToBig", func() { purego.RegisterLibFunc(&_fnCFSwapInt16HostToBig, _corefoundationLib, "CFSwapInt16HostToBig") })
-	_register("CFSwapInt16HostToLittle", func() { purego.RegisterLibFunc(&_fnCFSwapInt16HostToLittle, _corefoundationLib, "CFSwapInt16HostToLittle") })
-	_register("CFSwapInt16LittleToHost", func() { purego.RegisterLibFunc(&_fnCFSwapInt16LittleToHost, _corefoundationLib, "CFSwapInt16LittleToHost") })
+	_register("CFSwapInt16HostToLittle", func() {
+		purego.RegisterLibFunc(&_fnCFSwapInt16HostToLittle, _corefoundationLib, "CFSwapInt16HostToLittle")
+	})
+	_register("CFSwapInt16LittleToHost", func() {
+		purego.RegisterLibFunc(&_fnCFSwapInt16LittleToHost, _corefoundationLib, "CFSwapInt16LittleToHost")
+	})
 	_register("CFSwapInt32", func() { purego.RegisterLibFunc(&_fnCFSwapInt32, _corefoundationLib, "CFSwapInt32") })
 	_register("CFSwapInt32BigToHost", func() { purego.RegisterLibFunc(&_fnCFSwapInt32BigToHost, _corefoundationLib, "CFSwapInt32BigToHost") })
 	_register("CFSwapInt32HostToBig", func() { purego.RegisterLibFunc(&_fnCFSwapInt32HostToBig, _corefoundationLib, "CFSwapInt32HostToBig") })
-	_register("CFSwapInt32HostToLittle", func() { purego.RegisterLibFunc(&_fnCFSwapInt32HostToLittle, _corefoundationLib, "CFSwapInt32HostToLittle") })
-	_register("CFSwapInt32LittleToHost", func() { purego.RegisterLibFunc(&_fnCFSwapInt32LittleToHost, _corefoundationLib, "CFSwapInt32LittleToHost") })
+	_register("CFSwapInt32HostToLittle", func() {
+		purego.RegisterLibFunc(&_fnCFSwapInt32HostToLittle, _corefoundationLib, "CFSwapInt32HostToLittle")
+	})
+	_register("CFSwapInt32LittleToHost", func() {
+		purego.RegisterLibFunc(&_fnCFSwapInt32LittleToHost, _corefoundationLib, "CFSwapInt32LittleToHost")
+	})
 	_register("CFSwapInt64", func() { purego.RegisterLibFunc(&_fnCFSwapInt64, _corefoundationLib, "CFSwapInt64") })
 	_register("CFSwapInt64BigToHost", func() { purego.RegisterLibFunc(&_fnCFSwapInt64BigToHost, _corefoundationLib, "CFSwapInt64BigToHost") })
 	_register("CFSwapInt64HostToBig", func() { purego.RegisterLibFunc(&_fnCFSwapInt64HostToBig, _corefoundationLib, "CFSwapInt64HostToBig") })
-	_register("CFSwapInt64HostToLittle", func() { purego.RegisterLibFunc(&_fnCFSwapInt64HostToLittle, _corefoundationLib, "CFSwapInt64HostToLittle") })
-	_register("CFSwapInt64LittleToHost", func() { purego.RegisterLibFunc(&_fnCFSwapInt64LittleToHost, _corefoundationLib, "CFSwapInt64LittleToHost") })
-	_register("CFTimeZoneCopyAbbreviation", func() { purego.RegisterLibFunc(&_fnCFTimeZoneCopyAbbreviation, _corefoundationLib, "CFTimeZoneCopyAbbreviation") })
-	_register("CFTimeZoneCopyAbbreviationDictionary", func() { purego.RegisterLibFunc(&_fnCFTimeZoneCopyAbbreviationDictionary, _corefoundationLib, "CFTimeZoneCopyAbbreviationDictionary") })
+	_register("CFSwapInt64HostToLittle", func() {
+		purego.RegisterLibFunc(&_fnCFSwapInt64HostToLittle, _corefoundationLib, "CFSwapInt64HostToLittle")
+	})
+	_register("CFSwapInt64LittleToHost", func() {
+		purego.RegisterLibFunc(&_fnCFSwapInt64LittleToHost, _corefoundationLib, "CFSwapInt64LittleToHost")
+	})
+	_register("CFTimeZoneCopyAbbreviation", func() {
+		purego.RegisterLibFunc(&_fnCFTimeZoneCopyAbbreviation, _corefoundationLib, "CFTimeZoneCopyAbbreviation")
+	})
+	_register("CFTimeZoneCopyAbbreviationDictionary", func() {
+		purego.RegisterLibFunc(&_fnCFTimeZoneCopyAbbreviationDictionary, _corefoundationLib, "CFTimeZoneCopyAbbreviationDictionary")
+	})
 	_register("CFTimeZoneCopyDefault", func() { purego.RegisterLibFunc(&_fnCFTimeZoneCopyDefault, _corefoundationLib, "CFTimeZoneCopyDefault") })
-	_register("CFTimeZoneCopyKnownNames", func() { purego.RegisterLibFunc(&_fnCFTimeZoneCopyKnownNames, _corefoundationLib, "CFTimeZoneCopyKnownNames") })
-	_register("CFTimeZoneCopyLocalizedName", func() { purego.RegisterLibFunc(&_fnCFTimeZoneCopyLocalizedName, _corefoundationLib, "CFTimeZoneCopyLocalizedName") })
+	_register("CFTimeZoneCopyKnownNames", func() {
+		purego.RegisterLibFunc(&_fnCFTimeZoneCopyKnownNames, _corefoundationLib, "CFTimeZoneCopyKnownNames")
+	})
+	_register("CFTimeZoneCopyLocalizedName", func() {
+		purego.RegisterLibFunc(&_fnCFTimeZoneCopyLocalizedName, _corefoundationLib, "CFTimeZoneCopyLocalizedName")
+	})
 	_register("CFTimeZoneCopySystem", func() { purego.RegisterLibFunc(&_fnCFTimeZoneCopySystem, _corefoundationLib, "CFTimeZoneCopySystem") })
 	_register("CFTimeZoneCreate", func() { purego.RegisterLibFunc(&_fnCFTimeZoneCreate, _corefoundationLib, "CFTimeZoneCreate") })
-	_register("CFTimeZoneCreateWithName", func() { purego.RegisterLibFunc(&_fnCFTimeZoneCreateWithName, _corefoundationLib, "CFTimeZoneCreateWithName") })
-	_register("CFTimeZoneCreateWithTimeIntervalFromGMT", func() { purego.RegisterLibFunc(&_fnCFTimeZoneCreateWithTimeIntervalFromGMT, _corefoundationLib, "CFTimeZoneCreateWithTimeIntervalFromGMT") })
+	_register("CFTimeZoneCreateWithName", func() {
+		purego.RegisterLibFunc(&_fnCFTimeZoneCreateWithName, _corefoundationLib, "CFTimeZoneCreateWithName")
+	})
+	_register("CFTimeZoneCreateWithTimeIntervalFromGMT", func() {
+		purego.RegisterLibFunc(&_fnCFTimeZoneCreateWithTimeIntervalFromGMT, _corefoundationLib, "CFTimeZoneCreateWithTimeIntervalFromGMT")
+	})
 	_register("CFTimeZoneGetData", func() { purego.RegisterLibFunc(&_fnCFTimeZoneGetData, _corefoundationLib, "CFTimeZoneGetData") })
-	_register("CFTimeZoneGetDaylightSavingTimeOffset", func() { purego.RegisterLibFunc(&_fnCFTimeZoneGetDaylightSavingTimeOffset, _corefoundationLib, "CFTimeZoneGetDaylightSavingTimeOffset") })
+	_register("CFTimeZoneGetDaylightSavingTimeOffset", func() {
+		purego.RegisterLibFunc(&_fnCFTimeZoneGetDaylightSavingTimeOffset, _corefoundationLib, "CFTimeZoneGetDaylightSavingTimeOffset")
+	})
 	_register("CFTimeZoneGetName", func() { purego.RegisterLibFunc(&_fnCFTimeZoneGetName, _corefoundationLib, "CFTimeZoneGetName") })
-	_register("CFTimeZoneGetNextDaylightSavingTimeTransition", func() { purego.RegisterLibFunc(&_fnCFTimeZoneGetNextDaylightSavingTimeTransition, _corefoundationLib, "CFTimeZoneGetNextDaylightSavingTimeTransition") })
-	_register("CFTimeZoneGetSecondsFromGMT", func() { purego.RegisterLibFunc(&_fnCFTimeZoneGetSecondsFromGMT, _corefoundationLib, "CFTimeZoneGetSecondsFromGMT") })
+	_register("CFTimeZoneGetNextDaylightSavingTimeTransition", func() {
+		purego.RegisterLibFunc(&_fnCFTimeZoneGetNextDaylightSavingTimeTransition, _corefoundationLib, "CFTimeZoneGetNextDaylightSavingTimeTransition")
+	})
+	_register("CFTimeZoneGetSecondsFromGMT", func() {
+		purego.RegisterLibFunc(&_fnCFTimeZoneGetSecondsFromGMT, _corefoundationLib, "CFTimeZoneGetSecondsFromGMT")
+	})
 	_register("CFTimeZoneGetTypeID", func() { purego.RegisterLibFunc(&_fnCFTimeZoneGetTypeID, _corefoundationLib, "CFTimeZoneGetTypeID") })
-	_register("CFTimeZoneIsDaylightSavingTime", func() { purego.RegisterLibFunc(&_fnCFTimeZoneIsDaylightSavingTime, _corefoundationLib, "CFTimeZoneIsDaylightSavingTime") })
+	_register("CFTimeZoneIsDaylightSavingTime", func() {
+		purego.RegisterLibFunc(&_fnCFTimeZoneIsDaylightSavingTime, _corefoundationLib, "CFTimeZoneIsDaylightSavingTime")
+	})
 	_register("CFTimeZoneResetSystem", func() { purego.RegisterLibFunc(&_fnCFTimeZoneResetSystem, _corefoundationLib, "CFTimeZoneResetSystem") })
-	_register("CFTimeZoneSetAbbreviationDictionary", func() { purego.RegisterLibFunc(&_fnCFTimeZoneSetAbbreviationDictionary, _corefoundationLib, "CFTimeZoneSetAbbreviationDictionary") })
+	_register("CFTimeZoneSetAbbreviationDictionary", func() {
+		purego.RegisterLibFunc(&_fnCFTimeZoneSetAbbreviationDictionary, _corefoundationLib, "CFTimeZoneSetAbbreviationDictionary")
+	})
 	_register("CFTimeZoneSetDefault", func() { purego.RegisterLibFunc(&_fnCFTimeZoneSetDefault, _corefoundationLib, "CFTimeZoneSetDefault") })
 	_register("CFTreeAppendChild", func() { purego.RegisterLibFunc(&_fnCFTreeAppendChild, _corefoundationLib, "CFTreeAppendChild") })
-	_register("CFTreeApplyFunctionToChildren", func() { purego.RegisterLibFunc(&_fnCFTreeApplyFunctionToChildren, _corefoundationLib, "CFTreeApplyFunctionToChildren") })
+	_register("CFTreeApplyFunctionToChildren", func() {
+		purego.RegisterLibFunc(&_fnCFTreeApplyFunctionToChildren, _corefoundationLib, "CFTreeApplyFunctionToChildren")
+	})
 	_register("CFTreeCreate", func() { purego.RegisterLibFunc(&_fnCFTreeCreate, _corefoundationLib, "CFTreeCreate") })
 	_register("CFTreeFindRoot", func() { purego.RegisterLibFunc(&_fnCFTreeFindRoot, _corefoundationLib, "CFTreeFindRoot") })
 	_register("CFTreeGetChildAtIndex", func() { purego.RegisterLibFunc(&_fnCFTreeGetChildAtIndex, _corefoundationLib, "CFTreeGetChildAtIndex") })
@@ -758,122 +1664,286 @@ func _loadLibrary() {
 	_register("CFTreeInsertSibling", func() { purego.RegisterLibFunc(&_fnCFTreeInsertSibling, _corefoundationLib, "CFTreeInsertSibling") })
 	_register("CFTreePrependChild", func() { purego.RegisterLibFunc(&_fnCFTreePrependChild, _corefoundationLib, "CFTreePrependChild") })
 	_register("CFTreeRemove", func() { purego.RegisterLibFunc(&_fnCFTreeRemove, _corefoundationLib, "CFTreeRemove") })
-	_register("CFTreeRemoveAllChildren", func() { purego.RegisterLibFunc(&_fnCFTreeRemoveAllChildren, _corefoundationLib, "CFTreeRemoveAllChildren") })
+	_register("CFTreeRemoveAllChildren", func() {
+		purego.RegisterLibFunc(&_fnCFTreeRemoveAllChildren, _corefoundationLib, "CFTreeRemoveAllChildren")
+	})
 	_register("CFTreeSetContext", func() { purego.RegisterLibFunc(&_fnCFTreeSetContext, _corefoundationLib, "CFTreeSetContext") })
 	_register("CFTreeSortChildren", func() { purego.RegisterLibFunc(&_fnCFTreeSortChildren, _corefoundationLib, "CFTreeSortChildren") })
 	_register("CFURLCanBeDecomposed", func() { purego.RegisterLibFunc(&_fnCFURLCanBeDecomposed, _corefoundationLib, "CFURLCanBeDecomposed") })
-	_register("CFURLClearResourcePropertyCache", func() { purego.RegisterLibFunc(&_fnCFURLClearResourcePropertyCache, _corefoundationLib, "CFURLClearResourcePropertyCache") })
-	_register("CFURLClearResourcePropertyCacheForKey", func() { purego.RegisterLibFunc(&_fnCFURLClearResourcePropertyCacheForKey, _corefoundationLib, "CFURLClearResourcePropertyCacheForKey") })
+	_register("CFURLClearResourcePropertyCache", func() {
+		purego.RegisterLibFunc(&_fnCFURLClearResourcePropertyCache, _corefoundationLib, "CFURLClearResourcePropertyCache")
+	})
+	_register("CFURLClearResourcePropertyCacheForKey", func() {
+		purego.RegisterLibFunc(&_fnCFURLClearResourcePropertyCacheForKey, _corefoundationLib, "CFURLClearResourcePropertyCacheForKey")
+	})
 	_register("CFURLCopyAbsoluteURL", func() { purego.RegisterLibFunc(&_fnCFURLCopyAbsoluteURL, _corefoundationLib, "CFURLCopyAbsoluteURL") })
-	_register("CFURLCopyFileSystemPath", func() { purego.RegisterLibFunc(&_fnCFURLCopyFileSystemPath, _corefoundationLib, "CFURLCopyFileSystemPath") })
+	_register("CFURLCopyFileSystemPath", func() {
+		purego.RegisterLibFunc(&_fnCFURLCopyFileSystemPath, _corefoundationLib, "CFURLCopyFileSystemPath")
+	})
 	_register("CFURLCopyFragment", func() { purego.RegisterLibFunc(&_fnCFURLCopyFragment, _corefoundationLib, "CFURLCopyFragment") })
 	_register("CFURLCopyHostName", func() { purego.RegisterLibFunc(&_fnCFURLCopyHostName, _corefoundationLib, "CFURLCopyHostName") })
-	_register("CFURLCopyLastPathComponent", func() { purego.RegisterLibFunc(&_fnCFURLCopyLastPathComponent, _corefoundationLib, "CFURLCopyLastPathComponent") })
+	_register("CFURLCopyLastPathComponent", func() {
+		purego.RegisterLibFunc(&_fnCFURLCopyLastPathComponent, _corefoundationLib, "CFURLCopyLastPathComponent")
+	})
 	_register("CFURLCopyNetLocation", func() { purego.RegisterLibFunc(&_fnCFURLCopyNetLocation, _corefoundationLib, "CFURLCopyNetLocation") })
-	_register("CFURLCopyParameterString", func() { purego.RegisterLibFunc(&_fnCFURLCopyParameterString, _corefoundationLib, "CFURLCopyParameterString") })
+	_register("CFURLCopyParameterString", func() {
+		purego.RegisterLibFunc(&_fnCFURLCopyParameterString, _corefoundationLib, "CFURLCopyParameterString")
+	})
 	_register("CFURLCopyPassword", func() { purego.RegisterLibFunc(&_fnCFURLCopyPassword, _corefoundationLib, "CFURLCopyPassword") })
 	_register("CFURLCopyPath", func() { purego.RegisterLibFunc(&_fnCFURLCopyPath, _corefoundationLib, "CFURLCopyPath") })
-	_register("CFURLCopyPathExtension", func() { purego.RegisterLibFunc(&_fnCFURLCopyPathExtension, _corefoundationLib, "CFURLCopyPathExtension") })
+	_register("CFURLCopyPathExtension", func() {
+		purego.RegisterLibFunc(&_fnCFURLCopyPathExtension, _corefoundationLib, "CFURLCopyPathExtension")
+	})
 	_register("CFURLCopyQueryString", func() { purego.RegisterLibFunc(&_fnCFURLCopyQueryString, _corefoundationLib, "CFURLCopyQueryString") })
-	_register("CFURLCopyResourcePropertiesForKeys", func() { purego.RegisterLibFunc(&_fnCFURLCopyResourcePropertiesForKeys, _corefoundationLib, "CFURLCopyResourcePropertiesForKeys") })
-	_register("CFURLCopyResourcePropertyForKey", func() { purego.RegisterLibFunc(&_fnCFURLCopyResourcePropertyForKey, _corefoundationLib, "CFURLCopyResourcePropertyForKey") })
-	_register("CFURLCopyResourceSpecifier", func() { purego.RegisterLibFunc(&_fnCFURLCopyResourceSpecifier, _corefoundationLib, "CFURLCopyResourceSpecifier") })
+	_register("CFURLCopyResourcePropertiesForKeys", func() {
+		purego.RegisterLibFunc(&_fnCFURLCopyResourcePropertiesForKeys, _corefoundationLib, "CFURLCopyResourcePropertiesForKeys")
+	})
+	_register("CFURLCopyResourcePropertyForKey", func() {
+		purego.RegisterLibFunc(&_fnCFURLCopyResourcePropertyForKey, _corefoundationLib, "CFURLCopyResourcePropertyForKey")
+	})
+	_register("CFURLCopyResourceSpecifier", func() {
+		purego.RegisterLibFunc(&_fnCFURLCopyResourceSpecifier, _corefoundationLib, "CFURLCopyResourceSpecifier")
+	})
 	_register("CFURLCopyScheme", func() { purego.RegisterLibFunc(&_fnCFURLCopyScheme, _corefoundationLib, "CFURLCopyScheme") })
 	_register("CFURLCopyStrictPath", func() { purego.RegisterLibFunc(&_fnCFURLCopyStrictPath, _corefoundationLib, "CFURLCopyStrictPath") })
 	_register("CFURLCopyUserName", func() { purego.RegisterLibFunc(&_fnCFURLCopyUserName, _corefoundationLib, "CFURLCopyUserName") })
-	_register("CFURLCreateAbsoluteURLWithBytes", func() { purego.RegisterLibFunc(&_fnCFURLCreateAbsoluteURLWithBytes, _corefoundationLib, "CFURLCreateAbsoluteURLWithBytes") })
-	_register("CFURLCreateBookmarkData", func() { purego.RegisterLibFunc(&_fnCFURLCreateBookmarkData, _corefoundationLib, "CFURLCreateBookmarkData") })
-	_register("CFURLCreateBookmarkDataFromAliasRecord", func() { purego.RegisterLibFunc(&_fnCFURLCreateBookmarkDataFromAliasRecord, _corefoundationLib, "CFURLCreateBookmarkDataFromAliasRecord") })
-	_register("CFURLCreateBookmarkDataFromFile", func() { purego.RegisterLibFunc(&_fnCFURLCreateBookmarkDataFromFile, _corefoundationLib, "CFURLCreateBookmarkDataFromFile") })
-	_register("CFURLCreateByResolvingBookmarkData", func() { purego.RegisterLibFunc(&_fnCFURLCreateByResolvingBookmarkData, _corefoundationLib, "CFURLCreateByResolvingBookmarkData") })
-	_register("CFURLCreateCopyAppendingPathComponent", func() { purego.RegisterLibFunc(&_fnCFURLCreateCopyAppendingPathComponent, _corefoundationLib, "CFURLCreateCopyAppendingPathComponent") })
-	_register("CFURLCreateCopyAppendingPathExtension", func() { purego.RegisterLibFunc(&_fnCFURLCreateCopyAppendingPathExtension, _corefoundationLib, "CFURLCreateCopyAppendingPathExtension") })
-	_register("CFURLCreateCopyDeletingLastPathComponent", func() { purego.RegisterLibFunc(&_fnCFURLCreateCopyDeletingLastPathComponent, _corefoundationLib, "CFURLCreateCopyDeletingLastPathComponent") })
-	_register("CFURLCreateCopyDeletingPathExtension", func() { purego.RegisterLibFunc(&_fnCFURLCreateCopyDeletingPathExtension, _corefoundationLib, "CFURLCreateCopyDeletingPathExtension") })
+	_register("CFURLCreateAbsoluteURLWithBytes", func() {
+		purego.RegisterLibFunc(&_fnCFURLCreateAbsoluteURLWithBytes, _corefoundationLib, "CFURLCreateAbsoluteURLWithBytes")
+	})
+	_register("CFURLCreateBookmarkData", func() {
+		purego.RegisterLibFunc(&_fnCFURLCreateBookmarkData, _corefoundationLib, "CFURLCreateBookmarkData")
+	})
+	_register("CFURLCreateBookmarkDataFromAliasRecord", func() {
+		purego.RegisterLibFunc(&_fnCFURLCreateBookmarkDataFromAliasRecord, _corefoundationLib, "CFURLCreateBookmarkDataFromAliasRecord")
+	})
+	_register("CFURLCreateBookmarkDataFromFile", func() {
+		purego.RegisterLibFunc(&_fnCFURLCreateBookmarkDataFromFile, _corefoundationLib, "CFURLCreateBookmarkDataFromFile")
+	})
+	_register("CFURLCreateByResolvingBookmarkData", func() {
+		purego.RegisterLibFunc(&_fnCFURLCreateByResolvingBookmarkData, _corefoundationLib, "CFURLCreateByResolvingBookmarkData")
+	})
+	_register("CFURLCreateCopyAppendingPathComponent", func() {
+		purego.RegisterLibFunc(&_fnCFURLCreateCopyAppendingPathComponent, _corefoundationLib, "CFURLCreateCopyAppendingPathComponent")
+	})
+	_register("CFURLCreateCopyAppendingPathExtension", func() {
+		purego.RegisterLibFunc(&_fnCFURLCreateCopyAppendingPathExtension, _corefoundationLib, "CFURLCreateCopyAppendingPathExtension")
+	})
+	_register("CFURLCreateCopyDeletingLastPathComponent", func() {
+		purego.RegisterLibFunc(&_fnCFURLCreateCopyDeletingLastPathComponent, _corefoundationLib, "CFURLCreateCopyDeletingLastPathComponent")
+	})
+	_register("CFURLCreateCopyDeletingPathExtension", func() {
+		purego.RegisterLibFunc(&_fnCFURLCreateCopyDeletingPathExtension, _corefoundationLib, "CFURLCreateCopyDeletingPathExtension")
+	})
 	_register("CFURLCreateData", func() { purego.RegisterLibFunc(&_fnCFURLCreateData, _corefoundationLib, "CFURLCreateData") })
-	_register("CFURLCreateDataAndPropertiesFromResource", func() { purego.RegisterLibFunc(&_fnCFURLCreateDataAndPropertiesFromResource, _corefoundationLib, "CFURLCreateDataAndPropertiesFromResource") })
-	_register("CFURLCreateFilePathURL", func() { purego.RegisterLibFunc(&_fnCFURLCreateFilePathURL, _corefoundationLib, "CFURLCreateFilePathURL") })
-	_register("CFURLCreateFileReferenceURL", func() { purego.RegisterLibFunc(&_fnCFURLCreateFileReferenceURL, _corefoundationLib, "CFURLCreateFileReferenceURL") })
+	_register("CFURLCreateDataAndPropertiesFromResource", func() {
+		purego.RegisterLibFunc(&_fnCFURLCreateDataAndPropertiesFromResource, _corefoundationLib, "CFURLCreateDataAndPropertiesFromResource")
+	})
+	_register("CFURLCreateFilePathURL", func() {
+		purego.RegisterLibFunc(&_fnCFURLCreateFilePathURL, _corefoundationLib, "CFURLCreateFilePathURL")
+	})
+	_register("CFURLCreateFileReferenceURL", func() {
+		purego.RegisterLibFunc(&_fnCFURLCreateFileReferenceURL, _corefoundationLib, "CFURLCreateFileReferenceURL")
+	})
 	_register("CFURLCreateFromFSRef", func() { purego.RegisterLibFunc(&_fnCFURLCreateFromFSRef, _corefoundationLib, "CFURLCreateFromFSRef") })
-	_register("CFURLCreateFromFileSystemRepresentation", func() { purego.RegisterLibFunc(&_fnCFURLCreateFromFileSystemRepresentation, _corefoundationLib, "CFURLCreateFromFileSystemRepresentation") })
-	_register("CFURLCreateFromFileSystemRepresentationRelativeToBase", func() { purego.RegisterLibFunc(&_fnCFURLCreateFromFileSystemRepresentationRelativeToBase, _corefoundationLib, "CFURLCreateFromFileSystemRepresentationRelativeToBase") })
-	_register("CFURLCreatePropertyFromResource", func() { purego.RegisterLibFunc(&_fnCFURLCreatePropertyFromResource, _corefoundationLib, "CFURLCreatePropertyFromResource") })
-	_register("CFURLCreateResourcePropertiesForKeysFromBookmarkData", func() { purego.RegisterLibFunc(&_fnCFURLCreateResourcePropertiesForKeysFromBookmarkData, _corefoundationLib, "CFURLCreateResourcePropertiesForKeysFromBookmarkData") })
-	_register("CFURLCreateResourcePropertyForKeyFromBookmarkData", func() { purego.RegisterLibFunc(&_fnCFURLCreateResourcePropertyForKeyFromBookmarkData, _corefoundationLib, "CFURLCreateResourcePropertyForKeyFromBookmarkData") })
-	_register("CFURLCreateStringByAddingPercentEscapes", func() { purego.RegisterLibFunc(&_fnCFURLCreateStringByAddingPercentEscapes, _corefoundationLib, "CFURLCreateStringByAddingPercentEscapes") })
-	_register("CFURLCreateStringByReplacingPercentEscapes", func() { purego.RegisterLibFunc(&_fnCFURLCreateStringByReplacingPercentEscapes, _corefoundationLib, "CFURLCreateStringByReplacingPercentEscapes") })
-	_register("CFURLCreateStringByReplacingPercentEscapesUsingEncoding", func() { purego.RegisterLibFunc(&_fnCFURLCreateStringByReplacingPercentEscapesUsingEncoding, _corefoundationLib, "CFURLCreateStringByReplacingPercentEscapesUsingEncoding") })
+	_register("CFURLCreateFromFileSystemRepresentation", func() {
+		purego.RegisterLibFunc(&_fnCFURLCreateFromFileSystemRepresentation, _corefoundationLib, "CFURLCreateFromFileSystemRepresentation")
+	})
+	_register("CFURLCreateFromFileSystemRepresentationRelativeToBase", func() {
+		purego.RegisterLibFunc(&_fnCFURLCreateFromFileSystemRepresentationRelativeToBase, _corefoundationLib, "CFURLCreateFromFileSystemRepresentationRelativeToBase")
+	})
+	_register("CFURLCreatePropertyFromResource", func() {
+		purego.RegisterLibFunc(&_fnCFURLCreatePropertyFromResource, _corefoundationLib, "CFURLCreatePropertyFromResource")
+	})
+	_register("CFURLCreateResourcePropertiesForKeysFromBookmarkData", func() {
+		purego.RegisterLibFunc(&_fnCFURLCreateResourcePropertiesForKeysFromBookmarkData, _corefoundationLib, "CFURLCreateResourcePropertiesForKeysFromBookmarkData")
+	})
+	_register("CFURLCreateResourcePropertyForKeyFromBookmarkData", func() {
+		purego.RegisterLibFunc(&_fnCFURLCreateResourcePropertyForKeyFromBookmarkData, _corefoundationLib, "CFURLCreateResourcePropertyForKeyFromBookmarkData")
+	})
+	_register("CFURLCreateStringByAddingPercentEscapes", func() {
+		purego.RegisterLibFunc(&_fnCFURLCreateStringByAddingPercentEscapes, _corefoundationLib, "CFURLCreateStringByAddingPercentEscapes")
+	})
+	_register("CFURLCreateStringByReplacingPercentEscapes", func() {
+		purego.RegisterLibFunc(&_fnCFURLCreateStringByReplacingPercentEscapes, _corefoundationLib, "CFURLCreateStringByReplacingPercentEscapes")
+	})
+	_register("CFURLCreateStringByReplacingPercentEscapesUsingEncoding", func() {
+		purego.RegisterLibFunc(&_fnCFURLCreateStringByReplacingPercentEscapesUsingEncoding, _corefoundationLib, "CFURLCreateStringByReplacingPercentEscapesUsingEncoding")
+	})
 	_register("CFURLCreateWithBytes", func() { purego.RegisterLibFunc(&_fnCFURLCreateWithBytes, _corefoundationLib, "CFURLCreateWithBytes") })
-	_register("CFURLCreateWithFileSystemPath", func() { purego.RegisterLibFunc(&_fnCFURLCreateWithFileSystemPath, _corefoundationLib, "CFURLCreateWithFileSystemPath") })
-	_register("CFURLCreateWithFileSystemPathRelativeToBase", func() { purego.RegisterLibFunc(&_fnCFURLCreateWithFileSystemPathRelativeToBase, _corefoundationLib, "CFURLCreateWithFileSystemPathRelativeToBase") })
+	_register("CFURLCreateWithFileSystemPath", func() {
+		purego.RegisterLibFunc(&_fnCFURLCreateWithFileSystemPath, _corefoundationLib, "CFURLCreateWithFileSystemPath")
+	})
+	_register("CFURLCreateWithFileSystemPathRelativeToBase", func() {
+		purego.RegisterLibFunc(&_fnCFURLCreateWithFileSystemPathRelativeToBase, _corefoundationLib, "CFURLCreateWithFileSystemPathRelativeToBase")
+	})
 	_register("CFURLCreateWithString", func() { purego.RegisterLibFunc(&_fnCFURLCreateWithString, _corefoundationLib, "CFURLCreateWithString") })
 	_register("CFURLDestroyResource", func() { purego.RegisterLibFunc(&_fnCFURLDestroyResource, _corefoundationLib, "CFURLDestroyResource") })
-	_register("CFURLEnumeratorCreateForDirectoryURL", func() { purego.RegisterLibFunc(&_fnCFURLEnumeratorCreateForDirectoryURL, _corefoundationLib, "CFURLEnumeratorCreateForDirectoryURL") })
-	_register("CFURLEnumeratorCreateForMountedVolumes", func() { purego.RegisterLibFunc(&_fnCFURLEnumeratorCreateForMountedVolumes, _corefoundationLib, "CFURLEnumeratorCreateForMountedVolumes") })
-	_register("CFURLEnumeratorGetDescendentLevel", func() { purego.RegisterLibFunc(&_fnCFURLEnumeratorGetDescendentLevel, _corefoundationLib, "CFURLEnumeratorGetDescendentLevel") })
-	_register("CFURLEnumeratorGetNextURL", func() { purego.RegisterLibFunc(&_fnCFURLEnumeratorGetNextURL, _corefoundationLib, "CFURLEnumeratorGetNextURL") })
-	_register("CFURLEnumeratorGetSourceDidChange", func() { purego.RegisterLibFunc(&_fnCFURLEnumeratorGetSourceDidChange, _corefoundationLib, "CFURLEnumeratorGetSourceDidChange") })
-	_register("CFURLEnumeratorGetTypeID", func() { purego.RegisterLibFunc(&_fnCFURLEnumeratorGetTypeID, _corefoundationLib, "CFURLEnumeratorGetTypeID") })
-	_register("CFURLEnumeratorSkipDescendents", func() { purego.RegisterLibFunc(&_fnCFURLEnumeratorSkipDescendents, _corefoundationLib, "CFURLEnumeratorSkipDescendents") })
+	_register("CFURLEnumeratorCreateForDirectoryURL", func() {
+		purego.RegisterLibFunc(&_fnCFURLEnumeratorCreateForDirectoryURL, _corefoundationLib, "CFURLEnumeratorCreateForDirectoryURL")
+	})
+	_register("CFURLEnumeratorCreateForMountedVolumes", func() {
+		purego.RegisterLibFunc(&_fnCFURLEnumeratorCreateForMountedVolumes, _corefoundationLib, "CFURLEnumeratorCreateForMountedVolumes")
+	})
+	_register("CFURLEnumeratorGetDescendentLevel", func() {
+		purego.RegisterLibFunc(&_fnCFURLEnumeratorGetDescendentLevel, _corefoundationLib, "CFURLEnumeratorGetDescendentLevel")
+	})
+	_register("CFURLEnumeratorGetNextURL", func() {
+		purego.RegisterLibFunc(&_fnCFURLEnumeratorGetNextURL, _corefoundationLib, "CFURLEnumeratorGetNextURL")
+	})
+	_register("CFURLEnumeratorGetSourceDidChange", func() {
+		purego.RegisterLibFunc(&_fnCFURLEnumeratorGetSourceDidChange, _corefoundationLib, "CFURLEnumeratorGetSourceDidChange")
+	})
+	_register("CFURLEnumeratorGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnCFURLEnumeratorGetTypeID, _corefoundationLib, "CFURLEnumeratorGetTypeID")
+	})
+	_register("CFURLEnumeratorSkipDescendents", func() {
+		purego.RegisterLibFunc(&_fnCFURLEnumeratorSkipDescendents, _corefoundationLib, "CFURLEnumeratorSkipDescendents")
+	})
 	_register("CFURLGetBaseURL", func() { purego.RegisterLibFunc(&_fnCFURLGetBaseURL, _corefoundationLib, "CFURLGetBaseURL") })
-	_register("CFURLGetByteRangeForComponent", func() { purego.RegisterLibFunc(&_fnCFURLGetByteRangeForComponent, _corefoundationLib, "CFURLGetByteRangeForComponent") })
+	_register("CFURLGetByteRangeForComponent", func() {
+		purego.RegisterLibFunc(&_fnCFURLGetByteRangeForComponent, _corefoundationLib, "CFURLGetByteRangeForComponent")
+	})
 	_register("CFURLGetBytes", func() { purego.RegisterLibFunc(&_fnCFURLGetBytes, _corefoundationLib, "CFURLGetBytes") })
 	_register("CFURLGetFSRef", func() { purego.RegisterLibFunc(&_fnCFURLGetFSRef, _corefoundationLib, "CFURLGetFSRef") })
-	_register("CFURLGetFileSystemRepresentation", func() { purego.RegisterLibFunc(&_fnCFURLGetFileSystemRepresentation, _corefoundationLib, "CFURLGetFileSystemRepresentation") })
+	_register("CFURLGetFileSystemRepresentation", func() {
+		purego.RegisterLibFunc(&_fnCFURLGetFileSystemRepresentation, _corefoundationLib, "CFURLGetFileSystemRepresentation")
+	})
 	_register("CFURLGetPortNumber", func() { purego.RegisterLibFunc(&_fnCFURLGetPortNumber, _corefoundationLib, "CFURLGetPortNumber") })
 	_register("CFURLGetString", func() { purego.RegisterLibFunc(&_fnCFURLGetString, _corefoundationLib, "CFURLGetString") })
 	_register("CFURLGetTypeID", func() { purego.RegisterLibFunc(&_fnCFURLGetTypeID, _corefoundationLib, "CFURLGetTypeID") })
 	_register("CFURLHasDirectoryPath", func() { purego.RegisterLibFunc(&_fnCFURLHasDirectoryPath, _corefoundationLib, "CFURLHasDirectoryPath") })
-	_register("CFURLIsFileReferenceURL", func() { purego.RegisterLibFunc(&_fnCFURLIsFileReferenceURL, _corefoundationLib, "CFURLIsFileReferenceURL") })
-	_register("CFURLResourceIsReachable", func() { purego.RegisterLibFunc(&_fnCFURLResourceIsReachable, _corefoundationLib, "CFURLResourceIsReachable") })
-	_register("CFURLSetResourcePropertiesForKeys", func() { purego.RegisterLibFunc(&_fnCFURLSetResourcePropertiesForKeys, _corefoundationLib, "CFURLSetResourcePropertiesForKeys") })
-	_register("CFURLSetResourcePropertyForKey", func() { purego.RegisterLibFunc(&_fnCFURLSetResourcePropertyForKey, _corefoundationLib, "CFURLSetResourcePropertyForKey") })
-	_register("CFURLSetTemporaryResourcePropertyForKey", func() { purego.RegisterLibFunc(&_fnCFURLSetTemporaryResourcePropertyForKey, _corefoundationLib, "CFURLSetTemporaryResourcePropertyForKey") })
-	_register("CFURLStartAccessingSecurityScopedResource", func() { purego.RegisterLibFunc(&_fnCFURLStartAccessingSecurityScopedResource, _corefoundationLib, "CFURLStartAccessingSecurityScopedResource") })
-	_register("CFURLStopAccessingSecurityScopedResource", func() { purego.RegisterLibFunc(&_fnCFURLStopAccessingSecurityScopedResource, _corefoundationLib, "CFURLStopAccessingSecurityScopedResource") })
-	_register("CFURLWriteBookmarkDataToFile", func() { purego.RegisterLibFunc(&_fnCFURLWriteBookmarkDataToFile, _corefoundationLib, "CFURLWriteBookmarkDataToFile") })
-	_register("CFURLWriteDataAndPropertiesToResource", func() { purego.RegisterLibFunc(&_fnCFURLWriteDataAndPropertiesToResource, _corefoundationLib, "CFURLWriteDataAndPropertiesToResource") })
+	_register("CFURLIsFileReferenceURL", func() {
+		purego.RegisterLibFunc(&_fnCFURLIsFileReferenceURL, _corefoundationLib, "CFURLIsFileReferenceURL")
+	})
+	_register("CFURLResourceIsReachable", func() {
+		purego.RegisterLibFunc(&_fnCFURLResourceIsReachable, _corefoundationLib, "CFURLResourceIsReachable")
+	})
+	_register("CFURLSetResourcePropertiesForKeys", func() {
+		purego.RegisterLibFunc(&_fnCFURLSetResourcePropertiesForKeys, _corefoundationLib, "CFURLSetResourcePropertiesForKeys")
+	})
+	_register("CFURLSetResourcePropertyForKey", func() {
+		purego.RegisterLibFunc(&_fnCFURLSetResourcePropertyForKey, _corefoundationLib, "CFURLSetResourcePropertyForKey")
+	})
+	_register("CFURLSetTemporaryResourcePropertyForKey", func() {
+		purego.RegisterLibFunc(&_fnCFURLSetTemporaryResourcePropertyForKey, _corefoundationLib, "CFURLSetTemporaryResourcePropertyForKey")
+	})
+	_register("CFURLStartAccessingSecurityScopedResource", func() {
+		purego.RegisterLibFunc(&_fnCFURLStartAccessingSecurityScopedResource, _corefoundationLib, "CFURLStartAccessingSecurityScopedResource")
+	})
+	_register("CFURLStopAccessingSecurityScopedResource", func() {
+		purego.RegisterLibFunc(&_fnCFURLStopAccessingSecurityScopedResource, _corefoundationLib, "CFURLStopAccessingSecurityScopedResource")
+	})
+	_register("CFURLWriteBookmarkDataToFile", func() {
+		purego.RegisterLibFunc(&_fnCFURLWriteBookmarkDataToFile, _corefoundationLib, "CFURLWriteBookmarkDataToFile")
+	})
+	_register("CFURLWriteDataAndPropertiesToResource", func() {
+		purego.RegisterLibFunc(&_fnCFURLWriteDataAndPropertiesToResource, _corefoundationLib, "CFURLWriteDataAndPropertiesToResource")
+	})
 	_register("CFUUIDCreate", func() { purego.RegisterLibFunc(&_fnCFUUIDCreate, _corefoundationLib, "CFUUIDCreate") })
-	_register("CFUUIDCreateFromString", func() { purego.RegisterLibFunc(&_fnCFUUIDCreateFromString, _corefoundationLib, "CFUUIDCreateFromString") })
-	_register("CFUUIDCreateFromUUIDBytes", func() { purego.RegisterLibFunc(&_fnCFUUIDCreateFromUUIDBytes, _corefoundationLib, "CFUUIDCreateFromUUIDBytes") })
+	_register("CFUUIDCreateFromString", func() {
+		purego.RegisterLibFunc(&_fnCFUUIDCreateFromString, _corefoundationLib, "CFUUIDCreateFromString")
+	})
+	_register("CFUUIDCreateFromUUIDBytes", func() {
+		purego.RegisterLibFunc(&_fnCFUUIDCreateFromUUIDBytes, _corefoundationLib, "CFUUIDCreateFromUUIDBytes")
+	})
 	_register("CFUUIDCreateString", func() { purego.RegisterLibFunc(&_fnCFUUIDCreateString, _corefoundationLib, "CFUUIDCreateString") })
 	_register("CFUUIDCreateWithBytes", func() { purego.RegisterLibFunc(&_fnCFUUIDCreateWithBytes, _corefoundationLib, "CFUUIDCreateWithBytes") })
-	_register("CFUUIDGetConstantUUIDWithBytes", func() { purego.RegisterLibFunc(&_fnCFUUIDGetConstantUUIDWithBytes, _corefoundationLib, "CFUUIDGetConstantUUIDWithBytes") })
+	_register("CFUUIDGetConstantUUIDWithBytes", func() {
+		purego.RegisterLibFunc(&_fnCFUUIDGetConstantUUIDWithBytes, _corefoundationLib, "CFUUIDGetConstantUUIDWithBytes")
+	})
 	_register("CFUUIDGetTypeID", func() { purego.RegisterLibFunc(&_fnCFUUIDGetTypeID, _corefoundationLib, "CFUUIDGetTypeID") })
 	_register("CFUUIDGetUUIDBytes", func() { purego.RegisterLibFunc(&_fnCFUUIDGetUUIDBytes, _corefoundationLib, "CFUUIDGetUUIDBytes") })
-	_register("CFUserNotificationCancel", func() { purego.RegisterLibFunc(&_fnCFUserNotificationCancel, _corefoundationLib, "CFUserNotificationCancel") })
-	_register("CFUserNotificationCheckBoxChecked", func() { purego.RegisterLibFunc(&_fnCFUserNotificationCheckBoxChecked, _corefoundationLib, "CFUserNotificationCheckBoxChecked") })
-	_register("CFUserNotificationCreate", func() { purego.RegisterLibFunc(&_fnCFUserNotificationCreate, _corefoundationLib, "CFUserNotificationCreate") })
-	_register("CFUserNotificationCreateRunLoopSource", func() { purego.RegisterLibFunc(&_fnCFUserNotificationCreateRunLoopSource, _corefoundationLib, "CFUserNotificationCreateRunLoopSource") })
-	_register("CFUserNotificationDisplayAlert", func() { purego.RegisterLibFunc(&_fnCFUserNotificationDisplayAlert, _corefoundationLib, "CFUserNotificationDisplayAlert") })
-	_register("CFUserNotificationDisplayNotice", func() { purego.RegisterLibFunc(&_fnCFUserNotificationDisplayNotice, _corefoundationLib, "CFUserNotificationDisplayNotice") })
-	_register("CFUserNotificationGetResponseDictionary", func() { purego.RegisterLibFunc(&_fnCFUserNotificationGetResponseDictionary, _corefoundationLib, "CFUserNotificationGetResponseDictionary") })
-	_register("CFUserNotificationGetResponseValue", func() { purego.RegisterLibFunc(&_fnCFUserNotificationGetResponseValue, _corefoundationLib, "CFUserNotificationGetResponseValue") })
-	_register("CFUserNotificationGetTypeID", func() { purego.RegisterLibFunc(&_fnCFUserNotificationGetTypeID, _corefoundationLib, "CFUserNotificationGetTypeID") })
-	_register("CFUserNotificationPopUpSelection", func() { purego.RegisterLibFunc(&_fnCFUserNotificationPopUpSelection, _corefoundationLib, "CFUserNotificationPopUpSelection") })
-	_register("CFUserNotificationReceiveResponse", func() { purego.RegisterLibFunc(&_fnCFUserNotificationReceiveResponse, _corefoundationLib, "CFUserNotificationReceiveResponse") })
-	_register("CFUserNotificationSecureTextField", func() { purego.RegisterLibFunc(&_fnCFUserNotificationSecureTextField, _corefoundationLib, "CFUserNotificationSecureTextField") })
-	_register("CFUserNotificationUpdate", func() { purego.RegisterLibFunc(&_fnCFUserNotificationUpdate, _corefoundationLib, "CFUserNotificationUpdate") })
-	_register("CFWriteStreamCanAcceptBytes", func() { purego.RegisterLibFunc(&_fnCFWriteStreamCanAcceptBytes, _corefoundationLib, "CFWriteStreamCanAcceptBytes") })
+	_register("CFUserNotificationCancel", func() {
+		purego.RegisterLibFunc(&_fnCFUserNotificationCancel, _corefoundationLib, "CFUserNotificationCancel")
+	})
+	_register("CFUserNotificationCheckBoxChecked", func() {
+		purego.RegisterLibFunc(&_fnCFUserNotificationCheckBoxChecked, _corefoundationLib, "CFUserNotificationCheckBoxChecked")
+	})
+	_register("CFUserNotificationCreate", func() {
+		purego.RegisterLibFunc(&_fnCFUserNotificationCreate, _corefoundationLib, "CFUserNotificationCreate")
+	})
+	_register("CFUserNotificationCreateRunLoopSource", func() {
+		purego.RegisterLibFunc(&_fnCFUserNotificationCreateRunLoopSource, _corefoundationLib, "CFUserNotificationCreateRunLoopSource")
+	})
+	_register("CFUserNotificationDisplayAlert", func() {
+		purego.RegisterLibFunc(&_fnCFUserNotificationDisplayAlert, _corefoundationLib, "CFUserNotificationDisplayAlert")
+	})
+	_register("CFUserNotificationDisplayNotice", func() {
+		purego.RegisterLibFunc(&_fnCFUserNotificationDisplayNotice, _corefoundationLib, "CFUserNotificationDisplayNotice")
+	})
+	_register("CFUserNotificationGetResponseDictionary", func() {
+		purego.RegisterLibFunc(&_fnCFUserNotificationGetResponseDictionary, _corefoundationLib, "CFUserNotificationGetResponseDictionary")
+	})
+	_register("CFUserNotificationGetResponseValue", func() {
+		purego.RegisterLibFunc(&_fnCFUserNotificationGetResponseValue, _corefoundationLib, "CFUserNotificationGetResponseValue")
+	})
+	_register("CFUserNotificationGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnCFUserNotificationGetTypeID, _corefoundationLib, "CFUserNotificationGetTypeID")
+	})
+	_register("CFUserNotificationPopUpSelection", func() {
+		purego.RegisterLibFunc(&_fnCFUserNotificationPopUpSelection, _corefoundationLib, "CFUserNotificationPopUpSelection")
+	})
+	_register("CFUserNotificationReceiveResponse", func() {
+		purego.RegisterLibFunc(&_fnCFUserNotificationReceiveResponse, _corefoundationLib, "CFUserNotificationReceiveResponse")
+	})
+	_register("CFUserNotificationSecureTextField", func() {
+		purego.RegisterLibFunc(&_fnCFUserNotificationSecureTextField, _corefoundationLib, "CFUserNotificationSecureTextField")
+	})
+	_register("CFUserNotificationUpdate", func() {
+		purego.RegisterLibFunc(&_fnCFUserNotificationUpdate, _corefoundationLib, "CFUserNotificationUpdate")
+	})
+	_register("CFWriteStreamCanAcceptBytes", func() {
+		purego.RegisterLibFunc(&_fnCFWriteStreamCanAcceptBytes, _corefoundationLib, "CFWriteStreamCanAcceptBytes")
+	})
 	_register("CFWriteStreamClose", func() { purego.RegisterLibFunc(&_fnCFWriteStreamClose, _corefoundationLib, "CFWriteStreamClose") })
-	_register("CFWriteStreamCopyDispatchQueue", func() { purego.RegisterLibFunc(&_fnCFWriteStreamCopyDispatchQueue, _corefoundationLib, "CFWriteStreamCopyDispatchQueue") })
-	_register("CFWriteStreamCopyError", func() { purego.RegisterLibFunc(&_fnCFWriteStreamCopyError, _corefoundationLib, "CFWriteStreamCopyError") })
-	_register("CFWriteStreamCopyProperty", func() { purego.RegisterLibFunc(&_fnCFWriteStreamCopyProperty, _corefoundationLib, "CFWriteStreamCopyProperty") })
-	_register("CFWriteStreamCreateWithAllocatedBuffers", func() { purego.RegisterLibFunc(&_fnCFWriteStreamCreateWithAllocatedBuffers, _corefoundationLib, "CFWriteStreamCreateWithAllocatedBuffers") })
-	_register("CFWriteStreamCreateWithBuffer", func() { purego.RegisterLibFunc(&_fnCFWriteStreamCreateWithBuffer, _corefoundationLib, "CFWriteStreamCreateWithBuffer") })
-	_register("CFWriteStreamCreateWithFile", func() { purego.RegisterLibFunc(&_fnCFWriteStreamCreateWithFile, _corefoundationLib, "CFWriteStreamCreateWithFile") })
+	_register("CFWriteStreamCopyDispatchQueue", func() {
+		purego.RegisterLibFunc(&_fnCFWriteStreamCopyDispatchQueue, _corefoundationLib, "CFWriteStreamCopyDispatchQueue")
+	})
+	_register("CFWriteStreamCopyError", func() {
+		purego.RegisterLibFunc(&_fnCFWriteStreamCopyError, _corefoundationLib, "CFWriteStreamCopyError")
+	})
+	_register("CFWriteStreamCopyProperty", func() {
+		purego.RegisterLibFunc(&_fnCFWriteStreamCopyProperty, _corefoundationLib, "CFWriteStreamCopyProperty")
+	})
+	_register("CFWriteStreamCreateWithAllocatedBuffers", func() {
+		purego.RegisterLibFunc(&_fnCFWriteStreamCreateWithAllocatedBuffers, _corefoundationLib, "CFWriteStreamCreateWithAllocatedBuffers")
+	})
+	_register("CFWriteStreamCreateWithBuffer", func() {
+		purego.RegisterLibFunc(&_fnCFWriteStreamCreateWithBuffer, _corefoundationLib, "CFWriteStreamCreateWithBuffer")
+	})
+	_register("CFWriteStreamCreateWithFile", func() {
+		purego.RegisterLibFunc(&_fnCFWriteStreamCreateWithFile, _corefoundationLib, "CFWriteStreamCreateWithFile")
+	})
 	_register("CFWriteStreamGetError", func() { purego.RegisterLibFunc(&_fnCFWriteStreamGetError, _corefoundationLib, "CFWriteStreamGetError") })
-	_register("CFWriteStreamGetStatus", func() { purego.RegisterLibFunc(&_fnCFWriteStreamGetStatus, _corefoundationLib, "CFWriteStreamGetStatus") })
-	_register("CFWriteStreamGetTypeID", func() { purego.RegisterLibFunc(&_fnCFWriteStreamGetTypeID, _corefoundationLib, "CFWriteStreamGetTypeID") })
+	_register("CFWriteStreamGetStatus", func() {
+		purego.RegisterLibFunc(&_fnCFWriteStreamGetStatus, _corefoundationLib, "CFWriteStreamGetStatus")
+	})
+	_register("CFWriteStreamGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnCFWriteStreamGetTypeID, _corefoundationLib, "CFWriteStreamGetTypeID")
+	})
 	_register("CFWriteStreamOpen", func() { purego.RegisterLibFunc(&_fnCFWriteStreamOpen, _corefoundationLib, "CFWriteStreamOpen") })
-	_register("CFWriteStreamScheduleWithRunLoop", func() { purego.RegisterLibFunc(&_fnCFWriteStreamScheduleWithRunLoop, _corefoundationLib, "CFWriteStreamScheduleWithRunLoop") })
-	_register("CFWriteStreamSetClient", func() { purego.RegisterLibFunc(&_fnCFWriteStreamSetClient, _corefoundationLib, "CFWriteStreamSetClient") })
-	_register("CFWriteStreamSetDispatchQueue", func() { purego.RegisterLibFunc(&_fnCFWriteStreamSetDispatchQueue, _corefoundationLib, "CFWriteStreamSetDispatchQueue") })
-	_register("CFWriteStreamSetProperty", func() { purego.RegisterLibFunc(&_fnCFWriteStreamSetProperty, _corefoundationLib, "CFWriteStreamSetProperty") })
-	_register("CFWriteStreamUnscheduleFromRunLoop", func() { purego.RegisterLibFunc(&_fnCFWriteStreamUnscheduleFromRunLoop, _corefoundationLib, "CFWriteStreamUnscheduleFromRunLoop") })
+	_register("CFWriteStreamScheduleWithRunLoop", func() {
+		purego.RegisterLibFunc(&_fnCFWriteStreamScheduleWithRunLoop, _corefoundationLib, "CFWriteStreamScheduleWithRunLoop")
+	})
+	_register("CFWriteStreamSetClient", func() {
+		purego.RegisterLibFunc(&_fnCFWriteStreamSetClient, _corefoundationLib, "CFWriteStreamSetClient")
+	})
+	_register("CFWriteStreamSetDispatchQueue", func() {
+		purego.RegisterLibFunc(&_fnCFWriteStreamSetDispatchQueue, _corefoundationLib, "CFWriteStreamSetDispatchQueue")
+	})
+	_register("CFWriteStreamSetProperty", func() {
+		purego.RegisterLibFunc(&_fnCFWriteStreamSetProperty, _corefoundationLib, "CFWriteStreamSetProperty")
+	})
+	_register("CFWriteStreamUnscheduleFromRunLoop", func() {
+		purego.RegisterLibFunc(&_fnCFWriteStreamUnscheduleFromRunLoop, _corefoundationLib, "CFWriteStreamUnscheduleFromRunLoop")
+	})
 	_register("CFWriteStreamWrite", func() { purego.RegisterLibFunc(&_fnCFWriteStreamWrite, _corefoundationLib, "CFWriteStreamWrite") })
-	_register("CFXMLCreateStringByEscapingEntities", func() { purego.RegisterLibFunc(&_fnCFXMLCreateStringByEscapingEntities, _corefoundationLib, "CFXMLCreateStringByEscapingEntities") })
-	_register("CFXMLCreateStringByUnescapingEntities", func() { purego.RegisterLibFunc(&_fnCFXMLCreateStringByUnescapingEntities, _corefoundationLib, "CFXMLCreateStringByUnescapingEntities") })
+	_register("CFXMLCreateStringByEscapingEntities", func() {
+		purego.RegisterLibFunc(&_fnCFXMLCreateStringByEscapingEntities, _corefoundationLib, "CFXMLCreateStringByEscapingEntities")
+	})
+	_register("CFXMLCreateStringByUnescapingEntities", func() {
+		purego.RegisterLibFunc(&_fnCFXMLCreateStringByUnescapingEntities, _corefoundationLib, "CFXMLCreateStringByUnescapingEntities")
+	})
 	_register("CFXMLNodeCreate", func() { purego.RegisterLibFunc(&_fnCFXMLNodeCreate, _corefoundationLib, "CFXMLNodeCreate") })
 	_register("CFXMLNodeCreateCopy", func() { purego.RegisterLibFunc(&_fnCFXMLNodeCreateCopy, _corefoundationLib, "CFXMLNodeCreateCopy") })
 	_register("CFXMLNodeGetInfoPtr", func() { purego.RegisterLibFunc(&_fnCFXMLNodeGetInfoPtr, _corefoundationLib, "CFXMLNodeGetInfoPtr") })
@@ -882,25 +1952,53 @@ func _loadLibrary() {
 	_register("CFXMLNodeGetTypeID", func() { purego.RegisterLibFunc(&_fnCFXMLNodeGetTypeID, _corefoundationLib, "CFXMLNodeGetTypeID") })
 	_register("CFXMLNodeGetVersion", func() { purego.RegisterLibFunc(&_fnCFXMLNodeGetVersion, _corefoundationLib, "CFXMLNodeGetVersion") })
 	_register("CFXMLParserAbort", func() { purego.RegisterLibFunc(&_fnCFXMLParserAbort, _corefoundationLib, "CFXMLParserAbort") })
-	_register("CFXMLParserCopyErrorDescription", func() { purego.RegisterLibFunc(&_fnCFXMLParserCopyErrorDescription, _corefoundationLib, "CFXMLParserCopyErrorDescription") })
+	_register("CFXMLParserCopyErrorDescription", func() {
+		purego.RegisterLibFunc(&_fnCFXMLParserCopyErrorDescription, _corefoundationLib, "CFXMLParserCopyErrorDescription")
+	})
 	_register("CFXMLParserCreate", func() { purego.RegisterLibFunc(&_fnCFXMLParserCreate, _corefoundationLib, "CFXMLParserCreate") })
-	_register("CFXMLParserCreateWithDataFromURL", func() { purego.RegisterLibFunc(&_fnCFXMLParserCreateWithDataFromURL, _corefoundationLib, "CFXMLParserCreateWithDataFromURL") })
-	_register("CFXMLParserGetCallBacks", func() { purego.RegisterLibFunc(&_fnCFXMLParserGetCallBacks, _corefoundationLib, "CFXMLParserGetCallBacks") })
+	_register("CFXMLParserCreateWithDataFromURL", func() {
+		purego.RegisterLibFunc(&_fnCFXMLParserCreateWithDataFromURL, _corefoundationLib, "CFXMLParserCreateWithDataFromURL")
+	})
+	_register("CFXMLParserGetCallBacks", func() {
+		purego.RegisterLibFunc(&_fnCFXMLParserGetCallBacks, _corefoundationLib, "CFXMLParserGetCallBacks")
+	})
 	_register("CFXMLParserGetContext", func() { purego.RegisterLibFunc(&_fnCFXMLParserGetContext, _corefoundationLib, "CFXMLParserGetContext") })
-	_register("CFXMLParserGetDocument", func() { purego.RegisterLibFunc(&_fnCFXMLParserGetDocument, _corefoundationLib, "CFXMLParserGetDocument") })
-	_register("CFXMLParserGetLineNumber", func() { purego.RegisterLibFunc(&_fnCFXMLParserGetLineNumber, _corefoundationLib, "CFXMLParserGetLineNumber") })
-	_register("CFXMLParserGetLocation", func() { purego.RegisterLibFunc(&_fnCFXMLParserGetLocation, _corefoundationLib, "CFXMLParserGetLocation") })
-	_register("CFXMLParserGetSourceURL", func() { purego.RegisterLibFunc(&_fnCFXMLParserGetSourceURL, _corefoundationLib, "CFXMLParserGetSourceURL") })
-	_register("CFXMLParserGetStatusCode", func() { purego.RegisterLibFunc(&_fnCFXMLParserGetStatusCode, _corefoundationLib, "CFXMLParserGetStatusCode") })
+	_register("CFXMLParserGetDocument", func() {
+		purego.RegisterLibFunc(&_fnCFXMLParserGetDocument, _corefoundationLib, "CFXMLParserGetDocument")
+	})
+	_register("CFXMLParserGetLineNumber", func() {
+		purego.RegisterLibFunc(&_fnCFXMLParserGetLineNumber, _corefoundationLib, "CFXMLParserGetLineNumber")
+	})
+	_register("CFXMLParserGetLocation", func() {
+		purego.RegisterLibFunc(&_fnCFXMLParserGetLocation, _corefoundationLib, "CFXMLParserGetLocation")
+	})
+	_register("CFXMLParserGetSourceURL", func() {
+		purego.RegisterLibFunc(&_fnCFXMLParserGetSourceURL, _corefoundationLib, "CFXMLParserGetSourceURL")
+	})
+	_register("CFXMLParserGetStatusCode", func() {
+		purego.RegisterLibFunc(&_fnCFXMLParserGetStatusCode, _corefoundationLib, "CFXMLParserGetStatusCode")
+	})
 	_register("CFXMLParserGetTypeID", func() { purego.RegisterLibFunc(&_fnCFXMLParserGetTypeID, _corefoundationLib, "CFXMLParserGetTypeID") })
 	_register("CFXMLParserParse", func() { purego.RegisterLibFunc(&_fnCFXMLParserParse, _corefoundationLib, "CFXMLParserParse") })
-	_register("CFXMLTreeCreateFromData", func() { purego.RegisterLibFunc(&_fnCFXMLTreeCreateFromData, _corefoundationLib, "CFXMLTreeCreateFromData") })
-	_register("CFXMLTreeCreateFromDataWithError", func() { purego.RegisterLibFunc(&_fnCFXMLTreeCreateFromDataWithError, _corefoundationLib, "CFXMLTreeCreateFromDataWithError") })
-	_register("CFXMLTreeCreateWithDataFromURL", func() { purego.RegisterLibFunc(&_fnCFXMLTreeCreateWithDataFromURL, _corefoundationLib, "CFXMLTreeCreateWithDataFromURL") })
-	_register("CFXMLTreeCreateWithNode", func() { purego.RegisterLibFunc(&_fnCFXMLTreeCreateWithNode, _corefoundationLib, "CFXMLTreeCreateWithNode") })
-	_register("CFXMLTreeCreateXMLData", func() { purego.RegisterLibFunc(&_fnCFXMLTreeCreateXMLData, _corefoundationLib, "CFXMLTreeCreateXMLData") })
+	_register("CFXMLTreeCreateFromData", func() {
+		purego.RegisterLibFunc(&_fnCFXMLTreeCreateFromData, _corefoundationLib, "CFXMLTreeCreateFromData")
+	})
+	_register("CFXMLTreeCreateFromDataWithError", func() {
+		purego.RegisterLibFunc(&_fnCFXMLTreeCreateFromDataWithError, _corefoundationLib, "CFXMLTreeCreateFromDataWithError")
+	})
+	_register("CFXMLTreeCreateWithDataFromURL", func() {
+		purego.RegisterLibFunc(&_fnCFXMLTreeCreateWithDataFromURL, _corefoundationLib, "CFXMLTreeCreateWithDataFromURL")
+	})
+	_register("CFXMLTreeCreateWithNode", func() {
+		purego.RegisterLibFunc(&_fnCFXMLTreeCreateWithNode, _corefoundationLib, "CFXMLTreeCreateWithNode")
+	})
+	_register("CFXMLTreeCreateXMLData", func() {
+		purego.RegisterLibFunc(&_fnCFXMLTreeCreateXMLData, _corefoundationLib, "CFXMLTreeCreateXMLData")
+	})
 	_register("CFXMLTreeGetNode", func() { purego.RegisterLibFunc(&_fnCFXMLTreeGetNode, _corefoundationLib, "CFXMLTreeGetNode") })
-	_register("__CFStringMakeConstantString", func() { purego.RegisterLibFunc(&___CFStringMakeConstantString, _corefoundationLib, "__CFStringMakeConstantString") })
+	_register("__CFStringMakeConstantString", func() {
+		purego.RegisterLibFunc(&___CFStringMakeConstantString, _corefoundationLib, "__CFStringMakeConstantString")
+	})
 	_register("__builtin_constant_p", func() { purego.RegisterLibFunc(&___builtin_constant_p, _corefoundationLib, "__builtin_constant_p") })
 }
 

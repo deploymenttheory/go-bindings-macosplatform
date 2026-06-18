@@ -15,27 +15,27 @@ type NSScriptClassDescription struct {
 }
 
 var (
-	_clsNSScriptClassDescription = _objcClass("NSScriptClassDescription")
-	_nSScriptClassDescriptionSelClassDescriptionForClass = objc.RegisterName("classDescriptionForClass:")
+	_clsNSScriptClassDescription                                     = _objcClass("NSScriptClassDescription")
+	_nSScriptClassDescriptionSelClassDescriptionForClass             = objc.RegisterName("classDescriptionForClass:")
 	_nSScriptClassDescriptionSelInitWithSuiteNameClassNameDictionary = objc.RegisterName("initWithSuiteName:className:dictionary:")
-	_nSScriptClassDescriptionSelMatchesAppleEventCode = objc.RegisterName("matchesAppleEventCode:")
-	_nSScriptClassDescriptionSelSupportsCommand = objc.RegisterName("supportsCommand:")
-	_nSScriptClassDescriptionSelSelectorForCommand = objc.RegisterName("selectorForCommand:")
-	_nSScriptClassDescriptionSelTypeForKey = objc.RegisterName("typeForKey:")
-	_nSScriptClassDescriptionSelClassDescriptionForKey = objc.RegisterName("classDescriptionForKey:")
-	_nSScriptClassDescriptionSelAppleEventCodeForKey = objc.RegisterName("appleEventCodeForKey:")
-	_nSScriptClassDescriptionSelKeyWithAppleEventCode = objc.RegisterName("keyWithAppleEventCode:")
-	_nSScriptClassDescriptionSelIsLocationRequiredToCreateForKey = objc.RegisterName("isLocationRequiredToCreateForKey:")
-	_nSScriptClassDescriptionSelHasPropertyForKey = objc.RegisterName("hasPropertyForKey:")
-	_nSScriptClassDescriptionSelHasOrderedToManyRelationshipForKey = objc.RegisterName("hasOrderedToManyRelationshipForKey:")
-	_nSScriptClassDescriptionSelHasReadablePropertyForKey = objc.RegisterName("hasReadablePropertyForKey:")
-	_nSScriptClassDescriptionSelHasWritablePropertyForKey = objc.RegisterName("hasWritablePropertyForKey:")
-	_nSScriptClassDescriptionSelSuiteName = objc.RegisterName("suiteName")
-	_nSScriptClassDescriptionSelImplementationClassName = objc.RegisterName("implementationClassName")
-	_nSScriptClassDescriptionSelSuperclassDescription = objc.RegisterName("superclassDescription")
-	_nSScriptClassDescriptionSelAppleEventCode = objc.RegisterName("appleEventCode")
-	_nSScriptClassDescriptionSelDefaultSubcontainerAttributeKey = objc.RegisterName("defaultSubcontainerAttributeKey")
-	_nSScriptClassDescriptionSelIsReadOnlyKey = objc.RegisterName("isReadOnlyKey:")
+	_nSScriptClassDescriptionSelMatchesAppleEventCode                = objc.RegisterName("matchesAppleEventCode:")
+	_nSScriptClassDescriptionSelSupportsCommand                      = objc.RegisterName("supportsCommand:")
+	_nSScriptClassDescriptionSelSelectorForCommand                   = objc.RegisterName("selectorForCommand:")
+	_nSScriptClassDescriptionSelTypeForKey                           = objc.RegisterName("typeForKey:")
+	_nSScriptClassDescriptionSelClassDescriptionForKey               = objc.RegisterName("classDescriptionForKey:")
+	_nSScriptClassDescriptionSelAppleEventCodeForKey                 = objc.RegisterName("appleEventCodeForKey:")
+	_nSScriptClassDescriptionSelKeyWithAppleEventCode                = objc.RegisterName("keyWithAppleEventCode:")
+	_nSScriptClassDescriptionSelIsLocationRequiredToCreateForKey     = objc.RegisterName("isLocationRequiredToCreateForKey:")
+	_nSScriptClassDescriptionSelHasPropertyForKey                    = objc.RegisterName("hasPropertyForKey:")
+	_nSScriptClassDescriptionSelHasOrderedToManyRelationshipForKey   = objc.RegisterName("hasOrderedToManyRelationshipForKey:")
+	_nSScriptClassDescriptionSelHasReadablePropertyForKey            = objc.RegisterName("hasReadablePropertyForKey:")
+	_nSScriptClassDescriptionSelHasWritablePropertyForKey            = objc.RegisterName("hasWritablePropertyForKey:")
+	_nSScriptClassDescriptionSelSuiteName                            = objc.RegisterName("suiteName")
+	_nSScriptClassDescriptionSelImplementationClassName              = objc.RegisterName("implementationClassName")
+	_nSScriptClassDescriptionSelSuperclassDescription                = objc.RegisterName("superclassDescription")
+	_nSScriptClassDescriptionSelAppleEventCode                       = objc.RegisterName("appleEventCode")
+	_nSScriptClassDescriptionSelDefaultSubcontainerAttributeKey      = objc.RegisterName("defaultSubcontainerAttributeKey")
+	_nSScriptClassDescriptionSelIsReadOnlyKey                        = objc.RegisterName("isReadOnlyKey:")
 )
 
 func NSScriptClassDescriptionFromID(id objc.ID) *NSScriptClassDescription {
@@ -50,13 +50,17 @@ func NSScriptClassDescriptionFromID(id objc.ID) *NSScriptClassDescription {
 
 func NSScriptClassDescriptionClassDescriptionForClass(aClass objc.Class) *NSScriptClassDescription {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSScriptClassDescription), _nSScriptClassDescriptionSelClassDescriptionForClass, aClass)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptClassDescriptionFromID(_ret)
 }
 
 func (o *NSScriptClassDescription) InitWithSuiteNameClassNameDictionary(suiteName *NSString, className *NSString, classDeclaration *NSDictionary[objc.ID, objc.ID]) *NSScriptClassDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptClassDescriptionSelInitWithSuiteNameClassNameDictionary, suiteName.Ptr(), className.Ptr(), classDeclaration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptClassDescriptionFromID(_ret)
 }
 
@@ -77,13 +81,17 @@ func (o *NSScriptClassDescription) SelectorForCommand(commandDescription *NSScri
 
 func (o *NSScriptClassDescription) TypeForKey(key *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptClassDescriptionSelTypeForKey, key.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSScriptClassDescription) ClassDescriptionForKey(key *NSString) *NSScriptClassDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptClassDescriptionSelClassDescriptionForKey, key.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptClassDescriptionFromID(_ret)
 }
 
@@ -94,7 +102,9 @@ func (o *NSScriptClassDescription) AppleEventCodeForKey(key *NSString) uint {
 
 func (o *NSScriptClassDescription) KeyWithAppleEventCode(appleEventCode uint) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptClassDescriptionSelKeyWithAppleEventCode, appleEventCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -125,19 +135,25 @@ func (o *NSScriptClassDescription) HasWritablePropertyForKey(key *NSString) bool
 
 func (o *NSScriptClassDescription) SuiteName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptClassDescriptionSelSuiteName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSScriptClassDescription) ImplementationClassName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptClassDescriptionSelImplementationClassName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSScriptClassDescription) SuperclassDescription() *NSScriptClassDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptClassDescriptionSelSuperclassDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptClassDescriptionFromID(_ret)
 }
 
@@ -148,7 +164,9 @@ func (o *NSScriptClassDescription) AppleEventCode() uint {
 
 func (o *NSScriptClassDescription) DefaultSubcontainerAttributeKey() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptClassDescriptionSelDefaultSubcontainerAttributeKey)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -157,4 +175,3 @@ func (o *NSScriptClassDescription) IsReadOnlyKey(key *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSScriptClassDescriptionSelIsReadOnlyKey, key.Ptr())
 	return _ret
 }
-

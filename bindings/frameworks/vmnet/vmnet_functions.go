@@ -12,42 +12,42 @@ import (
 )
 
 var (
-	_vmnet_copy_shared_interface_list func() unsafe.Pointer
+	_vmnet_copy_shared_interface_list            func() unsafe.Pointer
 	_vmnet_interface_add_ip_port_forwarding_rule func(unsafe.Pointer, uint8, uint16, uint8, unsafe.Pointer, uint16, objc.Block) Vmnet_return_t
-// Deprecated: replaced by vmnet_interface_add_ip_port_forwarding_rule
-	_vmnet_interface_add_port_forwarding_rule func(unsafe.Pointer, uint8, uint16, unsafe.Pointer, uint16, objc.Block) Vmnet_return_t
+	// Deprecated: replaced by vmnet_interface_add_ip_port_forwarding_rule
+	_vmnet_interface_add_port_forwarding_rule     func(unsafe.Pointer, uint8, uint16, unsafe.Pointer, uint16, objc.Block) Vmnet_return_t
 	_vmnet_interface_get_ip_port_forwarding_rules func(unsafe.Pointer, uint8, objc.Block) Vmnet_return_t
-// Deprecated: replaced by vmnet_interface_get_ip_port_forwarding_rules
-	_vmnet_interface_get_port_forwarding_rules func(unsafe.Pointer, objc.Block) Vmnet_return_t
+	// Deprecated: replaced by vmnet_interface_get_ip_port_forwarding_rules
+	_vmnet_interface_get_port_forwarding_rules      func(unsafe.Pointer, objc.Block) Vmnet_return_t
 	_vmnet_interface_remove_ip_port_forwarding_rule func(unsafe.Pointer, uint8, uint16, uint8, objc.Block) Vmnet_return_t
-// Deprecated: replaced by vmnet_interface_remove_ip_port_forwarding_rule
-	_vmnet_interface_remove_port_forwarding_rule func(unsafe.Pointer, uint8, uint16, objc.Block) Vmnet_return_t
-	_vmnet_interface_set_event_callback func(unsafe.Pointer, Interface_event_t, objc.ID, objc.Block) Vmnet_return_t
-	_vmnet_interface_start_with_network func(unsafe.Pointer, objc.ID, objc.ID, objc.Block) unsafe.Pointer
-	_vmnet_ip_port_forwarding_rule_get_details func(objc.ID, *uint8, *uint16, uint8, unsafe.Pointer, *uint16) Vmnet_return_t
-	_vmnet_network_configuration_add_dhcp_reservation func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) Vmnet_return_t
-	_vmnet_network_configuration_add_port_forwarding_rule func(unsafe.Pointer, uint8, uint8, uint16, uint16, unsafe.Pointer) Vmnet_return_t
-	_vmnet_network_configuration_create func(Operating_modes_t, *Vmnet_return_t) unsafe.Pointer
-	_vmnet_network_configuration_disable_dhcp func(unsafe.Pointer)
-	_vmnet_network_configuration_disable_dns_proxy func(unsafe.Pointer)
-	_vmnet_network_configuration_disable_nat44 func(unsafe.Pointer)
-	_vmnet_network_configuration_disable_nat66 func(unsafe.Pointer)
+	// Deprecated: replaced by vmnet_interface_remove_ip_port_forwarding_rule
+	_vmnet_interface_remove_port_forwarding_rule              func(unsafe.Pointer, uint8, uint16, objc.Block) Vmnet_return_t
+	_vmnet_interface_set_event_callback                       func(unsafe.Pointer, Interface_event_t, objc.ID, objc.Block) Vmnet_return_t
+	_vmnet_interface_start_with_network                       func(unsafe.Pointer, objc.ID, objc.ID, objc.Block) unsafe.Pointer
+	_vmnet_ip_port_forwarding_rule_get_details                func(objc.ID, *uint8, *uint16, uint8, unsafe.Pointer, *uint16) Vmnet_return_t
+	_vmnet_network_configuration_add_dhcp_reservation         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) Vmnet_return_t
+	_vmnet_network_configuration_add_port_forwarding_rule     func(unsafe.Pointer, uint8, uint8, uint16, uint16, unsafe.Pointer) Vmnet_return_t
+	_vmnet_network_configuration_create                       func(Operating_modes_t, *Vmnet_return_t) unsafe.Pointer
+	_vmnet_network_configuration_disable_dhcp                 func(unsafe.Pointer)
+	_vmnet_network_configuration_disable_dns_proxy            func(unsafe.Pointer)
+	_vmnet_network_configuration_disable_nat44                func(unsafe.Pointer)
+	_vmnet_network_configuration_disable_nat66                func(unsafe.Pointer)
 	_vmnet_network_configuration_disable_router_advertisement func(unsafe.Pointer)
-	_vmnet_network_configuration_set_external_interface func(unsafe.Pointer, string) Vmnet_return_t
-	_vmnet_network_configuration_set_ipv4_subnet func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) Vmnet_return_t
-	_vmnet_network_configuration_set_ipv6_prefix func(unsafe.Pointer, unsafe.Pointer, uint8) Vmnet_return_t
-	_vmnet_network_configuration_set_mtu func(unsafe.Pointer, uint32) Vmnet_return_t
-	_vmnet_network_copy_serialization func(unsafe.Pointer, *Vmnet_return_t) unsafe.Pointer
-	_vmnet_network_create func(unsafe.Pointer, *Vmnet_return_t) unsafe.Pointer
-	_vmnet_network_create_with_serialization func(objc.ID, *Vmnet_return_t) unsafe.Pointer
-	_vmnet_network_get_ipv4_subnet func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vmnet_network_get_ipv6_prefix func(unsafe.Pointer, unsafe.Pointer, *uint8)
-// Deprecated: replaced by vmnet_ip_port_forwarding_rule_get_details
+	_vmnet_network_configuration_set_external_interface       func(unsafe.Pointer, string) Vmnet_return_t
+	_vmnet_network_configuration_set_ipv4_subnet              func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) Vmnet_return_t
+	_vmnet_network_configuration_set_ipv6_prefix              func(unsafe.Pointer, unsafe.Pointer, uint8) Vmnet_return_t
+	_vmnet_network_configuration_set_mtu                      func(unsafe.Pointer, uint32) Vmnet_return_t
+	_vmnet_network_copy_serialization                         func(unsafe.Pointer, *Vmnet_return_t) unsafe.Pointer
+	_vmnet_network_create                                     func(unsafe.Pointer, *Vmnet_return_t) unsafe.Pointer
+	_vmnet_network_create_with_serialization                  func(objc.ID, *Vmnet_return_t) unsafe.Pointer
+	_vmnet_network_get_ipv4_subnet                            func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_vmnet_network_get_ipv6_prefix                            func(unsafe.Pointer, unsafe.Pointer, *uint8)
+	// Deprecated: replaced by vmnet_ip_port_forwarding_rule_get_details
 	_vmnet_port_forwarding_rule_get_details func(objc.ID, *uint8, *uint16, unsafe.Pointer, *uint16) Vmnet_return_t
-	_vmnet_read func(unsafe.Pointer, *Vmpktdesc, *int32) Vmnet_return_t
-	_vmnet_start_interface func(objc.ID, objc.ID, objc.Block) unsafe.Pointer
-	_vmnet_stop_interface func(unsafe.Pointer, objc.ID, objc.Block) Vmnet_return_t
-	_vmnet_write func(unsafe.Pointer, *Vmpktdesc, *int32) Vmnet_return_t
+	_vmnet_read                             func(unsafe.Pointer, *Vmpktdesc, *int32) Vmnet_return_t
+	_vmnet_start_interface                  func(objc.ID, objc.ID, objc.Block) unsafe.Pointer
+	_vmnet_stop_interface                   func(unsafe.Pointer, objc.ID, objc.Block) Vmnet_return_t
+	_vmnet_write                            func(unsafe.Pointer, *Vmpktdesc, *int32) Vmnet_return_t
 )
 
 // C function: vmnet_copy_shared_interface_list
@@ -298,4 +298,3 @@ func VmnetStopInterface(interface_ unsafe.Pointer, queue *foundation.NSObject, h
 func VmnetWrite(interface_ unsafe.Pointer, packets *Vmpktdesc, pktcnt *int32) Vmnet_return_t {
 	return _vmnet_write(interface_, packets, pktcnt)
 }
-

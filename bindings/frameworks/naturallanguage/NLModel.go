@@ -19,14 +19,14 @@ type NLModel struct {
 }
 
 var (
-	_clsNLModel = _objcClass("NLModel")
-	_nLModelSelModelWithContentsOfURLError = objc.RegisterName("modelWithContentsOfURL:error:")
-	_nLModelSelModelWithMLModelError = objc.RegisterName("modelWithMLModel:error:")
-	_nLModelSelPredictedLabelForString = objc.RegisterName("predictedLabelForString:")
-	_nLModelSelPredictedLabelsForTokens = objc.RegisterName("predictedLabelsForTokens:")
+	_clsNLModel                                              = _objcClass("NLModel")
+	_nLModelSelModelWithContentsOfURLError                   = objc.RegisterName("modelWithContentsOfURL:error:")
+	_nLModelSelModelWithMLModelError                         = objc.RegisterName("modelWithMLModel:error:")
+	_nLModelSelPredictedLabelForString                       = objc.RegisterName("predictedLabelForString:")
+	_nLModelSelPredictedLabelsForTokens                      = objc.RegisterName("predictedLabelsForTokens:")
 	_nLModelSelPredictedLabelHypothesesForStringMaximumCount = objc.RegisterName("predictedLabelHypothesesForString:maximumCount:")
 	_nLModelSelPredictedLabelHypothesesForTokensMaximumCount = objc.RegisterName("predictedLabelHypothesesForTokens:maximumCount:")
-	_nLModelSelConfiguration = objc.RegisterName("configuration")
+	_nLModelSelConfiguration                                 = objc.RegisterName("configuration")
 )
 
 func NLModelFromID(id objc.ID) *NLModel {
@@ -42,7 +42,9 @@ func NLModelFromID(id objc.ID) *NLModel {
 func NLModelModelWithContentsOfURLError(url *foundation.NSURL) (*NLModel, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNLModel), _nLModelSelModelWithContentsOfURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -52,7 +54,9 @@ func NLModelModelWithContentsOfURLError(url *foundation.NSURL) (*NLModel, error)
 func NLModelModelWithMLModelError(mlModel *coreml.MLModel) (*NLModel, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNLModel), _nLModelSelModelWithMLModelError, mlModel.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -61,7 +65,9 @@ func NLModelModelWithMLModelError(mlModel *coreml.MLModel) (*NLModel, error) {
 
 func (o *NLModel) PredictedLabelForString(string_ *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLModelSelPredictedLabelForString, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -82,7 +88,8 @@ func (o *NLModel) PredictedLabelHypothesesForTokensMaximumCount(tokens *foundati
 
 func (o *NLModel) Configuration() *NLModelConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLModelSelConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NLModelConfigurationFromID(_ret)
 }
-

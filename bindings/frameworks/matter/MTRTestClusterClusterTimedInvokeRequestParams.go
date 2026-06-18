@@ -25,4 +25,3 @@ func MTRTestClusterClusterTimedInvokeRequestParamsFromID(id objc.ID) *MTRTestClu
 	purego.Track(o)
 	return o
 }
-

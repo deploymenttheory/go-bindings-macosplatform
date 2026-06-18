@@ -15,10 +15,10 @@ type AVMIDIChannelPressureEvent struct {
 }
 
 var (
-	_clsAVMIDIChannelPressureEvent = _objcClass("AVMIDIChannelPressureEvent")
+	_clsAVMIDIChannelPressureEvent                        = _objcClass("AVMIDIChannelPressureEvent")
 	_aVMIDIChannelPressureEventSelInitWithChannelPressure = objc.RegisterName("initWithChannel:pressure:")
-	_aVMIDIChannelPressureEventSelPressure = objc.RegisterName("pressure")
-	_aVMIDIChannelPressureEventSelSetPressure = objc.RegisterName("setPressure:")
+	_aVMIDIChannelPressureEventSelPressure                = objc.RegisterName("pressure")
+	_aVMIDIChannelPressureEventSelSetPressure             = objc.RegisterName("setPressure:")
 )
 
 func AVMIDIChannelPressureEventFromID(id objc.ID) *AVMIDIChannelPressureEvent {
@@ -34,7 +34,9 @@ func AVMIDIChannelPressureEventFromID(id objc.ID) *AVMIDIChannelPressureEvent {
 // @method initWithChannel:pressure: @abstract Initialize the event with a channel and a pressure value. @param channel The MIDI channel for the message.  Range: 0-15. @param pressure The MIDI channel pressure.  Range: 0-127.
 func (o *AVMIDIChannelPressureEvent) InitWithChannelPressure(channel uint, pressure uint) *AVMIDIChannelPressureEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMIDIChannelPressureEventSelInitWithChannelPressure, channel, pressure)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMIDIChannelPressureEventFromID(_ret)
 }
 
@@ -46,4 +48,3 @@ func (o *AVMIDIChannelPressureEvent) Pressure() uint {
 func (o *AVMIDIChannelPressureEvent) SetPressure(pressure uint) {
 	o.Ptr().Send(_aVMIDIChannelPressureEventSelSetPressure, pressure)
 }
-

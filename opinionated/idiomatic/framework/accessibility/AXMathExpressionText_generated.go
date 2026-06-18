@@ -47,7 +47,9 @@ func (x *MathExpressionText) Content() string {
 	return purego.GoString(_r.Ptr())
 }
 
-func (x *MathExpressionText) asMathExpression() *raw.AXMathExpression { return &x.inner.AXMathExpression }
+func (x *MathExpressionText) asMathExpression() *raw.AXMathExpression {
+	return &x.inner.AXMathExpression
+}
 
 // MathExpressionTextable is the interface implemented by [MathExpressionText], for mocking and DI.
 type MathExpressionTextable interface {
@@ -56,4 +58,3 @@ type MathExpressionTextable interface {
 }
 
 var _ MathExpressionTextable = (*MathExpressionText)(nil)
-

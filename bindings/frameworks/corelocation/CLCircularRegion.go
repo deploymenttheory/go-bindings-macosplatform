@@ -19,7 +19,7 @@ type CLCircularRegion struct {
 }
 
 var (
-	_clsCLCircularRegion = _objcClass("CLCircularRegion")
+	_clsCLCircularRegion                               = _objcClass("CLCircularRegion")
 	_cLCircularRegionSelInitWithCenterRadiusIdentifier = objc.RegisterName("initWithCenter:radius:identifier:")
 )
 
@@ -35,7 +35,8 @@ func CLCircularRegionFromID(id objc.ID) *CLCircularRegion {
 
 func (o *CLCircularRegion) InitWithCenterRadiusIdentifier(center unsafe.Pointer, radius unsafe.Pointer, identifier *foundation.NSString) *CLCircularRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLCircularRegionSelInitWithCenterRadiusIdentifier, center, radius, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLCircularRegionFromID(_ret)
 }
-

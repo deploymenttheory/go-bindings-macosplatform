@@ -58,7 +58,9 @@ func (x *DOMEntityReference) asDOMNode() *raw.DOMNode { return &x.inner.DOMNode 
 
 func (x *DOMEntityReference) asDOMObject() *raw.DOMObject { return &x.inner.DOMNode.DOMObject }
 
-func (x *DOMEntityReference) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMNode.DOMObject.WebScriptObject }
+func (x *DOMEntityReference) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMNode.DOMObject.WebScriptObject
+}
 
 // DOMEntityReferenceable is the interface implemented by [DOMEntityReference], for mocking and DI.
 type DOMEntityReferenceable interface {
@@ -69,4 +71,3 @@ type DOMEntityReferenceable interface {
 }
 
 var _ DOMEntityReferenceable = (*DOMEntityReference)(nil)
-

@@ -16,10 +16,10 @@ type MTRChannelClusterProgramCastStruct struct {
 }
 
 var (
-	_clsMTRChannelClusterProgramCastStruct = _objcClass("MTRChannelClusterProgramCastStruct")
-	_mTRChannelClusterProgramCastStructSelName = objc.RegisterName("name")
+	_clsMTRChannelClusterProgramCastStruct        = _objcClass("MTRChannelClusterProgramCastStruct")
+	_mTRChannelClusterProgramCastStructSelName    = objc.RegisterName("name")
 	_mTRChannelClusterProgramCastStructSelSetName = objc.RegisterName("setName:")
-	_mTRChannelClusterProgramCastStructSelRole = objc.RegisterName("role")
+	_mTRChannelClusterProgramCastStructSelRole    = objc.RegisterName("role")
 	_mTRChannelClusterProgramCastStructSelSetRole = objc.RegisterName("setRole:")
 )
 
@@ -35,7 +35,9 @@ func MTRChannelClusterProgramCastStructFromID(id objc.ID) *MTRChannelClusterProg
 
 func (o *MTRChannelClusterProgramCastStruct) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterProgramCastStructSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRChannelClusterProgramCastStruct) SetName(name *foundation.NSString) 
 
 func (o *MTRChannelClusterProgramCastStruct) Role() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterProgramCastStructSelRole)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTRChannelClusterProgramCastStruct) SetRole(role *foundation.NSString) {
 	o.Ptr().Send(_mTRChannelClusterProgramCastStructSelSetRole, role.Ptr())
 }
-

@@ -17,19 +17,19 @@ type AVMutableMetadataItem struct {
 }
 
 var (
-	_clsAVMutableMetadataItem = _objcClass("AVMutableMetadataItem")
-	_aVMutableMetadataItemSelMetadataItem = objc.RegisterName("metadataItem")
-	_aVMutableMetadataItemSelSetIdentifier = objc.RegisterName("setIdentifier:")
+	_clsAVMutableMetadataItem                       = _objcClass("AVMutableMetadataItem")
+	_aVMutableMetadataItemSelMetadataItem           = objc.RegisterName("metadataItem")
+	_aVMutableMetadataItemSelSetIdentifier          = objc.RegisterName("setIdentifier:")
 	_aVMutableMetadataItemSelSetExtendedLanguageTag = objc.RegisterName("setExtendedLanguageTag:")
-	_aVMutableMetadataItemSelSetLocale = objc.RegisterName("setLocale:")
-	_aVMutableMetadataItemSelSetTime = objc.RegisterName("setTime:")
-	_aVMutableMetadataItemSelSetDuration = objc.RegisterName("setDuration:")
-	_aVMutableMetadataItemSelSetDataType = objc.RegisterName("setDataType:")
-	_aVMutableMetadataItemSelSetValue = objc.RegisterName("setValue:")
-	_aVMutableMetadataItemSelSetExtraAttributes = objc.RegisterName("setExtraAttributes:")
-	_aVMutableMetadataItemSelSetStartDate = objc.RegisterName("setStartDate:")
-	_aVMutableMetadataItemSelSetKeySpace = objc.RegisterName("setKeySpace:")
-	_aVMutableMetadataItemSelSetKey = objc.RegisterName("setKey:")
+	_aVMutableMetadataItemSelSetLocale              = objc.RegisterName("setLocale:")
+	_aVMutableMetadataItemSelSetTime                = objc.RegisterName("setTime:")
+	_aVMutableMetadataItemSelSetDuration            = objc.RegisterName("setDuration:")
+	_aVMutableMetadataItemSelSetDataType            = objc.RegisterName("setDataType:")
+	_aVMutableMetadataItemSelSetValue               = objc.RegisterName("setValue:")
+	_aVMutableMetadataItemSelSetExtraAttributes     = objc.RegisterName("setExtraAttributes:")
+	_aVMutableMetadataItemSelSetStartDate           = objc.RegisterName("setStartDate:")
+	_aVMutableMetadataItemSelSetKeySpace            = objc.RegisterName("setKeySpace:")
+	_aVMutableMetadataItemSelSetKey                 = objc.RegisterName("setKey:")
 )
 
 func AVMutableMetadataItemFromID(id objc.ID) *AVMutableMetadataItem {
@@ -45,7 +45,9 @@ func AVMutableMetadataItemFromID(id objc.ID) *AVMutableMetadataItem {
 // @method			metadataItem @abstract		Returns an instance of AVMutableMetadataItem.
 func AVMutableMetadataItemMetadataItem() *AVMutableMetadataItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableMetadataItem), _aVMutableMetadataItemSelMetadataItem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMutableMetadataItemFromID(_ret)
 }
 
@@ -92,4 +94,3 @@ func (o *AVMutableMetadataItem) SetKeySpace(keySpace *foundation.NSString) {
 func (o *AVMutableMetadataItem) SetKey(key objc.ID) {
 	o.Ptr().Send(_aVMutableMetadataItemSelSetKey, key)
 }
-

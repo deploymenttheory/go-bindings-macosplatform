@@ -81,4 +81,3 @@ type TextureAtlasable interface {
 }
 
 var _ TextureAtlasable = (*TextureAtlas)(nil)
-

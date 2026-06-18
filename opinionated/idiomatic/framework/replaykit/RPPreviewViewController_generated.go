@@ -60,4 +60,3 @@ type PreviewViewControllerable interface {
 }
 
 var _ PreviewViewControllerable = (*PreviewViewController)(nil)
-

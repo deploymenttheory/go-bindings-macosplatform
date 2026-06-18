@@ -303,4 +303,3 @@ type IKScannerDeviceViewable interface {
 }
 
 var _ IKScannerDeviceViewable = (*IKScannerDeviceView)(nil)
-

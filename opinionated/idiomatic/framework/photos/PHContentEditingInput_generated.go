@@ -137,4 +137,3 @@ type ContentEditingInputable interface {
 }
 
 var _ ContentEditingInputable = (*ContentEditingInput)(nil)
-

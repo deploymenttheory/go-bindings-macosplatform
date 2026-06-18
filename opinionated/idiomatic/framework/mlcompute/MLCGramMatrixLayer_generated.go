@@ -64,4 +64,3 @@ type GramMatrixLayerable interface {
 }
 
 var _ GramMatrixLayerable = (*GramMatrixLayer)(nil)
-

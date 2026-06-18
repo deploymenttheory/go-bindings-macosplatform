@@ -16,19 +16,19 @@ type MTLArgumentDescriptor struct {
 }
 
 var (
-	_clsMTLArgumentDescriptor = _objcClass("MTLArgumentDescriptor")
-	_mTLArgumentDescriptorSelArgumentDescriptor = objc.RegisterName("argumentDescriptor")
-	_mTLArgumentDescriptorSelDataType = objc.RegisterName("dataType")
-	_mTLArgumentDescriptorSelSetDataType = objc.RegisterName("setDataType:")
-	_mTLArgumentDescriptorSelIndex = objc.RegisterName("index")
-	_mTLArgumentDescriptorSelSetIndex = objc.RegisterName("setIndex:")
-	_mTLArgumentDescriptorSelArrayLength = objc.RegisterName("arrayLength")
-	_mTLArgumentDescriptorSelSetArrayLength = objc.RegisterName("setArrayLength:")
-	_mTLArgumentDescriptorSelAccess = objc.RegisterName("access")
-	_mTLArgumentDescriptorSelSetAccess = objc.RegisterName("setAccess:")
-	_mTLArgumentDescriptorSelTextureType = objc.RegisterName("textureType")
-	_mTLArgumentDescriptorSelSetTextureType = objc.RegisterName("setTextureType:")
-	_mTLArgumentDescriptorSelConstantBlockAlignment = objc.RegisterName("constantBlockAlignment")
+	_clsMTLArgumentDescriptor                          = _objcClass("MTLArgumentDescriptor")
+	_mTLArgumentDescriptorSelArgumentDescriptor        = objc.RegisterName("argumentDescriptor")
+	_mTLArgumentDescriptorSelDataType                  = objc.RegisterName("dataType")
+	_mTLArgumentDescriptorSelSetDataType               = objc.RegisterName("setDataType:")
+	_mTLArgumentDescriptorSelIndex                     = objc.RegisterName("index")
+	_mTLArgumentDescriptorSelSetIndex                  = objc.RegisterName("setIndex:")
+	_mTLArgumentDescriptorSelArrayLength               = objc.RegisterName("arrayLength")
+	_mTLArgumentDescriptorSelSetArrayLength            = objc.RegisterName("setArrayLength:")
+	_mTLArgumentDescriptorSelAccess                    = objc.RegisterName("access")
+	_mTLArgumentDescriptorSelSetAccess                 = objc.RegisterName("setAccess:")
+	_mTLArgumentDescriptorSelTextureType               = objc.RegisterName("textureType")
+	_mTLArgumentDescriptorSelSetTextureType            = objc.RegisterName("setTextureType:")
+	_mTLArgumentDescriptorSelConstantBlockAlignment    = objc.RegisterName("constantBlockAlignment")
 	_mTLArgumentDescriptorSelSetConstantBlockAlignment = objc.RegisterName("setConstantBlockAlignment:")
 )
 
@@ -45,7 +45,9 @@ func MTLArgumentDescriptorFromID(id objc.ID) *MTLArgumentDescriptor {
 // @method argumentDescriptor @abstract Create an autoreleased default argument descriptor
 func MTLArgumentDescriptorArgumentDescriptor() *MTLArgumentDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLArgumentDescriptor), _mTLArgumentDescriptorSelArgumentDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLArgumentDescriptorFromID(_ret)
 }
 
@@ -108,4 +110,3 @@ func (o *MTLArgumentDescriptor) ConstantBlockAlignment() uint {
 func (o *MTLArgumentDescriptor) SetConstantBlockAlignment(constantBlockAlignment uint) {
 	o.Ptr().Send(_mTLArgumentDescriptorSelSetConstantBlockAlignment, constantBlockAlignment)
 }
-

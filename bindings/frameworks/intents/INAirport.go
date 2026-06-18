@@ -16,11 +16,11 @@ type INAirport struct {
 }
 
 var (
-	_clsINAirport = _objcClass("INAirport")
+	_clsINAirport                             = _objcClass("INAirport")
 	_iNAirportSelInitWithNameIataCodeIcaoCode = objc.RegisterName("initWithName:iataCode:icaoCode:")
-	_iNAirportSelName = objc.RegisterName("name")
-	_iNAirportSelIataCode = objc.RegisterName("iataCode")
-	_iNAirportSelIcaoCode = objc.RegisterName("icaoCode")
+	_iNAirportSelName                         = objc.RegisterName("name")
+	_iNAirportSelIataCode                     = objc.RegisterName("iataCode")
+	_iNAirportSelIcaoCode                     = objc.RegisterName("icaoCode")
 )
 
 func INAirportFromID(id objc.ID) *INAirport {
@@ -35,25 +35,32 @@ func INAirportFromID(id objc.ID) *INAirport {
 
 func (o *INAirport) InitWithNameIataCodeIcaoCode(name *foundation.NSString, iataCode *foundation.NSString, icaoCode *foundation.NSString) *INAirport {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNAirportSelInitWithNameIataCodeIcaoCode, name.Ptr(), iataCode.Ptr(), icaoCode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INAirportFromID(_ret)
 }
 
 func (o *INAirport) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNAirportSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INAirport) IataCode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNAirportSelIataCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INAirport) IcaoCode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNAirportSelIcaoCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

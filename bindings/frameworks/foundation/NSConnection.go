@@ -16,47 +16,47 @@ type NSConnection struct {
 }
 
 var (
-	_clsNSConnection = _objcClass("NSConnection")
-	_nSConnectionSelAllConnections = objc.RegisterName("allConnections")
-	_nSConnectionSelDefaultConnection = objc.RegisterName("defaultConnection")
-	_nSConnectionSelConnectionWithRegisteredNameHost = objc.RegisterName("connectionWithRegisteredName:host:")
-	_nSConnectionSelConnectionWithRegisteredNameHostUsingNameServer = objc.RegisterName("connectionWithRegisteredName:host:usingNameServer:")
-	_nSConnectionSelRootProxyForConnectionWithRegisteredNameHost = objc.RegisterName("rootProxyForConnectionWithRegisteredName:host:")
+	_clsNSConnection                                                            = _objcClass("NSConnection")
+	_nSConnectionSelAllConnections                                              = objc.RegisterName("allConnections")
+	_nSConnectionSelDefaultConnection                                           = objc.RegisterName("defaultConnection")
+	_nSConnectionSelConnectionWithRegisteredNameHost                            = objc.RegisterName("connectionWithRegisteredName:host:")
+	_nSConnectionSelConnectionWithRegisteredNameHostUsingNameServer             = objc.RegisterName("connectionWithRegisteredName:host:usingNameServer:")
+	_nSConnectionSelRootProxyForConnectionWithRegisteredNameHost                = objc.RegisterName("rootProxyForConnectionWithRegisteredName:host:")
 	_nSConnectionSelRootProxyForConnectionWithRegisteredNameHostUsingNameServer = objc.RegisterName("rootProxyForConnectionWithRegisteredName:host:usingNameServer:")
-	_nSConnectionSelServiceConnectionWithNameRootObjectUsingNameServer = objc.RegisterName("serviceConnectionWithName:rootObject:usingNameServer:")
-	_nSConnectionSelServiceConnectionWithNameRootObject = objc.RegisterName("serviceConnectionWithName:rootObject:")
-	_nSConnectionSelInvalidate = objc.RegisterName("invalidate")
-	_nSConnectionSelAddRequestMode = objc.RegisterName("addRequestMode:")
-	_nSConnectionSelRemoveRequestMode = objc.RegisterName("removeRequestMode:")
-	_nSConnectionSelRegisterName = objc.RegisterName("registerName:")
-	_nSConnectionSelRegisterNameWithNameServer = objc.RegisterName("registerName:withNameServer:")
-	_nSConnectionSelConnectionWithReceivePortSendPort = objc.RegisterName("connectionWithReceivePort:sendPort:")
-	_nSConnectionSelCurrentConversation = objc.RegisterName("currentConversation")
-	_nSConnectionSelInitWithReceivePortSendPort = objc.RegisterName("initWithReceivePort:sendPort:")
-	_nSConnectionSelEnableMultipleThreads = objc.RegisterName("enableMultipleThreads")
-	_nSConnectionSelAddRunLoop = objc.RegisterName("addRunLoop:")
-	_nSConnectionSelRemoveRunLoop = objc.RegisterName("removeRunLoop:")
-	_nSConnectionSelRunInNewThread = objc.RegisterName("runInNewThread")
-	_nSConnectionSelDispatchWithComponents = objc.RegisterName("dispatchWithComponents:")
-	_nSConnectionSelStatistics = objc.RegisterName("statistics")
-	_nSConnectionSelRequestTimeout = objc.RegisterName("requestTimeout")
-	_nSConnectionSelSetRequestTimeout = objc.RegisterName("setRequestTimeout:")
-	_nSConnectionSelReplyTimeout = objc.RegisterName("replyTimeout")
-	_nSConnectionSelSetReplyTimeout = objc.RegisterName("setReplyTimeout:")
-	_nSConnectionSelRootObject = objc.RegisterName("rootObject")
-	_nSConnectionSelSetRootObject = objc.RegisterName("setRootObject:")
-	_nSConnectionSelDelegate = objc.RegisterName("delegate")
-	_nSConnectionSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSConnectionSelIndependentConversationQueueing = objc.RegisterName("independentConversationQueueing")
-	_nSConnectionSelSetIndependentConversationQueueing = objc.RegisterName("setIndependentConversationQueueing:")
-	_nSConnectionSelIsValid = objc.RegisterName("isValid")
-	_nSConnectionSelRootProxy = objc.RegisterName("rootProxy")
-	_nSConnectionSelRequestModes = objc.RegisterName("requestModes")
-	_nSConnectionSelSendPort = objc.RegisterName("sendPort")
-	_nSConnectionSelReceivePort = objc.RegisterName("receivePort")
-	_nSConnectionSelMultipleThreadsEnabled = objc.RegisterName("multipleThreadsEnabled")
-	_nSConnectionSelRemoteObjects = objc.RegisterName("remoteObjects")
-	_nSConnectionSelLocalObjects = objc.RegisterName("localObjects")
+	_nSConnectionSelServiceConnectionWithNameRootObjectUsingNameServer          = objc.RegisterName("serviceConnectionWithName:rootObject:usingNameServer:")
+	_nSConnectionSelServiceConnectionWithNameRootObject                         = objc.RegisterName("serviceConnectionWithName:rootObject:")
+	_nSConnectionSelInvalidate                                                  = objc.RegisterName("invalidate")
+	_nSConnectionSelAddRequestMode                                              = objc.RegisterName("addRequestMode:")
+	_nSConnectionSelRemoveRequestMode                                           = objc.RegisterName("removeRequestMode:")
+	_nSConnectionSelRegisterName                                                = objc.RegisterName("registerName:")
+	_nSConnectionSelRegisterNameWithNameServer                                  = objc.RegisterName("registerName:withNameServer:")
+	_nSConnectionSelConnectionWithReceivePortSendPort                           = objc.RegisterName("connectionWithReceivePort:sendPort:")
+	_nSConnectionSelCurrentConversation                                         = objc.RegisterName("currentConversation")
+	_nSConnectionSelInitWithReceivePortSendPort                                 = objc.RegisterName("initWithReceivePort:sendPort:")
+	_nSConnectionSelEnableMultipleThreads                                       = objc.RegisterName("enableMultipleThreads")
+	_nSConnectionSelAddRunLoop                                                  = objc.RegisterName("addRunLoop:")
+	_nSConnectionSelRemoveRunLoop                                               = objc.RegisterName("removeRunLoop:")
+	_nSConnectionSelRunInNewThread                                              = objc.RegisterName("runInNewThread")
+	_nSConnectionSelDispatchWithComponents                                      = objc.RegisterName("dispatchWithComponents:")
+	_nSConnectionSelStatistics                                                  = objc.RegisterName("statistics")
+	_nSConnectionSelRequestTimeout                                              = objc.RegisterName("requestTimeout")
+	_nSConnectionSelSetRequestTimeout                                           = objc.RegisterName("setRequestTimeout:")
+	_nSConnectionSelReplyTimeout                                                = objc.RegisterName("replyTimeout")
+	_nSConnectionSelSetReplyTimeout                                             = objc.RegisterName("setReplyTimeout:")
+	_nSConnectionSelRootObject                                                  = objc.RegisterName("rootObject")
+	_nSConnectionSelSetRootObject                                               = objc.RegisterName("setRootObject:")
+	_nSConnectionSelDelegate                                                    = objc.RegisterName("delegate")
+	_nSConnectionSelSetDelegate                                                 = objc.RegisterName("setDelegate:")
+	_nSConnectionSelIndependentConversationQueueing                             = objc.RegisterName("independentConversationQueueing")
+	_nSConnectionSelSetIndependentConversationQueueing                          = objc.RegisterName("setIndependentConversationQueueing:")
+	_nSConnectionSelIsValid                                                     = objc.RegisterName("isValid")
+	_nSConnectionSelRootProxy                                                   = objc.RegisterName("rootProxy")
+	_nSConnectionSelRequestModes                                                = objc.RegisterName("requestModes")
+	_nSConnectionSelSendPort                                                    = objc.RegisterName("sendPort")
+	_nSConnectionSelReceivePort                                                 = objc.RegisterName("receivePort")
+	_nSConnectionSelMultipleThreadsEnabled                                      = objc.RegisterName("multipleThreadsEnabled")
+	_nSConnectionSelRemoteObjects                                               = objc.RegisterName("remoteObjects")
+	_nSConnectionSelLocalObjects                                                = objc.RegisterName("localObjects")
 )
 
 func NSConnectionFromID(id objc.ID) *NSConnection {
@@ -71,53 +71,69 @@ func NSConnectionFromID(id objc.ID) *NSConnection {
 
 func NSConnectionAllConnections() *NSArray[*NSConnection] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSConnection), _nSConnectionSelAllConnections)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSConnection](_ret)
 }
 
 // Deprecated: since macOS 10.6.
 func NSConnectionDefaultConnection() *NSConnection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSConnection), _nSConnectionSelDefaultConnection)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSConnectionFromID(_ret)
 }
 
 // Deprecated: since macOS 10.6.
 func NSConnectionConnectionWithRegisteredNameHost(name *NSString, hostName *NSString) *NSConnection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSConnection), _nSConnectionSelConnectionWithRegisteredNameHost, name.Ptr(), hostName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSConnectionFromID(_ret)
 }
 
 // Deprecated: since macOS 10.6.
 func NSConnectionConnectionWithRegisteredNameHostUsingNameServer(name *NSString, hostName *NSString, server *NSPortNameServer) *NSConnection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSConnection), _nSConnectionSelConnectionWithRegisteredNameHostUsingNameServer, name.Ptr(), hostName.Ptr(), server.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSConnectionFromID(_ret)
 }
 
 // Deprecated: since macOS 10.6.
 func NSConnectionRootProxyForConnectionWithRegisteredNameHost(name *NSString, hostName *NSString) *NSDistantObject {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSConnection), _nSConnectionSelRootProxyForConnectionWithRegisteredNameHost, name.Ptr(), hostName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDistantObjectFromID(_ret)
 }
 
 func NSConnectionRootProxyForConnectionWithRegisteredNameHostUsingNameServer(name *NSString, hostName *NSString, server *NSPortNameServer) *NSDistantObject {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSConnection), _nSConnectionSelRootProxyForConnectionWithRegisteredNameHostUsingNameServer, name.Ptr(), hostName.Ptr(), server.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDistantObjectFromID(_ret)
 }
 
 func NSConnectionServiceConnectionWithNameRootObjectUsingNameServer(name *NSString, root objc.ID, server *NSPortNameServer) *NSConnection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSConnection), _nSConnectionSelServiceConnectionWithNameRootObjectUsingNameServer, name.Ptr(), root, server.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSConnectionFromID(_ret)
 }
 
 func NSConnectionServiceConnectionWithNameRootObject(name *NSString, root objc.ID) *NSConnection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSConnection), _nSConnectionSelServiceConnectionWithNameRootObject, name.Ptr(), root)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSConnectionFromID(_ret)
 }
 
@@ -145,7 +161,9 @@ func (o *NSConnection) RegisterNameWithNameServer(name *NSString, server *NSPort
 
 func NSConnectionConnectionWithReceivePortSendPort(receivePort *NSPort, sendPort *NSPort) *NSConnection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSConnection), _nSConnectionSelConnectionWithReceivePortSendPort, receivePort.Ptr(), sendPort.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSConnectionFromID(_ret)
 }
 
@@ -156,7 +174,9 @@ func NSConnectionCurrentConversation() objc.ID {
 
 func (o *NSConnection) InitWithReceivePortSendPort(receivePort *NSPort, sendPort *NSPort) *NSConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSConnectionSelInitWithReceivePortSendPort, receivePort.Ptr(), sendPort.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSConnectionFromID(_ret)
 }
 
@@ -182,7 +202,9 @@ func (o *NSConnection) DispatchWithComponents(components *NSArray[objc.ID]) {
 
 func (o *NSConnection) Statistics() *NSDictionary[*NSString, *NSNumber] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSConnectionSelStatistics)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDictionaryFromID[*NSString, *NSNumber](_ret)
 }
 
@@ -238,25 +260,33 @@ func (o *NSConnection) IsValid() bool {
 
 func (o *NSConnection) RootProxy() *NSDistantObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSConnectionSelRootProxy)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDistantObjectFromID(_ret)
 }
 
 func (o *NSConnection) RequestModes() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSConnectionSelRequestModes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSConnection) SendPort() *NSPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSConnectionSelSendPort)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPortFromID(_ret)
 }
 
 func (o *NSConnection) ReceivePort() *NSPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSConnectionSelReceivePort)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPortFromID(_ret)
 }
 
@@ -274,4 +304,3 @@ func (o *NSConnection) LocalObjects() *NSArray[objc.ID] {
 	_ret := objc.Send[*NSArray[objc.ID]](o.Ptr(), _nSConnectionSelLocalObjects)
 	return _ret
 }
-

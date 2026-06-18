@@ -19,7 +19,9 @@ type MTRClusterOtaSoftwareUpdateProvider struct {
 }
 
 // Unwrap returns the underlying [raw.MTRClusterOtaSoftwareUpdateProvider].
-func (x *MTRClusterOtaSoftwareUpdateProvider) Unwrap() *raw.MTRClusterOtaSoftwareUpdateProvider { return x.inner }
+func (x *MTRClusterOtaSoftwareUpdateProvider) Unwrap() *raw.MTRClusterOtaSoftwareUpdateProvider {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -97,11 +99,17 @@ func (x *MTRClusterOtaSoftwareUpdateProvider) NotifyUpdateAppliedWithParamsExpec
 	x.inner.NotifyUpdateAppliedWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
 }
 
-func (x *MTRClusterOtaSoftwareUpdateProvider) asMTRClusterOTASoftwareUpdateProvider() *raw.MTRClusterOTASoftwareUpdateProvider { return &x.inner.MTRClusterOTASoftwareUpdateProvider }
+func (x *MTRClusterOtaSoftwareUpdateProvider) asMTRClusterOTASoftwareUpdateProvider() *raw.MTRClusterOTASoftwareUpdateProvider {
+	return &x.inner.MTRClusterOTASoftwareUpdateProvider
+}
 
-func (x *MTRClusterOtaSoftwareUpdateProvider) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRClusterOTASoftwareUpdateProvider.MTRGenericCluster }
+func (x *MTRClusterOtaSoftwareUpdateProvider) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRClusterOTASoftwareUpdateProvider.MTRGenericCluster
+}
 
-func (x *MTRClusterOtaSoftwareUpdateProvider) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRClusterOTASoftwareUpdateProvider.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterOtaSoftwareUpdateProvider) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRClusterOTASoftwareUpdateProvider.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterOtaSoftwareUpdateProviderable is the interface implemented by [MTRClusterOtaSoftwareUpdateProvider], for mocking and DI.
 type MTRClusterOtaSoftwareUpdateProviderable interface {
@@ -112,4 +120,3 @@ type MTRClusterOtaSoftwareUpdateProviderable interface {
 }
 
 var _ MTRClusterOtaSoftwareUpdateProviderable = (*MTRClusterOtaSoftwareUpdateProvider)(nil)
-

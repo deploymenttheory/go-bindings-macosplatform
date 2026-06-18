@@ -16,28 +16,28 @@ type INPerson struct {
 }
 
 var (
-	_clsINPerson = _objcClass("INPerson")
-	_iNPersonSelInitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifier = objc.RegisterName("initWithPersonHandle:nameComponents:displayName:image:contactIdentifier:customIdentifier:")
-	_iNPersonSelInitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierRelationship = objc.RegisterName("initWithPersonHandle:nameComponents:displayName:image:contactIdentifier:customIdentifier:relationship:")
-	_iNPersonSelInitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsMe = objc.RegisterName("initWithPersonHandle:nameComponents:displayName:image:contactIdentifier:customIdentifier:isMe:")
-	_iNPersonSelInitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsMeSuggestionType = objc.RegisterName("initWithPersonHandle:nameComponents:displayName:image:contactIdentifier:customIdentifier:isMe:suggestionType:")
+	_clsINPerson                                                                                                                     = _objcClass("INPerson")
+	_iNPersonSelInitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifier                                  = objc.RegisterName("initWithPersonHandle:nameComponents:displayName:image:contactIdentifier:customIdentifier:")
+	_iNPersonSelInitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierRelationship                      = objc.RegisterName("initWithPersonHandle:nameComponents:displayName:image:contactIdentifier:customIdentifier:relationship:")
+	_iNPersonSelInitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsMe                              = objc.RegisterName("initWithPersonHandle:nameComponents:displayName:image:contactIdentifier:customIdentifier:isMe:")
+	_iNPersonSelInitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsMeSuggestionType                = objc.RegisterName("initWithPersonHandle:nameComponents:displayName:image:contactIdentifier:customIdentifier:isMe:suggestionType:")
 	_iNPersonSelInitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsContactSuggestionSuggestionType = objc.RegisterName("initWithPersonHandle:nameComponents:displayName:image:contactIdentifier:customIdentifier:isContactSuggestion:suggestionType:")
-	_iNPersonSelPersonHandle = objc.RegisterName("personHandle")
-	_iNPersonSelNameComponents = objc.RegisterName("nameComponents")
-	_iNPersonSelDisplayName = objc.RegisterName("displayName")
-	_iNPersonSelImage = objc.RegisterName("image")
-	_iNPersonSelContactIdentifier = objc.RegisterName("contactIdentifier")
-	_iNPersonSelCustomIdentifier = objc.RegisterName("customIdentifier")
-	_iNPersonSelRelationship = objc.RegisterName("relationship")
-	_iNPersonSelIsContactSuggestion = objc.RegisterName("isContactSuggestion")
-	_iNPersonSelInitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierAliasesSuggestionType = objc.RegisterName("initWithPersonHandle:nameComponents:displayName:image:contactIdentifier:customIdentifier:aliases:suggestionType:")
-	_iNPersonSelAliases = objc.RegisterName("aliases")
-	_iNPersonSelSuggestionType = objc.RegisterName("suggestionType")
-	_iNPersonSelIsMe = objc.RegisterName("isMe")
-	_iNPersonSelInitWithHandleNameComponentsContactIdentifier = objc.RegisterName("initWithHandle:nameComponents:contactIdentifier:")
-	_iNPersonSelInitWithHandleDisplayNameContactIdentifier = objc.RegisterName("initWithHandle:displayName:contactIdentifier:")
-	_iNPersonSelInitWithHandleNameComponentsDisplayNameImageContactIdentifier = objc.RegisterName("initWithHandle:nameComponents:displayName:image:contactIdentifier:")
-	_iNPersonSelHandle = objc.RegisterName("handle")
+	_iNPersonSelPersonHandle                                                                                                         = objc.RegisterName("personHandle")
+	_iNPersonSelNameComponents                                                                                                       = objc.RegisterName("nameComponents")
+	_iNPersonSelDisplayName                                                                                                          = objc.RegisterName("displayName")
+	_iNPersonSelImage                                                                                                                = objc.RegisterName("image")
+	_iNPersonSelContactIdentifier                                                                                                    = objc.RegisterName("contactIdentifier")
+	_iNPersonSelCustomIdentifier                                                                                                     = objc.RegisterName("customIdentifier")
+	_iNPersonSelRelationship                                                                                                         = objc.RegisterName("relationship")
+	_iNPersonSelIsContactSuggestion                                                                                                  = objc.RegisterName("isContactSuggestion")
+	_iNPersonSelInitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierAliasesSuggestionType             = objc.RegisterName("initWithPersonHandle:nameComponents:displayName:image:contactIdentifier:customIdentifier:aliases:suggestionType:")
+	_iNPersonSelAliases                                                                                                              = objc.RegisterName("aliases")
+	_iNPersonSelSuggestionType                                                                                                       = objc.RegisterName("suggestionType")
+	_iNPersonSelIsMe                                                                                                                 = objc.RegisterName("isMe")
+	_iNPersonSelInitWithHandleNameComponentsContactIdentifier                                                                        = objc.RegisterName("initWithHandle:nameComponents:contactIdentifier:")
+	_iNPersonSelInitWithHandleDisplayNameContactIdentifier                                                                           = objc.RegisterName("initWithHandle:displayName:contactIdentifier:")
+	_iNPersonSelInitWithHandleNameComponentsDisplayNameImageContactIdentifier                                                        = objc.RegisterName("initWithHandle:nameComponents:displayName:image:contactIdentifier:")
+	_iNPersonSelHandle                                                                                                               = objc.RegisterName("handle")
 )
 
 func INPersonFromID(id objc.ID) *INPerson {
@@ -52,73 +52,97 @@ func INPersonFromID(id objc.ID) *INPerson {
 
 func (o *INPerson) InitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifier(personHandle *INPersonHandle, nameComponents *foundation.NSPersonNameComponents, displayName *foundation.NSString, image *INImage, contactIdentifier *foundation.NSString, customIdentifier *foundation.NSString) *INPerson {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonSelInitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifier, personHandle.Ptr(), nameComponents.Ptr(), displayName.Ptr(), image.Ptr(), contactIdentifier.Ptr(), customIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INPersonFromID(_ret)
 }
 
 func (o *INPerson) InitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierRelationship(personHandle *INPersonHandle, nameComponents *foundation.NSPersonNameComponents, displayName *foundation.NSString, image *INImage, contactIdentifier *foundation.NSString, customIdentifier *foundation.NSString, relationship *foundation.NSString) *INPerson {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonSelInitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierRelationship, personHandle.Ptr(), nameComponents.Ptr(), displayName.Ptr(), image.Ptr(), contactIdentifier.Ptr(), customIdentifier.Ptr(), relationship.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INPersonFromID(_ret)
 }
 
 func (o *INPerson) InitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsMe(personHandle *INPersonHandle, nameComponents *foundation.NSPersonNameComponents, displayName *foundation.NSString, image *INImage, contactIdentifier *foundation.NSString, customIdentifier *foundation.NSString, isMe bool) *INPerson {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonSelInitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsMe, personHandle.Ptr(), nameComponents.Ptr(), displayName.Ptr(), image.Ptr(), contactIdentifier.Ptr(), customIdentifier.Ptr(), isMe)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INPersonFromID(_ret)
 }
 
 func (o *INPerson) InitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsMeSuggestionType(personHandle *INPersonHandle, nameComponents *foundation.NSPersonNameComponents, displayName *foundation.NSString, image *INImage, contactIdentifier *foundation.NSString, customIdentifier *foundation.NSString, isMe bool, suggestionType INPersonSuggestionType) *INPerson {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonSelInitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsMeSuggestionType, personHandle.Ptr(), nameComponents.Ptr(), displayName.Ptr(), image.Ptr(), contactIdentifier.Ptr(), customIdentifier.Ptr(), isMe, suggestionType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INPersonFromID(_ret)
 }
 
 func (o *INPerson) InitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsContactSuggestionSuggestionType(personHandle *INPersonHandle, nameComponents *foundation.NSPersonNameComponents, displayName *foundation.NSString, image *INImage, contactIdentifier *foundation.NSString, customIdentifier *foundation.NSString, isContactSuggestion bool, suggestionType INPersonSuggestionType) *INPerson {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonSelInitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsContactSuggestionSuggestionType, personHandle.Ptr(), nameComponents.Ptr(), displayName.Ptr(), image.Ptr(), contactIdentifier.Ptr(), customIdentifier.Ptr(), isContactSuggestion, suggestionType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INPersonFromID(_ret)
 }
 
 func (o *INPerson) PersonHandle() *INPersonHandle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonSelPersonHandle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INPersonHandleFromID(_ret)
 }
 
 func (o *INPerson) NameComponents() *foundation.NSPersonNameComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonSelNameComponents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPersonNameComponentsFromID(_ret)
 }
 
 func (o *INPerson) DisplayName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonSelDisplayName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INPerson) Image() *INImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonSelImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INImageFromID(_ret)
 }
 
 func (o *INPerson) ContactIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonSelContactIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INPerson) CustomIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonSelCustomIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INPerson) Relationship() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonSelRelationship)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -129,13 +153,17 @@ func (o *INPerson) IsContactSuggestion() bool {
 
 func (o *INPerson) InitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierAliasesSuggestionType(personHandle *INPersonHandle, nameComponents *foundation.NSPersonNameComponents, displayName *foundation.NSString, image *INImage, contactIdentifier *foundation.NSString, customIdentifier *foundation.NSString, aliases *foundation.NSArray[*INPersonHandle], suggestionType INPersonSuggestionType) *INPerson {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonSelInitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierAliasesSuggestionType, personHandle.Ptr(), nameComponents.Ptr(), displayName.Ptr(), image.Ptr(), contactIdentifier.Ptr(), customIdentifier.Ptr(), aliases.Ptr(), suggestionType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INPersonFromID(_ret)
 }
 
 func (o *INPerson) Aliases() *foundation.NSArray[*INPersonHandle] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonSelAliases)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*INPersonHandle](_ret)
 }
 
@@ -152,28 +180,35 @@ func (o *INPerson) IsMe() bool {
 // Deprecated: Use the designated initializer instead
 func (o *INPerson) InitWithHandleNameComponentsContactIdentifier(handle *foundation.NSString, nameComponents *foundation.NSPersonNameComponents, contactIdentifier *foundation.NSString) *INPerson {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonSelInitWithHandleNameComponentsContactIdentifier, handle.Ptr(), nameComponents.Ptr(), contactIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INPersonFromID(_ret)
 }
 
 // Deprecated: Use the designated initializer instead
 func (o *INPerson) InitWithHandleDisplayNameContactIdentifier(handle *foundation.NSString, displayName *foundation.NSString, contactIdentifier *foundation.NSString) *INPerson {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonSelInitWithHandleDisplayNameContactIdentifier, handle.Ptr(), displayName.Ptr(), contactIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INPersonFromID(_ret)
 }
 
 // Deprecated: Use the designated initializer instead
 func (o *INPerson) InitWithHandleNameComponentsDisplayNameImageContactIdentifier(handle *foundation.NSString, nameComponents *foundation.NSPersonNameComponents, displayName *foundation.NSString, image *INImage, contactIdentifier *foundation.NSString) *INPerson {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonSelInitWithHandleNameComponentsDisplayNameImageContactIdentifier, handle.Ptr(), nameComponents.Ptr(), displayName.Ptr(), image.Ptr(), contactIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INPersonFromID(_ret)
 }
 
 // Deprecated: Use personHandle instead
 func (o *INPerson) Handle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonSelHandle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

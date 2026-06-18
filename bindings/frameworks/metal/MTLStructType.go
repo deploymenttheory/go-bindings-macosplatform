@@ -16,9 +16,9 @@ type MTLStructType struct {
 }
 
 var (
-	_clsMTLStructType = _objcClass("MTLStructType")
+	_clsMTLStructType             = _objcClass("MTLStructType")
 	_mTLStructTypeSelMemberByName = objc.RegisterName("memberByName:")
-	_mTLStructTypeSelMembers = objc.RegisterName("members")
+	_mTLStructTypeSelMembers      = objc.RegisterName("members")
 )
 
 func MTLStructTypeFromID(id objc.ID) *MTLStructType {
@@ -33,13 +33,16 @@ func MTLStructTypeFromID(id objc.ID) *MTLStructType {
 
 func (o *MTLStructType) MemberByName(name *foundation.NSString) *MTLStructMember {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLStructTypeSelMemberByName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLStructMemberFromID(_ret)
 }
 
 func (o *MTLStructType) Members() *foundation.NSArray[*MTLStructMember] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLStructTypeSelMembers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MTLStructMember](_ret)
 }
-

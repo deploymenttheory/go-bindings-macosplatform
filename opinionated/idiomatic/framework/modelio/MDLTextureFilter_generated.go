@@ -155,4 +155,3 @@ type TextureFilterable interface {
 }
 
 var _ TextureFilterable = (*TextureFilter)(nil)
-

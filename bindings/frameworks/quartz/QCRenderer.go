@@ -20,16 +20,16 @@ type QCRenderer struct {
 }
 
 var (
-	_clsQCRenderer = _objcClass("QCRenderer")
-	_qCRendererSelInitWithCompositionColorSpace = objc.RegisterName("initWithComposition:colorSpace:")
+	_clsQCRenderer                                                   = _objcClass("QCRenderer")
+	_qCRendererSelInitWithCompositionColorSpace                      = objc.RegisterName("initWithComposition:colorSpace:")
 	_qCRendererSelInitWithCGLContextPixelFormatColorSpaceComposition = objc.RegisterName("initWithCGLContext:pixelFormat:colorSpace:composition:")
-	_qCRendererSelInitOffScreenWithSizeColorSpaceComposition = objc.RegisterName("initOffScreenWithSize:colorSpace:composition:")
-	_qCRendererSelInitWithOpenGLContextPixelFormatFile = objc.RegisterName("initWithOpenGLContext:pixelFormat:file:")
-	_qCRendererSelRenderAtTimeArguments = objc.RegisterName("renderAtTime:arguments:")
-	_qCRendererSelRenderingTimeForTimeArguments = objc.RegisterName("renderingTimeForTime:arguments:")
-	_qCRendererSelComposition = objc.RegisterName("composition")
-	_qCRendererSelSnapshotImage = objc.RegisterName("snapshotImage")
-	_qCRendererSelCreateSnapshotImageOfType = objc.RegisterName("createSnapshotImageOfType:")
+	_qCRendererSelInitOffScreenWithSizeColorSpaceComposition         = objc.RegisterName("initOffScreenWithSize:colorSpace:composition:")
+	_qCRendererSelInitWithOpenGLContextPixelFormatFile               = objc.RegisterName("initWithOpenGLContext:pixelFormat:file:")
+	_qCRendererSelRenderAtTimeArguments                              = objc.RegisterName("renderAtTime:arguments:")
+	_qCRendererSelRenderingTimeForTimeArguments                      = objc.RegisterName("renderingTimeForTime:arguments:")
+	_qCRendererSelComposition                                        = objc.RegisterName("composition")
+	_qCRendererSelSnapshotImage                                      = objc.RegisterName("snapshotImage")
+	_qCRendererSelCreateSnapshotImageOfType                          = objc.RegisterName("createSnapshotImageOfType:")
 )
 
 func QCRendererFromID(id objc.ID) *QCRenderer {
@@ -74,13 +74,17 @@ func (o *QCRenderer) RenderingTimeForTimeArguments(time_ float64, arguments *fou
 
 func (o *QCRenderer) Composition() *QCComposition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCRendererSelComposition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return QCCompositionFromID(_ret)
 }
 
 func (o *QCRenderer) SnapshotImage() *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCRendererSelSnapshotImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSImageFromID(_ret)
 }
 
@@ -88,4 +92,3 @@ func (o *QCRenderer) CreateSnapshotImageOfType(type_ *foundation.NSString) objc.
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCRendererSelCreateSnapshotImageOfType, type_.Ptr())
 	return _ret
 }
-

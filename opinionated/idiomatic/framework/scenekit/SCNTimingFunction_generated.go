@@ -41,4 +41,3 @@ type TimingFunctionable interface {
 }
 
 var _ TimingFunctionable = (*TimingFunction)(nil)
-

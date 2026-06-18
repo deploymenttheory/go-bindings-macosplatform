@@ -16,7 +16,9 @@ type CollectionViewDiffableDataSource struct {
 }
 
 // Unwrap returns the underlying [raw.NSCollectionViewDiffableDataSource].
-func (x *CollectionViewDiffableDataSource) Unwrap() *raw.NSCollectionViewDiffableDataSource[objc.ID, objc.ID] { return x.inner }
+func (x *CollectionViewDiffableDataSource) Unwrap() *raw.NSCollectionViewDiffableDataSource[objc.ID, objc.ID] {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -86,4 +88,3 @@ type CollectionViewDiffableDataSourceable interface {
 }
 
 var _ CollectionViewDiffableDataSourceable = (*CollectionViewDiffableDataSource)(nil)
-

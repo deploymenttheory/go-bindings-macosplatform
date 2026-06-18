@@ -47,4 +47,3 @@ type PolylineRendererProvider interface {
 type ShapeProvider interface {
 	asShape() *raw.MKShape
 }
-

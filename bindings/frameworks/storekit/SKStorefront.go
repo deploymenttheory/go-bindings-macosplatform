@@ -17,9 +17,9 @@ type SKStorefront struct {
 }
 
 var (
-	_clsSKStorefront = _objcClass("SKStorefront")
+	_clsSKStorefront            = _objcClass("SKStorefront")
 	_sKStorefrontSelCountryCode = objc.RegisterName("countryCode")
-	_sKStorefrontSelIdentifier = objc.RegisterName("identifier")
+	_sKStorefrontSelIdentifier  = objc.RegisterName("identifier")
 )
 
 func SKStorefrontFromID(id objc.ID) *SKStorefront {
@@ -35,14 +35,17 @@ func SKStorefrontFromID(id objc.ID) *SKStorefront {
 // Deprecated: Use 'Storefront.countryCode'.
 func (o *SKStorefront) CountryCode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKStorefrontSelCountryCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Deprecated: Use 'Storefront.id'.
 func (o *SKStorefront) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKStorefrontSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

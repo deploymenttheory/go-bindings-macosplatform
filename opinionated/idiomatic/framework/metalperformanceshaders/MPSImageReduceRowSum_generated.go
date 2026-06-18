@@ -76,11 +76,17 @@ func (x *ImageReduceRowSum) WithLabel(label string) *ImageReduceRowSum {
 	return x
 }
 
-func (x *ImageReduceRowSum) asImageReduceUnary() *mpsimage.MPSImageReduceUnary { return &x.inner.MPSImageReduceUnary }
+func (x *ImageReduceRowSum) asImageReduceUnary() *mpsimage.MPSImageReduceUnary {
+	return &x.inner.MPSImageReduceUnary
+}
 
-func (x *ImageReduceRowSum) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel }
+func (x *ImageReduceRowSum) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
+	return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel
+}
 
-func (x *ImageReduceRowSum) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel }
+func (x *ImageReduceRowSum) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel
+}
 
 // ImageReduceRowSumable is the interface implemented by [ImageReduceRowSum], for mocking and DI.
 type ImageReduceRowSumable interface {
@@ -94,4 +100,3 @@ type ImageReduceRowSumable interface {
 }
 
 var _ ImageReduceRowSumable = (*ImageReduceRowSum)(nil)
-

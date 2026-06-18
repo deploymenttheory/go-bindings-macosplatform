@@ -85,4 +85,3 @@ type DataPointValueable interface {
 }
 
 var _ DataPointValueable = (*DataPointValue)(nil)
-

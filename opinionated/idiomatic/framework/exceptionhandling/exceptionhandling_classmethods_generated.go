@@ -16,4 +16,3 @@ func DefaultExceptionHandler() *ExceptionHandler {
 	}
 	return &ExceptionHandler{inner: _r}
 }
-

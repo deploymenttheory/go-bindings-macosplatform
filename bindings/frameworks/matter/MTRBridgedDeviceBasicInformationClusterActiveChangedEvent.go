@@ -16,8 +16,8 @@ type MTRBridgedDeviceBasicInformationClusterActiveChangedEvent struct {
 }
 
 var (
-	_clsMTRBridgedDeviceBasicInformationClusterActiveChangedEvent = _objcClass("MTRBridgedDeviceBasicInformationClusterActiveChangedEvent")
-	_mTRBridgedDeviceBasicInformationClusterActiveChangedEventSelPromisedActiveDuration = objc.RegisterName("promisedActiveDuration")
+	_clsMTRBridgedDeviceBasicInformationClusterActiveChangedEvent                          = _objcClass("MTRBridgedDeviceBasicInformationClusterActiveChangedEvent")
+	_mTRBridgedDeviceBasicInformationClusterActiveChangedEventSelPromisedActiveDuration    = objc.RegisterName("promisedActiveDuration")
 	_mTRBridgedDeviceBasicInformationClusterActiveChangedEventSelSetPromisedActiveDuration = objc.RegisterName("setPromisedActiveDuration:")
 )
 
@@ -33,11 +33,12 @@ func MTRBridgedDeviceBasicInformationClusterActiveChangedEventFromID(id objc.ID)
 
 func (o *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) PromisedActiveDuration() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBridgedDeviceBasicInformationClusterActiveChangedEventSelPromisedActiveDuration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) SetPromisedActiveDuration(promisedActiveDuration *foundation.NSNumber) {
 	o.Ptr().Send(_mTRBridgedDeviceBasicInformationClusterActiveChangedEventSelSetPromisedActiveDuration, promisedActiveDuration.Ptr())
 }
-

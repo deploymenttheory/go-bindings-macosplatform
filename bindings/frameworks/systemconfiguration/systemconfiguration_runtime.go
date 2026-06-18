@@ -14,8 +14,8 @@ import (
 
 var (
 	_systemconfigurationLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce               sync.Once
+	_failedSymbols          = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -48,172 +48,490 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("SCBondInterfaceCopyAll", func() { purego.RegisterLibFunc(&_fnSCBondInterfaceCopyAll, _systemconfigurationLib, "SCBondInterfaceCopyAll") })
-	_register("SCBondInterfaceCopyAvailableMemberInterfaces", func() { purego.RegisterLibFunc(&_fnSCBondInterfaceCopyAvailableMemberInterfaces, _systemconfigurationLib, "SCBondInterfaceCopyAvailableMemberInterfaces") })
-	_register("SCBondInterfaceCopyStatus", func() { purego.RegisterLibFunc(&_fnSCBondInterfaceCopyStatus, _systemconfigurationLib, "SCBondInterfaceCopyStatus") })
-	_register("SCBondInterfaceCreate", func() { purego.RegisterLibFunc(&_fnSCBondInterfaceCreate, _systemconfigurationLib, "SCBondInterfaceCreate") })
-	_register("SCBondInterfaceGetMemberInterfaces", func() { purego.RegisterLibFunc(&_fnSCBondInterfaceGetMemberInterfaces, _systemconfigurationLib, "SCBondInterfaceGetMemberInterfaces") })
-	_register("SCBondInterfaceGetOptions", func() { purego.RegisterLibFunc(&_fnSCBondInterfaceGetOptions, _systemconfigurationLib, "SCBondInterfaceGetOptions") })
-	_register("SCBondInterfaceRemove", func() { purego.RegisterLibFunc(&_fnSCBondInterfaceRemove, _systemconfigurationLib, "SCBondInterfaceRemove") })
-	_register("SCBondInterfaceSetLocalizedDisplayName", func() { purego.RegisterLibFunc(&_fnSCBondInterfaceSetLocalizedDisplayName, _systemconfigurationLib, "SCBondInterfaceSetLocalizedDisplayName") })
-	_register("SCBondInterfaceSetMemberInterfaces", func() { purego.RegisterLibFunc(&_fnSCBondInterfaceSetMemberInterfaces, _systemconfigurationLib, "SCBondInterfaceSetMemberInterfaces") })
-	_register("SCBondInterfaceSetOptions", func() { purego.RegisterLibFunc(&_fnSCBondInterfaceSetOptions, _systemconfigurationLib, "SCBondInterfaceSetOptions") })
-	_register("SCBondStatusGetInterfaceStatus", func() { purego.RegisterLibFunc(&_fnSCBondStatusGetInterfaceStatus, _systemconfigurationLib, "SCBondStatusGetInterfaceStatus") })
-	_register("SCBondStatusGetMemberInterfaces", func() { purego.RegisterLibFunc(&_fnSCBondStatusGetMemberInterfaces, _systemconfigurationLib, "SCBondStatusGetMemberInterfaces") })
-	_register("SCBondStatusGetTypeID", func() { purego.RegisterLibFunc(&_fnSCBondStatusGetTypeID, _systemconfigurationLib, "SCBondStatusGetTypeID") })
+	_register("SCBondInterfaceCopyAll", func() {
+		purego.RegisterLibFunc(&_fnSCBondInterfaceCopyAll, _systemconfigurationLib, "SCBondInterfaceCopyAll")
+	})
+	_register("SCBondInterfaceCopyAvailableMemberInterfaces", func() {
+		purego.RegisterLibFunc(&_fnSCBondInterfaceCopyAvailableMemberInterfaces, _systemconfigurationLib, "SCBondInterfaceCopyAvailableMemberInterfaces")
+	})
+	_register("SCBondInterfaceCopyStatus", func() {
+		purego.RegisterLibFunc(&_fnSCBondInterfaceCopyStatus, _systemconfigurationLib, "SCBondInterfaceCopyStatus")
+	})
+	_register("SCBondInterfaceCreate", func() {
+		purego.RegisterLibFunc(&_fnSCBondInterfaceCreate, _systemconfigurationLib, "SCBondInterfaceCreate")
+	})
+	_register("SCBondInterfaceGetMemberInterfaces", func() {
+		purego.RegisterLibFunc(&_fnSCBondInterfaceGetMemberInterfaces, _systemconfigurationLib, "SCBondInterfaceGetMemberInterfaces")
+	})
+	_register("SCBondInterfaceGetOptions", func() {
+		purego.RegisterLibFunc(&_fnSCBondInterfaceGetOptions, _systemconfigurationLib, "SCBondInterfaceGetOptions")
+	})
+	_register("SCBondInterfaceRemove", func() {
+		purego.RegisterLibFunc(&_fnSCBondInterfaceRemove, _systemconfigurationLib, "SCBondInterfaceRemove")
+	})
+	_register("SCBondInterfaceSetLocalizedDisplayName", func() {
+		purego.RegisterLibFunc(&_fnSCBondInterfaceSetLocalizedDisplayName, _systemconfigurationLib, "SCBondInterfaceSetLocalizedDisplayName")
+	})
+	_register("SCBondInterfaceSetMemberInterfaces", func() {
+		purego.RegisterLibFunc(&_fnSCBondInterfaceSetMemberInterfaces, _systemconfigurationLib, "SCBondInterfaceSetMemberInterfaces")
+	})
+	_register("SCBondInterfaceSetOptions", func() {
+		purego.RegisterLibFunc(&_fnSCBondInterfaceSetOptions, _systemconfigurationLib, "SCBondInterfaceSetOptions")
+	})
+	_register("SCBondStatusGetInterfaceStatus", func() {
+		purego.RegisterLibFunc(&_fnSCBondStatusGetInterfaceStatus, _systemconfigurationLib, "SCBondStatusGetInterfaceStatus")
+	})
+	_register("SCBondStatusGetMemberInterfaces", func() {
+		purego.RegisterLibFunc(&_fnSCBondStatusGetMemberInterfaces, _systemconfigurationLib, "SCBondStatusGetMemberInterfaces")
+	})
+	_register("SCBondStatusGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnSCBondStatusGetTypeID, _systemconfigurationLib, "SCBondStatusGetTypeID")
+	})
 	_register("SCCopyLastError", func() { purego.RegisterLibFunc(&_fnSCCopyLastError, _systemconfigurationLib, "SCCopyLastError") })
-	_register("SCDynamicStoreAddTemporaryValue", func() { purego.RegisterLibFunc(&_fnSCDynamicStoreAddTemporaryValue, _systemconfigurationLib, "SCDynamicStoreAddTemporaryValue") })
-	_register("SCDynamicStoreAddValue", func() { purego.RegisterLibFunc(&_fnSCDynamicStoreAddValue, _systemconfigurationLib, "SCDynamicStoreAddValue") })
-	_register("SCDynamicStoreCopyComputerName", func() { purego.RegisterLibFunc(&_fnSCDynamicStoreCopyComputerName, _systemconfigurationLib, "SCDynamicStoreCopyComputerName") })
-	_register("SCDynamicStoreCopyConsoleUser", func() { purego.RegisterLibFunc(&_fnSCDynamicStoreCopyConsoleUser, _systemconfigurationLib, "SCDynamicStoreCopyConsoleUser") })
-	_register("SCDynamicStoreCopyKeyList", func() { purego.RegisterLibFunc(&_fnSCDynamicStoreCopyKeyList, _systemconfigurationLib, "SCDynamicStoreCopyKeyList") })
-	_register("SCDynamicStoreCopyLocalHostName", func() { purego.RegisterLibFunc(&_fnSCDynamicStoreCopyLocalHostName, _systemconfigurationLib, "SCDynamicStoreCopyLocalHostName") })
-	_register("SCDynamicStoreCopyLocation", func() { purego.RegisterLibFunc(&_fnSCDynamicStoreCopyLocation, _systemconfigurationLib, "SCDynamicStoreCopyLocation") })
-	_register("SCDynamicStoreCopyMultiple", func() { purego.RegisterLibFunc(&_fnSCDynamicStoreCopyMultiple, _systemconfigurationLib, "SCDynamicStoreCopyMultiple") })
-	_register("SCDynamicStoreCopyNotifiedKeys", func() { purego.RegisterLibFunc(&_fnSCDynamicStoreCopyNotifiedKeys, _systemconfigurationLib, "SCDynamicStoreCopyNotifiedKeys") })
-	_register("SCDynamicStoreCopyProxies", func() { purego.RegisterLibFunc(&_fnSCDynamicStoreCopyProxies, _systemconfigurationLib, "SCDynamicStoreCopyProxies") })
-	_register("SCDynamicStoreCopyValue", func() { purego.RegisterLibFunc(&_fnSCDynamicStoreCopyValue, _systemconfigurationLib, "SCDynamicStoreCopyValue") })
-	_register("SCDynamicStoreCreate", func() { purego.RegisterLibFunc(&_fnSCDynamicStoreCreate, _systemconfigurationLib, "SCDynamicStoreCreate") })
-	_register("SCDynamicStoreCreateRunLoopSource", func() { purego.RegisterLibFunc(&_fnSCDynamicStoreCreateRunLoopSource, _systemconfigurationLib, "SCDynamicStoreCreateRunLoopSource") })
-	_register("SCDynamicStoreCreateWithOptions", func() { purego.RegisterLibFunc(&_fnSCDynamicStoreCreateWithOptions, _systemconfigurationLib, "SCDynamicStoreCreateWithOptions") })
-	_register("SCDynamicStoreGetTypeID", func() { purego.RegisterLibFunc(&_fnSCDynamicStoreGetTypeID, _systemconfigurationLib, "SCDynamicStoreGetTypeID") })
-	_register("SCDynamicStoreKeyCreateComputerName", func() { purego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateComputerName, _systemconfigurationLib, "SCDynamicStoreKeyCreateComputerName") })
-	_register("SCDynamicStoreKeyCreateConsoleUser", func() { purego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateConsoleUser, _systemconfigurationLib, "SCDynamicStoreKeyCreateConsoleUser") })
-	_register("SCDynamicStoreKeyCreateHostNames", func() { purego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateHostNames, _systemconfigurationLib, "SCDynamicStoreKeyCreateHostNames") })
-	_register("SCDynamicStoreKeyCreateLocation", func() { purego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateLocation, _systemconfigurationLib, "SCDynamicStoreKeyCreateLocation") })
-	_register("SCDynamicStoreKeyCreateNetworkGlobalEntity", func() { purego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateNetworkGlobalEntity, _systemconfigurationLib, "SCDynamicStoreKeyCreateNetworkGlobalEntity") })
-	_register("SCDynamicStoreKeyCreateNetworkInterface", func() { purego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateNetworkInterface, _systemconfigurationLib, "SCDynamicStoreKeyCreateNetworkInterface") })
-	_register("SCDynamicStoreKeyCreateNetworkInterfaceEntity", func() { purego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateNetworkInterfaceEntity, _systemconfigurationLib, "SCDynamicStoreKeyCreateNetworkInterfaceEntity") })
-	_register("SCDynamicStoreKeyCreateNetworkServiceEntity", func() { purego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateNetworkServiceEntity, _systemconfigurationLib, "SCDynamicStoreKeyCreateNetworkServiceEntity") })
-	_register("SCDynamicStoreKeyCreateProxies", func() { purego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateProxies, _systemconfigurationLib, "SCDynamicStoreKeyCreateProxies") })
-	_register("SCDynamicStoreNotifyValue", func() { purego.RegisterLibFunc(&_fnSCDynamicStoreNotifyValue, _systemconfigurationLib, "SCDynamicStoreNotifyValue") })
-	_register("SCDynamicStoreRemoveValue", func() { purego.RegisterLibFunc(&_fnSCDynamicStoreRemoveValue, _systemconfigurationLib, "SCDynamicStoreRemoveValue") })
-	_register("SCDynamicStoreSetDispatchQueue", func() { purego.RegisterLibFunc(&_fnSCDynamicStoreSetDispatchQueue, _systemconfigurationLib, "SCDynamicStoreSetDispatchQueue") })
-	_register("SCDynamicStoreSetMultiple", func() { purego.RegisterLibFunc(&_fnSCDynamicStoreSetMultiple, _systemconfigurationLib, "SCDynamicStoreSetMultiple") })
-	_register("SCDynamicStoreSetNotificationKeys", func() { purego.RegisterLibFunc(&_fnSCDynamicStoreSetNotificationKeys, _systemconfigurationLib, "SCDynamicStoreSetNotificationKeys") })
-	_register("SCDynamicStoreSetValue", func() { purego.RegisterLibFunc(&_fnSCDynamicStoreSetValue, _systemconfigurationLib, "SCDynamicStoreSetValue") })
+	_register("SCDynamicStoreAddTemporaryValue", func() {
+		purego.RegisterLibFunc(&_fnSCDynamicStoreAddTemporaryValue, _systemconfigurationLib, "SCDynamicStoreAddTemporaryValue")
+	})
+	_register("SCDynamicStoreAddValue", func() {
+		purego.RegisterLibFunc(&_fnSCDynamicStoreAddValue, _systemconfigurationLib, "SCDynamicStoreAddValue")
+	})
+	_register("SCDynamicStoreCopyComputerName", func() {
+		purego.RegisterLibFunc(&_fnSCDynamicStoreCopyComputerName, _systemconfigurationLib, "SCDynamicStoreCopyComputerName")
+	})
+	_register("SCDynamicStoreCopyConsoleUser", func() {
+		purego.RegisterLibFunc(&_fnSCDynamicStoreCopyConsoleUser, _systemconfigurationLib, "SCDynamicStoreCopyConsoleUser")
+	})
+	_register("SCDynamicStoreCopyKeyList", func() {
+		purego.RegisterLibFunc(&_fnSCDynamicStoreCopyKeyList, _systemconfigurationLib, "SCDynamicStoreCopyKeyList")
+	})
+	_register("SCDynamicStoreCopyLocalHostName", func() {
+		purego.RegisterLibFunc(&_fnSCDynamicStoreCopyLocalHostName, _systemconfigurationLib, "SCDynamicStoreCopyLocalHostName")
+	})
+	_register("SCDynamicStoreCopyLocation", func() {
+		purego.RegisterLibFunc(&_fnSCDynamicStoreCopyLocation, _systemconfigurationLib, "SCDynamicStoreCopyLocation")
+	})
+	_register("SCDynamicStoreCopyMultiple", func() {
+		purego.RegisterLibFunc(&_fnSCDynamicStoreCopyMultiple, _systemconfigurationLib, "SCDynamicStoreCopyMultiple")
+	})
+	_register("SCDynamicStoreCopyNotifiedKeys", func() {
+		purego.RegisterLibFunc(&_fnSCDynamicStoreCopyNotifiedKeys, _systemconfigurationLib, "SCDynamicStoreCopyNotifiedKeys")
+	})
+	_register("SCDynamicStoreCopyProxies", func() {
+		purego.RegisterLibFunc(&_fnSCDynamicStoreCopyProxies, _systemconfigurationLib, "SCDynamicStoreCopyProxies")
+	})
+	_register("SCDynamicStoreCopyValue", func() {
+		purego.RegisterLibFunc(&_fnSCDynamicStoreCopyValue, _systemconfigurationLib, "SCDynamicStoreCopyValue")
+	})
+	_register("SCDynamicStoreCreate", func() {
+		purego.RegisterLibFunc(&_fnSCDynamicStoreCreate, _systemconfigurationLib, "SCDynamicStoreCreate")
+	})
+	_register("SCDynamicStoreCreateRunLoopSource", func() {
+		purego.RegisterLibFunc(&_fnSCDynamicStoreCreateRunLoopSource, _systemconfigurationLib, "SCDynamicStoreCreateRunLoopSource")
+	})
+	_register("SCDynamicStoreCreateWithOptions", func() {
+		purego.RegisterLibFunc(&_fnSCDynamicStoreCreateWithOptions, _systemconfigurationLib, "SCDynamicStoreCreateWithOptions")
+	})
+	_register("SCDynamicStoreGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnSCDynamicStoreGetTypeID, _systemconfigurationLib, "SCDynamicStoreGetTypeID")
+	})
+	_register("SCDynamicStoreKeyCreateComputerName", func() {
+		purego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateComputerName, _systemconfigurationLib, "SCDynamicStoreKeyCreateComputerName")
+	})
+	_register("SCDynamicStoreKeyCreateConsoleUser", func() {
+		purego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateConsoleUser, _systemconfigurationLib, "SCDynamicStoreKeyCreateConsoleUser")
+	})
+	_register("SCDynamicStoreKeyCreateHostNames", func() {
+		purego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateHostNames, _systemconfigurationLib, "SCDynamicStoreKeyCreateHostNames")
+	})
+	_register("SCDynamicStoreKeyCreateLocation", func() {
+		purego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateLocation, _systemconfigurationLib, "SCDynamicStoreKeyCreateLocation")
+	})
+	_register("SCDynamicStoreKeyCreateNetworkGlobalEntity", func() {
+		purego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateNetworkGlobalEntity, _systemconfigurationLib, "SCDynamicStoreKeyCreateNetworkGlobalEntity")
+	})
+	_register("SCDynamicStoreKeyCreateNetworkInterface", func() {
+		purego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateNetworkInterface, _systemconfigurationLib, "SCDynamicStoreKeyCreateNetworkInterface")
+	})
+	_register("SCDynamicStoreKeyCreateNetworkInterfaceEntity", func() {
+		purego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateNetworkInterfaceEntity, _systemconfigurationLib, "SCDynamicStoreKeyCreateNetworkInterfaceEntity")
+	})
+	_register("SCDynamicStoreKeyCreateNetworkServiceEntity", func() {
+		purego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateNetworkServiceEntity, _systemconfigurationLib, "SCDynamicStoreKeyCreateNetworkServiceEntity")
+	})
+	_register("SCDynamicStoreKeyCreateProxies", func() {
+		purego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateProxies, _systemconfigurationLib, "SCDynamicStoreKeyCreateProxies")
+	})
+	_register("SCDynamicStoreNotifyValue", func() {
+		purego.RegisterLibFunc(&_fnSCDynamicStoreNotifyValue, _systemconfigurationLib, "SCDynamicStoreNotifyValue")
+	})
+	_register("SCDynamicStoreRemoveValue", func() {
+		purego.RegisterLibFunc(&_fnSCDynamicStoreRemoveValue, _systemconfigurationLib, "SCDynamicStoreRemoveValue")
+	})
+	_register("SCDynamicStoreSetDispatchQueue", func() {
+		purego.RegisterLibFunc(&_fnSCDynamicStoreSetDispatchQueue, _systemconfigurationLib, "SCDynamicStoreSetDispatchQueue")
+	})
+	_register("SCDynamicStoreSetMultiple", func() {
+		purego.RegisterLibFunc(&_fnSCDynamicStoreSetMultiple, _systemconfigurationLib, "SCDynamicStoreSetMultiple")
+	})
+	_register("SCDynamicStoreSetNotificationKeys", func() {
+		purego.RegisterLibFunc(&_fnSCDynamicStoreSetNotificationKeys, _systemconfigurationLib, "SCDynamicStoreSetNotificationKeys")
+	})
+	_register("SCDynamicStoreSetValue", func() {
+		purego.RegisterLibFunc(&_fnSCDynamicStoreSetValue, _systemconfigurationLib, "SCDynamicStoreSetValue")
+	})
 	_register("SCError", func() { purego.RegisterLibFunc(&_fnSCError, _systemconfigurationLib, "SCError") })
 	_register("SCErrorString", func() { purego.RegisterLibFunc(&_fnSCErrorString, _systemconfigurationLib, "SCErrorString") })
-	_register("SCNetworkCheckReachabilityByAddress", func() { purego.RegisterLibFunc(&_fnSCNetworkCheckReachabilityByAddress, _systemconfigurationLib, "SCNetworkCheckReachabilityByAddress") })
-	_register("SCNetworkCheckReachabilityByName", func() { purego.RegisterLibFunc(&_fnSCNetworkCheckReachabilityByName, _systemconfigurationLib, "SCNetworkCheckReachabilityByName") })
-	_register("SCNetworkConnectionCopyExtendedStatus", func() { purego.RegisterLibFunc(&_fnSCNetworkConnectionCopyExtendedStatus, _systemconfigurationLib, "SCNetworkConnectionCopyExtendedStatus") })
-	_register("SCNetworkConnectionCopyServiceID", func() { purego.RegisterLibFunc(&_fnSCNetworkConnectionCopyServiceID, _systemconfigurationLib, "SCNetworkConnectionCopyServiceID") })
-	_register("SCNetworkConnectionCopyStatistics", func() { purego.RegisterLibFunc(&_fnSCNetworkConnectionCopyStatistics, _systemconfigurationLib, "SCNetworkConnectionCopyStatistics") })
-	_register("SCNetworkConnectionCopyUserOptions", func() { purego.RegisterLibFunc(&_fnSCNetworkConnectionCopyUserOptions, _systemconfigurationLib, "SCNetworkConnectionCopyUserOptions") })
-	_register("SCNetworkConnectionCopyUserPreferences", func() { purego.RegisterLibFunc(&_fnSCNetworkConnectionCopyUserPreferences, _systemconfigurationLib, "SCNetworkConnectionCopyUserPreferences") })
-	_register("SCNetworkConnectionCreateWithServiceID", func() { purego.RegisterLibFunc(&_fnSCNetworkConnectionCreateWithServiceID, _systemconfigurationLib, "SCNetworkConnectionCreateWithServiceID") })
-	_register("SCNetworkConnectionGetStatus", func() { purego.RegisterLibFunc(&_fnSCNetworkConnectionGetStatus, _systemconfigurationLib, "SCNetworkConnectionGetStatus") })
-	_register("SCNetworkConnectionGetTypeID", func() { purego.RegisterLibFunc(&_fnSCNetworkConnectionGetTypeID, _systemconfigurationLib, "SCNetworkConnectionGetTypeID") })
-	_register("SCNetworkConnectionScheduleWithRunLoop", func() { purego.RegisterLibFunc(&_fnSCNetworkConnectionScheduleWithRunLoop, _systemconfigurationLib, "SCNetworkConnectionScheduleWithRunLoop") })
-	_register("SCNetworkConnectionSetDispatchQueue", func() { purego.RegisterLibFunc(&_fnSCNetworkConnectionSetDispatchQueue, _systemconfigurationLib, "SCNetworkConnectionSetDispatchQueue") })
-	_register("SCNetworkConnectionStart", func() { purego.RegisterLibFunc(&_fnSCNetworkConnectionStart, _systemconfigurationLib, "SCNetworkConnectionStart") })
-	_register("SCNetworkConnectionStop", func() { purego.RegisterLibFunc(&_fnSCNetworkConnectionStop, _systemconfigurationLib, "SCNetworkConnectionStop") })
-	_register("SCNetworkConnectionUnscheduleFromRunLoop", func() { purego.RegisterLibFunc(&_fnSCNetworkConnectionUnscheduleFromRunLoop, _systemconfigurationLib, "SCNetworkConnectionUnscheduleFromRunLoop") })
-	_register("SCNetworkInterfaceCopyAll", func() { purego.RegisterLibFunc(&_fnSCNetworkInterfaceCopyAll, _systemconfigurationLib, "SCNetworkInterfaceCopyAll") })
-	_register("SCNetworkInterfaceCopyMTU", func() { purego.RegisterLibFunc(&_fnSCNetworkInterfaceCopyMTU, _systemconfigurationLib, "SCNetworkInterfaceCopyMTU") })
-	_register("SCNetworkInterfaceCopyMediaOptions", func() { purego.RegisterLibFunc(&_fnSCNetworkInterfaceCopyMediaOptions, _systemconfigurationLib, "SCNetworkInterfaceCopyMediaOptions") })
-	_register("SCNetworkInterfaceCopyMediaSubTypeOptions", func() { purego.RegisterLibFunc(&_fnSCNetworkInterfaceCopyMediaSubTypeOptions, _systemconfigurationLib, "SCNetworkInterfaceCopyMediaSubTypeOptions") })
-	_register("SCNetworkInterfaceCopyMediaSubTypes", func() { purego.RegisterLibFunc(&_fnSCNetworkInterfaceCopyMediaSubTypes, _systemconfigurationLib, "SCNetworkInterfaceCopyMediaSubTypes") })
-	_register("SCNetworkInterfaceCreateWithInterface", func() { purego.RegisterLibFunc(&_fnSCNetworkInterfaceCreateWithInterface, _systemconfigurationLib, "SCNetworkInterfaceCreateWithInterface") })
-	_register("SCNetworkInterfaceForceConfigurationRefresh", func() { purego.RegisterLibFunc(&_fnSCNetworkInterfaceForceConfigurationRefresh, _systemconfigurationLib, "SCNetworkInterfaceForceConfigurationRefresh") })
-	_register("SCNetworkInterfaceGetBSDName", func() { purego.RegisterLibFunc(&_fnSCNetworkInterfaceGetBSDName, _systemconfigurationLib, "SCNetworkInterfaceGetBSDName") })
-	_register("SCNetworkInterfaceGetConfiguration", func() { purego.RegisterLibFunc(&_fnSCNetworkInterfaceGetConfiguration, _systemconfigurationLib, "SCNetworkInterfaceGetConfiguration") })
-	_register("SCNetworkInterfaceGetExtendedConfiguration", func() { purego.RegisterLibFunc(&_fnSCNetworkInterfaceGetExtendedConfiguration, _systemconfigurationLib, "SCNetworkInterfaceGetExtendedConfiguration") })
-	_register("SCNetworkInterfaceGetHardwareAddressString", func() { purego.RegisterLibFunc(&_fnSCNetworkInterfaceGetHardwareAddressString, _systemconfigurationLib, "SCNetworkInterfaceGetHardwareAddressString") })
-	_register("SCNetworkInterfaceGetInterface", func() { purego.RegisterLibFunc(&_fnSCNetworkInterfaceGetInterface, _systemconfigurationLib, "SCNetworkInterfaceGetInterface") })
-	_register("SCNetworkInterfaceGetInterfaceType", func() { purego.RegisterLibFunc(&_fnSCNetworkInterfaceGetInterfaceType, _systemconfigurationLib, "SCNetworkInterfaceGetInterfaceType") })
-	_register("SCNetworkInterfaceGetLocalizedDisplayName", func() { purego.RegisterLibFunc(&_fnSCNetworkInterfaceGetLocalizedDisplayName, _systemconfigurationLib, "SCNetworkInterfaceGetLocalizedDisplayName") })
-	_register("SCNetworkInterfaceGetSupportedInterfaceTypes", func() { purego.RegisterLibFunc(&_fnSCNetworkInterfaceGetSupportedInterfaceTypes, _systemconfigurationLib, "SCNetworkInterfaceGetSupportedInterfaceTypes") })
-	_register("SCNetworkInterfaceGetSupportedProtocolTypes", func() { purego.RegisterLibFunc(&_fnSCNetworkInterfaceGetSupportedProtocolTypes, _systemconfigurationLib, "SCNetworkInterfaceGetSupportedProtocolTypes") })
-	_register("SCNetworkInterfaceGetTypeID", func() { purego.RegisterLibFunc(&_fnSCNetworkInterfaceGetTypeID, _systemconfigurationLib, "SCNetworkInterfaceGetTypeID") })
-	_register("SCNetworkInterfaceRefreshConfiguration", func() { purego.RegisterLibFunc(&_fnSCNetworkInterfaceRefreshConfiguration, _systemconfigurationLib, "SCNetworkInterfaceRefreshConfiguration") })
-	_register("SCNetworkInterfaceSetConfiguration", func() { purego.RegisterLibFunc(&_fnSCNetworkInterfaceSetConfiguration, _systemconfigurationLib, "SCNetworkInterfaceSetConfiguration") })
-	_register("SCNetworkInterfaceSetExtendedConfiguration", func() { purego.RegisterLibFunc(&_fnSCNetworkInterfaceSetExtendedConfiguration, _systemconfigurationLib, "SCNetworkInterfaceSetExtendedConfiguration") })
-	_register("SCNetworkInterfaceSetMTU", func() { purego.RegisterLibFunc(&_fnSCNetworkInterfaceSetMTU, _systemconfigurationLib, "SCNetworkInterfaceSetMTU") })
-	_register("SCNetworkInterfaceSetMediaOptions", func() { purego.RegisterLibFunc(&_fnSCNetworkInterfaceSetMediaOptions, _systemconfigurationLib, "SCNetworkInterfaceSetMediaOptions") })
-	_register("SCNetworkProtocolGetConfiguration", func() { purego.RegisterLibFunc(&_fnSCNetworkProtocolGetConfiguration, _systemconfigurationLib, "SCNetworkProtocolGetConfiguration") })
-	_register("SCNetworkProtocolGetEnabled", func() { purego.RegisterLibFunc(&_fnSCNetworkProtocolGetEnabled, _systemconfigurationLib, "SCNetworkProtocolGetEnabled") })
-	_register("SCNetworkProtocolGetProtocolType", func() { purego.RegisterLibFunc(&_fnSCNetworkProtocolGetProtocolType, _systemconfigurationLib, "SCNetworkProtocolGetProtocolType") })
-	_register("SCNetworkProtocolGetTypeID", func() { purego.RegisterLibFunc(&_fnSCNetworkProtocolGetTypeID, _systemconfigurationLib, "SCNetworkProtocolGetTypeID") })
-	_register("SCNetworkProtocolSetConfiguration", func() { purego.RegisterLibFunc(&_fnSCNetworkProtocolSetConfiguration, _systemconfigurationLib, "SCNetworkProtocolSetConfiguration") })
-	_register("SCNetworkProtocolSetEnabled", func() { purego.RegisterLibFunc(&_fnSCNetworkProtocolSetEnabled, _systemconfigurationLib, "SCNetworkProtocolSetEnabled") })
-	_register("SCNetworkReachabilityCreateWithAddress", func() { purego.RegisterLibFunc(&_fnSCNetworkReachabilityCreateWithAddress, _systemconfigurationLib, "SCNetworkReachabilityCreateWithAddress") })
-	_register("SCNetworkReachabilityCreateWithAddressPair", func() { purego.RegisterLibFunc(&_fnSCNetworkReachabilityCreateWithAddressPair, _systemconfigurationLib, "SCNetworkReachabilityCreateWithAddressPair") })
-	_register("SCNetworkReachabilityCreateWithName", func() { purego.RegisterLibFunc(&_fnSCNetworkReachabilityCreateWithName, _systemconfigurationLib, "SCNetworkReachabilityCreateWithName") })
-	_register("SCNetworkReachabilityGetFlags", func() { purego.RegisterLibFunc(&_fnSCNetworkReachabilityGetFlags, _systemconfigurationLib, "SCNetworkReachabilityGetFlags") })
-	_register("SCNetworkReachabilityGetTypeID", func() { purego.RegisterLibFunc(&_fnSCNetworkReachabilityGetTypeID, _systemconfigurationLib, "SCNetworkReachabilityGetTypeID") })
-	_register("SCNetworkReachabilityScheduleWithRunLoop", func() { purego.RegisterLibFunc(&_fnSCNetworkReachabilityScheduleWithRunLoop, _systemconfigurationLib, "SCNetworkReachabilityScheduleWithRunLoop") })
-	_register("SCNetworkReachabilitySetCallback", func() { purego.RegisterLibFunc(&_fnSCNetworkReachabilitySetCallback, _systemconfigurationLib, "SCNetworkReachabilitySetCallback") })
-	_register("SCNetworkReachabilitySetDispatchQueue", func() { purego.RegisterLibFunc(&_fnSCNetworkReachabilitySetDispatchQueue, _systemconfigurationLib, "SCNetworkReachabilitySetDispatchQueue") })
-	_register("SCNetworkReachabilityUnscheduleFromRunLoop", func() { purego.RegisterLibFunc(&_fnSCNetworkReachabilityUnscheduleFromRunLoop, _systemconfigurationLib, "SCNetworkReachabilityUnscheduleFromRunLoop") })
-	_register("SCNetworkServiceAddProtocolType", func() { purego.RegisterLibFunc(&_fnSCNetworkServiceAddProtocolType, _systemconfigurationLib, "SCNetworkServiceAddProtocolType") })
-	_register("SCNetworkServiceCopy", func() { purego.RegisterLibFunc(&_fnSCNetworkServiceCopy, _systemconfigurationLib, "SCNetworkServiceCopy") })
-	_register("SCNetworkServiceCopyAll", func() { purego.RegisterLibFunc(&_fnSCNetworkServiceCopyAll, _systemconfigurationLib, "SCNetworkServiceCopyAll") })
-	_register("SCNetworkServiceCopyProtocol", func() { purego.RegisterLibFunc(&_fnSCNetworkServiceCopyProtocol, _systemconfigurationLib, "SCNetworkServiceCopyProtocol") })
-	_register("SCNetworkServiceCopyProtocols", func() { purego.RegisterLibFunc(&_fnSCNetworkServiceCopyProtocols, _systemconfigurationLib, "SCNetworkServiceCopyProtocols") })
-	_register("SCNetworkServiceCreate", func() { purego.RegisterLibFunc(&_fnSCNetworkServiceCreate, _systemconfigurationLib, "SCNetworkServiceCreate") })
-	_register("SCNetworkServiceEstablishDefaultConfiguration", func() { purego.RegisterLibFunc(&_fnSCNetworkServiceEstablishDefaultConfiguration, _systemconfigurationLib, "SCNetworkServiceEstablishDefaultConfiguration") })
-	_register("SCNetworkServiceGetEnabled", func() { purego.RegisterLibFunc(&_fnSCNetworkServiceGetEnabled, _systemconfigurationLib, "SCNetworkServiceGetEnabled") })
-	_register("SCNetworkServiceGetInterface", func() { purego.RegisterLibFunc(&_fnSCNetworkServiceGetInterface, _systemconfigurationLib, "SCNetworkServiceGetInterface") })
-	_register("SCNetworkServiceGetName", func() { purego.RegisterLibFunc(&_fnSCNetworkServiceGetName, _systemconfigurationLib, "SCNetworkServiceGetName") })
-	_register("SCNetworkServiceGetServiceID", func() { purego.RegisterLibFunc(&_fnSCNetworkServiceGetServiceID, _systemconfigurationLib, "SCNetworkServiceGetServiceID") })
-	_register("SCNetworkServiceGetTypeID", func() { purego.RegisterLibFunc(&_fnSCNetworkServiceGetTypeID, _systemconfigurationLib, "SCNetworkServiceGetTypeID") })
-	_register("SCNetworkServiceRemove", func() { purego.RegisterLibFunc(&_fnSCNetworkServiceRemove, _systemconfigurationLib, "SCNetworkServiceRemove") })
-	_register("SCNetworkServiceRemoveProtocolType", func() { purego.RegisterLibFunc(&_fnSCNetworkServiceRemoveProtocolType, _systemconfigurationLib, "SCNetworkServiceRemoveProtocolType") })
-	_register("SCNetworkServiceSetEnabled", func() { purego.RegisterLibFunc(&_fnSCNetworkServiceSetEnabled, _systemconfigurationLib, "SCNetworkServiceSetEnabled") })
-	_register("SCNetworkServiceSetName", func() { purego.RegisterLibFunc(&_fnSCNetworkServiceSetName, _systemconfigurationLib, "SCNetworkServiceSetName") })
-	_register("SCNetworkSetAddService", func() { purego.RegisterLibFunc(&_fnSCNetworkSetAddService, _systemconfigurationLib, "SCNetworkSetAddService") })
-	_register("SCNetworkSetContainsInterface", func() { purego.RegisterLibFunc(&_fnSCNetworkSetContainsInterface, _systemconfigurationLib, "SCNetworkSetContainsInterface") })
+	_register("SCNetworkCheckReachabilityByAddress", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkCheckReachabilityByAddress, _systemconfigurationLib, "SCNetworkCheckReachabilityByAddress")
+	})
+	_register("SCNetworkCheckReachabilityByName", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkCheckReachabilityByName, _systemconfigurationLib, "SCNetworkCheckReachabilityByName")
+	})
+	_register("SCNetworkConnectionCopyExtendedStatus", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkConnectionCopyExtendedStatus, _systemconfigurationLib, "SCNetworkConnectionCopyExtendedStatus")
+	})
+	_register("SCNetworkConnectionCopyServiceID", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkConnectionCopyServiceID, _systemconfigurationLib, "SCNetworkConnectionCopyServiceID")
+	})
+	_register("SCNetworkConnectionCopyStatistics", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkConnectionCopyStatistics, _systemconfigurationLib, "SCNetworkConnectionCopyStatistics")
+	})
+	_register("SCNetworkConnectionCopyUserOptions", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkConnectionCopyUserOptions, _systemconfigurationLib, "SCNetworkConnectionCopyUserOptions")
+	})
+	_register("SCNetworkConnectionCopyUserPreferences", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkConnectionCopyUserPreferences, _systemconfigurationLib, "SCNetworkConnectionCopyUserPreferences")
+	})
+	_register("SCNetworkConnectionCreateWithServiceID", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkConnectionCreateWithServiceID, _systemconfigurationLib, "SCNetworkConnectionCreateWithServiceID")
+	})
+	_register("SCNetworkConnectionGetStatus", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkConnectionGetStatus, _systemconfigurationLib, "SCNetworkConnectionGetStatus")
+	})
+	_register("SCNetworkConnectionGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkConnectionGetTypeID, _systemconfigurationLib, "SCNetworkConnectionGetTypeID")
+	})
+	_register("SCNetworkConnectionScheduleWithRunLoop", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkConnectionScheduleWithRunLoop, _systemconfigurationLib, "SCNetworkConnectionScheduleWithRunLoop")
+	})
+	_register("SCNetworkConnectionSetDispatchQueue", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkConnectionSetDispatchQueue, _systemconfigurationLib, "SCNetworkConnectionSetDispatchQueue")
+	})
+	_register("SCNetworkConnectionStart", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkConnectionStart, _systemconfigurationLib, "SCNetworkConnectionStart")
+	})
+	_register("SCNetworkConnectionStop", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkConnectionStop, _systemconfigurationLib, "SCNetworkConnectionStop")
+	})
+	_register("SCNetworkConnectionUnscheduleFromRunLoop", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkConnectionUnscheduleFromRunLoop, _systemconfigurationLib, "SCNetworkConnectionUnscheduleFromRunLoop")
+	})
+	_register("SCNetworkInterfaceCopyAll", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkInterfaceCopyAll, _systemconfigurationLib, "SCNetworkInterfaceCopyAll")
+	})
+	_register("SCNetworkInterfaceCopyMTU", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkInterfaceCopyMTU, _systemconfigurationLib, "SCNetworkInterfaceCopyMTU")
+	})
+	_register("SCNetworkInterfaceCopyMediaOptions", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkInterfaceCopyMediaOptions, _systemconfigurationLib, "SCNetworkInterfaceCopyMediaOptions")
+	})
+	_register("SCNetworkInterfaceCopyMediaSubTypeOptions", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkInterfaceCopyMediaSubTypeOptions, _systemconfigurationLib, "SCNetworkInterfaceCopyMediaSubTypeOptions")
+	})
+	_register("SCNetworkInterfaceCopyMediaSubTypes", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkInterfaceCopyMediaSubTypes, _systemconfigurationLib, "SCNetworkInterfaceCopyMediaSubTypes")
+	})
+	_register("SCNetworkInterfaceCreateWithInterface", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkInterfaceCreateWithInterface, _systemconfigurationLib, "SCNetworkInterfaceCreateWithInterface")
+	})
+	_register("SCNetworkInterfaceForceConfigurationRefresh", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkInterfaceForceConfigurationRefresh, _systemconfigurationLib, "SCNetworkInterfaceForceConfigurationRefresh")
+	})
+	_register("SCNetworkInterfaceGetBSDName", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkInterfaceGetBSDName, _systemconfigurationLib, "SCNetworkInterfaceGetBSDName")
+	})
+	_register("SCNetworkInterfaceGetConfiguration", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkInterfaceGetConfiguration, _systemconfigurationLib, "SCNetworkInterfaceGetConfiguration")
+	})
+	_register("SCNetworkInterfaceGetExtendedConfiguration", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkInterfaceGetExtendedConfiguration, _systemconfigurationLib, "SCNetworkInterfaceGetExtendedConfiguration")
+	})
+	_register("SCNetworkInterfaceGetHardwareAddressString", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkInterfaceGetHardwareAddressString, _systemconfigurationLib, "SCNetworkInterfaceGetHardwareAddressString")
+	})
+	_register("SCNetworkInterfaceGetInterface", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkInterfaceGetInterface, _systemconfigurationLib, "SCNetworkInterfaceGetInterface")
+	})
+	_register("SCNetworkInterfaceGetInterfaceType", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkInterfaceGetInterfaceType, _systemconfigurationLib, "SCNetworkInterfaceGetInterfaceType")
+	})
+	_register("SCNetworkInterfaceGetLocalizedDisplayName", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkInterfaceGetLocalizedDisplayName, _systemconfigurationLib, "SCNetworkInterfaceGetLocalizedDisplayName")
+	})
+	_register("SCNetworkInterfaceGetSupportedInterfaceTypes", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkInterfaceGetSupportedInterfaceTypes, _systemconfigurationLib, "SCNetworkInterfaceGetSupportedInterfaceTypes")
+	})
+	_register("SCNetworkInterfaceGetSupportedProtocolTypes", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkInterfaceGetSupportedProtocolTypes, _systemconfigurationLib, "SCNetworkInterfaceGetSupportedProtocolTypes")
+	})
+	_register("SCNetworkInterfaceGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkInterfaceGetTypeID, _systemconfigurationLib, "SCNetworkInterfaceGetTypeID")
+	})
+	_register("SCNetworkInterfaceRefreshConfiguration", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkInterfaceRefreshConfiguration, _systemconfigurationLib, "SCNetworkInterfaceRefreshConfiguration")
+	})
+	_register("SCNetworkInterfaceSetConfiguration", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkInterfaceSetConfiguration, _systemconfigurationLib, "SCNetworkInterfaceSetConfiguration")
+	})
+	_register("SCNetworkInterfaceSetExtendedConfiguration", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkInterfaceSetExtendedConfiguration, _systemconfigurationLib, "SCNetworkInterfaceSetExtendedConfiguration")
+	})
+	_register("SCNetworkInterfaceSetMTU", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkInterfaceSetMTU, _systemconfigurationLib, "SCNetworkInterfaceSetMTU")
+	})
+	_register("SCNetworkInterfaceSetMediaOptions", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkInterfaceSetMediaOptions, _systemconfigurationLib, "SCNetworkInterfaceSetMediaOptions")
+	})
+	_register("SCNetworkProtocolGetConfiguration", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkProtocolGetConfiguration, _systemconfigurationLib, "SCNetworkProtocolGetConfiguration")
+	})
+	_register("SCNetworkProtocolGetEnabled", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkProtocolGetEnabled, _systemconfigurationLib, "SCNetworkProtocolGetEnabled")
+	})
+	_register("SCNetworkProtocolGetProtocolType", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkProtocolGetProtocolType, _systemconfigurationLib, "SCNetworkProtocolGetProtocolType")
+	})
+	_register("SCNetworkProtocolGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkProtocolGetTypeID, _systemconfigurationLib, "SCNetworkProtocolGetTypeID")
+	})
+	_register("SCNetworkProtocolSetConfiguration", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkProtocolSetConfiguration, _systemconfigurationLib, "SCNetworkProtocolSetConfiguration")
+	})
+	_register("SCNetworkProtocolSetEnabled", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkProtocolSetEnabled, _systemconfigurationLib, "SCNetworkProtocolSetEnabled")
+	})
+	_register("SCNetworkReachabilityCreateWithAddress", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkReachabilityCreateWithAddress, _systemconfigurationLib, "SCNetworkReachabilityCreateWithAddress")
+	})
+	_register("SCNetworkReachabilityCreateWithAddressPair", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkReachabilityCreateWithAddressPair, _systemconfigurationLib, "SCNetworkReachabilityCreateWithAddressPair")
+	})
+	_register("SCNetworkReachabilityCreateWithName", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkReachabilityCreateWithName, _systemconfigurationLib, "SCNetworkReachabilityCreateWithName")
+	})
+	_register("SCNetworkReachabilityGetFlags", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkReachabilityGetFlags, _systemconfigurationLib, "SCNetworkReachabilityGetFlags")
+	})
+	_register("SCNetworkReachabilityGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkReachabilityGetTypeID, _systemconfigurationLib, "SCNetworkReachabilityGetTypeID")
+	})
+	_register("SCNetworkReachabilityScheduleWithRunLoop", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkReachabilityScheduleWithRunLoop, _systemconfigurationLib, "SCNetworkReachabilityScheduleWithRunLoop")
+	})
+	_register("SCNetworkReachabilitySetCallback", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkReachabilitySetCallback, _systemconfigurationLib, "SCNetworkReachabilitySetCallback")
+	})
+	_register("SCNetworkReachabilitySetDispatchQueue", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkReachabilitySetDispatchQueue, _systemconfigurationLib, "SCNetworkReachabilitySetDispatchQueue")
+	})
+	_register("SCNetworkReachabilityUnscheduleFromRunLoop", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkReachabilityUnscheduleFromRunLoop, _systemconfigurationLib, "SCNetworkReachabilityUnscheduleFromRunLoop")
+	})
+	_register("SCNetworkServiceAddProtocolType", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkServiceAddProtocolType, _systemconfigurationLib, "SCNetworkServiceAddProtocolType")
+	})
+	_register("SCNetworkServiceCopy", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkServiceCopy, _systemconfigurationLib, "SCNetworkServiceCopy")
+	})
+	_register("SCNetworkServiceCopyAll", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkServiceCopyAll, _systemconfigurationLib, "SCNetworkServiceCopyAll")
+	})
+	_register("SCNetworkServiceCopyProtocol", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkServiceCopyProtocol, _systemconfigurationLib, "SCNetworkServiceCopyProtocol")
+	})
+	_register("SCNetworkServiceCopyProtocols", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkServiceCopyProtocols, _systemconfigurationLib, "SCNetworkServiceCopyProtocols")
+	})
+	_register("SCNetworkServiceCreate", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkServiceCreate, _systemconfigurationLib, "SCNetworkServiceCreate")
+	})
+	_register("SCNetworkServiceEstablishDefaultConfiguration", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkServiceEstablishDefaultConfiguration, _systemconfigurationLib, "SCNetworkServiceEstablishDefaultConfiguration")
+	})
+	_register("SCNetworkServiceGetEnabled", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkServiceGetEnabled, _systemconfigurationLib, "SCNetworkServiceGetEnabled")
+	})
+	_register("SCNetworkServiceGetInterface", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkServiceGetInterface, _systemconfigurationLib, "SCNetworkServiceGetInterface")
+	})
+	_register("SCNetworkServiceGetName", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkServiceGetName, _systemconfigurationLib, "SCNetworkServiceGetName")
+	})
+	_register("SCNetworkServiceGetServiceID", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkServiceGetServiceID, _systemconfigurationLib, "SCNetworkServiceGetServiceID")
+	})
+	_register("SCNetworkServiceGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkServiceGetTypeID, _systemconfigurationLib, "SCNetworkServiceGetTypeID")
+	})
+	_register("SCNetworkServiceRemove", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkServiceRemove, _systemconfigurationLib, "SCNetworkServiceRemove")
+	})
+	_register("SCNetworkServiceRemoveProtocolType", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkServiceRemoveProtocolType, _systemconfigurationLib, "SCNetworkServiceRemoveProtocolType")
+	})
+	_register("SCNetworkServiceSetEnabled", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkServiceSetEnabled, _systemconfigurationLib, "SCNetworkServiceSetEnabled")
+	})
+	_register("SCNetworkServiceSetName", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkServiceSetName, _systemconfigurationLib, "SCNetworkServiceSetName")
+	})
+	_register("SCNetworkSetAddService", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkSetAddService, _systemconfigurationLib, "SCNetworkSetAddService")
+	})
+	_register("SCNetworkSetContainsInterface", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkSetContainsInterface, _systemconfigurationLib, "SCNetworkSetContainsInterface")
+	})
 	_register("SCNetworkSetCopy", func() { purego.RegisterLibFunc(&_fnSCNetworkSetCopy, _systemconfigurationLib, "SCNetworkSetCopy") })
-	_register("SCNetworkSetCopyAll", func() { purego.RegisterLibFunc(&_fnSCNetworkSetCopyAll, _systemconfigurationLib, "SCNetworkSetCopyAll") })
-	_register("SCNetworkSetCopyCurrent", func() { purego.RegisterLibFunc(&_fnSCNetworkSetCopyCurrent, _systemconfigurationLib, "SCNetworkSetCopyCurrent") })
-	_register("SCNetworkSetCopyServices", func() { purego.RegisterLibFunc(&_fnSCNetworkSetCopyServices, _systemconfigurationLib, "SCNetworkSetCopyServices") })
+	_register("SCNetworkSetCopyAll", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkSetCopyAll, _systemconfigurationLib, "SCNetworkSetCopyAll")
+	})
+	_register("SCNetworkSetCopyCurrent", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkSetCopyCurrent, _systemconfigurationLib, "SCNetworkSetCopyCurrent")
+	})
+	_register("SCNetworkSetCopyServices", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkSetCopyServices, _systemconfigurationLib, "SCNetworkSetCopyServices")
+	})
 	_register("SCNetworkSetCreate", func() { purego.RegisterLibFunc(&_fnSCNetworkSetCreate, _systemconfigurationLib, "SCNetworkSetCreate") })
-	_register("SCNetworkSetGetName", func() { purego.RegisterLibFunc(&_fnSCNetworkSetGetName, _systemconfigurationLib, "SCNetworkSetGetName") })
-	_register("SCNetworkSetGetServiceOrder", func() { purego.RegisterLibFunc(&_fnSCNetworkSetGetServiceOrder, _systemconfigurationLib, "SCNetworkSetGetServiceOrder") })
-	_register("SCNetworkSetGetSetID", func() { purego.RegisterLibFunc(&_fnSCNetworkSetGetSetID, _systemconfigurationLib, "SCNetworkSetGetSetID") })
-	_register("SCNetworkSetGetTypeID", func() { purego.RegisterLibFunc(&_fnSCNetworkSetGetTypeID, _systemconfigurationLib, "SCNetworkSetGetTypeID") })
+	_register("SCNetworkSetGetName", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkSetGetName, _systemconfigurationLib, "SCNetworkSetGetName")
+	})
+	_register("SCNetworkSetGetServiceOrder", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkSetGetServiceOrder, _systemconfigurationLib, "SCNetworkSetGetServiceOrder")
+	})
+	_register("SCNetworkSetGetSetID", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkSetGetSetID, _systemconfigurationLib, "SCNetworkSetGetSetID")
+	})
+	_register("SCNetworkSetGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkSetGetTypeID, _systemconfigurationLib, "SCNetworkSetGetTypeID")
+	})
 	_register("SCNetworkSetRemove", func() { purego.RegisterLibFunc(&_fnSCNetworkSetRemove, _systemconfigurationLib, "SCNetworkSetRemove") })
-	_register("SCNetworkSetRemoveService", func() { purego.RegisterLibFunc(&_fnSCNetworkSetRemoveService, _systemconfigurationLib, "SCNetworkSetRemoveService") })
-	_register("SCNetworkSetSetCurrent", func() { purego.RegisterLibFunc(&_fnSCNetworkSetSetCurrent, _systemconfigurationLib, "SCNetworkSetSetCurrent") })
-	_register("SCNetworkSetSetName", func() { purego.RegisterLibFunc(&_fnSCNetworkSetSetName, _systemconfigurationLib, "SCNetworkSetSetName") })
-	_register("SCNetworkSetSetServiceOrder", func() { purego.RegisterLibFunc(&_fnSCNetworkSetSetServiceOrder, _systemconfigurationLib, "SCNetworkSetSetServiceOrder") })
-	_register("SCPreferencesAddValue", func() { purego.RegisterLibFunc(&_fnSCPreferencesAddValue, _systemconfigurationLib, "SCPreferencesAddValue") })
-	_register("SCPreferencesApplyChanges", func() { purego.RegisterLibFunc(&_fnSCPreferencesApplyChanges, _systemconfigurationLib, "SCPreferencesApplyChanges") })
-	_register("SCPreferencesCommitChanges", func() { purego.RegisterLibFunc(&_fnSCPreferencesCommitChanges, _systemconfigurationLib, "SCPreferencesCommitChanges") })
-	_register("SCPreferencesCopyKeyList", func() { purego.RegisterLibFunc(&_fnSCPreferencesCopyKeyList, _systemconfigurationLib, "SCPreferencesCopyKeyList") })
-	_register("SCPreferencesCreate", func() { purego.RegisterLibFunc(&_fnSCPreferencesCreate, _systemconfigurationLib, "SCPreferencesCreate") })
-	_register("SCPreferencesCreateWithAuthorization", func() { purego.RegisterLibFunc(&_fnSCPreferencesCreateWithAuthorization, _systemconfigurationLib, "SCPreferencesCreateWithAuthorization") })
-	_register("SCPreferencesGetSignature", func() { purego.RegisterLibFunc(&_fnSCPreferencesGetSignature, _systemconfigurationLib, "SCPreferencesGetSignature") })
-	_register("SCPreferencesGetTypeID", func() { purego.RegisterLibFunc(&_fnSCPreferencesGetTypeID, _systemconfigurationLib, "SCPreferencesGetTypeID") })
-	_register("SCPreferencesGetValue", func() { purego.RegisterLibFunc(&_fnSCPreferencesGetValue, _systemconfigurationLib, "SCPreferencesGetValue") })
+	_register("SCNetworkSetRemoveService", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkSetRemoveService, _systemconfigurationLib, "SCNetworkSetRemoveService")
+	})
+	_register("SCNetworkSetSetCurrent", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkSetSetCurrent, _systemconfigurationLib, "SCNetworkSetSetCurrent")
+	})
+	_register("SCNetworkSetSetName", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkSetSetName, _systemconfigurationLib, "SCNetworkSetSetName")
+	})
+	_register("SCNetworkSetSetServiceOrder", func() {
+		purego.RegisterLibFunc(&_fnSCNetworkSetSetServiceOrder, _systemconfigurationLib, "SCNetworkSetSetServiceOrder")
+	})
+	_register("SCPreferencesAddValue", func() {
+		purego.RegisterLibFunc(&_fnSCPreferencesAddValue, _systemconfigurationLib, "SCPreferencesAddValue")
+	})
+	_register("SCPreferencesApplyChanges", func() {
+		purego.RegisterLibFunc(&_fnSCPreferencesApplyChanges, _systemconfigurationLib, "SCPreferencesApplyChanges")
+	})
+	_register("SCPreferencesCommitChanges", func() {
+		purego.RegisterLibFunc(&_fnSCPreferencesCommitChanges, _systemconfigurationLib, "SCPreferencesCommitChanges")
+	})
+	_register("SCPreferencesCopyKeyList", func() {
+		purego.RegisterLibFunc(&_fnSCPreferencesCopyKeyList, _systemconfigurationLib, "SCPreferencesCopyKeyList")
+	})
+	_register("SCPreferencesCreate", func() {
+		purego.RegisterLibFunc(&_fnSCPreferencesCreate, _systemconfigurationLib, "SCPreferencesCreate")
+	})
+	_register("SCPreferencesCreateWithAuthorization", func() {
+		purego.RegisterLibFunc(&_fnSCPreferencesCreateWithAuthorization, _systemconfigurationLib, "SCPreferencesCreateWithAuthorization")
+	})
+	_register("SCPreferencesGetSignature", func() {
+		purego.RegisterLibFunc(&_fnSCPreferencesGetSignature, _systemconfigurationLib, "SCPreferencesGetSignature")
+	})
+	_register("SCPreferencesGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnSCPreferencesGetTypeID, _systemconfigurationLib, "SCPreferencesGetTypeID")
+	})
+	_register("SCPreferencesGetValue", func() {
+		purego.RegisterLibFunc(&_fnSCPreferencesGetValue, _systemconfigurationLib, "SCPreferencesGetValue")
+	})
 	_register("SCPreferencesLock", func() { purego.RegisterLibFunc(&_fnSCPreferencesLock, _systemconfigurationLib, "SCPreferencesLock") })
-	_register("SCPreferencesPathCreateUniqueChild", func() { purego.RegisterLibFunc(&_fnSCPreferencesPathCreateUniqueChild, _systemconfigurationLib, "SCPreferencesPathCreateUniqueChild") })
-	_register("SCPreferencesPathGetLink", func() { purego.RegisterLibFunc(&_fnSCPreferencesPathGetLink, _systemconfigurationLib, "SCPreferencesPathGetLink") })
-	_register("SCPreferencesPathGetValue", func() { purego.RegisterLibFunc(&_fnSCPreferencesPathGetValue, _systemconfigurationLib, "SCPreferencesPathGetValue") })
-	_register("SCPreferencesPathRemoveValue", func() { purego.RegisterLibFunc(&_fnSCPreferencesPathRemoveValue, _systemconfigurationLib, "SCPreferencesPathRemoveValue") })
-	_register("SCPreferencesPathSetLink", func() { purego.RegisterLibFunc(&_fnSCPreferencesPathSetLink, _systemconfigurationLib, "SCPreferencesPathSetLink") })
-	_register("SCPreferencesPathSetValue", func() { purego.RegisterLibFunc(&_fnSCPreferencesPathSetValue, _systemconfigurationLib, "SCPreferencesPathSetValue") })
-	_register("SCPreferencesRemoveValue", func() { purego.RegisterLibFunc(&_fnSCPreferencesRemoveValue, _systemconfigurationLib, "SCPreferencesRemoveValue") })
-	_register("SCPreferencesScheduleWithRunLoop", func() { purego.RegisterLibFunc(&_fnSCPreferencesScheduleWithRunLoop, _systemconfigurationLib, "SCPreferencesScheduleWithRunLoop") })
-	_register("SCPreferencesSetCallback", func() { purego.RegisterLibFunc(&_fnSCPreferencesSetCallback, _systemconfigurationLib, "SCPreferencesSetCallback") })
-	_register("SCPreferencesSetComputerName", func() { purego.RegisterLibFunc(&_fnSCPreferencesSetComputerName, _systemconfigurationLib, "SCPreferencesSetComputerName") })
-	_register("SCPreferencesSetDispatchQueue", func() { purego.RegisterLibFunc(&_fnSCPreferencesSetDispatchQueue, _systemconfigurationLib, "SCPreferencesSetDispatchQueue") })
-	_register("SCPreferencesSetLocalHostName", func() { purego.RegisterLibFunc(&_fnSCPreferencesSetLocalHostName, _systemconfigurationLib, "SCPreferencesSetLocalHostName") })
-	_register("SCPreferencesSetValue", func() { purego.RegisterLibFunc(&_fnSCPreferencesSetValue, _systemconfigurationLib, "SCPreferencesSetValue") })
-	_register("SCPreferencesSynchronize", func() { purego.RegisterLibFunc(&_fnSCPreferencesSynchronize, _systemconfigurationLib, "SCPreferencesSynchronize") })
-	_register("SCPreferencesUnlock", func() { purego.RegisterLibFunc(&_fnSCPreferencesUnlock, _systemconfigurationLib, "SCPreferencesUnlock") })
-	_register("SCPreferencesUnscheduleFromRunLoop", func() { purego.RegisterLibFunc(&_fnSCPreferencesUnscheduleFromRunLoop, _systemconfigurationLib, "SCPreferencesUnscheduleFromRunLoop") })
-	_register("SCVLANInterfaceCopyAll", func() { purego.RegisterLibFunc(&_fnSCVLANInterfaceCopyAll, _systemconfigurationLib, "SCVLANInterfaceCopyAll") })
-	_register("SCVLANInterfaceCopyAvailablePhysicalInterfaces", func() { purego.RegisterLibFunc(&_fnSCVLANInterfaceCopyAvailablePhysicalInterfaces, _systemconfigurationLib, "SCVLANInterfaceCopyAvailablePhysicalInterfaces") })
-	_register("SCVLANInterfaceCreate", func() { purego.RegisterLibFunc(&_fnSCVLANInterfaceCreate, _systemconfigurationLib, "SCVLANInterfaceCreate") })
-	_register("SCVLANInterfaceGetOptions", func() { purego.RegisterLibFunc(&_fnSCVLANInterfaceGetOptions, _systemconfigurationLib, "SCVLANInterfaceGetOptions") })
-	_register("SCVLANInterfaceGetPhysicalInterface", func() { purego.RegisterLibFunc(&_fnSCVLANInterfaceGetPhysicalInterface, _systemconfigurationLib, "SCVLANInterfaceGetPhysicalInterface") })
-	_register("SCVLANInterfaceGetTag", func() { purego.RegisterLibFunc(&_fnSCVLANInterfaceGetTag, _systemconfigurationLib, "SCVLANInterfaceGetTag") })
-	_register("SCVLANInterfaceRemove", func() { purego.RegisterLibFunc(&_fnSCVLANInterfaceRemove, _systemconfigurationLib, "SCVLANInterfaceRemove") })
-	_register("SCVLANInterfaceSetLocalizedDisplayName", func() { purego.RegisterLibFunc(&_fnSCVLANInterfaceSetLocalizedDisplayName, _systemconfigurationLib, "SCVLANInterfaceSetLocalizedDisplayName") })
-	_register("SCVLANInterfaceSetOptions", func() { purego.RegisterLibFunc(&_fnSCVLANInterfaceSetOptions, _systemconfigurationLib, "SCVLANInterfaceSetOptions") })
-	_register("SCVLANInterfaceSetPhysicalInterfaceAndTag", func() { purego.RegisterLibFunc(&_fnSCVLANInterfaceSetPhysicalInterfaceAndTag, _systemconfigurationLib, "SCVLANInterfaceSetPhysicalInterfaceAndTag") })
+	_register("SCPreferencesPathCreateUniqueChild", func() {
+		purego.RegisterLibFunc(&_fnSCPreferencesPathCreateUniqueChild, _systemconfigurationLib, "SCPreferencesPathCreateUniqueChild")
+	})
+	_register("SCPreferencesPathGetLink", func() {
+		purego.RegisterLibFunc(&_fnSCPreferencesPathGetLink, _systemconfigurationLib, "SCPreferencesPathGetLink")
+	})
+	_register("SCPreferencesPathGetValue", func() {
+		purego.RegisterLibFunc(&_fnSCPreferencesPathGetValue, _systemconfigurationLib, "SCPreferencesPathGetValue")
+	})
+	_register("SCPreferencesPathRemoveValue", func() {
+		purego.RegisterLibFunc(&_fnSCPreferencesPathRemoveValue, _systemconfigurationLib, "SCPreferencesPathRemoveValue")
+	})
+	_register("SCPreferencesPathSetLink", func() {
+		purego.RegisterLibFunc(&_fnSCPreferencesPathSetLink, _systemconfigurationLib, "SCPreferencesPathSetLink")
+	})
+	_register("SCPreferencesPathSetValue", func() {
+		purego.RegisterLibFunc(&_fnSCPreferencesPathSetValue, _systemconfigurationLib, "SCPreferencesPathSetValue")
+	})
+	_register("SCPreferencesRemoveValue", func() {
+		purego.RegisterLibFunc(&_fnSCPreferencesRemoveValue, _systemconfigurationLib, "SCPreferencesRemoveValue")
+	})
+	_register("SCPreferencesScheduleWithRunLoop", func() {
+		purego.RegisterLibFunc(&_fnSCPreferencesScheduleWithRunLoop, _systemconfigurationLib, "SCPreferencesScheduleWithRunLoop")
+	})
+	_register("SCPreferencesSetCallback", func() {
+		purego.RegisterLibFunc(&_fnSCPreferencesSetCallback, _systemconfigurationLib, "SCPreferencesSetCallback")
+	})
+	_register("SCPreferencesSetComputerName", func() {
+		purego.RegisterLibFunc(&_fnSCPreferencesSetComputerName, _systemconfigurationLib, "SCPreferencesSetComputerName")
+	})
+	_register("SCPreferencesSetDispatchQueue", func() {
+		purego.RegisterLibFunc(&_fnSCPreferencesSetDispatchQueue, _systemconfigurationLib, "SCPreferencesSetDispatchQueue")
+	})
+	_register("SCPreferencesSetLocalHostName", func() {
+		purego.RegisterLibFunc(&_fnSCPreferencesSetLocalHostName, _systemconfigurationLib, "SCPreferencesSetLocalHostName")
+	})
+	_register("SCPreferencesSetValue", func() {
+		purego.RegisterLibFunc(&_fnSCPreferencesSetValue, _systemconfigurationLib, "SCPreferencesSetValue")
+	})
+	_register("SCPreferencesSynchronize", func() {
+		purego.RegisterLibFunc(&_fnSCPreferencesSynchronize, _systemconfigurationLib, "SCPreferencesSynchronize")
+	})
+	_register("SCPreferencesUnlock", func() {
+		purego.RegisterLibFunc(&_fnSCPreferencesUnlock, _systemconfigurationLib, "SCPreferencesUnlock")
+	})
+	_register("SCPreferencesUnscheduleFromRunLoop", func() {
+		purego.RegisterLibFunc(&_fnSCPreferencesUnscheduleFromRunLoop, _systemconfigurationLib, "SCPreferencesUnscheduleFromRunLoop")
+	})
+	_register("SCVLANInterfaceCopyAll", func() {
+		purego.RegisterLibFunc(&_fnSCVLANInterfaceCopyAll, _systemconfigurationLib, "SCVLANInterfaceCopyAll")
+	})
+	_register("SCVLANInterfaceCopyAvailablePhysicalInterfaces", func() {
+		purego.RegisterLibFunc(&_fnSCVLANInterfaceCopyAvailablePhysicalInterfaces, _systemconfigurationLib, "SCVLANInterfaceCopyAvailablePhysicalInterfaces")
+	})
+	_register("SCVLANInterfaceCreate", func() {
+		purego.RegisterLibFunc(&_fnSCVLANInterfaceCreate, _systemconfigurationLib, "SCVLANInterfaceCreate")
+	})
+	_register("SCVLANInterfaceGetOptions", func() {
+		purego.RegisterLibFunc(&_fnSCVLANInterfaceGetOptions, _systemconfigurationLib, "SCVLANInterfaceGetOptions")
+	})
+	_register("SCVLANInterfaceGetPhysicalInterface", func() {
+		purego.RegisterLibFunc(&_fnSCVLANInterfaceGetPhysicalInterface, _systemconfigurationLib, "SCVLANInterfaceGetPhysicalInterface")
+	})
+	_register("SCVLANInterfaceGetTag", func() {
+		purego.RegisterLibFunc(&_fnSCVLANInterfaceGetTag, _systemconfigurationLib, "SCVLANInterfaceGetTag")
+	})
+	_register("SCVLANInterfaceRemove", func() {
+		purego.RegisterLibFunc(&_fnSCVLANInterfaceRemove, _systemconfigurationLib, "SCVLANInterfaceRemove")
+	})
+	_register("SCVLANInterfaceSetLocalizedDisplayName", func() {
+		purego.RegisterLibFunc(&_fnSCVLANInterfaceSetLocalizedDisplayName, _systemconfigurationLib, "SCVLANInterfaceSetLocalizedDisplayName")
+	})
+	_register("SCVLANInterfaceSetOptions", func() {
+		purego.RegisterLibFunc(&_fnSCVLANInterfaceSetOptions, _systemconfigurationLib, "SCVLANInterfaceSetOptions")
+	})
+	_register("SCVLANInterfaceSetPhysicalInterfaceAndTag", func() {
+		purego.RegisterLibFunc(&_fnSCVLANInterfaceSetPhysicalInterfaceAndTag, _systemconfigurationLib, "SCVLANInterfaceSetPhysicalInterfaceAndTag")
+	})
 }
 
 func init() {

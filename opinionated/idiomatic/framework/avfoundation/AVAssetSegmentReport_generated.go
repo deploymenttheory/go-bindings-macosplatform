@@ -60,4 +60,3 @@ type AssetSegmentReportable interface {
 }
 
 var _ AssetSegmentReportable = (*AssetSegmentReport)(nil)
-

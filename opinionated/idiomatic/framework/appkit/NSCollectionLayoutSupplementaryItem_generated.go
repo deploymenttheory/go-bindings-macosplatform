@@ -16,7 +16,9 @@ type CollectionLayoutSupplementaryItem struct {
 }
 
 // Unwrap returns the underlying [raw.NSCollectionLayoutSupplementaryItem].
-func (x *CollectionLayoutSupplementaryItem) Unwrap() *raw.NSCollectionLayoutSupplementaryItem { return x.inner }
+func (x *CollectionLayoutSupplementaryItem) Unwrap() *raw.NSCollectionLayoutSupplementaryItem {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -91,9 +93,13 @@ func (x *CollectionLayoutSupplementaryItem) ItemAnchor() *CollectionLayoutAnchor
 	return &CollectionLayoutAnchor{inner: _r}
 }
 
-func (x *CollectionLayoutSupplementaryItem) asCollectionLayoutSupplementaryItem() *raw.NSCollectionLayoutSupplementaryItem { return x.inner }
+func (x *CollectionLayoutSupplementaryItem) asCollectionLayoutSupplementaryItem() *raw.NSCollectionLayoutSupplementaryItem {
+	return x.inner
+}
 
-func (x *CollectionLayoutSupplementaryItem) asCollectionLayoutItem() *raw.NSCollectionLayoutItem { return &x.inner.NSCollectionLayoutItem }
+func (x *CollectionLayoutSupplementaryItem) asCollectionLayoutItem() *raw.NSCollectionLayoutItem {
+	return &x.inner.NSCollectionLayoutItem
+}
 
 // CollectionLayoutSupplementaryItemable is the interface implemented by [CollectionLayoutSupplementaryItem], for mocking and DI.
 type CollectionLayoutSupplementaryItemable interface {
@@ -109,4 +115,3 @@ type CollectionLayoutSupplementaryItemable interface {
 }
 
 var _ CollectionLayoutSupplementaryItemable = (*CollectionLayoutSupplementaryItem)(nil)
-

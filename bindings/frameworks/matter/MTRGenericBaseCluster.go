@@ -25,4 +25,3 @@ func MTRGenericBaseClusterFromID(id objc.ID) *MTRGenericBaseCluster {
 	purego.Track(o)
 	return o
 }
-

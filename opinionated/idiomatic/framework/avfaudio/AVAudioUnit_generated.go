@@ -86,4 +86,3 @@ type AudioUnitable interface {
 }
 
 var _ AudioUnitable = (*AudioUnit)(nil)
-

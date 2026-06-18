@@ -47,4 +47,3 @@ type ProcessCapabilityable interface {
 }
 
 var _ ProcessCapabilityable = (*ProcessCapability)(nil)
-

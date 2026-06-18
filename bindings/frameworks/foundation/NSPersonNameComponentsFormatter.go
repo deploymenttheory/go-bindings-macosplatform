@@ -15,17 +15,17 @@ type NSPersonNameComponentsFormatter struct {
 }
 
 var (
-	_clsNSPersonNameComponentsFormatter = _objcClass("NSPersonNameComponentsFormatter")
+	_clsNSPersonNameComponentsFormatter                                                    = _objcClass("NSPersonNameComponentsFormatter")
 	_nSPersonNameComponentsFormatterSelLocalizedStringFromPersonNameComponentsStyleOptions = objc.RegisterName("localizedStringFromPersonNameComponents:style:options:")
-	_nSPersonNameComponentsFormatterSelStringFromPersonNameComponents = objc.RegisterName("stringFromPersonNameComponents:")
-	_nSPersonNameComponentsFormatterSelAnnotatedStringFromPersonNameComponents = objc.RegisterName("annotatedStringFromPersonNameComponents:")
-	_nSPersonNameComponentsFormatterSelPersonNameComponentsFromString = objc.RegisterName("personNameComponentsFromString:")
-	_nSPersonNameComponentsFormatterSelStyle = objc.RegisterName("style")
-	_nSPersonNameComponentsFormatterSelSetStyle = objc.RegisterName("setStyle:")
-	_nSPersonNameComponentsFormatterSelIsPhonetic = objc.RegisterName("isPhonetic")
-	_nSPersonNameComponentsFormatterSelSetPhonetic = objc.RegisterName("setPhonetic:")
-	_nSPersonNameComponentsFormatterSelLocale = objc.RegisterName("locale")
-	_nSPersonNameComponentsFormatterSelSetLocale = objc.RegisterName("setLocale:")
+	_nSPersonNameComponentsFormatterSelStringFromPersonNameComponents                      = objc.RegisterName("stringFromPersonNameComponents:")
+	_nSPersonNameComponentsFormatterSelAnnotatedStringFromPersonNameComponents             = objc.RegisterName("annotatedStringFromPersonNameComponents:")
+	_nSPersonNameComponentsFormatterSelPersonNameComponentsFromString                      = objc.RegisterName("personNameComponentsFromString:")
+	_nSPersonNameComponentsFormatterSelStyle                                               = objc.RegisterName("style")
+	_nSPersonNameComponentsFormatterSelSetStyle                                            = objc.RegisterName("setStyle:")
+	_nSPersonNameComponentsFormatterSelIsPhonetic                                          = objc.RegisterName("isPhonetic")
+	_nSPersonNameComponentsFormatterSelSetPhonetic                                         = objc.RegisterName("setPhonetic:")
+	_nSPersonNameComponentsFormatterSelLocale                                              = objc.RegisterName("locale")
+	_nSPersonNameComponentsFormatterSelSetLocale                                           = objc.RegisterName("setLocale:")
 )
 
 func NSPersonNameComponentsFormatterFromID(id objc.ID) *NSPersonNameComponentsFormatter {
@@ -40,25 +40,33 @@ func NSPersonNameComponentsFormatterFromID(id objc.ID) *NSPersonNameComponentsFo
 
 func NSPersonNameComponentsFormatterLocalizedStringFromPersonNameComponentsStyleOptions(components *NSPersonNameComponents, nameFormatStyle NSPersonNameComponentsFormatterStyle, nameOptions NSPersonNameComponentsFormatterOptions) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersonNameComponentsFormatter), _nSPersonNameComponentsFormatterSelLocalizedStringFromPersonNameComponentsStyleOptions, components.Ptr(), nameFormatStyle, nameOptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSPersonNameComponentsFormatter) StringFromPersonNameComponents(components *NSPersonNameComponents) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersonNameComponentsFormatterSelStringFromPersonNameComponents, components.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSPersonNameComponentsFormatter) AnnotatedStringFromPersonNameComponents(components *NSPersonNameComponents) *NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersonNameComponentsFormatterSelAnnotatedStringFromPersonNameComponents, components.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAttributedStringFromID(_ret)
 }
 
 func (o *NSPersonNameComponentsFormatter) PersonNameComponentsFromString(string_ *NSString) *NSPersonNameComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersonNameComponentsFormatterSelPersonNameComponentsFromString, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersonNameComponentsFromID(_ret)
 }
 
@@ -82,11 +90,12 @@ func (o *NSPersonNameComponentsFormatter) SetPhonetic(phonetic bool) {
 
 func (o *NSPersonNameComponentsFormatter) Locale() *NSLocale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersonNameComponentsFormatterSelLocale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLocaleFromID(_ret)
 }
 
 func (o *NSPersonNameComponentsFormatter) SetLocale(locale *NSLocale) {
 	o.Ptr().Send(_nSPersonNameComponentsFormatterSelSetLocale, locale.Ptr())
 }
-

@@ -81,9 +81,13 @@ func (x *HumanHandPoseObservation) Chirality() raw.VNChirality {
 	return x.inner.Chirality()
 }
 
-func (x *HumanHandPoseObservation) asRecognizedPointsObservation() *raw.VNRecognizedPointsObservation { return &x.inner.VNRecognizedPointsObservation }
+func (x *HumanHandPoseObservation) asRecognizedPointsObservation() *raw.VNRecognizedPointsObservation {
+	return &x.inner.VNRecognizedPointsObservation
+}
 
-func (x *HumanHandPoseObservation) asObservation() *raw.VNObservation { return &x.inner.VNRecognizedPointsObservation.VNObservation }
+func (x *HumanHandPoseObservation) asObservation() *raw.VNObservation {
+	return &x.inner.VNRecognizedPointsObservation.VNObservation
+}
 
 // HumanHandPoseObservationable is the interface implemented by [HumanHandPoseObservation], for mocking and DI.
 type HumanHandPoseObservationable interface {
@@ -96,4 +100,3 @@ type HumanHandPoseObservationable interface {
 }
 
 var _ HumanHandPoseObservationable = (*HumanHandPoseObservation)(nil)
-

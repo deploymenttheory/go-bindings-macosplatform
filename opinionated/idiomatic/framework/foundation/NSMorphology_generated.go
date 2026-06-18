@@ -225,4 +225,3 @@ type Morphologyable interface {
 }
 
 var _ Morphologyable = (*Morphology)(nil)
-

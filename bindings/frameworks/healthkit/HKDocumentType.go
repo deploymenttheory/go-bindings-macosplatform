@@ -25,4 +25,3 @@ func HKDocumentTypeFromID(id objc.ID) *HKDocumentType {
 	purego.Track(o)
 	return o
 }
-

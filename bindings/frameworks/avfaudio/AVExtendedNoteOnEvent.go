@@ -15,19 +15,19 @@ type AVExtendedNoteOnEvent struct {
 }
 
 var (
-	_clsAVExtendedNoteOnEvent = _objcClass("AVExtendedNoteOnEvent")
-	_aVExtendedNoteOnEventSelInitWithMIDINoteVelocityGroupIDDuration = objc.RegisterName("initWithMIDINote:velocity:groupID:duration:")
+	_clsAVExtendedNoteOnEvent                                                    = _objcClass("AVExtendedNoteOnEvent")
+	_aVExtendedNoteOnEventSelInitWithMIDINoteVelocityGroupIDDuration             = objc.RegisterName("initWithMIDINote:velocity:groupID:duration:")
 	_aVExtendedNoteOnEventSelInitWithMIDINoteVelocityInstrumentIDGroupIDDuration = objc.RegisterName("initWithMIDINote:velocity:instrumentID:groupID:duration:")
-	_aVExtendedNoteOnEventSelMidiNote = objc.RegisterName("midiNote")
-	_aVExtendedNoteOnEventSelSetMidiNote = objc.RegisterName("setMidiNote:")
-	_aVExtendedNoteOnEventSelVelocity = objc.RegisterName("velocity")
-	_aVExtendedNoteOnEventSelSetVelocity = objc.RegisterName("setVelocity:")
-	_aVExtendedNoteOnEventSelInstrumentID = objc.RegisterName("instrumentID")
-	_aVExtendedNoteOnEventSelSetInstrumentID = objc.RegisterName("setInstrumentID:")
-	_aVExtendedNoteOnEventSelGroupID = objc.RegisterName("groupID")
-	_aVExtendedNoteOnEventSelSetGroupID = objc.RegisterName("setGroupID:")
-	_aVExtendedNoteOnEventSelDuration = objc.RegisterName("duration")
-	_aVExtendedNoteOnEventSelSetDuration = objc.RegisterName("setDuration:")
+	_aVExtendedNoteOnEventSelMidiNote                                            = objc.RegisterName("midiNote")
+	_aVExtendedNoteOnEventSelSetMidiNote                                         = objc.RegisterName("setMidiNote:")
+	_aVExtendedNoteOnEventSelVelocity                                            = objc.RegisterName("velocity")
+	_aVExtendedNoteOnEventSelSetVelocity                                         = objc.RegisterName("setVelocity:")
+	_aVExtendedNoteOnEventSelInstrumentID                                        = objc.RegisterName("instrumentID")
+	_aVExtendedNoteOnEventSelSetInstrumentID                                     = objc.RegisterName("setInstrumentID:")
+	_aVExtendedNoteOnEventSelGroupID                                             = objc.RegisterName("groupID")
+	_aVExtendedNoteOnEventSelSetGroupID                                          = objc.RegisterName("setGroupID:")
+	_aVExtendedNoteOnEventSelDuration                                            = objc.RegisterName("duration")
+	_aVExtendedNoteOnEventSelSetDuration                                         = objc.RegisterName("setDuration:")
 )
 
 func AVExtendedNoteOnEventFromID(id objc.ID) *AVExtendedNoteOnEvent {
@@ -43,13 +43,17 @@ func AVExtendedNoteOnEventFromID(id objc.ID) *AVExtendedNoteOnEvent {
 // @method initWithMIDINote:velocity:groupID:duration @abstract Initialize the event with a midi note, velocity, instrument and group ID, and a duration. @param midiNote The MIDI velocity represented as a floating point.  Range: Destination-dependent, usually 0.0 - 127.0. @param velocity The MIDI velocity represented as a floating point.  Range: Destination-dependent, usually 0.0 - 127.0. @param groupID An index indicating the AudioUnitElement within the Group Scope which should handle this event (see AudioUnitElement). This normally maps to a channel within the audio unit. Range: normally between 0 and 15, but may be higher if the AVMusicTrack's destinationAudioUnit supports more channels. @param duration The duration of this event in AVMusicTimeStamp beats.  Range:  Any nonnegative number.
 func (o *AVExtendedNoteOnEvent) InitWithMIDINoteVelocityGroupIDDuration(midiNote float32, velocity float32, groupID uint, duration float64) *AVExtendedNoteOnEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVExtendedNoteOnEventSelInitWithMIDINoteVelocityGroupIDDuration, midiNote, velocity, groupID, duration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVExtendedNoteOnEventFromID(_ret)
 }
 
 func (o *AVExtendedNoteOnEvent) InitWithMIDINoteVelocityInstrumentIDGroupIDDuration(midiNote float32, velocity float32, instrumentID uint, groupID uint, duration float64) *AVExtendedNoteOnEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVExtendedNoteOnEventSelInitWithMIDINoteVelocityInstrumentIDGroupIDDuration, midiNote, velocity, instrumentID, groupID, duration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVExtendedNoteOnEventFromID(_ret)
 }
 
@@ -102,4 +106,3 @@ func (o *AVExtendedNoteOnEvent) Duration() float64 {
 func (o *AVExtendedNoteOnEvent) SetDuration(duration float64) {
 	o.Ptr().Send(_aVExtendedNoteOnEventSelSetDuration, duration)
 }
-

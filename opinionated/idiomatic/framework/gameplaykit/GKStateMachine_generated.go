@@ -81,4 +81,3 @@ type StateMachineable interface {
 }
 
 var _ StateMachineable = (*StateMachine)(nil)
-

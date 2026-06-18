@@ -16,14 +16,14 @@ type MTREnergyEVSEClusterEnergyTransferStoppedEvent struct {
 }
 
 var (
-	_clsMTREnergyEVSEClusterEnergyTransferStoppedEvent = _objcClass("MTREnergyEVSEClusterEnergyTransferStoppedEvent")
-	_mTREnergyEVSEClusterEnergyTransferStoppedEventSelSessionID = objc.RegisterName("sessionID")
-	_mTREnergyEVSEClusterEnergyTransferStoppedEventSelSetSessionID = objc.RegisterName("setSessionID:")
-	_mTREnergyEVSEClusterEnergyTransferStoppedEventSelState = objc.RegisterName("state")
-	_mTREnergyEVSEClusterEnergyTransferStoppedEventSelSetState = objc.RegisterName("setState:")
-	_mTREnergyEVSEClusterEnergyTransferStoppedEventSelReason = objc.RegisterName("reason")
-	_mTREnergyEVSEClusterEnergyTransferStoppedEventSelSetReason = objc.RegisterName("setReason:")
-	_mTREnergyEVSEClusterEnergyTransferStoppedEventSelEnergyTransferred = objc.RegisterName("energyTransferred")
+	_clsMTREnergyEVSEClusterEnergyTransferStoppedEvent                     = _objcClass("MTREnergyEVSEClusterEnergyTransferStoppedEvent")
+	_mTREnergyEVSEClusterEnergyTransferStoppedEventSelSessionID            = objc.RegisterName("sessionID")
+	_mTREnergyEVSEClusterEnergyTransferStoppedEventSelSetSessionID         = objc.RegisterName("setSessionID:")
+	_mTREnergyEVSEClusterEnergyTransferStoppedEventSelState                = objc.RegisterName("state")
+	_mTREnergyEVSEClusterEnergyTransferStoppedEventSelSetState             = objc.RegisterName("setState:")
+	_mTREnergyEVSEClusterEnergyTransferStoppedEventSelReason               = objc.RegisterName("reason")
+	_mTREnergyEVSEClusterEnergyTransferStoppedEventSelSetReason            = objc.RegisterName("setReason:")
+	_mTREnergyEVSEClusterEnergyTransferStoppedEventSelEnergyTransferred    = objc.RegisterName("energyTransferred")
 	_mTREnergyEVSEClusterEnergyTransferStoppedEventSelSetEnergyTransferred = objc.RegisterName("setEnergyTransferred:")
 )
 
@@ -39,7 +39,9 @@ func MTREnergyEVSEClusterEnergyTransferStoppedEventFromID(id objc.ID) *MTREnergy
 
 func (o *MTREnergyEVSEClusterEnergyTransferStoppedEvent) SessionID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREnergyEVSEClusterEnergyTransferStoppedEventSelSessionID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTREnergyEVSEClusterEnergyTransferStoppedEvent) SetSessionID(sessionID 
 
 func (o *MTREnergyEVSEClusterEnergyTransferStoppedEvent) State() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREnergyEVSEClusterEnergyTransferStoppedEventSelState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,7 +63,9 @@ func (o *MTREnergyEVSEClusterEnergyTransferStoppedEvent) SetState(state *foundat
 
 func (o *MTREnergyEVSEClusterEnergyTransferStoppedEvent) Reason() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREnergyEVSEClusterEnergyTransferStoppedEventSelReason)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -69,11 +75,12 @@ func (o *MTREnergyEVSEClusterEnergyTransferStoppedEvent) SetReason(reason *found
 
 func (o *MTREnergyEVSEClusterEnergyTransferStoppedEvent) EnergyTransferred() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREnergyEVSEClusterEnergyTransferStoppedEventSelEnergyTransferred)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTREnergyEVSEClusterEnergyTransferStoppedEvent) SetEnergyTransferred(energyTransferred *foundation.NSNumber) {
 	o.Ptr().Send(_mTREnergyEVSEClusterEnergyTransferStoppedEventSelSetEnergyTransferred, energyTransferred.Ptr())
 }
-

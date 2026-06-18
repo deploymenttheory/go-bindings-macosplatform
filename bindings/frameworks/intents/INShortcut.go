@@ -16,11 +16,11 @@ type INShortcut struct {
 }
 
 var (
-	_clsINShortcut = _objcClass("INShortcut")
-	_iNShortcutSelInitWithIntent = objc.RegisterName("initWithIntent:")
+	_clsINShortcut                     = _objcClass("INShortcut")
+	_iNShortcutSelInitWithIntent       = objc.RegisterName("initWithIntent:")
 	_iNShortcutSelInitWithUserActivity = objc.RegisterName("initWithUserActivity:")
-	_iNShortcutSelIntent = objc.RegisterName("intent")
-	_iNShortcutSelUserActivity = objc.RegisterName("userActivity")
+	_iNShortcutSelIntent               = objc.RegisterName("intent")
+	_iNShortcutSelUserActivity         = objc.RegisterName("userActivity")
 )
 
 func INShortcutFromID(id objc.ID) *INShortcut {
@@ -36,28 +36,35 @@ func INShortcutFromID(id objc.ID) *INShortcut {
 // @abstract Creates a shortcut with the given intent. @param intent Unless user configurable, must have a title and have valid shortcut types. @return Will return @c nil (and log an error) if the intent isn't valid.
 func (o *INShortcut) InitWithIntent(intent *INIntent) *INShortcut {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNShortcutSelInitWithIntent, intent.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INShortcutFromID(_ret)
 }
 
 // @abstract Creates a shortcut with the given user activity.
 func (o *INShortcut) InitWithUserActivity(userActivity *foundation.NSUserActivity) *INShortcut {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNShortcutSelInitWithUserActivity, userActivity.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INShortcutFromID(_ret)
 }
 
 // @abstract The intent that will be performed when this shortcut is invoked. @discussion Is @c nil if the shortcut was created with a @c NSUserActivity.
 func (o *INShortcut) Intent() *INIntent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNShortcutSelIntent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INIntentFromID(_ret)
 }
 
 // @abstract The user activity that will be performed when this shortcut is invoked. @discussion Is @c nil if the shortcut was created with an @c INIntent.
 func (o *INShortcut) UserActivity() *foundation.NSUserActivity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNShortcutSelUserActivity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUserActivityFromID(_ret)
 }
-

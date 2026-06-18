@@ -16,10 +16,10 @@ type MTRServiceAreaClusterAreaInfoStruct struct {
 }
 
 var (
-	_clsMTRServiceAreaClusterAreaInfoStruct = _objcClass("MTRServiceAreaClusterAreaInfoStruct")
-	_mTRServiceAreaClusterAreaInfoStructSelLocationInfo = objc.RegisterName("locationInfo")
+	_clsMTRServiceAreaClusterAreaInfoStruct                = _objcClass("MTRServiceAreaClusterAreaInfoStruct")
+	_mTRServiceAreaClusterAreaInfoStructSelLocationInfo    = objc.RegisterName("locationInfo")
 	_mTRServiceAreaClusterAreaInfoStructSelSetLocationInfo = objc.RegisterName("setLocationInfo:")
-	_mTRServiceAreaClusterAreaInfoStructSelLandmarkInfo = objc.RegisterName("landmarkInfo")
+	_mTRServiceAreaClusterAreaInfoStructSelLandmarkInfo    = objc.RegisterName("landmarkInfo")
 	_mTRServiceAreaClusterAreaInfoStructSelSetLandmarkInfo = objc.RegisterName("setLandmarkInfo:")
 )
 
@@ -35,7 +35,9 @@ func MTRServiceAreaClusterAreaInfoStructFromID(id objc.ID) *MTRServiceAreaCluste
 
 func (o *MTRServiceAreaClusterAreaInfoStruct) LocationInfo() *MTRDataTypeLocationDescriptorStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRServiceAreaClusterAreaInfoStructSelLocationInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRDataTypeLocationDescriptorStructFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRServiceAreaClusterAreaInfoStruct) SetLocationInfo(locationInfo *MTRD
 
 func (o *MTRServiceAreaClusterAreaInfoStruct) LandmarkInfo() *MTRServiceAreaClusterLandmarkInfoStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRServiceAreaClusterAreaInfoStructSelLandmarkInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRServiceAreaClusterLandmarkInfoStructFromID(_ret)
 }
 
 func (o *MTRServiceAreaClusterAreaInfoStruct) SetLandmarkInfo(landmarkInfo *MTRServiceAreaClusterLandmarkInfoStruct) {
 	o.Ptr().Send(_mTRServiceAreaClusterAreaInfoStructSelSetLandmarkInfo, landmarkInfo.Ptr())
 }
-

@@ -16,41 +16,41 @@ type NSImageView struct {
 }
 
 var (
-	_clsNSImageView = _objcClass("NSImageView")
-	_nSImageViewSelImageViewWithImage = objc.RegisterName("imageViewWithImage:")
-	_nSImageViewSelImage = objc.RegisterName("image")
-	_nSImageViewSelSetImage = objc.RegisterName("setImage:")
-	_nSImageViewSelIsEditable = objc.RegisterName("isEditable")
-	_nSImageViewSelSetEditable = objc.RegisterName("setEditable:")
-	_nSImageViewSelImageAlignment = objc.RegisterName("imageAlignment")
-	_nSImageViewSelSetImageAlignment = objc.RegisterName("setImageAlignment:")
-	_nSImageViewSelImageScaling = objc.RegisterName("imageScaling")
-	_nSImageViewSelSetImageScaling = objc.RegisterName("setImageScaling:")
-	_nSImageViewSelImageFrameStyle = objc.RegisterName("imageFrameStyle")
-	_nSImageViewSelSetImageFrameStyle = objc.RegisterName("setImageFrameStyle:")
-	_nSImageViewSelSymbolConfiguration = objc.RegisterName("symbolConfiguration")
-	_nSImageViewSelSetSymbolConfiguration = objc.RegisterName("setSymbolConfiguration:")
-	_nSImageViewSelContentTintColor = objc.RegisterName("contentTintColor")
-	_nSImageViewSelSetContentTintColor = objc.RegisterName("setContentTintColor:")
-	_nSImageViewSelAnimates = objc.RegisterName("animates")
-	_nSImageViewSelSetAnimates = objc.RegisterName("setAnimates:")
-	_nSImageViewSelAllowsCutCopyPaste = objc.RegisterName("allowsCutCopyPaste")
-	_nSImageViewSelSetAllowsCutCopyPaste = objc.RegisterName("setAllowsCutCopyPaste:")
-	_nSImageViewSelDefaultPreferredImageDynamicRange = objc.RegisterName("defaultPreferredImageDynamicRange")
-	_nSImageViewSelSetDefaultPreferredImageDynamicRange = objc.RegisterName("setDefaultPreferredImageDynamicRange:")
-	_nSImageViewSelPreferredImageDynamicRange = objc.RegisterName("preferredImageDynamicRange")
-	_nSImageViewSelSetPreferredImageDynamicRange = objc.RegisterName("setPreferredImageDynamicRange:")
-	_nSImageViewSelImageDynamicRange = objc.RegisterName("imageDynamicRange")
-	_nSImageViewSelAddSymbolEffect = objc.RegisterName("addSymbolEffect:")
-	_nSImageViewSelAddSymbolEffectOptions = objc.RegisterName("addSymbolEffect:options:")
-	_nSImageViewSelAddSymbolEffectOptionsAnimated = objc.RegisterName("addSymbolEffect:options:animated:")
-	_nSImageViewSelRemoveSymbolEffectOfType = objc.RegisterName("removeSymbolEffectOfType:")
-	_nSImageViewSelRemoveSymbolEffectOfTypeOptions = objc.RegisterName("removeSymbolEffectOfType:options:")
-	_nSImageViewSelRemoveSymbolEffectOfTypeOptionsAnimated = objc.RegisterName("removeSymbolEffectOfType:options:animated:")
-	_nSImageViewSelRemoveAllSymbolEffects = objc.RegisterName("removeAllSymbolEffects")
-	_nSImageViewSelRemoveAllSymbolEffectsWithOptions = objc.RegisterName("removeAllSymbolEffectsWithOptions:")
-	_nSImageViewSelRemoveAllSymbolEffectsWithOptionsAnimated = objc.RegisterName("removeAllSymbolEffectsWithOptions:animated:")
-	_nSImageViewSelSetSymbolImageWithContentTransition = objc.RegisterName("setSymbolImage:withContentTransition:")
+	_clsNSImageView                                           = _objcClass("NSImageView")
+	_nSImageViewSelImageViewWithImage                         = objc.RegisterName("imageViewWithImage:")
+	_nSImageViewSelImage                                      = objc.RegisterName("image")
+	_nSImageViewSelSetImage                                   = objc.RegisterName("setImage:")
+	_nSImageViewSelIsEditable                                 = objc.RegisterName("isEditable")
+	_nSImageViewSelSetEditable                                = objc.RegisterName("setEditable:")
+	_nSImageViewSelImageAlignment                             = objc.RegisterName("imageAlignment")
+	_nSImageViewSelSetImageAlignment                          = objc.RegisterName("setImageAlignment:")
+	_nSImageViewSelImageScaling                               = objc.RegisterName("imageScaling")
+	_nSImageViewSelSetImageScaling                            = objc.RegisterName("setImageScaling:")
+	_nSImageViewSelImageFrameStyle                            = objc.RegisterName("imageFrameStyle")
+	_nSImageViewSelSetImageFrameStyle                         = objc.RegisterName("setImageFrameStyle:")
+	_nSImageViewSelSymbolConfiguration                        = objc.RegisterName("symbolConfiguration")
+	_nSImageViewSelSetSymbolConfiguration                     = objc.RegisterName("setSymbolConfiguration:")
+	_nSImageViewSelContentTintColor                           = objc.RegisterName("contentTintColor")
+	_nSImageViewSelSetContentTintColor                        = objc.RegisterName("setContentTintColor:")
+	_nSImageViewSelAnimates                                   = objc.RegisterName("animates")
+	_nSImageViewSelSetAnimates                                = objc.RegisterName("setAnimates:")
+	_nSImageViewSelAllowsCutCopyPaste                         = objc.RegisterName("allowsCutCopyPaste")
+	_nSImageViewSelSetAllowsCutCopyPaste                      = objc.RegisterName("setAllowsCutCopyPaste:")
+	_nSImageViewSelDefaultPreferredImageDynamicRange          = objc.RegisterName("defaultPreferredImageDynamicRange")
+	_nSImageViewSelSetDefaultPreferredImageDynamicRange       = objc.RegisterName("setDefaultPreferredImageDynamicRange:")
+	_nSImageViewSelPreferredImageDynamicRange                 = objc.RegisterName("preferredImageDynamicRange")
+	_nSImageViewSelSetPreferredImageDynamicRange              = objc.RegisterName("setPreferredImageDynamicRange:")
+	_nSImageViewSelImageDynamicRange                          = objc.RegisterName("imageDynamicRange")
+	_nSImageViewSelAddSymbolEffect                            = objc.RegisterName("addSymbolEffect:")
+	_nSImageViewSelAddSymbolEffectOptions                     = objc.RegisterName("addSymbolEffect:options:")
+	_nSImageViewSelAddSymbolEffectOptionsAnimated             = objc.RegisterName("addSymbolEffect:options:animated:")
+	_nSImageViewSelRemoveSymbolEffectOfType                   = objc.RegisterName("removeSymbolEffectOfType:")
+	_nSImageViewSelRemoveSymbolEffectOfTypeOptions            = objc.RegisterName("removeSymbolEffectOfType:options:")
+	_nSImageViewSelRemoveSymbolEffectOfTypeOptionsAnimated    = objc.RegisterName("removeSymbolEffectOfType:options:animated:")
+	_nSImageViewSelRemoveAllSymbolEffects                     = objc.RegisterName("removeAllSymbolEffects")
+	_nSImageViewSelRemoveAllSymbolEffectsWithOptions          = objc.RegisterName("removeAllSymbolEffectsWithOptions:")
+	_nSImageViewSelRemoveAllSymbolEffectsWithOptionsAnimated  = objc.RegisterName("removeAllSymbolEffectsWithOptions:animated:")
+	_nSImageViewSelSetSymbolImageWithContentTransition        = objc.RegisterName("setSymbolImage:withContentTransition:")
 	_nSImageViewSelSetSymbolImageWithContentTransitionOptions = objc.RegisterName("setSymbolImage:withContentTransition:options:")
 )
 
@@ -67,13 +67,17 @@ func NSImageViewFromID(id objc.ID) *NSImageView {
 // Creates a non-editable image view containing the provided image. The image is scaled proportionally down to fit the view, and is centered within the view. @param image The image to display within the view. @return An initialized image view.
 func NSImageViewImageViewWithImage(image *NSImage) *NSImageView {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSImageView), _nSImageViewSelImageViewWithImage, image.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageViewFromID(_ret)
 }
 
 func (o *NSImageView) Image() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageViewSelImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -120,7 +124,9 @@ func (o *NSImageView) SetImageFrameStyle(imageFrameStyle NSImageFrameStyle) {
 // Specifies a combination of point size, weight, and scale to use when sizing and displaying symbol images. If a symbol configuration isn't provided, the image view uses a default size, weight, and scale provided by the system. The default value is `nil`.
 func (o *NSImageView) SymbolConfiguration() *NSImageSymbolConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageViewSelSymbolConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageSymbolConfigurationFromID(_ret)
 }
 
@@ -132,7 +138,9 @@ func (o *NSImageView) SetSymbolConfiguration(symbolConfiguration *NSImageSymbolC
 // A tint color to be used when rendering template image content. This color may be combined with other effects to produce a theme-appropriate rendition of the template image. A `nil` value indicates the standard set of effects without color modification. The default value is `nil`.
 func (o *NSImageView) ContentTintColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageViewSelContentTintColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -241,4 +249,3 @@ func (o *NSImageView) SetSymbolImageWithContentTransition(symbolImage *NSImage, 
 func (o *NSImageView) SetSymbolImageWithContentTransitionOptions(symbolImage *NSImage, transition *symbols.NSSymbolContentTransition, options *symbols.NSSymbolEffectOptions) {
 	o.Ptr().Send(_nSImageViewSelSetSymbolImageWithContentTransitionOptions, symbolImage.Ptr(), transition.Ptr(), options.Ptr())
 }
-

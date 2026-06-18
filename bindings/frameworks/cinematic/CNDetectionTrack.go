@@ -19,15 +19,15 @@ type CNDetectionTrack struct {
 }
 
 var (
-	_clsCNDetectionTrack = _objcClass("CNDetectionTrack")
+	_clsCNDetectionTrack                        = _objcClass("CNDetectionTrack")
 	_cNDetectionTrackSelDetectionAtOrBeforeTime = objc.RegisterName("detectionAtOrBeforeTime:")
-	_cNDetectionTrackSelDetectionNearestTime = objc.RegisterName("detectionNearestTime:")
-	_cNDetectionTrackSelDetectionsInTimeRange = objc.RegisterName("detectionsInTimeRange:")
-	_cNDetectionTrackSelDetectionType = objc.RegisterName("detectionType")
-	_cNDetectionTrackSelDetectionID = objc.RegisterName("detectionID")
-	_cNDetectionTrackSelDetectionGroupID = objc.RegisterName("detectionGroupID")
-	_cNDetectionTrackSelIsUserCreated = objc.RegisterName("isUserCreated")
-	_cNDetectionTrackSelIsDiscrete = objc.RegisterName("isDiscrete")
+	_cNDetectionTrackSelDetectionNearestTime    = objc.RegisterName("detectionNearestTime:")
+	_cNDetectionTrackSelDetectionsInTimeRange   = objc.RegisterName("detectionsInTimeRange:")
+	_cNDetectionTrackSelDetectionType           = objc.RegisterName("detectionType")
+	_cNDetectionTrackSelDetectionID             = objc.RegisterName("detectionID")
+	_cNDetectionTrackSelDetectionGroupID        = objc.RegisterName("detectionGroupID")
+	_cNDetectionTrackSelIsUserCreated           = objc.RegisterName("isUserCreated")
+	_cNDetectionTrackSelIsDiscrete              = objc.RegisterName("isDiscrete")
 )
 
 func CNDetectionTrackFromID(id objc.ID) *CNDetectionTrack {
@@ -42,20 +42,26 @@ func CNDetectionTrackFromID(id objc.ID) *CNDetectionTrack {
 
 func (o *CNDetectionTrack) DetectionAtOrBeforeTime(time_ coremedia.CMTime) *CNDetection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNDetectionTrackSelDetectionAtOrBeforeTime, time_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNDetectionFromID(_ret)
 }
 
 func (o *CNDetectionTrack) DetectionNearestTime(time_ coremedia.CMTime) *CNDetection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNDetectionTrackSelDetectionNearestTime, time_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNDetectionFromID(_ret)
 }
 
 // Gets the array of detections in the detection track within the given time range. Makes sense for discrete detection tracks only.
 func (o *CNDetectionTrack) DetectionsInTimeRange(timeRange coremedia.CMTimeRange) *foundation.NSArray[*CNDetection] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNDetectionTrackSelDetectionsInTimeRange, timeRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CNDetection](_ret)
 }
 
@@ -88,4 +94,3 @@ func (o *CNDetectionTrack) IsDiscrete() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cNDetectionTrackSelIsDiscrete)
 	return _ret
 }
-

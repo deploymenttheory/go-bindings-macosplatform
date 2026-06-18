@@ -462,4 +462,3 @@ type Bundleable interface {
 }
 
 var _ Bundleable = (*Bundle)(nil)
-

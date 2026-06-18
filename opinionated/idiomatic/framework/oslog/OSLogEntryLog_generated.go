@@ -49,4 +49,3 @@ type LogEntryLogable interface {
 }
 
 var _ LogEntryLogable = (*LogEntryLog)(nil)
-

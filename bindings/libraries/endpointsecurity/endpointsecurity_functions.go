@@ -432,4 +432,3 @@ func Es_delete_client(client unsafe.Pointer) Es_return_t {
 	cgo.RaiseIfException(_exc)
 	return _result
 }
-

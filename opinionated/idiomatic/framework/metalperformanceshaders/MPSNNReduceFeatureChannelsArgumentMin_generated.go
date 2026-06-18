@@ -19,7 +19,9 @@ type NNReduceFeatureChannelsArgumentMin struct {
 }
 
 // Unwrap returns the underlying [raw.MPSNNReduceFeatureChannelsArgumentMin].
-func (x *NNReduceFeatureChannelsArgumentMin) Unwrap() *raw.MPSNNReduceFeatureChannelsArgumentMin { return x.inner }
+func (x *NNReduceFeatureChannelsArgumentMin) Unwrap() *raw.MPSNNReduceFeatureChannelsArgumentMin {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -113,11 +115,17 @@ func (x *NNReduceFeatureChannelsArgumentMin) WithLabel(label string) *NNReduceFe
 	return x
 }
 
-func (x *NNReduceFeatureChannelsArgumentMin) asNNReduceUnary() *mpsneuralnetwork.MPSNNReduceUnary { return &x.inner.MPSNNReduceUnary }
+func (x *NNReduceFeatureChannelsArgumentMin) asNNReduceUnary() *mpsneuralnetwork.MPSNNReduceUnary {
+	return &x.inner.MPSNNReduceUnary
+}
 
-func (x *NNReduceFeatureChannelsArgumentMin) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
+func (x *NNReduceFeatureChannelsArgumentMin) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel
+}
 
-func (x *NNReduceFeatureChannelsArgumentMin) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel }
+func (x *NNReduceFeatureChannelsArgumentMin) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel
+}
 
 // NNReduceFeatureChannelsArgumentMinable is the interface implemented by [NNReduceFeatureChannelsArgumentMin], for mocking and DI.
 type NNReduceFeatureChannelsArgumentMinable interface {
@@ -136,4 +144,3 @@ type NNReduceFeatureChannelsArgumentMinable interface {
 }
 
 var _ NNReduceFeatureChannelsArgumentMinable = (*NNReduceFeatureChannelsArgumentMin)(nil)
-

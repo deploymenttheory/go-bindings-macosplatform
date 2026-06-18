@@ -12,147 +12,147 @@ import (
 )
 
 var (
-	_clBuildProgram func(unsafe.Pointer, uint32, unsafe.Pointer, string, unsafe.Pointer, unsafe.Pointer) int32
-	_clCompileProgram func(unsafe.Pointer, uint32, unsafe.Pointer, string, uint32, unsafe.Pointer, string, unsafe.Pointer, unsafe.Pointer) int32
-	_clCreateBuffer func(unsafe.Pointer, uint64, uint, unsafe.Pointer, *int32) unsafe.Pointer
-	_clCreateCommandQueue func(unsafe.Pointer, unsafe.Pointer, uint64, *int32) unsafe.Pointer
-	_clCreateCommandQueueWithPropertiesAPPLE func(unsafe.Pointer, unsafe.Pointer, *int, *int32) unsafe.Pointer
-	_clCreateContext func(*int, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *int32) unsafe.Pointer
-	_clCreateContextAndCommandQueueAPPLE func(*int, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint64, unsafe.Pointer, unsafe.Pointer) int32
-	_clCreateContextFromType func(*int, uint64, unsafe.Pointer, unsafe.Pointer, *int32) unsafe.Pointer
-	_clCreateDAGAPPLE func(unsafe.Pointer) unsafe.Pointer
-	_clCreateEventFromGLsyncKHR func(unsafe.Pointer, unsafe.Pointer, *int32) unsafe.Pointer
-	_clCreateFromGLBuffer func(unsafe.Pointer, uint64, uint, *int32) unsafe.Pointer
-	_clCreateFromGLRenderbuffer func(unsafe.Pointer, uint64, uint, *int32) unsafe.Pointer
-	_clCreateFromGLTexture func(unsafe.Pointer, uint64, uint, int, uint, *int32) unsafe.Pointer
-	_clCreateFromGLTexture2D func(unsafe.Pointer, uint64, uint, int, uint, *int32) unsafe.Pointer
-	_clCreateFromGLTexture3D func(unsafe.Pointer, uint64, uint, int, uint, *int32) unsafe.Pointer
-	_clCreateImage func(unsafe.Pointer, uint64, *ClImageFormat, *ClImageDesc, unsafe.Pointer, *int32) unsafe.Pointer
-	_clCreateImage2D func(unsafe.Pointer, uint64, *ClImageFormat, uint, uint, uint, unsafe.Pointer, *int32) unsafe.Pointer
-	_clCreateImage3D func(unsafe.Pointer, uint64, *ClImageFormat, uint, uint, uint, uint, uint, unsafe.Pointer, *int32) unsafe.Pointer
-	_clCreateImageFromIOSurface2DAPPLE func(unsafe.Pointer, uint64, *ClImageFormat, uint, uint, unsafe.Pointer, *int32) unsafe.Pointer
+	_clBuildProgram                                func(unsafe.Pointer, uint32, unsafe.Pointer, string, unsafe.Pointer, unsafe.Pointer) int32
+	_clCompileProgram                              func(unsafe.Pointer, uint32, unsafe.Pointer, string, uint32, unsafe.Pointer, string, unsafe.Pointer, unsafe.Pointer) int32
+	_clCreateBuffer                                func(unsafe.Pointer, uint64, uint, unsafe.Pointer, *int32) unsafe.Pointer
+	_clCreateCommandQueue                          func(unsafe.Pointer, unsafe.Pointer, uint64, *int32) unsafe.Pointer
+	_clCreateCommandQueueWithPropertiesAPPLE       func(unsafe.Pointer, unsafe.Pointer, *int, *int32) unsafe.Pointer
+	_clCreateContext                               func(*int, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *int32) unsafe.Pointer
+	_clCreateContextAndCommandQueueAPPLE           func(*int, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint64, unsafe.Pointer, unsafe.Pointer) int32
+	_clCreateContextFromType                       func(*int, uint64, unsafe.Pointer, unsafe.Pointer, *int32) unsafe.Pointer
+	_clCreateDAGAPPLE                              func(unsafe.Pointer) unsafe.Pointer
+	_clCreateEventFromGLsyncKHR                    func(unsafe.Pointer, unsafe.Pointer, *int32) unsafe.Pointer
+	_clCreateFromGLBuffer                          func(unsafe.Pointer, uint64, uint, *int32) unsafe.Pointer
+	_clCreateFromGLRenderbuffer                    func(unsafe.Pointer, uint64, uint, *int32) unsafe.Pointer
+	_clCreateFromGLTexture                         func(unsafe.Pointer, uint64, uint, int, uint, *int32) unsafe.Pointer
+	_clCreateFromGLTexture2D                       func(unsafe.Pointer, uint64, uint, int, uint, *int32) unsafe.Pointer
+	_clCreateFromGLTexture3D                       func(unsafe.Pointer, uint64, uint, int, uint, *int32) unsafe.Pointer
+	_clCreateImage                                 func(unsafe.Pointer, uint64, *ClImageFormat, *ClImageDesc, unsafe.Pointer, *int32) unsafe.Pointer
+	_clCreateImage2D                               func(unsafe.Pointer, uint64, *ClImageFormat, uint, uint, uint, unsafe.Pointer, *int32) unsafe.Pointer
+	_clCreateImage3D                               func(unsafe.Pointer, uint64, *ClImageFormat, uint, uint, uint, uint, uint, unsafe.Pointer, *int32) unsafe.Pointer
+	_clCreateImageFromIOSurface2DAPPLE             func(unsafe.Pointer, uint64, *ClImageFormat, uint, uint, unsafe.Pointer, *int32) unsafe.Pointer
 	_clCreateImageFromIOSurfaceWithPropertiesAPPLE func(unsafe.Pointer, uint64, *ClImageFormat, *ClImageDesc, *int, *int32) unsafe.Pointer
-	_clCreateKernel func(unsafe.Pointer, string, *int32) unsafe.Pointer
-	_clCreateKernelFromDAGAPPLE func(unsafe.Pointer, uint32, unsafe.Pointer) unsafe.Pointer
-	_clCreateKernelsInProgram func(unsafe.Pointer, uint32, unsafe.Pointer, *uint32) int32
-	_clCreateProgramAndKernelsWithSourceAPPLE func(unsafe.Pointer, uint32, string, *uint, uint32, unsafe.Pointer, string, uint32, string, unsafe.Pointer, unsafe.Pointer) int32
-	_clCreateProgramWithBinary func(unsafe.Pointer, uint32, unsafe.Pointer, *uint, *uint8, *int32, *int32) unsafe.Pointer
-	_clCreateProgramWithBuiltInKernels func(unsafe.Pointer, uint32, unsafe.Pointer, string, *int32) unsafe.Pointer
-	_clCreateProgramWithSource func(unsafe.Pointer, uint32, string, *uint, *int32) unsafe.Pointer
-	_clCreateSampler func(unsafe.Pointer, uint32, uint32, uint32, *int32) unsafe.Pointer
-	_clCreateSubBuffer func(unsafe.Pointer, uint64, uint32, unsafe.Pointer, *int32) unsafe.Pointer
-	_clCreateSubDevices func(unsafe.Pointer, *int, uint32, unsafe.Pointer, *uint32) int32
-	_clCreateUserEvent func(unsafe.Pointer, *int32) unsafe.Pointer
-	_clEnqueueAcquireGLObjects func(unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
-	_clEnqueueBarrier func(unsafe.Pointer) int32
-	_clEnqueueBarrierWithWaitList func(unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
-	_clEnqueueCopyBuffer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint, uint, uint, uint32, unsafe.Pointer, unsafe.Pointer) int32
-	_clEnqueueCopyBufferRect func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint, *uint, *uint, uint, uint, uint, uint, uint32, unsafe.Pointer, unsafe.Pointer) int32
-	_clEnqueueCopyBufferToImage func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint, *uint, *uint, uint32, unsafe.Pointer, unsafe.Pointer) int32
-	_clEnqueueCopyImage func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint, *uint, *uint, uint32, unsafe.Pointer, unsafe.Pointer) int32
-	_clEnqueueCopyImageToBuffer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint, *uint, uint, uint32, unsafe.Pointer, unsafe.Pointer) int32
-	_clEnqueueFillBuffer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint, uint, uint, uint32, unsafe.Pointer, unsafe.Pointer) int32
-	_clEnqueueFillImage func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint, *uint, uint32, unsafe.Pointer, unsafe.Pointer) int32
-	_clEnqueueMapBuffer func(unsafe.Pointer, unsafe.Pointer, uint32, uint64, uint, uint, uint32, unsafe.Pointer, unsafe.Pointer, *int32) unsafe.Pointer
-	_clEnqueueMapImage func(unsafe.Pointer, unsafe.Pointer, uint32, uint64, *uint, *uint, *uint, *uint, uint32, unsafe.Pointer, unsafe.Pointer, *int32) unsafe.Pointer
-	_clEnqueueMarker func(unsafe.Pointer, unsafe.Pointer) int32
-	_clEnqueueMarkerWithWaitList func(unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
-	_clEnqueueMigrateMemObjects func(unsafe.Pointer, uint32, unsafe.Pointer, uint64, uint32, unsafe.Pointer, unsafe.Pointer) int32
-	_clEnqueueNDRangeKernel func(unsafe.Pointer, unsafe.Pointer, uint32, *uint, *uint, *uint, uint32, unsafe.Pointer, unsafe.Pointer) int32
-	_clEnqueueNativeKernel func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint, uint32, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
-	_clEnqueueReadBuffer func(unsafe.Pointer, unsafe.Pointer, uint32, uint, uint, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
-	_clEnqueueReadBufferRect func(unsafe.Pointer, unsafe.Pointer, uint32, *uint, *uint, *uint, uint, uint, uint, uint, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
-	_clEnqueueReadImage func(unsafe.Pointer, unsafe.Pointer, uint32, *uint, *uint, uint, uint, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
-	_clEnqueueReleaseGLObjects func(unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
-	_clEnqueueTask func(unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
-	_clEnqueueUnmapMemObject func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
-	_clEnqueueWaitForEvents func(unsafe.Pointer, uint32, unsafe.Pointer) int32
-	_clEnqueueWriteBuffer func(unsafe.Pointer, unsafe.Pointer, uint32, uint, uint, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
-	_clEnqueueWriteBufferRect func(unsafe.Pointer, unsafe.Pointer, uint32, *uint, *uint, *uint, uint, uint, uint, uint, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
-	_clEnqueueWriteImage func(unsafe.Pointer, unsafe.Pointer, uint32, *uint, *uint, uint, uint, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
-	_clFinish func(unsafe.Pointer) int32
-	_clFlush func(unsafe.Pointer) int32
-	_clGetCommandQueueInfo func(unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint) int32
-	_clGetContextInfo func(unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint) int32
-	_clGetDAGNodeAPPLE func(unsafe.Pointer, unsafe.Pointer, *int, *uint32, uint) int
-	_clGetDeviceIDs func(unsafe.Pointer, uint64, uint32, unsafe.Pointer, *uint32) int32
-	_clGetDeviceInfo func(unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint) int32
-	_clGetEventInfo func(unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint) int32
-	_clGetEventProfilingInfo func(unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint) int32
-	_clGetExtensionFunctionAddress func(string) unsafe.Pointer
-	_clGetExtensionFunctionAddressForPlatform func(unsafe.Pointer, string) unsafe.Pointer
-	_clGetGLContextInfoAPPLE func(unsafe.Pointer, unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint) int32
-	_clGetGLObjectInfo func(unsafe.Pointer, *uint32, *uint) int32
-	_clGetGLTextureInfo func(unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint) int32
-	_clGetImageInfo func(unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint) int32
-	_clGetKernelArgInfo func(unsafe.Pointer, uint32, uint32, uint, unsafe.Pointer, *uint) int32
-	_clGetKernelInfo func(unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint) int32
-	_clGetKernelWorkGroupInfo func(unsafe.Pointer, unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint) int32
-	_clGetMemObjectInfo func(unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint) int32
-	_clGetPlatformIDs func(uint32, unsafe.Pointer, *uint32) int32
-	_clGetPlatformInfo func(unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint) int32
-	_clGetProgramBuildInfo func(unsafe.Pointer, unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint) int32
-	_clGetProgramInfo func(unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint) int32
-	_clGetSamplerInfo func(unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint) int32
-	_clGetSupportedImageFormats func(unsafe.Pointer, uint64, uint32, uint32, *ClImageFormat, *uint32) int32
-	_clLinkProgram func(unsafe.Pointer, uint32, unsafe.Pointer, string, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *int32) unsafe.Pointer
-	_clLogMessagesToStderrAPPLE func(string, unsafe.Pointer, uint, unsafe.Pointer)
-	_clLogMessagesToStdoutAPPLE func(string, unsafe.Pointer, uint, unsafe.Pointer)
-	_clLogMessagesToSystemLogAPPLE func(string, unsafe.Pointer, uint, unsafe.Pointer)
-	_clReleaseCommandQueue func(unsafe.Pointer) int32
-	_clReleaseContext func(unsafe.Pointer) int32
-	_clReleaseDAGAPPLE func(unsafe.Pointer)
-	_clReleaseDevice func(unsafe.Pointer) int32
-	_clReleaseEvent func(unsafe.Pointer) int32
-	_clReleaseKernel func(unsafe.Pointer) int32
-	_clReleaseMemObject func(unsafe.Pointer) int32
-	_clReleaseProgram func(unsafe.Pointer) int32
-	_clReleaseSampler func(unsafe.Pointer) int32
-	_clRetainCommandQueue func(unsafe.Pointer) int32
-	_clRetainContext func(unsafe.Pointer) int32
-	_clRetainDevice func(unsafe.Pointer) int32
-	_clRetainEvent func(unsafe.Pointer) int32
-	_clRetainKernel func(unsafe.Pointer) int32
-	_clRetainMemObject func(unsafe.Pointer) int32
-	_clRetainProgram func(unsafe.Pointer) int32
-	_clRetainSampler func(unsafe.Pointer) int32
-	_clSetEventCallback func(unsafe.Pointer, int32, unsafe.Pointer, unsafe.Pointer) int32
-	_clSetKernelArg func(unsafe.Pointer, uint32, uint, unsafe.Pointer) int32
-	_clSetKernelArgByNameAPPLE func(unsafe.Pointer, string, uint, unsafe.Pointer) int32
-	_clSetKernelArgsVaListAPPLE func(unsafe.Pointer, uint32, string) int32
-	_clSetMemObjectDestructorAPPLE func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
-	_clSetMemObjectDestructorCallback func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
-	_clSetUserEventStatus func(unsafe.Pointer, int32) int32
-	_clUnloadCompiler func() int32
-	_clUnloadPlatformCompiler func(unsafe.Pointer) int32
-	_clWaitForEvents func(uint32, unsafe.Pointer) int32
-	_gcl_copy_image func(unsafe.Pointer, unsafe.Pointer, *uint, *uint, *uint)
-	_gcl_copy_image_to_ptr func(unsafe.Pointer, unsafe.Pointer, *uint, *uint)
-	_gcl_copy_ptr_to_image func(unsafe.Pointer, unsafe.Pointer, *uint, *uint)
-	_gcl_create_buffer_from_ptr func(unsafe.Pointer) unsafe.Pointer
-	_gcl_create_dispatch_queue func(uint64, unsafe.Pointer) unsafe.Pointer
-	_gcl_create_image func(*ClImageFormat, uint, uint, uint, unsafe.Pointer) unsafe.Pointer
-	_gcl_create_kernel_from_block func(unsafe.Pointer) unsafe.Pointer
-	_gcl_free func(unsafe.Pointer)
-	_gcl_get_context func() unsafe.Pointer
-	_gcl_get_device_id_with_dispatch_queue func(objc.ID) unsafe.Pointer
-	_gcl_get_kernel_block_workgroup_info func(unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint)
-	_gcl_get_supported_image_formats func(unsafe.Pointer, uint32, uint, *ClImageFormat, *uint32)
-	_gcl_gl_create_image_from_renderbuffer func(uint32) unsafe.Pointer
-	_gcl_gl_create_image_from_texture func(uint32, int32, uint32) unsafe.Pointer
-	_gcl_gl_create_ptr_from_buffer func(uint32) unsafe.Pointer
-	_gcl_gl_set_sharegroup func(unsafe.Pointer)
-	_gcl_malloc func(uint, unsafe.Pointer, uint64) unsafe.Pointer
-	_gcl_map_image func(unsafe.Pointer, uint64, *uint, *uint) unsafe.Pointer
-	_gcl_map_ptr func(unsafe.Pointer, uint64, uint) unsafe.Pointer
-	_gcl_memcpy func(unsafe.Pointer, unsafe.Pointer, uint)
-	_gcl_memcpy_rect func(unsafe.Pointer, unsafe.Pointer, *uint, *uint, *uint, uint, uint, uint, uint)
-	_gcl_release_image func(unsafe.Pointer)
-	_gcl_retain_image func(unsafe.Pointer)
-	_gcl_set_finalizer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_gcl_start_timer func() uint64
-	_gcl_stop_timer func(uint64) float64
-	_gcl_unmap func(unsafe.Pointer)
+	_clCreateKernel                                func(unsafe.Pointer, string, *int32) unsafe.Pointer
+	_clCreateKernelFromDAGAPPLE                    func(unsafe.Pointer, uint32, unsafe.Pointer) unsafe.Pointer
+	_clCreateKernelsInProgram                      func(unsafe.Pointer, uint32, unsafe.Pointer, *uint32) int32
+	_clCreateProgramAndKernelsWithSourceAPPLE      func(unsafe.Pointer, uint32, string, *uint, uint32, unsafe.Pointer, string, uint32, string, unsafe.Pointer, unsafe.Pointer) int32
+	_clCreateProgramWithBinary                     func(unsafe.Pointer, uint32, unsafe.Pointer, *uint, *uint8, *int32, *int32) unsafe.Pointer
+	_clCreateProgramWithBuiltInKernels             func(unsafe.Pointer, uint32, unsafe.Pointer, string, *int32) unsafe.Pointer
+	_clCreateProgramWithSource                     func(unsafe.Pointer, uint32, string, *uint, *int32) unsafe.Pointer
+	_clCreateSampler                               func(unsafe.Pointer, uint32, uint32, uint32, *int32) unsafe.Pointer
+	_clCreateSubBuffer                             func(unsafe.Pointer, uint64, uint32, unsafe.Pointer, *int32) unsafe.Pointer
+	_clCreateSubDevices                            func(unsafe.Pointer, *int, uint32, unsafe.Pointer, *uint32) int32
+	_clCreateUserEvent                             func(unsafe.Pointer, *int32) unsafe.Pointer
+	_clEnqueueAcquireGLObjects                     func(unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	_clEnqueueBarrier                              func(unsafe.Pointer) int32
+	_clEnqueueBarrierWithWaitList                  func(unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	_clEnqueueCopyBuffer                           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint, uint, uint, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	_clEnqueueCopyBufferRect                       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint, *uint, *uint, uint, uint, uint, uint, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	_clEnqueueCopyBufferToImage                    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint, *uint, *uint, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	_clEnqueueCopyImage                            func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint, *uint, *uint, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	_clEnqueueCopyImageToBuffer                    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint, *uint, uint, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	_clEnqueueFillBuffer                           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint, uint, uint, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	_clEnqueueFillImage                            func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint, *uint, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	_clEnqueueMapBuffer                            func(unsafe.Pointer, unsafe.Pointer, uint32, uint64, uint, uint, uint32, unsafe.Pointer, unsafe.Pointer, *int32) unsafe.Pointer
+	_clEnqueueMapImage                             func(unsafe.Pointer, unsafe.Pointer, uint32, uint64, *uint, *uint, *uint, *uint, uint32, unsafe.Pointer, unsafe.Pointer, *int32) unsafe.Pointer
+	_clEnqueueMarker                               func(unsafe.Pointer, unsafe.Pointer) int32
+	_clEnqueueMarkerWithWaitList                   func(unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	_clEnqueueMigrateMemObjects                    func(unsafe.Pointer, uint32, unsafe.Pointer, uint64, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	_clEnqueueNDRangeKernel                        func(unsafe.Pointer, unsafe.Pointer, uint32, *uint, *uint, *uint, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	_clEnqueueNativeKernel                         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint, uint32, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	_clEnqueueReadBuffer                           func(unsafe.Pointer, unsafe.Pointer, uint32, uint, uint, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	_clEnqueueReadBufferRect                       func(unsafe.Pointer, unsafe.Pointer, uint32, *uint, *uint, *uint, uint, uint, uint, uint, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	_clEnqueueReadImage                            func(unsafe.Pointer, unsafe.Pointer, uint32, *uint, *uint, uint, uint, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	_clEnqueueReleaseGLObjects                     func(unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	_clEnqueueTask                                 func(unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	_clEnqueueUnmapMemObject                       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	_clEnqueueWaitForEvents                        func(unsafe.Pointer, uint32, unsafe.Pointer) int32
+	_clEnqueueWriteBuffer                          func(unsafe.Pointer, unsafe.Pointer, uint32, uint, uint, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	_clEnqueueWriteBufferRect                      func(unsafe.Pointer, unsafe.Pointer, uint32, *uint, *uint, *uint, uint, uint, uint, uint, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	_clEnqueueWriteImage                           func(unsafe.Pointer, unsafe.Pointer, uint32, *uint, *uint, uint, uint, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	_clFinish                                      func(unsafe.Pointer) int32
+	_clFlush                                       func(unsafe.Pointer) int32
+	_clGetCommandQueueInfo                         func(unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint) int32
+	_clGetContextInfo                              func(unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint) int32
+	_clGetDAGNodeAPPLE                             func(unsafe.Pointer, unsafe.Pointer, *int, *uint32, uint) int
+	_clGetDeviceIDs                                func(unsafe.Pointer, uint64, uint32, unsafe.Pointer, *uint32) int32
+	_clGetDeviceInfo                               func(unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint) int32
+	_clGetEventInfo                                func(unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint) int32
+	_clGetEventProfilingInfo                       func(unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint) int32
+	_clGetExtensionFunctionAddress                 func(string) unsafe.Pointer
+	_clGetExtensionFunctionAddressForPlatform      func(unsafe.Pointer, string) unsafe.Pointer
+	_clGetGLContextInfoAPPLE                       func(unsafe.Pointer, unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint) int32
+	_clGetGLObjectInfo                             func(unsafe.Pointer, *uint32, *uint) int32
+	_clGetGLTextureInfo                            func(unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint) int32
+	_clGetImageInfo                                func(unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint) int32
+	_clGetKernelArgInfo                            func(unsafe.Pointer, uint32, uint32, uint, unsafe.Pointer, *uint) int32
+	_clGetKernelInfo                               func(unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint) int32
+	_clGetKernelWorkGroupInfo                      func(unsafe.Pointer, unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint) int32
+	_clGetMemObjectInfo                            func(unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint) int32
+	_clGetPlatformIDs                              func(uint32, unsafe.Pointer, *uint32) int32
+	_clGetPlatformInfo                             func(unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint) int32
+	_clGetProgramBuildInfo                         func(unsafe.Pointer, unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint) int32
+	_clGetProgramInfo                              func(unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint) int32
+	_clGetSamplerInfo                              func(unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint) int32
+	_clGetSupportedImageFormats                    func(unsafe.Pointer, uint64, uint32, uint32, *ClImageFormat, *uint32) int32
+	_clLinkProgram                                 func(unsafe.Pointer, uint32, unsafe.Pointer, string, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *int32) unsafe.Pointer
+	_clLogMessagesToStderrAPPLE                    func(string, unsafe.Pointer, uint, unsafe.Pointer)
+	_clLogMessagesToStdoutAPPLE                    func(string, unsafe.Pointer, uint, unsafe.Pointer)
+	_clLogMessagesToSystemLogAPPLE                 func(string, unsafe.Pointer, uint, unsafe.Pointer)
+	_clReleaseCommandQueue                         func(unsafe.Pointer) int32
+	_clReleaseContext                              func(unsafe.Pointer) int32
+	_clReleaseDAGAPPLE                             func(unsafe.Pointer)
+	_clReleaseDevice                               func(unsafe.Pointer) int32
+	_clReleaseEvent                                func(unsafe.Pointer) int32
+	_clReleaseKernel                               func(unsafe.Pointer) int32
+	_clReleaseMemObject                            func(unsafe.Pointer) int32
+	_clReleaseProgram                              func(unsafe.Pointer) int32
+	_clReleaseSampler                              func(unsafe.Pointer) int32
+	_clRetainCommandQueue                          func(unsafe.Pointer) int32
+	_clRetainContext                               func(unsafe.Pointer) int32
+	_clRetainDevice                                func(unsafe.Pointer) int32
+	_clRetainEvent                                 func(unsafe.Pointer) int32
+	_clRetainKernel                                func(unsafe.Pointer) int32
+	_clRetainMemObject                             func(unsafe.Pointer) int32
+	_clRetainProgram                               func(unsafe.Pointer) int32
+	_clRetainSampler                               func(unsafe.Pointer) int32
+	_clSetEventCallback                            func(unsafe.Pointer, int32, unsafe.Pointer, unsafe.Pointer) int32
+	_clSetKernelArg                                func(unsafe.Pointer, uint32, uint, unsafe.Pointer) int32
+	_clSetKernelArgByNameAPPLE                     func(unsafe.Pointer, string, uint, unsafe.Pointer) int32
+	_clSetKernelArgsVaListAPPLE                    func(unsafe.Pointer, uint32, string) int32
+	_clSetMemObjectDestructorAPPLE                 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	_clSetMemObjectDestructorCallback              func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	_clSetUserEventStatus                          func(unsafe.Pointer, int32) int32
+	_clUnloadCompiler                              func() int32
+	_clUnloadPlatformCompiler                      func(unsafe.Pointer) int32
+	_clWaitForEvents                               func(uint32, unsafe.Pointer) int32
+	_gcl_copy_image                                func(unsafe.Pointer, unsafe.Pointer, *uint, *uint, *uint)
+	_gcl_copy_image_to_ptr                         func(unsafe.Pointer, unsafe.Pointer, *uint, *uint)
+	_gcl_copy_ptr_to_image                         func(unsafe.Pointer, unsafe.Pointer, *uint, *uint)
+	_gcl_create_buffer_from_ptr                    func(unsafe.Pointer) unsafe.Pointer
+	_gcl_create_dispatch_queue                     func(uint64, unsafe.Pointer) unsafe.Pointer
+	_gcl_create_image                              func(*ClImageFormat, uint, uint, uint, unsafe.Pointer) unsafe.Pointer
+	_gcl_create_kernel_from_block                  func(unsafe.Pointer) unsafe.Pointer
+	_gcl_free                                      func(unsafe.Pointer)
+	_gcl_get_context                               func() unsafe.Pointer
+	_gcl_get_device_id_with_dispatch_queue         func(objc.ID) unsafe.Pointer
+	_gcl_get_kernel_block_workgroup_info           func(unsafe.Pointer, uint32, uint, unsafe.Pointer, *uint)
+	_gcl_get_supported_image_formats               func(unsafe.Pointer, uint32, uint, *ClImageFormat, *uint32)
+	_gcl_gl_create_image_from_renderbuffer         func(uint32) unsafe.Pointer
+	_gcl_gl_create_image_from_texture              func(uint32, int32, uint32) unsafe.Pointer
+	_gcl_gl_create_ptr_from_buffer                 func(uint32) unsafe.Pointer
+	_gcl_gl_set_sharegroup                         func(unsafe.Pointer)
+	_gcl_malloc                                    func(uint, unsafe.Pointer, uint64) unsafe.Pointer
+	_gcl_map_image                                 func(unsafe.Pointer, uint64, *uint, *uint) unsafe.Pointer
+	_gcl_map_ptr                                   func(unsafe.Pointer, uint64, uint) unsafe.Pointer
+	_gcl_memcpy                                    func(unsafe.Pointer, unsafe.Pointer, uint)
+	_gcl_memcpy_rect                               func(unsafe.Pointer, unsafe.Pointer, *uint, *uint, *uint, uint, uint, uint, uint)
+	_gcl_release_image                             func(unsafe.Pointer)
+	_gcl_retain_image                              func(unsafe.Pointer)
+	_gcl_set_finalizer                             func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_gcl_start_timer                               func() uint64
+	_gcl_stop_timer                                func(uint64) float64
+	_gcl_unmap                                     func(unsafe.Pointer)
 )
 
 // C function: clBuildProgram
@@ -859,4 +859,3 @@ func GclStopTimer(t uint64) float64 {
 func GclUnmap(arg unsafe.Pointer) {
 	_gcl_unmap(arg)
 }
-

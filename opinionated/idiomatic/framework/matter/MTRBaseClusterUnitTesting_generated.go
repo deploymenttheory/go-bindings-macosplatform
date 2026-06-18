@@ -5258,11 +5258,17 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeClusterRevisionWithParamsS
 	}
 }
 
-func (x *MTRBaseClusterUnitTesting) asMTRBaseClusterUnitTesting() *raw.MTRBaseClusterUnitTesting { return x.inner }
+func (x *MTRBaseClusterUnitTesting) asMTRBaseClusterUnitTesting() *raw.MTRBaseClusterUnitTesting {
+	return x.inner
+}
 
-func (x *MTRBaseClusterUnitTesting) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterUnitTesting) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterUnitTesting) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterUnitTesting) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterUnitTestingable is the interface implemented by [MTRBaseClusterUnitTesting], for mocking and DI.
 type MTRBaseClusterUnitTestingable interface {
@@ -5637,4 +5643,3 @@ type MTRBaseClusterUnitTestingable interface {
 }
 
 var _ MTRBaseClusterUnitTestingable = (*MTRBaseClusterUnitTesting)(nil)
-

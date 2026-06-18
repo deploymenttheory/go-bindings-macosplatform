@@ -42,14 +42,18 @@ func GCControllerUserCustomizationsDidChangeNotification() uintptr {
 // Deprecated: Use the -[GCController controllerWithExtendedGamepad] method instead
 func GCCurrentExtendedGamepadSnapshotDataVersion() GCExtendedGamepadSnapshotDataVersion {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCCurrentExtendedGamepadSnapshotDataVersion")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*GCExtendedGamepadSnapshotDataVersion)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: Use the -[GCController controllerWithMicroGamepad] method instead
 func GCCurrentMicroGamepadSnapshotDataVersion() GCMicroGamepadSnapshotDataVersion {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCCurrentMicroGamepadSnapshotDataVersion")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*GCMicroGamepadSnapshotDataVersion)(unsafe.Pointer(ptr))
 }
 
@@ -60,49 +64,65 @@ func GCHapticDurationInfinite() uintptr {
 
 func GCHapticsLocalityAll() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCHapticsLocalityAll")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func GCHapticsLocalityDefault() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCHapticsLocalityDefault")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func GCHapticsLocalityHandles() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCHapticsLocalityHandles")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func GCHapticsLocalityLeftHandle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCHapticsLocalityLeftHandle")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func GCHapticsLocalityLeftTrigger() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCHapticsLocalityLeftTrigger")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func GCHapticsLocalityRightHandle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCHapticsLocalityRightHandle")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func GCHapticsLocalityRightTrigger() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCHapticsLocalityRightTrigger")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func GCHapticsLocalityTriggers() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCHapticsLocalityTriggers")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -390,805 +410,1073 @@ func GCKeyCloseBracket() uintptr {
 
 func GCKeyCodeApplication() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeApplication")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeBackslash() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeBackslash")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeCapsLock() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeCapsLock")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeCloseBracket() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeCloseBracket")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeComma() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeComma")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeDeleteForward() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeDeleteForward")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeDeleteOrBackspace() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeDeleteOrBackspace")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeDownArrow() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeDownArrow")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeEight() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeEight")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeEnd() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeEnd")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeEqualSign() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeEqualSign")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeEscape() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeEscape")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeF1() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeF1")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeF10() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeF10")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeF11() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeF11")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeF12() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeF12")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeF13() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeF13")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeF14() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeF14")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeF15() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeF15")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeF16() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeF16")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeF17() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeF17")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeF18() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeF18")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeF19() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeF19")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeF2() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeF2")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeF20() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeF20")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeF3() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeF3")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeF4() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeF4")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeF5() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeF5")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeF6() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeF6")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeF7() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeF7")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeF8() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeF8")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeF9() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeF9")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeFive() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeFive")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeFour() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeFour")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeGraveAccentAndTilde() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeGraveAccentAndTilde")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeHome() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeHome")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeHyphen() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeHyphen")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeInsert() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeInsert")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeInternational1() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeInternational1")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeInternational2() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeInternational2")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeInternational3() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeInternational3")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeInternational4() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeInternational4")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeInternational5() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeInternational5")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeInternational6() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeInternational6")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeInternational7() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeInternational7")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeInternational8() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeInternational8")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeInternational9() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeInternational9")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeyA() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeyA")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeyB() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeyB")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeyC() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeyC")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeyD() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeyD")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeyE() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeyE")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeyF() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeyF")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeyG() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeyG")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeyH() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeyH")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeyI() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeyI")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeyJ() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeyJ")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeyK() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeyK")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeyL() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeyL")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeyM() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeyM")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeyN() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeyN")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeyO() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeyO")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeyP() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeyP")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeyQ() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeyQ")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeyR() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeyR")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeyS() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeyS")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeyT() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeyT")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeyU() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeyU")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeyV() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeyV")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeyW() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeyW")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeyX() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeyX")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeyY() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeyY")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeyZ() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeyZ")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeypad0() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeypad0")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeypad1() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeypad1")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeypad2() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeypad2")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeypad3() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeypad3")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeypad4() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeypad4")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeypad5() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeypad5")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeypad6() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeypad6")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeypad7() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeypad7")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeypad8() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeypad8")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeypad9() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeypad9")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeypadAsterisk() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeypadAsterisk")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeypadEnter() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeypadEnter")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeypadEqualSign() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeypadEqualSign")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeypadHyphen() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeypadHyphen")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeypadNumLock() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeypadNumLock")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeypadPeriod() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeypadPeriod")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeypadPlus() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeypadPlus")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeKeypadSlash() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeKeypadSlash")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeLANG1() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeLANG1")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeLANG2() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeLANG2")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeLANG3() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeLANG3")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeLANG4() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeLANG4")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeLANG5() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeLANG5")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeLANG6() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeLANG6")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeLANG7() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeLANG7")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeLANG8() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeLANG8")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeLANG9() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeLANG9")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeLeftAlt() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeLeftAlt")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeLeftArrow() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeLeftArrow")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeLeftControl() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeLeftControl")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeLeftGUI() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeLeftGUI")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeLeftShift() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeLeftShift")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeNine() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeNine")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeNonUSBackslash() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeNonUSBackslash")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeNonUSPound() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeNonUSPound")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeOne() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeOne")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeOpenBracket() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeOpenBracket")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodePageDown() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodePageDown")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodePageUp() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodePageUp")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodePause() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodePause")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodePeriod() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodePeriod")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodePower() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodePower")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodePrintScreen() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodePrintScreen")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeQuote() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeQuote")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeReturnOrEnter() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeReturnOrEnter")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeRightAlt() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeRightAlt")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeRightArrow() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeRightArrow")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeRightControl() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeRightControl")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeRightGUI() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeRightGUI")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeRightShift() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeRightShift")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeScrollLock() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeScrollLock")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeSemicolon() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeSemicolon")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeSeven() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeSeven")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeSix() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeSix")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeSlash() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeSlash")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeSpacebar() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeSpacebar")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeTab() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeTab")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeThree() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeThree")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeTwo() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeTwo")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeUpArrow() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeUpArrow")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func GCKeyCodeZero() int {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCodeZero")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
@@ -1862,7 +2150,9 @@ func GCMouseDidStopBeingCurrentNotification() uintptr {
 
 func GCPoint2Zero() GCPoint2 {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCPoint2Zero")
-	if ptr == 0 { return GCPoint2{} }
+	if ptr == 0 {
+		return GCPoint2{}
+	}
 	return *(*GCPoint2)(unsafe.Pointer(ptr))
 }
 
@@ -1952,4 +2242,3 @@ func GCRacingWheelDidDisconnectNotification() uintptr {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCRacingWheelDidDisconnectNotification")
 	return ptr
 }
-

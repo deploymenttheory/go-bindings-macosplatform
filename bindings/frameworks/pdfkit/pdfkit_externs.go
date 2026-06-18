@@ -836,7 +836,8 @@ func KPDFAnnotationKey_WidgetValue() uintptr {
 
 func KPDFDestinationUnspecifiedValue() float64 {
 	ptr, _ := purego.Dlsym(_pdfkitLib, "kPDFDestinationUnspecifiedValue")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
-

@@ -250,9 +250,13 @@ func (x *MTRBaseClusterDishwasherMode) SubscribeAttributeClusterRevisionWithPara
 	}
 }
 
-func (x *MTRBaseClusterDishwasherMode) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterDishwasherMode) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterDishwasherMode) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterDishwasherMode) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterDishwasherModeable is the interface implemented by [MTRBaseClusterDishwasherMode], for mocking and DI.
 type MTRBaseClusterDishwasherModeable interface {
@@ -275,4 +279,3 @@ type MTRBaseClusterDishwasherModeable interface {
 }
 
 var _ MTRBaseClusterDishwasherModeable = (*MTRBaseClusterDishwasherMode)(nil)
-

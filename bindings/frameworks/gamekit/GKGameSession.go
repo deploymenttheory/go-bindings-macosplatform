@@ -19,29 +19,29 @@ type GKGameSession struct {
 }
 
 var (
-	_clsGKGameSession = _objcClass("GKGameSession")
-	_gKGameSessionSelCreateSessionInContainerWithTitleMaxConnectedPlayersCompletionHandler = objc.RegisterName("createSessionInContainer:withTitle:maxConnectedPlayers:completionHandler:")
-	_gKGameSessionSelLoadSessionsInContainerCompletionHandler = objc.RegisterName("loadSessionsInContainer:completionHandler:")
-	_gKGameSessionSelLoadSessionWithIdentifierCompletionHandler = objc.RegisterName("loadSessionWithIdentifier:completionHandler:")
-	_gKGameSessionSelRemoveSessionWithIdentifierCompletionHandler = objc.RegisterName("removeSessionWithIdentifier:completionHandler:")
-	_gKGameSessionSelGetShareURLWithCompletionHandler = objc.RegisterName("getShareURLWithCompletionHandler:")
-	_gKGameSessionSelLoadDataWithCompletionHandler = objc.RegisterName("loadDataWithCompletionHandler:")
-	_gKGameSessionSelSaveDataCompletionHandler = objc.RegisterName("saveData:completionHandler:")
-	_gKGameSessionSelSetConnectionStateCompletionHandler = objc.RegisterName("setConnectionState:completionHandler:")
-	_gKGameSessionSelPlayersWithConnectionState = objc.RegisterName("playersWithConnectionState:")
-	_gKGameSessionSelSendDataWithTransportTypeCompletionHandler = objc.RegisterName("sendData:withTransportType:completionHandler:")
+	_clsGKGameSession                                                                                     = _objcClass("GKGameSession")
+	_gKGameSessionSelCreateSessionInContainerWithTitleMaxConnectedPlayersCompletionHandler                = objc.RegisterName("createSessionInContainer:withTitle:maxConnectedPlayers:completionHandler:")
+	_gKGameSessionSelLoadSessionsInContainerCompletionHandler                                             = objc.RegisterName("loadSessionsInContainer:completionHandler:")
+	_gKGameSessionSelLoadSessionWithIdentifierCompletionHandler                                           = objc.RegisterName("loadSessionWithIdentifier:completionHandler:")
+	_gKGameSessionSelRemoveSessionWithIdentifierCompletionHandler                                         = objc.RegisterName("removeSessionWithIdentifier:completionHandler:")
+	_gKGameSessionSelGetShareURLWithCompletionHandler                                                     = objc.RegisterName("getShareURLWithCompletionHandler:")
+	_gKGameSessionSelLoadDataWithCompletionHandler                                                        = objc.RegisterName("loadDataWithCompletionHandler:")
+	_gKGameSessionSelSaveDataCompletionHandler                                                            = objc.RegisterName("saveData:completionHandler:")
+	_gKGameSessionSelSetConnectionStateCompletionHandler                                                  = objc.RegisterName("setConnectionState:completionHandler:")
+	_gKGameSessionSelPlayersWithConnectionState                                                           = objc.RegisterName("playersWithConnectionState:")
+	_gKGameSessionSelSendDataWithTransportTypeCompletionHandler                                           = objc.RegisterName("sendData:withTransportType:completionHandler:")
 	_gKGameSessionSelSendMessageWithLocalizedFormatKeyArgumentsDataToPlayersBadgePlayersCompletionHandler = objc.RegisterName("sendMessageWithLocalizedFormatKey:arguments:data:toPlayers:badgePlayers:completionHandler:")
-	_gKGameSessionSelClearBadgeForPlayersCompletionHandler = objc.RegisterName("clearBadgeForPlayers:completionHandler:")
-	_gKGameSessionSelIdentifier = objc.RegisterName("identifier")
-	_gKGameSessionSelTitle = objc.RegisterName("title")
-	_gKGameSessionSelOwner = objc.RegisterName("owner")
-	_gKGameSessionSelPlayers = objc.RegisterName("players")
-	_gKGameSessionSelLastModifiedDate = objc.RegisterName("lastModifiedDate")
-	_gKGameSessionSelLastModifiedPlayer = objc.RegisterName("lastModifiedPlayer")
-	_gKGameSessionSelMaxNumberOfConnectedPlayers = objc.RegisterName("maxNumberOfConnectedPlayers")
-	_gKGameSessionSelBadgedPlayers = objc.RegisterName("badgedPlayers")
-	_gKGameSessionSelAddEventListener = objc.RegisterName("addEventListener:")
-	_gKGameSessionSelRemoveEventListener = objc.RegisterName("removeEventListener:")
+	_gKGameSessionSelClearBadgeForPlayersCompletionHandler                                                = objc.RegisterName("clearBadgeForPlayers:completionHandler:")
+	_gKGameSessionSelIdentifier                                                                           = objc.RegisterName("identifier")
+	_gKGameSessionSelTitle                                                                                = objc.RegisterName("title")
+	_gKGameSessionSelOwner                                                                                = objc.RegisterName("owner")
+	_gKGameSessionSelPlayers                                                                              = objc.RegisterName("players")
+	_gKGameSessionSelLastModifiedDate                                                                     = objc.RegisterName("lastModifiedDate")
+	_gKGameSessionSelLastModifiedPlayer                                                                   = objc.RegisterName("lastModifiedPlayer")
+	_gKGameSessionSelMaxNumberOfConnectedPlayers                                                          = objc.RegisterName("maxNumberOfConnectedPlayers")
+	_gKGameSessionSelBadgedPlayers                                                                        = objc.RegisterName("badgedPlayers")
+	_gKGameSessionSelAddEventListener                                                                     = objc.RegisterName("addEventListener:")
+	_gKGameSessionSelRemoveEventListener                                                                  = objc.RegisterName("removeEventListener:")
 )
 
 func GKGameSessionFromID(id objc.ID) *GKGameSession {
@@ -162,7 +162,9 @@ func (o *GKGameSession) SetConnectionStateCompletionHandler(state GKConnectionSt
 
 func (o *GKGameSession) PlayersWithConnectionState(state GKConnectionState) *foundation.NSArray[*GKCloudPlayer] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameSessionSelPlayersWithConnectionState, state)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GKCloudPlayer](_ret)
 }
 
@@ -201,37 +203,49 @@ func (o *GKGameSession) ClearBadgeForPlayersCompletionHandler(players *foundatio
 
 func (o *GKGameSession) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameSessionSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *GKGameSession) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameSessionSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *GKGameSession) Owner() *GKCloudPlayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameSessionSelOwner)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKCloudPlayerFromID(_ret)
 }
 
 func (o *GKGameSession) Players() *foundation.NSArray[*GKCloudPlayer] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameSessionSelPlayers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GKCloudPlayer](_ret)
 }
 
 func (o *GKGameSession) LastModifiedDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameSessionSelLastModifiedDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *GKGameSession) LastModifiedPlayer() *GKCloudPlayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameSessionSelLastModifiedPlayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKCloudPlayerFromID(_ret)
 }
 
@@ -242,7 +256,9 @@ func (o *GKGameSession) MaxNumberOfConnectedPlayers() int {
 
 func (o *GKGameSession) BadgedPlayers() *foundation.NSArray[*GKCloudPlayer] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameSessionSelBadgedPlayers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GKCloudPlayer](_ret)
 }
 
@@ -255,4 +271,3 @@ func GKGameSessionAddEventListener(listener *foundation.NSObject) {
 func GKGameSessionRemoveEventListener(listener *foundation.NSObject) {
 	objc.ID(_clsGKGameSession).Send(_gKGameSessionSelRemoveEventListener, listener.Ptr())
 }
-

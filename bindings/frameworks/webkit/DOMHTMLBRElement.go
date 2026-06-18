@@ -16,8 +16,8 @@ type DOMHTMLBRElement struct {
 }
 
 var (
-	_clsDOMHTMLBRElement = _objcClass("DOMHTMLBRElement")
-	_dOMHTMLBRElementSelClear = objc.RegisterName("clear")
+	_clsDOMHTMLBRElement         = _objcClass("DOMHTMLBRElement")
+	_dOMHTMLBRElementSelClear    = objc.RegisterName("clear")
 	_dOMHTMLBRElementSelSetClear = objc.RegisterName("setClear:")
 )
 
@@ -33,11 +33,12 @@ func DOMHTMLBRElementFromID(id objc.ID) *DOMHTMLBRElement {
 
 func (o *DOMHTMLBRElement) Clear() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLBRElementSelClear)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLBRElement) SetClear(clear *foundation.NSString) {
 	o.Ptr().Send(_dOMHTMLBRElementSelSetClear, clear.Ptr())
 }
-

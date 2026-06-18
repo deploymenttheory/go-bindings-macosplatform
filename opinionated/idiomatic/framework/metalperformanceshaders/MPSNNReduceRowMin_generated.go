@@ -113,11 +113,17 @@ func (x *NNReduceRowMin) WithLabel(label string) *NNReduceRowMin {
 	return x
 }
 
-func (x *NNReduceRowMin) asNNReduceUnary() *mpsneuralnetwork.MPSNNReduceUnary { return &x.inner.MPSNNReduceUnary }
+func (x *NNReduceRowMin) asNNReduceUnary() *mpsneuralnetwork.MPSNNReduceUnary {
+	return &x.inner.MPSNNReduceUnary
+}
 
-func (x *NNReduceRowMin) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
+func (x *NNReduceRowMin) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel
+}
 
-func (x *NNReduceRowMin) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel }
+func (x *NNReduceRowMin) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel
+}
 
 // NNReduceRowMinable is the interface implemented by [NNReduceRowMin], for mocking and DI.
 type NNReduceRowMinable interface {
@@ -136,4 +142,3 @@ type NNReduceRowMinable interface {
 }
 
 var _ NNReduceRowMinable = (*NNReduceRowMin)(nil)
-

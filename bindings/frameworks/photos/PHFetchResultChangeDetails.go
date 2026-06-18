@@ -16,19 +16,19 @@ type PHFetchResultChangeDetails[ObjectType purego.AnyObject] struct {
 }
 
 var (
-	_clsPHFetchResultChangeDetails = _objcClass("PHFetchResultChangeDetails")
-	_pHFetchResultChangeDetailsSelEnumerateMovesWith = objc.RegisterName("enumerateMovesWithBlock:")
+	_clsPHFetchResultChangeDetails                                                        = _objcClass("PHFetchResultChangeDetails")
+	_pHFetchResultChangeDetailsSelEnumerateMovesWith                                      = objc.RegisterName("enumerateMovesWithBlock:")
 	_pHFetchResultChangeDetailsSelChangeDetailsFromFetchResultToFetchResultChangedObjects = objc.RegisterName("changeDetailsFromFetchResult:toFetchResult:changedObjects:")
-	_pHFetchResultChangeDetailsSelFetchResultBeforeChanges = objc.RegisterName("fetchResultBeforeChanges")
-	_pHFetchResultChangeDetailsSelFetchResultAfterChanges = objc.RegisterName("fetchResultAfterChanges")
-	_pHFetchResultChangeDetailsSelHasIncrementalChanges = objc.RegisterName("hasIncrementalChanges")
-	_pHFetchResultChangeDetailsSelRemovedIndexes = objc.RegisterName("removedIndexes")
-	_pHFetchResultChangeDetailsSelRemovedObjects = objc.RegisterName("removedObjects")
-	_pHFetchResultChangeDetailsSelInsertedIndexes = objc.RegisterName("insertedIndexes")
-	_pHFetchResultChangeDetailsSelInsertedObjects = objc.RegisterName("insertedObjects")
-	_pHFetchResultChangeDetailsSelChangedIndexes = objc.RegisterName("changedIndexes")
-	_pHFetchResultChangeDetailsSelChangedObjects = objc.RegisterName("changedObjects")
-	_pHFetchResultChangeDetailsSelHasMoves = objc.RegisterName("hasMoves")
+	_pHFetchResultChangeDetailsSelFetchResultBeforeChanges                                = objc.RegisterName("fetchResultBeforeChanges")
+	_pHFetchResultChangeDetailsSelFetchResultAfterChanges                                 = objc.RegisterName("fetchResultAfterChanges")
+	_pHFetchResultChangeDetailsSelHasIncrementalChanges                                   = objc.RegisterName("hasIncrementalChanges")
+	_pHFetchResultChangeDetailsSelRemovedIndexes                                          = objc.RegisterName("removedIndexes")
+	_pHFetchResultChangeDetailsSelRemovedObjects                                          = objc.RegisterName("removedObjects")
+	_pHFetchResultChangeDetailsSelInsertedIndexes                                         = objc.RegisterName("insertedIndexes")
+	_pHFetchResultChangeDetailsSelInsertedObjects                                         = objc.RegisterName("insertedObjects")
+	_pHFetchResultChangeDetailsSelChangedIndexes                                          = objc.RegisterName("changedIndexes")
+	_pHFetchResultChangeDetailsSelChangedObjects                                          = objc.RegisterName("changedObjects")
+	_pHFetchResultChangeDetailsSelHasMoves                                                = objc.RegisterName("hasMoves")
 )
 
 func PHFetchResultChangeDetailsFromID[ObjectType purego.AnyObject](id objc.ID) *PHFetchResultChangeDetails[ObjectType] {
@@ -54,19 +54,25 @@ func (o *PHFetchResultChangeDetails[ObjectType]) EnumerateMovesWith(handler func
 
 func PHFetchResultChangeDetailsChangeDetailsFromFetchResultToFetchResultChangedObjects(fromResult *PHFetchResult[objc.ID], toResult *PHFetchResult[objc.ID], changedObjects *foundation.NSArray[objc.ID]) *PHFetchResultChangeDetails[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHFetchResultChangeDetails), _pHFetchResultChangeDetailsSelChangeDetailsFromFetchResultToFetchResultChangedObjects, fromResult.Ptr(), toResult.Ptr(), changedObjects.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHFetchResultChangeDetailsFromID[objc.ID](_ret)
 }
 
 func (o *PHFetchResultChangeDetails[ObjectType]) FetchResultBeforeChanges() *PHFetchResult[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHFetchResultChangeDetailsSelFetchResultBeforeChanges)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHFetchResultFromID[ObjectType](_ret)
 }
 
 func (o *PHFetchResultChangeDetails[ObjectType]) FetchResultAfterChanges() *PHFetchResult[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHFetchResultChangeDetailsSelFetchResultAfterChanges)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHFetchResultFromID[ObjectType](_ret)
 }
 
@@ -77,37 +83,49 @@ func (o *PHFetchResultChangeDetails[ObjectType]) HasIncrementalChanges() bool {
 
 func (o *PHFetchResultChangeDetails[ObjectType]) RemovedIndexes() *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHFetchResultChangeDetailsSelRemovedIndexes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
 func (o *PHFetchResultChangeDetails[ObjectType]) RemovedObjects() *foundation.NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHFetchResultChangeDetailsSelRemovedObjects)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[ObjectType](_ret)
 }
 
 func (o *PHFetchResultChangeDetails[ObjectType]) InsertedIndexes() *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHFetchResultChangeDetailsSelInsertedIndexes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
 func (o *PHFetchResultChangeDetails[ObjectType]) InsertedObjects() *foundation.NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHFetchResultChangeDetailsSelInsertedObjects)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[ObjectType](_ret)
 }
 
 func (o *PHFetchResultChangeDetails[ObjectType]) ChangedIndexes() *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHFetchResultChangeDetailsSelChangedIndexes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
 func (o *PHFetchResultChangeDetails[ObjectType]) ChangedObjects() *foundation.NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHFetchResultChangeDetailsSelChangedObjects)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[ObjectType](_ret)
 }
 
@@ -115,4 +133,3 @@ func (o *PHFetchResultChangeDetails[ObjectType]) HasMoves() bool {
 	_ret := objc.Send[bool](o.Ptr(), _pHFetchResultChangeDetailsSelHasMoves)
 	return _ret
 }
-

@@ -35,9 +35,13 @@ func NewMetricPlayerItemSeekEvent() *MetricPlayerItemSeekEvent {
 	return &MetricPlayerItemSeekEvent{inner: raw.AVMetricPlayerItemSeekEventFromID(_id)}
 }
 
-func (x *MetricPlayerItemSeekEvent) asMetricPlayerItemRateChangeEvent() *raw.AVMetricPlayerItemRateChangeEvent { return &x.inner.AVMetricPlayerItemRateChangeEvent }
+func (x *MetricPlayerItemSeekEvent) asMetricPlayerItemRateChangeEvent() *raw.AVMetricPlayerItemRateChangeEvent {
+	return &x.inner.AVMetricPlayerItemRateChangeEvent
+}
 
-func (x *MetricPlayerItemSeekEvent) asMetricEvent() *raw.AVMetricEvent { return &x.inner.AVMetricPlayerItemRateChangeEvent.AVMetricEvent }
+func (x *MetricPlayerItemSeekEvent) asMetricEvent() *raw.AVMetricEvent {
+	return &x.inner.AVMetricPlayerItemRateChangeEvent.AVMetricEvent
+}
 
 // MetricPlayerItemSeekEventable is the interface implemented by [MetricPlayerItemSeekEvent], for mocking and DI.
 type MetricPlayerItemSeekEventable interface {
@@ -45,4 +49,3 @@ type MetricPlayerItemSeekEventable interface {
 }
 
 var _ MetricPlayerItemSeekEventable = (*MetricPlayerItemSeekEvent)(nil)
-

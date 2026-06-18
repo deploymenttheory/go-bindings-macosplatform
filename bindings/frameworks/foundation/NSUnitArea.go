@@ -15,21 +15,21 @@ type NSUnitArea struct {
 }
 
 var (
-	_clsNSUnitArea = _objcClass("NSUnitArea")
-	_nSUnitAreaSelSquareMegameters = objc.RegisterName("squareMegameters")
-	_nSUnitAreaSelSquareKilometers = objc.RegisterName("squareKilometers")
-	_nSUnitAreaSelSquareMeters = objc.RegisterName("squareMeters")
+	_clsNSUnitArea                  = _objcClass("NSUnitArea")
+	_nSUnitAreaSelSquareMegameters  = objc.RegisterName("squareMegameters")
+	_nSUnitAreaSelSquareKilometers  = objc.RegisterName("squareKilometers")
+	_nSUnitAreaSelSquareMeters      = objc.RegisterName("squareMeters")
 	_nSUnitAreaSelSquareCentimeters = objc.RegisterName("squareCentimeters")
 	_nSUnitAreaSelSquareMillimeters = objc.RegisterName("squareMillimeters")
 	_nSUnitAreaSelSquareMicrometers = objc.RegisterName("squareMicrometers")
-	_nSUnitAreaSelSquareNanometers = objc.RegisterName("squareNanometers")
-	_nSUnitAreaSelSquareInches = objc.RegisterName("squareInches")
-	_nSUnitAreaSelSquareFeet = objc.RegisterName("squareFeet")
-	_nSUnitAreaSelSquareYards = objc.RegisterName("squareYards")
-	_nSUnitAreaSelSquareMiles = objc.RegisterName("squareMiles")
-	_nSUnitAreaSelAcres = objc.RegisterName("acres")
-	_nSUnitAreaSelAres = objc.RegisterName("ares")
-	_nSUnitAreaSelHectares = objc.RegisterName("hectares")
+	_nSUnitAreaSelSquareNanometers  = objc.RegisterName("squareNanometers")
+	_nSUnitAreaSelSquareInches      = objc.RegisterName("squareInches")
+	_nSUnitAreaSelSquareFeet        = objc.RegisterName("squareFeet")
+	_nSUnitAreaSelSquareYards       = objc.RegisterName("squareYards")
+	_nSUnitAreaSelSquareMiles       = objc.RegisterName("squareMiles")
+	_nSUnitAreaSelAcres             = objc.RegisterName("acres")
+	_nSUnitAreaSelAres              = objc.RegisterName("ares")
+	_nSUnitAreaSelHectares          = objc.RegisterName("hectares")
 )
 
 func NSUnitAreaFromID(id objc.ID) *NSUnitArea {
@@ -44,85 +44,112 @@ func NSUnitAreaFromID(id objc.ID) *NSUnitArea {
 
 func NSUnitAreaSquareMegameters() *NSUnitArea {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitArea), _nSUnitAreaSelSquareMegameters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitAreaFromID(_ret)
 }
 
 func NSUnitAreaSquareKilometers() *NSUnitArea {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitArea), _nSUnitAreaSelSquareKilometers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitAreaFromID(_ret)
 }
 
 func NSUnitAreaSquareMeters() *NSUnitArea {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitArea), _nSUnitAreaSelSquareMeters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitAreaFromID(_ret)
 }
 
 func NSUnitAreaSquareCentimeters() *NSUnitArea {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitArea), _nSUnitAreaSelSquareCentimeters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitAreaFromID(_ret)
 }
 
 func NSUnitAreaSquareMillimeters() *NSUnitArea {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitArea), _nSUnitAreaSelSquareMillimeters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitAreaFromID(_ret)
 }
 
 func NSUnitAreaSquareMicrometers() *NSUnitArea {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitArea), _nSUnitAreaSelSquareMicrometers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitAreaFromID(_ret)
 }
 
 func NSUnitAreaSquareNanometers() *NSUnitArea {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitArea), _nSUnitAreaSelSquareNanometers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitAreaFromID(_ret)
 }
 
 func NSUnitAreaSquareInches() *NSUnitArea {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitArea), _nSUnitAreaSelSquareInches)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitAreaFromID(_ret)
 }
 
 func NSUnitAreaSquareFeet() *NSUnitArea {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitArea), _nSUnitAreaSelSquareFeet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitAreaFromID(_ret)
 }
 
 func NSUnitAreaSquareYards() *NSUnitArea {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitArea), _nSUnitAreaSelSquareYards)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitAreaFromID(_ret)
 }
 
 func NSUnitAreaSquareMiles() *NSUnitArea {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitArea), _nSUnitAreaSelSquareMiles)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitAreaFromID(_ret)
 }
 
 func NSUnitAreaAcres() *NSUnitArea {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitArea), _nSUnitAreaSelAcres)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitAreaFromID(_ret)
 }
 
 func NSUnitAreaAres() *NSUnitArea {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitArea), _nSUnitAreaSelAres)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitAreaFromID(_ret)
 }
 
 func NSUnitAreaHectares() *NSUnitArea {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitArea), _nSUnitAreaSelHectares)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitAreaFromID(_ret)
 }
-

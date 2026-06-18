@@ -15,17 +15,17 @@ type GCControllerButtonInput struct {
 }
 
 var (
-	_clsGCControllerButtonInput = _objcClass("GCControllerButtonInput")
-	_gCControllerButtonInputSelSetValue = objc.RegisterName("setValue:")
-	_gCControllerButtonInputSelValueChangedHandler = objc.RegisterName("valueChangedHandler")
-	_gCControllerButtonInputSelSetValueChangedHandler = objc.RegisterName("setValueChangedHandler:")
-	_gCControllerButtonInputSelPressedChangedHandler = objc.RegisterName("pressedChangedHandler")
+	_clsGCControllerButtonInput                         = _objcClass("GCControllerButtonInput")
+	_gCControllerButtonInputSelSetValue                 = objc.RegisterName("setValue:")
+	_gCControllerButtonInputSelValueChangedHandler      = objc.RegisterName("valueChangedHandler")
+	_gCControllerButtonInputSelSetValueChangedHandler   = objc.RegisterName("setValueChangedHandler:")
+	_gCControllerButtonInputSelPressedChangedHandler    = objc.RegisterName("pressedChangedHandler")
 	_gCControllerButtonInputSelSetPressedChangedHandler = objc.RegisterName("setPressedChangedHandler:")
-	_gCControllerButtonInputSelTouchedChangedHandler = objc.RegisterName("touchedChangedHandler")
+	_gCControllerButtonInputSelTouchedChangedHandler    = objc.RegisterName("touchedChangedHandler")
 	_gCControllerButtonInputSelSetTouchedChangedHandler = objc.RegisterName("setTouchedChangedHandler:")
-	_gCControllerButtonInputSelValue = objc.RegisterName("value")
-	_gCControllerButtonInputSelIsPressed = objc.RegisterName("isPressed")
-	_gCControllerButtonInputSelIsTouched = objc.RegisterName("isTouched")
+	_gCControllerButtonInputSelValue                    = objc.RegisterName("value")
+	_gCControllerButtonInputSelIsPressed                = objc.RegisterName("isPressed")
+	_gCControllerButtonInputSelIsTouched                = objc.RegisterName("isTouched")
 )
 
 func GCControllerButtonInputFromID(id objc.ID) *GCControllerButtonInput {
@@ -118,4 +118,3 @@ func (o *GCControllerButtonInput) IsTouched() bool {
 	_ret := objc.Send[bool](o.Ptr(), _gCControllerButtonInputSelIsTouched)
 	return _ret
 }
-

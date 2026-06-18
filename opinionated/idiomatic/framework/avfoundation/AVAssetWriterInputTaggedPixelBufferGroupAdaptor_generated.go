@@ -18,7 +18,9 @@ type AssetWriterInputTaggedPixelBufferGroupAdaptor struct {
 }
 
 // Unwrap returns the underlying [raw.AVAssetWriterInputTaggedPixelBufferGroupAdaptor].
-func (x *AssetWriterInputTaggedPixelBufferGroupAdaptor) Unwrap() *raw.AVAssetWriterInputTaggedPixelBufferGroupAdaptor { return x.inner }
+func (x *AssetWriterInputTaggedPixelBufferGroupAdaptor) Unwrap() *raw.AVAssetWriterInputTaggedPixelBufferGroupAdaptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -73,4 +75,3 @@ type AssetWriterInputTaggedPixelBufferGroupAdaptorable interface {
 }
 
 var _ AssetWriterInputTaggedPixelBufferGroupAdaptorable = (*AssetWriterInputTaggedPixelBufferGroupAdaptor)(nil)
-

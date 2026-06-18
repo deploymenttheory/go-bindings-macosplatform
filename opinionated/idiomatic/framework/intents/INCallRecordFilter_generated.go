@@ -68,4 +68,3 @@ type CallRecordFilterable interface {
 }
 
 var _ CallRecordFilterable = (*CallRecordFilter)(nil)
-

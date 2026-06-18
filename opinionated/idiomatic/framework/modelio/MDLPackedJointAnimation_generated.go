@@ -123,4 +123,3 @@ type PackedJointAnimationable interface {
 }
 
 var _ PackedJointAnimationable = (*PackedJointAnimation)(nil)
-

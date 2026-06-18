@@ -16,10 +16,10 @@ type NSExpressionDescription struct {
 }
 
 var (
-	_clsNSExpressionDescription = _objcClass("NSExpressionDescription")
-	_nSExpressionDescriptionSelExpression = objc.RegisterName("expression")
-	_nSExpressionDescriptionSelSetExpression = objc.RegisterName("setExpression:")
-	_nSExpressionDescriptionSelExpressionResultType = objc.RegisterName("expressionResultType")
+	_clsNSExpressionDescription                        = _objcClass("NSExpressionDescription")
+	_nSExpressionDescriptionSelExpression              = objc.RegisterName("expression")
+	_nSExpressionDescriptionSelSetExpression           = objc.RegisterName("setExpression:")
+	_nSExpressionDescriptionSelExpressionResultType    = objc.RegisterName("expressionResultType")
 	_nSExpressionDescriptionSelSetExpressionResultType = objc.RegisterName("setExpressionResultType:")
 )
 
@@ -35,7 +35,9 @@ func NSExpressionDescriptionFromID(id objc.ID) *NSExpressionDescription {
 
 func (o *NSExpressionDescription) Expression() *foundation.NSExpression {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExpressionDescriptionSelExpression)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSExpressionFromID(_ret)
 }
 
@@ -51,4 +53,3 @@ func (o *NSExpressionDescription) ExpressionResultType() NSAttributeType {
 func (o *NSExpressionDescription) SetExpressionResultType(expressionResultType NSAttributeType) {
 	o.Ptr().Send(_nSExpressionDescriptionSelSetExpressionResultType, expressionResultType)
 }
-

@@ -13,10 +13,10 @@ import (
 
 var (
 	_fnNetFSCopyURLForRemountingVolume func(unsafe.Pointer) unsafe.Pointer
-	_fnNetFSMountURLAsync func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, objc.ID, objc.Block) int
-	_fnNetFSMountURLCancel func(unsafe.Pointer) int
-	_fnNetFSMountURLProbe func(unsafe.Pointer) unsafe.Pointer
-	_fnNetFSMountURLSync func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnNetFSMountURLAsync              func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, objc.ID, objc.Block) int
+	_fnNetFSMountURLCancel             func(unsafe.Pointer) int
+	_fnNetFSMountURLProbe              func(unsafe.Pointer) unsafe.Pointer
+	_fnNetFSMountURLSync               func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 )
 
 func NetFSCopyURLForRemountingVolume(localPathURL unsafe.Pointer) unsafe.Pointer {
@@ -45,4 +45,3 @@ func NetFSMountURLProbe(hostname unsafe.Pointer) unsafe.Pointer {
 func NetFSMountURLSync(url unsafe.Pointer, mountpath unsafe.Pointer, user unsafe.Pointer, passwd unsafe.Pointer, open_options unsafe.Pointer, mount_options unsafe.Pointer, mountpoints unsafe.Pointer) int {
 	return _fnNetFSMountURLSync(url, mountpath, user, passwd, open_options, mount_options, mountpoints)
 }
-

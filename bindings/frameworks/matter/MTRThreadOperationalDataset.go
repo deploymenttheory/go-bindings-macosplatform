@@ -16,19 +16,19 @@ type MTRThreadOperationalDataset struct {
 }
 
 var (
-	_clsMTRThreadOperationalDataset = _objcClass("MTRThreadOperationalDataset")
+	_clsMTRThreadOperationalDataset                                                                = _objcClass("MTRThreadOperationalDataset")
 	_mTRThreadOperationalDatasetSelInitWithNetworkNameExtendedPANIDMasterKeyPSKcChannelNumberPanID = objc.RegisterName("initWithNetworkName:extendedPANID:masterKey:PSKc:channelNumber:panID:")
-	_mTRThreadOperationalDatasetSelInitWithData = objc.RegisterName("initWithData:")
-	_mTRThreadOperationalDatasetSelData = objc.RegisterName("data")
-	_mTRThreadOperationalDatasetSelNetworkName = objc.RegisterName("networkName")
-	_mTRThreadOperationalDatasetSelExtendedPANID = objc.RegisterName("extendedPANID")
-	_mTRThreadOperationalDatasetSelMasterKey = objc.RegisterName("masterKey")
-	_mTRThreadOperationalDatasetSelPSKc = objc.RegisterName("PSKc")
-	_mTRThreadOperationalDatasetSelChannelNumber = objc.RegisterName("channelNumber")
-	_mTRThreadOperationalDatasetSelPanID = objc.RegisterName("panID")
-	_mTRThreadOperationalDatasetSelInitWithNetworkNameExtendedPANIDMasterKeyPSKcChannelPanID = objc.RegisterName("initWithNetworkName:extendedPANID:masterKey:PSKc:channel:panID:")
-	_mTRThreadOperationalDatasetSelChannel = objc.RegisterName("channel")
-	_mTRThreadOperationalDatasetSelSetChannel = objc.RegisterName("setChannel:")
+	_mTRThreadOperationalDatasetSelInitWithData                                                    = objc.RegisterName("initWithData:")
+	_mTRThreadOperationalDatasetSelData                                                            = objc.RegisterName("data")
+	_mTRThreadOperationalDatasetSelNetworkName                                                     = objc.RegisterName("networkName")
+	_mTRThreadOperationalDatasetSelExtendedPANID                                                   = objc.RegisterName("extendedPANID")
+	_mTRThreadOperationalDatasetSelMasterKey                                                       = objc.RegisterName("masterKey")
+	_mTRThreadOperationalDatasetSelPSKc                                                            = objc.RegisterName("PSKc")
+	_mTRThreadOperationalDatasetSelChannelNumber                                                   = objc.RegisterName("channelNumber")
+	_mTRThreadOperationalDatasetSelPanID                                                           = objc.RegisterName("panID")
+	_mTRThreadOperationalDatasetSelInitWithNetworkNameExtendedPANIDMasterKeyPSKcChannelPanID       = objc.RegisterName("initWithNetworkName:extendedPANID:masterKey:PSKc:channel:panID:")
+	_mTRThreadOperationalDatasetSelChannel                                                         = objc.RegisterName("channel")
+	_mTRThreadOperationalDatasetSelSetChannel                                                      = objc.RegisterName("setChannel:")
 )
 
 func MTRThreadOperationalDatasetFromID(id objc.ID) *MTRThreadOperationalDataset {
@@ -44,69 +44,89 @@ func MTRThreadOperationalDatasetFromID(id objc.ID) *MTRThreadOperationalDataset 
 // Create a Thread Operational Dataset object with the individual network fields. @param extendedPANID Must be MTRSizeThreadExtendedPANID bytes.  Otherwise nil will be returned. @param masterKey Must be MTRSizeThreadMasterKey bytes. Otherwise nil will be returned. @param PSKc Must be MTRSizeThreadPSKc bytes.  Otherwise nil will be returned. @param channelNumber Must be an unsigned 16-bit value. @param panID Must be MTRSizeThreadPANID bytes.  Otherwise nil will be returned.  In particular, it's expected to be a 16-bit unsigned integer stored as 2 bytes in host order.
 func (o *MTRThreadOperationalDataset) InitWithNetworkNameExtendedPANIDMasterKeyPSKcChannelNumberPanID(networkName *foundation.NSString, extendedPANID *foundation.NSData, masterKey *foundation.NSData, pSKc *foundation.NSData, channelNumber *foundation.NSNumber, panID *foundation.NSData) *MTRThreadOperationalDataset {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadOperationalDatasetSelInitWithNetworkNameExtendedPANIDMasterKeyPSKcChannelNumberPanID, networkName.Ptr(), extendedPANID.Ptr(), masterKey.Ptr(), pSKc.Ptr(), channelNumber.Ptr(), panID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRThreadOperationalDatasetFromID(_ret)
 }
 
 // Create a Thread Operational Dataset object with a RCP formatted active operational dataset. This initializer will return nil if the input data cannot be parsed correctly
 func (o *MTRThreadOperationalDataset) InitWithData(data *foundation.NSData) *MTRThreadOperationalDataset {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadOperationalDatasetSelInitWithData, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRThreadOperationalDatasetFromID(_ret)
 }
 
 // Get the underlying data that represents the Thread Active Operational Dataset This can be used for the threadOperationalDataset of MTRCommissioningParameters.
 func (o *MTRThreadOperationalDataset) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadOperationalDatasetSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // The Thread Network name
 func (o *MTRThreadOperationalDataset) NetworkName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadOperationalDatasetSelNetworkName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The Thread Network extendended PAN ID
 func (o *MTRThreadOperationalDataset) ExtendedPANID() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadOperationalDatasetSelExtendedPANID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // The 16 byte Master Key
 func (o *MTRThreadOperationalDataset) MasterKey() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadOperationalDatasetSelMasterKey)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // The Thread PSKc
 func (o *MTRThreadOperationalDataset) PSKc() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadOperationalDatasetSelPSKc)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // The Thread network channel.  Always an unsigned 16-bit integer.
 func (o *MTRThreadOperationalDataset) ChannelNumber() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadOperationalDatasetSelChannelNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // A uint16_t stored as 2-bytes in host order representing the Thread PAN ID
 func (o *MTRThreadOperationalDataset) PanID() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadOperationalDatasetSelPanID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *MTRThreadOperationalDataset) InitWithNetworkNameExtendedPANIDMasterKeyPSKcChannelPanID(networkName *foundation.NSString, extendedPANID *foundation.NSData, masterKey *foundation.NSData, pSKc *foundation.NSData, channel uint16, panID *foundation.NSData) *MTRThreadOperationalDataset {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadOperationalDatasetSelInitWithNetworkNameExtendedPANIDMasterKeyPSKcChannelPanID, networkName.Ptr(), extendedPANID.Ptr(), masterKey.Ptr(), pSKc.Ptr(), channel, panID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRThreadOperationalDatasetFromID(_ret)
 }
 
@@ -118,4 +138,3 @@ func (o *MTRThreadOperationalDataset) Channel() uint16 {
 func (o *MTRThreadOperationalDataset) SetChannel(channel uint16) {
 	o.Ptr().Send(_mTRThreadOperationalDatasetSelSetChannel, channel)
 }
-

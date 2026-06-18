@@ -132,4 +132,3 @@ type Playerable interface {
 }
 
 var _ Playerable = (*Player)(nil)
-

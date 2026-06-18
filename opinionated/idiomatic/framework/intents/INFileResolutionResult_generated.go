@@ -35,7 +35,9 @@ func NewFileResolutionResult() *FileResolutionResult {
 	return &FileResolutionResult{inner: raw.INFileResolutionResultFromID(_id)}
 }
 
-func (x *FileResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
+func (x *FileResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
+	return &x.inner.INIntentResolutionResult
+}
 
 // FileResolutionResultable is the interface implemented by [FileResolutionResult], for mocking and DI.
 type FileResolutionResultable interface {
@@ -43,4 +45,3 @@ type FileResolutionResultable interface {
 }
 
 var _ FileResolutionResultable = (*FileResolutionResult)(nil)
-

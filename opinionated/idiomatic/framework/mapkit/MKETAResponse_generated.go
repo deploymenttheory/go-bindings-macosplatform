@@ -93,4 +93,3 @@ type ETAResponseable interface {
 }
 
 var _ ETAResponseable = (*ETAResponse)(nil)
-

@@ -16,13 +16,13 @@ type MTRDescriptorClusterDeviceTypeStruct struct {
 }
 
 var (
-	_clsMTRDescriptorClusterDeviceTypeStruct = _objcClass("MTRDescriptorClusterDeviceTypeStruct")
-	_mTRDescriptorClusterDeviceTypeStructSelDeviceType = objc.RegisterName("deviceType")
+	_clsMTRDescriptorClusterDeviceTypeStruct              = _objcClass("MTRDescriptorClusterDeviceTypeStruct")
+	_mTRDescriptorClusterDeviceTypeStructSelDeviceType    = objc.RegisterName("deviceType")
 	_mTRDescriptorClusterDeviceTypeStructSelSetDeviceType = objc.RegisterName("setDeviceType:")
-	_mTRDescriptorClusterDeviceTypeStructSelType = objc.RegisterName("type")
-	_mTRDescriptorClusterDeviceTypeStructSelSetType = objc.RegisterName("setType:")
-	_mTRDescriptorClusterDeviceTypeStructSelRevision = objc.RegisterName("revision")
-	_mTRDescriptorClusterDeviceTypeStructSelSetRevision = objc.RegisterName("setRevision:")
+	_mTRDescriptorClusterDeviceTypeStructSelType          = objc.RegisterName("type")
+	_mTRDescriptorClusterDeviceTypeStructSelSetType       = objc.RegisterName("setType:")
+	_mTRDescriptorClusterDeviceTypeStructSelRevision      = objc.RegisterName("revision")
+	_mTRDescriptorClusterDeviceTypeStructSelSetRevision   = objc.RegisterName("setRevision:")
 )
 
 func MTRDescriptorClusterDeviceTypeStructFromID(id objc.ID) *MTRDescriptorClusterDeviceTypeStruct {
@@ -37,7 +37,9 @@ func MTRDescriptorClusterDeviceTypeStructFromID(id objc.ID) *MTRDescriptorCluste
 
 func (o *MTRDescriptorClusterDeviceTypeStruct) DeviceType() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDescriptorClusterDeviceTypeStructSelDeviceType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTRDescriptorClusterDeviceTypeStruct) SetDeviceType(deviceType *foundat
 
 func (o *MTRDescriptorClusterDeviceTypeStruct) Type() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDescriptorClusterDeviceTypeStructSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *MTRDescriptorClusterDeviceTypeStruct) SetType(type_ *foundation.NSNumbe
 
 func (o *MTRDescriptorClusterDeviceTypeStruct) Revision() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDescriptorClusterDeviceTypeStructSelRevision)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDescriptorClusterDeviceTypeStruct) SetRevision(revision *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDescriptorClusterDeviceTypeStructSelSetRevision, revision.Ptr())
 }
-

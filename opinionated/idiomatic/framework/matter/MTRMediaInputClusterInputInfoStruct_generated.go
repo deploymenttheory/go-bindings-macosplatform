@@ -17,7 +17,9 @@ type MTRMediaInputClusterInputInfoStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRMediaInputClusterInputInfoStruct].
-func (x *MTRMediaInputClusterInputInfoStruct) Unwrap() *raw.MTRMediaInputClusterInputInfoStruct { return x.inner }
+func (x *MTRMediaInputClusterInputInfoStruct) Unwrap() *raw.MTRMediaInputClusterInputInfoStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -109,7 +111,9 @@ func (x *MTRMediaInputClusterInputInfoStruct) SetDescriptionString(descriptionSt
 	x.inner.SetDescriptionString(foundation.NSStringStringWithUTF8String(descriptionString))
 }
 
-func (x *MTRMediaInputClusterInputInfoStruct) asMTRMediaInputClusterInputInfoStruct() *raw.MTRMediaInputClusterInputInfoStruct { return x.inner }
+func (x *MTRMediaInputClusterInputInfoStruct) asMTRMediaInputClusterInputInfoStruct() *raw.MTRMediaInputClusterInputInfoStruct {
+	return x.inner
+}
 
 // MTRMediaInputClusterInputInfoStructable is the interface implemented by [MTRMediaInputClusterInputInfoStruct], for mocking and DI.
 type MTRMediaInputClusterInputInfoStructable interface {
@@ -129,4 +133,3 @@ type MTRMediaInputClusterInputInfoStructable interface {
 }
 
 var _ MTRMediaInputClusterInputInfoStructable = (*MTRMediaInputClusterInputInfoStruct)(nil)
-

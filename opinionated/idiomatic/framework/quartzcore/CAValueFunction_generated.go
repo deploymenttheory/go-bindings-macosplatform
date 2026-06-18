@@ -52,4 +52,3 @@ type ValueFunctionable interface {
 }
 
 var _ ValueFunctionable = (*ValueFunction)(nil)
-

@@ -66,7 +66,9 @@ func (x *DOMComment) asDOMNode() *raw.DOMNode { return &x.inner.DOMCharacterData
 
 func (x *DOMComment) asDOMObject() *raw.DOMObject { return &x.inner.DOMCharacterData.DOMNode.DOMObject }
 
-func (x *DOMComment) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMCharacterData.DOMNode.DOMObject.WebScriptObject }
+func (x *DOMComment) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMCharacterData.DOMNode.DOMObject.WebScriptObject
+}
 
 // DOMCommentable is the interface implemented by [DOMComment], for mocking and DI.
 type DOMCommentable interface {
@@ -78,4 +80,3 @@ type DOMCommentable interface {
 }
 
 var _ DOMCommentable = (*DOMComment)(nil)
-

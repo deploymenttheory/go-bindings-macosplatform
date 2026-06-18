@@ -6,4 +6,3 @@ package automator
 // AMWorkflowControllerDelegate wraps the ObjC protocol AMWorkflowControllerDelegate.
 type AMWorkflowControllerDelegate interface {
 }
-

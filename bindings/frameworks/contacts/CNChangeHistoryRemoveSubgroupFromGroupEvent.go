@@ -15,9 +15,9 @@ type CNChangeHistoryRemoveSubgroupFromGroupEvent struct {
 }
 
 var (
-	_clsCNChangeHistoryRemoveSubgroupFromGroupEvent = _objcClass("CNChangeHistoryRemoveSubgroupFromGroupEvent")
+	_clsCNChangeHistoryRemoveSubgroupFromGroupEvent         = _objcClass("CNChangeHistoryRemoveSubgroupFromGroupEvent")
 	_cNChangeHistoryRemoveSubgroupFromGroupEventSelSubgroup = objc.RegisterName("subgroup")
-	_cNChangeHistoryRemoveSubgroupFromGroupEventSelGroup = objc.RegisterName("group")
+	_cNChangeHistoryRemoveSubgroupFromGroupEventSelGroup    = objc.RegisterName("group")
 )
 
 func CNChangeHistoryRemoveSubgroupFromGroupEventFromID(id objc.ID) *CNChangeHistoryRemoveSubgroupFromGroupEvent {
@@ -32,13 +32,16 @@ func CNChangeHistoryRemoveSubgroupFromGroupEventFromID(id objc.ID) *CNChangeHist
 
 func (o *CNChangeHistoryRemoveSubgroupFromGroupEvent) Subgroup() *CNGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNChangeHistoryRemoveSubgroupFromGroupEventSelSubgroup)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNGroupFromID(_ret)
 }
 
 func (o *CNChangeHistoryRemoveSubgroupFromGroupEvent) Group() *CNGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNChangeHistoryRemoveSubgroupFromGroupEventSelGroup)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNGroupFromID(_ret)
 }
-

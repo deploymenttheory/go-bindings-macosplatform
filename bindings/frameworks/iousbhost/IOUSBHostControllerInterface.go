@@ -18,23 +18,23 @@ type IOUSBHostControllerInterface struct {
 }
 
 var (
-	_clsIOUSBHostControllerInterface = _objcClass("IOUSBHostControllerInterface")
+	_clsIOUSBHostControllerInterface                                                                                          = _objcClass("IOUSBHostControllerInterface")
 	_iOUSBHostControllerInterfaceSelInitWithCapabilitiesQueueInterruptRateHzErrorCommandHandlerDoorbellHandlerInterestHandler = objc.RegisterName("initWithCapabilities:queue:interruptRateHz:error:commandHandler:doorbellHandler:interestHandler:")
-	_iOUSBHostControllerInterfaceSelDestroy = objc.RegisterName("destroy")
-	_iOUSBHostControllerInterfaceSelEnqueueInterruptError = objc.RegisterName("enqueueInterrupt:error:")
-	_iOUSBHostControllerInterfaceSelEnqueueInterruptExpediteError = objc.RegisterName("enqueueInterrupt:expedite:error:")
-	_iOUSBHostControllerInterfaceSelEnqueueInterruptsCountError = objc.RegisterName("enqueueInterrupts:count:error:")
-	_iOUSBHostControllerInterfaceSelEnqueueInterruptsCountExpediteError = objc.RegisterName("enqueueInterrupts:count:expedite:error:")
-	_iOUSBHostControllerInterfaceSelDescriptionForMessage = objc.RegisterName("descriptionForMessage:")
-	_iOUSBHostControllerInterfaceSelGetPortStateMachineForCommandError = objc.RegisterName("getPortStateMachineForCommand:error:")
-	_iOUSBHostControllerInterfaceSelGetPortStateMachineForPortError = objc.RegisterName("getPortStateMachineForPort:error:")
-	_iOUSBHostControllerInterfaceSelCapabilitiesForPort = objc.RegisterName("capabilitiesForPort:")
-	_iOUSBHostControllerInterfaceSelQueue = objc.RegisterName("queue")
-	_iOUSBHostControllerInterfaceSelInterruptRateHz = objc.RegisterName("interruptRateHz")
-	_iOUSBHostControllerInterfaceSelSetInterruptRateHz = objc.RegisterName("setInterruptRateHz:")
-	_iOUSBHostControllerInterfaceSelControllerStateMachine = objc.RegisterName("controllerStateMachine")
-	_iOUSBHostControllerInterfaceSelCapabilities = objc.RegisterName("capabilities")
-	_iOUSBHostControllerInterfaceSelUuid = objc.RegisterName("uuid")
+	_iOUSBHostControllerInterfaceSelDestroy                                                                                   = objc.RegisterName("destroy")
+	_iOUSBHostControllerInterfaceSelEnqueueInterruptError                                                                     = objc.RegisterName("enqueueInterrupt:error:")
+	_iOUSBHostControllerInterfaceSelEnqueueInterruptExpediteError                                                             = objc.RegisterName("enqueueInterrupt:expedite:error:")
+	_iOUSBHostControllerInterfaceSelEnqueueInterruptsCountError                                                               = objc.RegisterName("enqueueInterrupts:count:error:")
+	_iOUSBHostControllerInterfaceSelEnqueueInterruptsCountExpediteError                                                       = objc.RegisterName("enqueueInterrupts:count:expedite:error:")
+	_iOUSBHostControllerInterfaceSelDescriptionForMessage                                                                     = objc.RegisterName("descriptionForMessage:")
+	_iOUSBHostControllerInterfaceSelGetPortStateMachineForCommandError                                                        = objc.RegisterName("getPortStateMachineForCommand:error:")
+	_iOUSBHostControllerInterfaceSelGetPortStateMachineForPortError                                                           = objc.RegisterName("getPortStateMachineForPort:error:")
+	_iOUSBHostControllerInterfaceSelCapabilitiesForPort                                                                       = objc.RegisterName("capabilitiesForPort:")
+	_iOUSBHostControllerInterfaceSelQueue                                                                                     = objc.RegisterName("queue")
+	_iOUSBHostControllerInterfaceSelInterruptRateHz                                                                           = objc.RegisterName("interruptRateHz")
+	_iOUSBHostControllerInterfaceSelSetInterruptRateHz                                                                        = objc.RegisterName("setInterruptRateHz:")
+	_iOUSBHostControllerInterfaceSelControllerStateMachine                                                                    = objc.RegisterName("controllerStateMachine")
+	_iOUSBHostControllerInterfaceSelCapabilities                                                                              = objc.RegisterName("capabilities")
+	_iOUSBHostControllerInterfaceSelUuid                                                                                      = objc.RegisterName("uuid")
 )
 
 func IOUSBHostControllerInterfaceFromID(id objc.ID) *IOUSBHostControllerInterface {
@@ -60,7 +60,9 @@ func (o *IOUSBHostControllerInterface) InitWithCapabilitiesQueueInterruptRateHzE
 		defer __block_doorbellHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostControllerInterfaceSelInitWithCapabilitiesQueueInterruptRateHzErrorCommandHandlerDoorbellHandlerInterestHandler, capabilities.Ptr(), queue.Ptr(), interruptRateHz, error_, commandHandler, __block_doorbellHandler, interestHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOUSBHostControllerInterfaceFromID(_ret)
 }
 
@@ -111,14 +113,18 @@ func (o *IOUSBHostControllerInterface) EnqueueInterruptsCountExpediteError(inter
 
 func (o *IOUSBHostControllerInterface) DescriptionForMessage(message *IOUSBHostCIMessage) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostControllerInterfaceSelDescriptionForMessage, message)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *IOUSBHostControllerInterface) GetPortStateMachineForCommandError(command *IOUSBHostCIMessage) (*IOUSBHostCIPortStateMachine, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostControllerInterfaceSelGetPortStateMachineForCommandError, command, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -128,7 +134,9 @@ func (o *IOUSBHostControllerInterface) GetPortStateMachineForCommandError(comman
 func (o *IOUSBHostControllerInterface) GetPortStateMachineForPortError(port uint) (*IOUSBHostCIPortStateMachine, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostControllerInterfaceSelGetPortStateMachineForPortError, port, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -144,7 +152,9 @@ func (o *IOUSBHostControllerInterface) CapabilitiesForPort(port uint) *IOUSBHost
 // @brief       The dispatch queue for asynchronous operations.
 func (o *IOUSBHostControllerInterface) Queue() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostControllerInterfaceSelQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
@@ -160,7 +170,9 @@ func (o *IOUSBHostControllerInterface) SetInterruptRateHz(interruptRateHz uint) 
 
 func (o *IOUSBHostControllerInterface) ControllerStateMachine() *IOUSBHostCIControllerStateMachine {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostControllerInterfaceSelControllerStateMachine)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOUSBHostCIControllerStateMachineFromID(_ret)
 }
 
@@ -173,7 +185,8 @@ func (o *IOUSBHostControllerInterface) Capabilities() *IOUSBHostCIMessage {
 // @brief       A UUID used to identify the host controller interface in this process and the kernel
 func (o *IOUSBHostControllerInterface) Uuid() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostControllerInterfaceSelUuid)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
-

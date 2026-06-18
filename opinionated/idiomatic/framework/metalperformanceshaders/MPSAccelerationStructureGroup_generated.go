@@ -49,4 +49,3 @@ type AccelerationStructureGroupable interface {
 }
 
 var _ AccelerationStructureGroupable = (*AccelerationStructureGroup)(nil)
-

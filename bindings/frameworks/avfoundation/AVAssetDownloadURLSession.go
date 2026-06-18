@@ -16,11 +16,11 @@ type AVAssetDownloadURLSession struct {
 }
 
 var (
-	_clsAVAssetDownloadURLSession = _objcClass("AVAssetDownloadURLSession")
-	_aVAssetDownloadURLSessionSelSessionWithConfigurationAssetDownloadDelegateDelegateQueue = objc.RegisterName("sessionWithConfiguration:assetDownloadDelegate:delegateQueue:")
-	_aVAssetDownloadURLSessionSelAssetDownloadTaskWithURLAssetAssetTitleAssetArtworkDataOptions = objc.RegisterName("assetDownloadTaskWithURLAsset:assetTitle:assetArtworkData:options:")
+	_clsAVAssetDownloadURLSession                                                                                       = _objcClass("AVAssetDownloadURLSession")
+	_aVAssetDownloadURLSessionSelSessionWithConfigurationAssetDownloadDelegateDelegateQueue                             = objc.RegisterName("sessionWithConfiguration:assetDownloadDelegate:delegateQueue:")
+	_aVAssetDownloadURLSessionSelAssetDownloadTaskWithURLAssetAssetTitleAssetArtworkDataOptions                         = objc.RegisterName("assetDownloadTaskWithURLAsset:assetTitle:assetArtworkData:options:")
 	_aVAssetDownloadURLSessionSelAggregateAssetDownloadTaskWithURLAssetMediaSelectionsAssetTitleAssetArtworkDataOptions = objc.RegisterName("aggregateAssetDownloadTaskWithURLAsset:mediaSelections:assetTitle:assetArtworkData:options:")
-	_aVAssetDownloadURLSessionSelAssetDownloadTaskWithConfiguration = objc.RegisterName("assetDownloadTaskWithConfiguration:")
+	_aVAssetDownloadURLSessionSelAssetDownloadTaskWithConfiguration                                                     = objc.RegisterName("assetDownloadTaskWithConfiguration:")
 )
 
 func AVAssetDownloadURLSessionFromID(id objc.ID) *AVAssetDownloadURLSession {
@@ -36,7 +36,9 @@ func AVAssetDownloadURLSessionFromID(id objc.ID) *AVAssetDownloadURLSession {
 // Creates and initializes an AVAssetDownloadURLSession for use with AVAssetDownloadTasks. - Parameter configuration: The configuration for this URLSession. Must be a background configuration. - Parameter delegate: The delegate object to handle asset download progress updates and other session related events. - Parameter delegateQueue: The queue to receive delegate callbacks on. If nil, a serial queue will be provided.
 func AVAssetDownloadURLSessionSessionWithConfigurationAssetDownloadDelegateDelegateQueue(configuration *foundation.NSURLSessionConfiguration, delegate AVAssetDownloadDelegate, delegateQueue *foundation.NSOperationQueue) *AVAssetDownloadURLSession {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetDownloadURLSession), _aVAssetDownloadURLSessionSelSessionWithConfigurationAssetDownloadDelegateDelegateQueue, configuration.Ptr(), delegate, delegateQueue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetDownloadURLSessionFromID(_ret)
 }
 
@@ -44,7 +46,9 @@ func AVAssetDownloadURLSessionSessionWithConfigurationAssetDownloadDelegateDeleg
 // Deprecated: Use assetDownloadTaskWithConfiguration: instead
 func (o *AVAssetDownloadURLSession) AssetDownloadTaskWithURLAssetAssetTitleAssetArtworkDataOptions(uRLAsset *AVURLAsset, title *foundation.NSString, artworkData *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVAssetDownloadTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetDownloadURLSessionSelAssetDownloadTaskWithURLAssetAssetTitleAssetArtworkDataOptions, uRLAsset.Ptr(), title.Ptr(), artworkData.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetDownloadTaskFromID(_ret)
 }
 
@@ -52,14 +56,17 @@ func (o *AVAssetDownloadURLSession) AssetDownloadTaskWithURLAssetAssetTitleAsset
 // Deprecated: Use assetDownloadTaskWithConfiguration: instead
 func (o *AVAssetDownloadURLSession) AggregateAssetDownloadTaskWithURLAssetMediaSelectionsAssetTitleAssetArtworkDataOptions(uRLAsset *AVURLAsset, mediaSelections *foundation.NSArray[*AVMediaSelection], title *foundation.NSString, artworkData *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVAggregateAssetDownloadTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetDownloadURLSessionSelAggregateAssetDownloadTaskWithURLAssetMediaSelectionsAssetTitleAssetArtworkDataOptions, uRLAsset.Ptr(), mediaSelections.Ptr(), title.Ptr(), artworkData.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAggregateAssetDownloadTaskFromID(_ret)
 }
 
 // Creates and initializes an AVAssetDownloadTask to be used with this AVAssetDownloadURLSession. This method will throw an exception if the URLSession has been invalidated. - Parameter downloadConfiguration: The configuration to be used to create the download task.
 func (o *AVAssetDownloadURLSession) AssetDownloadTaskWithConfiguration(downloadConfiguration *AVAssetDownloadConfiguration) *AVAssetDownloadTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetDownloadURLSessionSelAssetDownloadTaskWithConfiguration, downloadConfiguration.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetDownloadTaskFromID(_ret)
 }
-

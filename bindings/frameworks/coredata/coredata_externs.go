@@ -50,7 +50,9 @@ func NSBinaryStoreType() uintptr {
 
 func NSCoreDataCoreSpotlightDelegateIndexDidUpdateNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSCoreDataCoreSpotlightDelegateIndexDidUpdateNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -61,7 +63,9 @@ func NSCoreDataCoreSpotlightExporter() uintptr {
 
 func NSCoreDataVersionNumber() float64 {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSCoreDataVersionNumber")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
@@ -88,7 +92,9 @@ func NSEntityNameInPathKey() uintptr {
 
 func NSErrorMergePolicy() objc.ID {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSErrorMergePolicy")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*objc.ID)(unsafe.Pointer(ptr))
 }
 
@@ -182,13 +188,17 @@ func NSManagedObjectContextWillSaveNotification() uintptr {
 
 func NSMergeByPropertyObjectTrumpMergePolicy() objc.ID {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSMergeByPropertyObjectTrumpMergePolicy")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*objc.ID)(unsafe.Pointer(ptr))
 }
 
 func NSMergeByPropertyStoreTrumpMergePolicy() objc.ID {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSMergeByPropertyStoreTrumpMergePolicy")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*objc.ID)(unsafe.Pointer(ptr))
 }
 
@@ -241,7 +251,9 @@ func NSObjectURIKey() uintptr {
 
 func NSOverwriteMergePolicy() objc.ID {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSOverwriteMergePolicy")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*objc.ID)(unsafe.Pointer(ptr))
 }
 
@@ -405,7 +417,9 @@ func NSRemovedPersistentStoresKey() uintptr {
 
 func NSRollbackMergePolicy() objc.ID {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSRollbackMergePolicy")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*objc.ID)(unsafe.Pointer(ptr))
 }
 
@@ -516,4 +530,3 @@ func NSXMLStoreType() uintptr {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSXMLStoreType")
 	return ptr
 }
-

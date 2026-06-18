@@ -16,7 +16,7 @@ type SFSafariExtensionState struct {
 }
 
 var (
-	_clsSFSafariExtensionState = _objcClass("SFSafariExtensionState")
+	_clsSFSafariExtensionState          = _objcClass("SFSafariExtensionState")
 	_sFSafariExtensionStateSelIsEnabled = objc.RegisterName("isEnabled")
 )
 
@@ -34,4 +34,3 @@ func (o *SFSafariExtensionState) IsEnabled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _sFSafariExtensionStateSelIsEnabled)
 	return _ret
 }
-

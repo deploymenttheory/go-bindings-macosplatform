@@ -16,11 +16,11 @@ type MTRDeviceEnergyManagementModeClusterModeTagStruct struct {
 }
 
 var (
-	_clsMTRDeviceEnergyManagementModeClusterModeTagStruct = _objcClass("MTRDeviceEnergyManagementModeClusterModeTagStruct")
-	_mTRDeviceEnergyManagementModeClusterModeTagStructSelMfgCode = objc.RegisterName("mfgCode")
+	_clsMTRDeviceEnergyManagementModeClusterModeTagStruct           = _objcClass("MTRDeviceEnergyManagementModeClusterModeTagStruct")
+	_mTRDeviceEnergyManagementModeClusterModeTagStructSelMfgCode    = objc.RegisterName("mfgCode")
 	_mTRDeviceEnergyManagementModeClusterModeTagStructSelSetMfgCode = objc.RegisterName("setMfgCode:")
-	_mTRDeviceEnergyManagementModeClusterModeTagStructSelValue = objc.RegisterName("value")
-	_mTRDeviceEnergyManagementModeClusterModeTagStructSelSetValue = objc.RegisterName("setValue:")
+	_mTRDeviceEnergyManagementModeClusterModeTagStructSelValue      = objc.RegisterName("value")
+	_mTRDeviceEnergyManagementModeClusterModeTagStructSelSetValue   = objc.RegisterName("setValue:")
 )
 
 func MTRDeviceEnergyManagementModeClusterModeTagStructFromID(id objc.ID) *MTRDeviceEnergyManagementModeClusterModeTagStruct {
@@ -35,7 +35,9 @@ func MTRDeviceEnergyManagementModeClusterModeTagStructFromID(id objc.ID) *MTRDev
 
 func (o *MTRDeviceEnergyManagementModeClusterModeTagStruct) MfgCode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementModeClusterModeTagStructSelMfgCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRDeviceEnergyManagementModeClusterModeTagStruct) SetMfgCode(mfgCode *
 
 func (o *MTRDeviceEnergyManagementModeClusterModeTagStruct) Value() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementModeClusterModeTagStructSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDeviceEnergyManagementModeClusterModeTagStruct) SetValue(value *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDeviceEnergyManagementModeClusterModeTagStructSelSetValue, value.Ptr())
 }
-

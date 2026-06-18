@@ -16,8 +16,8 @@ type AVPlaybackCoordinationMedium struct {
 }
 
 var (
-	_clsAVPlaybackCoordinationMedium = _objcClass("AVPlaybackCoordinationMedium")
-	_aVPlaybackCoordinationMediumSelInit = objc.RegisterName("init")
+	_clsAVPlaybackCoordinationMedium                              = _objcClass("AVPlaybackCoordinationMedium")
+	_aVPlaybackCoordinationMediumSelInit                          = objc.RegisterName("init")
 	_aVPlaybackCoordinationMediumSelConnectedPlaybackCoordinators = objc.RegisterName("connectedPlaybackCoordinators")
 )
 
@@ -34,13 +34,16 @@ func AVPlaybackCoordinationMediumFromID(id objc.ID) *AVPlaybackCoordinationMediu
 // Initializes an AVPlaybackCoordinationMedium
 func (o *AVPlaybackCoordinationMedium) Init() *AVPlaybackCoordinationMedium {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlaybackCoordinationMediumSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlaybackCoordinationMediumFromID(_ret)
 }
 
 func (o *AVPlaybackCoordinationMedium) ConnectedPlaybackCoordinators() *foundation.NSArray[*AVPlayerPlaybackCoordinator] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlaybackCoordinationMediumSelConnectedPlaybackCoordinators)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVPlayerPlaybackCoordinator](_ret)
 }
-

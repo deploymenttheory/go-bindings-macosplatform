@@ -13,31 +13,41 @@ import (
 
 func MTL4CommandQueueErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTL4CommandQueueErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MTLBinaryArchiveDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLBinaryArchiveDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MTLCaptureErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLCaptureErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MTLCommandBufferEncoderInfoErrorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLCommandBufferEncoderInfoErrorKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MTLCommandBufferErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLCommandBufferErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -133,13 +143,17 @@ func MTLCommonCounterVertexInvocations() uintptr {
 
 func MTLCounterErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLCounterErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MTLDeviceErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLDeviceErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -163,56 +177,73 @@ func MTLDeviceWasRemovedNotification() uintptr {
 
 func MTLDynamicLibraryDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLDynamicLibraryDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MTLIOErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLIOErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MTLLibraryErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLLibraryErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func MTLLogStateErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLLogStateErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // An error domain for errors that pertain to creating a tensor.
 func MTLTensorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLTensorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSDeviceCertificationiPhonePerformanceGaming() int {
 	ptr, _ := purego.Dlsym(_metalLib, "NSDeviceCertificationiPhonePerformanceGaming")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func NSProcessInfoPerformanceProfileDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "NSProcessInfoPerformanceProfileDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSProcessPerformanceProfileDefault() int {
 	ptr, _ := purego.Dlsym(_metalLib, "NSProcessPerformanceProfileDefault")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
 func NSProcessPerformanceProfileSustained() int {
 	ptr, _ := purego.Dlsym(_metalLib, "NSProcessPerformanceProfileSustained")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int)(unsafe.Pointer(ptr))
 }
-

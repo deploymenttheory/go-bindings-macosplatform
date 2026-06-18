@@ -54,4 +54,3 @@ type Definitionable interface {
 }
 
 var _ Definitionable = (*Definition)(nil)
-

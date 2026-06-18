@@ -120,4 +120,3 @@ type ParameterEventable interface {
 }
 
 var _ ParameterEventable = (*ParameterEvent)(nil)
-

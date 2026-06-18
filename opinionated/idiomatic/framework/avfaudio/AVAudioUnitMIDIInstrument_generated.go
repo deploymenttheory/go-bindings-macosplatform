@@ -98,11 +98,15 @@ func (x *AudioUnitMIDIInstrument) SendMIDIEventList(eventList *coremidi.MIDIEven
 	x.inner.SendMIDIEventList(eventList)
 }
 
-func (x *AudioUnitMIDIInstrument) asAudioUnitMIDIInstrument() *raw.AVAudioUnitMIDIInstrument { return x.inner }
+func (x *AudioUnitMIDIInstrument) asAudioUnitMIDIInstrument() *raw.AVAudioUnitMIDIInstrument {
+	return x.inner
+}
 
 func (x *AudioUnitMIDIInstrument) asAudioUnit() *raw.AVAudioUnit { return &x.inner.AVAudioUnit }
 
-func (x *AudioUnitMIDIInstrument) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAudioUnit.AVAudioNode }
+func (x *AudioUnitMIDIInstrument) asAudioNode() *raw.AVAudioNode {
+	return &x.inner.AVAudioUnit.AVAudioNode
+}
 
 // AudioUnitMIDIInstrumentable is the interface implemented by [AudioUnitMIDIInstrument], for mocking and DI.
 type AudioUnitMIDIInstrumentable interface {
@@ -122,4 +126,3 @@ type AudioUnitMIDIInstrumentable interface {
 }
 
 var _ AudioUnitMIDIInstrumentable = (*AudioUnitMIDIInstrument)(nil)
-

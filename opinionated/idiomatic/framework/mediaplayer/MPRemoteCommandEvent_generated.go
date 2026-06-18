@@ -59,4 +59,3 @@ type RemoteCommandEventable interface {
 }
 
 var _ RemoteCommandEventable = (*RemoteCommandEvent)(nil)
-

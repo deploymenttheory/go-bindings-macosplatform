@@ -20,11 +20,11 @@ type DREraseProgressPanel struct {
 }
 
 var (
-	_clsDREraseProgressPanel = _objcClass("DREraseProgressPanel")
-	_dREraseProgressPanelSelProgressPanel = objc.RegisterName("progressPanel")
+	_clsDREraseProgressPanel                                         = _objcClass("DREraseProgressPanel")
+	_dREraseProgressPanelSelProgressPanel                            = objc.RegisterName("progressPanel")
 	_dREraseProgressPanelSelBeginProgressSheetForEraseModalForWindow = objc.RegisterName("beginProgressSheetForErase:modalForWindow:")
-	_dREraseProgressPanelSelBeginProgressPanelForErase = objc.RegisterName("beginProgressPanelForErase:")
-	_dREraseProgressPanelSelSetDescription = objc.RegisterName("setDescription:")
+	_dREraseProgressPanelSelBeginProgressPanelForErase               = objc.RegisterName("beginProgressPanelForErase:")
+	_dREraseProgressPanelSelSetDescription                           = objc.RegisterName("setDescription:")
 )
 
 func DREraseProgressPanelFromID(id objc.ID) *DREraseProgressPanel {
@@ -40,7 +40,9 @@ func DREraseProgressPanelFromID(id objc.ID) *DREraseProgressPanel {
 // @method			progressPanel @abstract		Creates and returns an instance of the erase progress panel. @result			A pointer to the newly created DREraseProgressPanel.
 func DREraseProgressPanelProgressPanel() *DREraseProgressPanel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsDREraseProgressPanel), _dREraseProgressPanelSelProgressPanel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DREraseProgressPanelFromID(_ret)
 }
 
@@ -58,4 +60,3 @@ func (o *DREraseProgressPanel) BeginProgressPanelForErase(erase *discrecording.D
 func (o *DREraseProgressPanel) SetDescription(description *foundation.NSString) {
 	o.Ptr().Send(_dREraseProgressPanelSelSetDescription, description.Ptr())
 }
-

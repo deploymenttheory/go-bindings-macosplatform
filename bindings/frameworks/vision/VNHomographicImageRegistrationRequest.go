@@ -25,4 +25,3 @@ func VNHomographicImageRegistrationRequestFromID(id objc.ID) *VNHomographicImage
 	purego.Track(o)
 	return o
 }
-

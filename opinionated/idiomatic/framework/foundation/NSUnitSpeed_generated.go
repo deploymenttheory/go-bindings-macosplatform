@@ -54,4 +54,3 @@ type UnitSpeedable interface {
 }
 
 var _ UnitSpeedable = (*UnitSpeed)(nil)
-

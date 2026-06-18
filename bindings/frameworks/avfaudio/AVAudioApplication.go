@@ -18,13 +18,13 @@ type AVAudioApplication struct {
 }
 
 var (
-	_clsAVAudioApplication = _objcClass("AVAudioApplication")
-	_aVAudioApplicationSelSetInputMutedError = objc.RegisterName("setInputMuted:error:")
-	_aVAudioApplicationSelSetInputMuteStateChangeHandlerError = objc.RegisterName("setInputMuteStateChangeHandler:error:")
+	_clsAVAudioApplication                                             = _objcClass("AVAudioApplication")
+	_aVAudioApplicationSelSetInputMutedError                           = objc.RegisterName("setInputMuted:error:")
+	_aVAudioApplicationSelSetInputMuteStateChangeHandlerError          = objc.RegisterName("setInputMuteStateChangeHandler:error:")
 	_aVAudioApplicationSelRequestRecordPermissionWithCompletionHandler = objc.RegisterName("requestRecordPermissionWithCompletionHandler:")
-	_aVAudioApplicationSelSharedInstance = objc.RegisterName("sharedInstance")
-	_aVAudioApplicationSelIsInputMuted = objc.RegisterName("isInputMuted")
-	_aVAudioApplicationSelRecordPermission = objc.RegisterName("recordPermission")
+	_aVAudioApplicationSelSharedInstance                               = objc.RegisterName("sharedInstance")
+	_aVAudioApplicationSelIsInputMuted                                 = objc.RegisterName("isInputMuted")
+	_aVAudioApplicationSelRecordPermission                             = objc.RegisterName("recordPermission")
 )
 
 func AVAudioApplicationFromID(id objc.ID) *AVAudioApplication {
@@ -79,7 +79,9 @@ func AVAudioApplicationRequestRecordPermissionWithCompletionHandler(response fun
 // Returns the singleton instance
 func AVAudioApplicationSharedInstance() *AVAudioApplication {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAudioApplication), _aVAudioApplicationSelSharedInstance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioApplicationFromID(_ret)
 }
 
@@ -94,4 +96,3 @@ func (o *AVAudioApplication) RecordPermission() AVAudioApplicationRecordPermissi
 	_ret := objc.Send[AVAudioApplicationRecordPermission](o.Ptr(), _aVAudioApplicationSelRecordPermission)
 	return _ret
 }
-

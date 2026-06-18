@@ -71,7 +71,9 @@ func (x *AVB17221AECPInterface) SendVendorUniqueCommandToMACAddressExpectRespons
 	return x.inner.SendVendorUniqueCommandToMACAddressExpectResponseWithinTimeoutCompletionHandler(message, destMAC, timeout, completionHandler)
 }
 
-func (x *AVB17221AECPInterface) asAVB1722ControlInterface() *raw.AVB1722ControlInterface { return &x.inner.AVB1722ControlInterface }
+func (x *AVB17221AECPInterface) asAVB1722ControlInterface() *raw.AVB1722ControlInterface {
+	return &x.inner.AVB1722ControlInterface
+}
 
 // AVB17221AECPInterfaceable is the interface implemented by [AVB17221AECPInterface], for mocking and DI.
 type AVB17221AECPInterfaceable interface {
@@ -86,4 +88,3 @@ type AVB17221AECPInterfaceable interface {
 }
 
 var _ AVB17221AECPInterfaceable = (*AVB17221AECPInterface)(nil)
-

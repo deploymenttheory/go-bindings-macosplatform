@@ -17,7 +17,7 @@ type MPSCNNSubtract struct {
 }
 
 var (
-	_clsMPSCNNSubtract = _objcClass("MPSCNNSubtract")
+	_clsMPSCNNSubtract               = _objcClass("MPSCNNSubtract")
 	_mPSCNNSubtractSelInitWithDevice = objc.RegisterName("initWithDevice:")
 )
 
@@ -34,7 +34,8 @@ func MPSCNNSubtractFromID(id objc.ID) *MPSCNNSubtract {
 // @abstract  Initialize the subtraction operator @param     device           The device the filter will run on. @return    A valid MPSCNNSubtract object or nil, if failure.
 func (o *MPSCNNSubtract) InitWithDevice(device metal.MTLDevice) *MPSCNNSubtract {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNSubtractSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNSubtractFromID(_ret)
 }
-

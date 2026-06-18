@@ -197,4 +197,3 @@ type Dateable interface {
 }
 
 var _ Dateable = (*Date)(nil)
-

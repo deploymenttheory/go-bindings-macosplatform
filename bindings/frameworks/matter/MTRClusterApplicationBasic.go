@@ -16,22 +16,22 @@ type MTRClusterApplicationBasic struct {
 }
 
 var (
-	_clsMTRClusterApplicationBasic = _objcClass("MTRClusterApplicationBasic")
-	_mTRClusterApplicationBasicSelReadAttributeVendorNameWithParams = objc.RegisterName("readAttributeVendorNameWithParams:")
-	_mTRClusterApplicationBasicSelReadAttributeVendorIDWithParams = objc.RegisterName("readAttributeVendorIDWithParams:")
-	_mTRClusterApplicationBasicSelReadAttributeApplicationNameWithParams = objc.RegisterName("readAttributeApplicationNameWithParams:")
-	_mTRClusterApplicationBasicSelReadAttributeProductIDWithParams = objc.RegisterName("readAttributeProductIDWithParams:")
-	_mTRClusterApplicationBasicSelReadAttributeApplicationWithParams = objc.RegisterName("readAttributeApplicationWithParams:")
-	_mTRClusterApplicationBasicSelReadAttributeStatusWithParams = objc.RegisterName("readAttributeStatusWithParams:")
-	_mTRClusterApplicationBasicSelReadAttributeApplicationVersionWithParams = objc.RegisterName("readAttributeApplicationVersionWithParams:")
-	_mTRClusterApplicationBasicSelReadAttributeAllowedVendorListWithParams = objc.RegisterName("readAttributeAllowedVendorListWithParams:")
+	_clsMTRClusterApplicationBasic                                            = _objcClass("MTRClusterApplicationBasic")
+	_mTRClusterApplicationBasicSelReadAttributeVendorNameWithParams           = objc.RegisterName("readAttributeVendorNameWithParams:")
+	_mTRClusterApplicationBasicSelReadAttributeVendorIDWithParams             = objc.RegisterName("readAttributeVendorIDWithParams:")
+	_mTRClusterApplicationBasicSelReadAttributeApplicationNameWithParams      = objc.RegisterName("readAttributeApplicationNameWithParams:")
+	_mTRClusterApplicationBasicSelReadAttributeProductIDWithParams            = objc.RegisterName("readAttributeProductIDWithParams:")
+	_mTRClusterApplicationBasicSelReadAttributeApplicationWithParams          = objc.RegisterName("readAttributeApplicationWithParams:")
+	_mTRClusterApplicationBasicSelReadAttributeStatusWithParams               = objc.RegisterName("readAttributeStatusWithParams:")
+	_mTRClusterApplicationBasicSelReadAttributeApplicationVersionWithParams   = objc.RegisterName("readAttributeApplicationVersionWithParams:")
+	_mTRClusterApplicationBasicSelReadAttributeAllowedVendorListWithParams    = objc.RegisterName("readAttributeAllowedVendorListWithParams:")
 	_mTRClusterApplicationBasicSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterApplicationBasicSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterApplicationBasicSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterApplicationBasicSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterApplicationBasicSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterApplicationBasicSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterApplicationBasicSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterApplicationBasicSelReadAttributeAcceptedCommandListWithParams  = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterApplicationBasicSelReadAttributeAttributeListWithParams        = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterApplicationBasicSelReadAttributeFeatureMapWithParams           = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterApplicationBasicSelReadAttributeClusterRevisionWithParams      = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterApplicationBasicSelInitWithDeviceEndpointIDQueue               = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterApplicationBasicSelInitWithDeviceEndpointQueue                 = objc.RegisterName("initWithDevice:endpoint:queue:")
 )
 
 func MTRClusterApplicationBasicFromID(id objc.ID) *MTRClusterApplicationBasic {
@@ -112,13 +112,16 @@ func (o *MTRClusterApplicationBasic) ReadAttributeClusterRevisionWithParams(para
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func (o *MTRClusterApplicationBasic) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterApplicationBasic {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterApplicationBasicSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterApplicationBasicFromID(_ret)
 }
 
 func (o *MTRClusterApplicationBasic) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterApplicationBasic {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterApplicationBasicSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterApplicationBasicFromID(_ret)
 }
-

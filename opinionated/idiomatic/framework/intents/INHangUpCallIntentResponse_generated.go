@@ -48,7 +48,9 @@ func (x *HangUpCallIntentResponse) Code() raw.INHangUpCallIntentResponseCode {
 	return x.inner.Code()
 }
 
-func (x *HangUpCallIntentResponse) asIntentResponse() *raw.INIntentResponse { return &x.inner.INIntentResponse }
+func (x *HangUpCallIntentResponse) asIntentResponse() *raw.INIntentResponse {
+	return &x.inner.INIntentResponse
+}
 
 // HangUpCallIntentResponseable is the interface implemented by [HangUpCallIntentResponse], for mocking and DI.
 type HangUpCallIntentResponseable interface {
@@ -58,4 +60,3 @@ type HangUpCallIntentResponseable interface {
 }
 
 var _ HangUpCallIntentResponseable = (*HangUpCallIntentResponse)(nil)
-

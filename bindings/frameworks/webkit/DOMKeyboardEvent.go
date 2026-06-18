@@ -16,20 +16,20 @@ type DOMKeyboardEvent struct {
 }
 
 var (
-	_clsDOMKeyboardEvent = _objcClass("DOMKeyboardEvent")
-	_dOMKeyboardEventSelGetModifierState = objc.RegisterName("getModifierState:")
-	_dOMKeyboardEventSelInitKeyboardEventCanBubbleCancelableViewKeyIdentifierLocationCtrlKeyAltKeyShiftKeyMetaKeyAltGraphKey = objc.RegisterName("initKeyboardEvent:canBubble:cancelable:view:keyIdentifier:location:ctrlKey:altKey:shiftKey:metaKey:altGraphKey:")
-	_dOMKeyboardEventSelInitKeyboardEventCanBubbleCancelableViewKeyIdentifierLocationCtrlKeyAltKeyShiftKeyMetaKey = objc.RegisterName("initKeyboardEvent:canBubble:cancelable:view:keyIdentifier:location:ctrlKey:altKey:shiftKey:metaKey:")
+	_clsDOMKeyboardEvent                                                                                                        = _objcClass("DOMKeyboardEvent")
+	_dOMKeyboardEventSelGetModifierState                                                                                        = objc.RegisterName("getModifierState:")
+	_dOMKeyboardEventSelInitKeyboardEventCanBubbleCancelableViewKeyIdentifierLocationCtrlKeyAltKeyShiftKeyMetaKeyAltGraphKey    = objc.RegisterName("initKeyboardEvent:canBubble:cancelable:view:keyIdentifier:location:ctrlKey:altKey:shiftKey:metaKey:altGraphKey:")
+	_dOMKeyboardEventSelInitKeyboardEventCanBubbleCancelableViewKeyIdentifierLocationCtrlKeyAltKeyShiftKeyMetaKey               = objc.RegisterName("initKeyboardEvent:canBubble:cancelable:view:keyIdentifier:location:ctrlKey:altKey:shiftKey:metaKey:")
 	_dOMKeyboardEventSelInitKeyboardEventCanBubbleCancelableViewKeyIdentifierKeyLocationCtrlKeyAltKeyShiftKeyMetaKeyAltGraphKey = objc.RegisterName("initKeyboardEvent:canBubble:cancelable:view:keyIdentifier:keyLocation:ctrlKey:altKey:shiftKey:metaKey:altGraphKey:")
-	_dOMKeyboardEventSelInitKeyboardEventCanBubbleCancelableViewKeyIdentifierKeyLocationCtrlKeyAltKeyShiftKeyMetaKey = objc.RegisterName("initKeyboardEvent:canBubble:cancelable:view:keyIdentifier:keyLocation:ctrlKey:altKey:shiftKey:metaKey:")
-	_dOMKeyboardEventSelKeyIdentifier = objc.RegisterName("keyIdentifier")
-	_dOMKeyboardEventSelLocation = objc.RegisterName("location")
-	_dOMKeyboardEventSelKeyLocation = objc.RegisterName("keyLocation")
-	_dOMKeyboardEventSelCtrlKey = objc.RegisterName("ctrlKey")
-	_dOMKeyboardEventSelShiftKey = objc.RegisterName("shiftKey")
-	_dOMKeyboardEventSelAltKey = objc.RegisterName("altKey")
-	_dOMKeyboardEventSelMetaKey = objc.RegisterName("metaKey")
-	_dOMKeyboardEventSelAltGraphKey = objc.RegisterName("altGraphKey")
+	_dOMKeyboardEventSelInitKeyboardEventCanBubbleCancelableViewKeyIdentifierKeyLocationCtrlKeyAltKeyShiftKeyMetaKey            = objc.RegisterName("initKeyboardEvent:canBubble:cancelable:view:keyIdentifier:keyLocation:ctrlKey:altKey:shiftKey:metaKey:")
+	_dOMKeyboardEventSelKeyIdentifier                                                                                           = objc.RegisterName("keyIdentifier")
+	_dOMKeyboardEventSelLocation                                                                                                = objc.RegisterName("location")
+	_dOMKeyboardEventSelKeyLocation                                                                                             = objc.RegisterName("keyLocation")
+	_dOMKeyboardEventSelCtrlKey                                                                                                 = objc.RegisterName("ctrlKey")
+	_dOMKeyboardEventSelShiftKey                                                                                                = objc.RegisterName("shiftKey")
+	_dOMKeyboardEventSelAltKey                                                                                                  = objc.RegisterName("altKey")
+	_dOMKeyboardEventSelMetaKey                                                                                                 = objc.RegisterName("metaKey")
+	_dOMKeyboardEventSelAltGraphKey                                                                                             = objc.RegisterName("altGraphKey")
 )
 
 func DOMKeyboardEventFromID(id objc.ID) *DOMKeyboardEvent {
@@ -65,7 +65,9 @@ func (o *DOMKeyboardEvent) InitKeyboardEventCanBubbleCancelableViewKeyIdentifier
 
 func (o *DOMKeyboardEvent) KeyIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMKeyboardEventSelKeyIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -103,4 +105,3 @@ func (o *DOMKeyboardEvent) AltGraphKey() bool {
 	_ret := objc.Send[bool](o.Ptr(), _dOMKeyboardEventSelAltGraphKey)
 	return _ret
 }
-

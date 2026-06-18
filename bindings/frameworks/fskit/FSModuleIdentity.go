@@ -16,10 +16,10 @@ type FSModuleIdentity struct {
 }
 
 var (
-	_clsFSModuleIdentity = _objcClass("FSModuleIdentity")
+	_clsFSModuleIdentity                 = _objcClass("FSModuleIdentity")
 	_fSModuleIdentitySelBundleIdentifier = objc.RegisterName("bundleIdentifier")
-	_fSModuleIdentitySelUrl = objc.RegisterName("url")
-	_fSModuleIdentitySelIsEnabled = objc.RegisterName("isEnabled")
+	_fSModuleIdentitySelUrl              = objc.RegisterName("url")
+	_fSModuleIdentitySelIsEnabled        = objc.RegisterName("isEnabled")
 )
 
 func FSModuleIdentityFromID(id objc.ID) *FSModuleIdentity {
@@ -35,14 +35,18 @@ func FSModuleIdentityFromID(id objc.ID) *FSModuleIdentity {
 // The module's bundle identifier.
 func (o *FSModuleIdentity) BundleIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSModuleIdentitySelBundleIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The module's URL.
 func (o *FSModuleIdentity) Url() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSModuleIdentitySelUrl)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -50,4 +54,3 @@ func (o *FSModuleIdentity) IsEnabled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _fSModuleIdentitySelIsEnabled)
 	return _ret
 }
-

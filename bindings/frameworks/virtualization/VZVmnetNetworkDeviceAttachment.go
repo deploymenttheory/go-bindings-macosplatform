@@ -17,9 +17,9 @@ type VZVmnetNetworkDeviceAttachment struct {
 }
 
 var (
-	_clsVZVmnetNetworkDeviceAttachment = _objcClass("VZVmnetNetworkDeviceAttachment")
+	_clsVZVmnetNetworkDeviceAttachment                = _objcClass("VZVmnetNetworkDeviceAttachment")
 	_vZVmnetNetworkDeviceAttachmentSelInitWithNetwork = objc.RegisterName("initWithNetwork:")
-	_vZVmnetNetworkDeviceAttachmentSelNetwork = objc.RegisterName("network")
+	_vZVmnetNetworkDeviceAttachmentSelNetwork         = objc.RegisterName("network")
 )
 
 func VZVmnetNetworkDeviceAttachmentFromID(id objc.ID) *VZVmnetNetworkDeviceAttachment {
@@ -35,7 +35,9 @@ func VZVmnetNetworkDeviceAttachmentFromID(id objc.ID) *VZVmnetNetworkDeviceAttac
 // @abstract Initialize a `VZVmnetNetworkDeviceAttachment` with a logical network. @param network The logical network object. @return An initialized `VZVmnetNetworkDeviceAttachment`. @discussion To ensure proper isolation between application processes, a VM can only use the `network` that is created by the same application process. If a VM created by one application tries to use a `network` created by another application, starting the interface with this attachment will fail. The vmnet framework requires an entitlement to create or configure a network. For more information, please refer to the vmnet framework API documentation. An example use of this API is: ``` vmnet_return_t status; auto network_configuration = vmnet_network_configuration_create(VMNET_SHARED_MODE, &status); if (!network_configuration) { // Handle error return `status`. } auto network = vmnet_network_create(network_configuration, &status); if (!network) { // Handle error return `status`. } VZVmnetNetworkDeviceAttachment *attachment = [[VZVmnetNetworkDeviceAttachment alloc] initWithNetwork:network]; VZVirtioNetworkDeviceConfiguration virtioNetworkDevice = [[VZVirtioNetworkDeviceConfiguration alloc] init]; virtioNetworkDevice.attachment = attachment; ```
 func (o *VZVmnetNetworkDeviceAttachment) InitWithNetwork(network unsafe.Pointer) *VZVmnetNetworkDeviceAttachment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVmnetNetworkDeviceAttachmentSelInitWithNetwork, network)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZVmnetNetworkDeviceAttachmentFromID(_ret)
 }
 
@@ -43,4 +45,3 @@ func (o *VZVmnetNetworkDeviceAttachment) Network() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _vZVmnetNetworkDeviceAttachmentSelNetwork)
 	return _ret
 }
-

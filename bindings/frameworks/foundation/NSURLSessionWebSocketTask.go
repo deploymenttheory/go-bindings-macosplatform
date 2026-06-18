@@ -17,15 +17,15 @@ type NSURLSessionWebSocketTask struct {
 }
 
 var (
-	_clsNSURLSessionWebSocketTask = _objcClass("NSURLSessionWebSocketTask")
-	_nSURLSessionWebSocketTaskSelSendMessageCompletionHandler = objc.RegisterName("sendMessage:completionHandler:")
+	_clsNSURLSessionWebSocketTask                                    = _objcClass("NSURLSessionWebSocketTask")
+	_nSURLSessionWebSocketTaskSelSendMessageCompletionHandler        = objc.RegisterName("sendMessage:completionHandler:")
 	_nSURLSessionWebSocketTaskSelReceiveMessageWithCompletionHandler = objc.RegisterName("receiveMessageWithCompletionHandler:")
-	_nSURLSessionWebSocketTaskSelSendPingWithPongReceiveHandler = objc.RegisterName("sendPingWithPongReceiveHandler:")
-	_nSURLSessionWebSocketTaskSelCancelWithCloseCodeReason = objc.RegisterName("cancelWithCloseCode:reason:")
-	_nSURLSessionWebSocketTaskSelMaximumMessageSize = objc.RegisterName("maximumMessageSize")
-	_nSURLSessionWebSocketTaskSelSetMaximumMessageSize = objc.RegisterName("setMaximumMessageSize:")
-	_nSURLSessionWebSocketTaskSelCloseCode = objc.RegisterName("closeCode")
-	_nSURLSessionWebSocketTaskSelCloseReason = objc.RegisterName("closeReason")
+	_nSURLSessionWebSocketTaskSelSendPingWithPongReceiveHandler      = objc.RegisterName("sendPingWithPongReceiveHandler:")
+	_nSURLSessionWebSocketTaskSelCancelWithCloseCodeReason           = objc.RegisterName("cancelWithCloseCode:reason:")
+	_nSURLSessionWebSocketTaskSelMaximumMessageSize                  = objc.RegisterName("maximumMessageSize")
+	_nSURLSessionWebSocketTaskSelSetMaximumMessageSize               = objc.RegisterName("setMaximumMessageSize:")
+	_nSURLSessionWebSocketTaskSelCloseCode                           = objc.RegisterName("closeCode")
+	_nSURLSessionWebSocketTaskSelCloseReason                         = objc.RegisterName("closeReason")
 )
 
 func NSURLSessionWebSocketTaskFromID(id objc.ID) *NSURLSessionWebSocketTask {
@@ -94,7 +94,8 @@ func (o *NSURLSessionWebSocketTask) CloseCode() NSURLSessionWebSocketCloseCode {
 
 func (o *NSURLSessionWebSocketTask) CloseReason() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionWebSocketTaskSelCloseReason)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
-

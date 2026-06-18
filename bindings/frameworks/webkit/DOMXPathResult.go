@@ -16,16 +16,16 @@ type DOMXPathResult struct {
 }
 
 var (
-	_clsDOMXPathResult = _objcClass("DOMXPathResult")
-	_dOMXPathResultSelIterateNext = objc.RegisterName("iterateNext")
-	_dOMXPathResultSelSnapshotItem = objc.RegisterName("snapshotItem:")
-	_dOMXPathResultSelResultType = objc.RegisterName("resultType")
-	_dOMXPathResultSelNumberValue = objc.RegisterName("numberValue")
-	_dOMXPathResultSelStringValue = objc.RegisterName("stringValue")
-	_dOMXPathResultSelBooleanValue = objc.RegisterName("booleanValue")
-	_dOMXPathResultSelSingleNodeValue = objc.RegisterName("singleNodeValue")
+	_clsDOMXPathResult                     = _objcClass("DOMXPathResult")
+	_dOMXPathResultSelIterateNext          = objc.RegisterName("iterateNext")
+	_dOMXPathResultSelSnapshotItem         = objc.RegisterName("snapshotItem:")
+	_dOMXPathResultSelResultType           = objc.RegisterName("resultType")
+	_dOMXPathResultSelNumberValue          = objc.RegisterName("numberValue")
+	_dOMXPathResultSelStringValue          = objc.RegisterName("stringValue")
+	_dOMXPathResultSelBooleanValue         = objc.RegisterName("booleanValue")
+	_dOMXPathResultSelSingleNodeValue      = objc.RegisterName("singleNodeValue")
 	_dOMXPathResultSelInvalidIteratorState = objc.RegisterName("invalidIteratorState")
-	_dOMXPathResultSelSnapshotLength = objc.RegisterName("snapshotLength")
+	_dOMXPathResultSelSnapshotLength       = objc.RegisterName("snapshotLength")
 )
 
 func DOMXPathResultFromID(id objc.ID) *DOMXPathResult {
@@ -40,13 +40,17 @@ func DOMXPathResultFromID(id objc.ID) *DOMXPathResult {
 
 func (o *DOMXPathResult) IterateNext() *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMXPathResultSelIterateNext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMXPathResult) SnapshotItem(index uint) *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMXPathResultSelSnapshotItem, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
@@ -62,7 +66,9 @@ func (o *DOMXPathResult) NumberValue() float64 {
 
 func (o *DOMXPathResult) StringValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMXPathResultSelStringValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -73,7 +79,9 @@ func (o *DOMXPathResult) BooleanValue() bool {
 
 func (o *DOMXPathResult) SingleNodeValue() *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMXPathResultSelSingleNodeValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
@@ -86,4 +94,3 @@ func (o *DOMXPathResult) SnapshotLength() uint {
 	_ret := objc.Send[uint](o.Ptr(), _dOMXPathResultSelSnapshotLength)
 	return _ret
 }
-

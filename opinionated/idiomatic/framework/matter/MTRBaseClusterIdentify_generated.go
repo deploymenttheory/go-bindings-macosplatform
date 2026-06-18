@@ -531,9 +531,13 @@ func (x *MTRBaseClusterIdentify) SubscribeAttributeClusterRevisionWithMinInterva
 	}
 }
 
-func (x *MTRBaseClusterIdentify) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterIdentify) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterIdentify) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterIdentify) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterIdentifyable is the interface implemented by [MTRBaseClusterIdentify], for mocking and DI.
 type MTRBaseClusterIdentifyable interface {
@@ -577,4 +581,3 @@ type MTRBaseClusterIdentifyable interface {
 }
 
 var _ MTRBaseClusterIdentifyable = (*MTRBaseClusterIdentify)(nil)
-

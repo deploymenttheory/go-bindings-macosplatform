@@ -16,10 +16,10 @@ type AVPlayerItemErrorLog struct {
 }
 
 var (
-	_clsAVPlayerItemErrorLog = _objcClass("AVPlayerItemErrorLog")
-	_aVPlayerItemErrorLogSelExtendedLogData = objc.RegisterName("extendedLogData")
+	_clsAVPlayerItemErrorLog                              = _objcClass("AVPlayerItemErrorLog")
+	_aVPlayerItemErrorLogSelExtendedLogData               = objc.RegisterName("extendedLogData")
 	_aVPlayerItemErrorLogSelExtendedLogDataStringEncoding = objc.RegisterName("extendedLogDataStringEncoding")
-	_aVPlayerItemErrorLogSelEvents = objc.RegisterName("events")
+	_aVPlayerItemErrorLogSelEvents                        = objc.RegisterName("events")
 )
 
 func AVPlayerItemErrorLogFromID(id objc.ID) *AVPlayerItemErrorLog {
@@ -35,7 +35,9 @@ func AVPlayerItemErrorLogFromID(id objc.ID) *AVPlayerItemErrorLog {
 // Serializes an AVPlayerItemErrorLog in the Extended Log File Format. This method converts the webserver error log into a textual format that conforms to the W3C Extended Log File Format for web server log files. For more information see: http://www.w3.org/pub/WWW/TR/WD-logfile.html - Returns: An autoreleased NSData instance.
 func (o *AVPlayerItemErrorLog) ExtendedLogData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemErrorLogSelExtendedLogData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -48,7 +50,8 @@ func (o *AVPlayerItemErrorLog) ExtendedLogDataStringEncoding() uint {
 // An ordered collection of AVPlayerItemErrorLogEvent instances. An ordered collection of AVPlayerItemErrorLogEvent instances that represent the chronological sequence of events contained in the error log. This property is not observable.
 func (o *AVPlayerItemErrorLog) Events() *foundation.NSArray[*AVPlayerItemErrorLogEvent] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemErrorLogSelEvents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVPlayerItemErrorLogEvent](_ret)
 }
-

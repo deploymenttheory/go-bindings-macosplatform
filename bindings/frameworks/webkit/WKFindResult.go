@@ -16,7 +16,7 @@ type WKFindResult struct {
 }
 
 var (
-	_clsWKFindResult = _objcClass("WKFindResult")
+	_clsWKFindResult           = _objcClass("WKFindResult")
 	_wKFindResultSelMatchFound = objc.RegisterName("matchFound")
 )
 
@@ -34,4 +34,3 @@ func (o *WKFindResult) MatchFound() bool {
 	_ret := objc.Send[bool](o.Ptr(), _wKFindResultSelMatchFound)
 	return _ret
 }
-

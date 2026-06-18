@@ -18,17 +18,17 @@ type SMAppService struct {
 }
 
 var (
-	_clsSMAppService = _objcClass("SMAppService")
-	_sMAppServiceSelLoginItemServiceWithIdentifier = objc.RegisterName("loginItemServiceWithIdentifier:")
-	_sMAppServiceSelAgentServiceWithPlistName = objc.RegisterName("agentServiceWithPlistName:")
-	_sMAppServiceSelDaemonServiceWithPlistName = objc.RegisterName("daemonServiceWithPlistName:")
-	_sMAppServiceSelRegisterAndReturnError = objc.RegisterName("registerAndReturnError:")
-	_sMAppServiceSelUnregisterAndReturnError = objc.RegisterName("unregisterAndReturnError:")
+	_clsSMAppService                                = _objcClass("SMAppService")
+	_sMAppServiceSelLoginItemServiceWithIdentifier  = objc.RegisterName("loginItemServiceWithIdentifier:")
+	_sMAppServiceSelAgentServiceWithPlistName       = objc.RegisterName("agentServiceWithPlistName:")
+	_sMAppServiceSelDaemonServiceWithPlistName      = objc.RegisterName("daemonServiceWithPlistName:")
+	_sMAppServiceSelRegisterAndReturnError          = objc.RegisterName("registerAndReturnError:")
+	_sMAppServiceSelUnregisterAndReturnError        = objc.RegisterName("unregisterAndReturnError:")
 	_sMAppServiceSelUnregisterWithCompletionHandler = objc.RegisterName("unregisterWithCompletionHandler:")
-	_sMAppServiceSelStatusForLegacyURL = objc.RegisterName("statusForLegacyURL:")
-	_sMAppServiceSelOpenSystemSettingsLoginItems = objc.RegisterName("openSystemSettingsLoginItems")
-	_sMAppServiceSelMainAppService = objc.RegisterName("mainAppService")
-	_sMAppServiceSelStatus = objc.RegisterName("status")
+	_sMAppServiceSelStatusForLegacyURL              = objc.RegisterName("statusForLegacyURL:")
+	_sMAppServiceSelOpenSystemSettingsLoginItems    = objc.RegisterName("openSystemSettingsLoginItems")
+	_sMAppServiceSelMainAppService                  = objc.RegisterName("mainAppService")
+	_sMAppServiceSelStatus                          = objc.RegisterName("status")
 )
 
 func SMAppServiceFromID(id objc.ID) *SMAppService {
@@ -44,21 +44,27 @@ func SMAppServiceFromID(id objc.ID) *SMAppService {
 // @method loginItemServiceWithIdentifier @abstract Initializes a SMAppService for a LoginItem corresponding to the bundle with the specified identifier. @param identifier The bundle identifier of the helper application @discussion The identifier must correspond to the bundle identifier for a LoginItem that lives in the calling app's Contents/Library/LoginItems directory
 func SMAppServiceLoginItemServiceWithIdentifier(identifier *foundation.NSString) *SMAppService {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSMAppService), _sMAppServiceSelLoginItemServiceWithIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SMAppServiceFromID(_ret)
 }
 
 // @method agentServiceWithPlistName @abstract Initializes a SMAppService with a LaunchAgent with the specified plist name. @param plistName The name of the plist corresponding to the SMAppService. @discussion The plistName must correspond to a plist in the calling app's Contents/Library/LaunchAgents directory In addition to the standard launchd.plist keys, plists registered with SMAppService may use the BundleProgram launchd plist key to specify an app bundle relative path for the executable. This key allows apps to support a user relocating the app bundle after installation.
 func SMAppServiceAgentServiceWithPlistName(plistName *foundation.NSString) *SMAppService {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSMAppService), _sMAppServiceSelAgentServiceWithPlistName, plistName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SMAppServiceFromID(_ret)
 }
 
 // @method daemonServiceWithPlistName @abstract Initializes a SMAppService with a LaunchDaemon with the specified plist name. @param plistName The name of the plist corresponding to the SMAppService. @discussion The plistName must correspond to a plist in the calling app's Contents/Library/LaunchDaemons directory In addition to the standard launchd.plist keys, plists registered with SMAppService may use the BundleProgram launchd plist key to specify an app bundle relative path for the executable. This key allows apps to support a user relocating the app bundle after installation. For a LaunchDaemon to be bootstrapped during boot, the containing application must be accessible before a user logs in. For applications that intend to register LaunchDaemons, it is recommended that the application bundle live in /Applications
 func SMAppServiceDaemonServiceWithPlistName(plistName *foundation.NSString) *SMAppService {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSMAppService), _sMAppServiceSelDaemonServiceWithPlistName, plistName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SMAppServiceFromID(_ret)
 }
 
@@ -107,7 +113,9 @@ func SMAppServiceOpenSystemSettingsLoginItems() {
 // @property mainAppService @abstract A SMAppService corresponding to the main application as a LoginItem This SMAppService can be used to configure the main app to be launched at login
 func SMAppServiceMainAppService() *SMAppService {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSMAppService), _sMAppServiceSelMainAppService)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SMAppServiceFromID(_ret)
 }
 
@@ -116,4 +124,3 @@ func (o *SMAppService) Status() SMAppServiceStatus {
 	_ret := objc.Send[SMAppServiceStatus](o.Ptr(), _sMAppServiceSelStatus)
 	return _ret
 }
-

@@ -6,4 +6,3 @@ package corelocation
 // CLLocationManagerDelegate wraps the ObjC protocol CLLocationManagerDelegate.
 type CLLocationManagerDelegate interface {
 }
-

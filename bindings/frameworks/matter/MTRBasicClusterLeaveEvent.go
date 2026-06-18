@@ -25,4 +25,3 @@ func MTRBasicClusterLeaveEventFromID(id objc.ID) *MTRBasicClusterLeaveEvent {
 	purego.Track(o)
 	return o
 }
-

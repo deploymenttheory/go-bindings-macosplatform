@@ -16,15 +16,15 @@ type MTREnergyEVSEClusterFaultEvent struct {
 }
 
 var (
-	_clsMTREnergyEVSEClusterFaultEvent = _objcClass("MTREnergyEVSEClusterFaultEvent")
-	_mTREnergyEVSEClusterFaultEventSelSessionID = objc.RegisterName("sessionID")
-	_mTREnergyEVSEClusterFaultEventSelSetSessionID = objc.RegisterName("setSessionID:")
-	_mTREnergyEVSEClusterFaultEventSelState = objc.RegisterName("state")
-	_mTREnergyEVSEClusterFaultEventSelSetState = objc.RegisterName("setState:")
-	_mTREnergyEVSEClusterFaultEventSelFaultStatePreviousState = objc.RegisterName("faultStatePreviousState")
+	_clsMTREnergyEVSEClusterFaultEvent                           = _objcClass("MTREnergyEVSEClusterFaultEvent")
+	_mTREnergyEVSEClusterFaultEventSelSessionID                  = objc.RegisterName("sessionID")
+	_mTREnergyEVSEClusterFaultEventSelSetSessionID               = objc.RegisterName("setSessionID:")
+	_mTREnergyEVSEClusterFaultEventSelState                      = objc.RegisterName("state")
+	_mTREnergyEVSEClusterFaultEventSelSetState                   = objc.RegisterName("setState:")
+	_mTREnergyEVSEClusterFaultEventSelFaultStatePreviousState    = objc.RegisterName("faultStatePreviousState")
 	_mTREnergyEVSEClusterFaultEventSelSetFaultStatePreviousState = objc.RegisterName("setFaultStatePreviousState:")
-	_mTREnergyEVSEClusterFaultEventSelFaultStateCurrentState = objc.RegisterName("faultStateCurrentState")
-	_mTREnergyEVSEClusterFaultEventSelSetFaultStateCurrentState = objc.RegisterName("setFaultStateCurrentState:")
+	_mTREnergyEVSEClusterFaultEventSelFaultStateCurrentState     = objc.RegisterName("faultStateCurrentState")
+	_mTREnergyEVSEClusterFaultEventSelSetFaultStateCurrentState  = objc.RegisterName("setFaultStateCurrentState:")
 )
 
 func MTREnergyEVSEClusterFaultEventFromID(id objc.ID) *MTREnergyEVSEClusterFaultEvent {
@@ -39,7 +39,9 @@ func MTREnergyEVSEClusterFaultEventFromID(id objc.ID) *MTREnergyEVSEClusterFault
 
 func (o *MTREnergyEVSEClusterFaultEvent) SessionID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREnergyEVSEClusterFaultEventSelSessionID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTREnergyEVSEClusterFaultEvent) SetSessionID(sessionID *foundation.NSNu
 
 func (o *MTREnergyEVSEClusterFaultEvent) State() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREnergyEVSEClusterFaultEventSelState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,7 +63,9 @@ func (o *MTREnergyEVSEClusterFaultEvent) SetState(state *foundation.NSNumber) {
 
 func (o *MTREnergyEVSEClusterFaultEvent) FaultStatePreviousState() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREnergyEVSEClusterFaultEventSelFaultStatePreviousState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -69,11 +75,12 @@ func (o *MTREnergyEVSEClusterFaultEvent) SetFaultStatePreviousState(faultStatePr
 
 func (o *MTREnergyEVSEClusterFaultEvent) FaultStateCurrentState() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREnergyEVSEClusterFaultEventSelFaultStateCurrentState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTREnergyEVSEClusterFaultEvent) SetFaultStateCurrentState(faultStateCurrentState *foundation.NSNumber) {
 	o.Ptr().Send(_mTREnergyEVSEClusterFaultEventSelSetFaultStateCurrentState, faultStateCurrentState.Ptr())
 }
-

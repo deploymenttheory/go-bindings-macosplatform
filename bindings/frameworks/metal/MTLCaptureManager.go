@@ -18,19 +18,19 @@ type MTLCaptureManager struct {
 }
 
 var (
-	_clsMTLCaptureManager = _objcClass("MTLCaptureManager")
-	_mTLCaptureManagerSelSharedCaptureManager = objc.RegisterName("sharedCaptureManager")
-	_mTLCaptureManagerSelNewCaptureScopeWithCommandQueue = objc.RegisterName("newCaptureScopeWithCommandQueue:")
+	_clsMTLCaptureManager                                    = _objcClass("MTLCaptureManager")
+	_mTLCaptureManagerSelSharedCaptureManager                = objc.RegisterName("sharedCaptureManager")
+	_mTLCaptureManagerSelNewCaptureScopeWithCommandQueue     = objc.RegisterName("newCaptureScopeWithCommandQueue:")
 	_mTLCaptureManagerSelNewCaptureScopeWithMTL4CommandQueue = objc.RegisterName("newCaptureScopeWithMTL4CommandQueue:")
-	_mTLCaptureManagerSelSupportsDestination = objc.RegisterName("supportsDestination:")
-	_mTLCaptureManagerSelStartCaptureWithDescriptorError = objc.RegisterName("startCaptureWithDescriptor:error:")
-	_mTLCaptureManagerSelStartCaptureWithDevice = objc.RegisterName("startCaptureWithDevice:")
-	_mTLCaptureManagerSelStartCaptureWithCommandQueue = objc.RegisterName("startCaptureWithCommandQueue:")
-	_mTLCaptureManagerSelStartCaptureWithScope = objc.RegisterName("startCaptureWithScope:")
-	_mTLCaptureManagerSelStopCapture = objc.RegisterName("stopCapture")
-	_mTLCaptureManagerSelDefaultCaptureScope = objc.RegisterName("defaultCaptureScope")
-	_mTLCaptureManagerSelSetDefaultCaptureScope = objc.RegisterName("setDefaultCaptureScope:")
-	_mTLCaptureManagerSelIsCapturing = objc.RegisterName("isCapturing")
+	_mTLCaptureManagerSelSupportsDestination                 = objc.RegisterName("supportsDestination:")
+	_mTLCaptureManagerSelStartCaptureWithDescriptorError     = objc.RegisterName("startCaptureWithDescriptor:error:")
+	_mTLCaptureManagerSelStartCaptureWithDevice              = objc.RegisterName("startCaptureWithDevice:")
+	_mTLCaptureManagerSelStartCaptureWithCommandQueue        = objc.RegisterName("startCaptureWithCommandQueue:")
+	_mTLCaptureManagerSelStartCaptureWithScope               = objc.RegisterName("startCaptureWithScope:")
+	_mTLCaptureManagerSelStopCapture                         = objc.RegisterName("stopCapture")
+	_mTLCaptureManagerSelDefaultCaptureScope                 = objc.RegisterName("defaultCaptureScope")
+	_mTLCaptureManagerSelSetDefaultCaptureScope              = objc.RegisterName("setDefaultCaptureScope:")
+	_mTLCaptureManagerSelIsCapturing                         = objc.RegisterName("isCapturing")
 )
 
 func MTLCaptureManagerFromID(id objc.ID) *MTLCaptureManager {
@@ -46,7 +46,9 @@ func MTLCaptureManagerFromID(id objc.ID) *MTLCaptureManager {
 // Retrieves the shared capture manager for this process. There is only one capture manager per process. The capture manager allows the user to create capture scopes and trigger captures from code. When a capture has been completed, it will be displayed in Xcode and the application will be paused. @remarks: only MTLCommandBuffers created after starting a capture and committed before stopping it are captured.
 func MTLCaptureManagerSharedCaptureManager() *MTLCaptureManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLCaptureManager), _mTLCaptureManagerSelSharedCaptureManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLCaptureManagerFromID(_ret)
 }
 
@@ -108,4 +110,3 @@ func (o *MTLCaptureManager) IsCapturing() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mTLCaptureManagerSelIsCapturing)
 	return _ret
 }
-

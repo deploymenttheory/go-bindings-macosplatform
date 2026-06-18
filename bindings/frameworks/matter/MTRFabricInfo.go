@@ -16,19 +16,19 @@ type MTRFabricInfo struct {
 }
 
 var (
-	_clsMTRFabricInfo = _objcClass("MTRFabricInfo")
-	_mTRFabricInfoSelRootPublicKey = objc.RegisterName("rootPublicKey")
-	_mTRFabricInfoSelVendorID = objc.RegisterName("vendorID")
-	_mTRFabricInfoSelFabricID = objc.RegisterName("fabricID")
-	_mTRFabricInfoSelNodeID = objc.RegisterName("nodeID")
-	_mTRFabricInfoSelLabel = objc.RegisterName("label")
-	_mTRFabricInfoSelRootCertificate = objc.RegisterName("rootCertificate")
-	_mTRFabricInfoSelRootCertificateTLV = objc.RegisterName("rootCertificateTLV")
-	_mTRFabricInfoSelIntermediateCertificate = objc.RegisterName("intermediateCertificate")
+	_clsMTRFabricInfo                           = _objcClass("MTRFabricInfo")
+	_mTRFabricInfoSelRootPublicKey              = objc.RegisterName("rootPublicKey")
+	_mTRFabricInfoSelVendorID                   = objc.RegisterName("vendorID")
+	_mTRFabricInfoSelFabricID                   = objc.RegisterName("fabricID")
+	_mTRFabricInfoSelNodeID                     = objc.RegisterName("nodeID")
+	_mTRFabricInfoSelLabel                      = objc.RegisterName("label")
+	_mTRFabricInfoSelRootCertificate            = objc.RegisterName("rootCertificate")
+	_mTRFabricInfoSelRootCertificateTLV         = objc.RegisterName("rootCertificateTLV")
+	_mTRFabricInfoSelIntermediateCertificate    = objc.RegisterName("intermediateCertificate")
 	_mTRFabricInfoSelIntermediateCertificateTLV = objc.RegisterName("intermediateCertificateTLV")
-	_mTRFabricInfoSelOperationalCertificate = objc.RegisterName("operationalCertificate")
-	_mTRFabricInfoSelOperationalCertificateTLV = objc.RegisterName("operationalCertificateTLV")
-	_mTRFabricInfoSelFabricIndex = objc.RegisterName("fabricIndex")
+	_mTRFabricInfoSelOperationalCertificate     = objc.RegisterName("operationalCertificate")
+	_mTRFabricInfoSelOperationalCertificateTLV  = objc.RegisterName("operationalCertificateTLV")
+	_mTRFabricInfoSelFabricIndex                = objc.RegisterName("fabricIndex")
 )
 
 func MTRFabricInfoFromID(id objc.ID) *MTRFabricInfo {
@@ -44,84 +44,107 @@ func MTRFabricInfoFromID(id objc.ID) *MTRFabricInfo {
 // Root public key for the fabric.
 func (o *MTRFabricInfo) RootPublicKey() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRFabricInfoSelRootPublicKey)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // Vendor identifier for the fabric.
 func (o *MTRFabricInfo) VendorID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRFabricInfoSelVendorID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // Fabric identifier (scoped to the root public key) for the fabric.
 func (o *MTRFabricInfo) FabricID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRFabricInfoSelFabricID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // Node identifier for the given node on the fabric.
 func (o *MTRFabricInfo) NodeID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRFabricInfoSelNodeID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // The string label for the fabric.  May be empty.
 func (o *MTRFabricInfo) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRFabricInfoSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The root certificate for the fabric.  This might be nil if a root certificate is not available (e.g. if this is information about some remote node that we don't have root certificate information for).
 func (o *MTRFabricInfo) RootCertificate() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRFabricInfoSelRootCertificate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // The same root certificate as rootCertificate, in Matter TLV format.
 func (o *MTRFabricInfo) RootCertificateTLV() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRFabricInfoSelRootCertificateTLV)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // The intermediate certificate for the node.  This might be nil if there is no intermediate certificate, or if the node is not on a fabric we have access to.
 func (o *MTRFabricInfo) IntermediateCertificate() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRFabricInfoSelIntermediateCertificate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // The same intermediate certificate as intermediateCertificate, in Matter TLV format.
 func (o *MTRFabricInfo) IntermediateCertificateTLV() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRFabricInfoSelIntermediateCertificateTLV)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // The operational certificate for the node.  This might be nil if the node is not on a fabric we have access to.
 func (o *MTRFabricInfo) OperationalCertificate() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRFabricInfoSelOperationalCertificate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // The same operational certificate as operationalCertificate, in Matter TLV format.
 func (o *MTRFabricInfo) OperationalCertificateTLV() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRFabricInfoSelOperationalCertificateTLV)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // The fabric index which identifies the fabric on the node.
 func (o *MTRFabricInfo) FabricIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRFabricInfoSelFabricIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
-

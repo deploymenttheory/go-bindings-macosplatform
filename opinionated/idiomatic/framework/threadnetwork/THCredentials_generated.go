@@ -120,4 +120,3 @@ type THCredentialsable interface {
 }
 
 var _ THCredentialsable = (*THCredentials)(nil)
-

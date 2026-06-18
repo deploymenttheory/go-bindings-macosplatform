@@ -51,7 +51,9 @@ func (x *CNNNeuronGeLUNode) WithLabel(label string) *CNNNeuronGeLUNode {
 
 func (x *CNNNeuronGeLUNode) asCNNNeuronNode() *raw.MPSCNNNeuronNode { return &x.inner.MPSCNNNeuronNode }
 
-func (x *CNNNeuronGeLUNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSCNNNeuronNode.MPSNNFilterNode }
+func (x *CNNNeuronGeLUNode) asNNFilterNode() *raw.MPSNNFilterNode {
+	return &x.inner.MPSCNNNeuronNode.MPSNNFilterNode
+}
 
 // CNNNeuronGeLUNodeable is the interface implemented by [CNNNeuronGeLUNode], for mocking and DI.
 type CNNNeuronGeLUNodeable interface {
@@ -61,4 +63,3 @@ type CNNNeuronGeLUNodeable interface {
 }
 
 var _ CNNNeuronGeLUNodeable = (*CNNNeuronGeLUNode)(nil)
-

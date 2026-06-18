@@ -16,11 +16,11 @@ type MTLResourceViewPoolDescriptor struct {
 }
 
 var (
-	_clsMTLResourceViewPoolDescriptor = _objcClass("MTLResourceViewPoolDescriptor")
-	_mTLResourceViewPoolDescriptorSelResourceViewCount = objc.RegisterName("resourceViewCount")
+	_clsMTLResourceViewPoolDescriptor                     = _objcClass("MTLResourceViewPoolDescriptor")
+	_mTLResourceViewPoolDescriptorSelResourceViewCount    = objc.RegisterName("resourceViewCount")
 	_mTLResourceViewPoolDescriptorSelSetResourceViewCount = objc.RegisterName("setResourceViewCount:")
-	_mTLResourceViewPoolDescriptorSelLabel = objc.RegisterName("label")
-	_mTLResourceViewPoolDescriptorSelSetLabel = objc.RegisterName("setLabel:")
+	_mTLResourceViewPoolDescriptorSelLabel                = objc.RegisterName("label")
+	_mTLResourceViewPoolDescriptorSelSetLabel             = objc.RegisterName("setLabel:")
 )
 
 func MTLResourceViewPoolDescriptorFromID(id objc.ID) *MTLResourceViewPoolDescriptor {
@@ -46,11 +46,12 @@ func (o *MTLResourceViewPoolDescriptor) SetResourceViewCount(resourceViewCount u
 // Assigns an optional label you to the resource view pool for debugging purposes.
 func (o *MTLResourceViewPoolDescriptor) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLResourceViewPoolDescriptorSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTLResourceViewPoolDescriptor) SetLabel(label *foundation.NSString) {
 	o.Ptr().Send(_mTLResourceViewPoolDescriptorSelSetLabel, label.Ptr())
 }
-

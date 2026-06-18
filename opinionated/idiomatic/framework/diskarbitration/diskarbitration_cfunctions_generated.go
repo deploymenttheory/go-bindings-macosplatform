@@ -204,4 +204,3 @@ func DAUnregisterApprovalCallback(session unsafe.Pointer, callback unsafe.Pointe
 func DAUnregisterCallback(session unsafe.Pointer, callback unsafe.Pointer, context_ unsafe.Pointer) {
 	raw.DAUnregisterCallback(session, callback, context_)
 }
-

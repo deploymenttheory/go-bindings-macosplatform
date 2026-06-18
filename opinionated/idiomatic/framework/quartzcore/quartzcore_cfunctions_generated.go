@@ -88,4 +88,3 @@ func CATransform3DScale(t raw.CATransform3D, sx float64, sy float64, sz float64)
 func CATransform3DTranslate(t raw.CATransform3D, tx float64, ty float64, tz float64) raw.CATransform3D {
 	return raw.CATransform3DTranslate(t, tx, ty, tz)
 }
-

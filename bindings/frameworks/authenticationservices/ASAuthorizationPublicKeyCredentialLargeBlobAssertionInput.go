@@ -16,11 +16,11 @@ type ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput struct {
 }
 
 var (
-	_clsASAuthorizationPublicKeyCredentialLargeBlobAssertionInput = _objcClass("ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput")
+	_clsASAuthorizationPublicKeyCredentialLargeBlobAssertionInput                  = _objcClass("ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput")
 	_aSAuthorizationPublicKeyCredentialLargeBlobAssertionInputSelInitWithOperation = objc.RegisterName("initWithOperation:")
-	_aSAuthorizationPublicKeyCredentialLargeBlobAssertionInputSelOperation = objc.RegisterName("operation")
-	_aSAuthorizationPublicKeyCredentialLargeBlobAssertionInputSelDataToWrite = objc.RegisterName("dataToWrite")
-	_aSAuthorizationPublicKeyCredentialLargeBlobAssertionInputSelSetDataToWrite = objc.RegisterName("setDataToWrite:")
+	_aSAuthorizationPublicKeyCredentialLargeBlobAssertionInputSelOperation         = objc.RegisterName("operation")
+	_aSAuthorizationPublicKeyCredentialLargeBlobAssertionInputSelDataToWrite       = objc.RegisterName("dataToWrite")
+	_aSAuthorizationPublicKeyCredentialLargeBlobAssertionInputSelSetDataToWrite    = objc.RegisterName("setDataToWrite:")
 )
 
 func ASAuthorizationPublicKeyCredentialLargeBlobAssertionInputFromID(id objc.ID) *ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput {
@@ -35,7 +35,9 @@ func ASAuthorizationPublicKeyCredentialLargeBlobAssertionInputFromID(id objc.ID)
 
 func (o *ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput) InitWithOperation(operation ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation) *ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPublicKeyCredentialLargeBlobAssertionInputSelInitWithOperation, operation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationPublicKeyCredentialLargeBlobAssertionInputFromID(_ret)
 }
 
@@ -46,11 +48,12 @@ func (o *ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput) Operation() 
 
 func (o *ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput) DataToWrite() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPublicKeyCredentialLargeBlobAssertionInputSelDataToWrite)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput) SetDataToWrite(dataToWrite *foundation.NSData) {
 	o.Ptr().Send(_aSAuthorizationPublicKeyCredentialLargeBlobAssertionInputSelSetDataToWrite, dataToWrite.Ptr())
 }
-

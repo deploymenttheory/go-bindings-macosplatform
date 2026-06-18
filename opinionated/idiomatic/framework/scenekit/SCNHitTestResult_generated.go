@@ -142,4 +142,3 @@ type HitTestResultable interface {
 }
 
 var _ HitTestResultable = (*HitTestResult)(nil)
-

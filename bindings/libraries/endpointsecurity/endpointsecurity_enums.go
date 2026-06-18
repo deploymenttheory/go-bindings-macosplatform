@@ -14,8 +14,8 @@ type Acl_entry_id_t int64
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
-	ACL_NEXT_ENTRY Acl_entry_id_t = -1
-	ACL_LAST_ENTRY Acl_entry_id_t = -2
+	ACL_NEXT_ENTRY  Acl_entry_id_t = -1
+	ACL_LAST_ENTRY  Acl_entry_id_t = -2
 )
 
 func (i Acl_entry_id_t) String() string {
@@ -62,13 +62,13 @@ func (i Acl_entry_id_t) isMultiValue() bool {
 type Acl_flag_t int64
 
 const (
-	ACL_FLAG_DEFER_INHERIT Acl_flag_t = 1
-	ACL_FLAG_NO_INHERIT Acl_flag_t = 131072
-	ACL_ENTRY_INHERITED Acl_flag_t = 16
-	ACL_ENTRY_FILE_INHERIT Acl_flag_t = 32
+	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
+	ACL_FLAG_NO_INHERIT         Acl_flag_t = 131072
+	ACL_ENTRY_INHERITED         Acl_flag_t = 16
+	ACL_ENTRY_FILE_INHERIT      Acl_flag_t = 32
 	ACL_ENTRY_DIRECTORY_INHERIT Acl_flag_t = 64
-	ACL_ENTRY_LIMIT_INHERIT Acl_flag_t = 128
-	ACL_ENTRY_ONLY_INHERIT Acl_flag_t = 256
+	ACL_ENTRY_LIMIT_INHERIT     Acl_flag_t = 128
+	ACL_ENTRY_ONLY_INHERIT      Acl_flag_t = 256
 )
 
 func (i Acl_flag_t) String() string {
@@ -131,24 +131,24 @@ func (i Acl_flag_t) isMultiValue() bool {
 type Acl_perm_t int64
 
 const (
-	ACL_READ_DATA Acl_perm_t = 2
-	ACL_LIST_DIRECTORY Acl_perm_t = 2
-	ACL_WRITE_DATA Acl_perm_t = 4
-	ACL_ADD_FILE Acl_perm_t = 4
-	ACL_EXECUTE Acl_perm_t = 8
-	ACL_SEARCH Acl_perm_t = 8
-	ACL_DELETE Acl_perm_t = 16
-	ACL_APPEND_DATA Acl_perm_t = 32
-	ACL_ADD_SUBDIRECTORY Acl_perm_t = 32
-	ACL_DELETE_CHILD Acl_perm_t = 64
-	ACL_READ_ATTRIBUTES Acl_perm_t = 128
-	ACL_WRITE_ATTRIBUTES Acl_perm_t = 256
-	ACL_READ_EXTATTRIBUTES Acl_perm_t = 512
+	ACL_READ_DATA           Acl_perm_t = 2
+	ACL_LIST_DIRECTORY      Acl_perm_t = 2
+	ACL_WRITE_DATA          Acl_perm_t = 4
+	ACL_ADD_FILE            Acl_perm_t = 4
+	ACL_EXECUTE             Acl_perm_t = 8
+	ACL_SEARCH              Acl_perm_t = 8
+	ACL_DELETE              Acl_perm_t = 16
+	ACL_APPEND_DATA         Acl_perm_t = 32
+	ACL_ADD_SUBDIRECTORY    Acl_perm_t = 32
+	ACL_DELETE_CHILD        Acl_perm_t = 64
+	ACL_READ_ATTRIBUTES     Acl_perm_t = 128
+	ACL_WRITE_ATTRIBUTES    Acl_perm_t = 256
+	ACL_READ_EXTATTRIBUTES  Acl_perm_t = 512
 	ACL_WRITE_EXTATTRIBUTES Acl_perm_t = 1024
-	ACL_READ_SECURITY Acl_perm_t = 2048
-	ACL_WRITE_SECURITY Acl_perm_t = 4096
-	ACL_CHANGE_OWNER Acl_perm_t = 8192
-	ACL_SYNCHRONIZE Acl_perm_t = 1048576
+	ACL_READ_SECURITY       Acl_perm_t = 2048
+	ACL_WRITE_SECURITY      Acl_perm_t = 4096
+	ACL_CHANGE_OWNER        Acl_perm_t = 8192
+	ACL_SYNCHRONIZE         Acl_perm_t = 1048576
 )
 
 func (i Acl_perm_t) String() string {
@@ -247,9 +247,9 @@ func (i Acl_perm_t) isMultiValue() bool {
 type Acl_tag_t int64
 
 const (
-	ACL_UNDEFINED_TAG Acl_tag_t = 0
+	ACL_UNDEFINED_TAG  Acl_tag_t = 0
 	ACL_EXTENDED_ALLOW Acl_tag_t = 1
-	ACL_EXTENDED_DENY Acl_tag_t = 2
+	ACL_EXTENDED_DENY  Acl_tag_t = 2
 )
 
 func (i Acl_tag_t) String() string {
@@ -297,12 +297,12 @@ type Acl_type_t int64
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
-	ACL_TYPE_ACCESS Acl_type_t = 0
-	ACL_TYPE_DEFAULT Acl_type_t = 1
-	ACL_TYPE_AFS Acl_type_t = 2
-	ACL_TYPE_CODA Acl_type_t = 3
-	ACL_TYPE_NTFS Acl_type_t = 4
-	ACL_TYPE_NWFS Acl_type_t = 5
+	ACL_TYPE_ACCESS   Acl_type_t = 0
+	ACL_TYPE_DEFAULT  Acl_type_t = 1
+	ACL_TYPE_AFS      Acl_type_t = 2
+	ACL_TYPE_CODA     Acl_type_t = 3
+	ACL_TYPE_NTFS     Acl_type_t = 4
+	ACL_TYPE_NWFS     Acl_type_t = 5
 )
 
 func (i Acl_type_t) String() string {
@@ -365,14 +365,14 @@ func (i Acl_type_t) isMultiValue() bool {
 type Clockid_t int64
 
 const (
-	_CLOCK_REALTIME Clockid_t = 0
-	_CLOCK_MONOTONIC Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW Clockid_t = 4
+	_CLOCK_REALTIME             Clockid_t = 0
+	_CLOCK_MONOTONIC            Clockid_t = 6
+	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
 	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID Clockid_t = 16
+	_CLOCK_UPTIME_RAW           Clockid_t = 8
+	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
+	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
+	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
 )
 
 func (i Clockid_t) String() string {
@@ -439,12 +439,12 @@ func (i Clockid_t) isMultiValue() bool {
 type Cryptex_auth_type_t int64
 
 const (
-	CRYPTEX1_AUTH_ENV_GENERIC Cryptex_auth_type_t = 4
+	CRYPTEX1_AUTH_ENV_GENERIC              Cryptex_auth_type_t = 4
 	CRYPTEX1_AUTH_ENV_GENERIC_SUPPLEMENTAL Cryptex_auth_type_t = 5
-	CRYPTEX_AUTH_PDI_NONCE Cryptex_auth_type_t = 6
-	CRYPTEX_AUTH_MOBILE_ASSET Cryptex_auth_type_t = 8
-	CRYPTEX_AUTH_MOBILE_ASSET_WITH_CODE Cryptex_auth_type_t = 9
-	CRYPTEX_AUTH_MAX Cryptex_auth_type_t = 9
+	CRYPTEX_AUTH_PDI_NONCE                 Cryptex_auth_type_t = 6
+	CRYPTEX_AUTH_MOBILE_ASSET              Cryptex_auth_type_t = 8
+	CRYPTEX_AUTH_MOBILE_ASSET_WITH_CODE    Cryptex_auth_type_t = 9
+	CRYPTEX_AUTH_MAX                       Cryptex_auth_type_t = 9
 )
 
 func (i Cryptex_auth_type_t) String() string {
@@ -501,7 +501,7 @@ func (i Cryptex_auth_type_t) isMultiValue() bool {
 type Es_action_type_t int64
 
 const (
-	ES_ACTION_TYPE_AUTH Es_action_type_t = 0
+	ES_ACTION_TYPE_AUTH   Es_action_type_t = 0
 	ES_ACTION_TYPE_NOTIFY Es_action_type_t = 1
 )
 
@@ -651,11 +651,11 @@ func (i Es_auth_result_t) isMultiValue() bool {
 type Es_authentication_type_t int64
 
 const (
-	ES_AUTHENTICATION_TYPE_OD Es_authentication_type_t = 0
-	ES_AUTHENTICATION_TYPE_TOUCHID Es_authentication_type_t = 1
-	ES_AUTHENTICATION_TYPE_TOKEN Es_authentication_type_t = 2
+	ES_AUTHENTICATION_TYPE_OD          Es_authentication_type_t = 0
+	ES_AUTHENTICATION_TYPE_TOUCHID     Es_authentication_type_t = 1
+	ES_AUTHENTICATION_TYPE_TOKEN       Es_authentication_type_t = 2
 	ES_AUTHENTICATION_TYPE_AUTO_UNLOCK Es_authentication_type_t = 3
-	ES_AUTHENTICATION_TYPE_LAST Es_authentication_type_t = 4
+	ES_AUTHENTICATION_TYPE_LAST        Es_authentication_type_t = 4
 )
 
 func (i Es_authentication_type_t) String() string {
@@ -834,11 +834,11 @@ func (i Es_auto_unlock_type_t) isMultiValue() bool {
 type Es_btm_item_type_t int64
 
 const (
-	ES_BTM_ITEM_TYPE_USER_ITEM Es_btm_item_type_t = 0
-	ES_BTM_ITEM_TYPE_APP Es_btm_item_type_t = 1
+	ES_BTM_ITEM_TYPE_USER_ITEM  Es_btm_item_type_t = 0
+	ES_BTM_ITEM_TYPE_APP        Es_btm_item_type_t = 1
 	ES_BTM_ITEM_TYPE_LOGIN_ITEM Es_btm_item_type_t = 2
-	ES_BTM_ITEM_TYPE_AGENT Es_btm_item_type_t = 3
-	ES_BTM_ITEM_TYPE_DAEMON Es_btm_item_type_t = 4
+	ES_BTM_ITEM_TYPE_AGENT      Es_btm_item_type_t = 3
+	ES_BTM_ITEM_TYPE_DAEMON     Es_btm_item_type_t = 4
 )
 
 func (i Es_btm_item_type_t) String() string {
@@ -946,17 +946,17 @@ func (i Es_clear_cache_result_t) isMultiValue() bool {
 type Es_cs_validation_category_t int64
 
 const (
-	ES_CS_VALIDATION_CATEGORY_INVALID Es_cs_validation_category_t = 0
-	ES_CS_VALIDATION_CATEGORY_PLATFORM Es_cs_validation_category_t = 1
-	ES_CS_VALIDATION_CATEGORY_TESTFLIGHT Es_cs_validation_category_t = 2
-	ES_CS_VALIDATION_CATEGORY_DEVELOPMENT Es_cs_validation_category_t = 3
-	ES_CS_VALIDATION_CATEGORY_APP_STORE Es_cs_validation_category_t = 4
-	ES_CS_VALIDATION_CATEGORY_ENTERPRISE Es_cs_validation_category_t = 5
-	ES_CS_VALIDATION_CATEGORY_DEVELOPER_ID Es_cs_validation_category_t = 6
+	ES_CS_VALIDATION_CATEGORY_INVALID       Es_cs_validation_category_t = 0
+	ES_CS_VALIDATION_CATEGORY_PLATFORM      Es_cs_validation_category_t = 1
+	ES_CS_VALIDATION_CATEGORY_TESTFLIGHT    Es_cs_validation_category_t = 2
+	ES_CS_VALIDATION_CATEGORY_DEVELOPMENT   Es_cs_validation_category_t = 3
+	ES_CS_VALIDATION_CATEGORY_APP_STORE     Es_cs_validation_category_t = 4
+	ES_CS_VALIDATION_CATEGORY_ENTERPRISE    Es_cs_validation_category_t = 5
+	ES_CS_VALIDATION_CATEGORY_DEVELOPER_ID  Es_cs_validation_category_t = 6
 	ES_CS_VALIDATION_CATEGORY_LOCAL_SIGNING Es_cs_validation_category_t = 7
-	ES_CS_VALIDATION_CATEGORY_ROSETTA Es_cs_validation_category_t = 8
-	ES_CS_VALIDATION_CATEGORY_OOPJIT Es_cs_validation_category_t = 9
-	ES_CS_VALIDATION_CATEGORY_NONE Es_cs_validation_category_t = 10
+	ES_CS_VALIDATION_CATEGORY_ROSETTA       Es_cs_validation_category_t = 8
+	ES_CS_VALIDATION_CATEGORY_OOPJIT        Es_cs_validation_category_t = 9
+	ES_CS_VALIDATION_CATEGORY_NONE          Es_cs_validation_category_t = 10
 )
 
 func (i Es_cs_validation_category_t) String() string {
@@ -1037,7 +1037,7 @@ type Es_destination_type_t int64
 
 const (
 	ES_DESTINATION_TYPE_EXISTING_FILE Es_destination_type_t = 0
-	ES_DESTINATION_TYPE_NEW_PATH Es_destination_type_t = 1
+	ES_DESTINATION_TYPE_NEW_PATH      Es_destination_type_t = 1
 )
 
 func (i Es_destination_type_t) String() string {
@@ -1081,164 +1081,164 @@ func (i Es_destination_type_t) isMultiValue() bool {
 type Es_event_type_t int64
 
 const (
-	ES_EVENT_TYPE_AUTH_EXEC Es_event_type_t = 0
-	ES_EVENT_TYPE_AUTH_OPEN Es_event_type_t = 1
-	ES_EVENT_TYPE_AUTH_KEXTLOAD Es_event_type_t = 2
-	ES_EVENT_TYPE_AUTH_MMAP Es_event_type_t = 3
-	ES_EVENT_TYPE_AUTH_MPROTECT Es_event_type_t = 4
-	ES_EVENT_TYPE_AUTH_MOUNT Es_event_type_t = 5
-	ES_EVENT_TYPE_AUTH_RENAME Es_event_type_t = 6
-	ES_EVENT_TYPE_AUTH_SIGNAL Es_event_type_t = 7
-	ES_EVENT_TYPE_AUTH_UNLINK Es_event_type_t = 8
-	ES_EVENT_TYPE_NOTIFY_EXEC Es_event_type_t = 9
-	ES_EVENT_TYPE_NOTIFY_OPEN Es_event_type_t = 10
-	ES_EVENT_TYPE_NOTIFY_FORK Es_event_type_t = 11
-	ES_EVENT_TYPE_NOTIFY_CLOSE Es_event_type_t = 12
-	ES_EVENT_TYPE_NOTIFY_CREATE Es_event_type_t = 13
-	ES_EVENT_TYPE_NOTIFY_EXCHANGEDATA Es_event_type_t = 14
-	ES_EVENT_TYPE_NOTIFY_EXIT Es_event_type_t = 15
-	ES_EVENT_TYPE_NOTIFY_GET_TASK Es_event_type_t = 16
-	ES_EVENT_TYPE_NOTIFY_KEXTLOAD Es_event_type_t = 17
-	ES_EVENT_TYPE_NOTIFY_KEXTUNLOAD Es_event_type_t = 18
-	ES_EVENT_TYPE_NOTIFY_LINK Es_event_type_t = 19
-	ES_EVENT_TYPE_NOTIFY_MMAP Es_event_type_t = 20
-	ES_EVENT_TYPE_NOTIFY_MPROTECT Es_event_type_t = 21
-	ES_EVENT_TYPE_NOTIFY_MOUNT Es_event_type_t = 22
-	ES_EVENT_TYPE_NOTIFY_UNMOUNT Es_event_type_t = 23
-	ES_EVENT_TYPE_NOTIFY_IOKIT_OPEN Es_event_type_t = 24
-	ES_EVENT_TYPE_NOTIFY_RENAME Es_event_type_t = 25
-	ES_EVENT_TYPE_NOTIFY_SETATTRLIST Es_event_type_t = 26
-	ES_EVENT_TYPE_NOTIFY_SETEXTATTR Es_event_type_t = 27
-	ES_EVENT_TYPE_NOTIFY_SETFLAGS Es_event_type_t = 28
-	ES_EVENT_TYPE_NOTIFY_SETMODE Es_event_type_t = 29
-	ES_EVENT_TYPE_NOTIFY_SETOWNER Es_event_type_t = 30
-	ES_EVENT_TYPE_NOTIFY_SIGNAL Es_event_type_t = 31
-	ES_EVENT_TYPE_NOTIFY_UNLINK Es_event_type_t = 32
-	ES_EVENT_TYPE_NOTIFY_WRITE Es_event_type_t = 33
-	ES_EVENT_TYPE_AUTH_FILE_PROVIDER_MATERIALIZE Es_event_type_t = 34
+	ES_EVENT_TYPE_AUTH_EXEC                        Es_event_type_t = 0
+	ES_EVENT_TYPE_AUTH_OPEN                        Es_event_type_t = 1
+	ES_EVENT_TYPE_AUTH_KEXTLOAD                    Es_event_type_t = 2
+	ES_EVENT_TYPE_AUTH_MMAP                        Es_event_type_t = 3
+	ES_EVENT_TYPE_AUTH_MPROTECT                    Es_event_type_t = 4
+	ES_EVENT_TYPE_AUTH_MOUNT                       Es_event_type_t = 5
+	ES_EVENT_TYPE_AUTH_RENAME                      Es_event_type_t = 6
+	ES_EVENT_TYPE_AUTH_SIGNAL                      Es_event_type_t = 7
+	ES_EVENT_TYPE_AUTH_UNLINK                      Es_event_type_t = 8
+	ES_EVENT_TYPE_NOTIFY_EXEC                      Es_event_type_t = 9
+	ES_EVENT_TYPE_NOTIFY_OPEN                      Es_event_type_t = 10
+	ES_EVENT_TYPE_NOTIFY_FORK                      Es_event_type_t = 11
+	ES_EVENT_TYPE_NOTIFY_CLOSE                     Es_event_type_t = 12
+	ES_EVENT_TYPE_NOTIFY_CREATE                    Es_event_type_t = 13
+	ES_EVENT_TYPE_NOTIFY_EXCHANGEDATA              Es_event_type_t = 14
+	ES_EVENT_TYPE_NOTIFY_EXIT                      Es_event_type_t = 15
+	ES_EVENT_TYPE_NOTIFY_GET_TASK                  Es_event_type_t = 16
+	ES_EVENT_TYPE_NOTIFY_KEXTLOAD                  Es_event_type_t = 17
+	ES_EVENT_TYPE_NOTIFY_KEXTUNLOAD                Es_event_type_t = 18
+	ES_EVENT_TYPE_NOTIFY_LINK                      Es_event_type_t = 19
+	ES_EVENT_TYPE_NOTIFY_MMAP                      Es_event_type_t = 20
+	ES_EVENT_TYPE_NOTIFY_MPROTECT                  Es_event_type_t = 21
+	ES_EVENT_TYPE_NOTIFY_MOUNT                     Es_event_type_t = 22
+	ES_EVENT_TYPE_NOTIFY_UNMOUNT                   Es_event_type_t = 23
+	ES_EVENT_TYPE_NOTIFY_IOKIT_OPEN                Es_event_type_t = 24
+	ES_EVENT_TYPE_NOTIFY_RENAME                    Es_event_type_t = 25
+	ES_EVENT_TYPE_NOTIFY_SETATTRLIST               Es_event_type_t = 26
+	ES_EVENT_TYPE_NOTIFY_SETEXTATTR                Es_event_type_t = 27
+	ES_EVENT_TYPE_NOTIFY_SETFLAGS                  Es_event_type_t = 28
+	ES_EVENT_TYPE_NOTIFY_SETMODE                   Es_event_type_t = 29
+	ES_EVENT_TYPE_NOTIFY_SETOWNER                  Es_event_type_t = 30
+	ES_EVENT_TYPE_NOTIFY_SIGNAL                    Es_event_type_t = 31
+	ES_EVENT_TYPE_NOTIFY_UNLINK                    Es_event_type_t = 32
+	ES_EVENT_TYPE_NOTIFY_WRITE                     Es_event_type_t = 33
+	ES_EVENT_TYPE_AUTH_FILE_PROVIDER_MATERIALIZE   Es_event_type_t = 34
 	ES_EVENT_TYPE_NOTIFY_FILE_PROVIDER_MATERIALIZE Es_event_type_t = 35
-	ES_EVENT_TYPE_AUTH_FILE_PROVIDER_UPDATE Es_event_type_t = 36
-	ES_EVENT_TYPE_NOTIFY_FILE_PROVIDER_UPDATE Es_event_type_t = 37
-	ES_EVENT_TYPE_AUTH_READLINK Es_event_type_t = 38
-	ES_EVENT_TYPE_NOTIFY_READLINK Es_event_type_t = 39
-	ES_EVENT_TYPE_AUTH_TRUNCATE Es_event_type_t = 40
-	ES_EVENT_TYPE_NOTIFY_TRUNCATE Es_event_type_t = 41
-	ES_EVENT_TYPE_AUTH_LINK Es_event_type_t = 42
-	ES_EVENT_TYPE_NOTIFY_LOOKUP Es_event_type_t = 43
-	ES_EVENT_TYPE_AUTH_CREATE Es_event_type_t = 44
-	ES_EVENT_TYPE_AUTH_SETATTRLIST Es_event_type_t = 45
-	ES_EVENT_TYPE_AUTH_SETEXTATTR Es_event_type_t = 46
-	ES_EVENT_TYPE_AUTH_SETFLAGS Es_event_type_t = 47
-	ES_EVENT_TYPE_AUTH_SETMODE Es_event_type_t = 48
-	ES_EVENT_TYPE_AUTH_SETOWNER Es_event_type_t = 49
-	ES_EVENT_TYPE_AUTH_CHDIR Es_event_type_t = 50
-	ES_EVENT_TYPE_NOTIFY_CHDIR Es_event_type_t = 51
-	ES_EVENT_TYPE_AUTH_GETATTRLIST Es_event_type_t = 52
-	ES_EVENT_TYPE_NOTIFY_GETATTRLIST Es_event_type_t = 53
-	ES_EVENT_TYPE_NOTIFY_STAT Es_event_type_t = 54
-	ES_EVENT_TYPE_NOTIFY_ACCESS Es_event_type_t = 55
-	ES_EVENT_TYPE_AUTH_CHROOT Es_event_type_t = 56
-	ES_EVENT_TYPE_NOTIFY_CHROOT Es_event_type_t = 57
-	ES_EVENT_TYPE_AUTH_UTIMES Es_event_type_t = 58
-	ES_EVENT_TYPE_NOTIFY_UTIMES Es_event_type_t = 59
-	ES_EVENT_TYPE_AUTH_CLONE Es_event_type_t = 60
-	ES_EVENT_TYPE_NOTIFY_CLONE Es_event_type_t = 61
-	ES_EVENT_TYPE_NOTIFY_FCNTL Es_event_type_t = 62
-	ES_EVENT_TYPE_AUTH_GETEXTATTR Es_event_type_t = 63
-	ES_EVENT_TYPE_NOTIFY_GETEXTATTR Es_event_type_t = 64
-	ES_EVENT_TYPE_AUTH_LISTEXTATTR Es_event_type_t = 65
-	ES_EVENT_TYPE_NOTIFY_LISTEXTATTR Es_event_type_t = 66
-	ES_EVENT_TYPE_AUTH_READDIR Es_event_type_t = 67
-	ES_EVENT_TYPE_NOTIFY_READDIR Es_event_type_t = 68
-	ES_EVENT_TYPE_AUTH_DELETEEXTATTR Es_event_type_t = 69
-	ES_EVENT_TYPE_NOTIFY_DELETEEXTATTR Es_event_type_t = 70
-	ES_EVENT_TYPE_AUTH_FSGETPATH Es_event_type_t = 71
-	ES_EVENT_TYPE_NOTIFY_FSGETPATH Es_event_type_t = 72
-	ES_EVENT_TYPE_NOTIFY_DUP Es_event_type_t = 73
-	ES_EVENT_TYPE_AUTH_SETTIME Es_event_type_t = 74
-	ES_EVENT_TYPE_NOTIFY_SETTIME Es_event_type_t = 75
-	ES_EVENT_TYPE_NOTIFY_UIPC_BIND Es_event_type_t = 76
-	ES_EVENT_TYPE_AUTH_UIPC_BIND Es_event_type_t = 77
-	ES_EVENT_TYPE_NOTIFY_UIPC_CONNECT Es_event_type_t = 78
-	ES_EVENT_TYPE_AUTH_UIPC_CONNECT Es_event_type_t = 79
-	ES_EVENT_TYPE_AUTH_EXCHANGEDATA Es_event_type_t = 80
-	ES_EVENT_TYPE_AUTH_SETACL Es_event_type_t = 81
-	ES_EVENT_TYPE_NOTIFY_SETACL Es_event_type_t = 82
-	ES_EVENT_TYPE_NOTIFY_PTY_GRANT Es_event_type_t = 83
-	ES_EVENT_TYPE_NOTIFY_PTY_CLOSE Es_event_type_t = 84
-	ES_EVENT_TYPE_AUTH_PROC_CHECK Es_event_type_t = 85
-	ES_EVENT_TYPE_NOTIFY_PROC_CHECK Es_event_type_t = 86
-	ES_EVENT_TYPE_AUTH_GET_TASK Es_event_type_t = 87
-	ES_EVENT_TYPE_AUTH_SEARCHFS Es_event_type_t = 88
-	ES_EVENT_TYPE_NOTIFY_SEARCHFS Es_event_type_t = 89
-	ES_EVENT_TYPE_AUTH_FCNTL Es_event_type_t = 90
-	ES_EVENT_TYPE_AUTH_IOKIT_OPEN Es_event_type_t = 91
-	ES_EVENT_TYPE_AUTH_PROC_SUSPEND_RESUME Es_event_type_t = 92
-	ES_EVENT_TYPE_NOTIFY_PROC_SUSPEND_RESUME Es_event_type_t = 93
-	ES_EVENT_TYPE_NOTIFY_CS_INVALIDATED Es_event_type_t = 94
-	ES_EVENT_TYPE_NOTIFY_GET_TASK_NAME Es_event_type_t = 95
-	ES_EVENT_TYPE_NOTIFY_TRACE Es_event_type_t = 96
-	ES_EVENT_TYPE_NOTIFY_REMOTE_THREAD_CREATE Es_event_type_t = 97
-	ES_EVENT_TYPE_AUTH_REMOUNT Es_event_type_t = 98
-	ES_EVENT_TYPE_NOTIFY_REMOUNT Es_event_type_t = 99
-	ES_EVENT_TYPE_AUTH_GET_TASK_READ Es_event_type_t = 100
-	ES_EVENT_TYPE_NOTIFY_GET_TASK_READ Es_event_type_t = 101
-	ES_EVENT_TYPE_NOTIFY_GET_TASK_INSPECT Es_event_type_t = 102
-	ES_EVENT_TYPE_NOTIFY_SETUID Es_event_type_t = 103
-	ES_EVENT_TYPE_NOTIFY_SETGID Es_event_type_t = 104
-	ES_EVENT_TYPE_NOTIFY_SETEUID Es_event_type_t = 105
-	ES_EVENT_TYPE_NOTIFY_SETEGID Es_event_type_t = 106
-	ES_EVENT_TYPE_NOTIFY_SETREUID Es_event_type_t = 107
-	ES_EVENT_TYPE_NOTIFY_SETREGID Es_event_type_t = 108
-	ES_EVENT_TYPE_AUTH_COPYFILE Es_event_type_t = 109
-	ES_EVENT_TYPE_NOTIFY_COPYFILE Es_event_type_t = 110
-	ES_EVENT_TYPE_NOTIFY_AUTHENTICATION Es_event_type_t = 111
-	ES_EVENT_TYPE_NOTIFY_XP_MALWARE_DETECTED Es_event_type_t = 112
-	ES_EVENT_TYPE_NOTIFY_XP_MALWARE_REMEDIATED Es_event_type_t = 113
-	ES_EVENT_TYPE_NOTIFY_LW_SESSION_LOGIN Es_event_type_t = 114
-	ES_EVENT_TYPE_NOTIFY_LW_SESSION_LOGOUT Es_event_type_t = 115
-	ES_EVENT_TYPE_NOTIFY_LW_SESSION_LOCK Es_event_type_t = 116
-	ES_EVENT_TYPE_NOTIFY_LW_SESSION_UNLOCK Es_event_type_t = 117
-	ES_EVENT_TYPE_NOTIFY_SCREENSHARING_ATTACH Es_event_type_t = 118
-	ES_EVENT_TYPE_NOTIFY_SCREENSHARING_DETACH Es_event_type_t = 119
-	ES_EVENT_TYPE_NOTIFY_OPENSSH_LOGIN Es_event_type_t = 120
-	ES_EVENT_TYPE_NOTIFY_OPENSSH_LOGOUT Es_event_type_t = 121
-	ES_EVENT_TYPE_NOTIFY_LOGIN_LOGIN Es_event_type_t = 122
-	ES_EVENT_TYPE_NOTIFY_LOGIN_LOGOUT Es_event_type_t = 123
-	ES_EVENT_TYPE_NOTIFY_BTM_LAUNCH_ITEM_ADD Es_event_type_t = 124
-	ES_EVENT_TYPE_NOTIFY_BTM_LAUNCH_ITEM_REMOVE Es_event_type_t = 125
-	ES_EVENT_TYPE_NOTIFY_PROFILE_ADD Es_event_type_t = 126
-	ES_EVENT_TYPE_NOTIFY_PROFILE_REMOVE Es_event_type_t = 127
-	ES_EVENT_TYPE_NOTIFY_SU Es_event_type_t = 128
-	ES_EVENT_TYPE_NOTIFY_AUTHORIZATION_PETITION Es_event_type_t = 129
-	ES_EVENT_TYPE_NOTIFY_AUTHORIZATION_JUDGEMENT Es_event_type_t = 130
-	ES_EVENT_TYPE_NOTIFY_SUDO Es_event_type_t = 131
-	ES_EVENT_TYPE_NOTIFY_OD_GROUP_ADD Es_event_type_t = 132
-	ES_EVENT_TYPE_NOTIFY_OD_GROUP_REMOVE Es_event_type_t = 133
-	ES_EVENT_TYPE_NOTIFY_OD_GROUP_SET Es_event_type_t = 134
-	ES_EVENT_TYPE_NOTIFY_OD_MODIFY_PASSWORD Es_event_type_t = 135
-	ES_EVENT_TYPE_NOTIFY_OD_DISABLE_USER Es_event_type_t = 136
-	ES_EVENT_TYPE_NOTIFY_OD_ENABLE_USER Es_event_type_t = 137
-	ES_EVENT_TYPE_NOTIFY_OD_ATTRIBUTE_VALUE_ADD Es_event_type_t = 138
+	ES_EVENT_TYPE_AUTH_FILE_PROVIDER_UPDATE        Es_event_type_t = 36
+	ES_EVENT_TYPE_NOTIFY_FILE_PROVIDER_UPDATE      Es_event_type_t = 37
+	ES_EVENT_TYPE_AUTH_READLINK                    Es_event_type_t = 38
+	ES_EVENT_TYPE_NOTIFY_READLINK                  Es_event_type_t = 39
+	ES_EVENT_TYPE_AUTH_TRUNCATE                    Es_event_type_t = 40
+	ES_EVENT_TYPE_NOTIFY_TRUNCATE                  Es_event_type_t = 41
+	ES_EVENT_TYPE_AUTH_LINK                        Es_event_type_t = 42
+	ES_EVENT_TYPE_NOTIFY_LOOKUP                    Es_event_type_t = 43
+	ES_EVENT_TYPE_AUTH_CREATE                      Es_event_type_t = 44
+	ES_EVENT_TYPE_AUTH_SETATTRLIST                 Es_event_type_t = 45
+	ES_EVENT_TYPE_AUTH_SETEXTATTR                  Es_event_type_t = 46
+	ES_EVENT_TYPE_AUTH_SETFLAGS                    Es_event_type_t = 47
+	ES_EVENT_TYPE_AUTH_SETMODE                     Es_event_type_t = 48
+	ES_EVENT_TYPE_AUTH_SETOWNER                    Es_event_type_t = 49
+	ES_EVENT_TYPE_AUTH_CHDIR                       Es_event_type_t = 50
+	ES_EVENT_TYPE_NOTIFY_CHDIR                     Es_event_type_t = 51
+	ES_EVENT_TYPE_AUTH_GETATTRLIST                 Es_event_type_t = 52
+	ES_EVENT_TYPE_NOTIFY_GETATTRLIST               Es_event_type_t = 53
+	ES_EVENT_TYPE_NOTIFY_STAT                      Es_event_type_t = 54
+	ES_EVENT_TYPE_NOTIFY_ACCESS                    Es_event_type_t = 55
+	ES_EVENT_TYPE_AUTH_CHROOT                      Es_event_type_t = 56
+	ES_EVENT_TYPE_NOTIFY_CHROOT                    Es_event_type_t = 57
+	ES_EVENT_TYPE_AUTH_UTIMES                      Es_event_type_t = 58
+	ES_EVENT_TYPE_NOTIFY_UTIMES                    Es_event_type_t = 59
+	ES_EVENT_TYPE_AUTH_CLONE                       Es_event_type_t = 60
+	ES_EVENT_TYPE_NOTIFY_CLONE                     Es_event_type_t = 61
+	ES_EVENT_TYPE_NOTIFY_FCNTL                     Es_event_type_t = 62
+	ES_EVENT_TYPE_AUTH_GETEXTATTR                  Es_event_type_t = 63
+	ES_EVENT_TYPE_NOTIFY_GETEXTATTR                Es_event_type_t = 64
+	ES_EVENT_TYPE_AUTH_LISTEXTATTR                 Es_event_type_t = 65
+	ES_EVENT_TYPE_NOTIFY_LISTEXTATTR               Es_event_type_t = 66
+	ES_EVENT_TYPE_AUTH_READDIR                     Es_event_type_t = 67
+	ES_EVENT_TYPE_NOTIFY_READDIR                   Es_event_type_t = 68
+	ES_EVENT_TYPE_AUTH_DELETEEXTATTR               Es_event_type_t = 69
+	ES_EVENT_TYPE_NOTIFY_DELETEEXTATTR             Es_event_type_t = 70
+	ES_EVENT_TYPE_AUTH_FSGETPATH                   Es_event_type_t = 71
+	ES_EVENT_TYPE_NOTIFY_FSGETPATH                 Es_event_type_t = 72
+	ES_EVENT_TYPE_NOTIFY_DUP                       Es_event_type_t = 73
+	ES_EVENT_TYPE_AUTH_SETTIME                     Es_event_type_t = 74
+	ES_EVENT_TYPE_NOTIFY_SETTIME                   Es_event_type_t = 75
+	ES_EVENT_TYPE_NOTIFY_UIPC_BIND                 Es_event_type_t = 76
+	ES_EVENT_TYPE_AUTH_UIPC_BIND                   Es_event_type_t = 77
+	ES_EVENT_TYPE_NOTIFY_UIPC_CONNECT              Es_event_type_t = 78
+	ES_EVENT_TYPE_AUTH_UIPC_CONNECT                Es_event_type_t = 79
+	ES_EVENT_TYPE_AUTH_EXCHANGEDATA                Es_event_type_t = 80
+	ES_EVENT_TYPE_AUTH_SETACL                      Es_event_type_t = 81
+	ES_EVENT_TYPE_NOTIFY_SETACL                    Es_event_type_t = 82
+	ES_EVENT_TYPE_NOTIFY_PTY_GRANT                 Es_event_type_t = 83
+	ES_EVENT_TYPE_NOTIFY_PTY_CLOSE                 Es_event_type_t = 84
+	ES_EVENT_TYPE_AUTH_PROC_CHECK                  Es_event_type_t = 85
+	ES_EVENT_TYPE_NOTIFY_PROC_CHECK                Es_event_type_t = 86
+	ES_EVENT_TYPE_AUTH_GET_TASK                    Es_event_type_t = 87
+	ES_EVENT_TYPE_AUTH_SEARCHFS                    Es_event_type_t = 88
+	ES_EVENT_TYPE_NOTIFY_SEARCHFS                  Es_event_type_t = 89
+	ES_EVENT_TYPE_AUTH_FCNTL                       Es_event_type_t = 90
+	ES_EVENT_TYPE_AUTH_IOKIT_OPEN                  Es_event_type_t = 91
+	ES_EVENT_TYPE_AUTH_PROC_SUSPEND_RESUME         Es_event_type_t = 92
+	ES_EVENT_TYPE_NOTIFY_PROC_SUSPEND_RESUME       Es_event_type_t = 93
+	ES_EVENT_TYPE_NOTIFY_CS_INVALIDATED            Es_event_type_t = 94
+	ES_EVENT_TYPE_NOTIFY_GET_TASK_NAME             Es_event_type_t = 95
+	ES_EVENT_TYPE_NOTIFY_TRACE                     Es_event_type_t = 96
+	ES_EVENT_TYPE_NOTIFY_REMOTE_THREAD_CREATE      Es_event_type_t = 97
+	ES_EVENT_TYPE_AUTH_REMOUNT                     Es_event_type_t = 98
+	ES_EVENT_TYPE_NOTIFY_REMOUNT                   Es_event_type_t = 99
+	ES_EVENT_TYPE_AUTH_GET_TASK_READ               Es_event_type_t = 100
+	ES_EVENT_TYPE_NOTIFY_GET_TASK_READ             Es_event_type_t = 101
+	ES_EVENT_TYPE_NOTIFY_GET_TASK_INSPECT          Es_event_type_t = 102
+	ES_EVENT_TYPE_NOTIFY_SETUID                    Es_event_type_t = 103
+	ES_EVENT_TYPE_NOTIFY_SETGID                    Es_event_type_t = 104
+	ES_EVENT_TYPE_NOTIFY_SETEUID                   Es_event_type_t = 105
+	ES_EVENT_TYPE_NOTIFY_SETEGID                   Es_event_type_t = 106
+	ES_EVENT_TYPE_NOTIFY_SETREUID                  Es_event_type_t = 107
+	ES_EVENT_TYPE_NOTIFY_SETREGID                  Es_event_type_t = 108
+	ES_EVENT_TYPE_AUTH_COPYFILE                    Es_event_type_t = 109
+	ES_EVENT_TYPE_NOTIFY_COPYFILE                  Es_event_type_t = 110
+	ES_EVENT_TYPE_NOTIFY_AUTHENTICATION            Es_event_type_t = 111
+	ES_EVENT_TYPE_NOTIFY_XP_MALWARE_DETECTED       Es_event_type_t = 112
+	ES_EVENT_TYPE_NOTIFY_XP_MALWARE_REMEDIATED     Es_event_type_t = 113
+	ES_EVENT_TYPE_NOTIFY_LW_SESSION_LOGIN          Es_event_type_t = 114
+	ES_EVENT_TYPE_NOTIFY_LW_SESSION_LOGOUT         Es_event_type_t = 115
+	ES_EVENT_TYPE_NOTIFY_LW_SESSION_LOCK           Es_event_type_t = 116
+	ES_EVENT_TYPE_NOTIFY_LW_SESSION_UNLOCK         Es_event_type_t = 117
+	ES_EVENT_TYPE_NOTIFY_SCREENSHARING_ATTACH      Es_event_type_t = 118
+	ES_EVENT_TYPE_NOTIFY_SCREENSHARING_DETACH      Es_event_type_t = 119
+	ES_EVENT_TYPE_NOTIFY_OPENSSH_LOGIN             Es_event_type_t = 120
+	ES_EVENT_TYPE_NOTIFY_OPENSSH_LOGOUT            Es_event_type_t = 121
+	ES_EVENT_TYPE_NOTIFY_LOGIN_LOGIN               Es_event_type_t = 122
+	ES_EVENT_TYPE_NOTIFY_LOGIN_LOGOUT              Es_event_type_t = 123
+	ES_EVENT_TYPE_NOTIFY_BTM_LAUNCH_ITEM_ADD       Es_event_type_t = 124
+	ES_EVENT_TYPE_NOTIFY_BTM_LAUNCH_ITEM_REMOVE    Es_event_type_t = 125
+	ES_EVENT_TYPE_NOTIFY_PROFILE_ADD               Es_event_type_t = 126
+	ES_EVENT_TYPE_NOTIFY_PROFILE_REMOVE            Es_event_type_t = 127
+	ES_EVENT_TYPE_NOTIFY_SU                        Es_event_type_t = 128
+	ES_EVENT_TYPE_NOTIFY_AUTHORIZATION_PETITION    Es_event_type_t = 129
+	ES_EVENT_TYPE_NOTIFY_AUTHORIZATION_JUDGEMENT   Es_event_type_t = 130
+	ES_EVENT_TYPE_NOTIFY_SUDO                      Es_event_type_t = 131
+	ES_EVENT_TYPE_NOTIFY_OD_GROUP_ADD              Es_event_type_t = 132
+	ES_EVENT_TYPE_NOTIFY_OD_GROUP_REMOVE           Es_event_type_t = 133
+	ES_EVENT_TYPE_NOTIFY_OD_GROUP_SET              Es_event_type_t = 134
+	ES_EVENT_TYPE_NOTIFY_OD_MODIFY_PASSWORD        Es_event_type_t = 135
+	ES_EVENT_TYPE_NOTIFY_OD_DISABLE_USER           Es_event_type_t = 136
+	ES_EVENT_TYPE_NOTIFY_OD_ENABLE_USER            Es_event_type_t = 137
+	ES_EVENT_TYPE_NOTIFY_OD_ATTRIBUTE_VALUE_ADD    Es_event_type_t = 138
 	ES_EVENT_TYPE_NOTIFY_OD_ATTRIBUTE_VALUE_REMOVE Es_event_type_t = 139
-	ES_EVENT_TYPE_NOTIFY_OD_ATTRIBUTE_SET Es_event_type_t = 140
-	ES_EVENT_TYPE_NOTIFY_OD_CREATE_USER Es_event_type_t = 141
-	ES_EVENT_TYPE_NOTIFY_OD_CREATE_GROUP Es_event_type_t = 142
-	ES_EVENT_TYPE_NOTIFY_OD_DELETE_USER Es_event_type_t = 143
-	ES_EVENT_TYPE_NOTIFY_OD_DELETE_GROUP Es_event_type_t = 144
-	ES_EVENT_TYPE_NOTIFY_XPC_CONNECT Es_event_type_t = 145
-	ES_EVENT_TYPE_NOTIFY_GATEKEEPER_USER_OVERRIDE Es_event_type_t = 146
-	ES_EVENT_TYPE_NOTIFY_TCC_MODIFY Es_event_type_t = 147
-	ES_EVENT_TYPE_RESERVED_0 Es_event_type_t = 148
-	ES_EVENT_TYPE_RESERVED_1 Es_event_type_t = 149
-	ES_EVENT_TYPE_RESERVED_2 Es_event_type_t = 150
-	ES_EVENT_TYPE_RESERVED_3 Es_event_type_t = 151
-	ES_EVENT_TYPE_RESERVED_4 Es_event_type_t = 152
-	ES_EVENT_TYPE_RESERVED_5 Es_event_type_t = 153
-	ES_EVENT_TYPE_RESERVED_6 Es_event_type_t = 154
-	ES_EVENT_TYPE_RESERVED_7 Es_event_type_t = 155
-	ES_EVENT_TYPE_RESERVED_8 Es_event_type_t = 156
-	ES_EVENT_TYPE_LAST Es_event_type_t = 157
+	ES_EVENT_TYPE_NOTIFY_OD_ATTRIBUTE_SET          Es_event_type_t = 140
+	ES_EVENT_TYPE_NOTIFY_OD_CREATE_USER            Es_event_type_t = 141
+	ES_EVENT_TYPE_NOTIFY_OD_CREATE_GROUP           Es_event_type_t = 142
+	ES_EVENT_TYPE_NOTIFY_OD_DELETE_USER            Es_event_type_t = 143
+	ES_EVENT_TYPE_NOTIFY_OD_DELETE_GROUP           Es_event_type_t = 144
+	ES_EVENT_TYPE_NOTIFY_XPC_CONNECT               Es_event_type_t = 145
+	ES_EVENT_TYPE_NOTIFY_GATEKEEPER_USER_OVERRIDE  Es_event_type_t = 146
+	ES_EVENT_TYPE_NOTIFY_TCC_MODIFY                Es_event_type_t = 147
+	ES_EVENT_TYPE_RESERVED_0                       Es_event_type_t = 148
+	ES_EVENT_TYPE_RESERVED_1                       Es_event_type_t = 149
+	ES_EVENT_TYPE_RESERVED_2                       Es_event_type_t = 150
+	ES_EVENT_TYPE_RESERVED_3                       Es_event_type_t = 151
+	ES_EVENT_TYPE_RESERVED_4                       Es_event_type_t = 152
+	ES_EVENT_TYPE_RESERVED_5                       Es_event_type_t = 153
+	ES_EVENT_TYPE_RESERVED_6                       Es_event_type_t = 154
+	ES_EVENT_TYPE_RESERVED_7                       Es_event_type_t = 155
+	ES_EVENT_TYPE_RESERVED_8                       Es_event_type_t = 156
+	ES_EVENT_TYPE_LAST                             Es_event_type_t = 157
 )
 
 func (i Es_event_type_t) String() string {
@@ -1952,8 +1952,8 @@ func (i Es_gatekeeper_user_override_file_type_t) isMultiValue() bool {
 type Es_get_task_type_t int64
 
 const (
-	ES_GET_TASK_TYPE_TASK_FOR_PID Es_get_task_type_t = 0
-	ES_GET_TASK_TYPE_EXPOSE_TASK Es_get_task_type_t = 1
+	ES_GET_TASK_TYPE_TASK_FOR_PID   Es_get_task_type_t = 0
+	ES_GET_TASK_TYPE_EXPOSE_TASK    Es_get_task_type_t = 1
 	ES_GET_TASK_TYPE_IDENTITY_TOKEN Es_get_task_type_t = 2
 )
 
@@ -2004,10 +2004,10 @@ type Es_mount_disposition_t int64
 const (
 	ES_MOUNT_DISPOSITION_EXTERNAL Es_mount_disposition_t = 0
 	ES_MOUNT_DISPOSITION_INTERNAL Es_mount_disposition_t = 1
-	ES_MOUNT_DISPOSITION_NETWORK Es_mount_disposition_t = 2
-	ES_MOUNT_DISPOSITION_VIRTUAL Es_mount_disposition_t = 3
-	ES_MOUNT_DISPOSITION_NULLFS Es_mount_disposition_t = 4
-	ES_MOUNT_DISPOSITION_UNKNOWN Es_mount_disposition_t = 5
+	ES_MOUNT_DISPOSITION_NETWORK  Es_mount_disposition_t = 2
+	ES_MOUNT_DISPOSITION_VIRTUAL  Es_mount_disposition_t = 3
+	ES_MOUNT_DISPOSITION_NULLFS   Es_mount_disposition_t = 4
+	ES_MOUNT_DISPOSITION_UNKNOWN  Es_mount_disposition_t = 5
 )
 
 func (i Es_mount_disposition_t) String() string {
@@ -2066,10 +2066,10 @@ func (i Es_mount_disposition_t) isMultiValue() bool {
 type Es_mute_inversion_type_t int64
 
 const (
-	ES_MUTE_INVERSION_TYPE_PROCESS Es_mute_inversion_type_t = 0
-	ES_MUTE_INVERSION_TYPE_PATH Es_mute_inversion_type_t = 1
+	ES_MUTE_INVERSION_TYPE_PROCESS     Es_mute_inversion_type_t = 0
+	ES_MUTE_INVERSION_TYPE_PATH        Es_mute_inversion_type_t = 1
 	ES_MUTE_INVERSION_TYPE_TARGET_PATH Es_mute_inversion_type_t = 2
-	ES_MUTE_INVERSION_TYPE_LAST Es_mute_inversion_type_t = 3
+	ES_MUTE_INVERSION_TYPE_LAST        Es_mute_inversion_type_t = 3
 )
 
 func (i Es_mute_inversion_type_t) String() string {
@@ -2310,7 +2310,7 @@ func (i Es_new_client_result_t) isMultiValue() bool {
 type Es_od_account_type_t int64
 
 const (
-	ES_OD_ACCOUNT_TYPE_USER Es_od_account_type_t = 0
+	ES_OD_ACCOUNT_TYPE_USER     Es_od_account_type_t = 0
 	ES_OD_ACCOUNT_TYPE_COMPUTER Es_od_account_type_t = 1
 )
 
@@ -2406,7 +2406,7 @@ func (i Es_od_member_type_t) isMultiValue() bool {
 type Es_od_record_type_t int64
 
 const (
-	ES_OD_RECORD_TYPE_USER Es_od_record_type_t = 0
+	ES_OD_RECORD_TYPE_USER  Es_od_record_type_t = 0
 	ES_OD_RECORD_TYPE_GROUP Es_od_record_type_t = 1
 )
 
@@ -2452,15 +2452,15 @@ type Es_openssh_login_result_type_t int64
 
 const (
 	ES_OPENSSH_LOGIN_EXCEED_MAXTRIES Es_openssh_login_result_type_t = 0
-	ES_OPENSSH_LOGIN_ROOT_DENIED Es_openssh_login_result_type_t = 1
-	ES_OPENSSH_AUTH_SUCCESS Es_openssh_login_result_type_t = 2
-	ES_OPENSSH_AUTH_FAIL_NONE Es_openssh_login_result_type_t = 3
-	ES_OPENSSH_AUTH_FAIL_PASSWD Es_openssh_login_result_type_t = 4
-	ES_OPENSSH_AUTH_FAIL_KBDINT Es_openssh_login_result_type_t = 5
-	ES_OPENSSH_AUTH_FAIL_PUBKEY Es_openssh_login_result_type_t = 6
-	ES_OPENSSH_AUTH_FAIL_HOSTBASED Es_openssh_login_result_type_t = 7
-	ES_OPENSSH_AUTH_FAIL_GSSAPI Es_openssh_login_result_type_t = 8
-	ES_OPENSSH_INVALID_USER Es_openssh_login_result_type_t = 9
+	ES_OPENSSH_LOGIN_ROOT_DENIED     Es_openssh_login_result_type_t = 1
+	ES_OPENSSH_AUTH_SUCCESS          Es_openssh_login_result_type_t = 2
+	ES_OPENSSH_AUTH_FAIL_NONE        Es_openssh_login_result_type_t = 3
+	ES_OPENSSH_AUTH_FAIL_PASSWD      Es_openssh_login_result_type_t = 4
+	ES_OPENSSH_AUTH_FAIL_KBDINT      Es_openssh_login_result_type_t = 5
+	ES_OPENSSH_AUTH_FAIL_PUBKEY      Es_openssh_login_result_type_t = 6
+	ES_OPENSSH_AUTH_FAIL_HOSTBASED   Es_openssh_login_result_type_t = 7
+	ES_OPENSSH_AUTH_FAIL_GSSAPI      Es_openssh_login_result_type_t = 8
+	ES_OPENSSH_INVALID_USER          Es_openssh_login_result_type_t = 9
 )
 
 func (i Es_openssh_login_result_type_t) String() string {
@@ -2536,16 +2536,16 @@ func (i Es_openssh_login_result_type_t) isMultiValue() bool {
 type Es_proc_check_type_t int64
 
 const (
-	ES_PROC_CHECK_TYPE_LISTPIDS Es_proc_check_type_t = 1
-	ES_PROC_CHECK_TYPE_PIDINFO Es_proc_check_type_t = 2
-	ES_PROC_CHECK_TYPE_PIDFDINFO Es_proc_check_type_t = 3
-	ES_PROC_CHECK_TYPE_KERNMSGBUF Es_proc_check_type_t = 4
-	ES_PROC_CHECK_TYPE_SETCONTROL Es_proc_check_type_t = 5
+	ES_PROC_CHECK_TYPE_LISTPIDS        Es_proc_check_type_t = 1
+	ES_PROC_CHECK_TYPE_PIDINFO         Es_proc_check_type_t = 2
+	ES_PROC_CHECK_TYPE_PIDFDINFO       Es_proc_check_type_t = 3
+	ES_PROC_CHECK_TYPE_KERNMSGBUF      Es_proc_check_type_t = 4
+	ES_PROC_CHECK_TYPE_SETCONTROL      Es_proc_check_type_t = 5
 	ES_PROC_CHECK_TYPE_PIDFILEPORTINFO Es_proc_check_type_t = 6
-	ES_PROC_CHECK_TYPE_TERMINATE Es_proc_check_type_t = 7
-	ES_PROC_CHECK_TYPE_DIRTYCONTROL Es_proc_check_type_t = 8
-	ES_PROC_CHECK_TYPE_PIDRUSAGE Es_proc_check_type_t = 9
-	ES_PROC_CHECK_TYPE_UDATA_INFO Es_proc_check_type_t = 14
+	ES_PROC_CHECK_TYPE_TERMINATE       Es_proc_check_type_t = 7
+	ES_PROC_CHECK_TYPE_DIRTYCONTROL    Es_proc_check_type_t = 8
+	ES_PROC_CHECK_TYPE_PIDRUSAGE       Es_proc_check_type_t = 9
+	ES_PROC_CHECK_TYPE_UDATA_INFO      Es_proc_check_type_t = 14
 )
 
 func (i Es_proc_check_type_t) String() string {
@@ -2621,8 +2621,8 @@ func (i Es_proc_check_type_t) isMultiValue() bool {
 type Es_proc_suspend_resume_type_t int64
 
 const (
-	ES_PROC_SUSPEND_RESUME_TYPE_SUSPEND Es_proc_suspend_resume_type_t = 0
-	ES_PROC_SUSPEND_RESUME_TYPE_RESUME Es_proc_suspend_resume_type_t = 1
+	ES_PROC_SUSPEND_RESUME_TYPE_SUSPEND          Es_proc_suspend_resume_type_t = 0
+	ES_PROC_SUSPEND_RESUME_TYPE_RESUME           Es_proc_suspend_resume_type_t = 1
 	ES_PROC_SUSPEND_RESUME_TYPE_SHUTDOWN_SOCKETS Es_proc_suspend_resume_type_t = 3
 )
 
@@ -2834,7 +2834,7 @@ type Es_return_t int64
 
 const (
 	ES_RETURN_SUCCESS Es_return_t = 0
-	ES_RETURN_ERROR Es_return_t = 1
+	ES_RETURN_ERROR   Es_return_t = 1
 )
 
 func (i Es_return_t) String() string {
@@ -2877,7 +2877,7 @@ func (i Es_return_t) isMultiValue() bool {
 type Es_set_or_clear_t int64
 
 const (
-	ES_SET Es_set_or_clear_t = 0
+	ES_SET   Es_set_or_clear_t = 0
 	ES_CLEAR Es_set_or_clear_t = 1
 )
 
@@ -2922,12 +2922,12 @@ func (i Es_set_or_clear_t) isMultiValue() bool {
 type Es_sudo_plugin_type_t int64
 
 const (
-	ES_SUDO_PLUGIN_TYPE_UNKNOWN Es_sudo_plugin_type_t = 0
+	ES_SUDO_PLUGIN_TYPE_UNKNOWN   Es_sudo_plugin_type_t = 0
 	ES_SUDO_PLUGIN_TYPE_FRONT_END Es_sudo_plugin_type_t = 1
-	ES_SUDO_PLUGIN_TYPE_POLICY Es_sudo_plugin_type_t = 2
-	ES_SUDO_PLUGIN_TYPE_IO Es_sudo_plugin_type_t = 3
-	ES_SUDO_PLUGIN_TYPE_AUDIT Es_sudo_plugin_type_t = 4
-	ES_SUDO_PLUGIN_TYPE_APPROVAL Es_sudo_plugin_type_t = 5
+	ES_SUDO_PLUGIN_TYPE_POLICY    Es_sudo_plugin_type_t = 2
+	ES_SUDO_PLUGIN_TYPE_IO        Es_sudo_plugin_type_t = 3
+	ES_SUDO_PLUGIN_TYPE_AUDIT     Es_sudo_plugin_type_t = 4
+	ES_SUDO_PLUGIN_TYPE_APPROVAL  Es_sudo_plugin_type_t = 5
 )
 
 func (i Es_sudo_plugin_type_t) String() string {
@@ -2987,20 +2987,20 @@ func (i Es_sudo_plugin_type_t) isMultiValue() bool {
 type Es_tcc_authorization_reason_t int64
 
 const (
-	ES_TCC_AUTHORIZATION_REASON_NONE Es_tcc_authorization_reason_t = 0
-	ES_TCC_AUTHORIZATION_REASON_ERROR Es_tcc_authorization_reason_t = 1
-	ES_TCC_AUTHORIZATION_REASON_USER_CONSENT Es_tcc_authorization_reason_t = 2
-	ES_TCC_AUTHORIZATION_REASON_USER_SET Es_tcc_authorization_reason_t = 3
-	ES_TCC_AUTHORIZATION_REASON_SYSTEM_SET Es_tcc_authorization_reason_t = 4
-	ES_TCC_AUTHORIZATION_REASON_SERVICE_POLICY Es_tcc_authorization_reason_t = 5
-	ES_TCC_AUTHORIZATION_REASON_MDM_POLICY Es_tcc_authorization_reason_t = 6
+	ES_TCC_AUTHORIZATION_REASON_NONE                    Es_tcc_authorization_reason_t = 0
+	ES_TCC_AUTHORIZATION_REASON_ERROR                   Es_tcc_authorization_reason_t = 1
+	ES_TCC_AUTHORIZATION_REASON_USER_CONSENT            Es_tcc_authorization_reason_t = 2
+	ES_TCC_AUTHORIZATION_REASON_USER_SET                Es_tcc_authorization_reason_t = 3
+	ES_TCC_AUTHORIZATION_REASON_SYSTEM_SET              Es_tcc_authorization_reason_t = 4
+	ES_TCC_AUTHORIZATION_REASON_SERVICE_POLICY          Es_tcc_authorization_reason_t = 5
+	ES_TCC_AUTHORIZATION_REASON_MDM_POLICY              Es_tcc_authorization_reason_t = 6
 	ES_TCC_AUTHORIZATION_REASON_SERVICE_OVERRIDE_POLICY Es_tcc_authorization_reason_t = 7
-	ES_TCC_AUTHORIZATION_REASON_MISSING_USAGE_STRING Es_tcc_authorization_reason_t = 8
-	ES_TCC_AUTHORIZATION_REASON_PROMPT_TIMEOUT Es_tcc_authorization_reason_t = 9
-	ES_TCC_AUTHORIZATION_REASON_PREFLIGHT_UNKNOWN Es_tcc_authorization_reason_t = 10
-	ES_TCC_AUTHORIZATION_REASON_ENTITLED Es_tcc_authorization_reason_t = 11
-	ES_TCC_AUTHORIZATION_REASON_APP_TYPE_POLICY Es_tcc_authorization_reason_t = 12
-	ES_TCC_AUTHORIZATION_REASON_PROMPT_CANCEL Es_tcc_authorization_reason_t = 13
+	ES_TCC_AUTHORIZATION_REASON_MISSING_USAGE_STRING    Es_tcc_authorization_reason_t = 8
+	ES_TCC_AUTHORIZATION_REASON_PROMPT_TIMEOUT          Es_tcc_authorization_reason_t = 9
+	ES_TCC_AUTHORIZATION_REASON_PREFLIGHT_UNKNOWN       Es_tcc_authorization_reason_t = 10
+	ES_TCC_AUTHORIZATION_REASON_ENTITLED                Es_tcc_authorization_reason_t = 11
+	ES_TCC_AUTHORIZATION_REASON_APP_TYPE_POLICY         Es_tcc_authorization_reason_t = 12
+	ES_TCC_AUTHORIZATION_REASON_PROMPT_CANCEL           Es_tcc_authorization_reason_t = 13
 )
 
 func (i Es_tcc_authorization_reason_t) String() string {
@@ -3092,13 +3092,13 @@ func (i Es_tcc_authorization_reason_t) isMultiValue() bool {
 type Es_tcc_authorization_right_t int64
 
 const (
-	ES_TCC_AUTHORIZATION_RIGHT_DENIED Es_tcc_authorization_right_t = 0
-	ES_TCC_AUTHORIZATION_RIGHT_UNKNOWN Es_tcc_authorization_right_t = 1
-	ES_TCC_AUTHORIZATION_RIGHT_ALLOWED Es_tcc_authorization_right_t = 2
-	ES_TCC_AUTHORIZATION_RIGHT_LIMITED Es_tcc_authorization_right_t = 3
+	ES_TCC_AUTHORIZATION_RIGHT_DENIED           Es_tcc_authorization_right_t = 0
+	ES_TCC_AUTHORIZATION_RIGHT_UNKNOWN          Es_tcc_authorization_right_t = 1
+	ES_TCC_AUTHORIZATION_RIGHT_ALLOWED          Es_tcc_authorization_right_t = 2
+	ES_TCC_AUTHORIZATION_RIGHT_LIMITED          Es_tcc_authorization_right_t = 3
 	ES_TCC_AUTHORIZATION_RIGHT_ADD_MODIFY_ADDED Es_tcc_authorization_right_t = 4
-	ES_TCC_AUTHORIZATION_RIGHT_SESSION_PID Es_tcc_authorization_right_t = 5
-	ES_TCC_AUTHORIZATION_RIGHT_LEARN_MORE Es_tcc_authorization_right_t = 6
+	ES_TCC_AUTHORIZATION_RIGHT_SESSION_PID      Es_tcc_authorization_right_t = 5
+	ES_TCC_AUTHORIZATION_RIGHT_LEARN_MORE       Es_tcc_authorization_right_t = 6
 )
 
 func (i Es_tcc_authorization_right_t) String() string {
@@ -3163,9 +3163,9 @@ type Es_tcc_event_type_t int64
 
 const (
 	ES_TCC_EVENT_TYPE_UNKNOWN Es_tcc_event_type_t = 0
-	ES_TCC_EVENT_TYPE_CREATE Es_tcc_event_type_t = 1
-	ES_TCC_EVENT_TYPE_MODIFY Es_tcc_event_type_t = 2
-	ES_TCC_EVENT_TYPE_DELETE Es_tcc_event_type_t = 3
+	ES_TCC_EVENT_TYPE_CREATE  Es_tcc_event_type_t = 1
+	ES_TCC_EVENT_TYPE_MODIFY  Es_tcc_event_type_t = 2
+	ES_TCC_EVENT_TYPE_DELETE  Es_tcc_event_type_t = 3
 )
 
 func (i Es_tcc_event_type_t) String() string {
@@ -3217,9 +3217,9 @@ func (i Es_tcc_event_type_t) isMultiValue() bool {
 type Es_tcc_identity_type_t int64
 
 const (
-	ES_TCC_IDENTITY_TYPE_BUNDLE_ID Es_tcc_identity_type_t = 0
-	ES_TCC_IDENTITY_TYPE_EXECUTABLE_PATH Es_tcc_identity_type_t = 1
-	ES_TCC_IDENTITY_TYPE_POLICY_ID Es_tcc_identity_type_t = 2
+	ES_TCC_IDENTITY_TYPE_BUNDLE_ID               Es_tcc_identity_type_t = 0
+	ES_TCC_IDENTITY_TYPE_EXECUTABLE_PATH         Es_tcc_identity_type_t = 1
+	ES_TCC_IDENTITY_TYPE_POLICY_ID               Es_tcc_identity_type_t = 2
 	ES_TCC_IDENTITY_TYPE_FILE_PROVIDER_DOMAIN_ID Es_tcc_identity_type_t = 3
 )
 
@@ -3272,7 +3272,7 @@ func (i Es_tcc_identity_type_t) isMultiValue() bool {
 type Es_touchid_mode_t int64
 
 const (
-	ES_TOUCHID_MODE_VERIFICATION Es_touchid_mode_t = 0
+	ES_TOUCHID_MODE_VERIFICATION   Es_touchid_mode_t = 0
 	ES_TOUCHID_MODE_IDENTIFICATION Es_touchid_mode_t = 1
 )
 
@@ -3317,14 +3317,14 @@ func (i Es_touchid_mode_t) isMultiValue() bool {
 type Es_xpc_domain_type_t int64
 
 const (
-	ES_XPC_DOMAIN_TYPE_SYSTEM Es_xpc_domain_type_t = 1
-	ES_XPC_DOMAIN_TYPE_USER Es_xpc_domain_type_t = 2
+	ES_XPC_DOMAIN_TYPE_SYSTEM     Es_xpc_domain_type_t = 1
+	ES_XPC_DOMAIN_TYPE_USER       Es_xpc_domain_type_t = 2
 	ES_XPC_DOMAIN_TYPE_USER_LOGIN Es_xpc_domain_type_t = 3
-	ES_XPC_DOMAIN_TYPE_SESSION Es_xpc_domain_type_t = 4
-	ES_XPC_DOMAIN_TYPE_PID Es_xpc_domain_type_t = 5
-	ES_XPC_DOMAIN_TYPE_MANAGER Es_xpc_domain_type_t = 6
-	ES_XPC_DOMAIN_TYPE_PORT Es_xpc_domain_type_t = 7
-	ES_XPC_DOMAIN_TYPE_GUI Es_xpc_domain_type_t = 8
+	ES_XPC_DOMAIN_TYPE_SESSION    Es_xpc_domain_type_t = 4
+	ES_XPC_DOMAIN_TYPE_PID        Es_xpc_domain_type_t = 5
+	ES_XPC_DOMAIN_TYPE_MANAGER    Es_xpc_domain_type_t = 6
+	ES_XPC_DOMAIN_TYPE_PORT       Es_xpc_domain_type_t = 7
+	ES_XPC_DOMAIN_TYPE_GUI        Es_xpc_domain_type_t = 8
 )
 
 func (i Es_xpc_domain_type_t) String() string {
@@ -3391,15 +3391,15 @@ func (i Es_xpc_domain_type_t) isMultiValue() bool {
 type Graftdmg_type_t int64
 
 const (
-	GRAFTDMG_CRYPTEX_BOOT Graftdmg_type_t = 1
-	GRAFTDMG_CRYPTEX_PREBOOT Graftdmg_type_t = 2
-	GRAFTDMG_CRYPTEX_DOWNLEVEL Graftdmg_type_t = 3
-	GRAFTDMG_CRYPTEX_AUTH_ENV_GENERIC Graftdmg_type_t = 4
-	GRAFTDMG_CRYPTEX_PDI_NONCE Graftdmg_type_t = 6
-	GRAFTDMG_CRYPTEX_EFFECTIVE_AP Graftdmg_type_t = 7
-	GRAFTDMG_CRYPTEX_MOBILE_ASSET Graftdmg_type_t = 8
+	GRAFTDMG_CRYPTEX_BOOT                   Graftdmg_type_t = 1
+	GRAFTDMG_CRYPTEX_PREBOOT                Graftdmg_type_t = 2
+	GRAFTDMG_CRYPTEX_DOWNLEVEL              Graftdmg_type_t = 3
+	GRAFTDMG_CRYPTEX_AUTH_ENV_GENERIC       Graftdmg_type_t = 4
+	GRAFTDMG_CRYPTEX_PDI_NONCE              Graftdmg_type_t = 6
+	GRAFTDMG_CRYPTEX_EFFECTIVE_AP           Graftdmg_type_t = 7
+	GRAFTDMG_CRYPTEX_MOBILE_ASSET           Graftdmg_type_t = 8
 	GRAFTDMG_CRYPTEX_MOBILE_ASSET_WITH_CODE Graftdmg_type_t = 9
-	GRAFTDMG_CRYPTEX_MAX Graftdmg_type_t = 9
+	GRAFTDMG_CRYPTEX_MAX                    Graftdmg_type_t = 9
 )
 
 func (i Graftdmg_type_t) String() string {
@@ -3469,13 +3469,13 @@ func (i Graftdmg_type_t) isMultiValue() bool {
 type Mpo_flags_t int64
 
 const (
-	MPO_PORT Mpo_flags_t = 0
-	MPO_SERVICE_PORT Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT Mpo_flags_t = 2048
-	MPO_REPLY_PORT Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT Mpo_flags_t = 32768
+	MPO_PORT                            Mpo_flags_t = 0
+	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
+	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
+	MPO_REPLY_PORT                      Mpo_flags_t = 4096
+	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
+	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
+	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
 	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
 )
 
@@ -3546,4 +3546,3 @@ func SerializeMpo_flags_t(values []Mpo_flags_t) []string {
 func (i Mpo_flags_t) isMultiValue() bool {
 	return true
 }
-

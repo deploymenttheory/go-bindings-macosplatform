@@ -16,15 +16,15 @@ type MTRDishwasherAlarmClusterNotifyEvent struct {
 }
 
 var (
-	_clsMTRDishwasherAlarmClusterNotifyEvent = _objcClass("MTRDishwasherAlarmClusterNotifyEvent")
-	_mTRDishwasherAlarmClusterNotifyEventSelActive = objc.RegisterName("active")
-	_mTRDishwasherAlarmClusterNotifyEventSelSetActive = objc.RegisterName("setActive:")
-	_mTRDishwasherAlarmClusterNotifyEventSelInactive = objc.RegisterName("inactive")
+	_clsMTRDishwasherAlarmClusterNotifyEvent            = _objcClass("MTRDishwasherAlarmClusterNotifyEvent")
+	_mTRDishwasherAlarmClusterNotifyEventSelActive      = objc.RegisterName("active")
+	_mTRDishwasherAlarmClusterNotifyEventSelSetActive   = objc.RegisterName("setActive:")
+	_mTRDishwasherAlarmClusterNotifyEventSelInactive    = objc.RegisterName("inactive")
 	_mTRDishwasherAlarmClusterNotifyEventSelSetInactive = objc.RegisterName("setInactive:")
-	_mTRDishwasherAlarmClusterNotifyEventSelState = objc.RegisterName("state")
-	_mTRDishwasherAlarmClusterNotifyEventSelSetState = objc.RegisterName("setState:")
-	_mTRDishwasherAlarmClusterNotifyEventSelMask = objc.RegisterName("mask")
-	_mTRDishwasherAlarmClusterNotifyEventSelSetMask = objc.RegisterName("setMask:")
+	_mTRDishwasherAlarmClusterNotifyEventSelState       = objc.RegisterName("state")
+	_mTRDishwasherAlarmClusterNotifyEventSelSetState    = objc.RegisterName("setState:")
+	_mTRDishwasherAlarmClusterNotifyEventSelMask        = objc.RegisterName("mask")
+	_mTRDishwasherAlarmClusterNotifyEventSelSetMask     = objc.RegisterName("setMask:")
 )
 
 func MTRDishwasherAlarmClusterNotifyEventFromID(id objc.ID) *MTRDishwasherAlarmClusterNotifyEvent {
@@ -39,7 +39,9 @@ func MTRDishwasherAlarmClusterNotifyEventFromID(id objc.ID) *MTRDishwasherAlarmC
 
 func (o *MTRDishwasherAlarmClusterNotifyEvent) Active() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDishwasherAlarmClusterNotifyEventSelActive)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTRDishwasherAlarmClusterNotifyEvent) SetActive(active *foundation.NSNu
 
 func (o *MTRDishwasherAlarmClusterNotifyEvent) Inactive() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDishwasherAlarmClusterNotifyEventSelInactive)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,7 +63,9 @@ func (o *MTRDishwasherAlarmClusterNotifyEvent) SetInactive(inactive *foundation.
 
 func (o *MTRDishwasherAlarmClusterNotifyEvent) State() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDishwasherAlarmClusterNotifyEventSelState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -69,11 +75,12 @@ func (o *MTRDishwasherAlarmClusterNotifyEvent) SetState(state *foundation.NSNumb
 
 func (o *MTRDishwasherAlarmClusterNotifyEvent) Mask() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDishwasherAlarmClusterNotifyEventSelMask)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDishwasherAlarmClusterNotifyEvent) SetMask(mask *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDishwasherAlarmClusterNotifyEventSelSetMask, mask.Ptr())
 }
-

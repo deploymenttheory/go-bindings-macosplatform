@@ -16,9 +16,9 @@ type NSTableHeaderCell struct {
 }
 
 var (
-	_clsNSTableHeaderCell = _objcClass("NSTableHeaderCell")
+	_clsNSTableHeaderCell                                                  = _objcClass("NSTableHeaderCell")
 	_nSTableHeaderCellSelDrawSortIndicatorWithFrameInViewAscendingPriority = objc.RegisterName("drawSortIndicatorWithFrame:inView:ascending:priority:")
-	_nSTableHeaderCellSelSortIndicatorRectForBounds = objc.RegisterName("sortIndicatorRectForBounds:")
+	_nSTableHeaderCellSelSortIndicatorRectForBounds                        = objc.RegisterName("sortIndicatorRectForBounds:")
 )
 
 func NSTableHeaderCellFromID(id objc.ID) *NSTableHeaderCell {
@@ -39,4 +39,3 @@ func (o *NSTableHeaderCell) SortIndicatorRectForBounds(rect corefoundation.CGRec
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTableHeaderCellSelSortIndicatorRectForBounds, rect)
 	return _ret
 }
-

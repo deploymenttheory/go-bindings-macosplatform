@@ -132,4 +132,3 @@ type Rightable interface {
 }
 
 var _ Rightable = (*Right)(nil)
-

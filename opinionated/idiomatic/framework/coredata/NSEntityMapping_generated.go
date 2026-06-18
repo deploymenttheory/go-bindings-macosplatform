@@ -81,7 +81,9 @@ func (x *EntityMapping) WithAttributeMappings(items ...*raw.NSPropertyMapping) *
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSPropertyMapping](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -97,7 +99,9 @@ func (x *EntityMapping) WithRelationshipMappings(items ...*raw.NSPropertyMapping
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSPropertyMapping](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -301,4 +305,3 @@ type EntityMappingable interface {
 }
 
 var _ EntityMappingable = (*EntityMapping)(nil)
-

@@ -69,4 +69,3 @@ type NotificationQueueable interface {
 }
 
 var _ NotificationQueueable = (*NotificationQueue)(nil)
-

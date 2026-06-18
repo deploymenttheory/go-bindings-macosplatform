@@ -11,13 +11,17 @@ import (
 
 func SharedWithYouCoreVersionNumber() float64 {
 	ptr, _ := purego.Dlsym(_sharedwithyoucoreLib, "SharedWithYouCoreVersionNumber")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func SharedWithYouCoreVersionString() []unsafe.Pointer {
 	ptr, _ := purego.Dlsym(_sharedwithyoucoreLib, "SharedWithYouCoreVersionString")
-	if ptr == 0 { return []unsafe.Pointer{} }
+	if ptr == 0 {
+		return []unsafe.Pointer{}
+	}
 	return *(*[]unsafe.Pointer)(unsafe.Pointer(ptr))
 }
 
@@ -26,4 +30,3 @@ func UTCollaborationOptionsTypeIdentifier() uintptr {
 	ptr, _ := purego.Dlsym(_sharedwithyoucoreLib, "UTCollaborationOptionsTypeIdentifier")
 	return ptr
 }
-

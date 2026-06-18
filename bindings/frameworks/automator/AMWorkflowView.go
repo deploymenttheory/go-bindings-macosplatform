@@ -16,10 +16,10 @@ type AMWorkflowView struct {
 }
 
 var (
-	_clsAMWorkflowView = _objcClass("AMWorkflowView")
-	_aMWorkflowViewSelIsEditable = objc.RegisterName("isEditable")
-	_aMWorkflowViewSelSetEditable = objc.RegisterName("setEditable:")
-	_aMWorkflowViewSelWorkflowController = objc.RegisterName("workflowController")
+	_clsAMWorkflowView                      = _objcClass("AMWorkflowView")
+	_aMWorkflowViewSelIsEditable            = objc.RegisterName("isEditable")
+	_aMWorkflowViewSelSetEditable           = objc.RegisterName("setEditable:")
+	_aMWorkflowViewSelWorkflowController    = objc.RegisterName("workflowController")
 	_aMWorkflowViewSelSetWorkflowController = objc.RegisterName("setWorkflowController:")
 )
 
@@ -44,11 +44,12 @@ func (o *AMWorkflowView) SetEditable(editable bool) {
 
 func (o *AMWorkflowView) WorkflowController() *AMWorkflowController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aMWorkflowViewSelWorkflowController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AMWorkflowControllerFromID(_ret)
 }
 
 func (o *AMWorkflowView) SetWorkflowController(workflowController *AMWorkflowController) {
 	o.Ptr().Send(_aMWorkflowViewSelSetWorkflowController, workflowController.Ptr())
 }
-

@@ -109,4 +109,3 @@ type CIImageRepable interface {
 }
 
 var _ CIImageRepable = (*CIImageRep)(nil)
-

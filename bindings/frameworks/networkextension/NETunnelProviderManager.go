@@ -18,25 +18,25 @@ type NETunnelProviderManager struct {
 }
 
 var (
-	_clsNETunnelProviderManager = _objcClass("NETunnelProviderManager")
+	_clsNETunnelProviderManager                                            = _objcClass("NETunnelProviderManager")
 	_nETunnelProviderManagerSelLoadAllFromPreferencesWithCompletionHandler = objc.RegisterName("loadAllFromPreferencesWithCompletionHandler:")
-	_nETunnelProviderManagerSelForPerAppVPN = objc.RegisterName("forPerAppVPN")
-	_nETunnelProviderManagerSelCopyAppRules = objc.RegisterName("copyAppRules")
-	_nETunnelProviderManagerSelRoutingMethod = objc.RegisterName("routingMethod")
-	_nETunnelProviderManagerSelSafariDomains = objc.RegisterName("safariDomains")
-	_nETunnelProviderManagerSelSetSafariDomains = objc.RegisterName("setSafariDomains:")
-	_nETunnelProviderManagerSelMailDomains = objc.RegisterName("mailDomains")
-	_nETunnelProviderManagerSelSetMailDomains = objc.RegisterName("setMailDomains:")
-	_nETunnelProviderManagerSelCalendarDomains = objc.RegisterName("calendarDomains")
-	_nETunnelProviderManagerSelSetCalendarDomains = objc.RegisterName("setCalendarDomains:")
-	_nETunnelProviderManagerSelContactsDomains = objc.RegisterName("contactsDomains")
-	_nETunnelProviderManagerSelSetContactsDomains = objc.RegisterName("setContactsDomains:")
-	_nETunnelProviderManagerSelAppRules = objc.RegisterName("appRules")
-	_nETunnelProviderManagerSelSetAppRules = objc.RegisterName("setAppRules:")
-	_nETunnelProviderManagerSelExcludedDomains = objc.RegisterName("excludedDomains")
-	_nETunnelProviderManagerSelSetExcludedDomains = objc.RegisterName("setExcludedDomains:")
-	_nETunnelProviderManagerSelAssociatedDomains = objc.RegisterName("associatedDomains")
-	_nETunnelProviderManagerSelSetAssociatedDomains = objc.RegisterName("setAssociatedDomains:")
+	_nETunnelProviderManagerSelForPerAppVPN                                = objc.RegisterName("forPerAppVPN")
+	_nETunnelProviderManagerSelCopyAppRules                                = objc.RegisterName("copyAppRules")
+	_nETunnelProviderManagerSelRoutingMethod                               = objc.RegisterName("routingMethod")
+	_nETunnelProviderManagerSelSafariDomains                               = objc.RegisterName("safariDomains")
+	_nETunnelProviderManagerSelSetSafariDomains                            = objc.RegisterName("setSafariDomains:")
+	_nETunnelProviderManagerSelMailDomains                                 = objc.RegisterName("mailDomains")
+	_nETunnelProviderManagerSelSetMailDomains                              = objc.RegisterName("setMailDomains:")
+	_nETunnelProviderManagerSelCalendarDomains                             = objc.RegisterName("calendarDomains")
+	_nETunnelProviderManagerSelSetCalendarDomains                          = objc.RegisterName("setCalendarDomains:")
+	_nETunnelProviderManagerSelContactsDomains                             = objc.RegisterName("contactsDomains")
+	_nETunnelProviderManagerSelSetContactsDomains                          = objc.RegisterName("setContactsDomains:")
+	_nETunnelProviderManagerSelAppRules                                    = objc.RegisterName("appRules")
+	_nETunnelProviderManagerSelSetAppRules                                 = objc.RegisterName("setAppRules:")
+	_nETunnelProviderManagerSelExcludedDomains                             = objc.RegisterName("excludedDomains")
+	_nETunnelProviderManagerSelSetExcludedDomains                          = objc.RegisterName("setExcludedDomains:")
+	_nETunnelProviderManagerSelAssociatedDomains                           = objc.RegisterName("associatedDomains")
+	_nETunnelProviderManagerSelSetAssociatedDomains                        = objc.RegisterName("setAssociatedDomains:")
 )
 
 func NETunnelProviderManagerFromID(id objc.ID) *NETunnelProviderManager {
@@ -67,7 +67,9 @@ func NETunnelProviderManagerLoadAllFromPreferencesWithCompletionHandler(completi
 // @method forPerAppVPN @discussion Create a NETunnelProviderManager instance that is used to manage a per-app VPN configuration.
 func NETunnelProviderManagerForPerAppVPN() *NETunnelProviderManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNETunnelProviderManager), _nETunnelProviderManagerSelForPerAppVPN)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NETunnelProviderManagerFromID(_ret)
 }
 
@@ -126,7 +128,9 @@ func (o *NETunnelProviderManager) SetContactsDomains(contactsDomains *foundation
 // @property appRules @property An array of NEAppRule objects. Only applies to per-app VPN configurations. Network traffic originating from apps matching one of these rules is routed through the per-app VPN.
 func (o *NETunnelProviderManager) AppRules() *foundation.NSArray[*NEAppRule] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nETunnelProviderManagerSelAppRules)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NEAppRule](_ret)
 }
 
@@ -153,4 +157,3 @@ func (o *NETunnelProviderManager) AssociatedDomains() *foundation.NSArray[*found
 func (o *NETunnelProviderManager) SetAssociatedDomains(associatedDomains *foundation.NSArray[*foundation.NSString]) {
 	o.Ptr().Send(_nETunnelProviderManagerSelSetAssociatedDomains, associatedDomains)
 }
-

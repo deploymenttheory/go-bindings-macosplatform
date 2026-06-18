@@ -15,7 +15,7 @@ type CMGyroData struct {
 }
 
 var (
-	_clsCMGyroData = _objcClass("CMGyroData")
+	_clsCMGyroData             = _objcClass("CMGyroData")
 	_cMGyroDataSelRotationRate = objc.RegisterName("rotationRate")
 )
 
@@ -33,4 +33,3 @@ func (o *CMGyroData) RotationRate() CMRotationRate {
 	_ret := objc.Send[CMRotationRate](o.Ptr(), _cMGyroDataSelRotationRate)
 	return _ret
 }
-

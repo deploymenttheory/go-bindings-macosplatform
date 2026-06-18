@@ -60,4 +60,3 @@ type MTL4CommandBufferOptionsable interface {
 }
 
 var _ MTL4CommandBufferOptionsable = (*MTL4CommandBufferOptions)(nil)
-

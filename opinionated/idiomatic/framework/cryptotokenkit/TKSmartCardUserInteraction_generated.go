@@ -89,7 +89,9 @@ func (x *SmartCardUserInteraction) SetInteractionTimeout(interactionTimeout floa
 	x.inner.SetInteractionTimeout(interactionTimeout)
 }
 
-func (x *SmartCardUserInteraction) asSmartCardUserInteraction() *raw.TKSmartCardUserInteraction { return x.inner }
+func (x *SmartCardUserInteraction) asSmartCardUserInteraction() *raw.TKSmartCardUserInteraction {
+	return x.inner
+}
 
 // SmartCardUserInteractionable is the interface implemented by [SmartCardUserInteraction], for mocking and DI.
 type SmartCardUserInteractionable interface {
@@ -107,4 +109,3 @@ type SmartCardUserInteractionable interface {
 }
 
 var _ SmartCardUserInteractionable = (*SmartCardUserInteraction)(nil)
-

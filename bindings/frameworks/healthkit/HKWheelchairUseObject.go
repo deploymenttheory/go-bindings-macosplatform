@@ -16,7 +16,7 @@ type HKWheelchairUseObject struct {
 }
 
 var (
-	_clsHKWheelchairUseObject = _objcClass("HKWheelchairUseObject")
+	_clsHKWheelchairUseObject              = _objcClass("HKWheelchairUseObject")
 	_hKWheelchairUseObjectSelWheelchairUse = objc.RegisterName("wheelchairUse")
 )
 
@@ -34,4 +34,3 @@ func (o *HKWheelchairUseObject) WheelchairUse() HKWheelchairUse {
 	_ret := objc.Send[HKWheelchairUse](o.Ptr(), _hKWheelchairUseObjectSelWheelchairUse)
 	return _ret
 }
-

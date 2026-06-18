@@ -20,97 +20,97 @@ type SKNode struct {
 }
 
 var (
-	_clsSKNode = _objcClass("SKNode")
-	_sKNodeSelInit = objc.RegisterName("init")
-	_sKNodeSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_sKNodeSelNode = objc.RegisterName("node")
-	_sKNodeSelNodeWithFileNamed = objc.RegisterName("nodeWithFileNamed:")
+	_clsSKNode                                             = _objcClass("SKNode")
+	_sKNodeSelInit                                         = objc.RegisterName("init")
+	_sKNodeSelInitWithCoder                                = objc.RegisterName("initWithCoder:")
+	_sKNodeSelNode                                         = objc.RegisterName("node")
+	_sKNodeSelNodeWithFileNamed                            = objc.RegisterName("nodeWithFileNamed:")
 	_sKNodeSelNodeWithFileNamedSecurelyWithClassesAndError = objc.RegisterName("nodeWithFileNamed:securelyWithClasses:andError:")
-	_sKNodeSelCalculateAccumulatedFrame = objc.RegisterName("calculateAccumulatedFrame")
-	_sKNodeSelValueForAttributeNamed = objc.RegisterName("valueForAttributeNamed:")
-	_sKNodeSelSetValueForAttributeNamed = objc.RegisterName("setValue:forAttributeNamed:")
-	_sKNodeSelSetScale = objc.RegisterName("setScale:")
-	_sKNodeSelAddChild = objc.RegisterName("addChild:")
-	_sKNodeSelInsertChildAtIndex = objc.RegisterName("insertChild:atIndex:")
-	_sKNodeSelRemoveChildrenInArray = objc.RegisterName("removeChildrenInArray:")
-	_sKNodeSelRemoveAllChildren = objc.RegisterName("removeAllChildren")
-	_sKNodeSelRemoveFromParent = objc.RegisterName("removeFromParent")
-	_sKNodeSelMoveToParent = objc.RegisterName("moveToParent:")
-	_sKNodeSelChildNodeWithName = objc.RegisterName("childNodeWithName:")
-	_sKNodeSelEnumerateChildNodesWithNameUsing = objc.RegisterName("enumerateChildNodesWithName:usingBlock:")
-	_sKNodeSelObjectForKeyedSubscript = objc.RegisterName("objectForKeyedSubscript:")
-	_sKNodeSelInParentHierarchy = objc.RegisterName("inParentHierarchy:")
-	_sKNodeSelRunAction = objc.RegisterName("runAction:")
-	_sKNodeSelRunActionCompletion = objc.RegisterName("runAction:completion:")
-	_sKNodeSelRunActionWithKey = objc.RegisterName("runAction:withKey:")
-	_sKNodeSelHasActions = objc.RegisterName("hasActions")
-	_sKNodeSelActionForKey = objc.RegisterName("actionForKey:")
-	_sKNodeSelRemoveActionForKey = objc.RegisterName("removeActionForKey:")
-	_sKNodeSelRemoveAllActions = objc.RegisterName("removeAllActions")
-	_sKNodeSelContainsPoint = objc.RegisterName("containsPoint:")
-	_sKNodeSelNodeAtPoint = objc.RegisterName("nodeAtPoint:")
-	_sKNodeSelNodesAtPoint = objc.RegisterName("nodesAtPoint:")
-	_sKNodeSelConvertPointFromNode = objc.RegisterName("convertPoint:fromNode:")
-	_sKNodeSelConvertPointToNode = objc.RegisterName("convertPoint:toNode:")
-	_sKNodeSelIntersectsNode = objc.RegisterName("intersectsNode:")
-	_sKNodeSelIsEqualToNode = objc.RegisterName("isEqualToNode:")
-	_sKNodeSelFrame = objc.RegisterName("frame")
-	_sKNodeSelPosition = objc.RegisterName("position")
-	_sKNodeSelSetPosition = objc.RegisterName("setPosition:")
-	_sKNodeSelZPosition = objc.RegisterName("zPosition")
-	_sKNodeSelSetZPosition = objc.RegisterName("setZPosition:")
-	_sKNodeSelZRotation = objc.RegisterName("zRotation")
-	_sKNodeSelSetZRotation = objc.RegisterName("setZRotation:")
-	_sKNodeSelXScale = objc.RegisterName("xScale")
-	_sKNodeSelSetXScale = objc.RegisterName("setXScale:")
-	_sKNodeSelYScale = objc.RegisterName("yScale")
-	_sKNodeSelSetYScale = objc.RegisterName("setYScale:")
-	_sKNodeSelSpeed = objc.RegisterName("speed")
-	_sKNodeSelSetSpeed = objc.RegisterName("setSpeed:")
-	_sKNodeSelAlpha = objc.RegisterName("alpha")
-	_sKNodeSelSetAlpha = objc.RegisterName("setAlpha:")
-	_sKNodeSelIsPaused = objc.RegisterName("isPaused")
-	_sKNodeSelSetPaused = objc.RegisterName("setPaused:")
-	_sKNodeSelIsHidden = objc.RegisterName("isHidden")
-	_sKNodeSelSetHidden = objc.RegisterName("setHidden:")
-	_sKNodeSelIsUserInteractionEnabled = objc.RegisterName("isUserInteractionEnabled")
-	_sKNodeSelSetUserInteractionEnabled = objc.RegisterName("setUserInteractionEnabled:")
-	_sKNodeSelParent = objc.RegisterName("parent")
-	_sKNodeSelChildren = objc.RegisterName("children")
-	_sKNodeSelName = objc.RegisterName("name")
-	_sKNodeSelSetName = objc.RegisterName("setName:")
-	_sKNodeSelScene = objc.RegisterName("scene")
-	_sKNodeSelPhysicsBody = objc.RegisterName("physicsBody")
-	_sKNodeSelSetPhysicsBody = objc.RegisterName("setPhysicsBody:")
-	_sKNodeSelUserData = objc.RegisterName("userData")
-	_sKNodeSelSetUserData = objc.RegisterName("setUserData:")
-	_sKNodeSelReachConstraints = objc.RegisterName("reachConstraints")
-	_sKNodeSelSetReachConstraints = objc.RegisterName("setReachConstraints:")
-	_sKNodeSelConstraints = objc.RegisterName("constraints")
-	_sKNodeSelSetConstraints = objc.RegisterName("setConstraints:")
-	_sKNodeSelAttributeValues = objc.RegisterName("attributeValues")
-	_sKNodeSelSetAttributeValues = objc.RegisterName("setAttributeValues:")
-	_sKNodeSelAccessibilityHitTest = objc.RegisterName("accessibilityHitTest:")
-	_sKNodeSelIsAccessibilityElement = objc.RegisterName("isAccessibilityElement")
-	_sKNodeSelSetAccessibilityElement = objc.RegisterName("setAccessibilityElement:")
-	_sKNodeSelAccessibilityRole = objc.RegisterName("accessibilityRole")
-	_sKNodeSelSetAccessibilityRole = objc.RegisterName("setAccessibilityRole:")
-	_sKNodeSelAccessibilityRoleDescription = objc.RegisterName("accessibilityRoleDescription")
-	_sKNodeSelSetAccessibilityRoleDescription = objc.RegisterName("setAccessibilityRoleDescription:")
-	_sKNodeSelAccessibilitySubrole = objc.RegisterName("accessibilitySubrole")
-	_sKNodeSelSetAccessibilitySubrole = objc.RegisterName("setAccessibilitySubrole:")
-	_sKNodeSelAccessibilityFrame = objc.RegisterName("accessibilityFrame")
-	_sKNodeSelSetAccessibilityFrame = objc.RegisterName("setAccessibilityFrame:")
-	_sKNodeSelAccessibilityParent = objc.RegisterName("accessibilityParent")
-	_sKNodeSelSetAccessibilityParent = objc.RegisterName("setAccessibilityParent:")
-	_sKNodeSelAccessibilityChildren = objc.RegisterName("accessibilityChildren")
-	_sKNodeSelSetAccessibilityChildren = objc.RegisterName("setAccessibilityChildren:")
-	_sKNodeSelAccessibilityHelp = objc.RegisterName("accessibilityHelp")
-	_sKNodeSelSetAccessibilityHelp = objc.RegisterName("setAccessibilityHelp:")
-	_sKNodeSelAccessibilityLabel = objc.RegisterName("accessibilityLabel")
-	_sKNodeSelSetAccessibilityLabel = objc.RegisterName("setAccessibilityLabel:")
-	_sKNodeSelIsAccessibilityEnabled = objc.RegisterName("isAccessibilityEnabled")
-	_sKNodeSelSetAccessibilityEnabled = objc.RegisterName("setAccessibilityEnabled:")
+	_sKNodeSelCalculateAccumulatedFrame                    = objc.RegisterName("calculateAccumulatedFrame")
+	_sKNodeSelValueForAttributeNamed                       = objc.RegisterName("valueForAttributeNamed:")
+	_sKNodeSelSetValueForAttributeNamed                    = objc.RegisterName("setValue:forAttributeNamed:")
+	_sKNodeSelSetScale                                     = objc.RegisterName("setScale:")
+	_sKNodeSelAddChild                                     = objc.RegisterName("addChild:")
+	_sKNodeSelInsertChildAtIndex                           = objc.RegisterName("insertChild:atIndex:")
+	_sKNodeSelRemoveChildrenInArray                        = objc.RegisterName("removeChildrenInArray:")
+	_sKNodeSelRemoveAllChildren                            = objc.RegisterName("removeAllChildren")
+	_sKNodeSelRemoveFromParent                             = objc.RegisterName("removeFromParent")
+	_sKNodeSelMoveToParent                                 = objc.RegisterName("moveToParent:")
+	_sKNodeSelChildNodeWithName                            = objc.RegisterName("childNodeWithName:")
+	_sKNodeSelEnumerateChildNodesWithNameUsing             = objc.RegisterName("enumerateChildNodesWithName:usingBlock:")
+	_sKNodeSelObjectForKeyedSubscript                      = objc.RegisterName("objectForKeyedSubscript:")
+	_sKNodeSelInParentHierarchy                            = objc.RegisterName("inParentHierarchy:")
+	_sKNodeSelRunAction                                    = objc.RegisterName("runAction:")
+	_sKNodeSelRunActionCompletion                          = objc.RegisterName("runAction:completion:")
+	_sKNodeSelRunActionWithKey                             = objc.RegisterName("runAction:withKey:")
+	_sKNodeSelHasActions                                   = objc.RegisterName("hasActions")
+	_sKNodeSelActionForKey                                 = objc.RegisterName("actionForKey:")
+	_sKNodeSelRemoveActionForKey                           = objc.RegisterName("removeActionForKey:")
+	_sKNodeSelRemoveAllActions                             = objc.RegisterName("removeAllActions")
+	_sKNodeSelContainsPoint                                = objc.RegisterName("containsPoint:")
+	_sKNodeSelNodeAtPoint                                  = objc.RegisterName("nodeAtPoint:")
+	_sKNodeSelNodesAtPoint                                 = objc.RegisterName("nodesAtPoint:")
+	_sKNodeSelConvertPointFromNode                         = objc.RegisterName("convertPoint:fromNode:")
+	_sKNodeSelConvertPointToNode                           = objc.RegisterName("convertPoint:toNode:")
+	_sKNodeSelIntersectsNode                               = objc.RegisterName("intersectsNode:")
+	_sKNodeSelIsEqualToNode                                = objc.RegisterName("isEqualToNode:")
+	_sKNodeSelFrame                                        = objc.RegisterName("frame")
+	_sKNodeSelPosition                                     = objc.RegisterName("position")
+	_sKNodeSelSetPosition                                  = objc.RegisterName("setPosition:")
+	_sKNodeSelZPosition                                    = objc.RegisterName("zPosition")
+	_sKNodeSelSetZPosition                                 = objc.RegisterName("setZPosition:")
+	_sKNodeSelZRotation                                    = objc.RegisterName("zRotation")
+	_sKNodeSelSetZRotation                                 = objc.RegisterName("setZRotation:")
+	_sKNodeSelXScale                                       = objc.RegisterName("xScale")
+	_sKNodeSelSetXScale                                    = objc.RegisterName("setXScale:")
+	_sKNodeSelYScale                                       = objc.RegisterName("yScale")
+	_sKNodeSelSetYScale                                    = objc.RegisterName("setYScale:")
+	_sKNodeSelSpeed                                        = objc.RegisterName("speed")
+	_sKNodeSelSetSpeed                                     = objc.RegisterName("setSpeed:")
+	_sKNodeSelAlpha                                        = objc.RegisterName("alpha")
+	_sKNodeSelSetAlpha                                     = objc.RegisterName("setAlpha:")
+	_sKNodeSelIsPaused                                     = objc.RegisterName("isPaused")
+	_sKNodeSelSetPaused                                    = objc.RegisterName("setPaused:")
+	_sKNodeSelIsHidden                                     = objc.RegisterName("isHidden")
+	_sKNodeSelSetHidden                                    = objc.RegisterName("setHidden:")
+	_sKNodeSelIsUserInteractionEnabled                     = objc.RegisterName("isUserInteractionEnabled")
+	_sKNodeSelSetUserInteractionEnabled                    = objc.RegisterName("setUserInteractionEnabled:")
+	_sKNodeSelParent                                       = objc.RegisterName("parent")
+	_sKNodeSelChildren                                     = objc.RegisterName("children")
+	_sKNodeSelName                                         = objc.RegisterName("name")
+	_sKNodeSelSetName                                      = objc.RegisterName("setName:")
+	_sKNodeSelScene                                        = objc.RegisterName("scene")
+	_sKNodeSelPhysicsBody                                  = objc.RegisterName("physicsBody")
+	_sKNodeSelSetPhysicsBody                               = objc.RegisterName("setPhysicsBody:")
+	_sKNodeSelUserData                                     = objc.RegisterName("userData")
+	_sKNodeSelSetUserData                                  = objc.RegisterName("setUserData:")
+	_sKNodeSelReachConstraints                             = objc.RegisterName("reachConstraints")
+	_sKNodeSelSetReachConstraints                          = objc.RegisterName("setReachConstraints:")
+	_sKNodeSelConstraints                                  = objc.RegisterName("constraints")
+	_sKNodeSelSetConstraints                               = objc.RegisterName("setConstraints:")
+	_sKNodeSelAttributeValues                              = objc.RegisterName("attributeValues")
+	_sKNodeSelSetAttributeValues                           = objc.RegisterName("setAttributeValues:")
+	_sKNodeSelAccessibilityHitTest                         = objc.RegisterName("accessibilityHitTest:")
+	_sKNodeSelIsAccessibilityElement                       = objc.RegisterName("isAccessibilityElement")
+	_sKNodeSelSetAccessibilityElement                      = objc.RegisterName("setAccessibilityElement:")
+	_sKNodeSelAccessibilityRole                            = objc.RegisterName("accessibilityRole")
+	_sKNodeSelSetAccessibilityRole                         = objc.RegisterName("setAccessibilityRole:")
+	_sKNodeSelAccessibilityRoleDescription                 = objc.RegisterName("accessibilityRoleDescription")
+	_sKNodeSelSetAccessibilityRoleDescription              = objc.RegisterName("setAccessibilityRoleDescription:")
+	_sKNodeSelAccessibilitySubrole                         = objc.RegisterName("accessibilitySubrole")
+	_sKNodeSelSetAccessibilitySubrole                      = objc.RegisterName("setAccessibilitySubrole:")
+	_sKNodeSelAccessibilityFrame                           = objc.RegisterName("accessibilityFrame")
+	_sKNodeSelSetAccessibilityFrame                        = objc.RegisterName("setAccessibilityFrame:")
+	_sKNodeSelAccessibilityParent                          = objc.RegisterName("accessibilityParent")
+	_sKNodeSelSetAccessibilityParent                       = objc.RegisterName("setAccessibilityParent:")
+	_sKNodeSelAccessibilityChildren                        = objc.RegisterName("accessibilityChildren")
+	_sKNodeSelSetAccessibilityChildren                     = objc.RegisterName("setAccessibilityChildren:")
+	_sKNodeSelAccessibilityHelp                            = objc.RegisterName("accessibilityHelp")
+	_sKNodeSelSetAccessibilityHelp                         = objc.RegisterName("setAccessibilityHelp:")
+	_sKNodeSelAccessibilityLabel                           = objc.RegisterName("accessibilityLabel")
+	_sKNodeSelSetAccessibilityLabel                        = objc.RegisterName("setAccessibilityLabel:")
+	_sKNodeSelIsAccessibilityEnabled                       = objc.RegisterName("isAccessibilityEnabled")
+	_sKNodeSelSetAccessibilityEnabled                      = objc.RegisterName("setAccessibilityEnabled:")
 )
 
 func SKNodeFromID(id objc.ID) *SKNode {
@@ -125,33 +125,43 @@ func SKNodeFromID(id objc.ID) *SKNode {
 
 func (o *SKNode) Init() *SKNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKNodeFromID(_ret)
 }
 
 // Support coding and decoding via NSKeyedArchiver.
 func (o *SKNode) InitWithCoder(aDecoder *foundation.NSCoder) *SKNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelInitWithCoder, aDecoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKNodeFromID(_ret)
 }
 
 func SKNodeNode() *SKNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKNode), _sKNodeSelNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKNodeFromID(_ret)
 }
 
 func SKNodeNodeWithFileNamed(filename *foundation.NSString) *SKNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKNode), _sKNodeSelNodeWithFileNamed, filename.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKNodeFromID(_ret)
 }
 
 func SKNodeNodeWithFileNamedSecurelyWithClassesAndError(filename *foundation.NSString, classes *foundation.NSSet[objc.Class]) (*SKNode, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKNode), _sKNodeSelNodeWithFileNamedSecurelyWithClassesAndError, filename.Ptr(), classes, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -167,7 +177,9 @@ func (o *SKNode) CalculateAccumulatedFrame() corefoundation.CGRect {
 // Deprecated: since macOS 10.12.
 func (o *SKNode) ValueForAttributeNamed(key *foundation.NSString) *SKAttributeValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelValueForAttributeNamed, key.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKAttributeValueFromID(_ret)
 }
 
@@ -208,7 +220,9 @@ func (o *SKNode) MoveToParent(parent *SKNode) {
 
 func (o *SKNode) ChildNodeWithName(name *foundation.NSString) *SKNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelChildNodeWithName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKNodeFromID(_ret)
 }
 
@@ -229,7 +243,9 @@ func (o *SKNode) EnumerateChildNodesWithNameUsing(name *foundation.NSString, blo
 // Simplified shorthand for enumerateChildNodesWithName that returns an array of the matching nodes. This allows subscripting of the form: NSArray *childrenMatchingName = node[@"name"] or even complex like: NSArray *siblingsBeginningWithA = node[@"../a*"] @param name An Xpath style path that can include simple regular expressions for matching node names. @see enumerateChildNodesWithName:usingBlock:
 func (o *SKNode) ObjectForKeyedSubscript(name *foundation.NSString) *foundation.NSArray[*SKNode] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelObjectForKeyedSubscript, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SKNode](_ret)
 }
 
@@ -264,7 +280,9 @@ func (o *SKNode) HasActions() bool {
 
 func (o *SKNode) ActionForKey(key *foundation.NSString) *SKAction {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelActionForKey, key.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKActionFromID(_ret)
 }
 
@@ -284,13 +302,17 @@ func (o *SKNode) ContainsPoint(p corefoundation.CGPoint) bool {
 // Returns the node itself or a child node at the point given. If the receiver is returned there is no child node at the given point. @return a child node or self at the given location.
 func (o *SKNode) NodeAtPoint(p corefoundation.CGPoint) *SKNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelNodeAtPoint, p)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKNodeFromID(_ret)
 }
 
 func (o *SKNode) NodesAtPoint(p corefoundation.CGPoint) *foundation.NSArray[*SKNode] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelNodesAtPoint, p)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SKNode](_ret)
 }
 
@@ -422,21 +444,27 @@ func (o *SKNode) SetUserInteractionEnabled(userInteractionEnabled bool) {
 // The parent of the node. If this is nil the node has not been added to another group and is thus the root node of its own graph.
 func (o *SKNode) Parent() *SKNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelParent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKNodeFromID(_ret)
 }
 
 // The children of this node.
 func (o *SKNode) Children() *foundation.NSArray[*SKNode] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelChildren)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SKNode](_ret)
 }
 
 // The client assignable name. In general, this should be unique among peers in the scene graph.
 func (o *SKNode) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -447,14 +475,18 @@ func (o *SKNode) SetName(name *foundation.NSString) {
 // The scene that the node is currently in.
 func (o *SKNode) Scene() *SKScene {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelScene)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKSceneFromID(_ret)
 }
 
 // Physics body attached to the node, with synchronized scale, rotation, and position
 func (o *SKNode) PhysicsBody() *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelPhysicsBody)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPhysicsBodyFromID(_ret)
 }
 
@@ -475,7 +507,9 @@ func (o *SKNode) SetUserData(userData *foundation.NSMutableDictionary[objc.ID, o
 // Kinematic constraints, used in IK solving
 func (o *SKNode) ReachConstraints() *SKReachConstraints {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelReachConstraints)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKReachConstraintsFromID(_ret)
 }
 
@@ -486,7 +520,9 @@ func (o *SKNode) SetReachConstraints(reachConstraints *SKReachConstraints) {
 // Optional array of SKConstraints Constraints are evaluated each frame after actions and physics. The node's transform will be changed to satisfy the constraint.
 func (o *SKNode) Constraints() *foundation.NSArray[*SKConstraint] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelConstraints)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SKConstraint](_ret)
 }
 
@@ -522,7 +558,9 @@ func (o *SKNode) SetAccessibilityElement(accessibilityElement bool) {
 
 func (o *SKNode) AccessibilityRole() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelAccessibilityRole)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -532,7 +570,9 @@ func (o *SKNode) SetAccessibilityRole(accessibilityRole *foundation.NSString) {
 
 func (o *SKNode) AccessibilityRoleDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelAccessibilityRoleDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -542,7 +582,9 @@ func (o *SKNode) SetAccessibilityRoleDescription(accessibilityRoleDescription *f
 
 func (o *SKNode) AccessibilitySubrole() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelAccessibilitySubrole)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -579,7 +621,9 @@ func (o *SKNode) SetAccessibilityChildren(accessibilityChildren *foundation.NSAr
 
 func (o *SKNode) AccessibilityHelp() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelAccessibilityHelp)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -589,7 +633,9 @@ func (o *SKNode) SetAccessibilityHelp(accessibilityHelp *foundation.NSString) {
 
 func (o *SKNode) AccessibilityLabel() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelAccessibilityLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -605,4 +651,3 @@ func (o *SKNode) IsAccessibilityEnabled() bool {
 func (o *SKNode) SetAccessibilityEnabled(accessibilityEnabled bool) {
 	o.Ptr().Send(_sKNodeSelSetAccessibilityEnabled, accessibilityEnabled)
 }
-

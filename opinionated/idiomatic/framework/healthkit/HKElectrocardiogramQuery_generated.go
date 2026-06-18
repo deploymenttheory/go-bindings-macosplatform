@@ -45,4 +45,3 @@ type ElectrocardiogramQueryable interface {
 }
 
 var _ ElectrocardiogramQueryable = (*ElectrocardiogramQuery)(nil)
-

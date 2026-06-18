@@ -16,7 +16,9 @@ type MTRBasicInformationClusterLeaveEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBasicInformationClusterLeaveEvent].
-func (x *MTRBasicInformationClusterLeaveEvent) Unwrap() *raw.MTRBasicInformationClusterLeaveEvent { return x.inner }
+func (x *MTRBasicInformationClusterLeaveEvent) Unwrap() *raw.MTRBasicInformationClusterLeaveEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -52,7 +54,9 @@ func (x *MTRBasicInformationClusterLeaveEvent) SetFabricIndex(fabricIndex *found
 	x.inner.SetFabricIndex(fabricIndex)
 }
 
-func (x *MTRBasicInformationClusterLeaveEvent) asMTRBasicInformationClusterLeaveEvent() *raw.MTRBasicInformationClusterLeaveEvent { return x.inner }
+func (x *MTRBasicInformationClusterLeaveEvent) asMTRBasicInformationClusterLeaveEvent() *raw.MTRBasicInformationClusterLeaveEvent {
+	return x.inner
+}
 
 // MTRBasicInformationClusterLeaveEventable is the interface implemented by [MTRBasicInformationClusterLeaveEvent], for mocking and DI.
 type MTRBasicInformationClusterLeaveEventable interface {
@@ -63,4 +67,3 @@ type MTRBasicInformationClusterLeaveEventable interface {
 }
 
 var _ MTRBasicInformationClusterLeaveEventable = (*MTRBasicInformationClusterLeaveEvent)(nil)
-

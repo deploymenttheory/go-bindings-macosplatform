@@ -12,4 +12,3 @@ import (
 type MathExpressionProvider interface {
 	asMathExpression() *raw.AXMathExpression
 }
-

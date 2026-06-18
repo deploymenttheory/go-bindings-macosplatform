@@ -16,7 +16,9 @@ type MTRDoorLockClusterSetCredentialParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRDoorLockClusterSetCredentialParams].
-func (x *MTRDoorLockClusterSetCredentialParams) Unwrap() *raw.MTRDoorLockClusterSetCredentialParams { return x.inner }
+func (x *MTRDoorLockClusterSetCredentialParams) Unwrap() *raw.MTRDoorLockClusterSetCredentialParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -198,4 +200,3 @@ type MTRDoorLockClusterSetCredentialParamsable interface {
 }
 
 var _ MTRDoorLockClusterSetCredentialParamsable = (*MTRDoorLockClusterSetCredentialParams)(nil)
-

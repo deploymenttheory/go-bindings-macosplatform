@@ -15,35 +15,35 @@ type NSScanner struct {
 }
 
 var (
-	_clsNSScanner = _objcClass("NSScanner")
-	_nSScannerSelInitWithString = objc.RegisterName("initWithString:")
-	_nSScannerSelString = objc.RegisterName("string")
-	_nSScannerSelScanLocation = objc.RegisterName("scanLocation")
-	_nSScannerSelSetScanLocation = objc.RegisterName("setScanLocation:")
-	_nSScannerSelCharactersToBeSkipped = objc.RegisterName("charactersToBeSkipped")
-	_nSScannerSelSetCharactersToBeSkipped = objc.RegisterName("setCharactersToBeSkipped:")
-	_nSScannerSelCaseSensitive = objc.RegisterName("caseSensitive")
-	_nSScannerSelSetCaseSensitive = objc.RegisterName("setCaseSensitive:")
-	_nSScannerSelLocale = objc.RegisterName("locale")
-	_nSScannerSelSetLocale = objc.RegisterName("setLocale:")
-	_nSScannerSelScanInt = objc.RegisterName("scanInt:")
-	_nSScannerSelScanInteger = objc.RegisterName("scanInteger:")
-	_nSScannerSelScanLongLong = objc.RegisterName("scanLongLong:")
-	_nSScannerSelScanUnsignedLongLong = objc.RegisterName("scanUnsignedLongLong:")
-	_nSScannerSelScanFloat = objc.RegisterName("scanFloat:")
-	_nSScannerSelScanDouble = objc.RegisterName("scanDouble:")
-	_nSScannerSelScanHexInt = objc.RegisterName("scanHexInt:")
-	_nSScannerSelScanHexLongLong = objc.RegisterName("scanHexLongLong:")
-	_nSScannerSelScanHexFloat = objc.RegisterName("scanHexFloat:")
-	_nSScannerSelScanHexDouble = objc.RegisterName("scanHexDouble:")
-	_nSScannerSelScanStringIntoString = objc.RegisterName("scanString:intoString:")
-	_nSScannerSelScanCharactersFromSetIntoString = objc.RegisterName("scanCharactersFromSet:intoString:")
-	_nSScannerSelScanUpToStringIntoString = objc.RegisterName("scanUpToString:intoString:")
+	_clsNSScanner                                    = _objcClass("NSScanner")
+	_nSScannerSelInitWithString                      = objc.RegisterName("initWithString:")
+	_nSScannerSelString                              = objc.RegisterName("string")
+	_nSScannerSelScanLocation                        = objc.RegisterName("scanLocation")
+	_nSScannerSelSetScanLocation                     = objc.RegisterName("setScanLocation:")
+	_nSScannerSelCharactersToBeSkipped               = objc.RegisterName("charactersToBeSkipped")
+	_nSScannerSelSetCharactersToBeSkipped            = objc.RegisterName("setCharactersToBeSkipped:")
+	_nSScannerSelCaseSensitive                       = objc.RegisterName("caseSensitive")
+	_nSScannerSelSetCaseSensitive                    = objc.RegisterName("setCaseSensitive:")
+	_nSScannerSelLocale                              = objc.RegisterName("locale")
+	_nSScannerSelSetLocale                           = objc.RegisterName("setLocale:")
+	_nSScannerSelScanInt                             = objc.RegisterName("scanInt:")
+	_nSScannerSelScanInteger                         = objc.RegisterName("scanInteger:")
+	_nSScannerSelScanLongLong                        = objc.RegisterName("scanLongLong:")
+	_nSScannerSelScanUnsignedLongLong                = objc.RegisterName("scanUnsignedLongLong:")
+	_nSScannerSelScanFloat                           = objc.RegisterName("scanFloat:")
+	_nSScannerSelScanDouble                          = objc.RegisterName("scanDouble:")
+	_nSScannerSelScanHexInt                          = objc.RegisterName("scanHexInt:")
+	_nSScannerSelScanHexLongLong                     = objc.RegisterName("scanHexLongLong:")
+	_nSScannerSelScanHexFloat                        = objc.RegisterName("scanHexFloat:")
+	_nSScannerSelScanHexDouble                       = objc.RegisterName("scanHexDouble:")
+	_nSScannerSelScanStringIntoString                = objc.RegisterName("scanString:intoString:")
+	_nSScannerSelScanCharactersFromSetIntoString     = objc.RegisterName("scanCharactersFromSet:intoString:")
+	_nSScannerSelScanUpToStringIntoString            = objc.RegisterName("scanUpToString:intoString:")
 	_nSScannerSelScanUpToCharactersFromSetIntoString = objc.RegisterName("scanUpToCharactersFromSet:intoString:")
-	_nSScannerSelScannerWithString = objc.RegisterName("scannerWithString:")
-	_nSScannerSelLocalizedScannerWithString = objc.RegisterName("localizedScannerWithString:")
-	_nSScannerSelIsAtEnd = objc.RegisterName("isAtEnd")
-	_nSScannerSelScanDecimal = objc.RegisterName("scanDecimal:")
+	_nSScannerSelScannerWithString                   = objc.RegisterName("scannerWithString:")
+	_nSScannerSelLocalizedScannerWithString          = objc.RegisterName("localizedScannerWithString:")
+	_nSScannerSelIsAtEnd                             = objc.RegisterName("isAtEnd")
+	_nSScannerSelScanDecimal                         = objc.RegisterName("scanDecimal:")
 )
 
 func NSScannerFromID(id objc.ID) *NSScanner {
@@ -58,13 +58,17 @@ func NSScannerFromID(id objc.ID) *NSScanner {
 
 func (o *NSScanner) InitWithString(string_ *NSString) *NSScanner {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScannerSelInitWithString, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScannerFromID(_ret)
 }
 
 func (o *NSScanner) String() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScannerSelString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -79,7 +83,9 @@ func (o *NSScanner) SetScanLocation(scanLocation uint) {
 
 func (o *NSScanner) CharactersToBeSkipped() *NSCharacterSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScannerSelCharactersToBeSkipped)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCharacterSetFromID(_ret)
 }
 
@@ -177,7 +183,9 @@ func (o *NSScanner) ScanUpToCharactersFromSetIntoString(set *NSCharacterSet, res
 
 func NSScannerScannerWithString(string_ *NSString) *NSScanner {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSScanner), _nSScannerSelScannerWithString, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScannerFromID(_ret)
 }
 
@@ -195,4 +203,3 @@ func (o *NSScanner) ScanDecimal(dcm *NSDecimal) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSScannerSelScanDecimal, dcm)
 	return _ret
 }
-

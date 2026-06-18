@@ -17,18 +17,18 @@ type VTLowLatencySuperResolutionScalerConfiguration struct {
 }
 
 var (
-	_clsVTLowLatencySuperResolutionScalerConfiguration = _objcClass("VTLowLatencySuperResolutionScalerConfiguration")
-	_vTLowLatencySuperResolutionScalerConfigurationSelInitWithFrameWidthFrameHeightScaleFactor = objc.RegisterName("initWithFrameWidth:frameHeight:scaleFactor:")
+	_clsVTLowLatencySuperResolutionScalerConfiguration                                              = _objcClass("VTLowLatencySuperResolutionScalerConfiguration")
+	_vTLowLatencySuperResolutionScalerConfigurationSelInitWithFrameWidthFrameHeightScaleFactor      = objc.RegisterName("initWithFrameWidth:frameHeight:scaleFactor:")
 	_vTLowLatencySuperResolutionScalerConfigurationSelSupportedScaleFactorsForFrameWidthFrameHeight = objc.RegisterName("supportedScaleFactorsForFrameWidth:frameHeight:")
-	_vTLowLatencySuperResolutionScalerConfigurationSelFrameWidth = objc.RegisterName("frameWidth")
-	_vTLowLatencySuperResolutionScalerConfigurationSelFrameHeight = objc.RegisterName("frameHeight")
-	_vTLowLatencySuperResolutionScalerConfigurationSelFrameSupportedPixelFormats = objc.RegisterName("frameSupportedPixelFormats")
-	_vTLowLatencySuperResolutionScalerConfigurationSelSourcePixelBufferAttributes = objc.RegisterName("sourcePixelBufferAttributes")
-	_vTLowLatencySuperResolutionScalerConfigurationSelDestinationPixelBufferAttributes = objc.RegisterName("destinationPixelBufferAttributes")
-	_vTLowLatencySuperResolutionScalerConfigurationSelScaleFactor = objc.RegisterName("scaleFactor")
-	_vTLowLatencySuperResolutionScalerConfigurationSelMaximumDimensions = objc.RegisterName("maximumDimensions")
-	_vTLowLatencySuperResolutionScalerConfigurationSelMinimumDimensions = objc.RegisterName("minimumDimensions")
-	_vTLowLatencySuperResolutionScalerConfigurationSelIsSupported = objc.RegisterName("isSupported")
+	_vTLowLatencySuperResolutionScalerConfigurationSelFrameWidth                                    = objc.RegisterName("frameWidth")
+	_vTLowLatencySuperResolutionScalerConfigurationSelFrameHeight                                   = objc.RegisterName("frameHeight")
+	_vTLowLatencySuperResolutionScalerConfigurationSelFrameSupportedPixelFormats                    = objc.RegisterName("frameSupportedPixelFormats")
+	_vTLowLatencySuperResolutionScalerConfigurationSelSourcePixelBufferAttributes                   = objc.RegisterName("sourcePixelBufferAttributes")
+	_vTLowLatencySuperResolutionScalerConfigurationSelDestinationPixelBufferAttributes              = objc.RegisterName("destinationPixelBufferAttributes")
+	_vTLowLatencySuperResolutionScalerConfigurationSelScaleFactor                                   = objc.RegisterName("scaleFactor")
+	_vTLowLatencySuperResolutionScalerConfigurationSelMaximumDimensions                             = objc.RegisterName("maximumDimensions")
+	_vTLowLatencySuperResolutionScalerConfigurationSelMinimumDimensions                             = objc.RegisterName("minimumDimensions")
+	_vTLowLatencySuperResolutionScalerConfigurationSelIsSupported                                   = objc.RegisterName("isSupported")
 )
 
 func VTLowLatencySuperResolutionScalerConfigurationFromID(id objc.ID) *VTLowLatencySuperResolutionScalerConfiguration {
@@ -41,10 +41,12 @@ func VTLowLatencySuperResolutionScalerConfigurationFromID(id objc.ID) *VTLowLate
 	return o
 }
 
-// Creates a new low-latency super-resolution scaler configuration with specified frame width and height. - Parameters: - frameWidth: Width of source frame in pixels. - frameHeight: Height of source frame in pixels. - scaleFactor: The scale factor to apply. This must be a supported value that ``supportedScaleFactorsForFrameWidth:frameHeight:`` returns.
+// Creates a new low-latency super-resolution scaler configuration with specified frame width and height. - Parameters: - frameWidth: Width of source frame in pixels. - frameHeight: Height of source frame in pixels. - scaleFactor: The scale factor to apply. This must be a supported value that “supportedScaleFactorsForFrameWidth:frameHeight:“ returns.
 func (o *VTLowLatencySuperResolutionScalerConfiguration) InitWithFrameWidthFrameHeightScaleFactor(frameWidth int, frameHeight int, scaleFactor float32) *VTLowLatencySuperResolutionScalerConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTLowLatencySuperResolutionScalerConfigurationSelInitWithFrameWidthFrameHeightScaleFactor, frameWidth, frameHeight, scaleFactor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VTLowLatencySuperResolutionScalerConfigurationFromID(_ret)
 }
 
@@ -72,13 +74,13 @@ func (o *VTLowLatencySuperResolutionScalerConfiguration) FrameSupportedPixelForm
 	return _ret
 }
 
-// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use ``CVPixelBufferCreateResolvedAttributesDictionary`` to combine this dictionary with your pixel buffer attributes dictionary.
+// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (o *VTLowLatencySuperResolutionScalerConfiguration) SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _vTLowLatencySuperResolutionScalerConfigurationSelSourcePixelBufferAttributes)
 	return _ret
 }
 
-// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use ``CVPixelBufferCreateResolvedAttributesDictionary`` to combine this dictionary with your pixel buffer attributes dictionary.
+// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (o *VTLowLatencySuperResolutionScalerConfiguration) DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _vTLowLatencySuperResolutionScalerConfigurationSelDestinationPixelBufferAttributes)
 	return _ret
@@ -107,4 +109,3 @@ func VTLowLatencySuperResolutionScalerConfigurationIsSupported() bool {
 	_ret := objc.Send[bool](objc.ID(_clsVTLowLatencySuperResolutionScalerConfiguration), _vTLowLatencySuperResolutionScalerConfigurationSelIsSupported)
 	return _ret
 }
-

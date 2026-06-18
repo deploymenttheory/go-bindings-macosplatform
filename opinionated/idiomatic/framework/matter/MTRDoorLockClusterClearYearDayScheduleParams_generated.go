@@ -16,7 +16,9 @@ type MTRDoorLockClusterClearYearDayScheduleParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRDoorLockClusterClearYearDayScheduleParams].
-func (x *MTRDoorLockClusterClearYearDayScheduleParams) Unwrap() *raw.MTRDoorLockClusterClearYearDayScheduleParams { return x.inner }
+func (x *MTRDoorLockClusterClearYearDayScheduleParams) Unwrap() *raw.MTRDoorLockClusterClearYearDayScheduleParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -118,4 +120,3 @@ type MTRDoorLockClusterClearYearDayScheduleParamsable interface {
 }
 
 var _ MTRDoorLockClusterClearYearDayScheduleParamsable = (*MTRDoorLockClusterClearYearDayScheduleParams)(nil)
-

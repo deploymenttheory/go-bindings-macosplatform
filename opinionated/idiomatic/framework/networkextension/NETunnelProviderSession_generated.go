@@ -52,7 +52,9 @@ func (x *NETunnelProviderSession) SendProviderMessageReturnErrorResponseHandler(
 	return x.inner.SendProviderMessageReturnErrorResponseHandler(messageData, error_, responseHandler)
 }
 
-func (x *NETunnelProviderSession) asNEVPNConnection() *raw.NEVPNConnection { return &x.inner.NEVPNConnection }
+func (x *NETunnelProviderSession) asNEVPNConnection() *raw.NEVPNConnection {
+	return &x.inner.NEVPNConnection
+}
 
 // NETunnelProviderSessionable is the interface implemented by [NETunnelProviderSession], for mocking and DI.
 type NETunnelProviderSessionable interface {
@@ -63,4 +65,3 @@ type NETunnelProviderSessionable interface {
 }
 
 var _ NETunnelProviderSessionable = (*NETunnelProviderSession)(nil)
-

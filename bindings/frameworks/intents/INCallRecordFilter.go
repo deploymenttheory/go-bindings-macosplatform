@@ -16,11 +16,11 @@ type INCallRecordFilter struct {
 }
 
 var (
-	_clsINCallRecordFilter = _objcClass("INCallRecordFilter")
+	_clsINCallRecordFilter                                            = _objcClass("INCallRecordFilter")
 	_iNCallRecordFilterSelInitWithParticipantsCallTypesCallCapability = objc.RegisterName("initWithParticipants:callTypes:callCapability:")
-	_iNCallRecordFilterSelParticipants = objc.RegisterName("participants")
-	_iNCallRecordFilterSelCallTypes = objc.RegisterName("callTypes")
-	_iNCallRecordFilterSelCallCapability = objc.RegisterName("callCapability")
+	_iNCallRecordFilterSelParticipants                                = objc.RegisterName("participants")
+	_iNCallRecordFilterSelCallTypes                                   = objc.RegisterName("callTypes")
+	_iNCallRecordFilterSelCallCapability                              = objc.RegisterName("callCapability")
 )
 
 func INCallRecordFilterFromID(id objc.ID) *INCallRecordFilter {
@@ -35,13 +35,17 @@ func INCallRecordFilterFromID(id objc.ID) *INCallRecordFilter {
 
 func (o *INCallRecordFilter) InitWithParticipantsCallTypesCallCapability(participants *foundation.NSArray[*INPerson], callTypes INCallRecordTypeOptions, callCapability INCallCapability) *INCallRecordFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNCallRecordFilterSelInitWithParticipantsCallTypesCallCapability, participants.Ptr(), callTypes, callCapability)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INCallRecordFilterFromID(_ret)
 }
 
 func (o *INCallRecordFilter) Participants() *foundation.NSArray[*INPerson] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNCallRecordFilterSelParticipants)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*INPerson](_ret)
 }
 
@@ -54,4 +58,3 @@ func (o *INCallRecordFilter) CallCapability() INCallCapability {
 	_ret := objc.Send[INCallCapability](o.Ptr(), _iNCallRecordFilterSelCallCapability)
 	return _ret
 }
-

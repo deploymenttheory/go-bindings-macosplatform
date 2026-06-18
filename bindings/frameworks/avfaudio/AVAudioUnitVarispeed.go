@@ -15,8 +15,8 @@ type AVAudioUnitVarispeed struct {
 }
 
 var (
-	_clsAVAudioUnitVarispeed = _objcClass("AVAudioUnitVarispeed")
-	_aVAudioUnitVarispeedSelRate = objc.RegisterName("rate")
+	_clsAVAudioUnitVarispeed        = _objcClass("AVAudioUnitVarispeed")
+	_aVAudioUnitVarispeedSelRate    = objc.RegisterName("rate")
 	_aVAudioUnitVarispeedSelSetRate = objc.RegisterName("setRate:")
 )
 
@@ -38,4 +38,3 @@ func (o *AVAudioUnitVarispeed) Rate() float32 {
 func (o *AVAudioUnitVarispeed) SetRate(rate float32) {
 	o.Ptr().Send(_aVAudioUnitVarispeedSelSetRate, rate)
 }
-

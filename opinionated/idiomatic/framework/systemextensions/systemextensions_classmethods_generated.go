@@ -53,4 +53,3 @@ func SharedWorkspace() *SystemExtensionsWorkspace {
 	}
 	return &SystemExtensionsWorkspace{inner: _r}
 }
-

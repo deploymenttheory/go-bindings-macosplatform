@@ -17,45 +17,45 @@ type NSUserDefaults struct {
 }
 
 var (
-	_clsNSUserDefaults = _objcClass("NSUserDefaults")
-	_nSUserDefaultsSelResetStandardUserDefaults = objc.RegisterName("resetStandardUserDefaults")
-	_nSUserDefaultsSelInit = objc.RegisterName("init")
-	_nSUserDefaultsSelInitWithSuiteName = objc.RegisterName("initWithSuiteName:")
-	_nSUserDefaultsSelInitWithUser = objc.RegisterName("initWithUser:")
-	_nSUserDefaultsSelObjectForKey = objc.RegisterName("objectForKey:")
-	_nSUserDefaultsSelSetObjectForKey = objc.RegisterName("setObject:forKey:")
-	_nSUserDefaultsSelRemoveObjectForKey = objc.RegisterName("removeObjectForKey:")
-	_nSUserDefaultsSelStringForKey = objc.RegisterName("stringForKey:")
-	_nSUserDefaultsSelArrayForKey = objc.RegisterName("arrayForKey:")
-	_nSUserDefaultsSelDictionaryForKey = objc.RegisterName("dictionaryForKey:")
-	_nSUserDefaultsSelDataForKey = objc.RegisterName("dataForKey:")
-	_nSUserDefaultsSelStringArrayForKey = objc.RegisterName("stringArrayForKey:")
-	_nSUserDefaultsSelIntegerForKey = objc.RegisterName("integerForKey:")
-	_nSUserDefaultsSelFloatForKey = objc.RegisterName("floatForKey:")
-	_nSUserDefaultsSelDoubleForKey = objc.RegisterName("doubleForKey:")
-	_nSUserDefaultsSelBoolForKey = objc.RegisterName("boolForKey:")
-	_nSUserDefaultsSelURLForKey = objc.RegisterName("URLForKey:")
-	_nSUserDefaultsSelSetIntegerForKey = objc.RegisterName("setInteger:forKey:")
-	_nSUserDefaultsSelSetFloatForKey = objc.RegisterName("setFloat:forKey:")
-	_nSUserDefaultsSelSetDoubleForKey = objc.RegisterName("setDouble:forKey:")
-	_nSUserDefaultsSelSetBoolForKey = objc.RegisterName("setBool:forKey:")
-	_nSUserDefaultsSelSetURLForKey = objc.RegisterName("setURL:forKey:")
-	_nSUserDefaultsSelRegisterDefaults = objc.RegisterName("registerDefaults:")
-	_nSUserDefaultsSelAddSuiteNamed = objc.RegisterName("addSuiteNamed:")
-	_nSUserDefaultsSelRemoveSuiteNamed = objc.RegisterName("removeSuiteNamed:")
-	_nSUserDefaultsSelDictionaryRepresentation = objc.RegisterName("dictionaryRepresentation")
-	_nSUserDefaultsSelVolatileDomainForName = objc.RegisterName("volatileDomainForName:")
-	_nSUserDefaultsSelSetVolatileDomainForName = objc.RegisterName("setVolatileDomain:forName:")
-	_nSUserDefaultsSelRemoveVolatileDomainForName = objc.RegisterName("removeVolatileDomainForName:")
-	_nSUserDefaultsSelPersistentDomainNames = objc.RegisterName("persistentDomainNames")
-	_nSUserDefaultsSelPersistentDomainForName = objc.RegisterName("persistentDomainForName:")
-	_nSUserDefaultsSelSetPersistentDomainForName = objc.RegisterName("setPersistentDomain:forName:")
+	_clsNSUserDefaults                              = _objcClass("NSUserDefaults")
+	_nSUserDefaultsSelResetStandardUserDefaults     = objc.RegisterName("resetStandardUserDefaults")
+	_nSUserDefaultsSelInit                          = objc.RegisterName("init")
+	_nSUserDefaultsSelInitWithSuiteName             = objc.RegisterName("initWithSuiteName:")
+	_nSUserDefaultsSelInitWithUser                  = objc.RegisterName("initWithUser:")
+	_nSUserDefaultsSelObjectForKey                  = objc.RegisterName("objectForKey:")
+	_nSUserDefaultsSelSetObjectForKey               = objc.RegisterName("setObject:forKey:")
+	_nSUserDefaultsSelRemoveObjectForKey            = objc.RegisterName("removeObjectForKey:")
+	_nSUserDefaultsSelStringForKey                  = objc.RegisterName("stringForKey:")
+	_nSUserDefaultsSelArrayForKey                   = objc.RegisterName("arrayForKey:")
+	_nSUserDefaultsSelDictionaryForKey              = objc.RegisterName("dictionaryForKey:")
+	_nSUserDefaultsSelDataForKey                    = objc.RegisterName("dataForKey:")
+	_nSUserDefaultsSelStringArrayForKey             = objc.RegisterName("stringArrayForKey:")
+	_nSUserDefaultsSelIntegerForKey                 = objc.RegisterName("integerForKey:")
+	_nSUserDefaultsSelFloatForKey                   = objc.RegisterName("floatForKey:")
+	_nSUserDefaultsSelDoubleForKey                  = objc.RegisterName("doubleForKey:")
+	_nSUserDefaultsSelBoolForKey                    = objc.RegisterName("boolForKey:")
+	_nSUserDefaultsSelURLForKey                     = objc.RegisterName("URLForKey:")
+	_nSUserDefaultsSelSetIntegerForKey              = objc.RegisterName("setInteger:forKey:")
+	_nSUserDefaultsSelSetFloatForKey                = objc.RegisterName("setFloat:forKey:")
+	_nSUserDefaultsSelSetDoubleForKey               = objc.RegisterName("setDouble:forKey:")
+	_nSUserDefaultsSelSetBoolForKey                 = objc.RegisterName("setBool:forKey:")
+	_nSUserDefaultsSelSetURLForKey                  = objc.RegisterName("setURL:forKey:")
+	_nSUserDefaultsSelRegisterDefaults              = objc.RegisterName("registerDefaults:")
+	_nSUserDefaultsSelAddSuiteNamed                 = objc.RegisterName("addSuiteNamed:")
+	_nSUserDefaultsSelRemoveSuiteNamed              = objc.RegisterName("removeSuiteNamed:")
+	_nSUserDefaultsSelDictionaryRepresentation      = objc.RegisterName("dictionaryRepresentation")
+	_nSUserDefaultsSelVolatileDomainForName         = objc.RegisterName("volatileDomainForName:")
+	_nSUserDefaultsSelSetVolatileDomainForName      = objc.RegisterName("setVolatileDomain:forName:")
+	_nSUserDefaultsSelRemoveVolatileDomainForName   = objc.RegisterName("removeVolatileDomainForName:")
+	_nSUserDefaultsSelPersistentDomainNames         = objc.RegisterName("persistentDomainNames")
+	_nSUserDefaultsSelPersistentDomainForName       = objc.RegisterName("persistentDomainForName:")
+	_nSUserDefaultsSelSetPersistentDomainForName    = objc.RegisterName("setPersistentDomain:forName:")
 	_nSUserDefaultsSelRemovePersistentDomainForName = objc.RegisterName("removePersistentDomainForName:")
-	_nSUserDefaultsSelSynchronize = objc.RegisterName("synchronize")
-	_nSUserDefaultsSelObjectIsForcedForKey = objc.RegisterName("objectIsForcedForKey:")
-	_nSUserDefaultsSelObjectIsForcedForKeyInDomain = objc.RegisterName("objectIsForcedForKey:inDomain:")
-	_nSUserDefaultsSelStandardUserDefaults = objc.RegisterName("standardUserDefaults")
-	_nSUserDefaultsSelVolatileDomainNames = objc.RegisterName("volatileDomainNames")
+	_nSUserDefaultsSelSynchronize                   = objc.RegisterName("synchronize")
+	_nSUserDefaultsSelObjectIsForcedForKey          = objc.RegisterName("objectIsForcedForKey:")
+	_nSUserDefaultsSelObjectIsForcedForKeyInDomain  = objc.RegisterName("objectIsForcedForKey:inDomain:")
+	_nSUserDefaultsSelStandardUserDefaults          = objc.RegisterName("standardUserDefaults")
+	_nSUserDefaultsSelVolatileDomainNames           = objc.RegisterName("volatileDomainNames")
 )
 
 func NSUserDefaultsFromID(id objc.ID) *NSUserDefaults {
@@ -76,14 +76,18 @@ func NSUserDefaultsResetStandardUserDefaults() {
 // -init is equivalent to -initWithSuiteName:nil
 func (o *NSUserDefaults) Init() *NSUserDefaults {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserDefaultsSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUserDefaultsFromID(_ret)
 }
 
 // -initWithSuiteName: initializes an instance of NSUserDefaults that searches the shared preferences search list for the domain 'suitename'. For example, using the identifier of an application group will cause the receiver to search the preferences for that group. Passing the current application's bundle identifier, NSGlobalDomain, or the corresponding CFPreferences constants is an error. Passing nil will search the default search list.
 func (o *NSUserDefaults) InitWithSuiteName(suitename *NSString) *NSUserDefaults {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserDefaultsSelInitWithSuiteName, suitename.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUserDefaultsFromID(_ret)
 }
 
@@ -113,7 +117,9 @@ func (o *NSUserDefaults) RemoveObjectForKey(defaultName *NSString) {
 // -stringForKey: is equivalent to -objectForKey:, except that it will convert NSNumber values to their NSString representation. If a non-string non-number value is found, nil will be returned.
 func (o *NSUserDefaults) StringForKey(defaultName *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserDefaultsSelStringForKey, defaultName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -132,14 +138,18 @@ func (o *NSUserDefaults) DictionaryForKey(defaultName *NSString) *NSDictionary[*
 // -dataForKey: is equivalent to -objectForKey:, except that it will return nil if the value is not an NSData.
 func (o *NSUserDefaults) DataForKey(defaultName *NSString) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserDefaultsSelDataForKey, defaultName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
 // -stringForKey: is equivalent to -objectForKey:, except that it will return nil if the value is not an NSArray<NSString *>. Note that unlike -stringForKey:, NSNumbers are not converted to NSStrings.
 func (o *NSUserDefaults) StringArrayForKey(defaultName *NSString) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserDefaultsSelStringArrayForKey, defaultName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -170,7 +180,9 @@ func (o *NSUserDefaults) BoolForKey(defaultName *NSString) bool {
 // -URLForKey: is equivalent to -objectForKey: except that it converts the returned value to an NSURL. If the value is an NSString path, then it will construct a file URL to that path. If the value is an archived URL from -setURL:forKey: it will be unarchived. If the value is absent or can't be converted to an NSURL, nil will be returned.
 func (o *NSUserDefaults) URLForKey(defaultName *NSString) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserDefaultsSelURLForKey, defaultName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
@@ -276,13 +288,16 @@ func (o *NSUserDefaults) ObjectIsForcedForKeyInDomain(key *NSString, domain *NSS
 // +standardUserDefaults returns a global instance of NSUserDefaults configured to search the current application's search list.
 func NSUserDefaultsStandardUserDefaults() *NSUserDefaults {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUserDefaults), _nSUserDefaultsSelStandardUserDefaults)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUserDefaultsFromID(_ret)
 }
 
 func (o *NSUserDefaults) VolatileDomainNames() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserDefaultsSelVolatileDomainNames)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
-

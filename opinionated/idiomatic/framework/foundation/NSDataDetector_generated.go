@@ -53,7 +53,9 @@ func (x *DataDetector) CheckingTypes() uint64 {
 	return x.inner.CheckingTypes()
 }
 
-func (x *DataDetector) asRegularExpression() *raw.NSRegularExpression { return &x.inner.NSRegularExpression }
+func (x *DataDetector) asRegularExpression() *raw.NSRegularExpression {
+	return &x.inner.NSRegularExpression
+}
 
 func (x *DataDetector) asObject() *raw.NSObject { return &x.inner.NSRegularExpression.NSObject }
 
@@ -65,4 +67,3 @@ type DataDetectorable interface {
 }
 
 var _ DataDetectorable = (*DataDetector)(nil)
-

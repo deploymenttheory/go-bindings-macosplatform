@@ -14,8 +14,8 @@ import (
 
 var (
 	_coreaudiotypesLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce          sync.Once
+	_failedSymbols     = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -48,7 +48,9 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("AudioChannelLayoutTag_GetNumberOfChannels", func() { purego.RegisterLibFunc(&_fnAudioChannelLayoutTag_GetNumberOfChannels, _coreaudiotypesLib, "AudioChannelLayoutTag_GetNumberOfChannels") })
+	_register("AudioChannelLayoutTag_GetNumberOfChannels", func() {
+		purego.RegisterLibFunc(&_fnAudioChannelLayoutTag_GetNumberOfChannels, _coreaudiotypesLib, "AudioChannelLayoutTag_GetNumberOfChannels")
+	})
 }
 
 func init() {

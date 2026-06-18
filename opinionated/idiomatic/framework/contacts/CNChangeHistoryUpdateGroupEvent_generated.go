@@ -44,7 +44,9 @@ func (x *ChangeHistoryUpdateGroupEvent) Group() *Group {
 	return &Group{inner: _r}
 }
 
-func (x *ChangeHistoryUpdateGroupEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent { return &x.inner.CNChangeHistoryEvent }
+func (x *ChangeHistoryUpdateGroupEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent {
+	return &x.inner.CNChangeHistoryEvent
+}
 
 // ChangeHistoryUpdateGroupEventable is the interface implemented by [ChangeHistoryUpdateGroupEvent], for mocking and DI.
 type ChangeHistoryUpdateGroupEventable interface {
@@ -53,4 +55,3 @@ type ChangeHistoryUpdateGroupEventable interface {
 }
 
 var _ ChangeHistoryUpdateGroupEventable = (*ChangeHistoryUpdateGroupEvent)(nil)
-

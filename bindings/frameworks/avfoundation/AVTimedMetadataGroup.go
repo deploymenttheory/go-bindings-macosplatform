@@ -19,11 +19,11 @@ type AVTimedMetadataGroup struct {
 }
 
 var (
-	_clsAVTimedMetadataGroup = _objcClass("AVTimedMetadataGroup")
+	_clsAVTimedMetadataGroup                       = _objcClass("AVTimedMetadataGroup")
 	_aVTimedMetadataGroupSelInitWithItemsTimeRange = objc.RegisterName("initWithItems:timeRange:")
-	_aVTimedMetadataGroupSelInitWithSampleBuffer = objc.RegisterName("initWithSampleBuffer:")
-	_aVTimedMetadataGroupSelTimeRange = objc.RegisterName("timeRange")
-	_aVTimedMetadataGroupSelCopyFormatDescription = objc.RegisterName("copyFormatDescription")
+	_aVTimedMetadataGroupSelInitWithSampleBuffer   = objc.RegisterName("initWithSampleBuffer:")
+	_aVTimedMetadataGroupSelTimeRange              = objc.RegisterName("timeRange")
+	_aVTimedMetadataGroupSelCopyFormatDescription  = objc.RegisterName("copyFormatDescription")
 )
 
 func AVTimedMetadataGroupFromID(id objc.ID) *AVTimedMetadataGroup {
@@ -39,14 +39,18 @@ func AVTimedMetadataGroupFromID(id objc.ID) *AVTimedMetadataGroup {
 // @method		initWithItems:timeRange: @abstract	Initializes an instance of AVTimedMetadataGroup with a collection of metadata items. @param		items An NSArray of AVMetadataItems. @param		timeRange The timeRange of the collection of AVMetadataItems. @result		An instance of AVTimedMetadataGroup.
 func (o *AVTimedMetadataGroup) InitWithItemsTimeRange(items *foundation.NSArray[*AVMetadataItem], timeRange coremedia.CMTimeRange) *AVTimedMetadataGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVTimedMetadataGroupSelInitWithItemsTimeRange, items.Ptr(), timeRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVTimedMetadataGroupFromID(_ret)
 }
 
 // @method		initWithSampleBuffer: @abstract	Initializes an instance of AVTimedMetadataGroup with a sample buffer. @param		sampleBuffer A CMSampleBuffer with media type kCMMediaType_Metadata. @result		An instance of AVTimedMetadataGroup.
 func (o *AVTimedMetadataGroup) InitWithSampleBuffer(sampleBuffer unsafe.Pointer) *AVTimedMetadataGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVTimedMetadataGroupSelInitWithSampleBuffer, sampleBuffer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVTimedMetadataGroupFromID(_ret)
 }
 
@@ -60,4 +64,3 @@ func (o *AVTimedMetadataGroup) CopyFormatDescription() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVTimedMetadataGroupSelCopyFormatDescription)
 	return _ret
 }
-

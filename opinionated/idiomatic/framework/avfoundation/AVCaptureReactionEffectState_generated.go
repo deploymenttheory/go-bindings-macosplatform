@@ -65,4 +65,3 @@ type CaptureReactionEffectStateable interface {
 }
 
 var _ CaptureReactionEffectStateable = (*CaptureReactionEffectState)(nil)
-

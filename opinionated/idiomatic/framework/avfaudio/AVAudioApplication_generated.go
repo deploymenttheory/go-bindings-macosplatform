@@ -65,4 +65,3 @@ type AudioApplicationable interface {
 }
 
 var _ AudioApplicationable = (*AudioApplication)(nil)
-

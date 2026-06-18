@@ -15,7 +15,7 @@ type NSSymbolAutomaticContentTransition struct {
 }
 
 var (
-	_clsNSSymbolAutomaticContentTransition = _objcClass("NSSymbolAutomaticContentTransition")
+	_clsNSSymbolAutomaticContentTransition           = _objcClass("NSSymbolAutomaticContentTransition")
 	_nSSymbolAutomaticContentTransitionSelTransition = objc.RegisterName("transition")
 )
 
@@ -32,7 +32,8 @@ func NSSymbolAutomaticContentTransitionFromID(id objc.ID) *NSSymbolAutomaticCont
 // The default automatic transition, determined by the system.
 func NSSymbolAutomaticContentTransitionTransition() *NSSymbolAutomaticContentTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolAutomaticContentTransition), _nSSymbolAutomaticContentTransitionSelTransition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolAutomaticContentTransitionFromID(_ret)
 }
-

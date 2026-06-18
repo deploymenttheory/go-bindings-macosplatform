@@ -172,11 +172,17 @@ func (x *DOMHTMLMapElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.i
 
 func (x *DOMHTMLMapElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
 
-func (x *DOMHTMLMapElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTMLElement.DOMElement.DOMNode }
+func (x *DOMHTMLMapElement) asDOMNode() *raw.DOMNode {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode
+}
 
-func (x *DOMHTMLMapElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
+func (x *DOMHTMLMapElement) asDOMObject() *raw.DOMObject {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject
+}
 
-func (x *DOMHTMLMapElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+func (x *DOMHTMLMapElement) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject
+}
 
 // DOMHTMLMapElementable is the interface implemented by [DOMHTMLMapElement], for mocking and DI.
 type DOMHTMLMapElementable interface {
@@ -205,4 +211,3 @@ type DOMHTMLMapElementable interface {
 }
 
 var _ DOMHTMLMapElementable = (*DOMHTMLMapElement)(nil)
-

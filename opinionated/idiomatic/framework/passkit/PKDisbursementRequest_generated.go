@@ -58,7 +58,9 @@ func (x *DisbursementRequest) WithSupportedNetworks(items ...*foundation.NSStrin
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -80,7 +82,9 @@ func (x *DisbursementRequest) WithSummaryItems(items ...PaymentSummaryItemProvid
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asPaymentSummaryItem().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asPaymentSummaryItem().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.PKPaymentSummaryItem](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -102,7 +106,9 @@ func (x *DisbursementRequest) WithRequiredRecipientContactFields(items ...*found
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -124,7 +130,9 @@ func (x *DisbursementRequest) WithSupportedRegions(items ...*foundation.NSString
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -334,4 +342,3 @@ type DisbursementRequestable interface {
 }
 
 var _ DisbursementRequestable = (*DisbursementRequest)(nil)
-

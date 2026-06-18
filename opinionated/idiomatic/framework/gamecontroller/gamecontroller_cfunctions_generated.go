@@ -89,4 +89,3 @@ func NSDataFromGCMicroGamepadSnapshotData(snapshotData *raw.GCMicroGamepadSnapsh
 func NSStringFromGCPoint2(point raw.GCPoint2) *foundation.NSString {
 	return raw.NSStringFromGCPoint2(point)
 }
-

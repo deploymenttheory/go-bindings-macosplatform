@@ -56,4 +56,3 @@ type EraseSetupPanelable interface {
 }
 
 var _ EraseSetupPanelable = (*EraseSetupPanel)(nil)
-

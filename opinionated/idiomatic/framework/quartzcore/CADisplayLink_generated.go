@@ -116,4 +116,3 @@ type DisplayLinkable interface {
 }
 
 var _ DisplayLinkable = (*DisplayLink)(nil)
-

@@ -175,4 +175,3 @@ func (e LARightState) String() string {
 		return fmt.Sprintf("LARightState(%d)", int64(e))
 	}
 }
-

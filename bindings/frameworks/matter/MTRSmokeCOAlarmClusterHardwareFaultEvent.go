@@ -26,4 +26,3 @@ func MTRSmokeCOAlarmClusterHardwareFaultEventFromID(id objc.ID) *MTRSmokeCOAlarm
 	purego.Track(o)
 	return o
 }
-

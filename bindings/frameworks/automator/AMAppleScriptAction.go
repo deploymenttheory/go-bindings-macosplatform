@@ -16,8 +16,8 @@ type AMAppleScriptAction struct {
 }
 
 var (
-	_clsAMAppleScriptAction = _objcClass("AMAppleScriptAction")
-	_aMAppleScriptActionSelScript = objc.RegisterName("script")
+	_clsAMAppleScriptAction          = _objcClass("AMAppleScriptAction")
+	_aMAppleScriptActionSelScript    = objc.RegisterName("script")
 	_aMAppleScriptActionSelSetScript = objc.RegisterName("setScript:")
 )
 
@@ -33,11 +33,12 @@ func AMAppleScriptActionFromID(id objc.ID) *AMAppleScriptAction {
 
 func (o *AMAppleScriptAction) Script() *osakit.OSAScript {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aMAppleScriptActionSelScript)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return osakit.OSAScriptFromID(_ret)
 }
 
 func (o *AMAppleScriptAction) SetScript(script *osakit.OSAScript) {
 	o.Ptr().Send(_aMAppleScriptActionSelSetScript, script.Ptr())
 }
-

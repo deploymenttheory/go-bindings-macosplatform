@@ -57,7 +57,9 @@ func (x *ColorPickerTouchBarItem) WithAllowedColorSpaces(items ...*raw.NSColorSp
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSColorSpace](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -191,7 +193,9 @@ func (x *ColorPickerTouchBarItem) SetEnabled(enabled bool) {
 	x.inner.SetEnabled(enabled)
 }
 
-func (x *ColorPickerTouchBarItem) asTouchBarItem() *raw.NSTouchBarItem { return &x.inner.NSTouchBarItem }
+func (x *ColorPickerTouchBarItem) asTouchBarItem() *raw.NSTouchBarItem {
+	return &x.inner.NSTouchBarItem
+}
 
 // ColorPickerTouchBarItemable is the interface implemented by [ColorPickerTouchBarItem], for mocking and DI.
 type ColorPickerTouchBarItemable interface {
@@ -223,4 +227,3 @@ type ColorPickerTouchBarItemable interface {
 }
 
 var _ ColorPickerTouchBarItemable = (*ColorPickerTouchBarItem)(nil)
-

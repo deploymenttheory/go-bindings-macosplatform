@@ -16,19 +16,19 @@ type MTRClusterDescriptor struct {
 }
 
 var (
-	_clsMTRClusterDescriptor = _objcClass("MTRClusterDescriptor")
-	_mTRClusterDescriptorSelReadAttributeDeviceTypeListWithParams = objc.RegisterName("readAttributeDeviceTypeListWithParams:")
-	_mTRClusterDescriptorSelReadAttributeServerListWithParams = objc.RegisterName("readAttributeServerListWithParams:")
-	_mTRClusterDescriptorSelReadAttributeClientListWithParams = objc.RegisterName("readAttributeClientListWithParams:")
-	_mTRClusterDescriptorSelReadAttributePartsListWithParams = objc.RegisterName("readAttributePartsListWithParams:")
+	_clsMTRClusterDescriptor                                            = _objcClass("MTRClusterDescriptor")
+	_mTRClusterDescriptorSelReadAttributeDeviceTypeListWithParams       = objc.RegisterName("readAttributeDeviceTypeListWithParams:")
+	_mTRClusterDescriptorSelReadAttributeServerListWithParams           = objc.RegisterName("readAttributeServerListWithParams:")
+	_mTRClusterDescriptorSelReadAttributeClientListWithParams           = objc.RegisterName("readAttributeClientListWithParams:")
+	_mTRClusterDescriptorSelReadAttributePartsListWithParams            = objc.RegisterName("readAttributePartsListWithParams:")
 	_mTRClusterDescriptorSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterDescriptorSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterDescriptorSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterDescriptorSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterDescriptorSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterDescriptorSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterDescriptorSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
-	_mTRClusterDescriptorSelReadAttributeDeviceListWithParams = objc.RegisterName("readAttributeDeviceListWithParams:")
+	_mTRClusterDescriptorSelReadAttributeAcceptedCommandListWithParams  = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterDescriptorSelReadAttributeAttributeListWithParams        = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterDescriptorSelReadAttributeFeatureMapWithParams           = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterDescriptorSelReadAttributeClusterRevisionWithParams      = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterDescriptorSelInitWithDeviceEndpointIDQueue               = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterDescriptorSelInitWithDeviceEndpointQueue                 = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterDescriptorSelReadAttributeDeviceListWithParams           = objc.RegisterName("readAttributeDeviceListWithParams:")
 )
 
 func MTRClusterDescriptorFromID(id objc.ID) *MTRClusterDescriptor {
@@ -89,13 +89,17 @@ func (o *MTRClusterDescriptor) ReadAttributeClusterRevisionWithParams(params *MT
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func (o *MTRClusterDescriptor) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterDescriptorSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterDescriptorFromID(_ret)
 }
 
 func (o *MTRClusterDescriptor) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterDescriptorSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterDescriptorFromID(_ret)
 }
 
@@ -103,4 +107,3 @@ func (o *MTRClusterDescriptor) ReadAttributeDeviceListWithParams(params *MTRRead
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterDescriptorSelReadAttributeDeviceListWithParams, params.Ptr())
 	return _ret
 }
-

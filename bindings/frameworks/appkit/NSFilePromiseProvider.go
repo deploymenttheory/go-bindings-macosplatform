@@ -16,15 +16,15 @@ type NSFilePromiseProvider struct {
 }
 
 var (
-	_clsNSFilePromiseProvider = _objcClass("NSFilePromiseProvider")
+	_clsNSFilePromiseProvider                         = _objcClass("NSFilePromiseProvider")
 	_nSFilePromiseProviderSelInitWithFileTypeDelegate = objc.RegisterName("initWithFileType:delegate:")
-	_nSFilePromiseProviderSelInit = objc.RegisterName("init")
-	_nSFilePromiseProviderSelFileType = objc.RegisterName("fileType")
-	_nSFilePromiseProviderSelSetFileType = objc.RegisterName("setFileType:")
-	_nSFilePromiseProviderSelDelegate = objc.RegisterName("delegate")
-	_nSFilePromiseProviderSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSFilePromiseProviderSelUserInfo = objc.RegisterName("userInfo")
-	_nSFilePromiseProviderSelSetUserInfo = objc.RegisterName("setUserInfo:")
+	_nSFilePromiseProviderSelInit                     = objc.RegisterName("init")
+	_nSFilePromiseProviderSelFileType                 = objc.RegisterName("fileType")
+	_nSFilePromiseProviderSelSetFileType              = objc.RegisterName("setFileType:")
+	_nSFilePromiseProviderSelDelegate                 = objc.RegisterName("delegate")
+	_nSFilePromiseProviderSelSetDelegate              = objc.RegisterName("setDelegate:")
+	_nSFilePromiseProviderSelUserInfo                 = objc.RegisterName("userInfo")
+	_nSFilePromiseProviderSelSetUserInfo              = objc.RegisterName("setUserInfo:")
 )
 
 func NSFilePromiseProviderFromID(id objc.ID) *NSFilePromiseProvider {
@@ -39,19 +39,25 @@ func NSFilePromiseProviderFromID(id objc.ID) *NSFilePromiseProvider {
 
 func (o *NSFilePromiseProvider) InitWithFileTypeDelegate(fileType *foundation.NSString, delegate NSFilePromiseProviderDelegate) *NSFilePromiseProvider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFilePromiseProviderSelInitWithFileTypeDelegate, fileType.Ptr(), delegate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFilePromiseProviderFromID(_ret)
 }
 
 func (o *NSFilePromiseProvider) Init() *NSFilePromiseProvider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFilePromiseProviderSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFilePromiseProviderFromID(_ret)
 }
 
 func (o *NSFilePromiseProvider) FileType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFilePromiseProviderSelFileType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -76,4 +82,3 @@ func (o *NSFilePromiseProvider) UserInfo() objc.ID {
 func (o *NSFilePromiseProvider) SetUserInfo(userInfo objc.ID) {
 	o.Ptr().Send(_nSFilePromiseProviderSelSetUserInfo, userInfo)
 }
-

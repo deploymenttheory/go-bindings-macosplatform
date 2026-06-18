@@ -16,20 +16,20 @@ type VTFrameRateConversionConfiguration struct {
 }
 
 var (
-	_clsVTFrameRateConversionConfiguration = _objcClass("VTFrameRateConversionConfiguration")
+	_clsVTFrameRateConversionConfiguration                                                                             = _objcClass("VTFrameRateConversionConfiguration")
 	_vTFrameRateConversionConfigurationSelInitWithFrameWidthFrameHeightUsePrecomputedFlowQualityPrioritizationRevision = objc.RegisterName("initWithFrameWidth:frameHeight:usePrecomputedFlow:qualityPrioritization:revision:")
-	_vTFrameRateConversionConfigurationSelFrameWidth = objc.RegisterName("frameWidth")
-	_vTFrameRateConversionConfigurationSelFrameHeight = objc.RegisterName("frameHeight")
-	_vTFrameRateConversionConfigurationSelUsePrecomputedFlow = objc.RegisterName("usePrecomputedFlow")
-	_vTFrameRateConversionConfigurationSelQualityPrioritization = objc.RegisterName("qualityPrioritization")
-	_vTFrameRateConversionConfigurationSelRevision = objc.RegisterName("revision")
-	_vTFrameRateConversionConfigurationSelSupportedRevisions = objc.RegisterName("supportedRevisions")
-	_vTFrameRateConversionConfigurationSelDefaultRevision = objc.RegisterName("defaultRevision")
-	_vTFrameRateConversionConfigurationSelFrameSupportedPixelFormats = objc.RegisterName("frameSupportedPixelFormats")
-	_vTFrameRateConversionConfigurationSelSourcePixelBufferAttributes = objc.RegisterName("sourcePixelBufferAttributes")
-	_vTFrameRateConversionConfigurationSelDestinationPixelBufferAttributes = objc.RegisterName("destinationPixelBufferAttributes")
-	_vTFrameRateConversionConfigurationSelIsSupported = objc.RegisterName("isSupported")
-	_vTFrameRateConversionConfigurationSelProcessorSupported = objc.RegisterName("processorSupported")
+	_vTFrameRateConversionConfigurationSelFrameWidth                                                                   = objc.RegisterName("frameWidth")
+	_vTFrameRateConversionConfigurationSelFrameHeight                                                                  = objc.RegisterName("frameHeight")
+	_vTFrameRateConversionConfigurationSelUsePrecomputedFlow                                                           = objc.RegisterName("usePrecomputedFlow")
+	_vTFrameRateConversionConfigurationSelQualityPrioritization                                                        = objc.RegisterName("qualityPrioritization")
+	_vTFrameRateConversionConfigurationSelRevision                                                                     = objc.RegisterName("revision")
+	_vTFrameRateConversionConfigurationSelSupportedRevisions                                                           = objc.RegisterName("supportedRevisions")
+	_vTFrameRateConversionConfigurationSelDefaultRevision                                                              = objc.RegisterName("defaultRevision")
+	_vTFrameRateConversionConfigurationSelFrameSupportedPixelFormats                                                   = objc.RegisterName("frameSupportedPixelFormats")
+	_vTFrameRateConversionConfigurationSelSourcePixelBufferAttributes                                                  = objc.RegisterName("sourcePixelBufferAttributes")
+	_vTFrameRateConversionConfigurationSelDestinationPixelBufferAttributes                                             = objc.RegisterName("destinationPixelBufferAttributes")
+	_vTFrameRateConversionConfigurationSelIsSupported                                                                  = objc.RegisterName("isSupported")
+	_vTFrameRateConversionConfigurationSelProcessorSupported                                                           = objc.RegisterName("processorSupported")
 )
 
 func VTFrameRateConversionConfigurationFromID(id objc.ID) *VTFrameRateConversionConfiguration {
@@ -42,10 +42,12 @@ func VTFrameRateConversionConfigurationFromID(id objc.ID) *VTFrameRateConversion
 	return o
 }
 
-// Creates a new frame-rate conversion configuration. Returns `nil` if dimensions are out of range or revision is unsupported. - Parameters: - frameWidth: Width of source frame in pixels; the maximum value is 8192 for macOS, and 4096 for iOS. - frameHeight: Height of source frame in pixels; the maximum value is 4320 for macOS, and 2160 for iOS. - usePrecomputedFlow: A Boolean value that indicates whether you are providing Optical Flow. If false, optical flow is computed on the fly. - qualityPrioritization: A level you use to prioritize quality or performance; for more information about supported levels, see ``VTFrameRateConversionConfigurationQualityPrioritization``. - revision: The specific algorithm or configuration revision you use to perform the request.
+// Creates a new frame-rate conversion configuration. Returns `nil` if dimensions are out of range or revision is unsupported. - Parameters: - frameWidth: Width of source frame in pixels; the maximum value is 8192 for macOS, and 4096 for iOS. - frameHeight: Height of source frame in pixels; the maximum value is 4320 for macOS, and 2160 for iOS. - usePrecomputedFlow: A Boolean value that indicates whether you are providing Optical Flow. If false, optical flow is computed on the fly. - qualityPrioritization: A level you use to prioritize quality or performance; for more information about supported levels, see “VTFrameRateConversionConfigurationQualityPrioritization“. - revision: The specific algorithm or configuration revision you use to perform the request.
 func (o *VTFrameRateConversionConfiguration) InitWithFrameWidthFrameHeightUsePrecomputedFlowQualityPrioritizationRevision(frameWidth int, frameHeight int, usePrecomputedFlow bool, qualityPrioritization VTFrameRateConversionConfigurationQualityPrioritization, revision VTFrameRateConversionConfigurationRevision) *VTFrameRateConversionConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTFrameRateConversionConfigurationSelInitWithFrameWidthFrameHeightUsePrecomputedFlowQualityPrioritizationRevision, frameWidth, frameHeight, usePrecomputedFlow, qualityPrioritization, revision)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VTFrameRateConversionConfigurationFromID(_ret)
 }
 
@@ -67,7 +69,7 @@ func (o *VTFrameRateConversionConfiguration) UsePrecomputedFlow() bool {
 	return _ret
 }
 
-// A parameter you use to control quality and performance levels. For more information about supported levels, see ``VTFrameRateConversionConfigurationQualityPrioritization``.
+// A parameter you use to control quality and performance levels. For more information about supported levels, see “VTFrameRateConversionConfigurationQualityPrioritization“.
 func (o *VTFrameRateConversionConfiguration) QualityPrioritization() VTFrameRateConversionConfigurationQualityPrioritization {
 	_ret := objc.Send[VTFrameRateConversionConfigurationQualityPrioritization](o.Ptr(), _vTFrameRateConversionConfigurationSelQualityPrioritization)
 	return _ret
@@ -82,7 +84,9 @@ func (o *VTFrameRateConversionConfiguration) Revision() VTFrameRateConversionCon
 // Provides the collection of currently supported algorithms or configuration revisions for the class of configuration. A property you use to introspect at runtime which revisions are available for each configuration.
 func VTFrameRateConversionConfigurationSupportedRevisions() *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVTFrameRateConversionConfiguration), _vTFrameRateConversionConfigurationSelSupportedRevisions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
@@ -98,13 +102,13 @@ func (o *VTFrameRateConversionConfiguration) FrameSupportedPixelFormats() *found
 	return _ret
 }
 
-// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use ``CVPixelBufferCreateResolvedAttributesDictionary`` to combine this dictionary with your pixel buffer attributes dictionary.
+// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (o *VTFrameRateConversionConfiguration) SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _vTFrameRateConversionConfigurationSelSourcePixelBufferAttributes)
 	return _ret
 }
 
-// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use ``CVPixelBufferCreateResolvedAttributesDictionary`` to combine this dictionary with your pixel buffer attributes dictionary.
+// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (o *VTFrameRateConversionConfiguration) DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _vTFrameRateConversionConfigurationSelDestinationPixelBufferAttributes)
 	return _ret
@@ -121,4 +125,3 @@ func VTFrameRateConversionConfigurationProcessorSupported() uint8 {
 	_ret := objc.Send[uint8](objc.ID(_clsVTFrameRateConversionConfiguration), _vTFrameRateConversionConfigurationSelProcessorSupported)
 	return _ret
 }
-

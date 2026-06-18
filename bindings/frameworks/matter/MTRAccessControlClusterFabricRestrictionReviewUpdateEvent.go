@@ -16,12 +16,12 @@ type MTRAccessControlClusterFabricRestrictionReviewUpdateEvent struct {
 }
 
 var (
-	_clsMTRAccessControlClusterFabricRestrictionReviewUpdateEvent = _objcClass("MTRAccessControlClusterFabricRestrictionReviewUpdateEvent")
-	_mTRAccessControlClusterFabricRestrictionReviewUpdateEventSelToken = objc.RegisterName("token")
-	_mTRAccessControlClusterFabricRestrictionReviewUpdateEventSelSetToken = objc.RegisterName("setToken:")
-	_mTRAccessControlClusterFabricRestrictionReviewUpdateEventSelInstruction = objc.RegisterName("instruction")
+	_clsMTRAccessControlClusterFabricRestrictionReviewUpdateEvent               = _objcClass("MTRAccessControlClusterFabricRestrictionReviewUpdateEvent")
+	_mTRAccessControlClusterFabricRestrictionReviewUpdateEventSelToken          = objc.RegisterName("token")
+	_mTRAccessControlClusterFabricRestrictionReviewUpdateEventSelSetToken       = objc.RegisterName("setToken:")
+	_mTRAccessControlClusterFabricRestrictionReviewUpdateEventSelInstruction    = objc.RegisterName("instruction")
 	_mTRAccessControlClusterFabricRestrictionReviewUpdateEventSelSetInstruction = objc.RegisterName("setInstruction:")
-	_mTRAccessControlClusterFabricRestrictionReviewUpdateEventSelFabricIndex = objc.RegisterName("fabricIndex")
+	_mTRAccessControlClusterFabricRestrictionReviewUpdateEventSelFabricIndex    = objc.RegisterName("fabricIndex")
 	_mTRAccessControlClusterFabricRestrictionReviewUpdateEventSelSetFabricIndex = objc.RegisterName("setFabricIndex:")
 )
 
@@ -37,7 +37,9 @@ func MTRAccessControlClusterFabricRestrictionReviewUpdateEventFromID(id objc.ID)
 
 func (o *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) Token() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAccessControlClusterFabricRestrictionReviewUpdateEventSelToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) SetToken(tok
 
 func (o *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) Instruction() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAccessControlClusterFabricRestrictionReviewUpdateEventSelInstruction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) SetInstructi
 
 func (o *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) FabricIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAccessControlClusterFabricRestrictionReviewUpdateEventSelFabricIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) SetFabricIndex(fabricIndex *foundation.NSNumber) {
 	o.Ptr().Send(_mTRAccessControlClusterFabricRestrictionReviewUpdateEventSelSetFabricIndex, fabricIndex.Ptr())
 }
-

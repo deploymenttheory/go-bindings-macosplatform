@@ -26,4 +26,3 @@ func SFSafariExtensionHandlerFromID(id objc.ID) *SFSafariExtensionHandler {
 	purego.Track(o)
 	return o
 }
-

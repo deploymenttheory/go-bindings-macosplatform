@@ -15,7 +15,9 @@ type CallRecordTypeOptionsResolutionResult struct {
 }
 
 // Unwrap returns the underlying [raw.INCallRecordTypeOptionsResolutionResult].
-func (x *CallRecordTypeOptionsResolutionResult) Unwrap() *raw.INCallRecordTypeOptionsResolutionResult { return x.inner }
+func (x *CallRecordTypeOptionsResolutionResult) Unwrap() *raw.INCallRecordTypeOptionsResolutionResult {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -35,7 +37,9 @@ func NewCallRecordTypeOptionsResolutionResult() *CallRecordTypeOptionsResolution
 	return &CallRecordTypeOptionsResolutionResult{inner: raw.INCallRecordTypeOptionsResolutionResultFromID(_id)}
 }
 
-func (x *CallRecordTypeOptionsResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
+func (x *CallRecordTypeOptionsResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
+	return &x.inner.INIntentResolutionResult
+}
 
 // CallRecordTypeOptionsResolutionResultable is the interface implemented by [CallRecordTypeOptionsResolutionResult], for mocking and DI.
 type CallRecordTypeOptionsResolutionResultable interface {
@@ -43,4 +47,3 @@ type CallRecordTypeOptionsResolutionResultable interface {
 }
 
 var _ CallRecordTypeOptionsResolutionResultable = (*CallRecordTypeOptionsResolutionResult)(nil)
-

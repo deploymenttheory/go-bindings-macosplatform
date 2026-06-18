@@ -11,9 +11,9 @@ import (
 type CGLCPContextPriorityRequest int64
 
 const (
-	KCGLCPContextPriorityRequestHigh CGLCPContextPriorityRequest = 0
+	KCGLCPContextPriorityRequestHigh   CGLCPContextPriorityRequest = 0
 	KCGLCPContextPriorityRequestNormal CGLCPContextPriorityRequest = 1
-	KCGLCPContextPriorityRequestLow CGLCPContextPriorityRequest = 2
+	KCGLCPContextPriorityRequestLow    CGLCPContextPriorityRequest = 2
 )
 
 func (e CGLCPContextPriorityRequest) String() string {
@@ -32,10 +32,10 @@ func (e CGLCPContextPriorityRequest) String() string {
 type EvCmd int64
 
 const (
-	EVNOP EvCmd = 0
-	EVHIDE EvCmd = 1
-	EVSHOW EvCmd = 2
-	EVMOVE EvCmd = 3
+	EVNOP   EvCmd = 0
+	EVHIDE  EvCmd = 1
+	EVSHOW  EvCmd = 2
+	EVMOVE  EvCmd = 3
 	EVLEVEL EvCmd = 4
 )
 
@@ -60,7 +60,7 @@ func (e EvCmd) String() string {
 type MDLabelDomain int64
 
 const (
-	KMDLabelUserDomain MDLabelDomain = 0
+	KMDLabelUserDomain  MDLabelDomain = 0
 	KMDLabelLocalDomain MDLabelDomain = 1
 )
 
@@ -78,8 +78,8 @@ func (e MDLabelDomain) String() string {
 type MDQueryOptionFlags int64
 
 const (
-	KMDQuerySynchronous MDQueryOptionFlags = 1
-	KMDQueryWantsUpdates MDQueryOptionFlags = 4
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
 	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
 )
 
@@ -115,8 +115,8 @@ func (e MDQuerySortOptionFlags) String() string {
 type NXMouseButton int64
 
 const (
-	NX_OneButton NXMouseButton = 0
-	NX_LeftButton NXMouseButton = 1
+	NX_OneButton   NXMouseButton = 0
+	NX_LeftButton  NXMouseButton = 1
 	NX_RightButton NXMouseButton = 2
 )
 
@@ -136,8 +136,8 @@ func (e NXMouseButton) String() string {
 type PKAddIdentityDocumentType int64
 
 const (
-	PKAddIdentityDocumentTypeIDCard PKAddIdentityDocumentType = 0
-	PKAddIdentityDocumentTypeMDL PKAddIdentityDocumentType = 1
+	PKAddIdentityDocumentTypeIDCard  PKAddIdentityDocumentType = 0
+	PKAddIdentityDocumentTypeMDL     PKAddIdentityDocumentType = 1
 	PKAddIdentityDocumentTypePhotoID PKAddIdentityDocumentType = 2
 )
 
@@ -157,8 +157,8 @@ func (e PKAddIdentityDocumentType) String() string {
 type PKAddPaymentPassError int64
 
 const (
-	PKAddPaymentPassErrorUnsupported PKAddPaymentPassError = 0
-	PKAddPaymentPassErrorUserCancelled PKAddPaymentPassError = 1
+	PKAddPaymentPassErrorUnsupported     PKAddPaymentPassError = 0
+	PKAddPaymentPassErrorUserCancelled   PKAddPaymentPassError = 1
 	PKAddPaymentPassErrorSystemCancelled PKAddPaymentPassError = 2
 )
 
@@ -179,7 +179,7 @@ type PKAddPaymentPassStyle int64
 
 const (
 	PKAddPaymentPassStylePayment PKAddPaymentPassStyle = 0
-	PKAddPaymentPassStyleAccess PKAddPaymentPassStyle = 1
+	PKAddPaymentPassStyleAccess  PKAddPaymentPassStyle = 1
 )
 
 func (e PKAddPaymentPassStyle) String() string {
@@ -196,13 +196,13 @@ func (e PKAddPaymentPassStyle) String() string {
 type PKAddSecureElementPassErrorCode int64
 
 const (
-	PKAddSecureElementPassGenericError PKAddSecureElementPassErrorCode = 0
-	PKAddSecureElementPassUnknownError PKAddSecureElementPassErrorCode = 0
-	PKAddSecureElementPassUserCanceledError PKAddSecureElementPassErrorCode = 1
-	PKAddSecureElementPassUnavailableError PKAddSecureElementPassErrorCode = 2
-	PKAddSecureElementPassInvalidConfigurationError PKAddSecureElementPassErrorCode = 3
-	PKAddSecureElementPassDeviceNotSupportedError PKAddSecureElementPassErrorCode = 4
-	PKAddSecureElementPassDeviceNotReadyError PKAddSecureElementPassErrorCode = 5
+	PKAddSecureElementPassGenericError               PKAddSecureElementPassErrorCode = 0
+	PKAddSecureElementPassUnknownError               PKAddSecureElementPassErrorCode = 0
+	PKAddSecureElementPassUserCanceledError          PKAddSecureElementPassErrorCode = 1
+	PKAddSecureElementPassUnavailableError           PKAddSecureElementPassErrorCode = 2
+	PKAddSecureElementPassInvalidConfigurationError  PKAddSecureElementPassErrorCode = 3
+	PKAddSecureElementPassDeviceNotSupportedError    PKAddSecureElementPassErrorCode = 4
+	PKAddSecureElementPassDeviceNotReadyError        PKAddSecureElementPassErrorCode = 5
 	PKAddSecureElementPassOSVersionNotSupportedError PKAddSecureElementPassErrorCode = 6
 )
 
@@ -230,7 +230,7 @@ func (e PKAddSecureElementPassErrorCode) String() string {
 type PKAddShareablePassConfigurationPrimaryAction uint64
 
 const (
-	PKAddShareablePassConfigurationPrimaryActionAdd PKAddShareablePassConfigurationPrimaryAction = 0
+	PKAddShareablePassConfigurationPrimaryActionAdd   PKAddShareablePassConfigurationPrimaryAction = 0
 	PKAddShareablePassConfigurationPrimaryActionShare PKAddShareablePassConfigurationPrimaryAction = 1
 )
 
@@ -248,30 +248,42 @@ func (e PKAddShareablePassConfigurationPrimaryAction) String() string {
 type PKAddressField uint64
 
 const (
-	PKAddressFieldNone PKAddressField = 0
+	PKAddressFieldNone          PKAddressField = 0
 	PKAddressFieldPostalAddress PKAddressField = 1
-	PKAddressFieldPhone PKAddressField = 2
-	PKAddressFieldEmail PKAddressField = 4
-	PKAddressFieldName PKAddressField = 8
-	PKAddressFieldAll PKAddressField = 15
+	PKAddressFieldPhone         PKAddressField = 2
+	PKAddressFieldEmail         PKAddressField = 4
+	PKAddressFieldName          PKAddressField = 8
+	PKAddressFieldAll           PKAddressField = 15
 )
 
 func (e PKAddressField) String() string {
 	var parts []string
-	if e&PKAddressFieldPostalAddress != 0 { parts = append(parts, "PKAddressFieldPostalAddress") }
-	if e&PKAddressFieldPhone != 0 { parts = append(parts, "PKAddressFieldPhone") }
-	if e&PKAddressFieldEmail != 0 { parts = append(parts, "PKAddressFieldEmail") }
-	if e&PKAddressFieldName != 0 { parts = append(parts, "PKAddressFieldName") }
-	if e&PKAddressFieldAll != 0 { parts = append(parts, "PKAddressFieldAll") }
-	if len(parts) == 0 { return "0" }
+	if e&PKAddressFieldPostalAddress != 0 {
+		parts = append(parts, "PKAddressFieldPostalAddress")
+	}
+	if e&PKAddressFieldPhone != 0 {
+		parts = append(parts, "PKAddressFieldPhone")
+	}
+	if e&PKAddressFieldEmail != 0 {
+		parts = append(parts, "PKAddressFieldEmail")
+	}
+	if e&PKAddressFieldName != 0 {
+		parts = append(parts, "PKAddressFieldName")
+	}
+	if e&PKAddressFieldAll != 0 {
+		parts = append(parts, "PKAddressFieldAll")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type PKApplePayLaterAvailability int64
 
 const (
-	PKApplePayLaterAvailable PKApplePayLaterAvailability = 0
-	PKApplePayLaterUnavailableItemIneligible PKApplePayLaterAvailability = 1
+	PKApplePayLaterAvailable                       PKApplePayLaterAvailability = 0
+	PKApplePayLaterUnavailableItemIneligible       PKApplePayLaterAvailability = 1
 	PKApplePayLaterUnavailableRecurringTransaction PKApplePayLaterAvailability = 2
 )
 
@@ -291,11 +303,11 @@ func (e PKApplePayLaterAvailability) String() string {
 type PKAutomaticPassPresentationSuppressionResult uint64
 
 const (
-	PKAutomaticPassPresentationSuppressionResultNotSupported PKAutomaticPassPresentationSuppressionResult = 0
+	PKAutomaticPassPresentationSuppressionResultNotSupported      PKAutomaticPassPresentationSuppressionResult = 0
 	PKAutomaticPassPresentationSuppressionResultAlreadyPresenting PKAutomaticPassPresentationSuppressionResult = 1
-	PKAutomaticPassPresentationSuppressionResultDenied PKAutomaticPassPresentationSuppressionResult = 2
-	PKAutomaticPassPresentationSuppressionResultCancelled PKAutomaticPassPresentationSuppressionResult = 3
-	PKAutomaticPassPresentationSuppressionResultSuccess PKAutomaticPassPresentationSuppressionResult = 4
+	PKAutomaticPassPresentationSuppressionResultDenied            PKAutomaticPassPresentationSuppressionResult = 2
+	PKAutomaticPassPresentationSuppressionResultCancelled         PKAutomaticPassPresentationSuppressionResult = 3
+	PKAutomaticPassPresentationSuppressionResultSuccess           PKAutomaticPassPresentationSuppressionResult = 4
 )
 
 func (e PKAutomaticPassPresentationSuppressionResult) String() string {
@@ -318,7 +330,7 @@ func (e PKAutomaticPassPresentationSuppressionResult) String() string {
 type PKBarcodeEventConfigurationDataType int64
 
 const (
-	PKBarcodeEventConfigurationDataTypeUnknown PKBarcodeEventConfigurationDataType = 0
+	PKBarcodeEventConfigurationDataTypeUnknown            PKBarcodeEventConfigurationDataType = 0
 	PKBarcodeEventConfigurationDataTypeSigningKeyMaterial PKBarcodeEventConfigurationDataType = 1
 	PKBarcodeEventConfigurationDataTypeSigningCertificate PKBarcodeEventConfigurationDataType = 2
 )
@@ -339,8 +351,8 @@ func (e PKBarcodeEventConfigurationDataType) String() string {
 type PKDisbursementErrorCode int64
 
 const (
-	PKDisbursementUnknownError PKDisbursementErrorCode = -1
-	PKDisbursementUnsupportedCardError PKDisbursementErrorCode = 1
+	PKDisbursementUnknownError                 PKDisbursementErrorCode = -1
+	PKDisbursementUnsupportedCardError         PKDisbursementErrorCode = 1
 	PKDisbursementRecipientContactInvalidError PKDisbursementErrorCode = 2
 )
 
@@ -360,32 +372,44 @@ func (e PKDisbursementErrorCode) String() string {
 type PKMerchantCapability uint64
 
 const (
-	PKMerchantCapability3DS PKMerchantCapability = 1
-	PKMerchantCapabilityEMV PKMerchantCapability = 2
-	PKMerchantCapabilityCredit PKMerchantCapability = 4
-	PKMerchantCapabilityDebit PKMerchantCapability = 8
+	PKMerchantCapability3DS             PKMerchantCapability = 1
+	PKMerchantCapabilityEMV             PKMerchantCapability = 2
+	PKMerchantCapabilityCredit          PKMerchantCapability = 4
+	PKMerchantCapabilityDebit           PKMerchantCapability = 8
 	PKMerchantCapabilityInstantFundsOut PKMerchantCapability = 128
 )
 
 func (e PKMerchantCapability) String() string {
 	var parts []string
-	if e&PKMerchantCapability3DS != 0 { parts = append(parts, "PKMerchantCapability3DS") }
-	if e&PKMerchantCapabilityEMV != 0 { parts = append(parts, "PKMerchantCapabilityEMV") }
-	if e&PKMerchantCapabilityCredit != 0 { parts = append(parts, "PKMerchantCapabilityCredit") }
-	if e&PKMerchantCapabilityDebit != 0 { parts = append(parts, "PKMerchantCapabilityDebit") }
-	if e&PKMerchantCapabilityInstantFundsOut != 0 { parts = append(parts, "PKMerchantCapabilityInstantFundsOut") }
-	if len(parts) == 0 { return "0" }
+	if e&PKMerchantCapability3DS != 0 {
+		parts = append(parts, "PKMerchantCapability3DS")
+	}
+	if e&PKMerchantCapabilityEMV != 0 {
+		parts = append(parts, "PKMerchantCapabilityEMV")
+	}
+	if e&PKMerchantCapabilityCredit != 0 {
+		parts = append(parts, "PKMerchantCapabilityCredit")
+	}
+	if e&PKMerchantCapabilityDebit != 0 {
+		parts = append(parts, "PKMerchantCapabilityDebit")
+	}
+	if e&PKMerchantCapabilityInstantFundsOut != 0 {
+		parts = append(parts, "PKMerchantCapabilityInstantFundsOut")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type PKPassKitErrorCode int64
 
 const (
-	PKUnknownError PKPassKitErrorCode = -1
-	PKInvalidDataError PKPassKitErrorCode = 1
+	PKUnknownError            PKPassKitErrorCode = -1
+	PKInvalidDataError        PKPassKitErrorCode = 1
 	PKUnsupportedVersionError PKPassKitErrorCode = 2
-	PKInvalidSignature PKPassKitErrorCode = 3
-	PKNotEntitledError PKPassKitErrorCode = 4
+	PKInvalidSignature        PKPassKitErrorCode = 3
+	PKNotEntitledError        PKPassKitErrorCode = 4
 )
 
 func (e PKPassKitErrorCode) String() string {
@@ -408,7 +432,7 @@ func (e PKPassKitErrorCode) String() string {
 type PKPassLibraryAddPassesStatus int64
 
 const (
-	PKPassLibraryDidAddPasses PKPassLibraryAddPassesStatus = 0
+	PKPassLibraryDidAddPasses       PKPassLibraryAddPassesStatus = 0
 	PKPassLibraryShouldReviewPasses PKPassLibraryAddPassesStatus = 1
 	PKPassLibraryDidCancelAddPasses PKPassLibraryAddPassesStatus = 2
 )
@@ -430,9 +454,9 @@ type PKPassLibraryAuthorizationStatus int64
 
 const (
 	PKPassLibraryAuthorizationStatusNotDetermined PKPassLibraryAuthorizationStatus = -1
-	PKPassLibraryAuthorizationStatusDenied PKPassLibraryAuthorizationStatus = 0
-	PKPassLibraryAuthorizationStatusAuthorized PKPassLibraryAuthorizationStatus = 1
-	PKPassLibraryAuthorizationStatusRestricted PKPassLibraryAuthorizationStatus = 2
+	PKPassLibraryAuthorizationStatusDenied        PKPassLibraryAuthorizationStatus = 0
+	PKPassLibraryAuthorizationStatusAuthorized    PKPassLibraryAuthorizationStatus = 1
+	PKPassLibraryAuthorizationStatusRestricted    PKPassLibraryAuthorizationStatus = 2
 )
 
 func (e PKPassLibraryAuthorizationStatus) String() string {
@@ -468,10 +492,10 @@ func (e PKPassLibraryCapability) String() string {
 type PKPassType uint64
 
 const (
-	PKPassTypeBarcode PKPassType = 0
+	PKPassTypeBarcode       PKPassType = 0
 	PKPassTypeSecureElement PKPassType = 1
-	PKPassTypePayment PKPassType = 1
-	PKPassTypeAny PKPassType = 18446744073709551615
+	PKPassTypePayment       PKPassType = 1
+	PKPassTypeAny           PKPassType = 18446744073709551615
 )
 
 func (e PKPassType) String() string {
@@ -490,14 +514,14 @@ func (e PKPassType) String() string {
 type PKPaymentAuthorizationStatus int64
 
 const (
-	PKPaymentAuthorizationStatusSuccess PKPaymentAuthorizationStatus = 0
-	PKPaymentAuthorizationStatusFailure PKPaymentAuthorizationStatus = 1
-	PKPaymentAuthorizationStatusInvalidBillingPostalAddress PKPaymentAuthorizationStatus = 2
+	PKPaymentAuthorizationStatusSuccess                      PKPaymentAuthorizationStatus = 0
+	PKPaymentAuthorizationStatusFailure                      PKPaymentAuthorizationStatus = 1
+	PKPaymentAuthorizationStatusInvalidBillingPostalAddress  PKPaymentAuthorizationStatus = 2
 	PKPaymentAuthorizationStatusInvalidShippingPostalAddress PKPaymentAuthorizationStatus = 3
-	PKPaymentAuthorizationStatusInvalidShippingContact PKPaymentAuthorizationStatus = 4
-	PKPaymentAuthorizationStatusPINRequired PKPaymentAuthorizationStatus = 5
-	PKPaymentAuthorizationStatusPINIncorrect PKPaymentAuthorizationStatus = 6
-	PKPaymentAuthorizationStatusPINLockout PKPaymentAuthorizationStatus = 7
+	PKPaymentAuthorizationStatusInvalidShippingContact       PKPaymentAuthorizationStatus = 4
+	PKPaymentAuthorizationStatusPINRequired                  PKPaymentAuthorizationStatus = 5
+	PKPaymentAuthorizationStatusPINIncorrect                 PKPaymentAuthorizationStatus = 6
+	PKPaymentAuthorizationStatusPINLockout                   PKPaymentAuthorizationStatus = 7
 )
 
 func (e PKPaymentAuthorizationStatus) String() string {
@@ -526,10 +550,10 @@ func (e PKPaymentAuthorizationStatus) String() string {
 type PKPaymentButtonStyle int64
 
 const (
-	PKPaymentButtonStyleWhite PKPaymentButtonStyle = 0
+	PKPaymentButtonStyleWhite        PKPaymentButtonStyle = 0
 	PKPaymentButtonStyleWhiteOutline PKPaymentButtonStyle = 1
-	PKPaymentButtonStyleBlack PKPaymentButtonStyle = 2
-	PKPaymentButtonStyleAutomatic PKPaymentButtonStyle = 3
+	PKPaymentButtonStyleBlack        PKPaymentButtonStyle = 2
+	PKPaymentButtonStyleAutomatic    PKPaymentButtonStyle = 3
 )
 
 func (e PKPaymentButtonStyle) String() string {
@@ -550,23 +574,23 @@ func (e PKPaymentButtonStyle) String() string {
 type PKPaymentButtonType int64
 
 const (
-	PKPaymentButtonTypePlain PKPaymentButtonType = 0
-	PKPaymentButtonTypeBuy PKPaymentButtonType = 1
-	PKPaymentButtonTypeSetUp PKPaymentButtonType = 2
-	PKPaymentButtonTypeInStore PKPaymentButtonType = 3
-	PKPaymentButtonTypeDonate PKPaymentButtonType = 4
-	PKPaymentButtonTypeCheckout PKPaymentButtonType = 5
-	PKPaymentButtonTypeBook PKPaymentButtonType = 6
-	PKPaymentButtonTypeSubscribe PKPaymentButtonType = 7
-	PKPaymentButtonTypeReload PKPaymentButtonType = 8
-	PKPaymentButtonTypeAddMoney PKPaymentButtonType = 9
-	PKPaymentButtonTypeTopUp PKPaymentButtonType = 10
-	PKPaymentButtonTypeOrder PKPaymentButtonType = 11
-	PKPaymentButtonTypeRent PKPaymentButtonType = 12
-	PKPaymentButtonTypeSupport PKPaymentButtonType = 13
+	PKPaymentButtonTypePlain      PKPaymentButtonType = 0
+	PKPaymentButtonTypeBuy        PKPaymentButtonType = 1
+	PKPaymentButtonTypeSetUp      PKPaymentButtonType = 2
+	PKPaymentButtonTypeInStore    PKPaymentButtonType = 3
+	PKPaymentButtonTypeDonate     PKPaymentButtonType = 4
+	PKPaymentButtonTypeCheckout   PKPaymentButtonType = 5
+	PKPaymentButtonTypeBook       PKPaymentButtonType = 6
+	PKPaymentButtonTypeSubscribe  PKPaymentButtonType = 7
+	PKPaymentButtonTypeReload     PKPaymentButtonType = 8
+	PKPaymentButtonTypeAddMoney   PKPaymentButtonType = 9
+	PKPaymentButtonTypeTopUp      PKPaymentButtonType = 10
+	PKPaymentButtonTypeOrder      PKPaymentButtonType = 11
+	PKPaymentButtonTypeRent       PKPaymentButtonType = 12
+	PKPaymentButtonTypeSupport    PKPaymentButtonType = 13
 	PKPaymentButtonTypeContribute PKPaymentButtonType = 14
-	PKPaymentButtonTypeTip PKPaymentButtonType = 15
-	PKPaymentButtonTypeContinue PKPaymentButtonType = 16
+	PKPaymentButtonTypeTip        PKPaymentButtonType = 15
+	PKPaymentButtonTypeContinue   PKPaymentButtonType = 16
 )
 
 func (e PKPaymentButtonType) String() string {
@@ -613,12 +637,12 @@ func (e PKPaymentButtonType) String() string {
 type PKPaymentErrorCode int64
 
 const (
-	PKPaymentUnknownError PKPaymentErrorCode = -1
-	PKPaymentShippingContactInvalidError PKPaymentErrorCode = 1
-	PKPaymentBillingContactInvalidError PKPaymentErrorCode = 2
+	PKPaymentUnknownError                      PKPaymentErrorCode = -1
+	PKPaymentShippingContactInvalidError       PKPaymentErrorCode = 1
+	PKPaymentBillingContactInvalidError        PKPaymentErrorCode = 2
 	PKPaymentShippingAddressUnserviceableError PKPaymentErrorCode = 3
-	PKPaymentCouponCodeInvalidError PKPaymentErrorCode = 4
-	PKPaymentCouponCodeExpiredError PKPaymentErrorCode = 5
+	PKPaymentCouponCodeInvalidError            PKPaymentErrorCode = 4
+	PKPaymentCouponCodeExpiredError            PKPaymentErrorCode = 5
 )
 
 func (e PKPaymentErrorCode) String() string {
@@ -644,11 +668,11 @@ type PKPaymentMethodType uint64
 
 const (
 	PKPaymentMethodTypeUnknown PKPaymentMethodType = 0
-	PKPaymentMethodTypeDebit PKPaymentMethodType = 1
-	PKPaymentMethodTypeCredit PKPaymentMethodType = 2
+	PKPaymentMethodTypeDebit   PKPaymentMethodType = 1
+	PKPaymentMethodTypeCredit  PKPaymentMethodType = 2
 	PKPaymentMethodTypePrepaid PKPaymentMethodType = 3
-	PKPaymentMethodTypeStore PKPaymentMethodType = 4
-	PKPaymentMethodTypeEMoney PKPaymentMethodType = 5
+	PKPaymentMethodTypeStore   PKPaymentMethodType = 4
+	PKPaymentMethodTypeEMoney  PKPaymentMethodType = 5
 )
 
 func (e PKPaymentMethodType) String() string {
@@ -674,11 +698,11 @@ func (e PKPaymentMethodType) String() string {
 type PKPaymentPassActivationState uint64
 
 const (
-	PKPaymentPassActivationStateActivated PKPaymentPassActivationState = 0
+	PKPaymentPassActivationStateActivated          PKPaymentPassActivationState = 0
 	PKPaymentPassActivationStateRequiresActivation PKPaymentPassActivationState = 1
-	PKPaymentPassActivationStateActivating PKPaymentPassActivationState = 2
-	PKPaymentPassActivationStateSuspended PKPaymentPassActivationState = 3
-	PKPaymentPassActivationStateDeactivated PKPaymentPassActivationState = 4
+	PKPaymentPassActivationStateActivating         PKPaymentPassActivationState = 2
+	PKPaymentPassActivationStateSuspended          PKPaymentPassActivationState = 3
+	PKPaymentPassActivationStateDeactivated        PKPaymentPassActivationState = 4
 )
 
 func (e PKPaymentPassActivationState) String() string {
@@ -701,7 +725,7 @@ func (e PKPaymentPassActivationState) String() string {
 type PKPaymentSummaryItemType uint64
 
 const (
-	PKPaymentSummaryItemTypeFinal PKPaymentSummaryItemType = 0
+	PKPaymentSummaryItemTypeFinal   PKPaymentSummaryItemType = 0
 	PKPaymentSummaryItemTypePending PKPaymentSummaryItemType = 1
 )
 
@@ -719,27 +743,33 @@ func (e PKPaymentSummaryItemType) String() string {
 type PKRadioTechnology uint64
 
 const (
-	PKRadioTechnologyNone PKRadioTechnology = 0
-	PKRadioTechnologyNFC PKRadioTechnology = 1
+	PKRadioTechnologyNone      PKRadioTechnology = 0
+	PKRadioTechnologyNFC       PKRadioTechnology = 1
 	PKRadioTechnologyBluetooth PKRadioTechnology = 2
 )
 
 func (e PKRadioTechnology) String() string {
 	var parts []string
-	if e&PKRadioTechnologyNFC != 0 { parts = append(parts, "PKRadioTechnologyNFC") }
-	if e&PKRadioTechnologyBluetooth != 0 { parts = append(parts, "PKRadioTechnologyBluetooth") }
-	if len(parts) == 0 { return "0" }
+	if e&PKRadioTechnologyNFC != 0 {
+		parts = append(parts, "PKRadioTechnologyNFC")
+	}
+	if e&PKRadioTechnologyBluetooth != 0 {
+		parts = append(parts, "PKRadioTechnologyBluetooth")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type PKSecureElementPassActivationState int64
 
 const (
-	PKSecureElementPassActivationStateActivated PKSecureElementPassActivationState = 0
+	PKSecureElementPassActivationStateActivated          PKSecureElementPassActivationState = 0
 	PKSecureElementPassActivationStateRequiresActivation PKSecureElementPassActivationState = 1
-	PKSecureElementPassActivationStateActivating PKSecureElementPassActivationState = 2
-	PKSecureElementPassActivationStateSuspended PKSecureElementPassActivationState = 3
-	PKSecureElementPassActivationStateDeactivated PKSecureElementPassActivationState = 4
+	PKSecureElementPassActivationStateActivating         PKSecureElementPassActivationState = 2
+	PKSecureElementPassActivationStateSuspended          PKSecureElementPassActivationState = 3
+	PKSecureElementPassActivationStateDeactivated        PKSecureElementPassActivationState = 4
 )
 
 func (e PKSecureElementPassActivationState) String() string {
@@ -763,7 +793,7 @@ type PKShareSecureElementPassErrorCode int64
 
 const (
 	PKShareSecureElementPassUnknownError PKShareSecureElementPassErrorCode = 0
-	PKShareSecureElementPassSetupError PKShareSecureElementPassErrorCode = 1
+	PKShareSecureElementPassSetupError   PKShareSecureElementPassErrorCode = 1
 )
 
 func (e PKShareSecureElementPassErrorCode) String() string {
@@ -780,9 +810,9 @@ func (e PKShareSecureElementPassErrorCode) String() string {
 type PKShippingContactEditingMode uint64
 
 const (
-	PKShippingContactEditingModeAvailable PKShippingContactEditingMode = 1
+	PKShippingContactEditingModeAvailable   PKShippingContactEditingMode = 1
 	PKShippingContactEditingModeStorePickup PKShippingContactEditingMode = 2
-	PKShippingContactEditingModeEnabled PKShippingContactEditingMode = 1
+	PKShippingContactEditingModeEnabled     PKShippingContactEditingMode = 1
 )
 
 func (e PKShippingContactEditingMode) String() string {
@@ -799,9 +829,9 @@ func (e PKShippingContactEditingMode) String() string {
 type PKShippingType uint64
 
 const (
-	PKShippingTypeShipping PKShippingType = 0
-	PKShippingTypeDelivery PKShippingType = 1
-	PKShippingTypeStorePickup PKShippingType = 2
+	PKShippingTypeShipping      PKShippingType = 0
+	PKShippingTypeDelivery      PKShippingType = 1
+	PKShippingTypeStorePickup   PKShippingType = 2
 	PKShippingTypeServicePickup PKShippingType = 3
 )
 
@@ -823,9 +853,9 @@ func (e PKShippingType) String() string {
 type PKVehicleConnectionErrorCode int64
 
 const (
-	PKVehicleConnectionErrorCodeUnknown PKVehicleConnectionErrorCode = 0
+	PKVehicleConnectionErrorCodeUnknown              PKVehicleConnectionErrorCode = 0
 	PKVehicleConnectionErrorCodeSessionUnableToStart PKVehicleConnectionErrorCode = 1
-	PKVehicleConnectionErrorCodeSessionNotActive PKVehicleConnectionErrorCode = 2
+	PKVehicleConnectionErrorCodeSessionNotActive     PKVehicleConnectionErrorCode = 2
 )
 
 func (e PKVehicleConnectionErrorCode) String() string {
@@ -844,9 +874,9 @@ func (e PKVehicleConnectionErrorCode) String() string {
 type PKVehicleConnectionSessionConnectionState int64
 
 const (
-	PKVehicleConnectionSessionConnectionStateDisconnected PKVehicleConnectionSessionConnectionState = 0
-	PKVehicleConnectionSessionConnectionStateConnected PKVehicleConnectionSessionConnectionState = 1
-	PKVehicleConnectionSessionConnectionStateConnecting PKVehicleConnectionSessionConnectionState = 2
+	PKVehicleConnectionSessionConnectionStateDisconnected    PKVehicleConnectionSessionConnectionState = 0
+	PKVehicleConnectionSessionConnectionStateConnected       PKVehicleConnectionSessionConnectionState = 1
+	PKVehicleConnectionSessionConnectionStateConnecting      PKVehicleConnectionSessionConnectionState = 2
 	PKVehicleConnectionSessionConnectionStateFailedToConnect PKVehicleConnectionSessionConnectionState = 3
 )
 
@@ -868,7 +898,7 @@ func (e PKVehicleConnectionSessionConnectionState) String() string {
 type PMPageToPaperMappingType int64
 
 const (
-	KPMPageToPaperMappingNone PMPageToPaperMappingType = 1
+	KPMPageToPaperMappingNone       PMPageToPaperMappingType = 1
 	KPMPageToPaperMappingScaleToFit PMPageToPaperMappingType = 2
 )
 
@@ -887,8 +917,8 @@ type Acl_entry_id_t int64
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
-	ACL_NEXT_ENTRY Acl_entry_id_t = -1
-	ACL_LAST_ENTRY Acl_entry_id_t = -2
+	ACL_NEXT_ENTRY  Acl_entry_id_t = -1
+	ACL_LAST_ENTRY  Acl_entry_id_t = -2
 )
 
 func (e Acl_entry_id_t) String() string {
@@ -907,13 +937,13 @@ func (e Acl_entry_id_t) String() string {
 type Acl_flag_t int64
 
 const (
-	ACL_FLAG_DEFER_INHERIT Acl_flag_t = 1
-	ACL_FLAG_NO_INHERIT Acl_flag_t = 131072
-	ACL_ENTRY_INHERITED Acl_flag_t = 16
-	ACL_ENTRY_FILE_INHERIT Acl_flag_t = 32
+	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
+	ACL_FLAG_NO_INHERIT         Acl_flag_t = 131072
+	ACL_ENTRY_INHERITED         Acl_flag_t = 16
+	ACL_ENTRY_FILE_INHERIT      Acl_flag_t = 32
 	ACL_ENTRY_DIRECTORY_INHERIT Acl_flag_t = 64
-	ACL_ENTRY_LIMIT_INHERIT Acl_flag_t = 128
-	ACL_ENTRY_ONLY_INHERIT Acl_flag_t = 256
+	ACL_ENTRY_LIMIT_INHERIT     Acl_flag_t = 128
+	ACL_ENTRY_ONLY_INHERIT      Acl_flag_t = 256
 )
 
 func (e Acl_flag_t) String() string {
@@ -940,24 +970,24 @@ func (e Acl_flag_t) String() string {
 type Acl_perm_t int64
 
 const (
-	ACL_READ_DATA Acl_perm_t = 2
-	ACL_LIST_DIRECTORY Acl_perm_t = 2
-	ACL_WRITE_DATA Acl_perm_t = 4
-	ACL_ADD_FILE Acl_perm_t = 4
-	ACL_EXECUTE Acl_perm_t = 8
-	ACL_SEARCH Acl_perm_t = 8
-	ACL_DELETE Acl_perm_t = 16
-	ACL_APPEND_DATA Acl_perm_t = 32
-	ACL_ADD_SUBDIRECTORY Acl_perm_t = 32
-	ACL_DELETE_CHILD Acl_perm_t = 64
-	ACL_READ_ATTRIBUTES Acl_perm_t = 128
-	ACL_WRITE_ATTRIBUTES Acl_perm_t = 256
-	ACL_READ_EXTATTRIBUTES Acl_perm_t = 512
+	ACL_READ_DATA           Acl_perm_t = 2
+	ACL_LIST_DIRECTORY      Acl_perm_t = 2
+	ACL_WRITE_DATA          Acl_perm_t = 4
+	ACL_ADD_FILE            Acl_perm_t = 4
+	ACL_EXECUTE             Acl_perm_t = 8
+	ACL_SEARCH              Acl_perm_t = 8
+	ACL_DELETE              Acl_perm_t = 16
+	ACL_APPEND_DATA         Acl_perm_t = 32
+	ACL_ADD_SUBDIRECTORY    Acl_perm_t = 32
+	ACL_DELETE_CHILD        Acl_perm_t = 64
+	ACL_READ_ATTRIBUTES     Acl_perm_t = 128
+	ACL_WRITE_ATTRIBUTES    Acl_perm_t = 256
+	ACL_READ_EXTATTRIBUTES  Acl_perm_t = 512
 	ACL_WRITE_EXTATTRIBUTES Acl_perm_t = 1024
-	ACL_READ_SECURITY Acl_perm_t = 2048
-	ACL_WRITE_SECURITY Acl_perm_t = 4096
-	ACL_CHANGE_OWNER Acl_perm_t = 8192
-	ACL_SYNCHRONIZE Acl_perm_t = 1048576
+	ACL_READ_SECURITY       Acl_perm_t = 2048
+	ACL_WRITE_SECURITY      Acl_perm_t = 4096
+	ACL_CHANGE_OWNER        Acl_perm_t = 8192
+	ACL_SYNCHRONIZE         Acl_perm_t = 1048576
 )
 
 func (e Acl_perm_t) String() string {
@@ -998,9 +1028,9 @@ func (e Acl_perm_t) String() string {
 type Acl_tag_t int64
 
 const (
-	ACL_UNDEFINED_TAG Acl_tag_t = 0
+	ACL_UNDEFINED_TAG  Acl_tag_t = 0
 	ACL_EXTENDED_ALLOW Acl_tag_t = 1
-	ACL_EXTENDED_DENY Acl_tag_t = 2
+	ACL_EXTENDED_DENY  Acl_tag_t = 2
 )
 
 func (e Acl_tag_t) String() string {
@@ -1020,12 +1050,12 @@ type Acl_type_t int64
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
-	ACL_TYPE_ACCESS Acl_type_t = 0
-	ACL_TYPE_DEFAULT Acl_type_t = 1
-	ACL_TYPE_AFS Acl_type_t = 2
-	ACL_TYPE_CODA Acl_type_t = 3
-	ACL_TYPE_NTFS Acl_type_t = 4
-	ACL_TYPE_NWFS Acl_type_t = 5
+	ACL_TYPE_ACCESS   Acl_type_t = 0
+	ACL_TYPE_DEFAULT  Acl_type_t = 1
+	ACL_TYPE_AFS      Acl_type_t = 2
+	ACL_TYPE_CODA     Acl_type_t = 3
+	ACL_TYPE_NTFS     Acl_type_t = 4
+	ACL_TYPE_NWFS     Acl_type_t = 5
 )
 
 func (e Acl_type_t) String() string {
@@ -1052,14 +1082,14 @@ func (e Acl_type_t) String() string {
 type Clockid_t int64
 
 const (
-	_CLOCK_REALTIME Clockid_t = 0
-	_CLOCK_MONOTONIC Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW Clockid_t = 4
+	_CLOCK_REALTIME             Clockid_t = 0
+	_CLOCK_MONOTONIC            Clockid_t = 6
+	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
 	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID Clockid_t = 16
+	_CLOCK_UPTIME_RAW           Clockid_t = 8
+	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
+	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
+	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
 )
 
 func (e Clockid_t) String() string {
@@ -1088,9 +1118,9 @@ func (e Clockid_t) String() string {
 type Dispatch_autorelease_frequency_t uint64
 
 const (
-	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT Dispatch_autorelease_frequency_t = 0
+	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT   Dispatch_autorelease_frequency_t = 0
 	DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM Dispatch_autorelease_frequency_t = 1
-	DISPATCH_AUTORELEASE_FREQUENCY_NEVER Dispatch_autorelease_frequency_t = 2
+	DISPATCH_AUTORELEASE_FREQUENCY_NEVER     Dispatch_autorelease_frequency_t = 2
 )
 
 func (e Dispatch_autorelease_frequency_t) String() string {
@@ -1109,36 +1139,50 @@ func (e Dispatch_autorelease_frequency_t) String() string {
 type Dispatch_block_flags_t uint64
 
 const (
-	DISPATCH_BLOCK_BARRIER Dispatch_block_flags_t = 1
-	DISPATCH_BLOCK_DETACHED Dispatch_block_flags_t = 2
-	DISPATCH_BLOCK_ASSIGN_CURRENT Dispatch_block_flags_t = 4
-	DISPATCH_BLOCK_NO_QOS_CLASS Dispatch_block_flags_t = 8
+	DISPATCH_BLOCK_BARRIER           Dispatch_block_flags_t = 1
+	DISPATCH_BLOCK_DETACHED          Dispatch_block_flags_t = 2
+	DISPATCH_BLOCK_ASSIGN_CURRENT    Dispatch_block_flags_t = 4
+	DISPATCH_BLOCK_NO_QOS_CLASS      Dispatch_block_flags_t = 8
 	DISPATCH_BLOCK_INHERIT_QOS_CLASS Dispatch_block_flags_t = 16
 	DISPATCH_BLOCK_ENFORCE_QOS_CLASS Dispatch_block_flags_t = 32
 )
 
 func (e Dispatch_block_flags_t) String() string {
 	var parts []string
-	if e&DISPATCH_BLOCK_BARRIER != 0 { parts = append(parts, "DISPATCH_BLOCK_BARRIER") }
-	if e&DISPATCH_BLOCK_DETACHED != 0 { parts = append(parts, "DISPATCH_BLOCK_DETACHED") }
-	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 { parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT") }
-	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS") }
-	if len(parts) == 0 { return "0" }
+	if e&DISPATCH_BLOCK_BARRIER != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_BARRIER")
+	}
+	if e&DISPATCH_BLOCK_DETACHED != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_DETACHED")
+	}
+	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT")
+	}
+	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Filesec_property_t int64
 
 const (
-	FILESEC_OWNER Filesec_property_t = 1
-	FILESEC_GROUP Filesec_property_t = 2
-	FILESEC_UUID Filesec_property_t = 3
-	FILESEC_MODE Filesec_property_t = 4
-	FILESEC_ACL Filesec_property_t = 5
-	FILESEC_GRPUUID Filesec_property_t = 6
-	FILESEC_ACL_RAW Filesec_property_t = 100
+	FILESEC_OWNER         Filesec_property_t = 1
+	FILESEC_GROUP         Filesec_property_t = 2
+	FILESEC_UUID          Filesec_property_t = 3
+	FILESEC_MODE          Filesec_property_t = 4
+	FILESEC_ACL           Filesec_property_t = 5
+	FILESEC_GRPUUID       Filesec_property_t = 6
+	FILESEC_ACL_RAW       Filesec_property_t = 100
 	FILESEC_ACL_ALLOCSIZE Filesec_property_t = 101
 )
 
@@ -1168,8 +1212,8 @@ func (e Filesec_property_t) String() string {
 type Idtype_t int64
 
 const (
-	P_ALL Idtype_t = 0
-	P_PID Idtype_t = 1
+	P_ALL  Idtype_t = 0
+	P_PID  Idtype_t = 1
 	P_PGID Idtype_t = 2
 )
 
@@ -1189,62 +1233,62 @@ func (e Idtype_t) String() string {
 type Ipc_info_object_type_t int64
 
 const (
-	IPC_OTYPE_NONE Ipc_info_object_type_t = 0
-	IPC_OTYPE_THREAD_CONTROL Ipc_info_object_type_t = 1
-	IPC_OTYPE_TASK_CONTROL Ipc_info_object_type_t = 2
-	IPC_OTYPE_HOST Ipc_info_object_type_t = 3
-	IPC_OTYPE_HOST_PRIV Ipc_info_object_type_t = 4
-	IPC_OTYPE_PROCESSOR Ipc_info_object_type_t = 5
-	IPC_OTYPE_PROCESSOR_SET Ipc_info_object_type_t = 6
-	IPC_OTYPE_PROCESSOR_SET_NAME Ipc_info_object_type_t = 7
-	IPC_OTYPE_TIMER Ipc_info_object_type_t = 8
-	IPC_OTYPE_PORT_SUBST_ONCE Ipc_info_object_type_t = 9
-	IPC_OTYPE_MIG Ipc_info_object_type_t = 10
-	IPC_OTYPE_MEMORY_OBJECT Ipc_info_object_type_t = 11
-	IPC_OTYPE_XMM_PAGER Ipc_info_object_type_t = 12
-	IPC_OTYPE_XMM_KERNEL Ipc_info_object_type_t = 13
-	IPC_OTYPE_XMM_REPLY Ipc_info_object_type_t = 14
-	IPC_OTYPE_UND_REPLY Ipc_info_object_type_t = 15
-	IPC_OTYPE_HOST_NOTIFY Ipc_info_object_type_t = 16
-	IPC_OTYPE_HOST_SECURITY Ipc_info_object_type_t = 17
-	IPC_OTYPE_LEDGER Ipc_info_object_type_t = 18
-	IPC_OTYPE_MAIN_DEVICE Ipc_info_object_type_t = 19
-	IPC_OTYPE_TASK_NAME Ipc_info_object_type_t = 20
-	IPC_OTYPE_SUBSYSTEM Ipc_info_object_type_t = 21
-	IPC_OTYPE_IO_DONE_QUEUE Ipc_info_object_type_t = 22
-	IPC_OTYPE_SEMAPHORE Ipc_info_object_type_t = 23
-	IPC_OTYPE_LOCK_SET Ipc_info_object_type_t = 24
-	IPC_OTYPE_CLOCK Ipc_info_object_type_t = 25
-	IPC_OTYPE_CLOCK_CTRL Ipc_info_object_type_t = 26
-	IPC_OTYPE_IOKIT_IDENT Ipc_info_object_type_t = 27
-	IPC_OTYPE_NAMED_ENTRY Ipc_info_object_type_t = 28
-	IPC_OTYPE_IOKIT_CONNECT Ipc_info_object_type_t = 29
-	IPC_OTYPE_IOKIT_OBJECT Ipc_info_object_type_t = 30
-	IPC_OTYPE_UPL Ipc_info_object_type_t = 31
-	IPC_OTYPE_MEM_OBJ_CONTROL Ipc_info_object_type_t = 32
-	IPC_OTYPE_AU_SESSIONPORT Ipc_info_object_type_t = 33
-	IPC_OTYPE_FILEPORT Ipc_info_object_type_t = 34
-	IPC_OTYPE_LABELH Ipc_info_object_type_t = 35
-	IPC_OTYPE_TASK_RESUME Ipc_info_object_type_t = 36
-	IPC_OTYPE_VOUCHER Ipc_info_object_type_t = 37
+	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
+	IPC_OTYPE_THREAD_CONTROL       Ipc_info_object_type_t = 1
+	IPC_OTYPE_TASK_CONTROL         Ipc_info_object_type_t = 2
+	IPC_OTYPE_HOST                 Ipc_info_object_type_t = 3
+	IPC_OTYPE_HOST_PRIV            Ipc_info_object_type_t = 4
+	IPC_OTYPE_PROCESSOR            Ipc_info_object_type_t = 5
+	IPC_OTYPE_PROCESSOR_SET        Ipc_info_object_type_t = 6
+	IPC_OTYPE_PROCESSOR_SET_NAME   Ipc_info_object_type_t = 7
+	IPC_OTYPE_TIMER                Ipc_info_object_type_t = 8
+	IPC_OTYPE_PORT_SUBST_ONCE      Ipc_info_object_type_t = 9
+	IPC_OTYPE_MIG                  Ipc_info_object_type_t = 10
+	IPC_OTYPE_MEMORY_OBJECT        Ipc_info_object_type_t = 11
+	IPC_OTYPE_XMM_PAGER            Ipc_info_object_type_t = 12
+	IPC_OTYPE_XMM_KERNEL           Ipc_info_object_type_t = 13
+	IPC_OTYPE_XMM_REPLY            Ipc_info_object_type_t = 14
+	IPC_OTYPE_UND_REPLY            Ipc_info_object_type_t = 15
+	IPC_OTYPE_HOST_NOTIFY          Ipc_info_object_type_t = 16
+	IPC_OTYPE_HOST_SECURITY        Ipc_info_object_type_t = 17
+	IPC_OTYPE_LEDGER               Ipc_info_object_type_t = 18
+	IPC_OTYPE_MAIN_DEVICE          Ipc_info_object_type_t = 19
+	IPC_OTYPE_TASK_NAME            Ipc_info_object_type_t = 20
+	IPC_OTYPE_SUBSYSTEM            Ipc_info_object_type_t = 21
+	IPC_OTYPE_IO_DONE_QUEUE        Ipc_info_object_type_t = 22
+	IPC_OTYPE_SEMAPHORE            Ipc_info_object_type_t = 23
+	IPC_OTYPE_LOCK_SET             Ipc_info_object_type_t = 24
+	IPC_OTYPE_CLOCK                Ipc_info_object_type_t = 25
+	IPC_OTYPE_CLOCK_CTRL           Ipc_info_object_type_t = 26
+	IPC_OTYPE_IOKIT_IDENT          Ipc_info_object_type_t = 27
+	IPC_OTYPE_NAMED_ENTRY          Ipc_info_object_type_t = 28
+	IPC_OTYPE_IOKIT_CONNECT        Ipc_info_object_type_t = 29
+	IPC_OTYPE_IOKIT_OBJECT         Ipc_info_object_type_t = 30
+	IPC_OTYPE_UPL                  Ipc_info_object_type_t = 31
+	IPC_OTYPE_MEM_OBJ_CONTROL      Ipc_info_object_type_t = 32
+	IPC_OTYPE_AU_SESSIONPORT       Ipc_info_object_type_t = 33
+	IPC_OTYPE_FILEPORT             Ipc_info_object_type_t = 34
+	IPC_OTYPE_LABELH               Ipc_info_object_type_t = 35
+	IPC_OTYPE_TASK_RESUME          Ipc_info_object_type_t = 36
+	IPC_OTYPE_VOUCHER              Ipc_info_object_type_t = 37
 	IPC_OTYPE_VOUCHER_ATTR_CONTROL Ipc_info_object_type_t = 38
-	IPC_OTYPE_WORK_INTERVAL Ipc_info_object_type_t = 39
-	IPC_OTYPE_UX_HANDLER Ipc_info_object_type_t = 40
-	IPC_OTYPE_UEXT_OBJECT Ipc_info_object_type_t = 41
-	IPC_OTYPE_ARCADE_REG Ipc_info_object_type_t = 42
-	IPC_OTYPE_EVENTLINK Ipc_info_object_type_t = 43
-	IPC_OTYPE_TASK_INSPECT Ipc_info_object_type_t = 44
-	IPC_OTYPE_TASK_READ Ipc_info_object_type_t = 45
-	IPC_OTYPE_THREAD_INSPECT Ipc_info_object_type_t = 46
-	IPC_OTYPE_THREAD_READ Ipc_info_object_type_t = 47
-	IPC_OTYPE_SUID_CRED Ipc_info_object_type_t = 48
-	IPC_OTYPE_HYPERVISOR Ipc_info_object_type_t = 49
-	IPC_OTYPE_TASK_ID_TOKEN Ipc_info_object_type_t = 50
-	IPC_OTYPE_TASK_FATAL Ipc_info_object_type_t = 51
-	IPC_OTYPE_KCDATA Ipc_info_object_type_t = 52
-	IPC_OTYPE_EXCLAVES_RESOURCE Ipc_info_object_type_t = 53
-	IPC_OTYPE_THREAD_RESUME Ipc_info_object_type_t = 54
-	IPC_OTYPE_UNKNOWN Ipc_info_object_type_t = 4294967295
+	IPC_OTYPE_WORK_INTERVAL        Ipc_info_object_type_t = 39
+	IPC_OTYPE_UX_HANDLER           Ipc_info_object_type_t = 40
+	IPC_OTYPE_UEXT_OBJECT          Ipc_info_object_type_t = 41
+	IPC_OTYPE_ARCADE_REG           Ipc_info_object_type_t = 42
+	IPC_OTYPE_EVENTLINK            Ipc_info_object_type_t = 43
+	IPC_OTYPE_TASK_INSPECT         Ipc_info_object_type_t = 44
+	IPC_OTYPE_TASK_READ            Ipc_info_object_type_t = 45
+	IPC_OTYPE_THREAD_INSPECT       Ipc_info_object_type_t = 46
+	IPC_OTYPE_THREAD_READ          Ipc_info_object_type_t = 47
+	IPC_OTYPE_SUID_CRED            Ipc_info_object_type_t = 48
+	IPC_OTYPE_HYPERVISOR           Ipc_info_object_type_t = 49
+	IPC_OTYPE_TASK_ID_TOKEN        Ipc_info_object_type_t = 50
+	IPC_OTYPE_TASK_FATAL           Ipc_info_object_type_t = 51
+	IPC_OTYPE_KCDATA               Ipc_info_object_type_t = 52
+	IPC_OTYPE_EXCLAVES_RESOURCE    Ipc_info_object_type_t = 53
+	IPC_OTYPE_THREAD_RESUME        Ipc_info_object_type_t = 54
+	IPC_OTYPE_UNKNOWN              Ipc_info_object_type_t = 4294967295
 )
 
 func (e Ipc_info_object_type_t) String() string {
@@ -1370,15 +1414,15 @@ type Launch_data_type_t int64
 
 const (
 	LAUNCH_DATA_DICTIONARY Launch_data_type_t = 1
-	LAUNCH_DATA_ARRAY Launch_data_type_t = 2
-	LAUNCH_DATA_FD Launch_data_type_t = 3
-	LAUNCH_DATA_INTEGER Launch_data_type_t = 4
-	LAUNCH_DATA_REAL Launch_data_type_t = 5
-	LAUNCH_DATA_BOOL Launch_data_type_t = 6
-	LAUNCH_DATA_STRING Launch_data_type_t = 7
-	LAUNCH_DATA_OPAQUE Launch_data_type_t = 8
-	LAUNCH_DATA_ERRNO Launch_data_type_t = 9
-	LAUNCH_DATA_MACHPORT Launch_data_type_t = 10
+	LAUNCH_DATA_ARRAY      Launch_data_type_t = 2
+	LAUNCH_DATA_FD         Launch_data_type_t = 3
+	LAUNCH_DATA_INTEGER    Launch_data_type_t = 4
+	LAUNCH_DATA_REAL       Launch_data_type_t = 5
+	LAUNCH_DATA_BOOL       Launch_data_type_t = 6
+	LAUNCH_DATA_STRING     Launch_data_type_t = 7
+	LAUNCH_DATA_OPAQUE     Launch_data_type_t = 8
+	LAUNCH_DATA_ERRNO      Launch_data_type_t = 9
+	LAUNCH_DATA_MACHPORT   Launch_data_type_t = 10
 )
 
 func (e Launch_data_type_t) String() string {
@@ -1416,7 +1460,9 @@ const (
 
 func (e Mach_vm_range_flags_t) String() string {
 	var parts []string
-	if len(parts) == 0 { return "0" }
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1424,7 +1470,7 @@ type Mach_vm_range_flavor_t int64
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
-	MACH_VM_RANGE_FLAVOR_V1 Mach_vm_range_flavor_t = 1
+	MACH_VM_RANGE_FLAVOR_V1      Mach_vm_range_flavor_t = 1
 )
 
 func (e Mach_vm_range_flavor_t) String() string {
@@ -1442,8 +1488,8 @@ type Mach_vm_range_tag_t int64
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
-	MACH_VM_RANGE_DATA Mach_vm_range_tag_t = 1
-	MACH_VM_RANGE_FIXED Mach_vm_range_tag_t = 2
+	MACH_VM_RANGE_DATA    Mach_vm_range_tag_t = 1
+	MACH_VM_RANGE_FIXED   Mach_vm_range_tag_t = 2
 )
 
 func (e Mach_vm_range_tag_t) String() string {
@@ -1462,26 +1508,42 @@ func (e Mach_vm_range_tag_t) String() string {
 type Mpo_flags_t int64
 
 const (
-	MPO_PORT Mpo_flags_t = 0
-	MPO_SERVICE_PORT Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT Mpo_flags_t = 2048
-	MPO_REPLY_PORT Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT Mpo_flags_t = 32768
+	MPO_PORT                            Mpo_flags_t = 0
+	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
+	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
+	MPO_REPLY_PORT                      Mpo_flags_t = 4096
+	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
+	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
+	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
 	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
 )
 
 func (e Mpo_flags_t) String() string {
 	var parts []string
-	if e&MPO_SERVICE_PORT != 0 { parts = append(parts, "MPO_SERVICE_PORT") }
-	if e&MPO_CONNECTION_PORT != 0 { parts = append(parts, "MPO_CONNECTION_PORT") }
-	if e&MPO_REPLY_PORT != 0 { parts = append(parts, "MPO_REPLY_PORT") }
-	if e&MPO_WEAK_REPLY_PORT != 0 { parts = append(parts, "MPO_WEAK_REPLY_PORT") }
-	if e&MPO_NOTIFICATION_PORT != 0 { parts = append(parts, "MPO_NOTIFICATION_PORT") }
-	if e&MPO_EXCEPTION_PORT != 0 { parts = append(parts, "MPO_EXCEPTION_PORT") }
-	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 { parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY") }
-	if len(parts) == 0 { return "0" }
+	if e&MPO_SERVICE_PORT != 0 {
+		parts = append(parts, "MPO_SERVICE_PORT")
+	}
+	if e&MPO_CONNECTION_PORT != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT")
+	}
+	if e&MPO_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_REPLY_PORT")
+	}
+	if e&MPO_WEAK_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_WEAK_REPLY_PORT")
+	}
+	if e&MPO_NOTIFICATION_PORT != 0 {
+		parts = append(parts, "MPO_NOTIFICATION_PORT")
+	}
+	if e&MPO_EXCEPTION_PORT != 0 {
+		parts = append(parts, "MPO_EXCEPTION_PORT")
+	}
+	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1503,41 +1565,45 @@ func (e Os_clockid_t) String() string {
 type Os_unfair_lock_flags_t int64
 
 const (
-	OS_UNFAIR_LOCK_FLAG_NONE Os_unfair_lock_flags_t = 0
+	OS_UNFAIR_LOCK_FLAG_NONE          Os_unfair_lock_flags_t = 0
 	OS_UNFAIR_LOCK_FLAG_ADAPTIVE_SPIN Os_unfair_lock_flags_t = 262144
 )
 
 func (e Os_unfair_lock_flags_t) String() string {
 	var parts []string
-	if e&OS_UNFAIR_LOCK_FLAG_ADAPTIVE_SPIN != 0 { parts = append(parts, "OS_UNFAIR_LOCK_FLAG_ADAPTIVE_SPIN") }
-	if len(parts) == 0 { return "0" }
+	if e&OS_UNFAIR_LOCK_FLAG_ADAPTIVE_SPIN != 0 {
+		parts = append(parts, "OS_UNFAIR_LOCK_FLAG_ADAPTIVE_SPIN")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Ptrauth_key int64
 
 const (
-	Ptrauth_key_none Ptrauth_key = -1
-	Ptrauth_key_asia Ptrauth_key = 0
-	Ptrauth_key_asib Ptrauth_key = 1
-	Ptrauth_key_asda Ptrauth_key = 2
-	Ptrauth_key_asdb Ptrauth_key = 3
+	Ptrauth_key_none                     Ptrauth_key = -1
+	Ptrauth_key_asia                     Ptrauth_key = 0
+	Ptrauth_key_asib                     Ptrauth_key = 1
+	Ptrauth_key_asda                     Ptrauth_key = 2
+	Ptrauth_key_asdb                     Ptrauth_key = 3
 	Ptrauth_key_process_independent_code Ptrauth_key = 0
-	Ptrauth_key_process_dependent_code Ptrauth_key = 1
+	Ptrauth_key_process_dependent_code   Ptrauth_key = 1
 	Ptrauth_key_process_independent_data Ptrauth_key = 2
-	Ptrauth_key_process_dependent_data Ptrauth_key = 3
-	Ptrauth_key_return_address Ptrauth_key = 1
-	Ptrauth_key_frame_pointer Ptrauth_key = 3
-	Ptrauth_key_function_pointer Ptrauth_key = 0
-	Ptrauth_key_block_function Ptrauth_key = 0
-	Ptrauth_key_cxx_vtable_pointer Ptrauth_key = 2
-	Ptrauth_key_method_list_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_isa_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_super_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_sel_pointer Ptrauth_key = 3
-	Ptrauth_key_objc_class_ro_pointer Ptrauth_key = 2
+	Ptrauth_key_process_dependent_data   Ptrauth_key = 3
+	Ptrauth_key_return_address           Ptrauth_key = 1
+	Ptrauth_key_frame_pointer            Ptrauth_key = 3
+	Ptrauth_key_function_pointer         Ptrauth_key = 0
+	Ptrauth_key_block_function           Ptrauth_key = 0
+	Ptrauth_key_cxx_vtable_pointer       Ptrauth_key = 2
+	Ptrauth_key_method_list_pointer      Ptrauth_key = 2
+	Ptrauth_key_objc_isa_pointer         Ptrauth_key = 2
+	Ptrauth_key_objc_super_pointer       Ptrauth_key = 2
+	Ptrauth_key_objc_sel_pointer         Ptrauth_key = 3
+	Ptrauth_key_objc_class_ro_pointer    Ptrauth_key = 2
 	Ptrauth_key_block_descriptor_pointer Ptrauth_key = 2
-	Ptrauth_key_init_fini_pointer Ptrauth_key = 0
+	Ptrauth_key_init_fini_pointer        Ptrauth_key = 0
 )
 
 func (e Ptrauth_key) String() string {
@@ -1561,11 +1627,11 @@ type Qos_class_t uint32
 
 const (
 	QOS_CLASS_USER_INTERACTIVE Qos_class_t = 33
-	QOS_CLASS_USER_INITIATED Qos_class_t = 25
-	QOS_CLASS_DEFAULT Qos_class_t = 21
-	QOS_CLASS_UTILITY Qos_class_t = 17
-	QOS_CLASS_BACKGROUND Qos_class_t = 9
-	QOS_CLASS_UNSPECIFIED Qos_class_t = 0
+	QOS_CLASS_USER_INITIATED   Qos_class_t = 25
+	QOS_CLASS_DEFAULT          Qos_class_t = 21
+	QOS_CLASS_UTILITY          Qos_class_t = 17
+	QOS_CLASS_BACKGROUND       Qos_class_t = 9
+	QOS_CLASS_UNSPECIFIED      Qos_class_t = 0
 )
 
 func (e Qos_class_t) String() string {
@@ -1590,22 +1656,22 @@ func (e Qos_class_t) String() string {
 type Virtual_memory_guard_exception_code_t int64
 
 const (
-	KGUARD_EXC_DEALLOC_GAP Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
 )
@@ -1656,34 +1722,47 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 type Xpc_listener_create_flags_t int64
 
 const (
-	XPC_LISTENER_CREATE_NONE Xpc_listener_create_flags_t = 0
-	XPC_LISTENER_CREATE_INACTIVE Xpc_listener_create_flags_t = 1
-	XPC_LISTENER_CREATE_FORCE_MACH Xpc_listener_create_flags_t = 2
+	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
+	XPC_LISTENER_CREATE_INACTIVE         Xpc_listener_create_flags_t = 1
+	XPC_LISTENER_CREATE_FORCE_MACH       Xpc_listener_create_flags_t = 2
 	XPC_LISTENER_CREATE_FORCE_XPCSERVICE Xpc_listener_create_flags_t = 4
 )
 
 func (e Xpc_listener_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_LISTENER_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE") }
-	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH") }
-	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_LISTENER_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Xpc_session_create_flags_t int64
 
 const (
-	XPC_SESSION_CREATE_NONE Xpc_session_create_flags_t = 0
-	XPC_SESSION_CREATE_INACTIVE Xpc_session_create_flags_t = 1
+	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0
+	XPC_SESSION_CREATE_INACTIVE        Xpc_session_create_flags_t = 1
 	XPC_SESSION_CREATE_MACH_PRIVILEGED Xpc_session_create_flags_t = 2
 )
 
 func (e Xpc_session_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_SESSION_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_SESSION_CREATE_INACTIVE") }
-	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 { parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_SESSION_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_INACTIVE")
+	}
+	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
-

@@ -15,12 +15,12 @@ type NSURLSessionWebSocketMessage struct {
 }
 
 var (
-	_clsNSURLSessionWebSocketMessage = _objcClass("NSURLSessionWebSocketMessage")
-	_nSURLSessionWebSocketMessageSelInitWithData = objc.RegisterName("initWithData:")
+	_clsNSURLSessionWebSocketMessage               = _objcClass("NSURLSessionWebSocketMessage")
+	_nSURLSessionWebSocketMessageSelInitWithData   = objc.RegisterName("initWithData:")
 	_nSURLSessionWebSocketMessageSelInitWithString = objc.RegisterName("initWithString:")
-	_nSURLSessionWebSocketMessageSelType = objc.RegisterName("type")
-	_nSURLSessionWebSocketMessageSelData = objc.RegisterName("data")
-	_nSURLSessionWebSocketMessageSelString = objc.RegisterName("string")
+	_nSURLSessionWebSocketMessageSelType           = objc.RegisterName("type")
+	_nSURLSessionWebSocketMessageSelData           = objc.RegisterName("data")
+	_nSURLSessionWebSocketMessageSelString         = objc.RegisterName("string")
 )
 
 func NSURLSessionWebSocketMessageFromID(id objc.ID) *NSURLSessionWebSocketMessage {
@@ -35,13 +35,17 @@ func NSURLSessionWebSocketMessageFromID(id objc.ID) *NSURLSessionWebSocketMessag
 
 func (o *NSURLSessionWebSocketMessage) InitWithData(data *NSData) *NSURLSessionWebSocketMessage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionWebSocketMessageSelInitWithData, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionWebSocketMessageFromID(_ret)
 }
 
 func (o *NSURLSessionWebSocketMessage) InitWithString(string_ *NSString) *NSURLSessionWebSocketMessage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionWebSocketMessageSelInitWithString, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionWebSocketMessageFromID(_ret)
 }
 
@@ -52,13 +56,16 @@ func (o *NSURLSessionWebSocketMessage) Type() NSURLSessionWebSocketMessageType {
 
 func (o *NSURLSessionWebSocketMessage) Data() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionWebSocketMessageSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
 func (o *NSURLSessionWebSocketMessage) String() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionWebSocketMessageSelString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
-

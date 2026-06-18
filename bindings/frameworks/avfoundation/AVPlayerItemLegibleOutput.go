@@ -16,15 +16,15 @@ type AVPlayerItemLegibleOutput struct {
 }
 
 var (
-	_clsAVPlayerItemLegibleOutput = _objcClass("AVPlayerItemLegibleOutput")
-	_aVPlayerItemLegibleOutputSelSetDelegateQueue = objc.RegisterName("setDelegate:queue:")
-	_aVPlayerItemLegibleOutputSelDelegate = objc.RegisterName("delegate")
-	_aVPlayerItemLegibleOutputSelDelegateQueue = objc.RegisterName("delegateQueue")
-	_aVPlayerItemLegibleOutputSelAdvanceIntervalForDelegateInvocation = objc.RegisterName("advanceIntervalForDelegateInvocation")
-	_aVPlayerItemLegibleOutputSelSetAdvanceIntervalForDelegateInvocation = objc.RegisterName("setAdvanceIntervalForDelegateInvocation:")
+	_clsAVPlayerItemLegibleOutput                                             = _objcClass("AVPlayerItemLegibleOutput")
+	_aVPlayerItemLegibleOutputSelSetDelegateQueue                             = objc.RegisterName("setDelegate:queue:")
+	_aVPlayerItemLegibleOutputSelDelegate                                     = objc.RegisterName("delegate")
+	_aVPlayerItemLegibleOutputSelDelegateQueue                                = objc.RegisterName("delegateQueue")
+	_aVPlayerItemLegibleOutputSelAdvanceIntervalForDelegateInvocation         = objc.RegisterName("advanceIntervalForDelegateInvocation")
+	_aVPlayerItemLegibleOutputSelSetAdvanceIntervalForDelegateInvocation      = objc.RegisterName("setAdvanceIntervalForDelegateInvocation:")
 	_aVPlayerItemLegibleOutputSelInitWithMediaSubtypesForNativeRepresentation = objc.RegisterName("initWithMediaSubtypesForNativeRepresentation:")
-	_aVPlayerItemLegibleOutputSelTextStylingResolution = objc.RegisterName("textStylingResolution")
-	_aVPlayerItemLegibleOutputSelSetTextStylingResolution = objc.RegisterName("setTextStylingResolution:")
+	_aVPlayerItemLegibleOutputSelTextStylingResolution                        = objc.RegisterName("textStylingResolution")
+	_aVPlayerItemLegibleOutputSelSetTextStylingResolution                     = objc.RegisterName("setTextStylingResolution:")
 )
 
 func AVPlayerItemLegibleOutputFromID(id objc.ID) *AVPlayerItemLegibleOutput {
@@ -51,7 +51,9 @@ func (o *AVPlayerItemLegibleOutput) Delegate() AVPlayerItemLegibleOutputPushDele
 // @property		delegateQueue @abstract		The dispatch queue where the delegate is messaged. @discussion This property is not key-value observable.
 func (o *AVPlayerItemLegibleOutput) DelegateQueue() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemLegibleOutputSelDelegateQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
@@ -68,17 +70,20 @@ func (o *AVPlayerItemLegibleOutput) SetAdvanceIntervalForDelegateInvocation(adva
 // @method			initWithMediaSubtypesForNativeRepresentation: @abstract		Returns an instance of AVPlayerItemLegibleOutput with filtering enabled for AVPlayerItemLegibleOutputPushDelegate's legibleOutput:didOutputAttributedStrings:nativeSampleBuffers:forItemTime:. @param			subtypes NSArray of NSNumber FourCC codes, e.g. @[ [NSNumber numberWithUnsignedInt:'tx3g'] ] @result			An instance of AVPlayerItemLegibleOutput. @discussion Add media subtype FourCC number objects to the subtypes array to elect to receive that type as a CMSampleBuffer instead of an NSAttributedString.  Initializing an AVPlayerItemLegibleOutput using the -init method is equivalent to calling -initWithMediaSubtypesForNativeRepresentation: with an empty array, which means that all legible data, regardless of media subtype, will be delivered using NSAttributedString in a common format. If a media subtype for which there is no legible data in the current player item is included in the media subtypes array, no error will occur.  AVPlayerItemLegibleOutput will not vend closed caption data as CMSampleBuffers, so it is an error to include 'c608' in the media subtypes array. This method throws an exception if any media subtype is kCMClosedCaptionFormatType_CEA608 (native representation is not available for media subtype).
 func (o *AVPlayerItemLegibleOutput) InitWithMediaSubtypesForNativeRepresentation(subtypes *foundation.NSArray[*foundation.NSNumber]) *AVPlayerItemLegibleOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemLegibleOutputSelInitWithMediaSubtypesForNativeRepresentation, subtypes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerItemLegibleOutputFromID(_ret)
 }
 
 func (o *AVPlayerItemLegibleOutput) TextStylingResolution() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemLegibleOutputSelTextStylingResolution)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *AVPlayerItemLegibleOutput) SetTextStylingResolution(textStylingResolution *foundation.NSString) {
 	o.Ptr().Send(_aVPlayerItemLegibleOutputSelSetTextStylingResolution, textStylingResolution.Ptr())
 }
-

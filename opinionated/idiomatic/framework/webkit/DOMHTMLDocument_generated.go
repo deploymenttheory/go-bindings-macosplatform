@@ -348,7 +348,9 @@ func (x *DOMHTMLDocument) asDOMNode() *raw.DOMNode { return &x.inner.DOMDocument
 
 func (x *DOMHTMLDocument) asDOMObject() *raw.DOMObject { return &x.inner.DOMDocument.DOMNode.DOMObject }
 
-func (x *DOMHTMLDocument) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMDocument.DOMNode.DOMObject.WebScriptObject }
+func (x *DOMHTMLDocument) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMDocument.DOMNode.DOMObject.WebScriptObject
+}
 
 // DOMHTMLDocumentable is the interface implemented by [DOMHTMLDocument], for mocking and DI.
 type DOMHTMLDocumentable interface {
@@ -403,4 +405,3 @@ type DOMHTMLDocumentable interface {
 }
 
 var _ DOMHTMLDocumentable = (*DOMHTMLDocument)(nil)
-

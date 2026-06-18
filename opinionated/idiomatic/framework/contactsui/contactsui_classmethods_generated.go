@@ -13,4 +13,3 @@ import (
 func DescriptorForRequiredKeys() contacts.CNKeyDescriptor {
 	return raw.CNContactViewControllerDescriptorForRequiredKeys()
 }
-

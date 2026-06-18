@@ -109,4 +109,3 @@ type SVGFDenoiserable interface {
 }
 
 var _ SVGFDenoiserable = (*SVGFDenoiser)(nil)
-

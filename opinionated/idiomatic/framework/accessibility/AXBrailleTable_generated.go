@@ -106,4 +106,3 @@ type BrailleTableable interface {
 }
 
 var _ BrailleTableable = (*BrailleTable)(nil)
-

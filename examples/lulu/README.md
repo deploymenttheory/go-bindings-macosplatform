@@ -58,6 +58,50 @@ lulu activate                # submit the system-extension activation request
 
 The **rule engine** is plain Go and unit-testable in isolation.
 
+## Declarative configuration (JSON or YAML)
+
+Firewall rules can be expressed as a declarative document and reconciled onto the
+firewall, `kubectl apply` style. The same schema is authored in either JSON or
+YAML (format chosen by file extension, or sniffed):
+
+```yaml
+version: "1"
+defaultAction: block
+rules:
+  - name: curl to example.com
+    path: /usr/bin/curl
+    action: allow
+    endpoints:
+      - host: example.com
+        port: "443"
+  - name: netcat
+    path: /usr/bin/nc
+    action: block
+```
+
+Apply it two ways:
+
+```sh
+lulu apply config/firewall.example.yaml              # reconcile a running daemon over XPC
+LULU_CONFIG=config/firewall.example.yaml luludaemon  # daemon reconciles at startup
+lulu export current.yaml                             # dump the live rules to a document
+```
+
+Reconciliation (`config` package) is:
+
+- **Idempotent** — rule identity is content-addressed (a hash of path + action +
+  host + port), so re-applying an unchanged document is a no-op; editing an
+  endpoint cleanly replaces the old rule.
+- **Safe** — only rules created by `apply` are marked *managed* and eligible for
+  pruning. Rules added by hand (`lulu allow`/`block`) are never removed by an apply.
+
+The engine-local path (`config.Apply` over a `rules.Engine`) is plain Go and is
+covered by `config/config_test.go`; the XPC path drives the same reconciler
+against the live daemon. Sample documents: `config/firewall.example.{yaml,json}`.
+
+YAML support uses `gopkg.in/yaml.v3` — the one place this example departs from the
+SDK's otherwise dependency-free posture (JSON alone is stdlib).
+
 ## What requires Apple provisioning (not doable with `go build` alone)
 
 macOS only loads `cmd/luludaemon` as a *system extension* when it is packaged and

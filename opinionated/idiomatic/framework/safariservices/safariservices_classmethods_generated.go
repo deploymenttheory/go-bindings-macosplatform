@@ -233,4 +233,3 @@ func GetStateOfSafariExtensionWithIdentifier(ctx context.Context, identifier str
 		return _zero, ctx.Err()
 	}
 }
-

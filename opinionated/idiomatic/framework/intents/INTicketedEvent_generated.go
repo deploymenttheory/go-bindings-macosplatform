@@ -77,4 +77,3 @@ type TicketedEventable interface {
 }
 
 var _ TicketedEventable = (*TicketedEvent)(nil)
-

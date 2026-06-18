@@ -155,9 +155,13 @@ func (x *CNNSpatialNormalization) SetDelta(delta float32) {
 	x.inner.SetDelta(delta)
 }
 
-func (x *CNNSpatialNormalization) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNKernel }
+func (x *CNNSpatialNormalization) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNKernel
+}
 
-func (x *CNNSpatialNormalization) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
+func (x *CNNSpatialNormalization) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNKernel.MPSKernel
+}
 
 // CNNSpatialNormalizationable is the interface implemented by [CNNSpatialNormalization], for mocking and DI.
 type CNNSpatialNormalizationable interface {
@@ -184,4 +188,3 @@ type CNNSpatialNormalizationable interface {
 }
 
 var _ CNNSpatialNormalizationable = (*CNNSpatialNormalization)(nil)
-

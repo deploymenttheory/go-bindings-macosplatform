@@ -106,4 +106,3 @@ type DraggingImageComponentable interface {
 }
 
 var _ DraggingImageComponentable = (*DraggingImageComponent)(nil)
-

@@ -245,4 +245,3 @@ type MapSnapshotOptionsable interface {
 }
 
 var _ MapSnapshotOptionsable = (*MapSnapshotOptions)(nil)
-

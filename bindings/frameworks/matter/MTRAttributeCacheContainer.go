@@ -16,7 +16,7 @@ type MTRAttributeCacheContainer struct {
 }
 
 var (
-	_clsMTRAttributeCacheContainer = _objcClass("MTRAttributeCacheContainer")
+	_clsMTRAttributeCacheContainer                                                                     = _objcClass("MTRAttributeCacheContainer")
 	_mTRAttributeCacheContainerSelReadAttributeWithEndpointIdClusterIdAttributeIdClientQueueCompletion = objc.RegisterName("readAttributeWithEndpointId:clusterId:attributeId:clientQueue:completion:")
 )
 
@@ -33,4 +33,3 @@ func MTRAttributeCacheContainerFromID(id objc.ID) *MTRAttributeCacheContainer {
 func (o *MTRAttributeCacheContainer) ReadAttributeWithEndpointIdClusterIdAttributeIdClientQueueCompletion(endpointId *foundation.NSNumber, clusterId *foundation.NSNumber, attributeId *foundation.NSNumber, clientQueue *foundation.NSObject, completion objc.Block) {
 	o.Ptr().Send(_mTRAttributeCacheContainerSelReadAttributeWithEndpointIdClusterIdAttributeIdClientQueueCompletion, endpointId.Ptr(), clusterId.Ptr(), attributeId.Ptr(), clientQueue.Ptr(), completion)
 }
-

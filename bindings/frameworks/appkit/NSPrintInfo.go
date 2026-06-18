@@ -19,56 +19,56 @@ type NSPrintInfo struct {
 }
 
 var (
-	_clsNSPrintInfo = _objcClass("NSPrintInfo")
-	_nSPrintInfoSelInitWithDictionary = objc.RegisterName("initWithDictionary:")
-	_nSPrintInfoSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSPrintInfoSelInit = objc.RegisterName("init")
-	_nSPrintInfoSelDictionary = objc.RegisterName("dictionary")
+	_clsNSPrintInfo                                 = _objcClass("NSPrintInfo")
+	_nSPrintInfoSelInitWithDictionary               = objc.RegisterName("initWithDictionary:")
+	_nSPrintInfoSelInitWithCoder                    = objc.RegisterName("initWithCoder:")
+	_nSPrintInfoSelInit                             = objc.RegisterName("init")
+	_nSPrintInfoSelDictionary                       = objc.RegisterName("dictionary")
 	_nSPrintInfoSelSetUpPrintOperationDefaultValues = objc.RegisterName("setUpPrintOperationDefaultValues")
-	_nSPrintInfoSelPMPrintSession = objc.RegisterName("PMPrintSession")
-	_nSPrintInfoSelPMPageFormat = objc.RegisterName("PMPageFormat")
-	_nSPrintInfoSelPMPrintSettings = objc.RegisterName("PMPrintSettings")
-	_nSPrintInfoSelUpdateFromPMPageFormat = objc.RegisterName("updateFromPMPageFormat")
-	_nSPrintInfoSelUpdateFromPMPrintSettings = objc.RegisterName("updateFromPMPrintSettings")
-	_nSPrintInfoSelTakeSettingsFromPDFInfo = objc.RegisterName("takeSettingsFromPDFInfo:")
-	_nSPrintInfoSelSharedPrintInfo = objc.RegisterName("sharedPrintInfo")
-	_nSPrintInfoSelSetSharedPrintInfo = objc.RegisterName("setSharedPrintInfo:")
-	_nSPrintInfoSelPaperName = objc.RegisterName("paperName")
-	_nSPrintInfoSelSetPaperName = objc.RegisterName("setPaperName:")
-	_nSPrintInfoSelPaperSize = objc.RegisterName("paperSize")
-	_nSPrintInfoSelSetPaperSize = objc.RegisterName("setPaperSize:")
-	_nSPrintInfoSelOrientation = objc.RegisterName("orientation")
-	_nSPrintInfoSelSetOrientation = objc.RegisterName("setOrientation:")
-	_nSPrintInfoSelScalingFactor = objc.RegisterName("scalingFactor")
-	_nSPrintInfoSelSetScalingFactor = objc.RegisterName("setScalingFactor:")
-	_nSPrintInfoSelLeftMargin = objc.RegisterName("leftMargin")
-	_nSPrintInfoSelSetLeftMargin = objc.RegisterName("setLeftMargin:")
-	_nSPrintInfoSelRightMargin = objc.RegisterName("rightMargin")
-	_nSPrintInfoSelSetRightMargin = objc.RegisterName("setRightMargin:")
-	_nSPrintInfoSelTopMargin = objc.RegisterName("topMargin")
-	_nSPrintInfoSelSetTopMargin = objc.RegisterName("setTopMargin:")
-	_nSPrintInfoSelBottomMargin = objc.RegisterName("bottomMargin")
-	_nSPrintInfoSelSetBottomMargin = objc.RegisterName("setBottomMargin:")
-	_nSPrintInfoSelIsHorizontallyCentered = objc.RegisterName("isHorizontallyCentered")
-	_nSPrintInfoSelSetHorizontallyCentered = objc.RegisterName("setHorizontallyCentered:")
-	_nSPrintInfoSelIsVerticallyCentered = objc.RegisterName("isVerticallyCentered")
-	_nSPrintInfoSelSetVerticallyCentered = objc.RegisterName("setVerticallyCentered:")
-	_nSPrintInfoSelHorizontalPagination = objc.RegisterName("horizontalPagination")
-	_nSPrintInfoSelSetHorizontalPagination = objc.RegisterName("setHorizontalPagination:")
-	_nSPrintInfoSelVerticalPagination = objc.RegisterName("verticalPagination")
-	_nSPrintInfoSelSetVerticalPagination = objc.RegisterName("setVerticalPagination:")
-	_nSPrintInfoSelJobDisposition = objc.RegisterName("jobDisposition")
-	_nSPrintInfoSelSetJobDisposition = objc.RegisterName("setJobDisposition:")
-	_nSPrintInfoSelPrinter = objc.RegisterName("printer")
-	_nSPrintInfoSelSetPrinter = objc.RegisterName("setPrinter:")
-	_nSPrintInfoSelImageablePageBounds = objc.RegisterName("imageablePageBounds")
-	_nSPrintInfoSelLocalizedPaperName = objc.RegisterName("localizedPaperName")
-	_nSPrintInfoSelDefaultPrinter = objc.RegisterName("defaultPrinter")
-	_nSPrintInfoSelPrintSettings = objc.RegisterName("printSettings")
-	_nSPrintInfoSelIsSelectionOnly = objc.RegisterName("isSelectionOnly")
-	_nSPrintInfoSelSetSelectionOnly = objc.RegisterName("setSelectionOnly:")
-	_nSPrintInfoSelSetDefaultPrinter = objc.RegisterName("setDefaultPrinter:")
-	_nSPrintInfoSelSizeForPaperName = objc.RegisterName("sizeForPaperName:")
+	_nSPrintInfoSelPMPrintSession                   = objc.RegisterName("PMPrintSession")
+	_nSPrintInfoSelPMPageFormat                     = objc.RegisterName("PMPageFormat")
+	_nSPrintInfoSelPMPrintSettings                  = objc.RegisterName("PMPrintSettings")
+	_nSPrintInfoSelUpdateFromPMPageFormat           = objc.RegisterName("updateFromPMPageFormat")
+	_nSPrintInfoSelUpdateFromPMPrintSettings        = objc.RegisterName("updateFromPMPrintSettings")
+	_nSPrintInfoSelTakeSettingsFromPDFInfo          = objc.RegisterName("takeSettingsFromPDFInfo:")
+	_nSPrintInfoSelSharedPrintInfo                  = objc.RegisterName("sharedPrintInfo")
+	_nSPrintInfoSelSetSharedPrintInfo               = objc.RegisterName("setSharedPrintInfo:")
+	_nSPrintInfoSelPaperName                        = objc.RegisterName("paperName")
+	_nSPrintInfoSelSetPaperName                     = objc.RegisterName("setPaperName:")
+	_nSPrintInfoSelPaperSize                        = objc.RegisterName("paperSize")
+	_nSPrintInfoSelSetPaperSize                     = objc.RegisterName("setPaperSize:")
+	_nSPrintInfoSelOrientation                      = objc.RegisterName("orientation")
+	_nSPrintInfoSelSetOrientation                   = objc.RegisterName("setOrientation:")
+	_nSPrintInfoSelScalingFactor                    = objc.RegisterName("scalingFactor")
+	_nSPrintInfoSelSetScalingFactor                 = objc.RegisterName("setScalingFactor:")
+	_nSPrintInfoSelLeftMargin                       = objc.RegisterName("leftMargin")
+	_nSPrintInfoSelSetLeftMargin                    = objc.RegisterName("setLeftMargin:")
+	_nSPrintInfoSelRightMargin                      = objc.RegisterName("rightMargin")
+	_nSPrintInfoSelSetRightMargin                   = objc.RegisterName("setRightMargin:")
+	_nSPrintInfoSelTopMargin                        = objc.RegisterName("topMargin")
+	_nSPrintInfoSelSetTopMargin                     = objc.RegisterName("setTopMargin:")
+	_nSPrintInfoSelBottomMargin                     = objc.RegisterName("bottomMargin")
+	_nSPrintInfoSelSetBottomMargin                  = objc.RegisterName("setBottomMargin:")
+	_nSPrintInfoSelIsHorizontallyCentered           = objc.RegisterName("isHorizontallyCentered")
+	_nSPrintInfoSelSetHorizontallyCentered          = objc.RegisterName("setHorizontallyCentered:")
+	_nSPrintInfoSelIsVerticallyCentered             = objc.RegisterName("isVerticallyCentered")
+	_nSPrintInfoSelSetVerticallyCentered            = objc.RegisterName("setVerticallyCentered:")
+	_nSPrintInfoSelHorizontalPagination             = objc.RegisterName("horizontalPagination")
+	_nSPrintInfoSelSetHorizontalPagination          = objc.RegisterName("setHorizontalPagination:")
+	_nSPrintInfoSelVerticalPagination               = objc.RegisterName("verticalPagination")
+	_nSPrintInfoSelSetVerticalPagination            = objc.RegisterName("setVerticalPagination:")
+	_nSPrintInfoSelJobDisposition                   = objc.RegisterName("jobDisposition")
+	_nSPrintInfoSelSetJobDisposition                = objc.RegisterName("setJobDisposition:")
+	_nSPrintInfoSelPrinter                          = objc.RegisterName("printer")
+	_nSPrintInfoSelSetPrinter                       = objc.RegisterName("setPrinter:")
+	_nSPrintInfoSelImageablePageBounds              = objc.RegisterName("imageablePageBounds")
+	_nSPrintInfoSelLocalizedPaperName               = objc.RegisterName("localizedPaperName")
+	_nSPrintInfoSelDefaultPrinter                   = objc.RegisterName("defaultPrinter")
+	_nSPrintInfoSelPrintSettings                    = objc.RegisterName("printSettings")
+	_nSPrintInfoSelIsSelectionOnly                  = objc.RegisterName("isSelectionOnly")
+	_nSPrintInfoSelSetSelectionOnly                 = objc.RegisterName("setSelectionOnly:")
+	_nSPrintInfoSelSetDefaultPrinter                = objc.RegisterName("setDefaultPrinter:")
+	_nSPrintInfoSelSizeForPaperName                 = objc.RegisterName("sizeForPaperName:")
 )
 
 func NSPrintInfoFromID(id objc.ID) *NSPrintInfo {
@@ -83,19 +83,25 @@ func NSPrintInfoFromID(id objc.ID) *NSPrintInfo {
 
 func (o *NSPrintInfo) InitWithDictionary(attributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NSPrintInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintInfoSelInitWithDictionary, attributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPrintInfoFromID(_ret)
 }
 
 func (o *NSPrintInfo) InitWithCoder(coder *foundation.NSCoder) *NSPrintInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintInfoSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPrintInfoFromID(_ret)
 }
 
 func (o *NSPrintInfo) Init() *NSPrintInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintInfoSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPrintInfoFromID(_ret)
 }
 
@@ -137,7 +143,9 @@ func (o *NSPrintInfo) TakeSettingsFromPDFInfo(inPDFInfo *NSPDFInfo) {
 
 func NSPrintInfoSharedPrintInfo() *NSPrintInfo {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPrintInfo), _nSPrintInfoSelSharedPrintInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPrintInfoFromID(_ret)
 }
 
@@ -147,7 +155,9 @@ func NSPrintInfoSetSharedPrintInfo(sharedPrintInfo *NSPrintInfo) {
 
 func (o *NSPrintInfo) PaperName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintInfoSelPaperName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -256,7 +266,9 @@ func (o *NSPrintInfo) SetVerticalPagination(verticalPagination NSPrintingPaginat
 
 func (o *NSPrintInfo) JobDisposition() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintInfoSelJobDisposition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -266,7 +278,9 @@ func (o *NSPrintInfo) SetJobDisposition(jobDisposition *foundation.NSString) {
 
 func (o *NSPrintInfo) Printer() *NSPrinter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintInfoSelPrinter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPrinterFromID(_ret)
 }
 
@@ -281,13 +295,17 @@ func (o *NSPrintInfo) ImageablePageBounds() corefoundation.CGRect {
 
 func (o *NSPrintInfo) LocalizedPaperName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintInfoSelLocalizedPaperName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func NSPrintInfoDefaultPrinter() *NSPrinter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPrintInfo), _nSPrintInfoSelDefaultPrinter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPrinterFromID(_ret)
 }
 
@@ -315,4 +333,3 @@ func NSPrintInfoSizeForPaperName(name *foundation.NSString) corefoundation.CGSiz
 	_ret := objc.Send[corefoundation.CGSize](objc.ID(_clsNSPrintInfo), _nSPrintInfoSelSizeForPaperName, name.Ptr())
 	return _ret
 }
-

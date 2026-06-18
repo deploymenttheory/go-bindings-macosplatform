@@ -15,12 +15,12 @@ type AVAudioUnitTimePitch struct {
 }
 
 var (
-	_clsAVAudioUnitTimePitch = _objcClass("AVAudioUnitTimePitch")
-	_aVAudioUnitTimePitchSelRate = objc.RegisterName("rate")
-	_aVAudioUnitTimePitchSelSetRate = objc.RegisterName("setRate:")
-	_aVAudioUnitTimePitchSelPitch = objc.RegisterName("pitch")
-	_aVAudioUnitTimePitchSelSetPitch = objc.RegisterName("setPitch:")
-	_aVAudioUnitTimePitchSelOverlap = objc.RegisterName("overlap")
+	_clsAVAudioUnitTimePitch           = _objcClass("AVAudioUnitTimePitch")
+	_aVAudioUnitTimePitchSelRate       = objc.RegisterName("rate")
+	_aVAudioUnitTimePitchSelSetRate    = objc.RegisterName("setRate:")
+	_aVAudioUnitTimePitchSelPitch      = objc.RegisterName("pitch")
+	_aVAudioUnitTimePitchSelSetPitch   = objc.RegisterName("setPitch:")
+	_aVAudioUnitTimePitchSelOverlap    = objc.RegisterName("overlap")
 	_aVAudioUnitTimePitchSelSetOverlap = objc.RegisterName("setOverlap:")
 )
 
@@ -63,4 +63,3 @@ func (o *AVAudioUnitTimePitch) Overlap() float32 {
 func (o *AVAudioUnitTimePitch) SetOverlap(overlap float32) {
 	o.Ptr().Send(_aVAudioUnitTimePitchSelSetOverlap, overlap)
 }
-

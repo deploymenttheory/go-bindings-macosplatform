@@ -18,25 +18,25 @@ type VTSuperResolutionScalerConfiguration struct {
 }
 
 var (
-	_clsVTSuperResolutionScalerConfiguration = _objcClass("VTSuperResolutionScalerConfiguration")
+	_clsVTSuperResolutionScalerConfiguration                                                                                                 = _objcClass("VTSuperResolutionScalerConfiguration")
 	_vTSuperResolutionScalerConfigurationSelInitWithFrameWidthFrameHeightScaleFactorInputTypeUsePrecomputedFlowQualityPrioritizationRevision = objc.RegisterName("initWithFrameWidth:frameHeight:scaleFactor:inputType:usePrecomputedFlow:qualityPrioritization:revision:")
-	_vTSuperResolutionScalerConfigurationSelDownloadConfigurationModelWithCompletionHandler = objc.RegisterName("downloadConfigurationModelWithCompletionHandler:")
-	_vTSuperResolutionScalerConfigurationSelFrameWidth = objc.RegisterName("frameWidth")
-	_vTSuperResolutionScalerConfigurationSelFrameHeight = objc.RegisterName("frameHeight")
-	_vTSuperResolutionScalerConfigurationSelInputType = objc.RegisterName("inputType")
-	_vTSuperResolutionScalerConfigurationSelUsesPrecomputedFlow = objc.RegisterName("usesPrecomputedFlow")
-	_vTSuperResolutionScalerConfigurationSelScaleFactor = objc.RegisterName("scaleFactor")
-	_vTSuperResolutionScalerConfigurationSelQualityPrioritization = objc.RegisterName("qualityPrioritization")
-	_vTSuperResolutionScalerConfigurationSelRevision = objc.RegisterName("revision")
-	_vTSuperResolutionScalerConfigurationSelSupportedRevisions = objc.RegisterName("supportedRevisions")
-	_vTSuperResolutionScalerConfigurationSelDefaultRevision = objc.RegisterName("defaultRevision")
-	_vTSuperResolutionScalerConfigurationSelFrameSupportedPixelFormats = objc.RegisterName("frameSupportedPixelFormats")
-	_vTSuperResolutionScalerConfigurationSelSourcePixelBufferAttributes = objc.RegisterName("sourcePixelBufferAttributes")
-	_vTSuperResolutionScalerConfigurationSelDestinationPixelBufferAttributes = objc.RegisterName("destinationPixelBufferAttributes")
-	_vTSuperResolutionScalerConfigurationSelConfigurationModelStatus = objc.RegisterName("configurationModelStatus")
-	_vTSuperResolutionScalerConfigurationSelConfigurationModelPercentageAvailable = objc.RegisterName("configurationModelPercentageAvailable")
-	_vTSuperResolutionScalerConfigurationSelIsSupported = objc.RegisterName("isSupported")
-	_vTSuperResolutionScalerConfigurationSelSupportedScaleFactors = objc.RegisterName("supportedScaleFactors")
+	_vTSuperResolutionScalerConfigurationSelDownloadConfigurationModelWithCompletionHandler                                                  = objc.RegisterName("downloadConfigurationModelWithCompletionHandler:")
+	_vTSuperResolutionScalerConfigurationSelFrameWidth                                                                                       = objc.RegisterName("frameWidth")
+	_vTSuperResolutionScalerConfigurationSelFrameHeight                                                                                      = objc.RegisterName("frameHeight")
+	_vTSuperResolutionScalerConfigurationSelInputType                                                                                        = objc.RegisterName("inputType")
+	_vTSuperResolutionScalerConfigurationSelUsesPrecomputedFlow                                                                              = objc.RegisterName("usesPrecomputedFlow")
+	_vTSuperResolutionScalerConfigurationSelScaleFactor                                                                                      = objc.RegisterName("scaleFactor")
+	_vTSuperResolutionScalerConfigurationSelQualityPrioritization                                                                            = objc.RegisterName("qualityPrioritization")
+	_vTSuperResolutionScalerConfigurationSelRevision                                                                                         = objc.RegisterName("revision")
+	_vTSuperResolutionScalerConfigurationSelSupportedRevisions                                                                               = objc.RegisterName("supportedRevisions")
+	_vTSuperResolutionScalerConfigurationSelDefaultRevision                                                                                  = objc.RegisterName("defaultRevision")
+	_vTSuperResolutionScalerConfigurationSelFrameSupportedPixelFormats                                                                       = objc.RegisterName("frameSupportedPixelFormats")
+	_vTSuperResolutionScalerConfigurationSelSourcePixelBufferAttributes                                                                      = objc.RegisterName("sourcePixelBufferAttributes")
+	_vTSuperResolutionScalerConfigurationSelDestinationPixelBufferAttributes                                                                 = objc.RegisterName("destinationPixelBufferAttributes")
+	_vTSuperResolutionScalerConfigurationSelConfigurationModelStatus                                                                         = objc.RegisterName("configurationModelStatus")
+	_vTSuperResolutionScalerConfigurationSelConfigurationModelPercentageAvailable                                                            = objc.RegisterName("configurationModelPercentageAvailable")
+	_vTSuperResolutionScalerConfigurationSelIsSupported                                                                                      = objc.RegisterName("isSupported")
+	_vTSuperResolutionScalerConfigurationSelSupportedScaleFactors                                                                            = objc.RegisterName("supportedScaleFactors")
 )
 
 func VTSuperResolutionScalerConfigurationFromID(id objc.ID) *VTSuperResolutionScalerConfiguration {
@@ -49,14 +49,16 @@ func VTSuperResolutionScalerConfigurationFromID(id objc.ID) *VTSuperResolutionSc
 	return o
 }
 
-// Creates a new super-resolution scaler processor configuration. This processor increases resolution of an image or video. Returns `nil` if dimensions are out of range or revision is unsupported. - Parameters: - frameWidth: Width of source frame in pixels. With ``VTSuperResolutionScalerConfigurationInputTypeVideo``, maximum width is 1920 on macOS and 1440 on iOS. With ``VTSuperResolutionScalerConfigurationInputTypeImage``, maximum width is 1920. - frameHeight: Height of source frame in pixels. With ``VTSuperResolutionScalerConfigurationInputTypeVideo``, maximum height is 1080. With ``VTSuperResolutionScalerConfigurationInputTypeImage``, maximum height is 1920 on macOS and 1080 on iOS. - scaleFactor: Indicates the scale factor between input and output. - inputType: Indicates the type of input, either video or image. - usePrecomputedFlow: Boolean value to indicate that you provide optical flow; if false, this configuration computes the optical flow on the fly. - qualityPrioritization: A level you use to prioritize quality or performance; for more information about supported levels, see ``VTSuperResolutionScalerConfigurationQualityPrioritization``. - revision: The specific algorithm or configuration revision you use to perform the request.
+// Creates a new super-resolution scaler processor configuration. This processor increases resolution of an image or video. Returns `nil` if dimensions are out of range or revision is unsupported. - Parameters: - frameWidth: Width of source frame in pixels. With “VTSuperResolutionScalerConfigurationInputTypeVideo“, maximum width is 1920 on macOS and 1440 on iOS. With “VTSuperResolutionScalerConfigurationInputTypeImage“, maximum width is 1920. - frameHeight: Height of source frame in pixels. With “VTSuperResolutionScalerConfigurationInputTypeVideo“, maximum height is 1080. With “VTSuperResolutionScalerConfigurationInputTypeImage“, maximum height is 1920 on macOS and 1080 on iOS. - scaleFactor: Indicates the scale factor between input and output. - inputType: Indicates the type of input, either video or image. - usePrecomputedFlow: Boolean value to indicate that you provide optical flow; if false, this configuration computes the optical flow on the fly. - qualityPrioritization: A level you use to prioritize quality or performance; for more information about supported levels, see “VTSuperResolutionScalerConfigurationQualityPrioritization“. - revision: The specific algorithm or configuration revision you use to perform the request.
 func (o *VTSuperResolutionScalerConfiguration) InitWithFrameWidthFrameHeightScaleFactorInputTypeUsePrecomputedFlowQualityPrioritizationRevision(frameWidth int, frameHeight int, scaleFactor int, inputType VTSuperResolutionScalerConfigurationInputType, usePrecomputedFlow bool, qualityPrioritization VTSuperResolutionScalerConfigurationQualityPrioritization, revision VTSuperResolutionScalerConfigurationRevision) *VTSuperResolutionScalerConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTSuperResolutionScalerConfigurationSelInitWithFrameWidthFrameHeightScaleFactorInputTypeUsePrecomputedFlowQualityPrioritizationRevision, frameWidth, frameHeight, scaleFactor, inputType, usePrecomputedFlow, qualityPrioritization, revision)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VTSuperResolutionScalerConfigurationFromID(_ret)
 }
 
-// Downloads models that the system needs for the current configuration. This method downloads model assets required for the current configuration in background. You should call this method if ``configurationModelStatus`` is ``VTSuperResolutionScalerConfigurationModelStatusDownloadRequired``. After this method is called, you can query ``configurationModelPercentageAvailable`` to determine progress of model asset download process. If the download fails, the completion handler is invoked with an `NSError`, and the ``configurationModelStatus`` goes back to ``VTSuperResolutionScalerConfigurationModelStatusDownloadRequired``. If the download succeeds, the completion handler is invoked with `nil` NSError.
+// Downloads models that the system needs for the current configuration. This method downloads model assets required for the current configuration in background. You should call this method if “configurationModelStatus“ is “VTSuperResolutionScalerConfigurationModelStatusDownloadRequired“. After this method is called, you can query “configurationModelPercentageAvailable“ to determine progress of model asset download process. If the download fails, the completion handler is invoked with an `NSError`, and the “configurationModelStatus“ goes back to “VTSuperResolutionScalerConfigurationModelStatusDownloadRequired“. If the download succeeds, the completion handler is invoked with `nil` NSError.
 func (o *VTSuperResolutionScalerConfiguration) DownloadConfigurationModelWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -98,7 +100,7 @@ func (o *VTSuperResolutionScalerConfiguration) ScaleFactor() int {
 	return _ret
 }
 
-// A parameter to control quality and performance levels. For more information about supported levels, see ``VTSuperResolutionScalerConfigurationQualityPrioritization``.
+// A parameter to control quality and performance levels. For more information about supported levels, see “VTSuperResolutionScalerConfigurationQualityPrioritization“.
 func (o *VTSuperResolutionScalerConfiguration) QualityPrioritization() VTSuperResolutionScalerConfigurationQualityPrioritization {
 	_ret := objc.Send[VTSuperResolutionScalerConfigurationQualityPrioritization](o.Ptr(), _vTSuperResolutionScalerConfigurationSelQualityPrioritization)
 	return _ret
@@ -113,7 +115,9 @@ func (o *VTSuperResolutionScalerConfiguration) Revision() VTSuperResolutionScale
 // Provides the collection of currently supported algorithms or configuration revisions for the class of configuration. A property you use to introspect at runtime which revisions are available for each configuration.
 func VTSuperResolutionScalerConfigurationSupportedRevisions() *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVTSuperResolutionScalerConfiguration), _vTSuperResolutionScalerConfigurationSelSupportedRevisions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
@@ -129,13 +133,13 @@ func (o *VTSuperResolutionScalerConfiguration) FrameSupportedPixelFormats() *fou
 	return _ret
 }
 
-// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use ``CVPixelBufferCreateResolvedAttributesDictionary`` to combine this dictionary with your pixel buffer attributes dictionary.
+// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (o *VTSuperResolutionScalerConfiguration) SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _vTSuperResolutionScalerConfigurationSelSourcePixelBufferAttributes)
 	return _ret
 }
 
-// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use ``CVPixelBufferCreateResolvedAttributesDictionary`` to combine this dictionary with your pixel buffer attributes dictionary.
+// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (o *VTSuperResolutionScalerConfiguration) DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _vTSuperResolutionScalerConfigurationSelDestinationPixelBufferAttributes)
 	return _ret
@@ -164,4 +168,3 @@ func VTSuperResolutionScalerConfigurationSupportedScaleFactors() *foundation.NSA
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](objc.ID(_clsVTSuperResolutionScalerConfiguration), _vTSuperResolutionScalerConfigurationSelSupportedScaleFactors)
 	return _ret
 }
-

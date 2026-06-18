@@ -90,7 +90,9 @@ func (x *ImagePyramid) KernelWidth() uint {
 
 func (x *ImagePyramid) asImagePyramid() *raw.MPSImagePyramid { return x.inner }
 
-func (x *ImagePyramid) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImagePyramid) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
 // ImagePyramidable is the interface implemented by [ImagePyramid], for mocking and DI.
 type ImagePyramidable interface {
@@ -103,4 +105,3 @@ type ImagePyramidable interface {
 }
 
 var _ ImagePyramidable = (*ImagePyramid)(nil)
-

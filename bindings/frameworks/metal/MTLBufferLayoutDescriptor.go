@@ -16,13 +16,13 @@ type MTLBufferLayoutDescriptor struct {
 }
 
 var (
-	_clsMTLBufferLayoutDescriptor = _objcClass("MTLBufferLayoutDescriptor")
-	_mTLBufferLayoutDescriptorSelStride = objc.RegisterName("stride")
-	_mTLBufferLayoutDescriptorSelSetStride = objc.RegisterName("setStride:")
-	_mTLBufferLayoutDescriptorSelStepFunction = objc.RegisterName("stepFunction")
+	_clsMTLBufferLayoutDescriptor                = _objcClass("MTLBufferLayoutDescriptor")
+	_mTLBufferLayoutDescriptorSelStride          = objc.RegisterName("stride")
+	_mTLBufferLayoutDescriptorSelSetStride       = objc.RegisterName("setStride:")
+	_mTLBufferLayoutDescriptorSelStepFunction    = objc.RegisterName("stepFunction")
 	_mTLBufferLayoutDescriptorSelSetStepFunction = objc.RegisterName("setStepFunction:")
-	_mTLBufferLayoutDescriptorSelStepRate = objc.RegisterName("stepRate")
-	_mTLBufferLayoutDescriptorSelSetStepRate = objc.RegisterName("setStepRate:")
+	_mTLBufferLayoutDescriptorSelStepRate        = objc.RegisterName("stepRate")
+	_mTLBufferLayoutDescriptorSelSetStepRate     = objc.RegisterName("setStepRate:")
 )
 
 func MTLBufferLayoutDescriptorFromID(id objc.ID) *MTLBufferLayoutDescriptor {
@@ -61,4 +61,3 @@ func (o *MTLBufferLayoutDescriptor) StepRate() uint {
 func (o *MTLBufferLayoutDescriptor) SetStepRate(stepRate uint) {
 	o.Ptr().Send(_mTLBufferLayoutDescriptorSelSetStepRate, stepRate)
 }
-

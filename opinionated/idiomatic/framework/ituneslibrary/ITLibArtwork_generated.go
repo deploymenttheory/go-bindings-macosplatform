@@ -61,4 +61,3 @@ type LibArtworkable interface {
 }
 
 var _ LibArtworkable = (*LibArtwork)(nil)
-

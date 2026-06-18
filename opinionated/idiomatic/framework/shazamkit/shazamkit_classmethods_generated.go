@@ -113,4 +113,3 @@ func GenerateSignatureFromAsset(ctx context.Context, asset *avfoundation.AVAsset
 		return _zero, ctx.Err()
 	}
 }
-

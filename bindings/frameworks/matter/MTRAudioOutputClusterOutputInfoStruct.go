@@ -16,13 +16,13 @@ type MTRAudioOutputClusterOutputInfoStruct struct {
 }
 
 var (
-	_clsMTRAudioOutputClusterOutputInfoStruct = _objcClass("MTRAudioOutputClusterOutputInfoStruct")
-	_mTRAudioOutputClusterOutputInfoStructSelIndex = objc.RegisterName("index")
-	_mTRAudioOutputClusterOutputInfoStructSelSetIndex = objc.RegisterName("setIndex:")
-	_mTRAudioOutputClusterOutputInfoStructSelOutputType = objc.RegisterName("outputType")
+	_clsMTRAudioOutputClusterOutputInfoStruct              = _objcClass("MTRAudioOutputClusterOutputInfoStruct")
+	_mTRAudioOutputClusterOutputInfoStructSelIndex         = objc.RegisterName("index")
+	_mTRAudioOutputClusterOutputInfoStructSelSetIndex      = objc.RegisterName("setIndex:")
+	_mTRAudioOutputClusterOutputInfoStructSelOutputType    = objc.RegisterName("outputType")
 	_mTRAudioOutputClusterOutputInfoStructSelSetOutputType = objc.RegisterName("setOutputType:")
-	_mTRAudioOutputClusterOutputInfoStructSelName = objc.RegisterName("name")
-	_mTRAudioOutputClusterOutputInfoStructSelSetName = objc.RegisterName("setName:")
+	_mTRAudioOutputClusterOutputInfoStructSelName          = objc.RegisterName("name")
+	_mTRAudioOutputClusterOutputInfoStructSelSetName       = objc.RegisterName("setName:")
 )
 
 func MTRAudioOutputClusterOutputInfoStructFromID(id objc.ID) *MTRAudioOutputClusterOutputInfoStruct {
@@ -37,7 +37,9 @@ func MTRAudioOutputClusterOutputInfoStructFromID(id objc.ID) *MTRAudioOutputClus
 
 func (o *MTRAudioOutputClusterOutputInfoStruct) Index() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAudioOutputClusterOutputInfoStructSelIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTRAudioOutputClusterOutputInfoStruct) SetIndex(index *foundation.NSNum
 
 func (o *MTRAudioOutputClusterOutputInfoStruct) OutputType() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAudioOutputClusterOutputInfoStructSelOutputType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *MTRAudioOutputClusterOutputInfoStruct) SetOutputType(outputType *founda
 
 func (o *MTRAudioOutputClusterOutputInfoStruct) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAudioOutputClusterOutputInfoStructSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTRAudioOutputClusterOutputInfoStruct) SetName(name *foundation.NSString) {
 	o.Ptr().Send(_mTRAudioOutputClusterOutputInfoStructSelSetName, name.Ptr())
 }
-

@@ -184,4 +184,3 @@ func LoadFromAssetChangesProgress(ctx context.Context, asset *avfoundation.AVAss
 		return _zero, ctx.Err()
 	}
 }
-

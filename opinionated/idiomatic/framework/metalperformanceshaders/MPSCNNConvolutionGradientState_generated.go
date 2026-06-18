@@ -71,9 +71,13 @@ func (x *CNNConvolutionGradientState) GradientForWeightsLayout() mpsneuralnetwor
 	return x.inner.GradientForWeightsLayout()
 }
 
-func (x *CNNConvolutionGradientState) asNNGradientState() *mpsneuralnetwork.MPSNNGradientState { return &x.inner.MPSNNGradientState }
+func (x *CNNConvolutionGradientState) asNNGradientState() *mpsneuralnetwork.MPSNNGradientState {
+	return &x.inner.MPSNNGradientState
+}
 
-func (x *CNNConvolutionGradientState) asState() *mpscore.MPSState { return &x.inner.MPSNNGradientState.MPSState }
+func (x *CNNConvolutionGradientState) asState() *mpscore.MPSState {
+	return &x.inner.MPSNNGradientState.MPSState
+}
 
 // CNNConvolutionGradientStateable is the interface implemented by [CNNConvolutionGradientState], for mocking and DI.
 type CNNConvolutionGradientStateable interface {
@@ -87,4 +91,3 @@ type CNNConvolutionGradientStateable interface {
 }
 
 var _ CNNConvolutionGradientStateable = (*CNNConvolutionGradientState)(nil)
-

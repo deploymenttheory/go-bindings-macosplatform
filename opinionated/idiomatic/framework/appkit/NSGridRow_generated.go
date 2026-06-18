@@ -188,4 +188,3 @@ type GridRowable interface {
 }
 
 var _ GridRowable = (*GridRow)(nil)
-

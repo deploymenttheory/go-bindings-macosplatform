@@ -16,12 +16,12 @@ type WKScriptMessage struct {
 }
 
 var (
-	_clsWKScriptMessage = _objcClass("WKScriptMessage")
-	_wKScriptMessageSelBody = objc.RegisterName("body")
-	_wKScriptMessageSelWebView = objc.RegisterName("webView")
+	_clsWKScriptMessage          = _objcClass("WKScriptMessage")
+	_wKScriptMessageSelBody      = objc.RegisterName("body")
+	_wKScriptMessageSelWebView   = objc.RegisterName("webView")
 	_wKScriptMessageSelFrameInfo = objc.RegisterName("frameInfo")
-	_wKScriptMessageSelName = objc.RegisterName("name")
-	_wKScriptMessageSelWorld = objc.RegisterName("world")
+	_wKScriptMessageSelName      = objc.RegisterName("name")
+	_wKScriptMessageSelWorld     = objc.RegisterName("world")
 )
 
 func WKScriptMessageFromID(id objc.ID) *WKScriptMessage {
@@ -43,28 +43,35 @@ func (o *WKScriptMessage) Body() objc.ID {
 // @abstract The web view sending the message.
 func (o *WKScriptMessage) WebView() *WKWebView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKScriptMessageSelWebView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebViewFromID(_ret)
 }
 
 // @abstract The frame sending the message.
 func (o *WKScriptMessage) FrameInfo() *WKFrameInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKScriptMessageSelFrameInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKFrameInfoFromID(_ret)
 }
 
 // @abstract The name of the message handler to which the message is sent.
 func (o *WKScriptMessage) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKScriptMessageSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract The content world from which the message was sent.
 func (o *WKScriptMessage) World() *WKContentWorld {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKScriptMessageSelWorld)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKContentWorldFromID(_ret)
 }
-

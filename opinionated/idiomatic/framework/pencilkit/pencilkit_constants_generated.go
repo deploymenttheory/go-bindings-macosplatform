@@ -12,5 +12,6 @@ import (
 
 // The UTType for storing drawing data.
 // PKAppleDrawingTypeIdentifier returns the value of the CoreFoundation reference constant PKAppleDrawingTypeIdentifier as an objc.ID.
-func PKAppleDrawingTypeIdentifier() objc.ID { return purego.CFConstant(raw.PKAppleDrawingTypeIdentifier()) }
-
+func PKAppleDrawingTypeIdentifier() objc.ID {
+	return purego.CFConstant(raw.PKAppleDrawingTypeIdentifier())
+}

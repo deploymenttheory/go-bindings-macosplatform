@@ -16,11 +16,15 @@ type MTRBridgedDeviceBasicInformationClusterActiveChangedEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBridgedDeviceBasicInformationClusterActiveChangedEvent].
-func (x *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) Unwrap() *raw.MTRBridgedDeviceBasicInformationClusterActiveChangedEvent { return x.inner }
+func (x *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) Unwrap() *raw.MTRBridgedDeviceBasicInformationClusterActiveChangedEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRBridgedDeviceBasicInformationClusterActiveChangedEventFromID adopts an existing object pointer as a MTRBridgedDeviceBasicInformationClusterActiveChangedEvent (nil for 0).
 func MTRBridgedDeviceBasicInformationClusterActiveChangedEventFromID(id objc.ID) *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent {
@@ -61,4 +65,3 @@ type MTRBridgedDeviceBasicInformationClusterActiveChangedEventable interface {
 }
 
 var _ MTRBridgedDeviceBasicInformationClusterActiveChangedEventable = (*MTRBridgedDeviceBasicInformationClusterActiveChangedEvent)(nil)
-

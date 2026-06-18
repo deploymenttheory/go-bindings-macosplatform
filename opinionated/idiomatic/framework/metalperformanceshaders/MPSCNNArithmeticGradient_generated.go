@@ -260,11 +260,17 @@ func (x *CNNArithmeticGradient) IsSecondarySourceFilter() bool {
 	return x.inner.IsSecondarySourceFilter()
 }
 
-func (x *CNNArithmeticGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
+func (x *CNNArithmeticGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNGradientKernel
+}
 
-func (x *CNNArithmeticGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *CNNArithmeticGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
-func (x *CNNArithmeticGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel }
+func (x *CNNArithmeticGradient) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel
+}
 
 // CNNArithmeticGradientable is the interface implemented by [CNNArithmeticGradient], for mocking and DI.
 type CNNArithmeticGradientable interface {
@@ -311,4 +317,3 @@ type CNNArithmeticGradientable interface {
 }
 
 var _ CNNArithmeticGradientable = (*CNNArithmeticGradient)(nil)
-

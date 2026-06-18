@@ -1556,4 +1556,3 @@ func CNSocialProfileUsernameKey() uintptr {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNSocialProfileUsernameKey")
 	return ptr
 }
-

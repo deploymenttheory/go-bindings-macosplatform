@@ -16,8 +16,8 @@ type MTLTileRenderPipelineColorAttachmentDescriptor struct {
 }
 
 var (
-	_clsMTLTileRenderPipelineColorAttachmentDescriptor = _objcClass("MTLTileRenderPipelineColorAttachmentDescriptor")
-	_mTLTileRenderPipelineColorAttachmentDescriptorSelPixelFormat = objc.RegisterName("pixelFormat")
+	_clsMTLTileRenderPipelineColorAttachmentDescriptor               = _objcClass("MTLTileRenderPipelineColorAttachmentDescriptor")
+	_mTLTileRenderPipelineColorAttachmentDescriptorSelPixelFormat    = objc.RegisterName("pixelFormat")
 	_mTLTileRenderPipelineColorAttachmentDescriptorSelSetPixelFormat = objc.RegisterName("setPixelFormat:")
 )
 
@@ -39,4 +39,3 @@ func (o *MTLTileRenderPipelineColorAttachmentDescriptor) PixelFormat() MTLPixelF
 func (o *MTLTileRenderPipelineColorAttachmentDescriptor) SetPixelFormat(pixelFormat MTLPixelFormat) {
 	o.Ptr().Send(_mTLTileRenderPipelineColorAttachmentDescriptorSelSetPixelFormat, pixelFormat)
 }
-

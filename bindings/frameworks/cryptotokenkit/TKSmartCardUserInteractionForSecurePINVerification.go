@@ -25,4 +25,3 @@ func TKSmartCardUserInteractionForSecurePINVerificationFromID(id objc.ID) *TKSma
 	purego.Track(o)
 	return o
 }
-

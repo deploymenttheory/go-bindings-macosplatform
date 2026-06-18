@@ -20,348 +20,348 @@ type NSWindow struct {
 }
 
 var (
-	_clsNSWindow = _objcClass("NSWindow")
-	_nSWindowSelFrameRectForContentRectStyleMask = objc.RegisterName("frameRectForContentRect:styleMask:")
-	_nSWindowSelContentRectForFrameRectStyleMask = objc.RegisterName("contentRectForFrameRect:styleMask:")
-	_nSWindowSelMinFrameWidthWithTitleStyleMask = objc.RegisterName("minFrameWidthWithTitle:styleMask:")
-	_nSWindowSelFrameRectForContentRect = objc.RegisterName("frameRectForContentRect:")
-	_nSWindowSelContentRectForFrameRect = objc.RegisterName("contentRectForFrameRect:")
-	_nSWindowSelInitWithContentRectStyleMaskBackingDefer = objc.RegisterName("initWithContentRect:styleMask:backing:defer:")
-	_nSWindowSelInitWithContentRectStyleMaskBackingDeferScreen = objc.RegisterName("initWithContentRect:styleMask:backing:defer:screen:")
-	_nSWindowSelAddTitlebarAccessoryViewController = objc.RegisterName("addTitlebarAccessoryViewController:")
-	_nSWindowSelInsertTitlebarAccessoryViewControllerAtIndex = objc.RegisterName("insertTitlebarAccessoryViewController:atIndex:")
-	_nSWindowSelRemoveTitlebarAccessoryViewControllerAtIndex = objc.RegisterName("removeTitlebarAccessoryViewControllerAtIndex:")
-	_nSWindowSelSetTitleWithRepresentedFilename = objc.RegisterName("setTitleWithRepresentedFilename:")
-	_nSWindowSelFieldEditorForObject = objc.RegisterName("fieldEditor:forObject:")
-	_nSWindowSelEndEditingFor = objc.RegisterName("endEditingFor:")
-	_nSWindowSelConstrainFrameRectToScreen = objc.RegisterName("constrainFrameRect:toScreen:")
-	_nSWindowSelSetFrameDisplay = objc.RegisterName("setFrame:display:")
-	_nSWindowSelSetContentSize = objc.RegisterName("setContentSize:")
-	_nSWindowSelSetFrameOrigin = objc.RegisterName("setFrameOrigin:")
-	_nSWindowSelSetFrameTopLeftPoint = objc.RegisterName("setFrameTopLeftPoint:")
-	_nSWindowSelCascadeTopLeftFromPoint = objc.RegisterName("cascadeTopLeftFromPoint:")
-	_nSWindowSelAnimationResizeTime = objc.RegisterName("animationResizeTime:")
-	_nSWindowSelSetFrameDisplayAnimate = objc.RegisterName("setFrame:display:animate:")
-	_nSWindowSelDisplayIfNeeded = objc.RegisterName("displayIfNeeded")
-	_nSWindowSelDisplay = objc.RegisterName("display")
-	_nSWindowSelUpdate = objc.RegisterName("update")
-	_nSWindowSelMakeFirstResponder = objc.RegisterName("makeFirstResponder:")
-	_nSWindowSelClose = objc.RegisterName("close")
-	_nSWindowSelMiniaturize = objc.RegisterName("miniaturize:")
-	_nSWindowSelDeminiaturize = objc.RegisterName("deminiaturize:")
-	_nSWindowSelZoom = objc.RegisterName("zoom:")
-	_nSWindowSelSetContentBorderThicknessForEdge = objc.RegisterName("setContentBorderThickness:forEdge:")
-	_nSWindowSelContentBorderThicknessForEdge = objc.RegisterName("contentBorderThicknessForEdge:")
-	_nSWindowSelSetAutorecalculatesContentBorderThicknessForEdge = objc.RegisterName("setAutorecalculatesContentBorderThickness:forEdge:")
-	_nSWindowSelAutorecalculatesContentBorderThicknessForEdge = objc.RegisterName("autorecalculatesContentBorderThicknessForEdge:")
-	_nSWindowSelCenter = objc.RegisterName("center")
-	_nSWindowSelMakeKeyAndOrderFront = objc.RegisterName("makeKeyAndOrderFront:")
-	_nSWindowSelOrderFront = objc.RegisterName("orderFront:")
-	_nSWindowSelOrderBack = objc.RegisterName("orderBack:")
-	_nSWindowSelOrderOut = objc.RegisterName("orderOut:")
-	_nSWindowSelOrderWindowRelativeTo = objc.RegisterName("orderWindow:relativeTo:")
-	_nSWindowSelOrderFrontRegardless = objc.RegisterName("orderFrontRegardless")
-	_nSWindowSelMakeKeyWindow = objc.RegisterName("makeKeyWindow")
-	_nSWindowSelMakeMainWindow = objc.RegisterName("makeMainWindow")
-	_nSWindowSelBecomeKeyWindow = objc.RegisterName("becomeKeyWindow")
-	_nSWindowSelResignKeyWindow = objc.RegisterName("resignKeyWindow")
-	_nSWindowSelBecomeMainWindow = objc.RegisterName("becomeMainWindow")
-	_nSWindowSelResignMainWindow = objc.RegisterName("resignMainWindow")
-	_nSWindowSelConvertRectToScreen = objc.RegisterName("convertRectToScreen:")
-	_nSWindowSelConvertRectFromScreen = objc.RegisterName("convertRectFromScreen:")
-	_nSWindowSelConvertPointToScreen = objc.RegisterName("convertPointToScreen:")
-	_nSWindowSelConvertPointFromScreen = objc.RegisterName("convertPointFromScreen:")
-	_nSWindowSelConvertRectToBacking = objc.RegisterName("convertRectToBacking:")
-	_nSWindowSelConvertRectFromBacking = objc.RegisterName("convertRectFromBacking:")
-	_nSWindowSelConvertPointToBacking = objc.RegisterName("convertPointToBacking:")
-	_nSWindowSelConvertPointFromBacking = objc.RegisterName("convertPointFromBacking:")
-	_nSWindowSelBackingAlignedRectOptions = objc.RegisterName("backingAlignedRect:options:")
-	_nSWindowSelPerformClose = objc.RegisterName("performClose:")
-	_nSWindowSelPerformMiniaturize = objc.RegisterName("performMiniaturize:")
-	_nSWindowSelPerformZoom = objc.RegisterName("performZoom:")
-	_nSWindowSelDataWithEPSInsideRect = objc.RegisterName("dataWithEPSInsideRect:")
-	_nSWindowSelDataWithPDFInsideRect = objc.RegisterName("dataWithPDFInsideRect:")
-	_nSWindowSelPrint = objc.RegisterName("print:")
-	_nSWindowSelSetDynamicDepthLimit = objc.RegisterName("setDynamicDepthLimit:")
-	_nSWindowSelInvalidateShadow = objc.RegisterName("invalidateShadow")
-	_nSWindowSelToggleFullScreen = objc.RegisterName("toggleFullScreen:")
-	_nSWindowSelSetFrameFromString = objc.RegisterName("setFrameFromString:")
-	_nSWindowSelSaveFrameUsingName = objc.RegisterName("saveFrameUsingName:")
-	_nSWindowSelSetFrameUsingNameForce = objc.RegisterName("setFrameUsingName:force:")
-	_nSWindowSelSetFrameUsingName = objc.RegisterName("setFrameUsingName:")
-	_nSWindowSelSetFrameAutosaveName = objc.RegisterName("setFrameAutosaveName:")
-	_nSWindowSelRemoveFrameUsingName = objc.RegisterName("removeFrameUsingName:")
-	_nSWindowSelBeginSheetCompletionHandler = objc.RegisterName("beginSheet:completionHandler:")
-	_nSWindowSelBeginCriticalSheetCompletionHandler = objc.RegisterName("beginCriticalSheet:completionHandler:")
-	_nSWindowSelEndSheet = objc.RegisterName("endSheet:")
-	_nSWindowSelEndSheetReturnCode = objc.RegisterName("endSheet:returnCode:")
-	_nSWindowSelStandardWindowButtonForStyleMask = objc.RegisterName("standardWindowButton:forStyleMask:")
-	_nSWindowSelStandardWindowButton = objc.RegisterName("standardWindowButton:")
-	_nSWindowSelAddChildWindowOrdered = objc.RegisterName("addChildWindow:ordered:")
-	_nSWindowSelRemoveChildWindow = objc.RegisterName("removeChildWindow:")
-	_nSWindowSelCanRepresentDisplayGamut = objc.RegisterName("canRepresentDisplayGamut:")
-	_nSWindowSelWindowNumbersWithOptions = objc.RegisterName("windowNumbersWithOptions:")
-	_nSWindowSelWindowNumberAtPointBelowWindowWithWindowNumber = objc.RegisterName("windowNumberAtPoint:belowWindowWithWindowNumber:")
-	_nSWindowSelWindowWithContentViewController = objc.RegisterName("windowWithContentViewController:")
-	_nSWindowSelPerformWindowDragWithEvent = objc.RegisterName("performWindowDragWithEvent:")
-	_nSWindowSelSelectNextKeyView = objc.RegisterName("selectNextKeyView:")
-	_nSWindowSelSelectPreviousKeyView = objc.RegisterName("selectPreviousKeyView:")
-	_nSWindowSelSelectKeyViewFollowingView = objc.RegisterName("selectKeyViewFollowingView:")
-	_nSWindowSelSelectKeyViewPrecedingView = objc.RegisterName("selectKeyViewPrecedingView:")
-	_nSWindowSelDisableKeyEquivalentForDefaultButtonCell = objc.RegisterName("disableKeyEquivalentForDefaultButtonCell")
-	_nSWindowSelEnableKeyEquivalentForDefaultButtonCell = objc.RegisterName("enableKeyEquivalentForDefaultButtonCell")
-	_nSWindowSelRecalculateKeyViewLoop = objc.RegisterName("recalculateKeyViewLoop")
-	_nSWindowSelToggleToolbarShown = objc.RegisterName("toggleToolbarShown:")
-	_nSWindowSelRunToolbarCustomizationPalette = objc.RegisterName("runToolbarCustomizationPalette:")
-	_nSWindowSelSelectNextTab = objc.RegisterName("selectNextTab:")
-	_nSWindowSelSelectPreviousTab = objc.RegisterName("selectPreviousTab:")
-	_nSWindowSelMoveTabToNewWindow = objc.RegisterName("moveTabToNewWindow:")
-	_nSWindowSelMergeAllWindows = objc.RegisterName("mergeAllWindows:")
-	_nSWindowSelToggleTabBar = objc.RegisterName("toggleTabBar:")
-	_nSWindowSelToggleTabOverview = objc.RegisterName("toggleTabOverview:")
-	_nSWindowSelAddTabbedWindowOrdered = objc.RegisterName("addTabbedWindow:ordered:")
-	_nSWindowSelTransferWindowSharingToWindowCompletionHandler = objc.RegisterName("transferWindowSharingToWindow:completionHandler:")
-	_nSWindowSelRequestSharingOfWindowCompletionHandler = objc.RegisterName("requestSharingOfWindow:completionHandler:")
+	_clsNSWindow                                                         = _objcClass("NSWindow")
+	_nSWindowSelFrameRectForContentRectStyleMask                         = objc.RegisterName("frameRectForContentRect:styleMask:")
+	_nSWindowSelContentRectForFrameRectStyleMask                         = objc.RegisterName("contentRectForFrameRect:styleMask:")
+	_nSWindowSelMinFrameWidthWithTitleStyleMask                          = objc.RegisterName("minFrameWidthWithTitle:styleMask:")
+	_nSWindowSelFrameRectForContentRect                                  = objc.RegisterName("frameRectForContentRect:")
+	_nSWindowSelContentRectForFrameRect                                  = objc.RegisterName("contentRectForFrameRect:")
+	_nSWindowSelInitWithContentRectStyleMaskBackingDefer                 = objc.RegisterName("initWithContentRect:styleMask:backing:defer:")
+	_nSWindowSelInitWithContentRectStyleMaskBackingDeferScreen           = objc.RegisterName("initWithContentRect:styleMask:backing:defer:screen:")
+	_nSWindowSelAddTitlebarAccessoryViewController                       = objc.RegisterName("addTitlebarAccessoryViewController:")
+	_nSWindowSelInsertTitlebarAccessoryViewControllerAtIndex             = objc.RegisterName("insertTitlebarAccessoryViewController:atIndex:")
+	_nSWindowSelRemoveTitlebarAccessoryViewControllerAtIndex             = objc.RegisterName("removeTitlebarAccessoryViewControllerAtIndex:")
+	_nSWindowSelSetTitleWithRepresentedFilename                          = objc.RegisterName("setTitleWithRepresentedFilename:")
+	_nSWindowSelFieldEditorForObject                                     = objc.RegisterName("fieldEditor:forObject:")
+	_nSWindowSelEndEditingFor                                            = objc.RegisterName("endEditingFor:")
+	_nSWindowSelConstrainFrameRectToScreen                               = objc.RegisterName("constrainFrameRect:toScreen:")
+	_nSWindowSelSetFrameDisplay                                          = objc.RegisterName("setFrame:display:")
+	_nSWindowSelSetContentSize                                           = objc.RegisterName("setContentSize:")
+	_nSWindowSelSetFrameOrigin                                           = objc.RegisterName("setFrameOrigin:")
+	_nSWindowSelSetFrameTopLeftPoint                                     = objc.RegisterName("setFrameTopLeftPoint:")
+	_nSWindowSelCascadeTopLeftFromPoint                                  = objc.RegisterName("cascadeTopLeftFromPoint:")
+	_nSWindowSelAnimationResizeTime                                      = objc.RegisterName("animationResizeTime:")
+	_nSWindowSelSetFrameDisplayAnimate                                   = objc.RegisterName("setFrame:display:animate:")
+	_nSWindowSelDisplayIfNeeded                                          = objc.RegisterName("displayIfNeeded")
+	_nSWindowSelDisplay                                                  = objc.RegisterName("display")
+	_nSWindowSelUpdate                                                   = objc.RegisterName("update")
+	_nSWindowSelMakeFirstResponder                                       = objc.RegisterName("makeFirstResponder:")
+	_nSWindowSelClose                                                    = objc.RegisterName("close")
+	_nSWindowSelMiniaturize                                              = objc.RegisterName("miniaturize:")
+	_nSWindowSelDeminiaturize                                            = objc.RegisterName("deminiaturize:")
+	_nSWindowSelZoom                                                     = objc.RegisterName("zoom:")
+	_nSWindowSelSetContentBorderThicknessForEdge                         = objc.RegisterName("setContentBorderThickness:forEdge:")
+	_nSWindowSelContentBorderThicknessForEdge                            = objc.RegisterName("contentBorderThicknessForEdge:")
+	_nSWindowSelSetAutorecalculatesContentBorderThicknessForEdge         = objc.RegisterName("setAutorecalculatesContentBorderThickness:forEdge:")
+	_nSWindowSelAutorecalculatesContentBorderThicknessForEdge            = objc.RegisterName("autorecalculatesContentBorderThicknessForEdge:")
+	_nSWindowSelCenter                                                   = objc.RegisterName("center")
+	_nSWindowSelMakeKeyAndOrderFront                                     = objc.RegisterName("makeKeyAndOrderFront:")
+	_nSWindowSelOrderFront                                               = objc.RegisterName("orderFront:")
+	_nSWindowSelOrderBack                                                = objc.RegisterName("orderBack:")
+	_nSWindowSelOrderOut                                                 = objc.RegisterName("orderOut:")
+	_nSWindowSelOrderWindowRelativeTo                                    = objc.RegisterName("orderWindow:relativeTo:")
+	_nSWindowSelOrderFrontRegardless                                     = objc.RegisterName("orderFrontRegardless")
+	_nSWindowSelMakeKeyWindow                                            = objc.RegisterName("makeKeyWindow")
+	_nSWindowSelMakeMainWindow                                           = objc.RegisterName("makeMainWindow")
+	_nSWindowSelBecomeKeyWindow                                          = objc.RegisterName("becomeKeyWindow")
+	_nSWindowSelResignKeyWindow                                          = objc.RegisterName("resignKeyWindow")
+	_nSWindowSelBecomeMainWindow                                         = objc.RegisterName("becomeMainWindow")
+	_nSWindowSelResignMainWindow                                         = objc.RegisterName("resignMainWindow")
+	_nSWindowSelConvertRectToScreen                                      = objc.RegisterName("convertRectToScreen:")
+	_nSWindowSelConvertRectFromScreen                                    = objc.RegisterName("convertRectFromScreen:")
+	_nSWindowSelConvertPointToScreen                                     = objc.RegisterName("convertPointToScreen:")
+	_nSWindowSelConvertPointFromScreen                                   = objc.RegisterName("convertPointFromScreen:")
+	_nSWindowSelConvertRectToBacking                                     = objc.RegisterName("convertRectToBacking:")
+	_nSWindowSelConvertRectFromBacking                                   = objc.RegisterName("convertRectFromBacking:")
+	_nSWindowSelConvertPointToBacking                                    = objc.RegisterName("convertPointToBacking:")
+	_nSWindowSelConvertPointFromBacking                                  = objc.RegisterName("convertPointFromBacking:")
+	_nSWindowSelBackingAlignedRectOptions                                = objc.RegisterName("backingAlignedRect:options:")
+	_nSWindowSelPerformClose                                             = objc.RegisterName("performClose:")
+	_nSWindowSelPerformMiniaturize                                       = objc.RegisterName("performMiniaturize:")
+	_nSWindowSelPerformZoom                                              = objc.RegisterName("performZoom:")
+	_nSWindowSelDataWithEPSInsideRect                                    = objc.RegisterName("dataWithEPSInsideRect:")
+	_nSWindowSelDataWithPDFInsideRect                                    = objc.RegisterName("dataWithPDFInsideRect:")
+	_nSWindowSelPrint                                                    = objc.RegisterName("print:")
+	_nSWindowSelSetDynamicDepthLimit                                     = objc.RegisterName("setDynamicDepthLimit:")
+	_nSWindowSelInvalidateShadow                                         = objc.RegisterName("invalidateShadow")
+	_nSWindowSelToggleFullScreen                                         = objc.RegisterName("toggleFullScreen:")
+	_nSWindowSelSetFrameFromString                                       = objc.RegisterName("setFrameFromString:")
+	_nSWindowSelSaveFrameUsingName                                       = objc.RegisterName("saveFrameUsingName:")
+	_nSWindowSelSetFrameUsingNameForce                                   = objc.RegisterName("setFrameUsingName:force:")
+	_nSWindowSelSetFrameUsingName                                        = objc.RegisterName("setFrameUsingName:")
+	_nSWindowSelSetFrameAutosaveName                                     = objc.RegisterName("setFrameAutosaveName:")
+	_nSWindowSelRemoveFrameUsingName                                     = objc.RegisterName("removeFrameUsingName:")
+	_nSWindowSelBeginSheetCompletionHandler                              = objc.RegisterName("beginSheet:completionHandler:")
+	_nSWindowSelBeginCriticalSheetCompletionHandler                      = objc.RegisterName("beginCriticalSheet:completionHandler:")
+	_nSWindowSelEndSheet                                                 = objc.RegisterName("endSheet:")
+	_nSWindowSelEndSheetReturnCode                                       = objc.RegisterName("endSheet:returnCode:")
+	_nSWindowSelStandardWindowButtonForStyleMask                         = objc.RegisterName("standardWindowButton:forStyleMask:")
+	_nSWindowSelStandardWindowButton                                     = objc.RegisterName("standardWindowButton:")
+	_nSWindowSelAddChildWindowOrdered                                    = objc.RegisterName("addChildWindow:ordered:")
+	_nSWindowSelRemoveChildWindow                                        = objc.RegisterName("removeChildWindow:")
+	_nSWindowSelCanRepresentDisplayGamut                                 = objc.RegisterName("canRepresentDisplayGamut:")
+	_nSWindowSelWindowNumbersWithOptions                                 = objc.RegisterName("windowNumbersWithOptions:")
+	_nSWindowSelWindowNumberAtPointBelowWindowWithWindowNumber           = objc.RegisterName("windowNumberAtPoint:belowWindowWithWindowNumber:")
+	_nSWindowSelWindowWithContentViewController                          = objc.RegisterName("windowWithContentViewController:")
+	_nSWindowSelPerformWindowDragWithEvent                               = objc.RegisterName("performWindowDragWithEvent:")
+	_nSWindowSelSelectNextKeyView                                        = objc.RegisterName("selectNextKeyView:")
+	_nSWindowSelSelectPreviousKeyView                                    = objc.RegisterName("selectPreviousKeyView:")
+	_nSWindowSelSelectKeyViewFollowingView                               = objc.RegisterName("selectKeyViewFollowingView:")
+	_nSWindowSelSelectKeyViewPrecedingView                               = objc.RegisterName("selectKeyViewPrecedingView:")
+	_nSWindowSelDisableKeyEquivalentForDefaultButtonCell                 = objc.RegisterName("disableKeyEquivalentForDefaultButtonCell")
+	_nSWindowSelEnableKeyEquivalentForDefaultButtonCell                  = objc.RegisterName("enableKeyEquivalentForDefaultButtonCell")
+	_nSWindowSelRecalculateKeyViewLoop                                   = objc.RegisterName("recalculateKeyViewLoop")
+	_nSWindowSelToggleToolbarShown                                       = objc.RegisterName("toggleToolbarShown:")
+	_nSWindowSelRunToolbarCustomizationPalette                           = objc.RegisterName("runToolbarCustomizationPalette:")
+	_nSWindowSelSelectNextTab                                            = objc.RegisterName("selectNextTab:")
+	_nSWindowSelSelectPreviousTab                                        = objc.RegisterName("selectPreviousTab:")
+	_nSWindowSelMoveTabToNewWindow                                       = objc.RegisterName("moveTabToNewWindow:")
+	_nSWindowSelMergeAllWindows                                          = objc.RegisterName("mergeAllWindows:")
+	_nSWindowSelToggleTabBar                                             = objc.RegisterName("toggleTabBar:")
+	_nSWindowSelToggleTabOverview                                        = objc.RegisterName("toggleTabOverview:")
+	_nSWindowSelAddTabbedWindowOrdered                                   = objc.RegisterName("addTabbedWindow:ordered:")
+	_nSWindowSelTransferWindowSharingToWindowCompletionHandler           = objc.RegisterName("transferWindowSharingToWindow:completionHandler:")
+	_nSWindowSelRequestSharingOfWindowCompletionHandler                  = objc.RegisterName("requestSharingOfWindow:completionHandler:")
 	_nSWindowSelRequestSharingOfWindowUsingPreviewTitleCompletionHandler = objc.RegisterName("requestSharingOfWindowUsingPreview:title:completionHandler:")
-	_nSWindowSelDefaultDepthLimit = objc.RegisterName("defaultDepthLimit")
-	_nSWindowSelTitle = objc.RegisterName("title")
-	_nSWindowSelSetTitle = objc.RegisterName("setTitle:")
-	_nSWindowSelSubtitle = objc.RegisterName("subtitle")
-	_nSWindowSelSetSubtitle = objc.RegisterName("setSubtitle:")
-	_nSWindowSelTitleVisibility = objc.RegisterName("titleVisibility")
-	_nSWindowSelSetTitleVisibility = objc.RegisterName("setTitleVisibility:")
-	_nSWindowSelTitlebarAppearsTransparent = objc.RegisterName("titlebarAppearsTransparent")
-	_nSWindowSelSetTitlebarAppearsTransparent = objc.RegisterName("setTitlebarAppearsTransparent:")
-	_nSWindowSelToolbarStyle = objc.RegisterName("toolbarStyle")
-	_nSWindowSelSetToolbarStyle = objc.RegisterName("setToolbarStyle:")
-	_nSWindowSelContentLayoutRect = objc.RegisterName("contentLayoutRect")
-	_nSWindowSelContentLayoutGuide = objc.RegisterName("contentLayoutGuide")
-	_nSWindowSelTitlebarAccessoryViewControllers = objc.RegisterName("titlebarAccessoryViewControllers")
-	_nSWindowSelSetTitlebarAccessoryViewControllers = objc.RegisterName("setTitlebarAccessoryViewControllers:")
-	_nSWindowSelRepresentedURL = objc.RegisterName("representedURL")
-	_nSWindowSelSetRepresentedURL = objc.RegisterName("setRepresentedURL:")
-	_nSWindowSelRepresentedFilename = objc.RegisterName("representedFilename")
-	_nSWindowSelSetRepresentedFilename = objc.RegisterName("setRepresentedFilename:")
-	_nSWindowSelIsExcludedFromWindowsMenu = objc.RegisterName("isExcludedFromWindowsMenu")
-	_nSWindowSelSetExcludedFromWindowsMenu = objc.RegisterName("setExcludedFromWindowsMenu:")
-	_nSWindowSelContentView = objc.RegisterName("contentView")
-	_nSWindowSelSetContentView = objc.RegisterName("setContentView:")
-	_nSWindowSelDelegate = objc.RegisterName("delegate")
-	_nSWindowSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSWindowSelWindowNumber = objc.RegisterName("windowNumber")
-	_nSWindowSelStyleMask = objc.RegisterName("styleMask")
-	_nSWindowSelSetStyleMask = objc.RegisterName("setStyleMask:")
-	_nSWindowSelCascadingReferenceFrame = objc.RegisterName("cascadingReferenceFrame")
-	_nSWindowSelFrame = objc.RegisterName("frame")
-	_nSWindowSelInLiveResize = objc.RegisterName("inLiveResize")
-	_nSWindowSelResizeIncrements = objc.RegisterName("resizeIncrements")
-	_nSWindowSelSetResizeIncrements = objc.RegisterName("setResizeIncrements:")
-	_nSWindowSelAspectRatio = objc.RegisterName("aspectRatio")
-	_nSWindowSelSetAspectRatio = objc.RegisterName("setAspectRatio:")
-	_nSWindowSelContentResizeIncrements = objc.RegisterName("contentResizeIncrements")
-	_nSWindowSelSetContentResizeIncrements = objc.RegisterName("setContentResizeIncrements:")
-	_nSWindowSelContentAspectRatio = objc.RegisterName("contentAspectRatio")
-	_nSWindowSelSetContentAspectRatio = objc.RegisterName("setContentAspectRatio:")
-	_nSWindowSelViewsNeedDisplay = objc.RegisterName("viewsNeedDisplay")
-	_nSWindowSelSetViewsNeedDisplay = objc.RegisterName("setViewsNeedDisplay:")
-	_nSWindowSelPreservesContentDuringLiveResize = objc.RegisterName("preservesContentDuringLiveResize")
-	_nSWindowSelSetPreservesContentDuringLiveResize = objc.RegisterName("setPreservesContentDuringLiveResize:")
-	_nSWindowSelFirstResponder = objc.RegisterName("firstResponder")
-	_nSWindowSelResizeFlags = objc.RegisterName("resizeFlags")
-	_nSWindowSelIsReleasedWhenClosed = objc.RegisterName("isReleasedWhenClosed")
-	_nSWindowSelSetReleasedWhenClosed = objc.RegisterName("setReleasedWhenClosed:")
-	_nSWindowSelIsZoomed = objc.RegisterName("isZoomed")
-	_nSWindowSelIsMiniaturized = objc.RegisterName("isMiniaturized")
-	_nSWindowSelBackgroundColor = objc.RegisterName("backgroundColor")
-	_nSWindowSelSetBackgroundColor = objc.RegisterName("setBackgroundColor:")
-	_nSWindowSelIsMovable = objc.RegisterName("isMovable")
-	_nSWindowSelSetMovable = objc.RegisterName("setMovable:")
-	_nSWindowSelIsMovableByWindowBackground = objc.RegisterName("isMovableByWindowBackground")
-	_nSWindowSelSetMovableByWindowBackground = objc.RegisterName("setMovableByWindowBackground:")
-	_nSWindowSelHidesOnDeactivate = objc.RegisterName("hidesOnDeactivate")
-	_nSWindowSelSetHidesOnDeactivate = objc.RegisterName("setHidesOnDeactivate:")
-	_nSWindowSelCanHide = objc.RegisterName("canHide")
-	_nSWindowSelSetCanHide = objc.RegisterName("setCanHide:")
-	_nSWindowSelMiniwindowImage = objc.RegisterName("miniwindowImage")
-	_nSWindowSelSetMiniwindowImage = objc.RegisterName("setMiniwindowImage:")
-	_nSWindowSelMiniwindowTitle = objc.RegisterName("miniwindowTitle")
-	_nSWindowSelSetMiniwindowTitle = objc.RegisterName("setMiniwindowTitle:")
-	_nSWindowSelDockTile = objc.RegisterName("dockTile")
-	_nSWindowSelIsDocumentEdited = objc.RegisterName("isDocumentEdited")
-	_nSWindowSelSetDocumentEdited = objc.RegisterName("setDocumentEdited:")
-	_nSWindowSelIsVisible = objc.RegisterName("isVisible")
-	_nSWindowSelIsKeyWindow = objc.RegisterName("isKeyWindow")
-	_nSWindowSelIsMainWindow = objc.RegisterName("isMainWindow")
-	_nSWindowSelCanBecomeKeyWindow = objc.RegisterName("canBecomeKeyWindow")
-	_nSWindowSelCanBecomeMainWindow = objc.RegisterName("canBecomeMainWindow")
-	_nSWindowSelWorksWhenModal = objc.RegisterName("worksWhenModal")
-	_nSWindowSelPreventsApplicationTerminationWhenModal = objc.RegisterName("preventsApplicationTerminationWhenModal")
-	_nSWindowSelSetPreventsApplicationTerminationWhenModal = objc.RegisterName("setPreventsApplicationTerminationWhenModal:")
-	_nSWindowSelBackingScaleFactor = objc.RegisterName("backingScaleFactor")
-	_nSWindowSelAllowsToolTipsWhenApplicationIsInactive = objc.RegisterName("allowsToolTipsWhenApplicationIsInactive")
-	_nSWindowSelSetAllowsToolTipsWhenApplicationIsInactive = objc.RegisterName("setAllowsToolTipsWhenApplicationIsInactive:")
-	_nSWindowSelBackingType = objc.RegisterName("backingType")
-	_nSWindowSelSetBackingType = objc.RegisterName("setBackingType:")
-	_nSWindowSelLevel = objc.RegisterName("level")
-	_nSWindowSelSetLevel = objc.RegisterName("setLevel:")
-	_nSWindowSelDepthLimit = objc.RegisterName("depthLimit")
-	_nSWindowSelSetDepthLimit = objc.RegisterName("setDepthLimit:")
-	_nSWindowSelHasDynamicDepthLimit = objc.RegisterName("hasDynamicDepthLimit")
-	_nSWindowSelScreen = objc.RegisterName("screen")
-	_nSWindowSelDeepestScreen = objc.RegisterName("deepestScreen")
-	_nSWindowSelHasShadow = objc.RegisterName("hasShadow")
-	_nSWindowSelSetHasShadow = objc.RegisterName("setHasShadow:")
-	_nSWindowSelAlphaValue = objc.RegisterName("alphaValue")
-	_nSWindowSelSetAlphaValue = objc.RegisterName("setAlphaValue:")
-	_nSWindowSelIsOpaque = objc.RegisterName("isOpaque")
-	_nSWindowSelSetOpaque = objc.RegisterName("setOpaque:")
-	_nSWindowSelSharingType = objc.RegisterName("sharingType")
-	_nSWindowSelSetSharingType = objc.RegisterName("setSharingType:")
-	_nSWindowSelAllowsConcurrentViewDrawing = objc.RegisterName("allowsConcurrentViewDrawing")
-	_nSWindowSelSetAllowsConcurrentViewDrawing = objc.RegisterName("setAllowsConcurrentViewDrawing:")
-	_nSWindowSelDisplaysWhenScreenProfileChanges = objc.RegisterName("displaysWhenScreenProfileChanges")
-	_nSWindowSelSetDisplaysWhenScreenProfileChanges = objc.RegisterName("setDisplaysWhenScreenProfileChanges:")
-	_nSWindowSelCanBecomeVisibleWithoutLogin = objc.RegisterName("canBecomeVisibleWithoutLogin")
-	_nSWindowSelSetCanBecomeVisibleWithoutLogin = objc.RegisterName("setCanBecomeVisibleWithoutLogin:")
-	_nSWindowSelCollectionBehavior = objc.RegisterName("collectionBehavior")
-	_nSWindowSelSetCollectionBehavior = objc.RegisterName("setCollectionBehavior:")
-	_nSWindowSelAnimationBehavior = objc.RegisterName("animationBehavior")
-	_nSWindowSelSetAnimationBehavior = objc.RegisterName("setAnimationBehavior:")
-	_nSWindowSelIsOnActiveSpace = objc.RegisterName("isOnActiveSpace")
-	_nSWindowSelStringWithSavedFrame = objc.RegisterName("stringWithSavedFrame")
-	_nSWindowSelFrameAutosaveName = objc.RegisterName("frameAutosaveName")
-	_nSWindowSelMinSize = objc.RegisterName("minSize")
-	_nSWindowSelSetMinSize = objc.RegisterName("setMinSize:")
-	_nSWindowSelMaxSize = objc.RegisterName("maxSize")
-	_nSWindowSelSetMaxSize = objc.RegisterName("setMaxSize:")
-	_nSWindowSelContentMinSize = objc.RegisterName("contentMinSize")
-	_nSWindowSelSetContentMinSize = objc.RegisterName("setContentMinSize:")
-	_nSWindowSelContentMaxSize = objc.RegisterName("contentMaxSize")
-	_nSWindowSelSetContentMaxSize = objc.RegisterName("setContentMaxSize:")
-	_nSWindowSelMinFullScreenContentSize = objc.RegisterName("minFullScreenContentSize")
-	_nSWindowSelSetMinFullScreenContentSize = objc.RegisterName("setMinFullScreenContentSize:")
-	_nSWindowSelMaxFullScreenContentSize = objc.RegisterName("maxFullScreenContentSize")
-	_nSWindowSelSetMaxFullScreenContentSize = objc.RegisterName("setMaxFullScreenContentSize:")
-	_nSWindowSelDeviceDescription = objc.RegisterName("deviceDescription")
-	_nSWindowSelWindowController = objc.RegisterName("windowController")
-	_nSWindowSelSetWindowController = objc.RegisterName("setWindowController:")
-	_nSWindowSelSheets = objc.RegisterName("sheets")
-	_nSWindowSelAttachedSheet = objc.RegisterName("attachedSheet")
-	_nSWindowSelIsSheet = objc.RegisterName("isSheet")
-	_nSWindowSelSheetParent = objc.RegisterName("sheetParent")
-	_nSWindowSelChildWindows = objc.RegisterName("childWindows")
-	_nSWindowSelParentWindow = objc.RegisterName("parentWindow")
-	_nSWindowSelSetParentWindow = objc.RegisterName("setParentWindow:")
-	_nSWindowSelAppearanceSource = objc.RegisterName("appearanceSource")
-	_nSWindowSelSetAppearanceSource = objc.RegisterName("setAppearanceSource:")
-	_nSWindowSelColorSpace = objc.RegisterName("colorSpace")
-	_nSWindowSelSetColorSpace = objc.RegisterName("setColorSpace:")
-	_nSWindowSelOcclusionState = objc.RegisterName("occlusionState")
-	_nSWindowSelTitlebarSeparatorStyle = objc.RegisterName("titlebarSeparatorStyle")
-	_nSWindowSelSetTitlebarSeparatorStyle = objc.RegisterName("setTitlebarSeparatorStyle:")
-	_nSWindowSelContentViewController = objc.RegisterName("contentViewController")
-	_nSWindowSelSetContentViewController = objc.RegisterName("setContentViewController:")
-	_nSWindowSelInitialFirstResponder = objc.RegisterName("initialFirstResponder")
-	_nSWindowSelSetInitialFirstResponder = objc.RegisterName("setInitialFirstResponder:")
-	_nSWindowSelKeyViewSelectionDirection = objc.RegisterName("keyViewSelectionDirection")
-	_nSWindowSelDefaultButtonCell = objc.RegisterName("defaultButtonCell")
-	_nSWindowSelSetDefaultButtonCell = objc.RegisterName("setDefaultButtonCell:")
-	_nSWindowSelAutorecalculatesKeyViewLoop = objc.RegisterName("autorecalculatesKeyViewLoop")
-	_nSWindowSelSetAutorecalculatesKeyViewLoop = objc.RegisterName("setAutorecalculatesKeyViewLoop:")
-	_nSWindowSelToolbar = objc.RegisterName("toolbar")
-	_nSWindowSelSetToolbar = objc.RegisterName("setToolbar:")
-	_nSWindowSelShowsToolbarButton = objc.RegisterName("showsToolbarButton")
-	_nSWindowSelSetShowsToolbarButton = objc.RegisterName("setShowsToolbarButton:")
-	_nSWindowSelAllowsAutomaticWindowTabbing = objc.RegisterName("allowsAutomaticWindowTabbing")
-	_nSWindowSelSetAllowsAutomaticWindowTabbing = objc.RegisterName("setAllowsAutomaticWindowTabbing:")
-	_nSWindowSelUserTabbingPreference = objc.RegisterName("userTabbingPreference")
-	_nSWindowSelTabbingMode = objc.RegisterName("tabbingMode")
-	_nSWindowSelSetTabbingMode = objc.RegisterName("setTabbingMode:")
-	_nSWindowSelTabbingIdentifier = objc.RegisterName("tabbingIdentifier")
-	_nSWindowSelSetTabbingIdentifier = objc.RegisterName("setTabbingIdentifier:")
-	_nSWindowSelTabbedWindows = objc.RegisterName("tabbedWindows")
-	_nSWindowSelTab = objc.RegisterName("tab")
-	_nSWindowSelTabGroup = objc.RegisterName("tabGroup")
-	_nSWindowSelHasActiveWindowSharingSession = objc.RegisterName("hasActiveWindowSharingSession")
-	_nSWindowSelWindowTitlebarLayoutDirection = objc.RegisterName("windowTitlebarLayoutDirection")
-	_nSWindowSelTrackEventsMatchingMaskTimeoutModeHandler = objc.RegisterName("trackEventsMatchingMask:timeout:mode:handler:")
-	_nSWindowSelNextEventMatchingMask = objc.RegisterName("nextEventMatchingMask:")
-	_nSWindowSelNextEventMatchingMaskUntilDateInModeDequeue = objc.RegisterName("nextEventMatchingMask:untilDate:inMode:dequeue:")
-	_nSWindowSelDiscardEventsMatchingMaskBeforeEvent = objc.RegisterName("discardEventsMatchingMask:beforeEvent:")
-	_nSWindowSelPostEventAtStart = objc.RegisterName("postEvent:atStart:")
-	_nSWindowSelSendEvent = objc.RegisterName("sendEvent:")
-	_nSWindowSelCurrentEvent = objc.RegisterName("currentEvent")
-	_nSWindowSelAcceptsMouseMovedEvents = objc.RegisterName("acceptsMouseMovedEvents")
-	_nSWindowSelSetAcceptsMouseMovedEvents = objc.RegisterName("setAcceptsMouseMovedEvents:")
-	_nSWindowSelIgnoresMouseEvents = objc.RegisterName("ignoresMouseEvents")
-	_nSWindowSelSetIgnoresMouseEvents = objc.RegisterName("setIgnoresMouseEvents:")
-	_nSWindowSelMouseLocationOutsideOfEventStream = objc.RegisterName("mouseLocationOutsideOfEventStream")
-	_nSWindowSelDisableCursorRects = objc.RegisterName("disableCursorRects")
-	_nSWindowSelEnableCursorRects = objc.RegisterName("enableCursorRects")
-	_nSWindowSelDiscardCursorRects = objc.RegisterName("discardCursorRects")
-	_nSWindowSelInvalidateCursorRectsForView = objc.RegisterName("invalidateCursorRectsForView:")
-	_nSWindowSelResetCursorRects = objc.RegisterName("resetCursorRects")
-	_nSWindowSelAreCursorRectsEnabled = objc.RegisterName("areCursorRectsEnabled")
-	_nSWindowSelBeginDraggingSessionWithItemsEventSource = objc.RegisterName("beginDraggingSessionWithItems:event:source:")
-	_nSWindowSelDragImageAtOffsetEventPasteboardSourceSlideBack = objc.RegisterName("dragImage:at:offset:event:pasteboard:source:slideBack:")
-	_nSWindowSelRegisterForDraggedTypes = objc.RegisterName("registerForDraggedTypes:")
-	_nSWindowSelUnregisterDraggedTypes = objc.RegisterName("unregisterDraggedTypes")
-	_nSWindowSelDisplayLinkWithTargetSelector = objc.RegisterName("displayLinkWithTarget:selector:")
-	_nSWindowSelCacheImageInRect = objc.RegisterName("cacheImageInRect:")
-	_nSWindowSelRestoreCachedImage = objc.RegisterName("restoreCachedImage")
-	_nSWindowSelDiscardCachedImage = objc.RegisterName("discardCachedImage")
-	_nSWindowSelMenuChanged = objc.RegisterName("menuChanged:")
-	_nSWindowSelGState = objc.RegisterName("gState")
-	_nSWindowSelConvertBaseToScreen = objc.RegisterName("convertBaseToScreen:")
-	_nSWindowSelConvertScreenToBase = objc.RegisterName("convertScreenToBase:")
-	_nSWindowSelUserSpaceScaleFactor = objc.RegisterName("userSpaceScaleFactor")
-	_nSWindowSelUseOptimizedDrawing = objc.RegisterName("useOptimizedDrawing:")
-	_nSWindowSelCanStoreColor = objc.RegisterName("canStoreColor")
-	_nSWindowSelDisableFlushWindow = objc.RegisterName("disableFlushWindow")
-	_nSWindowSelEnableFlushWindow = objc.RegisterName("enableFlushWindow")
-	_nSWindowSelFlushWindow = objc.RegisterName("flushWindow")
-	_nSWindowSelFlushWindowIfNeeded = objc.RegisterName("flushWindowIfNeeded")
-	_nSWindowSelInitWithWindowRef = objc.RegisterName("initWithWindowRef:")
-	_nSWindowSelDisableScreenUpdatesUntilFlush = objc.RegisterName("disableScreenUpdatesUntilFlush")
-	_nSWindowSelIsFlushWindowDisabled = objc.RegisterName("isFlushWindowDisabled")
-	_nSWindowSelIsAutodisplay = objc.RegisterName("isAutodisplay")
-	_nSWindowSelSetAutodisplay = objc.RegisterName("setAutodisplay:")
-	_nSWindowSelGraphicsContext = objc.RegisterName("graphicsContext")
-	_nSWindowSelIsOneShot = objc.RegisterName("isOneShot")
-	_nSWindowSelSetOneShot = objc.RegisterName("setOneShot:")
-	_nSWindowSelPreferredBackingLocation = objc.RegisterName("preferredBackingLocation")
-	_nSWindowSelSetPreferredBackingLocation = objc.RegisterName("setPreferredBackingLocation:")
-	_nSWindowSelBackingLocation = objc.RegisterName("backingLocation")
-	_nSWindowSelShowsResizeIndicator = objc.RegisterName("showsResizeIndicator")
-	_nSWindowSelSetShowsResizeIndicator = objc.RegisterName("setShowsResizeIndicator:")
-	_nSWindowSelWindowRef = objc.RegisterName("windowRef")
-	_nSWindowSelUpdateConstraintsIfNeeded = objc.RegisterName("updateConstraintsIfNeeded")
-	_nSWindowSelLayoutIfNeeded = objc.RegisterName("layoutIfNeeded")
-	_nSWindowSelAnchorAttributeForOrientation = objc.RegisterName("anchorAttributeForOrientation:")
-	_nSWindowSelSetAnchorAttributeForOrientation = objc.RegisterName("setAnchorAttribute:forOrientation:")
-	_nSWindowSelVisualizeConstraints = objc.RegisterName("visualizeConstraints:")
-	_nSWindowSelDrawers = objc.RegisterName("drawers")
-	_nSWindowSelSetIsMiniaturized = objc.RegisterName("setIsMiniaturized:")
-	_nSWindowSelSetIsVisible = objc.RegisterName("setIsVisible:")
-	_nSWindowSelSetIsZoomed = objc.RegisterName("setIsZoomed:")
-	_nSWindowSelHandleCloseScriptCommand = objc.RegisterName("handleCloseScriptCommand:")
-	_nSWindowSelHandlePrintScriptCommand = objc.RegisterName("handlePrintScriptCommand:")
-	_nSWindowSelHandleSaveScriptCommand = objc.RegisterName("handleSaveScriptCommand:")
-	_nSWindowSelHasCloseBox = objc.RegisterName("hasCloseBox")
-	_nSWindowSelHasTitleBar = objc.RegisterName("hasTitleBar")
-	_nSWindowSelIsFloatingPanel = objc.RegisterName("isFloatingPanel")
-	_nSWindowSelIsMiniaturizable = objc.RegisterName("isMiniaturizable")
-	_nSWindowSelIsModalPanel = objc.RegisterName("isModalPanel")
-	_nSWindowSelIsResizable = objc.RegisterName("isResizable")
-	_nSWindowSelIsZoomable = objc.RegisterName("isZoomable")
-	_nSWindowSelOrderedIndex = objc.RegisterName("orderedIndex")
-	_nSWindowSelSetOrderedIndex = objc.RegisterName("setOrderedIndex:")
-	_nSWindowSelDisableSnapshotRestoration = objc.RegisterName("disableSnapshotRestoration")
-	_nSWindowSelEnableSnapshotRestoration = objc.RegisterName("enableSnapshotRestoration")
-	_nSWindowSelIsRestorable = objc.RegisterName("isRestorable")
-	_nSWindowSelSetRestorable = objc.RegisterName("setRestorable:")
-	_nSWindowSelRestorationClass = objc.RegisterName("restorationClass")
-	_nSWindowSelSetRestorationClass = objc.RegisterName("setRestorationClass:")
+	_nSWindowSelDefaultDepthLimit                                        = objc.RegisterName("defaultDepthLimit")
+	_nSWindowSelTitle                                                    = objc.RegisterName("title")
+	_nSWindowSelSetTitle                                                 = objc.RegisterName("setTitle:")
+	_nSWindowSelSubtitle                                                 = objc.RegisterName("subtitle")
+	_nSWindowSelSetSubtitle                                              = objc.RegisterName("setSubtitle:")
+	_nSWindowSelTitleVisibility                                          = objc.RegisterName("titleVisibility")
+	_nSWindowSelSetTitleVisibility                                       = objc.RegisterName("setTitleVisibility:")
+	_nSWindowSelTitlebarAppearsTransparent                               = objc.RegisterName("titlebarAppearsTransparent")
+	_nSWindowSelSetTitlebarAppearsTransparent                            = objc.RegisterName("setTitlebarAppearsTransparent:")
+	_nSWindowSelToolbarStyle                                             = objc.RegisterName("toolbarStyle")
+	_nSWindowSelSetToolbarStyle                                          = objc.RegisterName("setToolbarStyle:")
+	_nSWindowSelContentLayoutRect                                        = objc.RegisterName("contentLayoutRect")
+	_nSWindowSelContentLayoutGuide                                       = objc.RegisterName("contentLayoutGuide")
+	_nSWindowSelTitlebarAccessoryViewControllers                         = objc.RegisterName("titlebarAccessoryViewControllers")
+	_nSWindowSelSetTitlebarAccessoryViewControllers                      = objc.RegisterName("setTitlebarAccessoryViewControllers:")
+	_nSWindowSelRepresentedURL                                           = objc.RegisterName("representedURL")
+	_nSWindowSelSetRepresentedURL                                        = objc.RegisterName("setRepresentedURL:")
+	_nSWindowSelRepresentedFilename                                      = objc.RegisterName("representedFilename")
+	_nSWindowSelSetRepresentedFilename                                   = objc.RegisterName("setRepresentedFilename:")
+	_nSWindowSelIsExcludedFromWindowsMenu                                = objc.RegisterName("isExcludedFromWindowsMenu")
+	_nSWindowSelSetExcludedFromWindowsMenu                               = objc.RegisterName("setExcludedFromWindowsMenu:")
+	_nSWindowSelContentView                                              = objc.RegisterName("contentView")
+	_nSWindowSelSetContentView                                           = objc.RegisterName("setContentView:")
+	_nSWindowSelDelegate                                                 = objc.RegisterName("delegate")
+	_nSWindowSelSetDelegate                                              = objc.RegisterName("setDelegate:")
+	_nSWindowSelWindowNumber                                             = objc.RegisterName("windowNumber")
+	_nSWindowSelStyleMask                                                = objc.RegisterName("styleMask")
+	_nSWindowSelSetStyleMask                                             = objc.RegisterName("setStyleMask:")
+	_nSWindowSelCascadingReferenceFrame                                  = objc.RegisterName("cascadingReferenceFrame")
+	_nSWindowSelFrame                                                    = objc.RegisterName("frame")
+	_nSWindowSelInLiveResize                                             = objc.RegisterName("inLiveResize")
+	_nSWindowSelResizeIncrements                                         = objc.RegisterName("resizeIncrements")
+	_nSWindowSelSetResizeIncrements                                      = objc.RegisterName("setResizeIncrements:")
+	_nSWindowSelAspectRatio                                              = objc.RegisterName("aspectRatio")
+	_nSWindowSelSetAspectRatio                                           = objc.RegisterName("setAspectRatio:")
+	_nSWindowSelContentResizeIncrements                                  = objc.RegisterName("contentResizeIncrements")
+	_nSWindowSelSetContentResizeIncrements                               = objc.RegisterName("setContentResizeIncrements:")
+	_nSWindowSelContentAspectRatio                                       = objc.RegisterName("contentAspectRatio")
+	_nSWindowSelSetContentAspectRatio                                    = objc.RegisterName("setContentAspectRatio:")
+	_nSWindowSelViewsNeedDisplay                                         = objc.RegisterName("viewsNeedDisplay")
+	_nSWindowSelSetViewsNeedDisplay                                      = objc.RegisterName("setViewsNeedDisplay:")
+	_nSWindowSelPreservesContentDuringLiveResize                         = objc.RegisterName("preservesContentDuringLiveResize")
+	_nSWindowSelSetPreservesContentDuringLiveResize                      = objc.RegisterName("setPreservesContentDuringLiveResize:")
+	_nSWindowSelFirstResponder                                           = objc.RegisterName("firstResponder")
+	_nSWindowSelResizeFlags                                              = objc.RegisterName("resizeFlags")
+	_nSWindowSelIsReleasedWhenClosed                                     = objc.RegisterName("isReleasedWhenClosed")
+	_nSWindowSelSetReleasedWhenClosed                                    = objc.RegisterName("setReleasedWhenClosed:")
+	_nSWindowSelIsZoomed                                                 = objc.RegisterName("isZoomed")
+	_nSWindowSelIsMiniaturized                                           = objc.RegisterName("isMiniaturized")
+	_nSWindowSelBackgroundColor                                          = objc.RegisterName("backgroundColor")
+	_nSWindowSelSetBackgroundColor                                       = objc.RegisterName("setBackgroundColor:")
+	_nSWindowSelIsMovable                                                = objc.RegisterName("isMovable")
+	_nSWindowSelSetMovable                                               = objc.RegisterName("setMovable:")
+	_nSWindowSelIsMovableByWindowBackground                              = objc.RegisterName("isMovableByWindowBackground")
+	_nSWindowSelSetMovableByWindowBackground                             = objc.RegisterName("setMovableByWindowBackground:")
+	_nSWindowSelHidesOnDeactivate                                        = objc.RegisterName("hidesOnDeactivate")
+	_nSWindowSelSetHidesOnDeactivate                                     = objc.RegisterName("setHidesOnDeactivate:")
+	_nSWindowSelCanHide                                                  = objc.RegisterName("canHide")
+	_nSWindowSelSetCanHide                                               = objc.RegisterName("setCanHide:")
+	_nSWindowSelMiniwindowImage                                          = objc.RegisterName("miniwindowImage")
+	_nSWindowSelSetMiniwindowImage                                       = objc.RegisterName("setMiniwindowImage:")
+	_nSWindowSelMiniwindowTitle                                          = objc.RegisterName("miniwindowTitle")
+	_nSWindowSelSetMiniwindowTitle                                       = objc.RegisterName("setMiniwindowTitle:")
+	_nSWindowSelDockTile                                                 = objc.RegisterName("dockTile")
+	_nSWindowSelIsDocumentEdited                                         = objc.RegisterName("isDocumentEdited")
+	_nSWindowSelSetDocumentEdited                                        = objc.RegisterName("setDocumentEdited:")
+	_nSWindowSelIsVisible                                                = objc.RegisterName("isVisible")
+	_nSWindowSelIsKeyWindow                                              = objc.RegisterName("isKeyWindow")
+	_nSWindowSelIsMainWindow                                             = objc.RegisterName("isMainWindow")
+	_nSWindowSelCanBecomeKeyWindow                                       = objc.RegisterName("canBecomeKeyWindow")
+	_nSWindowSelCanBecomeMainWindow                                      = objc.RegisterName("canBecomeMainWindow")
+	_nSWindowSelWorksWhenModal                                           = objc.RegisterName("worksWhenModal")
+	_nSWindowSelPreventsApplicationTerminationWhenModal                  = objc.RegisterName("preventsApplicationTerminationWhenModal")
+	_nSWindowSelSetPreventsApplicationTerminationWhenModal               = objc.RegisterName("setPreventsApplicationTerminationWhenModal:")
+	_nSWindowSelBackingScaleFactor                                       = objc.RegisterName("backingScaleFactor")
+	_nSWindowSelAllowsToolTipsWhenApplicationIsInactive                  = objc.RegisterName("allowsToolTipsWhenApplicationIsInactive")
+	_nSWindowSelSetAllowsToolTipsWhenApplicationIsInactive               = objc.RegisterName("setAllowsToolTipsWhenApplicationIsInactive:")
+	_nSWindowSelBackingType                                              = objc.RegisterName("backingType")
+	_nSWindowSelSetBackingType                                           = objc.RegisterName("setBackingType:")
+	_nSWindowSelLevel                                                    = objc.RegisterName("level")
+	_nSWindowSelSetLevel                                                 = objc.RegisterName("setLevel:")
+	_nSWindowSelDepthLimit                                               = objc.RegisterName("depthLimit")
+	_nSWindowSelSetDepthLimit                                            = objc.RegisterName("setDepthLimit:")
+	_nSWindowSelHasDynamicDepthLimit                                     = objc.RegisterName("hasDynamicDepthLimit")
+	_nSWindowSelScreen                                                   = objc.RegisterName("screen")
+	_nSWindowSelDeepestScreen                                            = objc.RegisterName("deepestScreen")
+	_nSWindowSelHasShadow                                                = objc.RegisterName("hasShadow")
+	_nSWindowSelSetHasShadow                                             = objc.RegisterName("setHasShadow:")
+	_nSWindowSelAlphaValue                                               = objc.RegisterName("alphaValue")
+	_nSWindowSelSetAlphaValue                                            = objc.RegisterName("setAlphaValue:")
+	_nSWindowSelIsOpaque                                                 = objc.RegisterName("isOpaque")
+	_nSWindowSelSetOpaque                                                = objc.RegisterName("setOpaque:")
+	_nSWindowSelSharingType                                              = objc.RegisterName("sharingType")
+	_nSWindowSelSetSharingType                                           = objc.RegisterName("setSharingType:")
+	_nSWindowSelAllowsConcurrentViewDrawing                              = objc.RegisterName("allowsConcurrentViewDrawing")
+	_nSWindowSelSetAllowsConcurrentViewDrawing                           = objc.RegisterName("setAllowsConcurrentViewDrawing:")
+	_nSWindowSelDisplaysWhenScreenProfileChanges                         = objc.RegisterName("displaysWhenScreenProfileChanges")
+	_nSWindowSelSetDisplaysWhenScreenProfileChanges                      = objc.RegisterName("setDisplaysWhenScreenProfileChanges:")
+	_nSWindowSelCanBecomeVisibleWithoutLogin                             = objc.RegisterName("canBecomeVisibleWithoutLogin")
+	_nSWindowSelSetCanBecomeVisibleWithoutLogin                          = objc.RegisterName("setCanBecomeVisibleWithoutLogin:")
+	_nSWindowSelCollectionBehavior                                       = objc.RegisterName("collectionBehavior")
+	_nSWindowSelSetCollectionBehavior                                    = objc.RegisterName("setCollectionBehavior:")
+	_nSWindowSelAnimationBehavior                                        = objc.RegisterName("animationBehavior")
+	_nSWindowSelSetAnimationBehavior                                     = objc.RegisterName("setAnimationBehavior:")
+	_nSWindowSelIsOnActiveSpace                                          = objc.RegisterName("isOnActiveSpace")
+	_nSWindowSelStringWithSavedFrame                                     = objc.RegisterName("stringWithSavedFrame")
+	_nSWindowSelFrameAutosaveName                                        = objc.RegisterName("frameAutosaveName")
+	_nSWindowSelMinSize                                                  = objc.RegisterName("minSize")
+	_nSWindowSelSetMinSize                                               = objc.RegisterName("setMinSize:")
+	_nSWindowSelMaxSize                                                  = objc.RegisterName("maxSize")
+	_nSWindowSelSetMaxSize                                               = objc.RegisterName("setMaxSize:")
+	_nSWindowSelContentMinSize                                           = objc.RegisterName("contentMinSize")
+	_nSWindowSelSetContentMinSize                                        = objc.RegisterName("setContentMinSize:")
+	_nSWindowSelContentMaxSize                                           = objc.RegisterName("contentMaxSize")
+	_nSWindowSelSetContentMaxSize                                        = objc.RegisterName("setContentMaxSize:")
+	_nSWindowSelMinFullScreenContentSize                                 = objc.RegisterName("minFullScreenContentSize")
+	_nSWindowSelSetMinFullScreenContentSize                              = objc.RegisterName("setMinFullScreenContentSize:")
+	_nSWindowSelMaxFullScreenContentSize                                 = objc.RegisterName("maxFullScreenContentSize")
+	_nSWindowSelSetMaxFullScreenContentSize                              = objc.RegisterName("setMaxFullScreenContentSize:")
+	_nSWindowSelDeviceDescription                                        = objc.RegisterName("deviceDescription")
+	_nSWindowSelWindowController                                         = objc.RegisterName("windowController")
+	_nSWindowSelSetWindowController                                      = objc.RegisterName("setWindowController:")
+	_nSWindowSelSheets                                                   = objc.RegisterName("sheets")
+	_nSWindowSelAttachedSheet                                            = objc.RegisterName("attachedSheet")
+	_nSWindowSelIsSheet                                                  = objc.RegisterName("isSheet")
+	_nSWindowSelSheetParent                                              = objc.RegisterName("sheetParent")
+	_nSWindowSelChildWindows                                             = objc.RegisterName("childWindows")
+	_nSWindowSelParentWindow                                             = objc.RegisterName("parentWindow")
+	_nSWindowSelSetParentWindow                                          = objc.RegisterName("setParentWindow:")
+	_nSWindowSelAppearanceSource                                         = objc.RegisterName("appearanceSource")
+	_nSWindowSelSetAppearanceSource                                      = objc.RegisterName("setAppearanceSource:")
+	_nSWindowSelColorSpace                                               = objc.RegisterName("colorSpace")
+	_nSWindowSelSetColorSpace                                            = objc.RegisterName("setColorSpace:")
+	_nSWindowSelOcclusionState                                           = objc.RegisterName("occlusionState")
+	_nSWindowSelTitlebarSeparatorStyle                                   = objc.RegisterName("titlebarSeparatorStyle")
+	_nSWindowSelSetTitlebarSeparatorStyle                                = objc.RegisterName("setTitlebarSeparatorStyle:")
+	_nSWindowSelContentViewController                                    = objc.RegisterName("contentViewController")
+	_nSWindowSelSetContentViewController                                 = objc.RegisterName("setContentViewController:")
+	_nSWindowSelInitialFirstResponder                                    = objc.RegisterName("initialFirstResponder")
+	_nSWindowSelSetInitialFirstResponder                                 = objc.RegisterName("setInitialFirstResponder:")
+	_nSWindowSelKeyViewSelectionDirection                                = objc.RegisterName("keyViewSelectionDirection")
+	_nSWindowSelDefaultButtonCell                                        = objc.RegisterName("defaultButtonCell")
+	_nSWindowSelSetDefaultButtonCell                                     = objc.RegisterName("setDefaultButtonCell:")
+	_nSWindowSelAutorecalculatesKeyViewLoop                              = objc.RegisterName("autorecalculatesKeyViewLoop")
+	_nSWindowSelSetAutorecalculatesKeyViewLoop                           = objc.RegisterName("setAutorecalculatesKeyViewLoop:")
+	_nSWindowSelToolbar                                                  = objc.RegisterName("toolbar")
+	_nSWindowSelSetToolbar                                               = objc.RegisterName("setToolbar:")
+	_nSWindowSelShowsToolbarButton                                       = objc.RegisterName("showsToolbarButton")
+	_nSWindowSelSetShowsToolbarButton                                    = objc.RegisterName("setShowsToolbarButton:")
+	_nSWindowSelAllowsAutomaticWindowTabbing                             = objc.RegisterName("allowsAutomaticWindowTabbing")
+	_nSWindowSelSetAllowsAutomaticWindowTabbing                          = objc.RegisterName("setAllowsAutomaticWindowTabbing:")
+	_nSWindowSelUserTabbingPreference                                    = objc.RegisterName("userTabbingPreference")
+	_nSWindowSelTabbingMode                                              = objc.RegisterName("tabbingMode")
+	_nSWindowSelSetTabbingMode                                           = objc.RegisterName("setTabbingMode:")
+	_nSWindowSelTabbingIdentifier                                        = objc.RegisterName("tabbingIdentifier")
+	_nSWindowSelSetTabbingIdentifier                                     = objc.RegisterName("setTabbingIdentifier:")
+	_nSWindowSelTabbedWindows                                            = objc.RegisterName("tabbedWindows")
+	_nSWindowSelTab                                                      = objc.RegisterName("tab")
+	_nSWindowSelTabGroup                                                 = objc.RegisterName("tabGroup")
+	_nSWindowSelHasActiveWindowSharingSession                            = objc.RegisterName("hasActiveWindowSharingSession")
+	_nSWindowSelWindowTitlebarLayoutDirection                            = objc.RegisterName("windowTitlebarLayoutDirection")
+	_nSWindowSelTrackEventsMatchingMaskTimeoutModeHandler                = objc.RegisterName("trackEventsMatchingMask:timeout:mode:handler:")
+	_nSWindowSelNextEventMatchingMask                                    = objc.RegisterName("nextEventMatchingMask:")
+	_nSWindowSelNextEventMatchingMaskUntilDateInModeDequeue              = objc.RegisterName("nextEventMatchingMask:untilDate:inMode:dequeue:")
+	_nSWindowSelDiscardEventsMatchingMaskBeforeEvent                     = objc.RegisterName("discardEventsMatchingMask:beforeEvent:")
+	_nSWindowSelPostEventAtStart                                         = objc.RegisterName("postEvent:atStart:")
+	_nSWindowSelSendEvent                                                = objc.RegisterName("sendEvent:")
+	_nSWindowSelCurrentEvent                                             = objc.RegisterName("currentEvent")
+	_nSWindowSelAcceptsMouseMovedEvents                                  = objc.RegisterName("acceptsMouseMovedEvents")
+	_nSWindowSelSetAcceptsMouseMovedEvents                               = objc.RegisterName("setAcceptsMouseMovedEvents:")
+	_nSWindowSelIgnoresMouseEvents                                       = objc.RegisterName("ignoresMouseEvents")
+	_nSWindowSelSetIgnoresMouseEvents                                    = objc.RegisterName("setIgnoresMouseEvents:")
+	_nSWindowSelMouseLocationOutsideOfEventStream                        = objc.RegisterName("mouseLocationOutsideOfEventStream")
+	_nSWindowSelDisableCursorRects                                       = objc.RegisterName("disableCursorRects")
+	_nSWindowSelEnableCursorRects                                        = objc.RegisterName("enableCursorRects")
+	_nSWindowSelDiscardCursorRects                                       = objc.RegisterName("discardCursorRects")
+	_nSWindowSelInvalidateCursorRectsForView                             = objc.RegisterName("invalidateCursorRectsForView:")
+	_nSWindowSelResetCursorRects                                         = objc.RegisterName("resetCursorRects")
+	_nSWindowSelAreCursorRectsEnabled                                    = objc.RegisterName("areCursorRectsEnabled")
+	_nSWindowSelBeginDraggingSessionWithItemsEventSource                 = objc.RegisterName("beginDraggingSessionWithItems:event:source:")
+	_nSWindowSelDragImageAtOffsetEventPasteboardSourceSlideBack          = objc.RegisterName("dragImage:at:offset:event:pasteboard:source:slideBack:")
+	_nSWindowSelRegisterForDraggedTypes                                  = objc.RegisterName("registerForDraggedTypes:")
+	_nSWindowSelUnregisterDraggedTypes                                   = objc.RegisterName("unregisterDraggedTypes")
+	_nSWindowSelDisplayLinkWithTargetSelector                            = objc.RegisterName("displayLinkWithTarget:selector:")
+	_nSWindowSelCacheImageInRect                                         = objc.RegisterName("cacheImageInRect:")
+	_nSWindowSelRestoreCachedImage                                       = objc.RegisterName("restoreCachedImage")
+	_nSWindowSelDiscardCachedImage                                       = objc.RegisterName("discardCachedImage")
+	_nSWindowSelMenuChanged                                              = objc.RegisterName("menuChanged:")
+	_nSWindowSelGState                                                   = objc.RegisterName("gState")
+	_nSWindowSelConvertBaseToScreen                                      = objc.RegisterName("convertBaseToScreen:")
+	_nSWindowSelConvertScreenToBase                                      = objc.RegisterName("convertScreenToBase:")
+	_nSWindowSelUserSpaceScaleFactor                                     = objc.RegisterName("userSpaceScaleFactor")
+	_nSWindowSelUseOptimizedDrawing                                      = objc.RegisterName("useOptimizedDrawing:")
+	_nSWindowSelCanStoreColor                                            = objc.RegisterName("canStoreColor")
+	_nSWindowSelDisableFlushWindow                                       = objc.RegisterName("disableFlushWindow")
+	_nSWindowSelEnableFlushWindow                                        = objc.RegisterName("enableFlushWindow")
+	_nSWindowSelFlushWindow                                              = objc.RegisterName("flushWindow")
+	_nSWindowSelFlushWindowIfNeeded                                      = objc.RegisterName("flushWindowIfNeeded")
+	_nSWindowSelInitWithWindowRef                                        = objc.RegisterName("initWithWindowRef:")
+	_nSWindowSelDisableScreenUpdatesUntilFlush                           = objc.RegisterName("disableScreenUpdatesUntilFlush")
+	_nSWindowSelIsFlushWindowDisabled                                    = objc.RegisterName("isFlushWindowDisabled")
+	_nSWindowSelIsAutodisplay                                            = objc.RegisterName("isAutodisplay")
+	_nSWindowSelSetAutodisplay                                           = objc.RegisterName("setAutodisplay:")
+	_nSWindowSelGraphicsContext                                          = objc.RegisterName("graphicsContext")
+	_nSWindowSelIsOneShot                                                = objc.RegisterName("isOneShot")
+	_nSWindowSelSetOneShot                                               = objc.RegisterName("setOneShot:")
+	_nSWindowSelPreferredBackingLocation                                 = objc.RegisterName("preferredBackingLocation")
+	_nSWindowSelSetPreferredBackingLocation                              = objc.RegisterName("setPreferredBackingLocation:")
+	_nSWindowSelBackingLocation                                          = objc.RegisterName("backingLocation")
+	_nSWindowSelShowsResizeIndicator                                     = objc.RegisterName("showsResizeIndicator")
+	_nSWindowSelSetShowsResizeIndicator                                  = objc.RegisterName("setShowsResizeIndicator:")
+	_nSWindowSelWindowRef                                                = objc.RegisterName("windowRef")
+	_nSWindowSelUpdateConstraintsIfNeeded                                = objc.RegisterName("updateConstraintsIfNeeded")
+	_nSWindowSelLayoutIfNeeded                                           = objc.RegisterName("layoutIfNeeded")
+	_nSWindowSelAnchorAttributeForOrientation                            = objc.RegisterName("anchorAttributeForOrientation:")
+	_nSWindowSelSetAnchorAttributeForOrientation                         = objc.RegisterName("setAnchorAttribute:forOrientation:")
+	_nSWindowSelVisualizeConstraints                                     = objc.RegisterName("visualizeConstraints:")
+	_nSWindowSelDrawers                                                  = objc.RegisterName("drawers")
+	_nSWindowSelSetIsMiniaturized                                        = objc.RegisterName("setIsMiniaturized:")
+	_nSWindowSelSetIsVisible                                             = objc.RegisterName("setIsVisible:")
+	_nSWindowSelSetIsZoomed                                              = objc.RegisterName("setIsZoomed:")
+	_nSWindowSelHandleCloseScriptCommand                                 = objc.RegisterName("handleCloseScriptCommand:")
+	_nSWindowSelHandlePrintScriptCommand                                 = objc.RegisterName("handlePrintScriptCommand:")
+	_nSWindowSelHandleSaveScriptCommand                                  = objc.RegisterName("handleSaveScriptCommand:")
+	_nSWindowSelHasCloseBox                                              = objc.RegisterName("hasCloseBox")
+	_nSWindowSelHasTitleBar                                              = objc.RegisterName("hasTitleBar")
+	_nSWindowSelIsFloatingPanel                                          = objc.RegisterName("isFloatingPanel")
+	_nSWindowSelIsMiniaturizable                                         = objc.RegisterName("isMiniaturizable")
+	_nSWindowSelIsModalPanel                                             = objc.RegisterName("isModalPanel")
+	_nSWindowSelIsResizable                                              = objc.RegisterName("isResizable")
+	_nSWindowSelIsZoomable                                               = objc.RegisterName("isZoomable")
+	_nSWindowSelOrderedIndex                                             = objc.RegisterName("orderedIndex")
+	_nSWindowSelSetOrderedIndex                                          = objc.RegisterName("setOrderedIndex:")
+	_nSWindowSelDisableSnapshotRestoration                               = objc.RegisterName("disableSnapshotRestoration")
+	_nSWindowSelEnableSnapshotRestoration                                = objc.RegisterName("enableSnapshotRestoration")
+	_nSWindowSelIsRestorable                                             = objc.RegisterName("isRestorable")
+	_nSWindowSelSetRestorable                                            = objc.RegisterName("setRestorable:")
+	_nSWindowSelRestorationClass                                         = objc.RegisterName("restorationClass")
+	_nSWindowSelSetRestorationClass                                      = objc.RegisterName("setRestorationClass:")
 )
 
 func NSWindowFromID(id objc.ID) *NSWindow {
@@ -401,13 +401,17 @@ func (o *NSWindow) ContentRectForFrameRect(frameRect corefoundation.CGRect) core
 
 func (o *NSWindow) InitWithContentRectStyleMaskBackingDefer(contentRect corefoundation.CGRect, style NSWindowStyleMask, backingStoreType NSBackingStoreType, flag bool) *NSWindow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelInitWithContentRectStyleMaskBackingDefer, contentRect, style, backingStoreType, flag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWindowFromID(_ret)
 }
 
 func (o *NSWindow) InitWithContentRectStyleMaskBackingDeferScreen(contentRect corefoundation.CGRect, style NSWindowStyleMask, backingStoreType NSBackingStoreType, flag bool, screen *NSScreen) *NSWindow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelInitWithContentRectStyleMaskBackingDeferScreen, contentRect, style, backingStoreType, flag, screen.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWindowFromID(_ret)
 }
 
@@ -429,7 +433,9 @@ func (o *NSWindow) SetTitleWithRepresentedFilename(filename *foundation.NSString
 
 func (o *NSWindow) FieldEditorForObject(createFlag bool, object objc.ID) *NSText {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelFieldEditorForObject, createFlag, object)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextFromID(_ret)
 }
 
@@ -643,13 +649,17 @@ func (o *NSWindow) PerformZoom(sender objc.ID) {
 
 func (o *NSWindow) DataWithEPSInsideRect(rect corefoundation.CGRect) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelDataWithEPSInsideRect, rect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *NSWindow) DataWithPDFInsideRect(rect corefoundation.CGRect) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelDataWithPDFInsideRect, rect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -729,13 +739,17 @@ func (o *NSWindow) EndSheetReturnCode(sheetWindow *NSWindow, returnCode int) {
 
 func NSWindowStandardWindowButtonForStyleMask(b NSWindowButton, styleMask NSWindowStyleMask) *NSButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSWindow), _nSWindowSelStandardWindowButtonForStyleMask, b, styleMask)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSButtonFromID(_ret)
 }
 
 func (o *NSWindow) StandardWindowButton(b NSWindowButton) *NSButton {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelStandardWindowButton, b)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSButtonFromID(_ret)
 }
 
@@ -768,7 +782,9 @@ func NSWindowWindowNumberAtPointBelowWindowWithWindowNumber(point corefoundation
 // Convenience method for creating an autoreleased titled window with the given contentViewController. A basic NSWindow with the following attributes is made: titled, closable, resizable, miniaturizable. The window's title is automatically bound to the contentViewController's title. The size of the window can easily be controlled by utilizing autolayout and applying size constraints to the view (or its subviews). The window has isReleasedWhenClosed set to NO, and it must be explicitly retained to keep the window instance alive. To have it automatically be freed when it is closed, do the following: [window retain] and [window setReleasedWhenClosed:YES].
 func NSWindowWindowWithContentViewController(contentViewController *NSViewController) *NSWindow {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSWindow), _nSWindowSelWindowWithContentViewController, contentViewController.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWindowFromID(_ret)
 }
 
@@ -887,7 +903,9 @@ func NSWindowDefaultDepthLimit() NSWindowDepth {
 
 func (o *NSWindow) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -898,7 +916,9 @@ func (o *NSWindow) SetTitle(title *foundation.NSString) {
 // Secondary text that may be displayed adjacent to or below the primary title depending on the configuration of the window. A value of empty string will remove the subtitle from the window layout.
 func (o *NSWindow) Subtitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelSubtitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -954,7 +974,9 @@ func (o *NSWindow) ContentLayoutGuide() objc.ID {
 
 func (o *NSWindow) TitlebarAccessoryViewControllers() *foundation.NSArray[*NSTitlebarAccessoryViewController] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelTitlebarAccessoryViewControllers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSTitlebarAccessoryViewController](_ret)
 }
 
@@ -965,7 +987,9 @@ func (o *NSWindow) SetTitlebarAccessoryViewControllers(titlebarAccessoryViewCont
 // If url is not nil and its path is not empty, the window will show a document icon in the titlebar. If the url represents a filename or other resource with a known icon, that icon will be used as the document icon.  Otherwise the default document icon will be used.  The icon can be customized using `-[[NSWindow standardWindowButton:NSWindowDocumentIconButton] setImage:customImage]`.  If url is not nil and its path is not empty, the window will have a pop-up menu which can be shown via command-click on the area containing the document icon and title.  By default, this menu will display the path components of the url.  The presence and contents of this menu can be controlled by the delegate method `-[window:shouldPopUpDocumentPathMenu:]` If the url is nil or has an empty path, the window will not show a document icon and will not have a pop-up menu available via command-click.
 func (o *NSWindow) RepresentedURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelRepresentedURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -976,7 +1000,9 @@ func (o *NSWindow) SetRepresentedURL(representedURL *foundation.NSURL) {
 
 func (o *NSWindow) RepresentedFilename() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelRepresentedFilename)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -995,7 +1021,9 @@ func (o *NSWindow) SetExcludedFromWindowsMenu(excludedFromWindowsMenu bool) {
 
 func (o *NSWindow) ContentView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelContentView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -1100,7 +1128,9 @@ func (o *NSWindow) SetPreservesContentDuringLiveResize(preservesContentDuringLiv
 
 func (o *NSWindow) FirstResponder() *NSResponder {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelFirstResponder)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSResponderFromID(_ret)
 }
 
@@ -1130,7 +1160,9 @@ func (o *NSWindow) IsMiniaturized() bool {
 
 func (o *NSWindow) BackgroundColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelBackgroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -1178,7 +1210,9 @@ func (o *NSWindow) SetCanHide(canHide bool) {
 
 func (o *NSWindow) MiniwindowImage() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelMiniwindowImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -1188,7 +1222,9 @@ func (o *NSWindow) SetMiniwindowImage(miniwindowImage *NSImage) {
 
 func (o *NSWindow) MiniwindowTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelMiniwindowTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1198,7 +1234,9 @@ func (o *NSWindow) SetMiniwindowTitle(miniwindowTitle *foundation.NSString) {
 
 func (o *NSWindow) DockTile() *NSDockTile {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelDockTile)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDockTileFromID(_ret)
 }
 
@@ -1304,13 +1342,17 @@ func (o *NSWindow) HasDynamicDepthLimit() bool {
 // The screen property returns the best screen for the window. If the window only intersects one screen, it returns that screen. If it intersects more than one screen, then it resolves the tie through based on what space it is mostly on. It may return nil if there are no available screens, or it is completely off screen.
 func (o *NSWindow) Screen() *NSScreen {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelScreen)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScreenFromID(_ret)
 }
 
 func (o *NSWindow) DeepestScreen() *NSScreen {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelDeepestScreen)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScreenFromID(_ret)
 }
 
@@ -1411,13 +1453,17 @@ func (o *NSWindow) IsOnActiveSpace() bool {
 
 func (o *NSWindow) StringWithSavedFrame() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelStringWithSavedFrame)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSWindow) FrameAutosaveName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelFrameAutosaveName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1482,7 +1528,9 @@ func (o *NSWindow) DeviceDescription() *foundation.NSDictionary[*foundation.NSSt
 
 func (o *NSWindow) WindowController() *NSWindowController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelWindowController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWindowControllerFromID(_ret)
 }
 
@@ -1493,14 +1541,18 @@ func (o *NSWindow) SetWindowController(windowController *NSWindowController) {
 // An ordered array of the sheets on the window. This consists of the presented sheets in top-to-bottom order, followed by queued sheets in the order they were queued. This does not include nested/sub-sheets.
 func (o *NSWindow) Sheets() *foundation.NSArray[*NSWindow] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelSheets)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSWindow](_ret)
 }
 
 // Returns the top-most sheet if there is one or more sheets, or nil if there is no sheet.
 func (o *NSWindow) AttachedSheet() *NSWindow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelAttachedSheet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWindowFromID(_ret)
 }
 
@@ -1512,19 +1564,25 @@ func (o *NSWindow) IsSheet() bool {
 // Returns the window that the sheet is directly attached to. This is based on the logical attachment of the sheet, not visual attachment. This relationship exists starting when the sheet is begun (using \c NSApplication's `-beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo: or NSWindow's -beginSheet:completionHandler:`), and ending once it is ordered out. Returns nil if the window is not a sheet or has no sheet parent.
 func (o *NSWindow) SheetParent() *NSWindow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelSheetParent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWindowFromID(_ret)
 }
 
 func (o *NSWindow) ChildWindows() *foundation.NSArray[*NSWindow] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelChildWindows)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSWindow](_ret)
 }
 
 func (o *NSWindow) ParentWindow() *NSWindow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelParentWindow)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWindowFromID(_ret)
 }
 
@@ -1535,7 +1593,9 @@ func (o *NSWindow) SetParentWindow(parentWindow *NSWindow) {
 // If set, the receiver will inherit the appearance of that object, as well as use KVO to observe its effectiveAppearance for changes. Typically this is used for child windows that are shown from a parent window or specific view. Defaults to NSApp.
 func (o *NSWindow) AppearanceSource() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelAppearanceSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
@@ -1546,7 +1606,9 @@ func (o *NSWindow) SetAppearanceSource(appearanceSource *foundation.NSObject) {
 
 func (o *NSWindow) ColorSpace() *NSColorSpace {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelColorSpace)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorSpaceFromID(_ret)
 }
 
@@ -1573,7 +1635,9 @@ func (o *NSWindow) SetTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSe
 // The main content view controller for the window. This provides the contentView of the window. Assigning this value will remove the existing contentView and will make the contentViewController.view the main contentView for the window. The default value is nil. The contentViewController only controls the contentView, and not the title of the window. The window title can easily be bound to the contentViewController with the following: [window bind:NSTitleBinding toObject:contentViewController withKeyPath:@"title" options:nil]. Setting the contentViewController will cause the window to resize based on the current size of the contentViewController. Autolayout should be used to restrict the size of the window. The value of the contentViewController is encoded in the NIB. Directly assigning a contentView will clear out the contentViewController.
 func (o *NSWindow) ContentViewController() *NSViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelContentViewController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewControllerFromID(_ret)
 }
 
@@ -1584,7 +1648,9 @@ func (o *NSWindow) SetContentViewController(contentViewController *NSViewControl
 
 func (o *NSWindow) InitialFirstResponder() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelInitialFirstResponder)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -1599,7 +1665,9 @@ func (o *NSWindow) KeyViewSelectionDirection() NSSelectionDirection {
 
 func (o *NSWindow) DefaultButtonCell() *NSButtonCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelDefaultButtonCell)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSButtonCellFromID(_ret)
 }
 
@@ -1618,7 +1686,9 @@ func (o *NSWindow) SetAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bo
 
 func (o *NSWindow) Toolbar() *NSToolbar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelToolbar)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSToolbarFromID(_ret)
 }
 
@@ -1668,7 +1738,9 @@ func (o *NSWindow) SetTabbingMode(tabbingMode NSWindowTabbingMode) {
 // Windows with the same \c tabbingIdentifier will have the ability to be tabbed together when a window is being shown. This allows aggregation of similar windows. By default, the \c tabbingIdentifier will be generated based on inherent window properties, such as the window class name, the delegate class name, the window controller class name, and some additional state. Windows can be explicitly made to group together by using the same \c tabbingIdentifier.
 func (o *NSWindow) TabbingIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelTabbingIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1680,21 +1752,27 @@ func (o *NSWindow) SetTabbingIdentifier(tabbingIdentifier *foundation.NSString) 
 // This is now a cover for `self.tabGroup.windows`, but will return nil if the window is not showing a tab bar.
 func (o *NSWindow) TabbedWindows() *foundation.NSArray[*NSWindow] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelTabbedWindows)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSWindow](_ret)
 }
 
 // Access the properties for this window when it is a tabbed window environment. See the \c NSWindowTab header and comments for more information.
 func (o *NSWindow) Tab() *NSWindowTab {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelTab)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWindowTabFromID(_ret)
 }
 
 // Represents a tab group of windows. This \c tabGroup is lazily created on demand.
 func (o *NSWindow) TabGroup() *NSWindowTabGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelTabGroup)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWindowTabGroupFromID(_ret)
 }
 
@@ -1727,13 +1805,17 @@ func (o *NSWindow) TrackEventsMatchingMaskTimeoutModeHandler(mask NSEventMask, t
 
 func (o *NSWindow) NextEventMatchingMask(mask NSEventMask) *NSEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelNextEventMatchingMask, mask)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEventFromID(_ret)
 }
 
 func (o *NSWindow) NextEventMatchingMaskUntilDateInModeDequeue(mask NSEventMask, expiration *foundation.NSDate, mode *foundation.NSString, deqFlag bool) *NSEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelNextEventMatchingMaskUntilDateInModeDequeue, mask, expiration.Ptr(), mode.Ptr(), deqFlag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEventFromID(_ret)
 }
 
@@ -1751,7 +1833,9 @@ func (o *NSWindow) SendEvent(event *NSEvent) {
 
 func (o *NSWindow) CurrentEvent() *NSEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelCurrentEvent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEventFromID(_ret)
 }
 
@@ -1805,7 +1889,9 @@ func (o *NSWindow) AreCursorRectsEnabled() bool {
 
 func (o *NSWindow) BeginDraggingSessionWithItemsEventSource(items *foundation.NSArray[*NSDraggingItem], event *NSEvent, source NSDraggingSource) *NSDraggingSession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelBeginDraggingSessionWithItemsEventSource, items.Ptr(), event.Ptr(), source)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDraggingSessionFromID(_ret)
 }
 
@@ -1827,7 +1913,9 @@ func (o *NSWindow) UnregisterDraggedTypes() {
 // Returns a new display link whose callback will be invoked in-sync with the display the window is on. If the window is not on any display the callback will not be invoked.
 func (o *NSWindow) DisplayLinkWithTargetSelector(target objc.ID, selector objc.SEL) *quartzcore.CADisplayLink {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelDisplayLinkWithTargetSelector, target, selector)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return quartzcore.CADisplayLinkFromID(_ret)
 }
 
@@ -1909,7 +1997,9 @@ func (o *NSWindow) FlushWindowIfNeeded() {
 // Deprecated: This method should not be used.
 func (o *NSWindow) InitWithWindowRef(windowRef unsafe.Pointer) *NSWindow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelInitWithWindowRef, windowRef)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWindowFromID(_ret)
 }
 
@@ -1938,7 +2028,9 @@ func (o *NSWindow) SetAutodisplay(autodisplay bool) {
 // Deprecated: Add instances of NSView to display content in a window.
 func (o *NSWindow) GraphicsContext() *NSGraphicsContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelGraphicsContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGraphicsContextFromID(_ret)
 }
 
@@ -2011,7 +2103,9 @@ func (o *NSWindow) VisualizeConstraints(constraints *foundation.NSArray[*NSLayou
 // Deprecated: Drawers are deprecated; consider using NSSplitViewController
 func (o *NSWindow) Drawers() *foundation.NSArray[*NSDrawer] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelDrawers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSDrawer](_ret)
 }
 
@@ -2111,4 +2205,3 @@ func (o *NSWindow) RestorationClass() unsafe.Pointer {
 func (o *NSWindow) SetRestorationClass(restorationClass unsafe.Pointer) {
 	o.Ptr().Send(_nSWindowSelSetRestorationClass, restorationClass)
 }
-

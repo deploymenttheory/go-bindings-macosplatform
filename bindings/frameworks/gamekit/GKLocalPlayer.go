@@ -19,39 +19,39 @@ type GKLocalPlayer struct {
 }
 
 var (
-	_clsGKLocalPlayer = _objcClass("GKLocalPlayer")
-	_gKLocalPlayerSelLoadRecentPlayersWithCompletionHandler = objc.RegisterName("loadRecentPlayersWithCompletionHandler:")
-	_gKLocalPlayerSelLoadChallengableFriendsWithCompletionHandler = objc.RegisterName("loadChallengableFriendsWithCompletionHandler:")
-	_gKLocalPlayerSelFetchItemsForIdentityVerificationSignature = objc.RegisterName("fetchItemsForIdentityVerificationSignature:")
-	_gKLocalPlayerSelLocal = objc.RegisterName("local")
-	_gKLocalPlayerSelLocalPlayer = objc.RegisterName("localPlayer")
-	_gKLocalPlayerSelIsAuthenticated = objc.RegisterName("isAuthenticated")
-	_gKLocalPlayerSelIsUnderage = objc.RegisterName("isUnderage")
-	_gKLocalPlayerSelIsMultiplayerGamingRestricted = objc.RegisterName("isMultiplayerGamingRestricted")
-	_gKLocalPlayerSelIsPersonalizedCommunicationRestricted = objc.RegisterName("isPersonalizedCommunicationRestricted")
-	_gKLocalPlayerSelRegisterListener = objc.RegisterName("registerListener:")
-	_gKLocalPlayerSelUnregisterListener = objc.RegisterName("unregisterListener:")
-	_gKLocalPlayerSelUnregisterAllListeners = objc.RegisterName("unregisterAllListeners")
-	_gKLocalPlayerSelSetDefaultLeaderboardCategoryIDCompletionHandler = objc.RegisterName("setDefaultLeaderboardCategoryID:completionHandler:")
-	_gKLocalPlayerSelLoadDefaultLeaderboardCategoryIDWithCompletionHandler = objc.RegisterName("loadDefaultLeaderboardCategoryIDWithCompletionHandler:")
-	_gKLocalPlayerSelAuthenticateWithCompletionHandler = objc.RegisterName("authenticateWithCompletionHandler:")
-	_gKLocalPlayerSelLoadFriendPlayersWithCompletionHandler = objc.RegisterName("loadFriendPlayersWithCompletionHandler:")
+	_clsGKLocalPlayer                                                           = _objcClass("GKLocalPlayer")
+	_gKLocalPlayerSelLoadRecentPlayersWithCompletionHandler                     = objc.RegisterName("loadRecentPlayersWithCompletionHandler:")
+	_gKLocalPlayerSelLoadChallengableFriendsWithCompletionHandler               = objc.RegisterName("loadChallengableFriendsWithCompletionHandler:")
+	_gKLocalPlayerSelFetchItemsForIdentityVerificationSignature                 = objc.RegisterName("fetchItemsForIdentityVerificationSignature:")
+	_gKLocalPlayerSelLocal                                                      = objc.RegisterName("local")
+	_gKLocalPlayerSelLocalPlayer                                                = objc.RegisterName("localPlayer")
+	_gKLocalPlayerSelIsAuthenticated                                            = objc.RegisterName("isAuthenticated")
+	_gKLocalPlayerSelIsUnderage                                                 = objc.RegisterName("isUnderage")
+	_gKLocalPlayerSelIsMultiplayerGamingRestricted                              = objc.RegisterName("isMultiplayerGamingRestricted")
+	_gKLocalPlayerSelIsPersonalizedCommunicationRestricted                      = objc.RegisterName("isPersonalizedCommunicationRestricted")
+	_gKLocalPlayerSelRegisterListener                                           = objc.RegisterName("registerListener:")
+	_gKLocalPlayerSelUnregisterListener                                         = objc.RegisterName("unregisterListener:")
+	_gKLocalPlayerSelUnregisterAllListeners                                     = objc.RegisterName("unregisterAllListeners")
+	_gKLocalPlayerSelSetDefaultLeaderboardCategoryIDCompletionHandler           = objc.RegisterName("setDefaultLeaderboardCategoryID:completionHandler:")
+	_gKLocalPlayerSelLoadDefaultLeaderboardCategoryIDWithCompletionHandler      = objc.RegisterName("loadDefaultLeaderboardCategoryIDWithCompletionHandler:")
+	_gKLocalPlayerSelAuthenticateWithCompletionHandler                          = objc.RegisterName("authenticateWithCompletionHandler:")
+	_gKLocalPlayerSelLoadFriendPlayersWithCompletionHandler                     = objc.RegisterName("loadFriendPlayersWithCompletionHandler:")
 	_gKLocalPlayerSelGenerateIdentityVerificationSignatureWithCompletionHandler = objc.RegisterName("generateIdentityVerificationSignatureWithCompletionHandler:")
-	_gKLocalPlayerSelLoadDefaultLeaderboardIdentifierWithCompletionHandler = objc.RegisterName("loadDefaultLeaderboardIdentifierWithCompletionHandler:")
-	_gKLocalPlayerSelSetDefaultLeaderboardIdentifierCompletionHandler = objc.RegisterName("setDefaultLeaderboardIdentifier:completionHandler:")
-	_gKLocalPlayerSelLoadFriendsWithCompletionHandler = objc.RegisterName("loadFriendsWithCompletionHandler:")
-	_gKLocalPlayerSelFriends = objc.RegisterName("friends")
-	_gKLocalPlayerSelLoadFriendsAuthorizationStatus = objc.RegisterName("loadFriendsAuthorizationStatus:")
-	_gKLocalPlayerSelLoadFriends = objc.RegisterName("loadFriends:")
-	_gKLocalPlayerSelLoadFriendsWithIdentifiersCompletionHandler = objc.RegisterName("loadFriendsWithIdentifiers:completionHandler:")
-	_gKLocalPlayerSelPresentFriendRequestCreatorFromWindowError = objc.RegisterName("presentFriendRequestCreatorFromWindow:error:")
-	_gKLocalPlayerSelAuthenticateHandler = objc.RegisterName("authenticateHandler")
-	_gKLocalPlayerSelSetAuthenticateHandler = objc.RegisterName("setAuthenticateHandler:")
-	_gKLocalPlayerSelIsPresentingFriendRequestViewController = objc.RegisterName("isPresentingFriendRequestViewController")
-	_gKLocalPlayerSelFetchSavedGamesWithCompletionHandler = objc.RegisterName("fetchSavedGamesWithCompletionHandler:")
-	_gKLocalPlayerSelSaveGameDataWithNameCompletionHandler = objc.RegisterName("saveGameData:withName:completionHandler:")
-	_gKLocalPlayerSelDeleteSavedGamesWithNameCompletionHandler = objc.RegisterName("deleteSavedGamesWithName:completionHandler:")
-	_gKLocalPlayerSelResolveConflictingSavedGamesWithDataCompletionHandler = objc.RegisterName("resolveConflictingSavedGames:withData:completionHandler:")
+	_gKLocalPlayerSelLoadDefaultLeaderboardIdentifierWithCompletionHandler      = objc.RegisterName("loadDefaultLeaderboardIdentifierWithCompletionHandler:")
+	_gKLocalPlayerSelSetDefaultLeaderboardIdentifierCompletionHandler           = objc.RegisterName("setDefaultLeaderboardIdentifier:completionHandler:")
+	_gKLocalPlayerSelLoadFriendsWithCompletionHandler                           = objc.RegisterName("loadFriendsWithCompletionHandler:")
+	_gKLocalPlayerSelFriends                                                    = objc.RegisterName("friends")
+	_gKLocalPlayerSelLoadFriendsAuthorizationStatus                             = objc.RegisterName("loadFriendsAuthorizationStatus:")
+	_gKLocalPlayerSelLoadFriends                                                = objc.RegisterName("loadFriends:")
+	_gKLocalPlayerSelLoadFriendsWithIdentifiersCompletionHandler                = objc.RegisterName("loadFriendsWithIdentifiers:completionHandler:")
+	_gKLocalPlayerSelPresentFriendRequestCreatorFromWindowError                 = objc.RegisterName("presentFriendRequestCreatorFromWindow:error:")
+	_gKLocalPlayerSelAuthenticateHandler                                        = objc.RegisterName("authenticateHandler")
+	_gKLocalPlayerSelSetAuthenticateHandler                                     = objc.RegisterName("setAuthenticateHandler:")
+	_gKLocalPlayerSelIsPresentingFriendRequestViewController                    = objc.RegisterName("isPresentingFriendRequestViewController")
+	_gKLocalPlayerSelFetchSavedGamesWithCompletionHandler                       = objc.RegisterName("fetchSavedGamesWithCompletionHandler:")
+	_gKLocalPlayerSelSaveGameDataWithNameCompletionHandler                      = objc.RegisterName("saveGameData:withName:completionHandler:")
+	_gKLocalPlayerSelDeleteSavedGamesWithNameCompletionHandler                  = objc.RegisterName("deleteSavedGamesWithName:completionHandler:")
+	_gKLocalPlayerSelResolveConflictingSavedGamesWithDataCompletionHandler      = objc.RegisterName("resolveConflictingSavedGames:withData:completionHandler:")
 )
 
 func GKLocalPlayerFromID(id objc.ID) *GKLocalPlayer {
@@ -118,13 +118,17 @@ func (o *GKLocalPlayer) FetchItemsForIdentityVerificationSignature(completionHan
 // Obtain the primary GKLocalPlayer object. The player is only available for offline play until logged in. A temporary player is created if no account is set up.
 func GKLocalPlayerLocal() *GKLocalPlayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKLocalPlayer), _gKLocalPlayerSelLocal)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKLocalPlayerFromID(_ret)
 }
 
 func GKLocalPlayerLocalPlayer() *GKLocalPlayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKLocalPlayer), _gKLocalPlayerSelLocalPlayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKLocalPlayerFromID(_ret)
 }
 
@@ -412,4 +416,3 @@ func (o *GKLocalPlayer) ResolveConflictingSavedGamesWithDataCompletionHandler(co
 	}
 	o.Ptr().Send(_gKLocalPlayerSelResolveConflictingSavedGamesWithDataCompletionHandler, conflictingSavedGames.Ptr(), data.Ptr(), __block_handler)
 }
-

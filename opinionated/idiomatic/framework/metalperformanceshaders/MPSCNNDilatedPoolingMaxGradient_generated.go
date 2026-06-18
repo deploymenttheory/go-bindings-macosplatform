@@ -173,13 +173,21 @@ func (x *CNNDilatedPoolingMaxGradient) WithLabel(label string) *CNNDilatedPoolin
 	return x
 }
 
-func (x *CNNDilatedPoolingMaxGradient) asCNNPoolingGradient() *mpsneuralnetwork.MPSCNNPoolingGradient { return &x.inner.MPSCNNPoolingGradient }
+func (x *CNNDilatedPoolingMaxGradient) asCNNPoolingGradient() *mpsneuralnetwork.MPSCNNPoolingGradient {
+	return &x.inner.MPSCNNPoolingGradient
+}
 
-func (x *CNNDilatedPoolingMaxGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel { return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel }
+func (x *CNNDilatedPoolingMaxGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel
+}
 
-func (x *CNNDilatedPoolingMaxGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *CNNDilatedPoolingMaxGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
-func (x *CNNDilatedPoolingMaxGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel }
+func (x *CNNDilatedPoolingMaxGradient) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel
+}
 
 // CNNDilatedPoolingMaxGradientable is the interface implemented by [CNNDilatedPoolingMaxGradient], for mocking and DI.
 type CNNDilatedPoolingMaxGradientable interface {
@@ -208,4 +216,3 @@ type CNNDilatedPoolingMaxGradientable interface {
 }
 
 var _ CNNDilatedPoolingMaxGradientable = (*CNNDilatedPoolingMaxGradient)(nil)
-

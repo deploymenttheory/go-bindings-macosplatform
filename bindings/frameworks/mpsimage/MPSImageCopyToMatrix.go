@@ -20,16 +20,16 @@ type MPSImageCopyToMatrix struct {
 }
 
 var (
-	_clsMPSImageCopyToMatrix = _objcClass("MPSImageCopyToMatrix")
-	_mPSImageCopyToMatrixSelInitWithDeviceDataLayout = objc.RegisterName("initWithDevice:dataLayout:")
-	_mPSImageCopyToMatrixSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSImageCopyToMatrixSelEncodeToCommandBufferSourceImageDestinationMatrix = objc.RegisterName("encodeToCommandBuffer:sourceImage:destinationMatrix:")
+	_clsMPSImageCopyToMatrix                                                        = _objcClass("MPSImageCopyToMatrix")
+	_mPSImageCopyToMatrixSelInitWithDeviceDataLayout                                = objc.RegisterName("initWithDevice:dataLayout:")
+	_mPSImageCopyToMatrixSelInitWithCoderDevice                                     = objc.RegisterName("initWithCoder:device:")
+	_mPSImageCopyToMatrixSelEncodeToCommandBufferSourceImageDestinationMatrix       = objc.RegisterName("encodeToCommandBuffer:sourceImage:destinationMatrix:")
 	_mPSImageCopyToMatrixSelEncodeBatchToCommandBufferSourceImagesDestinationMatrix = objc.RegisterName("encodeBatchToCommandBuffer:sourceImages:destinationMatrix:")
-	_mPSImageCopyToMatrixSelDestinationMatrixOrigin = objc.RegisterName("destinationMatrixOrigin")
-	_mPSImageCopyToMatrixSelSetDestinationMatrixOrigin = objc.RegisterName("setDestinationMatrixOrigin:")
-	_mPSImageCopyToMatrixSelDestinationMatrixBatchIndex = objc.RegisterName("destinationMatrixBatchIndex")
-	_mPSImageCopyToMatrixSelSetDestinationMatrixBatchIndex = objc.RegisterName("setDestinationMatrixBatchIndex:")
-	_mPSImageCopyToMatrixSelDataLayout = objc.RegisterName("dataLayout")
+	_mPSImageCopyToMatrixSelDestinationMatrixOrigin                                 = objc.RegisterName("destinationMatrixOrigin")
+	_mPSImageCopyToMatrixSelSetDestinationMatrixOrigin                              = objc.RegisterName("setDestinationMatrixOrigin:")
+	_mPSImageCopyToMatrixSelDestinationMatrixBatchIndex                             = objc.RegisterName("destinationMatrixBatchIndex")
+	_mPSImageCopyToMatrixSelSetDestinationMatrixBatchIndex                          = objc.RegisterName("setDestinationMatrixBatchIndex:")
+	_mPSImageCopyToMatrixSelDataLayout                                              = objc.RegisterName("dataLayout")
 )
 
 func MPSImageCopyToMatrixFromID(id objc.ID) *MPSImageCopyToMatrix {
@@ -45,14 +45,18 @@ func MPSImageCopyToMatrixFromID(id objc.ID) *MPSImageCopyToMatrix {
 // @abstract Initialize a MPSMatrixCopy object on a device @param    device        The device the kernel will run on @param    dataLayout    The data layout @return   A valid MPSMatrixCopy object or nil, if failure.
 func (o *MPSImageCopyToMatrix) InitWithDeviceDataLayout(device metal.MTLDevice, dataLayout mpscore.MPSDataLayout) *MPSImageCopyToMatrix {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageCopyToMatrixSelInitWithDeviceDataLayout, device, dataLayout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageCopyToMatrixFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSImageCopyToMatrix) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSImageCopyToMatrix {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageCopyToMatrixSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageCopyToMatrixFromID(_ret)
 }
 
@@ -91,4 +95,3 @@ func (o *MPSImageCopyToMatrix) DataLayout() mpscore.MPSDataLayout {
 	_ret := objc.Send[mpscore.MPSDataLayout](o.Ptr(), _mPSImageCopyToMatrixSelDataLayout)
 	return _ret
 }
-

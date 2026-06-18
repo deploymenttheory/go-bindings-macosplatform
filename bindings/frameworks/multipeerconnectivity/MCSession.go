@@ -18,22 +18,22 @@ type MCSession struct {
 }
 
 var (
-	_clsMCSession = _objcClass("MCSession")
-	_mCSessionSelInitWithPeer = objc.RegisterName("initWithPeer:")
-	_mCSessionSelInitWithPeerSecurityIdentityEncryptionPreference = objc.RegisterName("initWithPeer:securityIdentity:encryptionPreference:")
-	_mCSessionSelSendDataToPeersWithModeError = objc.RegisterName("sendData:toPeers:withMode:error:")
-	_mCSessionSelDisconnect = objc.RegisterName("disconnect")
+	_clsMCSession                                                     = _objcClass("MCSession")
+	_mCSessionSelInitWithPeer                                         = objc.RegisterName("initWithPeer:")
+	_mCSessionSelInitWithPeerSecurityIdentityEncryptionPreference     = objc.RegisterName("initWithPeer:securityIdentity:encryptionPreference:")
+	_mCSessionSelSendDataToPeersWithModeError                         = objc.RegisterName("sendData:toPeers:withMode:error:")
+	_mCSessionSelDisconnect                                           = objc.RegisterName("disconnect")
 	_mCSessionSelSendResourceAtURLWithNameToPeerWithCompletionHandler = objc.RegisterName("sendResourceAtURL:withName:toPeer:withCompletionHandler:")
-	_mCSessionSelStartStreamWithNameToPeerError = objc.RegisterName("startStreamWithName:toPeer:error:")
-	_mCSessionSelDelegate = objc.RegisterName("delegate")
-	_mCSessionSelSetDelegate = objc.RegisterName("setDelegate:")
-	_mCSessionSelMyPeerID = objc.RegisterName("myPeerID")
-	_mCSessionSelSecurityIdentity = objc.RegisterName("securityIdentity")
-	_mCSessionSelEncryptionPreference = objc.RegisterName("encryptionPreference")
-	_mCSessionSelConnectedPeers = objc.RegisterName("connectedPeers")
-	_mCSessionSelNearbyConnectionDataForPeerWithCompletionHandler = objc.RegisterName("nearbyConnectionDataForPeer:withCompletionHandler:")
-	_mCSessionSelConnectPeerWithNearbyConnectionData = objc.RegisterName("connectPeer:withNearbyConnectionData:")
-	_mCSessionSelCancelConnectPeer = objc.RegisterName("cancelConnectPeer:")
+	_mCSessionSelStartStreamWithNameToPeerError                       = objc.RegisterName("startStreamWithName:toPeer:error:")
+	_mCSessionSelDelegate                                             = objc.RegisterName("delegate")
+	_mCSessionSelSetDelegate                                          = objc.RegisterName("setDelegate:")
+	_mCSessionSelMyPeerID                                             = objc.RegisterName("myPeerID")
+	_mCSessionSelSecurityIdentity                                     = objc.RegisterName("securityIdentity")
+	_mCSessionSelEncryptionPreference                                 = objc.RegisterName("encryptionPreference")
+	_mCSessionSelConnectedPeers                                       = objc.RegisterName("connectedPeers")
+	_mCSessionSelNearbyConnectionDataForPeerWithCompletionHandler     = objc.RegisterName("nearbyConnectionDataForPeer:withCompletionHandler:")
+	_mCSessionSelConnectPeerWithNearbyConnectionData                  = objc.RegisterName("connectPeer:withNearbyConnectionData:")
+	_mCSessionSelCancelConnectPeer                                    = objc.RegisterName("cancelConnectPeer:")
 )
 
 func MCSessionFromID(id objc.ID) *MCSession {
@@ -48,13 +48,17 @@ func MCSessionFromID(id objc.ID) *MCSession {
 
 func (o *MCSession) InitWithPeer(myPeerID *MCPeerID) *MCSession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCSessionSelInitWithPeer, myPeerID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MCSessionFromID(_ret)
 }
 
 func (o *MCSession) InitWithPeerSecurityIdentityEncryptionPreference(myPeerID *MCPeerID, identity *foundation.NSArray[objc.ID], encryptionPreference MCEncryptionPreference) *MCSession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCSessionSelInitWithPeerSecurityIdentityEncryptionPreference, myPeerID.Ptr(), identity, encryptionPreference)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MCSessionFromID(_ret)
 }
 
@@ -80,14 +84,18 @@ func (o *MCSession) SendResourceAtURLWithNameToPeerWithCompletionHandler(resourc
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCSessionSelSendResourceAtURLWithNameToPeerWithCompletionHandler, resourceURL.Ptr(), resourceName.Ptr(), peerID.Ptr(), __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSProgressFromID(_ret)
 }
 
 func (o *MCSession) StartStreamWithNameToPeerError(streamName *foundation.NSString, peerID *MCPeerID) (*foundation.NSOutputStream, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCSessionSelStartStreamWithNameToPeerError, streamName.Ptr(), peerID.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -105,7 +113,9 @@ func (o *MCSession) SetDelegate(delegate MCSessionDelegate) {
 
 func (o *MCSession) MyPeerID() *MCPeerID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCSessionSelMyPeerID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MCPeerIDFromID(_ret)
 }
 
@@ -121,7 +131,9 @@ func (o *MCSession) EncryptionPreference() MCEncryptionPreference {
 
 func (o *MCSession) ConnectedPeers() *foundation.NSArray[*MCPeerID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCSessionSelConnectedPeers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MCPeerID](_ret)
 }
 
@@ -146,4 +158,3 @@ func (o *MCSession) ConnectPeerWithNearbyConnectionData(peerID *MCPeerID, data *
 func (o *MCSession) CancelConnectPeer(peerID *MCPeerID) {
 	o.Ptr().Send(_mCSessionSelCancelConnectPeer, peerID.Ptr())
 }
-

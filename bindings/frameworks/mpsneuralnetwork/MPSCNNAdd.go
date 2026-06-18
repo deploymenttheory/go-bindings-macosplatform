@@ -16,7 +16,7 @@ type MPSCNNAdd struct {
 }
 
 var (
-	_clsMPSCNNAdd = _objcClass("MPSCNNAdd")
+	_clsMPSCNNAdd               = _objcClass("MPSCNNAdd")
 	_mPSCNNAddSelInitWithDevice = objc.RegisterName("initWithDevice:")
 )
 
@@ -33,7 +33,8 @@ func MPSCNNAddFromID(id objc.ID) *MPSCNNAdd {
 // @abstract  Initialize the addition operator. @param     device           The device the filter will run on. @return    A valid MPSCNNAdd object or nil, if failure.
 func (o *MPSCNNAdd) InitWithDevice(device metal.MTLDevice) *MPSCNNAdd {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNAddSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNAddFromID(_ret)
 }
-

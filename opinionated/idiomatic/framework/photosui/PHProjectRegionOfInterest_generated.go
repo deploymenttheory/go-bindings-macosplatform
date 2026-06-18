@@ -71,4 +71,3 @@ type ProjectRegionOfInterestable interface {
 }
 
 var _ ProjectRegionOfInterestable = (*ProjectRegionOfInterest)(nil)
-

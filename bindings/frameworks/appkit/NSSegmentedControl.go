@@ -17,51 +17,51 @@ type NSSegmentedControl struct {
 }
 
 var (
-	_clsNSSegmentedControl = _objcClass("NSSegmentedControl")
-	_nSSegmentedControlSelSelectSegmentWithTag = objc.RegisterName("selectSegmentWithTag:")
-	_nSSegmentedControlSelSetWidthForSegment = objc.RegisterName("setWidth:forSegment:")
-	_nSSegmentedControlSelWidthForSegment = objc.RegisterName("widthForSegment:")
-	_nSSegmentedControlSelSetImageForSegment = objc.RegisterName("setImage:forSegment:")
-	_nSSegmentedControlSelImageForSegment = objc.RegisterName("imageForSegment:")
-	_nSSegmentedControlSelSetImageScalingForSegment = objc.RegisterName("setImageScaling:forSegment:")
-	_nSSegmentedControlSelImageScalingForSegment = objc.RegisterName("imageScalingForSegment:")
-	_nSSegmentedControlSelSetLabelForSegment = objc.RegisterName("setLabel:forSegment:")
-	_nSSegmentedControlSelLabelForSegment = objc.RegisterName("labelForSegment:")
-	_nSSegmentedControlSelSetMenuForSegment = objc.RegisterName("setMenu:forSegment:")
-	_nSSegmentedControlSelMenuForSegment = objc.RegisterName("menuForSegment:")
-	_nSSegmentedControlSelSetSelectedForSegment = objc.RegisterName("setSelected:forSegment:")
-	_nSSegmentedControlSelIsSelectedForSegment = objc.RegisterName("isSelectedForSegment:")
-	_nSSegmentedControlSelSetEnabledForSegment = objc.RegisterName("setEnabled:forSegment:")
-	_nSSegmentedControlSelIsEnabledForSegment = objc.RegisterName("isEnabledForSegment:")
-	_nSSegmentedControlSelSetToolTipForSegment = objc.RegisterName("setToolTip:forSegment:")
-	_nSSegmentedControlSelToolTipForSegment = objc.RegisterName("toolTipForSegment:")
-	_nSSegmentedControlSelSetTagForSegment = objc.RegisterName("setTag:forSegment:")
-	_nSSegmentedControlSelTagForSegment = objc.RegisterName("tagForSegment:")
-	_nSSegmentedControlSelSetShowsMenuIndicatorForSegment = objc.RegisterName("setShowsMenuIndicator:forSegment:")
-	_nSSegmentedControlSelShowsMenuIndicatorForSegment = objc.RegisterName("showsMenuIndicatorForSegment:")
-	_nSSegmentedControlSelSetAlignmentForSegment = objc.RegisterName("setAlignment:forSegment:")
-	_nSSegmentedControlSelAlignmentForSegment = objc.RegisterName("alignmentForSegment:")
-	_nSSegmentedControlSelCompressWithPrioritizedCompressionOptions = objc.RegisterName("compressWithPrioritizedCompressionOptions:")
-	_nSSegmentedControlSelMinimumSizeWithPrioritizedCompressionOptions = objc.RegisterName("minimumSizeWithPrioritizedCompressionOptions:")
-	_nSSegmentedControlSelSegmentCount = objc.RegisterName("segmentCount")
-	_nSSegmentedControlSelSetSegmentCount = objc.RegisterName("setSegmentCount:")
-	_nSSegmentedControlSelSelectedSegment = objc.RegisterName("selectedSegment")
-	_nSSegmentedControlSelSetSelectedSegment = objc.RegisterName("setSelectedSegment:")
-	_nSSegmentedControlSelSegmentStyle = objc.RegisterName("segmentStyle")
-	_nSSegmentedControlSelSetSegmentStyle = objc.RegisterName("setSegmentStyle:")
-	_nSSegmentedControlSelIsSpringLoaded = objc.RegisterName("isSpringLoaded")
-	_nSSegmentedControlSelSetSpringLoaded = objc.RegisterName("setSpringLoaded:")
-	_nSSegmentedControlSelTrackingMode = objc.RegisterName("trackingMode")
-	_nSSegmentedControlSelSetTrackingMode = objc.RegisterName("setTrackingMode:")
-	_nSSegmentedControlSelDoubleValueForSelectedSegment = objc.RegisterName("doubleValueForSelectedSegment")
-	_nSSegmentedControlSelSelectedSegmentBezelColor = objc.RegisterName("selectedSegmentBezelColor")
-	_nSSegmentedControlSelSetSelectedSegmentBezelColor = objc.RegisterName("setSelectedSegmentBezelColor:")
-	_nSSegmentedControlSelIndexOfSelectedItem = objc.RegisterName("indexOfSelectedItem")
-	_nSSegmentedControlSelSegmentDistribution = objc.RegisterName("segmentDistribution")
-	_nSSegmentedControlSelSetSegmentDistribution = objc.RegisterName("setSegmentDistribution:")
-	_nSSegmentedControlSelActiveCompressionOptions = objc.RegisterName("activeCompressionOptions")
-	_nSSegmentedControlSelBorderShape = objc.RegisterName("borderShape")
-	_nSSegmentedControlSelSetBorderShape = objc.RegisterName("setBorderShape:")
+	_clsNSSegmentedControl                                                   = _objcClass("NSSegmentedControl")
+	_nSSegmentedControlSelSelectSegmentWithTag                               = objc.RegisterName("selectSegmentWithTag:")
+	_nSSegmentedControlSelSetWidthForSegment                                 = objc.RegisterName("setWidth:forSegment:")
+	_nSSegmentedControlSelWidthForSegment                                    = objc.RegisterName("widthForSegment:")
+	_nSSegmentedControlSelSetImageForSegment                                 = objc.RegisterName("setImage:forSegment:")
+	_nSSegmentedControlSelImageForSegment                                    = objc.RegisterName("imageForSegment:")
+	_nSSegmentedControlSelSetImageScalingForSegment                          = objc.RegisterName("setImageScaling:forSegment:")
+	_nSSegmentedControlSelImageScalingForSegment                             = objc.RegisterName("imageScalingForSegment:")
+	_nSSegmentedControlSelSetLabelForSegment                                 = objc.RegisterName("setLabel:forSegment:")
+	_nSSegmentedControlSelLabelForSegment                                    = objc.RegisterName("labelForSegment:")
+	_nSSegmentedControlSelSetMenuForSegment                                  = objc.RegisterName("setMenu:forSegment:")
+	_nSSegmentedControlSelMenuForSegment                                     = objc.RegisterName("menuForSegment:")
+	_nSSegmentedControlSelSetSelectedForSegment                              = objc.RegisterName("setSelected:forSegment:")
+	_nSSegmentedControlSelIsSelectedForSegment                               = objc.RegisterName("isSelectedForSegment:")
+	_nSSegmentedControlSelSetEnabledForSegment                               = objc.RegisterName("setEnabled:forSegment:")
+	_nSSegmentedControlSelIsEnabledForSegment                                = objc.RegisterName("isEnabledForSegment:")
+	_nSSegmentedControlSelSetToolTipForSegment                               = objc.RegisterName("setToolTip:forSegment:")
+	_nSSegmentedControlSelToolTipForSegment                                  = objc.RegisterName("toolTipForSegment:")
+	_nSSegmentedControlSelSetTagForSegment                                   = objc.RegisterName("setTag:forSegment:")
+	_nSSegmentedControlSelTagForSegment                                      = objc.RegisterName("tagForSegment:")
+	_nSSegmentedControlSelSetShowsMenuIndicatorForSegment                    = objc.RegisterName("setShowsMenuIndicator:forSegment:")
+	_nSSegmentedControlSelShowsMenuIndicatorForSegment                       = objc.RegisterName("showsMenuIndicatorForSegment:")
+	_nSSegmentedControlSelSetAlignmentForSegment                             = objc.RegisterName("setAlignment:forSegment:")
+	_nSSegmentedControlSelAlignmentForSegment                                = objc.RegisterName("alignmentForSegment:")
+	_nSSegmentedControlSelCompressWithPrioritizedCompressionOptions          = objc.RegisterName("compressWithPrioritizedCompressionOptions:")
+	_nSSegmentedControlSelMinimumSizeWithPrioritizedCompressionOptions       = objc.RegisterName("minimumSizeWithPrioritizedCompressionOptions:")
+	_nSSegmentedControlSelSegmentCount                                       = objc.RegisterName("segmentCount")
+	_nSSegmentedControlSelSetSegmentCount                                    = objc.RegisterName("setSegmentCount:")
+	_nSSegmentedControlSelSelectedSegment                                    = objc.RegisterName("selectedSegment")
+	_nSSegmentedControlSelSetSelectedSegment                                 = objc.RegisterName("setSelectedSegment:")
+	_nSSegmentedControlSelSegmentStyle                                       = objc.RegisterName("segmentStyle")
+	_nSSegmentedControlSelSetSegmentStyle                                    = objc.RegisterName("setSegmentStyle:")
+	_nSSegmentedControlSelIsSpringLoaded                                     = objc.RegisterName("isSpringLoaded")
+	_nSSegmentedControlSelSetSpringLoaded                                    = objc.RegisterName("setSpringLoaded:")
+	_nSSegmentedControlSelTrackingMode                                       = objc.RegisterName("trackingMode")
+	_nSSegmentedControlSelSetTrackingMode                                    = objc.RegisterName("setTrackingMode:")
+	_nSSegmentedControlSelDoubleValueForSelectedSegment                      = objc.RegisterName("doubleValueForSelectedSegment")
+	_nSSegmentedControlSelSelectedSegmentBezelColor                          = objc.RegisterName("selectedSegmentBezelColor")
+	_nSSegmentedControlSelSetSelectedSegmentBezelColor                       = objc.RegisterName("setSelectedSegmentBezelColor:")
+	_nSSegmentedControlSelIndexOfSelectedItem                                = objc.RegisterName("indexOfSelectedItem")
+	_nSSegmentedControlSelSegmentDistribution                                = objc.RegisterName("segmentDistribution")
+	_nSSegmentedControlSelSetSegmentDistribution                             = objc.RegisterName("setSegmentDistribution:")
+	_nSSegmentedControlSelActiveCompressionOptions                           = objc.RegisterName("activeCompressionOptions")
+	_nSSegmentedControlSelBorderShape                                        = objc.RegisterName("borderShape")
+	_nSSegmentedControlSelSetBorderShape                                     = objc.RegisterName("setBorderShape:")
 	_nSSegmentedControlSelSegmentedControlWithLabelsTrackingModeTargetAction = objc.RegisterName("segmentedControlWithLabels:trackingMode:target:action:")
 	_nSSegmentedControlSelSegmentedControlWithImagesTrackingModeTargetAction = objc.RegisterName("segmentedControlWithImages:trackingMode:target:action:")
 )
@@ -96,7 +96,9 @@ func (o *NSSegmentedControl) SetImageForSegment(image *NSImage, segment int) {
 
 func (o *NSSegmentedControl) ImageForSegment(segment int) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedControlSelImageForSegment, segment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -115,7 +117,9 @@ func (o *NSSegmentedControl) SetLabelForSegment(label *foundation.NSString, segm
 
 func (o *NSSegmentedControl) LabelForSegment(segment int) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedControlSelLabelForSegment, segment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -125,7 +129,9 @@ func (o *NSSegmentedControl) SetMenuForSegment(menu *NSMenu, segment int) {
 
 func (o *NSSegmentedControl) MenuForSegment(segment int) *NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedControlSelMenuForSegment, segment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuFromID(_ret)
 }
 
@@ -153,7 +159,9 @@ func (o *NSSegmentedControl) SetToolTipForSegment(toolTip *foundation.NSString, 
 
 func (o *NSSegmentedControl) ToolTipForSegment(segment int) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedControlSelToolTipForSegment, segment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -245,7 +253,9 @@ func (o *NSSegmentedControl) DoubleValueForSelectedSegment() float64 {
 
 func (o *NSSegmentedControl) SelectedSegmentBezelColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedControlSelSelectedSegmentBezelColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -269,7 +279,9 @@ func (o *NSSegmentedControl) SetSegmentDistribution(segmentDistribution NSSegmen
 
 func (o *NSSegmentedControl) ActiveCompressionOptions() *NSUserInterfaceCompressionOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedControlSelActiveCompressionOptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUserInterfaceCompressionOptionsFromID(_ret)
 }
 
@@ -285,14 +297,17 @@ func (o *NSSegmentedControl) SetBorderShape(borderShape NSControlBorderShape) {
 // Creates a standard segmented control containing one segment for each of the provided labels. @param labels An array of localized label strings to use for the control's segments. @param trackingMode The selection mode for the control. The NSSegmentSwitchTracking enum describes the possible values and their effects. @param target The target object that receives action messages from the control. @param action The action message sent by the control. @return An initialized segmented control.
 func NSSegmentedControlSegmentedControlWithLabelsTrackingModeTargetAction(labels *foundation.NSArray[*foundation.NSString], trackingMode NSSegmentSwitchTracking, target objc.ID, action objc.SEL) *NSSegmentedControl {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSegmentedControl), _nSSegmentedControlSelSegmentedControlWithLabelsTrackingModeTargetAction, labels, trackingMode, target, action)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSegmentedControlFromID(_ret)
 }
 
 // Creates a standard segmented control containing one segment for each of the provided images. To ensure accessibility for this control, set the `accessibilityDescription` property on each of the provided images. @param images An array of image objects to use for the control's segments. @param trackingMode The selection mode for the control. The NSSegmentSwitchTracking enum describes the possible values and their effects. @param target The target object that receives action messages from the control. @param action The action message sent by the control. @return An initialized segmented control.
 func NSSegmentedControlSegmentedControlWithImagesTrackingModeTargetAction(images *foundation.NSArray[*NSImage], trackingMode NSSegmentSwitchTracking, target objc.ID, action objc.SEL) *NSSegmentedControl {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSegmentedControl), _nSSegmentedControlSelSegmentedControlWithImagesTrackingModeTargetAction, images.Ptr(), trackingMode, target, action)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSegmentedControlFromID(_ret)
 }
-

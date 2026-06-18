@@ -92,4 +92,3 @@ type TextTableBlockable interface {
 }
 
 var _ TextTableBlockable = (*TextTableBlock)(nil)
-

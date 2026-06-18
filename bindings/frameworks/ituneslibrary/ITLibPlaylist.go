@@ -16,16 +16,16 @@ type ITLibPlaylist struct {
 }
 
 var (
-	_clsITLibPlaylist = _objcClass("ITLibPlaylist")
-	_iTLibPlaylistSelName = objc.RegisterName("name")
-	_iTLibPlaylistSelIsPrimary = objc.RegisterName("isPrimary")
-	_iTLibPlaylistSelParentID = objc.RegisterName("parentID")
-	_iTLibPlaylistSelIsVisible = objc.RegisterName("isVisible")
+	_clsITLibPlaylist                   = _objcClass("ITLibPlaylist")
+	_iTLibPlaylistSelName               = objc.RegisterName("name")
+	_iTLibPlaylistSelIsPrimary          = objc.RegisterName("isPrimary")
+	_iTLibPlaylistSelParentID           = objc.RegisterName("parentID")
+	_iTLibPlaylistSelIsVisible          = objc.RegisterName("isVisible")
 	_iTLibPlaylistSelIsAllItemsPlaylist = objc.RegisterName("isAllItemsPlaylist")
-	_iTLibPlaylistSelItems = objc.RegisterName("items")
-	_iTLibPlaylistSelDistinguishedKind = objc.RegisterName("distinguishedKind")
-	_iTLibPlaylistSelKind = objc.RegisterName("kind")
-	_iTLibPlaylistSelIsMaster = objc.RegisterName("isMaster")
+	_iTLibPlaylistSelItems              = objc.RegisterName("items")
+	_iTLibPlaylistSelDistinguishedKind  = objc.RegisterName("distinguishedKind")
+	_iTLibPlaylistSelKind               = objc.RegisterName("kind")
+	_iTLibPlaylistSelIsMaster           = objc.RegisterName("isMaster")
 )
 
 func ITLibPlaylistFromID(id objc.ID) *ITLibPlaylist {
@@ -41,7 +41,9 @@ func ITLibPlaylistFromID(id objc.ID) *ITLibPlaylist {
 // @abstract The name or title of this playlist.
 func (o *ITLibPlaylist) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibPlaylistSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -54,7 +56,9 @@ func (o *ITLibPlaylist) IsPrimary() bool {
 // @abstract The unique identifier of this playlist' parent.
 func (o *ITLibPlaylist) ParentID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibPlaylistSelParentID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -73,7 +77,9 @@ func (o *ITLibPlaylist) IsAllItemsPlaylist() bool {
 // @abstract The media items contained within this playlist.
 func (o *ITLibPlaylist) Items() *foundation.NSArray[*ITLibMediaItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibPlaylistSelItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*ITLibMediaItem](_ret)
 }
 
@@ -95,4 +101,3 @@ func (o *ITLibPlaylist) IsMaster() bool {
 	_ret := objc.Send[bool](o.Ptr(), _iTLibPlaylistSelIsMaster)
 	return _ret
 }
-

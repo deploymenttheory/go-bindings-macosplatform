@@ -18,16 +18,16 @@ type ABRecord struct {
 }
 
 var (
-	_clsABRecord = _objcClass("ABRecord")
-	_aBRecordSelInit = objc.RegisterName("init")
-	_aBRecordSelInitWithAddressBook = objc.RegisterName("initWithAddressBook:")
-	_aBRecordSelValueForProperty = objc.RegisterName("valueForProperty:")
+	_clsABRecord                         = _objcClass("ABRecord")
+	_aBRecordSelInit                     = objc.RegisterName("init")
+	_aBRecordSelInitWithAddressBook      = objc.RegisterName("initWithAddressBook:")
+	_aBRecordSelValueForProperty         = objc.RegisterName("valueForProperty:")
 	_aBRecordSelSetValueForPropertyError = objc.RegisterName("setValue:forProperty:error:")
-	_aBRecordSelSetValueForProperty = objc.RegisterName("setValue:forProperty:")
-	_aBRecordSelRemoveValueForProperty = objc.RegisterName("removeValueForProperty:")
-	_aBRecordSelIsReadOnly = objc.RegisterName("isReadOnly")
-	_aBRecordSelUniqueId = objc.RegisterName("uniqueId")
-	_aBRecordSelDisplayName = objc.RegisterName("displayName")
+	_aBRecordSelSetValueForProperty      = objc.RegisterName("setValue:forProperty:")
+	_aBRecordSelRemoveValueForProperty   = objc.RegisterName("removeValueForProperty:")
+	_aBRecordSelIsReadOnly               = objc.RegisterName("isReadOnly")
+	_aBRecordSelUniqueId                 = objc.RegisterName("uniqueId")
+	_aBRecordSelDisplayName              = objc.RegisterName("displayName")
 )
 
 func ABRecordFromID(id objc.ID) *ABRecord {
@@ -81,13 +81,16 @@ func (o *ABRecord) IsReadOnly() bool {
 
 func (o *ABRecord) UniqueId() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aBRecordSelUniqueId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *ABRecord) DisplayName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aBRecordSelDisplayName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

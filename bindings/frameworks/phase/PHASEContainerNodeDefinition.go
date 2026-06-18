@@ -16,11 +16,11 @@ type PHASEContainerNodeDefinition struct {
 }
 
 var (
-	_clsPHASEContainerNodeDefinition = _objcClass("PHASEContainerNodeDefinition")
-	_pHASEContainerNodeDefinitionSelInit = objc.RegisterName("init")
-	_pHASEContainerNodeDefinitionSelNew = objc.RegisterName("new")
+	_clsPHASEContainerNodeDefinition                   = _objcClass("PHASEContainerNodeDefinition")
+	_pHASEContainerNodeDefinitionSelInit               = objc.RegisterName("init")
+	_pHASEContainerNodeDefinitionSelNew                = objc.RegisterName("new")
 	_pHASEContainerNodeDefinitionSelInitWithIdentifier = objc.RegisterName("initWithIdentifier:")
-	_pHASEContainerNodeDefinitionSelAddSubtree = objc.RegisterName("addSubtree:")
+	_pHASEContainerNodeDefinitionSelAddSubtree         = objc.RegisterName("addSubtree:")
 )
 
 func PHASEContainerNodeDefinitionFromID(id objc.ID) *PHASEContainerNodeDefinition {
@@ -36,7 +36,9 @@ func PHASEContainerNodeDefinitionFromID(id objc.ID) *PHASEContainerNodeDefinitio
 // @method init @abstract Create a container node definition @return A new PHASEContainerNodeDefinition object
 func (o *PHASEContainerNodeDefinition) Init() *PHASEContainerNodeDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEContainerNodeDefinitionSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEContainerNodeDefinitionFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func PHASEContainerNodeDefinitionNew() *PHASEContainerNodeDefinition {
 // @method initWithIdentifier @abstract Create a container node definition @param identifier An optional custom identifier to give to this object @return A new PHASEContainerNodeDefinition object
 func (o *PHASEContainerNodeDefinition) InitWithIdentifier(identifier *foundation.NSString) *PHASEContainerNodeDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEContainerNodeDefinitionSelInitWithIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEContainerNodeDefinitionFromID(_ret)
 }
 
@@ -57,4 +61,3 @@ func (o *PHASEContainerNodeDefinition) InitWithIdentifier(identifier *foundation
 func (o *PHASEContainerNodeDefinition) AddSubtree(subtree *PHASESoundEventNodeDefinition) {
 	o.Ptr().Send(_pHASEContainerNodeDefinitionSelAddSubtree, subtree.Ptr())
 }
-

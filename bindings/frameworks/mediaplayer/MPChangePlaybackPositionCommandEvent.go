@@ -15,7 +15,7 @@ type MPChangePlaybackPositionCommandEvent struct {
 }
 
 var (
-	_clsMPChangePlaybackPositionCommandEvent = _objcClass("MPChangePlaybackPositionCommandEvent")
+	_clsMPChangePlaybackPositionCommandEvent             = _objcClass("MPChangePlaybackPositionCommandEvent")
 	_mPChangePlaybackPositionCommandEventSelPositionTime = objc.RegisterName("positionTime")
 )
 
@@ -33,4 +33,3 @@ func (o *MPChangePlaybackPositionCommandEvent) PositionTime() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _mPChangePlaybackPositionCommandEventSelPositionTime)
 	return _ret
 }
-

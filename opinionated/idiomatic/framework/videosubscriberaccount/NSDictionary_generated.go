@@ -41,4 +41,3 @@ type NSDictionaryable interface {
 }
 
 var _ NSDictionaryable = (*NSDictionary)(nil)
-

@@ -18,12 +18,12 @@ type MLUpdateTask struct {
 }
 
 var (
-	_clsMLUpdateTask = _objcClass("MLUpdateTask")
+	_clsMLUpdateTask                                                                       = _objcClass("MLUpdateTask")
 	_mLUpdateTaskSelUpdateTaskForModelAtURLTrainingDataConfigurationCompletionHandlerError = objc.RegisterName("updateTaskForModelAtURL:trainingData:configuration:completionHandler:error:")
-	_mLUpdateTaskSelUpdateTaskForModelAtURLTrainingDataCompletionHandlerError = objc.RegisterName("updateTaskForModelAtURL:trainingData:completionHandler:error:")
-	_mLUpdateTaskSelUpdateTaskForModelAtURLTrainingDataConfigurationProgressHandlersError = objc.RegisterName("updateTaskForModelAtURL:trainingData:configuration:progressHandlers:error:")
-	_mLUpdateTaskSelUpdateTaskForModelAtURLTrainingDataProgressHandlersError = objc.RegisterName("updateTaskForModelAtURL:trainingData:progressHandlers:error:")
-	_mLUpdateTaskSelResumeWithParameters = objc.RegisterName("resumeWithParameters:")
+	_mLUpdateTaskSelUpdateTaskForModelAtURLTrainingDataCompletionHandlerError              = objc.RegisterName("updateTaskForModelAtURL:trainingData:completionHandler:error:")
+	_mLUpdateTaskSelUpdateTaskForModelAtURLTrainingDataConfigurationProgressHandlersError  = objc.RegisterName("updateTaskForModelAtURL:trainingData:configuration:progressHandlers:error:")
+	_mLUpdateTaskSelUpdateTaskForModelAtURLTrainingDataProgressHandlersError               = objc.RegisterName("updateTaskForModelAtURL:trainingData:progressHandlers:error:")
+	_mLUpdateTaskSelResumeWithParameters                                                   = objc.RegisterName("resumeWithParameters:")
 )
 
 func MLUpdateTaskFromID(id objc.ID) *MLUpdateTask {
@@ -49,7 +49,9 @@ func MLUpdateTaskUpdateTaskForModelAtURLTrainingDataConfigurationCompletionHandl
 	}
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLUpdateTask), _mLUpdateTaskSelUpdateTaskForModelAtURLTrainingDataConfigurationCompletionHandlerError, modelURL.Ptr(), trainingData, configuration.Ptr(), __block_completionHandler, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -69,7 +71,9 @@ func MLUpdateTaskUpdateTaskForModelAtURLTrainingDataCompletionHandlerError(model
 	}
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLUpdateTask), _mLUpdateTaskSelUpdateTaskForModelAtURLTrainingDataCompletionHandlerError, modelURL.Ptr(), trainingData, __block_completionHandler, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -79,7 +83,9 @@ func MLUpdateTaskUpdateTaskForModelAtURLTrainingDataCompletionHandlerError(model
 func MLUpdateTaskUpdateTaskForModelAtURLTrainingDataConfigurationProgressHandlersError(modelURL *foundation.NSURL, trainingData MLBatchProvider, configuration *MLModelConfiguration, progressHandlers *MLUpdateProgressHandlers) (*MLUpdateTask, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLUpdateTask), _mLUpdateTaskSelUpdateTaskForModelAtURLTrainingDataConfigurationProgressHandlersError, modelURL.Ptr(), trainingData, configuration.Ptr(), progressHandlers.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -89,7 +95,9 @@ func MLUpdateTaskUpdateTaskForModelAtURLTrainingDataConfigurationProgressHandler
 func MLUpdateTaskUpdateTaskForModelAtURLTrainingDataProgressHandlersError(modelURL *foundation.NSURL, trainingData MLBatchProvider, progressHandlers *MLUpdateProgressHandlers) (*MLUpdateTask, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLUpdateTask), _mLUpdateTaskSelUpdateTaskForModelAtURLTrainingDataProgressHandlersError, modelURL.Ptr(), trainingData, progressHandlers.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -99,4 +107,3 @@ func MLUpdateTaskUpdateTaskForModelAtURLTrainingDataProgressHandlersError(modelU
 func (o *MLUpdateTask) ResumeWithParameters(updateParameters *foundation.NSDictionary[*MLParameterKey, objc.ID]) {
 	o.Ptr().Send(_mLUpdateTaskSelResumeWithParameters, updateParameters)
 }
-

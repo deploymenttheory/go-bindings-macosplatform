@@ -16,9 +16,9 @@ type LADomainStateBiometry struct {
 }
 
 var (
-	_clsLADomainStateBiometry = _objcClass("LADomainStateBiometry")
+	_clsLADomainStateBiometry             = _objcClass("LADomainStateBiometry")
 	_lADomainStateBiometrySelBiometryType = objc.RegisterName("biometryType")
-	_lADomainStateBiometrySelStateHash = objc.RegisterName("stateHash")
+	_lADomainStateBiometrySelStateHash    = objc.RegisterName("stateHash")
 )
 
 func LADomainStateBiometryFromID(id objc.ID) *LADomainStateBiometry {
@@ -40,7 +40,8 @@ func (o *LADomainStateBiometry) BiometryType() LABiometryType {
 // Contains state hash data for the available biometry type. Returns `nil` if no biometry entities are enrolled. @discussion  If biometric database was modified (fingers, faces were removed or added), `stateHash` data will change. Nature of such database changes cannot be determined but comparing data of `stateHash` after different evaluatePolicy calls will reveal the fact database was changed between the calls. @warning Please note that the value returned by this property can change exceptionally between major OS versions even if the state of biometry has not changed.
 func (o *LADomainStateBiometry) StateHash() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lADomainStateBiometrySelStateHash)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

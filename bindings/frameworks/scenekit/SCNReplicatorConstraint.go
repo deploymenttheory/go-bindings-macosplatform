@@ -15,22 +15,22 @@ type SCNReplicatorConstraint struct {
 }
 
 var (
-	_clsSCNReplicatorConstraint = _objcClass("SCNReplicatorConstraint")
+	_clsSCNReplicatorConstraint                               = _objcClass("SCNReplicatorConstraint")
 	_sCNReplicatorConstraintSelReplicatorConstraintWithTarget = objc.RegisterName("replicatorConstraintWithTarget:")
-	_sCNReplicatorConstraintSelTarget = objc.RegisterName("target")
-	_sCNReplicatorConstraintSelSetTarget = objc.RegisterName("setTarget:")
-	_sCNReplicatorConstraintSelReplicatesOrientation = objc.RegisterName("replicatesOrientation")
-	_sCNReplicatorConstraintSelSetReplicatesOrientation = objc.RegisterName("setReplicatesOrientation:")
-	_sCNReplicatorConstraintSelReplicatesPosition = objc.RegisterName("replicatesPosition")
-	_sCNReplicatorConstraintSelSetReplicatesPosition = objc.RegisterName("setReplicatesPosition:")
-	_sCNReplicatorConstraintSelReplicatesScale = objc.RegisterName("replicatesScale")
-	_sCNReplicatorConstraintSelSetReplicatesScale = objc.RegisterName("setReplicatesScale:")
-	_sCNReplicatorConstraintSelOrientationOffset = objc.RegisterName("orientationOffset")
-	_sCNReplicatorConstraintSelSetOrientationOffset = objc.RegisterName("setOrientationOffset:")
-	_sCNReplicatorConstraintSelPositionOffset = objc.RegisterName("positionOffset")
-	_sCNReplicatorConstraintSelSetPositionOffset = objc.RegisterName("setPositionOffset:")
-	_sCNReplicatorConstraintSelScaleOffset = objc.RegisterName("scaleOffset")
-	_sCNReplicatorConstraintSelSetScaleOffset = objc.RegisterName("setScaleOffset:")
+	_sCNReplicatorConstraintSelTarget                         = objc.RegisterName("target")
+	_sCNReplicatorConstraintSelSetTarget                      = objc.RegisterName("setTarget:")
+	_sCNReplicatorConstraintSelReplicatesOrientation          = objc.RegisterName("replicatesOrientation")
+	_sCNReplicatorConstraintSelSetReplicatesOrientation       = objc.RegisterName("setReplicatesOrientation:")
+	_sCNReplicatorConstraintSelReplicatesPosition             = objc.RegisterName("replicatesPosition")
+	_sCNReplicatorConstraintSelSetReplicatesPosition          = objc.RegisterName("setReplicatesPosition:")
+	_sCNReplicatorConstraintSelReplicatesScale                = objc.RegisterName("replicatesScale")
+	_sCNReplicatorConstraintSelSetReplicatesScale             = objc.RegisterName("setReplicatesScale:")
+	_sCNReplicatorConstraintSelOrientationOffset              = objc.RegisterName("orientationOffset")
+	_sCNReplicatorConstraintSelSetOrientationOffset           = objc.RegisterName("setOrientationOffset:")
+	_sCNReplicatorConstraintSelPositionOffset                 = objc.RegisterName("positionOffset")
+	_sCNReplicatorConstraintSelSetPositionOffset              = objc.RegisterName("setPositionOffset:")
+	_sCNReplicatorConstraintSelScaleOffset                    = objc.RegisterName("scaleOffset")
+	_sCNReplicatorConstraintSelSetScaleOffset                 = objc.RegisterName("setScaleOffset:")
 )
 
 func SCNReplicatorConstraintFromID(id objc.ID) *SCNReplicatorConstraint {
@@ -46,14 +46,18 @@ func SCNReplicatorConstraintFromID(id objc.ID) *SCNReplicatorConstraint {
 // @method replicatorWithTargetNode @abstract Creates and returns a SCNReplicatorConstraint constraint.
 func SCNReplicatorConstraintReplicatorConstraintWithTarget(target *SCNNode) *SCNReplicatorConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNReplicatorConstraint), _sCNReplicatorConstraintSelReplicatorConstraintWithTarget, target.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNReplicatorConstraintFromID(_ret)
 }
 
 // @property target @abstract Defines the target node to replicate
 func (o *SCNReplicatorConstraint) Target() *SCNNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNReplicatorConstraintSelTarget)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNNodeFromID(_ret)
 }
 
@@ -120,4 +124,3 @@ func (o *SCNReplicatorConstraint) ScaleOffset() SCNVector3 {
 func (o *SCNReplicatorConstraint) SetScaleOffset(scaleOffset SCNVector3) {
 	o.Ptr().Send(_sCNReplicatorConstraintSelSetScaleOffset, scaleOffset)
 }
-

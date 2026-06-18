@@ -6,4 +6,3 @@ package extensionkit
 // EXHostViewControllerDelegate wraps the ObjC protocol EXHostViewControllerDelegate.
 type EXHostViewControllerDelegate interface {
 }
-

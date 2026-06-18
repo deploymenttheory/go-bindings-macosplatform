@@ -16,7 +16,9 @@ type MetricPlayerItemInitialLikelyToKeepUpEvent struct {
 }
 
 // Unwrap returns the underlying [raw.AVMetricPlayerItemInitialLikelyToKeepUpEvent].
-func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) Unwrap() *raw.AVMetricPlayerItemInitialLikelyToKeepUpEvent { return x.inner }
+func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) Unwrap() *raw.AVMetricPlayerItemInitialLikelyToKeepUpEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -69,9 +71,13 @@ func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) ContentKeyRequestEvents() [
 	})
 }
 
-func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) asMetricPlayerItemLikelyToKeepUpEvent() *raw.AVMetricPlayerItemLikelyToKeepUpEvent { return &x.inner.AVMetricPlayerItemLikelyToKeepUpEvent }
+func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) asMetricPlayerItemLikelyToKeepUpEvent() *raw.AVMetricPlayerItemLikelyToKeepUpEvent {
+	return &x.inner.AVMetricPlayerItemLikelyToKeepUpEvent
+}
 
-func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) asMetricEvent() *raw.AVMetricEvent { return &x.inner.AVMetricPlayerItemLikelyToKeepUpEvent.AVMetricEvent }
+func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) asMetricEvent() *raw.AVMetricEvent {
+	return &x.inner.AVMetricPlayerItemLikelyToKeepUpEvent.AVMetricEvent
+}
 
 // MetricPlayerItemInitialLikelyToKeepUpEventable is the interface implemented by [MetricPlayerItemInitialLikelyToKeepUpEvent], for mocking and DI.
 type MetricPlayerItemInitialLikelyToKeepUpEventable interface {
@@ -82,4 +88,3 @@ type MetricPlayerItemInitialLikelyToKeepUpEventable interface {
 }
 
 var _ MetricPlayerItemInitialLikelyToKeepUpEventable = (*MetricPlayerItemInitialLikelyToKeepUpEvent)(nil)
-

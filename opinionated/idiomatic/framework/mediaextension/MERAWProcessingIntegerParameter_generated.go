@@ -106,7 +106,9 @@ func (x *RAWProcessingIntegerParameter) SetCurrentValue(currentValue int) {
 	x.inner.SetCurrentValue(currentValue)
 }
 
-func (x *RAWProcessingIntegerParameter) asRAWProcessingParameter() *raw.MERAWProcessingParameter { return &x.inner.MERAWProcessingParameter }
+func (x *RAWProcessingIntegerParameter) asRAWProcessingParameter() *raw.MERAWProcessingParameter {
+	return &x.inner.MERAWProcessingParameter
+}
 
 // RAWProcessingIntegerParameterable is the interface implemented by [RAWProcessingIntegerParameter], for mocking and DI.
 type RAWProcessingIntegerParameterable interface {
@@ -122,4 +124,3 @@ type RAWProcessingIntegerParameterable interface {
 }
 
 var _ RAWProcessingIntegerParameterable = (*RAWProcessingIntegerParameter)(nil)
-

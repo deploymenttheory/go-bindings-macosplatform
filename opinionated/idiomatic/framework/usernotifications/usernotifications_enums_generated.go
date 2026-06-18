@@ -13,13 +13,13 @@ import (
 type UNAuthorizationOptions uint64
 
 const (
-	UNAuthorizationOptionBadge UNAuthorizationOptions = 1
-	UNAuthorizationOptionSound UNAuthorizationOptions = 2
-	UNAuthorizationOptionAlert UNAuthorizationOptions = 4
-	UNAuthorizationOptionCarPlay UNAuthorizationOptions = 8
-	UNAuthorizationOptionCriticalAlert UNAuthorizationOptions = 16
+	UNAuthorizationOptionBadge                           UNAuthorizationOptions = 1
+	UNAuthorizationOptionSound                           UNAuthorizationOptions = 2
+	UNAuthorizationOptionAlert                           UNAuthorizationOptions = 4
+	UNAuthorizationOptionCarPlay                         UNAuthorizationOptions = 8
+	UNAuthorizationOptionCriticalAlert                   UNAuthorizationOptions = 16
 	UNAuthorizationOptionProvidesAppNotificationSettings UNAuthorizationOptions = 32
-	UNAuthorizationOptionProvisional UNAuthorizationOptions = 64
+	UNAuthorizationOptionProvisional                     UNAuthorizationOptions = 64
 	// Deprecated: Use time-sensitive entitlement
 	UNAuthorizationOptionTimeSensitive UNAuthorizationOptions = 256
 )
@@ -60,9 +60,9 @@ type UNAuthorizationStatus int64
 
 const (
 	UNAuthorizationStatusNotDetermined UNAuthorizationStatus = 0
-	UNAuthorizationStatusDenied UNAuthorizationStatus = 1
-	UNAuthorizationStatusAuthorized UNAuthorizationStatus = 2
-	UNAuthorizationStatusProvisional UNAuthorizationStatus = 3
+	UNAuthorizationStatusDenied        UNAuthorizationStatus = 1
+	UNAuthorizationStatusAuthorized    UNAuthorizationStatus = 2
+	UNAuthorizationStatusProvisional   UNAuthorizationStatus = 3
 )
 
 func (e UNAuthorizationStatus) String() string {
@@ -85,8 +85,8 @@ type UNNotificationActionOptions uint64
 
 const (
 	UNNotificationActionOptionAuthenticationRequired UNNotificationActionOptions = 1
-	UNNotificationActionOptionDestructive UNNotificationActionOptions = 2
-	UNNotificationActionOptionForeground UNNotificationActionOptions = 4
+	UNNotificationActionOptionDestructive            UNNotificationActionOptions = 2
+	UNNotificationActionOptionForeground             UNNotificationActionOptions = 4
 )
 
 func (e UNNotificationActionOptions) String() string {
@@ -110,8 +110,8 @@ func (e UNNotificationActionOptions) String() string {
 type UNNotificationCategoryOptions uint64
 
 const (
-	UNNotificationCategoryOptionCustomDismissAction UNNotificationCategoryOptions = 1
-	UNNotificationCategoryOptionHiddenPreviewsShowTitle UNNotificationCategoryOptions = 4
+	UNNotificationCategoryOptionCustomDismissAction        UNNotificationCategoryOptions = 1
+	UNNotificationCategoryOptionHiddenPreviewsShowTitle    UNNotificationCategoryOptions = 4
 	UNNotificationCategoryOptionHiddenPreviewsShowSubtitle UNNotificationCategoryOptions = 8
 )
 
@@ -135,10 +135,10 @@ func (e UNNotificationCategoryOptions) String() string {
 type UNNotificationInterruptionLevel uint64
 
 const (
-	UNNotificationInterruptionLevelPassive UNNotificationInterruptionLevel = 0
-	UNNotificationInterruptionLevelActive UNNotificationInterruptionLevel = 1
+	UNNotificationInterruptionLevelPassive       UNNotificationInterruptionLevel = 0
+	UNNotificationInterruptionLevelActive        UNNotificationInterruptionLevel = 1
 	UNNotificationInterruptionLevelTimeSensitive UNNotificationInterruptionLevel = 2
-	UNNotificationInterruptionLevelCritical UNNotificationInterruptionLevel = 3
+	UNNotificationInterruptionLevelCritical      UNNotificationInterruptionLevel = 3
 )
 
 func (e UNNotificationInterruptionLevel) String() string {
@@ -160,8 +160,8 @@ type UNNotificationSetting int64
 
 const (
 	UNNotificationSettingNotSupported UNNotificationSetting = 0
-	UNNotificationSettingDisabled UNNotificationSetting = 1
-	UNNotificationSettingEnabled UNNotificationSetting = 2
+	UNNotificationSettingDisabled     UNNotificationSetting = 1
+	UNNotificationSettingEnabled      UNNotificationSetting = 2
 )
 
 func (e UNNotificationSetting) String() string {
@@ -180,9 +180,9 @@ func (e UNNotificationSetting) String() string {
 type UNShowPreviewsSetting int64
 
 const (
-	UNShowPreviewsSettingAlways UNShowPreviewsSetting = 0
+	UNShowPreviewsSettingAlways            UNShowPreviewsSetting = 0
 	UNShowPreviewsSettingWhenAuthenticated UNShowPreviewsSetting = 1
-	UNShowPreviewsSettingNever UNShowPreviewsSetting = 2
+	UNShowPreviewsSettingNever             UNShowPreviewsSetting = 2
 )
 
 func (e UNShowPreviewsSetting) String() string {
@@ -197,4 +197,3 @@ func (e UNShowPreviewsSetting) String() string {
 		return fmt.Sprintf("UNShowPreviewsSetting(%d)", int64(e))
 	}
 }
-

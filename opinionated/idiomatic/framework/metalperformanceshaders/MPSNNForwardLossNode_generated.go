@@ -140,7 +140,9 @@ func (x *NNForwardLossNode) SetPropertyCallBack(propertyCallBack mpsneuralnetwor
 	x.inner.SetPropertyCallBack(propertyCallBack)
 }
 
-func (x *NNForwardLossNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+func (x *NNForwardLossNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNFilterNode
+}
 
 // NNForwardLossNodeable is the interface implemented by [NNForwardLossNode], for mocking and DI.
 type NNForwardLossNodeable interface {
@@ -165,4 +167,3 @@ type NNForwardLossNodeable interface {
 }
 
 var _ NNForwardLossNodeable = (*NNForwardLossNode)(nil)
-

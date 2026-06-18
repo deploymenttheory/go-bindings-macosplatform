@@ -15,13 +15,13 @@ type NSRelativeSpecifier struct {
 }
 
 var (
-	_clsNSRelativeSpecifier = _objcClass("NSRelativeSpecifier")
-	_nSRelativeSpecifierSelInitWithCoder = objc.RegisterName("initWithCoder:")
+	_clsNSRelativeSpecifier                                                                                    = _objcClass("NSRelativeSpecifier")
+	_nSRelativeSpecifierSelInitWithCoder                                                                       = objc.RegisterName("initWithCoder:")
 	_nSRelativeSpecifierSelInitWithContainerClassDescriptionContainerSpecifierKeyRelativePositionBaseSpecifier = objc.RegisterName("initWithContainerClassDescription:containerSpecifier:key:relativePosition:baseSpecifier:")
-	_nSRelativeSpecifierSelRelativePosition = objc.RegisterName("relativePosition")
-	_nSRelativeSpecifierSelSetRelativePosition = objc.RegisterName("setRelativePosition:")
-	_nSRelativeSpecifierSelBaseSpecifier = objc.RegisterName("baseSpecifier")
-	_nSRelativeSpecifierSelSetBaseSpecifier = objc.RegisterName("setBaseSpecifier:")
+	_nSRelativeSpecifierSelRelativePosition                                                                    = objc.RegisterName("relativePosition")
+	_nSRelativeSpecifierSelSetRelativePosition                                                                 = objc.RegisterName("setRelativePosition:")
+	_nSRelativeSpecifierSelBaseSpecifier                                                                       = objc.RegisterName("baseSpecifier")
+	_nSRelativeSpecifierSelSetBaseSpecifier                                                                    = objc.RegisterName("setBaseSpecifier:")
 )
 
 func NSRelativeSpecifierFromID(id objc.ID) *NSRelativeSpecifier {
@@ -36,13 +36,17 @@ func NSRelativeSpecifierFromID(id objc.ID) *NSRelativeSpecifier {
 
 func (o *NSRelativeSpecifier) InitWithCoder(inCoder *NSCoder) *NSRelativeSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRelativeSpecifierSelInitWithCoder, inCoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSRelativeSpecifierFromID(_ret)
 }
 
 func (o *NSRelativeSpecifier) InitWithContainerClassDescriptionContainerSpecifierKeyRelativePositionBaseSpecifier(classDesc *NSScriptClassDescription, container *NSScriptObjectSpecifier, property *NSString, relPos NSRelativePosition, baseSpecifier *NSScriptObjectSpecifier) *NSRelativeSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRelativeSpecifierSelInitWithContainerClassDescriptionContainerSpecifierKeyRelativePositionBaseSpecifier, classDesc.Ptr(), container.Ptr(), property.Ptr(), relPos, baseSpecifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSRelativeSpecifierFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *NSRelativeSpecifier) SetRelativePosition(relativePosition NSRelativePos
 
 func (o *NSRelativeSpecifier) BaseSpecifier() *NSScriptObjectSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRelativeSpecifierSelBaseSpecifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptObjectSpecifierFromID(_ret)
 }
 
 func (o *NSRelativeSpecifier) SetBaseSpecifier(baseSpecifier *NSScriptObjectSpecifier) {
 	o.Ptr().Send(_nSRelativeSpecifierSelSetBaseSpecifier, baseSpecifier.Ptr())
 }
-

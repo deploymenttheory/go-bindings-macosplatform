@@ -21,15 +21,15 @@ type MPSMatrixSoftMax struct {
 }
 
 var (
-	_clsMPSMatrixSoftMax = _objcClass("MPSMatrixSoftMax")
-	_mPSMatrixSoftMaxSelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsMPSMatrixSoftMax                                             = _objcClass("MPSMatrixSoftMax")
+	_mPSMatrixSoftMaxSelInitWithDevice                               = objc.RegisterName("initWithDevice:")
 	_mPSMatrixSoftMaxSelEncodeToCommandBufferInputMatrixResultMatrix = objc.RegisterName("encodeToCommandBuffer:inputMatrix:resultMatrix:")
-	_mPSMatrixSoftMaxSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSMatrixSoftMaxSelCopyWithZoneDevice = objc.RegisterName("copyWithZone:device:")
-	_mPSMatrixSoftMaxSelSourceRows = objc.RegisterName("sourceRows")
-	_mPSMatrixSoftMaxSelSetSourceRows = objc.RegisterName("setSourceRows:")
-	_mPSMatrixSoftMaxSelSourceColumns = objc.RegisterName("sourceColumns")
-	_mPSMatrixSoftMaxSelSetSourceColumns = objc.RegisterName("setSourceColumns:")
+	_mPSMatrixSoftMaxSelInitWithCoderDevice                          = objc.RegisterName("initWithCoder:device:")
+	_mPSMatrixSoftMaxSelCopyWithZoneDevice                           = objc.RegisterName("copyWithZone:device:")
+	_mPSMatrixSoftMaxSelSourceRows                                   = objc.RegisterName("sourceRows")
+	_mPSMatrixSoftMaxSelSetSourceRows                                = objc.RegisterName("setSourceRows:")
+	_mPSMatrixSoftMaxSelSourceColumns                                = objc.RegisterName("sourceColumns")
+	_mPSMatrixSoftMaxSelSetSourceColumns                             = objc.RegisterName("setSourceColumns:")
 )
 
 func MPSMatrixSoftMaxFromID(id objc.ID) *MPSMatrixSoftMax {
@@ -45,7 +45,9 @@ func MPSMatrixSoftMaxFromID(id objc.ID) *MPSMatrixSoftMax {
 // @abstract   Initialize an MPSMatrixSoftMax object on a device for a given size. @param      device          The device on which the kernel will execute. @return     A valid MPSMatrixSoftMax object or nil, if failure.
 func (o *MPSMatrixSoftMax) InitWithDevice(device metal.MTLDevice) *MPSMatrixSoftMax {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixSoftMaxSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixSoftMaxFromID(_ret)
 }
 
@@ -57,7 +59,9 @@ func (o *MPSMatrixSoftMax) EncodeToCommandBufferInputMatrixResultMatrix(commandB
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSMatrixSoftMax @param      device      The MTLDevice on which to make the MPSMatrixSoftMax @return     A new MPSMatrixSoftMax object, or nil if failure.
 func (o *MPSMatrixSoftMax) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSMatrixSoftMax {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixSoftMaxSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixSoftMaxFromID(_ret)
 }
 
@@ -85,4 +89,3 @@ func (o *MPSMatrixSoftMax) SourceColumns() uint {
 func (o *MPSMatrixSoftMax) SetSourceColumns(sourceColumns uint) {
 	o.Ptr().Send(_mPSMatrixSoftMaxSelSetSourceColumns, sourceColumns)
 }
-

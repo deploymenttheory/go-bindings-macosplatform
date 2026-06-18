@@ -25,4 +25,3 @@ func HKAudiogramSampleTypeFromID(id objc.ID) *HKAudiogramSampleType {
 	purego.Track(o)
 	return o
 }
-

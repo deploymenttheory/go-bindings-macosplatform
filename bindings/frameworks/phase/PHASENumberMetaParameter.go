@@ -15,10 +15,10 @@ type PHASENumberMetaParameter struct {
 }
 
 var (
-	_clsPHASENumberMetaParameter = _objcClass("PHASENumberMetaParameter")
+	_clsPHASENumberMetaParameter                    = _objcClass("PHASENumberMetaParameter")
 	_pHASENumberMetaParameterSelFadeToValueDuration = objc.RegisterName("fadeToValue:duration:")
-	_pHASENumberMetaParameterSelMinimum = objc.RegisterName("minimum")
-	_pHASENumberMetaParameterSelMaximum = objc.RegisterName("maximum")
+	_pHASENumberMetaParameterSelMinimum             = objc.RegisterName("minimum")
+	_pHASENumberMetaParameterSelMaximum             = objc.RegisterName("maximum")
 )
 
 func PHASENumberMetaParameterFromID(id objc.ID) *PHASENumberMetaParameter {
@@ -47,4 +47,3 @@ func (o *PHASENumberMetaParameter) Maximum() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _pHASENumberMetaParameterSelMaximum)
 	return _ret
 }
-

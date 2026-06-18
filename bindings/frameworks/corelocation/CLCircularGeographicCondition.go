@@ -17,10 +17,10 @@ type CLCircularGeographicCondition struct {
 }
 
 var (
-	_clsCLCircularGeographicCondition = _objcClass("CLCircularGeographicCondition")
+	_clsCLCircularGeographicCondition                     = _objcClass("CLCircularGeographicCondition")
 	_cLCircularGeographicConditionSelInitWithCenterRadius = objc.RegisterName("initWithCenter:radius:")
-	_cLCircularGeographicConditionSelCenter = objc.RegisterName("center")
-	_cLCircularGeographicConditionSelRadius = objc.RegisterName("radius")
+	_cLCircularGeographicConditionSelCenter               = objc.RegisterName("center")
+	_cLCircularGeographicConditionSelRadius               = objc.RegisterName("radius")
 )
 
 func CLCircularGeographicConditionFromID(id objc.ID) *CLCircularGeographicCondition {
@@ -35,7 +35,9 @@ func CLCircularGeographicConditionFromID(id objc.ID) *CLCircularGeographicCondit
 
 func (o *CLCircularGeographicCondition) InitWithCenterRadius(center unsafe.Pointer, radius unsafe.Pointer) *CLCircularGeographicCondition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLCircularGeographicConditionSelInitWithCenterRadius, center, radius)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLCircularGeographicConditionFromID(_ret)
 }
 
@@ -48,4 +50,3 @@ func (o *CLCircularGeographicCondition) Radius() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cLCircularGeographicConditionSelRadius)
 	return _ret
 }
-

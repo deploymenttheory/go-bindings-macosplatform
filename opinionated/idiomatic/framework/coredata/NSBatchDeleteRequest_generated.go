@@ -58,7 +58,9 @@ func (x *BatchDeleteRequest) WithAffectedStores(items ...PersistentStoreProvider
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asPersistentStore().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asPersistentStore().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSPersistentStore](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -82,7 +84,9 @@ func (x *BatchDeleteRequest) FetchRequest() *raw.NSFetchRequest[objc.ID] {
 	return x.inner.FetchRequest()
 }
 
-func (x *BatchDeleteRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest { return &x.inner.NSPersistentStoreRequest }
+func (x *BatchDeleteRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest {
+	return &x.inner.NSPersistentStoreRequest
+}
 
 // BatchDeleteRequestable is the interface implemented by [BatchDeleteRequest], for mocking and DI.
 type BatchDeleteRequestable interface {
@@ -95,4 +99,3 @@ type BatchDeleteRequestable interface {
 }
 
 var _ BatchDeleteRequestable = (*BatchDeleteRequest)(nil)
-

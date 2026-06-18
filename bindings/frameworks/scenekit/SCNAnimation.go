@@ -17,48 +17,48 @@ type SCNAnimation struct {
 }
 
 var (
-	_clsSCNAnimation = _objcClass("SCNAnimation")
+	_clsSCNAnimation                           = _objcClass("SCNAnimation")
 	_sCNAnimationSelAnimationWithContentsOfURL = objc.RegisterName("animationWithContentsOfURL:")
-	_sCNAnimationSelAnimationNamed = objc.RegisterName("animationNamed:")
-	_sCNAnimationSelAnimationWithCAAnimation = objc.RegisterName("animationWithCAAnimation:")
-	_sCNAnimationSelDuration = objc.RegisterName("duration")
-	_sCNAnimationSelSetDuration = objc.RegisterName("setDuration:")
-	_sCNAnimationSelKeyPath = objc.RegisterName("keyPath")
-	_sCNAnimationSelSetKeyPath = objc.RegisterName("setKeyPath:")
-	_sCNAnimationSelTimingFunction = objc.RegisterName("timingFunction")
-	_sCNAnimationSelSetTimingFunction = objc.RegisterName("setTimingFunction:")
-	_sCNAnimationSelBlendInDuration = objc.RegisterName("blendInDuration")
-	_sCNAnimationSelSetBlendInDuration = objc.RegisterName("setBlendInDuration:")
-	_sCNAnimationSelBlendOutDuration = objc.RegisterName("blendOutDuration")
-	_sCNAnimationSelSetBlendOutDuration = objc.RegisterName("setBlendOutDuration:")
-	_sCNAnimationSelIsRemovedOnCompletion = objc.RegisterName("isRemovedOnCompletion")
-	_sCNAnimationSelSetRemovedOnCompletion = objc.RegisterName("setRemovedOnCompletion:")
-	_sCNAnimationSelIsAppliedOnCompletion = objc.RegisterName("isAppliedOnCompletion")
-	_sCNAnimationSelSetAppliedOnCompletion = objc.RegisterName("setAppliedOnCompletion:")
-	_sCNAnimationSelRepeatCount = objc.RegisterName("repeatCount")
-	_sCNAnimationSelSetRepeatCount = objc.RegisterName("setRepeatCount:")
-	_sCNAnimationSelAutoreverses = objc.RegisterName("autoreverses")
-	_sCNAnimationSelSetAutoreverses = objc.RegisterName("setAutoreverses:")
-	_sCNAnimationSelStartDelay = objc.RegisterName("startDelay")
-	_sCNAnimationSelSetStartDelay = objc.RegisterName("setStartDelay:")
-	_sCNAnimationSelTimeOffset = objc.RegisterName("timeOffset")
-	_sCNAnimationSelSetTimeOffset = objc.RegisterName("setTimeOffset:")
-	_sCNAnimationSelFillsForward = objc.RegisterName("fillsForward")
-	_sCNAnimationSelSetFillsForward = objc.RegisterName("setFillsForward:")
-	_sCNAnimationSelFillsBackward = objc.RegisterName("fillsBackward")
-	_sCNAnimationSelSetFillsBackward = objc.RegisterName("setFillsBackward:")
-	_sCNAnimationSelUsesSceneTimeBase = objc.RegisterName("usesSceneTimeBase")
-	_sCNAnimationSelSetUsesSceneTimeBase = objc.RegisterName("setUsesSceneTimeBase:")
-	_sCNAnimationSelAnimationDidStart = objc.RegisterName("animationDidStart")
-	_sCNAnimationSelSetAnimationDidStart = objc.RegisterName("setAnimationDidStart:")
-	_sCNAnimationSelAnimationDidStop = objc.RegisterName("animationDidStop")
-	_sCNAnimationSelSetAnimationDidStop = objc.RegisterName("setAnimationDidStop:")
-	_sCNAnimationSelAnimationEvents = objc.RegisterName("animationEvents")
-	_sCNAnimationSelSetAnimationEvents = objc.RegisterName("setAnimationEvents:")
-	_sCNAnimationSelIsAdditive = objc.RegisterName("isAdditive")
-	_sCNAnimationSelSetAdditive = objc.RegisterName("setAdditive:")
-	_sCNAnimationSelIsCumulative = objc.RegisterName("isCumulative")
-	_sCNAnimationSelSetCumulative = objc.RegisterName("setCumulative:")
+	_sCNAnimationSelAnimationNamed             = objc.RegisterName("animationNamed:")
+	_sCNAnimationSelAnimationWithCAAnimation   = objc.RegisterName("animationWithCAAnimation:")
+	_sCNAnimationSelDuration                   = objc.RegisterName("duration")
+	_sCNAnimationSelSetDuration                = objc.RegisterName("setDuration:")
+	_sCNAnimationSelKeyPath                    = objc.RegisterName("keyPath")
+	_sCNAnimationSelSetKeyPath                 = objc.RegisterName("setKeyPath:")
+	_sCNAnimationSelTimingFunction             = objc.RegisterName("timingFunction")
+	_sCNAnimationSelSetTimingFunction          = objc.RegisterName("setTimingFunction:")
+	_sCNAnimationSelBlendInDuration            = objc.RegisterName("blendInDuration")
+	_sCNAnimationSelSetBlendInDuration         = objc.RegisterName("setBlendInDuration:")
+	_sCNAnimationSelBlendOutDuration           = objc.RegisterName("blendOutDuration")
+	_sCNAnimationSelSetBlendOutDuration        = objc.RegisterName("setBlendOutDuration:")
+	_sCNAnimationSelIsRemovedOnCompletion      = objc.RegisterName("isRemovedOnCompletion")
+	_sCNAnimationSelSetRemovedOnCompletion     = objc.RegisterName("setRemovedOnCompletion:")
+	_sCNAnimationSelIsAppliedOnCompletion      = objc.RegisterName("isAppliedOnCompletion")
+	_sCNAnimationSelSetAppliedOnCompletion     = objc.RegisterName("setAppliedOnCompletion:")
+	_sCNAnimationSelRepeatCount                = objc.RegisterName("repeatCount")
+	_sCNAnimationSelSetRepeatCount             = objc.RegisterName("setRepeatCount:")
+	_sCNAnimationSelAutoreverses               = objc.RegisterName("autoreverses")
+	_sCNAnimationSelSetAutoreverses            = objc.RegisterName("setAutoreverses:")
+	_sCNAnimationSelStartDelay                 = objc.RegisterName("startDelay")
+	_sCNAnimationSelSetStartDelay              = objc.RegisterName("setStartDelay:")
+	_sCNAnimationSelTimeOffset                 = objc.RegisterName("timeOffset")
+	_sCNAnimationSelSetTimeOffset              = objc.RegisterName("setTimeOffset:")
+	_sCNAnimationSelFillsForward               = objc.RegisterName("fillsForward")
+	_sCNAnimationSelSetFillsForward            = objc.RegisterName("setFillsForward:")
+	_sCNAnimationSelFillsBackward              = objc.RegisterName("fillsBackward")
+	_sCNAnimationSelSetFillsBackward           = objc.RegisterName("setFillsBackward:")
+	_sCNAnimationSelUsesSceneTimeBase          = objc.RegisterName("usesSceneTimeBase")
+	_sCNAnimationSelSetUsesSceneTimeBase       = objc.RegisterName("setUsesSceneTimeBase:")
+	_sCNAnimationSelAnimationDidStart          = objc.RegisterName("animationDidStart")
+	_sCNAnimationSelSetAnimationDidStart       = objc.RegisterName("setAnimationDidStart:")
+	_sCNAnimationSelAnimationDidStop           = objc.RegisterName("animationDidStop")
+	_sCNAnimationSelSetAnimationDidStop        = objc.RegisterName("setAnimationDidStop:")
+	_sCNAnimationSelAnimationEvents            = objc.RegisterName("animationEvents")
+	_sCNAnimationSelSetAnimationEvents         = objc.RegisterName("setAnimationEvents:")
+	_sCNAnimationSelIsAdditive                 = objc.RegisterName("isAdditive")
+	_sCNAnimationSelSetAdditive                = objc.RegisterName("setAdditive:")
+	_sCNAnimationSelIsCumulative               = objc.RegisterName("isCumulative")
+	_sCNAnimationSelSetCumulative              = objc.RegisterName("setCumulative:")
 )
 
 func SCNAnimationFromID(id objc.ID) *SCNAnimation {
@@ -74,21 +74,27 @@ func SCNAnimationFromID(id objc.ID) *SCNAnimation {
 // Loads and returns an animation loaded from the specified URL. @param animationUrl The url to load.
 func SCNAnimationAnimationWithContentsOfURL(animationUrl *foundation.NSURL) *SCNAnimation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAnimation), _sCNAnimationSelAnimationWithContentsOfURL, animationUrl.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNAnimationFromID(_ret)
 }
 
 // Loads and returns the animation with the specified name in the current application bundle. @param animationName The name of the animation to load.
 func SCNAnimationAnimationNamed(animationName *foundation.NSString) *SCNAnimation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAnimation), _sCNAnimationSelAnimationNamed, animationName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNAnimationFromID(_ret)
 }
 
 // Returns a SCNAnimation initialized from a CAAnimation. @param caAnimation The CAAnimation to initialize from. @discussion Only CABasicAnimation, CAKeyframeAnimation and CAAnimationGroup are currently supported.
 func SCNAnimationAnimationWithCAAnimation(caAnimation *quartzcore.CAAnimation) *SCNAnimation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAnimation), _sCNAnimationSelAnimationWithCAAnimation, caAnimation.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNAnimationFromID(_ret)
 }
 
@@ -105,7 +111,9 @@ func (o *SCNAnimation) SetDuration(duration float64) {
 // The key-path describing the property to be animated for single-property animations, nil for animations targetting multiple nodes. defaults to nil. The key-path uses the KVC syntax. It's also possible to target a specific sub-node with the following syntax: /<node-name>.property1.property2.field    (field is optional, <node-name> is the name of the targeted node).
 func (o *SCNAnimation) KeyPath() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNAnimationSelKeyPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -116,7 +124,9 @@ func (o *SCNAnimation) SetKeyPath(keyPath *foundation.NSString) {
 // A timing function defining the pacing of the animation. Defaults to nil indicating linear pacing.
 func (o *SCNAnimation) TimingFunction() *SCNTimingFunction {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNAnimationSelTimingFunction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNTimingFunctionFromID(_ret)
 }
 
@@ -277,7 +287,9 @@ func (o *SCNAnimation) SetAnimationDidStop(animationDidStop func(*SCNAnimation, 
 // Specifies the animation events attached to the receiver. @see SCNAnimationEvent
 func (o *SCNAnimation) AnimationEvents() *foundation.NSArray[*SCNAnimationEvent] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNAnimationSelAnimationEvents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SCNAnimationEvent](_ret)
 }
 
@@ -304,4 +316,3 @@ func (o *SCNAnimation) IsCumulative() bool {
 func (o *SCNAnimation) SetCumulative(cumulative bool) {
 	o.Ptr().Send(_sCNAnimationSelSetCumulative, cumulative)
 }
-

@@ -16,16 +16,16 @@ type AVAudioInputNode struct {
 }
 
 var (
-	_clsAVAudioInputNode = _objcClass("AVAudioInputNode")
-	_aVAudioInputNodeSelSetManualRenderingInputPCMFormatInputBlock = objc.RegisterName("setManualRenderingInputPCMFormat:inputBlock:")
-	_aVAudioInputNodeSelSetMutedSpeechActivityEventListener = objc.RegisterName("setMutedSpeechActivityEventListener:")
-	_aVAudioInputNodeSelIsVoiceProcessingBypassed = objc.RegisterName("isVoiceProcessingBypassed")
-	_aVAudioInputNodeSelSetVoiceProcessingBypassed = objc.RegisterName("setVoiceProcessingBypassed:")
-	_aVAudioInputNodeSelIsVoiceProcessingAGCEnabled = objc.RegisterName("isVoiceProcessingAGCEnabled")
-	_aVAudioInputNodeSelSetVoiceProcessingAGCEnabled = objc.RegisterName("setVoiceProcessingAGCEnabled:")
-	_aVAudioInputNodeSelIsVoiceProcessingInputMuted = objc.RegisterName("isVoiceProcessingInputMuted")
-	_aVAudioInputNodeSelSetVoiceProcessingInputMuted = objc.RegisterName("setVoiceProcessingInputMuted:")
-	_aVAudioInputNodeSelVoiceProcessingOtherAudioDuckingConfiguration = objc.RegisterName("voiceProcessingOtherAudioDuckingConfiguration")
+	_clsAVAudioInputNode                                                 = _objcClass("AVAudioInputNode")
+	_aVAudioInputNodeSelSetManualRenderingInputPCMFormatInputBlock       = objc.RegisterName("setManualRenderingInputPCMFormat:inputBlock:")
+	_aVAudioInputNodeSelSetMutedSpeechActivityEventListener              = objc.RegisterName("setMutedSpeechActivityEventListener:")
+	_aVAudioInputNodeSelIsVoiceProcessingBypassed                        = objc.RegisterName("isVoiceProcessingBypassed")
+	_aVAudioInputNodeSelSetVoiceProcessingBypassed                       = objc.RegisterName("setVoiceProcessingBypassed:")
+	_aVAudioInputNodeSelIsVoiceProcessingAGCEnabled                      = objc.RegisterName("isVoiceProcessingAGCEnabled")
+	_aVAudioInputNodeSelSetVoiceProcessingAGCEnabled                     = objc.RegisterName("setVoiceProcessingAGCEnabled:")
+	_aVAudioInputNodeSelIsVoiceProcessingInputMuted                      = objc.RegisterName("isVoiceProcessingInputMuted")
+	_aVAudioInputNodeSelSetVoiceProcessingInputMuted                     = objc.RegisterName("setVoiceProcessingInputMuted:")
+	_aVAudioInputNodeSelVoiceProcessingOtherAudioDuckingConfiguration    = objc.RegisterName("voiceProcessingOtherAudioDuckingConfiguration")
 	_aVAudioInputNodeSelSetVoiceProcessingOtherAudioDuckingConfiguration = objc.RegisterName("setVoiceProcessingOtherAudioDuckingConfiguration:")
 )
 
@@ -104,4 +104,3 @@ func (o *AVAudioInputNode) VoiceProcessingOtherAudioDuckingConfiguration() AVAud
 func (o *AVAudioInputNode) SetVoiceProcessingOtherAudioDuckingConfiguration(voiceProcessingOtherAudioDuckingConfiguration AVAudioVoiceProcessingOtherAudioDuckingConfiguration) {
 	o.Ptr().Send(_aVAudioInputNodeSelSetVoiceProcessingOtherAudioDuckingConfiguration, voiceProcessingOtherAudioDuckingConfiguration)
 }
-

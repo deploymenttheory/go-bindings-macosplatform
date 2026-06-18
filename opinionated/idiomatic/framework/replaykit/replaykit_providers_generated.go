@@ -12,4 +12,3 @@ import (
 type BroadcastHandlerProvider interface {
 	asBroadcastHandler() *raw.RPBroadcastHandler
 }
-

@@ -116,4 +116,3 @@ type FeatureValueable interface {
 }
 
 var _ FeatureValueable = (*FeatureValue)(nil)
-

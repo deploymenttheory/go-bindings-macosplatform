@@ -97,7 +97,9 @@ func (x *RNNSingleGateDescriptor) SetRecurrentWeights(recurrentWeights raw.MPSCN
 	x.inner.SetRecurrentWeights(recurrentWeights)
 }
 
-func (x *RNNSingleGateDescriptor) asRNNDescriptor() *raw.MPSRNNDescriptor { return &x.inner.MPSRNNDescriptor }
+func (x *RNNSingleGateDescriptor) asRNNDescriptor() *raw.MPSRNNDescriptor {
+	return &x.inner.MPSRNNDescriptor
+}
 
 // RNNSingleGateDescriptorable is the interface implemented by [RNNSingleGateDescriptor], for mocking and DI.
 type RNNSingleGateDescriptorable interface {
@@ -116,4 +118,3 @@ type RNNSingleGateDescriptorable interface {
 }
 
 var _ RNNSingleGateDescriptorable = (*RNNSingleGateDescriptor)(nil)
-

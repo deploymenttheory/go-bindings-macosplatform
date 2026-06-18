@@ -54,4 +54,3 @@ type ConstantStringable interface {
 }
 
 var _ ConstantStringable = (*ConstantString)(nil)
-

@@ -72,4 +72,3 @@ type NWBonjourServiceEndpointable interface {
 }
 
 var _ NWBonjourServiceEndpointable = (*NWBonjourServiceEndpoint)(nil)
-

@@ -67,4 +67,3 @@ type NetworkingProcessable interface {
 }
 
 var _ NetworkingProcessable = (*NetworkingProcess)(nil)
-

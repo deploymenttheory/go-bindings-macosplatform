@@ -17,37 +17,37 @@ type NSSegmentedCell struct {
 }
 
 var (
-	_clsNSSegmentedCell = _objcClass("NSSegmentedCell")
-	_nSSegmentedCellSelSelectSegmentWithTag = objc.RegisterName("selectSegmentWithTag:")
-	_nSSegmentedCellSelMakeNextSegmentKey = objc.RegisterName("makeNextSegmentKey")
-	_nSSegmentedCellSelMakePreviousSegmentKey = objc.RegisterName("makePreviousSegmentKey")
-	_nSSegmentedCellSelSetWidthForSegment = objc.RegisterName("setWidth:forSegment:")
-	_nSSegmentedCellSelWidthForSegment = objc.RegisterName("widthForSegment:")
-	_nSSegmentedCellSelSetImageForSegment = objc.RegisterName("setImage:forSegment:")
-	_nSSegmentedCellSelImageForSegment = objc.RegisterName("imageForSegment:")
-	_nSSegmentedCellSelSetImageScalingForSegment = objc.RegisterName("setImageScaling:forSegment:")
-	_nSSegmentedCellSelImageScalingForSegment = objc.RegisterName("imageScalingForSegment:")
-	_nSSegmentedCellSelSetLabelForSegment = objc.RegisterName("setLabel:forSegment:")
-	_nSSegmentedCellSelLabelForSegment = objc.RegisterName("labelForSegment:")
-	_nSSegmentedCellSelSetSelectedForSegment = objc.RegisterName("setSelected:forSegment:")
-	_nSSegmentedCellSelIsSelectedForSegment = objc.RegisterName("isSelectedForSegment:")
-	_nSSegmentedCellSelSetEnabledForSegment = objc.RegisterName("setEnabled:forSegment:")
-	_nSSegmentedCellSelIsEnabledForSegment = objc.RegisterName("isEnabledForSegment:")
-	_nSSegmentedCellSelSetMenuForSegment = objc.RegisterName("setMenu:forSegment:")
-	_nSSegmentedCellSelMenuForSegment = objc.RegisterName("menuForSegment:")
-	_nSSegmentedCellSelSetToolTipForSegment = objc.RegisterName("setToolTip:forSegment:")
-	_nSSegmentedCellSelToolTipForSegment = objc.RegisterName("toolTipForSegment:")
-	_nSSegmentedCellSelSetTagForSegment = objc.RegisterName("setTag:forSegment:")
-	_nSSegmentedCellSelTagForSegment = objc.RegisterName("tagForSegment:")
-	_nSSegmentedCellSelDrawSegmentInFrameWithView = objc.RegisterName("drawSegment:inFrame:withView:")
-	_nSSegmentedCellSelSegmentCount = objc.RegisterName("segmentCount")
-	_nSSegmentedCellSelSetSegmentCount = objc.RegisterName("setSegmentCount:")
-	_nSSegmentedCellSelSelectedSegment = objc.RegisterName("selectedSegment")
-	_nSSegmentedCellSelSetSelectedSegment = objc.RegisterName("setSelectedSegment:")
-	_nSSegmentedCellSelTrackingMode = objc.RegisterName("trackingMode")
-	_nSSegmentedCellSelSetTrackingMode = objc.RegisterName("setTrackingMode:")
-	_nSSegmentedCellSelSegmentStyle = objc.RegisterName("segmentStyle")
-	_nSSegmentedCellSelSetSegmentStyle = objc.RegisterName("setSegmentStyle:")
+	_clsNSSegmentedCell                                  = _objcClass("NSSegmentedCell")
+	_nSSegmentedCellSelSelectSegmentWithTag              = objc.RegisterName("selectSegmentWithTag:")
+	_nSSegmentedCellSelMakeNextSegmentKey                = objc.RegisterName("makeNextSegmentKey")
+	_nSSegmentedCellSelMakePreviousSegmentKey            = objc.RegisterName("makePreviousSegmentKey")
+	_nSSegmentedCellSelSetWidthForSegment                = objc.RegisterName("setWidth:forSegment:")
+	_nSSegmentedCellSelWidthForSegment                   = objc.RegisterName("widthForSegment:")
+	_nSSegmentedCellSelSetImageForSegment                = objc.RegisterName("setImage:forSegment:")
+	_nSSegmentedCellSelImageForSegment                   = objc.RegisterName("imageForSegment:")
+	_nSSegmentedCellSelSetImageScalingForSegment         = objc.RegisterName("setImageScaling:forSegment:")
+	_nSSegmentedCellSelImageScalingForSegment            = objc.RegisterName("imageScalingForSegment:")
+	_nSSegmentedCellSelSetLabelForSegment                = objc.RegisterName("setLabel:forSegment:")
+	_nSSegmentedCellSelLabelForSegment                   = objc.RegisterName("labelForSegment:")
+	_nSSegmentedCellSelSetSelectedForSegment             = objc.RegisterName("setSelected:forSegment:")
+	_nSSegmentedCellSelIsSelectedForSegment              = objc.RegisterName("isSelectedForSegment:")
+	_nSSegmentedCellSelSetEnabledForSegment              = objc.RegisterName("setEnabled:forSegment:")
+	_nSSegmentedCellSelIsEnabledForSegment               = objc.RegisterName("isEnabledForSegment:")
+	_nSSegmentedCellSelSetMenuForSegment                 = objc.RegisterName("setMenu:forSegment:")
+	_nSSegmentedCellSelMenuForSegment                    = objc.RegisterName("menuForSegment:")
+	_nSSegmentedCellSelSetToolTipForSegment              = objc.RegisterName("setToolTip:forSegment:")
+	_nSSegmentedCellSelToolTipForSegment                 = objc.RegisterName("toolTipForSegment:")
+	_nSSegmentedCellSelSetTagForSegment                  = objc.RegisterName("setTag:forSegment:")
+	_nSSegmentedCellSelTagForSegment                     = objc.RegisterName("tagForSegment:")
+	_nSSegmentedCellSelDrawSegmentInFrameWithView        = objc.RegisterName("drawSegment:inFrame:withView:")
+	_nSSegmentedCellSelSegmentCount                      = objc.RegisterName("segmentCount")
+	_nSSegmentedCellSelSetSegmentCount                   = objc.RegisterName("setSegmentCount:")
+	_nSSegmentedCellSelSelectedSegment                   = objc.RegisterName("selectedSegment")
+	_nSSegmentedCellSelSetSelectedSegment                = objc.RegisterName("setSelectedSegment:")
+	_nSSegmentedCellSelTrackingMode                      = objc.RegisterName("trackingMode")
+	_nSSegmentedCellSelSetTrackingMode                   = objc.RegisterName("setTrackingMode:")
+	_nSSegmentedCellSelSegmentStyle                      = objc.RegisterName("segmentStyle")
+	_nSSegmentedCellSelSetSegmentStyle                   = objc.RegisterName("setSegmentStyle:")
 	_nSSegmentedCellSelInteriorBackgroundStyleForSegment = objc.RegisterName("interiorBackgroundStyleForSegment:")
 )
 
@@ -89,7 +89,9 @@ func (o *NSSegmentedCell) SetImageForSegment(image *NSImage, segment int) {
 
 func (o *NSSegmentedCell) ImageForSegment(segment int) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedCellSelImageForSegment, segment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -108,7 +110,9 @@ func (o *NSSegmentedCell) SetLabelForSegment(label *foundation.NSString, segment
 
 func (o *NSSegmentedCell) LabelForSegment(segment int) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedCellSelLabelForSegment, segment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -136,7 +140,9 @@ func (o *NSSegmentedCell) SetMenuForSegment(menu *NSMenu, segment int) {
 
 func (o *NSSegmentedCell) MenuForSegment(segment int) *NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedCellSelMenuForSegment, segment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuFromID(_ret)
 }
 
@@ -146,7 +152,9 @@ func (o *NSSegmentedCell) SetToolTipForSegment(toolTip *foundation.NSString, seg
 
 func (o *NSSegmentedCell) ToolTipForSegment(segment int) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedCellSelToolTipForSegment, segment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -203,4 +211,3 @@ func (o *NSSegmentedCell) InteriorBackgroundStyleForSegment(segment int) NSBackg
 	_ret := objc.Send[NSBackgroundStyle](o.Ptr(), _nSSegmentedCellSelInteriorBackgroundStyleForSegment, segment)
 	return _ret
 }
-

@@ -76,11 +76,17 @@ func (x *ImageReduceColumnMin) WithLabel(label string) *ImageReduceColumnMin {
 	return x
 }
 
-func (x *ImageReduceColumnMin) asImageReduceUnary() *mpsimage.MPSImageReduceUnary { return &x.inner.MPSImageReduceUnary }
+func (x *ImageReduceColumnMin) asImageReduceUnary() *mpsimage.MPSImageReduceUnary {
+	return &x.inner.MPSImageReduceUnary
+}
 
-func (x *ImageReduceColumnMin) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel }
+func (x *ImageReduceColumnMin) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
+	return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel
+}
 
-func (x *ImageReduceColumnMin) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel }
+func (x *ImageReduceColumnMin) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel
+}
 
 // ImageReduceColumnMinable is the interface implemented by [ImageReduceColumnMin], for mocking and DI.
 type ImageReduceColumnMinable interface {
@@ -94,4 +100,3 @@ type ImageReduceColumnMinable interface {
 }
 
 var _ ImageReduceColumnMinable = (*ImageReduceColumnMin)(nil)
-

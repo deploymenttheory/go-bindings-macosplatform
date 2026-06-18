@@ -18,24 +18,24 @@ type IOBluetoothSDPDataElement struct {
 }
 
 var (
-	_clsIOBluetoothSDPDataElement = _objcClass("IOBluetoothSDPDataElement")
-	_iOBluetoothSDPDataElementSelWithElementValue = objc.RegisterName("withElementValue:")
-	_iOBluetoothSDPDataElementSelWithTypeSizeDescriptorSizeValue = objc.RegisterName("withType:sizeDescriptor:size:value:")
-	_iOBluetoothSDPDataElementSelWithSDPDataElementRef = objc.RegisterName("withSDPDataElementRef:")
-	_iOBluetoothSDPDataElementSelInitWithElementValue = objc.RegisterName("initWithElementValue:")
+	_clsIOBluetoothSDPDataElement                                    = _objcClass("IOBluetoothSDPDataElement")
+	_iOBluetoothSDPDataElementSelWithElementValue                    = objc.RegisterName("withElementValue:")
+	_iOBluetoothSDPDataElementSelWithTypeSizeDescriptorSizeValue     = objc.RegisterName("withType:sizeDescriptor:size:value:")
+	_iOBluetoothSDPDataElementSelWithSDPDataElementRef               = objc.RegisterName("withSDPDataElementRef:")
+	_iOBluetoothSDPDataElementSelInitWithElementValue                = objc.RegisterName("initWithElementValue:")
 	_iOBluetoothSDPDataElementSelInitWithTypeSizeDescriptorSizeValue = objc.RegisterName("initWithType:sizeDescriptor:size:value:")
-	_iOBluetoothSDPDataElementSelGetSDPDataElementRef = objc.RegisterName("getSDPDataElementRef")
-	_iOBluetoothSDPDataElementSelGetTypeDescriptor = objc.RegisterName("getTypeDescriptor")
-	_iOBluetoothSDPDataElementSelGetSizeDescriptor = objc.RegisterName("getSizeDescriptor")
-	_iOBluetoothSDPDataElementSelGetSize = objc.RegisterName("getSize")
-	_iOBluetoothSDPDataElementSelGetNumberValue = objc.RegisterName("getNumberValue")
-	_iOBluetoothSDPDataElementSelGetDataValue = objc.RegisterName("getDataValue")
-	_iOBluetoothSDPDataElementSelGetStringValue = objc.RegisterName("getStringValue")
-	_iOBluetoothSDPDataElementSelGetArrayValue = objc.RegisterName("getArrayValue")
-	_iOBluetoothSDPDataElementSelGetUUIDValue = objc.RegisterName("getUUIDValue")
-	_iOBluetoothSDPDataElementSelGetValue = objc.RegisterName("getValue")
-	_iOBluetoothSDPDataElementSelContainsDataElement = objc.RegisterName("containsDataElement:")
-	_iOBluetoothSDPDataElementSelContainsValue = objc.RegisterName("containsValue:")
+	_iOBluetoothSDPDataElementSelGetSDPDataElementRef                = objc.RegisterName("getSDPDataElementRef")
+	_iOBluetoothSDPDataElementSelGetTypeDescriptor                   = objc.RegisterName("getTypeDescriptor")
+	_iOBluetoothSDPDataElementSelGetSizeDescriptor                   = objc.RegisterName("getSizeDescriptor")
+	_iOBluetoothSDPDataElementSelGetSize                             = objc.RegisterName("getSize")
+	_iOBluetoothSDPDataElementSelGetNumberValue                      = objc.RegisterName("getNumberValue")
+	_iOBluetoothSDPDataElementSelGetDataValue                        = objc.RegisterName("getDataValue")
+	_iOBluetoothSDPDataElementSelGetStringValue                      = objc.RegisterName("getStringValue")
+	_iOBluetoothSDPDataElementSelGetArrayValue                       = objc.RegisterName("getArrayValue")
+	_iOBluetoothSDPDataElementSelGetUUIDValue                        = objc.RegisterName("getUUIDValue")
+	_iOBluetoothSDPDataElementSelGetValue                            = objc.RegisterName("getValue")
+	_iOBluetoothSDPDataElementSelContainsDataElement                 = objc.RegisterName("containsDataElement:")
+	_iOBluetoothSDPDataElementSelContainsValue                       = objc.RegisterName("containsValue:")
 )
 
 func IOBluetoothSDPDataElementFromID(id objc.ID) *IOBluetoothSDPDataElement {
@@ -50,31 +50,41 @@ func IOBluetoothSDPDataElementFromID(id objc.ID) *IOBluetoothSDPDataElement {
 
 func IOBluetoothSDPDataElementWithElementValue(element *foundation.NSObject) *IOBluetoothSDPDataElement {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothSDPDataElement), _iOBluetoothSDPDataElementSelWithElementValue, element.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothSDPDataElementFromID(_ret)
 }
 
 func IOBluetoothSDPDataElementWithTypeSizeDescriptorSizeValue(type_ uint8, newSizeDescriptor uint8, newSize uint32, newValue *foundation.NSObject) *IOBluetoothSDPDataElement {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothSDPDataElement), _iOBluetoothSDPDataElementSelWithTypeSizeDescriptorSizeValue, type_, newSizeDescriptor, newSize, newValue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothSDPDataElementFromID(_ret)
 }
 
 func IOBluetoothSDPDataElementWithSDPDataElementRef(sdpDataElementRef unsafe.Pointer) *IOBluetoothSDPDataElement {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothSDPDataElement), _iOBluetoothSDPDataElementSelWithSDPDataElementRef, sdpDataElementRef)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothSDPDataElementFromID(_ret)
 }
 
 func (o *IOBluetoothSDPDataElement) InitWithElementValue(element *foundation.NSObject) *IOBluetoothSDPDataElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPDataElementSelInitWithElementValue, element.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothSDPDataElementFromID(_ret)
 }
 
 func (o *IOBluetoothSDPDataElement) InitWithTypeSizeDescriptorSizeValue(newType uint8, newSizeDescriptor uint8, newSize uint32, newValue *foundation.NSObject) *IOBluetoothSDPDataElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPDataElementSelInitWithTypeSizeDescriptorSizeValue, newType, newSizeDescriptor, newSize, newValue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothSDPDataElementFromID(_ret)
 }
 
@@ -100,19 +110,25 @@ func (o *IOBluetoothSDPDataElement) GetSize() uint32 {
 
 func (o *IOBluetoothSDPDataElement) GetNumberValue() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPDataElementSelGetNumberValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *IOBluetoothSDPDataElement) GetDataValue() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPDataElementSelGetDataValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *IOBluetoothSDPDataElement) GetStringValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPDataElementSelGetStringValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -123,13 +139,17 @@ func (o *IOBluetoothSDPDataElement) GetArrayValue() *foundation.NSArray[objc.ID]
 
 func (o *IOBluetoothSDPDataElement) GetUUIDValue() *IOBluetoothSDPUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPDataElementSelGetUUIDValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothSDPUUIDFromID(_ret)
 }
 
 func (o *IOBluetoothSDPDataElement) GetValue() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPDataElementSelGetValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
@@ -142,4 +162,3 @@ func (o *IOBluetoothSDPDataElement) ContainsValue(cmpValue *foundation.NSObject)
 	_ret := objc.Send[bool](o.Ptr(), _iOBluetoothSDPDataElementSelContainsValue, cmpValue.Ptr())
 	return _ret
 }
-

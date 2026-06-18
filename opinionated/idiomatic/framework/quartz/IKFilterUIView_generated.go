@@ -57,4 +57,3 @@ type IKFilterUIViewable interface {
 }
 
 var _ IKFilterUIViewable = (*IKFilterUIView)(nil)
-

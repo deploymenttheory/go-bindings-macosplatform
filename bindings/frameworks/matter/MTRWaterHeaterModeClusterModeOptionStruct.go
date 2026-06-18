@@ -16,12 +16,12 @@ type MTRWaterHeaterModeClusterModeOptionStruct struct {
 }
 
 var (
-	_clsMTRWaterHeaterModeClusterModeOptionStruct = _objcClass("MTRWaterHeaterModeClusterModeOptionStruct")
-	_mTRWaterHeaterModeClusterModeOptionStructSelLabel = objc.RegisterName("label")
-	_mTRWaterHeaterModeClusterModeOptionStructSelSetLabel = objc.RegisterName("setLabel:")
-	_mTRWaterHeaterModeClusterModeOptionStructSelMode = objc.RegisterName("mode")
-	_mTRWaterHeaterModeClusterModeOptionStructSelSetMode = objc.RegisterName("setMode:")
-	_mTRWaterHeaterModeClusterModeOptionStructSelModeTags = objc.RegisterName("modeTags")
+	_clsMTRWaterHeaterModeClusterModeOptionStruct            = _objcClass("MTRWaterHeaterModeClusterModeOptionStruct")
+	_mTRWaterHeaterModeClusterModeOptionStructSelLabel       = objc.RegisterName("label")
+	_mTRWaterHeaterModeClusterModeOptionStructSelSetLabel    = objc.RegisterName("setLabel:")
+	_mTRWaterHeaterModeClusterModeOptionStructSelMode        = objc.RegisterName("mode")
+	_mTRWaterHeaterModeClusterModeOptionStructSelSetMode     = objc.RegisterName("setMode:")
+	_mTRWaterHeaterModeClusterModeOptionStructSelModeTags    = objc.RegisterName("modeTags")
 	_mTRWaterHeaterModeClusterModeOptionStructSelSetModeTags = objc.RegisterName("setModeTags:")
 )
 
@@ -37,7 +37,9 @@ func MTRWaterHeaterModeClusterModeOptionStructFromID(id objc.ID) *MTRWaterHeater
 
 func (o *MTRWaterHeaterModeClusterModeOptionStruct) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRWaterHeaterModeClusterModeOptionStructSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTRWaterHeaterModeClusterModeOptionStruct) SetLabel(label *foundation.N
 
 func (o *MTRWaterHeaterModeClusterModeOptionStruct) Mode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRWaterHeaterModeClusterModeOptionStructSelMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -63,4 +67,3 @@ func (o *MTRWaterHeaterModeClusterModeOptionStruct) ModeTags() *foundation.NSArr
 func (o *MTRWaterHeaterModeClusterModeOptionStruct) SetModeTags(modeTags *foundation.NSArray[objc.ID]) {
 	o.Ptr().Send(_mTRWaterHeaterModeClusterModeOptionStructSelSetModeTags, modeTags)
 }
-

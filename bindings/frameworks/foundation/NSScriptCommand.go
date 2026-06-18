@@ -15,33 +15,33 @@ type NSScriptCommand struct {
 }
 
 var (
-	_clsNSScriptCommand = _objcClass("NSScriptCommand")
-	_nSScriptCommandSelInitWithCommandDescription = objc.RegisterName("initWithCommandDescription:")
-	_nSScriptCommandSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSScriptCommandSelPerformDefaultImplementation = objc.RegisterName("performDefaultImplementation")
-	_nSScriptCommandSelExecuteCommand = objc.RegisterName("executeCommand")
-	_nSScriptCommandSelCurrentCommand = objc.RegisterName("currentCommand")
-	_nSScriptCommandSelSuspendExecution = objc.RegisterName("suspendExecution")
-	_nSScriptCommandSelResumeExecutionWithResult = objc.RegisterName("resumeExecutionWithResult:")
-	_nSScriptCommandSelCommandDescription = objc.RegisterName("commandDescription")
-	_nSScriptCommandSelDirectParameter = objc.RegisterName("directParameter")
-	_nSScriptCommandSelSetDirectParameter = objc.RegisterName("setDirectParameter:")
-	_nSScriptCommandSelReceiversSpecifier = objc.RegisterName("receiversSpecifier")
-	_nSScriptCommandSelSetReceiversSpecifier = objc.RegisterName("setReceiversSpecifier:")
-	_nSScriptCommandSelEvaluatedReceivers = objc.RegisterName("evaluatedReceivers")
-	_nSScriptCommandSelArguments = objc.RegisterName("arguments")
-	_nSScriptCommandSelSetArguments = objc.RegisterName("setArguments:")
-	_nSScriptCommandSelEvaluatedArguments = objc.RegisterName("evaluatedArguments")
-	_nSScriptCommandSelIsWellFormed = objc.RegisterName("isWellFormed")
-	_nSScriptCommandSelScriptErrorNumber = objc.RegisterName("scriptErrorNumber")
-	_nSScriptCommandSelSetScriptErrorNumber = objc.RegisterName("setScriptErrorNumber:")
-	_nSScriptCommandSelScriptErrorOffendingObjectDescriptor = objc.RegisterName("scriptErrorOffendingObjectDescriptor")
+	_clsNSScriptCommand                                        = _objcClass("NSScriptCommand")
+	_nSScriptCommandSelInitWithCommandDescription              = objc.RegisterName("initWithCommandDescription:")
+	_nSScriptCommandSelInitWithCoder                           = objc.RegisterName("initWithCoder:")
+	_nSScriptCommandSelPerformDefaultImplementation            = objc.RegisterName("performDefaultImplementation")
+	_nSScriptCommandSelExecuteCommand                          = objc.RegisterName("executeCommand")
+	_nSScriptCommandSelCurrentCommand                          = objc.RegisterName("currentCommand")
+	_nSScriptCommandSelSuspendExecution                        = objc.RegisterName("suspendExecution")
+	_nSScriptCommandSelResumeExecutionWithResult               = objc.RegisterName("resumeExecutionWithResult:")
+	_nSScriptCommandSelCommandDescription                      = objc.RegisterName("commandDescription")
+	_nSScriptCommandSelDirectParameter                         = objc.RegisterName("directParameter")
+	_nSScriptCommandSelSetDirectParameter                      = objc.RegisterName("setDirectParameter:")
+	_nSScriptCommandSelReceiversSpecifier                      = objc.RegisterName("receiversSpecifier")
+	_nSScriptCommandSelSetReceiversSpecifier                   = objc.RegisterName("setReceiversSpecifier:")
+	_nSScriptCommandSelEvaluatedReceivers                      = objc.RegisterName("evaluatedReceivers")
+	_nSScriptCommandSelArguments                               = objc.RegisterName("arguments")
+	_nSScriptCommandSelSetArguments                            = objc.RegisterName("setArguments:")
+	_nSScriptCommandSelEvaluatedArguments                      = objc.RegisterName("evaluatedArguments")
+	_nSScriptCommandSelIsWellFormed                            = objc.RegisterName("isWellFormed")
+	_nSScriptCommandSelScriptErrorNumber                       = objc.RegisterName("scriptErrorNumber")
+	_nSScriptCommandSelSetScriptErrorNumber                    = objc.RegisterName("setScriptErrorNumber:")
+	_nSScriptCommandSelScriptErrorOffendingObjectDescriptor    = objc.RegisterName("scriptErrorOffendingObjectDescriptor")
 	_nSScriptCommandSelSetScriptErrorOffendingObjectDescriptor = objc.RegisterName("setScriptErrorOffendingObjectDescriptor:")
-	_nSScriptCommandSelScriptErrorExpectedTypeDescriptor = objc.RegisterName("scriptErrorExpectedTypeDescriptor")
-	_nSScriptCommandSelSetScriptErrorExpectedTypeDescriptor = objc.RegisterName("setScriptErrorExpectedTypeDescriptor:")
-	_nSScriptCommandSelScriptErrorString = objc.RegisterName("scriptErrorString")
-	_nSScriptCommandSelSetScriptErrorString = objc.RegisterName("setScriptErrorString:")
-	_nSScriptCommandSelAppleEvent = objc.RegisterName("appleEvent")
+	_nSScriptCommandSelScriptErrorExpectedTypeDescriptor       = objc.RegisterName("scriptErrorExpectedTypeDescriptor")
+	_nSScriptCommandSelSetScriptErrorExpectedTypeDescriptor    = objc.RegisterName("setScriptErrorExpectedTypeDescriptor:")
+	_nSScriptCommandSelScriptErrorString                       = objc.RegisterName("scriptErrorString")
+	_nSScriptCommandSelSetScriptErrorString                    = objc.RegisterName("setScriptErrorString:")
+	_nSScriptCommandSelAppleEvent                              = objc.RegisterName("appleEvent")
 )
 
 func NSScriptCommandFromID(id objc.ID) *NSScriptCommand {
@@ -56,13 +56,17 @@ func NSScriptCommandFromID(id objc.ID) *NSScriptCommand {
 
 func (o *NSScriptCommand) InitWithCommandDescription(commandDef *NSScriptCommandDescription) *NSScriptCommand {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandSelInitWithCommandDescription, commandDef.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptCommandFromID(_ret)
 }
 
 func (o *NSScriptCommand) InitWithCoder(inCoder *NSCoder) *NSScriptCommand {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandSelInitWithCoder, inCoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptCommandFromID(_ret)
 }
 
@@ -78,7 +82,9 @@ func (o *NSScriptCommand) ExecuteCommand() objc.ID {
 
 func NSScriptCommandCurrentCommand() *NSScriptCommand {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSScriptCommand), _nSScriptCommandSelCurrentCommand)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptCommandFromID(_ret)
 }
 
@@ -92,7 +98,9 @@ func (o *NSScriptCommand) ResumeExecutionWithResult(result objc.ID) {
 
 func (o *NSScriptCommand) CommandDescription() *NSScriptCommandDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandSelCommandDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptCommandDescriptionFromID(_ret)
 }
 
@@ -107,7 +115,9 @@ func (o *NSScriptCommand) SetDirectParameter(directParameter objc.ID) {
 
 func (o *NSScriptCommand) ReceiversSpecifier() *NSScriptObjectSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandSelReceiversSpecifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptObjectSpecifierFromID(_ret)
 }
 
@@ -150,7 +160,9 @@ func (o *NSScriptCommand) SetScriptErrorNumber(scriptErrorNumber int) {
 
 func (o *NSScriptCommand) ScriptErrorOffendingObjectDescriptor() *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandSelScriptErrorOffendingObjectDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
@@ -160,7 +172,9 @@ func (o *NSScriptCommand) SetScriptErrorOffendingObjectDescriptor(scriptErrorOff
 
 func (o *NSScriptCommand) ScriptErrorExpectedTypeDescriptor() *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandSelScriptErrorExpectedTypeDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
@@ -170,7 +184,9 @@ func (o *NSScriptCommand) SetScriptErrorExpectedTypeDescriptor(scriptErrorExpect
 
 func (o *NSScriptCommand) ScriptErrorString() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandSelScriptErrorString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -180,7 +196,8 @@ func (o *NSScriptCommand) SetScriptErrorString(scriptErrorString *NSString) {
 
 func (o *NSScriptCommand) AppleEvent() *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandSelAppleEvent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
-

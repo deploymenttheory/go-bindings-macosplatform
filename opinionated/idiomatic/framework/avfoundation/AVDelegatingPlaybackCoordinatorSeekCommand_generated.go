@@ -17,7 +17,9 @@ type DelegatingPlaybackCoordinatorSeekCommand struct {
 }
 
 // Unwrap returns the underlying [raw.AVDelegatingPlaybackCoordinatorSeekCommand].
-func (x *DelegatingPlaybackCoordinatorSeekCommand) Unwrap() *raw.AVDelegatingPlaybackCoordinatorSeekCommand { return x.inner }
+func (x *DelegatingPlaybackCoordinatorSeekCommand) Unwrap() *raw.AVDelegatingPlaybackCoordinatorSeekCommand {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -57,7 +59,9 @@ func (x *DelegatingPlaybackCoordinatorSeekCommand) CompletionDueDate() *foundati
 	return x.inner.CompletionDueDate()
 }
 
-func (x *DelegatingPlaybackCoordinatorSeekCommand) asDelegatingPlaybackCoordinatorPlaybackControlCommand() *raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommand { return &x.inner.AVDelegatingPlaybackCoordinatorPlaybackControlCommand }
+func (x *DelegatingPlaybackCoordinatorSeekCommand) asDelegatingPlaybackCoordinatorPlaybackControlCommand() *raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommand {
+	return &x.inner.AVDelegatingPlaybackCoordinatorPlaybackControlCommand
+}
 
 // DelegatingPlaybackCoordinatorSeekCommandable is the interface implemented by [DelegatingPlaybackCoordinatorSeekCommand], for mocking and DI.
 type DelegatingPlaybackCoordinatorSeekCommandable interface {
@@ -69,4 +73,3 @@ type DelegatingPlaybackCoordinatorSeekCommandable interface {
 }
 
 var _ DelegatingPlaybackCoordinatorSeekCommandable = (*DelegatingPlaybackCoordinatorSeekCommand)(nil)
-

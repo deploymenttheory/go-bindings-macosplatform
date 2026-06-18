@@ -62,4 +62,3 @@ type TemporaryMatrixable interface {
 }
 
 var _ TemporaryMatrixable = (*TemporaryMatrix)(nil)
-

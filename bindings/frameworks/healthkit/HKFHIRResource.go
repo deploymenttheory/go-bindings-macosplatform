@@ -16,12 +16,12 @@ type HKFHIRResource struct {
 }
 
 var (
-	_clsHKFHIRResource = _objcClass("HKFHIRResource")
-	_hKFHIRResourceSelFHIRVersion = objc.RegisterName("FHIRVersion")
+	_clsHKFHIRResource             = _objcClass("HKFHIRResource")
+	_hKFHIRResourceSelFHIRVersion  = objc.RegisterName("FHIRVersion")
 	_hKFHIRResourceSelResourceType = objc.RegisterName("resourceType")
-	_hKFHIRResourceSelIdentifier = objc.RegisterName("identifier")
-	_hKFHIRResourceSelData = objc.RegisterName("data")
-	_hKFHIRResourceSelSourceURL = objc.RegisterName("sourceURL")
+	_hKFHIRResourceSelIdentifier   = objc.RegisterName("identifier")
+	_hKFHIRResourceSelData         = objc.RegisterName("data")
+	_hKFHIRResourceSelSourceURL    = objc.RegisterName("sourceURL")
 )
 
 func HKFHIRResourceFromID(id objc.ID) *HKFHIRResource {
@@ -37,35 +37,44 @@ func HKFHIRResourceFromID(id objc.ID) *HKFHIRResource {
 // @property      FHIRVersion @abstract      The FHIR version of the resource data.
 func (o *HKFHIRResource) FHIRVersion() *HKFHIRVersion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKFHIRResourceSelFHIRVersion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKFHIRVersionFromID(_ret)
 }
 
 // @property      resourceType @abstract      The resource type, corresponding to the 'resourceType' field in the resource's JSON representation. @discussion    May be one of 8 FHIR resource types supported within HealthKit: AllergyIntolerance, Condition, Immunization, MedicationDispense, MedicationOrder, MedicationStatement, Observation, and Procedure.
 func (o *HKFHIRResource) ResourceType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKFHIRResourceSelResourceType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property      identifier @abstract      The identifier of the resource, corresponding to the 'id' field in the resource's JSON representation. @discussion    Unique within a given resource type and FHIR end-point, as represented by an HKSource.
 func (o *HKFHIRResource) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKFHIRResourceSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property      data @abstract      The JSON representation of the FHIR resource. @discussion    Conforms to the HL7 Argonaut Project resource type definitions.
 func (o *HKFHIRResource) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKFHIRResourceSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @property      sourceURL @abstract      The fully specified source URL of the FHIR resource. @discussion    This URL can be used to help determine the provenance of the resource. Direct access is protected by OAuth: querying without suitable authorization will result in an authorization error.
 func (o *HKFHIRResource) SourceURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKFHIRResourceSelSourceURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
-

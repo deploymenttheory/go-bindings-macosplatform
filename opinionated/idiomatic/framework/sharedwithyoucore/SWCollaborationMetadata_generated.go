@@ -172,4 +172,3 @@ type CollaborationMetadataable interface {
 }
 
 var _ CollaborationMetadataable = (*CollaborationMetadata)(nil)
-

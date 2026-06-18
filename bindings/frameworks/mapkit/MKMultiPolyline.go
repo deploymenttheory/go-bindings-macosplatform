@@ -16,9 +16,9 @@ type MKMultiPolyline struct {
 }
 
 var (
-	_clsMKMultiPolyline = _objcClass("MKMultiPolyline")
+	_clsMKMultiPolyline                  = _objcClass("MKMultiPolyline")
 	_mKMultiPolylineSelInitWithPolylines = objc.RegisterName("initWithPolylines:")
-	_mKMultiPolylineSelPolylines = objc.RegisterName("polylines")
+	_mKMultiPolylineSelPolylines         = objc.RegisterName("polylines")
 )
 
 func MKMultiPolylineFromID(id objc.ID) *MKMultiPolyline {
@@ -33,13 +33,16 @@ func MKMultiPolylineFromID(id objc.ID) *MKMultiPolyline {
 
 func (o *MKMultiPolyline) InitWithPolylines(polylines *foundation.NSArray[*MKPolyline]) *MKMultiPolyline {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMultiPolylineSelInitWithPolylines, polylines.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMultiPolylineFromID(_ret)
 }
 
 func (o *MKMultiPolyline) Polylines() *foundation.NSArray[*MKPolyline] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMultiPolylineSelPolylines)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MKPolyline](_ret)
 }
-

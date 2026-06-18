@@ -66,4 +66,3 @@ type LogEntrySignpostable interface {
 }
 
 var _ LogEntrySignpostable = (*LogEntrySignpost)(nil)
-

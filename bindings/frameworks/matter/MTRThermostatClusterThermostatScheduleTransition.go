@@ -25,4 +25,3 @@ func MTRThermostatClusterThermostatScheduleTransitionFromID(id objc.ID) *MTRTher
 	purego.Track(o)
 	return o
 }
-

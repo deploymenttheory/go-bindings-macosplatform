@@ -18,8 +18,8 @@ type MAFlashingLightsProcessor struct {
 }
 
 var (
-	_clsMAFlashingLightsProcessor = _objcClass("MAFlashingLightsProcessor")
-	_mAFlashingLightsProcessorSelCanProcessSurface = objc.RegisterName("canProcessSurface:")
+	_clsMAFlashingLightsProcessor                                         = _objcClass("MAFlashingLightsProcessor")
+	_mAFlashingLightsProcessorSelCanProcessSurface                        = objc.RegisterName("canProcessSurface:")
 	_mAFlashingLightsProcessorSelProcessSurfaceOutSurfaceTimestampOptions = objc.RegisterName("processSurface:outSurface:timestamp:options:")
 )
 
@@ -42,7 +42,8 @@ func (o *MAFlashingLightsProcessor) CanProcessSurface(surface unsafe.Pointer) bo
 // @abstract Processes an inSurface by analyzing pixels for sequences of flashing lights and then darkens content to reduce the risk of discomfort from some users. The outSurface will contain the mitigated content. The timestamp indicates the time at which the surface will be shown in the video playback. FPS will be determined based on the values of the timestamps. Options dictionary for additional parameters. @result An object which indicates whether the surface was able to be processed, the amount of mitigation that was applied, and the intensitry level that was detected.
 func (o *MAFlashingLightsProcessor) ProcessSurfaceOutSurfaceTimestampOptions(inSurface unsafe.Pointer, outSurface unsafe.Pointer, timestamp float64, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MAFlashingLightsProcessorResult {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mAFlashingLightsProcessorSelProcessSurfaceOutSurfaceTimestampOptions, inSurface, outSurface, timestamp, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MAFlashingLightsProcessorResultFromID(_ret)
 }
-

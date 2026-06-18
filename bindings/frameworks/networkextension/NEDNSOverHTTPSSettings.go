@@ -16,10 +16,10 @@ type NEDNSOverHTTPSSettings struct {
 }
 
 var (
-	_clsNEDNSOverHTTPSSettings = _objcClass("NEDNSOverHTTPSSettings")
-	_nEDNSOverHTTPSSettingsSelServerURL = objc.RegisterName("serverURL")
-	_nEDNSOverHTTPSSettingsSelSetServerURL = objc.RegisterName("setServerURL:")
-	_nEDNSOverHTTPSSettingsSelIdentityReference = objc.RegisterName("identityReference")
+	_clsNEDNSOverHTTPSSettings                     = _objcClass("NEDNSOverHTTPSSettings")
+	_nEDNSOverHTTPSSettingsSelServerURL            = objc.RegisterName("serverURL")
+	_nEDNSOverHTTPSSettingsSelSetServerURL         = objc.RegisterName("setServerURL:")
+	_nEDNSOverHTTPSSettingsSelIdentityReference    = objc.RegisterName("identityReference")
 	_nEDNSOverHTTPSSettingsSelSetIdentityReference = objc.RegisterName("setIdentityReference:")
 )
 
@@ -36,7 +36,9 @@ func NEDNSOverHTTPSSettingsFromID(id objc.ID) *NEDNSOverHTTPSSettings {
 // @property serverURL @discussion The URL to which to make DNS-over-HTTPS requests. The format should be an HTTPS URL with the path indicating the location of the DNS-over-HTTPS server, such as: "https://dnsserver.example.net/dns-query".
 func (o *NEDNSOverHTTPSSettings) ServerURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEDNSOverHTTPSSettingsSelServerURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -47,11 +49,12 @@ func (o *NEDNSOverHTTPSSettings) SetServerURL(serverURL *foundation.NSURL) {
 // @property identityReference @discussion The optional certificate identity keychain reference to use as a TLS client certificate.
 func (o *NEDNSOverHTTPSSettings) IdentityReference() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEDNSOverHTTPSSettingsSelIdentityReference)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *NEDNSOverHTTPSSettings) SetIdentityReference(identityReference *foundation.NSData) {
 	o.Ptr().Send(_nEDNSOverHTTPSSettingsSelSetIdentityReference, identityReference.Ptr())
 }
-

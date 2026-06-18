@@ -61,4 +61,3 @@ type KeychainSavePanelable interface {
 }
 
 var _ KeychainSavePanelable = (*KeychainSavePanel)(nil)
-

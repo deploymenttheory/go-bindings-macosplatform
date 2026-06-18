@@ -95,8 +95,8 @@ func EmitFrameworkWrappers(
 		}
 
 		fname := className + "_generated.go"
-		if err := os.WriteFile(filepath.Join(outDir, fname), buf.Bytes(), 0o600); err != nil {
-			return fmt.Errorf("write %s: %w", fname, err)
+		if err := emit.WriteGoFile(filepath.Join(outDir, fname), buf.Bytes()); err != nil {
+			return err
 		}
 	}
 	if err := emitProvidersFile(
@@ -2535,10 +2535,7 @@ func emitDocGo(outDir, pkgName string, fw *meta.FrameworkMeta) error {
 		fw.Framework,
 	)
 	fmt.Fprintf(&buf, "package %s\n", pkgName)
-	if err := os.WriteFile(filepath.Join(outDir, "doc.go"), buf.Bytes(), 0o600); err != nil {
-		return fmt.Errorf("write doc.go: %w", err)
-	}
-	return nil
+	return emit.WriteGoFile(filepath.Join(outDir, "doc.go"), buf.Bytes())
 }
 
 // emitProvidersFile writes <pkgname>_providers_generated.go containing one provider
@@ -2593,10 +2590,7 @@ func emitProvidersFile(
 	buf.Write(body.Bytes())
 
 	fname := pkgName + "_providers_generated.go"
-	if err := os.WriteFile(filepath.Join(outDir, fname), buf.Bytes(), 0o600); err != nil {
-		return fmt.Errorf("write %s: %w", fname, err)
-	}
-	return nil
+	return emit.WriteGoFile(filepath.Join(outDir, fname), buf.Bytes())
 }
 
 // ── C function wrappers (CFErrorRef * / NSError ** out-parameters) ────────────
@@ -2793,8 +2787,8 @@ func emitFunctionWrappers(
 	fmt.Fprint(&buf, "}\n")
 
 	fname := pkgName + "_functions_generated.go"
-	if err := os.WriteFile(filepath.Join(outDir, fname), buf.Bytes(), 0o600); err != nil {
-		return nil, fmt.Errorf("write %s: %w", fname, err)
+	if err := emit.WriteGoFile(filepath.Join(outDir, fname), buf.Bytes()); err != nil {
+		return nil, err
 	}
 	return emittedNames, nil
 }

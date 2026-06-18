@@ -78,4 +78,3 @@ type QuartzFilterable interface {
 }
 
 var _ QuartzFilterable = (*QuartzFilter)(nil)
-

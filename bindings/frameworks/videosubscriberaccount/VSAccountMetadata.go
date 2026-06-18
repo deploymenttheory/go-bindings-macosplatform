@@ -16,12 +16,12 @@ type VSAccountMetadata struct {
 }
 
 var (
-	_clsVSAccountMetadata = _objcClass("VSAccountMetadata")
-	_vSAccountMetadataSelAccountProviderIdentifier = objc.RegisterName("accountProviderIdentifier")
+	_clsVSAccountMetadata                             = _objcClass("VSAccountMetadata")
+	_vSAccountMetadataSelAccountProviderIdentifier    = objc.RegisterName("accountProviderIdentifier")
 	_vSAccountMetadataSelAuthenticationExpirationDate = objc.RegisterName("authenticationExpirationDate")
-	_vSAccountMetadataSelVerificationData = objc.RegisterName("verificationData")
-	_vSAccountMetadataSelSAMLAttributeQueryResponse = objc.RegisterName("SAMLAttributeQueryResponse")
-	_vSAccountMetadataSelAccountProviderResponse = objc.RegisterName("accountProviderResponse")
+	_vSAccountMetadataSelVerificationData             = objc.RegisterName("verificationData")
+	_vSAccountMetadataSelSAMLAttributeQueryResponse   = objc.RegisterName("SAMLAttributeQueryResponse")
+	_vSAccountMetadataSelAccountProviderResponse      = objc.RegisterName("accountProviderResponse")
 )
 
 func VSAccountMetadataFromID(id objc.ID) *VSAccountMetadata {
@@ -37,35 +37,44 @@ func VSAccountMetadataFromID(id objc.ID) *VSAccountMetadata {
 // A value that uniquely identifies the account provider. You may use this value to brand your app.
 func (o *VSAccountMetadata) AccountProviderIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vSAccountMetadataSelAccountProviderIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Specifies when the user might need to re-authenticate with the account provider. The value might be nil if the user is not currently authenticated.
 func (o *VSAccountMetadata) AuthenticationExpirationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vSAccountMetadataSelAuthenticationExpirationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // An opaque blob of data that can be used to cryptographically verify that the SAML AttributeQuery response actually came from the account provider.
 func (o *VSAccountMetadata) VerificationData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vSAccountMetadataSelVerificationData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // The SAML AttributeQuery response received from the account provider. The value might be nil if your account metadata request did not specify any SAML attributes or if the user does not have a valid authentication.
 func (o *VSAccountMetadata) SAMLAttributeQueryResponse() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vSAccountMetadataSelSAMLAttributeQueryResponse)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The response received from the account provider. The value might be nil if your account metadata request did not specify any attributes, or if the user does not have a valid authentication.
 func (o *VSAccountMetadata) AccountProviderResponse() *VSAccountProviderResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vSAccountMetadataSelAccountProviderResponse)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VSAccountProviderResponseFromID(_ret)
 }
-

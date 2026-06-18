@@ -11,4 +11,3 @@ func TKErrorDomain() uintptr {
 	ptr, _ := purego.Dlsym(_cryptotokenkitLib, "TKErrorDomain")
 	return ptr
 }
-

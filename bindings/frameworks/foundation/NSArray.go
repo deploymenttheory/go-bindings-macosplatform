@@ -17,76 +17,76 @@ type NSArray[ObjectType purego.AnyObject] struct {
 }
 
 var (
-	_clsNSArray = _objcClass("NSArray")
-	_nSArraySelObjectAtIndex = objc.RegisterName("objectAtIndex:")
-	_nSArraySelInit = objc.RegisterName("init")
-	_nSArraySelInitWithObjectsCount = objc.RegisterName("initWithObjects:count:")
-	_nSArraySelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSArraySelCount = objc.RegisterName("count")
-	_nSArraySelArrayByAddingObject = objc.RegisterName("arrayByAddingObject:")
-	_nSArraySelArrayByAddingObjectsFromArray = objc.RegisterName("arrayByAddingObjectsFromArray:")
-	_nSArraySelComponentsJoinedByString = objc.RegisterName("componentsJoinedByString:")
-	_nSArraySelContainsObject = objc.RegisterName("containsObject:")
-	_nSArraySelDescriptionWithLocale = objc.RegisterName("descriptionWithLocale:")
-	_nSArraySelDescriptionWithLocaleIndent = objc.RegisterName("descriptionWithLocale:indent:")
-	_nSArraySelFirstObjectCommonWithArray = objc.RegisterName("firstObjectCommonWithArray:")
-	_nSArraySelGetObjectsRange = objc.RegisterName("getObjects:range:")
-	_nSArraySelIndexOfObject = objc.RegisterName("indexOfObject:")
-	_nSArraySelIndexOfObjectInRange = objc.RegisterName("indexOfObject:inRange:")
-	_nSArraySelIndexOfObjectIdenticalTo = objc.RegisterName("indexOfObjectIdenticalTo:")
-	_nSArraySelIndexOfObjectIdenticalToInRange = objc.RegisterName("indexOfObjectIdenticalTo:inRange:")
-	_nSArraySelIsEqualToArray = objc.RegisterName("isEqualToArray:")
-	_nSArraySelObjectEnumerator = objc.RegisterName("objectEnumerator")
-	_nSArraySelReverseObjectEnumerator = objc.RegisterName("reverseObjectEnumerator")
-	_nSArraySelSortedArrayUsingFunctionContext = objc.RegisterName("sortedArrayUsingFunction:context:")
-	_nSArraySelSortedArrayUsingFunctionContextHint = objc.RegisterName("sortedArrayUsingFunction:context:hint:")
-	_nSArraySelSortedArrayUsingSelector = objc.RegisterName("sortedArrayUsingSelector:")
-	_nSArraySelSubarrayWithRange = objc.RegisterName("subarrayWithRange:")
-	_nSArraySelWriteToURLError = objc.RegisterName("writeToURL:error:")
-	_nSArraySelMakeObjectsPerformSelector = objc.RegisterName("makeObjectsPerformSelector:")
-	_nSArraySelMakeObjectsPerformSelectorWithObject = objc.RegisterName("makeObjectsPerformSelector:withObject:")
-	_nSArraySelObjectsAtIndexes = objc.RegisterName("objectsAtIndexes:")
-	_nSArraySelObjectAtIndexedSubscript = objc.RegisterName("objectAtIndexedSubscript:")
-	_nSArraySelEnumerateObjectsUsing = objc.RegisterName("enumerateObjectsUsingBlock:")
-	_nSArraySelEnumerateObjectsWithOptionsUsing = objc.RegisterName("enumerateObjectsWithOptions:usingBlock:")
-	_nSArraySelEnumerateObjectsAtIndexesOptionsUsing = objc.RegisterName("enumerateObjectsAtIndexes:options:usingBlock:")
-	_nSArraySelIndexOfObjectPassingTest = objc.RegisterName("indexOfObjectPassingTest:")
-	_nSArraySelIndexOfObjectWithOptionsPassingTest = objc.RegisterName("indexOfObjectWithOptions:passingTest:")
-	_nSArraySelIndexOfObjectAtIndexesOptionsPassingTest = objc.RegisterName("indexOfObjectAtIndexes:options:passingTest:")
-	_nSArraySelIndexesOfObjectsPassingTest = objc.RegisterName("indexesOfObjectsPassingTest:")
-	_nSArraySelIndexesOfObjectsWithOptionsPassingTest = objc.RegisterName("indexesOfObjectsWithOptions:passingTest:")
-	_nSArraySelIndexesOfObjectsAtIndexesOptionsPassingTest = objc.RegisterName("indexesOfObjectsAtIndexes:options:passingTest:")
-	_nSArraySelSortedArrayUsingComparator = objc.RegisterName("sortedArrayUsingComparator:")
-	_nSArraySelSortedArrayWithOptionsUsingComparator = objc.RegisterName("sortedArrayWithOptions:usingComparator:")
-	_nSArraySelIndexOfObjectInSortedRangeOptionsUsingComparator = objc.RegisterName("indexOfObject:inSortedRange:options:usingComparator:")
-	_nSArraySelFirstObject = objc.RegisterName("firstObject")
-	_nSArraySelLastObject = objc.RegisterName("lastObject")
-	_nSArraySelSortedArrayHint = objc.RegisterName("sortedArrayHint")
-	_nSArraySelArray = objc.RegisterName("array")
-	_nSArraySelArrayWithObject = objc.RegisterName("arrayWithObject:")
-	_nSArraySelArrayWithObjectsCount = objc.RegisterName("arrayWithObjects:count:")
-	_nSArraySelArrayWithArray = objc.RegisterName("arrayWithArray:")
-	_nSArraySelInitWithArray = objc.RegisterName("initWithArray:")
-	_nSArraySelInitWithArrayCopyItems = objc.RegisterName("initWithArray:copyItems:")
-	_nSArraySelInitWithContentsOfURLError = objc.RegisterName("initWithContentsOfURL:error:")
-	_nSArraySelArrayWithContentsOfURLError = objc.RegisterName("arrayWithContentsOfURL:error:")
-	_nSArraySelDifferenceFromArrayWithOptionsUsingEquivalenceTest = objc.RegisterName("differenceFromArray:withOptions:usingEquivalenceTest:")
-	_nSArraySelDifferenceFromArrayWithOptions = objc.RegisterName("differenceFromArray:withOptions:")
-	_nSArraySelDifferenceFromArray = objc.RegisterName("differenceFromArray:")
-	_nSArraySelArrayByApplyingDifference = objc.RegisterName("arrayByApplyingDifference:")
-	_nSArraySelGetObjects = objc.RegisterName("getObjects:")
-	_nSArraySelArrayWithContentsOfFile = objc.RegisterName("arrayWithContentsOfFile:")
-	_nSArraySelArrayWithContentsOfURL = objc.RegisterName("arrayWithContentsOfURL:")
-	_nSArraySelInitWithContentsOfFile = objc.RegisterName("initWithContentsOfFile:")
-	_nSArraySelInitWithContentsOfURL = objc.RegisterName("initWithContentsOfURL:")
-	_nSArraySelWriteToFileAtomically = objc.RegisterName("writeToFile:atomically:")
-	_nSArraySelWriteToURLAtomically = objc.RegisterName("writeToURL:atomically:")
-	_nSArraySelPathsMatchingExtensions = objc.RegisterName("pathsMatchingExtensions:")
+	_clsNSArray                                                      = _objcClass("NSArray")
+	_nSArraySelObjectAtIndex                                         = objc.RegisterName("objectAtIndex:")
+	_nSArraySelInit                                                  = objc.RegisterName("init")
+	_nSArraySelInitWithObjectsCount                                  = objc.RegisterName("initWithObjects:count:")
+	_nSArraySelInitWithCoder                                         = objc.RegisterName("initWithCoder:")
+	_nSArraySelCount                                                 = objc.RegisterName("count")
+	_nSArraySelArrayByAddingObject                                   = objc.RegisterName("arrayByAddingObject:")
+	_nSArraySelArrayByAddingObjectsFromArray                         = objc.RegisterName("arrayByAddingObjectsFromArray:")
+	_nSArraySelComponentsJoinedByString                              = objc.RegisterName("componentsJoinedByString:")
+	_nSArraySelContainsObject                                        = objc.RegisterName("containsObject:")
+	_nSArraySelDescriptionWithLocale                                 = objc.RegisterName("descriptionWithLocale:")
+	_nSArraySelDescriptionWithLocaleIndent                           = objc.RegisterName("descriptionWithLocale:indent:")
+	_nSArraySelFirstObjectCommonWithArray                            = objc.RegisterName("firstObjectCommonWithArray:")
+	_nSArraySelGetObjectsRange                                       = objc.RegisterName("getObjects:range:")
+	_nSArraySelIndexOfObject                                         = objc.RegisterName("indexOfObject:")
+	_nSArraySelIndexOfObjectInRange                                  = objc.RegisterName("indexOfObject:inRange:")
+	_nSArraySelIndexOfObjectIdenticalTo                              = objc.RegisterName("indexOfObjectIdenticalTo:")
+	_nSArraySelIndexOfObjectIdenticalToInRange                       = objc.RegisterName("indexOfObjectIdenticalTo:inRange:")
+	_nSArraySelIsEqualToArray                                        = objc.RegisterName("isEqualToArray:")
+	_nSArraySelObjectEnumerator                                      = objc.RegisterName("objectEnumerator")
+	_nSArraySelReverseObjectEnumerator                               = objc.RegisterName("reverseObjectEnumerator")
+	_nSArraySelSortedArrayUsingFunctionContext                       = objc.RegisterName("sortedArrayUsingFunction:context:")
+	_nSArraySelSortedArrayUsingFunctionContextHint                   = objc.RegisterName("sortedArrayUsingFunction:context:hint:")
+	_nSArraySelSortedArrayUsingSelector                              = objc.RegisterName("sortedArrayUsingSelector:")
+	_nSArraySelSubarrayWithRange                                     = objc.RegisterName("subarrayWithRange:")
+	_nSArraySelWriteToURLError                                       = objc.RegisterName("writeToURL:error:")
+	_nSArraySelMakeObjectsPerformSelector                            = objc.RegisterName("makeObjectsPerformSelector:")
+	_nSArraySelMakeObjectsPerformSelectorWithObject                  = objc.RegisterName("makeObjectsPerformSelector:withObject:")
+	_nSArraySelObjectsAtIndexes                                      = objc.RegisterName("objectsAtIndexes:")
+	_nSArraySelObjectAtIndexedSubscript                              = objc.RegisterName("objectAtIndexedSubscript:")
+	_nSArraySelEnumerateObjectsUsing                                 = objc.RegisterName("enumerateObjectsUsingBlock:")
+	_nSArraySelEnumerateObjectsWithOptionsUsing                      = objc.RegisterName("enumerateObjectsWithOptions:usingBlock:")
+	_nSArraySelEnumerateObjectsAtIndexesOptionsUsing                 = objc.RegisterName("enumerateObjectsAtIndexes:options:usingBlock:")
+	_nSArraySelIndexOfObjectPassingTest                              = objc.RegisterName("indexOfObjectPassingTest:")
+	_nSArraySelIndexOfObjectWithOptionsPassingTest                   = objc.RegisterName("indexOfObjectWithOptions:passingTest:")
+	_nSArraySelIndexOfObjectAtIndexesOptionsPassingTest              = objc.RegisterName("indexOfObjectAtIndexes:options:passingTest:")
+	_nSArraySelIndexesOfObjectsPassingTest                           = objc.RegisterName("indexesOfObjectsPassingTest:")
+	_nSArraySelIndexesOfObjectsWithOptionsPassingTest                = objc.RegisterName("indexesOfObjectsWithOptions:passingTest:")
+	_nSArraySelIndexesOfObjectsAtIndexesOptionsPassingTest           = objc.RegisterName("indexesOfObjectsAtIndexes:options:passingTest:")
+	_nSArraySelSortedArrayUsingComparator                            = objc.RegisterName("sortedArrayUsingComparator:")
+	_nSArraySelSortedArrayWithOptionsUsingComparator                 = objc.RegisterName("sortedArrayWithOptions:usingComparator:")
+	_nSArraySelIndexOfObjectInSortedRangeOptionsUsingComparator      = objc.RegisterName("indexOfObject:inSortedRange:options:usingComparator:")
+	_nSArraySelFirstObject                                           = objc.RegisterName("firstObject")
+	_nSArraySelLastObject                                            = objc.RegisterName("lastObject")
+	_nSArraySelSortedArrayHint                                       = objc.RegisterName("sortedArrayHint")
+	_nSArraySelArray                                                 = objc.RegisterName("array")
+	_nSArraySelArrayWithObject                                       = objc.RegisterName("arrayWithObject:")
+	_nSArraySelArrayWithObjectsCount                                 = objc.RegisterName("arrayWithObjects:count:")
+	_nSArraySelArrayWithArray                                        = objc.RegisterName("arrayWithArray:")
+	_nSArraySelInitWithArray                                         = objc.RegisterName("initWithArray:")
+	_nSArraySelInitWithArrayCopyItems                                = objc.RegisterName("initWithArray:copyItems:")
+	_nSArraySelInitWithContentsOfURLError                            = objc.RegisterName("initWithContentsOfURL:error:")
+	_nSArraySelArrayWithContentsOfURLError                           = objc.RegisterName("arrayWithContentsOfURL:error:")
+	_nSArraySelDifferenceFromArrayWithOptionsUsingEquivalenceTest    = objc.RegisterName("differenceFromArray:withOptions:usingEquivalenceTest:")
+	_nSArraySelDifferenceFromArrayWithOptions                        = objc.RegisterName("differenceFromArray:withOptions:")
+	_nSArraySelDifferenceFromArray                                   = objc.RegisterName("differenceFromArray:")
+	_nSArraySelArrayByApplyingDifference                             = objc.RegisterName("arrayByApplyingDifference:")
+	_nSArraySelGetObjects                                            = objc.RegisterName("getObjects:")
+	_nSArraySelArrayWithContentsOfFile                               = objc.RegisterName("arrayWithContentsOfFile:")
+	_nSArraySelArrayWithContentsOfURL                                = objc.RegisterName("arrayWithContentsOfURL:")
+	_nSArraySelInitWithContentsOfFile                                = objc.RegisterName("initWithContentsOfFile:")
+	_nSArraySelInitWithContentsOfURL                                 = objc.RegisterName("initWithContentsOfURL:")
+	_nSArraySelWriteToFileAtomically                                 = objc.RegisterName("writeToFile:atomically:")
+	_nSArraySelWriteToURLAtomically                                  = objc.RegisterName("writeToURL:atomically:")
+	_nSArraySelPathsMatchingExtensions                               = objc.RegisterName("pathsMatchingExtensions:")
 	_nSArraySelAddObserverToObjectsAtIndexesForKeyPathOptionsContext = objc.RegisterName("addObserver:toObjectsAtIndexes:forKeyPath:options:context:")
-	_nSArraySelRemoveObserverFromObjectsAtIndexesForKeyPathContext = objc.RegisterName("removeObserver:fromObjectsAtIndexes:forKeyPath:context:")
-	_nSArraySelRemoveObserverFromObjectsAtIndexesForKeyPath = objc.RegisterName("removeObserver:fromObjectsAtIndexes:forKeyPath:")
-	_nSArraySelSortedArrayUsingDescriptors = objc.RegisterName("sortedArrayUsingDescriptors:")
-	_nSArraySelFilteredArrayUsingPredicate = objc.RegisterName("filteredArrayUsingPredicate:")
+	_nSArraySelRemoveObserverFromObjectsAtIndexesForKeyPathContext   = objc.RegisterName("removeObserver:fromObjectsAtIndexes:forKeyPath:context:")
+	_nSArraySelRemoveObserverFromObjectsAtIndexesForKeyPath          = objc.RegisterName("removeObserver:fromObjectsAtIndexes:forKeyPath:")
+	_nSArraySelSortedArrayUsingDescriptors                           = objc.RegisterName("sortedArrayUsingDescriptors:")
+	_nSArraySelFilteredArrayUsingPredicate                           = objc.RegisterName("filteredArrayUsingPredicate:")
 )
 
 func NSArrayFromID[ObjectType purego.AnyObject](id objc.ID) *NSArray[ObjectType] {
@@ -106,19 +106,25 @@ func (o *NSArray[ObjectType]) ObjectAtIndex(index uint) ObjectType {
 
 func (o *NSArray[ObjectType]) Init() *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[ObjectType](_ret)
 }
 
 func (o *NSArray[ObjectType]) InitWithObjectsCount(objects unsafe.Pointer, cnt uint) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelInitWithObjectsCount, objects, cnt)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[ObjectType](_ret)
 }
 
 func (o *NSArray[ObjectType]) InitWithCoder(coder *NSCoder) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[ObjectType](_ret)
 }
 
@@ -129,19 +135,25 @@ func (o *NSArray[ObjectType]) Count() uint {
 
 func (o *NSArray[ObjectType]) ArrayByAddingObject(anObject ObjectType) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelArrayByAddingObject, anObject)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[ObjectType](_ret)
 }
 
 func (o *NSArray[ObjectType]) ArrayByAddingObjectsFromArray(otherArray *NSArray[ObjectType]) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelArrayByAddingObjectsFromArray, otherArray.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[ObjectType](_ret)
 }
 
 func (o *NSArray[ObjectType]) ComponentsJoinedByString(separator *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelComponentsJoinedByString, separator.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -152,13 +164,17 @@ func (o *NSArray[ObjectType]) ContainsObject(anObject ObjectType) bool {
 
 func (o *NSArray[ObjectType]) DescriptionWithLocale(locale objc.ID) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelDescriptionWithLocale, locale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSArray[ObjectType]) DescriptionWithLocaleIndent(locale objc.ID, level uint) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelDescriptionWithLocaleIndent, locale, level)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -198,37 +214,49 @@ func (o *NSArray[ObjectType]) IsEqualToArray(otherArray *NSArray[ObjectType]) bo
 
 func (o *NSArray[ObjectType]) ObjectEnumerator() *NSEnumerator[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelObjectEnumerator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEnumeratorFromID[ObjectType](_ret)
 }
 
 func (o *NSArray[ObjectType]) ReverseObjectEnumerator() *NSEnumerator[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelReverseObjectEnumerator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEnumeratorFromID[ObjectType](_ret)
 }
 
 func (o *NSArray[ObjectType]) SortedArrayUsingFunctionContext(comparator unsafe.Pointer, context_ unsafe.Pointer) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelSortedArrayUsingFunctionContext, comparator, context_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[ObjectType](_ret)
 }
 
 func (o *NSArray[ObjectType]) SortedArrayUsingFunctionContextHint(comparator unsafe.Pointer, context_ unsafe.Pointer, hint *NSData) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelSortedArrayUsingFunctionContextHint, comparator, context_, hint.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[ObjectType](_ret)
 }
 
 func (o *NSArray[ObjectType]) SortedArrayUsingSelector(comparator objc.SEL) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelSortedArrayUsingSelector, comparator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[ObjectType](_ret)
 }
 
 func (o *NSArray[ObjectType]) SubarrayWithRange(range_ NSRange) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelSubarrayWithRange, range_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[ObjectType](_ret)
 }
 
@@ -251,7 +279,9 @@ func (o *NSArray[ObjectType]) MakeObjectsPerformSelectorWithObject(aSelector obj
 
 func (o *NSArray[ObjectType]) ObjectsAtIndexes(indexes *NSIndexSet) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelObjectsAtIndexes, indexes.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[ObjectType](_ret)
 }
 
@@ -289,19 +319,25 @@ func (o *NSArray[ObjectType]) IndexOfObjectAtIndexesOptionsPassingTest(s *NSInde
 
 func (o *NSArray[ObjectType]) IndexesOfObjectsPassingTest(predicate objc.Block) *NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelIndexesOfObjectsPassingTest, predicate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSIndexSetFromID(_ret)
 }
 
 func (o *NSArray[ObjectType]) IndexesOfObjectsWithOptionsPassingTest(opts NSEnumerationOptions, predicate objc.Block) *NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelIndexesOfObjectsWithOptionsPassingTest, opts, predicate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSIndexSetFromID(_ret)
 }
 
 func (o *NSArray[ObjectType]) IndexesOfObjectsAtIndexesOptionsPassingTest(s *NSIndexSet, opts NSEnumerationOptions, predicate objc.Block) *NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelIndexesOfObjectsAtIndexesOptionsPassingTest, s.Ptr(), opts, predicate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSIndexSetFromID(_ret)
 }
 
@@ -314,7 +350,9 @@ func (o *NSArray[ObjectType]) SortedArrayUsingComparator(cmptr func(objc.ID, obj
 		defer __block_cmptr.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelSortedArrayUsingComparator, __block_cmptr)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[ObjectType](_ret)
 }
 
@@ -327,7 +365,9 @@ func (o *NSArray[ObjectType]) SortedArrayWithOptionsUsingComparator(opts NSSortO
 		defer __block_cmptr.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelSortedArrayWithOptionsUsingComparator, opts, __block_cmptr)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[ObjectType](_ret)
 }
 
@@ -355,50 +395,66 @@ func (o *NSArray[ObjectType]) LastObject() ObjectType {
 
 func (o *NSArray[ObjectType]) SortedArrayHint() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelSortedArrayHint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
 func NSArrayArray() *NSArray[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSArray), _nSArraySelArray)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[objc.ID](_ret)
 }
 
 func NSArrayArrayWithObject(anObject objc.ID) *NSArray[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSArray), _nSArraySelArrayWithObject, anObject)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[objc.ID](_ret)
 }
 
 func NSArrayArrayWithObjectsCount(objects unsafe.Pointer, cnt uint) *NSArray[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSArray), _nSArraySelArrayWithObjectsCount, objects, cnt)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[objc.ID](_ret)
 }
 
 func NSArrayArrayWithArray(array *NSArray[objc.ID]) *NSArray[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSArray), _nSArraySelArrayWithArray, array.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *NSArray[ObjectType]) InitWithArray(array *NSArray[ObjectType]) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelInitWithArray, array.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[ObjectType](_ret)
 }
 
 func (o *NSArray[ObjectType]) InitWithArrayCopyItems(array *NSArray[ObjectType], flag bool) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelInitWithArrayCopyItems, array.Ptr(), flag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[ObjectType](_ret)
 }
 
 func (o *NSArray[ObjectType]) InitWithContentsOfURLError(url *NSURL) (*NSArray[ObjectType], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelInitWithContentsOfURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -408,7 +464,9 @@ func (o *NSArray[ObjectType]) InitWithContentsOfURLError(url *NSURL) (*NSArray[O
 func NSArrayArrayWithContentsOfURLError(url *NSURL) (*NSArray[objc.ID], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSArray), _nSArraySelArrayWithContentsOfURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -417,25 +475,33 @@ func NSArrayArrayWithContentsOfURLError(url *NSURL) (*NSArray[objc.ID], error) {
 
 func (o *NSArray[ObjectType]) DifferenceFromArrayWithOptionsUsingEquivalenceTest(other *NSArray[ObjectType], options NSOrderedCollectionDifferenceCalculationOptions, block objc.Block) *NSOrderedCollectionDifference[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelDifferenceFromArrayWithOptionsUsingEquivalenceTest, other.Ptr(), options, block)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedCollectionDifferenceFromID[ObjectType](_ret)
 }
 
 func (o *NSArray[ObjectType]) DifferenceFromArrayWithOptions(other *NSArray[ObjectType], options NSOrderedCollectionDifferenceCalculationOptions) *NSOrderedCollectionDifference[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelDifferenceFromArrayWithOptions, other.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedCollectionDifferenceFromID[ObjectType](_ret)
 }
 
 func (o *NSArray[ObjectType]) DifferenceFromArray(other *NSArray[ObjectType]) *NSOrderedCollectionDifference[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelDifferenceFromArray, other.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedCollectionDifferenceFromID[ObjectType](_ret)
 }
 
 func (o *NSArray[ObjectType]) ArrayByApplyingDifference(difference *NSOrderedCollectionDifference[ObjectType]) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelArrayByApplyingDifference, difference.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[ObjectType](_ret)
 }
 
@@ -447,28 +513,36 @@ func (o *NSArray[ObjectType]) GetObjects(objects unsafe.Pointer) {
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func NSArrayArrayWithContentsOfFile(path *NSString) *NSArray[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSArray), _nSArraySelArrayWithContentsOfFile, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[objc.ID](_ret)
 }
 
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func NSArrayArrayWithContentsOfURL(url *NSURL) *NSArray[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSArray), _nSArraySelArrayWithContentsOfURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[objc.ID](_ret)
 }
 
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSArray[ObjectType]) InitWithContentsOfFile(path *NSString) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelInitWithContentsOfFile, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[ObjectType](_ret)
 }
 
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSArray[ObjectType]) InitWithContentsOfURL(url *NSURL) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelInitWithContentsOfURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[ObjectType](_ret)
 }
 
@@ -486,7 +560,9 @@ func (o *NSArray[ObjectType]) WriteToURLAtomically(url *NSURL, atomically bool) 
 
 func (o *NSArray[ObjectType]) PathsMatchingExtensions(filterTypes *NSArray[*NSString]) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelPathsMatchingExtensions, filterTypes.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -504,13 +580,16 @@ func (o *NSArray[ObjectType]) RemoveObserverFromObjectsAtIndexesForKeyPath(obser
 
 func (o *NSArray[ObjectType]) SortedArrayUsingDescriptors(sortDescriptors *NSArray[*NSSortDescriptor]) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelSortedArrayUsingDescriptors, sortDescriptors.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[ObjectType](_ret)
 }
 
 func (o *NSArray[ObjectType]) FilteredArrayUsingPredicate(predicate *NSPredicate) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelFilteredArrayUsingPredicate, predicate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[ObjectType](_ret)
 }
-

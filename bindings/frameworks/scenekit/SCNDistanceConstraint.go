@@ -15,14 +15,14 @@ type SCNDistanceConstraint struct {
 }
 
 var (
-	_clsSCNDistanceConstraint = _objcClass("SCNDistanceConstraint")
+	_clsSCNDistanceConstraint                             = _objcClass("SCNDistanceConstraint")
 	_sCNDistanceConstraintSelDistanceConstraintWithTarget = objc.RegisterName("distanceConstraintWithTarget:")
-	_sCNDistanceConstraintSelTarget = objc.RegisterName("target")
-	_sCNDistanceConstraintSelSetTarget = objc.RegisterName("setTarget:")
-	_sCNDistanceConstraintSelMinimumDistance = objc.RegisterName("minimumDistance")
-	_sCNDistanceConstraintSelSetMinimumDistance = objc.RegisterName("setMinimumDistance:")
-	_sCNDistanceConstraintSelMaximumDistance = objc.RegisterName("maximumDistance")
-	_sCNDistanceConstraintSelSetMaximumDistance = objc.RegisterName("setMaximumDistance:")
+	_sCNDistanceConstraintSelTarget                       = objc.RegisterName("target")
+	_sCNDistanceConstraintSelSetTarget                    = objc.RegisterName("setTarget:")
+	_sCNDistanceConstraintSelMinimumDistance              = objc.RegisterName("minimumDistance")
+	_sCNDistanceConstraintSelSetMinimumDistance           = objc.RegisterName("setMinimumDistance:")
+	_sCNDistanceConstraintSelMaximumDistance              = objc.RegisterName("maximumDistance")
+	_sCNDistanceConstraintSelSetMaximumDistance           = objc.RegisterName("setMaximumDistance:")
 )
 
 func SCNDistanceConstraintFromID(id objc.ID) *SCNDistanceConstraint {
@@ -38,14 +38,18 @@ func SCNDistanceConstraintFromID(id objc.ID) *SCNDistanceConstraint {
 // @method distanceConstraintWithTarget @abstract Creates and returns a SCNDistanceConstraint constraint.
 func SCNDistanceConstraintDistanceConstraintWithTarget(target *SCNNode) *SCNDistanceConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNDistanceConstraint), _sCNDistanceConstraintSelDistanceConstraintWithTarget, target.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNDistanceConstraintFromID(_ret)
 }
 
 // @property target @abstract Defines the target node to keep distance with.
 func (o *SCNDistanceConstraint) Target() *SCNNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNDistanceConstraintSelTarget)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNNodeFromID(_ret)
 }
 
@@ -72,4 +76,3 @@ func (o *SCNDistanceConstraint) MaximumDistance() float64 {
 func (o *SCNDistanceConstraint) SetMaximumDistance(maximumDistance float64) {
 	o.Ptr().Send(_sCNDistanceConstraintSelSetMaximumDistance, maximumDistance)
 }
-

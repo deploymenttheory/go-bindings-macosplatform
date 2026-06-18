@@ -19,14 +19,14 @@ type AVMutableAudioMixInputParameters struct {
 }
 
 var (
-	_clsAVMutableAudioMixInputParameters = _objcClass("AVMutableAudioMixInputParameters")
-	_aVMutableAudioMixInputParametersSelAudioMixInputParametersWithTrack = objc.RegisterName("audioMixInputParametersWithTrack:")
-	_aVMutableAudioMixInputParametersSelAudioMixInputParameters = objc.RegisterName("audioMixInputParameters")
+	_clsAVMutableAudioMixInputParameters                                                 = _objcClass("AVMutableAudioMixInputParameters")
+	_aVMutableAudioMixInputParametersSelAudioMixInputParametersWithTrack                 = objc.RegisterName("audioMixInputParametersWithTrack:")
+	_aVMutableAudioMixInputParametersSelAudioMixInputParameters                          = objc.RegisterName("audioMixInputParameters")
 	_aVMutableAudioMixInputParametersSelSetVolumeRampFromStartVolumeToEndVolumeTimeRange = objc.RegisterName("setVolumeRampFromStartVolume:toEndVolume:timeRange:")
-	_aVMutableAudioMixInputParametersSelSetVolumeAtTime = objc.RegisterName("setVolume:atTime:")
-	_aVMutableAudioMixInputParametersSelSetTrackID = objc.RegisterName("setTrackID:")
-	_aVMutableAudioMixInputParametersSelSetAudioTimePitchAlgorithm = objc.RegisterName("setAudioTimePitchAlgorithm:")
-	_aVMutableAudioMixInputParametersSelSetAudioTapProcessor = objc.RegisterName("setAudioTapProcessor:")
+	_aVMutableAudioMixInputParametersSelSetVolumeAtTime                                  = objc.RegisterName("setVolume:atTime:")
+	_aVMutableAudioMixInputParametersSelSetTrackID                                       = objc.RegisterName("setTrackID:")
+	_aVMutableAudioMixInputParametersSelSetAudioTimePitchAlgorithm                       = objc.RegisterName("setAudioTimePitchAlgorithm:")
+	_aVMutableAudioMixInputParametersSelSetAudioTapProcessor                             = objc.RegisterName("setAudioTapProcessor:")
 )
 
 func AVMutableAudioMixInputParametersFromID(id objc.ID) *AVMutableAudioMixInputParameters {
@@ -41,13 +41,17 @@ func AVMutableAudioMixInputParametersFromID(id objc.ID) *AVMutableAudioMixInputP
 
 func AVMutableAudioMixInputParametersAudioMixInputParametersWithTrack(track *AVAssetTrack) *AVMutableAudioMixInputParameters {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableAudioMixInputParameters), _aVMutableAudioMixInputParametersSelAudioMixInputParametersWithTrack, track.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMutableAudioMixInputParametersFromID(_ret)
 }
 
 func AVMutableAudioMixInputParametersAudioMixInputParameters() *AVMutableAudioMixInputParameters {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableAudioMixInputParameters), _aVMutableAudioMixInputParametersSelAudioMixInputParameters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMutableAudioMixInputParametersFromID(_ret)
 }
 
@@ -70,4 +74,3 @@ func (o *AVMutableAudioMixInputParameters) SetAudioTimePitchAlgorithm(audioTimeP
 func (o *AVMutableAudioMixInputParameters) SetAudioTapProcessor(audioTapProcessor unsafe.Pointer) {
 	o.Ptr().Send(_aVMutableAudioMixInputParametersSelSetAudioTapProcessor, audioTapProcessor)
 }
-

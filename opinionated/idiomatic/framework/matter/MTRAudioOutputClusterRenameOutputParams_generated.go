@@ -17,7 +17,9 @@ type MTRAudioOutputClusterRenameOutputParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRAudioOutputClusterRenameOutputParams].
-func (x *MTRAudioOutputClusterRenameOutputParams) Unwrap() *raw.MTRAudioOutputClusterRenameOutputParams { return x.inner }
+func (x *MTRAudioOutputClusterRenameOutputParams) Unwrap() *raw.MTRAudioOutputClusterRenameOutputParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -123,4 +125,3 @@ type MTRAudioOutputClusterRenameOutputParamsable interface {
 }
 
 var _ MTRAudioOutputClusterRenameOutputParamsable = (*MTRAudioOutputClusterRenameOutputParams)(nil)
-

@@ -661,9 +661,13 @@ func (x *MTRBaseClusterChannel) SubscribeAttributeClusterRevisionWithMinInterval
 	}
 }
 
-func (x *MTRBaseClusterChannel) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterChannel) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterChannel) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterChannel) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterChannelable is the interface implemented by [MTRBaseClusterChannel], for mocking and DI.
 type MTRBaseClusterChannelable interface {
@@ -713,4 +717,3 @@ type MTRBaseClusterChannelable interface {
 }
 
 var _ MTRBaseClusterChannelable = (*MTRBaseClusterChannel)(nil)
-

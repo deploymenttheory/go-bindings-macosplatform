@@ -16,13 +16,13 @@ type DOMAttr struct {
 }
 
 var (
-	_clsDOMAttr = _objcClass("DOMAttr")
-	_dOMAttrSelName = objc.RegisterName("name")
-	_dOMAttrSelSpecified = objc.RegisterName("specified")
-	_dOMAttrSelValue = objc.RegisterName("value")
-	_dOMAttrSelSetValue = objc.RegisterName("setValue:")
+	_clsDOMAttr             = _objcClass("DOMAttr")
+	_dOMAttrSelName         = objc.RegisterName("name")
+	_dOMAttrSelSpecified    = objc.RegisterName("specified")
+	_dOMAttrSelValue        = objc.RegisterName("value")
+	_dOMAttrSelSetValue     = objc.RegisterName("setValue:")
 	_dOMAttrSelOwnerElement = objc.RegisterName("ownerElement")
-	_dOMAttrSelStyle = objc.RegisterName("style")
+	_dOMAttrSelStyle        = objc.RegisterName("style")
 )
 
 func DOMAttrFromID(id objc.ID) *DOMAttr {
@@ -37,7 +37,9 @@ func DOMAttrFromID(id objc.ID) *DOMAttr {
 
 func (o *DOMAttr) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMAttrSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -48,7 +50,9 @@ func (o *DOMAttr) Specified() bool {
 
 func (o *DOMAttr) Value() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMAttrSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -58,13 +62,16 @@ func (o *DOMAttr) SetValue(value *foundation.NSString) {
 
 func (o *DOMAttr) OwnerElement() *DOMElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMAttrSelOwnerElement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMElementFromID(_ret)
 }
 
 func (o *DOMAttr) Style() *DOMCSSStyleDeclaration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMAttrSelStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMCSSStyleDeclarationFromID(_ret)
 }
-

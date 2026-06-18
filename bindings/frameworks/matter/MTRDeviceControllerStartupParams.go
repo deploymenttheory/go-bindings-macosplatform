@@ -16,36 +16,36 @@ type MTRDeviceControllerStartupParams struct {
 }
 
 var (
-	_clsMTRDeviceControllerStartupParams = _objcClass("MTRDeviceControllerStartupParams")
-	_mTRDeviceControllerStartupParamsSelInitWithIPKFabricIDNocSigner = objc.RegisterName("initWithIPK:fabricID:nocSigner:")
+	_clsMTRDeviceControllerStartupParams                                                                                          = _objcClass("MTRDeviceControllerStartupParams")
+	_mTRDeviceControllerStartupParamsSelInitWithIPKFabricIDNocSigner                                                              = objc.RegisterName("initWithIPK:fabricID:nocSigner:")
 	_mTRDeviceControllerStartupParamsSelInitWithIPKOperationalKeypairOperationalCertificateIntermediateCertificateRootCertificate = objc.RegisterName("initWithIPK:operationalKeypair:operationalCertificate:intermediateCertificate:rootCertificate:")
-	_mTRDeviceControllerStartupParamsSelNocSigner = objc.RegisterName("nocSigner")
-	_mTRDeviceControllerStartupParamsSelFabricID = objc.RegisterName("fabricID")
-	_mTRDeviceControllerStartupParamsSelIpk = objc.RegisterName("ipk")
-	_mTRDeviceControllerStartupParamsSelVendorID = objc.RegisterName("vendorID")
-	_mTRDeviceControllerStartupParamsSelSetVendorID = objc.RegisterName("setVendorID:")
-	_mTRDeviceControllerStartupParamsSelNodeID = objc.RegisterName("nodeID")
-	_mTRDeviceControllerStartupParamsSelSetNodeID = objc.RegisterName("setNodeID:")
-	_mTRDeviceControllerStartupParamsSelCaseAuthenticatedTags = objc.RegisterName("caseAuthenticatedTags")
-	_mTRDeviceControllerStartupParamsSelSetCaseAuthenticatedTags = objc.RegisterName("setCaseAuthenticatedTags:")
-	_mTRDeviceControllerStartupParamsSelRootCertificate = objc.RegisterName("rootCertificate")
-	_mTRDeviceControllerStartupParamsSelSetRootCertificate = objc.RegisterName("setRootCertificate:")
-	_mTRDeviceControllerStartupParamsSelIntermediateCertificate = objc.RegisterName("intermediateCertificate")
-	_mTRDeviceControllerStartupParamsSelSetIntermediateCertificate = objc.RegisterName("setIntermediateCertificate:")
-	_mTRDeviceControllerStartupParamsSelOperationalCertificate = objc.RegisterName("operationalCertificate")
-	_mTRDeviceControllerStartupParamsSelOperationalKeypair = objc.RegisterName("operationalKeypair")
-	_mTRDeviceControllerStartupParamsSelSetOperationalKeypair = objc.RegisterName("setOperationalKeypair:")
-	_mTRDeviceControllerStartupParamsSelOperationalCertificateIssuer = objc.RegisterName("operationalCertificateIssuer")
-	_mTRDeviceControllerStartupParamsSelSetOperationalCertificateIssuer = objc.RegisterName("setOperationalCertificateIssuer:")
-	_mTRDeviceControllerStartupParamsSelOperationalCertificateIssuerQueue = objc.RegisterName("operationalCertificateIssuerQueue")
-	_mTRDeviceControllerStartupParamsSelSetOperationalCertificateIssuerQueue = objc.RegisterName("setOperationalCertificateIssuerQueue:")
-	_mTRDeviceControllerStartupParamsSelInitWithSigningKeypairFabricIdIpk = objc.RegisterName("initWithSigningKeypair:fabricId:ipk:")
+	_mTRDeviceControllerStartupParamsSelNocSigner                                                                                 = objc.RegisterName("nocSigner")
+	_mTRDeviceControllerStartupParamsSelFabricID                                                                                  = objc.RegisterName("fabricID")
+	_mTRDeviceControllerStartupParamsSelIpk                                                                                       = objc.RegisterName("ipk")
+	_mTRDeviceControllerStartupParamsSelVendorID                                                                                  = objc.RegisterName("vendorID")
+	_mTRDeviceControllerStartupParamsSelSetVendorID                                                                               = objc.RegisterName("setVendorID:")
+	_mTRDeviceControllerStartupParamsSelNodeID                                                                                    = objc.RegisterName("nodeID")
+	_mTRDeviceControllerStartupParamsSelSetNodeID                                                                                 = objc.RegisterName("setNodeID:")
+	_mTRDeviceControllerStartupParamsSelCaseAuthenticatedTags                                                                     = objc.RegisterName("caseAuthenticatedTags")
+	_mTRDeviceControllerStartupParamsSelSetCaseAuthenticatedTags                                                                  = objc.RegisterName("setCaseAuthenticatedTags:")
+	_mTRDeviceControllerStartupParamsSelRootCertificate                                                                           = objc.RegisterName("rootCertificate")
+	_mTRDeviceControllerStartupParamsSelSetRootCertificate                                                                        = objc.RegisterName("setRootCertificate:")
+	_mTRDeviceControllerStartupParamsSelIntermediateCertificate                                                                   = objc.RegisterName("intermediateCertificate")
+	_mTRDeviceControllerStartupParamsSelSetIntermediateCertificate                                                                = objc.RegisterName("setIntermediateCertificate:")
+	_mTRDeviceControllerStartupParamsSelOperationalCertificate                                                                    = objc.RegisterName("operationalCertificate")
+	_mTRDeviceControllerStartupParamsSelOperationalKeypair                                                                        = objc.RegisterName("operationalKeypair")
+	_mTRDeviceControllerStartupParamsSelSetOperationalKeypair                                                                     = objc.RegisterName("setOperationalKeypair:")
+	_mTRDeviceControllerStartupParamsSelOperationalCertificateIssuer                                                              = objc.RegisterName("operationalCertificateIssuer")
+	_mTRDeviceControllerStartupParamsSelSetOperationalCertificateIssuer                                                           = objc.RegisterName("setOperationalCertificateIssuer:")
+	_mTRDeviceControllerStartupParamsSelOperationalCertificateIssuerQueue                                                         = objc.RegisterName("operationalCertificateIssuerQueue")
+	_mTRDeviceControllerStartupParamsSelSetOperationalCertificateIssuerQueue                                                      = objc.RegisterName("setOperationalCertificateIssuerQueue:")
+	_mTRDeviceControllerStartupParamsSelInitWithSigningKeypairFabricIdIpk                                                         = objc.RegisterName("initWithSigningKeypair:fabricId:ipk:")
 	_mTRDeviceControllerStartupParamsSelInitWithOperationalKeypairOperationalCertificateIntermediateCertificateRootCertificateIpk = objc.RegisterName("initWithOperationalKeypair:operationalCertificate:intermediateCertificate:rootCertificate:ipk:")
-	_mTRDeviceControllerStartupParamsSelFabricId = objc.RegisterName("fabricId")
-	_mTRDeviceControllerStartupParamsSelVendorId = objc.RegisterName("vendorId")
-	_mTRDeviceControllerStartupParamsSelSetVendorId = objc.RegisterName("setVendorId:")
-	_mTRDeviceControllerStartupParamsSelNodeId = objc.RegisterName("nodeId")
-	_mTRDeviceControllerStartupParamsSelSetNodeId = objc.RegisterName("setNodeId:")
+	_mTRDeviceControllerStartupParamsSelFabricId                                                                                  = objc.RegisterName("fabricId")
+	_mTRDeviceControllerStartupParamsSelVendorId                                                                                  = objc.RegisterName("vendorId")
+	_mTRDeviceControllerStartupParamsSelSetVendorId                                                                               = objc.RegisterName("setVendorId:")
+	_mTRDeviceControllerStartupParamsSelNodeId                                                                                    = objc.RegisterName("nodeId")
+	_mTRDeviceControllerStartupParamsSelSetNodeId                                                                                 = objc.RegisterName("setNodeId:")
 )
 
 func MTRDeviceControllerStartupParamsFromID(id objc.ID) *MTRDeviceControllerStartupParams {
@@ -61,14 +61,18 @@ func MTRDeviceControllerStartupParamsFromID(id objc.ID) *MTRDeviceControllerStar
 // Prepare to initialize a controller given a keypair to use for signing operational certificates. A controller created from MTRDeviceControllerStartupParams initialized with this method will be able to issue operational certificates to devices it commissions, using nocSigner to sign them. @param ipk The Identity Protection Key, must be 16 bytes in length @param fabricID The fabric identifier, must be non-zero.
 func (o *MTRDeviceControllerStartupParams) InitWithIPKFabricIDNocSigner(ipk *foundation.NSData, fabricID *foundation.NSNumber, nocSigner MTRKeypair) *MTRDeviceControllerStartupParams {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerStartupParamsSelInitWithIPKFabricIDNocSigner, ipk.Ptr(), fabricID.Ptr(), nocSigner)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRDeviceControllerStartupParamsFromID(_ret)
 }
 
 // Prepare to initialize a controller that is not able to sign operational certificates itself, and therefore needs to be provided with a complete operational certificate chain.  This initialization method should be used when none of the certificate-signing private keys are available locally. A controller created from MTRDeviceControllerStartupParams initialized with this method will not be able to commission devices unless operationalCertificateIssuer and operationalCertificateIssuerQueue are set. The fabric id and node id to use for the controller will be derived from the provided operationalCertificate. @param ipk The Identity Protection Key, must be 16 bytes in length @param intermediateCertificate may be nil if operationalCertificate is directly signed by rootCertificate.
 func (o *MTRDeviceControllerStartupParams) InitWithIPKOperationalKeypairOperationalCertificateIntermediateCertificateRootCertificate(ipk *foundation.NSData, operationalKeypair MTRKeypair, operationalCertificate *foundation.NSData, intermediateCertificate *foundation.NSData, rootCertificate *foundation.NSData) *MTRDeviceControllerStartupParams {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerStartupParamsSelInitWithIPKOperationalKeypairOperationalCertificateIntermediateCertificateRootCertificate, ipk.Ptr(), operationalKeypair, operationalCertificate.Ptr(), intermediateCertificate.Ptr(), rootCertificate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRDeviceControllerStartupParamsFromID(_ret)
 }
 
@@ -81,21 +85,27 @@ func (o *MTRDeviceControllerStartupParams) NocSigner() MTRKeypair {
 // Fabric id for the controller.  Must be set to a nonzero value.  This is scoped by the root public key, which is determined as follows: * If a root certificate is provided, it is the public key of the root certificate. * If a root certificate is not provided, the root public key is the public key of the nocSigner keypair, since in this case we are not using an intermediate certificate.
 func (o *MTRDeviceControllerStartupParams) FabricID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerStartupParamsSelFabricID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // IPK to use for the controller's fabric.  Allowed to change from the last time a controller was started on this fabric if a new IPK has been distributed to all the devices the controller wants to interact with.
 func (o *MTRDeviceControllerStartupParams) Ipk() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerStartupParamsSelIpk)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // Vendor ID (allocated by the Connectivity Standards Alliance) for this controller. If not nil, must not be the "standard" vendor id (0). When creating a new fabric: * Must not be nil. When using an existing fabric: * Will override existing value if not nil. Otherwise existing value will be used.
 func (o *MTRDeviceControllerStartupParams) VendorID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerStartupParamsSelVendorID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -106,7 +116,9 @@ func (o *MTRDeviceControllerStartupParams) SetVendorID(vendorID *foundation.NSNu
 // Node id for this controller. If operationalCertificate is not nil, must be nil.  The provided operational certificate will be used as-is. If not nil, must be a valid Matter operational node id. If operationalCertificate is nil, nodeID and operationalKeypair are used to determine an operational certificate, as follows: * When creating a new fabric: ** nodeID is allowed to be nil to indicate that a random node id should be generated. * When using an existing fabric: ** nodeID is allowed to be nil to indicate that the existing operational node id should be used.  The existing operational keys will also be used, unless operationalKeypair is provided.  The existing caseAuthenticatedTags will be used. ** If nodeID is not nil, a new operational certificate will be generated for the provided node id (even if that matches the existing node id), using either the operationalKeypair if that is provided or a new randomly generated operational key, and using the provided caseAuthenticatedTags.
 func (o *MTRDeviceControllerStartupParams) NodeID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerStartupParamsSelNodeID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -126,7 +138,9 @@ func (o *MTRDeviceControllerStartupParams) SetCaseAuthenticatedTags(caseAuthenti
 // Root certificate, in X.509 DER form, to use. Must not be nil if an intermediate CA is being used, to allow determination of the root public key. If not nil, and if an intermediate CA is not being used, the public key of this certificate must match the public key of nocSigner, if nocSigner is not nil. When creating a new fabric: * May be nil if nocSigner is not nil and an intermediate CA is not being used.  In that case the nocSigner keypair, which is the keypair for the root certificate, will be used to generate and sign a root certificate, with a random issuer id.  In this case, the fabricID will be included in the root certificate's subject DN. When using an existing fabric: * May be nil if nocSigner is not nil and an intermediate CA is not being used.  In that case, the existing root certificate for the fabric will be used. * If not nil must satisfy the following properties: 1) The public key must match the public key of the existing root certificate. 2) The subject DN must match the subject DN of the existing root certificate.
 func (o *MTRDeviceControllerStartupParams) RootCertificate() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerStartupParamsSelRootCertificate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -137,7 +151,9 @@ func (o *MTRDeviceControllerStartupParams) SetRootCertificate(rootCertificate *f
 // Intermediate certificate, in X.509 DER form, to use. If not nil, rootCertificate must not be nil, and the intermediate certificate must be signed by rootCertificate. If not nil, and nocSigner is not nil, the public key of this certificate must match the public key of nocSigner. When creating a new fabric: * Must not be nil if an intermediate CA is being used. * Must be nil if an intermediate CA is not being used. When using an existing fabric: * If not nil, will be used as the intermediate certificate for issuing operational certificates. * If nil: * If nocSigner is not nil, there is an existing intermediate certificate, and it matches the nocSigner public key, the existing intermediate certificate will be used. * Otherwise the fabric will not use an intermediate certificate.  This allows switching from using an intermediate CA to not using one.
 func (o *MTRDeviceControllerStartupParams) IntermediateCertificate() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerStartupParamsSelIntermediateCertificate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -148,7 +164,9 @@ func (o *MTRDeviceControllerStartupParams) SetIntermediateCertificate(intermedia
 // Operational certificate, in X.509 DER form, to use. If not nil, will be used as the operational certificate.  In this case operationalKeypair must not be nil. If nil, an operational certificate will be determined as described in the documentation for nodeID.
 func (o *MTRDeviceControllerStartupParams) OperationalCertificate() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerStartupParamsSelOperationalCertificate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -174,7 +192,9 @@ func (o *MTRDeviceControllerStartupParams) SetOperationalCertificateIssuer(opera
 
 func (o *MTRDeviceControllerStartupParams) OperationalCertificateIssuerQueue() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerStartupParamsSelOperationalCertificateIssuerQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
@@ -184,13 +204,17 @@ func (o *MTRDeviceControllerStartupParams) SetOperationalCertificateIssuerQueue(
 
 func (o *MTRDeviceControllerStartupParams) InitWithSigningKeypairFabricIdIpk(nocSigner MTRKeypair, fabricId uint64, ipk *foundation.NSData) *MTRDeviceControllerStartupParams {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerStartupParamsSelInitWithSigningKeypairFabricIdIpk, nocSigner, fabricId, ipk.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRDeviceControllerStartupParamsFromID(_ret)
 }
 
 func (o *MTRDeviceControllerStartupParams) InitWithOperationalKeypairOperationalCertificateIntermediateCertificateRootCertificateIpk(operationalKeypair MTRKeypair, operationalCertificate *foundation.NSData, intermediateCertificate *foundation.NSData, rootCertificate *foundation.NSData, ipk *foundation.NSData) *MTRDeviceControllerStartupParams {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerStartupParamsSelInitWithOperationalKeypairOperationalCertificateIntermediateCertificateRootCertificateIpk, operationalKeypair, operationalCertificate.Ptr(), intermediateCertificate.Ptr(), rootCertificate.Ptr(), ipk.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRDeviceControllerStartupParamsFromID(_ret)
 }
 
@@ -201,7 +225,9 @@ func (o *MTRDeviceControllerStartupParams) FabricId() uint64 {
 
 func (o *MTRDeviceControllerStartupParams) VendorId() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerStartupParamsSelVendorId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -211,11 +237,12 @@ func (o *MTRDeviceControllerStartupParams) SetVendorId(vendorId *foundation.NSNu
 
 func (o *MTRDeviceControllerStartupParams) NodeId() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerStartupParamsSelNodeId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDeviceControllerStartupParams) SetNodeId(nodeId *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDeviceControllerStartupParamsSelSetNodeId, nodeId.Ptr())
 }
-

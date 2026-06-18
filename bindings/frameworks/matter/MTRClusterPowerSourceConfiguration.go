@@ -16,15 +16,15 @@ type MTRClusterPowerSourceConfiguration struct {
 }
 
 var (
-	_clsMTRClusterPowerSourceConfiguration = _objcClass("MTRClusterPowerSourceConfiguration")
-	_mTRClusterPowerSourceConfigurationSelReadAttributeSourcesWithParams = objc.RegisterName("readAttributeSourcesWithParams:")
+	_clsMTRClusterPowerSourceConfiguration                                            = _objcClass("MTRClusterPowerSourceConfiguration")
+	_mTRClusterPowerSourceConfigurationSelReadAttributeSourcesWithParams              = objc.RegisterName("readAttributeSourcesWithParams:")
 	_mTRClusterPowerSourceConfigurationSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterPowerSourceConfigurationSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterPowerSourceConfigurationSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterPowerSourceConfigurationSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterPowerSourceConfigurationSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterPowerSourceConfigurationSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterPowerSourceConfigurationSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterPowerSourceConfigurationSelReadAttributeAcceptedCommandListWithParams  = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterPowerSourceConfigurationSelReadAttributeAttributeListWithParams        = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterPowerSourceConfigurationSelReadAttributeFeatureMapWithParams           = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterPowerSourceConfigurationSelReadAttributeClusterRevisionWithParams      = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterPowerSourceConfigurationSelInitWithDeviceEndpointIDQueue               = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterPowerSourceConfigurationSelInitWithDeviceEndpointQueue                 = objc.RegisterName("initWithDevice:endpoint:queue:")
 )
 
 func MTRClusterPowerSourceConfigurationFromID(id objc.ID) *MTRClusterPowerSourceConfiguration {
@@ -70,13 +70,16 @@ func (o *MTRClusterPowerSourceConfiguration) ReadAttributeClusterRevisionWithPar
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func (o *MTRClusterPowerSourceConfiguration) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterPowerSourceConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterPowerSourceConfigurationSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterPowerSourceConfigurationFromID(_ret)
 }
 
 func (o *MTRClusterPowerSourceConfiguration) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterPowerSourceConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterPowerSourceConfigurationSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterPowerSourceConfigurationFromID(_ret)
 }
-

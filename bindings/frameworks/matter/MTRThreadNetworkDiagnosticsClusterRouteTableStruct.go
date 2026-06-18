@@ -16,26 +16,26 @@ type MTRThreadNetworkDiagnosticsClusterRouteTableStruct struct {
 }
 
 var (
-	_clsMTRThreadNetworkDiagnosticsClusterRouteTableStruct = _objcClass("MTRThreadNetworkDiagnosticsClusterRouteTableStruct")
-	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelExtAddress = objc.RegisterName("extAddress")
-	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelSetExtAddress = objc.RegisterName("setExtAddress:")
-	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelRloc16 = objc.RegisterName("rloc16")
-	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelSetRloc16 = objc.RegisterName("setRloc16:")
-	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelRouterId = objc.RegisterName("routerId")
-	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelSetRouterId = objc.RegisterName("setRouterId:")
-	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelNextHop = objc.RegisterName("nextHop")
-	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelSetNextHop = objc.RegisterName("setNextHop:")
-	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelPathCost = objc.RegisterName("pathCost")
-	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelSetPathCost = objc.RegisterName("setPathCost:")
-	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelLqiIn = objc.RegisterName("lqiIn")
-	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelSetLqiIn = objc.RegisterName("setLqiIn:")
-	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelLqiOut = objc.RegisterName("lqiOut")
-	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelSetLqiOut = objc.RegisterName("setLqiOut:")
-	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelAge = objc.RegisterName("age")
-	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelSetAge = objc.RegisterName("setAge:")
-	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelAllocated = objc.RegisterName("allocated")
-	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelSetAllocated = objc.RegisterName("setAllocated:")
-	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelLinkEstablished = objc.RegisterName("linkEstablished")
+	_clsMTRThreadNetworkDiagnosticsClusterRouteTableStruct                   = _objcClass("MTRThreadNetworkDiagnosticsClusterRouteTableStruct")
+	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelExtAddress         = objc.RegisterName("extAddress")
+	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelSetExtAddress      = objc.RegisterName("setExtAddress:")
+	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelRloc16             = objc.RegisterName("rloc16")
+	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelSetRloc16          = objc.RegisterName("setRloc16:")
+	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelRouterId           = objc.RegisterName("routerId")
+	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelSetRouterId        = objc.RegisterName("setRouterId:")
+	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelNextHop            = objc.RegisterName("nextHop")
+	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelSetNextHop         = objc.RegisterName("setNextHop:")
+	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelPathCost           = objc.RegisterName("pathCost")
+	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelSetPathCost        = objc.RegisterName("setPathCost:")
+	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelLqiIn              = objc.RegisterName("lqiIn")
+	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelSetLqiIn           = objc.RegisterName("setLqiIn:")
+	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelLqiOut             = objc.RegisterName("lqiOut")
+	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelSetLqiOut          = objc.RegisterName("setLqiOut:")
+	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelAge                = objc.RegisterName("age")
+	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelSetAge             = objc.RegisterName("setAge:")
+	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelAllocated          = objc.RegisterName("allocated")
+	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelSetAllocated       = objc.RegisterName("setAllocated:")
+	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelLinkEstablished    = objc.RegisterName("linkEstablished")
 	_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelSetLinkEstablished = objc.RegisterName("setLinkEstablished:")
 )
 
@@ -51,7 +51,9 @@ func MTRThreadNetworkDiagnosticsClusterRouteTableStructFromID(id objc.ID) *MTRTh
 
 func (o *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) ExtAddress() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterRouteTableStructSelExtAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -61,7 +63,9 @@ func (o *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) SetExtAddress(extAd
 
 func (o *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) Rloc16() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterRouteTableStructSelRloc16)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -71,7 +75,9 @@ func (o *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) SetRloc16(rloc16 *f
 
 func (o *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) RouterId() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterRouteTableStructSelRouterId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -81,7 +87,9 @@ func (o *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) SetRouterId(routerI
 
 func (o *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) NextHop() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterRouteTableStructSelNextHop)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -91,7 +99,9 @@ func (o *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) SetNextHop(nextHop 
 
 func (o *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) PathCost() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterRouteTableStructSelPathCost)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -101,7 +111,9 @@ func (o *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) SetPathCost(pathCos
 
 func (o *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) LqiIn() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterRouteTableStructSelLqiIn)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -111,7 +123,9 @@ func (o *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) SetLqiIn(lqiIn *fou
 
 func (o *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) LqiOut() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterRouteTableStructSelLqiOut)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -121,7 +135,9 @@ func (o *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) SetLqiOut(lqiOut *f
 
 func (o *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) Age() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterRouteTableStructSelAge)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -131,7 +147,9 @@ func (o *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) SetAge(age *foundat
 
 func (o *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) Allocated() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterRouteTableStructSelAllocated)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -141,11 +159,12 @@ func (o *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) SetAllocated(alloca
 
 func (o *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) LinkEstablished() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterRouteTableStructSelLinkEstablished)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) SetLinkEstablished(linkEstablished *foundation.NSNumber) {
 	o.Ptr().Send(_mTRThreadNetworkDiagnosticsClusterRouteTableStructSelSetLinkEstablished, linkEstablished.Ptr())
 }
-

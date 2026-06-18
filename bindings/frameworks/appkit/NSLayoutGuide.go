@@ -17,24 +17,24 @@ type NSLayoutGuide struct {
 }
 
 var (
-	_clsNSLayoutGuide = _objcClass("NSLayoutGuide")
+	_clsNSLayoutGuide                                         = _objcClass("NSLayoutGuide")
 	_nSLayoutGuideSelConstraintsAffectingLayoutForOrientation = objc.RegisterName("constraintsAffectingLayoutForOrientation:")
-	_nSLayoutGuideSelFrame = objc.RegisterName("frame")
-	_nSLayoutGuideSelOwningView = objc.RegisterName("owningView")
-	_nSLayoutGuideSelSetOwningView = objc.RegisterName("setOwningView:")
-	_nSLayoutGuideSelIdentifier = objc.RegisterName("identifier")
-	_nSLayoutGuideSelSetIdentifier = objc.RegisterName("setIdentifier:")
-	_nSLayoutGuideSelLeadingAnchor = objc.RegisterName("leadingAnchor")
-	_nSLayoutGuideSelTrailingAnchor = objc.RegisterName("trailingAnchor")
-	_nSLayoutGuideSelLeftAnchor = objc.RegisterName("leftAnchor")
-	_nSLayoutGuideSelRightAnchor = objc.RegisterName("rightAnchor")
-	_nSLayoutGuideSelTopAnchor = objc.RegisterName("topAnchor")
-	_nSLayoutGuideSelBottomAnchor = objc.RegisterName("bottomAnchor")
-	_nSLayoutGuideSelWidthAnchor = objc.RegisterName("widthAnchor")
-	_nSLayoutGuideSelHeightAnchor = objc.RegisterName("heightAnchor")
-	_nSLayoutGuideSelCenterXAnchor = objc.RegisterName("centerXAnchor")
-	_nSLayoutGuideSelCenterYAnchor = objc.RegisterName("centerYAnchor")
-	_nSLayoutGuideSelHasAmbiguousLayout = objc.RegisterName("hasAmbiguousLayout")
+	_nSLayoutGuideSelFrame                                    = objc.RegisterName("frame")
+	_nSLayoutGuideSelOwningView                               = objc.RegisterName("owningView")
+	_nSLayoutGuideSelSetOwningView                            = objc.RegisterName("setOwningView:")
+	_nSLayoutGuideSelIdentifier                               = objc.RegisterName("identifier")
+	_nSLayoutGuideSelSetIdentifier                            = objc.RegisterName("setIdentifier:")
+	_nSLayoutGuideSelLeadingAnchor                            = objc.RegisterName("leadingAnchor")
+	_nSLayoutGuideSelTrailingAnchor                           = objc.RegisterName("trailingAnchor")
+	_nSLayoutGuideSelLeftAnchor                               = objc.RegisterName("leftAnchor")
+	_nSLayoutGuideSelRightAnchor                              = objc.RegisterName("rightAnchor")
+	_nSLayoutGuideSelTopAnchor                                = objc.RegisterName("topAnchor")
+	_nSLayoutGuideSelBottomAnchor                             = objc.RegisterName("bottomAnchor")
+	_nSLayoutGuideSelWidthAnchor                              = objc.RegisterName("widthAnchor")
+	_nSLayoutGuideSelHeightAnchor                             = objc.RegisterName("heightAnchor")
+	_nSLayoutGuideSelCenterXAnchor                            = objc.RegisterName("centerXAnchor")
+	_nSLayoutGuideSelCenterYAnchor                            = objc.RegisterName("centerYAnchor")
+	_nSLayoutGuideSelHasAmbiguousLayout                       = objc.RegisterName("hasAmbiguousLayout")
 )
 
 func NSLayoutGuideFromID(id objc.ID) *NSLayoutGuide {
@@ -49,7 +49,9 @@ func NSLayoutGuideFromID(id objc.ID) *NSLayoutGuide {
 
 func (o *NSLayoutGuide) ConstraintsAffectingLayoutForOrientation(orientation NSLayoutConstraintOrientation) *foundation.NSArray[*NSLayoutConstraint] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutGuideSelConstraintsAffectingLayoutForOrientation, orientation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSLayoutConstraint](_ret)
 }
 
@@ -60,7 +62,9 @@ func (o *NSLayoutGuide) Frame() corefoundation.CGRect {
 
 func (o *NSLayoutGuide) OwningView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutGuideSelOwningView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -70,7 +74,9 @@ func (o *NSLayoutGuide) SetOwningView(owningView *NSView) {
 
 func (o *NSLayoutGuide) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutGuideSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -80,61 +86,81 @@ func (o *NSLayoutGuide) SetIdentifier(identifier *foundation.NSString) {
 
 func (o *NSLayoutGuide) LeadingAnchor() *NSLayoutXAxisAnchor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutGuideSelLeadingAnchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutXAxisAnchorFromID(_ret)
 }
 
 func (o *NSLayoutGuide) TrailingAnchor() *NSLayoutXAxisAnchor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutGuideSelTrailingAnchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutXAxisAnchorFromID(_ret)
 }
 
 func (o *NSLayoutGuide) LeftAnchor() *NSLayoutXAxisAnchor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutGuideSelLeftAnchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutXAxisAnchorFromID(_ret)
 }
 
 func (o *NSLayoutGuide) RightAnchor() *NSLayoutXAxisAnchor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutGuideSelRightAnchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutXAxisAnchorFromID(_ret)
 }
 
 func (o *NSLayoutGuide) TopAnchor() *NSLayoutYAxisAnchor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutGuideSelTopAnchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutYAxisAnchorFromID(_ret)
 }
 
 func (o *NSLayoutGuide) BottomAnchor() *NSLayoutYAxisAnchor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutGuideSelBottomAnchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutYAxisAnchorFromID(_ret)
 }
 
 func (o *NSLayoutGuide) WidthAnchor() *NSLayoutDimension {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutGuideSelWidthAnchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutDimensionFromID(_ret)
 }
 
 func (o *NSLayoutGuide) HeightAnchor() *NSLayoutDimension {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutGuideSelHeightAnchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutDimensionFromID(_ret)
 }
 
 func (o *NSLayoutGuide) CenterXAnchor() *NSLayoutXAxisAnchor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutGuideSelCenterXAnchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutXAxisAnchorFromID(_ret)
 }
 
 func (o *NSLayoutGuide) CenterYAnchor() *NSLayoutYAxisAnchor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutGuideSelCenterYAnchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutYAxisAnchorFromID(_ret)
 }
 
@@ -142,4 +168,3 @@ func (o *NSLayoutGuide) HasAmbiguousLayout() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSLayoutGuideSelHasAmbiguousLayout)
 	return _ret
 }
-

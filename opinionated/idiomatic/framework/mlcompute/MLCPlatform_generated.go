@@ -41,4 +41,3 @@ type Platformable interface {
 }
 
 var _ Platformable = (*Platform)(nil)
-

@@ -15,19 +15,19 @@ type SCNPhysicsHingeJoint struct {
 }
 
 var (
-	_clsSCNPhysicsHingeJoint = _objcClass("SCNPhysicsHingeJoint")
+	_clsSCNPhysicsHingeJoint                                            = _objcClass("SCNPhysicsHingeJoint")
 	_sCNPhysicsHingeJointSelJointWithBodyAAxisAAnchorABodyBAxisBAnchorB = objc.RegisterName("jointWithBodyA:axisA:anchorA:bodyB:axisB:anchorB:")
-	_sCNPhysicsHingeJointSelJointWithBodyAxisAnchor = objc.RegisterName("jointWithBody:axis:anchor:")
-	_sCNPhysicsHingeJointSelBodyA = objc.RegisterName("bodyA")
-	_sCNPhysicsHingeJointSelAxisA = objc.RegisterName("axisA")
-	_sCNPhysicsHingeJointSelSetAxisA = objc.RegisterName("setAxisA:")
-	_sCNPhysicsHingeJointSelAnchorA = objc.RegisterName("anchorA")
-	_sCNPhysicsHingeJointSelSetAnchorA = objc.RegisterName("setAnchorA:")
-	_sCNPhysicsHingeJointSelBodyB = objc.RegisterName("bodyB")
-	_sCNPhysicsHingeJointSelAxisB = objc.RegisterName("axisB")
-	_sCNPhysicsHingeJointSelSetAxisB = objc.RegisterName("setAxisB:")
-	_sCNPhysicsHingeJointSelAnchorB = objc.RegisterName("anchorB")
-	_sCNPhysicsHingeJointSelSetAnchorB = objc.RegisterName("setAnchorB:")
+	_sCNPhysicsHingeJointSelJointWithBodyAxisAnchor                     = objc.RegisterName("jointWithBody:axis:anchor:")
+	_sCNPhysicsHingeJointSelBodyA                                       = objc.RegisterName("bodyA")
+	_sCNPhysicsHingeJointSelAxisA                                       = objc.RegisterName("axisA")
+	_sCNPhysicsHingeJointSelSetAxisA                                    = objc.RegisterName("setAxisA:")
+	_sCNPhysicsHingeJointSelAnchorA                                     = objc.RegisterName("anchorA")
+	_sCNPhysicsHingeJointSelSetAnchorA                                  = objc.RegisterName("setAnchorA:")
+	_sCNPhysicsHingeJointSelBodyB                                       = objc.RegisterName("bodyB")
+	_sCNPhysicsHingeJointSelAxisB                                       = objc.RegisterName("axisB")
+	_sCNPhysicsHingeJointSelSetAxisB                                    = objc.RegisterName("setAxisB:")
+	_sCNPhysicsHingeJointSelAnchorB                                     = objc.RegisterName("anchorB")
+	_sCNPhysicsHingeJointSelSetAnchorB                                  = objc.RegisterName("setAnchorB:")
 )
 
 func SCNPhysicsHingeJointFromID(id objc.ID) *SCNPhysicsHingeJoint {
@@ -42,19 +42,25 @@ func SCNPhysicsHingeJointFromID(id objc.ID) *SCNPhysicsHingeJoint {
 
 func SCNPhysicsHingeJointJointWithBodyAAxisAAnchorABodyBAxisBAnchorB(bodyA *SCNPhysicsBody, axisA SCNVector3, anchorA SCNVector3, bodyB *SCNPhysicsBody, axisB SCNVector3, anchorB SCNVector3) *SCNPhysicsHingeJoint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsHingeJoint), _sCNPhysicsHingeJointSelJointWithBodyAAxisAAnchorABodyBAxisBAnchorB, bodyA.Ptr(), axisA, anchorA, bodyB.Ptr(), axisB, anchorB)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsHingeJointFromID(_ret)
 }
 
 func SCNPhysicsHingeJointJointWithBodyAxisAnchor(body *SCNPhysicsBody, axis SCNVector3, anchor SCNVector3) *SCNPhysicsHingeJoint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsHingeJoint), _sCNPhysicsHingeJointSelJointWithBodyAxisAnchor, body.Ptr(), axis, anchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsHingeJointFromID(_ret)
 }
 
 func (o *SCNPhysicsHingeJoint) BodyA() *SCNPhysicsBody {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNPhysicsHingeJointSelBodyA)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsBodyFromID(_ret)
 }
 
@@ -78,7 +84,9 @@ func (o *SCNPhysicsHingeJoint) SetAnchorA(anchorA SCNVector3) {
 
 func (o *SCNPhysicsHingeJoint) BodyB() *SCNPhysicsBody {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNPhysicsHingeJointSelBodyB)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsBodyFromID(_ret)
 }
 
@@ -99,4 +107,3 @@ func (o *SCNPhysicsHingeJoint) AnchorB() SCNVector3 {
 func (o *SCNPhysicsHingeJoint) SetAnchorB(anchorB SCNVector3) {
 	o.Ptr().Send(_sCNPhysicsHingeJointSelSetAnchorB, anchorB)
 }
-

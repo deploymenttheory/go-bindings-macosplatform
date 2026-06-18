@@ -11,39 +11,38 @@ import (
 )
 
 type LSApplicationParameters struct {
-	Version int
-	Flags LSLaunchFlags
-	Application *carboncore.FSRef
+	Version           int
+	Flags             LSLaunchFlags
+	Application       *carboncore.FSRef
 	AsyncLaunchRefCon unsafe.Pointer
-	Environment unsafe.Pointer
-	Argv unsafe.Pointer
-	InitialEvent *ae.AEDesc
+	Environment       unsafe.Pointer
+	Argv              unsafe.Pointer
+	InitialEvent      *ae.AEDesc
 }
 
 type LSItemInfoRecord struct {
-	Flags LSItemInfoFlags
-	Filetype uint
-	Creator uint
+	Flags     LSItemInfoFlags
+	Filetype  uint
+	Creator   uint
 	Extension unsafe.Pointer
 }
 
 type LSLaunchFSRefSpec struct {
-	AppRef *carboncore.FSRef
-	NumDocs uint
-	ItemRefs *carboncore.FSRef
+	AppRef         *carboncore.FSRef
+	NumDocs        uint
+	ItemRefs       *carboncore.FSRef
 	PassThruParams *ae.AEDesc
-	LaunchFlags LSLaunchFlags
-	AsyncRefCon unsafe.Pointer
+	LaunchFlags    LSLaunchFlags
+	AsyncRefCon    unsafe.Pointer
 }
 
 type LSLaunchURLSpec struct {
-	AppURL unsafe.Pointer
-	ItemURLs unsafe.Pointer
+	AppURL         unsafe.Pointer
+	ItemURLs       unsafe.Pointer
 	PassThruParams *ae.AEDesc
-	LaunchFlags LSLaunchFlags
-	AsyncRefCon unsafe.Pointer
+	LaunchFlags    LSLaunchFlags
+	AsyncRefCon    unsafe.Pointer
 }
 
 // OpaqueIconRef is an opaque type.
 type OpaqueIconRef struct{}
-

@@ -17,44 +17,44 @@ type NSStatusItem struct {
 }
 
 var (
-	_clsNSStatusItem = _objcClass("NSStatusItem")
-	_nSStatusItemSelStatusBar = objc.RegisterName("statusBar")
-	_nSStatusItemSelLength = objc.RegisterName("length")
-	_nSStatusItemSelSetLength = objc.RegisterName("setLength:")
-	_nSStatusItemSelMenu = objc.RegisterName("menu")
-	_nSStatusItemSelSetMenu = objc.RegisterName("setMenu:")
-	_nSStatusItemSelButton = objc.RegisterName("button")
-	_nSStatusItemSelBehavior = objc.RegisterName("behavior")
-	_nSStatusItemSelSetBehavior = objc.RegisterName("setBehavior:")
-	_nSStatusItemSelIsVisible = objc.RegisterName("isVisible")
-	_nSStatusItemSelSetVisible = objc.RegisterName("setVisible:")
-	_nSStatusItemSelAutosaveName = objc.RegisterName("autosaveName")
-	_nSStatusItemSelSetAutosaveName = objc.RegisterName("setAutosaveName:")
-	_nSStatusItemSelSendActionOn = objc.RegisterName("sendActionOn:")
+	_clsNSStatusItem                                           = _objcClass("NSStatusItem")
+	_nSStatusItemSelStatusBar                                  = objc.RegisterName("statusBar")
+	_nSStatusItemSelLength                                     = objc.RegisterName("length")
+	_nSStatusItemSelSetLength                                  = objc.RegisterName("setLength:")
+	_nSStatusItemSelMenu                                       = objc.RegisterName("menu")
+	_nSStatusItemSelSetMenu                                    = objc.RegisterName("setMenu:")
+	_nSStatusItemSelButton                                     = objc.RegisterName("button")
+	_nSStatusItemSelBehavior                                   = objc.RegisterName("behavior")
+	_nSStatusItemSelSetBehavior                                = objc.RegisterName("setBehavior:")
+	_nSStatusItemSelIsVisible                                  = objc.RegisterName("isVisible")
+	_nSStatusItemSelSetVisible                                 = objc.RegisterName("setVisible:")
+	_nSStatusItemSelAutosaveName                               = objc.RegisterName("autosaveName")
+	_nSStatusItemSelSetAutosaveName                            = objc.RegisterName("setAutosaveName:")
+	_nSStatusItemSelSendActionOn                               = objc.RegisterName("sendActionOn:")
 	_nSStatusItemSelDrawStatusBarBackgroundInRectWithHighlight = objc.RegisterName("drawStatusBarBackgroundInRect:withHighlight:")
-	_nSStatusItemSelPopUpStatusItemMenu = objc.RegisterName("popUpStatusItemMenu:")
-	_nSStatusItemSelAction = objc.RegisterName("action")
-	_nSStatusItemSelSetAction = objc.RegisterName("setAction:")
-	_nSStatusItemSelDoubleAction = objc.RegisterName("doubleAction")
-	_nSStatusItemSelSetDoubleAction = objc.RegisterName("setDoubleAction:")
-	_nSStatusItemSelTarget = objc.RegisterName("target")
-	_nSStatusItemSelSetTarget = objc.RegisterName("setTarget:")
-	_nSStatusItemSelTitle = objc.RegisterName("title")
-	_nSStatusItemSelSetTitle = objc.RegisterName("setTitle:")
-	_nSStatusItemSelAttributedTitle = objc.RegisterName("attributedTitle")
-	_nSStatusItemSelSetAttributedTitle = objc.RegisterName("setAttributedTitle:")
-	_nSStatusItemSelImage = objc.RegisterName("image")
-	_nSStatusItemSelSetImage = objc.RegisterName("setImage:")
-	_nSStatusItemSelAlternateImage = objc.RegisterName("alternateImage")
-	_nSStatusItemSelSetAlternateImage = objc.RegisterName("setAlternateImage:")
-	_nSStatusItemSelIsEnabled = objc.RegisterName("isEnabled")
-	_nSStatusItemSelSetEnabled = objc.RegisterName("setEnabled:")
-	_nSStatusItemSelHighlightMode = objc.RegisterName("highlightMode")
-	_nSStatusItemSelSetHighlightMode = objc.RegisterName("setHighlightMode:")
-	_nSStatusItemSelToolTip = objc.RegisterName("toolTip")
-	_nSStatusItemSelSetToolTip = objc.RegisterName("setToolTip:")
-	_nSStatusItemSelView = objc.RegisterName("view")
-	_nSStatusItemSelSetView = objc.RegisterName("setView:")
+	_nSStatusItemSelPopUpStatusItemMenu                        = objc.RegisterName("popUpStatusItemMenu:")
+	_nSStatusItemSelAction                                     = objc.RegisterName("action")
+	_nSStatusItemSelSetAction                                  = objc.RegisterName("setAction:")
+	_nSStatusItemSelDoubleAction                               = objc.RegisterName("doubleAction")
+	_nSStatusItemSelSetDoubleAction                            = objc.RegisterName("setDoubleAction:")
+	_nSStatusItemSelTarget                                     = objc.RegisterName("target")
+	_nSStatusItemSelSetTarget                                  = objc.RegisterName("setTarget:")
+	_nSStatusItemSelTitle                                      = objc.RegisterName("title")
+	_nSStatusItemSelSetTitle                                   = objc.RegisterName("setTitle:")
+	_nSStatusItemSelAttributedTitle                            = objc.RegisterName("attributedTitle")
+	_nSStatusItemSelSetAttributedTitle                         = objc.RegisterName("setAttributedTitle:")
+	_nSStatusItemSelImage                                      = objc.RegisterName("image")
+	_nSStatusItemSelSetImage                                   = objc.RegisterName("setImage:")
+	_nSStatusItemSelAlternateImage                             = objc.RegisterName("alternateImage")
+	_nSStatusItemSelSetAlternateImage                          = objc.RegisterName("setAlternateImage:")
+	_nSStatusItemSelIsEnabled                                  = objc.RegisterName("isEnabled")
+	_nSStatusItemSelSetEnabled                                 = objc.RegisterName("setEnabled:")
+	_nSStatusItemSelHighlightMode                              = objc.RegisterName("highlightMode")
+	_nSStatusItemSelSetHighlightMode                           = objc.RegisterName("setHighlightMode:")
+	_nSStatusItemSelToolTip                                    = objc.RegisterName("toolTip")
+	_nSStatusItemSelSetToolTip                                 = objc.RegisterName("setToolTip:")
+	_nSStatusItemSelView                                       = objc.RegisterName("view")
+	_nSStatusItemSelSetView                                    = objc.RegisterName("setView:")
 )
 
 func NSStatusItemFromID(id objc.ID) *NSStatusItem {
@@ -69,7 +69,9 @@ func NSStatusItemFromID(id objc.ID) *NSStatusItem {
 
 func (o *NSStatusItem) StatusBar() *NSStatusBar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStatusItemSelStatusBar)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStatusBarFromID(_ret)
 }
 
@@ -84,7 +86,9 @@ func (o *NSStatusItem) SetLength(length float64) {
 
 func (o *NSStatusItem) Menu() *NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStatusItemSelMenu)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuFromID(_ret)
 }
 
@@ -94,7 +98,9 @@ func (o *NSStatusItem) SetMenu(menu *NSMenu) {
 
 func (o *NSStatusItem) Button() *NSStatusBarButton {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStatusItemSelButton)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStatusBarButtonFromID(_ret)
 }
 
@@ -118,7 +124,9 @@ func (o *NSStatusItem) SetVisible(visible bool) {
 
 func (o *NSStatusItem) AutosaveName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStatusItemSelAutosaveName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -178,7 +186,9 @@ func (o *NSStatusItem) SetTarget(target objc.ID) {
 // Deprecated: Use the receiver's button.title instead
 func (o *NSStatusItem) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStatusItemSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -190,7 +200,9 @@ func (o *NSStatusItem) SetTitle(title *foundation.NSString) {
 // Deprecated: Use the receiver's button.attributedTitle instead
 func (o *NSStatusItem) AttributedTitle() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStatusItemSelAttributedTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
@@ -202,7 +214,9 @@ func (o *NSStatusItem) SetAttributedTitle(attributedTitle *foundation.NSAttribut
 // Deprecated: Use the receiver's button.image instead
 func (o *NSStatusItem) Image() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStatusItemSelImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -214,7 +228,9 @@ func (o *NSStatusItem) SetImage(image *NSImage) {
 // Deprecated: Use the receiver's button.alternateImage instead
 func (o *NSStatusItem) AlternateImage() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStatusItemSelAlternateImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -248,7 +264,9 @@ func (o *NSStatusItem) SetHighlightMode(highlightMode bool) {
 // Deprecated: Use the receiver's button.toolTip instead
 func (o *NSStatusItem) ToolTip() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStatusItemSelToolTip)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -260,7 +278,9 @@ func (o *NSStatusItem) SetToolTip(toolTip *foundation.NSString) {
 // Deprecated: Use the standard button property instead
 func (o *NSStatusItem) View() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStatusItemSelView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -268,4 +288,3 @@ func (o *NSStatusItem) View() *NSView {
 func (o *NSStatusItem) SetView(view *NSView) {
 	o.Ptr().Send(_nSStatusItemSelSetView, view.Ptr())
 }
-

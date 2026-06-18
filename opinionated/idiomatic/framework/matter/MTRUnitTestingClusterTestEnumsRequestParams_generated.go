@@ -16,7 +16,9 @@ type MTRUnitTestingClusterTestEnumsRequestParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRUnitTestingClusterTestEnumsRequestParams].
-func (x *MTRUnitTestingClusterTestEnumsRequestParams) Unwrap() *raw.MTRUnitTestingClusterTestEnumsRequestParams { return x.inner }
+func (x *MTRUnitTestingClusterTestEnumsRequestParams) Unwrap() *raw.MTRUnitTestingClusterTestEnumsRequestParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -100,7 +102,9 @@ func (x *MTRUnitTestingClusterTestEnumsRequestParams) SetServerSideProcessingTim
 	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
 }
 
-func (x *MTRUnitTestingClusterTestEnumsRequestParams) asMTRUnitTestingClusterTestEnumsRequestParams() *raw.MTRUnitTestingClusterTestEnumsRequestParams { return x.inner }
+func (x *MTRUnitTestingClusterTestEnumsRequestParams) asMTRUnitTestingClusterTestEnumsRequestParams() *raw.MTRUnitTestingClusterTestEnumsRequestParams {
+	return x.inner
+}
 
 // MTRUnitTestingClusterTestEnumsRequestParamsable is the interface implemented by [MTRUnitTestingClusterTestEnumsRequestParams], for mocking and DI.
 type MTRUnitTestingClusterTestEnumsRequestParamsable interface {
@@ -120,4 +124,3 @@ type MTRUnitTestingClusterTestEnumsRequestParamsable interface {
 }
 
 var _ MTRUnitTestingClusterTestEnumsRequestParamsable = (*MTRUnitTestingClusterTestEnumsRequestParams)(nil)
-

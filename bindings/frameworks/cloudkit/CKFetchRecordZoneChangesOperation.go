@@ -18,30 +18,30 @@ type CKFetchRecordZoneChangesOperation struct {
 }
 
 var (
-	_clsCKFetchRecordZoneChangesOperation = _objcClass("CKFetchRecordZoneChangesOperation")
-	_cKFetchRecordZoneChangesOperationSelInit = objc.RegisterName("init")
+	_clsCKFetchRecordZoneChangesOperation                                                  = _objcClass("CKFetchRecordZoneChangesOperation")
+	_cKFetchRecordZoneChangesOperationSelInit                                              = objc.RegisterName("init")
 	_cKFetchRecordZoneChangesOperationSelInitWithRecordZoneIDsConfigurationsByRecordZoneID = objc.RegisterName("initWithRecordZoneIDs:configurationsByRecordZoneID:")
-	_cKFetchRecordZoneChangesOperationSelRecordZoneIDs = objc.RegisterName("recordZoneIDs")
-	_cKFetchRecordZoneChangesOperationSelSetRecordZoneIDs = objc.RegisterName("setRecordZoneIDs:")
-	_cKFetchRecordZoneChangesOperationSelConfigurationsByRecordZoneID = objc.RegisterName("configurationsByRecordZoneID")
-	_cKFetchRecordZoneChangesOperationSelSetConfigurationsByRecordZoneID = objc.RegisterName("setConfigurationsByRecordZoneID:")
-	_cKFetchRecordZoneChangesOperationSelFetchAllChanges = objc.RegisterName("fetchAllChanges")
-	_cKFetchRecordZoneChangesOperationSelSetFetchAllChanges = objc.RegisterName("setFetchAllChanges:")
-	_cKFetchRecordZoneChangesOperationSelRecordChangedBlock = objc.RegisterName("recordChangedBlock")
-	_cKFetchRecordZoneChangesOperationSelSetRecordChangedBlock = objc.RegisterName("setRecordChangedBlock:")
-	_cKFetchRecordZoneChangesOperationSelRecordWasChangedBlock = objc.RegisterName("recordWasChangedBlock")
-	_cKFetchRecordZoneChangesOperationSelSetRecordWasChangedBlock = objc.RegisterName("setRecordWasChangedBlock:")
-	_cKFetchRecordZoneChangesOperationSelRecordWithIDWasDeletedBlock = objc.RegisterName("recordWithIDWasDeletedBlock")
-	_cKFetchRecordZoneChangesOperationSelSetRecordWithIDWasDeletedBlock = objc.RegisterName("setRecordWithIDWasDeletedBlock:")
-	_cKFetchRecordZoneChangesOperationSelRecordZoneChangeTokensUpdatedBlock = objc.RegisterName("recordZoneChangeTokensUpdatedBlock")
-	_cKFetchRecordZoneChangesOperationSelSetRecordZoneChangeTokensUpdatedBlock = objc.RegisterName("setRecordZoneChangeTokensUpdatedBlock:")
-	_cKFetchRecordZoneChangesOperationSelRecordZoneFetchCompletionBlock = objc.RegisterName("recordZoneFetchCompletionBlock")
-	_cKFetchRecordZoneChangesOperationSelSetRecordZoneFetchCompletionBlock = objc.RegisterName("setRecordZoneFetchCompletionBlock:")
-	_cKFetchRecordZoneChangesOperationSelFetchRecordZoneChangesCompletionBlock = objc.RegisterName("fetchRecordZoneChangesCompletionBlock")
-	_cKFetchRecordZoneChangesOperationSelSetFetchRecordZoneChangesCompletionBlock = objc.RegisterName("setFetchRecordZoneChangesCompletionBlock:")
-	_cKFetchRecordZoneChangesOperationSelInitWithRecordZoneIDsOptionsByRecordZoneID = objc.RegisterName("initWithRecordZoneIDs:optionsByRecordZoneID:")
-	_cKFetchRecordZoneChangesOperationSelOptionsByRecordZoneID = objc.RegisterName("optionsByRecordZoneID")
-	_cKFetchRecordZoneChangesOperationSelSetOptionsByRecordZoneID = objc.RegisterName("setOptionsByRecordZoneID:")
+	_cKFetchRecordZoneChangesOperationSelRecordZoneIDs                                     = objc.RegisterName("recordZoneIDs")
+	_cKFetchRecordZoneChangesOperationSelSetRecordZoneIDs                                  = objc.RegisterName("setRecordZoneIDs:")
+	_cKFetchRecordZoneChangesOperationSelConfigurationsByRecordZoneID                      = objc.RegisterName("configurationsByRecordZoneID")
+	_cKFetchRecordZoneChangesOperationSelSetConfigurationsByRecordZoneID                   = objc.RegisterName("setConfigurationsByRecordZoneID:")
+	_cKFetchRecordZoneChangesOperationSelFetchAllChanges                                   = objc.RegisterName("fetchAllChanges")
+	_cKFetchRecordZoneChangesOperationSelSetFetchAllChanges                                = objc.RegisterName("setFetchAllChanges:")
+	_cKFetchRecordZoneChangesOperationSelRecordChangedBlock                                = objc.RegisterName("recordChangedBlock")
+	_cKFetchRecordZoneChangesOperationSelSetRecordChangedBlock                             = objc.RegisterName("setRecordChangedBlock:")
+	_cKFetchRecordZoneChangesOperationSelRecordWasChangedBlock                             = objc.RegisterName("recordWasChangedBlock")
+	_cKFetchRecordZoneChangesOperationSelSetRecordWasChangedBlock                          = objc.RegisterName("setRecordWasChangedBlock:")
+	_cKFetchRecordZoneChangesOperationSelRecordWithIDWasDeletedBlock                       = objc.RegisterName("recordWithIDWasDeletedBlock")
+	_cKFetchRecordZoneChangesOperationSelSetRecordWithIDWasDeletedBlock                    = objc.RegisterName("setRecordWithIDWasDeletedBlock:")
+	_cKFetchRecordZoneChangesOperationSelRecordZoneChangeTokensUpdatedBlock                = objc.RegisterName("recordZoneChangeTokensUpdatedBlock")
+	_cKFetchRecordZoneChangesOperationSelSetRecordZoneChangeTokensUpdatedBlock             = objc.RegisterName("setRecordZoneChangeTokensUpdatedBlock:")
+	_cKFetchRecordZoneChangesOperationSelRecordZoneFetchCompletionBlock                    = objc.RegisterName("recordZoneFetchCompletionBlock")
+	_cKFetchRecordZoneChangesOperationSelSetRecordZoneFetchCompletionBlock                 = objc.RegisterName("setRecordZoneFetchCompletionBlock:")
+	_cKFetchRecordZoneChangesOperationSelFetchRecordZoneChangesCompletionBlock             = objc.RegisterName("fetchRecordZoneChangesCompletionBlock")
+	_cKFetchRecordZoneChangesOperationSelSetFetchRecordZoneChangesCompletionBlock          = objc.RegisterName("setFetchRecordZoneChangesCompletionBlock:")
+	_cKFetchRecordZoneChangesOperationSelInitWithRecordZoneIDsOptionsByRecordZoneID        = objc.RegisterName("initWithRecordZoneIDs:optionsByRecordZoneID:")
+	_cKFetchRecordZoneChangesOperationSelOptionsByRecordZoneID                             = objc.RegisterName("optionsByRecordZoneID")
+	_cKFetchRecordZoneChangesOperationSelSetOptionsByRecordZoneID                          = objc.RegisterName("setOptionsByRecordZoneID:")
 )
 
 func CKFetchRecordZoneChangesOperationFromID(id objc.ID) *CKFetchRecordZoneChangesOperation {
@@ -57,21 +57,27 @@ func CKFetchRecordZoneChangesOperationFromID(id objc.ID) *CKFetchRecordZoneChang
 // Creates an empty fetch record zone changes operation.
 func (o *CKFetchRecordZoneChangesOperation) Init() *CKFetchRecordZoneChangesOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchRecordZoneChangesOperationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKFetchRecordZoneChangesOperationFromID(_ret)
 }
 
 // Creates an operation for fetching record zone changes. - Parameters: - recordZoneIDs: The IDs of the record zones that you want to query for changes. You can specify `nil` for this parameter. - configurationsByRecordZoneID: A dictionary that maps record zone IDs to their corresponding configurations. You can specify `nil` for this parameter. CloudKit configures the operation for retrieving all of the record zones that you specify. If you want to reduce the amount of data that CloudKit returns, provide zone configurations for each record zone.
 func (o *CKFetchRecordZoneChangesOperation) InitWithRecordZoneIDsConfigurationsByRecordZoneID(recordZoneIDs *foundation.NSArray[*CKRecordZoneID], configurationsByRecordZoneID *foundation.NSDictionary[*CKRecordZoneID, *CKFetchRecordZoneChangesConfiguration]) *CKFetchRecordZoneChangesOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchRecordZoneChangesOperationSelInitWithRecordZoneIDsConfigurationsByRecordZoneID, recordZoneIDs.Ptr(), configurationsByRecordZoneID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKFetchRecordZoneChangesOperationFromID(_ret)
 }
 
 // The IDs of the record zones that contain the records to fetch. Typically, you set the value of this property when you create the operation. If you intend to change the record zone IDs, update the value before you execute the operation or submit it to a queue.
 func (o *CKFetchRecordZoneChangesOperation) RecordZoneIDs() *foundation.NSArray[*CKRecordZoneID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchRecordZoneChangesOperationSelRecordZoneIDs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CKRecordZoneID](_ret)
 }
 
@@ -82,7 +88,9 @@ func (o *CKFetchRecordZoneChangesOperation) SetRecordZoneIDs(recordZoneIDs *foun
 // A dictionary of configurations for fetching change operations by zone identifier.
 func (o *CKFetchRecordZoneChangesOperation) ConfigurationsByRecordZoneID() *foundation.NSDictionary[*CKRecordZoneID, *CKFetchRecordZoneChangesConfiguration] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchRecordZoneChangesOperationSelConfigurationsByRecordZoneID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDictionaryFromID[*CKRecordZoneID, *CKFetchRecordZoneChangesConfiguration](_ret)
 }
 
@@ -90,7 +98,7 @@ func (o *CKFetchRecordZoneChangesOperation) SetConfigurationsByRecordZoneID(conf
 	o.Ptr().Send(_cKFetchRecordZoneChangesOperationSelSetConfigurationsByRecordZoneID, configurationsByRecordZoneID.Ptr())
 }
 
-// A Boolean value that indicates whether to send repeated requests to the server. If <doc://com.apple.documentation/documentation/swift/true>, the operation sends repeat requests to the server until it fetches all changes. CloudKit executes the handler you set on the ``CKFetchRecordZoneChangesOperation/recordZoneFetchResultBlock`` property with a change token after each request. The default value is <doc://com.apple.documentation/documentation/swift/true>.
+// A Boolean value that indicates whether to send repeated requests to the server. If <doc://com.apple.documentation/documentation/swift/true>, the operation sends repeat requests to the server until it fetches all changes. CloudKit executes the handler you set on the “CKFetchRecordZoneChangesOperation/recordZoneFetchResultBlock“ property with a change token after each request. The default value is <doc://com.apple.documentation/documentation/swift/true>.
 func (o *CKFetchRecordZoneChangesOperation) FetchAllChanges() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cKFetchRecordZoneChangesOperationSelFetchAllChanges)
 	return _ret
@@ -100,7 +108,7 @@ func (o *CKFetchRecordZoneChangesOperation) SetFetchAllChanges(fetchAllChanges b
 	o.Ptr().Send(_cKFetchRecordZoneChangesOperationSelSetFetchAllChanges, fetchAllChanges)
 }
 
-// The closure to execute with the contents of a changed record. The closure returns no value and takes the following parameter: - The changed record. If you specify a value for the ``CKFetchRecordZoneChangesConfiguration/desiredKeys`` property, the record contains only the corresponding fields. The operation executes this closure once for each record in the record zone with changes since the previous fetch request. Each time the closure executes, it executes serially with respect to the other closures of the operation. If there aren't any record changes, this closure doesn't execute. Set this property before you execute the operation or submit it to a queue.
+// The closure to execute with the contents of a changed record. The closure returns no value and takes the following parameter: - The changed record. If you specify a value for the “CKFetchRecordZoneChangesConfiguration/desiredKeys“ property, the record contains only the corresponding fields. The operation executes this closure once for each record in the record zone with changes since the previous fetch request. Each time the closure executes, it executes serially with respect to the other closures of the operation. If there aren't any record changes, this closure doesn't execute. Set this property before you execute the operation or submit it to a queue.
 // Deprecated: Use recordWasChangedBlock instead, which surfaces per-record errors
 func (o *CKFetchRecordZoneChangesOperation) RecordChangedBlock() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _cKFetchRecordZoneChangesOperationSelRecordChangedBlock)
@@ -122,7 +130,7 @@ func (o *CKFetchRecordZoneChangesOperation) SetRecordChangedBlock(recordChangedB
 	o.Ptr().Send(_cKFetchRecordZoneChangesOperationSelSetRecordChangedBlock, __block_recordChangedBlock)
 }
 
-// The closure to execute with the results of retrieving a record change. The closure returns no value and takes the following parameters: - The ID of the changed record to retrieve. - The changed record, or `nil` if CloudKit can't retrieve the record. If you specify a value for the ``CKFetchRecordZoneChangesConfiguration/desiredKeys`` property, the record contains only the corresponding fields. - An error that contains information about a problem, or `nil` if CloudKit retrieves the record successfully. The operation executes this closure once for each record in the record zone with changes since the previous fetch request. Each time the closure executes, it executes serially with respect to the other closures of the operation. If there aren't any record changes, this closure doesn't execute. Set this property before you execute the operation or submit it to a queue.
+// The closure to execute with the results of retrieving a record change. The closure returns no value and takes the following parameters: - The ID of the changed record to retrieve. - The changed record, or `nil` if CloudKit can't retrieve the record. If you specify a value for the “CKFetchRecordZoneChangesConfiguration/desiredKeys“ property, the record contains only the corresponding fields. - An error that contains information about a problem, or `nil` if CloudKit retrieves the record successfully. The operation executes this closure once for each record in the record zone with changes since the previous fetch request. Each time the closure executes, it executes serially with respect to the other closures of the operation. If there aren't any record changes, this closure doesn't execute. Set this property before you execute the operation or submit it to a queue.
 func (o *CKFetchRecordZoneChangesOperation) RecordWasChangedBlock() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _cKFetchRecordZoneChangesOperationSelRecordWasChangedBlock)
 	return _ret
@@ -194,7 +202,7 @@ func (o *CKFetchRecordZoneChangesOperation) SetRecordZoneChangeTokensUpdatedBloc
 	o.Ptr().Send(_cKFetchRecordZoneChangesOperationSelSetRecordZoneChangeTokensUpdatedBlock, __block_recordZoneChangeTokensUpdatedBlock)
 }
 
-// The closure to execute when a record zone's fetch finishes. The closure returns no value and takes the following parameters: - The record zone's ID. - The change token to store and use in subsequent instances of ``CKFetchRecordZoneChangesOperation``. - The more recent client change token from the device. If the change token isn't the more recent change token you provided, the server might not have received the associated changes. - A Boolean that indicates whether this is the final record zone change. If ``CKFetchRecordZoneChangesOperation/fetchAllChanges`` is <doc://com.apple.documentation/documentation/swift/false>, it's the app's responsibility to create additional instances of ``CKFetchRecordZoneChangesOperation`` to fetch further changes. - An error object that contains information about a problem, or `nil` if the operation successfully retrieves the results. The app is responsible for saving the change token at the end of the operation and providing it to future uses of ``CKFetchRecordZoneChangesOperation``. Each time the closure executes, it executes serially with respect to the other closures of the operation. Set this property before you execute the operation or submit it to a queue.
+// The closure to execute when a record zone's fetch finishes. The closure returns no value and takes the following parameters: - The record zone's ID. - The change token to store and use in subsequent instances of “CKFetchRecordZoneChangesOperation“. - The more recent client change token from the device. If the change token isn't the more recent change token you provided, the server might not have received the associated changes. - A Boolean that indicates whether this is the final record zone change. If “CKFetchRecordZoneChangesOperation/fetchAllChanges“ is <doc://com.apple.documentation/documentation/swift/false>, it's the app's responsibility to create additional instances of “CKFetchRecordZoneChangesOperation“ to fetch further changes. - An error object that contains information about a problem, or `nil` if the operation successfully retrieves the results. The app is responsible for saving the change token at the end of the operation and providing it to future uses of “CKFetchRecordZoneChangesOperation“. Each time the closure executes, it executes serially with respect to the other closures of the operation. Set this property before you execute the operation or submit it to a queue.
 func (o *CKFetchRecordZoneChangesOperation) RecordZoneFetchCompletionBlock() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _cKFetchRecordZoneChangesOperationSelRecordZoneFetchCompletionBlock)
 	return _ret
@@ -237,25 +245,28 @@ func (o *CKFetchRecordZoneChangesOperation) SetFetchRecordZoneChangesCompletionB
 	o.Ptr().Send(_cKFetchRecordZoneChangesOperationSelSetFetchRecordZoneChangesCompletionBlock, __block_fetchRecordZoneChangesCompletionBlock)
 }
 
-// Creates an operation for fetching record zone changes. @DeprecationSummary { Use ``CKFetchRecordZoneChangesOperation/init(recordZoneIDs:configurationsByRecordZoneID:)`` instead. } - Parameters: - recordZoneIDs: The IDs of the record zones that you want to query for changes. - optionsByRecordZoneID: A dictionary that maps record zone IDs to their corresponding options. You can specify `nil` for this parameter. CloudKit configures the operation for retrieving all of the record zones that you specify. If you want to reduce the amount of data that CloudKit returns, provide zone options for each record zone.
+// Creates an operation for fetching record zone changes. @DeprecationSummary { Use “CKFetchRecordZoneChangesOperation/init(recordZoneIDs:configurationsByRecordZoneID:)“ instead. } - Parameters: - recordZoneIDs: The IDs of the record zones that you want to query for changes. - optionsByRecordZoneID: A dictionary that maps record zone IDs to their corresponding options. You can specify `nil` for this parameter. CloudKit configures the operation for retrieving all of the record zones that you specify. If you want to reduce the amount of data that CloudKit returns, provide zone options for each record zone.
 // Deprecated: since macOS 10.14.
 func (o *CKFetchRecordZoneChangesOperation) InitWithRecordZoneIDsOptionsByRecordZoneID(recordZoneIDs *foundation.NSArray[*CKRecordZoneID], optionsByRecordZoneID *foundation.NSDictionary[*CKRecordZoneID, *CKFetchRecordZoneChangesOptions]) *CKFetchRecordZoneChangesOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchRecordZoneChangesOperationSelInitWithRecordZoneIDsOptionsByRecordZoneID, recordZoneIDs.Ptr(), optionsByRecordZoneID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKFetchRecordZoneChangesOperationFromID(_ret)
 }
 
-// Configuration options for each record zone that the operation retrieves. @DeprecationSummary { Use ``CKFetchRecordZoneChangesOperation/configurationsByRecordZoneID`` instead. } You can associate each record zone ID with options that define what CloudKit fetches for that record zone.  See ``CKFetchRecordZoneChangesOperation/ZoneOptions`` for more information.
+// Configuration options for each record zone that the operation retrieves. @DeprecationSummary { Use “CKFetchRecordZoneChangesOperation/configurationsByRecordZoneID“ instead. } You can associate each record zone ID with options that define what CloudKit fetches for that record zone.  See “CKFetchRecordZoneChangesOperation/ZoneOptions“ for more information.
 // Deprecated: since macOS 10.14.
 func (o *CKFetchRecordZoneChangesOperation) OptionsByRecordZoneID() *foundation.NSDictionary[*CKRecordZoneID, *CKFetchRecordZoneChangesOptions] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchRecordZoneChangesOperationSelOptionsByRecordZoneID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDictionaryFromID[*CKRecordZoneID, *CKFetchRecordZoneChangesOptions](_ret)
 }
 
-// Configuration options for each record zone that the operation retrieves. @DeprecationSummary { Use ``CKFetchRecordZoneChangesOperation/configurationsByRecordZoneID`` instead. } You can associate each record zone ID with options that define what CloudKit fetches for that record zone.  See ``CKFetchRecordZoneChangesOperation/ZoneOptions`` for more information.
+// Configuration options for each record zone that the operation retrieves. @DeprecationSummary { Use “CKFetchRecordZoneChangesOperation/configurationsByRecordZoneID“ instead. } You can associate each record zone ID with options that define what CloudKit fetches for that record zone.  See “CKFetchRecordZoneChangesOperation/ZoneOptions“ for more information.
 // Deprecated: since macOS 10.14.
 func (o *CKFetchRecordZoneChangesOperation) SetOptionsByRecordZoneID(optionsByRecordZoneID *foundation.NSDictionary[*CKRecordZoneID, *CKFetchRecordZoneChangesOptions]) {
 	o.Ptr().Send(_cKFetchRecordZoneChangesOperationSelSetOptionsByRecordZoneID, optionsByRecordZoneID.Ptr())
 }
-

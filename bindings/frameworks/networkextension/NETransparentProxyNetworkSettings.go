@@ -16,10 +16,10 @@ type NETransparentProxyNetworkSettings struct {
 }
 
 var (
-	_clsNETransparentProxyNetworkSettings = _objcClass("NETransparentProxyNetworkSettings")
-	_nETransparentProxyNetworkSettingsSelIncludedNetworkRules = objc.RegisterName("includedNetworkRules")
+	_clsNETransparentProxyNetworkSettings                        = _objcClass("NETransparentProxyNetworkSettings")
+	_nETransparentProxyNetworkSettingsSelIncludedNetworkRules    = objc.RegisterName("includedNetworkRules")
 	_nETransparentProxyNetworkSettingsSelSetIncludedNetworkRules = objc.RegisterName("setIncludedNetworkRules:")
-	_nETransparentProxyNetworkSettingsSelExcludedNetworkRules = objc.RegisterName("excludedNetworkRules")
+	_nETransparentProxyNetworkSettingsSelExcludedNetworkRules    = objc.RegisterName("excludedNetworkRules")
 	_nETransparentProxyNetworkSettingsSelSetExcludedNetworkRules = objc.RegisterName("setExcludedNetworkRules:")
 )
 
@@ -36,7 +36,9 @@ func NETransparentProxyNetworkSettingsFromID(id objc.ID) *NETransparentProxyNetw
 // @property includedNetworkRules @discussion An array of NENetworkRule objects that collectively specify the traffic that will be routed through the transparent proxy. The following restrictions apply to each NENetworkRule in this list: Restrictions for rules with an address endpoint: If the port string of the endpoint is "0" or is the empty string, then the address of the endpoint must be a non-wildcard address (i.e. "0.0.0.0" or "::"). If the address is a wildcard address (i.e. "0.0.0.0" or "::"), then the port string of the endpoint must be non-empty and must not be "0". A port string of "53" is not allowed. Destination Domain-based rules must be used to match DNS traffic. The matchLocalNetwork property must be nil. The matchDirection property must be NETrafficDirectionOutbound.
 func (o *NETransparentProxyNetworkSettings) IncludedNetworkRules() *foundation.NSArray[*NENetworkRule] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nETransparentProxyNetworkSettingsSelIncludedNetworkRules)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NENetworkRule](_ret)
 }
 
@@ -47,11 +49,12 @@ func (o *NETransparentProxyNetworkSettings) SetIncludedNetworkRules(includedNetw
 // @property excludedNetworkRules @discussion An array of NENetworkRule objects that collectively specify the traffic that will not be routed through the transparent proxy. The following restrictions apply to each NENetworkRule in this list: Restrictions for rules with an address endpoint: If the port string of the endpoint is "0" or is the empty string, then the address of the endpoint must be a non-wildcard address (i.e. "0.0.0.0" or "::"). If the address is a wildcard address (i.e. "0.0.0.0" or "::"), then the port string of the endpoint must be non-empty and must not be "0". A port string of "53" is not allowed. Destination Domain-based rules must be used to match DNS traffic. The matchLocalNetwork property must be nil. The matchDirection property must be NETrafficDirectionOutbound.
 func (o *NETransparentProxyNetworkSettings) ExcludedNetworkRules() *foundation.NSArray[*NENetworkRule] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nETransparentProxyNetworkSettingsSelExcludedNetworkRules)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NENetworkRule](_ret)
 }
 
 func (o *NETransparentProxyNetworkSettings) SetExcludedNetworkRules(excludedNetworkRules *foundation.NSArray[*NENetworkRule]) {
 	o.Ptr().Send(_nETransparentProxyNetworkSettingsSelSetExcludedNetworkRules, excludedNetworkRules.Ptr())
 }
-

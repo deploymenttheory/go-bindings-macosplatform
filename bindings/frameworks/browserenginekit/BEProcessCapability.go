@@ -18,9 +18,9 @@ type BEProcessCapability struct {
 }
 
 var (
-	_clsBEProcessCapability = _objcClass("BEProcessCapability")
-	_bEProcessCapabilitySelForeground = objc.RegisterName("foreground")
-	_bEProcessCapabilitySelSuspended = objc.RegisterName("suspended")
+	_clsBEProcessCapability                 = _objcClass("BEProcessCapability")
+	_bEProcessCapabilitySelForeground       = objc.RegisterName("foreground")
+	_bEProcessCapabilitySelSuspended        = objc.RegisterName("suspended")
 	_bEProcessCapabilitySelRequestWithError = objc.RegisterName("requestWithError:")
 )
 
@@ -37,14 +37,18 @@ func BEProcessCapabilityFromID(id objc.ID) *BEProcessCapability {
 // The helper extension process may run at foreground priority to work on behalf of the host process while it is foreground.
 func BEProcessCapabilityForeground() *BEProcessCapability {
 	_ret := objc.Send[objc.ID](objc.ID(_clsBEProcessCapability), _bEProcessCapabilitySelForeground)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return BEProcessCapabilityFromID(_ret)
 }
 
 // The helper extension process may remain resident in a suspended state (it will not be granted CPU time).
 func BEProcessCapabilitySuspended() *BEProcessCapability {
 	_ret := objc.Send[objc.ID](objc.ID(_clsBEProcessCapability), _bEProcessCapabilitySelSuspended)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return BEProcessCapabilityFromID(_ret)
 }
 
@@ -57,4 +61,3 @@ func (o *BEProcessCapability) RequestWithError() (BEProcessCapabilityGrant, erro
 	}
 	return _ret, nil
 }
-

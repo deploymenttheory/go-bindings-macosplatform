@@ -66,4 +66,3 @@ type ModelStructurePipelineable interface {
 }
 
 var _ ModelStructurePipelineable = (*ModelStructurePipeline)(nil)
-

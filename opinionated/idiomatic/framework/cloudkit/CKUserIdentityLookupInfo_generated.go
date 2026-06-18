@@ -88,4 +88,3 @@ type UserIdentityLookupInfoable interface {
 }
 
 var _ UserIdentityLookupInfoable = (*UserIdentityLookupInfo)(nil)
-

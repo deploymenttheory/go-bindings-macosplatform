@@ -18,12 +18,12 @@ type MPSImageThresholdBinaryInverse struct {
 }
 
 var (
-	_clsMPSImageThresholdBinaryInverse = _objcClass("MPSImageThresholdBinaryInverse")
+	_clsMPSImageThresholdBinaryInverse                                                                 = _objcClass("MPSImageThresholdBinaryInverse")
 	_mPSImageThresholdBinaryInverseSelInitWithDeviceThresholdValueMaximumValueLinearGrayColorTransform = objc.RegisterName("initWithDevice:thresholdValue:maximumValue:linearGrayColorTransform:")
-	_mPSImageThresholdBinaryInverseSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSImageThresholdBinaryInverseSelThresholdValue = objc.RegisterName("thresholdValue")
-	_mPSImageThresholdBinaryInverseSelMaximumValue = objc.RegisterName("maximumValue")
-	_mPSImageThresholdBinaryInverseSelTransform = objc.RegisterName("transform")
+	_mPSImageThresholdBinaryInverseSelInitWithCoderDevice                                              = objc.RegisterName("initWithCoder:device:")
+	_mPSImageThresholdBinaryInverseSelThresholdValue                                                   = objc.RegisterName("thresholdValue")
+	_mPSImageThresholdBinaryInverseSelMaximumValue                                                     = objc.RegisterName("maximumValue")
+	_mPSImageThresholdBinaryInverseSelTransform                                                        = objc.RegisterName("transform")
 )
 
 func MPSImageThresholdBinaryInverseFromID(id objc.ID) *MPSImageThresholdBinaryInverse {
@@ -39,14 +39,18 @@ func MPSImageThresholdBinaryInverseFromID(id objc.ID) *MPSImageThresholdBinaryIn
 // @abstract   initialize a MPSImageThresholdBinaryInverse filter @param      device          The device the filter will run on @param      thresholdValue  The threshold value to use @param      maximumValue    The maximum value to use @param      transform       This matrix is an array of 3 floats. The default if no transform is specifed is BT.601/JPEG: {0.299f, 0.587f, 0.114f};
 func (o *MPSImageThresholdBinaryInverse) InitWithDeviceThresholdValueMaximumValueLinearGrayColorTransform(device metal.MTLDevice, thresholdValue float32, maximumValue float32, transform *float32) *MPSImageThresholdBinaryInverse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageThresholdBinaryInverseSelInitWithDeviceThresholdValueMaximumValueLinearGrayColorTransform, device, thresholdValue, maximumValue, transform)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageThresholdBinaryInverseFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSImageThresholdBinaryInverse) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSImageThresholdBinaryInverse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageThresholdBinaryInverseSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageThresholdBinaryInverseFromID(_ret)
 }
 
@@ -67,4 +71,3 @@ func (o *MPSImageThresholdBinaryInverse) Transform() *float32 {
 	_ret := objc.Send[*float32](o.Ptr(), _mPSImageThresholdBinaryInverseSelTransform)
 	return _ret
 }
-

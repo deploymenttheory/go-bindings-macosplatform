@@ -108,4 +108,3 @@ func MTKTextureLoaderOriginTopLeft() uintptr {
 	ptr, _ := purego.Dlsym(_metalkitLib, "MTKTextureLoaderOriginTopLeft")
 	return ptr
 }
-

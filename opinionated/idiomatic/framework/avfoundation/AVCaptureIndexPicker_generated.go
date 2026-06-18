@@ -133,7 +133,9 @@ func (x *CaptureIndexPicker) SetAccessibilityIdentifier(accessibilityIdentifier 
 	x.inner.SetAccessibilityIdentifier(foundation.NSStringStringWithUTF8String(accessibilityIdentifier))
 }
 
-func (x *CaptureIndexPicker) asCaptureControl() *raw.AVCaptureControl { return &x.inner.AVCaptureControl }
+func (x *CaptureIndexPicker) asCaptureControl() *raw.AVCaptureControl {
+	return &x.inner.AVCaptureControl
+}
 
 // CaptureIndexPickerable is the interface implemented by [CaptureIndexPicker], for mocking and DI.
 type CaptureIndexPickerable interface {
@@ -153,4 +155,3 @@ type CaptureIndexPickerable interface {
 }
 
 var _ CaptureIndexPickerable = (*CaptureIndexPicker)(nil)
-

@@ -15,7 +15,9 @@ type USBScreenCoordinatePointingDeviceConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.VZUSBScreenCoordinatePointingDeviceConfiguration].
-func (x *USBScreenCoordinatePointingDeviceConfiguration) Unwrap() *raw.VZUSBScreenCoordinatePointingDeviceConfiguration { return x.inner }
+func (x *USBScreenCoordinatePointingDeviceConfiguration) Unwrap() *raw.VZUSBScreenCoordinatePointingDeviceConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -35,7 +37,9 @@ func NewUSBScreenCoordinatePointingDeviceConfiguration() *USBScreenCoordinatePoi
 	return &USBScreenCoordinatePointingDeviceConfiguration{inner: raw.VZUSBScreenCoordinatePointingDeviceConfigurationFromID(_id)}
 }
 
-func (x *USBScreenCoordinatePointingDeviceConfiguration) asPointingDeviceConfiguration() *raw.VZPointingDeviceConfiguration { return &x.inner.VZPointingDeviceConfiguration }
+func (x *USBScreenCoordinatePointingDeviceConfiguration) asPointingDeviceConfiguration() *raw.VZPointingDeviceConfiguration {
+	return &x.inner.VZPointingDeviceConfiguration
+}
 
 // USBScreenCoordinatePointingDeviceConfigurationable is the interface implemented by [USBScreenCoordinatePointingDeviceConfiguration], for mocking and DI.
 type USBScreenCoordinatePointingDeviceConfigurationable interface {
@@ -43,4 +47,3 @@ type USBScreenCoordinatePointingDeviceConfigurationable interface {
 }
 
 var _ USBScreenCoordinatePointingDeviceConfigurationable = (*USBScreenCoordinatePointingDeviceConfiguration)(nil)
-

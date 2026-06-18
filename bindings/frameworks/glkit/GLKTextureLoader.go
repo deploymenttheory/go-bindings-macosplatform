@@ -19,24 +19,24 @@ type GLKTextureLoader struct {
 }
 
 var (
-	_clsGLKTextureLoader = _objcClass("GLKTextureLoader")
-	_gLKTextureLoaderSelTextureWithContentsOfFileOptionsError = objc.RegisterName("textureWithContentsOfFile:options:error:")
-	_gLKTextureLoaderSelTextureWithContentsOfURLOptionsError = objc.RegisterName("textureWithContentsOfURL:options:error:")
-	_gLKTextureLoaderSelTextureWithNameScaleFactorBundleOptionsError = objc.RegisterName("textureWithName:scaleFactor:bundle:options:error:")
-	_gLKTextureLoaderSelTextureWithContentsOfDataOptionsError = objc.RegisterName("textureWithContentsOfData:options:error:")
-	_gLKTextureLoaderSelTextureWithCGImageOptionsError = objc.RegisterName("textureWithCGImage:options:error:")
-	_gLKTextureLoaderSelCubeMapWithContentsOfFilesOptionsError = objc.RegisterName("cubeMapWithContentsOfFiles:options:error:")
-	_gLKTextureLoaderSelCubeMapWithContentsOfFileOptionsError = objc.RegisterName("cubeMapWithContentsOfFile:options:error:")
-	_gLKTextureLoaderSelCubeMapWithContentsOfURLOptionsError = objc.RegisterName("cubeMapWithContentsOfURL:options:error:")
-	_gLKTextureLoaderSelInitWithShareContext = objc.RegisterName("initWithShareContext:")
-	_gLKTextureLoaderSelTextureWithContentsOfFileOptionsQueueCompletionHandler = objc.RegisterName("textureWithContentsOfFile:options:queue:completionHandler:")
-	_gLKTextureLoaderSelTextureWithContentsOfURLOptionsQueueCompletionHandler = objc.RegisterName("textureWithContentsOfURL:options:queue:completionHandler:")
+	_clsGLKTextureLoader                                                              = _objcClass("GLKTextureLoader")
+	_gLKTextureLoaderSelTextureWithContentsOfFileOptionsError                         = objc.RegisterName("textureWithContentsOfFile:options:error:")
+	_gLKTextureLoaderSelTextureWithContentsOfURLOptionsError                          = objc.RegisterName("textureWithContentsOfURL:options:error:")
+	_gLKTextureLoaderSelTextureWithNameScaleFactorBundleOptionsError                  = objc.RegisterName("textureWithName:scaleFactor:bundle:options:error:")
+	_gLKTextureLoaderSelTextureWithContentsOfDataOptionsError                         = objc.RegisterName("textureWithContentsOfData:options:error:")
+	_gLKTextureLoaderSelTextureWithCGImageOptionsError                                = objc.RegisterName("textureWithCGImage:options:error:")
+	_gLKTextureLoaderSelCubeMapWithContentsOfFilesOptionsError                        = objc.RegisterName("cubeMapWithContentsOfFiles:options:error:")
+	_gLKTextureLoaderSelCubeMapWithContentsOfFileOptionsError                         = objc.RegisterName("cubeMapWithContentsOfFile:options:error:")
+	_gLKTextureLoaderSelCubeMapWithContentsOfURLOptionsError                          = objc.RegisterName("cubeMapWithContentsOfURL:options:error:")
+	_gLKTextureLoaderSelInitWithShareContext                                          = objc.RegisterName("initWithShareContext:")
+	_gLKTextureLoaderSelTextureWithContentsOfFileOptionsQueueCompletionHandler        = objc.RegisterName("textureWithContentsOfFile:options:queue:completionHandler:")
+	_gLKTextureLoaderSelTextureWithContentsOfURLOptionsQueueCompletionHandler         = objc.RegisterName("textureWithContentsOfURL:options:queue:completionHandler:")
 	_gLKTextureLoaderSelTextureWithNameScaleFactorBundleOptionsQueueCompletionHandler = objc.RegisterName("textureWithName:scaleFactor:bundle:options:queue:completionHandler:")
-	_gLKTextureLoaderSelTextureWithContentsOfDataOptionsQueueCompletionHandler = objc.RegisterName("textureWithContentsOfData:options:queue:completionHandler:")
-	_gLKTextureLoaderSelTextureWithCGImageOptionsQueueCompletionHandler = objc.RegisterName("textureWithCGImage:options:queue:completionHandler:")
-	_gLKTextureLoaderSelCubeMapWithContentsOfFilesOptionsQueueCompletionHandler = objc.RegisterName("cubeMapWithContentsOfFiles:options:queue:completionHandler:")
-	_gLKTextureLoaderSelCubeMapWithContentsOfFileOptionsQueueCompletionHandler = objc.RegisterName("cubeMapWithContentsOfFile:options:queue:completionHandler:")
-	_gLKTextureLoaderSelCubeMapWithContentsOfURLOptionsQueueCompletionHandler = objc.RegisterName("cubeMapWithContentsOfURL:options:queue:completionHandler:")
+	_gLKTextureLoaderSelTextureWithContentsOfDataOptionsQueueCompletionHandler        = objc.RegisterName("textureWithContentsOfData:options:queue:completionHandler:")
+	_gLKTextureLoaderSelTextureWithCGImageOptionsQueueCompletionHandler               = objc.RegisterName("textureWithCGImage:options:queue:completionHandler:")
+	_gLKTextureLoaderSelCubeMapWithContentsOfFilesOptionsQueueCompletionHandler       = objc.RegisterName("cubeMapWithContentsOfFiles:options:queue:completionHandler:")
+	_gLKTextureLoaderSelCubeMapWithContentsOfFileOptionsQueueCompletionHandler        = objc.RegisterName("cubeMapWithContentsOfFile:options:queue:completionHandler:")
+	_gLKTextureLoaderSelCubeMapWithContentsOfURLOptionsQueueCompletionHandler         = objc.RegisterName("cubeMapWithContentsOfURL:options:queue:completionHandler:")
 )
 
 func GLKTextureLoaderFromID(id objc.ID) *GLKTextureLoader {
@@ -52,7 +52,9 @@ func GLKTextureLoaderFromID(id objc.ID) *GLKTextureLoader {
 func GLKTextureLoaderTextureWithContentsOfFileOptionsError(path *foundation.NSString, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]) (*GLKTextureInfo, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelTextureWithContentsOfFileOptionsError, path.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -62,7 +64,9 @@ func GLKTextureLoaderTextureWithContentsOfFileOptionsError(path *foundation.NSSt
 func GLKTextureLoaderTextureWithContentsOfURLOptionsError(url *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]) (*GLKTextureInfo, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelTextureWithContentsOfURLOptionsError, url.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -72,7 +76,9 @@ func GLKTextureLoaderTextureWithContentsOfURLOptionsError(url *foundation.NSURL,
 func GLKTextureLoaderTextureWithNameScaleFactorBundleOptionsError(name *foundation.NSString, scaleFactor float64, bundle *foundation.NSBundle, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]) (*GLKTextureInfo, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelTextureWithNameScaleFactorBundleOptionsError, name.Ptr(), scaleFactor, bundle.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -82,7 +88,9 @@ func GLKTextureLoaderTextureWithNameScaleFactorBundleOptionsError(name *foundati
 func GLKTextureLoaderTextureWithContentsOfDataOptionsError(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]) (*GLKTextureInfo, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelTextureWithContentsOfDataOptionsError, data.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -92,7 +100,9 @@ func GLKTextureLoaderTextureWithContentsOfDataOptionsError(data *foundation.NSDa
 func GLKTextureLoaderTextureWithCGImageOptionsError(cgImage unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]) (*GLKTextureInfo, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelTextureWithCGImageOptionsError, cgImage, options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -102,7 +112,9 @@ func GLKTextureLoaderTextureWithCGImageOptionsError(cgImage unsafe.Pointer, opti
 func GLKTextureLoaderCubeMapWithContentsOfFilesOptionsError(paths *foundation.NSArray[objc.ID], options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]) (*GLKTextureInfo, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelCubeMapWithContentsOfFilesOptionsError, paths, options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -112,7 +124,9 @@ func GLKTextureLoaderCubeMapWithContentsOfFilesOptionsError(paths *foundation.NS
 func GLKTextureLoaderCubeMapWithContentsOfFileOptionsError(path *foundation.NSString, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]) (*GLKTextureInfo, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelCubeMapWithContentsOfFileOptionsError, path.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -122,7 +136,9 @@ func GLKTextureLoaderCubeMapWithContentsOfFileOptionsError(path *foundation.NSSt
 func GLKTextureLoaderCubeMapWithContentsOfURLOptionsError(url *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]) (*GLKTextureInfo, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelCubeMapWithContentsOfURLOptionsError, url.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -131,7 +147,9 @@ func GLKTextureLoaderCubeMapWithContentsOfURLOptionsError(url *foundation.NSURL,
 
 func (o *GLKTextureLoader) InitWithShareContext(context_ *appkit.NSOpenGLContext) *GLKTextureLoader {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gLKTextureLoaderSelInitWithShareContext, context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GLKTextureLoaderFromID(_ret)
 }
 
@@ -246,4 +264,3 @@ func (o *GLKTextureLoader) CubeMapWithContentsOfURLOptionsQueueCompletionHandler
 	}
 	o.Ptr().Send(_gLKTextureLoaderSelCubeMapWithContentsOfURLOptionsQueueCompletionHandler, url.Ptr(), options, queue.Ptr(), __block_block)
 }
-

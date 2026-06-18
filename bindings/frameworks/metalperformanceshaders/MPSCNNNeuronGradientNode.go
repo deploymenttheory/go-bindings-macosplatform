@@ -16,10 +16,10 @@ type MPSCNNNeuronGradientNode struct {
 }
 
 var (
-	_clsMPSCNNNeuronGradientNode = _objcClass("MPSCNNNeuronGradientNode")
+	_clsMPSCNNNeuronGradientNode                                                         = _objcClass("MPSCNNNeuronGradientNode")
 	_mPSCNNNeuronGradientNodeSelNodeWithSourceGradientSourceImageGradientStateDescriptor = objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:descriptor:")
 	_mPSCNNNeuronGradientNodeSelInitWithSourceGradientSourceImageGradientStateDescriptor = objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:descriptor:")
-	_mPSCNNNeuronGradientNodeSelDescriptor = objc.RegisterName("descriptor")
+	_mPSCNNNeuronGradientNodeSelDescriptor                                               = objc.RegisterName("descriptor")
 )
 
 func MPSCNNNeuronGradientNodeFromID(id objc.ID) *MPSCNNNeuronGradientNode {
@@ -35,21 +35,26 @@ func MPSCNNNeuronGradientNodeFromID(id objc.ID) *MPSCNNNeuronGradientNode {
 // @abstract create a new neuron gradient node @discussion See also -[MPSCNNNeuronNode gradientFilterNodeWithSources:] for an easier way to do this
 func MPSCNNNeuronGradientNodeNodeWithSourceGradientSourceImageGradientStateDescriptor(sourceGradient *mpsneuralnetwork.MPSNNImageNode, sourceImage *mpsneuralnetwork.MPSNNImageNode, gradientState *mpsneuralnetwork.MPSNNGradientStateNode, descriptor *mpsneuralnetwork.MPSNNNeuronDescriptor) *MPSCNNNeuronGradientNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNNeuronGradientNode), _mPSCNNNeuronGradientNodeSelNodeWithSourceGradientSourceImageGradientStateDescriptor, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr(), descriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronGradientNodeFromID(_ret)
 }
 
 // @abstract create a new neuron gradient node @discussion See also -[MPSCNNNeuronNode gradientFilterNodeWithSources:] for an easier way to do this
 func (o *MPSCNNNeuronGradientNode) InitWithSourceGradientSourceImageGradientStateDescriptor(sourceGradient *mpsneuralnetwork.MPSNNImageNode, sourceImage *mpsneuralnetwork.MPSNNImageNode, gradientState *mpsneuralnetwork.MPSNNGradientStateNode, descriptor *mpsneuralnetwork.MPSNNNeuronDescriptor) *MPSCNNNeuronGradientNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronGradientNodeSelInitWithSourceGradientSourceImageGradientStateDescriptor, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr(), descriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronGradientNodeFromID(_ret)
 }
 
 // @abstract The neuron descriptor
 func (o *MPSCNNNeuronGradientNode) Descriptor() *mpsneuralnetwork.MPSNNNeuronDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronGradientNodeSelDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsneuralnetwork.MPSNNNeuronDescriptorFromID(_ret)
 }
-

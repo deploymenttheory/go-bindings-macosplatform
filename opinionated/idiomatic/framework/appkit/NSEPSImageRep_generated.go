@@ -120,4 +120,3 @@ type EPSImageRepable interface {
 }
 
 var _ EPSImageRepable = (*EPSImageRep)(nil)
-

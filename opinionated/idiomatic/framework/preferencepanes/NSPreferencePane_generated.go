@@ -209,4 +209,3 @@ type PreferencePaneable interface {
 }
 
 var _ PreferencePaneable = (*PreferencePane)(nil)
-

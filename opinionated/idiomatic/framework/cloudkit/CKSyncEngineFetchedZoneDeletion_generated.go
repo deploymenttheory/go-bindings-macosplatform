@@ -57,4 +57,3 @@ type SyncEngineFetchedZoneDeletionable interface {
 }
 
 var _ SyncEngineFetchedZoneDeletionable = (*SyncEngineFetchedZoneDeletion)(nil)
-

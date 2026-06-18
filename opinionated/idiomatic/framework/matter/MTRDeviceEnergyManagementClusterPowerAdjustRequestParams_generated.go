@@ -16,7 +16,9 @@ type MTRDeviceEnergyManagementClusterPowerAdjustRequestParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRDeviceEnergyManagementClusterPowerAdjustRequestParams].
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) Unwrap() *raw.MTRDeviceEnergyManagementClusterPowerAdjustRequestParams { return x.inner }
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) Unwrap() *raw.MTRDeviceEnergyManagementClusterPowerAdjustRequestParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -137,4 +139,3 @@ type MTRDeviceEnergyManagementClusterPowerAdjustRequestParamsable interface {
 }
 
 var _ MTRDeviceEnergyManagementClusterPowerAdjustRequestParamsable = (*MTRDeviceEnergyManagementClusterPowerAdjustRequestParams)(nil)
-

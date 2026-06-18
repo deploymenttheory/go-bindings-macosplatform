@@ -17,7 +17,9 @@ type MTRAccountLoginClusterGetSetupPINParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRAccountLoginClusterGetSetupPINParams].
-func (x *MTRAccountLoginClusterGetSetupPINParams) Unwrap() *raw.MTRAccountLoginClusterGetSetupPINParams { return x.inner }
+func (x *MTRAccountLoginClusterGetSetupPINParams) Unwrap() *raw.MTRAccountLoginClusterGetSetupPINParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -104,4 +106,3 @@ type MTRAccountLoginClusterGetSetupPINParamsable interface {
 }
 
 var _ MTRAccountLoginClusterGetSetupPINParamsable = (*MTRAccountLoginClusterGetSetupPINParams)(nil)
-

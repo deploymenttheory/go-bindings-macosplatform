@@ -25,4 +25,3 @@ func GCDeviceCursorFromID(id objc.ID) *GCDeviceCursor {
 	purego.Track(o)
 	return o
 }
-

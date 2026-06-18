@@ -60,4 +60,3 @@ type ShareableContentInfoable interface {
 }
 
 var _ ShareableContentInfoable = (*ShareableContentInfo)(nil)
-

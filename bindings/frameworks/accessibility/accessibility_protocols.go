@@ -40,4 +40,3 @@ type AXDataAxisDescriptor interface {
 type AXMathExpressionProvider interface {
 	AccessibilityMathExpression() *AXMathExpression
 }
-

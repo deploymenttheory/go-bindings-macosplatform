@@ -18,41 +18,41 @@ type MTRClusterActions struct {
 }
 
 var (
-	_clsMTRClusterActions = _objcClass("MTRClusterActions")
-	_mTRClusterActionsSelInstantActionWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("instantActionWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterActionsSelInstantActionWithTransitionWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("instantActionWithTransitionWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterActionsSelStartActionWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("startActionWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterActionsSelStartActionWithDurationWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("startActionWithDurationWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterActionsSelStopActionWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("stopActionWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterActionsSelPauseActionWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("pauseActionWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterActionsSelPauseActionWithDurationWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("pauseActionWithDurationWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterActionsSelResumeActionWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("resumeActionWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterActionsSelEnableActionWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("enableActionWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterActionsSelEnableActionWithDurationWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("enableActionWithDurationWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterActionsSelDisableActionWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("disableActionWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterActionsSelDisableActionWithDurationWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("disableActionWithDurationWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterActionsSelReadAttributeActionListWithParams = objc.RegisterName("readAttributeActionListWithParams:")
-	_mTRClusterActionsSelReadAttributeEndpointListsWithParams = objc.RegisterName("readAttributeEndpointListsWithParams:")
-	_mTRClusterActionsSelReadAttributeSetupURLWithParams = objc.RegisterName("readAttributeSetupURLWithParams:")
-	_mTRClusterActionsSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterActionsSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterActionsSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterActionsSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterActionsSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterActionsSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterActionsSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
-	_mTRClusterActionsSelInstantActionWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("instantActionWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_clsMTRClusterActions                                                                                          = _objcClass("MTRClusterActions")
+	_mTRClusterActionsSelInstantActionWithParamsExpectedValuesExpectedValueIntervalCompletion                      = objc.RegisterName("instantActionWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterActionsSelInstantActionWithTransitionWithParamsExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("instantActionWithTransitionWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterActionsSelStartActionWithParamsExpectedValuesExpectedValueIntervalCompletion                        = objc.RegisterName("startActionWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterActionsSelStartActionWithDurationWithParamsExpectedValuesExpectedValueIntervalCompletion            = objc.RegisterName("startActionWithDurationWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterActionsSelStopActionWithParamsExpectedValuesExpectedValueIntervalCompletion                         = objc.RegisterName("stopActionWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterActionsSelPauseActionWithParamsExpectedValuesExpectedValueIntervalCompletion                        = objc.RegisterName("pauseActionWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterActionsSelPauseActionWithDurationWithParamsExpectedValuesExpectedValueIntervalCompletion            = objc.RegisterName("pauseActionWithDurationWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterActionsSelResumeActionWithParamsExpectedValuesExpectedValueIntervalCompletion                       = objc.RegisterName("resumeActionWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterActionsSelEnableActionWithParamsExpectedValuesExpectedValueIntervalCompletion                       = objc.RegisterName("enableActionWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterActionsSelEnableActionWithDurationWithParamsExpectedValuesExpectedValueIntervalCompletion           = objc.RegisterName("enableActionWithDurationWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterActionsSelDisableActionWithParamsExpectedValuesExpectedValueIntervalCompletion                      = objc.RegisterName("disableActionWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterActionsSelDisableActionWithDurationWithParamsExpectedValuesExpectedValueIntervalCompletion          = objc.RegisterName("disableActionWithDurationWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterActionsSelReadAttributeActionListWithParams                                                         = objc.RegisterName("readAttributeActionListWithParams:")
+	_mTRClusterActionsSelReadAttributeEndpointListsWithParams                                                      = objc.RegisterName("readAttributeEndpointListsWithParams:")
+	_mTRClusterActionsSelReadAttributeSetupURLWithParams                                                           = objc.RegisterName("readAttributeSetupURLWithParams:")
+	_mTRClusterActionsSelReadAttributeGeneratedCommandListWithParams                                               = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterActionsSelReadAttributeAcceptedCommandListWithParams                                                = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterActionsSelReadAttributeAttributeListWithParams                                                      = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterActionsSelReadAttributeFeatureMapWithParams                                                         = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterActionsSelReadAttributeClusterRevisionWithParams                                                    = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterActionsSelInitWithDeviceEndpointIDQueue                                                             = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterActionsSelInitWithDeviceEndpointQueue                                                               = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterActionsSelInstantActionWithParamsExpectedValuesExpectedValueIntervalCompletionHandler               = objc.RegisterName("instantActionWithParams:expectedValues:expectedValueInterval:completionHandler:")
 	_mTRClusterActionsSelInstantActionWithTransitionWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("instantActionWithTransitionWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterActionsSelStartActionWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("startActionWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterActionsSelStartActionWithDurationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("startActionWithDurationWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterActionsSelStopActionWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("stopActionWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterActionsSelPauseActionWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("pauseActionWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterActionsSelPauseActionWithDurationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("pauseActionWithDurationWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterActionsSelResumeActionWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("resumeActionWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterActionsSelEnableActionWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("enableActionWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterActionsSelEnableActionWithDurationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("enableActionWithDurationWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterActionsSelDisableActionWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("disableActionWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterActionsSelDisableActionWithDurationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("disableActionWithDurationWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterActionsSelStartActionWithParamsExpectedValuesExpectedValueIntervalCompletionHandler                 = objc.RegisterName("startActionWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterActionsSelStartActionWithDurationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler     = objc.RegisterName("startActionWithDurationWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterActionsSelStopActionWithParamsExpectedValuesExpectedValueIntervalCompletionHandler                  = objc.RegisterName("stopActionWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterActionsSelPauseActionWithParamsExpectedValuesExpectedValueIntervalCompletionHandler                 = objc.RegisterName("pauseActionWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterActionsSelPauseActionWithDurationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler     = objc.RegisterName("pauseActionWithDurationWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterActionsSelResumeActionWithParamsExpectedValuesExpectedValueIntervalCompletionHandler                = objc.RegisterName("resumeActionWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterActionsSelEnableActionWithParamsExpectedValuesExpectedValueIntervalCompletionHandler                = objc.RegisterName("enableActionWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterActionsSelEnableActionWithDurationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler    = objc.RegisterName("enableActionWithDurationWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterActionsSelDisableActionWithParamsExpectedValuesExpectedValueIntervalCompletionHandler               = objc.RegisterName("disableActionWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterActionsSelDisableActionWithDurationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler   = objc.RegisterName("disableActionWithDurationWithParams:expectedValues:expectedValueInterval:completionHandler:")
 )
 
 func MTRClusterActionsFromID(id objc.ID) *MTRClusterActions {
@@ -240,13 +240,17 @@ func (o *MTRClusterActions) ReadAttributeClusterRevisionWithParams(params *MTRRe
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterActions) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterActions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterActionsSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterActionsFromID(_ret)
 }
 
 func (o *MTRClusterActions) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterActions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterActionsSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterActionsFromID(_ret)
 }
 
@@ -381,4 +385,3 @@ func (o *MTRClusterActions) DisableActionWithDurationWithParamsExpectedValuesExp
 	}
 	o.Ptr().Send(_mTRClusterActionsSelDisableActionWithDurationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
-

@@ -18,7 +18,9 @@ type LinuxRosettaUnixSocketCachingOptions struct {
 }
 
 // Unwrap returns the underlying [raw.VZLinuxRosettaUnixSocketCachingOptions].
-func (x *LinuxRosettaUnixSocketCachingOptions) Unwrap() *raw.VZLinuxRosettaUnixSocketCachingOptions { return x.inner }
+func (x *LinuxRosettaUnixSocketCachingOptions) Unwrap() *raw.VZLinuxRosettaUnixSocketCachingOptions {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -58,7 +60,9 @@ func (x *LinuxRosettaUnixSocketCachingOptions) Path() string {
 	return purego.GoString(_r.Ptr())
 }
 
-func (x *LinuxRosettaUnixSocketCachingOptions) asLinuxRosettaCachingOptions() *raw.VZLinuxRosettaCachingOptions { return &x.inner.VZLinuxRosettaCachingOptions }
+func (x *LinuxRosettaUnixSocketCachingOptions) asLinuxRosettaCachingOptions() *raw.VZLinuxRosettaCachingOptions {
+	return &x.inner.VZLinuxRosettaCachingOptions
+}
 
 // LinuxRosettaUnixSocketCachingOptionsable is the interface implemented by [LinuxRosettaUnixSocketCachingOptions], for mocking and DI.
 type LinuxRosettaUnixSocketCachingOptionsable interface {
@@ -67,4 +71,3 @@ type LinuxRosettaUnixSocketCachingOptionsable interface {
 }
 
 var _ LinuxRosettaUnixSocketCachingOptionsable = (*LinuxRosettaUnixSocketCachingOptions)(nil)
-

@@ -16,13 +16,13 @@ type AVCaptureAudioChannel struct {
 }
 
 var (
-	_clsAVCaptureAudioChannel = _objcClass("AVCaptureAudioChannel")
+	_clsAVCaptureAudioChannel                  = _objcClass("AVCaptureAudioChannel")
 	_aVCaptureAudioChannelSelAveragePowerLevel = objc.RegisterName("averagePowerLevel")
-	_aVCaptureAudioChannelSelPeakHoldLevel = objc.RegisterName("peakHoldLevel")
-	_aVCaptureAudioChannelSelVolume = objc.RegisterName("volume")
-	_aVCaptureAudioChannelSelSetVolume = objc.RegisterName("setVolume:")
-	_aVCaptureAudioChannelSelIsEnabled = objc.RegisterName("isEnabled")
-	_aVCaptureAudioChannelSelSetEnabled = objc.RegisterName("setEnabled:")
+	_aVCaptureAudioChannelSelPeakHoldLevel     = objc.RegisterName("peakHoldLevel")
+	_aVCaptureAudioChannelSelVolume            = objc.RegisterName("volume")
+	_aVCaptureAudioChannelSelSetVolume         = objc.RegisterName("setVolume:")
+	_aVCaptureAudioChannelSelIsEnabled         = objc.RegisterName("isEnabled")
+	_aVCaptureAudioChannelSelSetEnabled        = objc.RegisterName("setEnabled:")
 )
 
 func AVCaptureAudioChannelFromID(id objc.ID) *AVCaptureAudioChannel {
@@ -66,4 +66,3 @@ func (o *AVCaptureAudioChannel) IsEnabled() bool {
 func (o *AVCaptureAudioChannel) SetEnabled(enabled bool) {
 	o.Ptr().Send(_aVCaptureAudioChannelSelSetEnabled, enabled)
 }
-

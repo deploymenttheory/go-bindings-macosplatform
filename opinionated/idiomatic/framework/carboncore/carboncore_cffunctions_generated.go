@@ -765,4 +765,3 @@ func UpgradeScriptInfoToTextEncoding(iTextScriptID int16, iTextLanguageID int16,
 	}
 	return nil
 }
-

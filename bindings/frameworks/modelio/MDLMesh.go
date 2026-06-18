@@ -18,61 +18,61 @@ type MDLMesh struct {
 }
 
 var (
-	_clsMDLMesh = _objcClass("MDLMesh")
-	_mDLMeshSelInitWithBufferAllocator = objc.RegisterName("initWithBufferAllocator:")
-	_mDLMeshSelInitWithVertexBufferVertexCountDescriptorSubmeshes = objc.RegisterName("initWithVertexBuffer:vertexCount:descriptor:submeshes:")
-	_mDLMeshSelInitWithVertexBuffersVertexCountDescriptorSubmeshes = objc.RegisterName("initWithVertexBuffers:vertexCount:descriptor:submeshes:")
-	_mDLMeshSelVertexAttributeDataForAttributeNamed = objc.RegisterName("vertexAttributeDataForAttributeNamed:")
-	_mDLMeshSelVertexAttributeDataForAttributeNamedAsFormat = objc.RegisterName("vertexAttributeDataForAttributeNamed:asFormat:")
-	_mDLMeshSelBoundingBox = objc.RegisterName("boundingBox")
-	_mDLMeshSelVertexDescriptor = objc.RegisterName("vertexDescriptor")
-	_mDLMeshSelSetVertexDescriptor = objc.RegisterName("setVertexDescriptor:")
-	_mDLMeshSelVertexCount = objc.RegisterName("vertexCount")
-	_mDLMeshSelSetVertexCount = objc.RegisterName("setVertexCount:")
-	_mDLMeshSelVertexBuffers = objc.RegisterName("vertexBuffers")
-	_mDLMeshSelSetVertexBuffers = objc.RegisterName("setVertexBuffers:")
-	_mDLMeshSelSubmeshes = objc.RegisterName("submeshes")
-	_mDLMeshSelSetSubmeshes = objc.RegisterName("setSubmeshes:")
-	_mDLMeshSelAllocator = objc.RegisterName("allocator")
-	_mDLMeshSelAddAttributeWithNameFormat = objc.RegisterName("addAttributeWithName:format:")
-	_mDLMeshSelAddAttributeWithNameFormatTypeDataStride = objc.RegisterName("addAttributeWithName:format:type:data:stride:")
-	_mDLMeshSelAddAttributeWithNameFormatTypeDataStrideTime = objc.RegisterName("addAttributeWithName:format:type:data:stride:time:")
-	_mDLMeshSelAddNormalsWithAttributeNamedCreaseThreshold = objc.RegisterName("addNormalsWithAttributeNamed:creaseThreshold:")
-	_mDLMeshSelAddTangentBasisForTextureCoordinateAttributeNamedTangentAttributeNamedBitangentAttributeNamed = objc.RegisterName("addTangentBasisForTextureCoordinateAttributeNamed:tangentAttributeNamed:bitangentAttributeNamed:")
-	_mDLMeshSelAddTangentBasisForTextureCoordinateAttributeNamedNormalAttributeNamedTangentAttributeNamed = objc.RegisterName("addTangentBasisForTextureCoordinateAttributeNamed:normalAttributeNamed:tangentAttributeNamed:")
-	_mDLMeshSelAddOrthTanBasisForTextureCoordinateAttributeNamedNormalAttributeNamedTangentAttributeNamed = objc.RegisterName("addOrthTanBasisForTextureCoordinateAttributeNamed:normalAttributeNamed:tangentAttributeNamed:")
-	_mDLMeshSelAddUnwrappedTextureCoordinatesForAttributeNamed = objc.RegisterName("addUnwrappedTextureCoordinatesForAttributeNamed:")
-	_mDLMeshSelFlipTextureCoordinatesInAttributeNamed = objc.RegisterName("flipTextureCoordinatesInAttributeNamed:")
-	_mDLMeshSelMakeVerticesUnique = objc.RegisterName("makeVerticesUnique")
-	_mDLMeshSelMakeVerticesUniqueAndReturnError = objc.RegisterName("makeVerticesUniqueAndReturnError:")
-	_mDLMeshSelReplaceAttributeNamedWithData = objc.RegisterName("replaceAttributeNamed:withData:")
-	_mDLMeshSelUpdateAttributeNamedWithData = objc.RegisterName("updateAttributeNamed:withData:")
-	_mDLMeshSelRemoveAttributeNamed = objc.RegisterName("removeAttributeNamed:")
-	_mDLMeshSelInitBoxWithExtentSegmentsInwardNormalsGeometryTypeAllocator = objc.RegisterName("initBoxWithExtent:segments:inwardNormals:geometryType:allocator:")
-	_mDLMeshSelInitSphereWithExtentSegmentsInwardNormalsGeometryTypeAllocator = objc.RegisterName("initSphereWithExtent:segments:inwardNormals:geometryType:allocator:")
-	_mDLMeshSelInitHemisphereWithExtentSegmentsInwardNormalsCapGeometryTypeAllocator = objc.RegisterName("initHemisphereWithExtent:segments:inwardNormals:cap:geometryType:allocator:")
-	_mDLMeshSelInitCylinderWithExtentSegmentsInwardNormalsTopCapBottomCapGeometryTypeAllocator = objc.RegisterName("initCylinderWithExtent:segments:inwardNormals:topCap:bottomCap:geometryType:allocator:")
-	_mDLMeshSelInitCapsuleWithExtentCylinderSegmentsHemisphereSegmentsInwardNormalsGeometryTypeAllocator = objc.RegisterName("initCapsuleWithExtent:cylinderSegments:hemisphereSegments:inwardNormals:geometryType:allocator:")
-	_mDLMeshSelInitConeWithExtentSegmentsInwardNormalsCapGeometryTypeAllocator = objc.RegisterName("initConeWithExtent:segments:inwardNormals:cap:geometryType:allocator:")
-	_mDLMeshSelInitPlaneWithExtentSegmentsGeometryTypeAllocator = objc.RegisterName("initPlaneWithExtent:segments:geometryType:allocator:")
-	_mDLMeshSelInitIcosahedronWithExtentInwardNormalsGeometryTypeAllocator = objc.RegisterName("initIcosahedronWithExtent:inwardNormals:geometryType:allocator:")
-	_mDLMeshSelInitMeshBySubdividingMeshSubmeshIndexSubdivisionLevelsAllocator = objc.RegisterName("initMeshBySubdividingMesh:submeshIndex:subdivisionLevels:allocator:")
-	_mDLMeshSelNewBoxWithDimensionsSegmentsGeometryTypeInwardNormalsAllocator = objc.RegisterName("newBoxWithDimensions:segments:geometryType:inwardNormals:allocator:")
-	_mDLMeshSelNewEllipsoidWithRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsHemisphereAllocator = objc.RegisterName("newEllipsoidWithRadii:radialSegments:verticalSegments:geometryType:inwardNormals:hemisphere:allocator:")
-	_mDLMeshSelNewCylinderWithHeightRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsAllocator = objc.RegisterName("newCylinderWithHeight:radii:radialSegments:verticalSegments:geometryType:inwardNormals:allocator:")
-	_mDLMeshSelNewCapsuleWithHeightRadiiRadialSegmentsVerticalSegmentsHemisphereSegmentsGeometryTypeInwardNormalsAllocator = objc.RegisterName("newCapsuleWithHeight:radii:radialSegments:verticalSegments:hemisphereSegments:geometryType:inwardNormals:allocator:")
-	_mDLMeshSelNewEllipticalConeWithHeightRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsAllocator = objc.RegisterName("newEllipticalConeWithHeight:radii:radialSegments:verticalSegments:geometryType:inwardNormals:allocator:")
-	_mDLMeshSelNewPlaneWithDimensionsSegmentsGeometryTypeAllocator = objc.RegisterName("newPlaneWithDimensions:segments:geometryType:allocator:")
-	_mDLMeshSelNewIcosahedronWithRadiusInwardNormalsGeometryTypeAllocator = objc.RegisterName("newIcosahedronWithRadius:inwardNormals:geometryType:allocator:")
-	_mDLMeshSelNewIcosahedronWithRadiusInwardNormalsAllocator = objc.RegisterName("newIcosahedronWithRadius:inwardNormals:allocator:")
-	_mDLMeshSelNewSubdividedMeshSubmeshIndexSubdivisionLevels = objc.RegisterName("newSubdividedMesh:submeshIndex:subdivisionLevels:")
+	_clsMDLMesh                                                                                                                                = _objcClass("MDLMesh")
+	_mDLMeshSelInitWithBufferAllocator                                                                                                         = objc.RegisterName("initWithBufferAllocator:")
+	_mDLMeshSelInitWithVertexBufferVertexCountDescriptorSubmeshes                                                                              = objc.RegisterName("initWithVertexBuffer:vertexCount:descriptor:submeshes:")
+	_mDLMeshSelInitWithVertexBuffersVertexCountDescriptorSubmeshes                                                                             = objc.RegisterName("initWithVertexBuffers:vertexCount:descriptor:submeshes:")
+	_mDLMeshSelVertexAttributeDataForAttributeNamed                                                                                            = objc.RegisterName("vertexAttributeDataForAttributeNamed:")
+	_mDLMeshSelVertexAttributeDataForAttributeNamedAsFormat                                                                                    = objc.RegisterName("vertexAttributeDataForAttributeNamed:asFormat:")
+	_mDLMeshSelBoundingBox                                                                                                                     = objc.RegisterName("boundingBox")
+	_mDLMeshSelVertexDescriptor                                                                                                                = objc.RegisterName("vertexDescriptor")
+	_mDLMeshSelSetVertexDescriptor                                                                                                             = objc.RegisterName("setVertexDescriptor:")
+	_mDLMeshSelVertexCount                                                                                                                     = objc.RegisterName("vertexCount")
+	_mDLMeshSelSetVertexCount                                                                                                                  = objc.RegisterName("setVertexCount:")
+	_mDLMeshSelVertexBuffers                                                                                                                   = objc.RegisterName("vertexBuffers")
+	_mDLMeshSelSetVertexBuffers                                                                                                                = objc.RegisterName("setVertexBuffers:")
+	_mDLMeshSelSubmeshes                                                                                                                       = objc.RegisterName("submeshes")
+	_mDLMeshSelSetSubmeshes                                                                                                                    = objc.RegisterName("setSubmeshes:")
+	_mDLMeshSelAllocator                                                                                                                       = objc.RegisterName("allocator")
+	_mDLMeshSelAddAttributeWithNameFormat                                                                                                      = objc.RegisterName("addAttributeWithName:format:")
+	_mDLMeshSelAddAttributeWithNameFormatTypeDataStride                                                                                        = objc.RegisterName("addAttributeWithName:format:type:data:stride:")
+	_mDLMeshSelAddAttributeWithNameFormatTypeDataStrideTime                                                                                    = objc.RegisterName("addAttributeWithName:format:type:data:stride:time:")
+	_mDLMeshSelAddNormalsWithAttributeNamedCreaseThreshold                                                                                     = objc.RegisterName("addNormalsWithAttributeNamed:creaseThreshold:")
+	_mDLMeshSelAddTangentBasisForTextureCoordinateAttributeNamedTangentAttributeNamedBitangentAttributeNamed                                   = objc.RegisterName("addTangentBasisForTextureCoordinateAttributeNamed:tangentAttributeNamed:bitangentAttributeNamed:")
+	_mDLMeshSelAddTangentBasisForTextureCoordinateAttributeNamedNormalAttributeNamedTangentAttributeNamed                                      = objc.RegisterName("addTangentBasisForTextureCoordinateAttributeNamed:normalAttributeNamed:tangentAttributeNamed:")
+	_mDLMeshSelAddOrthTanBasisForTextureCoordinateAttributeNamedNormalAttributeNamedTangentAttributeNamed                                      = objc.RegisterName("addOrthTanBasisForTextureCoordinateAttributeNamed:normalAttributeNamed:tangentAttributeNamed:")
+	_mDLMeshSelAddUnwrappedTextureCoordinatesForAttributeNamed                                                                                 = objc.RegisterName("addUnwrappedTextureCoordinatesForAttributeNamed:")
+	_mDLMeshSelFlipTextureCoordinatesInAttributeNamed                                                                                          = objc.RegisterName("flipTextureCoordinatesInAttributeNamed:")
+	_mDLMeshSelMakeVerticesUnique                                                                                                              = objc.RegisterName("makeVerticesUnique")
+	_mDLMeshSelMakeVerticesUniqueAndReturnError                                                                                                = objc.RegisterName("makeVerticesUniqueAndReturnError:")
+	_mDLMeshSelReplaceAttributeNamedWithData                                                                                                   = objc.RegisterName("replaceAttributeNamed:withData:")
+	_mDLMeshSelUpdateAttributeNamedWithData                                                                                                    = objc.RegisterName("updateAttributeNamed:withData:")
+	_mDLMeshSelRemoveAttributeNamed                                                                                                            = objc.RegisterName("removeAttributeNamed:")
+	_mDLMeshSelInitBoxWithExtentSegmentsInwardNormalsGeometryTypeAllocator                                                                     = objc.RegisterName("initBoxWithExtent:segments:inwardNormals:geometryType:allocator:")
+	_mDLMeshSelInitSphereWithExtentSegmentsInwardNormalsGeometryTypeAllocator                                                                  = objc.RegisterName("initSphereWithExtent:segments:inwardNormals:geometryType:allocator:")
+	_mDLMeshSelInitHemisphereWithExtentSegmentsInwardNormalsCapGeometryTypeAllocator                                                           = objc.RegisterName("initHemisphereWithExtent:segments:inwardNormals:cap:geometryType:allocator:")
+	_mDLMeshSelInitCylinderWithExtentSegmentsInwardNormalsTopCapBottomCapGeometryTypeAllocator                                                 = objc.RegisterName("initCylinderWithExtent:segments:inwardNormals:topCap:bottomCap:geometryType:allocator:")
+	_mDLMeshSelInitCapsuleWithExtentCylinderSegmentsHemisphereSegmentsInwardNormalsGeometryTypeAllocator                                       = objc.RegisterName("initCapsuleWithExtent:cylinderSegments:hemisphereSegments:inwardNormals:geometryType:allocator:")
+	_mDLMeshSelInitConeWithExtentSegmentsInwardNormalsCapGeometryTypeAllocator                                                                 = objc.RegisterName("initConeWithExtent:segments:inwardNormals:cap:geometryType:allocator:")
+	_mDLMeshSelInitPlaneWithExtentSegmentsGeometryTypeAllocator                                                                                = objc.RegisterName("initPlaneWithExtent:segments:geometryType:allocator:")
+	_mDLMeshSelInitIcosahedronWithExtentInwardNormalsGeometryTypeAllocator                                                                     = objc.RegisterName("initIcosahedronWithExtent:inwardNormals:geometryType:allocator:")
+	_mDLMeshSelInitMeshBySubdividingMeshSubmeshIndexSubdivisionLevelsAllocator                                                                 = objc.RegisterName("initMeshBySubdividingMesh:submeshIndex:subdivisionLevels:allocator:")
+	_mDLMeshSelNewBoxWithDimensionsSegmentsGeometryTypeInwardNormalsAllocator                                                                  = objc.RegisterName("newBoxWithDimensions:segments:geometryType:inwardNormals:allocator:")
+	_mDLMeshSelNewEllipsoidWithRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsHemisphereAllocator                                 = objc.RegisterName("newEllipsoidWithRadii:radialSegments:verticalSegments:geometryType:inwardNormals:hemisphere:allocator:")
+	_mDLMeshSelNewCylinderWithHeightRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsAllocator                                      = objc.RegisterName("newCylinderWithHeight:radii:radialSegments:verticalSegments:geometryType:inwardNormals:allocator:")
+	_mDLMeshSelNewCapsuleWithHeightRadiiRadialSegmentsVerticalSegmentsHemisphereSegmentsGeometryTypeInwardNormalsAllocator                     = objc.RegisterName("newCapsuleWithHeight:radii:radialSegments:verticalSegments:hemisphereSegments:geometryType:inwardNormals:allocator:")
+	_mDLMeshSelNewEllipticalConeWithHeightRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsAllocator                                = objc.RegisterName("newEllipticalConeWithHeight:radii:radialSegments:verticalSegments:geometryType:inwardNormals:allocator:")
+	_mDLMeshSelNewPlaneWithDimensionsSegmentsGeometryTypeAllocator                                                                             = objc.RegisterName("newPlaneWithDimensions:segments:geometryType:allocator:")
+	_mDLMeshSelNewIcosahedronWithRadiusInwardNormalsGeometryTypeAllocator                                                                      = objc.RegisterName("newIcosahedronWithRadius:inwardNormals:geometryType:allocator:")
+	_mDLMeshSelNewIcosahedronWithRadiusInwardNormalsAllocator                                                                                  = objc.RegisterName("newIcosahedronWithRadius:inwardNormals:allocator:")
+	_mDLMeshSelNewSubdividedMeshSubmeshIndexSubdivisionLevels                                                                                  = objc.RegisterName("newSubdividedMesh:submeshIndex:subdivisionLevels:")
 	_mDLMeshSelGenerateAmbientOcclusionTextureWithSizeRaysPerSampleAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed = objc.RegisterName("generateAmbientOcclusionTextureWithSize:raysPerSample:attenuationFactor:objectsToConsider:vertexAttributeNamed:materialPropertyNamed:")
-	_mDLMeshSelGenerateAmbientOcclusionTextureWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed = objc.RegisterName("generateAmbientOcclusionTextureWithQuality:attenuationFactor:objectsToConsider:vertexAttributeNamed:materialPropertyNamed:")
-	_mDLMeshSelGenerateAmbientOcclusionVertexColorsWithRaysPerSampleAttenuationFactorObjectsToConsiderVertexAttributeNamed = objc.RegisterName("generateAmbientOcclusionVertexColorsWithRaysPerSample:attenuationFactor:objectsToConsider:vertexAttributeNamed:")
-	_mDLMeshSelGenerateAmbientOcclusionVertexColorsWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamed = objc.RegisterName("generateAmbientOcclusionVertexColorsWithQuality:attenuationFactor:objectsToConsider:vertexAttributeNamed:")
-	_mDLMeshSelGenerateLightMapTextureWithTextureSizeLightsToConsiderObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed = objc.RegisterName("generateLightMapTextureWithTextureSize:lightsToConsider:objectsToConsider:vertexAttributeNamed:materialPropertyNamed:")
-	_mDLMeshSelGenerateLightMapTextureWithQualityLightsToConsiderObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed = objc.RegisterName("generateLightMapTextureWithQuality:lightsToConsider:objectsToConsider:vertexAttributeNamed:materialPropertyNamed:")
-	_mDLMeshSelGenerateLightMapVertexColorsWithLightsToConsiderObjectsToConsiderVertexAttributeNamed = objc.RegisterName("generateLightMapVertexColorsWithLightsToConsider:objectsToConsider:vertexAttributeNamed:")
+	_mDLMeshSelGenerateAmbientOcclusionTextureWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed           = objc.RegisterName("generateAmbientOcclusionTextureWithQuality:attenuationFactor:objectsToConsider:vertexAttributeNamed:materialPropertyNamed:")
+	_mDLMeshSelGenerateAmbientOcclusionVertexColorsWithRaysPerSampleAttenuationFactorObjectsToConsiderVertexAttributeNamed                     = objc.RegisterName("generateAmbientOcclusionVertexColorsWithRaysPerSample:attenuationFactor:objectsToConsider:vertexAttributeNamed:")
+	_mDLMeshSelGenerateAmbientOcclusionVertexColorsWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamed                           = objc.RegisterName("generateAmbientOcclusionVertexColorsWithQuality:attenuationFactor:objectsToConsider:vertexAttributeNamed:")
+	_mDLMeshSelGenerateLightMapTextureWithTextureSizeLightsToConsiderObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed                = objc.RegisterName("generateLightMapTextureWithTextureSize:lightsToConsider:objectsToConsider:vertexAttributeNamed:materialPropertyNamed:")
+	_mDLMeshSelGenerateLightMapTextureWithQualityLightsToConsiderObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed                    = objc.RegisterName("generateLightMapTextureWithQuality:lightsToConsider:objectsToConsider:vertexAttributeNamed:materialPropertyNamed:")
+	_mDLMeshSelGenerateLightMapVertexColorsWithLightsToConsiderObjectsToConsiderVertexAttributeNamed                                           = objc.RegisterName("generateLightMapVertexColorsWithLightsToConsider:objectsToConsider:vertexAttributeNamed:")
 )
 
 func MDLMeshFromID(id objc.ID) *MDLMesh {
@@ -87,35 +87,45 @@ func MDLMeshFromID(id objc.ID) *MDLMesh {
 
 func (o *MDLMesh) InitWithBufferAllocator(bufferAllocator MDLMeshBufferAllocator) *MDLMesh {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMeshSelInitWithBufferAllocator, bufferAllocator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMeshFromID(_ret)
 }
 
 // @method initWithVertexBuffer:vertexCount:descriptor:submeshes: @abstract Initialize object with a vertex buffer and a collection of submeshes @return Initialized mesh or nil if descriptor's layout array does not describe a single buffer @param vertexBuffer MDLMeshBuffer object containing all vertex data for the mesh @param vertexCount Number of vertices in the vertexBuffer @param descriptor VertexDescriptor specifying how to interpret vertex data @param submeshes Array of submeshes with index buffers referencing vertex data and/or materials to be applied to mesh
 func (o *MDLMesh) InitWithVertexBufferVertexCountDescriptorSubmeshes(vertexBuffer MDLMeshBuffer, vertexCount uint, descriptor *MDLVertexDescriptor, submeshes *foundation.NSArray[*MDLSubmesh]) *MDLMesh {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMeshSelInitWithVertexBufferVertexCountDescriptorSubmeshes, vertexBuffer, vertexCount, descriptor.Ptr(), submeshes.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMeshFromID(_ret)
 }
 
 // @method initWithVertexBuffer:vertexCount:descriptor:submeshes: @abstract Initialize object with an array of vertex buffers (Structure of Arrays) and a collection of submeshes @return Initialized mesh or nil if descriptor's layout array is incompatible with vertexBuffers array @param vertexCount Number of vertices in vertexBuffers @param descriptor VertexDescriptor specifying how to interpret vertex data @param submeshes Array of submeshes with index buffers referencing vertex data and/or materials to be applied to mesh @discussion Allows initialization with the layout of the vertexBuffers in a structure-of-arrays form, in other words, non-interleaved vertex attributes
 func (o *MDLMesh) InitWithVertexBuffersVertexCountDescriptorSubmeshes(vertexBuffers *foundation.NSArray[MDLMeshBuffer], vertexCount uint, descriptor *MDLVertexDescriptor, submeshes *foundation.NSArray[*MDLSubmesh]) *MDLMesh {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMeshSelInitWithVertexBuffersVertexCountDescriptorSubmeshes, vertexBuffers.Ptr(), vertexCount, descriptor.Ptr(), submeshes.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMeshFromID(_ret)
 }
 
 // @method vertexAttributeDataForAttributeNamed: @abstract convenience selector to get quick access to vertex attribute data @discussion the vertex buffer will remain mapped until the MDLVertexAttributeData is freed.
 func (o *MDLMesh) VertexAttributeDataForAttributeNamed(name *foundation.NSString) *MDLVertexAttributeData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMeshSelVertexAttributeDataForAttributeNamed, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLVertexAttributeDataFromID(_ret)
 }
 
 // @method vertexAttributeDataForAttributeNamed:asFormat @abstract convenience selector to get quick access to vertex attribute data reformatted to the requested format if necessary. @discussion If the desired format has less elements than the source attribute elements, excess elements will be discarded. If the desired format has more elements than the source attribute, then the destination elements will be set to zero. The vertex buffer will remain mapped until the MDLVertexAttributeData is freed.
 func (o *MDLMesh) VertexAttributeDataForAttributeNamedAsFormat(name *foundation.NSString, format MDLVertexFormat) *MDLVertexAttributeData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMeshSelVertexAttributeDataForAttributeNamedAsFormat, name.Ptr(), format)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLVertexAttributeDataFromID(_ret)
 }
 
@@ -128,7 +138,9 @@ func (o *MDLMesh) BoundingBox() MDLAxisAlignedBoundingBox {
 // @property vertexDescriptor @abstract Immutable vertex descriptor for interpreting data in vertexBuffers @discussion Setting this applies the new layout in 'vertexBuffers' thus is a heavyweight operation as structured copies of almost all vertex buffer data could be made.  Additionally, if the new vertexDescriptor does not have an attribute in the original vertexDescriptor, that attribute will be deleted.  If the original vertexDescriptor does not have an attribute in the new vertexDescriptor, the data for the added attribute set as the added attribute's initializationValue property. The allocator associated with each original meshbuffer is used to reallocate the corresponding resultant meshbuffer.
 func (o *MDLMesh) VertexDescriptor() *MDLVertexDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMeshSelVertexDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLVertexDescriptorFromID(_ret)
 }
 
@@ -149,7 +161,9 @@ func (o *MDLMesh) SetVertexCount(vertexCount uint) {
 // @property vertexBuffers @abstract Array of buffers containing vertex data @discussion The vertex buffers in this array are indexed by the vertex descriptor.
 func (o *MDLMesh) VertexBuffers() *foundation.NSArray[MDLMeshBuffer] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMeshSelVertexBuffers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MDLMeshBuffer](_ret)
 }
 
@@ -160,7 +174,9 @@ func (o *MDLMesh) SetVertexBuffers(vertexBuffers *foundation.NSArray[MDLMeshBuff
 // @property submeshes @abstract Array of submeshes containing an indexbuffer referencing the vertex data and material to be applied when the mesh is rendered
 func (o *MDLMesh) Submeshes() *foundation.NSMutableArray[*MDLSubmesh] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMeshSelSubmeshes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSMutableArrayFromID[*MDLSubmesh](_ret)
 }
 
@@ -252,62 +268,80 @@ func (o *MDLMesh) RemoveAttributeNamed(name *foundation.NSString) {
 // @method initBoxMeshWithExtent:segments:inwardNormals:geometryType:allocator: @abstract Factory method for generating a mesh with a cube shape @return MDLMesh box with desired attributes @param extent size of the box in each dimension @param segments Number of slices in each dimension @param inwardNormals Generated Normal point inward @param geometryType Can be MDLGeometryTypeLines, MDLGeometryTypeQuads, or MDLGeometryTypeTriangles @param allocator A mesh buffer allocator used to allocate memory to back buffers for the returned mesh.  If nil, a default allocator will be used @discussion Assembled with triangle or quad primitives.  Specifying inward normals is useful for generating a skybox. The center of the box is at(0, 0, 0). Will raise an exception if an unsupported geometry type is passed in.
 func (o *MDLMesh) InitBoxWithExtentSegmentsInwardNormalsGeometryTypeAllocator(extent unsafe.Pointer, segments unsafe.Pointer, inwardNormals bool, geometryType MDLGeometryType, allocator MDLMeshBufferAllocator) *MDLMesh {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMeshSelInitBoxWithExtentSegmentsInwardNormalsGeometryTypeAllocator, extent, segments, inwardNormals, geometryType, allocator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMeshFromID(_ret)
 }
 
 // @method initSphereWithExtent:segments:inwardNormals:geometryType:allocator @abstract Factory method for generating a mesh with an ellipsoid shape @return MDLMesh ellipsoid with desired attributes @param geometryType Must be MDLGeometryTypeTriangles or MDLGeometryTypeLines @param inwardNormals If true, generated normals will face inwards. Useful for generating a skydome. Actual number of vertical slices will be half of 'vertical' segments @param allocator A mesh buffer allocator used to allocate memory to back buffers for the returned mesh.  If nil, a default allocator will be used @discussion Specifying inward normals and hemisphere is useful for generating a skydome. Specifying equal X, Y, and Z radii will generate a sphere. Specifying a y radius of 0.0 will generate a disc. Will raise an exception if radialSegments is < 3, verticalSegments is < 2, or an unsupported geometry type is passed in.
 func (o *MDLMesh) InitSphereWithExtentSegmentsInwardNormalsGeometryTypeAllocator(extent unsafe.Pointer, segments unsafe.Pointer, inwardNormals bool, geometryType MDLGeometryType, allocator MDLMeshBufferAllocator) *MDLMesh {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMeshSelInitSphereWithExtentSegmentsInwardNormalsGeometryTypeAllocator, extent, segments, inwardNormals, geometryType, allocator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMeshFromID(_ret)
 }
 
 func (o *MDLMesh) InitHemisphereWithExtentSegmentsInwardNormalsCapGeometryTypeAllocator(extent unsafe.Pointer, segments unsafe.Pointer, inwardNormals bool, cap_ bool, geometryType MDLGeometryType, allocator MDLMeshBufferAllocator) *MDLMesh {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMeshSelInitHemisphereWithExtentSegmentsInwardNormalsCapGeometryTypeAllocator, extent, segments, inwardNormals, cap_, geometryType, allocator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMeshFromID(_ret)
 }
 
 // @method initCylinderWithExtent:segments:inwardNormals:topCap:bottomCap:geometryType:allocator @abstract Factory method for generating a mesh with a cylindrical shape @return MDLMesh cylinder with desired attributes @param geometryType Must be MDLGeometryTypeTriangles or MDLGeometryTypeLines @param inwardNormals Normals point toward center of cylinder @param allocator A mesh buffer allocator used to allocate memory to back buffers for the returned mesh.  If nil, a default allocator will be used @discussion Center of cylinder at (0, 0, 0) with a top at +Y and bottom at -Y. Specifying equal X and Z radia will generate a true cylinder. Specifying a height of 0.0 and verticalSegments of 0 will generate a disc. Will raise an exception if radialSegments is < 3 or if an unsupported geometry type is passed in. Generated texture coordinates are laid out as follows: ___ /   \   <- T texcoord = 0.0 Texture for top of cylinder   ---> [     ] \___/ [     ]  <- T texcoord = 0.3333 [     ] Texture for sides of cylinder ---> [     ] [_____]  <- T texcoord = 0.6666 /   \ Texture for base of cylinder  ---> [     ] \___/   <- T texcoord = 1.0
 func (o *MDLMesh) InitCylinderWithExtentSegmentsInwardNormalsTopCapBottomCapGeometryTypeAllocator(extent unsafe.Pointer, segments unsafe.Pointer, inwardNormals bool, topCap bool, bottomCap bool, geometryType MDLGeometryType, allocator MDLMeshBufferAllocator) *MDLMesh {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMeshSelInitCylinderWithExtentSegmentsInwardNormalsTopCapBottomCapGeometryTypeAllocator, extent, segments, inwardNormals, topCap, bottomCap, geometryType, allocator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMeshFromID(_ret)
 }
 
 // @method initCapsuleWithExtent:cylinderSegments:hemisphereSegments:inwardNormals:geometryType:allocator @abstract Factory method for generating a mesh with a capsule shape; a cylinder with hemispheres for caps. @return MDLMesh capsule with desired attributes @param extent Dimension of bounding box for capsule. @param hemisphereSegments Number of slices through hemisphere caps along Y axis @param geometryType Must be MDLGeometryTypeTriangles or MDLGeometryTypeLines @param inwardNormals Normals point toward center of cylinder @param allocator A mesh buffer allocator used to allocate memory to back buffers for the returned mesh.  If nil, a default allocator will be used @discussion Center of capsule at (0, 0, 0) with a top at +Y and bottom at -Y. The height of hemisphere cap is specified by the minimum of X and Z Specifying equal X and Z radii will generate a true capsule. Specifying a height that is less than the twice of min of the X and Z radii or verticalSegments of 0 will generate a sphere. The full height of the capsule will also incorporate the hemisphere caps. Will raise an exception if radialSegments is < 3 or if hemisphereSegments < 1 or if an unsupported geometry type is specified. Generated texture coordinates for top and bottom caps are wrapped in a similar manner as for a sphere, laid out as follows: ___ /   \   <- T texcoord = 0.0 Texture for top of cylinder   ---> [-----] [     ]  <- T texcoord = extent.x/extent.y [     ] Texture for sides of cylinder ---> [     ] [_____]  <- T texcoord = 1.0 - extent.x/extent.y Texture for base of cylinder  ---> [     ] \___/   <- T texcoord = 1.0
 func (o *MDLMesh) InitCapsuleWithExtentCylinderSegmentsHemisphereSegmentsInwardNormalsGeometryTypeAllocator(extent unsafe.Pointer, segments unsafe.Pointer, hemisphereSegments int, inwardNormals bool, geometryType MDLGeometryType, allocator MDLMeshBufferAllocator) *MDLMesh {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMeshSelInitCapsuleWithExtentCylinderSegmentsHemisphereSegmentsInwardNormalsGeometryTypeAllocator, extent, segments, hemisphereSegments, inwardNormals, geometryType, allocator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMeshFromID(_ret)
 }
 
 // @method initConeWithExtent:segments:inwardNormals:cap:geometryType:allocator @abstract Factory method for generating a mesh with an ellipticalCone shape. @return MDLMesh cone with desired attributes @param geometryType Must be MDLGeometryTypeTriangles or MDLGeometryTypeLines @param inwardNormals Normals point toward center of ellipticalCone @param allocator A mesh buffer allocator used to allocate memory to back buffers for the returned mesh.  If nil, a default allocator will be used @discussion Point of cone at (0, 0, 0) while base of cone is -Y. Will raise an exception if radialSegments is < 3, or verticalSegments is < 1, or if an unsupported geometry type is passed in. Generated texture coordinates are laid out as follows: _____ [     ]  <- T texcoord = 0.0 [     ] Texture for sides of cone ---> [     ] [     ] [_____]  <- T texcoord = 0.6666 /   \ Texture for base of cone  ---> [     ] \___/   <- T texcoord = 1.0
 func (o *MDLMesh) InitConeWithExtentSegmentsInwardNormalsCapGeometryTypeAllocator(extent unsafe.Pointer, segments unsafe.Pointer, inwardNormals bool, cap_ bool, geometryType MDLGeometryType, allocator MDLMeshBufferAllocator) *MDLMesh {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMeshSelInitConeWithExtentSegmentsInwardNormalsCapGeometryTypeAllocator, extent, segments, inwardNormals, cap_, geometryType, allocator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMeshFromID(_ret)
 }
 
 // @method initPlaneWithExtent:segments:geometryType:allocator @abstract Factory method for generating a mesh with an planar shape @return MDLMesh plane with desired attributes @param extent extent of the plane @param segments Number of segements in the X and Y dimensions @param geometryType Can be MDLGeometryTypeLines, MDLGeometryTypeQuads, or MDLGeometryTypeTriangles @param allocator A mesh buffer allocator used to allocate memory to back buffers for the returned mesh.  If nil, a default allocator will be used @discussion Creates a plane spanning the greatest dimensions of extent. Will raise an exception if an unsupported geometry type is passed in.
 func (o *MDLMesh) InitPlaneWithExtentSegmentsGeometryTypeAllocator(extent unsafe.Pointer, segments unsafe.Pointer, geometryType MDLGeometryType, allocator MDLMeshBufferAllocator) *MDLMesh {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMeshSelInitPlaneWithExtentSegmentsGeometryTypeAllocator, extent, segments, geometryType, allocator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMeshFromID(_ret)
 }
 
 // @method initIcosahedronWithExtent:inwardNormals:geometryType:allocator @abstract Factory method for generating a mesh icosahedron @return MDLMesh icosahedron with desired attributes @param inwardNormals Generated normals will face towards the center of the mesh @param allocator A mesh buffer allocator used to allocate memory to back buffers for the returned mesh.  If nil, a default allocator will be used @discussion  Creates an icosahedron with center at (0, 0, 0).
 func (o *MDLMesh) InitIcosahedronWithExtentInwardNormalsGeometryTypeAllocator(extent unsafe.Pointer, inwardNormals bool, geometryType MDLGeometryType, allocator MDLMeshBufferAllocator) *MDLMesh {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMeshSelInitIcosahedronWithExtentInwardNormalsGeometryTypeAllocator, extent, inwardNormals, geometryType, allocator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMeshFromID(_ret)
 }
 
 // @method initMeshBySubdividingMesh:submeshIndex:subdivisionLevels:allocator @abstract Factory method that generates a subdivided mesh from a source mesh @param mesh Mesh from which to generate a subdivided mesh @param submeshIndex Index of submesh in Mesh's submesh array from which to generate a subdivided mesh @param subdivisionLevels The number of levels to subdivide mesh @discussion Subdivision levels over four are likely to generate more triangles than can be reasonably displayed. Index and vertex data will use the same allocator used for the source mesh. Loading an asset using the topology preservation flag set to YES will result in the best subdivision results. @return Returns a mesh subdivided to index level, unless subdivision is impossible.
 func (o *MDLMesh) InitMeshBySubdividingMeshSubmeshIndexSubdivisionLevelsAllocator(mesh *MDLMesh, submeshIndex int, subdivisionLevels uint, allocator MDLMeshBufferAllocator) *MDLMesh {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMeshSelInitMeshBySubdividingMeshSubmeshIndexSubdivisionLevelsAllocator, mesh.Ptr(), submeshIndex, subdivisionLevels, allocator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMeshFromID(_ret)
 }
 
@@ -392,4 +426,3 @@ func (o *MDLMesh) GenerateLightMapVertexColorsWithLightsToConsiderObjectsToConsi
 	_ret := objc.Send[bool](o.Ptr(), _mDLMeshSelGenerateLightMapVertexColorsWithLightsToConsiderObjectsToConsiderVertexAttributeNamed, lightsToConsider.Ptr(), objectsToConsider.Ptr(), vertexAttributeName.Ptr())
 	return _ret
 }
-

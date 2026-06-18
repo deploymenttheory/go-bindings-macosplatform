@@ -16,7 +16,9 @@ type CNNSpatialNormalizationGradientNode struct {
 }
 
 // Unwrap returns the underlying [raw.MPSCNNSpatialNormalizationGradientNode].
-func (x *CNNSpatialNormalizationGradientNode) Unwrap() *raw.MPSCNNSpatialNormalizationGradientNode { return x.inner }
+func (x *CNNSpatialNormalizationGradientNode) Unwrap() *raw.MPSCNNSpatialNormalizationGradientNode {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -129,9 +131,13 @@ func (x *CNNSpatialNormalizationGradientNode) SetDelta(delta float32) {
 	x.inner.SetDelta(delta)
 }
 
-func (x *CNNSpatialNormalizationGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
+func (x *CNNSpatialNormalizationGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode {
+	return &x.inner.MPSNNGradientFilterNode
+}
 
-func (x *CNNSpatialNormalizationGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
+func (x *CNNSpatialNormalizationGradientNode) asNNFilterNode() *raw.MPSNNFilterNode {
+	return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode
+}
 
 // CNNSpatialNormalizationGradientNodeable is the interface implemented by [CNNSpatialNormalizationGradientNode], for mocking and DI.
 type CNNSpatialNormalizationGradientNodeable interface {
@@ -156,4 +162,3 @@ type CNNSpatialNormalizationGradientNodeable interface {
 }
 
 var _ CNNSpatialNormalizationGradientNodeable = (*CNNSpatialNormalizationGradientNode)(nil)
-

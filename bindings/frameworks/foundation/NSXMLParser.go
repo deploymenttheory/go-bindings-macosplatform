@@ -17,29 +17,29 @@ type NSXMLParser struct {
 }
 
 var (
-	_clsNSXMLParser = _objcClass("NSXMLParser")
-	_nSXMLParserSelInitWithContentsOfURL = objc.RegisterName("initWithContentsOfURL:")
-	_nSXMLParserSelInitWithData = objc.RegisterName("initWithData:")
-	_nSXMLParserSelInitWithStream = objc.RegisterName("initWithStream:")
-	_nSXMLParserSelParse = objc.RegisterName("parse")
-	_nSXMLParserSelAbortParsing = objc.RegisterName("abortParsing")
-	_nSXMLParserSelDelegate = objc.RegisterName("delegate")
-	_nSXMLParserSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSXMLParserSelShouldProcessNamespaces = objc.RegisterName("shouldProcessNamespaces")
-	_nSXMLParserSelSetShouldProcessNamespaces = objc.RegisterName("setShouldProcessNamespaces:")
-	_nSXMLParserSelShouldReportNamespacePrefixes = objc.RegisterName("shouldReportNamespacePrefixes")
+	_clsNSXMLParser                                 = _objcClass("NSXMLParser")
+	_nSXMLParserSelInitWithContentsOfURL            = objc.RegisterName("initWithContentsOfURL:")
+	_nSXMLParserSelInitWithData                     = objc.RegisterName("initWithData:")
+	_nSXMLParserSelInitWithStream                   = objc.RegisterName("initWithStream:")
+	_nSXMLParserSelParse                            = objc.RegisterName("parse")
+	_nSXMLParserSelAbortParsing                     = objc.RegisterName("abortParsing")
+	_nSXMLParserSelDelegate                         = objc.RegisterName("delegate")
+	_nSXMLParserSelSetDelegate                      = objc.RegisterName("setDelegate:")
+	_nSXMLParserSelShouldProcessNamespaces          = objc.RegisterName("shouldProcessNamespaces")
+	_nSXMLParserSelSetShouldProcessNamespaces       = objc.RegisterName("setShouldProcessNamespaces:")
+	_nSXMLParserSelShouldReportNamespacePrefixes    = objc.RegisterName("shouldReportNamespacePrefixes")
 	_nSXMLParserSelSetShouldReportNamespacePrefixes = objc.RegisterName("setShouldReportNamespacePrefixes:")
-	_nSXMLParserSelExternalEntityResolvingPolicy = objc.RegisterName("externalEntityResolvingPolicy")
+	_nSXMLParserSelExternalEntityResolvingPolicy    = objc.RegisterName("externalEntityResolvingPolicy")
 	_nSXMLParserSelSetExternalEntityResolvingPolicy = objc.RegisterName("setExternalEntityResolvingPolicy:")
-	_nSXMLParserSelAllowedExternalEntityURLs = objc.RegisterName("allowedExternalEntityURLs")
-	_nSXMLParserSelSetAllowedExternalEntityURLs = objc.RegisterName("setAllowedExternalEntityURLs:")
-	_nSXMLParserSelParserError = objc.RegisterName("parserError")
-	_nSXMLParserSelShouldResolveExternalEntities = objc.RegisterName("shouldResolveExternalEntities")
+	_nSXMLParserSelAllowedExternalEntityURLs        = objc.RegisterName("allowedExternalEntityURLs")
+	_nSXMLParserSelSetAllowedExternalEntityURLs     = objc.RegisterName("setAllowedExternalEntityURLs:")
+	_nSXMLParserSelParserError                      = objc.RegisterName("parserError")
+	_nSXMLParserSelShouldResolveExternalEntities    = objc.RegisterName("shouldResolveExternalEntities")
 	_nSXMLParserSelSetShouldResolveExternalEntities = objc.RegisterName("setShouldResolveExternalEntities:")
-	_nSXMLParserSelPublicID = objc.RegisterName("publicID")
-	_nSXMLParserSelSystemID = objc.RegisterName("systemID")
-	_nSXMLParserSelLineNumber = objc.RegisterName("lineNumber")
-	_nSXMLParserSelColumnNumber = objc.RegisterName("columnNumber")
+	_nSXMLParserSelPublicID                         = objc.RegisterName("publicID")
+	_nSXMLParserSelSystemID                         = objc.RegisterName("systemID")
+	_nSXMLParserSelLineNumber                       = objc.RegisterName("lineNumber")
+	_nSXMLParserSelColumnNumber                     = objc.RegisterName("columnNumber")
 )
 
 func NSXMLParserFromID(id objc.ID) *NSXMLParser {
@@ -54,19 +54,25 @@ func NSXMLParserFromID(id objc.ID) *NSXMLParser {
 
 func (o *NSXMLParser) InitWithContentsOfURL(url *NSURL) *NSXMLParser {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLParserSelInitWithContentsOfURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLParserFromID(_ret)
 }
 
 func (o *NSXMLParser) InitWithData(data *NSData) *NSXMLParser {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLParserSelInitWithData, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLParserFromID(_ret)
 }
 
 func (o *NSXMLParser) InitWithStream(stream *NSInputStream) *NSXMLParser {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLParserSelInitWithStream, stream.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLParserFromID(_ret)
 }
 
@@ -117,7 +123,9 @@ func (o *NSXMLParser) SetExternalEntityResolvingPolicy(externalEntityResolvingPo
 
 func (o *NSXMLParser) AllowedExternalEntityURLs() *NSSet[*NSURL] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLParserSelAllowedExternalEntityURLs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSetFromID[*NSURL](_ret)
 }
 
@@ -141,13 +149,17 @@ func (o *NSXMLParser) SetShouldResolveExternalEntities(shouldResolveExternalEnti
 
 func (o *NSXMLParser) PublicID() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLParserSelPublicID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSXMLParser) SystemID() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLParserSelSystemID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -160,4 +172,3 @@ func (o *NSXMLParser) ColumnNumber() int {
 	_ret := objc.Send[int](o.Ptr(), _nSXMLParserSelColumnNumber)
 	return _ret
 }
-

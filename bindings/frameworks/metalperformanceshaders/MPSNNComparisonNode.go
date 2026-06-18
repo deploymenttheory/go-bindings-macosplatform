@@ -18,8 +18,8 @@ type MPSNNComparisonNode struct {
 }
 
 var (
-	_clsMPSNNComparisonNode = _objcClass("MPSNNComparisonNode")
-	_mPSNNComparisonNodeSelComparisonType = objc.RegisterName("comparisonType")
+	_clsMPSNNComparisonNode                  = _objcClass("MPSNNComparisonNode")
+	_mPSNNComparisonNodeSelComparisonType    = objc.RegisterName("comparisonType")
 	_mPSNNComparisonNodeSelSetComparisonType = objc.RegisterName("setComparisonType:")
 )
 
@@ -42,4 +42,3 @@ func (o *MPSNNComparisonNode) ComparisonType() mpsneuralnetwork.MPSNNComparisonT
 func (o *MPSNNComparisonNode) SetComparisonType(comparisonType mpsneuralnetwork.MPSNNComparisonType) {
 	o.Ptr().Send(_mPSNNComparisonNodeSelSetComparisonType, comparisonType)
 }
-

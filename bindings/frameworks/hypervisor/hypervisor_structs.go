@@ -6,21 +6,20 @@ package hypervisor
 // @abstract Contains details of a vcpu exception.
 // C struct: hv_vcpu_exit_exception_t
 type HvVcpuExitExceptionT struct {
-	Syndrome uint64
-	Virtual_address uint64
+	Syndrome         uint64
+	Virtual_address  uint64
 	Physical_address uint64
 }
 
 // @abstract Contains information about an exit from the vcpu to the host.
 // C struct: hv_vcpu_exit_t
 type HvVcpuExitT struct {
-	Reason Hv_exit_reason_t
+	Reason    Hv_exit_reason_t
 	Exception HvVcpuExitExceptionT
 }
 
 // C struct: hv_vcpu_sme_state_t
 type HvVcpuSmeStateT struct {
 	Streaming_sve_mode_enabled bool
-	Za_storage_enabled bool
+	Za_storage_enabled         bool
 }
-

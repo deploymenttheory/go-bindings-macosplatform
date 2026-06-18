@@ -43,4 +43,3 @@ type PhysicsBehaviorable interface {
 }
 
 var _ PhysicsBehaviorable = (*PhysicsBehavior)(nil)
-

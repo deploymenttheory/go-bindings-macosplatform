@@ -56,9 +56,13 @@ func (x *NNReductionColumnSumNode) WithLabel(label string) *NNReductionColumnSum
 	return x
 }
 
-func (x *NNReductionColumnSumNode) asNNUnaryReductionNode() *mpsneuralnetwork.MPSNNUnaryReductionNode { return &x.inner.MPSNNUnaryReductionNode }
+func (x *NNReductionColumnSumNode) asNNUnaryReductionNode() *mpsneuralnetwork.MPSNNUnaryReductionNode {
+	return &x.inner.MPSNNUnaryReductionNode
+}
 
-func (x *NNReductionColumnSumNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode }
+func (x *NNReductionColumnSumNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode
+}
 
 // NNReductionColumnSumNodeable is the interface implemented by [NNReductionColumnSumNode], for mocking and DI.
 type NNReductionColumnSumNodeable interface {
@@ -69,4 +73,3 @@ type NNReductionColumnSumNodeable interface {
 }
 
 var _ NNReductionColumnSumNodeable = (*NNReductionColumnSumNode)(nil)
-

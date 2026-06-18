@@ -16,8 +16,8 @@ type MTLBinaryArchiveDescriptor struct {
 }
 
 var (
-	_clsMTLBinaryArchiveDescriptor = _objcClass("MTLBinaryArchiveDescriptor")
-	_mTLBinaryArchiveDescriptorSelUrl = objc.RegisterName("url")
+	_clsMTLBinaryArchiveDescriptor       = _objcClass("MTLBinaryArchiveDescriptor")
+	_mTLBinaryArchiveDescriptorSelUrl    = objc.RegisterName("url")
 	_mTLBinaryArchiveDescriptorSelSetUrl = objc.RegisterName("setUrl:")
 )
 
@@ -33,11 +33,12 @@ func MTLBinaryArchiveDescriptorFromID(id objc.ID) *MTLBinaryArchiveDescriptor {
 
 func (o *MTLBinaryArchiveDescriptor) Url() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLBinaryArchiveDescriptorSelUrl)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *MTLBinaryArchiveDescriptor) SetUrl(url *foundation.NSURL) {
 	o.Ptr().Send(_mTLBinaryArchiveDescriptorSelSetUrl, url.Ptr())
 }
-

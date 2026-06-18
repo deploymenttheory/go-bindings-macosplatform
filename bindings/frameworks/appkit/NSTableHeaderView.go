@@ -16,14 +16,14 @@ type NSTableHeaderView struct {
 }
 
 var (
-	_clsNSTableHeaderView = _objcClass("NSTableHeaderView")
+	_clsNSTableHeaderView                   = _objcClass("NSTableHeaderView")
 	_nSTableHeaderViewSelHeaderRectOfColumn = objc.RegisterName("headerRectOfColumn:")
-	_nSTableHeaderViewSelColumnAtPoint = objc.RegisterName("columnAtPoint:")
-	_nSTableHeaderViewSelTableView = objc.RegisterName("tableView")
-	_nSTableHeaderViewSelSetTableView = objc.RegisterName("setTableView:")
-	_nSTableHeaderViewSelDraggedColumn = objc.RegisterName("draggedColumn")
-	_nSTableHeaderViewSelDraggedDistance = objc.RegisterName("draggedDistance")
-	_nSTableHeaderViewSelResizedColumn = objc.RegisterName("resizedColumn")
+	_nSTableHeaderViewSelColumnAtPoint      = objc.RegisterName("columnAtPoint:")
+	_nSTableHeaderViewSelTableView          = objc.RegisterName("tableView")
+	_nSTableHeaderViewSelSetTableView       = objc.RegisterName("setTableView:")
+	_nSTableHeaderViewSelDraggedColumn      = objc.RegisterName("draggedColumn")
+	_nSTableHeaderViewSelDraggedDistance    = objc.RegisterName("draggedDistance")
+	_nSTableHeaderViewSelResizedColumn      = objc.RegisterName("resizedColumn")
 )
 
 func NSTableHeaderViewFromID(id objc.ID) *NSTableHeaderView {
@@ -48,7 +48,9 @@ func (o *NSTableHeaderView) ColumnAtPoint(point corefoundation.CGPoint) int {
 
 func (o *NSTableHeaderView) TableView() *NSTableView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableHeaderViewSelTableView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTableViewFromID(_ret)
 }
 
@@ -70,4 +72,3 @@ func (o *NSTableHeaderView) ResizedColumn() int {
 	_ret := objc.Send[int](o.Ptr(), _nSTableHeaderViewSelResizedColumn)
 	return _ret
 }
-

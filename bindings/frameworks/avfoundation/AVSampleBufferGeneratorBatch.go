@@ -18,9 +18,9 @@ type AVSampleBufferGeneratorBatch struct {
 }
 
 var (
-	_clsAVSampleBufferGeneratorBatch = _objcClass("AVSampleBufferGeneratorBatch")
+	_clsAVSampleBufferGeneratorBatch                                   = _objcClass("AVSampleBufferGeneratorBatch")
 	_aVSampleBufferGeneratorBatchSelMakeDataReadyWithCompletionHandler = objc.RegisterName("makeDataReadyWithCompletionHandler:")
-	_aVSampleBufferGeneratorBatchSelCancel = objc.RegisterName("cancel")
+	_aVSampleBufferGeneratorBatchSelCancel                             = objc.RegisterName("cancel")
 )
 
 func AVSampleBufferGeneratorBatchFromID(id objc.ID) *AVSampleBufferGeneratorBatch {
@@ -49,4 +49,3 @@ func (o *AVSampleBufferGeneratorBatch) MakeDataReadyWithCompletionHandler(comple
 func (o *AVSampleBufferGeneratorBatch) Cancel() {
 	o.Ptr().Send(_aVSampleBufferGeneratorBatchSelCancel)
 }
-

@@ -194,4 +194,3 @@ func MinimumAllowedCPUCount() uint {
 func MaximumAllowedCPUCount() uint {
 	return raw.VZVirtualMachineConfigurationMaximumAllowedCPUCount()
 }
-

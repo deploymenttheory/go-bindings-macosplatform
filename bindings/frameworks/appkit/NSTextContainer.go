@@ -17,36 +17,36 @@ type NSTextContainer struct {
 }
 
 var (
-	_clsNSTextContainer = _objcClass("NSTextContainer")
-	_nSTextContainerSelInitWithSize = objc.RegisterName("initWithSize:")
-	_nSTextContainerSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSTextContainerSelLineFragmentRectForProposedRectAtIndexWritingDirectionRemainingRect = objc.RegisterName("lineFragmentRectForProposedRect:atIndex:writingDirection:remainingRect:")
-	_nSTextContainerSelTextLayoutManager = objc.RegisterName("textLayoutManager")
-	_nSTextContainerSelSize = objc.RegisterName("size")
-	_nSTextContainerSelSetSize = objc.RegisterName("setSize:")
-	_nSTextContainerSelLineBreakMode = objc.RegisterName("lineBreakMode")
-	_nSTextContainerSelSetLineBreakMode = objc.RegisterName("setLineBreakMode:")
-	_nSTextContainerSelLineFragmentPadding = objc.RegisterName("lineFragmentPadding")
-	_nSTextContainerSelSetLineFragmentPadding = objc.RegisterName("setLineFragmentPadding:")
-	_nSTextContainerSelMaximumNumberOfLines = objc.RegisterName("maximumNumberOfLines")
-	_nSTextContainerSelSetMaximumNumberOfLines = objc.RegisterName("setMaximumNumberOfLines:")
-	_nSTextContainerSelIsSimpleRectangularTextContainer = objc.RegisterName("isSimpleRectangularTextContainer")
-	_nSTextContainerSelWidthTracksTextView = objc.RegisterName("widthTracksTextView")
-	_nSTextContainerSelSetWidthTracksTextView = objc.RegisterName("setWidthTracksTextView:")
-	_nSTextContainerSelHeightTracksTextView = objc.RegisterName("heightTracksTextView")
-	_nSTextContainerSelSetHeightTracksTextView = objc.RegisterName("setHeightTracksTextView:")
-	_nSTextContainerSelLayoutManager = objc.RegisterName("layoutManager")
-	_nSTextContainerSelSetLayoutManager = objc.RegisterName("setLayoutManager:")
-	_nSTextContainerSelReplaceLayoutManager = objc.RegisterName("replaceLayoutManager:")
-	_nSTextContainerSelExclusionPaths = objc.RegisterName("exclusionPaths")
-	_nSTextContainerSelSetExclusionPaths = objc.RegisterName("setExclusionPaths:")
-	_nSTextContainerSelTextView = objc.RegisterName("textView")
-	_nSTextContainerSelSetTextView = objc.RegisterName("setTextView:")
-	_nSTextContainerSelInitWithContainerSize = objc.RegisterName("initWithContainerSize:")
+	_clsNSTextContainer                                                                            = _objcClass("NSTextContainer")
+	_nSTextContainerSelInitWithSize                                                                = objc.RegisterName("initWithSize:")
+	_nSTextContainerSelInitWithCoder                                                               = objc.RegisterName("initWithCoder:")
+	_nSTextContainerSelLineFragmentRectForProposedRectAtIndexWritingDirectionRemainingRect         = objc.RegisterName("lineFragmentRectForProposedRect:atIndex:writingDirection:remainingRect:")
+	_nSTextContainerSelTextLayoutManager                                                           = objc.RegisterName("textLayoutManager")
+	_nSTextContainerSelSize                                                                        = objc.RegisterName("size")
+	_nSTextContainerSelSetSize                                                                     = objc.RegisterName("setSize:")
+	_nSTextContainerSelLineBreakMode                                                               = objc.RegisterName("lineBreakMode")
+	_nSTextContainerSelSetLineBreakMode                                                            = objc.RegisterName("setLineBreakMode:")
+	_nSTextContainerSelLineFragmentPadding                                                         = objc.RegisterName("lineFragmentPadding")
+	_nSTextContainerSelSetLineFragmentPadding                                                      = objc.RegisterName("setLineFragmentPadding:")
+	_nSTextContainerSelMaximumNumberOfLines                                                        = objc.RegisterName("maximumNumberOfLines")
+	_nSTextContainerSelSetMaximumNumberOfLines                                                     = objc.RegisterName("setMaximumNumberOfLines:")
+	_nSTextContainerSelIsSimpleRectangularTextContainer                                            = objc.RegisterName("isSimpleRectangularTextContainer")
+	_nSTextContainerSelWidthTracksTextView                                                         = objc.RegisterName("widthTracksTextView")
+	_nSTextContainerSelSetWidthTracksTextView                                                      = objc.RegisterName("setWidthTracksTextView:")
+	_nSTextContainerSelHeightTracksTextView                                                        = objc.RegisterName("heightTracksTextView")
+	_nSTextContainerSelSetHeightTracksTextView                                                     = objc.RegisterName("setHeightTracksTextView:")
+	_nSTextContainerSelLayoutManager                                                               = objc.RegisterName("layoutManager")
+	_nSTextContainerSelSetLayoutManager                                                            = objc.RegisterName("setLayoutManager:")
+	_nSTextContainerSelReplaceLayoutManager                                                        = objc.RegisterName("replaceLayoutManager:")
+	_nSTextContainerSelExclusionPaths                                                              = objc.RegisterName("exclusionPaths")
+	_nSTextContainerSelSetExclusionPaths                                                           = objc.RegisterName("setExclusionPaths:")
+	_nSTextContainerSelTextView                                                                    = objc.RegisterName("textView")
+	_nSTextContainerSelSetTextView                                                                 = objc.RegisterName("setTextView:")
+	_nSTextContainerSelInitWithContainerSize                                                       = objc.RegisterName("initWithContainerSize:")
 	_nSTextContainerSelLineFragmentRectForProposedRectSweepDirectionMovementDirectionRemainingRect = objc.RegisterName("lineFragmentRectForProposedRect:sweepDirection:movementDirection:remainingRect:")
-	_nSTextContainerSelContainsPoint = objc.RegisterName("containsPoint:")
-	_nSTextContainerSelContainerSize = objc.RegisterName("containerSize")
-	_nSTextContainerSelSetContainerSize = objc.RegisterName("setContainerSize:")
+	_nSTextContainerSelContainsPoint                                                               = objc.RegisterName("containsPoint:")
+	_nSTextContainerSelContainerSize                                                               = objc.RegisterName("containerSize")
+	_nSTextContainerSelSetContainerSize                                                            = objc.RegisterName("setContainerSize:")
 )
 
 func NSTextContainerFromID(id objc.ID) *NSTextContainer {
@@ -61,13 +61,17 @@ func NSTextContainerFromID(id objc.ID) *NSTextContainer {
 
 func (o *NSTextContainer) InitWithSize(size corefoundation.CGSize) *NSTextContainer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContainerSelInitWithSize, size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextContainerFromID(_ret)
 }
 
 func (o *NSTextContainer) InitWithCoder(coder *foundation.NSCoder) *NSTextContainer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContainerSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextContainerFromID(_ret)
 }
 
@@ -78,7 +82,9 @@ func (o *NSTextContainer) LineFragmentRectForProposedRectAtIndexWritingDirection
 
 func (o *NSTextContainer) TextLayoutManager() *NSTextLayoutManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContainerSelTextLayoutManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextLayoutManagerFromID(_ret)
 }
 
@@ -143,7 +149,9 @@ func (o *NSTextContainer) SetHeightTracksTextView(heightTracksTextView bool) {
 
 func (o *NSTextContainer) LayoutManager() *NSLayoutManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContainerSelLayoutManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutManagerFromID(_ret)
 }
 
@@ -157,7 +165,9 @@ func (o *NSTextContainer) ReplaceLayoutManager(newLayoutManager *NSLayoutManager
 
 func (o *NSTextContainer) ExclusionPaths() *foundation.NSArray[*NSBezierPath] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContainerSelExclusionPaths)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSBezierPath](_ret)
 }
 
@@ -167,7 +177,9 @@ func (o *NSTextContainer) SetExclusionPaths(exclusionPaths *foundation.NSArray[*
 
 func (o *NSTextContainer) TextView() *NSTextView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContainerSelTextView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextViewFromID(_ret)
 }
 
@@ -177,7 +189,9 @@ func (o *NSTextContainer) SetTextView(textView *NSTextView) {
 
 func (o *NSTextContainer) InitWithContainerSize(aContainerSize corefoundation.CGSize) *NSTextContainer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContainerSelInitWithContainerSize, aContainerSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextContainerFromID(_ret)
 }
 
@@ -200,4 +214,3 @@ func (o *NSTextContainer) ContainerSize() corefoundation.CGSize {
 func (o *NSTextContainer) SetContainerSize(containerSize corefoundation.CGSize) {
 	o.Ptr().Send(_nSTextContainerSelSetContainerSize, containerSize)
 }
-

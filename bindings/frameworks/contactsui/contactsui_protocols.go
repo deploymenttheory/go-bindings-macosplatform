@@ -10,4 +10,3 @@ type CNContactPickerDelegate interface {
 // CNKeyDescriptor wraps the ObjC protocol CNKeyDescriptor.
 type CNKeyDescriptor interface {
 }
-

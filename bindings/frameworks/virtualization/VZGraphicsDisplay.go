@@ -19,12 +19,12 @@ type VZGraphicsDisplay struct {
 }
 
 var (
-	_clsVZGraphicsDisplay = _objcClass("VZGraphicsDisplay")
-	_vZGraphicsDisplaySelReconfigureWithSizeInPixelsError = objc.RegisterName("reconfigureWithSizeInPixels:error:")
+	_clsVZGraphicsDisplay                                  = _objcClass("VZGraphicsDisplay")
+	_vZGraphicsDisplaySelReconfigureWithSizeInPixelsError  = objc.RegisterName("reconfigureWithSizeInPixels:error:")
 	_vZGraphicsDisplaySelReconfigureWithConfigurationError = objc.RegisterName("reconfigureWithConfiguration:error:")
-	_vZGraphicsDisplaySelAddObserver = objc.RegisterName("addObserver:")
-	_vZGraphicsDisplaySelRemoveObserver = objc.RegisterName("removeObserver:")
-	_vZGraphicsDisplaySelSizeInPixels = objc.RegisterName("sizeInPixels")
+	_vZGraphicsDisplaySelAddObserver                       = objc.RegisterName("addObserver:")
+	_vZGraphicsDisplaySelRemoveObserver                    = objc.RegisterName("removeObserver:")
+	_vZGraphicsDisplaySelSizeInPixels                      = objc.RegisterName("sizeInPixels")
 )
 
 func VZGraphicsDisplayFromID(id objc.ID) *VZGraphicsDisplay {
@@ -72,4 +72,3 @@ func (o *VZGraphicsDisplay) SizeInPixels() corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _vZGraphicsDisplaySelSizeInPixels)
 	return _ret
 }
-

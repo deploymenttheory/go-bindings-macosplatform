@@ -26,4 +26,3 @@ func VZPlatformConfigurationFromID(id objc.ID) *VZPlatformConfiguration {
 	purego.Track(o)
 	return o
 }
-

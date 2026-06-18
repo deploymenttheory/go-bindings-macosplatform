@@ -36,4 +36,3 @@ func KSKEndTermChars() objc.ID { return purego.CFConstant(raw.KSKEndTermChars())
 
 // KSKLanguageTypes returns the value of the CoreFoundation reference constant kSKLanguageTypes as an objc.ID.
 func KSKLanguageTypes() objc.ID { return purego.CFConstant(raw.KSKLanguageTypes()) }
-

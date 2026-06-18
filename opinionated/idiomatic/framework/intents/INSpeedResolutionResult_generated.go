@@ -35,7 +35,9 @@ func NewSpeedResolutionResult() *SpeedResolutionResult {
 	return &SpeedResolutionResult{inner: raw.INSpeedResolutionResultFromID(_id)}
 }
 
-func (x *SpeedResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
+func (x *SpeedResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
+	return &x.inner.INIntentResolutionResult
+}
 
 // SpeedResolutionResultable is the interface implemented by [SpeedResolutionResult], for mocking and DI.
 type SpeedResolutionResultable interface {
@@ -43,4 +45,3 @@ type SpeedResolutionResultable interface {
 }
 
 var _ SpeedResolutionResultable = (*SpeedResolutionResult)(nil)
-

@@ -1218,11 +1218,17 @@ func (x *MTRBaseClusterBasic) SubscribeAttributeClusterRevisionWithMinIntervalMa
 	}
 }
 
-func (x *MTRBaseClusterBasic) asMTRBaseClusterBasicInformation() *raw.MTRBaseClusterBasicInformation { return &x.inner.MTRBaseClusterBasicInformation }
+func (x *MTRBaseClusterBasic) asMTRBaseClusterBasicInformation() *raw.MTRBaseClusterBasicInformation {
+	return &x.inner.MTRBaseClusterBasicInformation
+}
 
-func (x *MTRBaseClusterBasic) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRBaseClusterBasicInformation.MTRGenericBaseCluster }
+func (x *MTRBaseClusterBasic) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRBaseClusterBasicInformation.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterBasic) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRBaseClusterBasicInformation.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterBasic) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRBaseClusterBasicInformation.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterBasicable is the interface implemented by [MTRBaseClusterBasic], for mocking and DI.
 type MTRBaseClusterBasicable interface {
@@ -1288,4 +1294,3 @@ type MTRBaseClusterBasicable interface {
 }
 
 var _ MTRBaseClusterBasicable = (*MTRBaseClusterBasic)(nil)
-

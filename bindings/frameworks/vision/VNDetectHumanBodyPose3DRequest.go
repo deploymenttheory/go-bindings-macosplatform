@@ -18,10 +18,10 @@ type VNDetectHumanBodyPose3DRequest struct {
 }
 
 var (
-	_clsVNDetectHumanBodyPose3DRequest = _objcClass("VNDetectHumanBodyPose3DRequest")
-	_vNDetectHumanBodyPose3DRequestSelInit = objc.RegisterName("init")
-	_vNDetectHumanBodyPose3DRequestSelInitWithCompletionHandler = objc.RegisterName("initWithCompletionHandler:")
-	_vNDetectHumanBodyPose3DRequestSelSupportedJointNamesAndReturnError = objc.RegisterName("supportedJointNamesAndReturnError:")
+	_clsVNDetectHumanBodyPose3DRequest                                        = _objcClass("VNDetectHumanBodyPose3DRequest")
+	_vNDetectHumanBodyPose3DRequestSelInit                                    = objc.RegisterName("init")
+	_vNDetectHumanBodyPose3DRequestSelInitWithCompletionHandler               = objc.RegisterName("initWithCompletionHandler:")
+	_vNDetectHumanBodyPose3DRequestSelSupportedJointNamesAndReturnError       = objc.RegisterName("supportedJointNamesAndReturnError:")
 	_vNDetectHumanBodyPose3DRequestSelSupportedJointsGroupNamesAndReturnError = objc.RegisterName("supportedJointsGroupNamesAndReturnError:")
 )
 
@@ -38,7 +38,9 @@ func VNDetectHumanBodyPose3DRequestFromID(id objc.ID) *VNDetectHumanBodyPose3DRe
 // @brief Creates a new VNDetectHumanBodyPose3DRequest with no completion handler.
 func (o *VNDetectHumanBodyPose3DRequest) Init() *VNDetectHumanBodyPose3DRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNDetectHumanBodyPose3DRequestSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNDetectHumanBodyPose3DRequestFromID(_ret)
 }
 
@@ -55,7 +57,9 @@ func (o *VNDetectHumanBodyPose3DRequest) InitWithCompletionHandler(completionHan
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNDetectHumanBodyPose3DRequestSelInitWithCompletionHandler, __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNDetectHumanBodyPose3DRequestFromID(_ret)
 }
 
@@ -78,4 +82,3 @@ func (o *VNDetectHumanBodyPose3DRequest) SupportedJointsGroupNamesAndReturnError
 	}
 	return _ret, nil
 }
-

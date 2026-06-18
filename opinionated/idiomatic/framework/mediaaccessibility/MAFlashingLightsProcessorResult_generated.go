@@ -59,4 +59,3 @@ type FlashingLightsProcessorResultable interface {
 }
 
 var _ FlashingLightsProcessorResultable = (*FlashingLightsProcessorResult)(nil)
-

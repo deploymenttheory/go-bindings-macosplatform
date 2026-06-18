@@ -16,11 +16,11 @@ type MKPointOfInterestFilter struct {
 }
 
 var (
-	_clsMKPointOfInterestFilter = _objcClass("MKPointOfInterestFilter")
-	_mKPointOfInterestFilterSelInitIncludingCategories = objc.RegisterName("initIncludingCategories:")
-	_mKPointOfInterestFilterSelInitExcludingCategories = objc.RegisterName("initExcludingCategories:")
-	_mKPointOfInterestFilterSelIncludesCategory = objc.RegisterName("includesCategory:")
-	_mKPointOfInterestFilterSelExcludesCategory = objc.RegisterName("excludesCategory:")
+	_clsMKPointOfInterestFilter                             = _objcClass("MKPointOfInterestFilter")
+	_mKPointOfInterestFilterSelInitIncludingCategories      = objc.RegisterName("initIncludingCategories:")
+	_mKPointOfInterestFilterSelInitExcludingCategories      = objc.RegisterName("initExcludingCategories:")
+	_mKPointOfInterestFilterSelIncludesCategory             = objc.RegisterName("includesCategory:")
+	_mKPointOfInterestFilterSelExcludesCategory             = objc.RegisterName("excludesCategory:")
 	_mKPointOfInterestFilterSelFilterIncludingAllCategories = objc.RegisterName("filterIncludingAllCategories")
 	_mKPointOfInterestFilterSelFilterExcludingAllCategories = objc.RegisterName("filterExcludingAllCategories")
 )
@@ -37,13 +37,17 @@ func MKPointOfInterestFilterFromID(id objc.ID) *MKPointOfInterestFilter {
 
 func (o *MKPointOfInterestFilter) InitIncludingCategories(categories *foundation.NSArray[*foundation.NSString]) *MKPointOfInterestFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKPointOfInterestFilterSelInitIncludingCategories, categories)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPointOfInterestFilterFromID(_ret)
 }
 
 func (o *MKPointOfInterestFilter) InitExcludingCategories(categories *foundation.NSArray[*foundation.NSString]) *MKPointOfInterestFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKPointOfInterestFilterSelInitExcludingCategories, categories)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPointOfInterestFilterFromID(_ret)
 }
 
@@ -59,13 +63,16 @@ func (o *MKPointOfInterestFilter) ExcludesCategory(category *foundation.NSString
 
 func MKPointOfInterestFilterFilterIncludingAllCategories() *MKPointOfInterestFilter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKPointOfInterestFilter), _mKPointOfInterestFilterSelFilterIncludingAllCategories)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPointOfInterestFilterFromID(_ret)
 }
 
 func MKPointOfInterestFilterFilterExcludingAllCategories() *MKPointOfInterestFilter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKPointOfInterestFilter), _mKPointOfInterestFilterSelFilterExcludingAllCategories)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPointOfInterestFilterFromID(_ret)
 }
-

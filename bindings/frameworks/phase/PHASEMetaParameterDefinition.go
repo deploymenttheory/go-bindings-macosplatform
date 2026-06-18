@@ -15,7 +15,7 @@ type PHASEMetaParameterDefinition struct {
 }
 
 var (
-	_clsPHASEMetaParameterDefinition = _objcClass("PHASEMetaParameterDefinition")
+	_clsPHASEMetaParameterDefinition      = _objcClass("PHASEMetaParameterDefinition")
 	_pHASEMetaParameterDefinitionSelValue = objc.RegisterName("value")
 )
 
@@ -33,4 +33,3 @@ func (o *PHASEMetaParameterDefinition) Value() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEMetaParameterDefinitionSelValue)
 	return _ret
 }
-

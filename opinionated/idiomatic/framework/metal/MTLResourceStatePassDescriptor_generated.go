@@ -51,4 +51,3 @@ type ResourceStatePassDescriptorable interface {
 }
 
 var _ ResourceStatePassDescriptorable = (*ResourceStatePassDescriptor)(nil)
-

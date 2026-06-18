@@ -41,4 +41,3 @@ type IndexExtensionRequestHandlerable interface {
 }
 
 var _ IndexExtensionRequestHandlerable = (*IndexExtensionRequestHandler)(nil)
-

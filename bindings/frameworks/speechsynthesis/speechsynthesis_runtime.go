@@ -14,8 +14,8 @@ import (
 
 var (
 	_speechsynthesisLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce           sync.Once
+	_failedSymbols      = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -54,10 +54,16 @@ func _loadLibrary() {
 	_register("CountVoices", func() { purego.RegisterLibFunc(&_fnCountVoices, _speechsynthesisLib, "CountVoices") })
 	_register("DisposeSpeechChannel", func() { purego.RegisterLibFunc(&_fnDisposeSpeechChannel, _speechsynthesisLib, "DisposeSpeechChannel") })
 	_register("DisposeSpeechDoneUPP", func() { purego.RegisterLibFunc(&_fnDisposeSpeechDoneUPP, _speechsynthesisLib, "DisposeSpeechDoneUPP") })
-	_register("DisposeSpeechErrorUPP", func() { purego.RegisterLibFunc(&_fnDisposeSpeechErrorUPP, _speechsynthesisLib, "DisposeSpeechErrorUPP") })
-	_register("DisposeSpeechPhonemeUPP", func() { purego.RegisterLibFunc(&_fnDisposeSpeechPhonemeUPP, _speechsynthesisLib, "DisposeSpeechPhonemeUPP") })
+	_register("DisposeSpeechErrorUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeSpeechErrorUPP, _speechsynthesisLib, "DisposeSpeechErrorUPP")
+	})
+	_register("DisposeSpeechPhonemeUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeSpeechPhonemeUPP, _speechsynthesisLib, "DisposeSpeechPhonemeUPP")
+	})
 	_register("DisposeSpeechSyncUPP", func() { purego.RegisterLibFunc(&_fnDisposeSpeechSyncUPP, _speechsynthesisLib, "DisposeSpeechSyncUPP") })
-	_register("DisposeSpeechTextDoneUPP", func() { purego.RegisterLibFunc(&_fnDisposeSpeechTextDoneUPP, _speechsynthesisLib, "DisposeSpeechTextDoneUPP") })
+	_register("DisposeSpeechTextDoneUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeSpeechTextDoneUPP, _speechsynthesisLib, "DisposeSpeechTextDoneUPP")
+	})
 	_register("DisposeSpeechWordUPP", func() { purego.RegisterLibFunc(&_fnDisposeSpeechWordUPP, _speechsynthesisLib, "DisposeSpeechWordUPP") })
 	_register("GetIndVoice", func() { purego.RegisterLibFunc(&_fnGetIndVoice, _speechsynthesisLib, "GetIndVoice") })
 	_register("GetSpeechInfo", func() { purego.RegisterLibFunc(&_fnGetSpeechInfo, _speechsynthesisLib, "GetSpeechInfo") })
@@ -67,9 +73,13 @@ func _loadLibrary() {
 	_register("GetVoiceInfo", func() { purego.RegisterLibFunc(&_fnGetVoiceInfo, _speechsynthesisLib, "GetVoiceInfo") })
 	_register("InvokeSpeechDoneUPP", func() { purego.RegisterLibFunc(&_fnInvokeSpeechDoneUPP, _speechsynthesisLib, "InvokeSpeechDoneUPP") })
 	_register("InvokeSpeechErrorUPP", func() { purego.RegisterLibFunc(&_fnInvokeSpeechErrorUPP, _speechsynthesisLib, "InvokeSpeechErrorUPP") })
-	_register("InvokeSpeechPhonemeUPP", func() { purego.RegisterLibFunc(&_fnInvokeSpeechPhonemeUPP, _speechsynthesisLib, "InvokeSpeechPhonemeUPP") })
+	_register("InvokeSpeechPhonemeUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeSpeechPhonemeUPP, _speechsynthesisLib, "InvokeSpeechPhonemeUPP")
+	})
 	_register("InvokeSpeechSyncUPP", func() { purego.RegisterLibFunc(&_fnInvokeSpeechSyncUPP, _speechsynthesisLib, "InvokeSpeechSyncUPP") })
-	_register("InvokeSpeechTextDoneUPP", func() { purego.RegisterLibFunc(&_fnInvokeSpeechTextDoneUPP, _speechsynthesisLib, "InvokeSpeechTextDoneUPP") })
+	_register("InvokeSpeechTextDoneUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeSpeechTextDoneUPP, _speechsynthesisLib, "InvokeSpeechTextDoneUPP")
+	})
 	_register("InvokeSpeechWordUPP", func() { purego.RegisterLibFunc(&_fnInvokeSpeechWordUPP, _speechsynthesisLib, "InvokeSpeechWordUPP") })
 	_register("MakeVoiceSpec", func() { purego.RegisterLibFunc(&_fnMakeVoiceSpec, _speechsynthesisLib, "MakeVoiceSpec") })
 	_register("NewSpeechChannel", func() { purego.RegisterLibFunc(&_fnNewSpeechChannel, _speechsynthesisLib, "NewSpeechChannel") })
@@ -91,8 +101,12 @@ func _loadLibrary() {
 	_register("SpeechBusy", func() { purego.RegisterLibFunc(&_fnSpeechBusy, _speechsynthesisLib, "SpeechBusy") })
 	_register("SpeechBusySystemWide", func() { purego.RegisterLibFunc(&_fnSpeechBusySystemWide, _speechsynthesisLib, "SpeechBusySystemWide") })
 	_register("SpeechManagerVersion", func() { purego.RegisterLibFunc(&_fnSpeechManagerVersion, _speechsynthesisLib, "SpeechManagerVersion") })
-	_register("SpeechSynthesisRegisterModuleURL", func() { purego.RegisterLibFunc(&_fnSpeechSynthesisRegisterModuleURL, _speechsynthesisLib, "SpeechSynthesisRegisterModuleURL") })
-	_register("SpeechSynthesisUnregisterModuleURL", func() { purego.RegisterLibFunc(&_fnSpeechSynthesisUnregisterModuleURL, _speechsynthesisLib, "SpeechSynthesisUnregisterModuleURL") })
+	_register("SpeechSynthesisRegisterModuleURL", func() {
+		purego.RegisterLibFunc(&_fnSpeechSynthesisRegisterModuleURL, _speechsynthesisLib, "SpeechSynthesisRegisterModuleURL")
+	})
+	_register("SpeechSynthesisUnregisterModuleURL", func() {
+		purego.RegisterLibFunc(&_fnSpeechSynthesisUnregisterModuleURL, _speechsynthesisLib, "SpeechSynthesisUnregisterModuleURL")
+	})
 	_register("StopSpeech", func() { purego.RegisterLibFunc(&_fnStopSpeech, _speechsynthesisLib, "StopSpeech") })
 	_register("StopSpeechAt", func() { purego.RegisterLibFunc(&_fnStopSpeechAt, _speechsynthesisLib, "StopSpeechAt") })
 	_register("TextToPhonemes", func() { purego.RegisterLibFunc(&_fnTextToPhonemes, _speechsynthesisLib, "TextToPhonemes") })

@@ -68,4 +68,3 @@ type MapSnapshotterable interface {
 }
 
 var _ MapSnapshotterable = (*MapSnapshotter)(nil)
-

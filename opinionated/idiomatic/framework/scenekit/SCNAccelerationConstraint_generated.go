@@ -140,4 +140,3 @@ type AccelerationConstraintable interface {
 }
 
 var _ AccelerationConstraintable = (*AccelerationConstraint)(nil)
-

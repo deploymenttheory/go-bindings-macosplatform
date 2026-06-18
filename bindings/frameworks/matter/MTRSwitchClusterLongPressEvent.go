@@ -16,7 +16,7 @@ type MTRSwitchClusterLongPressEvent struct {
 }
 
 var (
-	_clsMTRSwitchClusterLongPressEvent = _objcClass("MTRSwitchClusterLongPressEvent")
+	_clsMTRSwitchClusterLongPressEvent               = _objcClass("MTRSwitchClusterLongPressEvent")
 	_mTRSwitchClusterLongPressEventSelGetNewPosition = objc.RegisterName("getNewPosition")
 	_mTRSwitchClusterLongPressEventSelSetNewPosition = objc.RegisterName("setNewPosition:")
 )
@@ -33,11 +33,12 @@ func MTRSwitchClusterLongPressEventFromID(id objc.ID) *MTRSwitchClusterLongPress
 
 func (o *MTRSwitchClusterLongPressEvent) GetNewPosition() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSwitchClusterLongPressEventSelGetNewPosition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRSwitchClusterLongPressEvent) SetNewPosition(newPosition *foundation.NSNumber) {
 	o.Ptr().Send(_mTRSwitchClusterLongPressEventSelSetNewPosition, newPosition.Ptr())
 }
-

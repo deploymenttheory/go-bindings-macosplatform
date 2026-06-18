@@ -9,7 +9,7 @@ import (
 
 type IOAddressSegment struct {
 	Address uint64
-	Length uint64
+	Length  uint64
 }
 
 // IOBufferMemoryDescriptor_IVars is an opaque type.
@@ -36,7 +36,7 @@ type IOCommand_IVars struct{}
 type IOCommand_LocalIVars struct{}
 
 type IODMACommandSpecification struct {
-	Options uint64
+	Options        uint64
 	MaxAddressBits uint64
 }
 
@@ -66,9 +66,9 @@ type IODispatchSource_LocalIVars struct{}
 
 type IOHistogramReportValues struct {
 	Bucket_hits uint64
-	Bucket_min int64
-	Bucket_max int64
-	Bucket_sum int64
+	Bucket_min  int64
+	Bucket_max  int64
+	Bucket_sum  int64
 }
 
 // IOHistogramReporter_IVars is an opaque type.
@@ -78,14 +78,14 @@ type IOHistogramReporter_IVars struct{}
 type IOHistogramReporter_LocalIVars struct{}
 
 type IOHistogramSegmentConfig struct {
-	Base_bucket_width uint32
-	Scale_flag uint32
-	Segment_idx uint32
+	Base_bucket_width    uint32
+	Scale_flag           uint32
+	Segment_idx          uint32
 	Segment_bucket_count uint32
 }
 
 type IOInterruptDispatchSourcePayload struct {
-	Time uint64
+	Time  uint64
 	Count uint64
 }
 
@@ -112,50 +112,50 @@ type IOMemoryMap_LocalIVars struct{}
 
 type IONamedValue struct {
 	Value int
-	Name string
+	Name  string
 }
 
 type IONormDistReportValues struct {
-	Samples uint64
-	Mean uint64
+	Samples  uint64
+	Mean     uint64
 	Variance uint64
 	Reserved uint64
 }
 
 type IOPhysicalRange struct {
 	Address uint64
-	Length uint64
+	Length  uint64
 }
 
 type IORPC struct {
-	Message *IORPCMessageMach
-	Reply *IORPCMessageMach
-	SendSize uint32
+	Message   *IORPCMessageMach
+	Reply     *IORPCMessageMach
+	SendSize  uint32
 	ReplySize uint32
 }
 
 type IORPCMessage struct {
-	Msgid uint64
-	Flags uint64
+	Msgid      uint64
+	Flags      uint64
 	ObjectRefs uint64
-	Objects [0]uint64
+	Objects    [0]uint64
 }
 
 type IORPCMessageErrorReturn struct {
-	Mach IORPCMessageMach
+	Mach    IORPCMessageMach
 	Content IORPCMessageErrorReturnContent
 }
 
 type IORPCMessageErrorReturnContent struct {
-	Hdr IORPCMessage
+	Hdr    IORPCMessage
 	Result int
-	Pad uint32
+	Pad    uint32
 }
 
 type IORPCMessageMach struct {
-	Msgh unsafe.Pointer
+	Msgh      unsafe.Pointer
 	Msgh_body unsafe.Pointer
-	Objects [0]unsafe.Pointer
+	Objects   [0]unsafe.Pointer
 }
 
 // IORWLock is an opaque type.
@@ -168,29 +168,29 @@ type IORecursiveConditionLock struct{}
 type IORecursiveLock struct{}
 
 type IOReportChannel struct {
-	Channel_id uint64
+	Channel_id   uint64
 	Channel_type IOReportChannelType
 }
 
 type IOReportChannelList struct {
 	Nchannels uint32
-	Channels []IOReportChannel
+	Channels  []IOReportChannel
 }
 
 type IOReportChannelType struct {
 	Report_format uint8
-	Reserved uint8
-	Categories uint16
-	Nelements uint16
-	Element_idx int16
+	Reserved      uint8
+	Categories    uint16
+	Nelements     uint16
+	Element_idx   int16
 }
 
 type IOReportElement struct {
-	Provider_id uint64
-	Channel_id uint64
+	Provider_id  uint64
+	Channel_id   uint64
 	Channel_type IOReportChannelType
-	Timestamp uint64
-	Values IOReportElementValues
+	Timestamp    uint64
+	Values       IOReportElementValues
 }
 
 type IOReportElementValues struct {
@@ -199,12 +199,12 @@ type IOReportElementValues struct {
 
 type IOReportInterest struct {
 	Provider_id uint64
-	Channel IOReportChannel
+	Channel     IOReportChannel
 }
 
 type IOReportInterestList struct {
 	Ninterests uint32
-	Interests []IOReportInterest
+	Interests  []IOReportInterest
 }
 
 // IOReportLegend_IVars is an opaque type.
@@ -243,9 +243,9 @@ type IOSimpleArrayReportValues struct {
 
 type IOSimpleReportValues struct {
 	Simple_value int64
-	Reserved1 uint64
-	Reserved2 uint64
-	Reserved3 uint64
+	Reserved1    uint64
+	Reserved2    uint64
+	Reserved3    uint64
 }
 
 // IOSimpleReporter_IVars is an opaque type.
@@ -255,9 +255,9 @@ type IOSimpleReporter_IVars struct{}
 type IOSimpleReporter_LocalIVars struct{}
 
 type IOStateReportValues struct {
-	State_id uint64
-	Intransitions uint64
-	Upticks uint64
+	State_id          uint64
+	Intransitions     uint64
+	Upticks           uint64
 	Last_intransition uint64
 }
 
@@ -274,26 +274,26 @@ type IOTimerDispatchSource_IVars struct{}
 type IOTimerDispatchSource_LocalIVars struct{}
 
 type IOUserClientMethodArguments struct {
-	Version uint64
-	Selector uint64
-	Completion *int32
-	ScalarInput *uint64
-	ScalarInputCount uint32
-	StructureInput *int32
-	StructureInputDescriptor *int32
-	ScalarOutput *uint64
-	ScalarOutputCount uint32
-	StructureOutput *int32
-	StructureOutputDescriptor *int32
+	Version                    uint64
+	Selector                   uint64
+	Completion                 *int32
+	ScalarInput                *uint64
+	ScalarInputCount           uint32
+	StructureInput             *int32
+	StructureInputDescriptor   *int32
+	ScalarOutput               *uint64
+	ScalarOutputCount          uint32
+	StructureOutput            *int32
+	StructureOutputDescriptor  *int32
 	StructureOutputMaximumSize uint64
 }
 
 type IOUserClientMethodDispatch struct {
-	Function unsafe.Pointer
-	CheckCompletionExists uint32
-	CheckScalarInputCount uint32
-	CheckStructureInputSize uint32
-	CheckScalarOutputCount uint32
+	Function                 unsafe.Pointer
+	CheckCompletionExists    uint32
+	CheckScalarInputCount    uint32
+	CheckStructureInputSize  uint32
+	CheckScalarOutputCount   uint32
 	CheckStructureOutputSize uint32
 }
 
@@ -305,7 +305,7 @@ type IOUserClient_LocalIVars struct{}
 
 type IOVirtualRange struct {
 	Address uint64
-	Length uint64
+	Length  uint64
 }
 
 // OSActionWaitToken is an opaque type.
@@ -342,36 +342,36 @@ type OSBundle_IVars struct{}
 type OSBundle_LocalIVars struct{}
 
 type OSClassDescription struct {
-	DescriptionSize uint32
-	Name [96]int8
-	SuperName [96]int8
-	MethodOptionsSize uint32
-	MethodOptionsOffset uint32
-	MetaMethodOptionsSize uint32
+	DescriptionSize         uint32
+	Name                    [96]int8
+	SuperName               [96]int8
+	MethodOptionsSize       uint32
+	MethodOptionsOffset     uint32
+	MetaMethodOptionsSize   uint32
 	MetaMethodOptionsOffset uint32
-	QueueNamesSize uint32
-	QueueNamesOffset uint32
-	MethodNamesSize uint32
-	MethodNamesOffset uint32
-	MetaMethodNamesSize uint32
-	MetaMethodNamesOffset uint32
-	Flags uint64
-	Resv1 [8]uint64
-	MethodOptions [0]uint64
-	MetaMethodOptions [0]uint64
-	DispatchNames [0]int8
-	MethodNames [0]int8
-	MetaMethodNames [0]int8
+	QueueNamesSize          uint32
+	QueueNamesOffset        uint32
+	MethodNamesSize         uint32
+	MethodNamesOffset       uint32
+	MetaMethodNamesSize     uint32
+	MetaMethodNamesOffset   uint32
+	Flags                   uint64
+	Resv1                   [8]uint64
+	MethodOptions           [0]uint64
+	MetaMethodOptions       [0]uint64
+	DispatchNames           [0]int8
+	MethodNames             [0]int8
+	MetaMethodNames         [0]int8
 }
 
 type OSClassLoadInformation struct {
-	Description *OSClassDescription
-	MetaPointer *int32
-	Version uint32
+	Description  *OSClassDescription
+	MetaPointer  *int32
+	Version      uint32
 	InstanceSize uint32
-	Resv2 [8]uint64
-	New unsafe.Pointer
-	Resv3 [8]uint64
+	Resv2        [8]uint64
+	New          unsafe.Pointer
+	Resv3        [8]uint64
 }
 
 // OSCollection_IVars is an opaque type.
@@ -448,21 +448,21 @@ type OSString_LocalIVars struct{}
 
 // C struct: _IOMDPrivateState
 type IOMDPrivateState struct {
-	Length uint64
+	Length  uint64
 	Options uint64
 }
 
 // C struct: _IOMemoryMapPrivateState
 type IOMemoryMapPrivateState struct {
-	Length uint64
-	Offset uint64
+	Length  uint64
+	Offset  uint64
 	Options uint64
 	Address uint64
 }
 
 // C struct: __OSStringStatic
 type OSStringStatic struct {
-	CString string
+	CString  string
 	OsString *int32
 }
 
@@ -483,4 +483,3 @@ type QueueHeadT = QueueEntry
 
 // QueueT is an opaque pointer to queue_entry (C typedef queue_t).
 type QueueT = *QueueEntry
-

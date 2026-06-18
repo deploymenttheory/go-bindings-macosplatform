@@ -178,4 +178,3 @@ type StepperTouchBarItemable interface {
 }
 
 var _ StepperTouchBarItemable = (*StepperTouchBarItem)(nil)
-

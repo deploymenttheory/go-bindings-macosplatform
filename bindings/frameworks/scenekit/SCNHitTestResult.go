@@ -20,22 +20,22 @@ type SCNHitTestResult struct {
 }
 
 var (
-	_clsSCNHitTestResult = _objcClass("SCNHitTestResult")
+	_clsSCNHitTestResult                                     = _objcClass("SCNHitTestResult")
 	_sCNHitTestResultSelTextureCoordinatesWithMappingChannel = objc.RegisterName("textureCoordinatesWithMappingChannel:")
-	_sCNHitTestResultSelNode = objc.RegisterName("node")
-	_sCNHitTestResultSelGeometryIndex = objc.RegisterName("geometryIndex")
-	_sCNHitTestResultSelFaceIndex = objc.RegisterName("faceIndex")
-	_sCNHitTestResultSelLocalCoordinates = objc.RegisterName("localCoordinates")
-	_sCNHitTestResultSelWorldCoordinates = objc.RegisterName("worldCoordinates")
-	_sCNHitTestResultSelLocalNormal = objc.RegisterName("localNormal")
-	_sCNHitTestResultSelWorldNormal = objc.RegisterName("worldNormal")
-	_sCNHitTestResultSelModelTransform = objc.RegisterName("modelTransform")
-	_sCNHitTestResultSelBoneNode = objc.RegisterName("boneNode")
-	_sCNHitTestResultSelSimdLocalCoordinates = objc.RegisterName("simdLocalCoordinates")
-	_sCNHitTestResultSelSimdWorldCoordinates = objc.RegisterName("simdWorldCoordinates")
-	_sCNHitTestResultSelSimdLocalNormal = objc.RegisterName("simdLocalNormal")
-	_sCNHitTestResultSelSimdWorldNormal = objc.RegisterName("simdWorldNormal")
-	_sCNHitTestResultSelSimdModelTransform = objc.RegisterName("simdModelTransform")
+	_sCNHitTestResultSelNode                                 = objc.RegisterName("node")
+	_sCNHitTestResultSelGeometryIndex                        = objc.RegisterName("geometryIndex")
+	_sCNHitTestResultSelFaceIndex                            = objc.RegisterName("faceIndex")
+	_sCNHitTestResultSelLocalCoordinates                     = objc.RegisterName("localCoordinates")
+	_sCNHitTestResultSelWorldCoordinates                     = objc.RegisterName("worldCoordinates")
+	_sCNHitTestResultSelLocalNormal                          = objc.RegisterName("localNormal")
+	_sCNHitTestResultSelWorldNormal                          = objc.RegisterName("worldNormal")
+	_sCNHitTestResultSelModelTransform                       = objc.RegisterName("modelTransform")
+	_sCNHitTestResultSelBoneNode                             = objc.RegisterName("boneNode")
+	_sCNHitTestResultSelSimdLocalCoordinates                 = objc.RegisterName("simdLocalCoordinates")
+	_sCNHitTestResultSelSimdWorldCoordinates                 = objc.RegisterName("simdWorldCoordinates")
+	_sCNHitTestResultSelSimdLocalNormal                      = objc.RegisterName("simdLocalNormal")
+	_sCNHitTestResultSelSimdWorldNormal                      = objc.RegisterName("simdWorldNormal")
+	_sCNHitTestResultSelSimdModelTransform                   = objc.RegisterName("simdModelTransform")
 )
 
 func SCNHitTestResultFromID(id objc.ID) *SCNHitTestResult {
@@ -57,7 +57,9 @@ func (o *SCNHitTestResult) TextureCoordinatesWithMappingChannel(channel int) cor
 // The hit node.
 func (o *SCNHitTestResult) Node() *SCNNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNHitTestResultSelNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNNodeFromID(_ret)
 }
 
@@ -106,7 +108,9 @@ func (o *SCNHitTestResult) ModelTransform() quartzcore.CATransform3D {
 // The hit bone. Only available if the node hit has a SCNSkinner attached.
 func (o *SCNHitTestResult) BoneNode() *SCNNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNHitTestResultSelBoneNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNNodeFromID(_ret)
 }
 
@@ -134,4 +138,3 @@ func (o *SCNHitTestResult) SimdModelTransform() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sCNHitTestResultSelSimdModelTransform)
 	return _ret
 }
-

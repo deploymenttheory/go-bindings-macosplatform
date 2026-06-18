@@ -18,18 +18,18 @@ type MPSNNOptimizerStochasticGradientDescent struct {
 }
 
 var (
-	_clsMPSNNOptimizerStochasticGradientDescent = _objcClass("MPSNNOptimizerStochasticGradientDescent")
-	_mPSNNOptimizerStochasticGradientDescentSelInitWithDeviceLearningRate = objc.RegisterName("initWithDevice:learningRate:")
-	_mPSNNOptimizerStochasticGradientDescentSelInitWithDeviceMomentumScaleUseNesterovMomentumOptimizerDescriptor = objc.RegisterName("initWithDevice:momentumScale:useNesterovMomentum:optimizerDescriptor:")
-	_mPSNNOptimizerStochasticGradientDescentSelInitWithDeviceMomentumScaleUseNestrovMomentumOptimizerDescriptor = objc.RegisterName("initWithDevice:momentumScale:useNestrovMomentum:optimizerDescriptor:")
-	_mPSNNOptimizerStochasticGradientDescentSelEncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorResultValuesVector = objc.RegisterName("encodeToCommandBuffer:inputGradientVector:inputValuesVector:inputMomentumVector:resultValuesVector:")
-	_mPSNNOptimizerStochasticGradientDescentSelEncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputMomentumMatrixResultValuesMatrix = objc.RegisterName("encodeToCommandBuffer:inputGradientMatrix:inputValuesMatrix:inputMomentumMatrix:resultValuesMatrix:")
-	_mPSNNOptimizerStochasticGradientDescentSelEncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputMomentumVectorsResultState = objc.RegisterName("encodeToCommandBuffer:convolutionGradientState:convolutionSourceState:inputMomentumVectors:resultState:")
-	_mPSNNOptimizerStochasticGradientDescentSelEncodeToCommandBufferBatchNormalizationStateInputMomentumVectorsResultState = objc.RegisterName("encodeToCommandBuffer:batchNormalizationState:inputMomentumVectors:resultState:")
+	_clsMPSNNOptimizerStochasticGradientDescent                                                                                                                 = _objcClass("MPSNNOptimizerStochasticGradientDescent")
+	_mPSNNOptimizerStochasticGradientDescentSelInitWithDeviceLearningRate                                                                                       = objc.RegisterName("initWithDevice:learningRate:")
+	_mPSNNOptimizerStochasticGradientDescentSelInitWithDeviceMomentumScaleUseNesterovMomentumOptimizerDescriptor                                                = objc.RegisterName("initWithDevice:momentumScale:useNesterovMomentum:optimizerDescriptor:")
+	_mPSNNOptimizerStochasticGradientDescentSelInitWithDeviceMomentumScaleUseNestrovMomentumOptimizerDescriptor                                                 = objc.RegisterName("initWithDevice:momentumScale:useNestrovMomentum:optimizerDescriptor:")
+	_mPSNNOptimizerStochasticGradientDescentSelEncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorResultValuesVector                   = objc.RegisterName("encodeToCommandBuffer:inputGradientVector:inputValuesVector:inputMomentumVector:resultValuesVector:")
+	_mPSNNOptimizerStochasticGradientDescentSelEncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputMomentumMatrixResultValuesMatrix                   = objc.RegisterName("encodeToCommandBuffer:inputGradientMatrix:inputValuesMatrix:inputMomentumMatrix:resultValuesMatrix:")
+	_mPSNNOptimizerStochasticGradientDescentSelEncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputMomentumVectorsResultState               = objc.RegisterName("encodeToCommandBuffer:convolutionGradientState:convolutionSourceState:inputMomentumVectors:resultState:")
+	_mPSNNOptimizerStochasticGradientDescentSelEncodeToCommandBufferBatchNormalizationStateInputMomentumVectorsResultState                                      = objc.RegisterName("encodeToCommandBuffer:batchNormalizationState:inputMomentumVectors:resultState:")
 	_mPSNNOptimizerStochasticGradientDescentSelEncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputMomentumVectorsResultState = objc.RegisterName("encodeToCommandBuffer:batchNormalizationGradientState:batchNormalizationSourceState:inputMomentumVectors:resultState:")
-	_mPSNNOptimizerStochasticGradientDescentSelMomentumScale = objc.RegisterName("momentumScale")
-	_mPSNNOptimizerStochasticGradientDescentSelUseNesterovMomentum = objc.RegisterName("useNesterovMomentum")
-	_mPSNNOptimizerStochasticGradientDescentSelUseNestrovMomentum = objc.RegisterName("useNestrovMomentum")
+	_mPSNNOptimizerStochasticGradientDescentSelMomentumScale                                                                                                    = objc.RegisterName("momentumScale")
+	_mPSNNOptimizerStochasticGradientDescentSelUseNesterovMomentum                                                                                              = objc.RegisterName("useNesterovMomentum")
+	_mPSNNOptimizerStochasticGradientDescentSelUseNestrovMomentum                                                                                               = objc.RegisterName("useNestrovMomentum")
 )
 
 func MPSNNOptimizerStochasticGradientDescentFromID(id objc.ID) *MPSNNOptimizerStochasticGradientDescent {
@@ -45,20 +45,26 @@ func MPSNNOptimizerStochasticGradientDescentFromID(id objc.ID) *MPSNNOptimizerSt
 // @abstract   Convenience initialization for the momentum update @param      device                     The device on which the kernel will execute. @param      learningRate               The learningRate which will be applied @return     A valid MPSNNOptimizerStochasticGradientDescent object or nil, if failure.
 func (o *MPSNNOptimizerStochasticGradientDescent) InitWithDeviceLearningRate(device metal.MTLDevice, learningRate float32) *MPSNNOptimizerStochasticGradientDescent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNOptimizerStochasticGradientDescentSelInitWithDeviceLearningRate, device, learningRate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNOptimizerStochasticGradientDescentFromID(_ret)
 }
 
 // @abstract   Full initialization for the momentum update @param      device                     The device on which the kernel will execute. @param      momentumScale              The momentumScale to update momentum for values array @param      useNesterovMomentum         Use the Nesterov style momentum update @param      optimizerDescriptor        The optimizerDescriptor which will have a bunch of properties to be applied @return     A valid MPSNNOptimizerMomentum object or nil, if failure.
 func (o *MPSNNOptimizerStochasticGradientDescent) InitWithDeviceMomentumScaleUseNesterovMomentumOptimizerDescriptor(device metal.MTLDevice, momentumScale float32, useNesterovMomentum bool, optimizerDescriptor *MPSNNOptimizerDescriptor) *MPSNNOptimizerStochasticGradientDescent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNOptimizerStochasticGradientDescentSelInitWithDeviceMomentumScaleUseNesterovMomentumOptimizerDescriptor, device, momentumScale, useNesterovMomentum, optimizerDescriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNOptimizerStochasticGradientDescentFromID(_ret)
 }
 
 func (o *MPSNNOptimizerStochasticGradientDescent) InitWithDeviceMomentumScaleUseNestrovMomentumOptimizerDescriptor(device metal.MTLDevice, momentumScale float32, useNestrovMomentum bool, optimizerDescriptor *MPSNNOptimizerDescriptor) *MPSNNOptimizerStochasticGradientDescent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNOptimizerStochasticGradientDescentSelInitWithDeviceMomentumScaleUseNestrovMomentumOptimizerDescriptor, device, momentumScale, useNestrovMomentum, optimizerDescriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNOptimizerStochasticGradientDescentFromID(_ret)
 }
 
@@ -102,4 +108,3 @@ func (o *MPSNNOptimizerStochasticGradientDescent) UseNestrovMomentum() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mPSNNOptimizerStochasticGradientDescentSelUseNestrovMomentum)
 	return _ret
 }
-

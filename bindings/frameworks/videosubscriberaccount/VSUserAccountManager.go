@@ -18,12 +18,12 @@ type VSUserAccountManager struct {
 }
 
 var (
-	_clsVSUserAccountManager = _objcClass("VSUserAccountManager")
-	_vSUserAccountManagerSelUpdateUserAccountCompletion = objc.RegisterName("updateUserAccount:completion:")
-	_vSUserAccountManagerSelQueryUserAccountsWithOptionsCompletion = objc.RegisterName("queryUserAccountsWithOptions:completion:")
-	_vSUserAccountManagerSelQueryAutoSignInTokenWithCompletionHandler = objc.RegisterName("queryAutoSignInTokenWithCompletionHandler:")
+	_clsVSUserAccountManager                                           = _objcClass("VSUserAccountManager")
+	_vSUserAccountManagerSelUpdateUserAccountCompletion                = objc.RegisterName("updateUserAccount:completion:")
+	_vSUserAccountManagerSelQueryUserAccountsWithOptionsCompletion     = objc.RegisterName("queryUserAccountsWithOptions:completion:")
+	_vSUserAccountManagerSelQueryAutoSignInTokenWithCompletionHandler  = objc.RegisterName("queryAutoSignInTokenWithCompletionHandler:")
 	_vSUserAccountManagerSelDeleteAutoSignInTokenWithCompletionHandler = objc.RegisterName("deleteAutoSignInTokenWithCompletionHandler:")
-	_vSUserAccountManagerSelSharedUserAccountManager = objc.RegisterName("sharedUserAccountManager")
+	_vSUserAccountManagerSelSharedUserAccountManager                   = objc.RegisterName("sharedUserAccountManager")
 )
 
 func VSUserAccountManagerFromID(id objc.ID) *VSUserAccountManager {
@@ -90,7 +90,8 @@ func (o *VSUserAccountManager) DeleteAutoSignInTokenWithCompletionHandler(comple
 
 func VSUserAccountManagerSharedUserAccountManager() *VSUserAccountManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVSUserAccountManager), _vSUserAccountManagerSelSharedUserAccountManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VSUserAccountManagerFromID(_ret)
 }
-

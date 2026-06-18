@@ -15,32 +15,32 @@ type MPSGraphDepthwiseConvolution2DOpDescriptor struct {
 }
 
 var (
-	_clsMPSGraphDepthwiseConvolution2DOpDescriptor = _objcClass("MPSGraphDepthwiseConvolution2DOpDescriptor")
+	_clsMPSGraphDepthwiseConvolution2DOpDescriptor                                                                                                                                                = _objcClass("MPSGraphDepthwiseConvolution2DOpDescriptor")
 	_mPSGraphDepthwiseConvolution2DOpDescriptorSelDescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayoutWeightsLayout = objc.RegisterName("descriptorWithStrideInX:strideInY:dilationRateInX:dilationRateInY:paddingLeft:paddingRight:paddingTop:paddingBottom:paddingStyle:dataLayout:weightsLayout:")
-	_mPSGraphDepthwiseConvolution2DOpDescriptorSelDescriptorWithDataLayoutWeightsLayout = objc.RegisterName("descriptorWithDataLayout:weightsLayout:")
-	_mPSGraphDepthwiseConvolution2DOpDescriptorSelSetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom = objc.RegisterName("setExplicitPaddingWithPaddingLeft:paddingRight:paddingTop:paddingBottom:")
-	_mPSGraphDepthwiseConvolution2DOpDescriptorSelStrideInX = objc.RegisterName("strideInX")
-	_mPSGraphDepthwiseConvolution2DOpDescriptorSelSetStrideInX = objc.RegisterName("setStrideInX:")
-	_mPSGraphDepthwiseConvolution2DOpDescriptorSelStrideInY = objc.RegisterName("strideInY")
-	_mPSGraphDepthwiseConvolution2DOpDescriptorSelSetStrideInY = objc.RegisterName("setStrideInY:")
-	_mPSGraphDepthwiseConvolution2DOpDescriptorSelDilationRateInX = objc.RegisterName("dilationRateInX")
-	_mPSGraphDepthwiseConvolution2DOpDescriptorSelSetDilationRateInX = objc.RegisterName("setDilationRateInX:")
-	_mPSGraphDepthwiseConvolution2DOpDescriptorSelDilationRateInY = objc.RegisterName("dilationRateInY")
-	_mPSGraphDepthwiseConvolution2DOpDescriptorSelSetDilationRateInY = objc.RegisterName("setDilationRateInY:")
-	_mPSGraphDepthwiseConvolution2DOpDescriptorSelPaddingLeft = objc.RegisterName("paddingLeft")
-	_mPSGraphDepthwiseConvolution2DOpDescriptorSelSetPaddingLeft = objc.RegisterName("setPaddingLeft:")
-	_mPSGraphDepthwiseConvolution2DOpDescriptorSelPaddingRight = objc.RegisterName("paddingRight")
-	_mPSGraphDepthwiseConvolution2DOpDescriptorSelSetPaddingRight = objc.RegisterName("setPaddingRight:")
-	_mPSGraphDepthwiseConvolution2DOpDescriptorSelPaddingTop = objc.RegisterName("paddingTop")
-	_mPSGraphDepthwiseConvolution2DOpDescriptorSelSetPaddingTop = objc.RegisterName("setPaddingTop:")
-	_mPSGraphDepthwiseConvolution2DOpDescriptorSelPaddingBottom = objc.RegisterName("paddingBottom")
-	_mPSGraphDepthwiseConvolution2DOpDescriptorSelSetPaddingBottom = objc.RegisterName("setPaddingBottom:")
-	_mPSGraphDepthwiseConvolution2DOpDescriptorSelPaddingStyle = objc.RegisterName("paddingStyle")
-	_mPSGraphDepthwiseConvolution2DOpDescriptorSelSetPaddingStyle = objc.RegisterName("setPaddingStyle:")
-	_mPSGraphDepthwiseConvolution2DOpDescriptorSelDataLayout = objc.RegisterName("dataLayout")
-	_mPSGraphDepthwiseConvolution2DOpDescriptorSelSetDataLayout = objc.RegisterName("setDataLayout:")
-	_mPSGraphDepthwiseConvolution2DOpDescriptorSelWeightsLayout = objc.RegisterName("weightsLayout")
-	_mPSGraphDepthwiseConvolution2DOpDescriptorSelSetWeightsLayout = objc.RegisterName("setWeightsLayout:")
+	_mPSGraphDepthwiseConvolution2DOpDescriptorSelDescriptorWithDataLayoutWeightsLayout                                                                                                           = objc.RegisterName("descriptorWithDataLayout:weightsLayout:")
+	_mPSGraphDepthwiseConvolution2DOpDescriptorSelSetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom                                                                            = objc.RegisterName("setExplicitPaddingWithPaddingLeft:paddingRight:paddingTop:paddingBottom:")
+	_mPSGraphDepthwiseConvolution2DOpDescriptorSelStrideInX                                                                                                                                       = objc.RegisterName("strideInX")
+	_mPSGraphDepthwiseConvolution2DOpDescriptorSelSetStrideInX                                                                                                                                    = objc.RegisterName("setStrideInX:")
+	_mPSGraphDepthwiseConvolution2DOpDescriptorSelStrideInY                                                                                                                                       = objc.RegisterName("strideInY")
+	_mPSGraphDepthwiseConvolution2DOpDescriptorSelSetStrideInY                                                                                                                                    = objc.RegisterName("setStrideInY:")
+	_mPSGraphDepthwiseConvolution2DOpDescriptorSelDilationRateInX                                                                                                                                 = objc.RegisterName("dilationRateInX")
+	_mPSGraphDepthwiseConvolution2DOpDescriptorSelSetDilationRateInX                                                                                                                              = objc.RegisterName("setDilationRateInX:")
+	_mPSGraphDepthwiseConvolution2DOpDescriptorSelDilationRateInY                                                                                                                                 = objc.RegisterName("dilationRateInY")
+	_mPSGraphDepthwiseConvolution2DOpDescriptorSelSetDilationRateInY                                                                                                                              = objc.RegisterName("setDilationRateInY:")
+	_mPSGraphDepthwiseConvolution2DOpDescriptorSelPaddingLeft                                                                                                                                     = objc.RegisterName("paddingLeft")
+	_mPSGraphDepthwiseConvolution2DOpDescriptorSelSetPaddingLeft                                                                                                                                  = objc.RegisterName("setPaddingLeft:")
+	_mPSGraphDepthwiseConvolution2DOpDescriptorSelPaddingRight                                                                                                                                    = objc.RegisterName("paddingRight")
+	_mPSGraphDepthwiseConvolution2DOpDescriptorSelSetPaddingRight                                                                                                                                 = objc.RegisterName("setPaddingRight:")
+	_mPSGraphDepthwiseConvolution2DOpDescriptorSelPaddingTop                                                                                                                                      = objc.RegisterName("paddingTop")
+	_mPSGraphDepthwiseConvolution2DOpDescriptorSelSetPaddingTop                                                                                                                                   = objc.RegisterName("setPaddingTop:")
+	_mPSGraphDepthwiseConvolution2DOpDescriptorSelPaddingBottom                                                                                                                                   = objc.RegisterName("paddingBottom")
+	_mPSGraphDepthwiseConvolution2DOpDescriptorSelSetPaddingBottom                                                                                                                                = objc.RegisterName("setPaddingBottom:")
+	_mPSGraphDepthwiseConvolution2DOpDescriptorSelPaddingStyle                                                                                                                                    = objc.RegisterName("paddingStyle")
+	_mPSGraphDepthwiseConvolution2DOpDescriptorSelSetPaddingStyle                                                                                                                                 = objc.RegisterName("setPaddingStyle:")
+	_mPSGraphDepthwiseConvolution2DOpDescriptorSelDataLayout                                                                                                                                      = objc.RegisterName("dataLayout")
+	_mPSGraphDepthwiseConvolution2DOpDescriptorSelSetDataLayout                                                                                                                                   = objc.RegisterName("setDataLayout:")
+	_mPSGraphDepthwiseConvolution2DOpDescriptorSelWeightsLayout                                                                                                                                   = objc.RegisterName("weightsLayout")
+	_mPSGraphDepthwiseConvolution2DOpDescriptorSelSetWeightsLayout                                                                                                                                = objc.RegisterName("setWeightsLayout:")
 )
 
 func MPSGraphDepthwiseConvolution2DOpDescriptorFromID(id objc.ID) *MPSGraphDepthwiseConvolution2DOpDescriptor {
@@ -56,18 +56,22 @@ func MPSGraphDepthwiseConvolution2DOpDescriptorFromID(id objc.ID) *MPSGraphDepth
 // Creates a 2D-depthwise convolution descriptor with given values. - Parameters: - strideInX: See `strideInX` property. - strideInY: See `strideInY` property. - dilationRateInX: See `dilationRateInX` property. - dilationRateInY: See `dilationRateInY` property. - paddingLeft: See `paddingLeft` property. - paddingRight: See `paddingRight` property. - paddingTop: See `paddingTop` property. - paddingBottom: See `paddingBottom` property. - paddingStyle: See `paddingStyle` property. - dataLayout: See `dataLayout` property. - weightsLayout: See `weightsLayout` property. - Returns: The descriptor on autoreleasepool.
 func MPSGraphDepthwiseConvolution2DOpDescriptorDescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayoutWeightsLayout(strideInX uint, strideInY uint, dilationRateInX uint, dilationRateInY uint, paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint, paddingStyle MPSGraphPaddingStyle, dataLayout MPSGraphTensorNamedDataLayout, weightsLayout MPSGraphTensorNamedDataLayout) *MPSGraphDepthwiseConvolution2DOpDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphDepthwiseConvolution2DOpDescriptor), _mPSGraphDepthwiseConvolution2DOpDescriptorSelDescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayoutWeightsLayout, strideInX, strideInY, dilationRateInX, dilationRateInY, paddingLeft, paddingRight, paddingTop, paddingBottom, paddingStyle, dataLayout, weightsLayout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSGraphDepthwiseConvolution2DOpDescriptorFromID(_ret)
 }
 
 // Creates a 2D-depthwise convolution descriptor with given properties and default values. - Parameters: - dataLayout: See `dataLayout` property. - weightsLayout: See `weightsLayout` property. - Returns: The descriptor on autoreleasepool.
 func MPSGraphDepthwiseConvolution2DOpDescriptorDescriptorWithDataLayoutWeightsLayout(dataLayout MPSGraphTensorNamedDataLayout, weightsLayout MPSGraphTensorNamedDataLayout) *MPSGraphDepthwiseConvolution2DOpDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphDepthwiseConvolution2DOpDescriptor), _mPSGraphDepthwiseConvolution2DOpDescriptorSelDescriptorWithDataLayoutWeightsLayout, dataLayout, weightsLayout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSGraphDepthwiseConvolution2DOpDescriptorFromID(_ret)
 }
 
-// Sets the explicit padding values. Note: this method also sets `paddingStyle` to `MPSGraphPaddingStyleExplicit` (see ``MPSGraphPaddingStyle``). - Parameters: - paddingLeft: See `paddingLeft` property. - paddingRight: See `paddingRight` property. - paddingTop: See `paddingTop` property. - paddingBottom: See `paddingBottom` property.
+// Sets the explicit padding values. Note: this method also sets `paddingStyle` to `MPSGraphPaddingStyleExplicit` (see “MPSGraphPaddingStyle“). - Parameters: - paddingLeft: See `paddingLeft` property. - paddingRight: See `paddingRight` property. - paddingTop: See `paddingTop` property. - paddingBottom: See `paddingBottom` property.
 func (o *MPSGraphDepthwiseConvolution2DOpDescriptor) SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint) {
 	o.Ptr().Send(_mPSGraphDepthwiseConvolution2DOpDescriptorSelSetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom, paddingLeft, paddingRight, paddingTop, paddingBottom)
 }
@@ -162,7 +166,7 @@ func (o *MPSGraphDepthwiseConvolution2DOpDescriptor) SetPaddingStyle(paddingStyl
 	o.Ptr().Send(_mPSGraphDepthwiseConvolution2DOpDescriptorSelSetPaddingStyle, paddingStyle)
 }
 
-// The data layout of the input data in the forward pass. See: ``MPSGraphTensorNamedDataLayout``.
+// The data layout of the input data in the forward pass. See: “MPSGraphTensorNamedDataLayout“.
 func (o *MPSGraphDepthwiseConvolution2DOpDescriptor) DataLayout() MPSGraphTensorNamedDataLayout {
 	_ret := objc.Send[MPSGraphTensorNamedDataLayout](o.Ptr(), _mPSGraphDepthwiseConvolution2DOpDescriptorSelDataLayout)
 	return _ret
@@ -172,7 +176,7 @@ func (o *MPSGraphDepthwiseConvolution2DOpDescriptor) SetDataLayout(dataLayout MP
 	o.Ptr().Send(_mPSGraphDepthwiseConvolution2DOpDescriptorSelSetDataLayout, dataLayout)
 }
 
-// The data layout of the weights. NOTE: 'O' index is channel multiplier index. See: ``MPSGraphTensorNamedDataLayout``.
+// The data layout of the weights. NOTE: 'O' index is channel multiplier index. See: “MPSGraphTensorNamedDataLayout“.
 func (o *MPSGraphDepthwiseConvolution2DOpDescriptor) WeightsLayout() MPSGraphTensorNamedDataLayout {
 	_ret := objc.Send[MPSGraphTensorNamedDataLayout](o.Ptr(), _mPSGraphDepthwiseConvolution2DOpDescriptorSelWeightsLayout)
 	return _ret
@@ -181,4 +185,3 @@ func (o *MPSGraphDepthwiseConvolution2DOpDescriptor) WeightsLayout() MPSGraphTen
 func (o *MPSGraphDepthwiseConvolution2DOpDescriptor) SetWeightsLayout(weightsLayout MPSGraphTensorNamedDataLayout) {
 	o.Ptr().Send(_mPSGraphDepthwiseConvolution2DOpDescriptorSelSetWeightsLayout, weightsLayout)
 }
-

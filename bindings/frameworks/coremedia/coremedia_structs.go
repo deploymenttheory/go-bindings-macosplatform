@@ -11,56 +11,56 @@ import (
 
 // @typedef CMBlockBufferCustomBlockSource @discussion Used with functions that accept a memory block allocator, this structure allows a client to provide a custom facility for obtaining the memory block to be used in a CMBlockBuffer. The AllocateBlock function must be non-zero if the CMBlockBuffer code will need to call for allocation (not required if a previously-obtained memory block is provided to the CMBlockBuffer API). The FreeBlock() routine, if non-NULL, will be called once when the CMBlockBuffer is disposed. It will not be called if no memory block is ever allocated or supplied. The refCon will be passed to both the AllocateBlock and FreeBlock() calls. The client is responsible for its disposal (if any) during the FreeBlock() callback. Note that for 64-bit architectures, this struct contains misaligned function pointers. To avoid link-time issues, it is recommended that clients fill CMBlockBufferCustomBlockSource's function pointer fields by using assignment statements, rather than declaring them as global or static structs. The functions that accept CMBlockBufferCustomBlockSource pointers copy the fields and do not require the struct to stay valid after they return.
 type CMBlockBufferCustomBlockSource struct {
-	Version uint32
+	Version       uint32
 	AllocateBlock unsafe.Pointer
-	FreeBlock unsafe.Pointer
-	RefCon unsafe.Pointer
+	FreeBlock     unsafe.Pointer
+	RefCon        unsafe.Pointer
 }
 
 // @typedef	CMBufferCallbacks @abstract	Callbacks provided to CMBufferQueueCreate, for use by the queue in interrogating the buffers that it will see. @discussion	With the exception of isDataReady, all these callbacks must always return the same result for the same arguments. A buffer's duration, timestamps, or position relative to other buffers must not appear to change while it is in the queue.  Once isDataReady has returned true for a given CMBuffer, it must always return true for that CMBuffer.  Durations must always be positive.
 type CMBufferCallbacks struct {
-	Version uint32
-	Refcon unsafe.Pointer
-	GetDecodeTimeStamp unsafe.Pointer
-	GetPresentationTimeStamp unsafe.Pointer
-	GetDuration unsafe.Pointer
-	IsDataReady unsafe.Pointer
-	Compare unsafe.Pointer
+	Version                     uint32
+	Refcon                      unsafe.Pointer
+	GetDecodeTimeStamp          unsafe.Pointer
+	GetPresentationTimeStamp    unsafe.Pointer
+	GetDuration                 unsafe.Pointer
+	IsDataReady                 unsafe.Pointer
+	Compare                     unsafe.Pointer
 	DataBecameReadyNotification unsafe.Pointer
-	GetSize unsafe.Pointer
+	GetSize                     unsafe.Pointer
 }
 
 type CMBufferHandlers struct {
-	Version uint
-	GetDecodeTimeStamp func(unsafe.Pointer) CMTime
-	GetPresentationTimeStamp func(unsafe.Pointer) CMTime
-	GetDuration func(unsafe.Pointer) CMTime
-	IsDataReady func(unsafe.Pointer) uint8
-	Compare func(unsafe.Pointer, unsafe.Pointer) corefoundation.CFComparisonResult
+	Version                     uint
+	GetDecodeTimeStamp          func(unsafe.Pointer) CMTime
+	GetPresentationTimeStamp    func(unsafe.Pointer) CMTime
+	GetDuration                 func(unsafe.Pointer) CMTime
+	IsDataReady                 func(unsafe.Pointer) uint8
+	Compare                     func(unsafe.Pointer, unsafe.Pointer) corefoundation.CFComparisonResult
 	DataBecameReadyNotification unsafe.Pointer
-	GetSize func(unsafe.Pointer) uint
+	GetSize                     func(unsafe.Pointer) uint
 }
 
 // @typedef	CMSampleTimingInfo @abstract	Collection of timing info for a sample in a CMSampleBuffer. A single CMSampleTimingInfo struct can describe every individual sample in a CMSampleBuffer, if the samples all have the same duration and are in presentation order with no gaps.
 type CMSampleTimingInfo struct {
-	Duration CMTime
+	Duration              CMTime
 	PresentationTimeStamp CMTime
-	DecodeTimeStamp CMTime
+	DecodeTimeStamp       CMTime
 }
 
 // @typedef CMTag @abstract An efficient structure used to label something about a resource or other media construct. @discussion A structure holding a CMTagCategory, CMTagDataType, and a CMTagValue serving to represent a particular tag that might be assigned to or associated with another resource. There is only one of each of the category, the dataType and the value so any notion of "has" is about the respective singular element.  CMTags are a value type. No lifetime management such as allocation or retain and release semantics are needed. CMTags can be passed by value, returned by value and stored in other structures or arrays or on the stack.  CMTags carry a single value that can be carried in 64 bits. This can include data types such as signed 64-bit integers, floating point values fitting in 64 bits, up to 64 bit of flags, and other data types fitting within 64 bits. Signaling of the data type is carried in the CMTagDataType. The data types can be extended through registration with the CoreMedia team.  A CMTag value should not be used to carry pointers. If such a reference is needed, it is okay to carry an index into an out-of-band data structure that itself has a memory reference or an object reference. @field category CMTagCategory for the tag. @field dataType CMTagDataType for the tag indicating the data type of the value. @field value CMTagValue for the value of the CMTag (e.g., a signed 64-bit integer.)
 type CMTag struct {
 	Category CMTagCategory
 	DataType CMTagDataType
-	Value uint64
+	Value    uint64
 }
 
 // @typedef	CMTime @abstract	Rational time value represented as int64/int32.
 type CMTime struct {
-	Value int64
+	Value     int64
 	Timescale int32
-	Flags CMTimeFlags
-	Epoch int64
+	Flags     CMTimeFlags
+	Epoch     int64
 }
 
 // @typedef	CMTimeMapping @abstract	A CMTimeMapping specifies the mapping of a segment of one time line (called "source") into another time line (called "target"). @discussion When used for movie edit lists, the source time line is the media and the target time line is the track/movie. @field	source The time range on the source time line. For an empty edit, source.start is an invalid CMTime, in which case source.duration shall be ignored. Otherwise, source.start is the starting time within the source, and source.duration is the duration of the source timeline to be mapped to the target time range. @field	target The time range on the target time line. If target.duration and source.duration are different, then the source segment should be played at rate source.duration/target.duration to fit.
@@ -71,13 +71,13 @@ type CMTimeMapping struct {
 
 // @typedef	CMTimeRange @abstract	A time range represented as two CMTime structures.
 type CMTimeRange struct {
-	Start CMTime
+	Start    CMTime
 	Duration CMTime
 }
 
 // @typedef CMVideoDimensions Type used for video dimensions, units are pixels
 type CMVideoDimensions struct {
-	Width int32
+	Width  int32
 	Height int32
 }
 
@@ -126,4 +126,3 @@ type OpaqueCMSampleBuffer struct{}
 // C struct: opaqueCMSimpleQueue
 // OpaqueCMSimpleQueue is an opaque type.
 type OpaqueCMSimpleQueue struct{}
-

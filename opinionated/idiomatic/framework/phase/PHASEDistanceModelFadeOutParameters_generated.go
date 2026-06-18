@@ -15,7 +15,9 @@ type DistanceModelFadeOutParameters struct {
 }
 
 // Unwrap returns the underlying [raw.PHASEDistanceModelFadeOutParameters].
-func (x *DistanceModelFadeOutParameters) Unwrap() *raw.PHASEDistanceModelFadeOutParameters { return x.inner }
+func (x *DistanceModelFadeOutParameters) Unwrap() *raw.PHASEDistanceModelFadeOutParameters {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -48,4 +50,3 @@ type DistanceModelFadeOutParametersable interface {
 }
 
 var _ DistanceModelFadeOutParametersable = (*DistanceModelFadeOutParameters)(nil)
-

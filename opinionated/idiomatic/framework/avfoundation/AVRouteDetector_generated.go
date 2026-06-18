@@ -66,4 +66,3 @@ type RouteDetectorable interface {
 }
 
 var _ RouteDetectorable = (*RouteDetector)(nil)
-

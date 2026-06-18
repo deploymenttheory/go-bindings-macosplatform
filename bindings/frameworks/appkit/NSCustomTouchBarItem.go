@@ -16,9 +16,9 @@ type NSCustomTouchBarItem struct {
 }
 
 var (
-	_clsNSCustomTouchBarItem = _objcClass("NSCustomTouchBarItem")
-	_nSCustomTouchBarItemSelSetView = objc.RegisterName("setView:")
-	_nSCustomTouchBarItemSelSetViewController = objc.RegisterName("setViewController:")
+	_clsNSCustomTouchBarItem                      = _objcClass("NSCustomTouchBarItem")
+	_nSCustomTouchBarItemSelSetView               = objc.RegisterName("setView:")
+	_nSCustomTouchBarItemSelSetViewController     = objc.RegisterName("setViewController:")
 	_nSCustomTouchBarItemSelSetCustomizationLabel = objc.RegisterName("setCustomizationLabel:")
 )
 
@@ -43,4 +43,3 @@ func (o *NSCustomTouchBarItem) SetViewController(viewController *NSViewControlle
 func (o *NSCustomTouchBarItem) SetCustomizationLabel(customizationLabel *foundation.NSString) {
 	o.Ptr().Send(_nSCustomTouchBarItemSelSetCustomizationLabel, customizationLabel.Ptr())
 }
-

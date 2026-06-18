@@ -73,4 +73,3 @@ type Sequenceable interface {
 }
 
 var _ Sequenceable = (*Sequence)(nil)
-

@@ -16,11 +16,11 @@ type CKRecordID struct {
 }
 
 var (
-	_clsCKRecordID = _objcClass("CKRecordID")
-	_cKRecordIDSelInitWithRecordName = objc.RegisterName("initWithRecordName:")
+	_clsCKRecordID                         = _objcClass("CKRecordID")
+	_cKRecordIDSelInitWithRecordName       = objc.RegisterName("initWithRecordName:")
 	_cKRecordIDSelInitWithRecordNameZoneID = objc.RegisterName("initWithRecordName:zoneID:")
-	_cKRecordIDSelRecordName = objc.RegisterName("recordName")
-	_cKRecordIDSelZoneID = objc.RegisterName("zoneID")
+	_cKRecordIDSelRecordName               = objc.RegisterName("recordName")
+	_cKRecordIDSelZoneID                   = objc.RegisterName("zoneID")
 )
 
 func CKRecordIDFromID(id objc.ID) *CKRecordID {
@@ -36,28 +36,35 @@ func CKRecordIDFromID(id objc.ID) *CKRecordID {
 // Creates a new record ID with the specified name in the default zone. - Parameters: - recordName: The name that identifies the record. The string must contain only ASCII characters, must not exceed 255 characters, and must not start with an underscore. If you specify an empty string for this parameter, the method throws an exception. - Returns: An initialized record ID object. Use this method when you're creating or searching for records in the default zone.
 func (o *CKRecordID) InitWithRecordName(recordName *foundation.NSString) *CKRecordID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKRecordIDSelInitWithRecordName, recordName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKRecordIDFromID(_ret)
 }
 
-// Creates a new record ID with the specified name and zone information. - Parameters: - recordName: The name that identifies the record. The string must contain only ASCII characters, must not exceed 255 characters, and must not start with an underscore. If you specify an empty string for this parameter, the method throws an exception. - zoneID: The ID of the zone where you want to store the record. This parameter must not be `nil`. - Returns: An initialized record ID object. Use this method when you create or search for records in a zone other than the default zone. The value in the `zoneID` parameter must represent a zone that already exists in the database. If the record zone doesn't exist, save the corresponding ``CKRecordZone`` object to the database before attempting to save any ``CKRecord`` objects in that zone.
+// Creates a new record ID with the specified name and zone information. - Parameters: - recordName: The name that identifies the record. The string must contain only ASCII characters, must not exceed 255 characters, and must not start with an underscore. If you specify an empty string for this parameter, the method throws an exception. - zoneID: The ID of the zone where you want to store the record. This parameter must not be `nil`. - Returns: An initialized record ID object. Use this method when you create or search for records in a zone other than the default zone. The value in the `zoneID` parameter must represent a zone that already exists in the database. If the record zone doesn't exist, save the corresponding “CKRecordZone“ object to the database before attempting to save any “CKRecord“ objects in that zone.
 func (o *CKRecordID) InitWithRecordNameZoneID(recordName *foundation.NSString, zoneID *CKRecordZoneID) *CKRecordID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKRecordIDSelInitWithRecordNameZoneID, recordName.Ptr(), zoneID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKRecordIDFromID(_ret)
 }
 
-// The unique name of the record. For share records that manage a shared record zone, this property's value is always ``CKRecordNameZoneWideShare``.
+// The unique name of the record. For share records that manage a shared record zone, this property's value is always “CKRecordNameZoneWideShare“.
 func (o *CKRecordID) RecordName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKRecordIDSelRecordName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The ID of the zone that contains the record.
 func (o *CKRecordID) ZoneID() *CKRecordZoneID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKRecordIDSelZoneID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKRecordZoneIDFromID(_ret)
 }
-

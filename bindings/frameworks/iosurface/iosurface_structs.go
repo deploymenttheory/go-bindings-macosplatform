@@ -6,4 +6,3 @@ package iosurface
 // C struct: __IOSurface
 // IOSurface is an opaque type.
 type IOSurface struct{}
-

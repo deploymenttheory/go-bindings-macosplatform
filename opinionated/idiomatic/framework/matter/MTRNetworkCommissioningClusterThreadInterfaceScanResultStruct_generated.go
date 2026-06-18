@@ -17,11 +17,15 @@ type MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct].
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) Unwrap() *raw.MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct { return x.inner }
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) Unwrap() *raw.MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRNetworkCommissioningClusterThreadInterfaceScanResultStructFromID adopts an existing object pointer as a MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct (nil for 0).
 func MTRNetworkCommissioningClusterThreadInterfaceScanResultStructFromID(id objc.ID) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct {
@@ -153,7 +157,9 @@ func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) SetLqi(l
 	x.inner.SetLqi(lqi)
 }
 
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) asMTRNetworkCommissioningClusterThreadInterfaceScanResultStruct() *raw.MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct { return x.inner }
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) asMTRNetworkCommissioningClusterThreadInterfaceScanResultStruct() *raw.MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct {
+	return x.inner
+}
 
 // MTRNetworkCommissioningClusterThreadInterfaceScanResultStructable is the interface implemented by [MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct], for mocking and DI.
 type MTRNetworkCommissioningClusterThreadInterfaceScanResultStructable interface {
@@ -182,4 +188,3 @@ type MTRNetworkCommissioningClusterThreadInterfaceScanResultStructable interface
 }
 
 var _ MTRNetworkCommissioningClusterThreadInterfaceScanResultStructable = (*MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct)(nil)
-

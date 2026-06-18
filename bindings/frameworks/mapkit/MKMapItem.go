@@ -18,31 +18,31 @@ type MKMapItem struct {
 }
 
 var (
-	_clsMKMapItem = _objcClass("MKMapItem")
-	_mKMapItemSelMapItemForCurrentLocation = objc.RegisterName("mapItemForCurrentLocation")
-	_mKMapItemSelInitWithPlacemark = objc.RegisterName("initWithPlacemark:")
-	_mKMapItemSelInitWithLocationAddress = objc.RegisterName("initWithLocation:address:")
-	_mKMapItemSelOpenInMapsWithLaunchOptions = objc.RegisterName("openInMapsWithLaunchOptions:")
-	_mKMapItemSelOpenMapsWithItemsLaunchOptions = objc.RegisterName("openMapsWithItems:launchOptions:")
-	_mKMapItemSelOpenInMapsWithLaunchOptionsCompletionHandler = objc.RegisterName("openInMapsWithLaunchOptions:completionHandler:")
+	_clsMKMapItem                                                = _objcClass("MKMapItem")
+	_mKMapItemSelMapItemForCurrentLocation                       = objc.RegisterName("mapItemForCurrentLocation")
+	_mKMapItemSelInitWithPlacemark                               = objc.RegisterName("initWithPlacemark:")
+	_mKMapItemSelInitWithLocationAddress                         = objc.RegisterName("initWithLocation:address:")
+	_mKMapItemSelOpenInMapsWithLaunchOptions                     = objc.RegisterName("openInMapsWithLaunchOptions:")
+	_mKMapItemSelOpenMapsWithItemsLaunchOptions                  = objc.RegisterName("openMapsWithItems:launchOptions:")
+	_mKMapItemSelOpenInMapsWithLaunchOptionsCompletionHandler    = objc.RegisterName("openInMapsWithLaunchOptions:completionHandler:")
 	_mKMapItemSelOpenMapsWithItemsLaunchOptionsCompletionHandler = objc.RegisterName("openMapsWithItems:launchOptions:completionHandler:")
-	_mKMapItemSelIdentifier = objc.RegisterName("identifier")
-	_mKMapItemSelAlternateIdentifiers = objc.RegisterName("alternateIdentifiers")
-	_mKMapItemSelPlacemark = objc.RegisterName("placemark")
-	_mKMapItemSelIsCurrentLocation = objc.RegisterName("isCurrentLocation")
-	_mKMapItemSelLocation = objc.RegisterName("location")
-	_mKMapItemSelAddress = objc.RegisterName("address")
-	_mKMapItemSelAddressRepresentations = objc.RegisterName("addressRepresentations")
-	_mKMapItemSelName = objc.RegisterName("name")
-	_mKMapItemSelSetName = objc.RegisterName("setName:")
-	_mKMapItemSelPhoneNumber = objc.RegisterName("phoneNumber")
-	_mKMapItemSelSetPhoneNumber = objc.RegisterName("setPhoneNumber:")
-	_mKMapItemSelUrl = objc.RegisterName("url")
-	_mKMapItemSelSetUrl = objc.RegisterName("setUrl:")
-	_mKMapItemSelTimeZone = objc.RegisterName("timeZone")
-	_mKMapItemSelSetTimeZone = objc.RegisterName("setTimeZone:")
-	_mKMapItemSelPointOfInterestCategory = objc.RegisterName("pointOfInterestCategory")
-	_mKMapItemSelSetPointOfInterestCategory = objc.RegisterName("setPointOfInterestCategory:")
+	_mKMapItemSelIdentifier                                      = objc.RegisterName("identifier")
+	_mKMapItemSelAlternateIdentifiers                            = objc.RegisterName("alternateIdentifiers")
+	_mKMapItemSelPlacemark                                       = objc.RegisterName("placemark")
+	_mKMapItemSelIsCurrentLocation                               = objc.RegisterName("isCurrentLocation")
+	_mKMapItemSelLocation                                        = objc.RegisterName("location")
+	_mKMapItemSelAddress                                         = objc.RegisterName("address")
+	_mKMapItemSelAddressRepresentations                          = objc.RegisterName("addressRepresentations")
+	_mKMapItemSelName                                            = objc.RegisterName("name")
+	_mKMapItemSelSetName                                         = objc.RegisterName("setName:")
+	_mKMapItemSelPhoneNumber                                     = objc.RegisterName("phoneNumber")
+	_mKMapItemSelSetPhoneNumber                                  = objc.RegisterName("setPhoneNumber:")
+	_mKMapItemSelUrl                                             = objc.RegisterName("url")
+	_mKMapItemSelSetUrl                                          = objc.RegisterName("setUrl:")
+	_mKMapItemSelTimeZone                                        = objc.RegisterName("timeZone")
+	_mKMapItemSelSetTimeZone                                     = objc.RegisterName("setTimeZone:")
+	_mKMapItemSelPointOfInterestCategory                         = objc.RegisterName("pointOfInterestCategory")
+	_mKMapItemSelSetPointOfInterestCategory                      = objc.RegisterName("setPointOfInterestCategory:")
 )
 
 func MKMapItemFromID(id objc.ID) *MKMapItem {
@@ -57,20 +57,26 @@ func MKMapItemFromID(id objc.ID) *MKMapItem {
 
 func MKMapItemMapItemForCurrentLocation() *MKMapItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKMapItem), _mKMapItemSelMapItemForCurrentLocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapItemFromID(_ret)
 }
 
 // Deprecated: Use init(location:address:)
 func (o *MKMapItem) InitWithPlacemark(placemark *MKPlacemark) *MKMapItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapItemSelInitWithPlacemark, placemark.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapItemFromID(_ret)
 }
 
 func (o *MKMapItem) InitWithLocationAddress(location unsafe.Pointer, address *MKAddress) *MKMapItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapItemSelInitWithLocationAddress, location, address.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapItemFromID(_ret)
 }
 
@@ -108,20 +114,26 @@ func MKMapItemOpenMapsWithItemsLaunchOptionsCompletionHandler(mapItems *foundati
 
 func (o *MKMapItem) Identifier() *MKMapItemIdentifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapItemSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapItemIdentifierFromID(_ret)
 }
 
 func (o *MKMapItem) AlternateIdentifiers() *foundation.NSSet[*MKMapItemIdentifier] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapItemSelAlternateIdentifiers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*MKMapItemIdentifier](_ret)
 }
 
 // Deprecated: Use location, address and addressRepresentations instead
 func (o *MKMapItem) Placemark() *MKPlacemark {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapItemSelPlacemark)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPlacemarkFromID(_ret)
 }
 
@@ -138,19 +150,25 @@ func (o *MKMapItem) Location() unsafe.Pointer {
 
 func (o *MKMapItem) Address() *MKAddress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapItemSelAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKAddressFromID(_ret)
 }
 
 func (o *MKMapItem) AddressRepresentations() *MKAddressRepresentations {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapItemSelAddressRepresentations)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKAddressRepresentationsFromID(_ret)
 }
 
 func (o *MKMapItem) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapItemSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -160,7 +178,9 @@ func (o *MKMapItem) SetName(name *foundation.NSString) {
 
 func (o *MKMapItem) PhoneNumber() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapItemSelPhoneNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -170,7 +190,9 @@ func (o *MKMapItem) SetPhoneNumber(phoneNumber *foundation.NSString) {
 
 func (o *MKMapItem) Url() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapItemSelUrl)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -180,7 +202,9 @@ func (o *MKMapItem) SetUrl(url *foundation.NSURL) {
 
 func (o *MKMapItem) TimeZone() *foundation.NSTimeZone {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapItemSelTimeZone)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSTimeZoneFromID(_ret)
 }
 
@@ -190,11 +214,12 @@ func (o *MKMapItem) SetTimeZone(timeZone *foundation.NSTimeZone) {
 
 func (o *MKMapItem) PointOfInterestCategory() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapItemSelPointOfInterestCategory)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MKMapItem) SetPointOfInterestCategory(pointOfInterestCategory *foundation.NSString) {
 	o.Ptr().Send(_mKMapItemSelSetPointOfInterestCategory, pointOfInterestCategory.Ptr())
 }
-

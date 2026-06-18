@@ -17,29 +17,29 @@ type AXChartDescriptor struct {
 }
 
 var (
-	_clsAXChartDescriptor = _objcClass("AXChartDescriptor")
-	_aXChartDescriptorSelInitWithTitleSummaryXAxisDescriptorYAxisDescriptorSeries = objc.RegisterName("initWithTitle:summary:xAxisDescriptor:yAxisDescriptor:series:")
-	_aXChartDescriptorSelInitWithAttributedTitleSummaryXAxisDescriptorYAxisDescriptorSeries = objc.RegisterName("initWithAttributedTitle:summary:xAxisDescriptor:yAxisDescriptor:series:")
-	_aXChartDescriptorSelInitWithTitleSummaryXAxisDescriptorYAxisDescriptorAdditionalAxesSeries = objc.RegisterName("initWithTitle:summary:xAxisDescriptor:yAxisDescriptor:additionalAxes:series:")
+	_clsAXChartDescriptor                                                                                 = _objcClass("AXChartDescriptor")
+	_aXChartDescriptorSelInitWithTitleSummaryXAxisDescriptorYAxisDescriptorSeries                         = objc.RegisterName("initWithTitle:summary:xAxisDescriptor:yAxisDescriptor:series:")
+	_aXChartDescriptorSelInitWithAttributedTitleSummaryXAxisDescriptorYAxisDescriptorSeries               = objc.RegisterName("initWithAttributedTitle:summary:xAxisDescriptor:yAxisDescriptor:series:")
+	_aXChartDescriptorSelInitWithTitleSummaryXAxisDescriptorYAxisDescriptorAdditionalAxesSeries           = objc.RegisterName("initWithTitle:summary:xAxisDescriptor:yAxisDescriptor:additionalAxes:series:")
 	_aXChartDescriptorSelInitWithAttributedTitleSummaryXAxisDescriptorYAxisDescriptorAdditionalAxesSeries = objc.RegisterName("initWithAttributedTitle:summary:xAxisDescriptor:yAxisDescriptor:additionalAxes:series:")
-	_aXChartDescriptorSelTitle = objc.RegisterName("title")
-	_aXChartDescriptorSelSetTitle = objc.RegisterName("setTitle:")
-	_aXChartDescriptorSelAttributedTitle = objc.RegisterName("attributedTitle")
-	_aXChartDescriptorSelSetAttributedTitle = objc.RegisterName("setAttributedTitle:")
-	_aXChartDescriptorSelSummary = objc.RegisterName("summary")
-	_aXChartDescriptorSelSetSummary = objc.RegisterName("setSummary:")
-	_aXChartDescriptorSelContentDirection = objc.RegisterName("contentDirection")
-	_aXChartDescriptorSelSetContentDirection = objc.RegisterName("setContentDirection:")
-	_aXChartDescriptorSelContentFrame = objc.RegisterName("contentFrame")
-	_aXChartDescriptorSelSetContentFrame = objc.RegisterName("setContentFrame:")
-	_aXChartDescriptorSelSeries = objc.RegisterName("series")
-	_aXChartDescriptorSelSetSeries = objc.RegisterName("setSeries:")
-	_aXChartDescriptorSelXAxis = objc.RegisterName("xAxis")
-	_aXChartDescriptorSelSetXAxis = objc.RegisterName("setXAxis:")
-	_aXChartDescriptorSelYAxis = objc.RegisterName("yAxis")
-	_aXChartDescriptorSelSetYAxis = objc.RegisterName("setYAxis:")
-	_aXChartDescriptorSelAdditionalAxes = objc.RegisterName("additionalAxes")
-	_aXChartDescriptorSelSetAdditionalAxes = objc.RegisterName("setAdditionalAxes:")
+	_aXChartDescriptorSelTitle                                                                            = objc.RegisterName("title")
+	_aXChartDescriptorSelSetTitle                                                                         = objc.RegisterName("setTitle:")
+	_aXChartDescriptorSelAttributedTitle                                                                  = objc.RegisterName("attributedTitle")
+	_aXChartDescriptorSelSetAttributedTitle                                                               = objc.RegisterName("setAttributedTitle:")
+	_aXChartDescriptorSelSummary                                                                          = objc.RegisterName("summary")
+	_aXChartDescriptorSelSetSummary                                                                       = objc.RegisterName("setSummary:")
+	_aXChartDescriptorSelContentDirection                                                                 = objc.RegisterName("contentDirection")
+	_aXChartDescriptorSelSetContentDirection                                                              = objc.RegisterName("setContentDirection:")
+	_aXChartDescriptorSelContentFrame                                                                     = objc.RegisterName("contentFrame")
+	_aXChartDescriptorSelSetContentFrame                                                                  = objc.RegisterName("setContentFrame:")
+	_aXChartDescriptorSelSeries                                                                           = objc.RegisterName("series")
+	_aXChartDescriptorSelSetSeries                                                                        = objc.RegisterName("setSeries:")
+	_aXChartDescriptorSelXAxis                                                                            = objc.RegisterName("xAxis")
+	_aXChartDescriptorSelSetXAxis                                                                         = objc.RegisterName("setXAxis:")
+	_aXChartDescriptorSelYAxis                                                                            = objc.RegisterName("yAxis")
+	_aXChartDescriptorSelSetYAxis                                                                         = objc.RegisterName("setYAxis:")
+	_aXChartDescriptorSelAdditionalAxes                                                                   = objc.RegisterName("additionalAxes")
+	_aXChartDescriptorSelSetAdditionalAxes                                                                = objc.RegisterName("setAdditionalAxes:")
 )
 
 func AXChartDescriptorFromID(id objc.ID) *AXChartDescriptor {
@@ -54,32 +54,42 @@ func AXChartDescriptorFromID(id objc.ID) *AXChartDescriptor {
 
 func (o *AXChartDescriptor) InitWithTitleSummaryXAxisDescriptorYAxisDescriptorSeries(title *foundation.NSString, summary *foundation.NSString, xAxis AXDataAxisDescriptor, yAxis *AXNumericDataAxisDescriptor, series *foundation.NSArray[*AXDataSeriesDescriptor]) *AXChartDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXChartDescriptorSelInitWithTitleSummaryXAxisDescriptorYAxisDescriptorSeries, title.Ptr(), summary.Ptr(), xAxis, yAxis.Ptr(), series.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXChartDescriptorFromID(_ret)
 }
 
 func (o *AXChartDescriptor) InitWithAttributedTitleSummaryXAxisDescriptorYAxisDescriptorSeries(attributedTitle *foundation.NSAttributedString, summary *foundation.NSString, xAxis AXDataAxisDescriptor, yAxis *AXNumericDataAxisDescriptor, series *foundation.NSArray[*AXDataSeriesDescriptor]) *AXChartDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXChartDescriptorSelInitWithAttributedTitleSummaryXAxisDescriptorYAxisDescriptorSeries, attributedTitle.Ptr(), summary.Ptr(), xAxis, yAxis.Ptr(), series.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXChartDescriptorFromID(_ret)
 }
 
 func (o *AXChartDescriptor) InitWithTitleSummaryXAxisDescriptorYAxisDescriptorAdditionalAxesSeries(title *foundation.NSString, summary *foundation.NSString, xAxis AXDataAxisDescriptor, yAxis *AXNumericDataAxisDescriptor, additionalAxes *foundation.NSArray[AXDataAxisDescriptor], series *foundation.NSArray[*AXDataSeriesDescriptor]) *AXChartDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXChartDescriptorSelInitWithTitleSummaryXAxisDescriptorYAxisDescriptorAdditionalAxesSeries, title.Ptr(), summary.Ptr(), xAxis, yAxis.Ptr(), additionalAxes.Ptr(), series.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXChartDescriptorFromID(_ret)
 }
 
 func (o *AXChartDescriptor) InitWithAttributedTitleSummaryXAxisDescriptorYAxisDescriptorAdditionalAxesSeries(attributedTitle *foundation.NSAttributedString, summary *foundation.NSString, xAxis AXDataAxisDescriptor, yAxis *AXNumericDataAxisDescriptor, additionalAxes *foundation.NSArray[AXDataAxisDescriptor], series *foundation.NSArray[*AXDataSeriesDescriptor]) *AXChartDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXChartDescriptorSelInitWithAttributedTitleSummaryXAxisDescriptorYAxisDescriptorAdditionalAxesSeries, attributedTitle.Ptr(), summary.Ptr(), xAxis, yAxis.Ptr(), additionalAxes.Ptr(), series.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXChartDescriptorFromID(_ret)
 }
 
 // The title of the chart.
 func (o *AXChartDescriptor) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXChartDescriptorSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -90,7 +100,9 @@ func (o *AXChartDescriptor) SetTitle(title *foundation.NSString) {
 // An attributed version of the title of the chart. When set, this will be used instead of `title`.
 func (o *AXChartDescriptor) AttributedTitle() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXChartDescriptorSelAttributedTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
@@ -101,7 +113,9 @@ func (o *AXChartDescriptor) SetAttributedTitle(attributedTitle *foundation.NSAtt
 // A natural language summary of the key message or features of the chart. e.g. "The chart shows that fuel efficiency decreases as vehicle weight increases."
 func (o *AXChartDescriptor) Summary() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXChartDescriptorSelSummary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -132,7 +146,9 @@ func (o *AXChartDescriptor) SetContentFrame(contentFrame corefoundation.CGRect) 
 // A set of data series descriptors describing each series in the chart.
 func (o *AXChartDescriptor) Series() *foundation.NSArray[*AXDataSeriesDescriptor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXChartDescriptorSelSeries)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AXDataSeriesDescriptor](_ret)
 }
 
@@ -153,7 +169,9 @@ func (o *AXChartDescriptor) SetXAxis(xAxis AXDataAxisDescriptor) {
 // The axis descriptor for the chart's Y axis.
 func (o *AXChartDescriptor) YAxis() *AXNumericDataAxisDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXChartDescriptorSelYAxis)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXNumericDataAxisDescriptorFromID(_ret)
 }
 
@@ -164,11 +182,12 @@ func (o *AXChartDescriptor) SetYAxis(yAxis *AXNumericDataAxisDescriptor) {
 // Descriptors for additional categorical or numerical axes beyond x and y. For example, in a visual chart, these values might be represented by the size or color of data points.
 func (o *AXChartDescriptor) AdditionalAxes() *foundation.NSArray[AXDataAxisDescriptor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXChartDescriptorSelAdditionalAxes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[AXDataAxisDescriptor](_ret)
 }
 
 func (o *AXChartDescriptor) SetAdditionalAxes(additionalAxes *foundation.NSArray[AXDataAxisDescriptor]) {
 	o.Ptr().Send(_aXChartDescriptorSelSetAdditionalAxes, additionalAxes.Ptr())
 }
-

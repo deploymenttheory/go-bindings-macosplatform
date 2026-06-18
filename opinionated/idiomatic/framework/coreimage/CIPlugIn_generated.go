@@ -41,4 +41,3 @@ type PlugInable interface {
 }
 
 var _ PlugInable = (*PlugIn)(nil)
-

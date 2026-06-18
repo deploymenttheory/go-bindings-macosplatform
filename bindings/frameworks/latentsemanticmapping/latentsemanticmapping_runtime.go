@@ -14,8 +14,8 @@ import (
 
 var (
 	_latentsemanticmappingLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce                 sync.Once
+	_failedSymbols            = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -50,29 +50,59 @@ func _loadLibrary() {
 	}
 	_register("LSMMapAddCategory", func() { purego.RegisterLibFunc(&_fnLSMMapAddCategory, _latentsemanticmappingLib, "LSMMapAddCategory") })
 	_register("LSMMapAddText", func() { purego.RegisterLibFunc(&_fnLSMMapAddText, _latentsemanticmappingLib, "LSMMapAddText") })
-	_register("LSMMapAddTextWithWeight", func() { purego.RegisterLibFunc(&_fnLSMMapAddTextWithWeight, _latentsemanticmappingLib, "LSMMapAddTextWithWeight") })
-	_register("LSMMapApplyClusters", func() { purego.RegisterLibFunc(&_fnLSMMapApplyClusters, _latentsemanticmappingLib, "LSMMapApplyClusters") })
+	_register("LSMMapAddTextWithWeight", func() {
+		purego.RegisterLibFunc(&_fnLSMMapAddTextWithWeight, _latentsemanticmappingLib, "LSMMapAddTextWithWeight")
+	})
+	_register("LSMMapApplyClusters", func() {
+		purego.RegisterLibFunc(&_fnLSMMapApplyClusters, _latentsemanticmappingLib, "LSMMapApplyClusters")
+	})
 	_register("LSMMapCompile", func() { purego.RegisterLibFunc(&_fnLSMMapCompile, _latentsemanticmappingLib, "LSMMapCompile") })
 	_register("LSMMapCreate", func() { purego.RegisterLibFunc(&_fnLSMMapCreate, _latentsemanticmappingLib, "LSMMapCreate") })
-	_register("LSMMapCreateClusters", func() { purego.RegisterLibFunc(&_fnLSMMapCreateClusters, _latentsemanticmappingLib, "LSMMapCreateClusters") })
-	_register("LSMMapCreateFromURL", func() { purego.RegisterLibFunc(&_fnLSMMapCreateFromURL, _latentsemanticmappingLib, "LSMMapCreateFromURL") })
-	_register("LSMMapGetCategoryCount", func() { purego.RegisterLibFunc(&_fnLSMMapGetCategoryCount, _latentsemanticmappingLib, "LSMMapGetCategoryCount") })
-	_register("LSMMapGetProperties", func() { purego.RegisterLibFunc(&_fnLSMMapGetProperties, _latentsemanticmappingLib, "LSMMapGetProperties") })
+	_register("LSMMapCreateClusters", func() {
+		purego.RegisterLibFunc(&_fnLSMMapCreateClusters, _latentsemanticmappingLib, "LSMMapCreateClusters")
+	})
+	_register("LSMMapCreateFromURL", func() {
+		purego.RegisterLibFunc(&_fnLSMMapCreateFromURL, _latentsemanticmappingLib, "LSMMapCreateFromURL")
+	})
+	_register("LSMMapGetCategoryCount", func() {
+		purego.RegisterLibFunc(&_fnLSMMapGetCategoryCount, _latentsemanticmappingLib, "LSMMapGetCategoryCount")
+	})
+	_register("LSMMapGetProperties", func() {
+		purego.RegisterLibFunc(&_fnLSMMapGetProperties, _latentsemanticmappingLib, "LSMMapGetProperties")
+	})
 	_register("LSMMapGetTypeID", func() { purego.RegisterLibFunc(&_fnLSMMapGetTypeID, _latentsemanticmappingLib, "LSMMapGetTypeID") })
-	_register("LSMMapSetProperties", func() { purego.RegisterLibFunc(&_fnLSMMapSetProperties, _latentsemanticmappingLib, "LSMMapSetProperties") })
-	_register("LSMMapSetStopWords", func() { purego.RegisterLibFunc(&_fnLSMMapSetStopWords, _latentsemanticmappingLib, "LSMMapSetStopWords") })
-	_register("LSMMapStartTraining", func() { purego.RegisterLibFunc(&_fnLSMMapStartTraining, _latentsemanticmappingLib, "LSMMapStartTraining") })
-	_register("LSMMapWriteToStream", func() { purego.RegisterLibFunc(&_fnLSMMapWriteToStream, _latentsemanticmappingLib, "LSMMapWriteToStream") })
+	_register("LSMMapSetProperties", func() {
+		purego.RegisterLibFunc(&_fnLSMMapSetProperties, _latentsemanticmappingLib, "LSMMapSetProperties")
+	})
+	_register("LSMMapSetStopWords", func() {
+		purego.RegisterLibFunc(&_fnLSMMapSetStopWords, _latentsemanticmappingLib, "LSMMapSetStopWords")
+	})
+	_register("LSMMapStartTraining", func() {
+		purego.RegisterLibFunc(&_fnLSMMapStartTraining, _latentsemanticmappingLib, "LSMMapStartTraining")
+	})
+	_register("LSMMapWriteToStream", func() {
+		purego.RegisterLibFunc(&_fnLSMMapWriteToStream, _latentsemanticmappingLib, "LSMMapWriteToStream")
+	})
 	_register("LSMMapWriteToURL", func() { purego.RegisterLibFunc(&_fnLSMMapWriteToURL, _latentsemanticmappingLib, "LSMMapWriteToURL") })
-	_register("LSMResultCopyToken", func() { purego.RegisterLibFunc(&_fnLSMResultCopyToken, _latentsemanticmappingLib, "LSMResultCopyToken") })
-	_register("LSMResultCopyTokenCluster", func() { purego.RegisterLibFunc(&_fnLSMResultCopyTokenCluster, _latentsemanticmappingLib, "LSMResultCopyTokenCluster") })
+	_register("LSMResultCopyToken", func() {
+		purego.RegisterLibFunc(&_fnLSMResultCopyToken, _latentsemanticmappingLib, "LSMResultCopyToken")
+	})
+	_register("LSMResultCopyTokenCluster", func() {
+		purego.RegisterLibFunc(&_fnLSMResultCopyTokenCluster, _latentsemanticmappingLib, "LSMResultCopyTokenCluster")
+	})
 	_register("LSMResultCopyWord", func() { purego.RegisterLibFunc(&_fnLSMResultCopyWord, _latentsemanticmappingLib, "LSMResultCopyWord") })
-	_register("LSMResultCopyWordCluster", func() { purego.RegisterLibFunc(&_fnLSMResultCopyWordCluster, _latentsemanticmappingLib, "LSMResultCopyWordCluster") })
+	_register("LSMResultCopyWordCluster", func() {
+		purego.RegisterLibFunc(&_fnLSMResultCopyWordCluster, _latentsemanticmappingLib, "LSMResultCopyWordCluster")
+	})
 	_register("LSMResultCreate", func() { purego.RegisterLibFunc(&_fnLSMResultCreate, _latentsemanticmappingLib, "LSMResultCreate") })
-	_register("LSMResultGetCategory", func() { purego.RegisterLibFunc(&_fnLSMResultGetCategory, _latentsemanticmappingLib, "LSMResultGetCategory") })
+	_register("LSMResultGetCategory", func() {
+		purego.RegisterLibFunc(&_fnLSMResultGetCategory, _latentsemanticmappingLib, "LSMResultGetCategory")
+	})
 	_register("LSMResultGetCount", func() { purego.RegisterLibFunc(&_fnLSMResultGetCount, _latentsemanticmappingLib, "LSMResultGetCount") })
 	_register("LSMResultGetScore", func() { purego.RegisterLibFunc(&_fnLSMResultGetScore, _latentsemanticmappingLib, "LSMResultGetScore") })
-	_register("LSMResultGetTypeID", func() { purego.RegisterLibFunc(&_fnLSMResultGetTypeID, _latentsemanticmappingLib, "LSMResultGetTypeID") })
+	_register("LSMResultGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnLSMResultGetTypeID, _latentsemanticmappingLib, "LSMResultGetTypeID")
+	})
 	_register("LSMTextAddToken", func() { purego.RegisterLibFunc(&_fnLSMTextAddToken, _latentsemanticmappingLib, "LSMTextAddToken") })
 	_register("LSMTextAddWord", func() { purego.RegisterLibFunc(&_fnLSMTextAddWord, _latentsemanticmappingLib, "LSMTextAddWord") })
 	_register("LSMTextAddWords", func() { purego.RegisterLibFunc(&_fnLSMTextAddWords, _latentsemanticmappingLib, "LSMTextAddWords") })

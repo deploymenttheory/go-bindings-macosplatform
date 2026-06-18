@@ -114,4 +114,3 @@ type MotionBlurParametersable interface {
 }
 
 var _ MotionBlurParametersable = (*MotionBlurParameters)(nil)
-

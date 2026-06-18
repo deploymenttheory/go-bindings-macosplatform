@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A rich visual representation of a link. ``LPLinkView`` presents a link based on its available metadata. Use it to show a link’s title and icon, associated images, inline audio, video playback, and maps in a familiar and consistent style. ## Present a rich link To present a rich link in your app, create an ``LPLinkView``, passing an ``LPLinkMetadata`` instance into its initializer. Then add the ``LPLinkView`` to your view. For example, to present links in a table view, add an ``LPLinkView`` instance as a subview when populating each cell. ```swift let linkView = LPLinkView(metadata: metadata) cell.contentView.addSubview(linkView) linkView.sizeToFit() ``` ``LPLinkView`` has an intrinsic size, but it also responds to <doc://com.apple.documentation/documentation/UIKit/UIView/sizeToFit()> to present a layout at any size.
+// A rich visual representation of a link. “LPLinkView“ presents a link based on its available metadata. Use it to show a link’s title and icon, associated images, inline audio, video playback, and maps in a familiar and consistent style. ## Present a rich link To present a rich link in your app, create an “LPLinkView“, passing an “LPLinkMetadata“ instance into its initializer. Then add the “LPLinkView“ to your view. For example, to present links in a table view, add an “LPLinkView“ instance as a subview when populating each cell. ```swift let linkView = LPLinkView(metadata: metadata) cell.contentView.addSubview(linkView) linkView.sizeToFit() ``` “LPLinkView“ has an intrinsic size, but it also responds to <doc://com.apple.documentation/documentation/UIKit/UIView/sizeToFit()> to present a layout at any size.
 //
 // Apple documentation: https://developer.apple.com/documentation/linkpresentation/lplinkview
 type LPLinkView struct {
@@ -19,11 +19,11 @@ type LPLinkView struct {
 }
 
 var (
-	_clsLPLinkView = _objcClass("LPLinkView")
-	_lPLinkViewSelInitWithURL = objc.RegisterName("initWithURL:")
+	_clsLPLinkView                 = _objcClass("LPLinkView")
+	_lPLinkViewSelInitWithURL      = objc.RegisterName("initWithURL:")
 	_lPLinkViewSelInitWithMetadata = objc.RegisterName("initWithMetadata:")
-	_lPLinkViewSelMetadata = objc.RegisterName("metadata")
-	_lPLinkViewSelSetMetadata = objc.RegisterName("setMetadata:")
+	_lPLinkViewSelMetadata         = objc.RegisterName("metadata")
+	_lPLinkViewSelSetMetadata      = objc.RegisterName("setMetadata:")
 )
 
 func LPLinkViewFromID(id objc.ID) *LPLinkView {
@@ -39,24 +39,29 @@ func LPLinkViewFromID(id objc.ID) *LPLinkView {
 // Initializes a placeholder link view without metadata for a given URL.
 func (o *LPLinkView) InitWithURL(uRL *foundation.NSURL) *LPLinkView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lPLinkViewSelInitWithURL, uRL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return LPLinkViewFromID(_ret)
 }
 
 // Initializes a link view with specified metadata.
 func (o *LPLinkView) InitWithMetadata(metadata *LPLinkMetadata) *LPLinkView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lPLinkViewSelInitWithMetadata, metadata.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return LPLinkViewFromID(_ret)
 }
 
 func (o *LPLinkView) Metadata() *LPLinkMetadata {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lPLinkViewSelMetadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return LPLinkMetadataFromID(_ret)
 }
 
 func (o *LPLinkView) SetMetadata(metadata *LPLinkMetadata) {
 	o.Ptr().Send(_lPLinkViewSelSetMetadata, metadata.Ptr())
 }
-

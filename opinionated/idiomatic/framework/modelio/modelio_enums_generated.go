@@ -12,7 +12,7 @@ type MDLAnimatedValueInterpolation uint64
 
 const (
 	MDLAnimatedValueInterpolationConstant MDLAnimatedValueInterpolation = 0
-	MDLAnimatedValueInterpolationLinear MDLAnimatedValueInterpolation = 1
+	MDLAnimatedValueInterpolationLinear   MDLAnimatedValueInterpolation = 1
 )
 
 func (e MDLAnimatedValueInterpolation) String() string {
@@ -29,7 +29,7 @@ func (e MDLAnimatedValueInterpolation) String() string {
 type MDLCameraProjection uint64
 
 const (
-	MDLCameraProjectionPerspective MDLCameraProjection = 0
+	MDLCameraProjectionPerspective  MDLCameraProjection = 0
 	MDLCameraProjectionOrthographic MDLCameraProjection = 1
 )
 
@@ -48,8 +48,8 @@ type MDLDataPrecision uint64
 
 const (
 	MDLDataPrecisionUndefined MDLDataPrecision = 0
-	MDLDataPrecisionFloat MDLDataPrecision = 1
-	MDLDataPrecisionDouble MDLDataPrecision = 2
+	MDLDataPrecisionFloat     MDLDataPrecision = 1
+	MDLDataPrecisionDouble    MDLDataPrecision = 2
 )
 
 func (e MDLDataPrecision) String() string {
@@ -68,11 +68,11 @@ func (e MDLDataPrecision) String() string {
 type MDLGeometryType int64
 
 const (
-	MDLGeometryTypePoints MDLGeometryType = 0
-	MDLGeometryTypeLines MDLGeometryType = 1
-	MDLGeometryTypeTriangles MDLGeometryType = 2
-	MDLGeometryTypeTriangleStrips MDLGeometryType = 3
-	MDLGeometryTypeQuads MDLGeometryType = 4
+	MDLGeometryTypePoints           MDLGeometryType = 0
+	MDLGeometryTypeLines            MDLGeometryType = 1
+	MDLGeometryTypeTriangles        MDLGeometryType = 2
+	MDLGeometryTypeTriangleStrips   MDLGeometryType = 3
+	MDLGeometryTypeQuads            MDLGeometryType = 4
 	MDLGeometryTypeVariableTopology MDLGeometryType = 5
 )
 
@@ -99,12 +99,12 @@ type MDLIndexBitDepth uint64
 
 const (
 	MDLIndexBitDepthInvalid MDLIndexBitDepth = 0
-	MDLIndexBitDepthUInt8 MDLIndexBitDepth = 8
-	MDLIndexBitDepthUint8 MDLIndexBitDepth = 8
-	MDLIndexBitDepthUInt16 MDLIndexBitDepth = 16
-	MDLIndexBitDepthUint16 MDLIndexBitDepth = 16
-	MDLIndexBitDepthUInt32 MDLIndexBitDepth = 32
-	MDLIndexBitDepthUint32 MDLIndexBitDepth = 32
+	MDLIndexBitDepthUInt8   MDLIndexBitDepth = 8
+	MDLIndexBitDepthUint8   MDLIndexBitDepth = 8
+	MDLIndexBitDepthUInt16  MDLIndexBitDepth = 16
+	MDLIndexBitDepthUint16  MDLIndexBitDepth = 16
+	MDLIndexBitDepthUInt32  MDLIndexBitDepth = 32
+	MDLIndexBitDepthUint32  MDLIndexBitDepth = 32
 )
 
 func (e MDLIndexBitDepth) String() string {
@@ -125,18 +125,18 @@ func (e MDLIndexBitDepth) String() string {
 type MDLLightType uint64
 
 const (
-	MDLLightTypeUnknown MDLLightType = 0
-	MDLLightTypeAmbient MDLLightType = 1
-	MDLLightTypeDirectional MDLLightType = 2
-	MDLLightTypeSpot MDLLightType = 3
-	MDLLightTypePoint MDLLightType = 4
-	MDLLightTypeLinear MDLLightType = 5
-	MDLLightTypeDiscArea MDLLightType = 6
+	MDLLightTypeUnknown         MDLLightType = 0
+	MDLLightTypeAmbient         MDLLightType = 1
+	MDLLightTypeDirectional     MDLLightType = 2
+	MDLLightTypeSpot            MDLLightType = 3
+	MDLLightTypePoint           MDLLightType = 4
+	MDLLightTypeLinear          MDLLightType = 5
+	MDLLightTypeDiscArea        MDLLightType = 6
 	MDLLightTypeRectangularArea MDLLightType = 7
 	MDLLightTypeSuperElliptical MDLLightType = 8
-	MDLLightTypePhotometric MDLLightType = 9
-	MDLLightTypeProbe MDLLightType = 10
-	MDLLightTypeEnvironment MDLLightType = 11
+	MDLLightTypePhotometric     MDLLightType = 9
+	MDLLightTypeProbe           MDLLightType = 10
+	MDLLightTypeEnvironment     MDLLightType = 11
 )
 
 func (e MDLLightType) String() string {
@@ -173,8 +173,8 @@ func (e MDLLightType) String() string {
 type MDLMaterialFace uint64
 
 const (
-	MDLMaterialFaceFront MDLMaterialFace = 0
-	MDLMaterialFaceBack MDLMaterialFace = 1
+	MDLMaterialFaceFront       MDLMaterialFace = 0
+	MDLMaterialFaceBack        MDLMaterialFace = 1
 	MDLMaterialFaceDoubleSided MDLMaterialFace = 2
 )
 
@@ -195,7 +195,7 @@ type MDLMaterialMipMapFilterMode uint64
 
 const (
 	MDLMaterialMipMapFilterModeNearest MDLMaterialMipMapFilterMode = 0
-	MDLMaterialMipMapFilterModeLinear MDLMaterialMipMapFilterMode = 1
+	MDLMaterialMipMapFilterModeLinear  MDLMaterialMipMapFilterMode = 1
 )
 
 func (e MDLMaterialMipMapFilterMode) String() string {
@@ -212,17 +212,17 @@ func (e MDLMaterialMipMapFilterMode) String() string {
 type MDLMaterialPropertyType uint64
 
 const (
-	MDLMaterialPropertyTypeNone MDLMaterialPropertyType = 0
-	MDLMaterialPropertyTypeString MDLMaterialPropertyType = 1
-	MDLMaterialPropertyTypeURL MDLMaterialPropertyType = 2
-	MDLMaterialPropertyTypeTexture MDLMaterialPropertyType = 3
-	MDLMaterialPropertyTypeColor MDLMaterialPropertyType = 4
-	MDLMaterialPropertyTypeFloat MDLMaterialPropertyType = 5
-	MDLMaterialPropertyTypeFloat2 MDLMaterialPropertyType = 6
-	MDLMaterialPropertyTypeFloat3 MDLMaterialPropertyType = 7
-	MDLMaterialPropertyTypeFloat4 MDLMaterialPropertyType = 8
+	MDLMaterialPropertyTypeNone     MDLMaterialPropertyType = 0
+	MDLMaterialPropertyTypeString   MDLMaterialPropertyType = 1
+	MDLMaterialPropertyTypeURL      MDLMaterialPropertyType = 2
+	MDLMaterialPropertyTypeTexture  MDLMaterialPropertyType = 3
+	MDLMaterialPropertyTypeColor    MDLMaterialPropertyType = 4
+	MDLMaterialPropertyTypeFloat    MDLMaterialPropertyType = 5
+	MDLMaterialPropertyTypeFloat2   MDLMaterialPropertyType = 6
+	MDLMaterialPropertyTypeFloat3   MDLMaterialPropertyType = 7
+	MDLMaterialPropertyTypeFloat4   MDLMaterialPropertyType = 8
 	MDLMaterialPropertyTypeMatrix44 MDLMaterialPropertyType = 9
-	MDLMaterialPropertyTypeBuffer MDLMaterialPropertyType = 10
+	MDLMaterialPropertyTypeBuffer   MDLMaterialPropertyType = 10
 )
 
 func (e MDLMaterialPropertyType) String() string {
@@ -257,32 +257,32 @@ func (e MDLMaterialPropertyType) String() string {
 type MDLMaterialSemantic uint64
 
 const (
-	MDLMaterialSemanticBaseColor MDLMaterialSemantic = 0
-	MDLMaterialSemanticSubsurface MDLMaterialSemantic = 1
-	MDLMaterialSemanticMetallic MDLMaterialSemantic = 2
-	MDLMaterialSemanticSpecular MDLMaterialSemantic = 3
-	MDLMaterialSemanticSpecularExponent MDLMaterialSemantic = 4
-	MDLMaterialSemanticSpecularTint MDLMaterialSemantic = 5
-	MDLMaterialSemanticRoughness MDLMaterialSemantic = 6
-	MDLMaterialSemanticAnisotropic MDLMaterialSemantic = 7
-	MDLMaterialSemanticAnisotropicRotation MDLMaterialSemantic = 8
-	MDLMaterialSemanticSheen MDLMaterialSemantic = 9
-	MDLMaterialSemanticSheenTint MDLMaterialSemantic = 10
-	MDLMaterialSemanticClearcoat MDLMaterialSemantic = 11
-	MDLMaterialSemanticClearcoatGloss MDLMaterialSemantic = 12
-	MDLMaterialSemanticEmission MDLMaterialSemantic = 13
-	MDLMaterialSemanticBump MDLMaterialSemantic = 14
-	MDLMaterialSemanticOpacity MDLMaterialSemantic = 15
+	MDLMaterialSemanticBaseColor                  MDLMaterialSemantic = 0
+	MDLMaterialSemanticSubsurface                 MDLMaterialSemantic = 1
+	MDLMaterialSemanticMetallic                   MDLMaterialSemantic = 2
+	MDLMaterialSemanticSpecular                   MDLMaterialSemantic = 3
+	MDLMaterialSemanticSpecularExponent           MDLMaterialSemantic = 4
+	MDLMaterialSemanticSpecularTint               MDLMaterialSemantic = 5
+	MDLMaterialSemanticRoughness                  MDLMaterialSemantic = 6
+	MDLMaterialSemanticAnisotropic                MDLMaterialSemantic = 7
+	MDLMaterialSemanticAnisotropicRotation        MDLMaterialSemantic = 8
+	MDLMaterialSemanticSheen                      MDLMaterialSemantic = 9
+	MDLMaterialSemanticSheenTint                  MDLMaterialSemantic = 10
+	MDLMaterialSemanticClearcoat                  MDLMaterialSemantic = 11
+	MDLMaterialSemanticClearcoatGloss             MDLMaterialSemantic = 12
+	MDLMaterialSemanticEmission                   MDLMaterialSemantic = 13
+	MDLMaterialSemanticBump                       MDLMaterialSemantic = 14
+	MDLMaterialSemanticOpacity                    MDLMaterialSemantic = 15
 	MDLMaterialSemanticInterfaceIndexOfRefraction MDLMaterialSemantic = 16
-	MDLMaterialSemanticMaterialIndexOfRefraction MDLMaterialSemantic = 17
-	MDLMaterialSemanticObjectSpaceNormal MDLMaterialSemantic = 18
-	MDLMaterialSemanticTangentSpaceNormal MDLMaterialSemantic = 19
-	MDLMaterialSemanticDisplacement MDLMaterialSemantic = 20
-	MDLMaterialSemanticDisplacementScale MDLMaterialSemantic = 21
-	MDLMaterialSemanticAmbientOcclusion MDLMaterialSemantic = 22
-	MDLMaterialSemanticAmbientOcclusionScale MDLMaterialSemantic = 23
-	MDLMaterialSemanticNone MDLMaterialSemantic = 32768
-	MDLMaterialSemanticUserDefined MDLMaterialSemantic = 32769
+	MDLMaterialSemanticMaterialIndexOfRefraction  MDLMaterialSemantic = 17
+	MDLMaterialSemanticObjectSpaceNormal          MDLMaterialSemantic = 18
+	MDLMaterialSemanticTangentSpaceNormal         MDLMaterialSemantic = 19
+	MDLMaterialSemanticDisplacement               MDLMaterialSemantic = 20
+	MDLMaterialSemanticDisplacementScale          MDLMaterialSemantic = 21
+	MDLMaterialSemanticAmbientOcclusion           MDLMaterialSemantic = 22
+	MDLMaterialSemanticAmbientOcclusionScale      MDLMaterialSemantic = 23
+	MDLMaterialSemanticNone                       MDLMaterialSemantic = 32768
+	MDLMaterialSemanticUserDefined                MDLMaterialSemantic = 32769
 )
 
 func (e MDLMaterialSemantic) String() string {
@@ -348,7 +348,7 @@ type MDLMaterialTextureFilterMode uint64
 
 const (
 	MDLMaterialTextureFilterModeNearest MDLMaterialTextureFilterMode = 0
-	MDLMaterialTextureFilterModeLinear MDLMaterialTextureFilterMode = 1
+	MDLMaterialTextureFilterModeLinear  MDLMaterialTextureFilterMode = 1
 )
 
 func (e MDLMaterialTextureFilterMode) String() string {
@@ -365,7 +365,7 @@ func (e MDLMaterialTextureFilterMode) String() string {
 type MDLMaterialTextureWrapMode uint64
 
 const (
-	MDLMaterialTextureWrapModeClamp MDLMaterialTextureWrapMode = 0
+	MDLMaterialTextureWrapModeClamp  MDLMaterialTextureWrapMode = 0
 	MDLMaterialTextureWrapModeRepeat MDLMaterialTextureWrapMode = 1
 	MDLMaterialTextureWrapModeMirror MDLMaterialTextureWrapMode = 2
 )
@@ -387,7 +387,7 @@ type MDLMeshBufferType uint64
 
 const (
 	MDLMeshBufferTypeVertex MDLMeshBufferType = 1
-	MDLMeshBufferTypeIndex MDLMeshBufferType = 2
+	MDLMeshBufferTypeIndex  MDLMeshBufferType = 2
 	MDLMeshBufferTypeCustom MDLMeshBufferType = 3
 )
 
@@ -407,7 +407,7 @@ func (e MDLMeshBufferType) String() string {
 type MDLProbePlacement int64
 
 const (
-	MDLProbePlacementUniformGrid MDLProbePlacement = 0
+	MDLProbePlacementUniformGrid            MDLProbePlacement = 0
 	MDLProbePlacementIrradianceDistribution MDLProbePlacement = 1
 )
 
@@ -425,17 +425,17 @@ func (e MDLProbePlacement) String() string {
 type MDLTextureChannelEncoding int64
 
 const (
-	MDLTextureChannelEncodingUInt8 MDLTextureChannelEncoding = 1
-	MDLTextureChannelEncodingUint8 MDLTextureChannelEncoding = 1
-	MDLTextureChannelEncodingUInt16 MDLTextureChannelEncoding = 2
-	MDLTextureChannelEncodingUint16 MDLTextureChannelEncoding = 2
-	MDLTextureChannelEncodingUInt24 MDLTextureChannelEncoding = 3
-	MDLTextureChannelEncodingUint24 MDLTextureChannelEncoding = 3
-	MDLTextureChannelEncodingUInt32 MDLTextureChannelEncoding = 4
-	MDLTextureChannelEncodingUint32 MDLTextureChannelEncoding = 4
-	MDLTextureChannelEncodingFloat16 MDLTextureChannelEncoding = 258
+	MDLTextureChannelEncodingUInt8     MDLTextureChannelEncoding = 1
+	MDLTextureChannelEncodingUint8     MDLTextureChannelEncoding = 1
+	MDLTextureChannelEncodingUInt16    MDLTextureChannelEncoding = 2
+	MDLTextureChannelEncodingUint16    MDLTextureChannelEncoding = 2
+	MDLTextureChannelEncodingUInt24    MDLTextureChannelEncoding = 3
+	MDLTextureChannelEncodingUint24    MDLTextureChannelEncoding = 3
+	MDLTextureChannelEncodingUInt32    MDLTextureChannelEncoding = 4
+	MDLTextureChannelEncodingUint32    MDLTextureChannelEncoding = 4
+	MDLTextureChannelEncodingFloat16   MDLTextureChannelEncoding = 258
 	MDLTextureChannelEncodingFloat16SR MDLTextureChannelEncoding = 770
-	MDLTextureChannelEncodingFloat32 MDLTextureChannelEncoding = 260
+	MDLTextureChannelEncodingFloat32   MDLTextureChannelEncoding = 260
 )
 
 func (e MDLTextureChannelEncoding) String() string {
@@ -492,69 +492,69 @@ func (e MDLTransformOpRotationOrder) String() string {
 type MDLVertexFormat uint64
 
 const (
-	MDLVertexFormatInvalid MDLVertexFormat = 0
-	MDLVertexFormatPackedBit MDLVertexFormat = 4096
-	MDLVertexFormatUCharBits MDLVertexFormat = 65536
-	MDLVertexFormatCharBits MDLVertexFormat = 131072
-	MDLVertexFormatUCharNormalizedBits MDLVertexFormat = 196608
-	MDLVertexFormatCharNormalizedBits MDLVertexFormat = 262144
-	MDLVertexFormatUShortBits MDLVertexFormat = 327680
-	MDLVertexFormatShortBits MDLVertexFormat = 393216
-	MDLVertexFormatUShortNormalizedBits MDLVertexFormat = 458752
-	MDLVertexFormatShortNormalizedBits MDLVertexFormat = 524288
-	MDLVertexFormatUIntBits MDLVertexFormat = 589824
-	MDLVertexFormatIntBits MDLVertexFormat = 655360
-	MDLVertexFormatHalfBits MDLVertexFormat = 720896
-	MDLVertexFormatFloatBits MDLVertexFormat = 786432
-	MDLVertexFormatUChar MDLVertexFormat = 65537
-	MDLVertexFormatUChar2 MDLVertexFormat = 65538
-	MDLVertexFormatUChar3 MDLVertexFormat = 65539
-	MDLVertexFormatUChar4 MDLVertexFormat = 65540
-	MDLVertexFormatChar MDLVertexFormat = 131073
-	MDLVertexFormatChar2 MDLVertexFormat = 131074
-	MDLVertexFormatChar3 MDLVertexFormat = 131075
-	MDLVertexFormatChar4 MDLVertexFormat = 131076
-	MDLVertexFormatUCharNormalized MDLVertexFormat = 196609
-	MDLVertexFormatUChar2Normalized MDLVertexFormat = 196610
-	MDLVertexFormatUChar3Normalized MDLVertexFormat = 196611
-	MDLVertexFormatUChar4Normalized MDLVertexFormat = 196612
-	MDLVertexFormatCharNormalized MDLVertexFormat = 262145
-	MDLVertexFormatChar2Normalized MDLVertexFormat = 262146
-	MDLVertexFormatChar3Normalized MDLVertexFormat = 262147
-	MDLVertexFormatChar4Normalized MDLVertexFormat = 262148
-	MDLVertexFormatUShort MDLVertexFormat = 327681
-	MDLVertexFormatUShort2 MDLVertexFormat = 327682
-	MDLVertexFormatUShort3 MDLVertexFormat = 327683
-	MDLVertexFormatUShort4 MDLVertexFormat = 327684
-	MDLVertexFormatShort MDLVertexFormat = 393217
-	MDLVertexFormatShort2 MDLVertexFormat = 393218
-	MDLVertexFormatShort3 MDLVertexFormat = 393219
-	MDLVertexFormatShort4 MDLVertexFormat = 393220
-	MDLVertexFormatUShortNormalized MDLVertexFormat = 458753
-	MDLVertexFormatUShort2Normalized MDLVertexFormat = 458754
-	MDLVertexFormatUShort3Normalized MDLVertexFormat = 458755
-	MDLVertexFormatUShort4Normalized MDLVertexFormat = 458756
-	MDLVertexFormatShortNormalized MDLVertexFormat = 524289
-	MDLVertexFormatShort2Normalized MDLVertexFormat = 524290
-	MDLVertexFormatShort3Normalized MDLVertexFormat = 524291
-	MDLVertexFormatShort4Normalized MDLVertexFormat = 524292
-	MDLVertexFormatUInt MDLVertexFormat = 589825
-	MDLVertexFormatUInt2 MDLVertexFormat = 589826
-	MDLVertexFormatUInt3 MDLVertexFormat = 589827
-	MDLVertexFormatUInt4 MDLVertexFormat = 589828
-	MDLVertexFormatInt MDLVertexFormat = 655361
-	MDLVertexFormatInt2 MDLVertexFormat = 655362
-	MDLVertexFormatInt3 MDLVertexFormat = 655363
-	MDLVertexFormatInt4 MDLVertexFormat = 655364
-	MDLVertexFormatHalf MDLVertexFormat = 720897
-	MDLVertexFormatHalf2 MDLVertexFormat = 720898
-	MDLVertexFormatHalf3 MDLVertexFormat = 720899
-	MDLVertexFormatHalf4 MDLVertexFormat = 720900
-	MDLVertexFormatFloat MDLVertexFormat = 786433
-	MDLVertexFormatFloat2 MDLVertexFormat = 786434
-	MDLVertexFormatFloat3 MDLVertexFormat = 786435
-	MDLVertexFormatFloat4 MDLVertexFormat = 786436
-	MDLVertexFormatInt1010102Normalized MDLVertexFormat = 659460
+	MDLVertexFormatInvalid               MDLVertexFormat = 0
+	MDLVertexFormatPackedBit             MDLVertexFormat = 4096
+	MDLVertexFormatUCharBits             MDLVertexFormat = 65536
+	MDLVertexFormatCharBits              MDLVertexFormat = 131072
+	MDLVertexFormatUCharNormalizedBits   MDLVertexFormat = 196608
+	MDLVertexFormatCharNormalizedBits    MDLVertexFormat = 262144
+	MDLVertexFormatUShortBits            MDLVertexFormat = 327680
+	MDLVertexFormatShortBits             MDLVertexFormat = 393216
+	MDLVertexFormatUShortNormalizedBits  MDLVertexFormat = 458752
+	MDLVertexFormatShortNormalizedBits   MDLVertexFormat = 524288
+	MDLVertexFormatUIntBits              MDLVertexFormat = 589824
+	MDLVertexFormatIntBits               MDLVertexFormat = 655360
+	MDLVertexFormatHalfBits              MDLVertexFormat = 720896
+	MDLVertexFormatFloatBits             MDLVertexFormat = 786432
+	MDLVertexFormatUChar                 MDLVertexFormat = 65537
+	MDLVertexFormatUChar2                MDLVertexFormat = 65538
+	MDLVertexFormatUChar3                MDLVertexFormat = 65539
+	MDLVertexFormatUChar4                MDLVertexFormat = 65540
+	MDLVertexFormatChar                  MDLVertexFormat = 131073
+	MDLVertexFormatChar2                 MDLVertexFormat = 131074
+	MDLVertexFormatChar3                 MDLVertexFormat = 131075
+	MDLVertexFormatChar4                 MDLVertexFormat = 131076
+	MDLVertexFormatUCharNormalized       MDLVertexFormat = 196609
+	MDLVertexFormatUChar2Normalized      MDLVertexFormat = 196610
+	MDLVertexFormatUChar3Normalized      MDLVertexFormat = 196611
+	MDLVertexFormatUChar4Normalized      MDLVertexFormat = 196612
+	MDLVertexFormatCharNormalized        MDLVertexFormat = 262145
+	MDLVertexFormatChar2Normalized       MDLVertexFormat = 262146
+	MDLVertexFormatChar3Normalized       MDLVertexFormat = 262147
+	MDLVertexFormatChar4Normalized       MDLVertexFormat = 262148
+	MDLVertexFormatUShort                MDLVertexFormat = 327681
+	MDLVertexFormatUShort2               MDLVertexFormat = 327682
+	MDLVertexFormatUShort3               MDLVertexFormat = 327683
+	MDLVertexFormatUShort4               MDLVertexFormat = 327684
+	MDLVertexFormatShort                 MDLVertexFormat = 393217
+	MDLVertexFormatShort2                MDLVertexFormat = 393218
+	MDLVertexFormatShort3                MDLVertexFormat = 393219
+	MDLVertexFormatShort4                MDLVertexFormat = 393220
+	MDLVertexFormatUShortNormalized      MDLVertexFormat = 458753
+	MDLVertexFormatUShort2Normalized     MDLVertexFormat = 458754
+	MDLVertexFormatUShort3Normalized     MDLVertexFormat = 458755
+	MDLVertexFormatUShort4Normalized     MDLVertexFormat = 458756
+	MDLVertexFormatShortNormalized       MDLVertexFormat = 524289
+	MDLVertexFormatShort2Normalized      MDLVertexFormat = 524290
+	MDLVertexFormatShort3Normalized      MDLVertexFormat = 524291
+	MDLVertexFormatShort4Normalized      MDLVertexFormat = 524292
+	MDLVertexFormatUInt                  MDLVertexFormat = 589825
+	MDLVertexFormatUInt2                 MDLVertexFormat = 589826
+	MDLVertexFormatUInt3                 MDLVertexFormat = 589827
+	MDLVertexFormatUInt4                 MDLVertexFormat = 589828
+	MDLVertexFormatInt                   MDLVertexFormat = 655361
+	MDLVertexFormatInt2                  MDLVertexFormat = 655362
+	MDLVertexFormatInt3                  MDLVertexFormat = 655363
+	MDLVertexFormatInt4                  MDLVertexFormat = 655364
+	MDLVertexFormatHalf                  MDLVertexFormat = 720897
+	MDLVertexFormatHalf2                 MDLVertexFormat = 720898
+	MDLVertexFormatHalf3                 MDLVertexFormat = 720899
+	MDLVertexFormatHalf4                 MDLVertexFormat = 720900
+	MDLVertexFormatFloat                 MDLVertexFormat = 786433
+	MDLVertexFormatFloat2                MDLVertexFormat = 786434
+	MDLVertexFormatFloat3                MDLVertexFormat = 786435
+	MDLVertexFormatFloat4                MDLVertexFormat = 786436
+	MDLVertexFormatInt1010102Normalized  MDLVertexFormat = 659460
 	MDLVertexFormatUInt1010102Normalized MDLVertexFormat = 593924
 )
 
@@ -692,4 +692,3 @@ func (e MDLVertexFormat) String() string {
 		return fmt.Sprintf("MDLVertexFormat(%d)", int64(e))
 	}
 }
-

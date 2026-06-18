@@ -16,10 +16,10 @@ type AVMetricHLSPlaylistRequestEvent struct {
 }
 
 var (
-	_clsAVMetricHLSPlaylistRequestEvent = _objcClass("AVMetricHLSPlaylistRequestEvent")
-	_aVMetricHLSPlaylistRequestEventSelUrl = objc.RegisterName("url")
-	_aVMetricHLSPlaylistRequestEventSelIsMultivariantPlaylist = objc.RegisterName("isMultivariantPlaylist")
-	_aVMetricHLSPlaylistRequestEventSelMediaType = objc.RegisterName("mediaType")
+	_clsAVMetricHLSPlaylistRequestEvent                          = _objcClass("AVMetricHLSPlaylistRequestEvent")
+	_aVMetricHLSPlaylistRequestEventSelUrl                       = objc.RegisterName("url")
+	_aVMetricHLSPlaylistRequestEventSelIsMultivariantPlaylist    = objc.RegisterName("isMultivariantPlaylist")
+	_aVMetricHLSPlaylistRequestEventSelMediaType                 = objc.RegisterName("mediaType")
 	_aVMetricHLSPlaylistRequestEventSelMediaResourceRequestEvent = objc.RegisterName("mediaResourceRequestEvent")
 )
 
@@ -36,7 +36,9 @@ func AVMetricHLSPlaylistRequestEventFromID(id objc.ID) *AVMetricHLSPlaylistReque
 // Returns the URL of the playlist. If no value is available, returns nil.
 func (o *AVMetricHLSPlaylistRequestEvent) Url() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricHLSPlaylistRequestEventSelUrl)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -49,14 +51,17 @@ func (o *AVMetricHLSPlaylistRequestEvent) IsMultivariantPlaylist() bool {
 // Returns the media type. If the value cannot be determined, returns AVMediaTypeMuxed.
 func (o *AVMetricHLSPlaylistRequestEvent) MediaType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricHLSPlaylistRequestEventSelMediaType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Returns the media resource request event which was used to satisfy the playlist.
 func (o *AVMetricHLSPlaylistRequestEvent) MediaResourceRequestEvent() *AVMetricMediaResourceRequestEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricHLSPlaylistRequestEventSelMediaResourceRequestEvent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMetricMediaResourceRequestEventFromID(_ret)
 }
-

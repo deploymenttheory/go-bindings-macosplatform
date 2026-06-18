@@ -15,4 +15,3 @@ type SCNVector4 struct {
 	Z float64
 	W float64
 }
-

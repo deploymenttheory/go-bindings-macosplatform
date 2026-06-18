@@ -12,187 +12,187 @@ import (
 )
 
 var (
-	_fnSCBondInterfaceCopyAll func(unsafe.Pointer) unsafe.Pointer
+	_fnSCBondInterfaceCopyAll                       func(unsafe.Pointer) unsafe.Pointer
 	_fnSCBondInterfaceCopyAvailableMemberInterfaces func(unsafe.Pointer) unsafe.Pointer
-	_fnSCBondInterfaceCopyStatus func(unsafe.Pointer) unsafe.Pointer
-	_fnSCBondInterfaceCreate func(unsafe.Pointer) unsafe.Pointer
-	_fnSCBondInterfaceGetMemberInterfaces func(unsafe.Pointer) unsafe.Pointer
-	_fnSCBondInterfaceGetOptions func(unsafe.Pointer) unsafe.Pointer
-	_fnSCBondInterfaceRemove func(unsafe.Pointer) uint8
-	_fnSCBondInterfaceSetLocalizedDisplayName func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCBondInterfaceSetMemberInterfaces func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCBondInterfaceSetOptions func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCBondStatusGetInterfaceStatus func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSCBondStatusGetMemberInterfaces func(unsafe.Pointer) unsafe.Pointer
-	_fnSCBondStatusGetTypeID func() uint
+	_fnSCBondInterfaceCopyStatus                    func(unsafe.Pointer) unsafe.Pointer
+	_fnSCBondInterfaceCreate                        func(unsafe.Pointer) unsafe.Pointer
+	_fnSCBondInterfaceGetMemberInterfaces           func(unsafe.Pointer) unsafe.Pointer
+	_fnSCBondInterfaceGetOptions                    func(unsafe.Pointer) unsafe.Pointer
+	_fnSCBondInterfaceRemove                        func(unsafe.Pointer) uint8
+	_fnSCBondInterfaceSetLocalizedDisplayName       func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCBondInterfaceSetMemberInterfaces           func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCBondInterfaceSetOptions                    func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCBondStatusGetInterfaceStatus               func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSCBondStatusGetMemberInterfaces              func(unsafe.Pointer) unsafe.Pointer
+	_fnSCBondStatusGetTypeID                        func() uint
 	// @function SCCopyLastError @discussion Returns the most recent status or error code generated as the result of calling a System Configuration framework API. @result Returns the last error encountered.
-	_fnSCCopyLastError func() unsafe.Pointer
-	_fnSCDynamicStoreAddTemporaryValue func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCDynamicStoreAddValue func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCDynamicStoreCopyComputerName func(unsafe.Pointer, *uint) unsafe.Pointer
-	_fnSCDynamicStoreCopyConsoleUser func(unsafe.Pointer, *uint, *uint) unsafe.Pointer
-	_fnSCDynamicStoreCopyKeyList func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSCDynamicStoreCopyLocalHostName func(unsafe.Pointer) unsafe.Pointer
-	_fnSCDynamicStoreCopyLocation func(unsafe.Pointer) unsafe.Pointer
-	_fnSCDynamicStoreCopyMultiple func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSCDynamicStoreCopyNotifiedKeys func(unsafe.Pointer) unsafe.Pointer
-	_fnSCDynamicStoreCopyProxies func(unsafe.Pointer) unsafe.Pointer
-	_fnSCDynamicStoreCopyValue func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSCDynamicStoreCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *SCDynamicStoreContext) unsafe.Pointer
-	_fnSCDynamicStoreCreateRunLoopSource func(unsafe.Pointer, unsafe.Pointer, int) unsafe.Pointer
-	_fnSCDynamicStoreCreateWithOptions func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *SCDynamicStoreContext) unsafe.Pointer
-	_fnSCDynamicStoreGetTypeID func() uint
-	_fnSCDynamicStoreKeyCreateComputerName func(unsafe.Pointer) unsafe.Pointer
-	_fnSCDynamicStoreKeyCreateConsoleUser func(unsafe.Pointer) unsafe.Pointer
-	_fnSCDynamicStoreKeyCreateHostNames func(unsafe.Pointer) unsafe.Pointer
-	_fnSCDynamicStoreKeyCreateLocation func(unsafe.Pointer) unsafe.Pointer
-	_fnSCDynamicStoreKeyCreateNetworkGlobalEntity func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSCDynamicStoreKeyCreateNetworkInterface func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSCCopyLastError                               func() unsafe.Pointer
+	_fnSCDynamicStoreAddTemporaryValue               func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCDynamicStoreAddValue                        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCDynamicStoreCopyComputerName                func(unsafe.Pointer, *uint) unsafe.Pointer
+	_fnSCDynamicStoreCopyConsoleUser                 func(unsafe.Pointer, *uint, *uint) unsafe.Pointer
+	_fnSCDynamicStoreCopyKeyList                     func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSCDynamicStoreCopyLocalHostName               func(unsafe.Pointer) unsafe.Pointer
+	_fnSCDynamicStoreCopyLocation                    func(unsafe.Pointer) unsafe.Pointer
+	_fnSCDynamicStoreCopyMultiple                    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSCDynamicStoreCopyNotifiedKeys                func(unsafe.Pointer) unsafe.Pointer
+	_fnSCDynamicStoreCopyProxies                     func(unsafe.Pointer) unsafe.Pointer
+	_fnSCDynamicStoreCopyValue                       func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSCDynamicStoreCreate                          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *SCDynamicStoreContext) unsafe.Pointer
+	_fnSCDynamicStoreCreateRunLoopSource             func(unsafe.Pointer, unsafe.Pointer, int) unsafe.Pointer
+	_fnSCDynamicStoreCreateWithOptions               func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *SCDynamicStoreContext) unsafe.Pointer
+	_fnSCDynamicStoreGetTypeID                       func() uint
+	_fnSCDynamicStoreKeyCreateComputerName           func(unsafe.Pointer) unsafe.Pointer
+	_fnSCDynamicStoreKeyCreateConsoleUser            func(unsafe.Pointer) unsafe.Pointer
+	_fnSCDynamicStoreKeyCreateHostNames              func(unsafe.Pointer) unsafe.Pointer
+	_fnSCDynamicStoreKeyCreateLocation               func(unsafe.Pointer) unsafe.Pointer
+	_fnSCDynamicStoreKeyCreateNetworkGlobalEntity    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSCDynamicStoreKeyCreateNetworkInterface       func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_fnSCDynamicStoreKeyCreateNetworkInterfaceEntity func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSCDynamicStoreKeyCreateNetworkServiceEntity func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSCDynamicStoreKeyCreateProxies func(unsafe.Pointer) unsafe.Pointer
-	_fnSCDynamicStoreNotifyValue func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCDynamicStoreRemoveValue func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCDynamicStoreSetDispatchQueue func(unsafe.Pointer, objc.ID) uint8
-	_fnSCDynamicStoreSetMultiple func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCDynamicStoreSetNotificationKeys func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCDynamicStoreSetValue func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCDynamicStoreKeyCreateNetworkServiceEntity   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSCDynamicStoreKeyCreateProxies                func(unsafe.Pointer) unsafe.Pointer
+	_fnSCDynamicStoreNotifyValue                     func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCDynamicStoreRemoveValue                     func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCDynamicStoreSetDispatchQueue                func(unsafe.Pointer, objc.ID) uint8
+	_fnSCDynamicStoreSetMultiple                     func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCDynamicStoreSetNotificationKeys             func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCDynamicStoreSetValue                        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
 	// @function SCError @discussion Returns the most recent status or error code generated as the result of calling a System Configuration framework API. @result Returns the last error encountered.
 	_fnSCError func() int
 	// @function SCErrorString @discussion Returns a pointer to the message string associated with the specified status or error number. @param status The status or error number. @result Returns a pointer to the error message string.
 	_fnSCErrorString func(int) string
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnSCNetworkCheckReachabilityByAddress func(unsafe.Pointer, uint, *uint32) uint8
-// Deprecated: No longer supported
-	_fnSCNetworkCheckReachabilityByName func(string, *uint32) uint8
-	_fnSCNetworkConnectionCopyExtendedStatus func(unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkConnectionCopyServiceID func(unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkConnectionCopyStatistics func(unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkConnectionCopyUserOptions func(unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkConnectionCopyUserPreferences func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCNetworkConnectionCreateWithServiceID func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *SCNetworkConnectionContext) unsafe.Pointer
-	_fnSCNetworkConnectionGetStatus func(unsafe.Pointer) SCNetworkConnectionStatus
-	_fnSCNetworkConnectionGetTypeID func() uint
-	_fnSCNetworkConnectionScheduleWithRunLoop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCNetworkConnectionSetDispatchQueue func(unsafe.Pointer, objc.ID) uint8
-	_fnSCNetworkConnectionStart func(unsafe.Pointer, unsafe.Pointer, uint8) uint8
-	_fnSCNetworkConnectionStop func(unsafe.Pointer, uint8) uint8
-	_fnSCNetworkConnectionUnscheduleFromRunLoop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCNetworkInterfaceCopyAll func() unsafe.Pointer
-	_fnSCNetworkInterfaceCopyMTU func(unsafe.Pointer, *int32, *int32, *int32) uint8
-	_fnSCNetworkInterfaceCopyMediaOptions func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8) uint8
-	_fnSCNetworkInterfaceCopyMediaSubTypeOptions func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkInterfaceCopyMediaSubTypes func(unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkInterfaceCreateWithInterface func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkInterfaceForceConfigurationRefresh func(unsafe.Pointer) uint8
-	_fnSCNetworkInterfaceGetBSDName func(unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkInterfaceGetConfiguration func(unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkInterfaceGetExtendedConfiguration func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkInterfaceGetHardwareAddressString func(unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkInterfaceGetInterface func(unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkInterfaceGetInterfaceType func(unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkInterfaceGetLocalizedDisplayName func(unsafe.Pointer) unsafe.Pointer
+	// Deprecated: No longer supported
+	_fnSCNetworkCheckReachabilityByName             func(string, *uint32) uint8
+	_fnSCNetworkConnectionCopyExtendedStatus        func(unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkConnectionCopyServiceID             func(unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkConnectionCopyStatistics            func(unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkConnectionCopyUserOptions           func(unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkConnectionCopyUserPreferences       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCNetworkConnectionCreateWithServiceID       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *SCNetworkConnectionContext) unsafe.Pointer
+	_fnSCNetworkConnectionGetStatus                 func(unsafe.Pointer) SCNetworkConnectionStatus
+	_fnSCNetworkConnectionGetTypeID                 func() uint
+	_fnSCNetworkConnectionScheduleWithRunLoop       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCNetworkConnectionSetDispatchQueue          func(unsafe.Pointer, objc.ID) uint8
+	_fnSCNetworkConnectionStart                     func(unsafe.Pointer, unsafe.Pointer, uint8) uint8
+	_fnSCNetworkConnectionStop                      func(unsafe.Pointer, uint8) uint8
+	_fnSCNetworkConnectionUnscheduleFromRunLoop     func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCNetworkInterfaceCopyAll                    func() unsafe.Pointer
+	_fnSCNetworkInterfaceCopyMTU                    func(unsafe.Pointer, *int32, *int32, *int32) uint8
+	_fnSCNetworkInterfaceCopyMediaOptions           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8) uint8
+	_fnSCNetworkInterfaceCopyMediaSubTypeOptions    func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkInterfaceCopyMediaSubTypes          func(unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkInterfaceCreateWithInterface        func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkInterfaceForceConfigurationRefresh  func(unsafe.Pointer) uint8
+	_fnSCNetworkInterfaceGetBSDName                 func(unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkInterfaceGetConfiguration           func(unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkInterfaceGetExtendedConfiguration   func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkInterfaceGetHardwareAddressString   func(unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkInterfaceGetInterface               func(unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkInterfaceGetInterfaceType           func(unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkInterfaceGetLocalizedDisplayName    func(unsafe.Pointer) unsafe.Pointer
 	_fnSCNetworkInterfaceGetSupportedInterfaceTypes func(unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkInterfaceGetSupportedProtocolTypes func(unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkInterfaceGetTypeID func() uint
-// Deprecated: No longer supported
-	_fnSCNetworkInterfaceRefreshConfiguration func(unsafe.Pointer) uint8
-	_fnSCNetworkInterfaceSetConfiguration func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCNetworkInterfaceGetSupportedProtocolTypes  func(unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkInterfaceGetTypeID                  func() uint
+	// Deprecated: No longer supported
+	_fnSCNetworkInterfaceRefreshConfiguration     func(unsafe.Pointer) uint8
+	_fnSCNetworkInterfaceSetConfiguration         func(unsafe.Pointer, unsafe.Pointer) uint8
 	_fnSCNetworkInterfaceSetExtendedConfiguration func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCNetworkInterfaceSetMTU func(unsafe.Pointer, int) uint8
-	_fnSCNetworkInterfaceSetMediaOptions func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCNetworkProtocolGetConfiguration func(unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkProtocolGetEnabled func(unsafe.Pointer) uint8
-	_fnSCNetworkProtocolGetProtocolType func(unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkProtocolGetTypeID func() uint
-	_fnSCNetworkProtocolSetConfiguration func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCNetworkProtocolSetEnabled func(unsafe.Pointer, uint8) uint8
-// Deprecated: since macOS 14.4.
+	_fnSCNetworkInterfaceSetMTU                   func(unsafe.Pointer, int) uint8
+	_fnSCNetworkInterfaceSetMediaOptions          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCNetworkProtocolGetConfiguration          func(unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkProtocolGetEnabled                func(unsafe.Pointer) uint8
+	_fnSCNetworkProtocolGetProtocolType           func(unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkProtocolGetTypeID                 func() uint
+	_fnSCNetworkProtocolSetConfiguration          func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCNetworkProtocolSetEnabled                func(unsafe.Pointer, uint8) uint8
+	// Deprecated: since macOS 14.4.
 	_fnSCNetworkReachabilityCreateWithAddress func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: since macOS 14.4.
+	// Deprecated: since macOS 14.4.
 	_fnSCNetworkReachabilityCreateWithAddressPair func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: since macOS 14.4.
+	// Deprecated: since macOS 14.4.
 	_fnSCNetworkReachabilityCreateWithName func(unsafe.Pointer, string) unsafe.Pointer
-// Deprecated: since macOS 14.4.
+	// Deprecated: since macOS 14.4.
 	_fnSCNetworkReachabilityGetFlags func(unsafe.Pointer, *SCNetworkReachabilityFlags) uint8
-// Deprecated: since macOS 14.4.
+	// Deprecated: since macOS 14.4.
 	_fnSCNetworkReachabilityGetTypeID func() uint
-// Deprecated: since macOS 14.4.
+	// Deprecated: since macOS 14.4.
 	_fnSCNetworkReachabilityScheduleWithRunLoop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-// Deprecated: since macOS 14.4.
+	// Deprecated: since macOS 14.4.
 	_fnSCNetworkReachabilitySetCallback func(unsafe.Pointer, unsafe.Pointer, *SCNetworkReachabilityContext) uint8
-// Deprecated: since macOS 14.4.
+	// Deprecated: since macOS 14.4.
 	_fnSCNetworkReachabilitySetDispatchQueue func(unsafe.Pointer, objc.ID) uint8
-// Deprecated: since macOS 14.4.
-	_fnSCNetworkReachabilityUnscheduleFromRunLoop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCNetworkServiceAddProtocolType func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCNetworkServiceCopy func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkServiceCopyAll func(unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkServiceCopyProtocol func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkServiceCopyProtocols func(unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkServiceCreate func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkServiceEstablishDefaultConfiguration func(unsafe.Pointer) uint8
-	_fnSCNetworkServiceGetEnabled func(unsafe.Pointer) uint8
-	_fnSCNetworkServiceGetInterface func(unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkServiceGetName func(unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkServiceGetServiceID func(unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkServiceGetTypeID func() uint
-	_fnSCNetworkServiceRemove func(unsafe.Pointer) uint8
-	_fnSCNetworkServiceRemoveProtocolType func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCNetworkServiceSetEnabled func(unsafe.Pointer, uint8) uint8
-	_fnSCNetworkServiceSetName func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCNetworkSetAddService func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCNetworkSetContainsInterface func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCNetworkSetCopy func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkSetCopyAll func(unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkSetCopyCurrent func(unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkSetCopyServices func(unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkSetCreate func(unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkSetGetName func(unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkSetGetServiceOrder func(unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkSetGetSetID func(unsafe.Pointer) unsafe.Pointer
-	_fnSCNetworkSetGetTypeID func() uint
-	_fnSCNetworkSetRemove func(unsafe.Pointer) uint8
-	_fnSCNetworkSetRemoveService func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCNetworkSetSetCurrent func(unsafe.Pointer) uint8
-	_fnSCNetworkSetSetName func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCNetworkSetSetServiceOrder func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCPreferencesAddValue func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCPreferencesApplyChanges func(unsafe.Pointer) uint8
-	_fnSCPreferencesCommitChanges func(unsafe.Pointer) uint8
-	_fnSCPreferencesCopyKeyList func(unsafe.Pointer) unsafe.Pointer
-	_fnSCPreferencesCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSCPreferencesCreateWithAuthorization func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSCPreferencesGetSignature func(unsafe.Pointer) unsafe.Pointer
-	_fnSCPreferencesGetTypeID func() uint
-	_fnSCPreferencesGetValue func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSCPreferencesLock func(unsafe.Pointer, uint8) uint8
-	_fnSCPreferencesPathCreateUniqueChild func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSCPreferencesPathGetLink func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSCPreferencesPathGetValue func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSCPreferencesPathRemoveValue func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCPreferencesPathSetLink func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCPreferencesPathSetValue func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCPreferencesRemoveValue func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCPreferencesScheduleWithRunLoop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCPreferencesSetCallback func(unsafe.Pointer, unsafe.Pointer, *SCPreferencesContext) uint8
-	_fnSCPreferencesSetComputerName func(unsafe.Pointer, unsafe.Pointer, uint) uint8
-	_fnSCPreferencesSetDispatchQueue func(unsafe.Pointer, objc.ID) uint8
-	_fnSCPreferencesSetLocalHostName func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCPreferencesSetValue func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCPreferencesSynchronize func(unsafe.Pointer)
-	_fnSCPreferencesUnlock func(unsafe.Pointer) uint8
-	_fnSCPreferencesUnscheduleFromRunLoop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCVLANInterfaceCopyAll func(unsafe.Pointer) unsafe.Pointer
+	// Deprecated: since macOS 14.4.
+	_fnSCNetworkReachabilityUnscheduleFromRunLoop     func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCNetworkServiceAddProtocolType                func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCNetworkServiceCopy                           func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkServiceCopyAll                        func(unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkServiceCopyProtocol                   func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkServiceCopyProtocols                  func(unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkServiceCreate                         func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkServiceEstablishDefaultConfiguration  func(unsafe.Pointer) uint8
+	_fnSCNetworkServiceGetEnabled                     func(unsafe.Pointer) uint8
+	_fnSCNetworkServiceGetInterface                   func(unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkServiceGetName                        func(unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkServiceGetServiceID                   func(unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkServiceGetTypeID                      func() uint
+	_fnSCNetworkServiceRemove                         func(unsafe.Pointer) uint8
+	_fnSCNetworkServiceRemoveProtocolType             func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCNetworkServiceSetEnabled                     func(unsafe.Pointer, uint8) uint8
+	_fnSCNetworkServiceSetName                        func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCNetworkSetAddService                         func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCNetworkSetContainsInterface                  func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCNetworkSetCopy                               func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkSetCopyAll                            func(unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkSetCopyCurrent                        func(unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkSetCopyServices                       func(unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkSetCreate                             func(unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkSetGetName                            func(unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkSetGetServiceOrder                    func(unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkSetGetSetID                           func(unsafe.Pointer) unsafe.Pointer
+	_fnSCNetworkSetGetTypeID                          func() uint
+	_fnSCNetworkSetRemove                             func(unsafe.Pointer) uint8
+	_fnSCNetworkSetRemoveService                      func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCNetworkSetSetCurrent                         func(unsafe.Pointer) uint8
+	_fnSCNetworkSetSetName                            func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCNetworkSetSetServiceOrder                    func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCPreferencesAddValue                          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCPreferencesApplyChanges                      func(unsafe.Pointer) uint8
+	_fnSCPreferencesCommitChanges                     func(unsafe.Pointer) uint8
+	_fnSCPreferencesCopyKeyList                       func(unsafe.Pointer) unsafe.Pointer
+	_fnSCPreferencesCreate                            func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSCPreferencesCreateWithAuthorization           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSCPreferencesGetSignature                      func(unsafe.Pointer) unsafe.Pointer
+	_fnSCPreferencesGetTypeID                         func() uint
+	_fnSCPreferencesGetValue                          func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSCPreferencesLock                              func(unsafe.Pointer, uint8) uint8
+	_fnSCPreferencesPathCreateUniqueChild             func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSCPreferencesPathGetLink                       func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSCPreferencesPathGetValue                      func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSCPreferencesPathRemoveValue                   func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCPreferencesPathSetLink                       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCPreferencesPathSetValue                      func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCPreferencesRemoveValue                       func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCPreferencesScheduleWithRunLoop               func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCPreferencesSetCallback                       func(unsafe.Pointer, unsafe.Pointer, *SCPreferencesContext) uint8
+	_fnSCPreferencesSetComputerName                   func(unsafe.Pointer, unsafe.Pointer, uint) uint8
+	_fnSCPreferencesSetDispatchQueue                  func(unsafe.Pointer, objc.ID) uint8
+	_fnSCPreferencesSetLocalHostName                  func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCPreferencesSetValue                          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCPreferencesSynchronize                       func(unsafe.Pointer)
+	_fnSCPreferencesUnlock                            func(unsafe.Pointer) uint8
+	_fnSCPreferencesUnscheduleFromRunLoop             func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCVLANInterfaceCopyAll                         func(unsafe.Pointer) unsafe.Pointer
 	_fnSCVLANInterfaceCopyAvailablePhysicalInterfaces func() unsafe.Pointer
-	_fnSCVLANInterfaceCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSCVLANInterfaceGetOptions func(unsafe.Pointer) unsafe.Pointer
-	_fnSCVLANInterfaceGetPhysicalInterface func(unsafe.Pointer) unsafe.Pointer
-	_fnSCVLANInterfaceGetTag func(unsafe.Pointer) unsafe.Pointer
-	_fnSCVLANInterfaceRemove func(unsafe.Pointer) uint8
-	_fnSCVLANInterfaceSetLocalizedDisplayName func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCVLANInterfaceSetOptions func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSCVLANInterfaceSetPhysicalInterfaceAndTag func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCVLANInterfaceCreate                          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSCVLANInterfaceGetOptions                      func(unsafe.Pointer) unsafe.Pointer
+	_fnSCVLANInterfaceGetPhysicalInterface            func(unsafe.Pointer) unsafe.Pointer
+	_fnSCVLANInterfaceGetTag                          func(unsafe.Pointer) unsafe.Pointer
+	_fnSCVLANInterfaceRemove                          func(unsafe.Pointer) uint8
+	_fnSCVLANInterfaceSetLocalizedDisplayName         func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCVLANInterfaceSetOptions                      func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSCVLANInterfaceSetPhysicalInterfaceAndTag      func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
 )
 
 func SCBondInterfaceCopyAll(prefs unsafe.Pointer) unsafe.Pointer {
@@ -873,4 +873,3 @@ func SCVLANInterfaceSetOptions(vlan unsafe.Pointer, newOptions unsafe.Pointer) u
 func SCVLANInterfaceSetPhysicalInterfaceAndTag(vlan unsafe.Pointer, physical unsafe.Pointer, tag unsafe.Pointer) uint8 {
 	return _fnSCVLANInterfaceSetPhysicalInterfaceAndTag(vlan, physical, tag)
 }
-

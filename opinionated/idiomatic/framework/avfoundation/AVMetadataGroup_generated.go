@@ -76,4 +76,3 @@ type MetadataGroupable interface {
 }
 
 var _ MetadataGroupable = (*MetadataGroup)(nil)
-

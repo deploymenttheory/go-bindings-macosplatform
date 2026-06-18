@@ -17,16 +17,16 @@ type INTrainTrip struct {
 }
 
 var (
-	_clsINTrainTrip = _objcClass("INTrainTrip")
+	_clsINTrainTrip                                                                                                                               = _objcClass("INTrainTrip")
 	_iNTrainTripSelInitWithProviderTrainNameTrainNumberTripDurationDepartureStationLocationDeparturePlatformArrivalStationLocationArrivalPlatform = objc.RegisterName("initWithProvider:trainName:trainNumber:tripDuration:departureStationLocation:departurePlatform:arrivalStationLocation:arrivalPlatform:")
-	_iNTrainTripSelProvider = objc.RegisterName("provider")
-	_iNTrainTripSelTrainName = objc.RegisterName("trainName")
-	_iNTrainTripSelTrainNumber = objc.RegisterName("trainNumber")
-	_iNTrainTripSelTripDuration = objc.RegisterName("tripDuration")
-	_iNTrainTripSelDepartureStationLocation = objc.RegisterName("departureStationLocation")
-	_iNTrainTripSelDeparturePlatform = objc.RegisterName("departurePlatform")
-	_iNTrainTripSelArrivalStationLocation = objc.RegisterName("arrivalStationLocation")
-	_iNTrainTripSelArrivalPlatform = objc.RegisterName("arrivalPlatform")
+	_iNTrainTripSelProvider                                                                                                                       = objc.RegisterName("provider")
+	_iNTrainTripSelTrainName                                                                                                                      = objc.RegisterName("trainName")
+	_iNTrainTripSelTrainNumber                                                                                                                    = objc.RegisterName("trainNumber")
+	_iNTrainTripSelTripDuration                                                                                                                   = objc.RegisterName("tripDuration")
+	_iNTrainTripSelDepartureStationLocation                                                                                                       = objc.RegisterName("departureStationLocation")
+	_iNTrainTripSelDeparturePlatform                                                                                                              = objc.RegisterName("departurePlatform")
+	_iNTrainTripSelArrivalStationLocation                                                                                                         = objc.RegisterName("arrivalStationLocation")
+	_iNTrainTripSelArrivalPlatform                                                                                                                = objc.RegisterName("arrivalPlatform")
 )
 
 func INTrainTripFromID(id objc.ID) *INTrainTrip {
@@ -41,55 +41,72 @@ func INTrainTripFromID(id objc.ID) *INTrainTrip {
 
 func (o *INTrainTrip) InitWithProviderTrainNameTrainNumberTripDurationDepartureStationLocationDeparturePlatformArrivalStationLocationArrivalPlatform(provider *foundation.NSString, trainName *foundation.NSString, trainNumber *foundation.NSString, tripDuration *INDateComponentsRange, departureStationLocation *corelocation.CLPlacemark, departurePlatform *foundation.NSString, arrivalStationLocation *corelocation.CLPlacemark, arrivalPlatform *foundation.NSString) *INTrainTrip {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNTrainTripSelInitWithProviderTrainNameTrainNumberTripDurationDepartureStationLocationDeparturePlatformArrivalStationLocationArrivalPlatform, provider.Ptr(), trainName.Ptr(), trainNumber.Ptr(), tripDuration.Ptr(), departureStationLocation.Ptr(), departurePlatform.Ptr(), arrivalStationLocation.Ptr(), arrivalPlatform.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INTrainTripFromID(_ret)
 }
 
 func (o *INTrainTrip) Provider() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNTrainTripSelProvider)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INTrainTrip) TrainName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNTrainTripSelTrainName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INTrainTrip) TrainNumber() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNTrainTripSelTrainNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INTrainTrip) TripDuration() *INDateComponentsRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNTrainTripSelTripDuration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INDateComponentsRangeFromID(_ret)
 }
 
 func (o *INTrainTrip) DepartureStationLocation() *corelocation.CLPlacemark {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNTrainTripSelDepartureStationLocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return corelocation.CLPlacemarkFromID(_ret)
 }
 
 func (o *INTrainTrip) DeparturePlatform() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNTrainTripSelDeparturePlatform)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INTrainTrip) ArrivalStationLocation() *corelocation.CLPlacemark {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNTrainTripSelArrivalStationLocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return corelocation.CLPlacemarkFromID(_ret)
 }
 
 func (o *INTrainTrip) ArrivalPlatform() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNTrainTripSelArrivalPlatform)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

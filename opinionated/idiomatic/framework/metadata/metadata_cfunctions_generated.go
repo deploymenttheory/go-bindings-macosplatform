@@ -296,4 +296,3 @@ func MDSchemaCopyDisplayNameForAttribute(name unsafe.Pointer) unsafe.Pointer {
 func MDSchemaCopyMetaAttributesForAttribute(name unsafe.Pointer) unsafe.Pointer {
 	return raw.MDSchemaCopyMetaAttributesForAttribute(name)
 }
-

@@ -19,7 +19,9 @@ type MTRBaseClusterTemperatureMeasurement struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterTemperatureMeasurement].
-func (x *MTRBaseClusterTemperatureMeasurement) Unwrap() *raw.MTRBaseClusterTemperatureMeasurement { return x.inner }
+func (x *MTRBaseClusterTemperatureMeasurement) Unwrap() *raw.MTRBaseClusterTemperatureMeasurement {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -683,9 +685,13 @@ func (x *MTRBaseClusterTemperatureMeasurement) SubscribeAttributeClusterRevision
 	}
 }
 
-func (x *MTRBaseClusterTemperatureMeasurement) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterTemperatureMeasurement) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterTemperatureMeasurement) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterTemperatureMeasurement) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterTemperatureMeasurementable is the interface implemented by [MTRBaseClusterTemperatureMeasurement], for mocking and DI.
 type MTRBaseClusterTemperatureMeasurementable interface {
@@ -729,4 +735,3 @@ type MTRBaseClusterTemperatureMeasurementable interface {
 }
 
 var _ MTRBaseClusterTemperatureMeasurementable = (*MTRBaseClusterTemperatureMeasurement)(nil)
-

@@ -98,4 +98,3 @@ type MessageSecurityInformationable interface {
 }
 
 var _ MessageSecurityInformationable = (*MessageSecurityInformation)(nil)
-

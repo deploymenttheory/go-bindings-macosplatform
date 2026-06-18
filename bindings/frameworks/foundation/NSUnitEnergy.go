@@ -15,11 +15,11 @@ type NSUnitEnergy struct {
 }
 
 var (
-	_clsNSUnitEnergy = _objcClass("NSUnitEnergy")
-	_nSUnitEnergySelKilojoules = objc.RegisterName("kilojoules")
-	_nSUnitEnergySelJoules = objc.RegisterName("joules")
-	_nSUnitEnergySelKilocalories = objc.RegisterName("kilocalories")
-	_nSUnitEnergySelCalories = objc.RegisterName("calories")
+	_clsNSUnitEnergy              = _objcClass("NSUnitEnergy")
+	_nSUnitEnergySelKilojoules    = objc.RegisterName("kilojoules")
+	_nSUnitEnergySelJoules        = objc.RegisterName("joules")
+	_nSUnitEnergySelKilocalories  = objc.RegisterName("kilocalories")
+	_nSUnitEnergySelCalories      = objc.RegisterName("calories")
 	_nSUnitEnergySelKilowattHours = objc.RegisterName("kilowattHours")
 )
 
@@ -35,31 +35,40 @@ func NSUnitEnergyFromID(id objc.ID) *NSUnitEnergy {
 
 func NSUnitEnergyKilojoules() *NSUnitEnergy {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitEnergy), _nSUnitEnergySelKilojoules)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitEnergyFromID(_ret)
 }
 
 func NSUnitEnergyJoules() *NSUnitEnergy {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitEnergy), _nSUnitEnergySelJoules)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitEnergyFromID(_ret)
 }
 
 func NSUnitEnergyKilocalories() *NSUnitEnergy {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitEnergy), _nSUnitEnergySelKilocalories)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitEnergyFromID(_ret)
 }
 
 func NSUnitEnergyCalories() *NSUnitEnergy {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitEnergy), _nSUnitEnergySelCalories)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitEnergyFromID(_ret)
 }
 
 func NSUnitEnergyKilowattHours() *NSUnitEnergy {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitEnergy), _nSUnitEnergySelKilowattHours)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitEnergyFromID(_ret)
 }
-

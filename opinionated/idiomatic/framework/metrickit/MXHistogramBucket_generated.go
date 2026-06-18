@@ -60,4 +60,3 @@ type HistogramBucketable interface {
 }
 
 var _ HistogramBucketable = (*HistogramBucket)(nil)
-

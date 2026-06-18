@@ -64,4 +64,3 @@ type PitchControlable interface {
 }
 
 var _ PitchControlable = (*PitchControl)(nil)
-

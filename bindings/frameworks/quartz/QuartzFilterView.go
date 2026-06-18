@@ -16,7 +16,7 @@ type QuartzFilterView struct {
 }
 
 var (
-	_clsQuartzFilterView = _objcClass("QuartzFilterView")
+	_clsQuartzFilterView          = _objcClass("QuartzFilterView")
 	_quartzFilterViewSelSizeToFit = objc.RegisterName("sizeToFit")
 )
 
@@ -33,4 +33,3 @@ func QuartzFilterViewFromID(id objc.ID) *QuartzFilterView {
 func (o *QuartzFilterView) SizeToFit() {
 	o.Ptr().Send(_quartzFilterViewSelSizeToFit)
 }
-

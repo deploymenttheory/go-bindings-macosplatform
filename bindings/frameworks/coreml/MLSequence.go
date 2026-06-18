@@ -16,13 +16,13 @@ type MLSequence struct {
 }
 
 var (
-	_clsMLSequence = _objcClass("MLSequence")
-	_mLSequenceSelEmptySequenceWithType = objc.RegisterName("emptySequenceWithType:")
+	_clsMLSequence                        = _objcClass("MLSequence")
+	_mLSequenceSelEmptySequenceWithType   = objc.RegisterName("emptySequenceWithType:")
 	_mLSequenceSelSequenceWithStringArray = objc.RegisterName("sequenceWithStringArray:")
-	_mLSequenceSelSequenceWithInt64Array = objc.RegisterName("sequenceWithInt64Array:")
-	_mLSequenceSelType = objc.RegisterName("type")
-	_mLSequenceSelStringValues = objc.RegisterName("stringValues")
-	_mLSequenceSelInt64Values = objc.RegisterName("int64Values")
+	_mLSequenceSelSequenceWithInt64Array  = objc.RegisterName("sequenceWithInt64Array:")
+	_mLSequenceSelType                    = objc.RegisterName("type")
+	_mLSequenceSelStringValues            = objc.RegisterName("stringValues")
+	_mLSequenceSelInt64Values             = objc.RegisterName("int64Values")
 )
 
 func MLSequenceFromID(id objc.ID) *MLSequence {
@@ -38,21 +38,27 @@ func MLSequenceFromID(id objc.ID) *MLSequence {
 // Empty sequence of a sepcific type
 func MLSequenceEmptySequenceWithType(type_ MLFeatureType) *MLSequence {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLSequence), _mLSequenceSelEmptySequenceWithType, type_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLSequenceFromID(_ret)
 }
 
 // String sequences, property will be empty array if type is MLFeatureTypeString
 func MLSequenceSequenceWithStringArray(stringValues *foundation.NSArray[*foundation.NSString]) *MLSequence {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLSequence), _mLSequenceSelSequenceWithStringArray, stringValues)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLSequenceFromID(_ret)
 }
 
 // int64 sequence, propery will be empty array if type is MLFeatureTypeInt64
 func MLSequenceSequenceWithInt64Array(int64Values *foundation.NSArray[*foundation.NSNumber]) *MLSequence {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLSequence), _mLSequenceSelSequenceWithInt64Array, int64Values)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLSequenceFromID(_ret)
 }
 
@@ -71,4 +77,3 @@ func (o *MLSequence) Int64Values() *foundation.NSArray[*foundation.NSNumber] {
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mLSequenceSelInt64Values)
 	return _ret
 }
-

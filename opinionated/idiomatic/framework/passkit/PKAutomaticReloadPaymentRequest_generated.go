@@ -151,4 +151,3 @@ type AutomaticReloadPaymentRequestable interface {
 }
 
 var _ AutomaticReloadPaymentRequestable = (*AutomaticReloadPaymentRequest)(nil)
-

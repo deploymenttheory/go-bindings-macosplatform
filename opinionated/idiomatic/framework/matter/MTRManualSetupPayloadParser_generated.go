@@ -56,4 +56,3 @@ type MTRManualSetupPayloadParserable interface {
 }
 
 var _ MTRManualSetupPayloadParserable = (*MTRManualSetupPayloadParser)(nil)
-

@@ -6,4 +6,3 @@ package videosubscriberaccount
 // VSAccountManagerDelegate wraps the ObjC protocol VSAccountManagerDelegate.
 type VSAccountManagerDelegate interface {
 }
-

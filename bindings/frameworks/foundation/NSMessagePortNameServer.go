@@ -16,7 +16,7 @@ type NSMessagePortNameServer struct {
 }
 
 var (
-	_clsNSMessagePortNameServer = _objcClass("NSMessagePortNameServer")
+	_clsNSMessagePortNameServer               = _objcClass("NSMessagePortNameServer")
 	_nSMessagePortNameServerSelSharedInstance = objc.RegisterName("sharedInstance")
 )
 
@@ -34,4 +34,3 @@ func NSMessagePortNameServerSharedInstance() objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMessagePortNameServer), _nSMessagePortNameServerSelSharedInstance)
 	return _ret
 }
-

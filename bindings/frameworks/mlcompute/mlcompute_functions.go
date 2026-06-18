@@ -41,91 +41,116 @@ var (
 // @abstract Returns a textual description of the activation type, suitable for debugging.
 func MLCActivationTypeDebugDescription(activationType MLCActivationType) *foundation.NSString {
 	_ret := _fnMLCActivationTypeDebugDescription(activationType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract Returns a textual description of the arithmetic operation, suitable for debugging.
 func MLCArithmeticOperationDebugDescription(operation MLCArithmeticOperation) *foundation.NSString {
 	_ret := _fnMLCArithmeticOperationDebugDescription(operation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract Returns a textual description of the comparison operation, suitable for debugging.
 func MLCComparisonOperationDebugDescription(operation MLCComparisonOperation) *foundation.NSString {
 	_ret := _fnMLCComparisonOperationDebugDescription(operation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract Returns a textual description of the convolution type, suitable for debugging.
 func MLCConvolutionTypeDebugDescription(convolutionType MLCConvolutionType) *foundation.NSString {
 	_ret := _fnMLCConvolutionTypeDebugDescription(convolutionType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract Returns a textual description of the gradient clipping type, suitable for debugging.
 func MLCGradientClippingTypeDebugDescription(gradientClippingType MLCGradientClippingType) *foundation.NSString {
 	_ret := _fnMLCGradientClippingTypeDebugDescription(gradientClippingType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract Returns a textual description of the LSTM result mode, suitable for debugging.
 func MLCLSTMResultModeDebugDescription(mode MLCLSTMResultMode) *foundation.NSString {
 	_ret := _fnMLCLSTMResultModeDebugDescription(mode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract Returns a textual description of the loss type, suitable for debugging.
 func MLCLossTypeDebugDescription(lossType MLCLossType) *foundation.NSString {
 	_ret := _fnMLCLossTypeDebugDescription(lossType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract Returns a textual description of the padding policy, suitable for debugging.
 func MLCPaddingPolicyDebugDescription(paddingPolicy MLCPaddingPolicy) *foundation.NSString {
 	_ret := _fnMLCPaddingPolicyDebugDescription(paddingPolicy)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract Returns a textual description of the padding type, suitable for debugging.
 func MLCPaddingTypeDebugDescription(paddingType MLCPaddingType) *foundation.NSString {
 	_ret := _fnMLCPaddingTypeDebugDescription(paddingType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract Returns a textual description of the pooling type, suitable for debugging.
 func MLCPoolingTypeDebugDescription(poolingType MLCPoolingType) *foundation.NSString {
 	_ret := _fnMLCPoolingTypeDebugDescription(poolingType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract Returns a textual description of the reduction type, suitable for debugging.
 func MLCReductionTypeDebugDescription(reductionType MLCReductionType) *foundation.NSString {
 	_ret := _fnMLCReductionTypeDebugDescription(reductionType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract Returns a textual description of the sample mode, suitable for debugging.
 func MLCSampleModeDebugDescription(mode MLCSampleMode) *foundation.NSString {
 	_ret := _fnMLCSampleModeDebugDescription(mode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract Returns a textual description of the softmax operation, suitable for debugging.
 func MLCSoftmaxOperationDebugDescription(operation MLCSoftmaxOperation) *foundation.NSString {
 	_ret := _fnMLCSoftmaxOperationDebugDescription(operation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

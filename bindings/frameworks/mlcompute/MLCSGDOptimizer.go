@@ -15,11 +15,11 @@ type MLCSGDOptimizer struct {
 }
 
 var (
-	_clsMLCSGDOptimizer = _objcClass("MLCSGDOptimizer")
-	_mLCSGDOptimizerSelOptimizerWithDescriptor = objc.RegisterName("optimizerWithDescriptor:")
+	_clsMLCSGDOptimizer                                                         = _objcClass("MLCSGDOptimizer")
+	_mLCSGDOptimizerSelOptimizerWithDescriptor                                  = objc.RegisterName("optimizerWithDescriptor:")
 	_mLCSGDOptimizerSelOptimizerWithDescriptorMomentumScaleUsesNesterovMomentum = objc.RegisterName("optimizerWithDescriptor:momentumScale:usesNesterovMomentum:")
-	_mLCSGDOptimizerSelMomentumScale = objc.RegisterName("momentumScale")
-	_mLCSGDOptimizerSelUsesNesterovMomentum = objc.RegisterName("usesNesterovMomentum")
+	_mLCSGDOptimizerSelMomentumScale                                            = objc.RegisterName("momentumScale")
+	_mLCSGDOptimizerSelUsesNesterovMomentum                                     = objc.RegisterName("usesNesterovMomentum")
 )
 
 func MLCSGDOptimizerFromID(id objc.ID) *MLCSGDOptimizer {
@@ -35,14 +35,18 @@ func MLCSGDOptimizerFromID(id objc.ID) *MLCSGDOptimizer {
 // @abstract   Create an MLCSGDOptimizer object with defaults @return     A new MLCSGDOptimizer object.
 func MLCSGDOptimizerOptimizerWithDescriptor(optimizerDescriptor *MLCOptimizerDescriptor) *MLCSGDOptimizer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCSGDOptimizer), _mLCSGDOptimizerSelOptimizerWithDescriptor, optimizerDescriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCSGDOptimizerFromID(_ret)
 }
 
 // @abstract   Create an MLCSGDOptimizer object @param      optimizerDescriptor    The optimizer descriptor object @param      momentumScale                 The momentum scale @param      usesNesterovMomentum      A boolean to enable / disable nesterov momentum @return     A new MLCSGDOptimizer object.
 func MLCSGDOptimizerOptimizerWithDescriptorMomentumScaleUsesNesterovMomentum(optimizerDescriptor *MLCOptimizerDescriptor, momentumScale float32, usesNesterovMomentum bool) *MLCSGDOptimizer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCSGDOptimizer), _mLCSGDOptimizerSelOptimizerWithDescriptorMomentumScaleUsesNesterovMomentum, optimizerDescriptor.Ptr(), momentumScale, usesNesterovMomentum)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCSGDOptimizerFromID(_ret)
 }
 
@@ -57,4 +61,3 @@ func (o *MLCSGDOptimizer) UsesNesterovMomentum() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mLCSGDOptimizerSelUsesNesterovMomentum)
 	return _ret
 }
-

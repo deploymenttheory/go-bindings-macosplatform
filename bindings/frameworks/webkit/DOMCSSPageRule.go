@@ -16,10 +16,10 @@ type DOMCSSPageRule struct {
 }
 
 var (
-	_clsDOMCSSPageRule = _objcClass("DOMCSSPageRule")
-	_dOMCSSPageRuleSelSelectorText = objc.RegisterName("selectorText")
+	_clsDOMCSSPageRule                = _objcClass("DOMCSSPageRule")
+	_dOMCSSPageRuleSelSelectorText    = objc.RegisterName("selectorText")
 	_dOMCSSPageRuleSelSetSelectorText = objc.RegisterName("setSelectorText:")
-	_dOMCSSPageRuleSelStyle = objc.RegisterName("style")
+	_dOMCSSPageRuleSelStyle           = objc.RegisterName("style")
 )
 
 func DOMCSSPageRuleFromID(id objc.ID) *DOMCSSPageRule {
@@ -34,7 +34,9 @@ func DOMCSSPageRuleFromID(id objc.ID) *DOMCSSPageRule {
 
 func (o *DOMCSSPageRule) SelectorText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSPageRuleSelSelectorText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -44,7 +46,8 @@ func (o *DOMCSSPageRule) SetSelectorText(selectorText *foundation.NSString) {
 
 func (o *DOMCSSPageRule) Style() *DOMCSSStyleDeclaration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSPageRuleSelStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMCSSStyleDeclarationFromID(_ret)
 }
-

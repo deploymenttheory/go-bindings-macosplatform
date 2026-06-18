@@ -29,4 +29,3 @@ func VTCopyVideoEncoderList(options objc.ID) (objc.ID, error) {
 	}
 	return objc.ID(_out0), nil
 }
-

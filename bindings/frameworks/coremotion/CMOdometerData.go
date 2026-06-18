@@ -18,19 +18,19 @@ type CMOdometerData struct {
 }
 
 var (
-	_clsCMOdometerData = _objcClass("CMOdometerData")
-	_cMOdometerDataSelStartDate = objc.RegisterName("startDate")
-	_cMOdometerDataSelEndDate = objc.RegisterName("endDate")
-	_cMOdometerDataSelDeltaDistance = objc.RegisterName("deltaDistance")
+	_clsCMOdometerData                      = _objcClass("CMOdometerData")
+	_cMOdometerDataSelStartDate             = objc.RegisterName("startDate")
+	_cMOdometerDataSelEndDate               = objc.RegisterName("endDate")
+	_cMOdometerDataSelDeltaDistance         = objc.RegisterName("deltaDistance")
 	_cMOdometerDataSelDeltaDistanceAccuracy = objc.RegisterName("deltaDistanceAccuracy")
-	_cMOdometerDataSelSpeed = objc.RegisterName("speed")
-	_cMOdometerDataSelSpeedAccuracy = objc.RegisterName("speedAccuracy")
-	_cMOdometerDataSelGpsDate = objc.RegisterName("gpsDate")
-	_cMOdometerDataSelDeltaAltitude = objc.RegisterName("deltaAltitude")
-	_cMOdometerDataSelVerticalAccuracy = objc.RegisterName("verticalAccuracy")
-	_cMOdometerDataSelOriginDevice = objc.RegisterName("originDevice")
-	_cMOdometerDataSelSlope = objc.RegisterName("slope")
-	_cMOdometerDataSelMaxAbsSlope = objc.RegisterName("maxAbsSlope")
+	_cMOdometerDataSelSpeed                 = objc.RegisterName("speed")
+	_cMOdometerDataSelSpeedAccuracy         = objc.RegisterName("speedAccuracy")
+	_cMOdometerDataSelGpsDate               = objc.RegisterName("gpsDate")
+	_cMOdometerDataSelDeltaAltitude         = objc.RegisterName("deltaAltitude")
+	_cMOdometerDataSelVerticalAccuracy      = objc.RegisterName("verticalAccuracy")
+	_cMOdometerDataSelOriginDevice          = objc.RegisterName("originDevice")
+	_cMOdometerDataSelSlope                 = objc.RegisterName("slope")
+	_cMOdometerDataSelMaxAbsSlope           = objc.RegisterName("maxAbsSlope")
 )
 
 func CMOdometerDataFromID(id objc.ID) *CMOdometerData {
@@ -45,13 +45,17 @@ func CMOdometerDataFromID(id objc.ID) *CMOdometerData {
 
 func (o *CMOdometerData) StartDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMOdometerDataSelStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *CMOdometerData) EndDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMOdometerDataSelEndDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -77,7 +81,9 @@ func (o *CMOdometerData) SpeedAccuracy() unsafe.Pointer {
 
 func (o *CMOdometerData) GpsDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMOdometerDataSelGpsDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -98,13 +104,16 @@ func (o *CMOdometerData) OriginDevice() CMOdometerOriginDevice {
 
 func (o *CMOdometerData) Slope() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMOdometerDataSelSlope)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *CMOdometerData) MaxAbsSlope() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMOdometerDataSelMaxAbsSlope)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
-

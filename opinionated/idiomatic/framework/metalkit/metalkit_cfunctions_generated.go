@@ -40,4 +40,3 @@ func MTKModelIOVertexDescriptorFromMetalWithError(metalDescriptor *metal.MTLVert
 func MTKModelIOVertexFormatFromMetal(vertexFormat metal.MTLVertexFormat) modelio.MDLVertexFormat {
 	return raw.MTKModelIOVertexFormatFromMetal(vertexFormat)
 }
-

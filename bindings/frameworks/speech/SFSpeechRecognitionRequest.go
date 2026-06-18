@@ -16,21 +16,21 @@ type SFSpeechRecognitionRequest struct {
 }
 
 var (
-	_clsSFSpeechRecognitionRequest = _objcClass("SFSpeechRecognitionRequest")
-	_sFSpeechRecognitionRequestSelTaskHint = objc.RegisterName("taskHint")
-	_sFSpeechRecognitionRequestSelSetTaskHint = objc.RegisterName("setTaskHint:")
-	_sFSpeechRecognitionRequestSelShouldReportPartialResults = objc.RegisterName("shouldReportPartialResults")
-	_sFSpeechRecognitionRequestSelSetShouldReportPartialResults = objc.RegisterName("setShouldReportPartialResults:")
-	_sFSpeechRecognitionRequestSelContextualStrings = objc.RegisterName("contextualStrings")
-	_sFSpeechRecognitionRequestSelSetContextualStrings = objc.RegisterName("setContextualStrings:")
-	_sFSpeechRecognitionRequestSelInteractionIdentifier = objc.RegisterName("interactionIdentifier")
-	_sFSpeechRecognitionRequestSelSetInteractionIdentifier = objc.RegisterName("setInteractionIdentifier:")
-	_sFSpeechRecognitionRequestSelRequiresOnDeviceRecognition = objc.RegisterName("requiresOnDeviceRecognition")
+	_clsSFSpeechRecognitionRequest                               = _objcClass("SFSpeechRecognitionRequest")
+	_sFSpeechRecognitionRequestSelTaskHint                       = objc.RegisterName("taskHint")
+	_sFSpeechRecognitionRequestSelSetTaskHint                    = objc.RegisterName("setTaskHint:")
+	_sFSpeechRecognitionRequestSelShouldReportPartialResults     = objc.RegisterName("shouldReportPartialResults")
+	_sFSpeechRecognitionRequestSelSetShouldReportPartialResults  = objc.RegisterName("setShouldReportPartialResults:")
+	_sFSpeechRecognitionRequestSelContextualStrings              = objc.RegisterName("contextualStrings")
+	_sFSpeechRecognitionRequestSelSetContextualStrings           = objc.RegisterName("setContextualStrings:")
+	_sFSpeechRecognitionRequestSelInteractionIdentifier          = objc.RegisterName("interactionIdentifier")
+	_sFSpeechRecognitionRequestSelSetInteractionIdentifier       = objc.RegisterName("setInteractionIdentifier:")
+	_sFSpeechRecognitionRequestSelRequiresOnDeviceRecognition    = objc.RegisterName("requiresOnDeviceRecognition")
 	_sFSpeechRecognitionRequestSelSetRequiresOnDeviceRecognition = objc.RegisterName("setRequiresOnDeviceRecognition:")
-	_sFSpeechRecognitionRequestSelAddsPunctuation = objc.RegisterName("addsPunctuation")
-	_sFSpeechRecognitionRequestSelSetAddsPunctuation = objc.RegisterName("setAddsPunctuation:")
-	_sFSpeechRecognitionRequestSelCustomizedLanguageModel = objc.RegisterName("customizedLanguageModel")
-	_sFSpeechRecognitionRequestSelSetCustomizedLanguageModel = objc.RegisterName("setCustomizedLanguageModel:")
+	_sFSpeechRecognitionRequestSelAddsPunctuation                = objc.RegisterName("addsPunctuation")
+	_sFSpeechRecognitionRequestSelSetAddsPunctuation             = objc.RegisterName("setAddsPunctuation:")
+	_sFSpeechRecognitionRequestSelCustomizedLanguageModel        = objc.RegisterName("customizedLanguageModel")
+	_sFSpeechRecognitionRequestSelSetCustomizedLanguageModel     = objc.RegisterName("setCustomizedLanguageModel:")
 )
 
 func SFSpeechRecognitionRequestFromID(id objc.ID) *SFSpeechRecognitionRequest {
@@ -43,7 +43,7 @@ func SFSpeechRecognitionRequestFromID(id objc.ID) *SFSpeechRecognitionRequest {
 	return o
 }
 
-// A value that indicates the type of speech recognition being performed. The default value of this property is ``SFSpeechRecognitionTaskHint/unspecified``. For a valid list of values, see ``SFSpeechRecognitionTaskHint``.
+// A value that indicates the type of speech recognition being performed. The default value of this property is “SFSpeechRecognitionTaskHint/unspecified“. For a valid list of values, see “SFSpeechRecognitionTaskHint“.
 func (o *SFSpeechRecognitionRequest) TaskHint() SFSpeechRecognitionTaskHint {
 	_ret := objc.Send[SFSpeechRecognitionTaskHint](o.Ptr(), _sFSpeechRecognitionRequestSelTaskHint)
 	return _ret
@@ -76,7 +76,9 @@ func (o *SFSpeechRecognitionRequest) SetContextualStrings(contextualStrings *fou
 // Deprecated: since macOS 12.0.
 func (o *SFSpeechRecognitionRequest) InteractionIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFSpeechRecognitionRequestSelInteractionIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -85,7 +87,7 @@ func (o *SFSpeechRecognitionRequest) SetInteractionIdentifier(interactionIdentif
 	o.Ptr().Send(_sFSpeechRecognitionRequestSelSetInteractionIdentifier, interactionIdentifier.Ptr())
 }
 
-// A Boolean value that determines whether a request must keep its audio data on the device. Set this property to `true` to prevent an ``SFSpeechRecognitionRequest`` from sending audio over the network. However, on-device requests won't be as accurate. > Note: > The request only honors this setting if the ``SFSpeechRecognizer/supportsOnDeviceRecognition`` (``SFSpeechRecognizer``) property is also `true`.
+// A Boolean value that determines whether a request must keep its audio data on the device. Set this property to `true` to prevent an “SFSpeechRecognitionRequest“ from sending audio over the network. However, on-device requests won't be as accurate. > Note: > The request only honors this setting if the “SFSpeechRecognizer/supportsOnDeviceRecognition“ (“SFSpeechRecognizer“) property is also `true`.
 func (o *SFSpeechRecognitionRequest) RequiresOnDeviceRecognition() bool {
 	_ret := objc.Send[bool](o.Ptr(), _sFSpeechRecognitionRequestSelRequiresOnDeviceRecognition)
 	return _ret
@@ -107,11 +109,12 @@ func (o *SFSpeechRecognitionRequest) SetAddsPunctuation(addsPunctuation bool) {
 
 func (o *SFSpeechRecognitionRequest) CustomizedLanguageModel() *SFSpeechLanguageModelConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFSpeechRecognitionRequestSelCustomizedLanguageModel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SFSpeechLanguageModelConfigurationFromID(_ret)
 }
 
 func (o *SFSpeechRecognitionRequest) SetCustomizedLanguageModel(customizedLanguageModel *SFSpeechLanguageModelConfiguration) {
 	o.Ptr().Send(_sFSpeechRecognitionRequestSelSetCustomizedLanguageModel, customizedLanguageModel.Ptr())
 }
-

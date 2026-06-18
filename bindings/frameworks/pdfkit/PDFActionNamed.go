@@ -15,10 +15,10 @@ type PDFActionNamed struct {
 }
 
 var (
-	_clsPDFActionNamed = _objcClass("PDFActionNamed")
+	_clsPDFActionNamed             = _objcClass("PDFActionNamed")
 	_pDFActionNamedSelInitWithName = objc.RegisterName("initWithName:")
-	_pDFActionNamedSelName = objc.RegisterName("name")
-	_pDFActionNamedSelSetName = objc.RegisterName("setName:")
+	_pDFActionNamedSelName         = objc.RegisterName("name")
+	_pDFActionNamedSelSetName      = objc.RegisterName("setName:")
 )
 
 func PDFActionNamedFromID(id objc.ID) *PDFActionNamed {
@@ -33,7 +33,9 @@ func PDFActionNamedFromID(id objc.ID) *PDFActionNamed {
 
 func (o *PDFActionNamed) InitWithName(name PDFActionNamedName) *PDFActionNamed {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFActionNamedSelInitWithName, name)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFActionNamedFromID(_ret)
 }
 
@@ -45,4 +47,3 @@ func (o *PDFActionNamed) Name() PDFActionNamedName {
 func (o *PDFActionNamed) SetName(name PDFActionNamedName) {
 	o.Ptr().Send(_pDFActionNamedSelSetName, name)
 }
-

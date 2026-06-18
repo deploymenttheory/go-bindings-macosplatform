@@ -16,7 +16,7 @@ type CNChangeHistoryDeleteContactEvent struct {
 }
 
 var (
-	_clsCNChangeHistoryDeleteContactEvent = _objcClass("CNChangeHistoryDeleteContactEvent")
+	_clsCNChangeHistoryDeleteContactEvent                  = _objcClass("CNChangeHistoryDeleteContactEvent")
 	_cNChangeHistoryDeleteContactEventSelContactIdentifier = objc.RegisterName("contactIdentifier")
 )
 
@@ -32,7 +32,8 @@ func CNChangeHistoryDeleteContactEventFromID(id objc.ID) *CNChangeHistoryDeleteC
 
 func (o *CNChangeHistoryDeleteContactEvent) ContactIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNChangeHistoryDeleteContactEventSelContactIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

@@ -139,4 +139,3 @@ type CertificatePresentationable interface {
 }
 
 var _ CertificatePresentationable = (*CertificatePresentation)(nil)
-

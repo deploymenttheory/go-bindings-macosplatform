@@ -16,7 +16,9 @@ type MTRPowerSourceClusterBatChargeFaultChangeType struct {
 }
 
 // Unwrap returns the underlying [raw.MTRPowerSourceClusterBatChargeFaultChangeType].
-func (x *MTRPowerSourceClusterBatChargeFaultChangeType) Unwrap() *raw.MTRPowerSourceClusterBatChargeFaultChangeType { return x.inner }
+func (x *MTRPowerSourceClusterBatChargeFaultChangeType) Unwrap() *raw.MTRPowerSourceClusterBatChargeFaultChangeType {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -66,4 +68,3 @@ type MTRPowerSourceClusterBatChargeFaultChangeTypeable interface {
 }
 
 var _ MTRPowerSourceClusterBatChargeFaultChangeTypeable = (*MTRPowerSourceClusterBatChargeFaultChangeType)(nil)
-

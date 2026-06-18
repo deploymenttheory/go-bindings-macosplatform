@@ -15,13 +15,13 @@ type MTLPointerType struct {
 }
 
 var (
-	_clsMTLPointerType = _objcClass("MTLPointerType")
-	_mTLPointerTypeSelElementStructType = objc.RegisterName("elementStructType")
-	_mTLPointerTypeSelElementArrayType = objc.RegisterName("elementArrayType")
-	_mTLPointerTypeSelElementType = objc.RegisterName("elementType")
-	_mTLPointerTypeSelAccess = objc.RegisterName("access")
-	_mTLPointerTypeSelAlignment = objc.RegisterName("alignment")
-	_mTLPointerTypeSelDataSize = objc.RegisterName("dataSize")
+	_clsMTLPointerType                        = _objcClass("MTLPointerType")
+	_mTLPointerTypeSelElementStructType       = objc.RegisterName("elementStructType")
+	_mTLPointerTypeSelElementArrayType        = objc.RegisterName("elementArrayType")
+	_mTLPointerTypeSelElementType             = objc.RegisterName("elementType")
+	_mTLPointerTypeSelAccess                  = objc.RegisterName("access")
+	_mTLPointerTypeSelAlignment               = objc.RegisterName("alignment")
+	_mTLPointerTypeSelDataSize                = objc.RegisterName("dataSize")
 	_mTLPointerTypeSelElementIsArgumentBuffer = objc.RegisterName("elementIsArgumentBuffer")
 )
 
@@ -37,13 +37,17 @@ func MTLPointerTypeFromID(id objc.ID) *MTLPointerType {
 
 func (o *MTLPointerType) ElementStructType() *MTLStructType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLPointerTypeSelElementStructType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLStructTypeFromID(_ret)
 }
 
 func (o *MTLPointerType) ElementArrayType() *MTLArrayType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLPointerTypeSelElementArrayType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLArrayTypeFromID(_ret)
 }
 
@@ -71,4 +75,3 @@ func (o *MTLPointerType) ElementIsArgumentBuffer() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mTLPointerTypeSelElementIsArgumentBuffer)
 	return _ret
 }
-

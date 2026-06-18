@@ -71,4 +71,3 @@ type TransposeLayerable interface {
 }
 
 var _ TransposeLayerable = (*TransposeLayer)(nil)
-

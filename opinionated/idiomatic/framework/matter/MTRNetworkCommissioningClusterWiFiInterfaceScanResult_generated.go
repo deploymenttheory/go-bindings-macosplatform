@@ -16,7 +16,9 @@ type MTRNetworkCommissioningClusterWiFiInterfaceScanResult struct {
 }
 
 // Unwrap returns the underlying [raw.MTRNetworkCommissioningClusterWiFiInterfaceScanResult].
-func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) Unwrap() *raw.MTRNetworkCommissioningClusterWiFiInterfaceScanResult { return x.inner }
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) Unwrap() *raw.MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -72,7 +74,9 @@ func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithRssi(rssi *f
 	return x
 }
 
-func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) asMTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct() *raw.MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct { return &x.inner.MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct }
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) asMTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct() *raw.MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct {
+	return &x.inner.MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct
+}
 
 // MTRNetworkCommissioningClusterWiFiInterfaceScanResultable is the interface implemented by [MTRNetworkCommissioningClusterWiFiInterfaceScanResult], for mocking and DI.
 type MTRNetworkCommissioningClusterWiFiInterfaceScanResultable interface {
@@ -86,4 +90,3 @@ type MTRNetworkCommissioningClusterWiFiInterfaceScanResultable interface {
 }
 
 var _ MTRNetworkCommissioningClusterWiFiInterfaceScanResultable = (*MTRNetworkCommissioningClusterWiFiInterfaceScanResult)(nil)
-

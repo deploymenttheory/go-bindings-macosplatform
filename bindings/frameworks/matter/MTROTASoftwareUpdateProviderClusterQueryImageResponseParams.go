@@ -18,26 +18,26 @@ type MTROTASoftwareUpdateProviderClusterQueryImageResponseParams struct {
 }
 
 var (
-	_clsMTROTASoftwareUpdateProviderClusterQueryImageResponseParams = _objcClass("MTROTASoftwareUpdateProviderClusterQueryImageResponseParams")
+	_clsMTROTASoftwareUpdateProviderClusterQueryImageResponseParams                           = _objcClass("MTROTASoftwareUpdateProviderClusterQueryImageResponseParams")
 	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelStatus = objc.RegisterName("status")
-	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelSetStatus = objc.RegisterName("setStatus:")
-	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelDelayedActionTime = objc.RegisterName("delayedActionTime")
-	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelSetDelayedActionTime = objc.RegisterName("setDelayedActionTime:")
-	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelImageURI = objc.RegisterName("imageURI")
-	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelSetImageURI = objc.RegisterName("setImageURI:")
-	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelSoftwareVersion = objc.RegisterName("softwareVersion")
-	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelSetSoftwareVersion = objc.RegisterName("setSoftwareVersion:")
-	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelSoftwareVersionString = objc.RegisterName("softwareVersionString")
-	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelSetSoftwareVersionString = objc.RegisterName("setSoftwareVersionString:")
-	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelUpdateToken = objc.RegisterName("updateToken")
-	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelSetUpdateToken = objc.RegisterName("setUpdateToken:")
-	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelUserConsentNeeded = objc.RegisterName("userConsentNeeded")
-	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelSetUserConsentNeeded = objc.RegisterName("setUserConsentNeeded:")
-	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelMetadataForRequestor = objc.RegisterName("metadataForRequestor")
-	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelSetMetadataForRequestor = objc.RegisterName("setMetadataForRequestor:")
-	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelStatus                     = objc.RegisterName("status")
+	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelSetStatus                  = objc.RegisterName("setStatus:")
+	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelDelayedActionTime          = objc.RegisterName("delayedActionTime")
+	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelSetDelayedActionTime       = objc.RegisterName("setDelayedActionTime:")
+	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelImageURI                   = objc.RegisterName("imageURI")
+	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelSetImageURI                = objc.RegisterName("setImageURI:")
+	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelSoftwareVersion            = objc.RegisterName("softwareVersion")
+	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelSetSoftwareVersion         = objc.RegisterName("setSoftwareVersion:")
+	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelSoftwareVersionString      = objc.RegisterName("softwareVersionString")
+	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelSetSoftwareVersionString   = objc.RegisterName("setSoftwareVersionString:")
+	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelUpdateToken                = objc.RegisterName("updateToken")
+	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelSetUpdateToken             = objc.RegisterName("setUpdateToken:")
+	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelUserConsentNeeded          = objc.RegisterName("userConsentNeeded")
+	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelSetUserConsentNeeded       = objc.RegisterName("setUserConsentNeeded:")
+	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelMetadataForRequestor       = objc.RegisterName("metadataForRequestor")
+	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelSetMetadataForRequestor    = objc.RegisterName("setMetadataForRequestor:")
+	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
 )
 
 func MTROTASoftwareUpdateProviderClusterQueryImageResponseParamsFromID(id objc.ID) *MTROTASoftwareUpdateProviderClusterQueryImageResponseParams {
@@ -54,7 +54,9 @@ func MTROTASoftwareUpdateProviderClusterQueryImageResponseParamsFromID(id objc.I
 func (o *MTROTASoftwareUpdateProviderClusterQueryImageResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTROTASoftwareUpdateProviderClusterQueryImageResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -63,7 +65,9 @@ func (o *MTROTASoftwareUpdateProviderClusterQueryImageResponseParams) InitWithRe
 
 func (o *MTROTASoftwareUpdateProviderClusterQueryImageResponseParams) Status() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -73,7 +77,9 @@ func (o *MTROTASoftwareUpdateProviderClusterQueryImageResponseParams) SetStatus(
 
 func (o *MTROTASoftwareUpdateProviderClusterQueryImageResponseParams) DelayedActionTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelDelayedActionTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -83,7 +89,9 @@ func (o *MTROTASoftwareUpdateProviderClusterQueryImageResponseParams) SetDelayed
 
 func (o *MTROTASoftwareUpdateProviderClusterQueryImageResponseParams) ImageURI() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelImageURI)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -93,7 +101,9 @@ func (o *MTROTASoftwareUpdateProviderClusterQueryImageResponseParams) SetImageUR
 
 func (o *MTROTASoftwareUpdateProviderClusterQueryImageResponseParams) SoftwareVersion() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelSoftwareVersion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -103,7 +113,9 @@ func (o *MTROTASoftwareUpdateProviderClusterQueryImageResponseParams) SetSoftwar
 
 func (o *MTROTASoftwareUpdateProviderClusterQueryImageResponseParams) SoftwareVersionString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelSoftwareVersionString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -113,7 +125,9 @@ func (o *MTROTASoftwareUpdateProviderClusterQueryImageResponseParams) SetSoftwar
 
 func (o *MTROTASoftwareUpdateProviderClusterQueryImageResponseParams) UpdateToken() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelUpdateToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -123,7 +137,9 @@ func (o *MTROTASoftwareUpdateProviderClusterQueryImageResponseParams) SetUpdateT
 
 func (o *MTROTASoftwareUpdateProviderClusterQueryImageResponseParams) UserConsentNeeded() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelUserConsentNeeded)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -133,7 +149,9 @@ func (o *MTROTASoftwareUpdateProviderClusterQueryImageResponseParams) SetUserCon
 
 func (o *MTROTASoftwareUpdateProviderClusterQueryImageResponseParams) MetadataForRequestor() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelMetadataForRequestor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -144,11 +162,12 @@ func (o *MTROTASoftwareUpdateProviderClusterQueryImageResponseParams) SetMetadat
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTROTASoftwareUpdateProviderClusterQueryImageResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTROTASoftwareUpdateProviderClusterQueryImageResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
 	o.Ptr().Send(_mTROTASoftwareUpdateProviderClusterQueryImageResponseParamsSelSetTimedInvokeTimeoutMs, timedInvokeTimeoutMs.Ptr())
 }
-

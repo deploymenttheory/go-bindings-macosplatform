@@ -18,13 +18,13 @@ type NSMappingModel struct {
 }
 
 var (
-	_clsNSMappingModel = _objcClass("NSMappingModel")
-	_nSMappingModelSelMappingModelFromBundlesForSourceModelDestinationModel = objc.RegisterName("mappingModelFromBundles:forSourceModel:destinationModel:")
+	_clsNSMappingModel                                                        = _objcClass("NSMappingModel")
+	_nSMappingModelSelMappingModelFromBundlesForSourceModelDestinationModel   = objc.RegisterName("mappingModelFromBundles:forSourceModel:destinationModel:")
 	_nSMappingModelSelInferredMappingModelForSourceModelDestinationModelError = objc.RegisterName("inferredMappingModelForSourceModel:destinationModel:error:")
-	_nSMappingModelSelInitWithContentsOfURL = objc.RegisterName("initWithContentsOfURL:")
-	_nSMappingModelSelEntityMappings = objc.RegisterName("entityMappings")
-	_nSMappingModelSelSetEntityMappings = objc.RegisterName("setEntityMappings:")
-	_nSMappingModelSelEntityMappingsByName = objc.RegisterName("entityMappingsByName")
+	_nSMappingModelSelInitWithContentsOfURL                                   = objc.RegisterName("initWithContentsOfURL:")
+	_nSMappingModelSelEntityMappings                                          = objc.RegisterName("entityMappings")
+	_nSMappingModelSelSetEntityMappings                                       = objc.RegisterName("setEntityMappings:")
+	_nSMappingModelSelEntityMappingsByName                                    = objc.RegisterName("entityMappingsByName")
 )
 
 func NSMappingModelFromID(id objc.ID) *NSMappingModel {
@@ -39,14 +39,18 @@ func NSMappingModelFromID(id objc.ID) *NSMappingModel {
 
 func NSMappingModelMappingModelFromBundlesForSourceModelDestinationModel(bundles *foundation.NSArray[*foundation.NSBundle], sourceModel *NSManagedObjectModel, destinationModel *NSManagedObjectModel) *NSMappingModel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMappingModel), _nSMappingModelSelMappingModelFromBundlesForSourceModelDestinationModel, bundles, sourceModel.Ptr(), destinationModel.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMappingModelFromID(_ret)
 }
 
 func NSMappingModelInferredMappingModelForSourceModelDestinationModelError(sourceModel *NSManagedObjectModel, destinationModel *NSManagedObjectModel) (*NSMappingModel, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMappingModel), _nSMappingModelSelInferredMappingModelForSourceModelDestinationModelError, sourceModel.Ptr(), destinationModel.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -55,13 +59,17 @@ func NSMappingModelInferredMappingModelForSourceModelDestinationModelError(sourc
 
 func (o *NSMappingModel) InitWithContentsOfURL(url *foundation.NSURL) *NSMappingModel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMappingModelSelInitWithContentsOfURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMappingModelFromID(_ret)
 }
 
 func (o *NSMappingModel) EntityMappings() *foundation.NSArray[*NSEntityMapping] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMappingModelSelEntityMappings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSEntityMapping](_ret)
 }
 
@@ -73,4 +81,3 @@ func (o *NSMappingModel) EntityMappingsByName() *foundation.NSDictionary[*founda
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *NSEntityMapping]](o.Ptr(), _nSMappingModelSelEntityMappingsByName)
 	return _ret
 }
-

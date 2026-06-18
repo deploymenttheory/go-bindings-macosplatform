@@ -16,7 +16,7 @@ type MPSNNReductionSpatialMeanGradientNode struct {
 }
 
 var (
-	_clsMPSNNReductionSpatialMeanGradientNode = _objcClass("MPSNNReductionSpatialMeanGradientNode")
+	_clsMPSNNReductionSpatialMeanGradientNode                                               = _objcClass("MPSNNReductionSpatialMeanGradientNode")
 	_mPSNNReductionSpatialMeanGradientNodeSelNodeWithSourceGradientSourceImageGradientState = objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:")
 	_mPSNNReductionSpatialMeanGradientNodeSelInitWithSourceGradientSourceImageGradientState = objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:")
 )
@@ -34,14 +34,17 @@ func MPSNNReductionSpatialMeanGradientNodeFromID(id objc.ID) *MPSNNReductionSpat
 // @abstract   A node to represent the gradient of a spatial mean reduction node. @param sourceGradient   The input gradient from the 'downstream' gradient filter. @param sourceImage      The input image from the forward spatial mean reduction node. @return  A MPSNNReductionSpatialMeanGradientNode
 func MPSNNReductionSpatialMeanGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient *mpsneuralnetwork.MPSNNImageNode, sourceImage *mpsneuralnetwork.MPSNNImageNode, gradientState *mpsneuralnetwork.MPSNNGradientStateNode) *MPSNNReductionSpatialMeanGradientNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNReductionSpatialMeanGradientNode), _mPSNNReductionSpatialMeanGradientNodeSelNodeWithSourceGradientSourceImageGradientState, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNReductionSpatialMeanGradientNodeFromID(_ret)
 }
 
 // @abstract   A node to represent the gradient of a spatial mean reduction node. @param sourceGradient   The input gradient from the 'downstream' gradient filter. @param sourceImage      The input image from the forward spatial mean reduction node. @return  A MPSNNReductionSpatialMeanGradientNode
 func (o *MPSNNReductionSpatialMeanGradientNode) InitWithSourceGradientSourceImageGradientState(sourceGradient *mpsneuralnetwork.MPSNNImageNode, sourceImage *mpsneuralnetwork.MPSNNImageNode, gradientState *mpsneuralnetwork.MPSNNGradientStateNode) *MPSNNReductionSpatialMeanGradientNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNReductionSpatialMeanGradientNodeSelInitWithSourceGradientSourceImageGradientState, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNReductionSpatialMeanGradientNodeFromID(_ret)
 }
-

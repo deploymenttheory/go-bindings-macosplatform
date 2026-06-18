@@ -48,4 +48,3 @@ type LookAroundSnapshotable interface {
 }
 
 var _ LookAroundSnapshotable = (*LookAroundSnapshot)(nil)
-

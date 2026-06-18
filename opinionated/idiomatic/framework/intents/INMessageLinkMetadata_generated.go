@@ -155,4 +155,3 @@ type MessageLinkMetadataable interface {
 }
 
 var _ MessageLinkMetadataable = (*MessageLinkMetadata)(nil)
-

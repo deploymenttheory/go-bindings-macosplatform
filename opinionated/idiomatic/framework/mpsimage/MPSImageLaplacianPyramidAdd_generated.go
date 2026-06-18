@@ -67,11 +67,17 @@ func (x *ImageLaplacianPyramidAdd) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMod
 	return x
 }
 
-func (x *ImageLaplacianPyramidAdd) asImageLaplacianPyramid() *raw.MPSImageLaplacianPyramid { return &x.inner.MPSImageLaplacianPyramid }
+func (x *ImageLaplacianPyramidAdd) asImageLaplacianPyramid() *raw.MPSImageLaplacianPyramid {
+	return &x.inner.MPSImageLaplacianPyramid
+}
 
-func (x *ImageLaplacianPyramidAdd) asImagePyramid() *raw.MPSImagePyramid { return &x.inner.MPSImageLaplacianPyramid.MPSImagePyramid }
+func (x *ImageLaplacianPyramidAdd) asImagePyramid() *raw.MPSImagePyramid {
+	return &x.inner.MPSImageLaplacianPyramid.MPSImagePyramid
+}
 
-func (x *ImageLaplacianPyramidAdd) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSImageLaplacianPyramid.MPSImagePyramid.MPSUnaryImageKernel }
+func (x *ImageLaplacianPyramidAdd) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
+	return &x.inner.MPSImageLaplacianPyramid.MPSImagePyramid.MPSUnaryImageKernel
+}
 
 // ImageLaplacianPyramidAddable is the interface implemented by [ImageLaplacianPyramidAdd], for mocking and DI.
 type ImageLaplacianPyramidAddable interface {
@@ -84,4 +90,3 @@ type ImageLaplacianPyramidAddable interface {
 }
 
 var _ ImageLaplacianPyramidAddable = (*ImageLaplacianPyramidAdd)(nil)
-

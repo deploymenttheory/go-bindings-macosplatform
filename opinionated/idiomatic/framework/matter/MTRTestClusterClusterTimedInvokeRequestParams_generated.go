@@ -16,7 +16,9 @@ type MTRTestClusterClusterTimedInvokeRequestParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRTestClusterClusterTimedInvokeRequestParams].
-func (x *MTRTestClusterClusterTimedInvokeRequestParams) Unwrap() *raw.MTRTestClusterClusterTimedInvokeRequestParams { return x.inner }
+func (x *MTRTestClusterClusterTimedInvokeRequestParams) Unwrap() *raw.MTRTestClusterClusterTimedInvokeRequestParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -48,7 +50,9 @@ func (x *MTRTestClusterClusterTimedInvokeRequestParams) WithServerSideProcessing
 	return x
 }
 
-func (x *MTRTestClusterClusterTimedInvokeRequestParams) asMTRUnitTestingClusterTimedInvokeRequestParams() *raw.MTRUnitTestingClusterTimedInvokeRequestParams { return &x.inner.MTRUnitTestingClusterTimedInvokeRequestParams }
+func (x *MTRTestClusterClusterTimedInvokeRequestParams) asMTRUnitTestingClusterTimedInvokeRequestParams() *raw.MTRUnitTestingClusterTimedInvokeRequestParams {
+	return &x.inner.MTRUnitTestingClusterTimedInvokeRequestParams
+}
 
 // MTRTestClusterClusterTimedInvokeRequestParamsable is the interface implemented by [MTRTestClusterClusterTimedInvokeRequestParams], for mocking and DI.
 type MTRTestClusterClusterTimedInvokeRequestParamsable interface {
@@ -58,4 +62,3 @@ type MTRTestClusterClusterTimedInvokeRequestParamsable interface {
 }
 
 var _ MTRTestClusterClusterTimedInvokeRequestParamsable = (*MTRTestClusterClusterTimedInvokeRequestParams)(nil)
-

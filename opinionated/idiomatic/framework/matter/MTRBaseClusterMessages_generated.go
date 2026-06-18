@@ -196,9 +196,13 @@ func (x *MTRBaseClusterMessages) SubscribeAttributeClusterRevisionWithParamsSubs
 	}
 }
 
-func (x *MTRBaseClusterMessages) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterMessages) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterMessages) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterMessages) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterMessagesable is the interface implemented by [MTRBaseClusterMessages], for mocking and DI.
 type MTRBaseClusterMessagesable interface {
@@ -222,4 +226,3 @@ type MTRBaseClusterMessagesable interface {
 }
 
 var _ MTRBaseClusterMessagesable = (*MTRBaseClusterMessages)(nil)
-

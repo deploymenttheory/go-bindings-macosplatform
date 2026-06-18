@@ -18,11 +18,11 @@ type MIDIUMPMutableFunctionBlock struct {
 }
 
 var (
-	_clsMIDIUMPMutableFunctionBlock = _objcClass("MIDIUMPMutableFunctionBlock")
+	_clsMIDIUMPMutableFunctionBlock                                                                                          = _objcClass("MIDIUMPMutableFunctionBlock")
 	_mIDIUMPMutableFunctionBlockSelInitWithNameDirectionFirstGroupTotalGroupsSpannedMaxSysEx8StreamsMIDI1InfoUIHintIsEnabled = objc.RegisterName("initWithName:direction:firstGroup:totalGroupsSpanned:maxSysEx8Streams:MIDI1Info:UIHint:isEnabled:")
-	_mIDIUMPMutableFunctionBlockSelSetEnabledError = objc.RegisterName("setEnabled:error:")
-	_mIDIUMPMutableFunctionBlockSelSetNameError = objc.RegisterName("setName:error:")
-	_mIDIUMPMutableFunctionBlockSelReconfigureWithFirstGroupDirectionMIDI1InfoUIHintError = objc.RegisterName("reconfigureWithFirstGroup:direction:MIDI1Info:UIHint:error:")
+	_mIDIUMPMutableFunctionBlockSelSetEnabledError                                                                           = objc.RegisterName("setEnabled:error:")
+	_mIDIUMPMutableFunctionBlockSelSetNameError                                                                              = objc.RegisterName("setName:error:")
+	_mIDIUMPMutableFunctionBlockSelReconfigureWithFirstGroupDirectionMIDI1InfoUIHintError                                    = objc.RegisterName("reconfigureWithFirstGroup:direction:MIDI1Info:UIHint:error:")
 )
 
 func MIDIUMPMutableFunctionBlockFromID(id objc.ID) *MIDIUMPMutableFunctionBlock {
@@ -38,7 +38,9 @@ func MIDIUMPMutableFunctionBlockFromID(id objc.ID) *MIDIUMPMutableFunctionBlock 
 // @method		initWithName:direction:firstGroup:totalGroupsSpanned:maxSysEx8Streams:MIDI1Info:UIHint:isEnabled: @brief		The initializer for constructing a Function Block. @param		name					The Function Block name. @param		direction				The directionality of the Function Block. @param		firstGroup				The first UMP Group supported by the Function Block. @param		totalGroupsSpanned		The number of UMP groups spanned by the Function Block. @param		maxSysEx8Streams		The maximum number of simultaneous Sysex8 streams. @param		MIDI1Info				The MIDI 1.0 speed information for the Function Block. @param		UIHint					A UI hint for the Function Block. @param		isEnabled				The enable state of the Function Block. @discussion	This operation will fail if virtual MIDI endpoint creation is not allowed (for example, on iOS, if your app doesn't list 'audio' in UIBackgroundModes).
 func (o *MIDIUMPMutableFunctionBlock) InitWithNameDirectionFirstGroupTotalGroupsSpannedMaxSysEx8StreamsMIDI1InfoUIHintIsEnabled(name *foundation.NSString, direction MIDIUMPFunctionBlockDirection, firstGroup uint8, totalGroupsSpanned uint8, maxSysEx8Streams uint8, mIDI1Info MIDIUMPFunctionBlockMIDI1Info, uIHint MIDIUMPFunctionBlockUIHint, isEnabled bool) *MIDIUMPMutableFunctionBlock {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDIUMPMutableFunctionBlockSelInitWithNameDirectionFirstGroupTotalGroupsSpannedMaxSysEx8StreamsMIDI1InfoUIHintIsEnabled, name.Ptr(), direction, firstGroup, totalGroupsSpanned, maxSysEx8Streams, mIDI1Info, uIHint, isEnabled)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MIDIUMPMutableFunctionBlockFromID(_ret)
 }
 
@@ -71,4 +73,3 @@ func (o *MIDIUMPMutableFunctionBlock) ReconfigureWithFirstGroupDirectionMIDI1Inf
 	}
 	return _ret, nil
 }
-

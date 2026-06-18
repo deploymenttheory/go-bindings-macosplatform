@@ -16,12 +16,12 @@ type MTRUnitTestingClusterTestNestedStructListArgumentRequestParams struct {
 }
 
 var (
-	_clsMTRUnitTestingClusterTestNestedStructListArgumentRequestParams = _objcClass("MTRUnitTestingClusterTestNestedStructListArgumentRequestParams")
-	_mTRUnitTestingClusterTestNestedStructListArgumentRequestParamsSelArg1 = objc.RegisterName("arg1")
-	_mTRUnitTestingClusterTestNestedStructListArgumentRequestParamsSelSetArg1 = objc.RegisterName("setArg1:")
-	_mTRUnitTestingClusterTestNestedStructListArgumentRequestParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRUnitTestingClusterTestNestedStructListArgumentRequestParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRUnitTestingClusterTestNestedStructListArgumentRequestParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRUnitTestingClusterTestNestedStructListArgumentRequestParams                               = _objcClass("MTRUnitTestingClusterTestNestedStructListArgumentRequestParams")
+	_mTRUnitTestingClusterTestNestedStructListArgumentRequestParamsSelArg1                           = objc.RegisterName("arg1")
+	_mTRUnitTestingClusterTestNestedStructListArgumentRequestParamsSelSetArg1                        = objc.RegisterName("setArg1:")
+	_mTRUnitTestingClusterTestNestedStructListArgumentRequestParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRUnitTestingClusterTestNestedStructListArgumentRequestParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRUnitTestingClusterTestNestedStructListArgumentRequestParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRUnitTestingClusterTestNestedStructListArgumentRequestParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -37,7 +37,9 @@ func MTRUnitTestingClusterTestNestedStructListArgumentRequestParamsFromID(id obj
 
 func (o *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) Arg1() *MTRUnitTestingClusterNestedStructList {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestNestedStructListArgumentRequestParamsSelArg1)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRUnitTestingClusterNestedStructListFromID(_ret)
 }
 
@@ -48,7 +50,9 @@ func (o *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) SetArg1
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestNestedStructListArgumentRequestParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,11 +63,12 @@ func (o *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) SetTime
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestNestedStructListArgumentRequestParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRUnitTestingClusterTestNestedStructListArgumentRequestParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

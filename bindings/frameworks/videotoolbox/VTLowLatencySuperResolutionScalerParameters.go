@@ -16,10 +16,10 @@ type VTLowLatencySuperResolutionScalerParameters struct {
 }
 
 var (
-	_clsVTLowLatencySuperResolutionScalerParameters = _objcClass("VTLowLatencySuperResolutionScalerParameters")
+	_clsVTLowLatencySuperResolutionScalerParameters                                    = _objcClass("VTLowLatencySuperResolutionScalerParameters")
 	_vTLowLatencySuperResolutionScalerParametersSelInitWithSourceFrameDestinationFrame = objc.RegisterName("initWithSourceFrame:destinationFrame:")
-	_vTLowLatencySuperResolutionScalerParametersSelSourceFrame = objc.RegisterName("sourceFrame")
-	_vTLowLatencySuperResolutionScalerParametersSelDestinationFrame = objc.RegisterName("destinationFrame")
+	_vTLowLatencySuperResolutionScalerParametersSelSourceFrame                         = objc.RegisterName("sourceFrame")
+	_vTLowLatencySuperResolutionScalerParametersSelDestinationFrame                    = objc.RegisterName("destinationFrame")
 )
 
 func VTLowLatencySuperResolutionScalerParametersFromID(id objc.ID) *VTLowLatencySuperResolutionScalerParameters {
@@ -35,21 +35,26 @@ func VTLowLatencySuperResolutionScalerParametersFromID(id objc.ID) *VTLowLatency
 // Creates a new low-latency, super-resolution scaler parameters object. - Parameters: - sourceFrame: Current source frame; must be non `nil`. - destinationFrame: User-allocated pixel buffer that receives the scaled processor output; must be non `nil`.
 func (o *VTLowLatencySuperResolutionScalerParameters) InitWithSourceFrameDestinationFrame(sourceFrame *VTFrameProcessorFrame, destinationFrame *VTFrameProcessorFrame) *VTLowLatencySuperResolutionScalerParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTLowLatencySuperResolutionScalerParametersSelInitWithSourceFrameDestinationFrame, sourceFrame.Ptr(), destinationFrame.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VTLowLatencySuperResolutionScalerParametersFromID(_ret)
 }
 
 // Current source frame, which must be non `nil`.
 func (o *VTLowLatencySuperResolutionScalerParameters) SourceFrame() *VTFrameProcessorFrame {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTLowLatencySuperResolutionScalerParametersSelSourceFrame)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VTFrameProcessorFrameFromID(_ret)
 }
 
 // Destination frame that contains user-allocated pixel buffer that receives the scaled processor output.
 func (o *VTLowLatencySuperResolutionScalerParameters) DestinationFrame() *VTFrameProcessorFrame {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTLowLatencySuperResolutionScalerParametersSelDestinationFrame)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VTFrameProcessorFrameFromID(_ret)
 }
-

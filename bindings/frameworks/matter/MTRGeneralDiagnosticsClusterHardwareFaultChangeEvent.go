@@ -16,10 +16,10 @@ type MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent struct {
 }
 
 var (
-	_clsMTRGeneralDiagnosticsClusterHardwareFaultChangeEvent = _objcClass("MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent")
-	_mTRGeneralDiagnosticsClusterHardwareFaultChangeEventSelCurrent = objc.RegisterName("current")
-	_mTRGeneralDiagnosticsClusterHardwareFaultChangeEventSelSetCurrent = objc.RegisterName("setCurrent:")
-	_mTRGeneralDiagnosticsClusterHardwareFaultChangeEventSelPrevious = objc.RegisterName("previous")
+	_clsMTRGeneralDiagnosticsClusterHardwareFaultChangeEvent            = _objcClass("MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent")
+	_mTRGeneralDiagnosticsClusterHardwareFaultChangeEventSelCurrent     = objc.RegisterName("current")
+	_mTRGeneralDiagnosticsClusterHardwareFaultChangeEventSelSetCurrent  = objc.RegisterName("setCurrent:")
+	_mTRGeneralDiagnosticsClusterHardwareFaultChangeEventSelPrevious    = objc.RegisterName("previous")
 	_mTRGeneralDiagnosticsClusterHardwareFaultChangeEventSelSetPrevious = objc.RegisterName("setPrevious:")
 )
 
@@ -50,4 +50,3 @@ func (o *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) Previous() *found
 func (o *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) SetPrevious(previous *foundation.NSArray[objc.ID]) {
 	o.Ptr().Send(_mTRGeneralDiagnosticsClusterHardwareFaultChangeEventSelSetPrevious, previous)
 }
-

@@ -17,11 +17,11 @@ type SCDisplay struct {
 }
 
 var (
-	_clsSCDisplay = _objcClass("SCDisplay")
+	_clsSCDisplay          = _objcClass("SCDisplay")
 	_sCDisplaySelDisplayID = objc.RegisterName("displayID")
-	_sCDisplaySelWidth = objc.RegisterName("width")
-	_sCDisplaySelHeight = objc.RegisterName("height")
-	_sCDisplaySelFrame = objc.RegisterName("frame")
+	_sCDisplaySelWidth     = objc.RegisterName("width")
+	_sCDisplaySelHeight    = objc.RegisterName("height")
+	_sCDisplaySelFrame     = objc.RegisterName("frame")
 )
 
 func SCDisplayFromID(id objc.ID) *SCDisplay {
@@ -57,4 +57,3 @@ func (o *SCDisplay) Frame() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _sCDisplaySelFrame)
 	return _ret
 }
-

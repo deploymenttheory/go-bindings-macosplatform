@@ -17,7 +17,9 @@ type MTRChannelClusterChangeChannelParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRChannelClusterChangeChannelParams].
-func (x *MTRChannelClusterChangeChannelParams) Unwrap() *raw.MTRChannelClusterChangeChannelParams { return x.inner }
+func (x *MTRChannelClusterChangeChannelParams) Unwrap() *raw.MTRChannelClusterChangeChannelParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -104,4 +106,3 @@ type MTRChannelClusterChangeChannelParamsable interface {
 }
 
 var _ MTRChannelClusterChangeChannelParamsable = (*MTRChannelClusterChangeChannelParams)(nil)
-

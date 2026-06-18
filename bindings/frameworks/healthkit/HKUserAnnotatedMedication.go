@@ -16,11 +16,11 @@ type HKUserAnnotatedMedication struct {
 }
 
 var (
-	_clsHKUserAnnotatedMedication = _objcClass("HKUserAnnotatedMedication")
-	_hKUserAnnotatedMedicationSelNickname = objc.RegisterName("nickname")
-	_hKUserAnnotatedMedicationSelIsArchived = objc.RegisterName("isArchived")
+	_clsHKUserAnnotatedMedication            = _objcClass("HKUserAnnotatedMedication")
+	_hKUserAnnotatedMedicationSelNickname    = objc.RegisterName("nickname")
+	_hKUserAnnotatedMedicationSelIsArchived  = objc.RegisterName("isArchived")
 	_hKUserAnnotatedMedicationSelHasSchedule = objc.RegisterName("hasSchedule")
-	_hKUserAnnotatedMedicationSelMedication = objc.RegisterName("medication")
+	_hKUserAnnotatedMedicationSelMedication  = objc.RegisterName("medication")
 )
 
 func HKUserAnnotatedMedicationFromID(id objc.ID) *HKUserAnnotatedMedication {
@@ -36,7 +36,9 @@ func HKUserAnnotatedMedicationFromID(id objc.ID) *HKUserAnnotatedMedication {
 // The nickname that a person added to a medication during the entry experience. This can be edited at any point.
 func (o *HKUserAnnotatedMedication) Nickname() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKUserAnnotatedMedicationSelNickname)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -55,7 +57,8 @@ func (o *HKUserAnnotatedMedication) HasSchedule() bool {
 // A reference to the specific medication a person is tracking. This concept's identifier is directly associated with the logged dose events.
 func (o *HKUserAnnotatedMedication) Medication() *HKMedicationConcept {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKUserAnnotatedMedicationSelMedication)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKMedicationConceptFromID(_ret)
 }
-

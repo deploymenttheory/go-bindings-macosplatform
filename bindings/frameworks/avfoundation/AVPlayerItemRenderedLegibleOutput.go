@@ -17,15 +17,15 @@ type AVPlayerItemRenderedLegibleOutput struct {
 }
 
 var (
-	_clsAVPlayerItemRenderedLegibleOutput = _objcClass("AVPlayerItemRenderedLegibleOutput")
-	_aVPlayerItemRenderedLegibleOutputSelInitWithVideoDisplaySize = objc.RegisterName("initWithVideoDisplaySize:")
-	_aVPlayerItemRenderedLegibleOutputSelSetDelegateQueue = objc.RegisterName("setDelegate:queue:")
-	_aVPlayerItemRenderedLegibleOutputSelDelegate = objc.RegisterName("delegate")
-	_aVPlayerItemRenderedLegibleOutputSelDelegateQueue = objc.RegisterName("delegateQueue")
-	_aVPlayerItemRenderedLegibleOutputSelAdvanceIntervalForDelegateInvocation = objc.RegisterName("advanceIntervalForDelegateInvocation")
+	_clsAVPlayerItemRenderedLegibleOutput                                        = _objcClass("AVPlayerItemRenderedLegibleOutput")
+	_aVPlayerItemRenderedLegibleOutputSelInitWithVideoDisplaySize                = objc.RegisterName("initWithVideoDisplaySize:")
+	_aVPlayerItemRenderedLegibleOutputSelSetDelegateQueue                        = objc.RegisterName("setDelegate:queue:")
+	_aVPlayerItemRenderedLegibleOutputSelDelegate                                = objc.RegisterName("delegate")
+	_aVPlayerItemRenderedLegibleOutputSelDelegateQueue                           = objc.RegisterName("delegateQueue")
+	_aVPlayerItemRenderedLegibleOutputSelAdvanceIntervalForDelegateInvocation    = objc.RegisterName("advanceIntervalForDelegateInvocation")
 	_aVPlayerItemRenderedLegibleOutputSelSetAdvanceIntervalForDelegateInvocation = objc.RegisterName("setAdvanceIntervalForDelegateInvocation:")
-	_aVPlayerItemRenderedLegibleOutputSelVideoDisplaySize = objc.RegisterName("videoDisplaySize")
-	_aVPlayerItemRenderedLegibleOutputSelSetVideoDisplaySize = objc.RegisterName("setVideoDisplaySize:")
+	_aVPlayerItemRenderedLegibleOutputSelVideoDisplaySize                        = objc.RegisterName("videoDisplaySize")
+	_aVPlayerItemRenderedLegibleOutputSelSetVideoDisplaySize                     = objc.RegisterName("setVideoDisplaySize:")
 )
 
 func AVPlayerItemRenderedLegibleOutputFromID(id objc.ID) *AVPlayerItemRenderedLegibleOutput {
@@ -41,7 +41,9 @@ func AVPlayerItemRenderedLegibleOutputFromID(id objc.ID) *AVPlayerItemRenderedLe
 // @method			initWithVideoDisplaySize: @abstract		Creates an instance of AVPlayerItemRenderedLegibleOutput. @param			videoDisplaySize CGSize for the video display area @discussion This is the only available initializer for AVPlayerItemRenderedLegibleOutput. The client can also choose to reset videoDisplaySize after initialization or during playback. Initializing and resetting videoDisplaySize with a zero height or width will result in an exception being thrown.
 func (o *AVPlayerItemRenderedLegibleOutput) InitWithVideoDisplaySize(videoDisplaySize corefoundation.CGSize) *AVPlayerItemRenderedLegibleOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemRenderedLegibleOutputSelInitWithVideoDisplaySize, videoDisplaySize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerItemRenderedLegibleOutputFromID(_ret)
 }
 
@@ -59,7 +61,9 @@ func (o *AVPlayerItemRenderedLegibleOutput) Delegate() AVPlayerItemRenderedLegib
 // @property		delegateQueue @abstract		The dispatch queue where the delegate is messaged. @discussion This property is not key-value observable.
 func (o *AVPlayerItemRenderedLegibleOutput) DelegateQueue() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemRenderedLegibleOutputSelDelegateQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
@@ -82,4 +86,3 @@ func (o *AVPlayerItemRenderedLegibleOutput) VideoDisplaySize() corefoundation.CG
 func (o *AVPlayerItemRenderedLegibleOutput) SetVideoDisplaySize(videoDisplaySize corefoundation.CGSize) {
 	o.Ptr().Send(_aVPlayerItemRenderedLegibleOutputSelSetVideoDisplaySize, videoDisplaySize)
 }
-

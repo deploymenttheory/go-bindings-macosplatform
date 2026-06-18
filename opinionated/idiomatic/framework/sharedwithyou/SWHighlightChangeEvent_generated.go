@@ -55,4 +55,3 @@ type HighlightChangeEventable interface {
 }
 
 var _ HighlightChangeEventable = (*HighlightChangeEvent)(nil)
-

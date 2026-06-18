@@ -15,18 +15,18 @@ type NSComparisonPredicate struct {
 }
 
 var (
-	_clsNSComparisonPredicate = _objcClass("NSComparisonPredicate")
+	_clsNSComparisonPredicate                                                              = _objcClass("NSComparisonPredicate")
 	_nSComparisonPredicateSelPredicateWithLeftExpressionRightExpressionModifierTypeOptions = objc.RegisterName("predicateWithLeftExpression:rightExpression:modifier:type:options:")
-	_nSComparisonPredicateSelPredicateWithLeftExpressionRightExpressionCustomSelector = objc.RegisterName("predicateWithLeftExpression:rightExpression:customSelector:")
-	_nSComparisonPredicateSelInitWithLeftExpressionRightExpressionModifierTypeOptions = objc.RegisterName("initWithLeftExpression:rightExpression:modifier:type:options:")
-	_nSComparisonPredicateSelInitWithLeftExpressionRightExpressionCustomSelector = objc.RegisterName("initWithLeftExpression:rightExpression:customSelector:")
-	_nSComparisonPredicateSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSComparisonPredicateSelPredicateOperatorType = objc.RegisterName("predicateOperatorType")
-	_nSComparisonPredicateSelComparisonPredicateModifier = objc.RegisterName("comparisonPredicateModifier")
-	_nSComparisonPredicateSelLeftExpression = objc.RegisterName("leftExpression")
-	_nSComparisonPredicateSelRightExpression = objc.RegisterName("rightExpression")
-	_nSComparisonPredicateSelCustomSelector = objc.RegisterName("customSelector")
-	_nSComparisonPredicateSelOptions = objc.RegisterName("options")
+	_nSComparisonPredicateSelPredicateWithLeftExpressionRightExpressionCustomSelector      = objc.RegisterName("predicateWithLeftExpression:rightExpression:customSelector:")
+	_nSComparisonPredicateSelInitWithLeftExpressionRightExpressionModifierTypeOptions      = objc.RegisterName("initWithLeftExpression:rightExpression:modifier:type:options:")
+	_nSComparisonPredicateSelInitWithLeftExpressionRightExpressionCustomSelector           = objc.RegisterName("initWithLeftExpression:rightExpression:customSelector:")
+	_nSComparisonPredicateSelInitWithCoder                                                 = objc.RegisterName("initWithCoder:")
+	_nSComparisonPredicateSelPredicateOperatorType                                         = objc.RegisterName("predicateOperatorType")
+	_nSComparisonPredicateSelComparisonPredicateModifier                                   = objc.RegisterName("comparisonPredicateModifier")
+	_nSComparisonPredicateSelLeftExpression                                                = objc.RegisterName("leftExpression")
+	_nSComparisonPredicateSelRightExpression                                               = objc.RegisterName("rightExpression")
+	_nSComparisonPredicateSelCustomSelector                                                = objc.RegisterName("customSelector")
+	_nSComparisonPredicateSelOptions                                                       = objc.RegisterName("options")
 )
 
 func NSComparisonPredicateFromID(id objc.ID) *NSComparisonPredicate {
@@ -41,31 +41,41 @@ func NSComparisonPredicateFromID(id objc.ID) *NSComparisonPredicate {
 
 func NSComparisonPredicatePredicateWithLeftExpressionRightExpressionModifierTypeOptions(lhs *NSExpression, rhs *NSExpression, modifier NSComparisonPredicateModifier, type_ NSPredicateOperatorType, options NSComparisonPredicateOptions) *NSComparisonPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSComparisonPredicate), _nSComparisonPredicateSelPredicateWithLeftExpressionRightExpressionModifierTypeOptions, lhs.Ptr(), rhs.Ptr(), modifier, type_, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSComparisonPredicateFromID(_ret)
 }
 
 func NSComparisonPredicatePredicateWithLeftExpressionRightExpressionCustomSelector(lhs *NSExpression, rhs *NSExpression, selector objc.SEL) *NSComparisonPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSComparisonPredicate), _nSComparisonPredicateSelPredicateWithLeftExpressionRightExpressionCustomSelector, lhs.Ptr(), rhs.Ptr(), selector)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSComparisonPredicateFromID(_ret)
 }
 
 func (o *NSComparisonPredicate) InitWithLeftExpressionRightExpressionModifierTypeOptions(lhs *NSExpression, rhs *NSExpression, modifier NSComparisonPredicateModifier, type_ NSPredicateOperatorType, options NSComparisonPredicateOptions) *NSComparisonPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSComparisonPredicateSelInitWithLeftExpressionRightExpressionModifierTypeOptions, lhs.Ptr(), rhs.Ptr(), modifier, type_, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSComparisonPredicateFromID(_ret)
 }
 
 func (o *NSComparisonPredicate) InitWithLeftExpressionRightExpressionCustomSelector(lhs *NSExpression, rhs *NSExpression, selector objc.SEL) *NSComparisonPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSComparisonPredicateSelInitWithLeftExpressionRightExpressionCustomSelector, lhs.Ptr(), rhs.Ptr(), selector)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSComparisonPredicateFromID(_ret)
 }
 
 func (o *NSComparisonPredicate) InitWithCoder(coder *NSCoder) *NSComparisonPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSComparisonPredicateSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSComparisonPredicateFromID(_ret)
 }
 
@@ -81,13 +91,17 @@ func (o *NSComparisonPredicate) ComparisonPredicateModifier() NSComparisonPredic
 
 func (o *NSComparisonPredicate) LeftExpression() *NSExpression {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSComparisonPredicateSelLeftExpression)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSExpressionFromID(_ret)
 }
 
 func (o *NSComparisonPredicate) RightExpression() *NSExpression {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSComparisonPredicateSelRightExpression)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSExpressionFromID(_ret)
 }
 
@@ -100,4 +114,3 @@ func (o *NSComparisonPredicate) Options() NSComparisonPredicateOptions {
 	_ret := objc.Send[NSComparisonPredicateOptions](o.Ptr(), _nSComparisonPredicateSelOptions)
 	return _ret
 }
-

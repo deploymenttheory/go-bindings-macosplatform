@@ -16,21 +16,21 @@ type NSUserInterfaceCompressionOptions struct {
 }
 
 var (
-	_clsNSUserInterfaceCompressionOptions = _objcClass("NSUserInterfaceCompressionOptions")
-	_nSUserInterfaceCompressionOptionsSelInit = objc.RegisterName("init")
-	_nSUserInterfaceCompressionOptionsSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSUserInterfaceCompressionOptionsSelInitWithIdentifier = objc.RegisterName("initWithIdentifier:")
+	_clsNSUserInterfaceCompressionOptions                           = _objcClass("NSUserInterfaceCompressionOptions")
+	_nSUserInterfaceCompressionOptionsSelInit                       = objc.RegisterName("init")
+	_nSUserInterfaceCompressionOptionsSelInitWithCoder              = objc.RegisterName("initWithCoder:")
+	_nSUserInterfaceCompressionOptionsSelInitWithIdentifier         = objc.RegisterName("initWithIdentifier:")
 	_nSUserInterfaceCompressionOptionsSelInitWithCompressionOptions = objc.RegisterName("initWithCompressionOptions:")
-	_nSUserInterfaceCompressionOptionsSelContainsOptions = objc.RegisterName("containsOptions:")
-	_nSUserInterfaceCompressionOptionsSelIntersectsOptions = objc.RegisterName("intersectsOptions:")
-	_nSUserInterfaceCompressionOptionsSelOptionsByAddingOptions = objc.RegisterName("optionsByAddingOptions:")
-	_nSUserInterfaceCompressionOptionsSelOptionsByRemovingOptions = objc.RegisterName("optionsByRemovingOptions:")
-	_nSUserInterfaceCompressionOptionsSelIsEmpty = objc.RegisterName("isEmpty")
-	_nSUserInterfaceCompressionOptionsSelHideImagesOption = objc.RegisterName("hideImagesOption")
-	_nSUserInterfaceCompressionOptionsSelHideTextOption = objc.RegisterName("hideTextOption")
-	_nSUserInterfaceCompressionOptionsSelReduceMetricsOption = objc.RegisterName("reduceMetricsOption")
-	_nSUserInterfaceCompressionOptionsSelBreakEqualWidthsOption = objc.RegisterName("breakEqualWidthsOption")
-	_nSUserInterfaceCompressionOptionsSelStandardOptions = objc.RegisterName("standardOptions")
+	_nSUserInterfaceCompressionOptionsSelContainsOptions            = objc.RegisterName("containsOptions:")
+	_nSUserInterfaceCompressionOptionsSelIntersectsOptions          = objc.RegisterName("intersectsOptions:")
+	_nSUserInterfaceCompressionOptionsSelOptionsByAddingOptions     = objc.RegisterName("optionsByAddingOptions:")
+	_nSUserInterfaceCompressionOptionsSelOptionsByRemovingOptions   = objc.RegisterName("optionsByRemovingOptions:")
+	_nSUserInterfaceCompressionOptionsSelIsEmpty                    = objc.RegisterName("isEmpty")
+	_nSUserInterfaceCompressionOptionsSelHideImagesOption           = objc.RegisterName("hideImagesOption")
+	_nSUserInterfaceCompressionOptionsSelHideTextOption             = objc.RegisterName("hideTextOption")
+	_nSUserInterfaceCompressionOptionsSelReduceMetricsOption        = objc.RegisterName("reduceMetricsOption")
+	_nSUserInterfaceCompressionOptionsSelBreakEqualWidthsOption     = objc.RegisterName("breakEqualWidthsOption")
+	_nSUserInterfaceCompressionOptionsSelStandardOptions            = objc.RegisterName("standardOptions")
 )
 
 func NSUserInterfaceCompressionOptionsFromID(id objc.ID) *NSUserInterfaceCompressionOptions {
@@ -45,25 +45,33 @@ func NSUserInterfaceCompressionOptionsFromID(id objc.ID) *NSUserInterfaceCompres
 
 func (o *NSUserInterfaceCompressionOptions) Init() *NSUserInterfaceCompressionOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserInterfaceCompressionOptionsSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUserInterfaceCompressionOptionsFromID(_ret)
 }
 
 func (o *NSUserInterfaceCompressionOptions) InitWithCoder(coder *foundation.NSCoder) *NSUserInterfaceCompressionOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserInterfaceCompressionOptionsSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUserInterfaceCompressionOptionsFromID(_ret)
 }
 
 func (o *NSUserInterfaceCompressionOptions) InitWithIdentifier(identifier *foundation.NSString) *NSUserInterfaceCompressionOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserInterfaceCompressionOptionsSelInitWithIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUserInterfaceCompressionOptionsFromID(_ret)
 }
 
 func (o *NSUserInterfaceCompressionOptions) InitWithCompressionOptions(options *foundation.NSSet[*NSUserInterfaceCompressionOptions]) *NSUserInterfaceCompressionOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserInterfaceCompressionOptionsSelInitWithCompressionOptions, options.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUserInterfaceCompressionOptionsFromID(_ret)
 }
 
@@ -79,13 +87,17 @@ func (o *NSUserInterfaceCompressionOptions) IntersectsOptions(options *NSUserInt
 
 func (o *NSUserInterfaceCompressionOptions) OptionsByAddingOptions(options *NSUserInterfaceCompressionOptions) *NSUserInterfaceCompressionOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserInterfaceCompressionOptionsSelOptionsByAddingOptions, options.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUserInterfaceCompressionOptionsFromID(_ret)
 }
 
 func (o *NSUserInterfaceCompressionOptions) OptionsByRemovingOptions(options *NSUserInterfaceCompressionOptions) *NSUserInterfaceCompressionOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserInterfaceCompressionOptionsSelOptionsByRemovingOptions, options.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUserInterfaceCompressionOptionsFromID(_ret)
 }
 
@@ -96,31 +108,40 @@ func (o *NSUserInterfaceCompressionOptions) IsEmpty() bool {
 
 func NSUserInterfaceCompressionOptionsHideImagesOption() *NSUserInterfaceCompressionOptions {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUserInterfaceCompressionOptions), _nSUserInterfaceCompressionOptionsSelHideImagesOption)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUserInterfaceCompressionOptionsFromID(_ret)
 }
 
 func NSUserInterfaceCompressionOptionsHideTextOption() *NSUserInterfaceCompressionOptions {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUserInterfaceCompressionOptions), _nSUserInterfaceCompressionOptionsSelHideTextOption)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUserInterfaceCompressionOptionsFromID(_ret)
 }
 
 func NSUserInterfaceCompressionOptionsReduceMetricsOption() *NSUserInterfaceCompressionOptions {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUserInterfaceCompressionOptions), _nSUserInterfaceCompressionOptionsSelReduceMetricsOption)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUserInterfaceCompressionOptionsFromID(_ret)
 }
 
 func NSUserInterfaceCompressionOptionsBreakEqualWidthsOption() *NSUserInterfaceCompressionOptions {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUserInterfaceCompressionOptions), _nSUserInterfaceCompressionOptionsSelBreakEqualWidthsOption)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUserInterfaceCompressionOptionsFromID(_ret)
 }
 
 func NSUserInterfaceCompressionOptionsStandardOptions() *NSUserInterfaceCompressionOptions {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUserInterfaceCompressionOptions), _nSUserInterfaceCompressionOptionsSelStandardOptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUserInterfaceCompressionOptionsFromID(_ret)
 }
-

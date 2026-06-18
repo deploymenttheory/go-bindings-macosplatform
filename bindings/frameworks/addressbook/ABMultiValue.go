@@ -16,14 +16,14 @@ type ABMultiValue struct {
 }
 
 var (
-	_clsABMultiValue = _objcClass("ABMultiValue")
-	_aBMultiValueSelCount = objc.RegisterName("count")
-	_aBMultiValueSelValueAtIndex = objc.RegisterName("valueAtIndex:")
-	_aBMultiValueSelLabelAtIndex = objc.RegisterName("labelAtIndex:")
-	_aBMultiValueSelIdentifierAtIndex = objc.RegisterName("identifierAtIndex:")
+	_clsABMultiValue                   = _objcClass("ABMultiValue")
+	_aBMultiValueSelCount              = objc.RegisterName("count")
+	_aBMultiValueSelValueAtIndex       = objc.RegisterName("valueAtIndex:")
+	_aBMultiValueSelLabelAtIndex       = objc.RegisterName("labelAtIndex:")
+	_aBMultiValueSelIdentifierAtIndex  = objc.RegisterName("identifierAtIndex:")
 	_aBMultiValueSelIndexForIdentifier = objc.RegisterName("indexForIdentifier:")
-	_aBMultiValueSelPrimaryIdentifier = objc.RegisterName("primaryIdentifier")
-	_aBMultiValueSelPropertyType = objc.RegisterName("propertyType")
+	_aBMultiValueSelPrimaryIdentifier  = objc.RegisterName("primaryIdentifier")
+	_aBMultiValueSelPropertyType       = objc.RegisterName("propertyType")
 	_aBMultiValueSelValueForIdentifier = objc.RegisterName("valueForIdentifier:")
 	_aBMultiValueSelLabelForIdentifier = objc.RegisterName("labelForIdentifier:")
 )
@@ -50,13 +50,17 @@ func (o *ABMultiValue) ValueAtIndex(index uint) objc.ID {
 
 func (o *ABMultiValue) LabelAtIndex(index uint) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aBMultiValueSelLabelAtIndex, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *ABMultiValue) IdentifierAtIndex(index uint) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aBMultiValueSelIdentifierAtIndex, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -67,7 +71,9 @@ func (o *ABMultiValue) IndexForIdentifier(identifier *foundation.NSString) uint 
 
 func (o *ABMultiValue) PrimaryIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aBMultiValueSelPrimaryIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -85,4 +91,3 @@ func (o *ABMultiValue) LabelForIdentifier(identifier *foundation.NSString) objc.
 	_ret := objc.Send[objc.ID](o.Ptr(), _aBMultiValueSelLabelForIdentifier, identifier.Ptr())
 	return _ret
 }
-

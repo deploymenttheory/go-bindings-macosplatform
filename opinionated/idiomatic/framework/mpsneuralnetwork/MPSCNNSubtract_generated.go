@@ -178,7 +178,9 @@ func (x *CNNSubtract) WithDestinationImageAllocator(destinationImageAllocator mp
 
 func (x *CNNSubtract) asCNNArithmetic() *raw.MPSCNNArithmetic { return &x.inner.MPSCNNArithmetic }
 
-func (x *CNNSubtract) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel }
+func (x *CNNSubtract) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel
+}
 
 // CNNSubtractable is the interface implemented by [CNNSubtract], for mocking and DI.
 type CNNSubtractable interface {
@@ -209,4 +211,3 @@ type CNNSubtractable interface {
 }
 
 var _ CNNSubtractable = (*CNNSubtract)(nil)
-

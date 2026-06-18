@@ -14,111 +14,111 @@ import (
 
 var (
 	// @function IOCallOnce @abstract Executes a block object only once @param flag A pointer to a IOCallOnceFlag structure that is used to test whether the block has completed or not. @param block The block object to execute once.
-	_fnIOCallOnce func(*IOCallOnceFlag, objc.Block)
-	_fnIODelay func(uint64)
-	_fnIOFixedDivide func(int, int) int
-	_fnIOFixedMultiply func(int, int) int
-	_fnIOFree func(unsafe.Pointer, uint)
-	_fnIOLockAlloc func() unsafe.Pointer
-	_fnIOLockAssert func(unsafe.Pointer, IOLockAssertState)
-	_fnIOLockFree func(unsafe.Pointer)
-	_fnIOLockLock func(unsafe.Pointer)
-	_fnIOLockTryLock func(unsafe.Pointer) bool
-	_fnIOLockUnlock func(unsafe.Pointer)
-	_fnIOLogBuffer func(string, unsafe.Pointer, uint)
-	_fnIOLogv func(string, string) int
-	_fnIOMalloc func(uint) unsafe.Pointer
-	_fnIOMallocTyped func(uint, uint64) unsafe.Pointer
-	_fnIOMallocZero func(uint) unsafe.Pointer
-	_fnIOMallocZeroTyped func(uint, uint64) unsafe.Pointer
+	_fnIOCallOnce           func(*IOCallOnceFlag, objc.Block)
+	_fnIODelay              func(uint64)
+	_fnIOFixedDivide        func(int, int) int
+	_fnIOFixedMultiply      func(int, int) int
+	_fnIOFree               func(unsafe.Pointer, uint)
+	_fnIOLockAlloc          func() unsafe.Pointer
+	_fnIOLockAssert         func(unsafe.Pointer, IOLockAssertState)
+	_fnIOLockFree           func(unsafe.Pointer)
+	_fnIOLockLock           func(unsafe.Pointer)
+	_fnIOLockTryLock        func(unsafe.Pointer) bool
+	_fnIOLockUnlock         func(unsafe.Pointer)
+	_fnIOLogBuffer          func(string, unsafe.Pointer, uint)
+	_fnIOLogv               func(string, string) int
+	_fnIOMalloc             func(uint) unsafe.Pointer
+	_fnIOMallocTyped        func(uint, uint64) unsafe.Pointer
+	_fnIOMallocZero         func(uint) unsafe.Pointer
+	_fnIOMallocZeroTyped    func(uint, uint64) unsafe.Pointer
 	_fnIOParseBootArgNumber func(string, unsafe.Pointer, int) bool
 	_fnIOParseBootArgString func(string, string, int) bool
 	_fnIORPCMessageFromMach func(*IORPCMessageMach, bool) *IORPCMessage
-	_fnIORWLockAlloc func() unsafe.Pointer
-	_fnIORWLockFree func(unsafe.Pointer)
+	_fnIORWLockAlloc        func() unsafe.Pointer
+	_fnIORWLockFree         func(unsafe.Pointer)
 	// @function IORWLockRead @abstract Lock a read/write lock for read. @discussion Lock the lock for read, allowing multiple readers when there are no writers. If the lock is held for write, block waiting for its unlock. Locking the lock recursively from one thread, for read or write, can result in deadlock. @param lock Pointer to the allocated lock.
 	_fnIORWLockRead func(unsafe.Pointer)
 	// @function IORWLockUnlock @abstract Unlock a read/write lock. @discussion Undo one call to IORWLockRead or IORWLockWrite. Results are undefined if the caller has not locked the lock. @param lock Pointer to the allocated lock.
 	_fnIORWLockUnlock func(unsafe.Pointer)
 	// @function IORWLockWrite @abstract Lock a read/write lock for write. @discussion Lock the lock for write, allowing one writer exlusive access. If the lock is held for read or write, block waiting for its unlock. Locking the lock recursively from one thread, for read or write, can result in deadlock. @param lock Pointer to the allocated lock.
-	_fnIORWLockWrite func(unsafe.Pointer)
-	_fnIORecursiveConditionLockAlloc func() unsafe.Pointer
-	_fnIORecursiveConditionLockFree func(unsafe.Pointer)
+	_fnIORWLockWrite                    func(unsafe.Pointer)
+	_fnIORecursiveConditionLockAlloc    func() unsafe.Pointer
+	_fnIORecursiveConditionLockFree     func(unsafe.Pointer)
 	_fnIORecursiveConditionLockHaveLock func(unsafe.Pointer) bool
-	_fnIORecursiveConditionLockLock func(unsafe.Pointer)
-	_fnIORecursiveConditionLockTryLock func(unsafe.Pointer) bool
-	_fnIORecursiveConditionLockUnlock func(unsafe.Pointer)
-	_fnIORecursiveLockAlloc func() unsafe.Pointer
-	_fnIORecursiveLockFree func(unsafe.Pointer)
-	_fnIORecursiveLockHaveLock func(unsafe.Pointer) bool
-	_fnIORecursiveLockLock func(unsafe.Pointer)
-	_fnIORecursiveLockTryLock func(unsafe.Pointer) bool
-	_fnIORecursiveLockUnlock func(unsafe.Pointer)
-	_fnIOSleep func(uint64)
-	_fnIOSysCtlByName func(string, unsafe.Pointer, *uint, unsafe.Pointer, uint) int
-	_fnIOThreadLocalStorageGet func(uint64) unsafe.Pointer
-	_fnIOThreadLocalStorageKeyCreate func(*uint64) int
-	_fnIOThreadLocalStorageKeyDelete func(uint64) int
-	_fnIOThreadLocalStorageSet func(uint64, unsafe.Pointer) int
-	_fnOSArrayAppendValue func(*int32, unsafe.Pointer) bool
-	_fnOSArrayApply func(*int32, objc.Block) bool
-	_fnOSArrayCreate func() *int32
-	_fnOSArrayGetCount func(*int32) uint32
-	_fnOSArrayGetStringValue func(*int32, uint) string
-	_fnOSArrayGetUInt64Value func(*int32, uint) uint64
-	_fnOSArrayGetValue func(*int32, uint) unsafe.Pointer
-	_fnOSArrayReplaceValue func(*int32, uint, unsafe.Pointer) bool
-	_fnOSArraySetStringValue func(*int32, uint, string)
-	_fnOSArraySetUInt64Value func(*int32, uint, uint64)
-	_fnOSArraySetValue func(*int32, uint, unsafe.Pointer) bool
-	_fnOSCollectionTypeID func(unsafe.Pointer) uint64
-	_fnOSCollectionTypeName func(uint64) string
-	_fnOSCollectionsInitialize func()
-	_fnOSCreateObjectFromSerialization func(*int32) unsafe.Pointer
-	_fnOSCreateSerializationFromBytes func(unsafe.Pointer, uint, objc.Block) *int32
-	_fnOSCreateSerializationFromObject func(unsafe.Pointer) *int32
-	_fnOSDataAppendBytes func(*int32, unsafe.Pointer, uint) bool
-	_fnOSDataCreate func(unsafe.Pointer, uint) *int32
-	_fnOSDataGetBytes func(*int32, unsafe.Pointer, uint, uint) uint
-	_fnOSDataGetBytesPtr func(*int32, uint, uint) unsafe.Pointer
-	_fnOSDataGetLength func(*int32) uint
-	_fnOSDictionaryApply func(*int32, objc.Block) bool
-	_fnOSDictionaryCreate func() *int32
-	_fnOSDictionaryGetCount func(*int32) uint32
-	_fnOSDictionaryGetStringValue func(*int32, string) string
-	_fnOSDictionaryGetUInt64Value func(*int32, string) uint64
-	_fnOSDictionaryGetValue func(*int32, string) unsafe.Pointer
-	_fnOSDictionarySetStringValue func(*int32, string, string)
-	_fnOSDictionarySetUInt64Value func(*int32, string, uint64)
-	_fnOSDictionarySetValue func(*int32, string, unsafe.Pointer) bool
-	_fnOSNumberCreateWithUInt64Value func(uint64) *int32
-	_fnOSNumberGetUInt64Value func(*int32) uint64
-	_fnOSObjectAllocate func(*int32, objc.ID) int
-	_fnOSObjectLog func(unsafe.Pointer)
-	_fnOSObjectRelease func(unsafe.Pointer)
-	_fnOSObjectRetain func(unsafe.Pointer)
-	_fnOSSerializationGetBytes func(*int32, *uint) unsafe.Pointer
-	_fnOSStringCreate func(string, uint) *int32
-	_fnOSStringGetLength func(*int32) uint
-	_fnOSStringGetStringPtr func(*int32) string
-	_fnOSSynchronizeIO func()
-	___DEQUEUE_ELT_CLEANUP func(*QueueEntry)
-	___QUEUE_ELT_VALIDATE func(*QueueEntry)
-	___QUEUE_ELT_VALIDATE_NEXT func(*QueueEntry) *QueueEntry
-	___QUEUE_ELT_VALIDATE_PREV func(*QueueEntry) *QueueEntry
-	___builtin_trap func()
-	_crc32 func(uint32, unsafe.Pointer, uint) uint32
-	_dequeue_head func(*QueueEntry) *QueueEntry
-	_dequeue_tail func(*QueueEntry) *QueueEntry
-	_enqueue_head func(*QueueEntry, *QueueEntry)
-	_enqueue_tail func(*QueueEntry, *QueueEntry)
-	_insque func(*QueueEntry, *QueueEntry)
-	_movqueue func(*QueueEntry, *QueueEntry)
-	_re_queue_head func(*QueueEntry, *QueueEntry)
-	_re_queue_tail func(*QueueEntry, *QueueEntry)
-	_read_random func(unsafe.Pointer, uint)
-	_remque func(*QueueEntry)
-	_remqueue func(*QueueEntry)
+	_fnIORecursiveConditionLockLock     func(unsafe.Pointer)
+	_fnIORecursiveConditionLockTryLock  func(unsafe.Pointer) bool
+	_fnIORecursiveConditionLockUnlock   func(unsafe.Pointer)
+	_fnIORecursiveLockAlloc             func() unsafe.Pointer
+	_fnIORecursiveLockFree              func(unsafe.Pointer)
+	_fnIORecursiveLockHaveLock          func(unsafe.Pointer) bool
+	_fnIORecursiveLockLock              func(unsafe.Pointer)
+	_fnIORecursiveLockTryLock           func(unsafe.Pointer) bool
+	_fnIORecursiveLockUnlock            func(unsafe.Pointer)
+	_fnIOSleep                          func(uint64)
+	_fnIOSysCtlByName                   func(string, unsafe.Pointer, *uint, unsafe.Pointer, uint) int
+	_fnIOThreadLocalStorageGet          func(uint64) unsafe.Pointer
+	_fnIOThreadLocalStorageKeyCreate    func(*uint64) int
+	_fnIOThreadLocalStorageKeyDelete    func(uint64) int
+	_fnIOThreadLocalStorageSet          func(uint64, unsafe.Pointer) int
+	_fnOSArrayAppendValue               func(*int32, unsafe.Pointer) bool
+	_fnOSArrayApply                     func(*int32, objc.Block) bool
+	_fnOSArrayCreate                    func() *int32
+	_fnOSArrayGetCount                  func(*int32) uint32
+	_fnOSArrayGetStringValue            func(*int32, uint) string
+	_fnOSArrayGetUInt64Value            func(*int32, uint) uint64
+	_fnOSArrayGetValue                  func(*int32, uint) unsafe.Pointer
+	_fnOSArrayReplaceValue              func(*int32, uint, unsafe.Pointer) bool
+	_fnOSArraySetStringValue            func(*int32, uint, string)
+	_fnOSArraySetUInt64Value            func(*int32, uint, uint64)
+	_fnOSArraySetValue                  func(*int32, uint, unsafe.Pointer) bool
+	_fnOSCollectionTypeID               func(unsafe.Pointer) uint64
+	_fnOSCollectionTypeName             func(uint64) string
+	_fnOSCollectionsInitialize          func()
+	_fnOSCreateObjectFromSerialization  func(*int32) unsafe.Pointer
+	_fnOSCreateSerializationFromBytes   func(unsafe.Pointer, uint, objc.Block) *int32
+	_fnOSCreateSerializationFromObject  func(unsafe.Pointer) *int32
+	_fnOSDataAppendBytes                func(*int32, unsafe.Pointer, uint) bool
+	_fnOSDataCreate                     func(unsafe.Pointer, uint) *int32
+	_fnOSDataGetBytes                   func(*int32, unsafe.Pointer, uint, uint) uint
+	_fnOSDataGetBytesPtr                func(*int32, uint, uint) unsafe.Pointer
+	_fnOSDataGetLength                  func(*int32) uint
+	_fnOSDictionaryApply                func(*int32, objc.Block) bool
+	_fnOSDictionaryCreate               func() *int32
+	_fnOSDictionaryGetCount             func(*int32) uint32
+	_fnOSDictionaryGetStringValue       func(*int32, string) string
+	_fnOSDictionaryGetUInt64Value       func(*int32, string) uint64
+	_fnOSDictionaryGetValue             func(*int32, string) unsafe.Pointer
+	_fnOSDictionarySetStringValue       func(*int32, string, string)
+	_fnOSDictionarySetUInt64Value       func(*int32, string, uint64)
+	_fnOSDictionarySetValue             func(*int32, string, unsafe.Pointer) bool
+	_fnOSNumberCreateWithUInt64Value    func(uint64) *int32
+	_fnOSNumberGetUInt64Value           func(*int32) uint64
+	_fnOSObjectAllocate                 func(*int32, objc.ID) int
+	_fnOSObjectLog                      func(unsafe.Pointer)
+	_fnOSObjectRelease                  func(unsafe.Pointer)
+	_fnOSObjectRetain                   func(unsafe.Pointer)
+	_fnOSSerializationGetBytes          func(*int32, *uint) unsafe.Pointer
+	_fnOSStringCreate                   func(string, uint) *int32
+	_fnOSStringGetLength                func(*int32) uint
+	_fnOSStringGetStringPtr             func(*int32) string
+	_fnOSSynchronizeIO                  func()
+	___DEQUEUE_ELT_CLEANUP              func(*QueueEntry)
+	___QUEUE_ELT_VALIDATE               func(*QueueEntry)
+	___QUEUE_ELT_VALIDATE_NEXT          func(*QueueEntry) *QueueEntry
+	___QUEUE_ELT_VALIDATE_PREV          func(*QueueEntry) *QueueEntry
+	___builtin_trap                     func()
+	_crc32                              func(uint32, unsafe.Pointer, uint) uint32
+	_dequeue_head                       func(*QueueEntry) *QueueEntry
+	_dequeue_tail                       func(*QueueEntry) *QueueEntry
+	_enqueue_head                       func(*QueueEntry, *QueueEntry)
+	_enqueue_tail                       func(*QueueEntry, *QueueEntry)
+	_insque                             func(*QueueEntry, *QueueEntry)
+	_movqueue                           func(*QueueEntry, *QueueEntry)
+	_re_queue_head                      func(*QueueEntry, *QueueEntry)
+	_re_queue_tail                      func(*QueueEntry, *QueueEntry)
+	_read_random                        func(unsafe.Pointer, uint)
+	_remque                             func(*QueueEntry)
+	_remqueue                           func(*QueueEntry)
 )
 
 // @function IOCallOnce @abstract Executes a block object only once @param flag A pointer to a IOCallOnceFlag structure that is used to test whether the block has completed or not. @param block The block object to execute once.
@@ -577,4 +577,3 @@ func Remque(elt *QueueEntry) {
 func Remqueue(elt *QueueEntry) {
 	_remqueue(elt)
 }
-

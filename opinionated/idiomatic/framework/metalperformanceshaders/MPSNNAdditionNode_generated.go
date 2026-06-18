@@ -115,9 +115,13 @@ func (x *NNAdditionNode) WithLabel(label string) *NNAdditionNode {
 	return x
 }
 
-func (x *NNAdditionNode) asNNBinaryArithmeticNode() *mpsneuralnetwork.MPSNNBinaryArithmeticNode { return &x.inner.MPSNNBinaryArithmeticNode }
+func (x *NNAdditionNode) asNNBinaryArithmeticNode() *mpsneuralnetwork.MPSNNBinaryArithmeticNode {
+	return &x.inner.MPSNNBinaryArithmeticNode
+}
 
-func (x *NNAdditionNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode }
+func (x *NNAdditionNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode
+}
 
 // NNAdditionNodeable is the interface implemented by [NNAdditionNode], for mocking and DI.
 type NNAdditionNodeable interface {
@@ -138,4 +142,3 @@ type NNAdditionNodeable interface {
 }
 
 var _ NNAdditionNodeable = (*NNAdditionNode)(nil)
-

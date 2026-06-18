@@ -16,12 +16,12 @@ type PDFAnnotationButtonWidget struct {
 }
 
 var (
-	_clsPDFAnnotationButtonWidget = _objcClass("PDFAnnotationButtonWidget")
-	_pDFAnnotationButtonWidgetSelControlType = objc.RegisterName("controlType")
-	_pDFAnnotationButtonWidgetSelSetControlType = objc.RegisterName("setControlType:")
-	_pDFAnnotationButtonWidgetSelState = objc.RegisterName("state")
-	_pDFAnnotationButtonWidgetSelSetState = objc.RegisterName("setState:")
-	_pDFAnnotationButtonWidgetSelOnStateValue = objc.RegisterName("onStateValue")
+	_clsPDFAnnotationButtonWidget                = _objcClass("PDFAnnotationButtonWidget")
+	_pDFAnnotationButtonWidgetSelControlType     = objc.RegisterName("controlType")
+	_pDFAnnotationButtonWidgetSelSetControlType  = objc.RegisterName("setControlType:")
+	_pDFAnnotationButtonWidgetSelState           = objc.RegisterName("state")
+	_pDFAnnotationButtonWidgetSelSetState        = objc.RegisterName("setState:")
+	_pDFAnnotationButtonWidgetSelOnStateValue    = objc.RegisterName("onStateValue")
 	_pDFAnnotationButtonWidgetSelSetOnStateValue = objc.RegisterName("setOnStateValue:")
 )
 
@@ -55,11 +55,12 @@ func (o *PDFAnnotationButtonWidget) SetState(value int) {
 
 func (o *PDFAnnotationButtonWidget) OnStateValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationButtonWidgetSelOnStateValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PDFAnnotationButtonWidget) SetOnStateValue(name *foundation.NSString) {
 	o.Ptr().Send(_pDFAnnotationButtonWidgetSelSetOnStateValue, name.Ptr())
 }
-

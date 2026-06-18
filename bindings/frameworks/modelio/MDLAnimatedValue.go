@@ -16,17 +16,17 @@ type MDLAnimatedValue struct {
 }
 
 var (
-	_clsMDLAnimatedValue = _objcClass("MDLAnimatedValue")
-	_mDLAnimatedValueSelIsAnimated = objc.RegisterName("isAnimated")
-	_mDLAnimatedValueSelClear = objc.RegisterName("clear")
+	_clsMDLAnimatedValue                 = _objcClass("MDLAnimatedValue")
+	_mDLAnimatedValueSelIsAnimated       = objc.RegisterName("isAnimated")
+	_mDLAnimatedValueSelClear            = objc.RegisterName("clear")
 	_mDLAnimatedValueSelGetTimesMaxCount = objc.RegisterName("getTimes:maxCount:")
-	_mDLAnimatedValueSelPrecision = objc.RegisterName("precision")
-	_mDLAnimatedValueSelTimeSampleCount = objc.RegisterName("timeSampleCount")
-	_mDLAnimatedValueSelMinimumTime = objc.RegisterName("minimumTime")
-	_mDLAnimatedValueSelMaximumTime = objc.RegisterName("maximumTime")
-	_mDLAnimatedValueSelInterpolation = objc.RegisterName("interpolation")
+	_mDLAnimatedValueSelPrecision        = objc.RegisterName("precision")
+	_mDLAnimatedValueSelTimeSampleCount  = objc.RegisterName("timeSampleCount")
+	_mDLAnimatedValueSelMinimumTime      = objc.RegisterName("minimumTime")
+	_mDLAnimatedValueSelMaximumTime      = objc.RegisterName("maximumTime")
+	_mDLAnimatedValueSelInterpolation    = objc.RegisterName("interpolation")
 	_mDLAnimatedValueSelSetInterpolation = objc.RegisterName("setInterpolation:")
-	_mDLAnimatedValueSelKeyTimes = objc.RegisterName("keyTimes")
+	_mDLAnimatedValueSelKeyTimes         = objc.RegisterName("keyTimes")
 )
 
 func MDLAnimatedValueFromID(id objc.ID) *MDLAnimatedValue {
@@ -86,4 +86,3 @@ func (o *MDLAnimatedValue) KeyTimes() *foundation.NSArray[*foundation.NSNumber] 
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mDLAnimatedValueSelKeyTimes)
 	return _ret
 }
-

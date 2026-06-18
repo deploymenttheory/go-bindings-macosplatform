@@ -18,27 +18,27 @@ type NSPersistentStore struct {
 }
 
 var (
-	_clsNSPersistentStore = _objcClass("NSPersistentStore")
-	_nSPersistentStoreSelMetadataForPersistentStoreWithURLError = objc.RegisterName("metadataForPersistentStoreWithURL:error:")
-	_nSPersistentStoreSelSetMetadataForPersistentStoreWithURLError = objc.RegisterName("setMetadata:forPersistentStoreWithURL:error:")
-	_nSPersistentStoreSelMigrationManagerClass = objc.RegisterName("migrationManagerClass")
+	_clsNSPersistentStore                                                              = _objcClass("NSPersistentStore")
+	_nSPersistentStoreSelMetadataForPersistentStoreWithURLError                        = objc.RegisterName("metadataForPersistentStoreWithURL:error:")
+	_nSPersistentStoreSelSetMetadataForPersistentStoreWithURLError                     = objc.RegisterName("setMetadata:forPersistentStoreWithURL:error:")
+	_nSPersistentStoreSelMigrationManagerClass                                         = objc.RegisterName("migrationManagerClass")
 	_nSPersistentStoreSelInitWithPersistentStoreCoordinatorConfigurationNameURLOptions = objc.RegisterName("initWithPersistentStoreCoordinator:configurationName:URL:options:")
-	_nSPersistentStoreSelLoadMetadata = objc.RegisterName("loadMetadata:")
-	_nSPersistentStoreSelDidAddToPersistentStoreCoordinator = objc.RegisterName("didAddToPersistentStoreCoordinator:")
-	_nSPersistentStoreSelWillRemoveFromPersistentStoreCoordinator = objc.RegisterName("willRemoveFromPersistentStoreCoordinator:")
-	_nSPersistentStoreSelPersistentStoreCoordinator = objc.RegisterName("persistentStoreCoordinator")
-	_nSPersistentStoreSelConfigurationName = objc.RegisterName("configurationName")
-	_nSPersistentStoreSelOptions = objc.RegisterName("options")
-	_nSPersistentStoreSelURL = objc.RegisterName("URL")
-	_nSPersistentStoreSelSetURL = objc.RegisterName("setURL:")
-	_nSPersistentStoreSelIdentifier = objc.RegisterName("identifier")
-	_nSPersistentStoreSelSetIdentifier = objc.RegisterName("setIdentifier:")
-	_nSPersistentStoreSelType = objc.RegisterName("type")
-	_nSPersistentStoreSelIsReadOnly = objc.RegisterName("isReadOnly")
-	_nSPersistentStoreSelSetReadOnly = objc.RegisterName("setReadOnly:")
-	_nSPersistentStoreSelMetadata = objc.RegisterName("metadata")
-	_nSPersistentStoreSelSetMetadata = objc.RegisterName("setMetadata:")
-	_nSPersistentStoreSelCoreSpotlightExporter = objc.RegisterName("coreSpotlightExporter")
+	_nSPersistentStoreSelLoadMetadata                                                  = objc.RegisterName("loadMetadata:")
+	_nSPersistentStoreSelDidAddToPersistentStoreCoordinator                            = objc.RegisterName("didAddToPersistentStoreCoordinator:")
+	_nSPersistentStoreSelWillRemoveFromPersistentStoreCoordinator                      = objc.RegisterName("willRemoveFromPersistentStoreCoordinator:")
+	_nSPersistentStoreSelPersistentStoreCoordinator                                    = objc.RegisterName("persistentStoreCoordinator")
+	_nSPersistentStoreSelConfigurationName                                             = objc.RegisterName("configurationName")
+	_nSPersistentStoreSelOptions                                                       = objc.RegisterName("options")
+	_nSPersistentStoreSelURL                                                           = objc.RegisterName("URL")
+	_nSPersistentStoreSelSetURL                                                        = objc.RegisterName("setURL:")
+	_nSPersistentStoreSelIdentifier                                                    = objc.RegisterName("identifier")
+	_nSPersistentStoreSelSetIdentifier                                                 = objc.RegisterName("setIdentifier:")
+	_nSPersistentStoreSelType                                                          = objc.RegisterName("type")
+	_nSPersistentStoreSelIsReadOnly                                                    = objc.RegisterName("isReadOnly")
+	_nSPersistentStoreSelSetReadOnly                                                   = objc.RegisterName("setReadOnly:")
+	_nSPersistentStoreSelMetadata                                                      = objc.RegisterName("metadata")
+	_nSPersistentStoreSelSetMetadata                                                   = objc.RegisterName("setMetadata:")
+	_nSPersistentStoreSelCoreSpotlightExporter                                         = objc.RegisterName("coreSpotlightExporter")
 )
 
 func NSPersistentStoreFromID(id objc.ID) *NSPersistentStore {
@@ -76,7 +76,9 @@ func NSPersistentStoreMigrationManagerClass() objc.Class {
 
 func (o *NSPersistentStore) InitWithPersistentStoreCoordinatorConfigurationNameURLOptions(root *NSPersistentStoreCoordinator, name *foundation.NSString, url *foundation.NSURL, options *foundation.NSDictionary[objc.ID, objc.ID]) *NSPersistentStore {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreSelInitWithPersistentStoreCoordinatorConfigurationNameURLOptions, root.Ptr(), name.Ptr(), url.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersistentStoreFromID(_ret)
 }
 
@@ -99,13 +101,17 @@ func (o *NSPersistentStore) WillRemoveFromPersistentStoreCoordinator(coordinator
 
 func (o *NSPersistentStore) PersistentStoreCoordinator() *NSPersistentStoreCoordinator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreSelPersistentStoreCoordinator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersistentStoreCoordinatorFromID(_ret)
 }
 
 func (o *NSPersistentStore) ConfigurationName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreSelConfigurationName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -116,7 +122,9 @@ func (o *NSPersistentStore) Options() *foundation.NSDictionary[objc.ID, objc.ID]
 
 func (o *NSPersistentStore) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -126,7 +134,9 @@ func (o *NSPersistentStore) SetURL(uRL *foundation.NSURL) {
 
 func (o *NSPersistentStore) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -136,7 +146,9 @@ func (o *NSPersistentStore) SetIdentifier(identifier *foundation.NSString) {
 
 func (o *NSPersistentStore) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -160,7 +172,8 @@ func (o *NSPersistentStore) SetMetadata(metadata *foundation.NSDictionary[*found
 
 func (o *NSPersistentStore) CoreSpotlightExporter() *NSCoreDataCoreSpotlightDelegate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreSelCoreSpotlightExporter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCoreDataCoreSpotlightDelegateFromID(_ret)
 }
-

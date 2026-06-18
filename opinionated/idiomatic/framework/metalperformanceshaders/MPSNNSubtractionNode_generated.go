@@ -115,9 +115,13 @@ func (x *NNSubtractionNode) WithLabel(label string) *NNSubtractionNode {
 	return x
 }
 
-func (x *NNSubtractionNode) asNNBinaryArithmeticNode() *mpsneuralnetwork.MPSNNBinaryArithmeticNode { return &x.inner.MPSNNBinaryArithmeticNode }
+func (x *NNSubtractionNode) asNNBinaryArithmeticNode() *mpsneuralnetwork.MPSNNBinaryArithmeticNode {
+	return &x.inner.MPSNNBinaryArithmeticNode
+}
 
-func (x *NNSubtractionNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode }
+func (x *NNSubtractionNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode
+}
 
 // NNSubtractionNodeable is the interface implemented by [NNSubtractionNode], for mocking and DI.
 type NNSubtractionNodeable interface {
@@ -138,4 +142,3 @@ type NNSubtractionNodeable interface {
 }
 
 var _ NNSubtractionNodeable = (*NNSubtractionNode)(nil)
-

@@ -35,9 +35,13 @@ func NewMetricPlayerItemStallEvent() *MetricPlayerItemStallEvent {
 	return &MetricPlayerItemStallEvent{inner: raw.AVMetricPlayerItemStallEventFromID(_id)}
 }
 
-func (x *MetricPlayerItemStallEvent) asMetricPlayerItemRateChangeEvent() *raw.AVMetricPlayerItemRateChangeEvent { return &x.inner.AVMetricPlayerItemRateChangeEvent }
+func (x *MetricPlayerItemStallEvent) asMetricPlayerItemRateChangeEvent() *raw.AVMetricPlayerItemRateChangeEvent {
+	return &x.inner.AVMetricPlayerItemRateChangeEvent
+}
 
-func (x *MetricPlayerItemStallEvent) asMetricEvent() *raw.AVMetricEvent { return &x.inner.AVMetricPlayerItemRateChangeEvent.AVMetricEvent }
+func (x *MetricPlayerItemStallEvent) asMetricEvent() *raw.AVMetricEvent {
+	return &x.inner.AVMetricPlayerItemRateChangeEvent.AVMetricEvent
+}
 
 // MetricPlayerItemStallEventable is the interface implemented by [MetricPlayerItemStallEvent], for mocking and DI.
 type MetricPlayerItemStallEventable interface {
@@ -45,4 +49,3 @@ type MetricPlayerItemStallEventable interface {
 }
 
 var _ MetricPlayerItemStallEventable = (*MetricPlayerItemStallEvent)(nil)
-

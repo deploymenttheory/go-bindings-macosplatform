@@ -16,9 +16,9 @@ type INVolumeResolutionResult struct {
 }
 
 var (
-	_clsINVolumeResolutionResult = _objcClass("INVolumeResolutionResult")
-	_iNVolumeResolutionResultSelSuccessWithResolvedVolume = objc.RegisterName("successWithResolvedVolume:")
-	_iNVolumeResolutionResultSelDisambiguationWithVolumeToDisambiguate = objc.RegisterName("disambiguationWithVolumeToDisambiguate:")
+	_clsINVolumeResolutionResult                                        = _objcClass("INVolumeResolutionResult")
+	_iNVolumeResolutionResultSelSuccessWithResolvedVolume               = objc.RegisterName("successWithResolvedVolume:")
+	_iNVolumeResolutionResultSelDisambiguationWithVolumeToDisambiguate  = objc.RegisterName("disambiguationWithVolumeToDisambiguate:")
 	_iNVolumeResolutionResultSelConfirmationRequiredWithVolumeToConfirm = objc.RegisterName("confirmationRequiredWithVolumeToConfirm:")
 )
 
@@ -34,19 +34,24 @@ func INVolumeResolutionResultFromID(id objc.ID) *INVolumeResolutionResult {
 
 func INVolumeResolutionResultSuccessWithResolvedVolume(resolvedVolume *foundation.NSMeasurement[*foundation.NSUnitVolume]) *INVolumeResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINVolumeResolutionResult), _iNVolumeResolutionResultSelSuccessWithResolvedVolume, resolvedVolume)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INVolumeResolutionResultFromID(_ret)
 }
 
 func INVolumeResolutionResultDisambiguationWithVolumeToDisambiguate(volumeToDisambiguate *foundation.NSArray[objc.ID]) *INVolumeResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINVolumeResolutionResult), _iNVolumeResolutionResultSelDisambiguationWithVolumeToDisambiguate, volumeToDisambiguate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INVolumeResolutionResultFromID(_ret)
 }
 
 func INVolumeResolutionResultConfirmationRequiredWithVolumeToConfirm(volumeToConfirm *foundation.NSMeasurement[*foundation.NSUnitVolume]) *INVolumeResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINVolumeResolutionResult), _iNVolumeResolutionResultSelConfirmationRequiredWithVolumeToConfirm, volumeToConfirm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INVolumeResolutionResultFromID(_ret)
 }
-

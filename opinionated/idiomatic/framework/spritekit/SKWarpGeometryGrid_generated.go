@@ -103,4 +103,3 @@ type WarpGeometryGridable interface {
 }
 
 var _ WarpGeometryGridable = (*WarpGeometryGrid)(nil)
-

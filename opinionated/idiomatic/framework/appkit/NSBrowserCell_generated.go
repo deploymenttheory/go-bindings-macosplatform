@@ -457,4 +457,3 @@ type BrowserCellable interface {
 }
 
 var _ BrowserCellable = (*BrowserCell)(nil)
-

@@ -94,4 +94,3 @@ type MatchPostalAddressable interface {
 }
 
 var _ MatchPostalAddressable = (*MatchPostalAddress)(nil)
-

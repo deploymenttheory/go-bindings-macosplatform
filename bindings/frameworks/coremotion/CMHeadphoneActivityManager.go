@@ -18,16 +18,16 @@ type CMHeadphoneActivityManager struct {
 }
 
 var (
-	_clsCMHeadphoneActivityManager = _objcClass("CMHeadphoneActivityManager")
-	_cMHeadphoneActivityManagerSelAuthorizationStatus = objc.RegisterName("authorizationStatus")
+	_clsCMHeadphoneActivityManager                                       = _objcClass("CMHeadphoneActivityManager")
+	_cMHeadphoneActivityManagerSelAuthorizationStatus                    = objc.RegisterName("authorizationStatus")
 	_cMHeadphoneActivityManagerSelStartActivityUpdatesToQueueWithHandler = objc.RegisterName("startActivityUpdatesToQueue:withHandler:")
-	_cMHeadphoneActivityManagerSelStopActivityUpdates = objc.RegisterName("stopActivityUpdates")
-	_cMHeadphoneActivityManagerSelStartStatusUpdatesToQueueWithHandler = objc.RegisterName("startStatusUpdatesToQueue:withHandler:")
-	_cMHeadphoneActivityManagerSelStopStatusUpdates = objc.RegisterName("stopStatusUpdates")
-	_cMHeadphoneActivityManagerSelIsActivityAvailable = objc.RegisterName("isActivityAvailable")
-	_cMHeadphoneActivityManagerSelIsActivityActive = objc.RegisterName("isActivityActive")
-	_cMHeadphoneActivityManagerSelIsStatusAvailable = objc.RegisterName("isStatusAvailable")
-	_cMHeadphoneActivityManagerSelIsStatusActive = objc.RegisterName("isStatusActive")
+	_cMHeadphoneActivityManagerSelStopActivityUpdates                    = objc.RegisterName("stopActivityUpdates")
+	_cMHeadphoneActivityManagerSelStartStatusUpdatesToQueueWithHandler   = objc.RegisterName("startStatusUpdatesToQueue:withHandler:")
+	_cMHeadphoneActivityManagerSelStopStatusUpdates                      = objc.RegisterName("stopStatusUpdates")
+	_cMHeadphoneActivityManagerSelIsActivityAvailable                    = objc.RegisterName("isActivityAvailable")
+	_cMHeadphoneActivityManagerSelIsActivityActive                       = objc.RegisterName("isActivityActive")
+	_cMHeadphoneActivityManagerSelIsStatusAvailable                      = objc.RegisterName("isStatusAvailable")
+	_cMHeadphoneActivityManagerSelIsStatusActive                         = objc.RegisterName("isStatusActive")
 )
 
 func CMHeadphoneActivityManagerFromID(id objc.ID) *CMHeadphoneActivityManager {
@@ -97,4 +97,3 @@ func (o *CMHeadphoneActivityManager) IsStatusActive() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cMHeadphoneActivityManagerSelIsStatusActive)
 	return _ret
 }
-

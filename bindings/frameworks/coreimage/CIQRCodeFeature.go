@@ -17,12 +17,12 @@ type CIQRCodeFeature struct {
 }
 
 var (
-	_clsCIQRCodeFeature = _objcClass("CIQRCodeFeature")
-	_cIQRCodeFeatureSelTopLeft = objc.RegisterName("topLeft")
-	_cIQRCodeFeatureSelTopRight = objc.RegisterName("topRight")
-	_cIQRCodeFeatureSelBottomLeft = objc.RegisterName("bottomLeft")
-	_cIQRCodeFeatureSelBottomRight = objc.RegisterName("bottomRight")
-	_cIQRCodeFeatureSelMessageString = objc.RegisterName("messageString")
+	_clsCIQRCodeFeature                 = _objcClass("CIQRCodeFeature")
+	_cIQRCodeFeatureSelTopLeft          = objc.RegisterName("topLeft")
+	_cIQRCodeFeatureSelTopRight         = objc.RegisterName("topRight")
+	_cIQRCodeFeatureSelBottomLeft       = objc.RegisterName("bottomLeft")
+	_cIQRCodeFeatureSelBottomRight      = objc.RegisterName("bottomRight")
+	_cIQRCodeFeatureSelMessageString    = objc.RegisterName("messageString")
 	_cIQRCodeFeatureSelSymbolDescriptor = objc.RegisterName("symbolDescriptor")
 )
 
@@ -63,14 +63,17 @@ func (o *CIQRCodeFeature) BottomRight() corefoundation.CGPoint {
 // The string decoded from the detected barcode.
 func (o *CIQRCodeFeature) MessageString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIQRCodeFeatureSelMessageString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
-// An abstract representation of a QR Code symbol. The property is a ``CIQRCodeDescriptor`` instance that contains the payload, symbol version, mask pattern, and error correction level, so the QR Code can be reproduced.
+// An abstract representation of a QR Code symbol. The property is a “CIQRCodeDescriptor“ instance that contains the payload, symbol version, mask pattern, and error correction level, so the QR Code can be reproduced.
 func (o *CIQRCodeFeature) SymbolDescriptor() *CIQRCodeDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIQRCodeFeatureSelSymbolDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIQRCodeDescriptorFromID(_ret)
 }
-

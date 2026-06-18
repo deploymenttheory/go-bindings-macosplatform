@@ -16,10 +16,10 @@ type INVoiceShortcut struct {
 }
 
 var (
-	_clsINVoiceShortcut = _objcClass("INVoiceShortcut")
-	_iNVoiceShortcutSelIdentifier = objc.RegisterName("identifier")
+	_clsINVoiceShortcut                 = _objcClass("INVoiceShortcut")
+	_iNVoiceShortcutSelIdentifier       = objc.RegisterName("identifier")
 	_iNVoiceShortcutSelInvocationPhrase = objc.RegisterName("invocationPhrase")
-	_iNVoiceShortcutSelShortcut = objc.RegisterName("shortcut")
+	_iNVoiceShortcutSelShortcut         = objc.RegisterName("shortcut")
 )
 
 func INVoiceShortcutFromID(id objc.ID) *INVoiceShortcut {
@@ -35,21 +35,26 @@ func INVoiceShortcutFromID(id objc.ID) *INVoiceShortcut {
 // @abstract The unique identifier for this voice shortcut
 func (o *INVoiceShortcut) Identifier() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNVoiceShortcutSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
 
 // @abstract The phrase the user speaks to invoke this shortcut; set by the user when they add it to Siri.
 func (o *INVoiceShortcut) InvocationPhrase() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNVoiceShortcutSelInvocationPhrase)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract The shortcut that will be performed when this voice shortcut is invoked via Siri.
 func (o *INVoiceShortcut) Shortcut() *INShortcut {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNVoiceShortcutSelShortcut)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INShortcutFromID(_ret)
 }
-

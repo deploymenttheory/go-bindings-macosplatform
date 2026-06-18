@@ -17,15 +17,15 @@ type INUIAddVoiceShortcutButton struct {
 }
 
 var (
-	_clsINUIAddVoiceShortcutButton = _objcClass("INUIAddVoiceShortcutButton")
-	_iNUIAddVoiceShortcutButtonSelInitWithStyle = objc.RegisterName("initWithStyle:")
-	_iNUIAddVoiceShortcutButtonSelStyle = objc.RegisterName("style")
-	_iNUIAddVoiceShortcutButtonSelSetStyle = objc.RegisterName("setStyle:")
-	_iNUIAddVoiceShortcutButtonSelDelegate = objc.RegisterName("delegate")
-	_iNUIAddVoiceShortcutButtonSelSetDelegate = objc.RegisterName("setDelegate:")
-	_iNUIAddVoiceShortcutButtonSelShortcut = objc.RegisterName("shortcut")
-	_iNUIAddVoiceShortcutButtonSelSetShortcut = objc.RegisterName("setShortcut:")
-	_iNUIAddVoiceShortcutButtonSelCornerRadius = objc.RegisterName("cornerRadius")
+	_clsINUIAddVoiceShortcutButton                = _objcClass("INUIAddVoiceShortcutButton")
+	_iNUIAddVoiceShortcutButtonSelInitWithStyle   = objc.RegisterName("initWithStyle:")
+	_iNUIAddVoiceShortcutButtonSelStyle           = objc.RegisterName("style")
+	_iNUIAddVoiceShortcutButtonSelSetStyle        = objc.RegisterName("setStyle:")
+	_iNUIAddVoiceShortcutButtonSelDelegate        = objc.RegisterName("delegate")
+	_iNUIAddVoiceShortcutButtonSelSetDelegate     = objc.RegisterName("setDelegate:")
+	_iNUIAddVoiceShortcutButtonSelShortcut        = objc.RegisterName("shortcut")
+	_iNUIAddVoiceShortcutButtonSelSetShortcut     = objc.RegisterName("setShortcut:")
+	_iNUIAddVoiceShortcutButtonSelCornerRadius    = objc.RegisterName("cornerRadius")
 	_iNUIAddVoiceShortcutButtonSelSetCornerRadius = objc.RegisterName("setCornerRadius:")
 )
 
@@ -41,7 +41,9 @@ func INUIAddVoiceShortcutButtonFromID(id objc.ID) *INUIAddVoiceShortcutButton {
 
 func (o *INUIAddVoiceShortcutButton) InitWithStyle(style INUIAddVoiceShortcutButtonStyle) *INUIAddVoiceShortcutButton {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNUIAddVoiceShortcutButtonSelInitWithStyle, style)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INUIAddVoiceShortcutButtonFromID(_ret)
 }
 
@@ -65,7 +67,9 @@ func (o *INUIAddVoiceShortcutButton) SetDelegate(delegate INUIAddVoiceShortcutBu
 
 func (o *INUIAddVoiceShortcutButton) Shortcut() *intents.INShortcut {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNUIAddVoiceShortcutButtonSelShortcut)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return intents.INShortcutFromID(_ret)
 }
 
@@ -82,4 +86,3 @@ func (o *INUIAddVoiceShortcutButton) CornerRadius() float64 {
 func (o *INUIAddVoiceShortcutButton) SetCornerRadius(cornerRadius float64) {
 	o.Ptr().Send(_iNUIAddVoiceShortcutButtonSelSetCornerRadius, cornerRadius)
 }
-

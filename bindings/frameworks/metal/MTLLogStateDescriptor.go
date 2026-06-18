@@ -16,10 +16,10 @@ type MTLLogStateDescriptor struct {
 }
 
 var (
-	_clsMTLLogStateDescriptor = _objcClass("MTLLogStateDescriptor")
-	_mTLLogStateDescriptorSelLevel = objc.RegisterName("level")
-	_mTLLogStateDescriptorSelSetLevel = objc.RegisterName("setLevel:")
-	_mTLLogStateDescriptorSelBufferSize = objc.RegisterName("bufferSize")
+	_clsMTLLogStateDescriptor              = _objcClass("MTLLogStateDescriptor")
+	_mTLLogStateDescriptorSelLevel         = objc.RegisterName("level")
+	_mTLLogStateDescriptorSelSetLevel      = objc.RegisterName("setLevel:")
+	_mTLLogStateDescriptorSelBufferSize    = objc.RegisterName("bufferSize")
 	_mTLLogStateDescriptorSelSetBufferSize = objc.RegisterName("setBufferSize:")
 )
 
@@ -52,4 +52,3 @@ func (o *MTLLogStateDescriptor) BufferSize() int {
 func (o *MTLLogStateDescriptor) SetBufferSize(bufferSize int) {
 	o.Ptr().Send(_mTLLogStateDescriptorSelSetBufferSize, bufferSize)
 }
-

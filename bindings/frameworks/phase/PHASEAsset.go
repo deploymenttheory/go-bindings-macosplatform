@@ -16,7 +16,7 @@ type PHASEAsset struct {
 }
 
 var (
-	_clsPHASEAsset = _objcClass("PHASEAsset")
+	_clsPHASEAsset           = _objcClass("PHASEAsset")
 	_pHASEAssetSelIdentifier = objc.RegisterName("identifier")
 )
 
@@ -32,7 +32,8 @@ func PHASEAssetFromID(id objc.ID) *PHASEAsset {
 
 func (o *PHASEAsset) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEAssetSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

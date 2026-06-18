@@ -111,4 +111,3 @@ type MediaSourceable interface {
 }
 
 var _ MediaSourceable = (*MediaSource)(nil)
-

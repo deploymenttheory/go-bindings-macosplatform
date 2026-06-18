@@ -18,20 +18,20 @@ type MPSCNNConvolutionGradient struct {
 }
 
 var (
-	_clsMPSCNNConvolutionGradient = _objcClass("MPSCNNConvolutionGradient")
-	_mPSCNNConvolutionGradientSelInitWithDeviceWeights = objc.RegisterName("initWithDevice:weights:")
-	_mPSCNNConvolutionGradientSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSCNNConvolutionGradientSelReloadWeightsAndBiasesFromDataSource = objc.RegisterName("reloadWeightsAndBiasesFromDataSource")
+	_clsMPSCNNConvolutionGradient                                             = _objcClass("MPSCNNConvolutionGradient")
+	_mPSCNNConvolutionGradientSelInitWithDeviceWeights                        = objc.RegisterName("initWithDevice:weights:")
+	_mPSCNNConvolutionGradientSelInitWithCoderDevice                          = objc.RegisterName("initWithCoder:device:")
+	_mPSCNNConvolutionGradientSelReloadWeightsAndBiasesFromDataSource         = objc.RegisterName("reloadWeightsAndBiasesFromDataSource")
 	_mPSCNNConvolutionGradientSelReloadWeightsAndBiasesWithCommandBufferState = objc.RegisterName("reloadWeightsAndBiasesWithCommandBuffer:state:")
-	_mPSCNNConvolutionGradientSelSourceGradientFeatureChannels = objc.RegisterName("sourceGradientFeatureChannels")
-	_mPSCNNConvolutionGradientSelSourceImageFeatureChannels = objc.RegisterName("sourceImageFeatureChannels")
-	_mPSCNNConvolutionGradientSelGroups = objc.RegisterName("groups")
-	_mPSCNNConvolutionGradientSelChannelMultiplier = objc.RegisterName("channelMultiplier")
-	_mPSCNNConvolutionGradientSelDataSource = objc.RegisterName("dataSource")
-	_mPSCNNConvolutionGradientSelGradientOption = objc.RegisterName("gradientOption")
-	_mPSCNNConvolutionGradientSelSetGradientOption = objc.RegisterName("setGradientOption:")
-	_mPSCNNConvolutionGradientSelSerializeWeightsAndBiases = objc.RegisterName("serializeWeightsAndBiases")
-	_mPSCNNConvolutionGradientSelSetSerializeWeightsAndBiases = objc.RegisterName("setSerializeWeightsAndBiases:")
+	_mPSCNNConvolutionGradientSelSourceGradientFeatureChannels                = objc.RegisterName("sourceGradientFeatureChannels")
+	_mPSCNNConvolutionGradientSelSourceImageFeatureChannels                   = objc.RegisterName("sourceImageFeatureChannels")
+	_mPSCNNConvolutionGradientSelGroups                                       = objc.RegisterName("groups")
+	_mPSCNNConvolutionGradientSelChannelMultiplier                            = objc.RegisterName("channelMultiplier")
+	_mPSCNNConvolutionGradientSelDataSource                                   = objc.RegisterName("dataSource")
+	_mPSCNNConvolutionGradientSelGradientOption                               = objc.RegisterName("gradientOption")
+	_mPSCNNConvolutionGradientSelSetGradientOption                            = objc.RegisterName("setGradientOption:")
+	_mPSCNNConvolutionGradientSelSerializeWeightsAndBiases                    = objc.RegisterName("serializeWeightsAndBiases")
+	_mPSCNNConvolutionGradientSelSetSerializeWeightsAndBiases                 = objc.RegisterName("setSerializeWeightsAndBiases:")
 )
 
 func MPSCNNConvolutionGradientFromID(id objc.ID) *MPSCNNConvolutionGradient {
@@ -47,14 +47,18 @@ func MPSCNNConvolutionGradientFromID(id objc.ID) *MPSCNNConvolutionGradient {
 // @abstract   Initializes a convolution gradient (with respect to weights and bias) object. @param      device                          The MTLDevice on which this MPSCNNConvolutionGradient filter will be used @param      weights                         A pointer to a object that conforms to the MPSCNNConvolutionDataSource protocol. Note that same data source as provided to forward convolution should be used. @return     A valid MPSCNNConvolutionGradient object or nil, if failure.
 func (o *MPSCNNConvolutionGradient) InitWithDeviceWeights(device metal.MTLDevice, weights mpsneuralnetwork.MPSCNNConvolutionDataSource) *MPSCNNConvolutionGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionGradientSelInitWithDeviceWeights, device, weights)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNConvolutionGradientFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSCNNConvolutionGradient) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSCNNConvolutionGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionGradientSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNConvolutionGradientFromID(_ret)
 }
 
@@ -118,4 +122,3 @@ func (o *MPSCNNConvolutionGradient) SerializeWeightsAndBiases() bool {
 func (o *MPSCNNConvolutionGradient) SetSerializeWeightsAndBiases(serializeWeightsAndBiases bool) {
 	o.Ptr().Send(_mPSCNNConvolutionGradientSelSetSerializeWeightsAndBiases, serializeWeightsAndBiases)
 }
-

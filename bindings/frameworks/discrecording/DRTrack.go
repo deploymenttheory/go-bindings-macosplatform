@@ -18,19 +18,19 @@ type DRTrack struct {
 }
 
 var (
-	_clsDRTrack = _objcClass("DRTrack")
-	_dRTrackSelInitWithProducer = objc.RegisterName("initWithProducer:")
-	_dRTrackSelProperties = objc.RegisterName("properties")
-	_dRTrackSelSetProperties = objc.RegisterName("setProperties:")
+	_clsDRTrack                               = _objcClass("DRTrack")
+	_dRTrackSelInitWithProducer               = objc.RegisterName("initWithProducer:")
+	_dRTrackSelProperties                     = objc.RegisterName("properties")
+	_dRTrackSelSetProperties                  = objc.RegisterName("setProperties:")
 	_dRTrackSelTestProductionSpeedForInterval = objc.RegisterName("testProductionSpeedForInterval:")
-	_dRTrackSelTestProductionSpeedForLength = objc.RegisterName("testProductionSpeedForLength:")
-	_dRTrackSelEstimateLength = objc.RegisterName("estimateLength")
-	_dRTrackSelLength = objc.RegisterName("length")
-	_dRTrackSelPreGap = objc.RegisterName("preGap")
-	_dRTrackSelSetPreGap = objc.RegisterName("setPreGap:")
-	_dRTrackSelTrackForAudioOfLengthProducer = objc.RegisterName("trackForAudioOfLength:producer:")
-	_dRTrackSelTrackForAudioFile = objc.RegisterName("trackForAudioFile:")
-	_dRTrackSelTrackForRootFolder = objc.RegisterName("trackForRootFolder:")
+	_dRTrackSelTestProductionSpeedForLength   = objc.RegisterName("testProductionSpeedForLength:")
+	_dRTrackSelEstimateLength                 = objc.RegisterName("estimateLength")
+	_dRTrackSelLength                         = objc.RegisterName("length")
+	_dRTrackSelPreGap                         = objc.RegisterName("preGap")
+	_dRTrackSelSetPreGap                      = objc.RegisterName("setPreGap:")
+	_dRTrackSelTrackForAudioOfLengthProducer  = objc.RegisterName("trackForAudioOfLength:producer:")
+	_dRTrackSelTrackForAudioFile              = objc.RegisterName("trackForAudioFile:")
+	_dRTrackSelTrackForRootFolder             = objc.RegisterName("trackForRootFolder:")
 )
 
 func DRTrackFromID(id objc.ID) *DRTrack {
@@ -81,14 +81,18 @@ func (o *DRTrack) EstimateLength() uint64 {
 // @method 		length @abstract		Returns the length of the track data. @discussion		The length returned does not include the length of the pregap. Only the length of the track data itself is returned. @result			A DRMSF representing the length of the track.
 func (o *DRTrack) Length() *DRMSF {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dRTrackSelLength)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DRMSFFromID(_ret)
 }
 
 // @method 		preGap @abstract		Returns the length of the pre gap. @discussion		This is a simple wrapper to obtain the @link DRPreGapLengthKey DRPreGapLengthKey @/link. If the @link DRPreGapLengthKey DRPreGapLengthKey @/link property has not been set for the track this method will return a zero-length @link //apple_ref/occ/cl/DRMSF DRMSF @/link object (0m:0s:0f). @result			A DRMSF representing the length of the pre gap.
 func (o *DRTrack) PreGap() *DRMSF {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dRTrackSelPreGap)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DRMSFFromID(_ret)
 }
 
@@ -99,21 +103,26 @@ func (o *DRTrack) SetPreGap(preGap *DRMSF) {
 
 func DRTrackTrackForAudioOfLengthProducer(length *DRMSF, producer objc.ID) *DRTrack {
 	_ret := objc.Send[objc.ID](objc.ID(_clsDRTrack), _dRTrackSelTrackForAudioOfLengthProducer, length.Ptr(), producer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DRTrackFromID(_ret)
 }
 
 // @method			trackForAudioFile: @abstract		Creates a DRTrack capable of burning RedBook CD audio from a QuickTime readable file. @discussion		This method creates a track object configured and primed to output RedBook audio CD data. It accepts any file readable by QuickTime and extracts the audio data (if any) from the file, translating that into the correct format for output to the disc. @param			path	The path to the file. This file must be one that can be read by QuickTime. @result			An autoreleased DRTrack
 func DRTrackTrackForAudioFile(path *foundation.NSString) *DRTrack {
 	_ret := objc.Send[objc.ID](objc.ID(_clsDRTrack), _dRTrackSelTrackForAudioFile, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DRTrackFromID(_ret)
 }
 
 // @method			trackForRootFolder: @abstract		Creates a DRTrack capable of burning a folder to disc. @discussion		Additional track properties can be set controlling the various filesystems to be generated. See the documentation for @link //apple_ref/occ/cl/DRTrack DRTrack @/link for more info. @param			rootFolder		The root of the volume to be created. @result			An autoreleased DRTrack
 func DRTrackTrackForRootFolder(rootFolder *DRFolder) *DRTrack {
 	_ret := objc.Send[objc.ID](objc.ID(_clsDRTrack), _dRTrackSelTrackForRootFolder, rootFolder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DRTrackFromID(_ret)
 }
-

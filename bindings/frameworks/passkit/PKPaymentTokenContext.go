@@ -16,18 +16,18 @@ type PKPaymentTokenContext struct {
 }
 
 var (
-	_clsPKPaymentTokenContext = _objcClass("PKPaymentTokenContext")
+	_clsPKPaymentTokenContext                                                                             = _objcClass("PKPaymentTokenContext")
 	_pKPaymentTokenContextSelInitWithMerchantIdentifierExternalIdentifierMerchantNameMerchantDomainAmount = objc.RegisterName("initWithMerchantIdentifier:externalIdentifier:merchantName:merchantDomain:amount:")
-	_pKPaymentTokenContextSelMerchantIdentifier = objc.RegisterName("merchantIdentifier")
-	_pKPaymentTokenContextSelSetMerchantIdentifier = objc.RegisterName("setMerchantIdentifier:")
-	_pKPaymentTokenContextSelExternalIdentifier = objc.RegisterName("externalIdentifier")
-	_pKPaymentTokenContextSelSetExternalIdentifier = objc.RegisterName("setExternalIdentifier:")
-	_pKPaymentTokenContextSelMerchantName = objc.RegisterName("merchantName")
-	_pKPaymentTokenContextSelSetMerchantName = objc.RegisterName("setMerchantName:")
-	_pKPaymentTokenContextSelMerchantDomain = objc.RegisterName("merchantDomain")
-	_pKPaymentTokenContextSelSetMerchantDomain = objc.RegisterName("setMerchantDomain:")
-	_pKPaymentTokenContextSelAmount = objc.RegisterName("amount")
-	_pKPaymentTokenContextSelSetAmount = objc.RegisterName("setAmount:")
+	_pKPaymentTokenContextSelMerchantIdentifier                                                           = objc.RegisterName("merchantIdentifier")
+	_pKPaymentTokenContextSelSetMerchantIdentifier                                                        = objc.RegisterName("setMerchantIdentifier:")
+	_pKPaymentTokenContextSelExternalIdentifier                                                           = objc.RegisterName("externalIdentifier")
+	_pKPaymentTokenContextSelSetExternalIdentifier                                                        = objc.RegisterName("setExternalIdentifier:")
+	_pKPaymentTokenContextSelMerchantName                                                                 = objc.RegisterName("merchantName")
+	_pKPaymentTokenContextSelSetMerchantName                                                              = objc.RegisterName("setMerchantName:")
+	_pKPaymentTokenContextSelMerchantDomain                                                               = objc.RegisterName("merchantDomain")
+	_pKPaymentTokenContextSelSetMerchantDomain                                                            = objc.RegisterName("setMerchantDomain:")
+	_pKPaymentTokenContextSelAmount                                                                       = objc.RegisterName("amount")
+	_pKPaymentTokenContextSelSetAmount                                                                    = objc.RegisterName("setAmount:")
 )
 
 func PKPaymentTokenContextFromID(id objc.ID) *PKPaymentTokenContext {
@@ -42,13 +42,17 @@ func PKPaymentTokenContextFromID(id objc.ID) *PKPaymentTokenContext {
 
 func (o *PKPaymentTokenContext) InitWithMerchantIdentifierExternalIdentifierMerchantNameMerchantDomainAmount(merchantIdentifier *foundation.NSString, externalIdentifier *foundation.NSString, merchantName *foundation.NSString, merchantDomain *foundation.NSString, amount *foundation.NSDecimalNumber) *PKPaymentTokenContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentTokenContextSelInitWithMerchantIdentifierExternalIdentifierMerchantNameMerchantDomainAmount, merchantIdentifier.Ptr(), externalIdentifier.Ptr(), merchantName.Ptr(), merchantDomain.Ptr(), amount.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKPaymentTokenContextFromID(_ret)
 }
 
 func (o *PKPaymentTokenContext) MerchantIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentTokenContextSelMerchantIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -58,7 +62,9 @@ func (o *PKPaymentTokenContext) SetMerchantIdentifier(merchantIdentifier *founda
 
 func (o *PKPaymentTokenContext) ExternalIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentTokenContextSelExternalIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -68,7 +74,9 @@ func (o *PKPaymentTokenContext) SetExternalIdentifier(externalIdentifier *founda
 
 func (o *PKPaymentTokenContext) MerchantName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentTokenContextSelMerchantName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -78,7 +86,9 @@ func (o *PKPaymentTokenContext) SetMerchantName(merchantName *foundation.NSStrin
 
 func (o *PKPaymentTokenContext) MerchantDomain() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentTokenContextSelMerchantDomain)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -88,11 +98,12 @@ func (o *PKPaymentTokenContext) SetMerchantDomain(merchantDomain *foundation.NSS
 
 func (o *PKPaymentTokenContext) Amount() *foundation.NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentTokenContextSelAmount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDecimalNumberFromID(_ret)
 }
 
 func (o *PKPaymentTokenContext) SetAmount(amount *foundation.NSDecimalNumber) {
 	o.Ptr().Send(_pKPaymentTokenContextSelSetAmount, amount.Ptr())
 }
-

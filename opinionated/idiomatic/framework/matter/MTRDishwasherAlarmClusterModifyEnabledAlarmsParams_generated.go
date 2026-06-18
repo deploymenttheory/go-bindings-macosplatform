@@ -16,7 +16,9 @@ type MTRDishwasherAlarmClusterModifyEnabledAlarmsParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRDishwasherAlarmClusterModifyEnabledAlarmsParams].
-func (x *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) Unwrap() *raw.MTRDishwasherAlarmClusterModifyEnabledAlarmsParams { return x.inner }
+func (x *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) Unwrap() *raw.MTRDishwasherAlarmClusterModifyEnabledAlarmsParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -99,4 +101,3 @@ type MTRDishwasherAlarmClusterModifyEnabledAlarmsParamsable interface {
 }
 
 var _ MTRDishwasherAlarmClusterModifyEnabledAlarmsParamsable = (*MTRDishwasherAlarmClusterModifyEnabledAlarmsParams)(nil)
-

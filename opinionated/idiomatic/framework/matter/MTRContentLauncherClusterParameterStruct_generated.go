@@ -17,7 +17,9 @@ type MTRContentLauncherClusterParameterStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRContentLauncherClusterParameterStruct].
-func (x *MTRContentLauncherClusterParameterStruct) Unwrap() *raw.MTRContentLauncherClusterParameterStruct { return x.inner }
+func (x *MTRContentLauncherClusterParameterStruct) Unwrap() *raw.MTRContentLauncherClusterParameterStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -83,7 +85,9 @@ func (x *MTRContentLauncherClusterParameterStruct) SetExternalIDList(externalIDL
 	x.inner.SetExternalIDList(externalIDList)
 }
 
-func (x *MTRContentLauncherClusterParameterStruct) asMTRContentLauncherClusterParameterStruct() *raw.MTRContentLauncherClusterParameterStruct { return x.inner }
+func (x *MTRContentLauncherClusterParameterStruct) asMTRContentLauncherClusterParameterStruct() *raw.MTRContentLauncherClusterParameterStruct {
+	return x.inner
+}
 
 // MTRContentLauncherClusterParameterStructable is the interface implemented by [MTRContentLauncherClusterParameterStruct], for mocking and DI.
 type MTRContentLauncherClusterParameterStructable interface {
@@ -99,4 +103,3 @@ type MTRContentLauncherClusterParameterStructable interface {
 }
 
 var _ MTRContentLauncherClusterParameterStructable = (*MTRContentLauncherClusterParameterStruct)(nil)
-

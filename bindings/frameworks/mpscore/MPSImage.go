@@ -19,39 +19,39 @@ type MPSImage struct {
 }
 
 var (
-	_clsMPSImage = _objcClass("MPSImage")
-	_mPSImageSelDefaultAllocator = objc.RegisterName("defaultAllocator")
-	_mPSImageSelInitWithDeviceImageDescriptor = objc.RegisterName("initWithDevice:imageDescriptor:")
-	_mPSImageSelInitWithParentImageSliceRangeFeatureChannels = objc.RegisterName("initWithParentImage:sliceRange:featureChannels:")
-	_mPSImageSelInitWithTextureFeatureChannels = objc.RegisterName("initWithTexture:featureChannels:")
-	_mPSImageSelBatchRepresentationWithSubRange = objc.RegisterName("batchRepresentationWithSubRange:")
-	_mPSImageSelBatchRepresentation = objc.RegisterName("batchRepresentation")
-	_mPSImageSelSubImageWithFeatureChannelRange = objc.RegisterName("subImageWithFeatureChannelRange:")
-	_mPSImageSelResourceSize = objc.RegisterName("resourceSize")
-	_mPSImageSelSetPurgeableState = objc.RegisterName("setPurgeableState:")
-	_mPSImageSelReadBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex = objc.RegisterName("readBytes:dataLayout:bytesPerRow:region:featureChannelInfo:imageIndex:")
-	_mPSImageSelWriteBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex = objc.RegisterName("writeBytes:dataLayout:bytesPerRow:region:featureChannelInfo:imageIndex:")
+	_clsMPSImage                                                                                             = _objcClass("MPSImage")
+	_mPSImageSelDefaultAllocator                                                                             = objc.RegisterName("defaultAllocator")
+	_mPSImageSelInitWithDeviceImageDescriptor                                                                = objc.RegisterName("initWithDevice:imageDescriptor:")
+	_mPSImageSelInitWithParentImageSliceRangeFeatureChannels                                                 = objc.RegisterName("initWithParentImage:sliceRange:featureChannels:")
+	_mPSImageSelInitWithTextureFeatureChannels                                                               = objc.RegisterName("initWithTexture:featureChannels:")
+	_mPSImageSelBatchRepresentationWithSubRange                                                              = objc.RegisterName("batchRepresentationWithSubRange:")
+	_mPSImageSelBatchRepresentation                                                                          = objc.RegisterName("batchRepresentation")
+	_mPSImageSelSubImageWithFeatureChannelRange                                                              = objc.RegisterName("subImageWithFeatureChannelRange:")
+	_mPSImageSelResourceSize                                                                                 = objc.RegisterName("resourceSize")
+	_mPSImageSelSetPurgeableState                                                                            = objc.RegisterName("setPurgeableState:")
+	_mPSImageSelReadBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex                             = objc.RegisterName("readBytes:dataLayout:bytesPerRow:region:featureChannelInfo:imageIndex:")
+	_mPSImageSelWriteBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex                            = objc.RegisterName("writeBytes:dataLayout:bytesPerRow:region:featureChannelInfo:imageIndex:")
 	_mPSImageSelWriteBytesDataLayoutBytesPerColumnBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex = objc.RegisterName("writeBytes:dataLayout:bytesPerColumn:bytesPerRow:bytesPerImage:region:featureChannelInfo:imageIndex:")
-	_mPSImageSelReadBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex = objc.RegisterName("readBytes:dataLayout:bytesPerRow:bytesPerImage:region:featureChannelInfo:imageIndex:")
-	_mPSImageSelWriteBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex = objc.RegisterName("writeBytes:dataLayout:bytesPerRow:bytesPerImage:region:featureChannelInfo:imageIndex:")
-	_mPSImageSelReadBytesDataLayoutImageIndex = objc.RegisterName("readBytes:dataLayout:imageIndex:")
-	_mPSImageSelWriteBytesDataLayoutImageIndex = objc.RegisterName("writeBytes:dataLayout:imageIndex:")
-	_mPSImageSelSynchronizeOnCommandBuffer = objc.RegisterName("synchronizeOnCommandBuffer:")
-	_mPSImageSelDevice = objc.RegisterName("device")
-	_mPSImageSelWidth = objc.RegisterName("width")
-	_mPSImageSelHeight = objc.RegisterName("height")
-	_mPSImageSelFeatureChannels = objc.RegisterName("featureChannels")
-	_mPSImageSelNumberOfImages = objc.RegisterName("numberOfImages")
-	_mPSImageSelTextureType = objc.RegisterName("textureType")
-	_mPSImageSelPixelFormat = objc.RegisterName("pixelFormat")
-	_mPSImageSelPrecision = objc.RegisterName("precision")
-	_mPSImageSelUsage = objc.RegisterName("usage")
-	_mPSImageSelFeatureChannelFormat = objc.RegisterName("featureChannelFormat")
-	_mPSImageSelPixelSize = objc.RegisterName("pixelSize")
-	_mPSImageSelTexture = objc.RegisterName("texture")
-	_mPSImageSelLabel = objc.RegisterName("label")
-	_mPSImageSelSetLabel = objc.RegisterName("setLabel:")
-	_mPSImageSelParent = objc.RegisterName("parent")
+	_mPSImageSelReadBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex                = objc.RegisterName("readBytes:dataLayout:bytesPerRow:bytesPerImage:region:featureChannelInfo:imageIndex:")
+	_mPSImageSelWriteBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex               = objc.RegisterName("writeBytes:dataLayout:bytesPerRow:bytesPerImage:region:featureChannelInfo:imageIndex:")
+	_mPSImageSelReadBytesDataLayoutImageIndex                                                                = objc.RegisterName("readBytes:dataLayout:imageIndex:")
+	_mPSImageSelWriteBytesDataLayoutImageIndex                                                               = objc.RegisterName("writeBytes:dataLayout:imageIndex:")
+	_mPSImageSelSynchronizeOnCommandBuffer                                                                   = objc.RegisterName("synchronizeOnCommandBuffer:")
+	_mPSImageSelDevice                                                                                       = objc.RegisterName("device")
+	_mPSImageSelWidth                                                                                        = objc.RegisterName("width")
+	_mPSImageSelHeight                                                                                       = objc.RegisterName("height")
+	_mPSImageSelFeatureChannels                                                                              = objc.RegisterName("featureChannels")
+	_mPSImageSelNumberOfImages                                                                               = objc.RegisterName("numberOfImages")
+	_mPSImageSelTextureType                                                                                  = objc.RegisterName("textureType")
+	_mPSImageSelPixelFormat                                                                                  = objc.RegisterName("pixelFormat")
+	_mPSImageSelPrecision                                                                                    = objc.RegisterName("precision")
+	_mPSImageSelUsage                                                                                        = objc.RegisterName("usage")
+	_mPSImageSelFeatureChannelFormat                                                                         = objc.RegisterName("featureChannelFormat")
+	_mPSImageSelPixelSize                                                                                    = objc.RegisterName("pixelSize")
+	_mPSImageSelTexture                                                                                      = objc.RegisterName("texture")
+	_mPSImageSelLabel                                                                                        = objc.RegisterName("label")
+	_mPSImageSelSetLabel                                                                                     = objc.RegisterName("setLabel:")
+	_mPSImageSelParent                                                                                       = objc.RegisterName("parent")
 )
 
 func MPSImageFromID(id objc.ID) *MPSImage {
@@ -73,21 +73,27 @@ func MPSImageDefaultAllocator() MPSImageAllocator {
 // @abstract   Initialize an empty image object @param      device              The device that the image will be used. May not be NULL. @param      imageDescriptor     The MPSImageDescriptor. May not be NULL. @return     A valid MPSImage object or nil, if failure. @discussion Storage to store data needed is allocated lazily on first use of MPSImage or when application calls MPSImage.texture
 func (o *MPSImage) InitWithDeviceImageDescriptor(device metal.MTLDevice, imageDescriptor *MPSImageDescriptor) *MPSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageSelInitWithDeviceImageDescriptor, device, imageDescriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageFromID(_ret)
 }
 
 // @abstract   Use -batchRepresentation or -subImageWithFeatureChannelRange instead @discussion Generally, you should call -batchRepresentation or -subImageWithFeatureChannelRange instead because they are safer. This is provided so that these interfaces will work with your MPSImage subclass. @param  parent  The parent image that owns the texture. It may be a sub-image. @param  sliceRange  The range of MTLTexture2dArray slices to be included in the sub-image @param  featureChannels The number of feature channels in the new image. The number of images is inferred. @return A MPSImage that references a subregion of the texel storage in parent instead of using its own storage.
 func (o *MPSImage) InitWithParentImageSliceRangeFeatureChannels(parent *MPSImage, sliceRange foundation.NSRange, featureChannels uint) *MPSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageSelInitWithParentImageSliceRangeFeatureChannels, parent.Ptr(), sliceRange, featureChannels)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageFromID(_ret)
 }
 
 // @abstract   Initialize an MPSImage object using Metal texture. Metal texture has been created by user for specific number of feature channels and number of images. @param      texture          The MTLTexture allocated by the user to be used as backing for MPSImage. @param      featureChannels  Number of feature channels this texture contains. @return     A valid MPSImage object or nil, if failure. @discussion Application can let MPS framework allocate texture with properties specified in imageDescriptor using initWithDevice:MPSImageDescriptor API above. However in memory intensive application, you can save memory (and allocation/deallocation time) by using MPSTemporaryImage where MPS framework aggressively reuse memory underlying textures on same command buffer. See MPSTemporaryImage class for details below. However, in certain cases, application developer may want more control on allocation, placement, reusing/recycling of memory backing textures used in application using Metal Heaps API. In this case, application can create MPSImage from pre-allocated texture using initWithTexture:featureChannels. MTLTextureType of texture can be MTLTextureType2D ONLY if featureChannels <= 4 in which case MPSImage.numberOfImages is set to 1. Else it should be MTLTextureType2DArray with arrayLength == numberOfImage * ((featureChannels + 3)/4). MPSImage.numberOfImages is set to texture.arrayLength / ((featureChannels + 3)/4). For MTLTextures containing typical image data which application may obtain from MetalKit or other libraries such as that drawn from a JPEG or PNG, featureChannels should be set to number of valid color channel e.g. for RGB data, even thought MTLPixelFormat will be MTLPixelFormatRGBA, featureChannels should be set to 3.
 func (o *MPSImage) InitWithTextureFeatureChannels(texture metal.MTLTexture, featureChannels uint) *MPSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageSelInitWithTextureFeatureChannels, texture, featureChannels)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageFromID(_ret)
 }
 
@@ -105,7 +111,9 @@ func (o *MPSImage) BatchRepresentation() unsafe.Pointer {
 
 func (o *MPSImage) SubImageWithFeatureChannelRange(range_ foundation.NSRange) *MPSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageSelSubImageWithFeatureChannelRange, range_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageFromID(_ret)
 }
 
@@ -236,7 +244,9 @@ func (o *MPSImage) Texture() metal.MTLTexture {
 // @property label @abstract A string to help identify this object.
 func (o *MPSImage) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -247,7 +257,8 @@ func (o *MPSImage) SetLabel(label *foundation.NSString) {
 // @abstract   The MPSImage from which this MPSImage was derived. Otherwise nil. @discussion This will point to the original image if this image was created using -batchRepresentation, -batchRepresentationWithRange: or -subImageWithFeatureChannelRange:.
 func (o *MPSImage) Parent() *MPSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageSelParent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageFromID(_ret)
 }
-

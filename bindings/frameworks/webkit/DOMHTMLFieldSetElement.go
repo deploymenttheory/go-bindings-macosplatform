@@ -15,7 +15,7 @@ type DOMHTMLFieldSetElement struct {
 }
 
 var (
-	_clsDOMHTMLFieldSetElement = _objcClass("DOMHTMLFieldSetElement")
+	_clsDOMHTMLFieldSetElement     = _objcClass("DOMHTMLFieldSetElement")
 	_dOMHTMLFieldSetElementSelForm = objc.RegisterName("form")
 )
 
@@ -31,7 +31,8 @@ func DOMHTMLFieldSetElementFromID(id objc.ID) *DOMHTMLFieldSetElement {
 
 func (o *DOMHTMLFieldSetElement) Form() *DOMHTMLFormElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLFieldSetElementSelForm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMHTMLFormElementFromID(_ret)
 }
-

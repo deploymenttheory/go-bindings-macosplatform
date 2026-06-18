@@ -17,28 +17,28 @@ type NSTextAttachment struct {
 }
 
 var (
-	_clsNSTextAttachment = _objcClass("NSTextAttachment")
-	_nSTextAttachmentSelInitWithDataOfType = objc.RegisterName("initWithData:ofType:")
-	_nSTextAttachmentSelInitWithFileWrapper = objc.RegisterName("initWithFileWrapper:")
-	_nSTextAttachmentSelTextAttachmentViewProviderClassForFileType = objc.RegisterName("textAttachmentViewProviderClassForFileType:")
+	_clsNSTextAttachment                                                   = _objcClass("NSTextAttachment")
+	_nSTextAttachmentSelInitWithDataOfType                                 = objc.RegisterName("initWithData:ofType:")
+	_nSTextAttachmentSelInitWithFileWrapper                                = objc.RegisterName("initWithFileWrapper:")
+	_nSTextAttachmentSelTextAttachmentViewProviderClassForFileType         = objc.RegisterName("textAttachmentViewProviderClassForFileType:")
 	_nSTextAttachmentSelRegisterTextAttachmentViewProviderClassForFileType = objc.RegisterName("registerTextAttachmentViewProviderClass:forFileType:")
-	_nSTextAttachmentSelContents = objc.RegisterName("contents")
-	_nSTextAttachmentSelSetContents = objc.RegisterName("setContents:")
-	_nSTextAttachmentSelFileType = objc.RegisterName("fileType")
-	_nSTextAttachmentSelSetFileType = objc.RegisterName("setFileType:")
-	_nSTextAttachmentSelImage = objc.RegisterName("image")
-	_nSTextAttachmentSelSetImage = objc.RegisterName("setImage:")
-	_nSTextAttachmentSelBounds = objc.RegisterName("bounds")
-	_nSTextAttachmentSelSetBounds = objc.RegisterName("setBounds:")
-	_nSTextAttachmentSelFileWrapper = objc.RegisterName("fileWrapper")
-	_nSTextAttachmentSelSetFileWrapper = objc.RegisterName("setFileWrapper:")
-	_nSTextAttachmentSelAttachmentCell = objc.RegisterName("attachmentCell")
-	_nSTextAttachmentSelSetAttachmentCell = objc.RegisterName("setAttachmentCell:")
-	_nSTextAttachmentSelLineLayoutPadding = objc.RegisterName("lineLayoutPadding")
-	_nSTextAttachmentSelSetLineLayoutPadding = objc.RegisterName("setLineLayoutPadding:")
-	_nSTextAttachmentSelAllowsTextAttachmentView = objc.RegisterName("allowsTextAttachmentView")
-	_nSTextAttachmentSelSetAllowsTextAttachmentView = objc.RegisterName("setAllowsTextAttachmentView:")
-	_nSTextAttachmentSelUsesTextAttachmentView = objc.RegisterName("usesTextAttachmentView")
+	_nSTextAttachmentSelContents                                           = objc.RegisterName("contents")
+	_nSTextAttachmentSelSetContents                                        = objc.RegisterName("setContents:")
+	_nSTextAttachmentSelFileType                                           = objc.RegisterName("fileType")
+	_nSTextAttachmentSelSetFileType                                        = objc.RegisterName("setFileType:")
+	_nSTextAttachmentSelImage                                              = objc.RegisterName("image")
+	_nSTextAttachmentSelSetImage                                           = objc.RegisterName("setImage:")
+	_nSTextAttachmentSelBounds                                             = objc.RegisterName("bounds")
+	_nSTextAttachmentSelSetBounds                                          = objc.RegisterName("setBounds:")
+	_nSTextAttachmentSelFileWrapper                                        = objc.RegisterName("fileWrapper")
+	_nSTextAttachmentSelSetFileWrapper                                     = objc.RegisterName("setFileWrapper:")
+	_nSTextAttachmentSelAttachmentCell                                     = objc.RegisterName("attachmentCell")
+	_nSTextAttachmentSelSetAttachmentCell                                  = objc.RegisterName("setAttachmentCell:")
+	_nSTextAttachmentSelLineLayoutPadding                                  = objc.RegisterName("lineLayoutPadding")
+	_nSTextAttachmentSelSetLineLayoutPadding                               = objc.RegisterName("setLineLayoutPadding:")
+	_nSTextAttachmentSelAllowsTextAttachmentView                           = objc.RegisterName("allowsTextAttachmentView")
+	_nSTextAttachmentSelSetAllowsTextAttachmentView                        = objc.RegisterName("setAllowsTextAttachmentView:")
+	_nSTextAttachmentSelUsesTextAttachmentView                             = objc.RegisterName("usesTextAttachmentView")
 )
 
 func NSTextAttachmentFromID(id objc.ID) *NSTextAttachment {
@@ -53,13 +53,17 @@ func NSTextAttachmentFromID(id objc.ID) *NSTextAttachment {
 
 func (o *NSTextAttachment) InitWithDataOfType(contentData *foundation.NSData, uti *foundation.NSString) *NSTextAttachment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextAttachmentSelInitWithDataOfType, contentData.Ptr(), uti.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextAttachmentFromID(_ret)
 }
 
 func (o *NSTextAttachment) InitWithFileWrapper(fileWrapper *foundation.NSFileWrapper) *NSTextAttachment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextAttachmentSelInitWithFileWrapper, fileWrapper.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextAttachmentFromID(_ret)
 }
 
@@ -74,7 +78,9 @@ func NSTextAttachmentRegisterTextAttachmentViewProviderClassForFileType(textAtta
 
 func (o *NSTextAttachment) Contents() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextAttachmentSelContents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -84,7 +90,9 @@ func (o *NSTextAttachment) SetContents(contents *foundation.NSData) {
 
 func (o *NSTextAttachment) FileType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextAttachmentSelFileType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -94,7 +102,9 @@ func (o *NSTextAttachment) SetFileType(fileType *foundation.NSString) {
 
 func (o *NSTextAttachment) Image() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextAttachmentSelImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -113,7 +123,9 @@ func (o *NSTextAttachment) SetBounds(bounds corefoundation.CGRect) {
 
 func (o *NSTextAttachment) FileWrapper() *foundation.NSFileWrapper {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextAttachmentSelFileWrapper)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSFileWrapperFromID(_ret)
 }
 
@@ -152,4 +164,3 @@ func (o *NSTextAttachment) UsesTextAttachmentView() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextAttachmentSelUsesTextAttachmentView)
 	return _ret
 }
-

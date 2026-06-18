@@ -15,18 +15,18 @@ type NSIndexPath struct {
 }
 
 var (
-	_clsNSIndexPath = _objcClass("NSIndexPath")
-	_nSIndexPathSelIndexPathWithIndex = objc.RegisterName("indexPathWithIndex:")
-	_nSIndexPathSelIndexPathWithIndexesLength = objc.RegisterName("indexPathWithIndexes:length:")
-	_nSIndexPathSelInitWithIndexesLength = objc.RegisterName("initWithIndexes:length:")
-	_nSIndexPathSelInitWithIndex = objc.RegisterName("initWithIndex:")
-	_nSIndexPathSelIndexPathByAddingIndex = objc.RegisterName("indexPathByAddingIndex:")
+	_clsNSIndexPath                             = _objcClass("NSIndexPath")
+	_nSIndexPathSelIndexPathWithIndex           = objc.RegisterName("indexPathWithIndex:")
+	_nSIndexPathSelIndexPathWithIndexesLength   = objc.RegisterName("indexPathWithIndexes:length:")
+	_nSIndexPathSelInitWithIndexesLength        = objc.RegisterName("initWithIndexes:length:")
+	_nSIndexPathSelInitWithIndex                = objc.RegisterName("initWithIndex:")
+	_nSIndexPathSelIndexPathByAddingIndex       = objc.RegisterName("indexPathByAddingIndex:")
 	_nSIndexPathSelIndexPathByRemovingLastIndex = objc.RegisterName("indexPathByRemovingLastIndex")
-	_nSIndexPathSelIndexAtPosition = objc.RegisterName("indexAtPosition:")
-	_nSIndexPathSelGetIndexesRange = objc.RegisterName("getIndexes:range:")
-	_nSIndexPathSelCompare = objc.RegisterName("compare:")
-	_nSIndexPathSelLength = objc.RegisterName("length")
-	_nSIndexPathSelGetIndexes = objc.RegisterName("getIndexes:")
+	_nSIndexPathSelIndexAtPosition              = objc.RegisterName("indexAtPosition:")
+	_nSIndexPathSelGetIndexesRange              = objc.RegisterName("getIndexes:range:")
+	_nSIndexPathSelCompare                      = objc.RegisterName("compare:")
+	_nSIndexPathSelLength                       = objc.RegisterName("length")
+	_nSIndexPathSelGetIndexes                   = objc.RegisterName("getIndexes:")
 )
 
 func NSIndexPathFromID(id objc.ID) *NSIndexPath {
@@ -41,37 +41,49 @@ func NSIndexPathFromID(id objc.ID) *NSIndexPath {
 
 func NSIndexPathIndexPathWithIndex(index uint) *NSIndexPath {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSIndexPath), _nSIndexPathSelIndexPathWithIndex, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSIndexPathFromID(_ret)
 }
 
 func NSIndexPathIndexPathWithIndexesLength(indexes *uint, length uint) *NSIndexPath {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSIndexPath), _nSIndexPathSelIndexPathWithIndexesLength, indexes, length)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSIndexPathFromID(_ret)
 }
 
 func (o *NSIndexPath) InitWithIndexesLength(indexes *uint, length uint) *NSIndexPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIndexPathSelInitWithIndexesLength, indexes, length)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSIndexPathFromID(_ret)
 }
 
 func (o *NSIndexPath) InitWithIndex(index uint) *NSIndexPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIndexPathSelInitWithIndex, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSIndexPathFromID(_ret)
 }
 
 func (o *NSIndexPath) IndexPathByAddingIndex(index uint) *NSIndexPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIndexPathSelIndexPathByAddingIndex, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSIndexPathFromID(_ret)
 }
 
 func (o *NSIndexPath) IndexPathByRemovingLastIndex() *NSIndexPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIndexPathSelIndexPathByRemovingLastIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSIndexPathFromID(_ret)
 }
 
@@ -100,4 +112,3 @@ func (o *NSIndexPath) Length() uint {
 func (o *NSIndexPath) GetIndexes(indexes *uint) {
 	o.Ptr().Send(_nSIndexPathSelGetIndexes, indexes)
 }
-

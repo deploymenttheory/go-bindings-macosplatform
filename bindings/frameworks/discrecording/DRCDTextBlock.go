@@ -18,19 +18,19 @@ type DRCDTextBlock struct {
 }
 
 var (
-	_clsDRCDTextBlock = _objcClass("DRCDTextBlock")
-	_dRCDTextBlockSelArrayOfCDTextBlocksFromPacks = objc.RegisterName("arrayOfCDTextBlocksFromPacks:")
+	_clsDRCDTextBlock                                = _objcClass("DRCDTextBlock")
+	_dRCDTextBlockSelArrayOfCDTextBlocksFromPacks    = objc.RegisterName("arrayOfCDTextBlocksFromPacks:")
 	_dRCDTextBlockSelCdTextBlockWithLanguageEncoding = objc.RegisterName("cdTextBlockWithLanguage:encoding:")
-	_dRCDTextBlockSelInitWithLanguageEncoding = objc.RegisterName("initWithLanguage:encoding:")
-	_dRCDTextBlockSelProperties = objc.RegisterName("properties")
-	_dRCDTextBlockSelSetProperties = objc.RegisterName("setProperties:")
-	_dRCDTextBlockSelTrackDictionaries = objc.RegisterName("trackDictionaries")
-	_dRCDTextBlockSelSetTrackDictionaries = objc.RegisterName("setTrackDictionaries:")
-	_dRCDTextBlockSelObjectForKeyOfTrack = objc.RegisterName("objectForKey:ofTrack:")
-	_dRCDTextBlockSelSetObjectForKeyOfTrack = objc.RegisterName("setObject:forKey:ofTrack:")
-	_dRCDTextBlockSelFlatten = objc.RegisterName("flatten")
-	_dRCDTextBlockSelLanguage = objc.RegisterName("language")
-	_dRCDTextBlockSelEncoding = objc.RegisterName("encoding")
+	_dRCDTextBlockSelInitWithLanguageEncoding        = objc.RegisterName("initWithLanguage:encoding:")
+	_dRCDTextBlockSelProperties                      = objc.RegisterName("properties")
+	_dRCDTextBlockSelSetProperties                   = objc.RegisterName("setProperties:")
+	_dRCDTextBlockSelTrackDictionaries               = objc.RegisterName("trackDictionaries")
+	_dRCDTextBlockSelSetTrackDictionaries            = objc.RegisterName("setTrackDictionaries:")
+	_dRCDTextBlockSelObjectForKeyOfTrack             = objc.RegisterName("objectForKey:ofTrack:")
+	_dRCDTextBlockSelSetObjectForKeyOfTrack          = objc.RegisterName("setObject:forKey:ofTrack:")
+	_dRCDTextBlockSelFlatten                         = objc.RegisterName("flatten")
+	_dRCDTextBlockSelLanguage                        = objc.RegisterName("language")
+	_dRCDTextBlockSelEncoding                        = objc.RegisterName("encoding")
 )
 
 func DRCDTextBlockFromID(id objc.ID) *DRCDTextBlock {
@@ -52,7 +52,9 @@ func DRCDTextBlockArrayOfCDTextBlocksFromPacks(packs *foundation.NSData) *founda
 // @method		cdTextBlockWithLanguage:encoding: @abstract	Creates a CD-Text block. @param		lang		ISO 639 language code describing the language in which the strings are provided.  CD-Text allows the concept of an unknown language, which can be represented here by an empty string. @param		enc			Character encoding into which the strings should be converted. @result		An autoreleased DRCDTextBlock object.
 func DRCDTextBlockCdTextBlockWithLanguageEncoding(lang *foundation.NSString, enc uint) *DRCDTextBlock {
 	_ret := objc.Send[objc.ID](objc.ID(_clsDRCDTextBlock), _dRCDTextBlockSelCdTextBlockWithLanguageEncoding, lang.Ptr(), enc)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DRCDTextBlockFromID(_ret)
 }
 
@@ -104,7 +106,9 @@ func (o *DRCDTextBlock) Flatten() uint {
 // @method		language @abstract	Returns the ISO 639 language code describing the language associated with the CD-Text block.  CD-Text allows the concept of an unknown language, which is represented here by an empty string. @result		A DRCDTextLanguage.
 func (o *DRCDTextBlock) Language() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dRCDTextBlockSelLanguage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -113,4 +117,3 @@ func (o *DRCDTextBlock) Encoding() uint {
 	_ret := objc.Send[uint](o.Ptr(), _dRCDTextBlockSelEncoding)
 	return _ret
 }
-

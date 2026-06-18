@@ -182,4 +182,3 @@ func IrradianceTextureCubeWithTextureNameDimensionsRoughness(texture *raw.MDLTex
 func ConvertToUSDZWriteToURL(inputURL string, outputURL string) {
 	raw.MDLUtilityConvertToUSDZWriteToURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(inputURL)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(outputURL)))
 }
-

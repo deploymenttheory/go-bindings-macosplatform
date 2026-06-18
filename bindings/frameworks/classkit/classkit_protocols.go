@@ -18,4 +18,3 @@ type CLSContextProvider interface {
 type CLSDataStoreDelegate interface {
 	CreateContextForIdentifierParentContextParentIdentifierPath(identifier *foundation.NSString, parentContext *CLSContext, parentIdentifierPath *foundation.NSArray[*foundation.NSString]) *CLSContext
 }
-

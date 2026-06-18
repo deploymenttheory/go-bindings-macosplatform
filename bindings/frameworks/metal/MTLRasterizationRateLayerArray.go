@@ -16,8 +16,8 @@ type MTLRasterizationRateLayerArray struct {
 }
 
 var (
-	_clsMTLRasterizationRateLayerArray = _objcClass("MTLRasterizationRateLayerArray")
-	_mTLRasterizationRateLayerArraySelObjectAtIndexedSubscript = objc.RegisterName("objectAtIndexedSubscript:")
+	_clsMTLRasterizationRateLayerArray                            = _objcClass("MTLRasterizationRateLayerArray")
+	_mTLRasterizationRateLayerArraySelObjectAtIndexedSubscript    = objc.RegisterName("objectAtIndexedSubscript:")
 	_mTLRasterizationRateLayerArraySelSetObjectAtIndexedSubscript = objc.RegisterName("setObject:atIndexedSubscript:")
 )
 
@@ -34,7 +34,9 @@ func MTLRasterizationRateLayerArrayFromID(id objc.ID) *MTLRasterizationRateLayer
 // @method objectAtIndexedSubscript: @return The MTLRasterizationRateLayerDescriptor instance for the given layerIndex, or nil if no instance hasn't been set for this index. @discussion Use setObject:atIndexedSubscript: to set the layer
 func (o *MTLRasterizationRateLayerArray) ObjectAtIndexedSubscript(layerIndex uint) *MTLRasterizationRateLayerDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRasterizationRateLayerArraySelObjectAtIndexedSubscript, layerIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLRasterizationRateLayerDescriptorFromID(_ret)
 }
 
@@ -42,4 +44,3 @@ func (o *MTLRasterizationRateLayerArray) ObjectAtIndexedSubscript(layerIndex uin
 func (o *MTLRasterizationRateLayerArray) SetObjectAtIndexedSubscript(layer *MTLRasterizationRateLayerDescriptor, layerIndex uint) {
 	o.Ptr().Send(_mTLRasterizationRateLayerArraySelSetObjectAtIndexedSubscript, layer.Ptr(), layerIndex)
 }
-

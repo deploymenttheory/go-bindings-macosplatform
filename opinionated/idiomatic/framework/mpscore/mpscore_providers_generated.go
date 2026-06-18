@@ -27,4 +27,3 @@ type NDArrayProvider interface {
 type VectorProvider interface {
 	asVector() *raw.MPSVector
 }
-

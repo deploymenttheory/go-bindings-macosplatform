@@ -87,4 +87,3 @@ type AdamOptimizerable interface {
 }
 
 var _ AdamOptimizerable = (*AdamOptimizer)(nil)
-

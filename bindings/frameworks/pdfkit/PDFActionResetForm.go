@@ -16,11 +16,11 @@ type PDFActionResetForm struct {
 }
 
 var (
-	_clsPDFActionResetForm = _objcClass("PDFActionResetForm")
-	_pDFActionResetFormSelInit = objc.RegisterName("init")
-	_pDFActionResetFormSelFields = objc.RegisterName("fields")
-	_pDFActionResetFormSelSetFields = objc.RegisterName("setFields:")
-	_pDFActionResetFormSelFieldsIncludedAreCleared = objc.RegisterName("fieldsIncludedAreCleared")
+	_clsPDFActionResetForm                            = _objcClass("PDFActionResetForm")
+	_pDFActionResetFormSelInit                        = objc.RegisterName("init")
+	_pDFActionResetFormSelFields                      = objc.RegisterName("fields")
+	_pDFActionResetFormSelSetFields                   = objc.RegisterName("setFields:")
+	_pDFActionResetFormSelFieldsIncludedAreCleared    = objc.RegisterName("fieldsIncludedAreCleared")
 	_pDFActionResetFormSelSetFieldsIncludedAreCleared = objc.RegisterName("setFieldsIncludedAreCleared:")
 )
 
@@ -36,7 +36,9 @@ func PDFActionResetFormFromID(id objc.ID) *PDFActionResetForm {
 
 func (o *PDFActionResetForm) Init() *PDFActionResetForm {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFActionResetFormSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFActionResetFormFromID(_ret)
 }
 
@@ -57,4 +59,3 @@ func (o *PDFActionResetForm) FieldsIncludedAreCleared() bool {
 func (o *PDFActionResetForm) SetFieldsIncludedAreCleared(fieldsIncludedAreCleared bool) {
 	o.Ptr().Send(_pDFActionResetFormSelSetFieldsIncludedAreCleared, fieldsIncludedAreCleared)
 }
-

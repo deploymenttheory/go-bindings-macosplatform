@@ -16,12 +16,12 @@ type SFSafariWindow struct {
 }
 
 var (
-	_clsSFSafariWindow = _objcClass("SFSafariWindow")
-	_sFSafariWindowSelGetActiveTabWithCompletionHandler = objc.RegisterName("getActiveTabWithCompletionHandler:")
-	_sFSafariWindowSelGetAllTabsWithCompletionHandler = objc.RegisterName("getAllTabsWithCompletionHandler:")
+	_clsSFSafariWindow                                                    = _objcClass("SFSafariWindow")
+	_sFSafariWindowSelGetActiveTabWithCompletionHandler                   = objc.RegisterName("getActiveTabWithCompletionHandler:")
+	_sFSafariWindowSelGetAllTabsWithCompletionHandler                     = objc.RegisterName("getAllTabsWithCompletionHandler:")
 	_sFSafariWindowSelOpenTabWithURLMakeActiveIfPossibleCompletionHandler = objc.RegisterName("openTabWithURL:makeActiveIfPossible:completionHandler:")
-	_sFSafariWindowSelGetToolbarItemWithCompletionHandler = objc.RegisterName("getToolbarItemWithCompletionHandler:")
-	_sFSafariWindowSelClose = objc.RegisterName("close")
+	_sFSafariWindowSelGetToolbarItemWithCompletionHandler                 = objc.RegisterName("getToolbarItemWithCompletionHandler:")
+	_sFSafariWindowSelClose                                               = objc.RegisterName("close")
 )
 
 func SFSafariWindowFromID(id objc.ID) *SFSafariWindow {
@@ -98,4 +98,3 @@ func (o *SFSafariWindow) GetToolbarItemWithCompletionHandler(completionHandler f
 func (o *SFSafariWindow) Close() {
 	o.Ptr().Send(_sFSafariWindowSelClose)
 }
-

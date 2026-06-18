@@ -87,11 +87,17 @@ func (x *MatrixLogSoftMax) WithLabel(label string) *MatrixLogSoftMax {
 	return x
 }
 
-func (x *MatrixLogSoftMax) asMatrixSoftMax() *mpsmatrix.MPSMatrixSoftMax { return &x.inner.MPSMatrixSoftMax }
+func (x *MatrixLogSoftMax) asMatrixSoftMax() *mpsmatrix.MPSMatrixSoftMax {
+	return &x.inner.MPSMatrixSoftMax
+}
 
-func (x *MatrixLogSoftMax) asMatrixUnaryKernel() *mpsmatrix.MPSMatrixUnaryKernel { return &x.inner.MPSMatrixSoftMax.MPSMatrixUnaryKernel }
+func (x *MatrixLogSoftMax) asMatrixUnaryKernel() *mpsmatrix.MPSMatrixUnaryKernel {
+	return &x.inner.MPSMatrixSoftMax.MPSMatrixUnaryKernel
+}
 
-func (x *MatrixLogSoftMax) asKernel() *mpscore.MPSKernel { return &x.inner.MPSMatrixSoftMax.MPSMatrixUnaryKernel.MPSKernel }
+func (x *MatrixLogSoftMax) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSMatrixSoftMax.MPSMatrixUnaryKernel.MPSKernel
+}
 
 // MatrixLogSoftMaxable is the interface implemented by [MatrixLogSoftMax], for mocking and DI.
 type MatrixLogSoftMaxable interface {
@@ -107,4 +113,3 @@ type MatrixLogSoftMaxable interface {
 }
 
 var _ MatrixLogSoftMaxable = (*MatrixLogSoftMax)(nil)
-

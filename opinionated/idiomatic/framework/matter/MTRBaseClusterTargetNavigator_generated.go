@@ -467,9 +467,13 @@ func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeClusterRevisionWithMin
 	}
 }
 
-func (x *MTRBaseClusterTargetNavigator) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterTargetNavigator) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterTargetNavigator) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterTargetNavigator) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterTargetNavigatorable is the interface implemented by [MTRBaseClusterTargetNavigator], for mocking and DI.
 type MTRBaseClusterTargetNavigatorable interface {
@@ -507,4 +511,3 @@ type MTRBaseClusterTargetNavigatorable interface {
 }
 
 var _ MTRBaseClusterTargetNavigatorable = (*MTRBaseClusterTargetNavigator)(nil)
-

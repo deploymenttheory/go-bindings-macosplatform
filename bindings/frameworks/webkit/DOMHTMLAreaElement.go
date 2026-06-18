@@ -16,27 +16,27 @@ type DOMHTMLAreaElement struct {
 }
 
 var (
-	_clsDOMHTMLAreaElement = _objcClass("DOMHTMLAreaElement")
-	_dOMHTMLAreaElementSelAlt = objc.RegisterName("alt")
-	_dOMHTMLAreaElementSelSetAlt = objc.RegisterName("setAlt:")
-	_dOMHTMLAreaElementSelCoords = objc.RegisterName("coords")
-	_dOMHTMLAreaElementSelSetCoords = objc.RegisterName("setCoords:")
-	_dOMHTMLAreaElementSelNoHref = objc.RegisterName("noHref")
-	_dOMHTMLAreaElementSelSetNoHref = objc.RegisterName("setNoHref:")
-	_dOMHTMLAreaElementSelShape = objc.RegisterName("shape")
-	_dOMHTMLAreaElementSelSetShape = objc.RegisterName("setShape:")
-	_dOMHTMLAreaElementSelTarget = objc.RegisterName("target")
-	_dOMHTMLAreaElementSelSetTarget = objc.RegisterName("setTarget:")
+	_clsDOMHTMLAreaElement                = _objcClass("DOMHTMLAreaElement")
+	_dOMHTMLAreaElementSelAlt             = objc.RegisterName("alt")
+	_dOMHTMLAreaElementSelSetAlt          = objc.RegisterName("setAlt:")
+	_dOMHTMLAreaElementSelCoords          = objc.RegisterName("coords")
+	_dOMHTMLAreaElementSelSetCoords       = objc.RegisterName("setCoords:")
+	_dOMHTMLAreaElementSelNoHref          = objc.RegisterName("noHref")
+	_dOMHTMLAreaElementSelSetNoHref       = objc.RegisterName("setNoHref:")
+	_dOMHTMLAreaElementSelShape           = objc.RegisterName("shape")
+	_dOMHTMLAreaElementSelSetShape        = objc.RegisterName("setShape:")
+	_dOMHTMLAreaElementSelTarget          = objc.RegisterName("target")
+	_dOMHTMLAreaElementSelSetTarget       = objc.RegisterName("setTarget:")
 	_dOMHTMLAreaElementSelAbsoluteLinkURL = objc.RegisterName("absoluteLinkURL")
-	_dOMHTMLAreaElementSelHref = objc.RegisterName("href")
-	_dOMHTMLAreaElementSelSetHref = objc.RegisterName("setHref:")
-	_dOMHTMLAreaElementSelProtocol = objc.RegisterName("protocol")
-	_dOMHTMLAreaElementSelHost = objc.RegisterName("host")
-	_dOMHTMLAreaElementSelHostname = objc.RegisterName("hostname")
-	_dOMHTMLAreaElementSelPort = objc.RegisterName("port")
-	_dOMHTMLAreaElementSelPathname = objc.RegisterName("pathname")
-	_dOMHTMLAreaElementSelSearch = objc.RegisterName("search")
-	_dOMHTMLAreaElementSelHashName = objc.RegisterName("hashName")
+	_dOMHTMLAreaElementSelHref            = objc.RegisterName("href")
+	_dOMHTMLAreaElementSelSetHref         = objc.RegisterName("setHref:")
+	_dOMHTMLAreaElementSelProtocol        = objc.RegisterName("protocol")
+	_dOMHTMLAreaElementSelHost            = objc.RegisterName("host")
+	_dOMHTMLAreaElementSelHostname        = objc.RegisterName("hostname")
+	_dOMHTMLAreaElementSelPort            = objc.RegisterName("port")
+	_dOMHTMLAreaElementSelPathname        = objc.RegisterName("pathname")
+	_dOMHTMLAreaElementSelSearch          = objc.RegisterName("search")
+	_dOMHTMLAreaElementSelHashName        = objc.RegisterName("hashName")
 )
 
 func DOMHTMLAreaElementFromID(id objc.ID) *DOMHTMLAreaElement {
@@ -51,7 +51,9 @@ func DOMHTMLAreaElementFromID(id objc.ID) *DOMHTMLAreaElement {
 
 func (o *DOMHTMLAreaElement) Alt() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAreaElementSelAlt)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -61,7 +63,9 @@ func (o *DOMHTMLAreaElement) SetAlt(alt *foundation.NSString) {
 
 func (o *DOMHTMLAreaElement) Coords() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAreaElementSelCoords)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -80,7 +84,9 @@ func (o *DOMHTMLAreaElement) SetNoHref(noHref bool) {
 
 func (o *DOMHTMLAreaElement) Shape() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAreaElementSelShape)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -90,7 +96,9 @@ func (o *DOMHTMLAreaElement) SetShape(shape *foundation.NSString) {
 
 func (o *DOMHTMLAreaElement) Target() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAreaElementSelTarget)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -100,13 +108,17 @@ func (o *DOMHTMLAreaElement) SetTarget(target *foundation.NSString) {
 
 func (o *DOMHTMLAreaElement) AbsoluteLinkURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAreaElementSelAbsoluteLinkURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *DOMHTMLAreaElement) Href() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAreaElementSelHref)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -116,43 +128,56 @@ func (o *DOMHTMLAreaElement) SetHref(href *foundation.NSString) {
 
 func (o *DOMHTMLAreaElement) Protocol() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAreaElementSelProtocol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLAreaElement) Host() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAreaElementSelHost)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLAreaElement) Hostname() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAreaElementSelHostname)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLAreaElement) Port() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAreaElementSelPort)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLAreaElement) Pathname() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAreaElementSelPathname)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLAreaElement) Search() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAreaElementSelSearch)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLAreaElement) HashName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAreaElementSelHashName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

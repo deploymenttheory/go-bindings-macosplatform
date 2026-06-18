@@ -106,4 +106,3 @@ type IKConstraintable interface {
 }
 
 var _ IKConstraintable = (*IKConstraint)(nil)
-

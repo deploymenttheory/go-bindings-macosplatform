@@ -21,17 +21,17 @@ func (o *NSProxy) Ptr() objc.ID { return o.ptr }
 func (o *NSProxy) InitPtr(id objc.ID) { o.ptr = id }
 
 var (
-	_clsNSProxy = _objcClass("NSProxy")
-	_nSProxySelAlloc = objc.RegisterName("alloc")
-	_nSProxySelAllocWithZone = objc.RegisterName("allocWithZone:")
-	_nSProxySelClass = objc.RegisterName("class")
-	_nSProxySelForwardInvocation = objc.RegisterName("forwardInvocation:")
+	_clsNSProxy                           = _objcClass("NSProxy")
+	_nSProxySelAlloc                      = objc.RegisterName("alloc")
+	_nSProxySelAllocWithZone              = objc.RegisterName("allocWithZone:")
+	_nSProxySelClass                      = objc.RegisterName("class")
+	_nSProxySelForwardInvocation          = objc.RegisterName("forwardInvocation:")
 	_nSProxySelMethodSignatureForSelector = objc.RegisterName("methodSignatureForSelector:")
-	_nSProxySelDealloc = objc.RegisterName("dealloc")
-	_nSProxySelFinalize = objc.RegisterName("finalize")
-	_nSProxySelRespondsToSelector = objc.RegisterName("respondsToSelector:")
-	_nSProxySelDescription = objc.RegisterName("description")
-	_nSProxySelDebugDescription = objc.RegisterName("debugDescription")
+	_nSProxySelDealloc                    = objc.RegisterName("dealloc")
+	_nSProxySelFinalize                   = objc.RegisterName("finalize")
+	_nSProxySelRespondsToSelector         = objc.RegisterName("respondsToSelector:")
+	_nSProxySelDescription                = objc.RegisterName("description")
+	_nSProxySelDebugDescription           = objc.RegisterName("debugDescription")
 )
 
 func NSProxyFromID(id objc.ID) *NSProxy {
@@ -65,7 +65,9 @@ func (o *NSProxy) ForwardInvocation(invocation *NSInvocation) {
 
 func (o *NSProxy) MethodSignatureForSelector(sel objc.SEL) *NSMethodSignature {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProxySelMethodSignatureForSelector, sel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMethodSignatureFromID(_ret)
 }
 
@@ -84,13 +86,16 @@ func NSProxyRespondsToSelector(aSelector objc.SEL) bool {
 
 func (o *NSProxy) Description() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProxySelDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSProxy) DebugDescription() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProxySelDebugDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
-

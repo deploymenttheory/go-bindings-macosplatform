@@ -16,16 +16,16 @@ type DOMImplementation struct {
 }
 
 var (
-	_clsDOMImplementation = _objcClass("DOMImplementation")
-	_dOMImplementationSelHasFeatureVersion = objc.RegisterName("hasFeature:version:")
+	_clsDOMImplementation                                   = _objcClass("DOMImplementation")
+	_dOMImplementationSelHasFeatureVersion                  = objc.RegisterName("hasFeature:version:")
 	_dOMImplementationSelCreateDocumentTypePublicIdSystemId = objc.RegisterName("createDocumentType:publicId:systemId:")
 	_dOMImplementationSelCreateDocumentQualifiedNameDoctype = objc.RegisterName("createDocument:qualifiedName:doctype:")
-	_dOMImplementationSelCreateCSSStyleSheetMedia = objc.RegisterName("createCSSStyleSheet:media:")
-	_dOMImplementationSelCreateHTMLDocument = objc.RegisterName("createHTMLDocument:")
-	_dOMImplementationSelHasFeature = objc.RegisterName("hasFeature::")
-	_dOMImplementationSelCreateDocumentType = objc.RegisterName("createDocumentType:::")
-	_dOMImplementationSelCreateDocument = objc.RegisterName("createDocument:::")
-	_dOMImplementationSelCreateCSSStyleSheet = objc.RegisterName("createCSSStyleSheet::")
+	_dOMImplementationSelCreateCSSStyleSheetMedia           = objc.RegisterName("createCSSStyleSheet:media:")
+	_dOMImplementationSelCreateHTMLDocument                 = objc.RegisterName("createHTMLDocument:")
+	_dOMImplementationSelHasFeature                         = objc.RegisterName("hasFeature::")
+	_dOMImplementationSelCreateDocumentType                 = objc.RegisterName("createDocumentType:::")
+	_dOMImplementationSelCreateDocument                     = objc.RegisterName("createDocument:::")
+	_dOMImplementationSelCreateCSSStyleSheet                = objc.RegisterName("createCSSStyleSheet::")
 )
 
 func DOMImplementationFromID(id objc.ID) *DOMImplementation {
@@ -45,25 +45,33 @@ func (o *DOMImplementation) HasFeatureVersion(feature *foundation.NSString, vers
 
 func (o *DOMImplementation) CreateDocumentTypePublicIdSystemId(qualifiedName *foundation.NSString, publicId *foundation.NSString, systemId *foundation.NSString) *DOMDocumentType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMImplementationSelCreateDocumentTypePublicIdSystemId, qualifiedName.Ptr(), publicId.Ptr(), systemId.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMDocumentTypeFromID(_ret)
 }
 
 func (o *DOMImplementation) CreateDocumentQualifiedNameDoctype(namespaceURI *foundation.NSString, qualifiedName *foundation.NSString, doctype *DOMDocumentType) *DOMDocument {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMImplementationSelCreateDocumentQualifiedNameDoctype, namespaceURI.Ptr(), qualifiedName.Ptr(), doctype.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMDocumentFromID(_ret)
 }
 
 func (o *DOMImplementation) CreateCSSStyleSheetMedia(title *foundation.NSString, media *foundation.NSString) *DOMCSSStyleSheet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMImplementationSelCreateCSSStyleSheetMedia, title.Ptr(), media.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMCSSStyleSheetFromID(_ret)
 }
 
 func (o *DOMImplementation) CreateHTMLDocument(title *foundation.NSString) *DOMHTMLDocument {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMImplementationSelCreateHTMLDocument, title.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMHTMLDocumentFromID(_ret)
 }
 
@@ -74,19 +82,24 @@ func (o *DOMImplementation) HasFeature(feature *foundation.NSString, version *fo
 
 func (o *DOMImplementation) CreateDocumentType(qualifiedName *foundation.NSString, publicId *foundation.NSString, systemId *foundation.NSString) *DOMDocumentType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMImplementationSelCreateDocumentType, qualifiedName.Ptr(), publicId.Ptr(), systemId.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMDocumentTypeFromID(_ret)
 }
 
 func (o *DOMImplementation) CreateDocument(namespaceURI *foundation.NSString, qualifiedName *foundation.NSString, doctype *DOMDocumentType) *DOMDocument {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMImplementationSelCreateDocument, namespaceURI.Ptr(), qualifiedName.Ptr(), doctype.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMDocumentFromID(_ret)
 }
 
 func (o *DOMImplementation) CreateCSSStyleSheet(title *foundation.NSString, media *foundation.NSString) *DOMCSSStyleSheet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMImplementationSelCreateCSSStyleSheet, title.Ptr(), media.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMCSSStyleSheetFromID(_ret)
 }
-

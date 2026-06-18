@@ -147,4 +147,3 @@ type CNNGroupNormalizationable interface {
 }
 
 var _ CNNGroupNormalizationable = (*CNNGroupNormalization)(nil)
-

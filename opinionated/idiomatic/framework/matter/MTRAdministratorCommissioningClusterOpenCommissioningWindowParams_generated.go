@@ -16,11 +16,15 @@ type MTRAdministratorCommissioningClusterOpenCommissioningWindowParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRAdministratorCommissioningClusterOpenCommissioningWindowParams].
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) Unwrap() *raw.MTRAdministratorCommissioningClusterOpenCommissioningWindowParams { return x.inner }
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) Unwrap() *raw.MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRAdministratorCommissioningClusterOpenCommissioningWindowParamsFromID adopts an existing object pointer as a MTRAdministratorCommissioningClusterOpenCommissioningWindowParams (nil for 0).
 func MTRAdministratorCommissioningClusterOpenCommissioningWindowParamsFromID(id objc.ID) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
@@ -194,4 +198,3 @@ type MTRAdministratorCommissioningClusterOpenCommissioningWindowParamsable inter
 }
 
 var _ MTRAdministratorCommissioningClusterOpenCommissioningWindowParamsable = (*MTRAdministratorCommissioningClusterOpenCommissioningWindowParams)(nil)
-

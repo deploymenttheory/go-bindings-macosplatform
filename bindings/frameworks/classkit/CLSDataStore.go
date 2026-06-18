@@ -18,20 +18,20 @@ type CLSDataStore struct {
 }
 
 var (
-	_clsCLSDataStore = _objcClass("CLSDataStore")
-	_cLSDataStoreSelSaveWithCompletion = objc.RegisterName("saveWithCompletion:")
-	_cLSDataStoreSelCompleteAllAssignedActivitiesMatching = objc.RegisterName("completeAllAssignedActivitiesMatching:")
-	_cLSDataStoreSelShared = objc.RegisterName("shared")
-	_cLSDataStoreSelMainAppContext = objc.RegisterName("mainAppContext")
-	_cLSDataStoreSelActiveContext = objc.RegisterName("activeContext")
-	_cLSDataStoreSelRunningActivity = objc.RegisterName("runningActivity")
-	_cLSDataStoreSelDelegate = objc.RegisterName("delegate")
-	_cLSDataStoreSelSetDelegate = objc.RegisterName("setDelegate:")
-	_cLSDataStoreSelContextsMatchingPredicateCompletion = objc.RegisterName("contextsMatchingPredicate:completion:")
+	_clsCLSDataStore                                         = _objcClass("CLSDataStore")
+	_cLSDataStoreSelSaveWithCompletion                       = objc.RegisterName("saveWithCompletion:")
+	_cLSDataStoreSelCompleteAllAssignedActivitiesMatching    = objc.RegisterName("completeAllAssignedActivitiesMatching:")
+	_cLSDataStoreSelShared                                   = objc.RegisterName("shared")
+	_cLSDataStoreSelMainAppContext                           = objc.RegisterName("mainAppContext")
+	_cLSDataStoreSelActiveContext                            = objc.RegisterName("activeContext")
+	_cLSDataStoreSelRunningActivity                          = objc.RegisterName("runningActivity")
+	_cLSDataStoreSelDelegate                                 = objc.RegisterName("delegate")
+	_cLSDataStoreSelSetDelegate                              = objc.RegisterName("setDelegate:")
+	_cLSDataStoreSelContextsMatchingPredicateCompletion      = objc.RegisterName("contextsMatchingPredicate:completion:")
 	_cLSDataStoreSelContextsMatchingIdentifierPathCompletion = objc.RegisterName("contextsMatchingIdentifierPath:completion:")
-	_cLSDataStoreSelRemoveContext = objc.RegisterName("removeContext:")
-	_cLSDataStoreSelFetchActivityForURLCompletion = objc.RegisterName("fetchActivityForURL:completion:")
-	_cLSDataStoreSelCheckIsAssignedDocumentCompletion = objc.RegisterName("checkIsAssignedDocument:completion:")
+	_cLSDataStoreSelRemoveContext                            = objc.RegisterName("removeContext:")
+	_cLSDataStoreSelFetchActivityForURLCompletion            = objc.RegisterName("fetchActivityForURL:completion:")
+	_cLSDataStoreSelCheckIsAssignedDocumentCompletion        = objc.RegisterName("checkIsAssignedDocument:completion:")
 )
 
 func CLSDataStoreFromID(id objc.ID) *CLSDataStore {
@@ -64,28 +64,36 @@ func (o *CLSDataStore) CompleteAllAssignedActivitiesMatching(contextPath *founda
 // @abstract      The data store provides read/write access to your app's ClassKit data. @discussion    Data written to the data store is automatically synced via iCloud across the user's devices.
 func CLSDataStoreShared() *CLSDataStore {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCLSDataStore), _cLSDataStoreSelShared)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLSDataStoreFromID(_ret)
 }
 
 // @abstract      Fetch the top level context for the current app. @discussion    The main context is automatically created. Add child contexts to this context to persist them in the data store.
 func (o *CLSDataStore) MainAppContext() *CLSContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSDataStoreSelMainAppContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLSContextFromID(_ret)
 }
 
 // @abstract      Returns the context that is currently active. If no context is active, this will return nil.
 func (o *CLSDataStore) ActiveContext() *CLSContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSDataStoreSelActiveContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLSContextFromID(_ret)
 }
 
 // @abstract      Returns the most recently started activity that is running.
 func (o *CLSDataStore) RunningActivity() *CLSActivity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSDataStoreSelRunningActivity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLSActivityFromID(_ret)
 }
 
@@ -160,4 +168,3 @@ func (o *CLSDataStore) CheckIsAssignedDocumentCompletion(documentURL *foundation
 	}
 	o.Ptr().Send(_cLSDataStoreSelCheckIsAssignedDocumentCompletion, documentURL.Ptr(), __block_completion)
 }
-

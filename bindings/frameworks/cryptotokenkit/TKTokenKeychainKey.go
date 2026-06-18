@@ -18,26 +18,26 @@ type TKTokenKeychainKey struct {
 }
 
 var (
-	_clsTKTokenKeychainKey = _objcClass("TKTokenKeychainKey")
+	_clsTKTokenKeychainKey                            = _objcClass("TKTokenKeychainKey")
 	_tKTokenKeychainKeySelInitWithCertificateObjectID = objc.RegisterName("initWithCertificate:objectID:")
-	_tKTokenKeychainKeySelKeyType = objc.RegisterName("keyType")
-	_tKTokenKeychainKeySelSetKeyType = objc.RegisterName("setKeyType:")
-	_tKTokenKeychainKeySelApplicationTag = objc.RegisterName("applicationTag")
-	_tKTokenKeychainKeySelSetApplicationTag = objc.RegisterName("setApplicationTag:")
-	_tKTokenKeychainKeySelKeySizeInBits = objc.RegisterName("keySizeInBits")
-	_tKTokenKeychainKeySelSetKeySizeInBits = objc.RegisterName("setKeySizeInBits:")
-	_tKTokenKeychainKeySelPublicKeyData = objc.RegisterName("publicKeyData")
-	_tKTokenKeychainKeySelSetPublicKeyData = objc.RegisterName("setPublicKeyData:")
-	_tKTokenKeychainKeySelPublicKeyHash = objc.RegisterName("publicKeyHash")
-	_tKTokenKeychainKeySelSetPublicKeyHash = objc.RegisterName("setPublicKeyHash:")
-	_tKTokenKeychainKeySelCanDecrypt = objc.RegisterName("canDecrypt")
-	_tKTokenKeychainKeySelSetCanDecrypt = objc.RegisterName("setCanDecrypt:")
-	_tKTokenKeychainKeySelCanSign = objc.RegisterName("canSign")
-	_tKTokenKeychainKeySelSetCanSign = objc.RegisterName("setCanSign:")
-	_tKTokenKeychainKeySelCanPerformKeyExchange = objc.RegisterName("canPerformKeyExchange")
-	_tKTokenKeychainKeySelSetCanPerformKeyExchange = objc.RegisterName("setCanPerformKeyExchange:")
-	_tKTokenKeychainKeySelIsSuitableForLogin = objc.RegisterName("isSuitableForLogin")
-	_tKTokenKeychainKeySelSetSuitableForLogin = objc.RegisterName("setSuitableForLogin:")
+	_tKTokenKeychainKeySelKeyType                     = objc.RegisterName("keyType")
+	_tKTokenKeychainKeySelSetKeyType                  = objc.RegisterName("setKeyType:")
+	_tKTokenKeychainKeySelApplicationTag              = objc.RegisterName("applicationTag")
+	_tKTokenKeychainKeySelSetApplicationTag           = objc.RegisterName("setApplicationTag:")
+	_tKTokenKeychainKeySelKeySizeInBits               = objc.RegisterName("keySizeInBits")
+	_tKTokenKeychainKeySelSetKeySizeInBits            = objc.RegisterName("setKeySizeInBits:")
+	_tKTokenKeychainKeySelPublicKeyData               = objc.RegisterName("publicKeyData")
+	_tKTokenKeychainKeySelSetPublicKeyData            = objc.RegisterName("setPublicKeyData:")
+	_tKTokenKeychainKeySelPublicKeyHash               = objc.RegisterName("publicKeyHash")
+	_tKTokenKeychainKeySelSetPublicKeyHash            = objc.RegisterName("setPublicKeyHash:")
+	_tKTokenKeychainKeySelCanDecrypt                  = objc.RegisterName("canDecrypt")
+	_tKTokenKeychainKeySelSetCanDecrypt               = objc.RegisterName("setCanDecrypt:")
+	_tKTokenKeychainKeySelCanSign                     = objc.RegisterName("canSign")
+	_tKTokenKeychainKeySelSetCanSign                  = objc.RegisterName("setCanSign:")
+	_tKTokenKeychainKeySelCanPerformKeyExchange       = objc.RegisterName("canPerformKeyExchange")
+	_tKTokenKeychainKeySelSetCanPerformKeyExchange    = objc.RegisterName("setCanPerformKeyExchange:")
+	_tKTokenKeychainKeySelIsSuitableForLogin          = objc.RegisterName("isSuitableForLogin")
+	_tKTokenKeychainKeySelSetSuitableForLogin         = objc.RegisterName("setSuitableForLogin:")
 )
 
 func TKTokenKeychainKeyFromID(id objc.ID) *TKTokenKeychainKey {
@@ -53,14 +53,18 @@ func TKTokenKeychainKeyFromID(id objc.ID) *TKTokenKeychainKey {
 // @discussion Initialize TKTokenKeychainKey with informations from SecCertificateRef associated with the key.  Use SecCertificateCreateWithData to obtain SecCertificateRef.  If NULL is passed instead of certificate, all properties of created instance must be initialized manually.
 func (o *TKTokenKeychainKey) InitWithCertificateObjectID(certificateRef unsafe.Pointer, objectID objc.ID) *TKTokenKeychainKey {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenKeychainKeySelInitWithCertificateObjectID, certificateRef, objectID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return TKTokenKeychainKeyFromID(_ret)
 }
 
 // @discussion Type of the key, currently kSecAttrKeyTypeRSA and kSecAttrKeyTypeECSECPrimeRandom is supported).  The property is an equivalent to kSecAttrKeyType in SecItem.h
 func (o *TKTokenKeychainKey) KeyType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenKeychainKeySelKeyType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -71,7 +75,9 @@ func (o *TKTokenKeychainKey) SetKeyType(keyType *foundation.NSString) {
 // @discussion Represents private tag data.  The property is an equivalent to kSecAttrApplicationTag in SecItem.h
 func (o *TKTokenKeychainKey) ApplicationTag() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenKeychainKeySelApplicationTag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -92,7 +98,9 @@ func (o *TKTokenKeychainKey) SetKeySizeInBits(keySizeInBits int) {
 // @discussion Contains raw public key data for this private key.
 func (o *TKTokenKeychainKey) PublicKeyData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenKeychainKeySelPublicKeyData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -103,7 +111,9 @@ func (o *TKTokenKeychainKey) SetPublicKeyData(publicKeyData *foundation.NSData) 
 // @discussion SHA1 hash of the raw public key.  The property is an equivalent to kSecAttrApplicationLabel in SecItem.h
 func (o *TKTokenKeychainKey) PublicKeyHash() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenKeychainKeySelPublicKeyHash)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -150,4 +160,3 @@ func (o *TKTokenKeychainKey) IsSuitableForLogin() bool {
 func (o *TKTokenKeychainKey) SetSuitableForLogin(suitableForLogin bool) {
 	o.Ptr().Send(_tKTokenKeychainKeySelSetSuitableForLogin, suitableForLogin)
 }
-

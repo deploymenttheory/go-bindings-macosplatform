@@ -80,4 +80,3 @@ type BurnProgressPanelable interface {
 }
 
 var _ BurnProgressPanelable = (*BurnProgressPanel)(nil)
-

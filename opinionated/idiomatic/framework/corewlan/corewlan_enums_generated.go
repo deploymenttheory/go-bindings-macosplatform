@@ -13,9 +13,9 @@ type CWChannelBand int64
 
 const (
 	KCWChannelBandUnknown CWChannelBand = 0
-	KCWChannelBand2GHz CWChannelBand = 1
-	KCWChannelBand5GHz CWChannelBand = 2
-	KCWChannelBand6GHz CWChannelBand = 3
+	KCWChannelBand2GHz    CWChannelBand = 1
+	KCWChannelBand5GHz    CWChannelBand = 2
+	KCWChannelBand6GHz    CWChannelBand = 3
 )
 
 func (e CWChannelBand) String() string {
@@ -37,10 +37,10 @@ type CWChannelWidth int64
 
 const (
 	KCWChannelWidthUnknown CWChannelWidth = 0
-	KCWChannelWidth20MHz CWChannelWidth = 1
-	KCWChannelWidth40MHz CWChannelWidth = 2
-	KCWChannelWidth80MHz CWChannelWidth = 3
-	KCWChannelWidth160MHz CWChannelWidth = 4
+	KCWChannelWidth20MHz   CWChannelWidth = 1
+	KCWChannelWidth40MHz   CWChannelWidth = 2
+	KCWChannelWidth80MHz   CWChannelWidth = 3
+	KCWChannelWidth160MHz  CWChannelWidth = 4
 )
 
 func (e CWChannelWidth) String() string {
@@ -64,11 +64,11 @@ func (e CWChannelWidth) String() string {
 type CWCipherKeyFlags uint64
 
 const (
-	KCWCipherKeyFlagsNone CWCipherKeyFlags = 0
-	KCWCipherKeyFlagsUnicast CWCipherKeyFlags = 2
+	KCWCipherKeyFlagsNone      CWCipherKeyFlags = 0
+	KCWCipherKeyFlagsUnicast   CWCipherKeyFlags = 2
 	KCWCipherKeyFlagsMulticast CWCipherKeyFlags = 4
-	KCWCipherKeyFlagsTx CWCipherKeyFlags = 8
-	KCWCipherKeyFlagsRx CWCipherKeyFlags = 16
+	KCWCipherKeyFlagsTx        CWCipherKeyFlags = 8
+	KCWCipherKeyFlagsRx        CWCipherKeyFlags = 16
 )
 
 func (e CWCipherKeyFlags) String() string {
@@ -94,17 +94,17 @@ func (e CWCipherKeyFlags) String() string {
 type CWEventType uint64
 
 const (
-	CWEventTypeNone CWEventType = 0
-	CWEventTypePowerDidChange CWEventType = 1
-	CWEventTypeSSIDDidChange CWEventType = 2
-	CWEventTypeBSSIDDidChange CWEventType = 3
+	CWEventTypeNone                 CWEventType = 0
+	CWEventTypePowerDidChange       CWEventType = 1
+	CWEventTypeSSIDDidChange        CWEventType = 2
+	CWEventTypeBSSIDDidChange       CWEventType = 3
 	CWEventTypeCountryCodeDidChange CWEventType = 4
-	CWEventTypeLinkDidChange CWEventType = 5
+	CWEventTypeLinkDidChange        CWEventType = 5
 	CWEventTypeLinkQualityDidChange CWEventType = 6
-	CWEventTypeModeDidChange CWEventType = 7
-	CWEventTypeScanCacheUpdated CWEventType = 8
-	CWEventTypeBtCoexStats CWEventType = 9
-	CWEventTypeUnknown CWEventType = 9223372036854775807
+	CWEventTypeModeDidChange        CWEventType = 7
+	CWEventTypeScanCacheUpdated     CWEventType = 8
+	CWEventTypeBtCoexStats          CWEventType = 9
+	CWEventTypeUnknown              CWEventType = 9223372036854775807
 )
 
 func (e CWEventType) String() string {
@@ -139,8 +139,8 @@ func (e CWEventType) String() string {
 type CWIBSSModeSecurity int64
 
 const (
-	KCWIBSSModeSecurityNone CWIBSSModeSecurity = 0
-	KCWIBSSModeSecurityWEP40 CWIBSSModeSecurity = 1
+	KCWIBSSModeSecurityNone   CWIBSSModeSecurity = 0
+	KCWIBSSModeSecurityWEP40  CWIBSSModeSecurity = 1
 	KCWIBSSModeSecurityWEP104 CWIBSSModeSecurity = 2
 )
 
@@ -160,10 +160,10 @@ func (e CWIBSSModeSecurity) String() string {
 type CWInterfaceMode int64
 
 const (
-	KCWInterfaceModeNone CWInterfaceMode = 0
+	KCWInterfaceModeNone    CWInterfaceMode = 0
 	KCWInterfaceModeStation CWInterfaceMode = 1
-	KCWInterfaceModeIBSS CWInterfaceMode = 2
-	KCWInterfaceModeHostAP CWInterfaceMode = 3
+	KCWInterfaceModeIBSS    CWInterfaceMode = 2
+	KCWInterfaceModeHostAP  CWInterfaceMode = 3
 )
 
 func (e CWInterfaceMode) String() string {
@@ -184,8 +184,8 @@ func (e CWInterfaceMode) String() string {
 type CWKeychainDomain int64
 
 const (
-	KCWKeychainDomainNone CWKeychainDomain = 0
-	KCWKeychainDomainUser CWKeychainDomain = 1
+	KCWKeychainDomainNone   CWKeychainDomain = 0
+	KCWKeychainDomainUser   CWKeychainDomain = 1
 	KCWKeychainDomainSystem CWKeychainDomain = 2
 )
 
@@ -206,10 +206,10 @@ type CWPHYMode int64
 
 const (
 	KCWPHYModeNone CWPHYMode = 0
-	KCWPHYMode11a CWPHYMode = 1
-	KCWPHYMode11b CWPHYMode = 2
-	KCWPHYMode11g CWPHYMode = 3
-	KCWPHYMode11n CWPHYMode = 4
+	KCWPHYMode11a  CWPHYMode = 1
+	KCWPHYMode11b  CWPHYMode = 2
+	KCWPHYMode11g  CWPHYMode = 3
+	KCWPHYMode11n  CWPHYMode = 4
 	KCWPHYMode11ac CWPHYMode = 5
 	KCWPHYMode11ax CWPHYMode = 6
 	KCWPHYMode11be CWPHYMode = 7
@@ -241,23 +241,23 @@ func (e CWPHYMode) String() string {
 type CWSecurity uint64
 
 const (
-	KCWSecurityNone CWSecurity = 0
-	KCWSecurityWEP CWSecurity = 1
-	KCWSecurityWPAPersonal CWSecurity = 2
-	KCWSecurityWPAPersonalMixed CWSecurity = 3
-	KCWSecurityWPA2Personal CWSecurity = 4
-	KCWSecurityPersonal CWSecurity = 5
-	KCWSecurityDynamicWEP CWSecurity = 6
-	KCWSecurityWPAEnterprise CWSecurity = 7
+	KCWSecurityNone               CWSecurity = 0
+	KCWSecurityWEP                CWSecurity = 1
+	KCWSecurityWPAPersonal        CWSecurity = 2
+	KCWSecurityWPAPersonalMixed   CWSecurity = 3
+	KCWSecurityWPA2Personal       CWSecurity = 4
+	KCWSecurityPersonal           CWSecurity = 5
+	KCWSecurityDynamicWEP         CWSecurity = 6
+	KCWSecurityWPAEnterprise      CWSecurity = 7
 	KCWSecurityWPAEnterpriseMixed CWSecurity = 8
-	KCWSecurityWPA2Enterprise CWSecurity = 9
-	KCWSecurityEnterprise CWSecurity = 10
-	KCWSecurityWPA3Personal CWSecurity = 11
-	KCWSecurityWPA3Enterprise CWSecurity = 12
-	KCWSecurityWPA3Transition CWSecurity = 13
-	KCWSecurityOWE CWSecurity = 14
-	KCWSecurityOWETransition CWSecurity = 15
-	KCWSecurityUnknown CWSecurity = 9223372036854775807
+	KCWSecurityWPA2Enterprise     CWSecurity = 9
+	KCWSecurityEnterprise         CWSecurity = 10
+	KCWSecurityWPA3Personal       CWSecurity = 11
+	KCWSecurityWPA3Enterprise     CWSecurity = 12
+	KCWSecurityWPA3Transition     CWSecurity = 13
+	KCWSecurityOWE                CWSecurity = 14
+	KCWSecurityOWETransition      CWSecurity = 15
+	KCWSecurityUnknown            CWSecurity = 9223372036854775807
 )
 
 func (e CWSecurity) String() string {
@@ -300,4 +300,3 @@ func (e CWSecurity) String() string {
 		return fmt.Sprintf("CWSecurity(%d)", int64(e))
 	}
 }
-

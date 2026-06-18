@@ -16,9 +16,9 @@ type PHASEConeDirectivityModelParameters struct {
 }
 
 var (
-	_clsPHASEConeDirectivityModelParameters = _objcClass("PHASEConeDirectivityModelParameters")
+	_clsPHASEConeDirectivityModelParameters                          = _objcClass("PHASEConeDirectivityModelParameters")
 	_pHASEConeDirectivityModelParametersSelInitWithSubbandParameters = objc.RegisterName("initWithSubbandParameters:")
-	_pHASEConeDirectivityModelParametersSelSubbandParameters = objc.RegisterName("subbandParameters")
+	_pHASEConeDirectivityModelParametersSelSubbandParameters         = objc.RegisterName("subbandParameters")
 )
 
 func PHASEConeDirectivityModelParametersFromID(id objc.ID) *PHASEConeDirectivityModelParameters {
@@ -33,13 +33,16 @@ func PHASEConeDirectivityModelParametersFromID(id objc.ID) *PHASEConeDirectivity
 
 func (o *PHASEConeDirectivityModelParameters) InitWithSubbandParameters(subbandParameters *foundation.NSArray[*PHASEConeDirectivityModelSubbandParameters]) *PHASEConeDirectivityModelParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEConeDirectivityModelParametersSelInitWithSubbandParameters, subbandParameters.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEConeDirectivityModelParametersFromID(_ret)
 }
 
 func (o *PHASEConeDirectivityModelParameters) SubbandParameters() *foundation.NSArray[*PHASEConeDirectivityModelSubbandParameters] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEConeDirectivityModelParametersSelSubbandParameters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PHASEConeDirectivityModelSubbandParameters](_ret)
 }
-

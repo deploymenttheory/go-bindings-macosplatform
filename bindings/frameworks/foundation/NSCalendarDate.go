@@ -16,34 +16,34 @@ type NSCalendarDate struct {
 }
 
 var (
-	_clsNSCalendarDate = _objcClass("NSCalendarDate")
-	_nSCalendarDateSelCalendarDate = objc.RegisterName("calendarDate")
-	_nSCalendarDateSelDateWithStringCalendarFormatLocale = objc.RegisterName("dateWithString:calendarFormat:locale:")
-	_nSCalendarDateSelDateWithStringCalendarFormat = objc.RegisterName("dateWithString:calendarFormat:")
-	_nSCalendarDateSelDateWithYearMonthDayHourMinuteSecondTimeZone = objc.RegisterName("dateWithYear:month:day:hour:minute:second:timeZone:")
+	_clsNSCalendarDate                                               = _objcClass("NSCalendarDate")
+	_nSCalendarDateSelCalendarDate                                   = objc.RegisterName("calendarDate")
+	_nSCalendarDateSelDateWithStringCalendarFormatLocale             = objc.RegisterName("dateWithString:calendarFormat:locale:")
+	_nSCalendarDateSelDateWithStringCalendarFormat                   = objc.RegisterName("dateWithString:calendarFormat:")
+	_nSCalendarDateSelDateWithYearMonthDayHourMinuteSecondTimeZone   = objc.RegisterName("dateWithYear:month:day:hour:minute:second:timeZone:")
 	_nSCalendarDateSelDateByAddingYearsMonthsDaysHoursMinutesSeconds = objc.RegisterName("dateByAddingYears:months:days:hours:minutes:seconds:")
-	_nSCalendarDateSelDayOfCommonEra = objc.RegisterName("dayOfCommonEra")
-	_nSCalendarDateSelDayOfMonth = objc.RegisterName("dayOfMonth")
-	_nSCalendarDateSelDayOfWeek = objc.RegisterName("dayOfWeek")
-	_nSCalendarDateSelDayOfYear = objc.RegisterName("dayOfYear")
-	_nSCalendarDateSelHourOfDay = objc.RegisterName("hourOfDay")
-	_nSCalendarDateSelMinuteOfHour = objc.RegisterName("minuteOfHour")
-	_nSCalendarDateSelMonthOfYear = objc.RegisterName("monthOfYear")
-	_nSCalendarDateSelSecondOfMinute = objc.RegisterName("secondOfMinute")
-	_nSCalendarDateSelYearOfCommonEra = objc.RegisterName("yearOfCommonEra")
-	_nSCalendarDateSelCalendarFormat = objc.RegisterName("calendarFormat")
-	_nSCalendarDateSelDescriptionWithCalendarFormatLocale = objc.RegisterName("descriptionWithCalendarFormat:locale:")
-	_nSCalendarDateSelDescriptionWithCalendarFormat = objc.RegisterName("descriptionWithCalendarFormat:")
-	_nSCalendarDateSelTimeZone = objc.RegisterName("timeZone")
-	_nSCalendarDateSelInitWithStringCalendarFormatLocale = objc.RegisterName("initWithString:calendarFormat:locale:")
-	_nSCalendarDateSelInitWithStringCalendarFormat = objc.RegisterName("initWithString:calendarFormat:")
-	_nSCalendarDateSelInitWithString = objc.RegisterName("initWithString:")
-	_nSCalendarDateSelInitWithYearMonthDayHourMinuteSecondTimeZone = objc.RegisterName("initWithYear:month:day:hour:minute:second:timeZone:")
-	_nSCalendarDateSelSetCalendarFormat = objc.RegisterName("setCalendarFormat:")
-	_nSCalendarDateSelSetTimeZone = objc.RegisterName("setTimeZone:")
-	_nSCalendarDateSelYearsMonthsDaysHoursMinutesSecondsSinceDate = objc.RegisterName("years:months:days:hours:minutes:seconds:sinceDate:")
-	_nSCalendarDateSelDistantFuture = objc.RegisterName("distantFuture")
-	_nSCalendarDateSelDistantPast = objc.RegisterName("distantPast")
+	_nSCalendarDateSelDayOfCommonEra                                 = objc.RegisterName("dayOfCommonEra")
+	_nSCalendarDateSelDayOfMonth                                     = objc.RegisterName("dayOfMonth")
+	_nSCalendarDateSelDayOfWeek                                      = objc.RegisterName("dayOfWeek")
+	_nSCalendarDateSelDayOfYear                                      = objc.RegisterName("dayOfYear")
+	_nSCalendarDateSelHourOfDay                                      = objc.RegisterName("hourOfDay")
+	_nSCalendarDateSelMinuteOfHour                                   = objc.RegisterName("minuteOfHour")
+	_nSCalendarDateSelMonthOfYear                                    = objc.RegisterName("monthOfYear")
+	_nSCalendarDateSelSecondOfMinute                                 = objc.RegisterName("secondOfMinute")
+	_nSCalendarDateSelYearOfCommonEra                                = objc.RegisterName("yearOfCommonEra")
+	_nSCalendarDateSelCalendarFormat                                 = objc.RegisterName("calendarFormat")
+	_nSCalendarDateSelDescriptionWithCalendarFormatLocale            = objc.RegisterName("descriptionWithCalendarFormat:locale:")
+	_nSCalendarDateSelDescriptionWithCalendarFormat                  = objc.RegisterName("descriptionWithCalendarFormat:")
+	_nSCalendarDateSelTimeZone                                       = objc.RegisterName("timeZone")
+	_nSCalendarDateSelInitWithStringCalendarFormatLocale             = objc.RegisterName("initWithString:calendarFormat:locale:")
+	_nSCalendarDateSelInitWithStringCalendarFormat                   = objc.RegisterName("initWithString:calendarFormat:")
+	_nSCalendarDateSelInitWithString                                 = objc.RegisterName("initWithString:")
+	_nSCalendarDateSelInitWithYearMonthDayHourMinuteSecondTimeZone   = objc.RegisterName("initWithYear:month:day:hour:minute:second:timeZone:")
+	_nSCalendarDateSelSetCalendarFormat                              = objc.RegisterName("setCalendarFormat:")
+	_nSCalendarDateSelSetTimeZone                                    = objc.RegisterName("setTimeZone:")
+	_nSCalendarDateSelYearsMonthsDaysHoursMinutesSecondsSinceDate    = objc.RegisterName("years:months:days:hours:minutes:seconds:sinceDate:")
+	_nSCalendarDateSelDistantFuture                                  = objc.RegisterName("distantFuture")
+	_nSCalendarDateSelDistantPast                                    = objc.RegisterName("distantPast")
 )
 
 func NSCalendarDateFromID(id objc.ID) *NSCalendarDate {
@@ -83,7 +83,9 @@ func NSCalendarDateDateWithYearMonthDayHourMinuteSecondTimeZone(year int, month 
 // Deprecated: Use NSCalendar instead
 func (o *NSCalendarDate) DateByAddingYearsMonthsDaysHoursMinutesSeconds(year int, month int, day int, hour int, minute int, second int) *NSCalendarDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarDateSelDateByAddingYearsMonthsDaysHoursMinutesSeconds, year, month, day, hour, minute, second)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCalendarDateFromID(_ret)
 }
 
@@ -144,28 +146,36 @@ func (o *NSCalendarDate) YearOfCommonEra() int {
 // Deprecated: since macOS 10.10.
 func (o *NSCalendarDate) CalendarFormat() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarDateSelCalendarFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // Deprecated: since macOS 10.10.
 func (o *NSCalendarDate) DescriptionWithCalendarFormatLocale(format *NSString, locale objc.ID) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarDateSelDescriptionWithCalendarFormatLocale, format.Ptr(), locale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // Deprecated: since macOS 10.10.
 func (o *NSCalendarDate) DescriptionWithCalendarFormat(format *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarDateSelDescriptionWithCalendarFormat, format.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // Deprecated: since macOS 10.10.
 func (o *NSCalendarDate) TimeZone() *NSTimeZone {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarDateSelTimeZone)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTimeZoneFromID(_ret)
 }
 
@@ -211,14 +221,17 @@ func (o *NSCalendarDate) YearsMonthsDaysHoursMinutesSecondsSinceDate(yp *int64, 
 // Deprecated: since macOS 10.10.
 func NSCalendarDateDistantFuture() *NSCalendarDate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCalendarDate), _nSCalendarDateSelDistantFuture)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCalendarDateFromID(_ret)
 }
 
 // Deprecated: since macOS 10.10.
 func NSCalendarDateDistantPast() *NSCalendarDate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCalendarDate), _nSCalendarDateSelDistantPast)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCalendarDateFromID(_ret)
 }
-

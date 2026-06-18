@@ -17,23 +17,23 @@ type GKVoiceChat struct {
 }
 
 var (
-	_clsGKVoiceChat = _objcClass("GKVoiceChat")
-	_gKVoiceChatSelStart = objc.RegisterName("start")
-	_gKVoiceChatSelStop = objc.RegisterName("stop")
-	_gKVoiceChatSelSetPlayerMuted = objc.RegisterName("setPlayer:muted:")
-	_gKVoiceChatSelIsVoIPAllowed = objc.RegisterName("isVoIPAllowed")
-	_gKVoiceChatSelPlayerVoiceChatStateDidChangeHandler = objc.RegisterName("playerVoiceChatStateDidChangeHandler")
+	_clsGKVoiceChat                                        = _objcClass("GKVoiceChat")
+	_gKVoiceChatSelStart                                   = objc.RegisterName("start")
+	_gKVoiceChatSelStop                                    = objc.RegisterName("stop")
+	_gKVoiceChatSelSetPlayerMuted                          = objc.RegisterName("setPlayer:muted:")
+	_gKVoiceChatSelIsVoIPAllowed                           = objc.RegisterName("isVoIPAllowed")
+	_gKVoiceChatSelPlayerVoiceChatStateDidChangeHandler    = objc.RegisterName("playerVoiceChatStateDidChangeHandler")
 	_gKVoiceChatSelSetPlayerVoiceChatStateDidChangeHandler = objc.RegisterName("setPlayerVoiceChatStateDidChangeHandler:")
-	_gKVoiceChatSelName = objc.RegisterName("name")
-	_gKVoiceChatSelIsActive = objc.RegisterName("isActive")
-	_gKVoiceChatSelSetActive = objc.RegisterName("setActive:")
-	_gKVoiceChatSelVolume = objc.RegisterName("volume")
-	_gKVoiceChatSelSetVolume = objc.RegisterName("setVolume:")
-	_gKVoiceChatSelPlayers = objc.RegisterName("players")
-	_gKVoiceChatSelPlayerStateUpdateHandler = objc.RegisterName("playerStateUpdateHandler")
-	_gKVoiceChatSelSetPlayerStateUpdateHandler = objc.RegisterName("setPlayerStateUpdateHandler:")
-	_gKVoiceChatSelSetMuteForPlayer = objc.RegisterName("setMute:forPlayer:")
-	_gKVoiceChatSelPlayerIDs = objc.RegisterName("playerIDs")
+	_gKVoiceChatSelName                                    = objc.RegisterName("name")
+	_gKVoiceChatSelIsActive                                = objc.RegisterName("isActive")
+	_gKVoiceChatSelSetActive                               = objc.RegisterName("setActive:")
+	_gKVoiceChatSelVolume                                  = objc.RegisterName("volume")
+	_gKVoiceChatSelSetVolume                               = objc.RegisterName("setVolume:")
+	_gKVoiceChatSelPlayers                                 = objc.RegisterName("players")
+	_gKVoiceChatSelPlayerStateUpdateHandler                = objc.RegisterName("playerStateUpdateHandler")
+	_gKVoiceChatSelSetPlayerStateUpdateHandler             = objc.RegisterName("setPlayerStateUpdateHandler:")
+	_gKVoiceChatSelSetMuteForPlayer                        = objc.RegisterName("setMute:forPlayer:")
+	_gKVoiceChatSelPlayerIDs                               = objc.RegisterName("playerIDs")
 )
 
 func GKVoiceChatFromID(id objc.ID) *GKVoiceChat {
@@ -91,7 +91,9 @@ func (o *GKVoiceChat) SetPlayerVoiceChatStateDidChangeHandler(playerVoiceChatSta
 // Deprecated: No longer supported
 func (o *GKVoiceChat) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKVoiceChatSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -118,7 +120,9 @@ func (o *GKVoiceChat) SetVolume(volume float32) {
 // Deprecated: No longer supported
 func (o *GKVoiceChat) Players() *foundation.NSArray[*GKPlayer] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKVoiceChatSelPlayers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GKPlayer](_ret)
 }
 
@@ -155,4 +159,3 @@ func (o *GKVoiceChat) PlayerIDs() *foundation.NSArray[*foundation.NSString] {
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _gKVoiceChatSelPlayerIDs)
 	return _ret
 }
-

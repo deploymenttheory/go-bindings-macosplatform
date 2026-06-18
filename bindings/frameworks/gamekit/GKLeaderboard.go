@@ -19,47 +19,47 @@ type GKLeaderboard struct {
 }
 
 var (
-	_clsGKLeaderboard = _objcClass("GKLeaderboard")
-	_gKLeaderboardSelLoadLeaderboardsWithIDsCompletionHandler = objc.RegisterName("loadLeaderboardsWithIDs:completionHandler:")
-	_gKLeaderboardSelLoadPreviousOccurrenceWithCompletionHandler = objc.RegisterName("loadPreviousOccurrenceWithCompletionHandler:")
-	_gKLeaderboardSelSubmitScoreContextPlayerLeaderboardIDsCompletionHandler = objc.RegisterName("submitScore:context:player:leaderboardIDs:completionHandler:")
-	_gKLeaderboardSelSubmitScoreContextPlayerCompletionHandler = objc.RegisterName("submitScore:context:player:completionHandler:")
+	_clsGKLeaderboard                                                         = _objcClass("GKLeaderboard")
+	_gKLeaderboardSelLoadLeaderboardsWithIDsCompletionHandler                 = objc.RegisterName("loadLeaderboardsWithIDs:completionHandler:")
+	_gKLeaderboardSelLoadPreviousOccurrenceWithCompletionHandler              = objc.RegisterName("loadPreviousOccurrenceWithCompletionHandler:")
+	_gKLeaderboardSelSubmitScoreContextPlayerLeaderboardIDsCompletionHandler  = objc.RegisterName("submitScore:context:player:leaderboardIDs:completionHandler:")
+	_gKLeaderboardSelSubmitScoreContextPlayerCompletionHandler                = objc.RegisterName("submitScore:context:player:completionHandler:")
 	_gKLeaderboardSelLoadEntriesForPlayerScopeTimeScopeRangeCompletionHandler = objc.RegisterName("loadEntriesForPlayerScope:timeScope:range:completionHandler:")
-	_gKLeaderboardSelLoadEntriesForPlayersTimeScopeCompletionHandler = objc.RegisterName("loadEntriesForPlayers:timeScope:completionHandler:")
-	_gKLeaderboardSelTitle = objc.RegisterName("title")
-	_gKLeaderboardSelGroupIdentifier = objc.RegisterName("groupIdentifier")
-	_gKLeaderboardSelBaseLeaderboardID = objc.RegisterName("baseLeaderboardID")
-	_gKLeaderboardSelType = objc.RegisterName("type")
-	_gKLeaderboardSelStartDate = objc.RegisterName("startDate")
-	_gKLeaderboardSelNextStartDate = objc.RegisterName("nextStartDate")
-	_gKLeaderboardSelDuration = objc.RegisterName("duration")
-	_gKLeaderboardSelLeaderboardDescription = objc.RegisterName("leaderboardDescription")
-	_gKLeaderboardSelReleaseState = objc.RegisterName("releaseState")
-	_gKLeaderboardSelActivityIdentifier = objc.RegisterName("activityIdentifier")
-	_gKLeaderboardSelActivityProperties = objc.RegisterName("activityProperties")
-	_gKLeaderboardSelIsHidden = objc.RegisterName("isHidden")
-	_gKLeaderboardSelInitWithPlayerIDs = objc.RegisterName("initWithPlayerIDs:")
-	_gKLeaderboardSelLoadCategoriesWithCompletionHandler = objc.RegisterName("loadCategoriesWithCompletionHandler:")
-	_gKLeaderboardSelSetDefaultLeaderboardWithCompletionHandler = objc.RegisterName("setDefaultLeaderboard:withCompletionHandler:")
-	_gKLeaderboardSelInit = objc.RegisterName("init")
-	_gKLeaderboardSelInitWithPlayers = objc.RegisterName("initWithPlayers:")
-	_gKLeaderboardSelLoadScoresWithCompletionHandler = objc.RegisterName("loadScoresWithCompletionHandler:")
-	_gKLeaderboardSelLoadLeaderboardsWithCompletionHandler = objc.RegisterName("loadLeaderboardsWithCompletionHandler:")
-	_gKLeaderboardSelCategory = objc.RegisterName("category")
-	_gKLeaderboardSelSetCategory = objc.RegisterName("setCategory:")
-	_gKLeaderboardSelTimeScope = objc.RegisterName("timeScope")
-	_gKLeaderboardSelSetTimeScope = objc.RegisterName("setTimeScope:")
-	_gKLeaderboardSelPlayerScope = objc.RegisterName("playerScope")
-	_gKLeaderboardSelSetPlayerScope = objc.RegisterName("setPlayerScope:")
-	_gKLeaderboardSelIdentifier = objc.RegisterName("identifier")
-	_gKLeaderboardSelSetIdentifier = objc.RegisterName("setIdentifier:")
-	_gKLeaderboardSelRange = objc.RegisterName("range")
-	_gKLeaderboardSelSetRange = objc.RegisterName("setRange:")
-	_gKLeaderboardSelScores = objc.RegisterName("scores")
-	_gKLeaderboardSelMaxRange = objc.RegisterName("maxRange")
-	_gKLeaderboardSelLocalPlayerScore = objc.RegisterName("localPlayerScore")
-	_gKLeaderboardSelIsLoading = objc.RegisterName("isLoading")
-	_gKLeaderboardSelLoadImageWithCompletionHandler = objc.RegisterName("loadImageWithCompletionHandler:")
+	_gKLeaderboardSelLoadEntriesForPlayersTimeScopeCompletionHandler          = objc.RegisterName("loadEntriesForPlayers:timeScope:completionHandler:")
+	_gKLeaderboardSelTitle                                                    = objc.RegisterName("title")
+	_gKLeaderboardSelGroupIdentifier                                          = objc.RegisterName("groupIdentifier")
+	_gKLeaderboardSelBaseLeaderboardID                                        = objc.RegisterName("baseLeaderboardID")
+	_gKLeaderboardSelType                                                     = objc.RegisterName("type")
+	_gKLeaderboardSelStartDate                                                = objc.RegisterName("startDate")
+	_gKLeaderboardSelNextStartDate                                            = objc.RegisterName("nextStartDate")
+	_gKLeaderboardSelDuration                                                 = objc.RegisterName("duration")
+	_gKLeaderboardSelLeaderboardDescription                                   = objc.RegisterName("leaderboardDescription")
+	_gKLeaderboardSelReleaseState                                             = objc.RegisterName("releaseState")
+	_gKLeaderboardSelActivityIdentifier                                       = objc.RegisterName("activityIdentifier")
+	_gKLeaderboardSelActivityProperties                                       = objc.RegisterName("activityProperties")
+	_gKLeaderboardSelIsHidden                                                 = objc.RegisterName("isHidden")
+	_gKLeaderboardSelInitWithPlayerIDs                                        = objc.RegisterName("initWithPlayerIDs:")
+	_gKLeaderboardSelLoadCategoriesWithCompletionHandler                      = objc.RegisterName("loadCategoriesWithCompletionHandler:")
+	_gKLeaderboardSelSetDefaultLeaderboardWithCompletionHandler               = objc.RegisterName("setDefaultLeaderboard:withCompletionHandler:")
+	_gKLeaderboardSelInit                                                     = objc.RegisterName("init")
+	_gKLeaderboardSelInitWithPlayers                                          = objc.RegisterName("initWithPlayers:")
+	_gKLeaderboardSelLoadScoresWithCompletionHandler                          = objc.RegisterName("loadScoresWithCompletionHandler:")
+	_gKLeaderboardSelLoadLeaderboardsWithCompletionHandler                    = objc.RegisterName("loadLeaderboardsWithCompletionHandler:")
+	_gKLeaderboardSelCategory                                                 = objc.RegisterName("category")
+	_gKLeaderboardSelSetCategory                                              = objc.RegisterName("setCategory:")
+	_gKLeaderboardSelTimeScope                                                = objc.RegisterName("timeScope")
+	_gKLeaderboardSelSetTimeScope                                             = objc.RegisterName("setTimeScope:")
+	_gKLeaderboardSelPlayerScope                                              = objc.RegisterName("playerScope")
+	_gKLeaderboardSelSetPlayerScope                                           = objc.RegisterName("setPlayerScope:")
+	_gKLeaderboardSelIdentifier                                               = objc.RegisterName("identifier")
+	_gKLeaderboardSelSetIdentifier                                            = objc.RegisterName("setIdentifier:")
+	_gKLeaderboardSelRange                                                    = objc.RegisterName("range")
+	_gKLeaderboardSelSetRange                                                 = objc.RegisterName("setRange:")
+	_gKLeaderboardSelScores                                                   = objc.RegisterName("scores")
+	_gKLeaderboardSelMaxRange                                                 = objc.RegisterName("maxRange")
+	_gKLeaderboardSelLocalPlayerScore                                         = objc.RegisterName("localPlayerScore")
+	_gKLeaderboardSelIsLoading                                                = objc.RegisterName("isLoading")
+	_gKLeaderboardSelLoadImageWithCompletionHandler                           = objc.RegisterName("loadImageWithCompletionHandler:")
 )
 
 func GKLeaderboardFromID(id objc.ID) *GKLeaderboard {
@@ -156,21 +156,27 @@ func (o *GKLeaderboard) LoadEntriesForPlayersTimeScopeCompletionHandler(players 
 // Localized title
 func (o *GKLeaderboard) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // set when leaderboards have been designated a game group; set when loadLeaderboardsWithCompletionHandler has been called for leaderboards that support game groups
 func (o *GKLeaderboard) GroupIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardSelGroupIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Leaderboard ID defined in App Store Connect that this instance is associated with
 func (o *GKLeaderboard) BaseLeaderboardID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardSelBaseLeaderboardID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -183,14 +189,18 @@ func (o *GKLeaderboard) Type() GKLeaderboardType {
 // Date and time this instance started accepting score submissions (only applicable to recurring leaderboards)
 func (o *GKLeaderboard) StartDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardSelStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // Date and time the next instance will start accepting score submissions (only applicable to recurring leaderboards)
 func (o *GKLeaderboard) NextStartDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardSelNextStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -203,7 +213,9 @@ func (o *GKLeaderboard) Duration() float64 {
 // The description of this Leaderboard as configured by the developer in App Store Connect.
 func (o *GKLeaderboard) LeaderboardDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardSelLeaderboardDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -216,7 +228,9 @@ func (o *GKLeaderboard) ReleaseState() GKReleaseState {
 // The identifier of the game activity associated with this leaderboard, as configured by the developer in App Store Connect.
 func (o *GKLeaderboard) ActivityIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardSelActivityIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -235,7 +249,9 @@ func (o *GKLeaderboard) IsHidden() bool {
 // Deprecated: since macOS 10.10.
 func (o *GKLeaderboard) InitWithPlayerIDs(playerIDs *foundation.NSArray[*foundation.NSString]) *GKLeaderboard {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardSelInitWithPlayerIDs, playerIDs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKLeaderboardFromID(_ret)
 }
 
@@ -260,7 +276,9 @@ func GKLeaderboardSetDefaultLeaderboardWithCompletionHandler(leaderboardIdentifi
 // Deprecated: since macOS 11.0.
 func (o *GKLeaderboard) Init() *GKLeaderboard {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKLeaderboardFromID(_ret)
 }
 
@@ -268,7 +286,9 @@ func (o *GKLeaderboard) Init() *GKLeaderboard {
 // Deprecated: since macOS 11.0.
 func (o *GKLeaderboard) InitWithPlayers(players *foundation.NSArray[*GKPlayer]) *GKLeaderboard {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardSelInitWithPlayers, players.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKLeaderboardFromID(_ret)
 }
 
@@ -307,7 +327,9 @@ func GKLeaderboardLoadLeaderboardsWithCompletionHandler(completionHandler func(*
 // Deprecated: since macOS 10.10.
 func (o *GKLeaderboard) Category() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardSelCategory)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -343,7 +365,9 @@ func (o *GKLeaderboard) SetPlayerScope(playerScope GKLeaderboardPlayerScope) {
 // Deprecated: since macOS 11.0.
 func (o *GKLeaderboard) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -368,7 +392,9 @@ func (o *GKLeaderboard) SetRange(range_ foundation.NSRange) {
 // Deprecated: since macOS 11.0.
 func (o *GKLeaderboard) Scores() *foundation.NSArray[*GKScore] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardSelScores)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GKScore](_ret)
 }
 
@@ -383,7 +409,9 @@ func (o *GKLeaderboard) MaxRange() uint {
 // Deprecated: since macOS 11.0.
 func (o *GKLeaderboard) LocalPlayerScore() *GKScore {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardSelLocalPlayerScore)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKScoreFromID(_ret)
 }
 
@@ -408,4 +436,3 @@ func (o *GKLeaderboard) LoadImageWithCompletionHandler(completionHandler func(*a
 	}
 	o.Ptr().Send(_gKLeaderboardSelLoadImageWithCompletionHandler, __block_completionHandler)
 }
-

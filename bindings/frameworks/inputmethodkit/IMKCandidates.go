@@ -20,41 +20,41 @@ type IMKCandidates struct {
 }
 
 var (
-	_clsIMKCandidates = _objcClass("IMKCandidates")
-	_iMKCandidatesSelInitWithServerPanelType = objc.RegisterName("initWithServer:panelType:")
-	_iMKCandidatesSelInitWithServerPanelTypeStyleType = objc.RegisterName("initWithServer:panelType:styleType:")
-	_iMKCandidatesSelPanelType = objc.RegisterName("panelType")
-	_iMKCandidatesSelSetPanelType = objc.RegisterName("setPanelType:")
-	_iMKCandidatesSelShow = objc.RegisterName("show:")
-	_iMKCandidatesSelHide = objc.RegisterName("hide")
-	_iMKCandidatesSelIsVisible = objc.RegisterName("isVisible")
-	_iMKCandidatesSelUpdateCandidates = objc.RegisterName("updateCandidates")
-	_iMKCandidatesSelShowAnnotation = objc.RegisterName("showAnnotation:")
-	_iMKCandidatesSelShowSublistSubListDelegate = objc.RegisterName("showSublist:subListDelegate:")
-	_iMKCandidatesSelCandidateFrame = objc.RegisterName("candidateFrame")
-	_iMKCandidatesSelSetSelectionKeys = objc.RegisterName("setSelectionKeys:")
-	_iMKCandidatesSelSelectionKeys = objc.RegisterName("selectionKeys")
-	_iMKCandidatesSelSetSelectionKeysKeylayout = objc.RegisterName("setSelectionKeysKeylayout:")
-	_iMKCandidatesSelSelectionKeysKeylayout = objc.RegisterName("selectionKeysKeylayout")
-	_iMKCandidatesSelSetAttributes = objc.RegisterName("setAttributes:")
-	_iMKCandidatesSelAttributes = objc.RegisterName("attributes")
-	_iMKCandidatesSelSetDismissesAutomatically = objc.RegisterName("setDismissesAutomatically:")
-	_iMKCandidatesSelDismissesAutomatically = objc.RegisterName("dismissesAutomatically")
-	_iMKCandidatesSelSelectedCandidate = objc.RegisterName("selectedCandidate")
-	_iMKCandidatesSelSetCandidateFrameTopLeft = objc.RegisterName("setCandidateFrameTopLeft:")
-	_iMKCandidatesSelShowChild = objc.RegisterName("showChild")
-	_iMKCandidatesSelHideChild = objc.RegisterName("hideChild")
-	_iMKCandidatesSelAttachChildToCandidateType = objc.RegisterName("attachChild:toCandidate:type:")
-	_iMKCandidatesSelDetachChild = objc.RegisterName("detachChild:")
-	_iMKCandidatesSelSetCandidateData = objc.RegisterName("setCandidateData:")
-	_iMKCandidatesSelSelectCandidateWithIdentifier = objc.RegisterName("selectCandidateWithIdentifier:")
-	_iMKCandidatesSelSelectCandidate = objc.RegisterName("selectCandidate:")
-	_iMKCandidatesSelShowCandidates = objc.RegisterName("showCandidates")
-	_iMKCandidatesSelCandidateStringIdentifier = objc.RegisterName("candidateStringIdentifier:")
-	_iMKCandidatesSelSelectedCandidateString = objc.RegisterName("selectedCandidateString")
-	_iMKCandidatesSelCandidateIdentifierAtLineNumber = objc.RegisterName("candidateIdentifierAtLineNumber:")
+	_clsIMKCandidates                                     = _objcClass("IMKCandidates")
+	_iMKCandidatesSelInitWithServerPanelType              = objc.RegisterName("initWithServer:panelType:")
+	_iMKCandidatesSelInitWithServerPanelTypeStyleType     = objc.RegisterName("initWithServer:panelType:styleType:")
+	_iMKCandidatesSelPanelType                            = objc.RegisterName("panelType")
+	_iMKCandidatesSelSetPanelType                         = objc.RegisterName("setPanelType:")
+	_iMKCandidatesSelShow                                 = objc.RegisterName("show:")
+	_iMKCandidatesSelHide                                 = objc.RegisterName("hide")
+	_iMKCandidatesSelIsVisible                            = objc.RegisterName("isVisible")
+	_iMKCandidatesSelUpdateCandidates                     = objc.RegisterName("updateCandidates")
+	_iMKCandidatesSelShowAnnotation                       = objc.RegisterName("showAnnotation:")
+	_iMKCandidatesSelShowSublistSubListDelegate           = objc.RegisterName("showSublist:subListDelegate:")
+	_iMKCandidatesSelCandidateFrame                       = objc.RegisterName("candidateFrame")
+	_iMKCandidatesSelSetSelectionKeys                     = objc.RegisterName("setSelectionKeys:")
+	_iMKCandidatesSelSelectionKeys                        = objc.RegisterName("selectionKeys")
+	_iMKCandidatesSelSetSelectionKeysKeylayout            = objc.RegisterName("setSelectionKeysKeylayout:")
+	_iMKCandidatesSelSelectionKeysKeylayout               = objc.RegisterName("selectionKeysKeylayout")
+	_iMKCandidatesSelSetAttributes                        = objc.RegisterName("setAttributes:")
+	_iMKCandidatesSelAttributes                           = objc.RegisterName("attributes")
+	_iMKCandidatesSelSetDismissesAutomatically            = objc.RegisterName("setDismissesAutomatically:")
+	_iMKCandidatesSelDismissesAutomatically               = objc.RegisterName("dismissesAutomatically")
+	_iMKCandidatesSelSelectedCandidate                    = objc.RegisterName("selectedCandidate")
+	_iMKCandidatesSelSetCandidateFrameTopLeft             = objc.RegisterName("setCandidateFrameTopLeft:")
+	_iMKCandidatesSelShowChild                            = objc.RegisterName("showChild")
+	_iMKCandidatesSelHideChild                            = objc.RegisterName("hideChild")
+	_iMKCandidatesSelAttachChildToCandidateType           = objc.RegisterName("attachChild:toCandidate:type:")
+	_iMKCandidatesSelDetachChild                          = objc.RegisterName("detachChild:")
+	_iMKCandidatesSelSetCandidateData                     = objc.RegisterName("setCandidateData:")
+	_iMKCandidatesSelSelectCandidateWithIdentifier        = objc.RegisterName("selectCandidateWithIdentifier:")
+	_iMKCandidatesSelSelectCandidate                      = objc.RegisterName("selectCandidate:")
+	_iMKCandidatesSelShowCandidates                       = objc.RegisterName("showCandidates")
+	_iMKCandidatesSelCandidateStringIdentifier            = objc.RegisterName("candidateStringIdentifier:")
+	_iMKCandidatesSelSelectedCandidateString              = objc.RegisterName("selectedCandidateString")
+	_iMKCandidatesSelCandidateIdentifierAtLineNumber      = objc.RegisterName("candidateIdentifierAtLineNumber:")
 	_iMKCandidatesSelLineNumberForCandidateWithIdentifier = objc.RegisterName("lineNumberForCandidateWithIdentifier:")
-	_iMKCandidatesSelClearSelection = objc.RegisterName("clearSelection")
+	_iMKCandidatesSelClearSelection                       = objc.RegisterName("clearSelection")
 )
 
 func IMKCandidatesFromID(id objc.ID) *IMKCandidates {
@@ -227,7 +227,9 @@ func (o *IMKCandidates) CandidateStringIdentifier(candidateString objc.ID) int {
 // @method @abstract	Returns the currently selected candidate string. @discussion Attempts to determine the string for the selected candidate.  If there is no selection the return value can be nil.  The attributed string is an autoreleased object.
 func (o *IMKCandidates) SelectedCandidateString() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iMKCandidatesSelSelectedCandidateString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
@@ -246,4 +248,3 @@ func (o *IMKCandidates) LineNumberForCandidateWithIdentifier(candidateIdentifier
 func (o *IMKCandidates) ClearSelection() {
 	o.Ptr().Send(_iMKCandidatesSelClearSelection)
 }
-

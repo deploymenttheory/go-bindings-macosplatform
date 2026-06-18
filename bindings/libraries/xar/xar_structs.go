@@ -11,21 +11,21 @@ import (
 
 // [xar.h:59]
 type Xar_header struct {
-	Magic uint32
-	Size uint16
-	Version uint16
-	Toc_length_compressed uint64
+	Magic                   uint32
+	Size                    uint16
+	Version                 uint16
+	Toc_length_compressed   uint64
 	Toc_length_uncompressed uint64
-	Cksum_alg uint32
+	Cksum_alg               uint32
 }
 
 // [xar.h:88]
 type Xar_stream struct {
-	Next_out string
+	Next_out  string
 	Avail_out uint32
-	Total_in uint64
+	Total_in  uint64
 	Total_out uint64
-	State unsafe.Pointer
+	State     unsafe.Pointer
 }
 
 type Xar_file_t struct {
@@ -130,4 +130,3 @@ func NewXar_t(ptr unsafe.Pointer) *Xar_t {
 
 // Xar_header_t is a typedef alias for Xar_header.
 type Xar_header_t = Xar_header
-

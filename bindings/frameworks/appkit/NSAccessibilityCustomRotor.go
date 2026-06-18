@@ -18,17 +18,17 @@ type NSAccessibilityCustomRotor struct {
 }
 
 var (
-	_clsNSAccessibilityCustomRotor = _objcClass("NSAccessibilityCustomRotor")
-	_nSAccessibilityCustomRotorSelInitWithLabelItemSearchDelegate = objc.RegisterName("initWithLabel:itemSearchDelegate:")
+	_clsNSAccessibilityCustomRotor                                    = _objcClass("NSAccessibilityCustomRotor")
+	_nSAccessibilityCustomRotorSelInitWithLabelItemSearchDelegate     = objc.RegisterName("initWithLabel:itemSearchDelegate:")
 	_nSAccessibilityCustomRotorSelInitWithRotorTypeItemSearchDelegate = objc.RegisterName("initWithRotorType:itemSearchDelegate:")
-	_nSAccessibilityCustomRotorSelType = objc.RegisterName("type")
-	_nSAccessibilityCustomRotorSelSetType = objc.RegisterName("setType:")
-	_nSAccessibilityCustomRotorSelLabel = objc.RegisterName("label")
-	_nSAccessibilityCustomRotorSelSetLabel = objc.RegisterName("setLabel:")
-	_nSAccessibilityCustomRotorSelItemSearchDelegate = objc.RegisterName("itemSearchDelegate")
-	_nSAccessibilityCustomRotorSelSetItemSearchDelegate = objc.RegisterName("setItemSearchDelegate:")
-	_nSAccessibilityCustomRotorSelItemLoadingDelegate = objc.RegisterName("itemLoadingDelegate")
-	_nSAccessibilityCustomRotorSelSetItemLoadingDelegate = objc.RegisterName("setItemLoadingDelegate:")
+	_nSAccessibilityCustomRotorSelType                                = objc.RegisterName("type")
+	_nSAccessibilityCustomRotorSelSetType                             = objc.RegisterName("setType:")
+	_nSAccessibilityCustomRotorSelLabel                               = objc.RegisterName("label")
+	_nSAccessibilityCustomRotorSelSetLabel                            = objc.RegisterName("setLabel:")
+	_nSAccessibilityCustomRotorSelItemSearchDelegate                  = objc.RegisterName("itemSearchDelegate")
+	_nSAccessibilityCustomRotorSelSetItemSearchDelegate               = objc.RegisterName("setItemSearchDelegate:")
+	_nSAccessibilityCustomRotorSelItemLoadingDelegate                 = objc.RegisterName("itemLoadingDelegate")
+	_nSAccessibilityCustomRotorSelSetItemLoadingDelegate              = objc.RegisterName("setItemLoadingDelegate:")
 )
 
 func NSAccessibilityCustomRotorFromID(id objc.ID) *NSAccessibilityCustomRotor {
@@ -44,14 +44,18 @@ func NSAccessibilityCustomRotorFromID(id objc.ID) *NSAccessibilityCustomRotor {
 // @brief Convenience initializer that uses NSAccessibilityCustomRotorTypeCustom as the default rotor type. Use this initializer for custom rotors that are not one of the common types.
 func (o *NSAccessibilityCustomRotor) InitWithLabelItemSearchDelegate(label *foundation.NSString, itemSearchDelegate NSAccessibilityCustomRotorItemSearchDelegate) *NSAccessibilityCustomRotor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAccessibilityCustomRotorSelInitWithLabelItemSearchDelegate, label.Ptr(), itemSearchDelegate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAccessibilityCustomRotorFromID(_ret)
 }
 
 // @brief Convenience initializer for custom rotors that use a common type such as links, headings, etc. A default label will be provided.
 func (o *NSAccessibilityCustomRotor) InitWithRotorTypeItemSearchDelegate(rotorType NSAccessibilityCustomRotorType, itemSearchDelegate NSAccessibilityCustomRotorItemSearchDelegate) *NSAccessibilityCustomRotor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAccessibilityCustomRotorSelInitWithRotorTypeItemSearchDelegate, rotorType, itemSearchDelegate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAccessibilityCustomRotorFromID(_ret)
 }
 
@@ -69,7 +73,9 @@ func (o *NSAccessibilityCustomRotor) SetType(type_ NSAccessibilityCustomRotorTyp
 // @brief The localized label assistive technologies will use to describe the custom rotor. @remark The label is only used when the rotor type is NSAccessibilityCustomRotorTypeCustom since a default is provided for all other types.
 func (o *NSAccessibilityCustomRotor) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAccessibilityCustomRotorSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -99,4 +105,3 @@ func (o *NSAccessibilityCustomRotor) ItemLoadingDelegate() NSAccessibilityElemen
 func (o *NSAccessibilityCustomRotor) SetItemLoadingDelegate(itemLoadingDelegate NSAccessibilityElementLoading) {
 	o.Ptr().Send(_nSAccessibilityCustomRotorSelSetItemLoadingDelegate, itemLoadingDelegate)
 }
-

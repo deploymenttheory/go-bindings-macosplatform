@@ -111,4 +111,3 @@ type ModelDescriptionable interface {
 }
 
 var _ ModelDescriptionable = (*ModelDescription)(nil)
-

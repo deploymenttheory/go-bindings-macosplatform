@@ -16,12 +16,12 @@ type MTRWaterHeaterModeClusterChangeToModeParams struct {
 }
 
 var (
-	_clsMTRWaterHeaterModeClusterChangeToModeParams = _objcClass("MTRWaterHeaterModeClusterChangeToModeParams")
-	_mTRWaterHeaterModeClusterChangeToModeParamsSelGetNewMode = objc.RegisterName("getNewMode")
-	_mTRWaterHeaterModeClusterChangeToModeParamsSelSetNewMode = objc.RegisterName("setNewMode:")
-	_mTRWaterHeaterModeClusterChangeToModeParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRWaterHeaterModeClusterChangeToModeParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRWaterHeaterModeClusterChangeToModeParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRWaterHeaterModeClusterChangeToModeParams                               = _objcClass("MTRWaterHeaterModeClusterChangeToModeParams")
+	_mTRWaterHeaterModeClusterChangeToModeParamsSelGetNewMode                     = objc.RegisterName("getNewMode")
+	_mTRWaterHeaterModeClusterChangeToModeParamsSelSetNewMode                     = objc.RegisterName("setNewMode:")
+	_mTRWaterHeaterModeClusterChangeToModeParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRWaterHeaterModeClusterChangeToModeParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRWaterHeaterModeClusterChangeToModeParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRWaterHeaterModeClusterChangeToModeParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -37,7 +37,9 @@ func MTRWaterHeaterModeClusterChangeToModeParamsFromID(id objc.ID) *MTRWaterHeat
 
 func (o *MTRWaterHeaterModeClusterChangeToModeParams) GetNewMode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRWaterHeaterModeClusterChangeToModeParamsSelGetNewMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -48,7 +50,9 @@ func (o *MTRWaterHeaterModeClusterChangeToModeParams) SetNewMode(newMode *founda
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRWaterHeaterModeClusterChangeToModeParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRWaterHeaterModeClusterChangeToModeParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,11 +63,12 @@ func (o *MTRWaterHeaterModeClusterChangeToModeParams) SetTimedInvokeTimeoutMs(ti
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRWaterHeaterModeClusterChangeToModeParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRWaterHeaterModeClusterChangeToModeParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRWaterHeaterModeClusterChangeToModeParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRWaterHeaterModeClusterChangeToModeParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

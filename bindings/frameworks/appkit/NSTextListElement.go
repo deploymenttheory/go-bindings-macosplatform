@@ -16,13 +16,13 @@ type NSTextListElement struct {
 }
 
 var (
-	_clsNSTextListElement = _objcClass("NSTextListElement")
+	_clsNSTextListElement                                                                   = _objcClass("NSTextListElement")
 	_nSTextListElementSelInitWithParentElementTextListContentsMarkerAttributesChildElements = objc.RegisterName("initWithParentElement:textList:contents:markerAttributes:childElements:")
-	_nSTextListElementSelTextListElementWithContentsMarkerAttributesTextListChildElements = objc.RegisterName("textListElementWithContents:markerAttributes:textList:childElements:")
-	_nSTextListElementSelTextListElementWithChildElementsTextListNestingLevel = objc.RegisterName("textListElementWithChildElements:textList:nestingLevel:")
-	_nSTextListElementSelTextList = objc.RegisterName("textList")
-	_nSTextListElementSelContents = objc.RegisterName("contents")
-	_nSTextListElementSelMarkerAttributes = objc.RegisterName("markerAttributes")
+	_nSTextListElementSelTextListElementWithContentsMarkerAttributesTextListChildElements   = objc.RegisterName("textListElementWithContents:markerAttributes:textList:childElements:")
+	_nSTextListElementSelTextListElementWithChildElementsTextListNestingLevel               = objc.RegisterName("textListElementWithChildElements:textList:nestingLevel:")
+	_nSTextListElementSelTextList                                                           = objc.RegisterName("textList")
+	_nSTextListElementSelContents                                                           = objc.RegisterName("contents")
+	_nSTextListElementSelMarkerAttributes                                                   = objc.RegisterName("markerAttributes")
 )
 
 func NSTextListElementFromID(id objc.ID) *NSTextListElement {
@@ -37,31 +37,41 @@ func NSTextListElementFromID(id objc.ID) *NSTextListElement {
 
 func (o *NSTextListElement) InitWithParentElementTextListContentsMarkerAttributesChildElements(parent *NSTextListElement, textList *NSTextList, contents *foundation.NSAttributedString, markerAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID], children *foundation.NSArray[*NSTextListElement]) *NSTextListElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextListElementSelInitWithParentElementTextListContentsMarkerAttributesChildElements, parent.Ptr(), textList.Ptr(), contents.Ptr(), markerAttributes, children.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextListElementFromID(_ret)
 }
 
 func NSTextListElementTextListElementWithContentsMarkerAttributesTextListChildElements(contents *foundation.NSAttributedString, markerAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID], textList *NSTextList, children *foundation.NSArray[*NSTextListElement]) *NSTextListElement {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextListElement), _nSTextListElementSelTextListElementWithContentsMarkerAttributesTextListChildElements, contents.Ptr(), markerAttributes, textList.Ptr(), children.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextListElementFromID(_ret)
 }
 
 func NSTextListElementTextListElementWithChildElementsTextListNestingLevel(children *foundation.NSArray[*NSTextListElement], textList *NSTextList, nestingLevel int) *NSTextListElement {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextListElement), _nSTextListElementSelTextListElementWithChildElementsTextListNestingLevel, children.Ptr(), textList.Ptr(), nestingLevel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextListElementFromID(_ret)
 }
 
 func (o *NSTextListElement) TextList() *NSTextList {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextListElementSelTextList)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextListFromID(_ret)
 }
 
 func (o *NSTextListElement) Contents() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextListElementSelContents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
@@ -69,4 +79,3 @@ func (o *NSTextListElement) MarkerAttributes() *foundation.NSDictionary[*foundat
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSTextListElementSelMarkerAttributes)
 	return _ret
 }
-

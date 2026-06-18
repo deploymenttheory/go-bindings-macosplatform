@@ -60,4 +60,3 @@ type CaptionRendererSceneable interface {
 }
 
 var _ CaptionRendererSceneable = (*CaptionRendererScene)(nil)
-

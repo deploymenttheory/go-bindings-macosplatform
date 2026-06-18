@@ -18,12 +18,12 @@ type SCSensitivityAnalyzer struct {
 }
 
 var (
-	_clsSCSensitivityAnalyzer = _objcClass("SCSensitivityAnalyzer")
-	_sCSensitivityAnalyzerSelInit = objc.RegisterName("init")
+	_clsSCSensitivityAnalyzer                                  = _objcClass("SCSensitivityAnalyzer")
+	_sCSensitivityAnalyzerSelInit                              = objc.RegisterName("init")
 	_sCSensitivityAnalyzerSelAnalyzeImageFileCompletionHandler = objc.RegisterName("analyzeImageFile:completionHandler:")
-	_sCSensitivityAnalyzerSelAnalyzeCGImageCompletionHandler = objc.RegisterName("analyzeCGImage:completionHandler:")
+	_sCSensitivityAnalyzerSelAnalyzeCGImageCompletionHandler   = objc.RegisterName("analyzeCGImage:completionHandler:")
 	_sCSensitivityAnalyzerSelAnalyzeVideoFileCompletionHandler = objc.RegisterName("analyzeVideoFile:completionHandler:")
-	_sCSensitivityAnalyzerSelAnalysisPolicy = objc.RegisterName("analysisPolicy")
+	_sCSensitivityAnalyzerSelAnalysisPolicy                    = objc.RegisterName("analysisPolicy")
 )
 
 func SCSensitivityAnalyzerFromID(id objc.ID) *SCSensitivityAnalyzer {
@@ -38,7 +38,9 @@ func SCSensitivityAnalyzerFromID(id objc.ID) *SCSensitivityAnalyzer {
 
 func (o *SCSensitivityAnalyzer) Init() *SCSensitivityAnalyzer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCSensitivityAnalyzerSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCSensitivityAnalyzerFromID(_ret)
 }
 
@@ -85,7 +87,9 @@ func (o *SCSensitivityAnalyzer) AnalyzeVideoFileCompletionHandler(fileURL *found
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCSensitivityAnalyzerSelAnalyzeVideoFileCompletionHandler, fileURL.Ptr(), __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSProgressFromID(_ret)
 }
 
@@ -94,4 +98,3 @@ func (o *SCSensitivityAnalyzer) AnalysisPolicy() SCSensitivityAnalysisPolicy {
 	_ret := objc.Send[SCSensitivityAnalysisPolicy](o.Ptr(), _sCSensitivityAnalyzerSelAnalysisPolicy)
 	return _ret
 }
-

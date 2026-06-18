@@ -16,8 +16,8 @@ type AVAudioSourceNode struct {
 }
 
 var (
-	_clsAVAudioSourceNode = _objcClass("AVAudioSourceNode")
-	_aVAudioSourceNodeSelInitWithRenderBlock = objc.RegisterName("initWithRenderBlock:")
+	_clsAVAudioSourceNode                          = _objcClass("AVAudioSourceNode")
+	_aVAudioSourceNodeSelInitWithRenderBlock       = objc.RegisterName("initWithRenderBlock:")
 	_aVAudioSourceNodeSelInitWithFormatRenderBlock = objc.RegisterName("initWithFormat:renderBlock:")
 )
 
@@ -41,7 +41,9 @@ func (o *AVAudioSourceNode) InitWithRenderBlock(block func(*bool, *coreaudiotype
 		defer __block_block.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioSourceNodeSelInitWithRenderBlock, __block_block)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioSourceNodeFromID(_ret)
 }
 
@@ -55,7 +57,8 @@ func (o *AVAudioSourceNode) InitWithFormatRenderBlock(format *AVAudioFormat, blo
 		defer __block_block.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioSourceNodeSelInitWithFormatRenderBlock, format.Ptr(), __block_block)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioSourceNodeFromID(_ret)
 }
-

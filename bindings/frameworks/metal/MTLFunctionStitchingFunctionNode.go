@@ -16,14 +16,14 @@ type MTLFunctionStitchingFunctionNode struct {
 }
 
 var (
-	_clsMTLFunctionStitchingFunctionNode = _objcClass("MTLFunctionStitchingFunctionNode")
+	_clsMTLFunctionStitchingFunctionNode                                         = _objcClass("MTLFunctionStitchingFunctionNode")
 	_mTLFunctionStitchingFunctionNodeSelInitWithNameArgumentsControlDependencies = objc.RegisterName("initWithName:arguments:controlDependencies:")
-	_mTLFunctionStitchingFunctionNodeSelName = objc.RegisterName("name")
-	_mTLFunctionStitchingFunctionNodeSelSetName = objc.RegisterName("setName:")
-	_mTLFunctionStitchingFunctionNodeSelArguments = objc.RegisterName("arguments")
-	_mTLFunctionStitchingFunctionNodeSelSetArguments = objc.RegisterName("setArguments:")
-	_mTLFunctionStitchingFunctionNodeSelControlDependencies = objc.RegisterName("controlDependencies")
-	_mTLFunctionStitchingFunctionNodeSelSetControlDependencies = objc.RegisterName("setControlDependencies:")
+	_mTLFunctionStitchingFunctionNodeSelName                                     = objc.RegisterName("name")
+	_mTLFunctionStitchingFunctionNodeSelSetName                                  = objc.RegisterName("setName:")
+	_mTLFunctionStitchingFunctionNodeSelArguments                                = objc.RegisterName("arguments")
+	_mTLFunctionStitchingFunctionNodeSelSetArguments                             = objc.RegisterName("setArguments:")
+	_mTLFunctionStitchingFunctionNodeSelControlDependencies                      = objc.RegisterName("controlDependencies")
+	_mTLFunctionStitchingFunctionNodeSelSetControlDependencies                   = objc.RegisterName("setControlDependencies:")
 )
 
 func MTLFunctionStitchingFunctionNodeFromID(id objc.ID) *MTLFunctionStitchingFunctionNode {
@@ -38,13 +38,17 @@ func MTLFunctionStitchingFunctionNodeFromID(id objc.ID) *MTLFunctionStitchingFun
 
 func (o *MTLFunctionStitchingFunctionNode) InitWithNameArgumentsControlDependencies(name *foundation.NSString, arguments *foundation.NSArray[MTLFunctionStitchingNode], controlDependencies *foundation.NSArray[*MTLFunctionStitchingFunctionNode]) *MTLFunctionStitchingFunctionNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLFunctionStitchingFunctionNodeSelInitWithNameArgumentsControlDependencies, name.Ptr(), arguments.Ptr(), controlDependencies.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLFunctionStitchingFunctionNodeFromID(_ret)
 }
 
 func (o *MTLFunctionStitchingFunctionNode) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLFunctionStitchingFunctionNodeSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -54,7 +58,9 @@ func (o *MTLFunctionStitchingFunctionNode) SetName(name *foundation.NSString) {
 
 func (o *MTLFunctionStitchingFunctionNode) Arguments() *foundation.NSArray[MTLFunctionStitchingNode] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLFunctionStitchingFunctionNodeSelArguments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTLFunctionStitchingNode](_ret)
 }
 
@@ -64,11 +70,12 @@ func (o *MTLFunctionStitchingFunctionNode) SetArguments(arguments *foundation.NS
 
 func (o *MTLFunctionStitchingFunctionNode) ControlDependencies() *foundation.NSArray[*MTLFunctionStitchingFunctionNode] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLFunctionStitchingFunctionNodeSelControlDependencies)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MTLFunctionStitchingFunctionNode](_ret)
 }
 
 func (o *MTLFunctionStitchingFunctionNode) SetControlDependencies(controlDependencies *foundation.NSArray[*MTLFunctionStitchingFunctionNode]) {
 	o.Ptr().Send(_mTLFunctionStitchingFunctionNodeSelSetControlDependencies, controlDependencies.Ptr())
 }
-

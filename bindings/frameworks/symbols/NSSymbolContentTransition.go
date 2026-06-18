@@ -26,4 +26,3 @@ func NSSymbolContentTransitionFromID(id objc.ID) *NSSymbolContentTransition {
 	purego.Track(o)
 	return o
 }
-

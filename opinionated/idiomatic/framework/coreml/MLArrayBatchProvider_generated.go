@@ -62,4 +62,3 @@ type ArrayBatchProviderable interface {
 }
 
 var _ ArrayBatchProviderable = (*ArrayBatchProvider)(nil)
-

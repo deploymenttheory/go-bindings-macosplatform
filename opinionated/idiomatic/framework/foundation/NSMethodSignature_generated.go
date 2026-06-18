@@ -87,4 +87,3 @@ type MethodSignatureable interface {
 }
 
 var _ MethodSignatureable = (*MethodSignature)(nil)
-

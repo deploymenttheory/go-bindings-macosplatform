@@ -16,8 +16,8 @@ type MTRDeviceControllerAbstractParameters struct {
 }
 
 var (
-	_clsMTRDeviceControllerAbstractParameters = _objcClass("MTRDeviceControllerAbstractParameters")
-	_mTRDeviceControllerAbstractParametersSelStartSuspended = objc.RegisterName("startSuspended")
+	_clsMTRDeviceControllerAbstractParameters                  = _objcClass("MTRDeviceControllerAbstractParameters")
+	_mTRDeviceControllerAbstractParametersSelStartSuspended    = objc.RegisterName("startSuspended")
 	_mTRDeviceControllerAbstractParametersSelSetStartSuspended = objc.RegisterName("setStartSuspended:")
 )
 
@@ -39,4 +39,3 @@ func (o *MTRDeviceControllerAbstractParameters) StartSuspended() bool {
 func (o *MTRDeviceControllerAbstractParameters) SetStartSuspended(startSuspended bool) {
 	o.Ptr().Send(_mTRDeviceControllerAbstractParametersSelSetStartSuspended, startSuspended)
 }
-

@@ -26,4 +26,3 @@ func CLBeaconIdentityConstraintFromID(id objc.ID) *CLBeaconIdentityConstraint {
 	purego.Track(o)
 	return o
 }
-

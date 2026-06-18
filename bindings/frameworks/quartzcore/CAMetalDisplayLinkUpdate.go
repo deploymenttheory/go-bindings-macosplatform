@@ -16,9 +16,9 @@ type CAMetalDisplayLinkUpdate struct {
 }
 
 var (
-	_clsCAMetalDisplayLinkUpdate = _objcClass("CAMetalDisplayLinkUpdate")
-	_cAMetalDisplayLinkUpdateSelDrawable = objc.RegisterName("drawable")
-	_cAMetalDisplayLinkUpdateSelTargetTimestamp = objc.RegisterName("targetTimestamp")
+	_clsCAMetalDisplayLinkUpdate                            = _objcClass("CAMetalDisplayLinkUpdate")
+	_cAMetalDisplayLinkUpdateSelDrawable                    = objc.RegisterName("drawable")
+	_cAMetalDisplayLinkUpdateSelTargetTimestamp             = objc.RegisterName("targetTimestamp")
 	_cAMetalDisplayLinkUpdateSelTargetPresentationTimestamp = objc.RegisterName("targetPresentationTimestamp")
 )
 
@@ -46,4 +46,3 @@ func (o *CAMetalDisplayLinkUpdate) TargetPresentationTimestamp() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _cAMetalDisplayLinkUpdateSelTargetPresentationTimestamp)
 	return _ret
 }
-

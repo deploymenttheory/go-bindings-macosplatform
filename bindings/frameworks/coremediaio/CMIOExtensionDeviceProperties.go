@@ -16,20 +16,20 @@ type CMIOExtensionDeviceProperties struct {
 }
 
 var (
-	_clsCMIOExtensionDeviceProperties = _objcClass("CMIOExtensionDeviceProperties")
+	_clsCMIOExtensionDeviceProperties                               = _objcClass("CMIOExtensionDeviceProperties")
 	_cMIOExtensionDevicePropertiesSelDevicePropertiesWithDictionary = objc.RegisterName("devicePropertiesWithDictionary:")
-	_cMIOExtensionDevicePropertiesSelInitWithDictionary = objc.RegisterName("initWithDictionary:")
-	_cMIOExtensionDevicePropertiesSelSetPropertyStateForProperty = objc.RegisterName("setPropertyState:forProperty:")
-	_cMIOExtensionDevicePropertiesSelModel = objc.RegisterName("model")
-	_cMIOExtensionDevicePropertiesSelSetModel = objc.RegisterName("setModel:")
-	_cMIOExtensionDevicePropertiesSelSuspended = objc.RegisterName("suspended")
-	_cMIOExtensionDevicePropertiesSelSetSuspended = objc.RegisterName("setSuspended:")
-	_cMIOExtensionDevicePropertiesSelTransportType = objc.RegisterName("transportType")
-	_cMIOExtensionDevicePropertiesSelSetTransportType = objc.RegisterName("setTransportType:")
-	_cMIOExtensionDevicePropertiesSelLinkedCoreAudioDeviceUID = objc.RegisterName("linkedCoreAudioDeviceUID")
-	_cMIOExtensionDevicePropertiesSelSetLinkedCoreAudioDeviceUID = objc.RegisterName("setLinkedCoreAudioDeviceUID:")
-	_cMIOExtensionDevicePropertiesSelPropertiesDictionary = objc.RegisterName("propertiesDictionary")
-	_cMIOExtensionDevicePropertiesSelSetPropertiesDictionary = objc.RegisterName("setPropertiesDictionary:")
+	_cMIOExtensionDevicePropertiesSelInitWithDictionary             = objc.RegisterName("initWithDictionary:")
+	_cMIOExtensionDevicePropertiesSelSetPropertyStateForProperty    = objc.RegisterName("setPropertyState:forProperty:")
+	_cMIOExtensionDevicePropertiesSelModel                          = objc.RegisterName("model")
+	_cMIOExtensionDevicePropertiesSelSetModel                       = objc.RegisterName("setModel:")
+	_cMIOExtensionDevicePropertiesSelSuspended                      = objc.RegisterName("suspended")
+	_cMIOExtensionDevicePropertiesSelSetSuspended                   = objc.RegisterName("setSuspended:")
+	_cMIOExtensionDevicePropertiesSelTransportType                  = objc.RegisterName("transportType")
+	_cMIOExtensionDevicePropertiesSelSetTransportType               = objc.RegisterName("setTransportType:")
+	_cMIOExtensionDevicePropertiesSelLinkedCoreAudioDeviceUID       = objc.RegisterName("linkedCoreAudioDeviceUID")
+	_cMIOExtensionDevicePropertiesSelSetLinkedCoreAudioDeviceUID    = objc.RegisterName("setLinkedCoreAudioDeviceUID:")
+	_cMIOExtensionDevicePropertiesSelPropertiesDictionary           = objc.RegisterName("propertiesDictionary")
+	_cMIOExtensionDevicePropertiesSelSetPropertiesDictionary        = objc.RegisterName("setPropertiesDictionary:")
 )
 
 func CMIOExtensionDevicePropertiesFromID(id objc.ID) *CMIOExtensionDeviceProperties {
@@ -45,14 +45,18 @@ func CMIOExtensionDevicePropertiesFromID(id objc.ID) *CMIOExtensionDevicePropert
 // @method devicePropertiesWithDictionary: @abstract Return a device properties instance. @param propertiesDictionary The dictionary of properties. @result A CMIOExtensionDeviceProperties instance.
 func CMIOExtensionDevicePropertiesDevicePropertiesWithDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CMIOExtensionDeviceProperties {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCMIOExtensionDeviceProperties), _cMIOExtensionDevicePropertiesSelDevicePropertiesWithDictionary, propertiesDictionary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CMIOExtensionDevicePropertiesFromID(_ret)
 }
 
 // @method initWithDictionary: @abstract Initialize a device properties instance. @param propertiesDictionary The dictionary of properties. @result A CMIOExtensionDeviceProperties instance.
 func (o *CMIOExtensionDeviceProperties) InitWithDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CMIOExtensionDeviceProperties {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionDevicePropertiesSelInitWithDictionary, propertiesDictionary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CMIOExtensionDevicePropertiesFromID(_ret)
 }
 
@@ -64,7 +68,9 @@ func (o *CMIOExtensionDeviceProperties) SetPropertyStateForProperty(propertyStat
 // @property model @abstract The device model. @discussion The property key is CMIOExtensionPropertyDeviceModel.
 func (o *CMIOExtensionDeviceProperties) Model() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionDevicePropertiesSelModel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -75,7 +81,9 @@ func (o *CMIOExtensionDeviceProperties) SetModel(model *foundation.NSString) {
 // @property suspended @abstract Indicates whether the device is suspended. @discussion The property key is CMIOExtensionPropertyDeviceIsSuspended.
 func (o *CMIOExtensionDeviceProperties) Suspended() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionDevicePropertiesSelSuspended)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -86,7 +94,9 @@ func (o *CMIOExtensionDeviceProperties) SetSuspended(suspended *foundation.NSNum
 // @property transportType @abstract The transport type of the receiver (e.g. USB, PCI, etc) whose value correspond to the audio transport type ( kIOAudioDeviceTransportType... ) defined in <IOKit/audio/IOAudioTypes.h>. @discussion The property key is CMIOExtensionPropertyDeviceTransportType.
 func (o *CMIOExtensionDeviceProperties) TransportType() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionDevicePropertiesSelTransportType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -97,7 +107,9 @@ func (o *CMIOExtensionDeviceProperties) SetTransportType(transportType *foundati
 // @property linkedCoreAudioDeviceUID @abstract The device linked CoreAudio device UID. @discussion The property key is CMIOExtensionPropertyDeviceLinkedCoreAudioDeviceUID.
 func (o *CMIOExtensionDeviceProperties) LinkedCoreAudioDeviceUID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionDevicePropertiesSelLinkedCoreAudioDeviceUID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -114,4 +126,3 @@ func (o *CMIOExtensionDeviceProperties) PropertiesDictionary() *foundation.NSDic
 func (o *CMIOExtensionDeviceProperties) SetPropertiesDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	o.Ptr().Send(_cMIOExtensionDevicePropertiesSelSetPropertiesDictionary, propertiesDictionary)
 }
-

@@ -59,4 +59,3 @@ type MetalDisplayLinkUpdateable interface {
 }
 
 var _ MetalDisplayLinkUpdateable = (*MetalDisplayLinkUpdate)(nil)
-

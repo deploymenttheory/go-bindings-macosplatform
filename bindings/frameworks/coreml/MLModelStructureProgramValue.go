@@ -26,4 +26,3 @@ func MLModelStructureProgramValueFromID(id objc.ID) *MLModelStructureProgramValu
 	purego.Track(o)
 	return o
 }
-

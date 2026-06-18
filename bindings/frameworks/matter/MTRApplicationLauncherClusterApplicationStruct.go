@@ -16,15 +16,15 @@ type MTRApplicationLauncherClusterApplicationStruct struct {
 }
 
 var (
-	_clsMTRApplicationLauncherClusterApplicationStruct = _objcClass("MTRApplicationLauncherClusterApplicationStruct")
-	_mTRApplicationLauncherClusterApplicationStructSelCatalogVendorID = objc.RegisterName("catalogVendorID")
+	_clsMTRApplicationLauncherClusterApplicationStruct                   = _objcClass("MTRApplicationLauncherClusterApplicationStruct")
+	_mTRApplicationLauncherClusterApplicationStructSelCatalogVendorID    = objc.RegisterName("catalogVendorID")
 	_mTRApplicationLauncherClusterApplicationStructSelSetCatalogVendorID = objc.RegisterName("setCatalogVendorID:")
-	_mTRApplicationLauncherClusterApplicationStructSelCatalogVendorId = objc.RegisterName("catalogVendorId")
+	_mTRApplicationLauncherClusterApplicationStructSelCatalogVendorId    = objc.RegisterName("catalogVendorId")
 	_mTRApplicationLauncherClusterApplicationStructSelSetCatalogVendorId = objc.RegisterName("setCatalogVendorId:")
-	_mTRApplicationLauncherClusterApplicationStructSelApplicationID = objc.RegisterName("applicationID")
-	_mTRApplicationLauncherClusterApplicationStructSelSetApplicationID = objc.RegisterName("setApplicationID:")
-	_mTRApplicationLauncherClusterApplicationStructSelApplicationId = objc.RegisterName("applicationId")
-	_mTRApplicationLauncherClusterApplicationStructSelSetApplicationId = objc.RegisterName("setApplicationId:")
+	_mTRApplicationLauncherClusterApplicationStructSelApplicationID      = objc.RegisterName("applicationID")
+	_mTRApplicationLauncherClusterApplicationStructSelSetApplicationID   = objc.RegisterName("setApplicationID:")
+	_mTRApplicationLauncherClusterApplicationStructSelApplicationId      = objc.RegisterName("applicationId")
+	_mTRApplicationLauncherClusterApplicationStructSelSetApplicationId   = objc.RegisterName("setApplicationId:")
 )
 
 func MTRApplicationLauncherClusterApplicationStructFromID(id objc.ID) *MTRApplicationLauncherClusterApplicationStruct {
@@ -39,7 +39,9 @@ func MTRApplicationLauncherClusterApplicationStructFromID(id objc.ID) *MTRApplic
 
 func (o *MTRApplicationLauncherClusterApplicationStruct) CatalogVendorID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRApplicationLauncherClusterApplicationStructSelCatalogVendorID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTRApplicationLauncherClusterApplicationStruct) SetCatalogVendorID(cata
 
 func (o *MTRApplicationLauncherClusterApplicationStruct) CatalogVendorId() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRApplicationLauncherClusterApplicationStructSelCatalogVendorId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,7 +63,9 @@ func (o *MTRApplicationLauncherClusterApplicationStruct) SetCatalogVendorId(cata
 
 func (o *MTRApplicationLauncherClusterApplicationStruct) ApplicationID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRApplicationLauncherClusterApplicationStructSelApplicationID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -69,11 +75,12 @@ func (o *MTRApplicationLauncherClusterApplicationStruct) SetApplicationID(applic
 
 func (o *MTRApplicationLauncherClusterApplicationStruct) ApplicationId() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRApplicationLauncherClusterApplicationStructSelApplicationId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTRApplicationLauncherClusterApplicationStruct) SetApplicationId(applicationId *foundation.NSString) {
 	o.Ptr().Send(_mTRApplicationLauncherClusterApplicationStructSelSetApplicationId, applicationId.Ptr())
 }
-

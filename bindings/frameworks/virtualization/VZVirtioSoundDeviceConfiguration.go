@@ -16,9 +16,9 @@ type VZVirtioSoundDeviceConfiguration struct {
 }
 
 var (
-	_clsVZVirtioSoundDeviceConfiguration = _objcClass("VZVirtioSoundDeviceConfiguration")
-	_vZVirtioSoundDeviceConfigurationSelInit = objc.RegisterName("init")
-	_vZVirtioSoundDeviceConfigurationSelStreams = objc.RegisterName("streams")
+	_clsVZVirtioSoundDeviceConfiguration           = _objcClass("VZVirtioSoundDeviceConfiguration")
+	_vZVirtioSoundDeviceConfigurationSelInit       = objc.RegisterName("init")
+	_vZVirtioSoundDeviceConfigurationSelStreams    = objc.RegisterName("streams")
 	_vZVirtioSoundDeviceConfigurationSelSetStreams = objc.RegisterName("setStreams:")
 )
 
@@ -34,17 +34,20 @@ func VZVirtioSoundDeviceConfigurationFromID(id objc.ID) *VZVirtioSoundDeviceConf
 
 func (o *VZVirtioSoundDeviceConfiguration) Init() *VZVirtioSoundDeviceConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioSoundDeviceConfigurationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZVirtioSoundDeviceConfigurationFromID(_ret)
 }
 
 func (o *VZVirtioSoundDeviceConfiguration) Streams() *foundation.NSArray[*VZVirtioSoundDeviceStreamConfiguration] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioSoundDeviceConfigurationSelStreams)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VZVirtioSoundDeviceStreamConfiguration](_ret)
 }
 
 func (o *VZVirtioSoundDeviceConfiguration) SetStreams(streams *foundation.NSArray[*VZVirtioSoundDeviceStreamConfiguration]) {
 	o.Ptr().Send(_vZVirtioSoundDeviceConfigurationSelSetStreams, streams.Ptr())
 }
-

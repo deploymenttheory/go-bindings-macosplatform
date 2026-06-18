@@ -19,13 +19,13 @@ type MPSNNCropAndResizeBilinear struct {
 }
 
 var (
-	_clsMPSNNCropAndResizeBilinear = _objcClass("MPSNNCropAndResizeBilinear")
+	_clsMPSNNCropAndResizeBilinear                                                            = _objcClass("MPSNNCropAndResizeBilinear")
 	_mPSNNCropAndResizeBilinearSelInitWithDeviceResizeWidthResizeHeightNumberOfRegionsRegions = objc.RegisterName("initWithDevice:resizeWidth:resizeHeight:numberOfRegions:regions:")
-	_mPSNNCropAndResizeBilinearSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSNNCropAndResizeBilinearSelResizeWidth = objc.RegisterName("resizeWidth")
-	_mPSNNCropAndResizeBilinearSelResizeHeight = objc.RegisterName("resizeHeight")
-	_mPSNNCropAndResizeBilinearSelNumberOfRegions = objc.RegisterName("numberOfRegions")
-	_mPSNNCropAndResizeBilinearSelRegions = objc.RegisterName("regions")
+	_mPSNNCropAndResizeBilinearSelInitWithCoderDevice                                         = objc.RegisterName("initWithCoder:device:")
+	_mPSNNCropAndResizeBilinearSelResizeWidth                                                 = objc.RegisterName("resizeWidth")
+	_mPSNNCropAndResizeBilinearSelResizeHeight                                                = objc.RegisterName("resizeHeight")
+	_mPSNNCropAndResizeBilinearSelNumberOfRegions                                             = objc.RegisterName("numberOfRegions")
+	_mPSNNCropAndResizeBilinearSelRegions                                                     = objc.RegisterName("regions")
 )
 
 func MPSNNCropAndResizeBilinearFromID(id objc.ID) *MPSNNCropAndResizeBilinear {
@@ -41,14 +41,18 @@ func MPSNNCropAndResizeBilinearFromID(id objc.ID) *MPSNNCropAndResizeBilinear {
 // @abstract  Initialize the crop and resize bilinear filter. @param     device                   The device the filter will run on. @param     resizeWidth              The destination resize width in pixels @param     resizeHeight             The destination resize height in pixels @param     numberOfRegions          Specifies the number of bounding box i.e. regions to resize @param     regions                  This is a pointer to "numberOfRegions" boxes which specify the locations in the source image to use for each box/region to perform the resize operation. @return    A valid MPSNNCropAndResizeBilinear object or nil, if failure.
 func (o *MPSNNCropAndResizeBilinear) InitWithDeviceResizeWidthResizeHeightNumberOfRegionsRegions(device metal.MTLDevice, resizeWidth uint, resizeHeight uint, numberOfRegions uint, regions *mpscore.MPSRegion) *MPSNNCropAndResizeBilinear {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNCropAndResizeBilinearSelInitWithDeviceResizeWidthResizeHeightNumberOfRegionsRegions, device, resizeWidth, resizeHeight, numberOfRegions, regions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNCropAndResizeBilinearFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSNNCropAndResizeBilinear @param      device      The MTLDevice on which to make the MPSNNCropAndResizeBilinear @return     A new MPSNNResizeBilinear object, or nil if failure.
 func (o *MPSNNCropAndResizeBilinear) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSNNCropAndResizeBilinear {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNCropAndResizeBilinearSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNCropAndResizeBilinearFromID(_ret)
 }
 
@@ -75,4 +79,3 @@ func (o *MPSNNCropAndResizeBilinear) Regions() *mpscore.MPSRegion {
 	_ret := objc.Send[*mpscore.MPSRegion](o.Ptr(), _mPSNNCropAndResizeBilinearSelRegions)
 	return _ret
 }
-

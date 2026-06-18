@@ -17,9 +17,9 @@ type AVVideoCompositionCoreAnimationTool struct {
 }
 
 var (
-	_clsAVVideoCompositionCoreAnimationTool = _objcClass("AVVideoCompositionCoreAnimationTool")
-	_aVVideoCompositionCoreAnimationToolSelVideoCompositionCoreAnimationToolWithAdditionalLayerAsTrackID = objc.RegisterName("videoCompositionCoreAnimationToolWithAdditionalLayer:asTrackID:")
-	_aVVideoCompositionCoreAnimationToolSelVideoCompositionCoreAnimationToolWithPostProcessingAsVideoLayerInLayer = objc.RegisterName("videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:inLayer:")
+	_clsAVVideoCompositionCoreAnimationTool                                                                        = _objcClass("AVVideoCompositionCoreAnimationTool")
+	_aVVideoCompositionCoreAnimationToolSelVideoCompositionCoreAnimationToolWithAdditionalLayerAsTrackID           = objc.RegisterName("videoCompositionCoreAnimationToolWithAdditionalLayer:asTrackID:")
+	_aVVideoCompositionCoreAnimationToolSelVideoCompositionCoreAnimationToolWithPostProcessingAsVideoLayerInLayer  = objc.RegisterName("videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:inLayer:")
 	_aVVideoCompositionCoreAnimationToolSelVideoCompositionCoreAnimationToolWithPostProcessingAsVideoLayersInLayer = objc.RegisterName("videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayers:inLayer:")
 )
 
@@ -36,21 +36,26 @@ func AVVideoCompositionCoreAnimationToolFromID(id objc.ID) *AVVideoCompositionCo
 // Add a Core Animation layer to the video composition Include a Core Animation layer as an individual track input in video composition. This layer should not come from, or be added to, another layer tree. trackID should not match any real trackID in the source. Use -[AVAsset unusedTrackID] to obtain a trackID that's guaranteed not to coincide with the trackID of any track of the asset. AVVideoCompositionInstructions should reference trackID where the rendered animation should be included. For best performance, no transform should be set in the AVVideoCompositionLayerInstruction for this trackID. Be aware that on iOS, CALayers backing a UIView usually have their content flipped (as defined by the -contentsAreFlipped method). It may be required to insert a CALayer with its geometryFlipped property set to YES in the layer hierarchy to get the same result when attaching a CALayer to a AVVideoCompositionCoreAnimationTool as when using it to back a UIView.
 func AVVideoCompositionCoreAnimationToolVideoCompositionCoreAnimationToolWithAdditionalLayerAsTrackID(layer *quartzcore.CALayer, trackID int32) *AVVideoCompositionCoreAnimationTool {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVVideoCompositionCoreAnimationTool), _aVVideoCompositionCoreAnimationToolSelVideoCompositionCoreAnimationToolWithAdditionalLayerAsTrackID, layer.Ptr(), trackID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVVideoCompositionCoreAnimationToolFromID(_ret)
 }
 
 // Compose the composited video frames with the Core Animation layer Place composited video frames in videoLayer and render animationLayer to produce the final frame. Normally videoLayer should be in animationLayer's sublayer tree. The animationLayer should not come from, or be added to, another layer tree. Be aware that on iOS, CALayers backing a UIView usually have their content flipped (as defined by the -contentsAreFlipped method). It may be required to insert a CALayer with its geometryFlipped property set to YES in the layer hierarchy to get the same result when attaching a CALayer to a AVVideoCompositionCoreAnimationTool as when using it to back a UIView.
 func AVVideoCompositionCoreAnimationToolVideoCompositionCoreAnimationToolWithPostProcessingAsVideoLayerInLayer(videoLayer *quartzcore.CALayer, animationLayer *quartzcore.CALayer) *AVVideoCompositionCoreAnimationTool {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVVideoCompositionCoreAnimationTool), _aVVideoCompositionCoreAnimationToolSelVideoCompositionCoreAnimationToolWithPostProcessingAsVideoLayerInLayer, videoLayer.Ptr(), animationLayer.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVVideoCompositionCoreAnimationToolFromID(_ret)
 }
 
 // Compose the composited video frames with the Core Animation layer Duplicate the composited video frames in each videoLayer and render animationLayer to produce the final frame. Normally videoLayers should be in animationLayer's sublayer tree. The animationLayer should not come from, or be added to, another layer tree. Be aware that on iOS, CALayers backing a UIView usually have their content flipped (as defined by the -contentsAreFlipped method). It may be required to insert a CALayer with its geometryFlipped property set to YES in the layer hierarchy to get the same result when attaching a CALayer to a AVVideoCompositionCoreAnimationTool as when using it to back a UIView.
 func AVVideoCompositionCoreAnimationToolVideoCompositionCoreAnimationToolWithPostProcessingAsVideoLayersInLayer(videoLayers *foundation.NSArray[*quartzcore.CALayer], animationLayer *quartzcore.CALayer) *AVVideoCompositionCoreAnimationTool {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVVideoCompositionCoreAnimationTool), _aVVideoCompositionCoreAnimationToolSelVideoCompositionCoreAnimationToolWithPostProcessingAsVideoLayersInLayer, videoLayers, animationLayer.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVVideoCompositionCoreAnimationToolFromID(_ret)
 }
-

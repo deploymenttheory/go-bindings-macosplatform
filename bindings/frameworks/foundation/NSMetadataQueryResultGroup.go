@@ -15,13 +15,13 @@ type NSMetadataQueryResultGroup struct {
 }
 
 var (
-	_clsNSMetadataQueryResultGroup = _objcClass("NSMetadataQueryResultGroup")
+	_clsNSMetadataQueryResultGroup              = _objcClass("NSMetadataQueryResultGroup")
 	_nSMetadataQueryResultGroupSelResultAtIndex = objc.RegisterName("resultAtIndex:")
-	_nSMetadataQueryResultGroupSelAttribute = objc.RegisterName("attribute")
-	_nSMetadataQueryResultGroupSelValue = objc.RegisterName("value")
-	_nSMetadataQueryResultGroupSelSubgroups = objc.RegisterName("subgroups")
-	_nSMetadataQueryResultGroupSelResultCount = objc.RegisterName("resultCount")
-	_nSMetadataQueryResultGroupSelResults = objc.RegisterName("results")
+	_nSMetadataQueryResultGroupSelAttribute     = objc.RegisterName("attribute")
+	_nSMetadataQueryResultGroupSelValue         = objc.RegisterName("value")
+	_nSMetadataQueryResultGroupSelSubgroups     = objc.RegisterName("subgroups")
+	_nSMetadataQueryResultGroupSelResultCount   = objc.RegisterName("resultCount")
+	_nSMetadataQueryResultGroupSelResults       = objc.RegisterName("results")
 )
 
 func NSMetadataQueryResultGroupFromID(id objc.ID) *NSMetadataQueryResultGroup {
@@ -41,7 +41,9 @@ func (o *NSMetadataQueryResultGroup) ResultAtIndex(idx uint) objc.ID {
 
 func (o *NSMetadataQueryResultGroup) Attribute() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQueryResultGroupSelAttribute)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -52,7 +54,9 @@ func (o *NSMetadataQueryResultGroup) Value() objc.ID {
 
 func (o *NSMetadataQueryResultGroup) Subgroups() *NSArray[*NSMetadataQueryResultGroup] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQueryResultGroupSelSubgroups)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSMetadataQueryResultGroup](_ret)
 }
 
@@ -65,4 +69,3 @@ func (o *NSMetadataQueryResultGroup) Results() *NSArray[objc.ID] {
 	_ret := objc.Send[*NSArray[objc.ID]](o.Ptr(), _nSMetadataQueryResultGroupSelResults)
 	return _ret
 }
-

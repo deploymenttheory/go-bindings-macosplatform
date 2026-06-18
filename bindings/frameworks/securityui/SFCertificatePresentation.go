@@ -19,17 +19,17 @@ type SFCertificatePresentation struct {
 }
 
 var (
-	_clsSFCertificatePresentation = _objcClass("SFCertificatePresentation")
-	_sFCertificatePresentationSelInitWithTrust = objc.RegisterName("initWithTrust:")
+	_clsSFCertificatePresentation                                   = _objcClass("SFCertificatePresentation")
+	_sFCertificatePresentationSelInitWithTrust                      = objc.RegisterName("initWithTrust:")
 	_sFCertificatePresentationSelPresentSheetInWindowDismissHandler = objc.RegisterName("presentSheetInWindow:dismissHandler:")
-	_sFCertificatePresentationSelDismissSheet = objc.RegisterName("dismissSheet")
-	_sFCertificatePresentationSelTrust = objc.RegisterName("trust")
-	_sFCertificatePresentationSelTitle = objc.RegisterName("title")
-	_sFCertificatePresentationSelSetTitle = objc.RegisterName("setTitle:")
-	_sFCertificatePresentationSelMessage = objc.RegisterName("message")
-	_sFCertificatePresentationSelSetMessage = objc.RegisterName("setMessage:")
-	_sFCertificatePresentationSelHelpURL = objc.RegisterName("helpURL")
-	_sFCertificatePresentationSelSetHelpURL = objc.RegisterName("setHelpURL:")
+	_sFCertificatePresentationSelDismissSheet                       = objc.RegisterName("dismissSheet")
+	_sFCertificatePresentationSelTrust                              = objc.RegisterName("trust")
+	_sFCertificatePresentationSelTitle                              = objc.RegisterName("title")
+	_sFCertificatePresentationSelSetTitle                           = objc.RegisterName("setTitle:")
+	_sFCertificatePresentationSelMessage                            = objc.RegisterName("message")
+	_sFCertificatePresentationSelSetMessage                         = objc.RegisterName("setMessage:")
+	_sFCertificatePresentationSelHelpURL                            = objc.RegisterName("helpURL")
+	_sFCertificatePresentationSelSetHelpURL                         = objc.RegisterName("setHelpURL:")
 )
 
 func SFCertificatePresentationFromID(id objc.ID) *SFCertificatePresentation {
@@ -45,7 +45,9 @@ func SFCertificatePresentationFromID(id objc.ID) *SFCertificatePresentation {
 // Initialize the certificate presentation with a certificate trust reference.
 func (o *SFCertificatePresentation) InitWithTrust(trust unsafe.Pointer) *SFCertificatePresentation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFCertificatePresentationSelInitWithTrust, trust)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SFCertificatePresentationFromID(_ret)
 }
 
@@ -74,7 +76,9 @@ func (o *SFCertificatePresentation) Trust() unsafe.Pointer {
 // Title string to be displayed. If no title is provided, a default title will be used.
 func (o *SFCertificatePresentation) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFCertificatePresentationSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -85,7 +89,9 @@ func (o *SFCertificatePresentation) SetTitle(title *foundation.NSString) {
 // Message string to be displayed. If no message is provided, a default message will be used.
 func (o *SFCertificatePresentation) Message() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFCertificatePresentationSelMessage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -96,11 +102,12 @@ func (o *SFCertificatePresentation) SetMessage(message *foundation.NSString) {
 // The URL that will be opened by clicking the "Learn More" button.
 func (o *SFCertificatePresentation) HelpURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFCertificatePresentationSelHelpURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *SFCertificatePresentation) SetHelpURL(helpURL *foundation.NSURL) {
 	o.Ptr().Send(_sFCertificatePresentationSelSetHelpURL, helpURL.Ptr())
 }
-

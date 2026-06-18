@@ -60,9 +60,13 @@ func (x *DetectHorizonRequest) WithRevision(revision uint) *DetectHorizonRequest
 	return x
 }
 
-func (x *DetectHorizonRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
+func (x *DetectHorizonRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNImageBasedRequest
+}
 
-func (x *DetectHorizonRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+func (x *DetectHorizonRequest) asRequest() *raw.VNRequest {
+	return &x.inner.VNImageBasedRequest.VNRequest
+}
 
 // DetectHorizonRequestable is the interface implemented by [DetectHorizonRequest], for mocking and DI.
 type DetectHorizonRequestable interface {
@@ -74,4 +78,3 @@ type DetectHorizonRequestable interface {
 }
 
 var _ DetectHorizonRequestable = (*DetectHorizonRequest)(nil)
-

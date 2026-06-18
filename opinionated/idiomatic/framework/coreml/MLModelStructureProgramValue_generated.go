@@ -41,4 +41,3 @@ type ModelStructureProgramValueable interface {
 }
 
 var _ ModelStructureProgramValueable = (*ModelStructureProgramValue)(nil)
-

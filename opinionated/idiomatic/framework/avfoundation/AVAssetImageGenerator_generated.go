@@ -232,4 +232,3 @@ type AssetImageGeneratorable interface {
 }
 
 var _ AssetImageGeneratorable = (*AssetImageGenerator)(nil)
-

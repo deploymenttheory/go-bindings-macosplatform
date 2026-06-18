@@ -16,12 +16,12 @@ type MIDICIDiscoveredNode struct {
 }
 
 var (
-	_clsMIDICIDiscoveredNode = _objcClass("MIDICIDiscoveredNode")
-	_mIDICIDiscoveredNodeSelDestination = objc.RegisterName("destination")
-	_mIDICIDiscoveredNodeSelDeviceInfo = objc.RegisterName("deviceInfo")
-	_mIDICIDiscoveredNodeSelSupportsProfiles = objc.RegisterName("supportsProfiles")
+	_clsMIDICIDiscoveredNode                   = _objcClass("MIDICIDiscoveredNode")
+	_mIDICIDiscoveredNodeSelDestination        = objc.RegisterName("destination")
+	_mIDICIDiscoveredNodeSelDeviceInfo         = objc.RegisterName("deviceInfo")
+	_mIDICIDiscoveredNodeSelSupportsProfiles   = objc.RegisterName("supportsProfiles")
 	_mIDICIDiscoveredNodeSelSupportsProperties = objc.RegisterName("supportsProperties")
-	_mIDICIDiscoveredNodeSelMaximumSysExSize = objc.RegisterName("maximumSysExSize")
+	_mIDICIDiscoveredNodeSelMaximumSysExSize   = objc.RegisterName("maximumSysExSize")
 )
 
 func MIDICIDiscoveredNodeFromID(id objc.ID) *MIDICIDiscoveredNode {
@@ -41,7 +41,9 @@ func (o *MIDICIDiscoveredNode) Destination() uint {
 
 func (o *MIDICIDiscoveredNode) DeviceInfo() *MIDICIDeviceInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICIDiscoveredNodeSelDeviceInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MIDICIDeviceInfoFromID(_ret)
 }
 
@@ -57,7 +59,8 @@ func (o *MIDICIDiscoveredNode) SupportsProperties() bool {
 
 func (o *MIDICIDiscoveredNode) MaximumSysExSize() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICIDiscoveredNodeSelMaximumSysExSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
-

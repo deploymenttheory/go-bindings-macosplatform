@@ -85,4 +85,3 @@ type AssetSpatialAudioInfoable interface {
 }
 
 var _ AssetSpatialAudioInfoable = (*AssetSpatialAudioInfo)(nil)
-

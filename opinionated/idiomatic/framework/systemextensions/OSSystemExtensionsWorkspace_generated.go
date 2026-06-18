@@ -53,4 +53,3 @@ type SystemExtensionsWorkspaceable interface {
 }
 
 var _ SystemExtensionsWorkspaceable = (*SystemExtensionsWorkspace)(nil)
-

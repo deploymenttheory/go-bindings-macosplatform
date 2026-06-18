@@ -31,9 +31,9 @@ func (e Tcl_QueuePosition) String() string {
 type Tcl_ValueType int64
 
 const (
-	TCL_INT Tcl_ValueType = 0
-	TCL_DOUBLE Tcl_ValueType = 1
-	TCL_EITHER Tcl_ValueType = 2
+	TCL_INT      Tcl_ValueType = 0
+	TCL_DOUBLE   Tcl_ValueType = 1
+	TCL_EITHER   Tcl_ValueType = 2
 	TCL_WIDE_INT Tcl_ValueType = 3
 )
 
@@ -55,14 +55,14 @@ func (e Tcl_ValueType) String() string {
 type Tk_Anchor int64
 
 const (
-	TK_ANCHOR_N Tk_Anchor = 0
-	TK_ANCHOR_NE Tk_Anchor = 1
-	TK_ANCHOR_E Tk_Anchor = 2
-	TK_ANCHOR_SE Tk_Anchor = 3
-	TK_ANCHOR_S Tk_Anchor = 4
-	TK_ANCHOR_SW Tk_Anchor = 5
-	TK_ANCHOR_W Tk_Anchor = 6
-	TK_ANCHOR_NW Tk_Anchor = 7
+	TK_ANCHOR_N      Tk_Anchor = 0
+	TK_ANCHOR_NE     Tk_Anchor = 1
+	TK_ANCHOR_E      Tk_Anchor = 2
+	TK_ANCHOR_SE     Tk_Anchor = 3
+	TK_ANCHOR_S      Tk_Anchor = 4
+	TK_ANCHOR_SW     Tk_Anchor = 5
+	TK_ANCHOR_W      Tk_Anchor = 6
+	TK_ANCHOR_NW     Tk_Anchor = 7
 	TK_ANCHOR_CENTER Tk_Anchor = 8
 )
 
@@ -94,28 +94,28 @@ func (e Tk_Anchor) String() string {
 type Tk_ConfigTypes int64
 
 const (
-	TK_CONFIG_BOOLEAN Tk_ConfigTypes = 0
-	TK_CONFIG_INT Tk_ConfigTypes = 1
-	TK_CONFIG_DOUBLE Tk_ConfigTypes = 2
-	TK_CONFIG_STRING Tk_ConfigTypes = 3
-	TK_CONFIG_UID Tk_ConfigTypes = 4
-	TK_CONFIG_COLOR Tk_ConfigTypes = 5
-	TK_CONFIG_FONT Tk_ConfigTypes = 6
-	TK_CONFIG_BITMAP Tk_ConfigTypes = 7
-	TK_CONFIG_BORDER Tk_ConfigTypes = 8
-	TK_CONFIG_RELIEF Tk_ConfigTypes = 9
-	TK_CONFIG_CURSOR Tk_ConfigTypes = 10
+	TK_CONFIG_BOOLEAN       Tk_ConfigTypes = 0
+	TK_CONFIG_INT           Tk_ConfigTypes = 1
+	TK_CONFIG_DOUBLE        Tk_ConfigTypes = 2
+	TK_CONFIG_STRING        Tk_ConfigTypes = 3
+	TK_CONFIG_UID           Tk_ConfigTypes = 4
+	TK_CONFIG_COLOR         Tk_ConfigTypes = 5
+	TK_CONFIG_FONT          Tk_ConfigTypes = 6
+	TK_CONFIG_BITMAP        Tk_ConfigTypes = 7
+	TK_CONFIG_BORDER        Tk_ConfigTypes = 8
+	TK_CONFIG_RELIEF        Tk_ConfigTypes = 9
+	TK_CONFIG_CURSOR        Tk_ConfigTypes = 10
 	TK_CONFIG_ACTIVE_CURSOR Tk_ConfigTypes = 11
-	TK_CONFIG_JUSTIFY Tk_ConfigTypes = 12
-	TK_CONFIG_ANCHOR Tk_ConfigTypes = 13
-	TK_CONFIG_SYNONYM Tk_ConfigTypes = 14
-	TK_CONFIG_CAP_STYLE Tk_ConfigTypes = 15
-	TK_CONFIG_JOIN_STYLE Tk_ConfigTypes = 16
-	TK_CONFIG_PIXELS Tk_ConfigTypes = 17
-	TK_CONFIG_MM Tk_ConfigTypes = 18
-	TK_CONFIG_WINDOW Tk_ConfigTypes = 19
-	TK_CONFIG_CUSTOM Tk_ConfigTypes = 20
-	TK_CONFIG_END Tk_ConfigTypes = 21
+	TK_CONFIG_JUSTIFY       Tk_ConfigTypes = 12
+	TK_CONFIG_ANCHOR        Tk_ConfigTypes = 13
+	TK_CONFIG_SYNONYM       Tk_ConfigTypes = 14
+	TK_CONFIG_CAP_STYLE     Tk_ConfigTypes = 15
+	TK_CONFIG_JOIN_STYLE    Tk_ConfigTypes = 16
+	TK_CONFIG_PIXELS        Tk_ConfigTypes = 17
+	TK_CONFIG_MM            Tk_ConfigTypes = 18
+	TK_CONFIG_WINDOW        Tk_ConfigTypes = 19
+	TK_CONFIG_CUSTOM        Tk_ConfigTypes = 20
+	TK_CONFIG_END           Tk_ConfigTypes = 21
 )
 
 func (e Tk_ConfigTypes) String() string {
@@ -172,8 +172,8 @@ func (e Tk_ConfigTypes) String() string {
 type Tk_Justify int64
 
 const (
-	TK_JUSTIFY_LEFT Tk_Justify = 0
-	TK_JUSTIFY_RIGHT Tk_Justify = 1
+	TK_JUSTIFY_LEFT   Tk_Justify = 0
+	TK_JUSTIFY_RIGHT  Tk_Justify = 1
 	TK_JUSTIFY_CENTER Tk_Justify = 2
 )
 
@@ -193,25 +193,25 @@ func (e Tk_Justify) String() string {
 type Tk_OptionType int64
 
 const (
-	TK_OPTION_BOOLEAN Tk_OptionType = 0
-	TK_OPTION_INT Tk_OptionType = 1
-	TK_OPTION_DOUBLE Tk_OptionType = 2
-	TK_OPTION_STRING Tk_OptionType = 3
+	TK_OPTION_BOOLEAN      Tk_OptionType = 0
+	TK_OPTION_INT          Tk_OptionType = 1
+	TK_OPTION_DOUBLE       Tk_OptionType = 2
+	TK_OPTION_STRING       Tk_OptionType = 3
 	TK_OPTION_STRING_TABLE Tk_OptionType = 4
-	TK_OPTION_COLOR Tk_OptionType = 5
-	TK_OPTION_FONT Tk_OptionType = 6
-	TK_OPTION_BITMAP Tk_OptionType = 7
-	TK_OPTION_BORDER Tk_OptionType = 8
-	TK_OPTION_RELIEF Tk_OptionType = 9
-	TK_OPTION_CURSOR Tk_OptionType = 10
-	TK_OPTION_JUSTIFY Tk_OptionType = 11
-	TK_OPTION_ANCHOR Tk_OptionType = 12
-	TK_OPTION_SYNONYM Tk_OptionType = 13
-	TK_OPTION_PIXELS Tk_OptionType = 14
-	TK_OPTION_WINDOW Tk_OptionType = 15
-	TK_OPTION_END Tk_OptionType = 16
-	TK_OPTION_CUSTOM Tk_OptionType = 17
-	TK_OPTION_STYLE Tk_OptionType = 18
+	TK_OPTION_COLOR        Tk_OptionType = 5
+	TK_OPTION_FONT         Tk_OptionType = 6
+	TK_OPTION_BITMAP       Tk_OptionType = 7
+	TK_OPTION_BORDER       Tk_OptionType = 8
+	TK_OPTION_RELIEF       Tk_OptionType = 9
+	TK_OPTION_CURSOR       Tk_OptionType = 10
+	TK_OPTION_JUSTIFY      Tk_OptionType = 11
+	TK_OPTION_ANCHOR       Tk_OptionType = 12
+	TK_OPTION_SYNONYM      Tk_OptionType = 13
+	TK_OPTION_PIXELS       Tk_OptionType = 14
+	TK_OPTION_WINDOW       Tk_OptionType = 15
+	TK_OPTION_END          Tk_OptionType = 16
+	TK_OPTION_CUSTOM       Tk_OptionType = 17
+	TK_OPTION_STYLE        Tk_OptionType = 18
 )
 
 func (e Tk_OptionType) String() string {
@@ -262,7 +262,7 @@ func (e Tk_OptionType) String() string {
 type Tk_RestrictAction int64
 
 const (
-	TK_DEFER_EVENT Tk_RestrictAction = 0
+	TK_DEFER_EVENT   Tk_RestrictAction = 0
 	TK_PROCESS_EVENT Tk_RestrictAction = 1
 	TK_DISCARD_EVENT Tk_RestrictAction = 2
 )
@@ -283,11 +283,11 @@ func (e Tk_RestrictAction) String() string {
 type Tk_State int64
 
 const (
-	TK_STATE_NULL Tk_State = -1
-	TK_STATE_ACTIVE Tk_State = 0
+	TK_STATE_NULL     Tk_State = -1
+	TK_STATE_ACTIVE   Tk_State = 0
 	TK_STATE_DISABLED Tk_State = 1
-	TK_STATE_NORMAL Tk_State = 2
-	TK_STATE_HIDDEN Tk_State = 3
+	TK_STATE_NORMAL   Tk_State = 2
+	TK_STATE_HIDDEN   Tk_State = 3
 )
 
 func (e Tk_State) String() string {
@@ -310,18 +310,18 @@ func (e Tk_State) String() string {
 type XIMCaretDirection int64
 
 const (
-	XIMForwardChar XIMCaretDirection = 0
-	XIMBackwardChar XIMCaretDirection = 1
-	XIMForwardWord XIMCaretDirection = 2
-	XIMBackwardWord XIMCaretDirection = 3
-	XIMCaretUp XIMCaretDirection = 4
-	XIMCaretDown XIMCaretDirection = 5
-	XIMNextLine XIMCaretDirection = 6
-	XIMPreviousLine XIMCaretDirection = 7
-	XIMLineStart XIMCaretDirection = 8
-	XIMLineEnd XIMCaretDirection = 9
+	XIMForwardChar      XIMCaretDirection = 0
+	XIMBackwardChar     XIMCaretDirection = 1
+	XIMForwardWord      XIMCaretDirection = 2
+	XIMBackwardWord     XIMCaretDirection = 3
+	XIMCaretUp          XIMCaretDirection = 4
+	XIMCaretDown        XIMCaretDirection = 5
+	XIMNextLine         XIMCaretDirection = 6
+	XIMPreviousLine     XIMCaretDirection = 7
+	XIMLineStart        XIMCaretDirection = 8
+	XIMLineEnd          XIMCaretDirection = 9
 	XIMAbsolutePosition XIMCaretDirection = 10
-	XIMDontChange XIMCaretDirection = 11
+	XIMDontChange       XIMCaretDirection = 11
 )
 
 func (e XIMCaretDirection) String() string {
@@ -359,7 +359,7 @@ type XIMCaretStyle int64
 
 const (
 	XIMIsInvisible XIMCaretStyle = 0
-	XIMIsPrimary XIMCaretStyle = 1
+	XIMIsPrimary   XIMCaretStyle = 1
 	XIMIsSecondary XIMCaretStyle = 2
 )
 
@@ -379,7 +379,7 @@ func (e XIMCaretStyle) String() string {
 type XIMStatusDataType int64
 
 const (
-	XIMTextType XIMStatusDataType = 0
+	XIMTextType   XIMStatusDataType = 0
 	XIMBitmapType XIMStatusDataType = 1
 )
 
@@ -393,4 +393,3 @@ func (e XIMStatusDataType) String() string {
 		return fmt.Sprintf("XIMStatusDataType(%d)", int64(e))
 	}
 }
-

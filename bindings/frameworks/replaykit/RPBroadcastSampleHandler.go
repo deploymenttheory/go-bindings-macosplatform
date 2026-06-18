@@ -18,14 +18,14 @@ type RPBroadcastSampleHandler struct {
 }
 
 var (
-	_clsRPBroadcastSampleHandler = _objcClass("RPBroadcastSampleHandler")
-	_rPBroadcastSampleHandlerSelBroadcastStartedWithSetupInfo = objc.RegisterName("broadcastStartedWithSetupInfo:")
-	_rPBroadcastSampleHandlerSelBroadcastPaused = objc.RegisterName("broadcastPaused")
-	_rPBroadcastSampleHandlerSelBroadcastResumed = objc.RegisterName("broadcastResumed")
-	_rPBroadcastSampleHandlerSelBroadcastFinished = objc.RegisterName("broadcastFinished")
+	_clsRPBroadcastSampleHandler                                      = _objcClass("RPBroadcastSampleHandler")
+	_rPBroadcastSampleHandlerSelBroadcastStartedWithSetupInfo         = objc.RegisterName("broadcastStartedWithSetupInfo:")
+	_rPBroadcastSampleHandlerSelBroadcastPaused                       = objc.RegisterName("broadcastPaused")
+	_rPBroadcastSampleHandlerSelBroadcastResumed                      = objc.RegisterName("broadcastResumed")
+	_rPBroadcastSampleHandlerSelBroadcastFinished                     = objc.RegisterName("broadcastFinished")
 	_rPBroadcastSampleHandlerSelBroadcastAnnotatedWithApplicationInfo = objc.RegisterName("broadcastAnnotatedWithApplicationInfo:")
-	_rPBroadcastSampleHandlerSelProcessSampleBufferWithType = objc.RegisterName("processSampleBuffer:withType:")
-	_rPBroadcastSampleHandlerSelFinishBroadcastWithError = objc.RegisterName("finishBroadcastWithError:")
+	_rPBroadcastSampleHandlerSelProcessSampleBufferWithType           = objc.RegisterName("processSampleBuffer:withType:")
+	_rPBroadcastSampleHandlerSelFinishBroadcastWithError              = objc.RegisterName("finishBroadcastWithError:")
 )
 
 func RPBroadcastSampleHandlerFromID(id objc.ID) *RPBroadcastSampleHandler {
@@ -72,4 +72,3 @@ func (o *RPBroadcastSampleHandler) ProcessSampleBufferWithType(sampleBuffer unsa
 func (o *RPBroadcastSampleHandler) FinishBroadcastWithError(error_ unsafe.Pointer) {
 	o.Ptr().Send(_rPBroadcastSampleHandlerSelFinishBroadcastWithError, error_)
 }
-

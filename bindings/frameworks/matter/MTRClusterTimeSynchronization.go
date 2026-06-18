@@ -18,31 +18,31 @@ type MTRClusterTimeSynchronization struct {
 }
 
 var (
-	_clsMTRClusterTimeSynchronization = _objcClass("MTRClusterTimeSynchronization")
-	_mTRClusterTimeSynchronizationSelSetUTCTimeWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("setUTCTimeWithParams:expectedValues:expectedValueInterval:completion:")
+	_clsMTRClusterTimeSynchronization                                                                            = _objcClass("MTRClusterTimeSynchronization")
+	_mTRClusterTimeSynchronizationSelSetUTCTimeWithParamsExpectedValuesExpectedValueIntervalCompletion           = objc.RegisterName("setUTCTimeWithParams:expectedValues:expectedValueInterval:completion:")
 	_mTRClusterTimeSynchronizationSelSetTrustedTimeSourceWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("setTrustedTimeSourceWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterTimeSynchronizationSelSetTimeZoneWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("setTimeZoneWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterTimeSynchronizationSelSetDSTOffsetWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("setDSTOffsetWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterTimeSynchronizationSelSetDefaultNTPWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("setDefaultNTPWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterTimeSynchronizationSelReadAttributeUTCTimeWithParams = objc.RegisterName("readAttributeUTCTimeWithParams:")
-	_mTRClusterTimeSynchronizationSelReadAttributeGranularityWithParams = objc.RegisterName("readAttributeGranularityWithParams:")
-	_mTRClusterTimeSynchronizationSelReadAttributeTimeSourceWithParams = objc.RegisterName("readAttributeTimeSourceWithParams:")
-	_mTRClusterTimeSynchronizationSelReadAttributeTrustedTimeSourceWithParams = objc.RegisterName("readAttributeTrustedTimeSourceWithParams:")
-	_mTRClusterTimeSynchronizationSelReadAttributeDefaultNTPWithParams = objc.RegisterName("readAttributeDefaultNTPWithParams:")
-	_mTRClusterTimeSynchronizationSelReadAttributeTimeZoneWithParams = objc.RegisterName("readAttributeTimeZoneWithParams:")
-	_mTRClusterTimeSynchronizationSelReadAttributeDSTOffsetWithParams = objc.RegisterName("readAttributeDSTOffsetWithParams:")
-	_mTRClusterTimeSynchronizationSelReadAttributeLocalTimeWithParams = objc.RegisterName("readAttributeLocalTimeWithParams:")
-	_mTRClusterTimeSynchronizationSelReadAttributeTimeZoneDatabaseWithParams = objc.RegisterName("readAttributeTimeZoneDatabaseWithParams:")
-	_mTRClusterTimeSynchronizationSelReadAttributeNTPServerAvailableWithParams = objc.RegisterName("readAttributeNTPServerAvailableWithParams:")
-	_mTRClusterTimeSynchronizationSelReadAttributeTimeZoneListMaxSizeWithParams = objc.RegisterName("readAttributeTimeZoneListMaxSizeWithParams:")
-	_mTRClusterTimeSynchronizationSelReadAttributeDSTOffsetListMaxSizeWithParams = objc.RegisterName("readAttributeDSTOffsetListMaxSizeWithParams:")
-	_mTRClusterTimeSynchronizationSelReadAttributeSupportsDNSResolveWithParams = objc.RegisterName("readAttributeSupportsDNSResolveWithParams:")
-	_mTRClusterTimeSynchronizationSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterTimeSynchronizationSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterTimeSynchronizationSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterTimeSynchronizationSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterTimeSynchronizationSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterTimeSynchronizationSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterTimeSynchronizationSelSetTimeZoneWithParamsExpectedValuesExpectedValueIntervalCompletion          = objc.RegisterName("setTimeZoneWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterTimeSynchronizationSelSetDSTOffsetWithParamsExpectedValuesExpectedValueIntervalCompletion         = objc.RegisterName("setDSTOffsetWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterTimeSynchronizationSelSetDefaultNTPWithParamsExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("setDefaultNTPWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterTimeSynchronizationSelReadAttributeUTCTimeWithParams                                              = objc.RegisterName("readAttributeUTCTimeWithParams:")
+	_mTRClusterTimeSynchronizationSelReadAttributeGranularityWithParams                                          = objc.RegisterName("readAttributeGranularityWithParams:")
+	_mTRClusterTimeSynchronizationSelReadAttributeTimeSourceWithParams                                           = objc.RegisterName("readAttributeTimeSourceWithParams:")
+	_mTRClusterTimeSynchronizationSelReadAttributeTrustedTimeSourceWithParams                                    = objc.RegisterName("readAttributeTrustedTimeSourceWithParams:")
+	_mTRClusterTimeSynchronizationSelReadAttributeDefaultNTPWithParams                                           = objc.RegisterName("readAttributeDefaultNTPWithParams:")
+	_mTRClusterTimeSynchronizationSelReadAttributeTimeZoneWithParams                                             = objc.RegisterName("readAttributeTimeZoneWithParams:")
+	_mTRClusterTimeSynchronizationSelReadAttributeDSTOffsetWithParams                                            = objc.RegisterName("readAttributeDSTOffsetWithParams:")
+	_mTRClusterTimeSynchronizationSelReadAttributeLocalTimeWithParams                                            = objc.RegisterName("readAttributeLocalTimeWithParams:")
+	_mTRClusterTimeSynchronizationSelReadAttributeTimeZoneDatabaseWithParams                                     = objc.RegisterName("readAttributeTimeZoneDatabaseWithParams:")
+	_mTRClusterTimeSynchronizationSelReadAttributeNTPServerAvailableWithParams                                   = objc.RegisterName("readAttributeNTPServerAvailableWithParams:")
+	_mTRClusterTimeSynchronizationSelReadAttributeTimeZoneListMaxSizeWithParams                                  = objc.RegisterName("readAttributeTimeZoneListMaxSizeWithParams:")
+	_mTRClusterTimeSynchronizationSelReadAttributeDSTOffsetListMaxSizeWithParams                                 = objc.RegisterName("readAttributeDSTOffsetListMaxSizeWithParams:")
+	_mTRClusterTimeSynchronizationSelReadAttributeSupportsDNSResolveWithParams                                   = objc.RegisterName("readAttributeSupportsDNSResolveWithParams:")
+	_mTRClusterTimeSynchronizationSelReadAttributeGeneratedCommandListWithParams                                 = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterTimeSynchronizationSelReadAttributeAcceptedCommandListWithParams                                  = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterTimeSynchronizationSelReadAttributeAttributeListWithParams                                        = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterTimeSynchronizationSelReadAttributeFeatureMapWithParams                                           = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterTimeSynchronizationSelReadAttributeClusterRevisionWithParams                                      = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterTimeSynchronizationSelInitWithDeviceEndpointIDQueue                                               = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterTimeSynchronizationFromID(id objc.ID) *MTRClusterTimeSynchronization {
@@ -206,7 +206,8 @@ func (o *MTRClusterTimeSynchronization) ReadAttributeClusterRevisionWithParams(p
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterTimeSynchronization) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterTimeSynchronization {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterTimeSynchronizationSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterTimeSynchronizationFromID(_ret)
 }
-

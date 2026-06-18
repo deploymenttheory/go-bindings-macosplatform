@@ -16,13 +16,13 @@ type NSPanGestureRecognizer struct {
 }
 
 var (
-	_clsNSPanGestureRecognizer = _objcClass("NSPanGestureRecognizer")
-	_nSPanGestureRecognizerSelTranslationInView = objc.RegisterName("translationInView:")
-	_nSPanGestureRecognizerSelSetTranslationInView = objc.RegisterName("setTranslation:inView:")
-	_nSPanGestureRecognizerSelVelocityInView = objc.RegisterName("velocityInView:")
-	_nSPanGestureRecognizerSelButtonMask = objc.RegisterName("buttonMask")
-	_nSPanGestureRecognizerSelSetButtonMask = objc.RegisterName("setButtonMask:")
-	_nSPanGestureRecognizerSelNumberOfTouchesRequired = objc.RegisterName("numberOfTouchesRequired")
+	_clsNSPanGestureRecognizer                           = _objcClass("NSPanGestureRecognizer")
+	_nSPanGestureRecognizerSelTranslationInView          = objc.RegisterName("translationInView:")
+	_nSPanGestureRecognizerSelSetTranslationInView       = objc.RegisterName("setTranslation:inView:")
+	_nSPanGestureRecognizerSelVelocityInView             = objc.RegisterName("velocityInView:")
+	_nSPanGestureRecognizerSelButtonMask                 = objc.RegisterName("buttonMask")
+	_nSPanGestureRecognizerSelSetButtonMask              = objc.RegisterName("setButtonMask:")
+	_nSPanGestureRecognizerSelNumberOfTouchesRequired    = objc.RegisterName("numberOfTouchesRequired")
 	_nSPanGestureRecognizerSelSetNumberOfTouchesRequired = objc.RegisterName("setNumberOfTouchesRequired:")
 )
 
@@ -67,4 +67,3 @@ func (o *NSPanGestureRecognizer) NumberOfTouchesRequired() int {
 func (o *NSPanGestureRecognizer) SetNumberOfTouchesRequired(numberOfTouchesRequired int) {
 	o.Ptr().Send(_nSPanGestureRecognizerSelSetNumberOfTouchesRequired, numberOfTouchesRequired)
 }
-

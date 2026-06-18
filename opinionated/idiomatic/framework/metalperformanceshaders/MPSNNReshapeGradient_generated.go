@@ -167,11 +167,17 @@ func (x *NNReshapeGradient) WithLabel(label string) *NNReshapeGradient {
 	return x
 }
 
-func (x *NNReshapeGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
+func (x *NNReshapeGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNGradientKernel
+}
 
-func (x *NNReshapeGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *NNReshapeGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
-func (x *NNReshapeGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel }
+func (x *NNReshapeGradient) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel
+}
 
 // NNReshapeGradientable is the interface implemented by [NNReshapeGradient], for mocking and DI.
 type NNReshapeGradientable interface {
@@ -199,4 +205,3 @@ type NNReshapeGradientable interface {
 }
 
 var _ NNReshapeGradientable = (*NNReshapeGradient)(nil)
-

@@ -47,4 +47,3 @@ type ContentBlockerStateable interface {
 }
 
 var _ ContentBlockerStateable = (*ContentBlockerState)(nil)
-

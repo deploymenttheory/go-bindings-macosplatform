@@ -64,4 +64,3 @@ type ModelConfigurationable interface {
 }
 
 var _ ModelConfigurationable = (*ModelConfiguration)(nil)
-

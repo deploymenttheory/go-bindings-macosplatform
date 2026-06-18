@@ -195,4 +195,3 @@ type MutableCaptionable interface {
 }
 
 var _ MutableCaptionable = (*MutableCaption)(nil)
-

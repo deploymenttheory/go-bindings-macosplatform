@@ -26,4 +26,3 @@ func MPSMatrixLogSoftMaxGradientFromID(id objc.ID) *MPSMatrixLogSoftMaxGradient 
 	purego.Track(o)
 	return o
 }
-

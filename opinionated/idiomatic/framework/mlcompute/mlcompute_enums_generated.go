@@ -170,7 +170,7 @@ const (
 	// An operation that calculates the elementwise min of two inputs.
 	MLCArithmeticOperationMin MLCArithmeticOperation = 28
 	// An operations that calculates the elementwise max of two inputs.
-	MLCArithmeticOperationMax MLCArithmeticOperation = 29
+	MLCArithmeticOperationMax   MLCArithmeticOperation = 29
 	MLCArithmeticOperationCount MLCArithmeticOperation = 30
 )
 
@@ -246,19 +246,19 @@ func (e MLCArithmeticOperation) String() string {
 type MLCComparisonOperation int64
 
 const (
-	MLCComparisonOperationEqual MLCComparisonOperation = 0
-	MLCComparisonOperationNotEqual MLCComparisonOperation = 1
-	MLCComparisonOperationLess MLCComparisonOperation = 2
-	MLCComparisonOperationGreater MLCComparisonOperation = 3
-	MLCComparisonOperationLessOrEqual MLCComparisonOperation = 4
+	MLCComparisonOperationEqual          MLCComparisonOperation = 0
+	MLCComparisonOperationNotEqual       MLCComparisonOperation = 1
+	MLCComparisonOperationLess           MLCComparisonOperation = 2
+	MLCComparisonOperationGreater        MLCComparisonOperation = 3
+	MLCComparisonOperationLessOrEqual    MLCComparisonOperation = 4
 	MLCComparisonOperationGreaterOrEqual MLCComparisonOperation = 5
-	MLCComparisonOperationLogicalAND MLCComparisonOperation = 6
-	MLCComparisonOperationLogicalOR MLCComparisonOperation = 7
-	MLCComparisonOperationLogicalNOT MLCComparisonOperation = 8
-	MLCComparisonOperationLogicalNAND MLCComparisonOperation = 9
-	MLCComparisonOperationLogicalNOR MLCComparisonOperation = 10
-	MLCComparisonOperationLogicalXOR MLCComparisonOperation = 11
-	MLCComparisonOperationCount MLCComparisonOperation = 12
+	MLCComparisonOperationLogicalAND     MLCComparisonOperation = 6
+	MLCComparisonOperationLogicalOR      MLCComparisonOperation = 7
+	MLCComparisonOperationLogicalNOT     MLCComparisonOperation = 8
+	MLCComparisonOperationLogicalNAND    MLCComparisonOperation = 9
+	MLCComparisonOperationLogicalNOR     MLCComparisonOperation = 10
+	MLCComparisonOperationLogicalXOR     MLCComparisonOperation = 11
+	MLCComparisonOperationCount          MLCComparisonOperation = 12
 )
 
 func (e MLCComparisonOperation) String() string {
@@ -374,7 +374,7 @@ const (
 	// The any device type.  When selected, the framework will automatically use the appropriate devices to achieve the best performance.
 	MLCDeviceTypeAny MLCDeviceType = 2
 	// The  Apple Neural Engine device.  When selected, the framework will use the  Neural Engine to execute all layers that can be executed on it. Layers that cannot be executed on the ANE will run on the CPU or GPU.   The Neural Engine device must be explicitly selected.  MLDeviceTypeAny will not select the Neural Engine device.  In addition, this device can be used with inference graphs only.  This device cannot be used with a training graph or an inference graph that shares layers with a training graph.
-	MLCDeviceTypeANE MLCDeviceType = 3
+	MLCDeviceTypeANE   MLCDeviceType = 3
 	MLCDeviceTypeCount MLCDeviceType = 4
 )
 
@@ -438,8 +438,8 @@ func (e MLCExecutionOptions) String() string {
 type MLCGradientClippingType int64
 
 const (
-	MLCGradientClippingTypeByValue MLCGradientClippingType = 0
-	MLCGradientClippingTypeByNorm MLCGradientClippingType = 1
+	MLCGradientClippingTypeByValue      MLCGradientClippingType = 0
+	MLCGradientClippingTypeByNorm       MLCGradientClippingType = 1
 	MLCGradientClippingTypeByGlobalNorm MLCGradientClippingType = 2
 )
 
@@ -532,7 +532,7 @@ const (
 	// The cosine distance loss.
 	MLCLossTypeCosineDistance MLCLossType = 7
 	// The log loss.
-	MLCLossTypeLog MLCLossType = 8
+	MLCLossTypeLog   MLCLossType = 8
 	MLCLossTypeCount MLCLossType = 9
 )
 
@@ -624,7 +624,7 @@ const (
 	MLCPoolingTypeAverage MLCPoolingType = 2
 	// The L2-norm pooling type.
 	MLCPoolingTypeL2Norm MLCPoolingType = 3
-	MLCPoolingTypeCount MLCPoolingType = 4
+	MLCPoolingTypeCount  MLCPoolingType = 4
 )
 
 func (e MLCPoolingType) String() string {
@@ -652,7 +652,7 @@ const (
 	MLCRandomInitializerTypeGlorotUniform MLCRandomInitializerType = 2
 	// The Xavier random initializer type.
 	MLCRandomInitializerTypeXavier MLCRandomInitializerType = 3
-	MLCRandomInitializerTypeCount MLCRandomInitializerType = 4
+	MLCRandomInitializerTypeCount  MLCRandomInitializerType = 4
 )
 
 func (e MLCRandomInitializerType) String() string {
@@ -694,7 +694,7 @@ const (
 	// Any(X) = X_0 || X_1 || ... X_n
 	MLCReductionTypeAny MLCReductionType = 8
 	// Alf(X) = X_0 && X_1 && ... X_n
-	MLCReductionTypeAll MLCReductionType = 9
+	MLCReductionTypeAll   MLCReductionType = 9
 	MLCReductionTypeCount MLCReductionType = 10
 )
 
@@ -790,4 +790,3 @@ func (e MLCSoftmaxOperation) String() string {
 		return fmt.Sprintf("MLCSoftmaxOperation(%d)", int64(e))
 	}
 }
-

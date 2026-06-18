@@ -82,4 +82,3 @@ type DistantObjectRequestable interface {
 }
 
 var _ DistantObjectRequestable = (*DistantObjectRequest)(nil)
-

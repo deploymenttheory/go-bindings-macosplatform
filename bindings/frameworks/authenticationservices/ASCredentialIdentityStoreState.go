@@ -16,8 +16,8 @@ type ASCredentialIdentityStoreState struct {
 }
 
 var (
-	_clsASCredentialIdentityStoreState = _objcClass("ASCredentialIdentityStoreState")
-	_aSCredentialIdentityStoreStateSelIsEnabled = objc.RegisterName("isEnabled")
+	_clsASCredentialIdentityStoreState                           = _objcClass("ASCredentialIdentityStoreState")
+	_aSCredentialIdentityStoreStateSelIsEnabled                  = objc.RegisterName("isEnabled")
 	_aSCredentialIdentityStoreStateSelSupportsIncrementalUpdates = objc.RegisterName("supportsIncrementalUpdates")
 )
 
@@ -42,4 +42,3 @@ func (o *ASCredentialIdentityStoreState) SupportsIncrementalUpdates() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aSCredentialIdentityStoreStateSelSupportsIncrementalUpdates)
 	return _ret
 }
-

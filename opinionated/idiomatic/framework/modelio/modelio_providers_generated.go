@@ -47,4 +47,3 @@ type ScatteringFunctionProvider interface {
 type TextureProvider interface {
 	asTexture() *raw.MDLTexture
 }
-

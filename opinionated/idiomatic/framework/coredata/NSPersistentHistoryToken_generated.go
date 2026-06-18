@@ -41,4 +41,3 @@ type PersistentHistoryTokenable interface {
 }
 
 var _ PersistentHistoryTokenable = (*PersistentHistoryToken)(nil)
-

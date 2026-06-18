@@ -17,15 +17,15 @@ type EKParticipant struct {
 }
 
 var (
-	_clsEKParticipant = _objcClass("EKParticipant")
+	_clsEKParticipant                      = _objcClass("EKParticipant")
 	_eKParticipantSelABPersonInAddressBook = objc.RegisterName("ABPersonInAddressBook:")
-	_eKParticipantSelURL = objc.RegisterName("URL")
-	_eKParticipantSelName = objc.RegisterName("name")
-	_eKParticipantSelParticipantStatus = objc.RegisterName("participantStatus")
-	_eKParticipantSelParticipantRole = objc.RegisterName("participantRole")
-	_eKParticipantSelParticipantType = objc.RegisterName("participantType")
-	_eKParticipantSelIsCurrentUser = objc.RegisterName("isCurrentUser")
-	_eKParticipantSelContactPredicate = objc.RegisterName("contactPredicate")
+	_eKParticipantSelURL                   = objc.RegisterName("URL")
+	_eKParticipantSelName                  = objc.RegisterName("name")
+	_eKParticipantSelParticipantStatus     = objc.RegisterName("participantStatus")
+	_eKParticipantSelParticipantRole       = objc.RegisterName("participantRole")
+	_eKParticipantSelParticipantType       = objc.RegisterName("participantType")
+	_eKParticipantSelIsCurrentUser         = objc.RegisterName("isCurrentUser")
+	_eKParticipantSelContactPredicate      = objc.RegisterName("contactPredicate")
 )
 
 func EKParticipantFromID(id objc.ID) *EKParticipant {
@@ -42,21 +42,27 @@ func EKParticipantFromID(id objc.ID) *EKParticipant {
 // Deprecated: since macOS 10.11.
 func (o *EKParticipant) ABPersonInAddressBook(addressBook *addressbook.ABAddressBook) *addressbook.ABPerson {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKParticipantSelABPersonInAddressBook, addressBook.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return addressbook.ABPersonFromID(_ret)
 }
 
 // @property   url @abstract   URL representing this participant.
 func (o *EKParticipant) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKParticipantSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // @property   name @abstract   Name of this participant.
 func (o *EKParticipant) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKParticipantSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -87,7 +93,8 @@ func (o *EKParticipant) IsCurrentUser() bool {
 // @method     contactPredicate @abstract   Returns a predicate to use with Contacts.framework to retrieve the corresponding CNContact instance. @discussion This method returns a predicate that can be used with a CNContactStore to fetch a CNContact instance for this participant, if one exists.
 func (o *EKParticipant) ContactPredicate() *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKParticipantSelContactPredicate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
-

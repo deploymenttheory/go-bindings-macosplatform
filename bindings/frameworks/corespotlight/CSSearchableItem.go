@@ -16,21 +16,21 @@ type CSSearchableItem struct {
 }
 
 var (
-	_clsCSSearchableItem = _objcClass("CSSearchableItem")
+	_clsCSSearchableItem                                                     = _objcClass("CSSearchableItem")
 	_cSSearchableItemSelInitWithUniqueIdentifierDomainIdentifierAttributeSet = objc.RegisterName("initWithUniqueIdentifier:domainIdentifier:attributeSet:")
-	_cSSearchableItemSelCompareByRank = objc.RegisterName("compareByRank:")
-	_cSSearchableItemSelUniqueIdentifier = objc.RegisterName("uniqueIdentifier")
-	_cSSearchableItemSelSetUniqueIdentifier = objc.RegisterName("setUniqueIdentifier:")
-	_cSSearchableItemSelDomainIdentifier = objc.RegisterName("domainIdentifier")
-	_cSSearchableItemSelSetDomainIdentifier = objc.RegisterName("setDomainIdentifier:")
-	_cSSearchableItemSelExpirationDate = objc.RegisterName("expirationDate")
-	_cSSearchableItemSelSetExpirationDate = objc.RegisterName("setExpirationDate:")
-	_cSSearchableItemSelAttributeSet = objc.RegisterName("attributeSet")
-	_cSSearchableItemSelSetAttributeSet = objc.RegisterName("setAttributeSet:")
-	_cSSearchableItemSelIsUpdate = objc.RegisterName("isUpdate")
-	_cSSearchableItemSelSetIsUpdate = objc.RegisterName("setIsUpdate:")
-	_cSSearchableItemSelUpdateListenerOptions = objc.RegisterName("updateListenerOptions")
-	_cSSearchableItemSelSetUpdateListenerOptions = objc.RegisterName("setUpdateListenerOptions:")
+	_cSSearchableItemSelCompareByRank                                        = objc.RegisterName("compareByRank:")
+	_cSSearchableItemSelUniqueIdentifier                                     = objc.RegisterName("uniqueIdentifier")
+	_cSSearchableItemSelSetUniqueIdentifier                                  = objc.RegisterName("setUniqueIdentifier:")
+	_cSSearchableItemSelDomainIdentifier                                     = objc.RegisterName("domainIdentifier")
+	_cSSearchableItemSelSetDomainIdentifier                                  = objc.RegisterName("setDomainIdentifier:")
+	_cSSearchableItemSelExpirationDate                                       = objc.RegisterName("expirationDate")
+	_cSSearchableItemSelSetExpirationDate                                    = objc.RegisterName("setExpirationDate:")
+	_cSSearchableItemSelAttributeSet                                         = objc.RegisterName("attributeSet")
+	_cSSearchableItemSelSetAttributeSet                                      = objc.RegisterName("setAttributeSet:")
+	_cSSearchableItemSelIsUpdate                                             = objc.RegisterName("isUpdate")
+	_cSSearchableItemSelSetIsUpdate                                          = objc.RegisterName("setIsUpdate:")
+	_cSSearchableItemSelUpdateListenerOptions                                = objc.RegisterName("updateListenerOptions")
+	_cSSearchableItemSelSetUpdateListenerOptions                             = objc.RegisterName("setUpdateListenerOptions:")
 )
 
 func CSSearchableItemFromID(id objc.ID) *CSSearchableItem {
@@ -45,7 +45,9 @@ func CSSearchableItemFromID(id objc.ID) *CSSearchableItem {
 
 func (o *CSSearchableItem) InitWithUniqueIdentifierDomainIdentifierAttributeSet(uniqueIdentifier *foundation.NSString, domainIdentifier *foundation.NSString, attributeSet *CSSearchableItemAttributeSet) *CSSearchableItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemSelInitWithUniqueIdentifierDomainIdentifierAttributeSet, uniqueIdentifier.Ptr(), domainIdentifier.Ptr(), attributeSet.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CSSearchableItemFromID(_ret)
 }
 
@@ -56,7 +58,9 @@ func (o *CSSearchableItem) CompareByRank(other *CSSearchableItem) foundation.NSC
 
 func (o *CSSearchableItem) UniqueIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemSelUniqueIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -66,7 +70,9 @@ func (o *CSSearchableItem) SetUniqueIdentifier(uniqueIdentifier *foundation.NSSt
 
 func (o *CSSearchableItem) DomainIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemSelDomainIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -76,7 +82,9 @@ func (o *CSSearchableItem) SetDomainIdentifier(domainIdentifier *foundation.NSSt
 
 func (o *CSSearchableItem) ExpirationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemSelExpirationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -86,7 +94,9 @@ func (o *CSSearchableItem) SetExpirationDate(expirationDate *foundation.NSDate) 
 
 func (o *CSSearchableItem) AttributeSet() *CSSearchableItemAttributeSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemSelAttributeSet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CSSearchableItemAttributeSetFromID(_ret)
 }
 
@@ -111,4 +121,3 @@ func (o *CSSearchableItem) UpdateListenerOptions() CSSearchableItemUpdateListene
 func (o *CSSearchableItem) SetUpdateListenerOptions(updateListenerOptions CSSearchableItemUpdateListenerOptions) {
 	o.Ptr().Send(_cSSearchableItemSelSetUpdateListenerOptions, updateListenerOptions)
 }
-

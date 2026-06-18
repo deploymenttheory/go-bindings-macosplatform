@@ -231,4 +231,3 @@ type LocalSearchCompleterable interface {
 }
 
 var _ LocalSearchCompleterable = (*LocalSearchCompleter)(nil)
-

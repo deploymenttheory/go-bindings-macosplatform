@@ -41,4 +41,3 @@ type CABTLEMIDIWindowControllerable interface {
 }
 
 var _ CABTLEMIDIWindowControllerable = (*CABTLEMIDIWindowController)(nil)
-

@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A cloud-synced directory for game-save data. To get an instance of the directory, call ``openDirectoryForContainerIdentifier:``, which returns the directory for the iCloud container associated with the specified identifier. Calling this method starts syncing the directory in the background on the specified container. When the game needs to access the contents of the directory, show a UI while the directory fully syncs using the ``finishSyncing:completionHandler:`` method. If you're showing your own UI, call the ``finishSyncingWithCompletionHandler:`` method to wait for the directory to finish syncing. After the directory is ready to use, syncing pauses until you close the directory object or the object is deallocated. To resume syncing during the game, close and re-open the directory by calling ``close`` and then ``openDirectoryForContainerIdentifier:``.
+// A cloud-synced directory for game-save data. To get an instance of the directory, call “openDirectoryForContainerIdentifier:“, which returns the directory for the iCloud container associated with the specified identifier. Calling this method starts syncing the directory in the background on the specified container. When the game needs to access the contents of the directory, show a UI while the directory fully syncs using the “finishSyncing:completionHandler:“ method. If you're showing your own UI, call the “finishSyncingWithCompletionHandler:“ method to wait for the directory to finish syncing. After the directory is ready to use, syncing pauses until you close the directory object or the object is deallocated. To resume syncing during the game, close and re-open the directory by calling “close“ and then “openDirectoryForContainerIdentifier:“.
 //
 // Apple documentation: https://developer.apple.com/documentation/gamesave/gssynceddirectory
 type GSSyncedDirectory struct {
@@ -19,14 +19,14 @@ type GSSyncedDirectory struct {
 }
 
 var (
-	_clsGSSyncedDirectory = _objcClass("GSSyncedDirectory")
-	_gSSyncedDirectorySelOpenDirectoryForContainerIdentifier = objc.RegisterName("openDirectoryForContainerIdentifier:")
-	_gSSyncedDirectorySelClose = objc.RegisterName("close")
+	_clsGSSyncedDirectory                                          = _objcClass("GSSyncedDirectory")
+	_gSSyncedDirectorySelOpenDirectoryForContainerIdentifier       = objc.RegisterName("openDirectoryForContainerIdentifier:")
+	_gSSyncedDirectorySelClose                                     = objc.RegisterName("close")
 	_gSSyncedDirectorySelTriggerPendingUploadWithCompletionHandler = objc.RegisterName("triggerPendingUploadWithCompletionHandler:")
-	_gSSyncedDirectorySelResolveConflictsWithVersion = objc.RegisterName("resolveConflictsWithVersion:")
-	_gSSyncedDirectorySelFinishSyncingWithCompletionHandler = objc.RegisterName("finishSyncingWithCompletionHandler:")
-	_gSSyncedDirectorySelFinishSyncingCompletionHandler = objc.RegisterName("finishSyncing:completionHandler:")
-	_gSSyncedDirectorySelDirectoryState = objc.RegisterName("directoryState")
+	_gSSyncedDirectorySelResolveConflictsWithVersion               = objc.RegisterName("resolveConflictsWithVersion:")
+	_gSSyncedDirectorySelFinishSyncingWithCompletionHandler        = objc.RegisterName("finishSyncingWithCompletionHandler:")
+	_gSSyncedDirectorySelFinishSyncingCompletionHandler            = objc.RegisterName("finishSyncing:completionHandler:")
+	_gSSyncedDirectorySelDirectoryState                            = objc.RegisterName("directoryState")
 )
 
 func GSSyncedDirectoryFromID(id objc.ID) *GSSyncedDirectory {
@@ -39,10 +39,12 @@ func GSSyncedDirectoryFromID(id objc.ID) *GSSyncedDirectory {
 	return o
 }
 
-// Requests an instance of the game-save directory. - Parameter containerIdentifier: The identifier of the directory to request. If you pass `nil`, this method uses the first container identifier listed in the `com.apple.developer.icloud-container-identifiers` entitlements array. This method returns immediately, and starts syncing the directory in the background. To wait for syncing to complete, call the ``finishSyncingWithCompletionHandler:`` method.
+// Requests an instance of the game-save directory. - Parameter containerIdentifier: The identifier of the directory to request. If you pass `nil`, this method uses the first container identifier listed in the `com.apple.developer.icloud-container-identifiers` entitlements array. This method returns immediately, and starts syncing the directory in the background. To wait for syncing to complete, call the “finishSyncingWithCompletionHandler:“ method.
 func GSSyncedDirectoryOpenDirectoryForContainerIdentifier(containerIdentifier *foundation.NSString) *GSSyncedDirectory {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGSSyncedDirectory), _gSSyncedDirectorySelOpenDirectoryForContainerIdentifier, containerIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GSSyncedDirectoryFromID(_ret)
 }
 
@@ -63,7 +65,7 @@ func (o *GSSyncedDirectory) TriggerPendingUploadWithCompletionHandler(completion
 	o.Ptr().Send(_gSSyncedDirectorySelTriggerPendingUploadWithCompletionHandler, __block_completion)
 }
 
-// Indicates that you resolved a conflict. - Parameter version: The version to use. If you're implementing your own conflict resolution, read all of the conflicting versions, and modify one of them to incorporate the state and changes from the others. Then call this method, passing that version. Call this method only when the directory is in the ``GSSyncState/GSSyncStateConflicted`` state.
+// Indicates that you resolved a conflict. - Parameter version: The version to use. If you're implementing your own conflict resolution, read all of the conflicting versions, and modify one of them to incorporate the state and changes from the others. Then call this method, passing that version. Call this method only when the directory is in the “GSSyncState/GSSyncStateConflicted“ state.
 func (o *GSSyncedDirectory) ResolveConflictsWithVersion(version *GSSyncedDirectoryVersion) {
 	o.Ptr().Send(_gSSyncedDirectorySelResolveConflictsWithVersion, version.Ptr())
 }
@@ -95,7 +97,8 @@ func (o *GSSyncedDirectory) FinishSyncingCompletionHandler(statusDisplay *appkit
 // The state of the directory.
 func (o *GSSyncedDirectory) DirectoryState() *GSSyncedDirectoryState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gSSyncedDirectorySelDirectoryState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GSSyncedDirectoryStateFromID(_ret)
 }
-

@@ -140,9 +140,13 @@ func (x *MTRClusterMediaInput) RenameInputWithParamsExpectedValuesExpectedValueI
 	x.inner.RenameInputWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
 }
 
-func (x *MTRClusterMediaInput) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterMediaInput) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterMediaInput) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterMediaInput) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterMediaInputable is the interface implemented by [MTRClusterMediaInput], for mocking and DI.
 type MTRClusterMediaInputable interface {
@@ -169,4 +173,3 @@ type MTRClusterMediaInputable interface {
 }
 
 var _ MTRClusterMediaInputable = (*MTRClusterMediaInput)(nil)
-

@@ -24,4 +24,3 @@ func KSMDomainSystemLaunchd() objc.ID { return purego.CFConstant(raw.KSMDomainSy
 
 // KSMDomainUserLaunchd returns the value of the CoreFoundation reference constant kSMDomainUserLaunchd as an objc.ID.
 func KSMDomainUserLaunchd() objc.ID { return purego.CFConstant(raw.KSMDomainUserLaunchd()) }
-

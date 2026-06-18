@@ -15,42 +15,42 @@ type NSUnitInformationStorage struct {
 }
 
 var (
-	_clsNSUnitInformationStorage = _objcClass("NSUnitInformationStorage")
-	_nSUnitInformationStorageSelBytes = objc.RegisterName("bytes")
-	_nSUnitInformationStorageSelBits = objc.RegisterName("bits")
-	_nSUnitInformationStorageSelNibbles = objc.RegisterName("nibbles")
+	_clsNSUnitInformationStorage           = _objcClass("NSUnitInformationStorage")
+	_nSUnitInformationStorageSelBytes      = objc.RegisterName("bytes")
+	_nSUnitInformationStorageSelBits       = objc.RegisterName("bits")
+	_nSUnitInformationStorageSelNibbles    = objc.RegisterName("nibbles")
 	_nSUnitInformationStorageSelYottabytes = objc.RegisterName("yottabytes")
 	_nSUnitInformationStorageSelZettabytes = objc.RegisterName("zettabytes")
-	_nSUnitInformationStorageSelExabytes = objc.RegisterName("exabytes")
-	_nSUnitInformationStorageSelPetabytes = objc.RegisterName("petabytes")
-	_nSUnitInformationStorageSelTerabytes = objc.RegisterName("terabytes")
-	_nSUnitInformationStorageSelGigabytes = objc.RegisterName("gigabytes")
-	_nSUnitInformationStorageSelMegabytes = objc.RegisterName("megabytes")
-	_nSUnitInformationStorageSelKilobytes = objc.RegisterName("kilobytes")
-	_nSUnitInformationStorageSelYottabits = objc.RegisterName("yottabits")
-	_nSUnitInformationStorageSelZettabits = objc.RegisterName("zettabits")
-	_nSUnitInformationStorageSelExabits = objc.RegisterName("exabits")
-	_nSUnitInformationStorageSelPetabits = objc.RegisterName("petabits")
-	_nSUnitInformationStorageSelTerabits = objc.RegisterName("terabits")
-	_nSUnitInformationStorageSelGigabits = objc.RegisterName("gigabits")
-	_nSUnitInformationStorageSelMegabits = objc.RegisterName("megabits")
-	_nSUnitInformationStorageSelKilobits = objc.RegisterName("kilobits")
-	_nSUnitInformationStorageSelYobibytes = objc.RegisterName("yobibytes")
-	_nSUnitInformationStorageSelZebibytes = objc.RegisterName("zebibytes")
-	_nSUnitInformationStorageSelExbibytes = objc.RegisterName("exbibytes")
-	_nSUnitInformationStorageSelPebibytes = objc.RegisterName("pebibytes")
-	_nSUnitInformationStorageSelTebibytes = objc.RegisterName("tebibytes")
-	_nSUnitInformationStorageSelGibibytes = objc.RegisterName("gibibytes")
-	_nSUnitInformationStorageSelMebibytes = objc.RegisterName("mebibytes")
-	_nSUnitInformationStorageSelKibibytes = objc.RegisterName("kibibytes")
-	_nSUnitInformationStorageSelYobibits = objc.RegisterName("yobibits")
-	_nSUnitInformationStorageSelZebibits = objc.RegisterName("zebibits")
-	_nSUnitInformationStorageSelExbibits = objc.RegisterName("exbibits")
-	_nSUnitInformationStorageSelPebibits = objc.RegisterName("pebibits")
-	_nSUnitInformationStorageSelTebibits = objc.RegisterName("tebibits")
-	_nSUnitInformationStorageSelGibibits = objc.RegisterName("gibibits")
-	_nSUnitInformationStorageSelMebibits = objc.RegisterName("mebibits")
-	_nSUnitInformationStorageSelKibibits = objc.RegisterName("kibibits")
+	_nSUnitInformationStorageSelExabytes   = objc.RegisterName("exabytes")
+	_nSUnitInformationStorageSelPetabytes  = objc.RegisterName("petabytes")
+	_nSUnitInformationStorageSelTerabytes  = objc.RegisterName("terabytes")
+	_nSUnitInformationStorageSelGigabytes  = objc.RegisterName("gigabytes")
+	_nSUnitInformationStorageSelMegabytes  = objc.RegisterName("megabytes")
+	_nSUnitInformationStorageSelKilobytes  = objc.RegisterName("kilobytes")
+	_nSUnitInformationStorageSelYottabits  = objc.RegisterName("yottabits")
+	_nSUnitInformationStorageSelZettabits  = objc.RegisterName("zettabits")
+	_nSUnitInformationStorageSelExabits    = objc.RegisterName("exabits")
+	_nSUnitInformationStorageSelPetabits   = objc.RegisterName("petabits")
+	_nSUnitInformationStorageSelTerabits   = objc.RegisterName("terabits")
+	_nSUnitInformationStorageSelGigabits   = objc.RegisterName("gigabits")
+	_nSUnitInformationStorageSelMegabits   = objc.RegisterName("megabits")
+	_nSUnitInformationStorageSelKilobits   = objc.RegisterName("kilobits")
+	_nSUnitInformationStorageSelYobibytes  = objc.RegisterName("yobibytes")
+	_nSUnitInformationStorageSelZebibytes  = objc.RegisterName("zebibytes")
+	_nSUnitInformationStorageSelExbibytes  = objc.RegisterName("exbibytes")
+	_nSUnitInformationStorageSelPebibytes  = objc.RegisterName("pebibytes")
+	_nSUnitInformationStorageSelTebibytes  = objc.RegisterName("tebibytes")
+	_nSUnitInformationStorageSelGibibytes  = objc.RegisterName("gibibytes")
+	_nSUnitInformationStorageSelMebibytes  = objc.RegisterName("mebibytes")
+	_nSUnitInformationStorageSelKibibytes  = objc.RegisterName("kibibytes")
+	_nSUnitInformationStorageSelYobibits   = objc.RegisterName("yobibits")
+	_nSUnitInformationStorageSelZebibits   = objc.RegisterName("zebibits")
+	_nSUnitInformationStorageSelExbibits   = objc.RegisterName("exbibits")
+	_nSUnitInformationStorageSelPebibits   = objc.RegisterName("pebibits")
+	_nSUnitInformationStorageSelTebibits   = objc.RegisterName("tebibits")
+	_nSUnitInformationStorageSelGibibits   = objc.RegisterName("gibibits")
+	_nSUnitInformationStorageSelMebibits   = objc.RegisterName("mebibits")
+	_nSUnitInformationStorageSelKibibits   = objc.RegisterName("kibibits")
 )
 
 func NSUnitInformationStorageFromID(id objc.ID) *NSUnitInformationStorage {
@@ -65,211 +65,280 @@ func NSUnitInformationStorageFromID(id objc.ID) *NSUnitInformationStorage {
 
 func NSUnitInformationStorageBytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelBytes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStorageBits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelBits)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStorageNibbles() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelNibbles)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStorageYottabytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelYottabytes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStorageZettabytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelZettabytes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStorageExabytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelExabytes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStoragePetabytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelPetabytes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStorageTerabytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelTerabytes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStorageGigabytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelGigabytes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStorageMegabytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelMegabytes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStorageKilobytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelKilobytes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStorageYottabits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelYottabits)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStorageZettabits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelZettabits)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStorageExabits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelExabits)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStoragePetabits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelPetabits)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStorageTerabits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelTerabits)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStorageGigabits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelGigabits)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStorageMegabits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelMegabits)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStorageKilobits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelKilobits)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStorageYobibytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelYobibytes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStorageZebibytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelZebibytes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStorageExbibytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelExbibytes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStoragePebibytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelPebibytes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStorageTebibytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelTebibytes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStorageGibibytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelGibibytes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStorageMebibytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelMebibytes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStorageKibibytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelKibibytes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStorageYobibits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelYobibits)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStorageZebibits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelZebibits)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStorageExbibits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelExbibits)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStoragePebibits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelPebibits)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStorageTebibits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelTebibits)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStorageGibibits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelGibibits)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStorageMebibits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelMebibits)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
 
 func NSUnitInformationStorageKibibits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelKibibits)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitInformationStorageFromID(_ret)
 }
-

@@ -120,4 +120,3 @@ type MIDINoteEventable interface {
 }
 
 var _ MIDINoteEventable = (*MIDINoteEvent)(nil)
-

@@ -47,7 +47,9 @@ func (x *MathExpressionOperator) Content() string {
 	return purego.GoString(_r.Ptr())
 }
 
-func (x *MathExpressionOperator) asMathExpression() *raw.AXMathExpression { return &x.inner.AXMathExpression }
+func (x *MathExpressionOperator) asMathExpression() *raw.AXMathExpression {
+	return &x.inner.AXMathExpression
+}
 
 // MathExpressionOperatorable is the interface implemented by [MathExpressionOperator], for mocking and DI.
 type MathExpressionOperatorable interface {
@@ -56,4 +58,3 @@ type MathExpressionOperatorable interface {
 }
 
 var _ MathExpressionOperatorable = (*MathExpressionOperator)(nil)
-

@@ -126,4 +126,3 @@ type CalCalendarStoreable interface {
 }
 
 var _ CalCalendarStoreable = (*CalCalendarStore)(nil)
-

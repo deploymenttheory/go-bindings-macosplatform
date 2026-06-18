@@ -16,8 +16,8 @@ type PKPushCredentials struct {
 }
 
 var (
-	_clsPKPushCredentials = _objcClass("PKPushCredentials")
-	_pKPushCredentialsSelType = objc.RegisterName("type")
+	_clsPKPushCredentials      = _objcClass("PKPushCredentials")
+	_pKPushCredentialsSelType  = objc.RegisterName("type")
 	_pKPushCredentialsSelToken = objc.RegisterName("token")
 )
 
@@ -31,17 +31,20 @@ func PKPushCredentialsFromID(id objc.ID) *PKPushCredentials {
 	return o
 }
 
-// The push type constant associated with the token. For possible values, see ``PushKit/PKPushType``.
+// The push type constant associated with the token. For possible values, see “PushKit/PKPushType“.
 func (o *PKPushCredentials) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPushCredentialsSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // A unique device token to use when sending push notifications to the current device. Forward this token to the server you use to generate push notifications. When preparing to deliver a push notification to the current device, include the token in the HTTP request you send to Apple Push Notification service (APNs).
 func (o *PKPushCredentials) Token() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPushCredentialsSelToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

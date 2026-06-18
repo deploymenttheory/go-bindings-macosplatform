@@ -98,4 +98,3 @@ type MotionBlurConfigurationable interface {
 }
 
 var _ MotionBlurConfigurationable = (*MotionBlurConfiguration)(nil)
-

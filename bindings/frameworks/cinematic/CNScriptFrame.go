@@ -19,12 +19,12 @@ type CNScriptFrame struct {
 }
 
 var (
-	_clsCNScriptFrame = _objcClass("CNScriptFrame")
-	_cNScriptFrameSelTime = objc.RegisterName("time")
-	_cNScriptFrameSelFocusDisparity = objc.RegisterName("focusDisparity")
-	_cNScriptFrameSelFocusDetection = objc.RegisterName("focusDetection")
-	_cNScriptFrameSelAllDetections = objc.RegisterName("allDetections")
-	_cNScriptFrameSelDetectionForID = objc.RegisterName("detectionForID:")
+	_clsCNScriptFrame                        = _objcClass("CNScriptFrame")
+	_cNScriptFrameSelTime                    = objc.RegisterName("time")
+	_cNScriptFrameSelFocusDisparity          = objc.RegisterName("focusDisparity")
+	_cNScriptFrameSelFocusDetection          = objc.RegisterName("focusDetection")
+	_cNScriptFrameSelAllDetections           = objc.RegisterName("allDetections")
+	_cNScriptFrameSelDetectionForID          = objc.RegisterName("detectionForID:")
 	_cNScriptFrameSelBestDetectionForGroupID = objc.RegisterName("bestDetectionForGroupID:")
 )
 
@@ -53,28 +53,35 @@ func (o *CNScriptFrame) FocusDisparity() float32 {
 // The detection on which the script is focused in this frame. The focusDisparity of the focusDetection can be different from that of the frame such as when a rack focus is in progress.
 func (o *CNScriptFrame) FocusDetection() *CNDetection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNScriptFrameSelFocusDetection)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNDetectionFromID(_ret)
 }
 
 // All detected objects in this frame.
 func (o *CNScriptFrame) AllDetections() *foundation.NSArray[*CNDetection] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNScriptFrameSelAllDetections)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CNDetection](_ret)
 }
 
 // The detection in this frame with the given detection ID, if any.
 func (o *CNScriptFrame) DetectionForID(detectionID int64) *CNDetection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNScriptFrameSelDetectionForID, detectionID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNDetectionFromID(_ret)
 }
 
 // The best detection to focus on in this frame among those with the given detectionGroupID. For example, a face is preferred to the corresponding torso, even though both have the same detectionGroupID.
 func (o *CNScriptFrame) BestDetectionForGroupID(detectionGroupID int64) *CNDetection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNScriptFrameSelBestDetectionForGroupID, detectionGroupID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNDetectionFromID(_ret)
 }
-

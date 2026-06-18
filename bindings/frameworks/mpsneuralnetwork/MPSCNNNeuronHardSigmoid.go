@@ -16,7 +16,7 @@ type MPSCNNNeuronHardSigmoid struct {
 }
 
 var (
-	_clsMPSCNNNeuronHardSigmoid = _objcClass("MPSCNNNeuronHardSigmoid")
+	_clsMPSCNNNeuronHardSigmoid                 = _objcClass("MPSCNNNeuronHardSigmoid")
 	_mPSCNNNeuronHardSigmoidSelInitWithDeviceAB = objc.RegisterName("initWithDevice:a:b:")
 )
 
@@ -33,7 +33,8 @@ func MPSCNNNeuronHardSigmoidFromID(id objc.ID) *MPSCNNNeuronHardSigmoid {
 // @abstract  Initialize a neuron filter @param     device           The device the filter will run on @param     a                Filter property "a". See class discussion. @param     b                Filter property "b". See class discussion. @return    A valid MPSCNNNeuronHardSigmoid object or nil, if failure.
 func (o *MPSCNNNeuronHardSigmoid) InitWithDeviceAB(device metal.MTLDevice, a float32, b float32) *MPSCNNNeuronHardSigmoid {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronHardSigmoidSelInitWithDeviceAB, device, a, b)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronHardSigmoidFromID(_ret)
 }
-

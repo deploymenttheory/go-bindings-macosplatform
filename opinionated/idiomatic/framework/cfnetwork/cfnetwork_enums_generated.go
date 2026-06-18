@@ -11,8 +11,8 @@ import (
 type CFHostInfoType int32
 
 const (
-	KCFHostAddresses CFHostInfoType = 0
-	KCFHostNames CFHostInfoType = 1
+	KCFHostAddresses    CFHostInfoType = 0
+	KCFHostNames        CFHostInfoType = 1
 	KCFHostReachability CFHostInfoType = 2
 )
 
@@ -43,4 +43,3 @@ func (e CFNetServiceMonitorType) String() string {
 		return fmt.Sprintf("CFNetServiceMonitorType(%d)", int64(e))
 	}
 }
-

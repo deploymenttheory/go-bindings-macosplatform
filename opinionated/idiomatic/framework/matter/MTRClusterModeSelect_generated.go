@@ -130,9 +130,13 @@ func (x *MTRClusterModeSelect) ChangeToModeWithParamsExpectedValuesExpectedValue
 	x.inner.ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
 }
 
-func (x *MTRClusterModeSelect) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterModeSelect) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterModeSelect) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterModeSelect) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterModeSelectable is the interface implemented by [MTRClusterModeSelect], for mocking and DI.
 type MTRClusterModeSelectable interface {
@@ -157,4 +161,3 @@ type MTRClusterModeSelectable interface {
 }
 
 var _ MTRClusterModeSelectable = (*MTRClusterModeSelect)(nil)
-

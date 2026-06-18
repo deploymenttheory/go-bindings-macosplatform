@@ -19,13 +19,13 @@ type QLThumbnailGenerator struct {
 }
 
 var (
-	_clsQLThumbnailGenerator = _objcClass("QLThumbnailGenerator")
-	_qLThumbnailGeneratorSelGenerateBestRepresentationForRequestCompletionHandler = objc.RegisterName("generateBestRepresentationForRequest:completionHandler:")
-	_qLThumbnailGeneratorSelGenerateRepresentationsForRequestUpdateHandler = objc.RegisterName("generateRepresentationsForRequest:updateHandler:")
-	_qLThumbnailGeneratorSelCancelRequest = objc.RegisterName("cancelRequest:")
-	_qLThumbnailGeneratorSelSaveBestRepresentationForRequestToFileAtURLAsContentTypeCompletionHandler = objc.RegisterName("saveBestRepresentationForRequest:toFileAtURL:asContentType:completionHandler:")
+	_clsQLThumbnailGenerator                                                                            = _objcClass("QLThumbnailGenerator")
+	_qLThumbnailGeneratorSelGenerateBestRepresentationForRequestCompletionHandler                       = objc.RegisterName("generateBestRepresentationForRequest:completionHandler:")
+	_qLThumbnailGeneratorSelGenerateRepresentationsForRequestUpdateHandler                              = objc.RegisterName("generateRepresentationsForRequest:updateHandler:")
+	_qLThumbnailGeneratorSelCancelRequest                                                               = objc.RegisterName("cancelRequest:")
+	_qLThumbnailGeneratorSelSaveBestRepresentationForRequestToFileAtURLAsContentTypeCompletionHandler   = objc.RegisterName("saveBestRepresentationForRequest:toFileAtURL:asContentType:completionHandler:")
 	_qLThumbnailGeneratorSelSaveBestRepresentationForRequestToFileAtURLWithContentTypeCompletionHandler = objc.RegisterName("saveBestRepresentationForRequest:toFileAtURL:withContentType:completionHandler:")
-	_qLThumbnailGeneratorSelSharedGenerator = objc.RegisterName("sharedGenerator")
+	_qLThumbnailGeneratorSelSharedGenerator                                                             = objc.RegisterName("sharedGenerator")
 )
 
 func QLThumbnailGeneratorFromID(id objc.ID) *QLThumbnailGenerator {
@@ -100,7 +100,8 @@ func (o *QLThumbnailGenerator) SaveBestRepresentationForRequestToFileAtURLWithCo
 
 func QLThumbnailGeneratorSharedGenerator() *QLThumbnailGenerator {
 	_ret := objc.Send[objc.ID](objc.ID(_clsQLThumbnailGenerator), _qLThumbnailGeneratorSelSharedGenerator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return QLThumbnailGeneratorFromID(_ret)
 }
-

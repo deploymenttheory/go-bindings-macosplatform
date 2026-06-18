@@ -15,7 +15,7 @@ type MPSkipIntervalCommandEvent struct {
 }
 
 var (
-	_clsMPSkipIntervalCommandEvent = _objcClass("MPSkipIntervalCommandEvent")
+	_clsMPSkipIntervalCommandEvent         = _objcClass("MPSkipIntervalCommandEvent")
 	_mPSkipIntervalCommandEventSelInterval = objc.RegisterName("interval")
 )
 
@@ -33,4 +33,3 @@ func (o *MPSkipIntervalCommandEvent) Interval() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _mPSkipIntervalCommandEventSelInterval)
 	return _ret
 }
-

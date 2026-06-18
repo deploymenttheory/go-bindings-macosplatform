@@ -16,13 +16,13 @@ type CLBeaconIdentityCondition struct {
 }
 
 var (
-	_clsCLBeaconIdentityCondition = _objcClass("CLBeaconIdentityCondition")
-	_cLBeaconIdentityConditionSelInitWithUUID = objc.RegisterName("initWithUUID:")
-	_cLBeaconIdentityConditionSelInitWithUUIDMajor = objc.RegisterName("initWithUUID:major:")
+	_clsCLBeaconIdentityCondition                       = _objcClass("CLBeaconIdentityCondition")
+	_cLBeaconIdentityConditionSelInitWithUUID           = objc.RegisterName("initWithUUID:")
+	_cLBeaconIdentityConditionSelInitWithUUIDMajor      = objc.RegisterName("initWithUUID:major:")
 	_cLBeaconIdentityConditionSelInitWithUUIDMajorMinor = objc.RegisterName("initWithUUID:major:minor:")
-	_cLBeaconIdentityConditionSelUUID = objc.RegisterName("UUID")
-	_cLBeaconIdentityConditionSelMajor = objc.RegisterName("major")
-	_cLBeaconIdentityConditionSelMinor = objc.RegisterName("minor")
+	_cLBeaconIdentityConditionSelUUID                   = objc.RegisterName("UUID")
+	_cLBeaconIdentityConditionSelMajor                  = objc.RegisterName("major")
+	_cLBeaconIdentityConditionSelMinor                  = objc.RegisterName("minor")
 )
 
 func CLBeaconIdentityConditionFromID(id objc.ID) *CLBeaconIdentityCondition {
@@ -37,37 +37,48 @@ func CLBeaconIdentityConditionFromID(id objc.ID) *CLBeaconIdentityCondition {
 
 func (o *CLBeaconIdentityCondition) InitWithUUID(uuid *foundation.NSUUID) *CLBeaconIdentityCondition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconIdentityConditionSelInitWithUUID, uuid.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLBeaconIdentityConditionFromID(_ret)
 }
 
 func (o *CLBeaconIdentityCondition) InitWithUUIDMajor(uuid *foundation.NSUUID, major uint16) *CLBeaconIdentityCondition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconIdentityConditionSelInitWithUUIDMajor, uuid.Ptr(), major)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLBeaconIdentityConditionFromID(_ret)
 }
 
 func (o *CLBeaconIdentityCondition) InitWithUUIDMajorMinor(uuid *foundation.NSUUID, major uint16, minor uint16) *CLBeaconIdentityCondition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconIdentityConditionSelInitWithUUIDMajorMinor, uuid.Ptr(), major, minor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLBeaconIdentityConditionFromID(_ret)
 }
 
 func (o *CLBeaconIdentityCondition) UUID() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconIdentityConditionSelUUID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
 
 func (o *CLBeaconIdentityCondition) Major() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconIdentityConditionSelMajor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *CLBeaconIdentityCondition) Minor() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconIdentityConditionSelMinor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
-

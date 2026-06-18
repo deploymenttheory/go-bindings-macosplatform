@@ -17,11 +17,11 @@ type MPSTemporaryMatrix struct {
 }
 
 var (
-	_clsMPSTemporaryMatrix = _objcClass("MPSTemporaryMatrix")
-	_mPSTemporaryMatrixSelTemporaryMatrixWithCommandBufferMatrixDescriptor = objc.RegisterName("temporaryMatrixWithCommandBuffer:matrixDescriptor:")
+	_clsMPSTemporaryMatrix                                                     = _objcClass("MPSTemporaryMatrix")
+	_mPSTemporaryMatrixSelTemporaryMatrixWithCommandBufferMatrixDescriptor     = objc.RegisterName("temporaryMatrixWithCommandBuffer:matrixDescriptor:")
 	_mPSTemporaryMatrixSelPrefetchStorageWithCommandBufferMatrixDescriptorList = objc.RegisterName("prefetchStorageWithCommandBuffer:matrixDescriptorList:")
-	_mPSTemporaryMatrixSelReadCount = objc.RegisterName("readCount")
-	_mPSTemporaryMatrixSelSetReadCount = objc.RegisterName("setReadCount:")
+	_mPSTemporaryMatrixSelReadCount                                            = objc.RegisterName("readCount")
+	_mPSTemporaryMatrixSelSetReadCount                                         = objc.RegisterName("setReadCount:")
 )
 
 func MPSTemporaryMatrixFromID(id objc.ID) *MPSTemporaryMatrix {
@@ -37,7 +37,9 @@ func MPSTemporaryMatrixFromID(id objc.ID) *MPSTemporaryMatrix {
 // @abstract   Initialize a MPSTemporaryMatrix for use on a MTLCommandBuffer @param      commandBuffer       The MTLCommandBuffer on which the MPSTemporaryMatrix will be exclusively used @param      matrixDescriptor    A valid MPSMatrixDescriptor describing the MPSMatrix format to create @return     A valid MPSTemporaryMatrix.  The object is not managed by a NSAutoreleasePool. The object will be released when the command buffer is committed. The underlying buffer will become invalid before this time due to the action of the readCount property.  Please read and understand the use of the readCount property before using this object.
 func MPSTemporaryMatrixTemporaryMatrixWithCommandBufferMatrixDescriptor(commandBuffer metal.MTLCommandBuffer, matrixDescriptor *MPSMatrixDescriptor) *MPSTemporaryMatrix {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSTemporaryMatrix), _mPSTemporaryMatrixSelTemporaryMatrixWithCommandBufferMatrixDescriptor, commandBuffer, matrixDescriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSTemporaryMatrixFromID(_ret)
 }
 
@@ -55,4 +57,3 @@ func (o *MPSTemporaryMatrix) ReadCount() uint {
 func (o *MPSTemporaryMatrix) SetReadCount(readCount uint) {
 	o.Ptr().Send(_mPSTemporaryMatrixSelSetReadCount, readCount)
 }
-

@@ -12,4 +12,3 @@ import (
 type MatchProvider interface {
 	asMatch() *raw.DDMatch
 }
-

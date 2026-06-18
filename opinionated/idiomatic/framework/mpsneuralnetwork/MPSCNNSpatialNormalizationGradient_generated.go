@@ -18,7 +18,9 @@ type CNNSpatialNormalizationGradient struct {
 }
 
 // Unwrap returns the underlying [raw.MPSCNNSpatialNormalizationGradient].
-func (x *CNNSpatialNormalizationGradient) Unwrap() *raw.MPSCNNSpatialNormalizationGradient { return x.inner }
+func (x *CNNSpatialNormalizationGradient) Unwrap() *raw.MPSCNNSpatialNormalizationGradient {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -202,9 +204,13 @@ func (x *CNNSpatialNormalizationGradient) SetDelta(delta float32) {
 	x.inner.SetDelta(delta)
 }
 
-func (x *CNNSpatialNormalizationGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
+func (x *CNNSpatialNormalizationGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNGradientKernel
+}
 
-func (x *CNNSpatialNormalizationGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *CNNSpatialNormalizationGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
 // CNNSpatialNormalizationGradientable is the interface implemented by [CNNSpatialNormalizationGradient], for mocking and DI.
 type CNNSpatialNormalizationGradientable interface {
@@ -239,4 +245,3 @@ type CNNSpatialNormalizationGradientable interface {
 }
 
 var _ CNNSpatialNormalizationGradientable = (*CNNSpatialNormalizationGradient)(nil)
-

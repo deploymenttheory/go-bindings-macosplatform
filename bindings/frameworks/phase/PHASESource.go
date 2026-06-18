@@ -16,12 +16,12 @@ type PHASESource struct {
 }
 
 var (
-	_clsPHASESource = _objcClass("PHASESource")
-	_pHASESourceSelInitWithEngine = objc.RegisterName("initWithEngine:")
+	_clsPHASESource                     = _objcClass("PHASESource")
+	_pHASESourceSelInitWithEngine       = objc.RegisterName("initWithEngine:")
 	_pHASESourceSelInitWithEngineShapes = objc.RegisterName("initWithEngine:shapes:")
-	_pHASESourceSelGain = objc.RegisterName("gain")
-	_pHASESourceSelSetGain = objc.RegisterName("setGain:")
-	_pHASESourceSelShapes = objc.RegisterName("shapes")
+	_pHASESourceSelGain                 = objc.RegisterName("gain")
+	_pHASESourceSelSetGain              = objc.RegisterName("setGain:")
+	_pHASESourceSelShapes               = objc.RegisterName("shapes")
 )
 
 func PHASESourceFromID(id objc.ID) *PHASESource {
@@ -37,14 +37,18 @@ func PHASESourceFromID(id objc.ID) *PHASESource {
 // @method initWithEngine: @abstract Initialize a new point source.
 func (o *PHASESource) InitWithEngine(engine *PHASEEngine) *PHASESource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESourceSelInitWithEngine, engine.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASESourceFromID(_ret)
 }
 
 // @method initWithEngine:shapes: @abstract Initialize a new volumetric source with shapes. @param shapes The shape(s) of the source within the world @discussion The shapes array cannot be empty, otherwise an exception is thrown. @note This function is thread-safe. Clients can safely run this function to create multiple sources from multiple threads, if required.
 func (o *PHASESource) InitWithEngineShapes(engine *PHASEEngine, shapes *foundation.NSArray[*PHASEShape]) *PHASESource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESourceSelInitWithEngineShapes, engine.Ptr(), shapes.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASESourceFromID(_ret)
 }
 
@@ -61,7 +65,8 @@ func (o *PHASESource) SetGain(gain float64) {
 // @property shapes @abstract Array of shapes associated with this source.
 func (o *PHASESource) Shapes() *foundation.NSArray[*PHASEShape] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESourceSelShapes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PHASEShape](_ret)
 }
-

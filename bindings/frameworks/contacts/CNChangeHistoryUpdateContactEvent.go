@@ -15,7 +15,7 @@ type CNChangeHistoryUpdateContactEvent struct {
 }
 
 var (
-	_clsCNChangeHistoryUpdateContactEvent = _objcClass("CNChangeHistoryUpdateContactEvent")
+	_clsCNChangeHistoryUpdateContactEvent        = _objcClass("CNChangeHistoryUpdateContactEvent")
 	_cNChangeHistoryUpdateContactEventSelContact = objc.RegisterName("contact")
 )
 
@@ -31,7 +31,8 @@ func CNChangeHistoryUpdateContactEventFromID(id objc.ID) *CNChangeHistoryUpdateC
 
 func (o *CNChangeHistoryUpdateContactEvent) Contact() *CNContact {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNChangeHistoryUpdateContactEventSelContact)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNContactFromID(_ret)
 }
-

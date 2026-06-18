@@ -16,7 +16,7 @@ type FSExtentPacker struct {
 }
 
 var (
-	_clsFSExtentPacker = _objcClass("FSExtentPacker")
+	_clsFSExtentPacker                                                            = _objcClass("FSExtentPacker")
 	_fSExtentPackerSelPackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength = objc.RegisterName("packExtentWithResource:type:logicalOffset:physicalOffset:length:")
 )
 
@@ -35,4 +35,3 @@ func (o *FSExtentPacker) PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLe
 	_ret := objc.Send[bool](o.Ptr(), _fSExtentPackerSelPackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength, resource.Ptr(), type_, logicalOffset, physicalOffset, length)
 	return _ret
 }
-

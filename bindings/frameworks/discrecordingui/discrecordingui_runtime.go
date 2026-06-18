@@ -14,8 +14,8 @@ import (
 
 var (
 	_discrecordinguiLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce           sync.Once
+	_failedSymbols      = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -48,18 +48,34 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("DRBurnSessionBeginProgressDialog", func() { purego.RegisterLibFunc(&_fnDRBurnSessionBeginProgressDialog, _discrecordinguiLib, "DRBurnSessionBeginProgressDialog") })
+	_register("DRBurnSessionBeginProgressDialog", func() {
+		purego.RegisterLibFunc(&_fnDRBurnSessionBeginProgressDialog, _discrecordinguiLib, "DRBurnSessionBeginProgressDialog")
+	})
 	_register("DRBurnSessionCreate", func() { purego.RegisterLibFunc(&_fnDRBurnSessionCreate, _discrecordinguiLib, "DRBurnSessionCreate") })
 	_register("DRBurnSessionGetBurn", func() { purego.RegisterLibFunc(&_fnDRBurnSessionGetBurn, _discrecordinguiLib, "DRBurnSessionGetBurn") })
-	_register("DRBurnSessionGetTypeID", func() { purego.RegisterLibFunc(&_fnDRBurnSessionGetTypeID, _discrecordinguiLib, "DRBurnSessionGetTypeID") })
+	_register("DRBurnSessionGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnDRBurnSessionGetTypeID, _discrecordinguiLib, "DRBurnSessionGetTypeID")
+	})
 	_register("DRBurnSessionSetBurn", func() { purego.RegisterLibFunc(&_fnDRBurnSessionSetBurn, _discrecordinguiLib, "DRBurnSessionSetBurn") })
-	_register("DRBurnSessionSetupDialog", func() { purego.RegisterLibFunc(&_fnDRBurnSessionSetupDialog, _discrecordinguiLib, "DRBurnSessionSetupDialog") })
-	_register("DREraseSessionBeginProgressDialog", func() { purego.RegisterLibFunc(&_fnDREraseSessionBeginProgressDialog, _discrecordinguiLib, "DREraseSessionBeginProgressDialog") })
+	_register("DRBurnSessionSetupDialog", func() {
+		purego.RegisterLibFunc(&_fnDRBurnSessionSetupDialog, _discrecordinguiLib, "DRBurnSessionSetupDialog")
+	})
+	_register("DREraseSessionBeginProgressDialog", func() {
+		purego.RegisterLibFunc(&_fnDREraseSessionBeginProgressDialog, _discrecordinguiLib, "DREraseSessionBeginProgressDialog")
+	})
 	_register("DREraseSessionCreate", func() { purego.RegisterLibFunc(&_fnDREraseSessionCreate, _discrecordinguiLib, "DREraseSessionCreate") })
-	_register("DREraseSessionGetErase", func() { purego.RegisterLibFunc(&_fnDREraseSessionGetErase, _discrecordinguiLib, "DREraseSessionGetErase") })
-	_register("DREraseSessionGetTypeID", func() { purego.RegisterLibFunc(&_fnDREraseSessionGetTypeID, _discrecordinguiLib, "DREraseSessionGetTypeID") })
-	_register("DREraseSessionSetErase", func() { purego.RegisterLibFunc(&_fnDREraseSessionSetErase, _discrecordinguiLib, "DREraseSessionSetErase") })
-	_register("DREraseSessionSetupDialog", func() { purego.RegisterLibFunc(&_fnDREraseSessionSetupDialog, _discrecordinguiLib, "DREraseSessionSetupDialog") })
+	_register("DREraseSessionGetErase", func() {
+		purego.RegisterLibFunc(&_fnDREraseSessionGetErase, _discrecordinguiLib, "DREraseSessionGetErase")
+	})
+	_register("DREraseSessionGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnDREraseSessionGetTypeID, _discrecordinguiLib, "DREraseSessionGetTypeID")
+	})
+	_register("DREraseSessionSetErase", func() {
+		purego.RegisterLibFunc(&_fnDREraseSessionSetErase, _discrecordinguiLib, "DREraseSessionSetErase")
+	})
+	_register("DREraseSessionSetupDialog", func() {
+		purego.RegisterLibFunc(&_fnDREraseSessionSetupDialog, _discrecordinguiLib, "DREraseSessionSetupDialog")
+	})
 }
 
 func init() {

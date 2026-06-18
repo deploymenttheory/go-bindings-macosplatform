@@ -11,15 +11,15 @@ import (
 type ITLibArtworkFormat uint64
 
 const (
-	ITLibArtworkFormatNone ITLibArtworkFormat = 0
-	ITLibArtworkFormatBitmap ITLibArtworkFormat = 1
-	ITLibArtworkFormatJPEG ITLibArtworkFormat = 2
+	ITLibArtworkFormatNone     ITLibArtworkFormat = 0
+	ITLibArtworkFormatBitmap   ITLibArtworkFormat = 1
+	ITLibArtworkFormatJPEG     ITLibArtworkFormat = 2
 	ITLibArtworkFormatJPEG2000 ITLibArtworkFormat = 3
-	ITLibArtworkFormatGIF ITLibArtworkFormat = 4
-	ITLibArtworkFormatPNG ITLibArtworkFormat = 5
-	ITLibArtworkFormatBMP ITLibArtworkFormat = 6
-	ITLibArtworkFormatTIFF ITLibArtworkFormat = 7
-	ITLibArtworkFormatPICT ITLibArtworkFormat = 8
+	ITLibArtworkFormatGIF      ITLibArtworkFormat = 4
+	ITLibArtworkFormatPNG      ITLibArtworkFormat = 5
+	ITLibArtworkFormatBMP      ITLibArtworkFormat = 6
+	ITLibArtworkFormatTIFF     ITLibArtworkFormat = 7
+	ITLibArtworkFormatPICT     ITLibArtworkFormat = 8
 )
 
 func (e ITLibArtworkFormat) String() string {
@@ -50,28 +50,28 @@ func (e ITLibArtworkFormat) String() string {
 type ITLibDistinguishedPlaylistKind uint64
 
 const (
-	ITLibDistinguishedPlaylistKindNone ITLibDistinguishedPlaylistKind = 0
-	ITLibDistinguishedPlaylistKindMovies ITLibDistinguishedPlaylistKind = 1
-	ITLibDistinguishedPlaylistKindTVShows ITLibDistinguishedPlaylistKind = 2
-	ITLibDistinguishedPlaylistKindMusic ITLibDistinguishedPlaylistKind = 3
-	ITLibDistinguishedPlaylistKindAudiobooks ITLibDistinguishedPlaylistKind = 4
-	ITLibDistinguishedPlaylistKindBooks ITLibDistinguishedPlaylistKind = 4
-	ITLibDistinguishedPlaylistKindRingtones ITLibDistinguishedPlaylistKind = 5
-	ITLibDistinguishedPlaylistKindPodcasts ITLibDistinguishedPlaylistKind = 7
-	ITLibDistinguishedPlaylistKindVoiceMemos ITLibDistinguishedPlaylistKind = 14
-	ITLibDistinguishedPlaylistKindPurchases ITLibDistinguishedPlaylistKind = 16
-	ITLibDistinguishedPlaylistKindiTunesU ITLibDistinguishedPlaylistKind = 26
-	ITLibDistinguishedPlaylistKind90sMusic ITLibDistinguishedPlaylistKind = 42
-	ITLibDistinguishedPlaylistKindMyTopRated ITLibDistinguishedPlaylistKind = 43
-	ITLibDistinguishedPlaylistKindTop25MostPlayed ITLibDistinguishedPlaylistKind = 44
-	ITLibDistinguishedPlaylistKindRecentlyPlayed ITLibDistinguishedPlaylistKind = 45
-	ITLibDistinguishedPlaylistKindRecentlyAdded ITLibDistinguishedPlaylistKind = 46
-	ITLibDistinguishedPlaylistKindMusicVideos ITLibDistinguishedPlaylistKind = 47
-	ITLibDistinguishedPlaylistKindClassicalMusic ITLibDistinguishedPlaylistKind = 48
-	ITLibDistinguishedPlaylistKindLibraryMusicVideos ITLibDistinguishedPlaylistKind = 49
-	ITLibDistinguishedPlaylistKindHomeVideos ITLibDistinguishedPlaylistKind = 50
-	ITLibDistinguishedPlaylistKindApplications ITLibDistinguishedPlaylistKind = 51
-	ITLibDistinguishedPlaylistKindLovedSongs ITLibDistinguishedPlaylistKind = 52
+	ITLibDistinguishedPlaylistKindNone                ITLibDistinguishedPlaylistKind = 0
+	ITLibDistinguishedPlaylistKindMovies              ITLibDistinguishedPlaylistKind = 1
+	ITLibDistinguishedPlaylistKindTVShows             ITLibDistinguishedPlaylistKind = 2
+	ITLibDistinguishedPlaylistKindMusic               ITLibDistinguishedPlaylistKind = 3
+	ITLibDistinguishedPlaylistKindAudiobooks          ITLibDistinguishedPlaylistKind = 4
+	ITLibDistinguishedPlaylistKindBooks               ITLibDistinguishedPlaylistKind = 4
+	ITLibDistinguishedPlaylistKindRingtones           ITLibDistinguishedPlaylistKind = 5
+	ITLibDistinguishedPlaylistKindPodcasts            ITLibDistinguishedPlaylistKind = 7
+	ITLibDistinguishedPlaylistKindVoiceMemos          ITLibDistinguishedPlaylistKind = 14
+	ITLibDistinguishedPlaylistKindPurchases           ITLibDistinguishedPlaylistKind = 16
+	ITLibDistinguishedPlaylistKindiTunesU             ITLibDistinguishedPlaylistKind = 26
+	ITLibDistinguishedPlaylistKind90sMusic            ITLibDistinguishedPlaylistKind = 42
+	ITLibDistinguishedPlaylistKindMyTopRated          ITLibDistinguishedPlaylistKind = 43
+	ITLibDistinguishedPlaylistKindTop25MostPlayed     ITLibDistinguishedPlaylistKind = 44
+	ITLibDistinguishedPlaylistKindRecentlyPlayed      ITLibDistinguishedPlaylistKind = 45
+	ITLibDistinguishedPlaylistKindRecentlyAdded       ITLibDistinguishedPlaylistKind = 46
+	ITLibDistinguishedPlaylistKindMusicVideos         ITLibDistinguishedPlaylistKind = 47
+	ITLibDistinguishedPlaylistKindClassicalMusic      ITLibDistinguishedPlaylistKind = 48
+	ITLibDistinguishedPlaylistKindLibraryMusicVideos  ITLibDistinguishedPlaylistKind = 49
+	ITLibDistinguishedPlaylistKindHomeVideos          ITLibDistinguishedPlaylistKind = 50
+	ITLibDistinguishedPlaylistKindApplications        ITLibDistinguishedPlaylistKind = 51
+	ITLibDistinguishedPlaylistKindLovedSongs          ITLibDistinguishedPlaylistKind = 52
 	ITLibDistinguishedPlaylistKindMusicShowsAndMovies ITLibDistinguishedPlaylistKind = 53
 )
 
@@ -164,9 +164,9 @@ type ITLibMediaItemLocationType uint64
 
 const (
 	ITLibMediaItemLocationTypeUnknown ITLibMediaItemLocationType = 0
-	ITLibMediaItemLocationTypeFile ITLibMediaItemLocationType = 1
-	ITLibMediaItemLocationTypeURL ITLibMediaItemLocationType = 2
-	ITLibMediaItemLocationTypeRemote ITLibMediaItemLocationType = 3
+	ITLibMediaItemLocationTypeFile    ITLibMediaItemLocationType = 1
+	ITLibMediaItemLocationTypeURL     ITLibMediaItemLocationType = 2
+	ITLibMediaItemLocationTypeRemote  ITLibMediaItemLocationType = 3
 )
 
 func (e ITLibMediaItemLocationType) String() string {
@@ -187,9 +187,9 @@ func (e ITLibMediaItemLocationType) String() string {
 type ITLibMediaItemLyricsContentRating uint64
 
 const (
-	ITLibMediaItemLyricsContentRatingNone ITLibMediaItemLyricsContentRating = 0
+	ITLibMediaItemLyricsContentRatingNone     ITLibMediaItemLyricsContentRating = 0
 	ITLibMediaItemLyricsContentRatingExplicit ITLibMediaItemLyricsContentRating = 1
-	ITLibMediaItemLyricsContentRatingClean ITLibMediaItemLyricsContentRating = 2
+	ITLibMediaItemLyricsContentRatingClean    ITLibMediaItemLyricsContentRating = 2
 )
 
 func (e ITLibMediaItemLyricsContentRating) String() string {
@@ -208,24 +208,24 @@ func (e ITLibMediaItemLyricsContentRating) String() string {
 type ITLibMediaItemMediaKind uint64
 
 const (
-	ITLibMediaItemMediaKindUnknown ITLibMediaItemMediaKind = 1
-	ITLibMediaItemMediaKindSong ITLibMediaItemMediaKind = 2
-	ITLibMediaItemMediaKindMovie ITLibMediaItemMediaKind = 3
-	ITLibMediaItemMediaKindPodcast ITLibMediaItemMediaKind = 4
-	ITLibMediaItemMediaKindAudiobook ITLibMediaItemMediaKind = 5
-	ITLibMediaItemMediaKindPDFBooklet ITLibMediaItemMediaKind = 6
-	ITLibMediaItemMediaKindMusicVideo ITLibMediaItemMediaKind = 7
-	ITLibMediaItemMediaKindTVShow ITLibMediaItemMediaKind = 8
+	ITLibMediaItemMediaKindUnknown            ITLibMediaItemMediaKind = 1
+	ITLibMediaItemMediaKindSong               ITLibMediaItemMediaKind = 2
+	ITLibMediaItemMediaKindMovie              ITLibMediaItemMediaKind = 3
+	ITLibMediaItemMediaKindPodcast            ITLibMediaItemMediaKind = 4
+	ITLibMediaItemMediaKindAudiobook          ITLibMediaItemMediaKind = 5
+	ITLibMediaItemMediaKindPDFBooklet         ITLibMediaItemMediaKind = 6
+	ITLibMediaItemMediaKindMusicVideo         ITLibMediaItemMediaKind = 7
+	ITLibMediaItemMediaKindTVShow             ITLibMediaItemMediaKind = 8
 	ITLibMediaItemMediaKindInteractiveBooklet ITLibMediaItemMediaKind = 9
-	ITLibMediaItemMediaKindHomeVideo ITLibMediaItemMediaKind = 12
-	ITLibMediaItemMediaKindRingtone ITLibMediaItemMediaKind = 14
-	ITLibMediaItemMediaKindDigitalBooklet ITLibMediaItemMediaKind = 15
-	ITLibMediaItemMediaKindIOSApplication ITLibMediaItemMediaKind = 16
-	ITLibMediaItemMediaKindVoiceMemo ITLibMediaItemMediaKind = 17
-	ITLibMediaItemMediaKindiTunesU ITLibMediaItemMediaKind = 18
-	ITLibMediaItemMediaKindBook ITLibMediaItemMediaKind = 19
-	ITLibMediaItemMediaKindPDFBook ITLibMediaItemMediaKind = 20
-	ITLibMediaItemMediaKindAlertTone ITLibMediaItemMediaKind = 21
+	ITLibMediaItemMediaKindHomeVideo          ITLibMediaItemMediaKind = 12
+	ITLibMediaItemMediaKindRingtone           ITLibMediaItemMediaKind = 14
+	ITLibMediaItemMediaKindDigitalBooklet     ITLibMediaItemMediaKind = 15
+	ITLibMediaItemMediaKindIOSApplication     ITLibMediaItemMediaKind = 16
+	ITLibMediaItemMediaKindVoiceMemo          ITLibMediaItemMediaKind = 17
+	ITLibMediaItemMediaKindiTunesU            ITLibMediaItemMediaKind = 18
+	ITLibMediaItemMediaKindBook               ITLibMediaItemMediaKind = 19
+	ITLibMediaItemMediaKindPDFBook            ITLibMediaItemMediaKind = 20
+	ITLibMediaItemMediaKindAlertTone          ITLibMediaItemMediaKind = 21
 )
 
 func (e ITLibMediaItemMediaKind) String() string {
@@ -274,9 +274,9 @@ func (e ITLibMediaItemMediaKind) String() string {
 type ITLibMediaItemPlayStatus uint64
 
 const (
-	ITLibMediaItemPlayStatusNone ITLibMediaItemPlayStatus = 0
+	ITLibMediaItemPlayStatusNone            ITLibMediaItemPlayStatus = 0
 	ITLibMediaItemPlayStatusPartiallyPlayed ITLibMediaItemPlayStatus = 1
-	ITLibMediaItemPlayStatusUnplayed ITLibMediaItemPlayStatus = 2
+	ITLibMediaItemPlayStatusUnplayed        ITLibMediaItemPlayStatus = 2
 )
 
 func (e ITLibMediaItemPlayStatus) String() string {
@@ -295,10 +295,10 @@ func (e ITLibMediaItemPlayStatus) String() string {
 type ITLibPlaylistKind uint64
 
 const (
-	ITLibPlaylistKindRegular ITLibPlaylistKind = 0
-	ITLibPlaylistKindSmart ITLibPlaylistKind = 1
-	ITLibPlaylistKindGenius ITLibPlaylistKind = 2
-	ITLibPlaylistKindFolder ITLibPlaylistKind = 3
+	ITLibPlaylistKindRegular   ITLibPlaylistKind = 0
+	ITLibPlaylistKindSmart     ITLibPlaylistKind = 1
+	ITLibPlaylistKindGenius    ITLibPlaylistKind = 2
+	ITLibPlaylistKindFolder    ITLibPlaylistKind = 3
 	ITLibPlaylistKindGeniusMix ITLibPlaylistKind = 4
 )
 
@@ -318,4 +318,3 @@ func (e ITLibPlaylistKind) String() string {
 		return fmt.Sprintf("ITLibPlaylistKind(%d)", int64(e))
 	}
 }
-

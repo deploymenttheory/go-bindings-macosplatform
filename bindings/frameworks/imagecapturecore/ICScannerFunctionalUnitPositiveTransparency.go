@@ -17,11 +17,11 @@ type ICScannerFunctionalUnitPositiveTransparency struct {
 }
 
 var (
-	_clsICScannerFunctionalUnitPositiveTransparency = _objcClass("ICScannerFunctionalUnitPositiveTransparency")
+	_clsICScannerFunctionalUnitPositiveTransparency                       = _objcClass("ICScannerFunctionalUnitPositiveTransparency")
 	_iCScannerFunctionalUnitPositiveTransparencySelSupportedDocumentTypes = objc.RegisterName("supportedDocumentTypes")
-	_iCScannerFunctionalUnitPositiveTransparencySelDocumentType = objc.RegisterName("documentType")
-	_iCScannerFunctionalUnitPositiveTransparencySelSetDocumentType = objc.RegisterName("setDocumentType:")
-	_iCScannerFunctionalUnitPositiveTransparencySelDocumentSize = objc.RegisterName("documentSize")
+	_iCScannerFunctionalUnitPositiveTransparencySelDocumentType           = objc.RegisterName("documentType")
+	_iCScannerFunctionalUnitPositiveTransparencySelSetDocumentType        = objc.RegisterName("setDocumentType:")
+	_iCScannerFunctionalUnitPositiveTransparencySelDocumentSize           = objc.RegisterName("documentSize")
 )
 
 func ICScannerFunctionalUnitPositiveTransparencyFromID(id objc.ID) *ICScannerFunctionalUnitPositiveTransparency {
@@ -37,7 +37,9 @@ func ICScannerFunctionalUnitPositiveTransparencyFromID(id objc.ID) *ICScannerFun
 // @property supportedDocumentTypes @abstract ￼Supported document types. The values in this set are valid values defined by ICScannerDocumentType.
 func (o *ICScannerFunctionalUnitPositiveTransparency) SupportedDocumentTypes() *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCScannerFunctionalUnitPositiveTransparencySelSupportedDocumentTypes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
@@ -56,4 +58,3 @@ func (o *ICScannerFunctionalUnitPositiveTransparency) DocumentSize() corefoundat
 	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _iCScannerFunctionalUnitPositiveTransparencySelDocumentSize)
 	return _ret
 }
-

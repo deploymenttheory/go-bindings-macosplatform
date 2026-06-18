@@ -54,4 +54,3 @@ type PressureConfigurationable interface {
 }
 
 var _ PressureConfigurationable = (*PressureConfiguration)(nil)
-

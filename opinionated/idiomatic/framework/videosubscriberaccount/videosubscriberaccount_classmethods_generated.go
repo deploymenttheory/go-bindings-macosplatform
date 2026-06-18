@@ -25,4 +25,3 @@ func SharedUserAccountManager() *VSUserAccountManager {
 	}
 	return &VSUserAccountManager{inner: _r}
 }
-

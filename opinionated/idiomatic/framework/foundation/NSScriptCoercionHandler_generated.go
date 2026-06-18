@@ -62,4 +62,3 @@ type ScriptCoercionHandlerable interface {
 }
 
 var _ ScriptCoercionHandlerable = (*ScriptCoercionHandler)(nil)
-

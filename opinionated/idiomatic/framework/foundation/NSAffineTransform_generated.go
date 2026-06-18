@@ -137,4 +137,3 @@ type AffineTransformable interface {
 }
 
 var _ AffineTransformable = (*AffineTransform)(nil)
-

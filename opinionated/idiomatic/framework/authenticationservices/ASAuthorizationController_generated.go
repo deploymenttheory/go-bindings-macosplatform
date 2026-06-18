@@ -112,4 +112,3 @@ type AuthorizationControllerable interface {
 }
 
 var _ AuthorizationControllerable = (*AuthorizationController)(nil)
-

@@ -18,30 +18,30 @@ type CAShapeLayer struct {
 }
 
 var (
-	_clsCAShapeLayer = _objcClass("CAShapeLayer")
-	_cAShapeLayerSelPath = objc.RegisterName("path")
-	_cAShapeLayerSelSetPath = objc.RegisterName("setPath:")
-	_cAShapeLayerSelFillColor = objc.RegisterName("fillColor")
-	_cAShapeLayerSelSetFillColor = objc.RegisterName("setFillColor:")
-	_cAShapeLayerSelFillRule = objc.RegisterName("fillRule")
-	_cAShapeLayerSelSetFillRule = objc.RegisterName("setFillRule:")
-	_cAShapeLayerSelStrokeColor = objc.RegisterName("strokeColor")
-	_cAShapeLayerSelSetStrokeColor = objc.RegisterName("setStrokeColor:")
-	_cAShapeLayerSelStrokeStart = objc.RegisterName("strokeStart")
-	_cAShapeLayerSelSetStrokeStart = objc.RegisterName("setStrokeStart:")
-	_cAShapeLayerSelStrokeEnd = objc.RegisterName("strokeEnd")
-	_cAShapeLayerSelSetStrokeEnd = objc.RegisterName("setStrokeEnd:")
-	_cAShapeLayerSelLineWidth = objc.RegisterName("lineWidth")
-	_cAShapeLayerSelSetLineWidth = objc.RegisterName("setLineWidth:")
-	_cAShapeLayerSelMiterLimit = objc.RegisterName("miterLimit")
-	_cAShapeLayerSelSetMiterLimit = objc.RegisterName("setMiterLimit:")
-	_cAShapeLayerSelLineCap = objc.RegisterName("lineCap")
-	_cAShapeLayerSelSetLineCap = objc.RegisterName("setLineCap:")
-	_cAShapeLayerSelLineJoin = objc.RegisterName("lineJoin")
-	_cAShapeLayerSelSetLineJoin = objc.RegisterName("setLineJoin:")
-	_cAShapeLayerSelLineDashPhase = objc.RegisterName("lineDashPhase")
-	_cAShapeLayerSelSetLineDashPhase = objc.RegisterName("setLineDashPhase:")
-	_cAShapeLayerSelLineDashPattern = objc.RegisterName("lineDashPattern")
+	_clsCAShapeLayer                   = _objcClass("CAShapeLayer")
+	_cAShapeLayerSelPath               = objc.RegisterName("path")
+	_cAShapeLayerSelSetPath            = objc.RegisterName("setPath:")
+	_cAShapeLayerSelFillColor          = objc.RegisterName("fillColor")
+	_cAShapeLayerSelSetFillColor       = objc.RegisterName("setFillColor:")
+	_cAShapeLayerSelFillRule           = objc.RegisterName("fillRule")
+	_cAShapeLayerSelSetFillRule        = objc.RegisterName("setFillRule:")
+	_cAShapeLayerSelStrokeColor        = objc.RegisterName("strokeColor")
+	_cAShapeLayerSelSetStrokeColor     = objc.RegisterName("setStrokeColor:")
+	_cAShapeLayerSelStrokeStart        = objc.RegisterName("strokeStart")
+	_cAShapeLayerSelSetStrokeStart     = objc.RegisterName("setStrokeStart:")
+	_cAShapeLayerSelStrokeEnd          = objc.RegisterName("strokeEnd")
+	_cAShapeLayerSelSetStrokeEnd       = objc.RegisterName("setStrokeEnd:")
+	_cAShapeLayerSelLineWidth          = objc.RegisterName("lineWidth")
+	_cAShapeLayerSelSetLineWidth       = objc.RegisterName("setLineWidth:")
+	_cAShapeLayerSelMiterLimit         = objc.RegisterName("miterLimit")
+	_cAShapeLayerSelSetMiterLimit      = objc.RegisterName("setMiterLimit:")
+	_cAShapeLayerSelLineCap            = objc.RegisterName("lineCap")
+	_cAShapeLayerSelSetLineCap         = objc.RegisterName("setLineCap:")
+	_cAShapeLayerSelLineJoin           = objc.RegisterName("lineJoin")
+	_cAShapeLayerSelSetLineJoin        = objc.RegisterName("setLineJoin:")
+	_cAShapeLayerSelLineDashPhase      = objc.RegisterName("lineDashPhase")
+	_cAShapeLayerSelSetLineDashPhase   = objc.RegisterName("setLineDashPhase:")
+	_cAShapeLayerSelLineDashPattern    = objc.RegisterName("lineDashPattern")
 	_cAShapeLayerSelSetLineDashPattern = objc.RegisterName("setLineDashPattern:")
 )
 
@@ -75,7 +75,9 @@ func (o *CAShapeLayer) SetFillColor(fillColor unsafe.Pointer) {
 
 func (o *CAShapeLayer) FillRule() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cAShapeLayerSelFillRule)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -130,7 +132,9 @@ func (o *CAShapeLayer) SetMiterLimit(miterLimit float64) {
 
 func (o *CAShapeLayer) LineCap() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cAShapeLayerSelLineCap)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -140,7 +144,9 @@ func (o *CAShapeLayer) SetLineCap(lineCap *foundation.NSString) {
 
 func (o *CAShapeLayer) LineJoin() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cAShapeLayerSelLineJoin)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -165,4 +171,3 @@ func (o *CAShapeLayer) LineDashPattern() *foundation.NSArray[*foundation.NSNumbe
 func (o *CAShapeLayer) SetLineDashPattern(lineDashPattern *foundation.NSArray[*foundation.NSNumber]) {
 	o.Ptr().Send(_cAShapeLayerSelSetLineDashPattern, lineDashPattern)
 }
-

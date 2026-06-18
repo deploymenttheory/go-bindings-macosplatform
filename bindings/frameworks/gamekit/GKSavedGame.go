@@ -18,11 +18,11 @@ type GKSavedGame struct {
 }
 
 var (
-	_clsGKSavedGame = _objcClass("GKSavedGame")
+	_clsGKSavedGame                              = _objcClass("GKSavedGame")
 	_gKSavedGameSelLoadDataWithCompletionHandler = objc.RegisterName("loadDataWithCompletionHandler:")
-	_gKSavedGameSelName = objc.RegisterName("name")
-	_gKSavedGameSelDeviceName = objc.RegisterName("deviceName")
-	_gKSavedGameSelModificationDate = objc.RegisterName("modificationDate")
+	_gKSavedGameSelName                          = objc.RegisterName("name")
+	_gKSavedGameSelDeviceName                    = objc.RegisterName("deviceName")
+	_gKSavedGameSelModificationDate              = objc.RegisterName("modificationDate")
 )
 
 func GKSavedGameFromID(id objc.ID) *GKSavedGame {
@@ -52,19 +52,24 @@ func (o *GKSavedGame) LoadDataWithCompletionHandler(handler func(*foundation.NSD
 
 func (o *GKSavedGame) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKSavedGameSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *GKSavedGame) DeviceName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKSavedGameSelDeviceName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *GKSavedGame) ModificationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKSavedGameSelModificationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
-

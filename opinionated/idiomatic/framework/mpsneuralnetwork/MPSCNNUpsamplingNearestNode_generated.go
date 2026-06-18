@@ -59,7 +59,9 @@ func (x *CNNUpsamplingNearestNode) ScaleFactorY() float64 {
 	return x.inner.ScaleFactorY()
 }
 
-func (x *CNNUpsamplingNearestNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+func (x *CNNUpsamplingNearestNode) asNNFilterNode() *raw.MPSNNFilterNode {
+	return &x.inner.MPSNNFilterNode
+}
 
 // CNNUpsamplingNearestNodeable is the interface implemented by [CNNUpsamplingNearestNode], for mocking and DI.
 type CNNUpsamplingNearestNodeable interface {
@@ -71,4 +73,3 @@ type CNNUpsamplingNearestNodeable interface {
 }
 
 var _ CNNUpsamplingNearestNodeable = (*CNNUpsamplingNearestNode)(nil)
-

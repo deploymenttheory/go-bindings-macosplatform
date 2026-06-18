@@ -98,7 +98,9 @@ func (x *DOMNodeIterator) PointerBeforeReferenceNode() bool {
 
 func (x *DOMNodeIterator) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
-func (x *DOMNodeIterator) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+func (x *DOMNodeIterator) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMObject.WebScriptObject
+}
 
 // DOMNodeIteratorable is the interface implemented by [DOMNodeIterator], for mocking and DI.
 type DOMNodeIteratorable interface {
@@ -115,4 +117,3 @@ type DOMNodeIteratorable interface {
 }
 
 var _ DOMNodeIteratorable = (*DOMNodeIterator)(nil)
-

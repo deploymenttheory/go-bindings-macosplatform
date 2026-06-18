@@ -10,8 +10,8 @@ import (
 type Idtype_t int64
 
 const (
-	P_ALL Idtype_t = 0
-	P_PID Idtype_t = 1
+	P_ALL  Idtype_t = 0
+	P_PID  Idtype_t = 1
 	P_PGID Idtype_t = 2
 )
 
@@ -50,38 +50,38 @@ type Ruby_fl_type int64
 
 const (
 	RUBY_FL_WB_PROTECTED Ruby_fl_type = 32
-	RUBY_FL_PROMOTED0 Ruby_fl_type = 32
-	RUBY_FL_PROMOTED1 Ruby_fl_type = 64
-	RUBY_FL_PROMOTED Ruby_fl_type = 96
-	RUBY_FL_FINALIZE Ruby_fl_type = 128
-	RUBY_FL_TAINT Ruby_fl_type = 256
-	RUBY_FL_UNTRUSTED Ruby_fl_type = 256
-	RUBY_FL_EXIVAR Ruby_fl_type = 1024
-	RUBY_FL_FREEZE Ruby_fl_type = 2048
-	RUBY_FL_USHIFT Ruby_fl_type = 12
-	RUBY_FL_USER0 Ruby_fl_type = 4096
-	RUBY_FL_USER1 Ruby_fl_type = 8192
-	RUBY_FL_USER2 Ruby_fl_type = 16384
-	RUBY_FL_USER3 Ruby_fl_type = 32768
-	RUBY_FL_USER4 Ruby_fl_type = 65536
-	RUBY_FL_USER5 Ruby_fl_type = 131072
-	RUBY_FL_USER6 Ruby_fl_type = 262144
-	RUBY_FL_USER7 Ruby_fl_type = 524288
-	RUBY_FL_USER8 Ruby_fl_type = 1048576
-	RUBY_FL_USER9 Ruby_fl_type = 2097152
-	RUBY_FL_USER10 Ruby_fl_type = 4194304
-	RUBY_FL_USER11 Ruby_fl_type = 8388608
-	RUBY_FL_USER12 Ruby_fl_type = 16777216
-	RUBY_FL_USER13 Ruby_fl_type = 33554432
-	RUBY_FL_USER14 Ruby_fl_type = 67108864
-	RUBY_FL_USER15 Ruby_fl_type = 134217728
-	RUBY_FL_USER16 Ruby_fl_type = 268435456
-	RUBY_FL_USER17 Ruby_fl_type = 536870912
-	RUBY_FL_USER18 Ruby_fl_type = 1073741824
-	RUBY_FL_USER19 Ruby_fl_type = -2147483648
-	RUBY_ELTS_SHARED Ruby_fl_type = 16384
-	RUBY_FL_DUPPED Ruby_fl_type = 1311
-	RUBY_FL_SINGLETON Ruby_fl_type = 4096
+	RUBY_FL_PROMOTED0    Ruby_fl_type = 32
+	RUBY_FL_PROMOTED1    Ruby_fl_type = 64
+	RUBY_FL_PROMOTED     Ruby_fl_type = 96
+	RUBY_FL_FINALIZE     Ruby_fl_type = 128
+	RUBY_FL_TAINT        Ruby_fl_type = 256
+	RUBY_FL_UNTRUSTED    Ruby_fl_type = 256
+	RUBY_FL_EXIVAR       Ruby_fl_type = 1024
+	RUBY_FL_FREEZE       Ruby_fl_type = 2048
+	RUBY_FL_USHIFT       Ruby_fl_type = 12
+	RUBY_FL_USER0        Ruby_fl_type = 4096
+	RUBY_FL_USER1        Ruby_fl_type = 8192
+	RUBY_FL_USER2        Ruby_fl_type = 16384
+	RUBY_FL_USER3        Ruby_fl_type = 32768
+	RUBY_FL_USER4        Ruby_fl_type = 65536
+	RUBY_FL_USER5        Ruby_fl_type = 131072
+	RUBY_FL_USER6        Ruby_fl_type = 262144
+	RUBY_FL_USER7        Ruby_fl_type = 524288
+	RUBY_FL_USER8        Ruby_fl_type = 1048576
+	RUBY_FL_USER9        Ruby_fl_type = 2097152
+	RUBY_FL_USER10       Ruby_fl_type = 4194304
+	RUBY_FL_USER11       Ruby_fl_type = 8388608
+	RUBY_FL_USER12       Ruby_fl_type = 16777216
+	RUBY_FL_USER13       Ruby_fl_type = 33554432
+	RUBY_FL_USER14       Ruby_fl_type = 67108864
+	RUBY_FL_USER15       Ruby_fl_type = 134217728
+	RUBY_FL_USER16       Ruby_fl_type = 268435456
+	RUBY_FL_USER17       Ruby_fl_type = 536870912
+	RUBY_FL_USER18       Ruby_fl_type = 1073741824
+	RUBY_FL_USER19       Ruby_fl_type = -2147483648
+	RUBY_ELTS_SHARED     Ruby_fl_type = 16384
+	RUBY_FL_DUPPED       Ruby_fl_type = 1311
+	RUBY_FL_SINGLETON    Ruby_fl_type = 4096
 )
 
 func (e Ruby_fl_type) String() string {
@@ -152,12 +152,12 @@ func (e Ruby_fl_type) String() string {
 type Ruby_rarray_flags int64
 
 const (
-	RARRAY_EMBED_LEN_MAX Ruby_rarray_flags = 3
-	RARRAY_EMBED_FLAG Ruby_rarray_flags = 8192
-	RARRAY_EMBED_LEN_MASK Ruby_rarray_flags = 98304
+	RARRAY_EMBED_LEN_MAX   Ruby_rarray_flags = 3
+	RARRAY_EMBED_FLAG      Ruby_rarray_flags = 8192
+	RARRAY_EMBED_LEN_MASK  Ruby_rarray_flags = 98304
 	RARRAY_EMBED_LEN_SHIFT Ruby_rarray_flags = 15
-	RARRAY_TRANSIENT_FLAG Ruby_rarray_flags = 33554432
-	RARRAY_ENUM_END Ruby_rarray_flags = 33554433
+	RARRAY_TRANSIENT_FLAG  Ruby_rarray_flags = 33554432
+	RARRAY_ENUM_END        Ruby_rarray_flags = 33554433
 )
 
 func (e Ruby_rarray_flags) String() string {
@@ -182,10 +182,10 @@ func (e Ruby_rarray_flags) String() string {
 type Ruby_rmodule_flags int64
 
 const (
-	RMODULE_IS_OVERLAID Ruby_rmodule_flags = 16384
-	RMODULE_IS_REFINEMENT Ruby_rmodule_flags = 32768
+	RMODULE_IS_OVERLAID              Ruby_rmodule_flags = 16384
+	RMODULE_IS_REFINEMENT            Ruby_rmodule_flags = 32768
 	RMODULE_INCLUDED_INTO_REFINEMENT Ruby_rmodule_flags = 65536
-	RMODULE_ENUM_END Ruby_rmodule_flags = 65537
+	RMODULE_ENUM_END                 Ruby_rmodule_flags = 65537
 )
 
 func (e Ruby_rmodule_flags) String() string {
@@ -207,8 +207,8 @@ type Ruby_robject_flags int64
 
 const (
 	ROBJECT_EMBED_LEN_MAX Ruby_robject_flags = 3
-	ROBJECT_EMBED Ruby_robject_flags = 8192
-	ROBJECT_ENUM_END Ruby_robject_flags = 8193
+	ROBJECT_EMBED         Ruby_robject_flags = 8192
+	ROBJECT_ENUM_END      Ruby_robject_flags = 8193
 )
 
 func (e Ruby_robject_flags) String() string {
@@ -227,12 +227,12 @@ func (e Ruby_robject_flags) String() string {
 type Ruby_rstring_flags int64
 
 const (
-	RSTRING_NOEMBED Ruby_rstring_flags = 8192
-	RSTRING_EMBED_LEN_MASK Ruby_rstring_flags = 507904
+	RSTRING_NOEMBED         Ruby_rstring_flags = 8192
+	RSTRING_EMBED_LEN_MASK  Ruby_rstring_flags = 507904
 	RSTRING_EMBED_LEN_SHIFT Ruby_rstring_flags = 14
-	RSTRING_EMBED_LEN_MAX Ruby_rstring_flags = 23
-	RSTRING_FSTR Ruby_rstring_flags = 536870912
-	RSTRING_ENUM_END Ruby_rstring_flags = 536870913
+	RSTRING_EMBED_LEN_MAX   Ruby_rstring_flags = 23
+	RSTRING_FSTR            Ruby_rstring_flags = 536870912
+	RSTRING_ENUM_END        Ruby_rstring_flags = 536870913
 )
 
 func (e Ruby_rstring_flags) String() string {
@@ -257,16 +257,16 @@ func (e Ruby_rstring_flags) String() string {
 type Ruby_special_consts int64
 
 const (
-	RUBY_Qfalse Ruby_special_consts = 0
-	RUBY_Qtrue Ruby_special_consts = 20
-	RUBY_Qnil Ruby_special_consts = 8
-	RUBY_Qundef Ruby_special_consts = 52
+	RUBY_Qfalse         Ruby_special_consts = 0
+	RUBY_Qtrue          Ruby_special_consts = 20
+	RUBY_Qnil           Ruby_special_consts = 8
+	RUBY_Qundef         Ruby_special_consts = 52
 	RUBY_IMMEDIATE_MASK Ruby_special_consts = 7
-	RUBY_FIXNUM_FLAG Ruby_special_consts = 1
-	RUBY_FLONUM_MASK Ruby_special_consts = 3
-	RUBY_FLONUM_FLAG Ruby_special_consts = 2
-	RUBY_SYMBOL_FLAG Ruby_special_consts = 12
-	RUBY_SPECIAL_SHIFT Ruby_special_consts = 8
+	RUBY_FIXNUM_FLAG    Ruby_special_consts = 1
+	RUBY_FLONUM_MASK    Ruby_special_consts = 3
+	RUBY_FLONUM_FLAG    Ruby_special_consts = 2
+	RUBY_SYMBOL_FLAG    Ruby_special_consts = 12
+	RUBY_SPECIAL_SHIFT  Ruby_special_consts = 8
 )
 
 func (e Ruby_special_consts) String() string {
@@ -297,33 +297,33 @@ func (e Ruby_special_consts) String() string {
 type Ruby_value_type int64
 
 const (
-	RUBY_T_NONE Ruby_value_type = 0
-	RUBY_T_OBJECT Ruby_value_type = 1
-	RUBY_T_CLASS Ruby_value_type = 2
-	RUBY_T_MODULE Ruby_value_type = 3
-	RUBY_T_FLOAT Ruby_value_type = 4
-	RUBY_T_STRING Ruby_value_type = 5
-	RUBY_T_REGEXP Ruby_value_type = 6
-	RUBY_T_ARRAY Ruby_value_type = 7
-	RUBY_T_HASH Ruby_value_type = 8
-	RUBY_T_STRUCT Ruby_value_type = 9
-	RUBY_T_BIGNUM Ruby_value_type = 10
-	RUBY_T_FILE Ruby_value_type = 11
-	RUBY_T_DATA Ruby_value_type = 12
-	RUBY_T_MATCH Ruby_value_type = 13
-	RUBY_T_COMPLEX Ruby_value_type = 14
+	RUBY_T_NONE     Ruby_value_type = 0
+	RUBY_T_OBJECT   Ruby_value_type = 1
+	RUBY_T_CLASS    Ruby_value_type = 2
+	RUBY_T_MODULE   Ruby_value_type = 3
+	RUBY_T_FLOAT    Ruby_value_type = 4
+	RUBY_T_STRING   Ruby_value_type = 5
+	RUBY_T_REGEXP   Ruby_value_type = 6
+	RUBY_T_ARRAY    Ruby_value_type = 7
+	RUBY_T_HASH     Ruby_value_type = 8
+	RUBY_T_STRUCT   Ruby_value_type = 9
+	RUBY_T_BIGNUM   Ruby_value_type = 10
+	RUBY_T_FILE     Ruby_value_type = 11
+	RUBY_T_DATA     Ruby_value_type = 12
+	RUBY_T_MATCH    Ruby_value_type = 13
+	RUBY_T_COMPLEX  Ruby_value_type = 14
 	RUBY_T_RATIONAL Ruby_value_type = 15
-	RUBY_T_NIL Ruby_value_type = 17
-	RUBY_T_TRUE Ruby_value_type = 18
-	RUBY_T_FALSE Ruby_value_type = 19
-	RUBY_T_SYMBOL Ruby_value_type = 20
-	RUBY_T_FIXNUM Ruby_value_type = 21
-	RUBY_T_UNDEF Ruby_value_type = 22
-	RUBY_T_IMEMO Ruby_value_type = 26
-	RUBY_T_NODE Ruby_value_type = 27
-	RUBY_T_ICLASS Ruby_value_type = 28
-	RUBY_T_ZOMBIE Ruby_value_type = 29
-	RUBY_T_MASK Ruby_value_type = 31
+	RUBY_T_NIL      Ruby_value_type = 17
+	RUBY_T_TRUE     Ruby_value_type = 18
+	RUBY_T_FALSE    Ruby_value_type = 19
+	RUBY_T_SYMBOL   Ruby_value_type = 20
+	RUBY_T_FIXNUM   Ruby_value_type = 21
+	RUBY_T_UNDEF    Ruby_value_type = 22
+	RUBY_T_IMEMO    Ruby_value_type = 26
+	RUBY_T_NODE     Ruby_value_type = 27
+	RUBY_T_ICLASS   Ruby_value_type = 28
+	RUBY_T_ZOMBIE   Ruby_value_type = 29
+	RUBY_T_MASK     Ruby_value_type = 31
 )
 
 func (e Ruby_value_type) String() string {
@@ -391,9 +391,9 @@ type St_retval int64
 
 const (
 	ST_CONTINUE St_retval = 0
-	ST_STOP St_retval = 1
-	ST_DELETE St_retval = 2
-	ST_CHECK St_retval = 3
+	ST_STOP     St_retval = 1
+	ST_DELETE   St_retval = 2
+	ST_CHECK    St_retval = 3
 )
 
 func (e St_retval) String() string {
@@ -410,4 +410,3 @@ func (e St_retval) String() string {
 		return fmt.Sprintf("St_retval(%d)", int64(e))
 	}
 }
-

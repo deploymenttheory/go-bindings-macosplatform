@@ -17,11 +17,11 @@ type AVAssetVariantVideoAttributes struct {
 }
 
 var (
-	_clsAVAssetVariantVideoAttributes = _objcClass("AVAssetVariantVideoAttributes")
-	_aVAssetVariantVideoAttributesSelVideoRange = objc.RegisterName("videoRange")
-	_aVAssetVariantVideoAttributesSelCodecTypes = objc.RegisterName("codecTypes")
-	_aVAssetVariantVideoAttributesSelPresentationSize = objc.RegisterName("presentationSize")
-	_aVAssetVariantVideoAttributesSelNominalFrameRate = objc.RegisterName("nominalFrameRate")
+	_clsAVAssetVariantVideoAttributes                      = _objcClass("AVAssetVariantVideoAttributes")
+	_aVAssetVariantVideoAttributesSelVideoRange            = objc.RegisterName("videoRange")
+	_aVAssetVariantVideoAttributesSelCodecTypes            = objc.RegisterName("codecTypes")
+	_aVAssetVariantVideoAttributesSelPresentationSize      = objc.RegisterName("presentationSize")
+	_aVAssetVariantVideoAttributesSelNominalFrameRate      = objc.RegisterName("nominalFrameRate")
 	_aVAssetVariantVideoAttributesSelVideoLayoutAttributes = objc.RegisterName("videoLayoutAttributes")
 )
 
@@ -38,7 +38,9 @@ func AVAssetVariantVideoAttributesFromID(id objc.ID) *AVAssetVariantVideoAttribu
 // Provides the video range of the variant. If it is not declared, it will be AVVideoRangeSDR.
 func (o *AVAssetVariantVideoAttributes) VideoRange() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetVariantVideoAttributesSelVideoRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -63,7 +65,8 @@ func (o *AVAssetVariantVideoAttributes) NominalFrameRate() float64 {
 // Describes the video layout attributes. videoLayoutAttributes' count may be greater than one if this variant contains a collection of differing video layout media attributes over time.
 func (o *AVAssetVariantVideoAttributes) VideoLayoutAttributes() *foundation.NSArray[*AVAssetVariantVideoLayoutAttributes] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetVariantVideoAttributesSelVideoLayoutAttributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVAssetVariantVideoLayoutAttributes](_ret)
 }
-

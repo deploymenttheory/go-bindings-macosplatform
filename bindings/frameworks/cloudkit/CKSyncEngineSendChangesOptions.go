@@ -16,11 +16,11 @@ type CKSyncEngineSendChangesOptions struct {
 }
 
 var (
-	_clsCKSyncEngineSendChangesOptions = _objcClass("CKSyncEngineSendChangesOptions")
-	_cKSyncEngineSendChangesOptionsSelInitWithScope = objc.RegisterName("initWithScope:")
-	_cKSyncEngineSendChangesOptionsSelScope = objc.RegisterName("scope")
-	_cKSyncEngineSendChangesOptionsSelSetScope = objc.RegisterName("setScope:")
-	_cKSyncEngineSendChangesOptionsSelOperationGroup = objc.RegisterName("operationGroup")
+	_clsCKSyncEngineSendChangesOptions                  = _objcClass("CKSyncEngineSendChangesOptions")
+	_cKSyncEngineSendChangesOptionsSelInitWithScope     = objc.RegisterName("initWithScope:")
+	_cKSyncEngineSendChangesOptionsSelScope             = objc.RegisterName("scope")
+	_cKSyncEngineSendChangesOptionsSelSetScope          = objc.RegisterName("setScope:")
+	_cKSyncEngineSendChangesOptionsSelOperationGroup    = objc.RegisterName("operationGroup")
 	_cKSyncEngineSendChangesOptionsSelSetOperationGroup = objc.RegisterName("setOperationGroup:")
 )
 
@@ -37,14 +37,18 @@ func CKSyncEngineSendChangesOptionsFromID(id objc.ID) *CKSyncEngineSendChangesOp
 // Initializes a set of options with the specific scope. If no scope is provided, the default scope will include everything.
 func (o *CKSyncEngineSendChangesOptions) InitWithScope(scope *CKSyncEngineSendChangesScope) *CKSyncEngineSendChangesOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineSendChangesOptionsSelInitWithScope, scope.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKSyncEngineSendChangesOptionsFromID(_ret)
 }
 
 // The scope in which to send changes to the server.
 func (o *CKSyncEngineSendChangesOptions) Scope() *CKSyncEngineSendChangesScope {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineSendChangesOptionsSelScope)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKSyncEngineSendChangesScopeFromID(_ret)
 }
 
@@ -55,11 +59,12 @@ func (o *CKSyncEngineSendChangesOptions) SetScope(scope *CKSyncEngineSendChanges
 // The operation group to use for the underlying CloudKit operations. - Tip: Providing a specific operation group helps you to identify and analyze the telemetry of send operations in CloudKit Console. The default value is `nil`.
 func (o *CKSyncEngineSendChangesOptions) OperationGroup() *CKOperationGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineSendChangesOptionsSelOperationGroup)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKOperationGroupFromID(_ret)
 }
 
 func (o *CKSyncEngineSendChangesOptions) SetOperationGroup(operationGroup *CKOperationGroup) {
 	o.Ptr().Send(_cKSyncEngineSendChangesOptionsSelSetOperationGroup, operationGroup.Ptr())
 }
-

@@ -73,4 +73,3 @@ type LinkViewable interface {
 }
 
 var _ LinkViewable = (*LinkView)(nil)
-

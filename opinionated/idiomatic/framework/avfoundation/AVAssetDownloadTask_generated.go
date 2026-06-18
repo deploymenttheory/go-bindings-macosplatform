@@ -71,4 +71,3 @@ type AssetDownloadTaskable interface {
 }
 
 var _ AssetDownloadTaskable = (*AssetDownloadTask)(nil)
-

@@ -16,9 +16,9 @@ type AMShellScriptAction struct {
 }
 
 var (
-	_clsAMShellScriptAction = _objcClass("AMShellScriptAction")
-	_aMShellScriptActionSelRemapLineEndings = objc.RegisterName("remapLineEndings")
-	_aMShellScriptActionSelInputFieldSeparator = objc.RegisterName("inputFieldSeparator")
+	_clsAMShellScriptAction                     = _objcClass("AMShellScriptAction")
+	_aMShellScriptActionSelRemapLineEndings     = objc.RegisterName("remapLineEndings")
+	_aMShellScriptActionSelInputFieldSeparator  = objc.RegisterName("inputFieldSeparator")
 	_aMShellScriptActionSelOutputFieldSeparator = objc.RegisterName("outputFieldSeparator")
 )
 
@@ -39,13 +39,16 @@ func (o *AMShellScriptAction) RemapLineEndings() bool {
 
 func (o *AMShellScriptAction) InputFieldSeparator() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aMShellScriptActionSelInputFieldSeparator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *AMShellScriptAction) OutputFieldSeparator() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aMShellScriptActionSelOutputFieldSeparator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

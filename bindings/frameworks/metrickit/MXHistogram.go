@@ -16,7 +16,7 @@ type MXHistogram[UnitType purego.AnyObject] struct {
 }
 
 var (
-	_clsMXHistogram = _objcClass("MXHistogram")
+	_clsMXHistogram                 = _objcClass("MXHistogram")
 	_mXHistogramSelTotalBucketCount = objc.RegisterName("totalBucketCount")
 	_mXHistogramSelBucketEnumerator = objc.RegisterName("bucketEnumerator")
 )
@@ -42,4 +42,3 @@ func (o *MXHistogram[UnitType]) BucketEnumerator() *foundation.NSEnumerator[objc
 	_ret := objc.Send[*foundation.NSEnumerator[objc.ID]](o.Ptr(), _mXHistogramSelBucketEnumerator)
 	return _ret
 }
-

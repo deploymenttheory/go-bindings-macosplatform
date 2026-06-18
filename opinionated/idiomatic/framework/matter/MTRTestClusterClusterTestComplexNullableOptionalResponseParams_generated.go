@@ -16,11 +16,15 @@ type MTRTestClusterClusterTestComplexNullableOptionalResponseParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRTestClusterClusterTestComplexNullableOptionalResponseParams].
-func (x *MTRTestClusterClusterTestComplexNullableOptionalResponseParams) Unwrap() *raw.MTRTestClusterClusterTestComplexNullableOptionalResponseParams { return x.inner }
+func (x *MTRTestClusterClusterTestComplexNullableOptionalResponseParams) Unwrap() *raw.MTRTestClusterClusterTestComplexNullableOptionalResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRTestClusterClusterTestComplexNullableOptionalResponseParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRTestClusterClusterTestComplexNullableOptionalResponseParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRTestClusterClusterTestComplexNullableOptionalResponseParamsFromID adopts an existing object pointer as a MTRTestClusterClusterTestComplexNullableOptionalResponseParams (nil for 0).
 func MTRTestClusterClusterTestComplexNullableOptionalResponseParamsFromID(id objc.ID) *MTRTestClusterClusterTestComplexNullableOptionalResponseParams {
@@ -192,7 +196,9 @@ func (x *MTRTestClusterClusterTestComplexNullableOptionalResponseParams) WithTim
 	return x
 }
 
-func (x *MTRTestClusterClusterTestComplexNullableOptionalResponseParams) asMTRUnitTestingClusterTestComplexNullableOptionalResponseParams() *raw.MTRUnitTestingClusterTestComplexNullableOptionalResponseParams { return &x.inner.MTRUnitTestingClusterTestComplexNullableOptionalResponseParams }
+func (x *MTRTestClusterClusterTestComplexNullableOptionalResponseParams) asMTRUnitTestingClusterTestComplexNullableOptionalResponseParams() *raw.MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
+	return &x.inner.MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
+}
 
 // MTRTestClusterClusterTestComplexNullableOptionalResponseParamsable is the interface implemented by [MTRTestClusterClusterTestComplexNullableOptionalResponseParams], for mocking and DI.
 type MTRTestClusterClusterTestComplexNullableOptionalResponseParamsable interface {
@@ -226,4 +232,3 @@ type MTRTestClusterClusterTestComplexNullableOptionalResponseParamsable interfac
 }
 
 var _ MTRTestClusterClusterTestComplexNullableOptionalResponseParamsable = (*MTRTestClusterClusterTestComplexNullableOptionalResponseParams)(nil)
-

@@ -19,7 +19,7 @@ type GKCloudPlayer struct {
 }
 
 var (
-	_clsGKCloudPlayer = _objcClass("GKCloudPlayer")
+	_clsGKCloudPlayer                                                      = _objcClass("GKCloudPlayer")
 	_gKCloudPlayerSelGetCurrentSignedInPlayerForContainerCompletionHandler = objc.RegisterName("getCurrentSignedInPlayerForContainer:completionHandler:")
 )
 
@@ -47,4 +47,3 @@ func GKCloudPlayerGetCurrentSignedInPlayerForContainerCompletionHandler(containe
 	}
 	objc.ID(_clsGKCloudPlayer).Send(_gKCloudPlayerSelGetCurrentSignedInPlayerForContainerCompletionHandler, containerName.Ptr(), __block_handler)
 }
-

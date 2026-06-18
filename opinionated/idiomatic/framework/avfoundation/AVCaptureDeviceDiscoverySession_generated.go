@@ -54,4 +54,3 @@ type CaptureDeviceDiscoverySessionable interface {
 }
 
 var _ CaptureDeviceDiscoverySessionable = (*CaptureDeviceDiscoverySession)(nil)
-

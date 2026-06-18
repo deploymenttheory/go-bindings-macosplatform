@@ -16,26 +16,26 @@ type MPSGRUDescriptor struct {
 }
 
 var (
-	_clsMPSGRUDescriptor = _objcClass("MPSGRUDescriptor")
+	_clsMPSGRUDescriptor                                                                 = _objcClass("MPSGRUDescriptor")
 	_mPSGRUDescriptorSelCreateGRUDescriptorWithInputFeatureChannelsOutputFeatureChannels = objc.RegisterName("createGRUDescriptorWithInputFeatureChannels:outputFeatureChannels:")
-	_mPSGRUDescriptorSelInputGateInputWeights = objc.RegisterName("inputGateInputWeights")
-	_mPSGRUDescriptorSelSetInputGateInputWeights = objc.RegisterName("setInputGateInputWeights:")
-	_mPSGRUDescriptorSelInputGateRecurrentWeights = objc.RegisterName("inputGateRecurrentWeights")
-	_mPSGRUDescriptorSelSetInputGateRecurrentWeights = objc.RegisterName("setInputGateRecurrentWeights:")
-	_mPSGRUDescriptorSelRecurrentGateInputWeights = objc.RegisterName("recurrentGateInputWeights")
-	_mPSGRUDescriptorSelSetRecurrentGateInputWeights = objc.RegisterName("setRecurrentGateInputWeights:")
-	_mPSGRUDescriptorSelRecurrentGateRecurrentWeights = objc.RegisterName("recurrentGateRecurrentWeights")
-	_mPSGRUDescriptorSelSetRecurrentGateRecurrentWeights = objc.RegisterName("setRecurrentGateRecurrentWeights:")
-	_mPSGRUDescriptorSelOutputGateInputWeights = objc.RegisterName("outputGateInputWeights")
-	_mPSGRUDescriptorSelSetOutputGateInputWeights = objc.RegisterName("setOutputGateInputWeights:")
-	_mPSGRUDescriptorSelOutputGateRecurrentWeights = objc.RegisterName("outputGateRecurrentWeights")
-	_mPSGRUDescriptorSelSetOutputGateRecurrentWeights = objc.RegisterName("setOutputGateRecurrentWeights:")
-	_mPSGRUDescriptorSelOutputGateInputGateWeights = objc.RegisterName("outputGateInputGateWeights")
-	_mPSGRUDescriptorSelSetOutputGateInputGateWeights = objc.RegisterName("setOutputGateInputGateWeights:")
-	_mPSGRUDescriptorSelGatePnormValue = objc.RegisterName("gatePnormValue")
-	_mPSGRUDescriptorSelSetGatePnormValue = objc.RegisterName("setGatePnormValue:")
-	_mPSGRUDescriptorSelFlipOutputGates = objc.RegisterName("flipOutputGates")
-	_mPSGRUDescriptorSelSetFlipOutputGates = objc.RegisterName("setFlipOutputGates:")
+	_mPSGRUDescriptorSelInputGateInputWeights                                            = objc.RegisterName("inputGateInputWeights")
+	_mPSGRUDescriptorSelSetInputGateInputWeights                                         = objc.RegisterName("setInputGateInputWeights:")
+	_mPSGRUDescriptorSelInputGateRecurrentWeights                                        = objc.RegisterName("inputGateRecurrentWeights")
+	_mPSGRUDescriptorSelSetInputGateRecurrentWeights                                     = objc.RegisterName("setInputGateRecurrentWeights:")
+	_mPSGRUDescriptorSelRecurrentGateInputWeights                                        = objc.RegisterName("recurrentGateInputWeights")
+	_mPSGRUDescriptorSelSetRecurrentGateInputWeights                                     = objc.RegisterName("setRecurrentGateInputWeights:")
+	_mPSGRUDescriptorSelRecurrentGateRecurrentWeights                                    = objc.RegisterName("recurrentGateRecurrentWeights")
+	_mPSGRUDescriptorSelSetRecurrentGateRecurrentWeights                                 = objc.RegisterName("setRecurrentGateRecurrentWeights:")
+	_mPSGRUDescriptorSelOutputGateInputWeights                                           = objc.RegisterName("outputGateInputWeights")
+	_mPSGRUDescriptorSelSetOutputGateInputWeights                                        = objc.RegisterName("setOutputGateInputWeights:")
+	_mPSGRUDescriptorSelOutputGateRecurrentWeights                                       = objc.RegisterName("outputGateRecurrentWeights")
+	_mPSGRUDescriptorSelSetOutputGateRecurrentWeights                                    = objc.RegisterName("setOutputGateRecurrentWeights:")
+	_mPSGRUDescriptorSelOutputGateInputGateWeights                                       = objc.RegisterName("outputGateInputGateWeights")
+	_mPSGRUDescriptorSelSetOutputGateInputGateWeights                                    = objc.RegisterName("setOutputGateInputGateWeights:")
+	_mPSGRUDescriptorSelGatePnormValue                                                   = objc.RegisterName("gatePnormValue")
+	_mPSGRUDescriptorSelSetGatePnormValue                                                = objc.RegisterName("setGatePnormValue:")
+	_mPSGRUDescriptorSelFlipOutputGates                                                  = objc.RegisterName("flipOutputGates")
+	_mPSGRUDescriptorSelSetFlipOutputGates                                               = objc.RegisterName("setFlipOutputGates:")
 )
 
 func MPSGRUDescriptorFromID(id objc.ID) *MPSGRUDescriptor {
@@ -51,7 +51,9 @@ func MPSGRUDescriptorFromID(id objc.ID) *MPSGRUDescriptor {
 // @abstract   Creates a GRU descriptor. @param      inputFeatureChannels    The number of feature channels in the input image/matrix. Must be >= 1. @param      outputFeatureChannels   The number of feature channels in the output image/matrix. Must be >= 1. @return     A valid MPSGRUDescriptor object or nil, if failure.
 func MPSGRUDescriptorCreateGRUDescriptorWithInputFeatureChannelsOutputFeatureChannels(inputFeatureChannels uint, outputFeatureChannels uint) *MPSGRUDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGRUDescriptor), _mPSGRUDescriptorSelCreateGRUDescriptorWithInputFeatureChannelsOutputFeatureChannels, inputFeatureChannels, outputFeatureChannels)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSGRUDescriptorFromID(_ret)
 }
 
@@ -144,4 +146,3 @@ func (o *MPSGRUDescriptor) FlipOutputGates() bool {
 func (o *MPSGRUDescriptor) SetFlipOutputGates(flipOutputGates bool) {
 	o.Ptr().Send(_mPSGRUDescriptorSelSetFlipOutputGates, flipOutputGates)
 }
-

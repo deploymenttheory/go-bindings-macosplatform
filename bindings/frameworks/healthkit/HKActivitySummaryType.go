@@ -25,4 +25,3 @@ func HKActivitySummaryTypeFromID(id objc.ID) *HKActivitySummaryType {
 	purego.Track(o)
 	return o
 }
-

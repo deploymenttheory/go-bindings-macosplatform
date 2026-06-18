@@ -87,4 +87,3 @@ type AccessibilityTextMarkerRangeable interface {
 }
 
 var _ AccessibilityTextMarkerRangeable = (*AccessibilityTextMarkerRange)(nil)
-

@@ -82,7 +82,9 @@ func (x *PlayerItemVideoOutput) DelegateQueue() *foundation.NSObject {
 	return x.inner.DelegateQueue()
 }
 
-func (x *PlayerItemVideoOutput) asPlayerItemOutput() *raw.AVPlayerItemOutput { return &x.inner.AVPlayerItemOutput }
+func (x *PlayerItemVideoOutput) asPlayerItemOutput() *raw.AVPlayerItemOutput {
+	return &x.inner.AVPlayerItemOutput
+}
 
 // PlayerItemVideoOutputable is the interface implemented by [PlayerItemVideoOutput], for mocking and DI.
 type PlayerItemVideoOutputable interface {
@@ -97,4 +99,3 @@ type PlayerItemVideoOutputable interface {
 }
 
 var _ PlayerItemVideoOutputable = (*PlayerItemVideoOutput)(nil)
-

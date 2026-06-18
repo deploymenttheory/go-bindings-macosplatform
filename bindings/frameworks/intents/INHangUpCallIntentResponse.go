@@ -16,9 +16,9 @@ type INHangUpCallIntentResponse struct {
 }
 
 var (
-	_clsINHangUpCallIntentResponse = _objcClass("INHangUpCallIntentResponse")
+	_clsINHangUpCallIntentResponse                         = _objcClass("INHangUpCallIntentResponse")
 	_iNHangUpCallIntentResponseSelInitWithCodeUserActivity = objc.RegisterName("initWithCode:userActivity:")
-	_iNHangUpCallIntentResponseSelCode = objc.RegisterName("code")
+	_iNHangUpCallIntentResponseSelCode                     = objc.RegisterName("code")
 )
 
 func INHangUpCallIntentResponseFromID(id objc.ID) *INHangUpCallIntentResponse {
@@ -33,7 +33,9 @@ func INHangUpCallIntentResponseFromID(id objc.ID) *INHangUpCallIntentResponse {
 
 func (o *INHangUpCallIntentResponse) InitWithCodeUserActivity(code INHangUpCallIntentResponseCode, userActivity *foundation.NSUserActivity) *INHangUpCallIntentResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNHangUpCallIntentResponseSelInitWithCodeUserActivity, code, userActivity.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INHangUpCallIntentResponseFromID(_ret)
 }
 
@@ -41,4 +43,3 @@ func (o *INHangUpCallIntentResponse) Code() INHangUpCallIntentResponseCode {
 	_ret := objc.Send[INHangUpCallIntentResponseCode](o.Ptr(), _iNHangUpCallIntentResponseSelCode)
 	return _ret
 }
-

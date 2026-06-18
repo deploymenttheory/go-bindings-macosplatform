@@ -49,4 +49,3 @@ type PersonIdentityable interface {
 }
 
 var _ PersonIdentityable = (*PersonIdentity)(nil)
-

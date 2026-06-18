@@ -16,16 +16,16 @@ type MERAWProcessingBooleanParameter struct {
 }
 
 var (
-	_clsMERAWProcessingBooleanParameter = _objcClass("MERAWProcessingBooleanParameter")
-	_mERAWProcessingBooleanParameterSelInitWithNameKeyDescriptionInitialValue = objc.RegisterName("initWithName:key:description:initialValue:")
-	_mERAWProcessingBooleanParameterSelInitWithNameKeyDescriptionInitialValueNeutralValue = objc.RegisterName("initWithName:key:description:initialValue:neutralValue:")
-	_mERAWProcessingBooleanParameterSelInitWithNameKeyDescriptionInitialValueCameraValue = objc.RegisterName("initWithName:key:description:initialValue:cameraValue:")
+	_clsMERAWProcessingBooleanParameter                                                              = _objcClass("MERAWProcessingBooleanParameter")
+	_mERAWProcessingBooleanParameterSelInitWithNameKeyDescriptionInitialValue                        = objc.RegisterName("initWithName:key:description:initialValue:")
+	_mERAWProcessingBooleanParameterSelInitWithNameKeyDescriptionInitialValueNeutralValue            = objc.RegisterName("initWithName:key:description:initialValue:neutralValue:")
+	_mERAWProcessingBooleanParameterSelInitWithNameKeyDescriptionInitialValueCameraValue             = objc.RegisterName("initWithName:key:description:initialValue:cameraValue:")
 	_mERAWProcessingBooleanParameterSelInitWithNameKeyDescriptionInitialValueNeutralValueCameraValue = objc.RegisterName("initWithName:key:description:initialValue:neutralValue:cameraValue:")
-	_mERAWProcessingBooleanParameterSelHasNeutralValue = objc.RegisterName("hasNeutralValue:")
-	_mERAWProcessingBooleanParameterSelHasCameraValue = objc.RegisterName("hasCameraValue:")
-	_mERAWProcessingBooleanParameterSelInitialValue = objc.RegisterName("initialValue")
-	_mERAWProcessingBooleanParameterSelCurrentValue = objc.RegisterName("currentValue")
-	_mERAWProcessingBooleanParameterSelSetCurrentValue = objc.RegisterName("setCurrentValue:")
+	_mERAWProcessingBooleanParameterSelHasNeutralValue                                               = objc.RegisterName("hasNeutralValue:")
+	_mERAWProcessingBooleanParameterSelHasCameraValue                                                = objc.RegisterName("hasCameraValue:")
+	_mERAWProcessingBooleanParameterSelInitialValue                                                  = objc.RegisterName("initialValue")
+	_mERAWProcessingBooleanParameterSelCurrentValue                                                  = objc.RegisterName("currentValue")
+	_mERAWProcessingBooleanParameterSelSetCurrentValue                                               = objc.RegisterName("setCurrentValue:")
 )
 
 func MERAWProcessingBooleanParameterFromID(id objc.ID) *MERAWProcessingBooleanParameter {
@@ -40,25 +40,33 @@ func MERAWProcessingBooleanParameterFromID(id objc.ID) *MERAWProcessingBooleanPa
 
 func (o *MERAWProcessingBooleanParameter) InitWithNameKeyDescriptionInitialValue(name *foundation.NSString, key *foundation.NSString, description *foundation.NSString, initialValue bool) *MERAWProcessingBooleanParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mERAWProcessingBooleanParameterSelInitWithNameKeyDescriptionInitialValue, name.Ptr(), key.Ptr(), description.Ptr(), initialValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MERAWProcessingBooleanParameterFromID(_ret)
 }
 
 func (o *MERAWProcessingBooleanParameter) InitWithNameKeyDescriptionInitialValueNeutralValue(name *foundation.NSString, key *foundation.NSString, description *foundation.NSString, initialValue bool, neutralValue bool) *MERAWProcessingBooleanParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mERAWProcessingBooleanParameterSelInitWithNameKeyDescriptionInitialValueNeutralValue, name.Ptr(), key.Ptr(), description.Ptr(), initialValue, neutralValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MERAWProcessingBooleanParameterFromID(_ret)
 }
 
 func (o *MERAWProcessingBooleanParameter) InitWithNameKeyDescriptionInitialValueCameraValue(name *foundation.NSString, key *foundation.NSString, description *foundation.NSString, initialValue bool, cameraValue bool) *MERAWProcessingBooleanParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mERAWProcessingBooleanParameterSelInitWithNameKeyDescriptionInitialValueCameraValue, name.Ptr(), key.Ptr(), description.Ptr(), initialValue, cameraValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MERAWProcessingBooleanParameterFromID(_ret)
 }
 
 func (o *MERAWProcessingBooleanParameter) InitWithNameKeyDescriptionInitialValueNeutralValueCameraValue(name *foundation.NSString, key *foundation.NSString, description *foundation.NSString, initialValue bool, neutralValue bool, cameraValue bool) *MERAWProcessingBooleanParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mERAWProcessingBooleanParameterSelInitWithNameKeyDescriptionInitialValueNeutralValueCameraValue, name.Ptr(), key.Ptr(), description.Ptr(), initialValue, neutralValue, cameraValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MERAWProcessingBooleanParameterFromID(_ret)
 }
 
@@ -89,4 +97,3 @@ func (o *MERAWProcessingBooleanParameter) CurrentValue() bool {
 func (o *MERAWProcessingBooleanParameter) SetCurrentValue(currentValue bool) {
 	o.Ptr().Send(_mERAWProcessingBooleanParameterSelSetCurrentValue, currentValue)
 }
-

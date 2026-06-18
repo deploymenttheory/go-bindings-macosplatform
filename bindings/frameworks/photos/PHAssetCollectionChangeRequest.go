@@ -16,20 +16,20 @@ type PHAssetCollectionChangeRequest struct {
 }
 
 var (
-	_clsPHAssetCollectionChangeRequest = _objcClass("PHAssetCollectionChangeRequest")
+	_clsPHAssetCollectionChangeRequest                                           = _objcClass("PHAssetCollectionChangeRequest")
 	_pHAssetCollectionChangeRequestSelCreationRequestForAssetCollectionWithTitle = objc.RegisterName("creationRequestForAssetCollectionWithTitle:")
-	_pHAssetCollectionChangeRequestSelDeleteAssetCollections = objc.RegisterName("deleteAssetCollections:")
-	_pHAssetCollectionChangeRequestSelChangeRequestForAssetCollection = objc.RegisterName("changeRequestForAssetCollection:")
-	_pHAssetCollectionChangeRequestSelChangeRequestForAssetCollectionAssets = objc.RegisterName("changeRequestForAssetCollection:assets:")
-	_pHAssetCollectionChangeRequestSelAddAssets = objc.RegisterName("addAssets:")
-	_pHAssetCollectionChangeRequestSelInsertAssetsAtIndexes = objc.RegisterName("insertAssets:atIndexes:")
-	_pHAssetCollectionChangeRequestSelRemoveAssets = objc.RegisterName("removeAssets:")
-	_pHAssetCollectionChangeRequestSelRemoveAssetsAtIndexes = objc.RegisterName("removeAssetsAtIndexes:")
-	_pHAssetCollectionChangeRequestSelReplaceAssetsAtIndexesWithAssets = objc.RegisterName("replaceAssetsAtIndexes:withAssets:")
-	_pHAssetCollectionChangeRequestSelMoveAssetsAtIndexesToIndex = objc.RegisterName("moveAssetsAtIndexes:toIndex:")
-	_pHAssetCollectionChangeRequestSelPlaceholderForCreatedAssetCollection = objc.RegisterName("placeholderForCreatedAssetCollection")
-	_pHAssetCollectionChangeRequestSelTitle = objc.RegisterName("title")
-	_pHAssetCollectionChangeRequestSelSetTitle = objc.RegisterName("setTitle:")
+	_pHAssetCollectionChangeRequestSelDeleteAssetCollections                     = objc.RegisterName("deleteAssetCollections:")
+	_pHAssetCollectionChangeRequestSelChangeRequestForAssetCollection            = objc.RegisterName("changeRequestForAssetCollection:")
+	_pHAssetCollectionChangeRequestSelChangeRequestForAssetCollectionAssets      = objc.RegisterName("changeRequestForAssetCollection:assets:")
+	_pHAssetCollectionChangeRequestSelAddAssets                                  = objc.RegisterName("addAssets:")
+	_pHAssetCollectionChangeRequestSelInsertAssetsAtIndexes                      = objc.RegisterName("insertAssets:atIndexes:")
+	_pHAssetCollectionChangeRequestSelRemoveAssets                               = objc.RegisterName("removeAssets:")
+	_pHAssetCollectionChangeRequestSelRemoveAssetsAtIndexes                      = objc.RegisterName("removeAssetsAtIndexes:")
+	_pHAssetCollectionChangeRequestSelReplaceAssetsAtIndexesWithAssets           = objc.RegisterName("replaceAssetsAtIndexes:withAssets:")
+	_pHAssetCollectionChangeRequestSelMoveAssetsAtIndexesToIndex                 = objc.RegisterName("moveAssetsAtIndexes:toIndex:")
+	_pHAssetCollectionChangeRequestSelPlaceholderForCreatedAssetCollection       = objc.RegisterName("placeholderForCreatedAssetCollection")
+	_pHAssetCollectionChangeRequestSelTitle                                      = objc.RegisterName("title")
+	_pHAssetCollectionChangeRequestSelSetTitle                                   = objc.RegisterName("setTitle:")
 )
 
 func PHAssetCollectionChangeRequestFromID(id objc.ID) *PHAssetCollectionChangeRequest {
@@ -44,7 +44,9 @@ func PHAssetCollectionChangeRequestFromID(id objc.ID) *PHAssetCollectionChangeRe
 
 func PHAssetCollectionChangeRequestCreationRequestForAssetCollectionWithTitle(title *foundation.NSString) *PHAssetCollectionChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetCollectionChangeRequest), _pHAssetCollectionChangeRequestSelCreationRequestForAssetCollectionWithTitle, title.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHAssetCollectionChangeRequestFromID(_ret)
 }
 
@@ -54,13 +56,17 @@ func PHAssetCollectionChangeRequestDeleteAssetCollections(assetCollections found
 
 func PHAssetCollectionChangeRequestChangeRequestForAssetCollection(assetCollection *PHAssetCollection) *PHAssetCollectionChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetCollectionChangeRequest), _pHAssetCollectionChangeRequestSelChangeRequestForAssetCollection, assetCollection.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHAssetCollectionChangeRequestFromID(_ret)
 }
 
 func PHAssetCollectionChangeRequestChangeRequestForAssetCollectionAssets(assetCollection *PHAssetCollection, assets *PHFetchResult[*PHAsset]) *PHAssetCollectionChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetCollectionChangeRequest), _pHAssetCollectionChangeRequestSelChangeRequestForAssetCollectionAssets, assetCollection.Ptr(), assets.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHAssetCollectionChangeRequestFromID(_ret)
 }
 
@@ -90,17 +96,20 @@ func (o *PHAssetCollectionChangeRequest) MoveAssetsAtIndexesToIndex(fromIndexes 
 
 func (o *PHAssetCollectionChangeRequest) PlaceholderForCreatedAssetCollection() *PHObjectPlaceholder {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHAssetCollectionChangeRequestSelPlaceholderForCreatedAssetCollection)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHObjectPlaceholderFromID(_ret)
 }
 
 func (o *PHAssetCollectionChangeRequest) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHAssetCollectionChangeRequestSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PHAssetCollectionChangeRequest) SetTitle(title *foundation.NSString) {
 	o.Ptr().Send(_pHAssetCollectionChangeRequestSelSetTitle, title.Ptr())
 }
-

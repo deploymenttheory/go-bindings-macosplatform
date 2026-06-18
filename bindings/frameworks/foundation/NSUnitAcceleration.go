@@ -15,9 +15,9 @@ type NSUnitAcceleration struct {
 }
 
 var (
-	_clsNSUnitAcceleration = _objcClass("NSUnitAcceleration")
+	_clsNSUnitAcceleration                       = _objcClass("NSUnitAcceleration")
 	_nSUnitAccelerationSelMetersPerSecondSquared = objc.RegisterName("metersPerSecondSquared")
-	_nSUnitAccelerationSelGravity = objc.RegisterName("gravity")
+	_nSUnitAccelerationSelGravity                = objc.RegisterName("gravity")
 )
 
 func NSUnitAccelerationFromID(id objc.ID) *NSUnitAcceleration {
@@ -32,13 +32,16 @@ func NSUnitAccelerationFromID(id objc.ID) *NSUnitAcceleration {
 
 func NSUnitAccelerationMetersPerSecondSquared() *NSUnitAcceleration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitAcceleration), _nSUnitAccelerationSelMetersPerSecondSquared)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitAccelerationFromID(_ret)
 }
 
 func NSUnitAccelerationGravity() *NSUnitAcceleration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitAcceleration), _nSUnitAccelerationSelGravity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitAccelerationFromID(_ret)
 }
-

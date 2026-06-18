@@ -71,7 +71,9 @@ func (x *LayoutYAxisAnchor) ConstraintLessThanOrEqualToSystemSpacingBelowAnchorM
 	return &LayoutConstraint{inner: _r}
 }
 
-func (x *LayoutYAxisAnchor) asLayoutAnchor() *raw.NSLayoutAnchor[objc.ID] { return &x.inner.NSLayoutAnchor }
+func (x *LayoutYAxisAnchor) asLayoutAnchor() *raw.NSLayoutAnchor[objc.ID] {
+	return &x.inner.NSLayoutAnchor
+}
 
 // LayoutYAxisAnchorable is the interface implemented by [LayoutYAxisAnchor], for mocking and DI.
 type LayoutYAxisAnchorable interface {
@@ -83,4 +85,3 @@ type LayoutYAxisAnchorable interface {
 }
 
 var _ LayoutYAxisAnchorable = (*LayoutYAxisAnchor)(nil)
-

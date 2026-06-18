@@ -18,7 +18,7 @@ type AVPersistableContentKeyRequest struct {
 }
 
 var (
-	_clsAVPersistableContentKeyRequest = _objcClass("AVPersistableContentKeyRequest")
+	_clsAVPersistableContentKeyRequest                                                       = _objcClass("AVPersistableContentKeyRequest")
 	_aVPersistableContentKeyRequestSelPersistableContentKeyFromKeyVendorResponseOptionsError = objc.RegisterName("persistableContentKeyFromKeyVendorResponse:options:error:")
 )
 
@@ -36,10 +36,11 @@ func AVPersistableContentKeyRequestFromID(id objc.ID) *AVPersistableContentKeyRe
 func (o *AVPersistableContentKeyRequest) PersistableContentKeyFromKeyVendorResponseOptionsError(keyVendorResponse *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPersistableContentKeyRequestSelPersistableContentKeyFromKeyVendorResponseOptionsError, keyVendorResponse.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSDataFromID(_ret), nil
 }
-

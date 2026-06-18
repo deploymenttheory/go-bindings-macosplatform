@@ -129,4 +129,3 @@ type PreviewReplyable interface {
 }
 
 var _ PreviewReplyable = (*PreviewReply)(nil)
-

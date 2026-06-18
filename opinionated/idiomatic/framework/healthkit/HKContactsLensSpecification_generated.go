@@ -54,7 +54,9 @@ func (x *ContactsLensSpecification) Diameter() *Quantity {
 	return &Quantity{inner: _r}
 }
 
-func (x *ContactsLensSpecification) asLensSpecification() *raw.HKLensSpecification { return &x.inner.HKLensSpecification }
+func (x *ContactsLensSpecification) asLensSpecification() *raw.HKLensSpecification {
+	return &x.inner.HKLensSpecification
+}
 
 // ContactsLensSpecificationable is the interface implemented by [ContactsLensSpecification], for mocking and DI.
 type ContactsLensSpecificationable interface {
@@ -64,4 +66,3 @@ type ContactsLensSpecificationable interface {
 }
 
 var _ ContactsLensSpecificationable = (*ContactsLensSpecification)(nil)
-

@@ -16,9 +16,9 @@ type MXHangDiagnostic struct {
 }
 
 var (
-	_clsMXHangDiagnostic = _objcClass("MXHangDiagnostic")
+	_clsMXHangDiagnostic              = _objcClass("MXHangDiagnostic")
 	_mXHangDiagnosticSelCallStackTree = objc.RegisterName("callStackTree")
-	_mXHangDiagnosticSelHangDuration = objc.RegisterName("hangDuration")
+	_mXHangDiagnosticSelHangDuration  = objc.RegisterName("hangDuration")
 )
 
 func MXHangDiagnosticFromID(id objc.ID) *MXHangDiagnostic {
@@ -34,7 +34,9 @@ func MXHangDiagnosticFromID(id objc.ID) *MXHangDiagnostic {
 // @property      callStackTree @abstract      The application call stack tree associated with the hang.
 func (o *MXHangDiagnostic) CallStackTree() *MXCallStackTree {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXHangDiagnosticSelCallStackTree)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MXCallStackTreeFromID(_ret)
 }
 
@@ -43,4 +45,3 @@ func (o *MXHangDiagnostic) HangDuration() *foundation.NSMeasurement[*foundation.
 	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitDuration]](o.Ptr(), _mXHangDiagnosticSelHangDuration)
 	return _ret
 }
-

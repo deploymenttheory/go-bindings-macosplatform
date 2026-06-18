@@ -17,12 +17,12 @@ type MPSCNNPoolingGradient struct {
 }
 
 var (
-	_clsMPSCNNPoolingGradient = _objcClass("MPSCNNPoolingGradient")
-	_mPSCNNPoolingGradientSelInitWithDeviceKernelWidthKernelHeight = objc.RegisterName("initWithDevice:kernelWidth:kernelHeight:")
+	_clsMPSCNNPoolingGradient                                                                    = _objcClass("MPSCNNPoolingGradient")
+	_mPSCNNPoolingGradientSelInitWithDeviceKernelWidthKernelHeight                               = objc.RegisterName("initWithDevice:kernelWidth:kernelHeight:")
 	_mPSCNNPoolingGradientSelInitWithDeviceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY = objc.RegisterName("initWithDevice:kernelWidth:kernelHeight:strideInPixelsX:strideInPixelsY:")
-	_mPSCNNPoolingGradientSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSCNNPoolingGradientSelSourceSize = objc.RegisterName("sourceSize")
-	_mPSCNNPoolingGradientSelSetSourceSize = objc.RegisterName("setSourceSize:")
+	_mPSCNNPoolingGradientSelInitWithCoderDevice                                                 = objc.RegisterName("initWithCoder:device:")
+	_mPSCNNPoolingGradientSelSourceSize                                                          = objc.RegisterName("sourceSize")
+	_mPSCNNPoolingGradientSelSetSourceSize                                                       = objc.RegisterName("setSourceSize:")
 )
 
 func MPSCNNPoolingGradientFromID(id objc.ID) *MPSCNNPoolingGradient {
@@ -38,21 +38,27 @@ func MPSCNNPoolingGradientFromID(id objc.ID) *MPSCNNPoolingGradient {
 // @abstract  Initialize a gradient pooling filter @param      device              The device the filter will run on @param      kernelWidth         The width of the kernel.  Can be an odd or even value. @param      kernelHeight        The height of the kernel.  Can be an odd or even value. @return     A valid MPSCNNPoolingGradient object or nil, if failure.
 func (o *MPSCNNPoolingGradient) InitWithDeviceKernelWidthKernelHeight(device metal.MTLDevice, kernelWidth uint, kernelHeight uint) *MPSCNNPoolingGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNPoolingGradientSelInitWithDeviceKernelWidthKernelHeight, device, kernelWidth, kernelHeight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNPoolingGradientFromID(_ret)
 }
 
 // @abstract  Initialize a gradient pooling filter @param      device              The device the filter will run on @param      kernelWidth         The width of the kernel.  Can be an odd or even value. @param      kernelHeight        The height of the kernel.  Can be an odd or even value. @param      strideInPixelsX     The input stride (upsampling factor) in the x dimension. @param      strideInPixelsY     The input stride (upsampling factor) in the y dimension. @return     A valid MPSCNNPoolingGradient object or nil, if failure.
 func (o *MPSCNNPoolingGradient) InitWithDeviceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY(device metal.MTLDevice, kernelWidth uint, kernelHeight uint, strideInPixelsX uint, strideInPixelsY uint) *MPSCNNPoolingGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNPoolingGradientSelInitWithDeviceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY, device, kernelWidth, kernelHeight, strideInPixelsX, strideInPixelsY)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNPoolingGradientFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSCNNPoolingGradient @param      device      The MTLDevice on which to make the MPSCNNPoolingGradient @return     A new MPSCNNPooling object, or nil if failure.
 func (o *MPSCNNPoolingGradient) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSCNNPoolingGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNPoolingGradientSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNPoolingGradientFromID(_ret)
 }
 
@@ -65,4 +71,3 @@ func (o *MPSCNNPoolingGradient) SourceSize() metal.MTLSize {
 func (o *MPSCNNPoolingGradient) SetSourceSize(sourceSize metal.MTLSize) {
 	o.Ptr().Send(_mPSCNNPoolingGradientSelSetSourceSize, sourceSize)
 }
-

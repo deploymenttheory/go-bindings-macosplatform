@@ -51,4 +51,3 @@ type MIDIMetaEventable interface {
 }
 
 var _ MIDIMetaEventable = (*MIDIMetaEvent)(nil)
-

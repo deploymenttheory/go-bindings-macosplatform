@@ -15,63 +15,63 @@ type NSProgress struct {
 }
 
 var (
-	_clsNSProgress = _objcClass("NSProgress")
-	_nSProgressSelCurrentProgress = objc.RegisterName("currentProgress")
-	_nSProgressSelProgressWithTotalUnitCount = objc.RegisterName("progressWithTotalUnitCount:")
-	_nSProgressSelDiscreteProgressWithTotalUnitCount = objc.RegisterName("discreteProgressWithTotalUnitCount:")
+	_clsNSProgress                                                 = _objcClass("NSProgress")
+	_nSProgressSelCurrentProgress                                  = objc.RegisterName("currentProgress")
+	_nSProgressSelProgressWithTotalUnitCount                       = objc.RegisterName("progressWithTotalUnitCount:")
+	_nSProgressSelDiscreteProgressWithTotalUnitCount               = objc.RegisterName("discreteProgressWithTotalUnitCount:")
 	_nSProgressSelProgressWithTotalUnitCountParentPendingUnitCount = objc.RegisterName("progressWithTotalUnitCount:parent:pendingUnitCount:")
-	_nSProgressSelInitWithParentUserInfo = objc.RegisterName("initWithParent:userInfo:")
-	_nSProgressSelBecomeCurrentWithPendingUnitCount = objc.RegisterName("becomeCurrentWithPendingUnitCount:")
-	_nSProgressSelPerformAsCurrentWithPendingUnitCountUsing = objc.RegisterName("performAsCurrentWithPendingUnitCount:usingBlock:")
-	_nSProgressSelResignCurrent = objc.RegisterName("resignCurrent")
-	_nSProgressSelAddChildWithPendingUnitCount = objc.RegisterName("addChild:withPendingUnitCount:")
-	_nSProgressSelSetUserInfoObjectForKey = objc.RegisterName("setUserInfoObject:forKey:")
-	_nSProgressSelCancel = objc.RegisterName("cancel")
-	_nSProgressSelPause = objc.RegisterName("pause")
-	_nSProgressSelResume = objc.RegisterName("resume")
-	_nSProgressSelPublish = objc.RegisterName("publish")
-	_nSProgressSelUnpublish = objc.RegisterName("unpublish")
-	_nSProgressSelAddSubscriberForFileURLWithPublishingHandler = objc.RegisterName("addSubscriberForFileURL:withPublishingHandler:")
-	_nSProgressSelRemoveSubscriber = objc.RegisterName("removeSubscriber:")
-	_nSProgressSelTotalUnitCount = objc.RegisterName("totalUnitCount")
-	_nSProgressSelSetTotalUnitCount = objc.RegisterName("setTotalUnitCount:")
-	_nSProgressSelCompletedUnitCount = objc.RegisterName("completedUnitCount")
-	_nSProgressSelSetCompletedUnitCount = objc.RegisterName("setCompletedUnitCount:")
-	_nSProgressSelLocalizedDescription = objc.RegisterName("localizedDescription")
-	_nSProgressSelSetLocalizedDescription = objc.RegisterName("setLocalizedDescription:")
-	_nSProgressSelLocalizedAdditionalDescription = objc.RegisterName("localizedAdditionalDescription")
-	_nSProgressSelSetLocalizedAdditionalDescription = objc.RegisterName("setLocalizedAdditionalDescription:")
-	_nSProgressSelIsCancellable = objc.RegisterName("isCancellable")
-	_nSProgressSelSetCancellable = objc.RegisterName("setCancellable:")
-	_nSProgressSelIsPausable = objc.RegisterName("isPausable")
-	_nSProgressSelSetPausable = objc.RegisterName("setPausable:")
-	_nSProgressSelIsCancelled = objc.RegisterName("isCancelled")
-	_nSProgressSelIsPaused = objc.RegisterName("isPaused")
-	_nSProgressSelCancellationHandler = objc.RegisterName("cancellationHandler")
-	_nSProgressSelSetCancellationHandler = objc.RegisterName("setCancellationHandler:")
-	_nSProgressSelPausingHandler = objc.RegisterName("pausingHandler")
-	_nSProgressSelSetPausingHandler = objc.RegisterName("setPausingHandler:")
-	_nSProgressSelResumingHandler = objc.RegisterName("resumingHandler")
-	_nSProgressSelSetResumingHandler = objc.RegisterName("setResumingHandler:")
-	_nSProgressSelIsIndeterminate = objc.RegisterName("isIndeterminate")
-	_nSProgressSelFractionCompleted = objc.RegisterName("fractionCompleted")
-	_nSProgressSelIsFinished = objc.RegisterName("isFinished")
-	_nSProgressSelUserInfo = objc.RegisterName("userInfo")
-	_nSProgressSelKind = objc.RegisterName("kind")
-	_nSProgressSelSetKind = objc.RegisterName("setKind:")
-	_nSProgressSelEstimatedTimeRemaining = objc.RegisterName("estimatedTimeRemaining")
-	_nSProgressSelSetEstimatedTimeRemaining = objc.RegisterName("setEstimatedTimeRemaining:")
-	_nSProgressSelThroughput = objc.RegisterName("throughput")
-	_nSProgressSelSetThroughput = objc.RegisterName("setThroughput:")
-	_nSProgressSelFileOperationKind = objc.RegisterName("fileOperationKind")
-	_nSProgressSelSetFileOperationKind = objc.RegisterName("setFileOperationKind:")
-	_nSProgressSelFileURL = objc.RegisterName("fileURL")
-	_nSProgressSelSetFileURL = objc.RegisterName("setFileURL:")
-	_nSProgressSelFileTotalCount = objc.RegisterName("fileTotalCount")
-	_nSProgressSelSetFileTotalCount = objc.RegisterName("setFileTotalCount:")
-	_nSProgressSelFileCompletedCount = objc.RegisterName("fileCompletedCount")
-	_nSProgressSelSetFileCompletedCount = objc.RegisterName("setFileCompletedCount:")
-	_nSProgressSelIsOld = objc.RegisterName("isOld")
+	_nSProgressSelInitWithParentUserInfo                           = objc.RegisterName("initWithParent:userInfo:")
+	_nSProgressSelBecomeCurrentWithPendingUnitCount                = objc.RegisterName("becomeCurrentWithPendingUnitCount:")
+	_nSProgressSelPerformAsCurrentWithPendingUnitCountUsing        = objc.RegisterName("performAsCurrentWithPendingUnitCount:usingBlock:")
+	_nSProgressSelResignCurrent                                    = objc.RegisterName("resignCurrent")
+	_nSProgressSelAddChildWithPendingUnitCount                     = objc.RegisterName("addChild:withPendingUnitCount:")
+	_nSProgressSelSetUserInfoObjectForKey                          = objc.RegisterName("setUserInfoObject:forKey:")
+	_nSProgressSelCancel                                           = objc.RegisterName("cancel")
+	_nSProgressSelPause                                            = objc.RegisterName("pause")
+	_nSProgressSelResume                                           = objc.RegisterName("resume")
+	_nSProgressSelPublish                                          = objc.RegisterName("publish")
+	_nSProgressSelUnpublish                                        = objc.RegisterName("unpublish")
+	_nSProgressSelAddSubscriberForFileURLWithPublishingHandler     = objc.RegisterName("addSubscriberForFileURL:withPublishingHandler:")
+	_nSProgressSelRemoveSubscriber                                 = objc.RegisterName("removeSubscriber:")
+	_nSProgressSelTotalUnitCount                                   = objc.RegisterName("totalUnitCount")
+	_nSProgressSelSetTotalUnitCount                                = objc.RegisterName("setTotalUnitCount:")
+	_nSProgressSelCompletedUnitCount                               = objc.RegisterName("completedUnitCount")
+	_nSProgressSelSetCompletedUnitCount                            = objc.RegisterName("setCompletedUnitCount:")
+	_nSProgressSelLocalizedDescription                             = objc.RegisterName("localizedDescription")
+	_nSProgressSelSetLocalizedDescription                          = objc.RegisterName("setLocalizedDescription:")
+	_nSProgressSelLocalizedAdditionalDescription                   = objc.RegisterName("localizedAdditionalDescription")
+	_nSProgressSelSetLocalizedAdditionalDescription                = objc.RegisterName("setLocalizedAdditionalDescription:")
+	_nSProgressSelIsCancellable                                    = objc.RegisterName("isCancellable")
+	_nSProgressSelSetCancellable                                   = objc.RegisterName("setCancellable:")
+	_nSProgressSelIsPausable                                       = objc.RegisterName("isPausable")
+	_nSProgressSelSetPausable                                      = objc.RegisterName("setPausable:")
+	_nSProgressSelIsCancelled                                      = objc.RegisterName("isCancelled")
+	_nSProgressSelIsPaused                                         = objc.RegisterName("isPaused")
+	_nSProgressSelCancellationHandler                              = objc.RegisterName("cancellationHandler")
+	_nSProgressSelSetCancellationHandler                           = objc.RegisterName("setCancellationHandler:")
+	_nSProgressSelPausingHandler                                   = objc.RegisterName("pausingHandler")
+	_nSProgressSelSetPausingHandler                                = objc.RegisterName("setPausingHandler:")
+	_nSProgressSelResumingHandler                                  = objc.RegisterName("resumingHandler")
+	_nSProgressSelSetResumingHandler                               = objc.RegisterName("setResumingHandler:")
+	_nSProgressSelIsIndeterminate                                  = objc.RegisterName("isIndeterminate")
+	_nSProgressSelFractionCompleted                                = objc.RegisterName("fractionCompleted")
+	_nSProgressSelIsFinished                                       = objc.RegisterName("isFinished")
+	_nSProgressSelUserInfo                                         = objc.RegisterName("userInfo")
+	_nSProgressSelKind                                             = objc.RegisterName("kind")
+	_nSProgressSelSetKind                                          = objc.RegisterName("setKind:")
+	_nSProgressSelEstimatedTimeRemaining                           = objc.RegisterName("estimatedTimeRemaining")
+	_nSProgressSelSetEstimatedTimeRemaining                        = objc.RegisterName("setEstimatedTimeRemaining:")
+	_nSProgressSelThroughput                                       = objc.RegisterName("throughput")
+	_nSProgressSelSetThroughput                                    = objc.RegisterName("setThroughput:")
+	_nSProgressSelFileOperationKind                                = objc.RegisterName("fileOperationKind")
+	_nSProgressSelSetFileOperationKind                             = objc.RegisterName("setFileOperationKind:")
+	_nSProgressSelFileURL                                          = objc.RegisterName("fileURL")
+	_nSProgressSelSetFileURL                                       = objc.RegisterName("setFileURL:")
+	_nSProgressSelFileTotalCount                                   = objc.RegisterName("fileTotalCount")
+	_nSProgressSelSetFileTotalCount                                = objc.RegisterName("setFileTotalCount:")
+	_nSProgressSelFileCompletedCount                               = objc.RegisterName("fileCompletedCount")
+	_nSProgressSelSetFileCompletedCount                            = objc.RegisterName("setFileCompletedCount:")
+	_nSProgressSelIsOld                                            = objc.RegisterName("isOld")
 )
 
 func NSProgressFromID(id objc.ID) *NSProgress {
@@ -86,31 +86,41 @@ func NSProgressFromID(id objc.ID) *NSProgress {
 
 func NSProgressCurrentProgress() *NSProgress {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSProgress), _nSProgressSelCurrentProgress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSProgressFromID(_ret)
 }
 
 func NSProgressProgressWithTotalUnitCount(unitCount int64) *NSProgress {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSProgress), _nSProgressSelProgressWithTotalUnitCount, unitCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSProgressFromID(_ret)
 }
 
 func NSProgressDiscreteProgressWithTotalUnitCount(unitCount int64) *NSProgress {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSProgress), _nSProgressSelDiscreteProgressWithTotalUnitCount, unitCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSProgressFromID(_ret)
 }
 
 func NSProgressProgressWithTotalUnitCountParentPendingUnitCount(unitCount int64, parent *NSProgress, portionOfParentTotalUnitCount int64) *NSProgress {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSProgress), _nSProgressSelProgressWithTotalUnitCountParentPendingUnitCount, unitCount, parent.Ptr(), portionOfParentTotalUnitCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSProgressFromID(_ret)
 }
 
 func (o *NSProgress) InitWithParentUserInfo(parentProgressOrNil *NSProgress, userInfoOrNil *NSDictionary[*NSString, objc.ID]) *NSProgress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProgressSelInitWithParentUserInfo, parentProgressOrNil.Ptr(), userInfoOrNil)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSProgressFromID(_ret)
 }
 
@@ -190,7 +200,9 @@ func (o *NSProgress) SetCompletedUnitCount(completedUnitCount int64) {
 
 func (o *NSProgress) LocalizedDescription() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProgressSelLocalizedDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -200,7 +212,9 @@ func (o *NSProgress) SetLocalizedDescription(localizedDescription *NSString) {
 
 func (o *NSProgress) LocalizedAdditionalDescription() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProgressSelLocalizedAdditionalDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -306,7 +320,9 @@ func (o *NSProgress) UserInfo() *NSDictionary[*NSString, objc.ID] {
 
 func (o *NSProgress) Kind() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProgressSelKind)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -316,7 +332,9 @@ func (o *NSProgress) SetKind(kind *NSString) {
 
 func (o *NSProgress) EstimatedTimeRemaining() *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProgressSelEstimatedTimeRemaining)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
@@ -326,7 +344,9 @@ func (o *NSProgress) SetEstimatedTimeRemaining(estimatedTimeRemaining *NSNumber)
 
 func (o *NSProgress) Throughput() *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProgressSelThroughput)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
@@ -336,7 +356,9 @@ func (o *NSProgress) SetThroughput(throughput *NSNumber) {
 
 func (o *NSProgress) FileOperationKind() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProgressSelFileOperationKind)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -346,7 +368,9 @@ func (o *NSProgress) SetFileOperationKind(fileOperationKind *NSString) {
 
 func (o *NSProgress) FileURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProgressSelFileURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
@@ -356,7 +380,9 @@ func (o *NSProgress) SetFileURL(fileURL *NSURL) {
 
 func (o *NSProgress) FileTotalCount() *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProgressSelFileTotalCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
@@ -366,7 +392,9 @@ func (o *NSProgress) SetFileTotalCount(fileTotalCount *NSNumber) {
 
 func (o *NSProgress) FileCompletedCount() *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProgressSelFileCompletedCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
@@ -378,4 +406,3 @@ func (o *NSProgress) IsOld() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSProgressSelIsOld)
 	return _ret
 }
-

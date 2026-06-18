@@ -17,11 +17,11 @@ type LAAuthenticationView struct {
 }
 
 var (
-	_clsLAAuthenticationView = _objcClass("LAAuthenticationView")
-	_lAAuthenticationViewSelInitWithContext = objc.RegisterName("initWithContext:")
+	_clsLAAuthenticationView                           = _objcClass("LAAuthenticationView")
+	_lAAuthenticationViewSelInitWithContext            = objc.RegisterName("initWithContext:")
 	_lAAuthenticationViewSelInitWithContextControlSize = objc.RegisterName("initWithContext:controlSize:")
-	_lAAuthenticationViewSelContext = objc.RegisterName("context")
-	_lAAuthenticationViewSelControlSize = objc.RegisterName("controlSize")
+	_lAAuthenticationViewSelContext                    = objc.RegisterName("context")
+	_lAAuthenticationViewSelControlSize                = objc.RegisterName("controlSize")
 )
 
 func LAAuthenticationViewFromID(id objc.ID) *LAAuthenticationView {
@@ -37,21 +37,27 @@ func LAAuthenticationViewFromID(id objc.ID) *LAAuthenticationView {
 // @brief Creates a new view and pairs it with the specified authentication context. @discussion The authentication is controlled using the provided authentication context. When `evaluatePolicy` or `evaluateAccessControl` is called on this context, the UI will be presented using this view rather than using the standard authentication alert. Since the view is designed for authentication with Touch ID or Watch the only supported policies for calling `evaluatePolicy` on the context are - `LAPolicyDeviceOwnerAuthenticationWithBiometrics` - `LAPolicyDeviceOwnerAuthenticationWithCompanion` - `LAPolicyDeviceOwnerAuthenticationWitchBiometricsOrCompanion` - `LAPolicyDeviceOwnerAuthentication` (This one is supported just for convenience. If neither biometric nor watch authentication is available, the evaluation of the policy fails) @param context  @c LAContext instance to control the authentication.
 func (o *LAAuthenticationView) InitWithContext(context_ *localauthentication.LAContext) *LAAuthenticationView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lAAuthenticationViewSelInitWithContext, context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return LAAuthenticationViewFromID(_ret)
 }
 
 // @brief Creates a new view and pairs it with the specified authentication context. @discussion The authentication is controlled using the provided authentication context. When `evaluatePolicy` or `evaluateAccessControl` is called on this context, the UI will be presented using this view rather than using the standard authentication alert. Since the view is designed for authentication with Touch ID or Watch the only supported policies for calling `evaluatePolicy` on the context are - `LAPolicyDeviceOwnerAuthenticationWithBiometrics` - `LAPolicyDeviceOwnerAuthenticationWithCompanion` - `LAPolicyDeviceOwnerAuthenticationWitchBiometricsOrCompanion` - `LAPolicyDeviceOwnerAuthentication` (This one is supported just for convenience. If neither biometric nor watch authentication is available, the evaluation of the policy fails) @param context  @c LAContext instance to control the authentication. @param controlSize Preferred size of @c LAAuthenticationView provided using @c NSControlSize
 func (o *LAAuthenticationView) InitWithContextControlSize(context_ *localauthentication.LAContext, controlSize appkit.NSControlSize) *LAAuthenticationView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lAAuthenticationViewSelInitWithContextControlSize, context_.Ptr(), controlSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return LAAuthenticationViewFromID(_ret)
 }
 
 // @brief @c LAContext instance passed to the initializer.
 func (o *LAAuthenticationView) Context() *localauthentication.LAContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lAAuthenticationViewSelContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return localauthentication.LAContextFromID(_ret)
 }
 
@@ -60,4 +66,3 @@ func (o *LAAuthenticationView) ControlSize() appkit.NSControlSize {
 	_ret := objc.Send[appkit.NSControlSize](o.Ptr(), _lAAuthenticationViewSelControlSize)
 	return _ret
 }
-

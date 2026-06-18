@@ -16,18 +16,18 @@ type MTRLevelControlClusterMoveParams struct {
 }
 
 var (
-	_clsMTRLevelControlClusterMoveParams = _objcClass("MTRLevelControlClusterMoveParams")
-	_mTRLevelControlClusterMoveParamsSelMoveMode = objc.RegisterName("moveMode")
-	_mTRLevelControlClusterMoveParamsSelSetMoveMode = objc.RegisterName("setMoveMode:")
-	_mTRLevelControlClusterMoveParamsSelRate = objc.RegisterName("rate")
-	_mTRLevelControlClusterMoveParamsSelSetRate = objc.RegisterName("setRate:")
-	_mTRLevelControlClusterMoveParamsSelOptionsMask = objc.RegisterName("optionsMask")
-	_mTRLevelControlClusterMoveParamsSelSetOptionsMask = objc.RegisterName("setOptionsMask:")
-	_mTRLevelControlClusterMoveParamsSelOptionsOverride = objc.RegisterName("optionsOverride")
-	_mTRLevelControlClusterMoveParamsSelSetOptionsOverride = objc.RegisterName("setOptionsOverride:")
-	_mTRLevelControlClusterMoveParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRLevelControlClusterMoveParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRLevelControlClusterMoveParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRLevelControlClusterMoveParams                               = _objcClass("MTRLevelControlClusterMoveParams")
+	_mTRLevelControlClusterMoveParamsSelMoveMode                       = objc.RegisterName("moveMode")
+	_mTRLevelControlClusterMoveParamsSelSetMoveMode                    = objc.RegisterName("setMoveMode:")
+	_mTRLevelControlClusterMoveParamsSelRate                           = objc.RegisterName("rate")
+	_mTRLevelControlClusterMoveParamsSelSetRate                        = objc.RegisterName("setRate:")
+	_mTRLevelControlClusterMoveParamsSelOptionsMask                    = objc.RegisterName("optionsMask")
+	_mTRLevelControlClusterMoveParamsSelSetOptionsMask                 = objc.RegisterName("setOptionsMask:")
+	_mTRLevelControlClusterMoveParamsSelOptionsOverride                = objc.RegisterName("optionsOverride")
+	_mTRLevelControlClusterMoveParamsSelSetOptionsOverride             = objc.RegisterName("setOptionsOverride:")
+	_mTRLevelControlClusterMoveParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRLevelControlClusterMoveParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRLevelControlClusterMoveParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRLevelControlClusterMoveParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -43,7 +43,9 @@ func MTRLevelControlClusterMoveParamsFromID(id objc.ID) *MTRLevelControlClusterM
 
 func (o *MTRLevelControlClusterMoveParams) MoveMode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRLevelControlClusterMoveParamsSelMoveMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -53,7 +55,9 @@ func (o *MTRLevelControlClusterMoveParams) SetMoveMode(moveMode *foundation.NSNu
 
 func (o *MTRLevelControlClusterMoveParams) Rate() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRLevelControlClusterMoveParamsSelRate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -63,7 +67,9 @@ func (o *MTRLevelControlClusterMoveParams) SetRate(rate *foundation.NSNumber) {
 
 func (o *MTRLevelControlClusterMoveParams) OptionsMask() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRLevelControlClusterMoveParamsSelOptionsMask)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -73,7 +79,9 @@ func (o *MTRLevelControlClusterMoveParams) SetOptionsMask(optionsMask *foundatio
 
 func (o *MTRLevelControlClusterMoveParams) OptionsOverride() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRLevelControlClusterMoveParamsSelOptionsOverride)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -84,7 +92,9 @@ func (o *MTRLevelControlClusterMoveParams) SetOptionsOverride(optionsOverride *f
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRLevelControlClusterMoveParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRLevelControlClusterMoveParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -95,11 +105,12 @@ func (o *MTRLevelControlClusterMoveParams) SetTimedInvokeTimeoutMs(timedInvokeTi
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRLevelControlClusterMoveParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRLevelControlClusterMoveParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRLevelControlClusterMoveParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRLevelControlClusterMoveParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

@@ -15,7 +15,9 @@ type CurrencyAmountResolutionResult struct {
 }
 
 // Unwrap returns the underlying [raw.INCurrencyAmountResolutionResult].
-func (x *CurrencyAmountResolutionResult) Unwrap() *raw.INCurrencyAmountResolutionResult { return x.inner }
+func (x *CurrencyAmountResolutionResult) Unwrap() *raw.INCurrencyAmountResolutionResult {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -35,7 +37,9 @@ func NewCurrencyAmountResolutionResult() *CurrencyAmountResolutionResult {
 	return &CurrencyAmountResolutionResult{inner: raw.INCurrencyAmountResolutionResultFromID(_id)}
 }
 
-func (x *CurrencyAmountResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
+func (x *CurrencyAmountResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
+	return &x.inner.INIntentResolutionResult
+}
 
 // CurrencyAmountResolutionResultable is the interface implemented by [CurrencyAmountResolutionResult], for mocking and DI.
 type CurrencyAmountResolutionResultable interface {
@@ -43,4 +47,3 @@ type CurrencyAmountResolutionResultable interface {
 }
 
 var _ CurrencyAmountResolutionResultable = (*CurrencyAmountResolutionResult)(nil)
-

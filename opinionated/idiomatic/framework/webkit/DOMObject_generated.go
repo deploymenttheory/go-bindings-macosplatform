@@ -55,4 +55,3 @@ type DOMObjectable interface {
 }
 
 var _ DOMObjectable = (*DOMObject)(nil)
-

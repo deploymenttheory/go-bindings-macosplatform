@@ -16,26 +16,26 @@ type EKEvent struct {
 }
 
 var (
-	_clsEKEvent = _objcClass("EKEvent")
-	_eKEventSelEventWithEventStore = objc.RegisterName("eventWithEventStore:")
+	_clsEKEvent                          = _objcClass("EKEvent")
+	_eKEventSelEventWithEventStore       = objc.RegisterName("eventWithEventStore:")
 	_eKEventSelCompareStartDateWithEvent = objc.RegisterName("compareStartDateWithEvent:")
-	_eKEventSelEventIdentifier = objc.RegisterName("eventIdentifier")
-	_eKEventSelIsAllDay = objc.RegisterName("isAllDay")
-	_eKEventSelSetAllDay = objc.RegisterName("setAllDay:")
-	_eKEventSelStartDate = objc.RegisterName("startDate")
-	_eKEventSelSetStartDate = objc.RegisterName("setStartDate:")
-	_eKEventSelEndDate = objc.RegisterName("endDate")
-	_eKEventSelSetEndDate = objc.RegisterName("setEndDate:")
-	_eKEventSelStructuredLocation = objc.RegisterName("structuredLocation")
-	_eKEventSelSetStructuredLocation = objc.RegisterName("setStructuredLocation:")
-	_eKEventSelOrganizer = objc.RegisterName("organizer")
-	_eKEventSelAvailability = objc.RegisterName("availability")
-	_eKEventSelSetAvailability = objc.RegisterName("setAvailability:")
-	_eKEventSelStatus = objc.RegisterName("status")
-	_eKEventSelIsDetached = objc.RegisterName("isDetached")
-	_eKEventSelOccurrenceDate = objc.RegisterName("occurrenceDate")
+	_eKEventSelEventIdentifier           = objc.RegisterName("eventIdentifier")
+	_eKEventSelIsAllDay                  = objc.RegisterName("isAllDay")
+	_eKEventSelSetAllDay                 = objc.RegisterName("setAllDay:")
+	_eKEventSelStartDate                 = objc.RegisterName("startDate")
+	_eKEventSelSetStartDate              = objc.RegisterName("setStartDate:")
+	_eKEventSelEndDate                   = objc.RegisterName("endDate")
+	_eKEventSelSetEndDate                = objc.RegisterName("setEndDate:")
+	_eKEventSelStructuredLocation        = objc.RegisterName("structuredLocation")
+	_eKEventSelSetStructuredLocation     = objc.RegisterName("setStructuredLocation:")
+	_eKEventSelOrganizer                 = objc.RegisterName("organizer")
+	_eKEventSelAvailability              = objc.RegisterName("availability")
+	_eKEventSelSetAvailability           = objc.RegisterName("setAvailability:")
+	_eKEventSelStatus                    = objc.RegisterName("status")
+	_eKEventSelIsDetached                = objc.RegisterName("isDetached")
+	_eKEventSelOccurrenceDate            = objc.RegisterName("occurrenceDate")
 	_eKEventSelBirthdayContactIdentifier = objc.RegisterName("birthdayContactIdentifier")
-	_eKEventSelBirthdayPersonUniqueID = objc.RegisterName("birthdayPersonUniqueID")
+	_eKEventSelBirthdayPersonUniqueID    = objc.RegisterName("birthdayPersonUniqueID")
 )
 
 func EKEventFromID(id objc.ID) *EKEvent {
@@ -51,7 +51,9 @@ func EKEventFromID(id objc.ID) *EKEvent {
 // @method     eventWithEventStore: @abstract   Creates a new autoreleased event object.
 func EKEventEventWithEventStore(eventStore *EKEventStore) *EKEvent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsEKEvent), _eKEventSelEventWithEventStore, eventStore.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EKEventFromID(_ret)
 }
 
@@ -64,7 +66,9 @@ func (o *EKEvent) CompareStartDateWithEvent(other *EKEvent) foundation.NSCompari
 // @property   eventIdentifier @abstract   A unique identifier for this event. @discussion This identifier can be used to look the event up using [EKEventStore eventWithIdentifier:]. You can use this not only to simply fetch the event, but also to validate the event has not been deleted out from under you when you get an external change notification via the EKEventStore database changed notification. If eventWithIdentifier: returns nil, the event was deleted. Please note that if you change the calendar of an event, this ID will likely change. It is currently also possible for the ID to change due to a sync operation. For example, if a user moved an event on a different client to another calendar, we'd see it as a completely new event here. This may be nil for events that have not been saved.
 func (o *EKEvent) EventIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventSelEventIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -81,7 +85,9 @@ func (o *EKEvent) SetAllDay(allDay bool) {
 // @property   startDate @abstract   The start date for the event. @discussion This property represents the start date for this event. Floating events (such as all-day events) are currently always returned in the default time zone. ([NSTimeZone defaultTimeZone]) This will be nil for new events until you set it.
 func (o *EKEvent) StartDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventSelStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -91,7 +97,9 @@ func (o *EKEvent) SetStartDate(startDate *foundation.NSDate) {
 
 func (o *EKEvent) EndDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventSelEndDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -102,7 +110,9 @@ func (o *EKEvent) SetEndDate(endDate *foundation.NSDate) {
 // @property   structuredLocation @abstract   Allows you to set a structured location (a location with a potential geo-coordinate) on an event. The getter for EKEvent’s location property just returns the structured location’s title. The setter for EKEvent’s location property is equivalent to [event setStructuredLocation:[EKStructuredLocation locationWithTitle:…]].
 func (o *EKEvent) StructuredLocation() *EKStructuredLocation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventSelStructuredLocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EKStructuredLocationFromID(_ret)
 }
 
@@ -113,7 +123,9 @@ func (o *EKEvent) SetStructuredLocation(structuredLocation *EKStructuredLocation
 // @property   organizer @abstract   The organizer of this event, or nil.
 func (o *EKEvent) Organizer() *EKParticipant {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventSelOrganizer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EKParticipantFromID(_ret)
 }
 
@@ -142,14 +154,18 @@ func (o *EKEvent) IsDetached() bool {
 // @property   occurrenceDate: @abstract   The occurrence date of an event if it is part of a recurring series. @discussion This is only set if the event is part of a recurring series. It returns the date on which this event was originally scheduled to occur. For occurrences that are unmodified from the recurring series, this is the same as the start date. This value will remain the same even if the event has been detached and its start date has changed. Floating events (such as all-day events) are currently returned in the default time zone. ([NSTimeZone defaultTimeZone]) This will be nil for new events until you set startDate.
 func (o *EKEvent) OccurrenceDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventSelOccurrenceDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // @method     birthdayContactIdentifier @abstract   Specifies the contact identifier of the person this event was created for. @discussion This property is only valid for events in the built-in Birthdays calendar. It specifies the contact identifier (for use with the Contacts framework) of the person this event was created for. For any other type of event, this property returns nil.
 func (o *EKEvent) BirthdayContactIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventSelBirthdayContactIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -157,7 +173,8 @@ func (o *EKEvent) BirthdayContactIdentifier() *foundation.NSString {
 // Deprecated: since macOS 10.11.
 func (o *EKEvent) BirthdayPersonUniqueID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventSelBirthdayPersonUniqueID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

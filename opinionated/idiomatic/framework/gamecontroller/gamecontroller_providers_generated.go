@@ -52,4 +52,3 @@ type PhysicalInputProfileProvider interface {
 type RacingWheelInputStateProvider interface {
 	asRacingWheelInputState() *raw.GCRacingWheelInputState
 }
-

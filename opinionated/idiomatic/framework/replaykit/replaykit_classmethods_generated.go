@@ -49,4 +49,3 @@ func SharedRecorder() *ScreenRecorder {
 	}
 	return &ScreenRecorder{inner: _r}
 }
-

@@ -16,7 +16,9 @@ type MTRThreadNetworkDiagnosticsClusterNeighborTable struct {
 }
 
 // Unwrap returns the underlying [raw.MTRThreadNetworkDiagnosticsClusterNeighborTable].
-func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) Unwrap() *raw.MTRThreadNetworkDiagnosticsClusterNeighborTable { return x.inner }
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) Unwrap() *raw.MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -120,7 +122,9 @@ func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithIsChild(isChild *f
 	return x
 }
 
-func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) asMTRThreadNetworkDiagnosticsClusterNeighborTableStruct() *raw.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct { return &x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct }
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) asMTRThreadNetworkDiagnosticsClusterNeighborTableStruct() *raw.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct {
+	return &x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct
+}
 
 // MTRThreadNetworkDiagnosticsClusterNeighborTableable is the interface implemented by [MTRThreadNetworkDiagnosticsClusterNeighborTable], for mocking and DI.
 type MTRThreadNetworkDiagnosticsClusterNeighborTableable interface {
@@ -142,4 +146,3 @@ type MTRThreadNetworkDiagnosticsClusterNeighborTableable interface {
 }
 
 var _ MTRThreadNetworkDiagnosticsClusterNeighborTableable = (*MTRThreadNetworkDiagnosticsClusterNeighborTable)(nil)
-

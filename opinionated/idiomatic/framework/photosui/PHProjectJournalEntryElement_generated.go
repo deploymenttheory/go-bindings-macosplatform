@@ -59,7 +59,9 @@ func (x *ProjectJournalEntryElement) TextElement() *ProjectTextElement {
 	return &ProjectTextElement{inner: _r}
 }
 
-func (x *ProjectJournalEntryElement) asProjectElement() *raw.PHProjectElement { return &x.inner.PHProjectElement }
+func (x *ProjectJournalEntryElement) asProjectElement() *raw.PHProjectElement {
+	return &x.inner.PHProjectElement
+}
 
 // ProjectJournalEntryElementable is the interface implemented by [ProjectJournalEntryElement], for mocking and DI.
 type ProjectJournalEntryElementable interface {
@@ -70,4 +72,3 @@ type ProjectJournalEntryElementable interface {
 }
 
 var _ ProjectJournalEntryElementable = (*ProjectJournalEntryElement)(nil)
-

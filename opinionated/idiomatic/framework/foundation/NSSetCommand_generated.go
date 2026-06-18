@@ -112,4 +112,3 @@ type SetCommandable interface {
 }
 
 var _ SetCommandable = (*SetCommand)(nil)
-

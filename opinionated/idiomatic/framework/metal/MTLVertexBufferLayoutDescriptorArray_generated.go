@@ -15,7 +15,9 @@ type VertexBufferLayoutDescriptorArray struct {
 }
 
 // Unwrap returns the underlying [raw.MTLVertexBufferLayoutDescriptorArray].
-func (x *VertexBufferLayoutDescriptorArray) Unwrap() *raw.MTLVertexBufferLayoutDescriptorArray { return x.inner }
+func (x *VertexBufferLayoutDescriptorArray) Unwrap() *raw.MTLVertexBufferLayoutDescriptorArray {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -57,4 +59,3 @@ type VertexBufferLayoutDescriptorArrayable interface {
 }
 
 var _ VertexBufferLayoutDescriptorArrayable = (*VertexBufferLayoutDescriptorArray)(nil)
-

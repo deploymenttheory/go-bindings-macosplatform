@@ -15,20 +15,20 @@ type GCMicroGamepad struct {
 }
 
 var (
-	_clsGCMicroGamepad = _objcClass("GCMicroGamepad")
-	_gCMicroGamepadSelSaveSnapshot = objc.RegisterName("saveSnapshot")
-	_gCMicroGamepadSelSetStateFromMicroGamepad = objc.RegisterName("setStateFromMicroGamepad:")
-	_gCMicroGamepadSelController = objc.RegisterName("controller")
-	_gCMicroGamepadSelValueChangedHandler = objc.RegisterName("valueChangedHandler")
-	_gCMicroGamepadSelSetValueChangedHandler = objc.RegisterName("setValueChangedHandler:")
-	_gCMicroGamepadSelDpad = objc.RegisterName("dpad")
-	_gCMicroGamepadSelButtonA = objc.RegisterName("buttonA")
-	_gCMicroGamepadSelButtonX = objc.RegisterName("buttonX")
-	_gCMicroGamepadSelButtonMenu = objc.RegisterName("buttonMenu")
-	_gCMicroGamepadSelReportsAbsoluteDpadValues = objc.RegisterName("reportsAbsoluteDpadValues")
+	_clsGCMicroGamepad                             = _objcClass("GCMicroGamepad")
+	_gCMicroGamepadSelSaveSnapshot                 = objc.RegisterName("saveSnapshot")
+	_gCMicroGamepadSelSetStateFromMicroGamepad     = objc.RegisterName("setStateFromMicroGamepad:")
+	_gCMicroGamepadSelController                   = objc.RegisterName("controller")
+	_gCMicroGamepadSelValueChangedHandler          = objc.RegisterName("valueChangedHandler")
+	_gCMicroGamepadSelSetValueChangedHandler       = objc.RegisterName("setValueChangedHandler:")
+	_gCMicroGamepadSelDpad                         = objc.RegisterName("dpad")
+	_gCMicroGamepadSelButtonA                      = objc.RegisterName("buttonA")
+	_gCMicroGamepadSelButtonX                      = objc.RegisterName("buttonX")
+	_gCMicroGamepadSelButtonMenu                   = objc.RegisterName("buttonMenu")
+	_gCMicroGamepadSelReportsAbsoluteDpadValues    = objc.RegisterName("reportsAbsoluteDpadValues")
 	_gCMicroGamepadSelSetReportsAbsoluteDpadValues = objc.RegisterName("setReportsAbsoluteDpadValues:")
-	_gCMicroGamepadSelAllowsRotation = objc.RegisterName("allowsRotation")
-	_gCMicroGamepadSelSetAllowsRotation = objc.RegisterName("setAllowsRotation:")
+	_gCMicroGamepadSelAllowsRotation               = objc.RegisterName("allowsRotation")
+	_gCMicroGamepadSelSetAllowsRotation            = objc.RegisterName("setAllowsRotation:")
 )
 
 func GCMicroGamepadFromID(id objc.ID) *GCMicroGamepad {
@@ -45,7 +45,9 @@ func GCMicroGamepadFromID(id objc.ID) *GCMicroGamepad {
 // Deprecated: Use the -[GCController capture] method instead
 func (o *GCMicroGamepad) SaveSnapshot() *GCMicroGamepadSnapshot {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCMicroGamepadSelSaveSnapshot)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCMicroGamepadSnapshotFromID(_ret)
 }
 
@@ -57,7 +59,9 @@ func (o *GCMicroGamepad) SetStateFromMicroGamepad(microGamepad *GCMicroGamepad) 
 // A profile keeps a reference to the controller that this profile is mapping input from.
 func (o *GCMicroGamepad) Controller() *GCController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCMicroGamepadSelController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerFromID(_ret)
 }
 
@@ -86,28 +90,36 @@ func (o *GCMicroGamepad) SetValueChangedHandler(valueChangedHandler func(*GCMicr
 // Optionally analog in the Micro profile. All the elements of this directional input are either analog or digital.
 func (o *GCMicroGamepad) Dpad() *GCControllerDirectionPad {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCMicroGamepadSelDpad)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerDirectionPadFromID(_ret)
 }
 
 // The Micro profile has two buttons that are optionally analog in the Micro profile. Button A is the primary action button, it indicates affirmative action and should be used to advance in menus or perform the primary action in gameplay.
 func (o *GCMicroGamepad) ButtonA() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCMicroGamepadSelButtonA)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
 // Button X is the secondary action button, it indicates an alternate affirmative action and should be used to perform a secondary action. If there is no secondary action it should be used as equivalent to buttonA. Unlike on other profiles there is no negative button on this profile. Instead the menu button should be used to present menu content or to retreat in a menu flow. @see buttonA
 func (o *GCMicroGamepad) ButtonX() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCMicroGamepadSelButtonX)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
 // Button menu is the primary menu button, and should be used to enter the main menu and pause the game.
 func (o *GCMicroGamepad) ButtonMenu() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCMicroGamepadSelButtonMenu)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
@@ -130,4 +142,3 @@ func (o *GCMicroGamepad) AllowsRotation() bool {
 func (o *GCMicroGamepad) SetAllowsRotation(allowsRotation bool) {
 	o.Ptr().Send(_gCMicroGamepadSelSetAllowsRotation, allowsRotation)
 }
-

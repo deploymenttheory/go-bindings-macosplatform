@@ -17,7 +17,9 @@ type MetricPlayerItemVariantSwitchStartEvent struct {
 }
 
 // Unwrap returns the underlying [raw.AVMetricPlayerItemVariantSwitchStartEvent].
-func (x *MetricPlayerItemVariantSwitchStartEvent) Unwrap() *raw.AVMetricPlayerItemVariantSwitchStartEvent { return x.inner }
+func (x *MetricPlayerItemVariantSwitchStartEvent) Unwrap() *raw.AVMetricPlayerItemVariantSwitchStartEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -93,7 +95,9 @@ func (x *MetricPlayerItemVariantSwitchStartEvent) SubtitleRendition() *MetricMed
 	return &MetricMediaRendition{inner: _r}
 }
 
-func (x *MetricPlayerItemVariantSwitchStartEvent) asMetricEvent() *raw.AVMetricEvent { return &x.inner.AVMetricEvent }
+func (x *MetricPlayerItemVariantSwitchStartEvent) asMetricEvent() *raw.AVMetricEvent {
+	return &x.inner.AVMetricEvent
+}
 
 // MetricPlayerItemVariantSwitchStartEventable is the interface implemented by [MetricPlayerItemVariantSwitchStartEvent], for mocking and DI.
 type MetricPlayerItemVariantSwitchStartEventable interface {
@@ -107,4 +111,3 @@ type MetricPlayerItemVariantSwitchStartEventable interface {
 }
 
 var _ MetricPlayerItemVariantSwitchStartEventable = (*MetricPlayerItemVariantSwitchStartEvent)(nil)
-

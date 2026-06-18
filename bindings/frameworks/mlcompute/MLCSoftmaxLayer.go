@@ -15,11 +15,11 @@ type MLCSoftmaxLayer struct {
 }
 
 var (
-	_clsMLCSoftmaxLayer = _objcClass("MLCSoftmaxLayer")
-	_mLCSoftmaxLayerSelLayerWithOperation = objc.RegisterName("layerWithOperation:")
+	_clsMLCSoftmaxLayer                            = _objcClass("MLCSoftmaxLayer")
+	_mLCSoftmaxLayerSelLayerWithOperation          = objc.RegisterName("layerWithOperation:")
 	_mLCSoftmaxLayerSelLayerWithOperationDimension = objc.RegisterName("layerWithOperation:dimension:")
-	_mLCSoftmaxLayerSelOperation = objc.RegisterName("operation")
-	_mLCSoftmaxLayerSelDimension = objc.RegisterName("dimension")
+	_mLCSoftmaxLayerSelOperation                   = objc.RegisterName("operation")
+	_mLCSoftmaxLayerSelDimension                   = objc.RegisterName("dimension")
 )
 
 func MLCSoftmaxLayerFromID(id objc.ID) *MLCSoftmaxLayer {
@@ -35,14 +35,18 @@ func MLCSoftmaxLayerFromID(id objc.ID) *MLCSoftmaxLayer {
 // @abstract   Create a softmax layer @param      operation  The softmax operation @return     A new softmax layer
 func MLCSoftmaxLayerLayerWithOperation(operation MLCSoftmaxOperation) *MLCSoftmaxLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCSoftmaxLayer), _mLCSoftmaxLayerSelLayerWithOperation, operation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCSoftmaxLayerFromID(_ret)
 }
 
 // @abstract   Create a softmax layer @param      operation  The softmax operation @param      dimension  The  dimension over which softmax operation should be performed @return     A new softmax layer
 func MLCSoftmaxLayerLayerWithOperationDimension(operation MLCSoftmaxOperation, dimension uint) *MLCSoftmaxLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCSoftmaxLayer), _mLCSoftmaxLayerSelLayerWithOperationDimension, operation, dimension)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCSoftmaxLayerFromID(_ret)
 }
 
@@ -57,4 +61,3 @@ func (o *MLCSoftmaxLayer) Dimension() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mLCSoftmaxLayerSelDimension)
 	return _ret
 }
-

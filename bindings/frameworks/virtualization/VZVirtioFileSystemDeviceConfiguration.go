@@ -18,13 +18,13 @@ type VZVirtioFileSystemDeviceConfiguration struct {
 }
 
 var (
-	_clsVZVirtioFileSystemDeviceConfiguration = _objcClass("VZVirtioFileSystemDeviceConfiguration")
-	_vZVirtioFileSystemDeviceConfigurationSelInitWithTag = objc.RegisterName("initWithTag:")
-	_vZVirtioFileSystemDeviceConfigurationSelValidateTagError = objc.RegisterName("validateTag:error:")
-	_vZVirtioFileSystemDeviceConfigurationSelTag = objc.RegisterName("tag")
-	_vZVirtioFileSystemDeviceConfigurationSelSetTag = objc.RegisterName("setTag:")
-	_vZVirtioFileSystemDeviceConfigurationSelShare = objc.RegisterName("share")
-	_vZVirtioFileSystemDeviceConfigurationSelSetShare = objc.RegisterName("setShare:")
+	_clsVZVirtioFileSystemDeviceConfiguration                       = _objcClass("VZVirtioFileSystemDeviceConfiguration")
+	_vZVirtioFileSystemDeviceConfigurationSelInitWithTag            = objc.RegisterName("initWithTag:")
+	_vZVirtioFileSystemDeviceConfigurationSelValidateTagError       = objc.RegisterName("validateTag:error:")
+	_vZVirtioFileSystemDeviceConfigurationSelTag                    = objc.RegisterName("tag")
+	_vZVirtioFileSystemDeviceConfigurationSelSetTag                 = objc.RegisterName("setTag:")
+	_vZVirtioFileSystemDeviceConfigurationSelShare                  = objc.RegisterName("share")
+	_vZVirtioFileSystemDeviceConfigurationSelSetShare               = objc.RegisterName("setShare:")
 	_vZVirtioFileSystemDeviceConfigurationSelMacOSGuestAutomountTag = objc.RegisterName("macOSGuestAutomountTag")
 )
 
@@ -41,7 +41,9 @@ func VZVirtioFileSystemDeviceConfigurationFromID(id objc.ID) *VZVirtioFileSystem
 // @abstract Configuration of the Virtio file system device. @param tag The label identifying this device in the guest. @discussion The tag is presented as a label in the guest identifying this device for mounting. The tag must be valid, which can be checked with +[VZVirtioFileSystemDeviceConfiguration validateTag:error:]. @see +[VZVirtioFileSystemDeviceConfiguration validateTag:error:]
 func (o *VZVirtioFileSystemDeviceConfiguration) InitWithTag(tag *foundation.NSString) *VZVirtioFileSystemDeviceConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioFileSystemDeviceConfigurationSelInitWithTag, tag.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZVirtioFileSystemDeviceConfigurationFromID(_ret)
 }
 
@@ -58,7 +60,9 @@ func VZVirtioFileSystemDeviceConfigurationValidateTagError(tag *foundation.NSStr
 // @abstract The tag is a string identifying the device. @discussion The tag is presented as a label in the guest identifying this device for mounting. The tag must be valid, which can be checked with +[VZVirtioFileSystemDeviceConfiguration validateTag:error:]. @see +[VZVirtioFileSystemDeviceConfiguration validateTag:error:]
 func (o *VZVirtioFileSystemDeviceConfiguration) Tag() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioFileSystemDeviceConfigurationSelTag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -69,7 +73,9 @@ func (o *VZVirtioFileSystemDeviceConfiguration) SetTag(tag *foundation.NSString)
 // @abstract Directory share. Defines how host resources are exposed to the guest virtual machine. @see VZSingleDirectoryShare @see VZMultipleDirectoryShare @see VZLinuxRosettaDirectoryShare
 func (o *VZVirtioFileSystemDeviceConfiguration) Share() *VZDirectoryShare {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioFileSystemDeviceConfigurationSelShare)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZDirectoryShareFromID(_ret)
 }
 
@@ -80,7 +86,8 @@ func (o *VZVirtioFileSystemDeviceConfiguration) SetShare(share *VZDirectoryShare
 // @abstract The macOS automount tag. @discussion A device configured with this tag will be automatically mounted in a macOS guest.
 func VZVirtioFileSystemDeviceConfigurationMacOSGuestAutomountTag() *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVZVirtioFileSystemDeviceConfiguration), _vZVirtioFileSystemDeviceConfigurationSelMacOSGuestAutomountTag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

@@ -17,7 +17,9 @@ type MTRDataTypeLocationDescriptorStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRDataTypeLocationDescriptorStruct].
-func (x *MTRDataTypeLocationDescriptorStruct) Unwrap() *raw.MTRDataTypeLocationDescriptorStruct { return x.inner }
+func (x *MTRDataTypeLocationDescriptorStruct) Unwrap() *raw.MTRDataTypeLocationDescriptorStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -104,4 +106,3 @@ type MTRDataTypeLocationDescriptorStructable interface {
 }
 
 var _ MTRDataTypeLocationDescriptorStructable = (*MTRDataTypeLocationDescriptorStruct)(nil)
-

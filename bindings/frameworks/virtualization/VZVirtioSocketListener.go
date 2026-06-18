@@ -16,8 +16,8 @@ type VZVirtioSocketListener struct {
 }
 
 var (
-	_clsVZVirtioSocketListener = _objcClass("VZVirtioSocketListener")
-	_vZVirtioSocketListenerSelDelegate = objc.RegisterName("delegate")
+	_clsVZVirtioSocketListener            = _objcClass("VZVirtioSocketListener")
+	_vZVirtioSocketListenerSelDelegate    = objc.RegisterName("delegate")
 	_vZVirtioSocketListenerSelSetDelegate = objc.RegisterName("setDelegate:")
 )
 
@@ -39,4 +39,3 @@ func (o *VZVirtioSocketListener) Delegate() VZVirtioSocketListenerDelegate {
 func (o *VZVirtioSocketListener) SetDelegate(delegate VZVirtioSocketListenerDelegate) {
 	o.Ptr().Send(_vZVirtioSocketListenerSelSetDelegate, delegate)
 }
-

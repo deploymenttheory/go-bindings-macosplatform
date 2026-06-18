@@ -16,7 +16,9 @@ type MTRAccessControlClusterAccessControlEntryStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRAccessControlClusterAccessControlEntryStruct].
-func (x *MTRAccessControlClusterAccessControlEntryStruct) Unwrap() *raw.MTRAccessControlClusterAccessControlEntryStruct { return x.inner }
+func (x *MTRAccessControlClusterAccessControlEntryStruct) Unwrap() *raw.MTRAccessControlClusterAccessControlEntryStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -104,7 +106,9 @@ func (x *MTRAccessControlClusterAccessControlEntryStruct) SetFabricIndex(fabricI
 	x.inner.SetFabricIndex(fabricIndex)
 }
 
-func (x *MTRAccessControlClusterAccessControlEntryStruct) asMTRAccessControlClusterAccessControlEntryStruct() *raw.MTRAccessControlClusterAccessControlEntryStruct { return x.inner }
+func (x *MTRAccessControlClusterAccessControlEntryStruct) asMTRAccessControlClusterAccessControlEntryStruct() *raw.MTRAccessControlClusterAccessControlEntryStruct {
+	return x.inner
+}
 
 // MTRAccessControlClusterAccessControlEntryStructable is the interface implemented by [MTRAccessControlClusterAccessControlEntryStruct], for mocking and DI.
 type MTRAccessControlClusterAccessControlEntryStructable interface {
@@ -125,4 +129,3 @@ type MTRAccessControlClusterAccessControlEntryStructable interface {
 }
 
 var _ MTRAccessControlClusterAccessControlEntryStructable = (*MTRAccessControlClusterAccessControlEntryStruct)(nil)
-

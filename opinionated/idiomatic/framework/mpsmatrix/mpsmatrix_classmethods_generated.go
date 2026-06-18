@@ -53,4 +53,3 @@ func DefaultDistributionDescriptor() *MatrixRandomDistributionDescriptor {
 	}
 	return &MatrixRandomDistributionDescriptor{inner: _r}
 }
-

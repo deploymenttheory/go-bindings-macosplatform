@@ -105,4 +105,3 @@ type BurnSetupPanelable interface {
 }
 
 var _ BurnSetupPanelable = (*BurnSetupPanel)(nil)
-

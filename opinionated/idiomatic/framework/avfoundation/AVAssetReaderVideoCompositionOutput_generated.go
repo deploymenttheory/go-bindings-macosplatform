@@ -17,7 +17,9 @@ type AssetReaderVideoCompositionOutput struct {
 }
 
 // Unwrap returns the underlying [raw.AVAssetReaderVideoCompositionOutput].
-func (x *AssetReaderVideoCompositionOutput) Unwrap() *raw.AVAssetReaderVideoCompositionOutput { return x.inner }
+func (x *AssetReaderVideoCompositionOutput) Unwrap() *raw.AVAssetReaderVideoCompositionOutput {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -91,7 +93,9 @@ func (x *AssetReaderVideoCompositionOutput) CustomVideoCompositor() raw.AVVideoC
 	return x.inner.CustomVideoCompositor()
 }
 
-func (x *AssetReaderVideoCompositionOutput) asAssetReaderOutput() *raw.AVAssetReaderOutput { return &x.inner.AVAssetReaderOutput }
+func (x *AssetReaderVideoCompositionOutput) asAssetReaderOutput() *raw.AVAssetReaderOutput {
+	return &x.inner.AVAssetReaderOutput
+}
 
 // AssetReaderVideoCompositionOutputable is the interface implemented by [AssetReaderVideoCompositionOutput], for mocking and DI.
 type AssetReaderVideoCompositionOutputable interface {
@@ -107,4 +111,3 @@ type AssetReaderVideoCompositionOutputable interface {
 }
 
 var _ AssetReaderVideoCompositionOutputable = (*AssetReaderVideoCompositionOutput)(nil)
-

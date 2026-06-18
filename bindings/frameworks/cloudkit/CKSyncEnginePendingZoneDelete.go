@@ -15,7 +15,7 @@ type CKSyncEnginePendingZoneDelete struct {
 }
 
 var (
-	_clsCKSyncEnginePendingZoneDelete = _objcClass("CKSyncEnginePendingZoneDelete")
+	_clsCKSyncEnginePendingZoneDelete               = _objcClass("CKSyncEnginePendingZoneDelete")
 	_cKSyncEnginePendingZoneDeleteSelInitWithZoneID = objc.RegisterName("initWithZoneID:")
 )
 
@@ -32,7 +32,8 @@ func CKSyncEnginePendingZoneDeleteFromID(id objc.ID) *CKSyncEnginePendingZoneDel
 // Creates a pending zone delete for the specified record zone identifier. - Parameters: - zoneID: The unique identifier of the record zone to delete. - Returns: An initialized pending zone delete.
 func (o *CKSyncEnginePendingZoneDelete) InitWithZoneID(zoneID *CKRecordZoneID) *CKSyncEnginePendingZoneDelete {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEnginePendingZoneDeleteSelInitWithZoneID, zoneID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKSyncEnginePendingZoneDeleteFromID(_ret)
 }
-

@@ -16,10 +16,10 @@ type AVMutableDateRangeMetadataGroup struct {
 }
 
 var (
-	_clsAVMutableDateRangeMetadataGroup = _objcClass("AVMutableDateRangeMetadataGroup")
+	_clsAVMutableDateRangeMetadataGroup             = _objcClass("AVMutableDateRangeMetadataGroup")
 	_aVMutableDateRangeMetadataGroupSelSetStartDate = objc.RegisterName("setStartDate:")
-	_aVMutableDateRangeMetadataGroupSelSetEndDate = objc.RegisterName("setEndDate:")
-	_aVMutableDateRangeMetadataGroupSelSetItems = objc.RegisterName("setItems:")
+	_aVMutableDateRangeMetadataGroupSelSetEndDate   = objc.RegisterName("setEndDate:")
+	_aVMutableDateRangeMetadataGroupSelSetItems     = objc.RegisterName("setItems:")
 )
 
 func AVMutableDateRangeMetadataGroupFromID(id objc.ID) *AVMutableDateRangeMetadataGroup {
@@ -43,4 +43,3 @@ func (o *AVMutableDateRangeMetadataGroup) SetEndDate(endDate *foundation.NSDate)
 func (o *AVMutableDateRangeMetadataGroup) SetItems(items *foundation.NSArray[*AVMetadataItem]) {
 	o.Ptr().Send(_aVMutableDateRangeMetadataGroupSelSetItems, items.Ptr())
 }
-

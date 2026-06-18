@@ -17,41 +17,41 @@ type NSFileWrapper struct {
 }
 
 var (
-	_clsNSFileWrapper = _objcClass("NSFileWrapper")
-	_nSFileWrapperSelInitWithURLOptionsError = objc.RegisterName("initWithURL:options:error:")
-	_nSFileWrapperSelInitDirectoryWithFileWrappers = objc.RegisterName("initDirectoryWithFileWrappers:")
-	_nSFileWrapperSelInitRegularFileWithContents = objc.RegisterName("initRegularFileWithContents:")
-	_nSFileWrapperSelInitSymbolicLinkWithDestinationURL = objc.RegisterName("initSymbolicLinkWithDestinationURL:")
-	_nSFileWrapperSelInitWithSerializedRepresentation = objc.RegisterName("initWithSerializedRepresentation:")
-	_nSFileWrapperSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSFileWrapperSelMatchesContentsOfURL = objc.RegisterName("matchesContentsOfURL:")
-	_nSFileWrapperSelReadFromURLOptionsError = objc.RegisterName("readFromURL:options:error:")
-	_nSFileWrapperSelWriteToURLOptionsOriginalContentsURLError = objc.RegisterName("writeToURL:options:originalContentsURL:error:")
-	_nSFileWrapperSelAddFileWrapper = objc.RegisterName("addFileWrapper:")
-	_nSFileWrapperSelAddRegularFileWithContentsPreferredFilename = objc.RegisterName("addRegularFileWithContents:preferredFilename:")
-	_nSFileWrapperSelRemoveFileWrapper = objc.RegisterName("removeFileWrapper:")
-	_nSFileWrapperSelKeyForFileWrapper = objc.RegisterName("keyForFileWrapper:")
-	_nSFileWrapperSelIsDirectory = objc.RegisterName("isDirectory")
-	_nSFileWrapperSelIsRegularFile = objc.RegisterName("isRegularFile")
-	_nSFileWrapperSelIsSymbolicLink = objc.RegisterName("isSymbolicLink")
-	_nSFileWrapperSelPreferredFilename = objc.RegisterName("preferredFilename")
-	_nSFileWrapperSelSetPreferredFilename = objc.RegisterName("setPreferredFilename:")
-	_nSFileWrapperSelFilename = objc.RegisterName("filename")
-	_nSFileWrapperSelSetFilename = objc.RegisterName("setFilename:")
-	_nSFileWrapperSelFileAttributes = objc.RegisterName("fileAttributes")
-	_nSFileWrapperSelSetFileAttributes = objc.RegisterName("setFileAttributes:")
-	_nSFileWrapperSelSerializedRepresentation = objc.RegisterName("serializedRepresentation")
-	_nSFileWrapperSelFileWrappers = objc.RegisterName("fileWrappers")
-	_nSFileWrapperSelRegularFileContents = objc.RegisterName("regularFileContents")
-	_nSFileWrapperSelSymbolicLinkDestinationURL = objc.RegisterName("symbolicLinkDestinationURL")
-	_nSFileWrapperSelInitWithPath = objc.RegisterName("initWithPath:")
-	_nSFileWrapperSelInitSymbolicLinkWithDestination = objc.RegisterName("initSymbolicLinkWithDestination:")
-	_nSFileWrapperSelNeedsToBeUpdatedFromPath = objc.RegisterName("needsToBeUpdatedFromPath:")
-	_nSFileWrapperSelUpdateFromPath = objc.RegisterName("updateFromPath:")
-	_nSFileWrapperSelWriteToFileAtomicallyUpdateFilenames = objc.RegisterName("writeToFile:atomically:updateFilenames:")
-	_nSFileWrapperSelAddFileWithPath = objc.RegisterName("addFileWithPath:")
+	_clsNSFileWrapper                                                = _objcClass("NSFileWrapper")
+	_nSFileWrapperSelInitWithURLOptionsError                         = objc.RegisterName("initWithURL:options:error:")
+	_nSFileWrapperSelInitDirectoryWithFileWrappers                   = objc.RegisterName("initDirectoryWithFileWrappers:")
+	_nSFileWrapperSelInitRegularFileWithContents                     = objc.RegisterName("initRegularFileWithContents:")
+	_nSFileWrapperSelInitSymbolicLinkWithDestinationURL              = objc.RegisterName("initSymbolicLinkWithDestinationURL:")
+	_nSFileWrapperSelInitWithSerializedRepresentation                = objc.RegisterName("initWithSerializedRepresentation:")
+	_nSFileWrapperSelInitWithCoder                                   = objc.RegisterName("initWithCoder:")
+	_nSFileWrapperSelMatchesContentsOfURL                            = objc.RegisterName("matchesContentsOfURL:")
+	_nSFileWrapperSelReadFromURLOptionsError                         = objc.RegisterName("readFromURL:options:error:")
+	_nSFileWrapperSelWriteToURLOptionsOriginalContentsURLError       = objc.RegisterName("writeToURL:options:originalContentsURL:error:")
+	_nSFileWrapperSelAddFileWrapper                                  = objc.RegisterName("addFileWrapper:")
+	_nSFileWrapperSelAddRegularFileWithContentsPreferredFilename     = objc.RegisterName("addRegularFileWithContents:preferredFilename:")
+	_nSFileWrapperSelRemoveFileWrapper                               = objc.RegisterName("removeFileWrapper:")
+	_nSFileWrapperSelKeyForFileWrapper                               = objc.RegisterName("keyForFileWrapper:")
+	_nSFileWrapperSelIsDirectory                                     = objc.RegisterName("isDirectory")
+	_nSFileWrapperSelIsRegularFile                                   = objc.RegisterName("isRegularFile")
+	_nSFileWrapperSelIsSymbolicLink                                  = objc.RegisterName("isSymbolicLink")
+	_nSFileWrapperSelPreferredFilename                               = objc.RegisterName("preferredFilename")
+	_nSFileWrapperSelSetPreferredFilename                            = objc.RegisterName("setPreferredFilename:")
+	_nSFileWrapperSelFilename                                        = objc.RegisterName("filename")
+	_nSFileWrapperSelSetFilename                                     = objc.RegisterName("setFilename:")
+	_nSFileWrapperSelFileAttributes                                  = objc.RegisterName("fileAttributes")
+	_nSFileWrapperSelSetFileAttributes                               = objc.RegisterName("setFileAttributes:")
+	_nSFileWrapperSelSerializedRepresentation                        = objc.RegisterName("serializedRepresentation")
+	_nSFileWrapperSelFileWrappers                                    = objc.RegisterName("fileWrappers")
+	_nSFileWrapperSelRegularFileContents                             = objc.RegisterName("regularFileContents")
+	_nSFileWrapperSelSymbolicLinkDestinationURL                      = objc.RegisterName("symbolicLinkDestinationURL")
+	_nSFileWrapperSelInitWithPath                                    = objc.RegisterName("initWithPath:")
+	_nSFileWrapperSelInitSymbolicLinkWithDestination                 = objc.RegisterName("initSymbolicLinkWithDestination:")
+	_nSFileWrapperSelNeedsToBeUpdatedFromPath                        = objc.RegisterName("needsToBeUpdatedFromPath:")
+	_nSFileWrapperSelUpdateFromPath                                  = objc.RegisterName("updateFromPath:")
+	_nSFileWrapperSelWriteToFileAtomicallyUpdateFilenames            = objc.RegisterName("writeToFile:atomically:updateFilenames:")
+	_nSFileWrapperSelAddFileWithPath                                 = objc.RegisterName("addFileWithPath:")
 	_nSFileWrapperSelAddSymbolicLinkWithDestinationPreferredFilename = objc.RegisterName("addSymbolicLinkWithDestination:preferredFilename:")
-	_nSFileWrapperSelSymbolicLinkDestination = objc.RegisterName("symbolicLinkDestination")
+	_nSFileWrapperSelSymbolicLinkDestination                         = objc.RegisterName("symbolicLinkDestination")
 )
 
 func NSFileWrapperFromID(id objc.ID) *NSFileWrapper {
@@ -67,7 +67,9 @@ func NSFileWrapperFromID(id objc.ID) *NSFileWrapper {
 func (o *NSFileWrapper) InitWithURLOptionsError(url *NSURL, options NSFileWrapperReadingOptions) (*NSFileWrapper, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileWrapperSelInitWithURLOptionsError, url.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -76,31 +78,41 @@ func (o *NSFileWrapper) InitWithURLOptionsError(url *NSURL, options NSFileWrappe
 
 func (o *NSFileWrapper) InitDirectoryWithFileWrappers(childrenByPreferredName *NSDictionary[*NSString, *NSFileWrapper]) *NSFileWrapper {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileWrapperSelInitDirectoryWithFileWrappers, childrenByPreferredName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileWrapperFromID(_ret)
 }
 
 func (o *NSFileWrapper) InitRegularFileWithContents(contents *NSData) *NSFileWrapper {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileWrapperSelInitRegularFileWithContents, contents.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileWrapperFromID(_ret)
 }
 
 func (o *NSFileWrapper) InitSymbolicLinkWithDestinationURL(url *NSURL) *NSFileWrapper {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileWrapperSelInitSymbolicLinkWithDestinationURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileWrapperFromID(_ret)
 }
 
 func (o *NSFileWrapper) InitWithSerializedRepresentation(serializeRepresentation *NSData) *NSFileWrapper {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileWrapperSelInitWithSerializedRepresentation, serializeRepresentation.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileWrapperFromID(_ret)
 }
 
 func (o *NSFileWrapper) InitWithCoder(inCoder *NSCoder) *NSFileWrapper {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileWrapperSelInitWithCoder, inCoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileWrapperFromID(_ret)
 }
 
@@ -129,13 +141,17 @@ func (o *NSFileWrapper) WriteToURLOptionsOriginalContentsURLError(url *NSURL, op
 
 func (o *NSFileWrapper) AddFileWrapper(child *NSFileWrapper) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileWrapperSelAddFileWrapper, child.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSFileWrapper) AddRegularFileWithContentsPreferredFilename(data *NSData, fileName *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileWrapperSelAddRegularFileWithContentsPreferredFilename, data.Ptr(), fileName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -145,7 +161,9 @@ func (o *NSFileWrapper) RemoveFileWrapper(child *NSFileWrapper) {
 
 func (o *NSFileWrapper) KeyForFileWrapper(child *NSFileWrapper) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileWrapperSelKeyForFileWrapper, child.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -166,7 +184,9 @@ func (o *NSFileWrapper) IsSymbolicLink() bool {
 
 func (o *NSFileWrapper) PreferredFilename() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileWrapperSelPreferredFilename)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -176,7 +196,9 @@ func (o *NSFileWrapper) SetPreferredFilename(preferredFilename *NSString) {
 
 func (o *NSFileWrapper) Filename() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileWrapperSelFilename)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -195,25 +217,33 @@ func (o *NSFileWrapper) SetFileAttributes(fileAttributes *NSDictionary[*NSString
 
 func (o *NSFileWrapper) SerializedRepresentation() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileWrapperSelSerializedRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
 func (o *NSFileWrapper) FileWrappers() *NSDictionary[*NSString, *NSFileWrapper] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileWrapperSelFileWrappers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDictionaryFromID[*NSString, *NSFileWrapper](_ret)
 }
 
 func (o *NSFileWrapper) RegularFileContents() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileWrapperSelRegularFileContents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
 func (o *NSFileWrapper) SymbolicLinkDestinationURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileWrapperSelSymbolicLinkDestinationURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
@@ -250,21 +280,26 @@ func (o *NSFileWrapper) WriteToFileAtomicallyUpdateFilenames(path *NSString, ato
 // Deprecated: Instantiate a new NSFileWrapper with -initWithURL:options:error:, send it -setPreferredFileName: if necessary, then use -addFileWrapper: instead.
 func (o *NSFileWrapper) AddFileWithPath(path *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileWrapperSelAddFileWithPath, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // Deprecated: Instantiate a new NSFileWrapper with -initWithSymbolicLinkDestinationURL:, send it -setPreferredFileName: if necessary, then use -addFileWrapper: instead.
 func (o *NSFileWrapper) AddSymbolicLinkWithDestinationPreferredFilename(path *NSString, filename *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileWrapperSelAddSymbolicLinkWithDestinationPreferredFilename, path.Ptr(), filename.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // Deprecated: Use -symbolicLinkDestinationURL instead.
 func (o *NSFileWrapper) SymbolicLinkDestination() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileWrapperSelSymbolicLinkDestination)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
-

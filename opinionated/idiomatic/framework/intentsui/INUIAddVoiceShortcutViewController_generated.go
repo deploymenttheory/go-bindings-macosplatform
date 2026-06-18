@@ -16,7 +16,9 @@ type AddVoiceShortcutViewController struct {
 }
 
 // Unwrap returns the underlying [raw.INUIAddVoiceShortcutViewController].
-func (x *AddVoiceShortcutViewController) Unwrap() *raw.INUIAddVoiceShortcutViewController { return x.inner }
+func (x *AddVoiceShortcutViewController) Unwrap() *raw.INUIAddVoiceShortcutViewController {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -62,4 +64,3 @@ type AddVoiceShortcutViewControllerable interface {
 }
 
 var _ AddVoiceShortcutViewControllerable = (*AddVoiceShortcutViewController)(nil)
-

@@ -49,7 +49,9 @@ func SCNGeometrySourceSemanticBoneWeights() uintptr {
 
 func SCNGeometrySourceSemanticColor() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNGeometrySourceSemanticColor")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -60,25 +62,33 @@ func SCNGeometrySourceSemanticEdgeCrease() uintptr {
 
 func SCNGeometrySourceSemanticNormal() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNGeometrySourceSemanticNormal")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SCNGeometrySourceSemanticTangent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNGeometrySourceSemanticTangent")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SCNGeometrySourceSemanticTexcoord() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNGeometrySourceSemanticTexcoord")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SCNGeometrySourceSemanticVertex() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNGeometrySourceSemanticVertex")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -89,31 +99,41 @@ func SCNGeometrySourceSemanticVertexCrease() uintptr {
 
 func SCNHitTestBackFaceCullingKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNHitTestBackFaceCullingKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SCNHitTestBoundingBoxOnlyKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNHitTestBoundingBoxOnlyKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SCNHitTestClipToZRangeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNHitTestClipToZRangeKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SCNHitTestFirstFoundOnlyKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNHitTestFirstFoundOnlyKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SCNHitTestIgnoreChildNodesKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNHitTestIgnoreChildNodesKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -124,31 +144,41 @@ func SCNHitTestIgnoreHiddenNodesKey() uintptr {
 
 func SCNHitTestOptionCategoryBitMask() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNHitTestOptionCategoryBitMask")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SCNHitTestOptionIgnoreLightArea() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNHitTestOptionIgnoreLightArea")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SCNHitTestOptionSearchMode() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNHitTestOptionSearchMode")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SCNHitTestRootNodeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNHitTestRootNodeKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SCNHitTestSortResultsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNHitTestSortResultsKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -203,85 +233,113 @@ func SCNLightSpotOuterAngleKey() uintptr {
 
 func SCNLightTypeAmbient() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNLightTypeAmbient")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SCNLightTypeArea() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNLightTypeArea")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SCNLightTypeDirectional() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNLightTypeDirectional")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SCNLightTypeIES() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNLightTypeIES")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SCNLightTypeOmni() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNLightTypeOmni")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SCNLightTypeProbe() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNLightTypeProbe")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SCNLightTypeSpot() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNLightTypeSpot")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SCNLightingModelBlinn() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNLightingModelBlinn")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SCNLightingModelConstant() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNLightingModelConstant")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SCNLightingModelLambert() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNLightingModelLambert")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SCNLightingModelPhong() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNLightingModelPhong")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SCNLightingModelPhysicallyBased() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNLightingModelPhysicallyBased")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SCNLightingModelShadowOnly() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNLightingModelShadowOnly")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SCNMatrix4Identity() quartzcore.CATransform3D {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNMatrix4Identity")
-	if ptr == 0 { return quartzcore.CATransform3D{} }
+	if ptr == 0 {
+		return quartzcore.CATransform3D{}
+	}
 	return *(*quartzcore.CATransform3D)(unsafe.Pointer(ptr))
 }
 
@@ -393,7 +451,9 @@ func SCNPhysicsShapeKeepAsCompoundKey() uintptr {
 
 func SCNPhysicsShapeOptionCollisionMargin() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNPhysicsShapeOptionCollisionMargin")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -455,21 +515,27 @@ func SCNPhysicsTestSearchModeKey() uintptr {
 // @constant SCNViewOptionPreferLowPowerDevice Specifies if the renderer should prefer a low power Metal device. @discussion The value is a NSNumber wrapping a BOOL. Defaults to NO.
 func SCNPreferLowPowerDeviceKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNPreferLowPowerDeviceKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant SCNViewOptionPreferredDevice Specifies the preferred Metal device to be used by the renderer. @discussion The value is directly a id <MTLDevice>.
 func SCNPreferredDeviceKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNPreferredDeviceKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant SCNViewOptionPreferredRenderingAPI Specifies the preferred rendering API to be used by the renderer. @discussion Pass it as the key in the options dictionary given to initWithFrame:options:. The value is a NSNumber wrapping a SCNRenderingAPI. You can also select the preferred rendering API directly from the SCNView inspector in InterfaceBuilder.
 func SCNPreferredRenderingAPIKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNPreferredRenderingAPIKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -486,7 +552,9 @@ func SCNProjectionTransform() uintptr {
 
 func SCNSceneEndTimeAttributeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNSceneEndTimeAttributeKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -498,7 +566,9 @@ func SCNSceneExportDestinationURL() uintptr {
 
 func SCNSceneFrameRateAttributeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNSceneFrameRateAttributeKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -559,7 +629,9 @@ func SCNSceneSourceAssetCreatedDateKey() uintptr {
 // @constant SCNSceneSourceAssetDirectoryURLsKey @abstract Pass an array of directory URLs where SceneKit should look for resources @discussion By default, SceneKit will look for the external resources it cannot find in the parent directory of the imported file. You can add additional directories by setting an array of URLs for this key when calling sceneWithOptions:error:. This is recommended if you want to construct your scene source from a data object, not from an URL, and need to load resources whose paths are not absolute.
 func SCNSceneSourceAssetDirectoryURLsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNSceneSourceAssetDirectoryURLsKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -596,56 +668,72 @@ func SCNSceneSourceAssetUpAxisKey() uintptr {
 // @constant SCNSceneSourceCheckConsistencyKey @abstract Pass YES in order to perform the document validation. @discussion This option can be set in the options dictionary of the SCNScene and SCNSceneSource loading methods. The value for this option should be a boolean NSNumber. If its boolean value is YES (the default is NO), SceneKit will attempt to check the document for consistency. If the document doesn't pass the consistency check it is then not loaded and an error is returned. This is slower, but for security reasons it should be set to YES if you are not sure the files you load are valid and have not been tampered with.
 func SCNSceneSourceCheckConsistencyKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNSceneSourceCheckConsistencyKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant SCNSceneSourceConvertToYUpKey @abstract Pass YES if a scene should be converted to Y up if it currently has a different up axis. @discussion Use this with a boolean value encapsulated in a NSNumber. The default value is NO. This option has no effect for SCN files or if the asset is already compressed by Xcode (use the compression options instead).
 func SCNSceneSourceConvertToYUpKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNSceneSourceConvertToYUpKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant SCNSceneSourceConvertUnitsToMetersKey @abstract Pass the units you want the scene to be converted to (in meter). @discussion Use this with a floating value encapsulated in a NSNumber. The default value is nil which means no conversion done. Passing a non-zero value will convert the scene coordinates so that 1 unit corresponds to N meters. For example pass 0.01 for 1 unit == 1 centimeter, pass 0.3048 for 1 unit == 1 foot... For better physics simulation it is recommended to use 1 unit equals to 1 meter. This option has no effect for SCN files or if the asset is already compressed by Xcode (use the compression options instead).
 func SCNSceneSourceConvertUnitsToMetersKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNSceneSourceConvertUnitsToMetersKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant SCNSceneSourceCreateNormalsIfAbsentKey @abstract Enable to try to guess acceptable normals for the vertices if none are given in the file @discussion Use this with a boolean value encapsulated in a NSNumber. The default value is NO.
 func SCNSceneSourceCreateNormalsIfAbsentKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNSceneSourceCreateNormalsIfAbsentKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant SCNSceneSourceFlattenSceneKey @abstract Pass YES to flatten the scene graph when possible. @discussion This option can be set in the options dictionary of the SCNScene and SCNSceneSource loading methods. The value for this option should be a boolean NSNumber. If its boolean value is YES (the default is NO), SceneKit will attempt to reduce the scene graph by merging the geometries. This option is suitable to preview a 3D scene efficiently and when manipulating the scene graph is not needed.
 func SCNSceneSourceFlattenSceneKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNSceneSourceFlattenSceneKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant SCNSceneSourceLoadingOptionPreserveOriginalTopology @abstract Pass YES to make SceneKit preserve the original topology instead of triangulating at load time. This can be useful to get better results when subdividing a geometry. @discussion Defaults to YES starting macOS 10.15, iOS 13, tvOS 13 and watchOS 6. Defaults to NO in previous versions.
 func SCNSceneSourceLoadingOptionPreserveOriginalTopology() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNSceneSourceLoadingOptionPreserveOriginalTopology")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant SCNSceneSourceOverrideAssetURLsKey @abstract Pass YES in order to override assets URLs with the directory URLs passed via SCNSceneSourceAssetDirectoryURLsKey. @discussion By default, SceneKit will look for the external resources using the paths/urls as described in the imported file. You can force SceneKit to only search for extern resources within the directories specified by the SCNSceneSourceAssetDirectoryURLsKey key. This can be useful to load a file and its resources from a specific bundle for instance.
 func SCNSceneSourceOverrideAssetURLsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNSceneSourceOverrideAssetURLsKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant SCNSceneSourceStrictConformanceKey @abstract Pass YES to interpret the 3D format of the file in a strict way. @discussion This option defaults to NO. In this case SceneKit will try to read any additional metadata present in the file to enable additional features and make the rendering as close as possible to the original intent. If you pass YES, SceneKit will instead only consider features which are part of the file format specification.
 func SCNSceneSourceStrictConformanceKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNSceneSourceStrictConformanceKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -653,13 +741,17 @@ func SCNSceneSourceStrictConformanceKey() *foundation.NSString {
 // Deprecated: No longer supported
 func SCNSceneSourceUseSafeModeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNSceneSourceUseSafeModeKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func SCNSceneStartTimeAttributeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNSceneStartTimeAttributeKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -694,13 +786,17 @@ func SCNShaderModifierEntryPointSurface() uintptr {
 
 func SCNVector3Zero() SCNVector3 {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNVector3Zero")
-	if ptr == 0 { return SCNVector3{} }
+	if ptr == 0 {
+		return SCNVector3{}
+	}
 	return *(*SCNVector3)(unsafe.Pointer(ptr))
 }
 
 func SCNVector4Zero() SCNVector4 {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNVector4Zero")
-	if ptr == 0 { return SCNVector4{} }
+	if ptr == 0 {
+		return SCNVector4{}
+	}
 	return *(*SCNVector4)(unsafe.Pointer(ptr))
 }
 
@@ -708,4 +804,3 @@ func SCNViewTransform() uintptr {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNViewTransform")
 	return ptr
 }
-

@@ -274,4 +274,3 @@ type CNNConvolutionable interface {
 }
 
 var _ CNNConvolutionable = (*CNNConvolution)(nil)
-

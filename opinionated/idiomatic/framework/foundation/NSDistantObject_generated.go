@@ -75,4 +75,3 @@ type DistantObjectable interface {
 }
 
 var _ DistantObjectable = (*DistantObject)(nil)
-

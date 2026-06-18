@@ -125,9 +125,13 @@ func (x *SpatialMixerDefinition) SetSourceDirectivityModelParameters(sourceDirec
 	x.inner.SetSourceDirectivityModelParameters(sourceDirectivityModelParameters)
 }
 
-func (x *SpatialMixerDefinition) asMixerDefinition() *raw.PHASEMixerDefinition { return &x.inner.PHASEMixerDefinition }
+func (x *SpatialMixerDefinition) asMixerDefinition() *raw.PHASEMixerDefinition {
+	return &x.inner.PHASEMixerDefinition
+}
 
-func (x *SpatialMixerDefinition) asDefinition() *raw.PHASEDefinition { return &x.inner.PHASEMixerDefinition.PHASEDefinition }
+func (x *SpatialMixerDefinition) asDefinition() *raw.PHASEDefinition {
+	return &x.inner.PHASEMixerDefinition.PHASEDefinition
+}
 
 // SpatialMixerDefinitionable is the interface implemented by [SpatialMixerDefinition], for mocking and DI.
 type SpatialMixerDefinitionable interface {
@@ -147,4 +151,3 @@ type SpatialMixerDefinitionable interface {
 }
 
 var _ SpatialMixerDefinitionable = (*SpatialMixerDefinition)(nil)
-

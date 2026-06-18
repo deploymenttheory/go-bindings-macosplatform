@@ -179,9 +179,13 @@ func (x *CNNNeuronGradient) Data() *foundation.NSData {
 	return x.inner.Data()
 }
 
-func (x *CNNNeuronGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
+func (x *CNNNeuronGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNGradientKernel
+}
 
-func (x *CNNNeuronGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *CNNNeuronGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
 // CNNNeuronGradientable is the interface implemented by [CNNNeuronGradient], for mocking and DI.
 type CNNNeuronGradientable interface {
@@ -212,4 +216,3 @@ type CNNNeuronGradientable interface {
 }
 
 var _ CNNNeuronGradientable = (*CNNNeuronGradient)(nil)
-

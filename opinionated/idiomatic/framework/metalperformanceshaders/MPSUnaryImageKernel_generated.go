@@ -150,4 +150,3 @@ type UnaryImageKernelable interface {
 }
 
 var _ UnaryImageKernelable = (*UnaryImageKernel)(nil)
-

@@ -144,7 +144,9 @@ func (x *DOMTreeWalker) SetCurrentNode(currentNode *raw.DOMNode) {
 
 func (x *DOMTreeWalker) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
-func (x *DOMTreeWalker) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+func (x *DOMTreeWalker) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMObject.WebScriptObject
+}
 
 // DOMTreeWalkerable is the interface implemented by [DOMTreeWalker], for mocking and DI.
 type DOMTreeWalkerable interface {
@@ -166,4 +168,3 @@ type DOMTreeWalkerable interface {
 }
 
 var _ DOMTreeWalkerable = (*DOMTreeWalker)(nil)
-

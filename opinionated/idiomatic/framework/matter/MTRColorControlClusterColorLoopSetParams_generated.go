@@ -16,7 +16,9 @@ type MTRColorControlClusterColorLoopSetParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRColorControlClusterColorLoopSetParams].
-func (x *MTRColorControlClusterColorLoopSetParams) Unwrap() *raw.MTRColorControlClusterColorLoopSetParams { return x.inner }
+func (x *MTRColorControlClusterColorLoopSetParams) Unwrap() *raw.MTRColorControlClusterColorLoopSetParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -213,4 +215,3 @@ type MTRColorControlClusterColorLoopSetParamsable interface {
 }
 
 var _ MTRColorControlClusterColorLoopSetParamsable = (*MTRColorControlClusterColorLoopSetParams)(nil)
-

@@ -55,4 +55,3 @@ type MTRAsyncCallbackWorkQueueable interface {
 }
 
 var _ MTRAsyncCallbackWorkQueueable = (*MTRAsyncCallbackWorkQueue)(nil)
-

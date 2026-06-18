@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_metalLib uintptr
-	_loadOnce sync.Once
+	_metalLib      uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -52,23 +52,41 @@ func _loadLibrary() {
 	_register("MTLClearColorMake", func() { purego.RegisterLibFunc(&_fnMTLClearColorMake, _metalLib, "MTLClearColorMake") })
 	_register("MTLCoordinate2DMake", func() { purego.RegisterLibFunc(&_fnMTLCoordinate2DMake, _metalLib, "MTLCoordinate2DMake") })
 	_register("MTLCopyAllDevices", func() { purego.RegisterLibFunc(&_fnMTLCopyAllDevices, _metalLib, "MTLCopyAllDevices") })
-	_register("MTLCopyAllDevicesWithObserver", func() { purego.RegisterLibFunc(&_fnMTLCopyAllDevicesWithObserver, _metalLib, "MTLCopyAllDevicesWithObserver") })
-	_register("MTLCreateSystemDefaultDevice", func() { purego.RegisterLibFunc(&_fnMTLCreateSystemDefaultDevice, _metalLib, "MTLCreateSystemDefaultDevice") })
-	_register("MTLIOCompressionContextAppendData", func() { purego.RegisterLibFunc(&_fnMTLIOCompressionContextAppendData, _metalLib, "MTLIOCompressionContextAppendData") })
-	_register("MTLIOCompressionContextDefaultChunkSize", func() { purego.RegisterLibFunc(&_fnMTLIOCompressionContextDefaultChunkSize, _metalLib, "MTLIOCompressionContextDefaultChunkSize") })
-	_register("MTLIOCreateCompressionContext", func() { purego.RegisterLibFunc(&_fnMTLIOCreateCompressionContext, _metalLib, "MTLIOCreateCompressionContext") })
-	_register("MTLIOFlushAndDestroyCompressionContext", func() { purego.RegisterLibFunc(&_fnMTLIOFlushAndDestroyCompressionContext, _metalLib, "MTLIOFlushAndDestroyCompressionContext") })
-	_register("MTLIndirectCommandBufferExecutionRangeMake", func() { purego.RegisterLibFunc(&_fnMTLIndirectCommandBufferExecutionRangeMake, _metalLib, "MTLIndirectCommandBufferExecutionRangeMake") })
+	_register("MTLCopyAllDevicesWithObserver", func() {
+		purego.RegisterLibFunc(&_fnMTLCopyAllDevicesWithObserver, _metalLib, "MTLCopyAllDevicesWithObserver")
+	})
+	_register("MTLCreateSystemDefaultDevice", func() {
+		purego.RegisterLibFunc(&_fnMTLCreateSystemDefaultDevice, _metalLib, "MTLCreateSystemDefaultDevice")
+	})
+	_register("MTLIOCompressionContextAppendData", func() {
+		purego.RegisterLibFunc(&_fnMTLIOCompressionContextAppendData, _metalLib, "MTLIOCompressionContextAppendData")
+	})
+	_register("MTLIOCompressionContextDefaultChunkSize", func() {
+		purego.RegisterLibFunc(&_fnMTLIOCompressionContextDefaultChunkSize, _metalLib, "MTLIOCompressionContextDefaultChunkSize")
+	})
+	_register("MTLIOCreateCompressionContext", func() {
+		purego.RegisterLibFunc(&_fnMTLIOCreateCompressionContext, _metalLib, "MTLIOCreateCompressionContext")
+	})
+	_register("MTLIOFlushAndDestroyCompressionContext", func() {
+		purego.RegisterLibFunc(&_fnMTLIOFlushAndDestroyCompressionContext, _metalLib, "MTLIOFlushAndDestroyCompressionContext")
+	})
+	_register("MTLIndirectCommandBufferExecutionRangeMake", func() {
+		purego.RegisterLibFunc(&_fnMTLIndirectCommandBufferExecutionRangeMake, _metalLib, "MTLIndirectCommandBufferExecutionRangeMake")
+	})
 	_register("MTLOriginMake", func() { purego.RegisterLibFunc(&_fnMTLOriginMake, _metalLib, "MTLOriginMake") })
 	_register("MTLPackedFloat3Make", func() { purego.RegisterLibFunc(&_fnMTLPackedFloat3Make, _metalLib, "MTLPackedFloat3Make") })
-	_register("MTLPackedFloatQuaternionMake", func() { purego.RegisterLibFunc(&_fnMTLPackedFloatQuaternionMake, _metalLib, "MTLPackedFloatQuaternionMake") })
+	_register("MTLPackedFloatQuaternionMake", func() {
+		purego.RegisterLibFunc(&_fnMTLPackedFloatQuaternionMake, _metalLib, "MTLPackedFloatQuaternionMake")
+	})
 	_register("MTLRegionMake1D", func() { purego.RegisterLibFunc(&_fnMTLRegionMake1D, _metalLib, "MTLRegionMake1D") })
 	_register("MTLRegionMake2D", func() { purego.RegisterLibFunc(&_fnMTLRegionMake2D, _metalLib, "MTLRegionMake2D") })
 	_register("MTLRegionMake3D", func() { purego.RegisterLibFunc(&_fnMTLRegionMake3D, _metalLib, "MTLRegionMake3D") })
 	_register("MTLRemoveDeviceObserver", func() { purego.RegisterLibFunc(&_fnMTLRemoveDeviceObserver, _metalLib, "MTLRemoveDeviceObserver") })
 	_register("MTLSamplePositionMake", func() { purego.RegisterLibFunc(&_fnMTLSamplePositionMake, _metalLib, "MTLSamplePositionMake") })
 	_register("MTLSizeMake", func() { purego.RegisterLibFunc(&_fnMTLSizeMake, _metalLib, "MTLSizeMake") })
-	_register("MTLTextureSwizzleChannelsMake", func() { purego.RegisterLibFunc(&_fnMTLTextureSwizzleChannelsMake, _metalLib, "MTLTextureSwizzleChannelsMake") })
+	_register("MTLTextureSwizzleChannelsMake", func() {
+		purego.RegisterLibFunc(&_fnMTLTextureSwizzleChannelsMake, _metalLib, "MTLTextureSwizzleChannelsMake")
+	})
 }
 
 func init() {

@@ -16,9 +16,9 @@ type MLCTransposeLayer struct {
 }
 
 var (
-	_clsMLCTransposeLayer = _objcClass("MLCTransposeLayer")
+	_clsMLCTransposeLayer                    = _objcClass("MLCTransposeLayer")
 	_mLCTransposeLayerSelLayerWithDimensions = objc.RegisterName("layerWithDimensions:")
-	_mLCTransposeLayerSelDimensions = objc.RegisterName("dimensions")
+	_mLCTransposeLayerSelDimensions          = objc.RegisterName("dimensions")
 )
 
 func MLCTransposeLayerFromID(id objc.ID) *MLCTransposeLayer {
@@ -34,7 +34,9 @@ func MLCTransposeLayerFromID(id objc.ID) *MLCTransposeLayer {
 // @abstract   Create a transpose layer @param      dimensions NSArray<NSNumber *> representing the desired ordering of dimensions The dimensions array specifies the input axis source for each output axis, such that the K'th element in the dimensions array specifies the input axis source for the K'th axis in the output.  The batch dimension which is typically axis 0 cannot be transposed. @return     A new transpose layer.
 func MLCTransposeLayerLayerWithDimensions(dimensions *foundation.NSArray[*foundation.NSNumber]) *MLCTransposeLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTransposeLayer), _mLCTransposeLayerSelLayerWithDimensions, dimensions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTransposeLayerFromID(_ret)
 }
 
@@ -43,4 +45,3 @@ func (o *MLCTransposeLayer) Dimensions() *foundation.NSArray[*foundation.NSNumbe
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mLCTransposeLayerSelDimensions)
 	return _ret
 }
-

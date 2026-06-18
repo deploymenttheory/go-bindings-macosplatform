@@ -16,10 +16,10 @@ type MTRGeneralCommissioningClusterBasicCommissioningInfo struct {
 }
 
 var (
-	_clsMTRGeneralCommissioningClusterBasicCommissioningInfo = _objcClass("MTRGeneralCommissioningClusterBasicCommissioningInfo")
-	_mTRGeneralCommissioningClusterBasicCommissioningInfoSelFailSafeExpiryLengthSeconds = objc.RegisterName("failSafeExpiryLengthSeconds")
-	_mTRGeneralCommissioningClusterBasicCommissioningInfoSelSetFailSafeExpiryLengthSeconds = objc.RegisterName("setFailSafeExpiryLengthSeconds:")
-	_mTRGeneralCommissioningClusterBasicCommissioningInfoSelMaxCumulativeFailsafeSeconds = objc.RegisterName("maxCumulativeFailsafeSeconds")
+	_clsMTRGeneralCommissioningClusterBasicCommissioningInfo                                = _objcClass("MTRGeneralCommissioningClusterBasicCommissioningInfo")
+	_mTRGeneralCommissioningClusterBasicCommissioningInfoSelFailSafeExpiryLengthSeconds     = objc.RegisterName("failSafeExpiryLengthSeconds")
+	_mTRGeneralCommissioningClusterBasicCommissioningInfoSelSetFailSafeExpiryLengthSeconds  = objc.RegisterName("setFailSafeExpiryLengthSeconds:")
+	_mTRGeneralCommissioningClusterBasicCommissioningInfoSelMaxCumulativeFailsafeSeconds    = objc.RegisterName("maxCumulativeFailsafeSeconds")
 	_mTRGeneralCommissioningClusterBasicCommissioningInfoSelSetMaxCumulativeFailsafeSeconds = objc.RegisterName("setMaxCumulativeFailsafeSeconds:")
 )
 
@@ -35,7 +35,9 @@ func MTRGeneralCommissioningClusterBasicCommissioningInfoFromID(id objc.ID) *MTR
 
 func (o *MTRGeneralCommissioningClusterBasicCommissioningInfo) FailSafeExpiryLengthSeconds() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralCommissioningClusterBasicCommissioningInfoSelFailSafeExpiryLengthSeconds)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRGeneralCommissioningClusterBasicCommissioningInfo) SetFailSafeExpiry
 
 func (o *MTRGeneralCommissioningClusterBasicCommissioningInfo) MaxCumulativeFailsafeSeconds() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralCommissioningClusterBasicCommissioningInfoSelMaxCumulativeFailsafeSeconds)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRGeneralCommissioningClusterBasicCommissioningInfo) SetMaxCumulativeFailsafeSeconds(maxCumulativeFailsafeSeconds *foundation.NSNumber) {
 	o.Ptr().Send(_mTRGeneralCommissioningClusterBasicCommissioningInfoSelSetMaxCumulativeFailsafeSeconds, maxCumulativeFailsafeSeconds.Ptr())
 }
-

@@ -16,7 +16,9 @@ type MTRAccessControlClusterExtensionEntry struct {
 }
 
 // Unwrap returns the underlying [raw.MTRAccessControlClusterExtensionEntry].
-func (x *MTRAccessControlClusterExtensionEntry) Unwrap() *raw.MTRAccessControlClusterExtensionEntry { return x.inner }
+func (x *MTRAccessControlClusterExtensionEntry) Unwrap() *raw.MTRAccessControlClusterExtensionEntry {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -48,7 +50,9 @@ func (x *MTRAccessControlClusterExtensionEntry) WithFabricIndex(fabricIndex *fou
 	return x
 }
 
-func (x *MTRAccessControlClusterExtensionEntry) asMTRAccessControlClusterAccessControlExtensionStruct() *raw.MTRAccessControlClusterAccessControlExtensionStruct { return &x.inner.MTRAccessControlClusterAccessControlExtensionStruct }
+func (x *MTRAccessControlClusterExtensionEntry) asMTRAccessControlClusterAccessControlExtensionStruct() *raw.MTRAccessControlClusterAccessControlExtensionStruct {
+	return &x.inner.MTRAccessControlClusterAccessControlExtensionStruct
+}
 
 // MTRAccessControlClusterExtensionEntryable is the interface implemented by [MTRAccessControlClusterExtensionEntry], for mocking and DI.
 type MTRAccessControlClusterExtensionEntryable interface {
@@ -58,4 +62,3 @@ type MTRAccessControlClusterExtensionEntryable interface {
 }
 
 var _ MTRAccessControlClusterExtensionEntryable = (*MTRAccessControlClusterExtensionEntry)(nil)
-

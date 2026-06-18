@@ -98,4 +98,3 @@ type BufferLayoutDescriptorable interface {
 }
 
 var _ BufferLayoutDescriptorable = (*BufferLayoutDescriptor)(nil)
-

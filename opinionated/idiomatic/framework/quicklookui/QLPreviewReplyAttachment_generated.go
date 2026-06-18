@@ -56,4 +56,3 @@ type PreviewReplyAttachmentable interface {
 }
 
 var _ PreviewReplyAttachmentable = (*PreviewReplyAttachment)(nil)
-

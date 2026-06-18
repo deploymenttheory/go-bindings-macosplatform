@@ -55,4 +55,3 @@ type RecordingOutputable interface {
 }
 
 var _ RecordingOutputable = (*RecordingOutput)(nil)
-

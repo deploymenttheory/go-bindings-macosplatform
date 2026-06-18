@@ -50,9 +50,13 @@ func (x *NDArrayGatherGradientState) WithLabel(label string) *NDArrayGatherGradi
 	return x
 }
 
-func (x *NDArrayGatherGradientState) asNDArrayGradientState() *mpsndarray.MPSNDArrayGradientState { return &x.inner.MPSNDArrayGradientState }
+func (x *NDArrayGatherGradientState) asNDArrayGradientState() *mpsndarray.MPSNDArrayGradientState {
+	return &x.inner.MPSNDArrayGradientState
+}
 
-func (x *NDArrayGatherGradientState) asState() *mpscore.MPSState { return &x.inner.MPSNDArrayGradientState.MPSState }
+func (x *NDArrayGatherGradientState) asState() *mpscore.MPSState {
+	return &x.inner.MPSNDArrayGradientState.MPSState
+}
 
 // NDArrayGatherGradientStateable is the interface implemented by [NDArrayGatherGradientState], for mocking and DI.
 type NDArrayGatherGradientStateable interface {
@@ -62,4 +66,3 @@ type NDArrayGatherGradientStateable interface {
 }
 
 var _ NDArrayGatherGradientStateable = (*NDArrayGatherGradientState)(nil)
-

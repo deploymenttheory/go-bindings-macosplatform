@@ -18,16 +18,16 @@ type VZNetworkBlockDeviceStorageDeviceAttachment struct {
 }
 
 var (
-	_clsVZNetworkBlockDeviceStorageDeviceAttachment = _objcClass("VZNetworkBlockDeviceStorageDeviceAttachment")
+	_clsVZNetworkBlockDeviceStorageDeviceAttachment                                                         = _objcClass("VZNetworkBlockDeviceStorageDeviceAttachment")
 	_vZNetworkBlockDeviceStorageDeviceAttachmentSelInitWithURLTimeoutForcedReadOnlySynchronizationModeError = objc.RegisterName("initWithURL:timeout:forcedReadOnly:synchronizationMode:error:")
-	_vZNetworkBlockDeviceStorageDeviceAttachmentSelInitWithURLError = objc.RegisterName("initWithURL:error:")
-	_vZNetworkBlockDeviceStorageDeviceAttachmentSelValidateURLError = objc.RegisterName("validateURL:error:")
-	_vZNetworkBlockDeviceStorageDeviceAttachmentSelURL = objc.RegisterName("URL")
-	_vZNetworkBlockDeviceStorageDeviceAttachmentSelTimeout = objc.RegisterName("timeout")
-	_vZNetworkBlockDeviceStorageDeviceAttachmentSelIsForcedReadOnly = objc.RegisterName("isForcedReadOnly")
-	_vZNetworkBlockDeviceStorageDeviceAttachmentSelSynchronizationMode = objc.RegisterName("synchronizationMode")
-	_vZNetworkBlockDeviceStorageDeviceAttachmentSelDelegate = objc.RegisterName("delegate")
-	_vZNetworkBlockDeviceStorageDeviceAttachmentSelSetDelegate = objc.RegisterName("setDelegate:")
+	_vZNetworkBlockDeviceStorageDeviceAttachmentSelInitWithURLError                                         = objc.RegisterName("initWithURL:error:")
+	_vZNetworkBlockDeviceStorageDeviceAttachmentSelValidateURLError                                         = objc.RegisterName("validateURL:error:")
+	_vZNetworkBlockDeviceStorageDeviceAttachmentSelURL                                                      = objc.RegisterName("URL")
+	_vZNetworkBlockDeviceStorageDeviceAttachmentSelTimeout                                                  = objc.RegisterName("timeout")
+	_vZNetworkBlockDeviceStorageDeviceAttachmentSelIsForcedReadOnly                                         = objc.RegisterName("isForcedReadOnly")
+	_vZNetworkBlockDeviceStorageDeviceAttachmentSelSynchronizationMode                                      = objc.RegisterName("synchronizationMode")
+	_vZNetworkBlockDeviceStorageDeviceAttachmentSelDelegate                                                 = objc.RegisterName("delegate")
+	_vZNetworkBlockDeviceStorageDeviceAttachmentSelSetDelegate                                              = objc.RegisterName("setDelegate:")
 )
 
 func VZNetworkBlockDeviceStorageDeviceAttachmentFromID(id objc.ID) *VZNetworkBlockDeviceStorageDeviceAttachment {
@@ -44,7 +44,9 @@ func VZNetworkBlockDeviceStorageDeviceAttachmentFromID(id objc.ID) *VZNetworkBlo
 func (o *VZNetworkBlockDeviceStorageDeviceAttachment) InitWithURLTimeoutForcedReadOnlySynchronizationModeError(uRL *foundation.NSURL, timeout float64, forcedReadOnly bool, synchronizationMode VZDiskSynchronizationMode) (*VZNetworkBlockDeviceStorageDeviceAttachment, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZNetworkBlockDeviceStorageDeviceAttachmentSelInitWithURLTimeoutForcedReadOnlySynchronizationModeError, uRL.Ptr(), timeout, forcedReadOnly, synchronizationMode, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -55,7 +57,9 @@ func (o *VZNetworkBlockDeviceStorageDeviceAttachment) InitWithURLTimeoutForcedRe
 func (o *VZNetworkBlockDeviceStorageDeviceAttachment) InitWithURLError(uRL *foundation.NSURL) (*VZNetworkBlockDeviceStorageDeviceAttachment, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZNetworkBlockDeviceStorageDeviceAttachmentSelInitWithURLError, uRL.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -75,7 +79,9 @@ func VZNetworkBlockDeviceStorageDeviceAttachmentValidateURLError(uRL *foundation
 // @abstract URL referring to the NBD server to which the NBD client is to be connected.
 func (o *VZNetworkBlockDeviceStorageDeviceAttachment) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZNetworkBlockDeviceStorageDeviceAttachmentSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -106,4 +112,3 @@ func (o *VZNetworkBlockDeviceStorageDeviceAttachment) Delegate() VZNetworkBlockD
 func (o *VZNetworkBlockDeviceStorageDeviceAttachment) SetDelegate(delegate VZNetworkBlockDeviceStorageDeviceAttachmentDelegate) {
 	o.Ptr().Send(_vZNetworkBlockDeviceStorageDeviceAttachmentSelSetDelegate, delegate)
 }
-

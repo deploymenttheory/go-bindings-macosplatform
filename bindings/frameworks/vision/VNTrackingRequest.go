@@ -17,14 +17,14 @@ type VNTrackingRequest struct {
 }
 
 var (
-	_clsVNTrackingRequest = _objcClass("VNTrackingRequest")
+	_clsVNTrackingRequest                                        = _objcClass("VNTrackingRequest")
 	_vNTrackingRequestSelSupportedNumberOfTrackersAndReturnError = objc.RegisterName("supportedNumberOfTrackersAndReturnError:")
-	_vNTrackingRequestSelInputObservation = objc.RegisterName("inputObservation")
-	_vNTrackingRequestSelSetInputObservation = objc.RegisterName("setInputObservation:")
-	_vNTrackingRequestSelTrackingLevel = objc.RegisterName("trackingLevel")
-	_vNTrackingRequestSelSetTrackingLevel = objc.RegisterName("setTrackingLevel:")
-	_vNTrackingRequestSelIsLastFrame = objc.RegisterName("isLastFrame")
-	_vNTrackingRequestSelSetLastFrame = objc.RegisterName("setLastFrame:")
+	_vNTrackingRequestSelInputObservation                        = objc.RegisterName("inputObservation")
+	_vNTrackingRequestSelSetInputObservation                     = objc.RegisterName("setInputObservation:")
+	_vNTrackingRequestSelTrackingLevel                           = objc.RegisterName("trackingLevel")
+	_vNTrackingRequestSelSetTrackingLevel                        = objc.RegisterName("setTrackingLevel:")
+	_vNTrackingRequestSelIsLastFrame                             = objc.RegisterName("isLastFrame")
+	_vNTrackingRequestSelSetLastFrame                            = objc.RegisterName("setLastFrame:")
 )
 
 func VNTrackingRequestFromID(id objc.ID) *VNTrackingRequest {
@@ -50,7 +50,9 @@ func (o *VNTrackingRequest) SupportedNumberOfTrackersAndReturnError() (uint, err
 // @property property inputObservation @abstract The observation object that defines a region to track. Providing an observation not returned from a tracker (e.g. user-defined, or from a detector) begins a new tracker for the sequence. Providing an observation that was returned from a tracker continues the use of that tracker, to track the region to the next frame. In general, unless documented in the request's documentation, the rectangle must be defined in normalized coordinates (both dimensions normalized to [0,1] with the origin at the lower-left corner).
 func (o *VNTrackingRequest) InputObservation() *VNDetectedObjectObservation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTrackingRequestSelInputObservation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNDetectedObjectObservationFromID(_ret)
 }
 
@@ -77,4 +79,3 @@ func (o *VNTrackingRequest) IsLastFrame() bool {
 func (o *VNTrackingRequest) SetLastFrame(lastFrame bool) {
 	o.Ptr().Send(_vNTrackingRequestSelSetLastFrame, lastFrame)
 }
-

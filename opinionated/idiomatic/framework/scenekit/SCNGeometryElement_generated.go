@@ -154,4 +154,3 @@ type GeometryElementable interface {
 }
 
 var _ GeometryElementable = (*GeometryElement)(nil)
-

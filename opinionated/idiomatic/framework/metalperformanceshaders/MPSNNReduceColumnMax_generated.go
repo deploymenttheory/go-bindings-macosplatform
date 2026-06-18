@@ -113,11 +113,17 @@ func (x *NNReduceColumnMax) WithLabel(label string) *NNReduceColumnMax {
 	return x
 }
 
-func (x *NNReduceColumnMax) asNNReduceUnary() *mpsneuralnetwork.MPSNNReduceUnary { return &x.inner.MPSNNReduceUnary }
+func (x *NNReduceColumnMax) asNNReduceUnary() *mpsneuralnetwork.MPSNNReduceUnary {
+	return &x.inner.MPSNNReduceUnary
+}
 
-func (x *NNReduceColumnMax) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
+func (x *NNReduceColumnMax) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel
+}
 
-func (x *NNReduceColumnMax) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel }
+func (x *NNReduceColumnMax) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel
+}
 
 // NNReduceColumnMaxable is the interface implemented by [NNReduceColumnMax], for mocking and DI.
 type NNReduceColumnMaxable interface {
@@ -136,4 +142,3 @@ type NNReduceColumnMaxable interface {
 }
 
 var _ NNReduceColumnMaxable = (*NNReduceColumnMax)(nil)
-

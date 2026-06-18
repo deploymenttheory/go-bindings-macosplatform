@@ -18,33 +18,33 @@ type IKScannerDeviceView struct {
 }
 
 var (
-	_clsIKScannerDeviceView = _objcClass("IKScannerDeviceView")
-	_iKScannerDeviceViewSelDelegate = objc.RegisterName("delegate")
-	_iKScannerDeviceViewSelSetDelegate = objc.RegisterName("setDelegate:")
-	_iKScannerDeviceViewSelScannerDevice = objc.RegisterName("scannerDevice")
-	_iKScannerDeviceViewSelSetScannerDevice = objc.RegisterName("setScannerDevice:")
-	_iKScannerDeviceViewSelMode = objc.RegisterName("mode")
-	_iKScannerDeviceViewSelSetMode = objc.RegisterName("setMode:")
-	_iKScannerDeviceViewSelHasDisplayModeSimple = objc.RegisterName("hasDisplayModeSimple")
-	_iKScannerDeviceViewSelSetHasDisplayModeSimple = objc.RegisterName("setHasDisplayModeSimple:")
-	_iKScannerDeviceViewSelHasDisplayModeAdvanced = objc.RegisterName("hasDisplayModeAdvanced")
-	_iKScannerDeviceViewSelSetHasDisplayModeAdvanced = objc.RegisterName("setHasDisplayModeAdvanced:")
-	_iKScannerDeviceViewSelTransferMode = objc.RegisterName("transferMode")
-	_iKScannerDeviceViewSelSetTransferMode = objc.RegisterName("setTransferMode:")
-	_iKScannerDeviceViewSelScanControlLabel = objc.RegisterName("scanControlLabel")
-	_iKScannerDeviceViewSelSetScanControlLabel = objc.RegisterName("setScanControlLabel:")
-	_iKScannerDeviceViewSelOverviewControlLabel = objc.RegisterName("overviewControlLabel")
-	_iKScannerDeviceViewSelSetOverviewControlLabel = objc.RegisterName("setOverviewControlLabel:")
-	_iKScannerDeviceViewSelDisplaysDownloadsDirectoryControl = objc.RegisterName("displaysDownloadsDirectoryControl")
-	_iKScannerDeviceViewSelSetDisplaysDownloadsDirectoryControl = objc.RegisterName("setDisplaysDownloadsDirectoryControl:")
-	_iKScannerDeviceViewSelDownloadsDirectory = objc.RegisterName("downloadsDirectory")
-	_iKScannerDeviceViewSelSetDownloadsDirectory = objc.RegisterName("setDownloadsDirectory:")
-	_iKScannerDeviceViewSelDocumentName = objc.RegisterName("documentName")
-	_iKScannerDeviceViewSelSetDocumentName = objc.RegisterName("setDocumentName:")
-	_iKScannerDeviceViewSelDisplaysPostProcessApplicationControl = objc.RegisterName("displaysPostProcessApplicationControl")
+	_clsIKScannerDeviceView                                         = _objcClass("IKScannerDeviceView")
+	_iKScannerDeviceViewSelDelegate                                 = objc.RegisterName("delegate")
+	_iKScannerDeviceViewSelSetDelegate                              = objc.RegisterName("setDelegate:")
+	_iKScannerDeviceViewSelScannerDevice                            = objc.RegisterName("scannerDevice")
+	_iKScannerDeviceViewSelSetScannerDevice                         = objc.RegisterName("setScannerDevice:")
+	_iKScannerDeviceViewSelMode                                     = objc.RegisterName("mode")
+	_iKScannerDeviceViewSelSetMode                                  = objc.RegisterName("setMode:")
+	_iKScannerDeviceViewSelHasDisplayModeSimple                     = objc.RegisterName("hasDisplayModeSimple")
+	_iKScannerDeviceViewSelSetHasDisplayModeSimple                  = objc.RegisterName("setHasDisplayModeSimple:")
+	_iKScannerDeviceViewSelHasDisplayModeAdvanced                   = objc.RegisterName("hasDisplayModeAdvanced")
+	_iKScannerDeviceViewSelSetHasDisplayModeAdvanced                = objc.RegisterName("setHasDisplayModeAdvanced:")
+	_iKScannerDeviceViewSelTransferMode                             = objc.RegisterName("transferMode")
+	_iKScannerDeviceViewSelSetTransferMode                          = objc.RegisterName("setTransferMode:")
+	_iKScannerDeviceViewSelScanControlLabel                         = objc.RegisterName("scanControlLabel")
+	_iKScannerDeviceViewSelSetScanControlLabel                      = objc.RegisterName("setScanControlLabel:")
+	_iKScannerDeviceViewSelOverviewControlLabel                     = objc.RegisterName("overviewControlLabel")
+	_iKScannerDeviceViewSelSetOverviewControlLabel                  = objc.RegisterName("setOverviewControlLabel:")
+	_iKScannerDeviceViewSelDisplaysDownloadsDirectoryControl        = objc.RegisterName("displaysDownloadsDirectoryControl")
+	_iKScannerDeviceViewSelSetDisplaysDownloadsDirectoryControl     = objc.RegisterName("setDisplaysDownloadsDirectoryControl:")
+	_iKScannerDeviceViewSelDownloadsDirectory                       = objc.RegisterName("downloadsDirectory")
+	_iKScannerDeviceViewSelSetDownloadsDirectory                    = objc.RegisterName("setDownloadsDirectory:")
+	_iKScannerDeviceViewSelDocumentName                             = objc.RegisterName("documentName")
+	_iKScannerDeviceViewSelSetDocumentName                          = objc.RegisterName("setDocumentName:")
+	_iKScannerDeviceViewSelDisplaysPostProcessApplicationControl    = objc.RegisterName("displaysPostProcessApplicationControl")
 	_iKScannerDeviceViewSelSetDisplaysPostProcessApplicationControl = objc.RegisterName("setDisplaysPostProcessApplicationControl:")
-	_iKScannerDeviceViewSelPostProcessApplication = objc.RegisterName("postProcessApplication")
-	_iKScannerDeviceViewSelSetPostProcessApplication = objc.RegisterName("setPostProcessApplication:")
+	_iKScannerDeviceViewSelPostProcessApplication                   = objc.RegisterName("postProcessApplication")
+	_iKScannerDeviceViewSelSetPostProcessApplication                = objc.RegisterName("setPostProcessApplication:")
 )
 
 func IKScannerDeviceViewFromID(id objc.ID) *IKScannerDeviceView {
@@ -70,7 +70,9 @@ func (o *IKScannerDeviceView) SetDelegate(delegate IKScannerDeviceViewDelegate) 
 // @property scannerDevice @abstract the scanner device.
 func (o *IKScannerDeviceView) ScannerDevice() *imagecapturecore.ICScannerDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKScannerDeviceViewSelScannerDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return imagecapturecore.ICScannerDeviceFromID(_ret)
 }
 
@@ -121,7 +123,9 @@ func (o *IKScannerDeviceView) SetTransferMode(transferMode IKScannerDeviceViewTr
 // @property scanControlLabel @abstract label for the 'Scan' control.
 func (o *IKScannerDeviceView) ScanControlLabel() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKScannerDeviceViewSelScanControlLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -132,7 +136,9 @@ func (o *IKScannerDeviceView) SetScanControlLabel(scanControlLabel *foundation.N
 // @property overviewControlLabel @abstract label for the 'Overview' control.
 func (o *IKScannerDeviceView) OverviewControlLabel() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKScannerDeviceViewSelOverviewControlLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -153,7 +159,9 @@ func (o *IKScannerDeviceView) SetDisplaysDownloadsDirectoryControl(displaysDownl
 // @property downloadsDirectory @abstract downloads directory.
 func (o *IKScannerDeviceView) DownloadsDirectory() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKScannerDeviceViewSelDownloadsDirectory)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -164,7 +172,9 @@ func (o *IKScannerDeviceView) SetDownloadsDirectory(downloadsDirectory *foundati
 // @property documentName @abstract document name.
 func (o *IKScannerDeviceView) DocumentName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKScannerDeviceViewSelDocumentName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -185,11 +195,12 @@ func (o *IKScannerDeviceView) SetDisplaysPostProcessApplicationControl(displaysP
 // @property postProcessApplication @abstract postprocessing application.
 func (o *IKScannerDeviceView) PostProcessApplication() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKScannerDeviceViewSelPostProcessApplication)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *IKScannerDeviceView) SetPostProcessApplication(postProcessApplication *foundation.NSURL) {
 	o.Ptr().Send(_iKScannerDeviceViewSelSetPostProcessApplication, postProcessApplication.Ptr())
 }
-

@@ -53,11 +53,15 @@ func (x *GAD7Assessment) Risk() raw.HKGAD7AssessmentRisk {
 	return x.inner.Risk()
 }
 
-func (x *GAD7Assessment) asScoredAssessment() *raw.HKScoredAssessment { return &x.inner.HKScoredAssessment }
+func (x *GAD7Assessment) asScoredAssessment() *raw.HKScoredAssessment {
+	return &x.inner.HKScoredAssessment
+}
 
 func (x *GAD7Assessment) asSample() *raw.HKSample { return &x.inner.HKScoredAssessment.HKSample }
 
-func (x *GAD7Assessment) asObject() *raw.HKObject { return &x.inner.HKScoredAssessment.HKSample.HKObject }
+func (x *GAD7Assessment) asObject() *raw.HKObject {
+	return &x.inner.HKScoredAssessment.HKSample.HKObject
+}
 
 // GAD7Assessmentable is the interface implemented by [GAD7Assessment], for mocking and DI.
 type GAD7Assessmentable interface {
@@ -67,4 +71,3 @@ type GAD7Assessmentable interface {
 }
 
 var _ GAD7Assessmentable = (*GAD7Assessment)(nil)
-

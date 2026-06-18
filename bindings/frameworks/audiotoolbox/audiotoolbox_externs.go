@@ -18,4 +18,3 @@ func KAudioComponentRegistrationsChangedNotification() uintptr {
 	ptr, _ := purego.Dlsym(_audiotoolboxLib, "kAudioComponentRegistrationsChangedNotification")
 	return ptr
 }
-

@@ -16,8 +16,8 @@ type NSDerivedAttributeDescription struct {
 }
 
 var (
-	_clsNSDerivedAttributeDescription = _objcClass("NSDerivedAttributeDescription")
-	_nSDerivedAttributeDescriptionSelDerivationExpression = objc.RegisterName("derivationExpression")
+	_clsNSDerivedAttributeDescription                        = _objcClass("NSDerivedAttributeDescription")
+	_nSDerivedAttributeDescriptionSelDerivationExpression    = objc.RegisterName("derivationExpression")
 	_nSDerivedAttributeDescriptionSelSetDerivationExpression = objc.RegisterName("setDerivationExpression:")
 )
 
@@ -33,11 +33,12 @@ func NSDerivedAttributeDescriptionFromID(id objc.ID) *NSDerivedAttributeDescript
 
 func (o *NSDerivedAttributeDescription) DerivationExpression() *foundation.NSExpression {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDerivedAttributeDescriptionSelDerivationExpression)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSExpressionFromID(_ret)
 }
 
 func (o *NSDerivedAttributeDescription) SetDerivationExpression(derivationExpression *foundation.NSExpression) {
 	o.Ptr().Send(_nSDerivedAttributeDescriptionSelSetDerivationExpression, derivationExpression.Ptr())
 }
-

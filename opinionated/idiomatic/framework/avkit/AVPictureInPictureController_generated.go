@@ -153,4 +153,3 @@ type PictureInPictureControllerable interface {
 }
 
 var _ PictureInPictureControllerable = (*PictureInPictureController)(nil)
-

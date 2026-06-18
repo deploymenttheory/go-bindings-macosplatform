@@ -187,4 +187,3 @@ type SpatialScalerDescriptorable interface {
 }
 
 var _ SpatialScalerDescriptorable = (*SpatialScalerDescriptor)(nil)
-

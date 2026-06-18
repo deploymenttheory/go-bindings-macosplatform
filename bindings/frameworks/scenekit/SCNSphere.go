@@ -15,14 +15,14 @@ type SCNSphere struct {
 }
 
 var (
-	_clsSCNSphere = _objcClass("SCNSphere")
+	_clsSCNSphere                 = _objcClass("SCNSphere")
 	_sCNSphereSelSphereWithRadius = objc.RegisterName("sphereWithRadius:")
-	_sCNSphereSelRadius = objc.RegisterName("radius")
-	_sCNSphereSelSetRadius = objc.RegisterName("setRadius:")
-	_sCNSphereSelIsGeodesic = objc.RegisterName("isGeodesic")
-	_sCNSphereSelSetGeodesic = objc.RegisterName("setGeodesic:")
-	_sCNSphereSelSegmentCount = objc.RegisterName("segmentCount")
-	_sCNSphereSelSetSegmentCount = objc.RegisterName("setSegmentCount:")
+	_sCNSphereSelRadius           = objc.RegisterName("radius")
+	_sCNSphereSelSetRadius        = objc.RegisterName("setRadius:")
+	_sCNSphereSelIsGeodesic       = objc.RegisterName("isGeodesic")
+	_sCNSphereSelSetGeodesic      = objc.RegisterName("setGeodesic:")
+	_sCNSphereSelSegmentCount     = objc.RegisterName("segmentCount")
+	_sCNSphereSelSetSegmentCount  = objc.RegisterName("setSegmentCount:")
 )
 
 func SCNSphereFromID(id objc.ID) *SCNSphere {
@@ -38,7 +38,9 @@ func SCNSphereFromID(id objc.ID) *SCNSphere {
 // @method sphereWithRadius: @abstract Creates and returns a sphere with given radius. @param radius The radius of the sphere.
 func SCNSphereSphereWithRadius(radius float64) *SCNSphere {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNSphere), _sCNSphereSelSphereWithRadius, radius)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNSphereFromID(_ret)
 }
 
@@ -71,4 +73,3 @@ func (o *SCNSphere) SegmentCount() int {
 func (o *SCNSphere) SetSegmentCount(segmentCount int) {
 	o.Ptr().Send(_sCNSphereSelSetSegmentCount, segmentCount)
 }
-

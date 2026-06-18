@@ -20,26 +20,26 @@ type SK3DNode struct {
 }
 
 var (
-	_clsSK3DNode = _objcClass("SK3DNode")
-	_sK3DNodeSelInitWithViewportSize = objc.RegisterName("initWithViewportSize:")
-	_sK3DNodeSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_sK3DNodeSelNodeWithViewportSize = objc.RegisterName("nodeWithViewportSize:")
-	_sK3DNodeSelHitTestOptions = objc.RegisterName("hitTest:options:")
-	_sK3DNodeSelProjectPoint = objc.RegisterName("projectPoint:")
-	_sK3DNodeSelUnprojectPoint = objc.RegisterName("unprojectPoint:")
-	_sK3DNodeSelViewportSize = objc.RegisterName("viewportSize")
-	_sK3DNodeSelSetViewportSize = objc.RegisterName("setViewportSize:")
-	_sK3DNodeSelScnScene = objc.RegisterName("scnScene")
-	_sK3DNodeSelSetScnScene = objc.RegisterName("setScnScene:")
-	_sK3DNodeSelSceneTime = objc.RegisterName("sceneTime")
-	_sK3DNodeSelSetSceneTime = objc.RegisterName("setSceneTime:")
-	_sK3DNodeSelIsPlaying = objc.RegisterName("isPlaying")
-	_sK3DNodeSelSetPlaying = objc.RegisterName("setPlaying:")
-	_sK3DNodeSelLoops = objc.RegisterName("loops")
-	_sK3DNodeSelSetLoops = objc.RegisterName("setLoops:")
-	_sK3DNodeSelPointOfView = objc.RegisterName("pointOfView")
-	_sK3DNodeSelSetPointOfView = objc.RegisterName("setPointOfView:")
-	_sK3DNodeSelAutoenablesDefaultLighting = objc.RegisterName("autoenablesDefaultLighting")
+	_clsSK3DNode                              = _objcClass("SK3DNode")
+	_sK3DNodeSelInitWithViewportSize          = objc.RegisterName("initWithViewportSize:")
+	_sK3DNodeSelInitWithCoder                 = objc.RegisterName("initWithCoder:")
+	_sK3DNodeSelNodeWithViewportSize          = objc.RegisterName("nodeWithViewportSize:")
+	_sK3DNodeSelHitTestOptions                = objc.RegisterName("hitTest:options:")
+	_sK3DNodeSelProjectPoint                  = objc.RegisterName("projectPoint:")
+	_sK3DNodeSelUnprojectPoint                = objc.RegisterName("unprojectPoint:")
+	_sK3DNodeSelViewportSize                  = objc.RegisterName("viewportSize")
+	_sK3DNodeSelSetViewportSize               = objc.RegisterName("setViewportSize:")
+	_sK3DNodeSelScnScene                      = objc.RegisterName("scnScene")
+	_sK3DNodeSelSetScnScene                   = objc.RegisterName("setScnScene:")
+	_sK3DNodeSelSceneTime                     = objc.RegisterName("sceneTime")
+	_sK3DNodeSelSetSceneTime                  = objc.RegisterName("setSceneTime:")
+	_sK3DNodeSelIsPlaying                     = objc.RegisterName("isPlaying")
+	_sK3DNodeSelSetPlaying                    = objc.RegisterName("setPlaying:")
+	_sK3DNodeSelLoops                         = objc.RegisterName("loops")
+	_sK3DNodeSelSetLoops                      = objc.RegisterName("setLoops:")
+	_sK3DNodeSelPointOfView                   = objc.RegisterName("pointOfView")
+	_sK3DNodeSelSetPointOfView                = objc.RegisterName("setPointOfView:")
+	_sK3DNodeSelAutoenablesDefaultLighting    = objc.RegisterName("autoenablesDefaultLighting")
 	_sK3DNodeSelSetAutoenablesDefaultLighting = objc.RegisterName("setAutoenablesDefaultLighting:")
 )
 
@@ -56,21 +56,27 @@ func SK3DNodeFromID(id objc.ID) *SK3DNode {
 // Designated initializer. Initialize a 3D Node with the viewport size the 3D content will be rendered with.
 func (o *SK3DNode) InitWithViewportSize(viewportSize corefoundation.CGSize) *SK3DNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sK3DNodeSelInitWithViewportSize, viewportSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SK3DNodeFromID(_ret)
 }
 
 // Support coding and decoding via NSKeyedArchiver.
 func (o *SK3DNode) InitWithCoder(aDecoder *foundation.NSCoder) *SK3DNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sK3DNodeSelInitWithCoder, aDecoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SK3DNodeFromID(_ret)
 }
 
 // Create a 3D Node with the viewport size the 3D content will be rendered with.
 func SK3DNodeNodeWithViewportSize(viewportSize corefoundation.CGSize) *SK3DNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSK3DNode), _sK3DNodeSelNodeWithViewportSize, viewportSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SK3DNodeFromID(_ret)
 }
 
@@ -105,7 +111,9 @@ func (o *SK3DNode) SetViewportSize(viewportSize corefoundation.CGSize) {
 // A SceneKit scene
 func (o *SK3DNode) ScnScene() *scenekit.SCNScene {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sK3DNodeSelScnScene)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return scenekit.SCNSceneFromID(_ret)
 }
 
@@ -146,7 +154,9 @@ func (o *SK3DNode) SetLoops(loops bool) {
 // @property pointOfView @abstract Specifies the point of view used to render the scene. @discussion A point of view must have either a camera or a spot light attached.
 func (o *SK3DNode) PointOfView() *scenekit.SCNNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sK3DNodeSelPointOfView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return scenekit.SCNNodeFromID(_ret)
 }
 
@@ -163,4 +173,3 @@ func (o *SK3DNode) AutoenablesDefaultLighting() bool {
 func (o *SK3DNode) SetAutoenablesDefaultLighting(autoenablesDefaultLighting bool) {
 	o.Ptr().Send(_sK3DNodeSelSetAutoenablesDefaultLighting, autoenablesDefaultLighting)
 }
-

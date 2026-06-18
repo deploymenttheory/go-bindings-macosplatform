@@ -84,9 +84,13 @@ func (x *MTRClusterUnitLocalization) ReadAttributeClusterRevisionWithParams(para
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterUnitLocalization) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterUnitLocalization) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterUnitLocalization) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterUnitLocalization) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterUnitLocalizationable is the interface implemented by [MTRClusterUnitLocalization], for mocking and DI.
 type MTRClusterUnitLocalizationable interface {
@@ -102,4 +106,3 @@ type MTRClusterUnitLocalizationable interface {
 }
 
 var _ MTRClusterUnitLocalizationable = (*MTRClusterUnitLocalization)(nil)
-

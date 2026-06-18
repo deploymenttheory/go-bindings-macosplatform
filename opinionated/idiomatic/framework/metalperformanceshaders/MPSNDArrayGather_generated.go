@@ -72,13 +72,21 @@ func (x *NDArrayGather) SetAxis(axis uint) {
 	x.inner.SetAxis(axis)
 }
 
-func (x *NDArrayGather) asNDArrayBinaryKernel() *mpsndarray.MPSNDArrayBinaryKernel { return &x.inner.MPSNDArrayBinaryKernel }
+func (x *NDArrayGather) asNDArrayBinaryKernel() *mpsndarray.MPSNDArrayBinaryKernel {
+	return &x.inner.MPSNDArrayBinaryKernel
+}
 
-func (x *NDArrayGather) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel { return &x.inner.MPSNDArrayBinaryKernel.MPSNDArrayMultiaryKernel }
+func (x *NDArrayGather) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel {
+	return &x.inner.MPSNDArrayBinaryKernel.MPSNDArrayMultiaryKernel
+}
 
-func (x *NDArrayGather) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayBinaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
+func (x *NDArrayGather) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase {
+	return &x.inner.MPSNDArrayBinaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase
+}
 
-func (x *NDArrayGather) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNDArrayBinaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel }
+func (x *NDArrayGather) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSNDArrayBinaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel
+}
 
 // NDArrayGatherable is the interface implemented by [NDArrayGather], for mocking and DI.
 type NDArrayGatherable interface {
@@ -92,4 +100,3 @@ type NDArrayGatherable interface {
 }
 
 var _ NDArrayGatherable = (*NDArrayGather)(nil)
-

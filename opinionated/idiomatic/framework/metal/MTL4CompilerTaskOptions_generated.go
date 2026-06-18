@@ -54,4 +54,3 @@ type MTL4CompilerTaskOptionsable interface {
 }
 
 var _ MTL4CompilerTaskOptionsable = (*MTL4CompilerTaskOptions)(nil)
-

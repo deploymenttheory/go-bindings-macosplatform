@@ -105,4 +105,3 @@ type Borderable interface {
 }
 
 var _ Borderable = (*Border)(nil)
-

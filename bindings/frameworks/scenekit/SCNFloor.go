@@ -15,21 +15,21 @@ type SCNFloor struct {
 }
 
 var (
-	_clsSCNFloor = _objcClass("SCNFloor")
-	_sCNFloorSelFloor = objc.RegisterName("floor")
-	_sCNFloorSelReflectivity = objc.RegisterName("reflectivity")
-	_sCNFloorSelSetReflectivity = objc.RegisterName("setReflectivity:")
-	_sCNFloorSelReflectionFalloffStart = objc.RegisterName("reflectionFalloffStart")
-	_sCNFloorSelSetReflectionFalloffStart = objc.RegisterName("setReflectionFalloffStart:")
-	_sCNFloorSelReflectionFalloffEnd = objc.RegisterName("reflectionFalloffEnd")
-	_sCNFloorSelSetReflectionFalloffEnd = objc.RegisterName("setReflectionFalloffEnd:")
-	_sCNFloorSelReflectionCategoryBitMask = objc.RegisterName("reflectionCategoryBitMask")
-	_sCNFloorSelSetReflectionCategoryBitMask = objc.RegisterName("setReflectionCategoryBitMask:")
-	_sCNFloorSelWidth = objc.RegisterName("width")
-	_sCNFloorSelSetWidth = objc.RegisterName("setWidth:")
-	_sCNFloorSelLength = objc.RegisterName("length")
-	_sCNFloorSelSetLength = objc.RegisterName("setLength:")
-	_sCNFloorSelReflectionResolutionScaleFactor = objc.RegisterName("reflectionResolutionScaleFactor")
+	_clsSCNFloor                                   = _objcClass("SCNFloor")
+	_sCNFloorSelFloor                              = objc.RegisterName("floor")
+	_sCNFloorSelReflectivity                       = objc.RegisterName("reflectivity")
+	_sCNFloorSelSetReflectivity                    = objc.RegisterName("setReflectivity:")
+	_sCNFloorSelReflectionFalloffStart             = objc.RegisterName("reflectionFalloffStart")
+	_sCNFloorSelSetReflectionFalloffStart          = objc.RegisterName("setReflectionFalloffStart:")
+	_sCNFloorSelReflectionFalloffEnd               = objc.RegisterName("reflectionFalloffEnd")
+	_sCNFloorSelSetReflectionFalloffEnd            = objc.RegisterName("setReflectionFalloffEnd:")
+	_sCNFloorSelReflectionCategoryBitMask          = objc.RegisterName("reflectionCategoryBitMask")
+	_sCNFloorSelSetReflectionCategoryBitMask       = objc.RegisterName("setReflectionCategoryBitMask:")
+	_sCNFloorSelWidth                              = objc.RegisterName("width")
+	_sCNFloorSelSetWidth                           = objc.RegisterName("setWidth:")
+	_sCNFloorSelLength                             = objc.RegisterName("length")
+	_sCNFloorSelSetLength                          = objc.RegisterName("setLength:")
+	_sCNFloorSelReflectionResolutionScaleFactor    = objc.RegisterName("reflectionResolutionScaleFactor")
 	_sCNFloorSelSetReflectionResolutionScaleFactor = objc.RegisterName("setReflectionResolutionScaleFactor:")
 )
 
@@ -46,7 +46,9 @@ func SCNFloorFromID(id objc.ID) *SCNFloor {
 // @method floor @abstract Creates and returns a floor. @discussion A floor is an infinite plane.
 func SCNFloorFloor() *SCNFloor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNFloor), _sCNFloorSelFloor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNFloorFromID(_ret)
 }
 
@@ -119,4 +121,3 @@ func (o *SCNFloor) ReflectionResolutionScaleFactor() float64 {
 func (o *SCNFloor) SetReflectionResolutionScaleFactor(reflectionResolutionScaleFactor float64) {
 	o.Ptr().Send(_sCNFloorSelSetReflectionResolutionScaleFactor, reflectionResolutionScaleFactor)
 }
-

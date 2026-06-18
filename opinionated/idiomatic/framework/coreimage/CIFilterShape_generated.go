@@ -109,4 +109,3 @@ type FilterShapeable interface {
 }
 
 var _ FilterShapeable = (*FilterShape)(nil)
-

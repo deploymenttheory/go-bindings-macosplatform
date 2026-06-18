@@ -15,15 +15,15 @@ type NSGlassEffectView struct {
 }
 
 var (
-	_clsNSGlassEffectView = _objcClass("NSGlassEffectView")
-	_nSGlassEffectViewSelContentView = objc.RegisterName("contentView")
-	_nSGlassEffectViewSelSetContentView = objc.RegisterName("setContentView:")
-	_nSGlassEffectViewSelCornerRadius = objc.RegisterName("cornerRadius")
+	_clsNSGlassEffectView                = _objcClass("NSGlassEffectView")
+	_nSGlassEffectViewSelContentView     = objc.RegisterName("contentView")
+	_nSGlassEffectViewSelSetContentView  = objc.RegisterName("setContentView:")
+	_nSGlassEffectViewSelCornerRadius    = objc.RegisterName("cornerRadius")
 	_nSGlassEffectViewSelSetCornerRadius = objc.RegisterName("setCornerRadius:")
-	_nSGlassEffectViewSelTintColor = objc.RegisterName("tintColor")
-	_nSGlassEffectViewSelSetTintColor = objc.RegisterName("setTintColor:")
-	_nSGlassEffectViewSelStyle = objc.RegisterName("style")
-	_nSGlassEffectViewSelSetStyle = objc.RegisterName("setStyle:")
+	_nSGlassEffectViewSelTintColor       = objc.RegisterName("tintColor")
+	_nSGlassEffectViewSelSetTintColor    = objc.RegisterName("setTintColor:")
+	_nSGlassEffectViewSelStyle           = objc.RegisterName("style")
+	_nSGlassEffectViewSelSetStyle        = objc.RegisterName("setStyle:")
 )
 
 func NSGlassEffectViewFromID(id objc.ID) *NSGlassEffectView {
@@ -39,7 +39,9 @@ func NSGlassEffectViewFromID(id objc.ID) *NSGlassEffectView {
 // The view to embed in glass. - Important: `NSGlassEffectView` only guarantees the `contentView` will be placed inside the glass effect; arbitrary subviews aren't guaranteed specific behavior with regard to z-order in relation to the content view or glass effect.
 func (o *NSGlassEffectView) ContentView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGlassEffectViewSelContentView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -62,7 +64,9 @@ func (o *NSGlassEffectView) SetCornerRadius(cornerRadius float64) {
 // The color the glass effect view uses to tint the background and glass effect toward.
 func (o *NSGlassEffectView) TintColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGlassEffectViewSelTintColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -81,4 +85,3 @@ func (o *NSGlassEffectView) Style() NSGlassEffectViewStyle {
 func (o *NSGlassEffectView) SetStyle(style NSGlassEffectViewStyle) {
 	o.Ptr().Send(_nSGlassEffectViewSelSetStyle, style)
 }
-

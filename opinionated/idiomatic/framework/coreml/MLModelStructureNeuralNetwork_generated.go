@@ -54,4 +54,3 @@ type ModelStructureNeuralNetworkable interface {
 }
 
 var _ ModelStructureNeuralNetworkable = (*ModelStructureNeuralNetwork)(nil)
-

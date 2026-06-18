@@ -177,7 +177,9 @@ func (x *MatrixNeuron) SetAlpha(alpha float64) {
 	x.inner.SetAlpha(alpha)
 }
 
-func (x *MatrixNeuron) asMatrixUnaryKernel() *mpsmatrix.MPSMatrixUnaryKernel { return &x.inner.MPSMatrixUnaryKernel }
+func (x *MatrixNeuron) asMatrixUnaryKernel() *mpsmatrix.MPSMatrixUnaryKernel {
+	return &x.inner.MPSMatrixUnaryKernel
+}
 
 func (x *MatrixNeuron) asKernel() *mpscore.MPSKernel { return &x.inner.MPSMatrixUnaryKernel.MPSKernel }
 
@@ -210,4 +212,3 @@ type MatrixNeuronable interface {
 }
 
 var _ MatrixNeuronable = (*MatrixNeuron)(nil)
-

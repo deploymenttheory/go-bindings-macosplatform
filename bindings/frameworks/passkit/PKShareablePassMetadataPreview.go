@@ -16,11 +16,11 @@ type PKShareablePassMetadataPreview struct {
 }
 
 var (
-	_clsPKShareablePassMetadataPreview = _objcClass("PKShareablePassMetadataPreview")
-	_pKShareablePassMetadataPreviewSelInitWithTemplateIdentifier = objc.RegisterName("initWithTemplateIdentifier:")
-	_pKShareablePassMetadataPreviewSelPreviewWithTemplateIdentifier = objc.RegisterName("previewWithTemplateIdentifier:")
-	_pKShareablePassMetadataPreviewSelOwnerDisplayName = objc.RegisterName("ownerDisplayName")
-	_pKShareablePassMetadataPreviewSelSetOwnerDisplayName = objc.RegisterName("setOwnerDisplayName:")
+	_clsPKShareablePassMetadataPreview                               = _objcClass("PKShareablePassMetadataPreview")
+	_pKShareablePassMetadataPreviewSelInitWithTemplateIdentifier     = objc.RegisterName("initWithTemplateIdentifier:")
+	_pKShareablePassMetadataPreviewSelPreviewWithTemplateIdentifier  = objc.RegisterName("previewWithTemplateIdentifier:")
+	_pKShareablePassMetadataPreviewSelOwnerDisplayName               = objc.RegisterName("ownerDisplayName")
+	_pKShareablePassMetadataPreviewSelSetOwnerDisplayName            = objc.RegisterName("setOwnerDisplayName:")
 	_pKShareablePassMetadataPreviewSelProvisioningTemplateIdentifier = objc.RegisterName("provisioningTemplateIdentifier")
 )
 
@@ -36,19 +36,25 @@ func PKShareablePassMetadataPreviewFromID(id objc.ID) *PKShareablePassMetadataPr
 
 func (o *PKShareablePassMetadataPreview) InitWithTemplateIdentifier(templateIdentifier *foundation.NSString) *PKShareablePassMetadataPreview {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKShareablePassMetadataPreviewSelInitWithTemplateIdentifier, templateIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKShareablePassMetadataPreviewFromID(_ret)
 }
 
 func PKShareablePassMetadataPreviewPreviewWithTemplateIdentifier(templateIdentifier *foundation.NSString) *PKShareablePassMetadataPreview {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPKShareablePassMetadataPreview), _pKShareablePassMetadataPreviewSelPreviewWithTemplateIdentifier, templateIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKShareablePassMetadataPreviewFromID(_ret)
 }
 
 func (o *PKShareablePassMetadataPreview) OwnerDisplayName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKShareablePassMetadataPreviewSelOwnerDisplayName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -58,7 +64,8 @@ func (o *PKShareablePassMetadataPreview) SetOwnerDisplayName(ownerDisplayName *f
 
 func (o *PKShareablePassMetadataPreview) ProvisioningTemplateIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKShareablePassMetadataPreviewSelProvisioningTemplateIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

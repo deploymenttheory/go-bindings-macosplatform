@@ -16,10 +16,10 @@ type DOMCSSStyleRule struct {
 }
 
 var (
-	_clsDOMCSSStyleRule = _objcClass("DOMCSSStyleRule")
-	_dOMCSSStyleRuleSelSelectorText = objc.RegisterName("selectorText")
+	_clsDOMCSSStyleRule                = _objcClass("DOMCSSStyleRule")
+	_dOMCSSStyleRuleSelSelectorText    = objc.RegisterName("selectorText")
 	_dOMCSSStyleRuleSelSetSelectorText = objc.RegisterName("setSelectorText:")
-	_dOMCSSStyleRuleSelStyle = objc.RegisterName("style")
+	_dOMCSSStyleRuleSelStyle           = objc.RegisterName("style")
 )
 
 func DOMCSSStyleRuleFromID(id objc.ID) *DOMCSSStyleRule {
@@ -34,7 +34,9 @@ func DOMCSSStyleRuleFromID(id objc.ID) *DOMCSSStyleRule {
 
 func (o *DOMCSSStyleRule) SelectorText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleRuleSelSelectorText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -44,7 +46,8 @@ func (o *DOMCSSStyleRule) SetSelectorText(selectorText *foundation.NSString) {
 
 func (o *DOMCSSStyleRule) Style() *DOMCSSStyleDeclaration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleRuleSelStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMCSSStyleDeclarationFromID(_ret)
 }
-

@@ -15,14 +15,14 @@ type NSDistributedNotificationCenter struct {
 }
 
 var (
-	_clsNSDistributedNotificationCenter = _objcClass("NSDistributedNotificationCenter")
-	_nSDistributedNotificationCenterSelNotificationCenterForType = objc.RegisterName("notificationCenterForType:")
-	_nSDistributedNotificationCenterSelDefaultCenter = objc.RegisterName("defaultCenter")
-	_nSDistributedNotificationCenterSelAddObserverSelectorNameObjectSuspensionBehavior = objc.RegisterName("addObserver:selector:name:object:suspensionBehavior:")
+	_clsNSDistributedNotificationCenter                                                     = _objcClass("NSDistributedNotificationCenter")
+	_nSDistributedNotificationCenterSelNotificationCenterForType                            = objc.RegisterName("notificationCenterForType:")
+	_nSDistributedNotificationCenterSelDefaultCenter                                        = objc.RegisterName("defaultCenter")
+	_nSDistributedNotificationCenterSelAddObserverSelectorNameObjectSuspensionBehavior      = objc.RegisterName("addObserver:selector:name:object:suspensionBehavior:")
 	_nSDistributedNotificationCenterSelPostNotificationNameObjectUserInfoDeliverImmediately = objc.RegisterName("postNotificationName:object:userInfo:deliverImmediately:")
-	_nSDistributedNotificationCenterSelPostNotificationNameObjectUserInfoOptions = objc.RegisterName("postNotificationName:object:userInfo:options:")
-	_nSDistributedNotificationCenterSelSuspended = objc.RegisterName("suspended")
-	_nSDistributedNotificationCenterSelSetSuspended = objc.RegisterName("setSuspended:")
+	_nSDistributedNotificationCenterSelPostNotificationNameObjectUserInfoOptions            = objc.RegisterName("postNotificationName:object:userInfo:options:")
+	_nSDistributedNotificationCenterSelSuspended                                            = objc.RegisterName("suspended")
+	_nSDistributedNotificationCenterSelSetSuspended                                         = objc.RegisterName("setSuspended:")
 )
 
 func NSDistributedNotificationCenterFromID(id objc.ID) *NSDistributedNotificationCenter {
@@ -37,13 +37,17 @@ func NSDistributedNotificationCenterFromID(id objc.ID) *NSDistributedNotificatio
 
 func NSDistributedNotificationCenterNotificationCenterForType(notificationCenterType *NSString) *NSDistributedNotificationCenter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDistributedNotificationCenter), _nSDistributedNotificationCenterSelNotificationCenterForType, notificationCenterType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDistributedNotificationCenterFromID(_ret)
 }
 
 func NSDistributedNotificationCenterDefaultCenter() *NSDistributedNotificationCenter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDistributedNotificationCenter), _nSDistributedNotificationCenterSelDefaultCenter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDistributedNotificationCenterFromID(_ret)
 }
 
@@ -67,4 +71,3 @@ func (o *NSDistributedNotificationCenter) Suspended() bool {
 func (o *NSDistributedNotificationCenter) SetSuspended(suspended bool) {
 	o.Ptr().Send(_nSDistributedNotificationCenterSelSetSuspended, suspended)
 }
-

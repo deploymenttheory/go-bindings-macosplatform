@@ -64,9 +64,13 @@ func (x *RandomNodeDefinition) SetUniqueSelectionQueueLength(uniqueSelectionQueu
 	x.inner.SetUniqueSelectionQueueLength(uniqueSelectionQueueLength)
 }
 
-func (x *RandomNodeDefinition) asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition { return &x.inner.PHASESoundEventNodeDefinition }
+func (x *RandomNodeDefinition) asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition {
+	return &x.inner.PHASESoundEventNodeDefinition
+}
 
-func (x *RandomNodeDefinition) asDefinition() *raw.PHASEDefinition { return &x.inner.PHASESoundEventNodeDefinition.PHASEDefinition }
+func (x *RandomNodeDefinition) asDefinition() *raw.PHASEDefinition {
+	return &x.inner.PHASESoundEventNodeDefinition.PHASEDefinition
+}
 
 // RandomNodeDefinitionable is the interface implemented by [RandomNodeDefinition], for mocking and DI.
 type RandomNodeDefinitionable interface {
@@ -78,4 +82,3 @@ type RandomNodeDefinitionable interface {
 }
 
 var _ RandomNodeDefinitionable = (*RandomNodeDefinition)(nil)
-

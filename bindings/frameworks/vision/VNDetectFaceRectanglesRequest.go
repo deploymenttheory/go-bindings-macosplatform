@@ -25,4 +25,3 @@ func VNDetectFaceRectanglesRequestFromID(id objc.ID) *VNDetectFaceRectanglesRequ
 	purego.Track(o)
 	return o
 }
-

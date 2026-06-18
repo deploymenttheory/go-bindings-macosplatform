@@ -16,11 +16,11 @@ type PKPaymentButton struct {
 }
 
 var (
-	_clsPKPaymentButton = _objcClass("PKPaymentButton")
-	_pKPaymentButtonSelButtonWithTypeStyle = objc.RegisterName("buttonWithType:style:")
+	_clsPKPaymentButton                                            = _objcClass("PKPaymentButton")
+	_pKPaymentButtonSelButtonWithTypeStyle                         = objc.RegisterName("buttonWithType:style:")
 	_pKPaymentButtonSelInitWithPaymentButtonTypePaymentButtonStyle = objc.RegisterName("initWithPaymentButtonType:paymentButtonStyle:")
-	_pKPaymentButtonSelCornerRadius = objc.RegisterName("cornerRadius")
-	_pKPaymentButtonSelSetCornerRadius = objc.RegisterName("setCornerRadius:")
+	_pKPaymentButtonSelCornerRadius                                = objc.RegisterName("cornerRadius")
+	_pKPaymentButtonSelSetCornerRadius                             = objc.RegisterName("setCornerRadius:")
 )
 
 func PKPaymentButtonFromID(id objc.ID) *PKPaymentButton {
@@ -35,13 +35,17 @@ func PKPaymentButtonFromID(id objc.ID) *PKPaymentButton {
 
 func PKPaymentButtonButtonWithTypeStyle(buttonType PKPaymentButtonType, buttonStyle PKPaymentButtonStyle) *PKPaymentButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPKPaymentButton), _pKPaymentButtonSelButtonWithTypeStyle, buttonType, buttonStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKPaymentButtonFromID(_ret)
 }
 
 func (o *PKPaymentButton) InitWithPaymentButtonTypePaymentButtonStyle(type_ PKPaymentButtonType, style PKPaymentButtonStyle) *PKPaymentButton {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentButtonSelInitWithPaymentButtonTypePaymentButtonStyle, type_, style)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKPaymentButtonFromID(_ret)
 }
 
@@ -53,4 +57,3 @@ func (o *PKPaymentButton) CornerRadius() float64 {
 func (o *PKPaymentButton) SetCornerRadius(cornerRadius float64) {
 	o.Ptr().Send(_pKPaymentButtonSelSetCornerRadius, cornerRadius)
 }
-

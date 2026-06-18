@@ -68,4 +68,3 @@ type MatMulLayerable interface {
 }
 
 var _ MatMulLayerable = (*MatMulLayer)(nil)
-

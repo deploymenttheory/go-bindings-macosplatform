@@ -29,4 +29,3 @@ func UAZoomChangeFocus(inRect *corefoundation.CGRect, inHighlightRect *corefound
 	}
 	return nil
 }
-

@@ -60,9 +60,13 @@ func (x *DetectFaceRectanglesRequest) WithRevision(revision uint) *DetectFaceRec
 	return x
 }
 
-func (x *DetectFaceRectanglesRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
+func (x *DetectFaceRectanglesRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNImageBasedRequest
+}
 
-func (x *DetectFaceRectanglesRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+func (x *DetectFaceRectanglesRequest) asRequest() *raw.VNRequest {
+	return &x.inner.VNImageBasedRequest.VNRequest
+}
 
 // DetectFaceRectanglesRequestable is the interface implemented by [DetectFaceRectanglesRequest], for mocking and DI.
 type DetectFaceRectanglesRequestable interface {
@@ -74,4 +78,3 @@ type DetectFaceRectanglesRequestable interface {
 }
 
 var _ DetectFaceRectanglesRequestable = (*DetectFaceRectanglesRequest)(nil)
-

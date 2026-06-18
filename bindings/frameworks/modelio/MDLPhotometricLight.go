@@ -16,14 +16,14 @@ type MDLPhotometricLight struct {
 }
 
 var (
-	_clsMDLPhotometricLight = _objcClass("MDLPhotometricLight")
-	_mDLPhotometricLightSelInitWithIESProfile = objc.RegisterName("initWithIESProfile:")
+	_clsMDLPhotometricLight                                    = _objcClass("MDLPhotometricLight")
+	_mDLPhotometricLightSelInitWithIESProfile                  = objc.RegisterName("initWithIESProfile:")
 	_mDLPhotometricLightSelGenerateSphericalHarmonicsFromLight = objc.RegisterName("generateSphericalHarmonicsFromLight:")
-	_mDLPhotometricLightSelGenerateCubemapFromLight = objc.RegisterName("generateCubemapFromLight:")
-	_mDLPhotometricLightSelGenerateTexture = objc.RegisterName("generateTexture:")
-	_mDLPhotometricLightSelLightCubeMap = objc.RegisterName("lightCubeMap")
-	_mDLPhotometricLightSelSphericalHarmonicsLevel = objc.RegisterName("sphericalHarmonicsLevel")
-	_mDLPhotometricLightSelSphericalHarmonicsCoefficients = objc.RegisterName("sphericalHarmonicsCoefficients")
+	_mDLPhotometricLightSelGenerateCubemapFromLight            = objc.RegisterName("generateCubemapFromLight:")
+	_mDLPhotometricLightSelGenerateTexture                     = objc.RegisterName("generateTexture:")
+	_mDLPhotometricLightSelLightCubeMap                        = objc.RegisterName("lightCubeMap")
+	_mDLPhotometricLightSelSphericalHarmonicsLevel             = objc.RegisterName("sphericalHarmonicsLevel")
+	_mDLPhotometricLightSelSphericalHarmonicsCoefficients      = objc.RegisterName("sphericalHarmonicsCoefficients")
 )
 
 func MDLPhotometricLightFromID(id objc.ID) *MDLPhotometricLight {
@@ -38,7 +38,9 @@ func MDLPhotometricLightFromID(id objc.ID) *MDLPhotometricLight {
 
 func (o *MDLPhotometricLight) InitWithIESProfile(uRL *foundation.NSURL) *MDLPhotometricLight {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLPhotometricLightSelInitWithIESProfile, uRL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLPhotometricLightFromID(_ret)
 }
 
@@ -53,13 +55,17 @@ func (o *MDLPhotometricLight) GenerateCubemapFromLight(textureSize uint) {
 // @method generateTexture @abstract Generate an IES compliant MDLTexture 1D when the number of horizontal angles is one and the innerConeAngle is < 180 2D when the previous statement fails and innerConeAngle < 89 3D in all other cases the parameter textureSize is the size in pixels of the texture image. For a size of N, 1D generates an Nx1 image, 2D generates an NxN image, 3D generates an Nx(N*6) image (i.e. cubemap).
 func (o *MDLPhotometricLight) GenerateTexture(textureSize uint) *MDLTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLPhotometricLightSelGenerateTexture, textureSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLTextureFromID(_ret)
 }
 
 func (o *MDLPhotometricLight) LightCubeMap() *MDLTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLPhotometricLightSelLightCubeMap)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLTextureFromID(_ret)
 }
 
@@ -70,7 +76,8 @@ func (o *MDLPhotometricLight) SphericalHarmonicsLevel() uint {
 
 func (o *MDLPhotometricLight) SphericalHarmonicsCoefficients() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLPhotometricLightSelSphericalHarmonicsCoefficients)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

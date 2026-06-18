@@ -68,7 +68,9 @@ func (x *RacingWheelInputState) Shifter() *GearShifterElement {
 	return &GearShifterElement{inner: _r}
 }
 
-func (x *RacingWheelInputState) asRacingWheelInputState() *raw.GCRacingWheelInputState { return x.inner }
+func (x *RacingWheelInputState) asRacingWheelInputState() *raw.GCRacingWheelInputState {
+	return x.inner
+}
 
 // RacingWheelInputStateable is the interface implemented by [RacingWheelInputState], for mocking and DI.
 type RacingWheelInputStateable interface {
@@ -81,4 +83,3 @@ type RacingWheelInputStateable interface {
 }
 
 var _ RacingWheelInputStateable = (*RacingWheelInputState)(nil)
-

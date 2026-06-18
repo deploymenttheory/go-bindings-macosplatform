@@ -16,264 +16,264 @@ type DOMCSSStyleDeclaration struct {
 }
 
 var (
-	_clsDOMCSSStyleDeclaration = _objcClass("DOMCSSStyleDeclaration")
-	_dOMCSSStyleDeclarationSelGetPropertyValue = objc.RegisterName("getPropertyValue:")
-	_dOMCSSStyleDeclarationSelGetPropertyCSSValue = objc.RegisterName("getPropertyCSSValue:")
-	_dOMCSSStyleDeclarationSelRemoveProperty = objc.RegisterName("removeProperty:")
-	_dOMCSSStyleDeclarationSelGetPropertyPriority = objc.RegisterName("getPropertyPriority:")
+	_clsDOMCSSStyleDeclaration                         = _objcClass("DOMCSSStyleDeclaration")
+	_dOMCSSStyleDeclarationSelGetPropertyValue         = objc.RegisterName("getPropertyValue:")
+	_dOMCSSStyleDeclarationSelGetPropertyCSSValue      = objc.RegisterName("getPropertyCSSValue:")
+	_dOMCSSStyleDeclarationSelRemoveProperty           = objc.RegisterName("removeProperty:")
+	_dOMCSSStyleDeclarationSelGetPropertyPriority      = objc.RegisterName("getPropertyPriority:")
 	_dOMCSSStyleDeclarationSelSetPropertyValuePriority = objc.RegisterName("setProperty:value:priority:")
-	_dOMCSSStyleDeclarationSelItem = objc.RegisterName("item:")
-	_dOMCSSStyleDeclarationSelGetPropertyShorthand = objc.RegisterName("getPropertyShorthand:")
-	_dOMCSSStyleDeclarationSelIsPropertyImplicit = objc.RegisterName("isPropertyImplicit:")
-	_dOMCSSStyleDeclarationSelCssText = objc.RegisterName("cssText")
-	_dOMCSSStyleDeclarationSelSetCssText = objc.RegisterName("setCssText:")
-	_dOMCSSStyleDeclarationSelLength = objc.RegisterName("length")
-	_dOMCSSStyleDeclarationSelParentRule = objc.RegisterName("parentRule")
-	_dOMCSSStyleDeclarationSelSetProperty = objc.RegisterName("setProperty:::")
-	_dOMCSSStyleDeclarationSelAzimuth = objc.RegisterName("azimuth")
-	_dOMCSSStyleDeclarationSelSetAzimuth = objc.RegisterName("setAzimuth:")
-	_dOMCSSStyleDeclarationSelBackground = objc.RegisterName("background")
-	_dOMCSSStyleDeclarationSelSetBackground = objc.RegisterName("setBackground:")
-	_dOMCSSStyleDeclarationSelBackgroundAttachment = objc.RegisterName("backgroundAttachment")
-	_dOMCSSStyleDeclarationSelSetBackgroundAttachment = objc.RegisterName("setBackgroundAttachment:")
-	_dOMCSSStyleDeclarationSelBackgroundColor = objc.RegisterName("backgroundColor")
-	_dOMCSSStyleDeclarationSelSetBackgroundColor = objc.RegisterName("setBackgroundColor:")
-	_dOMCSSStyleDeclarationSelBackgroundImage = objc.RegisterName("backgroundImage")
-	_dOMCSSStyleDeclarationSelSetBackgroundImage = objc.RegisterName("setBackgroundImage:")
-	_dOMCSSStyleDeclarationSelBackgroundPosition = objc.RegisterName("backgroundPosition")
-	_dOMCSSStyleDeclarationSelSetBackgroundPosition = objc.RegisterName("setBackgroundPosition:")
-	_dOMCSSStyleDeclarationSelBackgroundRepeat = objc.RegisterName("backgroundRepeat")
-	_dOMCSSStyleDeclarationSelSetBackgroundRepeat = objc.RegisterName("setBackgroundRepeat:")
-	_dOMCSSStyleDeclarationSelBorder = objc.RegisterName("border")
-	_dOMCSSStyleDeclarationSelSetBorder = objc.RegisterName("setBorder:")
-	_dOMCSSStyleDeclarationSelBorderCollapse = objc.RegisterName("borderCollapse")
-	_dOMCSSStyleDeclarationSelSetBorderCollapse = objc.RegisterName("setBorderCollapse:")
-	_dOMCSSStyleDeclarationSelBorderColor = objc.RegisterName("borderColor")
-	_dOMCSSStyleDeclarationSelSetBorderColor = objc.RegisterName("setBorderColor:")
-	_dOMCSSStyleDeclarationSelBorderSpacing = objc.RegisterName("borderSpacing")
-	_dOMCSSStyleDeclarationSelSetBorderSpacing = objc.RegisterName("setBorderSpacing:")
-	_dOMCSSStyleDeclarationSelBorderStyle = objc.RegisterName("borderStyle")
-	_dOMCSSStyleDeclarationSelSetBorderStyle = objc.RegisterName("setBorderStyle:")
-	_dOMCSSStyleDeclarationSelBorderTop = objc.RegisterName("borderTop")
-	_dOMCSSStyleDeclarationSelSetBorderTop = objc.RegisterName("setBorderTop:")
-	_dOMCSSStyleDeclarationSelBorderRight = objc.RegisterName("borderRight")
-	_dOMCSSStyleDeclarationSelSetBorderRight = objc.RegisterName("setBorderRight:")
-	_dOMCSSStyleDeclarationSelBorderBottom = objc.RegisterName("borderBottom")
-	_dOMCSSStyleDeclarationSelSetBorderBottom = objc.RegisterName("setBorderBottom:")
-	_dOMCSSStyleDeclarationSelBorderLeft = objc.RegisterName("borderLeft")
-	_dOMCSSStyleDeclarationSelSetBorderLeft = objc.RegisterName("setBorderLeft:")
-	_dOMCSSStyleDeclarationSelBorderTopColor = objc.RegisterName("borderTopColor")
-	_dOMCSSStyleDeclarationSelSetBorderTopColor = objc.RegisterName("setBorderTopColor:")
-	_dOMCSSStyleDeclarationSelBorderRightColor = objc.RegisterName("borderRightColor")
-	_dOMCSSStyleDeclarationSelSetBorderRightColor = objc.RegisterName("setBorderRightColor:")
-	_dOMCSSStyleDeclarationSelBorderBottomColor = objc.RegisterName("borderBottomColor")
-	_dOMCSSStyleDeclarationSelSetBorderBottomColor = objc.RegisterName("setBorderBottomColor:")
-	_dOMCSSStyleDeclarationSelBorderLeftColor = objc.RegisterName("borderLeftColor")
-	_dOMCSSStyleDeclarationSelSetBorderLeftColor = objc.RegisterName("setBorderLeftColor:")
-	_dOMCSSStyleDeclarationSelBorderTopStyle = objc.RegisterName("borderTopStyle")
-	_dOMCSSStyleDeclarationSelSetBorderTopStyle = objc.RegisterName("setBorderTopStyle:")
-	_dOMCSSStyleDeclarationSelBorderRightStyle = objc.RegisterName("borderRightStyle")
-	_dOMCSSStyleDeclarationSelSetBorderRightStyle = objc.RegisterName("setBorderRightStyle:")
-	_dOMCSSStyleDeclarationSelBorderBottomStyle = objc.RegisterName("borderBottomStyle")
-	_dOMCSSStyleDeclarationSelSetBorderBottomStyle = objc.RegisterName("setBorderBottomStyle:")
-	_dOMCSSStyleDeclarationSelBorderLeftStyle = objc.RegisterName("borderLeftStyle")
-	_dOMCSSStyleDeclarationSelSetBorderLeftStyle = objc.RegisterName("setBorderLeftStyle:")
-	_dOMCSSStyleDeclarationSelBorderTopWidth = objc.RegisterName("borderTopWidth")
-	_dOMCSSStyleDeclarationSelSetBorderTopWidth = objc.RegisterName("setBorderTopWidth:")
-	_dOMCSSStyleDeclarationSelBorderRightWidth = objc.RegisterName("borderRightWidth")
-	_dOMCSSStyleDeclarationSelSetBorderRightWidth = objc.RegisterName("setBorderRightWidth:")
-	_dOMCSSStyleDeclarationSelBorderBottomWidth = objc.RegisterName("borderBottomWidth")
-	_dOMCSSStyleDeclarationSelSetBorderBottomWidth = objc.RegisterName("setBorderBottomWidth:")
-	_dOMCSSStyleDeclarationSelBorderLeftWidth = objc.RegisterName("borderLeftWidth")
-	_dOMCSSStyleDeclarationSelSetBorderLeftWidth = objc.RegisterName("setBorderLeftWidth:")
-	_dOMCSSStyleDeclarationSelBorderWidth = objc.RegisterName("borderWidth")
-	_dOMCSSStyleDeclarationSelSetBorderWidth = objc.RegisterName("setBorderWidth:")
-	_dOMCSSStyleDeclarationSelBottom = objc.RegisterName("bottom")
-	_dOMCSSStyleDeclarationSelSetBottom = objc.RegisterName("setBottom:")
-	_dOMCSSStyleDeclarationSelCaptionSide = objc.RegisterName("captionSide")
-	_dOMCSSStyleDeclarationSelSetCaptionSide = objc.RegisterName("setCaptionSide:")
-	_dOMCSSStyleDeclarationSelClear = objc.RegisterName("clear")
-	_dOMCSSStyleDeclarationSelSetClear = objc.RegisterName("setClear:")
-	_dOMCSSStyleDeclarationSelClip = objc.RegisterName("clip")
-	_dOMCSSStyleDeclarationSelSetClip = objc.RegisterName("setClip:")
-	_dOMCSSStyleDeclarationSelColor = objc.RegisterName("color")
-	_dOMCSSStyleDeclarationSelSetColor = objc.RegisterName("setColor:")
-	_dOMCSSStyleDeclarationSelContent = objc.RegisterName("content")
-	_dOMCSSStyleDeclarationSelSetContent = objc.RegisterName("setContent:")
-	_dOMCSSStyleDeclarationSelCounterIncrement = objc.RegisterName("counterIncrement")
-	_dOMCSSStyleDeclarationSelSetCounterIncrement = objc.RegisterName("setCounterIncrement:")
-	_dOMCSSStyleDeclarationSelCounterReset = objc.RegisterName("counterReset")
-	_dOMCSSStyleDeclarationSelSetCounterReset = objc.RegisterName("setCounterReset:")
-	_dOMCSSStyleDeclarationSelCue = objc.RegisterName("cue")
-	_dOMCSSStyleDeclarationSelSetCue = objc.RegisterName("setCue:")
-	_dOMCSSStyleDeclarationSelCueAfter = objc.RegisterName("cueAfter")
-	_dOMCSSStyleDeclarationSelSetCueAfter = objc.RegisterName("setCueAfter:")
-	_dOMCSSStyleDeclarationSelCueBefore = objc.RegisterName("cueBefore")
-	_dOMCSSStyleDeclarationSelSetCueBefore = objc.RegisterName("setCueBefore:")
-	_dOMCSSStyleDeclarationSelCursor = objc.RegisterName("cursor")
-	_dOMCSSStyleDeclarationSelSetCursor = objc.RegisterName("setCursor:")
-	_dOMCSSStyleDeclarationSelDirection = objc.RegisterName("direction")
-	_dOMCSSStyleDeclarationSelSetDirection = objc.RegisterName("setDirection:")
-	_dOMCSSStyleDeclarationSelDisplay = objc.RegisterName("display")
-	_dOMCSSStyleDeclarationSelSetDisplay = objc.RegisterName("setDisplay:")
-	_dOMCSSStyleDeclarationSelElevation = objc.RegisterName("elevation")
-	_dOMCSSStyleDeclarationSelSetElevation = objc.RegisterName("setElevation:")
-	_dOMCSSStyleDeclarationSelEmptyCells = objc.RegisterName("emptyCells")
-	_dOMCSSStyleDeclarationSelSetEmptyCells = objc.RegisterName("setEmptyCells:")
-	_dOMCSSStyleDeclarationSelCssFloat = objc.RegisterName("cssFloat")
-	_dOMCSSStyleDeclarationSelSetCssFloat = objc.RegisterName("setCssFloat:")
-	_dOMCSSStyleDeclarationSelFont = objc.RegisterName("font")
-	_dOMCSSStyleDeclarationSelSetFont = objc.RegisterName("setFont:")
-	_dOMCSSStyleDeclarationSelFontFamily = objc.RegisterName("fontFamily")
-	_dOMCSSStyleDeclarationSelSetFontFamily = objc.RegisterName("setFontFamily:")
-	_dOMCSSStyleDeclarationSelFontSize = objc.RegisterName("fontSize")
-	_dOMCSSStyleDeclarationSelSetFontSize = objc.RegisterName("setFontSize:")
-	_dOMCSSStyleDeclarationSelFontSizeAdjust = objc.RegisterName("fontSizeAdjust")
-	_dOMCSSStyleDeclarationSelSetFontSizeAdjust = objc.RegisterName("setFontSizeAdjust:")
-	_dOMCSSStyleDeclarationSelFontStretch = objc.RegisterName("fontStretch")
-	_dOMCSSStyleDeclarationSelSetFontStretch = objc.RegisterName("setFontStretch:")
-	_dOMCSSStyleDeclarationSelFontStyle = objc.RegisterName("fontStyle")
-	_dOMCSSStyleDeclarationSelSetFontStyle = objc.RegisterName("setFontStyle:")
-	_dOMCSSStyleDeclarationSelFontVariant = objc.RegisterName("fontVariant")
-	_dOMCSSStyleDeclarationSelSetFontVariant = objc.RegisterName("setFontVariant:")
-	_dOMCSSStyleDeclarationSelFontWeight = objc.RegisterName("fontWeight")
-	_dOMCSSStyleDeclarationSelSetFontWeight = objc.RegisterName("setFontWeight:")
-	_dOMCSSStyleDeclarationSelHeight = objc.RegisterName("height")
-	_dOMCSSStyleDeclarationSelSetHeight = objc.RegisterName("setHeight:")
-	_dOMCSSStyleDeclarationSelLeft = objc.RegisterName("left")
-	_dOMCSSStyleDeclarationSelSetLeft = objc.RegisterName("setLeft:")
-	_dOMCSSStyleDeclarationSelLetterSpacing = objc.RegisterName("letterSpacing")
-	_dOMCSSStyleDeclarationSelSetLetterSpacing = objc.RegisterName("setLetterSpacing:")
-	_dOMCSSStyleDeclarationSelLineHeight = objc.RegisterName("lineHeight")
-	_dOMCSSStyleDeclarationSelSetLineHeight = objc.RegisterName("setLineHeight:")
-	_dOMCSSStyleDeclarationSelListStyle = objc.RegisterName("listStyle")
-	_dOMCSSStyleDeclarationSelSetListStyle = objc.RegisterName("setListStyle:")
-	_dOMCSSStyleDeclarationSelListStyleImage = objc.RegisterName("listStyleImage")
-	_dOMCSSStyleDeclarationSelSetListStyleImage = objc.RegisterName("setListStyleImage:")
-	_dOMCSSStyleDeclarationSelListStylePosition = objc.RegisterName("listStylePosition")
-	_dOMCSSStyleDeclarationSelSetListStylePosition = objc.RegisterName("setListStylePosition:")
-	_dOMCSSStyleDeclarationSelListStyleType = objc.RegisterName("listStyleType")
-	_dOMCSSStyleDeclarationSelSetListStyleType = objc.RegisterName("setListStyleType:")
-	_dOMCSSStyleDeclarationSelMargin = objc.RegisterName("margin")
-	_dOMCSSStyleDeclarationSelSetMargin = objc.RegisterName("setMargin:")
-	_dOMCSSStyleDeclarationSelMarginTop = objc.RegisterName("marginTop")
-	_dOMCSSStyleDeclarationSelSetMarginTop = objc.RegisterName("setMarginTop:")
-	_dOMCSSStyleDeclarationSelMarginRight = objc.RegisterName("marginRight")
-	_dOMCSSStyleDeclarationSelSetMarginRight = objc.RegisterName("setMarginRight:")
-	_dOMCSSStyleDeclarationSelMarginBottom = objc.RegisterName("marginBottom")
-	_dOMCSSStyleDeclarationSelSetMarginBottom = objc.RegisterName("setMarginBottom:")
-	_dOMCSSStyleDeclarationSelMarginLeft = objc.RegisterName("marginLeft")
-	_dOMCSSStyleDeclarationSelSetMarginLeft = objc.RegisterName("setMarginLeft:")
-	_dOMCSSStyleDeclarationSelMarkerOffset = objc.RegisterName("markerOffset")
-	_dOMCSSStyleDeclarationSelSetMarkerOffset = objc.RegisterName("setMarkerOffset:")
-	_dOMCSSStyleDeclarationSelMarks = objc.RegisterName("marks")
-	_dOMCSSStyleDeclarationSelSetMarks = objc.RegisterName("setMarks:")
-	_dOMCSSStyleDeclarationSelMaxHeight = objc.RegisterName("maxHeight")
-	_dOMCSSStyleDeclarationSelSetMaxHeight = objc.RegisterName("setMaxHeight:")
-	_dOMCSSStyleDeclarationSelMaxWidth = objc.RegisterName("maxWidth")
-	_dOMCSSStyleDeclarationSelSetMaxWidth = objc.RegisterName("setMaxWidth:")
-	_dOMCSSStyleDeclarationSelMinHeight = objc.RegisterName("minHeight")
-	_dOMCSSStyleDeclarationSelSetMinHeight = objc.RegisterName("setMinHeight:")
-	_dOMCSSStyleDeclarationSelMinWidth = objc.RegisterName("minWidth")
-	_dOMCSSStyleDeclarationSelSetMinWidth = objc.RegisterName("setMinWidth:")
-	_dOMCSSStyleDeclarationSelOrphans = objc.RegisterName("orphans")
-	_dOMCSSStyleDeclarationSelSetOrphans = objc.RegisterName("setOrphans:")
-	_dOMCSSStyleDeclarationSelOutline = objc.RegisterName("outline")
-	_dOMCSSStyleDeclarationSelSetOutline = objc.RegisterName("setOutline:")
-	_dOMCSSStyleDeclarationSelOutlineColor = objc.RegisterName("outlineColor")
-	_dOMCSSStyleDeclarationSelSetOutlineColor = objc.RegisterName("setOutlineColor:")
-	_dOMCSSStyleDeclarationSelOutlineStyle = objc.RegisterName("outlineStyle")
-	_dOMCSSStyleDeclarationSelSetOutlineStyle = objc.RegisterName("setOutlineStyle:")
-	_dOMCSSStyleDeclarationSelOutlineWidth = objc.RegisterName("outlineWidth")
-	_dOMCSSStyleDeclarationSelSetOutlineWidth = objc.RegisterName("setOutlineWidth:")
-	_dOMCSSStyleDeclarationSelOverflow = objc.RegisterName("overflow")
-	_dOMCSSStyleDeclarationSelSetOverflow = objc.RegisterName("setOverflow:")
-	_dOMCSSStyleDeclarationSelPadding = objc.RegisterName("padding")
-	_dOMCSSStyleDeclarationSelSetPadding = objc.RegisterName("setPadding:")
-	_dOMCSSStyleDeclarationSelPaddingTop = objc.RegisterName("paddingTop")
-	_dOMCSSStyleDeclarationSelSetPaddingTop = objc.RegisterName("setPaddingTop:")
-	_dOMCSSStyleDeclarationSelPaddingRight = objc.RegisterName("paddingRight")
-	_dOMCSSStyleDeclarationSelSetPaddingRight = objc.RegisterName("setPaddingRight:")
-	_dOMCSSStyleDeclarationSelPaddingBottom = objc.RegisterName("paddingBottom")
-	_dOMCSSStyleDeclarationSelSetPaddingBottom = objc.RegisterName("setPaddingBottom:")
-	_dOMCSSStyleDeclarationSelPaddingLeft = objc.RegisterName("paddingLeft")
-	_dOMCSSStyleDeclarationSelSetPaddingLeft = objc.RegisterName("setPaddingLeft:")
-	_dOMCSSStyleDeclarationSelPage = objc.RegisterName("page")
-	_dOMCSSStyleDeclarationSelSetPage = objc.RegisterName("setPage:")
-	_dOMCSSStyleDeclarationSelPageBreakAfter = objc.RegisterName("pageBreakAfter")
-	_dOMCSSStyleDeclarationSelSetPageBreakAfter = objc.RegisterName("setPageBreakAfter:")
-	_dOMCSSStyleDeclarationSelPageBreakBefore = objc.RegisterName("pageBreakBefore")
-	_dOMCSSStyleDeclarationSelSetPageBreakBefore = objc.RegisterName("setPageBreakBefore:")
-	_dOMCSSStyleDeclarationSelPageBreakInside = objc.RegisterName("pageBreakInside")
-	_dOMCSSStyleDeclarationSelSetPageBreakInside = objc.RegisterName("setPageBreakInside:")
-	_dOMCSSStyleDeclarationSelPause = objc.RegisterName("pause")
-	_dOMCSSStyleDeclarationSelSetPause = objc.RegisterName("setPause:")
-	_dOMCSSStyleDeclarationSelPauseAfter = objc.RegisterName("pauseAfter")
-	_dOMCSSStyleDeclarationSelSetPauseAfter = objc.RegisterName("setPauseAfter:")
-	_dOMCSSStyleDeclarationSelPauseBefore = objc.RegisterName("pauseBefore")
-	_dOMCSSStyleDeclarationSelSetPauseBefore = objc.RegisterName("setPauseBefore:")
-	_dOMCSSStyleDeclarationSelPitch = objc.RegisterName("pitch")
-	_dOMCSSStyleDeclarationSelSetPitch = objc.RegisterName("setPitch:")
-	_dOMCSSStyleDeclarationSelPitchRange = objc.RegisterName("pitchRange")
-	_dOMCSSStyleDeclarationSelSetPitchRange = objc.RegisterName("setPitchRange:")
-	_dOMCSSStyleDeclarationSelPlayDuring = objc.RegisterName("playDuring")
-	_dOMCSSStyleDeclarationSelSetPlayDuring = objc.RegisterName("setPlayDuring:")
-	_dOMCSSStyleDeclarationSelPosition = objc.RegisterName("position")
-	_dOMCSSStyleDeclarationSelSetPosition = objc.RegisterName("setPosition:")
-	_dOMCSSStyleDeclarationSelQuotes = objc.RegisterName("quotes")
-	_dOMCSSStyleDeclarationSelSetQuotes = objc.RegisterName("setQuotes:")
-	_dOMCSSStyleDeclarationSelRichness = objc.RegisterName("richness")
-	_dOMCSSStyleDeclarationSelSetRichness = objc.RegisterName("setRichness:")
-	_dOMCSSStyleDeclarationSelRight = objc.RegisterName("right")
-	_dOMCSSStyleDeclarationSelSetRight = objc.RegisterName("setRight:")
-	_dOMCSSStyleDeclarationSelSize = objc.RegisterName("size")
-	_dOMCSSStyleDeclarationSelSetSize = objc.RegisterName("setSize:")
-	_dOMCSSStyleDeclarationSelSpeak = objc.RegisterName("speak")
-	_dOMCSSStyleDeclarationSelSetSpeak = objc.RegisterName("setSpeak:")
-	_dOMCSSStyleDeclarationSelSpeakHeader = objc.RegisterName("speakHeader")
-	_dOMCSSStyleDeclarationSelSetSpeakHeader = objc.RegisterName("setSpeakHeader:")
-	_dOMCSSStyleDeclarationSelSpeakNumeral = objc.RegisterName("speakNumeral")
-	_dOMCSSStyleDeclarationSelSetSpeakNumeral = objc.RegisterName("setSpeakNumeral:")
-	_dOMCSSStyleDeclarationSelSpeakPunctuation = objc.RegisterName("speakPunctuation")
-	_dOMCSSStyleDeclarationSelSetSpeakPunctuation = objc.RegisterName("setSpeakPunctuation:")
-	_dOMCSSStyleDeclarationSelSpeechRate = objc.RegisterName("speechRate")
-	_dOMCSSStyleDeclarationSelSetSpeechRate = objc.RegisterName("setSpeechRate:")
-	_dOMCSSStyleDeclarationSelStress = objc.RegisterName("stress")
-	_dOMCSSStyleDeclarationSelSetStress = objc.RegisterName("setStress:")
-	_dOMCSSStyleDeclarationSelTableLayout = objc.RegisterName("tableLayout")
-	_dOMCSSStyleDeclarationSelSetTableLayout = objc.RegisterName("setTableLayout:")
-	_dOMCSSStyleDeclarationSelTextAlign = objc.RegisterName("textAlign")
-	_dOMCSSStyleDeclarationSelSetTextAlign = objc.RegisterName("setTextAlign:")
-	_dOMCSSStyleDeclarationSelTextDecoration = objc.RegisterName("textDecoration")
-	_dOMCSSStyleDeclarationSelSetTextDecoration = objc.RegisterName("setTextDecoration:")
-	_dOMCSSStyleDeclarationSelTextIndent = objc.RegisterName("textIndent")
-	_dOMCSSStyleDeclarationSelSetTextIndent = objc.RegisterName("setTextIndent:")
-	_dOMCSSStyleDeclarationSelTextShadow = objc.RegisterName("textShadow")
-	_dOMCSSStyleDeclarationSelSetTextShadow = objc.RegisterName("setTextShadow:")
-	_dOMCSSStyleDeclarationSelTextTransform = objc.RegisterName("textTransform")
-	_dOMCSSStyleDeclarationSelSetTextTransform = objc.RegisterName("setTextTransform:")
-	_dOMCSSStyleDeclarationSelTop = objc.RegisterName("top")
-	_dOMCSSStyleDeclarationSelSetTop = objc.RegisterName("setTop:")
-	_dOMCSSStyleDeclarationSelUnicodeBidi = objc.RegisterName("unicodeBidi")
-	_dOMCSSStyleDeclarationSelSetUnicodeBidi = objc.RegisterName("setUnicodeBidi:")
-	_dOMCSSStyleDeclarationSelVerticalAlign = objc.RegisterName("verticalAlign")
-	_dOMCSSStyleDeclarationSelSetVerticalAlign = objc.RegisterName("setVerticalAlign:")
-	_dOMCSSStyleDeclarationSelVisibility = objc.RegisterName("visibility")
-	_dOMCSSStyleDeclarationSelSetVisibility = objc.RegisterName("setVisibility:")
-	_dOMCSSStyleDeclarationSelVoiceFamily = objc.RegisterName("voiceFamily")
-	_dOMCSSStyleDeclarationSelSetVoiceFamily = objc.RegisterName("setVoiceFamily:")
-	_dOMCSSStyleDeclarationSelVolume = objc.RegisterName("volume")
-	_dOMCSSStyleDeclarationSelSetVolume = objc.RegisterName("setVolume:")
-	_dOMCSSStyleDeclarationSelWhiteSpace = objc.RegisterName("whiteSpace")
-	_dOMCSSStyleDeclarationSelSetWhiteSpace = objc.RegisterName("setWhiteSpace:")
-	_dOMCSSStyleDeclarationSelWidows = objc.RegisterName("widows")
-	_dOMCSSStyleDeclarationSelSetWidows = objc.RegisterName("setWidows:")
-	_dOMCSSStyleDeclarationSelWidth = objc.RegisterName("width")
-	_dOMCSSStyleDeclarationSelSetWidth = objc.RegisterName("setWidth:")
-	_dOMCSSStyleDeclarationSelWordSpacing = objc.RegisterName("wordSpacing")
-	_dOMCSSStyleDeclarationSelSetWordSpacing = objc.RegisterName("setWordSpacing:")
-	_dOMCSSStyleDeclarationSelZIndex = objc.RegisterName("zIndex")
-	_dOMCSSStyleDeclarationSelSetZIndex = objc.RegisterName("setZIndex:")
+	_dOMCSSStyleDeclarationSelItem                     = objc.RegisterName("item:")
+	_dOMCSSStyleDeclarationSelGetPropertyShorthand     = objc.RegisterName("getPropertyShorthand:")
+	_dOMCSSStyleDeclarationSelIsPropertyImplicit       = objc.RegisterName("isPropertyImplicit:")
+	_dOMCSSStyleDeclarationSelCssText                  = objc.RegisterName("cssText")
+	_dOMCSSStyleDeclarationSelSetCssText               = objc.RegisterName("setCssText:")
+	_dOMCSSStyleDeclarationSelLength                   = objc.RegisterName("length")
+	_dOMCSSStyleDeclarationSelParentRule               = objc.RegisterName("parentRule")
+	_dOMCSSStyleDeclarationSelSetProperty              = objc.RegisterName("setProperty:::")
+	_dOMCSSStyleDeclarationSelAzimuth                  = objc.RegisterName("azimuth")
+	_dOMCSSStyleDeclarationSelSetAzimuth               = objc.RegisterName("setAzimuth:")
+	_dOMCSSStyleDeclarationSelBackground               = objc.RegisterName("background")
+	_dOMCSSStyleDeclarationSelSetBackground            = objc.RegisterName("setBackground:")
+	_dOMCSSStyleDeclarationSelBackgroundAttachment     = objc.RegisterName("backgroundAttachment")
+	_dOMCSSStyleDeclarationSelSetBackgroundAttachment  = objc.RegisterName("setBackgroundAttachment:")
+	_dOMCSSStyleDeclarationSelBackgroundColor          = objc.RegisterName("backgroundColor")
+	_dOMCSSStyleDeclarationSelSetBackgroundColor       = objc.RegisterName("setBackgroundColor:")
+	_dOMCSSStyleDeclarationSelBackgroundImage          = objc.RegisterName("backgroundImage")
+	_dOMCSSStyleDeclarationSelSetBackgroundImage       = objc.RegisterName("setBackgroundImage:")
+	_dOMCSSStyleDeclarationSelBackgroundPosition       = objc.RegisterName("backgroundPosition")
+	_dOMCSSStyleDeclarationSelSetBackgroundPosition    = objc.RegisterName("setBackgroundPosition:")
+	_dOMCSSStyleDeclarationSelBackgroundRepeat         = objc.RegisterName("backgroundRepeat")
+	_dOMCSSStyleDeclarationSelSetBackgroundRepeat      = objc.RegisterName("setBackgroundRepeat:")
+	_dOMCSSStyleDeclarationSelBorder                   = objc.RegisterName("border")
+	_dOMCSSStyleDeclarationSelSetBorder                = objc.RegisterName("setBorder:")
+	_dOMCSSStyleDeclarationSelBorderCollapse           = objc.RegisterName("borderCollapse")
+	_dOMCSSStyleDeclarationSelSetBorderCollapse        = objc.RegisterName("setBorderCollapse:")
+	_dOMCSSStyleDeclarationSelBorderColor              = objc.RegisterName("borderColor")
+	_dOMCSSStyleDeclarationSelSetBorderColor           = objc.RegisterName("setBorderColor:")
+	_dOMCSSStyleDeclarationSelBorderSpacing            = objc.RegisterName("borderSpacing")
+	_dOMCSSStyleDeclarationSelSetBorderSpacing         = objc.RegisterName("setBorderSpacing:")
+	_dOMCSSStyleDeclarationSelBorderStyle              = objc.RegisterName("borderStyle")
+	_dOMCSSStyleDeclarationSelSetBorderStyle           = objc.RegisterName("setBorderStyle:")
+	_dOMCSSStyleDeclarationSelBorderTop                = objc.RegisterName("borderTop")
+	_dOMCSSStyleDeclarationSelSetBorderTop             = objc.RegisterName("setBorderTop:")
+	_dOMCSSStyleDeclarationSelBorderRight              = objc.RegisterName("borderRight")
+	_dOMCSSStyleDeclarationSelSetBorderRight           = objc.RegisterName("setBorderRight:")
+	_dOMCSSStyleDeclarationSelBorderBottom             = objc.RegisterName("borderBottom")
+	_dOMCSSStyleDeclarationSelSetBorderBottom          = objc.RegisterName("setBorderBottom:")
+	_dOMCSSStyleDeclarationSelBorderLeft               = objc.RegisterName("borderLeft")
+	_dOMCSSStyleDeclarationSelSetBorderLeft            = objc.RegisterName("setBorderLeft:")
+	_dOMCSSStyleDeclarationSelBorderTopColor           = objc.RegisterName("borderTopColor")
+	_dOMCSSStyleDeclarationSelSetBorderTopColor        = objc.RegisterName("setBorderTopColor:")
+	_dOMCSSStyleDeclarationSelBorderRightColor         = objc.RegisterName("borderRightColor")
+	_dOMCSSStyleDeclarationSelSetBorderRightColor      = objc.RegisterName("setBorderRightColor:")
+	_dOMCSSStyleDeclarationSelBorderBottomColor        = objc.RegisterName("borderBottomColor")
+	_dOMCSSStyleDeclarationSelSetBorderBottomColor     = objc.RegisterName("setBorderBottomColor:")
+	_dOMCSSStyleDeclarationSelBorderLeftColor          = objc.RegisterName("borderLeftColor")
+	_dOMCSSStyleDeclarationSelSetBorderLeftColor       = objc.RegisterName("setBorderLeftColor:")
+	_dOMCSSStyleDeclarationSelBorderTopStyle           = objc.RegisterName("borderTopStyle")
+	_dOMCSSStyleDeclarationSelSetBorderTopStyle        = objc.RegisterName("setBorderTopStyle:")
+	_dOMCSSStyleDeclarationSelBorderRightStyle         = objc.RegisterName("borderRightStyle")
+	_dOMCSSStyleDeclarationSelSetBorderRightStyle      = objc.RegisterName("setBorderRightStyle:")
+	_dOMCSSStyleDeclarationSelBorderBottomStyle        = objc.RegisterName("borderBottomStyle")
+	_dOMCSSStyleDeclarationSelSetBorderBottomStyle     = objc.RegisterName("setBorderBottomStyle:")
+	_dOMCSSStyleDeclarationSelBorderLeftStyle          = objc.RegisterName("borderLeftStyle")
+	_dOMCSSStyleDeclarationSelSetBorderLeftStyle       = objc.RegisterName("setBorderLeftStyle:")
+	_dOMCSSStyleDeclarationSelBorderTopWidth           = objc.RegisterName("borderTopWidth")
+	_dOMCSSStyleDeclarationSelSetBorderTopWidth        = objc.RegisterName("setBorderTopWidth:")
+	_dOMCSSStyleDeclarationSelBorderRightWidth         = objc.RegisterName("borderRightWidth")
+	_dOMCSSStyleDeclarationSelSetBorderRightWidth      = objc.RegisterName("setBorderRightWidth:")
+	_dOMCSSStyleDeclarationSelBorderBottomWidth        = objc.RegisterName("borderBottomWidth")
+	_dOMCSSStyleDeclarationSelSetBorderBottomWidth     = objc.RegisterName("setBorderBottomWidth:")
+	_dOMCSSStyleDeclarationSelBorderLeftWidth          = objc.RegisterName("borderLeftWidth")
+	_dOMCSSStyleDeclarationSelSetBorderLeftWidth       = objc.RegisterName("setBorderLeftWidth:")
+	_dOMCSSStyleDeclarationSelBorderWidth              = objc.RegisterName("borderWidth")
+	_dOMCSSStyleDeclarationSelSetBorderWidth           = objc.RegisterName("setBorderWidth:")
+	_dOMCSSStyleDeclarationSelBottom                   = objc.RegisterName("bottom")
+	_dOMCSSStyleDeclarationSelSetBottom                = objc.RegisterName("setBottom:")
+	_dOMCSSStyleDeclarationSelCaptionSide              = objc.RegisterName("captionSide")
+	_dOMCSSStyleDeclarationSelSetCaptionSide           = objc.RegisterName("setCaptionSide:")
+	_dOMCSSStyleDeclarationSelClear                    = objc.RegisterName("clear")
+	_dOMCSSStyleDeclarationSelSetClear                 = objc.RegisterName("setClear:")
+	_dOMCSSStyleDeclarationSelClip                     = objc.RegisterName("clip")
+	_dOMCSSStyleDeclarationSelSetClip                  = objc.RegisterName("setClip:")
+	_dOMCSSStyleDeclarationSelColor                    = objc.RegisterName("color")
+	_dOMCSSStyleDeclarationSelSetColor                 = objc.RegisterName("setColor:")
+	_dOMCSSStyleDeclarationSelContent                  = objc.RegisterName("content")
+	_dOMCSSStyleDeclarationSelSetContent               = objc.RegisterName("setContent:")
+	_dOMCSSStyleDeclarationSelCounterIncrement         = objc.RegisterName("counterIncrement")
+	_dOMCSSStyleDeclarationSelSetCounterIncrement      = objc.RegisterName("setCounterIncrement:")
+	_dOMCSSStyleDeclarationSelCounterReset             = objc.RegisterName("counterReset")
+	_dOMCSSStyleDeclarationSelSetCounterReset          = objc.RegisterName("setCounterReset:")
+	_dOMCSSStyleDeclarationSelCue                      = objc.RegisterName("cue")
+	_dOMCSSStyleDeclarationSelSetCue                   = objc.RegisterName("setCue:")
+	_dOMCSSStyleDeclarationSelCueAfter                 = objc.RegisterName("cueAfter")
+	_dOMCSSStyleDeclarationSelSetCueAfter              = objc.RegisterName("setCueAfter:")
+	_dOMCSSStyleDeclarationSelCueBefore                = objc.RegisterName("cueBefore")
+	_dOMCSSStyleDeclarationSelSetCueBefore             = objc.RegisterName("setCueBefore:")
+	_dOMCSSStyleDeclarationSelCursor                   = objc.RegisterName("cursor")
+	_dOMCSSStyleDeclarationSelSetCursor                = objc.RegisterName("setCursor:")
+	_dOMCSSStyleDeclarationSelDirection                = objc.RegisterName("direction")
+	_dOMCSSStyleDeclarationSelSetDirection             = objc.RegisterName("setDirection:")
+	_dOMCSSStyleDeclarationSelDisplay                  = objc.RegisterName("display")
+	_dOMCSSStyleDeclarationSelSetDisplay               = objc.RegisterName("setDisplay:")
+	_dOMCSSStyleDeclarationSelElevation                = objc.RegisterName("elevation")
+	_dOMCSSStyleDeclarationSelSetElevation             = objc.RegisterName("setElevation:")
+	_dOMCSSStyleDeclarationSelEmptyCells               = objc.RegisterName("emptyCells")
+	_dOMCSSStyleDeclarationSelSetEmptyCells            = objc.RegisterName("setEmptyCells:")
+	_dOMCSSStyleDeclarationSelCssFloat                 = objc.RegisterName("cssFloat")
+	_dOMCSSStyleDeclarationSelSetCssFloat              = objc.RegisterName("setCssFloat:")
+	_dOMCSSStyleDeclarationSelFont                     = objc.RegisterName("font")
+	_dOMCSSStyleDeclarationSelSetFont                  = objc.RegisterName("setFont:")
+	_dOMCSSStyleDeclarationSelFontFamily               = objc.RegisterName("fontFamily")
+	_dOMCSSStyleDeclarationSelSetFontFamily            = objc.RegisterName("setFontFamily:")
+	_dOMCSSStyleDeclarationSelFontSize                 = objc.RegisterName("fontSize")
+	_dOMCSSStyleDeclarationSelSetFontSize              = objc.RegisterName("setFontSize:")
+	_dOMCSSStyleDeclarationSelFontSizeAdjust           = objc.RegisterName("fontSizeAdjust")
+	_dOMCSSStyleDeclarationSelSetFontSizeAdjust        = objc.RegisterName("setFontSizeAdjust:")
+	_dOMCSSStyleDeclarationSelFontStretch              = objc.RegisterName("fontStretch")
+	_dOMCSSStyleDeclarationSelSetFontStretch           = objc.RegisterName("setFontStretch:")
+	_dOMCSSStyleDeclarationSelFontStyle                = objc.RegisterName("fontStyle")
+	_dOMCSSStyleDeclarationSelSetFontStyle             = objc.RegisterName("setFontStyle:")
+	_dOMCSSStyleDeclarationSelFontVariant              = objc.RegisterName("fontVariant")
+	_dOMCSSStyleDeclarationSelSetFontVariant           = objc.RegisterName("setFontVariant:")
+	_dOMCSSStyleDeclarationSelFontWeight               = objc.RegisterName("fontWeight")
+	_dOMCSSStyleDeclarationSelSetFontWeight            = objc.RegisterName("setFontWeight:")
+	_dOMCSSStyleDeclarationSelHeight                   = objc.RegisterName("height")
+	_dOMCSSStyleDeclarationSelSetHeight                = objc.RegisterName("setHeight:")
+	_dOMCSSStyleDeclarationSelLeft                     = objc.RegisterName("left")
+	_dOMCSSStyleDeclarationSelSetLeft                  = objc.RegisterName("setLeft:")
+	_dOMCSSStyleDeclarationSelLetterSpacing            = objc.RegisterName("letterSpacing")
+	_dOMCSSStyleDeclarationSelSetLetterSpacing         = objc.RegisterName("setLetterSpacing:")
+	_dOMCSSStyleDeclarationSelLineHeight               = objc.RegisterName("lineHeight")
+	_dOMCSSStyleDeclarationSelSetLineHeight            = objc.RegisterName("setLineHeight:")
+	_dOMCSSStyleDeclarationSelListStyle                = objc.RegisterName("listStyle")
+	_dOMCSSStyleDeclarationSelSetListStyle             = objc.RegisterName("setListStyle:")
+	_dOMCSSStyleDeclarationSelListStyleImage           = objc.RegisterName("listStyleImage")
+	_dOMCSSStyleDeclarationSelSetListStyleImage        = objc.RegisterName("setListStyleImage:")
+	_dOMCSSStyleDeclarationSelListStylePosition        = objc.RegisterName("listStylePosition")
+	_dOMCSSStyleDeclarationSelSetListStylePosition     = objc.RegisterName("setListStylePosition:")
+	_dOMCSSStyleDeclarationSelListStyleType            = objc.RegisterName("listStyleType")
+	_dOMCSSStyleDeclarationSelSetListStyleType         = objc.RegisterName("setListStyleType:")
+	_dOMCSSStyleDeclarationSelMargin                   = objc.RegisterName("margin")
+	_dOMCSSStyleDeclarationSelSetMargin                = objc.RegisterName("setMargin:")
+	_dOMCSSStyleDeclarationSelMarginTop                = objc.RegisterName("marginTop")
+	_dOMCSSStyleDeclarationSelSetMarginTop             = objc.RegisterName("setMarginTop:")
+	_dOMCSSStyleDeclarationSelMarginRight              = objc.RegisterName("marginRight")
+	_dOMCSSStyleDeclarationSelSetMarginRight           = objc.RegisterName("setMarginRight:")
+	_dOMCSSStyleDeclarationSelMarginBottom             = objc.RegisterName("marginBottom")
+	_dOMCSSStyleDeclarationSelSetMarginBottom          = objc.RegisterName("setMarginBottom:")
+	_dOMCSSStyleDeclarationSelMarginLeft               = objc.RegisterName("marginLeft")
+	_dOMCSSStyleDeclarationSelSetMarginLeft            = objc.RegisterName("setMarginLeft:")
+	_dOMCSSStyleDeclarationSelMarkerOffset             = objc.RegisterName("markerOffset")
+	_dOMCSSStyleDeclarationSelSetMarkerOffset          = objc.RegisterName("setMarkerOffset:")
+	_dOMCSSStyleDeclarationSelMarks                    = objc.RegisterName("marks")
+	_dOMCSSStyleDeclarationSelSetMarks                 = objc.RegisterName("setMarks:")
+	_dOMCSSStyleDeclarationSelMaxHeight                = objc.RegisterName("maxHeight")
+	_dOMCSSStyleDeclarationSelSetMaxHeight             = objc.RegisterName("setMaxHeight:")
+	_dOMCSSStyleDeclarationSelMaxWidth                 = objc.RegisterName("maxWidth")
+	_dOMCSSStyleDeclarationSelSetMaxWidth              = objc.RegisterName("setMaxWidth:")
+	_dOMCSSStyleDeclarationSelMinHeight                = objc.RegisterName("minHeight")
+	_dOMCSSStyleDeclarationSelSetMinHeight             = objc.RegisterName("setMinHeight:")
+	_dOMCSSStyleDeclarationSelMinWidth                 = objc.RegisterName("minWidth")
+	_dOMCSSStyleDeclarationSelSetMinWidth              = objc.RegisterName("setMinWidth:")
+	_dOMCSSStyleDeclarationSelOrphans                  = objc.RegisterName("orphans")
+	_dOMCSSStyleDeclarationSelSetOrphans               = objc.RegisterName("setOrphans:")
+	_dOMCSSStyleDeclarationSelOutline                  = objc.RegisterName("outline")
+	_dOMCSSStyleDeclarationSelSetOutline               = objc.RegisterName("setOutline:")
+	_dOMCSSStyleDeclarationSelOutlineColor             = objc.RegisterName("outlineColor")
+	_dOMCSSStyleDeclarationSelSetOutlineColor          = objc.RegisterName("setOutlineColor:")
+	_dOMCSSStyleDeclarationSelOutlineStyle             = objc.RegisterName("outlineStyle")
+	_dOMCSSStyleDeclarationSelSetOutlineStyle          = objc.RegisterName("setOutlineStyle:")
+	_dOMCSSStyleDeclarationSelOutlineWidth             = objc.RegisterName("outlineWidth")
+	_dOMCSSStyleDeclarationSelSetOutlineWidth          = objc.RegisterName("setOutlineWidth:")
+	_dOMCSSStyleDeclarationSelOverflow                 = objc.RegisterName("overflow")
+	_dOMCSSStyleDeclarationSelSetOverflow              = objc.RegisterName("setOverflow:")
+	_dOMCSSStyleDeclarationSelPadding                  = objc.RegisterName("padding")
+	_dOMCSSStyleDeclarationSelSetPadding               = objc.RegisterName("setPadding:")
+	_dOMCSSStyleDeclarationSelPaddingTop               = objc.RegisterName("paddingTop")
+	_dOMCSSStyleDeclarationSelSetPaddingTop            = objc.RegisterName("setPaddingTop:")
+	_dOMCSSStyleDeclarationSelPaddingRight             = objc.RegisterName("paddingRight")
+	_dOMCSSStyleDeclarationSelSetPaddingRight          = objc.RegisterName("setPaddingRight:")
+	_dOMCSSStyleDeclarationSelPaddingBottom            = objc.RegisterName("paddingBottom")
+	_dOMCSSStyleDeclarationSelSetPaddingBottom         = objc.RegisterName("setPaddingBottom:")
+	_dOMCSSStyleDeclarationSelPaddingLeft              = objc.RegisterName("paddingLeft")
+	_dOMCSSStyleDeclarationSelSetPaddingLeft           = objc.RegisterName("setPaddingLeft:")
+	_dOMCSSStyleDeclarationSelPage                     = objc.RegisterName("page")
+	_dOMCSSStyleDeclarationSelSetPage                  = objc.RegisterName("setPage:")
+	_dOMCSSStyleDeclarationSelPageBreakAfter           = objc.RegisterName("pageBreakAfter")
+	_dOMCSSStyleDeclarationSelSetPageBreakAfter        = objc.RegisterName("setPageBreakAfter:")
+	_dOMCSSStyleDeclarationSelPageBreakBefore          = objc.RegisterName("pageBreakBefore")
+	_dOMCSSStyleDeclarationSelSetPageBreakBefore       = objc.RegisterName("setPageBreakBefore:")
+	_dOMCSSStyleDeclarationSelPageBreakInside          = objc.RegisterName("pageBreakInside")
+	_dOMCSSStyleDeclarationSelSetPageBreakInside       = objc.RegisterName("setPageBreakInside:")
+	_dOMCSSStyleDeclarationSelPause                    = objc.RegisterName("pause")
+	_dOMCSSStyleDeclarationSelSetPause                 = objc.RegisterName("setPause:")
+	_dOMCSSStyleDeclarationSelPauseAfter               = objc.RegisterName("pauseAfter")
+	_dOMCSSStyleDeclarationSelSetPauseAfter            = objc.RegisterName("setPauseAfter:")
+	_dOMCSSStyleDeclarationSelPauseBefore              = objc.RegisterName("pauseBefore")
+	_dOMCSSStyleDeclarationSelSetPauseBefore           = objc.RegisterName("setPauseBefore:")
+	_dOMCSSStyleDeclarationSelPitch                    = objc.RegisterName("pitch")
+	_dOMCSSStyleDeclarationSelSetPitch                 = objc.RegisterName("setPitch:")
+	_dOMCSSStyleDeclarationSelPitchRange               = objc.RegisterName("pitchRange")
+	_dOMCSSStyleDeclarationSelSetPitchRange            = objc.RegisterName("setPitchRange:")
+	_dOMCSSStyleDeclarationSelPlayDuring               = objc.RegisterName("playDuring")
+	_dOMCSSStyleDeclarationSelSetPlayDuring            = objc.RegisterName("setPlayDuring:")
+	_dOMCSSStyleDeclarationSelPosition                 = objc.RegisterName("position")
+	_dOMCSSStyleDeclarationSelSetPosition              = objc.RegisterName("setPosition:")
+	_dOMCSSStyleDeclarationSelQuotes                   = objc.RegisterName("quotes")
+	_dOMCSSStyleDeclarationSelSetQuotes                = objc.RegisterName("setQuotes:")
+	_dOMCSSStyleDeclarationSelRichness                 = objc.RegisterName("richness")
+	_dOMCSSStyleDeclarationSelSetRichness              = objc.RegisterName("setRichness:")
+	_dOMCSSStyleDeclarationSelRight                    = objc.RegisterName("right")
+	_dOMCSSStyleDeclarationSelSetRight                 = objc.RegisterName("setRight:")
+	_dOMCSSStyleDeclarationSelSize                     = objc.RegisterName("size")
+	_dOMCSSStyleDeclarationSelSetSize                  = objc.RegisterName("setSize:")
+	_dOMCSSStyleDeclarationSelSpeak                    = objc.RegisterName("speak")
+	_dOMCSSStyleDeclarationSelSetSpeak                 = objc.RegisterName("setSpeak:")
+	_dOMCSSStyleDeclarationSelSpeakHeader              = objc.RegisterName("speakHeader")
+	_dOMCSSStyleDeclarationSelSetSpeakHeader           = objc.RegisterName("setSpeakHeader:")
+	_dOMCSSStyleDeclarationSelSpeakNumeral             = objc.RegisterName("speakNumeral")
+	_dOMCSSStyleDeclarationSelSetSpeakNumeral          = objc.RegisterName("setSpeakNumeral:")
+	_dOMCSSStyleDeclarationSelSpeakPunctuation         = objc.RegisterName("speakPunctuation")
+	_dOMCSSStyleDeclarationSelSetSpeakPunctuation      = objc.RegisterName("setSpeakPunctuation:")
+	_dOMCSSStyleDeclarationSelSpeechRate               = objc.RegisterName("speechRate")
+	_dOMCSSStyleDeclarationSelSetSpeechRate            = objc.RegisterName("setSpeechRate:")
+	_dOMCSSStyleDeclarationSelStress                   = objc.RegisterName("stress")
+	_dOMCSSStyleDeclarationSelSetStress                = objc.RegisterName("setStress:")
+	_dOMCSSStyleDeclarationSelTableLayout              = objc.RegisterName("tableLayout")
+	_dOMCSSStyleDeclarationSelSetTableLayout           = objc.RegisterName("setTableLayout:")
+	_dOMCSSStyleDeclarationSelTextAlign                = objc.RegisterName("textAlign")
+	_dOMCSSStyleDeclarationSelSetTextAlign             = objc.RegisterName("setTextAlign:")
+	_dOMCSSStyleDeclarationSelTextDecoration           = objc.RegisterName("textDecoration")
+	_dOMCSSStyleDeclarationSelSetTextDecoration        = objc.RegisterName("setTextDecoration:")
+	_dOMCSSStyleDeclarationSelTextIndent               = objc.RegisterName("textIndent")
+	_dOMCSSStyleDeclarationSelSetTextIndent            = objc.RegisterName("setTextIndent:")
+	_dOMCSSStyleDeclarationSelTextShadow               = objc.RegisterName("textShadow")
+	_dOMCSSStyleDeclarationSelSetTextShadow            = objc.RegisterName("setTextShadow:")
+	_dOMCSSStyleDeclarationSelTextTransform            = objc.RegisterName("textTransform")
+	_dOMCSSStyleDeclarationSelSetTextTransform         = objc.RegisterName("setTextTransform:")
+	_dOMCSSStyleDeclarationSelTop                      = objc.RegisterName("top")
+	_dOMCSSStyleDeclarationSelSetTop                   = objc.RegisterName("setTop:")
+	_dOMCSSStyleDeclarationSelUnicodeBidi              = objc.RegisterName("unicodeBidi")
+	_dOMCSSStyleDeclarationSelSetUnicodeBidi           = objc.RegisterName("setUnicodeBidi:")
+	_dOMCSSStyleDeclarationSelVerticalAlign            = objc.RegisterName("verticalAlign")
+	_dOMCSSStyleDeclarationSelSetVerticalAlign         = objc.RegisterName("setVerticalAlign:")
+	_dOMCSSStyleDeclarationSelVisibility               = objc.RegisterName("visibility")
+	_dOMCSSStyleDeclarationSelSetVisibility            = objc.RegisterName("setVisibility:")
+	_dOMCSSStyleDeclarationSelVoiceFamily              = objc.RegisterName("voiceFamily")
+	_dOMCSSStyleDeclarationSelSetVoiceFamily           = objc.RegisterName("setVoiceFamily:")
+	_dOMCSSStyleDeclarationSelVolume                   = objc.RegisterName("volume")
+	_dOMCSSStyleDeclarationSelSetVolume                = objc.RegisterName("setVolume:")
+	_dOMCSSStyleDeclarationSelWhiteSpace               = objc.RegisterName("whiteSpace")
+	_dOMCSSStyleDeclarationSelSetWhiteSpace            = objc.RegisterName("setWhiteSpace:")
+	_dOMCSSStyleDeclarationSelWidows                   = objc.RegisterName("widows")
+	_dOMCSSStyleDeclarationSelSetWidows                = objc.RegisterName("setWidows:")
+	_dOMCSSStyleDeclarationSelWidth                    = objc.RegisterName("width")
+	_dOMCSSStyleDeclarationSelSetWidth                 = objc.RegisterName("setWidth:")
+	_dOMCSSStyleDeclarationSelWordSpacing              = objc.RegisterName("wordSpacing")
+	_dOMCSSStyleDeclarationSelSetWordSpacing           = objc.RegisterName("setWordSpacing:")
+	_dOMCSSStyleDeclarationSelZIndex                   = objc.RegisterName("zIndex")
+	_dOMCSSStyleDeclarationSelSetZIndex                = objc.RegisterName("setZIndex:")
 )
 
 func DOMCSSStyleDeclarationFromID(id objc.ID) *DOMCSSStyleDeclaration {
@@ -288,25 +288,33 @@ func DOMCSSStyleDeclarationFromID(id objc.ID) *DOMCSSStyleDeclaration {
 
 func (o *DOMCSSStyleDeclaration) GetPropertyValue(propertyName *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelGetPropertyValue, propertyName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMCSSStyleDeclaration) GetPropertyCSSValue(propertyName *foundation.NSString) *DOMCSSValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelGetPropertyCSSValue, propertyName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMCSSValueFromID(_ret)
 }
 
 func (o *DOMCSSStyleDeclaration) RemoveProperty(propertyName *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelRemoveProperty, propertyName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMCSSStyleDeclaration) GetPropertyPriority(propertyName *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelGetPropertyPriority, propertyName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -316,13 +324,17 @@ func (o *DOMCSSStyleDeclaration) SetPropertyValuePriority(propertyName *foundati
 
 func (o *DOMCSSStyleDeclaration) Item(index uint) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelItem, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMCSSStyleDeclaration) GetPropertyShorthand(propertyName *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelGetPropertyShorthand, propertyName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -333,7 +345,9 @@ func (o *DOMCSSStyleDeclaration) IsPropertyImplicit(propertyName *foundation.NSS
 
 func (o *DOMCSSStyleDeclaration) CssText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelCssText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -348,7 +362,9 @@ func (o *DOMCSSStyleDeclaration) Length() uint {
 
 func (o *DOMCSSStyleDeclaration) ParentRule() *DOMCSSRule {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelParentRule)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMCSSRuleFromID(_ret)
 }
 
@@ -358,7 +374,9 @@ func (o *DOMCSSStyleDeclaration) SetProperty(propertyName *foundation.NSString, 
 
 func (o *DOMCSSStyleDeclaration) Azimuth() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelAzimuth)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -368,7 +386,9 @@ func (o *DOMCSSStyleDeclaration) SetAzimuth(azimuth *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) Background() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelBackground)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -378,7 +398,9 @@ func (o *DOMCSSStyleDeclaration) SetBackground(background *foundation.NSString) 
 
 func (o *DOMCSSStyleDeclaration) BackgroundAttachment() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelBackgroundAttachment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -388,7 +410,9 @@ func (o *DOMCSSStyleDeclaration) SetBackgroundAttachment(backgroundAttachment *f
 
 func (o *DOMCSSStyleDeclaration) BackgroundColor() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelBackgroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -398,7 +422,9 @@ func (o *DOMCSSStyleDeclaration) SetBackgroundColor(backgroundColor *foundation.
 
 func (o *DOMCSSStyleDeclaration) BackgroundImage() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelBackgroundImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -408,7 +434,9 @@ func (o *DOMCSSStyleDeclaration) SetBackgroundImage(backgroundImage *foundation.
 
 func (o *DOMCSSStyleDeclaration) BackgroundPosition() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelBackgroundPosition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -418,7 +446,9 @@ func (o *DOMCSSStyleDeclaration) SetBackgroundPosition(backgroundPosition *found
 
 func (o *DOMCSSStyleDeclaration) BackgroundRepeat() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelBackgroundRepeat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -428,7 +458,9 @@ func (o *DOMCSSStyleDeclaration) SetBackgroundRepeat(backgroundRepeat *foundatio
 
 func (o *DOMCSSStyleDeclaration) Border() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelBorder)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -438,7 +470,9 @@ func (o *DOMCSSStyleDeclaration) SetBorder(border *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) BorderCollapse() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelBorderCollapse)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -448,7 +482,9 @@ func (o *DOMCSSStyleDeclaration) SetBorderCollapse(borderCollapse *foundation.NS
 
 func (o *DOMCSSStyleDeclaration) BorderColor() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelBorderColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -458,7 +494,9 @@ func (o *DOMCSSStyleDeclaration) SetBorderColor(borderColor *foundation.NSString
 
 func (o *DOMCSSStyleDeclaration) BorderSpacing() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelBorderSpacing)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -468,7 +506,9 @@ func (o *DOMCSSStyleDeclaration) SetBorderSpacing(borderSpacing *foundation.NSSt
 
 func (o *DOMCSSStyleDeclaration) BorderStyle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelBorderStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -478,7 +518,9 @@ func (o *DOMCSSStyleDeclaration) SetBorderStyle(borderStyle *foundation.NSString
 
 func (o *DOMCSSStyleDeclaration) BorderTop() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelBorderTop)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -488,7 +530,9 @@ func (o *DOMCSSStyleDeclaration) SetBorderTop(borderTop *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) BorderRight() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelBorderRight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -498,7 +542,9 @@ func (o *DOMCSSStyleDeclaration) SetBorderRight(borderRight *foundation.NSString
 
 func (o *DOMCSSStyleDeclaration) BorderBottom() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelBorderBottom)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -508,7 +554,9 @@ func (o *DOMCSSStyleDeclaration) SetBorderBottom(borderBottom *foundation.NSStri
 
 func (o *DOMCSSStyleDeclaration) BorderLeft() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelBorderLeft)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -518,7 +566,9 @@ func (o *DOMCSSStyleDeclaration) SetBorderLeft(borderLeft *foundation.NSString) 
 
 func (o *DOMCSSStyleDeclaration) BorderTopColor() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelBorderTopColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -528,7 +578,9 @@ func (o *DOMCSSStyleDeclaration) SetBorderTopColor(borderTopColor *foundation.NS
 
 func (o *DOMCSSStyleDeclaration) BorderRightColor() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelBorderRightColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -538,7 +590,9 @@ func (o *DOMCSSStyleDeclaration) SetBorderRightColor(borderRightColor *foundatio
 
 func (o *DOMCSSStyleDeclaration) BorderBottomColor() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelBorderBottomColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -548,7 +602,9 @@ func (o *DOMCSSStyleDeclaration) SetBorderBottomColor(borderBottomColor *foundat
 
 func (o *DOMCSSStyleDeclaration) BorderLeftColor() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelBorderLeftColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -558,7 +614,9 @@ func (o *DOMCSSStyleDeclaration) SetBorderLeftColor(borderLeftColor *foundation.
 
 func (o *DOMCSSStyleDeclaration) BorderTopStyle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelBorderTopStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -568,7 +626,9 @@ func (o *DOMCSSStyleDeclaration) SetBorderTopStyle(borderTopStyle *foundation.NS
 
 func (o *DOMCSSStyleDeclaration) BorderRightStyle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelBorderRightStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -578,7 +638,9 @@ func (o *DOMCSSStyleDeclaration) SetBorderRightStyle(borderRightStyle *foundatio
 
 func (o *DOMCSSStyleDeclaration) BorderBottomStyle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelBorderBottomStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -588,7 +650,9 @@ func (o *DOMCSSStyleDeclaration) SetBorderBottomStyle(borderBottomStyle *foundat
 
 func (o *DOMCSSStyleDeclaration) BorderLeftStyle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelBorderLeftStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -598,7 +662,9 @@ func (o *DOMCSSStyleDeclaration) SetBorderLeftStyle(borderLeftStyle *foundation.
 
 func (o *DOMCSSStyleDeclaration) BorderTopWidth() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelBorderTopWidth)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -608,7 +674,9 @@ func (o *DOMCSSStyleDeclaration) SetBorderTopWidth(borderTopWidth *foundation.NS
 
 func (o *DOMCSSStyleDeclaration) BorderRightWidth() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelBorderRightWidth)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -618,7 +686,9 @@ func (o *DOMCSSStyleDeclaration) SetBorderRightWidth(borderRightWidth *foundatio
 
 func (o *DOMCSSStyleDeclaration) BorderBottomWidth() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelBorderBottomWidth)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -628,7 +698,9 @@ func (o *DOMCSSStyleDeclaration) SetBorderBottomWidth(borderBottomWidth *foundat
 
 func (o *DOMCSSStyleDeclaration) BorderLeftWidth() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelBorderLeftWidth)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -638,7 +710,9 @@ func (o *DOMCSSStyleDeclaration) SetBorderLeftWidth(borderLeftWidth *foundation.
 
 func (o *DOMCSSStyleDeclaration) BorderWidth() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelBorderWidth)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -648,7 +722,9 @@ func (o *DOMCSSStyleDeclaration) SetBorderWidth(borderWidth *foundation.NSString
 
 func (o *DOMCSSStyleDeclaration) Bottom() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelBottom)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -658,7 +734,9 @@ func (o *DOMCSSStyleDeclaration) SetBottom(bottom *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) CaptionSide() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelCaptionSide)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -668,7 +746,9 @@ func (o *DOMCSSStyleDeclaration) SetCaptionSide(captionSide *foundation.NSString
 
 func (o *DOMCSSStyleDeclaration) Clear() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelClear)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -678,7 +758,9 @@ func (o *DOMCSSStyleDeclaration) SetClear(clear *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) Clip() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelClip)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -688,7 +770,9 @@ func (o *DOMCSSStyleDeclaration) SetClip(clip *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) Color() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -698,7 +782,9 @@ func (o *DOMCSSStyleDeclaration) SetColor(color *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) Content() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelContent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -708,7 +794,9 @@ func (o *DOMCSSStyleDeclaration) SetContent(content *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) CounterIncrement() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelCounterIncrement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -718,7 +806,9 @@ func (o *DOMCSSStyleDeclaration) SetCounterIncrement(counterIncrement *foundatio
 
 func (o *DOMCSSStyleDeclaration) CounterReset() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelCounterReset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -728,7 +818,9 @@ func (o *DOMCSSStyleDeclaration) SetCounterReset(counterReset *foundation.NSStri
 
 func (o *DOMCSSStyleDeclaration) Cue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelCue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -738,7 +830,9 @@ func (o *DOMCSSStyleDeclaration) SetCue(cue *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) CueAfter() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelCueAfter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -748,7 +842,9 @@ func (o *DOMCSSStyleDeclaration) SetCueAfter(cueAfter *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) CueBefore() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelCueBefore)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -758,7 +854,9 @@ func (o *DOMCSSStyleDeclaration) SetCueBefore(cueBefore *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) Cursor() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelCursor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -768,7 +866,9 @@ func (o *DOMCSSStyleDeclaration) SetCursor(cursor *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) Direction() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelDirection)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -778,7 +878,9 @@ func (o *DOMCSSStyleDeclaration) SetDirection(direction *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) Display() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelDisplay)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -788,7 +890,9 @@ func (o *DOMCSSStyleDeclaration) SetDisplay(display *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) Elevation() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelElevation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -798,7 +902,9 @@ func (o *DOMCSSStyleDeclaration) SetElevation(elevation *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) EmptyCells() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelEmptyCells)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -808,7 +914,9 @@ func (o *DOMCSSStyleDeclaration) SetEmptyCells(emptyCells *foundation.NSString) 
 
 func (o *DOMCSSStyleDeclaration) CssFloat() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelCssFloat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -818,7 +926,9 @@ func (o *DOMCSSStyleDeclaration) SetCssFloat(cssFloat *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) Font() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelFont)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -828,7 +938,9 @@ func (o *DOMCSSStyleDeclaration) SetFont(font *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) FontFamily() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelFontFamily)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -838,7 +950,9 @@ func (o *DOMCSSStyleDeclaration) SetFontFamily(fontFamily *foundation.NSString) 
 
 func (o *DOMCSSStyleDeclaration) FontSize() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelFontSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -848,7 +962,9 @@ func (o *DOMCSSStyleDeclaration) SetFontSize(fontSize *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) FontSizeAdjust() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelFontSizeAdjust)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -858,7 +974,9 @@ func (o *DOMCSSStyleDeclaration) SetFontSizeAdjust(fontSizeAdjust *foundation.NS
 
 func (o *DOMCSSStyleDeclaration) FontStretch() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelFontStretch)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -868,7 +986,9 @@ func (o *DOMCSSStyleDeclaration) SetFontStretch(fontStretch *foundation.NSString
 
 func (o *DOMCSSStyleDeclaration) FontStyle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelFontStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -878,7 +998,9 @@ func (o *DOMCSSStyleDeclaration) SetFontStyle(fontStyle *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) FontVariant() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelFontVariant)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -888,7 +1010,9 @@ func (o *DOMCSSStyleDeclaration) SetFontVariant(fontVariant *foundation.NSString
 
 func (o *DOMCSSStyleDeclaration) FontWeight() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelFontWeight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -898,7 +1022,9 @@ func (o *DOMCSSStyleDeclaration) SetFontWeight(fontWeight *foundation.NSString) 
 
 func (o *DOMCSSStyleDeclaration) Height() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelHeight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -908,7 +1034,9 @@ func (o *DOMCSSStyleDeclaration) SetHeight(height *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) Left() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelLeft)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -918,7 +1046,9 @@ func (o *DOMCSSStyleDeclaration) SetLeft(left *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) LetterSpacing() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelLetterSpacing)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -928,7 +1058,9 @@ func (o *DOMCSSStyleDeclaration) SetLetterSpacing(letterSpacing *foundation.NSSt
 
 func (o *DOMCSSStyleDeclaration) LineHeight() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelLineHeight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -938,7 +1070,9 @@ func (o *DOMCSSStyleDeclaration) SetLineHeight(lineHeight *foundation.NSString) 
 
 func (o *DOMCSSStyleDeclaration) ListStyle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelListStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -948,7 +1082,9 @@ func (o *DOMCSSStyleDeclaration) SetListStyle(listStyle *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) ListStyleImage() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelListStyleImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -958,7 +1094,9 @@ func (o *DOMCSSStyleDeclaration) SetListStyleImage(listStyleImage *foundation.NS
 
 func (o *DOMCSSStyleDeclaration) ListStylePosition() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelListStylePosition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -968,7 +1106,9 @@ func (o *DOMCSSStyleDeclaration) SetListStylePosition(listStylePosition *foundat
 
 func (o *DOMCSSStyleDeclaration) ListStyleType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelListStyleType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -978,7 +1118,9 @@ func (o *DOMCSSStyleDeclaration) SetListStyleType(listStyleType *foundation.NSSt
 
 func (o *DOMCSSStyleDeclaration) Margin() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelMargin)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -988,7 +1130,9 @@ func (o *DOMCSSStyleDeclaration) SetMargin(margin *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) MarginTop() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelMarginTop)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -998,7 +1142,9 @@ func (o *DOMCSSStyleDeclaration) SetMarginTop(marginTop *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) MarginRight() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelMarginRight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1008,7 +1154,9 @@ func (o *DOMCSSStyleDeclaration) SetMarginRight(marginRight *foundation.NSString
 
 func (o *DOMCSSStyleDeclaration) MarginBottom() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelMarginBottom)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1018,7 +1166,9 @@ func (o *DOMCSSStyleDeclaration) SetMarginBottom(marginBottom *foundation.NSStri
 
 func (o *DOMCSSStyleDeclaration) MarginLeft() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelMarginLeft)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1028,7 +1178,9 @@ func (o *DOMCSSStyleDeclaration) SetMarginLeft(marginLeft *foundation.NSString) 
 
 func (o *DOMCSSStyleDeclaration) MarkerOffset() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelMarkerOffset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1038,7 +1190,9 @@ func (o *DOMCSSStyleDeclaration) SetMarkerOffset(markerOffset *foundation.NSStri
 
 func (o *DOMCSSStyleDeclaration) Marks() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelMarks)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1048,7 +1202,9 @@ func (o *DOMCSSStyleDeclaration) SetMarks(marks *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) MaxHeight() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelMaxHeight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1058,7 +1214,9 @@ func (o *DOMCSSStyleDeclaration) SetMaxHeight(maxHeight *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) MaxWidth() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelMaxWidth)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1068,7 +1226,9 @@ func (o *DOMCSSStyleDeclaration) SetMaxWidth(maxWidth *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) MinHeight() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelMinHeight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1078,7 +1238,9 @@ func (o *DOMCSSStyleDeclaration) SetMinHeight(minHeight *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) MinWidth() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelMinWidth)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1088,7 +1250,9 @@ func (o *DOMCSSStyleDeclaration) SetMinWidth(minWidth *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) Orphans() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelOrphans)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1098,7 +1262,9 @@ func (o *DOMCSSStyleDeclaration) SetOrphans(orphans *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) Outline() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelOutline)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1108,7 +1274,9 @@ func (o *DOMCSSStyleDeclaration) SetOutline(outline *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) OutlineColor() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelOutlineColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1118,7 +1286,9 @@ func (o *DOMCSSStyleDeclaration) SetOutlineColor(outlineColor *foundation.NSStri
 
 func (o *DOMCSSStyleDeclaration) OutlineStyle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelOutlineStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1128,7 +1298,9 @@ func (o *DOMCSSStyleDeclaration) SetOutlineStyle(outlineStyle *foundation.NSStri
 
 func (o *DOMCSSStyleDeclaration) OutlineWidth() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelOutlineWidth)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1138,7 +1310,9 @@ func (o *DOMCSSStyleDeclaration) SetOutlineWidth(outlineWidth *foundation.NSStri
 
 func (o *DOMCSSStyleDeclaration) Overflow() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelOverflow)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1148,7 +1322,9 @@ func (o *DOMCSSStyleDeclaration) SetOverflow(overflow *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) Padding() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelPadding)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1158,7 +1334,9 @@ func (o *DOMCSSStyleDeclaration) SetPadding(padding *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) PaddingTop() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelPaddingTop)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1168,7 +1346,9 @@ func (o *DOMCSSStyleDeclaration) SetPaddingTop(paddingTop *foundation.NSString) 
 
 func (o *DOMCSSStyleDeclaration) PaddingRight() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelPaddingRight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1178,7 +1358,9 @@ func (o *DOMCSSStyleDeclaration) SetPaddingRight(paddingRight *foundation.NSStri
 
 func (o *DOMCSSStyleDeclaration) PaddingBottom() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelPaddingBottom)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1188,7 +1370,9 @@ func (o *DOMCSSStyleDeclaration) SetPaddingBottom(paddingBottom *foundation.NSSt
 
 func (o *DOMCSSStyleDeclaration) PaddingLeft() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelPaddingLeft)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1198,7 +1382,9 @@ func (o *DOMCSSStyleDeclaration) SetPaddingLeft(paddingLeft *foundation.NSString
 
 func (o *DOMCSSStyleDeclaration) Page() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelPage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1208,7 +1394,9 @@ func (o *DOMCSSStyleDeclaration) SetPage(page *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) PageBreakAfter() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelPageBreakAfter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1218,7 +1406,9 @@ func (o *DOMCSSStyleDeclaration) SetPageBreakAfter(pageBreakAfter *foundation.NS
 
 func (o *DOMCSSStyleDeclaration) PageBreakBefore() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelPageBreakBefore)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1228,7 +1418,9 @@ func (o *DOMCSSStyleDeclaration) SetPageBreakBefore(pageBreakBefore *foundation.
 
 func (o *DOMCSSStyleDeclaration) PageBreakInside() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelPageBreakInside)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1238,7 +1430,9 @@ func (o *DOMCSSStyleDeclaration) SetPageBreakInside(pageBreakInside *foundation.
 
 func (o *DOMCSSStyleDeclaration) Pause() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelPause)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1248,7 +1442,9 @@ func (o *DOMCSSStyleDeclaration) SetPause(pause *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) PauseAfter() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelPauseAfter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1258,7 +1454,9 @@ func (o *DOMCSSStyleDeclaration) SetPauseAfter(pauseAfter *foundation.NSString) 
 
 func (o *DOMCSSStyleDeclaration) PauseBefore() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelPauseBefore)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1268,7 +1466,9 @@ func (o *DOMCSSStyleDeclaration) SetPauseBefore(pauseBefore *foundation.NSString
 
 func (o *DOMCSSStyleDeclaration) Pitch() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelPitch)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1278,7 +1478,9 @@ func (o *DOMCSSStyleDeclaration) SetPitch(pitch *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) PitchRange() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelPitchRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1288,7 +1490,9 @@ func (o *DOMCSSStyleDeclaration) SetPitchRange(pitchRange *foundation.NSString) 
 
 func (o *DOMCSSStyleDeclaration) PlayDuring() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelPlayDuring)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1298,7 +1502,9 @@ func (o *DOMCSSStyleDeclaration) SetPlayDuring(playDuring *foundation.NSString) 
 
 func (o *DOMCSSStyleDeclaration) Position() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelPosition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1308,7 +1514,9 @@ func (o *DOMCSSStyleDeclaration) SetPosition(position *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) Quotes() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelQuotes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1318,7 +1526,9 @@ func (o *DOMCSSStyleDeclaration) SetQuotes(quotes *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) Richness() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelRichness)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1328,7 +1538,9 @@ func (o *DOMCSSStyleDeclaration) SetRichness(richness *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) Right() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelRight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1338,7 +1550,9 @@ func (o *DOMCSSStyleDeclaration) SetRight(right *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) Size() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1348,7 +1562,9 @@ func (o *DOMCSSStyleDeclaration) SetSize(size *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) Speak() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelSpeak)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1358,7 +1574,9 @@ func (o *DOMCSSStyleDeclaration) SetSpeak(speak *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) SpeakHeader() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelSpeakHeader)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1368,7 +1586,9 @@ func (o *DOMCSSStyleDeclaration) SetSpeakHeader(speakHeader *foundation.NSString
 
 func (o *DOMCSSStyleDeclaration) SpeakNumeral() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelSpeakNumeral)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1378,7 +1598,9 @@ func (o *DOMCSSStyleDeclaration) SetSpeakNumeral(speakNumeral *foundation.NSStri
 
 func (o *DOMCSSStyleDeclaration) SpeakPunctuation() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelSpeakPunctuation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1388,7 +1610,9 @@ func (o *DOMCSSStyleDeclaration) SetSpeakPunctuation(speakPunctuation *foundatio
 
 func (o *DOMCSSStyleDeclaration) SpeechRate() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelSpeechRate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1398,7 +1622,9 @@ func (o *DOMCSSStyleDeclaration) SetSpeechRate(speechRate *foundation.NSString) 
 
 func (o *DOMCSSStyleDeclaration) Stress() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelStress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1408,7 +1634,9 @@ func (o *DOMCSSStyleDeclaration) SetStress(stress *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) TableLayout() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelTableLayout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1418,7 +1646,9 @@ func (o *DOMCSSStyleDeclaration) SetTableLayout(tableLayout *foundation.NSString
 
 func (o *DOMCSSStyleDeclaration) TextAlign() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelTextAlign)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1428,7 +1658,9 @@ func (o *DOMCSSStyleDeclaration) SetTextAlign(textAlign *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) TextDecoration() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelTextDecoration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1438,7 +1670,9 @@ func (o *DOMCSSStyleDeclaration) SetTextDecoration(textDecoration *foundation.NS
 
 func (o *DOMCSSStyleDeclaration) TextIndent() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelTextIndent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1448,7 +1682,9 @@ func (o *DOMCSSStyleDeclaration) SetTextIndent(textIndent *foundation.NSString) 
 
 func (o *DOMCSSStyleDeclaration) TextShadow() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelTextShadow)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1458,7 +1694,9 @@ func (o *DOMCSSStyleDeclaration) SetTextShadow(textShadow *foundation.NSString) 
 
 func (o *DOMCSSStyleDeclaration) TextTransform() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelTextTransform)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1468,7 +1706,9 @@ func (o *DOMCSSStyleDeclaration) SetTextTransform(textTransform *foundation.NSSt
 
 func (o *DOMCSSStyleDeclaration) Top() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelTop)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1478,7 +1718,9 @@ func (o *DOMCSSStyleDeclaration) SetTop(top *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) UnicodeBidi() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelUnicodeBidi)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1488,7 +1730,9 @@ func (o *DOMCSSStyleDeclaration) SetUnicodeBidi(unicodeBidi *foundation.NSString
 
 func (o *DOMCSSStyleDeclaration) VerticalAlign() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelVerticalAlign)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1498,7 +1742,9 @@ func (o *DOMCSSStyleDeclaration) SetVerticalAlign(verticalAlign *foundation.NSSt
 
 func (o *DOMCSSStyleDeclaration) Visibility() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelVisibility)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1508,7 +1754,9 @@ func (o *DOMCSSStyleDeclaration) SetVisibility(visibility *foundation.NSString) 
 
 func (o *DOMCSSStyleDeclaration) VoiceFamily() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelVoiceFamily)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1518,7 +1766,9 @@ func (o *DOMCSSStyleDeclaration) SetVoiceFamily(voiceFamily *foundation.NSString
 
 func (o *DOMCSSStyleDeclaration) Volume() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelVolume)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1528,7 +1778,9 @@ func (o *DOMCSSStyleDeclaration) SetVolume(volume *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) WhiteSpace() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelWhiteSpace)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1538,7 +1790,9 @@ func (o *DOMCSSStyleDeclaration) SetWhiteSpace(whiteSpace *foundation.NSString) 
 
 func (o *DOMCSSStyleDeclaration) Widows() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelWidows)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1548,7 +1802,9 @@ func (o *DOMCSSStyleDeclaration) SetWidows(widows *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) Width() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelWidth)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1558,7 +1814,9 @@ func (o *DOMCSSStyleDeclaration) SetWidth(width *foundation.NSString) {
 
 func (o *DOMCSSStyleDeclaration) WordSpacing() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelWordSpacing)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1568,11 +1826,12 @@ func (o *DOMCSSStyleDeclaration) SetWordSpacing(wordSpacing *foundation.NSString
 
 func (o *DOMCSSStyleDeclaration) ZIndex() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleDeclarationSelZIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMCSSStyleDeclaration) SetZIndex(zIndex *foundation.NSString) {
 	o.Ptr().Send(_dOMCSSStyleDeclarationSelSetZIndex, zIndex.Ptr())
 }
-

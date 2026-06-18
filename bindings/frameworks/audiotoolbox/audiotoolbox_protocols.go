@@ -20,4 +20,3 @@ type AUMessageChannel interface {
 	CallHostBlock() objc.Block
 	SetCallHostBlock(callHostBlock func(*foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSDictionary[objc.ID, objc.ID])
 }
-

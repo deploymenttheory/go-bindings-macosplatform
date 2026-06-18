@@ -16,28 +16,28 @@ type NSEntityMapping struct {
 }
 
 var (
-	_clsNSEntityMapping = _objcClass("NSEntityMapping")
-	_nSEntityMappingSelName = objc.RegisterName("name")
-	_nSEntityMappingSelSetName = objc.RegisterName("setName:")
-	_nSEntityMappingSelMappingType = objc.RegisterName("mappingType")
-	_nSEntityMappingSelSetMappingType = objc.RegisterName("setMappingType:")
-	_nSEntityMappingSelSourceEntityName = objc.RegisterName("sourceEntityName")
-	_nSEntityMappingSelSetSourceEntityName = objc.RegisterName("setSourceEntityName:")
-	_nSEntityMappingSelSourceEntityVersionHash = objc.RegisterName("sourceEntityVersionHash")
-	_nSEntityMappingSelSetSourceEntityVersionHash = objc.RegisterName("setSourceEntityVersionHash:")
-	_nSEntityMappingSelDestinationEntityName = objc.RegisterName("destinationEntityName")
-	_nSEntityMappingSelSetDestinationEntityName = objc.RegisterName("setDestinationEntityName:")
-	_nSEntityMappingSelDestinationEntityVersionHash = objc.RegisterName("destinationEntityVersionHash")
-	_nSEntityMappingSelSetDestinationEntityVersionHash = objc.RegisterName("setDestinationEntityVersionHash:")
-	_nSEntityMappingSelAttributeMappings = objc.RegisterName("attributeMappings")
-	_nSEntityMappingSelSetAttributeMappings = objc.RegisterName("setAttributeMappings:")
-	_nSEntityMappingSelRelationshipMappings = objc.RegisterName("relationshipMappings")
-	_nSEntityMappingSelSetRelationshipMappings = objc.RegisterName("setRelationshipMappings:")
-	_nSEntityMappingSelSourceExpression = objc.RegisterName("sourceExpression")
-	_nSEntityMappingSelSetSourceExpression = objc.RegisterName("setSourceExpression:")
-	_nSEntityMappingSelUserInfo = objc.RegisterName("userInfo")
-	_nSEntityMappingSelSetUserInfo = objc.RegisterName("setUserInfo:")
-	_nSEntityMappingSelEntityMigrationPolicyClassName = objc.RegisterName("entityMigrationPolicyClassName")
+	_clsNSEntityMapping                                  = _objcClass("NSEntityMapping")
+	_nSEntityMappingSelName                              = objc.RegisterName("name")
+	_nSEntityMappingSelSetName                           = objc.RegisterName("setName:")
+	_nSEntityMappingSelMappingType                       = objc.RegisterName("mappingType")
+	_nSEntityMappingSelSetMappingType                    = objc.RegisterName("setMappingType:")
+	_nSEntityMappingSelSourceEntityName                  = objc.RegisterName("sourceEntityName")
+	_nSEntityMappingSelSetSourceEntityName               = objc.RegisterName("setSourceEntityName:")
+	_nSEntityMappingSelSourceEntityVersionHash           = objc.RegisterName("sourceEntityVersionHash")
+	_nSEntityMappingSelSetSourceEntityVersionHash        = objc.RegisterName("setSourceEntityVersionHash:")
+	_nSEntityMappingSelDestinationEntityName             = objc.RegisterName("destinationEntityName")
+	_nSEntityMappingSelSetDestinationEntityName          = objc.RegisterName("setDestinationEntityName:")
+	_nSEntityMappingSelDestinationEntityVersionHash      = objc.RegisterName("destinationEntityVersionHash")
+	_nSEntityMappingSelSetDestinationEntityVersionHash   = objc.RegisterName("setDestinationEntityVersionHash:")
+	_nSEntityMappingSelAttributeMappings                 = objc.RegisterName("attributeMappings")
+	_nSEntityMappingSelSetAttributeMappings              = objc.RegisterName("setAttributeMappings:")
+	_nSEntityMappingSelRelationshipMappings              = objc.RegisterName("relationshipMappings")
+	_nSEntityMappingSelSetRelationshipMappings           = objc.RegisterName("setRelationshipMappings:")
+	_nSEntityMappingSelSourceExpression                  = objc.RegisterName("sourceExpression")
+	_nSEntityMappingSelSetSourceExpression               = objc.RegisterName("setSourceExpression:")
+	_nSEntityMappingSelUserInfo                          = objc.RegisterName("userInfo")
+	_nSEntityMappingSelSetUserInfo                       = objc.RegisterName("setUserInfo:")
+	_nSEntityMappingSelEntityMigrationPolicyClassName    = objc.RegisterName("entityMigrationPolicyClassName")
 	_nSEntityMappingSelSetEntityMigrationPolicyClassName = objc.RegisterName("setEntityMigrationPolicyClassName:")
 )
 
@@ -53,7 +53,9 @@ func NSEntityMappingFromID(id objc.ID) *NSEntityMapping {
 
 func (o *NSEntityMapping) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEntityMappingSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -72,7 +74,9 @@ func (o *NSEntityMapping) SetMappingType(mappingType NSEntityMappingType) {
 
 func (o *NSEntityMapping) SourceEntityName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEntityMappingSelSourceEntityName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -82,7 +86,9 @@ func (o *NSEntityMapping) SetSourceEntityName(sourceEntityName *foundation.NSStr
 
 func (o *NSEntityMapping) SourceEntityVersionHash() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEntityMappingSelSourceEntityVersionHash)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -92,7 +98,9 @@ func (o *NSEntityMapping) SetSourceEntityVersionHash(sourceEntityVersionHash *fo
 
 func (o *NSEntityMapping) DestinationEntityName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEntityMappingSelDestinationEntityName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -102,7 +110,9 @@ func (o *NSEntityMapping) SetDestinationEntityName(destinationEntityName *founda
 
 func (o *NSEntityMapping) DestinationEntityVersionHash() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEntityMappingSelDestinationEntityVersionHash)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -112,7 +122,9 @@ func (o *NSEntityMapping) SetDestinationEntityVersionHash(destinationEntityVersi
 
 func (o *NSEntityMapping) AttributeMappings() *foundation.NSArray[*NSPropertyMapping] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEntityMappingSelAttributeMappings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSPropertyMapping](_ret)
 }
 
@@ -122,7 +134,9 @@ func (o *NSEntityMapping) SetAttributeMappings(attributeMappings *foundation.NSA
 
 func (o *NSEntityMapping) RelationshipMappings() *foundation.NSArray[*NSPropertyMapping] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEntityMappingSelRelationshipMappings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSPropertyMapping](_ret)
 }
 
@@ -132,7 +146,9 @@ func (o *NSEntityMapping) SetRelationshipMappings(relationshipMappings *foundati
 
 func (o *NSEntityMapping) SourceExpression() *foundation.NSExpression {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEntityMappingSelSourceExpression)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSExpressionFromID(_ret)
 }
 
@@ -151,11 +167,12 @@ func (o *NSEntityMapping) SetUserInfo(userInfo *foundation.NSDictionary[objc.ID,
 
 func (o *NSEntityMapping) EntityMigrationPolicyClassName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEntityMappingSelEntityMigrationPolicyClassName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSEntityMapping) SetEntityMigrationPolicyClassName(entityMigrationPolicyClassName *foundation.NSString) {
 	o.Ptr().Send(_nSEntityMappingSelSetEntityMigrationPolicyClassName, entityMigrationPolicyClassName.Ptr())
 }
-

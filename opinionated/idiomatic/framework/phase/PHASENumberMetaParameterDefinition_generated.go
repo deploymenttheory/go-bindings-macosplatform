@@ -16,7 +16,9 @@ type NumberMetaParameterDefinition struct {
 }
 
 // Unwrap returns the underlying [raw.PHASENumberMetaParameterDefinition].
-func (x *NumberMetaParameterDefinition) Unwrap() *raw.PHASENumberMetaParameterDefinition { return x.inner }
+func (x *NumberMetaParameterDefinition) Unwrap() *raw.PHASENumberMetaParameterDefinition {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -68,11 +70,17 @@ func (x *NumberMetaParameterDefinition) Maximum() float64 {
 	return x.inner.Maximum()
 }
 
-func (x *NumberMetaParameterDefinition) asNumberMetaParameterDefinition() *raw.PHASENumberMetaParameterDefinition { return x.inner }
+func (x *NumberMetaParameterDefinition) asNumberMetaParameterDefinition() *raw.PHASENumberMetaParameterDefinition {
+	return x.inner
+}
 
-func (x *NumberMetaParameterDefinition) asMetaParameterDefinition() *raw.PHASEMetaParameterDefinition { return &x.inner.PHASEMetaParameterDefinition }
+func (x *NumberMetaParameterDefinition) asMetaParameterDefinition() *raw.PHASEMetaParameterDefinition {
+	return &x.inner.PHASEMetaParameterDefinition
+}
 
-func (x *NumberMetaParameterDefinition) asDefinition() *raw.PHASEDefinition { return &x.inner.PHASEMetaParameterDefinition.PHASEDefinition }
+func (x *NumberMetaParameterDefinition) asDefinition() *raw.PHASEDefinition {
+	return &x.inner.PHASEMetaParameterDefinition.PHASEDefinition
+}
 
 // NumberMetaParameterDefinitionable is the interface implemented by [NumberMetaParameterDefinition], for mocking and DI.
 type NumberMetaParameterDefinitionable interface {
@@ -82,4 +90,3 @@ type NumberMetaParameterDefinitionable interface {
 }
 
 var _ NumberMetaParameterDefinitionable = (*NumberMetaParameterDefinition)(nil)
-

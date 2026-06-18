@@ -57,4 +57,3 @@ type PathURLResourceable interface {
 }
 
 var _ PathURLResourceable = (*PathURLResource)(nil)
-

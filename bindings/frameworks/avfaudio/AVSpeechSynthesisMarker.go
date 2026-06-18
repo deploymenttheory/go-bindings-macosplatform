@@ -16,23 +16,23 @@ type AVSpeechSynthesisMarker struct {
 }
 
 var (
-	_clsAVSpeechSynthesisMarker = _objcClass("AVSpeechSynthesisMarker")
+	_clsAVSpeechSynthesisMarker                                                 = _objcClass("AVSpeechSynthesisMarker")
 	_aVSpeechSynthesisMarkerSelInitWithMarkerTypeForTextRangeAtByteSampleOffset = objc.RegisterName("initWithMarkerType:forTextRange:atByteSampleOffset:")
-	_aVSpeechSynthesisMarkerSelInitWithWordRangeAtByteSampleOffset = objc.RegisterName("initWithWordRange:atByteSampleOffset:")
-	_aVSpeechSynthesisMarkerSelInitWithSentenceRangeAtByteSampleOffset = objc.RegisterName("initWithSentenceRange:atByteSampleOffset:")
-	_aVSpeechSynthesisMarkerSelInitWithParagraphRangeAtByteSampleOffset = objc.RegisterName("initWithParagraphRange:atByteSampleOffset:")
-	_aVSpeechSynthesisMarkerSelInitWithPhonemeStringAtByteSampleOffset = objc.RegisterName("initWithPhonemeString:atByteSampleOffset:")
-	_aVSpeechSynthesisMarkerSelInitWithBookmarkNameAtByteSampleOffset = objc.RegisterName("initWithBookmarkName:atByteSampleOffset:")
-	_aVSpeechSynthesisMarkerSelMark = objc.RegisterName("mark")
-	_aVSpeechSynthesisMarkerSelSetMark = objc.RegisterName("setMark:")
-	_aVSpeechSynthesisMarkerSelByteSampleOffset = objc.RegisterName("byteSampleOffset")
-	_aVSpeechSynthesisMarkerSelSetByteSampleOffset = objc.RegisterName("setByteSampleOffset:")
-	_aVSpeechSynthesisMarkerSelTextRange = objc.RegisterName("textRange")
-	_aVSpeechSynthesisMarkerSelSetTextRange = objc.RegisterName("setTextRange:")
-	_aVSpeechSynthesisMarkerSelBookmarkName = objc.RegisterName("bookmarkName")
-	_aVSpeechSynthesisMarkerSelSetBookmarkName = objc.RegisterName("setBookmarkName:")
-	_aVSpeechSynthesisMarkerSelPhoneme = objc.RegisterName("phoneme")
-	_aVSpeechSynthesisMarkerSelSetPhoneme = objc.RegisterName("setPhoneme:")
+	_aVSpeechSynthesisMarkerSelInitWithWordRangeAtByteSampleOffset              = objc.RegisterName("initWithWordRange:atByteSampleOffset:")
+	_aVSpeechSynthesisMarkerSelInitWithSentenceRangeAtByteSampleOffset          = objc.RegisterName("initWithSentenceRange:atByteSampleOffset:")
+	_aVSpeechSynthesisMarkerSelInitWithParagraphRangeAtByteSampleOffset         = objc.RegisterName("initWithParagraphRange:atByteSampleOffset:")
+	_aVSpeechSynthesisMarkerSelInitWithPhonemeStringAtByteSampleOffset          = objc.RegisterName("initWithPhonemeString:atByteSampleOffset:")
+	_aVSpeechSynthesisMarkerSelInitWithBookmarkNameAtByteSampleOffset           = objc.RegisterName("initWithBookmarkName:atByteSampleOffset:")
+	_aVSpeechSynthesisMarkerSelMark                                             = objc.RegisterName("mark")
+	_aVSpeechSynthesisMarkerSelSetMark                                          = objc.RegisterName("setMark:")
+	_aVSpeechSynthesisMarkerSelByteSampleOffset                                 = objc.RegisterName("byteSampleOffset")
+	_aVSpeechSynthesisMarkerSelSetByteSampleOffset                              = objc.RegisterName("setByteSampleOffset:")
+	_aVSpeechSynthesisMarkerSelTextRange                                        = objc.RegisterName("textRange")
+	_aVSpeechSynthesisMarkerSelSetTextRange                                     = objc.RegisterName("setTextRange:")
+	_aVSpeechSynthesisMarkerSelBookmarkName                                     = objc.RegisterName("bookmarkName")
+	_aVSpeechSynthesisMarkerSelSetBookmarkName                                  = objc.RegisterName("setBookmarkName:")
+	_aVSpeechSynthesisMarkerSelPhoneme                                          = objc.RegisterName("phoneme")
+	_aVSpeechSynthesisMarkerSelSetPhoneme                                       = objc.RegisterName("setPhoneme:")
 )
 
 func AVSpeechSynthesisMarkerFromID(id objc.ID) *AVSpeechSynthesisMarker {
@@ -47,37 +47,49 @@ func AVSpeechSynthesisMarkerFromID(id objc.ID) *AVSpeechSynthesisMarker {
 
 func (o *AVSpeechSynthesisMarker) InitWithMarkerTypeForTextRangeAtByteSampleOffset(type_ AVSpeechSynthesisMarkerMark, range_ foundation.NSRange, byteSampleOffset uint) *AVSpeechSynthesisMarker {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechSynthesisMarkerSelInitWithMarkerTypeForTextRangeAtByteSampleOffset, type_, range_, byteSampleOffset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVSpeechSynthesisMarkerFromID(_ret)
 }
 
 func (o *AVSpeechSynthesisMarker) InitWithWordRangeAtByteSampleOffset(range_ foundation.NSRange, byteSampleOffset int) *AVSpeechSynthesisMarker {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechSynthesisMarkerSelInitWithWordRangeAtByteSampleOffset, range_, byteSampleOffset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVSpeechSynthesisMarkerFromID(_ret)
 }
 
 func (o *AVSpeechSynthesisMarker) InitWithSentenceRangeAtByteSampleOffset(range_ foundation.NSRange, byteSampleOffset int) *AVSpeechSynthesisMarker {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechSynthesisMarkerSelInitWithSentenceRangeAtByteSampleOffset, range_, byteSampleOffset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVSpeechSynthesisMarkerFromID(_ret)
 }
 
 func (o *AVSpeechSynthesisMarker) InitWithParagraphRangeAtByteSampleOffset(range_ foundation.NSRange, byteSampleOffset int) *AVSpeechSynthesisMarker {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechSynthesisMarkerSelInitWithParagraphRangeAtByteSampleOffset, range_, byteSampleOffset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVSpeechSynthesisMarkerFromID(_ret)
 }
 
 func (o *AVSpeechSynthesisMarker) InitWithPhonemeStringAtByteSampleOffset(phoneme *foundation.NSString, byteSampleOffset int) *AVSpeechSynthesisMarker {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechSynthesisMarkerSelInitWithPhonemeStringAtByteSampleOffset, phoneme.Ptr(), byteSampleOffset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVSpeechSynthesisMarkerFromID(_ret)
 }
 
 func (o *AVSpeechSynthesisMarker) InitWithBookmarkNameAtByteSampleOffset(mark *foundation.NSString, byteSampleOffset int) *AVSpeechSynthesisMarker {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechSynthesisMarkerSelInitWithBookmarkNameAtByteSampleOffset, mark.Ptr(), byteSampleOffset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVSpeechSynthesisMarkerFromID(_ret)
 }
 
@@ -112,7 +124,9 @@ func (o *AVSpeechSynthesisMarker) SetTextRange(textRange foundation.NSRange) {
 
 func (o *AVSpeechSynthesisMarker) BookmarkName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechSynthesisMarkerSelBookmarkName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -122,11 +136,12 @@ func (o *AVSpeechSynthesisMarker) SetBookmarkName(bookmarkName *foundation.NSStr
 
 func (o *AVSpeechSynthesisMarker) Phoneme() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechSynthesisMarkerSelPhoneme)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *AVSpeechSynthesisMarker) SetPhoneme(phoneme *foundation.NSString) {
 	o.Ptr().Send(_aVSpeechSynthesisMarkerSelSetPhoneme, phoneme.Ptr())
 }
-

@@ -95,4 +95,3 @@ type MutableCharacterSetable interface {
 }
 
 var _ MutableCharacterSetable = (*MutableCharacterSet)(nil)
-

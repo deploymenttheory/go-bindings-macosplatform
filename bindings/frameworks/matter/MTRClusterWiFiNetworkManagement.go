@@ -18,17 +18,17 @@ type MTRClusterWiFiNetworkManagement struct {
 }
 
 var (
-	_clsMTRClusterWiFiNetworkManagement = _objcClass("MTRClusterWiFiNetworkManagement")
+	_clsMTRClusterWiFiNetworkManagement                                                                                = _objcClass("MTRClusterWiFiNetworkManagement")
 	_mTRClusterWiFiNetworkManagementSelNetworkPassphraseRequestWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("networkPassphraseRequestWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterWiFiNetworkManagementSelNetworkPassphraseRequestWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("networkPassphraseRequestWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterWiFiNetworkManagementSelReadAttributeSSIDWithParams = objc.RegisterName("readAttributeSSIDWithParams:")
-	_mTRClusterWiFiNetworkManagementSelReadAttributePassphraseSurrogateWithParams = objc.RegisterName("readAttributePassphraseSurrogateWithParams:")
-	_mTRClusterWiFiNetworkManagementSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterWiFiNetworkManagementSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterWiFiNetworkManagementSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterWiFiNetworkManagementSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterWiFiNetworkManagementSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterWiFiNetworkManagementSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterWiFiNetworkManagementSelNetworkPassphraseRequestWithExpectedValuesExpectedValueIntervalCompletion       = objc.RegisterName("networkPassphraseRequestWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterWiFiNetworkManagementSelReadAttributeSSIDWithParams                                                     = objc.RegisterName("readAttributeSSIDWithParams:")
+	_mTRClusterWiFiNetworkManagementSelReadAttributePassphraseSurrogateWithParams                                      = objc.RegisterName("readAttributePassphraseSurrogateWithParams:")
+	_mTRClusterWiFiNetworkManagementSelReadAttributeGeneratedCommandListWithParams                                     = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterWiFiNetworkManagementSelReadAttributeAcceptedCommandListWithParams                                      = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterWiFiNetworkManagementSelReadAttributeAttributeListWithParams                                            = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterWiFiNetworkManagementSelReadAttributeFeatureMapWithParams                                               = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterWiFiNetworkManagementSelReadAttributeClusterRevisionWithParams                                          = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterWiFiNetworkManagementSelInitWithDeviceEndpointIDQueue                                                   = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterWiFiNetworkManagementFromID(id objc.ID) *MTRClusterWiFiNetworkManagement {
@@ -107,7 +107,8 @@ func (o *MTRClusterWiFiNetworkManagement) ReadAttributeClusterRevisionWithParams
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterWiFiNetworkManagement) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterWiFiNetworkManagement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterWiFiNetworkManagementSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterWiFiNetworkManagementFromID(_ret)
 }
-

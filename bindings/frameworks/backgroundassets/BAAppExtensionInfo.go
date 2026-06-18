@@ -16,8 +16,8 @@ type BAAppExtensionInfo struct {
 }
 
 var (
-	_clsBAAppExtensionInfo = _objcClass("BAAppExtensionInfo")
-	_bAAppExtensionInfoSelRestrictedDownloadSizeRemaining = objc.RegisterName("restrictedDownloadSizeRemaining")
+	_clsBAAppExtensionInfo                                         = _objcClass("BAAppExtensionInfo")
+	_bAAppExtensionInfoSelRestrictedDownloadSizeRemaining          = objc.RegisterName("restrictedDownloadSizeRemaining")
 	_bAAppExtensionInfoSelRestrictedEssentialDownloadSizeRemaining = objc.RegisterName("restrictedEssentialDownloadSizeRemaining")
 )
 
@@ -34,14 +34,17 @@ func BAAppExtensionInfoFromID(id objc.ID) *BAAppExtensionInfo {
 // @brief The number of bytes remaining that can be scheduled if the total download size is restricted. @discussion When a download is restricted, your extension can only schedule up to its `BADownloadAllowance` defined in your app's `Info.plist`. This result tells you the number of bytes remaining that can be scheduled before the application is launched. Once the application is launched, this restriction is removed. @result The result is `nil` if downloads are not restricted. It returns a valid number with the remaining available download size otherwise.
 func (o *BAAppExtensionInfo) RestrictedDownloadSizeRemaining() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _bAAppExtensionInfoSelRestrictedDownloadSizeRemaining)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // @brief The number of bytes remaining that can be scheduled if the total download size of optional assets is restricted. @discussion When a download is restricted, your extension can only schedule up to its `BAEssentialDownloadAllowance` defined in your app's `Info.plist`. This result tells you the number of bytes remaining that can be scheduled before the application is launched. Once the application is launched, this restriction is removed. @result The result is `nil` if downloads are not restricted. It returns a valid number with the remaining available download size otherwise.
 func (o *BAAppExtensionInfo) RestrictedEssentialDownloadSizeRemaining() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _bAAppExtensionInfoSelRestrictedEssentialDownloadSizeRemaining)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
-

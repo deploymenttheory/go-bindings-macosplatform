@@ -19,7 +19,9 @@ type MTRBaseClusterCarbonDioxideConcentrationMeasurement struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterCarbonDioxideConcentrationMeasurement].
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) Unwrap() *raw.MTRBaseClusterCarbonDioxideConcentrationMeasurement { return x.inner }
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) Unwrap() *raw.MTRBaseClusterCarbonDioxideConcentrationMeasurement {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -694,9 +696,13 @@ func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttribute
 	}
 }
 
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterCarbonDioxideConcentrationMeasurementable is the interface implemented by [MTRBaseClusterCarbonDioxideConcentrationMeasurement], for mocking and DI.
 type MTRBaseClusterCarbonDioxideConcentrationMeasurementable interface {
@@ -736,4 +742,3 @@ type MTRBaseClusterCarbonDioxideConcentrationMeasurementable interface {
 }
 
 var _ MTRBaseClusterCarbonDioxideConcentrationMeasurementable = (*MTRBaseClusterCarbonDioxideConcentrationMeasurement)(nil)
-

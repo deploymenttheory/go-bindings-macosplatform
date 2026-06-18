@@ -26,4 +26,3 @@ func AXMathExpressionFromID(id objc.ID) *AXMathExpression {
 	purego.Track(o)
 	return o
 }
-

@@ -97,4 +97,3 @@ type CaptionRegionable interface {
 }
 
 var _ CaptionRegionable = (*CaptionRegion)(nil)
-

@@ -392,4 +392,3 @@ type URLSessionable interface {
 }
 
 var _ URLSessionable = (*URLSession)(nil)
-

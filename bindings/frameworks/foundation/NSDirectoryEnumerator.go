@@ -15,13 +15,13 @@ type NSDirectoryEnumerator[ObjectType purego.AnyObject] struct {
 }
 
 var (
-	_clsNSDirectoryEnumerator = _objcClass("NSDirectoryEnumerator")
-	_nSDirectoryEnumeratorSelSkipDescendents = objc.RegisterName("skipDescendents")
-	_nSDirectoryEnumeratorSelSkipDescendants = objc.RegisterName("skipDescendants")
-	_nSDirectoryEnumeratorSelFileAttributes = objc.RegisterName("fileAttributes")
-	_nSDirectoryEnumeratorSelDirectoryAttributes = objc.RegisterName("directoryAttributes")
+	_clsNSDirectoryEnumerator                                = _objcClass("NSDirectoryEnumerator")
+	_nSDirectoryEnumeratorSelSkipDescendents                 = objc.RegisterName("skipDescendents")
+	_nSDirectoryEnumeratorSelSkipDescendants                 = objc.RegisterName("skipDescendants")
+	_nSDirectoryEnumeratorSelFileAttributes                  = objc.RegisterName("fileAttributes")
+	_nSDirectoryEnumeratorSelDirectoryAttributes             = objc.RegisterName("directoryAttributes")
 	_nSDirectoryEnumeratorSelIsEnumeratingDirectoryPostOrder = objc.RegisterName("isEnumeratingDirectoryPostOrder")
-	_nSDirectoryEnumeratorSelLevel = objc.RegisterName("level")
+	_nSDirectoryEnumeratorSelLevel                           = objc.RegisterName("level")
 )
 
 func NSDirectoryEnumeratorFromID[ObjectType purego.AnyObject](id objc.ID) *NSDirectoryEnumerator[ObjectType] {
@@ -61,4 +61,3 @@ func (o *NSDirectoryEnumerator[ObjectType]) Level() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSDirectoryEnumeratorSelLevel)
 	return _ret
 }
-

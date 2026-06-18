@@ -92,4 +92,3 @@ type Downloadable interface {
 }
 
 var _ Downloadable = (*Download)(nil)
-

@@ -73,7 +73,9 @@ func (x *CNNDilatedPoolingMaxNode) DilationRateY() uint {
 	return x.inner.DilationRateY()
 }
 
-func (x *CNNDilatedPoolingMaxNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+func (x *CNNDilatedPoolingMaxNode) asNNFilterNode() *raw.MPSNNFilterNode {
+	return &x.inner.MPSNNFilterNode
+}
 
 // CNNDilatedPoolingMaxNodeable is the interface implemented by [CNNDilatedPoolingMaxNode], for mocking and DI.
 type CNNDilatedPoolingMaxNodeable interface {
@@ -85,4 +87,3 @@ type CNNDilatedPoolingMaxNodeable interface {
 }
 
 var _ CNNDilatedPoolingMaxNodeable = (*CNNDilatedPoolingMaxNode)(nil)
-

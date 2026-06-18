@@ -94,9 +94,13 @@ func (x *MTRClusterDescriptor) ReadAttributeDeviceListWithParams(params *raw.MTR
 	return x.inner.ReadAttributeDeviceListWithParams(params)
 }
 
-func (x *MTRClusterDescriptor) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterDescriptor) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterDescriptor) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterDescriptor) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterDescriptorable is the interface implemented by [MTRClusterDescriptor], for mocking and DI.
 type MTRClusterDescriptorable interface {
@@ -114,4 +118,3 @@ type MTRClusterDescriptorable interface {
 }
 
 var _ MTRClusterDescriptorable = (*MTRClusterDescriptor)(nil)
-

@@ -18,12 +18,12 @@ type MTROperationalCredentialsClusterCertificateChainResponseParams struct {
 }
 
 var (
-	_clsMTROperationalCredentialsClusterCertificateChainResponseParams = _objcClass("MTROperationalCredentialsClusterCertificateChainResponseParams")
+	_clsMTROperationalCredentialsClusterCertificateChainResponseParams                           = _objcClass("MTROperationalCredentialsClusterCertificateChainResponseParams")
 	_mTROperationalCredentialsClusterCertificateChainResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTROperationalCredentialsClusterCertificateChainResponseParamsSelCertificate = objc.RegisterName("certificate")
-	_mTROperationalCredentialsClusterCertificateChainResponseParamsSelSetCertificate = objc.RegisterName("setCertificate:")
-	_mTROperationalCredentialsClusterCertificateChainResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTROperationalCredentialsClusterCertificateChainResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTROperationalCredentialsClusterCertificateChainResponseParamsSelCertificate                = objc.RegisterName("certificate")
+	_mTROperationalCredentialsClusterCertificateChainResponseParamsSelSetCertificate             = objc.RegisterName("setCertificate:")
+	_mTROperationalCredentialsClusterCertificateChainResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTROperationalCredentialsClusterCertificateChainResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
 )
 
 func MTROperationalCredentialsClusterCertificateChainResponseParamsFromID(id objc.ID) *MTROperationalCredentialsClusterCertificateChainResponseParams {
@@ -40,7 +40,9 @@ func MTROperationalCredentialsClusterCertificateChainResponseParamsFromID(id obj
 func (o *MTROperationalCredentialsClusterCertificateChainResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTROperationalCredentialsClusterCertificateChainResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterCertificateChainResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -49,7 +51,9 @@ func (o *MTROperationalCredentialsClusterCertificateChainResponseParams) InitWit
 
 func (o *MTROperationalCredentialsClusterCertificateChainResponseParams) Certificate() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterCertificateChainResponseParamsSelCertificate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -60,11 +64,12 @@ func (o *MTROperationalCredentialsClusterCertificateChainResponseParams) SetCert
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTROperationalCredentialsClusterCertificateChainResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterCertificateChainResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTROperationalCredentialsClusterCertificateChainResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
 	o.Ptr().Send(_mTROperationalCredentialsClusterCertificateChainResponseParamsSelSetTimedInvokeTimeoutMs, timedInvokeTimeoutMs.Ptr())
 }
-

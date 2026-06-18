@@ -58,11 +58,17 @@ func (x *NDArrayAffineInt4Dequantize) WithLabel(label string) *NDArrayAffineInt4
 	return x
 }
 
-func (x *NDArrayAffineInt4Dequantize) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel { return &x.inner.MPSNDArrayMultiaryKernel }
+func (x *NDArrayAffineInt4Dequantize) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel {
+	return &x.inner.MPSNDArrayMultiaryKernel
+}
 
-func (x *NDArrayAffineInt4Dequantize) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
+func (x *NDArrayAffineInt4Dequantize) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase {
+	return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase
+}
 
-func (x *NDArrayAffineInt4Dequantize) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel }
+func (x *NDArrayAffineInt4Dequantize) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel
+}
 
 // NDArrayAffineInt4Dequantizeable is the interface implemented by [NDArrayAffineInt4Dequantize], for mocking and DI.
 type NDArrayAffineInt4Dequantizeable interface {
@@ -73,4 +79,3 @@ type NDArrayAffineInt4Dequantizeable interface {
 }
 
 var _ NDArrayAffineInt4Dequantizeable = (*NDArrayAffineInt4Dequantize)(nil)
-

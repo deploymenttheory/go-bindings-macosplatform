@@ -73,4 +73,3 @@ type DialogControllerable interface {
 }
 
 var _ DialogControllerable = (*DialogController)(nil)
-

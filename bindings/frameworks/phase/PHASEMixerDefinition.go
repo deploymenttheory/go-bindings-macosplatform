@@ -15,10 +15,10 @@ type PHASEMixerDefinition struct {
 }
 
 var (
-	_clsPHASEMixerDefinition = _objcClass("PHASEMixerDefinition")
-	_pHASEMixerDefinitionSelGain = objc.RegisterName("gain")
-	_pHASEMixerDefinitionSelSetGain = objc.RegisterName("setGain:")
-	_pHASEMixerDefinitionSelGainMetaParameterDefinition = objc.RegisterName("gainMetaParameterDefinition")
+	_clsPHASEMixerDefinition                               = _objcClass("PHASEMixerDefinition")
+	_pHASEMixerDefinitionSelGain                           = objc.RegisterName("gain")
+	_pHASEMixerDefinitionSelSetGain                        = objc.RegisterName("setGain:")
+	_pHASEMixerDefinitionSelGainMetaParameterDefinition    = objc.RegisterName("gainMetaParameterDefinition")
 	_pHASEMixerDefinitionSelSetGainMetaParameterDefinition = objc.RegisterName("setGainMetaParameterDefinition:")
 )
 
@@ -45,11 +45,12 @@ func (o *PHASEMixerDefinition) SetGain(gain float64) {
 // @property gainMetaParameterDefinition @abstract Optionally attach a metaparameter definition here to enable real-time control of the gain during playback.
 func (o *PHASEMixerDefinition) GainMetaParameterDefinition() *PHASENumberMetaParameterDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEMixerDefinitionSelGainMetaParameterDefinition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASENumberMetaParameterDefinitionFromID(_ret)
 }
 
 func (o *PHASEMixerDefinition) SetGainMetaParameterDefinition(gainMetaParameterDefinition *PHASENumberMetaParameterDefinition) {
 	o.Ptr().Send(_pHASEMixerDefinitionSelSetGainMetaParameterDefinition, gainMetaParameterDefinition.Ptr())
 }
-

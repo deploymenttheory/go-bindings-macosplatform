@@ -98,4 +98,3 @@ type OS_dispatch_workloop interface {
 	cgo.Object
 	OS_dispatch_queue
 }
-

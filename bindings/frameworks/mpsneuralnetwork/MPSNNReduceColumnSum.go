@@ -17,8 +17,8 @@ type MPSNNReduceColumnSum struct {
 }
 
 var (
-	_clsMPSNNReduceColumnSum = _objcClass("MPSNNReduceColumnSum")
-	_mPSNNReduceColumnSumSelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsMPSNNReduceColumnSum                    = _objcClass("MPSNNReduceColumnSum")
+	_mPSNNReduceColumnSumSelInitWithDevice      = objc.RegisterName("initWithDevice:")
 	_mPSNNReduceColumnSumSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
 )
 
@@ -34,14 +34,17 @@ func MPSNNReduceColumnSumFromID(id objc.ID) *MPSNNReduceColumnSum {
 
 func (o *MPSNNReduceColumnSum) InitWithDevice(device metal.MTLDevice) *MPSNNReduceColumnSum {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNReduceColumnSumSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNReduceColumnSumFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSCNNPooling @param      device      The MTLDevice on which to make the MPSCNNPooling @return     A new MPSNNReduceColumnSum object, or nil if failure.
 func (o *MPSNNReduceColumnSum) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSNNReduceColumnSum {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNReduceColumnSumSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNReduceColumnSumFromID(_ret)
 }
-

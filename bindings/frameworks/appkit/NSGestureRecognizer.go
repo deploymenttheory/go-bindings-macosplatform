@@ -17,66 +17,66 @@ type NSGestureRecognizer struct {
 }
 
 var (
-	_clsNSGestureRecognizer = _objcClass("NSGestureRecognizer")
-	_nSGestureRecognizerSelInitWithTargetAction = objc.RegisterName("initWithTarget:action:")
-	_nSGestureRecognizerSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSGestureRecognizerSelLocationInView = objc.RegisterName("locationInView:")
-	_nSGestureRecognizerSelTarget = objc.RegisterName("target")
-	_nSGestureRecognizerSelSetTarget = objc.RegisterName("setTarget:")
-	_nSGestureRecognizerSelAction = objc.RegisterName("action")
-	_nSGestureRecognizerSelSetAction = objc.RegisterName("setAction:")
-	_nSGestureRecognizerSelState = objc.RegisterName("state")
-	_nSGestureRecognizerSelDelegate = objc.RegisterName("delegate")
-	_nSGestureRecognizerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSGestureRecognizerSelIsEnabled = objc.RegisterName("isEnabled")
-	_nSGestureRecognizerSelSetEnabled = objc.RegisterName("setEnabled:")
-	_nSGestureRecognizerSelView = objc.RegisterName("view")
-	_nSGestureRecognizerSelPressureConfiguration = objc.RegisterName("pressureConfiguration")
-	_nSGestureRecognizerSelSetPressureConfiguration = objc.RegisterName("setPressureConfiguration:")
-	_nSGestureRecognizerSelDelaysPrimaryMouseButtonEvents = objc.RegisterName("delaysPrimaryMouseButtonEvents")
-	_nSGestureRecognizerSelSetDelaysPrimaryMouseButtonEvents = objc.RegisterName("setDelaysPrimaryMouseButtonEvents:")
-	_nSGestureRecognizerSelDelaysSecondaryMouseButtonEvents = objc.RegisterName("delaysSecondaryMouseButtonEvents")
-	_nSGestureRecognizerSelSetDelaysSecondaryMouseButtonEvents = objc.RegisterName("setDelaysSecondaryMouseButtonEvents:")
-	_nSGestureRecognizerSelDelaysOtherMouseButtonEvents = objc.RegisterName("delaysOtherMouseButtonEvents")
-	_nSGestureRecognizerSelSetDelaysOtherMouseButtonEvents = objc.RegisterName("setDelaysOtherMouseButtonEvents:")
-	_nSGestureRecognizerSelDelaysKeyEvents = objc.RegisterName("delaysKeyEvents")
-	_nSGestureRecognizerSelSetDelaysKeyEvents = objc.RegisterName("setDelaysKeyEvents:")
-	_nSGestureRecognizerSelDelaysMagnificationEvents = objc.RegisterName("delaysMagnificationEvents")
-	_nSGestureRecognizerSelSetDelaysMagnificationEvents = objc.RegisterName("setDelaysMagnificationEvents:")
-	_nSGestureRecognizerSelDelaysRotationEvents = objc.RegisterName("delaysRotationEvents")
-	_nSGestureRecognizerSelSetDelaysRotationEvents = objc.RegisterName("setDelaysRotationEvents:")
-	_nSGestureRecognizerSelName = objc.RegisterName("name")
-	_nSGestureRecognizerSelSetName = objc.RegisterName("setName:")
-	_nSGestureRecognizerSelModifierFlags = objc.RegisterName("modifierFlags")
-	_nSGestureRecognizerSelAllowedTouchTypes = objc.RegisterName("allowedTouchTypes")
-	_nSGestureRecognizerSelSetAllowedTouchTypes = objc.RegisterName("setAllowedTouchTypes:")
-	_nSGestureRecognizerSelReset = objc.RegisterName("reset")
-	_nSGestureRecognizerSelCanPreventGestureRecognizer = objc.RegisterName("canPreventGestureRecognizer:")
-	_nSGestureRecognizerSelCanBePreventedByGestureRecognizer = objc.RegisterName("canBePreventedByGestureRecognizer:")
-	_nSGestureRecognizerSelShouldRequireFailureOfGestureRecognizer = objc.RegisterName("shouldRequireFailureOfGestureRecognizer:")
+	_clsNSGestureRecognizer                                          = _objcClass("NSGestureRecognizer")
+	_nSGestureRecognizerSelInitWithTargetAction                      = objc.RegisterName("initWithTarget:action:")
+	_nSGestureRecognizerSelInitWithCoder                             = objc.RegisterName("initWithCoder:")
+	_nSGestureRecognizerSelLocationInView                            = objc.RegisterName("locationInView:")
+	_nSGestureRecognizerSelTarget                                    = objc.RegisterName("target")
+	_nSGestureRecognizerSelSetTarget                                 = objc.RegisterName("setTarget:")
+	_nSGestureRecognizerSelAction                                    = objc.RegisterName("action")
+	_nSGestureRecognizerSelSetAction                                 = objc.RegisterName("setAction:")
+	_nSGestureRecognizerSelState                                     = objc.RegisterName("state")
+	_nSGestureRecognizerSelDelegate                                  = objc.RegisterName("delegate")
+	_nSGestureRecognizerSelSetDelegate                               = objc.RegisterName("setDelegate:")
+	_nSGestureRecognizerSelIsEnabled                                 = objc.RegisterName("isEnabled")
+	_nSGestureRecognizerSelSetEnabled                                = objc.RegisterName("setEnabled:")
+	_nSGestureRecognizerSelView                                      = objc.RegisterName("view")
+	_nSGestureRecognizerSelPressureConfiguration                     = objc.RegisterName("pressureConfiguration")
+	_nSGestureRecognizerSelSetPressureConfiguration                  = objc.RegisterName("setPressureConfiguration:")
+	_nSGestureRecognizerSelDelaysPrimaryMouseButtonEvents            = objc.RegisterName("delaysPrimaryMouseButtonEvents")
+	_nSGestureRecognizerSelSetDelaysPrimaryMouseButtonEvents         = objc.RegisterName("setDelaysPrimaryMouseButtonEvents:")
+	_nSGestureRecognizerSelDelaysSecondaryMouseButtonEvents          = objc.RegisterName("delaysSecondaryMouseButtonEvents")
+	_nSGestureRecognizerSelSetDelaysSecondaryMouseButtonEvents       = objc.RegisterName("setDelaysSecondaryMouseButtonEvents:")
+	_nSGestureRecognizerSelDelaysOtherMouseButtonEvents              = objc.RegisterName("delaysOtherMouseButtonEvents")
+	_nSGestureRecognizerSelSetDelaysOtherMouseButtonEvents           = objc.RegisterName("setDelaysOtherMouseButtonEvents:")
+	_nSGestureRecognizerSelDelaysKeyEvents                           = objc.RegisterName("delaysKeyEvents")
+	_nSGestureRecognizerSelSetDelaysKeyEvents                        = objc.RegisterName("setDelaysKeyEvents:")
+	_nSGestureRecognizerSelDelaysMagnificationEvents                 = objc.RegisterName("delaysMagnificationEvents")
+	_nSGestureRecognizerSelSetDelaysMagnificationEvents              = objc.RegisterName("setDelaysMagnificationEvents:")
+	_nSGestureRecognizerSelDelaysRotationEvents                      = objc.RegisterName("delaysRotationEvents")
+	_nSGestureRecognizerSelSetDelaysRotationEvents                   = objc.RegisterName("setDelaysRotationEvents:")
+	_nSGestureRecognizerSelName                                      = objc.RegisterName("name")
+	_nSGestureRecognizerSelSetName                                   = objc.RegisterName("setName:")
+	_nSGestureRecognizerSelModifierFlags                             = objc.RegisterName("modifierFlags")
+	_nSGestureRecognizerSelAllowedTouchTypes                         = objc.RegisterName("allowedTouchTypes")
+	_nSGestureRecognizerSelSetAllowedTouchTypes                      = objc.RegisterName("setAllowedTouchTypes:")
+	_nSGestureRecognizerSelReset                                     = objc.RegisterName("reset")
+	_nSGestureRecognizerSelCanPreventGestureRecognizer               = objc.RegisterName("canPreventGestureRecognizer:")
+	_nSGestureRecognizerSelCanBePreventedByGestureRecognizer         = objc.RegisterName("canBePreventedByGestureRecognizer:")
+	_nSGestureRecognizerSelShouldRequireFailureOfGestureRecognizer   = objc.RegisterName("shouldRequireFailureOfGestureRecognizer:")
 	_nSGestureRecognizerSelShouldBeRequiredToFailByGestureRecognizer = objc.RegisterName("shouldBeRequiredToFailByGestureRecognizer:")
-	_nSGestureRecognizerSelMouseDown = objc.RegisterName("mouseDown:")
-	_nSGestureRecognizerSelRightMouseDown = objc.RegisterName("rightMouseDown:")
-	_nSGestureRecognizerSelOtherMouseDown = objc.RegisterName("otherMouseDown:")
-	_nSGestureRecognizerSelMouseUp = objc.RegisterName("mouseUp:")
-	_nSGestureRecognizerSelRightMouseUp = objc.RegisterName("rightMouseUp:")
-	_nSGestureRecognizerSelOtherMouseUp = objc.RegisterName("otherMouseUp:")
-	_nSGestureRecognizerSelMouseDragged = objc.RegisterName("mouseDragged:")
-	_nSGestureRecognizerSelRightMouseDragged = objc.RegisterName("rightMouseDragged:")
-	_nSGestureRecognizerSelOtherMouseDragged = objc.RegisterName("otherMouseDragged:")
-	_nSGestureRecognizerSelMouseCancelled = objc.RegisterName("mouseCancelled:")
-	_nSGestureRecognizerSelKeyDown = objc.RegisterName("keyDown:")
-	_nSGestureRecognizerSelKeyUp = objc.RegisterName("keyUp:")
-	_nSGestureRecognizerSelFlagsChanged = objc.RegisterName("flagsChanged:")
-	_nSGestureRecognizerSelTabletPoint = objc.RegisterName("tabletPoint:")
-	_nSGestureRecognizerSelMagnifyWithEvent = objc.RegisterName("magnifyWithEvent:")
-	_nSGestureRecognizerSelRotateWithEvent = objc.RegisterName("rotateWithEvent:")
-	_nSGestureRecognizerSelPressureChangeWithEvent = objc.RegisterName("pressureChangeWithEvent:")
-	_nSGestureRecognizerSelTouchesBeganWithEvent = objc.RegisterName("touchesBeganWithEvent:")
-	_nSGestureRecognizerSelTouchesMovedWithEvent = objc.RegisterName("touchesMovedWithEvent:")
-	_nSGestureRecognizerSelTouchesEndedWithEvent = objc.RegisterName("touchesEndedWithEvent:")
-	_nSGestureRecognizerSelTouchesCancelledWithEvent = objc.RegisterName("touchesCancelledWithEvent:")
-	_nSGestureRecognizerSelSetState = objc.RegisterName("setState:")
+	_nSGestureRecognizerSelMouseDown                                 = objc.RegisterName("mouseDown:")
+	_nSGestureRecognizerSelRightMouseDown                            = objc.RegisterName("rightMouseDown:")
+	_nSGestureRecognizerSelOtherMouseDown                            = objc.RegisterName("otherMouseDown:")
+	_nSGestureRecognizerSelMouseUp                                   = objc.RegisterName("mouseUp:")
+	_nSGestureRecognizerSelRightMouseUp                              = objc.RegisterName("rightMouseUp:")
+	_nSGestureRecognizerSelOtherMouseUp                              = objc.RegisterName("otherMouseUp:")
+	_nSGestureRecognizerSelMouseDragged                              = objc.RegisterName("mouseDragged:")
+	_nSGestureRecognizerSelRightMouseDragged                         = objc.RegisterName("rightMouseDragged:")
+	_nSGestureRecognizerSelOtherMouseDragged                         = objc.RegisterName("otherMouseDragged:")
+	_nSGestureRecognizerSelMouseCancelled                            = objc.RegisterName("mouseCancelled:")
+	_nSGestureRecognizerSelKeyDown                                   = objc.RegisterName("keyDown:")
+	_nSGestureRecognizerSelKeyUp                                     = objc.RegisterName("keyUp:")
+	_nSGestureRecognizerSelFlagsChanged                              = objc.RegisterName("flagsChanged:")
+	_nSGestureRecognizerSelTabletPoint                               = objc.RegisterName("tabletPoint:")
+	_nSGestureRecognizerSelMagnifyWithEvent                          = objc.RegisterName("magnifyWithEvent:")
+	_nSGestureRecognizerSelRotateWithEvent                           = objc.RegisterName("rotateWithEvent:")
+	_nSGestureRecognizerSelPressureChangeWithEvent                   = objc.RegisterName("pressureChangeWithEvent:")
+	_nSGestureRecognizerSelTouchesBeganWithEvent                     = objc.RegisterName("touchesBeganWithEvent:")
+	_nSGestureRecognizerSelTouchesMovedWithEvent                     = objc.RegisterName("touchesMovedWithEvent:")
+	_nSGestureRecognizerSelTouchesEndedWithEvent                     = objc.RegisterName("touchesEndedWithEvent:")
+	_nSGestureRecognizerSelTouchesCancelledWithEvent                 = objc.RegisterName("touchesCancelledWithEvent:")
+	_nSGestureRecognizerSelSetState                                  = objc.RegisterName("setState:")
 )
 
 func NSGestureRecognizerFromID(id objc.ID) *NSGestureRecognizer {
@@ -91,13 +91,17 @@ func NSGestureRecognizerFromID(id objc.ID) *NSGestureRecognizer {
 
 func (o *NSGestureRecognizer) InitWithTargetAction(target objc.ID, action objc.SEL) *NSGestureRecognizer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGestureRecognizerSelInitWithTargetAction, target, action)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGestureRecognizerFromID(_ret)
 }
 
 func (o *NSGestureRecognizer) InitWithCoder(coder *foundation.NSCoder) *NSGestureRecognizer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGestureRecognizerSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGestureRecognizerFromID(_ret)
 }
 
@@ -149,13 +153,17 @@ func (o *NSGestureRecognizer) SetEnabled(enabled bool) {
 
 func (o *NSGestureRecognizer) View() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGestureRecognizerSelView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
 func (o *NSGestureRecognizer) PressureConfiguration() *NSPressureConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGestureRecognizerSelPressureConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPressureConfigurationFromID(_ret)
 }
 
@@ -219,7 +227,9 @@ func (o *NSGestureRecognizer) SetDelaysRotationEvents(delaysRotationEvents bool)
 
 func (o *NSGestureRecognizer) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGestureRecognizerSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -352,4 +362,3 @@ func (o *NSGestureRecognizer) TouchesCancelledWithEvent(event *NSEvent) {
 func (o *NSGestureRecognizer) SetState(state NSGestureRecognizerState) {
 	o.Ptr().Send(_nSGestureRecognizerSelSetState, state)
 }
-

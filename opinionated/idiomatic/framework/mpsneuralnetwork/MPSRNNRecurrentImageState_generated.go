@@ -54,4 +54,3 @@ type RNNRecurrentImageStateable interface {
 }
 
 var _ RNNRecurrentImageStateable = (*RNNRecurrentImageState)(nil)
-

@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// The object you use to observe changes to the current configuration. Use this class to start and stop observing the current configuration. For example, you can opt to disable private browsing in your web browser’s view controller when ``STScreenTimeConfiguration/enforcesChildRestrictions`` is `true`.
+// The object you use to observe changes to the current configuration. Use this class to start and stop observing the current configuration. For example, you can opt to disable private browsing in your web browser’s view controller when “STScreenTimeConfiguration/enforcesChildRestrictions“ is `true`.
 //
 // Apple documentation: https://developer.apple.com/documentation/screentime/stscreentimeconfigurationobserver
 type STScreenTimeConfigurationObserver struct {
@@ -18,11 +18,11 @@ type STScreenTimeConfigurationObserver struct {
 }
 
 var (
-	_clsSTScreenTimeConfigurationObserver = _objcClass("STScreenTimeConfigurationObserver")
+	_clsSTScreenTimeConfigurationObserver                    = _objcClass("STScreenTimeConfigurationObserver")
 	_sTScreenTimeConfigurationObserverSelInitWithUpdateQueue = objc.RegisterName("initWithUpdateQueue:")
-	_sTScreenTimeConfigurationObserverSelStartObserving = objc.RegisterName("startObserving")
-	_sTScreenTimeConfigurationObserverSelStopObserving = objc.RegisterName("stopObserving")
-	_sTScreenTimeConfigurationObserverSelConfiguration = objc.RegisterName("configuration")
+	_sTScreenTimeConfigurationObserverSelStartObserving      = objc.RegisterName("startObserving")
+	_sTScreenTimeConfigurationObserverSelStopObserving       = objc.RegisterName("stopObserving")
+	_sTScreenTimeConfigurationObserverSelConfiguration       = objc.RegisterName("configuration")
 )
 
 func STScreenTimeConfigurationObserverFromID(id objc.ID) *STScreenTimeConfigurationObserver {
@@ -38,7 +38,9 @@ func STScreenTimeConfigurationObserverFromID(id objc.ID) *STScreenTimeConfigurat
 // Creates a configuration observer that reports updates on the queue you specify. - Parameters: - updateQueue: The queue on which to report updates.
 func (o *STScreenTimeConfigurationObserver) InitWithUpdateQueue(updateQueue *foundation.NSObject) *STScreenTimeConfigurationObserver {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sTScreenTimeConfigurationObserverSelInitWithUpdateQueue, updateQueue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return STScreenTimeConfigurationObserverFromID(_ret)
 }
 
@@ -55,7 +57,8 @@ func (o *STScreenTimeConfigurationObserver) StopObserving() {
 // The configuration being observed.
 func (o *STScreenTimeConfigurationObserver) Configuration() *STScreenTimeConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sTScreenTimeConfigurationObserverSelConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return STScreenTimeConfigurationFromID(_ret)
 }
-

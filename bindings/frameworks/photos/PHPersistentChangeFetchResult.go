@@ -16,7 +16,7 @@ type PHPersistentChangeFetchResult struct {
 }
 
 var (
-	_clsPHPersistentChangeFetchResult = _objcClass("PHPersistentChangeFetchResult")
+	_clsPHPersistentChangeFetchResult                     = _objcClass("PHPersistentChangeFetchResult")
 	_pHPersistentChangeFetchResultSelEnumerateChangesWith = objc.RegisterName("enumerateChangesWithBlock:")
 )
 
@@ -43,4 +43,3 @@ func (o *PHPersistentChangeFetchResult) EnumerateChangesWith(block func(*PHPersi
 	}
 	o.Ptr().Send(_pHPersistentChangeFetchResultSelEnumerateChangesWith, __block_block)
 }
-

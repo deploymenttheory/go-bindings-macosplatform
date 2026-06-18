@@ -26,4 +26,3 @@ func OSLogPositionFromID(id objc.ID) *OSLogPosition {
 	purego.Track(o)
 	return o
 }
-

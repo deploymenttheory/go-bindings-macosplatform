@@ -54,4 +54,3 @@ type TensorExtentsable interface {
 }
 
 var _ TensorExtentsable = (*TensorExtents)(nil)
-

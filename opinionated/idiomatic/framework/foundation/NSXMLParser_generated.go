@@ -231,4 +231,3 @@ type XMLParserable interface {
 }
 
 var _ XMLParserable = (*XMLParser)(nil)
-

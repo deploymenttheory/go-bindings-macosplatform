@@ -15,11 +15,11 @@ type NSLayoutXAxisAnchor struct {
 }
 
 var (
-	_clsNSLayoutXAxisAnchor = _objcClass("NSLayoutXAxisAnchor")
-	_nSLayoutXAxisAnchorSelAnchorWithOffsetToAnchor = objc.RegisterName("anchorWithOffsetToAnchor:")
-	_nSLayoutXAxisAnchorSelConstraintEqualToSystemSpacingAfterAnchorMultiplier = objc.RegisterName("constraintEqualToSystemSpacingAfterAnchor:multiplier:")
+	_clsNSLayoutXAxisAnchor                                                                 = _objcClass("NSLayoutXAxisAnchor")
+	_nSLayoutXAxisAnchorSelAnchorWithOffsetToAnchor                                         = objc.RegisterName("anchorWithOffsetToAnchor:")
+	_nSLayoutXAxisAnchorSelConstraintEqualToSystemSpacingAfterAnchorMultiplier              = objc.RegisterName("constraintEqualToSystemSpacingAfterAnchor:multiplier:")
 	_nSLayoutXAxisAnchorSelConstraintGreaterThanOrEqualToSystemSpacingAfterAnchorMultiplier = objc.RegisterName("constraintGreaterThanOrEqualToSystemSpacingAfterAnchor:multiplier:")
-	_nSLayoutXAxisAnchorSelConstraintLessThanOrEqualToSystemSpacingAfterAnchorMultiplier = objc.RegisterName("constraintLessThanOrEqualToSystemSpacingAfterAnchor:multiplier:")
+	_nSLayoutXAxisAnchorSelConstraintLessThanOrEqualToSystemSpacingAfterAnchorMultiplier    = objc.RegisterName("constraintLessThanOrEqualToSystemSpacingAfterAnchor:multiplier:")
 )
 
 func NSLayoutXAxisAnchorFromID(id objc.ID) *NSLayoutXAxisAnchor {
@@ -34,25 +34,32 @@ func NSLayoutXAxisAnchorFromID(id objc.ID) *NSLayoutXAxisAnchor {
 
 func (o *NSLayoutXAxisAnchor) AnchorWithOffsetToAnchor(otherAnchor *NSLayoutXAxisAnchor) *NSLayoutDimension {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutXAxisAnchorSelAnchorWithOffsetToAnchor, otherAnchor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutDimensionFromID(_ret)
 }
 
 func (o *NSLayoutXAxisAnchor) ConstraintEqualToSystemSpacingAfterAnchorMultiplier(anchor *NSLayoutXAxisAnchor, multiplier float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutXAxisAnchorSelConstraintEqualToSystemSpacingAfterAnchorMultiplier, anchor.Ptr(), multiplier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutConstraintFromID(_ret)
 }
 
 func (o *NSLayoutXAxisAnchor) ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor *NSLayoutXAxisAnchor, multiplier float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutXAxisAnchorSelConstraintGreaterThanOrEqualToSystemSpacingAfterAnchorMultiplier, anchor.Ptr(), multiplier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutConstraintFromID(_ret)
 }
 
 func (o *NSLayoutXAxisAnchor) ConstraintLessThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor *NSLayoutXAxisAnchor, multiplier float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutXAxisAnchorSelConstraintLessThanOrEqualToSystemSpacingAfterAnchorMultiplier, anchor.Ptr(), multiplier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutConstraintFromID(_ret)
 }
-

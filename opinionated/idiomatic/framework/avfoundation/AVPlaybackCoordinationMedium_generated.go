@@ -54,4 +54,3 @@ type PlaybackCoordinationMediumable interface {
 }
 
 var _ PlaybackCoordinationMediumable = (*PlaybackCoordinationMedium)(nil)
-

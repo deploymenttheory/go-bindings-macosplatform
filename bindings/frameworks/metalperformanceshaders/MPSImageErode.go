@@ -26,4 +26,3 @@ func MPSImageErodeFromID(id objc.ID) *MPSImageErode {
 	purego.Track(o)
 	return o
 }
-

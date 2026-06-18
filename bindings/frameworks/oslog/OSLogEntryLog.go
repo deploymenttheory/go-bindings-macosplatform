@@ -15,7 +15,7 @@ type OSLogEntryLog struct {
 }
 
 var (
-	_clsOSLogEntryLog = _objcClass("OSLogEntryLog")
+	_clsOSLogEntryLog      = _objcClass("OSLogEntryLog")
 	_oSLogEntryLogSelLevel = objc.RegisterName("level")
 )
 
@@ -34,4 +34,3 @@ func (o *OSLogEntryLog) Level() OSLogEntryLogLevel {
 	_ret := objc.Send[OSLogEntryLogLevel](o.Ptr(), _oSLogEntryLogSelLevel)
 	return _ret
 }
-

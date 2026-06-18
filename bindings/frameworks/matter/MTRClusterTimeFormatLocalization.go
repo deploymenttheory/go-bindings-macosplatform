@@ -16,21 +16,21 @@ type MTRClusterTimeFormatLocalization struct {
 }
 
 var (
-	_clsMTRClusterTimeFormatLocalization = _objcClass("MTRClusterTimeFormatLocalization")
-	_mTRClusterTimeFormatLocalizationSelReadAttributeHourFormatWithParams = objc.RegisterName("readAttributeHourFormatWithParams:")
-	_mTRClusterTimeFormatLocalizationSelWriteAttributeHourFormatWithValueExpectedValueInterval = objc.RegisterName("writeAttributeHourFormatWithValue:expectedValueInterval:")
-	_mTRClusterTimeFormatLocalizationSelWriteAttributeHourFormatWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeHourFormatWithValue:expectedValueInterval:params:")
-	_mTRClusterTimeFormatLocalizationSelReadAttributeActiveCalendarTypeWithParams = objc.RegisterName("readAttributeActiveCalendarTypeWithParams:")
-	_mTRClusterTimeFormatLocalizationSelWriteAttributeActiveCalendarTypeWithValueExpectedValueInterval = objc.RegisterName("writeAttributeActiveCalendarTypeWithValue:expectedValueInterval:")
+	_clsMTRClusterTimeFormatLocalization                                                                     = _objcClass("MTRClusterTimeFormatLocalization")
+	_mTRClusterTimeFormatLocalizationSelReadAttributeHourFormatWithParams                                    = objc.RegisterName("readAttributeHourFormatWithParams:")
+	_mTRClusterTimeFormatLocalizationSelWriteAttributeHourFormatWithValueExpectedValueInterval               = objc.RegisterName("writeAttributeHourFormatWithValue:expectedValueInterval:")
+	_mTRClusterTimeFormatLocalizationSelWriteAttributeHourFormatWithValueExpectedValueIntervalParams         = objc.RegisterName("writeAttributeHourFormatWithValue:expectedValueInterval:params:")
+	_mTRClusterTimeFormatLocalizationSelReadAttributeActiveCalendarTypeWithParams                            = objc.RegisterName("readAttributeActiveCalendarTypeWithParams:")
+	_mTRClusterTimeFormatLocalizationSelWriteAttributeActiveCalendarTypeWithValueExpectedValueInterval       = objc.RegisterName("writeAttributeActiveCalendarTypeWithValue:expectedValueInterval:")
 	_mTRClusterTimeFormatLocalizationSelWriteAttributeActiveCalendarTypeWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeActiveCalendarTypeWithValue:expectedValueInterval:params:")
-	_mTRClusterTimeFormatLocalizationSelReadAttributeSupportedCalendarTypesWithParams = objc.RegisterName("readAttributeSupportedCalendarTypesWithParams:")
-	_mTRClusterTimeFormatLocalizationSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterTimeFormatLocalizationSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterTimeFormatLocalizationSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterTimeFormatLocalizationSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterTimeFormatLocalizationSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterTimeFormatLocalizationSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterTimeFormatLocalizationSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterTimeFormatLocalizationSelReadAttributeSupportedCalendarTypesWithParams                        = objc.RegisterName("readAttributeSupportedCalendarTypesWithParams:")
+	_mTRClusterTimeFormatLocalizationSelReadAttributeGeneratedCommandListWithParams                          = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterTimeFormatLocalizationSelReadAttributeAcceptedCommandListWithParams                           = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterTimeFormatLocalizationSelReadAttributeAttributeListWithParams                                 = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterTimeFormatLocalizationSelReadAttributeFeatureMapWithParams                                    = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterTimeFormatLocalizationSelReadAttributeClusterRevisionWithParams                               = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterTimeFormatLocalizationSelInitWithDeviceEndpointIDQueue                                        = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterTimeFormatLocalizationSelInitWithDeviceEndpointQueue                                          = objc.RegisterName("initWithDevice:endpoint:queue:")
 )
 
 func MTRClusterTimeFormatLocalizationFromID(id objc.ID) *MTRClusterTimeFormatLocalization {
@@ -102,13 +102,16 @@ func (o *MTRClusterTimeFormatLocalization) ReadAttributeClusterRevisionWithParam
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func (o *MTRClusterTimeFormatLocalization) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterTimeFormatLocalization {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterTimeFormatLocalizationSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterTimeFormatLocalizationFromID(_ret)
 }
 
 func (o *MTRClusterTimeFormatLocalization) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterTimeFormatLocalization {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterTimeFormatLocalizationSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterTimeFormatLocalizationFromID(_ret)
 }
-

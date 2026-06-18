@@ -841,4 +841,3 @@ type MapViewable interface {
 }
 
 var _ MapViewable = (*MapView)(nil)
-

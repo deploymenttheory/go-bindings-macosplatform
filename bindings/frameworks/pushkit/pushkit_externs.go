@@ -14,7 +14,8 @@ import (
 // A push type for file provider updates. Use file provider notifications to update your File Provider extension's content from your server. For more information, see <doc://com.apple.documentation/documentation/fileprovider/nonreplicated_file_provider_extension/content_and_change_tracking/tracking_your_file_provider_s_changes>.
 func PKPushTypeFileProvider() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_pushkitLib, "PKPushTypeFileProvider")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
-

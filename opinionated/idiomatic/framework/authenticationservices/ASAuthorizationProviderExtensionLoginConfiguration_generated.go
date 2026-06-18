@@ -18,7 +18,9 @@ type AuthorizationProviderExtensionLoginConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.ASAuthorizationProviderExtensionLoginConfiguration].
-func (x *AuthorizationProviderExtensionLoginConfiguration) Unwrap() *raw.ASAuthorizationProviderExtensionLoginConfiguration { return x.inner }
+func (x *AuthorizationProviderExtensionLoginConfiguration) Unwrap() *raw.ASAuthorizationProviderExtensionLoginConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -106,7 +108,9 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomNonceReques
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSURLQueryItem](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -152,7 +156,9 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomLoginReques
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSURLQueryItem](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -186,7 +192,9 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithKerberosTicketMap
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.ASAuthorizationProviderExtensionKerberosMapping](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -208,7 +216,9 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomRefreshRequ
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSURLQueryItem](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -260,7 +270,9 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomFederationU
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSURLQueryItem](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -306,7 +318,9 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomKeyExchange
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSURLQueryItem](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -322,7 +336,9 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomKeyRequestV
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSURLQueryItem](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -1074,4 +1090,3 @@ type AuthorizationProviderExtensionLoginConfigurationable interface {
 }
 
 var _ AuthorizationProviderExtensionLoginConfigurationable = (*AuthorizationProviderExtensionLoginConfiguration)(nil)
-

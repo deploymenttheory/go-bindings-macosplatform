@@ -45,7 +45,9 @@ func (x *PersistentStoreRequest) WithAffectedStores(items ...PersistentStoreProv
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asPersistentStore().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asPersistentStore().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSPersistentStore](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -75,7 +77,9 @@ func (x *PersistentStoreRequest) RequestType() raw.NSPersistentStoreRequestType 
 	return x.inner.RequestType()
 }
 
-func (x *PersistentStoreRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest { return x.inner }
+func (x *PersistentStoreRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest {
+	return x.inner
+}
 
 // PersistentStoreRequestable is the interface implemented by [PersistentStoreRequest], for mocking and DI.
 type PersistentStoreRequestable interface {
@@ -87,4 +91,3 @@ type PersistentStoreRequestable interface {
 }
 
 var _ PersistentStoreRequestable = (*PersistentStoreRequest)(nil)
-

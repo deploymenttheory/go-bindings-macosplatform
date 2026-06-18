@@ -198,4 +198,3 @@ type TextCheckingResultable interface {
 }
 
 var _ TextCheckingResultable = (*TextCheckingResult)(nil)
-

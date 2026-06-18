@@ -16,12 +16,12 @@ type HKSourceRevision struct {
 }
 
 var (
-	_clsHKSourceRevision = _objcClass("HKSourceRevision")
+	_clsHKSourceRevision                                                       = _objcClass("HKSourceRevision")
 	_hKSourceRevisionSelInitWithSourceVersionProductTypeOperatingSystemVersion = objc.RegisterName("initWithSource:version:productType:operatingSystemVersion:")
-	_hKSourceRevisionSelInitWithSourceVersion = objc.RegisterName("initWithSource:version:")
-	_hKSourceRevisionSelSource = objc.RegisterName("source")
-	_hKSourceRevisionSelProductType = objc.RegisterName("productType")
-	_hKSourceRevisionSelOperatingSystemVersion = objc.RegisterName("operatingSystemVersion")
+	_hKSourceRevisionSelInitWithSourceVersion                                  = objc.RegisterName("initWithSource:version:")
+	_hKSourceRevisionSelSource                                                 = objc.RegisterName("source")
+	_hKSourceRevisionSelProductType                                            = objc.RegisterName("productType")
+	_hKSourceRevisionSelOperatingSystemVersion                                 = objc.RegisterName("operatingSystemVersion")
 )
 
 func HKSourceRevisionFromID(id objc.ID) *HKSourceRevision {
@@ -37,28 +37,36 @@ func HKSourceRevisionFromID(id objc.ID) *HKSourceRevision {
 // @method        initWithSource:version:productType:operatingSystemVersion: @abstract      Initializes a new HKSourceRevision with the given source, version, product type, and operating system version.
 func (o *HKSourceRevision) InitWithSourceVersionProductTypeOperatingSystemVersion(source *HKSource, version *foundation.NSString, productType *foundation.NSString, operatingSystemVersion foundation.NSOperatingSystemVersion) *HKSourceRevision {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKSourceRevisionSelInitWithSourceVersionProductTypeOperatingSystemVersion, source.Ptr(), version.Ptr(), productType.Ptr(), operatingSystemVersion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKSourceRevisionFromID(_ret)
 }
 
 // @method        initWithSource:version: @abstract      Initializes a new HKSourceRevision with the given source and version.
 func (o *HKSourceRevision) InitWithSourceVersion(source *HKSource, version *foundation.NSString) *HKSourceRevision {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKSourceRevisionSelInitWithSourceVersion, source.Ptr(), version.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKSourceRevisionFromID(_ret)
 }
 
 // @property      source @abstract      The HKSource of the receiver.
 func (o *HKSourceRevision) Source() *HKSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKSourceRevisionSelSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKSourceFromID(_ret)
 }
 
 // @property      productType @abstract      Represents the product type of the device running HealthKit when the object was created. @discussion    This value may be nil for older data, which indicates an unknown product type.
 func (o *HKSourceRevision) ProductType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKSourceRevisionSelProductType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -67,4 +75,3 @@ func (o *HKSourceRevision) OperatingSystemVersion() foundation.NSOperatingSystem
 	_ret := objc.Send[foundation.NSOperatingSystemVersion](o.Ptr(), _hKSourceRevisionSelOperatingSystemVersion)
 	return _ret
 }
-

@@ -16,8 +16,8 @@ type VZNetworkDevice struct {
 }
 
 var (
-	_clsVZNetworkDevice = _objcClass("VZNetworkDevice")
-	_vZNetworkDeviceSelAttachment = objc.RegisterName("attachment")
+	_clsVZNetworkDevice              = _objcClass("VZNetworkDevice")
+	_vZNetworkDeviceSelAttachment    = objc.RegisterName("attachment")
 	_vZNetworkDeviceSelSetAttachment = objc.RegisterName("setAttachment:")
 )
 
@@ -33,11 +33,12 @@ func VZNetworkDeviceFromID(id objc.ID) *VZNetworkDevice {
 
 func (o *VZNetworkDevice) Attachment() *VZNetworkDeviceAttachment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZNetworkDeviceSelAttachment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZNetworkDeviceAttachmentFromID(_ret)
 }
 
 func (o *VZNetworkDevice) SetAttachment(attachment *VZNetworkDeviceAttachment) {
 	o.Ptr().Send(_vZNetworkDeviceSelSetAttachment, attachment.Ptr())
 }
-

@@ -86,4 +86,3 @@ type WebResourceable interface {
 }
 
 var _ WebResourceable = (*WebResource)(nil)
-

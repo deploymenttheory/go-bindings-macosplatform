@@ -122,7 +122,9 @@ func (x *ExpressionDescription) SetExpressionResultType(expressionResultType raw
 	x.inner.SetExpressionResultType(expressionResultType)
 }
 
-func (x *ExpressionDescription) asPropertyDescription() *raw.NSPropertyDescription { return &x.inner.NSPropertyDescription }
+func (x *ExpressionDescription) asPropertyDescription() *raw.NSPropertyDescription {
+	return &x.inner.NSPropertyDescription
+}
 
 // ExpressionDescriptionable is the interface implemented by [ExpressionDescription], for mocking and DI.
 type ExpressionDescriptionable interface {
@@ -145,4 +147,3 @@ type ExpressionDescriptionable interface {
 }
 
 var _ ExpressionDescriptionable = (*ExpressionDescription)(nil)
-

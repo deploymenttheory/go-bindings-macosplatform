@@ -25,4 +25,3 @@ func PHObjectPlaceholderFromID(id objc.ID) *PHObjectPlaceholder {
 	purego.Track(o)
 	return o
 }
-

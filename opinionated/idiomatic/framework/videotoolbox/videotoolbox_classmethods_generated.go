@@ -148,4 +148,3 @@ func VTTemporalNoiseFilterConfigurationMinimumDimensions() coremedia.CMVideoDime
 func VTTemporalNoiseFilterConfigurationIsSupported() bool {
 	return raw.VTTemporalNoiseFilterConfigurationIsSupported()
 }
-

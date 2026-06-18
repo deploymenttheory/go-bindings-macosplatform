@@ -8,590 +8,590 @@ import (
 )
 
 var (
-	_fnTclFreeObj func(*Tcl_Obj)
-	_fnTclTomMathInitializeStubs func(*Tcl_Interp, string, int, int) string
-	_fnTcl_Access func(string, int) int
-	_fnTcl_AddErrorInfo func(*Tcl_Interp, string)
-	_fnTcl_AddObjErrorInfo func(*Tcl_Interp, string, int)
-	_fnTcl_AlertNotifier func(unsafe.Pointer)
-	_fnTcl_Alloc func(uint) string
-	_fnTcl_AllocStatBuf func() unsafe.Pointer
-	_fnTcl_AllowExceptions func(*Tcl_Interp)
-	_fnTcl_AppInit func(*Tcl_Interp) int
-	_fnTcl_AppendAllObjTypes func(*Tcl_Interp, *Tcl_Obj) int
-	_fnTcl_AppendElement func(*Tcl_Interp, string)
-	_fnTcl_AppendExportList func(*Tcl_Interp, *Tcl_Namespace, *Tcl_Obj) int
-	_fnTcl_AppendFormatToObj func(*Tcl_Interp, *Tcl_Obj, string, int, unsafe.Pointer) int
-	_fnTcl_AppendLimitedToObj func(*Tcl_Obj, string, int, int, string)
-	_fnTcl_AppendObjToErrorInfo func(*Tcl_Interp, *Tcl_Obj)
-	_fnTcl_AppendObjToObj func(*Tcl_Obj, *Tcl_Obj)
-	_fnTcl_AppendPrintfToObj func(*Tcl_Obj, string)
-	_fnTcl_AppendResultVA func(*Tcl_Interp, string)
-	_fnTcl_AppendStringsToObjVA func(*Tcl_Obj, string)
-	_fnTcl_AppendToObj func(*Tcl_Obj, string, int)
-	_fnTcl_AppendUnicodeToObj func(*Tcl_Obj, *uint16, int)
-	_fnTcl_AsyncCreate func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnTcl_AsyncDelete func(unsafe.Pointer)
-	_fnTcl_AsyncInvoke func(*Tcl_Interp, int) int
-	_fnTcl_AsyncMark func(unsafe.Pointer)
-	_fnTcl_AsyncReady func() int
-	_fnTcl_AttemptAlloc func(uint) string
-	_fnTcl_AttemptDbCkalloc func(uint, string, int) string
-	_fnTcl_AttemptDbCkrealloc func(string, uint, string, int) string
-	_fnTcl_AttemptRealloc func(string, uint) string
-	_fnTcl_AttemptSetObjLength func(*Tcl_Obj, int) int
-	_fnTcl_BackgroundError func(*Tcl_Interp)
-	_fnTcl_Backslash func(string, *int32) int8
-	_fnTcl_BadChannelOption func(*Tcl_Interp, string, string) int
-	_fnTcl_CallWhenDeleted func(*Tcl_Interp, unsafe.Pointer, unsafe.Pointer)
-	_fnTcl_CancelIdleCall func(unsafe.Pointer, unsafe.Pointer)
-	_fnTcl_ChannelBlockModeProc func(*Tcl_ChannelType) unsafe.Pointer
-	_fnTcl_ChannelBuffered func(unsafe.Pointer) int
-	_fnTcl_ChannelClose2Proc func(*Tcl_ChannelType) unsafe.Pointer
-	_fnTcl_ChannelCloseProc func(*Tcl_ChannelType) unsafe.Pointer
-	_fnTcl_ChannelFlushProc func(*Tcl_ChannelType) unsafe.Pointer
-	_fnTcl_ChannelGetHandleProc func(*Tcl_ChannelType) unsafe.Pointer
-	_fnTcl_ChannelGetOptionProc func(*Tcl_ChannelType) unsafe.Pointer
-	_fnTcl_ChannelHandlerProc func(*Tcl_ChannelType) unsafe.Pointer
-	_fnTcl_ChannelInputProc func(*Tcl_ChannelType) unsafe.Pointer
-	_fnTcl_ChannelName func(*Tcl_ChannelType) string
-	_fnTcl_ChannelOutputProc func(*Tcl_ChannelType) unsafe.Pointer
-	_fnTcl_ChannelSeekProc func(*Tcl_ChannelType) unsafe.Pointer
-	_fnTcl_ChannelSetOptionProc func(*Tcl_ChannelType) unsafe.Pointer
-	_fnTcl_ChannelThreadActionProc func(*Tcl_ChannelType) unsafe.Pointer
-	_fnTcl_ChannelTruncateProc func(*Tcl_ChannelType) unsafe.Pointer
-	_fnTcl_ChannelVersion func(*Tcl_ChannelType) unsafe.Pointer
-	_fnTcl_ChannelWatchProc func(*Tcl_ChannelType) unsafe.Pointer
-	_fnTcl_ChannelWideSeekProc func(*Tcl_ChannelType) unsafe.Pointer
-	_fnTcl_Chdir func(string) int
-	_fnTcl_ClearChannelHandlers func(unsafe.Pointer)
-	_fnTcl_Close func(*Tcl_Interp, unsafe.Pointer) int
-	_fnTcl_CommandComplete func(string) int
-	_fnTcl_CommandTraceInfo func(*Tcl_Interp, string, int, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnTcl_Concat func(int, unsafe.Pointer) string
-	_fnTcl_ConcatObj func(int, unsafe.Pointer) *Tcl_Obj
-	_fnTcl_ConditionFinalize func(unsafe.Pointer)
-	_fnTcl_ConditionNotify func(unsafe.Pointer)
-	_fnTcl_ConditionWait func(unsafe.Pointer, unsafe.Pointer, *Tcl_Time)
-	_fnTcl_ConvertCountedElement func(string, int, string, int) int
-	_fnTcl_ConvertElement func(string, string, int) int
-	_fnTcl_ConvertToType func(*Tcl_Interp, *Tcl_Obj, *Tcl_ObjType) int
-	_fnTcl_CreateAlias func(*Tcl_Interp, string, *Tcl_Interp, string, int, unsafe.Pointer) int
-	_fnTcl_CreateAliasObj func(*Tcl_Interp, string, *Tcl_Interp, string, int, unsafe.Pointer) int
-	_fnTcl_CreateChannel func(*Tcl_ChannelType, string, unsafe.Pointer, int) unsafe.Pointer
-	_fnTcl_CreateChannelHandler func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer)
-	_fnTcl_CreateCloseHandler func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnTcl_CreateCommand func(*Tcl_Interp, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnTcl_CreateEncoding func(*Tcl_EncodingType) unsafe.Pointer
-	_fnTcl_CreateEnsemble func(*Tcl_Interp, string, *Tcl_Namespace, int) unsafe.Pointer
-	_fnTcl_CreateEventSource func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnTcl_CreateExitHandler func(unsafe.Pointer, unsafe.Pointer)
-	_fnTcl_CreateFileHandler func(int, int, unsafe.Pointer, unsafe.Pointer)
-	_fnTcl_CreateHashEntry func(*Tcl_HashTable, string, *int32) *Tcl_HashEntry
-	_fnTcl_CreateInterp func() *Tcl_Interp
-	_fnTcl_CreateMathFunc func(*Tcl_Interp, string, int, *Tcl_ValueType, unsafe.Pointer, unsafe.Pointer)
-	_fnTcl_CreateNamespace func(*Tcl_Interp, string, unsafe.Pointer, unsafe.Pointer) *Tcl_Namespace
-	_fnTcl_CreateObjCommand func(*Tcl_Interp, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnTcl_CreateObjTrace func(*Tcl_Interp, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnTcl_CreateSlave func(*Tcl_Interp, string, int) *Tcl_Interp
-	_fnTcl_CreateThread func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int) int
-	_fnTcl_CreateThreadExitHandler func(unsafe.Pointer, unsafe.Pointer)
-	_fnTcl_CreateTimerHandler func(int, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnTcl_CreateTrace func(*Tcl_Interp, int, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnTcl_CutChannel func(unsafe.Pointer)
-	_fnTcl_DStringAppend func(*Tcl_DString, string, int) string
-	_fnTcl_DStringAppendElement func(*Tcl_DString, string) string
-	_fnTcl_DStringEndSublist func(*Tcl_DString)
-	_fnTcl_DStringFree func(*Tcl_DString)
-	_fnTcl_DStringGetResult func(*Tcl_Interp, *Tcl_DString)
-	_fnTcl_DStringInit func(*Tcl_DString)
-	_fnTcl_DStringResult func(*Tcl_Interp, *Tcl_DString)
-	_fnTcl_DStringSetLength func(*Tcl_DString, int)
-	_fnTcl_DStringStartSublist func(*Tcl_DString)
-	_fnTcl_DbCkalloc func(uint, string, int) string
-	_fnTcl_DbCkfree func(string, string, int) int
-	_fnTcl_DbCkrealloc func(string, uint, string, int) string
-	_fnTcl_DbDecrRefCount func(*Tcl_Obj, string, int)
-	_fnTcl_DbIncrRefCount func(*Tcl_Obj, string, int)
-	_fnTcl_DbIsShared func(*Tcl_Obj, string, int) int
-	_fnTcl_DbNewBignumObj func(unsafe.Pointer, string, int) *Tcl_Obj
-	_fnTcl_DbNewBooleanObj func(int, string, int) *Tcl_Obj
-	_fnTcl_DbNewByteArrayObj func(*uint8, int, string, int) *Tcl_Obj
-	_fnTcl_DbNewDictObj func(string, int) *Tcl_Obj
-	_fnTcl_DbNewDoubleObj func(float64, string, int) *Tcl_Obj
-	_fnTcl_DbNewListObj func(int, unsafe.Pointer, string, int) *Tcl_Obj
-	_fnTcl_DbNewLongObj func(int, string, int) *Tcl_Obj
-	_fnTcl_DbNewObj func(string, int) *Tcl_Obj
-	_fnTcl_DbNewStringObj func(string, int, string, int) *Tcl_Obj
-	_fnTcl_DbNewWideIntObj func(int, string, int) *Tcl_Obj
-	_fnTcl_DecrRefCount func(*Tcl_Obj)
-	_fnTcl_DeleteAssocData func(*Tcl_Interp, string)
-	_fnTcl_DeleteChannelHandler func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnTcl_DeleteCloseHandler func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnTcl_DeleteCommand func(*Tcl_Interp, string) int
-	_fnTcl_DeleteCommandFromToken func(*Tcl_Interp, unsafe.Pointer) int
-	_fnTcl_DeleteEventSource func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnTcl_DeleteEvents func(unsafe.Pointer, unsafe.Pointer)
-	_fnTcl_DeleteExitHandler func(unsafe.Pointer, unsafe.Pointer)
-	_fnTcl_DeleteFileHandler func(int)
-	_fnTcl_DeleteHashEntry func(*Tcl_HashEntry)
-	_fnTcl_DeleteHashTable func(*Tcl_HashTable)
-	_fnTcl_DeleteInterp func(*Tcl_Interp)
-	_fnTcl_DeleteNamespace func(*Tcl_Namespace)
-	_fnTcl_DeleteThreadExitHandler func(unsafe.Pointer, unsafe.Pointer)
-	_fnTcl_DeleteTimerHandler func(unsafe.Pointer)
-	_fnTcl_DeleteTrace func(*Tcl_Interp, unsafe.Pointer)
-	_fnTcl_DetachChannel func(*Tcl_Interp, unsafe.Pointer) int
-	_fnTcl_DetachPids func(int, unsafe.Pointer)
-	_fnTcl_DictObjDone func(*Tcl_DictSearch)
-	_fnTcl_DictObjFirst func(*Tcl_Interp, *Tcl_Obj, *Tcl_DictSearch, *Tcl_Obj, *Tcl_Obj, *int32) int
-	_fnTcl_DictObjGet func(*Tcl_Interp, *Tcl_Obj, *Tcl_Obj, *Tcl_Obj) int
-	_fnTcl_DictObjNext func(*Tcl_DictSearch, *Tcl_Obj, *Tcl_Obj, *int32)
-	_fnTcl_DictObjPut func(*Tcl_Interp, *Tcl_Obj, *Tcl_Obj, *Tcl_Obj) int
-	_fnTcl_DictObjPutKeyList func(*Tcl_Interp, *Tcl_Obj, int, unsafe.Pointer, *Tcl_Obj) int
-	_fnTcl_DictObjRemove func(*Tcl_Interp, *Tcl_Obj, *Tcl_Obj) int
-	_fnTcl_DictObjRemoveKeyList func(*Tcl_Interp, *Tcl_Obj, int, unsafe.Pointer) int
-	_fnTcl_DictObjSize func(*Tcl_Interp, *Tcl_Obj, *int32) int
-	_fnTcl_DiscardInterpState func(unsafe.Pointer)
-	_fnTcl_DiscardResult func(*Tcl_SavedResult)
-	_fnTcl_DoOneEvent func(int) int
-	_fnTcl_DoWhenIdle func(unsafe.Pointer, unsafe.Pointer)
-	_fnTcl_DontCallWhenDeleted func(*Tcl_Interp, unsafe.Pointer, unsafe.Pointer)
-	_fnTcl_DumpActiveMemory func(string) int
-	_fnTcl_DuplicateObj func(*Tcl_Obj) *Tcl_Obj
-	_fnTcl_Eof func(unsafe.Pointer) int
-	_fnTcl_ErrnoId func() string
-	_fnTcl_ErrnoMsg func(int) string
-	_fnTcl_Eval func(*Tcl_Interp, string) int
-	_fnTcl_EvalEx func(*Tcl_Interp, string, int, int) int
-	_fnTcl_EvalFile func(*Tcl_Interp, string) int
-	_fnTcl_EvalObj func(*Tcl_Interp, *Tcl_Obj) int
-	_fnTcl_EvalObjEx func(*Tcl_Interp, *Tcl_Obj, int) int
-	_fnTcl_EvalObjv func(*Tcl_Interp, int, unsafe.Pointer, int) int
-	_fnTcl_EvalTokens func(*Tcl_Interp, *Tcl_Token, int) *Tcl_Obj
-	_fnTcl_EvalTokensStandard func(*Tcl_Interp, *Tcl_Token, int) int
-	_fnTcl_EventuallyFree func(unsafe.Pointer, unsafe.Pointer)
-	_fnTcl_Exit func(int)
-	_fnTcl_ExitThread func(int)
-	_fnTcl_Export func(*Tcl_Interp, *Tcl_Namespace, string, int) int
-	_fnTcl_ExposeCommand func(*Tcl_Interp, string, string) int
-	_fnTcl_ExprBoolean func(*Tcl_Interp, string, *int32) int
-	_fnTcl_ExprBooleanObj func(*Tcl_Interp, *Tcl_Obj, *int32) int
-	_fnTcl_ExprDouble func(*Tcl_Interp, string, *float64) int
-	_fnTcl_ExprDoubleObj func(*Tcl_Interp, *Tcl_Obj, *float64) int
-	_fnTcl_ExprLong func(*Tcl_Interp, string, *int64) int
-	_fnTcl_ExprLongObj func(*Tcl_Interp, *Tcl_Obj, *int64) int
-	_fnTcl_ExprObj func(*Tcl_Interp, *Tcl_Obj, *Tcl_Obj) int
-	_fnTcl_ExprString func(*Tcl_Interp, string) int
-	_fnTcl_ExternalToUtf func(*Tcl_Interp, unsafe.Pointer, string, int, int, unsafe.Pointer, string, int, *int32, *int32, *int32) int
-	_fnTcl_ExternalToUtfDString func(unsafe.Pointer, string, int, *Tcl_DString) string
-	_fnTcl_FSAccess func(*Tcl_Obj, int) int
-	_fnTcl_FSChdir func(*Tcl_Obj) int
-	_fnTcl_FSConvertToPathType func(*Tcl_Interp, *Tcl_Obj) int
-	_fnTcl_FSCopyDirectory func(*Tcl_Obj, *Tcl_Obj, *Tcl_Obj) int
-	_fnTcl_FSCopyFile func(*Tcl_Obj, *Tcl_Obj) int
-	_fnTcl_FSCreateDirectory func(*Tcl_Obj) int
-	_fnTcl_FSData func(*Tcl_Filesystem) unsafe.Pointer
-	_fnTcl_FSDeleteFile func(*Tcl_Obj) int
-	_fnTcl_FSEqualPaths func(*Tcl_Obj, *Tcl_Obj) int
-	_fnTcl_FSEvalFile func(*Tcl_Interp, *Tcl_Obj) int
-	_fnTcl_FSEvalFileEx func(*Tcl_Interp, *Tcl_Obj, string) int
-	_fnTcl_FSFileAttrStrings func(*Tcl_Obj, *Tcl_Obj) string
-	_fnTcl_FSFileAttrsGet func(*Tcl_Interp, int, *Tcl_Obj, *Tcl_Obj) int
-	_fnTcl_FSFileAttrsSet func(*Tcl_Interp, int, *Tcl_Obj, *Tcl_Obj) int
-	_fnTcl_FSFileSystemInfo func(*Tcl_Obj) *Tcl_Obj
-	_fnTcl_FSGetCwd func(*Tcl_Interp) *Tcl_Obj
-	_fnTcl_FSGetFileSystemForPath func(*Tcl_Obj) *Tcl_Filesystem
-	_fnTcl_FSGetInternalRep func(*Tcl_Obj, *Tcl_Filesystem) unsafe.Pointer
-	_fnTcl_FSGetNativePath func(*Tcl_Obj) string
-	_fnTcl_FSGetNormalizedPath func(*Tcl_Interp, *Tcl_Obj) *Tcl_Obj
-	_fnTcl_FSGetPathType func(*Tcl_Obj) Tcl_PathType
-	_fnTcl_FSGetTranslatedPath func(*Tcl_Interp, *Tcl_Obj) *Tcl_Obj
-	_fnTcl_FSGetTranslatedStringPath func(*Tcl_Interp, *Tcl_Obj) string
-	_fnTcl_FSJoinPath func(*Tcl_Obj, int) *Tcl_Obj
-	_fnTcl_FSJoinToPath func(*Tcl_Obj, int, unsafe.Pointer) *Tcl_Obj
-	_fnTcl_FSLink func(*Tcl_Obj, *Tcl_Obj, int) *Tcl_Obj
-	_fnTcl_FSListVolumes func() *Tcl_Obj
-	_fnTcl_FSLoadFile func(*Tcl_Interp, *Tcl_Obj, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnTcl_FSLstat func(*Tcl_Obj, unsafe.Pointer) int
-	_fnTcl_FSMatchInDirectory func(*Tcl_Interp, *Tcl_Obj, *Tcl_Obj, string, *Tcl_GlobTypeData) int
-	_fnTcl_FSMountsChanged func(*Tcl_Filesystem)
-	_fnTcl_FSNewNativePath func(*Tcl_Filesystem, unsafe.Pointer) *Tcl_Obj
-	_fnTcl_FSOpenFileChannel func(*Tcl_Interp, *Tcl_Obj, string, int) unsafe.Pointer
-	_fnTcl_FSPathSeparator func(*Tcl_Obj) *Tcl_Obj
-	_fnTcl_FSRegister func(unsafe.Pointer, *Tcl_Filesystem) int
-	_fnTcl_FSRemoveDirectory func(*Tcl_Obj, int, *Tcl_Obj) int
-	_fnTcl_FSRenameFile func(*Tcl_Obj, *Tcl_Obj) int
-	_fnTcl_FSSplitPath func(*Tcl_Obj, *int32) *Tcl_Obj
-	_fnTcl_FSStat func(*Tcl_Obj, unsafe.Pointer) int
-	_fnTcl_FSUnregister func(*Tcl_Filesystem) int
-	_fnTcl_FSUtime func(*Tcl_Obj, unsafe.Pointer) int
-	_fnTcl_Finalize func()
-	_fnTcl_FinalizeNotifier func(unsafe.Pointer)
-	_fnTcl_FinalizeThread func()
-	_fnTcl_FindCommand func(*Tcl_Interp, string, *Tcl_Namespace, int) unsafe.Pointer
-	_fnTcl_FindEnsemble func(*Tcl_Interp, *Tcl_Obj, int) unsafe.Pointer
-	_fnTcl_FindExecutable func(string)
-	_fnTcl_FindHashEntry func(*Tcl_HashTable, string) *Tcl_HashEntry
-	_fnTcl_FindNamespace func(*Tcl_Interp, string, *Tcl_Namespace, int) *Tcl_Namespace
-	_fnTcl_FirstHashEntry func(*Tcl_HashTable, *Tcl_HashSearch) *Tcl_HashEntry
-	_fnTcl_Flush func(unsafe.Pointer) int
-	_fnTcl_ForgetImport func(*Tcl_Interp, *Tcl_Namespace, string) int
-	_fnTcl_Format func(*Tcl_Interp, string, int, unsafe.Pointer) *Tcl_Obj
-	_fnTcl_Free func(string)
-	_fnTcl_FreeEncoding func(unsafe.Pointer)
-	_fnTcl_FreeParse func(*Tcl_Parse)
-	_fnTcl_FreeResult func(*Tcl_Interp)
-	_fnTcl_GetAlias func(*Tcl_Interp, string, *Tcl_Interp, string, *int32, string) int
-	_fnTcl_GetAliasObj func(*Tcl_Interp, string, *Tcl_Interp, string, *int32, *Tcl_Obj) int
-	_fnTcl_GetAllocMutex func() unsafe.Pointer
-	_fnTcl_GetAssocData func(*Tcl_Interp, string, unsafe.Pointer) unsafe.Pointer
-	_fnTcl_GetBignumFromObj func(*Tcl_Interp, *Tcl_Obj, unsafe.Pointer) int
-	_fnTcl_GetBoolean func(*Tcl_Interp, string, *int32) int
-	_fnTcl_GetBooleanFromObj func(*Tcl_Interp, *Tcl_Obj, *int32) int
-	_fnTcl_GetByteArrayFromObj func(*Tcl_Obj, *int32) unsafe.Pointer
-	_fnTcl_GetChannel func(*Tcl_Interp, string, *int32) unsafe.Pointer
-	_fnTcl_GetChannelBufferSize func(unsafe.Pointer) int
-	_fnTcl_GetChannelError func(unsafe.Pointer, *Tcl_Obj)
-	_fnTcl_GetChannelErrorInterp func(*Tcl_Interp, *Tcl_Obj)
-	_fnTcl_GetChannelHandle func(unsafe.Pointer, int, unsafe.Pointer) int
-	_fnTcl_GetChannelInstanceData func(unsafe.Pointer) unsafe.Pointer
-	_fnTcl_GetChannelMode func(unsafe.Pointer) int
-	_fnTcl_GetChannelName func(unsafe.Pointer) string
-	_fnTcl_GetChannelNames func(*Tcl_Interp) int
-	_fnTcl_GetChannelNamesEx func(*Tcl_Interp, string) int
-	_fnTcl_GetChannelOption func(*Tcl_Interp, unsafe.Pointer, string, *Tcl_DString) int
-	_fnTcl_GetChannelThread func(unsafe.Pointer) unsafe.Pointer
-	_fnTcl_GetChannelType func(unsafe.Pointer) *Tcl_ChannelType
-	_fnTcl_GetCharLength func(*Tcl_Obj) int
-	_fnTcl_GetCommandFromObj func(*Tcl_Interp, *Tcl_Obj) unsafe.Pointer
-	_fnTcl_GetCommandFullName func(*Tcl_Interp, unsafe.Pointer, *Tcl_Obj)
-	_fnTcl_GetCommandInfo func(*Tcl_Interp, string, *Tcl_CmdInfo) int
-	_fnTcl_GetCommandInfoFromToken func(unsafe.Pointer, *Tcl_CmdInfo) int
-	_fnTcl_GetCommandName func(*Tcl_Interp, unsafe.Pointer) string
-	_fnTcl_GetCurrentNamespace func(*Tcl_Interp) *Tcl_Namespace
-	_fnTcl_GetCurrentThread func() unsafe.Pointer
-	_fnTcl_GetCwd func(*Tcl_Interp, *Tcl_DString) string
-	_fnTcl_GetDefaultEncodingDir func() string
-	_fnTcl_GetDouble func(*Tcl_Interp, string, *float64) int
-	_fnTcl_GetDoubleFromObj func(*Tcl_Interp, *Tcl_Obj, *float64) int
-	_fnTcl_GetEncoding func(*Tcl_Interp, string) unsafe.Pointer
-	_fnTcl_GetEncodingFromObj func(*Tcl_Interp, *Tcl_Obj, unsafe.Pointer) int
-	_fnTcl_GetEncodingName func(unsafe.Pointer) string
-	_fnTcl_GetEncodingNameFromEnvironment func(*Tcl_DString) string
-	_fnTcl_GetEncodingNames func(*Tcl_Interp)
-	_fnTcl_GetEncodingSearchPath func() *Tcl_Obj
-	_fnTcl_GetEnsembleFlags func(*Tcl_Interp, unsafe.Pointer, *int32) int
-	_fnTcl_GetEnsembleMappingDict func(*Tcl_Interp, unsafe.Pointer, *Tcl_Obj) int
-	_fnTcl_GetEnsembleNamespace func(*Tcl_Interp, unsafe.Pointer, *Tcl_Namespace) int
-	_fnTcl_GetEnsembleSubcommandList func(*Tcl_Interp, unsafe.Pointer, *Tcl_Obj) int
-	_fnTcl_GetEnsembleUnknownHandler func(*Tcl_Interp, unsafe.Pointer, *Tcl_Obj) int
-	_fnTcl_GetErrno func() int
-	_fnTcl_GetGlobalNamespace func(*Tcl_Interp) *Tcl_Namespace
-	_fnTcl_GetHostName func() string
-	_fnTcl_GetIndexFromObj func(*Tcl_Interp, *Tcl_Obj, string, string, int, *int32) int
-	_fnTcl_GetIndexFromObjStruct func(*Tcl_Interp, *Tcl_Obj, unsafe.Pointer, int, string, int, *int32) int
-	_fnTcl_GetInt func(*Tcl_Interp, string, *int32) int
-	_fnTcl_GetIntFromObj func(*Tcl_Interp, *Tcl_Obj, *int32) int
-	_fnTcl_GetInterpPath func(*Tcl_Interp, *Tcl_Interp) int
-	_fnTcl_GetLongFromObj func(*Tcl_Interp, *Tcl_Obj, *int64) int
-	_fnTcl_GetMaster func(*Tcl_Interp) *Tcl_Interp
-	_fnTcl_GetMathFuncInfo func(*Tcl_Interp, string, *int32, *Tcl_ValueType, unsafe.Pointer, unsafe.Pointer) int
-	_fnTcl_GetMemoryInfo func(*Tcl_DString)
-	_fnTcl_GetNameOfExecutable func() string
-	_fnTcl_GetNamespaceUnknownHandler func(*Tcl_Interp, *Tcl_Namespace) *Tcl_Obj
-	_fnTcl_GetObjResult func(*Tcl_Interp) *Tcl_Obj
-	_fnTcl_GetObjType func(string) *Tcl_ObjType
-	_fnTcl_GetOpenFile func(*Tcl_Interp, string, int, int, unsafe.Pointer) int
-	_fnTcl_GetPathType func(string) Tcl_PathType
-	_fnTcl_GetRange func(*Tcl_Obj, int, int) *Tcl_Obj
-	_fnTcl_GetRegExpFromObj func(*Tcl_Interp, *Tcl_Obj, int) unsafe.Pointer
-	_fnTcl_GetReturnOptions func(*Tcl_Interp, int) *Tcl_Obj
-	_fnTcl_GetServiceMode func() int
-	_fnTcl_GetSlave func(*Tcl_Interp, string) *Tcl_Interp
-	_fnTcl_GetStackedChannel func(unsafe.Pointer) unsafe.Pointer
-	_fnTcl_GetStdChannel func(int) unsafe.Pointer
-	_fnTcl_GetString func(*Tcl_Obj) string
-	_fnTcl_GetStringFromObj func(*Tcl_Obj, *int32) string
-	_fnTcl_GetStringResult func(*Tcl_Interp) string
-	_fnTcl_GetThreadData func(unsafe.Pointer, int) unsafe.Pointer
-	_fnTcl_GetTime func(*Tcl_Time)
-	_fnTcl_GetTopChannel func(unsafe.Pointer) unsafe.Pointer
-	_fnTcl_GetUniChar func(*Tcl_Obj, int) uint16
-	_fnTcl_GetUnicode func(*Tcl_Obj) *uint16
-	_fnTcl_GetUnicodeFromObj func(*Tcl_Obj, *int32) *uint16
-	_fnTcl_GetVar func(*Tcl_Interp, string, int) string
-	_fnTcl_GetVar2 func(*Tcl_Interp, string, string, int) string
-	_fnTcl_GetVar2Ex func(*Tcl_Interp, string, string, int) *Tcl_Obj
-	_fnTcl_GetVersion func(*int32, *int32, *int32, *int32)
-	_fnTcl_GetWideIntFromObj func(*Tcl_Interp, *Tcl_Obj, *int) int
-	_fnTcl_Gets func(unsafe.Pointer, *Tcl_DString) int
-	_fnTcl_GetsObj func(unsafe.Pointer, *Tcl_Obj) int
-	_fnTcl_GlobalEval func(*Tcl_Interp, string) int
-	_fnTcl_GlobalEvalObj func(*Tcl_Interp, *Tcl_Obj) int
-	_fnTcl_HashStats func(*Tcl_HashTable) string
-	_fnTcl_HideCommand func(*Tcl_Interp, string, string) int
-	_fnTcl_Import func(*Tcl_Interp, *Tcl_Namespace, string, int) int
-	_fnTcl_IncrRefCount func(*Tcl_Obj)
-	_fnTcl_Init func(*Tcl_Interp) int
-	_fnTcl_InitBignumFromDouble func(*Tcl_Interp, float64, unsafe.Pointer) int
-	_fnTcl_InitCustomHashTable func(*Tcl_HashTable, int, *Tcl_HashKeyType)
-	_fnTcl_InitHashTable func(*Tcl_HashTable, int)
-	_fnTcl_InitMemory func(*Tcl_Interp)
-	_fnTcl_InitNotifier func() unsafe.Pointer
-	_fnTcl_InitObjHashTable func(*Tcl_HashTable)
-	_fnTcl_InitStubs func(*Tcl_Interp, string, int) string
-	_fnTcl_InputBlocked func(unsafe.Pointer) int
-	_fnTcl_InputBuffered func(unsafe.Pointer) int
-	_fnTcl_InterpDeleted func(*Tcl_Interp) int
-	_fnTcl_InvalidateStringRep func(*Tcl_Obj)
-	_fnTcl_IsChannelExisting func(string) int
-	_fnTcl_IsChannelRegistered func(*Tcl_Interp, unsafe.Pointer) int
-	_fnTcl_IsChannelShared func(unsafe.Pointer) int
-	_fnTcl_IsEnsemble func(unsafe.Pointer) int
-	_fnTcl_IsSafe func(*Tcl_Interp) int
-	_fnTcl_IsShared func(*Tcl_Obj) int
-	_fnTcl_IsStandardChannel func(unsafe.Pointer) int
-	_fnTcl_JoinPath func(int, unsafe.Pointer, *Tcl_DString) string
-	_fnTcl_JoinThread func(unsafe.Pointer, *int32) int
-	_fnTcl_LimitAddHandler func(*Tcl_Interp, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnTcl_LimitCheck func(*Tcl_Interp) int
-	_fnTcl_LimitExceeded func(*Tcl_Interp) int
-	_fnTcl_LimitGetCommands func(*Tcl_Interp) int
-	_fnTcl_LimitGetGranularity func(*Tcl_Interp, int) int
-	_fnTcl_LimitGetTime func(*Tcl_Interp, *Tcl_Time)
-	_fnTcl_LimitReady func(*Tcl_Interp) int
-	_fnTcl_LimitRemoveHandler func(*Tcl_Interp, int, unsafe.Pointer, unsafe.Pointer)
-	_fnTcl_LimitSetCommands func(*Tcl_Interp, int)
-	_fnTcl_LimitSetGranularity func(*Tcl_Interp, int, int)
-	_fnTcl_LimitSetTime func(*Tcl_Interp, *Tcl_Time)
-	_fnTcl_LimitTypeEnabled func(*Tcl_Interp, int) int
-	_fnTcl_LimitTypeExceeded func(*Tcl_Interp, int) int
-	_fnTcl_LimitTypeReset func(*Tcl_Interp, int)
-	_fnTcl_LimitTypeSet func(*Tcl_Interp, int)
-	_fnTcl_LinkVar func(*Tcl_Interp, string, string, int) int
-	_fnTcl_ListMathFuncs func(*Tcl_Interp, string) *Tcl_Obj
-	_fnTcl_ListObjAppendElement func(*Tcl_Interp, *Tcl_Obj, *Tcl_Obj) int
-	_fnTcl_ListObjAppendList func(*Tcl_Interp, *Tcl_Obj, *Tcl_Obj) int
-	_fnTcl_ListObjGetElements func(*Tcl_Interp, *Tcl_Obj, *int32, *Tcl_Obj) int
-	_fnTcl_ListObjIndex func(*Tcl_Interp, *Tcl_Obj, int, *Tcl_Obj) int
-	_fnTcl_ListObjLength func(*Tcl_Interp, *Tcl_Obj, *int32) int
-	_fnTcl_ListObjReplace func(*Tcl_Interp, *Tcl_Obj, int, int, int, unsafe.Pointer) int
-	_fnTcl_LogCommandInfo func(*Tcl_Interp, string, string, int)
-	_fnTcl_MacOSXOpenBundleResources func(*Tcl_Interp, string, int, int, string) int
+	_fnTclFreeObj                             func(*Tcl_Obj)
+	_fnTclTomMathInitializeStubs              func(*Tcl_Interp, string, int, int) string
+	_fnTcl_Access                             func(string, int) int
+	_fnTcl_AddErrorInfo                       func(*Tcl_Interp, string)
+	_fnTcl_AddObjErrorInfo                    func(*Tcl_Interp, string, int)
+	_fnTcl_AlertNotifier                      func(unsafe.Pointer)
+	_fnTcl_Alloc                              func(uint) string
+	_fnTcl_AllocStatBuf                       func() unsafe.Pointer
+	_fnTcl_AllowExceptions                    func(*Tcl_Interp)
+	_fnTcl_AppInit                            func(*Tcl_Interp) int
+	_fnTcl_AppendAllObjTypes                  func(*Tcl_Interp, *Tcl_Obj) int
+	_fnTcl_AppendElement                      func(*Tcl_Interp, string)
+	_fnTcl_AppendExportList                   func(*Tcl_Interp, *Tcl_Namespace, *Tcl_Obj) int
+	_fnTcl_AppendFormatToObj                  func(*Tcl_Interp, *Tcl_Obj, string, int, unsafe.Pointer) int
+	_fnTcl_AppendLimitedToObj                 func(*Tcl_Obj, string, int, int, string)
+	_fnTcl_AppendObjToErrorInfo               func(*Tcl_Interp, *Tcl_Obj)
+	_fnTcl_AppendObjToObj                     func(*Tcl_Obj, *Tcl_Obj)
+	_fnTcl_AppendPrintfToObj                  func(*Tcl_Obj, string)
+	_fnTcl_AppendResultVA                     func(*Tcl_Interp, string)
+	_fnTcl_AppendStringsToObjVA               func(*Tcl_Obj, string)
+	_fnTcl_AppendToObj                        func(*Tcl_Obj, string, int)
+	_fnTcl_AppendUnicodeToObj                 func(*Tcl_Obj, *uint16, int)
+	_fnTcl_AsyncCreate                        func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnTcl_AsyncDelete                        func(unsafe.Pointer)
+	_fnTcl_AsyncInvoke                        func(*Tcl_Interp, int) int
+	_fnTcl_AsyncMark                          func(unsafe.Pointer)
+	_fnTcl_AsyncReady                         func() int
+	_fnTcl_AttemptAlloc                       func(uint) string
+	_fnTcl_AttemptDbCkalloc                   func(uint, string, int) string
+	_fnTcl_AttemptDbCkrealloc                 func(string, uint, string, int) string
+	_fnTcl_AttemptRealloc                     func(string, uint) string
+	_fnTcl_AttemptSetObjLength                func(*Tcl_Obj, int) int
+	_fnTcl_BackgroundError                    func(*Tcl_Interp)
+	_fnTcl_Backslash                          func(string, *int32) int8
+	_fnTcl_BadChannelOption                   func(*Tcl_Interp, string, string) int
+	_fnTcl_CallWhenDeleted                    func(*Tcl_Interp, unsafe.Pointer, unsafe.Pointer)
+	_fnTcl_CancelIdleCall                     func(unsafe.Pointer, unsafe.Pointer)
+	_fnTcl_ChannelBlockModeProc               func(*Tcl_ChannelType) unsafe.Pointer
+	_fnTcl_ChannelBuffered                    func(unsafe.Pointer) int
+	_fnTcl_ChannelClose2Proc                  func(*Tcl_ChannelType) unsafe.Pointer
+	_fnTcl_ChannelCloseProc                   func(*Tcl_ChannelType) unsafe.Pointer
+	_fnTcl_ChannelFlushProc                   func(*Tcl_ChannelType) unsafe.Pointer
+	_fnTcl_ChannelGetHandleProc               func(*Tcl_ChannelType) unsafe.Pointer
+	_fnTcl_ChannelGetOptionProc               func(*Tcl_ChannelType) unsafe.Pointer
+	_fnTcl_ChannelHandlerProc                 func(*Tcl_ChannelType) unsafe.Pointer
+	_fnTcl_ChannelInputProc                   func(*Tcl_ChannelType) unsafe.Pointer
+	_fnTcl_ChannelName                        func(*Tcl_ChannelType) string
+	_fnTcl_ChannelOutputProc                  func(*Tcl_ChannelType) unsafe.Pointer
+	_fnTcl_ChannelSeekProc                    func(*Tcl_ChannelType) unsafe.Pointer
+	_fnTcl_ChannelSetOptionProc               func(*Tcl_ChannelType) unsafe.Pointer
+	_fnTcl_ChannelThreadActionProc            func(*Tcl_ChannelType) unsafe.Pointer
+	_fnTcl_ChannelTruncateProc                func(*Tcl_ChannelType) unsafe.Pointer
+	_fnTcl_ChannelVersion                     func(*Tcl_ChannelType) unsafe.Pointer
+	_fnTcl_ChannelWatchProc                   func(*Tcl_ChannelType) unsafe.Pointer
+	_fnTcl_ChannelWideSeekProc                func(*Tcl_ChannelType) unsafe.Pointer
+	_fnTcl_Chdir                              func(string) int
+	_fnTcl_ClearChannelHandlers               func(unsafe.Pointer)
+	_fnTcl_Close                              func(*Tcl_Interp, unsafe.Pointer) int
+	_fnTcl_CommandComplete                    func(string) int
+	_fnTcl_CommandTraceInfo                   func(*Tcl_Interp, string, int, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnTcl_Concat                             func(int, unsafe.Pointer) string
+	_fnTcl_ConcatObj                          func(int, unsafe.Pointer) *Tcl_Obj
+	_fnTcl_ConditionFinalize                  func(unsafe.Pointer)
+	_fnTcl_ConditionNotify                    func(unsafe.Pointer)
+	_fnTcl_ConditionWait                      func(unsafe.Pointer, unsafe.Pointer, *Tcl_Time)
+	_fnTcl_ConvertCountedElement              func(string, int, string, int) int
+	_fnTcl_ConvertElement                     func(string, string, int) int
+	_fnTcl_ConvertToType                      func(*Tcl_Interp, *Tcl_Obj, *Tcl_ObjType) int
+	_fnTcl_CreateAlias                        func(*Tcl_Interp, string, *Tcl_Interp, string, int, unsafe.Pointer) int
+	_fnTcl_CreateAliasObj                     func(*Tcl_Interp, string, *Tcl_Interp, string, int, unsafe.Pointer) int
+	_fnTcl_CreateChannel                      func(*Tcl_ChannelType, string, unsafe.Pointer, int) unsafe.Pointer
+	_fnTcl_CreateChannelHandler               func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer)
+	_fnTcl_CreateCloseHandler                 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnTcl_CreateCommand                      func(*Tcl_Interp, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnTcl_CreateEncoding                     func(*Tcl_EncodingType) unsafe.Pointer
+	_fnTcl_CreateEnsemble                     func(*Tcl_Interp, string, *Tcl_Namespace, int) unsafe.Pointer
+	_fnTcl_CreateEventSource                  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnTcl_CreateExitHandler                  func(unsafe.Pointer, unsafe.Pointer)
+	_fnTcl_CreateFileHandler                  func(int, int, unsafe.Pointer, unsafe.Pointer)
+	_fnTcl_CreateHashEntry                    func(*Tcl_HashTable, string, *int32) *Tcl_HashEntry
+	_fnTcl_CreateInterp                       func() *Tcl_Interp
+	_fnTcl_CreateMathFunc                     func(*Tcl_Interp, string, int, *Tcl_ValueType, unsafe.Pointer, unsafe.Pointer)
+	_fnTcl_CreateNamespace                    func(*Tcl_Interp, string, unsafe.Pointer, unsafe.Pointer) *Tcl_Namespace
+	_fnTcl_CreateObjCommand                   func(*Tcl_Interp, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnTcl_CreateObjTrace                     func(*Tcl_Interp, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnTcl_CreateSlave                        func(*Tcl_Interp, string, int) *Tcl_Interp
+	_fnTcl_CreateThread                       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int) int
+	_fnTcl_CreateThreadExitHandler            func(unsafe.Pointer, unsafe.Pointer)
+	_fnTcl_CreateTimerHandler                 func(int, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnTcl_CreateTrace                        func(*Tcl_Interp, int, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnTcl_CutChannel                         func(unsafe.Pointer)
+	_fnTcl_DStringAppend                      func(*Tcl_DString, string, int) string
+	_fnTcl_DStringAppendElement               func(*Tcl_DString, string) string
+	_fnTcl_DStringEndSublist                  func(*Tcl_DString)
+	_fnTcl_DStringFree                        func(*Tcl_DString)
+	_fnTcl_DStringGetResult                   func(*Tcl_Interp, *Tcl_DString)
+	_fnTcl_DStringInit                        func(*Tcl_DString)
+	_fnTcl_DStringResult                      func(*Tcl_Interp, *Tcl_DString)
+	_fnTcl_DStringSetLength                   func(*Tcl_DString, int)
+	_fnTcl_DStringStartSublist                func(*Tcl_DString)
+	_fnTcl_DbCkalloc                          func(uint, string, int) string
+	_fnTcl_DbCkfree                           func(string, string, int) int
+	_fnTcl_DbCkrealloc                        func(string, uint, string, int) string
+	_fnTcl_DbDecrRefCount                     func(*Tcl_Obj, string, int)
+	_fnTcl_DbIncrRefCount                     func(*Tcl_Obj, string, int)
+	_fnTcl_DbIsShared                         func(*Tcl_Obj, string, int) int
+	_fnTcl_DbNewBignumObj                     func(unsafe.Pointer, string, int) *Tcl_Obj
+	_fnTcl_DbNewBooleanObj                    func(int, string, int) *Tcl_Obj
+	_fnTcl_DbNewByteArrayObj                  func(*uint8, int, string, int) *Tcl_Obj
+	_fnTcl_DbNewDictObj                       func(string, int) *Tcl_Obj
+	_fnTcl_DbNewDoubleObj                     func(float64, string, int) *Tcl_Obj
+	_fnTcl_DbNewListObj                       func(int, unsafe.Pointer, string, int) *Tcl_Obj
+	_fnTcl_DbNewLongObj                       func(int, string, int) *Tcl_Obj
+	_fnTcl_DbNewObj                           func(string, int) *Tcl_Obj
+	_fnTcl_DbNewStringObj                     func(string, int, string, int) *Tcl_Obj
+	_fnTcl_DbNewWideIntObj                    func(int, string, int) *Tcl_Obj
+	_fnTcl_DecrRefCount                       func(*Tcl_Obj)
+	_fnTcl_DeleteAssocData                    func(*Tcl_Interp, string)
+	_fnTcl_DeleteChannelHandler               func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnTcl_DeleteCloseHandler                 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnTcl_DeleteCommand                      func(*Tcl_Interp, string) int
+	_fnTcl_DeleteCommandFromToken             func(*Tcl_Interp, unsafe.Pointer) int
+	_fnTcl_DeleteEventSource                  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnTcl_DeleteEvents                       func(unsafe.Pointer, unsafe.Pointer)
+	_fnTcl_DeleteExitHandler                  func(unsafe.Pointer, unsafe.Pointer)
+	_fnTcl_DeleteFileHandler                  func(int)
+	_fnTcl_DeleteHashEntry                    func(*Tcl_HashEntry)
+	_fnTcl_DeleteHashTable                    func(*Tcl_HashTable)
+	_fnTcl_DeleteInterp                       func(*Tcl_Interp)
+	_fnTcl_DeleteNamespace                    func(*Tcl_Namespace)
+	_fnTcl_DeleteThreadExitHandler            func(unsafe.Pointer, unsafe.Pointer)
+	_fnTcl_DeleteTimerHandler                 func(unsafe.Pointer)
+	_fnTcl_DeleteTrace                        func(*Tcl_Interp, unsafe.Pointer)
+	_fnTcl_DetachChannel                      func(*Tcl_Interp, unsafe.Pointer) int
+	_fnTcl_DetachPids                         func(int, unsafe.Pointer)
+	_fnTcl_DictObjDone                        func(*Tcl_DictSearch)
+	_fnTcl_DictObjFirst                       func(*Tcl_Interp, *Tcl_Obj, *Tcl_DictSearch, *Tcl_Obj, *Tcl_Obj, *int32) int
+	_fnTcl_DictObjGet                         func(*Tcl_Interp, *Tcl_Obj, *Tcl_Obj, *Tcl_Obj) int
+	_fnTcl_DictObjNext                        func(*Tcl_DictSearch, *Tcl_Obj, *Tcl_Obj, *int32)
+	_fnTcl_DictObjPut                         func(*Tcl_Interp, *Tcl_Obj, *Tcl_Obj, *Tcl_Obj) int
+	_fnTcl_DictObjPutKeyList                  func(*Tcl_Interp, *Tcl_Obj, int, unsafe.Pointer, *Tcl_Obj) int
+	_fnTcl_DictObjRemove                      func(*Tcl_Interp, *Tcl_Obj, *Tcl_Obj) int
+	_fnTcl_DictObjRemoveKeyList               func(*Tcl_Interp, *Tcl_Obj, int, unsafe.Pointer) int
+	_fnTcl_DictObjSize                        func(*Tcl_Interp, *Tcl_Obj, *int32) int
+	_fnTcl_DiscardInterpState                 func(unsafe.Pointer)
+	_fnTcl_DiscardResult                      func(*Tcl_SavedResult)
+	_fnTcl_DoOneEvent                         func(int) int
+	_fnTcl_DoWhenIdle                         func(unsafe.Pointer, unsafe.Pointer)
+	_fnTcl_DontCallWhenDeleted                func(*Tcl_Interp, unsafe.Pointer, unsafe.Pointer)
+	_fnTcl_DumpActiveMemory                   func(string) int
+	_fnTcl_DuplicateObj                       func(*Tcl_Obj) *Tcl_Obj
+	_fnTcl_Eof                                func(unsafe.Pointer) int
+	_fnTcl_ErrnoId                            func() string
+	_fnTcl_ErrnoMsg                           func(int) string
+	_fnTcl_Eval                               func(*Tcl_Interp, string) int
+	_fnTcl_EvalEx                             func(*Tcl_Interp, string, int, int) int
+	_fnTcl_EvalFile                           func(*Tcl_Interp, string) int
+	_fnTcl_EvalObj                            func(*Tcl_Interp, *Tcl_Obj) int
+	_fnTcl_EvalObjEx                          func(*Tcl_Interp, *Tcl_Obj, int) int
+	_fnTcl_EvalObjv                           func(*Tcl_Interp, int, unsafe.Pointer, int) int
+	_fnTcl_EvalTokens                         func(*Tcl_Interp, *Tcl_Token, int) *Tcl_Obj
+	_fnTcl_EvalTokensStandard                 func(*Tcl_Interp, *Tcl_Token, int) int
+	_fnTcl_EventuallyFree                     func(unsafe.Pointer, unsafe.Pointer)
+	_fnTcl_Exit                               func(int)
+	_fnTcl_ExitThread                         func(int)
+	_fnTcl_Export                             func(*Tcl_Interp, *Tcl_Namespace, string, int) int
+	_fnTcl_ExposeCommand                      func(*Tcl_Interp, string, string) int
+	_fnTcl_ExprBoolean                        func(*Tcl_Interp, string, *int32) int
+	_fnTcl_ExprBooleanObj                     func(*Tcl_Interp, *Tcl_Obj, *int32) int
+	_fnTcl_ExprDouble                         func(*Tcl_Interp, string, *float64) int
+	_fnTcl_ExprDoubleObj                      func(*Tcl_Interp, *Tcl_Obj, *float64) int
+	_fnTcl_ExprLong                           func(*Tcl_Interp, string, *int64) int
+	_fnTcl_ExprLongObj                        func(*Tcl_Interp, *Tcl_Obj, *int64) int
+	_fnTcl_ExprObj                            func(*Tcl_Interp, *Tcl_Obj, *Tcl_Obj) int
+	_fnTcl_ExprString                         func(*Tcl_Interp, string) int
+	_fnTcl_ExternalToUtf                      func(*Tcl_Interp, unsafe.Pointer, string, int, int, unsafe.Pointer, string, int, *int32, *int32, *int32) int
+	_fnTcl_ExternalToUtfDString               func(unsafe.Pointer, string, int, *Tcl_DString) string
+	_fnTcl_FSAccess                           func(*Tcl_Obj, int) int
+	_fnTcl_FSChdir                            func(*Tcl_Obj) int
+	_fnTcl_FSConvertToPathType                func(*Tcl_Interp, *Tcl_Obj) int
+	_fnTcl_FSCopyDirectory                    func(*Tcl_Obj, *Tcl_Obj, *Tcl_Obj) int
+	_fnTcl_FSCopyFile                         func(*Tcl_Obj, *Tcl_Obj) int
+	_fnTcl_FSCreateDirectory                  func(*Tcl_Obj) int
+	_fnTcl_FSData                             func(*Tcl_Filesystem) unsafe.Pointer
+	_fnTcl_FSDeleteFile                       func(*Tcl_Obj) int
+	_fnTcl_FSEqualPaths                       func(*Tcl_Obj, *Tcl_Obj) int
+	_fnTcl_FSEvalFile                         func(*Tcl_Interp, *Tcl_Obj) int
+	_fnTcl_FSEvalFileEx                       func(*Tcl_Interp, *Tcl_Obj, string) int
+	_fnTcl_FSFileAttrStrings                  func(*Tcl_Obj, *Tcl_Obj) string
+	_fnTcl_FSFileAttrsGet                     func(*Tcl_Interp, int, *Tcl_Obj, *Tcl_Obj) int
+	_fnTcl_FSFileAttrsSet                     func(*Tcl_Interp, int, *Tcl_Obj, *Tcl_Obj) int
+	_fnTcl_FSFileSystemInfo                   func(*Tcl_Obj) *Tcl_Obj
+	_fnTcl_FSGetCwd                           func(*Tcl_Interp) *Tcl_Obj
+	_fnTcl_FSGetFileSystemForPath             func(*Tcl_Obj) *Tcl_Filesystem
+	_fnTcl_FSGetInternalRep                   func(*Tcl_Obj, *Tcl_Filesystem) unsafe.Pointer
+	_fnTcl_FSGetNativePath                    func(*Tcl_Obj) string
+	_fnTcl_FSGetNormalizedPath                func(*Tcl_Interp, *Tcl_Obj) *Tcl_Obj
+	_fnTcl_FSGetPathType                      func(*Tcl_Obj) Tcl_PathType
+	_fnTcl_FSGetTranslatedPath                func(*Tcl_Interp, *Tcl_Obj) *Tcl_Obj
+	_fnTcl_FSGetTranslatedStringPath          func(*Tcl_Interp, *Tcl_Obj) string
+	_fnTcl_FSJoinPath                         func(*Tcl_Obj, int) *Tcl_Obj
+	_fnTcl_FSJoinToPath                       func(*Tcl_Obj, int, unsafe.Pointer) *Tcl_Obj
+	_fnTcl_FSLink                             func(*Tcl_Obj, *Tcl_Obj, int) *Tcl_Obj
+	_fnTcl_FSListVolumes                      func() *Tcl_Obj
+	_fnTcl_FSLoadFile                         func(*Tcl_Interp, *Tcl_Obj, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnTcl_FSLstat                            func(*Tcl_Obj, unsafe.Pointer) int
+	_fnTcl_FSMatchInDirectory                 func(*Tcl_Interp, *Tcl_Obj, *Tcl_Obj, string, *Tcl_GlobTypeData) int
+	_fnTcl_FSMountsChanged                    func(*Tcl_Filesystem)
+	_fnTcl_FSNewNativePath                    func(*Tcl_Filesystem, unsafe.Pointer) *Tcl_Obj
+	_fnTcl_FSOpenFileChannel                  func(*Tcl_Interp, *Tcl_Obj, string, int) unsafe.Pointer
+	_fnTcl_FSPathSeparator                    func(*Tcl_Obj) *Tcl_Obj
+	_fnTcl_FSRegister                         func(unsafe.Pointer, *Tcl_Filesystem) int
+	_fnTcl_FSRemoveDirectory                  func(*Tcl_Obj, int, *Tcl_Obj) int
+	_fnTcl_FSRenameFile                       func(*Tcl_Obj, *Tcl_Obj) int
+	_fnTcl_FSSplitPath                        func(*Tcl_Obj, *int32) *Tcl_Obj
+	_fnTcl_FSStat                             func(*Tcl_Obj, unsafe.Pointer) int
+	_fnTcl_FSUnregister                       func(*Tcl_Filesystem) int
+	_fnTcl_FSUtime                            func(*Tcl_Obj, unsafe.Pointer) int
+	_fnTcl_Finalize                           func()
+	_fnTcl_FinalizeNotifier                   func(unsafe.Pointer)
+	_fnTcl_FinalizeThread                     func()
+	_fnTcl_FindCommand                        func(*Tcl_Interp, string, *Tcl_Namespace, int) unsafe.Pointer
+	_fnTcl_FindEnsemble                       func(*Tcl_Interp, *Tcl_Obj, int) unsafe.Pointer
+	_fnTcl_FindExecutable                     func(string)
+	_fnTcl_FindHashEntry                      func(*Tcl_HashTable, string) *Tcl_HashEntry
+	_fnTcl_FindNamespace                      func(*Tcl_Interp, string, *Tcl_Namespace, int) *Tcl_Namespace
+	_fnTcl_FirstHashEntry                     func(*Tcl_HashTable, *Tcl_HashSearch) *Tcl_HashEntry
+	_fnTcl_Flush                              func(unsafe.Pointer) int
+	_fnTcl_ForgetImport                       func(*Tcl_Interp, *Tcl_Namespace, string) int
+	_fnTcl_Format                             func(*Tcl_Interp, string, int, unsafe.Pointer) *Tcl_Obj
+	_fnTcl_Free                               func(string)
+	_fnTcl_FreeEncoding                       func(unsafe.Pointer)
+	_fnTcl_FreeParse                          func(*Tcl_Parse)
+	_fnTcl_FreeResult                         func(*Tcl_Interp)
+	_fnTcl_GetAlias                           func(*Tcl_Interp, string, *Tcl_Interp, string, *int32, string) int
+	_fnTcl_GetAliasObj                        func(*Tcl_Interp, string, *Tcl_Interp, string, *int32, *Tcl_Obj) int
+	_fnTcl_GetAllocMutex                      func() unsafe.Pointer
+	_fnTcl_GetAssocData                       func(*Tcl_Interp, string, unsafe.Pointer) unsafe.Pointer
+	_fnTcl_GetBignumFromObj                   func(*Tcl_Interp, *Tcl_Obj, unsafe.Pointer) int
+	_fnTcl_GetBoolean                         func(*Tcl_Interp, string, *int32) int
+	_fnTcl_GetBooleanFromObj                  func(*Tcl_Interp, *Tcl_Obj, *int32) int
+	_fnTcl_GetByteArrayFromObj                func(*Tcl_Obj, *int32) unsafe.Pointer
+	_fnTcl_GetChannel                         func(*Tcl_Interp, string, *int32) unsafe.Pointer
+	_fnTcl_GetChannelBufferSize               func(unsafe.Pointer) int
+	_fnTcl_GetChannelError                    func(unsafe.Pointer, *Tcl_Obj)
+	_fnTcl_GetChannelErrorInterp              func(*Tcl_Interp, *Tcl_Obj)
+	_fnTcl_GetChannelHandle                   func(unsafe.Pointer, int, unsafe.Pointer) int
+	_fnTcl_GetChannelInstanceData             func(unsafe.Pointer) unsafe.Pointer
+	_fnTcl_GetChannelMode                     func(unsafe.Pointer) int
+	_fnTcl_GetChannelName                     func(unsafe.Pointer) string
+	_fnTcl_GetChannelNames                    func(*Tcl_Interp) int
+	_fnTcl_GetChannelNamesEx                  func(*Tcl_Interp, string) int
+	_fnTcl_GetChannelOption                   func(*Tcl_Interp, unsafe.Pointer, string, *Tcl_DString) int
+	_fnTcl_GetChannelThread                   func(unsafe.Pointer) unsafe.Pointer
+	_fnTcl_GetChannelType                     func(unsafe.Pointer) *Tcl_ChannelType
+	_fnTcl_GetCharLength                      func(*Tcl_Obj) int
+	_fnTcl_GetCommandFromObj                  func(*Tcl_Interp, *Tcl_Obj) unsafe.Pointer
+	_fnTcl_GetCommandFullName                 func(*Tcl_Interp, unsafe.Pointer, *Tcl_Obj)
+	_fnTcl_GetCommandInfo                     func(*Tcl_Interp, string, *Tcl_CmdInfo) int
+	_fnTcl_GetCommandInfoFromToken            func(unsafe.Pointer, *Tcl_CmdInfo) int
+	_fnTcl_GetCommandName                     func(*Tcl_Interp, unsafe.Pointer) string
+	_fnTcl_GetCurrentNamespace                func(*Tcl_Interp) *Tcl_Namespace
+	_fnTcl_GetCurrentThread                   func() unsafe.Pointer
+	_fnTcl_GetCwd                             func(*Tcl_Interp, *Tcl_DString) string
+	_fnTcl_GetDefaultEncodingDir              func() string
+	_fnTcl_GetDouble                          func(*Tcl_Interp, string, *float64) int
+	_fnTcl_GetDoubleFromObj                   func(*Tcl_Interp, *Tcl_Obj, *float64) int
+	_fnTcl_GetEncoding                        func(*Tcl_Interp, string) unsafe.Pointer
+	_fnTcl_GetEncodingFromObj                 func(*Tcl_Interp, *Tcl_Obj, unsafe.Pointer) int
+	_fnTcl_GetEncodingName                    func(unsafe.Pointer) string
+	_fnTcl_GetEncodingNameFromEnvironment     func(*Tcl_DString) string
+	_fnTcl_GetEncodingNames                   func(*Tcl_Interp)
+	_fnTcl_GetEncodingSearchPath              func() *Tcl_Obj
+	_fnTcl_GetEnsembleFlags                   func(*Tcl_Interp, unsafe.Pointer, *int32) int
+	_fnTcl_GetEnsembleMappingDict             func(*Tcl_Interp, unsafe.Pointer, *Tcl_Obj) int
+	_fnTcl_GetEnsembleNamespace               func(*Tcl_Interp, unsafe.Pointer, *Tcl_Namespace) int
+	_fnTcl_GetEnsembleSubcommandList          func(*Tcl_Interp, unsafe.Pointer, *Tcl_Obj) int
+	_fnTcl_GetEnsembleUnknownHandler          func(*Tcl_Interp, unsafe.Pointer, *Tcl_Obj) int
+	_fnTcl_GetErrno                           func() int
+	_fnTcl_GetGlobalNamespace                 func(*Tcl_Interp) *Tcl_Namespace
+	_fnTcl_GetHostName                        func() string
+	_fnTcl_GetIndexFromObj                    func(*Tcl_Interp, *Tcl_Obj, string, string, int, *int32) int
+	_fnTcl_GetIndexFromObjStruct              func(*Tcl_Interp, *Tcl_Obj, unsafe.Pointer, int, string, int, *int32) int
+	_fnTcl_GetInt                             func(*Tcl_Interp, string, *int32) int
+	_fnTcl_GetIntFromObj                      func(*Tcl_Interp, *Tcl_Obj, *int32) int
+	_fnTcl_GetInterpPath                      func(*Tcl_Interp, *Tcl_Interp) int
+	_fnTcl_GetLongFromObj                     func(*Tcl_Interp, *Tcl_Obj, *int64) int
+	_fnTcl_GetMaster                          func(*Tcl_Interp) *Tcl_Interp
+	_fnTcl_GetMathFuncInfo                    func(*Tcl_Interp, string, *int32, *Tcl_ValueType, unsafe.Pointer, unsafe.Pointer) int
+	_fnTcl_GetMemoryInfo                      func(*Tcl_DString)
+	_fnTcl_GetNameOfExecutable                func() string
+	_fnTcl_GetNamespaceUnknownHandler         func(*Tcl_Interp, *Tcl_Namespace) *Tcl_Obj
+	_fnTcl_GetObjResult                       func(*Tcl_Interp) *Tcl_Obj
+	_fnTcl_GetObjType                         func(string) *Tcl_ObjType
+	_fnTcl_GetOpenFile                        func(*Tcl_Interp, string, int, int, unsafe.Pointer) int
+	_fnTcl_GetPathType                        func(string) Tcl_PathType
+	_fnTcl_GetRange                           func(*Tcl_Obj, int, int) *Tcl_Obj
+	_fnTcl_GetRegExpFromObj                   func(*Tcl_Interp, *Tcl_Obj, int) unsafe.Pointer
+	_fnTcl_GetReturnOptions                   func(*Tcl_Interp, int) *Tcl_Obj
+	_fnTcl_GetServiceMode                     func() int
+	_fnTcl_GetSlave                           func(*Tcl_Interp, string) *Tcl_Interp
+	_fnTcl_GetStackedChannel                  func(unsafe.Pointer) unsafe.Pointer
+	_fnTcl_GetStdChannel                      func(int) unsafe.Pointer
+	_fnTcl_GetString                          func(*Tcl_Obj) string
+	_fnTcl_GetStringFromObj                   func(*Tcl_Obj, *int32) string
+	_fnTcl_GetStringResult                    func(*Tcl_Interp) string
+	_fnTcl_GetThreadData                      func(unsafe.Pointer, int) unsafe.Pointer
+	_fnTcl_GetTime                            func(*Tcl_Time)
+	_fnTcl_GetTopChannel                      func(unsafe.Pointer) unsafe.Pointer
+	_fnTcl_GetUniChar                         func(*Tcl_Obj, int) uint16
+	_fnTcl_GetUnicode                         func(*Tcl_Obj) *uint16
+	_fnTcl_GetUnicodeFromObj                  func(*Tcl_Obj, *int32) *uint16
+	_fnTcl_GetVar                             func(*Tcl_Interp, string, int) string
+	_fnTcl_GetVar2                            func(*Tcl_Interp, string, string, int) string
+	_fnTcl_GetVar2Ex                          func(*Tcl_Interp, string, string, int) *Tcl_Obj
+	_fnTcl_GetVersion                         func(*int32, *int32, *int32, *int32)
+	_fnTcl_GetWideIntFromObj                  func(*Tcl_Interp, *Tcl_Obj, *int) int
+	_fnTcl_Gets                               func(unsafe.Pointer, *Tcl_DString) int
+	_fnTcl_GetsObj                            func(unsafe.Pointer, *Tcl_Obj) int
+	_fnTcl_GlobalEval                         func(*Tcl_Interp, string) int
+	_fnTcl_GlobalEvalObj                      func(*Tcl_Interp, *Tcl_Obj) int
+	_fnTcl_HashStats                          func(*Tcl_HashTable) string
+	_fnTcl_HideCommand                        func(*Tcl_Interp, string, string) int
+	_fnTcl_Import                             func(*Tcl_Interp, *Tcl_Namespace, string, int) int
+	_fnTcl_IncrRefCount                       func(*Tcl_Obj)
+	_fnTcl_Init                               func(*Tcl_Interp) int
+	_fnTcl_InitBignumFromDouble               func(*Tcl_Interp, float64, unsafe.Pointer) int
+	_fnTcl_InitCustomHashTable                func(*Tcl_HashTable, int, *Tcl_HashKeyType)
+	_fnTcl_InitHashTable                      func(*Tcl_HashTable, int)
+	_fnTcl_InitMemory                         func(*Tcl_Interp)
+	_fnTcl_InitNotifier                       func() unsafe.Pointer
+	_fnTcl_InitObjHashTable                   func(*Tcl_HashTable)
+	_fnTcl_InitStubs                          func(*Tcl_Interp, string, int) string
+	_fnTcl_InputBlocked                       func(unsafe.Pointer) int
+	_fnTcl_InputBuffered                      func(unsafe.Pointer) int
+	_fnTcl_InterpDeleted                      func(*Tcl_Interp) int
+	_fnTcl_InvalidateStringRep                func(*Tcl_Obj)
+	_fnTcl_IsChannelExisting                  func(string) int
+	_fnTcl_IsChannelRegistered                func(*Tcl_Interp, unsafe.Pointer) int
+	_fnTcl_IsChannelShared                    func(unsafe.Pointer) int
+	_fnTcl_IsEnsemble                         func(unsafe.Pointer) int
+	_fnTcl_IsSafe                             func(*Tcl_Interp) int
+	_fnTcl_IsShared                           func(*Tcl_Obj) int
+	_fnTcl_IsStandardChannel                  func(unsafe.Pointer) int
+	_fnTcl_JoinPath                           func(int, unsafe.Pointer, *Tcl_DString) string
+	_fnTcl_JoinThread                         func(unsafe.Pointer, *int32) int
+	_fnTcl_LimitAddHandler                    func(*Tcl_Interp, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnTcl_LimitCheck                         func(*Tcl_Interp) int
+	_fnTcl_LimitExceeded                      func(*Tcl_Interp) int
+	_fnTcl_LimitGetCommands                   func(*Tcl_Interp) int
+	_fnTcl_LimitGetGranularity                func(*Tcl_Interp, int) int
+	_fnTcl_LimitGetTime                       func(*Tcl_Interp, *Tcl_Time)
+	_fnTcl_LimitReady                         func(*Tcl_Interp) int
+	_fnTcl_LimitRemoveHandler                 func(*Tcl_Interp, int, unsafe.Pointer, unsafe.Pointer)
+	_fnTcl_LimitSetCommands                   func(*Tcl_Interp, int)
+	_fnTcl_LimitSetGranularity                func(*Tcl_Interp, int, int)
+	_fnTcl_LimitSetTime                       func(*Tcl_Interp, *Tcl_Time)
+	_fnTcl_LimitTypeEnabled                   func(*Tcl_Interp, int) int
+	_fnTcl_LimitTypeExceeded                  func(*Tcl_Interp, int) int
+	_fnTcl_LimitTypeReset                     func(*Tcl_Interp, int)
+	_fnTcl_LimitTypeSet                       func(*Tcl_Interp, int)
+	_fnTcl_LinkVar                            func(*Tcl_Interp, string, string, int) int
+	_fnTcl_ListMathFuncs                      func(*Tcl_Interp, string) *Tcl_Obj
+	_fnTcl_ListObjAppendElement               func(*Tcl_Interp, *Tcl_Obj, *Tcl_Obj) int
+	_fnTcl_ListObjAppendList                  func(*Tcl_Interp, *Tcl_Obj, *Tcl_Obj) int
+	_fnTcl_ListObjGetElements                 func(*Tcl_Interp, *Tcl_Obj, *int32, *Tcl_Obj) int
+	_fnTcl_ListObjIndex                       func(*Tcl_Interp, *Tcl_Obj, int, *Tcl_Obj) int
+	_fnTcl_ListObjLength                      func(*Tcl_Interp, *Tcl_Obj, *int32) int
+	_fnTcl_ListObjReplace                     func(*Tcl_Interp, *Tcl_Obj, int, int, int, unsafe.Pointer) int
+	_fnTcl_LogCommandInfo                     func(*Tcl_Interp, string, string, int)
+	_fnTcl_MacOSXOpenBundleResources          func(*Tcl_Interp, string, int, int, string) int
 	_fnTcl_MacOSXOpenVersionedBundleResources func(*Tcl_Interp, string, string, int, int, string) int
-	_fnTcl_Main func(int, string, unsafe.Pointer)
-	_fnTcl_MakeFileChannel func(unsafe.Pointer, int) unsafe.Pointer
-	_fnTcl_MakeSafe func(*Tcl_Interp) int
-	_fnTcl_MakeTcpClientChannel func(unsafe.Pointer) unsafe.Pointer
-	_fnTcl_Merge func(int, unsafe.Pointer) string
-	_fnTcl_MutexFinalize func(unsafe.Pointer)
-	_fnTcl_MutexLock func(unsafe.Pointer)
-	_fnTcl_MutexUnlock func(unsafe.Pointer)
-	_fnTcl_NewBignumObj func(unsafe.Pointer) *Tcl_Obj
-	_fnTcl_NewBooleanObj func(int) *Tcl_Obj
-	_fnTcl_NewByteArrayObj func(*uint8, int) *Tcl_Obj
-	_fnTcl_NewDictObj func() *Tcl_Obj
-	_fnTcl_NewDoubleObj func(float64) *Tcl_Obj
-	_fnTcl_NewIntObj func(int) *Tcl_Obj
-	_fnTcl_NewListObj func(int, unsafe.Pointer) *Tcl_Obj
-	_fnTcl_NewLongObj func(int) *Tcl_Obj
-	_fnTcl_NewObj func() *Tcl_Obj
-	_fnTcl_NewStringObj func(string, int) *Tcl_Obj
-	_fnTcl_NewUnicodeObj func(*uint16, int) *Tcl_Obj
-	_fnTcl_NewWideIntObj func(int) *Tcl_Obj
-	_fnTcl_NextHashEntry func(*Tcl_HashSearch) *Tcl_HashEntry
-	_fnTcl_NotifyChannel func(unsafe.Pointer, int)
-	_fnTcl_NumUtfChars func(string, int) int
-	_fnTcl_ObjGetVar2 func(*Tcl_Interp, *Tcl_Obj, *Tcl_Obj, int) *Tcl_Obj
-	_fnTcl_ObjPrintf func(string) *Tcl_Obj
-	_fnTcl_ObjSetVar2 func(*Tcl_Interp, *Tcl_Obj, *Tcl_Obj, *Tcl_Obj, int) *Tcl_Obj
-	_fnTcl_OpenCommandChannel func(*Tcl_Interp, int, string, int) unsafe.Pointer
-	_fnTcl_OpenFileChannel func(*Tcl_Interp, string, string, int) unsafe.Pointer
-	_fnTcl_OpenTcpClient func(*Tcl_Interp, int, string, string, int, int) unsafe.Pointer
-	_fnTcl_OpenTcpServer func(*Tcl_Interp, int, string, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnTcl_OutputBuffered func(unsafe.Pointer) int
-	_fnTcl_PanicVA func(string, string)
-	_fnTcl_ParseBraces func(*Tcl_Interp, string, int, *Tcl_Parse, int, string) int
-	_fnTcl_ParseCommand func(*Tcl_Interp, string, int, int, *Tcl_Parse) int
-	_fnTcl_ParseExpr func(*Tcl_Interp, string, int, *Tcl_Parse) int
-	_fnTcl_ParseQuotedString func(*Tcl_Interp, string, int, *Tcl_Parse, int, string) int
-	_fnTcl_ParseVar func(*Tcl_Interp, string, string) string
-	_fnTcl_ParseVarName func(*Tcl_Interp, string, int, *Tcl_Parse, int) int
-	_fnTcl_PkgInitStubsCheck func(*Tcl_Interp, string, int) string
-	_fnTcl_PkgPresent func(*Tcl_Interp, string, string, int) string
-	_fnTcl_PkgPresentEx func(*Tcl_Interp, string, string, int, unsafe.Pointer) string
-	_fnTcl_PkgProvide func(*Tcl_Interp, string, string) int
-	_fnTcl_PkgProvideEx func(*Tcl_Interp, string, string, unsafe.Pointer) int
-	_fnTcl_PkgRequire func(*Tcl_Interp, string, string, int) string
-	_fnTcl_PkgRequireEx func(*Tcl_Interp, string, string, int, unsafe.Pointer) string
-	_fnTcl_PkgRequireProc func(*Tcl_Interp, string, int, unsafe.Pointer, unsafe.Pointer) int
-	_fnTcl_PosixError func(*Tcl_Interp) string
-	_fnTcl_Preserve func(unsafe.Pointer)
-	_fnTcl_PrintDouble func(*Tcl_Interp, float64, string)
-	_fnTcl_ProcObjCmd func(unsafe.Pointer, *Tcl_Interp, int, unsafe.Pointer) int
-	_fnTcl_PutEnv func(string) int
-	_fnTcl_QueryTimeProc func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnTcl_QueueEvent func(*Tcl_Event, Tcl_QueuePosition)
-	_fnTcl_Read func(unsafe.Pointer, string, int) int
-	_fnTcl_ReadChars func(unsafe.Pointer, *Tcl_Obj, int, int) int
-	_fnTcl_ReadRaw func(unsafe.Pointer, string, int) int
-	_fnTcl_Realloc func(string, uint) string
-	_fnTcl_ReapDetachedProcs func()
-	_fnTcl_RecordAndEval func(*Tcl_Interp, string, int) int
-	_fnTcl_RecordAndEvalObj func(*Tcl_Interp, *Tcl_Obj, int) int
-	_fnTcl_RegExpCompile func(*Tcl_Interp, string) unsafe.Pointer
-	_fnTcl_RegExpExec func(*Tcl_Interp, unsafe.Pointer, string, string) int
-	_fnTcl_RegExpExecObj func(*Tcl_Interp, unsafe.Pointer, *Tcl_Obj, int, int, int) int
-	_fnTcl_RegExpGetInfo func(unsafe.Pointer, *Tcl_RegExpInfo)
-	_fnTcl_RegExpMatch func(*Tcl_Interp, string, string) int
-	_fnTcl_RegExpMatchObj func(*Tcl_Interp, *Tcl_Obj, *Tcl_Obj) int
-	_fnTcl_RegExpRange func(unsafe.Pointer, int, string, string)
-	_fnTcl_RegisterChannel func(*Tcl_Interp, unsafe.Pointer)
-	_fnTcl_RegisterConfig func(*Tcl_Interp, string, *Tcl_Config, string)
-	_fnTcl_RegisterObjType func(*Tcl_ObjType)
-	_fnTcl_Release func(unsafe.Pointer)
-	_fnTcl_ResetResult func(*Tcl_Interp)
-	_fnTcl_RestoreInterpState func(*Tcl_Interp, unsafe.Pointer) int
-	_fnTcl_RestoreResult func(*Tcl_Interp, *Tcl_SavedResult)
-	_fnTcl_SaveInterpState func(*Tcl_Interp, int) unsafe.Pointer
-	_fnTcl_SaveResult func(*Tcl_Interp, *Tcl_SavedResult)
-	_fnTcl_ScanCountedElement func(string, int, *int32) int
-	_fnTcl_ScanElement func(string, *int32) int
-	_fnTcl_Seek func(unsafe.Pointer, int, int) int
-	_fnTcl_SeekOld func(unsafe.Pointer, int, int) int
-	_fnTcl_ServiceAll func() int
-	_fnTcl_ServiceEvent func(int) int
-	_fnTcl_ServiceModeHook func(int)
-	_fnTcl_SetAssocData func(*Tcl_Interp, string, unsafe.Pointer, unsafe.Pointer)
-	_fnTcl_SetBignumObj func(*Tcl_Obj, unsafe.Pointer)
-	_fnTcl_SetBooleanObj func(*Tcl_Obj, int)
-	_fnTcl_SetByteArrayLength func(*Tcl_Obj, int) unsafe.Pointer
-	_fnTcl_SetByteArrayObj func(*Tcl_Obj, *uint8, int)
-	_fnTcl_SetChannelBufferSize func(unsafe.Pointer, int)
-	_fnTcl_SetChannelError func(unsafe.Pointer, *Tcl_Obj)
-	_fnTcl_SetChannelErrorInterp func(*Tcl_Interp, *Tcl_Obj)
-	_fnTcl_SetChannelOption func(*Tcl_Interp, unsafe.Pointer, string, string) int
-	_fnTcl_SetCommandInfo func(*Tcl_Interp, string, *Tcl_CmdInfo) int
-	_fnTcl_SetCommandInfoFromToken func(unsafe.Pointer, *Tcl_CmdInfo) int
-	_fnTcl_SetDefaultEncodingDir func(string)
-	_fnTcl_SetDoubleObj func(*Tcl_Obj, float64)
-	_fnTcl_SetEncodingSearchPath func(*Tcl_Obj) int
-	_fnTcl_SetEnsembleFlags func(*Tcl_Interp, unsafe.Pointer, int) int
-	_fnTcl_SetEnsembleMappingDict func(*Tcl_Interp, unsafe.Pointer, *Tcl_Obj) int
-	_fnTcl_SetEnsembleSubcommandList func(*Tcl_Interp, unsafe.Pointer, *Tcl_Obj) int
-	_fnTcl_SetEnsembleUnknownHandler func(*Tcl_Interp, unsafe.Pointer, *Tcl_Obj) int
-	_fnTcl_SetErrno func(int)
-	_fnTcl_SetErrorCodeVA func(*Tcl_Interp, string)
-	_fnTcl_SetExitProc func(unsafe.Pointer) unsafe.Pointer
-	_fnTcl_SetIntObj func(*Tcl_Obj, int)
-	_fnTcl_SetListObj func(*Tcl_Obj, int, unsafe.Pointer)
-	_fnTcl_SetLongObj func(*Tcl_Obj, int)
-	_fnTcl_SetMainLoop func(unsafe.Pointer)
-	_fnTcl_SetMaxBlockTime func(*Tcl_Time)
-	_fnTcl_SetNamespaceUnknownHandler func(*Tcl_Interp, *Tcl_Namespace, *Tcl_Obj) int
-	_fnTcl_SetNotifier func(*Tcl_NotifierProcs)
-	_fnTcl_SetObjErrorCode func(*Tcl_Interp, *Tcl_Obj)
-	_fnTcl_SetObjLength func(*Tcl_Obj, int)
-	_fnTcl_SetObjResult func(*Tcl_Interp, *Tcl_Obj)
-	_fnTcl_SetPanicProc func(unsafe.Pointer)
-	_fnTcl_SetRecursionLimit func(*Tcl_Interp, int) int
-	_fnTcl_SetResult func(*Tcl_Interp, string, unsafe.Pointer)
-	_fnTcl_SetReturnOptions func(*Tcl_Interp, *Tcl_Obj) int
-	_fnTcl_SetServiceMode func(int) int
-	_fnTcl_SetStdChannel func(unsafe.Pointer, int)
-	_fnTcl_SetStringObj func(*Tcl_Obj, string, int)
-	_fnTcl_SetSystemEncoding func(*Tcl_Interp, string) int
-	_fnTcl_SetTimeProc func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnTcl_SetTimer func(*Tcl_Time)
-	_fnTcl_SetUnicodeObj func(*Tcl_Obj, *uint16, int)
-	_fnTcl_SetVar func(*Tcl_Interp, string, string, int) string
-	_fnTcl_SetVar2 func(*Tcl_Interp, string, string, string, int) string
-	_fnTcl_SetVar2Ex func(*Tcl_Interp, string, string, *Tcl_Obj, int) *Tcl_Obj
-	_fnTcl_SetWideIntObj func(*Tcl_Obj, int)
-	_fnTcl_SignalId func(int) string
-	_fnTcl_SignalMsg func(int) string
-	_fnTcl_Sleep func(int)
-	_fnTcl_SourceRCFile func(*Tcl_Interp)
-	_fnTcl_SpliceChannel func(unsafe.Pointer)
-	_fnTcl_SplitList func(*Tcl_Interp, string, *int32, string) int
-	_fnTcl_SplitPath func(string, *int32, string)
-	_fnTcl_StackChannel func(*Tcl_Interp, *Tcl_ChannelType, unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
-	_fnTcl_Stat func(string, unsafe.Pointer) int
-	_fnTcl_StaticPackage func(*Tcl_Interp, string, unsafe.Pointer, unsafe.Pointer)
-	_fnTcl_StringCaseMatch func(string, string, int) int
-	_fnTcl_StringMatch func(string, string) int
-	_fnTcl_SubstObj func(*Tcl_Interp, *Tcl_Obj, int) *Tcl_Obj
-	_fnTcl_TakeBignumFromObj func(*Tcl_Interp, *Tcl_Obj, unsafe.Pointer) int
-	_fnTcl_Tell func(unsafe.Pointer) int
-	_fnTcl_TellOld func(unsafe.Pointer) int
-	_fnTcl_ThreadAlert func(unsafe.Pointer)
-	_fnTcl_ThreadQueueEvent func(unsafe.Pointer, *Tcl_Event, Tcl_QueuePosition)
-	_fnTcl_TraceCommand func(*Tcl_Interp, string, int, unsafe.Pointer, unsafe.Pointer) int
-	_fnTcl_TraceVar func(*Tcl_Interp, string, int, unsafe.Pointer, unsafe.Pointer) int
-	_fnTcl_TraceVar2 func(*Tcl_Interp, string, string, int, unsafe.Pointer, unsafe.Pointer) int
-	_fnTcl_TranslateFileName func(*Tcl_Interp, string, *Tcl_DString) string
-	_fnTcl_TruncateChannel func(unsafe.Pointer, int) int
-	_fnTcl_Ungets func(unsafe.Pointer, string, int, int) int
-	_fnTcl_UniCharAtIndex func(string, int) uint16
-	_fnTcl_UniCharCaseMatch func(*uint16, *uint16, int) int
-	_fnTcl_UniCharIsAlnum func(int) int
-	_fnTcl_UniCharIsAlpha func(int) int
-	_fnTcl_UniCharIsControl func(int) int
-	_fnTcl_UniCharIsDigit func(int) int
-	_fnTcl_UniCharIsGraph func(int) int
-	_fnTcl_UniCharIsLower func(int) int
-	_fnTcl_UniCharIsPrint func(int) int
-	_fnTcl_UniCharIsPunct func(int) int
-	_fnTcl_UniCharIsSpace func(int) int
-	_fnTcl_UniCharIsUpper func(int) int
-	_fnTcl_UniCharIsWordChar func(int) int
-	_fnTcl_UniCharLen func(*uint16) int
-	_fnTcl_UniCharNcasecmp func(*uint16, *uint16, uint) int
-	_fnTcl_UniCharNcmp func(*uint16, *uint16, uint) int
-	_fnTcl_UniCharToLower func(int) uint16
-	_fnTcl_UniCharToTitle func(int) uint16
-	_fnTcl_UniCharToUpper func(int) uint16
-	_fnTcl_UniCharToUtf func(int, string) int
-	_fnTcl_UniCharToUtfDString func(*uint16, int, *Tcl_DString) string
-	_fnTcl_UnlinkVar func(*Tcl_Interp, string)
-	_fnTcl_UnregisterChannel func(*Tcl_Interp, unsafe.Pointer) int
-	_fnTcl_UnsetVar func(*Tcl_Interp, string, int) int
-	_fnTcl_UnsetVar2 func(*Tcl_Interp, string, string, int) int
-	_fnTcl_UnstackChannel func(*Tcl_Interp, unsafe.Pointer) int
-	_fnTcl_UntraceCommand func(*Tcl_Interp, string, int, unsafe.Pointer, unsafe.Pointer)
-	_fnTcl_UntraceVar func(*Tcl_Interp, string, int, unsafe.Pointer, unsafe.Pointer)
-	_fnTcl_UntraceVar2 func(*Tcl_Interp, string, string, int, unsafe.Pointer, unsafe.Pointer)
-	_fnTcl_UpVar func(*Tcl_Interp, string, string, string, int) int
-	_fnTcl_UpVar2 func(*Tcl_Interp, string, string, string, string, int) int
-	_fnTcl_UpdateLinkedVar func(*Tcl_Interp, string)
-	_fnTcl_UtfAtIndex func(string, int) string
-	_fnTcl_UtfBackslash func(string, *int32, string) int
-	_fnTcl_UtfCharComplete func(string, int) int
-	_fnTcl_UtfFindFirst func(string, int) string
-	_fnTcl_UtfFindLast func(string, int) string
-	_fnTcl_UtfNcasecmp func(string, string, uint) int
-	_fnTcl_UtfNcmp func(string, string, uint) int
-	_fnTcl_UtfNext func(string) string
-	_fnTcl_UtfPrev func(string, string) string
-	_fnTcl_UtfToExternal func(*Tcl_Interp, unsafe.Pointer, string, int, int, unsafe.Pointer, string, int, *int32, *int32, *int32) int
-	_fnTcl_UtfToExternalDString func(unsafe.Pointer, string, int, *Tcl_DString) string
-	_fnTcl_UtfToLower func(string) int
-	_fnTcl_UtfToTitle func(string) int
-	_fnTcl_UtfToUniChar func(string, *uint16) int
-	_fnTcl_UtfToUniCharDString func(string, int, *Tcl_DString) *uint16
-	_fnTcl_UtfToUpper func(string) int
-	_fnTcl_ValidateAllMemory func(string, int)
-	_fnTcl_VarEvalVA func(*Tcl_Interp, string) int
-	_fnTcl_VarTraceInfo func(*Tcl_Interp, string, int, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnTcl_VarTraceInfo2 func(*Tcl_Interp, string, string, int, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnTcl_WaitForEvent func(*Tcl_Time) int
-	_fnTcl_WaitPid func(unsafe.Pointer, *int32, int) unsafe.Pointer
-	_fnTcl_Write func(unsafe.Pointer, string, int) int
-	_fnTcl_WriteChars func(unsafe.Pointer, string, int) int
-	_fnTcl_WriteObj func(unsafe.Pointer, *Tcl_Obj) int
-	_fnTcl_WriteRaw func(unsafe.Pointer, string, int) int
-	_fnTcl_WrongNumArgs func(*Tcl_Interp, int, unsafe.Pointer, string)
+	_fnTcl_Main                               func(int, string, unsafe.Pointer)
+	_fnTcl_MakeFileChannel                    func(unsafe.Pointer, int) unsafe.Pointer
+	_fnTcl_MakeSafe                           func(*Tcl_Interp) int
+	_fnTcl_MakeTcpClientChannel               func(unsafe.Pointer) unsafe.Pointer
+	_fnTcl_Merge                              func(int, unsafe.Pointer) string
+	_fnTcl_MutexFinalize                      func(unsafe.Pointer)
+	_fnTcl_MutexLock                          func(unsafe.Pointer)
+	_fnTcl_MutexUnlock                        func(unsafe.Pointer)
+	_fnTcl_NewBignumObj                       func(unsafe.Pointer) *Tcl_Obj
+	_fnTcl_NewBooleanObj                      func(int) *Tcl_Obj
+	_fnTcl_NewByteArrayObj                    func(*uint8, int) *Tcl_Obj
+	_fnTcl_NewDictObj                         func() *Tcl_Obj
+	_fnTcl_NewDoubleObj                       func(float64) *Tcl_Obj
+	_fnTcl_NewIntObj                          func(int) *Tcl_Obj
+	_fnTcl_NewListObj                         func(int, unsafe.Pointer) *Tcl_Obj
+	_fnTcl_NewLongObj                         func(int) *Tcl_Obj
+	_fnTcl_NewObj                             func() *Tcl_Obj
+	_fnTcl_NewStringObj                       func(string, int) *Tcl_Obj
+	_fnTcl_NewUnicodeObj                      func(*uint16, int) *Tcl_Obj
+	_fnTcl_NewWideIntObj                      func(int) *Tcl_Obj
+	_fnTcl_NextHashEntry                      func(*Tcl_HashSearch) *Tcl_HashEntry
+	_fnTcl_NotifyChannel                      func(unsafe.Pointer, int)
+	_fnTcl_NumUtfChars                        func(string, int) int
+	_fnTcl_ObjGetVar2                         func(*Tcl_Interp, *Tcl_Obj, *Tcl_Obj, int) *Tcl_Obj
+	_fnTcl_ObjPrintf                          func(string) *Tcl_Obj
+	_fnTcl_ObjSetVar2                         func(*Tcl_Interp, *Tcl_Obj, *Tcl_Obj, *Tcl_Obj, int) *Tcl_Obj
+	_fnTcl_OpenCommandChannel                 func(*Tcl_Interp, int, string, int) unsafe.Pointer
+	_fnTcl_OpenFileChannel                    func(*Tcl_Interp, string, string, int) unsafe.Pointer
+	_fnTcl_OpenTcpClient                      func(*Tcl_Interp, int, string, string, int, int) unsafe.Pointer
+	_fnTcl_OpenTcpServer                      func(*Tcl_Interp, int, string, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnTcl_OutputBuffered                     func(unsafe.Pointer) int
+	_fnTcl_PanicVA                            func(string, string)
+	_fnTcl_ParseBraces                        func(*Tcl_Interp, string, int, *Tcl_Parse, int, string) int
+	_fnTcl_ParseCommand                       func(*Tcl_Interp, string, int, int, *Tcl_Parse) int
+	_fnTcl_ParseExpr                          func(*Tcl_Interp, string, int, *Tcl_Parse) int
+	_fnTcl_ParseQuotedString                  func(*Tcl_Interp, string, int, *Tcl_Parse, int, string) int
+	_fnTcl_ParseVar                           func(*Tcl_Interp, string, string) string
+	_fnTcl_ParseVarName                       func(*Tcl_Interp, string, int, *Tcl_Parse, int) int
+	_fnTcl_PkgInitStubsCheck                  func(*Tcl_Interp, string, int) string
+	_fnTcl_PkgPresent                         func(*Tcl_Interp, string, string, int) string
+	_fnTcl_PkgPresentEx                       func(*Tcl_Interp, string, string, int, unsafe.Pointer) string
+	_fnTcl_PkgProvide                         func(*Tcl_Interp, string, string) int
+	_fnTcl_PkgProvideEx                       func(*Tcl_Interp, string, string, unsafe.Pointer) int
+	_fnTcl_PkgRequire                         func(*Tcl_Interp, string, string, int) string
+	_fnTcl_PkgRequireEx                       func(*Tcl_Interp, string, string, int, unsafe.Pointer) string
+	_fnTcl_PkgRequireProc                     func(*Tcl_Interp, string, int, unsafe.Pointer, unsafe.Pointer) int
+	_fnTcl_PosixError                         func(*Tcl_Interp) string
+	_fnTcl_Preserve                           func(unsafe.Pointer)
+	_fnTcl_PrintDouble                        func(*Tcl_Interp, float64, string)
+	_fnTcl_ProcObjCmd                         func(unsafe.Pointer, *Tcl_Interp, int, unsafe.Pointer) int
+	_fnTcl_PutEnv                             func(string) int
+	_fnTcl_QueryTimeProc                      func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnTcl_QueueEvent                         func(*Tcl_Event, Tcl_QueuePosition)
+	_fnTcl_Read                               func(unsafe.Pointer, string, int) int
+	_fnTcl_ReadChars                          func(unsafe.Pointer, *Tcl_Obj, int, int) int
+	_fnTcl_ReadRaw                            func(unsafe.Pointer, string, int) int
+	_fnTcl_Realloc                            func(string, uint) string
+	_fnTcl_ReapDetachedProcs                  func()
+	_fnTcl_RecordAndEval                      func(*Tcl_Interp, string, int) int
+	_fnTcl_RecordAndEvalObj                   func(*Tcl_Interp, *Tcl_Obj, int) int
+	_fnTcl_RegExpCompile                      func(*Tcl_Interp, string) unsafe.Pointer
+	_fnTcl_RegExpExec                         func(*Tcl_Interp, unsafe.Pointer, string, string) int
+	_fnTcl_RegExpExecObj                      func(*Tcl_Interp, unsafe.Pointer, *Tcl_Obj, int, int, int) int
+	_fnTcl_RegExpGetInfo                      func(unsafe.Pointer, *Tcl_RegExpInfo)
+	_fnTcl_RegExpMatch                        func(*Tcl_Interp, string, string) int
+	_fnTcl_RegExpMatchObj                     func(*Tcl_Interp, *Tcl_Obj, *Tcl_Obj) int
+	_fnTcl_RegExpRange                        func(unsafe.Pointer, int, string, string)
+	_fnTcl_RegisterChannel                    func(*Tcl_Interp, unsafe.Pointer)
+	_fnTcl_RegisterConfig                     func(*Tcl_Interp, string, *Tcl_Config, string)
+	_fnTcl_RegisterObjType                    func(*Tcl_ObjType)
+	_fnTcl_Release                            func(unsafe.Pointer)
+	_fnTcl_ResetResult                        func(*Tcl_Interp)
+	_fnTcl_RestoreInterpState                 func(*Tcl_Interp, unsafe.Pointer) int
+	_fnTcl_RestoreResult                      func(*Tcl_Interp, *Tcl_SavedResult)
+	_fnTcl_SaveInterpState                    func(*Tcl_Interp, int) unsafe.Pointer
+	_fnTcl_SaveResult                         func(*Tcl_Interp, *Tcl_SavedResult)
+	_fnTcl_ScanCountedElement                 func(string, int, *int32) int
+	_fnTcl_ScanElement                        func(string, *int32) int
+	_fnTcl_Seek                               func(unsafe.Pointer, int, int) int
+	_fnTcl_SeekOld                            func(unsafe.Pointer, int, int) int
+	_fnTcl_ServiceAll                         func() int
+	_fnTcl_ServiceEvent                       func(int) int
+	_fnTcl_ServiceModeHook                    func(int)
+	_fnTcl_SetAssocData                       func(*Tcl_Interp, string, unsafe.Pointer, unsafe.Pointer)
+	_fnTcl_SetBignumObj                       func(*Tcl_Obj, unsafe.Pointer)
+	_fnTcl_SetBooleanObj                      func(*Tcl_Obj, int)
+	_fnTcl_SetByteArrayLength                 func(*Tcl_Obj, int) unsafe.Pointer
+	_fnTcl_SetByteArrayObj                    func(*Tcl_Obj, *uint8, int)
+	_fnTcl_SetChannelBufferSize               func(unsafe.Pointer, int)
+	_fnTcl_SetChannelError                    func(unsafe.Pointer, *Tcl_Obj)
+	_fnTcl_SetChannelErrorInterp              func(*Tcl_Interp, *Tcl_Obj)
+	_fnTcl_SetChannelOption                   func(*Tcl_Interp, unsafe.Pointer, string, string) int
+	_fnTcl_SetCommandInfo                     func(*Tcl_Interp, string, *Tcl_CmdInfo) int
+	_fnTcl_SetCommandInfoFromToken            func(unsafe.Pointer, *Tcl_CmdInfo) int
+	_fnTcl_SetDefaultEncodingDir              func(string)
+	_fnTcl_SetDoubleObj                       func(*Tcl_Obj, float64)
+	_fnTcl_SetEncodingSearchPath              func(*Tcl_Obj) int
+	_fnTcl_SetEnsembleFlags                   func(*Tcl_Interp, unsafe.Pointer, int) int
+	_fnTcl_SetEnsembleMappingDict             func(*Tcl_Interp, unsafe.Pointer, *Tcl_Obj) int
+	_fnTcl_SetEnsembleSubcommandList          func(*Tcl_Interp, unsafe.Pointer, *Tcl_Obj) int
+	_fnTcl_SetEnsembleUnknownHandler          func(*Tcl_Interp, unsafe.Pointer, *Tcl_Obj) int
+	_fnTcl_SetErrno                           func(int)
+	_fnTcl_SetErrorCodeVA                     func(*Tcl_Interp, string)
+	_fnTcl_SetExitProc                        func(unsafe.Pointer) unsafe.Pointer
+	_fnTcl_SetIntObj                          func(*Tcl_Obj, int)
+	_fnTcl_SetListObj                         func(*Tcl_Obj, int, unsafe.Pointer)
+	_fnTcl_SetLongObj                         func(*Tcl_Obj, int)
+	_fnTcl_SetMainLoop                        func(unsafe.Pointer)
+	_fnTcl_SetMaxBlockTime                    func(*Tcl_Time)
+	_fnTcl_SetNamespaceUnknownHandler         func(*Tcl_Interp, *Tcl_Namespace, *Tcl_Obj) int
+	_fnTcl_SetNotifier                        func(*Tcl_NotifierProcs)
+	_fnTcl_SetObjErrorCode                    func(*Tcl_Interp, *Tcl_Obj)
+	_fnTcl_SetObjLength                       func(*Tcl_Obj, int)
+	_fnTcl_SetObjResult                       func(*Tcl_Interp, *Tcl_Obj)
+	_fnTcl_SetPanicProc                       func(unsafe.Pointer)
+	_fnTcl_SetRecursionLimit                  func(*Tcl_Interp, int) int
+	_fnTcl_SetResult                          func(*Tcl_Interp, string, unsafe.Pointer)
+	_fnTcl_SetReturnOptions                   func(*Tcl_Interp, *Tcl_Obj) int
+	_fnTcl_SetServiceMode                     func(int) int
+	_fnTcl_SetStdChannel                      func(unsafe.Pointer, int)
+	_fnTcl_SetStringObj                       func(*Tcl_Obj, string, int)
+	_fnTcl_SetSystemEncoding                  func(*Tcl_Interp, string) int
+	_fnTcl_SetTimeProc                        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnTcl_SetTimer                           func(*Tcl_Time)
+	_fnTcl_SetUnicodeObj                      func(*Tcl_Obj, *uint16, int)
+	_fnTcl_SetVar                             func(*Tcl_Interp, string, string, int) string
+	_fnTcl_SetVar2                            func(*Tcl_Interp, string, string, string, int) string
+	_fnTcl_SetVar2Ex                          func(*Tcl_Interp, string, string, *Tcl_Obj, int) *Tcl_Obj
+	_fnTcl_SetWideIntObj                      func(*Tcl_Obj, int)
+	_fnTcl_SignalId                           func(int) string
+	_fnTcl_SignalMsg                          func(int) string
+	_fnTcl_Sleep                              func(int)
+	_fnTcl_SourceRCFile                       func(*Tcl_Interp)
+	_fnTcl_SpliceChannel                      func(unsafe.Pointer)
+	_fnTcl_SplitList                          func(*Tcl_Interp, string, *int32, string) int
+	_fnTcl_SplitPath                          func(string, *int32, string)
+	_fnTcl_StackChannel                       func(*Tcl_Interp, *Tcl_ChannelType, unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
+	_fnTcl_Stat                               func(string, unsafe.Pointer) int
+	_fnTcl_StaticPackage                      func(*Tcl_Interp, string, unsafe.Pointer, unsafe.Pointer)
+	_fnTcl_StringCaseMatch                    func(string, string, int) int
+	_fnTcl_StringMatch                        func(string, string) int
+	_fnTcl_SubstObj                           func(*Tcl_Interp, *Tcl_Obj, int) *Tcl_Obj
+	_fnTcl_TakeBignumFromObj                  func(*Tcl_Interp, *Tcl_Obj, unsafe.Pointer) int
+	_fnTcl_Tell                               func(unsafe.Pointer) int
+	_fnTcl_TellOld                            func(unsafe.Pointer) int
+	_fnTcl_ThreadAlert                        func(unsafe.Pointer)
+	_fnTcl_ThreadQueueEvent                   func(unsafe.Pointer, *Tcl_Event, Tcl_QueuePosition)
+	_fnTcl_TraceCommand                       func(*Tcl_Interp, string, int, unsafe.Pointer, unsafe.Pointer) int
+	_fnTcl_TraceVar                           func(*Tcl_Interp, string, int, unsafe.Pointer, unsafe.Pointer) int
+	_fnTcl_TraceVar2                          func(*Tcl_Interp, string, string, int, unsafe.Pointer, unsafe.Pointer) int
+	_fnTcl_TranslateFileName                  func(*Tcl_Interp, string, *Tcl_DString) string
+	_fnTcl_TruncateChannel                    func(unsafe.Pointer, int) int
+	_fnTcl_Ungets                             func(unsafe.Pointer, string, int, int) int
+	_fnTcl_UniCharAtIndex                     func(string, int) uint16
+	_fnTcl_UniCharCaseMatch                   func(*uint16, *uint16, int) int
+	_fnTcl_UniCharIsAlnum                     func(int) int
+	_fnTcl_UniCharIsAlpha                     func(int) int
+	_fnTcl_UniCharIsControl                   func(int) int
+	_fnTcl_UniCharIsDigit                     func(int) int
+	_fnTcl_UniCharIsGraph                     func(int) int
+	_fnTcl_UniCharIsLower                     func(int) int
+	_fnTcl_UniCharIsPrint                     func(int) int
+	_fnTcl_UniCharIsPunct                     func(int) int
+	_fnTcl_UniCharIsSpace                     func(int) int
+	_fnTcl_UniCharIsUpper                     func(int) int
+	_fnTcl_UniCharIsWordChar                  func(int) int
+	_fnTcl_UniCharLen                         func(*uint16) int
+	_fnTcl_UniCharNcasecmp                    func(*uint16, *uint16, uint) int
+	_fnTcl_UniCharNcmp                        func(*uint16, *uint16, uint) int
+	_fnTcl_UniCharToLower                     func(int) uint16
+	_fnTcl_UniCharToTitle                     func(int) uint16
+	_fnTcl_UniCharToUpper                     func(int) uint16
+	_fnTcl_UniCharToUtf                       func(int, string) int
+	_fnTcl_UniCharToUtfDString                func(*uint16, int, *Tcl_DString) string
+	_fnTcl_UnlinkVar                          func(*Tcl_Interp, string)
+	_fnTcl_UnregisterChannel                  func(*Tcl_Interp, unsafe.Pointer) int
+	_fnTcl_UnsetVar                           func(*Tcl_Interp, string, int) int
+	_fnTcl_UnsetVar2                          func(*Tcl_Interp, string, string, int) int
+	_fnTcl_UnstackChannel                     func(*Tcl_Interp, unsafe.Pointer) int
+	_fnTcl_UntraceCommand                     func(*Tcl_Interp, string, int, unsafe.Pointer, unsafe.Pointer)
+	_fnTcl_UntraceVar                         func(*Tcl_Interp, string, int, unsafe.Pointer, unsafe.Pointer)
+	_fnTcl_UntraceVar2                        func(*Tcl_Interp, string, string, int, unsafe.Pointer, unsafe.Pointer)
+	_fnTcl_UpVar                              func(*Tcl_Interp, string, string, string, int) int
+	_fnTcl_UpVar2                             func(*Tcl_Interp, string, string, string, string, int) int
+	_fnTcl_UpdateLinkedVar                    func(*Tcl_Interp, string)
+	_fnTcl_UtfAtIndex                         func(string, int) string
+	_fnTcl_UtfBackslash                       func(string, *int32, string) int
+	_fnTcl_UtfCharComplete                    func(string, int) int
+	_fnTcl_UtfFindFirst                       func(string, int) string
+	_fnTcl_UtfFindLast                        func(string, int) string
+	_fnTcl_UtfNcasecmp                        func(string, string, uint) int
+	_fnTcl_UtfNcmp                            func(string, string, uint) int
+	_fnTcl_UtfNext                            func(string) string
+	_fnTcl_UtfPrev                            func(string, string) string
+	_fnTcl_UtfToExternal                      func(*Tcl_Interp, unsafe.Pointer, string, int, int, unsafe.Pointer, string, int, *int32, *int32, *int32) int
+	_fnTcl_UtfToExternalDString               func(unsafe.Pointer, string, int, *Tcl_DString) string
+	_fnTcl_UtfToLower                         func(string) int
+	_fnTcl_UtfToTitle                         func(string) int
+	_fnTcl_UtfToUniChar                       func(string, *uint16) int
+	_fnTcl_UtfToUniCharDString                func(string, int, *Tcl_DString) *uint16
+	_fnTcl_UtfToUpper                         func(string) int
+	_fnTcl_ValidateAllMemory                  func(string, int)
+	_fnTcl_VarEvalVA                          func(*Tcl_Interp, string) int
+	_fnTcl_VarTraceInfo                       func(*Tcl_Interp, string, int, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnTcl_VarTraceInfo2                      func(*Tcl_Interp, string, string, int, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnTcl_WaitForEvent                       func(*Tcl_Time) int
+	_fnTcl_WaitPid                            func(unsafe.Pointer, *int32, int) unsafe.Pointer
+	_fnTcl_Write                              func(unsafe.Pointer, string, int) int
+	_fnTcl_WriteChars                         func(unsafe.Pointer, string, int) int
+	_fnTcl_WriteObj                           func(unsafe.Pointer, *Tcl_Obj) int
+	_fnTcl_WriteRaw                           func(unsafe.Pointer, string, int) int
+	_fnTcl_WrongNumArgs                       func(*Tcl_Interp, int, unsafe.Pointer, string)
 )
 
 func TclFreeObj(objPtr *Tcl_Obj) {
@@ -2929,4 +2929,3 @@ func Tcl_WriteRaw(chan_ unsafe.Pointer, src string, srcLen int) int {
 func Tcl_WrongNumArgs(interp *Tcl_Interp, objc int, objv unsafe.Pointer, message string) {
 	_fnTcl_WrongNumArgs(interp, objc, objv, message)
 }
-

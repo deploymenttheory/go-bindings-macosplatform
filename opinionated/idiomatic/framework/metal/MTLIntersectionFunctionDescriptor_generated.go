@@ -16,7 +16,9 @@ type IntersectionFunctionDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTLIntersectionFunctionDescriptor].
-func (x *IntersectionFunctionDescriptor) Unwrap() *raw.MTLIntersectionFunctionDescriptor { return x.inner }
+func (x *IntersectionFunctionDescriptor) Unwrap() *raw.MTLIntersectionFunctionDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -60,7 +62,9 @@ func (x *IntersectionFunctionDescriptor) WithOptions(options raw.MTLFunctionOpti
 	return x
 }
 
-func (x *IntersectionFunctionDescriptor) asFunctionDescriptor() *raw.MTLFunctionDescriptor { return &x.inner.MTLFunctionDescriptor }
+func (x *IntersectionFunctionDescriptor) asFunctionDescriptor() *raw.MTLFunctionDescriptor {
+	return &x.inner.MTLFunctionDescriptor
+}
 
 // IntersectionFunctionDescriptorable is the interface implemented by [IntersectionFunctionDescriptor], for mocking and DI.
 type IntersectionFunctionDescriptorable interface {
@@ -72,4 +76,3 @@ type IntersectionFunctionDescriptorable interface {
 }
 
 var _ IntersectionFunctionDescriptorable = (*IntersectionFunctionDescriptor)(nil)
-

@@ -16,7 +16,9 @@ type PhysicallyPlausibleScatteringFunction struct {
 }
 
 // Unwrap returns the underlying [raw.MDLPhysicallyPlausibleScatteringFunction].
-func (x *PhysicallyPlausibleScatteringFunction) Unwrap() *raw.MDLPhysicallyPlausibleScatteringFunction { return x.inner }
+func (x *PhysicallyPlausibleScatteringFunction) Unwrap() *raw.MDLPhysicallyPlausibleScatteringFunction {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -141,7 +143,9 @@ func (x *PhysicallyPlausibleScatteringFunction) ClearcoatGloss() *MaterialProper
 	return &MaterialProperty{inner: _r}
 }
 
-func (x *PhysicallyPlausibleScatteringFunction) asScatteringFunction() *raw.MDLScatteringFunction { return &x.inner.MDLScatteringFunction }
+func (x *PhysicallyPlausibleScatteringFunction) asScatteringFunction() *raw.MDLScatteringFunction {
+	return &x.inner.MDLScatteringFunction
+}
 
 // PhysicallyPlausibleScatteringFunctionable is the interface implemented by [PhysicallyPlausibleScatteringFunction], for mocking and DI.
 type PhysicallyPlausibleScatteringFunctionable interface {
@@ -161,4 +165,3 @@ type PhysicallyPlausibleScatteringFunctionable interface {
 }
 
 var _ PhysicallyPlausibleScatteringFunctionable = (*PhysicallyPlausibleScatteringFunction)(nil)
-

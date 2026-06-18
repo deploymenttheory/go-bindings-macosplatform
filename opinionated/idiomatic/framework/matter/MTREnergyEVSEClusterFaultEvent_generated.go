@@ -118,4 +118,3 @@ type MTREnergyEVSEClusterFaultEventable interface {
 }
 
 var _ MTREnergyEVSEClusterFaultEventable = (*MTREnergyEVSEClusterFaultEvent)(nil)
-

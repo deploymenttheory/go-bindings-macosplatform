@@ -209,4 +209,3 @@ type WKWebExtensionable interface {
 }
 
 var _ WKWebExtensionable = (*WKWebExtension)(nil)
-

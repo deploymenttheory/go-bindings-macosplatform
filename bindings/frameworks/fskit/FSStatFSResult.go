@@ -16,35 +16,35 @@ type FSStatFSResult struct {
 }
 
 var (
-	_clsFSStatFSResult = _objcClass("FSStatFSResult")
+	_clsFSStatFSResult                           = _objcClass("FSStatFSResult")
 	_fSStatFSResultSelInitWithFileSystemTypeName = objc.RegisterName("initWithFileSystemTypeName:")
-	_fSStatFSResultSelBlockSize = objc.RegisterName("blockSize")
-	_fSStatFSResultSelSetBlockSize = objc.RegisterName("setBlockSize:")
-	_fSStatFSResultSelIoSize = objc.RegisterName("ioSize")
-	_fSStatFSResultSelSetIoSize = objc.RegisterName("setIoSize:")
-	_fSStatFSResultSelTotalBlocks = objc.RegisterName("totalBlocks")
-	_fSStatFSResultSelSetTotalBlocks = objc.RegisterName("setTotalBlocks:")
-	_fSStatFSResultSelAvailableBlocks = objc.RegisterName("availableBlocks")
-	_fSStatFSResultSelSetAvailableBlocks = objc.RegisterName("setAvailableBlocks:")
-	_fSStatFSResultSelFreeBlocks = objc.RegisterName("freeBlocks")
-	_fSStatFSResultSelSetFreeBlocks = objc.RegisterName("setFreeBlocks:")
-	_fSStatFSResultSelUsedBlocks = objc.RegisterName("usedBlocks")
-	_fSStatFSResultSelSetUsedBlocks = objc.RegisterName("setUsedBlocks:")
-	_fSStatFSResultSelTotalBytes = objc.RegisterName("totalBytes")
-	_fSStatFSResultSelSetTotalBytes = objc.RegisterName("setTotalBytes:")
-	_fSStatFSResultSelAvailableBytes = objc.RegisterName("availableBytes")
-	_fSStatFSResultSelSetAvailableBytes = objc.RegisterName("setAvailableBytes:")
-	_fSStatFSResultSelFreeBytes = objc.RegisterName("freeBytes")
-	_fSStatFSResultSelSetFreeBytes = objc.RegisterName("setFreeBytes:")
-	_fSStatFSResultSelUsedBytes = objc.RegisterName("usedBytes")
-	_fSStatFSResultSelSetUsedBytes = objc.RegisterName("setUsedBytes:")
-	_fSStatFSResultSelTotalFiles = objc.RegisterName("totalFiles")
-	_fSStatFSResultSelSetTotalFiles = objc.RegisterName("setTotalFiles:")
-	_fSStatFSResultSelFreeFiles = objc.RegisterName("freeFiles")
-	_fSStatFSResultSelSetFreeFiles = objc.RegisterName("setFreeFiles:")
-	_fSStatFSResultSelFileSystemSubType = objc.RegisterName("fileSystemSubType")
-	_fSStatFSResultSelSetFileSystemSubType = objc.RegisterName("setFileSystemSubType:")
-	_fSStatFSResultSelFileSystemTypeName = objc.RegisterName("fileSystemTypeName")
+	_fSStatFSResultSelBlockSize                  = objc.RegisterName("blockSize")
+	_fSStatFSResultSelSetBlockSize               = objc.RegisterName("setBlockSize:")
+	_fSStatFSResultSelIoSize                     = objc.RegisterName("ioSize")
+	_fSStatFSResultSelSetIoSize                  = objc.RegisterName("setIoSize:")
+	_fSStatFSResultSelTotalBlocks                = objc.RegisterName("totalBlocks")
+	_fSStatFSResultSelSetTotalBlocks             = objc.RegisterName("setTotalBlocks:")
+	_fSStatFSResultSelAvailableBlocks            = objc.RegisterName("availableBlocks")
+	_fSStatFSResultSelSetAvailableBlocks         = objc.RegisterName("setAvailableBlocks:")
+	_fSStatFSResultSelFreeBlocks                 = objc.RegisterName("freeBlocks")
+	_fSStatFSResultSelSetFreeBlocks              = objc.RegisterName("setFreeBlocks:")
+	_fSStatFSResultSelUsedBlocks                 = objc.RegisterName("usedBlocks")
+	_fSStatFSResultSelSetUsedBlocks              = objc.RegisterName("setUsedBlocks:")
+	_fSStatFSResultSelTotalBytes                 = objc.RegisterName("totalBytes")
+	_fSStatFSResultSelSetTotalBytes              = objc.RegisterName("setTotalBytes:")
+	_fSStatFSResultSelAvailableBytes             = objc.RegisterName("availableBytes")
+	_fSStatFSResultSelSetAvailableBytes          = objc.RegisterName("setAvailableBytes:")
+	_fSStatFSResultSelFreeBytes                  = objc.RegisterName("freeBytes")
+	_fSStatFSResultSelSetFreeBytes               = objc.RegisterName("setFreeBytes:")
+	_fSStatFSResultSelUsedBytes                  = objc.RegisterName("usedBytes")
+	_fSStatFSResultSelSetUsedBytes               = objc.RegisterName("setUsedBytes:")
+	_fSStatFSResultSelTotalFiles                 = objc.RegisterName("totalFiles")
+	_fSStatFSResultSelSetTotalFiles              = objc.RegisterName("setTotalFiles:")
+	_fSStatFSResultSelFreeFiles                  = objc.RegisterName("freeFiles")
+	_fSStatFSResultSelSetFreeFiles               = objc.RegisterName("setFreeFiles:")
+	_fSStatFSResultSelFileSystemSubType          = objc.RegisterName("fileSystemSubType")
+	_fSStatFSResultSelSetFileSystemSubType       = objc.RegisterName("setFileSystemSubType:")
+	_fSStatFSResultSelFileSystemTypeName         = objc.RegisterName("fileSystemTypeName")
 )
 
 func FSStatFSResultFromID(id objc.ID) *FSStatFSResult {
@@ -60,7 +60,9 @@ func FSStatFSResultFromID(id objc.ID) *FSStatFSResult {
 // Creates an statistics result instance, using the given file system type name. - Parameters fileSystemTypeName: A type name for the file system. The maximum allowed length is `MFSTYPENAMELEN`, including the terminating `NUL` character.
 func (o *FSStatFSResult) InitWithFileSystemTypeName(fileSystemTypeName *foundation.NSString) *FSStatFSResult {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSStatFSResultSelInitWithFileSystemTypeName, fileSystemTypeName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return FSStatFSResultFromID(_ret)
 }
 
@@ -74,7 +76,7 @@ func (o *FSStatFSResult) SetBlockSize(blockSize int) {
 	o.Ptr().Send(_fSStatFSResultSelSetBlockSize, blockSize)
 }
 
-// A property for the optimal block size with which to perform I/O. For best performance, specify an `ioSize` that's an even multiple of ``blockSize``.
+// A property for the optimal block size with which to perform I/O. For best performance, specify an `ioSize` that's an even multiple of “blockSize“.
 func (o *FSStatFSResult) IoSize() int {
 	_ret := objc.Send[int](o.Ptr(), _fSStatFSResultSelIoSize)
 	return _ret
@@ -197,7 +199,8 @@ func (o *FSStatFSResult) SetFileSystemSubType(fileSystemSubType int) {
 // A property for the file system type name. Match this value to the `FSShortName` attribute within the `EXAppExtensionAttributes` dictionary of the module's `Info.plist`. The maximum allowed length is `MFSTYPENAMELEN`, including the terminating `NUL` character.
 func (o *FSStatFSResult) FileSystemTypeName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSStatFSResultSelFileSystemTypeName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

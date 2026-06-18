@@ -25,4 +25,3 @@ func MPSNNLanczosScaleNodeFromID(id objc.ID) *MPSNNLanczosScaleNode {
 	purego.Track(o)
 	return o
 }
-

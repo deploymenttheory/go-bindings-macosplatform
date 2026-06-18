@@ -18,8 +18,8 @@ type ASAuthorizationAppleIDProvider struct {
 }
 
 var (
-	_clsASAuthorizationAppleIDProvider = _objcClass("ASAuthorizationAppleIDProvider")
-	_aSAuthorizationAppleIDProviderSelCreateRequest = objc.RegisterName("createRequest")
+	_clsASAuthorizationAppleIDProvider                                      = _objcClass("ASAuthorizationAppleIDProvider")
+	_aSAuthorizationAppleIDProviderSelCreateRequest                         = objc.RegisterName("createRequest")
 	_aSAuthorizationAppleIDProviderSelGetCredentialStateForUserIDCompletion = objc.RegisterName("getCredentialStateForUserID:completion:")
 )
 
@@ -36,7 +36,9 @@ func ASAuthorizationAppleIDProviderFromID(id objc.ID) *ASAuthorizationAppleIDPro
 // @abstract This method initializes and returns an instance of @see ASAuthorizationAppleIDRequest to be serviced by @see ASAuthorizationController.
 func (o *ASAuthorizationAppleIDProvider) CreateRequest() *ASAuthorizationAppleIDRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationAppleIDProviderSelCreateRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationAppleIDRequestFromID(_ret)
 }
 
@@ -51,4 +53,3 @@ func (o *ASAuthorizationAppleIDProvider) GetCredentialStateForUserIDCompletion(u
 	}
 	o.Ptr().Send(_aSAuthorizationAppleIDProviderSelGetCredentialStateForUserIDCompletion, userID.Ptr(), __block_completion)
 }
-

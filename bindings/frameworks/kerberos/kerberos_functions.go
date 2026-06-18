@@ -10,691 +10,691 @@ import (
 )
 
 var (
-	_fnKLAcquireInitialTickets func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, string) int32
-	_fnKLAcquireInitialTicketsWithPassword func(unsafe.Pointer, unsafe.Pointer, string, string) int32
+	_fnKLAcquireInitialTickets                          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, string) int32
+	_fnKLAcquireInitialTicketsWithPassword              func(unsafe.Pointer, unsafe.Pointer, string, string) int32
 	_fnKLAcquireNewInitialTicketCredentialsWithPassword func(unsafe.Pointer, unsafe.Pointer, string, unsafe.Pointer, *int8, *int8, unsafe.Pointer, *Krb5Creds) int32
-	_fnKLAcquireNewInitialTickets func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, string) int32
-	_fnKLAcquireNewInitialTicketsWithKeytab func(unsafe.Pointer, unsafe.Pointer, string, string) int32
-	_fnKLAcquireNewInitialTicketsWithPassword func(unsafe.Pointer, unsafe.Pointer, string, string) int32
-	_fnKLAcquireNewTickets func(unsafe.Pointer, unsafe.Pointer, string) int32
-	_fnKLAcquireNewTicketsWithPassword func(unsafe.Pointer, unsafe.Pointer, string, string) int32
-	_fnKLAcquireTickets func(unsafe.Pointer, unsafe.Pointer, string) int32
-	_fnKLAcquireTicketsWithPassword func(unsafe.Pointer, unsafe.Pointer, string, string) int32
-	_fnKLCacheHasValidTickets func(unsafe.Pointer, uint, *int8, unsafe.Pointer, string) int32
-	_fnKLCancelAllDialogs func() int32
-	_fnKLChangePassword func(unsafe.Pointer) int32
-	_fnKLChangePasswordWithPasswords func(unsafe.Pointer, string, string, *int8, string, string) int32
-	_fnKLComparePrincipal func(unsafe.Pointer, unsafe.Pointer, *int8) int32
-	_fnKLCountKerberosRealms func() uint
-	_fnKLCreateLoginOptions func(unsafe.Pointer) int32
-	_fnKLCreatePrincipalFromKerberos5Principal func(*Krb5PrincipalData, unsafe.Pointer) int32
-	_fnKLCreatePrincipalFromPrincipal func(unsafe.Pointer, unsafe.Pointer) int32
-	_fnKLCreatePrincipalFromString func(string, uint, unsafe.Pointer) int32
-	_fnKLCreatePrincipalFromTriplet func(string, string, string, unsafe.Pointer) int32
-	_fnKLDestroyTickets func(unsafe.Pointer) int32
-	_fnKLDisposeLoginOptions func(unsafe.Pointer) int32
-	_fnKLDisposePrincipal func(unsafe.Pointer) int32
-	_fnKLDisposeString func(string) int32
-	_fnKLFindKerberosRealmByName func(string, *uint) int32
-	_fnKLGetApplicationOptions func(unsafe.Pointer) int32
-	_fnKLGetDefaultLoginOption func(uint, unsafe.Pointer, *uint) int32
-	_fnKLGetDisplayStringFromPrincipal func(unsafe.Pointer, uint, string) int32
-	_fnKLGetErrorString func(int32, string) int32
-	_fnKLGetIdleCallback func(unsafe.Pointer, *uint) int32
-	_fnKLGetKerberosDefaultRealm func(*uint) int32
-	_fnKLGetKerberosDefaultRealmByName func(string) int32
-	_fnKLGetKerberosRealm func(uint, string) int32
-	_fnKLGetStringFromPrincipal func(unsafe.Pointer, uint, string) int32
-	_fnKLGetTripletFromPrincipal func(unsafe.Pointer, string, string, string) int32
-	_fnKLHandleError func(int32, uint, int8) int32
-	_fnKLInsertKerberosRealm func(uint, string) int32
-	_fnKLLastChangedTime func(*uint) int32
-	_fnKLLoginOptionsSetAddressless func(unsafe.Pointer, int8) int32
-	_fnKLLoginOptionsSetForwardable func(unsafe.Pointer, int8) int32
-	_fnKLLoginOptionsSetProxiable func(unsafe.Pointer, int8) int32
-	_fnKLLoginOptionsSetRenewableLifetime func(unsafe.Pointer, uint) int32
-	_fnKLLoginOptionsSetServiceName func(unsafe.Pointer, string) int32
-	_fnKLLoginOptionsSetTicketLifetime func(unsafe.Pointer, uint) int32
-	_fnKLLoginOptionsSetTicketStartTime func(unsafe.Pointer, uint) int32
-	_fnKLRemoveAllKerberosRealms func() int32
-	_fnKLRemoveKerberosRealm func(uint) int32
-	_fnKLRenewInitialTickets func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, string) int32
-	_fnKLSetApplicationOptions func(unsafe.Pointer) int32
-	_fnKLSetDefaultLoginOption func(uint, unsafe.Pointer, uint) int32
-	_fnKLSetIdleCallback func(unsafe.Pointer, uint) int32
-	_fnKLSetKerberosDefaultRealm func(uint) int32
-	_fnKLSetKerberosDefaultRealmByName func(string) int32
-	_fnKLSetKerberosRealm func(uint, string) int32
-	_fnKLSetSystemDefaultCache func(unsafe.Pointer) int32
-	_fnKLStoreNewInitialTicketCredentials func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *Krb5Creds, string) int32
-	_fnKLTicketExpirationTime func(unsafe.Pointer, uint, *uint) int32
-	_fnKLTicketStartTime func(unsafe.Pointer, uint, *uint) int32
-	_fnKLValidateInitialTickets func(unsafe.Pointer, unsafe.Pointer, string) int32
-	_fnKLVerifyInitialTicketCredentials func(unsafe.Pointer, *Krb5Creds, int8) int32
-	_fnKLVerifyInitialTickets func(unsafe.Pointer, int8, string) int32
-	_add_error_table func(*ErrorTable) int
-// Deprecated: Use GSS.framework
+	_fnKLAcquireNewInitialTickets                       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, string) int32
+	_fnKLAcquireNewInitialTicketsWithKeytab             func(unsafe.Pointer, unsafe.Pointer, string, string) int32
+	_fnKLAcquireNewInitialTicketsWithPassword           func(unsafe.Pointer, unsafe.Pointer, string, string) int32
+	_fnKLAcquireNewTickets                              func(unsafe.Pointer, unsafe.Pointer, string) int32
+	_fnKLAcquireNewTicketsWithPassword                  func(unsafe.Pointer, unsafe.Pointer, string, string) int32
+	_fnKLAcquireTickets                                 func(unsafe.Pointer, unsafe.Pointer, string) int32
+	_fnKLAcquireTicketsWithPassword                     func(unsafe.Pointer, unsafe.Pointer, string, string) int32
+	_fnKLCacheHasValidTickets                           func(unsafe.Pointer, uint, *int8, unsafe.Pointer, string) int32
+	_fnKLCancelAllDialogs                               func() int32
+	_fnKLChangePassword                                 func(unsafe.Pointer) int32
+	_fnKLChangePasswordWithPasswords                    func(unsafe.Pointer, string, string, *int8, string, string) int32
+	_fnKLComparePrincipal                               func(unsafe.Pointer, unsafe.Pointer, *int8) int32
+	_fnKLCountKerberosRealms                            func() uint
+	_fnKLCreateLoginOptions                             func(unsafe.Pointer) int32
+	_fnKLCreatePrincipalFromKerberos5Principal          func(*Krb5PrincipalData, unsafe.Pointer) int32
+	_fnKLCreatePrincipalFromPrincipal                   func(unsafe.Pointer, unsafe.Pointer) int32
+	_fnKLCreatePrincipalFromString                      func(string, uint, unsafe.Pointer) int32
+	_fnKLCreatePrincipalFromTriplet                     func(string, string, string, unsafe.Pointer) int32
+	_fnKLDestroyTickets                                 func(unsafe.Pointer) int32
+	_fnKLDisposeLoginOptions                            func(unsafe.Pointer) int32
+	_fnKLDisposePrincipal                               func(unsafe.Pointer) int32
+	_fnKLDisposeString                                  func(string) int32
+	_fnKLFindKerberosRealmByName                        func(string, *uint) int32
+	_fnKLGetApplicationOptions                          func(unsafe.Pointer) int32
+	_fnKLGetDefaultLoginOption                          func(uint, unsafe.Pointer, *uint) int32
+	_fnKLGetDisplayStringFromPrincipal                  func(unsafe.Pointer, uint, string) int32
+	_fnKLGetErrorString                                 func(int32, string) int32
+	_fnKLGetIdleCallback                                func(unsafe.Pointer, *uint) int32
+	_fnKLGetKerberosDefaultRealm                        func(*uint) int32
+	_fnKLGetKerberosDefaultRealmByName                  func(string) int32
+	_fnKLGetKerberosRealm                               func(uint, string) int32
+	_fnKLGetStringFromPrincipal                         func(unsafe.Pointer, uint, string) int32
+	_fnKLGetTripletFromPrincipal                        func(unsafe.Pointer, string, string, string) int32
+	_fnKLHandleError                                    func(int32, uint, int8) int32
+	_fnKLInsertKerberosRealm                            func(uint, string) int32
+	_fnKLLastChangedTime                                func(*uint) int32
+	_fnKLLoginOptionsSetAddressless                     func(unsafe.Pointer, int8) int32
+	_fnKLLoginOptionsSetForwardable                     func(unsafe.Pointer, int8) int32
+	_fnKLLoginOptionsSetProxiable                       func(unsafe.Pointer, int8) int32
+	_fnKLLoginOptionsSetRenewableLifetime               func(unsafe.Pointer, uint) int32
+	_fnKLLoginOptionsSetServiceName                     func(unsafe.Pointer, string) int32
+	_fnKLLoginOptionsSetTicketLifetime                  func(unsafe.Pointer, uint) int32
+	_fnKLLoginOptionsSetTicketStartTime                 func(unsafe.Pointer, uint) int32
+	_fnKLRemoveAllKerberosRealms                        func() int32
+	_fnKLRemoveKerberosRealm                            func(uint) int32
+	_fnKLRenewInitialTickets                            func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, string) int32
+	_fnKLSetApplicationOptions                          func(unsafe.Pointer) int32
+	_fnKLSetDefaultLoginOption                          func(uint, unsafe.Pointer, uint) int32
+	_fnKLSetIdleCallback                                func(unsafe.Pointer, uint) int32
+	_fnKLSetKerberosDefaultRealm                        func(uint) int32
+	_fnKLSetKerberosDefaultRealmByName                  func(string) int32
+	_fnKLSetKerberosRealm                               func(uint, string) int32
+	_fnKLSetSystemDefaultCache                          func(unsafe.Pointer) int32
+	_fnKLStoreNewInitialTicketCredentials               func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *Krb5Creds, string) int32
+	_fnKLTicketExpirationTime                           func(unsafe.Pointer, uint, *uint) int32
+	_fnKLTicketStartTime                                func(unsafe.Pointer, uint, *uint) int32
+	_fnKLValidateInitialTickets                         func(unsafe.Pointer, unsafe.Pointer, string) int32
+	_fnKLVerifyInitialTicketCredentials                 func(unsafe.Pointer, *Krb5Creds, int8) int32
+	_fnKLVerifyInitialTickets                           func(unsafe.Pointer, int8, string) int32
+	_add_error_table                                    func(*ErrorTable) int
+	// Deprecated: Use GSS.framework
 	_apple_gss_krb5_export_authdata_if_relevant_context func(*uint32, unsafe.Pointer, uint32, unsafe.Pointer) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_apple_gss_krb5_free_authdata_if_relevant func(*uint32, unsafe.Pointer) uint32
 	// \ingroup cc_context_reference \param out_context on exit, a new context object.  Must be free with cc_context_release(). \param in_version  the requested API version.  This should be the maximum version the application supports. \param out_supported_version if non-NULL, on exit contains the maximum API version supported by the implementation. \param out_vendor if non-NULL, on exit contains a pointer to a read-only C string which contains a string describing the vendor which implemented the credentials cache API. \return On success, #ccNoError.  On failure, an error code representing the failure. May return CCAPI v2 error CC_BAD_API_VERSION if #ccapi_version_2 is passed in. \brief Initialize a new cc_context.
 	_cc_initialize func(**CcContextD, int32, *int32, string) int32
-	_com_err_va func(string, int, string, string)
+	_com_err_va    func(string, int, string, string)
 	_error_message func(int) string
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_accept_sec_context func(*uint32, unsafe.Pointer, unsafe.Pointer, *gss.GssBufferDescStruct, *gss.GssChannelBindingsStruct, unsafe.Pointer, **gss.GssOIDDescStruct, *gss.GssBufferDescStruct, *uint32, *uint32, unsafe.Pointer) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_acquire_cred func(*uint32, unsafe.Pointer, uint32, *gss.GssOIDSetDescStruct, int, unsafe.Pointer, **gss.GssOIDSetDescStruct, *uint32) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_add_cred func(*uint32, unsafe.Pointer, unsafe.Pointer, *gss.GssOIDDescStruct, int, uint32, uint32, unsafe.Pointer, **gss.GssOIDSetDescStruct, *uint32, *uint32) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_add_oid_set_member func(*uint32, *gss.GssOIDDescStruct, **gss.GssOIDSetDescStruct) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_canonicalize_name func(*uint32, unsafe.Pointer, *gss.GssOIDDescStruct, unsafe.Pointer) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_compare_name func(*uint32, unsafe.Pointer, unsafe.Pointer, *int32) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_context_time func(*uint32, unsafe.Pointer, *uint32) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_create_empty_oid_set func(*uint32, **gss.GssOIDSetDescStruct) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_delete_sec_context func(*uint32, unsafe.Pointer, *gss.GssBufferDescStruct) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_display_name func(*uint32, unsafe.Pointer, *gss.GssBufferDescStruct, **gss.GssOIDDescStruct) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_display_status func(*uint32, uint32, int, *gss.GssOIDDescStruct, *uint32, *gss.GssBufferDescStruct) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_duplicate_name func(*uint32, unsafe.Pointer, unsafe.Pointer) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_export_name func(*uint32, unsafe.Pointer, *gss.GssBufferDescStruct) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_export_sec_context func(*uint32, unsafe.Pointer, *gss.GssBufferDescStruct) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_get_mic func(*uint32, unsafe.Pointer, uint32, *gss.GssBufferDescStruct, *gss.GssBufferDescStruct) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_import_name func(*uint32, *gss.GssBufferDescStruct, *gss.GssOIDDescStruct, unsafe.Pointer) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_import_sec_context func(*uint32, *gss.GssBufferDescStruct, unsafe.Pointer) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_indicate_mechs func(*uint32, **gss.GssOIDSetDescStruct) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_init_sec_context func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *gss.GssOIDDescStruct, uint32, uint32, *gss.GssChannelBindingsStruct, *gss.GssBufferDescStruct, **gss.GssOIDDescStruct, *gss.GssBufferDescStruct, *uint32, *uint32) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_inquire_context func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint32, **gss.GssOIDDescStruct, *uint32, *int32, *int32) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_inquire_cred func(*uint32, unsafe.Pointer, unsafe.Pointer, *uint32, *int, **gss.GssOIDSetDescStruct) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_inquire_cred_by_mech func(*uint32, unsafe.Pointer, *gss.GssOIDDescStruct, unsafe.Pointer, *uint32, *uint32, *int) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_inquire_mechs_for_name func(*uint32, unsafe.Pointer, **gss.GssOIDSetDescStruct) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_inquire_names_for_mech func(*uint32, *gss.GssOIDDescStruct, **gss.GssOIDSetDescStruct) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_krb5_ccache_name func(*uint32, string, string) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_krb5_copy_ccache func(*uint32, unsafe.Pointer, unsafe.Pointer) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_krb5_export_lucid_sec_context func(*uint32, unsafe.Pointer, uint32, unsafe.Pointer) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_krb5_free_lucid_sec_context func(*uint32, unsafe.Pointer) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_krb5_get_tkt_flags func(*uint32, unsafe.Pointer, *int) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_krb5_set_allowable_enctypes func(*uint32, unsafe.Pointer, uint32, *int) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_krb5_ui func(*uint32, uint32) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_oid_to_str func(*uint32, *gss.GssOIDDescStruct, *gss.GssBufferDescStruct) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_process_context_token func(*uint32, unsafe.Pointer, *gss.GssBufferDescStruct) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_release_buffer func(*uint32, *gss.GssBufferDescStruct) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_release_cred func(*uint32, unsafe.Pointer) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_release_name func(*uint32, unsafe.Pointer) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_release_oid func(*uint32, **gss.GssOIDDescStruct) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_release_oid_set func(*uint32, **gss.GssOIDSetDescStruct) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_seal func(*uint32, unsafe.Pointer, int, int, *gss.GssBufferDescStruct, *int32, *gss.GssBufferDescStruct) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_sign func(*uint32, unsafe.Pointer, int, *gss.GssBufferDescStruct, *gss.GssBufferDescStruct) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_str_to_oid func(*uint32, *gss.GssBufferDescStruct, **gss.GssOIDDescStruct) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_test_oid_set_member func(*uint32, *gss.GssOIDDescStruct, *gss.GssOIDSetDescStruct, *int32) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_unseal func(*uint32, unsafe.Pointer, *gss.GssBufferDescStruct, *gss.GssBufferDescStruct, *int32, *int32) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_unwrap func(*uint32, unsafe.Pointer, *gss.GssBufferDescStruct, *gss.GssBufferDescStruct, *int32, *uint32) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_verify func(*uint32, unsafe.Pointer, *gss.GssBufferDescStruct, *gss.GssBufferDescStruct, *int32) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_verify_mic func(*uint32, unsafe.Pointer, *gss.GssBufferDescStruct, *gss.GssBufferDescStruct, *uint32) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_gss_wrap func(*uint32, unsafe.Pointer, int, uint32, *gss.GssBufferDescStruct, *int32, *gss.GssBufferDescStruct) uint32
-// Deprecated: Use GSS.framework
-	_gss_wrap_size_limit func(*uint32, unsafe.Pointer, int, uint32, uint32, *uint32) uint32
+	// Deprecated: Use GSS.framework
+	_gss_wrap_size_limit         func(*uint32, unsafe.Pointer, int, uint32, uint32, *uint32) uint32
 	_initialize_asn1_error_table func()
 	_initialize_k524_error_table func()
 	_initialize_krb5_error_table func()
 	_initialize_prof_error_table func()
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_425_conv_principal func(unsafe.Pointer, string, string, string, **Krb5PrincipalData) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_524_conv_principal func(unsafe.Pointer, *Krb5PrincipalData, string, string, string) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_524_convert_creds func(unsafe.Pointer, *Krb5Creds, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_address_compare func(unsafe.Pointer, *Krb5Address, *Krb5Address) uint
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_address_order func(unsafe.Pointer, *Krb5Address, *Krb5Address) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_address_search func(unsafe.Pointer, *Krb5Address, unsafe.Pointer) uint
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_aname_to_localname func(unsafe.Pointer, *Krb5PrincipalData, int, string) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_appdefault_boolean func(unsafe.Pointer, string, *Krb5Data, string, int, *int32)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_appdefault_string func(unsafe.Pointer, string, *Krb5Data, string, string, string)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_auth_con_free func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_auth_con_genaddrs func(unsafe.Pointer, unsafe.Pointer, int, int) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_auth_con_get_checksum_func func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_auth_con_getaddrs func(unsafe.Pointer, unsafe.Pointer, *Krb5Address, *Krb5Address) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_auth_con_getauthenticator func(unsafe.Pointer, unsafe.Pointer, *Krb5Authenticator) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_auth_con_getflags func(unsafe.Pointer, unsafe.Pointer, *int) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_auth_con_getkey func(unsafe.Pointer, unsafe.Pointer, *Krb5Keyblock) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_auth_con_getlocalseqnumber func(unsafe.Pointer, unsafe.Pointer, *int) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_auth_con_getrcache func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_auth_con_getrecvsubkey func(unsafe.Pointer, unsafe.Pointer, *Krb5Keyblock) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_auth_con_getremoteseqnumber func(unsafe.Pointer, unsafe.Pointer, *int) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_auth_con_getsendsubkey func(unsafe.Pointer, unsafe.Pointer, *Krb5Keyblock) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_auth_con_init func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_auth_con_set_checksum_func func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_auth_con_setaddrs func(unsafe.Pointer, unsafe.Pointer, *Krb5Address, *Krb5Address) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_auth_con_setflags func(unsafe.Pointer, unsafe.Pointer, int) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_auth_con_setports func(unsafe.Pointer, unsafe.Pointer, *Krb5Address, *Krb5Address) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_auth_con_setrcache func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_auth_con_setrecvsubkey func(unsafe.Pointer, unsafe.Pointer, *Krb5Keyblock) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_auth_con_setsendsubkey func(unsafe.Pointer, unsafe.Pointer, *Krb5Keyblock) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_auth_con_setuseruserkey func(unsafe.Pointer, unsafe.Pointer, *Krb5Keyblock) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_build_principal_alloc_va func(unsafe.Pointer, **Krb5PrincipalData, uint, string, string) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_c_block_size func(unsafe.Pointer, int, *uint) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_c_checksum_length func(unsafe.Pointer, int, *uint) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_c_decrypt func(unsafe.Pointer, *Krb5Keyblock, int, *Krb5Data, *Krb5EncData, *Krb5Data) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_c_encrypt func(unsafe.Pointer, *Krb5Keyblock, int, *Krb5Data, *Krb5Data, *Krb5EncData) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_c_encrypt_length func(unsafe.Pointer, int, uint, *uint) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_c_enctype_compare func(unsafe.Pointer, int, int, *uint) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_c_free_state func(unsafe.Pointer, *Krb5Keyblock, *Krb5Data) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_c_init_state func(unsafe.Pointer, *Krb5Keyblock, int, *Krb5Data) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_c_is_coll_proof_cksum func(int) uint
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_c_is_keyed_cksum func(int) uint
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_c_keyed_checksum_types func(unsafe.Pointer, int, *uint32, *int) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_c_make_checksum func(unsafe.Pointer, int, *Krb5Keyblock, int, *Krb5Data, *Krb5Checksum) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_c_make_random_key func(unsafe.Pointer, int, *Krb5Keyblock) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_c_random_add_entropy func(unsafe.Pointer, uint, *Krb5Data) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_c_random_make_octets func(unsafe.Pointer, *Krb5Data) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_c_random_os_entropy func(unsafe.Pointer, int, *int32) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_c_random_seed func(unsafe.Pointer, *Krb5Data) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_c_string_to_key func(unsafe.Pointer, int, *Krb5Data, *Krb5Data, *Krb5Keyblock) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_c_string_to_key_with_params func(unsafe.Pointer, int, *Krb5Data, *Krb5Data, *Krb5Data, *Krb5Keyblock) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_c_valid_cksumtype func(int) uint
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_c_valid_enctype func(int) uint
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_c_verify_checksum func(unsafe.Pointer, *Krb5Keyblock, int, *Krb5Data, *Krb5Checksum, *uint) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_calculate_checksum func(unsafe.Pointer, int, unsafe.Pointer, uint, unsafe.Pointer, uint, *Krb5Checksum) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cc_cache_match func(unsafe.Pointer, *Krb5PrincipalData, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cc_close func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cc_copy_creds func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cc_default func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cc_default_name func(unsafe.Pointer) string
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cc_destroy func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cc_end_seq_get func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cc_gen_new func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cc_get_config func(unsafe.Pointer, unsafe.Pointer, *Krb5PrincipalData, string, *Krb5Data) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cc_get_name func(unsafe.Pointer, unsafe.Pointer) string
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cc_get_principal func(unsafe.Pointer, unsafe.Pointer, **Krb5PrincipalData) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cc_get_type func(unsafe.Pointer, unsafe.Pointer) string
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cc_initialize func(unsafe.Pointer, unsafe.Pointer, *Krb5PrincipalData) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cc_last_change_time func(unsafe.Pointer, unsafe.Pointer, *int) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cc_lock func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cc_move func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cc_new_unique func(unsafe.Pointer, string, string, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cc_next_cred func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *Krb5Creds) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cc_remove_cred func(unsafe.Pointer, unsafe.Pointer, int, *Krb5Creds) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cc_resolve func(unsafe.Pointer, string, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cc_retrieve_cred func(unsafe.Pointer, unsafe.Pointer, int, *Krb5Creds, *Krb5Creds) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cc_set_config func(unsafe.Pointer, unsafe.Pointer, *Krb5PrincipalData, string, *Krb5Data) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cc_set_default_name func(unsafe.Pointer, string) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cc_set_flags func(unsafe.Pointer, unsafe.Pointer, int) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cc_start_seq_get func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cc_store_cred func(unsafe.Pointer, unsafe.Pointer, *Krb5Creds) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cc_unlock func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cccol_cursor_free func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cccol_cursor_new func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cccol_cursor_next func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cccol_last_change_time func(unsafe.Pointer, *int) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cccol_lock func(unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cccol_unlock func(unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_change_password func(unsafe.Pointer, *Krb5Creds, string, *int32, *Krb5Data, *Krb5Data) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_checksum_size func(unsafe.Pointer, int) uint
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_cksumtype_to_string func(int, string, uint) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_clear_error_message func(unsafe.Pointer)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_copy_addresses func(unsafe.Pointer, unsafe.Pointer, *Krb5Address) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_copy_authdata func(unsafe.Pointer, unsafe.Pointer, *Krb5Authdata) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_copy_authenticator func(unsafe.Pointer, *Krb5Authenticator, *Krb5Authenticator) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_copy_checksum func(unsafe.Pointer, *Krb5Checksum, *Krb5Checksum) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_copy_context func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_copy_creds func(unsafe.Pointer, *Krb5Creds, *Krb5Creds) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_copy_data func(unsafe.Pointer, *Krb5Data, *Krb5Data) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_copy_keyblock func(unsafe.Pointer, *Krb5Keyblock, *Krb5Keyblock) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_copy_keyblock_contents func(unsafe.Pointer, *Krb5Keyblock, *Krb5Keyblock) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_copy_principal func(unsafe.Pointer, *Krb5PrincipalData, **Krb5PrincipalData) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_copy_ticket func(unsafe.Pointer, *Krb5Ticket, *Krb5Ticket) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_decode_ticket func(*Krb5Data, *Krb5Ticket) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_decrypt func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint, *Krb5EncryptBlock, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_deltat_to_string func(int, string, uint) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_eblock_enctype func(unsafe.Pointer, *Krb5EncryptBlock) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_encrypt func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint, *Krb5EncryptBlock, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_encrypt_size func(uint, int) uint
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_enctype_to_string func(int, string, uint) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_finish_key func(unsafe.Pointer, *Krb5EncryptBlock) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_finish_random_key func(unsafe.Pointer, *Krb5EncryptBlock, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_free_addresses func(unsafe.Pointer, *Krb5Address)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_free_ap_rep_enc_part func(unsafe.Pointer, *Krb5ApRepEncPart)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_free_authdata func(unsafe.Pointer, *Krb5Authdata)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_free_authenticator func(unsafe.Pointer, *Krb5Authenticator)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_free_checksum func(unsafe.Pointer, *Krb5Checksum)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_free_checksum_contents func(unsafe.Pointer, *Krb5Checksum)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_free_cksumtypes func(unsafe.Pointer, *int)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_free_context func(unsafe.Pointer)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_free_cred_contents func(unsafe.Pointer, *Krb5Creds)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_free_creds func(unsafe.Pointer, *Krb5Creds)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_free_data func(unsafe.Pointer, *Krb5Data)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_free_data_contents func(unsafe.Pointer, *Krb5Data)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_free_default_realm func(unsafe.Pointer, string)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_free_error func(unsafe.Pointer, *Krb5Error)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_free_error_message func(unsafe.Pointer, string)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_free_host_realm func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_free_keyblock func(unsafe.Pointer, *Krb5Keyblock)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_free_keyblock_contents func(unsafe.Pointer, *Krb5Keyblock)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_free_keytab_entry_contents func(unsafe.Pointer, *Krb5KeytabEntrySt) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_free_principal func(unsafe.Pointer, *Krb5PrincipalData)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_free_tgt_creds func(unsafe.Pointer, *Krb5Creds)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_free_ticket func(unsafe.Pointer, *Krb5Ticket)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_free_unparsed_name func(unsafe.Pointer, string)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_fwd_tgt_creds func(unsafe.Pointer, unsafe.Pointer, string, *Krb5PrincipalData, *Krb5PrincipalData, unsafe.Pointer, int, *Krb5Data) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_get_credentials func(unsafe.Pointer, int, unsafe.Pointer, *Krb5Creds, *Krb5Creds) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_get_credentials_renew func(unsafe.Pointer, int, unsafe.Pointer, *Krb5Creds, *Krb5Creds) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_get_credentials_validate func(unsafe.Pointer, int, unsafe.Pointer, *Krb5Creds, *Krb5Creds) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_get_default_realm func(unsafe.Pointer, string) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_get_error_message func(unsafe.Pointer, int) string
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_get_host_realm func(unsafe.Pointer, string, string) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_get_init_creds_keytab func(unsafe.Pointer, *Krb5Creds, *Krb5PrincipalData, unsafe.Pointer, int, string, *Krb5GetInitCredsOpt) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_get_init_creds_opt_alloc func(unsafe.Pointer, *Krb5GetInitCredsOpt) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_get_init_creds_opt_free func(unsafe.Pointer, *Krb5GetInitCredsOpt)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_get_init_creds_opt_init func(*Krb5GetInitCredsOpt)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_get_init_creds_opt_set_address_list func(*Krb5GetInitCredsOpt, *Krb5Address)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_get_init_creds_opt_set_canonicalize func(*Krb5GetInitCredsOpt, int)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_get_init_creds_opt_set_change_password_prompt func(*Krb5GetInitCredsOpt, int)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_get_init_creds_opt_set_etype_list func(*Krb5GetInitCredsOpt, *int, int)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_get_init_creds_opt_set_forwardable func(*Krb5GetInitCredsOpt, int)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_get_init_creds_opt_set_pa func(unsafe.Pointer, *Krb5GetInitCredsOpt, string, string) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_get_init_creds_opt_set_preauth_list func(*Krb5GetInitCredsOpt, *int, int)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_get_init_creds_opt_set_process_last_req func(unsafe.Pointer, *Krb5GetInitCredsOpt, unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_get_init_creds_opt_set_proxiable func(*Krb5GetInitCredsOpt, int)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_get_init_creds_opt_set_renew_life func(*Krb5GetInitCredsOpt, int)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_get_init_creds_opt_set_salt func(*Krb5GetInitCredsOpt, *Krb5Data)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_get_init_creds_opt_set_tkt_life func(*Krb5GetInitCredsOpt, int)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_get_init_creds_password func(unsafe.Pointer, *Krb5Creds, *Krb5PrincipalData, string, unsafe.Pointer, unsafe.Pointer, int, string, *Krb5GetInitCredsOpt) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_get_permitted_enctypes func(unsafe.Pointer, *int) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_get_profile func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_get_prompt_types func(unsafe.Pointer) *int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_get_renewed_creds func(unsafe.Pointer, *Krb5Creds, *Krb5PrincipalData, unsafe.Pointer, string) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_get_server_rcache func(unsafe.Pointer, *Krb5Data, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_get_time_offsets func(unsafe.Pointer, *int, *int) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_get_validated_creds func(unsafe.Pointer, *Krb5Creds, *Krb5PrincipalData, unsafe.Pointer, string) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_gss_register_acceptor_identity func(string) uint32
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_init_context func(unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_init_keyblock func(unsafe.Pointer, int, uint, *Krb5Keyblock) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_init_random_key func(unsafe.Pointer, *Krb5EncryptBlock, *Krb5Keyblock, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_init_secure_context func(unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_is_config_principal func(unsafe.Pointer, *Krb5PrincipalData) uint
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_is_referral_realm func(*Krb5Data) uint
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_is_thread_safe func() uint
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_kt_add_entry func(unsafe.Pointer, unsafe.Pointer, *Krb5KeytabEntrySt) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_kt_close func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_kt_default func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_kt_default_name func(unsafe.Pointer, string, int) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_kt_end_seq_get func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_kt_get_entry func(unsafe.Pointer, unsafe.Pointer, *Krb5PrincipalData, uint, int, *Krb5KeytabEntrySt) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_kt_get_name func(unsafe.Pointer, unsafe.Pointer, string, uint) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_kt_get_type func(unsafe.Pointer, unsafe.Pointer) string
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_kt_next_entry func(unsafe.Pointer, unsafe.Pointer, *Krb5KeytabEntrySt, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_kt_read_service_key func(unsafe.Pointer, unsafe.Pointer, *Krb5PrincipalData, uint, int, *Krb5Keyblock) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_kt_remove_entry func(unsafe.Pointer, unsafe.Pointer, *Krb5KeytabEntrySt) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_kt_resolve func(unsafe.Pointer, string, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_kt_start_seq_get func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_kuserok func(unsafe.Pointer, *Krb5PrincipalData, string) uint
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_mk_1cred func(unsafe.Pointer, unsafe.Pointer, *Krb5Creds, *Krb5Data, *Krb5ReplayData) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_mk_error func(unsafe.Pointer, *Krb5Error, *Krb5Data) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_mk_ncred func(unsafe.Pointer, unsafe.Pointer, *Krb5Creds, *Krb5Data, *Krb5ReplayData) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_mk_priv func(unsafe.Pointer, unsafe.Pointer, *Krb5Data, *Krb5Data, *Krb5ReplayData) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_mk_rep func(unsafe.Pointer, unsafe.Pointer, *Krb5Data) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_mk_req func(unsafe.Pointer, unsafe.Pointer, int, string, string, *Krb5Data, unsafe.Pointer, *Krb5Data) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_mk_req_extended func(unsafe.Pointer, unsafe.Pointer, int, *Krb5Data, *Krb5Creds, *Krb5Data) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_mk_safe func(unsafe.Pointer, unsafe.Pointer, *Krb5Data, *Krb5Data, *Krb5ReplayData) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_os_localaddr func(unsafe.Pointer, *Krb5Address) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_parse_name func(unsafe.Pointer, string, **Krb5PrincipalData) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_parse_name_flags func(unsafe.Pointer, string, int, **Krb5PrincipalData) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_principal2salt func(unsafe.Pointer, *Krb5PrincipalData, *Krb5Data) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_principal_compare func(unsafe.Pointer, *Krb5PrincipalData, *Krb5PrincipalData) uint
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_process_key func(unsafe.Pointer, *Krb5EncryptBlock, *Krb5Keyblock) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_prompter_posix func(unsafe.Pointer, unsafe.Pointer, string, string, int, *Krb5Prompt) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_random_key func(unsafe.Pointer, *Krb5EncryptBlock, unsafe.Pointer, *Krb5Keyblock) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_rd_cred func(unsafe.Pointer, unsafe.Pointer, *Krb5Data, *Krb5Creds, *Krb5ReplayData) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_rd_error func(unsafe.Pointer, *Krb5Data, *Krb5Error) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_rd_priv func(unsafe.Pointer, unsafe.Pointer, *Krb5Data, *Krb5Data, *Krb5ReplayData) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_rd_rep func(unsafe.Pointer, unsafe.Pointer, *Krb5Data, *Krb5ApRepEncPart) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_rd_req func(unsafe.Pointer, unsafe.Pointer, *Krb5Data, *Krb5PrincipalData, unsafe.Pointer, *int, *Krb5Ticket) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_rd_safe func(unsafe.Pointer, unsafe.Pointer, *Krb5Data, *Krb5Data, *Krb5ReplayData) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_read_password func(unsafe.Pointer, string, string, string, *uint32) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_realm_compare func(unsafe.Pointer, *Krb5PrincipalData, *Krb5PrincipalData) uint
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_recvauth func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, string, *Krb5PrincipalData, int, unsafe.Pointer, *Krb5Ticket) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_recvauth_version func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *Krb5PrincipalData, int, unsafe.Pointer, *Krb5Ticket, *Krb5Data) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_salttype_to_string func(int, string, uint) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_sendauth func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, string, *Krb5PrincipalData, *Krb5PrincipalData, int, *Krb5Data, *Krb5Creds, unsafe.Pointer, *Krb5Error, *Krb5ApRepEncPart, *Krb5Creds) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_server_decrypt_ticket_keytab func(unsafe.Pointer, unsafe.Pointer, *Krb5Ticket) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_set_default_realm func(unsafe.Pointer, string) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_set_default_tgs_enctypes func(unsafe.Pointer, *int) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_set_password func(unsafe.Pointer, *Krb5Creds, string, *Krb5PrincipalData, *int32, *Krb5Data, *Krb5Data) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_set_password_using_ccache func(unsafe.Pointer, unsafe.Pointer, string, *Krb5PrincipalData, *int32, *Krb5Data, *Krb5Data) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_set_principal_realm func(unsafe.Pointer, *Krb5PrincipalData, string) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_set_real_time func(unsafe.Pointer, int, int) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_sname_to_principal func(unsafe.Pointer, string, string, int, **Krb5PrincipalData) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_string_to_cksumtype func(string, *int) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_string_to_deltat func(string, *int) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_string_to_enctype func(string, *int) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_string_to_key func(unsafe.Pointer, *Krb5EncryptBlock, *Krb5Keyblock, *Krb5Data, *Krb5Data) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_string_to_salttype func(string, *int) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_string_to_timestamp func(string, *int) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_timeofday func(unsafe.Pointer, *int) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_timestamp_to_sfstring func(int, string, uint, string) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_timestamp_to_string func(int, string, uint) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_unparse_name func(unsafe.Pointer, *Krb5PrincipalData, string) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_unparse_name_ext func(unsafe.Pointer, *Krb5PrincipalData, string, *uint32) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_unparse_name_flags func(unsafe.Pointer, *Krb5PrincipalData, int, string) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_unparse_name_flags_ext func(unsafe.Pointer, *Krb5PrincipalData, int, string, *uint32) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_us_timeofday func(unsafe.Pointer, *int, *int) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_use_enctype func(unsafe.Pointer, *Krb5EncryptBlock, int) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_verify_checksum func(unsafe.Pointer, int, *Krb5Checksum, unsafe.Pointer, uint, unsafe.Pointer, uint) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_verify_init_creds func(unsafe.Pointer, *Krb5Creds, *Krb5PrincipalData, unsafe.Pointer, unsafe.Pointer, *Krb5VerifyInitCredsOpt) int
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_verify_init_creds_opt_init func(*Krb5VerifyInitCredsOpt)
-// Deprecated: Use GSS.framework
+	// Deprecated: Use GSS.framework
 	_krb5_verify_init_creds_opt_set_ap_req_nofail func(*Krb5VerifyInitCredsOpt, int)
-	_krb5_vset_error_message func(unsafe.Pointer, int, string, string)
-	_profile_abandon func(unsafe.Pointer)
-	_profile_add_relation func(unsafe.Pointer, string, string) int
-	_profile_clear_relation func(unsafe.Pointer, string) int
-	_profile_configuration_updated func()
-	_profile_flush func(unsafe.Pointer) int
-	_profile_flush_to_buffer func(unsafe.Pointer, string) int
-	_profile_flush_to_file func(unsafe.Pointer, string) int
-	_profile_free_buffer func(unsafe.Pointer, string)
-	_profile_free_list func(string)
-	_profile_get_boolean func(unsafe.Pointer, string, string, string, int, *int32) int
-	_profile_get_integer func(unsafe.Pointer, string, string, string, int, *int32) int
-	_profile_get_relation_names func(unsafe.Pointer, string, string) int
-	_profile_get_string func(unsafe.Pointer, string, string, string, string, string) int
-	_profile_get_subsection_names func(unsafe.Pointer, string, string) int
-	_profile_get_values func(unsafe.Pointer, unsafe.Pointer, string) int
-	_profile_init func(*string, unsafe.Pointer) int
-	_profile_init_path func(string, unsafe.Pointer) int
-	_profile_is_modified func(unsafe.Pointer, *int32) int
-	_profile_is_writable func(unsafe.Pointer, *int32) int
-	_profile_iterator func(unsafe.Pointer, string, string) int
-	_profile_iterator_create func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) int
-	_profile_iterator_free func(unsafe.Pointer)
-	_profile_release func(unsafe.Pointer)
-	_profile_release_string func(string)
-	_profile_rename_section func(unsafe.Pointer, string, string) int
-	_profile_update_relation func(unsafe.Pointer, string, string, string) int
-	_remove_error_table func(*ErrorTable) int
-	_reset_com_err_hook func() unsafe.Pointer
-	_set_com_err_hook func(unsafe.Pointer) unsafe.Pointer
+	_krb5_vset_error_message                      func(unsafe.Pointer, int, string, string)
+	_profile_abandon                              func(unsafe.Pointer)
+	_profile_add_relation                         func(unsafe.Pointer, string, string) int
+	_profile_clear_relation                       func(unsafe.Pointer, string) int
+	_profile_configuration_updated                func()
+	_profile_flush                                func(unsafe.Pointer) int
+	_profile_flush_to_buffer                      func(unsafe.Pointer, string) int
+	_profile_flush_to_file                        func(unsafe.Pointer, string) int
+	_profile_free_buffer                          func(unsafe.Pointer, string)
+	_profile_free_list                            func(string)
+	_profile_get_boolean                          func(unsafe.Pointer, string, string, string, int, *int32) int
+	_profile_get_integer                          func(unsafe.Pointer, string, string, string, int, *int32) int
+	_profile_get_relation_names                   func(unsafe.Pointer, string, string) int
+	_profile_get_string                           func(unsafe.Pointer, string, string, string, string, string) int
+	_profile_get_subsection_names                 func(unsafe.Pointer, string, string) int
+	_profile_get_values                           func(unsafe.Pointer, unsafe.Pointer, string) int
+	_profile_init                                 func(*string, unsafe.Pointer) int
+	_profile_init_path                            func(string, unsafe.Pointer) int
+	_profile_is_modified                          func(unsafe.Pointer, *int32) int
+	_profile_is_writable                          func(unsafe.Pointer, *int32) int
+	_profile_iterator                             func(unsafe.Pointer, string, string) int
+	_profile_iterator_create                      func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) int
+	_profile_iterator_free                        func(unsafe.Pointer)
+	_profile_release                              func(unsafe.Pointer)
+	_profile_release_string                       func(string)
+	_profile_rename_section                       func(unsafe.Pointer, string, string) int
+	_profile_update_relation                      func(unsafe.Pointer, string, string, string) int
+	_remove_error_table                           func(*ErrorTable) int
+	_reset_com_err_hook                           func() unsafe.Pointer
+	_set_com_err_hook                             func(unsafe.Pointer) unsafe.Pointer
 )
 
 func KLAcquireInitialTickets(inPrincipal unsafe.Pointer, inLoginOptions unsafe.Pointer, outPrincipal unsafe.Pointer, outCredCacheName string) int32 {
@@ -2887,4 +2887,3 @@ func ResetComErrHook() unsafe.Pointer {
 func SetComErrHook(handler unsafe.Pointer) unsafe.Pointer {
 	return _set_com_err_hook(handler)
 }
-

@@ -16,7 +16,7 @@ type MPSCNNUpsampling struct {
 }
 
 var (
-	_clsMPSCNNUpsampling = _objcClass("MPSCNNUpsampling")
+	_clsMPSCNNUpsampling             = _objcClass("MPSCNNUpsampling")
 	_mPSCNNUpsamplingSelScaleFactorX = objc.RegisterName("scaleFactorX")
 	_mPSCNNUpsamplingSelScaleFactorY = objc.RegisterName("scaleFactorY")
 	_mPSCNNUpsamplingSelAlignCorners = objc.RegisterName("alignCorners")
@@ -49,4 +49,3 @@ func (o *MPSCNNUpsampling) AlignCorners() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mPSCNNUpsamplingSelAlignCorners)
 	return _ret
 }
-

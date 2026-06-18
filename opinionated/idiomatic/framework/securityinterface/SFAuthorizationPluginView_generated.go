@@ -135,4 +135,3 @@ type AuthorizationPluginViewable interface {
 }
 
 var _ AuthorizationPluginViewable = (*AuthorizationPluginView)(nil)
-

@@ -15,20 +15,20 @@ type VNFaceLandmarks2D struct {
 }
 
 var (
-	_clsVNFaceLandmarks2D = _objcClass("VNFaceLandmarks2D")
-	_vNFaceLandmarks2DSelAllPoints = objc.RegisterName("allPoints")
-	_vNFaceLandmarks2DSelFaceContour = objc.RegisterName("faceContour")
-	_vNFaceLandmarks2DSelLeftEye = objc.RegisterName("leftEye")
-	_vNFaceLandmarks2DSelRightEye = objc.RegisterName("rightEye")
-	_vNFaceLandmarks2DSelLeftEyebrow = objc.RegisterName("leftEyebrow")
+	_clsVNFaceLandmarks2D             = _objcClass("VNFaceLandmarks2D")
+	_vNFaceLandmarks2DSelAllPoints    = objc.RegisterName("allPoints")
+	_vNFaceLandmarks2DSelFaceContour  = objc.RegisterName("faceContour")
+	_vNFaceLandmarks2DSelLeftEye      = objc.RegisterName("leftEye")
+	_vNFaceLandmarks2DSelRightEye     = objc.RegisterName("rightEye")
+	_vNFaceLandmarks2DSelLeftEyebrow  = objc.RegisterName("leftEyebrow")
 	_vNFaceLandmarks2DSelRightEyebrow = objc.RegisterName("rightEyebrow")
-	_vNFaceLandmarks2DSelNose = objc.RegisterName("nose")
-	_vNFaceLandmarks2DSelNoseCrest = objc.RegisterName("noseCrest")
-	_vNFaceLandmarks2DSelMedianLine = objc.RegisterName("medianLine")
-	_vNFaceLandmarks2DSelOuterLips = objc.RegisterName("outerLips")
-	_vNFaceLandmarks2DSelInnerLips = objc.RegisterName("innerLips")
-	_vNFaceLandmarks2DSelLeftPupil = objc.RegisterName("leftPupil")
-	_vNFaceLandmarks2DSelRightPupil = objc.RegisterName("rightPupil")
+	_vNFaceLandmarks2DSelNose         = objc.RegisterName("nose")
+	_vNFaceLandmarks2DSelNoseCrest    = objc.RegisterName("noseCrest")
+	_vNFaceLandmarks2DSelMedianLine   = objc.RegisterName("medianLine")
+	_vNFaceLandmarks2DSelOuterLips    = objc.RegisterName("outerLips")
+	_vNFaceLandmarks2DSelInnerLips    = objc.RegisterName("innerLips")
+	_vNFaceLandmarks2DSelLeftPupil    = objc.RegisterName("leftPupil")
+	_vNFaceLandmarks2DSelRightPupil   = objc.RegisterName("rightPupil")
 )
 
 func VNFaceLandmarks2DFromID(id objc.ID) *VNFaceLandmarks2D {
@@ -44,91 +44,116 @@ func VNFaceLandmarks2DFromID(id objc.ID) *VNFaceLandmarks2D {
 // @brief allPoints the region containing all face landmark points.
 func (o *VNFaceLandmarks2D) AllPoints() *VNFaceLandmarkRegion2D {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNFaceLandmarks2DSelAllPoints)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNFaceLandmarkRegion2DFromID(_ret)
 }
 
 // @brief faceContour the region containing the points that describe the face contour from cheek over chin to cheek.
 func (o *VNFaceLandmarks2D) FaceContour() *VNFaceLandmarkRegion2D {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNFaceLandmarks2DSelFaceContour)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNFaceLandmarkRegion2DFromID(_ret)
 }
 
 // @brief leftEye the region containing the points describing the outline of the left eye.
 func (o *VNFaceLandmarks2D) LeftEye() *VNFaceLandmarkRegion2D {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNFaceLandmarks2DSelLeftEye)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNFaceLandmarkRegion2DFromID(_ret)
 }
 
 // @brief rightEye the region containing the points describing the outline of the right eye.
 func (o *VNFaceLandmarks2D) RightEye() *VNFaceLandmarkRegion2D {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNFaceLandmarks2DSelRightEye)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNFaceLandmarkRegion2DFromID(_ret)
 }
 
 // @brief leftEyebrow the region containing the points describing the trace of the left eyebrow.
 func (o *VNFaceLandmarks2D) LeftEyebrow() *VNFaceLandmarkRegion2D {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNFaceLandmarks2DSelLeftEyebrow)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNFaceLandmarkRegion2DFromID(_ret)
 }
 
 // @brief rightEyebrow the region containing the points describing the trace of the right eyebrow.
 func (o *VNFaceLandmarks2D) RightEyebrow() *VNFaceLandmarkRegion2D {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNFaceLandmarks2DSelRightEyebrow)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNFaceLandmarkRegion2DFromID(_ret)
 }
 
 // @brief nose the region containing the points describing the outline of the nose.
 func (o *VNFaceLandmarks2D) Nose() *VNFaceLandmarkRegion2D {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNFaceLandmarks2DSelNose)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNFaceLandmarkRegion2DFromID(_ret)
 }
 
 // @brief noseCrest the region containing the points describing the trace of the center crest of the nose.
 func (o *VNFaceLandmarks2D) NoseCrest() *VNFaceLandmarkRegion2D {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNFaceLandmarks2DSelNoseCrest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNFaceLandmarkRegion2DFromID(_ret)
 }
 
 // @brief medianLine the region containing the points describing the trace of the center line of the face.
 func (o *VNFaceLandmarks2D) MedianLine() *VNFaceLandmarkRegion2D {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNFaceLandmarks2DSelMedianLine)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNFaceLandmarkRegion2DFromID(_ret)
 }
 
 // @brief outer lips the region containing the points describing the outline of the outside of the lips.
 func (o *VNFaceLandmarks2D) OuterLips() *VNFaceLandmarkRegion2D {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNFaceLandmarks2DSelOuterLips)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNFaceLandmarkRegion2DFromID(_ret)
 }
 
 // @brief innerLips the region containing the points describing the outline of the space between the of the lips.
 func (o *VNFaceLandmarks2D) InnerLips() *VNFaceLandmarkRegion2D {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNFaceLandmarks2DSelInnerLips)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNFaceLandmarkRegion2DFromID(_ret)
 }
 
 // @brief leftPupil the region containing the point where the left pupil is located.  This value may be inaccurate if the face isBlinking.
 func (o *VNFaceLandmarks2D) LeftPupil() *VNFaceLandmarkRegion2D {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNFaceLandmarks2DSelLeftPupil)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNFaceLandmarkRegion2DFromID(_ret)
 }
 
 // @brief rightPupil the region containing the point where the right pupil is located.  This value may be inaccurate if the face isBlinking.
 func (o *VNFaceLandmarks2D) RightPupil() *VNFaceLandmarkRegion2D {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNFaceLandmarks2DSelRightPupil)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNFaceLandmarkRegion2DFromID(_ret)
 }
-

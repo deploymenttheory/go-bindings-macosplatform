@@ -104,7 +104,9 @@ func (x *AVB17221AECPVendorMessage) SetProtocolSpecificData(protocolSpecificData
 	x.inner.SetProtocolSpecificData(protocolSpecificData)
 }
 
-func (x *AVB17221AECPVendorMessage) asAVB17221AECPMessage() *raw.AVB17221AECPMessage { return &x.inner.AVB17221AECPMessage }
+func (x *AVB17221AECPVendorMessage) asAVB17221AECPMessage() *raw.AVB17221AECPMessage {
+	return &x.inner.AVB17221AECPMessage
+}
 
 // AVB17221AECPVendorMessageable is the interface implemented by [AVB17221AECPVendorMessage], for mocking and DI.
 type AVB17221AECPVendorMessageable interface {
@@ -124,4 +126,3 @@ type AVB17221AECPVendorMessageable interface {
 }
 
 var _ AVB17221AECPVendorMessageable = (*AVB17221AECPVendorMessage)(nil)
-

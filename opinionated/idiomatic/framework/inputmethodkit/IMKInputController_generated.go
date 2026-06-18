@@ -150,4 +150,3 @@ type InputControllerable interface {
 }
 
 var _ InputControllerable = (*InputController)(nil)
-

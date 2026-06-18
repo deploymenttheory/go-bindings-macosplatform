@@ -108,4 +108,3 @@ type SetupPanelable interface {
 }
 
 var _ SetupPanelable = (*SetupPanel)(nil)
-

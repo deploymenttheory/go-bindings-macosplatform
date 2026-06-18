@@ -15,8 +15,8 @@ type DOMFileList struct {
 }
 
 var (
-	_clsDOMFileList = _objcClass("DOMFileList")
-	_dOMFileListSelItem = objc.RegisterName("item:")
+	_clsDOMFileList       = _objcClass("DOMFileList")
+	_dOMFileListSelItem   = objc.RegisterName("item:")
 	_dOMFileListSelLength = objc.RegisterName("length")
 )
 
@@ -32,7 +32,9 @@ func DOMFileListFromID(id objc.ID) *DOMFileList {
 
 func (o *DOMFileList) Item(index uint) *DOMFile {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMFileListSelItem, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMFileFromID(_ret)
 }
 
@@ -40,4 +42,3 @@ func (o *DOMFileList) Length() uint {
 	_ret := objc.Send[uint](o.Ptr(), _dOMFileListSelLength)
 	return _ret
 }
-

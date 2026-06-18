@@ -18,40 +18,40 @@ type ICDevice struct {
 }
 
 var (
-	_clsICDevice = _objcClass("ICDevice")
-	_iCDeviceSelRequestOpenSession = objc.RegisterName("requestOpenSession")
-	_iCDeviceSelRequestCloseSession = objc.RegisterName("requestCloseSession")
-	_iCDeviceSelRequestEject = objc.RegisterName("requestEject")
-	_iCDeviceSelRequestOpenSessionWithOptionsCompletion = objc.RegisterName("requestOpenSessionWithOptions:completion:")
-	_iCDeviceSelRequestCloseSessionWithOptionsCompletion = objc.RegisterName("requestCloseSessionWithOptions:completion:")
-	_iCDeviceSelRequestEjectWithCompletion = objc.RegisterName("requestEjectWithCompletion:")
+	_clsICDevice                                                                                                 = _objcClass("ICDevice")
+	_iCDeviceSelRequestOpenSession                                                                               = objc.RegisterName("requestOpenSession")
+	_iCDeviceSelRequestCloseSession                                                                              = objc.RegisterName("requestCloseSession")
+	_iCDeviceSelRequestEject                                                                                     = objc.RegisterName("requestEject")
+	_iCDeviceSelRequestOpenSessionWithOptionsCompletion                                                          = objc.RegisterName("requestOpenSessionWithOptions:completion:")
+	_iCDeviceSelRequestCloseSessionWithOptionsCompletion                                                         = objc.RegisterName("requestCloseSessionWithOptions:completion:")
+	_iCDeviceSelRequestEjectWithCompletion                                                                       = objc.RegisterName("requestEjectWithCompletion:")
 	_iCDeviceSelRequestSendMessageOutDataMaxReturnedDataSizeSendMessageDelegateDidSendMessageSelectorContextInfo = objc.RegisterName("requestSendMessage:outData:maxReturnedDataSize:sendMessageDelegate:didSendMessageSelector:contextInfo:")
-	_iCDeviceSelRequestEjectOrDisconnect = objc.RegisterName("requestEjectOrDisconnect")
-	_iCDeviceSelRequestYield = objc.RegisterName("requestYield")
-	_iCDeviceSelDelegate = objc.RegisterName("delegate")
-	_iCDeviceSelSetDelegate = objc.RegisterName("setDelegate:")
-	_iCDeviceSelType = objc.RegisterName("type")
-	_iCDeviceSelCapabilities = objc.RegisterName("capabilities")
-	_iCDeviceSelName = objc.RegisterName("name")
-	_iCDeviceSelProductKind = objc.RegisterName("productKind")
-	_iCDeviceSelIcon = objc.RegisterName("icon")
-	_iCDeviceSelSystemSymbolName = objc.RegisterName("systemSymbolName")
-	_iCDeviceSelTransportType = objc.RegisterName("transportType")
-	_iCDeviceSelUUIDString = objc.RegisterName("UUIDString")
-	_iCDeviceSelLocationDescription = objc.RegisterName("locationDescription")
-	_iCDeviceSelHasOpenSession = objc.RegisterName("hasOpenSession")
-	_iCDeviceSelUserData = objc.RegisterName("userData")
-	_iCDeviceSelModulePath = objc.RegisterName("modulePath")
-	_iCDeviceSelModuleVersion = objc.RegisterName("moduleVersion")
-	_iCDeviceSelSerialNumberString = objc.RegisterName("serialNumberString")
-	_iCDeviceSelUsbLocationID = objc.RegisterName("usbLocationID")
-	_iCDeviceSelUsbProductID = objc.RegisterName("usbProductID")
-	_iCDeviceSelUsbVendorID = objc.RegisterName("usbVendorID")
-	_iCDeviceSelAutolaunchApplicationPath = objc.RegisterName("autolaunchApplicationPath")
-	_iCDeviceSelSetAutolaunchApplicationPath = objc.RegisterName("setAutolaunchApplicationPath:")
-	_iCDeviceSelIsRemote = objc.RegisterName("isRemote")
-	_iCDeviceSelPersistentIDString = objc.RegisterName("persistentIDString")
-	_iCDeviceSelModuleExecutableArchitecture = objc.RegisterName("moduleExecutableArchitecture")
+	_iCDeviceSelRequestEjectOrDisconnect                                                                         = objc.RegisterName("requestEjectOrDisconnect")
+	_iCDeviceSelRequestYield                                                                                     = objc.RegisterName("requestYield")
+	_iCDeviceSelDelegate                                                                                         = objc.RegisterName("delegate")
+	_iCDeviceSelSetDelegate                                                                                      = objc.RegisterName("setDelegate:")
+	_iCDeviceSelType                                                                                             = objc.RegisterName("type")
+	_iCDeviceSelCapabilities                                                                                     = objc.RegisterName("capabilities")
+	_iCDeviceSelName                                                                                             = objc.RegisterName("name")
+	_iCDeviceSelProductKind                                                                                      = objc.RegisterName("productKind")
+	_iCDeviceSelIcon                                                                                             = objc.RegisterName("icon")
+	_iCDeviceSelSystemSymbolName                                                                                 = objc.RegisterName("systemSymbolName")
+	_iCDeviceSelTransportType                                                                                    = objc.RegisterName("transportType")
+	_iCDeviceSelUUIDString                                                                                       = objc.RegisterName("UUIDString")
+	_iCDeviceSelLocationDescription                                                                              = objc.RegisterName("locationDescription")
+	_iCDeviceSelHasOpenSession                                                                                   = objc.RegisterName("hasOpenSession")
+	_iCDeviceSelUserData                                                                                         = objc.RegisterName("userData")
+	_iCDeviceSelModulePath                                                                                       = objc.RegisterName("modulePath")
+	_iCDeviceSelModuleVersion                                                                                    = objc.RegisterName("moduleVersion")
+	_iCDeviceSelSerialNumberString                                                                               = objc.RegisterName("serialNumberString")
+	_iCDeviceSelUsbLocationID                                                                                    = objc.RegisterName("usbLocationID")
+	_iCDeviceSelUsbProductID                                                                                     = objc.RegisterName("usbProductID")
+	_iCDeviceSelUsbVendorID                                                                                      = objc.RegisterName("usbVendorID")
+	_iCDeviceSelAutolaunchApplicationPath                                                                        = objc.RegisterName("autolaunchApplicationPath")
+	_iCDeviceSelSetAutolaunchApplicationPath                                                                     = objc.RegisterName("setAutolaunchApplicationPath:")
+	_iCDeviceSelIsRemote                                                                                         = objc.RegisterName("isRemote")
+	_iCDeviceSelPersistentIDString                                                                               = objc.RegisterName("persistentIDString")
+	_iCDeviceSelModuleExecutableArchitecture                                                                     = objc.RegisterName("moduleExecutableArchitecture")
 )
 
 func ICDeviceFromID(id objc.ID) *ICDevice {
@@ -155,14 +155,18 @@ func (o *ICDevice) Capabilities() *foundation.NSArray[*foundation.NSString] {
 // @property name @abstract ￼Name of the device as reported by the device module or by the device transport when a device module is not in control of this device. @note This name may change if the device module overrides the default name of the device reported by the device's transport, or if the name of the filesystem volume mounted by the device is changed by the user.
 func (o *ICDevice) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCDeviceSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property productKind @abstract ￼Type of the device. Possible values are: @"iPhone", @"iPod", @"iPad", @"Camera", @"Scanner"
 func (o *ICDevice) ProductKind() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCDeviceSelProductKind)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -175,21 +179,27 @@ func (o *ICDevice) Icon() unsafe.Pointer {
 // @property systemSymbolName @abstract ￼Standard system symbol used to represent the device class.  Using the symbol to render an appropriate device icon will ensure proper scaling for high resolution devices.
 func (o *ICDevice) SystemSymbolName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCDeviceSelSystemSymbolName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property transportType @abstract ￼The transport type used by the device. The possible values are: ICTransportTypeUSB or ICTransportTypeMassStorage.
 func (o *ICDevice) TransportType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCDeviceSelTransportType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property UUIDString @abstract ￼A string representation of the Universally Unique ID of the device.
 func (o *ICDevice) UUIDString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCDeviceSelUUIDString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -274,4 +284,3 @@ func (o *ICDevice) ModuleExecutableArchitecture() int {
 	_ret := objc.Send[int](o.Ptr(), _iCDeviceSelModuleExecutableArchitecture)
 	return _ret
 }
-

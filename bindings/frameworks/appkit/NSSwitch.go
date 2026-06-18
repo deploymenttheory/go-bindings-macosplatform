@@ -15,8 +15,8 @@ type NSSwitch struct {
 }
 
 var (
-	_clsNSSwitch = _objcClass("NSSwitch")
-	_nSSwitchSelState = objc.RegisterName("state")
+	_clsNSSwitch         = _objcClass("NSSwitch")
+	_nSSwitchSelState    = objc.RegisterName("state")
 	_nSSwitchSelSetState = objc.RegisterName("setState:")
 )
 
@@ -38,4 +38,3 @@ func (o *NSSwitch) State() int {
 func (o *NSSwitch) SetState(state int) {
 	o.Ptr().Send(_nSSwitchSelSetState, state)
 }
-

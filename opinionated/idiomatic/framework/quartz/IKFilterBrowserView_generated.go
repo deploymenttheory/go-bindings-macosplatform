@@ -58,4 +58,3 @@ type IKFilterBrowserViewable interface {
 }
 
 var _ IKFilterBrowserViewable = (*IKFilterBrowserView)(nil)
-

@@ -17,4 +17,3 @@ type MDLVoxelIndexExtent struct {
 	MinimumExtent unsafe.Pointer
 	MaximumExtent unsafe.Pointer
 }
-

@@ -18,8 +18,8 @@ type AVCompositionTrackFormatDescriptionReplacement struct {
 }
 
 var (
-	_clsAVCompositionTrackFormatDescriptionReplacement = _objcClass("AVCompositionTrackFormatDescriptionReplacement")
-	_aVCompositionTrackFormatDescriptionReplacementSelOriginalFormatDescription = objc.RegisterName("originalFormatDescription")
+	_clsAVCompositionTrackFormatDescriptionReplacement                             = _objcClass("AVCompositionTrackFormatDescriptionReplacement")
+	_aVCompositionTrackFormatDescriptionReplacementSelOriginalFormatDescription    = objc.RegisterName("originalFormatDescription")
 	_aVCompositionTrackFormatDescriptionReplacementSelReplacementFormatDescription = objc.RegisterName("replacementFormatDescription")
 )
 
@@ -44,4 +44,3 @@ func (o *AVCompositionTrackFormatDescriptionReplacement) ReplacementFormatDescri
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVCompositionTrackFormatDescriptionReplacementSelReplacementFormatDescription)
 	return _ret
 }
-

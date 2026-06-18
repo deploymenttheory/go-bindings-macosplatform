@@ -16,7 +16,7 @@ type VNRecognizedObjectObservation struct {
 }
 
 var (
-	_clsVNRecognizedObjectObservation = _objcClass("VNRecognizedObjectObservation")
+	_clsVNRecognizedObjectObservation       = _objcClass("VNRecognizedObjectObservation")
 	_vNRecognizedObjectObservationSelLabels = objc.RegisterName("labels")
 )
 
@@ -32,7 +32,8 @@ func VNRecognizedObjectObservationFromID(id objc.ID) *VNRecognizedObjectObservat
 
 func (o *VNRecognizedObjectObservation) Labels() *foundation.NSArray[*VNClassificationObservation] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNRecognizedObjectObservationSelLabels)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VNClassificationObservation](_ret)
 }
-

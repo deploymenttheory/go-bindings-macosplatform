@@ -58,9 +58,13 @@ func (x *MIDIProgramChangeEvent) SetProgramNumber(programNumber uint) {
 	x.inner.SetProgramNumber(programNumber)
 }
 
-func (x *MIDIProgramChangeEvent) asMIDIChannelEvent() *raw.AVMIDIChannelEvent { return &x.inner.AVMIDIChannelEvent }
+func (x *MIDIProgramChangeEvent) asMIDIChannelEvent() *raw.AVMIDIChannelEvent {
+	return &x.inner.AVMIDIChannelEvent
+}
 
-func (x *MIDIProgramChangeEvent) asMusicEvent() *raw.AVMusicEvent { return &x.inner.AVMIDIChannelEvent.AVMusicEvent }
+func (x *MIDIProgramChangeEvent) asMusicEvent() *raw.AVMusicEvent {
+	return &x.inner.AVMIDIChannelEvent.AVMusicEvent
+}
 
 // MIDIProgramChangeEventable is the interface implemented by [MIDIProgramChangeEvent], for mocking and DI.
 type MIDIProgramChangeEventable interface {
@@ -72,4 +76,3 @@ type MIDIProgramChangeEventable interface {
 }
 
 var _ MIDIProgramChangeEventable = (*MIDIProgramChangeEvent)(nil)
-

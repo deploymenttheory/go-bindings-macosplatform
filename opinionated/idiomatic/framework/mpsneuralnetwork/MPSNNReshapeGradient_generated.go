@@ -154,9 +154,13 @@ func (x *NNReshapeGradient) WithDestinationImageAllocator(destinationImageAlloca
 	return x
 }
 
-func (x *NNReshapeGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
+func (x *NNReshapeGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNGradientKernel
+}
 
-func (x *NNReshapeGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *NNReshapeGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
 // NNReshapeGradientable is the interface implemented by [NNReshapeGradient], for mocking and DI.
 type NNReshapeGradientable interface {
@@ -182,4 +186,3 @@ type NNReshapeGradientable interface {
 }
 
 var _ NNReshapeGradientable = (*NNReshapeGradient)(nil)
-

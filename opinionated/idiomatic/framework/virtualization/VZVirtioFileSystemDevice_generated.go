@@ -65,7 +65,9 @@ func (x *VirtioFileSystemDevice) SetShare(share *raw.VZDirectoryShare) {
 	x.inner.SetShare(share)
 }
 
-func (x *VirtioFileSystemDevice) asDirectorySharingDevice() *raw.VZDirectorySharingDevice { return &x.inner.VZDirectorySharingDevice }
+func (x *VirtioFileSystemDevice) asDirectorySharingDevice() *raw.VZDirectorySharingDevice {
+	return &x.inner.VZDirectorySharingDevice
+}
 
 // VirtioFileSystemDeviceable is the interface implemented by [VirtioFileSystemDevice], for mocking and DI.
 type VirtioFileSystemDeviceable interface {
@@ -77,4 +79,3 @@ type VirtioFileSystemDeviceable interface {
 }
 
 var _ VirtioFileSystemDeviceable = (*VirtioFileSystemDevice)(nil)
-

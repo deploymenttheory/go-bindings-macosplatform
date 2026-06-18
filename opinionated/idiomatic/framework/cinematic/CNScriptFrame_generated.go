@@ -97,4 +97,3 @@ type ScriptFrameable interface {
 }
 
 var _ ScriptFrameable = (*ScriptFrame)(nil)
-

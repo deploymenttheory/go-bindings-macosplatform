@@ -48,4 +48,3 @@ type MTRClusterStateCacheContainerable interface {
 }
 
 var _ MTRClusterStateCacheContainerable = (*MTRClusterStateCacheContainer)(nil)
-

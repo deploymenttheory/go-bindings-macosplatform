@@ -18,18 +18,18 @@ type MTRClusterLowPower struct {
 }
 
 var (
-	_clsMTRClusterLowPower = _objcClass("MTRClusterLowPower")
-	_mTRClusterLowPowerSelSleepWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("sleepWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterLowPowerSelSleepWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("sleepWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterLowPowerSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterLowPowerSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterLowPowerSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterLowPowerSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterLowPowerSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterLowPowerSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterLowPowerSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_clsMTRClusterLowPower                                                                    = _objcClass("MTRClusterLowPower")
+	_mTRClusterLowPowerSelSleepWithParamsExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("sleepWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterLowPowerSelSleepWithExpectedValuesExpectedValueIntervalCompletion              = objc.RegisterName("sleepWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterLowPowerSelReadAttributeGeneratedCommandListWithParams                         = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterLowPowerSelReadAttributeAcceptedCommandListWithParams                          = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterLowPowerSelReadAttributeAttributeListWithParams                                = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterLowPowerSelReadAttributeFeatureMapWithParams                                   = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterLowPowerSelReadAttributeClusterRevisionWithParams                              = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterLowPowerSelInitWithDeviceEndpointIDQueue                                       = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterLowPowerSelInitWithDeviceEndpointQueue                                         = objc.RegisterName("initWithDevice:endpoint:queue:")
 	_mTRClusterLowPowerSelSleepWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("sleepWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterLowPowerSelSleepWithExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("sleepWithExpectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterLowPowerSelSleepWithExpectedValuesExpectedValueIntervalCompletionHandler       = objc.RegisterName("sleepWithExpectedValues:expectedValueInterval:completionHandler:")
 )
 
 func MTRClusterLowPowerFromID(id objc.ID) *MTRClusterLowPower {
@@ -92,13 +92,17 @@ func (o *MTRClusterLowPower) ReadAttributeClusterRevisionWithParams(params *MTRR
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterLowPower) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterLowPower {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterLowPowerSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterLowPowerFromID(_ret)
 }
 
 func (o *MTRClusterLowPower) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterLowPower {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterLowPowerSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterLowPowerFromID(_ret)
 }
 
@@ -123,4 +127,3 @@ func (o *MTRClusterLowPower) SleepWithExpectedValuesExpectedValueIntervalComplet
 	}
 	o.Ptr().Send(_mTRClusterLowPowerSelSleepWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues, expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
-

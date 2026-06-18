@@ -199,7 +199,9 @@ func (x *TokenKeychainKey) SetSuitableForLogin(suitableForLogin bool) {
 	x.inner.SetSuitableForLogin(suitableForLogin)
 }
 
-func (x *TokenKeychainKey) asTokenKeychainItem() *raw.TKTokenKeychainItem { return &x.inner.TKTokenKeychainItem }
+func (x *TokenKeychainKey) asTokenKeychainItem() *raw.TKTokenKeychainItem {
+	return &x.inner.TKTokenKeychainItem
+}
 
 // TokenKeychainKeyable is the interface implemented by [TokenKeychainKey], for mocking and DI.
 type TokenKeychainKeyable interface {
@@ -236,4 +238,3 @@ type TokenKeychainKeyable interface {
 }
 
 var _ TokenKeychainKeyable = (*TokenKeychainKey)(nil)
-

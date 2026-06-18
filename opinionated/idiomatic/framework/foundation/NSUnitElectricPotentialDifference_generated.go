@@ -15,7 +15,9 @@ type UnitElectricPotentialDifference struct {
 }
 
 // Unwrap returns the underlying [raw.NSUnitElectricPotentialDifference].
-func (x *UnitElectricPotentialDifference) Unwrap() *raw.NSUnitElectricPotentialDifference { return x.inner }
+func (x *UnitElectricPotentialDifference) Unwrap() *raw.NSUnitElectricPotentialDifference {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -45,7 +47,9 @@ func (x *UnitElectricPotentialDifference) asDimension() *raw.NSDimension { retur
 
 func (x *UnitElectricPotentialDifference) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
 
-func (x *UnitElectricPotentialDifference) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
+func (x *UnitElectricPotentialDifference) asObject() *raw.NSObject {
+	return &x.inner.NSDimension.NSUnit.NSObject
+}
 
 // UnitElectricPotentialDifferenceable is the interface implemented by [UnitElectricPotentialDifference], for mocking and DI.
 type UnitElectricPotentialDifferenceable interface {
@@ -54,4 +58,3 @@ type UnitElectricPotentialDifferenceable interface {
 }
 
 var _ UnitElectricPotentialDifferenceable = (*UnitElectricPotentialDifference)(nil)
-

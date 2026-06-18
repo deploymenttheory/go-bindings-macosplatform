@@ -16,8 +16,8 @@ type MTLPipelineBufferDescriptor struct {
 }
 
 var (
-	_clsMTLPipelineBufferDescriptor = _objcClass("MTLPipelineBufferDescriptor")
-	_mTLPipelineBufferDescriptorSelMutability = objc.RegisterName("mutability")
+	_clsMTLPipelineBufferDescriptor              = _objcClass("MTLPipelineBufferDescriptor")
+	_mTLPipelineBufferDescriptorSelMutability    = objc.RegisterName("mutability")
 	_mTLPipelineBufferDescriptorSelSetMutability = objc.RegisterName("setMutability:")
 )
 
@@ -39,4 +39,3 @@ func (o *MTLPipelineBufferDescriptor) Mutability() MTLMutability {
 func (o *MTLPipelineBufferDescriptor) SetMutability(mutability MTLMutability) {
 	o.Ptr().Send(_mTLPipelineBufferDescriptorSelSetMutability, mutability)
 }
-

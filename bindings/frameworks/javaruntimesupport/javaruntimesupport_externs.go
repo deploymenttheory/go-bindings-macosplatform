@@ -11,4 +11,3 @@ func JRSMenuDidReuseItemNotification() uintptr {
 	ptr, _ := purego.Dlsym(_javaruntimesupportLib, "JRSMenuDidReuseItemNotification")
 	return ptr
 }
-

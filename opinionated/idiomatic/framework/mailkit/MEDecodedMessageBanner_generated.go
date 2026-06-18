@@ -70,4 +70,3 @@ type DecodedMessageBannerable interface {
 }
 
 var _ DecodedMessageBannerable = (*DecodedMessageBanner)(nil)
-

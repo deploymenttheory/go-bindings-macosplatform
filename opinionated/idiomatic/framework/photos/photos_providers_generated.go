@@ -37,4 +37,3 @@ type ImageManagerProvider interface {
 type ObjectProvider interface {
 	asObject() *raw.PHObject
 }
-

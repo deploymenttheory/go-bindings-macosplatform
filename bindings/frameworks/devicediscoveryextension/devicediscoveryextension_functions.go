@@ -10,40 +10,49 @@ import (
 )
 
 var (
-	_fnDDDeviceCategoryToString func(DDDeviceCategory) objc.ID
+	_fnDDDeviceCategoryToString           func(DDDeviceCategory) objc.ID
 	_fnDDDeviceMediaPlaybackStateToString func(DDDeviceMediaPlaybackState) objc.ID
-	_fnDDDeviceProtocolToString func(DDDeviceProtocol) objc.ID
-	_fnDDDeviceStateToString func(DDDeviceState) objc.ID
-	_fnDDEventTypeToString func(DDEventType) objc.ID
+	_fnDDDeviceProtocolToString           func(DDDeviceProtocol) objc.ID
+	_fnDDDeviceStateToString              func(DDDeviceState) objc.ID
+	_fnDDEventTypeToString                func(DDEventType) objc.ID
 )
 
 func DDDeviceCategoryToString(inValue DDDeviceCategory) *foundation.NSString {
 	_ret := _fnDDDeviceCategoryToString(inValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func DDDeviceMediaPlaybackStateToString(inValue DDDeviceMediaPlaybackState) *foundation.NSString {
 	_ret := _fnDDDeviceMediaPlaybackStateToString(inValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func DDDeviceProtocolToString(inValue DDDeviceProtocol) *foundation.NSString {
 	_ret := _fnDDDeviceProtocolToString(inValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func DDDeviceStateToString(inValue DDDeviceState) *foundation.NSString {
 	_ret := _fnDDDeviceStateToString(inValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func DDEventTypeToString(inValue DDEventType) *foundation.NSString {
 	_ret := _fnDDEventTypeToString(inValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

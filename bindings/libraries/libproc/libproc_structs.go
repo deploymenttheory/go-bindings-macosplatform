@@ -3,4 +3,3 @@
 //go:build darwin
 
 package libproc
-

@@ -18,7 +18,7 @@ type LASecret struct {
 }
 
 var (
-	_clsLASecret = _objcClass("LASecret")
+	_clsLASecret                       = _objcClass("LASecret")
 	_lASecretSelLoadDataWithCompletion = objc.RegisterName("loadDataWithCompletion:")
 )
 
@@ -46,4 +46,3 @@ func (o *LASecret) LoadDataWithCompletion(handler func(*foundation.NSData, unsaf
 	}
 	o.Ptr().Send(_lASecretSelLoadDataWithCompletion, __block_handler)
 }
-

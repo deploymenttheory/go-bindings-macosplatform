@@ -112,4 +112,3 @@ type CloneCommandable interface {
 }
 
 var _ CloneCommandable = (*CloneCommand)(nil)
-

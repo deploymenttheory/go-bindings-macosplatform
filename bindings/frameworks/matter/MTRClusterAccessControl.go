@@ -18,29 +18,29 @@ type MTRClusterAccessControl struct {
 }
 
 var (
-	_clsMTRClusterAccessControl = _objcClass("MTRClusterAccessControl")
+	_clsMTRClusterAccessControl                                                                                = _objcClass("MTRClusterAccessControl")
 	_mTRClusterAccessControlSelReviewFabricRestrictionsWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("reviewFabricRestrictionsWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterAccessControlSelReadAttributeACLWithParams = objc.RegisterName("readAttributeACLWithParams:")
-	_mTRClusterAccessControlSelWriteAttributeACLWithValueExpectedValueInterval = objc.RegisterName("writeAttributeACLWithValue:expectedValueInterval:")
-	_mTRClusterAccessControlSelWriteAttributeACLWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeACLWithValue:expectedValueInterval:params:")
-	_mTRClusterAccessControlSelReadAttributeExtensionWithParams = objc.RegisterName("readAttributeExtensionWithParams:")
-	_mTRClusterAccessControlSelWriteAttributeExtensionWithValueExpectedValueInterval = objc.RegisterName("writeAttributeExtensionWithValue:expectedValueInterval:")
-	_mTRClusterAccessControlSelWriteAttributeExtensionWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeExtensionWithValue:expectedValueInterval:params:")
-	_mTRClusterAccessControlSelReadAttributeSubjectsPerAccessControlEntryWithParams = objc.RegisterName("readAttributeSubjectsPerAccessControlEntryWithParams:")
-	_mTRClusterAccessControlSelReadAttributeTargetsPerAccessControlEntryWithParams = objc.RegisterName("readAttributeTargetsPerAccessControlEntryWithParams:")
-	_mTRClusterAccessControlSelReadAttributeAccessControlEntriesPerFabricWithParams = objc.RegisterName("readAttributeAccessControlEntriesPerFabricWithParams:")
-	_mTRClusterAccessControlSelReadAttributeCommissioningARLWithParams = objc.RegisterName("readAttributeCommissioningARLWithParams:")
-	_mTRClusterAccessControlSelReadAttributeARLWithParams = objc.RegisterName("readAttributeARLWithParams:")
-	_mTRClusterAccessControlSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterAccessControlSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterAccessControlSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterAccessControlSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterAccessControlSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterAccessControlSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterAccessControlSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
-	_mTRClusterAccessControlSelReadAttributeAclWithParams = objc.RegisterName("readAttributeAclWithParams:")
-	_mTRClusterAccessControlSelWriteAttributeAclWithValueExpectedValueInterval = objc.RegisterName("writeAttributeAclWithValue:expectedValueInterval:")
-	_mTRClusterAccessControlSelWriteAttributeAclWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeAclWithValue:expectedValueInterval:params:")
+	_mTRClusterAccessControlSelReadAttributeACLWithParams                                                      = objc.RegisterName("readAttributeACLWithParams:")
+	_mTRClusterAccessControlSelWriteAttributeACLWithValueExpectedValueInterval                                 = objc.RegisterName("writeAttributeACLWithValue:expectedValueInterval:")
+	_mTRClusterAccessControlSelWriteAttributeACLWithValueExpectedValueIntervalParams                           = objc.RegisterName("writeAttributeACLWithValue:expectedValueInterval:params:")
+	_mTRClusterAccessControlSelReadAttributeExtensionWithParams                                                = objc.RegisterName("readAttributeExtensionWithParams:")
+	_mTRClusterAccessControlSelWriteAttributeExtensionWithValueExpectedValueInterval                           = objc.RegisterName("writeAttributeExtensionWithValue:expectedValueInterval:")
+	_mTRClusterAccessControlSelWriteAttributeExtensionWithValueExpectedValueIntervalParams                     = objc.RegisterName("writeAttributeExtensionWithValue:expectedValueInterval:params:")
+	_mTRClusterAccessControlSelReadAttributeSubjectsPerAccessControlEntryWithParams                            = objc.RegisterName("readAttributeSubjectsPerAccessControlEntryWithParams:")
+	_mTRClusterAccessControlSelReadAttributeTargetsPerAccessControlEntryWithParams                             = objc.RegisterName("readAttributeTargetsPerAccessControlEntryWithParams:")
+	_mTRClusterAccessControlSelReadAttributeAccessControlEntriesPerFabricWithParams                            = objc.RegisterName("readAttributeAccessControlEntriesPerFabricWithParams:")
+	_mTRClusterAccessControlSelReadAttributeCommissioningARLWithParams                                         = objc.RegisterName("readAttributeCommissioningARLWithParams:")
+	_mTRClusterAccessControlSelReadAttributeARLWithParams                                                      = objc.RegisterName("readAttributeARLWithParams:")
+	_mTRClusterAccessControlSelReadAttributeGeneratedCommandListWithParams                                     = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterAccessControlSelReadAttributeAcceptedCommandListWithParams                                      = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterAccessControlSelReadAttributeAttributeListWithParams                                            = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterAccessControlSelReadAttributeFeatureMapWithParams                                               = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterAccessControlSelReadAttributeClusterRevisionWithParams                                          = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterAccessControlSelInitWithDeviceEndpointIDQueue                                                   = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterAccessControlSelInitWithDeviceEndpointQueue                                                     = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterAccessControlSelReadAttributeAclWithParams                                                      = objc.RegisterName("readAttributeAclWithParams:")
+	_mTRClusterAccessControlSelWriteAttributeAclWithValueExpectedValueInterval                                 = objc.RegisterName("writeAttributeAclWithValue:expectedValueInterval:")
+	_mTRClusterAccessControlSelWriteAttributeAclWithValueExpectedValueIntervalParams                           = objc.RegisterName("writeAttributeAclWithValue:expectedValueInterval:params:")
 )
 
 func MTRClusterAccessControlFromID(id objc.ID) *MTRClusterAccessControl {
@@ -146,13 +146,17 @@ func (o *MTRClusterAccessControl) ReadAttributeClusterRevisionWithParams(params 
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterAccessControl) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterAccessControl {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterAccessControlSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterAccessControlFromID(_ret)
 }
 
 func (o *MTRClusterAccessControl) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterAccessControl {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterAccessControlSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterAccessControlFromID(_ret)
 }
 
@@ -168,4 +172,3 @@ func (o *MTRClusterAccessControl) WriteAttributeAclWithValueExpectedValueInterva
 func (o *MTRClusterAccessControl) WriteAttributeAclWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *MTRWriteParams) {
 	o.Ptr().Send(_mTRClusterAccessControlSelWriteAttributeAclWithValueExpectedValueIntervalParams, dataValueDictionary, expectedValueIntervalMs.Ptr(), params.Ptr())
 }
-

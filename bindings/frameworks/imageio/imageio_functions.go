@@ -13,19 +13,19 @@ var (
 	// Animate the sequence of images contained in the file at `url`. Currently supported image formats are GIF and APNG. The `options` dictionary may be used to request additional playback options; see the list of keys above for more information. The block is called on the main queue at time intervals specified by the `delay time` of the image. The animation can be stopped by setting the boolean parameter of the block to true.
 	_fnCGAnimateImageAtURLWithBlock func(unsafe.Pointer, unsafe.Pointer, objc.Block) int
 	// Animate the sequence of images contained in `data`. Currently supported image formats are GIF and APNG. The `options` dictionary may be used to request additional playback options; see the list of keys above for more information. The block is called on the main queue at time intervals specified by the `delay time` of the image. The animation can be stopped by setting the boolean parameter of the block to true.
-	_fnCGAnimateImageDataWithBlock func(unsafe.Pointer, unsafe.Pointer, objc.Block) int
-	_fnCGImageDestinationAddAuxiliaryDataInfo func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCGImageDestinationAddImage func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCGImageDestinationAddImageAndMetadata func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCGImageDestinationAddImageFromSource func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer)
-	_fnCGImageDestinationCopyImageSource func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
-	_fnCGImageDestinationCopyTypeIdentifiers func() unsafe.Pointer
-	_fnCGImageDestinationCreateWithData func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) unsafe.Pointer
+	_fnCGAnimateImageDataWithBlock              func(unsafe.Pointer, unsafe.Pointer, objc.Block) int
+	_fnCGImageDestinationAddAuxiliaryDataInfo   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCGImageDestinationAddImage               func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCGImageDestinationAddImageAndMetadata    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCGImageDestinationAddImageFromSource     func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer)
+	_fnCGImageDestinationCopyImageSource        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	_fnCGImageDestinationCopyTypeIdentifiers    func() unsafe.Pointer
+	_fnCGImageDestinationCreateWithData         func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) unsafe.Pointer
 	_fnCGImageDestinationCreateWithDataConsumer func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) unsafe.Pointer
-	_fnCGImageDestinationCreateWithURL func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) unsafe.Pointer
-	_fnCGImageDestinationFinalize func(unsafe.Pointer) bool
-	_fnCGImageDestinationGetTypeID func() uint
-	_fnCGImageDestinationSetProperties func(unsafe.Pointer, unsafe.Pointer)
+	_fnCGImageDestinationCreateWithURL          func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) unsafe.Pointer
+	_fnCGImageDestinationFinalize               func(unsafe.Pointer) bool
+	_fnCGImageDestinationGetTypeID              func() uint
+	_fnCGImageDestinationSetProperties          func(unsafe.Pointer, unsafe.Pointer)
 	// @function CGImageMetadataCopyStringValueWithPath @abstract Searches for a specific tag in a CGImageMetadataRef and returns its string value. @discussion This is a convenience method for searching for a tag at path and extracting the string value. @param metadata A collection of metadata tags. @param parent A parent tag. If NULL, the path is relative to the root of the CGImageMetadataRef (i.e. it is not a child of another property). @param path A string with the path to the desired tag. Please consult the documentation of @link CGImageMetadataCopyTagWithPath @/link for information about path syntax. @return Returns a string from a CGImageMetadataTag located at 'path'. The tag must be of type kCGImageMetadataTypeString or kCGImageMetadataTypeAlternateText. For AlternateText tags, the element with the "x-default" language qualifier will be returned. For other types, NULL will be returned.
 	_fnCGImageMetadataCopyStringValueWithPath func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	// *! @functiongroup Working with CGImageProperties */ @function CGImageMetadataCopyTagMatchingImageProperty @abstract Searches for a specific CGImageMetadataTag matching a kCGImageProperty constant @discussion Provides a bridge for values from CGImageCopyPropertiesAtIndex, simplifying access for properties defined in EXIF and IPTC standards, which have no notion of namespaces, prefixes, or XMP property types. Metadata Working Group guidance is factored into the mapping of CGImageProperties to XMP compatible CGImageMetadataTags. For example, kCGImagePropertyExifDateTimeOriginal will get the value of the corresponding XMP tag, which is photoshop:DateCreated. Note that property values will still be in their XMP forms, such as "YYYY-MM-DDThh:mm:ss" for DateTime, rather than the EXIF or IPTC DateTime formats. @param metadata A collection of metadata tags @param dictionaryName the metadata subdictionary to which the image property belongs, such as kCGImagePropertyExifDictionary or kCGImagePropertyIPTCDictionary. Not all dictionaries and properties are supported at this time. @param propertyName the name of the property. This must be a defined property constant corresponding to the 'dictionaryName'. For example, kCGImagePropertyTIFFOrientation, kCGImagePropertyExifDateTimeOriginal, or kCGImagePropertyIPTCKeywords. A warning will be logged if the CGImageProperty is unsupported by CGImageMetadata. @return Returns a CGImageMetadataTagRef with the appropriate namespace, prefix, tag name, and XMP value for the corresponding CGImageProperty. Returns NULL if the property could not be found.
@@ -71,28 +71,28 @@ var (
 	// @function CGImageMetadataTagGetType @abstract Get the type of the CGImageMetadataTag @return Returns a CGImageMetadataType constant for the CGImageMetadataTag. This is primarily used to determine how to interpret the tag's value.
 	_fnCGImageMetadataTagGetType func(unsafe.Pointer) CGImageMetadataType
 	// *! @functiongroup Creating and identifying CGImageMetadataTags */ @function CGImageMetadataTagGetTypeID @abstract Gets the type identifier for the CGImageMetadataTag opaque type @return the type identifier for the CGImageMetadataTagGetTypeID opaque type
-	_fnCGImageMetadataTagGetTypeID func() uint
+	_fnCGImageMetadataTagGetTypeID               func() uint
 	_fnCGImageSourceCopyAuxiliaryDataInfoAtIndex func(unsafe.Pointer, uint, unsafe.Pointer) unsafe.Pointer
-	_fnCGImageSourceCopyMetadataAtIndex func(unsafe.Pointer, uint, unsafe.Pointer) unsafe.Pointer
-	_fnCGImageSourceCopyProperties func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCGImageSourceCopyPropertiesAtIndex func(unsafe.Pointer, uint, unsafe.Pointer) unsafe.Pointer
-	_fnCGImageSourceCopyTypeIdentifiers func() unsafe.Pointer
-	_fnCGImageSourceCreateImageAtIndex func(unsafe.Pointer, uint, unsafe.Pointer) unsafe.Pointer
-	_fnCGImageSourceCreateIncremental func(unsafe.Pointer) unsafe.Pointer
-	_fnCGImageSourceCreateThumbnailAtIndex func(unsafe.Pointer, uint, unsafe.Pointer) unsafe.Pointer
-	_fnCGImageSourceCreateWithData func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCGImageSourceCreateWithDataProvider func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCGImageSourceCreateWithURL func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCGImageSourceGetCount func(unsafe.Pointer) uint
-	_fnCGImageSourceGetPrimaryImageIndex func(unsafe.Pointer) uint
-	_fnCGImageSourceGetStatus func(unsafe.Pointer) CGImageSourceStatus
-	_fnCGImageSourceGetStatusAtIndex func(unsafe.Pointer, uint) CGImageSourceStatus
-	_fnCGImageSourceGetType func(unsafe.Pointer) unsafe.Pointer
-	_fnCGImageSourceGetTypeID func() uint
-	_fnCGImageSourceRemoveCacheAtIndex func(unsafe.Pointer, uint)
-	_fnCGImageSourceSetAllowableTypes func(unsafe.Pointer) int
-	_fnCGImageSourceUpdateData func(unsafe.Pointer, unsafe.Pointer, bool)
-	_fnCGImageSourceUpdateDataProvider func(unsafe.Pointer, unsafe.Pointer, bool)
+	_fnCGImageSourceCopyMetadataAtIndex          func(unsafe.Pointer, uint, unsafe.Pointer) unsafe.Pointer
+	_fnCGImageSourceCopyProperties               func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCGImageSourceCopyPropertiesAtIndex        func(unsafe.Pointer, uint, unsafe.Pointer) unsafe.Pointer
+	_fnCGImageSourceCopyTypeIdentifiers          func() unsafe.Pointer
+	_fnCGImageSourceCreateImageAtIndex           func(unsafe.Pointer, uint, unsafe.Pointer) unsafe.Pointer
+	_fnCGImageSourceCreateIncremental            func(unsafe.Pointer) unsafe.Pointer
+	_fnCGImageSourceCreateThumbnailAtIndex       func(unsafe.Pointer, uint, unsafe.Pointer) unsafe.Pointer
+	_fnCGImageSourceCreateWithData               func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCGImageSourceCreateWithDataProvider       func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCGImageSourceCreateWithURL                func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCGImageSourceGetCount                     func(unsafe.Pointer) uint
+	_fnCGImageSourceGetPrimaryImageIndex         func(unsafe.Pointer) uint
+	_fnCGImageSourceGetStatus                    func(unsafe.Pointer) CGImageSourceStatus
+	_fnCGImageSourceGetStatusAtIndex             func(unsafe.Pointer, uint) CGImageSourceStatus
+	_fnCGImageSourceGetType                      func(unsafe.Pointer) unsafe.Pointer
+	_fnCGImageSourceGetTypeID                    func() uint
+	_fnCGImageSourceRemoveCacheAtIndex           func(unsafe.Pointer, uint)
+	_fnCGImageSourceSetAllowableTypes            func(unsafe.Pointer) int
+	_fnCGImageSourceUpdateData                   func(unsafe.Pointer, unsafe.Pointer, bool)
+	_fnCGImageSourceUpdateDataProvider           func(unsafe.Pointer, unsafe.Pointer, bool)
 )
 
 // Animate the sequence of images contained in the file at `url`. Currently supported image formats are GIF and APNG. The `options` dictionary may be used to request additional playback options; see the list of keys above for more information. The block is called on the main queue at time intervals specified by the `delay time` of the image. The animation can be stopped by setting the boolean parameter of the block to true.
@@ -372,4 +372,3 @@ func CGImageSourceUpdateData(isrc unsafe.Pointer, data unsafe.Pointer, final boo
 func CGImageSourceUpdateDataProvider(isrc unsafe.Pointer, provider unsafe.Pointer, final bool) {
 	_fnCGImageSourceUpdateDataProvider(isrc, provider, final)
 }
-

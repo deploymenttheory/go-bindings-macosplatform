@@ -18,13 +18,13 @@ type NEIPv4Route struct {
 }
 
 var (
-	_clsNEIPv4Route = _objcClass("NEIPv4Route")
+	_clsNEIPv4Route                                     = _objcClass("NEIPv4Route")
 	_nEIPv4RouteSelInitWithDestinationAddressSubnetMask = objc.RegisterName("initWithDestinationAddress:subnetMask:")
-	_nEIPv4RouteSelDefaultRoute = objc.RegisterName("defaultRoute")
-	_nEIPv4RouteSelDestinationAddress = objc.RegisterName("destinationAddress")
-	_nEIPv4RouteSelDestinationSubnetMask = objc.RegisterName("destinationSubnetMask")
-	_nEIPv4RouteSelGatewayAddress = objc.RegisterName("gatewayAddress")
-	_nEIPv4RouteSelSetGatewayAddress = objc.RegisterName("setGatewayAddress:")
+	_nEIPv4RouteSelDefaultRoute                         = objc.RegisterName("defaultRoute")
+	_nEIPv4RouteSelDestinationAddress                   = objc.RegisterName("destinationAddress")
+	_nEIPv4RouteSelDestinationSubnetMask                = objc.RegisterName("destinationSubnetMask")
+	_nEIPv4RouteSelGatewayAddress                       = objc.RegisterName("gatewayAddress")
+	_nEIPv4RouteSelSetGatewayAddress                    = objc.RegisterName("setGatewayAddress:")
 )
 
 func NEIPv4RouteFromID(id objc.ID) *NEIPv4Route {
@@ -40,7 +40,9 @@ func NEIPv4RouteFromID(id objc.ID) *NEIPv4Route {
 // @method initWithDestinationAddress:subnetMask: @discussion Initialize a newly-allocated NEIPv4Route. @param address The IPv4 address of the destination network. @param subnetMask The subnet mask of the destination network. @return The initialized NEIPv4Route.
 func (o *NEIPv4Route) InitWithDestinationAddressSubnetMask(address *foundation.NSString, subnetMask *foundation.NSString) *NEIPv4Route {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEIPv4RouteSelInitWithDestinationAddressSubnetMask, address.Ptr(), subnetMask.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEIPv4RouteFromID(_ret)
 }
 
@@ -53,25 +55,30 @@ func NEIPv4RouteDefaultRoute() unsafe.Pointer {
 // @property destinationAddress @discussion An IPv4 address represented as a dotted decimal string.
 func (o *NEIPv4Route) DestinationAddress() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEIPv4RouteSelDestinationAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property destinationSubnetMask @discussion An IPv4 subnet mask represented as a dotted decimal string. This mask in combination with the destinationAddress property is used to determine the destination network of the route.
 func (o *NEIPv4Route) DestinationSubnetMask() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEIPv4RouteSelDestinationSubnetMask)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property gatewayAddress @discussion The IPv4 address of the route's gateway. If this property is nil then the route's gateway will be set to the tunnel's virtual interface.
 func (o *NEIPv4Route) GatewayAddress() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEIPv4RouteSelGatewayAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NEIPv4Route) SetGatewayAddress(gatewayAddress *foundation.NSString) {
 	o.Ptr().Send(_nEIPv4RouteSelSetGatewayAddress, gatewayAddress.Ptr())
 }
-

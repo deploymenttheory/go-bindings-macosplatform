@@ -16,7 +16,7 @@ type CMLogItem struct {
 }
 
 var (
-	_clsCMLogItem = _objcClass("CMLogItem")
+	_clsCMLogItem          = _objcClass("CMLogItem")
 	_cMLogItemSelTimestamp = objc.RegisterName("timestamp")
 )
 
@@ -34,4 +34,3 @@ func (o *CMLogItem) Timestamp() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _cMLogItemSelTimestamp)
 	return _ret
 }
-

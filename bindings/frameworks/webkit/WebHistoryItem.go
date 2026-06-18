@@ -17,15 +17,15 @@ type WebHistoryItem struct {
 }
 
 var (
-	_clsWebHistoryItem = _objcClass("WebHistoryItem")
+	_clsWebHistoryItem                                              = _objcClass("WebHistoryItem")
 	_webHistoryItemSelInitWithURLStringTitleLastVisitedTimeInterval = objc.RegisterName("initWithURLString:title:lastVisitedTimeInterval:")
-	_webHistoryItemSelOriginalURLString = objc.RegisterName("originalURLString")
-	_webHistoryItemSelURLString = objc.RegisterName("URLString")
-	_webHistoryItemSelTitle = objc.RegisterName("title")
-	_webHistoryItemSelLastVisitedTimeInterval = objc.RegisterName("lastVisitedTimeInterval")
-	_webHistoryItemSelAlternateTitle = objc.RegisterName("alternateTitle")
-	_webHistoryItemSelSetAlternateTitle = objc.RegisterName("setAlternateTitle:")
-	_webHistoryItemSelIcon = objc.RegisterName("icon")
+	_webHistoryItemSelOriginalURLString                             = objc.RegisterName("originalURLString")
+	_webHistoryItemSelURLString                                     = objc.RegisterName("URLString")
+	_webHistoryItemSelTitle                                         = objc.RegisterName("title")
+	_webHistoryItemSelLastVisitedTimeInterval                       = objc.RegisterName("lastVisitedTimeInterval")
+	_webHistoryItemSelAlternateTitle                                = objc.RegisterName("alternateTitle")
+	_webHistoryItemSelSetAlternateTitle                             = objc.RegisterName("setAlternateTitle:")
+	_webHistoryItemSelIcon                                          = objc.RegisterName("icon")
 )
 
 func WebHistoryItemFromID(id objc.ID) *WebHistoryItem {
@@ -41,28 +41,36 @@ func WebHistoryItemFromID(id objc.ID) *WebHistoryItem {
 // @method initWithURLString:title:lastVisitedTimeInterval: @param URLString The URL string for the item. @param title The title to use for the item.  This is normally the <title> of a page. @param time The time used to indicate when the item was used. @abstract Initialize a new WebHistoryItem @discussion WebHistoryItems are normally created for you by the WebKit. You may use this method to prepopulate a WebBackForwardList, or create 'artificial' items to add to a WebBackForwardList.  When first initialized the URLString and originalURLString will be the same.
 func (o *WebHistoryItem) InitWithURLStringTitleLastVisitedTimeInterval(uRLString *foundation.NSString, title *foundation.NSString, time_ float64) *WebHistoryItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webHistoryItemSelInitWithURLStringTitleLastVisitedTimeInterval, uRLString.Ptr(), title.Ptr(), time_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebHistoryItemFromID(_ret)
 }
 
 // @property originalURLString @abstract The string representation of the initial URL of this item. This value is normally set by the WebKit.
 func (o *WebHistoryItem) OriginalURLString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webHistoryItemSelOriginalURLString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property URLString @abstract The string representation of the URL represented by this item. @discussion The URLString may be different than the originalURLString if the page redirected to a new location.  This value is normally set by the WebKit.
 func (o *WebHistoryItem) URLString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webHistoryItemSelURLString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property title @abstract The title of the page represented by this item. @discussion This title cannot be changed by the client.  This value is normally set by the WebKit when a page title for the item is received.
 func (o *WebHistoryItem) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webHistoryItemSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -74,7 +82,9 @@ func (o *WebHistoryItem) LastVisitedTimeInterval() float64 {
 
 func (o *WebHistoryItem) AlternateTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webHistoryItemSelAlternateTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -85,7 +95,8 @@ func (o *WebHistoryItem) SetAlternateTitle(alternateTitle *foundation.NSString) 
 // @property icon @abstract The favorite icon of the page represented by this item. @discussion This icon returned will be determined by the WebKit.
 func (o *WebHistoryItem) Icon() *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webHistoryItemSelIcon)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSImageFromID(_ret)
 }
-

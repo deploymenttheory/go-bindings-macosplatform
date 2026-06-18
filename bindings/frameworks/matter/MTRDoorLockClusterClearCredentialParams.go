@@ -16,12 +16,12 @@ type MTRDoorLockClusterClearCredentialParams struct {
 }
 
 var (
-	_clsMTRDoorLockClusterClearCredentialParams = _objcClass("MTRDoorLockClusterClearCredentialParams")
-	_mTRDoorLockClusterClearCredentialParamsSelCredential = objc.RegisterName("credential")
-	_mTRDoorLockClusterClearCredentialParamsSelSetCredential = objc.RegisterName("setCredential:")
-	_mTRDoorLockClusterClearCredentialParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRDoorLockClusterClearCredentialParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRDoorLockClusterClearCredentialParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRDoorLockClusterClearCredentialParams                               = _objcClass("MTRDoorLockClusterClearCredentialParams")
+	_mTRDoorLockClusterClearCredentialParamsSelCredential                     = objc.RegisterName("credential")
+	_mTRDoorLockClusterClearCredentialParamsSelSetCredential                  = objc.RegisterName("setCredential:")
+	_mTRDoorLockClusterClearCredentialParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRDoorLockClusterClearCredentialParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRDoorLockClusterClearCredentialParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRDoorLockClusterClearCredentialParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -37,7 +37,9 @@ func MTRDoorLockClusterClearCredentialParamsFromID(id objc.ID) *MTRDoorLockClust
 
 func (o *MTRDoorLockClusterClearCredentialParams) Credential() *MTRDoorLockClusterCredentialStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterClearCredentialParamsSelCredential)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRDoorLockClusterCredentialStructFromID(_ret)
 }
 
@@ -48,7 +50,9 @@ func (o *MTRDoorLockClusterClearCredentialParams) SetCredential(credential *MTRD
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRDoorLockClusterClearCredentialParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterClearCredentialParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,11 +63,12 @@ func (o *MTRDoorLockClusterClearCredentialParams) SetTimedInvokeTimeoutMs(timedI
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRDoorLockClusterClearCredentialParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterClearCredentialParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDoorLockClusterClearCredentialParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDoorLockClusterClearCredentialParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

@@ -18,12 +18,12 @@ type PHASEEnvelopeSegment struct {
 }
 
 var (
-	_clsPHASEEnvelopeSegment = _objcClass("PHASEEnvelopeSegment")
+	_clsPHASEEnvelopeSegment                          = _objcClass("PHASEEnvelopeSegment")
 	_pHASEEnvelopeSegmentSelInitWithEndPointCurveType = objc.RegisterName("initWithEndPoint:curveType:")
-	_pHASEEnvelopeSegmentSelEndPoint = objc.RegisterName("endPoint")
-	_pHASEEnvelopeSegmentSelSetEndPoint = objc.RegisterName("setEndPoint:")
-	_pHASEEnvelopeSegmentSelCurveType = objc.RegisterName("curveType")
-	_pHASEEnvelopeSegmentSelSetCurveType = objc.RegisterName("setCurveType:")
+	_pHASEEnvelopeSegmentSelEndPoint                  = objc.RegisterName("endPoint")
+	_pHASEEnvelopeSegmentSelSetEndPoint               = objc.RegisterName("setEndPoint:")
+	_pHASEEnvelopeSegmentSelCurveType                 = objc.RegisterName("curveType")
+	_pHASEEnvelopeSegmentSelSetCurveType              = objc.RegisterName("setCurveType:")
 )
 
 func PHASEEnvelopeSegmentFromID(id objc.ID) *PHASEEnvelopeSegment {
@@ -39,7 +39,9 @@ func PHASEEnvelopeSegmentFromID(id objc.ID) *PHASEEnvelopeSegment {
 // @method initWithEndPoint:curveType @abstract Initialize an envelope segment with an endPoint and a curveType. @param endPoint The end point of the segment. @param curveType The curve type. @return A new envelope.
 func (o *PHASEEnvelopeSegment) InitWithEndPointCurveType(endPoint unsafe.Pointer, curveType PHASECurveType) *PHASEEnvelopeSegment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEEnvelopeSegmentSelInitWithEndPointCurveType, endPoint, curveType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEEnvelopeSegmentFromID(_ret)
 }
 
@@ -62,4 +64,3 @@ func (o *PHASEEnvelopeSegment) CurveType() PHASECurveType {
 func (o *PHASEEnvelopeSegment) SetCurveType(curveType PHASECurveType) {
 	o.Ptr().Send(_pHASEEnvelopeSegmentSelSetCurveType, curveType)
 }
-

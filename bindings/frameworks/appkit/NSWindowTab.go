@@ -16,15 +16,15 @@ type NSWindowTab struct {
 }
 
 var (
-	_clsNSWindowTab = _objcClass("NSWindowTab")
-	_nSWindowTabSelTitle = objc.RegisterName("title")
-	_nSWindowTabSelSetTitle = objc.RegisterName("setTitle:")
-	_nSWindowTabSelAttributedTitle = objc.RegisterName("attributedTitle")
+	_clsNSWindowTab                   = _objcClass("NSWindowTab")
+	_nSWindowTabSelTitle              = objc.RegisterName("title")
+	_nSWindowTabSelSetTitle           = objc.RegisterName("setTitle:")
+	_nSWindowTabSelAttributedTitle    = objc.RegisterName("attributedTitle")
 	_nSWindowTabSelSetAttributedTitle = objc.RegisterName("setAttributedTitle:")
-	_nSWindowTabSelToolTip = objc.RegisterName("toolTip")
-	_nSWindowTabSelSetToolTip = objc.RegisterName("setToolTip:")
-	_nSWindowTabSelAccessoryView = objc.RegisterName("accessoryView")
-	_nSWindowTabSelSetAccessoryView = objc.RegisterName("setAccessoryView:")
+	_nSWindowTabSelToolTip            = objc.RegisterName("toolTip")
+	_nSWindowTabSelSetToolTip         = objc.RegisterName("setToolTip:")
+	_nSWindowTabSelAccessoryView      = objc.RegisterName("accessoryView")
+	_nSWindowTabSelSetAccessoryView   = objc.RegisterName("setAccessoryView:")
 )
 
 func NSWindowTabFromID(id objc.ID) *NSWindowTab {
@@ -39,7 +39,9 @@ func NSWindowTabFromID(id objc.ID) *NSWindowTab {
 
 func (o *NSWindowTab) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowTabSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *NSWindowTab) SetTitle(title *foundation.NSString) {
 
 func (o *NSWindowTab) AttributedTitle() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowTabSelAttributedTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
@@ -59,7 +63,9 @@ func (o *NSWindowTab) SetAttributedTitle(attributedTitle *foundation.NSAttribute
 
 func (o *NSWindowTab) ToolTip() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowTabSelToolTip)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -69,11 +75,12 @@ func (o *NSWindowTab) SetToolTip(toolTip *foundation.NSString) {
 
 func (o *NSWindowTab) AccessoryView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowTabSelAccessoryView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
 func (o *NSWindowTab) SetAccessoryView(accessoryView *NSView) {
 	o.Ptr().Send(_nSWindowTabSelSetAccessoryView, accessoryView.Ptr())
 }
-

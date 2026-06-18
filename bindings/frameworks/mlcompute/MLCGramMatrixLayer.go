@@ -15,9 +15,9 @@ type MLCGramMatrixLayer struct {
 }
 
 var (
-	_clsMLCGramMatrixLayer = _objcClass("MLCGramMatrixLayer")
+	_clsMLCGramMatrixLayer               = _objcClass("MLCGramMatrixLayer")
 	_mLCGramMatrixLayerSelLayerWithScale = objc.RegisterName("layerWithScale:")
-	_mLCGramMatrixLayerSelScale = objc.RegisterName("scale")
+	_mLCGramMatrixLayerSelScale          = objc.RegisterName("scale")
 )
 
 func MLCGramMatrixLayerFromID(id objc.ID) *MLCGramMatrixLayer {
@@ -33,7 +33,9 @@ func MLCGramMatrixLayerFromID(id objc.ID) *MLCGramMatrixLayer {
 // @abstract   Create a GramMatrix layer @param      scale  The scaling factor for the output. @return     A new GramMatrix layer
 func MLCGramMatrixLayerLayerWithScale(scale float32) *MLCGramMatrixLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCGramMatrixLayer), _mLCGramMatrixLayerSelLayerWithScale, scale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCGramMatrixLayerFromID(_ret)
 }
 
@@ -42,4 +44,3 @@ func (o *MLCGramMatrixLayer) Scale() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _mLCGramMatrixLayerSelScale)
 	return _ret
 }
-

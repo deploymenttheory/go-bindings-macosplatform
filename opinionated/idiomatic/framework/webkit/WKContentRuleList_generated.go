@@ -52,4 +52,3 @@ type WKContentRuleListable interface {
 }
 
 var _ WKContentRuleListable = (*WKContentRuleList)(nil)
-

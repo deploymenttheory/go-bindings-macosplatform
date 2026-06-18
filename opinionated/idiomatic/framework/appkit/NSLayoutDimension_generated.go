@@ -116,7 +116,9 @@ func (x *LayoutDimension) ConstraintLessThanOrEqualToAnchorMultiplierConstant(an
 	return &LayoutConstraint{inner: _r}
 }
 
-func (x *LayoutDimension) asLayoutAnchor() *raw.NSLayoutAnchor[objc.ID] { return &x.inner.NSLayoutAnchor }
+func (x *LayoutDimension) asLayoutAnchor() *raw.NSLayoutAnchor[objc.ID] {
+	return &x.inner.NSLayoutAnchor
+}
 
 // LayoutDimensionable is the interface implemented by [LayoutDimension], for mocking and DI.
 type LayoutDimensionable interface {
@@ -133,4 +135,3 @@ type LayoutDimensionable interface {
 }
 
 var _ LayoutDimensionable = (*LayoutDimension)(nil)
-

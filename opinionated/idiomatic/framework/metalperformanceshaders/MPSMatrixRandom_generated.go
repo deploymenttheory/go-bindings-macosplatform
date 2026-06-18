@@ -123,4 +123,3 @@ type MatrixRandomable interface {
 }
 
 var _ MatrixRandomable = (*MatrixRandom)(nil)
-

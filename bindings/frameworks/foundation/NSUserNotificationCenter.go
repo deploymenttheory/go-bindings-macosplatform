@@ -16,18 +16,18 @@ type NSUserNotificationCenter struct {
 }
 
 var (
-	_clsNSUserNotificationCenter = _objcClass("NSUserNotificationCenter")
-	_nSUserNotificationCenterSelScheduleNotification = objc.RegisterName("scheduleNotification:")
-	_nSUserNotificationCenterSelRemoveScheduledNotification = objc.RegisterName("removeScheduledNotification:")
-	_nSUserNotificationCenterSelDeliverNotification = objc.RegisterName("deliverNotification:")
-	_nSUserNotificationCenterSelRemoveDeliveredNotification = objc.RegisterName("removeDeliveredNotification:")
+	_clsNSUserNotificationCenter                                = _objcClass("NSUserNotificationCenter")
+	_nSUserNotificationCenterSelScheduleNotification            = objc.RegisterName("scheduleNotification:")
+	_nSUserNotificationCenterSelRemoveScheduledNotification     = objc.RegisterName("removeScheduledNotification:")
+	_nSUserNotificationCenterSelDeliverNotification             = objc.RegisterName("deliverNotification:")
+	_nSUserNotificationCenterSelRemoveDeliveredNotification     = objc.RegisterName("removeDeliveredNotification:")
 	_nSUserNotificationCenterSelRemoveAllDeliveredNotifications = objc.RegisterName("removeAllDeliveredNotifications")
-	_nSUserNotificationCenterSelDefaultUserNotificationCenter = objc.RegisterName("defaultUserNotificationCenter")
-	_nSUserNotificationCenterSelDelegate = objc.RegisterName("delegate")
-	_nSUserNotificationCenterSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSUserNotificationCenterSelScheduledNotifications = objc.RegisterName("scheduledNotifications")
-	_nSUserNotificationCenterSelSetScheduledNotifications = objc.RegisterName("setScheduledNotifications:")
-	_nSUserNotificationCenterSelDeliveredNotifications = objc.RegisterName("deliveredNotifications")
+	_nSUserNotificationCenterSelDefaultUserNotificationCenter   = objc.RegisterName("defaultUserNotificationCenter")
+	_nSUserNotificationCenterSelDelegate                        = objc.RegisterName("delegate")
+	_nSUserNotificationCenterSelSetDelegate                     = objc.RegisterName("setDelegate:")
+	_nSUserNotificationCenterSelScheduledNotifications          = objc.RegisterName("scheduledNotifications")
+	_nSUserNotificationCenterSelSetScheduledNotifications       = objc.RegisterName("setScheduledNotifications:")
+	_nSUserNotificationCenterSelDeliveredNotifications          = objc.RegisterName("deliveredNotifications")
 )
 
 func NSUserNotificationCenterFromID(id objc.ID) *NSUserNotificationCenter {
@@ -62,7 +62,9 @@ func (o *NSUserNotificationCenter) RemoveAllDeliveredNotifications() {
 
 func NSUserNotificationCenterDefaultUserNotificationCenter() *NSUserNotificationCenter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUserNotificationCenter), _nSUserNotificationCenterSelDefaultUserNotificationCenter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUserNotificationCenterFromID(_ret)
 }
 
@@ -77,7 +79,9 @@ func (o *NSUserNotificationCenter) SetDelegate(delegate NSUserNotificationCenter
 
 func (o *NSUserNotificationCenter) ScheduledNotifications() *NSArray[*NSUserNotification] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationCenterSelScheduledNotifications)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSUserNotification](_ret)
 }
 
@@ -87,7 +91,8 @@ func (o *NSUserNotificationCenter) SetScheduledNotifications(scheduledNotificati
 
 func (o *NSUserNotificationCenter) DeliveredNotifications() *NSArray[*NSUserNotification] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationCenterSelDeliveredNotifications)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSUserNotification](_ret)
 }
-

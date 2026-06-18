@@ -16,54 +16,54 @@ type SCNMaterial struct {
 }
 
 var (
-	_clsSCNMaterial = _objcClass("SCNMaterial")
-	_sCNMaterialSelMaterial = objc.RegisterName("material")
-	_sCNMaterialSelName = objc.RegisterName("name")
-	_sCNMaterialSelSetName = objc.RegisterName("setName:")
-	_sCNMaterialSelDiffuse = objc.RegisterName("diffuse")
-	_sCNMaterialSelAmbient = objc.RegisterName("ambient")
-	_sCNMaterialSelSpecular = objc.RegisterName("specular")
-	_sCNMaterialSelEmission = objc.RegisterName("emission")
-	_sCNMaterialSelTransparent = objc.RegisterName("transparent")
-	_sCNMaterialSelReflective = objc.RegisterName("reflective")
-	_sCNMaterialSelMultiply = objc.RegisterName("multiply")
-	_sCNMaterialSelNormal = objc.RegisterName("normal")
-	_sCNMaterialSelDisplacement = objc.RegisterName("displacement")
-	_sCNMaterialSelAmbientOcclusion = objc.RegisterName("ambientOcclusion")
-	_sCNMaterialSelSelfIllumination = objc.RegisterName("selfIllumination")
-	_sCNMaterialSelMetalness = objc.RegisterName("metalness")
-	_sCNMaterialSelRoughness = objc.RegisterName("roughness")
-	_sCNMaterialSelClearCoat = objc.RegisterName("clearCoat")
-	_sCNMaterialSelClearCoatRoughness = objc.RegisterName("clearCoatRoughness")
-	_sCNMaterialSelClearCoatNormal = objc.RegisterName("clearCoatNormal")
-	_sCNMaterialSelShininess = objc.RegisterName("shininess")
-	_sCNMaterialSelSetShininess = objc.RegisterName("setShininess:")
-	_sCNMaterialSelTransparency = objc.RegisterName("transparency")
-	_sCNMaterialSelSetTransparency = objc.RegisterName("setTransparency:")
-	_sCNMaterialSelLightingModelName = objc.RegisterName("lightingModelName")
-	_sCNMaterialSelSetLightingModelName = objc.RegisterName("setLightingModelName:")
-	_sCNMaterialSelIsLitPerPixel = objc.RegisterName("isLitPerPixel")
-	_sCNMaterialSelSetLitPerPixel = objc.RegisterName("setLitPerPixel:")
-	_sCNMaterialSelIsDoubleSided = objc.RegisterName("isDoubleSided")
-	_sCNMaterialSelSetDoubleSided = objc.RegisterName("setDoubleSided:")
-	_sCNMaterialSelFillMode = objc.RegisterName("fillMode")
-	_sCNMaterialSelSetFillMode = objc.RegisterName("setFillMode:")
-	_sCNMaterialSelCullMode = objc.RegisterName("cullMode")
-	_sCNMaterialSelSetCullMode = objc.RegisterName("setCullMode:")
-	_sCNMaterialSelTransparencyMode = objc.RegisterName("transparencyMode")
-	_sCNMaterialSelSetTransparencyMode = objc.RegisterName("setTransparencyMode:")
-	_sCNMaterialSelLocksAmbientWithDiffuse = objc.RegisterName("locksAmbientWithDiffuse")
+	_clsSCNMaterial                           = _objcClass("SCNMaterial")
+	_sCNMaterialSelMaterial                   = objc.RegisterName("material")
+	_sCNMaterialSelName                       = objc.RegisterName("name")
+	_sCNMaterialSelSetName                    = objc.RegisterName("setName:")
+	_sCNMaterialSelDiffuse                    = objc.RegisterName("diffuse")
+	_sCNMaterialSelAmbient                    = objc.RegisterName("ambient")
+	_sCNMaterialSelSpecular                   = objc.RegisterName("specular")
+	_sCNMaterialSelEmission                   = objc.RegisterName("emission")
+	_sCNMaterialSelTransparent                = objc.RegisterName("transparent")
+	_sCNMaterialSelReflective                 = objc.RegisterName("reflective")
+	_sCNMaterialSelMultiply                   = objc.RegisterName("multiply")
+	_sCNMaterialSelNormal                     = objc.RegisterName("normal")
+	_sCNMaterialSelDisplacement               = objc.RegisterName("displacement")
+	_sCNMaterialSelAmbientOcclusion           = objc.RegisterName("ambientOcclusion")
+	_sCNMaterialSelSelfIllumination           = objc.RegisterName("selfIllumination")
+	_sCNMaterialSelMetalness                  = objc.RegisterName("metalness")
+	_sCNMaterialSelRoughness                  = objc.RegisterName("roughness")
+	_sCNMaterialSelClearCoat                  = objc.RegisterName("clearCoat")
+	_sCNMaterialSelClearCoatRoughness         = objc.RegisterName("clearCoatRoughness")
+	_sCNMaterialSelClearCoatNormal            = objc.RegisterName("clearCoatNormal")
+	_sCNMaterialSelShininess                  = objc.RegisterName("shininess")
+	_sCNMaterialSelSetShininess               = objc.RegisterName("setShininess:")
+	_sCNMaterialSelTransparency               = objc.RegisterName("transparency")
+	_sCNMaterialSelSetTransparency            = objc.RegisterName("setTransparency:")
+	_sCNMaterialSelLightingModelName          = objc.RegisterName("lightingModelName")
+	_sCNMaterialSelSetLightingModelName       = objc.RegisterName("setLightingModelName:")
+	_sCNMaterialSelIsLitPerPixel              = objc.RegisterName("isLitPerPixel")
+	_sCNMaterialSelSetLitPerPixel             = objc.RegisterName("setLitPerPixel:")
+	_sCNMaterialSelIsDoubleSided              = objc.RegisterName("isDoubleSided")
+	_sCNMaterialSelSetDoubleSided             = objc.RegisterName("setDoubleSided:")
+	_sCNMaterialSelFillMode                   = objc.RegisterName("fillMode")
+	_sCNMaterialSelSetFillMode                = objc.RegisterName("setFillMode:")
+	_sCNMaterialSelCullMode                   = objc.RegisterName("cullMode")
+	_sCNMaterialSelSetCullMode                = objc.RegisterName("setCullMode:")
+	_sCNMaterialSelTransparencyMode           = objc.RegisterName("transparencyMode")
+	_sCNMaterialSelSetTransparencyMode        = objc.RegisterName("setTransparencyMode:")
+	_sCNMaterialSelLocksAmbientWithDiffuse    = objc.RegisterName("locksAmbientWithDiffuse")
 	_sCNMaterialSelSetLocksAmbientWithDiffuse = objc.RegisterName("setLocksAmbientWithDiffuse:")
-	_sCNMaterialSelWritesToDepthBuffer = objc.RegisterName("writesToDepthBuffer")
-	_sCNMaterialSelSetWritesToDepthBuffer = objc.RegisterName("setWritesToDepthBuffer:")
-	_sCNMaterialSelColorBufferWriteMask = objc.RegisterName("colorBufferWriteMask")
-	_sCNMaterialSelSetColorBufferWriteMask = objc.RegisterName("setColorBufferWriteMask:")
-	_sCNMaterialSelReadsFromDepthBuffer = objc.RegisterName("readsFromDepthBuffer")
-	_sCNMaterialSelSetReadsFromDepthBuffer = objc.RegisterName("setReadsFromDepthBuffer:")
-	_sCNMaterialSelFresnelExponent = objc.RegisterName("fresnelExponent")
-	_sCNMaterialSelSetFresnelExponent = objc.RegisterName("setFresnelExponent:")
-	_sCNMaterialSelBlendMode = objc.RegisterName("blendMode")
-	_sCNMaterialSelSetBlendMode = objc.RegisterName("setBlendMode:")
+	_sCNMaterialSelWritesToDepthBuffer        = objc.RegisterName("writesToDepthBuffer")
+	_sCNMaterialSelSetWritesToDepthBuffer     = objc.RegisterName("setWritesToDepthBuffer:")
+	_sCNMaterialSelColorBufferWriteMask       = objc.RegisterName("colorBufferWriteMask")
+	_sCNMaterialSelSetColorBufferWriteMask    = objc.RegisterName("setColorBufferWriteMask:")
+	_sCNMaterialSelReadsFromDepthBuffer       = objc.RegisterName("readsFromDepthBuffer")
+	_sCNMaterialSelSetReadsFromDepthBuffer    = objc.RegisterName("setReadsFromDepthBuffer:")
+	_sCNMaterialSelFresnelExponent            = objc.RegisterName("fresnelExponent")
+	_sCNMaterialSelSetFresnelExponent         = objc.RegisterName("setFresnelExponent:")
+	_sCNMaterialSelBlendMode                  = objc.RegisterName("blendMode")
+	_sCNMaterialSelSetBlendMode               = objc.RegisterName("setBlendMode:")
 )
 
 func SCNMaterialFromID(id objc.ID) *SCNMaterial {
@@ -79,14 +79,18 @@ func SCNMaterialFromID(id objc.ID) *SCNMaterial {
 // @method material @abstract Creates and initialize a material instance.
 func SCNMaterialMaterial() *SCNMaterial {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNMaterial), _sCNMaterialSelMaterial)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNMaterialFromID(_ret)
 }
 
 // @property name @abstract Determines the name of the receiver.
 func (o *SCNMaterial) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNMaterialSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -97,112 +101,144 @@ func (o *SCNMaterial) SetName(name *foundation.NSString) {
 // @property diffuse @abstract Specifies the receiver's diffuse property. @discussion The diffuse property specifies the amount of light diffusely reflected from the surface. The diffuse light is reflected equally in all directions and is therefore independent of the point of view.
 func (o *SCNMaterial) Diffuse() *SCNMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNMaterialSelDiffuse)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNMaterialPropertyFromID(_ret)
 }
 
 // @property ambient @abstract Specifies the receiver's ambient property. @discussion The ambient property specifies the amount of ambient light to reflect. This property has no visual impact on scenes that have no ambient light. Setting the ambient has no effect if locksAmbientWithDiffuse is set to YES.
 func (o *SCNMaterial) Ambient() *SCNMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNMaterialSelAmbient)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNMaterialPropertyFromID(_ret)
 }
 
 // @property specular @abstract Specifies the receiver's specular property. @discussion The specular property specifies the amount of light to reflect in a mirror-like manner. The specular intensity increases when the point of view lines up with the direction of the reflected light.
 func (o *SCNMaterial) Specular() *SCNMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNMaterialSelSpecular)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNMaterialPropertyFromID(_ret)
 }
 
 // @property emission @abstract The emission property specifies the amount of light the material emits. This emission does not light up other surfaces in the scene.
 func (o *SCNMaterial) Emission() *SCNMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNMaterialSelEmission)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNMaterialPropertyFromID(_ret)
 }
 
 // @property transparent @abstract The transparent property specifies the transparent areas of the material.
 func (o *SCNMaterial) Transparent() *SCNMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNMaterialSelTransparent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNMaterialPropertyFromID(_ret)
 }
 
 // @property reflective @abstract The reflective property specifies the reflectivity of the surface. The surface will not actually reflect other objects in the scene. This property may be used as a sphere mapping to reflect a precomputed environment.
 func (o *SCNMaterial) Reflective() *SCNMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNMaterialSelReflective)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNMaterialPropertyFromID(_ret)
 }
 
 // @property multiply @abstract The multiply property specifies a color or an image used to multiply the output fragments with. The computed fragments are multiplied with the multiply value to produce the final fragments. This property may be used for shadow maps, to fade out or tint 3d objects.
 func (o *SCNMaterial) Multiply() *SCNMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNMaterialSelMultiply)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNMaterialPropertyFromID(_ret)
 }
 
 // @property normal @abstract The normal property specifies the surface orientation. @discussion When an image is set on the normal property the material is automatically lit per pixel. Setting a color has no effect.
 func (o *SCNMaterial) Normal() *SCNMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNMaterialSelNormal)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNMaterialPropertyFromID(_ret)
 }
 
 // @property displacement @abstract The displacement property specifies how vertex are translated in tangent space. @discussion Pass a grayscale image for a simple 'elevation' or rgb image for a vector displacement.
 func (o *SCNMaterial) Displacement() *SCNMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNMaterialSelDisplacement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNMaterialPropertyFromID(_ret)
 }
 
 // @property ambientOcclusion @abstract The ambientOcclusion property specifies the ambient occlusion of the surface. The ambient occlusion is multiplied with the ambient light, then the result is added to the lighting contribution. This property has no visual impact on scenes that have no ambient light. When an ambient occlusion map is set, the ambient property is ignored.
 func (o *SCNMaterial) AmbientOcclusion() *SCNMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNMaterialSelAmbientOcclusion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNMaterialPropertyFromID(_ret)
 }
 
 // @property selfIllumination @abstract The selfIllumination property specifies a texture or a color that is added to the lighting contribution of the surface. When a selfIllumination is set, the emission property is ignored.
 func (o *SCNMaterial) SelfIllumination() *SCNMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNMaterialSelSelfIllumination)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNMaterialPropertyFromID(_ret)
 }
 
 // @property metalness @abstract The metalness property specifies how metallic the material's surface appears. Lower values (darker colors) cause the material to appear more like a dielectric surface. Higher values (brighter colors) cause the surface to appear more metallic. This property is only used when 'lightingModelName' is 'SCNLightingModelPhysicallyBased'.
 func (o *SCNMaterial) Metalness() *SCNMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNMaterialSelMetalness)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNMaterialPropertyFromID(_ret)
 }
 
 // @property roughness @abstract The roughness property specifies the apparent smoothness of the surface. Lower values (darker colors) cause the material to appear shiny, with well-defined specular highlights. Higher values (brighter colors) cause specular highlights to spread out and the diffuse property of the material to become more retroreflective. This property is only used when 'lightingModelName' is 'SCNLightingModelPhysicallyBased'.
 func (o *SCNMaterial) Roughness() *SCNMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNMaterialSelRoughness)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNMaterialPropertyFromID(_ret)
 }
 
 // @property clearCoat @abstract The clearCoat property specifies color and intensity of the coat layer.
 func (o *SCNMaterial) ClearCoat() *SCNMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNMaterialSelClearCoat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNMaterialPropertyFromID(_ret)
 }
 
 // @property clearCoatRoughness @abstract The clearCoat property specifies color and intensity of the coat roughness.
 func (o *SCNMaterial) ClearCoatRoughness() *SCNMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNMaterialSelClearCoatRoughness)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNMaterialPropertyFromID(_ret)
 }
 
 // @property clearCoatNormal @abstract The clearCoatNormal property specifies color and intensity of the optional coat normal map.
 func (o *SCNMaterial) ClearCoatNormal() *SCNMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNMaterialSelClearCoatNormal)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNMaterialPropertyFromID(_ret)
 }
 
@@ -229,7 +265,9 @@ func (o *SCNMaterial) SetTransparency(transparency float64) {
 // @property lightingModelName @abstract Determines the receiver's lighting model. See above for the list of lighting models. Defaults to SCNLightingModelBlinn.
 func (o *SCNMaterial) LightingModelName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNMaterialSelLightingModelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -346,4 +384,3 @@ func (o *SCNMaterial) BlendMode() SCNBlendMode {
 func (o *SCNMaterial) SetBlendMode(blendMode SCNBlendMode) {
 	o.Ptr().Send(_sCNMaterialSelSetBlendMode, blendMode)
 }
-

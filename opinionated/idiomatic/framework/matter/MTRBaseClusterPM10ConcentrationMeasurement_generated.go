@@ -19,7 +19,9 @@ type MTRBaseClusterPM10ConcentrationMeasurement struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterPM10ConcentrationMeasurement].
-func (x *MTRBaseClusterPM10ConcentrationMeasurement) Unwrap() *raw.MTRBaseClusterPM10ConcentrationMeasurement { return x.inner }
+func (x *MTRBaseClusterPM10ConcentrationMeasurement) Unwrap() *raw.MTRBaseClusterPM10ConcentrationMeasurement {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -694,9 +696,13 @@ func (x *MTRBaseClusterPM10ConcentrationMeasurement) SubscribeAttributeClusterRe
 	}
 }
 
-func (x *MTRBaseClusterPM10ConcentrationMeasurement) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterPM10ConcentrationMeasurement) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterPM10ConcentrationMeasurement) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterPM10ConcentrationMeasurement) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterPM10ConcentrationMeasurementable is the interface implemented by [MTRBaseClusterPM10ConcentrationMeasurement], for mocking and DI.
 type MTRBaseClusterPM10ConcentrationMeasurementable interface {
@@ -736,4 +742,3 @@ type MTRBaseClusterPM10ConcentrationMeasurementable interface {
 }
 
 var _ MTRBaseClusterPM10ConcentrationMeasurementable = (*MTRBaseClusterPM10ConcentrationMeasurement)(nil)
-

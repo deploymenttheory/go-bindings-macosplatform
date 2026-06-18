@@ -18,21 +18,21 @@ type NEFilterManager struct {
 }
 
 var (
-	_clsNEFilterManager = _objcClass("NEFilterManager")
-	_nEFilterManagerSelSharedManager = objc.RegisterName("sharedManager")
-	_nEFilterManagerSelLoadFromPreferencesWithCompletionHandler = objc.RegisterName("loadFromPreferencesWithCompletionHandler:")
+	_clsNEFilterManager                                           = _objcClass("NEFilterManager")
+	_nEFilterManagerSelSharedManager                              = objc.RegisterName("sharedManager")
+	_nEFilterManagerSelLoadFromPreferencesWithCompletionHandler   = objc.RegisterName("loadFromPreferencesWithCompletionHandler:")
 	_nEFilterManagerSelRemoveFromPreferencesWithCompletionHandler = objc.RegisterName("removeFromPreferencesWithCompletionHandler:")
-	_nEFilterManagerSelSaveToPreferencesWithCompletionHandler = objc.RegisterName("saveToPreferencesWithCompletionHandler:")
-	_nEFilterManagerSelLocalizedDescription = objc.RegisterName("localizedDescription")
-	_nEFilterManagerSelSetLocalizedDescription = objc.RegisterName("setLocalizedDescription:")
-	_nEFilterManagerSelProviderConfiguration = objc.RegisterName("providerConfiguration")
-	_nEFilterManagerSelSetProviderConfiguration = objc.RegisterName("setProviderConfiguration:")
-	_nEFilterManagerSelIsEnabled = objc.RegisterName("isEnabled")
-	_nEFilterManagerSelSetEnabled = objc.RegisterName("setEnabled:")
-	_nEFilterManagerSelGrade = objc.RegisterName("grade")
-	_nEFilterManagerSelSetGrade = objc.RegisterName("setGrade:")
-	_nEFilterManagerSelDisableEncryptedDNSSettings = objc.RegisterName("disableEncryptedDNSSettings")
-	_nEFilterManagerSelSetDisableEncryptedDNSSettings = objc.RegisterName("setDisableEncryptedDNSSettings:")
+	_nEFilterManagerSelSaveToPreferencesWithCompletionHandler     = objc.RegisterName("saveToPreferencesWithCompletionHandler:")
+	_nEFilterManagerSelLocalizedDescription                       = objc.RegisterName("localizedDescription")
+	_nEFilterManagerSelSetLocalizedDescription                    = objc.RegisterName("setLocalizedDescription:")
+	_nEFilterManagerSelProviderConfiguration                      = objc.RegisterName("providerConfiguration")
+	_nEFilterManagerSelSetProviderConfiguration                   = objc.RegisterName("setProviderConfiguration:")
+	_nEFilterManagerSelIsEnabled                                  = objc.RegisterName("isEnabled")
+	_nEFilterManagerSelSetEnabled                                 = objc.RegisterName("setEnabled:")
+	_nEFilterManagerSelGrade                                      = objc.RegisterName("grade")
+	_nEFilterManagerSelSetGrade                                   = objc.RegisterName("setGrade:")
+	_nEFilterManagerSelDisableEncryptedDNSSettings                = objc.RegisterName("disableEncryptedDNSSettings")
+	_nEFilterManagerSelSetDisableEncryptedDNSSettings             = objc.RegisterName("setDisableEncryptedDNSSettings:")
 )
 
 func NEFilterManagerFromID(id objc.ID) *NEFilterManager {
@@ -48,7 +48,9 @@ func NEFilterManagerFromID(id objc.ID) *NEFilterManager {
 // @method sharedManager @return The singleton NEFilterManager object for the calling process.
 func NEFilterManagerSharedManager() *NEFilterManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNEFilterManager), _nEFilterManagerSelSharedManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEFilterManagerFromID(_ret)
 }
 
@@ -91,7 +93,9 @@ func (o *NEFilterManager) SaveToPreferencesWithCompletionHandler(completionHandl
 // @property localizedDescription @discussion A string containing a description of the filter.
 func (o *NEFilterManager) LocalizedDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFilterManagerSelLocalizedDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -102,7 +106,9 @@ func (o *NEFilterManager) SetLocalizedDescription(localizedDescription *foundati
 // @property providerConfiguration @discussion An NEFilterProviderConfiguration object containing the provider-specific portion of the filter configuration.
 func (o *NEFilterManager) ProviderConfiguration() *NEFilterProviderConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFilterManagerSelProviderConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEFilterProviderConfigurationFromID(_ret)
 }
 
@@ -139,4 +145,3 @@ func (o *NEFilterManager) DisableEncryptedDNSSettings() bool {
 func (o *NEFilterManager) SetDisableEncryptedDNSSettings(disableEncryptedDNSSettings bool) {
 	o.Ptr().Send(_nEFilterManagerSelSetDisableEncryptedDNSSettings, disableEncryptedDNSSettings)
 }
-

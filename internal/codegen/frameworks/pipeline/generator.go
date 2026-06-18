@@ -585,11 +585,7 @@ func writeFileHeaderRaw(buf *bytes.Buffer, packageName string, imports typemap.I
 }
 
 func writeGoFile(outDir, filename string, content []byte) error {
-	path := filepath.Join(outDir, filename)
-	if err := os.WriteFile(path, content, 0o600); err != nil {
-		return fmt.Errorf("write %s: %w", path, err)
-	}
-	return nil
+	return emit.WriteGoFile(filepath.Join(outDir, filename), content)
 }
 
 func cleanDir(dir string) error {

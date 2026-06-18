@@ -18,12 +18,12 @@ type CNScriptChanges struct {
 }
 
 var (
-	_clsCNScriptChanges = _objcClass("CNScriptChanges")
+	_clsCNScriptChanges                           = _objcClass("CNScriptChanges")
 	_cNScriptChangesSelInitWithDataRepresentation = objc.RegisterName("initWithDataRepresentation:")
-	_cNScriptChangesSelDataRepresentation = objc.RegisterName("dataRepresentation")
-	_cNScriptChangesSelFNumber = objc.RegisterName("fNumber")
-	_cNScriptChangesSelUserDecisions = objc.RegisterName("userDecisions")
-	_cNScriptChangesSelAddedDetectionTracks = objc.RegisterName("addedDetectionTracks")
+	_cNScriptChangesSelDataRepresentation         = objc.RegisterName("dataRepresentation")
+	_cNScriptChangesSelFNumber                    = objc.RegisterName("fNumber")
+	_cNScriptChangesSelUserDecisions              = objc.RegisterName("userDecisions")
+	_cNScriptChangesSelAddedDetectionTracks       = objc.RegisterName("addedDetectionTracks")
 )
 
 func CNScriptChangesFromID(id objc.ID) *CNScriptChanges {
@@ -39,14 +39,18 @@ func CNScriptChangesFromID(id objc.ID) *CNScriptChanges {
 // Create from previously saved data representation
 func (o *CNScriptChanges) InitWithDataRepresentation(dataRepresentation *foundation.NSData) *CNScriptChanges {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNScriptChangesSelInitWithDataRepresentation, dataRepresentation.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNScriptChangesFromID(_ret)
 }
 
 // Get persistent data representation of these changes for later restoration. The changes can only be used with the original cinematic asset from which the CNScript was created.
 func (o *CNScriptChanges) DataRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNScriptChangesSelDataRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -59,14 +63,17 @@ func (o *CNScriptChanges) FNumber() float32 {
 // All active user decisions, including those made at recording time, unless they have been removed.
 func (o *CNScriptChanges) UserDecisions() *foundation.NSArray[*CNDecision] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNScriptChangesSelUserDecisions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CNDecision](_ret)
 }
 
 // All detection tracks that have been added. Does not include those created at recording time.
 func (o *CNScriptChanges) AddedDetectionTracks() *foundation.NSArray[*CNDetectionTrack] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNScriptChangesSelAddedDetectionTracks)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CNDetectionTrack](_ret)
 }
-

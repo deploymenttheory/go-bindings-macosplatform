@@ -115,4 +115,3 @@ type CaptureOutputable interface {
 }
 
 var _ CaptureOutputable = (*CaptureOutput)(nil)
-

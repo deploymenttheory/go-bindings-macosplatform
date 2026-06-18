@@ -69,4 +69,3 @@ func VNNormalizedRectForImageRectUsingRegionOfInterest(imageRect corefoundation.
 func VNNormalizedRectIsIdentityRect(normalizedRect corefoundation.CGRect) bool {
 	return raw.VNNormalizedRectIsIdentityRect(normalizedRect)
 }
-

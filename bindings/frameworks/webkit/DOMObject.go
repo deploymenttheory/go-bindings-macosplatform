@@ -15,7 +15,7 @@ type DOMObject struct {
 }
 
 var (
-	_clsDOMObject = _objcClass("DOMObject")
+	_clsDOMObject      = _objcClass("DOMObject")
 	_dOMObjectSelSheet = objc.RegisterName("sheet")
 )
 
@@ -31,7 +31,8 @@ func DOMObjectFromID(id objc.ID) *DOMObject {
 
 func (o *DOMObject) Sheet() *DOMStyleSheet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMObjectSelSheet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMStyleSheetFromID(_ret)
 }
-

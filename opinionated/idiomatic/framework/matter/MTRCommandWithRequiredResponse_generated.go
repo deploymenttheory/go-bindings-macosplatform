@@ -104,4 +104,3 @@ type MTRCommandWithRequiredResponseable interface {
 }
 
 var _ MTRCommandWithRequiredResponseable = (*MTRCommandWithRequiredResponse)(nil)
-

@@ -67,4 +67,3 @@ type CIProfileable interface {
 }
 
 var _ CIProfileable = (*CIProfile)(nil)
-

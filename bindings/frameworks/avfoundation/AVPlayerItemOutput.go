@@ -18,11 +18,11 @@ type AVPlayerItemOutput struct {
 }
 
 var (
-	_clsAVPlayerItemOutput = _objcClass("AVPlayerItemOutput")
-	_aVPlayerItemOutputSelItemTimeForHostTime = objc.RegisterName("itemTimeForHostTime:")
-	_aVPlayerItemOutputSelItemTimeForMachAbsoluteTime = objc.RegisterName("itemTimeForMachAbsoluteTime:")
-	_aVPlayerItemOutputSelItemTimeForCVTimeStamp = objc.RegisterName("itemTimeForCVTimeStamp:")
-	_aVPlayerItemOutputSelSuppressesPlayerRendering = objc.RegisterName("suppressesPlayerRendering")
+	_clsAVPlayerItemOutput                             = _objcClass("AVPlayerItemOutput")
+	_aVPlayerItemOutputSelItemTimeForHostTime          = objc.RegisterName("itemTimeForHostTime:")
+	_aVPlayerItemOutputSelItemTimeForMachAbsoluteTime  = objc.RegisterName("itemTimeForMachAbsoluteTime:")
+	_aVPlayerItemOutputSelItemTimeForCVTimeStamp       = objc.RegisterName("itemTimeForCVTimeStamp:")
+	_aVPlayerItemOutputSelSuppressesPlayerRendering    = objc.RegisterName("suppressesPlayerRendering")
 	_aVPlayerItemOutputSelSetSuppressesPlayerRendering = objc.RegisterName("setSuppressesPlayerRendering:")
 )
 
@@ -59,4 +59,3 @@ func (o *AVPlayerItemOutput) SuppressesPlayerRendering() bool {
 func (o *AVPlayerItemOutput) SetSuppressesPlayerRendering(suppressesPlayerRendering bool) {
 	o.Ptr().Send(_aVPlayerItemOutputSelSetSuppressesPlayerRendering, suppressesPlayerRendering)
 }
-

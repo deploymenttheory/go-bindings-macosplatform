@@ -15,8 +15,8 @@ type INOutgoingMessageTypeResolutionResult struct {
 }
 
 var (
-	_clsINOutgoingMessageTypeResolutionResult = _objcClass("INOutgoingMessageTypeResolutionResult")
-	_iNOutgoingMessageTypeResolutionResultSelSuccessWithResolvedOutgoingMessageType = objc.RegisterName("successWithResolvedOutgoingMessageType:")
+	_clsINOutgoingMessageTypeResolutionResult                                                     = _objcClass("INOutgoingMessageTypeResolutionResult")
+	_iNOutgoingMessageTypeResolutionResultSelSuccessWithResolvedOutgoingMessageType               = objc.RegisterName("successWithResolvedOutgoingMessageType:")
 	_iNOutgoingMessageTypeResolutionResultSelConfirmationRequiredWithOutgoingMessageTypeToConfirm = objc.RegisterName("confirmationRequiredWithOutgoingMessageTypeToConfirm:")
 )
 
@@ -32,13 +32,16 @@ func INOutgoingMessageTypeResolutionResultFromID(id objc.ID) *INOutgoingMessageT
 
 func INOutgoingMessageTypeResolutionResultSuccessWithResolvedOutgoingMessageType(resolvedOutgoingMessageType INOutgoingMessageType) *INOutgoingMessageTypeResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINOutgoingMessageTypeResolutionResult), _iNOutgoingMessageTypeResolutionResultSelSuccessWithResolvedOutgoingMessageType, resolvedOutgoingMessageType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INOutgoingMessageTypeResolutionResultFromID(_ret)
 }
 
 func INOutgoingMessageTypeResolutionResultConfirmationRequiredWithOutgoingMessageTypeToConfirm(outgoingMessageTypeToConfirm INOutgoingMessageType) *INOutgoingMessageTypeResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINOutgoingMessageTypeResolutionResult), _iNOutgoingMessageTypeResolutionResultSelConfirmationRequiredWithOutgoingMessageTypeToConfirm, outgoingMessageTypeToConfirm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INOutgoingMessageTypeResolutionResultFromID(_ret)
 }
-

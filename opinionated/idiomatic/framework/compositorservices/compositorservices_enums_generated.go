@@ -12,9 +12,9 @@ import (
 type Cp_axis_direction_convention int64
 
 const (
-	Cp_axis_direction_convention_right_up_back Cp_axis_direction_convention = 0
-	Cp_axis_direction_convention_right_up_forward Cp_axis_direction_convention = 1
-	Cp_axis_direction_convention_right_down_back Cp_axis_direction_convention = 2
+	Cp_axis_direction_convention_right_up_back      Cp_axis_direction_convention = 0
+	Cp_axis_direction_convention_right_up_forward   Cp_axis_direction_convention = 1
+	Cp_axis_direction_convention_right_down_back    Cp_axis_direction_convention = 2
 	Cp_axis_direction_convention_right_down_forward Cp_axis_direction_convention = 3
 )
 
@@ -129,7 +129,7 @@ func (e Cp_layer_renderer_state) String() string {
 type Cp_supported_color_formats_options int64
 
 const (
-	Cp_supported_color_formats_options_none Cp_supported_color_formats_options = 0
+	Cp_supported_color_formats_options_none                          Cp_supported_color_formats_options = 0
 	Cp_supported_color_formats_options_progressive_immersion_enabled Cp_supported_color_formats_options = 1
 )
 
@@ -148,8 +148,8 @@ func (e Cp_supported_color_formats_options) String() string {
 type Cp_supported_layouts_options int64
 
 const (
-	Cp_supported_layouts_options_none Cp_supported_layouts_options = 0
-	Cp_supported_layouts_options_foveation_enabled Cp_supported_layouts_options = 1
+	Cp_supported_layouts_options_none                          Cp_supported_layouts_options = 0
+	Cp_supported_layouts_options_foveation_enabled             Cp_supported_layouts_options = 1
 	Cp_supported_layouts_options_progressive_immersion_enabled Cp_supported_layouts_options = 2
 )
 
@@ -166,4 +166,3 @@ func (e Cp_supported_layouts_options) String() string {
 	}
 	return strings.Join(parts, "|")
 }
-

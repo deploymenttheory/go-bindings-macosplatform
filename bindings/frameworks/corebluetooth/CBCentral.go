@@ -15,7 +15,7 @@ type CBCentral struct {
 }
 
 var (
-	_clsCBCentral = _objcClass("CBCentral")
+	_clsCBCentral                         = _objcClass("CBCentral")
 	_cBCentralSelMaximumUpdateValueLength = objc.RegisterName("maximumUpdateValueLength")
 )
 
@@ -33,4 +33,3 @@ func (o *CBCentral) MaximumUpdateValueLength() uint {
 	_ret := objc.Send[uint](o.Ptr(), _cBCentralSelMaximumUpdateValueLength)
 	return _ret
 }
-

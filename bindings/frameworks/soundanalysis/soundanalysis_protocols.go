@@ -15,4 +15,3 @@ type SNResult interface {
 type SNResultsObserving interface {
 	RequestDidProduceResult(request SNRequest, result SNResult)
 }
-

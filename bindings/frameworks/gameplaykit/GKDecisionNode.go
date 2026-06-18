@@ -16,10 +16,10 @@ type GKDecisionNode struct {
 }
 
 var (
-	_clsGKDecisionNode = _objcClass("GKDecisionNode")
-	_gKDecisionNodeSelCreateBranchWithValueAttribute = objc.RegisterName("createBranchWithValue:attribute:")
+	_clsGKDecisionNode                                   = _objcClass("GKDecisionNode")
+	_gKDecisionNodeSelCreateBranchWithValueAttribute     = objc.RegisterName("createBranchWithValue:attribute:")
 	_gKDecisionNodeSelCreateBranchWithPredicateAttribute = objc.RegisterName("createBranchWithPredicate:attribute:")
-	_gKDecisionNodeSelCreateBranchWithWeightAttribute = objc.RegisterName("createBranchWithWeight:attribute:")
+	_gKDecisionNodeSelCreateBranchWithWeightAttribute    = objc.RegisterName("createBranchWithWeight:attribute:")
 )
 
 func GKDecisionNodeFromID(id objc.ID) *GKDecisionNode {
@@ -35,21 +35,26 @@ func GKDecisionNodeFromID(id objc.ID) *GKDecisionNode {
 // Creates a numeric branch to a node containing the specified attribute @param value The value to create a branch with @param attribute The attribute of the created node @return The node lead to by the branch
 func (o *GKDecisionNode) CreateBranchWithValueAttribute(value *foundation.NSNumber, attribute foundation.NSObjectProtocol) *GKDecisionNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKDecisionNodeSelCreateBranchWithValueAttribute, value.Ptr(), attribute)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKDecisionNodeFromID(_ret)
 }
 
 // Creates a predicated branch to a node containing the specified attribute @param predicate The predicate to create a branch with @param attribute The attribute of the created node @return The node lead to by the branch
 func (o *GKDecisionNode) CreateBranchWithPredicateAttribute(predicate *foundation.NSPredicate, attribute foundation.NSObjectProtocol) *GKDecisionNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKDecisionNodeSelCreateBranchWithPredicateAttribute, predicate.Ptr(), attribute)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKDecisionNodeFromID(_ret)
 }
 
 // Creates a random branch to a node containing the specified attribute @param weight The weight to create a branch with (weighted for random selection) @param attribute The attribute of the created node @return The node lead to by the branch @see GKDecisionTree
 func (o *GKDecisionNode) CreateBranchWithWeightAttribute(weight int, attribute foundation.NSObjectProtocol) *GKDecisionNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKDecisionNodeSelCreateBranchWithWeightAttribute, weight, attribute)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKDecisionNodeFromID(_ret)
 }
-

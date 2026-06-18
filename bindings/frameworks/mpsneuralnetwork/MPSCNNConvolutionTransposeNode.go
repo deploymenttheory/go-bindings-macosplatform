@@ -17,7 +17,7 @@ type MPSCNNConvolutionTransposeNode struct {
 }
 
 var (
-	_clsMPSCNNConvolutionTransposeNode = _objcClass("MPSCNNConvolutionTransposeNode")
+	_clsMPSCNNConvolutionTransposeNode                                              = _objcClass("MPSCNNConvolutionTransposeNode")
 	_mPSCNNConvolutionTransposeNodeSelNodeWithSourceConvolutionGradientStateWeights = objc.RegisterName("nodeWithSource:convolutionGradientState:weights:")
 	_mPSCNNConvolutionTransposeNodeSelInitWithSourceConvolutionGradientStateWeights = objc.RegisterName("initWithSource:convolutionGradientState:weights:")
 )
@@ -35,14 +35,17 @@ func MPSCNNConvolutionTransposeNodeFromID(id objc.ID) *MPSCNNConvolutionTranspos
 // @abstract   Init an autoreleased not representing a MPSCNNConvolutionTransposeNode kernel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      convolutionGradientState        When the convolution transpose is used to 'undo' an earlier convolution in the graph, it is generally desired that the output image be the same size as the input image to the earlier convolution. You may optionally specify this size identity by passing in the MPSNNConvolutionGradientStateNode created by the convolution node here. @param      weights                 A pointer to a valid object conforming to the MPSCNNConvolutionDataSource protocol. This object is provided by you to encapsulate storage for convolution weights and biases. @return     A new MPSNNFilter node for a MPSCNNConvolutionTransposeNode kernel.
 func MPSCNNConvolutionTransposeNodeNodeWithSourceConvolutionGradientStateWeights(sourceNode *MPSNNImageNode, convolutionGradientState *MPSCNNConvolutionGradientStateNode, weights MPSCNNConvolutionDataSource) *MPSCNNConvolutionTransposeNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNConvolutionTransposeNode), _mPSCNNConvolutionTransposeNodeSelNodeWithSourceConvolutionGradientStateWeights, sourceNode.Ptr(), convolutionGradientState.Ptr(), weights)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNConvolutionTransposeNodeFromID(_ret)
 }
 
 // @abstract   Init a node representing a MPSCNNConvolutionTransposeNode kernel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      convolutionGradientState        When the convolution transpose is used to 'undo' an earlier convolution in the graph, it is generally desired that the output image be the same size as the input image to the earlier convolution. You may optionally specify this size identity by passing in the MPSCNNConvolutionGradientState node here. @param      weights                 A pointer to a valid object conforming to the MPSCNNConvolutionDataSource protocol. This object is provided by you to encapsulate storage for convolution weights and biases. @return     A new MPSNNFilter node for a MPSCNNConvolutionTransposeNode kernel.
 func (o *MPSCNNConvolutionTransposeNode) InitWithSourceConvolutionGradientStateWeights(sourceNode *MPSNNImageNode, convolutionGradientState *MPSCNNConvolutionGradientStateNode, weights MPSCNNConvolutionDataSource) *MPSCNNConvolutionTransposeNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionTransposeNodeSelInitWithSourceConvolutionGradientStateWeights, sourceNode.Ptr(), convolutionGradientState.Ptr(), weights)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNConvolutionTransposeNodeFromID(_ret)
 }
-

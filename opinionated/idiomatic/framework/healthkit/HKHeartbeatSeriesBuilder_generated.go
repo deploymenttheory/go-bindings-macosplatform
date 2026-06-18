@@ -76,7 +76,9 @@ func (x *HeartbeatSeriesBuilder) FinishSeriesWithCompletion(ctx context.Context)
 	}
 }
 
-func (x *HeartbeatSeriesBuilder) asSeriesBuilder() *raw.HKSeriesBuilder { return &x.inner.HKSeriesBuilder }
+func (x *HeartbeatSeriesBuilder) asSeriesBuilder() *raw.HKSeriesBuilder {
+	return &x.inner.HKSeriesBuilder
+}
 
 // HeartbeatSeriesBuilderable is the interface implemented by [HeartbeatSeriesBuilder], for mocking and DI.
 type HeartbeatSeriesBuilderable interface {
@@ -87,4 +89,3 @@ type HeartbeatSeriesBuilderable interface {
 }
 
 var _ HeartbeatSeriesBuilderable = (*HeartbeatSeriesBuilder)(nil)
-

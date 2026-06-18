@@ -15,7 +15,9 @@ type DiffableDataSourceSnapshot struct {
 }
 
 // Unwrap returns the underlying [raw.NSDiffableDataSourceSnapshot].
-func (x *DiffableDataSourceSnapshot) Unwrap() *raw.NSDiffableDataSourceSnapshot[objc.ID, objc.ID] { return x.inner }
+func (x *DiffableDataSourceSnapshot) Unwrap() *raw.NSDiffableDataSourceSnapshot[objc.ID, objc.ID] {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -41,4 +43,3 @@ type DiffableDataSourceSnapshotable interface {
 }
 
 var _ DiffableDataSourceSnapshotable = (*DiffableDataSourceSnapshot)(nil)
-

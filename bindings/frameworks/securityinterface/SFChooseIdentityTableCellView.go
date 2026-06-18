@@ -16,8 +16,8 @@ type SFChooseIdentityTableCellView struct {
 }
 
 var (
-	_clsSFChooseIdentityTableCellView = _objcClass("SFChooseIdentityTableCellView")
-	_sFChooseIdentityTableCellViewSelIssuerTextField = objc.RegisterName("issuerTextField")
+	_clsSFChooseIdentityTableCellView                   = _objcClass("SFChooseIdentityTableCellView")
+	_sFChooseIdentityTableCellViewSelIssuerTextField    = objc.RegisterName("issuerTextField")
 	_sFChooseIdentityTableCellViewSelSetIssuerTextField = objc.RegisterName("setIssuerTextField:")
 )
 
@@ -33,11 +33,12 @@ func SFChooseIdentityTableCellViewFromID(id objc.ID) *SFChooseIdentityTableCellV
 
 func (o *SFChooseIdentityTableCellView) IssuerTextField() *appkit.NSTextField {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFChooseIdentityTableCellViewSelIssuerTextField)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSTextFieldFromID(_ret)
 }
 
 func (o *SFChooseIdentityTableCellView) SetIssuerTextField(issuerTextField *appkit.NSTextField) {
 	o.Ptr().Send(_sFChooseIdentityTableCellViewSelSetIssuerTextField, issuerTextField.Ptr())
 }
-

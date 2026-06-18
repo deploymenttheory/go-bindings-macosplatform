@@ -650,4 +650,3 @@ func CVYCbCrMatrixGetIntegerCodePointForString(yCbCrMatrixString unsafe.Pointer)
 func CVYCbCrMatrixGetStringForIntegerCodePoint(yCbCrMatrixCodePoint int) unsafe.Pointer {
 	return raw.CVYCbCrMatrixGetStringForIntegerCodePoint(yCbCrMatrixCodePoint)
 }
-

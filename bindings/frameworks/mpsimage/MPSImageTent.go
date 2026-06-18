@@ -25,4 +25,3 @@ func MPSImageTentFromID(id objc.ID) *MPSImageTent {
 	purego.Track(o)
 	return o
 }
-

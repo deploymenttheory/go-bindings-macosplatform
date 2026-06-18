@@ -25,4 +25,3 @@ func MTRChannelClusterChannelInfoFromID(id objc.ID) *MTRChannelClusterChannelInf
 	purego.Track(o)
 	return o
 }
-

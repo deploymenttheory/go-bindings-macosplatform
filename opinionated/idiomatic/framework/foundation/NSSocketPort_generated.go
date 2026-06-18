@@ -122,4 +122,3 @@ type SocketPortable interface {
 }
 
 var _ SocketPortable = (*SocketPort)(nil)
-

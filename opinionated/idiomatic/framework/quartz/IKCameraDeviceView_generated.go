@@ -402,4 +402,3 @@ type IKCameraDeviceViewable interface {
 }
 
 var _ IKCameraDeviceViewable = (*IKCameraDeviceView)(nil)
-

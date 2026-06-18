@@ -16,9 +16,9 @@ type VZMacGraphicsDeviceConfiguration struct {
 }
 
 var (
-	_clsVZMacGraphicsDeviceConfiguration = _objcClass("VZMacGraphicsDeviceConfiguration")
-	_vZMacGraphicsDeviceConfigurationSelInit = objc.RegisterName("init")
-	_vZMacGraphicsDeviceConfigurationSelDisplays = objc.RegisterName("displays")
+	_clsVZMacGraphicsDeviceConfiguration            = _objcClass("VZMacGraphicsDeviceConfiguration")
+	_vZMacGraphicsDeviceConfigurationSelInit        = objc.RegisterName("init")
+	_vZMacGraphicsDeviceConfigurationSelDisplays    = objc.RegisterName("displays")
 	_vZMacGraphicsDeviceConfigurationSelSetDisplays = objc.RegisterName("setDisplays:")
 )
 
@@ -34,17 +34,20 @@ func VZMacGraphicsDeviceConfigurationFromID(id objc.ID) *VZMacGraphicsDeviceConf
 
 func (o *VZMacGraphicsDeviceConfiguration) Init() *VZMacGraphicsDeviceConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacGraphicsDeviceConfigurationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZMacGraphicsDeviceConfigurationFromID(_ret)
 }
 
 func (o *VZMacGraphicsDeviceConfiguration) Displays() *foundation.NSArray[*VZMacGraphicsDisplayConfiguration] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacGraphicsDeviceConfigurationSelDisplays)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VZMacGraphicsDisplayConfiguration](_ret)
 }
 
 func (o *VZMacGraphicsDeviceConfiguration) SetDisplays(displays *foundation.NSArray[*VZMacGraphicsDisplayConfiguration]) {
 	o.Ptr().Send(_vZMacGraphicsDeviceConfigurationSelSetDisplays, displays.Ptr())
 }
-

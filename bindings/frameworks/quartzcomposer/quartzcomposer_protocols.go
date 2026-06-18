@@ -69,4 +69,3 @@ type QCPlugInOutputImageProvider interface {
 	ImageBounds() corefoundation.CGRect
 	ImageColorSpace() unsafe.Pointer
 }
-

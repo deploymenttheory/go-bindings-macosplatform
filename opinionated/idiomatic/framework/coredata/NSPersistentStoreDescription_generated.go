@@ -251,4 +251,3 @@ type PersistentStoreDescriptionable interface {
 }
 
 var _ PersistentStoreDescriptionable = (*PersistentStoreDescription)(nil)
-

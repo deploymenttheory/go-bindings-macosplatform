@@ -17,10 +17,10 @@ type NSDataDetector struct {
 }
 
 var (
-	_clsNSDataDetector = _objcClass("NSDataDetector")
+	_clsNSDataDetector                           = _objcClass("NSDataDetector")
 	_nSDataDetectorSelDataDetectorWithTypesError = objc.RegisterName("dataDetectorWithTypes:error:")
-	_nSDataDetectorSelInitWithTypesError = objc.RegisterName("initWithTypes:error:")
-	_nSDataDetectorSelCheckingTypes = objc.RegisterName("checkingTypes")
+	_nSDataDetectorSelInitWithTypesError         = objc.RegisterName("initWithTypes:error:")
+	_nSDataDetectorSelCheckingTypes              = objc.RegisterName("checkingTypes")
 )
 
 func NSDataDetectorFromID(id objc.ID) *NSDataDetector {
@@ -36,7 +36,9 @@ func NSDataDetectorFromID(id objc.ID) *NSDataDetector {
 func NSDataDetectorDataDetectorWithTypesError(checkingTypes uint64) (*NSDataDetector, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDataDetector), _nSDataDetectorSelDataDetectorWithTypesError, checkingTypes, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -46,7 +48,9 @@ func NSDataDetectorDataDetectorWithTypesError(checkingTypes uint64) (*NSDataDete
 func (o *NSDataDetector) InitWithTypesError(checkingTypes uint64) (*NSDataDetector, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataDetectorSelInitWithTypesError, checkingTypes, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -57,4 +61,3 @@ func (o *NSDataDetector) CheckingTypes() uint64 {
 	_ret := objc.Send[uint64](o.Ptr(), _nSDataDetectorSelCheckingTypes)
 	return _ret
 }
-

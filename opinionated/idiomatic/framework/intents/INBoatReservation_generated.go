@@ -65,4 +65,3 @@ type BoatReservationable interface {
 }
 
 var _ BoatReservationable = (*BoatReservation)(nil)
-

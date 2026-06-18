@@ -16,11 +16,11 @@ type ASAuthorizationSecurityKeyPublicKeyCredentialProvider struct {
 }
 
 var (
-	_clsASAuthorizationSecurityKeyPublicKeyCredentialProvider = _objcClass("ASAuthorizationSecurityKeyPublicKeyCredentialProvider")
-	_aSAuthorizationSecurityKeyPublicKeyCredentialProviderSelInitWithRelyingPartyIdentifier = objc.RegisterName("initWithRelyingPartyIdentifier:")
+	_clsASAuthorizationSecurityKeyPublicKeyCredentialProvider                                                                      = _objcClass("ASAuthorizationSecurityKeyPublicKeyCredentialProvider")
+	_aSAuthorizationSecurityKeyPublicKeyCredentialProviderSelInitWithRelyingPartyIdentifier                                        = objc.RegisterName("initWithRelyingPartyIdentifier:")
 	_aSAuthorizationSecurityKeyPublicKeyCredentialProviderSelCreateCredentialRegistrationRequestWithChallengeDisplayNameNameUserID = objc.RegisterName("createCredentialRegistrationRequestWithChallenge:displayName:name:userID:")
-	_aSAuthorizationSecurityKeyPublicKeyCredentialProviderSelCreateCredentialAssertionRequestWithChallenge = objc.RegisterName("createCredentialAssertionRequestWithChallenge:")
-	_aSAuthorizationSecurityKeyPublicKeyCredentialProviderSelRelyingPartyIdentifier = objc.RegisterName("relyingPartyIdentifier")
+	_aSAuthorizationSecurityKeyPublicKeyCredentialProviderSelCreateCredentialAssertionRequestWithChallenge                         = objc.RegisterName("createCredentialAssertionRequestWithChallenge:")
+	_aSAuthorizationSecurityKeyPublicKeyCredentialProviderSelRelyingPartyIdentifier                                                = objc.RegisterName("relyingPartyIdentifier")
 )
 
 func ASAuthorizationSecurityKeyPublicKeyCredentialProviderFromID(id objc.ID) *ASAuthorizationSecurityKeyPublicKeyCredentialProvider {
@@ -35,28 +35,35 @@ func ASAuthorizationSecurityKeyPublicKeyCredentialProviderFromID(id objc.ID) *AS
 
 func (o *ASAuthorizationSecurityKeyPublicKeyCredentialProvider) InitWithRelyingPartyIdentifier(relyingPartyIdentifier *foundation.NSString) *ASAuthorizationSecurityKeyPublicKeyCredentialProvider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationSecurityKeyPublicKeyCredentialProviderSelInitWithRelyingPartyIdentifier, relyingPartyIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationSecurityKeyPublicKeyCredentialProviderFromID(_ret)
 }
 
 // @abstract Create a request to register a new security key credential. @param challenge The challenge to sign. @param displayName The display name for the new credential. @param name The name for the new credential. @param userID An identifier to be stored alongside the credential, which will be returned with the credential when it is used to authenticate.
 func (o *ASAuthorizationSecurityKeyPublicKeyCredentialProvider) CreateCredentialRegistrationRequestWithChallengeDisplayNameNameUserID(challenge *foundation.NSData, displayName *foundation.NSString, name *foundation.NSString, userID *foundation.NSData) *ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationSecurityKeyPublicKeyCredentialProviderSelCreateCredentialRegistrationRequestWithChallengeDisplayNameNameUserID, challenge.Ptr(), displayName.Ptr(), name.Ptr(), userID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestFromID(_ret)
 }
 
 // @abstract Create a request to authenticate using an existing credential. @param challenge The challenge to sign.
 func (o *ASAuthorizationSecurityKeyPublicKeyCredentialProvider) CreateCredentialAssertionRequestWithChallenge(challenge *foundation.NSData) *ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationSecurityKeyPublicKeyCredentialProviderSelCreateCredentialAssertionRequestWithChallenge, challenge.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequestFromID(_ret)
 }
 
 // @abstract The Relying Party identifier used for all requests created by this object.
 func (o *ASAuthorizationSecurityKeyPublicKeyCredentialProvider) RelyingPartyIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationSecurityKeyPublicKeyCredentialProviderSelRelyingPartyIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

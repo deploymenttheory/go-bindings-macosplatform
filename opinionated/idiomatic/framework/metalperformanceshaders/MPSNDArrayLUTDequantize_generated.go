@@ -58,11 +58,17 @@ func (x *NDArrayLUTDequantize) WithLabel(label string) *NDArrayLUTDequantize {
 	return x
 }
 
-func (x *NDArrayLUTDequantize) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel { return &x.inner.MPSNDArrayMultiaryKernel }
+func (x *NDArrayLUTDequantize) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel {
+	return &x.inner.MPSNDArrayMultiaryKernel
+}
 
-func (x *NDArrayLUTDequantize) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
+func (x *NDArrayLUTDequantize) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase {
+	return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase
+}
 
-func (x *NDArrayLUTDequantize) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel }
+func (x *NDArrayLUTDequantize) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel
+}
 
 // NDArrayLUTDequantizeable is the interface implemented by [NDArrayLUTDequantize], for mocking and DI.
 type NDArrayLUTDequantizeable interface {
@@ -73,4 +79,3 @@ type NDArrayLUTDequantizeable interface {
 }
 
 var _ NDArrayLUTDequantizeable = (*NDArrayLUTDequantize)(nil)
-

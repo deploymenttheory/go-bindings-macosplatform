@@ -812,4 +812,3 @@ type ButtonCellable interface {
 }
 
 var _ ButtonCellable = (*ButtonCell)(nil)
-

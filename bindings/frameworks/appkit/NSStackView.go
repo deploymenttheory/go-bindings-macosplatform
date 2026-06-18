@@ -16,43 +16,43 @@ type NSStackView struct {
 }
 
 var (
-	_clsNSStackView = _objcClass("NSStackView")
-	_nSStackViewSelStackViewWithViews = objc.RegisterName("stackViewWithViews:")
-	_nSStackViewSelSetCustomSpacingAfterView = objc.RegisterName("setCustomSpacing:afterView:")
-	_nSStackViewSelCustomSpacingAfterView = objc.RegisterName("customSpacingAfterView:")
-	_nSStackViewSelAddArrangedSubview = objc.RegisterName("addArrangedSubview:")
-	_nSStackViewSelInsertArrangedSubviewAtIndex = objc.RegisterName("insertArrangedSubview:atIndex:")
-	_nSStackViewSelRemoveArrangedSubview = objc.RegisterName("removeArrangedSubview:")
-	_nSStackViewSelSetVisibilityPriorityForView = objc.RegisterName("setVisibilityPriority:forView:")
-	_nSStackViewSelVisibilityPriorityForView = objc.RegisterName("visibilityPriorityForView:")
-	_nSStackViewSelClippingResistancePriorityForOrientation = objc.RegisterName("clippingResistancePriorityForOrientation:")
+	_clsNSStackView                                            = _objcClass("NSStackView")
+	_nSStackViewSelStackViewWithViews                          = objc.RegisterName("stackViewWithViews:")
+	_nSStackViewSelSetCustomSpacingAfterView                   = objc.RegisterName("setCustomSpacing:afterView:")
+	_nSStackViewSelCustomSpacingAfterView                      = objc.RegisterName("customSpacingAfterView:")
+	_nSStackViewSelAddArrangedSubview                          = objc.RegisterName("addArrangedSubview:")
+	_nSStackViewSelInsertArrangedSubviewAtIndex                = objc.RegisterName("insertArrangedSubview:atIndex:")
+	_nSStackViewSelRemoveArrangedSubview                       = objc.RegisterName("removeArrangedSubview:")
+	_nSStackViewSelSetVisibilityPriorityForView                = objc.RegisterName("setVisibilityPriority:forView:")
+	_nSStackViewSelVisibilityPriorityForView                   = objc.RegisterName("visibilityPriorityForView:")
+	_nSStackViewSelClippingResistancePriorityForOrientation    = objc.RegisterName("clippingResistancePriorityForOrientation:")
 	_nSStackViewSelSetClippingResistancePriorityForOrientation = objc.RegisterName("setClippingResistancePriority:forOrientation:")
-	_nSStackViewSelHuggingPriorityForOrientation = objc.RegisterName("huggingPriorityForOrientation:")
-	_nSStackViewSelSetHuggingPriorityForOrientation = objc.RegisterName("setHuggingPriority:forOrientation:")
-	_nSStackViewSelDelegate = objc.RegisterName("delegate")
-	_nSStackViewSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSStackViewSelOrientation = objc.RegisterName("orientation")
-	_nSStackViewSelSetOrientation = objc.RegisterName("setOrientation:")
-	_nSStackViewSelAlignment = objc.RegisterName("alignment")
-	_nSStackViewSelSetAlignment = objc.RegisterName("setAlignment:")
-	_nSStackViewSelEdgeInsets = objc.RegisterName("edgeInsets")
-	_nSStackViewSelSetEdgeInsets = objc.RegisterName("setEdgeInsets:")
-	_nSStackViewSelDistribution = objc.RegisterName("distribution")
-	_nSStackViewSelSetDistribution = objc.RegisterName("setDistribution:")
-	_nSStackViewSelSpacing = objc.RegisterName("spacing")
-	_nSStackViewSelSetSpacing = objc.RegisterName("setSpacing:")
-	_nSStackViewSelDetachesHiddenViews = objc.RegisterName("detachesHiddenViews")
-	_nSStackViewSelSetDetachesHiddenViews = objc.RegisterName("setDetachesHiddenViews:")
-	_nSStackViewSelArrangedSubviews = objc.RegisterName("arrangedSubviews")
-	_nSStackViewSelDetachedViews = objc.RegisterName("detachedViews")
-	_nSStackViewSelAddViewInGravity = objc.RegisterName("addView:inGravity:")
-	_nSStackViewSelInsertViewAtIndexInGravity = objc.RegisterName("insertView:atIndex:inGravity:")
-	_nSStackViewSelRemoveView = objc.RegisterName("removeView:")
-	_nSStackViewSelViewsInGravity = objc.RegisterName("viewsInGravity:")
-	_nSStackViewSelSetViewsInGravity = objc.RegisterName("setViews:inGravity:")
-	_nSStackViewSelViews = objc.RegisterName("views")
-	_nSStackViewSelHasEqualSpacing = objc.RegisterName("hasEqualSpacing")
-	_nSStackViewSelSetHasEqualSpacing = objc.RegisterName("setHasEqualSpacing:")
+	_nSStackViewSelHuggingPriorityForOrientation               = objc.RegisterName("huggingPriorityForOrientation:")
+	_nSStackViewSelSetHuggingPriorityForOrientation            = objc.RegisterName("setHuggingPriority:forOrientation:")
+	_nSStackViewSelDelegate                                    = objc.RegisterName("delegate")
+	_nSStackViewSelSetDelegate                                 = objc.RegisterName("setDelegate:")
+	_nSStackViewSelOrientation                                 = objc.RegisterName("orientation")
+	_nSStackViewSelSetOrientation                              = objc.RegisterName("setOrientation:")
+	_nSStackViewSelAlignment                                   = objc.RegisterName("alignment")
+	_nSStackViewSelSetAlignment                                = objc.RegisterName("setAlignment:")
+	_nSStackViewSelEdgeInsets                                  = objc.RegisterName("edgeInsets")
+	_nSStackViewSelSetEdgeInsets                               = objc.RegisterName("setEdgeInsets:")
+	_nSStackViewSelDistribution                                = objc.RegisterName("distribution")
+	_nSStackViewSelSetDistribution                             = objc.RegisterName("setDistribution:")
+	_nSStackViewSelSpacing                                     = objc.RegisterName("spacing")
+	_nSStackViewSelSetSpacing                                  = objc.RegisterName("setSpacing:")
+	_nSStackViewSelDetachesHiddenViews                         = objc.RegisterName("detachesHiddenViews")
+	_nSStackViewSelSetDetachesHiddenViews                      = objc.RegisterName("setDetachesHiddenViews:")
+	_nSStackViewSelArrangedSubviews                            = objc.RegisterName("arrangedSubviews")
+	_nSStackViewSelDetachedViews                               = objc.RegisterName("detachedViews")
+	_nSStackViewSelAddViewInGravity                            = objc.RegisterName("addView:inGravity:")
+	_nSStackViewSelInsertViewAtIndexInGravity                  = objc.RegisterName("insertView:atIndex:inGravity:")
+	_nSStackViewSelRemoveView                                  = objc.RegisterName("removeView:")
+	_nSStackViewSelViewsInGravity                              = objc.RegisterName("viewsInGravity:")
+	_nSStackViewSelSetViewsInGravity                           = objc.RegisterName("setViews:inGravity:")
+	_nSStackViewSelViews                                       = objc.RegisterName("views")
+	_nSStackViewSelHasEqualSpacing                             = objc.RegisterName("hasEqualSpacing")
+	_nSStackViewSelSetHasEqualSpacing                          = objc.RegisterName("setHasEqualSpacing:")
 )
 
 func NSStackViewFromID(id objc.ID) *NSStackView {
@@ -67,7 +67,9 @@ func NSStackViewFromID(id objc.ID) *NSStackView {
 
 func NSStackViewStackViewWithViews(views *foundation.NSArray[*NSView]) *NSStackView {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSStackView), _nSStackViewSelStackViewWithViews, views.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStackViewFromID(_ret)
 }
 
@@ -200,14 +202,18 @@ func (o *NSStackView) SetDetachesHiddenViews(detachesHiddenViews bool) {
 // The list of views that are arranged in a stack by the receiver. They are a subset of \c -subviews, with potential difference in ordering.
 func (o *NSStackView) ArrangedSubviews() *foundation.NSArray[*NSView] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStackViewSelArrangedSubviews)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSView](_ret)
 }
 
 // The arrangedSubviews that are currently detached/hidden.
 func (o *NSStackView) DetachedViews() *foundation.NSArray[*NSView] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStackViewSelDetachedViews)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSView](_ret)
 }
 
@@ -225,7 +231,9 @@ func (o *NSStackView) RemoveView(view *NSView) {
 
 func (o *NSStackView) ViewsInGravity(gravity NSStackViewGravity) *foundation.NSArray[*NSView] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStackViewSelViewsInGravity, gravity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSView](_ret)
 }
 
@@ -235,7 +243,9 @@ func (o *NSStackView) SetViewsInGravity(views *foundation.NSArray[*NSView], grav
 
 func (o *NSStackView) Views() *foundation.NSArray[*NSView] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStackViewSelViews)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSView](_ret)
 }
 
@@ -249,4 +259,3 @@ func (o *NSStackView) HasEqualSpacing() bool {
 func (o *NSStackView) SetHasEqualSpacing(hasEqualSpacing bool) {
 	o.Ptr().Send(_nSStackViewSelSetHasEqualSpacing, hasEqualSpacing)
 }
-

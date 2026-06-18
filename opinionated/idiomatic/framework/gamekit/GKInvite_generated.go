@@ -80,4 +80,3 @@ type Inviteable interface {
 }
 
 var _ Inviteable = (*Invite)(nil)
-

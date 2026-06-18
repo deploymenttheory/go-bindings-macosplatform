@@ -16,18 +16,18 @@ type CKOperationConfiguration struct {
 }
 
 var (
-	_clsCKOperationConfiguration = _objcClass("CKOperationConfiguration")
-	_cKOperationConfigurationSelContainer = objc.RegisterName("container")
-	_cKOperationConfigurationSelSetContainer = objc.RegisterName("setContainer:")
-	_cKOperationConfigurationSelQualityOfService = objc.RegisterName("qualityOfService")
-	_cKOperationConfigurationSelSetQualityOfService = objc.RegisterName("setQualityOfService:")
-	_cKOperationConfigurationSelAllowsCellularAccess = objc.RegisterName("allowsCellularAccess")
-	_cKOperationConfigurationSelSetAllowsCellularAccess = objc.RegisterName("setAllowsCellularAccess:")
-	_cKOperationConfigurationSelIsLongLived = objc.RegisterName("isLongLived")
-	_cKOperationConfigurationSelSetLongLived = objc.RegisterName("setLongLived:")
-	_cKOperationConfigurationSelTimeoutIntervalForRequest = objc.RegisterName("timeoutIntervalForRequest")
-	_cKOperationConfigurationSelSetTimeoutIntervalForRequest = objc.RegisterName("setTimeoutIntervalForRequest:")
-	_cKOperationConfigurationSelTimeoutIntervalForResource = objc.RegisterName("timeoutIntervalForResource")
+	_clsCKOperationConfiguration                              = _objcClass("CKOperationConfiguration")
+	_cKOperationConfigurationSelContainer                     = objc.RegisterName("container")
+	_cKOperationConfigurationSelSetContainer                  = objc.RegisterName("setContainer:")
+	_cKOperationConfigurationSelQualityOfService              = objc.RegisterName("qualityOfService")
+	_cKOperationConfigurationSelSetQualityOfService           = objc.RegisterName("setQualityOfService:")
+	_cKOperationConfigurationSelAllowsCellularAccess          = objc.RegisterName("allowsCellularAccess")
+	_cKOperationConfigurationSelSetAllowsCellularAccess       = objc.RegisterName("setAllowsCellularAccess:")
+	_cKOperationConfigurationSelIsLongLived                   = objc.RegisterName("isLongLived")
+	_cKOperationConfigurationSelSetLongLived                  = objc.RegisterName("setLongLived:")
+	_cKOperationConfigurationSelTimeoutIntervalForRequest     = objc.RegisterName("timeoutIntervalForRequest")
+	_cKOperationConfigurationSelSetTimeoutIntervalForRequest  = objc.RegisterName("setTimeoutIntervalForRequest:")
+	_cKOperationConfigurationSelTimeoutIntervalForResource    = objc.RegisterName("timeoutIntervalForResource")
 	_cKOperationConfigurationSelSetTimeoutIntervalForResource = objc.RegisterName("setTimeoutIntervalForResource:")
 )
 
@@ -41,10 +41,12 @@ func CKOperationConfigurationFromID(id objc.ID) *CKOperationConfiguration {
 	return o
 }
 
-// The configuration's container. If you don't provide a container, CloudKit uses the default container that ``CKContainer`` provides.
+// The configuration's container. If you don't provide a container, CloudKit uses the default container that “CKContainer“ provides.
 func (o *CKOperationConfiguration) Container() *CKContainer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKOperationConfigurationSelContainer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKContainerFromID(_ret)
 }
 
@@ -101,4 +103,3 @@ func (o *CKOperationConfiguration) TimeoutIntervalForResource() float64 {
 func (o *CKOperationConfiguration) SetTimeoutIntervalForResource(timeoutIntervalForResource float64) {
 	o.Ptr().Send(_cKOperationConfigurationSelSetTimeoutIntervalForResource, timeoutIntervalForResource)
 }
-

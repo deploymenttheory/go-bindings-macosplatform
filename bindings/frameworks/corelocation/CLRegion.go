@@ -18,16 +18,16 @@ type CLRegion struct {
 }
 
 var (
-	_clsCLRegion = _objcClass("CLRegion")
+	_clsCLRegion                                             = _objcClass("CLRegion")
 	_cLRegionSelInitCircularRegionWithCenterRadiusIdentifier = objc.RegisterName("initCircularRegionWithCenter:radius:identifier:")
-	_cLRegionSelContainsCoordinate = objc.RegisterName("containsCoordinate:")
-	_cLRegionSelCenter = objc.RegisterName("center")
-	_cLRegionSelRadius = objc.RegisterName("radius")
-	_cLRegionSelIdentifier = objc.RegisterName("identifier")
-	_cLRegionSelNotifyOnEntry = objc.RegisterName("notifyOnEntry")
-	_cLRegionSelSetNotifyOnEntry = objc.RegisterName("setNotifyOnEntry:")
-	_cLRegionSelNotifyOnExit = objc.RegisterName("notifyOnExit")
-	_cLRegionSelSetNotifyOnExit = objc.RegisterName("setNotifyOnExit:")
+	_cLRegionSelContainsCoordinate                           = objc.RegisterName("containsCoordinate:")
+	_cLRegionSelCenter                                       = objc.RegisterName("center")
+	_cLRegionSelRadius                                       = objc.RegisterName("radius")
+	_cLRegionSelIdentifier                                   = objc.RegisterName("identifier")
+	_cLRegionSelNotifyOnEntry                                = objc.RegisterName("notifyOnEntry")
+	_cLRegionSelSetNotifyOnEntry                             = objc.RegisterName("setNotifyOnEntry:")
+	_cLRegionSelNotifyOnExit                                 = objc.RegisterName("notifyOnExit")
+	_cLRegionSelSetNotifyOnExit                              = objc.RegisterName("setNotifyOnExit:")
 )
 
 func CLRegionFromID(id objc.ID) *CLRegion {
@@ -43,7 +43,9 @@ func CLRegionFromID(id objc.ID) *CLRegion {
 // Deprecated: Please see CLCircularRegion
 func (o *CLRegion) InitCircularRegionWithCenterRadiusIdentifier(center unsafe.Pointer, radius unsafe.Pointer, identifier *foundation.NSString) *CLRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLRegionSelInitCircularRegionWithCenterRadiusIdentifier, center, radius, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLRegionFromID(_ret)
 }
 
@@ -67,7 +69,9 @@ func (o *CLRegion) Radius() unsafe.Pointer {
 
 func (o *CLRegion) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLRegionSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -88,4 +92,3 @@ func (o *CLRegion) NotifyOnExit() bool {
 func (o *CLRegion) SetNotifyOnExit(notifyOnExit bool) {
 	o.Ptr().Send(_cLRegionSelSetNotifyOnExit, notifyOnExit)
 }
-

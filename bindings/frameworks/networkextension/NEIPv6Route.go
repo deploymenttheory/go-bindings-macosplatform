@@ -18,13 +18,13 @@ type NEIPv6Route struct {
 }
 
 var (
-	_clsNEIPv6Route = _objcClass("NEIPv6Route")
+	_clsNEIPv6Route                                              = _objcClass("NEIPv6Route")
 	_nEIPv6RouteSelInitWithDestinationAddressNetworkPrefixLength = objc.RegisterName("initWithDestinationAddress:networkPrefixLength:")
-	_nEIPv6RouteSelDefaultRoute = objc.RegisterName("defaultRoute")
-	_nEIPv6RouteSelDestinationAddress = objc.RegisterName("destinationAddress")
-	_nEIPv6RouteSelDestinationNetworkPrefixLength = objc.RegisterName("destinationNetworkPrefixLength")
-	_nEIPv6RouteSelGatewayAddress = objc.RegisterName("gatewayAddress")
-	_nEIPv6RouteSelSetGatewayAddress = objc.RegisterName("setGatewayAddress:")
+	_nEIPv6RouteSelDefaultRoute                                  = objc.RegisterName("defaultRoute")
+	_nEIPv6RouteSelDestinationAddress                            = objc.RegisterName("destinationAddress")
+	_nEIPv6RouteSelDestinationNetworkPrefixLength                = objc.RegisterName("destinationNetworkPrefixLength")
+	_nEIPv6RouteSelGatewayAddress                                = objc.RegisterName("gatewayAddress")
+	_nEIPv6RouteSelSetGatewayAddress                             = objc.RegisterName("setGatewayAddress:")
 )
 
 func NEIPv6RouteFromID(id objc.ID) *NEIPv6Route {
@@ -40,7 +40,9 @@ func NEIPv6RouteFromID(id objc.ID) *NEIPv6Route {
 // @method initWithDestinationAddress:networkPrefixLength: @discussion Initialize a newly-allocated NEIPv6Route. @param address The IPv6 address of the destination network. @param networkPrefixLength A number containing the length in bits of the network prefix of the destination network. @return The initialized NEIPv6Route.
 func (o *NEIPv6Route) InitWithDestinationAddressNetworkPrefixLength(address *foundation.NSString, networkPrefixLength *foundation.NSNumber) *NEIPv6Route {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEIPv6RouteSelInitWithDestinationAddressNetworkPrefixLength, address.Ptr(), networkPrefixLength.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEIPv6RouteFromID(_ret)
 }
 
@@ -53,25 +55,30 @@ func NEIPv6RouteDefaultRoute() unsafe.Pointer {
 // @property destinationAddress @discussion An IPv6 address represented as a string.
 func (o *NEIPv6Route) DestinationAddress() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEIPv6RouteSelDestinationAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property destinationNetworkPrefixLength @discussion A number containing the length in bits of the network prefix of the destination network. This prefix in combination with the destinationAddress property is used to determine the destination network of the route.
 func (o *NEIPv6Route) DestinationNetworkPrefixLength() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEIPv6RouteSelDestinationNetworkPrefixLength)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // @property gatewayAddress @discussion The IPv6 address of the route's gateway. If this property is nil then the route's gateway will be set to the tunnel's virtual interface.
 func (o *NEIPv6Route) GatewayAddress() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEIPv6RouteSelGatewayAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NEIPv6Route) SetGatewayAddress(gatewayAddress *foundation.NSString) {
 	o.Ptr().Send(_nEIPv6RouteSelSetGatewayAddress, gatewayAddress.Ptr())
 }
-

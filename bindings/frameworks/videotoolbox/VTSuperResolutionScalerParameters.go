@@ -16,14 +16,14 @@ type VTSuperResolutionScalerParameters struct {
 }
 
 var (
-	_clsVTSuperResolutionScalerParameters = _objcClass("VTSuperResolutionScalerParameters")
+	_clsVTSuperResolutionScalerParameters                                                                                             = _objcClass("VTSuperResolutionScalerParameters")
 	_vTSuperResolutionScalerParametersSelInitWithSourceFramePreviousFramePreviousOutputFrameOpticalFlowSubmissionModeDestinationFrame = objc.RegisterName("initWithSourceFrame:previousFrame:previousOutputFrame:opticalFlow:submissionMode:destinationFrame:")
-	_vTSuperResolutionScalerParametersSelSourceFrame = objc.RegisterName("sourceFrame")
-	_vTSuperResolutionScalerParametersSelPreviousFrame = objc.RegisterName("previousFrame")
-	_vTSuperResolutionScalerParametersSelPreviousOutputFrame = objc.RegisterName("previousOutputFrame")
-	_vTSuperResolutionScalerParametersSelOpticalFlow = objc.RegisterName("opticalFlow")
-	_vTSuperResolutionScalerParametersSelSubmissionMode = objc.RegisterName("submissionMode")
-	_vTSuperResolutionScalerParametersSelDestinationFrame = objc.RegisterName("destinationFrame")
+	_vTSuperResolutionScalerParametersSelSourceFrame                                                                                  = objc.RegisterName("sourceFrame")
+	_vTSuperResolutionScalerParametersSelPreviousFrame                                                                                = objc.RegisterName("previousFrame")
+	_vTSuperResolutionScalerParametersSelPreviousOutputFrame                                                                          = objc.RegisterName("previousOutputFrame")
+	_vTSuperResolutionScalerParametersSelOpticalFlow                                                                                  = objc.RegisterName("opticalFlow")
+	_vTSuperResolutionScalerParametersSelSubmissionMode                                                                               = objc.RegisterName("submissionMode")
+	_vTSuperResolutionScalerParametersSelDestinationFrame                                                                             = objc.RegisterName("destinationFrame")
 )
 
 func VTSuperResolutionScalerParametersFromID(id objc.ID) *VTSuperResolutionScalerParameters {
@@ -36,38 +36,48 @@ func VTSuperResolutionScalerParametersFromID(id objc.ID) *VTSuperResolutionScale
 	return o
 }
 
-// Creates a new super-resolution scaler parameters instance. Returns `nil` if `sourceFrame` or `destinationFrame` is `nil`, or if `sourceFrame` and reference frames have different pixel formats. - Parameters: - sourceFrame: Current source frame; must be non `nil`. - previousFrame: The previous source frame in presentation time order. For the first frame you can set this to `nil`. - previousOutputFrame: The previous output frame in presentation time order. For the first frame you can set this to `nil`. - opticalFlow: Optional `VTFrameProcessorOpticalFlow` object that contains forward and backward optical flow between the `sourceFrame` and `previousFrame`. You only need this if optical flow is pre-computed. - submissionMode: Provides a hint to let the processor know whether you are submitting frames in presentation sequence. For more information about supported modes see ``VTSuperResolutionScalerParametersSubmissionMode``. - destinationFrame: User-allocated pixel buffer that receives the results.
+// Creates a new super-resolution scaler parameters instance. Returns `nil` if `sourceFrame` or `destinationFrame` is `nil`, or if `sourceFrame` and reference frames have different pixel formats. - Parameters: - sourceFrame: Current source frame; must be non `nil`. - previousFrame: The previous source frame in presentation time order. For the first frame you can set this to `nil`. - previousOutputFrame: The previous output frame in presentation time order. For the first frame you can set this to `nil`. - opticalFlow: Optional `VTFrameProcessorOpticalFlow` object that contains forward and backward optical flow between the `sourceFrame` and `previousFrame`. You only need this if optical flow is pre-computed. - submissionMode: Provides a hint to let the processor know whether you are submitting frames in presentation sequence. For more information about supported modes see “VTSuperResolutionScalerParametersSubmissionMode“. - destinationFrame: User-allocated pixel buffer that receives the results.
 func (o *VTSuperResolutionScalerParameters) InitWithSourceFramePreviousFramePreviousOutputFrameOpticalFlowSubmissionModeDestinationFrame(sourceFrame *VTFrameProcessorFrame, previousFrame *VTFrameProcessorFrame, previousOutputFrame *VTFrameProcessorFrame, opticalFlow *VTFrameProcessorOpticalFlow, submissionMode VTSuperResolutionScalerParametersSubmissionMode, destinationFrame *VTFrameProcessorFrame) *VTSuperResolutionScalerParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTSuperResolutionScalerParametersSelInitWithSourceFramePreviousFramePreviousOutputFrameOpticalFlowSubmissionModeDestinationFrame, sourceFrame.Ptr(), previousFrame.Ptr(), previousOutputFrame.Ptr(), opticalFlow.Ptr(), submissionMode, destinationFrame.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VTSuperResolutionScalerParametersFromID(_ret)
 }
 
 // Current source frame, which must be non `nil`.
 func (o *VTSuperResolutionScalerParameters) SourceFrame() *VTFrameProcessorFrame {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTSuperResolutionScalerParametersSelSourceFrame)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VTFrameProcessorFrameFromID(_ret)
 }
 
 // Previous source frame in presentation time order, which is `nil` for the first frame.
 func (o *VTSuperResolutionScalerParameters) PreviousFrame() *VTFrameProcessorFrame {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTSuperResolutionScalerParametersSelPreviousFrame)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VTFrameProcessorFrameFromID(_ret)
 }
 
 // Previous output frame in presentation time order, which is `nil` for the first frame.
 func (o *VTSuperResolutionScalerParameters) PreviousOutputFrame() *VTFrameProcessorFrame {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTSuperResolutionScalerParametersSelPreviousOutputFrame)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VTFrameProcessorFrameFromID(_ret)
 }
 
 // Optional object that contains forward and backward optical flow with the previous frame. You only need this if optical flow is pre-computed. For the first frame this is `nil`.
 func (o *VTSuperResolutionScalerParameters) OpticalFlow() *VTFrameProcessorOpticalFlow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTSuperResolutionScalerParametersSelOpticalFlow)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VTFrameProcessorOpticalFlowFromID(_ret)
 }
 
@@ -80,7 +90,8 @@ func (o *VTSuperResolutionScalerParameters) SubmissionMode() VTSuperResolutionSc
 // Destination frame that contains user-allocated pixel buffer that receives the results.
 func (o *VTSuperResolutionScalerParameters) DestinationFrame() *VTFrameProcessorFrame {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTSuperResolutionScalerParametersSelDestinationFrame)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VTFrameProcessorFrameFromID(_ret)
 }
-

@@ -278,4 +278,3 @@ type VoxelArrayable interface {
 }
 
 var _ VoxelArrayable = (*VoxelArray)(nil)
-

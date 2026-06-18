@@ -136,7 +136,9 @@ func (x *AssetResourceLoadingRequest) FinishLoadingWithResponseDataRedirect(resp
 	x.inner.FinishLoadingWithResponseDataRedirect(response, data, redirect)
 }
 
-func (x *AssetResourceLoadingRequest) asAssetResourceLoadingRequest() *raw.AVAssetResourceLoadingRequest { return x.inner }
+func (x *AssetResourceLoadingRequest) asAssetResourceLoadingRequest() *raw.AVAssetResourceLoadingRequest {
+	return x.inner
+}
 
 // AssetResourceLoadingRequestable is the interface implemented by [AssetResourceLoadingRequest], for mocking and DI.
 type AssetResourceLoadingRequestable interface {
@@ -161,4 +163,3 @@ type AssetResourceLoadingRequestable interface {
 }
 
 var _ AssetResourceLoadingRequestable = (*AssetResourceLoadingRequest)(nil)
-

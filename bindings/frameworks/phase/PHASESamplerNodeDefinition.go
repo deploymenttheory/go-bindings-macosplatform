@@ -16,14 +16,14 @@ type PHASESamplerNodeDefinition struct {
 }
 
 var (
-	_clsPHASESamplerNodeDefinition = _objcClass("PHASESamplerNodeDefinition")
+	_clsPHASESamplerNodeDefinition                                                      = _objcClass("PHASESamplerNodeDefinition")
 	_pHASESamplerNodeDefinitionSelInitWithSoundAssetIdentifierMixerDefinitionIdentifier = objc.RegisterName("initWithSoundAssetIdentifier:mixerDefinition:identifier:")
-	_pHASESamplerNodeDefinitionSelInitWithSoundAssetIdentifierMixerDefinition = objc.RegisterName("initWithSoundAssetIdentifier:mixerDefinition:")
-	_pHASESamplerNodeDefinitionSelAssetIdentifier = objc.RegisterName("assetIdentifier")
-	_pHASESamplerNodeDefinitionSelCullOption = objc.RegisterName("cullOption")
-	_pHASESamplerNodeDefinitionSelSetCullOption = objc.RegisterName("setCullOption:")
-	_pHASESamplerNodeDefinitionSelPlaybackMode = objc.RegisterName("playbackMode")
-	_pHASESamplerNodeDefinitionSelSetPlaybackMode = objc.RegisterName("setPlaybackMode:")
+	_pHASESamplerNodeDefinitionSelInitWithSoundAssetIdentifierMixerDefinition           = objc.RegisterName("initWithSoundAssetIdentifier:mixerDefinition:")
+	_pHASESamplerNodeDefinitionSelAssetIdentifier                                       = objc.RegisterName("assetIdentifier")
+	_pHASESamplerNodeDefinitionSelCullOption                                            = objc.RegisterName("cullOption")
+	_pHASESamplerNodeDefinitionSelSetCullOption                                         = objc.RegisterName("setCullOption:")
+	_pHASESamplerNodeDefinitionSelPlaybackMode                                          = objc.RegisterName("playbackMode")
+	_pHASESamplerNodeDefinitionSelSetPlaybackMode                                       = objc.RegisterName("setPlaybackMode:")
 )
 
 func PHASESamplerNodeDefinitionFromID(id objc.ID) *PHASESamplerNodeDefinition {
@@ -39,21 +39,27 @@ func PHASESamplerNodeDefinitionFromID(id objc.ID) *PHASESamplerNodeDefinition {
 // @method initWithSoundAssetIdentifier:mixerDefinition:identifier @abstract Create a sampler node definition @param soundAssetIdentifier The identifier of the registered sound asset this sampler will play @param mixerDefinition The mixer definition this sampler will be assigned to @param identifier An optional custom identifier to give to this object @return A new PHASESamplerNodeDefinition object
 func (o *PHASESamplerNodeDefinition) InitWithSoundAssetIdentifierMixerDefinitionIdentifier(soundAssetIdentifier *foundation.NSString, mixerDefinition *PHASEMixerDefinition, identifier *foundation.NSString) *PHASESamplerNodeDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESamplerNodeDefinitionSelInitWithSoundAssetIdentifierMixerDefinitionIdentifier, soundAssetIdentifier.Ptr(), mixerDefinition.Ptr(), identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASESamplerNodeDefinitionFromID(_ret)
 }
 
 // @method initWithSoundAssetIdentifier:mixerDefinition @abstract Create a sampler node definition @param soundAssetIdentifier The identifier of the registered sound asset this sampler will play @param mixerDefinition The mixer definition this sampler will be assigned to @return A new PHASESamplerNodeDefinition object
 func (o *PHASESamplerNodeDefinition) InitWithSoundAssetIdentifierMixerDefinition(soundAssetIdentifier *foundation.NSString, mixerDefinition *PHASEMixerDefinition) *PHASESamplerNodeDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESamplerNodeDefinitionSelInitWithSoundAssetIdentifierMixerDefinition, soundAssetIdentifier.Ptr(), mixerDefinition.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASESamplerNodeDefinitionFromID(_ret)
 }
 
 // @property assetIdentifier @abstract The identifier that uniquely represents the registered sound asset this sampler will play.
 func (o *PHASESamplerNodeDefinition) AssetIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESamplerNodeDefinitionSelAssetIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -76,4 +82,3 @@ func (o *PHASESamplerNodeDefinition) PlaybackMode() PHASEPlaybackMode {
 func (o *PHASESamplerNodeDefinition) SetPlaybackMode(playbackMode PHASEPlaybackMode) {
 	o.Ptr().Send(_pHASESamplerNodeDefinitionSelSetPlaybackMode, playbackMode)
 }
-

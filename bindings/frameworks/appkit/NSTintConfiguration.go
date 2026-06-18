@@ -16,14 +16,14 @@ type NSTintConfiguration struct {
 }
 
 var (
-	_clsNSTintConfiguration = _objcClass("NSTintConfiguration")
+	_clsNSTintConfiguration                                    = _objcClass("NSTintConfiguration")
 	_nSTintConfigurationSelTintConfigurationWithPreferredColor = objc.RegisterName("tintConfigurationWithPreferredColor:")
-	_nSTintConfigurationSelTintConfigurationWithFixedColor = objc.RegisterName("tintConfigurationWithFixedColor:")
-	_nSTintConfigurationSelDefaultTintConfiguration = objc.RegisterName("defaultTintConfiguration")
-	_nSTintConfigurationSelMonochromeTintConfiguration = objc.RegisterName("monochromeTintConfiguration")
-	_nSTintConfigurationSelBaseTintColor = objc.RegisterName("baseTintColor")
-	_nSTintConfigurationSelEquivalentContentTintColor = objc.RegisterName("equivalentContentTintColor")
-	_nSTintConfigurationSelAdaptsToUserAccentColor = objc.RegisterName("adaptsToUserAccentColor")
+	_nSTintConfigurationSelTintConfigurationWithFixedColor     = objc.RegisterName("tintConfigurationWithFixedColor:")
+	_nSTintConfigurationSelDefaultTintConfiguration            = objc.RegisterName("defaultTintConfiguration")
+	_nSTintConfigurationSelMonochromeTintConfiguration         = objc.RegisterName("monochromeTintConfiguration")
+	_nSTintConfigurationSelBaseTintColor                       = objc.RegisterName("baseTintColor")
+	_nSTintConfigurationSelEquivalentContentTintColor          = objc.RegisterName("equivalentContentTintColor")
+	_nSTintConfigurationSelAdaptsToUserAccentColor             = objc.RegisterName("adaptsToUserAccentColor")
 )
 
 func NSTintConfigurationFromID(id objc.ID) *NSTintConfiguration {
@@ -39,42 +39,54 @@ func NSTintConfigurationFromID(id objc.ID) *NSTintConfiguration {
 // Specifies that content should be tinted with a particular color whenever the app's preferred Accent Color is in use, i.e. when the system Accent Color is configured to "Multicolor". If the system Accent Color is configured to any other color, this tint configuration defers to the Accent Color. This type of configuration should be used for custom colors that are designed to match an app-specific Accent Color, but would mismatch a user-selected color.
 func NSTintConfigurationTintConfigurationWithPreferredColor(color *NSColor) *NSTintConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTintConfiguration), _nSTintConfigurationSelTintConfigurationWithPreferredColor, color.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTintConfigurationFromID(_ret)
 }
 
 // Specifies that content should be tinted with a specific color value. The specified color value is used regardless of the system Accent Color.
 func NSTintConfigurationTintConfigurationWithFixedColor(color *NSColor) *NSTintConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTintConfiguration), _nSTintConfigurationSelTintConfigurationWithFixedColor, color.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTintConfigurationFromID(_ret)
 }
 
 // Specifies that content should be tinted using the system default for its context. For example, a source list icon's default tint matches the active Accent Color.
 func NSTintConfigurationDefaultTintConfiguration() *NSTintConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTintConfiguration), _nSTintConfigurationSelDefaultTintConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTintConfigurationFromID(_ret)
 }
 
 // Specifies that content should prefer a monochrome appearance. Monochrome content remains monochrome regardless of the system Accent Color.
 func NSTintConfigurationMonochromeTintConfiguration() *NSTintConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTintConfiguration), _nSTintConfigurationSelMonochromeTintConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTintConfigurationFromID(_ret)
 }
 
 // The base NSColor supplied when creating the tint configuration object. If the receiver wasn't created using a base NSColor, this property returns nil.
 func (o *NSTintConfiguration) BaseTintColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTintConfigurationSelBaseTintColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
 // An equivalent NSColor matching the effective content tint of the receiver. If the receiver can't be represented as a NSColor, this property returns nil.
 func (o *NSTintConfiguration) EquivalentContentTintColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTintConfigurationSelEquivalentContentTintColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -83,4 +95,3 @@ func (o *NSTintConfiguration) AdaptsToUserAccentColor() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTintConfigurationSelAdaptsToUserAccentColor)
 	return _ret
 }
-

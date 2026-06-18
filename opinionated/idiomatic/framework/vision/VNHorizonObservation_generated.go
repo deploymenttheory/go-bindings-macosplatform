@@ -62,4 +62,3 @@ type HorizonObservationable interface {
 }
 
 var _ HorizonObservationable = (*HorizonObservation)(nil)
-

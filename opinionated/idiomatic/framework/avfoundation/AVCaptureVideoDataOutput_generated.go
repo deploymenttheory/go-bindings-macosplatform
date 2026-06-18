@@ -158,7 +158,9 @@ func (x *CaptureVideoDataOutput) SetPreservesDynamicHDRMetadata(preservesDynamic
 	x.inner.SetPreservesDynamicHDRMetadata(preservesDynamicHDRMetadata)
 }
 
-func (x *CaptureVideoDataOutput) asCaptureOutput() *raw.AVCaptureOutput { return &x.inner.AVCaptureOutput }
+func (x *CaptureVideoDataOutput) asCaptureOutput() *raw.AVCaptureOutput {
+	return &x.inner.AVCaptureOutput
+}
 
 // CaptureVideoDataOutputable is the interface implemented by [CaptureVideoDataOutput], for mocking and DI.
 type CaptureVideoDataOutputable interface {
@@ -187,4 +189,3 @@ type CaptureVideoDataOutputable interface {
 }
 
 var _ CaptureVideoDataOutputable = (*CaptureVideoDataOutput)(nil)
-

@@ -67,4 +67,3 @@ type Directionsable interface {
 }
 
 var _ Directionsable = (*Directions)(nil)
-

@@ -56,9 +56,13 @@ func (x *NNReductionColumnMinNode) WithLabel(label string) *NNReductionColumnMin
 	return x
 }
 
-func (x *NNReductionColumnMinNode) asNNUnaryReductionNode() *mpsneuralnetwork.MPSNNUnaryReductionNode { return &x.inner.MPSNNUnaryReductionNode }
+func (x *NNReductionColumnMinNode) asNNUnaryReductionNode() *mpsneuralnetwork.MPSNNUnaryReductionNode {
+	return &x.inner.MPSNNUnaryReductionNode
+}
 
-func (x *NNReductionColumnMinNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode }
+func (x *NNReductionColumnMinNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode
+}
 
 // NNReductionColumnMinNodeable is the interface implemented by [NNReductionColumnMinNode], for mocking and DI.
 type NNReductionColumnMinNodeable interface {
@@ -69,4 +73,3 @@ type NNReductionColumnMinNodeable interface {
 }
 
 var _ NNReductionColumnMinNodeable = (*NNReductionColumnMinNode)(nil)
-

@@ -16,21 +16,21 @@ type OSAScriptController struct {
 }
 
 var (
-	_clsOSAScriptController = _objcClass("OSAScriptController")
+	_clsOSAScriptController              = _objcClass("OSAScriptController")
 	_oSAScriptControllerSelCompileScript = objc.RegisterName("compileScript:")
-	_oSAScriptControllerSelRecordScript = objc.RegisterName("recordScript:")
-	_oSAScriptControllerSelRunScript = objc.RegisterName("runScript:")
-	_oSAScriptControllerSelStopScript = objc.RegisterName("stopScript:")
-	_oSAScriptControllerSelScriptView = objc.RegisterName("scriptView")
+	_oSAScriptControllerSelRecordScript  = objc.RegisterName("recordScript:")
+	_oSAScriptControllerSelRunScript     = objc.RegisterName("runScript:")
+	_oSAScriptControllerSelStopScript    = objc.RegisterName("stopScript:")
+	_oSAScriptControllerSelScriptView    = objc.RegisterName("scriptView")
 	_oSAScriptControllerSelSetScriptView = objc.RegisterName("setScriptView:")
-	_oSAScriptControllerSelResultView = objc.RegisterName("resultView")
+	_oSAScriptControllerSelResultView    = objc.RegisterName("resultView")
 	_oSAScriptControllerSelSetResultView = objc.RegisterName("setResultView:")
-	_oSAScriptControllerSelScript = objc.RegisterName("script")
-	_oSAScriptControllerSelSetScript = objc.RegisterName("setScript:")
-	_oSAScriptControllerSelLanguage = objc.RegisterName("language")
-	_oSAScriptControllerSelSetLanguage = objc.RegisterName("setLanguage:")
-	_oSAScriptControllerSelScriptState = objc.RegisterName("scriptState")
-	_oSAScriptControllerSelIsCompiling = objc.RegisterName("isCompiling")
+	_oSAScriptControllerSelScript        = objc.RegisterName("script")
+	_oSAScriptControllerSelSetScript     = objc.RegisterName("setScript:")
+	_oSAScriptControllerSelLanguage      = objc.RegisterName("language")
+	_oSAScriptControllerSelSetLanguage   = objc.RegisterName("setLanguage:")
+	_oSAScriptControllerSelScriptState   = objc.RegisterName("scriptState")
+	_oSAScriptControllerSelIsCompiling   = objc.RegisterName("isCompiling")
 )
 
 func OSAScriptControllerFromID(id objc.ID) *OSAScriptController {
@@ -61,7 +61,9 @@ func (o *OSAScriptController) StopScript(sender objc.ID) {
 
 func (o *OSAScriptController) ScriptView() *OSAScriptView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptControllerSelScriptView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return OSAScriptViewFromID(_ret)
 }
 
@@ -71,7 +73,9 @@ func (o *OSAScriptController) SetScriptView(scriptView *OSAScriptView) {
 
 func (o *OSAScriptController) ResultView() *appkit.NSTextView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptControllerSelResultView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSTextViewFromID(_ret)
 }
 
@@ -81,7 +85,9 @@ func (o *OSAScriptController) SetResultView(resultView *appkit.NSTextView) {
 
 func (o *OSAScriptController) Script() *OSAScript {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptControllerSelScript)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return OSAScriptFromID(_ret)
 }
 
@@ -91,7 +97,9 @@ func (o *OSAScriptController) SetScript(script *OSAScript) {
 
 func (o *OSAScriptController) Language() *OSALanguage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptControllerSelLanguage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return OSALanguageFromID(_ret)
 }
 
@@ -108,4 +116,3 @@ func (o *OSAScriptController) IsCompiling() bool {
 	_ret := objc.Send[bool](o.Ptr(), _oSAScriptControllerSelIsCompiling)
 	return _ret
 }
-

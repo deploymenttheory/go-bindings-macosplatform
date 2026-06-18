@@ -67,4 +67,3 @@ type BundleAssetResolverable interface {
 }
 
 var _ BundleAssetResolverable = (*BundleAssetResolver)(nil)
-

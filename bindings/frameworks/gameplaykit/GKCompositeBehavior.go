@@ -16,14 +16,14 @@ type GKCompositeBehavior struct {
 }
 
 var (
-	_clsGKCompositeBehavior = _objcClass("GKCompositeBehavior")
-	_gKCompositeBehaviorSelBehaviorWithBehaviors = objc.RegisterName("behaviorWithBehaviors:")
+	_clsGKCompositeBehavior                                = _objcClass("GKCompositeBehavior")
+	_gKCompositeBehaviorSelBehaviorWithBehaviors           = objc.RegisterName("behaviorWithBehaviors:")
 	_gKCompositeBehaviorSelBehaviorWithBehaviorsAndWeights = objc.RegisterName("behaviorWithBehaviors:andWeights:")
-	_gKCompositeBehaviorSelSetWeightForBehavior = objc.RegisterName("setWeight:forBehavior:")
-	_gKCompositeBehaviorSelWeightForBehavior = objc.RegisterName("weightForBehavior:")
-	_gKCompositeBehaviorSelRemoveBehavior = objc.RegisterName("removeBehavior:")
-	_gKCompositeBehaviorSelRemoveAllBehaviors = objc.RegisterName("removeAllBehaviors")
-	_gKCompositeBehaviorSelBehaviorCount = objc.RegisterName("behaviorCount")
+	_gKCompositeBehaviorSelSetWeightForBehavior            = objc.RegisterName("setWeight:forBehavior:")
+	_gKCompositeBehaviorSelWeightForBehavior               = objc.RegisterName("weightForBehavior:")
+	_gKCompositeBehaviorSelRemoveBehavior                  = objc.RegisterName("removeBehavior:")
+	_gKCompositeBehaviorSelRemoveAllBehaviors              = objc.RegisterName("removeAllBehaviors")
+	_gKCompositeBehaviorSelBehaviorCount                   = objc.RegisterName("behaviorCount")
 )
 
 func GKCompositeBehaviorFromID(id objc.ID) *GKCompositeBehavior {
@@ -39,14 +39,18 @@ func GKCompositeBehaviorFromID(id objc.ID) *GKCompositeBehavior {
 // Creates a behavior with an array of sub-behaviors
 func GKCompositeBehaviorBehaviorWithBehaviors(behaviors *foundation.NSArray[*GKBehavior]) *GKCompositeBehavior {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKCompositeBehavior), _gKCompositeBehaviorSelBehaviorWithBehaviors, behaviors.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKCompositeBehaviorFromID(_ret)
 }
 
 // Creates a behavior with two associated arrays of sub-behaviors and weights
 func GKCompositeBehaviorBehaviorWithBehaviorsAndWeights(behaviors *foundation.NSArray[*GKBehavior], weights *foundation.NSArray[*foundation.NSNumber]) *GKCompositeBehavior {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKCompositeBehavior), _gKCompositeBehaviorSelBehaviorWithBehaviorsAndWeights, behaviors.Ptr(), weights)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKCompositeBehaviorFromID(_ret)
 }
 
@@ -76,4 +80,3 @@ func (o *GKCompositeBehavior) BehaviorCount() int {
 	_ret := objc.Send[int](o.Ptr(), _gKCompositeBehaviorSelBehaviorCount)
 	return _ret
 }
-

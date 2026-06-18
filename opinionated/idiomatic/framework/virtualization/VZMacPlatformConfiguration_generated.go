@@ -95,7 +95,9 @@ func (x *MacPlatformConfiguration) SetAuxiliaryStorage(auxiliaryStorage *raw.VZM
 	x.inner.SetAuxiliaryStorage(auxiliaryStorage)
 }
 
-func (x *MacPlatformConfiguration) asPlatformConfiguration() *raw.VZPlatformConfiguration { return &x.inner.VZPlatformConfiguration }
+func (x *MacPlatformConfiguration) asPlatformConfiguration() *raw.VZPlatformConfiguration {
+	return &x.inner.VZPlatformConfiguration
+}
 
 // MacPlatformConfigurationable is the interface implemented by [MacPlatformConfiguration], for mocking and DI.
 type MacPlatformConfigurationable interface {
@@ -112,4 +114,3 @@ type MacPlatformConfigurationable interface {
 }
 
 var _ MacPlatformConfigurationable = (*MacPlatformConfiguration)(nil)
-

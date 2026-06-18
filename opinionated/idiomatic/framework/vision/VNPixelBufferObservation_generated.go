@@ -51,7 +51,9 @@ func (x *PixelBufferObservation) FeatureName() string {
 	return purego.GoString(_r.Ptr())
 }
 
-func (x *PixelBufferObservation) asPixelBufferObservation() *raw.VNPixelBufferObservation { return x.inner }
+func (x *PixelBufferObservation) asPixelBufferObservation() *raw.VNPixelBufferObservation {
+	return x.inner
+}
 
 func (x *PixelBufferObservation) asObservation() *raw.VNObservation { return &x.inner.VNObservation }
 
@@ -63,4 +65,3 @@ type PixelBufferObservationable interface {
 }
 
 var _ PixelBufferObservationable = (*PixelBufferObservation)(nil)
-

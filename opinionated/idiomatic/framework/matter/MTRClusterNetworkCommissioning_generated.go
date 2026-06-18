@@ -475,9 +475,13 @@ func (x *MTRClusterNetworkCommissioning) ReorderNetworkWithParamsExpectedValuesE
 	}
 }
 
-func (x *MTRClusterNetworkCommissioning) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterNetworkCommissioning) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterNetworkCommissioning) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterNetworkCommissioning) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterNetworkCommissioningable is the interface implemented by [MTRClusterNetworkCommissioning], for mocking and DI.
 type MTRClusterNetworkCommissioningable interface {
@@ -516,4 +520,3 @@ type MTRClusterNetworkCommissioningable interface {
 }
 
 var _ MTRClusterNetworkCommissioningable = (*MTRClusterNetworkCommissioning)(nil)
-

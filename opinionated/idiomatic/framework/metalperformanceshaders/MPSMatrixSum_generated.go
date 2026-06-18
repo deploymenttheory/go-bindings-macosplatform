@@ -148,4 +148,3 @@ type MatrixSumable interface {
 }
 
 var _ MatrixSumable = (*MatrixSum)(nil)
-

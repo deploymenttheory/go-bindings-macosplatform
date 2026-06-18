@@ -16,14 +16,14 @@ type SCNPhysicsVehicle struct {
 }
 
 var (
-	_clsSCNPhysicsVehicle = _objcClass("SCNPhysicsVehicle")
-	_sCNPhysicsVehicleSelVehicleWithChassisBodyWheels = objc.RegisterName("vehicleWithChassisBody:wheels:")
-	_sCNPhysicsVehicleSelApplyEngineForceForWheelAtIndex = objc.RegisterName("applyEngineForce:forWheelAtIndex:")
-	_sCNPhysicsVehicleSelSetSteeringAngleForWheelAtIndex = objc.RegisterName("setSteeringAngle:forWheelAtIndex:")
+	_clsSCNPhysicsVehicle                                 = _objcClass("SCNPhysicsVehicle")
+	_sCNPhysicsVehicleSelVehicleWithChassisBodyWheels     = objc.RegisterName("vehicleWithChassisBody:wheels:")
+	_sCNPhysicsVehicleSelApplyEngineForceForWheelAtIndex  = objc.RegisterName("applyEngineForce:forWheelAtIndex:")
+	_sCNPhysicsVehicleSelSetSteeringAngleForWheelAtIndex  = objc.RegisterName("setSteeringAngle:forWheelAtIndex:")
 	_sCNPhysicsVehicleSelApplyBrakingForceForWheelAtIndex = objc.RegisterName("applyBrakingForce:forWheelAtIndex:")
-	_sCNPhysicsVehicleSelSpeedInKilometersPerHour = objc.RegisterName("speedInKilometersPerHour")
-	_sCNPhysicsVehicleSelWheels = objc.RegisterName("wheels")
-	_sCNPhysicsVehicleSelChassisBody = objc.RegisterName("chassisBody")
+	_sCNPhysicsVehicleSelSpeedInKilometersPerHour         = objc.RegisterName("speedInKilometersPerHour")
+	_sCNPhysicsVehicleSelWheels                           = objc.RegisterName("wheels")
+	_sCNPhysicsVehicleSelChassisBody                      = objc.RegisterName("chassisBody")
 )
 
 func SCNPhysicsVehicleFromID(id objc.ID) *SCNPhysicsVehicle {
@@ -38,7 +38,9 @@ func SCNPhysicsVehicleFromID(id objc.ID) *SCNPhysicsVehicle {
 
 func SCNPhysicsVehicleVehicleWithChassisBodyWheels(chassisBody *SCNPhysicsBody, wheels *foundation.NSArray[*SCNPhysicsVehicleWheel]) *SCNPhysicsVehicle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsVehicle), _sCNPhysicsVehicleSelVehicleWithChassisBodyWheels, chassisBody.Ptr(), wheels.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsVehicleFromID(_ret)
 }
 
@@ -61,13 +63,16 @@ func (o *SCNPhysicsVehicle) SpeedInKilometersPerHour() float64 {
 
 func (o *SCNPhysicsVehicle) Wheels() *foundation.NSArray[*SCNPhysicsVehicleWheel] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNPhysicsVehicleSelWheels)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SCNPhysicsVehicleWheel](_ret)
 }
 
 func (o *SCNPhysicsVehicle) ChassisBody() *SCNPhysicsBody {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNPhysicsVehicleSelChassisBody)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsBodyFromID(_ret)
 }
-

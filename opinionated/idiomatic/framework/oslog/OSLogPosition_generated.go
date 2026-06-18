@@ -41,4 +41,3 @@ type LogPositionable interface {
 }
 
 var _ LogPositionable = (*LogPosition)(nil)
-

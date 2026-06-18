@@ -19,13 +19,13 @@ type AVAssetWriterInputTaggedPixelBufferGroupAdaptor struct {
 }
 
 var (
-	_clsAVAssetWriterInputTaggedPixelBufferGroupAdaptor = _objcClass("AVAssetWriterInputTaggedPixelBufferGroupAdaptor")
+	_clsAVAssetWriterInputTaggedPixelBufferGroupAdaptor                                                                                             = _objcClass("AVAssetWriterInputTaggedPixelBufferGroupAdaptor")
 	_aVAssetWriterInputTaggedPixelBufferGroupAdaptorSelAssetWriterInputTaggedPixelBufferGroupAdaptorWithAssetWriterInputSourcePixelBufferAttributes = objc.RegisterName("assetWriterInputTaggedPixelBufferGroupAdaptorWithAssetWriterInput:sourcePixelBufferAttributes:")
-	_aVAssetWriterInputTaggedPixelBufferGroupAdaptorSelInitWithAssetWriterInputSourcePixelBufferAttributes = objc.RegisterName("initWithAssetWriterInput:sourcePixelBufferAttributes:")
-	_aVAssetWriterInputTaggedPixelBufferGroupAdaptorSelAppendTaggedPixelBufferGroupWithPresentationTime = objc.RegisterName("appendTaggedPixelBufferGroup:withPresentationTime:")
-	_aVAssetWriterInputTaggedPixelBufferGroupAdaptorSelAssetWriterInput = objc.RegisterName("assetWriterInput")
-	_aVAssetWriterInputTaggedPixelBufferGroupAdaptorSelSourcePixelBufferAttributes = objc.RegisterName("sourcePixelBufferAttributes")
-	_aVAssetWriterInputTaggedPixelBufferGroupAdaptorSelPixelBufferPool = objc.RegisterName("pixelBufferPool")
+	_aVAssetWriterInputTaggedPixelBufferGroupAdaptorSelInitWithAssetWriterInputSourcePixelBufferAttributes                                          = objc.RegisterName("initWithAssetWriterInput:sourcePixelBufferAttributes:")
+	_aVAssetWriterInputTaggedPixelBufferGroupAdaptorSelAppendTaggedPixelBufferGroupWithPresentationTime                                             = objc.RegisterName("appendTaggedPixelBufferGroup:withPresentationTime:")
+	_aVAssetWriterInputTaggedPixelBufferGroupAdaptorSelAssetWriterInput                                                                             = objc.RegisterName("assetWriterInput")
+	_aVAssetWriterInputTaggedPixelBufferGroupAdaptorSelSourcePixelBufferAttributes                                                                  = objc.RegisterName("sourcePixelBufferAttributes")
+	_aVAssetWriterInputTaggedPixelBufferGroupAdaptorSelPixelBufferPool                                                                              = objc.RegisterName("pixelBufferPool")
 )
 
 func AVAssetWriterInputTaggedPixelBufferGroupAdaptorFromID(id objc.ID) *AVAssetWriterInputTaggedPixelBufferGroupAdaptor {
@@ -41,14 +41,18 @@ func AVAssetWriterInputTaggedPixelBufferGroupAdaptorFromID(id objc.ID) *AVAssetW
 // Creates a new tagged buffer adaptor to receive tagged buffer groups for writing to the output file. In order to take advantage of the improved efficiency of appending buffers created from the adaptor's pixel buffer pool, clients should specify pixel buffer attributes that most closely accommodate the source format of the video frames being appended. Pixel buffer attributes keys for the pixel buffer pool are defined in <CoreVideo/CVPixelBuffer.h>. To specify the pixel format type, the pixelBufferAttributes dictionary should contain a value for kCVPixelBufferPixelFormatTypeKey. For example, use [NSNumber numberWithInt:kCVPixelFormatType_32BGRA] for 8-bit-per-channel BGRA. See the discussion under appendPixelBuffer:withPresentationTime: for advice on choosing a pixel format. Clients that do not need a pixel buffer pool for allocating buffers should set sourcePixelBufferAttributes to nil. This method throws an exception if the input is already attached to another asset writer input tagged buffer group adaptor or if the input has already started writing (the asset writer has progressed beyond AVAssetWriterStatusUnknown). - Parameter input: An instance of AVAssetWriterInput to which the receiver should append tagged buffer groups. Currently, only asset writer inputs that accept media data of type AVMediaTypeVideo can be used to initialize a tagged buffer adaptor. - Parameter sourcePixelBufferAttributes: Specifies the attributes of pixel buffers of tagged buffer groups that will be vended by the input's CVPixelBufferPool. - Returns: An instance of AVAssetWriterInputTaggedPixelBufferGroupAdaptor.
 func AVAssetWriterInputTaggedPixelBufferGroupAdaptorAssetWriterInputTaggedPixelBufferGroupAdaptorWithAssetWriterInputSourcePixelBufferAttributes(input *AVAssetWriterInput, sourcePixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVAssetWriterInputTaggedPixelBufferGroupAdaptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetWriterInputTaggedPixelBufferGroupAdaptor), _aVAssetWriterInputTaggedPixelBufferGroupAdaptorSelAssetWriterInputTaggedPixelBufferGroupAdaptorWithAssetWriterInputSourcePixelBufferAttributes, input.Ptr(), sourcePixelBufferAttributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetWriterInputTaggedPixelBufferGroupAdaptorFromID(_ret)
 }
 
 // Creates a new tagged buffer group adaptor to receive tagged buffer groups for writing to the output file. In order to take advantage of the improved efficiency of appending buffers created from the adaptor's pixel buffer pool, clients should specify pixel buffer attributes that most closely accommodate the source format of the video frames of tagged buffer groups being appended. Pixel buffer attributes keys for the pixel buffer pool are defined in <CoreVideo/CVPixelBuffer.h>. To specify the pixel format type, the pixelBufferAttributes dictionary should contain a value for kCVPixelBufferPixelFormatTypeKey. For example, use [NSNumber numberWithInt:kCVPixelFormatType_32BGRA] for 8-bit-per-channel BGRA. See the discussion under appendPixelBuffer:withPresentationTime: in AVAssetWriterInputPixelBufferAdaptor for advice on choosing a pixel format. Clients that do not need a pixel buffer pool for allocating buffers should set sourcePixelBufferAttributes to nil. It is an error to initialize an instance of AVAssetWriterInputTaggedPixelBufferGroupAdaptor with an asset writer input that is already attached to another instance of AVAssetWriterInputTaggedPixelBufferGroupAdaptor. It is also an error to initialize an instance of AVAssetWriterInputTaggedPixelBufferGroupAdaptor with an asset writer input whose asset writer has progressed beyond AVAssetWriterStatusUnknown. - Parameter input: An instance of AVAssetWriterInput to which the receiver should append tagged buffer groups. In addition to the pixel buffer adaptor, asset writer inputs with media data of type AVMediaTypeVideo can be used to initialize a tagged buffer group adaptor. - Parameter sourcePixelBufferAttributes: Specifies the attributes of pixel buffers of tagged buffer groups that will be vended by the input's CVPixelBufferPool. - Returns: An instance of AVAssetWriterInputTaggedPixelBufferGroupAdaptor.
 func (o *AVAssetWriterInputTaggedPixelBufferGroupAdaptor) InitWithAssetWriterInputSourcePixelBufferAttributes(input *AVAssetWriterInput, sourcePixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVAssetWriterInputTaggedPixelBufferGroupAdaptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterInputTaggedPixelBufferGroupAdaptorSelInitWithAssetWriterInputSourcePixelBufferAttributes, input.Ptr(), sourcePixelBufferAttributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetWriterInputTaggedPixelBufferGroupAdaptorFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *AVAssetWriterInputTaggedPixelBufferGroupAdaptor) AppendTaggedPixelBuffe
 // The asset writer input to which the receiver should append tagged buffer groups.
 func (o *AVAssetWriterInputTaggedPixelBufferGroupAdaptor) AssetWriterInput() *AVAssetWriterInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterInputTaggedPixelBufferGroupAdaptorSelAssetWriterInput)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetWriterInputFromID(_ret)
 }
 
@@ -76,4 +82,3 @@ func (o *AVAssetWriterInputTaggedPixelBufferGroupAdaptor) PixelBufferPool() unsa
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVAssetWriterInputTaggedPixelBufferGroupAdaptorSelPixelBufferPool)
 	return _ret
 }
-

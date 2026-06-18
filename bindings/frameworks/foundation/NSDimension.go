@@ -15,10 +15,10 @@ type NSDimension struct {
 }
 
 var (
-	_clsNSDimension = _objcClass("NSDimension")
+	_clsNSDimension                        = _objcClass("NSDimension")
 	_nSDimensionSelInitWithSymbolConverter = objc.RegisterName("initWithSymbol:converter:")
-	_nSDimensionSelBaseUnit = objc.RegisterName("baseUnit")
-	_nSDimensionSelConverter = objc.RegisterName("converter")
+	_nSDimensionSelBaseUnit                = objc.RegisterName("baseUnit")
+	_nSDimensionSelConverter               = objc.RegisterName("converter")
 )
 
 func NSDimensionFromID(id objc.ID) *NSDimension {
@@ -33,19 +33,24 @@ func NSDimensionFromID(id objc.ID) *NSDimension {
 
 func (o *NSDimension) InitWithSymbolConverter(symbol *NSString, converter *NSUnitConverter) *NSDimension {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDimensionSelInitWithSymbolConverter, symbol.Ptr(), converter.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDimensionFromID(_ret)
 }
 
 func NSDimensionBaseUnit() *NSDimension {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDimension), _nSDimensionSelBaseUnit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDimensionFromID(_ret)
 }
 
 func (o *NSDimension) Converter() *NSUnitConverter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDimensionSelConverter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitConverterFromID(_ret)
 }
-

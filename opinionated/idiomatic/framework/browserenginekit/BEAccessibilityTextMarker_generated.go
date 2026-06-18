@@ -41,4 +41,3 @@ type AccessibilityTextMarkerable interface {
 }
 
 var _ AccessibilityTextMarkerable = (*AccessibilityTextMarker)(nil)
-

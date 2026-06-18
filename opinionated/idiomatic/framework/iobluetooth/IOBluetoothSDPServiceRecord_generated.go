@@ -163,4 +163,3 @@ type IOBluetoothSDPServiceRecordable interface {
 }
 
 var _ IOBluetoothSDPServiceRecordable = (*IOBluetoothSDPServiceRecord)(nil)
-

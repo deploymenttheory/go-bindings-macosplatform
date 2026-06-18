@@ -15,13 +15,13 @@ type NEFilterNewFlowVerdict struct {
 }
 
 var (
-	_clsNEFilterNewFlowVerdict = _objcClass("NEFilterNewFlowVerdict")
-	_nEFilterNewFlowVerdictSelAllowVerdict = objc.RegisterName("allowVerdict")
-	_nEFilterNewFlowVerdictSelDropVerdict = objc.RegisterName("dropVerdict")
+	_clsNEFilterNewFlowVerdict                                                                                  = _objcClass("NEFilterNewFlowVerdict")
+	_nEFilterNewFlowVerdictSelAllowVerdict                                                                      = objc.RegisterName("allowVerdict")
+	_nEFilterNewFlowVerdictSelDropVerdict                                                                       = objc.RegisterName("dropVerdict")
 	_nEFilterNewFlowVerdictSelFilterDataVerdictWithFilterInboundPeekInboundBytesFilterOutboundPeekOutboundBytes = objc.RegisterName("filterDataVerdictWithFilterInbound:peekInboundBytes:filterOutbound:peekOutboundBytes:")
-	_nEFilterNewFlowVerdictSelPauseVerdict = objc.RegisterName("pauseVerdict")
-	_nEFilterNewFlowVerdictSelStatisticsReportFrequency = objc.RegisterName("statisticsReportFrequency")
-	_nEFilterNewFlowVerdictSelSetStatisticsReportFrequency = objc.RegisterName("setStatisticsReportFrequency:")
+	_nEFilterNewFlowVerdictSelPauseVerdict                                                                      = objc.RegisterName("pauseVerdict")
+	_nEFilterNewFlowVerdictSelStatisticsReportFrequency                                                         = objc.RegisterName("statisticsReportFrequency")
+	_nEFilterNewFlowVerdictSelSetStatisticsReportFrequency                                                      = objc.RegisterName("setStatisticsReportFrequency:")
 )
 
 func NEFilterNewFlowVerdictFromID(id objc.ID) *NEFilterNewFlowVerdict {
@@ -37,28 +37,36 @@ func NEFilterNewFlowVerdictFromID(id objc.ID) *NEFilterNewFlowVerdict {
 // @method allowVerdict @discussion This class method returns a verdict indicating that the flow should be allowed. @return The NEFilterNewFlowVerdict object.
 func NEFilterNewFlowVerdictAllowVerdict() *NEFilterNewFlowVerdict {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNEFilterNewFlowVerdict), _nEFilterNewFlowVerdictSelAllowVerdict)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEFilterNewFlowVerdictFromID(_ret)
 }
 
 // @method dropVerdict @discussion This class method returns a verdict indicating that the flow should be dropped. @return The NEFilterNewFlowVerdict object.
 func NEFilterNewFlowVerdictDropVerdict() *NEFilterNewFlowVerdict {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNEFilterNewFlowVerdict), _nEFilterNewFlowVerdictSelDropVerdict)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEFilterNewFlowVerdictFromID(_ret)
 }
 
 // @method filterDataVerdictWithFilterInbound:peekInboundBytes:filterOutbound:peekOutboundBytes: @discussion This class method returns a new flow verdict indicating that the filter needs to make a decision about a new flow after seeing a portion of the flow's data. @param filterInbound A boolean indicating if the filter needs to see inbound data @param peekInboundBytes The number of inbound bytes that the filter needs to see in the subsequent call to -[NEFilterDataProvider handleInboundDataFromFlow:readBytesStartOffset:readBytes:]. @param filterOutbound  boolean indicating if the filter needs to see outbound data @param peekOutboundBytes The number of outbound bytes that the filter needs to see in the subsequent call to -[NEFilterDataProvider handleOutboundDataFromFlow:readBytesStartOffset:readBytes:]. @return The new flow verdict.
 func NEFilterNewFlowVerdictFilterDataVerdictWithFilterInboundPeekInboundBytesFilterOutboundPeekOutboundBytes(filterInbound bool, peekInboundBytes uint, filterOutbound bool, peekOutboundBytes uint) *NEFilterNewFlowVerdict {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNEFilterNewFlowVerdict), _nEFilterNewFlowVerdictSelFilterDataVerdictWithFilterInboundPeekInboundBytesFilterOutboundPeekOutboundBytes, filterInbound, peekInboundBytes, filterOutbound, peekOutboundBytes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEFilterNewFlowVerdictFromID(_ret)
 }
 
 // @method pauseVerdict @discussion This class method returns a verdict indicating that none of the data provider's handler callbacks shall be called for the flow until after the flow is resumed by a call to -[NEFilterDataProvider resumeFlow:withVerdict:]. TCP flows may be paused indefinitely. UDP flows will be dropped if not resumed within 10 seconds of being paused. It is invalid to pause a flow that is already paused. @return The NEFilterNewFlowVerdict object.
 func NEFilterNewFlowVerdictPauseVerdict() *NEFilterNewFlowVerdict {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNEFilterNewFlowVerdict), _nEFilterNewFlowVerdictSelPauseVerdict)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEFilterNewFlowVerdictFromID(_ret)
 }
 
@@ -71,4 +79,3 @@ func (o *NEFilterNewFlowVerdict) StatisticsReportFrequency() NEFilterReportFrequ
 func (o *NEFilterNewFlowVerdict) SetStatisticsReportFrequency(statisticsReportFrequency NEFilterReportFrequency) {
 	o.Ptr().Send(_nEFilterNewFlowVerdictSelSetStatisticsReportFrequency, statisticsReportFrequency)
 }
-

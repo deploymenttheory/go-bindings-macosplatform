@@ -18,22 +18,22 @@ type MTRClusterAccountLogin struct {
 }
 
 var (
-	_clsMTRClusterAccountLogin = _objcClass("MTRClusterAccountLogin")
-	_mTRClusterAccountLoginSelGetSetupPINWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("getSetupPINWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterAccountLoginSelLoginWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("loginWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterAccountLoginSelLogoutWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("logoutWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterAccountLoginSelLogoutWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("logoutWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterAccountLoginSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterAccountLoginSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterAccountLoginSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterAccountLoginSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterAccountLoginSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterAccountLoginSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterAccountLoginSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_clsMTRClusterAccountLogin                                                                          = _objcClass("MTRClusterAccountLogin")
+	_mTRClusterAccountLoginSelGetSetupPINWithParamsExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("getSetupPINWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterAccountLoginSelLoginWithParamsExpectedValuesExpectedValueIntervalCompletion              = objc.RegisterName("loginWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterAccountLoginSelLogoutWithParamsExpectedValuesExpectedValueIntervalCompletion             = objc.RegisterName("logoutWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterAccountLoginSelLogoutWithExpectedValuesExpectedValueIntervalCompletion                   = objc.RegisterName("logoutWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterAccountLoginSelReadAttributeGeneratedCommandListWithParams                               = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterAccountLoginSelReadAttributeAcceptedCommandListWithParams                                = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterAccountLoginSelReadAttributeAttributeListWithParams                                      = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterAccountLoginSelReadAttributeFeatureMapWithParams                                         = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterAccountLoginSelReadAttributeClusterRevisionWithParams                                    = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterAccountLoginSelInitWithDeviceEndpointIDQueue                                             = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterAccountLoginSelInitWithDeviceEndpointQueue                                               = objc.RegisterName("initWithDevice:endpoint:queue:")
 	_mTRClusterAccountLoginSelGetSetupPINWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("getSetupPINWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterAccountLoginSelLoginWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("loginWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterAccountLoginSelLogoutWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("logoutWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterAccountLoginSelLogoutWithExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("logoutWithExpectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterAccountLoginSelLoginWithParamsExpectedValuesExpectedValueIntervalCompletionHandler       = objc.RegisterName("loginWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterAccountLoginSelLogoutWithParamsExpectedValuesExpectedValueIntervalCompletionHandler      = objc.RegisterName("logoutWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterAccountLoginSelLogoutWithExpectedValuesExpectedValueIntervalCompletionHandler            = objc.RegisterName("logoutWithExpectedValues:expectedValueInterval:completionHandler:")
 )
 
 func MTRClusterAccountLoginFromID(id objc.ID) *MTRClusterAccountLogin {
@@ -121,13 +121,17 @@ func (o *MTRClusterAccountLogin) ReadAttributeClusterRevisionWithParams(params *
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterAccountLogin) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterAccountLogin {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterAccountLoginSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterAccountLoginFromID(_ret)
 }
 
 func (o *MTRClusterAccountLogin) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterAccountLogin {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterAccountLoginSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterAccountLoginFromID(_ret)
 }
 
@@ -177,4 +181,3 @@ func (o *MTRClusterAccountLogin) LogoutWithExpectedValuesExpectedValueIntervalCo
 	}
 	o.Ptr().Send(_mTRClusterAccountLoginSelLogoutWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues, expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
-

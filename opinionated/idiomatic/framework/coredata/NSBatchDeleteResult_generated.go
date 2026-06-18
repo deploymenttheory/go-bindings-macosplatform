@@ -45,7 +45,9 @@ func (x *BatchDeleteResult) ResultType() raw.NSBatchDeleteRequestResultType {
 	return x.inner.ResultType()
 }
 
-func (x *BatchDeleteResult) asPersistentStoreResult() *raw.NSPersistentStoreResult { return &x.inner.NSPersistentStoreResult }
+func (x *BatchDeleteResult) asPersistentStoreResult() *raw.NSPersistentStoreResult {
+	return &x.inner.NSPersistentStoreResult
+}
 
 // BatchDeleteResultable is the interface implemented by [BatchDeleteResult], for mocking and DI.
 type BatchDeleteResultable interface {
@@ -55,4 +57,3 @@ type BatchDeleteResultable interface {
 }
 
 var _ BatchDeleteResultable = (*BatchDeleteResult)(nil)
-

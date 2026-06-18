@@ -16,23 +16,23 @@ type SCNAudioSource struct {
 }
 
 var (
-	_clsSCNAudioSource = _objcClass("SCNAudioSource")
+	_clsSCNAudioSource                  = _objcClass("SCNAudioSource")
 	_sCNAudioSourceSelInitWithFileNamed = objc.RegisterName("initWithFileNamed:")
-	_sCNAudioSourceSelInitWithURL = objc.RegisterName("initWithURL:")
-	_sCNAudioSourceSelAudioSourceNamed = objc.RegisterName("audioSourceNamed:")
-	_sCNAudioSourceSelLoad = objc.RegisterName("load")
-	_sCNAudioSourceSelIsPositional = objc.RegisterName("isPositional")
-	_sCNAudioSourceSelSetPositional = objc.RegisterName("setPositional:")
-	_sCNAudioSourceSelVolume = objc.RegisterName("volume")
-	_sCNAudioSourceSelSetVolume = objc.RegisterName("setVolume:")
-	_sCNAudioSourceSelRate = objc.RegisterName("rate")
-	_sCNAudioSourceSelSetRate = objc.RegisterName("setRate:")
-	_sCNAudioSourceSelReverbBlend = objc.RegisterName("reverbBlend")
-	_sCNAudioSourceSelSetReverbBlend = objc.RegisterName("setReverbBlend:")
-	_sCNAudioSourceSelLoops = objc.RegisterName("loops")
-	_sCNAudioSourceSelSetLoops = objc.RegisterName("setLoops:")
-	_sCNAudioSourceSelShouldStream = objc.RegisterName("shouldStream")
-	_sCNAudioSourceSelSetShouldStream = objc.RegisterName("setShouldStream:")
+	_sCNAudioSourceSelInitWithURL       = objc.RegisterName("initWithURL:")
+	_sCNAudioSourceSelAudioSourceNamed  = objc.RegisterName("audioSourceNamed:")
+	_sCNAudioSourceSelLoad              = objc.RegisterName("load")
+	_sCNAudioSourceSelIsPositional      = objc.RegisterName("isPositional")
+	_sCNAudioSourceSelSetPositional     = objc.RegisterName("setPositional:")
+	_sCNAudioSourceSelVolume            = objc.RegisterName("volume")
+	_sCNAudioSourceSelSetVolume         = objc.RegisterName("setVolume:")
+	_sCNAudioSourceSelRate              = objc.RegisterName("rate")
+	_sCNAudioSourceSelSetRate           = objc.RegisterName("setRate:")
+	_sCNAudioSourceSelReverbBlend       = objc.RegisterName("reverbBlend")
+	_sCNAudioSourceSelSetReverbBlend    = objc.RegisterName("setReverbBlend:")
+	_sCNAudioSourceSelLoops             = objc.RegisterName("loops")
+	_sCNAudioSourceSelSetLoops          = objc.RegisterName("setLoops:")
+	_sCNAudioSourceSelShouldStream      = objc.RegisterName("shouldStream")
+	_sCNAudioSourceSelSetShouldStream   = objc.RegisterName("setShouldStream:")
 )
 
 func SCNAudioSourceFromID(id objc.ID) *SCNAudioSource {
@@ -48,21 +48,27 @@ func SCNAudioSourceFromID(id objc.ID) *SCNAudioSource {
 // @method initWithFileNamed: @abstract Convenience initializer that creates an AVAudioNode from the named audio asset in the main bundle.
 func (o *SCNAudioSource) InitWithFileNamed(name *foundation.NSString) *SCNAudioSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNAudioSourceSelInitWithFileNamed, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNAudioSourceFromID(_ret)
 }
 
 // @method initWithURL: @abstract Convenience initializer that creates an AVAudioNode from the URL that contain a audio asset.
 func (o *SCNAudioSource) InitWithURL(url *foundation.NSURL) *SCNAudioSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNAudioSourceSelInitWithURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNAudioSourceFromID(_ret)
 }
 
 // @method audioSourceNamed: @abstract Convenience class initializer that caches audioSources.
 func SCNAudioSourceAudioSourceNamed(fileName *foundation.NSString) *SCNAudioSource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAudioSource), _sCNAudioSourceSelAudioSourceNamed, fileName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNAudioSourceFromID(_ret)
 }
 
@@ -130,4 +136,3 @@ func (o *SCNAudioSource) ShouldStream() bool {
 func (o *SCNAudioSource) SetShouldStream(shouldStream bool) {
 	o.Ptr().Send(_sCNAudioSourceSelSetShouldStream, shouldStream)
 }
-

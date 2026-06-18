@@ -16,12 +16,12 @@ type PKPaymentRequestMerchantSessionUpdate struct {
 }
 
 var (
-	_clsPKPaymentRequestMerchantSessionUpdate = _objcClass("PKPaymentRequestMerchantSessionUpdate")
+	_clsPKPaymentRequestMerchantSessionUpdate                              = _objcClass("PKPaymentRequestMerchantSessionUpdate")
 	_pKPaymentRequestMerchantSessionUpdateSelInitWithStatusMerchantSession = objc.RegisterName("initWithStatus:merchantSession:")
-	_pKPaymentRequestMerchantSessionUpdateSelStatus = objc.RegisterName("status")
-	_pKPaymentRequestMerchantSessionUpdateSelSetStatus = objc.RegisterName("setStatus:")
-	_pKPaymentRequestMerchantSessionUpdateSelSession = objc.RegisterName("session")
-	_pKPaymentRequestMerchantSessionUpdateSelSetSession = objc.RegisterName("setSession:")
+	_pKPaymentRequestMerchantSessionUpdateSelStatus                        = objc.RegisterName("status")
+	_pKPaymentRequestMerchantSessionUpdateSelSetStatus                     = objc.RegisterName("setStatus:")
+	_pKPaymentRequestMerchantSessionUpdateSelSession                       = objc.RegisterName("session")
+	_pKPaymentRequestMerchantSessionUpdateSelSetSession                    = objc.RegisterName("setSession:")
 )
 
 func PKPaymentRequestMerchantSessionUpdateFromID(id objc.ID) *PKPaymentRequestMerchantSessionUpdate {
@@ -36,7 +36,9 @@ func PKPaymentRequestMerchantSessionUpdateFromID(id objc.ID) *PKPaymentRequestMe
 
 func (o *PKPaymentRequestMerchantSessionUpdate) InitWithStatusMerchantSession(status PKPaymentAuthorizationStatus, session *PKPaymentMerchantSession) *PKPaymentRequestMerchantSessionUpdate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestMerchantSessionUpdateSelInitWithStatusMerchantSession, status, session.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKPaymentRequestMerchantSessionUpdateFromID(_ret)
 }
 
@@ -51,11 +53,12 @@ func (o *PKPaymentRequestMerchantSessionUpdate) SetStatus(status PKPaymentAuthor
 
 func (o *PKPaymentRequestMerchantSessionUpdate) Session() *PKPaymentMerchantSession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestMerchantSessionUpdateSelSession)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKPaymentMerchantSessionFromID(_ret)
 }
 
 func (o *PKPaymentRequestMerchantSessionUpdate) SetSession(session *PKPaymentMerchantSession) {
 	o.Ptr().Send(_pKPaymentRequestMerchantSessionUpdateSelSetSession, session.Ptr())
 }
-

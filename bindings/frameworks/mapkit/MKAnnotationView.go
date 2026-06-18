@@ -18,56 +18,56 @@ type MKAnnotationView struct {
 }
 
 var (
-	_clsMKAnnotationView = _objcClass("MKAnnotationView")
+	_clsMKAnnotationView                                  = _objcClass("MKAnnotationView")
 	_mKAnnotationViewSelInitWithAnnotationReuseIdentifier = objc.RegisterName("initWithAnnotation:reuseIdentifier:")
-	_mKAnnotationViewSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_mKAnnotationViewSelPrepareForDisplay = objc.RegisterName("prepareForDisplay")
-	_mKAnnotationViewSelSetSelectedAnimated = objc.RegisterName("setSelected:animated:")
-	_mKAnnotationViewSelSetDragStateAnimated = objc.RegisterName("setDragState:animated:")
-	_mKAnnotationViewSelReuseIdentifier = objc.RegisterName("reuseIdentifier")
-	_mKAnnotationViewSelAnnotation = objc.RegisterName("annotation")
-	_mKAnnotationViewSelSetAnnotation = objc.RegisterName("setAnnotation:")
-	_mKAnnotationViewSelImage = objc.RegisterName("image")
-	_mKAnnotationViewSelSetImage = objc.RegisterName("setImage:")
-	_mKAnnotationViewSelCenterOffset = objc.RegisterName("centerOffset")
-	_mKAnnotationViewSelSetCenterOffset = objc.RegisterName("setCenterOffset:")
-	_mKAnnotationViewSelAccessoryOffset = objc.RegisterName("accessoryOffset")
-	_mKAnnotationViewSelSetAccessoryOffset = objc.RegisterName("setAccessoryOffset:")
-	_mKAnnotationViewSelCalloutOffset = objc.RegisterName("calloutOffset")
-	_mKAnnotationViewSelSetCalloutOffset = objc.RegisterName("setCalloutOffset:")
-	_mKAnnotationViewSelLeftCalloutOffset = objc.RegisterName("leftCalloutOffset")
-	_mKAnnotationViewSelSetLeftCalloutOffset = objc.RegisterName("setLeftCalloutOffset:")
-	_mKAnnotationViewSelRightCalloutOffset = objc.RegisterName("rightCalloutOffset")
-	_mKAnnotationViewSelSetRightCalloutOffset = objc.RegisterName("setRightCalloutOffset:")
-	_mKAnnotationViewSelIsEnabled = objc.RegisterName("isEnabled")
-	_mKAnnotationViewSelSetEnabled = objc.RegisterName("setEnabled:")
-	_mKAnnotationViewSelIsHighlighted = objc.RegisterName("isHighlighted")
-	_mKAnnotationViewSelSetHighlighted = objc.RegisterName("setHighlighted:")
-	_mKAnnotationViewSelIsSelected = objc.RegisterName("isSelected")
-	_mKAnnotationViewSelSetSelected = objc.RegisterName("setSelected:")
-	_mKAnnotationViewSelCanShowCallout = objc.RegisterName("canShowCallout")
-	_mKAnnotationViewSelSetCanShowCallout = objc.RegisterName("setCanShowCallout:")
-	_mKAnnotationViewSelLeftCalloutAccessoryView = objc.RegisterName("leftCalloutAccessoryView")
-	_mKAnnotationViewSelSetLeftCalloutAccessoryView = objc.RegisterName("setLeftCalloutAccessoryView:")
-	_mKAnnotationViewSelRightCalloutAccessoryView = objc.RegisterName("rightCalloutAccessoryView")
-	_mKAnnotationViewSelSetRightCalloutAccessoryView = objc.RegisterName("setRightCalloutAccessoryView:")
-	_mKAnnotationViewSelDetailCalloutAccessoryView = objc.RegisterName("detailCalloutAccessoryView")
-	_mKAnnotationViewSelSetDetailCalloutAccessoryView = objc.RegisterName("setDetailCalloutAccessoryView:")
-	_mKAnnotationViewSelIsDraggable = objc.RegisterName("isDraggable")
-	_mKAnnotationViewSelSetDraggable = objc.RegisterName("setDraggable:")
-	_mKAnnotationViewSelDragState = objc.RegisterName("dragState")
-	_mKAnnotationViewSelSetDragState = objc.RegisterName("setDragState:")
-	_mKAnnotationViewSelClusteringIdentifier = objc.RegisterName("clusteringIdentifier")
-	_mKAnnotationViewSelSetClusteringIdentifier = objc.RegisterName("setClusteringIdentifier:")
-	_mKAnnotationViewSelClusterAnnotationView = objc.RegisterName("clusterAnnotationView")
-	_mKAnnotationViewSelDisplayPriority = objc.RegisterName("displayPriority")
-	_mKAnnotationViewSelSetDisplayPriority = objc.RegisterName("setDisplayPriority:")
-	_mKAnnotationViewSelZPriority = objc.RegisterName("zPriority")
-	_mKAnnotationViewSelSetZPriority = objc.RegisterName("setZPriority:")
-	_mKAnnotationViewSelSelectedZPriority = objc.RegisterName("selectedZPriority")
-	_mKAnnotationViewSelSetSelectedZPriority = objc.RegisterName("setSelectedZPriority:")
-	_mKAnnotationViewSelCollisionMode = objc.RegisterName("collisionMode")
-	_mKAnnotationViewSelSetCollisionMode = objc.RegisterName("setCollisionMode:")
+	_mKAnnotationViewSelInitWithCoder                     = objc.RegisterName("initWithCoder:")
+	_mKAnnotationViewSelPrepareForDisplay                 = objc.RegisterName("prepareForDisplay")
+	_mKAnnotationViewSelSetSelectedAnimated               = objc.RegisterName("setSelected:animated:")
+	_mKAnnotationViewSelSetDragStateAnimated              = objc.RegisterName("setDragState:animated:")
+	_mKAnnotationViewSelReuseIdentifier                   = objc.RegisterName("reuseIdentifier")
+	_mKAnnotationViewSelAnnotation                        = objc.RegisterName("annotation")
+	_mKAnnotationViewSelSetAnnotation                     = objc.RegisterName("setAnnotation:")
+	_mKAnnotationViewSelImage                             = objc.RegisterName("image")
+	_mKAnnotationViewSelSetImage                          = objc.RegisterName("setImage:")
+	_mKAnnotationViewSelCenterOffset                      = objc.RegisterName("centerOffset")
+	_mKAnnotationViewSelSetCenterOffset                   = objc.RegisterName("setCenterOffset:")
+	_mKAnnotationViewSelAccessoryOffset                   = objc.RegisterName("accessoryOffset")
+	_mKAnnotationViewSelSetAccessoryOffset                = objc.RegisterName("setAccessoryOffset:")
+	_mKAnnotationViewSelCalloutOffset                     = objc.RegisterName("calloutOffset")
+	_mKAnnotationViewSelSetCalloutOffset                  = objc.RegisterName("setCalloutOffset:")
+	_mKAnnotationViewSelLeftCalloutOffset                 = objc.RegisterName("leftCalloutOffset")
+	_mKAnnotationViewSelSetLeftCalloutOffset              = objc.RegisterName("setLeftCalloutOffset:")
+	_mKAnnotationViewSelRightCalloutOffset                = objc.RegisterName("rightCalloutOffset")
+	_mKAnnotationViewSelSetRightCalloutOffset             = objc.RegisterName("setRightCalloutOffset:")
+	_mKAnnotationViewSelIsEnabled                         = objc.RegisterName("isEnabled")
+	_mKAnnotationViewSelSetEnabled                        = objc.RegisterName("setEnabled:")
+	_mKAnnotationViewSelIsHighlighted                     = objc.RegisterName("isHighlighted")
+	_mKAnnotationViewSelSetHighlighted                    = objc.RegisterName("setHighlighted:")
+	_mKAnnotationViewSelIsSelected                        = objc.RegisterName("isSelected")
+	_mKAnnotationViewSelSetSelected                       = objc.RegisterName("setSelected:")
+	_mKAnnotationViewSelCanShowCallout                    = objc.RegisterName("canShowCallout")
+	_mKAnnotationViewSelSetCanShowCallout                 = objc.RegisterName("setCanShowCallout:")
+	_mKAnnotationViewSelLeftCalloutAccessoryView          = objc.RegisterName("leftCalloutAccessoryView")
+	_mKAnnotationViewSelSetLeftCalloutAccessoryView       = objc.RegisterName("setLeftCalloutAccessoryView:")
+	_mKAnnotationViewSelRightCalloutAccessoryView         = objc.RegisterName("rightCalloutAccessoryView")
+	_mKAnnotationViewSelSetRightCalloutAccessoryView      = objc.RegisterName("setRightCalloutAccessoryView:")
+	_mKAnnotationViewSelDetailCalloutAccessoryView        = objc.RegisterName("detailCalloutAccessoryView")
+	_mKAnnotationViewSelSetDetailCalloutAccessoryView     = objc.RegisterName("setDetailCalloutAccessoryView:")
+	_mKAnnotationViewSelIsDraggable                       = objc.RegisterName("isDraggable")
+	_mKAnnotationViewSelSetDraggable                      = objc.RegisterName("setDraggable:")
+	_mKAnnotationViewSelDragState                         = objc.RegisterName("dragState")
+	_mKAnnotationViewSelSetDragState                      = objc.RegisterName("setDragState:")
+	_mKAnnotationViewSelClusteringIdentifier              = objc.RegisterName("clusteringIdentifier")
+	_mKAnnotationViewSelSetClusteringIdentifier           = objc.RegisterName("setClusteringIdentifier:")
+	_mKAnnotationViewSelClusterAnnotationView             = objc.RegisterName("clusterAnnotationView")
+	_mKAnnotationViewSelDisplayPriority                   = objc.RegisterName("displayPriority")
+	_mKAnnotationViewSelSetDisplayPriority                = objc.RegisterName("setDisplayPriority:")
+	_mKAnnotationViewSelZPriority                         = objc.RegisterName("zPriority")
+	_mKAnnotationViewSelSetZPriority                      = objc.RegisterName("setZPriority:")
+	_mKAnnotationViewSelSelectedZPriority                 = objc.RegisterName("selectedZPriority")
+	_mKAnnotationViewSelSetSelectedZPriority              = objc.RegisterName("setSelectedZPriority:")
+	_mKAnnotationViewSelCollisionMode                     = objc.RegisterName("collisionMode")
+	_mKAnnotationViewSelSetCollisionMode                  = objc.RegisterName("setCollisionMode:")
 )
 
 func MKAnnotationViewFromID(id objc.ID) *MKAnnotationView {
@@ -82,13 +82,17 @@ func MKAnnotationViewFromID(id objc.ID) *MKAnnotationView {
 
 func (o *MKAnnotationView) InitWithAnnotationReuseIdentifier(annotation MKAnnotation, reuseIdentifier *foundation.NSString) *MKAnnotationView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKAnnotationViewSelInitWithAnnotationReuseIdentifier, annotation, reuseIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKAnnotationViewFromID(_ret)
 }
 
 func (o *MKAnnotationView) InitWithCoder(aDecoder *foundation.NSCoder) *MKAnnotationView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKAnnotationViewSelInitWithCoder, aDecoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKAnnotationViewFromID(_ret)
 }
 
@@ -106,7 +110,9 @@ func (o *MKAnnotationView) SetDragStateAnimated(newDragState MKAnnotationViewDra
 
 func (o *MKAnnotationView) ReuseIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKAnnotationViewSelReuseIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -121,7 +127,9 @@ func (o *MKAnnotationView) SetAnnotation(annotation MKAnnotation) {
 
 func (o *MKAnnotationView) Image() *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKAnnotationViewSelImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSImageFromID(_ret)
 }
 
@@ -212,7 +220,9 @@ func (o *MKAnnotationView) SetCanShowCallout(canShowCallout bool) {
 
 func (o *MKAnnotationView) LeftCalloutAccessoryView() *appkit.NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKAnnotationViewSelLeftCalloutAccessoryView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSViewFromID(_ret)
 }
 
@@ -222,7 +232,9 @@ func (o *MKAnnotationView) SetLeftCalloutAccessoryView(leftCalloutAccessoryView 
 
 func (o *MKAnnotationView) RightCalloutAccessoryView() *appkit.NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKAnnotationViewSelRightCalloutAccessoryView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSViewFromID(_ret)
 }
 
@@ -232,7 +244,9 @@ func (o *MKAnnotationView) SetRightCalloutAccessoryView(rightCalloutAccessoryVie
 
 func (o *MKAnnotationView) DetailCalloutAccessoryView() *appkit.NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKAnnotationViewSelDetailCalloutAccessoryView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSViewFromID(_ret)
 }
 
@@ -260,7 +274,9 @@ func (o *MKAnnotationView) SetDragState(dragState MKAnnotationViewDragState) {
 
 func (o *MKAnnotationView) ClusteringIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKAnnotationViewSelClusteringIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -270,7 +286,9 @@ func (o *MKAnnotationView) SetClusteringIdentifier(clusteringIdentifier *foundat
 
 func (o *MKAnnotationView) ClusterAnnotationView() *MKAnnotationView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKAnnotationViewSelClusterAnnotationView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKAnnotationViewFromID(_ret)
 }
 
@@ -309,4 +327,3 @@ func (o *MKAnnotationView) CollisionMode() MKAnnotationViewCollisionMode {
 func (o *MKAnnotationView) SetCollisionMode(collisionMode MKAnnotationViewCollisionMode) {
 	o.Ptr().Send(_mKAnnotationViewSelSetCollisionMode, collisionMode)
 }
-

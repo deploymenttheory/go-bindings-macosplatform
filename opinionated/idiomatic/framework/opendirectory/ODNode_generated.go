@@ -226,4 +226,3 @@ type Nodeable interface {
 }
 
 var _ Nodeable = (*Node)(nil)
-

@@ -756,4 +756,3 @@ func KColorSyncWebSafeColorsProfile() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncWebSafeColorsProfile")
 	return ptr
 }
-

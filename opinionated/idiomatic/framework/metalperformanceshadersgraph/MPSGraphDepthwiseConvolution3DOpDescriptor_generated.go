@@ -18,7 +18,9 @@ type GraphDepthwiseConvolution3DOpDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MPSGraphDepthwiseConvolution3DOpDescriptor].
-func (x *GraphDepthwiseConvolution3DOpDescriptor) Unwrap() *raw.MPSGraphDepthwiseConvolution3DOpDescriptor { return x.inner }
+func (x *GraphDepthwiseConvolution3DOpDescriptor) Unwrap() *raw.MPSGraphDepthwiseConvolution3DOpDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -45,7 +47,9 @@ func (x *GraphDepthwiseConvolution3DOpDescriptor) WithStrides(items ...*foundati
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -61,7 +65,9 @@ func (x *GraphDepthwiseConvolution3DOpDescriptor) WithDilationRates(items ...*fo
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -77,7 +83,9 @@ func (x *GraphDepthwiseConvolution3DOpDescriptor) WithPaddingValues(items ...*fo
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -166,7 +174,9 @@ func (x *GraphDepthwiseConvolution3DOpDescriptor) SetChannelDimensionIndex(chann
 	x.inner.SetChannelDimensionIndex(channelDimensionIndex)
 }
 
-func (x *GraphDepthwiseConvolution3DOpDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
+func (x *GraphDepthwiseConvolution3DOpDescriptor) asGraphObject() *raw.MPSGraphObject {
+	return &x.inner.MPSGraphObject
+}
 
 // GraphDepthwiseConvolution3DOpDescriptorable is the interface implemented by [GraphDepthwiseConvolution3DOpDescriptor], for mocking and DI.
 type GraphDepthwiseConvolution3DOpDescriptorable interface {
@@ -189,4 +199,3 @@ type GraphDepthwiseConvolution3DOpDescriptorable interface {
 }
 
 var _ GraphDepthwiseConvolution3DOpDescriptorable = (*GraphDepthwiseConvolution3DOpDescriptor)(nil)
-

@@ -16,14 +16,14 @@ type SFTranscriptionSegment struct {
 }
 
 var (
-	_clsSFTranscriptionSegment = _objcClass("SFTranscriptionSegment")
-	_sFTranscriptionSegmentSelSubstring = objc.RegisterName("substring")
-	_sFTranscriptionSegmentSelSubstringRange = objc.RegisterName("substringRange")
-	_sFTranscriptionSegmentSelTimestamp = objc.RegisterName("timestamp")
-	_sFTranscriptionSegmentSelDuration = objc.RegisterName("duration")
-	_sFTranscriptionSegmentSelConfidence = objc.RegisterName("confidence")
+	_clsSFTranscriptionSegment                      = _objcClass("SFTranscriptionSegment")
+	_sFTranscriptionSegmentSelSubstring             = objc.RegisterName("substring")
+	_sFTranscriptionSegmentSelSubstringRange        = objc.RegisterName("substringRange")
+	_sFTranscriptionSegmentSelTimestamp             = objc.RegisterName("timestamp")
+	_sFTranscriptionSegmentSelDuration              = objc.RegisterName("duration")
+	_sFTranscriptionSegmentSelConfidence            = objc.RegisterName("confidence")
 	_sFTranscriptionSegmentSelAlternativeSubstrings = objc.RegisterName("alternativeSubstrings")
-	_sFTranscriptionSegmentSelVoiceAnalytics = objc.RegisterName("voiceAnalytics")
+	_sFTranscriptionSegmentSelVoiceAnalytics        = objc.RegisterName("voiceAnalytics")
 )
 
 func SFTranscriptionSegmentFromID(id objc.ID) *SFTranscriptionSegment {
@@ -39,23 +39,25 @@ func SFTranscriptionSegmentFromID(id objc.ID) *SFTranscriptionSegment {
 // The string representation of the utterance in the transcription segment.
 func (o *SFTranscriptionSegment) Substring() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFTranscriptionSegmentSelSubstring)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
-// The range information for the transcription segment's substring, relative to the overall transcription. Use the range information to find the position of the segment within the ``SFTranscription/formattedString`` property of the ``SFTranscription`` object containing this segment.
+// The range information for the transcription segment's substring, relative to the overall transcription. Use the range information to find the position of the segment within the “SFTranscription/formattedString“ property of the “SFTranscription“ object containing this segment.
 func (o *SFTranscriptionSegment) SubstringRange() foundation.NSRange {
 	_ret := objc.Send[foundation.NSRange](o.Ptr(), _sFTranscriptionSegmentSelSubstringRange)
 	return _ret
 }
 
-// The start time of the segment in the processed audio stream. The ``timestamp`` is the number of seconds between the beginning of the audio content and when the user spoke the word represented by the segment. For example, if the user said the word "time" one second into the transcription "What time is it", the timestamp would be equal to `1.0`.
+// The start time of the segment in the processed audio stream. The “timestamp“ is the number of seconds between the beginning of the audio content and when the user spoke the word represented by the segment. For example, if the user said the word "time" one second into the transcription "What time is it", the timestamp would be equal to `1.0`.
 func (o *SFTranscriptionSegment) Timestamp() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _sFTranscriptionSegmentSelTimestamp)
 	return _ret
 }
 
-// The number of seconds it took for the user to speak the utterance represented by the segment. The ``duration`` contains the number of seconds it took for the user to speak the one or more words (utterance) represented by the segment. For example, the ``SFSpeechRecognizer`` sets ``duration`` to `0.6` if the user took `0.6` seconds to say `“time”` in the transcription of `“What time is it?"`.
+// The number of seconds it took for the user to speak the utterance represented by the segment. The “duration“ contains the number of seconds it took for the user to speak the one or more words (utterance) represented by the segment. For example, the “SFSpeechRecognizer“ sets “duration“ to `0.6` if the user took `0.6` seconds to say `“time”` in the transcription of `“What time is it?"`.
 func (o *SFTranscriptionSegment) Duration() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _sFTranscriptionSegmentSelDuration)
 	return _ret
@@ -77,7 +79,8 @@ func (o *SFTranscriptionSegment) AlternativeSubstrings() *foundation.NSArray[*fo
 // Deprecated: since macOS 11.3.
 func (o *SFTranscriptionSegment) VoiceAnalytics() *SFVoiceAnalytics {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFTranscriptionSegmentSelVoiceAnalytics)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SFVoiceAnalyticsFromID(_ret)
 }
-

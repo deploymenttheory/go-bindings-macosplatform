@@ -18,9 +18,9 @@ type CNCustomDetectionTrack struct {
 }
 
 var (
-	_clsCNCustomDetectionTrack = _objcClass("CNCustomDetectionTrack")
+	_clsCNCustomDetectionTrack                         = _objcClass("CNCustomDetectionTrack")
 	_cNCustomDetectionTrackSelInitWithDetectionsSmooth = objc.RegisterName("initWithDetections:smooth:")
-	_cNCustomDetectionTrackSelAllDetections = objc.RegisterName("allDetections")
+	_cNCustomDetectionTrackSelAllDetections            = objc.RegisterName("allDetections")
 )
 
 func CNCustomDetectionTrackFromID(id objc.ID) *CNCustomDetectionTrack {
@@ -36,13 +36,16 @@ func CNCustomDetectionTrackFromID(id objc.ID) *CNCustomDetectionTrack {
 // Initialize a custom detection track with an array of detections, optionally applying smoothing. The smoothing algorithm used is the same one that is used for built-in detections during recording. It compensates for some amount of jitter in the disparity measure by smoothing out variability.
 func (o *CNCustomDetectionTrack) InitWithDetectionsSmooth(detections *foundation.NSArray[*CNDetection], applySmoothing bool) *CNCustomDetectionTrack {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNCustomDetectionTrackSelInitWithDetectionsSmooth, detections.Ptr(), applySmoothing)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNCustomDetectionTrackFromID(_ret)
 }
 
 func (o *CNCustomDetectionTrack) AllDetections() *foundation.NSArray[*CNDetection] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNCustomDetectionTrackSelAllDetections)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CNDetection](_ret)
 }
-

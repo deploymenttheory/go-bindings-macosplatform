@@ -16,14 +16,14 @@ type CMIOExtensionPropertyAttributes[ObjectType purego.AnyObject] struct {
 }
 
 var (
-	_clsCMIOExtensionPropertyAttributes = _objcClass("CMIOExtensionPropertyAttributes")
+	_clsCMIOExtensionPropertyAttributes                                                          = _objcClass("CMIOExtensionPropertyAttributes")
 	_cMIOExtensionPropertyAttributesSelPropertyAttributesWithMinValueMaxValueValidValuesReadOnly = objc.RegisterName("propertyAttributesWithMinValue:maxValue:validValues:readOnly:")
-	_cMIOExtensionPropertyAttributesSelInitWithMinValueMaxValueValidValuesReadOnly = objc.RegisterName("initWithMinValue:maxValue:validValues:readOnly:")
-	_cMIOExtensionPropertyAttributesSelReadOnlyPropertyAttribute = objc.RegisterName("readOnlyPropertyAttribute")
-	_cMIOExtensionPropertyAttributesSelMinValue = objc.RegisterName("minValue")
-	_cMIOExtensionPropertyAttributesSelMaxValue = objc.RegisterName("maxValue")
-	_cMIOExtensionPropertyAttributesSelValidValues = objc.RegisterName("validValues")
-	_cMIOExtensionPropertyAttributesSelIsReadOnly = objc.RegisterName("isReadOnly")
+	_cMIOExtensionPropertyAttributesSelInitWithMinValueMaxValueValidValuesReadOnly               = objc.RegisterName("initWithMinValue:maxValue:validValues:readOnly:")
+	_cMIOExtensionPropertyAttributesSelReadOnlyPropertyAttribute                                 = objc.RegisterName("readOnlyPropertyAttribute")
+	_cMIOExtensionPropertyAttributesSelMinValue                                                  = objc.RegisterName("minValue")
+	_cMIOExtensionPropertyAttributesSelMaxValue                                                  = objc.RegisterName("maxValue")
+	_cMIOExtensionPropertyAttributesSelValidValues                                               = objc.RegisterName("validValues")
+	_cMIOExtensionPropertyAttributesSelIsReadOnly                                                = objc.RegisterName("isReadOnly")
 )
 
 func CMIOExtensionPropertyAttributesFromID[ObjectType purego.AnyObject](id objc.ID) *CMIOExtensionPropertyAttributes[ObjectType] {
@@ -39,21 +39,27 @@ func CMIOExtensionPropertyAttributesFromID[ObjectType purego.AnyObject](id objc.
 // @method propertyAttributesWithMinValue:maxValue:validValues:readonly: @abstract Returns a property attributes instance. @param minValue The minimum value of the property. @param maxValue The maximum value of the property. @param validValues The array of valid values. @param readOnly A readOnly flag. @result A CMIOExtensionPropertyAttributes instance that describes the attributes of a property. @discussion Property attributes may contain a minValue in which case the property is bounded by a minimum value. Property attributes may contain a maxValue in which case the property is bounded by a maximum value. Property attributes may contain both minValue and maxValue in which case the property is bounded within a range. Property attributes may contain a validValues in which case the property is discrete and can only have a certain set of value. If a property does not have a minValue/maxValue/validValues attributes, the property can have any value.
 func CMIOExtensionPropertyAttributesPropertyAttributesWithMinValueMaxValueValidValuesReadOnly(minValue objc.ID, maxValue objc.ID, validValues *foundation.NSArray[objc.ID], readOnly bool) *CMIOExtensionPropertyAttributes[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCMIOExtensionPropertyAttributes), _cMIOExtensionPropertyAttributesSelPropertyAttributesWithMinValueMaxValueValidValuesReadOnly, minValue, maxValue, validValues.Ptr(), readOnly)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CMIOExtensionPropertyAttributesFromID[objc.ID](_ret)
 }
 
 // @method propertyAttributesWithMinValue:maxValue:validValues:readonly: @abstract Initialize a property attributes instance. @param minValue The minimum value of the property. @param maxValue The maximum value of the property. @param validValues The array of valid values. @param readOnly A readOnly flag. @result A CMIOExtensionPropertyAttributes instance that describes the attributes of a property. @discussion Property attributes may contain a minValue in which case the property is bounded by a minimum value. Property attributes may contain a maxValue in which case the property is bounded by a maximum value. Property attributes may contain both minValue and maxValue in which case the property is bounded within a range. Property attributes may contain a validValues in which case the property is discrete and can only have a certain set of value. If a property does not have a minValue/maxValue/validValues attributes, the property can have any value.
 func (o *CMIOExtensionPropertyAttributes[ObjectType]) InitWithMinValueMaxValueValidValuesReadOnly(minValue ObjectType, maxValue ObjectType, validValues *foundation.NSArray[ObjectType], readOnly bool) *CMIOExtensionPropertyAttributes[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionPropertyAttributesSelInitWithMinValueMaxValueValidValuesReadOnly, minValue, maxValue, validValues.Ptr(), readOnly)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CMIOExtensionPropertyAttributesFromID[ObjectType](_ret)
 }
 
 // @property readOnlyPropertyAttribute @abstract The class property representing a readOnly property attribute with no minValue/maxValue/validValues.
 func CMIOExtensionPropertyAttributesReadOnlyPropertyAttribute() *CMIOExtensionPropertyAttributes[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCMIOExtensionPropertyAttributes), _cMIOExtensionPropertyAttributesSelReadOnlyPropertyAttribute)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CMIOExtensionPropertyAttributesFromID[objc.ID](_ret)
 }
 
@@ -72,7 +78,9 @@ func (o *CMIOExtensionPropertyAttributes[ObjectType]) MaxValue() ObjectType {
 // @property validValues @abstract An array of valid values.
 func (o *CMIOExtensionPropertyAttributes[ObjectType]) ValidValues() *foundation.NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionPropertyAttributesSelValidValues)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[ObjectType](_ret)
 }
 
@@ -81,4 +89,3 @@ func (o *CMIOExtensionPropertyAttributes[ObjectType]) IsReadOnly() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cMIOExtensionPropertyAttributesSelIsReadOnly)
 	return _ret
 }
-

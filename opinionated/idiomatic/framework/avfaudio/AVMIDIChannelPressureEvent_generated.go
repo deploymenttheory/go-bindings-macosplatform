@@ -58,9 +58,13 @@ func (x *MIDIChannelPressureEvent) SetPressure(pressure uint) {
 	x.inner.SetPressure(pressure)
 }
 
-func (x *MIDIChannelPressureEvent) asMIDIChannelEvent() *raw.AVMIDIChannelEvent { return &x.inner.AVMIDIChannelEvent }
+func (x *MIDIChannelPressureEvent) asMIDIChannelEvent() *raw.AVMIDIChannelEvent {
+	return &x.inner.AVMIDIChannelEvent
+}
 
-func (x *MIDIChannelPressureEvent) asMusicEvent() *raw.AVMusicEvent { return &x.inner.AVMIDIChannelEvent.AVMusicEvent }
+func (x *MIDIChannelPressureEvent) asMusicEvent() *raw.AVMusicEvent {
+	return &x.inner.AVMIDIChannelEvent.AVMusicEvent
+}
 
 // MIDIChannelPressureEventable is the interface implemented by [MIDIChannelPressureEvent], for mocking and DI.
 type MIDIChannelPressureEventable interface {
@@ -72,4 +76,3 @@ type MIDIChannelPressureEventable interface {
 }
 
 var _ MIDIChannelPressureEventable = (*MIDIChannelPressureEvent)(nil)
-

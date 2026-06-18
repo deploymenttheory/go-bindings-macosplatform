@@ -16,7 +16,7 @@ type SKPhysicsJointFixed struct {
 }
 
 var (
-	_clsSKPhysicsJointFixed = _objcClass("SKPhysicsJointFixed")
+	_clsSKPhysicsJointFixed                          = _objcClass("SKPhysicsJointFixed")
 	_sKPhysicsJointFixedSelJointWithBodyABodyBAnchor = objc.RegisterName("jointWithBodyA:bodyB:anchor:")
 )
 
@@ -32,7 +32,8 @@ func SKPhysicsJointFixedFromID(id objc.ID) *SKPhysicsJointFixed {
 
 func SKPhysicsJointFixedJointWithBodyABodyBAnchor(bodyA *SKPhysicsBody, bodyB *SKPhysicsBody, anchor corefoundation.CGPoint) *SKPhysicsJointFixed {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsJointFixed), _sKPhysicsJointFixedSelJointWithBodyABodyBAnchor, bodyA.Ptr(), bodyB.Ptr(), anchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPhysicsJointFixedFromID(_ret)
 }
-

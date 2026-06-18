@@ -110,4 +110,3 @@ type SceneSourceable interface {
 }
 
 var _ SceneSourceable = (*SceneSource)(nil)
-

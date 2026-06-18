@@ -10,4 +10,3 @@ type MPSNDArrayOffsets struct {
 type MPSNDArraySizes struct {
 	Dimensions [16]uint
 }
-

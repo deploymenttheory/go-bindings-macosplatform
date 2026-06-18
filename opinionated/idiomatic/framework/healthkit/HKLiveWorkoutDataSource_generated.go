@@ -61,4 +61,3 @@ type LiveWorkoutDataSourceable interface {
 }
 
 var _ LiveWorkoutDataSourceable = (*LiveWorkoutDataSource)(nil)
-

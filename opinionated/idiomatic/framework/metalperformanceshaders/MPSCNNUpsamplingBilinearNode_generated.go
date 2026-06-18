@@ -72,7 +72,9 @@ func (x *CNNUpsamplingBilinearNode) AlignCorners() bool {
 	return x.inner.AlignCorners()
 }
 
-func (x *CNNUpsamplingBilinearNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+func (x *CNNUpsamplingBilinearNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNFilterNode
+}
 
 // CNNUpsamplingBilinearNodeable is the interface implemented by [CNNUpsamplingBilinearNode], for mocking and DI.
 type CNNUpsamplingBilinearNodeable interface {
@@ -85,4 +87,3 @@ type CNNUpsamplingBilinearNodeable interface {
 }
 
 var _ CNNUpsamplingBilinearNodeable = (*CNNUpsamplingBilinearNode)(nil)
-

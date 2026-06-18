@@ -18,29 +18,29 @@ type MPSPolygonAccelerationStructure struct {
 }
 
 var (
-	_clsMPSPolygonAccelerationStructure = _objcClass("MPSPolygonAccelerationStructure")
-	_mPSPolygonAccelerationStructureSelPolygonType = objc.RegisterName("polygonType")
-	_mPSPolygonAccelerationStructureSelSetPolygonType = objc.RegisterName("setPolygonType:")
-	_mPSPolygonAccelerationStructureSelVertexStride = objc.RegisterName("vertexStride")
-	_mPSPolygonAccelerationStructureSelSetVertexStride = objc.RegisterName("setVertexStride:")
-	_mPSPolygonAccelerationStructureSelIndexType = objc.RegisterName("indexType")
-	_mPSPolygonAccelerationStructureSelSetIndexType = objc.RegisterName("setIndexType:")
-	_mPSPolygonAccelerationStructureSelVertexBuffer = objc.RegisterName("vertexBuffer")
-	_mPSPolygonAccelerationStructureSelSetVertexBuffer = objc.RegisterName("setVertexBuffer:")
-	_mPSPolygonAccelerationStructureSelVertexBufferOffset = objc.RegisterName("vertexBufferOffset")
+	_clsMPSPolygonAccelerationStructure                      = _objcClass("MPSPolygonAccelerationStructure")
+	_mPSPolygonAccelerationStructureSelPolygonType           = objc.RegisterName("polygonType")
+	_mPSPolygonAccelerationStructureSelSetPolygonType        = objc.RegisterName("setPolygonType:")
+	_mPSPolygonAccelerationStructureSelVertexStride          = objc.RegisterName("vertexStride")
+	_mPSPolygonAccelerationStructureSelSetVertexStride       = objc.RegisterName("setVertexStride:")
+	_mPSPolygonAccelerationStructureSelIndexType             = objc.RegisterName("indexType")
+	_mPSPolygonAccelerationStructureSelSetIndexType          = objc.RegisterName("setIndexType:")
+	_mPSPolygonAccelerationStructureSelVertexBuffer          = objc.RegisterName("vertexBuffer")
+	_mPSPolygonAccelerationStructureSelSetVertexBuffer       = objc.RegisterName("setVertexBuffer:")
+	_mPSPolygonAccelerationStructureSelVertexBufferOffset    = objc.RegisterName("vertexBufferOffset")
 	_mPSPolygonAccelerationStructureSelSetVertexBufferOffset = objc.RegisterName("setVertexBufferOffset:")
-	_mPSPolygonAccelerationStructureSelIndexBuffer = objc.RegisterName("indexBuffer")
-	_mPSPolygonAccelerationStructureSelSetIndexBuffer = objc.RegisterName("setIndexBuffer:")
-	_mPSPolygonAccelerationStructureSelIndexBufferOffset = objc.RegisterName("indexBufferOffset")
-	_mPSPolygonAccelerationStructureSelSetIndexBufferOffset = objc.RegisterName("setIndexBufferOffset:")
-	_mPSPolygonAccelerationStructureSelMaskBuffer = objc.RegisterName("maskBuffer")
-	_mPSPolygonAccelerationStructureSelSetMaskBuffer = objc.RegisterName("setMaskBuffer:")
-	_mPSPolygonAccelerationStructureSelMaskBufferOffset = objc.RegisterName("maskBufferOffset")
-	_mPSPolygonAccelerationStructureSelSetMaskBufferOffset = objc.RegisterName("setMaskBufferOffset:")
-	_mPSPolygonAccelerationStructureSelPolygonCount = objc.RegisterName("polygonCount")
-	_mPSPolygonAccelerationStructureSelSetPolygonCount = objc.RegisterName("setPolygonCount:")
-	_mPSPolygonAccelerationStructureSelPolygonBuffers = objc.RegisterName("polygonBuffers")
-	_mPSPolygonAccelerationStructureSelSetPolygonBuffers = objc.RegisterName("setPolygonBuffers:")
+	_mPSPolygonAccelerationStructureSelIndexBuffer           = objc.RegisterName("indexBuffer")
+	_mPSPolygonAccelerationStructureSelSetIndexBuffer        = objc.RegisterName("setIndexBuffer:")
+	_mPSPolygonAccelerationStructureSelIndexBufferOffset     = objc.RegisterName("indexBufferOffset")
+	_mPSPolygonAccelerationStructureSelSetIndexBufferOffset  = objc.RegisterName("setIndexBufferOffset:")
+	_mPSPolygonAccelerationStructureSelMaskBuffer            = objc.RegisterName("maskBuffer")
+	_mPSPolygonAccelerationStructureSelSetMaskBuffer         = objc.RegisterName("setMaskBuffer:")
+	_mPSPolygonAccelerationStructureSelMaskBufferOffset      = objc.RegisterName("maskBufferOffset")
+	_mPSPolygonAccelerationStructureSelSetMaskBufferOffset   = objc.RegisterName("setMaskBufferOffset:")
+	_mPSPolygonAccelerationStructureSelPolygonCount          = objc.RegisterName("polygonCount")
+	_mPSPolygonAccelerationStructureSelSetPolygonCount       = objc.RegisterName("setPolygonCount:")
+	_mPSPolygonAccelerationStructureSelPolygonBuffers        = objc.RegisterName("polygonBuffers")
+	_mPSPolygonAccelerationStructureSelSetPolygonBuffers     = objc.RegisterName("setPolygonBuffers:")
 )
 
 func MPSPolygonAccelerationStructureFromID(id objc.ID) *MPSPolygonAccelerationStructure {
@@ -156,11 +156,12 @@ func (o *MPSPolygonAccelerationStructure) SetPolygonCount(polygonCount uint) {
 // @brief Array of polygon buffers. Each buffer contains a vertex buffer and optional index and mask buffer for an array of polygons. Changing the length of this array requires rebuilding the acceleration structure. Using more than one MPSPolygonBuffer will reduce performance. It is better to concatenate these buffers into a single vertex buffer, index buffer, and mask buffer and use a single MPSPolygonBuffer if possible. This also applies when using an MPSInstanceAccelerationStructure: each instance or subclass of MPSPolygonAccelerationStructure in an instance hierarchy should use the same vertex buffer, index buffer, and mask buffer, although each acceleration structure may use different offsets into these buffers. This allows for the vertex, index, and mask buffers to be bound directly instead of indirectly through an argument buffer. There must be at least one MPSPolygonBuffer. On argument buffer tier 1 devices, there must be be exactly one MPSPolygonBuffer. Use the argumentBuffersSupport property of the MTLDevice to check for support.
 func (o *MPSPolygonAccelerationStructure) PolygonBuffers() *foundation.NSArray[*MPSPolygonBuffer] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSPolygonAccelerationStructureSelPolygonBuffers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MPSPolygonBuffer](_ret)
 }
 
 func (o *MPSPolygonAccelerationStructure) SetPolygonBuffers(polygonBuffers *foundation.NSArray[*MPSPolygonBuffer]) {
 	o.Ptr().Send(_mPSPolygonAccelerationStructureSelSetPolygonBuffers, polygonBuffers.Ptr())
 }
-

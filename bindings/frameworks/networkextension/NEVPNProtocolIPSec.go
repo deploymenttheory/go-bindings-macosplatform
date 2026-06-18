@@ -16,17 +16,17 @@ type NEVPNProtocolIPSec struct {
 }
 
 var (
-	_clsNEVPNProtocolIPSec = _objcClass("NEVPNProtocolIPSec")
-	_nEVPNProtocolIPSecSelAuthenticationMethod = objc.RegisterName("authenticationMethod")
-	_nEVPNProtocolIPSecSelSetAuthenticationMethod = objc.RegisterName("setAuthenticationMethod:")
-	_nEVPNProtocolIPSecSelUseExtendedAuthentication = objc.RegisterName("useExtendedAuthentication")
+	_clsNEVPNProtocolIPSec                             = _objcClass("NEVPNProtocolIPSec")
+	_nEVPNProtocolIPSecSelAuthenticationMethod         = objc.RegisterName("authenticationMethod")
+	_nEVPNProtocolIPSecSelSetAuthenticationMethod      = objc.RegisterName("setAuthenticationMethod:")
+	_nEVPNProtocolIPSecSelUseExtendedAuthentication    = objc.RegisterName("useExtendedAuthentication")
 	_nEVPNProtocolIPSecSelSetUseExtendedAuthentication = objc.RegisterName("setUseExtendedAuthentication:")
-	_nEVPNProtocolIPSecSelSharedSecretReference = objc.RegisterName("sharedSecretReference")
-	_nEVPNProtocolIPSecSelSetSharedSecretReference = objc.RegisterName("setSharedSecretReference:")
-	_nEVPNProtocolIPSecSelLocalIdentifier = objc.RegisterName("localIdentifier")
-	_nEVPNProtocolIPSecSelSetLocalIdentifier = objc.RegisterName("setLocalIdentifier:")
-	_nEVPNProtocolIPSecSelRemoteIdentifier = objc.RegisterName("remoteIdentifier")
-	_nEVPNProtocolIPSecSelSetRemoteIdentifier = objc.RegisterName("setRemoteIdentifier:")
+	_nEVPNProtocolIPSecSelSharedSecretReference        = objc.RegisterName("sharedSecretReference")
+	_nEVPNProtocolIPSecSelSetSharedSecretReference     = objc.RegisterName("setSharedSecretReference:")
+	_nEVPNProtocolIPSecSelLocalIdentifier              = objc.RegisterName("localIdentifier")
+	_nEVPNProtocolIPSecSelSetLocalIdentifier           = objc.RegisterName("setLocalIdentifier:")
+	_nEVPNProtocolIPSecSelRemoteIdentifier             = objc.RegisterName("remoteIdentifier")
+	_nEVPNProtocolIPSecSelSetRemoteIdentifier          = objc.RegisterName("setRemoteIdentifier:")
 )
 
 func NEVPNProtocolIPSecFromID(id objc.ID) *NEVPNProtocolIPSec {
@@ -62,7 +62,9 @@ func (o *NEVPNProtocolIPSec) SetUseExtendedAuthentication(useExtendedAuthenticat
 // @property sharedSecretReference @discussion A persistent reference to a keychain item of class kSecClassGenericPassword containing the IKE shared secret.
 func (o *NEVPNProtocolIPSec) SharedSecretReference() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEVPNProtocolIPSecSelSharedSecretReference)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -73,7 +75,9 @@ func (o *NEVPNProtocolIPSec) SetSharedSecretReference(sharedSecretReference *fou
 // @property localIdentifier @discussion A string identifying the local IPSec endpoint for authentication purposes.
 func (o *NEVPNProtocolIPSec) LocalIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEVPNProtocolIPSecSelLocalIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -84,11 +88,12 @@ func (o *NEVPNProtocolIPSec) SetLocalIdentifier(localIdentifier *foundation.NSSt
 // @property remoteIdentifier @discussion A string identifying the remote IPSec endpoint for authentication purposes.
 func (o *NEVPNProtocolIPSec) RemoteIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEVPNProtocolIPSecSelRemoteIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NEVPNProtocolIPSec) SetRemoteIdentifier(remoteIdentifier *foundation.NSString) {
 	o.Ptr().Send(_nEVPNProtocolIPSecSelSetRemoteIdentifier, remoteIdentifier.Ptr())
 }
-

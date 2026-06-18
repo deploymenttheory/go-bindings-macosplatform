@@ -20,35 +20,35 @@ type ODNode struct {
 }
 
 var (
-	_clsODNode = _objcClass("ODNode")
-	_oDNodeSelNodeWithSessionTypeError = objc.RegisterName("nodeWithSession:type:error:")
-	_oDNodeSelNodeWithSessionNameError = objc.RegisterName("nodeWithSession:name:error:")
-	_oDNodeSelInitWithSessionTypeError = objc.RegisterName("initWithSession:type:error:")
-	_oDNodeSelInitWithSessionNameError = objc.RegisterName("initWithSession:name:error:")
-	_oDNodeSelSubnodeNamesAndReturnError = objc.RegisterName("subnodeNamesAndReturnError:")
-	_oDNodeSelUnreachableSubnodeNamesAndReturnError = objc.RegisterName("unreachableSubnodeNamesAndReturnError:")
-	_oDNodeSelNodeDetailsForKeysError = objc.RegisterName("nodeDetailsForKeys:error:")
-	_oDNodeSelSupportedRecordTypesAndReturnError = objc.RegisterName("supportedRecordTypesAndReturnError:")
-	_oDNodeSelSupportedAttributesForRecordTypeError = objc.RegisterName("supportedAttributesForRecordType:error:")
-	_oDNodeSelSetCredentialsWithRecordTypeRecordNamePasswordError = objc.RegisterName("setCredentialsWithRecordType:recordName:password:error:")
+	_clsODNode                                                                                           = _objcClass("ODNode")
+	_oDNodeSelNodeWithSessionTypeError                                                                   = objc.RegisterName("nodeWithSession:type:error:")
+	_oDNodeSelNodeWithSessionNameError                                                                   = objc.RegisterName("nodeWithSession:name:error:")
+	_oDNodeSelInitWithSessionTypeError                                                                   = objc.RegisterName("initWithSession:type:error:")
+	_oDNodeSelInitWithSessionNameError                                                                   = objc.RegisterName("initWithSession:name:error:")
+	_oDNodeSelSubnodeNamesAndReturnError                                                                 = objc.RegisterName("subnodeNamesAndReturnError:")
+	_oDNodeSelUnreachableSubnodeNamesAndReturnError                                                      = objc.RegisterName("unreachableSubnodeNamesAndReturnError:")
+	_oDNodeSelNodeDetailsForKeysError                                                                    = objc.RegisterName("nodeDetailsForKeys:error:")
+	_oDNodeSelSupportedRecordTypesAndReturnError                                                         = objc.RegisterName("supportedRecordTypesAndReturnError:")
+	_oDNodeSelSupportedAttributesForRecordTypeError                                                      = objc.RegisterName("supportedAttributesForRecordType:error:")
+	_oDNodeSelSetCredentialsWithRecordTypeRecordNamePasswordError                                        = objc.RegisterName("setCredentialsWithRecordType:recordName:password:error:")
 	_oDNodeSelSetCredentialsWithRecordTypeAuthenticationTypeAuthenticationItemsContinueItemsContextError = objc.RegisterName("setCredentialsWithRecordType:authenticationType:authenticationItems:continueItems:context:error:")
-	_oDNodeSelSetCredentialsUsingKerberosCacheError = objc.RegisterName("setCredentialsUsingKerberosCache:error:")
-	_oDNodeSelCreateRecordWithRecordTypeNameAttributesError = objc.RegisterName("createRecordWithRecordType:name:attributes:error:")
-	_oDNodeSelRecordWithRecordTypeNameAttributesError = objc.RegisterName("recordWithRecordType:name:attributes:error:")
-	_oDNodeSelCustomCallSendDataError = objc.RegisterName("customCall:sendData:error:")
-	_oDNodeSelCustomFunctionPayloadError = objc.RegisterName("customFunction:payload:error:")
-	_oDNodeSelPoliciesAndReturnError = objc.RegisterName("policiesAndReturnError:")
-	_oDNodeSelSupportedPoliciesAndReturnError = objc.RegisterName("supportedPoliciesAndReturnError:")
-	_oDNodeSelSetPoliciesError = objc.RegisterName("setPolicies:error:")
-	_oDNodeSelSetPolicyValueError = objc.RegisterName("setPolicy:value:error:")
-	_oDNodeSelRemovePolicyError = objc.RegisterName("removePolicy:error:")
-	_oDNodeSelAddAccountPolicyToCategoryError = objc.RegisterName("addAccountPolicy:toCategory:error:")
-	_oDNodeSelRemoveAccountPolicyFromCategoryError = objc.RegisterName("removeAccountPolicy:fromCategory:error:")
-	_oDNodeSelSetAccountPoliciesError = objc.RegisterName("setAccountPolicies:error:")
-	_oDNodeSelAccountPoliciesAndReturnError = objc.RegisterName("accountPoliciesAndReturnError:")
-	_oDNodeSelPasswordContentCheckForRecordNameError = objc.RegisterName("passwordContentCheck:forRecordName:error:")
-	_oDNodeSelNodeName = objc.RegisterName("nodeName")
-	_oDNodeSelConfiguration = objc.RegisterName("configuration")
+	_oDNodeSelSetCredentialsUsingKerberosCacheError                                                      = objc.RegisterName("setCredentialsUsingKerberosCache:error:")
+	_oDNodeSelCreateRecordWithRecordTypeNameAttributesError                                              = objc.RegisterName("createRecordWithRecordType:name:attributes:error:")
+	_oDNodeSelRecordWithRecordTypeNameAttributesError                                                    = objc.RegisterName("recordWithRecordType:name:attributes:error:")
+	_oDNodeSelCustomCallSendDataError                                                                    = objc.RegisterName("customCall:sendData:error:")
+	_oDNodeSelCustomFunctionPayloadError                                                                 = objc.RegisterName("customFunction:payload:error:")
+	_oDNodeSelPoliciesAndReturnError                                                                     = objc.RegisterName("policiesAndReturnError:")
+	_oDNodeSelSupportedPoliciesAndReturnError                                                            = objc.RegisterName("supportedPoliciesAndReturnError:")
+	_oDNodeSelSetPoliciesError                                                                           = objc.RegisterName("setPolicies:error:")
+	_oDNodeSelSetPolicyValueError                                                                        = objc.RegisterName("setPolicy:value:error:")
+	_oDNodeSelRemovePolicyError                                                                          = objc.RegisterName("removePolicy:error:")
+	_oDNodeSelAddAccountPolicyToCategoryError                                                            = objc.RegisterName("addAccountPolicy:toCategory:error:")
+	_oDNodeSelRemoveAccountPolicyFromCategoryError                                                       = objc.RegisterName("removeAccountPolicy:fromCategory:error:")
+	_oDNodeSelSetAccountPoliciesError                                                                    = objc.RegisterName("setAccountPolicies:error:")
+	_oDNodeSelAccountPoliciesAndReturnError                                                              = objc.RegisterName("accountPoliciesAndReturnError:")
+	_oDNodeSelPasswordContentCheckForRecordNameError                                                     = objc.RegisterName("passwordContentCheck:forRecordName:error:")
+	_oDNodeSelNodeName                                                                                   = objc.RegisterName("nodeName")
+	_oDNodeSelConfiguration                                                                              = objc.RegisterName("configuration")
 )
 
 func ODNodeFromID(id objc.ID) *ODNode {
@@ -65,7 +65,9 @@ func ODNodeFromID(id objc.ID) *ODNode {
 func ODNodeNodeWithSessionTypeError(inSession *ODSession, inType uint32) (*ODNode, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsODNode), _oDNodeSelNodeWithSessionTypeError, inSession.Ptr(), inType, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -76,7 +78,9 @@ func ODNodeNodeWithSessionTypeError(inSession *ODSession, inType uint32) (*ODNod
 func ODNodeNodeWithSessionNameError(inSession *ODSession, inName *foundation.NSString) (*ODNode, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsODNode), _oDNodeSelNodeWithSessionNameError, inSession.Ptr(), inName.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -87,7 +91,9 @@ func ODNodeNodeWithSessionNameError(inSession *ODSession, inName *foundation.NSS
 func (o *ODNode) InitWithSessionTypeError(inSession *ODSession, inType uint32) (*ODNode, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDNodeSelInitWithSessionTypeError, inSession.Ptr(), inType, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -98,7 +104,9 @@ func (o *ODNode) InitWithSessionTypeError(inSession *ODSession, inType uint32) (
 func (o *ODNode) InitWithSessionNameError(inSession *ODSession, inName *foundation.NSString) (*ODNode, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDNodeSelInitWithSessionNameError, inSession.Ptr(), inName.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -190,7 +198,9 @@ func (o *ODNode) SetCredentialsUsingKerberosCacheError(inCacheName *foundation.N
 func (o *ODNode) CreateRecordWithRecordTypeNameAttributesError(inRecordType *foundation.NSString, inRecordName *foundation.NSString, inAttributes *foundation.NSDictionary[objc.ID, objc.ID]) (*ODRecord, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDNodeSelCreateRecordWithRecordTypeNameAttributesError, inRecordType.Ptr(), inRecordName.Ptr(), inAttributes, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -201,7 +211,9 @@ func (o *ODNode) CreateRecordWithRecordTypeNameAttributesError(inRecordType *fou
 func (o *ODNode) RecordWithRecordTypeNameAttributesError(inRecordType *foundation.NSString, inRecordName *foundation.NSString, inAttributes objc.ID) (*ODRecord, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDNodeSelRecordWithRecordTypeNameAttributesError, inRecordType.Ptr(), inRecordName.Ptr(), inAttributes, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -212,7 +224,9 @@ func (o *ODNode) RecordWithRecordTypeNameAttributesError(inRecordType *foundatio
 func (o *ODNode) CustomCallSendDataError(inCustomCode int, inSendData *foundation.NSData) (*foundation.NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDNodeSelCustomCallSendDataError, inCustomCode, inSendData.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -332,14 +346,17 @@ func (o *ODNode) PasswordContentCheckForRecordNameError(password *foundation.NSS
 // @property   nodeName @abstract   The node name. @discussion The node name, corresponding to its path in OpenDirectory.
 func (o *ODNode) NodeName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDNodeSelNodeName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @method configuration @abstract Returns an ODConfiguration object for the node. @discussion Returns an ODConfiguration object for the node.
 func (o *ODNode) Configuration() *ODConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDNodeSelConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ODConfigurationFromID(_ret)
 }
-

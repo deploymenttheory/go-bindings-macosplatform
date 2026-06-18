@@ -16,10 +16,10 @@ type MTRProductIdentity struct {
 }
 
 var (
-	_clsMTRProductIdentity = _objcClass("MTRProductIdentity")
+	_clsMTRProductIdentity                          = _objcClass("MTRProductIdentity")
 	_mTRProductIdentitySelInitWithVendorIDProductID = objc.RegisterName("initWithVendorID:productID:")
-	_mTRProductIdentitySelVendorID = objc.RegisterName("vendorID")
-	_mTRProductIdentitySelProductID = objc.RegisterName("productID")
+	_mTRProductIdentitySelVendorID                  = objc.RegisterName("vendorID")
+	_mTRProductIdentitySelProductID                 = objc.RegisterName("productID")
 )
 
 func MTRProductIdentityFromID(id objc.ID) *MTRProductIdentity {
@@ -34,19 +34,24 @@ func MTRProductIdentityFromID(id objc.ID) *MTRProductIdentity {
 
 func (o *MTRProductIdentity) InitWithVendorIDProductID(vendorID *foundation.NSNumber, productID *foundation.NSNumber) *MTRProductIdentity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRProductIdentitySelInitWithVendorIDProductID, vendorID.Ptr(), productID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRProductIdentityFromID(_ret)
 }
 
 func (o *MTRProductIdentity) VendorID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRProductIdentitySelVendorID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRProductIdentity) ProductID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRProductIdentitySelProductID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
-

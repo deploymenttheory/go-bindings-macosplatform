@@ -16,4 +16,3 @@ func SharedAccessoryManager() *AccessoryManager {
 	}
 	return &AccessoryManager{inner: _r}
 }
-

@@ -19,32 +19,32 @@ type CIFilter struct {
 }
 
 var (
-	_clsCIFilter = _objcClass("CIFilter")
-	_cIFilterSelName = objc.RegisterName("name")
-	_cIFilterSelSetName = objc.RegisterName("setName:")
-	_cIFilterSelSetDefaults = objc.RegisterName("setDefaults")
-	_cIFilterSelApplyArgumentsOptions = objc.RegisterName("apply:arguments:options:")
-	_cIFilterSelOutputImage = objc.RegisterName("outputImage")
-	_cIFilterSelIsEnabled = objc.RegisterName("isEnabled")
-	_cIFilterSelSetEnabled = objc.RegisterName("setEnabled:")
-	_cIFilterSelInputKeys = objc.RegisterName("inputKeys")
-	_cIFilterSelOutputKeys = objc.RegisterName("outputKeys")
-	_cIFilterSelAttributes = objc.RegisterName("attributes")
-	_cIFilterSelFilterWithName = objc.RegisterName("filterWithName:")
-	_cIFilterSelFilterWithNameWithInputParameters = objc.RegisterName("filterWithName:withInputParameters:")
-	_cIFilterSelFilterNamesInCategory = objc.RegisterName("filterNamesInCategory:")
-	_cIFilterSelFilterNamesInCategories = objc.RegisterName("filterNamesInCategories:")
-	_cIFilterSelRegisterFilterNameConstructorClassAttributes = objc.RegisterName("registerFilterName:constructor:classAttributes:")
-	_cIFilterSelLocalizedNameForFilterName = objc.RegisterName("localizedNameForFilterName:")
-	_cIFilterSelLocalizedNameForCategory = objc.RegisterName("localizedNameForCategory:")
-	_cIFilterSelLocalizedDescriptionForFilterName = objc.RegisterName("localizedDescriptionForFilterName:")
-	_cIFilterSelLocalizedReferenceDocumentationForFilterName = objc.RegisterName("localizedReferenceDocumentationForFilterName:")
-	_cIFilterSelSerializedXMPFromFiltersInputImageExtent = objc.RegisterName("serializedXMPFromFilters:inputImageExtent:")
+	_clsCIFilter                                                  = _objcClass("CIFilter")
+	_cIFilterSelName                                              = objc.RegisterName("name")
+	_cIFilterSelSetName                                           = objc.RegisterName("setName:")
+	_cIFilterSelSetDefaults                                       = objc.RegisterName("setDefaults")
+	_cIFilterSelApplyArgumentsOptions                             = objc.RegisterName("apply:arguments:options:")
+	_cIFilterSelOutputImage                                       = objc.RegisterName("outputImage")
+	_cIFilterSelIsEnabled                                         = objc.RegisterName("isEnabled")
+	_cIFilterSelSetEnabled                                        = objc.RegisterName("setEnabled:")
+	_cIFilterSelInputKeys                                         = objc.RegisterName("inputKeys")
+	_cIFilterSelOutputKeys                                        = objc.RegisterName("outputKeys")
+	_cIFilterSelAttributes                                        = objc.RegisterName("attributes")
+	_cIFilterSelFilterWithName                                    = objc.RegisterName("filterWithName:")
+	_cIFilterSelFilterWithNameWithInputParameters                 = objc.RegisterName("filterWithName:withInputParameters:")
+	_cIFilterSelFilterNamesInCategory                             = objc.RegisterName("filterNamesInCategory:")
+	_cIFilterSelFilterNamesInCategories                           = objc.RegisterName("filterNamesInCategories:")
+	_cIFilterSelRegisterFilterNameConstructorClassAttributes      = objc.RegisterName("registerFilterName:constructor:classAttributes:")
+	_cIFilterSelLocalizedNameForFilterName                        = objc.RegisterName("localizedNameForFilterName:")
+	_cIFilterSelLocalizedNameForCategory                          = objc.RegisterName("localizedNameForCategory:")
+	_cIFilterSelLocalizedDescriptionForFilterName                 = objc.RegisterName("localizedDescriptionForFilterName:")
+	_cIFilterSelLocalizedReferenceDocumentationForFilterName      = objc.RegisterName("localizedReferenceDocumentationForFilterName:")
+	_cIFilterSelSerializedXMPFromFiltersInputImageExtent          = objc.RegisterName("serializedXMPFromFilters:inputImageExtent:")
 	_cIFilterSelFilterArrayFromSerializedXMPInputImageExtentError = objc.RegisterName("filterArrayFromSerializedXMP:inputImageExtent:error:")
-	_cIFilterSelFilterWithImageURLOptions = objc.RegisterName("filterWithImageURL:options:")
-	_cIFilterSelFilterWithImageDataOptions = objc.RegisterName("filterWithImageData:options:")
-	_cIFilterSelFilterWithCVPixelBufferPropertiesOptions = objc.RegisterName("filterWithCVPixelBuffer:properties:options:")
-	_cIFilterSelSupportedRawCameraModels = objc.RegisterName("supportedRawCameraModels")
+	_cIFilterSelFilterWithImageURLOptions                         = objc.RegisterName("filterWithImageURL:options:")
+	_cIFilterSelFilterWithImageDataOptions                        = objc.RegisterName("filterWithImageData:options:")
+	_cIFilterSelFilterWithCVPixelBufferPropertiesOptions          = objc.RegisterName("filterWithCVPixelBuffer:properties:options:")
+	_cIFilterSelSupportedRawCameraModels                          = objc.RegisterName("supportedRawCameraModels")
 )
 
 func CIFilterFromID(id objc.ID) *CIFilter {
@@ -59,7 +59,9 @@ func CIFilterFromID(id objc.ID) *CIFilter {
 
 func (o *CIFilter) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIFilterSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -75,13 +77,17 @@ func (o *CIFilter) SetDefaults() {
 // Used by CIFilter subclasses to apply the array of argument values 'args' to the kernel function 'k'. The supplied arguments must be type-compatible with the function signature of the kernel. The key-value pairs defined by 'dict' (if non-nil) are used to control exactly how the kernel is evaluated. Valid keys include: kCIApplyOptionExtent: the size of the produced image. Value is a four element NSArray [X Y WIDTH HEIGHT]. kCIApplyOptionDefinition: the Domain of Definition of the produced image. Value is either a CIFilterShape object, or a four element NSArray defining a rectangle. @param  k         CIKernel of the filter @param  args      Array of arguments that are applied to the kernel @param  dict      Array of additional options
 func (o *CIFilter) ApplyArgumentsOptions(k *CIKernel, args *foundation.NSArray[objc.ID], dict *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIFilterSelApplyArgumentsOptions, k.Ptr(), args, dict)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIImageFromID(_ret)
 }
 
 func (o *CIFilter) OutputImage() *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIFilterSelOutputImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIImageFromID(_ret)
 }
 
@@ -115,14 +121,18 @@ func (o *CIFilter) Attributes() *foundation.NSDictionary[*foundation.NSString, o
 // Creates a new filter of type 'name'. On OSX, all input values will be undefined. On iOS, all input values will be set to default values.
 func CIFilterFilterWithName(name *foundation.NSString) *CIFilter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIFilter), _cIFilterSelFilterWithName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIFilterFromID(_ret)
 }
 
 // Creates a new filter of type 'name'. The filter's input parameters are set from the dictionary of key-value pairs. On OSX, any of the filter input parameters not specified in the dictionary will be undefined. On iOS, any of the filter input parameters not specified in the dictionary will be set to default values.
 func CIFilterFilterWithNameWithInputParameters(name *foundation.NSString, params *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIFilter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIFilter), _cIFilterSelFilterWithNameWithInputParameters, name.Ptr(), params)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIFilterFromID(_ret)
 }
 
@@ -146,35 +156,45 @@ func CIFilterRegisterFilterNameConstructorClassAttributes(name *foundation.NSStr
 // Returns the localized name of a filter for display in the UI.
 func CIFilterLocalizedNameForFilterName(filterName *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIFilter), _cIFilterSelLocalizedNameForFilterName, filterName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Returns the localized name of a category for display in the UI.
 func CIFilterLocalizedNameForCategory(category *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIFilter), _cIFilterSelLocalizedNameForCategory, category.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Returns the localized description of a filter for display in the UI.
 func CIFilterLocalizedDescriptionForFilterName(filterName *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIFilter), _cIFilterSelLocalizedDescriptionForFilterName, filterName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Returns the URL to the localized reference documentation describing the filter. The URL can be a local file or a remote document on a webserver. It is possible, that this method returns nil (like filters that predate this feature). A client of this API has to handle this case gracefully.
 func CIFilterLocalizedReferenceDocumentationForFilterName(filterName *foundation.NSString) *foundation.NSURL {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIFilter), _cIFilterSelLocalizedReferenceDocumentationForFilterName, filterName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // Deprecated: since macOS 14.0.
 func CIFilterSerializedXMPFromFiltersInputImageExtent(filters *foundation.NSArray[*CIFilter], extent corefoundation.CGRect) *foundation.NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIFilter), _cIFilterSelSerializedXMPFromFiltersInputImageExtent, filters.Ptr(), extent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -182,7 +202,9 @@ func CIFilterSerializedXMPFromFiltersInputImageExtent(filters *foundation.NSArra
 func CIFilterFilterArrayFromSerializedXMPInputImageExtentError(xmpData *foundation.NSData, extent corefoundation.CGRect) (*foundation.NSArray[*CIFilter], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIFilter), _cIFilterSelFilterArrayFromSerializedXMPInputImageExtentError, xmpData.Ptr(), extent, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -193,7 +215,9 @@ func CIFilterFilterArrayFromSerializedXMPInputImageExtentError(xmpData *foundati
 // Deprecated: Use new CIRAWFilter class instead.
 func CIFilterFilterWithImageURLOptions(url *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIFilter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIFilter), _cIFilterSelFilterWithImageURLOptions, url.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIFilterFromID(_ret)
 }
 
@@ -201,7 +225,9 @@ func CIFilterFilterWithImageURLOptions(url *foundation.NSURL, options *foundatio
 // Deprecated: Use new CIRAWFilter class instead.
 func CIFilterFilterWithImageDataOptions(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIFilter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIFilter), _cIFilterSelFilterWithImageDataOptions, data.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIFilterFromID(_ret)
 }
 
@@ -209,7 +235,9 @@ func CIFilterFilterWithImageDataOptions(data *foundation.NSData, options *founda
 // Deprecated: Use new CIRAWFilter class instead.
 func CIFilterFilterWithCVPixelBufferPropertiesOptions(pixelBuffer unsafe.Pointer, properties *foundation.NSDictionary[objc.ID, objc.ID], options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIFilter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIFilter), _cIFilterSelFilterWithCVPixelBufferPropertiesOptions, pixelBuffer, properties, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIFilterFromID(_ret)
 }
 
@@ -219,4 +247,3 @@ func CIFilterSupportedRawCameraModels() *foundation.NSArray[*foundation.NSString
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsCIFilter), _cIFilterSelSupportedRawCameraModels)
 	return _ret
 }
-

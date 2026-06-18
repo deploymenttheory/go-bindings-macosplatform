@@ -53,7 +53,9 @@ func (x *GaussianDistribution) Deviation() float32 {
 	return x.inner.Deviation()
 }
 
-func (x *GaussianDistribution) asRandomDistribution() *raw.GKRandomDistribution { return &x.inner.GKRandomDistribution }
+func (x *GaussianDistribution) asRandomDistribution() *raw.GKRandomDistribution {
+	return &x.inner.GKRandomDistribution
+}
 
 // GaussianDistributionable is the interface implemented by [GaussianDistribution], for mocking and DI.
 type GaussianDistributionable interface {
@@ -63,4 +65,3 @@ type GaussianDistributionable interface {
 }
 
 var _ GaussianDistributionable = (*GaussianDistribution)(nil)
-

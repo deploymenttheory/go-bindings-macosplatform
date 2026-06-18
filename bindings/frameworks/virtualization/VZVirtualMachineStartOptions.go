@@ -26,4 +26,3 @@ func VZVirtualMachineStartOptionsFromID(id objc.ID) *VZVirtualMachineStartOption
 	purego.Track(o)
 	return o
 }
-

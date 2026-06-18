@@ -15,7 +15,9 @@ type MTRDeviceControllerAbstractParameters struct {
 }
 
 // Unwrap returns the underlying [raw.MTRDeviceControllerAbstractParameters].
-func (x *MTRDeviceControllerAbstractParameters) Unwrap() *raw.MTRDeviceControllerAbstractParameters { return x.inner }
+func (x *MTRDeviceControllerAbstractParameters) Unwrap() *raw.MTRDeviceControllerAbstractParameters {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -51,7 +53,9 @@ func (x *MTRDeviceControllerAbstractParameters) SetStartSuspended(startSuspended
 	x.inner.SetStartSuspended(startSuspended)
 }
 
-func (x *MTRDeviceControllerAbstractParameters) asMTRDeviceControllerAbstractParameters() *raw.MTRDeviceControllerAbstractParameters { return x.inner }
+func (x *MTRDeviceControllerAbstractParameters) asMTRDeviceControllerAbstractParameters() *raw.MTRDeviceControllerAbstractParameters {
+	return x.inner
+}
 
 // MTRDeviceControllerAbstractParametersable is the interface implemented by [MTRDeviceControllerAbstractParameters], for mocking and DI.
 type MTRDeviceControllerAbstractParametersable interface {
@@ -62,4 +66,3 @@ type MTRDeviceControllerAbstractParametersable interface {
 }
 
 var _ MTRDeviceControllerAbstractParametersable = (*MTRDeviceControllerAbstractParameters)(nil)
-

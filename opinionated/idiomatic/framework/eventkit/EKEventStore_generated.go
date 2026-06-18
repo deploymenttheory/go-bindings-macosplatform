@@ -303,4 +303,3 @@ type EventStoreable interface {
 }
 
 var _ EventStoreable = (*EventStore)(nil)
-

@@ -1826,4 +1826,3 @@ func CMVideoFormatDescriptionGetPresentationDimensions(videoDesc unsafe.Pointer,
 func CMVideoFormatDescriptionMatchesImageBuffer(desc unsafe.Pointer, imageBuffer unsafe.Pointer) uint8 {
 	return raw.CMVideoFormatDescriptionMatchesImageBuffer(desc, imageBuffer)
 }
-

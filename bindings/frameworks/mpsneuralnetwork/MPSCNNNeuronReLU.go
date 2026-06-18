@@ -16,7 +16,7 @@ type MPSCNNNeuronReLU struct {
 }
 
 var (
-	_clsMPSCNNNeuronReLU = _objcClass("MPSCNNNeuronReLU")
+	_clsMPSCNNNeuronReLU                = _objcClass("MPSCNNNeuronReLU")
 	_mPSCNNNeuronReLUSelInitWithDeviceA = objc.RegisterName("initWithDevice:a:")
 )
 
@@ -33,7 +33,8 @@ func MPSCNNNeuronReLUFromID(id objc.ID) *MPSCNNNeuronReLU {
 // @abstract  Initialize the ReLU neuron filter @param     device           The device the filter will run on @param     a                Filter property "a". See class discussion. @return    A valid MPSCNNNeuronReLU object or nil, if failure.
 func (o *MPSCNNNeuronReLU) InitWithDeviceA(device metal.MTLDevice, a float32) *MPSCNNNeuronReLU {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronReLUSelInitWithDeviceA, device, a)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronReLUFromID(_ret)
 }
-

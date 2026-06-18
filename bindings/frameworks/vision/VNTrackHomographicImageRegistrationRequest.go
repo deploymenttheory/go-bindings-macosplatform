@@ -17,8 +17,8 @@ type VNTrackHomographicImageRegistrationRequest struct {
 }
 
 var (
-	_clsVNTrackHomographicImageRegistrationRequest = _objcClass("VNTrackHomographicImageRegistrationRequest")
-	_vNTrackHomographicImageRegistrationRequestSelInit = objc.RegisterName("init")
+	_clsVNTrackHomographicImageRegistrationRequest                          = _objcClass("VNTrackHomographicImageRegistrationRequest")
+	_vNTrackHomographicImageRegistrationRequestSelInit                      = objc.RegisterName("init")
 	_vNTrackHomographicImageRegistrationRequestSelInitWithCompletionHandler = objc.RegisterName("initWithCompletionHandler:")
 )
 
@@ -35,7 +35,9 @@ func VNTrackHomographicImageRegistrationRequestFromID(id objc.ID) *VNTrackHomogr
 // @brief Create a new request that can statefully track the homographic registration of two images. @discussion This is a convenience initializer for a frame analysis spacing of kCMTimeZero and a nil completion handler.
 func (o *VNTrackHomographicImageRegistrationRequest) Init() *VNTrackHomographicImageRegistrationRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTrackHomographicImageRegistrationRequestSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTrackHomographicImageRegistrationRequestFromID(_ret)
 }
 
@@ -52,7 +54,8 @@ func (o *VNTrackHomographicImageRegistrationRequest) InitWithCompletionHandler(c
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTrackHomographicImageRegistrationRequestSelInitWithCompletionHandler, __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTrackHomographicImageRegistrationRequestFromID(_ret)
 }
-

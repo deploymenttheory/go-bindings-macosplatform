@@ -18,10 +18,10 @@ type DRNotificationCenter struct {
 }
 
 var (
-	_clsDRNotificationCenter = _objcClass("DRNotificationCenter")
-	_dRNotificationCenterSelCurrentRunLoopCenter = objc.RegisterName("currentRunLoopCenter")
+	_clsDRNotificationCenter                              = _objcClass("DRNotificationCenter")
+	_dRNotificationCenterSelCurrentRunLoopCenter          = objc.RegisterName("currentRunLoopCenter")
 	_dRNotificationCenterSelAddObserverSelectorNameObject = objc.RegisterName("addObserver:selector:name:object:")
-	_dRNotificationCenterSelRemoveObserverNameObject = objc.RegisterName("removeObserver:name:object:")
+	_dRNotificationCenterSelRemoveObserverNameObject      = objc.RegisterName("removeObserver:name:object:")
 )
 
 func DRNotificationCenterFromID(id objc.ID) *DRNotificationCenter {
@@ -37,7 +37,9 @@ func DRNotificationCenterFromID(id objc.ID) *DRNotificationCenter {
 // @method			currentRunLoopCenter @abstract		Creates an initializes a DRNotificationCenter @discussion		The instance returned sends Disc Recording notifications only to the current run loop. If you want to receive notifications on another run loop, this method must be called from that runloop. @result			A shared DRNotificationCenter object.
 func DRNotificationCenterCurrentRunLoopCenter() *DRNotificationCenter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsDRNotificationCenter), _dRNotificationCenterSelCurrentRunLoopCenter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DRNotificationCenterFromID(_ret)
 }
 
@@ -50,4 +52,3 @@ func (o *DRNotificationCenter) AddObserverSelectorNameObject(observer objc.ID, a
 func (o *DRNotificationCenter) RemoveObserverNameObject(observer objc.ID, aName *foundation.NSString, anObject objc.ID) {
 	o.Ptr().Send(_dRNotificationCenterSelRemoveObserverNameObject, observer, aName.Ptr(), anObject)
 }
-

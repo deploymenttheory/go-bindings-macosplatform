@@ -87,7 +87,9 @@ func (x *AnimatedScalarArray) ElementCount() uint {
 	return x.inner.ElementCount()
 }
 
-func (x *AnimatedScalarArray) asAnimatedValue() *raw.MDLAnimatedValue { return &x.inner.MDLAnimatedValue }
+func (x *AnimatedScalarArray) asAnimatedValue() *raw.MDLAnimatedValue {
+	return &x.inner.MDLAnimatedValue
+}
 
 // AnimatedScalarArrayable is the interface implemented by [AnimatedScalarArray], for mocking and DI.
 type AnimatedScalarArrayable interface {
@@ -105,4 +107,3 @@ type AnimatedScalarArrayable interface {
 }
 
 var _ AnimatedScalarArrayable = (*AnimatedScalarArray)(nil)
-

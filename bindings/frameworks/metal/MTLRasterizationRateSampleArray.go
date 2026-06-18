@@ -16,8 +16,8 @@ type MTLRasterizationRateSampleArray struct {
 }
 
 var (
-	_clsMTLRasterizationRateSampleArray = _objcClass("MTLRasterizationRateSampleArray")
-	_mTLRasterizationRateSampleArraySelObjectAtIndexedSubscript = objc.RegisterName("objectAtIndexedSubscript:")
+	_clsMTLRasterizationRateSampleArray                            = _objcClass("MTLRasterizationRateSampleArray")
+	_mTLRasterizationRateSampleArraySelObjectAtIndexedSubscript    = objc.RegisterName("objectAtIndexedSubscript:")
 	_mTLRasterizationRateSampleArraySelSetObjectAtIndexedSubscript = objc.RegisterName("setObject:atIndexedSubscript:")
 )
 
@@ -34,7 +34,9 @@ func MTLRasterizationRateSampleArrayFromID(id objc.ID) *MTLRasterizationRateSamp
 // @method objectAtIndexedSubscript: @abstract Retrieves the sample value at the specified index. @return NSNumber instance describing the value of the sample at the specified index, or 0 if the index is out of range.
 func (o *MTLRasterizationRateSampleArray) ObjectAtIndexedSubscript(index uint) *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRasterizationRateSampleArraySelObjectAtIndexedSubscript, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -42,4 +44,3 @@ func (o *MTLRasterizationRateSampleArray) ObjectAtIndexedSubscript(index uint) *
 func (o *MTLRasterizationRateSampleArray) SetObjectAtIndexedSubscript(value *foundation.NSNumber, index uint) {
 	o.Ptr().Send(_mTLRasterizationRateSampleArraySelSetObjectAtIndexedSubscript, value.Ptr(), index)
 }
-

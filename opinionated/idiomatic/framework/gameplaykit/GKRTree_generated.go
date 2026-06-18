@@ -81,4 +81,3 @@ type RTreeable interface {
 }
 
 var _ RTreeable = (*RTree)(nil)
-

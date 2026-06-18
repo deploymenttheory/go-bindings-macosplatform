@@ -42,7 +42,9 @@ func (x *MTRBasicClusterStartUpEvent) WithSoftwareVersion(softwareVersion *found
 	return x
 }
 
-func (x *MTRBasicClusterStartUpEvent) asMTRBasicInformationClusterStartUpEvent() *raw.MTRBasicInformationClusterStartUpEvent { return &x.inner.MTRBasicInformationClusterStartUpEvent }
+func (x *MTRBasicClusterStartUpEvent) asMTRBasicInformationClusterStartUpEvent() *raw.MTRBasicInformationClusterStartUpEvent {
+	return &x.inner.MTRBasicInformationClusterStartUpEvent
+}
 
 // MTRBasicClusterStartUpEventable is the interface implemented by [MTRBasicClusterStartUpEvent], for mocking and DI.
 type MTRBasicClusterStartUpEventable interface {
@@ -51,4 +53,3 @@ type MTRBasicClusterStartUpEventable interface {
 }
 
 var _ MTRBasicClusterStartUpEventable = (*MTRBasicClusterStartUpEvent)(nil)
-

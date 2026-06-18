@@ -15,7 +15,9 @@ type MTRPumpConfigurationAndControlClusterAirDetectionEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRPumpConfigurationAndControlClusterAirDetectionEvent].
-func (x *MTRPumpConfigurationAndControlClusterAirDetectionEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterAirDetectionEvent { return x.inner }
+func (x *MTRPumpConfigurationAndControlClusterAirDetectionEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterAirDetectionEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -41,4 +43,3 @@ type MTRPumpConfigurationAndControlClusterAirDetectionEventable interface {
 }
 
 var _ MTRPumpConfigurationAndControlClusterAirDetectionEventable = (*MTRPumpConfigurationAndControlClusterAirDetectionEvent)(nil)
-

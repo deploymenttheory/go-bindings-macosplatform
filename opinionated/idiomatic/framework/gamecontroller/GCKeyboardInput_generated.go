@@ -71,7 +71,9 @@ func (x *KeyboardInput) IsAnyKeyPressed() bool {
 	return x.inner.IsAnyKeyPressed()
 }
 
-func (x *KeyboardInput) asPhysicalInputProfile() *raw.GCPhysicalInputProfile { return &x.inner.GCPhysicalInputProfile }
+func (x *KeyboardInput) asPhysicalInputProfile() *raw.GCPhysicalInputProfile {
+	return &x.inner.GCPhysicalInputProfile
+}
 
 // KeyboardInputable is the interface implemented by [KeyboardInput], for mocking and DI.
 type KeyboardInputable interface {
@@ -85,4 +87,3 @@ type KeyboardInputable interface {
 }
 
 var _ KeyboardInputable = (*KeyboardInput)(nil)
-

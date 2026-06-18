@@ -15,11 +15,11 @@ type DOMRect struct {
 }
 
 var (
-	_clsDOMRect = _objcClass("DOMRect")
-	_dOMRectSelTop = objc.RegisterName("top")
-	_dOMRectSelRight = objc.RegisterName("right")
+	_clsDOMRect       = _objcClass("DOMRect")
+	_dOMRectSelTop    = objc.RegisterName("top")
+	_dOMRectSelRight  = objc.RegisterName("right")
 	_dOMRectSelBottom = objc.RegisterName("bottom")
-	_dOMRectSelLeft = objc.RegisterName("left")
+	_dOMRectSelLeft   = objc.RegisterName("left")
 )
 
 func DOMRectFromID(id objc.ID) *DOMRect {
@@ -34,25 +34,32 @@ func DOMRectFromID(id objc.ID) *DOMRect {
 
 func (o *DOMRect) Top() *DOMCSSPrimitiveValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMRectSelTop)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMCSSPrimitiveValueFromID(_ret)
 }
 
 func (o *DOMRect) Right() *DOMCSSPrimitiveValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMRectSelRight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMCSSPrimitiveValueFromID(_ret)
 }
 
 func (o *DOMRect) Bottom() *DOMCSSPrimitiveValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMRectSelBottom)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMCSSPrimitiveValueFromID(_ret)
 }
 
 func (o *DOMRect) Left() *DOMCSSPrimitiveValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMRectSelLeft)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMCSSPrimitiveValueFromID(_ret)
 }
-

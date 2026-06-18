@@ -16,22 +16,22 @@ type MPSMatrixDescriptor struct {
 }
 
 var (
-	_clsMPSMatrixDescriptor = _objcClass("MPSMatrixDescriptor")
-	_mPSMatrixDescriptorSelMatrixDescriptorWithDimensionsColumnsRowBytesDataType = objc.RegisterName("matrixDescriptorWithDimensions:columns:rowBytes:dataType:")
-	_mPSMatrixDescriptorSelMatrixDescriptorWithRowsColumnsRowBytesDataType = objc.RegisterName("matrixDescriptorWithRows:columns:rowBytes:dataType:")
+	_clsMPSMatrixDescriptor                                                                   = _objcClass("MPSMatrixDescriptor")
+	_mPSMatrixDescriptorSelMatrixDescriptorWithDimensionsColumnsRowBytesDataType              = objc.RegisterName("matrixDescriptorWithDimensions:columns:rowBytes:dataType:")
+	_mPSMatrixDescriptorSelMatrixDescriptorWithRowsColumnsRowBytesDataType                    = objc.RegisterName("matrixDescriptorWithRows:columns:rowBytes:dataType:")
 	_mPSMatrixDescriptorSelMatrixDescriptorWithRowsColumnsMatricesRowBytesMatrixBytesDataType = objc.RegisterName("matrixDescriptorWithRows:columns:matrices:rowBytes:matrixBytes:dataType:")
-	_mPSMatrixDescriptorSelRowBytesFromColumnsDataType = objc.RegisterName("rowBytesFromColumns:dataType:")
-	_mPSMatrixDescriptorSelRowBytesForColumnsDataType = objc.RegisterName("rowBytesForColumns:dataType:")
-	_mPSMatrixDescriptorSelRows = objc.RegisterName("rows")
-	_mPSMatrixDescriptorSelSetRows = objc.RegisterName("setRows:")
-	_mPSMatrixDescriptorSelColumns = objc.RegisterName("columns")
-	_mPSMatrixDescriptorSelSetColumns = objc.RegisterName("setColumns:")
-	_mPSMatrixDescriptorSelMatrices = objc.RegisterName("matrices")
-	_mPSMatrixDescriptorSelDataType = objc.RegisterName("dataType")
-	_mPSMatrixDescriptorSelSetDataType = objc.RegisterName("setDataType:")
-	_mPSMatrixDescriptorSelRowBytes = objc.RegisterName("rowBytes")
-	_mPSMatrixDescriptorSelSetRowBytes = objc.RegisterName("setRowBytes:")
-	_mPSMatrixDescriptorSelMatrixBytes = objc.RegisterName("matrixBytes")
+	_mPSMatrixDescriptorSelRowBytesFromColumnsDataType                                        = objc.RegisterName("rowBytesFromColumns:dataType:")
+	_mPSMatrixDescriptorSelRowBytesForColumnsDataType                                         = objc.RegisterName("rowBytesForColumns:dataType:")
+	_mPSMatrixDescriptorSelRows                                                               = objc.RegisterName("rows")
+	_mPSMatrixDescriptorSelSetRows                                                            = objc.RegisterName("setRows:")
+	_mPSMatrixDescriptorSelColumns                                                            = objc.RegisterName("columns")
+	_mPSMatrixDescriptorSelSetColumns                                                         = objc.RegisterName("setColumns:")
+	_mPSMatrixDescriptorSelMatrices                                                           = objc.RegisterName("matrices")
+	_mPSMatrixDescriptorSelDataType                                                           = objc.RegisterName("dataType")
+	_mPSMatrixDescriptorSelSetDataType                                                        = objc.RegisterName("setDataType:")
+	_mPSMatrixDescriptorSelRowBytes                                                           = objc.RegisterName("rowBytes")
+	_mPSMatrixDescriptorSelSetRowBytes                                                        = objc.RegisterName("setRowBytes:")
+	_mPSMatrixDescriptorSelMatrixBytes                                                        = objc.RegisterName("matrixBytes")
 )
 
 func MPSMatrixDescriptorFromID(id objc.ID) *MPSMatrixDescriptor {
@@ -47,20 +47,26 @@ func MPSMatrixDescriptorFromID(id objc.ID) *MPSMatrixDescriptor {
 // @abstract   Create a MPSMatrixDescriptor with the specified dimensions and data type. @param      rows                The number of rows of the matrix. @param      columns             The number of columns of the matrix. @param      rowBytes            The number of bytes between starting elements of consecutive rows.  Must be a multiple of the element size. @param      dataType            The type of the data to be stored in the matrix. @discussion For performance considerations the optimal row stride may not necessarily be equal to the number of columns in the matrix.  The MPSMatrix class provides a method which may be used to determine this value, see the rowBytesForColumns API in the MPSMatrix class. The number of matrices described is initialized to 1.
 func MPSMatrixDescriptorMatrixDescriptorWithDimensionsColumnsRowBytesDataType(rows uint, columns uint, rowBytes uint, dataType MPSDataType) *MPSMatrixDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSMatrixDescriptor), _mPSMatrixDescriptorSelMatrixDescriptorWithDimensionsColumnsRowBytesDataType, rows, columns, rowBytes, dataType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixDescriptorFromID(_ret)
 }
 
 func MPSMatrixDescriptorMatrixDescriptorWithRowsColumnsRowBytesDataType(rows uint, columns uint, rowBytes uint, dataType MPSDataType) *MPSMatrixDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSMatrixDescriptor), _mPSMatrixDescriptorSelMatrixDescriptorWithRowsColumnsRowBytesDataType, rows, columns, rowBytes, dataType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixDescriptorFromID(_ret)
 }
 
 // @abstract   Create a MPSMatrixDescriptor with the specified dimensions and data type. @param      rows                The number of rows of a single matrix. @param      columns             The number of columns of a single matrix. @param      matrices            The number of matrices in the MPSMatrix object. @param      rowBytes            The number of bytes between starting elements of consecutive rows.  Must be a multiple of the element size. @param      matrixBytes         The number of bytes between starting elements of consecutive matrices.  Must be a multiple of rowBytes. @param      dataType            The type of the data to be stored in the matrix. @discussion For performance considerations the optimal row stride may not necessarily be equal to the number of columns in the matrix.  The MPSMatrix class provides a method which may be used to determine this value, see the rowBytesForColumns API in the MPSMatrix class.
 func MPSMatrixDescriptorMatrixDescriptorWithRowsColumnsMatricesRowBytesMatrixBytesDataType(rows uint, columns uint, matrices uint, rowBytes uint, matrixBytes uint, dataType MPSDataType) *MPSMatrixDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSMatrixDescriptor), _mPSMatrixDescriptorSelMatrixDescriptorWithRowsColumnsMatricesRowBytesMatrixBytesDataType, rows, columns, matrices, rowBytes, matrixBytes, dataType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixDescriptorFromID(_ret)
 }
 
@@ -126,4 +132,3 @@ func (o *MPSMatrixDescriptor) MatrixBytes() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mPSMatrixDescriptorSelMatrixBytes)
 	return _ret
 }
-

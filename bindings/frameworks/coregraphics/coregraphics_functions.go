@@ -13,762 +13,762 @@ import (
 )
 
 var (
-	_fnCGAcquireDisplayFadeReservation func(float32, *uint32) CGError
-	_fnCGAffineTransformConcat func(corefoundation.CGAffineTransform, corefoundation.CGAffineTransform) corefoundation.CGAffineTransform
-	_fnCGAffineTransformDecompose func(corefoundation.CGAffineTransform) corefoundation.CGAffineTransformComponents
-	_fnCGAffineTransformEqualToTransform func(corefoundation.CGAffineTransform, corefoundation.CGAffineTransform) bool
-	_fnCGAffineTransformInvert func(corefoundation.CGAffineTransform) corefoundation.CGAffineTransform
-	_fnCGAffineTransformIsIdentity func(corefoundation.CGAffineTransform) bool
-	_fnCGAffineTransformMake func(float64, float64, float64, float64, float64, float64) corefoundation.CGAffineTransform
-	_fnCGAffineTransformMakeRotation func(float64) corefoundation.CGAffineTransform
-	_fnCGAffineTransformMakeScale func(float64, float64) corefoundation.CGAffineTransform
-	_fnCGAffineTransformMakeTranslation func(float64, float64) corefoundation.CGAffineTransform
-	_fnCGAffineTransformMakeWithComponents func(corefoundation.CGAffineTransformComponents) corefoundation.CGAffineTransform
-	_fnCGAffineTransformRotate func(corefoundation.CGAffineTransform, float64) corefoundation.CGAffineTransform
-	_fnCGAffineTransformScale func(corefoundation.CGAffineTransform, float64, float64) corefoundation.CGAffineTransform
-	_fnCGAffineTransformTranslate func(corefoundation.CGAffineTransform, float64, float64) corefoundation.CGAffineTransform
-	_fnCGAssociateMouseAndMouseCursorPosition func(int) CGError
-	_fnCGBeginDisplayConfiguration func(unsafe.Pointer) CGError
-	_fnCGBitmapContextCreate func(unsafe.Pointer, uint, uint, uint, uint, unsafe.Pointer, CGBitmapInfo) unsafe.Pointer
-	_fnCGBitmapContextCreateAdaptive func(uint, uint, unsafe.Pointer, objc.Block, objc.Block, objc.Block, objc.Block) unsafe.Pointer
-	_fnCGBitmapContextCreateImage func(unsafe.Pointer) unsafe.Pointer
-	_fnCGBitmapContextCreateWithData func(unsafe.Pointer, uint, uint, uint, uint, unsafe.Pointer, CGBitmapInfo, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCGBitmapContextGetAlphaInfo func(unsafe.Pointer) CGImageAlphaInfo
-	_fnCGBitmapContextGetBitmapInfo func(unsafe.Pointer) CGBitmapInfo
-	_fnCGBitmapContextGetBitsPerComponent func(unsafe.Pointer) uint
-	_fnCGBitmapContextGetBitsPerPixel func(unsafe.Pointer) uint
-	_fnCGBitmapContextGetBytesPerRow func(unsafe.Pointer) uint
-	_fnCGBitmapContextGetColorSpace func(unsafe.Pointer) unsafe.Pointer
-	_fnCGBitmapContextGetData func(unsafe.Pointer) unsafe.Pointer
-	_fnCGBitmapContextGetHeight func(unsafe.Pointer) uint
-	_fnCGBitmapContextGetWidth func(unsafe.Pointer) uint
-	_fnCGBitmapInfoMake func(CGImageAlphaInfo, CGImageComponentInfo, CGImageByteOrderInfo, CGImagePixelFormatInfo) CGBitmapInfo
-	_fnCGCancelDisplayConfiguration func(unsafe.Pointer) CGError
-	_fnCGCaptureAllDisplays func() CGError
-	_fnCGCaptureAllDisplaysWithOptions func(CGCaptureOptions) CGError
-	_fnCGColorConversionInfoConvertData func(unsafe.Pointer, uint, uint, unsafe.Pointer, CGColorBufferFormat, unsafe.Pointer, CGColorBufferFormat, unsafe.Pointer) bool
-	_fnCGColorConversionInfoCreate func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCGColorConversionInfoCreateForToneMapping func(unsafe.Pointer, float32, unsafe.Pointer, float32, CGToneMapping, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCGAcquireDisplayFadeReservation                  func(float32, *uint32) CGError
+	_fnCGAffineTransformConcat                          func(corefoundation.CGAffineTransform, corefoundation.CGAffineTransform) corefoundation.CGAffineTransform
+	_fnCGAffineTransformDecompose                       func(corefoundation.CGAffineTransform) corefoundation.CGAffineTransformComponents
+	_fnCGAffineTransformEqualToTransform                func(corefoundation.CGAffineTransform, corefoundation.CGAffineTransform) bool
+	_fnCGAffineTransformInvert                          func(corefoundation.CGAffineTransform) corefoundation.CGAffineTransform
+	_fnCGAffineTransformIsIdentity                      func(corefoundation.CGAffineTransform) bool
+	_fnCGAffineTransformMake                            func(float64, float64, float64, float64, float64, float64) corefoundation.CGAffineTransform
+	_fnCGAffineTransformMakeRotation                    func(float64) corefoundation.CGAffineTransform
+	_fnCGAffineTransformMakeScale                       func(float64, float64) corefoundation.CGAffineTransform
+	_fnCGAffineTransformMakeTranslation                 func(float64, float64) corefoundation.CGAffineTransform
+	_fnCGAffineTransformMakeWithComponents              func(corefoundation.CGAffineTransformComponents) corefoundation.CGAffineTransform
+	_fnCGAffineTransformRotate                          func(corefoundation.CGAffineTransform, float64) corefoundation.CGAffineTransform
+	_fnCGAffineTransformScale                           func(corefoundation.CGAffineTransform, float64, float64) corefoundation.CGAffineTransform
+	_fnCGAffineTransformTranslate                       func(corefoundation.CGAffineTransform, float64, float64) corefoundation.CGAffineTransform
+	_fnCGAssociateMouseAndMouseCursorPosition           func(int) CGError
+	_fnCGBeginDisplayConfiguration                      func(unsafe.Pointer) CGError
+	_fnCGBitmapContextCreate                            func(unsafe.Pointer, uint, uint, uint, uint, unsafe.Pointer, CGBitmapInfo) unsafe.Pointer
+	_fnCGBitmapContextCreateAdaptive                    func(uint, uint, unsafe.Pointer, objc.Block, objc.Block, objc.Block, objc.Block) unsafe.Pointer
+	_fnCGBitmapContextCreateImage                       func(unsafe.Pointer) unsafe.Pointer
+	_fnCGBitmapContextCreateWithData                    func(unsafe.Pointer, uint, uint, uint, uint, unsafe.Pointer, CGBitmapInfo, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCGBitmapContextGetAlphaInfo                      func(unsafe.Pointer) CGImageAlphaInfo
+	_fnCGBitmapContextGetBitmapInfo                     func(unsafe.Pointer) CGBitmapInfo
+	_fnCGBitmapContextGetBitsPerComponent               func(unsafe.Pointer) uint
+	_fnCGBitmapContextGetBitsPerPixel                   func(unsafe.Pointer) uint
+	_fnCGBitmapContextGetBytesPerRow                    func(unsafe.Pointer) uint
+	_fnCGBitmapContextGetColorSpace                     func(unsafe.Pointer) unsafe.Pointer
+	_fnCGBitmapContextGetData                           func(unsafe.Pointer) unsafe.Pointer
+	_fnCGBitmapContextGetHeight                         func(unsafe.Pointer) uint
+	_fnCGBitmapContextGetWidth                          func(unsafe.Pointer) uint
+	_fnCGBitmapInfoMake                                 func(CGImageAlphaInfo, CGImageComponentInfo, CGImageByteOrderInfo, CGImagePixelFormatInfo) CGBitmapInfo
+	_fnCGCancelDisplayConfiguration                     func(unsafe.Pointer) CGError
+	_fnCGCaptureAllDisplays                             func() CGError
+	_fnCGCaptureAllDisplaysWithOptions                  func(CGCaptureOptions) CGError
+	_fnCGColorConversionInfoConvertData                 func(unsafe.Pointer, uint, uint, unsafe.Pointer, CGColorBufferFormat, unsafe.Pointer, CGColorBufferFormat, unsafe.Pointer) bool
+	_fnCGColorConversionInfoCreate                      func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCGColorConversionInfoCreateForToneMapping        func(unsafe.Pointer, float32, unsafe.Pointer, float32, CGToneMapping, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_fnCGColorConversionInfoCreateFromListWithArguments func(unsafe.Pointer, unsafe.Pointer, CGColorConversionInfoTransformType, CGColorRenderingIntent, string) unsafe.Pointer
-	_fnCGColorConversionInfoCreateWithOptions func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCGColorConversionInfoGetTypeID func() uint
-	_fnCGColorCreate func(unsafe.Pointer, *float64) unsafe.Pointer
-	_fnCGColorCreateCopy func(unsafe.Pointer) unsafe.Pointer
-	_fnCGColorCreateCopyByMatchingToColorSpace func(unsafe.Pointer, CGColorRenderingIntent, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCGColorCreateCopyWithAlpha func(unsafe.Pointer, float64) unsafe.Pointer
-	_fnCGColorCreateGenericCMYK func(float64, float64, float64, float64, float64) unsafe.Pointer
-	_fnCGColorCreateGenericGray func(float64, float64) unsafe.Pointer
-	_fnCGColorCreateGenericGrayGamma2_2 func(float64, float64) unsafe.Pointer
-	_fnCGColorCreateGenericRGB func(float64, float64, float64, float64) unsafe.Pointer
-	_fnCGColorCreateSRGB func(float64, float64, float64, float64) unsafe.Pointer
-	_fnCGColorCreateWithContentHeadroom func(float32, unsafe.Pointer, float64, float64, float64, float64) unsafe.Pointer
-	_fnCGColorCreateWithPattern func(unsafe.Pointer, unsafe.Pointer, *float64) unsafe.Pointer
-	_fnCGColorEqualToColor func(unsafe.Pointer, unsafe.Pointer) bool
-	_fnCGColorGetAlpha func(unsafe.Pointer) float64
-	_fnCGColorGetColorSpace func(unsafe.Pointer) unsafe.Pointer
-	_fnCGColorGetComponents func(unsafe.Pointer) *float64
-	_fnCGColorGetConstantColor func(unsafe.Pointer) unsafe.Pointer
-	_fnCGColorGetContentHeadroom func(unsafe.Pointer) float32
-	_fnCGColorGetNumberOfComponents func(unsafe.Pointer) uint
-	_fnCGColorGetPattern func(unsafe.Pointer) unsafe.Pointer
-	_fnCGColorGetTypeID func() uint
-	_fnCGColorRelease func(unsafe.Pointer)
-	_fnCGColorRetain func(unsafe.Pointer) unsafe.Pointer
-	_fnCGColorSpaceCopyBaseColorSpace func(unsafe.Pointer) unsafe.Pointer
-	_fnCGColorSpaceCopyICCData func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
-	_fnCGColorSpaceCopyICCProfile func(unsafe.Pointer) unsafe.Pointer
-	_fnCGColorSpaceCopyName func(unsafe.Pointer) unsafe.Pointer
-	_fnCGColorSpaceCopyPropertyList func(unsafe.Pointer) unsafe.Pointer
-	_fnCGColorSpaceCreateCalibratedGray func(*float64, *float64, float64) unsafe.Pointer
-	_fnCGColorSpaceCreateCalibratedRGB func(*float64, *float64, *float64, *float64) unsafe.Pointer
+	_fnCGColorConversionInfoCreateWithOptions           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCGColorConversionInfoGetTypeID                   func() uint
+	_fnCGColorCreate                                    func(unsafe.Pointer, *float64) unsafe.Pointer
+	_fnCGColorCreateCopy                                func(unsafe.Pointer) unsafe.Pointer
+	_fnCGColorCreateCopyByMatchingToColorSpace          func(unsafe.Pointer, CGColorRenderingIntent, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCGColorCreateCopyWithAlpha                       func(unsafe.Pointer, float64) unsafe.Pointer
+	_fnCGColorCreateGenericCMYK                         func(float64, float64, float64, float64, float64) unsafe.Pointer
+	_fnCGColorCreateGenericGray                         func(float64, float64) unsafe.Pointer
+	_fnCGColorCreateGenericGrayGamma2_2                 func(float64, float64) unsafe.Pointer
+	_fnCGColorCreateGenericRGB                          func(float64, float64, float64, float64) unsafe.Pointer
+	_fnCGColorCreateSRGB                                func(float64, float64, float64, float64) unsafe.Pointer
+	_fnCGColorCreateWithContentHeadroom                 func(float32, unsafe.Pointer, float64, float64, float64, float64) unsafe.Pointer
+	_fnCGColorCreateWithPattern                         func(unsafe.Pointer, unsafe.Pointer, *float64) unsafe.Pointer
+	_fnCGColorEqualToColor                              func(unsafe.Pointer, unsafe.Pointer) bool
+	_fnCGColorGetAlpha                                  func(unsafe.Pointer) float64
+	_fnCGColorGetColorSpace                             func(unsafe.Pointer) unsafe.Pointer
+	_fnCGColorGetComponents                             func(unsafe.Pointer) *float64
+	_fnCGColorGetConstantColor                          func(unsafe.Pointer) unsafe.Pointer
+	_fnCGColorGetContentHeadroom                        func(unsafe.Pointer) float32
+	_fnCGColorGetNumberOfComponents                     func(unsafe.Pointer) uint
+	_fnCGColorGetPattern                                func(unsafe.Pointer) unsafe.Pointer
+	_fnCGColorGetTypeID                                 func() uint
+	_fnCGColorRelease                                   func(unsafe.Pointer)
+	_fnCGColorRetain                                    func(unsafe.Pointer) unsafe.Pointer
+	_fnCGColorSpaceCopyBaseColorSpace                   func(unsafe.Pointer) unsafe.Pointer
+	_fnCGColorSpaceCopyICCData                          func(unsafe.Pointer) unsafe.Pointer
+	// Deprecated: No longer supported
+	_fnCGColorSpaceCopyICCProfile              func(unsafe.Pointer) unsafe.Pointer
+	_fnCGColorSpaceCopyName                    func(unsafe.Pointer) unsafe.Pointer
+	_fnCGColorSpaceCopyPropertyList            func(unsafe.Pointer) unsafe.Pointer
+	_fnCGColorSpaceCreateCalibratedGray        func(*float64, *float64, float64) unsafe.Pointer
+	_fnCGColorSpaceCreateCalibratedRGB         func(*float64, *float64, *float64, *float64) unsafe.Pointer
 	_fnCGColorSpaceCreateCopyWithStandardRange func(unsafe.Pointer) unsafe.Pointer
-	_fnCGColorSpaceCreateDeviceCMYK func() unsafe.Pointer
-	_fnCGColorSpaceCreateDeviceGray func() unsafe.Pointer
-	_fnCGColorSpaceCreateDeviceRGB func() unsafe.Pointer
-	_fnCGColorSpaceCreateExtended func(unsafe.Pointer) unsafe.Pointer
-	_fnCGColorSpaceCreateExtendedLinearized func(unsafe.Pointer) unsafe.Pointer
-	_fnCGColorSpaceCreateICCBased func(uint, *float64, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCGColorSpaceCreateIndexed func(unsafe.Pointer, uint, *uint8) unsafe.Pointer
-	_fnCGColorSpaceCreateLab func(*float64, *float64, *float64) unsafe.Pointer
-	_fnCGColorSpaceCreateLinearized func(unsafe.Pointer) unsafe.Pointer
-	_fnCGColorSpaceCreatePattern func(unsafe.Pointer) unsafe.Pointer
-	_fnCGColorSpaceCreateWithColorSyncProfile func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCGColorSpaceCreateWithICCData func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	_fnCGColorSpaceCreateDeviceCMYK            func() unsafe.Pointer
+	_fnCGColorSpaceCreateDeviceGray            func() unsafe.Pointer
+	_fnCGColorSpaceCreateDeviceRGB             func() unsafe.Pointer
+	_fnCGColorSpaceCreateExtended              func(unsafe.Pointer) unsafe.Pointer
+	_fnCGColorSpaceCreateExtendedLinearized    func(unsafe.Pointer) unsafe.Pointer
+	_fnCGColorSpaceCreateICCBased              func(uint, *float64, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCGColorSpaceCreateIndexed               func(unsafe.Pointer, uint, *uint8) unsafe.Pointer
+	_fnCGColorSpaceCreateLab                   func(*float64, *float64, *float64) unsafe.Pointer
+	_fnCGColorSpaceCreateLinearized            func(unsafe.Pointer) unsafe.Pointer
+	_fnCGColorSpaceCreatePattern               func(unsafe.Pointer) unsafe.Pointer
+	_fnCGColorSpaceCreateWithColorSyncProfile  func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCGColorSpaceCreateWithICCData           func(unsafe.Pointer) unsafe.Pointer
+	// Deprecated: No longer supported
 	_fnCGColorSpaceCreateWithICCProfile func(unsafe.Pointer) unsafe.Pointer
-	_fnCGColorSpaceCreateWithName func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	_fnCGColorSpaceCreateWithName       func(unsafe.Pointer) unsafe.Pointer
+	// Deprecated: No longer supported
 	_fnCGColorSpaceCreateWithPlatformColorSpace func(unsafe.Pointer) unsafe.Pointer
-	_fnCGColorSpaceCreateWithPropertyList func(unsafe.Pointer) unsafe.Pointer
-	_fnCGColorSpaceGetBaseColorSpace func(unsafe.Pointer) unsafe.Pointer
-	_fnCGColorSpaceGetColorTable func(unsafe.Pointer, *uint8)
-	_fnCGColorSpaceGetColorTableCount func(unsafe.Pointer) uint
-	_fnCGColorSpaceGetModel func(unsafe.Pointer) CGColorSpaceModel
-	_fnCGColorSpaceGetName func(unsafe.Pointer) unsafe.Pointer
-	_fnCGColorSpaceGetNumberOfComponents func(unsafe.Pointer) uint
-	_fnCGColorSpaceGetTypeID func() uint
-	_fnCGColorSpaceIsHDR func(unsafe.Pointer) bool
-	_fnCGColorSpaceIsHLGBased func(unsafe.Pointer) bool
-	_fnCGColorSpaceIsPQBased func(unsafe.Pointer) bool
-	_fnCGColorSpaceIsWideGamutRGB func(unsafe.Pointer) bool
-	_fnCGColorSpaceRelease func(unsafe.Pointer)
-	_fnCGColorSpaceRetain func(unsafe.Pointer) unsafe.Pointer
-	_fnCGColorSpaceSupportsOutput func(unsafe.Pointer) bool
-	_fnCGColorSpaceUsesExtendedRange func(unsafe.Pointer) bool
-	_fnCGColorSpaceUsesITUR_2100TF func(unsafe.Pointer) bool
-	_fnCGCompleteDisplayConfiguration func(unsafe.Pointer, CGConfigureOption) CGError
-	_fnCGConfigureDisplayFadeEffect func(unsafe.Pointer, float32, float32, float32, float32, float32) CGError
-	_fnCGConfigureDisplayMirrorOfDisplay func(unsafe.Pointer, uint32, uint32) CGError
-// Deprecated: No longer supported
-	_fnCGConfigureDisplayMode func(unsafe.Pointer, uint32, unsafe.Pointer) CGError
-	_fnCGConfigureDisplayOrigin func(unsafe.Pointer, uint32, int32, int32) CGError
-	_fnCGConfigureDisplayStereoOperation func(unsafe.Pointer, uint32, int, int) CGError
-	_fnCGConfigureDisplayWithDisplayMode func(unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) CGError
-	_fnCGContextAddArc func(unsafe.Pointer, float64, float64, float64, float64, float64, int)
-	_fnCGContextAddArcToPoint func(unsafe.Pointer, float64, float64, float64, float64, float64)
-	_fnCGContextAddCurveToPoint func(unsafe.Pointer, float64, float64, float64, float64, float64, float64)
-	_fnCGContextAddEllipseInRect func(unsafe.Pointer, corefoundation.CGRect)
-	_fnCGContextAddLineToPoint func(unsafe.Pointer, float64, float64)
-	_fnCGContextAddLines func(unsafe.Pointer, *corefoundation.CGPoint, uint)
-	_fnCGContextAddPath func(unsafe.Pointer, unsafe.Pointer)
-	_fnCGContextAddQuadCurveToPoint func(unsafe.Pointer, float64, float64, float64, float64)
-	_fnCGContextAddRect func(unsafe.Pointer, corefoundation.CGRect)
-	_fnCGContextAddRects func(unsafe.Pointer, *corefoundation.CGRect, uint)
-	_fnCGContextBeginPage func(unsafe.Pointer, *corefoundation.CGRect)
-	_fnCGContextBeginPath func(unsafe.Pointer)
-	_fnCGContextBeginTransparencyLayer func(unsafe.Pointer, unsafe.Pointer)
+	_fnCGColorSpaceCreateWithPropertyList       func(unsafe.Pointer) unsafe.Pointer
+	_fnCGColorSpaceGetBaseColorSpace            func(unsafe.Pointer) unsafe.Pointer
+	_fnCGColorSpaceGetColorTable                func(unsafe.Pointer, *uint8)
+	_fnCGColorSpaceGetColorTableCount           func(unsafe.Pointer) uint
+	_fnCGColorSpaceGetModel                     func(unsafe.Pointer) CGColorSpaceModel
+	_fnCGColorSpaceGetName                      func(unsafe.Pointer) unsafe.Pointer
+	_fnCGColorSpaceGetNumberOfComponents        func(unsafe.Pointer) uint
+	_fnCGColorSpaceGetTypeID                    func() uint
+	_fnCGColorSpaceIsHDR                        func(unsafe.Pointer) bool
+	_fnCGColorSpaceIsHLGBased                   func(unsafe.Pointer) bool
+	_fnCGColorSpaceIsPQBased                    func(unsafe.Pointer) bool
+	_fnCGColorSpaceIsWideGamutRGB               func(unsafe.Pointer) bool
+	_fnCGColorSpaceRelease                      func(unsafe.Pointer)
+	_fnCGColorSpaceRetain                       func(unsafe.Pointer) unsafe.Pointer
+	_fnCGColorSpaceSupportsOutput               func(unsafe.Pointer) bool
+	_fnCGColorSpaceUsesExtendedRange            func(unsafe.Pointer) bool
+	_fnCGColorSpaceUsesITUR_2100TF              func(unsafe.Pointer) bool
+	_fnCGCompleteDisplayConfiguration           func(unsafe.Pointer, CGConfigureOption) CGError
+	_fnCGConfigureDisplayFadeEffect             func(unsafe.Pointer, float32, float32, float32, float32, float32) CGError
+	_fnCGConfigureDisplayMirrorOfDisplay        func(unsafe.Pointer, uint32, uint32) CGError
+	// Deprecated: No longer supported
+	_fnCGConfigureDisplayMode                  func(unsafe.Pointer, uint32, unsafe.Pointer) CGError
+	_fnCGConfigureDisplayOrigin                func(unsafe.Pointer, uint32, int32, int32) CGError
+	_fnCGConfigureDisplayStereoOperation       func(unsafe.Pointer, uint32, int, int) CGError
+	_fnCGConfigureDisplayWithDisplayMode       func(unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) CGError
+	_fnCGContextAddArc                         func(unsafe.Pointer, float64, float64, float64, float64, float64, int)
+	_fnCGContextAddArcToPoint                  func(unsafe.Pointer, float64, float64, float64, float64, float64)
+	_fnCGContextAddCurveToPoint                func(unsafe.Pointer, float64, float64, float64, float64, float64, float64)
+	_fnCGContextAddEllipseInRect               func(unsafe.Pointer, corefoundation.CGRect)
+	_fnCGContextAddLineToPoint                 func(unsafe.Pointer, float64, float64)
+	_fnCGContextAddLines                       func(unsafe.Pointer, *corefoundation.CGPoint, uint)
+	_fnCGContextAddPath                        func(unsafe.Pointer, unsafe.Pointer)
+	_fnCGContextAddQuadCurveToPoint            func(unsafe.Pointer, float64, float64, float64, float64)
+	_fnCGContextAddRect                        func(unsafe.Pointer, corefoundation.CGRect)
+	_fnCGContextAddRects                       func(unsafe.Pointer, *corefoundation.CGRect, uint)
+	_fnCGContextBeginPage                      func(unsafe.Pointer, *corefoundation.CGRect)
+	_fnCGContextBeginPath                      func(unsafe.Pointer)
+	_fnCGContextBeginTransparencyLayer         func(unsafe.Pointer, unsafe.Pointer)
 	_fnCGContextBeginTransparencyLayerWithRect func(unsafe.Pointer, corefoundation.CGRect, unsafe.Pointer)
-	_fnCGContextClearRect func(unsafe.Pointer, corefoundation.CGRect)
-	_fnCGContextClip func(unsafe.Pointer)
-	_fnCGContextClipToMask func(unsafe.Pointer, corefoundation.CGRect, unsafe.Pointer)
-	_fnCGContextClipToRect func(unsafe.Pointer, corefoundation.CGRect)
-	_fnCGContextClipToRects func(unsafe.Pointer, *corefoundation.CGRect, uint)
-	_fnCGContextClosePath func(unsafe.Pointer)
-	_fnCGContextConcatCTM func(unsafe.Pointer, corefoundation.CGAffineTransform)
-	_fnCGContextConvertPointToDeviceSpace func(unsafe.Pointer, corefoundation.CGPoint) corefoundation.CGPoint
-	_fnCGContextConvertPointToUserSpace func(unsafe.Pointer, corefoundation.CGPoint) corefoundation.CGPoint
-	_fnCGContextConvertRectToDeviceSpace func(unsafe.Pointer, corefoundation.CGRect) corefoundation.CGRect
-	_fnCGContextConvertRectToUserSpace func(unsafe.Pointer, corefoundation.CGRect) corefoundation.CGRect
-	_fnCGContextConvertSizeToDeviceSpace func(unsafe.Pointer, corefoundation.CGSize) corefoundation.CGSize
-	_fnCGContextConvertSizeToUserSpace func(unsafe.Pointer, corefoundation.CGSize) corefoundation.CGSize
-	_fnCGContextCopyPath func(unsafe.Pointer) unsafe.Pointer
-	_fnCGContextDrawConicGradient func(unsafe.Pointer, unsafe.Pointer, corefoundation.CGPoint, float64)
-	_fnCGContextDrawImage func(unsafe.Pointer, corefoundation.CGRect, unsafe.Pointer)
-	_fnCGContextDrawImageApplyingToneMapping func(unsafe.Pointer, corefoundation.CGRect, unsafe.Pointer, CGToneMapping, unsafe.Pointer) bool
-	_fnCGContextDrawLayerAtPoint func(unsafe.Pointer, corefoundation.CGPoint, unsafe.Pointer)
-	_fnCGContextDrawLayerInRect func(unsafe.Pointer, corefoundation.CGRect, unsafe.Pointer)
-	_fnCGContextDrawLinearGradient func(unsafe.Pointer, unsafe.Pointer, corefoundation.CGPoint, corefoundation.CGPoint, CGGradientDrawingOptions)
-// Deprecated: No longer supported
-	_fnCGContextDrawPDFDocument func(unsafe.Pointer, corefoundation.CGRect, unsafe.Pointer, int)
-	_fnCGContextDrawPDFPage func(unsafe.Pointer, unsafe.Pointer)
-	_fnCGContextDrawPath func(unsafe.Pointer, CGPathDrawingMode)
-	_fnCGContextDrawRadialGradient func(unsafe.Pointer, unsafe.Pointer, corefoundation.CGPoint, float64, corefoundation.CGPoint, float64, CGGradientDrawingOptions)
-	_fnCGContextDrawShading func(unsafe.Pointer, unsafe.Pointer)
-	_fnCGContextDrawTiledImage func(unsafe.Pointer, corefoundation.CGRect, unsafe.Pointer)
-	_fnCGContextEOClip func(unsafe.Pointer)
-	_fnCGContextEOFillPath func(unsafe.Pointer)
-	_fnCGContextEndPage func(unsafe.Pointer)
-	_fnCGContextEndTransparencyLayer func(unsafe.Pointer)
-	_fnCGContextFillEllipseInRect func(unsafe.Pointer, corefoundation.CGRect)
-	_fnCGContextFillPath func(unsafe.Pointer)
-	_fnCGContextFillRect func(unsafe.Pointer, corefoundation.CGRect)
-	_fnCGContextFillRects func(unsafe.Pointer, *corefoundation.CGRect, uint)
-	_fnCGContextFlush func(unsafe.Pointer)
-	_fnCGContextGetCTM func(unsafe.Pointer) corefoundation.CGAffineTransform
-	_fnCGContextGetClipBoundingBox func(unsafe.Pointer) corefoundation.CGRect
-	_fnCGContextGetContentToneMappingInfo func(unsafe.Pointer) CGContentToneMappingInfo
-	_fnCGContextGetEDRTargetHeadroom func(unsafe.Pointer) float32
-	_fnCGContextGetInterpolationQuality func(unsafe.Pointer) CGInterpolationQuality
-	_fnCGContextGetPathBoundingBox func(unsafe.Pointer) corefoundation.CGRect
-	_fnCGContextGetPathCurrentPoint func(unsafe.Pointer) corefoundation.CGPoint
-	_fnCGContextGetTextMatrix func(unsafe.Pointer) corefoundation.CGAffineTransform
-	_fnCGContextGetTextPosition func(unsafe.Pointer) corefoundation.CGPoint
-	_fnCGContextGetTypeID func() uint
+	_fnCGContextClearRect                      func(unsafe.Pointer, corefoundation.CGRect)
+	_fnCGContextClip                           func(unsafe.Pointer)
+	_fnCGContextClipToMask                     func(unsafe.Pointer, corefoundation.CGRect, unsafe.Pointer)
+	_fnCGContextClipToRect                     func(unsafe.Pointer, corefoundation.CGRect)
+	_fnCGContextClipToRects                    func(unsafe.Pointer, *corefoundation.CGRect, uint)
+	_fnCGContextClosePath                      func(unsafe.Pointer)
+	_fnCGContextConcatCTM                      func(unsafe.Pointer, corefoundation.CGAffineTransform)
+	_fnCGContextConvertPointToDeviceSpace      func(unsafe.Pointer, corefoundation.CGPoint) corefoundation.CGPoint
+	_fnCGContextConvertPointToUserSpace        func(unsafe.Pointer, corefoundation.CGPoint) corefoundation.CGPoint
+	_fnCGContextConvertRectToDeviceSpace       func(unsafe.Pointer, corefoundation.CGRect) corefoundation.CGRect
+	_fnCGContextConvertRectToUserSpace         func(unsafe.Pointer, corefoundation.CGRect) corefoundation.CGRect
+	_fnCGContextConvertSizeToDeviceSpace       func(unsafe.Pointer, corefoundation.CGSize) corefoundation.CGSize
+	_fnCGContextConvertSizeToUserSpace         func(unsafe.Pointer, corefoundation.CGSize) corefoundation.CGSize
+	_fnCGContextCopyPath                       func(unsafe.Pointer) unsafe.Pointer
+	_fnCGContextDrawConicGradient              func(unsafe.Pointer, unsafe.Pointer, corefoundation.CGPoint, float64)
+	_fnCGContextDrawImage                      func(unsafe.Pointer, corefoundation.CGRect, unsafe.Pointer)
+	_fnCGContextDrawImageApplyingToneMapping   func(unsafe.Pointer, corefoundation.CGRect, unsafe.Pointer, CGToneMapping, unsafe.Pointer) bool
+	_fnCGContextDrawLayerAtPoint               func(unsafe.Pointer, corefoundation.CGPoint, unsafe.Pointer)
+	_fnCGContextDrawLayerInRect                func(unsafe.Pointer, corefoundation.CGRect, unsafe.Pointer)
+	_fnCGContextDrawLinearGradient             func(unsafe.Pointer, unsafe.Pointer, corefoundation.CGPoint, corefoundation.CGPoint, CGGradientDrawingOptions)
+	// Deprecated: No longer supported
+	_fnCGContextDrawPDFDocument                    func(unsafe.Pointer, corefoundation.CGRect, unsafe.Pointer, int)
+	_fnCGContextDrawPDFPage                        func(unsafe.Pointer, unsafe.Pointer)
+	_fnCGContextDrawPath                           func(unsafe.Pointer, CGPathDrawingMode)
+	_fnCGContextDrawRadialGradient                 func(unsafe.Pointer, unsafe.Pointer, corefoundation.CGPoint, float64, corefoundation.CGPoint, float64, CGGradientDrawingOptions)
+	_fnCGContextDrawShading                        func(unsafe.Pointer, unsafe.Pointer)
+	_fnCGContextDrawTiledImage                     func(unsafe.Pointer, corefoundation.CGRect, unsafe.Pointer)
+	_fnCGContextEOClip                             func(unsafe.Pointer)
+	_fnCGContextEOFillPath                         func(unsafe.Pointer)
+	_fnCGContextEndPage                            func(unsafe.Pointer)
+	_fnCGContextEndTransparencyLayer               func(unsafe.Pointer)
+	_fnCGContextFillEllipseInRect                  func(unsafe.Pointer, corefoundation.CGRect)
+	_fnCGContextFillPath                           func(unsafe.Pointer)
+	_fnCGContextFillRect                           func(unsafe.Pointer, corefoundation.CGRect)
+	_fnCGContextFillRects                          func(unsafe.Pointer, *corefoundation.CGRect, uint)
+	_fnCGContextFlush                              func(unsafe.Pointer)
+	_fnCGContextGetCTM                             func(unsafe.Pointer) corefoundation.CGAffineTransform
+	_fnCGContextGetClipBoundingBox                 func(unsafe.Pointer) corefoundation.CGRect
+	_fnCGContextGetContentToneMappingInfo          func(unsafe.Pointer) CGContentToneMappingInfo
+	_fnCGContextGetEDRTargetHeadroom               func(unsafe.Pointer) float32
+	_fnCGContextGetInterpolationQuality            func(unsafe.Pointer) CGInterpolationQuality
+	_fnCGContextGetPathBoundingBox                 func(unsafe.Pointer) corefoundation.CGRect
+	_fnCGContextGetPathCurrentPoint                func(unsafe.Pointer) corefoundation.CGPoint
+	_fnCGContextGetTextMatrix                      func(unsafe.Pointer) corefoundation.CGAffineTransform
+	_fnCGContextGetTextPosition                    func(unsafe.Pointer) corefoundation.CGPoint
+	_fnCGContextGetTypeID                          func() uint
 	_fnCGContextGetUserSpaceToDeviceSpaceTransform func(unsafe.Pointer) corefoundation.CGAffineTransform
-	_fnCGContextIsPathEmpty func(unsafe.Pointer) bool
-	_fnCGContextMoveToPoint func(unsafe.Pointer, float64, float64)
-	_fnCGContextPathContainsPoint func(unsafe.Pointer, corefoundation.CGPoint, CGPathDrawingMode) bool
-	_fnCGContextRelease func(unsafe.Pointer)
-	_fnCGContextReplacePathWithStrokedPath func(unsafe.Pointer)
-	_fnCGContextResetClip func(unsafe.Pointer)
-	_fnCGContextRestoreGState func(unsafe.Pointer)
-	_fnCGContextRetain func(unsafe.Pointer) unsafe.Pointer
-	_fnCGContextRotateCTM func(unsafe.Pointer, float64)
-	_fnCGContextSaveGState func(unsafe.Pointer)
-	_fnCGContextScaleCTM func(unsafe.Pointer, float64, float64)
-// Deprecated: No longer supported
-	_fnCGContextSelectFont func(unsafe.Pointer, string, float64, CGTextEncoding)
-	_fnCGContextSetAllowsAntialiasing func(unsafe.Pointer, bool)
-	_fnCGContextSetAllowsFontSmoothing func(unsafe.Pointer, bool)
-	_fnCGContextSetAllowsFontSubpixelPositioning func(unsafe.Pointer, bool)
+	_fnCGContextIsPathEmpty                        func(unsafe.Pointer) bool
+	_fnCGContextMoveToPoint                        func(unsafe.Pointer, float64, float64)
+	_fnCGContextPathContainsPoint                  func(unsafe.Pointer, corefoundation.CGPoint, CGPathDrawingMode) bool
+	_fnCGContextRelease                            func(unsafe.Pointer)
+	_fnCGContextReplacePathWithStrokedPath         func(unsafe.Pointer)
+	_fnCGContextResetClip                          func(unsafe.Pointer)
+	_fnCGContextRestoreGState                      func(unsafe.Pointer)
+	_fnCGContextRetain                             func(unsafe.Pointer) unsafe.Pointer
+	_fnCGContextRotateCTM                          func(unsafe.Pointer, float64)
+	_fnCGContextSaveGState                         func(unsafe.Pointer)
+	_fnCGContextScaleCTM                           func(unsafe.Pointer, float64, float64)
+	// Deprecated: No longer supported
+	_fnCGContextSelectFont                        func(unsafe.Pointer, string, float64, CGTextEncoding)
+	_fnCGContextSetAllowsAntialiasing             func(unsafe.Pointer, bool)
+	_fnCGContextSetAllowsFontSmoothing            func(unsafe.Pointer, bool)
+	_fnCGContextSetAllowsFontSubpixelPositioning  func(unsafe.Pointer, bool)
 	_fnCGContextSetAllowsFontSubpixelQuantization func(unsafe.Pointer, bool)
-	_fnCGContextSetAlpha func(unsafe.Pointer, float64)
-	_fnCGContextSetBlendMode func(unsafe.Pointer, CGBlendMode)
-	_fnCGContextSetCMYKFillColor func(unsafe.Pointer, float64, float64, float64, float64, float64)
-	_fnCGContextSetCMYKStrokeColor func(unsafe.Pointer, float64, float64, float64, float64, float64)
-	_fnCGContextSetCharacterSpacing func(unsafe.Pointer, float64)
-	_fnCGContextSetContentToneMappingInfo func(unsafe.Pointer, CGContentToneMappingInfo)
-	_fnCGContextSetEDRTargetHeadroom func(unsafe.Pointer, float32) bool
-	_fnCGContextSetFillColor func(unsafe.Pointer, *float64)
-	_fnCGContextSetFillColorSpace func(unsafe.Pointer, unsafe.Pointer)
-	_fnCGContextSetFillColorWithColor func(unsafe.Pointer, unsafe.Pointer)
-	_fnCGContextSetFillPattern func(unsafe.Pointer, unsafe.Pointer, *float64)
-	_fnCGContextSetFlatness func(unsafe.Pointer, float64)
-	_fnCGContextSetFont func(unsafe.Pointer, unsafe.Pointer)
-	_fnCGContextSetFontSize func(unsafe.Pointer, float64)
-	_fnCGContextSetGrayFillColor func(unsafe.Pointer, float64, float64)
-	_fnCGContextSetGrayStrokeColor func(unsafe.Pointer, float64, float64)
-	_fnCGContextSetInterpolationQuality func(unsafe.Pointer, CGInterpolationQuality)
-	_fnCGContextSetLineCap func(unsafe.Pointer, CGLineCap)
-	_fnCGContextSetLineDash func(unsafe.Pointer, float64, *float64, uint)
-	_fnCGContextSetLineJoin func(unsafe.Pointer, CGLineJoin)
-	_fnCGContextSetLineWidth func(unsafe.Pointer, float64)
-	_fnCGContextSetMiterLimit func(unsafe.Pointer, float64)
-	_fnCGContextSetPatternPhase func(unsafe.Pointer, corefoundation.CGSize)
-	_fnCGContextSetRGBFillColor func(unsafe.Pointer, float64, float64, float64, float64)
-	_fnCGContextSetRGBStrokeColor func(unsafe.Pointer, float64, float64, float64, float64)
-	_fnCGContextSetRenderingIntent func(unsafe.Pointer, CGColorRenderingIntent)
-	_fnCGContextSetShadow func(unsafe.Pointer, corefoundation.CGSize, float64)
-	_fnCGContextSetShadowWithColor func(unsafe.Pointer, corefoundation.CGSize, float64, unsafe.Pointer)
-	_fnCGContextSetShouldAntialias func(unsafe.Pointer, bool)
-	_fnCGContextSetShouldSmoothFonts func(unsafe.Pointer, bool)
-	_fnCGContextSetShouldSubpixelPositionFonts func(unsafe.Pointer, bool)
-	_fnCGContextSetShouldSubpixelQuantizeFonts func(unsafe.Pointer, bool)
-	_fnCGContextSetStrokeColor func(unsafe.Pointer, *float64)
-	_fnCGContextSetStrokeColorSpace func(unsafe.Pointer, unsafe.Pointer)
-	_fnCGContextSetStrokeColorWithColor func(unsafe.Pointer, unsafe.Pointer)
-	_fnCGContextSetStrokePattern func(unsafe.Pointer, unsafe.Pointer, *float64)
-	_fnCGContextSetTextDrawingMode func(unsafe.Pointer, CGTextDrawingMode)
-	_fnCGContextSetTextMatrix func(unsafe.Pointer, corefoundation.CGAffineTransform)
-	_fnCGContextSetTextPosition func(unsafe.Pointer, float64, float64)
-// Deprecated: No longer supported
+	_fnCGContextSetAlpha                          func(unsafe.Pointer, float64)
+	_fnCGContextSetBlendMode                      func(unsafe.Pointer, CGBlendMode)
+	_fnCGContextSetCMYKFillColor                  func(unsafe.Pointer, float64, float64, float64, float64, float64)
+	_fnCGContextSetCMYKStrokeColor                func(unsafe.Pointer, float64, float64, float64, float64, float64)
+	_fnCGContextSetCharacterSpacing               func(unsafe.Pointer, float64)
+	_fnCGContextSetContentToneMappingInfo         func(unsafe.Pointer, CGContentToneMappingInfo)
+	_fnCGContextSetEDRTargetHeadroom              func(unsafe.Pointer, float32) bool
+	_fnCGContextSetFillColor                      func(unsafe.Pointer, *float64)
+	_fnCGContextSetFillColorSpace                 func(unsafe.Pointer, unsafe.Pointer)
+	_fnCGContextSetFillColorWithColor             func(unsafe.Pointer, unsafe.Pointer)
+	_fnCGContextSetFillPattern                    func(unsafe.Pointer, unsafe.Pointer, *float64)
+	_fnCGContextSetFlatness                       func(unsafe.Pointer, float64)
+	_fnCGContextSetFont                           func(unsafe.Pointer, unsafe.Pointer)
+	_fnCGContextSetFontSize                       func(unsafe.Pointer, float64)
+	_fnCGContextSetGrayFillColor                  func(unsafe.Pointer, float64, float64)
+	_fnCGContextSetGrayStrokeColor                func(unsafe.Pointer, float64, float64)
+	_fnCGContextSetInterpolationQuality           func(unsafe.Pointer, CGInterpolationQuality)
+	_fnCGContextSetLineCap                        func(unsafe.Pointer, CGLineCap)
+	_fnCGContextSetLineDash                       func(unsafe.Pointer, float64, *float64, uint)
+	_fnCGContextSetLineJoin                       func(unsafe.Pointer, CGLineJoin)
+	_fnCGContextSetLineWidth                      func(unsafe.Pointer, float64)
+	_fnCGContextSetMiterLimit                     func(unsafe.Pointer, float64)
+	_fnCGContextSetPatternPhase                   func(unsafe.Pointer, corefoundation.CGSize)
+	_fnCGContextSetRGBFillColor                   func(unsafe.Pointer, float64, float64, float64, float64)
+	_fnCGContextSetRGBStrokeColor                 func(unsafe.Pointer, float64, float64, float64, float64)
+	_fnCGContextSetRenderingIntent                func(unsafe.Pointer, CGColorRenderingIntent)
+	_fnCGContextSetShadow                         func(unsafe.Pointer, corefoundation.CGSize, float64)
+	_fnCGContextSetShadowWithColor                func(unsafe.Pointer, corefoundation.CGSize, float64, unsafe.Pointer)
+	_fnCGContextSetShouldAntialias                func(unsafe.Pointer, bool)
+	_fnCGContextSetShouldSmoothFonts              func(unsafe.Pointer, bool)
+	_fnCGContextSetShouldSubpixelPositionFonts    func(unsafe.Pointer, bool)
+	_fnCGContextSetShouldSubpixelQuantizeFonts    func(unsafe.Pointer, bool)
+	_fnCGContextSetStrokeColor                    func(unsafe.Pointer, *float64)
+	_fnCGContextSetStrokeColorSpace               func(unsafe.Pointer, unsafe.Pointer)
+	_fnCGContextSetStrokeColorWithColor           func(unsafe.Pointer, unsafe.Pointer)
+	_fnCGContextSetStrokePattern                  func(unsafe.Pointer, unsafe.Pointer, *float64)
+	_fnCGContextSetTextDrawingMode                func(unsafe.Pointer, CGTextDrawingMode)
+	_fnCGContextSetTextMatrix                     func(unsafe.Pointer, corefoundation.CGAffineTransform)
+	_fnCGContextSetTextPosition                   func(unsafe.Pointer, float64, float64)
+	// Deprecated: No longer supported
 	_fnCGContextShowGlyphs func(unsafe.Pointer, *uint16, uint)
-// Deprecated: No longer supported
-	_fnCGContextShowGlyphsAtPoint func(unsafe.Pointer, float64, float64, *uint16, uint)
+	// Deprecated: No longer supported
+	_fnCGContextShowGlyphsAtPoint     func(unsafe.Pointer, float64, float64, *uint16, uint)
 	_fnCGContextShowGlyphsAtPositions func(unsafe.Pointer, *uint16, *corefoundation.CGPoint, uint)
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnCGContextShowGlyphsWithAdvances func(unsafe.Pointer, *uint16, *corefoundation.CGSize, uint)
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnCGContextShowText func(unsafe.Pointer, string, uint)
-// Deprecated: No longer supported
-	_fnCGContextShowTextAtPoint func(unsafe.Pointer, float64, float64, string, uint)
-	_fnCGContextStrokeEllipseInRect func(unsafe.Pointer, corefoundation.CGRect)
-	_fnCGContextStrokeLineSegments func(unsafe.Pointer, *corefoundation.CGPoint, uint)
-	_fnCGContextStrokePath func(unsafe.Pointer)
-	_fnCGContextStrokeRect func(unsafe.Pointer, corefoundation.CGRect)
-	_fnCGContextStrokeRectWithWidth func(unsafe.Pointer, corefoundation.CGRect, float64)
-	_fnCGContextSynchronize func(unsafe.Pointer)
+	// Deprecated: No longer supported
+	_fnCGContextShowTextAtPoint       func(unsafe.Pointer, float64, float64, string, uint)
+	_fnCGContextStrokeEllipseInRect   func(unsafe.Pointer, corefoundation.CGRect)
+	_fnCGContextStrokeLineSegments    func(unsafe.Pointer, *corefoundation.CGPoint, uint)
+	_fnCGContextStrokePath            func(unsafe.Pointer)
+	_fnCGContextStrokeRect            func(unsafe.Pointer, corefoundation.CGRect)
+	_fnCGContextStrokeRectWithWidth   func(unsafe.Pointer, corefoundation.CGRect, float64)
+	_fnCGContextSynchronize           func(unsafe.Pointer)
 	_fnCGContextSynchronizeAttributes func(unsafe.Pointer)
-	_fnCGContextTranslateCTM func(unsafe.Pointer, float64, float64)
-	_fnCGConvertColorDataWithFormat func(uint, uint, unsafe.Pointer, CGColorDataFormat, unsafe.Pointer, CGColorDataFormat, unsafe.Pointer) bool
-// Deprecated: No longer supported
+	_fnCGContextTranslateCTM          func(unsafe.Pointer, float64, float64)
+	_fnCGConvertColorDataWithFormat   func(uint, uint, unsafe.Pointer, CGColorDataFormat, unsafe.Pointer, CGColorDataFormat, unsafe.Pointer) bool
+	// Deprecated: No longer supported
 	_fnCGCursorIsDrawnInFramebuffer func() int
-// Deprecated: No longer supported
-	_fnCGCursorIsVisible func() int
-	_fnCGDataConsumerCreate func(unsafe.Pointer, *CGDataConsumerCallbacks) unsafe.Pointer
-	_fnCGDataConsumerCreateWithCFData func(unsafe.Pointer) unsafe.Pointer
-	_fnCGDataConsumerCreateWithURL func(unsafe.Pointer) unsafe.Pointer
-	_fnCGDataConsumerGetTypeID func() uint
-	_fnCGDataConsumerRelease func(unsafe.Pointer)
-	_fnCGDataConsumerRetain func(unsafe.Pointer) unsafe.Pointer
-	_fnCGDataProviderCopyData func(unsafe.Pointer) unsafe.Pointer
-	_fnCGDataProviderCreateDirect func(unsafe.Pointer, int64, *CGDataProviderDirectCallbacks) unsafe.Pointer
-	_fnCGDataProviderCreateSequential func(unsafe.Pointer, *CGDataProviderSequentialCallbacks) unsafe.Pointer
-	_fnCGDataProviderCreateWithCFData func(unsafe.Pointer) unsafe.Pointer
-	_fnCGDataProviderCreateWithData func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) unsafe.Pointer
-	_fnCGDataProviderCreateWithFilename func(string) unsafe.Pointer
-	_fnCGDataProviderCreateWithURL func(unsafe.Pointer) unsafe.Pointer
-	_fnCGDataProviderGetInfo func(unsafe.Pointer) unsafe.Pointer
-	_fnCGDataProviderGetTypeID func() uint
-	_fnCGDataProviderRelease func(unsafe.Pointer)
-	_fnCGDataProviderRetain func(unsafe.Pointer) unsafe.Pointer
+	// Deprecated: No longer supported
+	_fnCGCursorIsVisible                     func() int
+	_fnCGDataConsumerCreate                  func(unsafe.Pointer, *CGDataConsumerCallbacks) unsafe.Pointer
+	_fnCGDataConsumerCreateWithCFData        func(unsafe.Pointer) unsafe.Pointer
+	_fnCGDataConsumerCreateWithURL           func(unsafe.Pointer) unsafe.Pointer
+	_fnCGDataConsumerGetTypeID               func() uint
+	_fnCGDataConsumerRelease                 func(unsafe.Pointer)
+	_fnCGDataConsumerRetain                  func(unsafe.Pointer) unsafe.Pointer
+	_fnCGDataProviderCopyData                func(unsafe.Pointer) unsafe.Pointer
+	_fnCGDataProviderCreateDirect            func(unsafe.Pointer, int64, *CGDataProviderDirectCallbacks) unsafe.Pointer
+	_fnCGDataProviderCreateSequential        func(unsafe.Pointer, *CGDataProviderSequentialCallbacks) unsafe.Pointer
+	_fnCGDataProviderCreateWithCFData        func(unsafe.Pointer) unsafe.Pointer
+	_fnCGDataProviderCreateWithData          func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) unsafe.Pointer
+	_fnCGDataProviderCreateWithFilename      func(string) unsafe.Pointer
+	_fnCGDataProviderCreateWithURL           func(unsafe.Pointer) unsafe.Pointer
+	_fnCGDataProviderGetInfo                 func(unsafe.Pointer) unsafe.Pointer
+	_fnCGDataProviderGetTypeID               func() uint
+	_fnCGDataProviderRelease                 func(unsafe.Pointer)
+	_fnCGDataProviderRetain                  func(unsafe.Pointer) unsafe.Pointer
 	_fnCGDirectDisplayCopyCurrentMetalDevice func(uint32) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnCGDisplayAvailableModes func(uint32) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnCGDisplayBestModeForParameters func(uint32, uint, uint, uint, *int) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnCGDisplayBestModeForParametersAndRefreshRate func(uint32, uint, uint, uint, float64, *int) unsafe.Pointer
-	_fnCGDisplayBounds func(uint32) corefoundation.CGRect
-	_fnCGDisplayCapture func(uint32) CGError
-	_fnCGDisplayCaptureWithOptions func(uint32, CGCaptureOptions) CGError
-	_fnCGDisplayCopyAllDisplayModes func(uint32, unsafe.Pointer) unsafe.Pointer
-	_fnCGDisplayCopyColorSpace func(uint32) unsafe.Pointer
-	_fnCGDisplayCopyDisplayMode func(uint32) unsafe.Pointer
-// Deprecated: No longer supported
+	_fnCGDisplayBounds                              func(uint32) corefoundation.CGRect
+	_fnCGDisplayCapture                             func(uint32) CGError
+	_fnCGDisplayCaptureWithOptions                  func(uint32, CGCaptureOptions) CGError
+	_fnCGDisplayCopyAllDisplayModes                 func(uint32, unsafe.Pointer) unsafe.Pointer
+	_fnCGDisplayCopyColorSpace                      func(uint32) unsafe.Pointer
+	_fnCGDisplayCopyDisplayMode                     func(uint32) unsafe.Pointer
+	// Deprecated: No longer supported
 	_fnCGDisplayCurrentMode func(uint32) unsafe.Pointer
-	_fnCGDisplayFade func(uint32, float32, float32, float32, float32, float32, float32, int) CGError
-// Deprecated: No longer supported
+	_fnCGDisplayFade        func(uint32, float32, float32, float32, float32, float32, float32, int) CGError
+	// Deprecated: No longer supported
 	_fnCGDisplayFadeOperationInProgress func() int
-	_fnCGDisplayGammaTableCapacity func(uint32) uint32
-	_fnCGDisplayGetDrawingContext func(uint32) unsafe.Pointer
-	_fnCGDisplayHideCursor func(uint32) CGError
-	_fnCGDisplayIDToOpenGLDisplayMask func(uint32) uint32
-// Deprecated: No longer supported
-	_fnCGDisplayIOServicePort func(uint32) uint
-	_fnCGDisplayIsActive func(uint32) int
+	_fnCGDisplayGammaTableCapacity      func(uint32) uint32
+	_fnCGDisplayGetDrawingContext       func(uint32) unsafe.Pointer
+	_fnCGDisplayHideCursor              func(uint32) CGError
+	_fnCGDisplayIDToOpenGLDisplayMask   func(uint32) uint32
+	// Deprecated: No longer supported
+	_fnCGDisplayIOServicePort       func(uint32) uint
+	_fnCGDisplayIsActive            func(uint32) int
 	_fnCGDisplayIsAlwaysInMirrorSet func(uint32) int
-	_fnCGDisplayIsAsleep func(uint32) int
-	_fnCGDisplayIsBuiltin func(uint32) int
-// Deprecated: No longer supported
-	_fnCGDisplayIsCaptured func(uint32) int
+	_fnCGDisplayIsAsleep            func(uint32) int
+	_fnCGDisplayIsBuiltin           func(uint32) int
+	// Deprecated: No longer supported
+	_fnCGDisplayIsCaptured      func(uint32) int
 	_fnCGDisplayIsInHWMirrorSet func(uint32) int
-	_fnCGDisplayIsInMirrorSet func(uint32) int
-	_fnCGDisplayIsMain func(uint32) int
-	_fnCGDisplayIsOnline func(uint32) int
-	_fnCGDisplayIsStereo func(uint32) int
-	_fnCGDisplayMirrorsDisplay func(uint32) uint32
-// Deprecated: No longer supported
-	_fnCGDisplayModeCopyPixelEncoding func(unsafe.Pointer) unsafe.Pointer
-	_fnCGDisplayModeGetHeight func(unsafe.Pointer) uint
-	_fnCGDisplayModeGetIODisplayModeID func(unsafe.Pointer) int32
-	_fnCGDisplayModeGetIOFlags func(unsafe.Pointer) uint32
-	_fnCGDisplayModeGetPixelHeight func(unsafe.Pointer) uint
-	_fnCGDisplayModeGetPixelWidth func(unsafe.Pointer) uint
-	_fnCGDisplayModeGetRefreshRate func(unsafe.Pointer) float64
-	_fnCGDisplayModeGetTypeID func() uint
-	_fnCGDisplayModeGetWidth func(unsafe.Pointer) uint
-	_fnCGDisplayModeIsUsableForDesktopGUI func(unsafe.Pointer) bool
-	_fnCGDisplayModeRelease func(unsafe.Pointer)
-	_fnCGDisplayModeRetain func(unsafe.Pointer) unsafe.Pointer
-	_fnCGDisplayModelNumber func(uint32) uint32
-	_fnCGDisplayMoveCursorToPoint func(uint32, corefoundation.CGPoint) CGError
-	_fnCGDisplayPixelsHigh func(uint32) uint
-	_fnCGDisplayPixelsWide func(uint32) uint
-	_fnCGDisplayPrimaryDisplay func(uint32) uint32
+	_fnCGDisplayIsInMirrorSet   func(uint32) int
+	_fnCGDisplayIsMain          func(uint32) int
+	_fnCGDisplayIsOnline        func(uint32) int
+	_fnCGDisplayIsStereo        func(uint32) int
+	_fnCGDisplayMirrorsDisplay  func(uint32) uint32
+	// Deprecated: No longer supported
+	_fnCGDisplayModeCopyPixelEncoding           func(unsafe.Pointer) unsafe.Pointer
+	_fnCGDisplayModeGetHeight                   func(unsafe.Pointer) uint
+	_fnCGDisplayModeGetIODisplayModeID          func(unsafe.Pointer) int32
+	_fnCGDisplayModeGetIOFlags                  func(unsafe.Pointer) uint32
+	_fnCGDisplayModeGetPixelHeight              func(unsafe.Pointer) uint
+	_fnCGDisplayModeGetPixelWidth               func(unsafe.Pointer) uint
+	_fnCGDisplayModeGetRefreshRate              func(unsafe.Pointer) float64
+	_fnCGDisplayModeGetTypeID                   func() uint
+	_fnCGDisplayModeGetWidth                    func(unsafe.Pointer) uint
+	_fnCGDisplayModeIsUsableForDesktopGUI       func(unsafe.Pointer) bool
+	_fnCGDisplayModeRelease                     func(unsafe.Pointer)
+	_fnCGDisplayModeRetain                      func(unsafe.Pointer) unsafe.Pointer
+	_fnCGDisplayModelNumber                     func(uint32) uint32
+	_fnCGDisplayMoveCursorToPoint               func(uint32, corefoundation.CGPoint) CGError
+	_fnCGDisplayPixelsHigh                      func(uint32) uint
+	_fnCGDisplayPixelsWide                      func(uint32) uint
+	_fnCGDisplayPrimaryDisplay                  func(uint32) uint32
 	_fnCGDisplayRegisterReconfigurationCallback func(unsafe.Pointer, unsafe.Pointer) CGError
-	_fnCGDisplayRelease func(uint32) CGError
-	_fnCGDisplayRemoveReconfigurationCallback func(unsafe.Pointer, unsafe.Pointer) CGError
-	_fnCGDisplayRestoreColorSyncSettings func()
-	_fnCGDisplayRotation func(uint32) float64
-	_fnCGDisplayScreenSize func(uint32) corefoundation.CGSize
-	_fnCGDisplaySerialNumber func(uint32) uint32
-	_fnCGDisplaySetDisplayMode func(uint32, unsafe.Pointer, unsafe.Pointer) CGError
-	_fnCGDisplaySetStereoOperation func(uint32, int, int, CGConfigureOption) CGError
-	_fnCGDisplayShowCursor func(uint32) CGError
-// Deprecated: No longer supported
-	_fnCGDisplaySwitchToMode func(uint32, unsafe.Pointer) CGError
-	_fnCGDisplayUnitNumber func(uint32) uint32
-	_fnCGDisplayUsesOpenGLAcceleration func(uint32) int
-	_fnCGDisplayVendorNumber func(uint32) uint32
+	_fnCGDisplayRelease                         func(uint32) CGError
+	_fnCGDisplayRemoveReconfigurationCallback   func(unsafe.Pointer, unsafe.Pointer) CGError
+	_fnCGDisplayRestoreColorSyncSettings        func()
+	_fnCGDisplayRotation                        func(uint32) float64
+	_fnCGDisplayScreenSize                      func(uint32) corefoundation.CGSize
+	_fnCGDisplaySerialNumber                    func(uint32) uint32
+	_fnCGDisplaySetDisplayMode                  func(uint32, unsafe.Pointer, unsafe.Pointer) CGError
+	_fnCGDisplaySetStereoOperation              func(uint32, int, int, CGConfigureOption) CGError
+	_fnCGDisplayShowCursor                      func(uint32) CGError
+	// Deprecated: No longer supported
+	_fnCGDisplaySwitchToMode                  func(uint32, unsafe.Pointer) CGError
+	_fnCGDisplayUnitNumber                    func(uint32) uint32
+	_fnCGDisplayUsesOpenGLAcceleration        func(uint32) int
+	_fnCGDisplayVendorNumber                  func(uint32) uint32
 	_fnCGEXRToneMappingGammaGetDefaultOptions func() unsafe.Pointer
-// Deprecated: No longer supported
-	_fnCGEnableEventStateCombining func(int) CGError
-	_fnCGErrorSetCallback func(unsafe.Pointer)
-	_fnCGEventCreate func(unsafe.Pointer) unsafe.Pointer
-	_fnCGEventCreateCopy func(unsafe.Pointer) unsafe.Pointer
-	_fnCGEventCreateData func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCGEventCreateFromData func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCGEventCreateKeyboardEvent func(unsafe.Pointer, uint16, bool) unsafe.Pointer
-	_fnCGEventCreateMouseEvent func(unsafe.Pointer, CGEventType, corefoundation.CGPoint, CGMouseButton) unsafe.Pointer
-	_fnCGEventCreateScrollWheelEvent2 func(unsafe.Pointer, CGScrollEventUnit, uint32, int32, int32, int32) unsafe.Pointer
-	_fnCGEventCreateSourceFromEvent func(unsafe.Pointer) unsafe.Pointer
-	_fnCGEventGetDoubleValueField func(unsafe.Pointer, CGEventField) float64
-	_fnCGEventGetFlags func(unsafe.Pointer) CGEventFlags
-	_fnCGEventGetIntegerValueField func(unsafe.Pointer, CGEventField) int64
-	_fnCGEventGetLocation func(unsafe.Pointer) corefoundation.CGPoint
-	_fnCGEventGetTimestamp func(unsafe.Pointer) uint64
-	_fnCGEventGetType func(unsafe.Pointer) CGEventType
-	_fnCGEventGetTypeID func() uint
-	_fnCGEventGetUnflippedLocation func(unsafe.Pointer) corefoundation.CGPoint
-	_fnCGEventKeyboardGetUnicodeString func(unsafe.Pointer, uint, *uint, *uint16)
-	_fnCGEventKeyboardSetUnicodeString func(unsafe.Pointer, uint, *uint16)
-	_fnCGEventPost func(CGEventTapLocation, unsafe.Pointer)
-	_fnCGEventPostToPSN func(unsafe.Pointer, unsafe.Pointer)
-	_fnCGEventPostToPid func(int, unsafe.Pointer)
-	_fnCGEventSetDoubleValueField func(unsafe.Pointer, CGEventField, float64)
-	_fnCGEventSetFlags func(unsafe.Pointer, CGEventFlags)
-	_fnCGEventSetIntegerValueField func(unsafe.Pointer, CGEventField, int64)
-	_fnCGEventSetLocation func(unsafe.Pointer, corefoundation.CGPoint)
-	_fnCGEventSetSource func(unsafe.Pointer, unsafe.Pointer)
-	_fnCGEventSetTimestamp func(unsafe.Pointer, uint64)
-	_fnCGEventSetType func(unsafe.Pointer, CGEventType)
-	_fnCGEventSourceButtonState func(CGEventSourceStateID, CGMouseButton) bool
-	_fnCGEventSourceCounterForEventType func(CGEventSourceStateID, CGEventType) uint32
-	_fnCGEventSourceCreate func(CGEventSourceStateID) unsafe.Pointer
-	_fnCGEventSourceFlagsState func(CGEventSourceStateID) CGEventFlags
-	_fnCGEventSourceGetKeyboardType func(unsafe.Pointer) uint32
+	// Deprecated: No longer supported
+	_fnCGEnableEventStateCombining                             func(int) CGError
+	_fnCGErrorSetCallback                                      func(unsafe.Pointer)
+	_fnCGEventCreate                                           func(unsafe.Pointer) unsafe.Pointer
+	_fnCGEventCreateCopy                                       func(unsafe.Pointer) unsafe.Pointer
+	_fnCGEventCreateData                                       func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCGEventCreateFromData                                   func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCGEventCreateKeyboardEvent                              func(unsafe.Pointer, uint16, bool) unsafe.Pointer
+	_fnCGEventCreateMouseEvent                                 func(unsafe.Pointer, CGEventType, corefoundation.CGPoint, CGMouseButton) unsafe.Pointer
+	_fnCGEventCreateScrollWheelEvent2                          func(unsafe.Pointer, CGScrollEventUnit, uint32, int32, int32, int32) unsafe.Pointer
+	_fnCGEventCreateSourceFromEvent                            func(unsafe.Pointer) unsafe.Pointer
+	_fnCGEventGetDoubleValueField                              func(unsafe.Pointer, CGEventField) float64
+	_fnCGEventGetFlags                                         func(unsafe.Pointer) CGEventFlags
+	_fnCGEventGetIntegerValueField                             func(unsafe.Pointer, CGEventField) int64
+	_fnCGEventGetLocation                                      func(unsafe.Pointer) corefoundation.CGPoint
+	_fnCGEventGetTimestamp                                     func(unsafe.Pointer) uint64
+	_fnCGEventGetType                                          func(unsafe.Pointer) CGEventType
+	_fnCGEventGetTypeID                                        func() uint
+	_fnCGEventGetUnflippedLocation                             func(unsafe.Pointer) corefoundation.CGPoint
+	_fnCGEventKeyboardGetUnicodeString                         func(unsafe.Pointer, uint, *uint, *uint16)
+	_fnCGEventKeyboardSetUnicodeString                         func(unsafe.Pointer, uint, *uint16)
+	_fnCGEventPost                                             func(CGEventTapLocation, unsafe.Pointer)
+	_fnCGEventPostToPSN                                        func(unsafe.Pointer, unsafe.Pointer)
+	_fnCGEventPostToPid                                        func(int, unsafe.Pointer)
+	_fnCGEventSetDoubleValueField                              func(unsafe.Pointer, CGEventField, float64)
+	_fnCGEventSetFlags                                         func(unsafe.Pointer, CGEventFlags)
+	_fnCGEventSetIntegerValueField                             func(unsafe.Pointer, CGEventField, int64)
+	_fnCGEventSetLocation                                      func(unsafe.Pointer, corefoundation.CGPoint)
+	_fnCGEventSetSource                                        func(unsafe.Pointer, unsafe.Pointer)
+	_fnCGEventSetTimestamp                                     func(unsafe.Pointer, uint64)
+	_fnCGEventSetType                                          func(unsafe.Pointer, CGEventType)
+	_fnCGEventSourceButtonState                                func(CGEventSourceStateID, CGMouseButton) bool
+	_fnCGEventSourceCounterForEventType                        func(CGEventSourceStateID, CGEventType) uint32
+	_fnCGEventSourceCreate                                     func(CGEventSourceStateID) unsafe.Pointer
+	_fnCGEventSourceFlagsState                                 func(CGEventSourceStateID) CGEventFlags
+	_fnCGEventSourceGetKeyboardType                            func(unsafe.Pointer) uint32
 	_fnCGEventSourceGetLocalEventsFilterDuringSuppressionState func(unsafe.Pointer, CGEventSuppressionState) CGEventFilterMask
-	_fnCGEventSourceGetLocalEventsSuppressionInterval func(unsafe.Pointer) float64
-	_fnCGEventSourceGetPixelsPerLine func(unsafe.Pointer) float64
-	_fnCGEventSourceGetSourceStateID func(unsafe.Pointer) CGEventSourceStateID
-	_fnCGEventSourceGetTypeID func() uint
-	_fnCGEventSourceGetUserData func(unsafe.Pointer) int64
-	_fnCGEventSourceKeyState func(CGEventSourceStateID, uint16) bool
-	_fnCGEventSourceSecondsSinceLastEventType func(CGEventSourceStateID, CGEventType) float64
-	_fnCGEventSourceSetKeyboardType func(unsafe.Pointer, uint32)
+	_fnCGEventSourceGetLocalEventsSuppressionInterval          func(unsafe.Pointer) float64
+	_fnCGEventSourceGetPixelsPerLine                           func(unsafe.Pointer) float64
+	_fnCGEventSourceGetSourceStateID                           func(unsafe.Pointer) CGEventSourceStateID
+	_fnCGEventSourceGetTypeID                                  func() uint
+	_fnCGEventSourceGetUserData                                func(unsafe.Pointer) int64
+	_fnCGEventSourceKeyState                                   func(CGEventSourceStateID, uint16) bool
+	_fnCGEventSourceSecondsSinceLastEventType                  func(CGEventSourceStateID, CGEventType) float64
+	_fnCGEventSourceSetKeyboardType                            func(unsafe.Pointer, uint32)
 	_fnCGEventSourceSetLocalEventsFilterDuringSuppressionState func(unsafe.Pointer, CGEventFilterMask, CGEventSuppressionState)
-	_fnCGEventSourceSetLocalEventsSuppressionInterval func(unsafe.Pointer, float64)
-	_fnCGEventSourceSetPixelsPerLine func(unsafe.Pointer, float64)
-	_fnCGEventSourceSetUserData func(unsafe.Pointer, int64)
-	_fnCGEventTapCreate func(CGEventTapLocation, CGEventTapPlacement, CGEventTapOptions, uint64, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCGEventTapCreateForPSN func(unsafe.Pointer, CGEventTapPlacement, CGEventTapOptions, uint64, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCGEventTapCreateForPid func(int, CGEventTapPlacement, CGEventTapOptions, uint64, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCGEventTapEnable func(unsafe.Pointer, bool)
-	_fnCGEventTapIsEnabled func(unsafe.Pointer) bool
-	_fnCGEventTapPostEvent func(unsafe.Pointer, unsafe.Pointer)
-	_fnCGFontCanCreatePostScriptSubset func(unsafe.Pointer, CGFontPostScriptFormat) bool
-	_fnCGFontCopyFullName func(unsafe.Pointer) unsafe.Pointer
-	_fnCGFontCopyGlyphNameForGlyph func(unsafe.Pointer, uint16) unsafe.Pointer
-	_fnCGFontCopyPostScriptName func(unsafe.Pointer) unsafe.Pointer
-	_fnCGFontCopyTableForTag func(unsafe.Pointer, uint32) unsafe.Pointer
-	_fnCGFontCopyTableTags func(unsafe.Pointer) unsafe.Pointer
-	_fnCGFontCopyVariationAxes func(unsafe.Pointer) unsafe.Pointer
-	_fnCGFontCopyVariations func(unsafe.Pointer) unsafe.Pointer
-	_fnCGFontCreateCopyWithVariations func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCGFontCreatePostScriptEncoding func(unsafe.Pointer, *uint16) unsafe.Pointer
-	_fnCGFontCreatePostScriptSubset func(unsafe.Pointer, unsafe.Pointer, CGFontPostScriptFormat, *uint16, uint, *uint16) unsafe.Pointer
-	_fnCGFontCreateWithDataProvider func(unsafe.Pointer) unsafe.Pointer
-	_fnCGFontCreateWithFontName func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
-	_fnCGFontCreateWithPlatformFont func(unsafe.Pointer) unsafe.Pointer
-	_fnCGFontGetAscent func(unsafe.Pointer) int
-	_fnCGFontGetCapHeight func(unsafe.Pointer) int
-	_fnCGFontGetDescent func(unsafe.Pointer) int
-	_fnCGFontGetFontBBox func(unsafe.Pointer) corefoundation.CGRect
-	_fnCGFontGetGlyphAdvances func(unsafe.Pointer, *uint16, uint, *int32) bool
-	_fnCGFontGetGlyphBBoxes func(unsafe.Pointer, *uint16, uint, *corefoundation.CGRect) bool
-	_fnCGFontGetGlyphWithGlyphName func(unsafe.Pointer, unsafe.Pointer) uint16
-	_fnCGFontGetItalicAngle func(unsafe.Pointer) float64
-	_fnCGFontGetLeading func(unsafe.Pointer) int
-	_fnCGFontGetNumberOfGlyphs func(unsafe.Pointer) uint
-	_fnCGFontGetStemV func(unsafe.Pointer) float64
-	_fnCGFontGetTypeID func() uint
-	_fnCGFontGetUnitsPerEm func(unsafe.Pointer) int
-	_fnCGFontGetXHeight func(unsafe.Pointer) int
-	_fnCGFontRelease func(unsafe.Pointer)
-	_fnCGFontRetain func(unsafe.Pointer) unsafe.Pointer
-	_fnCGFunctionCreate func(unsafe.Pointer, uint, *float64, uint, *float64, *CGFunctionCallbacks) unsafe.Pointer
-	_fnCGFunctionGetTypeID func() uint
-	_fnCGFunctionRelease func(unsafe.Pointer)
-	_fnCGFunctionRetain func(unsafe.Pointer) unsafe.Pointer
-	_fnCGGetActiveDisplayList func(uint32, *uint32, *uint32) CGError
-	_fnCGGetDisplayTransferByFormula func(uint32, *float32, *float32, *float32, *float32, *float32, *float32, *float32, *float32, *float32) CGError
-	_fnCGGetDisplayTransferByTable func(uint32, uint32, *float32, *float32, *float32, *uint32) CGError
-	_fnCGGetDisplaysWithOpenGLDisplayMask func(uint32, uint32, *uint32, *uint32) CGError
-	_fnCGGetDisplaysWithPoint func(corefoundation.CGPoint, uint32, *uint32, *uint32) CGError
-	_fnCGGetDisplaysWithRect func(corefoundation.CGRect, uint32, *uint32, *uint32) CGError
-	_fnCGGetEventTapList func(uint32, *CGEventTapInformation, *uint32) CGError
-	_fnCGGetLastMouseDelta func(*int32, *int32)
-	_fnCGGetOnlineDisplayList func(uint32, *uint32, *uint32) CGError
-	_fnCGGradientCreateWithColorComponents func(unsafe.Pointer, *float64, *float64, uint) unsafe.Pointer
-	_fnCGGradientCreateWithColors func(unsafe.Pointer, unsafe.Pointer, *float64) unsafe.Pointer
-	_fnCGGradientCreateWithContentHeadroom func(float32, unsafe.Pointer, *float64, *float64, uint) unsafe.Pointer
-	_fnCGGradientGetContentHeadroom func(unsafe.Pointer) float32
-	_fnCGGradientGetTypeID func() uint
-	_fnCGGradientRelease func(unsafe.Pointer)
-	_fnCGGradientRetain func(unsafe.Pointer) unsafe.Pointer
-	_fnCGImageCalculateContentAverageLightLevel func(unsafe.Pointer) float32
-	_fnCGImageCalculateContentHeadroom func(unsafe.Pointer) float32
+	_fnCGEventSourceSetLocalEventsSuppressionInterval          func(unsafe.Pointer, float64)
+	_fnCGEventSourceSetPixelsPerLine                           func(unsafe.Pointer, float64)
+	_fnCGEventSourceSetUserData                                func(unsafe.Pointer, int64)
+	_fnCGEventTapCreate                                        func(CGEventTapLocation, CGEventTapPlacement, CGEventTapOptions, uint64, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCGEventTapCreateForPSN                                  func(unsafe.Pointer, CGEventTapPlacement, CGEventTapOptions, uint64, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCGEventTapCreateForPid                                  func(int, CGEventTapPlacement, CGEventTapOptions, uint64, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCGEventTapEnable                                        func(unsafe.Pointer, bool)
+	_fnCGEventTapIsEnabled                                     func(unsafe.Pointer) bool
+	_fnCGEventTapPostEvent                                     func(unsafe.Pointer, unsafe.Pointer)
+	_fnCGFontCanCreatePostScriptSubset                         func(unsafe.Pointer, CGFontPostScriptFormat) bool
+	_fnCGFontCopyFullName                                      func(unsafe.Pointer) unsafe.Pointer
+	_fnCGFontCopyGlyphNameForGlyph                             func(unsafe.Pointer, uint16) unsafe.Pointer
+	_fnCGFontCopyPostScriptName                                func(unsafe.Pointer) unsafe.Pointer
+	_fnCGFontCopyTableForTag                                   func(unsafe.Pointer, uint32) unsafe.Pointer
+	_fnCGFontCopyTableTags                                     func(unsafe.Pointer) unsafe.Pointer
+	_fnCGFontCopyVariationAxes                                 func(unsafe.Pointer) unsafe.Pointer
+	_fnCGFontCopyVariations                                    func(unsafe.Pointer) unsafe.Pointer
+	_fnCGFontCreateCopyWithVariations                          func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCGFontCreatePostScriptEncoding                          func(unsafe.Pointer, *uint16) unsafe.Pointer
+	_fnCGFontCreatePostScriptSubset                            func(unsafe.Pointer, unsafe.Pointer, CGFontPostScriptFormat, *uint16, uint, *uint16) unsafe.Pointer
+	_fnCGFontCreateWithDataProvider                            func(unsafe.Pointer) unsafe.Pointer
+	_fnCGFontCreateWithFontName                                func(unsafe.Pointer) unsafe.Pointer
+	// Deprecated: No longer supported
+	_fnCGFontCreateWithPlatformFont                    func(unsafe.Pointer) unsafe.Pointer
+	_fnCGFontGetAscent                                 func(unsafe.Pointer) int
+	_fnCGFontGetCapHeight                              func(unsafe.Pointer) int
+	_fnCGFontGetDescent                                func(unsafe.Pointer) int
+	_fnCGFontGetFontBBox                               func(unsafe.Pointer) corefoundation.CGRect
+	_fnCGFontGetGlyphAdvances                          func(unsafe.Pointer, *uint16, uint, *int32) bool
+	_fnCGFontGetGlyphBBoxes                            func(unsafe.Pointer, *uint16, uint, *corefoundation.CGRect) bool
+	_fnCGFontGetGlyphWithGlyphName                     func(unsafe.Pointer, unsafe.Pointer) uint16
+	_fnCGFontGetItalicAngle                            func(unsafe.Pointer) float64
+	_fnCGFontGetLeading                                func(unsafe.Pointer) int
+	_fnCGFontGetNumberOfGlyphs                         func(unsafe.Pointer) uint
+	_fnCGFontGetStemV                                  func(unsafe.Pointer) float64
+	_fnCGFontGetTypeID                                 func() uint
+	_fnCGFontGetUnitsPerEm                             func(unsafe.Pointer) int
+	_fnCGFontGetXHeight                                func(unsafe.Pointer) int
+	_fnCGFontRelease                                   func(unsafe.Pointer)
+	_fnCGFontRetain                                    func(unsafe.Pointer) unsafe.Pointer
+	_fnCGFunctionCreate                                func(unsafe.Pointer, uint, *float64, uint, *float64, *CGFunctionCallbacks) unsafe.Pointer
+	_fnCGFunctionGetTypeID                             func() uint
+	_fnCGFunctionRelease                               func(unsafe.Pointer)
+	_fnCGFunctionRetain                                func(unsafe.Pointer) unsafe.Pointer
+	_fnCGGetActiveDisplayList                          func(uint32, *uint32, *uint32) CGError
+	_fnCGGetDisplayTransferByFormula                   func(uint32, *float32, *float32, *float32, *float32, *float32, *float32, *float32, *float32, *float32) CGError
+	_fnCGGetDisplayTransferByTable                     func(uint32, uint32, *float32, *float32, *float32, *uint32) CGError
+	_fnCGGetDisplaysWithOpenGLDisplayMask              func(uint32, uint32, *uint32, *uint32) CGError
+	_fnCGGetDisplaysWithPoint                          func(corefoundation.CGPoint, uint32, *uint32, *uint32) CGError
+	_fnCGGetDisplaysWithRect                           func(corefoundation.CGRect, uint32, *uint32, *uint32) CGError
+	_fnCGGetEventTapList                               func(uint32, *CGEventTapInformation, *uint32) CGError
+	_fnCGGetLastMouseDelta                             func(*int32, *int32)
+	_fnCGGetOnlineDisplayList                          func(uint32, *uint32, *uint32) CGError
+	_fnCGGradientCreateWithColorComponents             func(unsafe.Pointer, *float64, *float64, uint) unsafe.Pointer
+	_fnCGGradientCreateWithColors                      func(unsafe.Pointer, unsafe.Pointer, *float64) unsafe.Pointer
+	_fnCGGradientCreateWithContentHeadroom             func(float32, unsafe.Pointer, *float64, *float64, uint) unsafe.Pointer
+	_fnCGGradientGetContentHeadroom                    func(unsafe.Pointer) float32
+	_fnCGGradientGetTypeID                             func() uint
+	_fnCGGradientRelease                               func(unsafe.Pointer)
+	_fnCGGradientRetain                                func(unsafe.Pointer) unsafe.Pointer
+	_fnCGImageCalculateContentAverageLightLevel        func(unsafe.Pointer) float32
+	_fnCGImageCalculateContentHeadroom                 func(unsafe.Pointer) float32
 	_fnCGImageContainsImageSpecificToneMappingMetadata func(unsafe.Pointer) bool
-	_fnCGImageCreate func(uint, uint, uint, uint, uint, unsafe.Pointer, CGBitmapInfo, unsafe.Pointer, *float64, bool, CGColorRenderingIntent) unsafe.Pointer
-	_fnCGImageCreateCopy func(unsafe.Pointer) unsafe.Pointer
-	_fnCGImageCreateCopyWithCalculatedHDRStats func(unsafe.Pointer) unsafe.Pointer
-	_fnCGImageCreateCopyWithColorSpace func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCGImageCreateCopyWithContentAverageLightLevel func(unsafe.Pointer, float32) unsafe.Pointer
-	_fnCGImageCreateCopyWithContentHeadroom func(float32, unsafe.Pointer) unsafe.Pointer
-	_fnCGImageCreateWithContentHeadroom func(float32, uint, uint, uint, uint, uint, unsafe.Pointer, CGBitmapInfo, unsafe.Pointer, *float64, bool, CGColorRenderingIntent) unsafe.Pointer
-	_fnCGImageCreateWithImageInRect func(unsafe.Pointer, corefoundation.CGRect) unsafe.Pointer
-	_fnCGImageCreateWithJPEGDataProvider func(unsafe.Pointer, *float64, bool, CGColorRenderingIntent) unsafe.Pointer
-	_fnCGImageCreateWithMask func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCGImageCreateWithMaskingColors func(unsafe.Pointer, *float64) unsafe.Pointer
-	_fnCGImageCreateWithPNGDataProvider func(unsafe.Pointer, *float64, bool, CGColorRenderingIntent) unsafe.Pointer
-	_fnCGImageGetAlphaInfo func(unsafe.Pointer) CGImageAlphaInfo
-	_fnCGImageGetBitmapInfo func(unsafe.Pointer) CGBitmapInfo
-	_fnCGImageGetBitsPerComponent func(unsafe.Pointer) uint
-	_fnCGImageGetBitsPerPixel func(unsafe.Pointer) uint
-	_fnCGImageGetByteOrderInfo func(unsafe.Pointer) CGImageByteOrderInfo
-	_fnCGImageGetBytesPerRow func(unsafe.Pointer) uint
-	_fnCGImageGetColorSpace func(unsafe.Pointer) unsafe.Pointer
-	_fnCGImageGetContentAverageLightLevel func(unsafe.Pointer) float32
-	_fnCGImageGetContentHeadroom func(unsafe.Pointer) float32
-	_fnCGImageGetDataProvider func(unsafe.Pointer) unsafe.Pointer
-	_fnCGImageGetDecode func(unsafe.Pointer) *float64
-	_fnCGImageGetHeight func(unsafe.Pointer) uint
-	_fnCGImageGetPixelFormatInfo func(unsafe.Pointer) CGImagePixelFormatInfo
-	_fnCGImageGetRenderingIntent func(unsafe.Pointer) CGColorRenderingIntent
-	_fnCGImageGetShouldInterpolate func(unsafe.Pointer) bool
-	_fnCGImageGetTypeID func() uint
-	_fnCGImageGetUTType func(unsafe.Pointer) unsafe.Pointer
-	_fnCGImageGetWidth func(unsafe.Pointer) uint
-	_fnCGImageIsMask func(unsafe.Pointer) bool
-	_fnCGImageMaskCreate func(uint, uint, uint, uint, uint, unsafe.Pointer, *float64, bool) unsafe.Pointer
-	_fnCGImageRelease func(unsafe.Pointer)
-	_fnCGImageRetain func(unsafe.Pointer) unsafe.Pointer
-	_fnCGImageShouldToneMap func(unsafe.Pointer) bool
-// Deprecated: No longer supported
-	_fnCGInhibitLocalEvents func(int) CGError
-	_fnCGLayerCreateWithContext func(unsafe.Pointer, corefoundation.CGSize, unsafe.Pointer) unsafe.Pointer
-	_fnCGLayerGetContext func(unsafe.Pointer) unsafe.Pointer
-	_fnCGLayerGetSize func(unsafe.Pointer) corefoundation.CGSize
-	_fnCGLayerGetTypeID func() uint
-	_fnCGLayerRelease func(unsafe.Pointer)
-	_fnCGLayerRetain func(unsafe.Pointer) unsafe.Pointer
-	_fnCGMainDisplayID func() uint32
-	_fnCGOpenGLDisplayMaskToDisplayID func(uint32) uint32
-	_fnCGPDFArrayApplyBlock func(unsafe.Pointer, objc.Block, unsafe.Pointer)
-	_fnCGPDFArrayGetArray func(unsafe.Pointer, uint, unsafe.Pointer) bool
-	_fnCGPDFArrayGetBoolean func(unsafe.Pointer, uint, *uint8) bool
-	_fnCGPDFArrayGetCount func(unsafe.Pointer) uint
-	_fnCGPDFArrayGetDictionary func(unsafe.Pointer, uint, unsafe.Pointer) bool
-	_fnCGPDFArrayGetInteger func(unsafe.Pointer, uint, *int) bool
-	_fnCGPDFArrayGetName func(unsafe.Pointer, uint, string) bool
-	_fnCGPDFArrayGetNull func(unsafe.Pointer, uint) bool
-	_fnCGPDFArrayGetNumber func(unsafe.Pointer, uint, *float64) bool
-	_fnCGPDFArrayGetObject func(unsafe.Pointer, uint, unsafe.Pointer) bool
-	_fnCGPDFArrayGetStream func(unsafe.Pointer, uint, unsafe.Pointer) bool
-	_fnCGPDFArrayGetString func(unsafe.Pointer, uint, unsafe.Pointer) bool
-	_fnCGPDFContentStreamCreateWithPage func(unsafe.Pointer) unsafe.Pointer
-	_fnCGPDFContentStreamCreateWithStream func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCGPDFContentStreamGetResource func(unsafe.Pointer, string, string) unsafe.Pointer
-	_fnCGPDFContentStreamGetStreams func(unsafe.Pointer) unsafe.Pointer
-	_fnCGPDFContentStreamRelease func(unsafe.Pointer)
-	_fnCGPDFContentStreamRetain func(unsafe.Pointer) unsafe.Pointer
-	_fnCGPDFContextAddDestinationAtPoint func(unsafe.Pointer, unsafe.Pointer, corefoundation.CGPoint)
-	_fnCGPDFContextAddDocumentMetadata func(unsafe.Pointer, unsafe.Pointer)
-	_fnCGPDFContextBeginPage func(unsafe.Pointer, unsafe.Pointer)
-	_fnCGPDFContextBeginTag func(unsafe.Pointer, CGPDFTagType, unsafe.Pointer)
-	_fnCGPDFContextClose func(unsafe.Pointer)
-	_fnCGPDFContextCreate func(unsafe.Pointer, *corefoundation.CGRect, unsafe.Pointer) unsafe.Pointer
-	_fnCGPDFContextCreateWithURL func(unsafe.Pointer, *corefoundation.CGRect, unsafe.Pointer) unsafe.Pointer
-	_fnCGPDFContextEndPage func(unsafe.Pointer)
-	_fnCGPDFContextEndTag func(unsafe.Pointer)
-	_fnCGPDFContextSetDestinationForRect func(unsafe.Pointer, unsafe.Pointer, corefoundation.CGRect)
-	_fnCGPDFContextSetIDTree func(unsafe.Pointer, unsafe.Pointer)
-	_fnCGPDFContextSetOutline func(unsafe.Pointer, unsafe.Pointer)
+	_fnCGImageCreate                                   func(uint, uint, uint, uint, uint, unsafe.Pointer, CGBitmapInfo, unsafe.Pointer, *float64, bool, CGColorRenderingIntent) unsafe.Pointer
+	_fnCGImageCreateCopy                               func(unsafe.Pointer) unsafe.Pointer
+	_fnCGImageCreateCopyWithCalculatedHDRStats         func(unsafe.Pointer) unsafe.Pointer
+	_fnCGImageCreateCopyWithColorSpace                 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCGImageCreateCopyWithContentAverageLightLevel   func(unsafe.Pointer, float32) unsafe.Pointer
+	_fnCGImageCreateCopyWithContentHeadroom            func(float32, unsafe.Pointer) unsafe.Pointer
+	_fnCGImageCreateWithContentHeadroom                func(float32, uint, uint, uint, uint, uint, unsafe.Pointer, CGBitmapInfo, unsafe.Pointer, *float64, bool, CGColorRenderingIntent) unsafe.Pointer
+	_fnCGImageCreateWithImageInRect                    func(unsafe.Pointer, corefoundation.CGRect) unsafe.Pointer
+	_fnCGImageCreateWithJPEGDataProvider               func(unsafe.Pointer, *float64, bool, CGColorRenderingIntent) unsafe.Pointer
+	_fnCGImageCreateWithMask                           func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCGImageCreateWithMaskingColors                  func(unsafe.Pointer, *float64) unsafe.Pointer
+	_fnCGImageCreateWithPNGDataProvider                func(unsafe.Pointer, *float64, bool, CGColorRenderingIntent) unsafe.Pointer
+	_fnCGImageGetAlphaInfo                             func(unsafe.Pointer) CGImageAlphaInfo
+	_fnCGImageGetBitmapInfo                            func(unsafe.Pointer) CGBitmapInfo
+	_fnCGImageGetBitsPerComponent                      func(unsafe.Pointer) uint
+	_fnCGImageGetBitsPerPixel                          func(unsafe.Pointer) uint
+	_fnCGImageGetByteOrderInfo                         func(unsafe.Pointer) CGImageByteOrderInfo
+	_fnCGImageGetBytesPerRow                           func(unsafe.Pointer) uint
+	_fnCGImageGetColorSpace                            func(unsafe.Pointer) unsafe.Pointer
+	_fnCGImageGetContentAverageLightLevel              func(unsafe.Pointer) float32
+	_fnCGImageGetContentHeadroom                       func(unsafe.Pointer) float32
+	_fnCGImageGetDataProvider                          func(unsafe.Pointer) unsafe.Pointer
+	_fnCGImageGetDecode                                func(unsafe.Pointer) *float64
+	_fnCGImageGetHeight                                func(unsafe.Pointer) uint
+	_fnCGImageGetPixelFormatInfo                       func(unsafe.Pointer) CGImagePixelFormatInfo
+	_fnCGImageGetRenderingIntent                       func(unsafe.Pointer) CGColorRenderingIntent
+	_fnCGImageGetShouldInterpolate                     func(unsafe.Pointer) bool
+	_fnCGImageGetTypeID                                func() uint
+	_fnCGImageGetUTType                                func(unsafe.Pointer) unsafe.Pointer
+	_fnCGImageGetWidth                                 func(unsafe.Pointer) uint
+	_fnCGImageIsMask                                   func(unsafe.Pointer) bool
+	_fnCGImageMaskCreate                               func(uint, uint, uint, uint, uint, unsafe.Pointer, *float64, bool) unsafe.Pointer
+	_fnCGImageRelease                                  func(unsafe.Pointer)
+	_fnCGImageRetain                                   func(unsafe.Pointer) unsafe.Pointer
+	_fnCGImageShouldToneMap                            func(unsafe.Pointer) bool
+	// Deprecated: No longer supported
+	_fnCGInhibitLocalEvents                func(int) CGError
+	_fnCGLayerCreateWithContext            func(unsafe.Pointer, corefoundation.CGSize, unsafe.Pointer) unsafe.Pointer
+	_fnCGLayerGetContext                   func(unsafe.Pointer) unsafe.Pointer
+	_fnCGLayerGetSize                      func(unsafe.Pointer) corefoundation.CGSize
+	_fnCGLayerGetTypeID                    func() uint
+	_fnCGLayerRelease                      func(unsafe.Pointer)
+	_fnCGLayerRetain                       func(unsafe.Pointer) unsafe.Pointer
+	_fnCGMainDisplayID                     func() uint32
+	_fnCGOpenGLDisplayMaskToDisplayID      func(uint32) uint32
+	_fnCGPDFArrayApplyBlock                func(unsafe.Pointer, objc.Block, unsafe.Pointer)
+	_fnCGPDFArrayGetArray                  func(unsafe.Pointer, uint, unsafe.Pointer) bool
+	_fnCGPDFArrayGetBoolean                func(unsafe.Pointer, uint, *uint8) bool
+	_fnCGPDFArrayGetCount                  func(unsafe.Pointer) uint
+	_fnCGPDFArrayGetDictionary             func(unsafe.Pointer, uint, unsafe.Pointer) bool
+	_fnCGPDFArrayGetInteger                func(unsafe.Pointer, uint, *int) bool
+	_fnCGPDFArrayGetName                   func(unsafe.Pointer, uint, string) bool
+	_fnCGPDFArrayGetNull                   func(unsafe.Pointer, uint) bool
+	_fnCGPDFArrayGetNumber                 func(unsafe.Pointer, uint, *float64) bool
+	_fnCGPDFArrayGetObject                 func(unsafe.Pointer, uint, unsafe.Pointer) bool
+	_fnCGPDFArrayGetStream                 func(unsafe.Pointer, uint, unsafe.Pointer) bool
+	_fnCGPDFArrayGetString                 func(unsafe.Pointer, uint, unsafe.Pointer) bool
+	_fnCGPDFContentStreamCreateWithPage    func(unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFContentStreamCreateWithStream  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFContentStreamGetResource       func(unsafe.Pointer, string, string) unsafe.Pointer
+	_fnCGPDFContentStreamGetStreams        func(unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFContentStreamRelease           func(unsafe.Pointer)
+	_fnCGPDFContentStreamRetain            func(unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFContextAddDestinationAtPoint   func(unsafe.Pointer, unsafe.Pointer, corefoundation.CGPoint)
+	_fnCGPDFContextAddDocumentMetadata     func(unsafe.Pointer, unsafe.Pointer)
+	_fnCGPDFContextBeginPage               func(unsafe.Pointer, unsafe.Pointer)
+	_fnCGPDFContextBeginTag                func(unsafe.Pointer, CGPDFTagType, unsafe.Pointer)
+	_fnCGPDFContextClose                   func(unsafe.Pointer)
+	_fnCGPDFContextCreate                  func(unsafe.Pointer, *corefoundation.CGRect, unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFContextCreateWithURL           func(unsafe.Pointer, *corefoundation.CGRect, unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFContextEndPage                 func(unsafe.Pointer)
+	_fnCGPDFContextEndTag                  func(unsafe.Pointer)
+	_fnCGPDFContextSetDestinationForRect   func(unsafe.Pointer, unsafe.Pointer, corefoundation.CGRect)
+	_fnCGPDFContextSetIDTree               func(unsafe.Pointer, unsafe.Pointer)
+	_fnCGPDFContextSetOutline              func(unsafe.Pointer, unsafe.Pointer)
 	_fnCGPDFContextSetPageTagStructureTree func(unsafe.Pointer, unsafe.Pointer)
-	_fnCGPDFContextSetParentTree func(unsafe.Pointer, unsafe.Pointer)
-	_fnCGPDFContextSetURLForRect func(unsafe.Pointer, unsafe.Pointer, corefoundation.CGRect)
-	_fnCGPDFDictionaryApplyBlock func(unsafe.Pointer, objc.Block, unsafe.Pointer)
-	_fnCGPDFDictionaryApplyFunction func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCGPDFDictionaryGetArray func(unsafe.Pointer, string, unsafe.Pointer) bool
-	_fnCGPDFDictionaryGetBoolean func(unsafe.Pointer, string, *uint8) bool
-	_fnCGPDFDictionaryGetCount func(unsafe.Pointer) uint
-	_fnCGPDFDictionaryGetDictionary func(unsafe.Pointer, string, unsafe.Pointer) bool
-	_fnCGPDFDictionaryGetInteger func(unsafe.Pointer, string, *int) bool
-	_fnCGPDFDictionaryGetName func(unsafe.Pointer, string, string) bool
-	_fnCGPDFDictionaryGetNumber func(unsafe.Pointer, string, *float64) bool
-	_fnCGPDFDictionaryGetObject func(unsafe.Pointer, string, unsafe.Pointer) bool
-	_fnCGPDFDictionaryGetStream func(unsafe.Pointer, string, unsafe.Pointer) bool
-	_fnCGPDFDictionaryGetString func(unsafe.Pointer, string, unsafe.Pointer) bool
-	_fnCGPDFDocumentAllowsCopying func(unsafe.Pointer) bool
-	_fnCGPDFDocumentAllowsPrinting func(unsafe.Pointer) bool
-	_fnCGPDFDocumentCreateWithProvider func(unsafe.Pointer) unsafe.Pointer
-	_fnCGPDFDocumentCreateWithURL func(unsafe.Pointer) unsafe.Pointer
-	_fnCGPDFDocumentGetAccessPermissions func(unsafe.Pointer) CGPDFAccessPermissions
-// Deprecated: No longer supported
+	_fnCGPDFContextSetParentTree           func(unsafe.Pointer, unsafe.Pointer)
+	_fnCGPDFContextSetURLForRect           func(unsafe.Pointer, unsafe.Pointer, corefoundation.CGRect)
+	_fnCGPDFDictionaryApplyBlock           func(unsafe.Pointer, objc.Block, unsafe.Pointer)
+	_fnCGPDFDictionaryApplyFunction        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCGPDFDictionaryGetArray             func(unsafe.Pointer, string, unsafe.Pointer) bool
+	_fnCGPDFDictionaryGetBoolean           func(unsafe.Pointer, string, *uint8) bool
+	_fnCGPDFDictionaryGetCount             func(unsafe.Pointer) uint
+	_fnCGPDFDictionaryGetDictionary        func(unsafe.Pointer, string, unsafe.Pointer) bool
+	_fnCGPDFDictionaryGetInteger           func(unsafe.Pointer, string, *int) bool
+	_fnCGPDFDictionaryGetName              func(unsafe.Pointer, string, string) bool
+	_fnCGPDFDictionaryGetNumber            func(unsafe.Pointer, string, *float64) bool
+	_fnCGPDFDictionaryGetObject            func(unsafe.Pointer, string, unsafe.Pointer) bool
+	_fnCGPDFDictionaryGetStream            func(unsafe.Pointer, string, unsafe.Pointer) bool
+	_fnCGPDFDictionaryGetString            func(unsafe.Pointer, string, unsafe.Pointer) bool
+	_fnCGPDFDocumentAllowsCopying          func(unsafe.Pointer) bool
+	_fnCGPDFDocumentAllowsPrinting         func(unsafe.Pointer) bool
+	_fnCGPDFDocumentCreateWithProvider     func(unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFDocumentCreateWithURL          func(unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFDocumentGetAccessPermissions   func(unsafe.Pointer) CGPDFAccessPermissions
+	// Deprecated: No longer supported
 	_fnCGPDFDocumentGetArtBox func(unsafe.Pointer, int) corefoundation.CGRect
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnCGPDFDocumentGetBleedBox func(unsafe.Pointer, int) corefoundation.CGRect
-	_fnCGPDFDocumentGetCatalog func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	_fnCGPDFDocumentGetCatalog  func(unsafe.Pointer) unsafe.Pointer
+	// Deprecated: No longer supported
 	_fnCGPDFDocumentGetCropBox func(unsafe.Pointer, int) corefoundation.CGRect
-	_fnCGPDFDocumentGetID func(unsafe.Pointer) unsafe.Pointer
-	_fnCGPDFDocumentGetInfo func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
-	_fnCGPDFDocumentGetMediaBox func(unsafe.Pointer, int) corefoundation.CGRect
+	_fnCGPDFDocumentGetID      func(unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFDocumentGetInfo    func(unsafe.Pointer) unsafe.Pointer
+	// Deprecated: No longer supported
+	_fnCGPDFDocumentGetMediaBox      func(unsafe.Pointer, int) corefoundation.CGRect
 	_fnCGPDFDocumentGetNumberOfPages func(unsafe.Pointer) uint
-	_fnCGPDFDocumentGetOutline func(unsafe.Pointer) unsafe.Pointer
-	_fnCGPDFDocumentGetPage func(unsafe.Pointer, uint) unsafe.Pointer
-// Deprecated: No longer supported
+	_fnCGPDFDocumentGetOutline       func(unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFDocumentGetPage          func(unsafe.Pointer, uint) unsafe.Pointer
+	// Deprecated: No longer supported
 	_fnCGPDFDocumentGetRotationAngle func(unsafe.Pointer, int) int
-// Deprecated: No longer supported
-	_fnCGPDFDocumentGetTrimBox func(unsafe.Pointer, int) corefoundation.CGRect
-	_fnCGPDFDocumentGetTypeID func() uint
-	_fnCGPDFDocumentGetVersion func(unsafe.Pointer, *int32, *int32)
-	_fnCGPDFDocumentIsEncrypted func(unsafe.Pointer) bool
-	_fnCGPDFDocumentIsUnlocked func(unsafe.Pointer) bool
-	_fnCGPDFDocumentRelease func(unsafe.Pointer)
-	_fnCGPDFDocumentRetain func(unsafe.Pointer) unsafe.Pointer
-	_fnCGPDFDocumentUnlockWithPassword func(unsafe.Pointer, string) bool
-	_fnCGPDFObjectGetType func(unsafe.Pointer) CGPDFObjectType
-	_fnCGPDFObjectGetValue func(unsafe.Pointer, CGPDFObjectType, unsafe.Pointer) bool
-	_fnCGPDFOperatorTableCreate func() unsafe.Pointer
-	_fnCGPDFOperatorTableRelease func(unsafe.Pointer)
-	_fnCGPDFOperatorTableRetain func(unsafe.Pointer) unsafe.Pointer
-	_fnCGPDFOperatorTableSetCallback func(unsafe.Pointer, string, unsafe.Pointer)
-	_fnCGPDFPageGetBoxRect func(unsafe.Pointer, CGPDFBox) corefoundation.CGRect
-	_fnCGPDFPageGetDictionary func(unsafe.Pointer) unsafe.Pointer
-	_fnCGPDFPageGetDocument func(unsafe.Pointer) unsafe.Pointer
-	_fnCGPDFPageGetDrawingTransform func(unsafe.Pointer, CGPDFBox, corefoundation.CGRect, int, bool) corefoundation.CGAffineTransform
-	_fnCGPDFPageGetPageNumber func(unsafe.Pointer) uint
-	_fnCGPDFPageGetRotationAngle func(unsafe.Pointer) int
-	_fnCGPDFPageGetTypeID func() uint
-	_fnCGPDFPageRelease func(unsafe.Pointer)
-	_fnCGPDFPageRetain func(unsafe.Pointer) unsafe.Pointer
-	_fnCGPDFScannerCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCGPDFScannerGetContentStream func(unsafe.Pointer) unsafe.Pointer
-	_fnCGPDFScannerPopArray func(unsafe.Pointer, unsafe.Pointer) bool
-	_fnCGPDFScannerPopBoolean func(unsafe.Pointer, *uint8) bool
-	_fnCGPDFScannerPopDictionary func(unsafe.Pointer, unsafe.Pointer) bool
-	_fnCGPDFScannerPopInteger func(unsafe.Pointer, *int) bool
-	_fnCGPDFScannerPopName func(unsafe.Pointer, string) bool
-	_fnCGPDFScannerPopNumber func(unsafe.Pointer, *float64) bool
-	_fnCGPDFScannerPopObject func(unsafe.Pointer, unsafe.Pointer) bool
-	_fnCGPDFScannerPopStream func(unsafe.Pointer, unsafe.Pointer) bool
-	_fnCGPDFScannerPopString func(unsafe.Pointer, unsafe.Pointer) bool
-	_fnCGPDFScannerRelease func(unsafe.Pointer)
-	_fnCGPDFScannerRetain func(unsafe.Pointer) unsafe.Pointer
-	_fnCGPDFScannerScan func(unsafe.Pointer) bool
-	_fnCGPDFScannerStop func(unsafe.Pointer)
-	_fnCGPDFStreamCopyData func(unsafe.Pointer, *CGPDFDataFormat) unsafe.Pointer
-	_fnCGPDFStreamGetDictionary func(unsafe.Pointer) unsafe.Pointer
-	_fnCGPDFStringCopyDate func(unsafe.Pointer) unsafe.Pointer
-	_fnCGPDFStringCopyTextString func(unsafe.Pointer) unsafe.Pointer
-	_fnCGPDFStringGetBytePtr func(unsafe.Pointer) unsafe.Pointer
-	_fnCGPDFStringGetLength func(unsafe.Pointer) uint
-	_fnCGPDFTagTypeGetName func(CGPDFTagType) string
-	_fnCGPSConverterAbort func(unsafe.Pointer) bool
-	_fnCGPSConverterConvert func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
-	_fnCGPSConverterCreate func(unsafe.Pointer, *CGPSConverterCallbacks, unsafe.Pointer) unsafe.Pointer
-	_fnCGPSConverterGetTypeID func() uint
-	_fnCGPSConverterIsConverting func(unsafe.Pointer) bool
-	_fnCGPathAddArc func(unsafe.Pointer, *corefoundation.CGAffineTransform, float64, float64, float64, float64, float64, bool)
-	_fnCGPathAddArcToPoint func(unsafe.Pointer, *corefoundation.CGAffineTransform, float64, float64, float64, float64, float64)
-	_fnCGPathAddCurveToPoint func(unsafe.Pointer, *corefoundation.CGAffineTransform, float64, float64, float64, float64, float64, float64)
-	_fnCGPathAddEllipseInRect func(unsafe.Pointer, *corefoundation.CGAffineTransform, corefoundation.CGRect)
-	_fnCGPathAddLineToPoint func(unsafe.Pointer, *corefoundation.CGAffineTransform, float64, float64)
-	_fnCGPathAddLines func(unsafe.Pointer, *corefoundation.CGAffineTransform, *corefoundation.CGPoint, uint)
-	_fnCGPathAddPath func(unsafe.Pointer, *corefoundation.CGAffineTransform, unsafe.Pointer)
-	_fnCGPathAddQuadCurveToPoint func(unsafe.Pointer, *corefoundation.CGAffineTransform, float64, float64, float64, float64)
-	_fnCGPathAddRect func(unsafe.Pointer, *corefoundation.CGAffineTransform, corefoundation.CGRect)
-	_fnCGPathAddRects func(unsafe.Pointer, *corefoundation.CGAffineTransform, *corefoundation.CGRect, uint)
-	_fnCGPathAddRelativeArc func(unsafe.Pointer, *corefoundation.CGAffineTransform, float64, float64, float64, float64, float64)
-	_fnCGPathAddRoundedRect func(unsafe.Pointer, *corefoundation.CGAffineTransform, corefoundation.CGRect, float64, float64)
-	_fnCGPathApply func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCGPathApplyWithBlock func(unsafe.Pointer, objc.Block)
-	_fnCGPathCloseSubpath func(unsafe.Pointer)
-	_fnCGPathContainsPoint func(unsafe.Pointer, *corefoundation.CGAffineTransform, corefoundation.CGPoint, bool) bool
-	_fnCGPathCreateCopy func(unsafe.Pointer) unsafe.Pointer
-	_fnCGPathCreateCopyByDashingPath func(unsafe.Pointer, *corefoundation.CGAffineTransform, float64, *float64, uint) unsafe.Pointer
-	_fnCGPathCreateCopyByFlattening func(unsafe.Pointer, float64) unsafe.Pointer
-	_fnCGPathCreateCopyByIntersectingPath func(unsafe.Pointer, unsafe.Pointer, bool) unsafe.Pointer
-	_fnCGPathCreateCopyByNormalizing func(unsafe.Pointer, bool) unsafe.Pointer
-	_fnCGPathCreateCopyByStrokingPath func(unsafe.Pointer, *corefoundation.CGAffineTransform, float64, CGLineCap, CGLineJoin, float64) unsafe.Pointer
-	_fnCGPathCreateCopyBySubtractingPath func(unsafe.Pointer, unsafe.Pointer, bool) unsafe.Pointer
+	// Deprecated: No longer supported
+	_fnCGPDFDocumentGetTrimBox                     func(unsafe.Pointer, int) corefoundation.CGRect
+	_fnCGPDFDocumentGetTypeID                      func() uint
+	_fnCGPDFDocumentGetVersion                     func(unsafe.Pointer, *int32, *int32)
+	_fnCGPDFDocumentIsEncrypted                    func(unsafe.Pointer) bool
+	_fnCGPDFDocumentIsUnlocked                     func(unsafe.Pointer) bool
+	_fnCGPDFDocumentRelease                        func(unsafe.Pointer)
+	_fnCGPDFDocumentRetain                         func(unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFDocumentUnlockWithPassword             func(unsafe.Pointer, string) bool
+	_fnCGPDFObjectGetType                          func(unsafe.Pointer) CGPDFObjectType
+	_fnCGPDFObjectGetValue                         func(unsafe.Pointer, CGPDFObjectType, unsafe.Pointer) bool
+	_fnCGPDFOperatorTableCreate                    func() unsafe.Pointer
+	_fnCGPDFOperatorTableRelease                   func(unsafe.Pointer)
+	_fnCGPDFOperatorTableRetain                    func(unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFOperatorTableSetCallback               func(unsafe.Pointer, string, unsafe.Pointer)
+	_fnCGPDFPageGetBoxRect                         func(unsafe.Pointer, CGPDFBox) corefoundation.CGRect
+	_fnCGPDFPageGetDictionary                      func(unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFPageGetDocument                        func(unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFPageGetDrawingTransform                func(unsafe.Pointer, CGPDFBox, corefoundation.CGRect, int, bool) corefoundation.CGAffineTransform
+	_fnCGPDFPageGetPageNumber                      func(unsafe.Pointer) uint
+	_fnCGPDFPageGetRotationAngle                   func(unsafe.Pointer) int
+	_fnCGPDFPageGetTypeID                          func() uint
+	_fnCGPDFPageRelease                            func(unsafe.Pointer)
+	_fnCGPDFPageRetain                             func(unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFScannerCreate                          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFScannerGetContentStream                func(unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFScannerPopArray                        func(unsafe.Pointer, unsafe.Pointer) bool
+	_fnCGPDFScannerPopBoolean                      func(unsafe.Pointer, *uint8) bool
+	_fnCGPDFScannerPopDictionary                   func(unsafe.Pointer, unsafe.Pointer) bool
+	_fnCGPDFScannerPopInteger                      func(unsafe.Pointer, *int) bool
+	_fnCGPDFScannerPopName                         func(unsafe.Pointer, string) bool
+	_fnCGPDFScannerPopNumber                       func(unsafe.Pointer, *float64) bool
+	_fnCGPDFScannerPopObject                       func(unsafe.Pointer, unsafe.Pointer) bool
+	_fnCGPDFScannerPopStream                       func(unsafe.Pointer, unsafe.Pointer) bool
+	_fnCGPDFScannerPopString                       func(unsafe.Pointer, unsafe.Pointer) bool
+	_fnCGPDFScannerRelease                         func(unsafe.Pointer)
+	_fnCGPDFScannerRetain                          func(unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFScannerScan                            func(unsafe.Pointer) bool
+	_fnCGPDFScannerStop                            func(unsafe.Pointer)
+	_fnCGPDFStreamCopyData                         func(unsafe.Pointer, *CGPDFDataFormat) unsafe.Pointer
+	_fnCGPDFStreamGetDictionary                    func(unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFStringCopyDate                         func(unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFStringCopyTextString                   func(unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFStringGetBytePtr                       func(unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFStringGetLength                        func(unsafe.Pointer) uint
+	_fnCGPDFTagTypeGetName                         func(CGPDFTagType) string
+	_fnCGPSConverterAbort                          func(unsafe.Pointer) bool
+	_fnCGPSConverterConvert                        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	_fnCGPSConverterCreate                         func(unsafe.Pointer, *CGPSConverterCallbacks, unsafe.Pointer) unsafe.Pointer
+	_fnCGPSConverterGetTypeID                      func() uint
+	_fnCGPSConverterIsConverting                   func(unsafe.Pointer) bool
+	_fnCGPathAddArc                                func(unsafe.Pointer, *corefoundation.CGAffineTransform, float64, float64, float64, float64, float64, bool)
+	_fnCGPathAddArcToPoint                         func(unsafe.Pointer, *corefoundation.CGAffineTransform, float64, float64, float64, float64, float64)
+	_fnCGPathAddCurveToPoint                       func(unsafe.Pointer, *corefoundation.CGAffineTransform, float64, float64, float64, float64, float64, float64)
+	_fnCGPathAddEllipseInRect                      func(unsafe.Pointer, *corefoundation.CGAffineTransform, corefoundation.CGRect)
+	_fnCGPathAddLineToPoint                        func(unsafe.Pointer, *corefoundation.CGAffineTransform, float64, float64)
+	_fnCGPathAddLines                              func(unsafe.Pointer, *corefoundation.CGAffineTransform, *corefoundation.CGPoint, uint)
+	_fnCGPathAddPath                               func(unsafe.Pointer, *corefoundation.CGAffineTransform, unsafe.Pointer)
+	_fnCGPathAddQuadCurveToPoint                   func(unsafe.Pointer, *corefoundation.CGAffineTransform, float64, float64, float64, float64)
+	_fnCGPathAddRect                               func(unsafe.Pointer, *corefoundation.CGAffineTransform, corefoundation.CGRect)
+	_fnCGPathAddRects                              func(unsafe.Pointer, *corefoundation.CGAffineTransform, *corefoundation.CGRect, uint)
+	_fnCGPathAddRelativeArc                        func(unsafe.Pointer, *corefoundation.CGAffineTransform, float64, float64, float64, float64, float64)
+	_fnCGPathAddRoundedRect                        func(unsafe.Pointer, *corefoundation.CGAffineTransform, corefoundation.CGRect, float64, float64)
+	_fnCGPathApply                                 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCGPathApplyWithBlock                        func(unsafe.Pointer, objc.Block)
+	_fnCGPathCloseSubpath                          func(unsafe.Pointer)
+	_fnCGPathContainsPoint                         func(unsafe.Pointer, *corefoundation.CGAffineTransform, corefoundation.CGPoint, bool) bool
+	_fnCGPathCreateCopy                            func(unsafe.Pointer) unsafe.Pointer
+	_fnCGPathCreateCopyByDashingPath               func(unsafe.Pointer, *corefoundation.CGAffineTransform, float64, *float64, uint) unsafe.Pointer
+	_fnCGPathCreateCopyByFlattening                func(unsafe.Pointer, float64) unsafe.Pointer
+	_fnCGPathCreateCopyByIntersectingPath          func(unsafe.Pointer, unsafe.Pointer, bool) unsafe.Pointer
+	_fnCGPathCreateCopyByNormalizing               func(unsafe.Pointer, bool) unsafe.Pointer
+	_fnCGPathCreateCopyByStrokingPath              func(unsafe.Pointer, *corefoundation.CGAffineTransform, float64, CGLineCap, CGLineJoin, float64) unsafe.Pointer
+	_fnCGPathCreateCopyBySubtractingPath           func(unsafe.Pointer, unsafe.Pointer, bool) unsafe.Pointer
 	_fnCGPathCreateCopyBySymmetricDifferenceOfPath func(unsafe.Pointer, unsafe.Pointer, bool) unsafe.Pointer
-	_fnCGPathCreateCopyByTransformingPath func(unsafe.Pointer, *corefoundation.CGAffineTransform) unsafe.Pointer
-	_fnCGPathCreateCopyByUnioningPath func(unsafe.Pointer, unsafe.Pointer, bool) unsafe.Pointer
-	_fnCGPathCreateCopyOfLineByIntersectingPath func(unsafe.Pointer, unsafe.Pointer, bool) unsafe.Pointer
-	_fnCGPathCreateCopyOfLineBySubtractingPath func(unsafe.Pointer, unsafe.Pointer, bool) unsafe.Pointer
-	_fnCGPathCreateMutable func() unsafe.Pointer
-	_fnCGPathCreateMutableCopy func(unsafe.Pointer) unsafe.Pointer
-	_fnCGPathCreateMutableCopyByTransformingPath func(unsafe.Pointer, *corefoundation.CGAffineTransform) unsafe.Pointer
-	_fnCGPathCreateSeparateComponents func(unsafe.Pointer, bool) unsafe.Pointer
-	_fnCGPathCreateWithEllipseInRect func(corefoundation.CGRect, *corefoundation.CGAffineTransform) unsafe.Pointer
-	_fnCGPathCreateWithRect func(corefoundation.CGRect, *corefoundation.CGAffineTransform) unsafe.Pointer
-	_fnCGPathCreateWithRoundedRect func(corefoundation.CGRect, float64, float64, *corefoundation.CGAffineTransform) unsafe.Pointer
-	_fnCGPathEqualToPath func(unsafe.Pointer, unsafe.Pointer) bool
-	_fnCGPathGetBoundingBox func(unsafe.Pointer) corefoundation.CGRect
-	_fnCGPathGetCurrentPoint func(unsafe.Pointer) corefoundation.CGPoint
-	_fnCGPathGetPathBoundingBox func(unsafe.Pointer) corefoundation.CGRect
-	_fnCGPathGetTypeID func() uint
-	_fnCGPathIntersectsPath func(unsafe.Pointer, unsafe.Pointer, bool) bool
-	_fnCGPathIsEmpty func(unsafe.Pointer) bool
-	_fnCGPathIsRect func(unsafe.Pointer, *corefoundation.CGRect) bool
-	_fnCGPathMoveToPoint func(unsafe.Pointer, *corefoundation.CGAffineTransform, float64, float64)
-	_fnCGPathRelease func(unsafe.Pointer)
-	_fnCGPathRetain func(unsafe.Pointer) unsafe.Pointer
-	_fnCGPatternCreate func(unsafe.Pointer, corefoundation.CGRect, corefoundation.CGAffineTransform, float64, float64, CGPatternTiling, bool, *CGPatternCallbacks) unsafe.Pointer
-	_fnCGPatternGetTypeID func() uint
-	_fnCGPatternRelease func(unsafe.Pointer)
-	_fnCGPatternRetain func(unsafe.Pointer) unsafe.Pointer
-	_fnCGPointApplyAffineTransform func(corefoundation.CGPoint, corefoundation.CGAffineTransform) corefoundation.CGPoint
-	_fnCGPointCreateDictionaryRepresentation func(corefoundation.CGPoint) unsafe.Pointer
-	_fnCGPointEqualToPoint func(corefoundation.CGPoint, corefoundation.CGPoint) bool
-	_fnCGPointMake func(float64, float64) corefoundation.CGPoint
-	_fnCGPointMakeWithDictionaryRepresentation func(unsafe.Pointer, *corefoundation.CGPoint) bool
-// Deprecated: No longer supported
-	_fnCGPostKeyboardEvent func(uint16, uint16, int) CGError
-	_fnCGPreflightListenEventAccess func() bool
-	_fnCGPreflightPostEventAccess func() bool
-	_fnCGPreflightScreenCaptureAccess func() bool
-	_fnCGRectApplyAffineTransform func(corefoundation.CGRect, corefoundation.CGAffineTransform) corefoundation.CGRect
-	_fnCGRectContainsPoint func(corefoundation.CGRect, corefoundation.CGPoint) bool
-	_fnCGRectContainsRect func(corefoundation.CGRect, corefoundation.CGRect) bool
-	_fnCGRectCreateDictionaryRepresentation func(corefoundation.CGRect) unsafe.Pointer
-	_fnCGRectDivide func(corefoundation.CGRect, *corefoundation.CGRect, *corefoundation.CGRect, float64, corefoundation.CGRectEdge)
-	_fnCGRectEqualToRect func(corefoundation.CGRect, corefoundation.CGRect) bool
-	_fnCGRectGetHeight func(corefoundation.CGRect) float64
-	_fnCGRectGetMaxX func(corefoundation.CGRect) float64
-	_fnCGRectGetMaxY func(corefoundation.CGRect) float64
-	_fnCGRectGetMidX func(corefoundation.CGRect) float64
-	_fnCGRectGetMidY func(corefoundation.CGRect) float64
-	_fnCGRectGetMinX func(corefoundation.CGRect) float64
-	_fnCGRectGetMinY func(corefoundation.CGRect) float64
-	_fnCGRectGetWidth func(corefoundation.CGRect) float64
-	_fnCGRectInset func(corefoundation.CGRect, float64, float64) corefoundation.CGRect
-	_fnCGRectIntegral func(corefoundation.CGRect) corefoundation.CGRect
-	_fnCGRectIntersection func(corefoundation.CGRect, corefoundation.CGRect) corefoundation.CGRect
-	_fnCGRectIntersectsRect func(corefoundation.CGRect, corefoundation.CGRect) bool
-	_fnCGRectIsEmpty func(corefoundation.CGRect) bool
-	_fnCGRectIsInfinite func(corefoundation.CGRect) bool
-	_fnCGRectIsNull func(corefoundation.CGRect) bool
-	_fnCGRectMake func(float64, float64, float64, float64) corefoundation.CGRect
+	_fnCGPathCreateCopyByTransformingPath          func(unsafe.Pointer, *corefoundation.CGAffineTransform) unsafe.Pointer
+	_fnCGPathCreateCopyByUnioningPath              func(unsafe.Pointer, unsafe.Pointer, bool) unsafe.Pointer
+	_fnCGPathCreateCopyOfLineByIntersectingPath    func(unsafe.Pointer, unsafe.Pointer, bool) unsafe.Pointer
+	_fnCGPathCreateCopyOfLineBySubtractingPath     func(unsafe.Pointer, unsafe.Pointer, bool) unsafe.Pointer
+	_fnCGPathCreateMutable                         func() unsafe.Pointer
+	_fnCGPathCreateMutableCopy                     func(unsafe.Pointer) unsafe.Pointer
+	_fnCGPathCreateMutableCopyByTransformingPath   func(unsafe.Pointer, *corefoundation.CGAffineTransform) unsafe.Pointer
+	_fnCGPathCreateSeparateComponents              func(unsafe.Pointer, bool) unsafe.Pointer
+	_fnCGPathCreateWithEllipseInRect               func(corefoundation.CGRect, *corefoundation.CGAffineTransform) unsafe.Pointer
+	_fnCGPathCreateWithRect                        func(corefoundation.CGRect, *corefoundation.CGAffineTransform) unsafe.Pointer
+	_fnCGPathCreateWithRoundedRect                 func(corefoundation.CGRect, float64, float64, *corefoundation.CGAffineTransform) unsafe.Pointer
+	_fnCGPathEqualToPath                           func(unsafe.Pointer, unsafe.Pointer) bool
+	_fnCGPathGetBoundingBox                        func(unsafe.Pointer) corefoundation.CGRect
+	_fnCGPathGetCurrentPoint                       func(unsafe.Pointer) corefoundation.CGPoint
+	_fnCGPathGetPathBoundingBox                    func(unsafe.Pointer) corefoundation.CGRect
+	_fnCGPathGetTypeID                             func() uint
+	_fnCGPathIntersectsPath                        func(unsafe.Pointer, unsafe.Pointer, bool) bool
+	_fnCGPathIsEmpty                               func(unsafe.Pointer) bool
+	_fnCGPathIsRect                                func(unsafe.Pointer, *corefoundation.CGRect) bool
+	_fnCGPathMoveToPoint                           func(unsafe.Pointer, *corefoundation.CGAffineTransform, float64, float64)
+	_fnCGPathRelease                               func(unsafe.Pointer)
+	_fnCGPathRetain                                func(unsafe.Pointer) unsafe.Pointer
+	_fnCGPatternCreate                             func(unsafe.Pointer, corefoundation.CGRect, corefoundation.CGAffineTransform, float64, float64, CGPatternTiling, bool, *CGPatternCallbacks) unsafe.Pointer
+	_fnCGPatternGetTypeID                          func() uint
+	_fnCGPatternRelease                            func(unsafe.Pointer)
+	_fnCGPatternRetain                             func(unsafe.Pointer) unsafe.Pointer
+	_fnCGPointApplyAffineTransform                 func(corefoundation.CGPoint, corefoundation.CGAffineTransform) corefoundation.CGPoint
+	_fnCGPointCreateDictionaryRepresentation       func(corefoundation.CGPoint) unsafe.Pointer
+	_fnCGPointEqualToPoint                         func(corefoundation.CGPoint, corefoundation.CGPoint) bool
+	_fnCGPointMake                                 func(float64, float64) corefoundation.CGPoint
+	_fnCGPointMakeWithDictionaryRepresentation     func(unsafe.Pointer, *corefoundation.CGPoint) bool
+	// Deprecated: No longer supported
+	_fnCGPostKeyboardEvent                    func(uint16, uint16, int) CGError
+	_fnCGPreflightListenEventAccess           func() bool
+	_fnCGPreflightPostEventAccess             func() bool
+	_fnCGPreflightScreenCaptureAccess         func() bool
+	_fnCGRectApplyAffineTransform             func(corefoundation.CGRect, corefoundation.CGAffineTransform) corefoundation.CGRect
+	_fnCGRectContainsPoint                    func(corefoundation.CGRect, corefoundation.CGPoint) bool
+	_fnCGRectContainsRect                     func(corefoundation.CGRect, corefoundation.CGRect) bool
+	_fnCGRectCreateDictionaryRepresentation   func(corefoundation.CGRect) unsafe.Pointer
+	_fnCGRectDivide                           func(corefoundation.CGRect, *corefoundation.CGRect, *corefoundation.CGRect, float64, corefoundation.CGRectEdge)
+	_fnCGRectEqualToRect                      func(corefoundation.CGRect, corefoundation.CGRect) bool
+	_fnCGRectGetHeight                        func(corefoundation.CGRect) float64
+	_fnCGRectGetMaxX                          func(corefoundation.CGRect) float64
+	_fnCGRectGetMaxY                          func(corefoundation.CGRect) float64
+	_fnCGRectGetMidX                          func(corefoundation.CGRect) float64
+	_fnCGRectGetMidY                          func(corefoundation.CGRect) float64
+	_fnCGRectGetMinX                          func(corefoundation.CGRect) float64
+	_fnCGRectGetMinY                          func(corefoundation.CGRect) float64
+	_fnCGRectGetWidth                         func(corefoundation.CGRect) float64
+	_fnCGRectInset                            func(corefoundation.CGRect, float64, float64) corefoundation.CGRect
+	_fnCGRectIntegral                         func(corefoundation.CGRect) corefoundation.CGRect
+	_fnCGRectIntersection                     func(corefoundation.CGRect, corefoundation.CGRect) corefoundation.CGRect
+	_fnCGRectIntersectsRect                   func(corefoundation.CGRect, corefoundation.CGRect) bool
+	_fnCGRectIsEmpty                          func(corefoundation.CGRect) bool
+	_fnCGRectIsInfinite                       func(corefoundation.CGRect) bool
+	_fnCGRectIsNull                           func(corefoundation.CGRect) bool
+	_fnCGRectMake                             func(float64, float64, float64, float64) corefoundation.CGRect
 	_fnCGRectMakeWithDictionaryRepresentation func(unsafe.Pointer, *corefoundation.CGRect) bool
-	_fnCGRectOffset func(corefoundation.CGRect, float64, float64) corefoundation.CGRect
-	_fnCGRectStandardize func(corefoundation.CGRect) corefoundation.CGRect
-	_fnCGRectUnion func(corefoundation.CGRect, corefoundation.CGRect) corefoundation.CGRect
-// Deprecated: No longer supported
+	_fnCGRectOffset                           func(corefoundation.CGRect, float64, float64) corefoundation.CGRect
+	_fnCGRectStandardize                      func(corefoundation.CGRect) corefoundation.CGRect
+	_fnCGRectUnion                            func(corefoundation.CGRect, corefoundation.CGRect) corefoundation.CGRect
+	// Deprecated: No longer supported
 	_fnCGRegisterScreenRefreshCallback func(unsafe.Pointer, unsafe.Pointer) CGError
-	_fnCGReleaseAllDisplays func() CGError
+	_fnCGReleaseAllDisplays            func() CGError
 	_fnCGReleaseDisplayFadeReservation func(uint32) CGError
-// Deprecated: No longer supported
-	_fnCGReleaseScreenRefreshRects func(*corefoundation.CGRect)
-	_fnCGRenderingBufferLockBytePtr func(unsafe.Pointer) unsafe.Pointer
-	_fnCGRenderingBufferProviderCreate func(unsafe.Pointer, uint, objc.Block, objc.Block, objc.Block) unsafe.Pointer
+	// Deprecated: No longer supported
+	_fnCGReleaseScreenRefreshRects               func(*corefoundation.CGRect)
+	_fnCGRenderingBufferLockBytePtr              func(unsafe.Pointer) unsafe.Pointer
+	_fnCGRenderingBufferProviderCreate           func(unsafe.Pointer, uint, objc.Block, objc.Block, objc.Block) unsafe.Pointer
 	_fnCGRenderingBufferProviderCreateWithCFData func(unsafe.Pointer) unsafe.Pointer
-	_fnCGRenderingBufferProviderGetSize func(unsafe.Pointer) uint
-	_fnCGRenderingBufferProviderGetTypeID func() uint
-	_fnCGRenderingBufferUnlockBytePtr func(unsafe.Pointer)
-	_fnCGRequestListenEventAccess func() bool
-	_fnCGRequestPostEventAccess func() bool
-	_fnCGRequestScreenCaptureAccess func() bool
-	_fnCGRestorePermanentDisplayConfiguration func()
-// Deprecated: No longer supported
+	_fnCGRenderingBufferProviderGetSize          func(unsafe.Pointer) uint
+	_fnCGRenderingBufferProviderGetTypeID        func() uint
+	_fnCGRenderingBufferUnlockBytePtr            func(unsafe.Pointer)
+	_fnCGRequestListenEventAccess                func() bool
+	_fnCGRequestPostEventAccess                  func() bool
+	_fnCGRequestScreenCaptureAccess              func() bool
+	_fnCGRestorePermanentDisplayConfiguration    func()
+	// Deprecated: No longer supported
 	_fnCGScreenRegisterMoveCallback func(unsafe.Pointer, unsafe.Pointer) CGError
-// Deprecated: No longer supported
-	_fnCGScreenUnregisterMoveCallback func(unsafe.Pointer, unsafe.Pointer)
-	_fnCGSessionCopyCurrentDictionary func() unsafe.Pointer
+	// Deprecated: No longer supported
+	_fnCGScreenUnregisterMoveCallback  func(unsafe.Pointer, unsafe.Pointer)
+	_fnCGSessionCopyCurrentDictionary  func() unsafe.Pointer
 	_fnCGSetDisplayTransferByByteTable func(uint32, uint32, *uint8, *uint8, *uint8) CGError
-	_fnCGSetDisplayTransferByFormula func(uint32, float32, float32, float32, float32, float32, float32, float32, float32, float32) CGError
-	_fnCGSetDisplayTransferByTable func(uint32, uint32, *float32, *float32, *float32) CGError
-// Deprecated: No longer supported
+	_fnCGSetDisplayTransferByFormula   func(uint32, float32, float32, float32, float32, float32, float32, float32, float32, float32) CGError
+	_fnCGSetDisplayTransferByTable     func(uint32, uint32, *float32, *float32, *float32) CGError
+	// Deprecated: No longer supported
 	_fnCGSetLocalEventsFilterDuringSuppressionState func(CGEventFilterMask, CGEventSuppressionState) CGError
-// Deprecated: No longer supported
-	_fnCGSetLocalEventsSuppressionInterval func(float64) CGError
-	_fnCGShadingCreateAxial func(unsafe.Pointer, corefoundation.CGPoint, corefoundation.CGPoint, unsafe.Pointer, bool, bool) unsafe.Pointer
-	_fnCGShadingCreateAxialWithContentHeadroom func(float32, unsafe.Pointer, corefoundation.CGPoint, corefoundation.CGPoint, unsafe.Pointer, bool, bool) unsafe.Pointer
-	_fnCGShadingCreateRadial func(unsafe.Pointer, corefoundation.CGPoint, float64, corefoundation.CGPoint, float64, unsafe.Pointer, bool, bool) unsafe.Pointer
+	// Deprecated: No longer supported
+	_fnCGSetLocalEventsSuppressionInterval      func(float64) CGError
+	_fnCGShadingCreateAxial                     func(unsafe.Pointer, corefoundation.CGPoint, corefoundation.CGPoint, unsafe.Pointer, bool, bool) unsafe.Pointer
+	_fnCGShadingCreateAxialWithContentHeadroom  func(float32, unsafe.Pointer, corefoundation.CGPoint, corefoundation.CGPoint, unsafe.Pointer, bool, bool) unsafe.Pointer
+	_fnCGShadingCreateRadial                    func(unsafe.Pointer, corefoundation.CGPoint, float64, corefoundation.CGPoint, float64, unsafe.Pointer, bool, bool) unsafe.Pointer
 	_fnCGShadingCreateRadialWithContentHeadroom func(float32, unsafe.Pointer, corefoundation.CGPoint, float64, corefoundation.CGPoint, float64, unsafe.Pointer, bool, bool) unsafe.Pointer
-	_fnCGShadingGetContentHeadroom func(unsafe.Pointer) float32
-	_fnCGShadingGetTypeID func() uint
-	_fnCGShadingRelease func(unsafe.Pointer)
-	_fnCGShadingRetain func(unsafe.Pointer) unsafe.Pointer
-	_fnCGShieldingWindowID func(uint32) uint32
-	_fnCGShieldingWindowLevel func() int32
-	_fnCGSizeApplyAffineTransform func(corefoundation.CGSize, corefoundation.CGAffineTransform) corefoundation.CGSize
-	_fnCGSizeCreateDictionaryRepresentation func(corefoundation.CGSize) unsafe.Pointer
-	_fnCGSizeEqualToSize func(corefoundation.CGSize, corefoundation.CGSize) bool
-	_fnCGSizeMake func(float64, float64) corefoundation.CGSize
-	_fnCGSizeMakeWithDictionaryRepresentation func(unsafe.Pointer, *corefoundation.CGSize) bool
-// Deprecated: No longer supported
+	_fnCGShadingGetContentHeadroom              func(unsafe.Pointer) float32
+	_fnCGShadingGetTypeID                       func() uint
+	_fnCGShadingRelease                         func(unsafe.Pointer)
+	_fnCGShadingRetain                          func(unsafe.Pointer) unsafe.Pointer
+	_fnCGShieldingWindowID                      func(uint32) uint32
+	_fnCGShieldingWindowLevel                   func() int32
+	_fnCGSizeApplyAffineTransform               func(corefoundation.CGSize, corefoundation.CGAffineTransform) corefoundation.CGSize
+	_fnCGSizeCreateDictionaryRepresentation     func(corefoundation.CGSize) unsafe.Pointer
+	_fnCGSizeEqualToSize                        func(corefoundation.CGSize, corefoundation.CGSize) bool
+	_fnCGSizeMake                               func(float64, float64) corefoundation.CGSize
+	_fnCGSizeMakeWithDictionaryRepresentation   func(unsafe.Pointer, *corefoundation.CGSize) bool
+	// Deprecated: No longer supported
 	_fnCGUnregisterScreenRefreshCallback func(unsafe.Pointer, unsafe.Pointer)
-	_fnCGVectorMake func(float64, float64) corefoundation.CGVector
-// Deprecated: No longer supported
+	_fnCGVectorMake                      func(float64, float64) corefoundation.CGVector
+	// Deprecated: No longer supported
 	_fnCGWaitForScreenRefreshRects func(*corefoundation.CGRect, *uint32) CGError
-// Deprecated: No longer supported
-	_fnCGWaitForScreenUpdateRects func(CGScreenUpdateOperation, *CGScreenUpdateOperation, *corefoundation.CGRect, *uint, *CGScreenUpdateMoveDelta) CGError
-	_fnCGWarpMouseCursorPosition func(corefoundation.CGPoint) CGError
-	_fnCGWindowLevelForKey func(CGWindowLevelKey) int32
-	_fnCGWindowListCopyWindowInfo func(CGWindowListOption, uint32) unsafe.Pointer
-	_fnCGWindowListCreate func(CGWindowListOption, uint32) unsafe.Pointer
+	// Deprecated: No longer supported
+	_fnCGWaitForScreenUpdateRects             func(CGScreenUpdateOperation, *CGScreenUpdateOperation, *corefoundation.CGRect, *uint, *CGScreenUpdateMoveDelta) CGError
+	_fnCGWarpMouseCursorPosition              func(corefoundation.CGPoint) CGError
+	_fnCGWindowLevelForKey                    func(CGWindowLevelKey) int32
+	_fnCGWindowListCopyWindowInfo             func(CGWindowListOption, uint32) unsafe.Pointer
+	_fnCGWindowListCreate                     func(CGWindowListOption, uint32) unsafe.Pointer
 	_fnCGWindowListCreateDescriptionFromArray func(unsafe.Pointer) unsafe.Pointer
-	_fnCGWindowListCreateImage func(corefoundation.CGRect, CGWindowListOption, uint32, CGWindowImageOption) unsafe.Pointer
-	_fnCGWindowListCreateImageFromArray func(corefoundation.CGRect, unsafe.Pointer, CGWindowImageOption) unsafe.Pointer
-// Deprecated: No longer supported
-	_fnCGWindowServerCFMachPort func() unsafe.Pointer
+	_fnCGWindowListCreateImage                func(corefoundation.CGRect, CGWindowListOption, uint32, CGWindowImageOption) unsafe.Pointer
+	_fnCGWindowListCreateImageFromArray       func(corefoundation.CGRect, unsafe.Pointer, CGWindowImageOption) unsafe.Pointer
+	// Deprecated: No longer supported
+	_fnCGWindowServerCFMachPort       func() unsafe.Pointer
 	_fnCGWindowServerCreateServerPort func() unsafe.Pointer
 )
 
@@ -3743,4 +3743,3 @@ func CGWindowServerCFMachPort() unsafe.Pointer {
 func CGWindowServerCreateServerPort() unsafe.Pointer {
 	return _fnCGWindowServerCreateServerPort()
 }
-

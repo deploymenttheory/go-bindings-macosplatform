@@ -17,37 +17,37 @@ type CAEmitterLayer struct {
 }
 
 var (
-	_clsCAEmitterLayer = _objcClass("CAEmitterLayer")
-	_cAEmitterLayerSelEmitterCells = objc.RegisterName("emitterCells")
-	_cAEmitterLayerSelSetEmitterCells = objc.RegisterName("setEmitterCells:")
-	_cAEmitterLayerSelBirthRate = objc.RegisterName("birthRate")
-	_cAEmitterLayerSelSetBirthRate = objc.RegisterName("setBirthRate:")
-	_cAEmitterLayerSelLifetime = objc.RegisterName("lifetime")
-	_cAEmitterLayerSelSetLifetime = objc.RegisterName("setLifetime:")
-	_cAEmitterLayerSelEmitterPosition = objc.RegisterName("emitterPosition")
-	_cAEmitterLayerSelSetEmitterPosition = objc.RegisterName("setEmitterPosition:")
-	_cAEmitterLayerSelEmitterZPosition = objc.RegisterName("emitterZPosition")
+	_clsCAEmitterLayer                    = _objcClass("CAEmitterLayer")
+	_cAEmitterLayerSelEmitterCells        = objc.RegisterName("emitterCells")
+	_cAEmitterLayerSelSetEmitterCells     = objc.RegisterName("setEmitterCells:")
+	_cAEmitterLayerSelBirthRate           = objc.RegisterName("birthRate")
+	_cAEmitterLayerSelSetBirthRate        = objc.RegisterName("setBirthRate:")
+	_cAEmitterLayerSelLifetime            = objc.RegisterName("lifetime")
+	_cAEmitterLayerSelSetLifetime         = objc.RegisterName("setLifetime:")
+	_cAEmitterLayerSelEmitterPosition     = objc.RegisterName("emitterPosition")
+	_cAEmitterLayerSelSetEmitterPosition  = objc.RegisterName("setEmitterPosition:")
+	_cAEmitterLayerSelEmitterZPosition    = objc.RegisterName("emitterZPosition")
 	_cAEmitterLayerSelSetEmitterZPosition = objc.RegisterName("setEmitterZPosition:")
-	_cAEmitterLayerSelEmitterSize = objc.RegisterName("emitterSize")
-	_cAEmitterLayerSelSetEmitterSize = objc.RegisterName("setEmitterSize:")
-	_cAEmitterLayerSelEmitterDepth = objc.RegisterName("emitterDepth")
-	_cAEmitterLayerSelSetEmitterDepth = objc.RegisterName("setEmitterDepth:")
-	_cAEmitterLayerSelEmitterShape = objc.RegisterName("emitterShape")
-	_cAEmitterLayerSelSetEmitterShape = objc.RegisterName("setEmitterShape:")
-	_cAEmitterLayerSelEmitterMode = objc.RegisterName("emitterMode")
-	_cAEmitterLayerSelSetEmitterMode = objc.RegisterName("setEmitterMode:")
-	_cAEmitterLayerSelRenderMode = objc.RegisterName("renderMode")
-	_cAEmitterLayerSelSetRenderMode = objc.RegisterName("setRenderMode:")
-	_cAEmitterLayerSelPreservesDepth = objc.RegisterName("preservesDepth")
-	_cAEmitterLayerSelSetPreservesDepth = objc.RegisterName("setPreservesDepth:")
-	_cAEmitterLayerSelVelocity = objc.RegisterName("velocity")
-	_cAEmitterLayerSelSetVelocity = objc.RegisterName("setVelocity:")
-	_cAEmitterLayerSelScale = objc.RegisterName("scale")
-	_cAEmitterLayerSelSetScale = objc.RegisterName("setScale:")
-	_cAEmitterLayerSelSpin = objc.RegisterName("spin")
-	_cAEmitterLayerSelSetSpin = objc.RegisterName("setSpin:")
-	_cAEmitterLayerSelSeed = objc.RegisterName("seed")
-	_cAEmitterLayerSelSetSeed = objc.RegisterName("setSeed:")
+	_cAEmitterLayerSelEmitterSize         = objc.RegisterName("emitterSize")
+	_cAEmitterLayerSelSetEmitterSize      = objc.RegisterName("setEmitterSize:")
+	_cAEmitterLayerSelEmitterDepth        = objc.RegisterName("emitterDepth")
+	_cAEmitterLayerSelSetEmitterDepth     = objc.RegisterName("setEmitterDepth:")
+	_cAEmitterLayerSelEmitterShape        = objc.RegisterName("emitterShape")
+	_cAEmitterLayerSelSetEmitterShape     = objc.RegisterName("setEmitterShape:")
+	_cAEmitterLayerSelEmitterMode         = objc.RegisterName("emitterMode")
+	_cAEmitterLayerSelSetEmitterMode      = objc.RegisterName("setEmitterMode:")
+	_cAEmitterLayerSelRenderMode          = objc.RegisterName("renderMode")
+	_cAEmitterLayerSelSetRenderMode       = objc.RegisterName("setRenderMode:")
+	_cAEmitterLayerSelPreservesDepth      = objc.RegisterName("preservesDepth")
+	_cAEmitterLayerSelSetPreservesDepth   = objc.RegisterName("setPreservesDepth:")
+	_cAEmitterLayerSelVelocity            = objc.RegisterName("velocity")
+	_cAEmitterLayerSelSetVelocity         = objc.RegisterName("setVelocity:")
+	_cAEmitterLayerSelScale               = objc.RegisterName("scale")
+	_cAEmitterLayerSelSetScale            = objc.RegisterName("setScale:")
+	_cAEmitterLayerSelSpin                = objc.RegisterName("spin")
+	_cAEmitterLayerSelSetSpin             = objc.RegisterName("setSpin:")
+	_cAEmitterLayerSelSeed                = objc.RegisterName("seed")
+	_cAEmitterLayerSelSetSeed             = objc.RegisterName("setSeed:")
 )
 
 func CAEmitterLayerFromID(id objc.ID) *CAEmitterLayer {
@@ -62,7 +62,9 @@ func CAEmitterLayerFromID(id objc.ID) *CAEmitterLayer {
 
 func (o *CAEmitterLayer) EmitterCells() *foundation.NSArray[*CAEmitterCell] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cAEmitterLayerSelEmitterCells)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CAEmitterCell](_ret)
 }
 
@@ -126,7 +128,9 @@ func (o *CAEmitterLayer) SetEmitterDepth(emitterDepth float64) {
 
 func (o *CAEmitterLayer) EmitterShape() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cAEmitterLayerSelEmitterShape)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -136,7 +140,9 @@ func (o *CAEmitterLayer) SetEmitterShape(emitterShape *foundation.NSString) {
 
 func (o *CAEmitterLayer) EmitterMode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cAEmitterLayerSelEmitterMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -146,7 +152,9 @@ func (o *CAEmitterLayer) SetEmitterMode(emitterMode *foundation.NSString) {
 
 func (o *CAEmitterLayer) RenderMode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cAEmitterLayerSelRenderMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -198,4 +206,3 @@ func (o *CAEmitterLayer) Seed() uint {
 func (o *CAEmitterLayer) SetSeed(seed uint) {
 	o.Ptr().Send(_cAEmitterLayerSelSetSeed, seed)
 }
-

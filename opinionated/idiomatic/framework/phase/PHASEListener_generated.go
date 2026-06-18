@@ -82,4 +82,3 @@ type Listenerable interface {
 }
 
 var _ Listenerable = (*Listener)(nil)
-

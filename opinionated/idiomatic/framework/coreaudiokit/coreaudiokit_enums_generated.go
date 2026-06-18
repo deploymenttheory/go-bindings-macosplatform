@@ -12,7 +12,7 @@ import (
 type AUGenericViewDisplayFlags int64
 
 const (
-	AUViewTitleDisplayFlag AUGenericViewDisplayFlags = 1
+	AUViewTitleDisplayFlag      AUGenericViewDisplayFlags = 1
 	AUViewPropertiesDisplayFlag AUGenericViewDisplayFlags = 2
 	AUViewParametersDisplayFlag AUGenericViewDisplayFlags = 4
 )
@@ -33,4 +33,3 @@ func (e AUGenericViewDisplayFlags) String() string {
 	}
 	return strings.Join(parts, "|")
 }
-

@@ -17,7 +17,9 @@ type HostCIControllerStateMachine struct {
 }
 
 // Unwrap returns the underlying [raw.IOUSBHostCIControllerStateMachine].
-func (x *HostCIControllerStateMachine) Unwrap() *raw.IOUSBHostCIControllerStateMachine { return x.inner }
+func (x *HostCIControllerStateMachine) Unwrap() *raw.IOUSBHostCIControllerStateMachine {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -88,4 +90,3 @@ type HostCIControllerStateMachineable interface {
 }
 
 var _ HostCIControllerStateMachineable = (*HostCIControllerStateMachine)(nil)
-

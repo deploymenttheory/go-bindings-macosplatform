@@ -12,22 +12,22 @@ import (
 
 // [AAEntryACLBlob.h:50]
 type AAAccessControlEntry struct {
-	Tag uint32
-	Perms uint64
-	Flags uint64
+	Tag            uint32
+	Perms          uint64
+	Flags          uint64
 	Qualifier_type uint32
 }
 
 // [AAEntryAttributes.h:18]
 type AAEntryAttributes struct {
 	Field0 unsafe.Pointer
-	Uid uint32
-	Gid uint32
-	Flg uint32
-	Mod uint32
-	Btm bsd.Timespec
-	Ctm bsd.Timespec
-	Mtm bsd.Timespec
+	Uid    uint32
+	Gid    uint32
+	Flg    uint32
+	Mod    uint32
+	Btm    bsd.Timespec
+	Ctm    bsd.Timespec
+	Mtm    bsd.Timespec
 }
 
 type AAArchiveStream struct {
@@ -209,4 +209,3 @@ func NewAEAContext(ptr unsafe.Pointer) *AEAContext {
 	cgo.Track(o, o.Ptr)
 	return o
 }
-

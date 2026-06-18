@@ -99,7 +99,9 @@ func (x *EffectPropertyTexture) SetEnvMode(envMode raw.GLKTextureEnvMode) {
 	x.inner.SetEnvMode(envMode)
 }
 
-func (x *EffectPropertyTexture) asEffectProperty() *raw.GLKEffectProperty { return &x.inner.GLKEffectProperty }
+func (x *EffectPropertyTexture) asEffectProperty() *raw.GLKEffectProperty {
+	return &x.inner.GLKEffectProperty
+}
 
 // EffectPropertyTextureable is the interface implemented by [EffectPropertyTexture], for mocking and DI.
 type EffectPropertyTextureable interface {
@@ -119,4 +121,3 @@ type EffectPropertyTextureable interface {
 }
 
 var _ EffectPropertyTextureable = (*EffectPropertyTexture)(nil)
-

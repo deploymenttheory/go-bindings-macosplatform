@@ -587,9 +587,13 @@ func (x *MTRBaseClusterSwitch) SubscribeAttributeClusterRevisionWithMinIntervalM
 	}
 }
 
-func (x *MTRBaseClusterSwitch) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterSwitch) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterSwitch) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterSwitch) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterSwitchable is the interface implemented by [MTRBaseClusterSwitch], for mocking and DI.
 type MTRBaseClusterSwitchable interface {
@@ -629,4 +633,3 @@ type MTRBaseClusterSwitchable interface {
 }
 
 var _ MTRBaseClusterSwitchable = (*MTRBaseClusterSwitch)(nil)
-

@@ -17,13 +17,13 @@ type SFSafariToolbarItem struct {
 }
 
 var (
-	_clsSFSafariToolbarItem = _objcClass("SFSafariToolbarItem")
+	_clsSFSafariToolbarItem                        = _objcClass("SFSafariToolbarItem")
 	_sFSafariToolbarItemSelSetEnabledWithBadgeText = objc.RegisterName("setEnabled:withBadgeText:")
-	_sFSafariToolbarItemSelSetEnabled = objc.RegisterName("setEnabled:")
-	_sFSafariToolbarItemSelSetBadgeText = objc.RegisterName("setBadgeText:")
-	_sFSafariToolbarItemSelSetImage = objc.RegisterName("setImage:")
-	_sFSafariToolbarItemSelSetLabel = objc.RegisterName("setLabel:")
-	_sFSafariToolbarItemSelShowPopover = objc.RegisterName("showPopover")
+	_sFSafariToolbarItemSelSetEnabled              = objc.RegisterName("setEnabled:")
+	_sFSafariToolbarItemSelSetBadgeText            = objc.RegisterName("setBadgeText:")
+	_sFSafariToolbarItemSelSetImage                = objc.RegisterName("setImage:")
+	_sFSafariToolbarItemSelSetLabel                = objc.RegisterName("setLabel:")
+	_sFSafariToolbarItemSelShowPopover             = objc.RegisterName("showPopover")
 )
 
 func SFSafariToolbarItemFromID(id objc.ID) *SFSafariToolbarItem {
@@ -65,4 +65,3 @@ func (o *SFSafariToolbarItem) SetLabel(label *foundation.NSString) {
 func (o *SFSafariToolbarItem) ShowPopover() {
 	o.Ptr().Send(_sFSafariToolbarItemSelShowPopover)
 }
-

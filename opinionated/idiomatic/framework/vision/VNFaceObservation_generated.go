@@ -65,9 +65,13 @@ func (x *FaceObservation) Pitch() *foundation.NSNumber {
 	return x.inner.Pitch()
 }
 
-func (x *FaceObservation) asDetectedObjectObservation() *raw.VNDetectedObjectObservation { return &x.inner.VNDetectedObjectObservation }
+func (x *FaceObservation) asDetectedObjectObservation() *raw.VNDetectedObjectObservation {
+	return &x.inner.VNDetectedObjectObservation
+}
 
-func (x *FaceObservation) asObservation() *raw.VNObservation { return &x.inner.VNDetectedObjectObservation.VNObservation }
+func (x *FaceObservation) asObservation() *raw.VNObservation {
+	return &x.inner.VNDetectedObjectObservation.VNObservation
+}
 
 // FaceObservationable is the interface implemented by [FaceObservation], for mocking and DI.
 type FaceObservationable interface {
@@ -80,4 +84,3 @@ type FaceObservationable interface {
 }
 
 var _ FaceObservationable = (*FaceObservation)(nil)
-

@@ -18,18 +18,18 @@ type MTRCommissionerControlClusterReverseOpenCommissioningWindowParams struct {
 }
 
 var (
-	_clsMTRCommissionerControlClusterReverseOpenCommissioningWindowParams = _objcClass("MTRCommissionerControlClusterReverseOpenCommissioningWindowParams")
+	_clsMTRCommissionerControlClusterReverseOpenCommissioningWindowParams                           = _objcClass("MTRCommissionerControlClusterReverseOpenCommissioningWindowParams")
 	_mTRCommissionerControlClusterReverseOpenCommissioningWindowParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRCommissionerControlClusterReverseOpenCommissioningWindowParamsSelCommissioningTimeout = objc.RegisterName("commissioningTimeout")
-	_mTRCommissionerControlClusterReverseOpenCommissioningWindowParamsSelSetCommissioningTimeout = objc.RegisterName("setCommissioningTimeout:")
-	_mTRCommissionerControlClusterReverseOpenCommissioningWindowParamsSelPakePasscodeVerifier = objc.RegisterName("pakePasscodeVerifier")
-	_mTRCommissionerControlClusterReverseOpenCommissioningWindowParamsSelSetPakePasscodeVerifier = objc.RegisterName("setPakePasscodeVerifier:")
-	_mTRCommissionerControlClusterReverseOpenCommissioningWindowParamsSelDiscriminator = objc.RegisterName("discriminator")
-	_mTRCommissionerControlClusterReverseOpenCommissioningWindowParamsSelSetDiscriminator = objc.RegisterName("setDiscriminator:")
-	_mTRCommissionerControlClusterReverseOpenCommissioningWindowParamsSelIterations = objc.RegisterName("iterations")
-	_mTRCommissionerControlClusterReverseOpenCommissioningWindowParamsSelSetIterations = objc.RegisterName("setIterations:")
-	_mTRCommissionerControlClusterReverseOpenCommissioningWindowParamsSelSalt = objc.RegisterName("salt")
-	_mTRCommissionerControlClusterReverseOpenCommissioningWindowParamsSelSetSalt = objc.RegisterName("setSalt:")
+	_mTRCommissionerControlClusterReverseOpenCommissioningWindowParamsSelCommissioningTimeout       = objc.RegisterName("commissioningTimeout")
+	_mTRCommissionerControlClusterReverseOpenCommissioningWindowParamsSelSetCommissioningTimeout    = objc.RegisterName("setCommissioningTimeout:")
+	_mTRCommissionerControlClusterReverseOpenCommissioningWindowParamsSelPakePasscodeVerifier       = objc.RegisterName("pakePasscodeVerifier")
+	_mTRCommissionerControlClusterReverseOpenCommissioningWindowParamsSelSetPakePasscodeVerifier    = objc.RegisterName("setPakePasscodeVerifier:")
+	_mTRCommissionerControlClusterReverseOpenCommissioningWindowParamsSelDiscriminator              = objc.RegisterName("discriminator")
+	_mTRCommissionerControlClusterReverseOpenCommissioningWindowParamsSelSetDiscriminator           = objc.RegisterName("setDiscriminator:")
+	_mTRCommissionerControlClusterReverseOpenCommissioningWindowParamsSelIterations                 = objc.RegisterName("iterations")
+	_mTRCommissionerControlClusterReverseOpenCommissioningWindowParamsSelSetIterations              = objc.RegisterName("setIterations:")
+	_mTRCommissionerControlClusterReverseOpenCommissioningWindowParamsSelSalt                       = objc.RegisterName("salt")
+	_mTRCommissionerControlClusterReverseOpenCommissioningWindowParamsSelSetSalt                    = objc.RegisterName("setSalt:")
 )
 
 func MTRCommissionerControlClusterReverseOpenCommissioningWindowParamsFromID(id objc.ID) *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams {
@@ -46,7 +46,9 @@ func MTRCommissionerControlClusterReverseOpenCommissioningWindowParamsFromID(id 
 func (o *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRCommissionerControlClusterReverseOpenCommissioningWindowParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissionerControlClusterReverseOpenCommissioningWindowParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -55,7 +57,9 @@ func (o *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) Init
 
 func (o *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) CommissioningTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissionerControlClusterReverseOpenCommissioningWindowParamsSelCommissioningTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -65,7 +69,9 @@ func (o *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) SetC
 
 func (o *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) PakePasscodeVerifier() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissionerControlClusterReverseOpenCommissioningWindowParamsSelPakePasscodeVerifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -75,7 +81,9 @@ func (o *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) SetP
 
 func (o *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) Discriminator() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissionerControlClusterReverseOpenCommissioningWindowParamsSelDiscriminator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -85,7 +93,9 @@ func (o *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) SetD
 
 func (o *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) Iterations() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissionerControlClusterReverseOpenCommissioningWindowParamsSelIterations)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -95,11 +105,12 @@ func (o *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) SetI
 
 func (o *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) Salt() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissionerControlClusterReverseOpenCommissioningWindowParamsSelSalt)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) SetSalt(salt *foundation.NSData) {
 	o.Ptr().Send(_mTRCommissionerControlClusterReverseOpenCommissioningWindowParamsSelSetSalt, salt.Ptr())
 }
-

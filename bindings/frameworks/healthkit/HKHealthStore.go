@@ -18,43 +18,43 @@ type HKHealthStore struct {
 }
 
 var (
-	_clsHKHealthStore = _objcClass("HKHealthStore")
-	_hKHealthStoreSelIsHealthDataAvailable = objc.RegisterName("isHealthDataAvailable")
-	_hKHealthStoreSelSupportsHealthRecords = objc.RegisterName("supportsHealthRecords")
-	_hKHealthStoreSelAuthorizationStatusForType = objc.RegisterName("authorizationStatusForType:")
-	_hKHealthStoreSelRequestAuthorizationToShareTypesReadTypesCompletion = objc.RegisterName("requestAuthorizationToShareTypes:readTypes:completion:")
-	_hKHealthStoreSelRequestPerObjectReadAuthorizationForTypePredicateCompletion = objc.RegisterName("requestPerObjectReadAuthorizationForType:predicate:completion:")
+	_clsHKHealthStore                                                                = _objcClass("HKHealthStore")
+	_hKHealthStoreSelIsHealthDataAvailable                                           = objc.RegisterName("isHealthDataAvailable")
+	_hKHealthStoreSelSupportsHealthRecords                                           = objc.RegisterName("supportsHealthRecords")
+	_hKHealthStoreSelAuthorizationStatusForType                                      = objc.RegisterName("authorizationStatusForType:")
+	_hKHealthStoreSelRequestAuthorizationToShareTypesReadTypesCompletion             = objc.RegisterName("requestAuthorizationToShareTypes:readTypes:completion:")
+	_hKHealthStoreSelRequestPerObjectReadAuthorizationForTypePredicateCompletion     = objc.RegisterName("requestPerObjectReadAuthorizationForType:predicate:completion:")
 	_hKHealthStoreSelGetRequestStatusForAuthorizationToShareTypesReadTypesCompletion = objc.RegisterName("getRequestStatusForAuthorizationToShareTypes:readTypes:completion:")
-	_hKHealthStoreSelHandleAuthorizationForExtensionWithCompletion = objc.RegisterName("handleAuthorizationForExtensionWithCompletion:")
-	_hKHealthStoreSelEarliestPermittedSampleDate = objc.RegisterName("earliestPermittedSampleDate")
-	_hKHealthStoreSelSaveObjectWithCompletion = objc.RegisterName("saveObject:withCompletion:")
-	_hKHealthStoreSelSaveObjectsWithCompletion = objc.RegisterName("saveObjects:withCompletion:")
-	_hKHealthStoreSelDeleteObjectWithCompletion = objc.RegisterName("deleteObject:withCompletion:")
-	_hKHealthStoreSelDeleteObjectsWithCompletion = objc.RegisterName("deleteObjects:withCompletion:")
-	_hKHealthStoreSelDeleteObjectsOfTypePredicateWithCompletion = objc.RegisterName("deleteObjectsOfType:predicate:withCompletion:")
-	_hKHealthStoreSelExecuteQuery = objc.RegisterName("executeQuery:")
-	_hKHealthStoreSelStopQuery = objc.RegisterName("stopQuery:")
-	_hKHealthStoreSelSplitTotalEnergyStartDateEndDateResultsHandler = objc.RegisterName("splitTotalEnergy:startDate:endDate:resultsHandler:")
-	_hKHealthStoreSelDateOfBirthWithError = objc.RegisterName("dateOfBirthWithError:")
-	_hKHealthStoreSelDateOfBirthComponentsWithError = objc.RegisterName("dateOfBirthComponentsWithError:")
-	_hKHealthStoreSelBiologicalSexWithError = objc.RegisterName("biologicalSexWithError:")
-	_hKHealthStoreSelBloodTypeWithError = objc.RegisterName("bloodTypeWithError:")
-	_hKHealthStoreSelFitzpatrickSkinTypeWithError = objc.RegisterName("fitzpatrickSkinTypeWithError:")
-	_hKHealthStoreSelWheelchairUseWithError = objc.RegisterName("wheelchairUseWithError:")
-	_hKHealthStoreSelActivityMoveModeWithError = objc.RegisterName("activityMoveModeWithError:")
-	_hKHealthStoreSelAddSamplesToWorkoutCompletion = objc.RegisterName("addSamples:toWorkout:completion:")
-	_hKHealthStoreSelPauseWorkoutSession = objc.RegisterName("pauseWorkoutSession:")
-	_hKHealthStoreSelResumeWorkoutSession = objc.RegisterName("resumeWorkoutSession:")
-	_hKHealthStoreSelStartWatchAppWithWorkoutConfigurationCompletion = objc.RegisterName("startWatchAppWithWorkoutConfiguration:completion:")
-	_hKHealthStoreSelWorkoutSessionMirroringStartHandler = objc.RegisterName("workoutSessionMirroringStartHandler")
-	_hKHealthStoreSelSetWorkoutSessionMirroringStartHandler = objc.RegisterName("setWorkoutSessionMirroringStartHandler:")
-	_hKHealthStoreSelEnableBackgroundDeliveryForTypeFrequencyWithCompletion = objc.RegisterName("enableBackgroundDeliveryForType:frequency:withCompletion:")
-	_hKHealthStoreSelDisableBackgroundDeliveryForTypeWithCompletion = objc.RegisterName("disableBackgroundDeliveryForType:withCompletion:")
-	_hKHealthStoreSelDisableAllBackgroundDeliveryWithCompletion = objc.RegisterName("disableAllBackgroundDeliveryWithCompletion:")
-	_hKHealthStoreSelPreferredUnitsForQuantityTypesCompletion = objc.RegisterName("preferredUnitsForQuantityTypes:completion:")
-	_hKHealthStoreSelRecalibrateEstimatesForSampleTypeAtDateCompletion = objc.RegisterName("recalibrateEstimatesForSampleType:atDate:completion:")
-	_hKHealthStoreSelRelateWorkoutEffortSampleWithWorkoutActivityCompletion = objc.RegisterName("relateWorkoutEffortSample:withWorkout:activity:completion:")
-	_hKHealthStoreSelUnrelateWorkoutEffortSampleFromWorkoutActivityCompletion = objc.RegisterName("unrelateWorkoutEffortSample:fromWorkout:activity:completion:")
+	_hKHealthStoreSelHandleAuthorizationForExtensionWithCompletion                   = objc.RegisterName("handleAuthorizationForExtensionWithCompletion:")
+	_hKHealthStoreSelEarliestPermittedSampleDate                                     = objc.RegisterName("earliestPermittedSampleDate")
+	_hKHealthStoreSelSaveObjectWithCompletion                                        = objc.RegisterName("saveObject:withCompletion:")
+	_hKHealthStoreSelSaveObjectsWithCompletion                                       = objc.RegisterName("saveObjects:withCompletion:")
+	_hKHealthStoreSelDeleteObjectWithCompletion                                      = objc.RegisterName("deleteObject:withCompletion:")
+	_hKHealthStoreSelDeleteObjectsWithCompletion                                     = objc.RegisterName("deleteObjects:withCompletion:")
+	_hKHealthStoreSelDeleteObjectsOfTypePredicateWithCompletion                      = objc.RegisterName("deleteObjectsOfType:predicate:withCompletion:")
+	_hKHealthStoreSelExecuteQuery                                                    = objc.RegisterName("executeQuery:")
+	_hKHealthStoreSelStopQuery                                                       = objc.RegisterName("stopQuery:")
+	_hKHealthStoreSelSplitTotalEnergyStartDateEndDateResultsHandler                  = objc.RegisterName("splitTotalEnergy:startDate:endDate:resultsHandler:")
+	_hKHealthStoreSelDateOfBirthWithError                                            = objc.RegisterName("dateOfBirthWithError:")
+	_hKHealthStoreSelDateOfBirthComponentsWithError                                  = objc.RegisterName("dateOfBirthComponentsWithError:")
+	_hKHealthStoreSelBiologicalSexWithError                                          = objc.RegisterName("biologicalSexWithError:")
+	_hKHealthStoreSelBloodTypeWithError                                              = objc.RegisterName("bloodTypeWithError:")
+	_hKHealthStoreSelFitzpatrickSkinTypeWithError                                    = objc.RegisterName("fitzpatrickSkinTypeWithError:")
+	_hKHealthStoreSelWheelchairUseWithError                                          = objc.RegisterName("wheelchairUseWithError:")
+	_hKHealthStoreSelActivityMoveModeWithError                                       = objc.RegisterName("activityMoveModeWithError:")
+	_hKHealthStoreSelAddSamplesToWorkoutCompletion                                   = objc.RegisterName("addSamples:toWorkout:completion:")
+	_hKHealthStoreSelPauseWorkoutSession                                             = objc.RegisterName("pauseWorkoutSession:")
+	_hKHealthStoreSelResumeWorkoutSession                                            = objc.RegisterName("resumeWorkoutSession:")
+	_hKHealthStoreSelStartWatchAppWithWorkoutConfigurationCompletion                 = objc.RegisterName("startWatchAppWithWorkoutConfiguration:completion:")
+	_hKHealthStoreSelWorkoutSessionMirroringStartHandler                             = objc.RegisterName("workoutSessionMirroringStartHandler")
+	_hKHealthStoreSelSetWorkoutSessionMirroringStartHandler                          = objc.RegisterName("setWorkoutSessionMirroringStartHandler:")
+	_hKHealthStoreSelEnableBackgroundDeliveryForTypeFrequencyWithCompletion          = objc.RegisterName("enableBackgroundDeliveryForType:frequency:withCompletion:")
+	_hKHealthStoreSelDisableBackgroundDeliveryForTypeWithCompletion                  = objc.RegisterName("disableBackgroundDeliveryForType:withCompletion:")
+	_hKHealthStoreSelDisableAllBackgroundDeliveryWithCompletion                      = objc.RegisterName("disableAllBackgroundDeliveryWithCompletion:")
+	_hKHealthStoreSelPreferredUnitsForQuantityTypesCompletion                        = objc.RegisterName("preferredUnitsForQuantityTypes:completion:")
+	_hKHealthStoreSelRecalibrateEstimatesForSampleTypeAtDateCompletion               = objc.RegisterName("recalibrateEstimatesForSampleType:atDate:completion:")
+	_hKHealthStoreSelRelateWorkoutEffortSampleWithWorkoutActivityCompletion          = objc.RegisterName("relateWorkoutEffortSample:withWorkout:activity:completion:")
+	_hKHealthStoreSelUnrelateWorkoutEffortSampleFromWorkoutActivityCompletion        = objc.RegisterName("unrelateWorkoutEffortSample:fromWorkout:activity:completion:")
 )
 
 func HKHealthStoreFromID(id objc.ID) *HKHealthStore {
@@ -136,7 +136,9 @@ func (o *HKHealthStore) HandleAuthorizationForExtensionWithCompletion(completion
 // @method        earliestPermittedSampleDate @abstract      Samples prior to the earliestPermittedSampleDate cannot be saved or queried. @discussion    On some platforms, only samples with end dates newer than the value returned by earliestPermittedSampleDate may be saved or retrieved.
 func (o *HKHealthStore) EarliestPermittedSampleDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKHealthStoreSelEarliestPermittedSampleDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -231,7 +233,9 @@ func (o *HKHealthStore) SplitTotalEnergyStartDateEndDateResultsHandler(totalEner
 func (o *HKHealthStore) DateOfBirthWithError() (*foundation.NSDate, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKHealthStoreSelDateOfBirthWithError, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -242,7 +246,9 @@ func (o *HKHealthStore) DateOfBirthWithError() (*foundation.NSDate, error) {
 func (o *HKHealthStore) DateOfBirthComponentsWithError() (*foundation.NSDateComponents, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKHealthStoreSelDateOfBirthComponentsWithError, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -253,7 +259,9 @@ func (o *HKHealthStore) DateOfBirthComponentsWithError() (*foundation.NSDateComp
 func (o *HKHealthStore) BiologicalSexWithError() (*HKBiologicalSexObject, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKHealthStoreSelBiologicalSexWithError, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -264,7 +272,9 @@ func (o *HKHealthStore) BiologicalSexWithError() (*HKBiologicalSexObject, error)
 func (o *HKHealthStore) BloodTypeWithError() (*HKBloodTypeObject, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKHealthStoreSelBloodTypeWithError, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -275,7 +285,9 @@ func (o *HKHealthStore) BloodTypeWithError() (*HKBloodTypeObject, error) {
 func (o *HKHealthStore) FitzpatrickSkinTypeWithError() (*HKFitzpatrickSkinTypeObject, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKHealthStoreSelFitzpatrickSkinTypeWithError, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -286,7 +298,9 @@ func (o *HKHealthStore) FitzpatrickSkinTypeWithError() (*HKFitzpatrickSkinTypeOb
 func (o *HKHealthStore) WheelchairUseWithError() (*HKWheelchairUseObject, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKHealthStoreSelWheelchairUseWithError, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -297,7 +311,9 @@ func (o *HKHealthStore) WheelchairUseWithError() (*HKWheelchairUseObject, error)
 func (o *HKHealthStore) ActivityMoveModeWithError() (*HKActivityMoveModeObject, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKHealthStoreSelActivityMoveModeWithError, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -443,4 +459,3 @@ func (o *HKHealthStore) UnrelateWorkoutEffortSampleFromWorkoutActivityCompletion
 	}
 	o.Ptr().Send(_hKHealthStoreSelUnrelateWorkoutEffortSampleFromWorkoutActivityCompletion, sample.Ptr(), workout.Ptr(), activity.Ptr(), __block_completion)
 }
-

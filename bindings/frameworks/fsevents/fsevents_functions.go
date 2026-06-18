@@ -12,30 +12,30 @@ import (
 )
 
 var (
-	_fnFSEventStreamCopyDescription func(unsafe.Pointer) unsafe.Pointer
-	_fnFSEventStreamCopyPathsBeingWatched func(unsafe.Pointer) unsafe.Pointer
-	_fnFSEventStreamCreate func(unsafe.Pointer, unsafe.Pointer, *FSEventStreamContext, unsafe.Pointer, uint64, float64, uint) unsafe.Pointer
+	_fnFSEventStreamCopyDescription        func(unsafe.Pointer) unsafe.Pointer
+	_fnFSEventStreamCopyPathsBeingWatched  func(unsafe.Pointer) unsafe.Pointer
+	_fnFSEventStreamCreate                 func(unsafe.Pointer, unsafe.Pointer, *FSEventStreamContext, unsafe.Pointer, uint64, float64, uint) unsafe.Pointer
 	_fnFSEventStreamCreateRelativeToDevice func(unsafe.Pointer, unsafe.Pointer, *FSEventStreamContext, int, unsafe.Pointer, uint64, float64, uint) unsafe.Pointer
-	_fnFSEventStreamFlushAsync func(unsafe.Pointer) uint64
-	_fnFSEventStreamFlushSync func(unsafe.Pointer)
-	_fnFSEventStreamGetDeviceBeingWatched func(unsafe.Pointer) int
-	_fnFSEventStreamGetLatestEventId func(unsafe.Pointer) uint64
-	_fnFSEventStreamInvalidate func(unsafe.Pointer)
-	_fnFSEventStreamRelease func(unsafe.Pointer)
-	_fnFSEventStreamRetain func(unsafe.Pointer)
-// Deprecated: Use FSEventStreamSetDispatchQueue instead.
+	_fnFSEventStreamFlushAsync             func(unsafe.Pointer) uint64
+	_fnFSEventStreamFlushSync              func(unsafe.Pointer)
+	_fnFSEventStreamGetDeviceBeingWatched  func(unsafe.Pointer) int
+	_fnFSEventStreamGetLatestEventId       func(unsafe.Pointer) uint64
+	_fnFSEventStreamInvalidate             func(unsafe.Pointer)
+	_fnFSEventStreamRelease                func(unsafe.Pointer)
+	_fnFSEventStreamRetain                 func(unsafe.Pointer)
+	// Deprecated: Use FSEventStreamSetDispatchQueue instead.
 	_fnFSEventStreamScheduleWithRunLoop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnFSEventStreamSetDispatchQueue func(unsafe.Pointer, objc.ID)
-	_fnFSEventStreamSetExclusionPaths func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnFSEventStreamShow func(unsafe.Pointer)
-	_fnFSEventStreamStart func(unsafe.Pointer) uint8
-	_fnFSEventStreamStop func(unsafe.Pointer)
-// Deprecated: Use FSEventStreamSetDispatchQueue instead.
-	_fnFSEventStreamUnscheduleFromRunLoop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnFSEventsCopyUUIDForDevice func(int) unsafe.Pointer
-	_fnFSEventsGetCurrentEventId func() uint64
+	_fnFSEventStreamSetDispatchQueue    func(unsafe.Pointer, objc.ID)
+	_fnFSEventStreamSetExclusionPaths   func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnFSEventStreamShow                func(unsafe.Pointer)
+	_fnFSEventStreamStart               func(unsafe.Pointer) uint8
+	_fnFSEventStreamStop                func(unsafe.Pointer)
+	// Deprecated: Use FSEventStreamSetDispatchQueue instead.
+	_fnFSEventStreamUnscheduleFromRunLoop        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnFSEventsCopyUUIDForDevice                 func(int) unsafe.Pointer
+	_fnFSEventsGetCurrentEventId                 func() uint64
 	_fnFSEventsGetLastEventIdForDeviceBeforeTime func(int, float64) uint64
-	_fnFSEventsPurgeEventsForDeviceUpToEventId func(int, uint64) uint8
+	_fnFSEventsPurgeEventsForDeviceUpToEventId   func(int, uint64) uint8
 )
 
 func FSEventStreamCopyDescription(streamRef unsafe.Pointer) unsafe.Pointer {
@@ -127,4 +127,3 @@ func FSEventsGetLastEventIdForDeviceBeforeTime(dev int, time_ float64) uint64 {
 func FSEventsPurgeEventsForDeviceUpToEventId(dev int, eventId uint64) uint8 {
 	return _fnFSEventsPurgeEventsForDeviceUpToEventId(dev, eventId)
 }
-

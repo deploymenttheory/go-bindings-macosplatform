@@ -17,10 +17,10 @@ type PKInk struct {
 }
 
 var (
-	_clsPKInk = _objcClass("PKInk")
-	_pKInkSelInitWithInkTypeColor = objc.RegisterName("initWithInkType:color:")
-	_pKInkSelInkType = objc.RegisterName("inkType")
-	_pKInkSelColor = objc.RegisterName("color")
+	_clsPKInk                       = _objcClass("PKInk")
+	_pKInkSelInitWithInkTypeColor   = objc.RegisterName("initWithInkType:color:")
+	_pKInkSelInkType                = objc.RegisterName("inkType")
+	_pKInkSelColor                  = objc.RegisterName("color")
 	_pKInkSelRequiredContentVersion = objc.RegisterName("requiredContentVersion")
 )
 
@@ -36,20 +36,26 @@ func PKInkFromID(id objc.ID) *PKInk {
 
 func (o *PKInk) InitWithInkTypeColor(type_ *foundation.NSString, color *appkit.NSColor) *PKInk {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKInkSelInitWithInkTypeColor, type_.Ptr(), color.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKInkFromID(_ret)
 }
 
 // The type of ink, eg. pen, pencil...
 func (o *PKInk) InkType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKInkSelInkType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKInk) Color() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKInkSelColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -58,4 +64,3 @@ func (o *PKInk) RequiredContentVersion() PKContentVersion {
 	_ret := objc.Send[PKContentVersion](o.Ptr(), _pKInkSelRequiredContentVersion)
 	return _ret
 }
-

@@ -16,8 +16,8 @@ type NSPathComponentCell struct {
 }
 
 var (
-	_clsNSPathComponentCell = _objcClass("NSPathComponentCell")
-	_nSPathComponentCellSelURL = objc.RegisterName("URL")
+	_clsNSPathComponentCell       = _objcClass("NSPathComponentCell")
+	_nSPathComponentCellSelURL    = objc.RegisterName("URL")
 	_nSPathComponentCellSelSetURL = objc.RegisterName("setURL:")
 )
 
@@ -33,11 +33,12 @@ func NSPathComponentCellFromID(id objc.ID) *NSPathComponentCell {
 
 func (o *NSPathComponentCell) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathComponentCellSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *NSPathComponentCell) SetURL(uRL *foundation.NSURL) {
 	o.Ptr().Send(_nSPathComponentCellSelSetURL, uRL.Ptr())
 }
-

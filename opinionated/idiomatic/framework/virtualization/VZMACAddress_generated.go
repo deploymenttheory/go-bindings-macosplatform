@@ -98,4 +98,3 @@ type MACAddressable interface {
 }
 
 var _ MACAddressable = (*MACAddress)(nil)
-

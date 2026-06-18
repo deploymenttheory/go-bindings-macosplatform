@@ -16,7 +16,9 @@ type CNNSubPixelConvolutionDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MPSCNNSubPixelConvolutionDescriptor].
-func (x *CNNSubPixelConvolutionDescriptor) Unwrap() *raw.MPSCNNSubPixelConvolutionDescriptor { return x.inner }
+func (x *CNNSubPixelConvolutionDescriptor) Unwrap() *raw.MPSCNNSubPixelConvolutionDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -112,7 +114,9 @@ func (x *CNNSubPixelConvolutionDescriptor) SetSubPixelScaleFactor(subPixelScaleF
 	x.inner.SetSubPixelScaleFactor(subPixelScaleFactor)
 }
 
-func (x *CNNSubPixelConvolutionDescriptor) asCNNConvolutionDescriptor() *mpsneuralnetwork.MPSCNNConvolutionDescriptor { return &x.inner.MPSCNNConvolutionDescriptor }
+func (x *CNNSubPixelConvolutionDescriptor) asCNNConvolutionDescriptor() *mpsneuralnetwork.MPSCNNConvolutionDescriptor {
+	return &x.inner.MPSCNNConvolutionDescriptor
+}
 
 // CNNSubPixelConvolutionDescriptorable is the interface implemented by [CNNSubPixelConvolutionDescriptor], for mocking and DI.
 type CNNSubPixelConvolutionDescriptorable interface {
@@ -133,4 +137,3 @@ type CNNSubPixelConvolutionDescriptorable interface {
 }
 
 var _ CNNSubPixelConvolutionDescriptorable = (*CNNSubPixelConvolutionDescriptor)(nil)
-

@@ -34,4 +34,3 @@ func NetFSMountURLProbe(hostname unsafe.Pointer) unsafe.Pointer {
 func NetFSMountURLSync(url unsafe.Pointer, mountpath unsafe.Pointer, user unsafe.Pointer, passwd unsafe.Pointer, open_options unsafe.Pointer, mount_options unsafe.Pointer, mountpoints unsafe.Pointer) int {
 	return raw.NetFSMountURLSync(url, mountpath, user, passwd, open_options, mount_options, mountpoints)
 }
-

@@ -212,4 +212,3 @@ type Placemarkable interface {
 }
 
 var _ Placemarkable = (*Placemark)(nil)
-

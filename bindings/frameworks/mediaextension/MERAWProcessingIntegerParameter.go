@@ -16,18 +16,18 @@ type MERAWProcessingIntegerParameter struct {
 }
 
 var (
-	_clsMERAWProcessingIntegerParameter = _objcClass("MERAWProcessingIntegerParameter")
-	_mERAWProcessingIntegerParameterSelInitWithNameKeyDescriptionInitialValueMaximumMinimum = objc.RegisterName("initWithName:key:description:initialValue:maximum:minimum:")
-	_mERAWProcessingIntegerParameterSelInitWithNameKeyDescriptionInitialValueMaximumMinimumNeutralValue = objc.RegisterName("initWithName:key:description:initialValue:maximum:minimum:neutralValue:")
-	_mERAWProcessingIntegerParameterSelInitWithNameKeyDescriptionInitialValueMaximumMinimumCameraValue = objc.RegisterName("initWithName:key:description:initialValue:maximum:minimum:cameraValue:")
+	_clsMERAWProcessingIntegerParameter                                                                            = _objcClass("MERAWProcessingIntegerParameter")
+	_mERAWProcessingIntegerParameterSelInitWithNameKeyDescriptionInitialValueMaximumMinimum                        = objc.RegisterName("initWithName:key:description:initialValue:maximum:minimum:")
+	_mERAWProcessingIntegerParameterSelInitWithNameKeyDescriptionInitialValueMaximumMinimumNeutralValue            = objc.RegisterName("initWithName:key:description:initialValue:maximum:minimum:neutralValue:")
+	_mERAWProcessingIntegerParameterSelInitWithNameKeyDescriptionInitialValueMaximumMinimumCameraValue             = objc.RegisterName("initWithName:key:description:initialValue:maximum:minimum:cameraValue:")
 	_mERAWProcessingIntegerParameterSelInitWithNameKeyDescriptionInitialValueMaximumMinimumNeutralValueCameraValue = objc.RegisterName("initWithName:key:description:initialValue:maximum:minimum:neutralValue:cameraValue:")
-	_mERAWProcessingIntegerParameterSelHasNeutralValue = objc.RegisterName("hasNeutralValue:")
-	_mERAWProcessingIntegerParameterSelHasCameraValue = objc.RegisterName("hasCameraValue:")
-	_mERAWProcessingIntegerParameterSelMaximumValue = objc.RegisterName("maximumValue")
-	_mERAWProcessingIntegerParameterSelMinimumValue = objc.RegisterName("minimumValue")
-	_mERAWProcessingIntegerParameterSelInitialValue = objc.RegisterName("initialValue")
-	_mERAWProcessingIntegerParameterSelCurrentValue = objc.RegisterName("currentValue")
-	_mERAWProcessingIntegerParameterSelSetCurrentValue = objc.RegisterName("setCurrentValue:")
+	_mERAWProcessingIntegerParameterSelHasNeutralValue                                                             = objc.RegisterName("hasNeutralValue:")
+	_mERAWProcessingIntegerParameterSelHasCameraValue                                                              = objc.RegisterName("hasCameraValue:")
+	_mERAWProcessingIntegerParameterSelMaximumValue                                                                = objc.RegisterName("maximumValue")
+	_mERAWProcessingIntegerParameterSelMinimumValue                                                                = objc.RegisterName("minimumValue")
+	_mERAWProcessingIntegerParameterSelInitialValue                                                                = objc.RegisterName("initialValue")
+	_mERAWProcessingIntegerParameterSelCurrentValue                                                                = objc.RegisterName("currentValue")
+	_mERAWProcessingIntegerParameterSelSetCurrentValue                                                             = objc.RegisterName("setCurrentValue:")
 )
 
 func MERAWProcessingIntegerParameterFromID(id objc.ID) *MERAWProcessingIntegerParameter {
@@ -42,25 +42,33 @@ func MERAWProcessingIntegerParameterFromID(id objc.ID) *MERAWProcessingIntegerPa
 
 func (o *MERAWProcessingIntegerParameter) InitWithNameKeyDescriptionInitialValueMaximumMinimum(name *foundation.NSString, key *foundation.NSString, description *foundation.NSString, initialValue int, maximum int, minimum int) *MERAWProcessingIntegerParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mERAWProcessingIntegerParameterSelInitWithNameKeyDescriptionInitialValueMaximumMinimum, name.Ptr(), key.Ptr(), description.Ptr(), initialValue, maximum, minimum)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MERAWProcessingIntegerParameterFromID(_ret)
 }
 
 func (o *MERAWProcessingIntegerParameter) InitWithNameKeyDescriptionInitialValueMaximumMinimumNeutralValue(name *foundation.NSString, key *foundation.NSString, description *foundation.NSString, initialValue int, maximum int, minimum int, neutralValue int) *MERAWProcessingIntegerParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mERAWProcessingIntegerParameterSelInitWithNameKeyDescriptionInitialValueMaximumMinimumNeutralValue, name.Ptr(), key.Ptr(), description.Ptr(), initialValue, maximum, minimum, neutralValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MERAWProcessingIntegerParameterFromID(_ret)
 }
 
 func (o *MERAWProcessingIntegerParameter) InitWithNameKeyDescriptionInitialValueMaximumMinimumCameraValue(name *foundation.NSString, key *foundation.NSString, description *foundation.NSString, initialValue int, maximum int, minimum int, cameraValue int) *MERAWProcessingIntegerParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mERAWProcessingIntegerParameterSelInitWithNameKeyDescriptionInitialValueMaximumMinimumCameraValue, name.Ptr(), key.Ptr(), description.Ptr(), initialValue, maximum, minimum, cameraValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MERAWProcessingIntegerParameterFromID(_ret)
 }
 
 func (o *MERAWProcessingIntegerParameter) InitWithNameKeyDescriptionInitialValueMaximumMinimumNeutralValueCameraValue(name *foundation.NSString, key *foundation.NSString, description *foundation.NSString, initialValue int, maximum int, minimum int, neutralValue int, cameraValue int) *MERAWProcessingIntegerParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mERAWProcessingIntegerParameterSelInitWithNameKeyDescriptionInitialValueMaximumMinimumNeutralValueCameraValue, name.Ptr(), key.Ptr(), description.Ptr(), initialValue, maximum, minimum, neutralValue, cameraValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MERAWProcessingIntegerParameterFromID(_ret)
 }
 
@@ -103,4 +111,3 @@ func (o *MERAWProcessingIntegerParameter) CurrentValue() int {
 func (o *MERAWProcessingIntegerParameter) SetCurrentValue(currentValue int) {
 	o.Ptr().Send(_mERAWProcessingIntegerParameterSelSetCurrentValue, currentValue)
 }
-

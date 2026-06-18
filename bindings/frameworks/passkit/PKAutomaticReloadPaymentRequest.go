@@ -16,18 +16,18 @@ type PKAutomaticReloadPaymentRequest struct {
 }
 
 var (
-	_clsPKAutomaticReloadPaymentRequest = _objcClass("PKAutomaticReloadPaymentRequest")
+	_clsPKAutomaticReloadPaymentRequest                                                              = _objcClass("PKAutomaticReloadPaymentRequest")
 	_pKAutomaticReloadPaymentRequestSelInitWithPaymentDescriptionAutomaticReloadBillingManagementURL = objc.RegisterName("initWithPaymentDescription:automaticReloadBilling:managementURL:")
-	_pKAutomaticReloadPaymentRequestSelPaymentDescription = objc.RegisterName("paymentDescription")
-	_pKAutomaticReloadPaymentRequestSelSetPaymentDescription = objc.RegisterName("setPaymentDescription:")
-	_pKAutomaticReloadPaymentRequestSelAutomaticReloadBilling = objc.RegisterName("automaticReloadBilling")
-	_pKAutomaticReloadPaymentRequestSelSetAutomaticReloadBilling = objc.RegisterName("setAutomaticReloadBilling:")
-	_pKAutomaticReloadPaymentRequestSelBillingAgreement = objc.RegisterName("billingAgreement")
-	_pKAutomaticReloadPaymentRequestSelSetBillingAgreement = objc.RegisterName("setBillingAgreement:")
-	_pKAutomaticReloadPaymentRequestSelManagementURL = objc.RegisterName("managementURL")
-	_pKAutomaticReloadPaymentRequestSelSetManagementURL = objc.RegisterName("setManagementURL:")
-	_pKAutomaticReloadPaymentRequestSelTokenNotificationURL = objc.RegisterName("tokenNotificationURL")
-	_pKAutomaticReloadPaymentRequestSelSetTokenNotificationURL = objc.RegisterName("setTokenNotificationURL:")
+	_pKAutomaticReloadPaymentRequestSelPaymentDescription                                            = objc.RegisterName("paymentDescription")
+	_pKAutomaticReloadPaymentRequestSelSetPaymentDescription                                         = objc.RegisterName("setPaymentDescription:")
+	_pKAutomaticReloadPaymentRequestSelAutomaticReloadBilling                                        = objc.RegisterName("automaticReloadBilling")
+	_pKAutomaticReloadPaymentRequestSelSetAutomaticReloadBilling                                     = objc.RegisterName("setAutomaticReloadBilling:")
+	_pKAutomaticReloadPaymentRequestSelBillingAgreement                                              = objc.RegisterName("billingAgreement")
+	_pKAutomaticReloadPaymentRequestSelSetBillingAgreement                                           = objc.RegisterName("setBillingAgreement:")
+	_pKAutomaticReloadPaymentRequestSelManagementURL                                                 = objc.RegisterName("managementURL")
+	_pKAutomaticReloadPaymentRequestSelSetManagementURL                                              = objc.RegisterName("setManagementURL:")
+	_pKAutomaticReloadPaymentRequestSelTokenNotificationURL                                          = objc.RegisterName("tokenNotificationURL")
+	_pKAutomaticReloadPaymentRequestSelSetTokenNotificationURL                                       = objc.RegisterName("setTokenNotificationURL:")
 )
 
 func PKAutomaticReloadPaymentRequestFromID(id objc.ID) *PKAutomaticReloadPaymentRequest {
@@ -42,13 +42,17 @@ func PKAutomaticReloadPaymentRequestFromID(id objc.ID) *PKAutomaticReloadPayment
 
 func (o *PKAutomaticReloadPaymentRequest) InitWithPaymentDescriptionAutomaticReloadBillingManagementURL(paymentDescription *foundation.NSString, automaticReloadBilling *PKAutomaticReloadPaymentSummaryItem, managementURL *foundation.NSURL) *PKAutomaticReloadPaymentRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAutomaticReloadPaymentRequestSelInitWithPaymentDescriptionAutomaticReloadBillingManagementURL, paymentDescription.Ptr(), automaticReloadBilling.Ptr(), managementURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKAutomaticReloadPaymentRequestFromID(_ret)
 }
 
 func (o *PKAutomaticReloadPaymentRequest) PaymentDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAutomaticReloadPaymentRequestSelPaymentDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -58,7 +62,9 @@ func (o *PKAutomaticReloadPaymentRequest) SetPaymentDescription(paymentDescripti
 
 func (o *PKAutomaticReloadPaymentRequest) AutomaticReloadBilling() *PKAutomaticReloadPaymentSummaryItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAutomaticReloadPaymentRequestSelAutomaticReloadBilling)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKAutomaticReloadPaymentSummaryItemFromID(_ret)
 }
 
@@ -68,7 +74,9 @@ func (o *PKAutomaticReloadPaymentRequest) SetAutomaticReloadBilling(automaticRel
 
 func (o *PKAutomaticReloadPaymentRequest) BillingAgreement() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAutomaticReloadPaymentRequestSelBillingAgreement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -78,7 +86,9 @@ func (o *PKAutomaticReloadPaymentRequest) SetBillingAgreement(billingAgreement *
 
 func (o *PKAutomaticReloadPaymentRequest) ManagementURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAutomaticReloadPaymentRequestSelManagementURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -88,11 +98,12 @@ func (o *PKAutomaticReloadPaymentRequest) SetManagementURL(managementURL *founda
 
 func (o *PKAutomaticReloadPaymentRequest) TokenNotificationURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAutomaticReloadPaymentRequestSelTokenNotificationURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *PKAutomaticReloadPaymentRequest) SetTokenNotificationURL(tokenNotificationURL *foundation.NSURL) {
 	o.Ptr().Send(_pKAutomaticReloadPaymentRequestSelSetTokenNotificationURL, tokenNotificationURL.Ptr())
 }
-

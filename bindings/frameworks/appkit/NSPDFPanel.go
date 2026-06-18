@@ -16,15 +16,15 @@ type NSPDFPanel struct {
 }
 
 var (
-	_clsNSPDFPanel = _objcClass("NSPDFPanel")
-	_nSPDFPanelSelPanel = objc.RegisterName("panel")
+	_clsNSPDFPanel                                                     = _objcClass("NSPDFPanel")
+	_nSPDFPanelSelPanel                                                = objc.RegisterName("panel")
 	_nSPDFPanelSelBeginSheetWithPDFInfoModalForWindowCompletionHandler = objc.RegisterName("beginSheetWithPDFInfo:modalForWindow:completionHandler:")
-	_nSPDFPanelSelAccessoryController = objc.RegisterName("accessoryController")
-	_nSPDFPanelSelSetAccessoryController = objc.RegisterName("setAccessoryController:")
-	_nSPDFPanelSelOptions = objc.RegisterName("options")
-	_nSPDFPanelSelSetOptions = objc.RegisterName("setOptions:")
-	_nSPDFPanelSelDefaultFileName = objc.RegisterName("defaultFileName")
-	_nSPDFPanelSelSetDefaultFileName = objc.RegisterName("setDefaultFileName:")
+	_nSPDFPanelSelAccessoryController                                  = objc.RegisterName("accessoryController")
+	_nSPDFPanelSelSetAccessoryController                               = objc.RegisterName("setAccessoryController:")
+	_nSPDFPanelSelOptions                                              = objc.RegisterName("options")
+	_nSPDFPanelSelSetOptions                                           = objc.RegisterName("setOptions:")
+	_nSPDFPanelSelDefaultFileName                                      = objc.RegisterName("defaultFileName")
+	_nSPDFPanelSelSetDefaultFileName                                   = objc.RegisterName("setDefaultFileName:")
 )
 
 func NSPDFPanelFromID(id objc.ID) *NSPDFPanel {
@@ -39,7 +39,9 @@ func NSPDFPanelFromID(id objc.ID) *NSPDFPanel {
 
 func NSPDFPanelPanel() *NSPDFPanel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPDFPanel), _nSPDFPanelSelPanel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPDFPanelFromID(_ret)
 }
 
@@ -56,7 +58,9 @@ func (o *NSPDFPanel) BeginSheetWithPDFInfoModalForWindowCompletionHandler(pdfInf
 
 func (o *NSPDFPanel) AccessoryController() *NSViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPDFPanelSelAccessoryController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewControllerFromID(_ret)
 }
 
@@ -75,11 +79,12 @@ func (o *NSPDFPanel) SetOptions(options NSPDFPanelOptions) {
 
 func (o *NSPDFPanel) DefaultFileName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPDFPanelSelDefaultFileName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSPDFPanel) SetDefaultFileName(defaultFileName *foundation.NSString) {
 	o.Ptr().Send(_nSPDFPanelSelSetDefaultFileName, defaultFileName.Ptr())
 }
-

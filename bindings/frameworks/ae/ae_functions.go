@@ -10,138 +10,138 @@ import (
 )
 
 var (
-	_fnAECallObjectAccessor func(uint, *AEDesc, uint, uint, *AEDesc, *AEDesc) int16
-	_fnAECheckIsRecord func(*AEDesc) uint8
-	_fnAECoerceDesc func(*AEDesc, uint, *AEDesc) int16
-	_fnAECoercePtr func(uint, unsafe.Pointer, int, uint, *AEDesc) int16
-	_fnAECompareDesc func(*AEDesc, *AEDesc, *uint8) int
-	_fnAECountItems func(*AEDesc, *int64) int16
-	_fnAECreateAppleEvent func(uint, uint, *AEDesc, int16, int, *AEDesc) int16
-	_fnAECreateDesc func(uint, unsafe.Pointer, int, *AEDesc) int16
-	_fnAECreateDescFromExternalPtr func(uint, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, *AEDesc) int
-	_fnAECreateList func(unsafe.Pointer, int, uint8, *AEDesc) int16
+	_fnAECallObjectAccessor          func(uint, *AEDesc, uint, uint, *AEDesc, *AEDesc) int16
+	_fnAECheckIsRecord               func(*AEDesc) uint8
+	_fnAECoerceDesc                  func(*AEDesc, uint, *AEDesc) int16
+	_fnAECoercePtr                   func(uint, unsafe.Pointer, int, uint, *AEDesc) int16
+	_fnAECompareDesc                 func(*AEDesc, *AEDesc, *uint8) int
+	_fnAECountItems                  func(*AEDesc, *int64) int16
+	_fnAECreateAppleEvent            func(uint, uint, *AEDesc, int16, int, *AEDesc) int16
+	_fnAECreateDesc                  func(uint, unsafe.Pointer, int, *AEDesc) int16
+	_fnAECreateDescFromExternalPtr   func(uint, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, *AEDesc) int
+	_fnAECreateList                  func(unsafe.Pointer, int, uint8, *AEDesc) int16
 	_fnAECreateRemoteProcessResolver func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnAEDecodeMessage func(unsafe.Pointer, *AEDesc, *AEDesc) int
-	_fnAEDeleteItem func(*AEDesc, int) int16
-	_fnAEDeleteParam func(*AEDesc, uint) int16
+	_fnAEDecodeMessage               func(unsafe.Pointer, *AEDesc, *AEDesc) int
+	_fnAEDeleteItem                  func(*AEDesc, int) int16
+	_fnAEDeleteParam                 func(*AEDesc, uint) int16
 	// Determines whether the current application is able to send an AppleEvent with the given eventClass and eventID to the application described as targetAddressDesc. Mac OS 10.14 and later impose additional requirements on applications when they send AppleEvents to other applications in order to insure that users are aware of and consent to allowing such control or information exchange.  Generally this involves the user being prompted in a secure fashion the first time an application attempts to send an AppleEvent to another application. If the user consents then this application can send events to the target.  If the user does not consent then any future attempts to send AppleEvents will result in a failure with errAEEventNotPermitted being returned. Certain AppleEvents are allowed to be sent without prompting the user.  Pass typeWildCard for the eventClass and eventID to determine if every event is allowed to be sent from this application to the target. Applications can determine, without sending an AppleEvent to a target application, whether they are allowed to send AppleEvents to the target with this function.  If askUserIfNeeded is true, and this application does not yet have permission to send AppleEvents to the target, then the user will be asked if permission can be granted; if askUserIfNeeded is false and permission has not been granted, then errAEEventWouldRequireUserConsent will be returned. The target AEAddressDesc must refer to an already running application. @subsection macOS Threading Thread safe since version 10.14.  Do not call this function on your main thread because it may take arbitrarily long to return if the user needs to be prompted for consent. @param target A pointer to an address descriptor. Before calling AEDeterminePermissionToAutomateTarget, you set the descriptor to identify the target application for the Apple event.  The target address descriptor must refer to a running application.  If the target application is on another machine, then Remote AppleEvents must be enabled on that machine for the user. @param theAEEventClass The event class of the Apple event to determine permission for. @param theAEEventID The event ID of the Apple event to determine permission for. @param askUserIfNeeded a Boolean; if true, and if this application does not yet have permission to send events to the target application, then prompt the user to obtain permission.  If false, do not prompt the user. @returns If the current application is permitted to send the given AppleEvent to the target, then noErr will be returned.  If the current application is not permitted to send the event, errAEEventNotPermitted will be returned.  If the target application is not running, then procNotFound will be returned.  If askUserIfNeeded is false, and this application is not yet permitted to send AppleEvents to the target, then errAEEventWouldRequireUserConsent will be returned.
-	_fnAEDeterminePermissionToAutomateTarget func(*AEDesc, uint, uint, uint8) int
-	_fnAEDisposeDesc func(*AEDesc) int16
-	_fnAEDisposeRemoteProcessResolver func(unsafe.Pointer)
-	_fnAEDisposeToken func(*AEDesc) int16
-	_fnAEDuplicateDesc func(*AEDesc, *AEDesc) int16
-	_fnAEFlattenDesc func(*AEDesc, string, int, *int) int
-	_fnAEGetArray func(*AEDesc, int8, unsafe.Pointer, int, *uint, *int, *int64) int16
-	_fnAEGetAttributeDesc func(*AEDesc, uint, uint, *AEDesc) int16
-	_fnAEGetAttributePtr func(*AEDesc, uint, uint, *uint, unsafe.Pointer, int, *int) int16
-	_fnAEGetCoercionHandler func(uint, uint, unsafe.Pointer, unsafe.Pointer, *uint8, uint8) int16
-	_fnAEGetDescData func(*AEDesc, unsafe.Pointer, int) int16
-	_fnAEGetDescDataRange func(*AEDesc, unsafe.Pointer, int, int) int
-	_fnAEGetDescDataSize func(*AEDesc) int
-	_fnAEGetEventHandler func(uint, uint, unsafe.Pointer, unsafe.Pointer, uint8) int16
-	_fnAEGetNthDesc func(*AEDesc, int, uint, *uint, *AEDesc) int16
-	_fnAEGetNthPtr func(*AEDesc, int, uint, *uint, *uint, unsafe.Pointer, int, *int) int16
-	_fnAEGetObjectAccessor func(uint, uint, unsafe.Pointer, unsafe.Pointer, uint8) int16
-	_fnAEGetParamDesc func(*AEDesc, uint, uint, *AEDesc) int16
-	_fnAEGetParamPtr func(*AEDesc, uint, uint, *uint, unsafe.Pointer, int, *int) int16
-	_fnAEGetRegisteredMachPort func() uint
-	_fnAEGetSpecialHandler func(uint, unsafe.Pointer, uint8) int16
-	_fnAEInitializeDesc func(*AEDesc)
-	_fnAEInstallCoercionHandler func(uint, uint, unsafe.Pointer, unsafe.Pointer, uint8, uint8) int16
-	_fnAEInstallEventHandler func(uint, uint, unsafe.Pointer, unsafe.Pointer, uint8) int16
-	_fnAEInstallObjectAccessor func(uint, uint, unsafe.Pointer, unsafe.Pointer, uint8) int16
-	_fnAEInstallSpecialHandler func(uint, unsafe.Pointer, uint8) int16
-	_fnAEManagerInfo func(uint, *int64) int16
-	_fnAEObjectInit func() int16
-	_fnAEPrintDescToHandle func(*AEDesc, **string) int
-	_fnAEProcessMessage func(unsafe.Pointer) int
-	_fnAEPutArray func(*AEDesc, int8, unsafe.Pointer, uint, int, int) int16
-	_fnAEPutAttributeDesc func(*AEDesc, uint, *AEDesc) int16
-	_fnAEPutAttributePtr func(*AEDesc, uint, uint, unsafe.Pointer, int) int16
-	_fnAEPutDesc func(*AEDesc, int, *AEDesc) int16
-	_fnAEPutParamDesc func(*AEDesc, uint, *AEDesc) int16
-	_fnAEPutParamPtr func(*AEDesc, uint, uint, unsafe.Pointer, int) int16
-	_fnAEPutPtr func(*AEDesc, int, uint, unsafe.Pointer, int) int16
-	_fnAERemoteProcessResolverGetProcesses func(unsafe.Pointer, *corefoundation.CFStreamError) unsafe.Pointer
+	_fnAEDeterminePermissionToAutomateTarget      func(*AEDesc, uint, uint, uint8) int
+	_fnAEDisposeDesc                              func(*AEDesc) int16
+	_fnAEDisposeRemoteProcessResolver             func(unsafe.Pointer)
+	_fnAEDisposeToken                             func(*AEDesc) int16
+	_fnAEDuplicateDesc                            func(*AEDesc, *AEDesc) int16
+	_fnAEFlattenDesc                              func(*AEDesc, string, int, *int) int
+	_fnAEGetArray                                 func(*AEDesc, int8, unsafe.Pointer, int, *uint, *int, *int64) int16
+	_fnAEGetAttributeDesc                         func(*AEDesc, uint, uint, *AEDesc) int16
+	_fnAEGetAttributePtr                          func(*AEDesc, uint, uint, *uint, unsafe.Pointer, int, *int) int16
+	_fnAEGetCoercionHandler                       func(uint, uint, unsafe.Pointer, unsafe.Pointer, *uint8, uint8) int16
+	_fnAEGetDescData                              func(*AEDesc, unsafe.Pointer, int) int16
+	_fnAEGetDescDataRange                         func(*AEDesc, unsafe.Pointer, int, int) int
+	_fnAEGetDescDataSize                          func(*AEDesc) int
+	_fnAEGetEventHandler                          func(uint, uint, unsafe.Pointer, unsafe.Pointer, uint8) int16
+	_fnAEGetNthDesc                               func(*AEDesc, int, uint, *uint, *AEDesc) int16
+	_fnAEGetNthPtr                                func(*AEDesc, int, uint, *uint, *uint, unsafe.Pointer, int, *int) int16
+	_fnAEGetObjectAccessor                        func(uint, uint, unsafe.Pointer, unsafe.Pointer, uint8) int16
+	_fnAEGetParamDesc                             func(*AEDesc, uint, uint, *AEDesc) int16
+	_fnAEGetParamPtr                              func(*AEDesc, uint, uint, *uint, unsafe.Pointer, int, *int) int16
+	_fnAEGetRegisteredMachPort                    func() uint
+	_fnAEGetSpecialHandler                        func(uint, unsafe.Pointer, uint8) int16
+	_fnAEInitializeDesc                           func(*AEDesc)
+	_fnAEInstallCoercionHandler                   func(uint, uint, unsafe.Pointer, unsafe.Pointer, uint8, uint8) int16
+	_fnAEInstallEventHandler                      func(uint, uint, unsafe.Pointer, unsafe.Pointer, uint8) int16
+	_fnAEInstallObjectAccessor                    func(uint, uint, unsafe.Pointer, unsafe.Pointer, uint8) int16
+	_fnAEInstallSpecialHandler                    func(uint, unsafe.Pointer, uint8) int16
+	_fnAEManagerInfo                              func(uint, *int64) int16
+	_fnAEObjectInit                               func() int16
+	_fnAEPrintDescToHandle                        func(*AEDesc, **string) int
+	_fnAEProcessMessage                           func(unsafe.Pointer) int
+	_fnAEPutArray                                 func(*AEDesc, int8, unsafe.Pointer, uint, int, int) int16
+	_fnAEPutAttributeDesc                         func(*AEDesc, uint, *AEDesc) int16
+	_fnAEPutAttributePtr                          func(*AEDesc, uint, uint, unsafe.Pointer, int) int16
+	_fnAEPutDesc                                  func(*AEDesc, int, *AEDesc) int16
+	_fnAEPutParamDesc                             func(*AEDesc, uint, *AEDesc) int16
+	_fnAEPutParamPtr                              func(*AEDesc, uint, uint, unsafe.Pointer, int) int16
+	_fnAEPutPtr                                   func(*AEDesc, int, uint, unsafe.Pointer, int) int16
+	_fnAERemoteProcessResolverGetProcesses        func(unsafe.Pointer, *corefoundation.CFStreamError) unsafe.Pointer
 	_fnAERemoteProcessResolverScheduleWithRunLoop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *AERemoteProcessResolverContext)
-	_fnAERemoveCoercionHandler func(uint, uint, unsafe.Pointer, uint8) int16
-	_fnAERemoveEventHandler func(uint, uint, unsafe.Pointer, uint8) int16
-	_fnAERemoveObjectAccessor func(uint, uint, unsafe.Pointer, uint8) int16
-	_fnAERemoveSpecialHandler func(uint, unsafe.Pointer, uint8) int16
-	_fnAEReplaceDescData func(uint, unsafe.Pointer, int, *AEDesc) int16
-	_fnAEResolve func(*AEDesc, int16, *AEDesc) int16
-	_fnAESendMessage func(*AEDesc, *AEDesc, int, int) int
-	_fnAESetObjectCallbacks func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
-	_fnAESizeOfAttribute func(*AEDesc, uint, *uint, *int) int16
-	_fnAESizeOfFlattenedDesc func(*AEDesc) int
-	_fnAESizeOfNthItem func(*AEDesc, int, *uint, *int) int16
-	_fnAESizeOfParam func(*AEDesc, uint, *uint, *int) int16
-	_fnAEStreamClose func(unsafe.Pointer, *AEDesc) int
-	_fnAEStreamCloseDesc func(unsafe.Pointer) int
-	_fnAEStreamCloseList func(unsafe.Pointer) int
-	_fnAEStreamCloseRecord func(unsafe.Pointer) int
-	_fnAEStreamCreateEvent func(uint, uint, uint, unsafe.Pointer, int, int16, int) unsafe.Pointer
-	_fnAEStreamOpen func() unsafe.Pointer
-	_fnAEStreamOpenDesc func(unsafe.Pointer, uint) int
-	_fnAEStreamOpenEvent func(*AEDesc) unsafe.Pointer
-	_fnAEStreamOpenKeyDesc func(unsafe.Pointer, uint, uint) int
-	_fnAEStreamOpenList func(unsafe.Pointer) int
-	_fnAEStreamOpenRecord func(unsafe.Pointer, uint) int
-	_fnAEStreamOptionalParam func(unsafe.Pointer, uint) int
-	_fnAEStreamSetRecordType func(unsafe.Pointer, uint) int
-	_fnAEStreamWriteAEDesc func(unsafe.Pointer, *AEDesc) int
-	_fnAEStreamWriteData func(unsafe.Pointer, unsafe.Pointer, int) int
-	_fnAEStreamWriteDesc func(unsafe.Pointer, uint, unsafe.Pointer, int) int
-	_fnAEStreamWriteKey func(unsafe.Pointer, uint) int
-	_fnAEStreamWriteKeyDesc func(unsafe.Pointer, uint, uint, unsafe.Pointer, int) int
-// Deprecated: since macOS 11.0.
+	_fnAERemoveCoercionHandler                    func(uint, uint, unsafe.Pointer, uint8) int16
+	_fnAERemoveEventHandler                       func(uint, uint, unsafe.Pointer, uint8) int16
+	_fnAERemoveObjectAccessor                     func(uint, uint, unsafe.Pointer, uint8) int16
+	_fnAERemoveSpecialHandler                     func(uint, unsafe.Pointer, uint8) int16
+	_fnAEReplaceDescData                          func(uint, unsafe.Pointer, int, *AEDesc) int16
+	_fnAEResolve                                  func(*AEDesc, int16, *AEDesc) int16
+	_fnAESendMessage                              func(*AEDesc, *AEDesc, int, int) int
+	_fnAESetObjectCallbacks                       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
+	_fnAESizeOfAttribute                          func(*AEDesc, uint, *uint, *int) int16
+	_fnAESizeOfFlattenedDesc                      func(*AEDesc) int
+	_fnAESizeOfNthItem                            func(*AEDesc, int, *uint, *int) int16
+	_fnAESizeOfParam                              func(*AEDesc, uint, *uint, *int) int16
+	_fnAEStreamClose                              func(unsafe.Pointer, *AEDesc) int
+	_fnAEStreamCloseDesc                          func(unsafe.Pointer) int
+	_fnAEStreamCloseList                          func(unsafe.Pointer) int
+	_fnAEStreamCloseRecord                        func(unsafe.Pointer) int
+	_fnAEStreamCreateEvent                        func(uint, uint, uint, unsafe.Pointer, int, int16, int) unsafe.Pointer
+	_fnAEStreamOpen                               func() unsafe.Pointer
+	_fnAEStreamOpenDesc                           func(unsafe.Pointer, uint) int
+	_fnAEStreamOpenEvent                          func(*AEDesc) unsafe.Pointer
+	_fnAEStreamOpenKeyDesc                        func(unsafe.Pointer, uint, uint) int
+	_fnAEStreamOpenList                           func(unsafe.Pointer) int
+	_fnAEStreamOpenRecord                         func(unsafe.Pointer, uint) int
+	_fnAEStreamOptionalParam                      func(unsafe.Pointer, uint) int
+	_fnAEStreamSetRecordType                      func(unsafe.Pointer, uint) int
+	_fnAEStreamWriteAEDesc                        func(unsafe.Pointer, *AEDesc) int
+	_fnAEStreamWriteData                          func(unsafe.Pointer, unsafe.Pointer, int) int
+	_fnAEStreamWriteDesc                          func(unsafe.Pointer, uint, unsafe.Pointer, int) int
+	_fnAEStreamWriteKey                           func(unsafe.Pointer, uint) int
+	_fnAEStreamWriteKeyDesc                       func(unsafe.Pointer, uint, uint, unsafe.Pointer, int) int
+	// Deprecated: since macOS 11.0.
 	_fnAEUnflattenDesc func(unsafe.Pointer, *AEDesc) int
 	// Allocates an AEDesc (given a Null Desc) constructed from a flattened data buffer produced by calling AEFlattenDesc. @param buffer A pointer to data produced by `AEFlattenDesc` @param bufferLen The size of the data referenced by `buffer` @param result On successful completion, a pointer to an `AEDesc*` containing the unflattened descriptor. The caller is responsible for disposing of it. @return `noErr` on success, `paramErr` if the buffer could not be parsed, or `memFullErr` for irrational memory sizes.
-	_fnAEUnflattenDescFromBytes func(unsafe.Pointer, uint, *AEDesc) int
-	_fnCreateCompDescriptor func(uint, *AEDesc, *AEDesc, uint8, *AEDesc) int16
-	_fnCreateLogicalDescriptor func(*AEDesc, uint, uint8, *AEDesc) int16
-	_fnCreateObjSpecifier func(uint, *AEDesc, uint, *AEDesc, uint8, *AEDesc) int16
-	_fnCreateOffsetDescriptor func(int, *AEDesc) int16
-	_fnCreateRangeDescriptor func(*AEDesc, *AEDesc, uint8, *AEDesc) int16
-	_fnDisposeAECoerceDescUPP func(unsafe.Pointer)
-	_fnDisposeAECoercePtrUPP func(unsafe.Pointer)
+	_fnAEUnflattenDescFromBytes    func(unsafe.Pointer, uint, *AEDesc) int
+	_fnCreateCompDescriptor        func(uint, *AEDesc, *AEDesc, uint8, *AEDesc) int16
+	_fnCreateLogicalDescriptor     func(*AEDesc, uint, uint8, *AEDesc) int16
+	_fnCreateObjSpecifier          func(uint, *AEDesc, uint, *AEDesc, uint8, *AEDesc) int16
+	_fnCreateOffsetDescriptor      func(int, *AEDesc) int16
+	_fnCreateRangeDescriptor       func(*AEDesc, *AEDesc, uint8, *AEDesc) int16
+	_fnDisposeAECoerceDescUPP      func(unsafe.Pointer)
+	_fnDisposeAECoercePtrUPP       func(unsafe.Pointer)
 	_fnDisposeAEDisposeExternalUPP func(unsafe.Pointer)
-	_fnDisposeAEEventHandlerUPP func(unsafe.Pointer)
-	_fnDisposeOSLAccessorUPP func(unsafe.Pointer)
-	_fnDisposeOSLAdjustMarksUPP func(unsafe.Pointer)
-	_fnDisposeOSLCompareUPP func(unsafe.Pointer)
-	_fnDisposeOSLCountUPP func(unsafe.Pointer)
-	_fnDisposeOSLDisposeTokenUPP func(unsafe.Pointer)
-	_fnDisposeOSLGetErrDescUPP func(unsafe.Pointer)
-	_fnDisposeOSLGetMarkTokenUPP func(unsafe.Pointer)
-	_fnDisposeOSLMarkUPP func(unsafe.Pointer)
-	_fnInvokeAECoerceDescUPP func(*AEDesc, uint, unsafe.Pointer, *AEDesc, unsafe.Pointer) int16
-	_fnInvokeAECoercePtrUPP func(uint, unsafe.Pointer, int, uint, unsafe.Pointer, *AEDesc, unsafe.Pointer) int16
-	_fnInvokeAEDisposeExternalUPP func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer)
-	_fnInvokeAEEventHandlerUPP func(*AEDesc, *AEDesc, unsafe.Pointer, unsafe.Pointer) int16
-	_fnInvokeOSLAccessorUPP func(uint, *AEDesc, uint, uint, *AEDesc, *AEDesc, unsafe.Pointer, unsafe.Pointer) int16
-	_fnInvokeOSLAdjustMarksUPP func(int, int, *AEDesc, unsafe.Pointer) int16
-	_fnInvokeOSLCompareUPP func(uint, *AEDesc, *AEDesc, *uint8, unsafe.Pointer) int16
-	_fnInvokeOSLCountUPP func(uint, uint, *AEDesc, *int64, unsafe.Pointer) int16
-	_fnInvokeOSLDisposeTokenUPP func(*AEDesc, unsafe.Pointer) int16
-	_fnInvokeOSLGetErrDescUPP func(*AEDesc, unsafe.Pointer) int16
-	_fnInvokeOSLGetMarkTokenUPP func(*AEDesc, uint, *AEDesc, unsafe.Pointer) int16
-	_fnInvokeOSLMarkUPP func(*AEDesc, *AEDesc, int, unsafe.Pointer) int16
-	_fnNewAECoerceDescUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewAECoercePtrUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewAEDisposeExternalUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewAEEventHandlerUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewOSLAccessorUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewOSLAdjustMarksUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewOSLCompareUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewOSLCountUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewOSLDisposeTokenUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewOSLGetErrDescUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewOSLGetMarkTokenUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewOSLMarkUPP func(unsafe.Pointer) unsafe.Pointer
-	_vAEBuildAppleEvent func(uint, uint, uint, unsafe.Pointer, int, int16, int, *AEDesc, *AEBuildError, string, string) int
-	_vAEBuildDesc func(*AEDesc, *AEBuildError, string, string) int
-	_vAEBuildParameters func(*AEDesc, *AEBuildError, string, string) int
+	_fnDisposeAEEventHandlerUPP    func(unsafe.Pointer)
+	_fnDisposeOSLAccessorUPP       func(unsafe.Pointer)
+	_fnDisposeOSLAdjustMarksUPP    func(unsafe.Pointer)
+	_fnDisposeOSLCompareUPP        func(unsafe.Pointer)
+	_fnDisposeOSLCountUPP          func(unsafe.Pointer)
+	_fnDisposeOSLDisposeTokenUPP   func(unsafe.Pointer)
+	_fnDisposeOSLGetErrDescUPP     func(unsafe.Pointer)
+	_fnDisposeOSLGetMarkTokenUPP   func(unsafe.Pointer)
+	_fnDisposeOSLMarkUPP           func(unsafe.Pointer)
+	_fnInvokeAECoerceDescUPP       func(*AEDesc, uint, unsafe.Pointer, *AEDesc, unsafe.Pointer) int16
+	_fnInvokeAECoercePtrUPP        func(uint, unsafe.Pointer, int, uint, unsafe.Pointer, *AEDesc, unsafe.Pointer) int16
+	_fnInvokeAEDisposeExternalUPP  func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer)
+	_fnInvokeAEEventHandlerUPP     func(*AEDesc, *AEDesc, unsafe.Pointer, unsafe.Pointer) int16
+	_fnInvokeOSLAccessorUPP        func(uint, *AEDesc, uint, uint, *AEDesc, *AEDesc, unsafe.Pointer, unsafe.Pointer) int16
+	_fnInvokeOSLAdjustMarksUPP     func(int, int, *AEDesc, unsafe.Pointer) int16
+	_fnInvokeOSLCompareUPP         func(uint, *AEDesc, *AEDesc, *uint8, unsafe.Pointer) int16
+	_fnInvokeOSLCountUPP           func(uint, uint, *AEDesc, *int64, unsafe.Pointer) int16
+	_fnInvokeOSLDisposeTokenUPP    func(*AEDesc, unsafe.Pointer) int16
+	_fnInvokeOSLGetErrDescUPP      func(*AEDesc, unsafe.Pointer) int16
+	_fnInvokeOSLGetMarkTokenUPP    func(*AEDesc, uint, *AEDesc, unsafe.Pointer) int16
+	_fnInvokeOSLMarkUPP            func(*AEDesc, *AEDesc, int, unsafe.Pointer) int16
+	_fnNewAECoerceDescUPP          func(unsafe.Pointer) unsafe.Pointer
+	_fnNewAECoercePtrUPP           func(unsafe.Pointer) unsafe.Pointer
+	_fnNewAEDisposeExternalUPP     func(unsafe.Pointer) unsafe.Pointer
+	_fnNewAEEventHandlerUPP        func(unsafe.Pointer) unsafe.Pointer
+	_fnNewOSLAccessorUPP           func(unsafe.Pointer) unsafe.Pointer
+	_fnNewOSLAdjustMarksUPP        func(unsafe.Pointer) unsafe.Pointer
+	_fnNewOSLCompareUPP            func(unsafe.Pointer) unsafe.Pointer
+	_fnNewOSLCountUPP              func(unsafe.Pointer) unsafe.Pointer
+	_fnNewOSLDisposeTokenUPP       func(unsafe.Pointer) unsafe.Pointer
+	_fnNewOSLGetErrDescUPP         func(unsafe.Pointer) unsafe.Pointer
+	_fnNewOSLGetMarkTokenUPP       func(unsafe.Pointer) unsafe.Pointer
+	_fnNewOSLMarkUPP               func(unsafe.Pointer) unsafe.Pointer
+	_vAEBuildAppleEvent            func(uint, uint, uint, unsafe.Pointer, int, int16, int, *AEDesc, *AEBuildError, string, string) int
+	_vAEBuildDesc                  func(*AEDesc, *AEBuildError, string, string) int
+	_vAEBuildParameters            func(*AEDesc, *AEBuildError, string, string) int
 )
 
 func AECallObjectAccessor(desiredClass uint, containerToken *AEDesc, containerClass uint, keyForm uint, keyData *AEDesc, token *AEDesc) int16 {
@@ -665,4 +665,3 @@ func VAEBuildDesc(dst *AEDesc, error_ *AEBuildError, src string, args string) in
 func VAEBuildParameters(event *AEDesc, error_ *AEBuildError, format string, args string) int {
 	return _vAEBuildParameters(event, error_, format, args)
 }
-

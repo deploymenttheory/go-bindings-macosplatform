@@ -16,20 +16,20 @@ type MIDIUMPEndpoint struct {
 }
 
 var (
-	_clsMIDIUMPEndpoint = _objcClass("MIDIUMPEndpoint")
-	_mIDIUMPEndpointSelName = objc.RegisterName("name")
-	_mIDIUMPEndpointSelMIDIProtocol = objc.RegisterName("MIDIProtocol")
-	_mIDIUMPEndpointSelSupportedMIDIProtocols = objc.RegisterName("supportedMIDIProtocols")
-	_mIDIUMPEndpointSelMIDIDestination = objc.RegisterName("MIDIDestination")
-	_mIDIUMPEndpointSelMIDISource = objc.RegisterName("MIDISource")
-	_mIDIUMPEndpointSelDeviceInfo = objc.RegisterName("deviceInfo")
-	_mIDIUMPEndpointSelProductInstanceID = objc.RegisterName("productInstanceID")
-	_mIDIUMPEndpointSelHasStaticFunctionBlocks = objc.RegisterName("hasStaticFunctionBlocks")
-	_mIDIUMPEndpointSelHasJRTSReceiveCapability = objc.RegisterName("hasJRTSReceiveCapability")
+	_clsMIDIUMPEndpoint                          = _objcClass("MIDIUMPEndpoint")
+	_mIDIUMPEndpointSelName                      = objc.RegisterName("name")
+	_mIDIUMPEndpointSelMIDIProtocol              = objc.RegisterName("MIDIProtocol")
+	_mIDIUMPEndpointSelSupportedMIDIProtocols    = objc.RegisterName("supportedMIDIProtocols")
+	_mIDIUMPEndpointSelMIDIDestination           = objc.RegisterName("MIDIDestination")
+	_mIDIUMPEndpointSelMIDISource                = objc.RegisterName("MIDISource")
+	_mIDIUMPEndpointSelDeviceInfo                = objc.RegisterName("deviceInfo")
+	_mIDIUMPEndpointSelProductInstanceID         = objc.RegisterName("productInstanceID")
+	_mIDIUMPEndpointSelHasStaticFunctionBlocks   = objc.RegisterName("hasStaticFunctionBlocks")
+	_mIDIUMPEndpointSelHasJRTSReceiveCapability  = objc.RegisterName("hasJRTSReceiveCapability")
 	_mIDIUMPEndpointSelHasJRTSTransmitCapability = objc.RegisterName("hasJRTSTransmitCapability")
-	_mIDIUMPEndpointSelEndpointType = objc.RegisterName("endpointType")
-	_mIDIUMPEndpointSelFunctionBlocks = objc.RegisterName("functionBlocks")
-	_mIDIUMPEndpointSelSetFunctionBlocks = objc.RegisterName("setFunctionBlocks:")
+	_mIDIUMPEndpointSelEndpointType              = objc.RegisterName("endpointType")
+	_mIDIUMPEndpointSelFunctionBlocks            = objc.RegisterName("functionBlocks")
+	_mIDIUMPEndpointSelSetFunctionBlocks         = objc.RegisterName("setFunctionBlocks:")
 )
 
 func MIDIUMPEndpointFromID(id objc.ID) *MIDIUMPEndpoint {
@@ -45,7 +45,9 @@ func MIDIUMPEndpointFromID(id objc.ID) *MIDIUMPEndpoint {
 // @property	name @brief		The UTF-8 encoded name of the UMP endpoint. @discussion The name shall not be any longer than 98 bytes of UTF-8 Text.
 func (o *MIDIUMPEndpoint) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDIUMPEndpointSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -76,14 +78,18 @@ func (o *MIDIUMPEndpoint) MIDISource() uint {
 // @property	deviceInfo @brief		The MIDI 2.0 Device identity information associated with the device.
 func (o *MIDIUMPEndpoint) DeviceInfo() *MIDI2DeviceInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDIUMPEndpointSelDeviceInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MIDI2DeviceInfoFromID(_ret)
 }
 
 // @property	productInstanceID @brief		Serial number (or similar value) uniquely identifying this manufacturer/family/model, up to 42 bytes of ASCII Text in the ordinal range 32-126.
 func (o *MIDIUMPEndpoint) ProductInstanceID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDIUMPEndpointSelProductInstanceID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -114,11 +120,12 @@ func (o *MIDIUMPEndpoint) EndpointType() MIDIUMPCIObjectBackingType {
 // @property	functionBlocks @brief		The Function Blocks associated with the UMP endpoint, if any.
 func (o *MIDIUMPEndpoint) FunctionBlocks() *foundation.NSArray[*MIDIUMPFunctionBlock] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDIUMPEndpointSelFunctionBlocks)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MIDIUMPFunctionBlock](_ret)
 }
 
 func (o *MIDIUMPEndpoint) SetFunctionBlocks(functionBlocks *foundation.NSArray[*MIDIUMPFunctionBlock]) {
 	o.Ptr().Send(_mIDIUMPEndpointSelSetFunctionBlocks, functionBlocks.Ptr())
 }
-

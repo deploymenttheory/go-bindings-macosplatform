@@ -18,9 +18,9 @@ type VNRecognizeAnimalsRequest struct {
 }
 
 var (
-	_clsVNRecognizeAnimalsRequest = _objcClass("VNRecognizeAnimalsRequest")
+	_clsVNRecognizeAnimalsRequest                                       = _objcClass("VNRecognizeAnimalsRequest")
 	_vNRecognizeAnimalsRequestSelKnownAnimalIdentifiersForRevisionError = objc.RegisterName("knownAnimalIdentifiersForRevision:error:")
-	_vNRecognizeAnimalsRequestSelSupportedIdentifiersAndReturnError = objc.RegisterName("supportedIdentifiersAndReturnError:")
+	_vNRecognizeAnimalsRequestSelSupportedIdentifiersAndReturnError     = objc.RegisterName("supportedIdentifiersAndReturnError:")
 )
 
 func VNRecognizeAnimalsRequestFromID(id objc.ID) *VNRecognizeAnimalsRequest {
@@ -53,4 +53,3 @@ func (o *VNRecognizeAnimalsRequest) SupportedIdentifiersAndReturnError() (*found
 	}
 	return _ret, nil
 }
-

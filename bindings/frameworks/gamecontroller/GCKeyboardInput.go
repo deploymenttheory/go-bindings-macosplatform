@@ -15,11 +15,11 @@ type GCKeyboardInput struct {
 }
 
 var (
-	_clsGCKeyboardInput = _objcClass("GCKeyboardInput")
-	_gCKeyboardInputSelButtonForKeyCode = objc.RegisterName("buttonForKeyCode:")
-	_gCKeyboardInputSelKeyChangedHandler = objc.RegisterName("keyChangedHandler")
+	_clsGCKeyboardInput                     = _objcClass("GCKeyboardInput")
+	_gCKeyboardInputSelButtonForKeyCode     = objc.RegisterName("buttonForKeyCode:")
+	_gCKeyboardInputSelKeyChangedHandler    = objc.RegisterName("keyChangedHandler")
 	_gCKeyboardInputSelSetKeyChangedHandler = objc.RegisterName("setKeyChangedHandler:")
-	_gCKeyboardInputSelIsAnyKeyPressed = objc.RegisterName("isAnyKeyPressed")
+	_gCKeyboardInputSelIsAnyKeyPressed      = objc.RegisterName("isAnyKeyPressed")
 )
 
 func GCKeyboardInputFromID(id objc.ID) *GCKeyboardInput {
@@ -35,7 +35,9 @@ func GCKeyboardInputFromID(id objc.ID) *GCKeyboardInput {
 // Alongside general subscript notation of GCPhysicalInputProfile keys can be accessed using this method. @example [keyboard buttonForKey:GCKeyCode.UpArrow] == keyboard[GCKeyUpArrow] @param code is a low level key code that can be used for accessing a keyboard button. @note Full list of supported key constants can be found in GCKeyCodes.h and GCKeyNames.h
 func (o *GCKeyboardInput) ButtonForKeyCode(code int) *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCKeyboardInputSelButtonForKeyCode, code)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
@@ -66,4 +68,3 @@ func (o *GCKeyboardInput) IsAnyKeyPressed() bool {
 	_ret := objc.Send[bool](o.Ptr(), _gCKeyboardInputSelIsAnyKeyPressed)
 	return _ret
 }
-

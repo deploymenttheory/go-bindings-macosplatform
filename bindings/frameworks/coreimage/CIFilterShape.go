@@ -17,16 +17,16 @@ type CIFilterShape struct {
 }
 
 var (
-	_clsCIFilterShape = _objcClass("CIFilterShape")
-	_cIFilterShapeSelShapeWithRect = objc.RegisterName("shapeWithRect:")
-	_cIFilterShapeSelInitWithRect = objc.RegisterName("initWithRect:")
+	_clsCIFilterShape                    = _objcClass("CIFilterShape")
+	_cIFilterShapeSelShapeWithRect       = objc.RegisterName("shapeWithRect:")
+	_cIFilterShapeSelInitWithRect        = objc.RegisterName("initWithRect:")
 	_cIFilterShapeSelTransformByInterior = objc.RegisterName("transformBy:interior:")
-	_cIFilterShapeSelInsetByXY = objc.RegisterName("insetByX:Y:")
-	_cIFilterShapeSelUnionWith = objc.RegisterName("unionWith:")
-	_cIFilterShapeSelUnionWithRect = objc.RegisterName("unionWithRect:")
-	_cIFilterShapeSelIntersectWith = objc.RegisterName("intersectWith:")
-	_cIFilterShapeSelIntersectWithRect = objc.RegisterName("intersectWithRect:")
-	_cIFilterShapeSelExtent = objc.RegisterName("extent")
+	_cIFilterShapeSelInsetByXY           = objc.RegisterName("insetByX:Y:")
+	_cIFilterShapeSelUnionWith           = objc.RegisterName("unionWith:")
+	_cIFilterShapeSelUnionWithRect       = objc.RegisterName("unionWithRect:")
+	_cIFilterShapeSelIntersectWith       = objc.RegisterName("intersectWith:")
+	_cIFilterShapeSelIntersectWithRect   = objc.RegisterName("intersectWithRect:")
+	_cIFilterShapeSelExtent              = objc.RegisterName("extent")
 )
 
 func CIFilterShapeFromID(id objc.ID) *CIFilterShape {
@@ -41,49 +41,65 @@ func CIFilterShapeFromID(id objc.ID) *CIFilterShape {
 
 func CIFilterShapeShapeWithRect(r corefoundation.CGRect) *CIFilterShape {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIFilterShape), _cIFilterShapeSelShapeWithRect, r)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIFilterShapeFromID(_ret)
 }
 
 func (o *CIFilterShape) InitWithRect(r corefoundation.CGRect) *CIFilterShape {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIFilterShapeSelInitWithRect, r)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIFilterShapeFromID(_ret)
 }
 
 func (o *CIFilterShape) TransformByInterior(m corefoundation.CGAffineTransform, flag bool) *CIFilterShape {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIFilterShapeSelTransformByInterior, m, flag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIFilterShapeFromID(_ret)
 }
 
 func (o *CIFilterShape) InsetByXY(dx int, dy int) *CIFilterShape {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIFilterShapeSelInsetByXY, dx, dy)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIFilterShapeFromID(_ret)
 }
 
 func (o *CIFilterShape) UnionWith(s2 *CIFilterShape) *CIFilterShape {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIFilterShapeSelUnionWith, s2.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIFilterShapeFromID(_ret)
 }
 
 func (o *CIFilterShape) UnionWithRect(r corefoundation.CGRect) *CIFilterShape {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIFilterShapeSelUnionWithRect, r)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIFilterShapeFromID(_ret)
 }
 
 func (o *CIFilterShape) IntersectWith(s2 *CIFilterShape) *CIFilterShape {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIFilterShapeSelIntersectWith, s2.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIFilterShapeFromID(_ret)
 }
 
 func (o *CIFilterShape) IntersectWithRect(r corefoundation.CGRect) *CIFilterShape {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIFilterShapeSelIntersectWithRect, r)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIFilterShapeFromID(_ret)
 }
 
@@ -91,4 +107,3 @@ func (o *CIFilterShape) Extent() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _cIFilterShapeSelExtent)
 	return _ret
 }
-

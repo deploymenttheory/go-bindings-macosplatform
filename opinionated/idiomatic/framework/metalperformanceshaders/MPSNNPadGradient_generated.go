@@ -167,11 +167,17 @@ func (x *NNPadGradient) WithLabel(label string) *NNPadGradient {
 	return x
 }
 
-func (x *NNPadGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
+func (x *NNPadGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNGradientKernel
+}
 
-func (x *NNPadGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *NNPadGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
-func (x *NNPadGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel }
+func (x *NNPadGradient) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel
+}
 
 // NNPadGradientable is the interface implemented by [NNPadGradient], for mocking and DI.
 type NNPadGradientable interface {
@@ -199,4 +205,3 @@ type NNPadGradientable interface {
 }
 
 var _ NNPadGradientable = (*NNPadGradient)(nil)
-

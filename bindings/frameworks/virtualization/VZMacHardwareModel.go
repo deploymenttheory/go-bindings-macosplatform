@@ -16,10 +16,10 @@ type VZMacHardwareModel struct {
 }
 
 var (
-	_clsVZMacHardwareModel = _objcClass("VZMacHardwareModel")
+	_clsVZMacHardwareModel                           = _objcClass("VZMacHardwareModel")
 	_vZMacHardwareModelSelInitWithDataRepresentation = objc.RegisterName("initWithDataRepresentation:")
-	_vZMacHardwareModelSelDataRepresentation = objc.RegisterName("dataRepresentation")
-	_vZMacHardwareModelSelIsSupported = objc.RegisterName("isSupported")
+	_vZMacHardwareModelSelDataRepresentation         = objc.RegisterName("dataRepresentation")
+	_vZMacHardwareModelSelIsSupported                = objc.RegisterName("isSupported")
 )
 
 func VZMacHardwareModelFromID(id objc.ID) *VZMacHardwareModel {
@@ -35,14 +35,18 @@ func VZMacHardwareModelFromID(id objc.ID) *VZMacHardwareModel {
 // @abstract Get the hardware model described by the specified data representation. @param dataRepresentation The opaque data representation of the hardware model to be obtained.
 func (o *VZMacHardwareModel) InitWithDataRepresentation(dataRepresentation *foundation.NSData) *VZMacHardwareModel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacHardwareModelSelInitWithDataRepresentation, dataRepresentation.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZMacHardwareModelFromID(_ret)
 }
 
 // @abstract Opaque data representation of the hardware model. @discussion This can be used to recreate the same hardware model with -[VZMacHardwareModel initWithDataRepresentation:].
 func (o *VZMacHardwareModel) DataRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacHardwareModelSelDataRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -51,4 +55,3 @@ func (o *VZMacHardwareModel) IsSupported() bool {
 	_ret := objc.Send[bool](o.Ptr(), _vZMacHardwareModelSelIsSupported)
 	return _ret
 }
-

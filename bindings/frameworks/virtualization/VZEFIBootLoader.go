@@ -15,9 +15,9 @@ type VZEFIBootLoader struct {
 }
 
 var (
-	_clsVZEFIBootLoader = _objcClass("VZEFIBootLoader")
-	_vZEFIBootLoaderSelInit = objc.RegisterName("init")
-	_vZEFIBootLoaderSelVariableStore = objc.RegisterName("variableStore")
+	_clsVZEFIBootLoader                 = _objcClass("VZEFIBootLoader")
+	_vZEFIBootLoaderSelInit             = objc.RegisterName("init")
+	_vZEFIBootLoaderSelVariableStore    = objc.RegisterName("variableStore")
 	_vZEFIBootLoaderSelSetVariableStore = objc.RegisterName("setVariableStore:")
 )
 
@@ -33,17 +33,20 @@ func VZEFIBootLoaderFromID(id objc.ID) *VZEFIBootLoader {
 
 func (o *VZEFIBootLoader) Init() *VZEFIBootLoader {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZEFIBootLoaderSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZEFIBootLoaderFromID(_ret)
 }
 
 func (o *VZEFIBootLoader) VariableStore() *VZEFIVariableStore {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZEFIBootLoaderSelVariableStore)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZEFIVariableStoreFromID(_ret)
 }
 
 func (o *VZEFIBootLoader) SetVariableStore(variableStore *VZEFIVariableStore) {
 	o.Ptr().Send(_vZEFIBootLoaderSelSetVariableStore, variableStore.Ptr())
 }
-

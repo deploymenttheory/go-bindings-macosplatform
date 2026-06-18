@@ -16,14 +16,14 @@ type NEEvaluateConnectionRule struct {
 }
 
 var (
-	_clsNEEvaluateConnectionRule = _objcClass("NEEvaluateConnectionRule")
+	_clsNEEvaluateConnectionRule                              = _objcClass("NEEvaluateConnectionRule")
 	_nEEvaluateConnectionRuleSelInitWithMatchDomainsAndAction = objc.RegisterName("initWithMatchDomains:andAction:")
-	_nEEvaluateConnectionRuleSelAction = objc.RegisterName("action")
-	_nEEvaluateConnectionRuleSelMatchDomains = objc.RegisterName("matchDomains")
-	_nEEvaluateConnectionRuleSelUseDNSServers = objc.RegisterName("useDNSServers")
-	_nEEvaluateConnectionRuleSelSetUseDNSServers = objc.RegisterName("setUseDNSServers:")
-	_nEEvaluateConnectionRuleSelProbeURL = objc.RegisterName("probeURL")
-	_nEEvaluateConnectionRuleSelSetProbeURL = objc.RegisterName("setProbeURL:")
+	_nEEvaluateConnectionRuleSelAction                        = objc.RegisterName("action")
+	_nEEvaluateConnectionRuleSelMatchDomains                  = objc.RegisterName("matchDomains")
+	_nEEvaluateConnectionRuleSelUseDNSServers                 = objc.RegisterName("useDNSServers")
+	_nEEvaluateConnectionRuleSelSetUseDNSServers              = objc.RegisterName("setUseDNSServers:")
+	_nEEvaluateConnectionRuleSelProbeURL                      = objc.RegisterName("probeURL")
+	_nEEvaluateConnectionRuleSelSetProbeURL                   = objc.RegisterName("setProbeURL:")
 )
 
 func NEEvaluateConnectionRuleFromID(id objc.ID) *NEEvaluateConnectionRule {
@@ -39,7 +39,9 @@ func NEEvaluateConnectionRuleFromID(id objc.ID) *NEEvaluateConnectionRule {
 // @method initWithMatchDomains:andAction @discussion Initialize an NEEvaluateConnectionRule instance with a list of destination host domains and an action
 func (o *NEEvaluateConnectionRule) InitWithMatchDomainsAndAction(domains *foundation.NSArray[*foundation.NSString], action NEEvaluateConnectionRuleAction) *NEEvaluateConnectionRule {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEEvaluateConnectionRuleSelInitWithMatchDomainsAndAction, domains, action)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEEvaluateConnectionRuleFromID(_ret)
 }
 
@@ -68,11 +70,12 @@ func (o *NEEvaluateConnectionRule) SetUseDNSServers(useDNSServers *foundation.NS
 // @property probeURL @discussion An HTTP or HTTPS URL. If the rule matches the connection being established and the action is NEEvaluateConnectionRuleActionConnectIfNeeded and a request sent to this URL results in a response with an HTTP response code other than 200, then the VPN is started.
 func (o *NEEvaluateConnectionRule) ProbeURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEEvaluateConnectionRuleSelProbeURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *NEEvaluateConnectionRule) SetProbeURL(probeURL *foundation.NSURL) {
 	o.Ptr().Send(_nEEvaluateConnectionRuleSelSetProbeURL, probeURL.Ptr())
 }
-

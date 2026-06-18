@@ -16,18 +16,18 @@ type AVB17221AECPAEMMessage struct {
 }
 
 var (
-	_clsAVB17221AECPAEMMessage = _objcClass("AVB17221AECPAEMMessage")
-	_aVB17221AECPAEMMessageSelCommandMessage = objc.RegisterName("commandMessage")
-	_aVB17221AECPAEMMessageSelResponseMessage = objc.RegisterName("responseMessage")
+	_clsAVB17221AECPAEMMessage                                  = _objcClass("AVB17221AECPAEMMessage")
+	_aVB17221AECPAEMMessageSelCommandMessage                    = objc.RegisterName("commandMessage")
+	_aVB17221AECPAEMMessageSelResponseMessage                   = objc.RegisterName("responseMessage")
 	_aVB17221AECPAEMMessageSelResponseMessageFromCommandMessage = objc.RegisterName("responseMessageFromCommandMessage:")
-	_aVB17221AECPAEMMessageSelCommandType = objc.RegisterName("commandType")
-	_aVB17221AECPAEMMessageSelSetCommandType = objc.RegisterName("setCommandType:")
-	_aVB17221AECPAEMMessageSelIsUnsolicited = objc.RegisterName("isUnsolicited")
-	_aVB17221AECPAEMMessageSelSetUnsolicited = objc.RegisterName("setUnsolicited:")
-	_aVB17221AECPAEMMessageSelIsControllerRequest = objc.RegisterName("isControllerRequest")
-	_aVB17221AECPAEMMessageSelSetControllerRequest = objc.RegisterName("setControllerRequest:")
-	_aVB17221AECPAEMMessageSelCommandSpecificData = objc.RegisterName("commandSpecificData")
-	_aVB17221AECPAEMMessageSelSetCommandSpecificData = objc.RegisterName("setCommandSpecificData:")
+	_aVB17221AECPAEMMessageSelCommandType                       = objc.RegisterName("commandType")
+	_aVB17221AECPAEMMessageSelSetCommandType                    = objc.RegisterName("setCommandType:")
+	_aVB17221AECPAEMMessageSelIsUnsolicited                     = objc.RegisterName("isUnsolicited")
+	_aVB17221AECPAEMMessageSelSetUnsolicited                    = objc.RegisterName("setUnsolicited:")
+	_aVB17221AECPAEMMessageSelIsControllerRequest               = objc.RegisterName("isControllerRequest")
+	_aVB17221AECPAEMMessageSelSetControllerRequest              = objc.RegisterName("setControllerRequest:")
+	_aVB17221AECPAEMMessageSelCommandSpecificData               = objc.RegisterName("commandSpecificData")
+	_aVB17221AECPAEMMessageSelSetCommandSpecificData            = objc.RegisterName("setCommandSpecificData:")
 )
 
 func AVB17221AECPAEMMessageFromID(id objc.ID) *AVB17221AECPAEMMessage {
@@ -43,21 +43,27 @@ func AVB17221AECPAEMMessageFromID(id objc.ID) *AVB17221AECPAEMMessage {
 // @method		commandMessage @abstract	This method returns an AVB17221AECPAEMMessage instance setup as an AEM command. @result		An AVB17221AECPAEMMessage instance pre-setup as an AEM command.
 func AVB17221AECPAEMMessageCommandMessage() *AVB17221AECPAEMMessage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVB17221AECPAEMMessage), _aVB17221AECPAEMMessageSelCommandMessage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVB17221AECPAEMMessageFromID(_ret)
 }
 
 // @method		responseMessage @abstract	This method returns an AVB17221AECPAEMMessage instance setup as an AEM response. @result		An AVB17221AECPAEMMessage instance pre-setup as an AEM response.
 func AVB17221AECPAEMMessageResponseMessage() *AVB17221AECPAEMMessage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVB17221AECPAEMMessage), _aVB17221AECPAEMMessageSelResponseMessage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVB17221AECPAEMMessageFromID(_ret)
 }
 
 // @method		responseMessageFromCommandMessage @abstract	This method returns an AVB17221AECPAEMMessage instance setup as an AEM response with the appropriate info copied from the supplied command message. @result		An AVB17221AECPAEMMessage instance setup as an AEM response with all info copied from the command message..
 func AVB17221AECPAEMMessageResponseMessageFromCommandMessage(commandMessage *AVB17221AECPAEMMessage) *AVB17221AECPAEMMessage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVB17221AECPAEMMessage), _aVB17221AECPAEMMessageSelResponseMessageFromCommandMessage, commandMessage.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVB17221AECPAEMMessageFromID(_ret)
 }
 
@@ -94,11 +100,12 @@ func (o *AVB17221AECPAEMMessage) SetControllerRequest(controllerRequest bool) {
 // @property	commandSpecificData @abstract	The command_specific_data field of the AECP AEM message.
 func (o *AVB17221AECPAEMMessage) CommandSpecificData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVB17221AECPAEMMessageSelCommandSpecificData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *AVB17221AECPAEMMessage) SetCommandSpecificData(commandSpecificData *foundation.NSData) {
 	o.Ptr().Send(_aVB17221AECPAEMMessageSelSetCommandSpecificData, commandSpecificData.Ptr())
 }
-

@@ -197,7 +197,9 @@ func (x *ComboBox) WithPlaceholderStrings(items ...*foundation.NSString) *ComboB
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -213,7 +215,9 @@ func (x *ComboBox) WithPlaceholderAttributedStrings(items ...*foundation.NSAttri
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSAttributedString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -403,7 +407,9 @@ func (x *ComboBox) WithSubviews(items ...ViewProvider) *ComboBox {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asView().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSView](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -545,7 +551,9 @@ func (x *ComboBox) WithBackgroundFilters(items ...*coreimage.CIFilter) *ComboBox
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -567,7 +575,9 @@ func (x *ComboBox) WithContentFilters(items ...*coreimage.CIFilter) *ComboBox {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -631,7 +641,9 @@ func (x *ComboBox) WithGestureRecognizers(items ...GestureRecognizerProvider) *C
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -911,7 +923,9 @@ func (x *ComboBox) asControl() *raw.NSControl { return &x.inner.NSTextField.NSCo
 
 func (x *ComboBox) asView() *raw.NSView { return &x.inner.NSTextField.NSControl.NSView }
 
-func (x *ComboBox) asResponder() *raw.NSResponder { return &x.inner.NSTextField.NSControl.NSView.NSResponder }
+func (x *ComboBox) asResponder() *raw.NSResponder {
+	return &x.inner.NSTextField.NSControl.NSView.NSResponder
+}
 
 // ComboBoxable is the interface implemented by [ComboBox], for mocking and DI.
 type ComboBoxable interface {
@@ -1059,4 +1073,3 @@ type ComboBoxable interface {
 }
 
 var _ ComboBoxable = (*ComboBox)(nil)
-

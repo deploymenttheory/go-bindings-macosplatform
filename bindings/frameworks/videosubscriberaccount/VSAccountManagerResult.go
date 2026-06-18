@@ -16,7 +16,7 @@ type VSAccountManagerResult struct {
 }
 
 var (
-	_clsVSAccountManagerResult = _objcClass("VSAccountManagerResult")
+	_clsVSAccountManagerResult       = _objcClass("VSAccountManagerResult")
 	_vSAccountManagerResultSelCancel = objc.RegisterName("cancel")
 )
 
@@ -34,4 +34,3 @@ func VSAccountManagerResultFromID(id objc.ID) *VSAccountManagerResult {
 func (o *VSAccountManagerResult) Cancel() {
 	o.Ptr().Send(_vSAccountManagerResultSelCancel)
 }
-

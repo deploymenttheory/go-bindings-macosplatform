@@ -19,7 +19,9 @@ type PlayerInterstitialEventController struct {
 }
 
 // Unwrap returns the underlying [raw.AVPlayerInterstitialEventController].
-func (x *PlayerInterstitialEventController) Unwrap() *raw.AVPlayerInterstitialEventController { return x.inner }
+func (x *PlayerInterstitialEventController) Unwrap() *raw.AVPlayerInterstitialEventController {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -47,7 +49,9 @@ func (x *PlayerInterstitialEventController) WithEvents(items ...*raw.AVPlayerInt
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.AVPlayerInterstitialEvent](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -107,7 +111,9 @@ func (x *PlayerInterstitialEventController) SetLocalizedStringsTableName(localiz
 	x.inner.SetLocalizedStringsTableName(foundation.NSStringStringWithUTF8String(localizedStringsTableName))
 }
 
-func (x *PlayerInterstitialEventController) asPlayerInterstitialEventMonitor() *raw.AVPlayerInterstitialEventMonitor { return &x.inner.AVPlayerInterstitialEventMonitor }
+func (x *PlayerInterstitialEventController) asPlayerInterstitialEventMonitor() *raw.AVPlayerInterstitialEventMonitor {
+	return &x.inner.AVPlayerInterstitialEventMonitor
+}
 
 // PlayerInterstitialEventControllerable is the interface implemented by [PlayerInterstitialEventController], for mocking and DI.
 type PlayerInterstitialEventControllerable interface {
@@ -125,4 +131,3 @@ type PlayerInterstitialEventControllerable interface {
 }
 
 var _ PlayerInterstitialEventControllerable = (*PlayerInterstitialEventController)(nil)
-

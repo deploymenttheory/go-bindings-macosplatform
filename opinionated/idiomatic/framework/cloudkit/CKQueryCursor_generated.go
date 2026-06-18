@@ -41,4 +41,3 @@ type QueryCursorable interface {
 }
 
 var _ QueryCursorable = (*QueryCursor)(nil)
-

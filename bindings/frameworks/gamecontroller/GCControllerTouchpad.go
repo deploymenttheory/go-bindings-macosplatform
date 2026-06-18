@@ -15,19 +15,19 @@ type GCControllerTouchpad struct {
 }
 
 var (
-	_clsGCControllerTouchpad = _objcClass("GCControllerTouchpad")
+	_clsGCControllerTouchpad                                          = _objcClass("GCControllerTouchpad")
 	_gCControllerTouchpadSelSetValueForXAxisYAxisTouchDownButtonValue = objc.RegisterName("setValueForXAxis:yAxis:touchDown:buttonValue:")
-	_gCControllerTouchpadSelButton = objc.RegisterName("button")
-	_gCControllerTouchpadSelTouchDown = objc.RegisterName("touchDown")
-	_gCControllerTouchpadSelSetTouchDown = objc.RegisterName("setTouchDown:")
-	_gCControllerTouchpadSelTouchMoved = objc.RegisterName("touchMoved")
-	_gCControllerTouchpadSelSetTouchMoved = objc.RegisterName("setTouchMoved:")
-	_gCControllerTouchpadSelTouchUp = objc.RegisterName("touchUp")
-	_gCControllerTouchpadSelSetTouchUp = objc.RegisterName("setTouchUp:")
-	_gCControllerTouchpadSelTouchSurface = objc.RegisterName("touchSurface")
-	_gCControllerTouchpadSelTouchState = objc.RegisterName("touchState")
-	_gCControllerTouchpadSelReportsAbsoluteTouchSurfaceValues = objc.RegisterName("reportsAbsoluteTouchSurfaceValues")
-	_gCControllerTouchpadSelSetReportsAbsoluteTouchSurfaceValues = objc.RegisterName("setReportsAbsoluteTouchSurfaceValues:")
+	_gCControllerTouchpadSelButton                                    = objc.RegisterName("button")
+	_gCControllerTouchpadSelTouchDown                                 = objc.RegisterName("touchDown")
+	_gCControllerTouchpadSelSetTouchDown                              = objc.RegisterName("setTouchDown:")
+	_gCControllerTouchpadSelTouchMoved                                = objc.RegisterName("touchMoved")
+	_gCControllerTouchpadSelSetTouchMoved                             = objc.RegisterName("setTouchMoved:")
+	_gCControllerTouchpadSelTouchUp                                   = objc.RegisterName("touchUp")
+	_gCControllerTouchpadSelSetTouchUp                                = objc.RegisterName("setTouchUp:")
+	_gCControllerTouchpadSelTouchSurface                              = objc.RegisterName("touchSurface")
+	_gCControllerTouchpadSelTouchState                                = objc.RegisterName("touchState")
+	_gCControllerTouchpadSelReportsAbsoluteTouchSurfaceValues         = objc.RegisterName("reportsAbsoluteTouchSurfaceValues")
+	_gCControllerTouchpadSelSetReportsAbsoluteTouchSurfaceValues      = objc.RegisterName("setReportsAbsoluteTouchSurfaceValues:")
 )
 
 func GCControllerTouchpadFromID(id objc.ID) *GCControllerTouchpad {
@@ -48,7 +48,9 @@ func (o *GCControllerTouchpad) SetValueForXAxisYAxisTouchDownButtonValue(xAxis f
 // Button is the button built into the touch surface.
 func (o *GCControllerTouchpad) Button() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCControllerTouchpadSelButton)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
@@ -115,7 +117,9 @@ func (o *GCControllerTouchpad) SetTouchUp(touchUp func(*GCControllerTouchpad, fl
 // The touch surface is a 2-axis control that represents the position of a touch event on the touchpad. The axes will indicate the most recent touch position - a non-zero value does not indicate that the surface is being touched, and a value of (0, 0) does not indicate the surface is not being touched. @see touchState - Should be polled in conjunction with touchSurface to determine if values are valid
 func (o *GCControllerTouchpad) TouchSurface() *GCControllerDirectionPad {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCControllerTouchpadSelTouchSurface)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerDirectionPadFromID(_ret)
 }
 
@@ -134,4 +138,3 @@ func (o *GCControllerTouchpad) ReportsAbsoluteTouchSurfaceValues() bool {
 func (o *GCControllerTouchpad) SetReportsAbsoluteTouchSurfaceValues(reportsAbsoluteTouchSurfaceValues bool) {
 	o.Ptr().Send(_gCControllerTouchpadSelSetReportsAbsoluteTouchSurfaceValues, reportsAbsoluteTouchSurfaceValues)
 }
-

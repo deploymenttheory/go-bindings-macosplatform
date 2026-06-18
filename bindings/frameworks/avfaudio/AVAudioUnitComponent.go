@@ -19,28 +19,28 @@ type AVAudioUnitComponent struct {
 }
 
 var (
-	_clsAVAudioUnitComponent = _objcClass("AVAudioUnitComponent")
+	_clsAVAudioUnitComponent                                          = _objcClass("AVAudioUnitComponent")
 	_aVAudioUnitComponentSelSupportsNumberInputChannelsOutputChannels = objc.RegisterName("supportsNumberInputChannels:outputChannels:")
-	_aVAudioUnitComponentSelName = objc.RegisterName("name")
-	_aVAudioUnitComponentSelTypeName = objc.RegisterName("typeName")
-	_aVAudioUnitComponentSelLocalizedTypeName = objc.RegisterName("localizedTypeName")
-	_aVAudioUnitComponentSelManufacturerName = objc.RegisterName("manufacturerName")
-	_aVAudioUnitComponentSelVersionString = objc.RegisterName("versionString")
-	_aVAudioUnitComponentSelComponentURL = objc.RegisterName("componentURL")
-	_aVAudioUnitComponentSelAvailableArchitectures = objc.RegisterName("availableArchitectures")
-	_aVAudioUnitComponentSelIsSandboxSafe = objc.RegisterName("isSandboxSafe")
-	_aVAudioUnitComponentSelHasMIDIInput = objc.RegisterName("hasMIDIInput")
-	_aVAudioUnitComponentSelHasMIDIOutput = objc.RegisterName("hasMIDIOutput")
-	_aVAudioUnitComponentSelAudioComponent = objc.RegisterName("audioComponent")
-	_aVAudioUnitComponentSelUserTagNames = objc.RegisterName("userTagNames")
-	_aVAudioUnitComponentSelSetUserTagNames = objc.RegisterName("setUserTagNames:")
-	_aVAudioUnitComponentSelAllTagNames = objc.RegisterName("allTagNames")
-	_aVAudioUnitComponentSelAudioComponentDescription = objc.RegisterName("audioComponentDescription")
-	_aVAudioUnitComponentSelIconURL = objc.RegisterName("iconURL")
-	_aVAudioUnitComponentSelIcon = objc.RegisterName("icon")
-	_aVAudioUnitComponentSelPassesAUVal = objc.RegisterName("passesAUVal")
-	_aVAudioUnitComponentSelHasCustomView = objc.RegisterName("hasCustomView")
-	_aVAudioUnitComponentSelConfigurationDictionary = objc.RegisterName("configurationDictionary")
+	_aVAudioUnitComponentSelName                                      = objc.RegisterName("name")
+	_aVAudioUnitComponentSelTypeName                                  = objc.RegisterName("typeName")
+	_aVAudioUnitComponentSelLocalizedTypeName                         = objc.RegisterName("localizedTypeName")
+	_aVAudioUnitComponentSelManufacturerName                          = objc.RegisterName("manufacturerName")
+	_aVAudioUnitComponentSelVersionString                             = objc.RegisterName("versionString")
+	_aVAudioUnitComponentSelComponentURL                              = objc.RegisterName("componentURL")
+	_aVAudioUnitComponentSelAvailableArchitectures                    = objc.RegisterName("availableArchitectures")
+	_aVAudioUnitComponentSelIsSandboxSafe                             = objc.RegisterName("isSandboxSafe")
+	_aVAudioUnitComponentSelHasMIDIInput                              = objc.RegisterName("hasMIDIInput")
+	_aVAudioUnitComponentSelHasMIDIOutput                             = objc.RegisterName("hasMIDIOutput")
+	_aVAudioUnitComponentSelAudioComponent                            = objc.RegisterName("audioComponent")
+	_aVAudioUnitComponentSelUserTagNames                              = objc.RegisterName("userTagNames")
+	_aVAudioUnitComponentSelSetUserTagNames                           = objc.RegisterName("setUserTagNames:")
+	_aVAudioUnitComponentSelAllTagNames                               = objc.RegisterName("allTagNames")
+	_aVAudioUnitComponentSelAudioComponentDescription                 = objc.RegisterName("audioComponentDescription")
+	_aVAudioUnitComponentSelIconURL                                   = objc.RegisterName("iconURL")
+	_aVAudioUnitComponentSelIcon                                      = objc.RegisterName("icon")
+	_aVAudioUnitComponentSelPassesAUVal                               = objc.RegisterName("passesAUVal")
+	_aVAudioUnitComponentSelHasCustomView                             = objc.RegisterName("hasCustomView")
+	_aVAudioUnitComponentSelConfigurationDictionary                   = objc.RegisterName("configurationDictionary")
 )
 
 func AVAudioUnitComponentFromID(id objc.ID) *AVAudioUnitComponent {
@@ -62,35 +62,45 @@ func (o *AVAudioUnitComponent) SupportsNumberInputChannelsOutputChannels(numInpu
 // @property name @abstract the name of an audio component
 func (o *AVAudioUnitComponent) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitComponentSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property typeName @abstract standard audio component types returned as strings
 func (o *AVAudioUnitComponent) TypeName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitComponentSelTypeName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property localizedTypeName @abstract localized string of typeName for display
 func (o *AVAudioUnitComponent) LocalizedTypeName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitComponentSelLocalizedTypeName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property manufacturerName @abstract the manufacturer name, extracted from the manufacturer key defined in Info.plist dictionary
 func (o *AVAudioUnitComponent) ManufacturerName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitComponentSelManufacturerName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property versionString @abstract version number as string
 func (o *AVAudioUnitComponent) VersionString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitComponentSelVersionString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -98,7 +108,9 @@ func (o *AVAudioUnitComponent) VersionString() *foundation.NSString {
 // Deprecated: since macOS 10.11.
 func (o *AVAudioUnitComponent) ComponentURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitComponentSelComponentURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -157,13 +169,17 @@ func (o *AVAudioUnitComponent) AudioComponentDescription() objc.ID {
 // @property iconURL @abstract A URL that will specify the location of an icon file that can be used when presenting UI for this audio component.
 func (o *AVAudioUnitComponent) IconURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitComponentSelIconURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *AVAudioUnitComponent) Icon() *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitComponentSelIcon)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSImageFromID(_ret)
 }
 
@@ -184,4 +200,3 @@ func (o *AVAudioUnitComponent) ConfigurationDictionary() *foundation.NSDictionar
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _aVAudioUnitComponentSelConfigurationDictionary)
 	return _ret
 }
-

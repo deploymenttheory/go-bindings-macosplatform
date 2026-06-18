@@ -93,4 +93,3 @@ type GraphNodeable interface {
 }
 
 var _ GraphNodeable = (*GraphNode)(nil)
-

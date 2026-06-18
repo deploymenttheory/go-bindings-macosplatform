@@ -18,15 +18,15 @@ type HKFHIRVersion struct {
 }
 
 var (
-	_clsHKFHIRVersion = _objcClass("HKFHIRVersion")
+	_clsHKFHIRVersion                              = _objcClass("HKFHIRVersion")
 	_hKFHIRVersionSelVersionFromVersionStringError = objc.RegisterName("versionFromVersionString:error:")
-	_hKFHIRVersionSelPrimaryDSTU2Version = objc.RegisterName("primaryDSTU2Version")
-	_hKFHIRVersionSelPrimaryR4Version = objc.RegisterName("primaryR4Version")
-	_hKFHIRVersionSelMajorVersion = objc.RegisterName("majorVersion")
-	_hKFHIRVersionSelMinorVersion = objc.RegisterName("minorVersion")
-	_hKFHIRVersionSelPatchVersion = objc.RegisterName("patchVersion")
-	_hKFHIRVersionSelFHIRRelease = objc.RegisterName("FHIRRelease")
-	_hKFHIRVersionSelStringRepresentation = objc.RegisterName("stringRepresentation")
+	_hKFHIRVersionSelPrimaryDSTU2Version           = objc.RegisterName("primaryDSTU2Version")
+	_hKFHIRVersionSelPrimaryR4Version              = objc.RegisterName("primaryR4Version")
+	_hKFHIRVersionSelMajorVersion                  = objc.RegisterName("majorVersion")
+	_hKFHIRVersionSelMinorVersion                  = objc.RegisterName("minorVersion")
+	_hKFHIRVersionSelPatchVersion                  = objc.RegisterName("patchVersion")
+	_hKFHIRVersionSelFHIRRelease                   = objc.RegisterName("FHIRRelease")
+	_hKFHIRVersionSelStringRepresentation          = objc.RegisterName("stringRepresentation")
 )
 
 func HKFHIRVersionFromID(id objc.ID) *HKFHIRVersion {
@@ -42,7 +42,9 @@ func HKFHIRVersionFromID(id objc.ID) *HKFHIRVersion {
 func HKFHIRVersionVersionFromVersionStringError(versionString *foundation.NSString) (*HKFHIRVersion, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKFHIRVersion), _hKFHIRVersionSelVersionFromVersionStringError, versionString.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -51,13 +53,17 @@ func HKFHIRVersionVersionFromVersionStringError(versionString *foundation.NSStri
 
 func HKFHIRVersionPrimaryDSTU2Version() *HKFHIRVersion {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKFHIRVersion), _hKFHIRVersionSelPrimaryDSTU2Version)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKFHIRVersionFromID(_ret)
 }
 
 func HKFHIRVersionPrimaryR4Version() *HKFHIRVersion {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKFHIRVersion), _hKFHIRVersionSelPrimaryR4Version)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKFHIRVersionFromID(_ret)
 }
 
@@ -78,14 +84,17 @@ func (o *HKFHIRVersion) PatchVersion() int {
 
 func (o *HKFHIRVersion) FHIRRelease() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKFHIRVersionSelFHIRRelease)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property      stringRepresentation @abstract      A string representation in the format "{major}.{minor}.{patch}".
 func (o *HKFHIRVersion) StringRepresentation() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKFHIRVersionSelStringRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

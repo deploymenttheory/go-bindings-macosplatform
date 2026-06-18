@@ -16,45 +16,45 @@ type AVB17221Entity struct {
 }
 
 var (
-	_clsAVB17221Entity = _objcClass("AVB17221Entity")
-	_aVB17221EntitySelIsLocalEntity = objc.RegisterName("isLocalEntity")
-	_aVB17221EntitySelSetLocalEntity = objc.RegisterName("setLocalEntity:")
-	_aVB17221EntitySelTimeToLive = objc.RegisterName("timeToLive")
-	_aVB17221EntitySelSetTimeToLive = objc.RegisterName("setTimeToLive:")
-	_aVB17221EntitySelEntityID = objc.RegisterName("entityID")
-	_aVB17221EntitySelSetEntityID = objc.RegisterName("setEntityID:")
-	_aVB17221EntitySelEntityModelID = objc.RegisterName("entityModelID")
-	_aVB17221EntitySelSetEntityModelID = objc.RegisterName("setEntityModelID:")
-	_aVB17221EntitySelEntityCapabilities = objc.RegisterName("entityCapabilities")
-	_aVB17221EntitySelSetEntityCapabilities = objc.RegisterName("setEntityCapabilities:")
-	_aVB17221EntitySelTalkerStreamSources = objc.RegisterName("talkerStreamSources")
-	_aVB17221EntitySelSetTalkerStreamSources = objc.RegisterName("setTalkerStreamSources:")
-	_aVB17221EntitySelTalkerCapabilities = objc.RegisterName("talkerCapabilities")
-	_aVB17221EntitySelSetTalkerCapabilities = objc.RegisterName("setTalkerCapabilities:")
-	_aVB17221EntitySelListenerStreamSinks = objc.RegisterName("listenerStreamSinks")
-	_aVB17221EntitySelSetListenerStreamSinks = objc.RegisterName("setListenerStreamSinks:")
-	_aVB17221EntitySelListenerCapabilities = objc.RegisterName("listenerCapabilities")
-	_aVB17221EntitySelSetListenerCapabilities = objc.RegisterName("setListenerCapabilities:")
-	_aVB17221EntitySelControllerCapabilities = objc.RegisterName("controllerCapabilities")
-	_aVB17221EntitySelSetControllerCapabilities = objc.RegisterName("setControllerCapabilities:")
-	_aVB17221EntitySelAvailableIndex = objc.RegisterName("availableIndex")
-	_aVB17221EntitySelSetAvailableIndex = objc.RegisterName("setAvailableIndex:")
-	_aVB17221EntitySelGPTPGrandmasterID = objc.RegisterName("gPTPGrandmasterID")
-	_aVB17221EntitySelSetGPTPGrandmasterID = objc.RegisterName("setGPTPGrandmasterID:")
-	_aVB17221EntitySelGPTPDomainNumber = objc.RegisterName("gPTPDomainNumber")
-	_aVB17221EntitySelSetGPTPDomainNumber = objc.RegisterName("setGPTPDomainNumber:")
-	_aVB17221EntitySelIdentifyControlIndex = objc.RegisterName("identifyControlIndex")
-	_aVB17221EntitySelSetIdentifyControlIndex = objc.RegisterName("setIdentifyControlIndex:")
-	_aVB17221EntitySelInterfaceIndex = objc.RegisterName("interfaceIndex")
-	_aVB17221EntitySelSetInterfaceIndex = objc.RegisterName("setInterfaceIndex:")
-	_aVB17221EntitySelAssociationID = objc.RegisterName("associationID")
-	_aVB17221EntitySelSetAssociationID = objc.RegisterName("setAssociationID:")
-	_aVB17221EntitySelCurrentConfigurationIndex = objc.RegisterName("currentConfigurationIndex")
+	_clsAVB17221Entity                             = _objcClass("AVB17221Entity")
+	_aVB17221EntitySelIsLocalEntity                = objc.RegisterName("isLocalEntity")
+	_aVB17221EntitySelSetLocalEntity               = objc.RegisterName("setLocalEntity:")
+	_aVB17221EntitySelTimeToLive                   = objc.RegisterName("timeToLive")
+	_aVB17221EntitySelSetTimeToLive                = objc.RegisterName("setTimeToLive:")
+	_aVB17221EntitySelEntityID                     = objc.RegisterName("entityID")
+	_aVB17221EntitySelSetEntityID                  = objc.RegisterName("setEntityID:")
+	_aVB17221EntitySelEntityModelID                = objc.RegisterName("entityModelID")
+	_aVB17221EntitySelSetEntityModelID             = objc.RegisterName("setEntityModelID:")
+	_aVB17221EntitySelEntityCapabilities           = objc.RegisterName("entityCapabilities")
+	_aVB17221EntitySelSetEntityCapabilities        = objc.RegisterName("setEntityCapabilities:")
+	_aVB17221EntitySelTalkerStreamSources          = objc.RegisterName("talkerStreamSources")
+	_aVB17221EntitySelSetTalkerStreamSources       = objc.RegisterName("setTalkerStreamSources:")
+	_aVB17221EntitySelTalkerCapabilities           = objc.RegisterName("talkerCapabilities")
+	_aVB17221EntitySelSetTalkerCapabilities        = objc.RegisterName("setTalkerCapabilities:")
+	_aVB17221EntitySelListenerStreamSinks          = objc.RegisterName("listenerStreamSinks")
+	_aVB17221EntitySelSetListenerStreamSinks       = objc.RegisterName("setListenerStreamSinks:")
+	_aVB17221EntitySelListenerCapabilities         = objc.RegisterName("listenerCapabilities")
+	_aVB17221EntitySelSetListenerCapabilities      = objc.RegisterName("setListenerCapabilities:")
+	_aVB17221EntitySelControllerCapabilities       = objc.RegisterName("controllerCapabilities")
+	_aVB17221EntitySelSetControllerCapabilities    = objc.RegisterName("setControllerCapabilities:")
+	_aVB17221EntitySelAvailableIndex               = objc.RegisterName("availableIndex")
+	_aVB17221EntitySelSetAvailableIndex            = objc.RegisterName("setAvailableIndex:")
+	_aVB17221EntitySelGPTPGrandmasterID            = objc.RegisterName("gPTPGrandmasterID")
+	_aVB17221EntitySelSetGPTPGrandmasterID         = objc.RegisterName("setGPTPGrandmasterID:")
+	_aVB17221EntitySelGPTPDomainNumber             = objc.RegisterName("gPTPDomainNumber")
+	_aVB17221EntitySelSetGPTPDomainNumber          = objc.RegisterName("setGPTPDomainNumber:")
+	_aVB17221EntitySelIdentifyControlIndex         = objc.RegisterName("identifyControlIndex")
+	_aVB17221EntitySelSetIdentifyControlIndex      = objc.RegisterName("setIdentifyControlIndex:")
+	_aVB17221EntitySelInterfaceIndex               = objc.RegisterName("interfaceIndex")
+	_aVB17221EntitySelSetInterfaceIndex            = objc.RegisterName("setInterfaceIndex:")
+	_aVB17221EntitySelAssociationID                = objc.RegisterName("associationID")
+	_aVB17221EntitySelSetAssociationID             = objc.RegisterName("setAssociationID:")
+	_aVB17221EntitySelCurrentConfigurationIndex    = objc.RegisterName("currentConfigurationIndex")
 	_aVB17221EntitySelSetCurrentConfigurationIndex = objc.RegisterName("setCurrentConfigurationIndex:")
-	_aVB17221EntitySelMacAddresses = objc.RegisterName("macAddresses")
-	_aVB17221EntitySelSetMacAddresses = objc.RegisterName("setMacAddresses:")
-	_aVB17221EntitySelEntityDiscovery = objc.RegisterName("entityDiscovery")
-	_aVB17221EntitySelSetEntityDiscovery = objc.RegisterName("setEntityDiscovery:")
+	_aVB17221EntitySelMacAddresses                 = objc.RegisterName("macAddresses")
+	_aVB17221EntitySelSetMacAddresses              = objc.RegisterName("setMacAddresses:")
+	_aVB17221EntitySelEntityDiscovery              = objc.RegisterName("entityDiscovery")
+	_aVB17221EntitySelSetEntityDiscovery           = objc.RegisterName("setEntityDiscovery:")
 )
 
 func AVB17221EntityFromID(id objc.ID) *AVB17221Entity {
@@ -240,7 +240,9 @@ func (o *AVB17221Entity) SetCurrentConfigurationIndex(currentConfigurationIndex 
 // @property	macAddresses @abstract	An array of AVBMACAddress objects containing the current MAC addresses of the entity.
 func (o *AVB17221Entity) MacAddresses() *foundation.NSArray[*AVBMACAddress] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVB17221EntitySelMacAddresses)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVBMACAddress](_ret)
 }
 
@@ -251,11 +253,12 @@ func (o *AVB17221Entity) SetMacAddresses(macAddresses *foundation.NSArray[*AVBMA
 // @property	entityDiscovery @abstract	The AVB17221EntityDiscovery object which discovered the entity.
 func (o *AVB17221Entity) EntityDiscovery() *AVB17221EntityDiscovery {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVB17221EntitySelEntityDiscovery)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVB17221EntityDiscoveryFromID(_ret)
 }
 
 func (o *AVB17221Entity) SetEntityDiscovery(entityDiscovery *AVB17221EntityDiscovery) {
 	o.Ptr().Send(_aVB17221EntitySelSetEntityDiscovery, entityDiscovery.Ptr())
 }
-

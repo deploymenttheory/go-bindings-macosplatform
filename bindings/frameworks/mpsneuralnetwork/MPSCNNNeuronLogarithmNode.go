@@ -17,11 +17,11 @@ type MPSCNNNeuronLogarithmNode struct {
 }
 
 var (
-	_clsMPSCNNNeuronLogarithmNode = _objcClass("MPSCNNNeuronLogarithmNode")
+	_clsMPSCNNNeuronLogarithmNode                  = _objcClass("MPSCNNNeuronLogarithmNode")
 	_mPSCNNNeuronLogarithmNodeSelNodeWithSourceABC = objc.RegisterName("nodeWithSource:a:b:c:")
 	_mPSCNNNeuronLogarithmNodeSelInitWithSourceABC = objc.RegisterName("initWithSource:a:b:c:")
-	_mPSCNNNeuronLogarithmNodeSelNodeWithSource = objc.RegisterName("nodeWithSource:")
-	_mPSCNNNeuronLogarithmNodeSelInitWithSource = objc.RegisterName("initWithSource:")
+	_mPSCNNNeuronLogarithmNodeSelNodeWithSource    = objc.RegisterName("nodeWithSource:")
+	_mPSCNNNeuronLogarithmNodeSelInitWithSource    = objc.RegisterName("initWithSource:")
 )
 
 func MPSCNNNeuronLogarithmNodeFromID(id objc.ID) *MPSCNNNeuronLogarithmNode {
@@ -36,28 +36,35 @@ func MPSCNNNeuronLogarithmNodeFromID(id objc.ID) *MPSCNNNeuronLogarithmNode {
 
 func MPSCNNNeuronLogarithmNodeNodeWithSourceABC(sourceNode *MPSNNImageNode, a float32, b float32, c float32) *MPSCNNNeuronLogarithmNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNNeuronLogarithmNode), _mPSCNNNeuronLogarithmNodeSelNodeWithSourceABC, sourceNode.Ptr(), a, b, c)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronLogarithmNodeFromID(_ret)
 }
 
 // @abstract   Init a node representing a MPSCNNNeuronLogarithm kernel @discussion For each pixel, applies the following function: @code f(x) = log_c(a * x + b) @endcode @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      a                       See discussion above. @param      b                       See discussion above. @param      c                       See discussion above. @return     A new MPSNNFilter node for a MPSCNNNeuronLogarithm kernel.
 func (o *MPSCNNNeuronLogarithmNode) InitWithSourceABC(sourceNode *MPSNNImageNode, a float32, b float32, c float32) *MPSCNNNeuronLogarithmNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronLogarithmNodeSelInitWithSourceABC, sourceNode.Ptr(), a, b, c)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronLogarithmNodeFromID(_ret)
 }
 
 // @abstract Create an autoreleased node with default values for parameters a, b, and c
 func MPSCNNNeuronLogarithmNodeNodeWithSource(sourceNode *MPSNNImageNode) *MPSCNNNeuronLogarithmNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNNeuronLogarithmNode), _mPSCNNNeuronLogarithmNodeSelNodeWithSource, sourceNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronLogarithmNodeFromID(_ret)
 }
 
 // @abstract Init a node with default values for parameters a, b, and c
 func (o *MPSCNNNeuronLogarithmNode) InitWithSource(sourceNode *MPSNNImageNode) *MPSCNNNeuronLogarithmNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronLogarithmNodeSelInitWithSource, sourceNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronLogarithmNodeFromID(_ret)
 }
-

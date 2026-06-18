@@ -50,4 +50,3 @@ type TokenAuthOperationable interface {
 }
 
 var _ TokenAuthOperationable = (*TokenAuthOperation)(nil)
-

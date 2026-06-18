@@ -53,7 +53,9 @@ func (x *FileSerialPortAttachment) Append() bool {
 	return x.inner.Append()
 }
 
-func (x *FileSerialPortAttachment) asSerialPortAttachment() *raw.VZSerialPortAttachment { return &x.inner.VZSerialPortAttachment }
+func (x *FileSerialPortAttachment) asSerialPortAttachment() *raw.VZSerialPortAttachment {
+	return &x.inner.VZSerialPortAttachment
+}
 
 // FileSerialPortAttachmentable is the interface implemented by [FileSerialPortAttachment], for mocking and DI.
 type FileSerialPortAttachmentable interface {
@@ -63,4 +65,3 @@ type FileSerialPortAttachmentable interface {
 }
 
 var _ FileSerialPortAttachmentable = (*FileSerialPortAttachment)(nil)
-

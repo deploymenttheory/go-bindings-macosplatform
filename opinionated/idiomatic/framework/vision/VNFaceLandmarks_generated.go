@@ -49,4 +49,3 @@ type FaceLandmarksable interface {
 }
 
 var _ FaceLandmarksable = (*FaceLandmarks)(nil)
-

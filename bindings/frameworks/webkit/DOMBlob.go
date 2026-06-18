@@ -15,7 +15,7 @@ type DOMBlob struct {
 }
 
 var (
-	_clsDOMBlob = _objcClass("DOMBlob")
+	_clsDOMBlob     = _objcClass("DOMBlob")
 	_dOMBlobSelSize = objc.RegisterName("size")
 )
 
@@ -33,4 +33,3 @@ func (o *DOMBlob) Size() uint64 {
 	_ret := objc.Send[uint64](o.Ptr(), _dOMBlobSelSize)
 	return _ret
 }
-

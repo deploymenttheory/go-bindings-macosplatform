@@ -17,21 +17,21 @@ type NSError struct {
 }
 
 var (
-	_clsNSError = _objcClass("NSError")
-	_nSErrorSelInitWithDomainCodeUserInfo = objc.RegisterName("initWithDomain:code:userInfo:")
-	_nSErrorSelErrorWithDomainCodeUserInfo = objc.RegisterName("errorWithDomain:code:userInfo:")
+	_clsNSError                                          = _objcClass("NSError")
+	_nSErrorSelInitWithDomainCodeUserInfo                = objc.RegisterName("initWithDomain:code:userInfo:")
+	_nSErrorSelErrorWithDomainCodeUserInfo               = objc.RegisterName("errorWithDomain:code:userInfo:")
 	_nSErrorSelSetUserInfoValueProviderForDomainProvider = objc.RegisterName("setUserInfoValueProviderForDomain:provider:")
-	_nSErrorSelUserInfoValueProviderForDomain = objc.RegisterName("userInfoValueProviderForDomain:")
-	_nSErrorSelDomain = objc.RegisterName("domain")
-	_nSErrorSelCode = objc.RegisterName("code")
-	_nSErrorSelUserInfo = objc.RegisterName("userInfo")
-	_nSErrorSelLocalizedDescription = objc.RegisterName("localizedDescription")
-	_nSErrorSelLocalizedFailureReason = objc.RegisterName("localizedFailureReason")
-	_nSErrorSelLocalizedRecoverySuggestion = objc.RegisterName("localizedRecoverySuggestion")
-	_nSErrorSelLocalizedRecoveryOptions = objc.RegisterName("localizedRecoveryOptions")
-	_nSErrorSelRecoveryAttempter = objc.RegisterName("recoveryAttempter")
-	_nSErrorSelHelpAnchor = objc.RegisterName("helpAnchor")
-	_nSErrorSelUnderlyingErrors = objc.RegisterName("underlyingErrors")
+	_nSErrorSelUserInfoValueProviderForDomain            = objc.RegisterName("userInfoValueProviderForDomain:")
+	_nSErrorSelDomain                                    = objc.RegisterName("domain")
+	_nSErrorSelCode                                      = objc.RegisterName("code")
+	_nSErrorSelUserInfo                                  = objc.RegisterName("userInfo")
+	_nSErrorSelLocalizedDescription                      = objc.RegisterName("localizedDescription")
+	_nSErrorSelLocalizedFailureReason                    = objc.RegisterName("localizedFailureReason")
+	_nSErrorSelLocalizedRecoverySuggestion               = objc.RegisterName("localizedRecoverySuggestion")
+	_nSErrorSelLocalizedRecoveryOptions                  = objc.RegisterName("localizedRecoveryOptions")
+	_nSErrorSelRecoveryAttempter                         = objc.RegisterName("recoveryAttempter")
+	_nSErrorSelHelpAnchor                                = objc.RegisterName("helpAnchor")
+	_nSErrorSelUnderlyingErrors                          = objc.RegisterName("underlyingErrors")
 )
 
 func NSErrorFromID(id objc.ID) *NSError {
@@ -46,13 +46,17 @@ func NSErrorFromID(id objc.ID) *NSError {
 
 func (o *NSError) InitWithDomainCodeUserInfo(domain *NSString, code int, dict *NSDictionary[*NSString, objc.ID]) *NSError {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSErrorSelInitWithDomainCodeUserInfo, domain.Ptr(), code, dict)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSErrorFromID(_ret)
 }
 
 func NSErrorErrorWithDomainCodeUserInfo(domain *NSString, code int, dict *NSDictionary[*NSString, objc.ID]) *NSError {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSError), _nSErrorSelErrorWithDomainCodeUserInfo, domain.Ptr(), code, dict)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSErrorFromID(_ret)
 }
 
@@ -77,7 +81,9 @@ func NSErrorUserInfoValueProviderForDomain(errorDomain *NSString) objc.Block {
 
 func (o *NSError) Domain() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSErrorSelDomain)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -93,25 +99,33 @@ func (o *NSError) UserInfo() *NSDictionary[*NSString, objc.ID] {
 
 func (o *NSError) LocalizedDescription() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSErrorSelLocalizedDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSError) LocalizedFailureReason() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSErrorSelLocalizedFailureReason)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSError) LocalizedRecoverySuggestion() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSErrorSelLocalizedRecoverySuggestion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSError) LocalizedRecoveryOptions() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSErrorSelLocalizedRecoveryOptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -122,7 +136,9 @@ func (o *NSError) RecoveryAttempter() objc.ID {
 
 func (o *NSError) HelpAnchor() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSErrorSelHelpAnchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -130,4 +146,3 @@ func (o *NSError) UnderlyingErrors() *NSArray[objc.ID] {
 	_ret := objc.Send[*NSArray[objc.ID]](o.Ptr(), _nSErrorSelUnderlyingErrors)
 	return _ret
 }
-

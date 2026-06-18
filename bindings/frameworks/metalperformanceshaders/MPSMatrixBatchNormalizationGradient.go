@@ -22,22 +22,22 @@ type MPSMatrixBatchNormalizationGradient struct {
 }
 
 var (
-	_clsMPSMatrixBatchNormalizationGradient = _objcClass("MPSMatrixBatchNormalizationGradient")
-	_mPSMatrixBatchNormalizationGradientSelSetNeuronTypeParameterAParameterBParameterC = objc.RegisterName("setNeuronType:parameterA:parameterB:parameterC:")
-	_mPSMatrixBatchNormalizationGradientSelNeuronType = objc.RegisterName("neuronType")
-	_mPSMatrixBatchNormalizationGradientSelNeuronParameterA = objc.RegisterName("neuronParameterA")
-	_mPSMatrixBatchNormalizationGradientSelNeuronParameterB = objc.RegisterName("neuronParameterB")
-	_mPSMatrixBatchNormalizationGradientSelNeuronParameterC = objc.RegisterName("neuronParameterC")
-	_mPSMatrixBatchNormalizationGradientSelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsMPSMatrixBatchNormalizationGradient                                                                                                                                                                              = _objcClass("MPSMatrixBatchNormalizationGradient")
+	_mPSMatrixBatchNormalizationGradientSelSetNeuronTypeParameterAParameterBParameterC                                                                                                                                   = objc.RegisterName("setNeuronType:parameterA:parameterB:parameterC:")
+	_mPSMatrixBatchNormalizationGradientSelNeuronType                                                                                                                                                                    = objc.RegisterName("neuronType")
+	_mPSMatrixBatchNormalizationGradientSelNeuronParameterA                                                                                                                                                              = objc.RegisterName("neuronParameterA")
+	_mPSMatrixBatchNormalizationGradientSelNeuronParameterB                                                                                                                                                              = objc.RegisterName("neuronParameterB")
+	_mPSMatrixBatchNormalizationGradientSelNeuronParameterC                                                                                                                                                              = objc.RegisterName("neuronParameterC")
+	_mPSMatrixBatchNormalizationGradientSelInitWithDevice                                                                                                                                                                = objc.RegisterName("initWithDevice:")
 	_mPSMatrixBatchNormalizationGradientSelEncodeToCommandBufferGradientMatrixInputMatrixMeanVectorVarianceVectorGammaVectorBetaVectorResultGradientForDataMatrixResultGradientForGammaVectorResultGradientForBetaVector = objc.RegisterName("encodeToCommandBuffer:gradientMatrix:inputMatrix:meanVector:varianceVector:gammaVector:betaVector:resultGradientForDataMatrix:resultGradientForGammaVector:resultGradientForBetaVector:")
-	_mPSMatrixBatchNormalizationGradientSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSMatrixBatchNormalizationGradientSelCopyWithZoneDevice = objc.RegisterName("copyWithZone:device:")
-	_mPSMatrixBatchNormalizationGradientSelSourceNumberOfFeatureVectors = objc.RegisterName("sourceNumberOfFeatureVectors")
-	_mPSMatrixBatchNormalizationGradientSelSetSourceNumberOfFeatureVectors = objc.RegisterName("setSourceNumberOfFeatureVectors:")
-	_mPSMatrixBatchNormalizationGradientSelSourceInputFeatureChannels = objc.RegisterName("sourceInputFeatureChannels")
-	_mPSMatrixBatchNormalizationGradientSelSetSourceInputFeatureChannels = objc.RegisterName("setSourceInputFeatureChannels:")
-	_mPSMatrixBatchNormalizationGradientSelEpsilon = objc.RegisterName("epsilon")
-	_mPSMatrixBatchNormalizationGradientSelSetEpsilon = objc.RegisterName("setEpsilon:")
+	_mPSMatrixBatchNormalizationGradientSelInitWithCoderDevice                                                                                                                                                           = objc.RegisterName("initWithCoder:device:")
+	_mPSMatrixBatchNormalizationGradientSelCopyWithZoneDevice                                                                                                                                                            = objc.RegisterName("copyWithZone:device:")
+	_mPSMatrixBatchNormalizationGradientSelSourceNumberOfFeatureVectors                                                                                                                                                  = objc.RegisterName("sourceNumberOfFeatureVectors")
+	_mPSMatrixBatchNormalizationGradientSelSetSourceNumberOfFeatureVectors                                                                                                                                               = objc.RegisterName("setSourceNumberOfFeatureVectors:")
+	_mPSMatrixBatchNormalizationGradientSelSourceInputFeatureChannels                                                                                                                                                    = objc.RegisterName("sourceInputFeatureChannels")
+	_mPSMatrixBatchNormalizationGradientSelSetSourceInputFeatureChannels                                                                                                                                                 = objc.RegisterName("setSourceInputFeatureChannels:")
+	_mPSMatrixBatchNormalizationGradientSelEpsilon                                                                                                                                                                       = objc.RegisterName("epsilon")
+	_mPSMatrixBatchNormalizationGradientSelSetEpsilon                                                                                                                                                                    = objc.RegisterName("setEpsilon:")
 )
 
 func MPSMatrixBatchNormalizationGradientFromID(id objc.ID) *MPSMatrixBatchNormalizationGradient {
@@ -81,7 +81,9 @@ func (o *MPSMatrixBatchNormalizationGradient) NeuronParameterC() float32 {
 
 func (o *MPSMatrixBatchNormalizationGradient) InitWithDevice(device metal.MTLDevice) *MPSMatrixBatchNormalizationGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixBatchNormalizationGradientSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixBatchNormalizationGradientFromID(_ret)
 }
 
@@ -93,7 +95,9 @@ func (o *MPSMatrixBatchNormalizationGradient) EncodeToCommandBufferGradientMatri
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSMatrixBatchNormalizationGradient @param      device      The MTLDevice on which to make the MPSMatrixBatchNormalizationGradient object. @return     A new MPSMatrixBatchNormalizationGradient object, or nil if failure.
 func (o *MPSMatrixBatchNormalizationGradient) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSMatrixBatchNormalizationGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixBatchNormalizationGradientSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixBatchNormalizationGradientFromID(_ret)
 }
 
@@ -132,4 +136,3 @@ func (o *MPSMatrixBatchNormalizationGradient) Epsilon() float32 {
 func (o *MPSMatrixBatchNormalizationGradient) SetEpsilon(epsilon float32) {
 	o.Ptr().Send(_mPSMatrixBatchNormalizationGradientSelSetEpsilon, epsilon)
 }
-

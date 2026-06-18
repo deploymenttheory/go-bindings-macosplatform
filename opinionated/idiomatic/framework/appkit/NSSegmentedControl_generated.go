@@ -240,7 +240,9 @@ func (x *SegmentedControl) WithSubviews(items ...ViewProvider) *SegmentedControl
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asView().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSView](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -382,7 +384,9 @@ func (x *SegmentedControl) WithBackgroundFilters(items ...*coreimage.CIFilter) *
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -404,7 +408,9 @@ func (x *SegmentedControl) WithContentFilters(items ...*coreimage.CIFilter) *Seg
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -468,7 +474,9 @@ func (x *SegmentedControl) WithGestureRecognizers(items ...GestureRecognizerProv
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -815,7 +823,9 @@ func (x *SegmentedControl) asControl() *raw.NSControl { return &x.inner.NSContro
 
 func (x *SegmentedControl) asView() *raw.NSView { return &x.inner.NSControl.NSView }
 
-func (x *SegmentedControl) asResponder() *raw.NSResponder { return &x.inner.NSControl.NSView.NSResponder }
+func (x *SegmentedControl) asResponder() *raw.NSResponder {
+	return &x.inner.NSControl.NSView.NSResponder
+}
 
 // SegmentedControlable is the interface implemented by [SegmentedControl], for mocking and DI.
 type SegmentedControlable interface {
@@ -948,4 +958,3 @@ type SegmentedControlable interface {
 }
 
 var _ SegmentedControlable = (*SegmentedControl)(nil)
-

@@ -16,20 +16,20 @@ type AVCaptionRegion struct {
 }
 
 var (
-	_clsAVCaptionRegion = _objcClass("AVCaptionRegion")
-	_aVCaptionRegionSelEncodeWithCoder = objc.RegisterName("encodeWithCoder:")
-	_aVCaptionRegionSelIsEqual = objc.RegisterName("isEqual:")
-	_aVCaptionRegionSelAppleITTTopRegion = objc.RegisterName("appleITTTopRegion")
-	_aVCaptionRegionSelAppleITTBottomRegion = objc.RegisterName("appleITTBottomRegion")
-	_aVCaptionRegionSelAppleITTLeftRegion = objc.RegisterName("appleITTLeftRegion")
-	_aVCaptionRegionSelAppleITTRightRegion = objc.RegisterName("appleITTRightRegion")
+	_clsAVCaptionRegion                       = _objcClass("AVCaptionRegion")
+	_aVCaptionRegionSelEncodeWithCoder        = objc.RegisterName("encodeWithCoder:")
+	_aVCaptionRegionSelIsEqual                = objc.RegisterName("isEqual:")
+	_aVCaptionRegionSelAppleITTTopRegion      = objc.RegisterName("appleITTTopRegion")
+	_aVCaptionRegionSelAppleITTBottomRegion   = objc.RegisterName("appleITTBottomRegion")
+	_aVCaptionRegionSelAppleITTLeftRegion     = objc.RegisterName("appleITTLeftRegion")
+	_aVCaptionRegionSelAppleITTRightRegion    = objc.RegisterName("appleITTRightRegion")
 	_aVCaptionRegionSelSubRipTextBottomRegion = objc.RegisterName("subRipTextBottomRegion")
-	_aVCaptionRegionSelIdentifier = objc.RegisterName("identifier")
-	_aVCaptionRegionSelOrigin = objc.RegisterName("origin")
-	_aVCaptionRegionSelSize = objc.RegisterName("size")
-	_aVCaptionRegionSelScroll = objc.RegisterName("scroll")
-	_aVCaptionRegionSelDisplayAlignment = objc.RegisterName("displayAlignment")
-	_aVCaptionRegionSelWritingMode = objc.RegisterName("writingMode")
+	_aVCaptionRegionSelIdentifier             = objc.RegisterName("identifier")
+	_aVCaptionRegionSelOrigin                 = objc.RegisterName("origin")
+	_aVCaptionRegionSelSize                   = objc.RegisterName("size")
+	_aVCaptionRegionSelScroll                 = objc.RegisterName("scroll")
+	_aVCaptionRegionSelDisplayAlignment       = objc.RegisterName("displayAlignment")
+	_aVCaptionRegionSelWritingMode            = objc.RegisterName("writingMode")
 )
 
 func AVCaptionRegionFromID(id objc.ID) *AVCaptionRegion {
@@ -55,42 +55,54 @@ func (o *AVCaptionRegion) IsEqual(object objc.ID) bool {
 // @property appleITTTopRegion @abstract The top region for iTT format @discussion This region can be used in iTT format and it occupies the top 15% of the display area. The region uses LRTB, a line progresses left to right and the block extends from top to bottom. Each line is stacked with top justified.
 func AVCaptionRegionAppleITTTopRegion() *AVCaptionRegion {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptionRegion), _aVCaptionRegionSelAppleITTTopRegion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptionRegionFromID(_ret)
 }
 
 // @property appleITTBottomRegion @abstract The bottom region for iTT format @discussion This region can be used in iTT format and it occupies the bottom 15% of the display area. The region uses LRTB, a line progresses left to right and the block extends from top to bottom. Each line is stacked with bottom justified.
 func AVCaptionRegionAppleITTBottomRegion() *AVCaptionRegion {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptionRegion), _aVCaptionRegionSelAppleITTBottomRegion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptionRegionFromID(_ret)
 }
 
 // @property appleITTLeftRegion @abstract The  left region for iTT format @discussion This region can be used in iTT format and it occupies the left 15% of the display area. The region uses TBRL, a line progresses top to bottom and the block extends from right to left. Each line is stacked with right justified.
 func AVCaptionRegionAppleITTLeftRegion() *AVCaptionRegion {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptionRegion), _aVCaptionRegionSelAppleITTLeftRegion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptionRegionFromID(_ret)
 }
 
 // @property appleITTRightRegion @abstract The right region for iTT format @discussion This region can be used in iTT format and it occupies the right 15% of the display area. The region uses TBRL, a line progresses top to bottom and the block extends from right to left. Each line is stacked with right justified.
 func AVCaptionRegionAppleITTRightRegion() *AVCaptionRegion {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptionRegion), _aVCaptionRegionSelAppleITTRightRegion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptionRegionFromID(_ret)
 }
 
 // @property subRipTextBottomRegion @abstract The bottom region for SubRip Text (SRT) format @discussion This region can be used in SRT format and it occupies the entire video display area. The region uses LRTB, a line progresses left to right and the block extends from top to bottom. Each line is stacked with bottom justified.
 func AVCaptionRegionSubRipTextBottomRegion() *AVCaptionRegion {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptionRegion), _aVCaptionRegionSelSubRipTextBottomRegion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptionRegionFromID(_ret)
 }
 
 // @property identifier @abstract Identifier for the region @discussion When regionIdentifier is nil, two regions with the same position and endPosition are considered to be same, that is captions referring these regions belong to the same region when serialized to a format like TTML.  In addition, the AVCaptionRegion cannot be mutably copied. When regionIdentifier is not nil, two regions are same if and only if the region identifier is equal. It is a client's responsibility to ensure these AVCaptionRegion objects have the same properties.
 func (o *AVCaptionRegion) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptionRegionSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -123,4 +135,3 @@ func (o *AVCaptionRegion) WritingMode() AVCaptionRegionWritingMode {
 	_ret := objc.Send[AVCaptionRegionWritingMode](o.Ptr(), _aVCaptionRegionSelWritingMode)
 	return _ret
 }
-

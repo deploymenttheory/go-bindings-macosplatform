@@ -159,4 +159,3 @@ type MediaSelectionOptionable interface {
 }
 
 var _ MediaSelectionOptionable = (*MediaSelectionOption)(nil)
-

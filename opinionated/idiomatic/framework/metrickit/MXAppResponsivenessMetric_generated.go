@@ -50,4 +50,3 @@ type AppResponsivenessMetricable interface {
 }
 
 var _ AppResponsivenessMetricable = (*AppResponsivenessMetric)(nil)
-

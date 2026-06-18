@@ -17,7 +17,9 @@ type MTRDeviceControllerExternalCertificateParameters struct {
 }
 
 // Unwrap returns the underlying [raw.MTRDeviceControllerExternalCertificateParameters].
-func (x *MTRDeviceControllerExternalCertificateParameters) Unwrap() *raw.MTRDeviceControllerExternalCertificateParameters { return x.inner }
+func (x *MTRDeviceControllerExternalCertificateParameters) Unwrap() *raw.MTRDeviceControllerExternalCertificateParameters {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -45,7 +47,9 @@ func (x *MTRDeviceControllerExternalCertificateParameters) WithProductAttestatio
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSData](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -61,7 +65,9 @@ func (x *MTRDeviceControllerExternalCertificateParameters) WithCertificationDecl
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSData](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -99,9 +105,13 @@ func (x *MTRDeviceControllerExternalCertificateParameters) RootCertificate() *fo
 	return x.inner.RootCertificate()
 }
 
-func (x *MTRDeviceControllerExternalCertificateParameters) asMTRDeviceControllerParameters() *raw.MTRDeviceControllerParameters { return &x.inner.MTRDeviceControllerParameters }
+func (x *MTRDeviceControllerExternalCertificateParameters) asMTRDeviceControllerParameters() *raw.MTRDeviceControllerParameters {
+	return &x.inner.MTRDeviceControllerParameters
+}
 
-func (x *MTRDeviceControllerExternalCertificateParameters) asMTRDeviceControllerAbstractParameters() *raw.MTRDeviceControllerAbstractParameters { return &x.inner.MTRDeviceControllerParameters.MTRDeviceControllerAbstractParameters }
+func (x *MTRDeviceControllerExternalCertificateParameters) asMTRDeviceControllerAbstractParameters() *raw.MTRDeviceControllerAbstractParameters {
+	return &x.inner.MTRDeviceControllerParameters.MTRDeviceControllerAbstractParameters
+}
 
 // MTRDeviceControllerExternalCertificateParametersable is the interface implemented by [MTRDeviceControllerExternalCertificateParameters], for mocking and DI.
 type MTRDeviceControllerExternalCertificateParametersable interface {
@@ -116,4 +126,3 @@ type MTRDeviceControllerExternalCertificateParametersable interface {
 }
 
 var _ MTRDeviceControllerExternalCertificateParametersable = (*MTRDeviceControllerExternalCertificateParameters)(nil)
-

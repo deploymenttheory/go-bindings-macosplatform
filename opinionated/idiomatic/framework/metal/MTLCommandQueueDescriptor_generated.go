@@ -79,4 +79,3 @@ type CommandQueueDescriptorable interface {
 }
 
 var _ CommandQueueDescriptorable = (*CommandQueueDescriptor)(nil)
-

@@ -49,4 +49,3 @@ func MTRSetLogCallback(logTypeThreshold raw.MTRLogType, callback func(raw.MTRLog
 func MTRSetMessageReliabilityParameters(idleRetransmitMs *foundation.NSNumber, activeRetransmitMs *foundation.NSNumber, activeThresholdMs *foundation.NSNumber, additionalRetransmitDelayMs *foundation.NSNumber) {
 	raw.MTRSetMessageReliabilityParameters(idleRetransmitMs, activeRetransmitMs, activeThresholdMs, additionalRetransmitDelayMs)
 }
-

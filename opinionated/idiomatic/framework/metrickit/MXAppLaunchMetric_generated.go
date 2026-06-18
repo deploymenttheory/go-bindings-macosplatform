@@ -68,4 +68,3 @@ type AppLaunchMetricable interface {
 }
 
 var _ AppLaunchMetricable = (*AppLaunchMetric)(nil)
-

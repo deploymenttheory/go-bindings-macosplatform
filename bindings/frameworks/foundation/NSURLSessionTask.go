@@ -17,37 +17,37 @@ type NSURLSessionTask struct {
 }
 
 var (
-	_clsNSURLSessionTask = _objcClass("NSURLSessionTask")
-	_nSURLSessionTaskSelCancel = objc.RegisterName("cancel")
-	_nSURLSessionTaskSelSuspend = objc.RegisterName("suspend")
-	_nSURLSessionTaskSelResume = objc.RegisterName("resume")
-	_nSURLSessionTaskSelInit = objc.RegisterName("init")
-	_nSURLSessionTaskSelNew = objc.RegisterName("new")
-	_nSURLSessionTaskSelTaskIdentifier = objc.RegisterName("taskIdentifier")
-	_nSURLSessionTaskSelOriginalRequest = objc.RegisterName("originalRequest")
-	_nSURLSessionTaskSelCurrentRequest = objc.RegisterName("currentRequest")
-	_nSURLSessionTaskSelResponse = objc.RegisterName("response")
-	_nSURLSessionTaskSelDelegate = objc.RegisterName("delegate")
-	_nSURLSessionTaskSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSURLSessionTaskSelProgress = objc.RegisterName("progress")
-	_nSURLSessionTaskSelEarliestBeginDate = objc.RegisterName("earliestBeginDate")
-	_nSURLSessionTaskSelSetEarliestBeginDate = objc.RegisterName("setEarliestBeginDate:")
-	_nSURLSessionTaskSelCountOfBytesClientExpectsToSend = objc.RegisterName("countOfBytesClientExpectsToSend")
-	_nSURLSessionTaskSelSetCountOfBytesClientExpectsToSend = objc.RegisterName("setCountOfBytesClientExpectsToSend:")
-	_nSURLSessionTaskSelCountOfBytesClientExpectsToReceive = objc.RegisterName("countOfBytesClientExpectsToReceive")
+	_clsNSURLSessionTask                                      = _objcClass("NSURLSessionTask")
+	_nSURLSessionTaskSelCancel                                = objc.RegisterName("cancel")
+	_nSURLSessionTaskSelSuspend                               = objc.RegisterName("suspend")
+	_nSURLSessionTaskSelResume                                = objc.RegisterName("resume")
+	_nSURLSessionTaskSelInit                                  = objc.RegisterName("init")
+	_nSURLSessionTaskSelNew                                   = objc.RegisterName("new")
+	_nSURLSessionTaskSelTaskIdentifier                        = objc.RegisterName("taskIdentifier")
+	_nSURLSessionTaskSelOriginalRequest                       = objc.RegisterName("originalRequest")
+	_nSURLSessionTaskSelCurrentRequest                        = objc.RegisterName("currentRequest")
+	_nSURLSessionTaskSelResponse                              = objc.RegisterName("response")
+	_nSURLSessionTaskSelDelegate                              = objc.RegisterName("delegate")
+	_nSURLSessionTaskSelSetDelegate                           = objc.RegisterName("setDelegate:")
+	_nSURLSessionTaskSelProgress                              = objc.RegisterName("progress")
+	_nSURLSessionTaskSelEarliestBeginDate                     = objc.RegisterName("earliestBeginDate")
+	_nSURLSessionTaskSelSetEarliestBeginDate                  = objc.RegisterName("setEarliestBeginDate:")
+	_nSURLSessionTaskSelCountOfBytesClientExpectsToSend       = objc.RegisterName("countOfBytesClientExpectsToSend")
+	_nSURLSessionTaskSelSetCountOfBytesClientExpectsToSend    = objc.RegisterName("setCountOfBytesClientExpectsToSend:")
+	_nSURLSessionTaskSelCountOfBytesClientExpectsToReceive    = objc.RegisterName("countOfBytesClientExpectsToReceive")
 	_nSURLSessionTaskSelSetCountOfBytesClientExpectsToReceive = objc.RegisterName("setCountOfBytesClientExpectsToReceive:")
-	_nSURLSessionTaskSelCountOfBytesSent = objc.RegisterName("countOfBytesSent")
-	_nSURLSessionTaskSelCountOfBytesReceived = objc.RegisterName("countOfBytesReceived")
-	_nSURLSessionTaskSelCountOfBytesExpectedToSend = objc.RegisterName("countOfBytesExpectedToSend")
-	_nSURLSessionTaskSelCountOfBytesExpectedToReceive = objc.RegisterName("countOfBytesExpectedToReceive")
-	_nSURLSessionTaskSelTaskDescription = objc.RegisterName("taskDescription")
-	_nSURLSessionTaskSelSetTaskDescription = objc.RegisterName("setTaskDescription:")
-	_nSURLSessionTaskSelState = objc.RegisterName("state")
-	_nSURLSessionTaskSelError = objc.RegisterName("error")
-	_nSURLSessionTaskSelPriority = objc.RegisterName("priority")
-	_nSURLSessionTaskSelSetPriority = objc.RegisterName("setPriority:")
-	_nSURLSessionTaskSelPrefersIncrementalDelivery = objc.RegisterName("prefersIncrementalDelivery")
-	_nSURLSessionTaskSelSetPrefersIncrementalDelivery = objc.RegisterName("setPrefersIncrementalDelivery:")
+	_nSURLSessionTaskSelCountOfBytesSent                      = objc.RegisterName("countOfBytesSent")
+	_nSURLSessionTaskSelCountOfBytesReceived                  = objc.RegisterName("countOfBytesReceived")
+	_nSURLSessionTaskSelCountOfBytesExpectedToSend            = objc.RegisterName("countOfBytesExpectedToSend")
+	_nSURLSessionTaskSelCountOfBytesExpectedToReceive         = objc.RegisterName("countOfBytesExpectedToReceive")
+	_nSURLSessionTaskSelTaskDescription                       = objc.RegisterName("taskDescription")
+	_nSURLSessionTaskSelSetTaskDescription                    = objc.RegisterName("setTaskDescription:")
+	_nSURLSessionTaskSelState                                 = objc.RegisterName("state")
+	_nSURLSessionTaskSelError                                 = objc.RegisterName("error")
+	_nSURLSessionTaskSelPriority                              = objc.RegisterName("priority")
+	_nSURLSessionTaskSelSetPriority                           = objc.RegisterName("setPriority:")
+	_nSURLSessionTaskSelPrefersIncrementalDelivery            = objc.RegisterName("prefersIncrementalDelivery")
+	_nSURLSessionTaskSelSetPrefersIncrementalDelivery         = objc.RegisterName("setPrefersIncrementalDelivery:")
 )
 
 func NSURLSessionTaskFromID(id objc.ID) *NSURLSessionTask {
@@ -75,7 +75,9 @@ func (o *NSURLSessionTask) Resume() {
 // Deprecated: Not supported
 func (o *NSURLSessionTask) Init() *NSURLSessionTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionTaskFromID(_ret)
 }
 
@@ -92,19 +94,25 @@ func (o *NSURLSessionTask) TaskIdentifier() uint {
 
 func (o *NSURLSessionTask) OriginalRequest() *NSURLRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskSelOriginalRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLRequestFromID(_ret)
 }
 
 func (o *NSURLSessionTask) CurrentRequest() *NSURLRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskSelCurrentRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLRequestFromID(_ret)
 }
 
 func (o *NSURLSessionTask) Response() *NSURLResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskSelResponse)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLResponseFromID(_ret)
 }
 
@@ -119,13 +127,17 @@ func (o *NSURLSessionTask) SetDelegate(delegate NSURLSessionTaskDelegate) {
 
 func (o *NSURLSessionTask) Progress() *NSProgress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskSelProgress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSProgressFromID(_ret)
 }
 
 func (o *NSURLSessionTask) EarliestBeginDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskSelEarliestBeginDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
@@ -173,7 +185,9 @@ func (o *NSURLSessionTask) CountOfBytesExpectedToReceive() int64 {
 
 func (o *NSURLSessionTask) TaskDescription() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskSelTaskDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -208,4 +222,3 @@ func (o *NSURLSessionTask) PrefersIncrementalDelivery() bool {
 func (o *NSURLSessionTask) SetPrefersIncrementalDelivery(prefersIncrementalDelivery bool) {
 	o.Ptr().Send(_nSURLSessionTaskSelSetPrefersIncrementalDelivery, prefersIncrementalDelivery)
 }
-

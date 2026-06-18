@@ -16,25 +16,25 @@ type MTROperationalCredentialsClusterFabricDescriptorStruct struct {
 }
 
 var (
-	_clsMTROperationalCredentialsClusterFabricDescriptorStruct = _objcClass("MTROperationalCredentialsClusterFabricDescriptorStruct")
-	_mTROperationalCredentialsClusterFabricDescriptorStructSelRootPublicKey = objc.RegisterName("rootPublicKey")
+	_clsMTROperationalCredentialsClusterFabricDescriptorStruct                 = _objcClass("MTROperationalCredentialsClusterFabricDescriptorStruct")
+	_mTROperationalCredentialsClusterFabricDescriptorStructSelRootPublicKey    = objc.RegisterName("rootPublicKey")
 	_mTROperationalCredentialsClusterFabricDescriptorStructSelSetRootPublicKey = objc.RegisterName("setRootPublicKey:")
-	_mTROperationalCredentialsClusterFabricDescriptorStructSelVendorID = objc.RegisterName("vendorID")
-	_mTROperationalCredentialsClusterFabricDescriptorStructSelSetVendorID = objc.RegisterName("setVendorID:")
-	_mTROperationalCredentialsClusterFabricDescriptorStructSelVendorId = objc.RegisterName("vendorId")
-	_mTROperationalCredentialsClusterFabricDescriptorStructSelSetVendorId = objc.RegisterName("setVendorId:")
-	_mTROperationalCredentialsClusterFabricDescriptorStructSelFabricID = objc.RegisterName("fabricID")
-	_mTROperationalCredentialsClusterFabricDescriptorStructSelSetFabricID = objc.RegisterName("setFabricID:")
-	_mTROperationalCredentialsClusterFabricDescriptorStructSelFabricId = objc.RegisterName("fabricId")
-	_mTROperationalCredentialsClusterFabricDescriptorStructSelSetFabricId = objc.RegisterName("setFabricId:")
-	_mTROperationalCredentialsClusterFabricDescriptorStructSelNodeID = objc.RegisterName("nodeID")
-	_mTROperationalCredentialsClusterFabricDescriptorStructSelSetNodeID = objc.RegisterName("setNodeID:")
-	_mTROperationalCredentialsClusterFabricDescriptorStructSelNodeId = objc.RegisterName("nodeId")
-	_mTROperationalCredentialsClusterFabricDescriptorStructSelSetNodeId = objc.RegisterName("setNodeId:")
-	_mTROperationalCredentialsClusterFabricDescriptorStructSelLabel = objc.RegisterName("label")
-	_mTROperationalCredentialsClusterFabricDescriptorStructSelSetLabel = objc.RegisterName("setLabel:")
-	_mTROperationalCredentialsClusterFabricDescriptorStructSelFabricIndex = objc.RegisterName("fabricIndex")
-	_mTROperationalCredentialsClusterFabricDescriptorStructSelSetFabricIndex = objc.RegisterName("setFabricIndex:")
+	_mTROperationalCredentialsClusterFabricDescriptorStructSelVendorID         = objc.RegisterName("vendorID")
+	_mTROperationalCredentialsClusterFabricDescriptorStructSelSetVendorID      = objc.RegisterName("setVendorID:")
+	_mTROperationalCredentialsClusterFabricDescriptorStructSelVendorId         = objc.RegisterName("vendorId")
+	_mTROperationalCredentialsClusterFabricDescriptorStructSelSetVendorId      = objc.RegisterName("setVendorId:")
+	_mTROperationalCredentialsClusterFabricDescriptorStructSelFabricID         = objc.RegisterName("fabricID")
+	_mTROperationalCredentialsClusterFabricDescriptorStructSelSetFabricID      = objc.RegisterName("setFabricID:")
+	_mTROperationalCredentialsClusterFabricDescriptorStructSelFabricId         = objc.RegisterName("fabricId")
+	_mTROperationalCredentialsClusterFabricDescriptorStructSelSetFabricId      = objc.RegisterName("setFabricId:")
+	_mTROperationalCredentialsClusterFabricDescriptorStructSelNodeID           = objc.RegisterName("nodeID")
+	_mTROperationalCredentialsClusterFabricDescriptorStructSelSetNodeID        = objc.RegisterName("setNodeID:")
+	_mTROperationalCredentialsClusterFabricDescriptorStructSelNodeId           = objc.RegisterName("nodeId")
+	_mTROperationalCredentialsClusterFabricDescriptorStructSelSetNodeId        = objc.RegisterName("setNodeId:")
+	_mTROperationalCredentialsClusterFabricDescriptorStructSelLabel            = objc.RegisterName("label")
+	_mTROperationalCredentialsClusterFabricDescriptorStructSelSetLabel         = objc.RegisterName("setLabel:")
+	_mTROperationalCredentialsClusterFabricDescriptorStructSelFabricIndex      = objc.RegisterName("fabricIndex")
+	_mTROperationalCredentialsClusterFabricDescriptorStructSelSetFabricIndex   = objc.RegisterName("setFabricIndex:")
 )
 
 func MTROperationalCredentialsClusterFabricDescriptorStructFromID(id objc.ID) *MTROperationalCredentialsClusterFabricDescriptorStruct {
@@ -49,7 +49,9 @@ func MTROperationalCredentialsClusterFabricDescriptorStructFromID(id objc.ID) *M
 
 func (o *MTROperationalCredentialsClusterFabricDescriptorStruct) RootPublicKey() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterFabricDescriptorStructSelRootPublicKey)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -59,7 +61,9 @@ func (o *MTROperationalCredentialsClusterFabricDescriptorStruct) SetRootPublicKe
 
 func (o *MTROperationalCredentialsClusterFabricDescriptorStruct) VendorID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterFabricDescriptorStructSelVendorID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -69,7 +73,9 @@ func (o *MTROperationalCredentialsClusterFabricDescriptorStruct) SetVendorID(ven
 
 func (o *MTROperationalCredentialsClusterFabricDescriptorStruct) VendorId() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterFabricDescriptorStructSelVendorId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -79,7 +85,9 @@ func (o *MTROperationalCredentialsClusterFabricDescriptorStruct) SetVendorId(ven
 
 func (o *MTROperationalCredentialsClusterFabricDescriptorStruct) FabricID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterFabricDescriptorStructSelFabricID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -89,7 +97,9 @@ func (o *MTROperationalCredentialsClusterFabricDescriptorStruct) SetFabricID(fab
 
 func (o *MTROperationalCredentialsClusterFabricDescriptorStruct) FabricId() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterFabricDescriptorStructSelFabricId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -99,7 +109,9 @@ func (o *MTROperationalCredentialsClusterFabricDescriptorStruct) SetFabricId(fab
 
 func (o *MTROperationalCredentialsClusterFabricDescriptorStruct) NodeID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterFabricDescriptorStructSelNodeID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -109,7 +121,9 @@ func (o *MTROperationalCredentialsClusterFabricDescriptorStruct) SetNodeID(nodeI
 
 func (o *MTROperationalCredentialsClusterFabricDescriptorStruct) NodeId() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterFabricDescriptorStructSelNodeId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -119,7 +133,9 @@ func (o *MTROperationalCredentialsClusterFabricDescriptorStruct) SetNodeId(nodeI
 
 func (o *MTROperationalCredentialsClusterFabricDescriptorStruct) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterFabricDescriptorStructSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -129,11 +145,12 @@ func (o *MTROperationalCredentialsClusterFabricDescriptorStruct) SetLabel(label 
 
 func (o *MTROperationalCredentialsClusterFabricDescriptorStruct) FabricIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterFabricDescriptorStructSelFabricIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTROperationalCredentialsClusterFabricDescriptorStruct) SetFabricIndex(fabricIndex *foundation.NSNumber) {
 	o.Ptr().Send(_mTROperationalCredentialsClusterFabricDescriptorStructSelSetFabricIndex, fabricIndex.Ptr())
 }
-

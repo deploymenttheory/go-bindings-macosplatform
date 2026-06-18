@@ -15,18 +15,18 @@ type NSXPCListener struct {
 }
 
 var (
-	_clsNSXPCListener = _objcClass("NSXPCListener")
-	_nSXPCListenerSelServiceListener = objc.RegisterName("serviceListener")
-	_nSXPCListenerSelAnonymousListener = objc.RegisterName("anonymousListener")
-	_nSXPCListenerSelInitWithMachServiceName = objc.RegisterName("initWithMachServiceName:")
-	_nSXPCListenerSelResume = objc.RegisterName("resume")
-	_nSXPCListenerSelSuspend = objc.RegisterName("suspend")
-	_nSXPCListenerSelActivate = objc.RegisterName("activate")
-	_nSXPCListenerSelInvalidate = objc.RegisterName("invalidate")
+	_clsNSXPCListener                                    = _objcClass("NSXPCListener")
+	_nSXPCListenerSelServiceListener                     = objc.RegisterName("serviceListener")
+	_nSXPCListenerSelAnonymousListener                   = objc.RegisterName("anonymousListener")
+	_nSXPCListenerSelInitWithMachServiceName             = objc.RegisterName("initWithMachServiceName:")
+	_nSXPCListenerSelResume                              = objc.RegisterName("resume")
+	_nSXPCListenerSelSuspend                             = objc.RegisterName("suspend")
+	_nSXPCListenerSelActivate                            = objc.RegisterName("activate")
+	_nSXPCListenerSelInvalidate                          = objc.RegisterName("invalidate")
 	_nSXPCListenerSelSetConnectionCodeSigningRequirement = objc.RegisterName("setConnectionCodeSigningRequirement:")
-	_nSXPCListenerSelDelegate = objc.RegisterName("delegate")
-	_nSXPCListenerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSXPCListenerSelEndpoint = objc.RegisterName("endpoint")
+	_nSXPCListenerSelDelegate                            = objc.RegisterName("delegate")
+	_nSXPCListenerSelSetDelegate                         = objc.RegisterName("setDelegate:")
+	_nSXPCListenerSelEndpoint                            = objc.RegisterName("endpoint")
 )
 
 func NSXPCListenerFromID(id objc.ID) *NSXPCListener {
@@ -41,19 +41,25 @@ func NSXPCListenerFromID(id objc.ID) *NSXPCListener {
 
 func NSXPCListenerServiceListener() *NSXPCListener {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSXPCListener), _nSXPCListenerSelServiceListener)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXPCListenerFromID(_ret)
 }
 
 func NSXPCListenerAnonymousListener() *NSXPCListener {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSXPCListener), _nSXPCListenerSelAnonymousListener)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXPCListenerFromID(_ret)
 }
 
 func (o *NSXPCListener) InitWithMachServiceName(name *NSString) *NSXPCListener {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXPCListenerSelInitWithMachServiceName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXPCListenerFromID(_ret)
 }
 
@@ -89,7 +95,8 @@ func (o *NSXPCListener) SetDelegate(delegate NSXPCListenerDelegate) {
 
 func (o *NSXPCListener) Endpoint() *NSXPCListenerEndpoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXPCListenerSelEndpoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXPCListenerEndpointFromID(_ret)
 }
-

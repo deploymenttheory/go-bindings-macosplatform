@@ -15,9 +15,9 @@ type INShareFocusStatusIntent struct {
 }
 
 var (
-	_clsINShareFocusStatusIntent = _objcClass("INShareFocusStatusIntent")
+	_clsINShareFocusStatusIntent                    = _objcClass("INShareFocusStatusIntent")
 	_iNShareFocusStatusIntentSelInitWithFocusStatus = objc.RegisterName("initWithFocusStatus:")
-	_iNShareFocusStatusIntentSelFocusStatus = objc.RegisterName("focusStatus")
+	_iNShareFocusStatusIntentSelFocusStatus         = objc.RegisterName("focusStatus")
 )
 
 func INShareFocusStatusIntentFromID(id objc.ID) *INShareFocusStatusIntent {
@@ -32,13 +32,16 @@ func INShareFocusStatusIntentFromID(id objc.ID) *INShareFocusStatusIntent {
 
 func (o *INShareFocusStatusIntent) InitWithFocusStatus(focusStatus *INFocusStatus) *INShareFocusStatusIntent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNShareFocusStatusIntentSelInitWithFocusStatus, focusStatus.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INShareFocusStatusIntentFromID(_ret)
 }
 
 func (o *INShareFocusStatusIntent) FocusStatus() *INFocusStatus {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNShareFocusStatusIntentSelFocusStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INFocusStatusFromID(_ret)
 }
-

@@ -16,8 +16,8 @@ type HKElectrocardiogramVoltageMeasurement struct {
 }
 
 var (
-	_clsHKElectrocardiogramVoltageMeasurement = _objcClass("HKElectrocardiogramVoltageMeasurement")
-	_hKElectrocardiogramVoltageMeasurementSelQuantityForLead = objc.RegisterName("quantityForLead:")
+	_clsHKElectrocardiogramVoltageMeasurement                     = _objcClass("HKElectrocardiogramVoltageMeasurement")
+	_hKElectrocardiogramVoltageMeasurementSelQuantityForLead      = objc.RegisterName("quantityForLead:")
 	_hKElectrocardiogramVoltageMeasurementSelTimeSinceSampleStart = objc.RegisterName("timeSinceSampleStart")
 )
 
@@ -34,7 +34,9 @@ func HKElectrocardiogramVoltageMeasurementFromID(id objc.ID) *HKElectrocardiogra
 // @method        quantityForLead: @abstract      Returns an HKQuantity for the specified lead with a unit compatible with [HKUnit voltUnit]. @param         lead      The HKElectrocardiogramLead for which voltage quantity will be returned.
 func (o *HKElectrocardiogramVoltageMeasurement) QuantityForLead(lead HKElectrocardiogramLead) *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKElectrocardiogramVoltageMeasurementSelQuantityForLead, lead)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
@@ -43,4 +45,3 @@ func (o *HKElectrocardiogramVoltageMeasurement) TimeSinceSampleStart() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _hKElectrocardiogramVoltageMeasurementSelTimeSinceSampleStart)
 	return _ret
 }
-

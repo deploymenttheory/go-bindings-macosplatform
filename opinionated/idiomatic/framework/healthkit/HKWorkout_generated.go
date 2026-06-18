@@ -139,4 +139,3 @@ type Workoutable interface {
 }
 
 var _ Workoutable = (*Workout)(nil)
-

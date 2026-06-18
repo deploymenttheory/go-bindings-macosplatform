@@ -22,23 +22,23 @@ type MPSMatrixNeuron struct {
 }
 
 var (
-	_clsMPSMatrixNeuron = _objcClass("MPSMatrixNeuron")
-	_mPSMatrixNeuronSelSetNeuronTypeParameterAParameterBParameterC = objc.RegisterName("setNeuronType:parameterA:parameterB:parameterC:")
-	_mPSMatrixNeuronSelNeuronType = objc.RegisterName("neuronType")
-	_mPSMatrixNeuronSelNeuronParameterA = objc.RegisterName("neuronParameterA")
-	_mPSMatrixNeuronSelNeuronParameterB = objc.RegisterName("neuronParameterB")
-	_mPSMatrixNeuronSelNeuronParameterC = objc.RegisterName("neuronParameterC")
-	_mPSMatrixNeuronSelSetNeuronToPReLUWithParametersA = objc.RegisterName("setNeuronToPReLUWithParametersA:")
-	_mPSMatrixNeuronSelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsMPSMatrixNeuron                                                       = _objcClass("MPSMatrixNeuron")
+	_mPSMatrixNeuronSelSetNeuronTypeParameterAParameterBParameterC            = objc.RegisterName("setNeuronType:parameterA:parameterB:parameterC:")
+	_mPSMatrixNeuronSelNeuronType                                             = objc.RegisterName("neuronType")
+	_mPSMatrixNeuronSelNeuronParameterA                                       = objc.RegisterName("neuronParameterA")
+	_mPSMatrixNeuronSelNeuronParameterB                                       = objc.RegisterName("neuronParameterB")
+	_mPSMatrixNeuronSelNeuronParameterC                                       = objc.RegisterName("neuronParameterC")
+	_mPSMatrixNeuronSelSetNeuronToPReLUWithParametersA                        = objc.RegisterName("setNeuronToPReLUWithParametersA:")
+	_mPSMatrixNeuronSelInitWithDevice                                         = objc.RegisterName("initWithDevice:")
 	_mPSMatrixNeuronSelEncodeToCommandBufferInputMatrixBiasVectorResultMatrix = objc.RegisterName("encodeToCommandBuffer:inputMatrix:biasVector:resultMatrix:")
-	_mPSMatrixNeuronSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSMatrixNeuronSelCopyWithZoneDevice = objc.RegisterName("copyWithZone:device:")
-	_mPSMatrixNeuronSelSourceNumberOfFeatureVectors = objc.RegisterName("sourceNumberOfFeatureVectors")
-	_mPSMatrixNeuronSelSetSourceNumberOfFeatureVectors = objc.RegisterName("setSourceNumberOfFeatureVectors:")
-	_mPSMatrixNeuronSelSourceInputFeatureChannels = objc.RegisterName("sourceInputFeatureChannels")
-	_mPSMatrixNeuronSelSetSourceInputFeatureChannels = objc.RegisterName("setSourceInputFeatureChannels:")
-	_mPSMatrixNeuronSelAlpha = objc.RegisterName("alpha")
-	_mPSMatrixNeuronSelSetAlpha = objc.RegisterName("setAlpha:")
+	_mPSMatrixNeuronSelInitWithCoderDevice                                    = objc.RegisterName("initWithCoder:device:")
+	_mPSMatrixNeuronSelCopyWithZoneDevice                                     = objc.RegisterName("copyWithZone:device:")
+	_mPSMatrixNeuronSelSourceNumberOfFeatureVectors                           = objc.RegisterName("sourceNumberOfFeatureVectors")
+	_mPSMatrixNeuronSelSetSourceNumberOfFeatureVectors                        = objc.RegisterName("setSourceNumberOfFeatureVectors:")
+	_mPSMatrixNeuronSelSourceInputFeatureChannels                             = objc.RegisterName("sourceInputFeatureChannels")
+	_mPSMatrixNeuronSelSetSourceInputFeatureChannels                          = objc.RegisterName("setSourceInputFeatureChannels:")
+	_mPSMatrixNeuronSelAlpha                                                  = objc.RegisterName("alpha")
+	_mPSMatrixNeuronSelSetAlpha                                               = objc.RegisterName("setAlpha:")
 )
 
 func MPSMatrixNeuronFromID(id objc.ID) *MPSMatrixNeuron {
@@ -87,7 +87,9 @@ func (o *MPSMatrixNeuron) SetNeuronToPReLUWithParametersA(a *foundation.NSData) 
 
 func (o *MPSMatrixNeuron) InitWithDevice(device metal.MTLDevice) *MPSMatrixNeuron {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixNeuronSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixNeuronFromID(_ret)
 }
 
@@ -99,7 +101,9 @@ func (o *MPSMatrixNeuron) EncodeToCommandBufferInputMatrixBiasVectorResultMatrix
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSMatrixNeuron @param      device      The MTLDevice on which to make the MPSMatrixNeuron object. @return     A new MPSMatrixNeuron object, or nil if failure.
 func (o *MPSMatrixNeuron) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSMatrixNeuron {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixNeuronSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixNeuronFromID(_ret)
 }
 
@@ -138,4 +142,3 @@ func (o *MPSMatrixNeuron) Alpha() float64 {
 func (o *MPSMatrixNeuron) SetAlpha(alpha float64) {
 	o.Ptr().Send(_mPSMatrixNeuronSelSetAlpha, alpha)
 }
-

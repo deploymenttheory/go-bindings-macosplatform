@@ -102,9 +102,13 @@ func (x *CNNNeuronTanH) WithLabel(label string) *CNNNeuronTanH {
 
 func (x *CNNNeuronTanH) asCNNNeuron() *mpsneuralnetwork.MPSCNNNeuron { return &x.inner.MPSCNNNeuron }
 
-func (x *CNNNeuronTanH) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel }
+func (x *CNNNeuronTanH) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNNeuron.MPSCNNKernel
+}
 
-func (x *CNNNeuronTanH) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel }
+func (x *CNNNeuronTanH) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel
+}
 
 // CNNNeuronTanHable is the interface implemented by [CNNNeuronTanH], for mocking and DI.
 type CNNNeuronTanHable interface {
@@ -122,4 +126,3 @@ type CNNNeuronTanHable interface {
 }
 
 var _ CNNNeuronTanHable = (*CNNNeuronTanH)(nil)
-

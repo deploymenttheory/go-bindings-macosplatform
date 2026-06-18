@@ -19,21 +19,21 @@ type CSSearchableIndex struct {
 }
 
 var (
-	_clsCSSearchableIndex = _objcClass("CSSearchableIndex")
-	_cSSearchableIndexSelIsIndexingAvailable = objc.RegisterName("isIndexingAvailable")
-	_cSSearchableIndexSelDefaultSearchableIndex = objc.RegisterName("defaultSearchableIndex")
-	_cSSearchableIndexSelInitWithName = objc.RegisterName("initWithName:")
-	_cSSearchableIndexSelInitWithNameProtectionClass = objc.RegisterName("initWithName:protectionClass:")
-	_cSSearchableIndexSelIndexSearchableItemsCompletionHandler = objc.RegisterName("indexSearchableItems:completionHandler:")
-	_cSSearchableIndexSelDeleteSearchableItemsWithIdentifiersCompletionHandler = objc.RegisterName("deleteSearchableItemsWithIdentifiers:completionHandler:")
-	_cSSearchableIndexSelDeleteSearchableItemsWithDomainIdentifiersCompletionHandler = objc.RegisterName("deleteSearchableItemsWithDomainIdentifiers:completionHandler:")
-	_cSSearchableIndexSelDeleteAllSearchableItemsWithCompletionHandler = objc.RegisterName("deleteAllSearchableItemsWithCompletionHandler:")
-	_cSSearchableIndexSelIndexDelegate = objc.RegisterName("indexDelegate")
-	_cSSearchableIndexSelSetIndexDelegate = objc.RegisterName("setIndexDelegate:")
-	_cSSearchableIndexSelBeginIndexBatch = objc.RegisterName("beginIndexBatch")
-	_cSSearchableIndexSelEndIndexBatchWithExpectedClientStateNewClientStateCompletionHandler = objc.RegisterName("endIndexBatchWithExpectedClientState:newClientState:completionHandler:")
-	_cSSearchableIndexSelEndIndexBatchWithClientStateCompletionHandler = objc.RegisterName("endIndexBatchWithClientState:completionHandler:")
-	_cSSearchableIndexSelFetchLastClientStateWithCompletionHandler = objc.RegisterName("fetchLastClientStateWithCompletionHandler:")
+	_clsCSSearchableIndex                                                                       = _objcClass("CSSearchableIndex")
+	_cSSearchableIndexSelIsIndexingAvailable                                                    = objc.RegisterName("isIndexingAvailable")
+	_cSSearchableIndexSelDefaultSearchableIndex                                                 = objc.RegisterName("defaultSearchableIndex")
+	_cSSearchableIndexSelInitWithName                                                           = objc.RegisterName("initWithName:")
+	_cSSearchableIndexSelInitWithNameProtectionClass                                            = objc.RegisterName("initWithName:protectionClass:")
+	_cSSearchableIndexSelIndexSearchableItemsCompletionHandler                                  = objc.RegisterName("indexSearchableItems:completionHandler:")
+	_cSSearchableIndexSelDeleteSearchableItemsWithIdentifiersCompletionHandler                  = objc.RegisterName("deleteSearchableItemsWithIdentifiers:completionHandler:")
+	_cSSearchableIndexSelDeleteSearchableItemsWithDomainIdentifiersCompletionHandler            = objc.RegisterName("deleteSearchableItemsWithDomainIdentifiers:completionHandler:")
+	_cSSearchableIndexSelDeleteAllSearchableItemsWithCompletionHandler                          = objc.RegisterName("deleteAllSearchableItemsWithCompletionHandler:")
+	_cSSearchableIndexSelIndexDelegate                                                          = objc.RegisterName("indexDelegate")
+	_cSSearchableIndexSelSetIndexDelegate                                                       = objc.RegisterName("setIndexDelegate:")
+	_cSSearchableIndexSelBeginIndexBatch                                                        = objc.RegisterName("beginIndexBatch")
+	_cSSearchableIndexSelEndIndexBatchWithExpectedClientStateNewClientStateCompletionHandler    = objc.RegisterName("endIndexBatchWithExpectedClientState:newClientState:completionHandler:")
+	_cSSearchableIndexSelEndIndexBatchWithClientStateCompletionHandler                          = objc.RegisterName("endIndexBatchWithClientState:completionHandler:")
+	_cSSearchableIndexSelFetchLastClientStateWithCompletionHandler                              = objc.RegisterName("fetchLastClientStateWithCompletionHandler:")
 	_cSSearchableIndexSelFetchDataForBundleIdentifierItemIdentifierContentTypeCompletionHandler = objc.RegisterName("fetchDataForBundleIdentifier:itemIdentifier:contentType:completionHandler:")
 )
 
@@ -54,19 +54,25 @@ func CSSearchableIndexIsIndexingAvailable() bool {
 
 func CSSearchableIndexDefaultSearchableIndex() *CSSearchableIndex {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCSSearchableIndex), _cSSearchableIndexSelDefaultSearchableIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CSSearchableIndexFromID(_ret)
 }
 
 func (o *CSSearchableIndex) InitWithName(name *foundation.NSString) *CSSearchableIndex {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableIndexSelInitWithName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CSSearchableIndexFromID(_ret)
 }
 
 func (o *CSSearchableIndex) InitWithNameProtectionClass(name *foundation.NSString, protectionClass *foundation.NSString) *CSSearchableIndex {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableIndexSelInitWithNameProtectionClass, name.Ptr(), protectionClass.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CSSearchableIndexFromID(_ret)
 }
 
@@ -176,4 +182,3 @@ func (o *CSSearchableIndex) FetchDataForBundleIdentifierItemIdentifierContentTyp
 	}
 	o.Ptr().Send(_cSSearchableIndexSelFetchDataForBundleIdentifierItemIdentifierContentTypeCompletionHandler, bundleIdentifier.Ptr(), itemIdentifier.Ptr(), contentType.Ptr(), __block_completionHandler)
 }
-

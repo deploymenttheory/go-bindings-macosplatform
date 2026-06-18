@@ -16,13 +16,13 @@ type CIQRCodeDescriptor struct {
 }
 
 var (
-	_clsCIQRCodeDescriptor = _objcClass("CIQRCodeDescriptor")
-	_cIQRCodeDescriptorSelInitWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel = objc.RegisterName("initWithPayload:symbolVersion:maskPattern:errorCorrectionLevel:")
+	_clsCIQRCodeDescriptor                                                                  = _objcClass("CIQRCodeDescriptor")
+	_cIQRCodeDescriptorSelInitWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel       = objc.RegisterName("initWithPayload:symbolVersion:maskPattern:errorCorrectionLevel:")
 	_cIQRCodeDescriptorSelDescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel = objc.RegisterName("descriptorWithPayload:symbolVersion:maskPattern:errorCorrectionLevel:")
-	_cIQRCodeDescriptorSelErrorCorrectedPayload = objc.RegisterName("errorCorrectedPayload")
-	_cIQRCodeDescriptorSelSymbolVersion = objc.RegisterName("symbolVersion")
-	_cIQRCodeDescriptorSelMaskPattern = objc.RegisterName("maskPattern")
-	_cIQRCodeDescriptorSelErrorCorrectionLevel = objc.RegisterName("errorCorrectionLevel")
+	_cIQRCodeDescriptorSelErrorCorrectedPayload                                             = objc.RegisterName("errorCorrectedPayload")
+	_cIQRCodeDescriptorSelSymbolVersion                                                     = objc.RegisterName("symbolVersion")
+	_cIQRCodeDescriptorSelMaskPattern                                                       = objc.RegisterName("maskPattern")
+	_cIQRCodeDescriptorSelErrorCorrectionLevel                                              = objc.RegisterName("errorCorrectionLevel")
 )
 
 func CIQRCodeDescriptorFromID(id objc.ID) *CIQRCodeDescriptor {
@@ -35,24 +35,30 @@ func CIQRCodeDescriptorFromID(id objc.ID) *CIQRCodeDescriptor {
 	return o
 }
 
-// Initializes a QR code descriptor for the given payload and parameters. - Parameters: - errorCorrectedPayload: The data to encode in the QR code symbol. - symbolVersion: The symbol version, from 1 through 40. - maskPattern: The mask pattern to use in the QR code, from 0 to 7. - errorCorrectionLevel: The QR code's error correction level: L, M, Q, or H. - Returns: An initialized ``CIAztecCodeDescriptor`` instance or `nil` if the parameters are invalid
+// Initializes a QR code descriptor for the given payload and parameters. - Parameters: - errorCorrectedPayload: The data to encode in the QR code symbol. - symbolVersion: The symbol version, from 1 through 40. - maskPattern: The mask pattern to use in the QR code, from 0 to 7. - errorCorrectionLevel: The QR code's error correction level: L, M, Q, or H. - Returns: An initialized “CIAztecCodeDescriptor“ instance or `nil` if the parameters are invalid
 func (o *CIQRCodeDescriptor) InitWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel(errorCorrectedPayload *foundation.NSData, symbolVersion int, maskPattern uint8, errorCorrectionLevel CIQRCodeErrorCorrectionLevel) *CIQRCodeDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIQRCodeDescriptorSelInitWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel, errorCorrectedPayload.Ptr(), symbolVersion, maskPattern, errorCorrectionLevel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIQRCodeDescriptorFromID(_ret)
 }
 
-// Creates a QR code descriptor for the given payload and parameters. - Parameters: - errorCorrectedPayload: The data to encode in the QR code symbol. - symbolVersion: The symbol version, from 1 through 40. - maskPattern: The mask pattern to use in the QR code, from 0 to 7. - errorCorrectionLevel: The QR code's error correction level: L, M, Q, or H. - Returns: An autoreleased ``CIAztecCodeDescriptor`` instance or `nil` if the parameters are invalid
+// Creates a QR code descriptor for the given payload and parameters. - Parameters: - errorCorrectedPayload: The data to encode in the QR code symbol. - symbolVersion: The symbol version, from 1 through 40. - maskPattern: The mask pattern to use in the QR code, from 0 to 7. - errorCorrectionLevel: The QR code's error correction level: L, M, Q, or H. - Returns: An autoreleased “CIAztecCodeDescriptor“ instance or `nil` if the parameters are invalid
 func CIQRCodeDescriptorDescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel(errorCorrectedPayload *foundation.NSData, symbolVersion int, maskPattern uint8, errorCorrectionLevel CIQRCodeErrorCorrectionLevel) *CIQRCodeDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIQRCodeDescriptor), _cIQRCodeDescriptorSelDescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel, errorCorrectedPayload.Ptr(), symbolVersion, maskPattern, errorCorrectionLevel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIQRCodeDescriptorFromID(_ret)
 }
 
 // The error-corrected codeword payload that comprises the QR code symbol. QR Codes are formally specified in ISO/IEC 18004:2006(E). Section 6.4.10 "Bitstream to codeword conversion" specifies the set of 8-bit codewords in the symbol immediately prior to splitting the message into blocks and applying error correction. During decode, error correction is applied and if successful, the message is re-ordered to the state immediately following "Bitstream to codeword conversion." The `errorCorrectedPayload` corresponds to this sequence of 8-bit codewords.
 func (o *CIQRCodeDescriptor) ErrorCorrectedPayload() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIQRCodeDescriptorSelErrorCorrectedPayload)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -68,9 +74,8 @@ func (o *CIQRCodeDescriptor) MaskPattern() uint8 {
 	return _ret
 }
 
-// The error correction level of the QR code symbol. QR Codes support four levels of Reed-Solomon error correction. The possible error correction levels are enumerated in ``CIDataMatrixCodeECCVersion``.
+// The error correction level of the QR code symbol. QR Codes support four levels of Reed-Solomon error correction. The possible error correction levels are enumerated in “CIDataMatrixCodeECCVersion“.
 func (o *CIQRCodeDescriptor) ErrorCorrectionLevel() CIQRCodeErrorCorrectionLevel {
 	_ret := objc.Send[CIQRCodeErrorCorrectionLevel](o.Ptr(), _cIQRCodeDescriptorSelErrorCorrectionLevel)
 	return _ret
 }
-

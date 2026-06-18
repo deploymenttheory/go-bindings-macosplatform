@@ -16,7 +16,7 @@ type ASAuthorizationPublicKeyCredentialLargeBlobRegistrationOutput struct {
 }
 
 var (
-	_clsASAuthorizationPublicKeyCredentialLargeBlobRegistrationOutput = _objcClass("ASAuthorizationPublicKeyCredentialLargeBlobRegistrationOutput")
+	_clsASAuthorizationPublicKeyCredentialLargeBlobRegistrationOutput            = _objcClass("ASAuthorizationPublicKeyCredentialLargeBlobRegistrationOutput")
 	_aSAuthorizationPublicKeyCredentialLargeBlobRegistrationOutputSelIsSupported = objc.RegisterName("isSupported")
 )
 
@@ -34,4 +34,3 @@ func (o *ASAuthorizationPublicKeyCredentialLargeBlobRegistrationOutput) IsSuppor
 	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationPublicKeyCredentialLargeBlobRegistrationOutputSelIsSupported)
 	return _ret
 }
-

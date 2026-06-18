@@ -16,15 +16,15 @@ type DOMCSSStyleSheet struct {
 }
 
 var (
-	_clsDOMCSSStyleSheet = _objcClass("DOMCSSStyleSheet")
-	_dOMCSSStyleSheetSelInsertRuleIndex = objc.RegisterName("insertRule:index:")
-	_dOMCSSStyleSheetSelDeleteRule = objc.RegisterName("deleteRule:")
+	_clsDOMCSSStyleSheet                  = _objcClass("DOMCSSStyleSheet")
+	_dOMCSSStyleSheetSelInsertRuleIndex   = objc.RegisterName("insertRule:index:")
+	_dOMCSSStyleSheetSelDeleteRule        = objc.RegisterName("deleteRule:")
 	_dOMCSSStyleSheetSelAddRuleStyleIndex = objc.RegisterName("addRule:style:index:")
-	_dOMCSSStyleSheetSelRemoveRule = objc.RegisterName("removeRule:")
-	_dOMCSSStyleSheetSelOwnerRule = objc.RegisterName("ownerRule")
-	_dOMCSSStyleSheetSelCssRules = objc.RegisterName("cssRules")
-	_dOMCSSStyleSheetSelRules = objc.RegisterName("rules")
-	_dOMCSSStyleSheetSelInsertRule = objc.RegisterName("insertRule::")
+	_dOMCSSStyleSheetSelRemoveRule        = objc.RegisterName("removeRule:")
+	_dOMCSSStyleSheetSelOwnerRule         = objc.RegisterName("ownerRule")
+	_dOMCSSStyleSheetSelCssRules          = objc.RegisterName("cssRules")
+	_dOMCSSStyleSheetSelRules             = objc.RegisterName("rules")
+	_dOMCSSStyleSheetSelInsertRule        = objc.RegisterName("insertRule::")
 )
 
 func DOMCSSStyleSheetFromID(id objc.ID) *DOMCSSStyleSheet {
@@ -57,19 +57,25 @@ func (o *DOMCSSStyleSheet) RemoveRule(index uint) {
 
 func (o *DOMCSSStyleSheet) OwnerRule() *DOMCSSRule {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleSheetSelOwnerRule)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMCSSRuleFromID(_ret)
 }
 
 func (o *DOMCSSStyleSheet) CssRules() *DOMCSSRuleList {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleSheetSelCssRules)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMCSSRuleListFromID(_ret)
 }
 
 func (o *DOMCSSStyleSheet) Rules() *DOMCSSRuleList {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSStyleSheetSelRules)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMCSSRuleListFromID(_ret)
 }
 
@@ -77,4 +83,3 @@ func (o *DOMCSSStyleSheet) InsertRule(rule *foundation.NSString, index uint) uin
 	_ret := objc.Send[uint](o.Ptr(), _dOMCSSStyleSheetSelInsertRule, rule.Ptr(), index)
 	return _ret
 }
-

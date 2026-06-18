@@ -26,4 +26,3 @@ func VZSocketDeviceConfigurationFromID(id objc.ID) *VZSocketDeviceConfiguration 
 	purego.Track(o)
 	return o
 }
-

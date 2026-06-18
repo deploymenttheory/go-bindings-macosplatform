@@ -12,8 +12,8 @@ import (
 type PKAddIdentityDocumentType int64
 
 const (
-	PKAddIdentityDocumentTypeIDCard PKAddIdentityDocumentType = 0
-	PKAddIdentityDocumentTypeMDL PKAddIdentityDocumentType = 1
+	PKAddIdentityDocumentTypeIDCard  PKAddIdentityDocumentType = 0
+	PKAddIdentityDocumentTypeMDL     PKAddIdentityDocumentType = 1
 	PKAddIdentityDocumentTypePhotoID PKAddIdentityDocumentType = 2
 )
 
@@ -34,7 +34,7 @@ type PKAddPaymentPassStyle int64
 
 const (
 	PKAddPaymentPassStylePayment PKAddPaymentPassStyle = 0
-	PKAddPaymentPassStyleAccess PKAddPaymentPassStyle = 1
+	PKAddPaymentPassStyleAccess  PKAddPaymentPassStyle = 1
 )
 
 func (e PKAddPaymentPassStyle) String() string {
@@ -51,7 +51,7 @@ func (e PKAddPaymentPassStyle) String() string {
 type PKAddShareablePassConfigurationPrimaryAction uint64
 
 const (
-	PKAddShareablePassConfigurationPrimaryActionAdd PKAddShareablePassConfigurationPrimaryAction = 0
+	PKAddShareablePassConfigurationPrimaryActionAdd   PKAddShareablePassConfigurationPrimaryAction = 0
 	PKAddShareablePassConfigurationPrimaryActionShare PKAddShareablePassConfigurationPrimaryAction = 1
 )
 
@@ -70,12 +70,12 @@ func (e PKAddShareablePassConfigurationPrimaryAction) String() string {
 type PKAddressField uint64
 
 const (
-	PKAddressFieldNone PKAddressField = 0
+	PKAddressFieldNone          PKAddressField = 0
 	PKAddressFieldPostalAddress PKAddressField = 1
-	PKAddressFieldPhone PKAddressField = 2
-	PKAddressFieldEmail PKAddressField = 4
-	PKAddressFieldName PKAddressField = 8
-	PKAddressFieldAll PKAddressField = 15
+	PKAddressFieldPhone         PKAddressField = 2
+	PKAddressFieldEmail         PKAddressField = 4
+	PKAddressFieldName          PKAddressField = 8
+	PKAddressFieldAll           PKAddressField = 15
 )
 
 func (e PKAddressField) String() string {
@@ -104,8 +104,8 @@ func (e PKAddressField) String() string {
 type PKApplePayLaterAvailability int64
 
 const (
-	PKApplePayLaterAvailable PKApplePayLaterAvailability = 0
-	PKApplePayLaterUnavailableItemIneligible PKApplePayLaterAvailability = 1
+	PKApplePayLaterAvailable                       PKApplePayLaterAvailability = 0
+	PKApplePayLaterUnavailableItemIneligible       PKApplePayLaterAvailability = 1
 	PKApplePayLaterUnavailableRecurringTransaction PKApplePayLaterAvailability = 2
 )
 
@@ -125,11 +125,11 @@ func (e PKApplePayLaterAvailability) String() string {
 type PKAutomaticPassPresentationSuppressionResult uint64
 
 const (
-	PKAutomaticPassPresentationSuppressionResultNotSupported PKAutomaticPassPresentationSuppressionResult = 0
+	PKAutomaticPassPresentationSuppressionResultNotSupported      PKAutomaticPassPresentationSuppressionResult = 0
 	PKAutomaticPassPresentationSuppressionResultAlreadyPresenting PKAutomaticPassPresentationSuppressionResult = 1
-	PKAutomaticPassPresentationSuppressionResultDenied PKAutomaticPassPresentationSuppressionResult = 2
-	PKAutomaticPassPresentationSuppressionResultCancelled PKAutomaticPassPresentationSuppressionResult = 3
-	PKAutomaticPassPresentationSuppressionResultSuccess PKAutomaticPassPresentationSuppressionResult = 4
+	PKAutomaticPassPresentationSuppressionResultDenied            PKAutomaticPassPresentationSuppressionResult = 2
+	PKAutomaticPassPresentationSuppressionResultCancelled         PKAutomaticPassPresentationSuppressionResult = 3
+	PKAutomaticPassPresentationSuppressionResultSuccess           PKAutomaticPassPresentationSuppressionResult = 4
 )
 
 func (e PKAutomaticPassPresentationSuppressionResult) String() string {
@@ -152,7 +152,7 @@ func (e PKAutomaticPassPresentationSuppressionResult) String() string {
 type PKBarcodeEventConfigurationDataType int64
 
 const (
-	PKBarcodeEventConfigurationDataTypeUnknown PKBarcodeEventConfigurationDataType = 0
+	PKBarcodeEventConfigurationDataTypeUnknown            PKBarcodeEventConfigurationDataType = 0
 	PKBarcodeEventConfigurationDataTypeSigningKeyMaterial PKBarcodeEventConfigurationDataType = 1
 	PKBarcodeEventConfigurationDataTypeSigningCertificate PKBarcodeEventConfigurationDataType = 2
 )
@@ -174,10 +174,10 @@ func (e PKBarcodeEventConfigurationDataType) String() string {
 type PKMerchantCapability uint64
 
 const (
-	PKMerchantCapability3DS PKMerchantCapability = 1
-	PKMerchantCapabilityEMV PKMerchantCapability = 2
-	PKMerchantCapabilityCredit PKMerchantCapability = 4
-	PKMerchantCapabilityDebit PKMerchantCapability = 8
+	PKMerchantCapability3DS             PKMerchantCapability = 1
+	PKMerchantCapabilityEMV             PKMerchantCapability = 2
+	PKMerchantCapabilityCredit          PKMerchantCapability = 4
+	PKMerchantCapabilityDebit           PKMerchantCapability = 8
 	PKMerchantCapabilityInstantFundsOut PKMerchantCapability = 128
 )
 
@@ -207,7 +207,7 @@ func (e PKMerchantCapability) String() string {
 type PKPassLibraryAddPassesStatus int64
 
 const (
-	PKPassLibraryDidAddPasses PKPassLibraryAddPassesStatus = 0
+	PKPassLibraryDidAddPasses       PKPassLibraryAddPassesStatus = 0
 	PKPassLibraryShouldReviewPasses PKPassLibraryAddPassesStatus = 1
 	PKPassLibraryDidCancelAddPasses PKPassLibraryAddPassesStatus = 2
 )
@@ -229,9 +229,9 @@ type PKPassLibraryAuthorizationStatus int64
 
 const (
 	PKPassLibraryAuthorizationStatusNotDetermined PKPassLibraryAuthorizationStatus = -1
-	PKPassLibraryAuthorizationStatusDenied PKPassLibraryAuthorizationStatus = 0
-	PKPassLibraryAuthorizationStatusAuthorized PKPassLibraryAuthorizationStatus = 1
-	PKPassLibraryAuthorizationStatusRestricted PKPassLibraryAuthorizationStatus = 2
+	PKPassLibraryAuthorizationStatusDenied        PKPassLibraryAuthorizationStatus = 0
+	PKPassLibraryAuthorizationStatusAuthorized    PKPassLibraryAuthorizationStatus = 1
+	PKPassLibraryAuthorizationStatusRestricted    PKPassLibraryAuthorizationStatus = 2
 )
 
 func (e PKPassLibraryAuthorizationStatus) String() string {
@@ -267,7 +267,7 @@ func (e PKPassLibraryCapability) String() string {
 type PKPassType uint64
 
 const (
-	PKPassTypeBarcode PKPassType = 0
+	PKPassTypeBarcode       PKPassType = 0
 	PKPassTypeSecureElement PKPassType = 1
 	// Deprecated: Use PKPassTypeSecureElement instead
 	PKPassTypePayment PKPassType = 1
@@ -291,14 +291,14 @@ func (e PKPassType) String() string {
 type PKPaymentAuthorizationStatus int64
 
 const (
-	PKPaymentAuthorizationStatusSuccess PKPaymentAuthorizationStatus = 0
-	PKPaymentAuthorizationStatusFailure PKPaymentAuthorizationStatus = 1
-	PKPaymentAuthorizationStatusInvalidBillingPostalAddress PKPaymentAuthorizationStatus = 2
+	PKPaymentAuthorizationStatusSuccess                      PKPaymentAuthorizationStatus = 0
+	PKPaymentAuthorizationStatusFailure                      PKPaymentAuthorizationStatus = 1
+	PKPaymentAuthorizationStatusInvalidBillingPostalAddress  PKPaymentAuthorizationStatus = 2
 	PKPaymentAuthorizationStatusInvalidShippingPostalAddress PKPaymentAuthorizationStatus = 3
-	PKPaymentAuthorizationStatusInvalidShippingContact PKPaymentAuthorizationStatus = 4
-	PKPaymentAuthorizationStatusPINRequired PKPaymentAuthorizationStatus = 5
-	PKPaymentAuthorizationStatusPINIncorrect PKPaymentAuthorizationStatus = 6
-	PKPaymentAuthorizationStatusPINLockout PKPaymentAuthorizationStatus = 7
+	PKPaymentAuthorizationStatusInvalidShippingContact       PKPaymentAuthorizationStatus = 4
+	PKPaymentAuthorizationStatusPINRequired                  PKPaymentAuthorizationStatus = 5
+	PKPaymentAuthorizationStatusPINIncorrect                 PKPaymentAuthorizationStatus = 6
+	PKPaymentAuthorizationStatusPINLockout                   PKPaymentAuthorizationStatus = 7
 )
 
 func (e PKPaymentAuthorizationStatus) String() string {
@@ -327,10 +327,10 @@ func (e PKPaymentAuthorizationStatus) String() string {
 type PKPaymentButtonStyle int64
 
 const (
-	PKPaymentButtonStyleWhite PKPaymentButtonStyle = 0
+	PKPaymentButtonStyleWhite        PKPaymentButtonStyle = 0
 	PKPaymentButtonStyleWhiteOutline PKPaymentButtonStyle = 1
-	PKPaymentButtonStyleBlack PKPaymentButtonStyle = 2
-	PKPaymentButtonStyleAutomatic PKPaymentButtonStyle = 3
+	PKPaymentButtonStyleBlack        PKPaymentButtonStyle = 2
+	PKPaymentButtonStyleAutomatic    PKPaymentButtonStyle = 3
 )
 
 func (e PKPaymentButtonStyle) String() string {
@@ -351,23 +351,23 @@ func (e PKPaymentButtonStyle) String() string {
 type PKPaymentButtonType int64
 
 const (
-	PKPaymentButtonTypePlain PKPaymentButtonType = 0
-	PKPaymentButtonTypeBuy PKPaymentButtonType = 1
-	PKPaymentButtonTypeSetUp PKPaymentButtonType = 2
-	PKPaymentButtonTypeInStore PKPaymentButtonType = 3
-	PKPaymentButtonTypeDonate PKPaymentButtonType = 4
-	PKPaymentButtonTypeCheckout PKPaymentButtonType = 5
-	PKPaymentButtonTypeBook PKPaymentButtonType = 6
-	PKPaymentButtonTypeSubscribe PKPaymentButtonType = 7
-	PKPaymentButtonTypeReload PKPaymentButtonType = 8
-	PKPaymentButtonTypeAddMoney PKPaymentButtonType = 9
-	PKPaymentButtonTypeTopUp PKPaymentButtonType = 10
-	PKPaymentButtonTypeOrder PKPaymentButtonType = 11
-	PKPaymentButtonTypeRent PKPaymentButtonType = 12
-	PKPaymentButtonTypeSupport PKPaymentButtonType = 13
+	PKPaymentButtonTypePlain      PKPaymentButtonType = 0
+	PKPaymentButtonTypeBuy        PKPaymentButtonType = 1
+	PKPaymentButtonTypeSetUp      PKPaymentButtonType = 2
+	PKPaymentButtonTypeInStore    PKPaymentButtonType = 3
+	PKPaymentButtonTypeDonate     PKPaymentButtonType = 4
+	PKPaymentButtonTypeCheckout   PKPaymentButtonType = 5
+	PKPaymentButtonTypeBook       PKPaymentButtonType = 6
+	PKPaymentButtonTypeSubscribe  PKPaymentButtonType = 7
+	PKPaymentButtonTypeReload     PKPaymentButtonType = 8
+	PKPaymentButtonTypeAddMoney   PKPaymentButtonType = 9
+	PKPaymentButtonTypeTopUp      PKPaymentButtonType = 10
+	PKPaymentButtonTypeOrder      PKPaymentButtonType = 11
+	PKPaymentButtonTypeRent       PKPaymentButtonType = 12
+	PKPaymentButtonTypeSupport    PKPaymentButtonType = 13
 	PKPaymentButtonTypeContribute PKPaymentButtonType = 14
-	PKPaymentButtonTypeTip PKPaymentButtonType = 15
-	PKPaymentButtonTypeContinue PKPaymentButtonType = 16
+	PKPaymentButtonTypeTip        PKPaymentButtonType = 15
+	PKPaymentButtonTypeContinue   PKPaymentButtonType = 16
 )
 
 func (e PKPaymentButtonType) String() string {
@@ -415,11 +415,11 @@ type PKPaymentMethodType uint64
 
 const (
 	PKPaymentMethodTypeUnknown PKPaymentMethodType = 0
-	PKPaymentMethodTypeDebit PKPaymentMethodType = 1
-	PKPaymentMethodTypeCredit PKPaymentMethodType = 2
+	PKPaymentMethodTypeDebit   PKPaymentMethodType = 1
+	PKPaymentMethodTypeCredit  PKPaymentMethodType = 2
 	PKPaymentMethodTypePrepaid PKPaymentMethodType = 3
-	PKPaymentMethodTypeStore PKPaymentMethodType = 4
-	PKPaymentMethodTypeEMoney PKPaymentMethodType = 5
+	PKPaymentMethodTypeStore   PKPaymentMethodType = 4
+	PKPaymentMethodTypeEMoney  PKPaymentMethodType = 5
 )
 
 func (e PKPaymentMethodType) String() string {
@@ -445,11 +445,11 @@ func (e PKPaymentMethodType) String() string {
 type PKPaymentPassActivationState uint64
 
 const (
-	PKPaymentPassActivationStateActivated PKPaymentPassActivationState = 0
+	PKPaymentPassActivationStateActivated          PKPaymentPassActivationState = 0
 	PKPaymentPassActivationStateRequiresActivation PKPaymentPassActivationState = 1
-	PKPaymentPassActivationStateActivating PKPaymentPassActivationState = 2
-	PKPaymentPassActivationStateSuspended PKPaymentPassActivationState = 3
-	PKPaymentPassActivationStateDeactivated PKPaymentPassActivationState = 4
+	PKPaymentPassActivationStateActivating         PKPaymentPassActivationState = 2
+	PKPaymentPassActivationStateSuspended          PKPaymentPassActivationState = 3
+	PKPaymentPassActivationStateDeactivated        PKPaymentPassActivationState = 4
 )
 
 func (e PKPaymentPassActivationState) String() string {
@@ -472,7 +472,7 @@ func (e PKPaymentPassActivationState) String() string {
 type PKPaymentSummaryItemType uint64
 
 const (
-	PKPaymentSummaryItemTypeFinal PKPaymentSummaryItemType = 0
+	PKPaymentSummaryItemTypeFinal   PKPaymentSummaryItemType = 0
 	PKPaymentSummaryItemTypePending PKPaymentSummaryItemType = 1
 )
 
@@ -491,8 +491,8 @@ func (e PKPaymentSummaryItemType) String() string {
 type PKRadioTechnology uint64
 
 const (
-	PKRadioTechnologyNone PKRadioTechnology = 0
-	PKRadioTechnologyNFC PKRadioTechnology = 1
+	PKRadioTechnologyNone      PKRadioTechnology = 0
+	PKRadioTechnologyNFC       PKRadioTechnology = 1
 	PKRadioTechnologyBluetooth PKRadioTechnology = 2
 )
 
@@ -513,11 +513,11 @@ func (e PKRadioTechnology) String() string {
 type PKSecureElementPassActivationState int64
 
 const (
-	PKSecureElementPassActivationStateActivated PKSecureElementPassActivationState = 0
+	PKSecureElementPassActivationStateActivated          PKSecureElementPassActivationState = 0
 	PKSecureElementPassActivationStateRequiresActivation PKSecureElementPassActivationState = 1
-	PKSecureElementPassActivationStateActivating PKSecureElementPassActivationState = 2
-	PKSecureElementPassActivationStateSuspended PKSecureElementPassActivationState = 3
-	PKSecureElementPassActivationStateDeactivated PKSecureElementPassActivationState = 4
+	PKSecureElementPassActivationStateActivating         PKSecureElementPassActivationState = 2
+	PKSecureElementPassActivationStateSuspended          PKSecureElementPassActivationState = 3
+	PKSecureElementPassActivationStateDeactivated        PKSecureElementPassActivationState = 4
 )
 
 func (e PKSecureElementPassActivationState) String() string {
@@ -540,9 +540,9 @@ func (e PKSecureElementPassActivationState) String() string {
 type PKShippingContactEditingMode uint64
 
 const (
-	PKShippingContactEditingModeAvailable PKShippingContactEditingMode = 1
+	PKShippingContactEditingModeAvailable   PKShippingContactEditingMode = 1
 	PKShippingContactEditingModeStorePickup PKShippingContactEditingMode = 2
-	PKShippingContactEditingModeEnabled PKShippingContactEditingMode = 1
+	PKShippingContactEditingModeEnabled     PKShippingContactEditingMode = 1
 )
 
 func (e PKShippingContactEditingMode) String() string {
@@ -559,9 +559,9 @@ func (e PKShippingContactEditingMode) String() string {
 type PKShippingType uint64
 
 const (
-	PKShippingTypeShipping PKShippingType = 0
-	PKShippingTypeDelivery PKShippingType = 1
-	PKShippingTypeStorePickup PKShippingType = 2
+	PKShippingTypeShipping      PKShippingType = 0
+	PKShippingTypeDelivery      PKShippingType = 1
+	PKShippingTypeStorePickup   PKShippingType = 2
 	PKShippingTypeServicePickup PKShippingType = 3
 )
 
@@ -583,9 +583,9 @@ func (e PKShippingType) String() string {
 type PKVehicleConnectionSessionConnectionState int64
 
 const (
-	PKVehicleConnectionSessionConnectionStateDisconnected PKVehicleConnectionSessionConnectionState = 0
-	PKVehicleConnectionSessionConnectionStateConnected PKVehicleConnectionSessionConnectionState = 1
-	PKVehicleConnectionSessionConnectionStateConnecting PKVehicleConnectionSessionConnectionState = 2
+	PKVehicleConnectionSessionConnectionStateDisconnected    PKVehicleConnectionSessionConnectionState = 0
+	PKVehicleConnectionSessionConnectionStateConnected       PKVehicleConnectionSessionConnectionState = 1
+	PKVehicleConnectionSessionConnectionStateConnecting      PKVehicleConnectionSessionConnectionState = 2
 	PKVehicleConnectionSessionConnectionStateFailedToConnect PKVehicleConnectionSessionConnectionState = 3
 )
 
@@ -603,4 +603,3 @@ func (e PKVehicleConnectionSessionConnectionState) String() string {
 		return fmt.Sprintf("PKVehicleConnectionSessionConnectionState(%d)", int64(e))
 	}
 }
-

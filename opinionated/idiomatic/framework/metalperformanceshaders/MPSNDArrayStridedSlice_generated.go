@@ -72,13 +72,21 @@ func (x *NDArrayStridedSlice) SetStrides(strides mpsndarray.MPSNDArrayOffsets) {
 	x.inner.SetStrides(strides)
 }
 
-func (x *NDArrayStridedSlice) asNDArrayUnaryKernel() *mpsndarray.MPSNDArrayUnaryKernel { return &x.inner.MPSNDArrayUnaryKernel }
+func (x *NDArrayStridedSlice) asNDArrayUnaryKernel() *mpsndarray.MPSNDArrayUnaryKernel {
+	return &x.inner.MPSNDArrayUnaryKernel
+}
 
-func (x *NDArrayStridedSlice) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel { return &x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel }
+func (x *NDArrayStridedSlice) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel {
+	return &x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel
+}
 
-func (x *NDArrayStridedSlice) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
+func (x *NDArrayStridedSlice) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase {
+	return &x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase
+}
 
-func (x *NDArrayStridedSlice) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel }
+func (x *NDArrayStridedSlice) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel
+}
 
 // NDArrayStridedSliceable is the interface implemented by [NDArrayStridedSlice], for mocking and DI.
 type NDArrayStridedSliceable interface {
@@ -92,4 +100,3 @@ type NDArrayStridedSliceable interface {
 }
 
 var _ NDArrayStridedSliceable = (*NDArrayStridedSlice)(nil)
-

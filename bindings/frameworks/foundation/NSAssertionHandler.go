@@ -15,7 +15,7 @@ type NSAssertionHandler struct {
 }
 
 var (
-	_clsNSAssertionHandler = _objcClass("NSAssertionHandler")
+	_clsNSAssertionHandler               = _objcClass("NSAssertionHandler")
 	_nSAssertionHandlerSelCurrentHandler = objc.RegisterName("currentHandler")
 )
 
@@ -31,7 +31,8 @@ func NSAssertionHandlerFromID(id objc.ID) *NSAssertionHandler {
 
 func NSAssertionHandlerCurrentHandler() *NSAssertionHandler {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAssertionHandler), _nSAssertionHandlerSelCurrentHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAssertionHandlerFromID(_ret)
 }
-

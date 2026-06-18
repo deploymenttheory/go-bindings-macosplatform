@@ -1409,9 +1409,13 @@ func (x *MTRBaseClusterBarrierControl) SubscribeAttributeClusterRevisionWithMinI
 	}
 }
 
-func (x *MTRBaseClusterBarrierControl) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterBarrierControl) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterBarrierControl) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterBarrierControl) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterBarrierControlable is the interface implemented by [MTRBaseClusterBarrierControl], for mocking and DI.
 type MTRBaseClusterBarrierControlable interface {
@@ -1509,4 +1513,3 @@ type MTRBaseClusterBarrierControlable interface {
 }
 
 var _ MTRBaseClusterBarrierControlable = (*MTRBaseClusterBarrierControl)(nil)
-

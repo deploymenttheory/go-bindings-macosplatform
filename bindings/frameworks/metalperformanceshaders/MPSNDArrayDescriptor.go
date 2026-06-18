@@ -19,24 +19,24 @@ type MPSNDArrayDescriptor struct {
 }
 
 var (
-	_clsMPSNDArrayDescriptor = _objcClass("MPSNDArrayDescriptor")
-	_mPSNDArrayDescriptorSelLengthOfDimension = objc.RegisterName("lengthOfDimension:")
-	_mPSNDArrayDescriptorSelSliceRangeForDimension = objc.RegisterName("sliceRangeForDimension:")
-	_mPSNDArrayDescriptorSelSliceDimensionWithSubrange = objc.RegisterName("sliceDimension:withSubrange:")
-	_mPSNDArrayDescriptorSelTransposeDimensionWithDimension = objc.RegisterName("transposeDimension:withDimension:")
-	_mPSNDArrayDescriptorSelPermuteWithDimensionOrder = objc.RegisterName("permuteWithDimensionOrder:")
-	_mPSNDArrayDescriptorSelDimensionOrder = objc.RegisterName("dimensionOrder")
-	_mPSNDArrayDescriptorSelGetShape = objc.RegisterName("getShape")
+	_clsMPSNDArrayDescriptor                                                   = _objcClass("MPSNDArrayDescriptor")
+	_mPSNDArrayDescriptorSelLengthOfDimension                                  = objc.RegisterName("lengthOfDimension:")
+	_mPSNDArrayDescriptorSelSliceRangeForDimension                             = objc.RegisterName("sliceRangeForDimension:")
+	_mPSNDArrayDescriptorSelSliceDimensionWithSubrange                         = objc.RegisterName("sliceDimension:withSubrange:")
+	_mPSNDArrayDescriptorSelTransposeDimensionWithDimension                    = objc.RegisterName("transposeDimension:withDimension:")
+	_mPSNDArrayDescriptorSelPermuteWithDimensionOrder                          = objc.RegisterName("permuteWithDimensionOrder:")
+	_mPSNDArrayDescriptorSelDimensionOrder                                     = objc.RegisterName("dimensionOrder")
+	_mPSNDArrayDescriptorSelGetShape                                           = objc.RegisterName("getShape")
 	_mPSNDArrayDescriptorSelDescriptorWithDataTypeDimensionCountDimensionSizes = objc.RegisterName("descriptorWithDataType:dimensionCount:dimensionSizes:")
-	_mPSNDArrayDescriptorSelDescriptorWithDataTypeShape = objc.RegisterName("descriptorWithDataType:shape:")
-	_mPSNDArrayDescriptorSelReshapeWithDimensionCountDimensionSizes = objc.RegisterName("reshapeWithDimensionCount:dimensionSizes:")
-	_mPSNDArrayDescriptorSelReshapeWithShape = objc.RegisterName("reshapeWithShape:")
-	_mPSNDArrayDescriptorSelDataType = objc.RegisterName("dataType")
-	_mPSNDArrayDescriptorSelSetDataType = objc.RegisterName("setDataType:")
-	_mPSNDArrayDescriptorSelNumberOfDimensions = objc.RegisterName("numberOfDimensions")
-	_mPSNDArrayDescriptorSelSetNumberOfDimensions = objc.RegisterName("setNumberOfDimensions:")
-	_mPSNDArrayDescriptorSelPreferPackedRows = objc.RegisterName("preferPackedRows")
-	_mPSNDArrayDescriptorSelSetPreferPackedRows = objc.RegisterName("setPreferPackedRows:")
+	_mPSNDArrayDescriptorSelDescriptorWithDataTypeShape                        = objc.RegisterName("descriptorWithDataType:shape:")
+	_mPSNDArrayDescriptorSelReshapeWithDimensionCountDimensionSizes            = objc.RegisterName("reshapeWithDimensionCount:dimensionSizes:")
+	_mPSNDArrayDescriptorSelReshapeWithShape                                   = objc.RegisterName("reshapeWithShape:")
+	_mPSNDArrayDescriptorSelDataType                                           = objc.RegisterName("dataType")
+	_mPSNDArrayDescriptorSelSetDataType                                        = objc.RegisterName("setDataType:")
+	_mPSNDArrayDescriptorSelNumberOfDimensions                                 = objc.RegisterName("numberOfDimensions")
+	_mPSNDArrayDescriptorSelSetNumberOfDimensions                              = objc.RegisterName("setNumberOfDimensions:")
+	_mPSNDArrayDescriptorSelPreferPackedRows                                   = objc.RegisterName("preferPackedRows")
+	_mPSNDArrayDescriptorSelSetPreferPackedRows                                = objc.RegisterName("setPreferPackedRows:")
 )
 
 func MPSNDArrayDescriptorFromID(id objc.ID) *MPSNDArrayDescriptor {
@@ -91,14 +91,18 @@ func (o *MPSNDArrayDescriptor) GetShape() *foundation.NSArray[*foundation.NSNumb
 // @abstract   Create an MPSNDArrayDescriptor object for a given size of dimensions. @discussion Sample code: @code // Creates an NDArrayDescriptor of dimensions [32, 6, 5, 3] NSUInteger sizes[] = {3,5,6,32}; [ MPSNDArray descriptorWithDataType: MPSDataTypeFloat32 dimensionCount: 4 dimensionSizes: sizes ];    // array of numberOfDimensions dimensions. Starts with dimension 0 @endcode @param      dataType           MPSDataType of elements in the MPSNDArray @param      numberOfDimensions Number of dimensions in the NDArray. May not exceed 16. @param      dimensionSizes     An array of NSUIntegers where dimension lengths provided by the user goes from fastest moving to slowest moving dimension. The product of all dimension lengths must be less than 2**31. Additional system memory limits may apply @return     A valid MPSNDArrayDescriptor object or nil, if failure.
 func MPSNDArrayDescriptorDescriptorWithDataTypeDimensionCountDimensionSizes(dataType mpscore.MPSDataType, numberOfDimensions uint, dimensionSizes *uint) *MPSNDArrayDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNDArrayDescriptor), _mPSNDArrayDescriptorSelDescriptorWithDataTypeDimensionCountDimensionSizes, dataType, numberOfDimensions, dimensionSizes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNDArrayDescriptorFromID(_ret)
 }
 
 // @abstract   A convenience function to create an MPSNDArrayDescriptor object for a given size of dimensions. @discussion Sample code: @code // Creates an NDArrayDescriptor of dimensions [32, 6, 5, 3] NSArray<NSNumber *> sizes = {@32,@6,@5,@3}; [ MPSNDArray descriptorWithDataType: MPSDataTypeFloat32 shape: &sizes]; @endcode @param      dataType           MPSDataType of elements in the MPSNDArray @param      shape              An array of NSUIntegers where dimension lengths provided by the user goes from slowest moving to fastest moving dimension. This is same order as MLMultiArray in coreML and most frameworks in Python The product of all dimension lengths must be less than 2**31. Additional system memory limits may apply @return     A valid MPSNDArrayDescriptor object or nil, if failure.
 func MPSNDArrayDescriptorDescriptorWithDataTypeShape(dataType mpscore.MPSDataType, shape *foundation.NSArray[*foundation.NSNumber]) *MPSNDArrayDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNDArrayDescriptor), _mPSNDArrayDescriptorSelDescriptorWithDataTypeShape, dataType, shape)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNDArrayDescriptorFromID(_ret)
 }
 
@@ -142,4 +146,3 @@ func (o *MPSNDArrayDescriptor) PreferPackedRows() bool {
 func (o *MPSNDArrayDescriptor) SetPreferPackedRows(preferPackedRows bool) {
 	o.Ptr().Send(_mPSNDArrayDescriptorSelSetPreferPackedRows, preferPackedRows)
 }
-

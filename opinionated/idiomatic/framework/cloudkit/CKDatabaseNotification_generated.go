@@ -49,4 +49,3 @@ type DatabaseNotificationable interface {
 }
 
 var _ DatabaseNotificationable = (*DatabaseNotification)(nil)
-

@@ -16,10 +16,10 @@ type MKDirectionsResponse struct {
 }
 
 var (
-	_clsMKDirectionsResponse = _objcClass("MKDirectionsResponse")
-	_mKDirectionsResponseSelSource = objc.RegisterName("source")
+	_clsMKDirectionsResponse            = _objcClass("MKDirectionsResponse")
+	_mKDirectionsResponseSelSource      = objc.RegisterName("source")
 	_mKDirectionsResponseSelDestination = objc.RegisterName("destination")
-	_mKDirectionsResponseSelRoutes = objc.RegisterName("routes")
+	_mKDirectionsResponseSelRoutes      = objc.RegisterName("routes")
 )
 
 func MKDirectionsResponseFromID(id objc.ID) *MKDirectionsResponse {
@@ -34,19 +34,24 @@ func MKDirectionsResponseFromID(id objc.ID) *MKDirectionsResponse {
 
 func (o *MKDirectionsResponse) Source() *MKMapItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKDirectionsResponseSelSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapItemFromID(_ret)
 }
 
 func (o *MKDirectionsResponse) Destination() *MKMapItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKDirectionsResponseSelDestination)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapItemFromID(_ret)
 }
 
 func (o *MKDirectionsResponse) Routes() *foundation.NSArray[*MKRoute] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKDirectionsResponseSelRoutes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MKRoute](_ret)
 }
-

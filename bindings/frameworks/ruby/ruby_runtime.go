@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_rubyLib uintptr
-	_loadOnce sync.Once
+	_rubyLib       uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -66,12 +66,18 @@ func _loadLibrary() {
 	_register("rb_alias_variable", func() { purego.RegisterLibFunc(&_rb_alias_variable, _rubyLib, "rb_alias_variable") })
 	_register("rb_alloc_tmp_buffer", func() { purego.RegisterLibFunc(&_rb_alloc_tmp_buffer, _rubyLib, "rb_alloc_tmp_buffer") })
 	_register("rb_alloc_tmp_buffer2", func() { purego.RegisterLibFunc(&_rb_alloc_tmp_buffer2, _rubyLib, "rb_alloc_tmp_buffer2") })
-	_register("rb_alloc_tmp_buffer_with_count", func() { purego.RegisterLibFunc(&_rb_alloc_tmp_buffer_with_count, _rubyLib, "rb_alloc_tmp_buffer_with_count") })
+	_register("rb_alloc_tmp_buffer_with_count", func() {
+		purego.RegisterLibFunc(&_rb_alloc_tmp_buffer_with_count, _rubyLib, "rb_alloc_tmp_buffer_with_count")
+	})
 	_register("rb_any_to_s", func() { purego.RegisterLibFunc(&_rb_any_to_s, _rubyLib, "rb_any_to_s") })
 	_register("rb_apply", func() { purego.RegisterLibFunc(&_rb_apply, _rubyLib, "rb_apply") })
-	_register("rb_arithmetic_sequence_extract", func() { purego.RegisterLibFunc(&_rb_arithmetic_sequence_extract, _rubyLib, "rb_arithmetic_sequence_extract") })
+	_register("rb_arithmetic_sequence_extract", func() {
+		purego.RegisterLibFunc(&_rb_arithmetic_sequence_extract, _rubyLib, "rb_arithmetic_sequence_extract")
+	})
 	_register("rb_array_const_ptr", func() { purego.RegisterLibFunc(&_rb_array_const_ptr, _rubyLib, "rb_array_const_ptr") })
-	_register("rb_array_const_ptr_transient", func() { purego.RegisterLibFunc(&_rb_array_const_ptr_transient, _rubyLib, "rb_array_const_ptr_transient") })
+	_register("rb_array_const_ptr_transient", func() {
+		purego.RegisterLibFunc(&_rb_array_const_ptr_transient, _rubyLib, "rb_array_const_ptr_transient")
+	})
 	_register("rb_array_len", func() { purego.RegisterLibFunc(&_rb_array_len, _rubyLib, "rb_array_len") })
 	_register("rb_array_ptr_use_end", func() { purego.RegisterLibFunc(&_rb_array_ptr_use_end, _rubyLib, "rb_array_ptr_use_end") })
 	_register("rb_array_ptr_use_start", func() { purego.RegisterLibFunc(&_rb_array_ptr_use_start, _rubyLib, "rb_array_ptr_use_start") })
@@ -190,14 +196,22 @@ func _loadLibrary() {
 	_register("rb_class_of", func() { purego.RegisterLibFunc(&_rb_class_of, _rubyLib, "rb_class_of") })
 	_register("rb_class_path", func() { purego.RegisterLibFunc(&_rb_class_path, _rubyLib, "rb_class_path") })
 	_register("rb_class_path_cached", func() { purego.RegisterLibFunc(&_rb_class_path_cached, _rubyLib, "rb_class_path_cached") })
-	_register("rb_class_private_instance_methods", func() { purego.RegisterLibFunc(&_rb_class_private_instance_methods, _rubyLib, "rb_class_private_instance_methods") })
-	_register("rb_class_protected_instance_methods", func() { purego.RegisterLibFunc(&_rb_class_protected_instance_methods, _rubyLib, "rb_class_protected_instance_methods") })
-	_register("rb_class_public_instance_methods", func() { purego.RegisterLibFunc(&_rb_class_public_instance_methods, _rubyLib, "rb_class_public_instance_methods") })
+	_register("rb_class_private_instance_methods", func() {
+		purego.RegisterLibFunc(&_rb_class_private_instance_methods, _rubyLib, "rb_class_private_instance_methods")
+	})
+	_register("rb_class_protected_instance_methods", func() {
+		purego.RegisterLibFunc(&_rb_class_protected_instance_methods, _rubyLib, "rb_class_protected_instance_methods")
+	})
+	_register("rb_class_public_instance_methods", func() {
+		purego.RegisterLibFunc(&_rb_class_public_instance_methods, _rubyLib, "rb_class_public_instance_methods")
+	})
 	_register("rb_class_real", func() { purego.RegisterLibFunc(&_rb_class_real, _rubyLib, "rb_class_real") })
 	_register("rb_class_superclass", func() { purego.RegisterLibFunc(&_rb_class_superclass, _rubyLib, "rb_class_superclass") })
 	_register("rb_clear_cache", func() { purego.RegisterLibFunc(&_rb_clear_cache, _rubyLib, "rb_clear_cache") })
 	_register("rb_clear_constant_cache", func() { purego.RegisterLibFunc(&_rb_clear_constant_cache, _rubyLib, "rb_clear_constant_cache") })
-	_register("rb_clear_method_cache_by_class", func() { purego.RegisterLibFunc(&_rb_clear_method_cache_by_class, _rubyLib, "rb_clear_method_cache_by_class") })
+	_register("rb_clear_method_cache_by_class", func() {
+		purego.RegisterLibFunc(&_rb_clear_method_cache_by_class, _rubyLib, "rb_clear_method_cache_by_class")
+	})
 	_register("rb_cloexec_dup", func() { purego.RegisterLibFunc(&_rb_cloexec_dup, _rubyLib, "rb_cloexec_dup") })
 	_register("rb_cloexec_dup2", func() { purego.RegisterLibFunc(&_rb_cloexec_dup2, _rubyLib, "rb_cloexec_dup2") })
 	_register("rb_cloexec_fcntl_dupfd", func() { purego.RegisterLibFunc(&_rb_cloexec_fcntl_dupfd, _rubyLib, "rb_cloexec_fcntl_dupfd") })
@@ -316,7 +330,9 @@ func _loadLibrary() {
 	_register("rb_exec_recursive", func() { purego.RegisterLibFunc(&_rb_exec_recursive, _rubyLib, "rb_exec_recursive") })
 	_register("rb_exec_recursive_outer", func() { purego.RegisterLibFunc(&_rb_exec_recursive_outer, _rubyLib, "rb_exec_recursive_outer") })
 	_register("rb_exec_recursive_paired", func() { purego.RegisterLibFunc(&_rb_exec_recursive_paired, _rubyLib, "rb_exec_recursive_paired") })
-	_register("rb_exec_recursive_paired_outer", func() { purego.RegisterLibFunc(&_rb_exec_recursive_paired_outer, _rubyLib, "rb_exec_recursive_paired_outer") })
+	_register("rb_exec_recursive_paired_outer", func() {
+		purego.RegisterLibFunc(&_rb_exec_recursive_paired_outer, _rubyLib, "rb_exec_recursive_paired_outer")
+	})
 	_register("rb_exit", func() { purego.RegisterLibFunc(&_rb_exit, _rubyLib, "rb_exit") })
 	_register("rb_extend_object", func() { purego.RegisterLibFunc(&_rb_extend_object, _rubyLib, "rb_extend_object") })
 	_register("rb_external_str_new", func() { purego.RegisterLibFunc(&_rb_external_str_new, _rubyLib, "rb_external_str_new") })
@@ -373,9 +389,13 @@ func _loadLibrary() {
 	_register("rb_float_new_in_heap", func() { purego.RegisterLibFunc(&_rb_float_new_in_heap, _rubyLib, "rb_float_new_in_heap") })
 	_register("rb_float_value", func() { purego.RegisterLibFunc(&_rb_float_value, _rubyLib, "rb_float_value") })
 	_register("rb_flt_rationalize", func() { purego.RegisterLibFunc(&_rb_flt_rationalize, _rubyLib, "rb_flt_rationalize") })
-	_register("rb_flt_rationalize_with_prec", func() { purego.RegisterLibFunc(&_rb_flt_rationalize_with_prec, _rubyLib, "rb_flt_rationalize_with_prec") })
+	_register("rb_flt_rationalize_with_prec", func() {
+		purego.RegisterLibFunc(&_rb_flt_rationalize_with_prec, _rubyLib, "rb_flt_rationalize_with_prec")
+	})
 	_register("rb_frame_callee", func() { purego.RegisterLibFunc(&_rb_frame_callee, _rubyLib, "rb_frame_callee") })
-	_register("rb_frame_method_id_and_class", func() { purego.RegisterLibFunc(&_rb_frame_method_id_and_class, _rubyLib, "rb_frame_method_id_and_class") })
+	_register("rb_frame_method_id_and_class", func() {
+		purego.RegisterLibFunc(&_rb_frame_method_id_and_class, _rubyLib, "rb_frame_method_id_and_class")
+	})
 	_register("rb_frame_pop", func() { purego.RegisterLibFunc(&_rb_frame_pop, _rubyLib, "rb_frame_pop") })
 	_register("rb_frame_this_func", func() { purego.RegisterLibFunc(&_rb_frame_this_func, _rubyLib, "rb_frame_this_func") })
 	_register("rb_free_generic_ivar", func() { purego.RegisterLibFunc(&_rb_free_generic_ivar, _rubyLib, "rb_free_generic_ivar") })
@@ -388,7 +408,9 @@ func _loadLibrary() {
 	_register("rb_funcallv_public", func() { purego.RegisterLibFunc(&_rb_funcallv_public, _rubyLib, "rb_funcallv_public") })
 	_register("rb_gc", func() { purego.RegisterLibFunc(&_rb_gc, _rubyLib, "rb_gc") })
 	_register("rb_gc_adjust_memory_usage", func() { purego.RegisterLibFunc(&_rb_gc_adjust_memory_usage, _rubyLib, "rb_gc_adjust_memory_usage") })
-	_register("rb_gc_call_finalizer_at_exit", func() { purego.RegisterLibFunc(&_rb_gc_call_finalizer_at_exit, _rubyLib, "rb_gc_call_finalizer_at_exit") })
+	_register("rb_gc_call_finalizer_at_exit", func() {
+		purego.RegisterLibFunc(&_rb_gc_call_finalizer_at_exit, _rubyLib, "rb_gc_call_finalizer_at_exit")
+	})
 	_register("rb_gc_copy_finalizer", func() { purego.RegisterLibFunc(&_rb_gc_copy_finalizer, _rubyLib, "rb_gc_copy_finalizer") })
 	_register("rb_gc_count", func() { purego.RegisterLibFunc(&_rb_gc_count, _rubyLib, "rb_gc_count") })
 	_register("rb_gc_disable", func() { purego.RegisterLibFunc(&_rb_gc_disable, _rubyLib, "rb_gc_disable") })
@@ -405,7 +427,9 @@ func _loadLibrary() {
 	_register("rb_gc_stat", func() { purego.RegisterLibFunc(&_rb_gc_stat, _rubyLib, "rb_gc_stat") })
 	_register("rb_gc_unregister_address", func() { purego.RegisterLibFunc(&_rb_gc_unregister_address, _rubyLib, "rb_gc_unregister_address") })
 	_register("rb_gc_writebarrier", func() { purego.RegisterLibFunc(&_rb_gc_writebarrier, _rubyLib, "rb_gc_writebarrier") })
-	_register("rb_gc_writebarrier_unprotect", func() { purego.RegisterLibFunc(&_rb_gc_writebarrier_unprotect, _rubyLib, "rb_gc_writebarrier_unprotect") })
+	_register("rb_gc_writebarrier_unprotect", func() {
+		purego.RegisterLibFunc(&_rb_gc_writebarrier_unprotect, _rubyLib, "rb_gc_writebarrier_unprotect")
+	})
 	_register("rb_generic_ivar_table", func() { purego.RegisterLibFunc(&_rb_generic_ivar_table, _rubyLib, "rb_generic_ivar_table") })
 	_register("rb_genrand_int32", func() { purego.RegisterLibFunc(&_rb_genrand_int32, _rubyLib, "rb_genrand_int32") })
 	_register("rb_genrand_real", func() { purego.RegisterLibFunc(&_rb_genrand_real, _rubyLib, "rb_genrand_real") })
@@ -433,7 +457,9 @@ func _loadLibrary() {
 	_register("rb_hash", func() { purego.RegisterLibFunc(&_rb_hash, _rubyLib, "rb_hash") })
 	_register("rb_hash_aref", func() { purego.RegisterLibFunc(&_rb_hash_aref, _rubyLib, "rb_hash_aref") })
 	_register("rb_hash_aset", func() { purego.RegisterLibFunc(&_rb_hash_aset, _rubyLib, "rb_hash_aset") })
-	_register("rb_hash_bulk_insert_into_st_table", func() { purego.RegisterLibFunc(&_rb_hash_bulk_insert_into_st_table, _rubyLib, "rb_hash_bulk_insert_into_st_table") })
+	_register("rb_hash_bulk_insert_into_st_table", func() {
+		purego.RegisterLibFunc(&_rb_hash_bulk_insert_into_st_table, _rubyLib, "rb_hash_bulk_insert_into_st_table")
+	})
 	_register("rb_hash_clear", func() { purego.RegisterLibFunc(&_rb_hash_clear, _rubyLib, "rb_hash_clear") })
 	_register("rb_hash_delete", func() { purego.RegisterLibFunc(&_rb_hash_delete, _rubyLib, "rb_hash_delete") })
 	_register("rb_hash_delete_if", func() { purego.RegisterLibFunc(&_rb_hash_delete_if, _rubyLib, "rb_hash_delete_if") })
@@ -546,7 +572,9 @@ func _loadLibrary() {
 	_register("rb_memcicmp", func() { purego.RegisterLibFunc(&_rb_memcicmp, _rubyLib, "rb_memcicmp") })
 	_register("rb_memerror", func() { purego.RegisterLibFunc(&_rb_memerror, _rubyLib, "rb_memerror") })
 	_register("rb_memhash", func() { purego.RegisterLibFunc(&_rb_memhash, _rubyLib, "rb_memhash") })
-	_register("rb_method_basic_definition_p", func() { purego.RegisterLibFunc(&_rb_method_basic_definition_p, _rubyLib, "rb_method_basic_definition_p") })
+	_register("rb_method_basic_definition_p", func() {
+		purego.RegisterLibFunc(&_rb_method_basic_definition_p, _rubyLib, "rb_method_basic_definition_p")
+	})
 	_register("rb_method_boundp", func() { purego.RegisterLibFunc(&_rb_method_boundp, _rubyLib, "rb_method_boundp") })
 	_register("rb_method_call", func() { purego.RegisterLibFunc(&_rb_method_call, _rubyLib, "rb_method_call") })
 	_register("rb_method_call_with_block", func() { purego.RegisterLibFunc(&_rb_method_call_with_block, _rubyLib, "rb_method_call_with_block") })
@@ -628,7 +656,9 @@ func _loadLibrary() {
 	_register("rb_obj_is_proc", func() { purego.RegisterLibFunc(&_rb_obj_is_proc, _rubyLib, "rb_obj_is_proc") })
 	_register("rb_obj_method", func() { purego.RegisterLibFunc(&_rb_obj_method, _rubyLib, "rb_obj_method") })
 	_register("rb_obj_method_arity", func() { purego.RegisterLibFunc(&_rb_obj_method_arity, _rubyLib, "rb_obj_method_arity") })
-	_register("rb_obj_remove_instance_variable", func() { purego.RegisterLibFunc(&_rb_obj_remove_instance_variable, _rubyLib, "rb_obj_remove_instance_variable") })
+	_register("rb_obj_remove_instance_variable", func() {
+		purego.RegisterLibFunc(&_rb_obj_remove_instance_variable, _rubyLib, "rb_obj_remove_instance_variable")
+	})
 	_register("rb_obj_respond_to", func() { purego.RegisterLibFunc(&_rb_obj_respond_to, _rubyLib, "rb_obj_respond_to") })
 	_register("rb_obj_reveal", func() { purego.RegisterLibFunc(&_rb_obj_reveal, _rubyLib, "rb_obj_reveal") })
 	_register("rb_obj_setup", func() { purego.RegisterLibFunc(&_rb_obj_setup, _rubyLib, "rb_obj_setup") })
@@ -813,7 +843,9 @@ func _loadLibrary() {
 	_register("rb_tainted_str_new_cstr", func() { purego.RegisterLibFunc(&_rb_tainted_str_new_cstr, _rubyLib, "rb_tainted_str_new_cstr") })
 	_register("rb_thread_alone", func() { purego.RegisterLibFunc(&_rb_thread_alone, _rubyLib, "rb_thread_alone") })
 	_register("rb_thread_atfork", func() { purego.RegisterLibFunc(&_rb_thread_atfork, _rubyLib, "rb_thread_atfork") })
-	_register("rb_thread_atfork_before_exec", func() { purego.RegisterLibFunc(&_rb_thread_atfork_before_exec, _rubyLib, "rb_thread_atfork_before_exec") })
+	_register("rb_thread_atfork_before_exec", func() {
+		purego.RegisterLibFunc(&_rb_thread_atfork_before_exec, _rubyLib, "rb_thread_atfork_before_exec")
+	})
 	_register("rb_thread_check_ints", func() { purego.RegisterLibFunc(&_rb_thread_check_ints, _rubyLib, "rb_thread_check_ints") })
 	_register("rb_thread_create", func() { purego.RegisterLibFunc(&_rb_thread_create, _rubyLib, "rb_thread_create") })
 	_register("rb_thread_current", func() { purego.RegisterLibFunc(&_rb_thread_current, _rubyLib, "rb_thread_current") })
@@ -943,7 +975,9 @@ func _loadLibrary() {
 	_register("st_init_numtable", func() { purego.RegisterLibFunc(&_st_init_numtable, _rubyLib, "st_init_numtable") })
 	_register("st_init_numtable_with_size", func() { purego.RegisterLibFunc(&_st_init_numtable_with_size, _rubyLib, "st_init_numtable_with_size") })
 	_register("st_init_strcasetable", func() { purego.RegisterLibFunc(&_st_init_strcasetable, _rubyLib, "st_init_strcasetable") })
-	_register("st_init_strcasetable_with_size", func() { purego.RegisterLibFunc(&_st_init_strcasetable_with_size, _rubyLib, "st_init_strcasetable_with_size") })
+	_register("st_init_strcasetable_with_size", func() {
+		purego.RegisterLibFunc(&_st_init_strcasetable_with_size, _rubyLib, "st_init_strcasetable_with_size")
+	})
 	_register("st_init_strtable", func() { purego.RegisterLibFunc(&_st_init_strtable, _rubyLib, "st_init_strtable") })
 	_register("st_init_strtable_with_size", func() { purego.RegisterLibFunc(&_st_init_strtable_with_size, _rubyLib, "st_init_strtable_with_size") })
 	_register("st_init_table", func() { purego.RegisterLibFunc(&_st_init_table, _rubyLib, "st_init_table") })
@@ -952,8 +986,12 @@ func _loadLibrary() {
 	_register("st_insert2", func() { purego.RegisterLibFunc(&_st_insert2, _rubyLib, "st_insert2") })
 	_register("st_keys", func() { purego.RegisterLibFunc(&_st_keys, _rubyLib, "st_keys") })
 	_register("st_keys_check", func() { purego.RegisterLibFunc(&_st_keys_check, _rubyLib, "st_keys_check") })
-	_register("st_locale_insensitive_strcasecmp", func() { purego.RegisterLibFunc(&_st_locale_insensitive_strcasecmp, _rubyLib, "st_locale_insensitive_strcasecmp") })
-	_register("st_locale_insensitive_strncasecmp", func() { purego.RegisterLibFunc(&_st_locale_insensitive_strncasecmp, _rubyLib, "st_locale_insensitive_strncasecmp") })
+	_register("st_locale_insensitive_strcasecmp", func() {
+		purego.RegisterLibFunc(&_st_locale_insensitive_strcasecmp, _rubyLib, "st_locale_insensitive_strcasecmp")
+	})
+	_register("st_locale_insensitive_strncasecmp", func() {
+		purego.RegisterLibFunc(&_st_locale_insensitive_strncasecmp, _rubyLib, "st_locale_insensitive_strncasecmp")
+	})
 	_register("st_lookup", func() { purego.RegisterLibFunc(&_st_lookup, _rubyLib, "st_lookup") })
 	_register("st_memsize", func() { purego.RegisterLibFunc(&_st_memsize, _rubyLib, "st_memsize") })
 	_register("st_numcmp", func() { purego.RegisterLibFunc(&_st_numcmp, _rubyLib, "st_numcmp") })

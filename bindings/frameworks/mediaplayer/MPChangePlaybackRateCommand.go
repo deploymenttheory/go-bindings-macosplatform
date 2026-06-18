@@ -16,8 +16,8 @@ type MPChangePlaybackRateCommand struct {
 }
 
 var (
-	_clsMPChangePlaybackRateCommand = _objcClass("MPChangePlaybackRateCommand")
-	_mPChangePlaybackRateCommandSelSupportedPlaybackRates = objc.RegisterName("supportedPlaybackRates")
+	_clsMPChangePlaybackRateCommand                          = _objcClass("MPChangePlaybackRateCommand")
+	_mPChangePlaybackRateCommandSelSupportedPlaybackRates    = objc.RegisterName("supportedPlaybackRates")
 	_mPChangePlaybackRateCommandSelSetSupportedPlaybackRates = objc.RegisterName("setSupportedPlaybackRates:")
 )
 
@@ -39,4 +39,3 @@ func (o *MPChangePlaybackRateCommand) SupportedPlaybackRates() *foundation.NSArr
 func (o *MPChangePlaybackRateCommand) SetSupportedPlaybackRates(supportedPlaybackRates *foundation.NSArray[*foundation.NSNumber]) {
 	o.Ptr().Send(_mPChangePlaybackRateCommandSelSetSupportedPlaybackRates, supportedPlaybackRates)
 }
-

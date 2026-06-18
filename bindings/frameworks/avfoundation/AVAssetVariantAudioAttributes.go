@@ -16,9 +16,9 @@ type AVAssetVariantAudioAttributes struct {
 }
 
 var (
-	_clsAVAssetVariantAudioAttributes = _objcClass("AVAssetVariantAudioAttributes")
+	_clsAVAssetVariantAudioAttributes                                          = _objcClass("AVAssetVariantAudioAttributes")
 	_aVAssetVariantAudioAttributesSelRenditionSpecificAttributesForMediaOption = objc.RegisterName("renditionSpecificAttributesForMediaOption:")
-	_aVAssetVariantAudioAttributesSelFormatIDs = objc.RegisterName("formatIDs")
+	_aVAssetVariantAudioAttributesSelFormatIDs                                 = objc.RegisterName("formatIDs")
 )
 
 func AVAssetVariantAudioAttributesFromID(id objc.ID) *AVAssetVariantAudioAttributes {
@@ -34,7 +34,9 @@ func AVAssetVariantAudioAttributesFromID(id objc.ID) *AVAssetVariantAudioAttribu
 // Provides attributes for a specific audio media selection option. If no rendition specific attributes are declared, it will be nil. - Parameter mediaSelectionOption: The option to return rendition specific information for.
 func (o *AVAssetVariantAudioAttributes) RenditionSpecificAttributesForMediaOption(mediaSelectionOption *AVMediaSelectionOption) *AVAssetVariantAudioRenditionSpecificAttributes {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetVariantAudioAttributesSelRenditionSpecificAttributesForMediaOption, mediaSelectionOption.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetVariantAudioRenditionSpecificAttributesFromID(_ret)
 }
 
@@ -43,4 +45,3 @@ func (o *AVAssetVariantAudioAttributes) FormatIDs() *foundation.NSArray[*foundat
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aVAssetVariantAudioAttributesSelFormatIDs)
 	return _ret
 }
-

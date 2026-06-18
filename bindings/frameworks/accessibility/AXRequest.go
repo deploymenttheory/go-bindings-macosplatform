@@ -16,9 +16,9 @@ type AXRequest struct {
 }
 
 var (
-	_clsAXRequest = _objcClass("AXRequest")
+	_clsAXRequest               = _objcClass("AXRequest")
 	_aXRequestSelCurrentRequest = objc.RegisterName("currentRequest")
-	_aXRequestSelTechnology = objc.RegisterName("technology")
+	_aXRequestSelTechnology     = objc.RegisterName("technology")
 )
 
 func AXRequestFromID(id objc.ID) *AXRequest {
@@ -33,13 +33,16 @@ func AXRequestFromID(id objc.ID) *AXRequest {
 
 func AXRequestCurrentRequest() *AXRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAXRequest), _aXRequestSelCurrentRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXRequestFromID(_ret)
 }
 
 func (o *AXRequest) Technology() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXRequestSelTechnology)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

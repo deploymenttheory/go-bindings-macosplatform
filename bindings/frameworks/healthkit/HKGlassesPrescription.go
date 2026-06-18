@@ -16,10 +16,10 @@ type HKGlassesPrescription struct {
 }
 
 var (
-	_clsHKGlassesPrescription = _objcClass("HKGlassesPrescription")
+	_clsHKGlassesPrescription                                                                                                = _objcClass("HKGlassesPrescription")
 	_hKGlassesPrescriptionSelPrescriptionWithRightEyeSpecificationLeftEyeSpecificationDateIssuedExpirationDateDeviceMetadata = objc.RegisterName("prescriptionWithRightEyeSpecification:leftEyeSpecification:dateIssued:expirationDate:device:metadata:")
-	_hKGlassesPrescriptionSelRightEye = objc.RegisterName("rightEye")
-	_hKGlassesPrescriptionSelLeftEye = objc.RegisterName("leftEye")
+	_hKGlassesPrescriptionSelRightEye                                                                                        = objc.RegisterName("rightEye")
+	_hKGlassesPrescriptionSelLeftEye                                                                                         = objc.RegisterName("leftEye")
 )
 
 func HKGlassesPrescriptionFromID(id objc.ID) *HKGlassesPrescription {
@@ -35,21 +35,26 @@ func HKGlassesPrescriptionFromID(id objc.ID) *HKGlassesPrescription {
 // @method        prescriptionWithRightEyeSpecification:leftEyeSpecification:type:dateIssued:expirationDate:device:metadata @param         rightEyeSpecification    The right eye specification @param         leftEyeSpecification     The left eye specification @param         dateIssued               The date the prescription was issued @param         expirationDate           The date the prescription expires @param         device                   The device that generated the sample @param         metadata                 The metadata for the sample
 func HKGlassesPrescriptionPrescriptionWithRightEyeSpecificationLeftEyeSpecificationDateIssuedExpirationDateDeviceMetadata(rightEyeSpecification *HKGlassesLensSpecification, leftEyeSpecification *HKGlassesLensSpecification, dateIssued *foundation.NSDate, expirationDate *foundation.NSDate, device *HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKGlassesPrescription {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKGlassesPrescription), _hKGlassesPrescriptionSelPrescriptionWithRightEyeSpecificationLeftEyeSpecificationDateIssuedExpirationDateDeviceMetadata, rightEyeSpecification.Ptr(), leftEyeSpecification.Ptr(), dateIssued.Ptr(), expirationDate.Ptr(), device.Ptr(), metadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKGlassesPrescriptionFromID(_ret)
 }
 
 // @property      rightEye @abstract      The right eye lens specification
 func (o *HKGlassesPrescription) RightEye() *HKGlassesLensSpecification {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKGlassesPrescriptionSelRightEye)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKGlassesLensSpecificationFromID(_ret)
 }
 
 // @property      leftEye @abstract      The left eye lens specification
 func (o *HKGlassesPrescription) LeftEye() *HKGlassesLensSpecification {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKGlassesPrescriptionSelLeftEye)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKGlassesLensSpecificationFromID(_ret)
 }
-

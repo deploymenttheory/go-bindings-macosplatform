@@ -63,4 +63,3 @@ type ActionNamedable interface {
 }
 
 var _ ActionNamedable = (*ActionNamed)(nil)
-

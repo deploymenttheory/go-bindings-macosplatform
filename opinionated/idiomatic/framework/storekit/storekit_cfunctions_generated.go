@@ -12,4 +12,3 @@ import (
 func SKTerminateForInvalidReceipt() {
 	raw.SKTerminateForInvalidReceipt()
 }
-

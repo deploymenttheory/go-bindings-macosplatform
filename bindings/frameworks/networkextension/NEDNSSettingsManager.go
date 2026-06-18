@@ -18,18 +18,18 @@ type NEDNSSettingsManager struct {
 }
 
 var (
-	_clsNEDNSSettingsManager = _objcClass("NEDNSSettingsManager")
-	_nEDNSSettingsManagerSelSharedManager = objc.RegisterName("sharedManager")
-	_nEDNSSettingsManagerSelLoadFromPreferencesWithCompletionHandler = objc.RegisterName("loadFromPreferencesWithCompletionHandler:")
+	_clsNEDNSSettingsManager                                           = _objcClass("NEDNSSettingsManager")
+	_nEDNSSettingsManagerSelSharedManager                              = objc.RegisterName("sharedManager")
+	_nEDNSSettingsManagerSelLoadFromPreferencesWithCompletionHandler   = objc.RegisterName("loadFromPreferencesWithCompletionHandler:")
 	_nEDNSSettingsManagerSelRemoveFromPreferencesWithCompletionHandler = objc.RegisterName("removeFromPreferencesWithCompletionHandler:")
-	_nEDNSSettingsManagerSelSaveToPreferencesWithCompletionHandler = objc.RegisterName("saveToPreferencesWithCompletionHandler:")
-	_nEDNSSettingsManagerSelLocalizedDescription = objc.RegisterName("localizedDescription")
-	_nEDNSSettingsManagerSelSetLocalizedDescription = objc.RegisterName("setLocalizedDescription:")
-	_nEDNSSettingsManagerSelDnsSettings = objc.RegisterName("dnsSettings")
-	_nEDNSSettingsManagerSelSetDnsSettings = objc.RegisterName("setDnsSettings:")
-	_nEDNSSettingsManagerSelOnDemandRules = objc.RegisterName("onDemandRules")
-	_nEDNSSettingsManagerSelSetOnDemandRules = objc.RegisterName("setOnDemandRules:")
-	_nEDNSSettingsManagerSelIsEnabled = objc.RegisterName("isEnabled")
+	_nEDNSSettingsManagerSelSaveToPreferencesWithCompletionHandler     = objc.RegisterName("saveToPreferencesWithCompletionHandler:")
+	_nEDNSSettingsManagerSelLocalizedDescription                       = objc.RegisterName("localizedDescription")
+	_nEDNSSettingsManagerSelSetLocalizedDescription                    = objc.RegisterName("setLocalizedDescription:")
+	_nEDNSSettingsManagerSelDnsSettings                                = objc.RegisterName("dnsSettings")
+	_nEDNSSettingsManagerSelSetDnsSettings                             = objc.RegisterName("setDnsSettings:")
+	_nEDNSSettingsManagerSelOnDemandRules                              = objc.RegisterName("onDemandRules")
+	_nEDNSSettingsManagerSelSetOnDemandRules                           = objc.RegisterName("setOnDemandRules:")
+	_nEDNSSettingsManagerSelIsEnabled                                  = objc.RegisterName("isEnabled")
 )
 
 func NEDNSSettingsManagerFromID(id objc.ID) *NEDNSSettingsManager {
@@ -45,7 +45,9 @@ func NEDNSSettingsManagerFromID(id objc.ID) *NEDNSSettingsManager {
 // @method sharedManager @return The singleton NEDNSSettingsManager object for the calling process.
 func NEDNSSettingsManagerSharedManager() *NEDNSSettingsManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNEDNSSettingsManager), _nEDNSSettingsManagerSelSharedManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEDNSSettingsManagerFromID(_ret)
 }
 
@@ -88,7 +90,9 @@ func (o *NEDNSSettingsManager) SaveToPreferencesWithCompletionHandler(completion
 // @property localizedDescription @discussion A string containing a description of the DNS settings.
 func (o *NEDNSSettingsManager) LocalizedDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEDNSSettingsManagerSelLocalizedDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -99,7 +103,9 @@ func (o *NEDNSSettingsManager) SetLocalizedDescription(localizedDescription *fou
 // @property dnsSettings @discussion An NEDNSSettings object containing the DNS resolver configuration to apply to the system.
 func (o *NEDNSSettingsManager) DnsSettings() *NEDNSSettings {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEDNSSettingsManagerSelDnsSettings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEDNSSettingsFromID(_ret)
 }
 
@@ -110,7 +116,9 @@ func (o *NEDNSSettingsManager) SetDnsSettings(dnsSettings *NEDNSSettings) {
 // @property onDemandRules @discussion An array of NEOnDemandRule objects. If nil, the associated DNS settings will always apply. If non-nil, the array describes the networks on which the DNS configuration should take effect or not.
 func (o *NEDNSSettingsManager) OnDemandRules() *foundation.NSArray[*NEOnDemandRule] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEDNSSettingsManagerSelOnDemandRules)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NEOnDemandRule](_ret)
 }
 
@@ -123,4 +131,3 @@ func (o *NEDNSSettingsManager) IsEnabled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nEDNSSettingsManagerSelIsEnabled)
 	return _ret
 }
-

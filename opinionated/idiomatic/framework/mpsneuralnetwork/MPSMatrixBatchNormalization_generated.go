@@ -164,4 +164,3 @@ type MatrixBatchNormalizationable interface {
 }
 
 var _ MatrixBatchNormalizationable = (*MatrixBatchNormalization)(nil)
-

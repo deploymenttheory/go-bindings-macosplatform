@@ -17,14 +17,14 @@ type OSALanguageInstance struct {
 }
 
 var (
-	_clsOSALanguageInstance = _objcClass("OSALanguageInstance")
+	_clsOSALanguageInstance                             = _objcClass("OSALanguageInstance")
 	_oSALanguageInstanceSelLanguageInstanceWithLanguage = objc.RegisterName("languageInstanceWithLanguage:")
-	_oSALanguageInstanceSelInitWithLanguage = objc.RegisterName("initWithLanguage:")
-	_oSALanguageInstanceSelRichTextFromDescriptor = objc.RegisterName("richTextFromDescriptor:")
-	_oSALanguageInstanceSelLanguage = objc.RegisterName("language")
-	_oSALanguageInstanceSelComponentInstance = objc.RegisterName("componentInstance")
-	_oSALanguageInstanceSelDefaultTarget = objc.RegisterName("defaultTarget")
-	_oSALanguageInstanceSelSetDefaultTarget = objc.RegisterName("setDefaultTarget:")
+	_oSALanguageInstanceSelInitWithLanguage             = objc.RegisterName("initWithLanguage:")
+	_oSALanguageInstanceSelRichTextFromDescriptor       = objc.RegisterName("richTextFromDescriptor:")
+	_oSALanguageInstanceSelLanguage                     = objc.RegisterName("language")
+	_oSALanguageInstanceSelComponentInstance            = objc.RegisterName("componentInstance")
+	_oSALanguageInstanceSelDefaultTarget                = objc.RegisterName("defaultTarget")
+	_oSALanguageInstanceSelSetDefaultTarget             = objc.RegisterName("setDefaultTarget:")
 )
 
 func OSALanguageInstanceFromID(id objc.ID) *OSALanguageInstance {
@@ -39,25 +39,33 @@ func OSALanguageInstanceFromID(id objc.ID) *OSALanguageInstance {
 
 func OSALanguageInstanceLanguageInstanceWithLanguage(language *OSALanguage) *OSALanguageInstance {
 	_ret := objc.Send[objc.ID](objc.ID(_clsOSALanguageInstance), _oSALanguageInstanceSelLanguageInstanceWithLanguage, language.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return OSALanguageInstanceFromID(_ret)
 }
 
 func (o *OSALanguageInstance) InitWithLanguage(language *OSALanguage) *OSALanguageInstance {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSALanguageInstanceSelInitWithLanguage, language.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return OSALanguageInstanceFromID(_ret)
 }
 
 func (o *OSALanguageInstance) RichTextFromDescriptor(descriptor *foundation.NSAppleEventDescriptor) *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSALanguageInstanceSelRichTextFromDescriptor, descriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
 func (o *OSALanguageInstance) Language() *OSALanguage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSALanguageInstanceSelLanguage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return OSALanguageFromID(_ret)
 }
 
@@ -68,11 +76,12 @@ func (o *OSALanguageInstance) ComponentInstance() *carboncore.ComponentInstanceR
 
 func (o *OSALanguageInstance) DefaultTarget() *foundation.NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSALanguageInstanceSelDefaultTarget)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAppleEventDescriptorFromID(_ret)
 }
 
 func (o *OSALanguageInstance) SetDefaultTarget(defaultTarget *foundation.NSAppleEventDescriptor) {
 	o.Ptr().Send(_oSALanguageInstanceSelSetDefaultTarget, defaultTarget.Ptr())
 }
-

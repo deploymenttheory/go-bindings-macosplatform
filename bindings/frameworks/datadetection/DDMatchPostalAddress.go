@@ -18,12 +18,12 @@ type DDMatchPostalAddress struct {
 }
 
 var (
-	_clsDDMatchPostalAddress = _objcClass("DDMatchPostalAddress")
-	_dDMatchPostalAddressSelStreet = objc.RegisterName("street")
-	_dDMatchPostalAddressSelCity = objc.RegisterName("city")
-	_dDMatchPostalAddressSelState = objc.RegisterName("state")
+	_clsDDMatchPostalAddress           = _objcClass("DDMatchPostalAddress")
+	_dDMatchPostalAddressSelStreet     = objc.RegisterName("street")
+	_dDMatchPostalAddressSelCity       = objc.RegisterName("city")
+	_dDMatchPostalAddressSelState      = objc.RegisterName("state")
 	_dDMatchPostalAddressSelPostalCode = objc.RegisterName("postalCode")
-	_dDMatchPostalAddressSelCountry = objc.RegisterName("country")
+	_dDMatchPostalAddressSelCountry    = objc.RegisterName("country")
 )
 
 func DDMatchPostalAddressFromID(id objc.ID) *DDMatchPostalAddress {
@@ -39,35 +39,44 @@ func DDMatchPostalAddressFromID(id objc.ID) *DDMatchPostalAddress {
 // The street name in a postal address.
 func (o *DDMatchPostalAddress) Street() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDMatchPostalAddressSelStreet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The city name in a postal address.
 func (o *DDMatchPostalAddress) City() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDMatchPostalAddressSelCity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The state name in a postal address.
 func (o *DDMatchPostalAddress) State() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDMatchPostalAddressSelState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The postal code in a postal address.
 func (o *DDMatchPostalAddress) PostalCode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDMatchPostalAddressSelPostalCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The country or region name in a postal address.
 func (o *DDMatchPostalAddress) Country() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDMatchPostalAddressSelCountry)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

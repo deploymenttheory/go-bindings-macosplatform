@@ -18,44 +18,44 @@ type MDLMaterialProperty struct {
 }
 
 var (
-	_clsMDLMaterialProperty = _objcClass("MDLMaterialProperty")
-	_mDLMaterialPropertySelInitWithNameSemantic = objc.RegisterName("initWithName:semantic:")
-	_mDLMaterialPropertySelInitWithNameSemanticFloat = objc.RegisterName("initWithName:semantic:float:")
-	_mDLMaterialPropertySelInitWithNameSemanticFloat2 = objc.RegisterName("initWithName:semantic:float2:")
-	_mDLMaterialPropertySelInitWithNameSemanticFloat3 = objc.RegisterName("initWithName:semantic:float3:")
-	_mDLMaterialPropertySelInitWithNameSemanticFloat4 = objc.RegisterName("initWithName:semantic:float4:")
-	_mDLMaterialPropertySelInitWithNameSemanticMatrix4x4 = objc.RegisterName("initWithName:semantic:matrix4x4:")
-	_mDLMaterialPropertySelInitWithNameSemanticURL = objc.RegisterName("initWithName:semantic:URL:")
-	_mDLMaterialPropertySelInitWithNameSemanticString = objc.RegisterName("initWithName:semantic:string:")
+	_clsMDLMaterialProperty                                   = _objcClass("MDLMaterialProperty")
+	_mDLMaterialPropertySelInitWithNameSemantic               = objc.RegisterName("initWithName:semantic:")
+	_mDLMaterialPropertySelInitWithNameSemanticFloat          = objc.RegisterName("initWithName:semantic:float:")
+	_mDLMaterialPropertySelInitWithNameSemanticFloat2         = objc.RegisterName("initWithName:semantic:float2:")
+	_mDLMaterialPropertySelInitWithNameSemanticFloat3         = objc.RegisterName("initWithName:semantic:float3:")
+	_mDLMaterialPropertySelInitWithNameSemanticFloat4         = objc.RegisterName("initWithName:semantic:float4:")
+	_mDLMaterialPropertySelInitWithNameSemanticMatrix4x4      = objc.RegisterName("initWithName:semantic:matrix4x4:")
+	_mDLMaterialPropertySelInitWithNameSemanticURL            = objc.RegisterName("initWithName:semantic:URL:")
+	_mDLMaterialPropertySelInitWithNameSemanticString         = objc.RegisterName("initWithName:semantic:string:")
 	_mDLMaterialPropertySelInitWithNameSemanticTextureSampler = objc.RegisterName("initWithName:semantic:textureSampler:")
-	_mDLMaterialPropertySelInitWithNameSemanticColor = objc.RegisterName("initWithName:semantic:color:")
-	_mDLMaterialPropertySelSetProperties = objc.RegisterName("setProperties:")
-	_mDLMaterialPropertySelSemantic = objc.RegisterName("semantic")
-	_mDLMaterialPropertySelSetSemantic = objc.RegisterName("setSemantic:")
-	_mDLMaterialPropertySelType = objc.RegisterName("type")
-	_mDLMaterialPropertySelSetType = objc.RegisterName("setType:")
-	_mDLMaterialPropertySelName = objc.RegisterName("name")
-	_mDLMaterialPropertySelSetName = objc.RegisterName("setName:")
-	_mDLMaterialPropertySelStringValue = objc.RegisterName("stringValue")
-	_mDLMaterialPropertySelSetStringValue = objc.RegisterName("setStringValue:")
-	_mDLMaterialPropertySelURLValue = objc.RegisterName("URLValue")
-	_mDLMaterialPropertySelSetURLValue = objc.RegisterName("setURLValue:")
-	_mDLMaterialPropertySelTextureSamplerValue = objc.RegisterName("textureSamplerValue")
-	_mDLMaterialPropertySelSetTextureSamplerValue = objc.RegisterName("setTextureSamplerValue:")
-	_mDLMaterialPropertySelColor = objc.RegisterName("color")
-	_mDLMaterialPropertySelSetColor = objc.RegisterName("setColor:")
-	_mDLMaterialPropertySelFloatValue = objc.RegisterName("floatValue")
-	_mDLMaterialPropertySelSetFloatValue = objc.RegisterName("setFloatValue:")
-	_mDLMaterialPropertySelFloat2Value = objc.RegisterName("float2Value")
-	_mDLMaterialPropertySelSetFloat2Value = objc.RegisterName("setFloat2Value:")
-	_mDLMaterialPropertySelFloat3Value = objc.RegisterName("float3Value")
-	_mDLMaterialPropertySelSetFloat3Value = objc.RegisterName("setFloat3Value:")
-	_mDLMaterialPropertySelFloat4Value = objc.RegisterName("float4Value")
-	_mDLMaterialPropertySelSetFloat4Value = objc.RegisterName("setFloat4Value:")
-	_mDLMaterialPropertySelMatrix4x4 = objc.RegisterName("matrix4x4")
-	_mDLMaterialPropertySelSetMatrix4x4 = objc.RegisterName("setMatrix4x4:")
-	_mDLMaterialPropertySelLuminance = objc.RegisterName("luminance")
-	_mDLMaterialPropertySelSetLuminance = objc.RegisterName("setLuminance:")
+	_mDLMaterialPropertySelInitWithNameSemanticColor          = objc.RegisterName("initWithName:semantic:color:")
+	_mDLMaterialPropertySelSetProperties                      = objc.RegisterName("setProperties:")
+	_mDLMaterialPropertySelSemantic                           = objc.RegisterName("semantic")
+	_mDLMaterialPropertySelSetSemantic                        = objc.RegisterName("setSemantic:")
+	_mDLMaterialPropertySelType                               = objc.RegisterName("type")
+	_mDLMaterialPropertySelSetType                            = objc.RegisterName("setType:")
+	_mDLMaterialPropertySelName                               = objc.RegisterName("name")
+	_mDLMaterialPropertySelSetName                            = objc.RegisterName("setName:")
+	_mDLMaterialPropertySelStringValue                        = objc.RegisterName("stringValue")
+	_mDLMaterialPropertySelSetStringValue                     = objc.RegisterName("setStringValue:")
+	_mDLMaterialPropertySelURLValue                           = objc.RegisterName("URLValue")
+	_mDLMaterialPropertySelSetURLValue                        = objc.RegisterName("setURLValue:")
+	_mDLMaterialPropertySelTextureSamplerValue                = objc.RegisterName("textureSamplerValue")
+	_mDLMaterialPropertySelSetTextureSamplerValue             = objc.RegisterName("setTextureSamplerValue:")
+	_mDLMaterialPropertySelColor                              = objc.RegisterName("color")
+	_mDLMaterialPropertySelSetColor                           = objc.RegisterName("setColor:")
+	_mDLMaterialPropertySelFloatValue                         = objc.RegisterName("floatValue")
+	_mDLMaterialPropertySelSetFloatValue                      = objc.RegisterName("setFloatValue:")
+	_mDLMaterialPropertySelFloat2Value                        = objc.RegisterName("float2Value")
+	_mDLMaterialPropertySelSetFloat2Value                     = objc.RegisterName("setFloat2Value:")
+	_mDLMaterialPropertySelFloat3Value                        = objc.RegisterName("float3Value")
+	_mDLMaterialPropertySelSetFloat3Value                     = objc.RegisterName("setFloat3Value:")
+	_mDLMaterialPropertySelFloat4Value                        = objc.RegisterName("float4Value")
+	_mDLMaterialPropertySelSetFloat4Value                     = objc.RegisterName("setFloat4Value:")
+	_mDLMaterialPropertySelMatrix4x4                          = objc.RegisterName("matrix4x4")
+	_mDLMaterialPropertySelSetMatrix4x4                       = objc.RegisterName("setMatrix4x4:")
+	_mDLMaterialPropertySelLuminance                          = objc.RegisterName("luminance")
+	_mDLMaterialPropertySelSetLuminance                       = objc.RegisterName("setLuminance:")
 )
 
 func MDLMaterialPropertyFromID(id objc.ID) *MDLMaterialProperty {
@@ -70,61 +70,81 @@ func MDLMaterialPropertyFromID(id objc.ID) *MDLMaterialProperty {
 
 func (o *MDLMaterialProperty) InitWithNameSemantic(name *foundation.NSString, semantic MDLMaterialSemantic) *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertySelInitWithNameSemantic, name.Ptr(), semantic)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMaterialPropertyFromID(_ret)
 }
 
 func (o *MDLMaterialProperty) InitWithNameSemanticFloat(name *foundation.NSString, semantic MDLMaterialSemantic, value float32) *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertySelInitWithNameSemanticFloat, name.Ptr(), semantic, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMaterialPropertyFromID(_ret)
 }
 
 func (o *MDLMaterialProperty) InitWithNameSemanticFloat2(name *foundation.NSString, semantic MDLMaterialSemantic, value unsafe.Pointer) *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertySelInitWithNameSemanticFloat2, name.Ptr(), semantic, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMaterialPropertyFromID(_ret)
 }
 
 func (o *MDLMaterialProperty) InitWithNameSemanticFloat3(name *foundation.NSString, semantic MDLMaterialSemantic, value unsafe.Pointer) *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertySelInitWithNameSemanticFloat3, name.Ptr(), semantic, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMaterialPropertyFromID(_ret)
 }
 
 func (o *MDLMaterialProperty) InitWithNameSemanticFloat4(name *foundation.NSString, semantic MDLMaterialSemantic, value unsafe.Pointer) *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertySelInitWithNameSemanticFloat4, name.Ptr(), semantic, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMaterialPropertyFromID(_ret)
 }
 
 func (o *MDLMaterialProperty) InitWithNameSemanticMatrix4x4(name *foundation.NSString, semantic MDLMaterialSemantic, value unsafe.Pointer) *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertySelInitWithNameSemanticMatrix4x4, name.Ptr(), semantic, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMaterialPropertyFromID(_ret)
 }
 
 func (o *MDLMaterialProperty) InitWithNameSemanticURL(name *foundation.NSString, semantic MDLMaterialSemantic, uRL *foundation.NSURL) *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertySelInitWithNameSemanticURL, name.Ptr(), semantic, uRL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMaterialPropertyFromID(_ret)
 }
 
 func (o *MDLMaterialProperty) InitWithNameSemanticString(name *foundation.NSString, semantic MDLMaterialSemantic, string_ *foundation.NSString) *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertySelInitWithNameSemanticString, name.Ptr(), semantic, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMaterialPropertyFromID(_ret)
 }
 
 func (o *MDLMaterialProperty) InitWithNameSemanticTextureSampler(name *foundation.NSString, semantic MDLMaterialSemantic, textureSampler *MDLTextureSampler) *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertySelInitWithNameSemanticTextureSampler, name.Ptr(), semantic, textureSampler.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMaterialPropertyFromID(_ret)
 }
 
 func (o *MDLMaterialProperty) InitWithNameSemanticColor(name *foundation.NSString, semantic MDLMaterialSemantic, color unsafe.Pointer) *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertySelInitWithNameSemanticColor, name.Ptr(), semantic, color)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMaterialPropertyFromID(_ret)
 }
 
@@ -153,7 +173,9 @@ func (o *MDLMaterialProperty) SetType(type_ MDLMaterialPropertyType) {
 // @see MDLNamed
 func (o *MDLMaterialProperty) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertySelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -163,7 +185,9 @@ func (o *MDLMaterialProperty) SetName(name *foundation.NSString) {
 
 func (o *MDLMaterialProperty) StringValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertySelStringValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -173,7 +197,9 @@ func (o *MDLMaterialProperty) SetStringValue(stringValue *foundation.NSString) {
 
 func (o *MDLMaterialProperty) URLValue() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertySelURLValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -183,7 +209,9 @@ func (o *MDLMaterialProperty) SetURLValue(uRLValue *foundation.NSURL) {
 
 func (o *MDLMaterialProperty) TextureSamplerValue() *MDLTextureSampler {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertySelTextureSamplerValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLTextureSamplerFromID(_ret)
 }
 
@@ -253,4 +281,3 @@ func (o *MDLMaterialProperty) Luminance() float32 {
 func (o *MDLMaterialProperty) SetLuminance(luminance float32) {
 	o.Ptr().Send(_mDLMaterialPropertySelSetLuminance, luminance)
 }
-

@@ -86,4 +86,3 @@ type ScreenshotOutputable interface {
 }
 
 var _ ScreenshotOutputable = (*ScreenshotOutput)(nil)
-

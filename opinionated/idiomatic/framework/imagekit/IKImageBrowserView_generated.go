@@ -398,4 +398,3 @@ type ImageBrowserViewable interface {
 }
 
 var _ ImageBrowserViewable = (*ImageBrowserView)(nil)
-

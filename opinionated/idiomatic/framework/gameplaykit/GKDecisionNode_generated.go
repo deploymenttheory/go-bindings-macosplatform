@@ -72,4 +72,3 @@ type DecisionNodeable interface {
 }
 
 var _ DecisionNodeable = (*DecisionNode)(nil)
-

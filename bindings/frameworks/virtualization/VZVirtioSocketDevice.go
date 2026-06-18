@@ -17,9 +17,9 @@ type VZVirtioSocketDevice struct {
 }
 
 var (
-	_clsVZVirtioSocketDevice = _objcClass("VZVirtioSocketDevice")
-	_vZVirtioSocketDeviceSelSetSocketListenerForPort = objc.RegisterName("setSocketListener:forPort:")
-	_vZVirtioSocketDeviceSelRemoveSocketListenerForPort = objc.RegisterName("removeSocketListenerForPort:")
+	_clsVZVirtioSocketDevice                               = _objcClass("VZVirtioSocketDevice")
+	_vZVirtioSocketDeviceSelSetSocketListenerForPort       = objc.RegisterName("setSocketListener:forPort:")
+	_vZVirtioSocketDeviceSelRemoveSocketListenerForPort    = objc.RegisterName("removeSocketListenerForPort:")
 	_vZVirtioSocketDeviceSelConnectToPortCompletionHandler = objc.RegisterName("connectToPort:completionHandler:")
 )
 
@@ -57,4 +57,3 @@ func (o *VZVirtioSocketDevice) ConnectToPortCompletionHandler(port uint32, compl
 	}
 	o.Ptr().Send(_vZVirtioSocketDeviceSelConnectToPortCompletionHandler, port, __block_completionHandler)
 }
-

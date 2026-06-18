@@ -20,16 +20,16 @@ type MPSKernel struct {
 }
 
 var (
-	_clsMPSKernel = _objcClass("MPSKernel")
-	_mPSKernelSelInitWithDevice = objc.RegisterName("initWithDevice:")
-	_mPSKernelSelCopyWithZoneDevice = objc.RegisterName("copyWithZone:device:")
-	_mPSKernelSelInitWithCoder = objc.RegisterName("initWithCoder:")
+	_clsMPSKernel                    = _objcClass("MPSKernel")
+	_mPSKernelSelInitWithDevice      = objc.RegisterName("initWithDevice:")
+	_mPSKernelSelCopyWithZoneDevice  = objc.RegisterName("copyWithZone:device:")
+	_mPSKernelSelInitWithCoder       = objc.RegisterName("initWithCoder:")
 	_mPSKernelSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSKernelSelOptions = objc.RegisterName("options")
-	_mPSKernelSelSetOptions = objc.RegisterName("setOptions:")
-	_mPSKernelSelDevice = objc.RegisterName("device")
-	_mPSKernelSelLabel = objc.RegisterName("label")
-	_mPSKernelSelSetLabel = objc.RegisterName("setLabel:")
+	_mPSKernelSelOptions             = objc.RegisterName("options")
+	_mPSKernelSelSetOptions          = objc.RegisterName("setOptions:")
+	_mPSKernelSelDevice              = objc.RegisterName("device")
+	_mPSKernelSelLabel               = objc.RegisterName("label")
+	_mPSKernelSelSetLabel            = objc.RegisterName("setLabel:")
 )
 
 func MPSKernelFromID(id objc.ID) *MPSKernel {
@@ -45,7 +45,9 @@ func MPSKernelFromID(id objc.ID) *MPSKernel {
 // @abstract   Standard init with default properties per filter type @param      device      The device that the filter will be used on. May not be NULL. @result     a pointer to the newly initialized object. This will fail, returning nil if the device is not supported. Devices must be MTLFeatureSet_iOS_GPUFamily2_v1 or later.
 func (o *MPSKernel) InitWithDevice(device metal.MTLDevice) *MPSKernel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSKernelSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSKernelFromID(_ret)
 }
 
@@ -58,14 +60,18 @@ func (o *MPSKernel) CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevi
 // @abstract   Called by NSCoder to decode MPSKernels @discussion This isn't the right interface to decode a MPSKernel, but it is the one that NSCoder uses. To enable your NSCoder (e.g. NSKeyedUnarchiver) to set which device to use extend the object to adopt the MPSDeviceProvider protocol. Otherwise, the Metal system default device will be used.
 func (o *MPSKernel) InitWithCoder(aDecoder *foundation.NSCoder) *MPSKernel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSKernelSelInitWithCoder, aDecoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSKernelFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSKernel) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSKernel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSKernelSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSKernelFromID(_ret)
 }
 
@@ -88,11 +94,12 @@ func (o *MPSKernel) Device() metal.MTLDevice {
 // @property label @abstract A string to help identify this object.
 func (o *MPSKernel) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSKernelSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MPSKernel) SetLabel(label *foundation.NSString) {
 	o.Ptr().Send(_mPSKernelSelSetLabel, label.Ptr())
 }
-

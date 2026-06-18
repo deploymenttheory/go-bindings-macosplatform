@@ -91,4 +91,3 @@ type HeadphoneActivityManagerable interface {
 }
 
 var _ HeadphoneActivityManagerable = (*HeadphoneActivityManager)(nil)
-

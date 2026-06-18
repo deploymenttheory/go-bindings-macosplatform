@@ -18,25 +18,25 @@ type DRFSObject struct {
 }
 
 var (
-	_clsDRFSObject = _objcClass("DRFSObject")
-	_dRFSObjectSelIsVirtual = objc.RegisterName("isVirtual")
-	_dRFSObjectSelSourcePath = objc.RegisterName("sourcePath")
-	_dRFSObjectSelParent = objc.RegisterName("parent")
-	_dRFSObjectSelBaseName = objc.RegisterName("baseName")
-	_dRFSObjectSelSetBaseName = objc.RegisterName("setBaseName:")
-	_dRFSObjectSelSpecificNameForFilesystem = objc.RegisterName("specificNameForFilesystem:")
-	_dRFSObjectSelSpecificNames = objc.RegisterName("specificNames")
-	_dRFSObjectSelSetSpecificNameForFilesystem = objc.RegisterName("setSpecificName:forFilesystem:")
-	_dRFSObjectSelSetSpecificNames = objc.RegisterName("setSpecificNames:")
-	_dRFSObjectSelMangledNameForFilesystem = objc.RegisterName("mangledNameForFilesystem:")
-	_dRFSObjectSelMangledNames = objc.RegisterName("mangledNames")
+	_clsDRFSObject                                                    = _objcClass("DRFSObject")
+	_dRFSObjectSelIsVirtual                                           = objc.RegisterName("isVirtual")
+	_dRFSObjectSelSourcePath                                          = objc.RegisterName("sourcePath")
+	_dRFSObjectSelParent                                              = objc.RegisterName("parent")
+	_dRFSObjectSelBaseName                                            = objc.RegisterName("baseName")
+	_dRFSObjectSelSetBaseName                                         = objc.RegisterName("setBaseName:")
+	_dRFSObjectSelSpecificNameForFilesystem                           = objc.RegisterName("specificNameForFilesystem:")
+	_dRFSObjectSelSpecificNames                                       = objc.RegisterName("specificNames")
+	_dRFSObjectSelSetSpecificNameForFilesystem                        = objc.RegisterName("setSpecificName:forFilesystem:")
+	_dRFSObjectSelSetSpecificNames                                    = objc.RegisterName("setSpecificNames:")
+	_dRFSObjectSelMangledNameForFilesystem                            = objc.RegisterName("mangledNameForFilesystem:")
+	_dRFSObjectSelMangledNames                                        = objc.RegisterName("mangledNames")
 	_dRFSObjectSelPropertyForKeyInFilesystemMergeWithOtherFilesystems = objc.RegisterName("propertyForKey:inFilesystem:mergeWithOtherFilesystems:")
-	_dRFSObjectSelPropertiesForFilesystemMergeWithOtherFilesystems = objc.RegisterName("propertiesForFilesystem:mergeWithOtherFilesystems:")
-	_dRFSObjectSelSetPropertyForKeyInFilesystem = objc.RegisterName("setProperty:forKey:inFilesystem:")
-	_dRFSObjectSelSetPropertiesInFilesystem = objc.RegisterName("setProperties:inFilesystem:")
-	_dRFSObjectSelExplicitFilesystemMask = objc.RegisterName("explicitFilesystemMask")
-	_dRFSObjectSelSetExplicitFilesystemMask = objc.RegisterName("setExplicitFilesystemMask:")
-	_dRFSObjectSelEffectiveFilesystemMask = objc.RegisterName("effectiveFilesystemMask")
+	_dRFSObjectSelPropertiesForFilesystemMergeWithOtherFilesystems    = objc.RegisterName("propertiesForFilesystem:mergeWithOtherFilesystems:")
+	_dRFSObjectSelSetPropertyForKeyInFilesystem                       = objc.RegisterName("setProperty:forKey:inFilesystem:")
+	_dRFSObjectSelSetPropertiesInFilesystem                           = objc.RegisterName("setProperties:inFilesystem:")
+	_dRFSObjectSelExplicitFilesystemMask                              = objc.RegisterName("explicitFilesystemMask")
+	_dRFSObjectSelSetExplicitFilesystemMask                           = objc.RegisterName("setExplicitFilesystemMask:")
+	_dRFSObjectSelEffectiveFilesystemMask                             = objc.RegisterName("effectiveFilesystemMask")
 )
 
 func DRFSObjectFromID(id objc.ID) *DRFSObject {
@@ -58,21 +58,27 @@ func (o *DRFSObject) IsVirtual() bool {
 // @method		sourcePath @abstract	Returns the path to a real object. @discussion	This method only applies to DRFSObjects pointing to real objects. @result		A path
 func (o *DRFSObject) SourcePath() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dRFSObjectSelSourcePath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @method		parent @abstract	Returns the parent folder (if any) of the receiver in the content hierarchy. @result		A @link //apple_ref/occ/cl/DRFolder DRFolder @/link object.
 func (o *DRFSObject) Parent() *DRFolder {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dRFSObjectSelParent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DRFolderFromID(_ret)
 }
 
 // @method		baseName @abstract	Returns the base name for the receiver. @discussion		The base name is the name from which any necessary filesystem-specific names are automatically generated. Because the content creation API is able to generate multiple filesystems which require multiple varied naming conventions, a sensible system for naming is required.  Thus each file has a base name which corresponds to its default name in any filesystem. Whenever possible, the base name will be used in the generated filesystem without modification.  If the name cannot be used as-is (if, for example, it contains illegal characters, exceeds the length requirements, doesn't meet the required format, or a name collision is detected) then an acceptable name that meets the filesystem's criteria will be generated automatically from the base name. The default base name for a real file or folder is the actual on-disk name of the item. @result		The base name of the object.
 func (o *DRFSObject) BaseName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dRFSObjectSelBaseName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -84,7 +90,9 @@ func (o *DRFSObject) SetBaseName(baseName *foundation.NSString) {
 // @method		specificNameForFilesystem: @abstract	Returns a single filesystem-specific name for the receiver. @param		filesystem	The filesystem to return the name from. @result		An NSString containing the name of the file.
 func (o *DRFSObject) SpecificNameForFilesystem(filesystem *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dRFSObjectSelSpecificNameForFilesystem, filesystem.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -107,7 +115,9 @@ func (o *DRFSObject) SetSpecificNames(specificNames *foundation.NSDictionary[obj
 // @method		mangledNameForFilesystem: @abstract	Returns a single filesystem-specific name for the receiver, mangled for uniqueness. @discussion	The string will be mangled for uniqueness amongst its siblings; if the burn were to happen immediately after this call, this is the name which would be used on the resulting disc. @param		filesystem	The filesystem to set the name for. @result		The name of the file mangled for filesystem constraints.
 func (o *DRFSObject) MangledNameForFilesystem(filesystem *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dRFSObjectSelMangledNameForFilesystem, filesystem.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -155,4 +165,3 @@ func (o *DRFSObject) EffectiveFilesystemMask() uint {
 	_ret := objc.Send[uint](o.Ptr(), _dRFSObjectSelEffectiveFilesystemMask)
 	return _ret
 }
-

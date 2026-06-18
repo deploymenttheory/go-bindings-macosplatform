@@ -416,7 +416,9 @@ func (x *IOBluetoothDevice) IsHandsFreeDevice() bool {
 	return x.inner.IsHandsFreeDevice()
 }
 
-func (x *IOBluetoothDevice) asIOBluetoothObject() *raw.IOBluetoothObject { return &x.inner.IOBluetoothObject }
+func (x *IOBluetoothDevice) asIOBluetoothObject() *raw.IOBluetoothObject {
+	return &x.inner.IOBluetoothObject
+}
 
 // IOBluetoothDeviceable is the interface implemented by [IOBluetoothDevice], for mocking and DI.
 type IOBluetoothDeviceable interface {
@@ -490,4 +492,3 @@ type IOBluetoothDeviceable interface {
 }
 
 var _ IOBluetoothDeviceable = (*IOBluetoothDevice)(nil)
-

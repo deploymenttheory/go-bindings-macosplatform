@@ -84,4 +84,3 @@ type Seatable interface {
 }
 
 var _ Seatable = (*Seat)(nil)
-

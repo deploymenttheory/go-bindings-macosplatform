@@ -16,8 +16,8 @@ type INCallRecordResolutionResult struct {
 }
 
 var (
-	_clsINCallRecordResolutionResult = _objcClass("INCallRecordResolutionResult")
-	_iNCallRecordResolutionResultSelSuccessWithResolvedCallRecord = objc.RegisterName("successWithResolvedCallRecord:")
+	_clsINCallRecordResolutionResult                                            = _objcClass("INCallRecordResolutionResult")
+	_iNCallRecordResolutionResultSelSuccessWithResolvedCallRecord               = objc.RegisterName("successWithResolvedCallRecord:")
 	_iNCallRecordResolutionResultSelDisambiguationWithCallRecordsToDisambiguate = objc.RegisterName("disambiguationWithCallRecordsToDisambiguate:")
 	_iNCallRecordResolutionResultSelConfirmationRequiredWithCallRecordToConfirm = objc.RegisterName("confirmationRequiredWithCallRecordToConfirm:")
 )
@@ -34,19 +34,24 @@ func INCallRecordResolutionResultFromID(id objc.ID) *INCallRecordResolutionResul
 
 func INCallRecordResolutionResultSuccessWithResolvedCallRecord(resolvedCallRecord *INCallRecord) *INCallRecordResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINCallRecordResolutionResult), _iNCallRecordResolutionResultSelSuccessWithResolvedCallRecord, resolvedCallRecord.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INCallRecordResolutionResultFromID(_ret)
 }
 
 func INCallRecordResolutionResultDisambiguationWithCallRecordsToDisambiguate(callRecordsToDisambiguate *foundation.NSArray[*INCallRecord]) *INCallRecordResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINCallRecordResolutionResult), _iNCallRecordResolutionResultSelDisambiguationWithCallRecordsToDisambiguate, callRecordsToDisambiguate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INCallRecordResolutionResultFromID(_ret)
 }
 
 func INCallRecordResolutionResultConfirmationRequiredWithCallRecordToConfirm(callRecordToConfirm *INCallRecord) *INCallRecordResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINCallRecordResolutionResult), _iNCallRecordResolutionResultSelConfirmationRequiredWithCallRecordToConfirm, callRecordToConfirm.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INCallRecordResolutionResultFromID(_ret)
 }
-

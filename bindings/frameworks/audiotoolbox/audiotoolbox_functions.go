@@ -17,413 +17,413 @@ import (
 )
 
 var (
-	_fnAUEventListenerAddEventType func(unsafe.Pointer, unsafe.Pointer, *AudioUnitEvent) int
-	_fnAUEventListenerCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float32, float32, unsafe.Pointer) int
+	_fnAUEventListenerAddEventType            func(unsafe.Pointer, unsafe.Pointer, *AudioUnitEvent) int
+	_fnAUEventListenerCreate                  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float32, float32, unsafe.Pointer) int
 	_fnAUEventListenerCreateWithDispatchQueue func(unsafe.Pointer, float32, float32, objc.ID, objc.Block) int
-	_fnAUEventListenerNotify func(unsafe.Pointer, unsafe.Pointer, *AudioUnitEvent) int
-	_fnAUEventListenerRemoveEventType func(unsafe.Pointer, unsafe.Pointer, *AudioUnitEvent) int
-	_fnAUGraphAddNode func(unsafe.Pointer, *AudioComponentDescription, *int) int
-	_fnAUGraphAddRenderNotify func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnAUGraphClearConnections func(unsafe.Pointer) int
-	_fnAUGraphClose func(unsafe.Pointer) int
-	_fnAUGraphConnectNodeInput func(unsafe.Pointer, int, uint, int, uint) int
-// Deprecated: no longer supported
-	_fnAUGraphCountNodeConnections func(unsafe.Pointer, int, *uint) int
+	_fnAUEventListenerNotify                  func(unsafe.Pointer, unsafe.Pointer, *AudioUnitEvent) int
+	_fnAUEventListenerRemoveEventType         func(unsafe.Pointer, unsafe.Pointer, *AudioUnitEvent) int
+	_fnAUGraphAddNode                         func(unsafe.Pointer, *AudioComponentDescription, *int) int
+	_fnAUGraphAddRenderNotify                 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnAUGraphClearConnections                func(unsafe.Pointer) int
+	_fnAUGraphClose                           func(unsafe.Pointer) int
+	_fnAUGraphConnectNodeInput                func(unsafe.Pointer, int, uint, int, uint) int
+	// Deprecated: no longer supported
+	_fnAUGraphCountNodeConnections  func(unsafe.Pointer, int, *uint) int
 	_fnAUGraphCountNodeInteractions func(unsafe.Pointer, int, *uint) int
-	_fnAUGraphDisconnectNodeInput func(unsafe.Pointer, int, uint) int
-	_fnAUGraphGetCPULoad func(unsafe.Pointer, *float32) int
-// Deprecated: no longer supported
-	_fnAUGraphGetConnectionInfo func(unsafe.Pointer, uint, *int, *uint, *int, *uint) int
-	_fnAUGraphGetIndNode func(unsafe.Pointer, uint, *int) int
+	_fnAUGraphDisconnectNodeInput   func(unsafe.Pointer, int, uint) int
+	_fnAUGraphGetCPULoad            func(unsafe.Pointer, *float32) int
+	// Deprecated: no longer supported
+	_fnAUGraphGetConnectionInfo  func(unsafe.Pointer, uint, *int, *uint, *int, *uint) int
+	_fnAUGraphGetIndNode         func(unsafe.Pointer, uint, *int) int
 	_fnAUGraphGetInteractionInfo func(unsafe.Pointer, uint, *AUNodeInteraction) int
-	_fnAUGraphGetMaxCPULoad func(unsafe.Pointer, *float32) int
-// Deprecated: no longer supported
+	_fnAUGraphGetMaxCPULoad      func(unsafe.Pointer, *float32) int
+	// Deprecated: no longer supported
 	_fnAUGraphGetNodeConnections func(unsafe.Pointer, int, *AudioUnitNodeConnection, *uint) int
-	_fnAUGraphGetNodeCount func(unsafe.Pointer, *uint) int
-// Deprecated: no longer supported
+	_fnAUGraphGetNodeCount       func(unsafe.Pointer, *uint) int
+	// Deprecated: no longer supported
 	_fnAUGraphGetNodeInfo func(unsafe.Pointer, int, *carboncore.ComponentDescription, *uint, unsafe.Pointer, **carboncore.ComponentInstanceRecord) int
-// Deprecated: no longer supported
+	// Deprecated: no longer supported
 	_fnAUGraphGetNodeInfoSubGraph func(unsafe.Pointer, int, unsafe.Pointer) int
 	_fnAUGraphGetNodeInteractions func(unsafe.Pointer, int, *uint, *AUNodeInteraction) int
-// Deprecated: no longer supported
-	_fnAUGraphGetNumberOfConnections func(unsafe.Pointer, *uint) int
+	// Deprecated: no longer supported
+	_fnAUGraphGetNumberOfConnections  func(unsafe.Pointer, *uint) int
 	_fnAUGraphGetNumberOfInteractions func(unsafe.Pointer, *uint) int
-	_fnAUGraphInitialize func(unsafe.Pointer) int
-	_fnAUGraphIsInitialized func(unsafe.Pointer, *uint8) int
-// Deprecated: no longer supported
+	_fnAUGraphInitialize              func(unsafe.Pointer) int
+	_fnAUGraphIsInitialized           func(unsafe.Pointer, *uint8) int
+	// Deprecated: no longer supported
 	_fnAUGraphIsNodeSubGraph func(unsafe.Pointer, int, *uint8) int
-	_fnAUGraphIsOpen func(unsafe.Pointer, *uint8) int
-	_fnAUGraphIsRunning func(unsafe.Pointer, *uint8) int
-// Deprecated: no longer supported
+	_fnAUGraphIsOpen         func(unsafe.Pointer, *uint8) int
+	_fnAUGraphIsRunning      func(unsafe.Pointer, *uint8) int
+	// Deprecated: no longer supported
 	_fnAUGraphNewNode func(unsafe.Pointer, *carboncore.ComponentDescription, uint, unsafe.Pointer, *int) int
-// Deprecated: no longer supported
-	_fnAUGraphNewNodeSubGraph func(unsafe.Pointer, *int) int
-	_fnAUGraphNodeInfo func(unsafe.Pointer, int, *AudioComponentDescription, **carboncore.ComponentInstanceRecord) int
-	_fnAUGraphOpen func(unsafe.Pointer) int
-	_fnAUGraphRemoveNode func(unsafe.Pointer, int) int
-	_fnAUGraphRemoveRenderNotify func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnAUGraphSetNodeInputCallback func(unsafe.Pointer, int, uint, *AURenderCallbackStruct) int
-	_fnAUGraphStart func(unsafe.Pointer) int
-	_fnAUGraphStop func(unsafe.Pointer) int
-	_fnAUGraphUninitialize func(unsafe.Pointer) int
-	_fnAUGraphUpdate func(unsafe.Pointer, *uint8) int
-	_fnAUListenerAddParameter func(unsafe.Pointer, unsafe.Pointer, *AudioUnitParameter) int
-	_fnAUListenerCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float32, unsafe.Pointer) int
-	_fnAUListenerCreateWithDispatchQueue func(unsafe.Pointer, float32, objc.ID, objc.Block) int
-	_fnAUListenerDispose func(unsafe.Pointer) int
-	_fnAUListenerRemoveParameter func(unsafe.Pointer, unsafe.Pointer, *AudioUnitParameter) int
-	_fnAUParameterFormatValue func(float64, *AudioUnitParameter, string, uint) string
-	_fnAUParameterListenerNotify func(unsafe.Pointer, unsafe.Pointer, *AudioUnitParameter) int
-	_fnAUParameterSet func(unsafe.Pointer, unsafe.Pointer, *AudioUnitParameter, float32, uint) int
-	_fnAUParameterValueFromLinear func(float32, *AudioUnitParameter) float32
-	_fnAUParameterValueToLinear func(float32, *AudioUnitParameter) float32
-	_fnAudioCodecAppendInputBufferList func(*carboncore.ComponentInstanceRecord, *coreaudiotypes.AudioBufferList, *uint, *coreaudiotypes.AudioStreamPacketDescription, *uint) int
-	_fnAudioCodecAppendInputData func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, *uint, *uint, *coreaudiotypes.AudioStreamPacketDescription) int
-	_fnAudioCodecGetProperty func(*carboncore.ComponentInstanceRecord, uint, *uint, unsafe.Pointer) int
-	_fnAudioCodecGetPropertyInfo func(*carboncore.ComponentInstanceRecord, uint, *uint, *uint8) int
-	_fnAudioCodecInitialize func(*carboncore.ComponentInstanceRecord, *coreaudiotypes.AudioStreamBasicDescription, *coreaudiotypes.AudioStreamBasicDescription, unsafe.Pointer, uint) int
-	_fnAudioCodecProduceOutputBufferList func(*carboncore.ComponentInstanceRecord, *coreaudiotypes.AudioBufferList, *uint, *coreaudiotypes.AudioStreamPacketDescription, *uint) int
-	_fnAudioCodecProduceOutputPackets func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, *uint, *uint, *coreaudiotypes.AudioStreamPacketDescription, *uint) int
-	_fnAudioCodecReset func(*carboncore.ComponentInstanceRecord) int
-	_fnAudioCodecSetProperty func(*carboncore.ComponentInstanceRecord, uint, uint, unsafe.Pointer) int
-	_fnAudioCodecUninitialize func(*carboncore.ComponentInstanceRecord) int
+	// Deprecated: no longer supported
+	_fnAUGraphNewNodeSubGraph              func(unsafe.Pointer, *int) int
+	_fnAUGraphNodeInfo                     func(unsafe.Pointer, int, *AudioComponentDescription, **carboncore.ComponentInstanceRecord) int
+	_fnAUGraphOpen                         func(unsafe.Pointer) int
+	_fnAUGraphRemoveNode                   func(unsafe.Pointer, int) int
+	_fnAUGraphRemoveRenderNotify           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnAUGraphSetNodeInputCallback         func(unsafe.Pointer, int, uint, *AURenderCallbackStruct) int
+	_fnAUGraphStart                        func(unsafe.Pointer) int
+	_fnAUGraphStop                         func(unsafe.Pointer) int
+	_fnAUGraphUninitialize                 func(unsafe.Pointer) int
+	_fnAUGraphUpdate                       func(unsafe.Pointer, *uint8) int
+	_fnAUListenerAddParameter              func(unsafe.Pointer, unsafe.Pointer, *AudioUnitParameter) int
+	_fnAUListenerCreate                    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float32, unsafe.Pointer) int
+	_fnAUListenerCreateWithDispatchQueue   func(unsafe.Pointer, float32, objc.ID, objc.Block) int
+	_fnAUListenerDispose                   func(unsafe.Pointer) int
+	_fnAUListenerRemoveParameter           func(unsafe.Pointer, unsafe.Pointer, *AudioUnitParameter) int
+	_fnAUParameterFormatValue              func(float64, *AudioUnitParameter, string, uint) string
+	_fnAUParameterListenerNotify           func(unsafe.Pointer, unsafe.Pointer, *AudioUnitParameter) int
+	_fnAUParameterSet                      func(unsafe.Pointer, unsafe.Pointer, *AudioUnitParameter, float32, uint) int
+	_fnAUParameterValueFromLinear          func(float32, *AudioUnitParameter) float32
+	_fnAUParameterValueToLinear            func(float32, *AudioUnitParameter) float32
+	_fnAudioCodecAppendInputBufferList     func(*carboncore.ComponentInstanceRecord, *coreaudiotypes.AudioBufferList, *uint, *coreaudiotypes.AudioStreamPacketDescription, *uint) int
+	_fnAudioCodecAppendInputData           func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, *uint, *uint, *coreaudiotypes.AudioStreamPacketDescription) int
+	_fnAudioCodecGetProperty               func(*carboncore.ComponentInstanceRecord, uint, *uint, unsafe.Pointer) int
+	_fnAudioCodecGetPropertyInfo           func(*carboncore.ComponentInstanceRecord, uint, *uint, *uint8) int
+	_fnAudioCodecInitialize                func(*carboncore.ComponentInstanceRecord, *coreaudiotypes.AudioStreamBasicDescription, *coreaudiotypes.AudioStreamBasicDescription, unsafe.Pointer, uint) int
+	_fnAudioCodecProduceOutputBufferList   func(*carboncore.ComponentInstanceRecord, *coreaudiotypes.AudioBufferList, *uint, *coreaudiotypes.AudioStreamPacketDescription, *uint) int
+	_fnAudioCodecProduceOutputPackets      func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, *uint, *uint, *coreaudiotypes.AudioStreamPacketDescription, *uint) int
+	_fnAudioCodecReset                     func(*carboncore.ComponentInstanceRecord) int
+	_fnAudioCodecSetProperty               func(*carboncore.ComponentInstanceRecord, uint, uint, unsafe.Pointer) int
+	_fnAudioCodecUninitialize              func(*carboncore.ComponentInstanceRecord) int
 	_fnAudioComponentCopyConfigurationInfo func(unsafe.Pointer, unsafe.Pointer) int
-	_fnAudioComponentCopyIcon func(unsafe.Pointer) unsafe.Pointer
-	_fnAudioComponentCopyName func(unsafe.Pointer, unsafe.Pointer) int
-	_fnAudioComponentCount func(*AudioComponentDescription) uint
-	_fnAudioComponentFindNext func(unsafe.Pointer, *AudioComponentDescription) unsafe.Pointer
-	_fnAudioComponentGetDescription func(unsafe.Pointer, *AudioComponentDescription) int
-// Deprecated: since macOS 11.0.
-	_fnAudioComponentGetIcon func(unsafe.Pointer) objc.ID
-	_fnAudioComponentGetVersion func(unsafe.Pointer, *uint) int
-	_fnAudioComponentInstanceCanDo func(*carboncore.ComponentInstanceRecord, int16) uint8
-	_fnAudioComponentInstanceDispose func(*carboncore.ComponentInstanceRecord) int
+	_fnAudioComponentCopyIcon              func(unsafe.Pointer) unsafe.Pointer
+	_fnAudioComponentCopyName              func(unsafe.Pointer, unsafe.Pointer) int
+	_fnAudioComponentCount                 func(*AudioComponentDescription) uint
+	_fnAudioComponentFindNext              func(unsafe.Pointer, *AudioComponentDescription) unsafe.Pointer
+	_fnAudioComponentGetDescription        func(unsafe.Pointer, *AudioComponentDescription) int
+	// Deprecated: since macOS 11.0.
+	_fnAudioComponentGetIcon              func(unsafe.Pointer) objc.ID
+	_fnAudioComponentGetVersion           func(unsafe.Pointer, *uint) int
+	_fnAudioComponentInstanceCanDo        func(*carboncore.ComponentInstanceRecord, int16) uint8
+	_fnAudioComponentInstanceDispose      func(*carboncore.ComponentInstanceRecord) int
 	_fnAudioComponentInstanceGetComponent func(*carboncore.ComponentInstanceRecord) unsafe.Pointer
-	_fnAudioComponentInstanceNew func(unsafe.Pointer, **carboncore.ComponentInstanceRecord) int
-	_fnAudioComponentInstantiate func(unsafe.Pointer, AudioComponentInstantiationOptions, objc.Block)
-	_fnAudioComponentRegister func(*AudioComponentDescription, unsafe.Pointer, uint, unsafe.Pointer) unsafe.Pointer
-	_fnAudioComponentValidate func(unsafe.Pointer, unsafe.Pointer, *AudioComponentValidationResult) int
-	_fnAudioComponentValidateWithResults func(unsafe.Pointer, unsafe.Pointer, objc.Block) int
-	_fnAudioConverterConvertBuffer func(unsafe.Pointer, uint, unsafe.Pointer, *uint, unsafe.Pointer) int
+	_fnAudioComponentInstanceNew          func(unsafe.Pointer, **carboncore.ComponentInstanceRecord) int
+	_fnAudioComponentInstantiate          func(unsafe.Pointer, AudioComponentInstantiationOptions, objc.Block)
+	_fnAudioComponentRegister             func(*AudioComponentDescription, unsafe.Pointer, uint, unsafe.Pointer) unsafe.Pointer
+	_fnAudioComponentValidate             func(unsafe.Pointer, unsafe.Pointer, *AudioComponentValidationResult) int
+	_fnAudioComponentValidateWithResults  func(unsafe.Pointer, unsafe.Pointer, objc.Block) int
+	_fnAudioConverterConvertBuffer        func(unsafe.Pointer, uint, unsafe.Pointer, *uint, unsafe.Pointer) int
 	_fnAudioConverterConvertComplexBuffer func(unsafe.Pointer, uint, *coreaudiotypes.AudioBufferList, *coreaudiotypes.AudioBufferList) int
-	_fnAudioConverterDispose func(unsafe.Pointer) int
-// Deprecated: no longer supported
-	_fnAudioConverterFillBuffer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint, unsafe.Pointer) int
-	_fnAudioConverterFillComplexBuffer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint, *coreaudiotypes.AudioBufferList, *coreaudiotypes.AudioStreamPacketDescription) int
-	_fnAudioConverterFillComplexBufferRealtimeSafe func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint, *coreaudiotypes.AudioBufferList, *coreaudiotypes.AudioStreamPacketDescription) int
+	_fnAudioConverterDispose              func(unsafe.Pointer) int
+	// Deprecated: no longer supported
+	_fnAudioConverterFillBuffer                              func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint, unsafe.Pointer) int
+	_fnAudioConverterFillComplexBuffer                       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint, *coreaudiotypes.AudioBufferList, *coreaudiotypes.AudioStreamPacketDescription) int
+	_fnAudioConverterFillComplexBufferRealtimeSafe           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint, *coreaudiotypes.AudioBufferList, *coreaudiotypes.AudioStreamPacketDescription) int
 	_fnAudioConverterFillComplexBufferWithPacketDependencies func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint, *coreaudiotypes.AudioBufferList, *coreaudiotypes.AudioStreamPacketDescription, *coreaudiotypes.AudioStreamPacketDependencyDescription) int
-	_fnAudioConverterGetProperty func(unsafe.Pointer, uint, *uint, unsafe.Pointer) int
-	_fnAudioConverterGetPropertyInfo func(unsafe.Pointer, uint, *uint, *uint8) int
-	_fnAudioConverterNew func(*coreaudiotypes.AudioStreamBasicDescription, *coreaudiotypes.AudioStreamBasicDescription, unsafe.Pointer) int
-	_fnAudioConverterNewSpecific func(*coreaudiotypes.AudioStreamBasicDescription, *coreaudiotypes.AudioStreamBasicDescription, uint, *coreaudiotypes.AudioClassDescription, unsafe.Pointer) int
-	_fnAudioConverterNewWithOptions func(*coreaudiotypes.AudioStreamBasicDescription, *coreaudiotypes.AudioStreamBasicDescription, AudioConverterOptions, unsafe.Pointer) int
-	_fnAudioConverterPrepare func(uint, unsafe.Pointer, objc.Block)
-	_fnAudioConverterReset func(unsafe.Pointer) int
-	_fnAudioConverterSetProperty func(unsafe.Pointer, uint, uint, unsafe.Pointer) int
-	_fnAudioFileClose func(unsafe.Pointer) int
-	_fnAudioFileComponentCloseFile func(*carboncore.ComponentInstanceRecord) int
-	_fnAudioFileComponentCountUserData func(*carboncore.ComponentInstanceRecord, uint, *uint) int
-// Deprecated: no longer supported
-	_fnAudioFileComponentCreate func(*carboncore.ComponentInstanceRecord, *carboncore.FSRef, unsafe.Pointer, *coreaudiotypes.AudioStreamBasicDescription, uint, *carboncore.FSRef) int
+	_fnAudioConverterGetProperty                             func(unsafe.Pointer, uint, *uint, unsafe.Pointer) int
+	_fnAudioConverterGetPropertyInfo                         func(unsafe.Pointer, uint, *uint, *uint8) int
+	_fnAudioConverterNew                                     func(*coreaudiotypes.AudioStreamBasicDescription, *coreaudiotypes.AudioStreamBasicDescription, unsafe.Pointer) int
+	_fnAudioConverterNewSpecific                             func(*coreaudiotypes.AudioStreamBasicDescription, *coreaudiotypes.AudioStreamBasicDescription, uint, *coreaudiotypes.AudioClassDescription, unsafe.Pointer) int
+	_fnAudioConverterNewWithOptions                          func(*coreaudiotypes.AudioStreamBasicDescription, *coreaudiotypes.AudioStreamBasicDescription, AudioConverterOptions, unsafe.Pointer) int
+	_fnAudioConverterPrepare                                 func(uint, unsafe.Pointer, objc.Block)
+	_fnAudioConverterReset                                   func(unsafe.Pointer) int
+	_fnAudioConverterSetProperty                             func(unsafe.Pointer, uint, uint, unsafe.Pointer) int
+	_fnAudioFileClose                                        func(unsafe.Pointer) int
+	_fnAudioFileComponentCloseFile                           func(*carboncore.ComponentInstanceRecord) int
+	_fnAudioFileComponentCountUserData                       func(*carboncore.ComponentInstanceRecord, uint, *uint) int
+	// Deprecated: no longer supported
+	_fnAudioFileComponentCreate    func(*carboncore.ComponentInstanceRecord, *carboncore.FSRef, unsafe.Pointer, *coreaudiotypes.AudioStreamBasicDescription, uint, *carboncore.FSRef) int
 	_fnAudioFileComponentCreateURL func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, *coreaudiotypes.AudioStreamBasicDescription, uint) int
-// Deprecated: no longer supported
-	_fnAudioFileComponentDataIsThisFormat func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint) int
+	// Deprecated: no longer supported
+	_fnAudioFileComponentDataIsThisFormat      func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint) int
 	_fnAudioFileComponentExtensionIsThisFormat func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, *uint) int
-	_fnAudioFileComponentFileDataIsThisFormat func(*carboncore.ComponentInstanceRecord, uint, unsafe.Pointer, *uint) int
-// Deprecated: no longer supported
-	_fnAudioFileComponentFileIsThisFormat func(*carboncore.ComponentInstanceRecord, int16, *uint) int
-	_fnAudioFileComponentGetGlobalInfo func(*carboncore.ComponentInstanceRecord, uint, uint, unsafe.Pointer, *uint, unsafe.Pointer) int
-	_fnAudioFileComponentGetGlobalInfoSize func(*carboncore.ComponentInstanceRecord, uint, uint, unsafe.Pointer, *uint) int
-	_fnAudioFileComponentGetProperty func(*carboncore.ComponentInstanceRecord, uint, *uint, unsafe.Pointer) int
-	_fnAudioFileComponentGetPropertyInfo func(*carboncore.ComponentInstanceRecord, uint, *uint, *uint) int
-	_fnAudioFileComponentGetUserData func(*carboncore.ComponentInstanceRecord, uint, uint, *uint, unsafe.Pointer) int
+	_fnAudioFileComponentFileDataIsThisFormat  func(*carboncore.ComponentInstanceRecord, uint, unsafe.Pointer, *uint) int
+	// Deprecated: no longer supported
+	_fnAudioFileComponentFileIsThisFormat    func(*carboncore.ComponentInstanceRecord, int16, *uint) int
+	_fnAudioFileComponentGetGlobalInfo       func(*carboncore.ComponentInstanceRecord, uint, uint, unsafe.Pointer, *uint, unsafe.Pointer) int
+	_fnAudioFileComponentGetGlobalInfoSize   func(*carboncore.ComponentInstanceRecord, uint, uint, unsafe.Pointer, *uint) int
+	_fnAudioFileComponentGetProperty         func(*carboncore.ComponentInstanceRecord, uint, *uint, unsafe.Pointer) int
+	_fnAudioFileComponentGetPropertyInfo     func(*carboncore.ComponentInstanceRecord, uint, *uint, *uint) int
+	_fnAudioFileComponentGetUserData         func(*carboncore.ComponentInstanceRecord, uint, uint, *uint, unsafe.Pointer) int
 	_fnAudioFileComponentGetUserDataAtOffset func(*carboncore.ComponentInstanceRecord, uint, uint, int64, *uint, unsafe.Pointer) int
-	_fnAudioFileComponentGetUserDataSize func(*carboncore.ComponentInstanceRecord, uint, uint, *uint) int
-	_fnAudioFileComponentGetUserDataSize64 func(*carboncore.ComponentInstanceRecord, uint, uint, *uint64) int
-// Deprecated: no longer supported
-	_fnAudioFileComponentInitialize func(*carboncore.ComponentInstanceRecord, *carboncore.FSRef, *coreaudiotypes.AudioStreamBasicDescription, uint) int
+	_fnAudioFileComponentGetUserDataSize     func(*carboncore.ComponentInstanceRecord, uint, uint, *uint) int
+	_fnAudioFileComponentGetUserDataSize64   func(*carboncore.ComponentInstanceRecord, uint, uint, *uint64) int
+	// Deprecated: no longer supported
+	_fnAudioFileComponentInitialize              func(*carboncore.ComponentInstanceRecord, *carboncore.FSRef, *coreaudiotypes.AudioStreamBasicDescription, uint) int
 	_fnAudioFileComponentInitializeWithCallbacks func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint, *coreaudiotypes.AudioStreamBasicDescription, uint) int
-// Deprecated: no longer supported
-	_fnAudioFileComponentOpenFile func(*carboncore.ComponentInstanceRecord, *carboncore.FSRef, int8, int16) int
-	_fnAudioFileComponentOpenURL func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, int8, int) int
+	// Deprecated: no longer supported
+	_fnAudioFileComponentOpenFile          func(*carboncore.ComponentInstanceRecord, *carboncore.FSRef, int8, int16) int
+	_fnAudioFileComponentOpenURL           func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, int8, int) int
 	_fnAudioFileComponentOpenWithCallbacks func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnAudioFileComponentOptimize func(*carboncore.ComponentInstanceRecord) int
-	_fnAudioFileComponentReadBytes func(*carboncore.ComponentInstanceRecord, uint8, int64, *uint, unsafe.Pointer) int
-	_fnAudioFileComponentReadPacketData func(*carboncore.ComponentInstanceRecord, uint8, *uint, *coreaudiotypes.AudioStreamPacketDescription, int64, *uint, unsafe.Pointer) int
-	_fnAudioFileComponentReadPackets func(*carboncore.ComponentInstanceRecord, uint8, *uint, *coreaudiotypes.AudioStreamPacketDescription, int64, *uint, unsafe.Pointer) int
-	_fnAudioFileComponentRemoveUserData func(*carboncore.ComponentInstanceRecord, uint, uint) int
-	_fnAudioFileComponentSetProperty func(*carboncore.ComponentInstanceRecord, uint, uint, unsafe.Pointer) int
-	_fnAudioFileComponentSetUserData func(*carboncore.ComponentInstanceRecord, uint, uint, uint, unsafe.Pointer) int
-	_fnAudioFileComponentWriteBytes func(*carboncore.ComponentInstanceRecord, uint8, int64, *uint, unsafe.Pointer) int
-	_fnAudioFileComponentWritePackets func(*carboncore.ComponentInstanceRecord, uint8, uint, *coreaudiotypes.AudioStreamPacketDescription, int64, *uint, unsafe.Pointer) int
-	_fnAudioFileCountUserData func(unsafe.Pointer, uint, *uint) int
-// Deprecated: no longer supported
-	_fnAudioFileCreate func(*carboncore.FSRef, unsafe.Pointer, uint, *coreaudiotypes.AudioStreamBasicDescription, AudioFileFlags, *carboncore.FSRef, unsafe.Pointer) int
-	_fnAudioFileCreateWithURL func(unsafe.Pointer, uint, *coreaudiotypes.AudioStreamBasicDescription, AudioFileFlags, unsafe.Pointer) int
-	_fnAudioFileGetGlobalInfo func(uint, uint, unsafe.Pointer, *uint, unsafe.Pointer) int
-	_fnAudioFileGetGlobalInfoSize func(uint, uint, unsafe.Pointer, *uint) int
-	_fnAudioFileGetProperty func(unsafe.Pointer, uint, *uint, unsafe.Pointer) int
-	_fnAudioFileGetPropertyInfo func(unsafe.Pointer, uint, *uint, *uint) int
-	_fnAudioFileGetUserData func(unsafe.Pointer, uint, uint, *uint, unsafe.Pointer) int
+	_fnAudioFileComponentOptimize          func(*carboncore.ComponentInstanceRecord) int
+	_fnAudioFileComponentReadBytes         func(*carboncore.ComponentInstanceRecord, uint8, int64, *uint, unsafe.Pointer) int
+	_fnAudioFileComponentReadPacketData    func(*carboncore.ComponentInstanceRecord, uint8, *uint, *coreaudiotypes.AudioStreamPacketDescription, int64, *uint, unsafe.Pointer) int
+	_fnAudioFileComponentReadPackets       func(*carboncore.ComponentInstanceRecord, uint8, *uint, *coreaudiotypes.AudioStreamPacketDescription, int64, *uint, unsafe.Pointer) int
+	_fnAudioFileComponentRemoveUserData    func(*carboncore.ComponentInstanceRecord, uint, uint) int
+	_fnAudioFileComponentSetProperty       func(*carboncore.ComponentInstanceRecord, uint, uint, unsafe.Pointer) int
+	_fnAudioFileComponentSetUserData       func(*carboncore.ComponentInstanceRecord, uint, uint, uint, unsafe.Pointer) int
+	_fnAudioFileComponentWriteBytes        func(*carboncore.ComponentInstanceRecord, uint8, int64, *uint, unsafe.Pointer) int
+	_fnAudioFileComponentWritePackets      func(*carboncore.ComponentInstanceRecord, uint8, uint, *coreaudiotypes.AudioStreamPacketDescription, int64, *uint, unsafe.Pointer) int
+	_fnAudioFileCountUserData              func(unsafe.Pointer, uint, *uint) int
+	// Deprecated: no longer supported
+	_fnAudioFileCreate              func(*carboncore.FSRef, unsafe.Pointer, uint, *coreaudiotypes.AudioStreamBasicDescription, AudioFileFlags, *carboncore.FSRef, unsafe.Pointer) int
+	_fnAudioFileCreateWithURL       func(unsafe.Pointer, uint, *coreaudiotypes.AudioStreamBasicDescription, AudioFileFlags, unsafe.Pointer) int
+	_fnAudioFileGetGlobalInfo       func(uint, uint, unsafe.Pointer, *uint, unsafe.Pointer) int
+	_fnAudioFileGetGlobalInfoSize   func(uint, uint, unsafe.Pointer, *uint) int
+	_fnAudioFileGetProperty         func(unsafe.Pointer, uint, *uint, unsafe.Pointer) int
+	_fnAudioFileGetPropertyInfo     func(unsafe.Pointer, uint, *uint, *uint) int
+	_fnAudioFileGetUserData         func(unsafe.Pointer, uint, uint, *uint, unsafe.Pointer) int
 	_fnAudioFileGetUserDataAtOffset func(unsafe.Pointer, uint, uint, int64, *uint, unsafe.Pointer) int
-	_fnAudioFileGetUserDataSize func(unsafe.Pointer, uint, uint, *uint) int
-	_fnAudioFileGetUserDataSize64 func(unsafe.Pointer, uint, uint, *uint64) int
-// Deprecated: no longer supported
-	_fnAudioFileInitialize func(*carboncore.FSRef, uint, *coreaudiotypes.AudioStreamBasicDescription, AudioFileFlags, unsafe.Pointer) int
+	_fnAudioFileGetUserDataSize     func(unsafe.Pointer, uint, uint, *uint) int
+	_fnAudioFileGetUserDataSize64   func(unsafe.Pointer, uint, uint, *uint64) int
+	// Deprecated: no longer supported
+	_fnAudioFileInitialize              func(*carboncore.FSRef, uint, *coreaudiotypes.AudioStreamBasicDescription, AudioFileFlags, unsafe.Pointer) int
 	_fnAudioFileInitializeWithCallbacks func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint, *coreaudiotypes.AudioStreamBasicDescription, AudioFileFlags, unsafe.Pointer) int
-// Deprecated: no longer supported
-	_fnAudioFileOpen func(*carboncore.FSRef, AudioFilePermissions, uint, unsafe.Pointer) int
-	_fnAudioFileOpenURL func(unsafe.Pointer, AudioFilePermissions, uint, unsafe.Pointer) int
+	// Deprecated: no longer supported
+	_fnAudioFileOpen              func(*carboncore.FSRef, AudioFilePermissions, uint, unsafe.Pointer) int
+	_fnAudioFileOpenURL           func(unsafe.Pointer, AudioFilePermissions, uint, unsafe.Pointer) int
 	_fnAudioFileOpenWithCallbacks func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) int
-	_fnAudioFileOptimize func(unsafe.Pointer) int
-	_fnAudioFileReadBytes func(unsafe.Pointer, uint8, int64, *uint, unsafe.Pointer) int
-	_fnAudioFileReadPacketData func(unsafe.Pointer, uint8, *uint, *coreaudiotypes.AudioStreamPacketDescription, int64, *uint, unsafe.Pointer) int
-// Deprecated: no longer supported
-	_fnAudioFileReadPackets func(unsafe.Pointer, uint8, *uint, *coreaudiotypes.AudioStreamPacketDescription, int64, *uint, unsafe.Pointer) int
-	_fnAudioFileRemoveUserData func(unsafe.Pointer, uint, uint) int
-	_fnAudioFileSetProperty func(unsafe.Pointer, uint, uint, unsafe.Pointer) int
-	_fnAudioFileSetUserData func(unsafe.Pointer, uint, uint, uint, unsafe.Pointer) int
-	_fnAudioFileStreamClose func(unsafe.Pointer) int
-	_fnAudioFileStreamGetProperty func(unsafe.Pointer, uint, *uint, unsafe.Pointer) int
-	_fnAudioFileStreamGetPropertyInfo func(unsafe.Pointer, uint, *uint, *uint8) int
-	_fnAudioFileStreamOpen func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) int
-	_fnAudioFileStreamParseBytes func(unsafe.Pointer, uint, unsafe.Pointer, AudioFileStreamParseFlags) int
-	_fnAudioFileStreamSeek func(unsafe.Pointer, int64, *int64, *AudioFileStreamSeekFlags) int
-	_fnAudioFileStreamSetProperty func(unsafe.Pointer, uint, uint, unsafe.Pointer) int
-	_fnAudioFileWriteBytes func(unsafe.Pointer, uint8, int64, *uint, unsafe.Pointer) int
-	_fnAudioFileWritePackets func(unsafe.Pointer, uint8, uint, *coreaudiotypes.AudioStreamPacketDescription, int64, *uint, unsafe.Pointer) int
+	_fnAudioFileOptimize          func(unsafe.Pointer) int
+	_fnAudioFileReadBytes         func(unsafe.Pointer, uint8, int64, *uint, unsafe.Pointer) int
+	_fnAudioFileReadPacketData    func(unsafe.Pointer, uint8, *uint, *coreaudiotypes.AudioStreamPacketDescription, int64, *uint, unsafe.Pointer) int
+	// Deprecated: no longer supported
+	_fnAudioFileReadPackets                  func(unsafe.Pointer, uint8, *uint, *coreaudiotypes.AudioStreamPacketDescription, int64, *uint, unsafe.Pointer) int
+	_fnAudioFileRemoveUserData               func(unsafe.Pointer, uint, uint) int
+	_fnAudioFileSetProperty                  func(unsafe.Pointer, uint, uint, unsafe.Pointer) int
+	_fnAudioFileSetUserData                  func(unsafe.Pointer, uint, uint, uint, unsafe.Pointer) int
+	_fnAudioFileStreamClose                  func(unsafe.Pointer) int
+	_fnAudioFileStreamGetProperty            func(unsafe.Pointer, uint, *uint, unsafe.Pointer) int
+	_fnAudioFileStreamGetPropertyInfo        func(unsafe.Pointer, uint, *uint, *uint8) int
+	_fnAudioFileStreamOpen                   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) int
+	_fnAudioFileStreamParseBytes             func(unsafe.Pointer, uint, unsafe.Pointer, AudioFileStreamParseFlags) int
+	_fnAudioFileStreamSeek                   func(unsafe.Pointer, int64, *int64, *AudioFileStreamSeekFlags) int
+	_fnAudioFileStreamSetProperty            func(unsafe.Pointer, uint, uint, unsafe.Pointer) int
+	_fnAudioFileWriteBytes                   func(unsafe.Pointer, uint8, int64, *uint, unsafe.Pointer) int
+	_fnAudioFileWritePackets                 func(unsafe.Pointer, uint8, uint, *coreaudiotypes.AudioStreamPacketDescription, int64, *uint, unsafe.Pointer) int
 	_fnAudioFileWritePacketsWithDependencies func(unsafe.Pointer, uint8, uint, *coreaudiotypes.AudioStreamPacketDescription, *coreaudiotypes.AudioStreamPacketDependencyDescription, int64, *uint, unsafe.Pointer) int
-	_fnAudioFormatGetProperty func(uint, uint, unsafe.Pointer, *uint, unsafe.Pointer) int
-	_fnAudioFormatGetPropertyInfo func(uint, uint, unsafe.Pointer, *uint) int
-// Deprecated: no longer supported
+	_fnAudioFormatGetProperty                func(uint, uint, unsafe.Pointer, *uint, unsafe.Pointer) int
+	_fnAudioFormatGetPropertyInfo            func(uint, uint, unsafe.Pointer, *uint) int
+	// Deprecated: no longer supported
 	_fnAudioHardwareServiceAddPropertyListener func(uint, *coreaudio.AudioObjectPropertyAddress, unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: no longer supported
+	// Deprecated: no longer supported
 	_fnAudioHardwareServiceGetPropertyData func(uint, *coreaudio.AudioObjectPropertyAddress, uint, unsafe.Pointer, *uint, unsafe.Pointer) int
-// Deprecated: no longer supported
+	// Deprecated: no longer supported
 	_fnAudioHardwareServiceGetPropertyDataSize func(uint, *coreaudio.AudioObjectPropertyAddress, uint, unsafe.Pointer, *uint) int
-// Deprecated: no longer supported
+	// Deprecated: no longer supported
 	_fnAudioHardwareServiceHasProperty func(uint, *coreaudio.AudioObjectPropertyAddress) uint8
-// Deprecated: no longer supported
+	// Deprecated: no longer supported
 	_fnAudioHardwareServiceIsPropertySettable func(uint, *coreaudio.AudioObjectPropertyAddress, *uint8) int
-// Deprecated: no longer supported
+	// Deprecated: no longer supported
 	_fnAudioHardwareServiceRemovePropertyListener func(uint, *coreaudio.AudioObjectPropertyAddress, unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: no longer supported
-	_fnAudioHardwareServiceSetPropertyData func(uint, *coreaudio.AudioObjectPropertyAddress, uint, unsafe.Pointer, uint, unsafe.Pointer) int
-	_fnAudioOutputUnitStart func(*carboncore.ComponentInstanceRecord) int
-	_fnAudioOutputUnitStop func(*carboncore.ComponentInstanceRecord) int
-	_fnAudioQueueAddPropertyListener func(unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int
-	_fnAudioQueueAllocateBuffer func(unsafe.Pointer, uint, **AudioQueueBuffer) int
+	// Deprecated: no longer supported
+	_fnAudioHardwareServiceSetPropertyData            func(uint, *coreaudio.AudioObjectPropertyAddress, uint, unsafe.Pointer, uint, unsafe.Pointer) int
+	_fnAudioOutputUnitStart                           func(*carboncore.ComponentInstanceRecord) int
+	_fnAudioOutputUnitStop                            func(*carboncore.ComponentInstanceRecord) int
+	_fnAudioQueueAddPropertyListener                  func(unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int
+	_fnAudioQueueAllocateBuffer                       func(unsafe.Pointer, uint, **AudioQueueBuffer) int
 	_fnAudioQueueAllocateBufferWithPacketDescriptions func(unsafe.Pointer, uint, uint, **AudioQueueBuffer) int
-	_fnAudioQueueCreateTimeline func(unsafe.Pointer, unsafe.Pointer) int
-	_fnAudioQueueDeviceGetCurrentTime func(unsafe.Pointer, *coreaudiotypes.AudioTimeStamp) int
-	_fnAudioQueueDeviceGetNearestStartTime func(unsafe.Pointer, *coreaudiotypes.AudioTimeStamp, uint) int
-	_fnAudioQueueDeviceTranslateTime func(unsafe.Pointer, *coreaudiotypes.AudioTimeStamp, *coreaudiotypes.AudioTimeStamp) int
-	_fnAudioQueueDispose func(unsafe.Pointer, uint8) int
-	_fnAudioQueueDisposeTimeline func(unsafe.Pointer, unsafe.Pointer) int
-	_fnAudioQueueEnqueueBuffer func(unsafe.Pointer, *AudioQueueBuffer, uint, *coreaudiotypes.AudioStreamPacketDescription) int
-	_fnAudioQueueEnqueueBufferWithParameters func(unsafe.Pointer, *AudioQueueBuffer, uint, *coreaudiotypes.AudioStreamPacketDescription, uint, uint, uint, *AudioQueueParameterEvent, *coreaudiotypes.AudioTimeStamp, *coreaudiotypes.AudioTimeStamp) int
-	_fnAudioQueueFlush func(unsafe.Pointer) int
-	_fnAudioQueueFreeBuffer func(unsafe.Pointer, *AudioQueueBuffer) int
-	_fnAudioQueueGetCurrentTime func(unsafe.Pointer, unsafe.Pointer, *coreaudiotypes.AudioTimeStamp, *uint8) int
-	_fnAudioQueueGetParameter func(unsafe.Pointer, uint, *float32) int
-	_fnAudioQueueGetProperty func(unsafe.Pointer, uint, unsafe.Pointer, *uint) int
-	_fnAudioQueueGetPropertySize func(unsafe.Pointer, uint, *uint) int
-	_fnAudioQueueNewInput func(*coreaudiotypes.AudioStreamBasicDescription, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) int
-	_fnAudioQueueNewInputWithDispatchQueue func(unsafe.Pointer, *coreaudiotypes.AudioStreamBasicDescription, uint, objc.ID, objc.Block) int
-	_fnAudioQueueNewOutput func(*coreaudiotypes.AudioStreamBasicDescription, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) int
-	_fnAudioQueueNewOutputWithDispatchQueue func(unsafe.Pointer, *coreaudiotypes.AudioStreamBasicDescription, uint, objc.ID, objc.Block) int
-	_fnAudioQueueOfflineRender func(unsafe.Pointer, *coreaudiotypes.AudioTimeStamp, *AudioQueueBuffer, uint) int
-	_fnAudioQueuePause func(unsafe.Pointer) int
-	_fnAudioQueuePrime func(unsafe.Pointer, uint, *uint) int
-	_fnAudioQueueProcessingTapDispose func(unsafe.Pointer) int
-	_fnAudioQueueProcessingTapGetQueueTime func(unsafe.Pointer, *float64, *uint) int
-	_fnAudioQueueProcessingTapGetSourceAudio func(unsafe.Pointer, uint, *coreaudiotypes.AudioTimeStamp, *AudioQueueProcessingTapFlags, *uint, *coreaudiotypes.AudioBufferList) int
-	_fnAudioQueueProcessingTapNew func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, AudioQueueProcessingTapFlags, *uint, *coreaudiotypes.AudioStreamBasicDescription, unsafe.Pointer) int
-	_fnAudioQueueRemovePropertyListener func(unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int
-	_fnAudioQueueReset func(unsafe.Pointer) int
-	_fnAudioQueueSetOfflineRenderFormat func(unsafe.Pointer, *coreaudiotypes.AudioStreamBasicDescription, *coreaudiotypes.AudioChannelLayout) int
-	_fnAudioQueueSetParameter func(unsafe.Pointer, uint, float32) int
-	_fnAudioQueueSetProperty func(unsafe.Pointer, uint, unsafe.Pointer, uint) int
-	_fnAudioQueueStart func(unsafe.Pointer, *coreaudiotypes.AudioTimeStamp) int
-	_fnAudioQueueStop func(unsafe.Pointer, uint8) int
-	_fnAudioServicesAddSystemSoundCompletion func(uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnAudioServicesCreateSystemSoundID func(unsafe.Pointer, *uint) int
-	_fnAudioServicesDisposeSystemSoundID func(uint) int
-	_fnAudioServicesGetProperty func(uint, uint, unsafe.Pointer, *uint, unsafe.Pointer) int
-	_fnAudioServicesGetPropertyInfo func(uint, uint, unsafe.Pointer, *uint, *uint8) int
-	_fnAudioServicesPlayAlertSound func(uint)
-	_fnAudioServicesPlayAlertSoundWithCompletion func(uint, objc.Block)
-	_fnAudioServicesPlaySystemSound func(uint)
-	_fnAudioServicesPlaySystemSoundWithCompletion func(uint, objc.Block)
-	_fnAudioServicesRemoveSystemSoundCompletion func(uint)
-	_fnAudioServicesSetProperty func(uint, uint, unsafe.Pointer, uint, unsafe.Pointer) int
-	_fnAudioUnitAddPropertyListener func(*carboncore.ComponentInstanceRecord, uint, unsafe.Pointer, unsafe.Pointer) int
-	_fnAudioUnitAddRenderNotify func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, unsafe.Pointer) int
-	_fnAudioUnitExtensionCopyComponentList func(unsafe.Pointer) unsafe.Pointer
-	_fnAudioUnitExtensionSetComponentList func(unsafe.Pointer, unsafe.Pointer) int
-	_fnAudioUnitGetParameter func(*carboncore.ComponentInstanceRecord, uint, uint, uint, *float32) int
-	_fnAudioUnitGetProperty func(*carboncore.ComponentInstanceRecord, uint, uint, uint, unsafe.Pointer, *uint) int
-	_fnAudioUnitGetPropertyInfo func(*carboncore.ComponentInstanceRecord, uint, uint, uint, *uint, *uint8) int
-	_fnAudioUnitInitialize func(*carboncore.ComponentInstanceRecord) int
-	_fnAudioUnitProcess func(*carboncore.ComponentInstanceRecord, *AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint, *coreaudiotypes.AudioBufferList) int
-	_fnAudioUnitProcessMultiple func(*carboncore.ComponentInstanceRecord, *AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint, uint, *coreaudiotypes.AudioBufferList, uint, *coreaudiotypes.AudioBufferList) int
-	_fnAudioUnitRemovePropertyListenerWithUserData func(*carboncore.ComponentInstanceRecord, uint, unsafe.Pointer, unsafe.Pointer) int
-	_fnAudioUnitRemoveRenderNotify func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, unsafe.Pointer) int
-	_fnAudioUnitRender func(*carboncore.ComponentInstanceRecord, *AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint, uint, *coreaudiotypes.AudioBufferList) int
-	_fnAudioUnitReset func(*carboncore.ComponentInstanceRecord, uint, uint) int
-	_fnAudioUnitScheduleParameters func(*carboncore.ComponentInstanceRecord, *AudioUnitParameterEvent, uint) int
-	_fnAudioUnitSetParameter func(*carboncore.ComponentInstanceRecord, uint, uint, uint, float32, uint) int
-	_fnAudioUnitSetProperty func(*carboncore.ComponentInstanceRecord, uint, uint, uint, unsafe.Pointer, uint) int
-	_fnAudioUnitUninitialize func(*carboncore.ComponentInstanceRecord) int
-	_fnAudioWorkIntervalCreate func(string, accelerate.Os_clockid_t, unsafe.Pointer) unsafe.Pointer
-	_fnCAClockAddListener func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnCAClockArm func(unsafe.Pointer) int
-	_fnCAClockBarBeatTimeToBeats func(unsafe.Pointer, *CABarBeatTime, *float64) int
-	_fnCAClockBeatsToBarBeatTime func(unsafe.Pointer, float64, uint16, *CABarBeatTime) int
-	_fnCAClockDisarm func(unsafe.Pointer) int
-	_fnCAClockDispose func(unsafe.Pointer) int
-	_fnCAClockGetCurrentTempo func(unsafe.Pointer, *float64, *CAClockTime) int
-	_fnCAClockGetCurrentTime func(unsafe.Pointer, CAClockTimeFormat, *CAClockTime) int
-	_fnCAClockGetPlayRate func(unsafe.Pointer, *float64) int
-	_fnCAClockGetProperty func(unsafe.Pointer, CAClockPropertyID, *uint, unsafe.Pointer) int
-	_fnCAClockGetPropertyInfo func(unsafe.Pointer, CAClockPropertyID, *uint, *uint8) int
-	_fnCAClockGetStartTime func(unsafe.Pointer, CAClockTimeFormat, *CAClockTime) int
-	_fnCAClockNew func(uint, unsafe.Pointer) int
-	_fnCAClockParseMIDI func(unsafe.Pointer, objc.ID) int
-	_fnCAClockRemoveListener func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnCAClockSMPTETimeToSeconds func(unsafe.Pointer, *coreaudiotypes.SMPTETime, *float64) int
-	_fnCAClockSecondsToSMPTETime func(unsafe.Pointer, float64, uint16, *coreaudiotypes.SMPTETime) int
-	_fnCAClockSetCurrentTempo func(unsafe.Pointer, float64, *CAClockTime) int
-	_fnCAClockSetCurrentTime func(unsafe.Pointer, *CAClockTime) int
-	_fnCAClockSetPlayRate func(unsafe.Pointer, float64) int
-	_fnCAClockSetProperty func(unsafe.Pointer, CAClockPropertyID, uint, unsafe.Pointer) int
-	_fnCAClockStart func(unsafe.Pointer) int
-	_fnCAClockStop func(unsafe.Pointer) int
-	_fnCAClockTranslateTime func(unsafe.Pointer, *CAClockTime, CAClockTimeFormat, *CAClockTime) int
+	_fnAudioQueueCreateTimeline                       func(unsafe.Pointer, unsafe.Pointer) int
+	_fnAudioQueueDeviceGetCurrentTime                 func(unsafe.Pointer, *coreaudiotypes.AudioTimeStamp) int
+	_fnAudioQueueDeviceGetNearestStartTime            func(unsafe.Pointer, *coreaudiotypes.AudioTimeStamp, uint) int
+	_fnAudioQueueDeviceTranslateTime                  func(unsafe.Pointer, *coreaudiotypes.AudioTimeStamp, *coreaudiotypes.AudioTimeStamp) int
+	_fnAudioQueueDispose                              func(unsafe.Pointer, uint8) int
+	_fnAudioQueueDisposeTimeline                      func(unsafe.Pointer, unsafe.Pointer) int
+	_fnAudioQueueEnqueueBuffer                        func(unsafe.Pointer, *AudioQueueBuffer, uint, *coreaudiotypes.AudioStreamPacketDescription) int
+	_fnAudioQueueEnqueueBufferWithParameters          func(unsafe.Pointer, *AudioQueueBuffer, uint, *coreaudiotypes.AudioStreamPacketDescription, uint, uint, uint, *AudioQueueParameterEvent, *coreaudiotypes.AudioTimeStamp, *coreaudiotypes.AudioTimeStamp) int
+	_fnAudioQueueFlush                                func(unsafe.Pointer) int
+	_fnAudioQueueFreeBuffer                           func(unsafe.Pointer, *AudioQueueBuffer) int
+	_fnAudioQueueGetCurrentTime                       func(unsafe.Pointer, unsafe.Pointer, *coreaudiotypes.AudioTimeStamp, *uint8) int
+	_fnAudioQueueGetParameter                         func(unsafe.Pointer, uint, *float32) int
+	_fnAudioQueueGetProperty                          func(unsafe.Pointer, uint, unsafe.Pointer, *uint) int
+	_fnAudioQueueGetPropertySize                      func(unsafe.Pointer, uint, *uint) int
+	_fnAudioQueueNewInput                             func(*coreaudiotypes.AudioStreamBasicDescription, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) int
+	_fnAudioQueueNewInputWithDispatchQueue            func(unsafe.Pointer, *coreaudiotypes.AudioStreamBasicDescription, uint, objc.ID, objc.Block) int
+	_fnAudioQueueNewOutput                            func(*coreaudiotypes.AudioStreamBasicDescription, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) int
+	_fnAudioQueueNewOutputWithDispatchQueue           func(unsafe.Pointer, *coreaudiotypes.AudioStreamBasicDescription, uint, objc.ID, objc.Block) int
+	_fnAudioQueueOfflineRender                        func(unsafe.Pointer, *coreaudiotypes.AudioTimeStamp, *AudioQueueBuffer, uint) int
+	_fnAudioQueuePause                                func(unsafe.Pointer) int
+	_fnAudioQueuePrime                                func(unsafe.Pointer, uint, *uint) int
+	_fnAudioQueueProcessingTapDispose                 func(unsafe.Pointer) int
+	_fnAudioQueueProcessingTapGetQueueTime            func(unsafe.Pointer, *float64, *uint) int
+	_fnAudioQueueProcessingTapGetSourceAudio          func(unsafe.Pointer, uint, *coreaudiotypes.AudioTimeStamp, *AudioQueueProcessingTapFlags, *uint, *coreaudiotypes.AudioBufferList) int
+	_fnAudioQueueProcessingTapNew                     func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, AudioQueueProcessingTapFlags, *uint, *coreaudiotypes.AudioStreamBasicDescription, unsafe.Pointer) int
+	_fnAudioQueueRemovePropertyListener               func(unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int
+	_fnAudioQueueReset                                func(unsafe.Pointer) int
+	_fnAudioQueueSetOfflineRenderFormat               func(unsafe.Pointer, *coreaudiotypes.AudioStreamBasicDescription, *coreaudiotypes.AudioChannelLayout) int
+	_fnAudioQueueSetParameter                         func(unsafe.Pointer, uint, float32) int
+	_fnAudioQueueSetProperty                          func(unsafe.Pointer, uint, unsafe.Pointer, uint) int
+	_fnAudioQueueStart                                func(unsafe.Pointer, *coreaudiotypes.AudioTimeStamp) int
+	_fnAudioQueueStop                                 func(unsafe.Pointer, uint8) int
+	_fnAudioServicesAddSystemSoundCompletion          func(uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnAudioServicesCreateSystemSoundID               func(unsafe.Pointer, *uint) int
+	_fnAudioServicesDisposeSystemSoundID              func(uint) int
+	_fnAudioServicesGetProperty                       func(uint, uint, unsafe.Pointer, *uint, unsafe.Pointer) int
+	_fnAudioServicesGetPropertyInfo                   func(uint, uint, unsafe.Pointer, *uint, *uint8) int
+	_fnAudioServicesPlayAlertSound                    func(uint)
+	_fnAudioServicesPlayAlertSoundWithCompletion      func(uint, objc.Block)
+	_fnAudioServicesPlaySystemSound                   func(uint)
+	_fnAudioServicesPlaySystemSoundWithCompletion     func(uint, objc.Block)
+	_fnAudioServicesRemoveSystemSoundCompletion       func(uint)
+	_fnAudioServicesSetProperty                       func(uint, uint, unsafe.Pointer, uint, unsafe.Pointer) int
+	_fnAudioUnitAddPropertyListener                   func(*carboncore.ComponentInstanceRecord, uint, unsafe.Pointer, unsafe.Pointer) int
+	_fnAudioUnitAddRenderNotify                       func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, unsafe.Pointer) int
+	_fnAudioUnitExtensionCopyComponentList            func(unsafe.Pointer) unsafe.Pointer
+	_fnAudioUnitExtensionSetComponentList             func(unsafe.Pointer, unsafe.Pointer) int
+	_fnAudioUnitGetParameter                          func(*carboncore.ComponentInstanceRecord, uint, uint, uint, *float32) int
+	_fnAudioUnitGetProperty                           func(*carboncore.ComponentInstanceRecord, uint, uint, uint, unsafe.Pointer, *uint) int
+	_fnAudioUnitGetPropertyInfo                       func(*carboncore.ComponentInstanceRecord, uint, uint, uint, *uint, *uint8) int
+	_fnAudioUnitInitialize                            func(*carboncore.ComponentInstanceRecord) int
+	_fnAudioUnitProcess                               func(*carboncore.ComponentInstanceRecord, *AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint, *coreaudiotypes.AudioBufferList) int
+	_fnAudioUnitProcessMultiple                       func(*carboncore.ComponentInstanceRecord, *AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint, uint, *coreaudiotypes.AudioBufferList, uint, *coreaudiotypes.AudioBufferList) int
+	_fnAudioUnitRemovePropertyListenerWithUserData    func(*carboncore.ComponentInstanceRecord, uint, unsafe.Pointer, unsafe.Pointer) int
+	_fnAudioUnitRemoveRenderNotify                    func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, unsafe.Pointer) int
+	_fnAudioUnitRender                                func(*carboncore.ComponentInstanceRecord, *AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint, uint, *coreaudiotypes.AudioBufferList) int
+	_fnAudioUnitReset                                 func(*carboncore.ComponentInstanceRecord, uint, uint) int
+	_fnAudioUnitScheduleParameters                    func(*carboncore.ComponentInstanceRecord, *AudioUnitParameterEvent, uint) int
+	_fnAudioUnitSetParameter                          func(*carboncore.ComponentInstanceRecord, uint, uint, uint, float32, uint) int
+	_fnAudioUnitSetProperty                           func(*carboncore.ComponentInstanceRecord, uint, uint, uint, unsafe.Pointer, uint) int
+	_fnAudioUnitUninitialize                          func(*carboncore.ComponentInstanceRecord) int
+	_fnAudioWorkIntervalCreate                        func(string, accelerate.Os_clockid_t, unsafe.Pointer) unsafe.Pointer
+	_fnCAClockAddListener                             func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnCAClockArm                                     func(unsafe.Pointer) int
+	_fnCAClockBarBeatTimeToBeats                      func(unsafe.Pointer, *CABarBeatTime, *float64) int
+	_fnCAClockBeatsToBarBeatTime                      func(unsafe.Pointer, float64, uint16, *CABarBeatTime) int
+	_fnCAClockDisarm                                  func(unsafe.Pointer) int
+	_fnCAClockDispose                                 func(unsafe.Pointer) int
+	_fnCAClockGetCurrentTempo                         func(unsafe.Pointer, *float64, *CAClockTime) int
+	_fnCAClockGetCurrentTime                          func(unsafe.Pointer, CAClockTimeFormat, *CAClockTime) int
+	_fnCAClockGetPlayRate                             func(unsafe.Pointer, *float64) int
+	_fnCAClockGetProperty                             func(unsafe.Pointer, CAClockPropertyID, *uint, unsafe.Pointer) int
+	_fnCAClockGetPropertyInfo                         func(unsafe.Pointer, CAClockPropertyID, *uint, *uint8) int
+	_fnCAClockGetStartTime                            func(unsafe.Pointer, CAClockTimeFormat, *CAClockTime) int
+	_fnCAClockNew                                     func(uint, unsafe.Pointer) int
+	_fnCAClockParseMIDI                               func(unsafe.Pointer, objc.ID) int
+	_fnCAClockRemoveListener                          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnCAClockSMPTETimeToSeconds                      func(unsafe.Pointer, *coreaudiotypes.SMPTETime, *float64) int
+	_fnCAClockSecondsToSMPTETime                      func(unsafe.Pointer, float64, uint16, *coreaudiotypes.SMPTETime) int
+	_fnCAClockSetCurrentTempo                         func(unsafe.Pointer, float64, *CAClockTime) int
+	_fnCAClockSetCurrentTime                          func(unsafe.Pointer, *CAClockTime) int
+	_fnCAClockSetPlayRate                             func(unsafe.Pointer, float64) int
+	_fnCAClockSetProperty                             func(unsafe.Pointer, CAClockPropertyID, uint, unsafe.Pointer) int
+	_fnCAClockStart                                   func(unsafe.Pointer) int
+	_fnCAClockStop                                    func(unsafe.Pointer) int
+	_fnCAClockTranslateTime                           func(unsafe.Pointer, *CAClockTime, CAClockTimeFormat, *CAClockTime) int
 	// Print the internal state of an object to os_log.
 	_fnCAShow func(unsafe.Pointer)
 	// Print the internal state of an object to the supplied FILE*.
-	_fnCAShowFile func(unsafe.Pointer, unsafe.Pointer)
+	_fnCAShowFile                      func(unsafe.Pointer, unsafe.Pointer)
 	_fnCopyInstrumentInfoFromSoundBank func(unsafe.Pointer, unsafe.Pointer) int
-	_fnCopyNameFromSoundBank func(unsafe.Pointer, unsafe.Pointer) int
-	_fnDisposeAUGraph func(unsafe.Pointer) int
-	_fnDisposeMusicEventIterator func(unsafe.Pointer) int
-	_fnDisposeMusicPlayer func(unsafe.Pointer) int
-	_fnDisposeMusicSequence func(unsafe.Pointer) int
-// Deprecated: no longer supported
-	_fnExtAudioFileCreateNew func(*carboncore.FSRef, unsafe.Pointer, uint, *coreaudiotypes.AudioStreamBasicDescription, *coreaudiotypes.AudioChannelLayout, unsafe.Pointer) int
-	_fnExtAudioFileCreateWithURL func(unsafe.Pointer, uint, *coreaudiotypes.AudioStreamBasicDescription, *coreaudiotypes.AudioChannelLayout, uint, unsafe.Pointer) int
-	_fnExtAudioFileDispose func(unsafe.Pointer) int
-	_fnExtAudioFileGetProperty func(unsafe.Pointer, uint, *uint, unsafe.Pointer) int
+	_fnCopyNameFromSoundBank           func(unsafe.Pointer, unsafe.Pointer) int
+	_fnDisposeAUGraph                  func(unsafe.Pointer) int
+	_fnDisposeMusicEventIterator       func(unsafe.Pointer) int
+	_fnDisposeMusicPlayer              func(unsafe.Pointer) int
+	_fnDisposeMusicSequence            func(unsafe.Pointer) int
+	// Deprecated: no longer supported
+	_fnExtAudioFileCreateNew       func(*carboncore.FSRef, unsafe.Pointer, uint, *coreaudiotypes.AudioStreamBasicDescription, *coreaudiotypes.AudioChannelLayout, unsafe.Pointer) int
+	_fnExtAudioFileCreateWithURL   func(unsafe.Pointer, uint, *coreaudiotypes.AudioStreamBasicDescription, *coreaudiotypes.AudioChannelLayout, uint, unsafe.Pointer) int
+	_fnExtAudioFileDispose         func(unsafe.Pointer) int
+	_fnExtAudioFileGetProperty     func(unsafe.Pointer, uint, *uint, unsafe.Pointer) int
 	_fnExtAudioFileGetPropertyInfo func(unsafe.Pointer, uint, *uint, *uint8) int
-// Deprecated: no longer supported
-	_fnExtAudioFileOpen func(*carboncore.FSRef, unsafe.Pointer) int
-	_fnExtAudioFileOpenURL func(unsafe.Pointer, unsafe.Pointer) int
-	_fnExtAudioFileRead func(unsafe.Pointer, *uint, *coreaudiotypes.AudioBufferList) int
-	_fnExtAudioFileSeek func(unsafe.Pointer, int64) int
-	_fnExtAudioFileSetProperty func(unsafe.Pointer, uint, uint, unsafe.Pointer) int
-	_fnExtAudioFileTell func(unsafe.Pointer, *int64) int
-	_fnExtAudioFileWrapAudioFileID func(unsafe.Pointer, uint8, unsafe.Pointer) int
-	_fnExtAudioFileWrite func(unsafe.Pointer, uint, *coreaudiotypes.AudioBufferList) int
-	_fnExtAudioFileWriteAsync func(unsafe.Pointer, uint, *coreaudiotypes.AudioBufferList) int
+	// Deprecated: no longer supported
+	_fnExtAudioFileOpen                 func(*carboncore.FSRef, unsafe.Pointer) int
+	_fnExtAudioFileOpenURL              func(unsafe.Pointer, unsafe.Pointer) int
+	_fnExtAudioFileRead                 func(unsafe.Pointer, *uint, *coreaudiotypes.AudioBufferList) int
+	_fnExtAudioFileSeek                 func(unsafe.Pointer, int64) int
+	_fnExtAudioFileSetProperty          func(unsafe.Pointer, uint, uint, unsafe.Pointer) int
+	_fnExtAudioFileTell                 func(unsafe.Pointer, *int64) int
+	_fnExtAudioFileWrapAudioFileID      func(unsafe.Pointer, uint8, unsafe.Pointer) int
+	_fnExtAudioFileWrite                func(unsafe.Pointer, uint, *coreaudiotypes.AudioBufferList) int
+	_fnExtAudioFileWriteAsync           func(unsafe.Pointer, uint, *coreaudiotypes.AudioBufferList) int
 	_fnGetAudioUnitParameterDisplayType func(AudioUnitParameterOptions) AudioUnitParameterOptions
-// Deprecated: no longer supported
-	_fnGetNameFromSoundBank func(*carboncore.FSRef, unsafe.Pointer) int
-	_fnMusicDeviceMIDIEvent func(*carboncore.ComponentInstanceRecord, uint, uint, uint, uint) int
+	// Deprecated: no longer supported
+	_fnGetNameFromSoundBank     func(*carboncore.FSRef, unsafe.Pointer) int
+	_fnMusicDeviceMIDIEvent     func(*carboncore.ComponentInstanceRecord, uint, uint, uint, uint) int
 	_fnMusicDeviceMIDIEventList func(*carboncore.ComponentInstanceRecord, uint, objc.ID) int
-// Deprecated: no longer supported
+	// Deprecated: no longer supported
 	_fnMusicDevicePrepareInstrument func(*carboncore.ComponentInstanceRecord, uint) int
-// Deprecated: no longer supported
-	_fnMusicDeviceReleaseInstrument func(*carboncore.ComponentInstanceRecord, uint) int
-	_fnMusicDeviceStartNote func(*carboncore.ComponentInstanceRecord, uint, uint, *uint, uint, *MusicDeviceNoteParams) int
-	_fnMusicDeviceStopNote func(*carboncore.ComponentInstanceRecord, uint, uint, uint) int
-	_fnMusicDeviceSysEx func(*carboncore.ComponentInstanceRecord, *uint8, uint) int
-	_fnMusicEventIteratorDeleteEvent func(unsafe.Pointer) int
-	_fnMusicEventIteratorGetEventInfo func(unsafe.Pointer, *float64, *uint, unsafe.Pointer, *uint) int
-	_fnMusicEventIteratorHasCurrentEvent func(unsafe.Pointer, *uint8) int
-	_fnMusicEventIteratorHasNextEvent func(unsafe.Pointer, *uint8) int
+	// Deprecated: no longer supported
+	_fnMusicDeviceReleaseInstrument       func(*carboncore.ComponentInstanceRecord, uint) int
+	_fnMusicDeviceStartNote               func(*carboncore.ComponentInstanceRecord, uint, uint, *uint, uint, *MusicDeviceNoteParams) int
+	_fnMusicDeviceStopNote                func(*carboncore.ComponentInstanceRecord, uint, uint, uint) int
+	_fnMusicDeviceSysEx                   func(*carboncore.ComponentInstanceRecord, *uint8, uint) int
+	_fnMusicEventIteratorDeleteEvent      func(unsafe.Pointer) int
+	_fnMusicEventIteratorGetEventInfo     func(unsafe.Pointer, *float64, *uint, unsafe.Pointer, *uint) int
+	_fnMusicEventIteratorHasCurrentEvent  func(unsafe.Pointer, *uint8) int
+	_fnMusicEventIteratorHasNextEvent     func(unsafe.Pointer, *uint8) int
 	_fnMusicEventIteratorHasPreviousEvent func(unsafe.Pointer, *uint8) int
-	_fnMusicEventIteratorNextEvent func(unsafe.Pointer) int
-	_fnMusicEventIteratorPreviousEvent func(unsafe.Pointer) int
-	_fnMusicEventIteratorSeek func(unsafe.Pointer, float64) int
-	_fnMusicEventIteratorSetEventInfo func(unsafe.Pointer, uint, unsafe.Pointer) int
-	_fnMusicEventIteratorSetEventTime func(unsafe.Pointer, float64) int
-	_fnMusicPlayerGetBeatsForHostTime func(unsafe.Pointer, uint64, *float64) int
-	_fnMusicPlayerGetHostTimeForBeats func(unsafe.Pointer, float64, *uint64) int
-	_fnMusicPlayerGetPlayRateScalar func(unsafe.Pointer, *float64) int
-	_fnMusicPlayerGetSequence func(unsafe.Pointer, unsafe.Pointer) int
-	_fnMusicPlayerGetTime func(unsafe.Pointer, *float64) int
-	_fnMusicPlayerIsPlaying func(unsafe.Pointer, *uint8) int
-	_fnMusicPlayerPreroll func(unsafe.Pointer) int
-	_fnMusicPlayerSetPlayRateScalar func(unsafe.Pointer, float64) int
-	_fnMusicPlayerSetSequence func(unsafe.Pointer, unsafe.Pointer) int
-	_fnMusicPlayerSetTime func(unsafe.Pointer, float64) int
-	_fnMusicPlayerStart func(unsafe.Pointer) int
-	_fnMusicPlayerStop func(unsafe.Pointer) int
-	_fnMusicSequenceBarBeatTimeToBeats func(unsafe.Pointer, *CABarBeatTime, *float64) int
-	_fnMusicSequenceBeatsToBarBeatTime func(unsafe.Pointer, float64, uint, *CABarBeatTime) int
-	_fnMusicSequenceDisposeTrack func(unsafe.Pointer, unsafe.Pointer) int
-	_fnMusicSequenceFileCreate func(unsafe.Pointer, unsafe.Pointer, MusicSequenceFileTypeID, MusicSequenceFileFlags, int16) int
-	_fnMusicSequenceFileCreateData func(unsafe.Pointer, MusicSequenceFileTypeID, MusicSequenceFileFlags, int16, unsafe.Pointer) int
-	_fnMusicSequenceFileLoad func(unsafe.Pointer, unsafe.Pointer, MusicSequenceFileTypeID, MusicSequenceLoadFlags) int
-	_fnMusicSequenceFileLoadData func(unsafe.Pointer, unsafe.Pointer, MusicSequenceFileTypeID, MusicSequenceLoadFlags) int
-	_fnMusicSequenceGetAUGraph func(unsafe.Pointer, unsafe.Pointer) int
-	_fnMusicSequenceGetBeatsForSeconds func(unsafe.Pointer, float64, *float64) int
-	_fnMusicSequenceGetIndTrack func(unsafe.Pointer, uint, unsafe.Pointer) int
-	_fnMusicSequenceGetInfoDictionary func(unsafe.Pointer) unsafe.Pointer
-	_fnMusicSequenceGetSMPTEResolution func(int16, *int8, *uint8)
-	_fnMusicSequenceGetSecondsForBeats func(unsafe.Pointer, float64, *float64) int
-	_fnMusicSequenceGetSequenceType func(unsafe.Pointer, *MusicSequenceType) int
-	_fnMusicSequenceGetTempoTrack func(unsafe.Pointer, unsafe.Pointer) int
-	_fnMusicSequenceGetTrackCount func(unsafe.Pointer, *uint) int
-	_fnMusicSequenceGetTrackIndex func(unsafe.Pointer, unsafe.Pointer, *uint) int
-// Deprecated: no longer supported
+	_fnMusicEventIteratorNextEvent        func(unsafe.Pointer) int
+	_fnMusicEventIteratorPreviousEvent    func(unsafe.Pointer) int
+	_fnMusicEventIteratorSeek             func(unsafe.Pointer, float64) int
+	_fnMusicEventIteratorSetEventInfo     func(unsafe.Pointer, uint, unsafe.Pointer) int
+	_fnMusicEventIteratorSetEventTime     func(unsafe.Pointer, float64) int
+	_fnMusicPlayerGetBeatsForHostTime     func(unsafe.Pointer, uint64, *float64) int
+	_fnMusicPlayerGetHostTimeForBeats     func(unsafe.Pointer, float64, *uint64) int
+	_fnMusicPlayerGetPlayRateScalar       func(unsafe.Pointer, *float64) int
+	_fnMusicPlayerGetSequence             func(unsafe.Pointer, unsafe.Pointer) int
+	_fnMusicPlayerGetTime                 func(unsafe.Pointer, *float64) int
+	_fnMusicPlayerIsPlaying               func(unsafe.Pointer, *uint8) int
+	_fnMusicPlayerPreroll                 func(unsafe.Pointer) int
+	_fnMusicPlayerSetPlayRateScalar       func(unsafe.Pointer, float64) int
+	_fnMusicPlayerSetSequence             func(unsafe.Pointer, unsafe.Pointer) int
+	_fnMusicPlayerSetTime                 func(unsafe.Pointer, float64) int
+	_fnMusicPlayerStart                   func(unsafe.Pointer) int
+	_fnMusicPlayerStop                    func(unsafe.Pointer) int
+	_fnMusicSequenceBarBeatTimeToBeats    func(unsafe.Pointer, *CABarBeatTime, *float64) int
+	_fnMusicSequenceBeatsToBarBeatTime    func(unsafe.Pointer, float64, uint, *CABarBeatTime) int
+	_fnMusicSequenceDisposeTrack          func(unsafe.Pointer, unsafe.Pointer) int
+	_fnMusicSequenceFileCreate            func(unsafe.Pointer, unsafe.Pointer, MusicSequenceFileTypeID, MusicSequenceFileFlags, int16) int
+	_fnMusicSequenceFileCreateData        func(unsafe.Pointer, MusicSequenceFileTypeID, MusicSequenceFileFlags, int16, unsafe.Pointer) int
+	_fnMusicSequenceFileLoad              func(unsafe.Pointer, unsafe.Pointer, MusicSequenceFileTypeID, MusicSequenceLoadFlags) int
+	_fnMusicSequenceFileLoadData          func(unsafe.Pointer, unsafe.Pointer, MusicSequenceFileTypeID, MusicSequenceLoadFlags) int
+	_fnMusicSequenceGetAUGraph            func(unsafe.Pointer, unsafe.Pointer) int
+	_fnMusicSequenceGetBeatsForSeconds    func(unsafe.Pointer, float64, *float64) int
+	_fnMusicSequenceGetIndTrack           func(unsafe.Pointer, uint, unsafe.Pointer) int
+	_fnMusicSequenceGetInfoDictionary     func(unsafe.Pointer) unsafe.Pointer
+	_fnMusicSequenceGetSMPTEResolution    func(int16, *int8, *uint8)
+	_fnMusicSequenceGetSecondsForBeats    func(unsafe.Pointer, float64, *float64) int
+	_fnMusicSequenceGetSequenceType       func(unsafe.Pointer, *MusicSequenceType) int
+	_fnMusicSequenceGetTempoTrack         func(unsafe.Pointer, unsafe.Pointer) int
+	_fnMusicSequenceGetTrackCount         func(unsafe.Pointer, *uint) int
+	_fnMusicSequenceGetTrackIndex         func(unsafe.Pointer, unsafe.Pointer, *uint) int
+	// Deprecated: no longer supported
 	_fnMusicSequenceLoadSMFDataWithFlags func(unsafe.Pointer, unsafe.Pointer, MusicSequenceLoadFlags) int
-// Deprecated: no longer supported
+	// Deprecated: no longer supported
 	_fnMusicSequenceLoadSMFWithFlags func(unsafe.Pointer, *carboncore.FSRef, MusicSequenceLoadFlags) int
-	_fnMusicSequenceNewTrack func(unsafe.Pointer, unsafe.Pointer) int
-	_fnMusicSequenceReverse func(unsafe.Pointer) int
-// Deprecated: no longer supported
+	_fnMusicSequenceNewTrack         func(unsafe.Pointer, unsafe.Pointer) int
+	_fnMusicSequenceReverse          func(unsafe.Pointer) int
+	// Deprecated: no longer supported
 	_fnMusicSequenceSaveMIDIFile func(unsafe.Pointer, *carboncore.FSRef, unsafe.Pointer, uint16, uint) int
-// Deprecated: no longer supported
-	_fnMusicSequenceSaveSMFData func(unsafe.Pointer, unsafe.Pointer, uint16) int
-	_fnMusicSequenceSetAUGraph func(unsafe.Pointer, unsafe.Pointer) int
-	_fnMusicSequenceSetMIDIEndpoint func(unsafe.Pointer, uint) int
+	// Deprecated: no longer supported
+	_fnMusicSequenceSaveSMFData        func(unsafe.Pointer, unsafe.Pointer, uint16) int
+	_fnMusicSequenceSetAUGraph         func(unsafe.Pointer, unsafe.Pointer) int
+	_fnMusicSequenceSetMIDIEndpoint    func(unsafe.Pointer, uint) int
 	_fnMusicSequenceSetSMPTEResolution func(int8, uint8) int16
-	_fnMusicSequenceSetSequenceType func(unsafe.Pointer, MusicSequenceType) int
-	_fnMusicSequenceSetUserCallback func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnMusicTrackClear func(unsafe.Pointer, float64, float64) int
-	_fnMusicTrackCopyInsert func(unsafe.Pointer, float64, float64, unsafe.Pointer, float64) int
-	_fnMusicTrackCut func(unsafe.Pointer, float64, float64) int
-	_fnMusicTrackGetDestMIDIEndpoint func(unsafe.Pointer, *uint) int
-	_fnMusicTrackGetDestNode func(unsafe.Pointer, *int) int
-	_fnMusicTrackGetProperty func(unsafe.Pointer, uint, unsafe.Pointer, *uint) int
-	_fnMusicTrackGetSequence func(unsafe.Pointer, unsafe.Pointer) int
-	_fnMusicTrackMerge func(unsafe.Pointer, float64, float64, unsafe.Pointer, float64) int
-	_fnMusicTrackMoveEvents func(unsafe.Pointer, float64, float64, float64) int
-	_fnMusicTrackNewAUPresetEvent func(unsafe.Pointer, float64, *AUPresetEvent) int
-// Deprecated: no longer supported
+	_fnMusicSequenceSetSequenceType    func(unsafe.Pointer, MusicSequenceType) int
+	_fnMusicSequenceSetUserCallback    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnMusicTrackClear                 func(unsafe.Pointer, float64, float64) int
+	_fnMusicTrackCopyInsert            func(unsafe.Pointer, float64, float64, unsafe.Pointer, float64) int
+	_fnMusicTrackCut                   func(unsafe.Pointer, float64, float64) int
+	_fnMusicTrackGetDestMIDIEndpoint   func(unsafe.Pointer, *uint) int
+	_fnMusicTrackGetDestNode           func(unsafe.Pointer, *int) int
+	_fnMusicTrackGetProperty           func(unsafe.Pointer, uint, unsafe.Pointer, *uint) int
+	_fnMusicTrackGetSequence           func(unsafe.Pointer, unsafe.Pointer) int
+	_fnMusicTrackMerge                 func(unsafe.Pointer, float64, float64, unsafe.Pointer, float64) int
+	_fnMusicTrackMoveEvents            func(unsafe.Pointer, float64, float64, float64) int
+	_fnMusicTrackNewAUPresetEvent      func(unsafe.Pointer, float64, *AUPresetEvent) int
+	// Deprecated: no longer supported
 	_fnMusicTrackNewExtendedControlEvent func(unsafe.Pointer, float64, *ExtendedControlEvent) int
-	_fnMusicTrackNewExtendedNoteEvent func(unsafe.Pointer, float64, *ExtendedNoteOnEvent) int
-	_fnMusicTrackNewExtendedTempoEvent func(unsafe.Pointer, float64, float64) int
-	_fnMusicTrackNewMIDIChannelEvent func(unsafe.Pointer, float64, *MIDIChannelMessage) int
-	_fnMusicTrackNewMIDINoteEvent func(unsafe.Pointer, float64, *MIDINoteMessage) int
-	_fnMusicTrackNewMIDIRawDataEvent func(unsafe.Pointer, float64, *MIDIRawData) int
-	_fnMusicTrackNewMetaEvent func(unsafe.Pointer, float64, *MIDIMetaEvent) int
-	_fnMusicTrackNewParameterEvent func(unsafe.Pointer, float64, *ParameterEvent) int
-	_fnMusicTrackNewUserEvent func(unsafe.Pointer, float64, *MusicEventUserData) int
-	_fnMusicTrackSetDestMIDIEndpoint func(unsafe.Pointer, uint) int
-	_fnMusicTrackSetDestNode func(unsafe.Pointer, int) int
-	_fnMusicTrackSetProperty func(unsafe.Pointer, uint, unsafe.Pointer, uint) int
-	_fnNewAUGraph func(unsafe.Pointer) int
-	_fnNewMusicEventIterator func(unsafe.Pointer, unsafe.Pointer) int
-	_fnNewMusicPlayer func(unsafe.Pointer) int
-	_fnNewMusicSequence func(unsafe.Pointer) int
-// Deprecated: no longer supported
-	_fnNewMusicTrackFrom func(unsafe.Pointer, float64, float64, unsafe.Pointer) int
-	_fnNextAudioFileRegion func(*AudioFileRegion) *AudioFileRegion
-	_fnNumAudioFileMarkersToNumBytes func(uint) uint
-	_fnNumBytesToNumAudioFileMarkers func(uint) uint
+	_fnMusicTrackNewExtendedNoteEvent    func(unsafe.Pointer, float64, *ExtendedNoteOnEvent) int
+	_fnMusicTrackNewExtendedTempoEvent   func(unsafe.Pointer, float64, float64) int
+	_fnMusicTrackNewMIDIChannelEvent     func(unsafe.Pointer, float64, *MIDIChannelMessage) int
+	_fnMusicTrackNewMIDINoteEvent        func(unsafe.Pointer, float64, *MIDINoteMessage) int
+	_fnMusicTrackNewMIDIRawDataEvent     func(unsafe.Pointer, float64, *MIDIRawData) int
+	_fnMusicTrackNewMetaEvent            func(unsafe.Pointer, float64, *MIDIMetaEvent) int
+	_fnMusicTrackNewParameterEvent       func(unsafe.Pointer, float64, *ParameterEvent) int
+	_fnMusicTrackNewUserEvent            func(unsafe.Pointer, float64, *MusicEventUserData) int
+	_fnMusicTrackSetDestMIDIEndpoint     func(unsafe.Pointer, uint) int
+	_fnMusicTrackSetDestNode             func(unsafe.Pointer, int) int
+	_fnMusicTrackSetProperty             func(unsafe.Pointer, uint, unsafe.Pointer, uint) int
+	_fnNewAUGraph                        func(unsafe.Pointer) int
+	_fnNewMusicEventIterator             func(unsafe.Pointer, unsafe.Pointer) int
+	_fnNewMusicPlayer                    func(unsafe.Pointer) int
+	_fnNewMusicSequence                  func(unsafe.Pointer) int
+	// Deprecated: no longer supported
+	_fnNewMusicTrackFrom                func(unsafe.Pointer, float64, float64, unsafe.Pointer) int
+	_fnNextAudioFileRegion              func(*AudioFileRegion) *AudioFileRegion
+	_fnNumAudioFileMarkersToNumBytes    func(uint) uint
+	_fnNumBytesToNumAudioFileMarkers    func(uint) uint
 	_fnSetAudioUnitParameterDisplayType func(AudioUnitParameterOptions, AudioUnitParameterOptions) AudioUnitParameterOptions
 )
 
@@ -721,7 +721,9 @@ func AudioComponentGetDescription(inComponent unsafe.Pointer, outDesc *AudioComp
 // Deprecated: since macOS 11.0.
 func AudioComponentGetIcon(comp unsafe.Pointer) *appkit.NSImage {
 	_ret := _fnAudioComponentGetIcon(comp)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSImageFromID(_ret)
 }
 
@@ -2003,4 +2005,3 @@ func NumBytesToNumAudioFileMarkers(inNumBytes uint) uint {
 func SetAudioUnitParameterDisplayType(flags AudioUnitParameterOptions, displayType AudioUnitParameterOptions) AudioUnitParameterOptions {
 	return _fnSetAudioUnitParameterDisplayType(flags, displayType)
 }
-

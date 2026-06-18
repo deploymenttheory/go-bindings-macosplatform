@@ -18,7 +18,7 @@ type MPSCNNFullyConnectedNode struct {
 }
 
 var (
-	_clsMPSCNNFullyConnectedNode = _objcClass("MPSCNNFullyConnectedNode")
+	_clsMPSCNNFullyConnectedNode                      = _objcClass("MPSCNNFullyConnectedNode")
 	_mPSCNNFullyConnectedNodeSelNodeWithSourceWeights = objc.RegisterName("nodeWithSource:weights:")
 	_mPSCNNFullyConnectedNodeSelInitWithSourceWeights = objc.RegisterName("initWithSource:weights:")
 )
@@ -36,14 +36,17 @@ func MPSCNNFullyConnectedNodeFromID(id objc.ID) *MPSCNNFullyConnectedNode {
 // @abstract   Init an autoreleased not representing a MPSCNNFullyConnected kernel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      weights                 A pointer to a valid object conforming to the MPSCNNConvolutionDataSource protocol. This object is provided by you to encapsulate storage for convolution weights and biases. @return     A new MPSNNFilter node for a MPSCNNConvolution kernel.
 func MPSCNNFullyConnectedNodeNodeWithSourceWeights(sourceNode *mpsneuralnetwork.MPSNNImageNode, weights mpsneuralnetwork.MPSCNNConvolutionDataSource) *MPSCNNFullyConnectedNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNFullyConnectedNode), _mPSCNNFullyConnectedNodeSelNodeWithSourceWeights, sourceNode.Ptr(), weights)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNFullyConnectedNodeFromID(_ret)
 }
 
 // @abstract   Init a node representing a MPSCNNFullyConnected kernel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      weights                 A pointer to a valid object conforming to the MPSCNNConvolutionDataSource protocol. This object is provided by you to encapsulate storage for convolution weights and biases. @return     A new MPSNNFilter node for a MPSCNNFullyConnected kernel.
 func (o *MPSCNNFullyConnectedNode) InitWithSourceWeights(sourceNode *mpsneuralnetwork.MPSNNImageNode, weights mpsneuralnetwork.MPSCNNConvolutionDataSource) *MPSCNNFullyConnectedNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNFullyConnectedNodeSelInitWithSourceWeights, sourceNode.Ptr(), weights)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNFullyConnectedNodeFromID(_ret)
 }
-

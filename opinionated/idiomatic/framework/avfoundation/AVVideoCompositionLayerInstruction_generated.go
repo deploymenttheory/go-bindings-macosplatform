@@ -17,7 +17,9 @@ type VideoCompositionLayerInstruction struct {
 }
 
 // Unwrap returns the underlying [raw.AVVideoCompositionLayerInstruction].
-func (x *VideoCompositionLayerInstruction) Unwrap() *raw.AVVideoCompositionLayerInstruction { return x.inner }
+func (x *VideoCompositionLayerInstruction) Unwrap() *raw.AVVideoCompositionLayerInstruction {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -52,7 +54,9 @@ func (x *VideoCompositionLayerInstruction) GetCropRectangleRampForTimeStartCropR
 	return x.inner.GetCropRectangleRampForTimeStartCropRectangleEndCropRectangleTimeRange(time_, startCropRectangle, endCropRectangle, timeRange)
 }
 
-func (x *VideoCompositionLayerInstruction) asVideoCompositionLayerInstruction() *raw.AVVideoCompositionLayerInstruction { return x.inner }
+func (x *VideoCompositionLayerInstruction) asVideoCompositionLayerInstruction() *raw.AVVideoCompositionLayerInstruction {
+	return x.inner
+}
 
 // VideoCompositionLayerInstructionable is the interface implemented by [VideoCompositionLayerInstruction], for mocking and DI.
 type VideoCompositionLayerInstructionable interface {
@@ -63,4 +67,3 @@ type VideoCompositionLayerInstructionable interface {
 }
 
 var _ VideoCompositionLayerInstructionable = (*VideoCompositionLayerInstruction)(nil)
-

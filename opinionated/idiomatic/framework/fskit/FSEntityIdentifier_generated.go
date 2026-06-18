@@ -103,4 +103,3 @@ type EntityIdentifierable interface {
 }
 
 var _ EntityIdentifierable = (*EntityIdentifier)(nil)
-

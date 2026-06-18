@@ -155,4 +155,3 @@ type PaymentTokenContextable interface {
 }
 
 var _ PaymentTokenContextable = (*PaymentTokenContext)(nil)
-

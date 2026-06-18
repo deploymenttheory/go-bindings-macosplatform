@@ -17,9 +17,9 @@ type NSATSTypesetter struct {
 }
 
 var (
-	_clsNSATSTypesetter = _objcClass("NSATSTypesetter")
-	_nSATSTypesetterSelSharedTypesetter = objc.RegisterName("sharedTypesetter")
-	_nSATSTypesetterSelLineFragmentRectForProposedRectRemainingRect = objc.RegisterName("lineFragmentRectForProposedRect:remainingRect:")
+	_clsNSATSTypesetter                                                                   = _objcClass("NSATSTypesetter")
+	_nSATSTypesetterSelSharedTypesetter                                                   = objc.RegisterName("sharedTypesetter")
+	_nSATSTypesetterSelLineFragmentRectForProposedRectRemainingRect                       = objc.RegisterName("lineFragmentRectForProposedRect:remainingRect:")
 	_nSATSTypesetterSelGetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits = objc.RegisterName("getGlyphsInRange:glyphs:characterIndexes:glyphInscriptions:elasticBits:")
 )
 
@@ -35,7 +35,9 @@ func NSATSTypesetterFromID(id objc.ID) *NSATSTypesetter {
 
 func NSATSTypesetterSharedTypesetter() *NSATSTypesetter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSATSTypesetter), _nSATSTypesetterSelSharedTypesetter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSATSTypesetterFromID(_ret)
 }
 
@@ -50,4 +52,3 @@ func (o *NSATSTypesetter) GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscription
 	_ret := objc.Send[uint](o.Ptr(), _nSATSTypesetterSelGetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits, glyphsRange, glyphBuffer, charIndexBuffer, inscribeBuffer, elasticBuffer)
 	return _ret
 }
-

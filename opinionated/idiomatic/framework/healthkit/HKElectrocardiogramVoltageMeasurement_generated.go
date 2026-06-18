@@ -15,7 +15,9 @@ type ElectrocardiogramVoltageMeasurement struct {
 }
 
 // Unwrap returns the underlying [raw.HKElectrocardiogramVoltageMeasurement].
-func (x *ElectrocardiogramVoltageMeasurement) Unwrap() *raw.HKElectrocardiogramVoltageMeasurement { return x.inner }
+func (x *ElectrocardiogramVoltageMeasurement) Unwrap() *raw.HKElectrocardiogramVoltageMeasurement {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -57,4 +59,3 @@ type ElectrocardiogramVoltageMeasurementable interface {
 }
 
 var _ ElectrocardiogramVoltageMeasurementable = (*ElectrocardiogramVoltageMeasurement)(nil)
-

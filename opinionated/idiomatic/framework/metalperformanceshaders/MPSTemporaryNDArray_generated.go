@@ -71,4 +71,3 @@ type TemporaryNDArrayable interface {
 }
 
 var _ TemporaryNDArrayable = (*TemporaryNDArray)(nil)
-

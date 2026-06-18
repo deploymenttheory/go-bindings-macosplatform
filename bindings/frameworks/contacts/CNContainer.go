@@ -16,13 +16,13 @@ type CNContainer struct {
 }
 
 var (
-	_clsCNContainer = _objcClass("CNContainer")
-	_cNContainerSelIdentifier = objc.RegisterName("identifier")
-	_cNContainerSelName = objc.RegisterName("name")
-	_cNContainerSelType = objc.RegisterName("type")
-	_cNContainerSelPredicateForContainersWithIdentifiers = objc.RegisterName("predicateForContainersWithIdentifiers:")
+	_clsCNContainer                                             = _objcClass("CNContainer")
+	_cNContainerSelIdentifier                                   = objc.RegisterName("identifier")
+	_cNContainerSelName                                         = objc.RegisterName("name")
+	_cNContainerSelType                                         = objc.RegisterName("type")
+	_cNContainerSelPredicateForContainersWithIdentifiers        = objc.RegisterName("predicateForContainersWithIdentifiers:")
 	_cNContainerSelPredicateForContainerOfContactWithIdentifier = objc.RegisterName("predicateForContainerOfContactWithIdentifier:")
-	_cNContainerSelPredicateForContainerOfGroupWithIdentifier = objc.RegisterName("predicateForContainerOfGroupWithIdentifier:")
+	_cNContainerSelPredicateForContainerOfGroupWithIdentifier   = objc.RegisterName("predicateForContainerOfGroupWithIdentifier:")
 )
 
 func CNContainerFromID(id objc.ID) *CNContainer {
@@ -38,13 +38,17 @@ func CNContainerFromID(id objc.ID) *CNContainer {
 // The identifier is unique among containers on the device. It can be saved and used for fetching containers next application launch.
 func (o *CNContainer) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContainerSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CNContainer) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContainerSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -55,20 +59,25 @@ func (o *CNContainer) Type() CNContainerType {
 
 func CNContainerPredicateForContainersWithIdentifiers(identifiers *foundation.NSArray[*foundation.NSString]) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContainer), _cNContainerSelPredicateForContainersWithIdentifiers, identifiers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
 // @discussion If the identifier is for a unified contact then the fetch will return an empty array. To fetch the containers of a unified contact, first fetch the linked contacts then fetch the container of each linked contact.
 func CNContainerPredicateForContainerOfContactWithIdentifier(contactIdentifier *foundation.NSString) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContainer), _cNContainerSelPredicateForContainerOfContactWithIdentifier, contactIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
 func CNContainerPredicateForContainerOfGroupWithIdentifier(groupIdentifier *foundation.NSString) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContainer), _cNContainerSelPredicateForContainerOfGroupWithIdentifier, groupIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
-

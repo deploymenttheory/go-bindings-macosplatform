@@ -20,27 +20,27 @@ type SKRenderer struct {
 }
 
 var (
-	_clsSKRenderer = _objcClass("SKRenderer")
-	_sKRendererSelRendererWithDevice = objc.RegisterName("rendererWithDevice:")
-	_sKRendererSelRenderWithViewportCommandBufferRenderPassDescriptor = objc.RegisterName("renderWithViewport:commandBuffer:renderPassDescriptor:")
+	_clsSKRenderer                                                                       = _objcClass("SKRenderer")
+	_sKRendererSelRendererWithDevice                                                     = objc.RegisterName("rendererWithDevice:")
+	_sKRendererSelRenderWithViewportCommandBufferRenderPassDescriptor                    = objc.RegisterName("renderWithViewport:commandBuffer:renderPassDescriptor:")
 	_sKRendererSelRenderWithViewportRenderCommandEncoderRenderPassDescriptorCommandQueue = objc.RegisterName("renderWithViewport:renderCommandEncoder:renderPassDescriptor:commandQueue:")
-	_sKRendererSelUpdateAtTime = objc.RegisterName("updateAtTime:")
-	_sKRendererSelScene = objc.RegisterName("scene")
-	_sKRendererSelSetScene = objc.RegisterName("setScene:")
-	_sKRendererSelIgnoresSiblingOrder = objc.RegisterName("ignoresSiblingOrder")
-	_sKRendererSelSetIgnoresSiblingOrder = objc.RegisterName("setIgnoresSiblingOrder:")
-	_sKRendererSelShouldCullNonVisibleNodes = objc.RegisterName("shouldCullNonVisibleNodes")
-	_sKRendererSelSetShouldCullNonVisibleNodes = objc.RegisterName("setShouldCullNonVisibleNodes:")
-	_sKRendererSelShowsDrawCount = objc.RegisterName("showsDrawCount")
-	_sKRendererSelSetShowsDrawCount = objc.RegisterName("setShowsDrawCount:")
-	_sKRendererSelShowsNodeCount = objc.RegisterName("showsNodeCount")
-	_sKRendererSelSetShowsNodeCount = objc.RegisterName("setShowsNodeCount:")
-	_sKRendererSelShowsQuadCount = objc.RegisterName("showsQuadCount")
-	_sKRendererSelSetShowsQuadCount = objc.RegisterName("setShowsQuadCount:")
-	_sKRendererSelShowsPhysics = objc.RegisterName("showsPhysics")
-	_sKRendererSelSetShowsPhysics = objc.RegisterName("setShowsPhysics:")
-	_sKRendererSelShowsFields = objc.RegisterName("showsFields")
-	_sKRendererSelSetShowsFields = objc.RegisterName("setShowsFields:")
+	_sKRendererSelUpdateAtTime                                                           = objc.RegisterName("updateAtTime:")
+	_sKRendererSelScene                                                                  = objc.RegisterName("scene")
+	_sKRendererSelSetScene                                                               = objc.RegisterName("setScene:")
+	_sKRendererSelIgnoresSiblingOrder                                                    = objc.RegisterName("ignoresSiblingOrder")
+	_sKRendererSelSetIgnoresSiblingOrder                                                 = objc.RegisterName("setIgnoresSiblingOrder:")
+	_sKRendererSelShouldCullNonVisibleNodes                                              = objc.RegisterName("shouldCullNonVisibleNodes")
+	_sKRendererSelSetShouldCullNonVisibleNodes                                           = objc.RegisterName("setShouldCullNonVisibleNodes:")
+	_sKRendererSelShowsDrawCount                                                         = objc.RegisterName("showsDrawCount")
+	_sKRendererSelSetShowsDrawCount                                                      = objc.RegisterName("setShowsDrawCount:")
+	_sKRendererSelShowsNodeCount                                                         = objc.RegisterName("showsNodeCount")
+	_sKRendererSelSetShowsNodeCount                                                      = objc.RegisterName("setShowsNodeCount:")
+	_sKRendererSelShowsQuadCount                                                         = objc.RegisterName("showsQuadCount")
+	_sKRendererSelSetShowsQuadCount                                                      = objc.RegisterName("setShowsQuadCount:")
+	_sKRendererSelShowsPhysics                                                           = objc.RegisterName("showsPhysics")
+	_sKRendererSelSetShowsPhysics                                                        = objc.RegisterName("setShowsPhysics:")
+	_sKRendererSelShowsFields                                                            = objc.RegisterName("showsFields")
+	_sKRendererSelSetShowsFields                                                         = objc.RegisterName("setShowsFields:")
 )
 
 func SKRendererFromID(id objc.ID) *SKRenderer {
@@ -56,7 +56,9 @@ func SKRendererFromID(id objc.ID) *SKRenderer {
 // Creates a renderer with the specified Metal device. @param device A Metal device. @return A new renderer object.
 func SKRendererRendererWithDevice(device metal.MTLDevice) *SKRenderer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKRenderer), _sKRendererSelRendererWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKRendererFromID(_ret)
 }
 
@@ -78,7 +80,9 @@ func (o *SKRenderer) UpdateAtTime(currentTime float64) {
 // The currently presented scene, otherwise nil. If in a transition, the 'incoming' scene is returned.
 func (o *SKRenderer) Scene() *SKScene {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKRendererSelScene)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKSceneFromID(_ret)
 }
 
@@ -151,4 +155,3 @@ func (o *SKRenderer) ShowsFields() bool {
 func (o *SKRenderer) SetShowsFields(showsFields bool) {
 	o.Ptr().Send(_sKRendererSelSetShowsFields, showsFields)
 }
-

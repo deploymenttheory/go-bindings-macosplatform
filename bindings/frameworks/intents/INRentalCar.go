@@ -16,13 +16,13 @@ type INRentalCar struct {
 }
 
 var (
-	_clsINRentalCar = _objcClass("INRentalCar")
+	_clsINRentalCar                                                           = _objcClass("INRentalCar")
 	_iNRentalCarSelInitWithRentalCompanyNameTypeMakeModelRentalCarDescription = objc.RegisterName("initWithRentalCompanyName:type:make:model:rentalCarDescription:")
-	_iNRentalCarSelRentalCompanyName = objc.RegisterName("rentalCompanyName")
-	_iNRentalCarSelType = objc.RegisterName("type")
-	_iNRentalCarSelMake = objc.RegisterName("make")
-	_iNRentalCarSelModel = objc.RegisterName("model")
-	_iNRentalCarSelRentalCarDescription = objc.RegisterName("rentalCarDescription")
+	_iNRentalCarSelRentalCompanyName                                          = objc.RegisterName("rentalCompanyName")
+	_iNRentalCarSelType                                                       = objc.RegisterName("type")
+	_iNRentalCarSelMake                                                       = objc.RegisterName("make")
+	_iNRentalCarSelModel                                                      = objc.RegisterName("model")
+	_iNRentalCarSelRentalCarDescription                                       = objc.RegisterName("rentalCarDescription")
 )
 
 func INRentalCarFromID(id objc.ID) *INRentalCar {
@@ -37,37 +37,48 @@ func INRentalCarFromID(id objc.ID) *INRentalCar {
 
 func (o *INRentalCar) InitWithRentalCompanyNameTypeMakeModelRentalCarDescription(rentalCompanyName *foundation.NSString, type_ *foundation.NSString, make_ *foundation.NSString, model *foundation.NSString, rentalCarDescription *foundation.NSString) *INRentalCar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNRentalCarSelInitWithRentalCompanyNameTypeMakeModelRentalCarDescription, rentalCompanyName.Ptr(), type_.Ptr(), make_.Ptr(), model.Ptr(), rentalCarDescription.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INRentalCarFromID(_ret)
 }
 
 func (o *INRentalCar) RentalCompanyName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNRentalCarSelRentalCompanyName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INRentalCar) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNRentalCarSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INRentalCar) Make() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNRentalCarSelMake)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INRentalCar) Model() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNRentalCarSelModel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INRentalCar) RentalCarDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNRentalCarSelRentalCarDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

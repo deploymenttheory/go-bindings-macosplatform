@@ -347,4 +347,3 @@ type CNNYOLOLossDescriptorable interface {
 }
 
 var _ CNNYOLOLossDescriptorable = (*CNNYOLOLossDescriptor)(nil)
-

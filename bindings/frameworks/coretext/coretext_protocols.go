@@ -13,4 +13,3 @@ import (
 type CTAdaptiveImageProviding interface {
 	ImageForProposedSizeScaleFactorImageOffsetImageSize(proposedSize corefoundation.CGSize, scaleFactor float64, outImageOffset *corefoundation.CGPoint, outImageSize *corefoundation.CGSize) unsafe.Pointer
 }
-

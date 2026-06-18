@@ -18,25 +18,25 @@ type AVContentKeySession struct {
 }
 
 var (
-	_clsAVContentKeySession = _objcClass("AVContentKeySession")
-	_aVContentKeySessionSelContentKeySessionWithKeySystem = objc.RegisterName("contentKeySessionWithKeySystem:")
-	_aVContentKeySessionSelContentKeySessionWithKeySystemStorageDirectoryAtURL = objc.RegisterName("contentKeySessionWithKeySystem:storageDirectoryAtURL:")
-	_aVContentKeySessionSelSetDelegateQueue = objc.RegisterName("setDelegate:queue:")
-	_aVContentKeySessionSelExpire = objc.RegisterName("expire")
-	_aVContentKeySessionSelProcessContentKeyRequestWithIdentifierInitializationDataOptions = objc.RegisterName("processContentKeyRequestWithIdentifier:initializationData:options:")
-	_aVContentKeySessionSelRenewExpiringResponseDataForContentKeyRequest = objc.RegisterName("renewExpiringResponseDataForContentKeyRequest:")
+	_clsAVContentKeySession                                                                         = _objcClass("AVContentKeySession")
+	_aVContentKeySessionSelContentKeySessionWithKeySystem                                           = objc.RegisterName("contentKeySessionWithKeySystem:")
+	_aVContentKeySessionSelContentKeySessionWithKeySystemStorageDirectoryAtURL                      = objc.RegisterName("contentKeySessionWithKeySystem:storageDirectoryAtURL:")
+	_aVContentKeySessionSelSetDelegateQueue                                                         = objc.RegisterName("setDelegate:queue:")
+	_aVContentKeySessionSelExpire                                                                   = objc.RegisterName("expire")
+	_aVContentKeySessionSelProcessContentKeyRequestWithIdentifierInitializationDataOptions          = objc.RegisterName("processContentKeyRequestWithIdentifier:initializationData:options:")
+	_aVContentKeySessionSelRenewExpiringResponseDataForContentKeyRequest                            = objc.RegisterName("renewExpiringResponseDataForContentKeyRequest:")
 	_aVContentKeySessionSelMakeSecureTokenForExpirationDateOfPersistableContentKeyCompletionHandler = objc.RegisterName("makeSecureTokenForExpirationDateOfPersistableContentKey:completionHandler:")
-	_aVContentKeySessionSelInvalidatePersistableContentKeyOptionsCompletionHandler = objc.RegisterName("invalidatePersistableContentKey:options:completionHandler:")
-	_aVContentKeySessionSelInvalidateAllPersistableContentKeysForAppOptionsCompletionHandler = objc.RegisterName("invalidateAllPersistableContentKeysForApp:options:completionHandler:")
-	_aVContentKeySessionSelDelegate = objc.RegisterName("delegate")
-	_aVContentKeySessionSelDelegateQueue = objc.RegisterName("delegateQueue")
-	_aVContentKeySessionSelStorageURL = objc.RegisterName("storageURL")
-	_aVContentKeySessionSelKeySystem = objc.RegisterName("keySystem")
-	_aVContentKeySessionSelContentProtectionSessionIdentifier = objc.RegisterName("contentProtectionSessionIdentifier")
-	_aVContentKeySessionSelAddContentKeyRecipient = objc.RegisterName("addContentKeyRecipient:")
-	_aVContentKeySessionSelRemoveContentKeyRecipient = objc.RegisterName("removeContentKeyRecipient:")
-	_aVContentKeySessionSelContentKeyRecipients = objc.RegisterName("contentKeyRecipients")
-	_aVContentKeySessionSelPendingExpiredSessionReportsWithAppIdentifierStorageDirectoryAtURL = objc.RegisterName("pendingExpiredSessionReportsWithAppIdentifier:storageDirectoryAtURL:")
+	_aVContentKeySessionSelInvalidatePersistableContentKeyOptionsCompletionHandler                  = objc.RegisterName("invalidatePersistableContentKey:options:completionHandler:")
+	_aVContentKeySessionSelInvalidateAllPersistableContentKeysForAppOptionsCompletionHandler        = objc.RegisterName("invalidateAllPersistableContentKeysForApp:options:completionHandler:")
+	_aVContentKeySessionSelDelegate                                                                 = objc.RegisterName("delegate")
+	_aVContentKeySessionSelDelegateQueue                                                            = objc.RegisterName("delegateQueue")
+	_aVContentKeySessionSelStorageURL                                                               = objc.RegisterName("storageURL")
+	_aVContentKeySessionSelKeySystem                                                                = objc.RegisterName("keySystem")
+	_aVContentKeySessionSelContentProtectionSessionIdentifier                                       = objc.RegisterName("contentProtectionSessionIdentifier")
+	_aVContentKeySessionSelAddContentKeyRecipient                                                   = objc.RegisterName("addContentKeyRecipient:")
+	_aVContentKeySessionSelRemoveContentKeyRecipient                                                = objc.RegisterName("removeContentKeyRecipient:")
+	_aVContentKeySessionSelContentKeyRecipients                                                     = objc.RegisterName("contentKeyRecipients")
+	_aVContentKeySessionSelPendingExpiredSessionReportsWithAppIdentifierStorageDirectoryAtURL       = objc.RegisterName("pendingExpiredSessionReportsWithAppIdentifier:storageDirectoryAtURL:")
 	_aVContentKeySessionSelRemovePendingExpiredSessionReportsWithAppIdentifierStorageDirectoryAtURL = objc.RegisterName("removePendingExpiredSessionReports:withAppIdentifier:storageDirectoryAtURL:")
 )
 
@@ -53,14 +53,18 @@ func AVContentKeySessionFromID(id objc.ID) *AVContentKeySession {
 // Creates a new instance of AVContentKeySession to manage a collection of media content keys. This method returns an AVContentKeySession instance that is capable of managing collection of media content keys corresponding to the input keySystem. An NSInvalidArgumentException will be raised if the value of keySystem is unsupported. - Parameter keySystem: A valid key system for retrieving keys. - Returns: A new AVContentKeySession.
 func AVContentKeySessionContentKeySessionWithKeySystem(keySystem *foundation.NSString) *AVContentKeySession {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVContentKeySession), _aVContentKeySessionSelContentKeySessionWithKeySystem, keySystem.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVContentKeySessionFromID(_ret)
 }
 
 // Creates a new instance of AVContentKeySession to manage a collection of media content keys. This method returns an AVContentKeySession instance that is capable of managing collection of media content keys corresponding to the input keySystem. An NSInvalidArgumentException will be raised if the value of keySystem is unsupported. - Parameter keySystem: A valid key system for retrieving keys. - Parameter storageURL: URL to a writable directory that the session will use to facilitate expired session reports after abnormal session termination. - Returns: A new AVContentKeySession.
 func AVContentKeySessionContentKeySessionWithKeySystemStorageDirectoryAtURL(keySystem *foundation.NSString, storageURL *foundation.NSURL) *AVContentKeySession {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVContentKeySession), _aVContentKeySessionSelContentKeySessionWithKeySystemStorageDirectoryAtURL, keySystem.Ptr(), storageURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVContentKeySessionFromID(_ret)
 }
 
@@ -138,28 +142,36 @@ func (o *AVContentKeySession) Delegate() AVContentKeySessionDelegate {
 // The dispatch queue on which all delegate methods will be invoked whenever processes requiring content keys are executed asynchronously. The value of this property is a dispatch_queue_t. The queue is set using the setDelegate:queue: method.
 func (o *AVContentKeySession) DelegateQueue() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVContentKeySessionSelDelegateQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
 // The storage URL provided when the AVContentKeySession was created. May be nil. URL to a writable directory; may be nil. The session will use this to facilitate expired session reports after abnormal session termination.
 func (o *AVContentKeySession) StorageURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVContentKeySessionSelStorageURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // The key system used for retrieving keys
 func (o *AVContentKeySession) KeySystem() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVContentKeySessionSelKeySystem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // An opaque identifier for the current content protection session. May be nil. Will call the delegate's contentKeySessionContentProtectionSessionIdentifierDidChange: when the identifier changes. The protection session ID is a unique string identifier generated by the AVContentKeySession that can be used by the application to identify content key session objects.
 func (o *AVContentKeySession) ContentProtectionSessionIdentifier() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVContentKeySessionSelContentProtectionSessionIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -175,7 +187,9 @@ func (o *AVContentKeySession) RemoveContentKeyRecipient(recipient AVContentKeyRe
 
 func (o *AVContentKeySession) ContentKeyRecipients() *foundation.NSArray[AVContentKeyRecipient] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVContentKeySessionSelContentKeyRecipients)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[AVContentKeyRecipient](_ret)
 }
 
@@ -189,4 +203,3 @@ func AVContentKeySessionPendingExpiredSessionReportsWithAppIdentifierStorageDire
 func AVContentKeySessionRemovePendingExpiredSessionReportsWithAppIdentifierStorageDirectoryAtURL(expiredSessionReports *foundation.NSArray[*foundation.NSData], appIdentifier *foundation.NSData, storageURL *foundation.NSURL) {
 	objc.ID(_clsAVContentKeySession).Send(_aVContentKeySessionSelRemovePendingExpiredSessionReportsWithAppIdentifierStorageDirectoryAtURL, expiredSessionReports, appIdentifier.Ptr(), storageURL.Ptr())
 }
-

@@ -103,4 +103,3 @@ type PaymentAuthorizationResultable interface {
 }
 
 var _ PaymentAuthorizationResultable = (*PaymentAuthorizationResult)(nil)
-

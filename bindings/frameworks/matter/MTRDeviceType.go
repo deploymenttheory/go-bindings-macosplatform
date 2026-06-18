@@ -16,11 +16,11 @@ type MTRDeviceType struct {
 }
 
 var (
-	_clsMTRDeviceType = _objcClass("MTRDeviceType")
+	_clsMTRDeviceType                = _objcClass("MTRDeviceType")
 	_mTRDeviceTypeSelDeviceTypeForID = objc.RegisterName("deviceTypeForID:")
-	_mTRDeviceTypeSelId = objc.RegisterName("id")
-	_mTRDeviceTypeSelName = objc.RegisterName("name")
-	_mTRDeviceTypeSelIsUtility = objc.RegisterName("isUtility")
+	_mTRDeviceTypeSelId              = objc.RegisterName("id")
+	_mTRDeviceTypeSelName            = objc.RegisterName("name")
+	_mTRDeviceTypeSelIsUtility       = objc.RegisterName("isUtility")
 )
 
 func MTRDeviceTypeFromID(id objc.ID) *MTRDeviceType {
@@ -36,21 +36,27 @@ func MTRDeviceTypeFromID(id objc.ID) *MTRDeviceType {
 // Returns an MTRDeviceType for the given ID, if the ID is known.  Returns nil for unknown IDs.
 func MTRDeviceTypeDeviceTypeForID(deviceTypeID *foundation.NSNumber) *MTRDeviceType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRDeviceType), _mTRDeviceTypeSelDeviceTypeForID, deviceTypeID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRDeviceTypeFromID(_ret)
 }
 
 // The identifier of the device type (32-bit unsigned integer).
 func (o *MTRDeviceType) Id() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceTypeSelId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // Returns the name of the device type.
 func (o *MTRDeviceType) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceTypeSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -59,4 +65,3 @@ func (o *MTRDeviceType) IsUtility() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mTRDeviceTypeSelIsUtility)
 	return _ret
 }
-

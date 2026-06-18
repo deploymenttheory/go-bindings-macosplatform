@@ -16,12 +16,12 @@ type MPSCNNDropoutGradientNode struct {
 }
 
 var (
-	_clsMPSCNNDropoutGradientNode = _objcClass("MPSCNNDropoutGradientNode")
+	_clsMPSCNNDropoutGradientNode                                                                                    = _objcClass("MPSCNNDropoutGradientNode")
 	_mPSCNNDropoutGradientNodeSelNodeWithSourceGradientSourceImageGradientStateKeepProbabilitySeedMaskStrideInPixels = objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:keepProbability:seed:maskStrideInPixels:")
 	_mPSCNNDropoutGradientNodeSelInitWithSourceGradientSourceImageGradientStateKeepProbabilitySeedMaskStrideInPixels = objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:keepProbability:seed:maskStrideInPixels:")
-	_mPSCNNDropoutGradientNodeSelKeepProbability = objc.RegisterName("keepProbability")
-	_mPSCNNDropoutGradientNodeSelSeed = objc.RegisterName("seed")
-	_mPSCNNDropoutGradientNodeSelMaskStrideInPixels = objc.RegisterName("maskStrideInPixels")
+	_mPSCNNDropoutGradientNodeSelKeepProbability                                                                     = objc.RegisterName("keepProbability")
+	_mPSCNNDropoutGradientNodeSelSeed                                                                                = objc.RegisterName("seed")
+	_mPSCNNDropoutGradientNodeSelMaskStrideInPixels                                                                  = objc.RegisterName("maskStrideInPixels")
 )
 
 func MPSCNNDropoutGradientNodeFromID(id objc.ID) *MPSCNNDropoutGradientNode {
@@ -37,14 +37,18 @@ func MPSCNNDropoutGradientNodeFromID(id objc.ID) *MPSCNNDropoutGradientNode {
 // @abstract create a new dropout gradient node @discussion See also -[MPSCNNNeuronNode gradientFilterNodeWithSources:] for an easier way to do this
 func MPSCNNDropoutGradientNodeNodeWithSourceGradientSourceImageGradientStateKeepProbabilitySeedMaskStrideInPixels(sourceGradient *MPSNNImageNode, sourceImage *MPSNNImageNode, gradientState *MPSNNGradientStateNode, keepProbability float32, seed uint, maskStrideInPixels metal.MTLSize) *MPSCNNDropoutGradientNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNDropoutGradientNode), _mPSCNNDropoutGradientNodeSelNodeWithSourceGradientSourceImageGradientStateKeepProbabilitySeedMaskStrideInPixels, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr(), keepProbability, seed, maskStrideInPixels)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNDropoutGradientNodeFromID(_ret)
 }
 
 // @abstract create a new dropout gradient node @discussion See also -[MPSCNNNeuronNode gradientFilterNodeWithSources:] for an easier way to do this
 func (o *MPSCNNDropoutGradientNode) InitWithSourceGradientSourceImageGradientStateKeepProbabilitySeedMaskStrideInPixels(sourceGradient *MPSNNImageNode, sourceImage *MPSNNImageNode, gradientState *MPSNNGradientStateNode, keepProbability float32, seed uint, maskStrideInPixels metal.MTLSize) *MPSCNNDropoutGradientNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNDropoutGradientNodeSelInitWithSourceGradientSourceImageGradientStateKeepProbabilitySeedMaskStrideInPixels, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr(), keepProbability, seed, maskStrideInPixels)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNDropoutGradientNodeFromID(_ret)
 }
 
@@ -62,4 +66,3 @@ func (o *MPSCNNDropoutGradientNode) MaskStrideInPixels() metal.MTLSize {
 	_ret := objc.Send[metal.MTLSize](o.Ptr(), _mPSCNNDropoutGradientNodeSelMaskStrideInPixels)
 	return _ret
 }
-

@@ -16,24 +16,24 @@ type MTRClusterRadonConcentrationMeasurement struct {
 }
 
 var (
-	_clsMTRClusterRadonConcentrationMeasurement = _objcClass("MTRClusterRadonConcentrationMeasurement")
-	_mTRClusterRadonConcentrationMeasurementSelReadAttributeMeasuredValueWithParams = objc.RegisterName("readAttributeMeasuredValueWithParams:")
-	_mTRClusterRadonConcentrationMeasurementSelReadAttributeMinMeasuredValueWithParams = objc.RegisterName("readAttributeMinMeasuredValueWithParams:")
-	_mTRClusterRadonConcentrationMeasurementSelReadAttributeMaxMeasuredValueWithParams = objc.RegisterName("readAttributeMaxMeasuredValueWithParams:")
-	_mTRClusterRadonConcentrationMeasurementSelReadAttributePeakMeasuredValueWithParams = objc.RegisterName("readAttributePeakMeasuredValueWithParams:")
-	_mTRClusterRadonConcentrationMeasurementSelReadAttributePeakMeasuredValueWindowWithParams = objc.RegisterName("readAttributePeakMeasuredValueWindowWithParams:")
-	_mTRClusterRadonConcentrationMeasurementSelReadAttributeAverageMeasuredValueWithParams = objc.RegisterName("readAttributeAverageMeasuredValueWithParams:")
+	_clsMTRClusterRadonConcentrationMeasurement                                                  = _objcClass("MTRClusterRadonConcentrationMeasurement")
+	_mTRClusterRadonConcentrationMeasurementSelReadAttributeMeasuredValueWithParams              = objc.RegisterName("readAttributeMeasuredValueWithParams:")
+	_mTRClusterRadonConcentrationMeasurementSelReadAttributeMinMeasuredValueWithParams           = objc.RegisterName("readAttributeMinMeasuredValueWithParams:")
+	_mTRClusterRadonConcentrationMeasurementSelReadAttributeMaxMeasuredValueWithParams           = objc.RegisterName("readAttributeMaxMeasuredValueWithParams:")
+	_mTRClusterRadonConcentrationMeasurementSelReadAttributePeakMeasuredValueWithParams          = objc.RegisterName("readAttributePeakMeasuredValueWithParams:")
+	_mTRClusterRadonConcentrationMeasurementSelReadAttributePeakMeasuredValueWindowWithParams    = objc.RegisterName("readAttributePeakMeasuredValueWindowWithParams:")
+	_mTRClusterRadonConcentrationMeasurementSelReadAttributeAverageMeasuredValueWithParams       = objc.RegisterName("readAttributeAverageMeasuredValueWithParams:")
 	_mTRClusterRadonConcentrationMeasurementSelReadAttributeAverageMeasuredValueWindowWithParams = objc.RegisterName("readAttributeAverageMeasuredValueWindowWithParams:")
-	_mTRClusterRadonConcentrationMeasurementSelReadAttributeUncertaintyWithParams = objc.RegisterName("readAttributeUncertaintyWithParams:")
-	_mTRClusterRadonConcentrationMeasurementSelReadAttributeMeasurementUnitWithParams = objc.RegisterName("readAttributeMeasurementUnitWithParams:")
-	_mTRClusterRadonConcentrationMeasurementSelReadAttributeMeasurementMediumWithParams = objc.RegisterName("readAttributeMeasurementMediumWithParams:")
-	_mTRClusterRadonConcentrationMeasurementSelReadAttributeLevelValueWithParams = objc.RegisterName("readAttributeLevelValueWithParams:")
-	_mTRClusterRadonConcentrationMeasurementSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterRadonConcentrationMeasurementSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterRadonConcentrationMeasurementSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterRadonConcentrationMeasurementSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterRadonConcentrationMeasurementSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterRadonConcentrationMeasurementSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterRadonConcentrationMeasurementSelReadAttributeUncertaintyWithParams                = objc.RegisterName("readAttributeUncertaintyWithParams:")
+	_mTRClusterRadonConcentrationMeasurementSelReadAttributeMeasurementUnitWithParams            = objc.RegisterName("readAttributeMeasurementUnitWithParams:")
+	_mTRClusterRadonConcentrationMeasurementSelReadAttributeMeasurementMediumWithParams          = objc.RegisterName("readAttributeMeasurementMediumWithParams:")
+	_mTRClusterRadonConcentrationMeasurementSelReadAttributeLevelValueWithParams                 = objc.RegisterName("readAttributeLevelValueWithParams:")
+	_mTRClusterRadonConcentrationMeasurementSelReadAttributeGeneratedCommandListWithParams       = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterRadonConcentrationMeasurementSelReadAttributeAcceptedCommandListWithParams        = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterRadonConcentrationMeasurementSelReadAttributeAttributeListWithParams              = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterRadonConcentrationMeasurementSelReadAttributeFeatureMapWithParams                 = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterRadonConcentrationMeasurementSelReadAttributeClusterRevisionWithParams            = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterRadonConcentrationMeasurementSelInitWithDeviceEndpointIDQueue                     = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterRadonConcentrationMeasurementFromID(id objc.ID) *MTRClusterRadonConcentrationMeasurement {
@@ -129,7 +129,8 @@ func (o *MTRClusterRadonConcentrationMeasurement) ReadAttributeClusterRevisionWi
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func (o *MTRClusterRadonConcentrationMeasurement) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterRadonConcentrationMeasurement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterRadonConcentrationMeasurementSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterRadonConcentrationMeasurementFromID(_ret)
 }
-

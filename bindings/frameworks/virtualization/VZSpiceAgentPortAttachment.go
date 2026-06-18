@@ -16,9 +16,9 @@ type VZSpiceAgentPortAttachment struct {
 }
 
 var (
-	_clsVZSpiceAgentPortAttachment = _objcClass("VZSpiceAgentPortAttachment")
-	_vZSpiceAgentPortAttachmentSelInit = objc.RegisterName("init")
-	_vZSpiceAgentPortAttachmentSelSharesClipboard = objc.RegisterName("sharesClipboard")
+	_clsVZSpiceAgentPortAttachment                   = _objcClass("VZSpiceAgentPortAttachment")
+	_vZSpiceAgentPortAttachmentSelInit               = objc.RegisterName("init")
+	_vZSpiceAgentPortAttachmentSelSharesClipboard    = objc.RegisterName("sharesClipboard")
 	_vZSpiceAgentPortAttachmentSelSetSharesClipboard = objc.RegisterName("setSharesClipboard:")
 	_vZSpiceAgentPortAttachmentSelSpiceAgentPortName = objc.RegisterName("spiceAgentPortName")
 )
@@ -35,7 +35,9 @@ func VZSpiceAgentPortAttachmentFromID(id objc.ID) *VZSpiceAgentPortAttachment {
 
 func (o *VZSpiceAgentPortAttachment) Init() *VZSpiceAgentPortAttachment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZSpiceAgentPortAttachmentSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZSpiceAgentPortAttachmentFromID(_ret)
 }
 
@@ -52,7 +54,8 @@ func (o *VZSpiceAgentPortAttachment) SetSharesClipboard(sharesClipboard bool) {
 // @abstract The Spice agent port name. @discussion A console port configured with this name will spawn a Spice guest agent if supported by the guest. VZConsolePortConfiguration.attachment must be set to VZSpiceAgentPortAttachment. VZVirtioConsolePortConfiguration.isConsole must remain false on a Spice agent port.
 func VZSpiceAgentPortAttachmentSpiceAgentPortName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVZSpiceAgentPortAttachment), _vZSpiceAgentPortAttachmentSelSpiceAgentPortName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

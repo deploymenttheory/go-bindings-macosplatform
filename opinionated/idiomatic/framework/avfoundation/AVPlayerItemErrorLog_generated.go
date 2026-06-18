@@ -67,4 +67,3 @@ type PlayerItemErrorLogable interface {
 }
 
 var _ PlayerItemErrorLogable = (*PlayerItemErrorLog)(nil)
-

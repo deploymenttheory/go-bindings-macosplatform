@@ -16,10 +16,10 @@ type LAEnvironmentState struct {
 }
 
 var (
-	_clsLAEnvironmentState = _objcClass("LAEnvironmentState")
-	_lAEnvironmentStateSelBiometry = objc.RegisterName("biometry")
-	_lAEnvironmentStateSelUserPassword = objc.RegisterName("userPassword")
-	_lAEnvironmentStateSelCompanions = objc.RegisterName("companions")
+	_clsLAEnvironmentState              = _objcClass("LAEnvironmentState")
+	_lAEnvironmentStateSelBiometry      = objc.RegisterName("biometry")
+	_lAEnvironmentStateSelUserPassword  = objc.RegisterName("userPassword")
+	_lAEnvironmentStateSelCompanions    = objc.RegisterName("companions")
 	_lAEnvironmentStateSelAllMechanisms = objc.RegisterName("allMechanisms")
 )
 
@@ -36,28 +36,35 @@ func LAEnvironmentStateFromID(id objc.ID) *LAEnvironmentState {
 // @brief Information about biometric authentication (Touch ID, Face ID or Optic ID). @discussion @c nil if biometry is not supported by this device.
 func (o *LAEnvironmentState) Biometry() *LAEnvironmentMechanismBiometry {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lAEnvironmentStateSelBiometry)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return LAEnvironmentMechanismBiometryFromID(_ret)
 }
 
 // @brief Information about local user password (on macOS) or passcode (on embedded platforms). @discussion @c nil if user password or passcode is not supported by this device.
 func (o *LAEnvironmentState) UserPassword() *LAEnvironmentMechanismUserPassword {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lAEnvironmentStateSelUserPassword)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return LAEnvironmentMechanismUserPasswordFromID(_ret)
 }
 
 // @brief Companion authentication mechanisms. @discussion Companion mechanisms such as Apple Watch can appear and disappear as they get in and out of reach, but this property enumerates paired companions, even if they are not reachable at the moment. Check @c isUsable property to determine if a particular companion type is available for use. Note that items in this array represent paired companion types, not individual devices. Therefore, even if the user has paired multiple Apple Watch devices for companion authentication, the array will contain only one @c LAEnvironmentMechanimsCompanion instance of type @c LACompanionTypeWatch.
 func (o *LAEnvironmentState) Companions() *foundation.NSArray[*LAEnvironmentMechanismCompanion] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lAEnvironmentStateSelCompanions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*LAEnvironmentMechanismCompanion](_ret)
 }
 
 // @brief Information about all authentication mechanisms. @discussion This property aggregates @c biometry, @c userPassword, @c companions and any future authentication mechanisms.
 func (o *LAEnvironmentState) AllMechanisms() *foundation.NSArray[*LAEnvironmentMechanism] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lAEnvironmentStateSelAllMechanisms)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*LAEnvironmentMechanism](_ret)
 }
-

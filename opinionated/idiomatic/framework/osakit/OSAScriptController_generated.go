@@ -166,4 +166,3 @@ type ScriptControllerable interface {
 }
 
 var _ ScriptControllerable = (*ScriptController)(nil)
-

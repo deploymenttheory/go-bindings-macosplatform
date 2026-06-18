@@ -18,8 +18,8 @@ type SFContentBlockerManager struct {
 }
 
 var (
-	_clsSFContentBlockerManager = _objcClass("SFContentBlockerManager")
-	_sFContentBlockerManagerSelReloadContentBlockerWithIdentifierCompletionHandler = objc.RegisterName("reloadContentBlockerWithIdentifier:completionHandler:")
+	_clsSFContentBlockerManager                                                        = _objcClass("SFContentBlockerManager")
+	_sFContentBlockerManagerSelReloadContentBlockerWithIdentifierCompletionHandler     = objc.RegisterName("reloadContentBlockerWithIdentifier:completionHandler:")
 	_sFContentBlockerManagerSelGetStateOfContentBlockerWithIdentifierCompletionHandler = objc.RegisterName("getStateOfContentBlockerWithIdentifier:completionHandler:")
 )
 
@@ -57,4 +57,3 @@ func SFContentBlockerManagerGetStateOfContentBlockerWithIdentifierCompletionHand
 	}
 	objc.ID(_clsSFContentBlockerManager).Send(_sFContentBlockerManagerSelGetStateOfContentBlockerWithIdentifierCompletionHandler, identifier.Ptr(), __block_completionHandler)
 }
-

@@ -18,12 +18,12 @@ type MTRChannelClusterProgramGuideResponseParams struct {
 }
 
 var (
-	_clsMTRChannelClusterProgramGuideResponseParams = _objcClass("MTRChannelClusterProgramGuideResponseParams")
+	_clsMTRChannelClusterProgramGuideResponseParams                           = _objcClass("MTRChannelClusterProgramGuideResponseParams")
 	_mTRChannelClusterProgramGuideResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRChannelClusterProgramGuideResponseParamsSelPaging = objc.RegisterName("paging")
-	_mTRChannelClusterProgramGuideResponseParamsSelSetPaging = objc.RegisterName("setPaging:")
-	_mTRChannelClusterProgramGuideResponseParamsSelProgramList = objc.RegisterName("programList")
-	_mTRChannelClusterProgramGuideResponseParamsSelSetProgramList = objc.RegisterName("setProgramList:")
+	_mTRChannelClusterProgramGuideResponseParamsSelPaging                     = objc.RegisterName("paging")
+	_mTRChannelClusterProgramGuideResponseParamsSelSetPaging                  = objc.RegisterName("setPaging:")
+	_mTRChannelClusterProgramGuideResponseParamsSelProgramList                = objc.RegisterName("programList")
+	_mTRChannelClusterProgramGuideResponseParamsSelSetProgramList             = objc.RegisterName("setProgramList:")
 )
 
 func MTRChannelClusterProgramGuideResponseParamsFromID(id objc.ID) *MTRChannelClusterProgramGuideResponseParams {
@@ -40,7 +40,9 @@ func MTRChannelClusterProgramGuideResponseParamsFromID(id objc.ID) *MTRChannelCl
 func (o *MTRChannelClusterProgramGuideResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRChannelClusterProgramGuideResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterProgramGuideResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -49,7 +51,9 @@ func (o *MTRChannelClusterProgramGuideResponseParams) InitWithResponseValueError
 
 func (o *MTRChannelClusterProgramGuideResponseParams) Paging() *MTRChannelClusterChannelPagingStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterProgramGuideResponseParamsSelPaging)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRChannelClusterChannelPagingStructFromID(_ret)
 }
 
@@ -65,4 +69,3 @@ func (o *MTRChannelClusterProgramGuideResponseParams) ProgramList() *foundation.
 func (o *MTRChannelClusterProgramGuideResponseParams) SetProgramList(programList *foundation.NSArray[objc.ID]) {
 	o.Ptr().Send(_mTRChannelClusterProgramGuideResponseParamsSelSetProgramList, programList)
 }
-

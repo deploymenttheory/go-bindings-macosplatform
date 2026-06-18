@@ -173,4 +173,3 @@ type CaptureVideoPreviewLayerable interface {
 }
 
 var _ CaptureVideoPreviewLayerable = (*CaptureVideoPreviewLayer)(nil)
-

@@ -62,4 +62,3 @@ type EFIVariableStoreable interface {
 }
 
 var _ EFIVariableStoreable = (*EFIVariableStore)(nil)
-

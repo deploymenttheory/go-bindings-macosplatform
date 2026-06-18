@@ -10,4 +10,3 @@ type SFSpeechRecognitionTaskDelegate interface {
 // SFSpeechRecognizerDelegate wraps the ObjC protocol SFSpeechRecognizerDelegate.
 type SFSpeechRecognizerDelegate interface {
 }
-

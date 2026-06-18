@@ -20,53 +20,53 @@ type AVAsset struct {
 }
 
 var (
-	_clsAVAsset = _objcClass("AVAsset")
-	_aVAssetSelAssetWithURL = objc.RegisterName("assetWithURL:")
-	_aVAssetSelDuration = objc.RegisterName("duration")
-	_aVAssetSelPreferredRate = objc.RegisterName("preferredRate")
-	_aVAssetSelPreferredVolume = objc.RegisterName("preferredVolume")
-	_aVAssetSelPreferredTransform = objc.RegisterName("preferredTransform")
-	_aVAssetSelNaturalSize = objc.RegisterName("naturalSize")
-	_aVAssetSelMinimumTimeOffsetFromLive = objc.RegisterName("minimumTimeOffsetFromLive")
-	_aVAssetSelCancelLoading = objc.RegisterName("cancelLoading")
-	_aVAssetSelProvidesPreciseDurationAndTiming = objc.RegisterName("providesPreciseDurationAndTiming")
-	_aVAssetSelReferenceRestrictions = objc.RegisterName("referenceRestrictions")
-	_aVAssetSelTrackWithTrackID = objc.RegisterName("trackWithTrackID:")
-	_aVAssetSelLoadTrackWithTrackIDCompletionHandler = objc.RegisterName("loadTrackWithTrackID:completionHandler:")
-	_aVAssetSelTracksWithMediaType = objc.RegisterName("tracksWithMediaType:")
-	_aVAssetSelLoadTracksWithMediaTypeCompletionHandler = objc.RegisterName("loadTracksWithMediaType:completionHandler:")
-	_aVAssetSelTracksWithMediaCharacteristic = objc.RegisterName("tracksWithMediaCharacteristic:")
-	_aVAssetSelLoadTracksWithMediaCharacteristicCompletionHandler = objc.RegisterName("loadTracksWithMediaCharacteristic:completionHandler:")
-	_aVAssetSelTracks = objc.RegisterName("tracks")
-	_aVAssetSelTrackGroups = objc.RegisterName("trackGroups")
-	_aVAssetSelMetadataForFormat = objc.RegisterName("metadataForFormat:")
-	_aVAssetSelLoadMetadataForFormatCompletionHandler = objc.RegisterName("loadMetadataForFormat:completionHandler:")
-	_aVAssetSelCreationDate = objc.RegisterName("creationDate")
-	_aVAssetSelLyrics = objc.RegisterName("lyrics")
-	_aVAssetSelCommonMetadata = objc.RegisterName("commonMetadata")
-	_aVAssetSelMetadata = objc.RegisterName("metadata")
-	_aVAssetSelAvailableMetadataFormats = objc.RegisterName("availableMetadataFormats")
-	_aVAssetSelChapterMetadataGroupsWithTitleLocaleContainingItemsWithCommonKeys = objc.RegisterName("chapterMetadataGroupsWithTitleLocale:containingItemsWithCommonKeys:")
+	_clsAVAsset                                                                                       = _objcClass("AVAsset")
+	_aVAssetSelAssetWithURL                                                                           = objc.RegisterName("assetWithURL:")
+	_aVAssetSelDuration                                                                               = objc.RegisterName("duration")
+	_aVAssetSelPreferredRate                                                                          = objc.RegisterName("preferredRate")
+	_aVAssetSelPreferredVolume                                                                        = objc.RegisterName("preferredVolume")
+	_aVAssetSelPreferredTransform                                                                     = objc.RegisterName("preferredTransform")
+	_aVAssetSelNaturalSize                                                                            = objc.RegisterName("naturalSize")
+	_aVAssetSelMinimumTimeOffsetFromLive                                                              = objc.RegisterName("minimumTimeOffsetFromLive")
+	_aVAssetSelCancelLoading                                                                          = objc.RegisterName("cancelLoading")
+	_aVAssetSelProvidesPreciseDurationAndTiming                                                       = objc.RegisterName("providesPreciseDurationAndTiming")
+	_aVAssetSelReferenceRestrictions                                                                  = objc.RegisterName("referenceRestrictions")
+	_aVAssetSelTrackWithTrackID                                                                       = objc.RegisterName("trackWithTrackID:")
+	_aVAssetSelLoadTrackWithTrackIDCompletionHandler                                                  = objc.RegisterName("loadTrackWithTrackID:completionHandler:")
+	_aVAssetSelTracksWithMediaType                                                                    = objc.RegisterName("tracksWithMediaType:")
+	_aVAssetSelLoadTracksWithMediaTypeCompletionHandler                                               = objc.RegisterName("loadTracksWithMediaType:completionHandler:")
+	_aVAssetSelTracksWithMediaCharacteristic                                                          = objc.RegisterName("tracksWithMediaCharacteristic:")
+	_aVAssetSelLoadTracksWithMediaCharacteristicCompletionHandler                                     = objc.RegisterName("loadTracksWithMediaCharacteristic:completionHandler:")
+	_aVAssetSelTracks                                                                                 = objc.RegisterName("tracks")
+	_aVAssetSelTrackGroups                                                                            = objc.RegisterName("trackGroups")
+	_aVAssetSelMetadataForFormat                                                                      = objc.RegisterName("metadataForFormat:")
+	_aVAssetSelLoadMetadataForFormatCompletionHandler                                                 = objc.RegisterName("loadMetadataForFormat:completionHandler:")
+	_aVAssetSelCreationDate                                                                           = objc.RegisterName("creationDate")
+	_aVAssetSelLyrics                                                                                 = objc.RegisterName("lyrics")
+	_aVAssetSelCommonMetadata                                                                         = objc.RegisterName("commonMetadata")
+	_aVAssetSelMetadata                                                                               = objc.RegisterName("metadata")
+	_aVAssetSelAvailableMetadataFormats                                                               = objc.RegisterName("availableMetadataFormats")
+	_aVAssetSelChapterMetadataGroupsWithTitleLocaleContainingItemsWithCommonKeys                      = objc.RegisterName("chapterMetadataGroupsWithTitleLocale:containingItemsWithCommonKeys:")
 	_aVAssetSelLoadChapterMetadataGroupsWithTitleLocaleContainingItemsWithCommonKeysCompletionHandler = objc.RegisterName("loadChapterMetadataGroupsWithTitleLocale:containingItemsWithCommonKeys:completionHandler:")
-	_aVAssetSelChapterMetadataGroupsBestMatchingPreferredLanguages = objc.RegisterName("chapterMetadataGroupsBestMatchingPreferredLanguages:")
-	_aVAssetSelLoadChapterMetadataGroupsBestMatchingPreferredLanguagesCompletionHandler = objc.RegisterName("loadChapterMetadataGroupsBestMatchingPreferredLanguages:completionHandler:")
-	_aVAssetSelAvailableChapterLocales = objc.RegisterName("availableChapterLocales")
-	_aVAssetSelMediaSelectionGroupForMediaCharacteristic = objc.RegisterName("mediaSelectionGroupForMediaCharacteristic:")
-	_aVAssetSelLoadMediaSelectionGroupForMediaCharacteristicCompletionHandler = objc.RegisterName("loadMediaSelectionGroupForMediaCharacteristic:completionHandler:")
-	_aVAssetSelAvailableMediaCharacteristicsWithMediaSelectionOptions = objc.RegisterName("availableMediaCharacteristicsWithMediaSelectionOptions")
-	_aVAssetSelPreferredMediaSelection = objc.RegisterName("preferredMediaSelection")
-	_aVAssetSelAllMediaSelections = objc.RegisterName("allMediaSelections")
-	_aVAssetSelHasProtectedContent = objc.RegisterName("hasProtectedContent")
-	_aVAssetSelCanContainFragments = objc.RegisterName("canContainFragments")
-	_aVAssetSelContainsFragments = objc.RegisterName("containsFragments")
-	_aVAssetSelOverallDurationHint = objc.RegisterName("overallDurationHint")
-	_aVAssetSelIsPlayable = objc.RegisterName("isPlayable")
-	_aVAssetSelIsExportable = objc.RegisterName("isExportable")
-	_aVAssetSelIsReadable = objc.RegisterName("isReadable")
-	_aVAssetSelIsComposable = objc.RegisterName("isComposable")
-	_aVAssetSelIsCompatibleWithAirPlayVideo = objc.RegisterName("isCompatibleWithAirPlayVideo")
-	_aVAssetSelUnusedTrackID = objc.RegisterName("unusedTrackID")
-	_aVAssetSelFindUnusedTrackIDWithCompletionHandler = objc.RegisterName("findUnusedTrackIDWithCompletionHandler:")
+	_aVAssetSelChapterMetadataGroupsBestMatchingPreferredLanguages                                    = objc.RegisterName("chapterMetadataGroupsBestMatchingPreferredLanguages:")
+	_aVAssetSelLoadChapterMetadataGroupsBestMatchingPreferredLanguagesCompletionHandler               = objc.RegisterName("loadChapterMetadataGroupsBestMatchingPreferredLanguages:completionHandler:")
+	_aVAssetSelAvailableChapterLocales                                                                = objc.RegisterName("availableChapterLocales")
+	_aVAssetSelMediaSelectionGroupForMediaCharacteristic                                              = objc.RegisterName("mediaSelectionGroupForMediaCharacteristic:")
+	_aVAssetSelLoadMediaSelectionGroupForMediaCharacteristicCompletionHandler                         = objc.RegisterName("loadMediaSelectionGroupForMediaCharacteristic:completionHandler:")
+	_aVAssetSelAvailableMediaCharacteristicsWithMediaSelectionOptions                                 = objc.RegisterName("availableMediaCharacteristicsWithMediaSelectionOptions")
+	_aVAssetSelPreferredMediaSelection                                                                = objc.RegisterName("preferredMediaSelection")
+	_aVAssetSelAllMediaSelections                                                                     = objc.RegisterName("allMediaSelections")
+	_aVAssetSelHasProtectedContent                                                                    = objc.RegisterName("hasProtectedContent")
+	_aVAssetSelCanContainFragments                                                                    = objc.RegisterName("canContainFragments")
+	_aVAssetSelContainsFragments                                                                      = objc.RegisterName("containsFragments")
+	_aVAssetSelOverallDurationHint                                                                    = objc.RegisterName("overallDurationHint")
+	_aVAssetSelIsPlayable                                                                             = objc.RegisterName("isPlayable")
+	_aVAssetSelIsExportable                                                                           = objc.RegisterName("isExportable")
+	_aVAssetSelIsReadable                                                                             = objc.RegisterName("isReadable")
+	_aVAssetSelIsComposable                                                                           = objc.RegisterName("isComposable")
+	_aVAssetSelIsCompatibleWithAirPlayVideo                                                           = objc.RegisterName("isCompatibleWithAirPlayVideo")
+	_aVAssetSelUnusedTrackID                                                                          = objc.RegisterName("unusedTrackID")
+	_aVAssetSelFindUnusedTrackIDWithCompletionHandler                                                 = objc.RegisterName("findUnusedTrackIDWithCompletionHandler:")
 )
 
 func AVAssetFromID(id objc.ID) *AVAsset {
@@ -82,7 +82,9 @@ func AVAssetFromID(id objc.ID) *AVAsset {
 // Returns an instance of AVAsset for inspection of a media resource. Returns a newly allocated instance of a subclass of AVAsset initialized with the specified URL. - Parameter URL: An instance of NSURL that references a media resource. - Returns: An instance of AVAsset.
 func AVAssetAssetWithURL(uRL *foundation.NSURL) *AVAsset {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAsset), _aVAssetSelAssetWithURL, uRL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetFromID(_ret)
 }
 
@@ -143,7 +145,9 @@ func (o *AVAsset) ReferenceRestrictions() AVAssetReferenceRestrictions {
 // Deprecated: Use loadTrackWithTrackID:completionHandler: instead
 func (o *AVAsset) TrackWithTrackID(trackID int32) *AVAssetTrack {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetSelTrackWithTrackID, trackID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetTrackFromID(_ret)
 }
 
@@ -163,7 +167,9 @@ func (o *AVAsset) LoadTrackWithTrackIDCompletionHandler(trackID int32, completio
 // Deprecated: Use loadTracksWithMediaType:completionHandler: instead
 func (o *AVAsset) TracksWithMediaType(mediaType *foundation.NSString) *foundation.NSArray[*AVAssetTrack] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetSelTracksWithMediaType, mediaType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVAssetTrack](_ret)
 }
 
@@ -186,7 +192,9 @@ func (o *AVAsset) LoadTracksWithMediaTypeCompletionHandler(mediaType *foundation
 // Deprecated: Use loadTracksWithMediaCharacteristic:completionHandler: instead
 func (o *AVAsset) TracksWithMediaCharacteristic(mediaCharacteristic *foundation.NSString) *foundation.NSArray[*AVAssetTrack] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetSelTracksWithMediaCharacteristic, mediaCharacteristic.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVAssetTrack](_ret)
 }
 
@@ -208,14 +216,18 @@ func (o *AVAsset) LoadTracksWithMediaCharacteristicCompletionHandler(mediaCharac
 // Provides the array of AVAssetTracks contained by the asset
 func (o *AVAsset) Tracks() *foundation.NSArray[*AVAssetTrack] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetSelTracks)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVAssetTrack](_ret)
 }
 
 // All track groups in the receiver. The value of this property is an NSArray of AVAssetTrackGroups, each representing a different grouping of tracks in the receiver.
 func (o *AVAsset) TrackGroups() *foundation.NSArray[*AVAssetTrackGroup] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetSelTrackGroups)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVAssetTrackGroup](_ret)
 }
 
@@ -223,7 +235,9 @@ func (o *AVAsset) TrackGroups() *foundation.NSArray[*AVAssetTrackGroup] {
 // Deprecated: Use loadMetadataForFormat:completionHandler: instead
 func (o *AVAsset) MetadataForFormat(format *foundation.NSString) *foundation.NSArray[*AVMetadataItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetSelMetadataForFormat, format.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVMetadataItem](_ret)
 }
 
@@ -245,28 +259,36 @@ func (o *AVAsset) LoadMetadataForFormatCompletionHandler(format *foundation.NSSt
 // Indicates the creation date of the asset as an AVMetadataItem. May be nil. If a creation date has been stored by the asset in a form that can be converted to an NSDate, the dateValue property of the AVMetadataItem will provide an instance of NSDate. Otherwise the creation date is available only as a string value, via -[AVMetadataItem stringValue].
 func (o *AVAsset) CreationDate() *AVMetadataItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetSelCreationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMetadataItemFromID(_ret)
 }
 
 // Provides access to the lyrics of the asset suitable for the current locale.
 func (o *AVAsset) Lyrics() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetSelLyrics)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Provides access to an array of AVMetadataItems for each common metadata key for which a value is available; items can be filtered according to language via +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:] and according to identifier via +[AVMetadataItem metadataItemsFromArray:filteredByIdentifier:].
 func (o *AVAsset) CommonMetadata() *foundation.NSArray[*AVMetadataItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetSelCommonMetadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVMetadataItem](_ret)
 }
 
 // Provides access to an array of AVMetadataItems for all metadata identifiers for which a value is available; items can be filtered according to language via +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:] and according to identifier via +[AVMetadataItem metadataItemsFromArray:filteredByIdentifier:].
 func (o *AVAsset) Metadata() *foundation.NSArray[*AVMetadataItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetSelMetadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVMetadataItem](_ret)
 }
 
@@ -280,7 +302,9 @@ func (o *AVAsset) AvailableMetadataFormats() *foundation.NSArray[*foundation.NSS
 // Deprecated: Use loadChapterMetadataGroupsWithTitleLocale:containingItemsWithCommonKeys:completionHandler: instead
 func (o *AVAsset) ChapterMetadataGroupsWithTitleLocaleContainingItemsWithCommonKeys(locale *foundation.NSLocale, commonKeys *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*AVTimedMetadataGroup] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetSelChapterMetadataGroupsWithTitleLocaleContainingItemsWithCommonKeys, locale.Ptr(), commonKeys)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVTimedMetadataGroup](_ret)
 }
 
@@ -303,7 +327,9 @@ func (o *AVAsset) LoadChapterMetadataGroupsWithTitleLocaleContainingItemsWithCom
 // Deprecated: Use loadChapterMetadataGroupsBestMatchingPreferredLanguages:completionHandler: instead
 func (o *AVAsset) ChapterMetadataGroupsBestMatchingPreferredLanguages(preferredLanguages *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*AVTimedMetadataGroup] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetSelChapterMetadataGroupsBestMatchingPreferredLanguages, preferredLanguages)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVTimedMetadataGroup](_ret)
 }
 
@@ -332,7 +358,9 @@ func (o *AVAsset) AvailableChapterLocales() *foundation.NSArray[*foundation.NSLo
 // Deprecated: Use loadMediaSelectionGroupForMediaCharacteristic:completionHandler: instead
 func (o *AVAsset) MediaSelectionGroupForMediaCharacteristic(mediaCharacteristic *foundation.NSString) *AVMediaSelectionGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetSelMediaSelectionGroupForMediaCharacteristic, mediaCharacteristic.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMediaSelectionGroupFromID(_ret)
 }
 
@@ -357,14 +385,18 @@ func (o *AVAsset) AvailableMediaCharacteristicsWithMediaSelectionOptions() *foun
 // Provides an instance of AVMediaSelection with default selections for each of the receiver's media selection groups.
 func (o *AVAsset) PreferredMediaSelection() *AVMediaSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetSelPreferredMediaSelection)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMediaSelectionFromID(_ret)
 }
 
 // Provides an array of all permutations of AVMediaSelection for this asset.
 func (o *AVAsset) AllMediaSelections() *foundation.NSArray[*AVMediaSelection] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetSelAllMediaSelections)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVMediaSelection](_ret)
 }
 
@@ -439,4 +471,3 @@ func (o *AVAsset) FindUnusedTrackIDWithCompletionHandler(completionHandler func(
 	}
 	o.Ptr().Send(_aVAssetSelFindUnusedTrackIDWithCompletionHandler, __block_completionHandler)
 }
-

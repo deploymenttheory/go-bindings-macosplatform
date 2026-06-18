@@ -16,10 +16,10 @@ type MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct struct {
 }
 
 var (
-	_clsMTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct = _objcClass("MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct")
-	_mTRActivatedCarbonFilterMonitoringClusterReplacementProductStructSelProductIdentifierType = objc.RegisterName("productIdentifierType")
-	_mTRActivatedCarbonFilterMonitoringClusterReplacementProductStructSelSetProductIdentifierType = objc.RegisterName("setProductIdentifierType:")
-	_mTRActivatedCarbonFilterMonitoringClusterReplacementProductStructSelProductIdentifierValue = objc.RegisterName("productIdentifierValue")
+	_clsMTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct                          = _objcClass("MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct")
+	_mTRActivatedCarbonFilterMonitoringClusterReplacementProductStructSelProductIdentifierType     = objc.RegisterName("productIdentifierType")
+	_mTRActivatedCarbonFilterMonitoringClusterReplacementProductStructSelSetProductIdentifierType  = objc.RegisterName("setProductIdentifierType:")
+	_mTRActivatedCarbonFilterMonitoringClusterReplacementProductStructSelProductIdentifierValue    = objc.RegisterName("productIdentifierValue")
 	_mTRActivatedCarbonFilterMonitoringClusterReplacementProductStructSelSetProductIdentifierValue = objc.RegisterName("setProductIdentifierValue:")
 )
 
@@ -35,7 +35,9 @@ func MTRActivatedCarbonFilterMonitoringClusterReplacementProductStructFromID(id 
 
 func (o *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) ProductIdentifierType() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRActivatedCarbonFilterMonitoringClusterReplacementProductStructSelProductIdentifierType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) SetP
 
 func (o *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) ProductIdentifierValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRActivatedCarbonFilterMonitoringClusterReplacementProductStructSelProductIdentifierValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) SetProductIdentifierValue(productIdentifierValue *foundation.NSString) {
 	o.Ptr().Send(_mTRActivatedCarbonFilterMonitoringClusterReplacementProductStructSelSetProductIdentifierValue, productIdentifierValue.Ptr())
 }
-

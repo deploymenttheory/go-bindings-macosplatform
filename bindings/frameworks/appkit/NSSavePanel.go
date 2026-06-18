@@ -19,62 +19,62 @@ type NSSavePanel struct {
 }
 
 var (
-	_clsNSSavePanel = _objcClass("NSSavePanel")
-	_nSSavePanelSelSavePanel = objc.RegisterName("savePanel")
-	_nSSavePanelSelValidateVisibleColumns = objc.RegisterName("validateVisibleColumns")
-	_nSSavePanelSelOk = objc.RegisterName("ok:")
-	_nSSavePanelSelCancel = objc.RegisterName("cancel:")
-	_nSSavePanelSelBeginSheetModalForWindowCompletionHandler = objc.RegisterName("beginSheetModalForWindow:completionHandler:")
-	_nSSavePanelSelBeginWithCompletionHandler = objc.RegisterName("beginWithCompletionHandler:")
-	_nSSavePanelSelRunModal = objc.RegisterName("runModal")
-	_nSSavePanelSelURL = objc.RegisterName("URL")
-	_nSSavePanelSelIdentifier = objc.RegisterName("identifier")
-	_nSSavePanelSelSetIdentifier = objc.RegisterName("setIdentifier:")
-	_nSSavePanelSelDirectoryURL = objc.RegisterName("directoryURL")
-	_nSSavePanelSelSetDirectoryURL = objc.RegisterName("setDirectoryURL:")
-	_nSSavePanelSelAllowedContentTypes = objc.RegisterName("allowedContentTypes")
-	_nSSavePanelSelSetAllowedContentTypes = objc.RegisterName("setAllowedContentTypes:")
-	_nSSavePanelSelAllowsOtherFileTypes = objc.RegisterName("allowsOtherFileTypes")
-	_nSSavePanelSelSetAllowsOtherFileTypes = objc.RegisterName("setAllowsOtherFileTypes:")
-	_nSSavePanelSelCurrentContentType = objc.RegisterName("currentContentType")
-	_nSSavePanelSelSetCurrentContentType = objc.RegisterName("setCurrentContentType:")
-	_nSSavePanelSelAccessoryView = objc.RegisterName("accessoryView")
-	_nSSavePanelSelSetAccessoryView = objc.RegisterName("setAccessoryView:")
-	_nSSavePanelSelIsExpanded = objc.RegisterName("isExpanded")
-	_nSSavePanelSelCanCreateDirectories = objc.RegisterName("canCreateDirectories")
-	_nSSavePanelSelSetCanCreateDirectories = objc.RegisterName("setCanCreateDirectories:")
-	_nSSavePanelSelCanSelectHiddenExtension = objc.RegisterName("canSelectHiddenExtension")
-	_nSSavePanelSelSetCanSelectHiddenExtension = objc.RegisterName("setCanSelectHiddenExtension:")
-	_nSSavePanelSelIsExtensionHidden = objc.RegisterName("isExtensionHidden")
-	_nSSavePanelSelSetExtensionHidden = objc.RegisterName("setExtensionHidden:")
-	_nSSavePanelSelTreatsFilePackagesAsDirectories = objc.RegisterName("treatsFilePackagesAsDirectories")
-	_nSSavePanelSelSetTreatsFilePackagesAsDirectories = objc.RegisterName("setTreatsFilePackagesAsDirectories:")
-	_nSSavePanelSelPrompt = objc.RegisterName("prompt")
-	_nSSavePanelSelSetPrompt = objc.RegisterName("setPrompt:")
-	_nSSavePanelSelNameFieldLabel = objc.RegisterName("nameFieldLabel")
-	_nSSavePanelSelSetNameFieldLabel = objc.RegisterName("setNameFieldLabel:")
-	_nSSavePanelSelNameFieldStringValue = objc.RegisterName("nameFieldStringValue")
-	_nSSavePanelSelSetNameFieldStringValue = objc.RegisterName("setNameFieldStringValue:")
-	_nSSavePanelSelMessage = objc.RegisterName("message")
-	_nSSavePanelSelSetMessage = objc.RegisterName("setMessage:")
-	_nSSavePanelSelShowsHiddenFiles = objc.RegisterName("showsHiddenFiles")
-	_nSSavePanelSelSetShowsHiddenFiles = objc.RegisterName("setShowsHiddenFiles:")
-	_nSSavePanelSelShowsTagField = objc.RegisterName("showsTagField")
-	_nSSavePanelSelSetShowsTagField = objc.RegisterName("setShowsTagField:")
-	_nSSavePanelSelTagNames = objc.RegisterName("tagNames")
-	_nSSavePanelSelSetTagNames = objc.RegisterName("setTagNames:")
-	_nSSavePanelSelShowsContentTypes = objc.RegisterName("showsContentTypes")
-	_nSSavePanelSelSetShowsContentTypes = objc.RegisterName("setShowsContentTypes:")
-	_nSSavePanelSelFilename = objc.RegisterName("filename")
-	_nSSavePanelSelDirectory = objc.RegisterName("directory")
-	_nSSavePanelSelSetDirectory = objc.RegisterName("setDirectory:")
-	_nSSavePanelSelRequiredFileType = objc.RegisterName("requiredFileType")
-	_nSSavePanelSelSetRequiredFileType = objc.RegisterName("setRequiredFileType:")
+	_clsNSSavePanel                                                                               = _objcClass("NSSavePanel")
+	_nSSavePanelSelSavePanel                                                                      = objc.RegisterName("savePanel")
+	_nSSavePanelSelValidateVisibleColumns                                                         = objc.RegisterName("validateVisibleColumns")
+	_nSSavePanelSelOk                                                                             = objc.RegisterName("ok:")
+	_nSSavePanelSelCancel                                                                         = objc.RegisterName("cancel:")
+	_nSSavePanelSelBeginSheetModalForWindowCompletionHandler                                      = objc.RegisterName("beginSheetModalForWindow:completionHandler:")
+	_nSSavePanelSelBeginWithCompletionHandler                                                     = objc.RegisterName("beginWithCompletionHandler:")
+	_nSSavePanelSelRunModal                                                                       = objc.RegisterName("runModal")
+	_nSSavePanelSelURL                                                                            = objc.RegisterName("URL")
+	_nSSavePanelSelIdentifier                                                                     = objc.RegisterName("identifier")
+	_nSSavePanelSelSetIdentifier                                                                  = objc.RegisterName("setIdentifier:")
+	_nSSavePanelSelDirectoryURL                                                                   = objc.RegisterName("directoryURL")
+	_nSSavePanelSelSetDirectoryURL                                                                = objc.RegisterName("setDirectoryURL:")
+	_nSSavePanelSelAllowedContentTypes                                                            = objc.RegisterName("allowedContentTypes")
+	_nSSavePanelSelSetAllowedContentTypes                                                         = objc.RegisterName("setAllowedContentTypes:")
+	_nSSavePanelSelAllowsOtherFileTypes                                                           = objc.RegisterName("allowsOtherFileTypes")
+	_nSSavePanelSelSetAllowsOtherFileTypes                                                        = objc.RegisterName("setAllowsOtherFileTypes:")
+	_nSSavePanelSelCurrentContentType                                                             = objc.RegisterName("currentContentType")
+	_nSSavePanelSelSetCurrentContentType                                                          = objc.RegisterName("setCurrentContentType:")
+	_nSSavePanelSelAccessoryView                                                                  = objc.RegisterName("accessoryView")
+	_nSSavePanelSelSetAccessoryView                                                               = objc.RegisterName("setAccessoryView:")
+	_nSSavePanelSelIsExpanded                                                                     = objc.RegisterName("isExpanded")
+	_nSSavePanelSelCanCreateDirectories                                                           = objc.RegisterName("canCreateDirectories")
+	_nSSavePanelSelSetCanCreateDirectories                                                        = objc.RegisterName("setCanCreateDirectories:")
+	_nSSavePanelSelCanSelectHiddenExtension                                                       = objc.RegisterName("canSelectHiddenExtension")
+	_nSSavePanelSelSetCanSelectHiddenExtension                                                    = objc.RegisterName("setCanSelectHiddenExtension:")
+	_nSSavePanelSelIsExtensionHidden                                                              = objc.RegisterName("isExtensionHidden")
+	_nSSavePanelSelSetExtensionHidden                                                             = objc.RegisterName("setExtensionHidden:")
+	_nSSavePanelSelTreatsFilePackagesAsDirectories                                                = objc.RegisterName("treatsFilePackagesAsDirectories")
+	_nSSavePanelSelSetTreatsFilePackagesAsDirectories                                             = objc.RegisterName("setTreatsFilePackagesAsDirectories:")
+	_nSSavePanelSelPrompt                                                                         = objc.RegisterName("prompt")
+	_nSSavePanelSelSetPrompt                                                                      = objc.RegisterName("setPrompt:")
+	_nSSavePanelSelNameFieldLabel                                                                 = objc.RegisterName("nameFieldLabel")
+	_nSSavePanelSelSetNameFieldLabel                                                              = objc.RegisterName("setNameFieldLabel:")
+	_nSSavePanelSelNameFieldStringValue                                                           = objc.RegisterName("nameFieldStringValue")
+	_nSSavePanelSelSetNameFieldStringValue                                                        = objc.RegisterName("setNameFieldStringValue:")
+	_nSSavePanelSelMessage                                                                        = objc.RegisterName("message")
+	_nSSavePanelSelSetMessage                                                                     = objc.RegisterName("setMessage:")
+	_nSSavePanelSelShowsHiddenFiles                                                               = objc.RegisterName("showsHiddenFiles")
+	_nSSavePanelSelSetShowsHiddenFiles                                                            = objc.RegisterName("setShowsHiddenFiles:")
+	_nSSavePanelSelShowsTagField                                                                  = objc.RegisterName("showsTagField")
+	_nSSavePanelSelSetShowsTagField                                                               = objc.RegisterName("setShowsTagField:")
+	_nSSavePanelSelTagNames                                                                       = objc.RegisterName("tagNames")
+	_nSSavePanelSelSetTagNames                                                                    = objc.RegisterName("setTagNames:")
+	_nSSavePanelSelShowsContentTypes                                                              = objc.RegisterName("showsContentTypes")
+	_nSSavePanelSelSetShowsContentTypes                                                           = objc.RegisterName("setShowsContentTypes:")
+	_nSSavePanelSelFilename                                                                       = objc.RegisterName("filename")
+	_nSSavePanelSelDirectory                                                                      = objc.RegisterName("directory")
+	_nSSavePanelSelSetDirectory                                                                   = objc.RegisterName("setDirectory:")
+	_nSSavePanelSelRequiredFileType                                                               = objc.RegisterName("requiredFileType")
+	_nSSavePanelSelSetRequiredFileType                                                            = objc.RegisterName("setRequiredFileType:")
 	_nSSavePanelSelBeginSheetForDirectoryFileModalForWindowModalDelegateDidEndSelectorContextInfo = objc.RegisterName("beginSheetForDirectory:file:modalForWindow:modalDelegate:didEndSelector:contextInfo:")
-	_nSSavePanelSelRunModalForDirectoryFile = objc.RegisterName("runModalForDirectory:file:")
-	_nSSavePanelSelSelectText = objc.RegisterName("selectText:")
-	_nSSavePanelSelAllowedFileTypes = objc.RegisterName("allowedFileTypes")
-	_nSSavePanelSelSetAllowedFileTypes = objc.RegisterName("setAllowedFileTypes:")
+	_nSSavePanelSelRunModalForDirectoryFile                                                       = objc.RegisterName("runModalForDirectory:file:")
+	_nSSavePanelSelSelectText                                                                     = objc.RegisterName("selectText:")
+	_nSSavePanelSelAllowedFileTypes                                                               = objc.RegisterName("allowedFileTypes")
+	_nSSavePanelSelSetAllowedFileTypes                                                            = objc.RegisterName("setAllowedFileTypes:")
 )
 
 func NSSavePanelFromID(id objc.ID) *NSSavePanel {
@@ -90,7 +90,9 @@ func NSSavePanelFromID(id objc.ID) *NSSavePanel {
 // Creates a new instance of the NSSavePanel. This class is not a singleton.
 func NSSavePanelSavePanel() *NSSavePanel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSavePanel), _nSSavePanelSelSavePanel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSavePanelFromID(_ret)
 }
 
@@ -140,14 +142,18 @@ func (o *NSSavePanel) RunModal() int {
 // `NSSavePanel`: Returns the URL to save the file at. A file may already exist at `url` if the user choose to overwrite it. `NSOpenPanel`: Returns the single filename selected by the user. Note: if -allowsMultipleSelection is set, you should use the -URLs on NSOpenPanel instead.
 func (o *NSSavePanel) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // Sets and returns the identifier. The panel's current state such as the root directory and the current directory are saved and restored relative to the identifier. - Note: When the identifier is changed, the properties that depend on the identifier are updated from user defaults. Properties that have a null value in user defaults are not changed (and keep their existing value). - Note: Can only be set during the configuration phase.
 func (o *NSSavePanel) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -159,7 +165,9 @@ func (o *NSSavePanel) SetIdentifier(identifier *foundation.NSString) {
 // `NSSavePanel`/`NSOpenPanel`: Sets and returns the directory that is displayed. Set to `nil` to display the default directory. This method will not block to resolve the URL, and the directory will asynchronously be set, if required. - Note: Can only be set during the configuration phase.
 func (o *NSSavePanel) DirectoryURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelDirectoryURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -193,7 +201,9 @@ func (o *NSSavePanel) SetAllowsOtherFileTypes(allowsOtherFileTypes bool) {
 // `NSSavePanel`:The current type. If set to `nil`, resets to the first allowed content type. Returns `nil` if `allowedContentTypes` is empty. `NSOpenPanel`: Not used. - Note: Asserts that `currentContentType` conforms to `UTTypeData` or `UTTypeDirectory`.
 func (o *NSSavePanel) CurrentContentType() *uniformtypeidentifiers.UTType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelCurrentContentType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return uniformtypeidentifiers.UTTypeFromID(_ret)
 }
 
@@ -205,7 +215,9 @@ func (o *NSSavePanel) SetCurrentContentType(currentContentType *uniformtypeident
 // Sets and returns the accessory view shown in the panel. For applications that link on 10.6 and later, the accessoryView's frame will be observed, and any changes the programmer makes to the frame will automatically be reflected in the panel (including animated changes to the frame height). For applications that link on 26.0 and later and use the Liquid Glass design, the accessoryView's control metrics will be the larger Liquid Glass metrics.
 func (o *NSSavePanel) AccessoryView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelAccessoryView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -267,7 +279,9 @@ func (o *NSSavePanel) SetTreatsFilePackagesAsDirectories(treatsFilePackagesAsDir
 // `NSSavePanel`/`NSOpenPanel`: Sets the text shown on the Open or Save button. If set to an empty string, it will show a localized "Open" for the NSOpenPanel and "Save" for the NSSavePanel. The default value will be the correct localized prompt for the open or save panel, as appropriate.
 func (o *NSSavePanel) Prompt() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelPrompt)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -279,7 +293,9 @@ func (o *NSSavePanel) SetPrompt(prompt *foundation.NSString) {
 // `NSSavePanel`: Sets and returns the text shown to the left of the "name field". Default value is a localized "Save As:" string. `NSOpenPanel`: Not used.
 func (o *NSSavePanel) NameFieldLabel() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelNameFieldLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -291,7 +307,9 @@ func (o *NSSavePanel) SetNameFieldLabel(nameFieldLabel *foundation.NSString) {
 // `NSSavePanel`: Sets and returns the user-editable file name shown in the name field. - Note: Calling the deprecated methods that take a "name:" parameter will overwrite any values set before the panel is shown. - Note: If `[panel isExtensionHidden]` is set to `YES`, the extension will be hidden. - Note: Can only be set during the configuration phase. `NSOpenPanel`: Not used.
 func (o *NSSavePanel) NameFieldStringValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelNameFieldStringValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -303,7 +321,9 @@ func (o *NSSavePanel) SetNameFieldStringValue(nameFieldStringValue *foundation.N
 // `NSSavePanel`/`NSOpenPanel`: Sets and returns the message shown under title of the panel.
 func (o *NSSavePanel) Message() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelMessage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -359,14 +379,18 @@ func (o *NSSavePanel) SetShowsContentTypes(showsContentTypes bool) {
 // Deprecated: Use -URL instead
 func (o *NSSavePanel) Filename() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelFilename)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Deprecated: Use -directoryURL instead
 func (o *NSSavePanel) Directory() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelDirectory)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -378,7 +402,9 @@ func (o *NSSavePanel) SetDirectory(path *foundation.NSString) {
 // Deprecated: Use -allowedContentTypes instead
 func (o *NSSavePanel) RequiredFileType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelRequiredFileType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -415,4 +441,3 @@ func (o *NSSavePanel) AllowedFileTypes() *foundation.NSArray[*foundation.NSStrin
 func (o *NSSavePanel) SetAllowedFileTypes(allowedFileTypes *foundation.NSArray[*foundation.NSString]) {
 	o.Ptr().Send(_nSSavePanelSelSetAllowedFileTypes, allowedFileTypes)
 }
-

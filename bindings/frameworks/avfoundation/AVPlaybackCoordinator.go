@@ -17,17 +17,17 @@ type AVPlaybackCoordinator struct {
 }
 
 var (
-	_clsAVPlaybackCoordinator = _objcClass("AVPlaybackCoordinator")
-	_aVPlaybackCoordinatorSelBeginSuspensionForReason = objc.RegisterName("beginSuspensionForReason:")
-	_aVPlaybackCoordinatorSelExpectedItemTimeAtHostTime = objc.RegisterName("expectedItemTimeAtHostTime:")
-	_aVPlaybackCoordinatorSelOtherParticipants = objc.RegisterName("otherParticipants")
-	_aVPlaybackCoordinatorSelSuspensionReasons = objc.RegisterName("suspensionReasons")
+	_clsAVPlaybackCoordinator                                                      = _objcClass("AVPlaybackCoordinator")
+	_aVPlaybackCoordinatorSelBeginSuspensionForReason                              = objc.RegisterName("beginSuspensionForReason:")
+	_aVPlaybackCoordinatorSelExpectedItemTimeAtHostTime                            = objc.RegisterName("expectedItemTimeAtHostTime:")
+	_aVPlaybackCoordinatorSelOtherParticipants                                     = objc.RegisterName("otherParticipants")
+	_aVPlaybackCoordinatorSelSuspensionReasons                                     = objc.RegisterName("suspensionReasons")
 	_aVPlaybackCoordinatorSelSetParticipantLimitForWaitingOutSuspensionsWithReason = objc.RegisterName("setParticipantLimit:forWaitingOutSuspensionsWithReason:")
-	_aVPlaybackCoordinatorSelParticipantLimitForWaitingOutSuspensionsWithReason = objc.RegisterName("participantLimitForWaitingOutSuspensionsWithReason:")
-	_aVPlaybackCoordinatorSelSuspensionReasonsThatTriggerWaiting = objc.RegisterName("suspensionReasonsThatTriggerWaiting")
-	_aVPlaybackCoordinatorSelSetSuspensionReasonsThatTriggerWaiting = objc.RegisterName("setSuspensionReasonsThatTriggerWaiting:")
-	_aVPlaybackCoordinatorSelPauseSnapsToMediaTimeOfOriginator = objc.RegisterName("pauseSnapsToMediaTimeOfOriginator")
-	_aVPlaybackCoordinatorSelSetPauseSnapsToMediaTimeOfOriginator = objc.RegisterName("setPauseSnapsToMediaTimeOfOriginator:")
+	_aVPlaybackCoordinatorSelParticipantLimitForWaitingOutSuspensionsWithReason    = objc.RegisterName("participantLimitForWaitingOutSuspensionsWithReason:")
+	_aVPlaybackCoordinatorSelSuspensionReasonsThatTriggerWaiting                   = objc.RegisterName("suspensionReasonsThatTriggerWaiting")
+	_aVPlaybackCoordinatorSelSetSuspensionReasonsThatTriggerWaiting                = objc.RegisterName("setSuspensionReasonsThatTriggerWaiting:")
+	_aVPlaybackCoordinatorSelPauseSnapsToMediaTimeOfOriginator                     = objc.RegisterName("pauseSnapsToMediaTimeOfOriginator")
+	_aVPlaybackCoordinatorSelSetPauseSnapsToMediaTimeOfOriginator                  = objc.RegisterName("setPauseSnapsToMediaTimeOfOriginator:")
 )
 
 func AVPlaybackCoordinatorFromID(id objc.ID) *AVPlaybackCoordinator {
@@ -43,7 +43,9 @@ func AVPlaybackCoordinatorFromID(id objc.ID) *AVPlaybackCoordinator {
 // Informs the coordinator that its playback object is detached from the group for some reason and should not receive any playback commands from the coordinator. Use this to tell the coordinator that its player cannot, or should not, participate in coordinated playback temporarily. The coordinator will not respond to playback commands coming from the group and it will also not send any commands to the group. To resume in group playback, end a suspension by calling one of the suspension's end methods. - Parameter suspensionReason: Indicates the reason for the suspension that is shared with other participants. Can be a system-defined reason (see AVCoordinatedPlaybackSuspensionReason*) or a custom string. - NOTE: See the description of AVPlaybackCoordinator subclasses for suspensions automatically begun on behalf of their playback objects, if any.
 func (o *AVPlaybackCoordinator) BeginSuspensionForReason(suspensionReason *foundation.NSString) *AVCoordinatedPlaybackSuspension {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlaybackCoordinatorSelBeginSuspensionForReason, suspensionReason.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCoordinatedPlaybackSuspensionFromID(_ret)
 }
 
@@ -56,7 +58,9 @@ func (o *AVPlaybackCoordinator) ExpectedItemTimeAtHostTime(hostClockTime coremed
 // The playback states of the other participants in the group. Use this property to create UI informing the local user about the state of other participants in the group. - NOTE: The coordinator posts AVPlaybackCoordinatorOtherParticipantsDidChangeNotification when the contents of the array changes.
 func (o *AVPlaybackCoordinator) OtherParticipants() *foundation.NSArray[*AVCoordinatedPlaybackParticipant] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlaybackCoordinatorSelOtherParticipants)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVCoordinatedPlaybackParticipant](_ret)
 }
 
@@ -96,4 +100,3 @@ func (o *AVPlaybackCoordinator) PauseSnapsToMediaTimeOfOriginator() bool {
 func (o *AVPlaybackCoordinator) SetPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator bool) {
 	o.Ptr().Send(_aVPlaybackCoordinatorSelSetPauseSnapsToMediaTimeOfOriginator, pauseSnapsToMediaTimeOfOriginator)
 }
-

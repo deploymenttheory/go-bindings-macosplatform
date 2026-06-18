@@ -16,7 +16,9 @@ type CNNLocalContrastNormalizationNode struct {
 }
 
 // Unwrap returns the underlying [raw.MPSCNNLocalContrastNormalizationNode].
-func (x *CNNLocalContrastNormalizationNode) Unwrap() *raw.MPSCNNLocalContrastNormalizationNode { return x.inner }
+func (x *CNNLocalContrastNormalizationNode) Unwrap() *raw.MPSCNNLocalContrastNormalizationNode {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -154,9 +156,13 @@ func (x *CNNLocalContrastNormalizationNode) SetKernelHeight(kernelHeight uint) {
 	x.inner.SetKernelHeight(kernelHeight)
 }
 
-func (x *CNNLocalContrastNormalizationNode) asCNNNormalizationNode() *raw.MPSCNNNormalizationNode { return &x.inner.MPSCNNNormalizationNode }
+func (x *CNNLocalContrastNormalizationNode) asCNNNormalizationNode() *raw.MPSCNNNormalizationNode {
+	return &x.inner.MPSCNNNormalizationNode
+}
 
-func (x *CNNLocalContrastNormalizationNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSCNNNormalizationNode.MPSNNFilterNode }
+func (x *CNNLocalContrastNormalizationNode) asNNFilterNode() *raw.MPSNNFilterNode {
+	return &x.inner.MPSCNNNormalizationNode.MPSNNFilterNode
+}
 
 // CNNLocalContrastNormalizationNodeable is the interface implemented by [CNNLocalContrastNormalizationNode], for mocking and DI.
 type CNNLocalContrastNormalizationNodeable interface {
@@ -184,4 +190,3 @@ type CNNLocalContrastNormalizationNodeable interface {
 }
 
 var _ CNNLocalContrastNormalizationNodeable = (*CNNLocalContrastNormalizationNode)(nil)
-

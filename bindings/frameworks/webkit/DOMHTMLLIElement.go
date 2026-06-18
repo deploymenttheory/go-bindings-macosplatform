@@ -16,10 +16,10 @@ type DOMHTMLLIElement struct {
 }
 
 var (
-	_clsDOMHTMLLIElement = _objcClass("DOMHTMLLIElement")
-	_dOMHTMLLIElementSelType = objc.RegisterName("type")
-	_dOMHTMLLIElementSelSetType = objc.RegisterName("setType:")
-	_dOMHTMLLIElementSelValue = objc.RegisterName("value")
+	_clsDOMHTMLLIElement         = _objcClass("DOMHTMLLIElement")
+	_dOMHTMLLIElementSelType     = objc.RegisterName("type")
+	_dOMHTMLLIElementSelSetType  = objc.RegisterName("setType:")
+	_dOMHTMLLIElementSelValue    = objc.RegisterName("value")
 	_dOMHTMLLIElementSelSetValue = objc.RegisterName("setValue:")
 )
 
@@ -35,7 +35,9 @@ func DOMHTMLLIElementFromID(id objc.ID) *DOMHTMLLIElement {
 
 func (o *DOMHTMLLIElement) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLLIElementSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -51,4 +53,3 @@ func (o *DOMHTMLLIElement) Value() int {
 func (o *DOMHTMLLIElement) SetValue(value int) {
 	o.Ptr().Send(_dOMHTMLLIElementSelSetValue, value)
 }
-

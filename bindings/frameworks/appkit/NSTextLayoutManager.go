@@ -17,49 +17,49 @@ type NSTextLayoutManager struct {
 }
 
 var (
-	_clsNSTextLayoutManager = _objcClass("NSTextLayoutManager")
-	_nSTextLayoutManagerSelInit = objc.RegisterName("init")
-	_nSTextLayoutManagerSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSTextLayoutManagerSelReplaceTextContentManager = objc.RegisterName("replaceTextContentManager:")
-	_nSTextLayoutManagerSelEnsureLayoutForRange = objc.RegisterName("ensureLayoutForRange:")
-	_nSTextLayoutManagerSelEnsureLayoutForBounds = objc.RegisterName("ensureLayoutForBounds:")
-	_nSTextLayoutManagerSelInvalidateLayoutForRange = objc.RegisterName("invalidateLayoutForRange:")
-	_nSTextLayoutManagerSelTextLayoutFragmentForPosition = objc.RegisterName("textLayoutFragmentForPosition:")
-	_nSTextLayoutManagerSelTextLayoutFragmentForLocation = objc.RegisterName("textLayoutFragmentForLocation:")
+	_clsNSTextLayoutManager                                                     = _objcClass("NSTextLayoutManager")
+	_nSTextLayoutManagerSelInit                                                 = objc.RegisterName("init")
+	_nSTextLayoutManagerSelInitWithCoder                                        = objc.RegisterName("initWithCoder:")
+	_nSTextLayoutManagerSelReplaceTextContentManager                            = objc.RegisterName("replaceTextContentManager:")
+	_nSTextLayoutManagerSelEnsureLayoutForRange                                 = objc.RegisterName("ensureLayoutForRange:")
+	_nSTextLayoutManagerSelEnsureLayoutForBounds                                = objc.RegisterName("ensureLayoutForBounds:")
+	_nSTextLayoutManagerSelInvalidateLayoutForRange                             = objc.RegisterName("invalidateLayoutForRange:")
+	_nSTextLayoutManagerSelTextLayoutFragmentForPosition                        = objc.RegisterName("textLayoutFragmentForPosition:")
+	_nSTextLayoutManagerSelTextLayoutFragmentForLocation                        = objc.RegisterName("textLayoutFragmentForLocation:")
 	_nSTextLayoutManagerSelEnumerateTextLayoutFragmentsFromLocationOptionsUsing = objc.RegisterName("enumerateTextLayoutFragmentsFromLocation:options:usingBlock:")
 	_nSTextLayoutManagerSelEnumerateRenderingAttributesFromLocationReverseUsing = objc.RegisterName("enumerateRenderingAttributesFromLocation:reverse:usingBlock:")
-	_nSTextLayoutManagerSelSetRenderingAttributesForTextRange = objc.RegisterName("setRenderingAttributes:forTextRange:")
-	_nSTextLayoutManagerSelAddRenderingAttributeValueForTextRange = objc.RegisterName("addRenderingAttribute:value:forTextRange:")
-	_nSTextLayoutManagerSelRemoveRenderingAttributeForTextRange = objc.RegisterName("removeRenderingAttribute:forTextRange:")
-	_nSTextLayoutManagerSelInvalidateRenderingAttributesForTextRange = objc.RegisterName("invalidateRenderingAttributesForTextRange:")
-	_nSTextLayoutManagerSelRenderingAttributesForLinkAtLocation = objc.RegisterName("renderingAttributesForLink:atLocation:")
-	_nSTextLayoutManagerSelEnumerateTextSegmentsInRangeTypeOptionsUsing = objc.RegisterName("enumerateTextSegmentsInRange:type:options:usingBlock:")
-	_nSTextLayoutManagerSelReplaceContentsInRangeWithTextElements = objc.RegisterName("replaceContentsInRange:withTextElements:")
-	_nSTextLayoutManagerSelReplaceContentsInRangeWithAttributedString = objc.RegisterName("replaceContentsInRange:withAttributedString:")
-	_nSTextLayoutManagerSelDelegate = objc.RegisterName("delegate")
-	_nSTextLayoutManagerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSTextLayoutManagerSelUsesFontLeading = objc.RegisterName("usesFontLeading")
-	_nSTextLayoutManagerSelSetUsesFontLeading = objc.RegisterName("setUsesFontLeading:")
-	_nSTextLayoutManagerSelLimitsLayoutForSuspiciousContents = objc.RegisterName("limitsLayoutForSuspiciousContents")
-	_nSTextLayoutManagerSelSetLimitsLayoutForSuspiciousContents = objc.RegisterName("setLimitsLayoutForSuspiciousContents:")
-	_nSTextLayoutManagerSelUsesHyphenation = objc.RegisterName("usesHyphenation")
-	_nSTextLayoutManagerSelSetUsesHyphenation = objc.RegisterName("setUsesHyphenation:")
-	_nSTextLayoutManagerSelResolvesNaturalAlignmentWithBaseWritingDirection = objc.RegisterName("resolvesNaturalAlignmentWithBaseWritingDirection")
-	_nSTextLayoutManagerSelSetResolvesNaturalAlignmentWithBaseWritingDirection = objc.RegisterName("setResolvesNaturalAlignmentWithBaseWritingDirection:")
-	_nSTextLayoutManagerSelTextContentManager = objc.RegisterName("textContentManager")
-	_nSTextLayoutManagerSelTextContainer = objc.RegisterName("textContainer")
-	_nSTextLayoutManagerSelSetTextContainer = objc.RegisterName("setTextContainer:")
-	_nSTextLayoutManagerSelUsageBoundsForTextContainer = objc.RegisterName("usageBoundsForTextContainer")
-	_nSTextLayoutManagerSelTextViewportLayoutController = objc.RegisterName("textViewportLayoutController")
-	_nSTextLayoutManagerSelLayoutQueue = objc.RegisterName("layoutQueue")
-	_nSTextLayoutManagerSelSetLayoutQueue = objc.RegisterName("setLayoutQueue:")
-	_nSTextLayoutManagerSelTextSelections = objc.RegisterName("textSelections")
-	_nSTextLayoutManagerSelSetTextSelections = objc.RegisterName("setTextSelections:")
-	_nSTextLayoutManagerSelTextSelectionNavigation = objc.RegisterName("textSelectionNavigation")
-	_nSTextLayoutManagerSelSetTextSelectionNavigation = objc.RegisterName("setTextSelectionNavigation:")
-	_nSTextLayoutManagerSelRenderingAttributesValidator = objc.RegisterName("renderingAttributesValidator")
-	_nSTextLayoutManagerSelSetRenderingAttributesValidator = objc.RegisterName("setRenderingAttributesValidator:")
-	_nSTextLayoutManagerSelLinkRenderingAttributes = objc.RegisterName("linkRenderingAttributes")
+	_nSTextLayoutManagerSelSetRenderingAttributesForTextRange                   = objc.RegisterName("setRenderingAttributes:forTextRange:")
+	_nSTextLayoutManagerSelAddRenderingAttributeValueForTextRange               = objc.RegisterName("addRenderingAttribute:value:forTextRange:")
+	_nSTextLayoutManagerSelRemoveRenderingAttributeForTextRange                 = objc.RegisterName("removeRenderingAttribute:forTextRange:")
+	_nSTextLayoutManagerSelInvalidateRenderingAttributesForTextRange            = objc.RegisterName("invalidateRenderingAttributesForTextRange:")
+	_nSTextLayoutManagerSelRenderingAttributesForLinkAtLocation                 = objc.RegisterName("renderingAttributesForLink:atLocation:")
+	_nSTextLayoutManagerSelEnumerateTextSegmentsInRangeTypeOptionsUsing         = objc.RegisterName("enumerateTextSegmentsInRange:type:options:usingBlock:")
+	_nSTextLayoutManagerSelReplaceContentsInRangeWithTextElements               = objc.RegisterName("replaceContentsInRange:withTextElements:")
+	_nSTextLayoutManagerSelReplaceContentsInRangeWithAttributedString           = objc.RegisterName("replaceContentsInRange:withAttributedString:")
+	_nSTextLayoutManagerSelDelegate                                             = objc.RegisterName("delegate")
+	_nSTextLayoutManagerSelSetDelegate                                          = objc.RegisterName("setDelegate:")
+	_nSTextLayoutManagerSelUsesFontLeading                                      = objc.RegisterName("usesFontLeading")
+	_nSTextLayoutManagerSelSetUsesFontLeading                                   = objc.RegisterName("setUsesFontLeading:")
+	_nSTextLayoutManagerSelLimitsLayoutForSuspiciousContents                    = objc.RegisterName("limitsLayoutForSuspiciousContents")
+	_nSTextLayoutManagerSelSetLimitsLayoutForSuspiciousContents                 = objc.RegisterName("setLimitsLayoutForSuspiciousContents:")
+	_nSTextLayoutManagerSelUsesHyphenation                                      = objc.RegisterName("usesHyphenation")
+	_nSTextLayoutManagerSelSetUsesHyphenation                                   = objc.RegisterName("setUsesHyphenation:")
+	_nSTextLayoutManagerSelResolvesNaturalAlignmentWithBaseWritingDirection     = objc.RegisterName("resolvesNaturalAlignmentWithBaseWritingDirection")
+	_nSTextLayoutManagerSelSetResolvesNaturalAlignmentWithBaseWritingDirection  = objc.RegisterName("setResolvesNaturalAlignmentWithBaseWritingDirection:")
+	_nSTextLayoutManagerSelTextContentManager                                   = objc.RegisterName("textContentManager")
+	_nSTextLayoutManagerSelTextContainer                                        = objc.RegisterName("textContainer")
+	_nSTextLayoutManagerSelSetTextContainer                                     = objc.RegisterName("setTextContainer:")
+	_nSTextLayoutManagerSelUsageBoundsForTextContainer                          = objc.RegisterName("usageBoundsForTextContainer")
+	_nSTextLayoutManagerSelTextViewportLayoutController                         = objc.RegisterName("textViewportLayoutController")
+	_nSTextLayoutManagerSelLayoutQueue                                          = objc.RegisterName("layoutQueue")
+	_nSTextLayoutManagerSelSetLayoutQueue                                       = objc.RegisterName("setLayoutQueue:")
+	_nSTextLayoutManagerSelTextSelections                                       = objc.RegisterName("textSelections")
+	_nSTextLayoutManagerSelSetTextSelections                                    = objc.RegisterName("setTextSelections:")
+	_nSTextLayoutManagerSelTextSelectionNavigation                              = objc.RegisterName("textSelectionNavigation")
+	_nSTextLayoutManagerSelSetTextSelectionNavigation                           = objc.RegisterName("setTextSelectionNavigation:")
+	_nSTextLayoutManagerSelRenderingAttributesValidator                         = objc.RegisterName("renderingAttributesValidator")
+	_nSTextLayoutManagerSelSetRenderingAttributesValidator                      = objc.RegisterName("setRenderingAttributesValidator:")
+	_nSTextLayoutManagerSelLinkRenderingAttributes                              = objc.RegisterName("linkRenderingAttributes")
 )
 
 func NSTextLayoutManagerFromID(id objc.ID) *NSTextLayoutManager {
@@ -74,13 +74,17 @@ func NSTextLayoutManagerFromID(id objc.ID) *NSTextLayoutManager {
 
 func (o *NSTextLayoutManager) Init() *NSTextLayoutManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutManagerSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextLayoutManagerFromID(_ret)
 }
 
 func (o *NSTextLayoutManager) InitWithCoder(coder *foundation.NSCoder) *NSTextLayoutManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutManagerSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextLayoutManagerFromID(_ret)
 }
 
@@ -102,13 +106,17 @@ func (o *NSTextLayoutManager) InvalidateLayoutForRange(range_ *NSTextRange) {
 
 func (o *NSTextLayoutManager) TextLayoutFragmentForPosition(position corefoundation.CGPoint) *NSTextLayoutFragment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutManagerSelTextLayoutFragmentForPosition, position)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextLayoutFragmentFromID(_ret)
 }
 
 func (o *NSTextLayoutManager) TextLayoutFragmentForLocation(location NSTextLocation) *NSTextLayoutFragment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutManagerSelTextLayoutFragmentForLocation, location)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextLayoutFragmentFromID(_ret)
 }
 
@@ -200,7 +208,7 @@ func (o *NSTextLayoutManager) SetUsesHyphenation(usesHyphenation bool) {
 	o.Ptr().Send(_nSTextLayoutManagerSelSetUsesHyphenation, usesHyphenation)
 }
 
-// Specifies the behavior for resolving ``NSTextAlignment.natural`` to the visual alignment. When set to ``true``, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is ``true``.
+// Specifies the behavior for resolving “NSTextAlignment.natural“ to the visual alignment. When set to “true“, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is “true“.
 func (o *NSTextLayoutManager) ResolvesNaturalAlignmentWithBaseWritingDirection() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextLayoutManagerSelResolvesNaturalAlignmentWithBaseWritingDirection)
 	return _ret
@@ -212,13 +220,17 @@ func (o *NSTextLayoutManager) SetResolvesNaturalAlignmentWithBaseWritingDirectio
 
 func (o *NSTextLayoutManager) TextContentManager() *NSTextContentManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutManagerSelTextContentManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextContentManagerFromID(_ret)
 }
 
 func (o *NSTextLayoutManager) TextContainer() *NSTextContainer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutManagerSelTextContainer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextContainerFromID(_ret)
 }
 
@@ -233,13 +245,17 @@ func (o *NSTextLayoutManager) UsageBoundsForTextContainer() corefoundation.CGRec
 
 func (o *NSTextLayoutManager) TextViewportLayoutController() *NSTextViewportLayoutController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutManagerSelTextViewportLayoutController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextViewportLayoutControllerFromID(_ret)
 }
 
 func (o *NSTextLayoutManager) LayoutQueue() *foundation.NSOperationQueue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutManagerSelLayoutQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSOperationQueueFromID(_ret)
 }
 
@@ -249,7 +265,9 @@ func (o *NSTextLayoutManager) SetLayoutQueue(layoutQueue *foundation.NSOperation
 
 func (o *NSTextLayoutManager) TextSelections() *foundation.NSArray[*NSTextSelection] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutManagerSelTextSelections)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSTextSelection](_ret)
 }
 
@@ -259,7 +277,9 @@ func (o *NSTextLayoutManager) SetTextSelections(textSelections *foundation.NSArr
 
 func (o *NSTextLayoutManager) TextSelectionNavigation() *NSTextSelectionNavigation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutManagerSelTextSelectionNavigation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextSelectionNavigationFromID(_ret)
 }
 
@@ -293,4 +313,3 @@ func NSTextLayoutManagerLinkRenderingAttributes() *foundation.NSDictionary[*foun
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](objc.ID(_clsNSTextLayoutManager), _nSTextLayoutManagerSelLinkRenderingAttributes)
 	return _ret
 }
-

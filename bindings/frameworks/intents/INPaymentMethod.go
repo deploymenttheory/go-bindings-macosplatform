@@ -16,13 +16,13 @@ type INPaymentMethod struct {
 }
 
 var (
-	_clsINPaymentMethod = _objcClass("INPaymentMethod")
+	_clsINPaymentMethod                                       = _objcClass("INPaymentMethod")
 	_iNPaymentMethodSelInitWithTypeNameIdentificationHintIcon = objc.RegisterName("initWithType:name:identificationHint:icon:")
-	_iNPaymentMethodSelApplePayPaymentMethod = objc.RegisterName("applePayPaymentMethod")
-	_iNPaymentMethodSelType = objc.RegisterName("type")
-	_iNPaymentMethodSelName = objc.RegisterName("name")
-	_iNPaymentMethodSelIcon = objc.RegisterName("icon")
-	_iNPaymentMethodSelIdentificationHint = objc.RegisterName("identificationHint")
+	_iNPaymentMethodSelApplePayPaymentMethod                  = objc.RegisterName("applePayPaymentMethod")
+	_iNPaymentMethodSelType                                   = objc.RegisterName("type")
+	_iNPaymentMethodSelName                                   = objc.RegisterName("name")
+	_iNPaymentMethodSelIcon                                   = objc.RegisterName("icon")
+	_iNPaymentMethodSelIdentificationHint                     = objc.RegisterName("identificationHint")
 )
 
 func INPaymentMethodFromID(id objc.ID) *INPaymentMethod {
@@ -37,13 +37,17 @@ func INPaymentMethodFromID(id objc.ID) *INPaymentMethod {
 
 func (o *INPaymentMethod) InitWithTypeNameIdentificationHintIcon(type_ INPaymentMethodType, name *foundation.NSString, identificationHint *foundation.NSString, icon *INImage) *INPaymentMethod {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPaymentMethodSelInitWithTypeNameIdentificationHintIcon, type_, name.Ptr(), identificationHint.Ptr(), icon.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INPaymentMethodFromID(_ret)
 }
 
 func INPaymentMethodApplePayPaymentMethod() *INPaymentMethod {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINPaymentMethod), _iNPaymentMethodSelApplePayPaymentMethod)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INPaymentMethodFromID(_ret)
 }
 
@@ -54,19 +58,24 @@ func (o *INPaymentMethod) Type() INPaymentMethodType {
 
 func (o *INPaymentMethod) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPaymentMethodSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INPaymentMethod) Icon() *INImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPaymentMethodSelIcon)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INImageFromID(_ret)
 }
 
 func (o *INPaymentMethod) IdentificationHint() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPaymentMethodSelIdentificationHint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

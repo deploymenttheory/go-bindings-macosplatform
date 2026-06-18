@@ -180,4 +180,3 @@ type URLCacheable interface {
 }
 
 var _ URLCacheable = (*URLCache)(nil)
-

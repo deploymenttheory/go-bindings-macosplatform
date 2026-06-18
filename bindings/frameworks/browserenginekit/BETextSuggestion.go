@@ -16,9 +16,9 @@ type BETextSuggestion struct {
 }
 
 var (
-	_clsBETextSuggestion = _objcClass("BETextSuggestion")
+	_clsBETextSuggestion                  = _objcClass("BETextSuggestion")
 	_bETextSuggestionSelInitWithInputText = objc.RegisterName("initWithInputText:")
-	_bETextSuggestionSelInputText = objc.RegisterName("inputText")
+	_bETextSuggestionSelInputText         = objc.RegisterName("inputText")
 )
 
 func BETextSuggestionFromID(id objc.ID) *BETextSuggestion {
@@ -34,14 +34,17 @@ func BETextSuggestionFromID(id objc.ID) *BETextSuggestion {
 // Initializes a new text suggestion with the given input text.
 func (o *BETextSuggestion) InitWithInputText(inputText *foundation.NSString) *BETextSuggestion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _bETextSuggestionSelInitWithInputText, inputText.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return BETextSuggestionFromID(_ret)
 }
 
 // Text that will be inserted into the document when the user chooses the suggestion.
 func (o *BETextSuggestion) InputText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _bETextSuggestionSelInputText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

@@ -16,17 +16,17 @@ type NSTreeNode struct {
 }
 
 var (
-	_clsNSTreeNode = _objcClass("NSTreeNode")
-	_nSTreeNodeSelTreeNodeWithRepresentedObject = objc.RegisterName("treeNodeWithRepresentedObject:")
-	_nSTreeNodeSelInitWithRepresentedObject = objc.RegisterName("initWithRepresentedObject:")
-	_nSTreeNodeSelDescendantNodeAtIndexPath = objc.RegisterName("descendantNodeAtIndexPath:")
+	_clsNSTreeNode                                   = _objcClass("NSTreeNode")
+	_nSTreeNodeSelTreeNodeWithRepresentedObject      = objc.RegisterName("treeNodeWithRepresentedObject:")
+	_nSTreeNodeSelInitWithRepresentedObject          = objc.RegisterName("initWithRepresentedObject:")
+	_nSTreeNodeSelDescendantNodeAtIndexPath          = objc.RegisterName("descendantNodeAtIndexPath:")
 	_nSTreeNodeSelSortWithSortDescriptorsRecursively = objc.RegisterName("sortWithSortDescriptors:recursively:")
-	_nSTreeNodeSelRepresentedObject = objc.RegisterName("representedObject")
-	_nSTreeNodeSelIndexPath = objc.RegisterName("indexPath")
-	_nSTreeNodeSelIsLeaf = objc.RegisterName("isLeaf")
-	_nSTreeNodeSelChildNodes = objc.RegisterName("childNodes")
-	_nSTreeNodeSelMutableChildNodes = objc.RegisterName("mutableChildNodes")
-	_nSTreeNodeSelParentNode = objc.RegisterName("parentNode")
+	_nSTreeNodeSelRepresentedObject                  = objc.RegisterName("representedObject")
+	_nSTreeNodeSelIndexPath                          = objc.RegisterName("indexPath")
+	_nSTreeNodeSelIsLeaf                             = objc.RegisterName("isLeaf")
+	_nSTreeNodeSelChildNodes                         = objc.RegisterName("childNodes")
+	_nSTreeNodeSelMutableChildNodes                  = objc.RegisterName("mutableChildNodes")
+	_nSTreeNodeSelParentNode                         = objc.RegisterName("parentNode")
 )
 
 func NSTreeNodeFromID(id objc.ID) *NSTreeNode {
@@ -41,19 +41,25 @@ func NSTreeNodeFromID(id objc.ID) *NSTreeNode {
 
 func NSTreeNodeTreeNodeWithRepresentedObject(modelObject objc.ID) *NSTreeNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTreeNode), _nSTreeNodeSelTreeNodeWithRepresentedObject, modelObject)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTreeNodeFromID(_ret)
 }
 
 func (o *NSTreeNode) InitWithRepresentedObject(modelObject objc.ID) *NSTreeNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTreeNodeSelInitWithRepresentedObject, modelObject)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTreeNodeFromID(_ret)
 }
 
 func (o *NSTreeNode) DescendantNodeAtIndexPath(indexPath *foundation.NSIndexPath) *NSTreeNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTreeNodeSelDescendantNodeAtIndexPath, indexPath.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTreeNodeFromID(_ret)
 }
 
@@ -68,7 +74,9 @@ func (o *NSTreeNode) RepresentedObject() objc.ID {
 
 func (o *NSTreeNode) IndexPath() *foundation.NSIndexPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTreeNodeSelIndexPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexPathFromID(_ret)
 }
 
@@ -79,19 +87,24 @@ func (o *NSTreeNode) IsLeaf() bool {
 
 func (o *NSTreeNode) ChildNodes() *foundation.NSArray[*NSTreeNode] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTreeNodeSelChildNodes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSTreeNode](_ret)
 }
 
 func (o *NSTreeNode) MutableChildNodes() *foundation.NSMutableArray[*NSTreeNode] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTreeNodeSelMutableChildNodes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSMutableArrayFromID[*NSTreeNode](_ret)
 }
 
 func (o *NSTreeNode) ParentNode() *NSTreeNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTreeNodeSelParentNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTreeNodeFromID(_ret)
 }
-

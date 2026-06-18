@@ -108,4 +108,3 @@ type IndexPathable interface {
 }
 
 var _ IndexPathable = (*IndexPath)(nil)
-

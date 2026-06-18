@@ -234,4 +234,3 @@ type UserNotificationCenterable interface {
 }
 
 var _ UserNotificationCenterable = (*UserNotificationCenter)(nil)
-

@@ -111,4 +111,3 @@ type ComparisonPredicateable interface {
 }
 
 var _ ComparisonPredicateable = (*ComparisonPredicate)(nil)
-

@@ -228,9 +228,13 @@ func (x *TargetedImageRequest) WithRevision(revision uint) *TargetedImageRequest
 
 func (x *TargetedImageRequest) asTargetedImageRequest() *raw.VNTargetedImageRequest { return x.inner }
 
-func (x *TargetedImageRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
+func (x *TargetedImageRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNImageBasedRequest
+}
 
-func (x *TargetedImageRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+func (x *TargetedImageRequest) asRequest() *raw.VNRequest {
+	return &x.inner.VNImageBasedRequest.VNRequest
+}
 
 // TargetedImageRequestable is the interface implemented by [TargetedImageRequest], for mocking and DI.
 type TargetedImageRequestable interface {
@@ -242,4 +246,3 @@ type TargetedImageRequestable interface {
 }
 
 var _ TargetedImageRequestable = (*TargetedImageRequest)(nil)
-

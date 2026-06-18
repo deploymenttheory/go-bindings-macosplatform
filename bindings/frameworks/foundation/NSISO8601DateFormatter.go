@@ -15,15 +15,15 @@ type NSISO8601DateFormatter struct {
 }
 
 var (
-	_clsNSISO8601DateFormatter = _objcClass("NSISO8601DateFormatter")
-	_nSISO8601DateFormatterSelInit = objc.RegisterName("init")
-	_nSISO8601DateFormatterSelStringFromDate = objc.RegisterName("stringFromDate:")
-	_nSISO8601DateFormatterSelDateFromString = objc.RegisterName("dateFromString:")
+	_clsNSISO8601DateFormatter                                    = _objcClass("NSISO8601DateFormatter")
+	_nSISO8601DateFormatterSelInit                                = objc.RegisterName("init")
+	_nSISO8601DateFormatterSelStringFromDate                      = objc.RegisterName("stringFromDate:")
+	_nSISO8601DateFormatterSelDateFromString                      = objc.RegisterName("dateFromString:")
 	_nSISO8601DateFormatterSelStringFromDateTimeZoneFormatOptions = objc.RegisterName("stringFromDate:timeZone:formatOptions:")
-	_nSISO8601DateFormatterSelTimeZone = objc.RegisterName("timeZone")
-	_nSISO8601DateFormatterSelSetTimeZone = objc.RegisterName("setTimeZone:")
-	_nSISO8601DateFormatterSelFormatOptions = objc.RegisterName("formatOptions")
-	_nSISO8601DateFormatterSelSetFormatOptions = objc.RegisterName("setFormatOptions:")
+	_nSISO8601DateFormatterSelTimeZone                            = objc.RegisterName("timeZone")
+	_nSISO8601DateFormatterSelSetTimeZone                         = objc.RegisterName("setTimeZone:")
+	_nSISO8601DateFormatterSelFormatOptions                       = objc.RegisterName("formatOptions")
+	_nSISO8601DateFormatterSelSetFormatOptions                    = objc.RegisterName("setFormatOptions:")
 )
 
 func NSISO8601DateFormatterFromID(id objc.ID) *NSISO8601DateFormatter {
@@ -38,31 +38,41 @@ func NSISO8601DateFormatterFromID(id objc.ID) *NSISO8601DateFormatter {
 
 func (o *NSISO8601DateFormatter) Init() *NSISO8601DateFormatter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSISO8601DateFormatterSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSISO8601DateFormatterFromID(_ret)
 }
 
 func (o *NSISO8601DateFormatter) StringFromDate(date *NSDate) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSISO8601DateFormatterSelStringFromDate, date.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSISO8601DateFormatter) DateFromString(string_ *NSString) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSISO8601DateFormatterSelDateFromString, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func NSISO8601DateFormatterStringFromDateTimeZoneFormatOptions(date *NSDate, timeZone *NSTimeZone, formatOptions NSISO8601DateFormatOptions) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSISO8601DateFormatter), _nSISO8601DateFormatterSelStringFromDateTimeZoneFormatOptions, date.Ptr(), timeZone.Ptr(), formatOptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSISO8601DateFormatter) TimeZone() *NSTimeZone {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSISO8601DateFormatterSelTimeZone)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTimeZoneFromID(_ret)
 }
 
@@ -78,4 +88,3 @@ func (o *NSISO8601DateFormatter) FormatOptions() NSISO8601DateFormatOptions {
 func (o *NSISO8601DateFormatter) SetFormatOptions(formatOptions NSISO8601DateFormatOptions) {
 	o.Ptr().Send(_nSISO8601DateFormatterSelSetFormatOptions, formatOptions)
 }
-

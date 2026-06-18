@@ -17,13 +17,13 @@ type ISyncChange struct {
 }
 
 var (
-	_clsISyncChange = _objcClass("ISyncChange")
-	_iSyncChangeSelChangeWithTypeRecordIdentifierChanges = objc.RegisterName("changeWithType:recordIdentifier:changes:")
+	_clsISyncChange                                          = _objcClass("ISyncChange")
+	_iSyncChangeSelChangeWithTypeRecordIdentifierChanges     = objc.RegisterName("changeWithType:recordIdentifier:changes:")
 	_iSyncChangeSelInitWithChangeTypeRecordIdentifierChanges = objc.RegisterName("initWithChangeType:recordIdentifier:changes:")
-	_iSyncChangeSelType = objc.RegisterName("type")
-	_iSyncChangeSelRecordIdentifier = objc.RegisterName("recordIdentifier")
-	_iSyncChangeSelRecord = objc.RegisterName("record")
-	_iSyncChangeSelChanges = objc.RegisterName("changes")
+	_iSyncChangeSelType                                      = objc.RegisterName("type")
+	_iSyncChangeSelRecordIdentifier                          = objc.RegisterName("recordIdentifier")
+	_iSyncChangeSelRecord                                    = objc.RegisterName("record")
+	_iSyncChangeSelChanges                                   = objc.RegisterName("changes")
 )
 
 func ISyncChangeFromID(id objc.ID) *ISyncChange {
@@ -57,7 +57,9 @@ func (o *ISyncChange) Type() int {
 // Deprecated: since macOS 10.7.
 func (o *ISyncChange) RecordIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncChangeSelRecordIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -72,4 +74,3 @@ func (o *ISyncChange) Changes() *foundation.NSArray[objc.ID] {
 	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _iSyncChangeSelChanges)
 	return _ret
 }
-

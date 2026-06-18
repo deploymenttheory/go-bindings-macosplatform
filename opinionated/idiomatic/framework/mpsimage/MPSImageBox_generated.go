@@ -89,4 +89,3 @@ type ImageBoxable interface {
 }
 
 var _ ImageBoxable = (*ImageBox)(nil)
-

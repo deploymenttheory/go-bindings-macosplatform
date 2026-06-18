@@ -176,4 +176,3 @@ type AVVideoCompositionInstructionProtocol interface {
 // AVVideoCompositionValidationHandling wraps the ObjC protocol AVVideoCompositionValidationHandling.
 type AVVideoCompositionValidationHandling interface {
 }
-

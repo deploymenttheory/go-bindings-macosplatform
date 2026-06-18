@@ -80,4 +80,3 @@ type WKPDFConfigurationable interface {
 }
 
 var _ WKPDFConfigurationable = (*WKPDFConfiguration)(nil)
-

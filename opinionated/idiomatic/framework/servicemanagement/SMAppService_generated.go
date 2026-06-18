@@ -83,4 +83,3 @@ type AppServiceable interface {
 }
 
 var _ AppServiceable = (*AppService)(nil)
-

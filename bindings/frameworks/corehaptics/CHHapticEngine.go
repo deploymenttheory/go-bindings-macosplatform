@@ -18,35 +18,35 @@ type CHHapticEngine struct {
 }
 
 var (
-	_clsCHHapticEngine = _objcClass("CHHapticEngine")
-	_cHHapticEngineSelCapabilitiesForHardware = objc.RegisterName("capabilitiesForHardware")
-	_cHHapticEngineSelInitAndReturnError = objc.RegisterName("initAndReturnError:")
-	_cHHapticEngineSelInitWithAudioSessionError = objc.RegisterName("initWithAudioSession:error:")
-	_cHHapticEngineSelStartWithCompletionHandler = objc.RegisterName("startWithCompletionHandler:")
-	_cHHapticEngineSelStartAndReturnError = objc.RegisterName("startAndReturnError:")
-	_cHHapticEngineSelStopWithCompletionHandler = objc.RegisterName("stopWithCompletionHandler:")
-	_cHHapticEngineSelNotifyWhenPlayersFinished = objc.RegisterName("notifyWhenPlayersFinished:")
-	_cHHapticEngineSelCreatePlayerWithPatternError = objc.RegisterName("createPlayerWithPattern:error:")
+	_clsCHHapticEngine                                     = _objcClass("CHHapticEngine")
+	_cHHapticEngineSelCapabilitiesForHardware              = objc.RegisterName("capabilitiesForHardware")
+	_cHHapticEngineSelInitAndReturnError                   = objc.RegisterName("initAndReturnError:")
+	_cHHapticEngineSelInitWithAudioSessionError            = objc.RegisterName("initWithAudioSession:error:")
+	_cHHapticEngineSelStartWithCompletionHandler           = objc.RegisterName("startWithCompletionHandler:")
+	_cHHapticEngineSelStartAndReturnError                  = objc.RegisterName("startAndReturnError:")
+	_cHHapticEngineSelStopWithCompletionHandler            = objc.RegisterName("stopWithCompletionHandler:")
+	_cHHapticEngineSelNotifyWhenPlayersFinished            = objc.RegisterName("notifyWhenPlayersFinished:")
+	_cHHapticEngineSelCreatePlayerWithPatternError         = objc.RegisterName("createPlayerWithPattern:error:")
 	_cHHapticEngineSelCreateAdvancedPlayerWithPatternError = objc.RegisterName("createAdvancedPlayerWithPattern:error:")
-	_cHHapticEngineSelRegisterAudioResourceOptionsError = objc.RegisterName("registerAudioResource:options:error:")
-	_cHHapticEngineSelUnregisterAudioResourceError = objc.RegisterName("unregisterAudioResource:error:")
-	_cHHapticEngineSelPlayPatternFromURLError = objc.RegisterName("playPatternFromURL:error:")
-	_cHHapticEngineSelPlayPatternFromDataError = objc.RegisterName("playPatternFromData:error:")
-	_cHHapticEngineSelCurrentTime = objc.RegisterName("currentTime")
-	_cHHapticEngineSelStoppedHandler = objc.RegisterName("stoppedHandler")
-	_cHHapticEngineSelSetStoppedHandler = objc.RegisterName("setStoppedHandler:")
-	_cHHapticEngineSelResetHandler = objc.RegisterName("resetHandler")
-	_cHHapticEngineSelSetResetHandler = objc.RegisterName("setResetHandler:")
-	_cHHapticEngineSelPlaysHapticsOnly = objc.RegisterName("playsHapticsOnly")
-	_cHHapticEngineSelSetPlaysHapticsOnly = objc.RegisterName("setPlaysHapticsOnly:")
-	_cHHapticEngineSelPlaysAudioOnly = objc.RegisterName("playsAudioOnly")
-	_cHHapticEngineSelSetPlaysAudioOnly = objc.RegisterName("setPlaysAudioOnly:")
-	_cHHapticEngineSelIsMutedForAudio = objc.RegisterName("isMutedForAudio")
-	_cHHapticEngineSelSetIsMutedForAudio = objc.RegisterName("setIsMutedForAudio:")
-	_cHHapticEngineSelIsMutedForHaptics = objc.RegisterName("isMutedForHaptics")
-	_cHHapticEngineSelSetIsMutedForHaptics = objc.RegisterName("setIsMutedForHaptics:")
-	_cHHapticEngineSelIsAutoShutdownEnabled = objc.RegisterName("isAutoShutdownEnabled")
-	_cHHapticEngineSelSetAutoShutdownEnabled = objc.RegisterName("setAutoShutdownEnabled:")
+	_cHHapticEngineSelRegisterAudioResourceOptionsError    = objc.RegisterName("registerAudioResource:options:error:")
+	_cHHapticEngineSelUnregisterAudioResourceError         = objc.RegisterName("unregisterAudioResource:error:")
+	_cHHapticEngineSelPlayPatternFromURLError              = objc.RegisterName("playPatternFromURL:error:")
+	_cHHapticEngineSelPlayPatternFromDataError             = objc.RegisterName("playPatternFromData:error:")
+	_cHHapticEngineSelCurrentTime                          = objc.RegisterName("currentTime")
+	_cHHapticEngineSelStoppedHandler                       = objc.RegisterName("stoppedHandler")
+	_cHHapticEngineSelSetStoppedHandler                    = objc.RegisterName("setStoppedHandler:")
+	_cHHapticEngineSelResetHandler                         = objc.RegisterName("resetHandler")
+	_cHHapticEngineSelSetResetHandler                      = objc.RegisterName("setResetHandler:")
+	_cHHapticEngineSelPlaysHapticsOnly                     = objc.RegisterName("playsHapticsOnly")
+	_cHHapticEngineSelSetPlaysHapticsOnly                  = objc.RegisterName("setPlaysHapticsOnly:")
+	_cHHapticEngineSelPlaysAudioOnly                       = objc.RegisterName("playsAudioOnly")
+	_cHHapticEngineSelSetPlaysAudioOnly                    = objc.RegisterName("setPlaysAudioOnly:")
+	_cHHapticEngineSelIsMutedForAudio                      = objc.RegisterName("isMutedForAudio")
+	_cHHapticEngineSelSetIsMutedForAudio                   = objc.RegisterName("setIsMutedForAudio:")
+	_cHHapticEngineSelIsMutedForHaptics                    = objc.RegisterName("isMutedForHaptics")
+	_cHHapticEngineSelSetIsMutedForHaptics                 = objc.RegisterName("setIsMutedForHaptics:")
+	_cHHapticEngineSelIsAutoShutdownEnabled                = objc.RegisterName("isAutoShutdownEnabled")
+	_cHHapticEngineSelSetAutoShutdownEnabled               = objc.RegisterName("setAutoShutdownEnabled:")
 )
 
 func CHHapticEngineFromID(id objc.ID) *CHHapticEngine {
@@ -69,7 +69,9 @@ func CHHapticEngineCapabilitiesForHardware() CHHapticDeviceCapability {
 func (o *CHHapticEngine) InitAndReturnError() (*CHHapticEngine, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticEngineSelInitAndReturnError, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -80,7 +82,9 @@ func (o *CHHapticEngine) InitAndReturnError() (*CHHapticEngine, error) {
 func (o *CHHapticEngine) InitWithAudioSessionError(audioSession objc.ID) (*CHHapticEngine, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticEngineSelInitWithAudioSessionError, audioSession, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -281,4 +285,3 @@ func (o *CHHapticEngine) IsAutoShutdownEnabled() bool {
 func (o *CHHapticEngine) SetAutoShutdownEnabled(autoShutdownEnabled bool) {
 	o.Ptr().Send(_cHHapticEngineSelSetAutoShutdownEnabled, autoShutdownEnabled)
 }
-

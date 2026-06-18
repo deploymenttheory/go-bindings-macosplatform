@@ -16,15 +16,15 @@ type NEPacketTunnelNetworkSettings struct {
 }
 
 var (
-	_clsNEPacketTunnelNetworkSettings = _objcClass("NEPacketTunnelNetworkSettings")
-	_nEPacketTunnelNetworkSettingsSelIPv4Settings = objc.RegisterName("IPv4Settings")
-	_nEPacketTunnelNetworkSettingsSelSetIPv4Settings = objc.RegisterName("setIPv4Settings:")
-	_nEPacketTunnelNetworkSettingsSelIPv6Settings = objc.RegisterName("IPv6Settings")
-	_nEPacketTunnelNetworkSettingsSelSetIPv6Settings = objc.RegisterName("setIPv6Settings:")
-	_nEPacketTunnelNetworkSettingsSelTunnelOverheadBytes = objc.RegisterName("tunnelOverheadBytes")
+	_clsNEPacketTunnelNetworkSettings                       = _objcClass("NEPacketTunnelNetworkSettings")
+	_nEPacketTunnelNetworkSettingsSelIPv4Settings           = objc.RegisterName("IPv4Settings")
+	_nEPacketTunnelNetworkSettingsSelSetIPv4Settings        = objc.RegisterName("setIPv4Settings:")
+	_nEPacketTunnelNetworkSettingsSelIPv6Settings           = objc.RegisterName("IPv6Settings")
+	_nEPacketTunnelNetworkSettingsSelSetIPv6Settings        = objc.RegisterName("setIPv6Settings:")
+	_nEPacketTunnelNetworkSettingsSelTunnelOverheadBytes    = objc.RegisterName("tunnelOverheadBytes")
 	_nEPacketTunnelNetworkSettingsSelSetTunnelOverheadBytes = objc.RegisterName("setTunnelOverheadBytes:")
-	_nEPacketTunnelNetworkSettingsSelMTU = objc.RegisterName("MTU")
-	_nEPacketTunnelNetworkSettingsSelSetMTU = objc.RegisterName("setMTU:")
+	_nEPacketTunnelNetworkSettingsSelMTU                    = objc.RegisterName("MTU")
+	_nEPacketTunnelNetworkSettingsSelSetMTU                 = objc.RegisterName("setMTU:")
 )
 
 func NEPacketTunnelNetworkSettingsFromID(id objc.ID) *NEPacketTunnelNetworkSettings {
@@ -40,7 +40,9 @@ func NEPacketTunnelNetworkSettingsFromID(id objc.ID) *NEPacketTunnelNetworkSetti
 // @property IPv4Settings @discussion An NEIPv4Settings object that contains the desired tunnel IPv4 settings.
 func (o *NEPacketTunnelNetworkSettings) IPv4Settings() *NEIPv4Settings {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEPacketTunnelNetworkSettingsSelIPv4Settings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEIPv4SettingsFromID(_ret)
 }
 
@@ -51,7 +53,9 @@ func (o *NEPacketTunnelNetworkSettings) SetIPv4Settings(iPv4Settings *NEIPv4Sett
 // @property IPv6Settings @discussion An NEIPv6Settings object that contains the desired tunnel IPv6 settings.
 func (o *NEPacketTunnelNetworkSettings) IPv6Settings() *NEIPv6Settings {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEPacketTunnelNetworkSettingsSelIPv6Settings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEIPv6SettingsFromID(_ret)
 }
 
@@ -62,7 +66,9 @@ func (o *NEPacketTunnelNetworkSettings) SetIPv6Settings(iPv6Settings *NEIPv6Sett
 // @property tunnelOverheadBytes @discussion An NSNumber object containing the number of bytes of overhead appended to each outbound packet through the tunnel. The MTU for the TUN interface is computed by subtracting this value from the MTU of the primary physical interface.
 func (o *NEPacketTunnelNetworkSettings) TunnelOverheadBytes() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEPacketTunnelNetworkSettingsSelTunnelOverheadBytes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -73,11 +79,12 @@ func (o *NEPacketTunnelNetworkSettings) SetTunnelOverheadBytes(tunnelOverheadByt
 // @property MTU @discussion An NSNumber object containing the Maximum Transmission Unit (MTU) size in bytes to assign to the TUN interface. If this property is set, the tunnelOverheadBytes property is ignored.
 func (o *NEPacketTunnelNetworkSettings) MTU() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEPacketTunnelNetworkSettingsSelMTU)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *NEPacketTunnelNetworkSettings) SetMTU(mTU *foundation.NSNumber) {
 	o.Ptr().Send(_nEPacketTunnelNetworkSettingsSelSetMTU, mTU.Ptr())
 }
-

@@ -58,4 +58,3 @@ type FilterBrowserViewable interface {
 }
 
 var _ FilterBrowserViewable = (*FilterBrowserView)(nil)
-

@@ -64,4 +64,3 @@ type DeviceLightable interface {
 }
 
 var _ DeviceLightable = (*DeviceLight)(nil)
-

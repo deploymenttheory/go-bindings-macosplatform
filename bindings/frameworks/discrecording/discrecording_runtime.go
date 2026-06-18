@@ -14,8 +14,8 @@ import (
 
 var (
 	_discrecordingLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce         sync.Once
+	_failedSymbols    = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -49,7 +49,9 @@ func _loadLibrary() {
 		return
 	}
 	_register("DRAudioTrackCreate", func() { purego.RegisterLibFunc(&_fnDRAudioTrackCreate, _discrecordingLib, "DRAudioTrackCreate") })
-	_register("DRAudioTrackCreateWithURL", func() { purego.RegisterLibFunc(&_fnDRAudioTrackCreateWithURL, _discrecordingLib, "DRAudioTrackCreateWithURL") })
+	_register("DRAudioTrackCreateWithURL", func() {
+		purego.RegisterLibFunc(&_fnDRAudioTrackCreateWithURL, _discrecordingLib, "DRAudioTrackCreateWithURL")
+	})
 	_register("DRBurnAbort", func() { purego.RegisterLibFunc(&_fnDRBurnAbort, _discrecordingLib, "DRBurnAbort") })
 	_register("DRBurnCopyStatus", func() { purego.RegisterLibFunc(&_fnDRBurnCopyStatus, _discrecordingLib, "DRBurnCopyStatus") })
 	_register("DRBurnCreate", func() { purego.RegisterLibFunc(&_fnDRBurnCreate, _discrecordingLib, "DRBurnCreate") })
@@ -59,25 +61,53 @@ func _loadLibrary() {
 	_register("DRBurnSetProperties", func() { purego.RegisterLibFunc(&_fnDRBurnSetProperties, _discrecordingLib, "DRBurnSetProperties") })
 	_register("DRBurnWriteLayout", func() { purego.RegisterLibFunc(&_fnDRBurnWriteLayout, _discrecordingLib, "DRBurnWriteLayout") })
 	_register("DRCDTextBlockCreate", func() { purego.RegisterLibFunc(&_fnDRCDTextBlockCreate, _discrecordingLib, "DRCDTextBlockCreate") })
-	_register("DRCDTextBlockCreateArrayFromPackList", func() { purego.RegisterLibFunc(&_fnDRCDTextBlockCreateArrayFromPackList, _discrecordingLib, "DRCDTextBlockCreateArrayFromPackList") })
+	_register("DRCDTextBlockCreateArrayFromPackList", func() {
+		purego.RegisterLibFunc(&_fnDRCDTextBlockCreateArrayFromPackList, _discrecordingLib, "DRCDTextBlockCreateArrayFromPackList")
+	})
 	_register("DRCDTextBlockFlatten", func() { purego.RegisterLibFunc(&_fnDRCDTextBlockFlatten, _discrecordingLib, "DRCDTextBlockFlatten") })
-	_register("DRCDTextBlockGetProperties", func() { purego.RegisterLibFunc(&_fnDRCDTextBlockGetProperties, _discrecordingLib, "DRCDTextBlockGetProperties") })
-	_register("DRCDTextBlockGetTrackDictionaries", func() { purego.RegisterLibFunc(&_fnDRCDTextBlockGetTrackDictionaries, _discrecordingLib, "DRCDTextBlockGetTrackDictionaries") })
-	_register("DRCDTextBlockGetTypeID", func() { purego.RegisterLibFunc(&_fnDRCDTextBlockGetTypeID, _discrecordingLib, "DRCDTextBlockGetTypeID") })
+	_register("DRCDTextBlockGetProperties", func() {
+		purego.RegisterLibFunc(&_fnDRCDTextBlockGetProperties, _discrecordingLib, "DRCDTextBlockGetProperties")
+	})
+	_register("DRCDTextBlockGetTrackDictionaries", func() {
+		purego.RegisterLibFunc(&_fnDRCDTextBlockGetTrackDictionaries, _discrecordingLib, "DRCDTextBlockGetTrackDictionaries")
+	})
+	_register("DRCDTextBlockGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnDRCDTextBlockGetTypeID, _discrecordingLib, "DRCDTextBlockGetTypeID")
+	})
 	_register("DRCDTextBlockGetValue", func() { purego.RegisterLibFunc(&_fnDRCDTextBlockGetValue, _discrecordingLib, "DRCDTextBlockGetValue") })
-	_register("DRCDTextBlockSetProperties", func() { purego.RegisterLibFunc(&_fnDRCDTextBlockSetProperties, _discrecordingLib, "DRCDTextBlockSetProperties") })
-	_register("DRCDTextBlockSetTrackDictionaries", func() { purego.RegisterLibFunc(&_fnDRCDTextBlockSetTrackDictionaries, _discrecordingLib, "DRCDTextBlockSetTrackDictionaries") })
+	_register("DRCDTextBlockSetProperties", func() {
+		purego.RegisterLibFunc(&_fnDRCDTextBlockSetProperties, _discrecordingLib, "DRCDTextBlockSetProperties")
+	})
+	_register("DRCDTextBlockSetTrackDictionaries", func() {
+		purego.RegisterLibFunc(&_fnDRCDTextBlockSetTrackDictionaries, _discrecordingLib, "DRCDTextBlockSetTrackDictionaries")
+	})
 	_register("DRCDTextBlockSetValue", func() { purego.RegisterLibFunc(&_fnDRCDTextBlockSetValue, _discrecordingLib, "DRCDTextBlockSetValue") })
 	_register("DRCopyDeviceArray", func() { purego.RegisterLibFunc(&_fnDRCopyDeviceArray, _discrecordingLib, "DRCopyDeviceArray") })
-	_register("DRCopyLocalizedStringForAdditionalSense", func() { purego.RegisterLibFunc(&_fnDRCopyLocalizedStringForAdditionalSense, _discrecordingLib, "DRCopyLocalizedStringForAdditionalSense") })
-	_register("DRCopyLocalizedStringForDiscRecordingError", func() { purego.RegisterLibFunc(&_fnDRCopyLocalizedStringForDiscRecordingError, _discrecordingLib, "DRCopyLocalizedStringForDiscRecordingError") })
-	_register("DRCopyLocalizedStringForSenseCode", func() { purego.RegisterLibFunc(&_fnDRCopyLocalizedStringForSenseCode, _discrecordingLib, "DRCopyLocalizedStringForSenseCode") })
-	_register("DRCopyLocalizedStringForValue", func() { purego.RegisterLibFunc(&_fnDRCopyLocalizedStringForValue, _discrecordingLib, "DRCopyLocalizedStringForValue") })
-	_register("DRDeviceAcquireExclusiveAccess", func() { purego.RegisterLibFunc(&_fnDRDeviceAcquireExclusiveAccess, _discrecordingLib, "DRDeviceAcquireExclusiveAccess") })
-	_register("DRDeviceAcquireMediaReservation", func() { purego.RegisterLibFunc(&_fnDRDeviceAcquireMediaReservation, _discrecordingLib, "DRDeviceAcquireMediaReservation") })
+	_register("DRCopyLocalizedStringForAdditionalSense", func() {
+		purego.RegisterLibFunc(&_fnDRCopyLocalizedStringForAdditionalSense, _discrecordingLib, "DRCopyLocalizedStringForAdditionalSense")
+	})
+	_register("DRCopyLocalizedStringForDiscRecordingError", func() {
+		purego.RegisterLibFunc(&_fnDRCopyLocalizedStringForDiscRecordingError, _discrecordingLib, "DRCopyLocalizedStringForDiscRecordingError")
+	})
+	_register("DRCopyLocalizedStringForSenseCode", func() {
+		purego.RegisterLibFunc(&_fnDRCopyLocalizedStringForSenseCode, _discrecordingLib, "DRCopyLocalizedStringForSenseCode")
+	})
+	_register("DRCopyLocalizedStringForValue", func() {
+		purego.RegisterLibFunc(&_fnDRCopyLocalizedStringForValue, _discrecordingLib, "DRCopyLocalizedStringForValue")
+	})
+	_register("DRDeviceAcquireExclusiveAccess", func() {
+		purego.RegisterLibFunc(&_fnDRDeviceAcquireExclusiveAccess, _discrecordingLib, "DRDeviceAcquireExclusiveAccess")
+	})
+	_register("DRDeviceAcquireMediaReservation", func() {
+		purego.RegisterLibFunc(&_fnDRDeviceAcquireMediaReservation, _discrecordingLib, "DRDeviceAcquireMediaReservation")
+	})
 	_register("DRDeviceCloseTray", func() { purego.RegisterLibFunc(&_fnDRDeviceCloseTray, _discrecordingLib, "DRDeviceCloseTray") })
-	_register("DRDeviceCopyDeviceForBSDName", func() { purego.RegisterLibFunc(&_fnDRDeviceCopyDeviceForBSDName, _discrecordingLib, "DRDeviceCopyDeviceForBSDName") })
-	_register("DRDeviceCopyDeviceForIORegistryEntryPath", func() { purego.RegisterLibFunc(&_fnDRDeviceCopyDeviceForIORegistryEntryPath, _discrecordingLib, "DRDeviceCopyDeviceForIORegistryEntryPath") })
+	_register("DRDeviceCopyDeviceForBSDName", func() {
+		purego.RegisterLibFunc(&_fnDRDeviceCopyDeviceForBSDName, _discrecordingLib, "DRDeviceCopyDeviceForBSDName")
+	})
+	_register("DRDeviceCopyDeviceForIORegistryEntryPath", func() {
+		purego.RegisterLibFunc(&_fnDRDeviceCopyDeviceForIORegistryEntryPath, _discrecordingLib, "DRDeviceCopyDeviceForIORegistryEntryPath")
+	})
 	_register("DRDeviceCopyInfo", func() { purego.RegisterLibFunc(&_fnDRDeviceCopyInfo, _discrecordingLib, "DRDeviceCopyInfo") })
 	_register("DRDeviceCopyStatus", func() { purego.RegisterLibFunc(&_fnDRDeviceCopyStatus, _discrecordingLib, "DRDeviceCopyStatus") })
 	_register("DRDeviceEjectMedia", func() { purego.RegisterLibFunc(&_fnDRDeviceEjectMedia, _discrecordingLib, "DRDeviceEjectMedia") })
@@ -85,8 +115,12 @@ func _loadLibrary() {
 	_register("DRDeviceIsValid", func() { purego.RegisterLibFunc(&_fnDRDeviceIsValid, _discrecordingLib, "DRDeviceIsValid") })
 	_register("DRDeviceKPSForXFactor", func() { purego.RegisterLibFunc(&_fnDRDeviceKPSForXFactor, _discrecordingLib, "DRDeviceKPSForXFactor") })
 	_register("DRDeviceOpenTray", func() { purego.RegisterLibFunc(&_fnDRDeviceOpenTray, _discrecordingLib, "DRDeviceOpenTray") })
-	_register("DRDeviceReleaseExclusiveAccess", func() { purego.RegisterLibFunc(&_fnDRDeviceReleaseExclusiveAccess, _discrecordingLib, "DRDeviceReleaseExclusiveAccess") })
-	_register("DRDeviceReleaseMediaReservation", func() { purego.RegisterLibFunc(&_fnDRDeviceReleaseMediaReservation, _discrecordingLib, "DRDeviceReleaseMediaReservation") })
+	_register("DRDeviceReleaseExclusiveAccess", func() {
+		purego.RegisterLibFunc(&_fnDRDeviceReleaseExclusiveAccess, _discrecordingLib, "DRDeviceReleaseExclusiveAccess")
+	})
+	_register("DRDeviceReleaseMediaReservation", func() {
+		purego.RegisterLibFunc(&_fnDRDeviceReleaseMediaReservation, _discrecordingLib, "DRDeviceReleaseMediaReservation")
+	})
 	_register("DRDeviceXFactorForKPS", func() { purego.RegisterLibFunc(&_fnDRDeviceXFactorForKPS, _discrecordingLib, "DRDeviceXFactorForKPS") })
 	_register("DREraseCopyStatus", func() { purego.RegisterLibFunc(&_fnDREraseCopyStatus, _discrecordingLib, "DREraseCopyStatus") })
 	_register("DREraseCreate", func() { purego.RegisterLibFunc(&_fnDREraseCreate, _discrecordingLib, "DREraseCreate") })
@@ -95,48 +129,102 @@ func _loadLibrary() {
 	_register("DREraseGetTypeID", func() { purego.RegisterLibFunc(&_fnDREraseGetTypeID, _discrecordingLib, "DREraseGetTypeID") })
 	_register("DREraseSetProperties", func() { purego.RegisterLibFunc(&_fnDREraseSetProperties, _discrecordingLib, "DREraseSetProperties") })
 	_register("DREraseStart", func() { purego.RegisterLibFunc(&_fnDREraseStart, _discrecordingLib, "DREraseStart") })
-	_register("DRFSObjectCopyBaseName", func() { purego.RegisterLibFunc(&_fnDRFSObjectCopyBaseName, _discrecordingLib, "DRFSObjectCopyBaseName") })
-	_register("DRFSObjectCopyFilesystemProperties", func() { purego.RegisterLibFunc(&_fnDRFSObjectCopyFilesystemProperties, _discrecordingLib, "DRFSObjectCopyFilesystemProperties") })
-	_register("DRFSObjectCopyFilesystemProperty", func() { purego.RegisterLibFunc(&_fnDRFSObjectCopyFilesystemProperty, _discrecordingLib, "DRFSObjectCopyFilesystemProperty") })
-	_register("DRFSObjectCopyMangledName", func() { purego.RegisterLibFunc(&_fnDRFSObjectCopyMangledName, _discrecordingLib, "DRFSObjectCopyMangledName") })
-	_register("DRFSObjectCopyMangledNames", func() { purego.RegisterLibFunc(&_fnDRFSObjectCopyMangledNames, _discrecordingLib, "DRFSObjectCopyMangledNames") })
+	_register("DRFSObjectCopyBaseName", func() {
+		purego.RegisterLibFunc(&_fnDRFSObjectCopyBaseName, _discrecordingLib, "DRFSObjectCopyBaseName")
+	})
+	_register("DRFSObjectCopyFilesystemProperties", func() {
+		purego.RegisterLibFunc(&_fnDRFSObjectCopyFilesystemProperties, _discrecordingLib, "DRFSObjectCopyFilesystemProperties")
+	})
+	_register("DRFSObjectCopyFilesystemProperty", func() {
+		purego.RegisterLibFunc(&_fnDRFSObjectCopyFilesystemProperty, _discrecordingLib, "DRFSObjectCopyFilesystemProperty")
+	})
+	_register("DRFSObjectCopyMangledName", func() {
+		purego.RegisterLibFunc(&_fnDRFSObjectCopyMangledName, _discrecordingLib, "DRFSObjectCopyMangledName")
+	})
+	_register("DRFSObjectCopyMangledNames", func() {
+		purego.RegisterLibFunc(&_fnDRFSObjectCopyMangledNames, _discrecordingLib, "DRFSObjectCopyMangledNames")
+	})
 	_register("DRFSObjectCopyRealURL", func() { purego.RegisterLibFunc(&_fnDRFSObjectCopyRealURL, _discrecordingLib, "DRFSObjectCopyRealURL") })
-	_register("DRFSObjectCopySpecificName", func() { purego.RegisterLibFunc(&_fnDRFSObjectCopySpecificName, _discrecordingLib, "DRFSObjectCopySpecificName") })
-	_register("DRFSObjectCopySpecificNames", func() { purego.RegisterLibFunc(&_fnDRFSObjectCopySpecificNames, _discrecordingLib, "DRFSObjectCopySpecificNames") })
-	_register("DRFSObjectGetFilesystemMask", func() { purego.RegisterLibFunc(&_fnDRFSObjectGetFilesystemMask, _discrecordingLib, "DRFSObjectGetFilesystemMask") })
+	_register("DRFSObjectCopySpecificName", func() {
+		purego.RegisterLibFunc(&_fnDRFSObjectCopySpecificName, _discrecordingLib, "DRFSObjectCopySpecificName")
+	})
+	_register("DRFSObjectCopySpecificNames", func() {
+		purego.RegisterLibFunc(&_fnDRFSObjectCopySpecificNames, _discrecordingLib, "DRFSObjectCopySpecificNames")
+	})
+	_register("DRFSObjectGetFilesystemMask", func() {
+		purego.RegisterLibFunc(&_fnDRFSObjectGetFilesystemMask, _discrecordingLib, "DRFSObjectGetFilesystemMask")
+	})
 	_register("DRFSObjectGetParent", func() { purego.RegisterLibFunc(&_fnDRFSObjectGetParent, _discrecordingLib, "DRFSObjectGetParent") })
-	_register("DRFSObjectGetRealFSRef", func() { purego.RegisterLibFunc(&_fnDRFSObjectGetRealFSRef, _discrecordingLib, "DRFSObjectGetRealFSRef") })
+	_register("DRFSObjectGetRealFSRef", func() {
+		purego.RegisterLibFunc(&_fnDRFSObjectGetRealFSRef, _discrecordingLib, "DRFSObjectGetRealFSRef")
+	})
 	_register("DRFSObjectIsVirtual", func() { purego.RegisterLibFunc(&_fnDRFSObjectIsVirtual, _discrecordingLib, "DRFSObjectIsVirtual") })
 	_register("DRFSObjectSetBaseName", func() { purego.RegisterLibFunc(&_fnDRFSObjectSetBaseName, _discrecordingLib, "DRFSObjectSetBaseName") })
-	_register("DRFSObjectSetFilesystemMask", func() { purego.RegisterLibFunc(&_fnDRFSObjectSetFilesystemMask, _discrecordingLib, "DRFSObjectSetFilesystemMask") })
-	_register("DRFSObjectSetFilesystemProperties", func() { purego.RegisterLibFunc(&_fnDRFSObjectSetFilesystemProperties, _discrecordingLib, "DRFSObjectSetFilesystemProperties") })
-	_register("DRFSObjectSetFilesystemProperty", func() { purego.RegisterLibFunc(&_fnDRFSObjectSetFilesystemProperty, _discrecordingLib, "DRFSObjectSetFilesystemProperty") })
-	_register("DRFSObjectSetSpecificName", func() { purego.RegisterLibFunc(&_fnDRFSObjectSetSpecificName, _discrecordingLib, "DRFSObjectSetSpecificName") })
-	_register("DRFSObjectSetSpecificNames", func() { purego.RegisterLibFunc(&_fnDRFSObjectSetSpecificNames, _discrecordingLib, "DRFSObjectSetSpecificNames") })
+	_register("DRFSObjectSetFilesystemMask", func() {
+		purego.RegisterLibFunc(&_fnDRFSObjectSetFilesystemMask, _discrecordingLib, "DRFSObjectSetFilesystemMask")
+	})
+	_register("DRFSObjectSetFilesystemProperties", func() {
+		purego.RegisterLibFunc(&_fnDRFSObjectSetFilesystemProperties, _discrecordingLib, "DRFSObjectSetFilesystemProperties")
+	})
+	_register("DRFSObjectSetFilesystemProperty", func() {
+		purego.RegisterLibFunc(&_fnDRFSObjectSetFilesystemProperty, _discrecordingLib, "DRFSObjectSetFilesystemProperty")
+	})
+	_register("DRFSObjectSetSpecificName", func() {
+		purego.RegisterLibFunc(&_fnDRFSObjectSetSpecificName, _discrecordingLib, "DRFSObjectSetSpecificName")
+	})
+	_register("DRFSObjectSetSpecificNames", func() {
+		purego.RegisterLibFunc(&_fnDRFSObjectSetSpecificNames, _discrecordingLib, "DRFSObjectSetSpecificNames")
+	})
 	_register("DRFileCreateReal", func() { purego.RegisterLibFunc(&_fnDRFileCreateReal, _discrecordingLib, "DRFileCreateReal") })
-	_register("DRFileCreateRealWithURL", func() { purego.RegisterLibFunc(&_fnDRFileCreateRealWithURL, _discrecordingLib, "DRFileCreateRealWithURL") })
-	_register("DRFileCreateVirtualLink", func() { purego.RegisterLibFunc(&_fnDRFileCreateVirtualLink, _discrecordingLib, "DRFileCreateVirtualLink") })
-	_register("DRFileCreateVirtualWithCallback", func() { purego.RegisterLibFunc(&_fnDRFileCreateVirtualWithCallback, _discrecordingLib, "DRFileCreateVirtualWithCallback") })
-	_register("DRFileCreateVirtualWithData", func() { purego.RegisterLibFunc(&_fnDRFileCreateVirtualWithData, _discrecordingLib, "DRFileCreateVirtualWithData") })
+	_register("DRFileCreateRealWithURL", func() {
+		purego.RegisterLibFunc(&_fnDRFileCreateRealWithURL, _discrecordingLib, "DRFileCreateRealWithURL")
+	})
+	_register("DRFileCreateVirtualLink", func() {
+		purego.RegisterLibFunc(&_fnDRFileCreateVirtualLink, _discrecordingLib, "DRFileCreateVirtualLink")
+	})
+	_register("DRFileCreateVirtualWithCallback", func() {
+		purego.RegisterLibFunc(&_fnDRFileCreateVirtualWithCallback, _discrecordingLib, "DRFileCreateVirtualWithCallback")
+	})
+	_register("DRFileCreateVirtualWithData", func() {
+		purego.RegisterLibFunc(&_fnDRFileCreateVirtualWithData, _discrecordingLib, "DRFileCreateVirtualWithData")
+	})
 	_register("DRFileGetTypeID", func() { purego.RegisterLibFunc(&_fnDRFileGetTypeID, _discrecordingLib, "DRFileGetTypeID") })
-	_register("DRFilesystemTrackCreate", func() { purego.RegisterLibFunc(&_fnDRFilesystemTrackCreate, _discrecordingLib, "DRFilesystemTrackCreate") })
-	_register("DRFilesystemTrackEstimateOverhead", func() { purego.RegisterLibFunc(&_fnDRFilesystemTrackEstimateOverhead, _discrecordingLib, "DRFilesystemTrackEstimateOverhead") })
+	_register("DRFilesystemTrackCreate", func() {
+		purego.RegisterLibFunc(&_fnDRFilesystemTrackCreate, _discrecordingLib, "DRFilesystemTrackCreate")
+	})
+	_register("DRFilesystemTrackEstimateOverhead", func() {
+		purego.RegisterLibFunc(&_fnDRFilesystemTrackEstimateOverhead, _discrecordingLib, "DRFilesystemTrackEstimateOverhead")
+	})
 	_register("DRFolderAddChild", func() { purego.RegisterLibFunc(&_fnDRFolderAddChild, _discrecordingLib, "DRFolderAddChild") })
-	_register("DRFolderConvertRealToVirtual", func() { purego.RegisterLibFunc(&_fnDRFolderConvertRealToVirtual, _discrecordingLib, "DRFolderConvertRealToVirtual") })
+	_register("DRFolderConvertRealToVirtual", func() {
+		purego.RegisterLibFunc(&_fnDRFolderConvertRealToVirtual, _discrecordingLib, "DRFolderConvertRealToVirtual")
+	})
 	_register("DRFolderCopyChildren", func() { purego.RegisterLibFunc(&_fnDRFolderCopyChildren, _discrecordingLib, "DRFolderCopyChildren") })
 	_register("DRFolderCountChildren", func() { purego.RegisterLibFunc(&_fnDRFolderCountChildren, _discrecordingLib, "DRFolderCountChildren") })
 	_register("DRFolderCreateReal", func() { purego.RegisterLibFunc(&_fnDRFolderCreateReal, _discrecordingLib, "DRFolderCreateReal") })
-	_register("DRFolderCreateRealWithURL", func() { purego.RegisterLibFunc(&_fnDRFolderCreateRealWithURL, _discrecordingLib, "DRFolderCreateRealWithURL") })
+	_register("DRFolderCreateRealWithURL", func() {
+		purego.RegisterLibFunc(&_fnDRFolderCreateRealWithURL, _discrecordingLib, "DRFolderCreateRealWithURL")
+	})
 	_register("DRFolderCreateVirtual", func() { purego.RegisterLibFunc(&_fnDRFolderCreateVirtual, _discrecordingLib, "DRFolderCreateVirtual") })
 	_register("DRFolderGetTypeID", func() { purego.RegisterLibFunc(&_fnDRFolderGetTypeID, _discrecordingLib, "DRFolderGetTypeID") })
 	_register("DRFolderRemoveChild", func() { purego.RegisterLibFunc(&_fnDRFolderRemoveChild, _discrecordingLib, "DRFolderRemoveChild") })
 	_register("DRGetRefCon", func() { purego.RegisterLibFunc(&_fnDRGetRefCon, _discrecordingLib, "DRGetRefCon") })
 	_register("DRGetVersion", func() { purego.RegisterLibFunc(&_fnDRGetVersion, _discrecordingLib, "DRGetVersion") })
-	_register("DRNotificationCenterAddObserver", func() { purego.RegisterLibFunc(&_fnDRNotificationCenterAddObserver, _discrecordingLib, "DRNotificationCenterAddObserver") })
-	_register("DRNotificationCenterCreate", func() { purego.RegisterLibFunc(&_fnDRNotificationCenterCreate, _discrecordingLib, "DRNotificationCenterCreate") })
-	_register("DRNotificationCenterCreateRunLoopSource", func() { purego.RegisterLibFunc(&_fnDRNotificationCenterCreateRunLoopSource, _discrecordingLib, "DRNotificationCenterCreateRunLoopSource") })
-	_register("DRNotificationCenterGetTypeID", func() { purego.RegisterLibFunc(&_fnDRNotificationCenterGetTypeID, _discrecordingLib, "DRNotificationCenterGetTypeID") })
-	_register("DRNotificationCenterRemoveObserver", func() { purego.RegisterLibFunc(&_fnDRNotificationCenterRemoveObserver, _discrecordingLib, "DRNotificationCenterRemoveObserver") })
+	_register("DRNotificationCenterAddObserver", func() {
+		purego.RegisterLibFunc(&_fnDRNotificationCenterAddObserver, _discrecordingLib, "DRNotificationCenterAddObserver")
+	})
+	_register("DRNotificationCenterCreate", func() {
+		purego.RegisterLibFunc(&_fnDRNotificationCenterCreate, _discrecordingLib, "DRNotificationCenterCreate")
+	})
+	_register("DRNotificationCenterCreateRunLoopSource", func() {
+		purego.RegisterLibFunc(&_fnDRNotificationCenterCreateRunLoopSource, _discrecordingLib, "DRNotificationCenterCreateRunLoopSource")
+	})
+	_register("DRNotificationCenterGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnDRNotificationCenterGetTypeID, _discrecordingLib, "DRNotificationCenterGetTypeID")
+	})
+	_register("DRNotificationCenterRemoveObserver", func() {
+		purego.RegisterLibFunc(&_fnDRNotificationCenterRemoveObserver, _discrecordingLib, "DRNotificationCenterRemoveObserver")
+	})
 	_register("DRSetRefCon", func() { purego.RegisterLibFunc(&_fnDRSetRefCon, _discrecordingLib, "DRSetRefCon") })
 	_register("DRTrackCreate", func() { purego.RegisterLibFunc(&_fnDRTrackCreate, _discrecordingLib, "DRTrackCreate") })
 	_register("DRTrackEstimateLength", func() { purego.RegisterLibFunc(&_fnDRTrackEstimateLength, _discrecordingLib, "DRTrackEstimateLength") })

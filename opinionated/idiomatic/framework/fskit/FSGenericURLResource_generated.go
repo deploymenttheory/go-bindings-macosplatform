@@ -51,4 +51,3 @@ type GenericURLResourceable interface {
 }
 
 var _ GenericURLResourceable = (*GenericURLResource)(nil)
-

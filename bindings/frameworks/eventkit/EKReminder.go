@@ -16,18 +16,18 @@ type EKReminder struct {
 }
 
 var (
-	_clsEKReminder = _objcClass("EKReminder")
+	_clsEKReminder                       = _objcClass("EKReminder")
 	_eKReminderSelReminderWithEventStore = objc.RegisterName("reminderWithEventStore:")
-	_eKReminderSelStartDateComponents = objc.RegisterName("startDateComponents")
+	_eKReminderSelStartDateComponents    = objc.RegisterName("startDateComponents")
 	_eKReminderSelSetStartDateComponents = objc.RegisterName("setStartDateComponents:")
-	_eKReminderSelDueDateComponents = objc.RegisterName("dueDateComponents")
-	_eKReminderSelSetDueDateComponents = objc.RegisterName("setDueDateComponents:")
-	_eKReminderSelIsCompleted = objc.RegisterName("isCompleted")
-	_eKReminderSelSetCompleted = objc.RegisterName("setCompleted:")
-	_eKReminderSelCompletionDate = objc.RegisterName("completionDate")
-	_eKReminderSelSetCompletionDate = objc.RegisterName("setCompletionDate:")
-	_eKReminderSelPriority = objc.RegisterName("priority")
-	_eKReminderSelSetPriority = objc.RegisterName("setPriority:")
+	_eKReminderSelDueDateComponents      = objc.RegisterName("dueDateComponents")
+	_eKReminderSelSetDueDateComponents   = objc.RegisterName("setDueDateComponents:")
+	_eKReminderSelIsCompleted            = objc.RegisterName("isCompleted")
+	_eKReminderSelSetCompleted           = objc.RegisterName("setCompleted:")
+	_eKReminderSelCompletionDate         = objc.RegisterName("completionDate")
+	_eKReminderSelSetCompletionDate      = objc.RegisterName("setCompletionDate:")
+	_eKReminderSelPriority               = objc.RegisterName("priority")
+	_eKReminderSelSetPriority            = objc.RegisterName("setPriority:")
 )
 
 func EKReminderFromID(id objc.ID) *EKReminder {
@@ -43,14 +43,18 @@ func EKReminderFromID(id objc.ID) *EKReminder {
 // @method     reminderWithEventStore: @abstract   Creates a new reminder in the given event store.
 func EKReminderReminderWithEventStore(eventStore *EKEventStore) *EKReminder {
 	_ret := objc.Send[objc.ID](objc.ID(_clsEKReminder), _eKReminderSelReminderWithEventStore, eventStore.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EKReminderFromID(_ret)
 }
 
 // @property   startDateComponents @abstract   The start date of the task, as date components. @discussion The use of date components allows the start date and its time zone to be represented in a single property. A nil time zone represents a floating date.  Setting a date component without a hour, minute and second component will set allDay to YES. If you set this property, the calendar must be set to NSCalendarIdentifierGregorian. An exception is raised otherwise.
 func (o *EKReminder) StartDateComponents() *foundation.NSDateComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKReminderSelStartDateComponents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateComponentsFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *EKReminder) SetStartDateComponents(startDateComponents *foundation.NSDa
 // @property   dueDateComponents @abstract   The date by which this reminder should be completed. @discussion The use of date components allows the due date and its time zone to be represented in a single property. A nil time zone represents a floating date.  Setting a date component without a hour, minute and second component will set allDay to YES. If you set this property, the calendar must be set to NSCalendarIdentifierGregorian. An exception is raised otherwise. On iOS, if you set the due date for a reminder, you must also set a start date, otherwise you will receive an error (EKErrorNoStartDate) when attempting to save this reminder. This is not a requirement on OS X.
 func (o *EKReminder) DueDateComponents() *foundation.NSDateComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKReminderSelDueDateComponents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateComponentsFromID(_ret)
 }
 
@@ -82,7 +88,9 @@ func (o *EKReminder) SetCompleted(completed bool) {
 // @property   completionDate @abstract   The date on which this reminder was completed.
 func (o *EKReminder) CompletionDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKReminderSelCompletionDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -99,4 +107,3 @@ func (o *EKReminder) Priority() uint {
 func (o *EKReminder) SetPriority(priority uint) {
 	o.Ptr().Send(_eKReminderSelSetPriority, priority)
 }
-

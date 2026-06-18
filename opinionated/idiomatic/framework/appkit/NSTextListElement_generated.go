@@ -70,7 +70,9 @@ func (x *TextListElement) MarkerAttributes() *foundation.NSDictionary[*foundatio
 
 func (x *TextListElement) asTextParagraph() *raw.NSTextParagraph { return &x.inner.NSTextParagraph }
 
-func (x *TextListElement) asTextElement() *raw.NSTextElement { return &x.inner.NSTextParagraph.NSTextElement }
+func (x *TextListElement) asTextElement() *raw.NSTextElement {
+	return &x.inner.NSTextParagraph.NSTextElement
+}
 
 // TextListElementable is the interface implemented by [TextListElement], for mocking and DI.
 type TextListElementable interface {
@@ -83,4 +85,3 @@ type TextListElementable interface {
 }
 
 var _ TextListElementable = (*TextListElement)(nil)
-

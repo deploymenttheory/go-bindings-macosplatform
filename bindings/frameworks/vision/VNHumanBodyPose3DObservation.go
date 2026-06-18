@@ -18,17 +18,17 @@ type VNHumanBodyPose3DObservation struct {
 }
 
 var (
-	_clsVNHumanBodyPose3DObservation = _objcClass("VNHumanBodyPose3DObservation")
-	_vNHumanBodyPose3DObservationSelRecognizedPointsForJointsGroupNameError = objc.RegisterName("recognizedPointsForJointsGroupName:error:")
-	_vNHumanBodyPose3DObservationSelRecognizedPointForJointNameError = objc.RegisterName("recognizedPointForJointName:error:")
-	_vNHumanBodyPose3DObservationSelPointInImageForJointNameError = objc.RegisterName("pointInImageForJointName:error:")
-	_vNHumanBodyPose3DObservationSelParentJointNameForJointName = objc.RegisterName("parentJointNameForJointName:")
+	_clsVNHumanBodyPose3DObservation                                           = _objcClass("VNHumanBodyPose3DObservation")
+	_vNHumanBodyPose3DObservationSelRecognizedPointsForJointsGroupNameError    = objc.RegisterName("recognizedPointsForJointsGroupName:error:")
+	_vNHumanBodyPose3DObservationSelRecognizedPointForJointNameError           = objc.RegisterName("recognizedPointForJointName:error:")
+	_vNHumanBodyPose3DObservationSelPointInImageForJointNameError              = objc.RegisterName("pointInImageForJointName:error:")
+	_vNHumanBodyPose3DObservationSelParentJointNameForJointName                = objc.RegisterName("parentJointNameForJointName:")
 	_vNHumanBodyPose3DObservationSelGetCameraRelativePositionForJointNameError = objc.RegisterName("getCameraRelativePosition:forJointName:error:")
-	_vNHumanBodyPose3DObservationSelHeightEstimation = objc.RegisterName("heightEstimation")
-	_vNHumanBodyPose3DObservationSelCameraOriginMatrix = objc.RegisterName("cameraOriginMatrix")
-	_vNHumanBodyPose3DObservationSelAvailableJointsGroupNames = objc.RegisterName("availableJointsGroupNames")
-	_vNHumanBodyPose3DObservationSelAvailableJointNames = objc.RegisterName("availableJointNames")
-	_vNHumanBodyPose3DObservationSelBodyHeight = objc.RegisterName("bodyHeight")
+	_vNHumanBodyPose3DObservationSelHeightEstimation                           = objc.RegisterName("heightEstimation")
+	_vNHumanBodyPose3DObservationSelCameraOriginMatrix                         = objc.RegisterName("cameraOriginMatrix")
+	_vNHumanBodyPose3DObservationSelAvailableJointsGroupNames                  = objc.RegisterName("availableJointsGroupNames")
+	_vNHumanBodyPose3DObservationSelAvailableJointNames                        = objc.RegisterName("availableJointNames")
+	_vNHumanBodyPose3DObservationSelBodyHeight                                 = objc.RegisterName("bodyHeight")
 )
 
 func VNHumanBodyPose3DObservationFromID(id objc.ID) *VNHumanBodyPose3DObservation {
@@ -54,7 +54,9 @@ func (o *VNHumanBodyPose3DObservation) RecognizedPointsForJointsGroupNameError(j
 func (o *VNHumanBodyPose3DObservation) RecognizedPointForJointNameError(jointName *foundation.NSString) (*VNHumanBodyRecognizedPoint3D, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNHumanBodyPose3DObservationSelRecognizedPointForJointNameError, jointName.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -65,7 +67,9 @@ func (o *VNHumanBodyPose3DObservation) RecognizedPointForJointNameError(jointNam
 func (o *VNHumanBodyPose3DObservation) PointInImageForJointNameError(jointName *foundation.NSString) (*VNPoint, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNHumanBodyPose3DObservationSelPointInImageForJointNameError, jointName.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -75,7 +79,9 @@ func (o *VNHumanBodyPose3DObservation) PointInImageForJointNameError(jointName *
 // @brief Obtain the parent joint of a specified joint @param jointName The name of the human body joint @return The name of the parent joint
 func (o *VNHumanBodyPose3DObservation) ParentJointNameForJointName(jointName *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNHumanBodyPose3DObservationSelParentJointNameForJointName, jointName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -118,4 +124,3 @@ func (o *VNHumanBodyPose3DObservation) BodyHeight() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _vNHumanBodyPose3DObservationSelBodyHeight)
 	return _ret
 }
-

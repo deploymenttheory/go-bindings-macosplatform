@@ -16,13 +16,13 @@ type MTLRenderPipelineFunctionsDescriptor struct {
 }
 
 var (
-	_clsMTLRenderPipelineFunctionsDescriptor = _objcClass("MTLRenderPipelineFunctionsDescriptor")
-	_mTLRenderPipelineFunctionsDescriptorSelVertexAdditionalBinaryFunctions = objc.RegisterName("vertexAdditionalBinaryFunctions")
-	_mTLRenderPipelineFunctionsDescriptorSelSetVertexAdditionalBinaryFunctions = objc.RegisterName("setVertexAdditionalBinaryFunctions:")
-	_mTLRenderPipelineFunctionsDescriptorSelFragmentAdditionalBinaryFunctions = objc.RegisterName("fragmentAdditionalBinaryFunctions")
+	_clsMTLRenderPipelineFunctionsDescriptor                                     = _objcClass("MTLRenderPipelineFunctionsDescriptor")
+	_mTLRenderPipelineFunctionsDescriptorSelVertexAdditionalBinaryFunctions      = objc.RegisterName("vertexAdditionalBinaryFunctions")
+	_mTLRenderPipelineFunctionsDescriptorSelSetVertexAdditionalBinaryFunctions   = objc.RegisterName("setVertexAdditionalBinaryFunctions:")
+	_mTLRenderPipelineFunctionsDescriptorSelFragmentAdditionalBinaryFunctions    = objc.RegisterName("fragmentAdditionalBinaryFunctions")
 	_mTLRenderPipelineFunctionsDescriptorSelSetFragmentAdditionalBinaryFunctions = objc.RegisterName("setFragmentAdditionalBinaryFunctions:")
-	_mTLRenderPipelineFunctionsDescriptorSelTileAdditionalBinaryFunctions = objc.RegisterName("tileAdditionalBinaryFunctions")
-	_mTLRenderPipelineFunctionsDescriptorSelSetTileAdditionalBinaryFunctions = objc.RegisterName("setTileAdditionalBinaryFunctions:")
+	_mTLRenderPipelineFunctionsDescriptorSelTileAdditionalBinaryFunctions        = objc.RegisterName("tileAdditionalBinaryFunctions")
+	_mTLRenderPipelineFunctionsDescriptorSelSetTileAdditionalBinaryFunctions     = objc.RegisterName("setTileAdditionalBinaryFunctions:")
 )
 
 func MTLRenderPipelineFunctionsDescriptorFromID(id objc.ID) *MTLRenderPipelineFunctionsDescriptor {
@@ -38,7 +38,9 @@ func MTLRenderPipelineFunctionsDescriptorFromID(id objc.ID) *MTLRenderPipelineFu
 // @property vertexAdditionalBinaryFunctions @abstract The set of additional binary functions to be accessed from the vertex function in an incrementally created pipeline state.
 func (o *MTLRenderPipelineFunctionsDescriptor) VertexAdditionalBinaryFunctions() *foundation.NSArray[MTLFunction] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRenderPipelineFunctionsDescriptorSelVertexAdditionalBinaryFunctions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTLFunction](_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTLRenderPipelineFunctionsDescriptor) SetVertexAdditionalBinaryFunction
 // @property fragmentAdditionalBinaryFunctions @abstract The set of additional binary functions to be accessed from the fragment function in an incrementally created pipeline state.
 func (o *MTLRenderPipelineFunctionsDescriptor) FragmentAdditionalBinaryFunctions() *foundation.NSArray[MTLFunction] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRenderPipelineFunctionsDescriptorSelFragmentAdditionalBinaryFunctions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTLFunction](_ret)
 }
 
@@ -60,11 +64,12 @@ func (o *MTLRenderPipelineFunctionsDescriptor) SetFragmentAdditionalBinaryFuncti
 // @property tileAdditionalBinaryFunctions @abstract The set of additional binary functions to be accessed from the tile function in an incrementally created pipeline state.
 func (o *MTLRenderPipelineFunctionsDescriptor) TileAdditionalBinaryFunctions() *foundation.NSArray[MTLFunction] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRenderPipelineFunctionsDescriptorSelTileAdditionalBinaryFunctions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTLFunction](_ret)
 }
 
 func (o *MTLRenderPipelineFunctionsDescriptor) SetTileAdditionalBinaryFunctions(tileAdditionalBinaryFunctions *foundation.NSArray[MTLFunction]) {
 	o.Ptr().Send(_mTLRenderPipelineFunctionsDescriptorSelSetTileAdditionalBinaryFunctions, tileAdditionalBinaryFunctions.Ptr())
 }
-

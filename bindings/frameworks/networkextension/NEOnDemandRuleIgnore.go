@@ -25,4 +25,3 @@ func NEOnDemandRuleIgnoreFromID(id objc.ID) *NEOnDemandRuleIgnore {
 	purego.Track(o)
 	return o
 }
-

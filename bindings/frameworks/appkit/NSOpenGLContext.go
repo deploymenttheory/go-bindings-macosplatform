@@ -19,32 +19,32 @@ type NSOpenGLContext struct {
 }
 
 var (
-	_clsNSOpenGLContext = _objcClass("NSOpenGLContext")
-	_nSOpenGLContextSelInitWithFormatShareContext = objc.RegisterName("initWithFormat:shareContext:")
-	_nSOpenGLContextSelInitWithCGLContextObj = objc.RegisterName("initWithCGLContextObj:")
-	_nSOpenGLContextSelSetView = objc.RegisterName("setView:")
-	_nSOpenGLContextSelSetFullScreen = objc.RegisterName("setFullScreen")
-	_nSOpenGLContextSelSetOffScreenWidthHeightRowbytes = objc.RegisterName("setOffScreen:width:height:rowbytes:")
-	_nSOpenGLContextSelClearDrawable = objc.RegisterName("clearDrawable")
-	_nSOpenGLContextSelUpdate = objc.RegisterName("update")
-	_nSOpenGLContextSelFlushBuffer = objc.RegisterName("flushBuffer")
-	_nSOpenGLContextSelMakeCurrentContext = objc.RegisterName("makeCurrentContext")
-	_nSOpenGLContextSelClearCurrentContext = objc.RegisterName("clearCurrentContext")
-	_nSOpenGLContextSelCopyAttributesFromContextWithMask = objc.RegisterName("copyAttributesFromContext:withMask:")
-	_nSOpenGLContextSelSetValuesForParameter = objc.RegisterName("setValues:forParameter:")
-	_nSOpenGLContextSelGetValuesForParameter = objc.RegisterName("getValues:forParameter:")
-	_nSOpenGLContextSelCreateTextureFromViewInternalFormat = objc.RegisterName("createTexture:fromView:internalFormat:")
-	_nSOpenGLContextSelPixelFormat = objc.RegisterName("pixelFormat")
-	_nSOpenGLContextSelView = objc.RegisterName("view")
-	_nSOpenGLContextSelCurrentContext = objc.RegisterName("currentContext")
-	_nSOpenGLContextSelCurrentVirtualScreen = objc.RegisterName("currentVirtualScreen")
-	_nSOpenGLContextSelSetCurrentVirtualScreen = objc.RegisterName("setCurrentVirtualScreen:")
-	_nSOpenGLContextSelCGLContextObj = objc.RegisterName("CGLContextObj")
+	_clsNSOpenGLContext                                                         = _objcClass("NSOpenGLContext")
+	_nSOpenGLContextSelInitWithFormatShareContext                               = objc.RegisterName("initWithFormat:shareContext:")
+	_nSOpenGLContextSelInitWithCGLContextObj                                    = objc.RegisterName("initWithCGLContextObj:")
+	_nSOpenGLContextSelSetView                                                  = objc.RegisterName("setView:")
+	_nSOpenGLContextSelSetFullScreen                                            = objc.RegisterName("setFullScreen")
+	_nSOpenGLContextSelSetOffScreenWidthHeightRowbytes                          = objc.RegisterName("setOffScreen:width:height:rowbytes:")
+	_nSOpenGLContextSelClearDrawable                                            = objc.RegisterName("clearDrawable")
+	_nSOpenGLContextSelUpdate                                                   = objc.RegisterName("update")
+	_nSOpenGLContextSelFlushBuffer                                              = objc.RegisterName("flushBuffer")
+	_nSOpenGLContextSelMakeCurrentContext                                       = objc.RegisterName("makeCurrentContext")
+	_nSOpenGLContextSelClearCurrentContext                                      = objc.RegisterName("clearCurrentContext")
+	_nSOpenGLContextSelCopyAttributesFromContextWithMask                        = objc.RegisterName("copyAttributesFromContext:withMask:")
+	_nSOpenGLContextSelSetValuesForParameter                                    = objc.RegisterName("setValues:forParameter:")
+	_nSOpenGLContextSelGetValuesForParameter                                    = objc.RegisterName("getValues:forParameter:")
+	_nSOpenGLContextSelCreateTextureFromViewInternalFormat                      = objc.RegisterName("createTexture:fromView:internalFormat:")
+	_nSOpenGLContextSelPixelFormat                                              = objc.RegisterName("pixelFormat")
+	_nSOpenGLContextSelView                                                     = objc.RegisterName("view")
+	_nSOpenGLContextSelCurrentContext                                           = objc.RegisterName("currentContext")
+	_nSOpenGLContextSelCurrentVirtualScreen                                     = objc.RegisterName("currentVirtualScreen")
+	_nSOpenGLContextSelSetCurrentVirtualScreen                                  = objc.RegisterName("setCurrentVirtualScreen:")
+	_nSOpenGLContextSelCGLContextObj                                            = objc.RegisterName("CGLContextObj")
 	_nSOpenGLContextSelSetPixelBufferCubeMapFaceMipMapLevelCurrentVirtualScreen = objc.RegisterName("setPixelBuffer:cubeMapFace:mipMapLevel:currentVirtualScreen:")
-	_nSOpenGLContextSelPixelBuffer = objc.RegisterName("pixelBuffer")
-	_nSOpenGLContextSelPixelBufferCubeMapFace = objc.RegisterName("pixelBufferCubeMapFace")
-	_nSOpenGLContextSelPixelBufferMipMapLevel = objc.RegisterName("pixelBufferMipMapLevel")
-	_nSOpenGLContextSelSetTextureImageToPixelBufferColorBuffer = objc.RegisterName("setTextureImageToPixelBuffer:colorBuffer:")
+	_nSOpenGLContextSelPixelBuffer                                              = objc.RegisterName("pixelBuffer")
+	_nSOpenGLContextSelPixelBufferCubeMapFace                                   = objc.RegisterName("pixelBufferCubeMapFace")
+	_nSOpenGLContextSelPixelBufferMipMapLevel                                   = objc.RegisterName("pixelBufferMipMapLevel")
+	_nSOpenGLContextSelSetTextureImageToPixelBufferColorBuffer                  = objc.RegisterName("setTextureImageToPixelBuffer:colorBuffer:")
 )
 
 func NSOpenGLContextFromID(id objc.ID) *NSOpenGLContext {
@@ -59,13 +59,17 @@ func NSOpenGLContextFromID(id objc.ID) *NSOpenGLContext {
 
 func (o *NSOpenGLContext) InitWithFormatShareContext(format *NSOpenGLPixelFormat, share *NSOpenGLContext) *NSOpenGLContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLContextSelInitWithFormatShareContext, format.Ptr(), share.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOpenGLContextFromID(_ret)
 }
 
 func (o *NSOpenGLContext) InitWithCGLContextObj(context_ unsafe.Pointer) *NSOpenGLContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLContextSelInitWithCGLContextObj, context_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOpenGLContextFromID(_ret)
 }
 
@@ -128,20 +132,26 @@ func (o *NSOpenGLContext) CreateTextureFromViewInternalFormat(target uint32, vie
 
 func (o *NSOpenGLContext) PixelFormat() *NSOpenGLPixelFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLContextSelPixelFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOpenGLPixelFormatFromID(_ret)
 }
 
 // Deprecated: since macOS 10.14.
 func (o *NSOpenGLContext) View() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLContextSelView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
 func NSOpenGLContextCurrentContext() *NSOpenGLContext {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOpenGLContext), _nSOpenGLContextSelCurrentContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOpenGLContextFromID(_ret)
 }
 
@@ -168,7 +178,9 @@ func (o *NSOpenGLContext) SetPixelBufferCubeMapFaceMipMapLevelCurrentVirtualScre
 // Deprecated: since macOS 10.7.
 func (o *NSOpenGLContext) PixelBuffer() *NSOpenGLPixelBuffer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLContextSelPixelBuffer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOpenGLPixelBufferFromID(_ret)
 }
 
@@ -188,4 +200,3 @@ func (o *NSOpenGLContext) PixelBufferMipMapLevel() int32 {
 func (o *NSOpenGLContext) SetTextureImageToPixelBufferColorBuffer(pixelBuffer *NSOpenGLPixelBuffer, source uint32) {
 	o.Ptr().Send(_nSOpenGLContextSelSetTextureImageToPixelBufferColorBuffer, pixelBuffer.Ptr(), source)
 }
-

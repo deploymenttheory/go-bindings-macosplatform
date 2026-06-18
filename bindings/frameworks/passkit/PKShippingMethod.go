@@ -16,12 +16,12 @@ type PKShippingMethod struct {
 }
 
 var (
-	_clsPKShippingMethod = _objcClass("PKShippingMethod")
-	_pKShippingMethodSelIdentifier = objc.RegisterName("identifier")
-	_pKShippingMethodSelSetIdentifier = objc.RegisterName("setIdentifier:")
-	_pKShippingMethodSelDetail = objc.RegisterName("detail")
-	_pKShippingMethodSelSetDetail = objc.RegisterName("setDetail:")
-	_pKShippingMethodSelDateComponentsRange = objc.RegisterName("dateComponentsRange")
+	_clsPKShippingMethod                       = _objcClass("PKShippingMethod")
+	_pKShippingMethodSelIdentifier             = objc.RegisterName("identifier")
+	_pKShippingMethodSelSetIdentifier          = objc.RegisterName("setIdentifier:")
+	_pKShippingMethodSelDetail                 = objc.RegisterName("detail")
+	_pKShippingMethodSelSetDetail              = objc.RegisterName("setDetail:")
+	_pKShippingMethodSelDateComponentsRange    = objc.RegisterName("dateComponentsRange")
 	_pKShippingMethodSelSetDateComponentsRange = objc.RegisterName("setDateComponentsRange:")
 )
 
@@ -37,7 +37,9 @@ func PKShippingMethodFromID(id objc.ID) *PKShippingMethod {
 
 func (o *PKShippingMethod) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKShippingMethodSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *PKShippingMethod) SetIdentifier(identifier *foundation.NSString) {
 
 func (o *PKShippingMethod) Detail() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKShippingMethodSelDetail)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *PKShippingMethod) SetDetail(detail *foundation.NSString) {
 
 func (o *PKShippingMethod) DateComponentsRange() *PKDateComponentsRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKShippingMethodSelDateComponentsRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKDateComponentsRangeFromID(_ret)
 }
 
 func (o *PKShippingMethod) SetDateComponentsRange(dateComponentsRange *PKDateComponentsRange) {
 	o.Ptr().Send(_pKShippingMethodSelSetDateComponentsRange, dateComponentsRange.Ptr())
 }
-

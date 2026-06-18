@@ -18,12 +18,12 @@ type MTRClusterOtaSoftwareUpdateRequestor struct {
 }
 
 var (
-	_clsMTRClusterOtaSoftwareUpdateRequestor = _objcClass("MTRClusterOtaSoftwareUpdateRequestor")
-	_mTRClusterOtaSoftwareUpdateRequestorSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_clsMTRClusterOtaSoftwareUpdateRequestor                                                                                  = _objcClass("MTRClusterOtaSoftwareUpdateRequestor")
+	_mTRClusterOtaSoftwareUpdateRequestorSelInitWithDeviceEndpointQueue                                                       = objc.RegisterName("initWithDevice:endpoint:queue:")
 	_mTRClusterOtaSoftwareUpdateRequestorSelAnnounceOtaProviderWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("announceOtaProviderWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterOtaSoftwareUpdateRequestorSelReadAttributeDefaultOtaProvidersWithParams = objc.RegisterName("readAttributeDefaultOtaProvidersWithParams:")
-	_mTRClusterOtaSoftwareUpdateRequestorSelWriteAttributeDefaultOtaProvidersWithValueExpectedValueInterval = objc.RegisterName("writeAttributeDefaultOtaProvidersWithValue:expectedValueInterval:")
-	_mTRClusterOtaSoftwareUpdateRequestorSelWriteAttributeDefaultOtaProvidersWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeDefaultOtaProvidersWithValue:expectedValueInterval:params:")
+	_mTRClusterOtaSoftwareUpdateRequestorSelReadAttributeDefaultOtaProvidersWithParams                                        = objc.RegisterName("readAttributeDefaultOtaProvidersWithParams:")
+	_mTRClusterOtaSoftwareUpdateRequestorSelWriteAttributeDefaultOtaProvidersWithValueExpectedValueInterval                   = objc.RegisterName("writeAttributeDefaultOtaProvidersWithValue:expectedValueInterval:")
+	_mTRClusterOtaSoftwareUpdateRequestorSelWriteAttributeDefaultOtaProvidersWithValueExpectedValueIntervalParams             = objc.RegisterName("writeAttributeDefaultOtaProvidersWithValue:expectedValueInterval:params:")
 )
 
 func MTRClusterOtaSoftwareUpdateRequestorFromID(id objc.ID) *MTRClusterOtaSoftwareUpdateRequestor {
@@ -38,7 +38,9 @@ func MTRClusterOtaSoftwareUpdateRequestorFromID(id objc.ID) *MTRClusterOtaSoftwa
 
 func (o *MTRClusterOtaSoftwareUpdateRequestor) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterOtaSoftwareUpdateRequestor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterOtaSoftwareUpdateRequestorSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterOtaSoftwareUpdateRequestorFromID(_ret)
 }
 
@@ -65,4 +67,3 @@ func (o *MTRClusterOtaSoftwareUpdateRequestor) WriteAttributeDefaultOtaProviders
 func (o *MTRClusterOtaSoftwareUpdateRequestor) WriteAttributeDefaultOtaProvidersWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *MTRWriteParams) {
 	o.Ptr().Send(_mTRClusterOtaSoftwareUpdateRequestorSelWriteAttributeDefaultOtaProvidersWithValueExpectedValueIntervalParams, dataValueDictionary, expectedValueIntervalMs.Ptr(), params.Ptr())
 }
-

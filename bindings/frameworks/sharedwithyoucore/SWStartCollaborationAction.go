@@ -16,9 +16,9 @@ type SWStartCollaborationAction struct {
 }
 
 var (
-	_clsSWStartCollaborationAction = _objcClass("SWStartCollaborationAction")
+	_clsSWStartCollaborationAction                                       = _objcClass("SWStartCollaborationAction")
 	_sWStartCollaborationActionSelFulfillUsingURLCollaborationIdentifier = objc.RegisterName("fulfillUsingURL:collaborationIdentifier:")
-	_sWStartCollaborationActionSelCollaborationMetadata = objc.RegisterName("collaborationMetadata")
+	_sWStartCollaborationActionSelCollaborationMetadata                  = objc.RegisterName("collaborationMetadata")
 )
 
 func SWStartCollaborationActionFromID(id objc.ID) *SWStartCollaborationAction {
@@ -37,7 +37,8 @@ func (o *SWStartCollaborationAction) FulfillUsingURLCollaborationIdentifier(url 
 
 func (o *SWStartCollaborationAction) CollaborationMetadata() *SWCollaborationMetadata {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWStartCollaborationActionSelCollaborationMetadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SWCollaborationMetadataFromID(_ret)
 }
-

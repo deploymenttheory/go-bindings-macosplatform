@@ -17,19 +17,19 @@ type MDLStereoscopicCamera struct {
 }
 
 var (
-	_clsMDLStereoscopicCamera = _objcClass("MDLStereoscopicCamera")
-	_mDLStereoscopicCameraSelInterPupillaryDistance = objc.RegisterName("interPupillaryDistance")
+	_clsMDLStereoscopicCamera                          = _objcClass("MDLStereoscopicCamera")
+	_mDLStereoscopicCameraSelInterPupillaryDistance    = objc.RegisterName("interPupillaryDistance")
 	_mDLStereoscopicCameraSelSetInterPupillaryDistance = objc.RegisterName("setInterPupillaryDistance:")
-	_mDLStereoscopicCameraSelLeftVergence = objc.RegisterName("leftVergence")
-	_mDLStereoscopicCameraSelSetLeftVergence = objc.RegisterName("setLeftVergence:")
-	_mDLStereoscopicCameraSelRightVergence = objc.RegisterName("rightVergence")
-	_mDLStereoscopicCameraSelSetRightVergence = objc.RegisterName("setRightVergence:")
-	_mDLStereoscopicCameraSelOverlap = objc.RegisterName("overlap")
-	_mDLStereoscopicCameraSelSetOverlap = objc.RegisterName("setOverlap:")
-	_mDLStereoscopicCameraSelLeftViewMatrix = objc.RegisterName("leftViewMatrix")
-	_mDLStereoscopicCameraSelRightViewMatrix = objc.RegisterName("rightViewMatrix")
-	_mDLStereoscopicCameraSelLeftProjectionMatrix = objc.RegisterName("leftProjectionMatrix")
-	_mDLStereoscopicCameraSelRightProjectionMatrix = objc.RegisterName("rightProjectionMatrix")
+	_mDLStereoscopicCameraSelLeftVergence              = objc.RegisterName("leftVergence")
+	_mDLStereoscopicCameraSelSetLeftVergence           = objc.RegisterName("setLeftVergence:")
+	_mDLStereoscopicCameraSelRightVergence             = objc.RegisterName("rightVergence")
+	_mDLStereoscopicCameraSelSetRightVergence          = objc.RegisterName("setRightVergence:")
+	_mDLStereoscopicCameraSelOverlap                   = objc.RegisterName("overlap")
+	_mDLStereoscopicCameraSelSetOverlap                = objc.RegisterName("setOverlap:")
+	_mDLStereoscopicCameraSelLeftViewMatrix            = objc.RegisterName("leftViewMatrix")
+	_mDLStereoscopicCameraSelRightViewMatrix           = objc.RegisterName("rightViewMatrix")
+	_mDLStereoscopicCameraSelLeftProjectionMatrix      = objc.RegisterName("leftProjectionMatrix")
+	_mDLStereoscopicCameraSelRightProjectionMatrix     = objc.RegisterName("rightProjectionMatrix")
 )
 
 func MDLStereoscopicCameraFromID(id objc.ID) *MDLStereoscopicCamera {
@@ -100,4 +100,3 @@ func (o *MDLStereoscopicCamera) RightProjectionMatrix() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mDLStereoscopicCameraSelRightProjectionMatrix)
 	return _ret
 }
-

@@ -17,16 +17,16 @@ type INBusTrip struct {
 }
 
 var (
-	_clsINBusTrip = _objcClass("INBusTrip")
+	_clsINBusTrip                                                                                                                           = _objcClass("INBusTrip")
 	_iNBusTripSelInitWithProviderBusNameBusNumberTripDurationDepartureBusStopLocationDeparturePlatformArrivalBusStopLocationArrivalPlatform = objc.RegisterName("initWithProvider:busName:busNumber:tripDuration:departureBusStopLocation:departurePlatform:arrivalBusStopLocation:arrivalPlatform:")
-	_iNBusTripSelProvider = objc.RegisterName("provider")
-	_iNBusTripSelBusName = objc.RegisterName("busName")
-	_iNBusTripSelBusNumber = objc.RegisterName("busNumber")
-	_iNBusTripSelTripDuration = objc.RegisterName("tripDuration")
-	_iNBusTripSelDepartureBusStopLocation = objc.RegisterName("departureBusStopLocation")
-	_iNBusTripSelDeparturePlatform = objc.RegisterName("departurePlatform")
-	_iNBusTripSelArrivalBusStopLocation = objc.RegisterName("arrivalBusStopLocation")
-	_iNBusTripSelArrivalPlatform = objc.RegisterName("arrivalPlatform")
+	_iNBusTripSelProvider                                                                                                                   = objc.RegisterName("provider")
+	_iNBusTripSelBusName                                                                                                                    = objc.RegisterName("busName")
+	_iNBusTripSelBusNumber                                                                                                                  = objc.RegisterName("busNumber")
+	_iNBusTripSelTripDuration                                                                                                               = objc.RegisterName("tripDuration")
+	_iNBusTripSelDepartureBusStopLocation                                                                                                   = objc.RegisterName("departureBusStopLocation")
+	_iNBusTripSelDeparturePlatform                                                                                                          = objc.RegisterName("departurePlatform")
+	_iNBusTripSelArrivalBusStopLocation                                                                                                     = objc.RegisterName("arrivalBusStopLocation")
+	_iNBusTripSelArrivalPlatform                                                                                                            = objc.RegisterName("arrivalPlatform")
 )
 
 func INBusTripFromID(id objc.ID) *INBusTrip {
@@ -41,55 +41,72 @@ func INBusTripFromID(id objc.ID) *INBusTrip {
 
 func (o *INBusTrip) InitWithProviderBusNameBusNumberTripDurationDepartureBusStopLocationDeparturePlatformArrivalBusStopLocationArrivalPlatform(provider *foundation.NSString, busName *foundation.NSString, busNumber *foundation.NSString, tripDuration *INDateComponentsRange, departureBusStopLocation *corelocation.CLPlacemark, departurePlatform *foundation.NSString, arrivalBusStopLocation *corelocation.CLPlacemark, arrivalPlatform *foundation.NSString) *INBusTrip {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNBusTripSelInitWithProviderBusNameBusNumberTripDurationDepartureBusStopLocationDeparturePlatformArrivalBusStopLocationArrivalPlatform, provider.Ptr(), busName.Ptr(), busNumber.Ptr(), tripDuration.Ptr(), departureBusStopLocation.Ptr(), departurePlatform.Ptr(), arrivalBusStopLocation.Ptr(), arrivalPlatform.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INBusTripFromID(_ret)
 }
 
 func (o *INBusTrip) Provider() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNBusTripSelProvider)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INBusTrip) BusName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNBusTripSelBusName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INBusTrip) BusNumber() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNBusTripSelBusNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INBusTrip) TripDuration() *INDateComponentsRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNBusTripSelTripDuration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INDateComponentsRangeFromID(_ret)
 }
 
 func (o *INBusTrip) DepartureBusStopLocation() *corelocation.CLPlacemark {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNBusTripSelDepartureBusStopLocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return corelocation.CLPlacemarkFromID(_ret)
 }
 
 func (o *INBusTrip) DeparturePlatform() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNBusTripSelDeparturePlatform)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INBusTrip) ArrivalBusStopLocation() *corelocation.CLPlacemark {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNBusTripSelArrivalBusStopLocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return corelocation.CLPlacemarkFromID(_ret)
 }
 
 func (o *INBusTrip) ArrivalPlatform() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNBusTripSelArrivalPlatform)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

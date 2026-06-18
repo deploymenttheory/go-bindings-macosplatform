@@ -11,233 +11,233 @@ import (
 )
 
 var (
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDClearLastPlayBookmark func() int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDCloseMediaFile func() int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDCloseMediaVolume func() int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDDisplaySubPicture func(uint8) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDDispose func() int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDDoButtonActivate func(int) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDDoMenuCGClick func(*corefoundation.CGPoint, *int) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDDoMenuCGMouseOver func(*corefoundation.CGPoint, *int) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDDoUserNavigation func(DVDUserNavigation) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDEnableWebAccess func(uint8) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetAngle func(*uint16) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetAspectRatio func(*DVDAspectRatio) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetAudioLanguageCode func(*uint, *uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetAudioLanguageCodeByStream func(uint16, *uint, *uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetAudioOutputMode func(*int) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetAudioOutputModeCapabilities func(*int) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetAudioStream func(*uint16) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetAudioStreamFormat func(*DVDAudioFormat, *uint, *uint, *uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetAudioStreamFormatByStream func(uint, *DVDAudioFormat, *uint, *uint, *uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetAudioVolume func(*uint16) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetAudioVolumeInfo func(*uint16, *uint16, *uint16) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetBookmark func(unsafe.Pointer, *uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetButtonPosition func(uint, *corefoundation.CGRect, *uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetButtoninfo func(*uint, *uint, *uint, *uint, *uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetChapter func(*uint16) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetDiscRegionCode func(*uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetDriveRegionCode func(*uint, *int16) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetFormatStandard func(*DVDFormat) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetGPRMValue func(uint, *uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetLastPlayBookmark func(unsafe.Pointer, *uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetMediaUniqueID func(*uint8) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetMediaVolumeCFName func(unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetMediaVolumeName func(string) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetMenuLanguageCode func(*uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetNativeVideoSize func(*uint16, *uint16) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetNumAngles func(*uint16) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetNumAudioStreams func(*uint16) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetNumChapters func(uint16, *uint16) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetNumSubPictureStreams func(*uint16) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetNumTitles func(*uint16) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetSPDIFDataOutDevice func(*uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetSPDIFDataOutDeviceCFName func(uint, unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetSPDIFDataOutDeviceCount func(*uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetScanRate func(*DVDScanRate, *DVDScanDirection) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetState func(*DVDState) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetSubPictureLanguageCode func(*uint, *uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetSubPictureLanguageCodeByStream func(uint16, *uint, *uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetSubPictureStream func(*uint16) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetTime func(int16, *uint, *uint16) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetTimeEventRate func(*uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetTitle func(*uint16) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetVideoCGBounds func(*corefoundation.CGRect) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetVideoDisplay func(*uint32) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetVideoWindowID func(*uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGetVideoWindowRef func(unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGoBackOneLevel func() int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGoToMenu func(DVDMenu) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDGotoBookmark func(unsafe.Pointer, uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDHasMedia func(*uint8) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDHasMenu func(DVDMenu, *uint8) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDHasNextChapter func(*uint8) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDHasPreviousChapter func(*uint8) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDIdle func() int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDInitialize func() int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDIsDisplayingSubPicture func(*uint8) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDIsMuted func(*uint8) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDIsOnMenu func(*uint8, *DVDMenu) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDIsPaused func(*uint8) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDIsPlaying func(*uint8) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDIsRegisteredEventCallBack func(unsafe.Pointer) uint8
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDIsSupportedDisplay func(uint32, *uint8) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDIsValidMediaRef func(*carboncore.FSRef, *uint8) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDIsValidMediaURL func(unsafe.Pointer, *uint8) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDMute func(uint8) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDNextChapter func() int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDOpenMediaFile func(*carboncore.FSRef) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDOpenMediaFileWithURL func(unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDOpenMediaVolume func(*carboncore.FSRef) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDOpenMediaVolumeWithURL func(unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDPause func() int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDPlay func() int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDPreviousChapter func() int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDRegisterEventCallBack func(unsafe.Pointer, *DVDEventCode, uint, unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDResume func() int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDReturnToTitle func() int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDScan func(DVDScanRate, DVDScanDirection) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDSetAngle func(uint16) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDSetAspectRatio func(DVDAspectRatio) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDSetAudioOutputMode func(int) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDSetAudioStream func(uint16) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDSetAudioVolume func(uint16) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDSetChapter func(uint16) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDSetDefaultAudioLanguageCode func(uint, uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDSetDefaultMenuLanguageCode func(uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDSetDefaultSubPictureLanguageCode func(uint, uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDSetDriveRegionCode func(uint, unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDSetFatalErrorCallBack func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDSetLastPlayBookmark func(unsafe.Pointer, uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDSetSPDIFDataOutDevice func(uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDSetSubPictureStream func(uint16) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDSetTime func(int16, uint, uint16) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDSetTimeEventRate func(uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDSetTitle func(uint16) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDSetVideoCGBounds func(*corefoundation.CGRect) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDSetVideoDisplay func(uint32) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDSetVideoWindowID func(uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDSetVideoWindowRef func(unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDSleep func() int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDStepFrame func(DVDScanDirection) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDStop func() int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDSwitchToDisplay func(uint32, *uint8) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDUnregisterEventCallBack func(unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDUpdateVideo func() int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDVDWakeUp func() int
 )
 
@@ -810,4 +810,3 @@ func DVDUpdateVideo() int {
 func DVDWakeUp() int {
 	return _fnDVDWakeUp()
 }
-

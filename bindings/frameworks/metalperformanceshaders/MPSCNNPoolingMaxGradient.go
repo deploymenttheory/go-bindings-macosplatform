@@ -18,9 +18,9 @@ type MPSCNNPoolingMaxGradient struct {
 }
 
 var (
-	_clsMPSCNNPoolingMaxGradient = _objcClass("MPSCNNPoolingMaxGradient")
+	_clsMPSCNNPoolingMaxGradient                                                                    = _objcClass("MPSCNNPoolingMaxGradient")
 	_mPSCNNPoolingMaxGradientSelInitWithDeviceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY = objc.RegisterName("initWithDevice:kernelWidth:kernelHeight:strideInPixelsX:strideInPixelsY:")
-	_mPSCNNPoolingMaxGradientSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
+	_mPSCNNPoolingMaxGradientSelInitWithCoderDevice                                                 = objc.RegisterName("initWithCoder:device:")
 )
 
 func MPSCNNPoolingMaxGradientFromID(id objc.ID) *MPSCNNPoolingMaxGradient {
@@ -36,14 +36,17 @@ func MPSCNNPoolingMaxGradientFromID(id objc.ID) *MPSCNNPoolingMaxGradient {
 // @abstract  Initialize a gradient max pooling filter @param      device              The device the filter will run on @param      kernelWidth         The width of the kernel.  Can be an odd or even value. @param      kernelHeight        The height of the kernel.  Can be an odd or even value. @param      strideInPixelsX     The input stride (upsampling factor) in the x dimension. @param      strideInPixelsY     The input stride (upsampling factor) in the y dimension. @return     A valid MPSCNNPoolingGradient object or nil, if failure.
 func (o *MPSCNNPoolingMaxGradient) InitWithDeviceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY(device metal.MTLDevice, kernelWidth uint, kernelHeight uint, strideInPixelsX uint, strideInPixelsY uint) *MPSCNNPoolingMaxGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNPoolingMaxGradientSelInitWithDeviceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY, device, kernelWidth, kernelHeight, strideInPixelsX, strideInPixelsY)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNPoolingMaxGradientFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSCNNPoolingMaxGradient @param      device      The MTLDevice on which to make the MPSCNNPoolingMaxGradient @return     A new MPSCNNPoolingMaxGradient object, or nil if failure.
 func (o *MPSCNNPoolingMaxGradient) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSCNNPoolingMaxGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNPoolingMaxGradientSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNPoolingMaxGradientFromID(_ret)
 }
-

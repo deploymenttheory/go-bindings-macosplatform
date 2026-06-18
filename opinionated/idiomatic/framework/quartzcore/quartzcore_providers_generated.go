@@ -27,4 +27,3 @@ type LayerProvider interface {
 type PropertyAnimationProvider interface {
 	asPropertyAnimation() *raw.CAPropertyAnimation
 }
-

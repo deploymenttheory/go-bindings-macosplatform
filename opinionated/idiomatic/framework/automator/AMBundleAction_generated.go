@@ -97,4 +97,3 @@ type BundleActionable interface {
 }
 
 var _ BundleActionable = (*BundleAction)(nil)
-

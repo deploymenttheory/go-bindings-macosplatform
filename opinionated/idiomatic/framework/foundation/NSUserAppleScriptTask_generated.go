@@ -47,7 +47,9 @@ func (x *UserAppleScriptTask) ExecuteWithAppleEventCompletionHandler(event *raw.
 	x.inner.ExecuteWithAppleEventCompletionHandler(event, handler)
 }
 
-func (x *UserAppleScriptTask) asUserScriptTask() *raw.NSUserScriptTask { return &x.inner.NSUserScriptTask }
+func (x *UserAppleScriptTask) asUserScriptTask() *raw.NSUserScriptTask {
+	return &x.inner.NSUserScriptTask
+}
 
 func (x *UserAppleScriptTask) asObject() *raw.NSObject { return &x.inner.NSUserScriptTask.NSObject }
 
@@ -59,4 +61,3 @@ type UserAppleScriptTaskable interface {
 }
 
 var _ UserAppleScriptTaskable = (*UserAppleScriptTask)(nil)
-

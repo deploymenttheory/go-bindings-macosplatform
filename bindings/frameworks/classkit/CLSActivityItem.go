@@ -16,9 +16,9 @@ type CLSActivityItem struct {
 }
 
 var (
-	_clsCLSActivityItem = _objcClass("CLSActivityItem")
-	_cLSActivityItemSelTitle = objc.RegisterName("title")
-	_cLSActivityItemSelSetTitle = objc.RegisterName("setTitle:")
+	_clsCLSActivityItem           = _objcClass("CLSActivityItem")
+	_cLSActivityItemSelTitle      = objc.RegisterName("title")
+	_cLSActivityItemSelSetTitle   = objc.RegisterName("setTitle:")
 	_cLSActivityItemSelIdentifier = objc.RegisterName("identifier")
 )
 
@@ -35,7 +35,9 @@ func CLSActivityItemFromID(id objc.ID) *CLSActivityItem {
 // @abstract      Title of what this ActivityItem represents. @discussion    This will be the title associated with the activity item in the generated progress report.
 func (o *CLSActivityItem) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSActivityItemSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -46,7 +48,8 @@ func (o *CLSActivityItem) SetTitle(title *foundation.NSString) {
 // @abstract      An identifier that is unique within its owning activity @discussion    The identifier can be used to look up existing activityItems in a given activity.
 func (o *CLSActivityItem) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSActivityItemSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

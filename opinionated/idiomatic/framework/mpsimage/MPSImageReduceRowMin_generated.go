@@ -62,9 +62,13 @@ func (x *ImageReduceRowMin) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *Ima
 	return x
 }
 
-func (x *ImageReduceRowMin) asImageReduceUnary() *raw.MPSImageReduceUnary { return &x.inner.MPSImageReduceUnary }
+func (x *ImageReduceRowMin) asImageReduceUnary() *raw.MPSImageReduceUnary {
+	return &x.inner.MPSImageReduceUnary
+}
 
-func (x *ImageReduceRowMin) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel }
+func (x *ImageReduceRowMin) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
+	return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel
+}
 
 // ImageReduceRowMinable is the interface implemented by [ImageReduceRowMin], for mocking and DI.
 type ImageReduceRowMinable interface {
@@ -76,4 +80,3 @@ type ImageReduceRowMinable interface {
 }
 
 var _ ImageReduceRowMinable = (*ImageReduceRowMin)(nil)
-

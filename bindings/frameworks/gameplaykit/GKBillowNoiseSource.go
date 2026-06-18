@@ -17,11 +17,11 @@ type GKBillowNoiseSource struct {
 }
 
 var (
-	_clsGKBillowNoiseSource = _objcClass("GKBillowNoiseSource")
+	_clsGKBillowNoiseSource                                                                   = _objcClass("GKBillowNoiseSource")
 	_gKBillowNoiseSourceSelBillowNoiseSourceWithFrequencyOctaveCountPersistenceLacunaritySeed = objc.RegisterName("billowNoiseSourceWithFrequency:octaveCount:persistence:lacunarity:seed:")
-	_gKBillowNoiseSourceSelInitWithFrequencyOctaveCountPersistenceLacunaritySeed = objc.RegisterName("initWithFrequency:octaveCount:persistence:lacunarity:seed:")
-	_gKBillowNoiseSourceSelPersistence = objc.RegisterName("persistence")
-	_gKBillowNoiseSourceSelSetPersistence = objc.RegisterName("setPersistence:")
+	_gKBillowNoiseSourceSelInitWithFrequencyOctaveCountPersistenceLacunaritySeed              = objc.RegisterName("initWithFrequency:octaveCount:persistence:lacunarity:seed:")
+	_gKBillowNoiseSourceSelPersistence                                                        = objc.RegisterName("persistence")
+	_gKBillowNoiseSourceSelSetPersistence                                                     = objc.RegisterName("setPersistence:")
 )
 
 func GKBillowNoiseSourceFromID(id objc.ID) *GKBillowNoiseSource {
@@ -36,13 +36,17 @@ func GKBillowNoiseSourceFromID(id objc.ID) *GKBillowNoiseSource {
 
 func GKBillowNoiseSourceBillowNoiseSourceWithFrequencyOctaveCountPersistenceLacunaritySeed(frequency float64, octaveCount int, persistence float64, lacunarity float64, seed int32) *GKBillowNoiseSource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKBillowNoiseSource), _gKBillowNoiseSourceSelBillowNoiseSourceWithFrequencyOctaveCountPersistenceLacunaritySeed, frequency, octaveCount, persistence, lacunarity, seed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKBillowNoiseSourceFromID(_ret)
 }
 
 func (o *GKBillowNoiseSource) InitWithFrequencyOctaveCountPersistenceLacunaritySeed(frequency float64, octaveCount int, persistence float64, lacunarity float64, seed int32) *GKBillowNoiseSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKBillowNoiseSourceSelInitWithFrequencyOctaveCountPersistenceLacunaritySeed, frequency, octaveCount, persistence, lacunarity, seed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKBillowNoiseSourceFromID(_ret)
 }
 
@@ -54,4 +58,3 @@ func (o *GKBillowNoiseSource) Persistence() float64 {
 func (o *GKBillowNoiseSource) SetPersistence(persistence float64) {
 	o.Ptr().Send(_gKBillowNoiseSourceSelSetPersistence, persistence)
 }
-

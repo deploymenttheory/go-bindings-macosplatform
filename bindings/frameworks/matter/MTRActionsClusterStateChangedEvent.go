@@ -16,10 +16,10 @@ type MTRActionsClusterStateChangedEvent struct {
 }
 
 var (
-	_clsMTRActionsClusterStateChangedEvent = _objcClass("MTRActionsClusterStateChangedEvent")
-	_mTRActionsClusterStateChangedEventSelActionID = objc.RegisterName("actionID")
+	_clsMTRActionsClusterStateChangedEvent            = _objcClass("MTRActionsClusterStateChangedEvent")
+	_mTRActionsClusterStateChangedEventSelActionID    = objc.RegisterName("actionID")
 	_mTRActionsClusterStateChangedEventSelSetActionID = objc.RegisterName("setActionID:")
-	_mTRActionsClusterStateChangedEventSelInvokeID = objc.RegisterName("invokeID")
+	_mTRActionsClusterStateChangedEventSelInvokeID    = objc.RegisterName("invokeID")
 	_mTRActionsClusterStateChangedEventSelSetInvokeID = objc.RegisterName("setInvokeID:")
 	_mTRActionsClusterStateChangedEventSelGetNewState = objc.RegisterName("getNewState")
 	_mTRActionsClusterStateChangedEventSelSetNewState = objc.RegisterName("setNewState:")
@@ -37,7 +37,9 @@ func MTRActionsClusterStateChangedEventFromID(id objc.ID) *MTRActionsClusterStat
 
 func (o *MTRActionsClusterStateChangedEvent) ActionID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRActionsClusterStateChangedEventSelActionID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTRActionsClusterStateChangedEvent) SetActionID(actionID *foundation.NS
 
 func (o *MTRActionsClusterStateChangedEvent) InvokeID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRActionsClusterStateChangedEventSelInvokeID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *MTRActionsClusterStateChangedEvent) SetInvokeID(invokeID *foundation.NS
 
 func (o *MTRActionsClusterStateChangedEvent) GetNewState() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRActionsClusterStateChangedEventSelGetNewState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRActionsClusterStateChangedEvent) SetNewState(newState *foundation.NSNumber) {
 	o.Ptr().Send(_mTRActionsClusterStateChangedEventSelSetNewState, newState.Ptr())
 }
-

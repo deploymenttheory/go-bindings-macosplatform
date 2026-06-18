@@ -18,10 +18,10 @@ type CNContactVCardSerialization struct {
 }
 
 var (
-	_clsCNContactVCardSerialization = _objcClass("CNContactVCardSerialization")
+	_clsCNContactVCardSerialization                          = _objcClass("CNContactVCardSerialization")
 	_cNContactVCardSerializationSelDescriptorForRequiredKeys = objc.RegisterName("descriptorForRequiredKeys")
-	_cNContactVCardSerializationSelDataWithContactsError = objc.RegisterName("dataWithContacts:error:")
-	_cNContactVCardSerializationSelContactsWithDataError = objc.RegisterName("contactsWithData:error:")
+	_cNContactVCardSerializationSelDataWithContactsError     = objc.RegisterName("dataWithContacts:error:")
+	_cNContactVCardSerializationSelContactsWithDataError     = objc.RegisterName("contactsWithData:error:")
 )
 
 func CNContactVCardSerializationFromID(id objc.ID) *CNContactVCardSerialization {
@@ -44,7 +44,9 @@ func CNContactVCardSerializationDescriptorForRequiredKeys() CNKeyDescriptor {
 func CNContactVCardSerializationDataWithContactsError(contacts *foundation.NSArray[*CNContact]) (*foundation.NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContactVCardSerialization), _cNContactVCardSerializationSelDataWithContactsError, contacts.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -55,10 +57,11 @@ func CNContactVCardSerializationDataWithContactsError(contacts *foundation.NSArr
 func CNContactVCardSerializationContactsWithDataError(data *foundation.NSData) (*foundation.NSArray[*CNContact], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContactVCardSerialization), _cNContactVCardSerializationSelContactsWithDataError, data.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSArrayFromID[*CNContact](_ret), nil
 }
-

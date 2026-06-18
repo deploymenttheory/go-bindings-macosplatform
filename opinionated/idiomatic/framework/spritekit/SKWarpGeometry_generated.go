@@ -43,4 +43,3 @@ type WarpGeometryable interface {
 }
 
 var _ WarpGeometryable = (*WarpGeometry)(nil)
-

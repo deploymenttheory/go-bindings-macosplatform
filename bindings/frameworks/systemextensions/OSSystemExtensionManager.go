@@ -16,7 +16,7 @@ type OSSystemExtensionManager struct {
 }
 
 var (
-	_clsOSSystemExtensionManager = _objcClass("OSSystemExtensionManager")
+	_clsOSSystemExtensionManager              = _objcClass("OSSystemExtensionManager")
 	_oSSystemExtensionManagerSelSubmitRequest = objc.RegisterName("submitRequest:")
 	_oSSystemExtensionManagerSelSharedManager = objc.RegisterName("sharedManager")
 )
@@ -38,7 +38,8 @@ func (o *OSSystemExtensionManager) SubmitRequest(request *OSSystemExtensionReque
 
 func OSSystemExtensionManagerSharedManager() *OSSystemExtensionManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsOSSystemExtensionManager), _oSSystemExtensionManagerSelSharedManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return OSSystemExtensionManagerFromID(_ret)
 }
-

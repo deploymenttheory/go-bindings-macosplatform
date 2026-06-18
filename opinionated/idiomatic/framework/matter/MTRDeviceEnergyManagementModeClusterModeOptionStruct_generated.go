@@ -17,7 +17,9 @@ type MTRDeviceEnergyManagementModeClusterModeOptionStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRDeviceEnergyManagementModeClusterModeOptionStruct].
-func (x *MTRDeviceEnergyManagementModeClusterModeOptionStruct) Unwrap() *raw.MTRDeviceEnergyManagementModeClusterModeOptionStruct { return x.inner }
+func (x *MTRDeviceEnergyManagementModeClusterModeOptionStruct) Unwrap() *raw.MTRDeviceEnergyManagementModeClusterModeOptionStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -97,4 +99,3 @@ type MTRDeviceEnergyManagementModeClusterModeOptionStructable interface {
 }
 
 var _ MTRDeviceEnergyManagementModeClusterModeOptionStructable = (*MTRDeviceEnergyManagementModeClusterModeOptionStruct)(nil)
-

@@ -54,4 +54,3 @@ type DeletedObjectable interface {
 }
 
 var _ DeletedObjectable = (*DeletedObject)(nil)
-

@@ -68,4 +68,3 @@ type Actionable interface {
 }
 
 var _ Actionable = (*Action)(nil)
-

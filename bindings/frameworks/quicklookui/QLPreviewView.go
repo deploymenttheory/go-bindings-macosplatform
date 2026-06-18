@@ -17,19 +17,19 @@ type QLPreviewView struct {
 }
 
 var (
-	_clsQLPreviewView = _objcClass("QLPreviewView")
-	_qLPreviewViewSelInitWithFrameStyle = objc.RegisterName("initWithFrame:style:")
-	_qLPreviewViewSelInitWithFrame = objc.RegisterName("initWithFrame:")
-	_qLPreviewViewSelRefreshPreviewItem = objc.RegisterName("refreshPreviewItem")
-	_qLPreviewViewSelClose = objc.RegisterName("close")
-	_qLPreviewViewSelPreviewItem = objc.RegisterName("previewItem")
-	_qLPreviewViewSelSetPreviewItem = objc.RegisterName("setPreviewItem:")
-	_qLPreviewViewSelDisplayState = objc.RegisterName("displayState")
-	_qLPreviewViewSelSetDisplayState = objc.RegisterName("setDisplayState:")
-	_qLPreviewViewSelShouldCloseWithWindow = objc.RegisterName("shouldCloseWithWindow")
+	_clsQLPreviewView                         = _objcClass("QLPreviewView")
+	_qLPreviewViewSelInitWithFrameStyle       = objc.RegisterName("initWithFrame:style:")
+	_qLPreviewViewSelInitWithFrame            = objc.RegisterName("initWithFrame:")
+	_qLPreviewViewSelRefreshPreviewItem       = objc.RegisterName("refreshPreviewItem")
+	_qLPreviewViewSelClose                    = objc.RegisterName("close")
+	_qLPreviewViewSelPreviewItem              = objc.RegisterName("previewItem")
+	_qLPreviewViewSelSetPreviewItem           = objc.RegisterName("setPreviewItem:")
+	_qLPreviewViewSelDisplayState             = objc.RegisterName("displayState")
+	_qLPreviewViewSelSetDisplayState          = objc.RegisterName("setDisplayState:")
+	_qLPreviewViewSelShouldCloseWithWindow    = objc.RegisterName("shouldCloseWithWindow")
 	_qLPreviewViewSelSetShouldCloseWithWindow = objc.RegisterName("setShouldCloseWithWindow:")
-	_qLPreviewViewSelAutostarts = objc.RegisterName("autostarts")
-	_qLPreviewViewSelSetAutostarts = objc.RegisterName("setAutostarts:")
+	_qLPreviewViewSelAutostarts               = objc.RegisterName("autostarts")
+	_qLPreviewViewSelSetAutostarts            = objc.RegisterName("setAutostarts:")
 )
 
 func QLPreviewViewFromID(id objc.ID) *QLPreviewView {
@@ -42,29 +42,29 @@ func QLPreviewViewFromID(id objc.ID) *QLPreviewView {
 	return o
 }
 
-// Creates a preview view with the provided frame and style. This is the designated initializer for the `QLPreviewView` class. - Parameters: - frame: The frame rectangle for the initialized `QLPreviewView` object. - style: The desired style for the `QLPreviewView` object. For a list of possible styles, see ``QuickLookUI/QLPreviewViewStyle``. - Returns: Returns a `QLPreviewView` object with the designated frame and style.
+// Creates a preview view with the provided frame and style. This is the designated initializer for the `QLPreviewView` class. - Parameters: - frame: The frame rectangle for the initialized `QLPreviewView` object. - style: The desired style for the `QLPreviewView` object. For a list of possible styles, see “QuickLookUI/QLPreviewViewStyle“. - Returns: Returns a `QLPreviewView` object with the designated frame and style.
 func (o *QLPreviewView) InitWithFrameStyle(frame corefoundation.CGRect, style QLPreviewViewStyle) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qLPreviewViewSelInitWithFrameStyle, frame, style)
 	return _ret
 }
 
-// Creates a preview view with the provided frame. Calling this method is equivalent to calling ``QuickLookUI/QLPreviewView/initWithFrame:style:`` with the `style` parameter being ``QuickLookUI/QLPreviewViewStyle/QLPreviewViewStyleNormal``. - Parameters: - frame: The frame rectangle for the initialized `QLPreviewView` object. - Returns: Returns a `QLPreviewView` object with the designated frame and the default style.
+// Creates a preview view with the provided frame. Calling this method is equivalent to calling “QuickLookUI/QLPreviewView/initWithFrame:style:“ with the `style` parameter being “QuickLookUI/QLPreviewViewStyle/QLPreviewViewStyleNormal“. - Parameters: - frame: The frame rectangle for the initialized `QLPreviewView` object. - Returns: Returns a `QLPreviewView` object with the designated frame and the default style.
 func (o *QLPreviewView) InitWithFrame(frame corefoundation.CGRect) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qLPreviewViewSelInitWithFrame, frame)
 	return _ret
 }
 
-// Updates the preview to display the currently previewed item. When you modify the object that the ``QuickLookUI/QLPreviewView/previewItem`` property points to, call this method to generate and display the new preview.
+// Updates the preview to display the currently previewed item. When you modify the object that the “QuickLookUI/QLPreviewView/previewItem“ property points to, call this method to generate and display the new preview.
 func (o *QLPreviewView) RefreshPreviewItem() {
 	o.Ptr().Send(_qLPreviewViewSelRefreshPreviewItem)
 }
 
-// Closes the view, releasing the current preview item. Once a ``QuickLookUI/QLPreviewView`` is closed, it won’t accept any more preview items. You only need to call this method if ``QuickLookUI/QLPreviewView/shouldCloseWithWindow`` is set to <doc://com.apple.documentation/documentation/objectivec/no>. If you don’t close a ``QuickLookUI/QLPreviewView`` when you are done using it, your app will leak memory.
+// Closes the view, releasing the current preview item. Once a “QuickLookUI/QLPreviewView“ is closed, it won’t accept any more preview items. You only need to call this method if “QuickLookUI/QLPreviewView/shouldCloseWithWindow“ is set to <doc://com.apple.documentation/documentation/objectivec/no>. If you don’t close a “QuickLookUI/QLPreviewView“ when you are done using it, your app will leak memory.
 func (o *QLPreviewView) Close() {
 	o.Ptr().Send(_qLPreviewViewSelClose)
 }
 
-// The item to preview. Quick Look requires Items you wish to conform to the <doc://com.apple.documentation/documentation/quicklook/qlpreviewitem> protocol. When you set this property, the ``QuickLookUI/QLPreviewView`` loads the preview asynchronously. Due to this asynchronous behavior, don’t assume that the preview is ready immediately after assigning it to this property.
+// The item to preview. Quick Look requires Items you wish to conform to the <doc://com.apple.documentation/documentation/quicklook/qlpreviewitem> protocol. When you set this property, the “QuickLookUI/QLPreviewView“ loads the preview asynchronously. Due to this asynchronous behavior, don’t assume that the preview is ready immediately after assigning it to this property.
 func (o *QLPreviewView) PreviewItem() QLPreviewItem {
 	_ret := objc.Send[QLPreviewItem](o.Ptr(), _qLPreviewViewSelPreviewItem)
 	return _ret
@@ -84,7 +84,7 @@ func (o *QLPreviewView) SetDisplayState(displayState objc.ID) {
 	o.Ptr().Send(_qLPreviewViewSelSetDisplayState, displayState)
 }
 
-// A Boolean value that determines whether the preview should close when its window closes. The default value of this property is <doc://com.apple.documentation/documentation/objectivec/yes>, which means that the preview automatically closes when its window closes. If you set this property to <doc://com.apple.documentation/documentation/objectivec/no>, close the preview by calling the ``QuickLookUI/QLPreviewView/close`` method when finished with it. Once you close a ``QuickLookUI/QLPreviewView``, it won’t accept any more preview items.
+// A Boolean value that determines whether the preview should close when its window closes. The default value of this property is <doc://com.apple.documentation/documentation/objectivec/yes>, which means that the preview automatically closes when its window closes. If you set this property to <doc://com.apple.documentation/documentation/objectivec/no>, close the preview by calling the “QuickLookUI/QLPreviewView/close“ method when finished with it. Once you close a “QuickLookUI/QLPreviewView“, it won’t accept any more preview items.
 func (o *QLPreviewView) ShouldCloseWithWindow() bool {
 	_ret := objc.Send[bool](o.Ptr(), _qLPreviewViewSelShouldCloseWithWindow)
 	return _ret
@@ -103,4 +103,3 @@ func (o *QLPreviewView) Autostarts() bool {
 func (o *QLPreviewView) SetAutostarts(autostarts bool) {
 	o.Ptr().Send(_qLPreviewViewSelSetAutostarts, autostarts)
 }
-

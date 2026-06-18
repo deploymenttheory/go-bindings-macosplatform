@@ -17,19 +17,19 @@ type MLMediaGroup struct {
 }
 
 var (
-	_clsMLMediaGroup = _objcClass("MLMediaGroup")
-	_mLMediaGroupSelMediaLibrary = objc.RegisterName("mediaLibrary")
-	_mLMediaGroupSelParent = objc.RegisterName("parent")
+	_clsMLMediaGroup                      = _objcClass("MLMediaGroup")
+	_mLMediaGroupSelMediaLibrary          = objc.RegisterName("mediaLibrary")
+	_mLMediaGroupSelParent                = objc.RegisterName("parent")
 	_mLMediaGroupSelMediaSourceIdentifier = objc.RegisterName("mediaSourceIdentifier")
-	_mLMediaGroupSelName = objc.RegisterName("name")
-	_mLMediaGroupSelIdentifier = objc.RegisterName("identifier")
-	_mLMediaGroupSelTypeIdentifier = objc.RegisterName("typeIdentifier")
-	_mLMediaGroupSelAttributes = objc.RegisterName("attributes")
-	_mLMediaGroupSelChildGroups = objc.RegisterName("childGroups")
-	_mLMediaGroupSelURL = objc.RegisterName("URL")
-	_mLMediaGroupSelModificationDate = objc.RegisterName("modificationDate")
-	_mLMediaGroupSelIconImage = objc.RegisterName("iconImage")
-	_mLMediaGroupSelMediaObjects = objc.RegisterName("mediaObjects")
+	_mLMediaGroupSelName                  = objc.RegisterName("name")
+	_mLMediaGroupSelIdentifier            = objc.RegisterName("identifier")
+	_mLMediaGroupSelTypeIdentifier        = objc.RegisterName("typeIdentifier")
+	_mLMediaGroupSelAttributes            = objc.RegisterName("attributes")
+	_mLMediaGroupSelChildGroups           = objc.RegisterName("childGroups")
+	_mLMediaGroupSelURL                   = objc.RegisterName("URL")
+	_mLMediaGroupSelModificationDate      = objc.RegisterName("modificationDate")
+	_mLMediaGroupSelIconImage             = objc.RegisterName("iconImage")
+	_mLMediaGroupSelMediaObjects          = objc.RegisterName("mediaObjects")
 )
 
 func MLMediaGroupFromID(id objc.ID) *MLMediaGroup {
@@ -44,37 +44,49 @@ func MLMediaGroupFromID(id objc.ID) *MLMediaGroup {
 
 func (o *MLMediaGroup) MediaLibrary() *MLMediaLibrary {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLMediaGroupSelMediaLibrary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLMediaLibraryFromID(_ret)
 }
 
 func (o *MLMediaGroup) Parent() *MLMediaGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLMediaGroupSelParent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLMediaGroupFromID(_ret)
 }
 
 func (o *MLMediaGroup) MediaSourceIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLMediaGroupSelMediaSourceIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MLMediaGroup) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLMediaGroupSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MLMediaGroup) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLMediaGroupSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MLMediaGroup) TypeIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLMediaGroupSelTypeIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -85,31 +97,40 @@ func (o *MLMediaGroup) Attributes() *foundation.NSDictionary[*foundation.NSStrin
 
 func (o *MLMediaGroup) ChildGroups() *foundation.NSArray[*MLMediaGroup] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLMediaGroupSelChildGroups)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MLMediaGroup](_ret)
 }
 
 func (o *MLMediaGroup) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLMediaGroupSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *MLMediaGroup) ModificationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLMediaGroupSelModificationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *MLMediaGroup) IconImage() *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLMediaGroupSelIconImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSImageFromID(_ret)
 }
 
 func (o *MLMediaGroup) MediaObjects() *foundation.NSArray[*MLMediaObject] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLMediaGroupSelMediaObjects)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MLMediaObject](_ret)
 }
-

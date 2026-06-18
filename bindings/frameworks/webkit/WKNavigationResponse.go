@@ -16,9 +16,9 @@ type WKNavigationResponse struct {
 }
 
 var (
-	_clsWKNavigationResponse = _objcClass("WKNavigationResponse")
-	_wKNavigationResponseSelIsForMainFrame = objc.RegisterName("isForMainFrame")
-	_wKNavigationResponseSelResponse = objc.RegisterName("response")
+	_clsWKNavigationResponse                = _objcClass("WKNavigationResponse")
+	_wKNavigationResponseSelIsForMainFrame  = objc.RegisterName("isForMainFrame")
+	_wKNavigationResponseSelResponse        = objc.RegisterName("response")
 	_wKNavigationResponseSelCanShowMIMEType = objc.RegisterName("canShowMIMEType")
 )
 
@@ -41,7 +41,9 @@ func (o *WKNavigationResponse) IsForMainFrame() bool {
 // @abstract The frame's response.
 func (o *WKNavigationResponse) Response() *foundation.NSURLResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKNavigationResponseSelResponse)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLResponseFromID(_ret)
 }
 
@@ -50,4 +52,3 @@ func (o *WKNavigationResponse) CanShowMIMEType() bool {
 	_ret := objc.Send[bool](o.Ptr(), _wKNavigationResponseSelCanShowMIMEType)
 	return _ret
 }
-

@@ -17,7 +17,7 @@ type BCChatAction struct {
 }
 
 var (
-	_clsBCChatAction = _objcClass("BCChatAction")
+	_clsBCChatAction                               = _objcClass("BCChatAction")
 	_bCChatActionSelOpenTranscriptIntentParameters = objc.RegisterName("openTranscript:intentParameters:")
 )
 
@@ -36,4 +36,3 @@ func BCChatActionFromID(id objc.ID) *BCChatAction {
 func BCChatActionOpenTranscriptIntentParameters(businessIdentifier *foundation.NSString, intentParameters *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) {
 	objc.ID(_clsBCChatAction).Send(_bCChatActionSelOpenTranscriptIntentParameters, businessIdentifier.Ptr(), intentParameters)
 }
-

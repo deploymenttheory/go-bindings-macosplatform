@@ -17,13 +17,13 @@ type NSSharingServicePicker struct {
 }
 
 var (
-	_clsNSSharingServicePicker = _objcClass("NSSharingServicePicker")
-	_nSSharingServicePickerSelInitWithItems = objc.RegisterName("initWithItems:")
+	_clsNSSharingServicePicker                                      = _objcClass("NSSharingServicePicker")
+	_nSSharingServicePickerSelInitWithItems                         = objc.RegisterName("initWithItems:")
 	_nSSharingServicePickerSelShowRelativeToRectOfViewPreferredEdge = objc.RegisterName("showRelativeToRect:ofView:preferredEdge:")
-	_nSSharingServicePickerSelClose = objc.RegisterName("close")
-	_nSSharingServicePickerSelDelegate = objc.RegisterName("delegate")
-	_nSSharingServicePickerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSSharingServicePickerSelStandardShareMenuItem = objc.RegisterName("standardShareMenuItem")
+	_nSSharingServicePickerSelClose                                 = objc.RegisterName("close")
+	_nSSharingServicePickerSelDelegate                              = objc.RegisterName("delegate")
+	_nSSharingServicePickerSelSetDelegate                           = objc.RegisterName("setDelegate:")
+	_nSSharingServicePickerSelStandardShareMenuItem                 = objc.RegisterName("standardShareMenuItem")
 )
 
 func NSSharingServicePickerFromID(id objc.ID) *NSSharingServicePicker {
@@ -39,7 +39,9 @@ func NSSharingServicePickerFromID(id objc.ID) *NSSharingServicePicker {
 // Returns a new picker. The items represent the objects to be shared and must conform to the <NSPasteboardWriting> protocol or be an NSItemProvider or an NSDocument. (e.g. NSString, NSImage, NSURL, etc.)
 func (o *NSSharingServicePicker) InitWithItems(items *foundation.NSArray[objc.ID]) *NSSharingServicePicker {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSharingServicePickerSelInitWithItems, items)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSharingServicePickerFromID(_ret)
 }
 
@@ -65,7 +67,8 @@ func (o *NSSharingServicePicker) SetDelegate(delegate NSSharingServicePickerDele
 // Returns a menu item suitable to display the picker for the given items.
 func (o *NSSharingServicePicker) StandardShareMenuItem() *NSMenuItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSharingServicePickerSelStandardShareMenuItem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuItemFromID(_ret)
 }
-

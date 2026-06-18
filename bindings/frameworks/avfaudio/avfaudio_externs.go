@@ -172,67 +172,89 @@ func AVAudioSessionInterruptionWasSuspendedKey() uintptr {
 
 func AVAudioSessionLocationLower() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVAudioSessionLocationLower")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVAudioSessionLocationUpper() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVAudioSessionLocationUpper")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVAudioSessionOrientationBack() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVAudioSessionOrientationBack")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVAudioSessionOrientationBottom() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVAudioSessionOrientationBottom")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVAudioSessionOrientationFront() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVAudioSessionOrientationFront")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVAudioSessionOrientationLeft() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVAudioSessionOrientationLeft")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVAudioSessionOrientationRight() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVAudioSessionOrientationRight")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVAudioSessionOrientationTop() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVAudioSessionOrientationTop")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVAudioSessionPolarPatternCardioid() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVAudioSessionPolarPatternCardioid")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVAudioSessionPolarPatternOmnidirectional() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVAudioSessionPolarPatternOmnidirectional")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func AVAudioSessionPolarPatternSubcardioid() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVAudioSessionPolarPatternSubcardioid")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -354,7 +376,9 @@ func AVEncoderDynamicRangeControlConfigurationKey() uintptr {
 
 func AVExtendedNoteOnEventDefaultInstrument() uint {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVExtendedNoteOnEventDefaultInstrument")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*uint)(unsafe.Pointer(ptr))
 }
 
@@ -420,7 +444,9 @@ func AVSampleRateKey() uintptr {
 
 func AVSpeechSynthesisAvailableVoicesDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVSpeechSynthesisAvailableVoicesDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -448,4 +474,3 @@ func AVSpeechUtteranceMinimumSpeechRate() uintptr {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVSpeechUtteranceMinimumSpeechRate")
 	return ptr
 }
-

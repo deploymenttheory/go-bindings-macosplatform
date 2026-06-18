@@ -18,21 +18,21 @@ type GKPath struct {
 }
 
 var (
-	_clsGKPath = _objcClass("GKPath")
-	_gKPathSelPathWithPointsCountRadiusCyclical = objc.RegisterName("pathWithPoints:count:radius:cyclical:")
-	_gKPathSelInitWithPointsCountRadiusCyclical = objc.RegisterName("initWithPoints:count:radius:cyclical:")
+	_clsGKPath                                        = _objcClass("GKPath")
+	_gKPathSelPathWithPointsCountRadiusCyclical       = objc.RegisterName("pathWithPoints:count:radius:cyclical:")
+	_gKPathSelInitWithPointsCountRadiusCyclical       = objc.RegisterName("initWithPoints:count:radius:cyclical:")
 	_gKPathSelPathWithFloat3PointsCountRadiusCyclical = objc.RegisterName("pathWithFloat3Points:count:radius:cyclical:")
 	_gKPathSelInitWithFloat3PointsCountRadiusCyclical = objc.RegisterName("initWithFloat3Points:count:radius:cyclical:")
-	_gKPathSelPathWithGraphNodesRadius = objc.RegisterName("pathWithGraphNodes:radius:")
-	_gKPathSelInitWithGraphNodesRadius = objc.RegisterName("initWithGraphNodes:radius:")
-	_gKPathSelPointAtIndex = objc.RegisterName("pointAtIndex:")
-	_gKPathSelFloat2AtIndex = objc.RegisterName("float2AtIndex:")
-	_gKPathSelFloat3AtIndex = objc.RegisterName("float3AtIndex:")
-	_gKPathSelRadius = objc.RegisterName("radius")
-	_gKPathSelSetRadius = objc.RegisterName("setRadius:")
-	_gKPathSelNumPoints = objc.RegisterName("numPoints")
-	_gKPathSelIsCyclical = objc.RegisterName("isCyclical")
-	_gKPathSelSetCyclical = objc.RegisterName("setCyclical:")
+	_gKPathSelPathWithGraphNodesRadius                = objc.RegisterName("pathWithGraphNodes:radius:")
+	_gKPathSelInitWithGraphNodesRadius                = objc.RegisterName("initWithGraphNodes:radius:")
+	_gKPathSelPointAtIndex                            = objc.RegisterName("pointAtIndex:")
+	_gKPathSelFloat2AtIndex                           = objc.RegisterName("float2AtIndex:")
+	_gKPathSelFloat3AtIndex                           = objc.RegisterName("float3AtIndex:")
+	_gKPathSelRadius                                  = objc.RegisterName("radius")
+	_gKPathSelSetRadius                               = objc.RegisterName("setRadius:")
+	_gKPathSelNumPoints                               = objc.RegisterName("numPoints")
+	_gKPathSelIsCyclical                              = objc.RegisterName("isCyclical")
+	_gKPathSelSetCyclical                             = objc.RegisterName("setCyclical:")
 )
 
 func GKPathFromID(id objc.ID) *GKPath {
@@ -48,38 +48,50 @@ func GKPathFromID(id objc.ID) *GKPath {
 // Creates a path from an array of points @param points an array of points to make a path from @param radius radius of the path to create @param cyclical is the path a cycle that loops back on itself?
 func GKPathPathWithPointsCountRadiusCyclical(points unsafe.Pointer, count uint, radius float32, cyclical bool) *GKPath {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKPath), _gKPathSelPathWithPointsCountRadiusCyclical, points, count, radius, cyclical)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKPathFromID(_ret)
 }
 
 func (o *GKPath) InitWithPointsCountRadiusCyclical(points unsafe.Pointer, count uint, radius float32, cyclical bool) *GKPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKPathSelInitWithPointsCountRadiusCyclical, points, count, radius, cyclical)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKPathFromID(_ret)
 }
 
 func GKPathPathWithFloat3PointsCountRadiusCyclical(points unsafe.Pointer, count uint, radius float32, cyclical bool) *GKPath {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKPath), _gKPathSelPathWithFloat3PointsCountRadiusCyclical, points, count, radius, cyclical)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKPathFromID(_ret)
 }
 
 func (o *GKPath) InitWithFloat3PointsCountRadiusCyclical(points unsafe.Pointer, count uint, radius float32, cyclical bool) *GKPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKPathSelInitWithFloat3PointsCountRadiusCyclical, points, count, radius, cyclical)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKPathFromID(_ret)
 }
 
 // Creates a path from an array of graph nodes (often a result of pathfinding) Accepts GKGraphNode2D and GKGraphNode3D Cyclical is set to NO @param graphNodes an array of graph nodes to make a path from @param radius radius of the path to create @see GKGraphNode
 func GKPathPathWithGraphNodesRadius(graphNodes *foundation.NSArray[*GKGraphNode], radius float32) *GKPath {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKPath), _gKPathSelPathWithGraphNodesRadius, graphNodes.Ptr(), radius)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKPathFromID(_ret)
 }
 
 func (o *GKPath) InitWithGraphNodesRadius(graphNodes *foundation.NSArray[*GKGraphNode], radius float32) *GKPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKPathSelInitWithGraphNodesRadius, graphNodes.Ptr(), radius)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKPathFromID(_ret)
 }
 
@@ -124,4 +136,3 @@ func (o *GKPath) IsCyclical() bool {
 func (o *GKPath) SetCyclical(cyclical bool) {
 	o.Ptr().Send(_gKPathSelSetCyclical, cyclical)
 }
-

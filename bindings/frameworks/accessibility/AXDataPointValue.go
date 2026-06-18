@@ -16,13 +16,13 @@ type AXDataPointValue struct {
 }
 
 var (
-	_clsAXDataPointValue = _objcClass("AXDataPointValue")
-	_aXDataPointValueSelValueWithNumber = objc.RegisterName("valueWithNumber:")
+	_clsAXDataPointValue                  = _objcClass("AXDataPointValue")
+	_aXDataPointValueSelValueWithNumber   = objc.RegisterName("valueWithNumber:")
 	_aXDataPointValueSelValueWithCategory = objc.RegisterName("valueWithCategory:")
-	_aXDataPointValueSelNumber = objc.RegisterName("number")
-	_aXDataPointValueSelSetNumber = objc.RegisterName("setNumber:")
-	_aXDataPointValueSelCategory = objc.RegisterName("category")
-	_aXDataPointValueSelSetCategory = objc.RegisterName("setCategory:")
+	_aXDataPointValueSelNumber            = objc.RegisterName("number")
+	_aXDataPointValueSelSetNumber         = objc.RegisterName("setNumber:")
+	_aXDataPointValueSelCategory          = objc.RegisterName("category")
+	_aXDataPointValueSelSetCategory       = objc.RegisterName("setCategory:")
 )
 
 func AXDataPointValueFromID(id objc.ID) *AXDataPointValue {
@@ -37,13 +37,17 @@ func AXDataPointValueFromID(id objc.ID) *AXDataPointValue {
 
 func AXDataPointValueValueWithNumber(number float64) *AXDataPointValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAXDataPointValue), _aXDataPointValueSelValueWithNumber, number)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXDataPointValueFromID(_ret)
 }
 
 func AXDataPointValueValueWithCategory(category *foundation.NSString) *AXDataPointValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAXDataPointValue), _aXDataPointValueSelValueWithCategory, category.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXDataPointValueFromID(_ret)
 }
 
@@ -58,11 +62,12 @@ func (o *AXDataPointValue) SetNumber(number float64) {
 
 func (o *AXDataPointValue) Category() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXDataPointValueSelCategory)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *AXDataPointValue) SetCategory(category *foundation.NSString) {
 	o.Ptr().Send(_aXDataPointValueSelSetCategory, category.Ptr())
 }
-

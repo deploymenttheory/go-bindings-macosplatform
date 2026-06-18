@@ -152,4 +152,3 @@ type MediaGroupable interface {
 }
 
 var _ MediaGroupable = (*MediaGroup)(nil)
-

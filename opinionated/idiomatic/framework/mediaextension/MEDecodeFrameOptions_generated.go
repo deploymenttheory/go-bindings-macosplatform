@@ -79,4 +79,3 @@ type DecodeFrameOptionsable interface {
 }
 
 var _ DecodeFrameOptionsable = (*DecodeFrameOptions)(nil)
-

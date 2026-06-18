@@ -16,7 +16,7 @@ type VNRecognizedPoint struct {
 }
 
 var (
-	_clsVNRecognizedPoint = _objcClass("VNRecognizedPoint")
+	_clsVNRecognizedPoint           = _objcClass("VNRecognizedPoint")
 	_vNRecognizedPointSelIdentifier = objc.RegisterName("identifier")
 )
 
@@ -32,7 +32,8 @@ func VNRecognizedPointFromID(id objc.ID) *VNRecognizedPoint {
 
 func (o *VNRecognizedPoint) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNRecognizedPointSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

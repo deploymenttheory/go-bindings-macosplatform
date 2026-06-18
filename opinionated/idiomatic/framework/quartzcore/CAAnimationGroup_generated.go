@@ -45,7 +45,9 @@ func (x *AnimationGroup) WithAnimations(items ...AnimationProvider) *AnimationGr
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asAnimation().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asAnimation().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.CAAnimation](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -109,4 +111,3 @@ type AnimationGroupable interface {
 }
 
 var _ AnimationGroupable = (*AnimationGroup)(nil)
-

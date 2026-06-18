@@ -87,11 +87,17 @@ func (x *TrackObjectRequest) WithRevision(revision uint) *TrackObjectRequest {
 	return x
 }
 
-func (x *TrackObjectRequest) asTrackingRequest() *raw.VNTrackingRequest { return &x.inner.VNTrackingRequest }
+func (x *TrackObjectRequest) asTrackingRequest() *raw.VNTrackingRequest {
+	return &x.inner.VNTrackingRequest
+}
 
-func (x *TrackObjectRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNTrackingRequest.VNImageBasedRequest }
+func (x *TrackObjectRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNTrackingRequest.VNImageBasedRequest
+}
 
-func (x *TrackObjectRequest) asRequest() *raw.VNRequest { return &x.inner.VNTrackingRequest.VNImageBasedRequest.VNRequest }
+func (x *TrackObjectRequest) asRequest() *raw.VNRequest {
+	return &x.inner.VNTrackingRequest.VNImageBasedRequest.VNRequest
+}
 
 // TrackObjectRequestable is the interface implemented by [TrackObjectRequest], for mocking and DI.
 type TrackObjectRequestable interface {
@@ -106,4 +112,3 @@ type TrackObjectRequestable interface {
 }
 
 var _ TrackObjectRequestable = (*TrackObjectRequest)(nil)
-

@@ -20,12 +20,12 @@ type MPSNNReshape struct {
 }
 
 var (
-	_clsMPSNNReshape = _objcClass("MPSNNReshape")
-	_mPSNNReshapeSelInitWithDevice = objc.RegisterName("initWithDevice:")
-	_mPSNNReshapeSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSNNReshapeSelEncodeToCommandBufferSourceImageReshapedWidthReshapedHeightReshapedFeatureChannels = objc.RegisterName("encodeToCommandBuffer:sourceImage:reshapedWidth:reshapedHeight:reshapedFeatureChannels:")
-	_mPSNNReshapeSelEncodeToCommandBufferSourceImageDestinationStateDestinationStateIsTemporaryReshapedWidthReshapedHeightReshapedFeatureChannels = objc.RegisterName("encodeToCommandBuffer:sourceImage:destinationState:destinationStateIsTemporary:reshapedWidth:reshapedHeight:reshapedFeatureChannels:")
-	_mPSNNReshapeSelEncodeBatchToCommandBufferSourceImagesReshapedWidthReshapedHeightReshapedFeatureChannels = objc.RegisterName("encodeBatchToCommandBuffer:sourceImages:reshapedWidth:reshapedHeight:reshapedFeatureChannels:")
+	_clsMPSNNReshape                                                                                                                                     = _objcClass("MPSNNReshape")
+	_mPSNNReshapeSelInitWithDevice                                                                                                                       = objc.RegisterName("initWithDevice:")
+	_mPSNNReshapeSelInitWithCoderDevice                                                                                                                  = objc.RegisterName("initWithCoder:device:")
+	_mPSNNReshapeSelEncodeToCommandBufferSourceImageReshapedWidthReshapedHeightReshapedFeatureChannels                                                   = objc.RegisterName("encodeToCommandBuffer:sourceImage:reshapedWidth:reshapedHeight:reshapedFeatureChannels:")
+	_mPSNNReshapeSelEncodeToCommandBufferSourceImageDestinationStateDestinationStateIsTemporaryReshapedWidthReshapedHeightReshapedFeatureChannels        = objc.RegisterName("encodeToCommandBuffer:sourceImage:destinationState:destinationStateIsTemporary:reshapedWidth:reshapedHeight:reshapedFeatureChannels:")
+	_mPSNNReshapeSelEncodeBatchToCommandBufferSourceImagesReshapedWidthReshapedHeightReshapedFeatureChannels                                             = objc.RegisterName("encodeBatchToCommandBuffer:sourceImages:reshapedWidth:reshapedHeight:reshapedFeatureChannels:")
 	_mPSNNReshapeSelEncodeBatchToCommandBufferSourceImagesDestinationStatesDestinationStateIsTemporaryReshapedWidthReshapedHeightReshapedFeatureChannels = objc.RegisterName("encodeBatchToCommandBuffer:sourceImages:destinationStates:destinationStateIsTemporary:reshapedWidth:reshapedHeight:reshapedFeatureChannels:")
 )
 
@@ -42,27 +42,35 @@ func MPSNNReshapeFromID(id objc.ID) *MPSNNReshape {
 // @abstract Initialize a MPSNNReshape kernel @param    device    The device the filter will run on @return   A valid MPSNNReshape object or nil, if failure.
 func (o *MPSNNReshape) InitWithDevice(device metal.MTLDevice) *MPSNNReshape {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNReshapeSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNReshapeFromID(_ret)
 }
 
 func (o *MPSNNReshape) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSNNReshape {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNReshapeSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNReshapeFromID(_ret)
 }
 
 // @abstract   Encode a reshape to a command buffer for a given shape. @param  commandBuffer                       The command buffer on which to encode the reshape operation. @param  sourceImage                             The input image to be reshaped. @param  reshapedWidth                           The width of the resulting reshaped image. @param  reshapedHeight                          The height of the resulting reshaped image. @param  reshapedFeatureChannels     The number of feature channels in the resulting reshaped image.
 func (o *MPSNNReshape) EncodeToCommandBufferSourceImageReshapedWidthReshapedHeightReshapedFeatureChannels(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, reshapedWidth uint, reshapedHeight uint, reshapedFeatureChannels uint) *mpscore.MPSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNReshapeSelEncodeToCommandBufferSourceImageReshapedWidthReshapedHeightReshapedFeatureChannels, commandBuffer, sourceImage.Ptr(), reshapedWidth, reshapedHeight, reshapedFeatureChannels)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpscore.MPSImageFromID(_ret)
 }
 
 // @abstract   Encode a reshape to a command buffer for a given shape. @param  commandBuffer                       The command buffer on which to encode the reshape operation. @param  outState                                A state to be created and autoreleased which will hold information about this execution to be provided to a subsequent gradient pass. @param  isTemporary                      YES if the state is to be created as a temporary state, NO otherwise. @param  sourceImage                             The input image to be reshaped. @param  reshapedWidth                           The width of the resulting reshaped image. @param  reshapedHeight                          The height of the resulting reshaped image. @param  reshapedFeatureChannels     The number of feature channels in the resulting reshaped image.
 func (o *MPSNNReshape) EncodeToCommandBufferSourceImageDestinationStateDestinationStateIsTemporaryReshapedWidthReshapedHeightReshapedFeatureChannels(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, outState *mpscore.MPSState, isTemporary bool, reshapedWidth uint, reshapedHeight uint, reshapedFeatureChannels uint) *mpscore.MPSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNReshapeSelEncodeToCommandBufferSourceImageDestinationStateDestinationStateIsTemporaryReshapedWidthReshapedHeightReshapedFeatureChannels, commandBuffer, sourceImage.Ptr(), outState.Ptr(), isTemporary, reshapedWidth, reshapedHeight, reshapedFeatureChannels)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpscore.MPSImageFromID(_ret)
 }
 
@@ -77,4 +85,3 @@ func (o *MPSNNReshape) EncodeBatchToCommandBufferSourceImagesDestinationStatesDe
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mPSNNReshapeSelEncodeBatchToCommandBufferSourceImagesDestinationStatesDestinationStateIsTemporaryReshapedWidthReshapedHeightReshapedFeatureChannels, commandBuffer, sourceImages, outStates, isTemporary, reshapedWidth, reshapedHeight, reshapedFeatureChannels)
 	return _ret
 }
-

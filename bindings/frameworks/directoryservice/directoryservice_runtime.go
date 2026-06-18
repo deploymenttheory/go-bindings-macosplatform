@@ -14,8 +14,8 @@ import (
 
 var (
 	_directoryserviceLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce            sync.Once
+	_failedSymbols       = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -50,18 +50,36 @@ func _loadLibrary() {
 	}
 	_register("dsAddAttribute", func() { purego.RegisterLibFunc(&_dsAddAttribute, _directoryserviceLib, "dsAddAttribute") })
 	_register("dsAddAttributeValue", func() { purego.RegisterLibFunc(&_dsAddAttributeValue, _directoryserviceLib, "dsAddAttributeValue") })
-	_register("dsAddChildPIDToReference", func() { purego.RegisterLibFunc(&_dsAddChildPIDToReference, _directoryserviceLib, "dsAddChildPIDToReference") })
-	_register("dsAllocAttributeValueEntry", func() { purego.RegisterLibFunc(&_dsAllocAttributeValueEntry, _directoryserviceLib, "dsAllocAttributeValueEntry") })
-	_register("dsAllocStringsFromList", func() { purego.RegisterLibFunc(&_dsAllocStringsFromList, _directoryserviceLib, "dsAllocStringsFromList") })
-	_register("dsAppendAuthBufferWithAuthorityAttribute", func() { purego.RegisterLibFunc(&_dsAppendAuthBufferWithAuthorityAttribute, _directoryserviceLib, "dsAppendAuthBufferWithAuthorityAttribute") })
-	_register("dsAppendAuthBufferWithAuthorityStrings", func() { purego.RegisterLibFunc(&_dsAppendAuthBufferWithAuthorityStrings, _directoryserviceLib, "dsAppendAuthBufferWithAuthorityStrings") })
+	_register("dsAddChildPIDToReference", func() {
+		purego.RegisterLibFunc(&_dsAddChildPIDToReference, _directoryserviceLib, "dsAddChildPIDToReference")
+	})
+	_register("dsAllocAttributeValueEntry", func() {
+		purego.RegisterLibFunc(&_dsAllocAttributeValueEntry, _directoryserviceLib, "dsAllocAttributeValueEntry")
+	})
+	_register("dsAllocStringsFromList", func() {
+		purego.RegisterLibFunc(&_dsAllocStringsFromList, _directoryserviceLib, "dsAllocStringsFromList")
+	})
+	_register("dsAppendAuthBufferWithAuthorityAttribute", func() {
+		purego.RegisterLibFunc(&_dsAppendAuthBufferWithAuthorityAttribute, _directoryserviceLib, "dsAppendAuthBufferWithAuthorityAttribute")
+	})
+	_register("dsAppendAuthBufferWithAuthorityStrings", func() {
+		purego.RegisterLibFunc(&_dsAppendAuthBufferWithAuthorityStrings, _directoryserviceLib, "dsAppendAuthBufferWithAuthorityStrings")
+	})
 	_register("dsAppendStringToList", func() { purego.RegisterLibFunc(&_dsAppendStringToList, _directoryserviceLib, "dsAppendStringToList") })
-	_register("dsAppendStringToListAlloc", func() { purego.RegisterLibFunc(&_dsAppendStringToListAlloc, _directoryserviceLib, "dsAppendStringToListAlloc") })
+	_register("dsAppendStringToListAlloc", func() {
+		purego.RegisterLibFunc(&_dsAppendStringToListAlloc, _directoryserviceLib, "dsAppendStringToListAlloc")
+	})
 	_register("dsBuildFromPath", func() { purego.RegisterLibFunc(&_dsBuildFromPath, _directoryserviceLib, "dsBuildFromPath") })
-	_register("dsBuildListFromPathAlloc", func() { purego.RegisterLibFunc(&_dsBuildListFromPathAlloc, _directoryserviceLib, "dsBuildListFromPathAlloc") })
-	_register("dsBuildListFromStringsAllocV", func() { purego.RegisterLibFunc(&_dsBuildListFromStringsAllocV, _directoryserviceLib, "dsBuildListFromStringsAllocV") })
+	_register("dsBuildListFromPathAlloc", func() {
+		purego.RegisterLibFunc(&_dsBuildListFromPathAlloc, _directoryserviceLib, "dsBuildListFromPathAlloc")
+	})
+	_register("dsBuildListFromStringsAllocV", func() {
+		purego.RegisterLibFunc(&_dsBuildListFromStringsAllocV, _directoryserviceLib, "dsBuildListFromStringsAllocV")
+	})
 	_register("dsCloseAttributeList", func() { purego.RegisterLibFunc(&_dsCloseAttributeList, _directoryserviceLib, "dsCloseAttributeList") })
-	_register("dsCloseAttributeValueList", func() { purego.RegisterLibFunc(&_dsCloseAttributeValueList, _directoryserviceLib, "dsCloseAttributeValueList") })
+	_register("dsCloseAttributeValueList", func() {
+		purego.RegisterLibFunc(&_dsCloseAttributeValueList, _directoryserviceLib, "dsCloseAttributeValueList")
+	})
 	_register("dsCloseDirNode", func() { purego.RegisterLibFunc(&_dsCloseDirNode, _directoryserviceLib, "dsCloseDirNode") })
 	_register("dsCloseDirService", func() { purego.RegisterLibFunc(&_dsCloseDirService, _directoryserviceLib, "dsCloseDirService") })
 	_register("dsCloseRecord", func() { purego.RegisterLibFunc(&_dsCloseRecord, _directoryserviceLib, "dsCloseRecord") })
@@ -69,37 +87,67 @@ func _loadLibrary() {
 	_register("dsCreateRecord", func() { purego.RegisterLibFunc(&_dsCreateRecord, _directoryserviceLib, "dsCreateRecord") })
 	_register("dsCreateRecordAndOpen", func() { purego.RegisterLibFunc(&_dsCreateRecordAndOpen, _directoryserviceLib, "dsCreateRecordAndOpen") })
 	_register("dsDataBufferAllocate", func() { purego.RegisterLibFunc(&_dsDataBufferAllocate, _directoryserviceLib, "dsDataBufferAllocate") })
-	_register("dsDataBufferDeAllocate", func() { purego.RegisterLibFunc(&_dsDataBufferDeAllocate, _directoryserviceLib, "dsDataBufferDeAllocate") })
+	_register("dsDataBufferDeAllocate", func() {
+		purego.RegisterLibFunc(&_dsDataBufferDeAllocate, _directoryserviceLib, "dsDataBufferDeAllocate")
+	})
 	_register("dsDataListAllocate", func() { purego.RegisterLibFunc(&_dsDataListAllocate, _directoryserviceLib, "dsDataListAllocate") })
 	_register("dsDataListCopyList", func() { purego.RegisterLibFunc(&_dsDataListCopyList, _directoryserviceLib, "dsDataListCopyList") })
 	_register("dsDataListDeAllocate", func() { purego.RegisterLibFunc(&_dsDataListDeAllocate, _directoryserviceLib, "dsDataListDeAllocate") })
 	_register("dsDataListDeallocate", func() { purego.RegisterLibFunc(&_dsDataListDeallocate, _directoryserviceLib, "dsDataListDeallocate") })
-	_register("dsDataListDeleteThisNode", func() { purego.RegisterLibFunc(&_dsDataListDeleteThisNode, _directoryserviceLib, "dsDataListDeleteThisNode") })
+	_register("dsDataListDeleteThisNode", func() {
+		purego.RegisterLibFunc(&_dsDataListDeleteThisNode, _directoryserviceLib, "dsDataListDeleteThisNode")
+	})
 	_register("dsDataListGetNode", func() { purego.RegisterLibFunc(&_dsDataListGetNode, _directoryserviceLib, "dsDataListGetNode") })
-	_register("dsDataListGetNodeAlloc", func() { purego.RegisterLibFunc(&_dsDataListGetNodeAlloc, _directoryserviceLib, "dsDataListGetNodeAlloc") })
-	_register("dsDataListGetNodeCount", func() { purego.RegisterLibFunc(&_dsDataListGetNodeCount, _directoryserviceLib, "dsDataListGetNodeCount") })
+	_register("dsDataListGetNodeAlloc", func() {
+		purego.RegisterLibFunc(&_dsDataListGetNodeAlloc, _directoryserviceLib, "dsDataListGetNodeAlloc")
+	})
+	_register("dsDataListGetNodeCount", func() {
+		purego.RegisterLibFunc(&_dsDataListGetNodeCount, _directoryserviceLib, "dsDataListGetNodeCount")
+	})
 	_register("dsDataListInsertAfter", func() { purego.RegisterLibFunc(&_dsDataListInsertAfter, _directoryserviceLib, "dsDataListInsertAfter") })
 	_register("dsDataListInsertNode", func() { purego.RegisterLibFunc(&_dsDataListInsertNode, _directoryserviceLib, "dsDataListInsertNode") })
 	_register("dsDataListMergeList", func() { purego.RegisterLibFunc(&_dsDataListMergeList, _directoryserviceLib, "dsDataListMergeList") })
-	_register("dsDataListMergeListAfter", func() { purego.RegisterLibFunc(&_dsDataListMergeListAfter, _directoryserviceLib, "dsDataListMergeListAfter") })
+	_register("dsDataListMergeListAfter", func() {
+		purego.RegisterLibFunc(&_dsDataListMergeListAfter, _directoryserviceLib, "dsDataListMergeListAfter")
+	})
 	_register("dsDataListRemoveNodes", func() { purego.RegisterLibFunc(&_dsDataListRemoveNodes, _directoryserviceLib, "dsDataListRemoveNodes") })
-	_register("dsDataListRemoveThisNode", func() { purego.RegisterLibFunc(&_dsDataListRemoveThisNode, _directoryserviceLib, "dsDataListRemoveThisNode") })
-	_register("dsDataNodeAllocateBlock", func() { purego.RegisterLibFunc(&_dsDataNodeAllocateBlock, _directoryserviceLib, "dsDataNodeAllocateBlock") })
-	_register("dsDataNodeAllocateString", func() { purego.RegisterLibFunc(&_dsDataNodeAllocateString, _directoryserviceLib, "dsDataNodeAllocateString") })
+	_register("dsDataListRemoveThisNode", func() {
+		purego.RegisterLibFunc(&_dsDataListRemoveThisNode, _directoryserviceLib, "dsDataListRemoveThisNode")
+	})
+	_register("dsDataNodeAllocateBlock", func() {
+		purego.RegisterLibFunc(&_dsDataNodeAllocateBlock, _directoryserviceLib, "dsDataNodeAllocateBlock")
+	})
+	_register("dsDataNodeAllocateString", func() {
+		purego.RegisterLibFunc(&_dsDataNodeAllocateString, _directoryserviceLib, "dsDataNodeAllocateString")
+	})
 	_register("dsDataNodeDeAllocate", func() { purego.RegisterLibFunc(&_dsDataNodeDeAllocate, _directoryserviceLib, "dsDataNodeDeAllocate") })
 	_register("dsDataNodeGetLength", func() { purego.RegisterLibFunc(&_dsDataNodeGetLength, _directoryserviceLib, "dsDataNodeGetLength") })
 	_register("dsDataNodeGetSize", func() { purego.RegisterLibFunc(&_dsDataNodeGetSize, _directoryserviceLib, "dsDataNodeGetSize") })
 	_register("dsDataNodeSetLength", func() { purego.RegisterLibFunc(&_dsDataNodeSetLength, _directoryserviceLib, "dsDataNodeSetLength") })
-	_register("dsDeallocAttributeEntry", func() { purego.RegisterLibFunc(&_dsDeallocAttributeEntry, _directoryserviceLib, "dsDeallocAttributeEntry") })
-	_register("dsDeallocAttributeValueEntry", func() { purego.RegisterLibFunc(&_dsDeallocAttributeValueEntry, _directoryserviceLib, "dsDeallocAttributeValueEntry") })
+	_register("dsDeallocAttributeEntry", func() {
+		purego.RegisterLibFunc(&_dsDeallocAttributeEntry, _directoryserviceLib, "dsDeallocAttributeEntry")
+	})
+	_register("dsDeallocAttributeValueEntry", func() {
+		purego.RegisterLibFunc(&_dsDeallocAttributeValueEntry, _directoryserviceLib, "dsDeallocAttributeValueEntry")
+	})
 	_register("dsDeallocRecordEntry", func() { purego.RegisterLibFunc(&_dsDeallocRecordEntry, _directoryserviceLib, "dsDeallocRecordEntry") })
 	_register("dsDeleteRecord", func() { purego.RegisterLibFunc(&_dsDeleteRecord, _directoryserviceLib, "dsDeleteRecord") })
-	_register("dsDoAttributeValueSearch", func() { purego.RegisterLibFunc(&_dsDoAttributeValueSearch, _directoryserviceLib, "dsDoAttributeValueSearch") })
-	_register("dsDoAttributeValueSearchWithData", func() { purego.RegisterLibFunc(&_dsDoAttributeValueSearchWithData, _directoryserviceLib, "dsDoAttributeValueSearchWithData") })
+	_register("dsDoAttributeValueSearch", func() {
+		purego.RegisterLibFunc(&_dsDoAttributeValueSearch, _directoryserviceLib, "dsDoAttributeValueSearch")
+	})
+	_register("dsDoAttributeValueSearchWithData", func() {
+		purego.RegisterLibFunc(&_dsDoAttributeValueSearchWithData, _directoryserviceLib, "dsDoAttributeValueSearchWithData")
+	})
 	_register("dsDoDirNodeAuth", func() { purego.RegisterLibFunc(&_dsDoDirNodeAuth, _directoryserviceLib, "dsDoDirNodeAuth") })
-	_register("dsDoDirNodeAuthOnRecordType", func() { purego.RegisterLibFunc(&_dsDoDirNodeAuthOnRecordType, _directoryserviceLib, "dsDoDirNodeAuthOnRecordType") })
-	_register("dsDoMultipleAttributeValueSearch", func() { purego.RegisterLibFunc(&_dsDoMultipleAttributeValueSearch, _directoryserviceLib, "dsDoMultipleAttributeValueSearch") })
-	_register("dsDoMultipleAttributeValueSearchWithData", func() { purego.RegisterLibFunc(&_dsDoMultipleAttributeValueSearchWithData, _directoryserviceLib, "dsDoMultipleAttributeValueSearchWithData") })
+	_register("dsDoDirNodeAuthOnRecordType", func() {
+		purego.RegisterLibFunc(&_dsDoDirNodeAuthOnRecordType, _directoryserviceLib, "dsDoDirNodeAuthOnRecordType")
+	})
+	_register("dsDoMultipleAttributeValueSearch", func() {
+		purego.RegisterLibFunc(&_dsDoMultipleAttributeValueSearch, _directoryserviceLib, "dsDoMultipleAttributeValueSearch")
+	})
+	_register("dsDoMultipleAttributeValueSearchWithData", func() {
+		purego.RegisterLibFunc(&_dsDoMultipleAttributeValueSearchWithData, _directoryserviceLib, "dsDoMultipleAttributeValueSearchWithData")
+	})
 	_register("dsDoPlugInCustomCall", func() { purego.RegisterLibFunc(&_dsDoPlugInCustomCall, _directoryserviceLib, "dsDoPlugInCustomCall") })
 	_register("dsFindDirNodes", func() { purego.RegisterLibFunc(&_dsFindDirNodes, _directoryserviceLib, "dsFindDirNodes") })
 	_register("dsFlushRecord", func() { purego.RegisterLibFunc(&_dsFlushRecord, _directoryserviceLib, "dsFlushRecord") })
@@ -107,23 +155,45 @@ func _loadLibrary() {
 	_register("dsGetAttributeValue", func() { purego.RegisterLibFunc(&_dsGetAttributeValue, _directoryserviceLib, "dsGetAttributeValue") })
 	_register("dsGetDataLength", func() { purego.RegisterLibFunc(&_dsGetDataLength, _directoryserviceLib, "dsGetDataLength") })
 	_register("dsGetDirNodeCount", func() { purego.RegisterLibFunc(&_dsGetDirNodeCount, _directoryserviceLib, "dsGetDirNodeCount") })
-	_register("dsGetDirNodeCountWithInfo", func() { purego.RegisterLibFunc(&_dsGetDirNodeCountWithInfo, _directoryserviceLib, "dsGetDirNodeCountWithInfo") })
+	_register("dsGetDirNodeCountWithInfo", func() {
+		purego.RegisterLibFunc(&_dsGetDirNodeCountWithInfo, _directoryserviceLib, "dsGetDirNodeCountWithInfo")
+	})
 	_register("dsGetDirNodeInfo", func() { purego.RegisterLibFunc(&_dsGetDirNodeInfo, _directoryserviceLib, "dsGetDirNodeInfo") })
 	_register("dsGetDirNodeList", func() { purego.RegisterLibFunc(&_dsGetDirNodeList, _directoryserviceLib, "dsGetDirNodeList") })
 	_register("dsGetDirNodeName", func() { purego.RegisterLibFunc(&_dsGetDirNodeName, _directoryserviceLib, "dsGetDirNodeName") })
-	_register("dsGetNextAttributeEntry", func() { purego.RegisterLibFunc(&_dsGetNextAttributeEntry, _directoryserviceLib, "dsGetNextAttributeEntry") })
-	_register("dsGetNextAttributeValue", func() { purego.RegisterLibFunc(&_dsGetNextAttributeValue, _directoryserviceLib, "dsGetNextAttributeValue") })
+	_register("dsGetNextAttributeEntry", func() {
+		purego.RegisterLibFunc(&_dsGetNextAttributeEntry, _directoryserviceLib, "dsGetNextAttributeEntry")
+	})
+	_register("dsGetNextAttributeValue", func() {
+		purego.RegisterLibFunc(&_dsGetNextAttributeValue, _directoryserviceLib, "dsGetNextAttributeValue")
+	})
 	_register("dsGetPathFromList", func() { purego.RegisterLibFunc(&_dsGetPathFromList, _directoryserviceLib, "dsGetPathFromList") })
-	_register("dsGetRecordAttributeInfo", func() { purego.RegisterLibFunc(&_dsGetRecordAttributeInfo, _directoryserviceLib, "dsGetRecordAttributeInfo") })
-	_register("dsGetRecordAttributeValueByID", func() { purego.RegisterLibFunc(&_dsGetRecordAttributeValueByID, _directoryserviceLib, "dsGetRecordAttributeValueByID") })
-	_register("dsGetRecordAttributeValueByIndex", func() { purego.RegisterLibFunc(&_dsGetRecordAttributeValueByIndex, _directoryserviceLib, "dsGetRecordAttributeValueByIndex") })
-	_register("dsGetRecordAttributeValueByValue", func() { purego.RegisterLibFunc(&_dsGetRecordAttributeValueByValue, _directoryserviceLib, "dsGetRecordAttributeValueByValue") })
+	_register("dsGetRecordAttributeInfo", func() {
+		purego.RegisterLibFunc(&_dsGetRecordAttributeInfo, _directoryserviceLib, "dsGetRecordAttributeInfo")
+	})
+	_register("dsGetRecordAttributeValueByID", func() {
+		purego.RegisterLibFunc(&_dsGetRecordAttributeValueByID, _directoryserviceLib, "dsGetRecordAttributeValueByID")
+	})
+	_register("dsGetRecordAttributeValueByIndex", func() {
+		purego.RegisterLibFunc(&_dsGetRecordAttributeValueByIndex, _directoryserviceLib, "dsGetRecordAttributeValueByIndex")
+	})
+	_register("dsGetRecordAttributeValueByValue", func() {
+		purego.RegisterLibFunc(&_dsGetRecordAttributeValueByValue, _directoryserviceLib, "dsGetRecordAttributeValueByValue")
+	})
 	_register("dsGetRecordEntry", func() { purego.RegisterLibFunc(&_dsGetRecordEntry, _directoryserviceLib, "dsGetRecordEntry") })
 	_register("dsGetRecordList", func() { purego.RegisterLibFunc(&_dsGetRecordList, _directoryserviceLib, "dsGetRecordList") })
-	_register("dsGetRecordNameFromEntry", func() { purego.RegisterLibFunc(&_dsGetRecordNameFromEntry, _directoryserviceLib, "dsGetRecordNameFromEntry") })
-	_register("dsGetRecordReferenceInfo", func() { purego.RegisterLibFunc(&_dsGetRecordReferenceInfo, _directoryserviceLib, "dsGetRecordReferenceInfo") })
-	_register("dsGetRecordTypeFromEntry", func() { purego.RegisterLibFunc(&_dsGetRecordTypeFromEntry, _directoryserviceLib, "dsGetRecordTypeFromEntry") })
-	_register("dsIsDirServiceLocalRunning", func() { purego.RegisterLibFunc(&_dsIsDirServiceLocalRunning, _directoryserviceLib, "dsIsDirServiceLocalRunning") })
+	_register("dsGetRecordNameFromEntry", func() {
+		purego.RegisterLibFunc(&_dsGetRecordNameFromEntry, _directoryserviceLib, "dsGetRecordNameFromEntry")
+	})
+	_register("dsGetRecordReferenceInfo", func() {
+		purego.RegisterLibFunc(&_dsGetRecordReferenceInfo, _directoryserviceLib, "dsGetRecordReferenceInfo")
+	})
+	_register("dsGetRecordTypeFromEntry", func() {
+		purego.RegisterLibFunc(&_dsGetRecordTypeFromEntry, _directoryserviceLib, "dsGetRecordTypeFromEntry")
+	})
+	_register("dsIsDirServiceLocalRunning", func() {
+		purego.RegisterLibFunc(&_dsIsDirServiceLocalRunning, _directoryserviceLib, "dsIsDirServiceLocalRunning")
+	})
 	_register("dsIsDirServiceRunning", func() { purego.RegisterLibFunc(&_dsIsDirServiceRunning, _directoryserviceLib, "dsIsDirServiceRunning") })
 	_register("dsOpenDirNode", func() { purego.RegisterLibFunc(&_dsOpenDirNode, _directoryserviceLib, "dsOpenDirNode") })
 	_register("dsOpenDirService", func() { purego.RegisterLibFunc(&_dsOpenDirService, _directoryserviceLib, "dsOpenDirService") })
@@ -133,8 +203,12 @@ func _loadLibrary() {
 	_register("dsParseAuthAuthority", func() { purego.RegisterLibFunc(&_dsParseAuthAuthority, _directoryserviceLib, "dsParseAuthAuthority") })
 	_register("dsReleaseContinueData", func() { purego.RegisterLibFunc(&_dsReleaseContinueData, _directoryserviceLib, "dsReleaseContinueData") })
 	_register("dsRemoveAttribute", func() { purego.RegisterLibFunc(&_dsRemoveAttribute, _directoryserviceLib, "dsRemoveAttribute") })
-	_register("dsRemoveAttributeValue", func() { purego.RegisterLibFunc(&_dsRemoveAttributeValue, _directoryserviceLib, "dsRemoveAttributeValue") })
-	_register("dsServiceInformationAllocate", func() { purego.RegisterLibFunc(&_dsServiceInformationAllocate, _directoryserviceLib, "dsServiceInformationAllocate") })
+	_register("dsRemoveAttributeValue", func() {
+		purego.RegisterLibFunc(&_dsRemoveAttributeValue, _directoryserviceLib, "dsRemoveAttributeValue")
+	})
+	_register("dsServiceInformationAllocate", func() {
+		purego.RegisterLibFunc(&_dsServiceInformationAllocate, _directoryserviceLib, "dsServiceInformationAllocate")
+	})
 	_register("dsSetAttributeValue", func() { purego.RegisterLibFunc(&_dsSetAttributeValue, _directoryserviceLib, "dsSetAttributeValue") })
 	_register("dsSetAttributeValues", func() { purego.RegisterLibFunc(&_dsSetAttributeValues, _directoryserviceLib, "dsSetAttributeValues") })
 	_register("dsSetRecordName", func() { purego.RegisterLibFunc(&_dsSetRecordName, _directoryserviceLib, "dsSetRecordName") })

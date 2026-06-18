@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A class that defines a set of methods for saving and restoring user defaults for screen savers. ``ScreenSaverDefaults`` gives you access to preference values you need to configure your screen saver. Because multiple apps can load a screen saver, you can’t use the standard <doc://com.apple.documentation/documentation/foundation/nsuserdefaults> object to store preferences. Instead, instantiate this class using the ``ScreenSaverDefaults/defaultsForModuleWithName:`` method, which takes your screen saver’s bundle identifier as a parameter. The resulting object gives you a way to store your preference values and associate them only with your screen saver. Use the inherited <doc://com.apple.documentation/documentation/foundation/nsuserdefaults> methods to load, store, or modify values.
+// A class that defines a set of methods for saving and restoring user defaults for screen savers. “ScreenSaverDefaults“ gives you access to preference values you need to configure your screen saver. Because multiple apps can load a screen saver, you can’t use the standard <doc://com.apple.documentation/documentation/foundation/nsuserdefaults> object to store preferences. Instead, instantiate this class using the “ScreenSaverDefaults/defaultsForModuleWithName:“ method, which takes your screen saver’s bundle identifier as a parameter. The resulting object gives you a way to store your preference values and associate them only with your screen saver. Use the inherited <doc://com.apple.documentation/documentation/foundation/nsuserdefaults> methods to load, store, or modify values.
 //
 // Apple documentation: https://developer.apple.com/documentation/screensaver/screensaverdefaults
 type ScreenSaverDefaults struct {
@@ -18,7 +18,7 @@ type ScreenSaverDefaults struct {
 }
 
 var (
-	_clsScreenSaverDefaults = _objcClass("ScreenSaverDefaults")
+	_clsScreenSaverDefaults                          = _objcClass("ScreenSaverDefaults")
 	_screenSaverDefaultsSelDefaultsForModuleWithName = objc.RegisterName("defaultsForModuleWithName:")
 )
 
@@ -35,7 +35,8 @@ func ScreenSaverDefaultsFromID(id objc.ID) *ScreenSaverDefaults {
 // Returns a screen saver defaults instance that reads and writes defaults for the specified module. - Parameters: - inModuleName: The bundle identifier for the module.
 func ScreenSaverDefaultsDefaultsForModuleWithName(inModuleName *foundation.NSString) *ScreenSaverDefaults {
 	_ret := objc.Send[objc.ID](objc.ID(_clsScreenSaverDefaults), _screenSaverDefaultsSelDefaultsForModuleWithName, inModuleName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ScreenSaverDefaultsFromID(_ret)
 }
-

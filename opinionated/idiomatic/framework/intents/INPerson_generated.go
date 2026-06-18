@@ -206,4 +206,3 @@ type Personable interface {
 }
 
 var _ Personable = (*Person)(nil)
-

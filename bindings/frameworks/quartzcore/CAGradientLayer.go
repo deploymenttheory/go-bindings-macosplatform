@@ -17,17 +17,17 @@ type CAGradientLayer struct {
 }
 
 var (
-	_clsCAGradientLayer = _objcClass("CAGradientLayer")
-	_cAGradientLayerSelColors = objc.RegisterName("colors")
-	_cAGradientLayerSelSetColors = objc.RegisterName("setColors:")
-	_cAGradientLayerSelLocations = objc.RegisterName("locations")
-	_cAGradientLayerSelSetLocations = objc.RegisterName("setLocations:")
-	_cAGradientLayerSelStartPoint = objc.RegisterName("startPoint")
+	_clsCAGradientLayer              = _objcClass("CAGradientLayer")
+	_cAGradientLayerSelColors        = objc.RegisterName("colors")
+	_cAGradientLayerSelSetColors     = objc.RegisterName("setColors:")
+	_cAGradientLayerSelLocations     = objc.RegisterName("locations")
+	_cAGradientLayerSelSetLocations  = objc.RegisterName("setLocations:")
+	_cAGradientLayerSelStartPoint    = objc.RegisterName("startPoint")
 	_cAGradientLayerSelSetStartPoint = objc.RegisterName("setStartPoint:")
-	_cAGradientLayerSelEndPoint = objc.RegisterName("endPoint")
-	_cAGradientLayerSelSetEndPoint = objc.RegisterName("setEndPoint:")
-	_cAGradientLayerSelType = objc.RegisterName("type")
-	_cAGradientLayerSelSetType = objc.RegisterName("setType:")
+	_cAGradientLayerSelEndPoint      = objc.RegisterName("endPoint")
+	_cAGradientLayerSelSetEndPoint   = objc.RegisterName("setEndPoint:")
+	_cAGradientLayerSelType          = objc.RegisterName("type")
+	_cAGradientLayerSelSetType       = objc.RegisterName("setType:")
 )
 
 func CAGradientLayerFromID(id objc.ID) *CAGradientLayer {
@@ -78,11 +78,12 @@ func (o *CAGradientLayer) SetEndPoint(endPoint corefoundation.CGPoint) {
 
 func (o *CAGradientLayer) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cAGradientLayerSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CAGradientLayer) SetType(type_ *foundation.NSString) {
 	o.Ptr().Send(_cAGradientLayerSelSetType, type_.Ptr())
 }
-

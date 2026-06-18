@@ -43,4 +43,3 @@ type SymbolEffectable interface {
 }
 
 var _ SymbolEffectable = (*SymbolEffect)(nil)
-

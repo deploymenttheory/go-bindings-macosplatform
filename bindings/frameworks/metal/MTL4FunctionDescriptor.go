@@ -26,4 +26,3 @@ func MTL4FunctionDescriptorFromID(id objc.ID) *MTL4FunctionDescriptor {
 	purego.Track(o)
 	return o
 }
-

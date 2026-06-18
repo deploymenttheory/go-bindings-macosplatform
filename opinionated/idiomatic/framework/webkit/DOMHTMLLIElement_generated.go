@@ -179,11 +179,17 @@ func (x *DOMHTMLLIElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.in
 
 func (x *DOMHTMLLIElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
 
-func (x *DOMHTMLLIElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTMLElement.DOMElement.DOMNode }
+func (x *DOMHTMLLIElement) asDOMNode() *raw.DOMNode {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode
+}
 
-func (x *DOMHTMLLIElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
+func (x *DOMHTMLLIElement) asDOMObject() *raw.DOMObject {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject
+}
 
-func (x *DOMHTMLLIElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+func (x *DOMHTMLLIElement) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject
+}
 
 // DOMHTMLLIElementable is the interface implemented by [DOMHTMLLIElement], for mocking and DI.
 type DOMHTMLLIElementable interface {
@@ -214,4 +220,3 @@ type DOMHTMLLIElementable interface {
 }
 
 var _ DOMHTMLLIElementable = (*DOMHTMLLIElement)(nil)
-

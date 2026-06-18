@@ -85,9 +85,13 @@ func (x *ImageBilinearScale) WithLabel(label string) *ImageBilinearScale {
 
 func (x *ImageBilinearScale) asImageScale() *mpsimage.MPSImageScale { return &x.inner.MPSImageScale }
 
-func (x *ImageBilinearScale) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSImageScale.MPSUnaryImageKernel }
+func (x *ImageBilinearScale) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
+	return &x.inner.MPSImageScale.MPSUnaryImageKernel
+}
 
-func (x *ImageBilinearScale) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImageScale.MPSUnaryImageKernel.MPSKernel }
+func (x *ImageBilinearScale) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSImageScale.MPSUnaryImageKernel.MPSKernel
+}
 
 // ImageBilinearScaleable is the interface implemented by [ImageBilinearScale], for mocking and DI.
 type ImageBilinearScaleable interface {
@@ -101,4 +105,3 @@ type ImageBilinearScaleable interface {
 }
 
 var _ ImageBilinearScaleable = (*ImageBilinearScale)(nil)
-

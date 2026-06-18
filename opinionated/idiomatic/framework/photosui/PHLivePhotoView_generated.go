@@ -182,4 +182,3 @@ type LivePhotoViewable interface {
 }
 
 var _ LivePhotoViewable = (*LivePhotoView)(nil)
-

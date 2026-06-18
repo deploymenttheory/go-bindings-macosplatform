@@ -303,4 +303,3 @@ type ScannerDeviceViewable interface {
 }
 
 var _ ScannerDeviceViewable = (*ScannerDeviceView)(nil)
-

@@ -16,10 +16,10 @@ type NEFilterSettings struct {
 }
 
 var (
-	_clsNEFilterSettings = _objcClass("NEFilterSettings")
+	_clsNEFilterSettings                           = _objcClass("NEFilterSettings")
 	_nEFilterSettingsSelInitWithRulesDefaultAction = objc.RegisterName("initWithRules:defaultAction:")
-	_nEFilterSettingsSelRules = objc.RegisterName("rules")
-	_nEFilterSettingsSelDefaultAction = objc.RegisterName("defaultAction")
+	_nEFilterSettingsSelRules                      = objc.RegisterName("rules")
+	_nEFilterSettingsSelDefaultAction              = objc.RegisterName("defaultAction")
 )
 
 func NEFilterSettingsFromID(id objc.ID) *NEFilterSettings {
@@ -35,14 +35,18 @@ func NEFilterSettingsFromID(id objc.ID) *NEFilterSettings {
 // @method initWithRules:defaultAction: @discussion Initialize a newly-allocated NEFilterSettings object with a set of filtering rules and a default filter action to takke if none of the rules match. @param rules An NSArray containing an ordered list of NEFilterRule objects. The maximum number of rules that this array can contain is 1000. @param defaultAction The NEFilterAction to take for flows of network (non-loopback) data that do not match any of the specified rules. The default defaultAction is NEFilterActionFilterData. If defaultAction is NEFilterActionAllow or NEFilterActionDrop, then the rules array must contain at least one NEFilterRule. The default action for loopback traffic is NEFilterActionAllow and cannot be changed. To filter loopback traffic you must include rules in the rules array that specifically match loopback traffic and have an action of NEFilterActionFilterData. @return the newly-initialized NEFilterSettings object.
 func (o *NEFilterSettings) InitWithRulesDefaultAction(rules *foundation.NSArray[*NEFilterRule], defaultAction NEFilterAction) *NEFilterSettings {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFilterSettingsSelInitWithRulesDefaultAction, rules.Ptr(), defaultAction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEFilterSettingsFromID(_ret)
 }
 
 // @property rules @discussion An NSArray containing an ordered list of NEFilterRuleObjects. After the NEFilterSettings are applied to the system, each network flow is matched against these rules in order, and the NEFilterAction of the first rule that matches is taken: NEFilterActionAllow: Allow the flow of data to proceed on its journey through the networking stack without consulting this provider. NEFilterActionDrop: Drop the flow without consulting this provider. NEFilterActionFilterData: Call this provider's handleNewFlow: method with the flow.
 func (o *NEFilterSettings) Rules() *foundation.NSArray[*NEFilterRule] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFilterSettingsSelRules)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NEFilterRule](_ret)
 }
 
@@ -51,4 +55,3 @@ func (o *NEFilterSettings) DefaultAction() NEFilterAction {
 	_ret := objc.Send[NEFilterAction](o.Ptr(), _nEFilterSettingsSelDefaultAction)
 	return _ret
 }
-

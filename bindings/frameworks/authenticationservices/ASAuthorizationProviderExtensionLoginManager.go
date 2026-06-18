@@ -18,35 +18,35 @@ type ASAuthorizationProviderExtensionLoginManager struct {
 }
 
 var (
-	_clsASAuthorizationProviderExtensionLoginManager = _objcClass("ASAuthorizationProviderExtensionLoginManager")
-	_aSAuthorizationProviderExtensionLoginManagerSelSaveUserLoginConfigurationError = objc.RegisterName("saveUserLoginConfiguration:error:")
-	_aSAuthorizationProviderExtensionLoginManagerSelSaveLoginConfigurationError = objc.RegisterName("saveLoginConfiguration:error:")
-	_aSAuthorizationProviderExtensionLoginManagerSelSaveCertificateKeyType = objc.RegisterName("saveCertificate:keyType:")
-	_aSAuthorizationProviderExtensionLoginManagerSelCopyKeyForKeyType = objc.RegisterName("copyKeyForKeyType:")
-	_aSAuthorizationProviderExtensionLoginManagerSelCopyIdentityForKeyType = objc.RegisterName("copyIdentityForKeyType:")
-	_aSAuthorizationProviderExtensionLoginManagerSelBeginKeyRotationForKeyType = objc.RegisterName("beginKeyRotationForKeyType:")
-	_aSAuthorizationProviderExtensionLoginManagerSelCompleteKeyRotationForKeyType = objc.RegisterName("completeKeyRotationForKeyType:")
-	_aSAuthorizationProviderExtensionLoginManagerSelUserNeedsReauthenticationWithCompletion = objc.RegisterName("userNeedsReauthenticationWithCompletion:")
-	_aSAuthorizationProviderExtensionLoginManagerSelDeviceRegistrationsNeedsRepair = objc.RegisterName("deviceRegistrationsNeedsRepair")
-	_aSAuthorizationProviderExtensionLoginManagerSelUserRegistrationsNeedsRepair = objc.RegisterName("userRegistrationsNeedsRepair")
-	_aSAuthorizationProviderExtensionLoginManagerSelDecryptionKeysNeedRepair = objc.RegisterName("decryptionKeysNeedRepair")
-	_aSAuthorizationProviderExtensionLoginManagerSelResetKeys = objc.RegisterName("resetKeys")
-	_aSAuthorizationProviderExtensionLoginManagerSelResetDeviceKeys = objc.RegisterName("resetDeviceKeys")
-	_aSAuthorizationProviderExtensionLoginManagerSelResetUserSecureEnclaveKey = objc.RegisterName("resetUserSecureEnclaveKey")
-	_aSAuthorizationProviderExtensionLoginManagerSelAttestKeyClientDataHashCompletion = objc.RegisterName("attestKey:clientDataHash:completion:")
-	_aSAuthorizationProviderExtensionLoginManagerSelAttestPendingKeyClientDataHashCompletion = objc.RegisterName("attestPendingKey:clientDataHash:completion:")
+	_clsASAuthorizationProviderExtensionLoginManager                                                = _objcClass("ASAuthorizationProviderExtensionLoginManager")
+	_aSAuthorizationProviderExtensionLoginManagerSelSaveUserLoginConfigurationError                 = objc.RegisterName("saveUserLoginConfiguration:error:")
+	_aSAuthorizationProviderExtensionLoginManagerSelSaveLoginConfigurationError                     = objc.RegisterName("saveLoginConfiguration:error:")
+	_aSAuthorizationProviderExtensionLoginManagerSelSaveCertificateKeyType                          = objc.RegisterName("saveCertificate:keyType:")
+	_aSAuthorizationProviderExtensionLoginManagerSelCopyKeyForKeyType                               = objc.RegisterName("copyKeyForKeyType:")
+	_aSAuthorizationProviderExtensionLoginManagerSelCopyIdentityForKeyType                          = objc.RegisterName("copyIdentityForKeyType:")
+	_aSAuthorizationProviderExtensionLoginManagerSelBeginKeyRotationForKeyType                      = objc.RegisterName("beginKeyRotationForKeyType:")
+	_aSAuthorizationProviderExtensionLoginManagerSelCompleteKeyRotationForKeyType                   = objc.RegisterName("completeKeyRotationForKeyType:")
+	_aSAuthorizationProviderExtensionLoginManagerSelUserNeedsReauthenticationWithCompletion         = objc.RegisterName("userNeedsReauthenticationWithCompletion:")
+	_aSAuthorizationProviderExtensionLoginManagerSelDeviceRegistrationsNeedsRepair                  = objc.RegisterName("deviceRegistrationsNeedsRepair")
+	_aSAuthorizationProviderExtensionLoginManagerSelUserRegistrationsNeedsRepair                    = objc.RegisterName("userRegistrationsNeedsRepair")
+	_aSAuthorizationProviderExtensionLoginManagerSelDecryptionKeysNeedRepair                        = objc.RegisterName("decryptionKeysNeedRepair")
+	_aSAuthorizationProviderExtensionLoginManagerSelResetKeys                                       = objc.RegisterName("resetKeys")
+	_aSAuthorizationProviderExtensionLoginManagerSelResetDeviceKeys                                 = objc.RegisterName("resetDeviceKeys")
+	_aSAuthorizationProviderExtensionLoginManagerSelResetUserSecureEnclaveKey                       = objc.RegisterName("resetUserSecureEnclaveKey")
+	_aSAuthorizationProviderExtensionLoginManagerSelAttestKeyClientDataHashCompletion               = objc.RegisterName("attestKey:clientDataHash:completion:")
+	_aSAuthorizationProviderExtensionLoginManagerSelAttestPendingKeyClientDataHashCompletion        = objc.RegisterName("attestPendingKey:clientDataHash:completion:")
 	_aSAuthorizationProviderExtensionLoginManagerSelPresentRegistrationViewControllerWithCompletion = objc.RegisterName("presentRegistrationViewControllerWithCompletion:")
-	_aSAuthorizationProviderExtensionLoginManagerSelIsDeviceRegistered = objc.RegisterName("isDeviceRegistered")
-	_aSAuthorizationProviderExtensionLoginManagerSelIsUserRegistered = objc.RegisterName("isUserRegistered")
-	_aSAuthorizationProviderExtensionLoginManagerSelRegistrationToken = objc.RegisterName("registrationToken")
-	_aSAuthorizationProviderExtensionLoginManagerSelAuthenticationMethod = objc.RegisterName("authenticationMethod")
-	_aSAuthorizationProviderExtensionLoginManagerSelExtensionData = objc.RegisterName("extensionData")
-	_aSAuthorizationProviderExtensionLoginManagerSelLoginUserName = objc.RegisterName("loginUserName")
-	_aSAuthorizationProviderExtensionLoginManagerSelSetLoginUserName = objc.RegisterName("setLoginUserName:")
-	_aSAuthorizationProviderExtensionLoginManagerSelUserLoginConfiguration = objc.RegisterName("userLoginConfiguration")
-	_aSAuthorizationProviderExtensionLoginManagerSelSsoTokens = objc.RegisterName("ssoTokens")
-	_aSAuthorizationProviderExtensionLoginManagerSelSetSsoTokens = objc.RegisterName("setSsoTokens:")
-	_aSAuthorizationProviderExtensionLoginManagerSelLoginConfiguration = objc.RegisterName("loginConfiguration")
+	_aSAuthorizationProviderExtensionLoginManagerSelIsDeviceRegistered                              = objc.RegisterName("isDeviceRegistered")
+	_aSAuthorizationProviderExtensionLoginManagerSelIsUserRegistered                                = objc.RegisterName("isUserRegistered")
+	_aSAuthorizationProviderExtensionLoginManagerSelRegistrationToken                               = objc.RegisterName("registrationToken")
+	_aSAuthorizationProviderExtensionLoginManagerSelAuthenticationMethod                            = objc.RegisterName("authenticationMethod")
+	_aSAuthorizationProviderExtensionLoginManagerSelExtensionData                                   = objc.RegisterName("extensionData")
+	_aSAuthorizationProviderExtensionLoginManagerSelLoginUserName                                   = objc.RegisterName("loginUserName")
+	_aSAuthorizationProviderExtensionLoginManagerSelSetLoginUserName                                = objc.RegisterName("setLoginUserName:")
+	_aSAuthorizationProviderExtensionLoginManagerSelUserLoginConfiguration                          = objc.RegisterName("userLoginConfiguration")
+	_aSAuthorizationProviderExtensionLoginManagerSelSsoTokens                                       = objc.RegisterName("ssoTokens")
+	_aSAuthorizationProviderExtensionLoginManagerSelSetSsoTokens                                    = objc.RegisterName("setSsoTokens:")
+	_aSAuthorizationProviderExtensionLoginManagerSelLoginConfiguration                              = objc.RegisterName("loginConfiguration")
 )
 
 func ASAuthorizationProviderExtensionLoginManagerFromID(id objc.ID) *ASAuthorizationProviderExtensionLoginManager {
@@ -186,7 +186,9 @@ func (o *ASAuthorizationProviderExtensionLoginManager) IsUserRegistered() bool {
 // @abstract Returns the device registration token from the MDM profile.
 func (o *ASAuthorizationProviderExtensionLoginManager) RegistrationToken() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginManagerSelRegistrationToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -217,7 +219,9 @@ func (o *ASAuthorizationProviderExtensionLoginManager) SetLoginUserName(loginUse
 // @abstract Retrieves the current user login configuration for the extension.
 func (o *ASAuthorizationProviderExtensionLoginManager) UserLoginConfiguration() *ASAuthorizationProviderExtensionUserLoginConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginManagerSelUserLoginConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationProviderExtensionUserLoginConfigurationFromID(_ret)
 }
 
@@ -234,7 +238,8 @@ func (o *ASAuthorizationProviderExtensionLoginManager) SetSsoTokens(ssoTokens *f
 // @abstract Retrieves or sets the current login configuration for the extension.
 func (o *ASAuthorizationProviderExtensionLoginManager) LoginConfiguration() *ASAuthorizationProviderExtensionLoginConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginManagerSelLoginConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationProviderExtensionLoginConfigurationFromID(_ret)
 }
-

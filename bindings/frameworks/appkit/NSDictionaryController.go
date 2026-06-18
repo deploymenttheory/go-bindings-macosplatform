@@ -16,19 +16,19 @@ type NSDictionaryController struct {
 }
 
 var (
-	_clsNSDictionaryController = _objcClass("NSDictionaryController")
-	_nSDictionaryControllerSelInitialKey = objc.RegisterName("initialKey")
-	_nSDictionaryControllerSelSetInitialKey = objc.RegisterName("setInitialKey:")
-	_nSDictionaryControllerSelInitialValue = objc.RegisterName("initialValue")
-	_nSDictionaryControllerSelSetInitialValue = objc.RegisterName("setInitialValue:")
-	_nSDictionaryControllerSelIncludedKeys = objc.RegisterName("includedKeys")
-	_nSDictionaryControllerSelSetIncludedKeys = objc.RegisterName("setIncludedKeys:")
-	_nSDictionaryControllerSelExcludedKeys = objc.RegisterName("excludedKeys")
-	_nSDictionaryControllerSelSetExcludedKeys = objc.RegisterName("setExcludedKeys:")
-	_nSDictionaryControllerSelLocalizedKeyDictionary = objc.RegisterName("localizedKeyDictionary")
+	_clsNSDictionaryController                          = _objcClass("NSDictionaryController")
+	_nSDictionaryControllerSelInitialKey                = objc.RegisterName("initialKey")
+	_nSDictionaryControllerSelSetInitialKey             = objc.RegisterName("setInitialKey:")
+	_nSDictionaryControllerSelInitialValue              = objc.RegisterName("initialValue")
+	_nSDictionaryControllerSelSetInitialValue           = objc.RegisterName("setInitialValue:")
+	_nSDictionaryControllerSelIncludedKeys              = objc.RegisterName("includedKeys")
+	_nSDictionaryControllerSelSetIncludedKeys           = objc.RegisterName("setIncludedKeys:")
+	_nSDictionaryControllerSelExcludedKeys              = objc.RegisterName("excludedKeys")
+	_nSDictionaryControllerSelSetExcludedKeys           = objc.RegisterName("setExcludedKeys:")
+	_nSDictionaryControllerSelLocalizedKeyDictionary    = objc.RegisterName("localizedKeyDictionary")
 	_nSDictionaryControllerSelSetLocalizedKeyDictionary = objc.RegisterName("setLocalizedKeyDictionary:")
-	_nSDictionaryControllerSelLocalizedKeyTable = objc.RegisterName("localizedKeyTable")
-	_nSDictionaryControllerSelSetLocalizedKeyTable = objc.RegisterName("setLocalizedKeyTable:")
+	_nSDictionaryControllerSelLocalizedKeyTable         = objc.RegisterName("localizedKeyTable")
+	_nSDictionaryControllerSelSetLocalizedKeyTable      = objc.RegisterName("setLocalizedKeyTable:")
 )
 
 func NSDictionaryControllerFromID(id objc.ID) *NSDictionaryController {
@@ -43,7 +43,9 @@ func NSDictionaryControllerFromID(id objc.ID) *NSDictionaryController {
 
 func (o *NSDictionaryController) InitialKey() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionaryControllerSelInitialKey)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -89,11 +91,12 @@ func (o *NSDictionaryController) SetLocalizedKeyDictionary(localizedKeyDictionar
 
 func (o *NSDictionaryController) LocalizedKeyTable() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionaryControllerSelLocalizedKeyTable)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSDictionaryController) SetLocalizedKeyTable(localizedKeyTable *foundation.NSString) {
 	o.Ptr().Send(_nSDictionaryControllerSelSetLocalizedKeyTable, localizedKeyTable.Ptr())
 }
-

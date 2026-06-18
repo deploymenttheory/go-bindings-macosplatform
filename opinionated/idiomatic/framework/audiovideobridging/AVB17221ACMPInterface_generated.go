@@ -65,7 +65,9 @@ func (x *AVB17221ACMPInterface) MulticastDestinationAddress() *MACAddress {
 	return &MACAddress{inner: _r}
 }
 
-func (x *AVB17221ACMPInterface) asAVB1722ControlInterface() *raw.AVB1722ControlInterface { return &x.inner.AVB1722ControlInterface }
+func (x *AVB17221ACMPInterface) asAVB1722ControlInterface() *raw.AVB1722ControlInterface {
+	return &x.inner.AVB1722ControlInterface
+}
 
 // AVB17221ACMPInterfaceable is the interface implemented by [AVB17221ACMPInterface], for mocking and DI.
 type AVB17221ACMPInterfaceable interface {
@@ -78,4 +80,3 @@ type AVB17221ACMPInterfaceable interface {
 }
 
 var _ AVB17221ACMPInterfaceable = (*AVB17221ACMPInterface)(nil)
-

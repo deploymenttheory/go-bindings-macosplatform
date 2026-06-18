@@ -51,7 +51,9 @@ func (x *DOMFileList) Length() uint {
 
 func (x *DOMFileList) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
-func (x *DOMFileList) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+func (x *DOMFileList) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMObject.WebScriptObject
+}
 
 // DOMFileListable is the interface implemented by [DOMFileList], for mocking and DI.
 type DOMFileListable interface {
@@ -61,4 +63,3 @@ type DOMFileListable interface {
 }
 
 var _ DOMFileListable = (*DOMFileList)(nil)
-

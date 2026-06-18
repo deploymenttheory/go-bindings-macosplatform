@@ -18,19 +18,19 @@ type GKRandomDistribution struct {
 }
 
 var (
-	_clsGKRandomDistribution = _objcClass("GKRandomDistribution")
+	_clsGKRandomDistribution                                            = _objcClass("GKRandomDistribution")
 	_gKRandomDistributionSelInitWithRandomSourceLowestValueHighestValue = objc.RegisterName("initWithRandomSource:lowestValue:highestValue:")
-	_gKRandomDistributionSelNextInt = objc.RegisterName("nextInt")
-	_gKRandomDistributionSelNextIntWithUpperBound = objc.RegisterName("nextIntWithUpperBound:")
-	_gKRandomDistributionSelNextUniform = objc.RegisterName("nextUniform")
-	_gKRandomDistributionSelNextBool = objc.RegisterName("nextBool")
-	_gKRandomDistributionSelDistributionWithLowestValueHighestValue = objc.RegisterName("distributionWithLowestValue:highestValue:")
-	_gKRandomDistributionSelDistributionForDieWithSideCount = objc.RegisterName("distributionForDieWithSideCount:")
-	_gKRandomDistributionSelD6 = objc.RegisterName("d6")
-	_gKRandomDistributionSelD20 = objc.RegisterName("d20")
-	_gKRandomDistributionSelLowestValue = objc.RegisterName("lowestValue")
-	_gKRandomDistributionSelHighestValue = objc.RegisterName("highestValue")
-	_gKRandomDistributionSelNumberOfPossibleOutcomes = objc.RegisterName("numberOfPossibleOutcomes")
+	_gKRandomDistributionSelNextInt                                     = objc.RegisterName("nextInt")
+	_gKRandomDistributionSelNextIntWithUpperBound                       = objc.RegisterName("nextIntWithUpperBound:")
+	_gKRandomDistributionSelNextUniform                                 = objc.RegisterName("nextUniform")
+	_gKRandomDistributionSelNextBool                                    = objc.RegisterName("nextBool")
+	_gKRandomDistributionSelDistributionWithLowestValueHighestValue     = objc.RegisterName("distributionWithLowestValue:highestValue:")
+	_gKRandomDistributionSelDistributionForDieWithSideCount             = objc.RegisterName("distributionForDieWithSideCount:")
+	_gKRandomDistributionSelD6                                          = objc.RegisterName("d6")
+	_gKRandomDistributionSelD20                                         = objc.RegisterName("d20")
+	_gKRandomDistributionSelLowestValue                                 = objc.RegisterName("lowestValue")
+	_gKRandomDistributionSelHighestValue                                = objc.RegisterName("highestValue")
+	_gKRandomDistributionSelNumberOfPossibleOutcomes                    = objc.RegisterName("numberOfPossibleOutcomes")
 )
 
 func GKRandomDistributionFromID(id objc.ID) *GKRandomDistribution {
@@ -46,7 +46,9 @@ func GKRandomDistributionFromID(id objc.ID) *GKRandomDistribution {
 // Initializes a random distribution within the range [lowest, highest] using a source to grab input values from.
 func (o *GKRandomDistribution) InitWithRandomSourceLowestValueHighestValue(source GKRandom, lowestInclusive int, highestInclusive int) *GKRandomDistribution {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKRandomDistributionSelInitWithRandomSourceLowestValueHighestValue, source, lowestInclusive, highestInclusive)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKRandomDistributionFromID(_ret)
 }
 
@@ -77,28 +79,36 @@ func (o *GKRandomDistribution) NextBool() bool {
 // Convenience creation of random distribution within the range [lowest, highest] using an isolated source to grab input values from. This is equivalent to calling alloc followed by initWithSource:lowest:highest:, where source is [[GKRandomSource alloc] init]. @see initWithRandomSource:lowestValue:highestValue:
 func GKRandomDistributionDistributionWithLowestValueHighestValue(lowestInclusive int, highestInclusive int) *GKRandomDistribution {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKRandomDistribution), _gKRandomDistributionSelDistributionWithLowestValueHighestValue, lowestInclusive, highestInclusive)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKRandomDistributionFromID(_ret)
 }
 
 // Convenience creation of random distribution with the die like range [1, sideCount] using an isolated source to grab input values from. This is equivalent to calling alloc followed by initWithSource:lowest:highest:, where source is [[GKRandomSource alloc] init]. @see initWithRandomSource:lowestValue:highestValue:
 func GKRandomDistributionDistributionForDieWithSideCount(sideCount int) *GKRandomDistribution {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKRandomDistribution), _gKRandomDistributionSelDistributionForDieWithSideCount, sideCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKRandomDistributionFromID(_ret)
 }
 
 // Convenience creation for the very common d6 range [1, 6] with an isolated random source shielded from outside sources.
 func GKRandomDistributionD6() *GKRandomDistribution {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKRandomDistribution), _gKRandomDistributionSelD6)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKRandomDistributionFromID(_ret)
 }
 
 // Convenience creation for the very common d20 range [1, 20] with an isolated random source shielded from outside sources.
 func GKRandomDistributionD20() *GKRandomDistribution {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKRandomDistribution), _gKRandomDistributionSelD20)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKRandomDistributionFromID(_ret)
 }
 
@@ -119,4 +129,3 @@ func (o *GKRandomDistribution) NumberOfPossibleOutcomes() uint {
 	_ret := objc.Send[uint](o.Ptr(), _gKRandomDistributionSelNumberOfPossibleOutcomes)
 	return _ret
 }
-

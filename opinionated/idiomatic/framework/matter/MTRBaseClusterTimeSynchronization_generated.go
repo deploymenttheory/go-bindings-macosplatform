@@ -19,7 +19,9 @@ type MTRBaseClusterTimeSynchronization struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterTimeSynchronization].
-func (x *MTRBaseClusterTimeSynchronization) Unwrap() *raw.MTRBaseClusterTimeSynchronization { return x.inner }
+func (x *MTRBaseClusterTimeSynchronization) Unwrap() *raw.MTRBaseClusterTimeSynchronization {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -768,9 +770,13 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeClusterRevisionWit
 	}
 }
 
-func (x *MTRBaseClusterTimeSynchronization) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterTimeSynchronization) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterTimeSynchronization) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterTimeSynchronization) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterTimeSynchronizationable is the interface implemented by [MTRBaseClusterTimeSynchronization], for mocking and DI.
 type MTRBaseClusterTimeSynchronizationable interface {
@@ -819,4 +825,3 @@ type MTRBaseClusterTimeSynchronizationable interface {
 }
 
 var _ MTRBaseClusterTimeSynchronizationable = (*MTRBaseClusterTimeSynchronization)(nil)
-

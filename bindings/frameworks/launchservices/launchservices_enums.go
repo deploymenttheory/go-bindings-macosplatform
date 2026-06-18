@@ -11,145 +11,235 @@ import (
 type LSAcceptanceFlags int64
 
 const (
-	KLSAcceptDefault LSAcceptanceFlags = 1
+	KLSAcceptDefault      LSAcceptanceFlags = 1
 	KLSAcceptAllowLoginUI LSAcceptanceFlags = 2
 )
 
 func (e LSAcceptanceFlags) String() string {
 	var parts []string
-	if e&KLSAcceptDefault != 0 { parts = append(parts, "KLSAcceptDefault") }
-	if e&KLSAcceptAllowLoginUI != 0 { parts = append(parts, "KLSAcceptAllowLoginUI") }
-	if len(parts) == 0 { return "0" }
+	if e&KLSAcceptDefault != 0 {
+		parts = append(parts, "KLSAcceptDefault")
+	}
+	if e&KLSAcceptAllowLoginUI != 0 {
+		parts = append(parts, "KLSAcceptAllowLoginUI")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type LSHandlerOptions int64
 
 const (
-	KLSHandlerOptionsDefault LSHandlerOptions = 0
+	KLSHandlerOptionsDefault       LSHandlerOptions = 0
 	KLSHandlerOptionsIgnoreCreator LSHandlerOptions = 1
 )
 
 func (e LSHandlerOptions) String() string {
 	var parts []string
-	if e&KLSHandlerOptionsIgnoreCreator != 0 { parts = append(parts, "KLSHandlerOptionsIgnoreCreator") }
-	if len(parts) == 0 { return "0" }
+	if e&KLSHandlerOptionsIgnoreCreator != 0 {
+		parts = append(parts, "KLSHandlerOptionsIgnoreCreator")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type LSItemInfoFlags int64
 
 const (
-	KLSItemInfoIsPlainFile LSItemInfoFlags = 1
-	KLSItemInfoIsPackage LSItemInfoFlags = 2
-	KLSItemInfoIsApplication LSItemInfoFlags = 4
-	KLSItemInfoIsContainer LSItemInfoFlags = 8
-	KLSItemInfoIsAliasFile LSItemInfoFlags = 16
-	KLSItemInfoIsSymlink LSItemInfoFlags = 32
-	KLSItemInfoIsInvisible LSItemInfoFlags = 64
-	KLSItemInfoIsNativeApp LSItemInfoFlags = 128
-	KLSItemInfoIsClassicApp LSItemInfoFlags = 256
-	KLSItemInfoAppPrefersNative LSItemInfoFlags = 512
+	KLSItemInfoIsPlainFile       LSItemInfoFlags = 1
+	KLSItemInfoIsPackage         LSItemInfoFlags = 2
+	KLSItemInfoIsApplication     LSItemInfoFlags = 4
+	KLSItemInfoIsContainer       LSItemInfoFlags = 8
+	KLSItemInfoIsAliasFile       LSItemInfoFlags = 16
+	KLSItemInfoIsSymlink         LSItemInfoFlags = 32
+	KLSItemInfoIsInvisible       LSItemInfoFlags = 64
+	KLSItemInfoIsNativeApp       LSItemInfoFlags = 128
+	KLSItemInfoIsClassicApp      LSItemInfoFlags = 256
+	KLSItemInfoAppPrefersNative  LSItemInfoFlags = 512
 	KLSItemInfoAppPrefersClassic LSItemInfoFlags = 1024
-	KLSItemInfoAppIsScriptable LSItemInfoFlags = 2048
-	KLSItemInfoIsVolume LSItemInfoFlags = 4096
+	KLSItemInfoAppIsScriptable   LSItemInfoFlags = 2048
+	KLSItemInfoIsVolume          LSItemInfoFlags = 4096
 	KLSItemInfoExtensionIsHidden LSItemInfoFlags = 1048576
 )
 
 func (e LSItemInfoFlags) String() string {
 	var parts []string
-	if e&KLSItemInfoIsPlainFile != 0 { parts = append(parts, "KLSItemInfoIsPlainFile") }
-	if e&KLSItemInfoIsPackage != 0 { parts = append(parts, "KLSItemInfoIsPackage") }
-	if e&KLSItemInfoIsApplication != 0 { parts = append(parts, "KLSItemInfoIsApplication") }
-	if e&KLSItemInfoIsContainer != 0 { parts = append(parts, "KLSItemInfoIsContainer") }
-	if e&KLSItemInfoIsAliasFile != 0 { parts = append(parts, "KLSItemInfoIsAliasFile") }
-	if e&KLSItemInfoIsSymlink != 0 { parts = append(parts, "KLSItemInfoIsSymlink") }
-	if e&KLSItemInfoIsInvisible != 0 { parts = append(parts, "KLSItemInfoIsInvisible") }
-	if e&KLSItemInfoIsNativeApp != 0 { parts = append(parts, "KLSItemInfoIsNativeApp") }
-	if e&KLSItemInfoIsClassicApp != 0 { parts = append(parts, "KLSItemInfoIsClassicApp") }
-	if e&KLSItemInfoAppPrefersNative != 0 { parts = append(parts, "KLSItemInfoAppPrefersNative") }
-	if e&KLSItemInfoAppPrefersClassic != 0 { parts = append(parts, "KLSItemInfoAppPrefersClassic") }
-	if e&KLSItemInfoAppIsScriptable != 0 { parts = append(parts, "KLSItemInfoAppIsScriptable") }
-	if e&KLSItemInfoIsVolume != 0 { parts = append(parts, "KLSItemInfoIsVolume") }
-	if e&KLSItemInfoExtensionIsHidden != 0 { parts = append(parts, "KLSItemInfoExtensionIsHidden") }
-	if len(parts) == 0 { return "0" }
+	if e&KLSItemInfoIsPlainFile != 0 {
+		parts = append(parts, "KLSItemInfoIsPlainFile")
+	}
+	if e&KLSItemInfoIsPackage != 0 {
+		parts = append(parts, "KLSItemInfoIsPackage")
+	}
+	if e&KLSItemInfoIsApplication != 0 {
+		parts = append(parts, "KLSItemInfoIsApplication")
+	}
+	if e&KLSItemInfoIsContainer != 0 {
+		parts = append(parts, "KLSItemInfoIsContainer")
+	}
+	if e&KLSItemInfoIsAliasFile != 0 {
+		parts = append(parts, "KLSItemInfoIsAliasFile")
+	}
+	if e&KLSItemInfoIsSymlink != 0 {
+		parts = append(parts, "KLSItemInfoIsSymlink")
+	}
+	if e&KLSItemInfoIsInvisible != 0 {
+		parts = append(parts, "KLSItemInfoIsInvisible")
+	}
+	if e&KLSItemInfoIsNativeApp != 0 {
+		parts = append(parts, "KLSItemInfoIsNativeApp")
+	}
+	if e&KLSItemInfoIsClassicApp != 0 {
+		parts = append(parts, "KLSItemInfoIsClassicApp")
+	}
+	if e&KLSItemInfoAppPrefersNative != 0 {
+		parts = append(parts, "KLSItemInfoAppPrefersNative")
+	}
+	if e&KLSItemInfoAppPrefersClassic != 0 {
+		parts = append(parts, "KLSItemInfoAppPrefersClassic")
+	}
+	if e&KLSItemInfoAppIsScriptable != 0 {
+		parts = append(parts, "KLSItemInfoAppIsScriptable")
+	}
+	if e&KLSItemInfoIsVolume != 0 {
+		parts = append(parts, "KLSItemInfoIsVolume")
+	}
+	if e&KLSItemInfoExtensionIsHidden != 0 {
+		parts = append(parts, "KLSItemInfoExtensionIsHidden")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type LSLaunchFlags int64
 
 const (
-	KLSLaunchDefaults LSLaunchFlags = 1
-	KLSLaunchAndPrint LSLaunchFlags = 2
+	KLSLaunchDefaults         LSLaunchFlags = 1
+	KLSLaunchAndPrint         LSLaunchFlags = 2
 	KLSLaunchAndDisplayErrors LSLaunchFlags = 64
 	KLSLaunchDontAddToRecents LSLaunchFlags = 256
-	KLSLaunchDontSwitch LSLaunchFlags = 512
-	KLSLaunchAsync LSLaunchFlags = 65536
-	KLSLaunchNewInstance LSLaunchFlags = 524288
-	KLSLaunchAndHide LSLaunchFlags = 1048576
-	KLSLaunchAndHideOthers LSLaunchFlags = 2097152
+	KLSLaunchDontSwitch       LSLaunchFlags = 512
+	KLSLaunchAsync            LSLaunchFlags = 65536
+	KLSLaunchNewInstance      LSLaunchFlags = 524288
+	KLSLaunchAndHide          LSLaunchFlags = 1048576
+	KLSLaunchAndHideOthers    LSLaunchFlags = 2097152
 )
 
 func (e LSLaunchFlags) String() string {
 	var parts []string
-	if e&KLSLaunchDefaults != 0 { parts = append(parts, "KLSLaunchDefaults") }
-	if e&KLSLaunchAndPrint != 0 { parts = append(parts, "KLSLaunchAndPrint") }
-	if e&KLSLaunchAndDisplayErrors != 0 { parts = append(parts, "KLSLaunchAndDisplayErrors") }
-	if e&KLSLaunchDontAddToRecents != 0 { parts = append(parts, "KLSLaunchDontAddToRecents") }
-	if e&KLSLaunchDontSwitch != 0 { parts = append(parts, "KLSLaunchDontSwitch") }
-	if e&KLSLaunchAsync != 0 { parts = append(parts, "KLSLaunchAsync") }
-	if e&KLSLaunchNewInstance != 0 { parts = append(parts, "KLSLaunchNewInstance") }
-	if e&KLSLaunchAndHide != 0 { parts = append(parts, "KLSLaunchAndHide") }
-	if e&KLSLaunchAndHideOthers != 0 { parts = append(parts, "KLSLaunchAndHideOthers") }
-	if len(parts) == 0 { return "0" }
+	if e&KLSLaunchDefaults != 0 {
+		parts = append(parts, "KLSLaunchDefaults")
+	}
+	if e&KLSLaunchAndPrint != 0 {
+		parts = append(parts, "KLSLaunchAndPrint")
+	}
+	if e&KLSLaunchAndDisplayErrors != 0 {
+		parts = append(parts, "KLSLaunchAndDisplayErrors")
+	}
+	if e&KLSLaunchDontAddToRecents != 0 {
+		parts = append(parts, "KLSLaunchDontAddToRecents")
+	}
+	if e&KLSLaunchDontSwitch != 0 {
+		parts = append(parts, "KLSLaunchDontSwitch")
+	}
+	if e&KLSLaunchAsync != 0 {
+		parts = append(parts, "KLSLaunchAsync")
+	}
+	if e&KLSLaunchNewInstance != 0 {
+		parts = append(parts, "KLSLaunchNewInstance")
+	}
+	if e&KLSLaunchAndHide != 0 {
+		parts = append(parts, "KLSLaunchAndHide")
+	}
+	if e&KLSLaunchAndHideOthers != 0 {
+		parts = append(parts, "KLSLaunchAndHideOthers")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type LSRequestedInfo int64
 
 const (
-	KLSRequestExtension LSRequestedInfo = 1
-	KLSRequestTypeCreator LSRequestedInfo = 2
-	KLSRequestBasicFlagsOnly LSRequestedInfo = 4
-	KLSRequestAppTypeFlags LSRequestedInfo = 8
-	KLSRequestAllFlags LSRequestedInfo = 16
-	KLSRequestIconAndKind LSRequestedInfo = 32
+	KLSRequestExtension          LSRequestedInfo = 1
+	KLSRequestTypeCreator        LSRequestedInfo = 2
+	KLSRequestBasicFlagsOnly     LSRequestedInfo = 4
+	KLSRequestAppTypeFlags       LSRequestedInfo = 8
+	KLSRequestAllFlags           LSRequestedInfo = 16
+	KLSRequestIconAndKind        LSRequestedInfo = 32
 	KLSRequestExtensionFlagsOnly LSRequestedInfo = 64
-	KLSRequestAllInfo LSRequestedInfo = 4294967295
+	KLSRequestAllInfo            LSRequestedInfo = 4294967295
 )
 
 func (e LSRequestedInfo) String() string {
 	var parts []string
-	if e&KLSRequestExtension != 0 { parts = append(parts, "KLSRequestExtension") }
-	if e&KLSRequestTypeCreator != 0 { parts = append(parts, "KLSRequestTypeCreator") }
-	if e&KLSRequestBasicFlagsOnly != 0 { parts = append(parts, "KLSRequestBasicFlagsOnly") }
-	if e&KLSRequestAppTypeFlags != 0 { parts = append(parts, "KLSRequestAppTypeFlags") }
-	if e&KLSRequestAllFlags != 0 { parts = append(parts, "KLSRequestAllFlags") }
-	if e&KLSRequestIconAndKind != 0 { parts = append(parts, "KLSRequestIconAndKind") }
-	if e&KLSRequestExtensionFlagsOnly != 0 { parts = append(parts, "KLSRequestExtensionFlagsOnly") }
-	if e&KLSRequestAllInfo != 0 { parts = append(parts, "KLSRequestAllInfo") }
-	if len(parts) == 0 { return "0" }
+	if e&KLSRequestExtension != 0 {
+		parts = append(parts, "KLSRequestExtension")
+	}
+	if e&KLSRequestTypeCreator != 0 {
+		parts = append(parts, "KLSRequestTypeCreator")
+	}
+	if e&KLSRequestBasicFlagsOnly != 0 {
+		parts = append(parts, "KLSRequestBasicFlagsOnly")
+	}
+	if e&KLSRequestAppTypeFlags != 0 {
+		parts = append(parts, "KLSRequestAppTypeFlags")
+	}
+	if e&KLSRequestAllFlags != 0 {
+		parts = append(parts, "KLSRequestAllFlags")
+	}
+	if e&KLSRequestIconAndKind != 0 {
+		parts = append(parts, "KLSRequestIconAndKind")
+	}
+	if e&KLSRequestExtensionFlagsOnly != 0 {
+		parts = append(parts, "KLSRequestExtensionFlagsOnly")
+	}
+	if e&KLSRequestAllInfo != 0 {
+		parts = append(parts, "KLSRequestAllInfo")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type LSRolesMask int64
 
 const (
-	KLSRolesNone LSRolesMask = 1
+	KLSRolesNone   LSRolesMask = 1
 	KLSRolesViewer LSRolesMask = 2
 	KLSRolesEditor LSRolesMask = 4
-	KLSRolesShell LSRolesMask = 8
-	KLSRolesAll LSRolesMask = 4294967295
+	KLSRolesShell  LSRolesMask = 8
+	KLSRolesAll    LSRolesMask = 4294967295
 )
 
 func (e LSRolesMask) String() string {
 	var parts []string
-	if e&KLSRolesNone != 0 { parts = append(parts, "KLSRolesNone") }
-	if e&KLSRolesViewer != 0 { parts = append(parts, "KLSRolesViewer") }
-	if e&KLSRolesEditor != 0 { parts = append(parts, "KLSRolesEditor") }
-	if e&KLSRolesShell != 0 { parts = append(parts, "KLSRolesShell") }
-	if e&KLSRolesAll != 0 { parts = append(parts, "KLSRolesAll") }
-	if len(parts) == 0 { return "0" }
+	if e&KLSRolesNone != 0 {
+		parts = append(parts, "KLSRolesNone")
+	}
+	if e&KLSRolesViewer != 0 {
+		parts = append(parts, "KLSRolesViewer")
+	}
+	if e&KLSRolesEditor != 0 {
+		parts = append(parts, "KLSRolesEditor")
+	}
+	if e&KLSRolesShell != 0 {
+		parts = append(parts, "KLSRolesShell")
+	}
+	if e&KLSRolesAll != 0 {
+		parts = append(parts, "KLSRolesAll")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -157,8 +247,8 @@ type Acl_entry_id_t int64
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
-	ACL_NEXT_ENTRY Acl_entry_id_t = -1
-	ACL_LAST_ENTRY Acl_entry_id_t = -2
+	ACL_NEXT_ENTRY  Acl_entry_id_t = -1
+	ACL_LAST_ENTRY  Acl_entry_id_t = -2
 )
 
 func (e Acl_entry_id_t) String() string {
@@ -177,13 +267,13 @@ func (e Acl_entry_id_t) String() string {
 type Acl_flag_t int64
 
 const (
-	ACL_FLAG_DEFER_INHERIT Acl_flag_t = 1
-	ACL_FLAG_NO_INHERIT Acl_flag_t = 131072
-	ACL_ENTRY_INHERITED Acl_flag_t = 16
-	ACL_ENTRY_FILE_INHERIT Acl_flag_t = 32
+	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
+	ACL_FLAG_NO_INHERIT         Acl_flag_t = 131072
+	ACL_ENTRY_INHERITED         Acl_flag_t = 16
+	ACL_ENTRY_FILE_INHERIT      Acl_flag_t = 32
 	ACL_ENTRY_DIRECTORY_INHERIT Acl_flag_t = 64
-	ACL_ENTRY_LIMIT_INHERIT Acl_flag_t = 128
-	ACL_ENTRY_ONLY_INHERIT Acl_flag_t = 256
+	ACL_ENTRY_LIMIT_INHERIT     Acl_flag_t = 128
+	ACL_ENTRY_ONLY_INHERIT      Acl_flag_t = 256
 )
 
 func (e Acl_flag_t) String() string {
@@ -210,24 +300,24 @@ func (e Acl_flag_t) String() string {
 type Acl_perm_t int64
 
 const (
-	ACL_READ_DATA Acl_perm_t = 2
-	ACL_LIST_DIRECTORY Acl_perm_t = 2
-	ACL_WRITE_DATA Acl_perm_t = 4
-	ACL_ADD_FILE Acl_perm_t = 4
-	ACL_EXECUTE Acl_perm_t = 8
-	ACL_SEARCH Acl_perm_t = 8
-	ACL_DELETE Acl_perm_t = 16
-	ACL_APPEND_DATA Acl_perm_t = 32
-	ACL_ADD_SUBDIRECTORY Acl_perm_t = 32
-	ACL_DELETE_CHILD Acl_perm_t = 64
-	ACL_READ_ATTRIBUTES Acl_perm_t = 128
-	ACL_WRITE_ATTRIBUTES Acl_perm_t = 256
-	ACL_READ_EXTATTRIBUTES Acl_perm_t = 512
+	ACL_READ_DATA           Acl_perm_t = 2
+	ACL_LIST_DIRECTORY      Acl_perm_t = 2
+	ACL_WRITE_DATA          Acl_perm_t = 4
+	ACL_ADD_FILE            Acl_perm_t = 4
+	ACL_EXECUTE             Acl_perm_t = 8
+	ACL_SEARCH              Acl_perm_t = 8
+	ACL_DELETE              Acl_perm_t = 16
+	ACL_APPEND_DATA         Acl_perm_t = 32
+	ACL_ADD_SUBDIRECTORY    Acl_perm_t = 32
+	ACL_DELETE_CHILD        Acl_perm_t = 64
+	ACL_READ_ATTRIBUTES     Acl_perm_t = 128
+	ACL_WRITE_ATTRIBUTES    Acl_perm_t = 256
+	ACL_READ_EXTATTRIBUTES  Acl_perm_t = 512
 	ACL_WRITE_EXTATTRIBUTES Acl_perm_t = 1024
-	ACL_READ_SECURITY Acl_perm_t = 2048
-	ACL_WRITE_SECURITY Acl_perm_t = 4096
-	ACL_CHANGE_OWNER Acl_perm_t = 8192
-	ACL_SYNCHRONIZE Acl_perm_t = 1048576
+	ACL_READ_SECURITY       Acl_perm_t = 2048
+	ACL_WRITE_SECURITY      Acl_perm_t = 4096
+	ACL_CHANGE_OWNER        Acl_perm_t = 8192
+	ACL_SYNCHRONIZE         Acl_perm_t = 1048576
 )
 
 func (e Acl_perm_t) String() string {
@@ -268,9 +358,9 @@ func (e Acl_perm_t) String() string {
 type Acl_tag_t int64
 
 const (
-	ACL_UNDEFINED_TAG Acl_tag_t = 0
+	ACL_UNDEFINED_TAG  Acl_tag_t = 0
 	ACL_EXTENDED_ALLOW Acl_tag_t = 1
-	ACL_EXTENDED_DENY Acl_tag_t = 2
+	ACL_EXTENDED_DENY  Acl_tag_t = 2
 )
 
 func (e Acl_tag_t) String() string {
@@ -290,12 +380,12 @@ type Acl_type_t int64
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
-	ACL_TYPE_ACCESS Acl_type_t = 0
-	ACL_TYPE_DEFAULT Acl_type_t = 1
-	ACL_TYPE_AFS Acl_type_t = 2
-	ACL_TYPE_CODA Acl_type_t = 3
-	ACL_TYPE_NTFS Acl_type_t = 4
-	ACL_TYPE_NWFS Acl_type_t = 5
+	ACL_TYPE_ACCESS   Acl_type_t = 0
+	ACL_TYPE_DEFAULT  Acl_type_t = 1
+	ACL_TYPE_AFS      Acl_type_t = 2
+	ACL_TYPE_CODA     Acl_type_t = 3
+	ACL_TYPE_NTFS     Acl_type_t = 4
+	ACL_TYPE_NWFS     Acl_type_t = 5
 )
 
 func (e Acl_type_t) String() string {
@@ -322,14 +412,14 @@ func (e Acl_type_t) String() string {
 type Clockid_t int64
 
 const (
-	_CLOCK_REALTIME Clockid_t = 0
-	_CLOCK_MONOTONIC Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW Clockid_t = 4
+	_CLOCK_REALTIME             Clockid_t = 0
+	_CLOCK_MONOTONIC            Clockid_t = 6
+	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
 	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID Clockid_t = 16
+	_CLOCK_UPTIME_RAW           Clockid_t = 8
+	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
+	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
+	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
 )
 
 func (e Clockid_t) String() string {
@@ -358,9 +448,9 @@ func (e Clockid_t) String() string {
 type Dispatch_autorelease_frequency_t uint64
 
 const (
-	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT Dispatch_autorelease_frequency_t = 0
+	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT   Dispatch_autorelease_frequency_t = 0
 	DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM Dispatch_autorelease_frequency_t = 1
-	DISPATCH_AUTORELEASE_FREQUENCY_NEVER Dispatch_autorelease_frequency_t = 2
+	DISPATCH_AUTORELEASE_FREQUENCY_NEVER     Dispatch_autorelease_frequency_t = 2
 )
 
 func (e Dispatch_autorelease_frequency_t) String() string {
@@ -379,36 +469,50 @@ func (e Dispatch_autorelease_frequency_t) String() string {
 type Dispatch_block_flags_t uint64
 
 const (
-	DISPATCH_BLOCK_BARRIER Dispatch_block_flags_t = 1
-	DISPATCH_BLOCK_DETACHED Dispatch_block_flags_t = 2
-	DISPATCH_BLOCK_ASSIGN_CURRENT Dispatch_block_flags_t = 4
-	DISPATCH_BLOCK_NO_QOS_CLASS Dispatch_block_flags_t = 8
+	DISPATCH_BLOCK_BARRIER           Dispatch_block_flags_t = 1
+	DISPATCH_BLOCK_DETACHED          Dispatch_block_flags_t = 2
+	DISPATCH_BLOCK_ASSIGN_CURRENT    Dispatch_block_flags_t = 4
+	DISPATCH_BLOCK_NO_QOS_CLASS      Dispatch_block_flags_t = 8
 	DISPATCH_BLOCK_INHERIT_QOS_CLASS Dispatch_block_flags_t = 16
 	DISPATCH_BLOCK_ENFORCE_QOS_CLASS Dispatch_block_flags_t = 32
 )
 
 func (e Dispatch_block_flags_t) String() string {
 	var parts []string
-	if e&DISPATCH_BLOCK_BARRIER != 0 { parts = append(parts, "DISPATCH_BLOCK_BARRIER") }
-	if e&DISPATCH_BLOCK_DETACHED != 0 { parts = append(parts, "DISPATCH_BLOCK_DETACHED") }
-	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 { parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT") }
-	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS") }
-	if len(parts) == 0 { return "0" }
+	if e&DISPATCH_BLOCK_BARRIER != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_BARRIER")
+	}
+	if e&DISPATCH_BLOCK_DETACHED != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_DETACHED")
+	}
+	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT")
+	}
+	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Filesec_property_t int64
 
 const (
-	FILESEC_OWNER Filesec_property_t = 1
-	FILESEC_GROUP Filesec_property_t = 2
-	FILESEC_UUID Filesec_property_t = 3
-	FILESEC_MODE Filesec_property_t = 4
-	FILESEC_ACL Filesec_property_t = 5
-	FILESEC_GRPUUID Filesec_property_t = 6
-	FILESEC_ACL_RAW Filesec_property_t = 100
+	FILESEC_OWNER         Filesec_property_t = 1
+	FILESEC_GROUP         Filesec_property_t = 2
+	FILESEC_UUID          Filesec_property_t = 3
+	FILESEC_MODE          Filesec_property_t = 4
+	FILESEC_ACL           Filesec_property_t = 5
+	FILESEC_GRPUUID       Filesec_property_t = 6
+	FILESEC_ACL_RAW       Filesec_property_t = 100
 	FILESEC_ACL_ALLOCSIZE Filesec_property_t = 101
 )
 
@@ -438,8 +542,8 @@ func (e Filesec_property_t) String() string {
 type Idtype_t int64
 
 const (
-	P_ALL Idtype_t = 0
-	P_PID Idtype_t = 1
+	P_ALL  Idtype_t = 0
+	P_PID  Idtype_t = 1
 	P_PGID Idtype_t = 2
 )
 
@@ -459,62 +563,62 @@ func (e Idtype_t) String() string {
 type Ipc_info_object_type_t int64
 
 const (
-	IPC_OTYPE_NONE Ipc_info_object_type_t = 0
-	IPC_OTYPE_THREAD_CONTROL Ipc_info_object_type_t = 1
-	IPC_OTYPE_TASK_CONTROL Ipc_info_object_type_t = 2
-	IPC_OTYPE_HOST Ipc_info_object_type_t = 3
-	IPC_OTYPE_HOST_PRIV Ipc_info_object_type_t = 4
-	IPC_OTYPE_PROCESSOR Ipc_info_object_type_t = 5
-	IPC_OTYPE_PROCESSOR_SET Ipc_info_object_type_t = 6
-	IPC_OTYPE_PROCESSOR_SET_NAME Ipc_info_object_type_t = 7
-	IPC_OTYPE_TIMER Ipc_info_object_type_t = 8
-	IPC_OTYPE_PORT_SUBST_ONCE Ipc_info_object_type_t = 9
-	IPC_OTYPE_MIG Ipc_info_object_type_t = 10
-	IPC_OTYPE_MEMORY_OBJECT Ipc_info_object_type_t = 11
-	IPC_OTYPE_XMM_PAGER Ipc_info_object_type_t = 12
-	IPC_OTYPE_XMM_KERNEL Ipc_info_object_type_t = 13
-	IPC_OTYPE_XMM_REPLY Ipc_info_object_type_t = 14
-	IPC_OTYPE_UND_REPLY Ipc_info_object_type_t = 15
-	IPC_OTYPE_HOST_NOTIFY Ipc_info_object_type_t = 16
-	IPC_OTYPE_HOST_SECURITY Ipc_info_object_type_t = 17
-	IPC_OTYPE_LEDGER Ipc_info_object_type_t = 18
-	IPC_OTYPE_MAIN_DEVICE Ipc_info_object_type_t = 19
-	IPC_OTYPE_TASK_NAME Ipc_info_object_type_t = 20
-	IPC_OTYPE_SUBSYSTEM Ipc_info_object_type_t = 21
-	IPC_OTYPE_IO_DONE_QUEUE Ipc_info_object_type_t = 22
-	IPC_OTYPE_SEMAPHORE Ipc_info_object_type_t = 23
-	IPC_OTYPE_LOCK_SET Ipc_info_object_type_t = 24
-	IPC_OTYPE_CLOCK Ipc_info_object_type_t = 25
-	IPC_OTYPE_CLOCK_CTRL Ipc_info_object_type_t = 26
-	IPC_OTYPE_IOKIT_IDENT Ipc_info_object_type_t = 27
-	IPC_OTYPE_NAMED_ENTRY Ipc_info_object_type_t = 28
-	IPC_OTYPE_IOKIT_CONNECT Ipc_info_object_type_t = 29
-	IPC_OTYPE_IOKIT_OBJECT Ipc_info_object_type_t = 30
-	IPC_OTYPE_UPL Ipc_info_object_type_t = 31
-	IPC_OTYPE_MEM_OBJ_CONTROL Ipc_info_object_type_t = 32
-	IPC_OTYPE_AU_SESSIONPORT Ipc_info_object_type_t = 33
-	IPC_OTYPE_FILEPORT Ipc_info_object_type_t = 34
-	IPC_OTYPE_LABELH Ipc_info_object_type_t = 35
-	IPC_OTYPE_TASK_RESUME Ipc_info_object_type_t = 36
-	IPC_OTYPE_VOUCHER Ipc_info_object_type_t = 37
+	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
+	IPC_OTYPE_THREAD_CONTROL       Ipc_info_object_type_t = 1
+	IPC_OTYPE_TASK_CONTROL         Ipc_info_object_type_t = 2
+	IPC_OTYPE_HOST                 Ipc_info_object_type_t = 3
+	IPC_OTYPE_HOST_PRIV            Ipc_info_object_type_t = 4
+	IPC_OTYPE_PROCESSOR            Ipc_info_object_type_t = 5
+	IPC_OTYPE_PROCESSOR_SET        Ipc_info_object_type_t = 6
+	IPC_OTYPE_PROCESSOR_SET_NAME   Ipc_info_object_type_t = 7
+	IPC_OTYPE_TIMER                Ipc_info_object_type_t = 8
+	IPC_OTYPE_PORT_SUBST_ONCE      Ipc_info_object_type_t = 9
+	IPC_OTYPE_MIG                  Ipc_info_object_type_t = 10
+	IPC_OTYPE_MEMORY_OBJECT        Ipc_info_object_type_t = 11
+	IPC_OTYPE_XMM_PAGER            Ipc_info_object_type_t = 12
+	IPC_OTYPE_XMM_KERNEL           Ipc_info_object_type_t = 13
+	IPC_OTYPE_XMM_REPLY            Ipc_info_object_type_t = 14
+	IPC_OTYPE_UND_REPLY            Ipc_info_object_type_t = 15
+	IPC_OTYPE_HOST_NOTIFY          Ipc_info_object_type_t = 16
+	IPC_OTYPE_HOST_SECURITY        Ipc_info_object_type_t = 17
+	IPC_OTYPE_LEDGER               Ipc_info_object_type_t = 18
+	IPC_OTYPE_MAIN_DEVICE          Ipc_info_object_type_t = 19
+	IPC_OTYPE_TASK_NAME            Ipc_info_object_type_t = 20
+	IPC_OTYPE_SUBSYSTEM            Ipc_info_object_type_t = 21
+	IPC_OTYPE_IO_DONE_QUEUE        Ipc_info_object_type_t = 22
+	IPC_OTYPE_SEMAPHORE            Ipc_info_object_type_t = 23
+	IPC_OTYPE_LOCK_SET             Ipc_info_object_type_t = 24
+	IPC_OTYPE_CLOCK                Ipc_info_object_type_t = 25
+	IPC_OTYPE_CLOCK_CTRL           Ipc_info_object_type_t = 26
+	IPC_OTYPE_IOKIT_IDENT          Ipc_info_object_type_t = 27
+	IPC_OTYPE_NAMED_ENTRY          Ipc_info_object_type_t = 28
+	IPC_OTYPE_IOKIT_CONNECT        Ipc_info_object_type_t = 29
+	IPC_OTYPE_IOKIT_OBJECT         Ipc_info_object_type_t = 30
+	IPC_OTYPE_UPL                  Ipc_info_object_type_t = 31
+	IPC_OTYPE_MEM_OBJ_CONTROL      Ipc_info_object_type_t = 32
+	IPC_OTYPE_AU_SESSIONPORT       Ipc_info_object_type_t = 33
+	IPC_OTYPE_FILEPORT             Ipc_info_object_type_t = 34
+	IPC_OTYPE_LABELH               Ipc_info_object_type_t = 35
+	IPC_OTYPE_TASK_RESUME          Ipc_info_object_type_t = 36
+	IPC_OTYPE_VOUCHER              Ipc_info_object_type_t = 37
 	IPC_OTYPE_VOUCHER_ATTR_CONTROL Ipc_info_object_type_t = 38
-	IPC_OTYPE_WORK_INTERVAL Ipc_info_object_type_t = 39
-	IPC_OTYPE_UX_HANDLER Ipc_info_object_type_t = 40
-	IPC_OTYPE_UEXT_OBJECT Ipc_info_object_type_t = 41
-	IPC_OTYPE_ARCADE_REG Ipc_info_object_type_t = 42
-	IPC_OTYPE_EVENTLINK Ipc_info_object_type_t = 43
-	IPC_OTYPE_TASK_INSPECT Ipc_info_object_type_t = 44
-	IPC_OTYPE_TASK_READ Ipc_info_object_type_t = 45
-	IPC_OTYPE_THREAD_INSPECT Ipc_info_object_type_t = 46
-	IPC_OTYPE_THREAD_READ Ipc_info_object_type_t = 47
-	IPC_OTYPE_SUID_CRED Ipc_info_object_type_t = 48
-	IPC_OTYPE_HYPERVISOR Ipc_info_object_type_t = 49
-	IPC_OTYPE_TASK_ID_TOKEN Ipc_info_object_type_t = 50
-	IPC_OTYPE_TASK_FATAL Ipc_info_object_type_t = 51
-	IPC_OTYPE_KCDATA Ipc_info_object_type_t = 52
-	IPC_OTYPE_EXCLAVES_RESOURCE Ipc_info_object_type_t = 53
-	IPC_OTYPE_THREAD_RESUME Ipc_info_object_type_t = 54
-	IPC_OTYPE_UNKNOWN Ipc_info_object_type_t = 4294967295
+	IPC_OTYPE_WORK_INTERVAL        Ipc_info_object_type_t = 39
+	IPC_OTYPE_UX_HANDLER           Ipc_info_object_type_t = 40
+	IPC_OTYPE_UEXT_OBJECT          Ipc_info_object_type_t = 41
+	IPC_OTYPE_ARCADE_REG           Ipc_info_object_type_t = 42
+	IPC_OTYPE_EVENTLINK            Ipc_info_object_type_t = 43
+	IPC_OTYPE_TASK_INSPECT         Ipc_info_object_type_t = 44
+	IPC_OTYPE_TASK_READ            Ipc_info_object_type_t = 45
+	IPC_OTYPE_THREAD_INSPECT       Ipc_info_object_type_t = 46
+	IPC_OTYPE_THREAD_READ          Ipc_info_object_type_t = 47
+	IPC_OTYPE_SUID_CRED            Ipc_info_object_type_t = 48
+	IPC_OTYPE_HYPERVISOR           Ipc_info_object_type_t = 49
+	IPC_OTYPE_TASK_ID_TOKEN        Ipc_info_object_type_t = 50
+	IPC_OTYPE_TASK_FATAL           Ipc_info_object_type_t = 51
+	IPC_OTYPE_KCDATA               Ipc_info_object_type_t = 52
+	IPC_OTYPE_EXCLAVES_RESOURCE    Ipc_info_object_type_t = 53
+	IPC_OTYPE_THREAD_RESUME        Ipc_info_object_type_t = 54
+	IPC_OTYPE_UNKNOWN              Ipc_info_object_type_t = 4294967295
 )
 
 func (e Ipc_info_object_type_t) String() string {
@@ -640,15 +744,15 @@ type Launch_data_type_t int64
 
 const (
 	LAUNCH_DATA_DICTIONARY Launch_data_type_t = 1
-	LAUNCH_DATA_ARRAY Launch_data_type_t = 2
-	LAUNCH_DATA_FD Launch_data_type_t = 3
-	LAUNCH_DATA_INTEGER Launch_data_type_t = 4
-	LAUNCH_DATA_REAL Launch_data_type_t = 5
-	LAUNCH_DATA_BOOL Launch_data_type_t = 6
-	LAUNCH_DATA_STRING Launch_data_type_t = 7
-	LAUNCH_DATA_OPAQUE Launch_data_type_t = 8
-	LAUNCH_DATA_ERRNO Launch_data_type_t = 9
-	LAUNCH_DATA_MACHPORT Launch_data_type_t = 10
+	LAUNCH_DATA_ARRAY      Launch_data_type_t = 2
+	LAUNCH_DATA_FD         Launch_data_type_t = 3
+	LAUNCH_DATA_INTEGER    Launch_data_type_t = 4
+	LAUNCH_DATA_REAL       Launch_data_type_t = 5
+	LAUNCH_DATA_BOOL       Launch_data_type_t = 6
+	LAUNCH_DATA_STRING     Launch_data_type_t = 7
+	LAUNCH_DATA_OPAQUE     Launch_data_type_t = 8
+	LAUNCH_DATA_ERRNO      Launch_data_type_t = 9
+	LAUNCH_DATA_MACHPORT   Launch_data_type_t = 10
 )
 
 func (e Launch_data_type_t) String() string {
@@ -686,7 +790,9 @@ const (
 
 func (e Mach_vm_range_flags_t) String() string {
 	var parts []string
-	if len(parts) == 0 { return "0" }
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -694,7 +800,7 @@ type Mach_vm_range_flavor_t int64
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
-	MACH_VM_RANGE_FLAVOR_V1 Mach_vm_range_flavor_t = 1
+	MACH_VM_RANGE_FLAVOR_V1      Mach_vm_range_flavor_t = 1
 )
 
 func (e Mach_vm_range_flavor_t) String() string {
@@ -712,8 +818,8 @@ type Mach_vm_range_tag_t int64
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
-	MACH_VM_RANGE_DATA Mach_vm_range_tag_t = 1
-	MACH_VM_RANGE_FIXED Mach_vm_range_tag_t = 2
+	MACH_VM_RANGE_DATA    Mach_vm_range_tag_t = 1
+	MACH_VM_RANGE_FIXED   Mach_vm_range_tag_t = 2
 )
 
 func (e Mach_vm_range_tag_t) String() string {
@@ -732,26 +838,42 @@ func (e Mach_vm_range_tag_t) String() string {
 type Mpo_flags_t int64
 
 const (
-	MPO_PORT Mpo_flags_t = 0
-	MPO_SERVICE_PORT Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT Mpo_flags_t = 2048
-	MPO_REPLY_PORT Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT Mpo_flags_t = 32768
+	MPO_PORT                            Mpo_flags_t = 0
+	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
+	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
+	MPO_REPLY_PORT                      Mpo_flags_t = 4096
+	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
+	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
+	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
 	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
 )
 
 func (e Mpo_flags_t) String() string {
 	var parts []string
-	if e&MPO_SERVICE_PORT != 0 { parts = append(parts, "MPO_SERVICE_PORT") }
-	if e&MPO_CONNECTION_PORT != 0 { parts = append(parts, "MPO_CONNECTION_PORT") }
-	if e&MPO_REPLY_PORT != 0 { parts = append(parts, "MPO_REPLY_PORT") }
-	if e&MPO_WEAK_REPLY_PORT != 0 { parts = append(parts, "MPO_WEAK_REPLY_PORT") }
-	if e&MPO_NOTIFICATION_PORT != 0 { parts = append(parts, "MPO_NOTIFICATION_PORT") }
-	if e&MPO_EXCEPTION_PORT != 0 { parts = append(parts, "MPO_EXCEPTION_PORT") }
-	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 { parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY") }
-	if len(parts) == 0 { return "0" }
+	if e&MPO_SERVICE_PORT != 0 {
+		parts = append(parts, "MPO_SERVICE_PORT")
+	}
+	if e&MPO_CONNECTION_PORT != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT")
+	}
+	if e&MPO_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_REPLY_PORT")
+	}
+	if e&MPO_WEAK_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_WEAK_REPLY_PORT")
+	}
+	if e&MPO_NOTIFICATION_PORT != 0 {
+		parts = append(parts, "MPO_NOTIFICATION_PORT")
+	}
+	if e&MPO_EXCEPTION_PORT != 0 {
+		parts = append(parts, "MPO_EXCEPTION_PORT")
+	}
+	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -773,27 +895,27 @@ func (e Os_clockid_t) String() string {
 type Ptrauth_key int64
 
 const (
-	Ptrauth_key_none Ptrauth_key = -1
-	Ptrauth_key_asia Ptrauth_key = 0
-	Ptrauth_key_asib Ptrauth_key = 1
-	Ptrauth_key_asda Ptrauth_key = 2
-	Ptrauth_key_asdb Ptrauth_key = 3
+	Ptrauth_key_none                     Ptrauth_key = -1
+	Ptrauth_key_asia                     Ptrauth_key = 0
+	Ptrauth_key_asib                     Ptrauth_key = 1
+	Ptrauth_key_asda                     Ptrauth_key = 2
+	Ptrauth_key_asdb                     Ptrauth_key = 3
 	Ptrauth_key_process_independent_code Ptrauth_key = 0
-	Ptrauth_key_process_dependent_code Ptrauth_key = 1
+	Ptrauth_key_process_dependent_code   Ptrauth_key = 1
 	Ptrauth_key_process_independent_data Ptrauth_key = 2
-	Ptrauth_key_process_dependent_data Ptrauth_key = 3
-	Ptrauth_key_return_address Ptrauth_key = 1
-	Ptrauth_key_frame_pointer Ptrauth_key = 3
-	Ptrauth_key_function_pointer Ptrauth_key = 0
-	Ptrauth_key_block_function Ptrauth_key = 0
-	Ptrauth_key_cxx_vtable_pointer Ptrauth_key = 2
-	Ptrauth_key_method_list_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_isa_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_super_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_sel_pointer Ptrauth_key = 3
-	Ptrauth_key_objc_class_ro_pointer Ptrauth_key = 2
+	Ptrauth_key_process_dependent_data   Ptrauth_key = 3
+	Ptrauth_key_return_address           Ptrauth_key = 1
+	Ptrauth_key_frame_pointer            Ptrauth_key = 3
+	Ptrauth_key_function_pointer         Ptrauth_key = 0
+	Ptrauth_key_block_function           Ptrauth_key = 0
+	Ptrauth_key_cxx_vtable_pointer       Ptrauth_key = 2
+	Ptrauth_key_method_list_pointer      Ptrauth_key = 2
+	Ptrauth_key_objc_isa_pointer         Ptrauth_key = 2
+	Ptrauth_key_objc_super_pointer       Ptrauth_key = 2
+	Ptrauth_key_objc_sel_pointer         Ptrauth_key = 3
+	Ptrauth_key_objc_class_ro_pointer    Ptrauth_key = 2
 	Ptrauth_key_block_descriptor_pointer Ptrauth_key = 2
-	Ptrauth_key_init_fini_pointer Ptrauth_key = 0
+	Ptrauth_key_init_fini_pointer        Ptrauth_key = 0
 )
 
 func (e Ptrauth_key) String() string {
@@ -817,11 +939,11 @@ type Qos_class_t uint32
 
 const (
 	QOS_CLASS_USER_INTERACTIVE Qos_class_t = 33
-	QOS_CLASS_USER_INITIATED Qos_class_t = 25
-	QOS_CLASS_DEFAULT Qos_class_t = 21
-	QOS_CLASS_UTILITY Qos_class_t = 17
-	QOS_CLASS_BACKGROUND Qos_class_t = 9
-	QOS_CLASS_UNSPECIFIED Qos_class_t = 0
+	QOS_CLASS_USER_INITIATED   Qos_class_t = 25
+	QOS_CLASS_DEFAULT          Qos_class_t = 21
+	QOS_CLASS_UTILITY          Qos_class_t = 17
+	QOS_CLASS_BACKGROUND       Qos_class_t = 9
+	QOS_CLASS_UNSPECIFIED      Qos_class_t = 0
 )
 
 func (e Qos_class_t) String() string {
@@ -846,22 +968,22 @@ func (e Qos_class_t) String() string {
 type Virtual_memory_guard_exception_code_t int64
 
 const (
-	KGUARD_EXC_DEALLOC_GAP Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
 )
@@ -912,253 +1034,267 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 type Xpc_listener_create_flags_t int64
 
 const (
-	XPC_LISTENER_CREATE_NONE Xpc_listener_create_flags_t = 0
-	XPC_LISTENER_CREATE_INACTIVE Xpc_listener_create_flags_t = 1
-	XPC_LISTENER_CREATE_FORCE_MACH Xpc_listener_create_flags_t = 2
+	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
+	XPC_LISTENER_CREATE_INACTIVE         Xpc_listener_create_flags_t = 1
+	XPC_LISTENER_CREATE_FORCE_MACH       Xpc_listener_create_flags_t = 2
 	XPC_LISTENER_CREATE_FORCE_XPCSERVICE Xpc_listener_create_flags_t = 4
 )
 
 func (e Xpc_listener_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_LISTENER_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE") }
-	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH") }
-	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_LISTENER_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Xpc_session_create_flags_t int64
 
 const (
-	XPC_SESSION_CREATE_NONE Xpc_session_create_flags_t = 0
-	XPC_SESSION_CREATE_INACTIVE Xpc_session_create_flags_t = 1
+	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0
+	XPC_SESSION_CREATE_INACTIVE        Xpc_session_create_flags_t = 1
 	XPC_SESSION_CREATE_MACH_PRIVILEGED Xpc_session_create_flags_t = 2
 )
 
 func (e Xpc_session_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_SESSION_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_SESSION_CREATE_INACTIVE") }
-	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 { parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_SESSION_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_INACTIVE")
+	}
+	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 const (
-	AppleMenuFolderIconResource = -3982
-	DesktopIconResource = -3992
-	FloppyIconResource = -3998
-	GenericApplicationIconResource = -3996
-	GenericCDROMIconResource = -3987
+	AppleMenuFolderIconResource      = -3982
+	DesktopIconResource              = -3992
+	FloppyIconResource               = -3998
+	GenericApplicationIconResource   = -3996
+	GenericCDROMIconResource         = -3987
 	GenericDeskAccessoryIconResource = -3991
-	GenericDocumentIconResource = -4000
-	GenericEditionFileIconResource = -3989
-	GenericExtensionIconResource = -16415
-	GenericFileServerIconResource = -3972
-	GenericFolderIconResource = -3999
-	GenericHardDiskIconResource = -3995
-	GenericMoverObjectIconResource = -3969
-	GenericPreferencesIconResource = -3971
+	GenericDocumentIconResource      = -4000
+	GenericEditionFileIconResource   = -3989
+	GenericExtensionIconResource     = -16415
+	GenericFileServerIconResource    = -3972
+	GenericFolderIconResource        = -3999
+	GenericHardDiskIconResource      = -3995
+	GenericMoverObjectIconResource   = -3969
+	GenericPreferencesIconResource   = -3971
 	GenericQueryDocumentIconResource = -16506
-	GenericRAMDiskIconResource = -3988
-	GenericStationeryIconResource = -3985
-	GenericSuitcaseIconResource = -3970
-	OpenFolderIconResource = -3997
-	PrivateFolderIconResource = -3994
-	SystemFolderIconResource = -3983
-	TrashIconResource = -3993
+	GenericRAMDiskIconResource       = -3988
+	GenericStationeryIconResource    = -3985
+	GenericSuitcaseIconResource      = -3970
+	OpenFolderIconResource           = -3997
+	PrivateFolderIconResource        = -3994
+	SystemFolderIconResource         = -3983
+	TrashIconResource                = -3993
 )
 
 const (
 	KAlertCautionIcon = 1667331444
-	KAlertNoteIcon = 1852798053
-	KAlertStopIcon = 1937010544
+	KAlertNoteIcon    = 1852798053
+	KAlertStopIcon    = 1937010544
 )
 
 const (
-	KAppearanceFolderIcon = 1634758770
-	KAppleExtrasFolderIcon = 1634040004
-	KAppleMenuFolderIcon = 1634561653
-	KApplicationSupportFolderIcon = 1634956656
-	KApplicationsFolderIcon = 1634758771
-	KAssistantsFolderIcon = 1634956484
-	KColorSyncFolderIcon = 1886547814
-	KContextualMenuItemsFolderIcon = 1668116085
-	KControlPanelDisabledFolderIcon = 1668575812
-	KControlPanelFolderIcon = 1668575852
-	KControlStripModulesFolderIcon = 1935963844
-	KDocumentsFolderIcon = 1685021555
-	KExtensionsDisabledFolderIcon = 1702392900
-	KExtensionsFolderIcon = 1702392942
-	KFavoritesFolderIcon = 1717663347
-	KFontsFolderIcon = 1718578804
-	KHelpFolderIcon = -999789456
-	KInternetFolderIcon = 1768846532
-	KInternetPlugInFolderIcon = -999398028
-	KInternetSearchSitesFolderIcon = 1769173862
-	KLocalesFolderIcon = -999526557
-	KMacOSReadMeFolderIcon = 1836020420
-	KPreferencesFolderIcon = 1886545604
-	KPrintMonitorFolderIcon = 1886547572
-	KPrinterDescriptionFolderIcon = 1886413926
-	KPrinterDriverFolderIcon = -999263644
-	KPublicFolderIcon = 1886741094
-	KRecentApplicationsFolderIcon = 1918988400
-	KRecentDocumentsFolderIcon = 1919184739
-	KRecentServersFolderIcon = 1920168566
-	KScriptingAdditionsFolderIcon = -999070862
-	KScriptsFolderIcon = 1935897284
-	KSharedLibrariesFolderIcon = -999528094
-	KShutdownItemsDisabledFolderIcon = 1936221252
-	KShutdownItemsFolderIcon = 1936221286
-	KSpeakableItemsFolder = 1936747369
-	KStartupItemsDisabledFolderIcon = 1937011268
-	KStartupItemsFolderIcon = 1937011316
+	KAppearanceFolderIcon              = 1634758770
+	KAppleExtrasFolderIcon             = 1634040004
+	KAppleMenuFolderIcon               = 1634561653
+	KApplicationSupportFolderIcon      = 1634956656
+	KApplicationsFolderIcon            = 1634758771
+	KAssistantsFolderIcon              = 1634956484
+	KColorSyncFolderIcon               = 1886547814
+	KContextualMenuItemsFolderIcon     = 1668116085
+	KControlPanelDisabledFolderIcon    = 1668575812
+	KControlPanelFolderIcon            = 1668575852
+	KControlStripModulesFolderIcon     = 1935963844
+	KDocumentsFolderIcon               = 1685021555
+	KExtensionsDisabledFolderIcon      = 1702392900
+	KExtensionsFolderIcon              = 1702392942
+	KFavoritesFolderIcon               = 1717663347
+	KFontsFolderIcon                   = 1718578804
+	KHelpFolderIcon                    = -999789456
+	KInternetFolderIcon                = 1768846532
+	KInternetPlugInFolderIcon          = -999398028
+	KInternetSearchSitesFolderIcon     = 1769173862
+	KLocalesFolderIcon                 = -999526557
+	KMacOSReadMeFolderIcon             = 1836020420
+	KPreferencesFolderIcon             = 1886545604
+	KPrintMonitorFolderIcon            = 1886547572
+	KPrinterDescriptionFolderIcon      = 1886413926
+	KPrinterDriverFolderIcon           = -999263644
+	KPublicFolderIcon                  = 1886741094
+	KRecentApplicationsFolderIcon      = 1918988400
+	KRecentDocumentsFolderIcon         = 1919184739
+	KRecentServersFolderIcon           = 1920168566
+	KScriptingAdditionsFolderIcon      = -999070862
+	KScriptsFolderIcon                 = 1935897284
+	KSharedLibrariesFolderIcon         = -999528094
+	KShutdownItemsDisabledFolderIcon   = 1936221252
+	KShutdownItemsFolderIcon           = 1936221286
+	KSpeakableItemsFolder              = 1936747369
+	KStartupItemsDisabledFolderIcon    = 1937011268
+	KStartupItemsFolderIcon            = 1937011316
 	KSystemExtensionDisabledFolderIcon = 1835098948
-	KSystemFolderIcon = 1835098995
-	KTextEncodingsFolderIcon = -999004808
-	KUsersFolderIcon = 1970500292
-	KUtilitiesFolderIcon = 1970563524
-	KVoicesFolderIcon = 1719037795
+	KSystemFolderIcon                  = 1835098995
+	KTextEncodingsFolderIcon           = -999004808
+	KUsersFolderIcon                   = 1970500292
+	KUtilitiesFolderIcon               = 1970563524
+	KVoicesFolderIcon                  = 1719037795
 )
 
 const (
-	KAppleLogoIcon = 1667330156
-	KAppleMenuIcon = 1935765612
-	KBackwardArrowIcon = 1650553455
-	KBurningIcon = 1651864174
-	KConnectToIcon = 1668178804
-	KDeleteAliasIcon = 1684106345
-	KEjectMediaIcon = 1701471587
-	KFavoriteItemsIcon = 1717663346
-	KForwardArrowIcon = 1717662319
-	KGenericWindowIcon = 1735879022
-	KGridIcon = 1735551332
-	KHelpIcon = 1751477360
-	KKeepArrangedIcon = 1634889319
-	KLockedIcon = 1819239275
-	KNoFilesIcon = 1852205420
-	KNoFolderIcon = 1852206180
-	KNoWriteIcon = 1853321844
+	KAppleLogoIcon                  = 1667330156
+	KAppleMenuIcon                  = 1935765612
+	KBackwardArrowIcon              = 1650553455
+	KBurningIcon                    = 1651864174
+	KConnectToIcon                  = 1668178804
+	KDeleteAliasIcon                = 1684106345
+	KEjectMediaIcon                 = 1701471587
+	KFavoriteItemsIcon              = 1717663346
+	KForwardArrowIcon               = 1717662319
+	KGenericWindowIcon              = 1735879022
+	KGridIcon                       = 1735551332
+	KHelpIcon                       = 1751477360
+	KKeepArrangedIcon               = 1634889319
+	KLockedIcon                     = 1819239275
+	KNoFilesIcon                    = 1852205420
+	KNoFolderIcon                   = 1852206180
+	KNoWriteIcon                    = 1853321844
 	KProtectedApplicationFolderIcon = 1885433968
-	KProtectedSystemFolderIcon = 1886615923
-	KQuestionMarkIcon = 1903519091
-	KRecentItemsIcon = 1919118964
-	KRightContainerArrowIcon = 1919115634
-	KShortcutIcon = 1936224884
-	KSortAscendingIcon = 1634954852
-	KSortDescendingIcon = 1685286500
-	KUnlockedIcon = 1970037611
+	KProtectedSystemFolderIcon      = 1886615923
+	KQuestionMarkIcon               = 1903519091
+	KRecentItemsIcon                = 1919118964
+	KRightContainerArrowIcon        = 1919115634
+	KShortcutIcon                   = 1936224884
+	KSortAscendingIcon              = 1634954852
+	KSortDescendingIcon             = 1685286500
+	KUnlockedIcon                   = 1970037611
 )
 
 const (
 	KAlertCautionBadgeIcon = 1667392615
-	KAliasBadgeIcon = 1633838183
-	KAppleScriptBadgeIcon = 1935897200
-	KLockedBadgeIcon = 1818387559
-	KMountedBadgeIcon = 1835164775
-	KSharedBadgeIcon = 1935828071
+	KAliasBadgeIcon        = 1633838183
+	KAppleScriptBadgeIcon  = 1935897200
+	KLockedBadgeIcon       = 1818387559
+	KMountedBadgeIcon      = 1835164775
+	KSharedBadgeIcon       = 1935828071
 )
 
 const (
-	KAFPServerIcon = 1634103411
-	KAppleTalkIcon = 1635019883
-	KAppleTalkZoneIcon = 1635023470
-	KFTPServerIcon = 1718906995
+	KAFPServerIcon      = 1634103411
+	KAppleTalkIcon      = 1635019883
+	KAppleTalkZoneIcon  = 1635023470
+	KFTPServerIcon      = 1718906995
 	KGenericNetworkIcon = 1735288180
-	KHTTPServerIcon = 1752461427
-	KIPFileServerIcon = 1769173622
+	KHTTPServerIcon     = 1752461427
+	KIPFileServerIcon   = 1769173622
 )
 
 const (
-	KClipboardIcon = 1129072976
-	KClippingPictureTypeIcon = 1668051056
-	KClippingSoundTypeIcon = 1668051059
-	KClippingTextTypeIcon = 1668051060
-	KClippingUnknownTypeIcon = 1668051061
-	KComputerIcon = 1919905652
-	KDesktopIcon = 1684370283
-	KFinderIcon = 1179534418
-	KFontSuitcaseIcon = 1179011404
-	KFullTrashIcon = 1718907496
-	KGenericApplicationIcon = 1095782476
-	KGenericCDROMIcon = 1667523698
-	KGenericComponentIcon = 1953001063
-	KGenericControlPanelIcon = 1095782467
+	KClipboardIcon                 = 1129072976
+	KClippingPictureTypeIcon       = 1668051056
+	KClippingSoundTypeIcon         = 1668051059
+	KClippingTextTypeIcon          = 1668051060
+	KClippingUnknownTypeIcon       = 1668051061
+	KComputerIcon                  = 1919905652
+	KDesktopIcon                   = 1684370283
+	KFinderIcon                    = 1179534418
+	KFontSuitcaseIcon              = 1179011404
+	KFullTrashIcon                 = 1718907496
+	KGenericApplicationIcon        = 1095782476
+	KGenericCDROMIcon              = 1667523698
+	KGenericComponentIcon          = 1953001063
+	KGenericControlPanelIcon       = 1095782467
 	KGenericControlStripModuleIcon = 1935959414
-	KGenericDeskAccessoryIcon = 1095782468
-	KGenericDocumentIcon = 1685021557
-	KGenericEditionFileIcon = 1701082214
-	KGenericExtensionIcon = 1229867348
-	KGenericFileServerIcon = 1936881266
-	KGenericFloppyIcon = 1718382713
-	KGenericFontIcon = 1717987692
-	KGenericFontScalerIcon = 1935895666
-	KGenericHardDiskIcon = 1751413611
-	KGenericIDiskIcon = 1768190827
-	KGenericMoverObjectIcon = 1836021362
-	KGenericPCCardIcon = 1885564259
-	KGenericPreferencesIcon = 1886545254
-	KGenericQueryDocumentIcon = 1902473849
-	KGenericRAMDiskIcon = 1918987620
-	KGenericRemovableMediaIcon = 1919774582
-	KGenericSharedLibaryIcon = 1936223330
-	KGenericStationeryIcon = 1935961955
-	KGenericSuitcaseIcon = 1937074548
-	KGenericURLIcon = 1735750252
-	KGenericWORMIcon = 2003792493
-	KInternationResourcesIcon = 1768319340
-	KInternationalResourcesIcon = 1768319340
-	KKeyboardLayoutIcon = 1801873772
-	KSoundFileIcon = 1936091500
-	KSystemSuitcaseIcon = 2054388083
-	KTrashIcon = 1953657704
-	KTrueTypeFlatFontIcon = 1936092788
-	KTrueTypeFontIcon = 1952868716
-	KTrueTypeMultiFlatFontIcon = 1953784678
-	KUnknownFSObjectIcon = 1970169459
-	KUserIDiskIcon = 1969517419
+	KGenericDeskAccessoryIcon      = 1095782468
+	KGenericDocumentIcon           = 1685021557
+	KGenericEditionFileIcon        = 1701082214
+	KGenericExtensionIcon          = 1229867348
+	KGenericFileServerIcon         = 1936881266
+	KGenericFloppyIcon             = 1718382713
+	KGenericFontIcon               = 1717987692
+	KGenericFontScalerIcon         = 1935895666
+	KGenericHardDiskIcon           = 1751413611
+	KGenericIDiskIcon              = 1768190827
+	KGenericMoverObjectIcon        = 1836021362
+	KGenericPCCardIcon             = 1885564259
+	KGenericPreferencesIcon        = 1886545254
+	KGenericQueryDocumentIcon      = 1902473849
+	KGenericRAMDiskIcon            = 1918987620
+	KGenericRemovableMediaIcon     = 1919774582
+	KGenericSharedLibaryIcon       = 1936223330
+	KGenericStationeryIcon         = 1935961955
+	KGenericSuitcaseIcon           = 1937074548
+	KGenericURLIcon                = 1735750252
+	KGenericWORMIcon               = 2003792493
+	KInternationResourcesIcon      = 1768319340
+	KInternationalResourcesIcon    = 1768319340
+	KKeyboardLayoutIcon            = 1801873772
+	KSoundFileIcon                 = 1936091500
+	KSystemSuitcaseIcon            = 2054388083
+	KTrashIcon                     = 1953657704
+	KTrueTypeFlatFontIcon          = 1936092788
+	KTrueTypeFontIcon              = 1952868716
+	KTrueTypeMultiFlatFontIcon     = 1953784678
+	KUnknownFSObjectIcon           = 1970169459
+	KUserIDiskIcon                 = 1969517419
 )
 
 const (
-	KDesktopIconResource = -3992
-	KGenericFileServerIconResource = -3972
-	KGenericHardDiskIconResource = -3995
+	KDesktopIconResource            = -3992
+	KGenericFileServerIconResource  = -3972
+	KGenericHardDiskIconResource    = -3995
 	KGenericMoverObjectIconResource = -3969
-	KGenericSuitcaseIconResource = -3970
-	KOpenFolderIconResource = -3997
+	KGenericSuitcaseIconResource    = -3970
+	KOpenFolderIconResource         = -3997
 )
 
 const (
-	KFloppyIconResource = -3998
-	KGenericApplicationIconResource = -3996
-	KGenericCDROMIconResource = -3987
+	KFloppyIconResource               = -3998
+	KGenericApplicationIconResource   = -3996
+	KGenericCDROMIconResource         = -3987
 	KGenericDeskAccessoryIconResource = -3991
-	KGenericDocumentIconResource = -4000
-	KGenericEditionFileIconResource = -3989
-	KGenericFolderIconResource = -3999
-	KGenericRAMDiskIconResource = -3988
-	KGenericStationeryIconResource = -3985
-	KPrivateFolderIconResource = -3994
-	KTrashIconResource = -3993
+	KGenericDocumentIconResource      = -4000
+	KGenericEditionFileIconResource   = -3989
+	KGenericFolderIconResource        = -3999
+	KGenericRAMDiskIconResource       = -3988
+	KGenericStationeryIconResource    = -3985
+	KPrivateFolderIconResource        = -3994
+	KTrashIconResource                = -3993
 )
 
 const (
-	KDropFolderIcon = 1684172664
+	KDropFolderIcon    = 1684172664
 	KGenericFolderIcon = 1718379634
 	KMountedFolderIcon = 1835955300
-	KOpenFolderIcon = 1868983396
-	KOwnedFolderIcon = 1870098020
+	KOpenFolderIcon    = 1868983396
+	KOwnedFolderIcon   = 1870098020
 	KPrivateFolderIcon = 1886549606
-	KSharedFolderIcon = 1936221804
+	KSharedFolderIcon  = 1936221804
 )
 
 const (
-	KAppleMenuFolderIconResource = -3982
-	KGenericExtensionIconResource = -16415
-	KGenericPreferencesIconResource = -3971
+	KAppleMenuFolderIconResource      = -3982
+	KGenericExtensionIconResource     = -16415
+	KGenericPreferencesIconResource   = -3971
 	KGenericQueryDocumentIconResource = -16506
-	KHelpIconResource = -20271
-	KSystemFolderIconResource = -3983
+	KHelpIconResource                 = -20271
+	KSystemFolderIconResource         = -3983
 )
 
 const (
@@ -1166,88 +1302,88 @@ const (
 )
 
 const (
-	KIconServicesNoBadgeFlag = 1
-	KIconServicesNormalUsageFlag = 0
+	KIconServicesNoBadgeFlag        = 1
+	KIconServicesNormalUsageFlag    = 0
 	KIconServicesUpdateIfNeededFlag = 2
 )
 
 const (
-	KInternetLocationAppleShareIcon = 1768710502
-	KInternetLocationAppleTalkZoneIcon = 1768710516
-	KInternetLocationFTPIcon = 1768711796
-	KInternetLocationFileIcon = 1768711785
-	KInternetLocationGenericIcon = 1768712037
-	KInternetLocationHTTPIcon = 1768712308
-	KInternetLocationMailIcon = 1768713569
+	KInternetLocationAppleShareIcon      = 1768710502
+	KInternetLocationAppleTalkZoneIcon   = 1768710516
+	KInternetLocationFTPIcon             = 1768711796
+	KInternetLocationFileIcon            = 1768711785
+	KInternetLocationGenericIcon         = 1768712037
+	KInternetLocationHTTPIcon            = 1768712308
+	KInternetLocationMailIcon            = 1768713569
 	KInternetLocationNSLNeighborhoodIcon = 1768713843
-	KInternetLocationNewsIcon = 1768713847
+	KInternetLocationNewsIcon            = 1768713847
 )
 
 const (
 	KLSLaunchHasUntrustedContents = 4194304
-	KLSLaunchInClassic = 262144
-	KLSLaunchInhibitBGOnly = 128
-	KLSLaunchNoParams = 2048
-	KLSLaunchStartClassic = 131072
+	KLSLaunchInClassic            = 262144
+	KLSLaunchInhibitBGOnly        = 128
+	KLSLaunchNoParams             = 2048
+	KLSLaunchStartClassic         = 131072
 )
 
 const (
-	KLSAppDoesNotClaimTypeErr = -10820
-	KLSAppDoesNotSupportSchemeWarning = -10821
-	KLSAppInTrashErr = -10660
-	KLSApplicationNotFoundErr = -10814
-	KLSAttributeNotFoundErr = -10662
-	KLSAttributeNotSettableErr = -10663
-	KLSCannotSetInfoErr = -10823
-	KLSDataErr = -10817
-	KLSDataTooOldErr = -10816
-	KLSDataUnavailableErr = -10813
-	KLSExecutableIncorrectFormat = -10661
-	KLSGarbageCollectionUnsupportedErr = -10666
+	KLSAppDoesNotClaimTypeErr            = -10820
+	KLSAppDoesNotSupportSchemeWarning    = -10821
+	KLSAppInTrashErr                     = -10660
+	KLSApplicationNotFoundErr            = -10814
+	KLSAttributeNotFoundErr              = -10662
+	KLSAttributeNotSettableErr           = -10663
+	KLSCannotSetInfoErr                  = -10823
+	KLSDataErr                           = -10817
+	KLSDataTooOldErr                     = -10816
+	KLSDataUnavailableErr                = -10813
+	KLSExecutableIncorrectFormat         = -10661
+	KLSGarbageCollectionUnsupportedErr   = -10666
 	KLSIncompatibleApplicationVersionErr = -10664
-	KLSIncompatibleSystemVersionErr = -10825
-	KLSLaunchInProgressErr = -10818
-	KLSMalformedLocErr = -10400
-	KLSMultipleSessionsNotSupportedErr = -10829
-	KLSNo32BitEnvironmentErr = -10386
-	KLSNoClassicEnvironmentErr = -10828
-	KLSNoExecutableErr = -10827
-	KLSNoLaunchPermissionErr = -10826
-	KLSNoRegistrationInfoErr = -10824
-	KLSNoRosettaEnvironmentErr = -10665
-	KLSNotAnApplicationErr = -10811
-	KLSNotInitializedErr = -10812
-	KLSNotRegisteredErr = -10819
-	KLSServerCommunicationErr = -10822
-	KLSUnknownErr = -10810
-	KLSUnknownTypeErr = -10815
+	KLSIncompatibleSystemVersionErr      = -10825
+	KLSLaunchInProgressErr               = -10818
+	KLSMalformedLocErr                   = -10400
+	KLSMultipleSessionsNotSupportedErr   = -10829
+	KLSNo32BitEnvironmentErr             = -10386
+	KLSNoClassicEnvironmentErr           = -10828
+	KLSNoExecutableErr                   = -10827
+	KLSNoLaunchPermissionErr             = -10826
+	KLSNoRegistrationInfoErr             = -10824
+	KLSNoRosettaEnvironmentErr           = -10665
+	KLSNotAnApplicationErr               = -10811
+	KLSNotInitializedErr                 = -10812
+	KLSNotRegisteredErr                  = -10819
+	KLSServerCommunicationErr            = -10822
+	KLSUnknownErr                        = -10810
+	KLSUnknownTypeErr                    = -10815
 )
 
 const (
 	KLSUnknownCreator = 0
-	KLSUnknownType = 0
+	KLSUnknownType    = 0
 )
 
 const (
 	KSharingPrivsNotApplicableIcon = 1936223841
-	KSharingPrivsReadOnlyIcon = 1936224879
-	KSharingPrivsReadWriteIcon = 1936224887
-	KSharingPrivsUnknownIcon = 1936225643
-	KSharingPrivsWritableIcon = 2003986804
+	KSharingPrivsReadOnlyIcon      = 1936224879
+	KSharingPrivsReadWriteIcon     = 1936224887
+	KSharingPrivsUnknownIcon       = 1936225643
+	KSharingPrivsWritableIcon      = 2003986804
 )
 
 const (
 	KControlPanelFolderIconResource = -3976
-	KDropFolderIconResource = -3979
-	KExtensionsFolderIconResource = -3973
-	KFontsFolderIconResource = -3968
-	KFullTrashIconResource = -3984
-	KMountedFolderIconResource = -3977
-	KOwnedFolderIconResource = -3980
-	KPreferencesFolderIconResource = -3974
+	KDropFolderIconResource         = -3979
+	KExtensionsFolderIconResource   = -3973
+	KFontsFolderIconResource        = -3968
+	KFullTrashIconResource          = -3984
+	KMountedFolderIconResource      = -3977
+	KOwnedFolderIconResource        = -3980
+	KPreferencesFolderIconResource  = -3974
 	KPrintMonitorFolderIconResource = -3975
-	KSharedFolderIconResource = -3978
-	KStartupFolderIconResource = -3981
+	KSharedFolderIconResource       = -3978
+	KStartupFolderIconResource      = -3981
 )
 
 const (
@@ -1255,46 +1391,45 @@ const (
 )
 
 const (
-	KToolbarAdvancedIcon = 1952604534
+	KToolbarAdvancedIcon           = 1952604534
 	KToolbarApplicationsFolderIcon = 1950445683
-	KToolbarCustomizeIcon = 1952675187
-	KToolbarDeleteIcon = 1952736620
-	KToolbarDesktopFolderIcon = 1950643051
-	KToolbarDocumentsFolderIcon = 1950642019
-	KToolbarDownloadsFolderIcon = 1950644078
-	KToolbarFavoritesIcon = 1952866678
-	KToolbarHomeIcon = 1953001325
-	KToolbarInfoIcon = 1952606574
-	KToolbarLabelsIcon = 1952607330
-	KToolbarLibraryFolderIcon = 1951164770
-	KToolbarMovieFolderIcon = 1951231862
-	KToolbarMusicFolderIcon = 1951233395
-	KToolbarPicturesFolderIcon = 1951426915
-	KToolbarPublicFolderIcon = 1951429986
-	KToolbarSitesFolderIcon = 1951626355
-	KToolbarUtilitiesFolderIcon = 1951757420
+	KToolbarCustomizeIcon          = 1952675187
+	KToolbarDeleteIcon             = 1952736620
+	KToolbarDesktopFolderIcon      = 1950643051
+	KToolbarDocumentsFolderIcon    = 1950642019
+	KToolbarDownloadsFolderIcon    = 1950644078
+	KToolbarFavoritesIcon          = 1952866678
+	KToolbarHomeIcon               = 1953001325
+	KToolbarInfoIcon               = 1952606574
+	KToolbarLabelsIcon             = 1952607330
+	KToolbarLibraryFolderIcon      = 1951164770
+	KToolbarMovieFolderIcon        = 1951231862
+	KToolbarMusicFolderIcon        = 1951233395
+	KToolbarPicturesFolderIcon     = 1951426915
+	KToolbarPublicFolderIcon       = 1951429986
+	KToolbarSitesFolderIcon        = 1951626355
+	KToolbarUtilitiesFolderIcon    = 1951757420
 )
 
 const (
-	KGroupIcon = 1735554416
-	KGuestUserIcon = 1735750514
-	KOwnerIcon = 1937077106
-	KUserFolderIcon = 1969646692
-	KUserIcon = 1970496882
+	KGroupIcon           = 1735554416
+	KGuestUserIcon       = 1735750514
+	KOwnerIcon           = 1937077106
+	KUserFolderIcon      = 1969646692
+	KUserIcon            = 1970496882
 	KWorkgroupFolderIcon = 2003201124
 )
 
 const (
 	ControlPanelFolderIconResource = -3976
-	DropFolderIconResource = -3979
-	ExtensionsFolderIconResource = -3973
-	FontsFolderIconResource = -3968
-	FullTrashIconResource = -3984
-	MountedFolderIconResource = -3977
-	OwnedFolderIconResource = -3980
-	PreferencesFolderIconResource = -3974
+	DropFolderIconResource         = -3979
+	ExtensionsFolderIconResource   = -3973
+	FontsFolderIconResource        = -3968
+	FullTrashIconResource          = -3984
+	MountedFolderIconResource      = -3977
+	OwnedFolderIconResource        = -3980
+	PreferencesFolderIconResource  = -3974
 	PrintMonitorFolderIconResource = -3975
-	SharedFolderIconResource = -3978
-	StartupFolderIconResource = -3981
+	SharedFolderIconResource       = -3978
+	StartupFolderIconResource      = -3981
 )
-

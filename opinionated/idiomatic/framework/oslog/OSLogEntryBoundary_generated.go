@@ -43,4 +43,3 @@ type LogEntryBoundaryable interface {
 }
 
 var _ LogEntryBoundaryable = (*LogEntryBoundary)(nil)
-

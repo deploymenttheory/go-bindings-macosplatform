@@ -16,10 +16,10 @@ type INCurrencyAmount struct {
 }
 
 var (
-	_clsINCurrencyAmount = _objcClass("INCurrencyAmount")
+	_clsINCurrencyAmount                           = _objcClass("INCurrencyAmount")
 	_iNCurrencyAmountSelInitWithAmountCurrencyCode = objc.RegisterName("initWithAmount:currencyCode:")
-	_iNCurrencyAmountSelAmount = objc.RegisterName("amount")
-	_iNCurrencyAmountSelCurrencyCode = objc.RegisterName("currencyCode")
+	_iNCurrencyAmountSelAmount                     = objc.RegisterName("amount")
+	_iNCurrencyAmountSelCurrencyCode               = objc.RegisterName("currencyCode")
 )
 
 func INCurrencyAmountFromID(id objc.ID) *INCurrencyAmount {
@@ -34,19 +34,24 @@ func INCurrencyAmountFromID(id objc.ID) *INCurrencyAmount {
 
 func (o *INCurrencyAmount) InitWithAmountCurrencyCode(amount *foundation.NSDecimalNumber, currencyCode *foundation.NSString) *INCurrencyAmount {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNCurrencyAmountSelInitWithAmountCurrencyCode, amount.Ptr(), currencyCode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INCurrencyAmountFromID(_ret)
 }
 
 func (o *INCurrencyAmount) Amount() *foundation.NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNCurrencyAmountSelAmount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDecimalNumberFromID(_ret)
 }
 
 func (o *INCurrencyAmount) CurrencyCode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNCurrencyAmountSelCurrencyCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

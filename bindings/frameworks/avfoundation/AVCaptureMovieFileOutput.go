@@ -17,23 +17,23 @@ type AVCaptureMovieFileOutput struct {
 }
 
 var (
-	_clsAVCaptureMovieFileOutput = _objcClass("AVCaptureMovieFileOutput")
-	_aVCaptureMovieFileOutputSelInit = objc.RegisterName("init")
-	_aVCaptureMovieFileOutputSelNew = objc.RegisterName("new")
-	_aVCaptureMovieFileOutputSelOutputSettingsForConnection = objc.RegisterName("outputSettingsForConnection:")
-	_aVCaptureMovieFileOutputSelSetOutputSettingsForConnection = objc.RegisterName("setOutputSettings:forConnection:")
+	_clsAVCaptureMovieFileOutput                                                                                              = _objcClass("AVCaptureMovieFileOutput")
+	_aVCaptureMovieFileOutputSelInit                                                                                          = objc.RegisterName("init")
+	_aVCaptureMovieFileOutputSelNew                                                                                           = objc.RegisterName("new")
+	_aVCaptureMovieFileOutputSelOutputSettingsForConnection                                                                   = objc.RegisterName("outputSettingsForConnection:")
+	_aVCaptureMovieFileOutputSelSetOutputSettingsForConnection                                                                = objc.RegisterName("setOutputSettings:forConnection:")
 	_aVCaptureMovieFileOutputSelSetPrimaryConstituentDeviceSwitchingBehaviorForRecordingRestrictedSwitchingBehaviorConditions = objc.RegisterName("setPrimaryConstituentDeviceSwitchingBehaviorForRecording:restrictedSwitchingBehaviorConditions:")
-	_aVCaptureMovieFileOutputSelMovieFragmentInterval = objc.RegisterName("movieFragmentInterval")
-	_aVCaptureMovieFileOutputSelSetMovieFragmentInterval = objc.RegisterName("setMovieFragmentInterval:")
-	_aVCaptureMovieFileOutputSelMetadata = objc.RegisterName("metadata")
-	_aVCaptureMovieFileOutputSelSetMetadata = objc.RegisterName("setMetadata:")
-	_aVCaptureMovieFileOutputSelIsPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled = objc.RegisterName("isPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled")
-	_aVCaptureMovieFileOutputSelSetPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled = objc.RegisterName("setPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled:")
-	_aVCaptureMovieFileOutputSelPrimaryConstituentDeviceSwitchingBehaviorForRecording = objc.RegisterName("primaryConstituentDeviceSwitchingBehaviorForRecording")
-	_aVCaptureMovieFileOutputSelPrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionsForRecording = objc.RegisterName("primaryConstituentDeviceRestrictedSwitchingBehaviorConditionsForRecording")
-	_aVCaptureMovieFileOutputSelIsSpatialVideoCaptureSupported = objc.RegisterName("isSpatialVideoCaptureSupported")
-	_aVCaptureMovieFileOutputSelIsSpatialVideoCaptureEnabled = objc.RegisterName("isSpatialVideoCaptureEnabled")
-	_aVCaptureMovieFileOutputSelSetSpatialVideoCaptureEnabled = objc.RegisterName("setSpatialVideoCaptureEnabled:")
+	_aVCaptureMovieFileOutputSelMovieFragmentInterval                                                                         = objc.RegisterName("movieFragmentInterval")
+	_aVCaptureMovieFileOutputSelSetMovieFragmentInterval                                                                      = objc.RegisterName("setMovieFragmentInterval:")
+	_aVCaptureMovieFileOutputSelMetadata                                                                                      = objc.RegisterName("metadata")
+	_aVCaptureMovieFileOutputSelSetMetadata                                                                                   = objc.RegisterName("setMetadata:")
+	_aVCaptureMovieFileOutputSelIsPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled                                = objc.RegisterName("isPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled")
+	_aVCaptureMovieFileOutputSelSetPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled                               = objc.RegisterName("setPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled:")
+	_aVCaptureMovieFileOutputSelPrimaryConstituentDeviceSwitchingBehaviorForRecording                                         = objc.RegisterName("primaryConstituentDeviceSwitchingBehaviorForRecording")
+	_aVCaptureMovieFileOutputSelPrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionsForRecording                     = objc.RegisterName("primaryConstituentDeviceRestrictedSwitchingBehaviorConditionsForRecording")
+	_aVCaptureMovieFileOutputSelIsSpatialVideoCaptureSupported                                                                = objc.RegisterName("isSpatialVideoCaptureSupported")
+	_aVCaptureMovieFileOutputSelIsSpatialVideoCaptureEnabled                                                                  = objc.RegisterName("isSpatialVideoCaptureEnabled")
+	_aVCaptureMovieFileOutputSelSetSpatialVideoCaptureEnabled                                                                 = objc.RegisterName("setSpatialVideoCaptureEnabled:")
 )
 
 func AVCaptureMovieFileOutputFromID(id objc.ID) *AVCaptureMovieFileOutput {
@@ -48,7 +48,9 @@ func AVCaptureMovieFileOutputFromID(id objc.ID) *AVCaptureMovieFileOutput {
 
 func (o *AVCaptureMovieFileOutput) Init() *AVCaptureMovieFileOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureMovieFileOutputSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureMovieFileOutputFromID(_ret)
 }
 
@@ -86,7 +88,9 @@ func (o *AVCaptureMovieFileOutput) SetMovieFragmentInterval(movieFragmentInterva
 // @property metadata @abstract A collection of metadata to be written to the receiver's output files. @discussion The value of this property is an array of AVMetadataItem objects representing the collection of top-level metadata to be written in each output file.
 func (o *AVCaptureMovieFileOutput) Metadata() *foundation.NSArray[*AVMetadataItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureMovieFileOutputSelMetadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVMetadataItem](_ret)
 }
 
@@ -131,4 +135,3 @@ func (o *AVCaptureMovieFileOutput) IsSpatialVideoCaptureEnabled() bool {
 func (o *AVCaptureMovieFileOutput) SetSpatialVideoCaptureEnabled(spatialVideoCaptureEnabled bool) {
 	o.Ptr().Send(_aVCaptureMovieFileOutputSelSetSpatialVideoCaptureEnabled, spatialVideoCaptureEnabled)
 }
-

@@ -16,7 +16,9 @@ type DetectDocumentSegmentationRequest struct {
 }
 
 // Unwrap returns the underlying [raw.VNDetectDocumentSegmentationRequest].
-func (x *DetectDocumentSegmentationRequest) Unwrap() *raw.VNDetectDocumentSegmentationRequest { return x.inner }
+func (x *DetectDocumentSegmentationRequest) Unwrap() *raw.VNDetectDocumentSegmentationRequest {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -60,9 +62,13 @@ func (x *DetectDocumentSegmentationRequest) WithRevision(revision uint) *DetectD
 	return x
 }
 
-func (x *DetectDocumentSegmentationRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
+func (x *DetectDocumentSegmentationRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNImageBasedRequest
+}
 
-func (x *DetectDocumentSegmentationRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+func (x *DetectDocumentSegmentationRequest) asRequest() *raw.VNRequest {
+	return &x.inner.VNImageBasedRequest.VNRequest
+}
 
 // DetectDocumentSegmentationRequestable is the interface implemented by [DetectDocumentSegmentationRequest], for mocking and DI.
 type DetectDocumentSegmentationRequestable interface {
@@ -74,4 +80,3 @@ type DetectDocumentSegmentationRequestable interface {
 }
 
 var _ DetectDocumentSegmentationRequestable = (*DetectDocumentSegmentationRequest)(nil)
-

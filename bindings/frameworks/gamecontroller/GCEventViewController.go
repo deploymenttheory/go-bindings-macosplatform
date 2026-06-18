@@ -16,8 +16,8 @@ type GCEventViewController struct {
 }
 
 var (
-	_clsGCEventViewController = _objcClass("GCEventViewController")
-	_gCEventViewControllerSelControllerUserInteractionEnabled = objc.RegisterName("controllerUserInteractionEnabled")
+	_clsGCEventViewController                                    = _objcClass("GCEventViewController")
+	_gCEventViewControllerSelControllerUserInteractionEnabled    = objc.RegisterName("controllerUserInteractionEnabled")
 	_gCEventViewControllerSelSetControllerUserInteractionEnabled = objc.RegisterName("setControllerUserInteractionEnabled:")
 )
 
@@ -39,4 +39,3 @@ func (o *GCEventViewController) ControllerUserInteractionEnabled() bool {
 func (o *GCEventViewController) SetControllerUserInteractionEnabled(controllerUserInteractionEnabled bool) {
 	o.Ptr().Send(_gCEventViewControllerSelSetControllerUserInteractionEnabled, controllerUserInteractionEnabled)
 }
-

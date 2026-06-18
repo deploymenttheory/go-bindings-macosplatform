@@ -16,12 +16,12 @@ type AVMetricPlayerItemVariantSwitchStartEvent struct {
 }
 
 var (
-	_clsAVMetricPlayerItemVariantSwitchStartEvent = _objcClass("AVMetricPlayerItemVariantSwitchStartEvent")
-	_aVMetricPlayerItemVariantSwitchStartEventSelFromVariant = objc.RegisterName("fromVariant")
-	_aVMetricPlayerItemVariantSwitchStartEventSelToVariant = objc.RegisterName("toVariant")
-	_aVMetricPlayerItemVariantSwitchStartEventSelLoadedTimeRanges = objc.RegisterName("loadedTimeRanges")
-	_aVMetricPlayerItemVariantSwitchStartEventSelVideoRendition = objc.RegisterName("videoRendition")
-	_aVMetricPlayerItemVariantSwitchStartEventSelAudioRendition = objc.RegisterName("audioRendition")
+	_clsAVMetricPlayerItemVariantSwitchStartEvent                  = _objcClass("AVMetricPlayerItemVariantSwitchStartEvent")
+	_aVMetricPlayerItemVariantSwitchStartEventSelFromVariant       = objc.RegisterName("fromVariant")
+	_aVMetricPlayerItemVariantSwitchStartEventSelToVariant         = objc.RegisterName("toVariant")
+	_aVMetricPlayerItemVariantSwitchStartEventSelLoadedTimeRanges  = objc.RegisterName("loadedTimeRanges")
+	_aVMetricPlayerItemVariantSwitchStartEventSelVideoRendition    = objc.RegisterName("videoRendition")
+	_aVMetricPlayerItemVariantSwitchStartEventSelAudioRendition    = objc.RegisterName("audioRendition")
 	_aVMetricPlayerItemVariantSwitchStartEventSelSubtitleRendition = objc.RegisterName("subtitleRendition")
 )
 
@@ -38,14 +38,18 @@ func AVMetricPlayerItemVariantSwitchStartEventFromID(id objc.ID) *AVMetricPlayer
 // Returns the variant from which the switch is attempted. If no value is available, returns nil
 func (o *AVMetricPlayerItemVariantSwitchStartEvent) FromVariant() *AVAssetVariant {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricPlayerItemVariantSwitchStartEventSelFromVariant)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetVariantFromID(_ret)
 }
 
 // Returns the variant to which the switch is attempted.
 func (o *AVMetricPlayerItemVariantSwitchStartEvent) ToVariant() *AVAssetVariant {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricPlayerItemVariantSwitchStartEventSelToVariant)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetVariantFromID(_ret)
 }
 
@@ -58,21 +62,26 @@ func (o *AVMetricPlayerItemVariantSwitchStartEvent) LoadedTimeRanges() *foundati
 // @property videoRendition @abstract Contains information corresponding to the currently selected video rendition.
 func (o *AVMetricPlayerItemVariantSwitchStartEvent) VideoRendition() *AVMetricMediaRendition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricPlayerItemVariantSwitchStartEventSelVideoRendition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMetricMediaRenditionFromID(_ret)
 }
 
 // @property audioRendition @abstract Contains information corresponding to the currently selected audio rendition.
 func (o *AVMetricPlayerItemVariantSwitchStartEvent) AudioRendition() *AVMetricMediaRendition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricPlayerItemVariantSwitchStartEventSelAudioRendition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMetricMediaRenditionFromID(_ret)
 }
 
 // @property subtitleRendition @abstract Contains information corresponding to the currently selected subtitle rendition.
 func (o *AVMetricPlayerItemVariantSwitchStartEvent) SubtitleRendition() *AVMetricMediaRendition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricPlayerItemVariantSwitchStartEventSelSubtitleRendition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMetricMediaRenditionFromID(_ret)
 }
-

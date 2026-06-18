@@ -19,383 +19,383 @@ type CSSearchableItemAttributeSet struct {
 }
 
 var (
-	_clsCSSearchableItemAttributeSet = _objcClass("CSSearchableItemAttributeSet")
-	_cSSearchableItemAttributeSetSelInitWithItemContentType = objc.RegisterName("initWithItemContentType:")
-	_cSSearchableItemAttributeSetSelInitWithContentType = objc.RegisterName("initWithContentType:")
-	_cSSearchableItemAttributeSetSelSetValueForCustomKey = objc.RegisterName("setValue:forCustomKey:")
-	_cSSearchableItemAttributeSetSelValueForCustomKey = objc.RegisterName("valueForCustomKey:")
-	_cSSearchableItemAttributeSetSelDisplayName = objc.RegisterName("displayName")
-	_cSSearchableItemAttributeSetSelSetDisplayName = objc.RegisterName("setDisplayName:")
-	_cSSearchableItemAttributeSetSelAlternateNames = objc.RegisterName("alternateNames")
-	_cSSearchableItemAttributeSetSelSetAlternateNames = objc.RegisterName("setAlternateNames:")
-	_cSSearchableItemAttributeSetSelPath = objc.RegisterName("path")
-	_cSSearchableItemAttributeSetSelSetPath = objc.RegisterName("setPath:")
-	_cSSearchableItemAttributeSetSelContentURL = objc.RegisterName("contentURL")
-	_cSSearchableItemAttributeSetSelSetContentURL = objc.RegisterName("setContentURL:")
-	_cSSearchableItemAttributeSetSelThumbnailURL = objc.RegisterName("thumbnailURL")
-	_cSSearchableItemAttributeSetSelSetThumbnailURL = objc.RegisterName("setThumbnailURL:")
-	_cSSearchableItemAttributeSetSelThumbnailData = objc.RegisterName("thumbnailData")
-	_cSSearchableItemAttributeSetSelSetThumbnailData = objc.RegisterName("setThumbnailData:")
-	_cSSearchableItemAttributeSetSelDarkThumbnailURL = objc.RegisterName("darkThumbnailURL")
-	_cSSearchableItemAttributeSetSelSetDarkThumbnailURL = objc.RegisterName("setDarkThumbnailURL:")
-	_cSSearchableItemAttributeSetSelRelatedUniqueIdentifier = objc.RegisterName("relatedUniqueIdentifier")
-	_cSSearchableItemAttributeSetSelSetRelatedUniqueIdentifier = objc.RegisterName("setRelatedUniqueIdentifier:")
-	_cSSearchableItemAttributeSetSelWeakRelatedUniqueIdentifier = objc.RegisterName("weakRelatedUniqueIdentifier")
-	_cSSearchableItemAttributeSetSelSetWeakRelatedUniqueIdentifier = objc.RegisterName("setWeakRelatedUniqueIdentifier:")
-	_cSSearchableItemAttributeSetSelMetadataModificationDate = objc.RegisterName("metadataModificationDate")
-	_cSSearchableItemAttributeSetSelSetMetadataModificationDate = objc.RegisterName("setMetadataModificationDate:")
-	_cSSearchableItemAttributeSetSelContentType = objc.RegisterName("contentType")
-	_cSSearchableItemAttributeSetSelSetContentType = objc.RegisterName("setContentType:")
-	_cSSearchableItemAttributeSetSelContentTypeTree = objc.RegisterName("contentTypeTree")
-	_cSSearchableItemAttributeSetSelSetContentTypeTree = objc.RegisterName("setContentTypeTree:")
-	_cSSearchableItemAttributeSetSelKeywords = objc.RegisterName("keywords")
-	_cSSearchableItemAttributeSetSelSetKeywords = objc.RegisterName("setKeywords:")
-	_cSSearchableItemAttributeSetSelTitle = objc.RegisterName("title")
-	_cSSearchableItemAttributeSetSelSetTitle = objc.RegisterName("setTitle:")
-	_cSSearchableItemAttributeSetSelIsUserCreated = objc.RegisterName("isUserCreated")
-	_cSSearchableItemAttributeSetSelSetUserCreated = objc.RegisterName("setUserCreated:")
-	_cSSearchableItemAttributeSetSelIsUserOwned = objc.RegisterName("isUserOwned")
-	_cSSearchableItemAttributeSetSelSetUserOwned = objc.RegisterName("setUserOwned:")
-	_cSSearchableItemAttributeSetSelIsUserCurated = objc.RegisterName("isUserCurated")
-	_cSSearchableItemAttributeSetSelSetUserCurated = objc.RegisterName("setUserCurated:")
-	_cSSearchableItemAttributeSetSelRankingHint = objc.RegisterName("rankingHint")
-	_cSSearchableItemAttributeSetSelSetRankingHint = objc.RegisterName("setRankingHint:")
-	_cSSearchableItemAttributeSetSelDomainIdentifier = objc.RegisterName("domainIdentifier")
-	_cSSearchableItemAttributeSetSelSetDomainIdentifier = objc.RegisterName("setDomainIdentifier:")
-	_cSSearchableItemAttributeSetSelTextContentSummary = objc.RegisterName("textContentSummary")
-	_cSSearchableItemAttributeSetSelTranscribedTextContent = objc.RegisterName("transcribedTextContent")
-	_cSSearchableItemAttributeSetSelSetTranscribedTextContent = objc.RegisterName("setTranscribedTextContent:")
-	_cSSearchableItemAttributeSetSelSupportsPhoneCall = objc.RegisterName("supportsPhoneCall")
-	_cSSearchableItemAttributeSetSelSetSupportsPhoneCall = objc.RegisterName("setSupportsPhoneCall:")
-	_cSSearchableItemAttributeSetSelSupportsNavigation = objc.RegisterName("supportsNavigation")
-	_cSSearchableItemAttributeSetSelSetSupportsNavigation = objc.RegisterName("setSupportsNavigation:")
-	_cSSearchableItemAttributeSetSelContainerTitle = objc.RegisterName("containerTitle")
-	_cSSearchableItemAttributeSetSelSetContainerTitle = objc.RegisterName("setContainerTitle:")
-	_cSSearchableItemAttributeSetSelContainerDisplayName = objc.RegisterName("containerDisplayName")
-	_cSSearchableItemAttributeSetSelSetContainerDisplayName = objc.RegisterName("setContainerDisplayName:")
-	_cSSearchableItemAttributeSetSelContainerIdentifier = objc.RegisterName("containerIdentifier")
-	_cSSearchableItemAttributeSetSelSetContainerIdentifier = objc.RegisterName("setContainerIdentifier:")
-	_cSSearchableItemAttributeSetSelContainerOrder = objc.RegisterName("containerOrder")
-	_cSSearchableItemAttributeSetSelSetContainerOrder = objc.RegisterName("setContainerOrder:")
-	_cSSearchableItemAttributeSetSelProviderDataTypeIdentifiers = objc.RegisterName("providerDataTypeIdentifiers")
-	_cSSearchableItemAttributeSetSelSetProviderDataTypeIdentifiers = objc.RegisterName("setProviderDataTypeIdentifiers:")
-	_cSSearchableItemAttributeSetSelProviderFileTypeIdentifiers = objc.RegisterName("providerFileTypeIdentifiers")
-	_cSSearchableItemAttributeSetSelSetProviderFileTypeIdentifiers = objc.RegisterName("setProviderFileTypeIdentifiers:")
-	_cSSearchableItemAttributeSetSelProviderInPlaceFileTypeIdentifiers = objc.RegisterName("providerInPlaceFileTypeIdentifiers")
+	_clsCSSearchableItemAttributeSet                                      = _objcClass("CSSearchableItemAttributeSet")
+	_cSSearchableItemAttributeSetSelInitWithItemContentType               = objc.RegisterName("initWithItemContentType:")
+	_cSSearchableItemAttributeSetSelInitWithContentType                   = objc.RegisterName("initWithContentType:")
+	_cSSearchableItemAttributeSetSelSetValueForCustomKey                  = objc.RegisterName("setValue:forCustomKey:")
+	_cSSearchableItemAttributeSetSelValueForCustomKey                     = objc.RegisterName("valueForCustomKey:")
+	_cSSearchableItemAttributeSetSelDisplayName                           = objc.RegisterName("displayName")
+	_cSSearchableItemAttributeSetSelSetDisplayName                        = objc.RegisterName("setDisplayName:")
+	_cSSearchableItemAttributeSetSelAlternateNames                        = objc.RegisterName("alternateNames")
+	_cSSearchableItemAttributeSetSelSetAlternateNames                     = objc.RegisterName("setAlternateNames:")
+	_cSSearchableItemAttributeSetSelPath                                  = objc.RegisterName("path")
+	_cSSearchableItemAttributeSetSelSetPath                               = objc.RegisterName("setPath:")
+	_cSSearchableItemAttributeSetSelContentURL                            = objc.RegisterName("contentURL")
+	_cSSearchableItemAttributeSetSelSetContentURL                         = objc.RegisterName("setContentURL:")
+	_cSSearchableItemAttributeSetSelThumbnailURL                          = objc.RegisterName("thumbnailURL")
+	_cSSearchableItemAttributeSetSelSetThumbnailURL                       = objc.RegisterName("setThumbnailURL:")
+	_cSSearchableItemAttributeSetSelThumbnailData                         = objc.RegisterName("thumbnailData")
+	_cSSearchableItemAttributeSetSelSetThumbnailData                      = objc.RegisterName("setThumbnailData:")
+	_cSSearchableItemAttributeSetSelDarkThumbnailURL                      = objc.RegisterName("darkThumbnailURL")
+	_cSSearchableItemAttributeSetSelSetDarkThumbnailURL                   = objc.RegisterName("setDarkThumbnailURL:")
+	_cSSearchableItemAttributeSetSelRelatedUniqueIdentifier               = objc.RegisterName("relatedUniqueIdentifier")
+	_cSSearchableItemAttributeSetSelSetRelatedUniqueIdentifier            = objc.RegisterName("setRelatedUniqueIdentifier:")
+	_cSSearchableItemAttributeSetSelWeakRelatedUniqueIdentifier           = objc.RegisterName("weakRelatedUniqueIdentifier")
+	_cSSearchableItemAttributeSetSelSetWeakRelatedUniqueIdentifier        = objc.RegisterName("setWeakRelatedUniqueIdentifier:")
+	_cSSearchableItemAttributeSetSelMetadataModificationDate              = objc.RegisterName("metadataModificationDate")
+	_cSSearchableItemAttributeSetSelSetMetadataModificationDate           = objc.RegisterName("setMetadataModificationDate:")
+	_cSSearchableItemAttributeSetSelContentType                           = objc.RegisterName("contentType")
+	_cSSearchableItemAttributeSetSelSetContentType                        = objc.RegisterName("setContentType:")
+	_cSSearchableItemAttributeSetSelContentTypeTree                       = objc.RegisterName("contentTypeTree")
+	_cSSearchableItemAttributeSetSelSetContentTypeTree                    = objc.RegisterName("setContentTypeTree:")
+	_cSSearchableItemAttributeSetSelKeywords                              = objc.RegisterName("keywords")
+	_cSSearchableItemAttributeSetSelSetKeywords                           = objc.RegisterName("setKeywords:")
+	_cSSearchableItemAttributeSetSelTitle                                 = objc.RegisterName("title")
+	_cSSearchableItemAttributeSetSelSetTitle                              = objc.RegisterName("setTitle:")
+	_cSSearchableItemAttributeSetSelIsUserCreated                         = objc.RegisterName("isUserCreated")
+	_cSSearchableItemAttributeSetSelSetUserCreated                        = objc.RegisterName("setUserCreated:")
+	_cSSearchableItemAttributeSetSelIsUserOwned                           = objc.RegisterName("isUserOwned")
+	_cSSearchableItemAttributeSetSelSetUserOwned                          = objc.RegisterName("setUserOwned:")
+	_cSSearchableItemAttributeSetSelIsUserCurated                         = objc.RegisterName("isUserCurated")
+	_cSSearchableItemAttributeSetSelSetUserCurated                        = objc.RegisterName("setUserCurated:")
+	_cSSearchableItemAttributeSetSelRankingHint                           = objc.RegisterName("rankingHint")
+	_cSSearchableItemAttributeSetSelSetRankingHint                        = objc.RegisterName("setRankingHint:")
+	_cSSearchableItemAttributeSetSelDomainIdentifier                      = objc.RegisterName("domainIdentifier")
+	_cSSearchableItemAttributeSetSelSetDomainIdentifier                   = objc.RegisterName("setDomainIdentifier:")
+	_cSSearchableItemAttributeSetSelTextContentSummary                    = objc.RegisterName("textContentSummary")
+	_cSSearchableItemAttributeSetSelTranscribedTextContent                = objc.RegisterName("transcribedTextContent")
+	_cSSearchableItemAttributeSetSelSetTranscribedTextContent             = objc.RegisterName("setTranscribedTextContent:")
+	_cSSearchableItemAttributeSetSelSupportsPhoneCall                     = objc.RegisterName("supportsPhoneCall")
+	_cSSearchableItemAttributeSetSelSetSupportsPhoneCall                  = objc.RegisterName("setSupportsPhoneCall:")
+	_cSSearchableItemAttributeSetSelSupportsNavigation                    = objc.RegisterName("supportsNavigation")
+	_cSSearchableItemAttributeSetSelSetSupportsNavigation                 = objc.RegisterName("setSupportsNavigation:")
+	_cSSearchableItemAttributeSetSelContainerTitle                        = objc.RegisterName("containerTitle")
+	_cSSearchableItemAttributeSetSelSetContainerTitle                     = objc.RegisterName("setContainerTitle:")
+	_cSSearchableItemAttributeSetSelContainerDisplayName                  = objc.RegisterName("containerDisplayName")
+	_cSSearchableItemAttributeSetSelSetContainerDisplayName               = objc.RegisterName("setContainerDisplayName:")
+	_cSSearchableItemAttributeSetSelContainerIdentifier                   = objc.RegisterName("containerIdentifier")
+	_cSSearchableItemAttributeSetSelSetContainerIdentifier                = objc.RegisterName("setContainerIdentifier:")
+	_cSSearchableItemAttributeSetSelContainerOrder                        = objc.RegisterName("containerOrder")
+	_cSSearchableItemAttributeSetSelSetContainerOrder                     = objc.RegisterName("setContainerOrder:")
+	_cSSearchableItemAttributeSetSelProviderDataTypeIdentifiers           = objc.RegisterName("providerDataTypeIdentifiers")
+	_cSSearchableItemAttributeSetSelSetProviderDataTypeIdentifiers        = objc.RegisterName("setProviderDataTypeIdentifiers:")
+	_cSSearchableItemAttributeSetSelProviderFileTypeIdentifiers           = objc.RegisterName("providerFileTypeIdentifiers")
+	_cSSearchableItemAttributeSetSelSetProviderFileTypeIdentifiers        = objc.RegisterName("setProviderFileTypeIdentifiers:")
+	_cSSearchableItemAttributeSetSelProviderInPlaceFileTypeIdentifiers    = objc.RegisterName("providerInPlaceFileTypeIdentifiers")
 	_cSSearchableItemAttributeSetSelSetProviderInPlaceFileTypeIdentifiers = objc.RegisterName("setProviderInPlaceFileTypeIdentifiers:")
-	_cSSearchableItemAttributeSetSelSubject = objc.RegisterName("subject")
-	_cSSearchableItemAttributeSetSelSetSubject = objc.RegisterName("setSubject:")
-	_cSSearchableItemAttributeSetSelTheme = objc.RegisterName("theme")
-	_cSSearchableItemAttributeSetSelSetTheme = objc.RegisterName("setTheme:")
-	_cSSearchableItemAttributeSetSelContentDescription = objc.RegisterName("contentDescription")
-	_cSSearchableItemAttributeSetSelSetContentDescription = objc.RegisterName("setContentDescription:")
-	_cSSearchableItemAttributeSetSelIdentifier = objc.RegisterName("identifier")
-	_cSSearchableItemAttributeSetSelSetIdentifier = objc.RegisterName("setIdentifier:")
-	_cSSearchableItemAttributeSetSelAudiences = objc.RegisterName("audiences")
-	_cSSearchableItemAttributeSetSelSetAudiences = objc.RegisterName("setAudiences:")
-	_cSSearchableItemAttributeSetSelFileSize = objc.RegisterName("fileSize")
-	_cSSearchableItemAttributeSetSelSetFileSize = objc.RegisterName("setFileSize:")
-	_cSSearchableItemAttributeSetSelPageCount = objc.RegisterName("pageCount")
-	_cSSearchableItemAttributeSetSelSetPageCount = objc.RegisterName("setPageCount:")
-	_cSSearchableItemAttributeSetSelPageWidth = objc.RegisterName("pageWidth")
-	_cSSearchableItemAttributeSetSelSetPageWidth = objc.RegisterName("setPageWidth:")
-	_cSSearchableItemAttributeSetSelPageHeight = objc.RegisterName("pageHeight")
-	_cSSearchableItemAttributeSetSelSetPageHeight = objc.RegisterName("setPageHeight:")
-	_cSSearchableItemAttributeSetSelSecurityMethod = objc.RegisterName("securityMethod")
-	_cSSearchableItemAttributeSetSelSetSecurityMethod = objc.RegisterName("setSecurityMethod:")
-	_cSSearchableItemAttributeSetSelCreator = objc.RegisterName("creator")
-	_cSSearchableItemAttributeSetSelSetCreator = objc.RegisterName("setCreator:")
-	_cSSearchableItemAttributeSetSelEncodingApplications = objc.RegisterName("encodingApplications")
-	_cSSearchableItemAttributeSetSelSetEncodingApplications = objc.RegisterName("setEncodingApplications:")
-	_cSSearchableItemAttributeSetSelKind = objc.RegisterName("kind")
-	_cSSearchableItemAttributeSetSelSetKind = objc.RegisterName("setKind:")
-	_cSSearchableItemAttributeSetSelFontNames = objc.RegisterName("fontNames")
-	_cSSearchableItemAttributeSetSelSetFontNames = objc.RegisterName("setFontNames:")
-	_cSSearchableItemAttributeSetSelDueDate = objc.RegisterName("dueDate")
-	_cSSearchableItemAttributeSetSelSetDueDate = objc.RegisterName("setDueDate:")
-	_cSSearchableItemAttributeSetSelCompletionDate = objc.RegisterName("completionDate")
-	_cSSearchableItemAttributeSetSelSetCompletionDate = objc.RegisterName("setCompletionDate:")
-	_cSSearchableItemAttributeSetSelStartDate = objc.RegisterName("startDate")
-	_cSSearchableItemAttributeSetSelSetStartDate = objc.RegisterName("setStartDate:")
-	_cSSearchableItemAttributeSetSelEndDate = objc.RegisterName("endDate")
-	_cSSearchableItemAttributeSetSelSetEndDate = objc.RegisterName("setEndDate:")
-	_cSSearchableItemAttributeSetSelImportantDates = objc.RegisterName("importantDates")
-	_cSSearchableItemAttributeSetSelSetImportantDates = objc.RegisterName("setImportantDates:")
-	_cSSearchableItemAttributeSetSelAllDay = objc.RegisterName("allDay")
-	_cSSearchableItemAttributeSetSelSetAllDay = objc.RegisterName("setAllDay:")
-	_cSSearchableItemAttributeSetSelAccountIdentifier = objc.RegisterName("accountIdentifier")
-	_cSSearchableItemAttributeSetSelSetAccountIdentifier = objc.RegisterName("setAccountIdentifier:")
-	_cSSearchableItemAttributeSetSelAccountHandles = objc.RegisterName("accountHandles")
-	_cSSearchableItemAttributeSetSelSetAccountHandles = objc.RegisterName("setAccountHandles:")
-	_cSSearchableItemAttributeSetSelHTMLContentData = objc.RegisterName("HTMLContentData")
-	_cSSearchableItemAttributeSetSelSetHTMLContentData = objc.RegisterName("setHTMLContentData:")
-	_cSSearchableItemAttributeSetSelTextContent = objc.RegisterName("textContent")
-	_cSSearchableItemAttributeSetSelSetTextContent = objc.RegisterName("setTextContent:")
-	_cSSearchableItemAttributeSetSelAuthors = objc.RegisterName("authors")
-	_cSSearchableItemAttributeSetSelSetAuthors = objc.RegisterName("setAuthors:")
-	_cSSearchableItemAttributeSetSelPrimaryRecipients = objc.RegisterName("primaryRecipients")
-	_cSSearchableItemAttributeSetSelSetPrimaryRecipients = objc.RegisterName("setPrimaryRecipients:")
-	_cSSearchableItemAttributeSetSelAdditionalRecipients = objc.RegisterName("additionalRecipients")
-	_cSSearchableItemAttributeSetSelSetAdditionalRecipients = objc.RegisterName("setAdditionalRecipients:")
-	_cSSearchableItemAttributeSetSelHiddenAdditionalRecipients = objc.RegisterName("hiddenAdditionalRecipients")
-	_cSSearchableItemAttributeSetSelSetHiddenAdditionalRecipients = objc.RegisterName("setHiddenAdditionalRecipients:")
-	_cSSearchableItemAttributeSetSelEmailHeaders = objc.RegisterName("emailHeaders")
-	_cSSearchableItemAttributeSetSelSetEmailHeaders = objc.RegisterName("setEmailHeaders:")
-	_cSSearchableItemAttributeSetSelMailboxIdentifiers = objc.RegisterName("mailboxIdentifiers")
-	_cSSearchableItemAttributeSetSelSetMailboxIdentifiers = objc.RegisterName("setMailboxIdentifiers:")
-	_cSSearchableItemAttributeSetSelAuthorNames = objc.RegisterName("authorNames")
-	_cSSearchableItemAttributeSetSelSetAuthorNames = objc.RegisterName("setAuthorNames:")
-	_cSSearchableItemAttributeSetSelRecipientNames = objc.RegisterName("recipientNames")
-	_cSSearchableItemAttributeSetSelSetRecipientNames = objc.RegisterName("setRecipientNames:")
-	_cSSearchableItemAttributeSetSelAuthorEmailAddresses = objc.RegisterName("authorEmailAddresses")
-	_cSSearchableItemAttributeSetSelSetAuthorEmailAddresses = objc.RegisterName("setAuthorEmailAddresses:")
-	_cSSearchableItemAttributeSetSelRecipientEmailAddresses = objc.RegisterName("recipientEmailAddresses")
-	_cSSearchableItemAttributeSetSelSetRecipientEmailAddresses = objc.RegisterName("setRecipientEmailAddresses:")
-	_cSSearchableItemAttributeSetSelAuthorAddresses = objc.RegisterName("authorAddresses")
-	_cSSearchableItemAttributeSetSelSetAuthorAddresses = objc.RegisterName("setAuthorAddresses:")
-	_cSSearchableItemAttributeSetSelRecipientAddresses = objc.RegisterName("recipientAddresses")
-	_cSSearchableItemAttributeSetSelSetRecipientAddresses = objc.RegisterName("setRecipientAddresses:")
-	_cSSearchableItemAttributeSetSelPhoneNumbers = objc.RegisterName("phoneNumbers")
-	_cSSearchableItemAttributeSetSelSetPhoneNumbers = objc.RegisterName("setPhoneNumbers:")
-	_cSSearchableItemAttributeSetSelEmailAddresses = objc.RegisterName("emailAddresses")
-	_cSSearchableItemAttributeSetSelSetEmailAddresses = objc.RegisterName("setEmailAddresses:")
-	_cSSearchableItemAttributeSetSelInstantMessageAddresses = objc.RegisterName("instantMessageAddresses")
-	_cSSearchableItemAttributeSetSelSetInstantMessageAddresses = objc.RegisterName("setInstantMessageAddresses:")
-	_cSSearchableItemAttributeSetSelIsLikelyJunk = objc.RegisterName("isLikelyJunk")
-	_cSSearchableItemAttributeSetSelSetLikelyJunk = objc.RegisterName("setLikelyJunk:")
-	_cSSearchableItemAttributeSetSelIsPriority = objc.RegisterName("isPriority")
-	_cSSearchableItemAttributeSetSelEditors = objc.RegisterName("editors")
-	_cSSearchableItemAttributeSetSelSetEditors = objc.RegisterName("setEditors:")
-	_cSSearchableItemAttributeSetSelParticipants = objc.RegisterName("participants")
-	_cSSearchableItemAttributeSetSelSetParticipants = objc.RegisterName("setParticipants:")
-	_cSSearchableItemAttributeSetSelProjects = objc.RegisterName("projects")
-	_cSSearchableItemAttributeSetSelSetProjects = objc.RegisterName("setProjects:")
-	_cSSearchableItemAttributeSetSelContentSources = objc.RegisterName("contentSources")
-	_cSSearchableItemAttributeSetSelSetContentSources = objc.RegisterName("setContentSources:")
-	_cSSearchableItemAttributeSetSelComment = objc.RegisterName("comment")
-	_cSSearchableItemAttributeSetSelSetComment = objc.RegisterName("setComment:")
-	_cSSearchableItemAttributeSetSelCopyright = objc.RegisterName("copyright")
-	_cSSearchableItemAttributeSetSelSetCopyright = objc.RegisterName("setCopyright:")
-	_cSSearchableItemAttributeSetSelLastUsedDate = objc.RegisterName("lastUsedDate")
-	_cSSearchableItemAttributeSetSelSetLastUsedDate = objc.RegisterName("setLastUsedDate:")
-	_cSSearchableItemAttributeSetSelContentCreationDate = objc.RegisterName("contentCreationDate")
-	_cSSearchableItemAttributeSetSelSetContentCreationDate = objc.RegisterName("setContentCreationDate:")
-	_cSSearchableItemAttributeSetSelContentModificationDate = objc.RegisterName("contentModificationDate")
-	_cSSearchableItemAttributeSetSelSetContentModificationDate = objc.RegisterName("setContentModificationDate:")
-	_cSSearchableItemAttributeSetSelAddedDate = objc.RegisterName("addedDate")
-	_cSSearchableItemAttributeSetSelSetAddedDate = objc.RegisterName("setAddedDate:")
-	_cSSearchableItemAttributeSetSelDownloadedDate = objc.RegisterName("downloadedDate")
-	_cSSearchableItemAttributeSetSelSetDownloadedDate = objc.RegisterName("setDownloadedDate:")
-	_cSSearchableItemAttributeSetSelDuration = objc.RegisterName("duration")
-	_cSSearchableItemAttributeSetSelSetDuration = objc.RegisterName("setDuration:")
-	_cSSearchableItemAttributeSetSelContactKeywords = objc.RegisterName("contactKeywords")
-	_cSSearchableItemAttributeSetSelSetContactKeywords = objc.RegisterName("setContactKeywords:")
-	_cSSearchableItemAttributeSetSelCodecs = objc.RegisterName("codecs")
-	_cSSearchableItemAttributeSetSelSetCodecs = objc.RegisterName("setCodecs:")
-	_cSSearchableItemAttributeSetSelMediaTypes = objc.RegisterName("mediaTypes")
-	_cSSearchableItemAttributeSetSelSetMediaTypes = objc.RegisterName("setMediaTypes:")
-	_cSSearchableItemAttributeSetSelIsStreamable = objc.RegisterName("isStreamable")
-	_cSSearchableItemAttributeSetSelSetStreamable = objc.RegisterName("setStreamable:")
-	_cSSearchableItemAttributeSetSelTotalBitRate = objc.RegisterName("totalBitRate")
-	_cSSearchableItemAttributeSetSelSetTotalBitRate = objc.RegisterName("setTotalBitRate:")
-	_cSSearchableItemAttributeSetSelVideoBitRate = objc.RegisterName("videoBitRate")
-	_cSSearchableItemAttributeSetSelSetVideoBitRate = objc.RegisterName("setVideoBitRate:")
-	_cSSearchableItemAttributeSetSelAudioBitRate = objc.RegisterName("audioBitRate")
-	_cSSearchableItemAttributeSetSelSetAudioBitRate = objc.RegisterName("setAudioBitRate:")
-	_cSSearchableItemAttributeSetSelDeliveryType = objc.RegisterName("deliveryType")
-	_cSSearchableItemAttributeSetSelSetDeliveryType = objc.RegisterName("setDeliveryType:")
-	_cSSearchableItemAttributeSetSelOrganizations = objc.RegisterName("organizations")
-	_cSSearchableItemAttributeSetSelSetOrganizations = objc.RegisterName("setOrganizations:")
-	_cSSearchableItemAttributeSetSelRole = objc.RegisterName("role")
-	_cSSearchableItemAttributeSetSelSetRole = objc.RegisterName("setRole:")
-	_cSSearchableItemAttributeSetSelLanguages = objc.RegisterName("languages")
-	_cSSearchableItemAttributeSetSelSetLanguages = objc.RegisterName("setLanguages:")
-	_cSSearchableItemAttributeSetSelRights = objc.RegisterName("rights")
-	_cSSearchableItemAttributeSetSelSetRights = objc.RegisterName("setRights:")
-	_cSSearchableItemAttributeSetSelPublishers = objc.RegisterName("publishers")
-	_cSSearchableItemAttributeSetSelSetPublishers = objc.RegisterName("setPublishers:")
-	_cSSearchableItemAttributeSetSelContributors = objc.RegisterName("contributors")
-	_cSSearchableItemAttributeSetSelSetContributors = objc.RegisterName("setContributors:")
-	_cSSearchableItemAttributeSetSelCoverage = objc.RegisterName("coverage")
-	_cSSearchableItemAttributeSetSelSetCoverage = objc.RegisterName("setCoverage:")
-	_cSSearchableItemAttributeSetSelRating = objc.RegisterName("rating")
-	_cSSearchableItemAttributeSetSelSetRating = objc.RegisterName("setRating:")
-	_cSSearchableItemAttributeSetSelRatingDescription = objc.RegisterName("ratingDescription")
-	_cSSearchableItemAttributeSetSelSetRatingDescription = objc.RegisterName("setRatingDescription:")
-	_cSSearchableItemAttributeSetSelPlayCount = objc.RegisterName("playCount")
-	_cSSearchableItemAttributeSetSelSetPlayCount = objc.RegisterName("setPlayCount:")
-	_cSSearchableItemAttributeSetSelInformation = objc.RegisterName("information")
-	_cSSearchableItemAttributeSetSelSetInformation = objc.RegisterName("setInformation:")
-	_cSSearchableItemAttributeSetSelDirector = objc.RegisterName("director")
-	_cSSearchableItemAttributeSetSelSetDirector = objc.RegisterName("setDirector:")
-	_cSSearchableItemAttributeSetSelProducer = objc.RegisterName("producer")
-	_cSSearchableItemAttributeSetSelSetProducer = objc.RegisterName("setProducer:")
-	_cSSearchableItemAttributeSetSelGenre = objc.RegisterName("genre")
-	_cSSearchableItemAttributeSetSelSetGenre = objc.RegisterName("setGenre:")
-	_cSSearchableItemAttributeSetSelPerformers = objc.RegisterName("performers")
-	_cSSearchableItemAttributeSetSelSetPerformers = objc.RegisterName("setPerformers:")
-	_cSSearchableItemAttributeSetSelOriginalFormat = objc.RegisterName("originalFormat")
-	_cSSearchableItemAttributeSetSelSetOriginalFormat = objc.RegisterName("setOriginalFormat:")
-	_cSSearchableItemAttributeSetSelOriginalSource = objc.RegisterName("originalSource")
-	_cSSearchableItemAttributeSetSelSetOriginalSource = objc.RegisterName("setOriginalSource:")
-	_cSSearchableItemAttributeSetSelIsLocal = objc.RegisterName("isLocal")
-	_cSSearchableItemAttributeSetSelSetLocal = objc.RegisterName("setLocal:")
-	_cSSearchableItemAttributeSetSelContentRating = objc.RegisterName("contentRating")
-	_cSSearchableItemAttributeSetSelSetContentRating = objc.RegisterName("setContentRating:")
-	_cSSearchableItemAttributeSetSelURL = objc.RegisterName("URL")
-	_cSSearchableItemAttributeSetSelSetURL = objc.RegisterName("setURL:")
-	_cSSearchableItemAttributeSetSelAudioSampleRate = objc.RegisterName("audioSampleRate")
-	_cSSearchableItemAttributeSetSelSetAudioSampleRate = objc.RegisterName("setAudioSampleRate:")
-	_cSSearchableItemAttributeSetSelAudioChannelCount = objc.RegisterName("audioChannelCount")
-	_cSSearchableItemAttributeSetSelSetAudioChannelCount = objc.RegisterName("setAudioChannelCount:")
-	_cSSearchableItemAttributeSetSelTempo = objc.RegisterName("tempo")
-	_cSSearchableItemAttributeSetSelSetTempo = objc.RegisterName("setTempo:")
-	_cSSearchableItemAttributeSetSelKeySignature = objc.RegisterName("keySignature")
-	_cSSearchableItemAttributeSetSelSetKeySignature = objc.RegisterName("setKeySignature:")
-	_cSSearchableItemAttributeSetSelTimeSignature = objc.RegisterName("timeSignature")
-	_cSSearchableItemAttributeSetSelSetTimeSignature = objc.RegisterName("setTimeSignature:")
-	_cSSearchableItemAttributeSetSelAudioEncodingApplication = objc.RegisterName("audioEncodingApplication")
-	_cSSearchableItemAttributeSetSelSetAudioEncodingApplication = objc.RegisterName("setAudioEncodingApplication:")
-	_cSSearchableItemAttributeSetSelComposer = objc.RegisterName("composer")
-	_cSSearchableItemAttributeSetSelSetComposer = objc.RegisterName("setComposer:")
-	_cSSearchableItemAttributeSetSelLyricist = objc.RegisterName("lyricist")
-	_cSSearchableItemAttributeSetSelSetLyricist = objc.RegisterName("setLyricist:")
-	_cSSearchableItemAttributeSetSelAlbum = objc.RegisterName("album")
-	_cSSearchableItemAttributeSetSelSetAlbum = objc.RegisterName("setAlbum:")
-	_cSSearchableItemAttributeSetSelArtist = objc.RegisterName("artist")
-	_cSSearchableItemAttributeSetSelSetArtist = objc.RegisterName("setArtist:")
-	_cSSearchableItemAttributeSetSelAudioTrackNumber = objc.RegisterName("audioTrackNumber")
-	_cSSearchableItemAttributeSetSelSetAudioTrackNumber = objc.RegisterName("setAudioTrackNumber:")
-	_cSSearchableItemAttributeSetSelRecordingDate = objc.RegisterName("recordingDate")
-	_cSSearchableItemAttributeSetSelSetRecordingDate = objc.RegisterName("setRecordingDate:")
-	_cSSearchableItemAttributeSetSelMusicalGenre = objc.RegisterName("musicalGenre")
-	_cSSearchableItemAttributeSetSelSetMusicalGenre = objc.RegisterName("setMusicalGenre:")
-	_cSSearchableItemAttributeSetSelIsGeneralMIDISequence = objc.RegisterName("isGeneralMIDISequence")
-	_cSSearchableItemAttributeSetSelSetGeneralMIDISequence = objc.RegisterName("setGeneralMIDISequence:")
-	_cSSearchableItemAttributeSetSelMusicalInstrumentCategory = objc.RegisterName("musicalInstrumentCategory")
-	_cSSearchableItemAttributeSetSelSetMusicalInstrumentCategory = objc.RegisterName("setMusicalInstrumentCategory:")
-	_cSSearchableItemAttributeSetSelMusicalInstrumentName = objc.RegisterName("musicalInstrumentName")
-	_cSSearchableItemAttributeSetSelSetMusicalInstrumentName = objc.RegisterName("setMusicalInstrumentName:")
-	_cSSearchableItemAttributeSetSelPixelHeight = objc.RegisterName("pixelHeight")
-	_cSSearchableItemAttributeSetSelSetPixelHeight = objc.RegisterName("setPixelHeight:")
-	_cSSearchableItemAttributeSetSelPixelWidth = objc.RegisterName("pixelWidth")
-	_cSSearchableItemAttributeSetSelSetPixelWidth = objc.RegisterName("setPixelWidth:")
-	_cSSearchableItemAttributeSetSelPixelCount = objc.RegisterName("pixelCount")
-	_cSSearchableItemAttributeSetSelSetPixelCount = objc.RegisterName("setPixelCount:")
-	_cSSearchableItemAttributeSetSelColorSpace = objc.RegisterName("colorSpace")
-	_cSSearchableItemAttributeSetSelSetColorSpace = objc.RegisterName("setColorSpace:")
-	_cSSearchableItemAttributeSetSelBitsPerSample = objc.RegisterName("bitsPerSample")
-	_cSSearchableItemAttributeSetSelSetBitsPerSample = objc.RegisterName("setBitsPerSample:")
-	_cSSearchableItemAttributeSetSelIsFlashOn = objc.RegisterName("isFlashOn")
-	_cSSearchableItemAttributeSetSelSetFlashOn = objc.RegisterName("setFlashOn:")
-	_cSSearchableItemAttributeSetSelFocalLength = objc.RegisterName("focalLength")
-	_cSSearchableItemAttributeSetSelSetFocalLength = objc.RegisterName("setFocalLength:")
-	_cSSearchableItemAttributeSetSelIsFocalLength35mm = objc.RegisterName("isFocalLength35mm")
-	_cSSearchableItemAttributeSetSelSetFocalLength35mm = objc.RegisterName("setFocalLength35mm:")
-	_cSSearchableItemAttributeSetSelAcquisitionMake = objc.RegisterName("acquisitionMake")
-	_cSSearchableItemAttributeSetSelSetAcquisitionMake = objc.RegisterName("setAcquisitionMake:")
-	_cSSearchableItemAttributeSetSelAcquisitionModel = objc.RegisterName("acquisitionModel")
-	_cSSearchableItemAttributeSetSelSetAcquisitionModel = objc.RegisterName("setAcquisitionModel:")
-	_cSSearchableItemAttributeSetSelCameraOwner = objc.RegisterName("cameraOwner")
-	_cSSearchableItemAttributeSetSelSetCameraOwner = objc.RegisterName("setCameraOwner:")
-	_cSSearchableItemAttributeSetSelLensModel = objc.RegisterName("lensModel")
-	_cSSearchableItemAttributeSetSelSetLensModel = objc.RegisterName("setLensModel:")
-	_cSSearchableItemAttributeSetSelISOSpeed = objc.RegisterName("ISOSpeed")
-	_cSSearchableItemAttributeSetSelSetISOSpeed = objc.RegisterName("setISOSpeed:")
-	_cSSearchableItemAttributeSetSelOrientation = objc.RegisterName("orientation")
-	_cSSearchableItemAttributeSetSelSetOrientation = objc.RegisterName("setOrientation:")
-	_cSSearchableItemAttributeSetSelLayerNames = objc.RegisterName("layerNames")
-	_cSSearchableItemAttributeSetSelSetLayerNames = objc.RegisterName("setLayerNames:")
-	_cSSearchableItemAttributeSetSelWhiteBalance = objc.RegisterName("whiteBalance")
-	_cSSearchableItemAttributeSetSelSetWhiteBalance = objc.RegisterName("setWhiteBalance:")
-	_cSSearchableItemAttributeSetSelAperture = objc.RegisterName("aperture")
-	_cSSearchableItemAttributeSetSelSetAperture = objc.RegisterName("setAperture:")
-	_cSSearchableItemAttributeSetSelProfileName = objc.RegisterName("profileName")
-	_cSSearchableItemAttributeSetSelSetProfileName = objc.RegisterName("setProfileName:")
-	_cSSearchableItemAttributeSetSelResolutionWidthDPI = objc.RegisterName("resolutionWidthDPI")
-	_cSSearchableItemAttributeSetSelSetResolutionWidthDPI = objc.RegisterName("setResolutionWidthDPI:")
-	_cSSearchableItemAttributeSetSelResolutionHeightDPI = objc.RegisterName("resolutionHeightDPI")
-	_cSSearchableItemAttributeSetSelSetResolutionHeightDPI = objc.RegisterName("setResolutionHeightDPI:")
-	_cSSearchableItemAttributeSetSelExposureMode = objc.RegisterName("exposureMode")
-	_cSSearchableItemAttributeSetSelSetExposureMode = objc.RegisterName("setExposureMode:")
-	_cSSearchableItemAttributeSetSelExposureTime = objc.RegisterName("exposureTime")
-	_cSSearchableItemAttributeSetSelSetExposureTime = objc.RegisterName("setExposureTime:")
-	_cSSearchableItemAttributeSetSelEXIFVersion = objc.RegisterName("EXIFVersion")
-	_cSSearchableItemAttributeSetSelSetEXIFVersion = objc.RegisterName("setEXIFVersion:")
-	_cSSearchableItemAttributeSetSelEXIFGPSVersion = objc.RegisterName("EXIFGPSVersion")
-	_cSSearchableItemAttributeSetSelSetEXIFGPSVersion = objc.RegisterName("setEXIFGPSVersion:")
-	_cSSearchableItemAttributeSetSelHasAlphaChannel = objc.RegisterName("hasAlphaChannel")
-	_cSSearchableItemAttributeSetSelSetHasAlphaChannel = objc.RegisterName("setHasAlphaChannel:")
-	_cSSearchableItemAttributeSetSelIsRedEyeOn = objc.RegisterName("isRedEyeOn")
-	_cSSearchableItemAttributeSetSelSetRedEyeOn = objc.RegisterName("setRedEyeOn:")
-	_cSSearchableItemAttributeSetSelMeteringMode = objc.RegisterName("meteringMode")
-	_cSSearchableItemAttributeSetSelSetMeteringMode = objc.RegisterName("setMeteringMode:")
-	_cSSearchableItemAttributeSetSelMaxAperture = objc.RegisterName("maxAperture")
-	_cSSearchableItemAttributeSetSelSetMaxAperture = objc.RegisterName("setMaxAperture:")
-	_cSSearchableItemAttributeSetSelFNumber = objc.RegisterName("fNumber")
-	_cSSearchableItemAttributeSetSelSetFNumber = objc.RegisterName("setFNumber:")
-	_cSSearchableItemAttributeSetSelExposureProgram = objc.RegisterName("exposureProgram")
-	_cSSearchableItemAttributeSetSelSetExposureProgram = objc.RegisterName("setExposureProgram:")
-	_cSSearchableItemAttributeSetSelExposureTimeString = objc.RegisterName("exposureTimeString")
-	_cSSearchableItemAttributeSetSelSetExposureTimeString = objc.RegisterName("setExposureTimeString:")
-	_cSSearchableItemAttributeSetSelHeadline = objc.RegisterName("headline")
-	_cSSearchableItemAttributeSetSelSetHeadline = objc.RegisterName("setHeadline:")
-	_cSSearchableItemAttributeSetSelInstructions = objc.RegisterName("instructions")
-	_cSSearchableItemAttributeSetSelSetInstructions = objc.RegisterName("setInstructions:")
-	_cSSearchableItemAttributeSetSelThoroughfare = objc.RegisterName("thoroughfare")
-	_cSSearchableItemAttributeSetSelSetThoroughfare = objc.RegisterName("setThoroughfare:")
-	_cSSearchableItemAttributeSetSelSubThoroughfare = objc.RegisterName("subThoroughfare")
-	_cSSearchableItemAttributeSetSelSetSubThoroughfare = objc.RegisterName("setSubThoroughfare:")
-	_cSSearchableItemAttributeSetSelPostalCode = objc.RegisterName("postalCode")
-	_cSSearchableItemAttributeSetSelSetPostalCode = objc.RegisterName("setPostalCode:")
-	_cSSearchableItemAttributeSetSelCity = objc.RegisterName("city")
-	_cSSearchableItemAttributeSetSelSetCity = objc.RegisterName("setCity:")
-	_cSSearchableItemAttributeSetSelStateOrProvince = objc.RegisterName("stateOrProvince")
-	_cSSearchableItemAttributeSetSelSetStateOrProvince = objc.RegisterName("setStateOrProvince:")
-	_cSSearchableItemAttributeSetSelCountry = objc.RegisterName("country")
-	_cSSearchableItemAttributeSetSelSetCountry = objc.RegisterName("setCountry:")
-	_cSSearchableItemAttributeSetSelFullyFormattedAddress = objc.RegisterName("fullyFormattedAddress")
-	_cSSearchableItemAttributeSetSelSetFullyFormattedAddress = objc.RegisterName("setFullyFormattedAddress:")
-	_cSSearchableItemAttributeSetSelAltitude = objc.RegisterName("altitude")
-	_cSSearchableItemAttributeSetSelSetAltitude = objc.RegisterName("setAltitude:")
-	_cSSearchableItemAttributeSetSelLatitude = objc.RegisterName("latitude")
-	_cSSearchableItemAttributeSetSelSetLatitude = objc.RegisterName("setLatitude:")
-	_cSSearchableItemAttributeSetSelLongitude = objc.RegisterName("longitude")
-	_cSSearchableItemAttributeSetSelSetLongitude = objc.RegisterName("setLongitude:")
-	_cSSearchableItemAttributeSetSelSpeed = objc.RegisterName("speed")
-	_cSSearchableItemAttributeSetSelSetSpeed = objc.RegisterName("setSpeed:")
-	_cSSearchableItemAttributeSetSelTimestamp = objc.RegisterName("timestamp")
-	_cSSearchableItemAttributeSetSelSetTimestamp = objc.RegisterName("setTimestamp:")
-	_cSSearchableItemAttributeSetSelImageDirection = objc.RegisterName("imageDirection")
-	_cSSearchableItemAttributeSetSelSetImageDirection = objc.RegisterName("setImageDirection:")
-	_cSSearchableItemAttributeSetSelNamedLocation = objc.RegisterName("namedLocation")
-	_cSSearchableItemAttributeSetSelSetNamedLocation = objc.RegisterName("setNamedLocation:")
-	_cSSearchableItemAttributeSetSelGPSTrack = objc.RegisterName("GPSTrack")
-	_cSSearchableItemAttributeSetSelSetGPSTrack = objc.RegisterName("setGPSTrack:")
-	_cSSearchableItemAttributeSetSelGPSStatus = objc.RegisterName("GPSStatus")
-	_cSSearchableItemAttributeSetSelSetGPSStatus = objc.RegisterName("setGPSStatus:")
-	_cSSearchableItemAttributeSetSelGPSMeasureMode = objc.RegisterName("GPSMeasureMode")
-	_cSSearchableItemAttributeSetSelSetGPSMeasureMode = objc.RegisterName("setGPSMeasureMode:")
-	_cSSearchableItemAttributeSetSelGPSDOP = objc.RegisterName("GPSDOP")
-	_cSSearchableItemAttributeSetSelSetGPSDOP = objc.RegisterName("setGPSDOP:")
-	_cSSearchableItemAttributeSetSelGPSMapDatum = objc.RegisterName("GPSMapDatum")
-	_cSSearchableItemAttributeSetSelSetGPSMapDatum = objc.RegisterName("setGPSMapDatum:")
-	_cSSearchableItemAttributeSetSelGPSDestLatitude = objc.RegisterName("GPSDestLatitude")
-	_cSSearchableItemAttributeSetSelSetGPSDestLatitude = objc.RegisterName("setGPSDestLatitude:")
-	_cSSearchableItemAttributeSetSelGPSDestLongitude = objc.RegisterName("GPSDestLongitude")
-	_cSSearchableItemAttributeSetSelSetGPSDestLongitude = objc.RegisterName("setGPSDestLongitude:")
-	_cSSearchableItemAttributeSetSelGPSDestBearing = objc.RegisterName("GPSDestBearing")
-	_cSSearchableItemAttributeSetSelSetGPSDestBearing = objc.RegisterName("setGPSDestBearing:")
-	_cSSearchableItemAttributeSetSelGPSDestDistance = objc.RegisterName("GPSDestDistance")
-	_cSSearchableItemAttributeSetSelSetGPSDestDistance = objc.RegisterName("setGPSDestDistance:")
-	_cSSearchableItemAttributeSetSelGPSProcessingMethod = objc.RegisterName("GPSProcessingMethod")
-	_cSSearchableItemAttributeSetSelSetGPSProcessingMethod = objc.RegisterName("setGPSProcessingMethod:")
-	_cSSearchableItemAttributeSetSelGPSAreaInformation = objc.RegisterName("GPSAreaInformation")
-	_cSSearchableItemAttributeSetSelSetGPSAreaInformation = objc.RegisterName("setGPSAreaInformation:")
-	_cSSearchableItemAttributeSetSelGPSDateStamp = objc.RegisterName("GPSDateStamp")
-	_cSSearchableItemAttributeSetSelSetGPSDateStamp = objc.RegisterName("setGPSDateStamp:")
-	_cSSearchableItemAttributeSetSelGPSDifferental = objc.RegisterName("GPSDifferental")
-	_cSSearchableItemAttributeSetSelSetGPSDifferental = objc.RegisterName("setGPSDifferental:")
+	_cSSearchableItemAttributeSetSelSubject                               = objc.RegisterName("subject")
+	_cSSearchableItemAttributeSetSelSetSubject                            = objc.RegisterName("setSubject:")
+	_cSSearchableItemAttributeSetSelTheme                                 = objc.RegisterName("theme")
+	_cSSearchableItemAttributeSetSelSetTheme                              = objc.RegisterName("setTheme:")
+	_cSSearchableItemAttributeSetSelContentDescription                    = objc.RegisterName("contentDescription")
+	_cSSearchableItemAttributeSetSelSetContentDescription                 = objc.RegisterName("setContentDescription:")
+	_cSSearchableItemAttributeSetSelIdentifier                            = objc.RegisterName("identifier")
+	_cSSearchableItemAttributeSetSelSetIdentifier                         = objc.RegisterName("setIdentifier:")
+	_cSSearchableItemAttributeSetSelAudiences                             = objc.RegisterName("audiences")
+	_cSSearchableItemAttributeSetSelSetAudiences                          = objc.RegisterName("setAudiences:")
+	_cSSearchableItemAttributeSetSelFileSize                              = objc.RegisterName("fileSize")
+	_cSSearchableItemAttributeSetSelSetFileSize                           = objc.RegisterName("setFileSize:")
+	_cSSearchableItemAttributeSetSelPageCount                             = objc.RegisterName("pageCount")
+	_cSSearchableItemAttributeSetSelSetPageCount                          = objc.RegisterName("setPageCount:")
+	_cSSearchableItemAttributeSetSelPageWidth                             = objc.RegisterName("pageWidth")
+	_cSSearchableItemAttributeSetSelSetPageWidth                          = objc.RegisterName("setPageWidth:")
+	_cSSearchableItemAttributeSetSelPageHeight                            = objc.RegisterName("pageHeight")
+	_cSSearchableItemAttributeSetSelSetPageHeight                         = objc.RegisterName("setPageHeight:")
+	_cSSearchableItemAttributeSetSelSecurityMethod                        = objc.RegisterName("securityMethod")
+	_cSSearchableItemAttributeSetSelSetSecurityMethod                     = objc.RegisterName("setSecurityMethod:")
+	_cSSearchableItemAttributeSetSelCreator                               = objc.RegisterName("creator")
+	_cSSearchableItemAttributeSetSelSetCreator                            = objc.RegisterName("setCreator:")
+	_cSSearchableItemAttributeSetSelEncodingApplications                  = objc.RegisterName("encodingApplications")
+	_cSSearchableItemAttributeSetSelSetEncodingApplications               = objc.RegisterName("setEncodingApplications:")
+	_cSSearchableItemAttributeSetSelKind                                  = objc.RegisterName("kind")
+	_cSSearchableItemAttributeSetSelSetKind                               = objc.RegisterName("setKind:")
+	_cSSearchableItemAttributeSetSelFontNames                             = objc.RegisterName("fontNames")
+	_cSSearchableItemAttributeSetSelSetFontNames                          = objc.RegisterName("setFontNames:")
+	_cSSearchableItemAttributeSetSelDueDate                               = objc.RegisterName("dueDate")
+	_cSSearchableItemAttributeSetSelSetDueDate                            = objc.RegisterName("setDueDate:")
+	_cSSearchableItemAttributeSetSelCompletionDate                        = objc.RegisterName("completionDate")
+	_cSSearchableItemAttributeSetSelSetCompletionDate                     = objc.RegisterName("setCompletionDate:")
+	_cSSearchableItemAttributeSetSelStartDate                             = objc.RegisterName("startDate")
+	_cSSearchableItemAttributeSetSelSetStartDate                          = objc.RegisterName("setStartDate:")
+	_cSSearchableItemAttributeSetSelEndDate                               = objc.RegisterName("endDate")
+	_cSSearchableItemAttributeSetSelSetEndDate                            = objc.RegisterName("setEndDate:")
+	_cSSearchableItemAttributeSetSelImportantDates                        = objc.RegisterName("importantDates")
+	_cSSearchableItemAttributeSetSelSetImportantDates                     = objc.RegisterName("setImportantDates:")
+	_cSSearchableItemAttributeSetSelAllDay                                = objc.RegisterName("allDay")
+	_cSSearchableItemAttributeSetSelSetAllDay                             = objc.RegisterName("setAllDay:")
+	_cSSearchableItemAttributeSetSelAccountIdentifier                     = objc.RegisterName("accountIdentifier")
+	_cSSearchableItemAttributeSetSelSetAccountIdentifier                  = objc.RegisterName("setAccountIdentifier:")
+	_cSSearchableItemAttributeSetSelAccountHandles                        = objc.RegisterName("accountHandles")
+	_cSSearchableItemAttributeSetSelSetAccountHandles                     = objc.RegisterName("setAccountHandles:")
+	_cSSearchableItemAttributeSetSelHTMLContentData                       = objc.RegisterName("HTMLContentData")
+	_cSSearchableItemAttributeSetSelSetHTMLContentData                    = objc.RegisterName("setHTMLContentData:")
+	_cSSearchableItemAttributeSetSelTextContent                           = objc.RegisterName("textContent")
+	_cSSearchableItemAttributeSetSelSetTextContent                        = objc.RegisterName("setTextContent:")
+	_cSSearchableItemAttributeSetSelAuthors                               = objc.RegisterName("authors")
+	_cSSearchableItemAttributeSetSelSetAuthors                            = objc.RegisterName("setAuthors:")
+	_cSSearchableItemAttributeSetSelPrimaryRecipients                     = objc.RegisterName("primaryRecipients")
+	_cSSearchableItemAttributeSetSelSetPrimaryRecipients                  = objc.RegisterName("setPrimaryRecipients:")
+	_cSSearchableItemAttributeSetSelAdditionalRecipients                  = objc.RegisterName("additionalRecipients")
+	_cSSearchableItemAttributeSetSelSetAdditionalRecipients               = objc.RegisterName("setAdditionalRecipients:")
+	_cSSearchableItemAttributeSetSelHiddenAdditionalRecipients            = objc.RegisterName("hiddenAdditionalRecipients")
+	_cSSearchableItemAttributeSetSelSetHiddenAdditionalRecipients         = objc.RegisterName("setHiddenAdditionalRecipients:")
+	_cSSearchableItemAttributeSetSelEmailHeaders                          = objc.RegisterName("emailHeaders")
+	_cSSearchableItemAttributeSetSelSetEmailHeaders                       = objc.RegisterName("setEmailHeaders:")
+	_cSSearchableItemAttributeSetSelMailboxIdentifiers                    = objc.RegisterName("mailboxIdentifiers")
+	_cSSearchableItemAttributeSetSelSetMailboxIdentifiers                 = objc.RegisterName("setMailboxIdentifiers:")
+	_cSSearchableItemAttributeSetSelAuthorNames                           = objc.RegisterName("authorNames")
+	_cSSearchableItemAttributeSetSelSetAuthorNames                        = objc.RegisterName("setAuthorNames:")
+	_cSSearchableItemAttributeSetSelRecipientNames                        = objc.RegisterName("recipientNames")
+	_cSSearchableItemAttributeSetSelSetRecipientNames                     = objc.RegisterName("setRecipientNames:")
+	_cSSearchableItemAttributeSetSelAuthorEmailAddresses                  = objc.RegisterName("authorEmailAddresses")
+	_cSSearchableItemAttributeSetSelSetAuthorEmailAddresses               = objc.RegisterName("setAuthorEmailAddresses:")
+	_cSSearchableItemAttributeSetSelRecipientEmailAddresses               = objc.RegisterName("recipientEmailAddresses")
+	_cSSearchableItemAttributeSetSelSetRecipientEmailAddresses            = objc.RegisterName("setRecipientEmailAddresses:")
+	_cSSearchableItemAttributeSetSelAuthorAddresses                       = objc.RegisterName("authorAddresses")
+	_cSSearchableItemAttributeSetSelSetAuthorAddresses                    = objc.RegisterName("setAuthorAddresses:")
+	_cSSearchableItemAttributeSetSelRecipientAddresses                    = objc.RegisterName("recipientAddresses")
+	_cSSearchableItemAttributeSetSelSetRecipientAddresses                 = objc.RegisterName("setRecipientAddresses:")
+	_cSSearchableItemAttributeSetSelPhoneNumbers                          = objc.RegisterName("phoneNumbers")
+	_cSSearchableItemAttributeSetSelSetPhoneNumbers                       = objc.RegisterName("setPhoneNumbers:")
+	_cSSearchableItemAttributeSetSelEmailAddresses                        = objc.RegisterName("emailAddresses")
+	_cSSearchableItemAttributeSetSelSetEmailAddresses                     = objc.RegisterName("setEmailAddresses:")
+	_cSSearchableItemAttributeSetSelInstantMessageAddresses               = objc.RegisterName("instantMessageAddresses")
+	_cSSearchableItemAttributeSetSelSetInstantMessageAddresses            = objc.RegisterName("setInstantMessageAddresses:")
+	_cSSearchableItemAttributeSetSelIsLikelyJunk                          = objc.RegisterName("isLikelyJunk")
+	_cSSearchableItemAttributeSetSelSetLikelyJunk                         = objc.RegisterName("setLikelyJunk:")
+	_cSSearchableItemAttributeSetSelIsPriority                            = objc.RegisterName("isPriority")
+	_cSSearchableItemAttributeSetSelEditors                               = objc.RegisterName("editors")
+	_cSSearchableItemAttributeSetSelSetEditors                            = objc.RegisterName("setEditors:")
+	_cSSearchableItemAttributeSetSelParticipants                          = objc.RegisterName("participants")
+	_cSSearchableItemAttributeSetSelSetParticipants                       = objc.RegisterName("setParticipants:")
+	_cSSearchableItemAttributeSetSelProjects                              = objc.RegisterName("projects")
+	_cSSearchableItemAttributeSetSelSetProjects                           = objc.RegisterName("setProjects:")
+	_cSSearchableItemAttributeSetSelContentSources                        = objc.RegisterName("contentSources")
+	_cSSearchableItemAttributeSetSelSetContentSources                     = objc.RegisterName("setContentSources:")
+	_cSSearchableItemAttributeSetSelComment                               = objc.RegisterName("comment")
+	_cSSearchableItemAttributeSetSelSetComment                            = objc.RegisterName("setComment:")
+	_cSSearchableItemAttributeSetSelCopyright                             = objc.RegisterName("copyright")
+	_cSSearchableItemAttributeSetSelSetCopyright                          = objc.RegisterName("setCopyright:")
+	_cSSearchableItemAttributeSetSelLastUsedDate                          = objc.RegisterName("lastUsedDate")
+	_cSSearchableItemAttributeSetSelSetLastUsedDate                       = objc.RegisterName("setLastUsedDate:")
+	_cSSearchableItemAttributeSetSelContentCreationDate                   = objc.RegisterName("contentCreationDate")
+	_cSSearchableItemAttributeSetSelSetContentCreationDate                = objc.RegisterName("setContentCreationDate:")
+	_cSSearchableItemAttributeSetSelContentModificationDate               = objc.RegisterName("contentModificationDate")
+	_cSSearchableItemAttributeSetSelSetContentModificationDate            = objc.RegisterName("setContentModificationDate:")
+	_cSSearchableItemAttributeSetSelAddedDate                             = objc.RegisterName("addedDate")
+	_cSSearchableItemAttributeSetSelSetAddedDate                          = objc.RegisterName("setAddedDate:")
+	_cSSearchableItemAttributeSetSelDownloadedDate                        = objc.RegisterName("downloadedDate")
+	_cSSearchableItemAttributeSetSelSetDownloadedDate                     = objc.RegisterName("setDownloadedDate:")
+	_cSSearchableItemAttributeSetSelDuration                              = objc.RegisterName("duration")
+	_cSSearchableItemAttributeSetSelSetDuration                           = objc.RegisterName("setDuration:")
+	_cSSearchableItemAttributeSetSelContactKeywords                       = objc.RegisterName("contactKeywords")
+	_cSSearchableItemAttributeSetSelSetContactKeywords                    = objc.RegisterName("setContactKeywords:")
+	_cSSearchableItemAttributeSetSelCodecs                                = objc.RegisterName("codecs")
+	_cSSearchableItemAttributeSetSelSetCodecs                             = objc.RegisterName("setCodecs:")
+	_cSSearchableItemAttributeSetSelMediaTypes                            = objc.RegisterName("mediaTypes")
+	_cSSearchableItemAttributeSetSelSetMediaTypes                         = objc.RegisterName("setMediaTypes:")
+	_cSSearchableItemAttributeSetSelIsStreamable                          = objc.RegisterName("isStreamable")
+	_cSSearchableItemAttributeSetSelSetStreamable                         = objc.RegisterName("setStreamable:")
+	_cSSearchableItemAttributeSetSelTotalBitRate                          = objc.RegisterName("totalBitRate")
+	_cSSearchableItemAttributeSetSelSetTotalBitRate                       = objc.RegisterName("setTotalBitRate:")
+	_cSSearchableItemAttributeSetSelVideoBitRate                          = objc.RegisterName("videoBitRate")
+	_cSSearchableItemAttributeSetSelSetVideoBitRate                       = objc.RegisterName("setVideoBitRate:")
+	_cSSearchableItemAttributeSetSelAudioBitRate                          = objc.RegisterName("audioBitRate")
+	_cSSearchableItemAttributeSetSelSetAudioBitRate                       = objc.RegisterName("setAudioBitRate:")
+	_cSSearchableItemAttributeSetSelDeliveryType                          = objc.RegisterName("deliveryType")
+	_cSSearchableItemAttributeSetSelSetDeliveryType                       = objc.RegisterName("setDeliveryType:")
+	_cSSearchableItemAttributeSetSelOrganizations                         = objc.RegisterName("organizations")
+	_cSSearchableItemAttributeSetSelSetOrganizations                      = objc.RegisterName("setOrganizations:")
+	_cSSearchableItemAttributeSetSelRole                                  = objc.RegisterName("role")
+	_cSSearchableItemAttributeSetSelSetRole                               = objc.RegisterName("setRole:")
+	_cSSearchableItemAttributeSetSelLanguages                             = objc.RegisterName("languages")
+	_cSSearchableItemAttributeSetSelSetLanguages                          = objc.RegisterName("setLanguages:")
+	_cSSearchableItemAttributeSetSelRights                                = objc.RegisterName("rights")
+	_cSSearchableItemAttributeSetSelSetRights                             = objc.RegisterName("setRights:")
+	_cSSearchableItemAttributeSetSelPublishers                            = objc.RegisterName("publishers")
+	_cSSearchableItemAttributeSetSelSetPublishers                         = objc.RegisterName("setPublishers:")
+	_cSSearchableItemAttributeSetSelContributors                          = objc.RegisterName("contributors")
+	_cSSearchableItemAttributeSetSelSetContributors                       = objc.RegisterName("setContributors:")
+	_cSSearchableItemAttributeSetSelCoverage                              = objc.RegisterName("coverage")
+	_cSSearchableItemAttributeSetSelSetCoverage                           = objc.RegisterName("setCoverage:")
+	_cSSearchableItemAttributeSetSelRating                                = objc.RegisterName("rating")
+	_cSSearchableItemAttributeSetSelSetRating                             = objc.RegisterName("setRating:")
+	_cSSearchableItemAttributeSetSelRatingDescription                     = objc.RegisterName("ratingDescription")
+	_cSSearchableItemAttributeSetSelSetRatingDescription                  = objc.RegisterName("setRatingDescription:")
+	_cSSearchableItemAttributeSetSelPlayCount                             = objc.RegisterName("playCount")
+	_cSSearchableItemAttributeSetSelSetPlayCount                          = objc.RegisterName("setPlayCount:")
+	_cSSearchableItemAttributeSetSelInformation                           = objc.RegisterName("information")
+	_cSSearchableItemAttributeSetSelSetInformation                        = objc.RegisterName("setInformation:")
+	_cSSearchableItemAttributeSetSelDirector                              = objc.RegisterName("director")
+	_cSSearchableItemAttributeSetSelSetDirector                           = objc.RegisterName("setDirector:")
+	_cSSearchableItemAttributeSetSelProducer                              = objc.RegisterName("producer")
+	_cSSearchableItemAttributeSetSelSetProducer                           = objc.RegisterName("setProducer:")
+	_cSSearchableItemAttributeSetSelGenre                                 = objc.RegisterName("genre")
+	_cSSearchableItemAttributeSetSelSetGenre                              = objc.RegisterName("setGenre:")
+	_cSSearchableItemAttributeSetSelPerformers                            = objc.RegisterName("performers")
+	_cSSearchableItemAttributeSetSelSetPerformers                         = objc.RegisterName("setPerformers:")
+	_cSSearchableItemAttributeSetSelOriginalFormat                        = objc.RegisterName("originalFormat")
+	_cSSearchableItemAttributeSetSelSetOriginalFormat                     = objc.RegisterName("setOriginalFormat:")
+	_cSSearchableItemAttributeSetSelOriginalSource                        = objc.RegisterName("originalSource")
+	_cSSearchableItemAttributeSetSelSetOriginalSource                     = objc.RegisterName("setOriginalSource:")
+	_cSSearchableItemAttributeSetSelIsLocal                               = objc.RegisterName("isLocal")
+	_cSSearchableItemAttributeSetSelSetLocal                              = objc.RegisterName("setLocal:")
+	_cSSearchableItemAttributeSetSelContentRating                         = objc.RegisterName("contentRating")
+	_cSSearchableItemAttributeSetSelSetContentRating                      = objc.RegisterName("setContentRating:")
+	_cSSearchableItemAttributeSetSelURL                                   = objc.RegisterName("URL")
+	_cSSearchableItemAttributeSetSelSetURL                                = objc.RegisterName("setURL:")
+	_cSSearchableItemAttributeSetSelAudioSampleRate                       = objc.RegisterName("audioSampleRate")
+	_cSSearchableItemAttributeSetSelSetAudioSampleRate                    = objc.RegisterName("setAudioSampleRate:")
+	_cSSearchableItemAttributeSetSelAudioChannelCount                     = objc.RegisterName("audioChannelCount")
+	_cSSearchableItemAttributeSetSelSetAudioChannelCount                  = objc.RegisterName("setAudioChannelCount:")
+	_cSSearchableItemAttributeSetSelTempo                                 = objc.RegisterName("tempo")
+	_cSSearchableItemAttributeSetSelSetTempo                              = objc.RegisterName("setTempo:")
+	_cSSearchableItemAttributeSetSelKeySignature                          = objc.RegisterName("keySignature")
+	_cSSearchableItemAttributeSetSelSetKeySignature                       = objc.RegisterName("setKeySignature:")
+	_cSSearchableItemAttributeSetSelTimeSignature                         = objc.RegisterName("timeSignature")
+	_cSSearchableItemAttributeSetSelSetTimeSignature                      = objc.RegisterName("setTimeSignature:")
+	_cSSearchableItemAttributeSetSelAudioEncodingApplication              = objc.RegisterName("audioEncodingApplication")
+	_cSSearchableItemAttributeSetSelSetAudioEncodingApplication           = objc.RegisterName("setAudioEncodingApplication:")
+	_cSSearchableItemAttributeSetSelComposer                              = objc.RegisterName("composer")
+	_cSSearchableItemAttributeSetSelSetComposer                           = objc.RegisterName("setComposer:")
+	_cSSearchableItemAttributeSetSelLyricist                              = objc.RegisterName("lyricist")
+	_cSSearchableItemAttributeSetSelSetLyricist                           = objc.RegisterName("setLyricist:")
+	_cSSearchableItemAttributeSetSelAlbum                                 = objc.RegisterName("album")
+	_cSSearchableItemAttributeSetSelSetAlbum                              = objc.RegisterName("setAlbum:")
+	_cSSearchableItemAttributeSetSelArtist                                = objc.RegisterName("artist")
+	_cSSearchableItemAttributeSetSelSetArtist                             = objc.RegisterName("setArtist:")
+	_cSSearchableItemAttributeSetSelAudioTrackNumber                      = objc.RegisterName("audioTrackNumber")
+	_cSSearchableItemAttributeSetSelSetAudioTrackNumber                   = objc.RegisterName("setAudioTrackNumber:")
+	_cSSearchableItemAttributeSetSelRecordingDate                         = objc.RegisterName("recordingDate")
+	_cSSearchableItemAttributeSetSelSetRecordingDate                      = objc.RegisterName("setRecordingDate:")
+	_cSSearchableItemAttributeSetSelMusicalGenre                          = objc.RegisterName("musicalGenre")
+	_cSSearchableItemAttributeSetSelSetMusicalGenre                       = objc.RegisterName("setMusicalGenre:")
+	_cSSearchableItemAttributeSetSelIsGeneralMIDISequence                 = objc.RegisterName("isGeneralMIDISequence")
+	_cSSearchableItemAttributeSetSelSetGeneralMIDISequence                = objc.RegisterName("setGeneralMIDISequence:")
+	_cSSearchableItemAttributeSetSelMusicalInstrumentCategory             = objc.RegisterName("musicalInstrumentCategory")
+	_cSSearchableItemAttributeSetSelSetMusicalInstrumentCategory          = objc.RegisterName("setMusicalInstrumentCategory:")
+	_cSSearchableItemAttributeSetSelMusicalInstrumentName                 = objc.RegisterName("musicalInstrumentName")
+	_cSSearchableItemAttributeSetSelSetMusicalInstrumentName              = objc.RegisterName("setMusicalInstrumentName:")
+	_cSSearchableItemAttributeSetSelPixelHeight                           = objc.RegisterName("pixelHeight")
+	_cSSearchableItemAttributeSetSelSetPixelHeight                        = objc.RegisterName("setPixelHeight:")
+	_cSSearchableItemAttributeSetSelPixelWidth                            = objc.RegisterName("pixelWidth")
+	_cSSearchableItemAttributeSetSelSetPixelWidth                         = objc.RegisterName("setPixelWidth:")
+	_cSSearchableItemAttributeSetSelPixelCount                            = objc.RegisterName("pixelCount")
+	_cSSearchableItemAttributeSetSelSetPixelCount                         = objc.RegisterName("setPixelCount:")
+	_cSSearchableItemAttributeSetSelColorSpace                            = objc.RegisterName("colorSpace")
+	_cSSearchableItemAttributeSetSelSetColorSpace                         = objc.RegisterName("setColorSpace:")
+	_cSSearchableItemAttributeSetSelBitsPerSample                         = objc.RegisterName("bitsPerSample")
+	_cSSearchableItemAttributeSetSelSetBitsPerSample                      = objc.RegisterName("setBitsPerSample:")
+	_cSSearchableItemAttributeSetSelIsFlashOn                             = objc.RegisterName("isFlashOn")
+	_cSSearchableItemAttributeSetSelSetFlashOn                            = objc.RegisterName("setFlashOn:")
+	_cSSearchableItemAttributeSetSelFocalLength                           = objc.RegisterName("focalLength")
+	_cSSearchableItemAttributeSetSelSetFocalLength                        = objc.RegisterName("setFocalLength:")
+	_cSSearchableItemAttributeSetSelIsFocalLength35mm                     = objc.RegisterName("isFocalLength35mm")
+	_cSSearchableItemAttributeSetSelSetFocalLength35mm                    = objc.RegisterName("setFocalLength35mm:")
+	_cSSearchableItemAttributeSetSelAcquisitionMake                       = objc.RegisterName("acquisitionMake")
+	_cSSearchableItemAttributeSetSelSetAcquisitionMake                    = objc.RegisterName("setAcquisitionMake:")
+	_cSSearchableItemAttributeSetSelAcquisitionModel                      = objc.RegisterName("acquisitionModel")
+	_cSSearchableItemAttributeSetSelSetAcquisitionModel                   = objc.RegisterName("setAcquisitionModel:")
+	_cSSearchableItemAttributeSetSelCameraOwner                           = objc.RegisterName("cameraOwner")
+	_cSSearchableItemAttributeSetSelSetCameraOwner                        = objc.RegisterName("setCameraOwner:")
+	_cSSearchableItemAttributeSetSelLensModel                             = objc.RegisterName("lensModel")
+	_cSSearchableItemAttributeSetSelSetLensModel                          = objc.RegisterName("setLensModel:")
+	_cSSearchableItemAttributeSetSelISOSpeed                              = objc.RegisterName("ISOSpeed")
+	_cSSearchableItemAttributeSetSelSetISOSpeed                           = objc.RegisterName("setISOSpeed:")
+	_cSSearchableItemAttributeSetSelOrientation                           = objc.RegisterName("orientation")
+	_cSSearchableItemAttributeSetSelSetOrientation                        = objc.RegisterName("setOrientation:")
+	_cSSearchableItemAttributeSetSelLayerNames                            = objc.RegisterName("layerNames")
+	_cSSearchableItemAttributeSetSelSetLayerNames                         = objc.RegisterName("setLayerNames:")
+	_cSSearchableItemAttributeSetSelWhiteBalance                          = objc.RegisterName("whiteBalance")
+	_cSSearchableItemAttributeSetSelSetWhiteBalance                       = objc.RegisterName("setWhiteBalance:")
+	_cSSearchableItemAttributeSetSelAperture                              = objc.RegisterName("aperture")
+	_cSSearchableItemAttributeSetSelSetAperture                           = objc.RegisterName("setAperture:")
+	_cSSearchableItemAttributeSetSelProfileName                           = objc.RegisterName("profileName")
+	_cSSearchableItemAttributeSetSelSetProfileName                        = objc.RegisterName("setProfileName:")
+	_cSSearchableItemAttributeSetSelResolutionWidthDPI                    = objc.RegisterName("resolutionWidthDPI")
+	_cSSearchableItemAttributeSetSelSetResolutionWidthDPI                 = objc.RegisterName("setResolutionWidthDPI:")
+	_cSSearchableItemAttributeSetSelResolutionHeightDPI                   = objc.RegisterName("resolutionHeightDPI")
+	_cSSearchableItemAttributeSetSelSetResolutionHeightDPI                = objc.RegisterName("setResolutionHeightDPI:")
+	_cSSearchableItemAttributeSetSelExposureMode                          = objc.RegisterName("exposureMode")
+	_cSSearchableItemAttributeSetSelSetExposureMode                       = objc.RegisterName("setExposureMode:")
+	_cSSearchableItemAttributeSetSelExposureTime                          = objc.RegisterName("exposureTime")
+	_cSSearchableItemAttributeSetSelSetExposureTime                       = objc.RegisterName("setExposureTime:")
+	_cSSearchableItemAttributeSetSelEXIFVersion                           = objc.RegisterName("EXIFVersion")
+	_cSSearchableItemAttributeSetSelSetEXIFVersion                        = objc.RegisterName("setEXIFVersion:")
+	_cSSearchableItemAttributeSetSelEXIFGPSVersion                        = objc.RegisterName("EXIFGPSVersion")
+	_cSSearchableItemAttributeSetSelSetEXIFGPSVersion                     = objc.RegisterName("setEXIFGPSVersion:")
+	_cSSearchableItemAttributeSetSelHasAlphaChannel                       = objc.RegisterName("hasAlphaChannel")
+	_cSSearchableItemAttributeSetSelSetHasAlphaChannel                    = objc.RegisterName("setHasAlphaChannel:")
+	_cSSearchableItemAttributeSetSelIsRedEyeOn                            = objc.RegisterName("isRedEyeOn")
+	_cSSearchableItemAttributeSetSelSetRedEyeOn                           = objc.RegisterName("setRedEyeOn:")
+	_cSSearchableItemAttributeSetSelMeteringMode                          = objc.RegisterName("meteringMode")
+	_cSSearchableItemAttributeSetSelSetMeteringMode                       = objc.RegisterName("setMeteringMode:")
+	_cSSearchableItemAttributeSetSelMaxAperture                           = objc.RegisterName("maxAperture")
+	_cSSearchableItemAttributeSetSelSetMaxAperture                        = objc.RegisterName("setMaxAperture:")
+	_cSSearchableItemAttributeSetSelFNumber                               = objc.RegisterName("fNumber")
+	_cSSearchableItemAttributeSetSelSetFNumber                            = objc.RegisterName("setFNumber:")
+	_cSSearchableItemAttributeSetSelExposureProgram                       = objc.RegisterName("exposureProgram")
+	_cSSearchableItemAttributeSetSelSetExposureProgram                    = objc.RegisterName("setExposureProgram:")
+	_cSSearchableItemAttributeSetSelExposureTimeString                    = objc.RegisterName("exposureTimeString")
+	_cSSearchableItemAttributeSetSelSetExposureTimeString                 = objc.RegisterName("setExposureTimeString:")
+	_cSSearchableItemAttributeSetSelHeadline                              = objc.RegisterName("headline")
+	_cSSearchableItemAttributeSetSelSetHeadline                           = objc.RegisterName("setHeadline:")
+	_cSSearchableItemAttributeSetSelInstructions                          = objc.RegisterName("instructions")
+	_cSSearchableItemAttributeSetSelSetInstructions                       = objc.RegisterName("setInstructions:")
+	_cSSearchableItemAttributeSetSelThoroughfare                          = objc.RegisterName("thoroughfare")
+	_cSSearchableItemAttributeSetSelSetThoroughfare                       = objc.RegisterName("setThoroughfare:")
+	_cSSearchableItemAttributeSetSelSubThoroughfare                       = objc.RegisterName("subThoroughfare")
+	_cSSearchableItemAttributeSetSelSetSubThoroughfare                    = objc.RegisterName("setSubThoroughfare:")
+	_cSSearchableItemAttributeSetSelPostalCode                            = objc.RegisterName("postalCode")
+	_cSSearchableItemAttributeSetSelSetPostalCode                         = objc.RegisterName("setPostalCode:")
+	_cSSearchableItemAttributeSetSelCity                                  = objc.RegisterName("city")
+	_cSSearchableItemAttributeSetSelSetCity                               = objc.RegisterName("setCity:")
+	_cSSearchableItemAttributeSetSelStateOrProvince                       = objc.RegisterName("stateOrProvince")
+	_cSSearchableItemAttributeSetSelSetStateOrProvince                    = objc.RegisterName("setStateOrProvince:")
+	_cSSearchableItemAttributeSetSelCountry                               = objc.RegisterName("country")
+	_cSSearchableItemAttributeSetSelSetCountry                            = objc.RegisterName("setCountry:")
+	_cSSearchableItemAttributeSetSelFullyFormattedAddress                 = objc.RegisterName("fullyFormattedAddress")
+	_cSSearchableItemAttributeSetSelSetFullyFormattedAddress              = objc.RegisterName("setFullyFormattedAddress:")
+	_cSSearchableItemAttributeSetSelAltitude                              = objc.RegisterName("altitude")
+	_cSSearchableItemAttributeSetSelSetAltitude                           = objc.RegisterName("setAltitude:")
+	_cSSearchableItemAttributeSetSelLatitude                              = objc.RegisterName("latitude")
+	_cSSearchableItemAttributeSetSelSetLatitude                           = objc.RegisterName("setLatitude:")
+	_cSSearchableItemAttributeSetSelLongitude                             = objc.RegisterName("longitude")
+	_cSSearchableItemAttributeSetSelSetLongitude                          = objc.RegisterName("setLongitude:")
+	_cSSearchableItemAttributeSetSelSpeed                                 = objc.RegisterName("speed")
+	_cSSearchableItemAttributeSetSelSetSpeed                              = objc.RegisterName("setSpeed:")
+	_cSSearchableItemAttributeSetSelTimestamp                             = objc.RegisterName("timestamp")
+	_cSSearchableItemAttributeSetSelSetTimestamp                          = objc.RegisterName("setTimestamp:")
+	_cSSearchableItemAttributeSetSelImageDirection                        = objc.RegisterName("imageDirection")
+	_cSSearchableItemAttributeSetSelSetImageDirection                     = objc.RegisterName("setImageDirection:")
+	_cSSearchableItemAttributeSetSelNamedLocation                         = objc.RegisterName("namedLocation")
+	_cSSearchableItemAttributeSetSelSetNamedLocation                      = objc.RegisterName("setNamedLocation:")
+	_cSSearchableItemAttributeSetSelGPSTrack                              = objc.RegisterName("GPSTrack")
+	_cSSearchableItemAttributeSetSelSetGPSTrack                           = objc.RegisterName("setGPSTrack:")
+	_cSSearchableItemAttributeSetSelGPSStatus                             = objc.RegisterName("GPSStatus")
+	_cSSearchableItemAttributeSetSelSetGPSStatus                          = objc.RegisterName("setGPSStatus:")
+	_cSSearchableItemAttributeSetSelGPSMeasureMode                        = objc.RegisterName("GPSMeasureMode")
+	_cSSearchableItemAttributeSetSelSetGPSMeasureMode                     = objc.RegisterName("setGPSMeasureMode:")
+	_cSSearchableItemAttributeSetSelGPSDOP                                = objc.RegisterName("GPSDOP")
+	_cSSearchableItemAttributeSetSelSetGPSDOP                             = objc.RegisterName("setGPSDOP:")
+	_cSSearchableItemAttributeSetSelGPSMapDatum                           = objc.RegisterName("GPSMapDatum")
+	_cSSearchableItemAttributeSetSelSetGPSMapDatum                        = objc.RegisterName("setGPSMapDatum:")
+	_cSSearchableItemAttributeSetSelGPSDestLatitude                       = objc.RegisterName("GPSDestLatitude")
+	_cSSearchableItemAttributeSetSelSetGPSDestLatitude                    = objc.RegisterName("setGPSDestLatitude:")
+	_cSSearchableItemAttributeSetSelGPSDestLongitude                      = objc.RegisterName("GPSDestLongitude")
+	_cSSearchableItemAttributeSetSelSetGPSDestLongitude                   = objc.RegisterName("setGPSDestLongitude:")
+	_cSSearchableItemAttributeSetSelGPSDestBearing                        = objc.RegisterName("GPSDestBearing")
+	_cSSearchableItemAttributeSetSelSetGPSDestBearing                     = objc.RegisterName("setGPSDestBearing:")
+	_cSSearchableItemAttributeSetSelGPSDestDistance                       = objc.RegisterName("GPSDestDistance")
+	_cSSearchableItemAttributeSetSelSetGPSDestDistance                    = objc.RegisterName("setGPSDestDistance:")
+	_cSSearchableItemAttributeSetSelGPSProcessingMethod                   = objc.RegisterName("GPSProcessingMethod")
+	_cSSearchableItemAttributeSetSelSetGPSProcessingMethod                = objc.RegisterName("setGPSProcessingMethod:")
+	_cSSearchableItemAttributeSetSelGPSAreaInformation                    = objc.RegisterName("GPSAreaInformation")
+	_cSSearchableItemAttributeSetSelSetGPSAreaInformation                 = objc.RegisterName("setGPSAreaInformation:")
+	_cSSearchableItemAttributeSetSelGPSDateStamp                          = objc.RegisterName("GPSDateStamp")
+	_cSSearchableItemAttributeSetSelSetGPSDateStamp                       = objc.RegisterName("setGPSDateStamp:")
+	_cSSearchableItemAttributeSetSelGPSDifferental                        = objc.RegisterName("GPSDifferental")
+	_cSSearchableItemAttributeSetSelSetGPSDifferental                     = objc.RegisterName("setGPSDifferental:")
 )
 
 func CSSearchableItemAttributeSetFromID(id objc.ID) *CSSearchableItemAttributeSet {
@@ -411,13 +411,17 @@ func CSSearchableItemAttributeSetFromID(id objc.ID) *CSSearchableItemAttributeSe
 // Deprecated: Use initWithContentType instead
 func (o *CSSearchableItemAttributeSet) InitWithItemContentType(itemContentType *foundation.NSString) *CSSearchableItemAttributeSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelInitWithItemContentType, itemContentType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CSSearchableItemAttributeSetFromID(_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) InitWithContentType(contentType *uniformtypeidentifiers.UTType) *CSSearchableItemAttributeSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelInitWithContentType, contentType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CSSearchableItemAttributeSetFromID(_ret)
 }
 
@@ -432,7 +436,9 @@ func (o *CSSearchableItemAttributeSet) ValueForCustomKey(key *CSCustomAttributeK
 
 func (o *CSSearchableItemAttributeSet) DisplayName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelDisplayName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -451,7 +457,9 @@ func (o *CSSearchableItemAttributeSet) SetAlternateNames(alternateNames *foundat
 
 func (o *CSSearchableItemAttributeSet) Path() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -461,7 +469,9 @@ func (o *CSSearchableItemAttributeSet) SetPath(path *foundation.NSString) {
 
 func (o *CSSearchableItemAttributeSet) ContentURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelContentURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -471,7 +481,9 @@ func (o *CSSearchableItemAttributeSet) SetContentURL(contentURL *foundation.NSUR
 
 func (o *CSSearchableItemAttributeSet) ThumbnailURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelThumbnailURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -481,7 +493,9 @@ func (o *CSSearchableItemAttributeSet) SetThumbnailURL(thumbnailURL *foundation.
 
 func (o *CSSearchableItemAttributeSet) ThumbnailData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelThumbnailData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -491,7 +505,9 @@ func (o *CSSearchableItemAttributeSet) SetThumbnailData(thumbnailData *foundatio
 
 func (o *CSSearchableItemAttributeSet) DarkThumbnailURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelDarkThumbnailURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -501,7 +517,9 @@ func (o *CSSearchableItemAttributeSet) SetDarkThumbnailURL(darkThumbnailURL *fou
 
 func (o *CSSearchableItemAttributeSet) RelatedUniqueIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelRelatedUniqueIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -520,7 +538,9 @@ func (o *CSSearchableItemAttributeSet) SetWeakRelatedUniqueIdentifier(weakRelate
 
 func (o *CSSearchableItemAttributeSet) MetadataModificationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelMetadataModificationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -530,7 +550,9 @@ func (o *CSSearchableItemAttributeSet) SetMetadataModificationDate(metadataModif
 
 func (o *CSSearchableItemAttributeSet) ContentType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelContentType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -558,7 +580,9 @@ func (o *CSSearchableItemAttributeSet) SetKeywords(keywords *foundation.NSArray[
 
 func (o *CSSearchableItemAttributeSet) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -613,13 +637,17 @@ func (o *CSSearchableItemAttributeSet) SetDomainIdentifier(domainIdentifier unsa
 
 func (o *CSSearchableItemAttributeSet) TextContentSummary() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelTextContentSummary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) TranscribedTextContent() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelTranscribedTextContent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -629,7 +657,9 @@ func (o *CSSearchableItemAttributeSet) SetTranscribedTextContent(transcribedText
 
 func (o *CSSearchableItemAttributeSet) SupportsPhoneCall() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelSupportsPhoneCall)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -639,7 +669,9 @@ func (o *CSSearchableItemAttributeSet) SetSupportsPhoneCall(supportsPhoneCall *f
 
 func (o *CSSearchableItemAttributeSet) SupportsNavigation() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelSupportsNavigation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -649,7 +681,9 @@ func (o *CSSearchableItemAttributeSet) SetSupportsNavigation(supportsNavigation 
 
 func (o *CSSearchableItemAttributeSet) ContainerTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelContainerTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -659,7 +693,9 @@ func (o *CSSearchableItemAttributeSet) SetContainerTitle(containerTitle *foundat
 
 func (o *CSSearchableItemAttributeSet) ContainerDisplayName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelContainerDisplayName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -669,7 +705,9 @@ func (o *CSSearchableItemAttributeSet) SetContainerDisplayName(containerDisplayN
 
 func (o *CSSearchableItemAttributeSet) ContainerIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelContainerIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -679,7 +717,9 @@ func (o *CSSearchableItemAttributeSet) SetContainerIdentifier(containerIdentifie
 
 func (o *CSSearchableItemAttributeSet) ContainerOrder() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelContainerOrder)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -717,7 +757,9 @@ func (o *CSSearchableItemAttributeSet) SetProviderInPlaceFileTypeIdentifiers(pro
 // Subject of the this item.
 func (o *CSSearchableItemAttributeSet) Subject() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelSubject)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -727,7 +769,9 @@ func (o *CSSearchableItemAttributeSet) SetSubject(subject *foundation.NSString) 
 
 func (o *CSSearchableItemAttributeSet) Theme() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelTheme)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -737,7 +781,9 @@ func (o *CSSearchableItemAttributeSet) SetTheme(theme *foundation.NSString) {
 
 func (o *CSSearchableItemAttributeSet) ContentDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelContentDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -747,7 +793,9 @@ func (o *CSSearchableItemAttributeSet) SetContentDescription(contentDescription 
 
 func (o *CSSearchableItemAttributeSet) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -766,7 +814,9 @@ func (o *CSSearchableItemAttributeSet) SetAudiences(audiences *foundation.NSArra
 
 func (o *CSSearchableItemAttributeSet) FileSize() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelFileSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -776,7 +826,9 @@ func (o *CSSearchableItemAttributeSet) SetFileSize(fileSize *foundation.NSNumber
 
 func (o *CSSearchableItemAttributeSet) PageCount() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelPageCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -786,7 +838,9 @@ func (o *CSSearchableItemAttributeSet) SetPageCount(pageCount *foundation.NSNumb
 
 func (o *CSSearchableItemAttributeSet) PageWidth() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelPageWidth)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -796,7 +850,9 @@ func (o *CSSearchableItemAttributeSet) SetPageWidth(pageWidth *foundation.NSNumb
 
 func (o *CSSearchableItemAttributeSet) PageHeight() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelPageHeight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -806,7 +862,9 @@ func (o *CSSearchableItemAttributeSet) SetPageHeight(pageHeight *foundation.NSNu
 
 func (o *CSSearchableItemAttributeSet) SecurityMethod() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelSecurityMethod)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -816,7 +874,9 @@ func (o *CSSearchableItemAttributeSet) SetSecurityMethod(securityMethod *foundat
 
 func (o *CSSearchableItemAttributeSet) Creator() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelCreator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -835,7 +895,9 @@ func (o *CSSearchableItemAttributeSet) SetEncodingApplications(encodingApplicati
 
 func (o *CSSearchableItemAttributeSet) Kind() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelKind)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -854,7 +916,9 @@ func (o *CSSearchableItemAttributeSet) SetFontNames(fontNames *foundation.NSArra
 
 func (o *CSSearchableItemAttributeSet) DueDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelDueDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -864,7 +928,9 @@ func (o *CSSearchableItemAttributeSet) SetDueDate(dueDate *foundation.NSDate) {
 
 func (o *CSSearchableItemAttributeSet) CompletionDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelCompletionDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -874,7 +940,9 @@ func (o *CSSearchableItemAttributeSet) SetCompletionDate(completionDate *foundat
 
 func (o *CSSearchableItemAttributeSet) StartDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -884,7 +952,9 @@ func (o *CSSearchableItemAttributeSet) SetStartDate(startDate *foundation.NSDate
 
 func (o *CSSearchableItemAttributeSet) EndDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelEndDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -903,7 +973,9 @@ func (o *CSSearchableItemAttributeSet) SetImportantDates(importantDates *foundat
 
 func (o *CSSearchableItemAttributeSet) AllDay() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelAllDay)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -913,7 +985,9 @@ func (o *CSSearchableItemAttributeSet) SetAllDay(allDay *foundation.NSNumber) {
 
 func (o *CSSearchableItemAttributeSet) AccountIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelAccountIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -932,7 +1006,9 @@ func (o *CSSearchableItemAttributeSet) SetAccountHandles(accountHandles *foundat
 
 func (o *CSSearchableItemAttributeSet) HTMLContentData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelHTMLContentData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -942,7 +1018,9 @@ func (o *CSSearchableItemAttributeSet) SetHTMLContentData(hTMLContentData *found
 
 func (o *CSSearchableItemAttributeSet) TextContent() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelTextContent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -952,7 +1030,9 @@ func (o *CSSearchableItemAttributeSet) SetTextContent(textContent *foundation.NS
 
 func (o *CSSearchableItemAttributeSet) Authors() *foundation.NSArray[*CSPerson] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelAuthors)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CSPerson](_ret)
 }
 
@@ -962,7 +1042,9 @@ func (o *CSSearchableItemAttributeSet) SetAuthors(authors *foundation.NSArray[*C
 
 func (o *CSSearchableItemAttributeSet) PrimaryRecipients() *foundation.NSArray[*CSPerson] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelPrimaryRecipients)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CSPerson](_ret)
 }
 
@@ -972,7 +1054,9 @@ func (o *CSSearchableItemAttributeSet) SetPrimaryRecipients(primaryRecipients *f
 
 func (o *CSSearchableItemAttributeSet) AdditionalRecipients() *foundation.NSArray[*CSPerson] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelAdditionalRecipients)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CSPerson](_ret)
 }
 
@@ -982,7 +1066,9 @@ func (o *CSSearchableItemAttributeSet) SetAdditionalRecipients(additionalRecipie
 
 func (o *CSSearchableItemAttributeSet) HiddenAdditionalRecipients() *foundation.NSArray[*CSPerson] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelHiddenAdditionalRecipients)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CSPerson](_ret)
 }
 
@@ -1091,7 +1177,9 @@ func (o *CSSearchableItemAttributeSet) SetInstantMessageAddresses(instantMessage
 
 func (o *CSSearchableItemAttributeSet) IsLikelyJunk() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelIsLikelyJunk)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1101,7 +1189,9 @@ func (o *CSSearchableItemAttributeSet) SetLikelyJunk(likelyJunk *foundation.NSNu
 
 func (o *CSSearchableItemAttributeSet) IsPriority() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelIsPriority)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1143,7 +1233,9 @@ func (o *CSSearchableItemAttributeSet) SetContentSources(contentSources *foundat
 
 func (o *CSSearchableItemAttributeSet) Comment() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelComment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1153,7 +1245,9 @@ func (o *CSSearchableItemAttributeSet) SetComment(comment *foundation.NSString) 
 
 func (o *CSSearchableItemAttributeSet) Copyright() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelCopyright)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1163,7 +1257,9 @@ func (o *CSSearchableItemAttributeSet) SetCopyright(copyright *foundation.NSStri
 
 func (o *CSSearchableItemAttributeSet) LastUsedDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelLastUsedDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -1173,7 +1269,9 @@ func (o *CSSearchableItemAttributeSet) SetLastUsedDate(lastUsedDate *foundation.
 
 func (o *CSSearchableItemAttributeSet) ContentCreationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelContentCreationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -1183,7 +1281,9 @@ func (o *CSSearchableItemAttributeSet) SetContentCreationDate(contentCreationDat
 
 func (o *CSSearchableItemAttributeSet) ContentModificationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelContentModificationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -1193,7 +1293,9 @@ func (o *CSSearchableItemAttributeSet) SetContentModificationDate(contentModific
 
 func (o *CSSearchableItemAttributeSet) AddedDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelAddedDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -1203,7 +1305,9 @@ func (o *CSSearchableItemAttributeSet) SetAddedDate(addedDate *foundation.NSDate
 
 func (o *CSSearchableItemAttributeSet) DownloadedDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelDownloadedDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -1213,7 +1317,9 @@ func (o *CSSearchableItemAttributeSet) SetDownloadedDate(downloadedDate *foundat
 
 func (o *CSSearchableItemAttributeSet) Duration() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelDuration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1250,7 +1356,9 @@ func (o *CSSearchableItemAttributeSet) SetMediaTypes(mediaTypes *foundation.NSAr
 
 func (o *CSSearchableItemAttributeSet) IsStreamable() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelIsStreamable)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1260,7 +1368,9 @@ func (o *CSSearchableItemAttributeSet) SetStreamable(streamable *foundation.NSNu
 
 func (o *CSSearchableItemAttributeSet) TotalBitRate() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelTotalBitRate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1270,7 +1380,9 @@ func (o *CSSearchableItemAttributeSet) SetTotalBitRate(totalBitRate *foundation.
 
 func (o *CSSearchableItemAttributeSet) VideoBitRate() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelVideoBitRate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1280,7 +1392,9 @@ func (o *CSSearchableItemAttributeSet) SetVideoBitRate(videoBitRate *foundation.
 
 func (o *CSSearchableItemAttributeSet) AudioBitRate() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelAudioBitRate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1290,7 +1404,9 @@ func (o *CSSearchableItemAttributeSet) SetAudioBitRate(audioBitRate *foundation.
 
 func (o *CSSearchableItemAttributeSet) DeliveryType() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelDeliveryType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1309,7 +1425,9 @@ func (o *CSSearchableItemAttributeSet) SetOrganizations(organizations *foundatio
 
 func (o *CSSearchableItemAttributeSet) Role() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelRole)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1328,7 +1446,9 @@ func (o *CSSearchableItemAttributeSet) SetLanguages(languages *foundation.NSArra
 
 func (o *CSSearchableItemAttributeSet) Rights() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelRights)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1365,7 +1485,9 @@ func (o *CSSearchableItemAttributeSet) SetCoverage(coverage *foundation.NSArray[
 
 func (o *CSSearchableItemAttributeSet) Rating() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelRating)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1375,7 +1497,9 @@ func (o *CSSearchableItemAttributeSet) SetRating(rating *foundation.NSNumber) {
 
 func (o *CSSearchableItemAttributeSet) RatingDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelRatingDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1385,7 +1509,9 @@ func (o *CSSearchableItemAttributeSet) SetRatingDescription(ratingDescription *f
 
 func (o *CSSearchableItemAttributeSet) PlayCount() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelPlayCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1395,7 +1521,9 @@ func (o *CSSearchableItemAttributeSet) SetPlayCount(playCount *foundation.NSNumb
 
 func (o *CSSearchableItemAttributeSet) Information() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelInformation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1405,7 +1533,9 @@ func (o *CSSearchableItemAttributeSet) SetInformation(information *foundation.NS
 
 func (o *CSSearchableItemAttributeSet) Director() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelDirector)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1415,7 +1545,9 @@ func (o *CSSearchableItemAttributeSet) SetDirector(director *foundation.NSString
 
 func (o *CSSearchableItemAttributeSet) Producer() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelProducer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1425,7 +1557,9 @@ func (o *CSSearchableItemAttributeSet) SetProducer(producer *foundation.NSString
 
 func (o *CSSearchableItemAttributeSet) Genre() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelGenre)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1444,7 +1578,9 @@ func (o *CSSearchableItemAttributeSet) SetPerformers(performers *foundation.NSAr
 
 func (o *CSSearchableItemAttributeSet) OriginalFormat() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelOriginalFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1454,7 +1590,9 @@ func (o *CSSearchableItemAttributeSet) SetOriginalFormat(originalFormat *foundat
 
 func (o *CSSearchableItemAttributeSet) OriginalSource() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelOriginalSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1464,7 +1602,9 @@ func (o *CSSearchableItemAttributeSet) SetOriginalSource(originalSource *foundat
 
 func (o *CSSearchableItemAttributeSet) IsLocal() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelIsLocal)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1474,7 +1614,9 @@ func (o *CSSearchableItemAttributeSet) SetLocal(local *foundation.NSNumber) {
 
 func (o *CSSearchableItemAttributeSet) ContentRating() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelContentRating)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1484,7 +1626,9 @@ func (o *CSSearchableItemAttributeSet) SetContentRating(contentRating *foundatio
 
 func (o *CSSearchableItemAttributeSet) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -1494,7 +1638,9 @@ func (o *CSSearchableItemAttributeSet) SetURL(uRL *foundation.NSURL) {
 
 func (o *CSSearchableItemAttributeSet) AudioSampleRate() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelAudioSampleRate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1504,7 +1650,9 @@ func (o *CSSearchableItemAttributeSet) SetAudioSampleRate(audioSampleRate *found
 
 func (o *CSSearchableItemAttributeSet) AudioChannelCount() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelAudioChannelCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1514,7 +1662,9 @@ func (o *CSSearchableItemAttributeSet) SetAudioChannelCount(audioChannelCount *f
 
 func (o *CSSearchableItemAttributeSet) Tempo() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelTempo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1524,7 +1674,9 @@ func (o *CSSearchableItemAttributeSet) SetTempo(tempo *foundation.NSNumber) {
 
 func (o *CSSearchableItemAttributeSet) KeySignature() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelKeySignature)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1534,7 +1686,9 @@ func (o *CSSearchableItemAttributeSet) SetKeySignature(keySignature *foundation.
 
 func (o *CSSearchableItemAttributeSet) TimeSignature() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelTimeSignature)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1544,7 +1698,9 @@ func (o *CSSearchableItemAttributeSet) SetTimeSignature(timeSignature *foundatio
 
 func (o *CSSearchableItemAttributeSet) AudioEncodingApplication() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelAudioEncodingApplication)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1554,7 +1710,9 @@ func (o *CSSearchableItemAttributeSet) SetAudioEncodingApplication(audioEncoding
 
 func (o *CSSearchableItemAttributeSet) Composer() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelComposer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1564,7 +1722,9 @@ func (o *CSSearchableItemAttributeSet) SetComposer(composer *foundation.NSString
 
 func (o *CSSearchableItemAttributeSet) Lyricist() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelLyricist)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1574,7 +1734,9 @@ func (o *CSSearchableItemAttributeSet) SetLyricist(lyricist *foundation.NSString
 
 func (o *CSSearchableItemAttributeSet) Album() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelAlbum)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1584,7 +1746,9 @@ func (o *CSSearchableItemAttributeSet) SetAlbum(album *foundation.NSString) {
 
 func (o *CSSearchableItemAttributeSet) Artist() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelArtist)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1594,7 +1758,9 @@ func (o *CSSearchableItemAttributeSet) SetArtist(artist *foundation.NSString) {
 
 func (o *CSSearchableItemAttributeSet) AudioTrackNumber() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelAudioTrackNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1604,7 +1770,9 @@ func (o *CSSearchableItemAttributeSet) SetAudioTrackNumber(audioTrackNumber *fou
 
 func (o *CSSearchableItemAttributeSet) RecordingDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelRecordingDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -1614,7 +1782,9 @@ func (o *CSSearchableItemAttributeSet) SetRecordingDate(recordingDate *foundatio
 
 func (o *CSSearchableItemAttributeSet) MusicalGenre() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelMusicalGenre)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1624,7 +1794,9 @@ func (o *CSSearchableItemAttributeSet) SetMusicalGenre(musicalGenre *foundation.
 
 func (o *CSSearchableItemAttributeSet) IsGeneralMIDISequence() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelIsGeneralMIDISequence)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1634,7 +1806,9 @@ func (o *CSSearchableItemAttributeSet) SetGeneralMIDISequence(generalMIDISequenc
 
 func (o *CSSearchableItemAttributeSet) MusicalInstrumentCategory() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelMusicalInstrumentCategory)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1644,7 +1818,9 @@ func (o *CSSearchableItemAttributeSet) SetMusicalInstrumentCategory(musicalInstr
 
 func (o *CSSearchableItemAttributeSet) MusicalInstrumentName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelMusicalInstrumentName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1654,7 +1830,9 @@ func (o *CSSearchableItemAttributeSet) SetMusicalInstrumentName(musicalInstrumen
 
 func (o *CSSearchableItemAttributeSet) PixelHeight() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelPixelHeight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1664,7 +1842,9 @@ func (o *CSSearchableItemAttributeSet) SetPixelHeight(pixelHeight *foundation.NS
 
 func (o *CSSearchableItemAttributeSet) PixelWidth() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelPixelWidth)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1674,7 +1854,9 @@ func (o *CSSearchableItemAttributeSet) SetPixelWidth(pixelWidth *foundation.NSNu
 
 func (o *CSSearchableItemAttributeSet) PixelCount() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelPixelCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1684,7 +1866,9 @@ func (o *CSSearchableItemAttributeSet) SetPixelCount(pixelCount *foundation.NSNu
 
 func (o *CSSearchableItemAttributeSet) ColorSpace() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelColorSpace)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1694,7 +1878,9 @@ func (o *CSSearchableItemAttributeSet) SetColorSpace(colorSpace *foundation.NSSt
 
 func (o *CSSearchableItemAttributeSet) BitsPerSample() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelBitsPerSample)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1704,7 +1890,9 @@ func (o *CSSearchableItemAttributeSet) SetBitsPerSample(bitsPerSample *foundatio
 
 func (o *CSSearchableItemAttributeSet) IsFlashOn() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelIsFlashOn)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1714,7 +1902,9 @@ func (o *CSSearchableItemAttributeSet) SetFlashOn(flashOn *foundation.NSNumber) 
 
 func (o *CSSearchableItemAttributeSet) FocalLength() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelFocalLength)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1724,7 +1914,9 @@ func (o *CSSearchableItemAttributeSet) SetFocalLength(focalLength *foundation.NS
 
 func (o *CSSearchableItemAttributeSet) IsFocalLength35mm() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelIsFocalLength35mm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1734,7 +1926,9 @@ func (o *CSSearchableItemAttributeSet) SetFocalLength35mm(focalLength35mm *found
 
 func (o *CSSearchableItemAttributeSet) AcquisitionMake() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelAcquisitionMake)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1744,7 +1938,9 @@ func (o *CSSearchableItemAttributeSet) SetAcquisitionMake(acquisitionMake *found
 
 func (o *CSSearchableItemAttributeSet) AcquisitionModel() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelAcquisitionModel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1754,7 +1950,9 @@ func (o *CSSearchableItemAttributeSet) SetAcquisitionModel(acquisitionModel *fou
 
 func (o *CSSearchableItemAttributeSet) CameraOwner() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelCameraOwner)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1764,7 +1962,9 @@ func (o *CSSearchableItemAttributeSet) SetCameraOwner(cameraOwner *foundation.NS
 
 func (o *CSSearchableItemAttributeSet) LensModel() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelLensModel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1774,7 +1974,9 @@ func (o *CSSearchableItemAttributeSet) SetLensModel(lensModel *foundation.NSStri
 
 func (o *CSSearchableItemAttributeSet) ISOSpeed() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelISOSpeed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1784,7 +1986,9 @@ func (o *CSSearchableItemAttributeSet) SetISOSpeed(iSOSpeed *foundation.NSNumber
 
 func (o *CSSearchableItemAttributeSet) Orientation() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelOrientation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1803,7 +2007,9 @@ func (o *CSSearchableItemAttributeSet) SetLayerNames(layerNames *foundation.NSAr
 
 func (o *CSSearchableItemAttributeSet) WhiteBalance() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelWhiteBalance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1813,7 +2019,9 @@ func (o *CSSearchableItemAttributeSet) SetWhiteBalance(whiteBalance *foundation.
 
 func (o *CSSearchableItemAttributeSet) Aperture() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelAperture)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1823,7 +2031,9 @@ func (o *CSSearchableItemAttributeSet) SetAperture(aperture *foundation.NSNumber
 
 func (o *CSSearchableItemAttributeSet) ProfileName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelProfileName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1833,7 +2043,9 @@ func (o *CSSearchableItemAttributeSet) SetProfileName(profileName *foundation.NS
 
 func (o *CSSearchableItemAttributeSet) ResolutionWidthDPI() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelResolutionWidthDPI)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1843,7 +2055,9 @@ func (o *CSSearchableItemAttributeSet) SetResolutionWidthDPI(resolutionWidthDPI 
 
 func (o *CSSearchableItemAttributeSet) ResolutionHeightDPI() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelResolutionHeightDPI)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1853,7 +2067,9 @@ func (o *CSSearchableItemAttributeSet) SetResolutionHeightDPI(resolutionHeightDP
 
 func (o *CSSearchableItemAttributeSet) ExposureMode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelExposureMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1863,7 +2079,9 @@ func (o *CSSearchableItemAttributeSet) SetExposureMode(exposureMode *foundation.
 
 func (o *CSSearchableItemAttributeSet) ExposureTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelExposureTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1873,7 +2091,9 @@ func (o *CSSearchableItemAttributeSet) SetExposureTime(exposureTime *foundation.
 
 func (o *CSSearchableItemAttributeSet) EXIFVersion() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelEXIFVersion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1883,7 +2103,9 @@ func (o *CSSearchableItemAttributeSet) SetEXIFVersion(eXIFVersion *foundation.NS
 
 func (o *CSSearchableItemAttributeSet) EXIFGPSVersion() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelEXIFGPSVersion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1893,7 +2115,9 @@ func (o *CSSearchableItemAttributeSet) SetEXIFGPSVersion(eXIFGPSVersion *foundat
 
 func (o *CSSearchableItemAttributeSet) HasAlphaChannel() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelHasAlphaChannel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1903,7 +2127,9 @@ func (o *CSSearchableItemAttributeSet) SetHasAlphaChannel(hasAlphaChannel *found
 
 func (o *CSSearchableItemAttributeSet) IsRedEyeOn() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelIsRedEyeOn)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1913,7 +2139,9 @@ func (o *CSSearchableItemAttributeSet) SetRedEyeOn(redEyeOn *foundation.NSNumber
 
 func (o *CSSearchableItemAttributeSet) MeteringMode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelMeteringMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1923,7 +2151,9 @@ func (o *CSSearchableItemAttributeSet) SetMeteringMode(meteringMode *foundation.
 
 func (o *CSSearchableItemAttributeSet) MaxAperture() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelMaxAperture)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1933,7 +2163,9 @@ func (o *CSSearchableItemAttributeSet) SetMaxAperture(maxAperture *foundation.NS
 
 func (o *CSSearchableItemAttributeSet) FNumber() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelFNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -1943,7 +2175,9 @@ func (o *CSSearchableItemAttributeSet) SetFNumber(fNumber *foundation.NSNumber) 
 
 func (o *CSSearchableItemAttributeSet) ExposureProgram() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelExposureProgram)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1953,7 +2187,9 @@ func (o *CSSearchableItemAttributeSet) SetExposureProgram(exposureProgram *found
 
 func (o *CSSearchableItemAttributeSet) ExposureTimeString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelExposureTimeString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1963,7 +2199,9 @@ func (o *CSSearchableItemAttributeSet) SetExposureTimeString(exposureTimeString 
 
 func (o *CSSearchableItemAttributeSet) Headline() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelHeadline)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1973,7 +2211,9 @@ func (o *CSSearchableItemAttributeSet) SetHeadline(headline *foundation.NSString
 
 func (o *CSSearchableItemAttributeSet) Instructions() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelInstructions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1983,7 +2223,9 @@ func (o *CSSearchableItemAttributeSet) SetInstructions(instructions *foundation.
 
 func (o *CSSearchableItemAttributeSet) Thoroughfare() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelThoroughfare)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1993,7 +2235,9 @@ func (o *CSSearchableItemAttributeSet) SetThoroughfare(thoroughfare *foundation.
 
 func (o *CSSearchableItemAttributeSet) SubThoroughfare() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelSubThoroughfare)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -2003,7 +2247,9 @@ func (o *CSSearchableItemAttributeSet) SetSubThoroughfare(subThoroughfare *found
 
 func (o *CSSearchableItemAttributeSet) PostalCode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelPostalCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -2013,7 +2259,9 @@ func (o *CSSearchableItemAttributeSet) SetPostalCode(postalCode *foundation.NSSt
 
 func (o *CSSearchableItemAttributeSet) City() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelCity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -2023,7 +2271,9 @@ func (o *CSSearchableItemAttributeSet) SetCity(city *foundation.NSString) {
 
 func (o *CSSearchableItemAttributeSet) StateOrProvince() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelStateOrProvince)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -2033,7 +2283,9 @@ func (o *CSSearchableItemAttributeSet) SetStateOrProvince(stateOrProvince *found
 
 func (o *CSSearchableItemAttributeSet) Country() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelCountry)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -2043,7 +2295,9 @@ func (o *CSSearchableItemAttributeSet) SetCountry(country *foundation.NSString) 
 
 func (o *CSSearchableItemAttributeSet) FullyFormattedAddress() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelFullyFormattedAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -2053,7 +2307,9 @@ func (o *CSSearchableItemAttributeSet) SetFullyFormattedAddress(fullyFormattedAd
 
 func (o *CSSearchableItemAttributeSet) Altitude() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelAltitude)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -2063,7 +2319,9 @@ func (o *CSSearchableItemAttributeSet) SetAltitude(altitude *foundation.NSNumber
 
 func (o *CSSearchableItemAttributeSet) Latitude() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelLatitude)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -2073,7 +2331,9 @@ func (o *CSSearchableItemAttributeSet) SetLatitude(latitude *foundation.NSNumber
 
 func (o *CSSearchableItemAttributeSet) Longitude() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelLongitude)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -2083,7 +2343,9 @@ func (o *CSSearchableItemAttributeSet) SetLongitude(longitude *foundation.NSNumb
 
 func (o *CSSearchableItemAttributeSet) Speed() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelSpeed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -2093,7 +2355,9 @@ func (o *CSSearchableItemAttributeSet) SetSpeed(speed *foundation.NSNumber) {
 
 func (o *CSSearchableItemAttributeSet) Timestamp() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelTimestamp)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -2103,7 +2367,9 @@ func (o *CSSearchableItemAttributeSet) SetTimestamp(timestamp *foundation.NSDate
 
 func (o *CSSearchableItemAttributeSet) ImageDirection() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelImageDirection)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -2113,7 +2379,9 @@ func (o *CSSearchableItemAttributeSet) SetImageDirection(imageDirection *foundat
 
 func (o *CSSearchableItemAttributeSet) NamedLocation() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelNamedLocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -2123,7 +2391,9 @@ func (o *CSSearchableItemAttributeSet) SetNamedLocation(namedLocation *foundatio
 
 func (o *CSSearchableItemAttributeSet) GPSTrack() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelGPSTrack)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -2133,7 +2403,9 @@ func (o *CSSearchableItemAttributeSet) SetGPSTrack(gPSTrack *foundation.NSNumber
 
 func (o *CSSearchableItemAttributeSet) GPSStatus() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelGPSStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -2143,7 +2415,9 @@ func (o *CSSearchableItemAttributeSet) SetGPSStatus(gPSStatus *foundation.NSStri
 
 func (o *CSSearchableItemAttributeSet) GPSMeasureMode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelGPSMeasureMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -2153,7 +2427,9 @@ func (o *CSSearchableItemAttributeSet) SetGPSMeasureMode(gPSMeasureMode *foundat
 
 func (o *CSSearchableItemAttributeSet) GPSDOP() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelGPSDOP)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -2163,7 +2439,9 @@ func (o *CSSearchableItemAttributeSet) SetGPSDOP(gPSDOP *foundation.NSNumber) {
 
 func (o *CSSearchableItemAttributeSet) GPSMapDatum() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelGPSMapDatum)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -2173,7 +2451,9 @@ func (o *CSSearchableItemAttributeSet) SetGPSMapDatum(gPSMapDatum *foundation.NS
 
 func (o *CSSearchableItemAttributeSet) GPSDestLatitude() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelGPSDestLatitude)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -2183,7 +2463,9 @@ func (o *CSSearchableItemAttributeSet) SetGPSDestLatitude(gPSDestLatitude *found
 
 func (o *CSSearchableItemAttributeSet) GPSDestLongitude() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelGPSDestLongitude)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -2193,7 +2475,9 @@ func (o *CSSearchableItemAttributeSet) SetGPSDestLongitude(gPSDestLongitude *fou
 
 func (o *CSSearchableItemAttributeSet) GPSDestBearing() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelGPSDestBearing)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -2203,7 +2487,9 @@ func (o *CSSearchableItemAttributeSet) SetGPSDestBearing(gPSDestBearing *foundat
 
 func (o *CSSearchableItemAttributeSet) GPSDestDistance() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelGPSDestDistance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -2213,7 +2499,9 @@ func (o *CSSearchableItemAttributeSet) SetGPSDestDistance(gPSDestDistance *found
 
 func (o *CSSearchableItemAttributeSet) GPSProcessingMethod() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelGPSProcessingMethod)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -2223,7 +2511,9 @@ func (o *CSSearchableItemAttributeSet) SetGPSProcessingMethod(gPSProcessingMetho
 
 func (o *CSSearchableItemAttributeSet) GPSAreaInformation() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelGPSAreaInformation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -2233,7 +2523,9 @@ func (o *CSSearchableItemAttributeSet) SetGPSAreaInformation(gPSAreaInformation 
 
 func (o *CSSearchableItemAttributeSet) GPSDateStamp() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelGPSDateStamp)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -2243,11 +2535,12 @@ func (o *CSSearchableItemAttributeSet) SetGPSDateStamp(gPSDateStamp *foundation.
 
 func (o *CSSearchableItemAttributeSet) GPSDifferental() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelGPSDifferental)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetGPSDifferental(gPSDifferental *foundation.NSNumber) {
 	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetGPSDifferental, gPSDifferental.Ptr())
 }
-

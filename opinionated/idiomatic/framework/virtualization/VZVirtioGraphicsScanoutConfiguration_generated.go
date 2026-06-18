@@ -15,7 +15,9 @@ type VirtioGraphicsScanoutConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.VZVirtioGraphicsScanoutConfiguration].
-func (x *VirtioGraphicsScanoutConfiguration) Unwrap() *raw.VZVirtioGraphicsScanoutConfiguration { return x.inner }
+func (x *VirtioGraphicsScanoutConfiguration) Unwrap() *raw.VZVirtioGraphicsScanoutConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -68,7 +70,9 @@ func (x *VirtioGraphicsScanoutConfiguration) SetHeightInPixels(heightInPixels in
 	x.inner.SetHeightInPixels(heightInPixels)
 }
 
-func (x *VirtioGraphicsScanoutConfiguration) asGraphicsDisplayConfiguration() *raw.VZGraphicsDisplayConfiguration { return &x.inner.VZGraphicsDisplayConfiguration }
+func (x *VirtioGraphicsScanoutConfiguration) asGraphicsDisplayConfiguration() *raw.VZGraphicsDisplayConfiguration {
+	return &x.inner.VZGraphicsDisplayConfiguration
+}
 
 // VirtioGraphicsScanoutConfigurationable is the interface implemented by [VirtioGraphicsScanoutConfiguration], for mocking and DI.
 type VirtioGraphicsScanoutConfigurationable interface {
@@ -82,4 +86,3 @@ type VirtioGraphicsScanoutConfigurationable interface {
 }
 
 var _ VirtioGraphicsScanoutConfigurationable = (*VirtioGraphicsScanoutConfiguration)(nil)
-

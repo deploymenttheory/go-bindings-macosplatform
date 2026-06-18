@@ -18,18 +18,18 @@ type MTRGroupsClusterViewGroupResponseParams struct {
 }
 
 var (
-	_clsMTRGroupsClusterViewGroupResponseParams = _objcClass("MTRGroupsClusterViewGroupResponseParams")
+	_clsMTRGroupsClusterViewGroupResponseParams                           = _objcClass("MTRGroupsClusterViewGroupResponseParams")
 	_mTRGroupsClusterViewGroupResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRGroupsClusterViewGroupResponseParamsSelStatus = objc.RegisterName("status")
-	_mTRGroupsClusterViewGroupResponseParamsSelSetStatus = objc.RegisterName("setStatus:")
-	_mTRGroupsClusterViewGroupResponseParamsSelGroupID = objc.RegisterName("groupID")
-	_mTRGroupsClusterViewGroupResponseParamsSelSetGroupID = objc.RegisterName("setGroupID:")
-	_mTRGroupsClusterViewGroupResponseParamsSelGroupName = objc.RegisterName("groupName")
-	_mTRGroupsClusterViewGroupResponseParamsSelSetGroupName = objc.RegisterName("setGroupName:")
-	_mTRGroupsClusterViewGroupResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRGroupsClusterViewGroupResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRGroupsClusterViewGroupResponseParamsSelGroupId = objc.RegisterName("groupId")
-	_mTRGroupsClusterViewGroupResponseParamsSelSetGroupId = objc.RegisterName("setGroupId:")
+	_mTRGroupsClusterViewGroupResponseParamsSelStatus                     = objc.RegisterName("status")
+	_mTRGroupsClusterViewGroupResponseParamsSelSetStatus                  = objc.RegisterName("setStatus:")
+	_mTRGroupsClusterViewGroupResponseParamsSelGroupID                    = objc.RegisterName("groupID")
+	_mTRGroupsClusterViewGroupResponseParamsSelSetGroupID                 = objc.RegisterName("setGroupID:")
+	_mTRGroupsClusterViewGroupResponseParamsSelGroupName                  = objc.RegisterName("groupName")
+	_mTRGroupsClusterViewGroupResponseParamsSelSetGroupName               = objc.RegisterName("setGroupName:")
+	_mTRGroupsClusterViewGroupResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRGroupsClusterViewGroupResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRGroupsClusterViewGroupResponseParamsSelGroupId                    = objc.RegisterName("groupId")
+	_mTRGroupsClusterViewGroupResponseParamsSelSetGroupId                 = objc.RegisterName("setGroupId:")
 )
 
 func MTRGroupsClusterViewGroupResponseParamsFromID(id objc.ID) *MTRGroupsClusterViewGroupResponseParams {
@@ -46,7 +46,9 @@ func MTRGroupsClusterViewGroupResponseParamsFromID(id objc.ID) *MTRGroupsCluster
 func (o *MTRGroupsClusterViewGroupResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRGroupsClusterViewGroupResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupsClusterViewGroupResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -55,7 +57,9 @@ func (o *MTRGroupsClusterViewGroupResponseParams) InitWithResponseValueError(res
 
 func (o *MTRGroupsClusterViewGroupResponseParams) Status() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupsClusterViewGroupResponseParamsSelStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -65,7 +69,9 @@ func (o *MTRGroupsClusterViewGroupResponseParams) SetStatus(status *foundation.N
 
 func (o *MTRGroupsClusterViewGroupResponseParams) GroupID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupsClusterViewGroupResponseParamsSelGroupID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -75,7 +81,9 @@ func (o *MTRGroupsClusterViewGroupResponseParams) SetGroupID(groupID *foundation
 
 func (o *MTRGroupsClusterViewGroupResponseParams) GroupName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupsClusterViewGroupResponseParamsSelGroupName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -86,7 +94,9 @@ func (o *MTRGroupsClusterViewGroupResponseParams) SetGroupName(groupName *founda
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRGroupsClusterViewGroupResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupsClusterViewGroupResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -96,11 +106,12 @@ func (o *MTRGroupsClusterViewGroupResponseParams) SetTimedInvokeTimeoutMs(timedI
 
 func (o *MTRGroupsClusterViewGroupResponseParams) GroupId() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupsClusterViewGroupResponseParamsSelGroupId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRGroupsClusterViewGroupResponseParams) SetGroupId(groupId *foundation.NSNumber) {
 	o.Ptr().Send(_mTRGroupsClusterViewGroupResponseParamsSelSetGroupId, groupId.Ptr())
 }
-

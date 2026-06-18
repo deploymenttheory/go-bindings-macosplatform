@@ -160,4 +160,3 @@ type OperationConfigurationable interface {
 }
 
 var _ OperationConfigurationable = (*OperationConfiguration)(nil)
-

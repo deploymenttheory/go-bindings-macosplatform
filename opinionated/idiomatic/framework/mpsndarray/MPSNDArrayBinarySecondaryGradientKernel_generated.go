@@ -18,7 +18,9 @@ type ArrayBinarySecondaryGradientKernel struct {
 }
 
 // Unwrap returns the underlying [raw.MPSNDArrayBinarySecondaryGradientKernel].
-func (x *ArrayBinarySecondaryGradientKernel) Unwrap() *raw.MPSNDArrayBinarySecondaryGradientKernel { return x.inner }
+func (x *ArrayBinarySecondaryGradientKernel) Unwrap() *raw.MPSNDArrayBinarySecondaryGradientKernel {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -55,9 +57,13 @@ func (x *ArrayBinarySecondaryGradientKernel) EncodeToCommandBufferPrimarySourceA
 	x.inner.EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientStateDestinationArray(cmdBuf, primarySourceArray, secondarySourceArray, gradient, state, destination)
 }
 
-func (x *ArrayBinarySecondaryGradientKernel) asArrayMultiaryGradientKernel() *raw.MPSNDArrayMultiaryGradientKernel { return &x.inner.MPSNDArrayMultiaryGradientKernel }
+func (x *ArrayBinarySecondaryGradientKernel) asArrayMultiaryGradientKernel() *raw.MPSNDArrayMultiaryGradientKernel {
+	return &x.inner.MPSNDArrayMultiaryGradientKernel
+}
 
-func (x *ArrayBinarySecondaryGradientKernel) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase }
+func (x *ArrayBinarySecondaryGradientKernel) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase {
+	return &x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase
+}
 
 // ArrayBinarySecondaryGradientKernelable is the interface implemented by [ArrayBinarySecondaryGradientKernel], for mocking and DI.
 type ArrayBinarySecondaryGradientKernelable interface {
@@ -68,4 +74,3 @@ type ArrayBinarySecondaryGradientKernelable interface {
 }
 
 var _ ArrayBinarySecondaryGradientKernelable = (*ArrayBinarySecondaryGradientKernel)(nil)
-

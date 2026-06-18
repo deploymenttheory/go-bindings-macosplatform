@@ -11,13 +11,16 @@ import (
 
 func GameSaveVersionNumber() float64 {
 	ptr, _ := purego.Dlsym(_gamesaveLib, "GameSaveVersionNumber")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func GameSaveVersionString() []unsafe.Pointer {
 	ptr, _ := purego.Dlsym(_gamesaveLib, "GameSaveVersionString")
-	if ptr == 0 { return []unsafe.Pointer{} }
+	if ptr == 0 {
+		return []unsafe.Pointer{}
+	}
 	return *(*[]unsafe.Pointer)(unsafe.Pointer(ptr))
 }
-

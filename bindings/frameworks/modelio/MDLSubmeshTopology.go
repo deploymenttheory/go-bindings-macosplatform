@@ -16,28 +16,28 @@ type MDLSubmeshTopology struct {
 }
 
 var (
-	_clsMDLSubmeshTopology = _objcClass("MDLSubmeshTopology")
-	_mDLSubmeshTopologySelInitWithSubmesh = objc.RegisterName("initWithSubmesh:")
-	_mDLSubmeshTopologySelFaceTopology = objc.RegisterName("faceTopology")
-	_mDLSubmeshTopologySelSetFaceTopology = objc.RegisterName("setFaceTopology:")
-	_mDLSubmeshTopologySelFaceCount = objc.RegisterName("faceCount")
-	_mDLSubmeshTopologySelSetFaceCount = objc.RegisterName("setFaceCount:")
-	_mDLSubmeshTopologySelVertexCreaseIndices = objc.RegisterName("vertexCreaseIndices")
+	_clsMDLSubmeshTopology                       = _objcClass("MDLSubmeshTopology")
+	_mDLSubmeshTopologySelInitWithSubmesh        = objc.RegisterName("initWithSubmesh:")
+	_mDLSubmeshTopologySelFaceTopology           = objc.RegisterName("faceTopology")
+	_mDLSubmeshTopologySelSetFaceTopology        = objc.RegisterName("setFaceTopology:")
+	_mDLSubmeshTopologySelFaceCount              = objc.RegisterName("faceCount")
+	_mDLSubmeshTopologySelSetFaceCount           = objc.RegisterName("setFaceCount:")
+	_mDLSubmeshTopologySelVertexCreaseIndices    = objc.RegisterName("vertexCreaseIndices")
 	_mDLSubmeshTopologySelSetVertexCreaseIndices = objc.RegisterName("setVertexCreaseIndices:")
-	_mDLSubmeshTopologySelVertexCreases = objc.RegisterName("vertexCreases")
-	_mDLSubmeshTopologySelSetVertexCreases = objc.RegisterName("setVertexCreases:")
-	_mDLSubmeshTopologySelVertexCreaseCount = objc.RegisterName("vertexCreaseCount")
-	_mDLSubmeshTopologySelSetVertexCreaseCount = objc.RegisterName("setVertexCreaseCount:")
-	_mDLSubmeshTopologySelEdgeCreaseIndices = objc.RegisterName("edgeCreaseIndices")
-	_mDLSubmeshTopologySelSetEdgeCreaseIndices = objc.RegisterName("setEdgeCreaseIndices:")
-	_mDLSubmeshTopologySelEdgeCreases = objc.RegisterName("edgeCreases")
-	_mDLSubmeshTopologySelSetEdgeCreases = objc.RegisterName("setEdgeCreases:")
-	_mDLSubmeshTopologySelEdgeCreaseCount = objc.RegisterName("edgeCreaseCount")
-	_mDLSubmeshTopologySelSetEdgeCreaseCount = objc.RegisterName("setEdgeCreaseCount:")
-	_mDLSubmeshTopologySelHoles = objc.RegisterName("holes")
-	_mDLSubmeshTopologySelSetHoles = objc.RegisterName("setHoles:")
-	_mDLSubmeshTopologySelHoleCount = objc.RegisterName("holeCount")
-	_mDLSubmeshTopologySelSetHoleCount = objc.RegisterName("setHoleCount:")
+	_mDLSubmeshTopologySelVertexCreases          = objc.RegisterName("vertexCreases")
+	_mDLSubmeshTopologySelSetVertexCreases       = objc.RegisterName("setVertexCreases:")
+	_mDLSubmeshTopologySelVertexCreaseCount      = objc.RegisterName("vertexCreaseCount")
+	_mDLSubmeshTopologySelSetVertexCreaseCount   = objc.RegisterName("setVertexCreaseCount:")
+	_mDLSubmeshTopologySelEdgeCreaseIndices      = objc.RegisterName("edgeCreaseIndices")
+	_mDLSubmeshTopologySelSetEdgeCreaseIndices   = objc.RegisterName("setEdgeCreaseIndices:")
+	_mDLSubmeshTopologySelEdgeCreases            = objc.RegisterName("edgeCreases")
+	_mDLSubmeshTopologySelSetEdgeCreases         = objc.RegisterName("setEdgeCreases:")
+	_mDLSubmeshTopologySelEdgeCreaseCount        = objc.RegisterName("edgeCreaseCount")
+	_mDLSubmeshTopologySelSetEdgeCreaseCount     = objc.RegisterName("setEdgeCreaseCount:")
+	_mDLSubmeshTopologySelHoles                  = objc.RegisterName("holes")
+	_mDLSubmeshTopologySelSetHoles               = objc.RegisterName("setHoles:")
+	_mDLSubmeshTopologySelHoleCount              = objc.RegisterName("holeCount")
+	_mDLSubmeshTopologySelSetHoleCount           = objc.RegisterName("setHoleCount:")
 )
 
 func MDLSubmeshTopologyFromID(id objc.ID) *MDLSubmeshTopology {
@@ -53,7 +53,9 @@ func MDLSubmeshTopologyFromID(id objc.ID) *MDLSubmeshTopology {
 // @method initWithSubmesh: @abstract create a topology object corresponding to the topology in the submesh
 func (o *MDLSubmeshTopology) InitWithSubmesh(submesh *MDLSubmesh) *MDLSubmeshTopology {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLSubmeshTopologySelInitWithSubmesh, submesh.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLSubmeshTopologyFromID(_ret)
 }
 
@@ -154,4 +156,3 @@ func (o *MDLSubmeshTopology) HoleCount() uint {
 func (o *MDLSubmeshTopology) SetHoleCount(holeCount uint) {
 	o.Ptr().Send(_mDLSubmeshTopologySelSetHoleCount, holeCount)
 }
-

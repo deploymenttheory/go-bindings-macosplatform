@@ -59,4 +59,3 @@ type ZoomRangeable interface {
 }
 
 var _ ZoomRangeable = (*ZoomRange)(nil)
-

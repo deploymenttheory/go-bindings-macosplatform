@@ -18,7 +18,8 @@ func LAErrorDomain() uintptr {
 // The maximum value for LAContext touchIDAuthenticationAllowableReuseDuration property.
 func LATouchIDAuthenticationMaximumAllowableReuseDuration() float64 {
 	ptr, _ := purego.Dlsym(_localauthenticationLib, "LATouchIDAuthenticationMaximumAllowableReuseDuration")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
-

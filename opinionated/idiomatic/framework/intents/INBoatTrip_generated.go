@@ -97,4 +97,3 @@ type BoatTripable interface {
 }
 
 var _ BoatTripable = (*BoatTrip)(nil)
-

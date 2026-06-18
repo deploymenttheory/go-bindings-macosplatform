@@ -19,24 +19,24 @@ type PDFSelection struct {
 }
 
 var (
-	_clsPDFSelection = _objcClass("PDFSelection")
-	_pDFSelectionSelInitWithDocument = objc.RegisterName("initWithDocument:")
-	_pDFSelectionSelBoundsForPage = objc.RegisterName("boundsForPage:")
-	_pDFSelectionSelNumberOfTextRangesOnPage = objc.RegisterName("numberOfTextRangesOnPage:")
-	_pDFSelectionSelRangeAtIndexOnPage = objc.RegisterName("rangeAtIndex:onPage:")
-	_pDFSelectionSelSelectionsByLine = objc.RegisterName("selectionsByLine")
-	_pDFSelectionSelAddSelection = objc.RegisterName("addSelection:")
-	_pDFSelectionSelAddSelections = objc.RegisterName("addSelections:")
-	_pDFSelectionSelExtendSelectionAtEnd = objc.RegisterName("extendSelectionAtEnd:")
-	_pDFSelectionSelExtendSelectionAtStart = objc.RegisterName("extendSelectionAtStart:")
+	_clsPDFSelection                                 = _objcClass("PDFSelection")
+	_pDFSelectionSelInitWithDocument                 = objc.RegisterName("initWithDocument:")
+	_pDFSelectionSelBoundsForPage                    = objc.RegisterName("boundsForPage:")
+	_pDFSelectionSelNumberOfTextRangesOnPage         = objc.RegisterName("numberOfTextRangesOnPage:")
+	_pDFSelectionSelRangeAtIndexOnPage               = objc.RegisterName("rangeAtIndex:onPage:")
+	_pDFSelectionSelSelectionsByLine                 = objc.RegisterName("selectionsByLine")
+	_pDFSelectionSelAddSelection                     = objc.RegisterName("addSelection:")
+	_pDFSelectionSelAddSelections                    = objc.RegisterName("addSelections:")
+	_pDFSelectionSelExtendSelectionAtEnd             = objc.RegisterName("extendSelectionAtEnd:")
+	_pDFSelectionSelExtendSelectionAtStart           = objc.RegisterName("extendSelectionAtStart:")
 	_pDFSelectionSelExtendSelectionForLineBoundaries = objc.RegisterName("extendSelectionForLineBoundaries")
-	_pDFSelectionSelDrawForPageActive = objc.RegisterName("drawForPage:active:")
-	_pDFSelectionSelDrawForPageWithBoxActive = objc.RegisterName("drawForPage:withBox:active:")
-	_pDFSelectionSelPages = objc.RegisterName("pages")
-	_pDFSelectionSelColor = objc.RegisterName("color")
-	_pDFSelectionSelSetColor = objc.RegisterName("setColor:")
-	_pDFSelectionSelString = objc.RegisterName("string")
-	_pDFSelectionSelAttributedString = objc.RegisterName("attributedString")
+	_pDFSelectionSelDrawForPageActive                = objc.RegisterName("drawForPage:active:")
+	_pDFSelectionSelDrawForPageWithBoxActive         = objc.RegisterName("drawForPage:withBox:active:")
+	_pDFSelectionSelPages                            = objc.RegisterName("pages")
+	_pDFSelectionSelColor                            = objc.RegisterName("color")
+	_pDFSelectionSelSetColor                         = objc.RegisterName("setColor:")
+	_pDFSelectionSelString                           = objc.RegisterName("string")
+	_pDFSelectionSelAttributedString                 = objc.RegisterName("attributedString")
 )
 
 func PDFSelectionFromID(id objc.ID) *PDFSelection {
@@ -51,7 +51,9 @@ func PDFSelectionFromID(id objc.ID) *PDFSelection {
 
 func (o *PDFSelection) InitWithDocument(document *PDFDocument) *PDFSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFSelectionSelInitWithDocument, document.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFSelectionFromID(_ret)
 }
 
@@ -72,7 +74,9 @@ func (o *PDFSelection) RangeAtIndexOnPage(index uint, page *PDFPage) foundation.
 
 func (o *PDFSelection) SelectionsByLine() *foundation.NSArray[*PDFSelection] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFSelectionSelSelectionsByLine)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PDFSelection](_ret)
 }
 
@@ -106,7 +110,9 @@ func (o *PDFSelection) DrawForPageWithBoxActive(page *PDFPage, box PDFDisplayBox
 
 func (o *PDFSelection) Pages() *foundation.NSArray[*PDFPage] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFSelectionSelPages)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PDFPage](_ret)
 }
 
@@ -121,13 +127,16 @@ func (o *PDFSelection) SetColor(color unsafe.Pointer) {
 
 func (o *PDFSelection) String() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFSelectionSelString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PDFSelection) AttributedString() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFSelectionSelAttributedString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
-

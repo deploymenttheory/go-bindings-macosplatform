@@ -41,11 +41,17 @@ func (x *NETransparentProxyProvider) WithReasserting(reasserting bool) *NETransp
 	return x
 }
 
-func (x *NETransparentProxyProvider) asNEAppProxyProvider() *raw.NEAppProxyProvider { return &x.inner.NEAppProxyProvider }
+func (x *NETransparentProxyProvider) asNEAppProxyProvider() *raw.NEAppProxyProvider {
+	return &x.inner.NEAppProxyProvider
+}
 
-func (x *NETransparentProxyProvider) asNETunnelProvider() *raw.NETunnelProvider { return &x.inner.NEAppProxyProvider.NETunnelProvider }
+func (x *NETransparentProxyProvider) asNETunnelProvider() *raw.NETunnelProvider {
+	return &x.inner.NEAppProxyProvider.NETunnelProvider
+}
 
-func (x *NETransparentProxyProvider) asNEProvider() *raw.NEProvider { return &x.inner.NEAppProxyProvider.NETunnelProvider.NEProvider }
+func (x *NETransparentProxyProvider) asNEProvider() *raw.NEProvider {
+	return &x.inner.NEAppProxyProvider.NETunnelProvider.NEProvider
+}
 
 // NETransparentProxyProviderable is the interface implemented by [NETransparentProxyProvider], for mocking and DI.
 type NETransparentProxyProviderable interface {
@@ -54,4 +60,3 @@ type NETransparentProxyProviderable interface {
 }
 
 var _ NETransparentProxyProviderable = (*NETransparentProxyProvider)(nil)
-

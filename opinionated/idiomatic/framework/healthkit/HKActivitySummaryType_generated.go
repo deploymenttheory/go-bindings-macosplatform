@@ -43,4 +43,3 @@ type ActivitySummaryTypeable interface {
 }
 
 var _ ActivitySummaryTypeable = (*ActivitySummaryType)(nil)
-

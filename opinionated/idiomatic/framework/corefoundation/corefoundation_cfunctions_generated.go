@@ -4179,4 +4179,3 @@ func CFStringMakeConstantString(cStr string) unsafe.Pointer {
 func BuiltinConstantP() int {
 	return raw.BuiltinConstantP()
 }
-

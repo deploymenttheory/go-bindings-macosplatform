@@ -16,11 +16,11 @@ type MTREventRequestPath struct {
 }
 
 var (
-	_clsMTREventRequestPath = _objcClass("MTREventRequestPath")
+	_clsMTREventRequestPath                                          = _objcClass("MTREventRequestPath")
 	_mTREventRequestPathSelRequestPathWithEndpointIDClusterIDEventID = objc.RegisterName("requestPathWithEndpointID:clusterID:eventID:")
-	_mTREventRequestPathSelEndpoint = objc.RegisterName("endpoint")
-	_mTREventRequestPathSelCluster = objc.RegisterName("cluster")
-	_mTREventRequestPathSelEvent = objc.RegisterName("event")
+	_mTREventRequestPathSelEndpoint                                  = objc.RegisterName("endpoint")
+	_mTREventRequestPathSelCluster                                   = objc.RegisterName("cluster")
+	_mTREventRequestPathSelEvent                                     = objc.RegisterName("event")
 )
 
 func MTREventRequestPathFromID(id objc.ID) *MTREventRequestPath {
@@ -35,25 +35,32 @@ func MTREventRequestPathFromID(id objc.ID) *MTREventRequestPath {
 
 func MTREventRequestPathRequestPathWithEndpointIDClusterIDEventID(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, eventID *foundation.NSNumber) *MTREventRequestPath {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTREventRequestPath), _mTREventRequestPathSelRequestPathWithEndpointIDClusterIDEventID, endpointID.Ptr(), clusterID.Ptr(), eventID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTREventRequestPathFromID(_ret)
 }
 
 func (o *MTREventRequestPath) Endpoint() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREventRequestPathSelEndpoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTREventRequestPath) Cluster() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREventRequestPathSelCluster)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTREventRequestPath) Event() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREventRequestPathSelEvent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
-

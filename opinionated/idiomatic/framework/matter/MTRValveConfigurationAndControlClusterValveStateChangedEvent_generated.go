@@ -16,11 +16,15 @@ type MTRValveConfigurationAndControlClusterValveStateChangedEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRValveConfigurationAndControlClusterValveStateChangedEvent].
-func (x *MTRValveConfigurationAndControlClusterValveStateChangedEvent) Unwrap() *raw.MTRValveConfigurationAndControlClusterValveStateChangedEvent { return x.inner }
+func (x *MTRValveConfigurationAndControlClusterValveStateChangedEvent) Unwrap() *raw.MTRValveConfigurationAndControlClusterValveStateChangedEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRValveConfigurationAndControlClusterValveStateChangedEvent) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRValveConfigurationAndControlClusterValveStateChangedEvent) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRValveConfigurationAndControlClusterValveStateChangedEventFromID adopts an existing object pointer as a MTRValveConfigurationAndControlClusterValveStateChangedEvent (nil for 0).
 func MTRValveConfigurationAndControlClusterValveStateChangedEventFromID(id objc.ID) *MTRValveConfigurationAndControlClusterValveStateChangedEvent {
@@ -80,4 +84,3 @@ type MTRValveConfigurationAndControlClusterValveStateChangedEventable interface 
 }
 
 var _ MTRValveConfigurationAndControlClusterValveStateChangedEventable = (*MTRValveConfigurationAndControlClusterValveStateChangedEvent)(nil)
-

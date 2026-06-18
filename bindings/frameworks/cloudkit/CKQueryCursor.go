@@ -26,4 +26,3 @@ func CKQueryCursorFromID(id objc.ID) *CKQueryCursor {
 	purego.Track(o)
 	return o
 }
-

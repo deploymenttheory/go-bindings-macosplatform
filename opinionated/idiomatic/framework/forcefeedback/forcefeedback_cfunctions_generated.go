@@ -108,4 +108,3 @@ func FFIsForceFeedback(hidDevice uint) unsafe.Pointer {
 func FFReleaseDevice(deviceReference unsafe.Pointer) unsafe.Pointer {
 	return raw.FFReleaseDevice(deviceReference)
 }
-

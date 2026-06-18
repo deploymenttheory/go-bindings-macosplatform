@@ -27,4 +27,3 @@ func IKImageBrowserViewFromID(id objc.ID) *IKImageBrowserView {
 	purego.Track(o)
 	return o
 }
-

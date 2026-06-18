@@ -15,7 +15,9 @@ type EnvelopeDistanceModelParameters struct {
 }
 
 // Unwrap returns the underlying [raw.PHASEEnvelopeDistanceModelParameters].
-func (x *EnvelopeDistanceModelParameters) Unwrap() *raw.PHASEEnvelopeDistanceModelParameters { return x.inner }
+func (x *EnvelopeDistanceModelParameters) Unwrap() *raw.PHASEEnvelopeDistanceModelParameters {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -51,7 +53,9 @@ func (x *EnvelopeDistanceModelParameters) Envelope() *Envelope {
 	return &Envelope{inner: _r}
 }
 
-func (x *EnvelopeDistanceModelParameters) asDistanceModelParameters() *raw.PHASEDistanceModelParameters { return &x.inner.PHASEDistanceModelParameters }
+func (x *EnvelopeDistanceModelParameters) asDistanceModelParameters() *raw.PHASEDistanceModelParameters {
+	return &x.inner.PHASEDistanceModelParameters
+}
 
 // EnvelopeDistanceModelParametersable is the interface implemented by [EnvelopeDistanceModelParameters], for mocking and DI.
 type EnvelopeDistanceModelParametersable interface {
@@ -61,4 +65,3 @@ type EnvelopeDistanceModelParametersable interface {
 }
 
 var _ EnvelopeDistanceModelParametersable = (*EnvelopeDistanceModelParameters)(nil)
-

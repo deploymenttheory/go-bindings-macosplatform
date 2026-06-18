@@ -20,112 +20,112 @@ type AUAudioUnit struct {
 }
 
 var (
-	_clsAUAudioUnit = _objcClass("AUAudioUnit")
-	_aUAudioUnitSelInitWithComponentDescriptionOptionsError = objc.RegisterName("initWithComponentDescription:options:error:")
-	_aUAudioUnitSelInitWithComponentDescriptionError = objc.RegisterName("initWithComponentDescription:error:")
+	_clsAUAudioUnit                                                            = _objcClass("AUAudioUnit")
+	_aUAudioUnitSelInitWithComponentDescriptionOptionsError                    = objc.RegisterName("initWithComponentDescription:options:error:")
+	_aUAudioUnitSelInitWithComponentDescriptionError                           = objc.RegisterName("initWithComponentDescription:error:")
 	_aUAudioUnitSelInstantiateWithComponentDescriptionOptionsCompletionHandler = objc.RegisterName("instantiateWithComponentDescription:options:completionHandler:")
-	_aUAudioUnitSelAllocateRenderResourcesAndReturnError = objc.RegisterName("allocateRenderResourcesAndReturnError:")
-	_aUAudioUnitSelDeallocateRenderResources = objc.RegisterName("deallocateRenderResources")
-	_aUAudioUnitSelReset = objc.RegisterName("reset")
-	_aUAudioUnitSelTokenByAddingRenderObserver = objc.RegisterName("tokenByAddingRenderObserver:")
-	_aUAudioUnitSelRemoveRenderObserver = objc.RegisterName("removeRenderObserver:")
-	_aUAudioUnitSelParametersForOverviewWithCount = objc.RegisterName("parametersForOverviewWithCount:")
-	_aUAudioUnitSelSaveUserPresetError = objc.RegisterName("saveUserPreset:error:")
-	_aUAudioUnitSelDeleteUserPresetError = objc.RegisterName("deleteUserPreset:error:")
-	_aUAudioUnitSelPresetStateForError = objc.RegisterName("presetStateFor:error:")
-	_aUAudioUnitSelProfileStateForCableChannel = objc.RegisterName("profileStateForCable:channel:")
-	_aUAudioUnitSelEnableProfileCableOnChannelError = objc.RegisterName("enableProfile:cable:onChannel:error:")
-	_aUAudioUnitSelDisableProfileCableOnChannelError = objc.RegisterName("disableProfile:cable:onChannel:error:")
-	_aUAudioUnitSelMessageChannelFor = objc.RegisterName("messageChannelFor:")
-	_aUAudioUnitSelComponentDescription = objc.RegisterName("componentDescription")
-	_aUAudioUnitSelComponent = objc.RegisterName("component")
-	_aUAudioUnitSelComponentName = objc.RegisterName("componentName")
-	_aUAudioUnitSelAudioUnitName = objc.RegisterName("audioUnitName")
-	_aUAudioUnitSelManufacturerName = objc.RegisterName("manufacturerName")
-	_aUAudioUnitSelAudioUnitShortName = objc.RegisterName("audioUnitShortName")
-	_aUAudioUnitSelComponentVersion = objc.RegisterName("componentVersion")
-	_aUAudioUnitSelRenderResourcesAllocated = objc.RegisterName("renderResourcesAllocated")
-	_aUAudioUnitSelInputBusses = objc.RegisterName("inputBusses")
-	_aUAudioUnitSelOutputBusses = objc.RegisterName("outputBusses")
-	_aUAudioUnitSelRenderBlock = objc.RegisterName("renderBlock")
-	_aUAudioUnitSelScheduleParameterBlock = objc.RegisterName("scheduleParameterBlock")
-	_aUAudioUnitSelMaximumFramesToRender = objc.RegisterName("maximumFramesToRender")
-	_aUAudioUnitSelSetMaximumFramesToRender = objc.RegisterName("setMaximumFramesToRender:")
-	_aUAudioUnitSelParameterTree = objc.RegisterName("parameterTree")
-	_aUAudioUnitSelSetParameterTree = objc.RegisterName("setParameterTree:")
-	_aUAudioUnitSelAllParameterValues = objc.RegisterName("allParameterValues")
-	_aUAudioUnitSelIsMusicDeviceOrEffect = objc.RegisterName("isMusicDeviceOrEffect")
-	_aUAudioUnitSelVirtualMIDICableCount = objc.RegisterName("virtualMIDICableCount")
-	_aUAudioUnitSelScheduleMIDIEventBlock = objc.RegisterName("scheduleMIDIEventBlock")
-	_aUAudioUnitSelScheduleMIDIEventListBlock = objc.RegisterName("scheduleMIDIEventListBlock")
-	_aUAudioUnitSelMIDIOutputNames = objc.RegisterName("MIDIOutputNames")
-	_aUAudioUnitSelProvidesUserInterface = objc.RegisterName("providesUserInterface")
-	_aUAudioUnitSelMIDIOutputEventBlock = objc.RegisterName("MIDIOutputEventBlock")
-	_aUAudioUnitSelSetMIDIOutputEventBlock = objc.RegisterName("setMIDIOutputEventBlock:")
-	_aUAudioUnitSelMIDIOutputEventListBlock = objc.RegisterName("MIDIOutputEventListBlock")
-	_aUAudioUnitSelSetMIDIOutputEventListBlock = objc.RegisterName("setMIDIOutputEventListBlock:")
-	_aUAudioUnitSelAudioUnitMIDIProtocol = objc.RegisterName("AudioUnitMIDIProtocol")
-	_aUAudioUnitSelHostMIDIProtocol = objc.RegisterName("hostMIDIProtocol")
-	_aUAudioUnitSelSetHostMIDIProtocol = objc.RegisterName("setHostMIDIProtocol:")
-	_aUAudioUnitSelFullState = objc.RegisterName("fullState")
-	_aUAudioUnitSelSetFullState = objc.RegisterName("setFullState:")
-	_aUAudioUnitSelFullStateForDocument = objc.RegisterName("fullStateForDocument")
-	_aUAudioUnitSelSetFullStateForDocument = objc.RegisterName("setFullStateForDocument:")
-	_aUAudioUnitSelFactoryPresets = objc.RegisterName("factoryPresets")
-	_aUAudioUnitSelUserPresets = objc.RegisterName("userPresets")
-	_aUAudioUnitSelSupportsUserPresets = objc.RegisterName("supportsUserPresets")
-	_aUAudioUnitSelIsLoadedInProcess = objc.RegisterName("isLoadedInProcess")
-	_aUAudioUnitSelCurrentPreset = objc.RegisterName("currentPreset")
-	_aUAudioUnitSelSetCurrentPreset = objc.RegisterName("setCurrentPreset:")
-	_aUAudioUnitSelLatency = objc.RegisterName("latency")
-	_aUAudioUnitSelTailTime = objc.RegisterName("tailTime")
-	_aUAudioUnitSelRenderQuality = objc.RegisterName("renderQuality")
-	_aUAudioUnitSelSetRenderQuality = objc.RegisterName("setRenderQuality:")
-	_aUAudioUnitSelShouldBypassEffect = objc.RegisterName("shouldBypassEffect")
-	_aUAudioUnitSelSetShouldBypassEffect = objc.RegisterName("setShouldBypassEffect:")
-	_aUAudioUnitSelCanProcessInPlace = objc.RegisterName("canProcessInPlace")
-	_aUAudioUnitSelIsRenderingOffline = objc.RegisterName("isRenderingOffline")
-	_aUAudioUnitSelSetRenderingOffline = objc.RegisterName("setRenderingOffline:")
-	_aUAudioUnitSelChannelCapabilities = objc.RegisterName("channelCapabilities")
-	_aUAudioUnitSelMusicalContextBlock = objc.RegisterName("musicalContextBlock")
-	_aUAudioUnitSelSetMusicalContextBlock = objc.RegisterName("setMusicalContextBlock:")
-	_aUAudioUnitSelTransportStateBlock = objc.RegisterName("transportStateBlock")
-	_aUAudioUnitSelSetTransportStateBlock = objc.RegisterName("setTransportStateBlock:")
-	_aUAudioUnitSelContextName = objc.RegisterName("contextName")
-	_aUAudioUnitSelSetContextName = objc.RegisterName("setContextName:")
-	_aUAudioUnitSelMigrateFromPlugin = objc.RegisterName("migrateFromPlugin")
-	_aUAudioUnitSelSupportsMPE = objc.RegisterName("supportsMPE")
-	_aUAudioUnitSelChannelMap = objc.RegisterName("channelMap")
-	_aUAudioUnitSelSetChannelMap = objc.RegisterName("setChannelMap:")
-	_aUAudioUnitSelProfileChangedBlock = objc.RegisterName("profileChangedBlock")
-	_aUAudioUnitSelSetProfileChangedBlock = objc.RegisterName("setProfileChangedBlock:")
-	_aUAudioUnitSelSetDeviceIDError = objc.RegisterName("setDeviceID:error:")
-	_aUAudioUnitSelStartHardwareAndReturnError = objc.RegisterName("startHardwareAndReturnError:")
-	_aUAudioUnitSelStopHardware = objc.RegisterName("stopHardware")
-	_aUAudioUnitSelCanPerformInput = objc.RegisterName("canPerformInput")
-	_aUAudioUnitSelCanPerformOutput = objc.RegisterName("canPerformOutput")
-	_aUAudioUnitSelIsInputEnabled = objc.RegisterName("isInputEnabled")
-	_aUAudioUnitSelSetInputEnabled = objc.RegisterName("setInputEnabled:")
-	_aUAudioUnitSelIsOutputEnabled = objc.RegisterName("isOutputEnabled")
-	_aUAudioUnitSelSetOutputEnabled = objc.RegisterName("setOutputEnabled:")
-	_aUAudioUnitSelOutputProvider = objc.RegisterName("outputProvider")
-	_aUAudioUnitSelSetOutputProvider = objc.RegisterName("setOutputProvider:")
-	_aUAudioUnitSelInputHandler = objc.RegisterName("inputHandler")
-	_aUAudioUnitSelSetInputHandler = objc.RegisterName("setInputHandler:")
-	_aUAudioUnitSelDeviceID = objc.RegisterName("deviceID")
-	_aUAudioUnitSelDeviceInputLatency = objc.RegisterName("deviceInputLatency")
-	_aUAudioUnitSelDeviceOutputLatency = objc.RegisterName("deviceOutputLatency")
-	_aUAudioUnitSelIsRunning = objc.RegisterName("isRunning")
-	_aUAudioUnitSelOsWorkgroup = objc.RegisterName("osWorkgroup")
-	_aUAudioUnitSelIntendedSpatialExperience = objc.RegisterName("intendedSpatialExperience")
-	_aUAudioUnitSelSetIntendedSpatialExperience = objc.RegisterName("setIntendedSpatialExperience:")
-	_aUAudioUnitSelRegisterSubclassAsComponentDescriptionNameVersion = objc.RegisterName("registerSubclass:asComponentDescription:name:version:")
-	_aUAudioUnitSelShouldChangeToFormatForBus = objc.RegisterName("shouldChangeToFormat:forBus:")
-	_aUAudioUnitSelSetRenderResourcesAllocated = objc.RegisterName("setRenderResourcesAllocated:")
-	_aUAudioUnitSelInternalRenderBlock = objc.RegisterName("internalRenderBlock")
-	_aUAudioUnitSelRenderContextObserver = objc.RegisterName("renderContextObserver")
-	_aUAudioUnitSelMIDIOutputBufferSizeHint = objc.RegisterName("MIDIOutputBufferSizeHint")
-	_aUAudioUnitSelSetMIDIOutputBufferSizeHint = objc.RegisterName("setMIDIOutputBufferSizeHint:")
+	_aUAudioUnitSelAllocateRenderResourcesAndReturnError                       = objc.RegisterName("allocateRenderResourcesAndReturnError:")
+	_aUAudioUnitSelDeallocateRenderResources                                   = objc.RegisterName("deallocateRenderResources")
+	_aUAudioUnitSelReset                                                       = objc.RegisterName("reset")
+	_aUAudioUnitSelTokenByAddingRenderObserver                                 = objc.RegisterName("tokenByAddingRenderObserver:")
+	_aUAudioUnitSelRemoveRenderObserver                                        = objc.RegisterName("removeRenderObserver:")
+	_aUAudioUnitSelParametersForOverviewWithCount                              = objc.RegisterName("parametersForOverviewWithCount:")
+	_aUAudioUnitSelSaveUserPresetError                                         = objc.RegisterName("saveUserPreset:error:")
+	_aUAudioUnitSelDeleteUserPresetError                                       = objc.RegisterName("deleteUserPreset:error:")
+	_aUAudioUnitSelPresetStateForError                                         = objc.RegisterName("presetStateFor:error:")
+	_aUAudioUnitSelProfileStateForCableChannel                                 = objc.RegisterName("profileStateForCable:channel:")
+	_aUAudioUnitSelEnableProfileCableOnChannelError                            = objc.RegisterName("enableProfile:cable:onChannel:error:")
+	_aUAudioUnitSelDisableProfileCableOnChannelError                           = objc.RegisterName("disableProfile:cable:onChannel:error:")
+	_aUAudioUnitSelMessageChannelFor                                           = objc.RegisterName("messageChannelFor:")
+	_aUAudioUnitSelComponentDescription                                        = objc.RegisterName("componentDescription")
+	_aUAudioUnitSelComponent                                                   = objc.RegisterName("component")
+	_aUAudioUnitSelComponentName                                               = objc.RegisterName("componentName")
+	_aUAudioUnitSelAudioUnitName                                               = objc.RegisterName("audioUnitName")
+	_aUAudioUnitSelManufacturerName                                            = objc.RegisterName("manufacturerName")
+	_aUAudioUnitSelAudioUnitShortName                                          = objc.RegisterName("audioUnitShortName")
+	_aUAudioUnitSelComponentVersion                                            = objc.RegisterName("componentVersion")
+	_aUAudioUnitSelRenderResourcesAllocated                                    = objc.RegisterName("renderResourcesAllocated")
+	_aUAudioUnitSelInputBusses                                                 = objc.RegisterName("inputBusses")
+	_aUAudioUnitSelOutputBusses                                                = objc.RegisterName("outputBusses")
+	_aUAudioUnitSelRenderBlock                                                 = objc.RegisterName("renderBlock")
+	_aUAudioUnitSelScheduleParameterBlock                                      = objc.RegisterName("scheduleParameterBlock")
+	_aUAudioUnitSelMaximumFramesToRender                                       = objc.RegisterName("maximumFramesToRender")
+	_aUAudioUnitSelSetMaximumFramesToRender                                    = objc.RegisterName("setMaximumFramesToRender:")
+	_aUAudioUnitSelParameterTree                                               = objc.RegisterName("parameterTree")
+	_aUAudioUnitSelSetParameterTree                                            = objc.RegisterName("setParameterTree:")
+	_aUAudioUnitSelAllParameterValues                                          = objc.RegisterName("allParameterValues")
+	_aUAudioUnitSelIsMusicDeviceOrEffect                                       = objc.RegisterName("isMusicDeviceOrEffect")
+	_aUAudioUnitSelVirtualMIDICableCount                                       = objc.RegisterName("virtualMIDICableCount")
+	_aUAudioUnitSelScheduleMIDIEventBlock                                      = objc.RegisterName("scheduleMIDIEventBlock")
+	_aUAudioUnitSelScheduleMIDIEventListBlock                                  = objc.RegisterName("scheduleMIDIEventListBlock")
+	_aUAudioUnitSelMIDIOutputNames                                             = objc.RegisterName("MIDIOutputNames")
+	_aUAudioUnitSelProvidesUserInterface                                       = objc.RegisterName("providesUserInterface")
+	_aUAudioUnitSelMIDIOutputEventBlock                                        = objc.RegisterName("MIDIOutputEventBlock")
+	_aUAudioUnitSelSetMIDIOutputEventBlock                                     = objc.RegisterName("setMIDIOutputEventBlock:")
+	_aUAudioUnitSelMIDIOutputEventListBlock                                    = objc.RegisterName("MIDIOutputEventListBlock")
+	_aUAudioUnitSelSetMIDIOutputEventListBlock                                 = objc.RegisterName("setMIDIOutputEventListBlock:")
+	_aUAudioUnitSelAudioUnitMIDIProtocol                                       = objc.RegisterName("AudioUnitMIDIProtocol")
+	_aUAudioUnitSelHostMIDIProtocol                                            = objc.RegisterName("hostMIDIProtocol")
+	_aUAudioUnitSelSetHostMIDIProtocol                                         = objc.RegisterName("setHostMIDIProtocol:")
+	_aUAudioUnitSelFullState                                                   = objc.RegisterName("fullState")
+	_aUAudioUnitSelSetFullState                                                = objc.RegisterName("setFullState:")
+	_aUAudioUnitSelFullStateForDocument                                        = objc.RegisterName("fullStateForDocument")
+	_aUAudioUnitSelSetFullStateForDocument                                     = objc.RegisterName("setFullStateForDocument:")
+	_aUAudioUnitSelFactoryPresets                                              = objc.RegisterName("factoryPresets")
+	_aUAudioUnitSelUserPresets                                                 = objc.RegisterName("userPresets")
+	_aUAudioUnitSelSupportsUserPresets                                         = objc.RegisterName("supportsUserPresets")
+	_aUAudioUnitSelIsLoadedInProcess                                           = objc.RegisterName("isLoadedInProcess")
+	_aUAudioUnitSelCurrentPreset                                               = objc.RegisterName("currentPreset")
+	_aUAudioUnitSelSetCurrentPreset                                            = objc.RegisterName("setCurrentPreset:")
+	_aUAudioUnitSelLatency                                                     = objc.RegisterName("latency")
+	_aUAudioUnitSelTailTime                                                    = objc.RegisterName("tailTime")
+	_aUAudioUnitSelRenderQuality                                               = objc.RegisterName("renderQuality")
+	_aUAudioUnitSelSetRenderQuality                                            = objc.RegisterName("setRenderQuality:")
+	_aUAudioUnitSelShouldBypassEffect                                          = objc.RegisterName("shouldBypassEffect")
+	_aUAudioUnitSelSetShouldBypassEffect                                       = objc.RegisterName("setShouldBypassEffect:")
+	_aUAudioUnitSelCanProcessInPlace                                           = objc.RegisterName("canProcessInPlace")
+	_aUAudioUnitSelIsRenderingOffline                                          = objc.RegisterName("isRenderingOffline")
+	_aUAudioUnitSelSetRenderingOffline                                         = objc.RegisterName("setRenderingOffline:")
+	_aUAudioUnitSelChannelCapabilities                                         = objc.RegisterName("channelCapabilities")
+	_aUAudioUnitSelMusicalContextBlock                                         = objc.RegisterName("musicalContextBlock")
+	_aUAudioUnitSelSetMusicalContextBlock                                      = objc.RegisterName("setMusicalContextBlock:")
+	_aUAudioUnitSelTransportStateBlock                                         = objc.RegisterName("transportStateBlock")
+	_aUAudioUnitSelSetTransportStateBlock                                      = objc.RegisterName("setTransportStateBlock:")
+	_aUAudioUnitSelContextName                                                 = objc.RegisterName("contextName")
+	_aUAudioUnitSelSetContextName                                              = objc.RegisterName("setContextName:")
+	_aUAudioUnitSelMigrateFromPlugin                                           = objc.RegisterName("migrateFromPlugin")
+	_aUAudioUnitSelSupportsMPE                                                 = objc.RegisterName("supportsMPE")
+	_aUAudioUnitSelChannelMap                                                  = objc.RegisterName("channelMap")
+	_aUAudioUnitSelSetChannelMap                                               = objc.RegisterName("setChannelMap:")
+	_aUAudioUnitSelProfileChangedBlock                                         = objc.RegisterName("profileChangedBlock")
+	_aUAudioUnitSelSetProfileChangedBlock                                      = objc.RegisterName("setProfileChangedBlock:")
+	_aUAudioUnitSelSetDeviceIDError                                            = objc.RegisterName("setDeviceID:error:")
+	_aUAudioUnitSelStartHardwareAndReturnError                                 = objc.RegisterName("startHardwareAndReturnError:")
+	_aUAudioUnitSelStopHardware                                                = objc.RegisterName("stopHardware")
+	_aUAudioUnitSelCanPerformInput                                             = objc.RegisterName("canPerformInput")
+	_aUAudioUnitSelCanPerformOutput                                            = objc.RegisterName("canPerformOutput")
+	_aUAudioUnitSelIsInputEnabled                                              = objc.RegisterName("isInputEnabled")
+	_aUAudioUnitSelSetInputEnabled                                             = objc.RegisterName("setInputEnabled:")
+	_aUAudioUnitSelIsOutputEnabled                                             = objc.RegisterName("isOutputEnabled")
+	_aUAudioUnitSelSetOutputEnabled                                            = objc.RegisterName("setOutputEnabled:")
+	_aUAudioUnitSelOutputProvider                                              = objc.RegisterName("outputProvider")
+	_aUAudioUnitSelSetOutputProvider                                           = objc.RegisterName("setOutputProvider:")
+	_aUAudioUnitSelInputHandler                                                = objc.RegisterName("inputHandler")
+	_aUAudioUnitSelSetInputHandler                                             = objc.RegisterName("setInputHandler:")
+	_aUAudioUnitSelDeviceID                                                    = objc.RegisterName("deviceID")
+	_aUAudioUnitSelDeviceInputLatency                                          = objc.RegisterName("deviceInputLatency")
+	_aUAudioUnitSelDeviceOutputLatency                                         = objc.RegisterName("deviceOutputLatency")
+	_aUAudioUnitSelIsRunning                                                   = objc.RegisterName("isRunning")
+	_aUAudioUnitSelOsWorkgroup                                                 = objc.RegisterName("osWorkgroup")
+	_aUAudioUnitSelIntendedSpatialExperience                                   = objc.RegisterName("intendedSpatialExperience")
+	_aUAudioUnitSelSetIntendedSpatialExperience                                = objc.RegisterName("setIntendedSpatialExperience:")
+	_aUAudioUnitSelRegisterSubclassAsComponentDescriptionNameVersion           = objc.RegisterName("registerSubclass:asComponentDescription:name:version:")
+	_aUAudioUnitSelShouldChangeToFormatForBus                                  = objc.RegisterName("shouldChangeToFormat:forBus:")
+	_aUAudioUnitSelSetRenderResourcesAllocated                                 = objc.RegisterName("setRenderResourcesAllocated:")
+	_aUAudioUnitSelInternalRenderBlock                                         = objc.RegisterName("internalRenderBlock")
+	_aUAudioUnitSelRenderContextObserver                                       = objc.RegisterName("renderContextObserver")
+	_aUAudioUnitSelMIDIOutputBufferSizeHint                                    = objc.RegisterName("MIDIOutputBufferSizeHint")
+	_aUAudioUnitSelSetMIDIOutputBufferSizeHint                                 = objc.RegisterName("setMIDIOutputBufferSizeHint:")
 )
 
 func AUAudioUnitFromID(id objc.ID) *AUAudioUnit {
@@ -142,7 +142,9 @@ func AUAudioUnitFromID(id objc.ID) *AUAudioUnit {
 func (o *AUAudioUnit) InitWithComponentDescriptionOptionsError(componentDescription AudioComponentDescription, options AudioComponentInstantiationOptions) (*AUAudioUnit, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitSelInitWithComponentDescriptionOptionsError, componentDescription, options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -153,7 +155,9 @@ func (o *AUAudioUnit) InitWithComponentDescriptionOptionsError(componentDescript
 func (o *AUAudioUnit) InitWithComponentDescriptionError(componentDescription AudioComponentDescription) (*AUAudioUnit, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitSelInitWithComponentDescriptionError, componentDescription, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -296,28 +300,36 @@ func (o *AUAudioUnit) Component() unsafe.Pointer {
 // @property	componentName @brief		The unit's component's name. @discussion By convention, an audio unit's component name is its manufacturer's name, plus ": ", plus the audio unit's name. The audioUnitName and manufacturerName properties are derived from the component name.
 func (o *AUAudioUnit) ComponentName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitSelComponentName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property	audioUnitName @brief		The audio unit's name.
 func (o *AUAudioUnit) AudioUnitName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitSelAudioUnitName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property	manufacturerName @brief		The manufacturer's name.
 func (o *AUAudioUnit) ManufacturerName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitSelManufacturerName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property	audioUnitShortName @brief		A short name for the audio unit. @discussion Audio unit host applications can display this name in situations where the audioUnitName might be too long. The recommended length is up to 16 characters. Host applications may truncate it.
 func (o *AUAudioUnit) AudioUnitShortName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitSelAudioUnitShortName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -336,14 +348,18 @@ func (o *AUAudioUnit) RenderResourcesAllocated() bool {
 // @property	inputBusses @brief		An audio unit's audio input connection points. @discussion Subclassers must override this property's getter. The implementation should return the same object every time it is asked for it, since clients can install KVO observers on it.
 func (o *AUAudioUnit) InputBusses() *AUAudioUnitBusArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitSelInputBusses)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AUAudioUnitBusArrayFromID(_ret)
 }
 
 // @property	outputBusses @brief		An audio unit's audio output connection points. @discussion Subclassers must override this property's getter. The implementation should return the same object every time it is asked for it, since clients can install KVO observers on it.
 func (o *AUAudioUnit) OutputBusses() *AUAudioUnitBusArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitSelOutputBusses)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AUAudioUnitBusArrayFromID(_ret)
 }
 
@@ -372,7 +388,9 @@ func (o *AUAudioUnit) SetMaximumFramesToRender(maximumFramesToRender uint32) {
 // @property	parameterTree @brief		An audio unit's parameters, organized in a hierarchy. @return A parameter tree object, or nil if the unit has no parameters. @discussion Audio unit hosts can fetch this property to discover a unit's parameters. KVO notifications are issued on this member to notify the host of changes to the set of available parameters. AUAudioUnit has an additional pseudo-property, "allParameterValues", on which KVO notifications are issued in response to certain events where potentially all parameter values are invalidated. This includes changes to currentPreset, fullState, and fullStateForDocument. Hosts should not attempt to set this property. Subclassers should implement the parameterTree getter to expose parameters to hosts. They should cache as much as possible and send KVO notifications on "parameterTree" when altering the structure of the tree or the static information (ranges, etc) of parameters. This is similar to the v2 properties kAudioUnitProperty_ParameterList and kAudioUnitProperty_ParameterInfo. Note that it is not safe to modify this property in a real-time context.
 func (o *AUAudioUnit) ParameterTree() *AUParameterTree {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitSelParameterTree)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AUParameterTreeFromID(_ret)
 }
 
@@ -494,14 +512,18 @@ func (o *AUAudioUnit) SetFullStateForDocument(fullStateForDocument *foundation.N
 // @property	factoryPresets @brief		A collection of presets provided by the audio unit's developer. @discussion A preset provides users of an audio unit with an easily-selectable, fine-tuned set of parameters provided by the developer. This property returns all of the available factory presets. Bridged to the v2 property kAudioUnitProperty_FactoryPresets.
 func (o *AUAudioUnit) FactoryPresets() *foundation.NSArray[*AUAudioUnitPreset] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitSelFactoryPresets)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AUAudioUnitPreset](_ret)
 }
 
 // @property	userPresets @brief		A collection of presets saved by the user @discussion In addition to factory presets, provided by the audio unit vendor, users have the ability to save the values of the parameters of an audio unit into a user preset. These users presets can be accessed using this property. The default implementation of this method will load the user presets from an internal location that might not be directly accessible to the audio unit host application or to the audio unit. Instead of accessing this path directly, the audio unit should rely on the superclass implementation of this method to retrieve the presets. Audio Units are free to override this method to load their user presets via different means (e.g. from their iCloud container).
 func (o *AUAudioUnit) UserPresets() *foundation.NSArray[*AUAudioUnitPreset] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitSelUserPresets)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AUAudioUnitPreset](_ret)
 }
 
@@ -520,7 +542,9 @@ func (o *AUAudioUnit) IsLoadedInProcess() bool {
 // @property	currentPreset @brief		The audio unit's last-selected preset. @discussion Hosts can let the user select a preset by setting this property. Note that when getting this property, it does not reflect whether parameters may have been modified since the preset was selected. Bridged to the v2 property kAudioUnitProperty_PresentPreset.
 func (o *AUAudioUnit) CurrentPreset() *AUAudioUnitPreset {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitSelCurrentPreset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AUAudioUnitPresetFromID(_ret)
 }
 
@@ -619,7 +643,9 @@ func (o *AUAudioUnit) SetTransportStateBlock(transportStateBlock func(*AUHostTra
 // @property	contextName @brief		Information about the host context in which the audio unit is connected, for display in the audio unit's view. @discussion For example, a host could set "track 3" as the context, so that the audio unit's view could then display to the user "My audio unit on track 3". Bridged to the v2 property kAudioUnitProperty_ContextName.
 func (o *AUAudioUnit) ContextName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitSelContextName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -826,4 +852,3 @@ func (o *AUAudioUnit) MIDIOutputBufferSizeHint() int {
 func (o *AUAudioUnit) SetMIDIOutputBufferSizeHint(mIDIOutputBufferSizeHint int) {
 	o.Ptr().Send(_aUAudioUnitSelSetMIDIOutputBufferSizeHint, mIDIOutputBufferSizeHint)
 }
-

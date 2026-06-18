@@ -66,4 +66,3 @@ type VisionPrescriptionable interface {
 }
 
 var _ VisionPrescriptionable = (*VisionPrescription)(nil)
-

@@ -63,7 +63,9 @@ func (x *PaymentRequest) WithSupportedNetworks(items ...*foundation.NSString) *P
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -103,7 +105,9 @@ func (x *PaymentRequest) WithPaymentSummaryItems(items ...PaymentSummaryItemProv
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asPaymentSummaryItem().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asPaymentSummaryItem().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.PKPaymentSummaryItem](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -161,7 +165,9 @@ func (x *PaymentRequest) WithShippingMethods(items ...*raw.PKShippingMethod) *Pa
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.PKShippingMethod](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -201,7 +207,9 @@ func (x *PaymentRequest) WithMultiTokenContexts(items ...*raw.PKPaymentTokenCont
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.PKPaymentTokenContext](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -661,4 +669,3 @@ type PaymentRequestable interface {
 }
 
 var _ PaymentRequestable = (*PaymentRequest)(nil)
-

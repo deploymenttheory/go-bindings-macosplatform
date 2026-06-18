@@ -100,9 +100,13 @@ func (x *MTRClusterAudioOutput) RenameOutputWithParamsExpectedValuesExpectedValu
 	x.inner.RenameOutputWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
 }
 
-func (x *MTRClusterAudioOutput) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterAudioOutput) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterAudioOutput) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterAudioOutput) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterAudioOutputable is the interface implemented by [MTRClusterAudioOutput], for mocking and DI.
 type MTRClusterAudioOutputable interface {
@@ -121,4 +125,3 @@ type MTRClusterAudioOutputable interface {
 }
 
 var _ MTRClusterAudioOutputable = (*MTRClusterAudioOutput)(nil)
-

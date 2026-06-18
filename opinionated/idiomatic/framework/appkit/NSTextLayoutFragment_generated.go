@@ -206,4 +206,3 @@ type TextLayoutFragmentable interface {
 }
 
 var _ TextLayoutFragmentable = (*TextLayoutFragment)(nil)
-

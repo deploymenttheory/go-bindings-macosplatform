@@ -15,25 +15,25 @@ type NSURLCache struct {
 }
 
 var (
-	_clsNSURLCache = _objcClass("NSURLCache")
-	_nSURLCacheSelInitWithMemoryCapacityDiskCapacityDiskPath = objc.RegisterName("initWithMemoryCapacity:diskCapacity:diskPath:")
+	_clsNSURLCache                                               = _objcClass("NSURLCache")
+	_nSURLCacheSelInitWithMemoryCapacityDiskCapacityDiskPath     = objc.RegisterName("initWithMemoryCapacity:diskCapacity:diskPath:")
 	_nSURLCacheSelInitWithMemoryCapacityDiskCapacityDirectoryURL = objc.RegisterName("initWithMemoryCapacity:diskCapacity:directoryURL:")
-	_nSURLCacheSelCachedResponseForRequest = objc.RegisterName("cachedResponseForRequest:")
-	_nSURLCacheSelStoreCachedResponseForRequest = objc.RegisterName("storeCachedResponse:forRequest:")
-	_nSURLCacheSelRemoveCachedResponseForRequest = objc.RegisterName("removeCachedResponseForRequest:")
-	_nSURLCacheSelRemoveAllCachedResponses = objc.RegisterName("removeAllCachedResponses")
-	_nSURLCacheSelRemoveCachedResponsesSinceDate = objc.RegisterName("removeCachedResponsesSinceDate:")
-	_nSURLCacheSelSharedURLCache = objc.RegisterName("sharedURLCache")
-	_nSURLCacheSelSetSharedURLCache = objc.RegisterName("setSharedURLCache:")
-	_nSURLCacheSelMemoryCapacity = objc.RegisterName("memoryCapacity")
-	_nSURLCacheSelSetMemoryCapacity = objc.RegisterName("setMemoryCapacity:")
-	_nSURLCacheSelDiskCapacity = objc.RegisterName("diskCapacity")
-	_nSURLCacheSelSetDiskCapacity = objc.RegisterName("setDiskCapacity:")
-	_nSURLCacheSelCurrentMemoryUsage = objc.RegisterName("currentMemoryUsage")
-	_nSURLCacheSelCurrentDiskUsage = objc.RegisterName("currentDiskUsage")
-	_nSURLCacheSelStoreCachedResponseForDataTask = objc.RegisterName("storeCachedResponse:forDataTask:")
-	_nSURLCacheSelGetCachedResponseForDataTaskCompletionHandler = objc.RegisterName("getCachedResponseForDataTask:completionHandler:")
-	_nSURLCacheSelRemoveCachedResponseForDataTask = objc.RegisterName("removeCachedResponseForDataTask:")
+	_nSURLCacheSelCachedResponseForRequest                       = objc.RegisterName("cachedResponseForRequest:")
+	_nSURLCacheSelStoreCachedResponseForRequest                  = objc.RegisterName("storeCachedResponse:forRequest:")
+	_nSURLCacheSelRemoveCachedResponseForRequest                 = objc.RegisterName("removeCachedResponseForRequest:")
+	_nSURLCacheSelRemoveAllCachedResponses                       = objc.RegisterName("removeAllCachedResponses")
+	_nSURLCacheSelRemoveCachedResponsesSinceDate                 = objc.RegisterName("removeCachedResponsesSinceDate:")
+	_nSURLCacheSelSharedURLCache                                 = objc.RegisterName("sharedURLCache")
+	_nSURLCacheSelSetSharedURLCache                              = objc.RegisterName("setSharedURLCache:")
+	_nSURLCacheSelMemoryCapacity                                 = objc.RegisterName("memoryCapacity")
+	_nSURLCacheSelSetMemoryCapacity                              = objc.RegisterName("setMemoryCapacity:")
+	_nSURLCacheSelDiskCapacity                                   = objc.RegisterName("diskCapacity")
+	_nSURLCacheSelSetDiskCapacity                                = objc.RegisterName("setDiskCapacity:")
+	_nSURLCacheSelCurrentMemoryUsage                             = objc.RegisterName("currentMemoryUsage")
+	_nSURLCacheSelCurrentDiskUsage                               = objc.RegisterName("currentDiskUsage")
+	_nSURLCacheSelStoreCachedResponseForDataTask                 = objc.RegisterName("storeCachedResponse:forDataTask:")
+	_nSURLCacheSelGetCachedResponseForDataTaskCompletionHandler  = objc.RegisterName("getCachedResponseForDataTask:completionHandler:")
+	_nSURLCacheSelRemoveCachedResponseForDataTask                = objc.RegisterName("removeCachedResponseForDataTask:")
 )
 
 func NSURLCacheFromID(id objc.ID) *NSURLCache {
@@ -50,21 +50,27 @@ func NSURLCacheFromID(id objc.ID) *NSURLCache {
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSURLCache) InitWithMemoryCapacityDiskCapacityDiskPath(memoryCapacity uint, diskCapacity uint, path *NSString) *NSURLCache {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLCacheSelInitWithMemoryCapacityDiskCapacityDiskPath, memoryCapacity, diskCapacity, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLCacheFromID(_ret)
 }
 
 // @method initWithMemoryCapacity:diskCapacity:directoryURL: @abstract Initializes an NSURLCache with the given capacity and directory. @param memoryCapacity the capacity, measured in bytes, for the cache in memory. Or 0 to disable memory cache. @param diskCapacity the capacity, measured in bytes, for the cache on disk. Or 0 to disable disk cache. @param directoryURL the path to a directory on disk where the cache data is stored. Or nil for default directory. @result an initialized NSURLCache, with the given capacity, optionally backed by disk.
 func (o *NSURLCache) InitWithMemoryCapacityDiskCapacityDirectoryURL(memoryCapacity uint, diskCapacity uint, directoryURL *NSURL) *NSURLCache {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLCacheSelInitWithMemoryCapacityDiskCapacityDirectoryURL, memoryCapacity, diskCapacity, directoryURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLCacheFromID(_ret)
 }
 
 // @method cachedResponseForRequest: @abstract Returns the NSCachedURLResponse stored in the cache with the given request. @discussion The method returns nil if there is no NSCachedURLResponse stored using the given request. @param request the NSURLRequest to use as a key for the lookup. @result The NSCachedURLResponse stored in the cache with the given request, or nil if there is no NSCachedURLResponse stored with the given request.
 func (o *NSURLCache) CachedResponseForRequest(request *NSURLRequest) *NSCachedURLResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLCacheSelCachedResponseForRequest, request.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCachedURLResponseFromID(_ret)
 }
 
@@ -91,7 +97,9 @@ func (o *NSURLCache) RemoveCachedResponsesSinceDate(date *NSDate) {
 // @property sharedURLCache @abstract Returns the shared NSURLCache instance or sets the NSURLCache instance shared by all clients of the current process. This will be the new object returned when calls to the <tt>sharedURLCache</tt> method are made. @discussion Unless set explicitly through a call to <tt>+setSharedURLCache:</tt>, this method returns an NSURLCache instance created with the following default values: <ul> <li>Memory capacity: 4 megabytes (4 * 1024 * 1024 bytes) <li>Disk capacity: 20 megabytes (20 * 1024 * 1024 bytes) <li>Disk path: <nobr>(user home directory)/Library/Caches/(application bundle id)</nobr> </ul> <p>Users who do not have special caching requirements or constraints should find the default shared cache instance acceptable. If this default shared cache instance is not acceptable, <tt>+setSharedURLCache:</tt> can be called to set a different NSURLCache instance to be returned from this method. Callers should take care to ensure that the setter is called at a time when no other caller has a reference to the previously-set shared URL cache. This is to prevent storing cache data from becoming unexpectedly unretrievable. @result the shared NSURLCache instance.
 func NSURLCacheSharedURLCache() *NSURLCache {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLCache), _nSURLCacheSelSharedURLCache)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLCacheFromID(_ret)
 }
 
@@ -152,4 +160,3 @@ func (o *NSURLCache) GetCachedResponseForDataTaskCompletionHandler(dataTask *NSU
 func (o *NSURLCache) RemoveCachedResponseForDataTask(dataTask *NSURLSessionDataTask) {
 	o.Ptr().Send(_nSURLCacheSelRemoveCachedResponseForDataTask, dataTask.Ptr())
 }
-

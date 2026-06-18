@@ -16,8 +16,8 @@ type MTRDoorLockClusterDoorLockAlarmEvent struct {
 }
 
 var (
-	_clsMTRDoorLockClusterDoorLockAlarmEvent = _objcClass("MTRDoorLockClusterDoorLockAlarmEvent")
-	_mTRDoorLockClusterDoorLockAlarmEventSelAlarmCode = objc.RegisterName("alarmCode")
+	_clsMTRDoorLockClusterDoorLockAlarmEvent             = _objcClass("MTRDoorLockClusterDoorLockAlarmEvent")
+	_mTRDoorLockClusterDoorLockAlarmEventSelAlarmCode    = objc.RegisterName("alarmCode")
 	_mTRDoorLockClusterDoorLockAlarmEventSelSetAlarmCode = objc.RegisterName("setAlarmCode:")
 )
 
@@ -33,11 +33,12 @@ func MTRDoorLockClusterDoorLockAlarmEventFromID(id objc.ID) *MTRDoorLockClusterD
 
 func (o *MTRDoorLockClusterDoorLockAlarmEvent) AlarmCode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterDoorLockAlarmEventSelAlarmCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDoorLockClusterDoorLockAlarmEvent) SetAlarmCode(alarmCode *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDoorLockClusterDoorLockAlarmEventSelSetAlarmCode, alarmCode.Ptr())
 }
-

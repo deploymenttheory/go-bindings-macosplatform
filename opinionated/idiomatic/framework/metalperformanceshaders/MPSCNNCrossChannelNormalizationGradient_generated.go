@@ -19,7 +19,9 @@ type CNNCrossChannelNormalizationGradient struct {
 }
 
 // Unwrap returns the underlying [raw.MPSCNNCrossChannelNormalizationGradient].
-func (x *CNNCrossChannelNormalizationGradient) Unwrap() *raw.MPSCNNCrossChannelNormalizationGradient { return x.inner }
+func (x *CNNCrossChannelNormalizationGradient) Unwrap() *raw.MPSCNNCrossChannelNormalizationGradient {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -220,11 +222,17 @@ func (x *CNNCrossChannelNormalizationGradient) KernelSize() uint {
 	return x.inner.KernelSize()
 }
 
-func (x *CNNCrossChannelNormalizationGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
+func (x *CNNCrossChannelNormalizationGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNGradientKernel
+}
 
-func (x *CNNCrossChannelNormalizationGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *CNNCrossChannelNormalizationGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
-func (x *CNNCrossChannelNormalizationGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel }
+func (x *CNNCrossChannelNormalizationGradient) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel
+}
 
 // CNNCrossChannelNormalizationGradientable is the interface implemented by [CNNCrossChannelNormalizationGradient], for mocking and DI.
 type CNNCrossChannelNormalizationGradientable interface {
@@ -262,4 +270,3 @@ type CNNCrossChannelNormalizationGradientable interface {
 }
 
 var _ CNNCrossChannelNormalizationGradientable = (*CNNCrossChannelNormalizationGradient)(nil)
-

@@ -148,9 +148,13 @@ func (x *MTRClusterSmokeCOAlarm) ReadAttributeClusterRevisionWithParams(params *
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterSmokeCOAlarm) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterSmokeCOAlarm) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterSmokeCOAlarm) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterSmokeCOAlarm) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterSmokeCOAlarmable is the interface implemented by [MTRClusterSmokeCOAlarm], for mocking and DI.
 type MTRClusterSmokeCOAlarmable interface {
@@ -180,4 +184,3 @@ type MTRClusterSmokeCOAlarmable interface {
 }
 
 var _ MTRClusterSmokeCOAlarmable = (*MTRClusterSmokeCOAlarm)(nil)
-

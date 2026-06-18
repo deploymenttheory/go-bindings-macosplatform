@@ -275,4 +275,3 @@ func ReadIconFromFSRef(ref *carboncore.FSRef, iconFamily ***osservices.IconFamil
 	}
 	return nil
 }
-

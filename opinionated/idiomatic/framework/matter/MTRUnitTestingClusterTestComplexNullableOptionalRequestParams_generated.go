@@ -17,11 +17,15 @@ type MTRUnitTestingClusterTestComplexNullableOptionalRequestParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRUnitTestingClusterTestComplexNullableOptionalRequestParams].
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) Unwrap() *raw.MTRUnitTestingClusterTestComplexNullableOptionalRequestParams { return x.inner }
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) Unwrap() *raw.MTRUnitTestingClusterTestComplexNullableOptionalRequestParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRUnitTestingClusterTestComplexNullableOptionalRequestParamsFromID adopts an existing object pointer as a MTRUnitTestingClusterTestComplexNullableOptionalRequestParams (nil for 0).
 func MTRUnitTestingClusterTestComplexNullableOptionalRequestParamsFromID(id objc.ID) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams {
@@ -267,7 +271,9 @@ func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetServe
 	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
 }
 
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) asMTRUnitTestingClusterTestComplexNullableOptionalRequestParams() *raw.MTRUnitTestingClusterTestComplexNullableOptionalRequestParams { return x.inner }
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) asMTRUnitTestingClusterTestComplexNullableOptionalRequestParams() *raw.MTRUnitTestingClusterTestComplexNullableOptionalRequestParams {
+	return x.inner
+}
 
 // MTRUnitTestingClusterTestComplexNullableOptionalRequestParamsable is the interface implemented by [MTRUnitTestingClusterTestComplexNullableOptionalRequestParams], for mocking and DI.
 type MTRUnitTestingClusterTestComplexNullableOptionalRequestParamsable interface {
@@ -314,4 +320,3 @@ type MTRUnitTestingClusterTestComplexNullableOptionalRequestParamsable interface
 }
 
 var _ MTRUnitTestingClusterTestComplexNullableOptionalRequestParamsable = (*MTRUnitTestingClusterTestComplexNullableOptionalRequestParams)(nil)
-

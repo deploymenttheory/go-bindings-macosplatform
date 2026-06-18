@@ -45,4 +45,3 @@ type MTRGenericBaseClusterable interface {
 }
 
 var _ MTRGenericBaseClusterable = (*MTRGenericBaseCluster)(nil)
-

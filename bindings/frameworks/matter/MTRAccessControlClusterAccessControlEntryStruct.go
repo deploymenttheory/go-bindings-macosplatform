@@ -16,16 +16,16 @@ type MTRAccessControlClusterAccessControlEntryStruct struct {
 }
 
 var (
-	_clsMTRAccessControlClusterAccessControlEntryStruct = _objcClass("MTRAccessControlClusterAccessControlEntryStruct")
-	_mTRAccessControlClusterAccessControlEntryStructSelPrivilege = objc.RegisterName("privilege")
-	_mTRAccessControlClusterAccessControlEntryStructSelSetPrivilege = objc.RegisterName("setPrivilege:")
-	_mTRAccessControlClusterAccessControlEntryStructSelAuthMode = objc.RegisterName("authMode")
-	_mTRAccessControlClusterAccessControlEntryStructSelSetAuthMode = objc.RegisterName("setAuthMode:")
-	_mTRAccessControlClusterAccessControlEntryStructSelSubjects = objc.RegisterName("subjects")
-	_mTRAccessControlClusterAccessControlEntryStructSelSetSubjects = objc.RegisterName("setSubjects:")
-	_mTRAccessControlClusterAccessControlEntryStructSelTargets = objc.RegisterName("targets")
-	_mTRAccessControlClusterAccessControlEntryStructSelSetTargets = objc.RegisterName("setTargets:")
-	_mTRAccessControlClusterAccessControlEntryStructSelFabricIndex = objc.RegisterName("fabricIndex")
+	_clsMTRAccessControlClusterAccessControlEntryStruct               = _objcClass("MTRAccessControlClusterAccessControlEntryStruct")
+	_mTRAccessControlClusterAccessControlEntryStructSelPrivilege      = objc.RegisterName("privilege")
+	_mTRAccessControlClusterAccessControlEntryStructSelSetPrivilege   = objc.RegisterName("setPrivilege:")
+	_mTRAccessControlClusterAccessControlEntryStructSelAuthMode       = objc.RegisterName("authMode")
+	_mTRAccessControlClusterAccessControlEntryStructSelSetAuthMode    = objc.RegisterName("setAuthMode:")
+	_mTRAccessControlClusterAccessControlEntryStructSelSubjects       = objc.RegisterName("subjects")
+	_mTRAccessControlClusterAccessControlEntryStructSelSetSubjects    = objc.RegisterName("setSubjects:")
+	_mTRAccessControlClusterAccessControlEntryStructSelTargets        = objc.RegisterName("targets")
+	_mTRAccessControlClusterAccessControlEntryStructSelSetTargets     = objc.RegisterName("setTargets:")
+	_mTRAccessControlClusterAccessControlEntryStructSelFabricIndex    = objc.RegisterName("fabricIndex")
 	_mTRAccessControlClusterAccessControlEntryStructSelSetFabricIndex = objc.RegisterName("setFabricIndex:")
 )
 
@@ -41,7 +41,9 @@ func MTRAccessControlClusterAccessControlEntryStructFromID(id objc.ID) *MTRAcces
 
 func (o *MTRAccessControlClusterAccessControlEntryStruct) Privilege() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAccessControlClusterAccessControlEntryStructSelPrivilege)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -51,7 +53,9 @@ func (o *MTRAccessControlClusterAccessControlEntryStruct) SetPrivilege(privilege
 
 func (o *MTRAccessControlClusterAccessControlEntryStruct) AuthMode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAccessControlClusterAccessControlEntryStructSelAuthMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -79,11 +83,12 @@ func (o *MTRAccessControlClusterAccessControlEntryStruct) SetTargets(targets *fo
 
 func (o *MTRAccessControlClusterAccessControlEntryStruct) FabricIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAccessControlClusterAccessControlEntryStructSelFabricIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRAccessControlClusterAccessControlEntryStruct) SetFabricIndex(fabricIndex *foundation.NSNumber) {
 	o.Ptr().Send(_mTRAccessControlClusterAccessControlEntryStructSelSetFabricIndex, fabricIndex.Ptr())
 }
-

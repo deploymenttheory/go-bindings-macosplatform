@@ -72,7 +72,9 @@ func (x *ImageBilinearScale) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *Im
 
 func (x *ImageBilinearScale) asImageScale() *raw.MPSImageScale { return &x.inner.MPSImageScale }
 
-func (x *ImageBilinearScale) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSImageScale.MPSUnaryImageKernel }
+func (x *ImageBilinearScale) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
+	return &x.inner.MPSImageScale.MPSUnaryImageKernel
+}
 
 // ImageBilinearScaleable is the interface implemented by [ImageBilinearScale], for mocking and DI.
 type ImageBilinearScaleable interface {
@@ -84,4 +86,3 @@ type ImageBilinearScaleable interface {
 }
 
 var _ ImageBilinearScaleable = (*ImageBilinearScale)(nil)
-

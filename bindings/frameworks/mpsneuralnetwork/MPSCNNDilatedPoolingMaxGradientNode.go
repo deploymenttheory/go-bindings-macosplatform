@@ -15,11 +15,11 @@ type MPSCNNDilatedPoolingMaxGradientNode struct {
 }
 
 var (
-	_clsMPSCNNDilatedPoolingMaxGradientNode = _objcClass("MPSCNNDilatedPoolingMaxGradientNode")
+	_clsMPSCNNDilatedPoolingMaxGradientNode                                                                                                                              = _objcClass("MPSCNNDilatedPoolingMaxGradientNode")
 	_mPSCNNDilatedPoolingMaxGradientNodeSelNodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY = objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:kernelWidth:kernelHeight:strideInPixelsX:strideInPixelsY:dilationRateX:dilationRateY:")
 	_mPSCNNDilatedPoolingMaxGradientNodeSelInitWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY = objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:kernelWidth:kernelHeight:strideInPixelsX:strideInPixelsY:dilationRateX:dilationRateY:")
-	_mPSCNNDilatedPoolingMaxGradientNodeSelDilationRateX = objc.RegisterName("dilationRateX")
-	_mPSCNNDilatedPoolingMaxGradientNodeSelDilationRateY = objc.RegisterName("dilationRateY")
+	_mPSCNNDilatedPoolingMaxGradientNodeSelDilationRateX                                                                                                                 = objc.RegisterName("dilationRateX")
+	_mPSCNNDilatedPoolingMaxGradientNodeSelDilationRateY                                                                                                                 = objc.RegisterName("dilationRateY")
 )
 
 func MPSCNNDilatedPoolingMaxGradientNodeFromID(id objc.ID) *MPSCNNDilatedPoolingMaxGradientNode {
@@ -35,14 +35,18 @@ func MPSCNNDilatedPoolingMaxGradientNodeFromID(id objc.ID) *MPSCNNDilatedPooling
 // @abstract make a pooling gradient node @discussion  It would be much easier to use [inferencePoolingNode gradientNodeForSourceGradient:] instead. @param      sourceGradient  The gradient from the downstream gradient filter. @param      sourceImage     The input image to the inference pooling filter @param      gradientState   The gradient state produced by the inference poolin filter @param      kernelWidth     The kernel width of the inference filter @param      kernelHeight    The kernel height of the inference filter @param      strideInPixelsX The X stride from the inference filter @param      strideInPixelsY The Y stride from the inference filter
 func MPSCNNDilatedPoolingMaxGradientNodeNodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY(sourceGradient *MPSNNImageNode, sourceImage *MPSNNImageNode, gradientState *MPSNNGradientStateNode, kernelWidth uint, kernelHeight uint, strideInPixelsX uint, strideInPixelsY uint, dilationRateX uint, dilationRateY uint) *MPSCNNDilatedPoolingMaxGradientNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNDilatedPoolingMaxGradientNode), _mPSCNNDilatedPoolingMaxGradientNodeSelNodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr(), kernelWidth, kernelHeight, strideInPixelsX, strideInPixelsY, dilationRateX, dilationRateY)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNDilatedPoolingMaxGradientNodeFromID(_ret)
 }
 
 // @abstract make a pooling gradient node @discussion  It would be much easier to use [inferencePoolingNode gradientNodeForSourceGradient:] instead. @param      sourceGradient  The gradient from the downstream gradient filter. @param      sourceImage     The input image to the inference pooling filter @param      gradientState   The gradient state produced by the inference poolin filter @param      kernelWidth     The kernel width of the inference filter @param      kernelHeight    The kernel height of the inference filter @param      strideInPixelsX The X stride from the inference filter @param      strideInPixelsY The Y stride from the inference filter
 func (o *MPSCNNDilatedPoolingMaxGradientNode) InitWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY(sourceGradient *MPSNNImageNode, sourceImage *MPSNNImageNode, gradientState *MPSNNGradientStateNode, kernelWidth uint, kernelHeight uint, strideInPixelsX uint, strideInPixelsY uint, dilationRateX uint, dilationRateY uint) *MPSCNNDilatedPoolingMaxGradientNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNDilatedPoolingMaxGradientNodeSelInitWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr(), kernelWidth, kernelHeight, strideInPixelsX, strideInPixelsY, dilationRateX, dilationRateY)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNDilatedPoolingMaxGradientNodeFromID(_ret)
 }
 
@@ -55,4 +59,3 @@ func (o *MPSCNNDilatedPoolingMaxGradientNode) DilationRateY() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mPSCNNDilatedPoolingMaxGradientNodeSelDilationRateY)
 	return _ret
 }
-

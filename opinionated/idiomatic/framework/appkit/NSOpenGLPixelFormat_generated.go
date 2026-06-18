@@ -88,4 +88,3 @@ type OpenGLPixelFormatable interface {
 }
 
 var _ OpenGLPixelFormatable = (*OpenGLPixelFormat)(nil)
-

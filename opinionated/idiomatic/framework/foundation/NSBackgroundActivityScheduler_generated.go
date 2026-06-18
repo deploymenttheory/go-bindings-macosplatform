@@ -156,4 +156,3 @@ type BackgroundActivitySchedulerable interface {
 }
 
 var _ BackgroundActivitySchedulerable = (*BackgroundActivityScheduler)(nil)
-

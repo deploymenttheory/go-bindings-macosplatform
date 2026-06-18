@@ -138,7 +138,9 @@ func (x *Node) WithConstraints(items ...*raw.SKConstraint) *Node {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.SKConstraint](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -827,4 +829,3 @@ type Nodeable interface {
 }
 
 var _ Nodeable = (*Node)(nil)
-

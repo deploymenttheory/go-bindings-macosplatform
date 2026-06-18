@@ -54,4 +54,3 @@ type UnitConcentrationMassable interface {
 }
 
 var _ UnitConcentrationMassable = (*UnitConcentrationMass)(nil)
-

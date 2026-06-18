@@ -17,211 +17,211 @@ type NSTextView struct {
 }
 
 var (
-	_clsNSTextView = _objcClass("NSTextView")
-	_nSTextViewSelInitWithFrameTextContainer = objc.RegisterName("initWithFrame:textContainer:")
-	_nSTextViewSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSTextViewSelInitWithFrame = objc.RegisterName("initWithFrame:")
-	_nSTextViewSelInitUsingTextLayoutManager = objc.RegisterName("initUsingTextLayoutManager:")
-	_nSTextViewSelTextViewUsingTextLayoutManager = objc.RegisterName("textViewUsingTextLayoutManager:")
-	_nSTextViewSelReplaceTextContainer = objc.RegisterName("replaceTextContainer:")
-	_nSTextViewSelInvalidateTextContainerOrigin = objc.RegisterName("invalidateTextContainerOrigin")
-	_nSTextViewSelInsertText = objc.RegisterName("insertText:")
-	_nSTextViewSelSetConstrainedFrameSize = objc.RegisterName("setConstrainedFrameSize:")
-	_nSTextViewSelSetAlignmentRange = objc.RegisterName("setAlignment:range:")
-	_nSTextViewSelSetBaseWritingDirectionRange = objc.RegisterName("setBaseWritingDirection:range:")
-	_nSTextViewSelTurnOffKerning = objc.RegisterName("turnOffKerning:")
-	_nSTextViewSelTightenKerning = objc.RegisterName("tightenKerning:")
-	_nSTextViewSelLoosenKerning = objc.RegisterName("loosenKerning:")
-	_nSTextViewSelUseStandardKerning = objc.RegisterName("useStandardKerning:")
-	_nSTextViewSelTurnOffLigatures = objc.RegisterName("turnOffLigatures:")
-	_nSTextViewSelUseStandardLigatures = objc.RegisterName("useStandardLigatures:")
-	_nSTextViewSelUseAllLigatures = objc.RegisterName("useAllLigatures:")
-	_nSTextViewSelRaiseBaseline = objc.RegisterName("raiseBaseline:")
-	_nSTextViewSelLowerBaseline = objc.RegisterName("lowerBaseline:")
-	_nSTextViewSelToggleTraditionalCharacterShape = objc.RegisterName("toggleTraditionalCharacterShape:")
-	_nSTextViewSelOutline = objc.RegisterName("outline:")
-	_nSTextViewSelPerformFindPanelAction = objc.RegisterName("performFindPanelAction:")
-	_nSTextViewSelAlignJustified = objc.RegisterName("alignJustified:")
-	_nSTextViewSelChangeColor = objc.RegisterName("changeColor:")
-	_nSTextViewSelChangeAttributes = objc.RegisterName("changeAttributes:")
-	_nSTextViewSelChangeDocumentBackgroundColor = objc.RegisterName("changeDocumentBackgroundColor:")
-	_nSTextViewSelOrderFrontSpacingPanel = objc.RegisterName("orderFrontSpacingPanel:")
-	_nSTextViewSelOrderFrontLinkPanel = objc.RegisterName("orderFrontLinkPanel:")
-	_nSTextViewSelOrderFrontListPanel = objc.RegisterName("orderFrontListPanel:")
-	_nSTextViewSelOrderFrontTablePanel = objc.RegisterName("orderFrontTablePanel:")
-	_nSTextViewSelSetNeedsDisplayInRectAvoidAdditionalLayout = objc.RegisterName("setNeedsDisplayInRect:avoidAdditionalLayout:")
-	_nSTextViewSelDrawInsertionPointInRectColorTurnedOn = objc.RegisterName("drawInsertionPointInRect:color:turnedOn:")
-	_nSTextViewSelDrawViewBackgroundInRect = objc.RegisterName("drawViewBackgroundInRect:")
-	_nSTextViewSelUpdateRuler = objc.RegisterName("updateRuler")
-	_nSTextViewSelUpdateFontPanel = objc.RegisterName("updateFontPanel")
-	_nSTextViewSelUpdateDragTypeRegistration = objc.RegisterName("updateDragTypeRegistration")
-	_nSTextViewSelSelectionRangeForProposedRangeGranularity = objc.RegisterName("selectionRangeForProposedRange:granularity:")
-	_nSTextViewSelClickedOnLinkAtIndex = objc.RegisterName("clickedOnLink:atIndex:")
-	_nSTextViewSelStartSpeaking = objc.RegisterName("startSpeaking:")
-	_nSTextViewSelStopSpeaking = objc.RegisterName("stopSpeaking:")
-	_nSTextViewSelSetLayoutOrientation = objc.RegisterName("setLayoutOrientation:")
-	_nSTextViewSelChangeLayoutOrientation = objc.RegisterName("changeLayoutOrientation:")
-	_nSTextViewSelCharacterIndexForInsertionAtPoint = objc.RegisterName("characterIndexForInsertionAtPoint:")
-	_nSTextViewSelPerformValidatedReplacementInRangeWithAttributedString = objc.RegisterName("performValidatedReplacementInRange:withAttributedString:")
-	_nSTextViewSelTextContainer = objc.RegisterName("textContainer")
-	_nSTextViewSelSetTextContainer = objc.RegisterName("setTextContainer:")
-	_nSTextViewSelTextContainerInset = objc.RegisterName("textContainerInset")
-	_nSTextViewSelSetTextContainerInset = objc.RegisterName("setTextContainerInset:")
-	_nSTextViewSelTextContainerOrigin = objc.RegisterName("textContainerOrigin")
-	_nSTextViewSelLayoutManager = objc.RegisterName("layoutManager")
-	_nSTextViewSelTextStorage = objc.RegisterName("textStorage")
-	_nSTextViewSelTextLayoutManager = objc.RegisterName("textLayoutManager")
-	_nSTextViewSelTextContentStorage = objc.RegisterName("textContentStorage")
-	_nSTextViewSelShouldDrawInsertionPoint = objc.RegisterName("shouldDrawInsertionPoint")
-	_nSTextViewSelStronglyReferencesTextStorage = objc.RegisterName("stronglyReferencesTextStorage")
-	_nSTextViewSelUsesAdaptiveColorMappingForDarkAppearance = objc.RegisterName("usesAdaptiveColorMappingForDarkAppearance")
-	_nSTextViewSelSetUsesAdaptiveColorMappingForDarkAppearance = objc.RegisterName("setUsesAdaptiveColorMappingForDarkAppearance:")
-	_nSTextViewSelComplete = objc.RegisterName("complete:")
-	_nSTextViewSelCompletionsForPartialWordRangeIndexOfSelectedItem = objc.RegisterName("completionsForPartialWordRange:indexOfSelectedItem:")
-	_nSTextViewSelInsertCompletionForPartialWordRangeMovementIsFinal = objc.RegisterName("insertCompletion:forPartialWordRange:movement:isFinal:")
-	_nSTextViewSelRangeForUserCompletion = objc.RegisterName("rangeForUserCompletion")
-	_nSTextViewSelWriteSelectionToPasteboardType = objc.RegisterName("writeSelectionToPasteboard:type:")
-	_nSTextViewSelWriteSelectionToPasteboardTypes = objc.RegisterName("writeSelectionToPasteboard:types:")
-	_nSTextViewSelPreferredPasteboardTypeFromArrayRestrictedToTypesFromArray = objc.RegisterName("preferredPasteboardTypeFromArray:restrictedToTypesFromArray:")
-	_nSTextViewSelReadSelectionFromPasteboardType = objc.RegisterName("readSelectionFromPasteboard:type:")
-	_nSTextViewSelReadSelectionFromPasteboard = objc.RegisterName("readSelectionFromPasteboard:")
-	_nSTextViewSelRegisterForServices = objc.RegisterName("registerForServices")
-	_nSTextViewSelPasteAsPlainText = objc.RegisterName("pasteAsPlainText:")
-	_nSTextViewSelPasteAsRichText = objc.RegisterName("pasteAsRichText:")
-	_nSTextViewSelWritablePasteboardTypes = objc.RegisterName("writablePasteboardTypes")
-	_nSTextViewSelReadablePasteboardTypes = objc.RegisterName("readablePasteboardTypes")
-	_nSTextViewSelDragSelectionWithEventOffsetSlideBack = objc.RegisterName("dragSelectionWithEvent:offset:slideBack:")
-	_nSTextViewSelDragImageForSelectionWithEventOrigin = objc.RegisterName("dragImageForSelectionWithEvent:origin:")
-	_nSTextViewSelDragOperationForDraggingInfoType = objc.RegisterName("dragOperationForDraggingInfo:type:")
-	_nSTextViewSelCleanUpAfterDragOperation = objc.RegisterName("cleanUpAfterDragOperation")
-	_nSTextViewSelAcceptableDragTypes = objc.RegisterName("acceptableDragTypes")
-	_nSTextViewSelSetSelectedRangesAffinityStillSelecting = objc.RegisterName("setSelectedRanges:affinity:stillSelecting:")
-	_nSTextViewSelSetSelectedRangeAffinityStillSelecting = objc.RegisterName("setSelectedRange:affinity:stillSelecting:")
-	_nSTextViewSelUpdateInsertionPointStateAndRestartTimer = objc.RegisterName("updateInsertionPointStateAndRestartTimer:")
-	_nSTextViewSelToggleContinuousSpellChecking = objc.RegisterName("toggleContinuousSpellChecking:")
-	_nSTextViewSelToggleGrammarChecking = objc.RegisterName("toggleGrammarChecking:")
-	_nSTextViewSelSetSpellingStateRange = objc.RegisterName("setSpellingState:range:")
-	_nSTextViewSelShouldChangeTextInRangesReplacementStrings = objc.RegisterName("shouldChangeTextInRanges:replacementStrings:")
-	_nSTextViewSelShouldChangeTextInRangeReplacementString = objc.RegisterName("shouldChangeTextInRange:replacementString:")
-	_nSTextViewSelDidChangeText = objc.RegisterName("didChangeText")
-	_nSTextViewSelBreakUndoCoalescing = objc.RegisterName("breakUndoCoalescing")
-	_nSTextViewSelShowFindIndicatorForRange = objc.RegisterName("showFindIndicatorForRange:")
-	_nSTextViewSelSelectedRanges = objc.RegisterName("selectedRanges")
-	_nSTextViewSelSetSelectedRanges = objc.RegisterName("setSelectedRanges:")
-	_nSTextViewSelSelectionAffinity = objc.RegisterName("selectionAffinity")
-	_nSTextViewSelSelectionGranularity = objc.RegisterName("selectionGranularity")
-	_nSTextViewSelSetSelectionGranularity = objc.RegisterName("setSelectionGranularity:")
-	_nSTextViewSelSelectedTextAttributes = objc.RegisterName("selectedTextAttributes")
-	_nSTextViewSelSetSelectedTextAttributes = objc.RegisterName("setSelectedTextAttributes:")
-	_nSTextViewSelInsertionPointColor = objc.RegisterName("insertionPointColor")
-	_nSTextViewSelSetInsertionPointColor = objc.RegisterName("setInsertionPointColor:")
-	_nSTextViewSelMarkedTextAttributes = objc.RegisterName("markedTextAttributes")
-	_nSTextViewSelSetMarkedTextAttributes = objc.RegisterName("setMarkedTextAttributes:")
-	_nSTextViewSelLinkTextAttributes = objc.RegisterName("linkTextAttributes")
-	_nSTextViewSelSetLinkTextAttributes = objc.RegisterName("setLinkTextAttributes:")
-	_nSTextViewSelDisplaysLinkToolTips = objc.RegisterName("displaysLinkToolTips")
-	_nSTextViewSelSetDisplaysLinkToolTips = objc.RegisterName("setDisplaysLinkToolTips:")
-	_nSTextViewSelAcceptsGlyphInfo = objc.RegisterName("acceptsGlyphInfo")
-	_nSTextViewSelSetAcceptsGlyphInfo = objc.RegisterName("setAcceptsGlyphInfo:")
-	_nSTextViewSelUsesRuler = objc.RegisterName("usesRuler")
-	_nSTextViewSelSetUsesRuler = objc.RegisterName("setUsesRuler:")
-	_nSTextViewSelUsesInspectorBar = objc.RegisterName("usesInspectorBar")
-	_nSTextViewSelSetUsesInspectorBar = objc.RegisterName("setUsesInspectorBar:")
-	_nSTextViewSelIsContinuousSpellCheckingEnabled = objc.RegisterName("isContinuousSpellCheckingEnabled")
-	_nSTextViewSelSetContinuousSpellCheckingEnabled = objc.RegisterName("setContinuousSpellCheckingEnabled:")
-	_nSTextViewSelSpellCheckerDocumentTag = objc.RegisterName("spellCheckerDocumentTag")
-	_nSTextViewSelIsGrammarCheckingEnabled = objc.RegisterName("isGrammarCheckingEnabled")
-	_nSTextViewSelSetGrammarCheckingEnabled = objc.RegisterName("setGrammarCheckingEnabled:")
-	_nSTextViewSelTypingAttributes = objc.RegisterName("typingAttributes")
-	_nSTextViewSelSetTypingAttributes = objc.RegisterName("setTypingAttributes:")
-	_nSTextViewSelRangesForUserTextChange = objc.RegisterName("rangesForUserTextChange")
-	_nSTextViewSelRangesForUserCharacterAttributeChange = objc.RegisterName("rangesForUserCharacterAttributeChange")
-	_nSTextViewSelRangesForUserParagraphAttributeChange = objc.RegisterName("rangesForUserParagraphAttributeChange")
-	_nSTextViewSelRangeForUserTextChange = objc.RegisterName("rangeForUserTextChange")
-	_nSTextViewSelRangeForUserCharacterAttributeChange = objc.RegisterName("rangeForUserCharacterAttributeChange")
-	_nSTextViewSelRangeForUserParagraphAttributeChange = objc.RegisterName("rangeForUserParagraphAttributeChange")
-	_nSTextViewSelAllowsDocumentBackgroundColorChange = objc.RegisterName("allowsDocumentBackgroundColorChange")
-	_nSTextViewSelSetAllowsDocumentBackgroundColorChange = objc.RegisterName("setAllowsDocumentBackgroundColorChange:")
-	_nSTextViewSelDefaultParagraphStyle = objc.RegisterName("defaultParagraphStyle")
-	_nSTextViewSelSetDefaultParagraphStyle = objc.RegisterName("setDefaultParagraphStyle:")
-	_nSTextViewSelAllowsUndo = objc.RegisterName("allowsUndo")
-	_nSTextViewSelSetAllowsUndo = objc.RegisterName("setAllowsUndo:")
-	_nSTextViewSelIsCoalescingUndo = objc.RegisterName("isCoalescingUndo")
-	_nSTextViewSelAllowsImageEditing = objc.RegisterName("allowsImageEditing")
-	_nSTextViewSelSetAllowsImageEditing = objc.RegisterName("setAllowsImageEditing:")
-	_nSTextViewSelUsesRolloverButtonForSelection = objc.RegisterName("usesRolloverButtonForSelection")
-	_nSTextViewSelSetUsesRolloverButtonForSelection = objc.RegisterName("setUsesRolloverButtonForSelection:")
-	_nSTextViewSelSetRulerVisible = objc.RegisterName("setRulerVisible:")
-	_nSTextViewSelAllowedInputSourceLocales = objc.RegisterName("allowedInputSourceLocales")
-	_nSTextViewSelSetAllowedInputSourceLocales = objc.RegisterName("setAllowedInputSourceLocales:")
-	_nSTextViewSelIsWritingToolsActive = objc.RegisterName("isWritingToolsActive")
-	_nSTextViewSelWritingToolsBehavior = objc.RegisterName("writingToolsBehavior")
-	_nSTextViewSelSetWritingToolsBehavior = objc.RegisterName("setWritingToolsBehavior:")
-	_nSTextViewSelAllowedWritingToolsResultOptions = objc.RegisterName("allowedWritingToolsResultOptions")
-	_nSTextViewSelSetAllowedWritingToolsResultOptions = objc.RegisterName("setAllowedWritingToolsResultOptions:")
-	_nSTextViewSelSmartDeleteRangeForProposedRange = objc.RegisterName("smartDeleteRangeForProposedRange:")
-	_nSTextViewSelToggleSmartInsertDelete = objc.RegisterName("toggleSmartInsertDelete:")
-	_nSTextViewSelSmartInsertForStringReplacingRangeBeforeStringAfterString = objc.RegisterName("smartInsertForString:replacingRange:beforeString:afterString:")
-	_nSTextViewSelSmartInsertBeforeStringForStringReplacingRange = objc.RegisterName("smartInsertBeforeStringForString:replacingRange:")
-	_nSTextViewSelSmartInsertAfterStringForStringReplacingRange = objc.RegisterName("smartInsertAfterStringForString:replacingRange:")
-	_nSTextViewSelToggleAutomaticQuoteSubstitution = objc.RegisterName("toggleAutomaticQuoteSubstitution:")
-	_nSTextViewSelToggleAutomaticLinkDetection = objc.RegisterName("toggleAutomaticLinkDetection:")
-	_nSTextViewSelToggleAutomaticDataDetection = objc.RegisterName("toggleAutomaticDataDetection:")
-	_nSTextViewSelToggleAutomaticDashSubstitution = objc.RegisterName("toggleAutomaticDashSubstitution:")
-	_nSTextViewSelToggleAutomaticTextReplacement = objc.RegisterName("toggleAutomaticTextReplacement:")
-	_nSTextViewSelToggleAutomaticSpellingCorrection = objc.RegisterName("toggleAutomaticSpellingCorrection:")
-	_nSTextViewSelCheckTextInRangeTypesOptions = objc.RegisterName("checkTextInRange:types:options:")
+	_clsNSTextView                                                                  = _objcClass("NSTextView")
+	_nSTextViewSelInitWithFrameTextContainer                                        = objc.RegisterName("initWithFrame:textContainer:")
+	_nSTextViewSelInitWithCoder                                                     = objc.RegisterName("initWithCoder:")
+	_nSTextViewSelInitWithFrame                                                     = objc.RegisterName("initWithFrame:")
+	_nSTextViewSelInitUsingTextLayoutManager                                        = objc.RegisterName("initUsingTextLayoutManager:")
+	_nSTextViewSelTextViewUsingTextLayoutManager                                    = objc.RegisterName("textViewUsingTextLayoutManager:")
+	_nSTextViewSelReplaceTextContainer                                              = objc.RegisterName("replaceTextContainer:")
+	_nSTextViewSelInvalidateTextContainerOrigin                                     = objc.RegisterName("invalidateTextContainerOrigin")
+	_nSTextViewSelInsertText                                                        = objc.RegisterName("insertText:")
+	_nSTextViewSelSetConstrainedFrameSize                                           = objc.RegisterName("setConstrainedFrameSize:")
+	_nSTextViewSelSetAlignmentRange                                                 = objc.RegisterName("setAlignment:range:")
+	_nSTextViewSelSetBaseWritingDirectionRange                                      = objc.RegisterName("setBaseWritingDirection:range:")
+	_nSTextViewSelTurnOffKerning                                                    = objc.RegisterName("turnOffKerning:")
+	_nSTextViewSelTightenKerning                                                    = objc.RegisterName("tightenKerning:")
+	_nSTextViewSelLoosenKerning                                                     = objc.RegisterName("loosenKerning:")
+	_nSTextViewSelUseStandardKerning                                                = objc.RegisterName("useStandardKerning:")
+	_nSTextViewSelTurnOffLigatures                                                  = objc.RegisterName("turnOffLigatures:")
+	_nSTextViewSelUseStandardLigatures                                              = objc.RegisterName("useStandardLigatures:")
+	_nSTextViewSelUseAllLigatures                                                   = objc.RegisterName("useAllLigatures:")
+	_nSTextViewSelRaiseBaseline                                                     = objc.RegisterName("raiseBaseline:")
+	_nSTextViewSelLowerBaseline                                                     = objc.RegisterName("lowerBaseline:")
+	_nSTextViewSelToggleTraditionalCharacterShape                                   = objc.RegisterName("toggleTraditionalCharacterShape:")
+	_nSTextViewSelOutline                                                           = objc.RegisterName("outline:")
+	_nSTextViewSelPerformFindPanelAction                                            = objc.RegisterName("performFindPanelAction:")
+	_nSTextViewSelAlignJustified                                                    = objc.RegisterName("alignJustified:")
+	_nSTextViewSelChangeColor                                                       = objc.RegisterName("changeColor:")
+	_nSTextViewSelChangeAttributes                                                  = objc.RegisterName("changeAttributes:")
+	_nSTextViewSelChangeDocumentBackgroundColor                                     = objc.RegisterName("changeDocumentBackgroundColor:")
+	_nSTextViewSelOrderFrontSpacingPanel                                            = objc.RegisterName("orderFrontSpacingPanel:")
+	_nSTextViewSelOrderFrontLinkPanel                                               = objc.RegisterName("orderFrontLinkPanel:")
+	_nSTextViewSelOrderFrontListPanel                                               = objc.RegisterName("orderFrontListPanel:")
+	_nSTextViewSelOrderFrontTablePanel                                              = objc.RegisterName("orderFrontTablePanel:")
+	_nSTextViewSelSetNeedsDisplayInRectAvoidAdditionalLayout                        = objc.RegisterName("setNeedsDisplayInRect:avoidAdditionalLayout:")
+	_nSTextViewSelDrawInsertionPointInRectColorTurnedOn                             = objc.RegisterName("drawInsertionPointInRect:color:turnedOn:")
+	_nSTextViewSelDrawViewBackgroundInRect                                          = objc.RegisterName("drawViewBackgroundInRect:")
+	_nSTextViewSelUpdateRuler                                                       = objc.RegisterName("updateRuler")
+	_nSTextViewSelUpdateFontPanel                                                   = objc.RegisterName("updateFontPanel")
+	_nSTextViewSelUpdateDragTypeRegistration                                        = objc.RegisterName("updateDragTypeRegistration")
+	_nSTextViewSelSelectionRangeForProposedRangeGranularity                         = objc.RegisterName("selectionRangeForProposedRange:granularity:")
+	_nSTextViewSelClickedOnLinkAtIndex                                              = objc.RegisterName("clickedOnLink:atIndex:")
+	_nSTextViewSelStartSpeaking                                                     = objc.RegisterName("startSpeaking:")
+	_nSTextViewSelStopSpeaking                                                      = objc.RegisterName("stopSpeaking:")
+	_nSTextViewSelSetLayoutOrientation                                              = objc.RegisterName("setLayoutOrientation:")
+	_nSTextViewSelChangeLayoutOrientation                                           = objc.RegisterName("changeLayoutOrientation:")
+	_nSTextViewSelCharacterIndexForInsertionAtPoint                                 = objc.RegisterName("characterIndexForInsertionAtPoint:")
+	_nSTextViewSelPerformValidatedReplacementInRangeWithAttributedString            = objc.RegisterName("performValidatedReplacementInRange:withAttributedString:")
+	_nSTextViewSelTextContainer                                                     = objc.RegisterName("textContainer")
+	_nSTextViewSelSetTextContainer                                                  = objc.RegisterName("setTextContainer:")
+	_nSTextViewSelTextContainerInset                                                = objc.RegisterName("textContainerInset")
+	_nSTextViewSelSetTextContainerInset                                             = objc.RegisterName("setTextContainerInset:")
+	_nSTextViewSelTextContainerOrigin                                               = objc.RegisterName("textContainerOrigin")
+	_nSTextViewSelLayoutManager                                                     = objc.RegisterName("layoutManager")
+	_nSTextViewSelTextStorage                                                       = objc.RegisterName("textStorage")
+	_nSTextViewSelTextLayoutManager                                                 = objc.RegisterName("textLayoutManager")
+	_nSTextViewSelTextContentStorage                                                = objc.RegisterName("textContentStorage")
+	_nSTextViewSelShouldDrawInsertionPoint                                          = objc.RegisterName("shouldDrawInsertionPoint")
+	_nSTextViewSelStronglyReferencesTextStorage                                     = objc.RegisterName("stronglyReferencesTextStorage")
+	_nSTextViewSelUsesAdaptiveColorMappingForDarkAppearance                         = objc.RegisterName("usesAdaptiveColorMappingForDarkAppearance")
+	_nSTextViewSelSetUsesAdaptiveColorMappingForDarkAppearance                      = objc.RegisterName("setUsesAdaptiveColorMappingForDarkAppearance:")
+	_nSTextViewSelComplete                                                          = objc.RegisterName("complete:")
+	_nSTextViewSelCompletionsForPartialWordRangeIndexOfSelectedItem                 = objc.RegisterName("completionsForPartialWordRange:indexOfSelectedItem:")
+	_nSTextViewSelInsertCompletionForPartialWordRangeMovementIsFinal                = objc.RegisterName("insertCompletion:forPartialWordRange:movement:isFinal:")
+	_nSTextViewSelRangeForUserCompletion                                            = objc.RegisterName("rangeForUserCompletion")
+	_nSTextViewSelWriteSelectionToPasteboardType                                    = objc.RegisterName("writeSelectionToPasteboard:type:")
+	_nSTextViewSelWriteSelectionToPasteboardTypes                                   = objc.RegisterName("writeSelectionToPasteboard:types:")
+	_nSTextViewSelPreferredPasteboardTypeFromArrayRestrictedToTypesFromArray        = objc.RegisterName("preferredPasteboardTypeFromArray:restrictedToTypesFromArray:")
+	_nSTextViewSelReadSelectionFromPasteboardType                                   = objc.RegisterName("readSelectionFromPasteboard:type:")
+	_nSTextViewSelReadSelectionFromPasteboard                                       = objc.RegisterName("readSelectionFromPasteboard:")
+	_nSTextViewSelRegisterForServices                                               = objc.RegisterName("registerForServices")
+	_nSTextViewSelPasteAsPlainText                                                  = objc.RegisterName("pasteAsPlainText:")
+	_nSTextViewSelPasteAsRichText                                                   = objc.RegisterName("pasteAsRichText:")
+	_nSTextViewSelWritablePasteboardTypes                                           = objc.RegisterName("writablePasteboardTypes")
+	_nSTextViewSelReadablePasteboardTypes                                           = objc.RegisterName("readablePasteboardTypes")
+	_nSTextViewSelDragSelectionWithEventOffsetSlideBack                             = objc.RegisterName("dragSelectionWithEvent:offset:slideBack:")
+	_nSTextViewSelDragImageForSelectionWithEventOrigin                              = objc.RegisterName("dragImageForSelectionWithEvent:origin:")
+	_nSTextViewSelDragOperationForDraggingInfoType                                  = objc.RegisterName("dragOperationForDraggingInfo:type:")
+	_nSTextViewSelCleanUpAfterDragOperation                                         = objc.RegisterName("cleanUpAfterDragOperation")
+	_nSTextViewSelAcceptableDragTypes                                               = objc.RegisterName("acceptableDragTypes")
+	_nSTextViewSelSetSelectedRangesAffinityStillSelecting                           = objc.RegisterName("setSelectedRanges:affinity:stillSelecting:")
+	_nSTextViewSelSetSelectedRangeAffinityStillSelecting                            = objc.RegisterName("setSelectedRange:affinity:stillSelecting:")
+	_nSTextViewSelUpdateInsertionPointStateAndRestartTimer                          = objc.RegisterName("updateInsertionPointStateAndRestartTimer:")
+	_nSTextViewSelToggleContinuousSpellChecking                                     = objc.RegisterName("toggleContinuousSpellChecking:")
+	_nSTextViewSelToggleGrammarChecking                                             = objc.RegisterName("toggleGrammarChecking:")
+	_nSTextViewSelSetSpellingStateRange                                             = objc.RegisterName("setSpellingState:range:")
+	_nSTextViewSelShouldChangeTextInRangesReplacementStrings                        = objc.RegisterName("shouldChangeTextInRanges:replacementStrings:")
+	_nSTextViewSelShouldChangeTextInRangeReplacementString                          = objc.RegisterName("shouldChangeTextInRange:replacementString:")
+	_nSTextViewSelDidChangeText                                                     = objc.RegisterName("didChangeText")
+	_nSTextViewSelBreakUndoCoalescing                                               = objc.RegisterName("breakUndoCoalescing")
+	_nSTextViewSelShowFindIndicatorForRange                                         = objc.RegisterName("showFindIndicatorForRange:")
+	_nSTextViewSelSelectedRanges                                                    = objc.RegisterName("selectedRanges")
+	_nSTextViewSelSetSelectedRanges                                                 = objc.RegisterName("setSelectedRanges:")
+	_nSTextViewSelSelectionAffinity                                                 = objc.RegisterName("selectionAffinity")
+	_nSTextViewSelSelectionGranularity                                              = objc.RegisterName("selectionGranularity")
+	_nSTextViewSelSetSelectionGranularity                                           = objc.RegisterName("setSelectionGranularity:")
+	_nSTextViewSelSelectedTextAttributes                                            = objc.RegisterName("selectedTextAttributes")
+	_nSTextViewSelSetSelectedTextAttributes                                         = objc.RegisterName("setSelectedTextAttributes:")
+	_nSTextViewSelInsertionPointColor                                               = objc.RegisterName("insertionPointColor")
+	_nSTextViewSelSetInsertionPointColor                                            = objc.RegisterName("setInsertionPointColor:")
+	_nSTextViewSelMarkedTextAttributes                                              = objc.RegisterName("markedTextAttributes")
+	_nSTextViewSelSetMarkedTextAttributes                                           = objc.RegisterName("setMarkedTextAttributes:")
+	_nSTextViewSelLinkTextAttributes                                                = objc.RegisterName("linkTextAttributes")
+	_nSTextViewSelSetLinkTextAttributes                                             = objc.RegisterName("setLinkTextAttributes:")
+	_nSTextViewSelDisplaysLinkToolTips                                              = objc.RegisterName("displaysLinkToolTips")
+	_nSTextViewSelSetDisplaysLinkToolTips                                           = objc.RegisterName("setDisplaysLinkToolTips:")
+	_nSTextViewSelAcceptsGlyphInfo                                                  = objc.RegisterName("acceptsGlyphInfo")
+	_nSTextViewSelSetAcceptsGlyphInfo                                               = objc.RegisterName("setAcceptsGlyphInfo:")
+	_nSTextViewSelUsesRuler                                                         = objc.RegisterName("usesRuler")
+	_nSTextViewSelSetUsesRuler                                                      = objc.RegisterName("setUsesRuler:")
+	_nSTextViewSelUsesInspectorBar                                                  = objc.RegisterName("usesInspectorBar")
+	_nSTextViewSelSetUsesInspectorBar                                               = objc.RegisterName("setUsesInspectorBar:")
+	_nSTextViewSelIsContinuousSpellCheckingEnabled                                  = objc.RegisterName("isContinuousSpellCheckingEnabled")
+	_nSTextViewSelSetContinuousSpellCheckingEnabled                                 = objc.RegisterName("setContinuousSpellCheckingEnabled:")
+	_nSTextViewSelSpellCheckerDocumentTag                                           = objc.RegisterName("spellCheckerDocumentTag")
+	_nSTextViewSelIsGrammarCheckingEnabled                                          = objc.RegisterName("isGrammarCheckingEnabled")
+	_nSTextViewSelSetGrammarCheckingEnabled                                         = objc.RegisterName("setGrammarCheckingEnabled:")
+	_nSTextViewSelTypingAttributes                                                  = objc.RegisterName("typingAttributes")
+	_nSTextViewSelSetTypingAttributes                                               = objc.RegisterName("setTypingAttributes:")
+	_nSTextViewSelRangesForUserTextChange                                           = objc.RegisterName("rangesForUserTextChange")
+	_nSTextViewSelRangesForUserCharacterAttributeChange                             = objc.RegisterName("rangesForUserCharacterAttributeChange")
+	_nSTextViewSelRangesForUserParagraphAttributeChange                             = objc.RegisterName("rangesForUserParagraphAttributeChange")
+	_nSTextViewSelRangeForUserTextChange                                            = objc.RegisterName("rangeForUserTextChange")
+	_nSTextViewSelRangeForUserCharacterAttributeChange                              = objc.RegisterName("rangeForUserCharacterAttributeChange")
+	_nSTextViewSelRangeForUserParagraphAttributeChange                              = objc.RegisterName("rangeForUserParagraphAttributeChange")
+	_nSTextViewSelAllowsDocumentBackgroundColorChange                               = objc.RegisterName("allowsDocumentBackgroundColorChange")
+	_nSTextViewSelSetAllowsDocumentBackgroundColorChange                            = objc.RegisterName("setAllowsDocumentBackgroundColorChange:")
+	_nSTextViewSelDefaultParagraphStyle                                             = objc.RegisterName("defaultParagraphStyle")
+	_nSTextViewSelSetDefaultParagraphStyle                                          = objc.RegisterName("setDefaultParagraphStyle:")
+	_nSTextViewSelAllowsUndo                                                        = objc.RegisterName("allowsUndo")
+	_nSTextViewSelSetAllowsUndo                                                     = objc.RegisterName("setAllowsUndo:")
+	_nSTextViewSelIsCoalescingUndo                                                  = objc.RegisterName("isCoalescingUndo")
+	_nSTextViewSelAllowsImageEditing                                                = objc.RegisterName("allowsImageEditing")
+	_nSTextViewSelSetAllowsImageEditing                                             = objc.RegisterName("setAllowsImageEditing:")
+	_nSTextViewSelUsesRolloverButtonForSelection                                    = objc.RegisterName("usesRolloverButtonForSelection")
+	_nSTextViewSelSetUsesRolloverButtonForSelection                                 = objc.RegisterName("setUsesRolloverButtonForSelection:")
+	_nSTextViewSelSetRulerVisible                                                   = objc.RegisterName("setRulerVisible:")
+	_nSTextViewSelAllowedInputSourceLocales                                         = objc.RegisterName("allowedInputSourceLocales")
+	_nSTextViewSelSetAllowedInputSourceLocales                                      = objc.RegisterName("setAllowedInputSourceLocales:")
+	_nSTextViewSelIsWritingToolsActive                                              = objc.RegisterName("isWritingToolsActive")
+	_nSTextViewSelWritingToolsBehavior                                              = objc.RegisterName("writingToolsBehavior")
+	_nSTextViewSelSetWritingToolsBehavior                                           = objc.RegisterName("setWritingToolsBehavior:")
+	_nSTextViewSelAllowedWritingToolsResultOptions                                  = objc.RegisterName("allowedWritingToolsResultOptions")
+	_nSTextViewSelSetAllowedWritingToolsResultOptions                               = objc.RegisterName("setAllowedWritingToolsResultOptions:")
+	_nSTextViewSelSmartDeleteRangeForProposedRange                                  = objc.RegisterName("smartDeleteRangeForProposedRange:")
+	_nSTextViewSelToggleSmartInsertDelete                                           = objc.RegisterName("toggleSmartInsertDelete:")
+	_nSTextViewSelSmartInsertForStringReplacingRangeBeforeStringAfterString         = objc.RegisterName("smartInsertForString:replacingRange:beforeString:afterString:")
+	_nSTextViewSelSmartInsertBeforeStringForStringReplacingRange                    = objc.RegisterName("smartInsertBeforeStringForString:replacingRange:")
+	_nSTextViewSelSmartInsertAfterStringForStringReplacingRange                     = objc.RegisterName("smartInsertAfterStringForString:replacingRange:")
+	_nSTextViewSelToggleAutomaticQuoteSubstitution                                  = objc.RegisterName("toggleAutomaticQuoteSubstitution:")
+	_nSTextViewSelToggleAutomaticLinkDetection                                      = objc.RegisterName("toggleAutomaticLinkDetection:")
+	_nSTextViewSelToggleAutomaticDataDetection                                      = objc.RegisterName("toggleAutomaticDataDetection:")
+	_nSTextViewSelToggleAutomaticDashSubstitution                                   = objc.RegisterName("toggleAutomaticDashSubstitution:")
+	_nSTextViewSelToggleAutomaticTextReplacement                                    = objc.RegisterName("toggleAutomaticTextReplacement:")
+	_nSTextViewSelToggleAutomaticSpellingCorrection                                 = objc.RegisterName("toggleAutomaticSpellingCorrection:")
+	_nSTextViewSelCheckTextInRangeTypesOptions                                      = objc.RegisterName("checkTextInRange:types:options:")
 	_nSTextViewSelHandleTextCheckingResultsForRangeTypesOptionsOrthographyWordCount = objc.RegisterName("handleTextCheckingResults:forRange:types:options:orthography:wordCount:")
-	_nSTextViewSelOrderFrontSubstitutionsPanel = objc.RegisterName("orderFrontSubstitutionsPanel:")
-	_nSTextViewSelCheckTextInSelection = objc.RegisterName("checkTextInSelection:")
-	_nSTextViewSelCheckTextInDocument = objc.RegisterName("checkTextInDocument:")
-	_nSTextViewSelSmartInsertDeleteEnabled = objc.RegisterName("smartInsertDeleteEnabled")
-	_nSTextViewSelSetSmartInsertDeleteEnabled = objc.RegisterName("setSmartInsertDeleteEnabled:")
-	_nSTextViewSelIsAutomaticQuoteSubstitutionEnabled = objc.RegisterName("isAutomaticQuoteSubstitutionEnabled")
-	_nSTextViewSelSetAutomaticQuoteSubstitutionEnabled = objc.RegisterName("setAutomaticQuoteSubstitutionEnabled:")
-	_nSTextViewSelIsAutomaticLinkDetectionEnabled = objc.RegisterName("isAutomaticLinkDetectionEnabled")
-	_nSTextViewSelSetAutomaticLinkDetectionEnabled = objc.RegisterName("setAutomaticLinkDetectionEnabled:")
-	_nSTextViewSelIsAutomaticDataDetectionEnabled = objc.RegisterName("isAutomaticDataDetectionEnabled")
-	_nSTextViewSelSetAutomaticDataDetectionEnabled = objc.RegisterName("setAutomaticDataDetectionEnabled:")
-	_nSTextViewSelIsAutomaticDashSubstitutionEnabled = objc.RegisterName("isAutomaticDashSubstitutionEnabled")
-	_nSTextViewSelSetAutomaticDashSubstitutionEnabled = objc.RegisterName("setAutomaticDashSubstitutionEnabled:")
-	_nSTextViewSelIsAutomaticTextReplacementEnabled = objc.RegisterName("isAutomaticTextReplacementEnabled")
-	_nSTextViewSelSetAutomaticTextReplacementEnabled = objc.RegisterName("setAutomaticTextReplacementEnabled:")
-	_nSTextViewSelIsAutomaticSpellingCorrectionEnabled = objc.RegisterName("isAutomaticSpellingCorrectionEnabled")
-	_nSTextViewSelSetAutomaticSpellingCorrectionEnabled = objc.RegisterName("setAutomaticSpellingCorrectionEnabled:")
-	_nSTextViewSelEnabledTextCheckingTypes = objc.RegisterName("enabledTextCheckingTypes")
-	_nSTextViewSelSetEnabledTextCheckingTypes = objc.RegisterName("setEnabledTextCheckingTypes:")
-	_nSTextViewSelUsesFindPanel = objc.RegisterName("usesFindPanel")
-	_nSTextViewSelSetUsesFindPanel = objc.RegisterName("setUsesFindPanel:")
-	_nSTextViewSelUsesFindBar = objc.RegisterName("usesFindBar")
-	_nSTextViewSelSetUsesFindBar = objc.RegisterName("setUsesFindBar:")
-	_nSTextViewSelIsIncrementalSearchingEnabled = objc.RegisterName("isIncrementalSearchingEnabled")
-	_nSTextViewSelSetIncrementalSearchingEnabled = objc.RegisterName("setIncrementalSearchingEnabled:")
-	_nSTextViewSelInlinePredictionType = objc.RegisterName("inlinePredictionType")
-	_nSTextViewSelSetInlinePredictionType = objc.RegisterName("setInlinePredictionType:")
-	_nSTextViewSelMathExpressionCompletionType = objc.RegisterName("mathExpressionCompletionType")
-	_nSTextViewSelSetMathExpressionCompletionType = objc.RegisterName("setMathExpressionCompletionType:")
-	_nSTextViewSelToggleQuickLookPreviewPanel = objc.RegisterName("toggleQuickLookPreviewPanel:")
-	_nSTextViewSelQuickLookPreviewableItemsInRanges = objc.RegisterName("quickLookPreviewableItemsInRanges:")
-	_nSTextViewSelUpdateQuickLookPreviewPanel = objc.RegisterName("updateQuickLookPreviewPanel")
-	_nSTextViewSelOrderFrontSharingServicePicker = objc.RegisterName("orderFrontSharingServicePicker:")
-	_nSTextViewSelToggleAutomaticTextCompletion = objc.RegisterName("toggleAutomaticTextCompletion:")
-	_nSTextViewSelUpdateTouchBarItemIdentifiers = objc.RegisterName("updateTouchBarItemIdentifiers")
-	_nSTextViewSelUpdateTextTouchBarItems = objc.RegisterName("updateTextTouchBarItems")
-	_nSTextViewSelUpdateCandidates = objc.RegisterName("updateCandidates")
-	_nSTextViewSelIsAutomaticTextCompletionEnabled = objc.RegisterName("isAutomaticTextCompletionEnabled")
-	_nSTextViewSelSetAutomaticTextCompletionEnabled = objc.RegisterName("setAutomaticTextCompletionEnabled:")
-	_nSTextViewSelAllowsCharacterPickerTouchBarItem = objc.RegisterName("allowsCharacterPickerTouchBarItem")
-	_nSTextViewSelSetAllowsCharacterPickerTouchBarItem = objc.RegisterName("setAllowsCharacterPickerTouchBarItem:")
-	_nSTextViewSelScrollableTextView = objc.RegisterName("scrollableTextView")
-	_nSTextViewSelFieldEditor = objc.RegisterName("fieldEditor")
-	_nSTextViewSelScrollableDocumentContentTextView = objc.RegisterName("scrollableDocumentContentTextView")
-	_nSTextViewSelScrollablePlainDocumentContentTextView = objc.RegisterName("scrollablePlainDocumentContentTextView")
-	_nSTextViewSelDrawTextHighlightBackgroundForTextRangeOrigin = objc.RegisterName("drawTextHighlightBackgroundForTextRange:origin:")
-	_nSTextViewSelHighlight = objc.RegisterName("highlight:")
-	_nSTextViewSelTextHighlightAttributes = objc.RegisterName("textHighlightAttributes")
-	_nSTextViewSelSetTextHighlightAttributes = objc.RegisterName("setTextHighlightAttributes:")
-	_nSTextViewSelToggleBaseWritingDirection = objc.RegisterName("toggleBaseWritingDirection:")
+	_nSTextViewSelOrderFrontSubstitutionsPanel                                      = objc.RegisterName("orderFrontSubstitutionsPanel:")
+	_nSTextViewSelCheckTextInSelection                                              = objc.RegisterName("checkTextInSelection:")
+	_nSTextViewSelCheckTextInDocument                                               = objc.RegisterName("checkTextInDocument:")
+	_nSTextViewSelSmartInsertDeleteEnabled                                          = objc.RegisterName("smartInsertDeleteEnabled")
+	_nSTextViewSelSetSmartInsertDeleteEnabled                                       = objc.RegisterName("setSmartInsertDeleteEnabled:")
+	_nSTextViewSelIsAutomaticQuoteSubstitutionEnabled                               = objc.RegisterName("isAutomaticQuoteSubstitutionEnabled")
+	_nSTextViewSelSetAutomaticQuoteSubstitutionEnabled                              = objc.RegisterName("setAutomaticQuoteSubstitutionEnabled:")
+	_nSTextViewSelIsAutomaticLinkDetectionEnabled                                   = objc.RegisterName("isAutomaticLinkDetectionEnabled")
+	_nSTextViewSelSetAutomaticLinkDetectionEnabled                                  = objc.RegisterName("setAutomaticLinkDetectionEnabled:")
+	_nSTextViewSelIsAutomaticDataDetectionEnabled                                   = objc.RegisterName("isAutomaticDataDetectionEnabled")
+	_nSTextViewSelSetAutomaticDataDetectionEnabled                                  = objc.RegisterName("setAutomaticDataDetectionEnabled:")
+	_nSTextViewSelIsAutomaticDashSubstitutionEnabled                                = objc.RegisterName("isAutomaticDashSubstitutionEnabled")
+	_nSTextViewSelSetAutomaticDashSubstitutionEnabled                               = objc.RegisterName("setAutomaticDashSubstitutionEnabled:")
+	_nSTextViewSelIsAutomaticTextReplacementEnabled                                 = objc.RegisterName("isAutomaticTextReplacementEnabled")
+	_nSTextViewSelSetAutomaticTextReplacementEnabled                                = objc.RegisterName("setAutomaticTextReplacementEnabled:")
+	_nSTextViewSelIsAutomaticSpellingCorrectionEnabled                              = objc.RegisterName("isAutomaticSpellingCorrectionEnabled")
+	_nSTextViewSelSetAutomaticSpellingCorrectionEnabled                             = objc.RegisterName("setAutomaticSpellingCorrectionEnabled:")
+	_nSTextViewSelEnabledTextCheckingTypes                                          = objc.RegisterName("enabledTextCheckingTypes")
+	_nSTextViewSelSetEnabledTextCheckingTypes                                       = objc.RegisterName("setEnabledTextCheckingTypes:")
+	_nSTextViewSelUsesFindPanel                                                     = objc.RegisterName("usesFindPanel")
+	_nSTextViewSelSetUsesFindPanel                                                  = objc.RegisterName("setUsesFindPanel:")
+	_nSTextViewSelUsesFindBar                                                       = objc.RegisterName("usesFindBar")
+	_nSTextViewSelSetUsesFindBar                                                    = objc.RegisterName("setUsesFindBar:")
+	_nSTextViewSelIsIncrementalSearchingEnabled                                     = objc.RegisterName("isIncrementalSearchingEnabled")
+	_nSTextViewSelSetIncrementalSearchingEnabled                                    = objc.RegisterName("setIncrementalSearchingEnabled:")
+	_nSTextViewSelInlinePredictionType                                              = objc.RegisterName("inlinePredictionType")
+	_nSTextViewSelSetInlinePredictionType                                           = objc.RegisterName("setInlinePredictionType:")
+	_nSTextViewSelMathExpressionCompletionType                                      = objc.RegisterName("mathExpressionCompletionType")
+	_nSTextViewSelSetMathExpressionCompletionType                                   = objc.RegisterName("setMathExpressionCompletionType:")
+	_nSTextViewSelToggleQuickLookPreviewPanel                                       = objc.RegisterName("toggleQuickLookPreviewPanel:")
+	_nSTextViewSelQuickLookPreviewableItemsInRanges                                 = objc.RegisterName("quickLookPreviewableItemsInRanges:")
+	_nSTextViewSelUpdateQuickLookPreviewPanel                                       = objc.RegisterName("updateQuickLookPreviewPanel")
+	_nSTextViewSelOrderFrontSharingServicePicker                                    = objc.RegisterName("orderFrontSharingServicePicker:")
+	_nSTextViewSelToggleAutomaticTextCompletion                                     = objc.RegisterName("toggleAutomaticTextCompletion:")
+	_nSTextViewSelUpdateTouchBarItemIdentifiers                                     = objc.RegisterName("updateTouchBarItemIdentifiers")
+	_nSTextViewSelUpdateTextTouchBarItems                                           = objc.RegisterName("updateTextTouchBarItems")
+	_nSTextViewSelUpdateCandidates                                                  = objc.RegisterName("updateCandidates")
+	_nSTextViewSelIsAutomaticTextCompletionEnabled                                  = objc.RegisterName("isAutomaticTextCompletionEnabled")
+	_nSTextViewSelSetAutomaticTextCompletionEnabled                                 = objc.RegisterName("setAutomaticTextCompletionEnabled:")
+	_nSTextViewSelAllowsCharacterPickerTouchBarItem                                 = objc.RegisterName("allowsCharacterPickerTouchBarItem")
+	_nSTextViewSelSetAllowsCharacterPickerTouchBarItem                              = objc.RegisterName("setAllowsCharacterPickerTouchBarItem:")
+	_nSTextViewSelScrollableTextView                                                = objc.RegisterName("scrollableTextView")
+	_nSTextViewSelFieldEditor                                                       = objc.RegisterName("fieldEditor")
+	_nSTextViewSelScrollableDocumentContentTextView                                 = objc.RegisterName("scrollableDocumentContentTextView")
+	_nSTextViewSelScrollablePlainDocumentContentTextView                            = objc.RegisterName("scrollablePlainDocumentContentTextView")
+	_nSTextViewSelDrawTextHighlightBackgroundForTextRangeOrigin                     = objc.RegisterName("drawTextHighlightBackgroundForTextRange:origin:")
+	_nSTextViewSelHighlight                                                         = objc.RegisterName("highlight:")
+	_nSTextViewSelTextHighlightAttributes                                           = objc.RegisterName("textHighlightAttributes")
+	_nSTextViewSelSetTextHighlightAttributes                                        = objc.RegisterName("setTextHighlightAttributes:")
+	_nSTextViewSelToggleBaseWritingDirection                                        = objc.RegisterName("toggleBaseWritingDirection:")
 )
 
 func NSTextViewFromID(id objc.ID) *NSTextView {
@@ -236,31 +236,41 @@ func NSTextViewFromID(id objc.ID) *NSTextView {
 
 func (o *NSTextView) InitWithFrameTextContainer(frameRect corefoundation.CGRect, container *NSTextContainer) *NSTextView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelInitWithFrameTextContainer, frameRect, container.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextViewFromID(_ret)
 }
 
 func (o *NSTextView) InitWithCoder(coder *foundation.NSCoder) *NSTextView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextViewFromID(_ret)
 }
 
 func (o *NSTextView) InitWithFrame(frameRect corefoundation.CGRect) *NSTextView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelInitWithFrame, frameRect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextViewFromID(_ret)
 }
 
 func (o *NSTextView) InitUsingTextLayoutManager(usingTextLayoutManager bool) *NSTextView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelInitUsingTextLayoutManager, usingTextLayoutManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextViewFromID(_ret)
 }
 
 func NSTextViewTextViewUsingTextLayoutManager(usingTextLayoutManager bool) *NSTextView {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextView), _nSTextViewSelTextViewUsingTextLayoutManager, usingTextLayoutManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextViewFromID(_ret)
 }
 
@@ -432,7 +442,9 @@ func (o *NSTextView) PerformValidatedReplacementInRangeWithAttributedString(rang
 
 func (o *NSTextView) TextContainer() *NSTextContainer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelTextContainer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextContainerFromID(_ret)
 }
 
@@ -456,25 +468,33 @@ func (o *NSTextView) TextContainerOrigin() corefoundation.CGPoint {
 
 func (o *NSTextView) LayoutManager() *NSLayoutManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelLayoutManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutManagerFromID(_ret)
 }
 
 func (o *NSTextView) TextStorage() *NSTextStorage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelTextStorage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextStorageFromID(_ret)
 }
 
 func (o *NSTextView) TextLayoutManager() *NSTextLayoutManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelTextLayoutManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextLayoutManagerFromID(_ret)
 }
 
 func (o *NSTextView) TextContentStorage() *NSTextContentStorage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelTextContentStorage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextContentStorageFromID(_ret)
 }
 
@@ -527,7 +547,9 @@ func (o *NSTextView) WriteSelectionToPasteboardTypes(pboard *NSPasteboard, types
 
 func (o *NSTextView) PreferredPasteboardTypeFromArrayRestrictedToTypesFromArray(availableTypes *foundation.NSArray[*foundation.NSString], allowedTypes *foundation.NSArray[*foundation.NSString]) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelPreferredPasteboardTypeFromArrayRestrictedToTypesFromArray, availableTypes, allowedTypes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -570,7 +592,9 @@ func (o *NSTextView) DragSelectionWithEventOffsetSlideBack(event *NSEvent, mouse
 
 func (o *NSTextView) DragImageForSelectionWithEventOrigin(event *NSEvent, origin *corefoundation.CGPoint) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelDragImageForSelectionWithEventOrigin, event.Ptr(), origin)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -668,7 +692,9 @@ func (o *NSTextView) SetSelectedTextAttributes(selectedTextAttributes *foundatio
 
 func (o *NSTextView) InsertionPointColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelInsertionPointColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -803,7 +829,9 @@ func (o *NSTextView) SetAllowsDocumentBackgroundColorChange(allowsDocumentBackgr
 
 func (o *NSTextView) DefaultParagraphStyle() *NSParagraphStyle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelDefaultParagraphStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSParagraphStyleFromID(_ret)
 }
 
@@ -894,13 +922,17 @@ func (o *NSTextView) SmartInsertForStringReplacingRangeBeforeStringAfterString(p
 
 func (o *NSTextView) SmartInsertBeforeStringForStringReplacingRange(pasteString *foundation.NSString, charRangeToReplace foundation.NSRange) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelSmartInsertBeforeStringForStringReplacingRange, pasteString.Ptr(), charRangeToReplace)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSTextView) SmartInsertAfterStringForStringReplacingRange(pasteString *foundation.NSString, charRangeToReplace foundation.NSRange) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelSmartInsertAfterStringForStringReplacingRange, pasteString.Ptr(), charRangeToReplace)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1118,25 +1150,33 @@ func (o *NSTextView) SetAllowsCharacterPickerTouchBarItem(allowsCharacterPickerT
 
 func NSTextViewScrollableTextView() *NSScrollView {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextView), _nSTextViewSelScrollableTextView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrollViewFromID(_ret)
 }
 
 func NSTextViewFieldEditor() *NSTextView {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextView), _nSTextViewSelFieldEditor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextViewFromID(_ret)
 }
 
 func NSTextViewScrollableDocumentContentTextView() *NSScrollView {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextView), _nSTextViewSelScrollableDocumentContentTextView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrollViewFromID(_ret)
 }
 
 func NSTextViewScrollablePlainDocumentContentTextView() *NSScrollView {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextView), _nSTextViewSelScrollablePlainDocumentContentTextView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrollViewFromID(_ret)
 }
 
@@ -1162,4 +1202,3 @@ func (o *NSTextView) SetTextHighlightAttributes(textHighlightAttributes *foundat
 func (o *NSTextView) ToggleBaseWritingDirection(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelToggleBaseWritingDirection, sender)
 }
-

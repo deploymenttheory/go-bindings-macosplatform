@@ -124,7 +124,9 @@ func (x *DOMNamedNodeMap) RemoveNamedItemNS(namespaceURI string, localName strin
 
 func (x *DOMNamedNodeMap) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
-func (x *DOMNamedNodeMap) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+func (x *DOMNamedNodeMap) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMObject.WebScriptObject
+}
 
 // DOMNamedNodeMapable is the interface implemented by [DOMNamedNodeMap], for mocking and DI.
 type DOMNamedNodeMapable interface {
@@ -142,4 +144,3 @@ type DOMNamedNodeMapable interface {
 }
 
 var _ DOMNamedNodeMapable = (*DOMNamedNodeMap)(nil)
-

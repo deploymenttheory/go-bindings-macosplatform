@@ -17,4 +17,3 @@ type ActionProvider interface {
 type AnnotationProvider interface {
 	asAnnotation() *raw.PDFAnnotation
 }
-

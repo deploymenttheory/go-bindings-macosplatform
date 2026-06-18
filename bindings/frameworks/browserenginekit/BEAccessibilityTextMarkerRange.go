@@ -16,11 +16,11 @@ type BEAccessibilityTextMarkerRange struct {
 }
 
 var (
-	_clsBEAccessibilityTextMarkerRange = _objcClass("BEAccessibilityTextMarkerRange")
-	_bEAccessibilityTextMarkerRangeSelStartMarker = objc.RegisterName("startMarker")
+	_clsBEAccessibilityTextMarkerRange               = _objcClass("BEAccessibilityTextMarkerRange")
+	_bEAccessibilityTextMarkerRangeSelStartMarker    = objc.RegisterName("startMarker")
 	_bEAccessibilityTextMarkerRangeSelSetStartMarker = objc.RegisterName("setStartMarker:")
-	_bEAccessibilityTextMarkerRangeSelEndMarker = objc.RegisterName("endMarker")
-	_bEAccessibilityTextMarkerRangeSelSetEndMarker = objc.RegisterName("setEndMarker:")
+	_bEAccessibilityTextMarkerRangeSelEndMarker      = objc.RegisterName("endMarker")
+	_bEAccessibilityTextMarkerRangeSelSetEndMarker   = objc.RegisterName("setEndMarker:")
 )
 
 func BEAccessibilityTextMarkerRangeFromID(id objc.ID) *BEAccessibilityTextMarkerRange {
@@ -35,7 +35,9 @@ func BEAccessibilityTextMarkerRangeFromID(id objc.ID) *BEAccessibilityTextMarker
 
 func (o *BEAccessibilityTextMarkerRange) StartMarker() *BEAccessibilityTextMarker {
 	_ret := objc.Send[objc.ID](o.Ptr(), _bEAccessibilityTextMarkerRangeSelStartMarker)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return BEAccessibilityTextMarkerFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *BEAccessibilityTextMarkerRange) SetStartMarker(startMarker *BEAccessibi
 
 func (o *BEAccessibilityTextMarkerRange) EndMarker() *BEAccessibilityTextMarker {
 	_ret := objc.Send[objc.ID](o.Ptr(), _bEAccessibilityTextMarkerRangeSelEndMarker)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return BEAccessibilityTextMarkerFromID(_ret)
 }
 
 func (o *BEAccessibilityTextMarkerRange) SetEndMarker(endMarker *BEAccessibilityTextMarker) {
 	o.Ptr().Send(_bEAccessibilityTextMarkerRangeSelSetEndMarker, endMarker.Ptr())
 }
-

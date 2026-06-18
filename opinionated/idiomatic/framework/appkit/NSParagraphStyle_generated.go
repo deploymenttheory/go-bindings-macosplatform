@@ -194,4 +194,3 @@ type ParagraphStyleable interface {
 }
 
 var _ ParagraphStyleable = (*ParagraphStyle)(nil)
-

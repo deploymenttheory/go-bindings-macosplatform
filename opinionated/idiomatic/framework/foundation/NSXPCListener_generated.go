@@ -111,4 +111,3 @@ type XPCListenerable interface {
 }
 
 var _ XPCListenerable = (*XPCListener)(nil)
-

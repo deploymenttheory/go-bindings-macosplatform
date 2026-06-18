@@ -66,7 +66,9 @@ func (x *BeaconIdentityCondition) Minor() *foundation.NSNumber {
 	return x.inner.Minor()
 }
 
-func (x *BeaconIdentityCondition) asBeaconIdentityCondition() *raw.CLBeaconIdentityCondition { return x.inner }
+func (x *BeaconIdentityCondition) asBeaconIdentityCondition() *raw.CLBeaconIdentityCondition {
+	return x.inner
+}
 
 func (x *BeaconIdentityCondition) asCondition() *raw.CLCondition { return &x.inner.CLCondition }
 
@@ -79,4 +81,3 @@ type BeaconIdentityConditionable interface {
 }
 
 var _ BeaconIdentityConditionable = (*BeaconIdentityCondition)(nil)
-

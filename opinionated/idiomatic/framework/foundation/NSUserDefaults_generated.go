@@ -282,4 +282,3 @@ type UserDefaultsable interface {
 }
 
 var _ UserDefaultsable = (*UserDefaults)(nil)
-

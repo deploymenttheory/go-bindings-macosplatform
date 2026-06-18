@@ -16,10 +16,10 @@ type INEditMessageIntent struct {
 }
 
 var (
-	_clsINEditMessageIntent = _objcClass("INEditMessageIntent")
+	_clsINEditMessageIntent                                       = _objcClass("INEditMessageIntent")
 	_iNEditMessageIntentSelInitWithMessageIdentifierEditedContent = objc.RegisterName("initWithMessageIdentifier:editedContent:")
-	_iNEditMessageIntentSelMessageIdentifier = objc.RegisterName("messageIdentifier")
-	_iNEditMessageIntentSelEditedContent = objc.RegisterName("editedContent")
+	_iNEditMessageIntentSelMessageIdentifier                      = objc.RegisterName("messageIdentifier")
+	_iNEditMessageIntentSelEditedContent                          = objc.RegisterName("editedContent")
 )
 
 func INEditMessageIntentFromID(id objc.ID) *INEditMessageIntent {
@@ -34,19 +34,24 @@ func INEditMessageIntentFromID(id objc.ID) *INEditMessageIntent {
 
 func (o *INEditMessageIntent) InitWithMessageIdentifierEditedContent(messageIdentifier *foundation.NSString, editedContent *foundation.NSString) *INEditMessageIntent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNEditMessageIntentSelInitWithMessageIdentifierEditedContent, messageIdentifier.Ptr(), editedContent.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INEditMessageIntentFromID(_ret)
 }
 
 func (o *INEditMessageIntent) MessageIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNEditMessageIntentSelMessageIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INEditMessageIntent) EditedContent() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNEditMessageIntentSelEditedContent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

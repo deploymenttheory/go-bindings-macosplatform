@@ -90,9 +90,13 @@ func (x *NDArrayMultiaryKernel) EncodeToCommandEncoderCommandBufferSourceArraysD
 	x.inner.EncodeToCommandEncoderCommandBufferSourceArraysDestinationArray(encoder, commandBuffer, sourceArrays, destination)
 }
 
-func (x *NDArrayMultiaryKernel) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryBase }
+func (x *NDArrayMultiaryKernel) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase {
+	return &x.inner.MPSNDArrayMultiaryBase
+}
 
-func (x *NDArrayMultiaryKernel) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNDArrayMultiaryBase.MPSKernel }
+func (x *NDArrayMultiaryKernel) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSNDArrayMultiaryBase.MPSKernel
+}
 
 // NDArrayMultiaryKernelable is the interface implemented by [NDArrayMultiaryKernel], for mocking and DI.
 type NDArrayMultiaryKernelable interface {
@@ -108,4 +112,3 @@ type NDArrayMultiaryKernelable interface {
 }
 
 var _ NDArrayMultiaryKernelable = (*NDArrayMultiaryKernel)(nil)
-

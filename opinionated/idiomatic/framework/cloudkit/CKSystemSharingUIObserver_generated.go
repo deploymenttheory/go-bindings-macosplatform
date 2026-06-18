@@ -104,4 +104,3 @@ type SystemSharingUIObserverable interface {
 }
 
 var _ SystemSharingUIObserverable = (*SystemSharingUIObserver)(nil)
-

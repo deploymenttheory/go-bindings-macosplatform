@@ -119,4 +119,3 @@ func CWKeychainSetWiFiPassword(domain raw.CWKeychainDomain, ssid *foundation.NSD
 	}
 	return nil
 }
-

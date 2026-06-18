@@ -18,25 +18,25 @@ type CKQueryOperation struct {
 }
 
 var (
-	_clsCKQueryOperation = _objcClass("CKQueryOperation")
-	_cKQueryOperationSelInit = objc.RegisterName("init")
-	_cKQueryOperationSelInitWithQuery = objc.RegisterName("initWithQuery:")
-	_cKQueryOperationSelInitWithCursor = objc.RegisterName("initWithCursor:")
-	_cKQueryOperationSelQuery = objc.RegisterName("query")
-	_cKQueryOperationSelSetQuery = objc.RegisterName("setQuery:")
-	_cKQueryOperationSelCursor = objc.RegisterName("cursor")
-	_cKQueryOperationSelSetCursor = objc.RegisterName("setCursor:")
-	_cKQueryOperationSelZoneID = objc.RegisterName("zoneID")
-	_cKQueryOperationSelSetZoneID = objc.RegisterName("setZoneID:")
-	_cKQueryOperationSelResultsLimit = objc.RegisterName("resultsLimit")
-	_cKQueryOperationSelSetResultsLimit = objc.RegisterName("setResultsLimit:")
-	_cKQueryOperationSelDesiredKeys = objc.RegisterName("desiredKeys")
-	_cKQueryOperationSelSetDesiredKeys = objc.RegisterName("setDesiredKeys:")
-	_cKQueryOperationSelRecordFetchedBlock = objc.RegisterName("recordFetchedBlock")
-	_cKQueryOperationSelSetRecordFetchedBlock = objc.RegisterName("setRecordFetchedBlock:")
-	_cKQueryOperationSelRecordMatchedBlock = objc.RegisterName("recordMatchedBlock")
-	_cKQueryOperationSelSetRecordMatchedBlock = objc.RegisterName("setRecordMatchedBlock:")
-	_cKQueryOperationSelQueryCompletionBlock = objc.RegisterName("queryCompletionBlock")
+	_clsCKQueryOperation                        = _objcClass("CKQueryOperation")
+	_cKQueryOperationSelInit                    = objc.RegisterName("init")
+	_cKQueryOperationSelInitWithQuery           = objc.RegisterName("initWithQuery:")
+	_cKQueryOperationSelInitWithCursor          = objc.RegisterName("initWithCursor:")
+	_cKQueryOperationSelQuery                   = objc.RegisterName("query")
+	_cKQueryOperationSelSetQuery                = objc.RegisterName("setQuery:")
+	_cKQueryOperationSelCursor                  = objc.RegisterName("cursor")
+	_cKQueryOperationSelSetCursor               = objc.RegisterName("setCursor:")
+	_cKQueryOperationSelZoneID                  = objc.RegisterName("zoneID")
+	_cKQueryOperationSelSetZoneID               = objc.RegisterName("setZoneID:")
+	_cKQueryOperationSelResultsLimit            = objc.RegisterName("resultsLimit")
+	_cKQueryOperationSelSetResultsLimit         = objc.RegisterName("setResultsLimit:")
+	_cKQueryOperationSelDesiredKeys             = objc.RegisterName("desiredKeys")
+	_cKQueryOperationSelSetDesiredKeys          = objc.RegisterName("setDesiredKeys:")
+	_cKQueryOperationSelRecordFetchedBlock      = objc.RegisterName("recordFetchedBlock")
+	_cKQueryOperationSelSetRecordFetchedBlock   = objc.RegisterName("setRecordFetchedBlock:")
+	_cKQueryOperationSelRecordMatchedBlock      = objc.RegisterName("recordMatchedBlock")
+	_cKQueryOperationSelSetRecordMatchedBlock   = objc.RegisterName("setRecordMatchedBlock:")
+	_cKQueryOperationSelQueryCompletionBlock    = objc.RegisterName("queryCompletionBlock")
 	_cKQueryOperationSelSetQueryCompletionBlock = objc.RegisterName("setQueryCompletionBlock:")
 )
 
@@ -53,28 +53,36 @@ func CKQueryOperationFromID(id objc.ID) *CKQueryOperation {
 // Creates an empty query operation.
 func (o *CKQueryOperation) Init() *CKQueryOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKQueryOperationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKQueryOperationFromID(_ret)
 }
 
 // Creates an operation that searches for records in the specified record zone. - Parameters: - query: The query for the search. You can use the operation that this method returns only once to perform a search, but you can reuse the query that you provide. During execution, the operation performs a new search and returns the first batch of results. If there are more results available, you must create a separate query object using the provided cursor object.
 func (o *CKQueryOperation) InitWithQuery(query *CKQuery) *CKQueryOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKQueryOperationSelInitWithQuery, query.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKQueryOperationFromID(_ret)
 }
 
-// Creates an operation with additional results from a previous search. - Parameters: - cursor: The cursor that identifies the previous search. CloudKit passes this value to the completion handler of the previous search. For more information, see the ``CKQueryOperation/queryCompletionBlock`` property. Use this method to create an operation that retrieves the next batch of results from a previous search. When executing searches for a cursor, don't cache cursors for a long time before using them. A cursor isn't a snapshot of the previous search results; it stores a relative offset into the results list. An operation that you create from a cursor performs a new search, sorts the new set of results, and uses the previous offset value to determine where the next batch of results starts.
+// Creates an operation with additional results from a previous search. - Parameters: - cursor: The cursor that identifies the previous search. CloudKit passes this value to the completion handler of the previous search. For more information, see the “CKQueryOperation/queryCompletionBlock“ property. Use this method to create an operation that retrieves the next batch of results from a previous search. When executing searches for a cursor, don't cache cursors for a long time before using them. A cursor isn't a snapshot of the previous search results; it stores a relative offset into the results list. An operation that you create from a cursor performs a new search, sorts the new set of results, and uses the previous offset value to determine where the next batch of results starts.
 func (o *CKQueryOperation) InitWithCursor(cursor *CKQueryCursor) *CKQueryOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKQueryOperationSelInitWithCursor, cursor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKQueryOperationFromID(_ret)
 }
 
-// The query for the search. The initial value of this property is the query that you provide to the ``CKQueryOperation/init(query:)`` method. When the value in the ``CKQueryOperation/cursor`` property is `nil`, the operation uses this property's value to execute a new search and return its results to your completion handler. If ``CKQueryOperation/cursor`` isn't `nil`, the operation uses the cursor instead. If you intend to specify or change the value of this property, do so before you execute the operation or submit it to a queue.
+// The query for the search. The initial value of this property is the query that you provide to the “CKQueryOperation/init(query:)“ method. When the value in the “CKQueryOperation/cursor“ property is `nil`, the operation uses this property's value to execute a new search and return its results to your completion handler. If “CKQueryOperation/cursor“ isn't `nil`, the operation uses the cursor instead. If you intend to specify or change the value of this property, do so before you execute the operation or submit it to a queue.
 func (o *CKQueryOperation) Query() *CKQuery {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKQueryOperationSelQuery)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKQueryFromID(_ret)
 }
 
@@ -82,10 +90,12 @@ func (o *CKQueryOperation) SetQuery(query *CKQuery) {
 	o.Ptr().Send(_cKQueryOperationSelSetQuery, query.Ptr())
 }
 
-// The cursor for continuing the search. The initial value of this property is the cursor that you provide to the ``CKQueryOperation/init(cursor:)`` method. When you use a cursor, the operation ignores the contents of the ``CKQueryOperation/query`` property. This property's value is an opaque value that CloudKit provides. For more information, see the ``CKQueryOperation/queryCompletionBlock`` property. If you intend to specify or change the value in this property, do so before you execute the operation or submit it to a queue.
+// The cursor for continuing the search. The initial value of this property is the cursor that you provide to the “CKQueryOperation/init(cursor:)“ method. When you use a cursor, the operation ignores the contents of the “CKQueryOperation/query“ property. This property's value is an opaque value that CloudKit provides. For more information, see the “CKQueryOperation/queryCompletionBlock“ property. If you intend to specify or change the value in this property, do so before you execute the operation or submit it to a queue.
 func (o *CKQueryOperation) Cursor() *CKQueryCursor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKQueryOperationSelCursor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKQueryCursorFromID(_ret)
 }
 
@@ -93,10 +103,12 @@ func (o *CKQueryOperation) SetCursor(cursor *CKQueryCursor) {
 	o.Ptr().Send(_cKQueryOperationSelSetCursor, cursor.Ptr())
 }
 
-// The ID of the record zone that contains the records to search. The value of this property limits the scope of the search to only the records in the specified record zone. If you don't specify a record zone, the search includes all record zones. When you create an operation using the ``CKQueryOperation/init(cursor:)`` method, this property's value is `nil` and CloudKit ignores any changes that you make to it. When the operation executes, the cursor provides the record zone information from the original search that provides the cursor.
+// The ID of the record zone that contains the records to search. The value of this property limits the scope of the search to only the records in the specified record zone. If you don't specify a record zone, the search includes all record zones. When you create an operation using the “CKQueryOperation/init(cursor:)“ method, this property's value is `nil` and CloudKit ignores any changes that you make to it. When the operation executes, the cursor provides the record zone information from the original search that provides the cursor.
 func (o *CKQueryOperation) ZoneID() *CKRecordZoneID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKQueryOperationSelZoneID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKRecordZoneIDFromID(_ret)
 }
 
@@ -104,7 +116,7 @@ func (o *CKQueryOperation) SetZoneID(zoneID *CKRecordZoneID) {
 	o.Ptr().Send(_cKQueryOperationSelSetZoneID, zoneID.Ptr())
 }
 
-// The maximum number of records to return at one time. For most queries, leave the value of this property as the default value, which is the ``CKQueryOperation/maximumResults`` constant. When using that value, CloudKit returns as many records as possible while minimizing delays in receiving those records. If you want to process a fixed number of results, change the value of this property accordingly.
+// The maximum number of records to return at one time. For most queries, leave the value of this property as the default value, which is the “CKQueryOperation/maximumResults“ constant. When using that value, CloudKit returns as many records as possible while minimizing delays in receiving those records. If you want to process a fixed number of results, change the value of this property accordingly.
 func (o *CKQueryOperation) ResultsLimit() uint {
 	_ret := objc.Send[uint](o.Ptr(), _cKQueryOperationSelResultsLimit)
 	return _ret
@@ -169,7 +181,7 @@ func (o *CKQueryOperation) SetRecordMatchedBlock(recordMatchedBlock func(*CKReco
 	o.Ptr().Send(_cKQueryOperationSelSetRecordMatchedBlock, __block_recordMatchedBlock)
 }
 
-// The closure to execute after CloudKit retrieves all of the records. The closure returns no value and takes the following parameters: - A cursor that indicates there are more results to fetch, or `nil` if there are no additional results. Use the cursor to create a new query operation when you're ready to retrieve the next batch of results. - An error that contains information about a problem, or `nil` if CloudKit retrieves the results successfully. This closure executes only once, and represents your final opportunity to process the results. It executes after all of the individual record fetch closures. The closure executes serially with respect to the other closures of the operation. If the number of records that the operation intends to return exceeds ``CKQueryOperation/resultsLimit``, the operation provides a cursor that you can use to retrieve the next batch of results. You must create a separate operation using the cursor to fetch the next batch of results. Update the value of this property before you execute the operation or submit it to a queue.
+// The closure to execute after CloudKit retrieves all of the records. The closure returns no value and takes the following parameters: - A cursor that indicates there are more results to fetch, or `nil` if there are no additional results. Use the cursor to create a new query operation when you're ready to retrieve the next batch of results. - An error that contains information about a problem, or `nil` if CloudKit retrieves the results successfully. This closure executes only once, and represents your final opportunity to process the results. It executes after all of the individual record fetch closures. The closure executes serially with respect to the other closures of the operation. If the number of records that the operation intends to return exceeds “CKQueryOperation/resultsLimit“, the operation provides a cursor that you can use to retrieve the next batch of results. You must create a separate operation using the cursor to fetch the next batch of results. Update the value of this property before you execute the operation or submit it to a queue.
 func (o *CKQueryOperation) QueryCompletionBlock() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _cKQueryOperationSelQueryCompletionBlock)
 	return _ret
@@ -188,4 +200,3 @@ func (o *CKQueryOperation) SetQueryCompletionBlock(queryCompletionBlock func(*CK
 	}
 	o.Ptr().Send(_cKQueryOperationSelSetQueryCompletionBlock, __block_queryCompletionBlock)
 }
-

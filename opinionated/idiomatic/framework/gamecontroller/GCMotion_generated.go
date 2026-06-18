@@ -220,4 +220,3 @@ type Motionable interface {
 }
 
 var _ Motionable = (*Motion)(nil)
-

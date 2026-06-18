@@ -66,4 +66,3 @@ type EFIBootLoaderable interface {
 }
 
 var _ EFIBootLoaderable = (*EFIBootLoader)(nil)
-

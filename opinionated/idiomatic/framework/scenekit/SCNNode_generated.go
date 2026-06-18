@@ -185,7 +185,9 @@ func (x *Node) WithConstraints(items ...ConstraintProvider) *Node {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asConstraint().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asConstraint().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.SCNConstraint](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -201,7 +203,9 @@ func (x *Node) WithFilters(items ...*coreimage.CIFilter) *Node {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -1121,4 +1125,3 @@ type Nodeable interface {
 }
 
 var _ Nodeable = (*Node)(nil)
-

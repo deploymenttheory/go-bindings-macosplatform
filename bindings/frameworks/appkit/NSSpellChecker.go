@@ -17,63 +17,63 @@ type NSSpellChecker struct {
 }
 
 var (
-	_clsNSSpellChecker = _objcClass("NSSpellChecker")
-	_nSSpellCheckerSelUniqueSpellDocumentTag = objc.RegisterName("uniqueSpellDocumentTag")
-	_nSSpellCheckerSelCheckSpellingOfStringStartingAtLanguageWrapInSpellDocumentWithTagWordCount = objc.RegisterName("checkSpellingOfString:startingAt:language:wrap:inSpellDocumentWithTag:wordCount:")
-	_nSSpellCheckerSelCheckSpellingOfStringStartingAt = objc.RegisterName("checkSpellingOfString:startingAt:")
-	_nSSpellCheckerSelCountWordsInStringLanguage = objc.RegisterName("countWordsInString:language:")
-	_nSSpellCheckerSelCheckGrammarOfStringStartingAtLanguageWrapInSpellDocumentWithTagDetails = objc.RegisterName("checkGrammarOfString:startingAt:language:wrap:inSpellDocumentWithTag:details:")
-	_nSSpellCheckerSelCheckStringRangeTypesOptionsInSpellDocumentWithTagOrthographyWordCount = objc.RegisterName("checkString:range:types:options:inSpellDocumentWithTag:orthography:wordCount:")
-	_nSSpellCheckerSelRequestCheckingOfStringRangeTypesOptionsInSpellDocumentWithTagCompletionHandler = objc.RegisterName("requestCheckingOfString:range:types:options:inSpellDocumentWithTag:completionHandler:")
-	_nSSpellCheckerSelRequestCandidatesForSelectedRangeInStringTypesOptionsInSpellDocumentWithTagCompletionHandler = objc.RegisterName("requestCandidatesForSelectedRange:inString:types:options:inSpellDocumentWithTag:completionHandler:")
-	_nSSpellCheckerSelMenuForResultStringOptionsAtLocationInView = objc.RegisterName("menuForResult:string:options:atLocation:inView:")
-	_nSSpellCheckerSelUserQuotesArrayForLanguage = objc.RegisterName("userQuotesArrayForLanguage:")
-	_nSSpellCheckerSelUpdateSpellingPanelWithMisspelledWord = objc.RegisterName("updateSpellingPanelWithMisspelledWord:")
-	_nSSpellCheckerSelUpdateSpellingPanelWithGrammarStringDetail = objc.RegisterName("updateSpellingPanelWithGrammarString:detail:")
-	_nSSpellCheckerSelUpdatePanels = objc.RegisterName("updatePanels")
-	_nSSpellCheckerSelIgnoreWordInSpellDocumentWithTag = objc.RegisterName("ignoreWord:inSpellDocumentWithTag:")
-	_nSSpellCheckerSelIgnoredWordsInSpellDocumentWithTag = objc.RegisterName("ignoredWordsInSpellDocumentWithTag:")
-	_nSSpellCheckerSelSetIgnoredWordsInSpellDocumentWithTag = objc.RegisterName("setIgnoredWords:inSpellDocumentWithTag:")
-	_nSSpellCheckerSelGuessesForWordRangeInStringLanguageInSpellDocumentWithTag = objc.RegisterName("guessesForWordRange:inString:language:inSpellDocumentWithTag:")
-	_nSSpellCheckerSelCorrectionForWordRangeInStringLanguageInSpellDocumentWithTag = objc.RegisterName("correctionForWordRange:inString:language:inSpellDocumentWithTag:")
-	_nSSpellCheckerSelCompletionsForPartialWordRangeInStringLanguageInSpellDocumentWithTag = objc.RegisterName("completionsForPartialWordRange:inString:language:inSpellDocumentWithTag:")
-	_nSSpellCheckerSelLanguageForWordRangeInStringOrthography = objc.RegisterName("languageForWordRange:inString:orthography:")
-	_nSSpellCheckerSelCloseSpellDocumentWithTag = objc.RegisterName("closeSpellDocumentWithTag:")
-	_nSSpellCheckerSelRecordResponseToCorrectionForWordLanguageInSpellDocumentWithTag = objc.RegisterName("recordResponse:toCorrection:forWord:language:inSpellDocumentWithTag:")
+	_clsNSSpellChecker                                                                                                 = _objcClass("NSSpellChecker")
+	_nSSpellCheckerSelUniqueSpellDocumentTag                                                                           = objc.RegisterName("uniqueSpellDocumentTag")
+	_nSSpellCheckerSelCheckSpellingOfStringStartingAtLanguageWrapInSpellDocumentWithTagWordCount                       = objc.RegisterName("checkSpellingOfString:startingAt:language:wrap:inSpellDocumentWithTag:wordCount:")
+	_nSSpellCheckerSelCheckSpellingOfStringStartingAt                                                                  = objc.RegisterName("checkSpellingOfString:startingAt:")
+	_nSSpellCheckerSelCountWordsInStringLanguage                                                                       = objc.RegisterName("countWordsInString:language:")
+	_nSSpellCheckerSelCheckGrammarOfStringStartingAtLanguageWrapInSpellDocumentWithTagDetails                          = objc.RegisterName("checkGrammarOfString:startingAt:language:wrap:inSpellDocumentWithTag:details:")
+	_nSSpellCheckerSelCheckStringRangeTypesOptionsInSpellDocumentWithTagOrthographyWordCount                           = objc.RegisterName("checkString:range:types:options:inSpellDocumentWithTag:orthography:wordCount:")
+	_nSSpellCheckerSelRequestCheckingOfStringRangeTypesOptionsInSpellDocumentWithTagCompletionHandler                  = objc.RegisterName("requestCheckingOfString:range:types:options:inSpellDocumentWithTag:completionHandler:")
+	_nSSpellCheckerSelRequestCandidatesForSelectedRangeInStringTypesOptionsInSpellDocumentWithTagCompletionHandler     = objc.RegisterName("requestCandidatesForSelectedRange:inString:types:options:inSpellDocumentWithTag:completionHandler:")
+	_nSSpellCheckerSelMenuForResultStringOptionsAtLocationInView                                                       = objc.RegisterName("menuForResult:string:options:atLocation:inView:")
+	_nSSpellCheckerSelUserQuotesArrayForLanguage                                                                       = objc.RegisterName("userQuotesArrayForLanguage:")
+	_nSSpellCheckerSelUpdateSpellingPanelWithMisspelledWord                                                            = objc.RegisterName("updateSpellingPanelWithMisspelledWord:")
+	_nSSpellCheckerSelUpdateSpellingPanelWithGrammarStringDetail                                                       = objc.RegisterName("updateSpellingPanelWithGrammarString:detail:")
+	_nSSpellCheckerSelUpdatePanels                                                                                     = objc.RegisterName("updatePanels")
+	_nSSpellCheckerSelIgnoreWordInSpellDocumentWithTag                                                                 = objc.RegisterName("ignoreWord:inSpellDocumentWithTag:")
+	_nSSpellCheckerSelIgnoredWordsInSpellDocumentWithTag                                                               = objc.RegisterName("ignoredWordsInSpellDocumentWithTag:")
+	_nSSpellCheckerSelSetIgnoredWordsInSpellDocumentWithTag                                                            = objc.RegisterName("setIgnoredWords:inSpellDocumentWithTag:")
+	_nSSpellCheckerSelGuessesForWordRangeInStringLanguageInSpellDocumentWithTag                                        = objc.RegisterName("guessesForWordRange:inString:language:inSpellDocumentWithTag:")
+	_nSSpellCheckerSelCorrectionForWordRangeInStringLanguageInSpellDocumentWithTag                                     = objc.RegisterName("correctionForWordRange:inString:language:inSpellDocumentWithTag:")
+	_nSSpellCheckerSelCompletionsForPartialWordRangeInStringLanguageInSpellDocumentWithTag                             = objc.RegisterName("completionsForPartialWordRange:inString:language:inSpellDocumentWithTag:")
+	_nSSpellCheckerSelLanguageForWordRangeInStringOrthography                                                          = objc.RegisterName("languageForWordRange:inString:orthography:")
+	_nSSpellCheckerSelCloseSpellDocumentWithTag                                                                        = objc.RegisterName("closeSpellDocumentWithTag:")
+	_nSSpellCheckerSelRecordResponseToCorrectionForWordLanguageInSpellDocumentWithTag                                  = objc.RegisterName("recordResponse:toCorrection:forWord:language:inSpellDocumentWithTag:")
 	_nSSpellCheckerSelShowCorrectionIndicatorOfTypePrimaryStringAlternativeStringsForStringInRectViewCompletionHandler = objc.RegisterName("showCorrectionIndicatorOfType:primaryString:alternativeStrings:forStringInRect:view:completionHandler:")
-	_nSSpellCheckerSelDismissCorrectionIndicatorForView = objc.RegisterName("dismissCorrectionIndicatorForView:")
-	_nSSpellCheckerSelShowInlinePredictionForCandidatesClient = objc.RegisterName("showInlinePredictionForCandidates:client:")
-	_nSSpellCheckerSelPreventsAutocorrectionBeforeStringLanguage = objc.RegisterName("preventsAutocorrectionBeforeString:language:")
-	_nSSpellCheckerSelDeletesAutospaceBetweenStringAndStringLanguage = objc.RegisterName("deletesAutospaceBetweenString:andString:language:")
-	_nSSpellCheckerSelSetWordFieldStringValue = objc.RegisterName("setWordFieldStringValue:")
-	_nSSpellCheckerSelLearnWord = objc.RegisterName("learnWord:")
-	_nSSpellCheckerSelHasLearnedWord = objc.RegisterName("hasLearnedWord:")
-	_nSSpellCheckerSelUnlearnWord = objc.RegisterName("unlearnWord:")
-	_nSSpellCheckerSelLanguage = objc.RegisterName("language")
-	_nSSpellCheckerSelSetLanguage = objc.RegisterName("setLanguage:")
-	_nSSpellCheckerSelSharedSpellChecker = objc.RegisterName("sharedSpellChecker")
-	_nSSpellCheckerSelSharedSpellCheckerExists = objc.RegisterName("sharedSpellCheckerExists")
-	_nSSpellCheckerSelUserReplacementsDictionary = objc.RegisterName("userReplacementsDictionary")
-	_nSSpellCheckerSelSpellingPanel = objc.RegisterName("spellingPanel")
-	_nSSpellCheckerSelAccessoryView = objc.RegisterName("accessoryView")
-	_nSSpellCheckerSelSetAccessoryView = objc.RegisterName("setAccessoryView:")
-	_nSSpellCheckerSelSubstitutionsPanel = objc.RegisterName("substitutionsPanel")
-	_nSSpellCheckerSelSubstitutionsPanelAccessoryViewController = objc.RegisterName("substitutionsPanelAccessoryViewController")
-	_nSSpellCheckerSelSetSubstitutionsPanelAccessoryViewController = objc.RegisterName("setSubstitutionsPanelAccessoryViewController:")
-	_nSSpellCheckerSelAvailableLanguages = objc.RegisterName("availableLanguages")
-	_nSSpellCheckerSelUserPreferredLanguages = objc.RegisterName("userPreferredLanguages")
-	_nSSpellCheckerSelAutomaticallyIdentifiesLanguages = objc.RegisterName("automaticallyIdentifiesLanguages")
-	_nSSpellCheckerSelSetAutomaticallyIdentifiesLanguages = objc.RegisterName("setAutomaticallyIdentifiesLanguages:")
-	_nSSpellCheckerSelIsAutomaticTextReplacementEnabled = objc.RegisterName("isAutomaticTextReplacementEnabled")
-	_nSSpellCheckerSelIsAutomaticSpellingCorrectionEnabled = objc.RegisterName("isAutomaticSpellingCorrectionEnabled")
-	_nSSpellCheckerSelIsAutomaticQuoteSubstitutionEnabled = objc.RegisterName("isAutomaticQuoteSubstitutionEnabled")
-	_nSSpellCheckerSelIsAutomaticDashSubstitutionEnabled = objc.RegisterName("isAutomaticDashSubstitutionEnabled")
-	_nSSpellCheckerSelIsAutomaticCapitalizationEnabled = objc.RegisterName("isAutomaticCapitalizationEnabled")
-	_nSSpellCheckerSelIsAutomaticPeriodSubstitutionEnabled = objc.RegisterName("isAutomaticPeriodSubstitutionEnabled")
-	_nSSpellCheckerSelIsAutomaticTextCompletionEnabled = objc.RegisterName("isAutomaticTextCompletionEnabled")
-	_nSSpellCheckerSelIsAutomaticInlinePredictionEnabled = objc.RegisterName("isAutomaticInlinePredictionEnabled")
-	_nSSpellCheckerSelGuessesForWord = objc.RegisterName("guessesForWord:")
-	_nSSpellCheckerSelForgetWord = objc.RegisterName("forgetWord:")
+	_nSSpellCheckerSelDismissCorrectionIndicatorForView                                                                = objc.RegisterName("dismissCorrectionIndicatorForView:")
+	_nSSpellCheckerSelShowInlinePredictionForCandidatesClient                                                          = objc.RegisterName("showInlinePredictionForCandidates:client:")
+	_nSSpellCheckerSelPreventsAutocorrectionBeforeStringLanguage                                                       = objc.RegisterName("preventsAutocorrectionBeforeString:language:")
+	_nSSpellCheckerSelDeletesAutospaceBetweenStringAndStringLanguage                                                   = objc.RegisterName("deletesAutospaceBetweenString:andString:language:")
+	_nSSpellCheckerSelSetWordFieldStringValue                                                                          = objc.RegisterName("setWordFieldStringValue:")
+	_nSSpellCheckerSelLearnWord                                                                                        = objc.RegisterName("learnWord:")
+	_nSSpellCheckerSelHasLearnedWord                                                                                   = objc.RegisterName("hasLearnedWord:")
+	_nSSpellCheckerSelUnlearnWord                                                                                      = objc.RegisterName("unlearnWord:")
+	_nSSpellCheckerSelLanguage                                                                                         = objc.RegisterName("language")
+	_nSSpellCheckerSelSetLanguage                                                                                      = objc.RegisterName("setLanguage:")
+	_nSSpellCheckerSelSharedSpellChecker                                                                               = objc.RegisterName("sharedSpellChecker")
+	_nSSpellCheckerSelSharedSpellCheckerExists                                                                         = objc.RegisterName("sharedSpellCheckerExists")
+	_nSSpellCheckerSelUserReplacementsDictionary                                                                       = objc.RegisterName("userReplacementsDictionary")
+	_nSSpellCheckerSelSpellingPanel                                                                                    = objc.RegisterName("spellingPanel")
+	_nSSpellCheckerSelAccessoryView                                                                                    = objc.RegisterName("accessoryView")
+	_nSSpellCheckerSelSetAccessoryView                                                                                 = objc.RegisterName("setAccessoryView:")
+	_nSSpellCheckerSelSubstitutionsPanel                                                                               = objc.RegisterName("substitutionsPanel")
+	_nSSpellCheckerSelSubstitutionsPanelAccessoryViewController                                                        = objc.RegisterName("substitutionsPanelAccessoryViewController")
+	_nSSpellCheckerSelSetSubstitutionsPanelAccessoryViewController                                                     = objc.RegisterName("setSubstitutionsPanelAccessoryViewController:")
+	_nSSpellCheckerSelAvailableLanguages                                                                               = objc.RegisterName("availableLanguages")
+	_nSSpellCheckerSelUserPreferredLanguages                                                                           = objc.RegisterName("userPreferredLanguages")
+	_nSSpellCheckerSelAutomaticallyIdentifiesLanguages                                                                 = objc.RegisterName("automaticallyIdentifiesLanguages")
+	_nSSpellCheckerSelSetAutomaticallyIdentifiesLanguages                                                              = objc.RegisterName("setAutomaticallyIdentifiesLanguages:")
+	_nSSpellCheckerSelIsAutomaticTextReplacementEnabled                                                                = objc.RegisterName("isAutomaticTextReplacementEnabled")
+	_nSSpellCheckerSelIsAutomaticSpellingCorrectionEnabled                                                             = objc.RegisterName("isAutomaticSpellingCorrectionEnabled")
+	_nSSpellCheckerSelIsAutomaticQuoteSubstitutionEnabled                                                              = objc.RegisterName("isAutomaticQuoteSubstitutionEnabled")
+	_nSSpellCheckerSelIsAutomaticDashSubstitutionEnabled                                                               = objc.RegisterName("isAutomaticDashSubstitutionEnabled")
+	_nSSpellCheckerSelIsAutomaticCapitalizationEnabled                                                                 = objc.RegisterName("isAutomaticCapitalizationEnabled")
+	_nSSpellCheckerSelIsAutomaticPeriodSubstitutionEnabled                                                             = objc.RegisterName("isAutomaticPeriodSubstitutionEnabled")
+	_nSSpellCheckerSelIsAutomaticTextCompletionEnabled                                                                 = objc.RegisterName("isAutomaticTextCompletionEnabled")
+	_nSSpellCheckerSelIsAutomaticInlinePredictionEnabled                                                               = objc.RegisterName("isAutomaticInlinePredictionEnabled")
+	_nSSpellCheckerSelGuessesForWord                                                                                   = objc.RegisterName("guessesForWord:")
+	_nSSpellCheckerSelForgetWord                                                                                       = objc.RegisterName("forgetWord:")
 )
 
 func NSSpellCheckerFromID(id objc.ID) *NSSpellChecker {
@@ -128,7 +128,9 @@ func (o *NSSpellChecker) RequestCandidatesForSelectedRangeInStringTypesOptionsIn
 
 func (o *NSSpellChecker) MenuForResultStringOptionsAtLocationInView(result *foundation.NSTextCheckingResult, checkedString *foundation.NSString, options *foundation.NSDictionary[*foundation.NSString, objc.ID], location corefoundation.CGPoint, view *NSView) *NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSpellCheckerSelMenuForResultStringOptionsAtLocationInView, result.Ptr(), checkedString.Ptr(), options, location, view.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuFromID(_ret)
 }
 
@@ -169,7 +171,9 @@ func (o *NSSpellChecker) GuessesForWordRangeInStringLanguageInSpellDocumentWithT
 
 func (o *NSSpellChecker) CorrectionForWordRangeInStringLanguageInSpellDocumentWithTag(range_ foundation.NSRange, string_ *foundation.NSString, language *foundation.NSString, tag int) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSpellCheckerSelCorrectionForWordRangeInStringLanguageInSpellDocumentWithTag, range_, string_.Ptr(), language.Ptr(), tag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -180,7 +184,9 @@ func (o *NSSpellChecker) CompletionsForPartialWordRangeInStringLanguageInSpellDo
 
 func (o *NSSpellChecker) LanguageForWordRangeInStringOrthography(range_ foundation.NSRange, string_ *foundation.NSString, orthography *foundation.NSOrthography) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSpellCheckerSelLanguageForWordRangeInStringOrthography, range_, string_.Ptr(), orthography.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -243,7 +249,9 @@ func (o *NSSpellChecker) UnlearnWord(word *foundation.NSString) {
 
 func (o *NSSpellChecker) Language() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSpellCheckerSelLanguage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -254,7 +262,9 @@ func (o *NSSpellChecker) SetLanguage(language *foundation.NSString) bool {
 
 func NSSpellCheckerSharedSpellChecker() *NSSpellChecker {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSpellChecker), _nSSpellCheckerSelSharedSpellChecker)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSpellCheckerFromID(_ret)
 }
 
@@ -270,13 +280,17 @@ func (o *NSSpellChecker) UserReplacementsDictionary() *foundation.NSDictionary[*
 
 func (o *NSSpellChecker) SpellingPanel() *NSPanel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSpellCheckerSelSpellingPanel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPanelFromID(_ret)
 }
 
 func (o *NSSpellChecker) AccessoryView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSpellCheckerSelAccessoryView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -286,13 +300,17 @@ func (o *NSSpellChecker) SetAccessoryView(accessoryView *NSView) {
 
 func (o *NSSpellChecker) SubstitutionsPanel() *NSPanel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSpellCheckerSelSubstitutionsPanel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPanelFromID(_ret)
 }
 
 func (o *NSSpellChecker) SubstitutionsPanelAccessoryViewController() *NSViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSpellCheckerSelSubstitutionsPanelAccessoryViewController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewControllerFromID(_ret)
 }
 
@@ -369,4 +387,3 @@ func (o *NSSpellChecker) GuessesForWord(word *foundation.NSString) *foundation.N
 func (o *NSSpellChecker) ForgetWord(word *foundation.NSString) {
 	o.Ptr().Send(_nSSpellCheckerSelForgetWord, word.Ptr())
 }
-

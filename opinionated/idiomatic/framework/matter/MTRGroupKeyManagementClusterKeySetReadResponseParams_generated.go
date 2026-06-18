@@ -18,7 +18,9 @@ type MTRGroupKeyManagementClusterKeySetReadResponseParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRGroupKeyManagementClusterKeySetReadResponseParams].
-func (x *MTRGroupKeyManagementClusterKeySetReadResponseParams) Unwrap() *raw.MTRGroupKeyManagementClusterKeySetReadResponseParams { return x.inner }
+func (x *MTRGroupKeyManagementClusterKeySetReadResponseParams) Unwrap() *raw.MTRGroupKeyManagementClusterKeySetReadResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -91,4 +93,3 @@ type MTRGroupKeyManagementClusterKeySetReadResponseParamsable interface {
 }
 
 var _ MTRGroupKeyManagementClusterKeySetReadResponseParamsable = (*MTRGroupKeyManagementClusterKeySetReadResponseParams)(nil)
-

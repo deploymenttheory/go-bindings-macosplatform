@@ -140,9 +140,13 @@ func (x *ControllerButtonInput) IsTouched() bool {
 	return x.inner.IsTouched()
 }
 
-func (x *ControllerButtonInput) asControllerButtonInput() *raw.GCControllerButtonInput { return x.inner }
+func (x *ControllerButtonInput) asControllerButtonInput() *raw.GCControllerButtonInput {
+	return x.inner
+}
 
-func (x *ControllerButtonInput) asControllerElement() *raw.GCControllerElement { return &x.inner.GCControllerElement }
+func (x *ControllerButtonInput) asControllerElement() *raw.GCControllerElement {
+	return &x.inner.GCControllerElement
+}
 
 // ControllerButtonInputable is the interface implemented by [ControllerButtonInput], for mocking and DI.
 type ControllerButtonInputable interface {
@@ -169,4 +173,3 @@ type ControllerButtonInputable interface {
 }
 
 var _ ControllerButtonInputable = (*ControllerButtonInput)(nil)
-

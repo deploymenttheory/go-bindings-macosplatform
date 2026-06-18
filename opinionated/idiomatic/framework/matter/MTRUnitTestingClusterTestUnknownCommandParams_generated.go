@@ -16,7 +16,9 @@ type MTRUnitTestingClusterTestUnknownCommandParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRUnitTestingClusterTestUnknownCommandParams].
-func (x *MTRUnitTestingClusterTestUnknownCommandParams) Unwrap() *raw.MTRUnitTestingClusterTestUnknownCommandParams { return x.inner }
+func (x *MTRUnitTestingClusterTestUnknownCommandParams) Unwrap() *raw.MTRUnitTestingClusterTestUnknownCommandParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -68,7 +70,9 @@ func (x *MTRUnitTestingClusterTestUnknownCommandParams) SetServerSideProcessingT
 	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
 }
 
-func (x *MTRUnitTestingClusterTestUnknownCommandParams) asMTRUnitTestingClusterTestUnknownCommandParams() *raw.MTRUnitTestingClusterTestUnknownCommandParams { return x.inner }
+func (x *MTRUnitTestingClusterTestUnknownCommandParams) asMTRUnitTestingClusterTestUnknownCommandParams() *raw.MTRUnitTestingClusterTestUnknownCommandParams {
+	return x.inner
+}
 
 // MTRUnitTestingClusterTestUnknownCommandParamsable is the interface implemented by [MTRUnitTestingClusterTestUnknownCommandParams], for mocking and DI.
 type MTRUnitTestingClusterTestUnknownCommandParamsable interface {
@@ -82,4 +86,3 @@ type MTRUnitTestingClusterTestUnknownCommandParamsable interface {
 }
 
 var _ MTRUnitTestingClusterTestUnknownCommandParamsable = (*MTRUnitTestingClusterTestUnknownCommandParams)(nil)
-

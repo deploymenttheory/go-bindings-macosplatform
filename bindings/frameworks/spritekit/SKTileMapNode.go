@@ -20,44 +20,44 @@ type SKTileMapNode struct {
 }
 
 var (
-	_clsSKTileMapNode = _objcClass("SKTileMapNode")
-	_sKTileMapNodeSelTileMapNodeWithTileSetColumnsRowsTileSize = objc.RegisterName("tileMapNodeWithTileSet:columns:rows:tileSize:")
+	_clsSKTileMapNode                                                           = _objcClass("SKTileMapNode")
+	_sKTileMapNodeSelTileMapNodeWithTileSetColumnsRowsTileSize                  = objc.RegisterName("tileMapNodeWithTileSet:columns:rows:tileSize:")
 	_sKTileMapNodeSelTileMapNodeWithTileSetColumnsRowsTileSizeFillWithTileGroup = objc.RegisterName("tileMapNodeWithTileSet:columns:rows:tileSize:fillWithTileGroup:")
-	_sKTileMapNodeSelTileMapNodeWithTileSetColumnsRowsTileSizeTileGroupLayout = objc.RegisterName("tileMapNodeWithTileSet:columns:rows:tileSize:tileGroupLayout:")
-	_sKTileMapNodeSelInitWithTileSetColumnsRowsTileSize = objc.RegisterName("initWithTileSet:columns:rows:tileSize:")
-	_sKTileMapNodeSelInitWithTileSetColumnsRowsTileSizeFillWithTileGroup = objc.RegisterName("initWithTileSet:columns:rows:tileSize:fillWithTileGroup:")
-	_sKTileMapNodeSelInitWithTileSetColumnsRowsTileSizeTileGroupLayout = objc.RegisterName("initWithTileSet:columns:rows:tileSize:tileGroupLayout:")
-	_sKTileMapNodeSelFillWithTileGroup = objc.RegisterName("fillWithTileGroup:")
-	_sKTileMapNodeSelTileDefinitionAtColumnRow = objc.RegisterName("tileDefinitionAtColumn:row:")
-	_sKTileMapNodeSelTileGroupAtColumnRow = objc.RegisterName("tileGroupAtColumn:row:")
-	_sKTileMapNodeSelSetTileGroupForColumnRow = objc.RegisterName("setTileGroup:forColumn:row:")
-	_sKTileMapNodeSelSetTileGroupAndTileDefinitionForColumnRow = objc.RegisterName("setTileGroup:andTileDefinition:forColumn:row:")
-	_sKTileMapNodeSelTileColumnIndexFromPosition = objc.RegisterName("tileColumnIndexFromPosition:")
-	_sKTileMapNodeSelTileRowIndexFromPosition = objc.RegisterName("tileRowIndexFromPosition:")
-	_sKTileMapNodeSelCenterOfTileAtColumnRow = objc.RegisterName("centerOfTileAtColumn:row:")
-	_sKTileMapNodeSelNumberOfColumns = objc.RegisterName("numberOfColumns")
-	_sKTileMapNodeSelSetNumberOfColumns = objc.RegisterName("setNumberOfColumns:")
-	_sKTileMapNodeSelNumberOfRows = objc.RegisterName("numberOfRows")
-	_sKTileMapNodeSelSetNumberOfRows = objc.RegisterName("setNumberOfRows:")
-	_sKTileMapNodeSelTileSize = objc.RegisterName("tileSize")
-	_sKTileMapNodeSelSetTileSize = objc.RegisterName("setTileSize:")
-	_sKTileMapNodeSelMapSize = objc.RegisterName("mapSize")
-	_sKTileMapNodeSelTileSet = objc.RegisterName("tileSet")
-	_sKTileMapNodeSelSetTileSet = objc.RegisterName("setTileSet:")
-	_sKTileMapNodeSelColorBlendFactor = objc.RegisterName("colorBlendFactor")
-	_sKTileMapNodeSelSetColorBlendFactor = objc.RegisterName("setColorBlendFactor:")
-	_sKTileMapNodeSelColor = objc.RegisterName("color")
-	_sKTileMapNodeSelSetColor = objc.RegisterName("setColor:")
-	_sKTileMapNodeSelBlendMode = objc.RegisterName("blendMode")
-	_sKTileMapNodeSelSetBlendMode = objc.RegisterName("setBlendMode:")
-	_sKTileMapNodeSelAnchorPoint = objc.RegisterName("anchorPoint")
-	_sKTileMapNodeSelSetAnchorPoint = objc.RegisterName("setAnchorPoint:")
-	_sKTileMapNodeSelShader = objc.RegisterName("shader")
-	_sKTileMapNodeSelSetShader = objc.RegisterName("setShader:")
-	_sKTileMapNodeSelLightingBitMask = objc.RegisterName("lightingBitMask")
-	_sKTileMapNodeSelSetLightingBitMask = objc.RegisterName("setLightingBitMask:")
-	_sKTileMapNodeSelEnableAutomapping = objc.RegisterName("enableAutomapping")
-	_sKTileMapNodeSelSetEnableAutomapping = objc.RegisterName("setEnableAutomapping:")
+	_sKTileMapNodeSelTileMapNodeWithTileSetColumnsRowsTileSizeTileGroupLayout   = objc.RegisterName("tileMapNodeWithTileSet:columns:rows:tileSize:tileGroupLayout:")
+	_sKTileMapNodeSelInitWithTileSetColumnsRowsTileSize                         = objc.RegisterName("initWithTileSet:columns:rows:tileSize:")
+	_sKTileMapNodeSelInitWithTileSetColumnsRowsTileSizeFillWithTileGroup        = objc.RegisterName("initWithTileSet:columns:rows:tileSize:fillWithTileGroup:")
+	_sKTileMapNodeSelInitWithTileSetColumnsRowsTileSizeTileGroupLayout          = objc.RegisterName("initWithTileSet:columns:rows:tileSize:tileGroupLayout:")
+	_sKTileMapNodeSelFillWithTileGroup                                          = objc.RegisterName("fillWithTileGroup:")
+	_sKTileMapNodeSelTileDefinitionAtColumnRow                                  = objc.RegisterName("tileDefinitionAtColumn:row:")
+	_sKTileMapNodeSelTileGroupAtColumnRow                                       = objc.RegisterName("tileGroupAtColumn:row:")
+	_sKTileMapNodeSelSetTileGroupForColumnRow                                   = objc.RegisterName("setTileGroup:forColumn:row:")
+	_sKTileMapNodeSelSetTileGroupAndTileDefinitionForColumnRow                  = objc.RegisterName("setTileGroup:andTileDefinition:forColumn:row:")
+	_sKTileMapNodeSelTileColumnIndexFromPosition                                = objc.RegisterName("tileColumnIndexFromPosition:")
+	_sKTileMapNodeSelTileRowIndexFromPosition                                   = objc.RegisterName("tileRowIndexFromPosition:")
+	_sKTileMapNodeSelCenterOfTileAtColumnRow                                    = objc.RegisterName("centerOfTileAtColumn:row:")
+	_sKTileMapNodeSelNumberOfColumns                                            = objc.RegisterName("numberOfColumns")
+	_sKTileMapNodeSelSetNumberOfColumns                                         = objc.RegisterName("setNumberOfColumns:")
+	_sKTileMapNodeSelNumberOfRows                                               = objc.RegisterName("numberOfRows")
+	_sKTileMapNodeSelSetNumberOfRows                                            = objc.RegisterName("setNumberOfRows:")
+	_sKTileMapNodeSelTileSize                                                   = objc.RegisterName("tileSize")
+	_sKTileMapNodeSelSetTileSize                                                = objc.RegisterName("setTileSize:")
+	_sKTileMapNodeSelMapSize                                                    = objc.RegisterName("mapSize")
+	_sKTileMapNodeSelTileSet                                                    = objc.RegisterName("tileSet")
+	_sKTileMapNodeSelSetTileSet                                                 = objc.RegisterName("setTileSet:")
+	_sKTileMapNodeSelColorBlendFactor                                           = objc.RegisterName("colorBlendFactor")
+	_sKTileMapNodeSelSetColorBlendFactor                                        = objc.RegisterName("setColorBlendFactor:")
+	_sKTileMapNodeSelColor                                                      = objc.RegisterName("color")
+	_sKTileMapNodeSelSetColor                                                   = objc.RegisterName("setColor:")
+	_sKTileMapNodeSelBlendMode                                                  = objc.RegisterName("blendMode")
+	_sKTileMapNodeSelSetBlendMode                                               = objc.RegisterName("setBlendMode:")
+	_sKTileMapNodeSelAnchorPoint                                                = objc.RegisterName("anchorPoint")
+	_sKTileMapNodeSelSetAnchorPoint                                             = objc.RegisterName("setAnchorPoint:")
+	_sKTileMapNodeSelShader                                                     = objc.RegisterName("shader")
+	_sKTileMapNodeSelSetShader                                                  = objc.RegisterName("setShader:")
+	_sKTileMapNodeSelLightingBitMask                                            = objc.RegisterName("lightingBitMask")
+	_sKTileMapNodeSelSetLightingBitMask                                         = objc.RegisterName("setLightingBitMask:")
+	_sKTileMapNodeSelEnableAutomapping                                          = objc.RegisterName("enableAutomapping")
+	_sKTileMapNodeSelSetEnableAutomapping                                       = objc.RegisterName("setEnableAutomapping:")
 )
 
 func SKTileMapNodeFromID(id objc.ID) *SKTileMapNode {
@@ -73,42 +73,54 @@ func SKTileMapNodeFromID(id objc.ID) *SKTileMapNode {
 // Create a tile map node with the specified tile set and dimensions. The tiles of the map will be empty, equivalent to the nil tile definition/group. @param tileSet the tile set that is used to render the tiles @param columns the number of columns in the map that can hold tiles @param rows the number of rows in the map that can hold tiles @param tileSize the size of each tile in points
 func SKTileMapNodeTileMapNodeWithTileSetColumnsRowsTileSize(tileSet *SKTileSet, columns uint, rows uint, tileSize corefoundation.CGSize) *SKTileMapNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTileMapNode), _sKTileMapNodeSelTileMapNodeWithTileSetColumnsRowsTileSize, tileSet.Ptr(), columns, rows, tileSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileMapNodeFromID(_ret)
 }
 
 // Create a tile map node with the specified tile set and dimensions, and fill it with the specified tile group. @param tileSet the tile set that is used to render the tiles @param columns the number of columns in the map that can hold tiles @param rows the number of rows in the map that can hold tiles @param tileSize the size of each tile in points @param tileGroup the tile group we wish to fill the tile map with
 func SKTileMapNodeTileMapNodeWithTileSetColumnsRowsTileSizeFillWithTileGroup(tileSet *SKTileSet, columns uint, rows uint, tileSize corefoundation.CGSize, tileGroup *SKTileGroup) *SKTileMapNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTileMapNode), _sKTileMapNodeSelTileMapNodeWithTileSetColumnsRowsTileSizeFillWithTileGroup, tileSet.Ptr(), columns, rows, tileSize, tileGroup.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileMapNodeFromID(_ret)
 }
 
 // Create a tile map node with the specified tile set and dimensions, and fill it with a specific layout of tile groups that belong to the provided tile set. The tileGroupLayout array should match the dimensions of the tile map (i.e., the number of elements should be equal to columns * rows). Index 0 of the array maps to column 0, row 0 of the tile map. Index 1 is column 1, row 0, and so on, wrapping around to the next row once the index passes the number of columns in the tile map. If the array has fewer elements than the number of tiles in the map, the remaining tiles are initialized with the nil tile group. If the array has more elements than the number of tiles in the map, the extra tile groups are ignored. @param tileSet the tile set that is used to render the tiles @param columns the number of columns in the map that can hold tiles @param rows the number of rows in the map that can hold tiles @param tileSize the size of each tile in points @param tileGroupLayout an array of tile groups that we want to use to fill the tile map
 func SKTileMapNodeTileMapNodeWithTileSetColumnsRowsTileSizeTileGroupLayout(tileSet *SKTileSet, columns uint, rows uint, tileSize corefoundation.CGSize, tileGroupLayout *foundation.NSArray[*SKTileGroup]) *SKTileMapNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTileMapNode), _sKTileMapNodeSelTileMapNodeWithTileSetColumnsRowsTileSizeTileGroupLayout, tileSet.Ptr(), columns, rows, tileSize, tileGroupLayout.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileMapNodeFromID(_ret)
 }
 
 // Initialize a tile map node with the specified tile set and dimensions. The tiles of the map will be empty, equivalent to the nil tile definition/group. @param tileSet the tile set that is used to render the tiles @param columns the number of columns in the map that can hold tiles @param rows the number of rows in the map that can hold tiles @param tileSize the size of each tile in points
 func (o *SKTileMapNode) InitWithTileSetColumnsRowsTileSize(tileSet *SKTileSet, columns uint, rows uint, tileSize corefoundation.CGSize) *SKTileMapNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileMapNodeSelInitWithTileSetColumnsRowsTileSize, tileSet.Ptr(), columns, rows, tileSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileMapNodeFromID(_ret)
 }
 
 // Initialize a tile map node with the specified tile set and dimensions, and fill it with the specified tile group. @param tileSet the tile set that is used to render the tiles @param columns the number of columns in the map that can hold tiles @param rows the number of rows in the map that can hold tiles @param tileSize the size of each tile in points @param tileGroup the tile group we wish to fill the tile map with
 func (o *SKTileMapNode) InitWithTileSetColumnsRowsTileSizeFillWithTileGroup(tileSet *SKTileSet, columns uint, rows uint, tileSize corefoundation.CGSize, tileGroup *SKTileGroup) *SKTileMapNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileMapNodeSelInitWithTileSetColumnsRowsTileSizeFillWithTileGroup, tileSet.Ptr(), columns, rows, tileSize, tileGroup.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileMapNodeFromID(_ret)
 }
 
 // Initialize a tile map node with the specified tile set and dimensions, and fill it with a specific layout of tile groups that belong to the provided tile set. The tileGroupLayout array should match the dimensions of the tile map (i.e., the number of elements should be equal to columns * rows). Index 0 of the array maps to column 0, row 0 of the tile map. Index 1 is column 1, row 0, and so on, wrapping around to the next row once the index passes the number of columns in the tile map. If the array has fewer elements than the number of tiles in the map, the remaining tiles are initialized with the nil tile group. If the array has more elements than the number of tiles in the map, the extra tile groups are ignored. @param tileSet the tile set that is used to render the tiles @param columns the number of columns in the map that can hold tiles @param rows the number of rows in the map that can hold tiles @param tileSize the size of each tile in points @param tileGroupLayout an array of tile groups that we want to use to fill the tile map
 func (o *SKTileMapNode) InitWithTileSetColumnsRowsTileSizeTileGroupLayout(tileSet *SKTileSet, columns uint, rows uint, tileSize corefoundation.CGSize, tileGroupLayout *foundation.NSArray[*SKTileGroup]) *SKTileMapNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileMapNodeSelInitWithTileSetColumnsRowsTileSizeTileGroupLayout, tileSet.Ptr(), columns, rows, tileSize, tileGroupLayout.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileMapNodeFromID(_ret)
 }
 
@@ -120,14 +132,18 @@ func (o *SKTileMapNode) FillWithTileGroup(tileGroup *SKTileGroup) {
 // Look up the tile definition at the specified tile index. @param column the column index of the tile @param row the row index of the tile
 func (o *SKTileMapNode) TileDefinitionAtColumnRow(column uint, row uint) *SKTileDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileMapNodeSelTileDefinitionAtColumnRow, column, row)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileDefinitionFromID(_ret)
 }
 
 // Look up the tile group at the specified tile index. @param column the column index of the tile @param row the row index of the tile
 func (o *SKTileMapNode) TileGroupAtColumnRow(column uint, row uint) *SKTileGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileMapNodeSelTileGroupAtColumnRow, column, row)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileGroupFromID(_ret)
 }
 
@@ -198,7 +214,9 @@ func (o *SKTileMapNode) MapSize() corefoundation.CGSize {
 // The tile set being used by this tile map.
 func (o *SKTileMapNode) TileSet() *SKTileSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileMapNodeSelTileSet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileSetFromID(_ret)
 }
 
@@ -219,7 +237,9 @@ func (o *SKTileMapNode) SetColorBlendFactor(colorBlendFactor float64) {
 // Base color for the tile map (If no texture is present, the color still is drawn).
 func (o *SKTileMapNode) Color() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileMapNodeSelColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -250,7 +270,9 @@ func (o *SKTileMapNode) SetAnchorPoint(anchorPoint corefoundation.CGPoint) {
 // A property that determines whether the tile map is rendered using a custom shader.
 func (o *SKTileMapNode) Shader() *SKShader {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileMapNodeSelShader)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKShaderFromID(_ret)
 }
 
@@ -276,4 +298,3 @@ func (o *SKTileMapNode) EnableAutomapping() bool {
 func (o *SKTileMapNode) SetEnableAutomapping(enableAutomapping bool) {
 	o.Ptr().Send(_sKTileMapNodeSelSetEnableAutomapping, enableAutomapping)
 }
-

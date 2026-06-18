@@ -10,85 +10,85 @@ import (
 )
 
 var (
-	_fnSKDocumentCopyURL func(unsafe.Pointer) unsafe.Pointer
-	_fnSKDocumentCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSKDocumentCreateWithURL func(unsafe.Pointer) unsafe.Pointer
-	_fnSKDocumentGetName func(unsafe.Pointer) unsafe.Pointer
-	_fnSKDocumentGetParent func(unsafe.Pointer) unsafe.Pointer
-	_fnSKDocumentGetSchemeName func(unsafe.Pointer) unsafe.Pointer
-	_fnSKDocumentGetTypeID func() uint
-	_fnSKIndexAddDocument func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8) uint8
-	_fnSKIndexAddDocumentWithText func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8) uint8
-	_fnSKIndexClose func(unsafe.Pointer)
-	_fnSKIndexCompact func(unsafe.Pointer) uint8
-	_fnSKIndexCopyDocumentForDocumentID func(unsafe.Pointer, int) unsafe.Pointer
-	_fnSKIndexCopyDocumentIDArrayForTermID func(unsafe.Pointer, int) unsafe.Pointer
-	_fnSKIndexCopyDocumentProperties func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSKDocumentCopyURL                     func(unsafe.Pointer) unsafe.Pointer
+	_fnSKDocumentCreate                      func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSKDocumentCreateWithURL               func(unsafe.Pointer) unsafe.Pointer
+	_fnSKDocumentGetName                     func(unsafe.Pointer) unsafe.Pointer
+	_fnSKDocumentGetParent                   func(unsafe.Pointer) unsafe.Pointer
+	_fnSKDocumentGetSchemeName               func(unsafe.Pointer) unsafe.Pointer
+	_fnSKDocumentGetTypeID                   func() uint
+	_fnSKIndexAddDocument                    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8) uint8
+	_fnSKIndexAddDocumentWithText            func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8) uint8
+	_fnSKIndexClose                          func(unsafe.Pointer)
+	_fnSKIndexCompact                        func(unsafe.Pointer) uint8
+	_fnSKIndexCopyDocumentForDocumentID      func(unsafe.Pointer, int) unsafe.Pointer
+	_fnSKIndexCopyDocumentIDArrayForTermID   func(unsafe.Pointer, int) unsafe.Pointer
+	_fnSKIndexCopyDocumentProperties         func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_fnSKIndexCopyDocumentRefsForDocumentIDs func(unsafe.Pointer, int, *int, unsafe.Pointer)
 	_fnSKIndexCopyDocumentURLsForDocumentIDs func(unsafe.Pointer, int, *int, unsafe.Pointer)
-	_fnSKIndexCopyInfoForDocumentIDs func(unsafe.Pointer, int, *int, unsafe.Pointer, *int)
-	_fnSKIndexCopyTermIDArrayForDocumentID func(unsafe.Pointer, int) unsafe.Pointer
-	_fnSKIndexCopyTermStringForTermID func(unsafe.Pointer, int) unsafe.Pointer
-	_fnSKIndexCreateWithMutableData func(unsafe.Pointer, unsafe.Pointer, SKIndexType, unsafe.Pointer) unsafe.Pointer
-	_fnSKIndexCreateWithURL func(unsafe.Pointer, unsafe.Pointer, SKIndexType, unsafe.Pointer) unsafe.Pointer
-	_fnSKIndexDocumentIteratorCopyNext func(unsafe.Pointer) unsafe.Pointer
-	_fnSKIndexDocumentIteratorCreate func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSKIndexDocumentIteratorGetTypeID func() uint
-	_fnSKIndexFlush func(unsafe.Pointer) uint8
-	_fnSKIndexGetAnalysisProperties func(unsafe.Pointer) unsafe.Pointer
-	_fnSKIndexGetDocumentCount func(unsafe.Pointer) int
-	_fnSKIndexGetDocumentID func(unsafe.Pointer, unsafe.Pointer) int
-	_fnSKIndexGetDocumentState func(unsafe.Pointer, unsafe.Pointer) SKDocumentIndexState
-	_fnSKIndexGetDocumentTermCount func(unsafe.Pointer, int) int
-	_fnSKIndexGetDocumentTermFrequency func(unsafe.Pointer, int, int) int
-	_fnSKIndexGetIndexType func(unsafe.Pointer) SKIndexType
-	_fnSKIndexGetMaximumBytesBeforeFlush func(unsafe.Pointer) int
-	_fnSKIndexGetMaximumDocumentID func(unsafe.Pointer) int
-	_fnSKIndexGetMaximumTermID func(unsafe.Pointer) int
-	_fnSKIndexGetTermDocumentCount func(unsafe.Pointer, int) int
-	_fnSKIndexGetTermIDForTermString func(unsafe.Pointer, unsafe.Pointer) int
-	_fnSKIndexGetTypeID func() uint
-	_fnSKIndexMoveDocument func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSKIndexOpenWithData func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSKIndexOpenWithMutableData func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSKIndexOpenWithURL func(unsafe.Pointer, unsafe.Pointer, uint8) unsafe.Pointer
-	_fnSKIndexRemoveDocument func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSKIndexRenameDocument func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnSKIndexSetDocumentProperties func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnSKIndexSetMaximumBytesBeforeFlush func(unsafe.Pointer, int)
-	_fnSKLoadDefaultExtractorPlugIns func()
-	_fnSKSearchCancel func(unsafe.Pointer)
-	_fnSKSearchCreate func(unsafe.Pointer, unsafe.Pointer, uint) unsafe.Pointer
-	_fnSKSearchFindMatches func(unsafe.Pointer, int, *int, *float32, float64, *int) uint8
-	_fnSKSearchGetTypeID func() uint
-// Deprecated: No longer supported
+	_fnSKIndexCopyInfoForDocumentIDs         func(unsafe.Pointer, int, *int, unsafe.Pointer, *int)
+	_fnSKIndexCopyTermIDArrayForDocumentID   func(unsafe.Pointer, int) unsafe.Pointer
+	_fnSKIndexCopyTermStringForTermID        func(unsafe.Pointer, int) unsafe.Pointer
+	_fnSKIndexCreateWithMutableData          func(unsafe.Pointer, unsafe.Pointer, SKIndexType, unsafe.Pointer) unsafe.Pointer
+	_fnSKIndexCreateWithURL                  func(unsafe.Pointer, unsafe.Pointer, SKIndexType, unsafe.Pointer) unsafe.Pointer
+	_fnSKIndexDocumentIteratorCopyNext       func(unsafe.Pointer) unsafe.Pointer
+	_fnSKIndexDocumentIteratorCreate         func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSKIndexDocumentIteratorGetTypeID      func() uint
+	_fnSKIndexFlush                          func(unsafe.Pointer) uint8
+	_fnSKIndexGetAnalysisProperties          func(unsafe.Pointer) unsafe.Pointer
+	_fnSKIndexGetDocumentCount               func(unsafe.Pointer) int
+	_fnSKIndexGetDocumentID                  func(unsafe.Pointer, unsafe.Pointer) int
+	_fnSKIndexGetDocumentState               func(unsafe.Pointer, unsafe.Pointer) SKDocumentIndexState
+	_fnSKIndexGetDocumentTermCount           func(unsafe.Pointer, int) int
+	_fnSKIndexGetDocumentTermFrequency       func(unsafe.Pointer, int, int) int
+	_fnSKIndexGetIndexType                   func(unsafe.Pointer) SKIndexType
+	_fnSKIndexGetMaximumBytesBeforeFlush     func(unsafe.Pointer) int
+	_fnSKIndexGetMaximumDocumentID           func(unsafe.Pointer) int
+	_fnSKIndexGetMaximumTermID               func(unsafe.Pointer) int
+	_fnSKIndexGetTermDocumentCount           func(unsafe.Pointer, int) int
+	_fnSKIndexGetTermIDForTermString         func(unsafe.Pointer, unsafe.Pointer) int
+	_fnSKIndexGetTypeID                      func() uint
+	_fnSKIndexMoveDocument                   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSKIndexOpenWithData                   func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSKIndexOpenWithMutableData            func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSKIndexOpenWithURL                    func(unsafe.Pointer, unsafe.Pointer, uint8) unsafe.Pointer
+	_fnSKIndexRemoveDocument                 func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSKIndexRenameDocument                 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnSKIndexSetDocumentProperties          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnSKIndexSetMaximumBytesBeforeFlush     func(unsafe.Pointer, int)
+	_fnSKLoadDefaultExtractorPlugIns         func()
+	_fnSKSearchCancel                        func(unsafe.Pointer)
+	_fnSKSearchCreate                        func(unsafe.Pointer, unsafe.Pointer, uint) unsafe.Pointer
+	_fnSKSearchFindMatches                   func(unsafe.Pointer, int, *int, *float32, float64, *int) uint8
+	_fnSKSearchGetTypeID                     func() uint
+	// Deprecated: No longer supported
 	_fnSKSearchGroupCopyIndexes func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnSKSearchGroupCreate func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnSKSearchGroupGetTypeID func() uint
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnSKSearchResultsCopyMatchingTerms func(unsafe.Pointer, int) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnSKSearchResultsCreateWithDocuments func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnSKSearchResultsCreateWithQuery func(unsafe.Pointer, unsafe.Pointer, SKSearchType, int, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnSKSearchResultsGetCount func(unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnSKSearchResultsGetInfoInRange func(unsafe.Pointer, corefoundation.CFRange, unsafe.Pointer, unsafe.Pointer, *float32) int
-// Deprecated: No longer supported
-	_fnSKSearchResultsGetTypeID func() uint
-	_fnSKSummaryCopyParagraphAtIndex func(unsafe.Pointer, int) unsafe.Pointer
+	// Deprecated: No longer supported
+	_fnSKSearchResultsGetTypeID            func() uint
+	_fnSKSummaryCopyParagraphAtIndex       func(unsafe.Pointer, int) unsafe.Pointer
 	_fnSKSummaryCopyParagraphSummaryString func(unsafe.Pointer, int) unsafe.Pointer
-	_fnSKSummaryCopySentenceAtIndex func(unsafe.Pointer, int) unsafe.Pointer
-	_fnSKSummaryCopySentenceSummaryString func(unsafe.Pointer, int) unsafe.Pointer
-	_fnSKSummaryCreateWithString func(unsafe.Pointer) unsafe.Pointer
-	_fnSKSummaryGetParagraphCount func(unsafe.Pointer) int
-	_fnSKSummaryGetParagraphSummaryInfo func(unsafe.Pointer, int, *int, *int) int
-	_fnSKSummaryGetSentenceCount func(unsafe.Pointer) int
-	_fnSKSummaryGetSentenceSummaryInfo func(unsafe.Pointer, int, *int, *int, *int) int
-	_fnSKSummaryGetTypeID func() uint
+	_fnSKSummaryCopySentenceAtIndex        func(unsafe.Pointer, int) unsafe.Pointer
+	_fnSKSummaryCopySentenceSummaryString  func(unsafe.Pointer, int) unsafe.Pointer
+	_fnSKSummaryCreateWithString           func(unsafe.Pointer) unsafe.Pointer
+	_fnSKSummaryGetParagraphCount          func(unsafe.Pointer) int
+	_fnSKSummaryGetParagraphSummaryInfo    func(unsafe.Pointer, int, *int, *int) int
+	_fnSKSummaryGetSentenceCount           func(unsafe.Pointer) int
+	_fnSKSummaryGetSentenceSummaryInfo     func(unsafe.Pointer, int, *int, *int, *int) int
+	_fnSKSummaryGetTypeID                  func() uint
 )
 
 func SKDocumentCopyURL(inDocument unsafe.Pointer) unsafe.Pointer {
@@ -379,4 +379,3 @@ func SKSummaryGetSentenceSummaryInfo(summary unsafe.Pointer, numSentencesInSumma
 func SKSummaryGetTypeID() uint {
 	return _fnSKSummaryGetTypeID()
 }
-

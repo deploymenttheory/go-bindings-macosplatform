@@ -62,7 +62,9 @@ func (x *ControllerLiveInput) UnmappedInput() *ControllerLiveInput {
 	return &ControllerLiveInput{inner: _r}
 }
 
-func (x *ControllerLiveInput) asControllerInputState() *raw.GCControllerInputState { return &x.inner.GCControllerInputState }
+func (x *ControllerLiveInput) asControllerInputState() *raw.GCControllerInputState {
+	return &x.inner.GCControllerInputState
+}
 
 // ControllerLiveInputable is the interface implemented by [ControllerLiveInput], for mocking and DI.
 type ControllerLiveInputable interface {
@@ -73,4 +75,3 @@ type ControllerLiveInputable interface {
 }
 
 var _ ControllerLiveInputable = (*ControllerLiveInput)(nil)
-

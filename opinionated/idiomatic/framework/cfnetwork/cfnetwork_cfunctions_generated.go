@@ -504,4 +504,3 @@ func CFStreamCreatePairWithSocketToNetService(alloc unsafe.Pointer, service unsa
 func CFWriteStreamCreateWithFTPURL(alloc unsafe.Pointer, ftpURL unsafe.Pointer) unsafe.Pointer {
 	return raw.CFWriteStreamCreateWithFTPURL(alloc, ftpURL)
 }
-

@@ -45,7 +45,9 @@ func (x *PersistentHistoryResult) ResultType() raw.NSPersistentHistoryResultType
 	return x.inner.ResultType()
 }
 
-func (x *PersistentHistoryResult) asPersistentStoreResult() *raw.NSPersistentStoreResult { return &x.inner.NSPersistentStoreResult }
+func (x *PersistentHistoryResult) asPersistentStoreResult() *raw.NSPersistentStoreResult {
+	return &x.inner.NSPersistentStoreResult
+}
 
 // PersistentHistoryResultable is the interface implemented by [PersistentHistoryResult], for mocking and DI.
 type PersistentHistoryResultable interface {
@@ -55,4 +57,3 @@ type PersistentHistoryResultable interface {
 }
 
 var _ PersistentHistoryResultable = (*PersistentHistoryResult)(nil)
-

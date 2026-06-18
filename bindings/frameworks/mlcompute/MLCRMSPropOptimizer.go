@@ -16,13 +16,13 @@ type MLCRMSPropOptimizer struct {
 }
 
 var (
-	_clsMLCRMSPropOptimizer = _objcClass("MLCRMSPropOptimizer")
-	_mLCRMSPropOptimizerSelOptimizerWithDescriptor = objc.RegisterName("optimizerWithDescriptor:")
+	_clsMLCRMSPropOptimizer                                                           = _objcClass("MLCRMSPropOptimizer")
+	_mLCRMSPropOptimizerSelOptimizerWithDescriptor                                    = objc.RegisterName("optimizerWithDescriptor:")
 	_mLCRMSPropOptimizerSelOptimizerWithDescriptorMomentumScaleAlphaEpsilonIsCentered = objc.RegisterName("optimizerWithDescriptor:momentumScale:alpha:epsilon:isCentered:")
-	_mLCRMSPropOptimizerSelMomentumScale = objc.RegisterName("momentumScale")
-	_mLCRMSPropOptimizerSelAlpha = objc.RegisterName("alpha")
-	_mLCRMSPropOptimizerSelEpsilon = objc.RegisterName("epsilon")
-	_mLCRMSPropOptimizerSelIsCentered = objc.RegisterName("isCentered")
+	_mLCRMSPropOptimizerSelMomentumScale                                              = objc.RegisterName("momentumScale")
+	_mLCRMSPropOptimizerSelAlpha                                                      = objc.RegisterName("alpha")
+	_mLCRMSPropOptimizerSelEpsilon                                                    = objc.RegisterName("epsilon")
+	_mLCRMSPropOptimizerSelIsCentered                                                 = objc.RegisterName("isCentered")
 )
 
 func MLCRMSPropOptimizerFromID(id objc.ID) *MLCRMSPropOptimizer {
@@ -38,14 +38,18 @@ func MLCRMSPropOptimizerFromID(id objc.ID) *MLCRMSPropOptimizer {
 // @abstract   Create a MLCRMSPropOptimizer object with defaults @return     A new MLCRMSPropOptimizer object.
 func MLCRMSPropOptimizerOptimizerWithDescriptor(optimizerDescriptor *MLCOptimizerDescriptor) *MLCRMSPropOptimizer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCRMSPropOptimizer), _mLCRMSPropOptimizerSelOptimizerWithDescriptor, optimizerDescriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCRMSPropOptimizerFromID(_ret)
 }
 
 // @abstract   Create a MLCRMSPropOptimizer object @param      optimizerDescriptor    The optimizer descriptor object @param      momentumScale                 The momentum scale @param      alpha                                   The smoothing constant value @param      epsilon                              The epsilon value to use to improve numerical stability @param      isCentered                            A boolean to specify whether to compute the centered RMSProp or not @return     A new MLCRMSPropOptimizer object.
 func MLCRMSPropOptimizerOptimizerWithDescriptorMomentumScaleAlphaEpsilonIsCentered(optimizerDescriptor *MLCOptimizerDescriptor, momentumScale float32, alpha float32, epsilon float32, isCentered bool) *MLCRMSPropOptimizer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCRMSPropOptimizer), _mLCRMSPropOptimizerSelOptimizerWithDescriptorMomentumScaleAlphaEpsilonIsCentered, optimizerDescriptor.Ptr(), momentumScale, alpha, epsilon, isCentered)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCRMSPropOptimizerFromID(_ret)
 }
 
@@ -72,4 +76,3 @@ func (o *MLCRMSPropOptimizer) IsCentered() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mLCRMSPropOptimizerSelIsCentered)
 	return _ret
 }
-

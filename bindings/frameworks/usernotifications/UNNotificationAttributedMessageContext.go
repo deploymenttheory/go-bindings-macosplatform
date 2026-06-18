@@ -17,7 +17,7 @@ type UNNotificationAttributedMessageContext struct {
 }
 
 var (
-	_clsUNNotificationAttributedMessageContext = _objcClass("UNNotificationAttributedMessageContext")
+	_clsUNNotificationAttributedMessageContext                                              = _objcClass("UNNotificationAttributedMessageContext")
 	_uNNotificationAttributedMessageContextSelContextWithSendMessageIntentAttributedContent = objc.RegisterName("contextWithSendMessageIntent:attributedContent:")
 )
 
@@ -33,7 +33,8 @@ func UNNotificationAttributedMessageContextFromID(id objc.ID) *UNNotificationAtt
 
 func UNNotificationAttributedMessageContextContextWithSendMessageIntentAttributedContent(sendMessageIntent *intents.INSendMessageIntent, attributedContent *foundation.NSAttributedString) *UNNotificationAttributedMessageContext {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationAttributedMessageContext), _uNNotificationAttributedMessageContextSelContextWithSendMessageIntentAttributedContent, sendMessageIntent.Ptr(), attributedContent.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UNNotificationAttributedMessageContextFromID(_ret)
 }
-

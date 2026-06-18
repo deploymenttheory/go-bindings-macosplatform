@@ -16,13 +16,13 @@ type MTLComputePassSampleBufferAttachmentDescriptor struct {
 }
 
 var (
-	_clsMTLComputePassSampleBufferAttachmentDescriptor = _objcClass("MTLComputePassSampleBufferAttachmentDescriptor")
-	_mTLComputePassSampleBufferAttachmentDescriptorSelSampleBuffer = objc.RegisterName("sampleBuffer")
-	_mTLComputePassSampleBufferAttachmentDescriptorSelSetSampleBuffer = objc.RegisterName("setSampleBuffer:")
-	_mTLComputePassSampleBufferAttachmentDescriptorSelStartOfEncoderSampleIndex = objc.RegisterName("startOfEncoderSampleIndex")
+	_clsMTLComputePassSampleBufferAttachmentDescriptor                             = _objcClass("MTLComputePassSampleBufferAttachmentDescriptor")
+	_mTLComputePassSampleBufferAttachmentDescriptorSelSampleBuffer                 = objc.RegisterName("sampleBuffer")
+	_mTLComputePassSampleBufferAttachmentDescriptorSelSetSampleBuffer              = objc.RegisterName("setSampleBuffer:")
+	_mTLComputePassSampleBufferAttachmentDescriptorSelStartOfEncoderSampleIndex    = objc.RegisterName("startOfEncoderSampleIndex")
 	_mTLComputePassSampleBufferAttachmentDescriptorSelSetStartOfEncoderSampleIndex = objc.RegisterName("setStartOfEncoderSampleIndex:")
-	_mTLComputePassSampleBufferAttachmentDescriptorSelEndOfEncoderSampleIndex = objc.RegisterName("endOfEncoderSampleIndex")
-	_mTLComputePassSampleBufferAttachmentDescriptorSelSetEndOfEncoderSampleIndex = objc.RegisterName("setEndOfEncoderSampleIndex:")
+	_mTLComputePassSampleBufferAttachmentDescriptorSelEndOfEncoderSampleIndex      = objc.RegisterName("endOfEncoderSampleIndex")
+	_mTLComputePassSampleBufferAttachmentDescriptorSelSetEndOfEncoderSampleIndex   = objc.RegisterName("setEndOfEncoderSampleIndex:")
 )
 
 func MTLComputePassSampleBufferAttachmentDescriptorFromID(id objc.ID) *MTLComputePassSampleBufferAttachmentDescriptor {
@@ -64,4 +64,3 @@ func (o *MTLComputePassSampleBufferAttachmentDescriptor) EndOfEncoderSampleIndex
 func (o *MTLComputePassSampleBufferAttachmentDescriptor) SetEndOfEncoderSampleIndex(endOfEncoderSampleIndex uint) {
 	o.Ptr().Send(_mTLComputePassSampleBufferAttachmentDescriptorSelSetEndOfEncoderSampleIndex, endOfEncoderSampleIndex)
 }
-

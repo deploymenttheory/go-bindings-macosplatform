@@ -18,14 +18,14 @@ type MTRApplicationLauncherClusterLauncherResponseParams struct {
 }
 
 var (
-	_clsMTRApplicationLauncherClusterLauncherResponseParams = _objcClass("MTRApplicationLauncherClusterLauncherResponseParams")
+	_clsMTRApplicationLauncherClusterLauncherResponseParams                           = _objcClass("MTRApplicationLauncherClusterLauncherResponseParams")
 	_mTRApplicationLauncherClusterLauncherResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRApplicationLauncherClusterLauncherResponseParamsSelStatus = objc.RegisterName("status")
-	_mTRApplicationLauncherClusterLauncherResponseParamsSelSetStatus = objc.RegisterName("setStatus:")
-	_mTRApplicationLauncherClusterLauncherResponseParamsSelData = objc.RegisterName("data")
-	_mTRApplicationLauncherClusterLauncherResponseParamsSelSetData = objc.RegisterName("setData:")
-	_mTRApplicationLauncherClusterLauncherResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRApplicationLauncherClusterLauncherResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRApplicationLauncherClusterLauncherResponseParamsSelStatus                     = objc.RegisterName("status")
+	_mTRApplicationLauncherClusterLauncherResponseParamsSelSetStatus                  = objc.RegisterName("setStatus:")
+	_mTRApplicationLauncherClusterLauncherResponseParamsSelData                       = objc.RegisterName("data")
+	_mTRApplicationLauncherClusterLauncherResponseParamsSelSetData                    = objc.RegisterName("setData:")
+	_mTRApplicationLauncherClusterLauncherResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRApplicationLauncherClusterLauncherResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
 )
 
 func MTRApplicationLauncherClusterLauncherResponseParamsFromID(id objc.ID) *MTRApplicationLauncherClusterLauncherResponseParams {
@@ -42,7 +42,9 @@ func MTRApplicationLauncherClusterLauncherResponseParamsFromID(id objc.ID) *MTRA
 func (o *MTRApplicationLauncherClusterLauncherResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRApplicationLauncherClusterLauncherResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRApplicationLauncherClusterLauncherResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -51,7 +53,9 @@ func (o *MTRApplicationLauncherClusterLauncherResponseParams) InitWithResponseVa
 
 func (o *MTRApplicationLauncherClusterLauncherResponseParams) Status() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRApplicationLauncherClusterLauncherResponseParamsSelStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *MTRApplicationLauncherClusterLauncherResponseParams) SetStatus(status *
 
 func (o *MTRApplicationLauncherClusterLauncherResponseParams) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRApplicationLauncherClusterLauncherResponseParamsSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -72,11 +78,12 @@ func (o *MTRApplicationLauncherClusterLauncherResponseParams) SetData(data *foun
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRApplicationLauncherClusterLauncherResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRApplicationLauncherClusterLauncherResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRApplicationLauncherClusterLauncherResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
 	o.Ptr().Send(_mTRApplicationLauncherClusterLauncherResponseParamsSelSetTimedInvokeTimeoutMs, timedInvokeTimeoutMs.Ptr())
 }
-

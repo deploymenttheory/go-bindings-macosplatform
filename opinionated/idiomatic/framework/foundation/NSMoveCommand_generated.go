@@ -112,4 +112,3 @@ type MoveCommandable interface {
 }
 
 var _ MoveCommandable = (*MoveCommand)(nil)
-

@@ -10,56 +10,56 @@ import (
 )
 
 type CGBitmapParameters struct {
-	Width uint
-	Height uint
-	BytesPerPixel uint
-	AlignedBytesPerRow uint
-	Component CGComponent
-	Layout CGBitmapLayout
-	Format CGImagePixelFormatInfo
-	ColorSpace unsafe.Pointer
+	Width                 uint
+	Height                uint
+	BytesPerPixel         uint
+	AlignedBytesPerRow    uint
+	Component             CGComponent
+	Layout                CGBitmapLayout
+	Format                CGImagePixelFormatInfo
+	ColorSpace            unsafe.Pointer
 	HasPremultipliedAlpha bool
-	ByteOrder int
-	EdrTargetHeadroom float32
+	ByteOrder             int
+	EdrTargetHeadroom     float32
 }
 
 // CGColor is an opaque type.
 type CGColor struct{}
 
 type CGColorBufferFormat struct {
-	Version uint32
-	BitmapInfo CGBitmapInfo
+	Version          uint32
+	BitmapInfo       CGBitmapInfo
 	BitsPerComponent uint
-	BitsPerPixel uint
-	BytesPerRow uint
+	BitsPerPixel     uint
+	BytesPerRow      uint
 }
 
 // CGColorConversionInfo is an opaque type.
 type CGColorConversionInfo struct{}
 
 type CGColorDataFormat struct {
-	Version uint32
-	Colorspace_info unsafe.Pointer
-	Bitmap_info CGBitmapInfo
+	Version            uint32
+	Colorspace_info    unsafe.Pointer
+	Bitmap_info        CGBitmapInfo
 	Bits_per_component uint
-	Bytes_per_row uint
-	Intent CGColorRenderingIntent
-	Decode *float64
+	Bytes_per_row      uint
+	Intent             CGColorRenderingIntent
+	Decode             *float64
 }
 
 // CGColorSpace is an opaque type.
 type CGColorSpace struct{}
 
 type CGContentInfo struct {
-	DeepestImageComponent CGComponent
-	ContentColorModels CGColorModel
-	HasWideGamut bool
-	HasTransparency bool
+	DeepestImageComponent  CGComponent
+	ContentColorModels     CGColorModel
+	HasWideGamut           bool
+	HasTransparency        bool
 	LargestContentHeadroom float32
 }
 
 type CGContentToneMappingInfo struct {
-	Method CGToneMapping
+	Method  CGToneMapping
 	Options unsafe.Pointer
 }
 
@@ -70,7 +70,7 @@ type CGContext struct{}
 type CGDataConsumer struct{}
 
 type CGDataConsumerCallbacks struct {
-	PutBytes unsafe.Pointer
+	PutBytes        unsafe.Pointer
 	ReleaseConsumer unsafe.Pointer
 }
 
@@ -78,25 +78,25 @@ type CGDataConsumerCallbacks struct {
 type CGDataProvider struct{}
 
 type CGDataProviderDirectCallbacks struct {
-	Version uint
-	GetBytePointer unsafe.Pointer
+	Version            uint
+	GetBytePointer     unsafe.Pointer
 	ReleaseBytePointer unsafe.Pointer
 	GetBytesAtPosition unsafe.Pointer
-	ReleaseInfo unsafe.Pointer
+	ReleaseInfo        unsafe.Pointer
 }
 
 type CGDataProviderSequentialCallbacks struct {
-	Version uint
-	GetBytes unsafe.Pointer
+	Version     uint
+	GetBytes    unsafe.Pointer
 	SkipForward unsafe.Pointer
-	Rewind unsafe.Pointer
+	Rewind      unsafe.Pointer
 	ReleaseInfo unsafe.Pointer
 }
 
 type CGDeviceColor struct {
-	Red float32
+	Red   float32
 	Green float32
-	Blue float32
+	Blue  float32
 }
 
 // CGDisplayMode is an opaque type.
@@ -117,8 +117,8 @@ type CGFont struct{}
 type CGFunction struct{}
 
 type CGFunctionCallbacks struct {
-	Version uint
-	Evaluate unsafe.Pointer
+	Version     uint
+	Evaluate    unsafe.Pointer
 	ReleaseInfo unsafe.Pointer
 }
 
@@ -165,21 +165,21 @@ type CGPDFString struct{}
 type CGPSConverter struct{}
 
 type CGPSConverterCallbacks struct {
-	Version uint
+	Version       uint
 	BeginDocument unsafe.Pointer
-	EndDocument unsafe.Pointer
-	BeginPage unsafe.Pointer
-	EndPage unsafe.Pointer
-	NoteProgress unsafe.Pointer
-	NoteMessage unsafe.Pointer
-	ReleaseInfo unsafe.Pointer
+	EndDocument   unsafe.Pointer
+	BeginPage     unsafe.Pointer
+	EndPage       unsafe.Pointer
+	NoteProgress  unsafe.Pointer
+	NoteMessage   unsafe.Pointer
+	ReleaseInfo   unsafe.Pointer
 }
 
 // CGPath is an opaque type.
 type CGPath struct{}
 
 type CGPathElement struct {
-	Type CGPathElementType
+	Type   CGPathElementType
 	Points *corefoundation.CGPoint
 }
 
@@ -187,7 +187,7 @@ type CGPathElement struct {
 type CGPattern struct{}
 
 type CGPatternCallbacks struct {
-	Version uint
+	Version     uint
 	DrawPattern unsafe.Pointer
 	ReleaseInfo unsafe.Pointer
 }
@@ -220,16 +220,16 @@ type CGEventSource struct{}
 
 // C struct: __CGEventTapInformation
 type CGEventTapInformation struct {
-	EventTapID uint32
-	TapPoint CGEventTapLocation
-	Options CGEventTapOptions
-	EventsOfInterest uint64
-	TappingProcess int
+	EventTapID         uint32
+	TapPoint           CGEventTapLocation
+	Options            CGEventTapOptions
+	EventsOfInterest   uint64
+	TappingProcess     int
 	ProcessBeingTapped int
-	Enabled bool
-	MinUsecLatency float32
-	AvgUsecLatency float32
-	MaxUsecLatency float32
+	Enabled            bool
+	MinUsecLatency     float32
+	AvgUsecLatency     float32
+	MaxUsecLatency     float32
 }
 
 // C struct: __CGEventTapProxy
@@ -239,4 +239,3 @@ type CGEventTapProxy struct{}
 // C struct: __IOSurface
 // IOSurface is an opaque type.
 type IOSurface struct{}
-

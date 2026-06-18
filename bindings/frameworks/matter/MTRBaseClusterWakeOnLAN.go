@@ -18,29 +18,29 @@ type MTRBaseClusterWakeOnLAN struct {
 }
 
 var (
-	_clsMTRBaseClusterWakeOnLAN = _objcClass("MTRBaseClusterWakeOnLAN")
-	_mTRBaseClusterWakeOnLANSelReadAttributeMACAddressWithCompletion = objc.RegisterName("readAttributeMACAddressWithCompletion:")
-	_mTRBaseClusterWakeOnLANSelSubscribeAttributeMACAddressWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeMACAddressWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterWakeOnLANSelReadAttributeMACAddressWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeMACAddressWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterWakeOnLANSelReadAttributeLinkLocalAddressWithCompletion = objc.RegisterName("readAttributeLinkLocalAddressWithCompletion:")
-	_mTRBaseClusterWakeOnLANSelSubscribeAttributeLinkLocalAddressWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeLinkLocalAddressWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterWakeOnLANSelReadAttributeLinkLocalAddressWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeLinkLocalAddressWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterWakeOnLANSelReadAttributeGeneratedCommandListWithCompletion = objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:")
+	_clsMTRBaseClusterWakeOnLAN                                                                                     = _objcClass("MTRBaseClusterWakeOnLAN")
+	_mTRBaseClusterWakeOnLANSelReadAttributeMACAddressWithCompletion                                                = objc.RegisterName("readAttributeMACAddressWithCompletion:")
+	_mTRBaseClusterWakeOnLANSelSubscribeAttributeMACAddressWithParamsSubscriptionEstablishedReportHandler           = objc.RegisterName("subscribeAttributeMACAddressWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterWakeOnLANSelReadAttributeMACAddressWithClusterStateCacheEndpointQueueCompletion                  = objc.RegisterName("readAttributeMACAddressWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterWakeOnLANSelReadAttributeLinkLocalAddressWithCompletion                                          = objc.RegisterName("readAttributeLinkLocalAddressWithCompletion:")
+	_mTRBaseClusterWakeOnLANSelSubscribeAttributeLinkLocalAddressWithParamsSubscriptionEstablishedReportHandler     = objc.RegisterName("subscribeAttributeLinkLocalAddressWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterWakeOnLANSelReadAttributeLinkLocalAddressWithClusterStateCacheEndpointQueueCompletion            = objc.RegisterName("readAttributeLinkLocalAddressWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterWakeOnLANSelReadAttributeGeneratedCommandListWithCompletion                                      = objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:")
 	_mTRBaseClusterWakeOnLANSelSubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterWakeOnLANSelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeGeneratedCommandListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterWakeOnLANSelReadAttributeAcceptedCommandListWithCompletion = objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:")
-	_mTRBaseClusterWakeOnLANSelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterWakeOnLANSelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeAcceptedCommandListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterWakeOnLANSelReadAttributeAttributeListWithCompletion = objc.RegisterName("readAttributeAttributeListWithCompletion:")
-	_mTRBaseClusterWakeOnLANSelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterWakeOnLANSelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeAttributeListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterWakeOnLANSelReadAttributeFeatureMapWithCompletion = objc.RegisterName("readAttributeFeatureMapWithCompletion:")
-	_mTRBaseClusterWakeOnLANSelSubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterWakeOnLANSelReadAttributeFeatureMapWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeFeatureMapWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterWakeOnLANSelReadAttributeClusterRevisionWithCompletion = objc.RegisterName("readAttributeClusterRevisionWithCompletion:")
-	_mTRBaseClusterWakeOnLANSelSubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterWakeOnLANSelReadAttributeClusterRevisionWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeClusterRevisionWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterWakeOnLANSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRBaseClusterWakeOnLANSelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion        = objc.RegisterName("readAttributeGeneratedCommandListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterWakeOnLANSelReadAttributeAcceptedCommandListWithCompletion                                       = objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:")
+	_mTRBaseClusterWakeOnLANSelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler  = objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterWakeOnLANSelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion         = objc.RegisterName("readAttributeAcceptedCommandListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterWakeOnLANSelReadAttributeAttributeListWithCompletion                                             = objc.RegisterName("readAttributeAttributeListWithCompletion:")
+	_mTRBaseClusterWakeOnLANSelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler        = objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterWakeOnLANSelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion               = objc.RegisterName("readAttributeAttributeListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterWakeOnLANSelReadAttributeFeatureMapWithCompletion                                                = objc.RegisterName("readAttributeFeatureMapWithCompletion:")
+	_mTRBaseClusterWakeOnLANSelSubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler           = objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterWakeOnLANSelReadAttributeFeatureMapWithClusterStateCacheEndpointQueueCompletion                  = objc.RegisterName("readAttributeFeatureMapWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterWakeOnLANSelReadAttributeClusterRevisionWithCompletion                                           = objc.RegisterName("readAttributeClusterRevisionWithCompletion:")
+	_mTRBaseClusterWakeOnLANSelSubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler      = objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterWakeOnLANSelReadAttributeClusterRevisionWithClusterStateCacheEndpointQueueCompletion             = objc.RegisterName("readAttributeClusterRevisionWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterWakeOnLANSelInitWithDeviceEndpointIDQueue                                                        = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRBaseClusterWakeOnLANFromID(id objc.ID) *MTRBaseClusterWakeOnLAN {
@@ -309,7 +309,8 @@ func MTRBaseClusterWakeOnLANReadAttributeClusterRevisionWithClusterStateCacheEnd
 // For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func (o *MTRBaseClusterWakeOnLAN) InitWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterWakeOnLAN {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBaseClusterWakeOnLANSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRBaseClusterWakeOnLANFromID(_ret)
 }
-

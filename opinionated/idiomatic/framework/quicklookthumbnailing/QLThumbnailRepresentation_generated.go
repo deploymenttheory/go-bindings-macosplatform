@@ -61,4 +61,3 @@ type ThumbnailRepresentationable interface {
 }
 
 var _ ThumbnailRepresentationable = (*ThumbnailRepresentation)(nil)
-

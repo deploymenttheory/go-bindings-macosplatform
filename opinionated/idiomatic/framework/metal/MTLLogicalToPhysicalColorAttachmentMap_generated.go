@@ -15,7 +15,9 @@ type LogicalToPhysicalColorAttachmentMap struct {
 }
 
 // Unwrap returns the underlying [raw.MTLLogicalToPhysicalColorAttachmentMap].
-func (x *LogicalToPhysicalColorAttachmentMap) Unwrap() *raw.MTLLogicalToPhysicalColorAttachmentMap { return x.inner }
+func (x *LogicalToPhysicalColorAttachmentMap) Unwrap() *raw.MTLLogicalToPhysicalColorAttachmentMap {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -59,4 +61,3 @@ type LogicalToPhysicalColorAttachmentMapable interface {
 }
 
 var _ LogicalToPhysicalColorAttachmentMapable = (*LogicalToPhysicalColorAttachmentMap)(nil)
-

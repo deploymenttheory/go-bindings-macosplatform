@@ -70,4 +70,3 @@ type ScatterLayerable interface {
 }
 
 var _ ScatterLayerable = (*ScatterLayer)(nil)
-

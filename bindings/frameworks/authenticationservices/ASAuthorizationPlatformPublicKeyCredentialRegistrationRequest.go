@@ -15,12 +15,12 @@ type ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest struct {
 }
 
 var (
-	_clsASAuthorizationPlatformPublicKeyCredentialRegistrationRequest = _objcClass("ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest")
-	_aSAuthorizationPlatformPublicKeyCredentialRegistrationRequestSelLargeBlob = objc.RegisterName("largeBlob")
-	_aSAuthorizationPlatformPublicKeyCredentialRegistrationRequestSelSetLargeBlob = objc.RegisterName("setLargeBlob:")
-	_aSAuthorizationPlatformPublicKeyCredentialRegistrationRequestSelPrf = objc.RegisterName("prf")
-	_aSAuthorizationPlatformPublicKeyCredentialRegistrationRequestSelSetPrf = objc.RegisterName("setPrf:")
-	_aSAuthorizationPlatformPublicKeyCredentialRegistrationRequestSelRequestStyle = objc.RegisterName("requestStyle")
+	_clsASAuthorizationPlatformPublicKeyCredentialRegistrationRequest                = _objcClass("ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest")
+	_aSAuthorizationPlatformPublicKeyCredentialRegistrationRequestSelLargeBlob       = objc.RegisterName("largeBlob")
+	_aSAuthorizationPlatformPublicKeyCredentialRegistrationRequestSelSetLargeBlob    = objc.RegisterName("setLargeBlob:")
+	_aSAuthorizationPlatformPublicKeyCredentialRegistrationRequestSelPrf             = objc.RegisterName("prf")
+	_aSAuthorizationPlatformPublicKeyCredentialRegistrationRequestSelSetPrf          = objc.RegisterName("setPrf:")
+	_aSAuthorizationPlatformPublicKeyCredentialRegistrationRequestSelRequestStyle    = objc.RegisterName("requestStyle")
 	_aSAuthorizationPlatformPublicKeyCredentialRegistrationRequestSelSetRequestStyle = objc.RegisterName("setRequestStyle:")
 )
 
@@ -36,7 +36,9 @@ func ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestFromID(id objc
 
 func (o *ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest) LargeBlob() *ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPlatformPublicKeyCredentialRegistrationRequestSelLargeBlob)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInputFromID(_ret)
 }
 
@@ -46,7 +48,9 @@ func (o *ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest) SetLarge
 
 func (o *ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest) Prf() *ASAuthorizationPublicKeyCredentialPRFRegistrationInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPlatformPublicKeyCredentialRegistrationRequestSelPrf)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationPublicKeyCredentialPRFRegistrationInputFromID(_ret)
 }
 
@@ -62,4 +66,3 @@ func (o *ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest) RequestS
 func (o *ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest) SetRequestStyle(requestStyle ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle) {
 	o.Ptr().Send(_aSAuthorizationPlatformPublicKeyCredentialRegistrationRequestSelSetRequestStyle, requestStyle)
 }
-

@@ -16,11 +16,11 @@ type CKUserIdentity struct {
 }
 
 var (
-	_clsCKUserIdentity = _objcClass("CKUserIdentity")
-	_cKUserIdentitySelUserRecordID = objc.RegisterName("userRecordID")
-	_cKUserIdentitySelLookupInfo = objc.RegisterName("lookupInfo")
-	_cKUserIdentitySelNameComponents = objc.RegisterName("nameComponents")
-	_cKUserIdentitySelHasiCloudAccount = objc.RegisterName("hasiCloudAccount")
+	_clsCKUserIdentity                   = _objcClass("CKUserIdentity")
+	_cKUserIdentitySelUserRecordID       = objc.RegisterName("userRecordID")
+	_cKUserIdentitySelLookupInfo         = objc.RegisterName("lookupInfo")
+	_cKUserIdentitySelNameComponents     = objc.RegisterName("nameComponents")
+	_cKUserIdentitySelHasiCloudAccount   = objc.RegisterName("hasiCloudAccount")
 	_cKUserIdentitySelContactIdentifiers = objc.RegisterName("contactIdentifiers")
 )
 
@@ -37,21 +37,27 @@ func CKUserIdentityFromID(id objc.ID) *CKUserIdentity {
 // The user record ID for the corresponding user record.
 func (o *CKUserIdentity) UserRecordID() *CKRecordID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKUserIdentitySelUserRecordID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKRecordIDFromID(_ret)
 }
 
-// The lookup info for retrieving the user identity. Use this property's value to retrieve the user identity when using the ``CKDiscoverUserIdentitiesOperation`` and ``CKFetchShareParticipantsOperation`` operations.
+// The lookup info for retrieving the user identity. Use this property's value to retrieve the user identity when using the “CKDiscoverUserIdentitiesOperation“ and “CKFetchShareParticipantsOperation“ operations.
 func (o *CKUserIdentity) LookupInfo() *CKUserIdentityLookupInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKUserIdentitySelLookupInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKUserIdentityLookupInfoFromID(_ret)
 }
 
 // The user's name. You can use this property to construct the user's name for display. Use the components with an instance of <doc://com.apple.documentation/documentation/foundation/personnamecomponentsformatter> to create a string representation for the current locale.
 func (o *CKUserIdentity) NameComponents() *foundation.NSPersonNameComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKUserIdentitySelNameComponents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPersonNameComponentsFromID(_ret)
 }
 
@@ -61,10 +67,9 @@ func (o *CKUserIdentity) HasiCloudAccount() bool {
 	return _ret
 }
 
-// Identifiers that match contacts in the local Contacts database. Identities that CloudKit discovers using ``CKDiscoverAllUserIdentitiesOperation`` correspond to entries in the local Contacts database, matching the identifier on <doc://com.apple.documentation/documentation/contacts/cncontact>.  Use these identifiers with the Contacts database to get additional information about the contacts. Multiple identifiers can exist for a single discovered user because multiple contacts can contain the same email addresses or phone numbers. To transform these identifiers into an array of unified contact identifiers, create a predicate by calling the <doc://com.apple.documentation/documentation/contacts/cncontact/predicateforcontacts(withidentifiers:)> method, and then pass that predicate to the <doc://com.apple.documentation/documentation/contacts/cncontactstore/unifiedcontacts(matching:keystofetch:)> method.
+// Identifiers that match contacts in the local Contacts database. Identities that CloudKit discovers using “CKDiscoverAllUserIdentitiesOperation“ correspond to entries in the local Contacts database, matching the identifier on <doc://com.apple.documentation/documentation/contacts/cncontact>.  Use these identifiers with the Contacts database to get additional information about the contacts. Multiple identifiers can exist for a single discovered user because multiple contacts can contain the same email addresses or phone numbers. To transform these identifiers into an array of unified contact identifiers, create a predicate by calling the <doc://com.apple.documentation/documentation/contacts/cncontact/predicateforcontacts(withidentifiers:)> method, and then pass that predicate to the <doc://com.apple.documentation/documentation/contacts/cncontactstore/unifiedcontacts(matching:keystofetch:)> method.
 // Deprecated: No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.
 func (o *CKUserIdentity) ContactIdentifiers() *foundation.NSArray[*foundation.NSString] {
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cKUserIdentitySelContactIdentifiers)
 	return _ret
 }
-

@@ -48,9 +48,13 @@ func (x *ContainerNodeDefinition) AddSubtree(subtree *raw.PHASESoundEventNodeDef
 	x.inner.AddSubtree(subtree)
 }
 
-func (x *ContainerNodeDefinition) asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition { return &x.inner.PHASESoundEventNodeDefinition }
+func (x *ContainerNodeDefinition) asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition {
+	return &x.inner.PHASESoundEventNodeDefinition
+}
 
-func (x *ContainerNodeDefinition) asDefinition() *raw.PHASEDefinition { return &x.inner.PHASESoundEventNodeDefinition.PHASEDefinition }
+func (x *ContainerNodeDefinition) asDefinition() *raw.PHASEDefinition {
+	return &x.inner.PHASESoundEventNodeDefinition.PHASEDefinition
+}
 
 // ContainerNodeDefinitionable is the interface implemented by [ContainerNodeDefinition], for mocking and DI.
 type ContainerNodeDefinitionable interface {
@@ -59,4 +63,3 @@ type ContainerNodeDefinitionable interface {
 }
 
 var _ ContainerNodeDefinitionable = (*ContainerNodeDefinition)(nil)
-

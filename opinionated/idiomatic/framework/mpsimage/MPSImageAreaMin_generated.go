@@ -57,7 +57,9 @@ func (x *ImageAreaMin) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageAre
 
 func (x *ImageAreaMin) asImageAreaMax() *raw.MPSImageAreaMax { return &x.inner.MPSImageAreaMax }
 
-func (x *ImageAreaMin) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSImageAreaMax.MPSUnaryImageKernel }
+func (x *ImageAreaMin) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
+	return &x.inner.MPSImageAreaMax.MPSUnaryImageKernel
+}
 
 // ImageAreaMinable is the interface implemented by [ImageAreaMin], for mocking and DI.
 type ImageAreaMinable interface {
@@ -68,4 +70,3 @@ type ImageAreaMinable interface {
 }
 
 var _ ImageAreaMinable = (*ImageAreaMin)(nil)
-

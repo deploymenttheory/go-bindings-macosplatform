@@ -15,8 +15,8 @@ type NSPipe struct {
 }
 
 var (
-	_clsNSPipe = _objcClass("NSPipe")
-	_nSPipeSelPipe = objc.RegisterName("pipe")
+	_clsNSPipe                     = _objcClass("NSPipe")
+	_nSPipeSelPipe                 = objc.RegisterName("pipe")
 	_nSPipeSelFileHandleForReading = objc.RegisterName("fileHandleForReading")
 	_nSPipeSelFileHandleForWriting = objc.RegisterName("fileHandleForWriting")
 )
@@ -33,19 +33,24 @@ func NSPipeFromID(id objc.ID) *NSPipe {
 
 func NSPipePipe() *NSPipe {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPipe), _nSPipeSelPipe)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPipeFromID(_ret)
 }
 
 func (o *NSPipe) FileHandleForReading() *NSFileHandle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPipeSelFileHandleForReading)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileHandleFromID(_ret)
 }
 
 func (o *NSPipe) FileHandleForWriting() *NSFileHandle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPipeSelFileHandleForWriting)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileHandleFromID(_ret)
 }
-

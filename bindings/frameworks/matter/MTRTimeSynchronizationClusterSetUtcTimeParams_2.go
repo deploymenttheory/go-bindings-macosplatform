@@ -25,4 +25,3 @@ func MTRTimeSynchronizationClusterSetUtcTimeParamsFromID(id objc.ID) *MTRTimeSyn
 	purego.Track(o)
 	return o
 }
-

@@ -8,66 +8,66 @@ import (
 )
 
 var (
-	_fnMSCBeginTransaction func(*MSCTokenConnection) uint32
-	_fnMSCCancelEventWait func() uint32
-	_fnMSCChangePIN func(*MSCTokenConnection, uint8, *uint8, uint8, *uint8, uint8) uint32
-	_fnMSCClearReset func(*MSCTokenConnection) uint8
-	_fnMSCComputeCrypt func(*MSCTokenConnection, *MSCCryptInit, *uint8, uint32, *uint8, *uint32) uint32
-	_fnMSCCreateObject func(*MSCTokenConnection, string, uint32, *MSCObjectACL) uint32
-	_fnMSCCreatePIN func(*MSCTokenConnection, uint8, uint8, *uint8, uint32, *uint8, uint8) uint32
-	_fnMSCDeleteObject func(*MSCTokenConnection, string, uint8) uint32
-	_fnMSCEndTransaction func(*MSCTokenConnection, uint32) uint32
+	_fnMSCBeginTransaction    func(*MSCTokenConnection) uint32
+	_fnMSCCancelEventWait     func() uint32
+	_fnMSCChangePIN           func(*MSCTokenConnection, uint8, *uint8, uint8, *uint8, uint8) uint32
+	_fnMSCClearReset          func(*MSCTokenConnection) uint8
+	_fnMSCComputeCrypt        func(*MSCTokenConnection, *MSCCryptInit, *uint8, uint32, *uint8, *uint32) uint32
+	_fnMSCCreateObject        func(*MSCTokenConnection, string, uint32, *MSCObjectACL) uint32
+	_fnMSCCreatePIN           func(*MSCTokenConnection, uint8, uint8, *uint8, uint32, *uint8, uint8) uint32
+	_fnMSCDeleteObject        func(*MSCTokenConnection, string, uint8) uint32
+	_fnMSCEndTransaction      func(*MSCTokenConnection, uint32) uint32
 	_fnMSCEstablishConnection func(*MSCTokenInfo, uint32, *uint8, uint32, *MSCTokenConnection) uint32
-	_fnMSCExportKey func(*MSCTokenConnection, uint8, *uint8, *uint32, unsafe.Pointer, uint8) uint32
-	_fnMSCExtAuthenticate func(*MSCTokenConnection, uint8, uint8, uint8, *uint8, uint32) uint32
-	_fnMSCExtendedFeature func(*MSCTokenConnection, uint32, *uint8, uint32, *uint8, *uint32) uint32
-	_fnMSCGenerateKeys func(*MSCTokenConnection, uint8, uint8, *MSCGenKeyParams) uint32
-	_fnMSCGetCapabilities func(*MSCTokenConnection, uint32, *uint8, *uint32) uint32
-	_fnMSCGetChallenge func(*MSCTokenConnection, *uint8, uint16, *uint8, uint16) uint32
-	_fnMSCGetKeyAttributes func(*MSCTokenConnection, uint8, *MSCKeyInfo) uint32
+	_fnMSCExportKey           func(*MSCTokenConnection, uint8, *uint8, *uint32, unsafe.Pointer, uint8) uint32
+	_fnMSCExtAuthenticate     func(*MSCTokenConnection, uint8, uint8, uint8, *uint8, uint32) uint32
+	_fnMSCExtendedFeature     func(*MSCTokenConnection, uint32, *uint8, uint32, *uint8, *uint32) uint32
+	_fnMSCGenerateKeys        func(*MSCTokenConnection, uint8, uint8, *MSCGenKeyParams) uint32
+	_fnMSCGetCapabilities     func(*MSCTokenConnection, uint32, *uint8, *uint32) uint32
+	_fnMSCGetChallenge        func(*MSCTokenConnection, *uint8, uint16, *uint8, uint16) uint32
+	_fnMSCGetKeyAttributes    func(*MSCTokenConnection, uint8, *MSCKeyInfo) uint32
 	_fnMSCGetObjectAttributes func(*MSCTokenConnection, string, *MSCObjectInfo) uint32
-	_fnMSCGetStatus func(*MSCTokenConnection, *MSCStatusInfo) uint32
-	_fnMSCImportKey func(*MSCTokenConnection, uint8, *MSCKeyACL, *uint8, uint32, *MSCKeyPolicy, unsafe.Pointer, uint8) uint32
-	_fnMSCIsTokenChanged func(*MSCTokenConnection) uint8
-	_fnMSCIsTokenKnown func(*MSCTokenConnection) uint8
-	_fnMSCIsTokenMoved func(*MSCTokenConnection) uint8
-	_fnMSCIsTokenReset func(*MSCTokenConnection) uint8
-	_fnMSCListKeys func(*MSCTokenConnection, uint8, *MSCKeyInfo) uint32
-	_fnMSCListObjects func(*MSCTokenConnection, uint8, *MSCObjectInfo) uint32
-	_fnMSCListPINs func(*MSCTokenConnection, *uint16) uint32
-	_fnMSCListTokens func(uint32, *MSCTokenInfo, *uint32) uint32
-	_fnMSCLogoutAll func(*MSCTokenConnection) uint32
-	_fnMSCReadAllocateObject func(*MSCTokenConnection, string, **uint8, *uint32, unsafe.Pointer, unsafe.Pointer) uint32
-	_fnMSCReadObject func(*MSCTokenConnection, string, uint32, *uint8, uint32, unsafe.Pointer, unsafe.Pointer) uint32
-	_fnMSCReleaseConnection func(*MSCTokenConnection, uint32) uint32
-	_fnMSCUnblockPIN func(*MSCTokenConnection, uint8, *uint8, uint32) uint32
-	_fnMSCVerifyPIN func(*MSCTokenConnection, uint8, *uint8, uint32) uint32
-	_fnMSCWaitForTokenEvent func(*MSCTokenInfo, uint32, uint32) uint32
-	_fnMSCWriteFramework func(*MSCTokenConnection, *MSCInitTokenParams) uint32
-	_fnMSCWriteObject func(*MSCTokenConnection, string, uint32, *uint8, uint32, unsafe.Pointer, unsafe.Pointer) uint32
-	_fnSCardBeginTransaction func(int32) int32
-	_fnSCardCancel func(int32) int32
+	_fnMSCGetStatus           func(*MSCTokenConnection, *MSCStatusInfo) uint32
+	_fnMSCImportKey           func(*MSCTokenConnection, uint8, *MSCKeyACL, *uint8, uint32, *MSCKeyPolicy, unsafe.Pointer, uint8) uint32
+	_fnMSCIsTokenChanged      func(*MSCTokenConnection) uint8
+	_fnMSCIsTokenKnown        func(*MSCTokenConnection) uint8
+	_fnMSCIsTokenMoved        func(*MSCTokenConnection) uint8
+	_fnMSCIsTokenReset        func(*MSCTokenConnection) uint8
+	_fnMSCListKeys            func(*MSCTokenConnection, uint8, *MSCKeyInfo) uint32
+	_fnMSCListObjects         func(*MSCTokenConnection, uint8, *MSCObjectInfo) uint32
+	_fnMSCListPINs            func(*MSCTokenConnection, *uint16) uint32
+	_fnMSCListTokens          func(uint32, *MSCTokenInfo, *uint32) uint32
+	_fnMSCLogoutAll           func(*MSCTokenConnection) uint32
+	_fnMSCReadAllocateObject  func(*MSCTokenConnection, string, **uint8, *uint32, unsafe.Pointer, unsafe.Pointer) uint32
+	_fnMSCReadObject          func(*MSCTokenConnection, string, uint32, *uint8, uint32, unsafe.Pointer, unsafe.Pointer) uint32
+	_fnMSCReleaseConnection   func(*MSCTokenConnection, uint32) uint32
+	_fnMSCUnblockPIN          func(*MSCTokenConnection, uint8, *uint8, uint32) uint32
+	_fnMSCVerifyPIN           func(*MSCTokenConnection, uint8, *uint8, uint32) uint32
+	_fnMSCWaitForTokenEvent   func(*MSCTokenInfo, uint32, uint32) uint32
+	_fnMSCWriteFramework      func(*MSCTokenConnection, *MSCInitTokenParams) uint32
+	_fnMSCWriteObject         func(*MSCTokenConnection, string, uint32, *uint8, uint32, unsafe.Pointer, unsafe.Pointer) uint32
+	_fnSCardBeginTransaction  func(int32) int32
+	_fnSCardCancel            func(int32) int32
 	_fnSCardCancelTransaction func(int32) int32
-	_fnSCardConnect func(int32, string, uint32, uint32, *int32, *uint32) int32
-	_fnSCardControl func(int32, unsafe.Pointer, uint32, unsafe.Pointer, *uint32) int32
-	_fnSCardControl132 func(int32, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32) int32
-	_fnSCardDisconnect func(int32, uint32) int32
-	_fnSCardEndTransaction func(int32, uint32) int32
-	_fnSCardEstablishContext func(uint32, unsafe.Pointer, unsafe.Pointer, *int32) int32
-	_fnSCardGetAttrib func(int32, uint32, *uint8, *uint32) int32
-	_fnSCardGetStatusChange func(int32, uint32, *SCARD_READERSTATE_A, uint32) int32
-	_fnSCardIsValidContext func(int32) int32
-	_fnSCardListReaderGroups func(int32, string, *uint32) int32
-	_fnSCardListReaders func(int32, string, string, *uint32) int32
-	_fnSCardReconnect func(int32, uint32, uint32, uint32, *uint32) int32
-	_fnSCardReleaseContext func(int32) int32
-	_fnSCardSetAttrib func(int32, uint32, *uint8, uint32) int32
-	_fnSCardSetTimeout func(int32, uint32) int32
-	_fnSCardStatus func(int32, string, *uint32, *uint32, *uint32, *uint8, *uint32) int32
-	_fnSCardTransmit func(int32, *SCARD_IO_REQUEST, *uint8, uint32, *SCARDIOREQUEST, *uint8, *uint32) int32
-	_fnSCardUnload func()
-	_msc_error func(uint) string
-	_pcsc_stringify_error func(int32) string
+	_fnSCardConnect           func(int32, string, uint32, uint32, *int32, *uint32) int32
+	_fnSCardControl           func(int32, unsafe.Pointer, uint32, unsafe.Pointer, *uint32) int32
+	_fnSCardControl132        func(int32, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32) int32
+	_fnSCardDisconnect        func(int32, uint32) int32
+	_fnSCardEndTransaction    func(int32, uint32) int32
+	_fnSCardEstablishContext  func(uint32, unsafe.Pointer, unsafe.Pointer, *int32) int32
+	_fnSCardGetAttrib         func(int32, uint32, *uint8, *uint32) int32
+	_fnSCardGetStatusChange   func(int32, uint32, *SCARD_READERSTATE_A, uint32) int32
+	_fnSCardIsValidContext    func(int32) int32
+	_fnSCardListReaderGroups  func(int32, string, *uint32) int32
+	_fnSCardListReaders       func(int32, string, string, *uint32) int32
+	_fnSCardReconnect         func(int32, uint32, uint32, uint32, *uint32) int32
+	_fnSCardReleaseContext    func(int32) int32
+	_fnSCardSetAttrib         func(int32, uint32, *uint8, uint32) int32
+	_fnSCardSetTimeout        func(int32, uint32) int32
+	_fnSCardStatus            func(int32, string, *uint32, *uint32, *uint32, *uint8, *uint32) int32
+	_fnSCardTransmit          func(int32, *SCARD_IO_REQUEST, *uint8, uint32, *SCARDIOREQUEST, *uint8, *uint32) int32
+	_fnSCardUnload            func()
+	_msc_error                func(uint) string
+	_pcsc_stringify_error     func(int32) string
 )
 
 func MSCBeginTransaction(pConnection *MSCTokenConnection) uint32 {
@@ -311,4 +311,3 @@ func MscError(errorCode uint) string {
 func PcscStringifyError(err int32) string {
 	return _pcsc_stringify_error(err)
 }
-

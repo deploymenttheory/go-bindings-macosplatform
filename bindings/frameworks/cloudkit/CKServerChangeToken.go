@@ -26,4 +26,3 @@ func CKServerChangeTokenFromID(id objc.ID) *CKServerChangeToken {
 	purego.Track(o)
 	return o
 }
-

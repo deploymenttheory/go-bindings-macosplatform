@@ -337,4 +337,3 @@ type MTL4RenderPassDescriptorable interface {
 }
 
 var _ MTL4RenderPassDescriptorable = (*MTL4RenderPassDescriptor)(nil)
-

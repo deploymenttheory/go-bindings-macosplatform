@@ -139,4 +139,3 @@ func SessionWithOptionsError(inOptions *foundation.NSDictionary[objc.ID, objc.ID
 	}
 	return &Session{inner: _r}, nil
 }
-

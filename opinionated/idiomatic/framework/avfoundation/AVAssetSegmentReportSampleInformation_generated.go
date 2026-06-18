@@ -16,7 +16,9 @@ type AssetSegmentReportSampleInformation struct {
 }
 
 // Unwrap returns the underlying [raw.AVAssetSegmentReportSampleInformation].
-func (x *AssetSegmentReportSampleInformation) Unwrap() *raw.AVAssetSegmentReportSampleInformation { return x.inner }
+func (x *AssetSegmentReportSampleInformation) Unwrap() *raw.AVAssetSegmentReportSampleInformation {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -66,4 +68,3 @@ type AssetSegmentReportSampleInformationable interface {
 }
 
 var _ AssetSegmentReportSampleInformationable = (*AssetSegmentReportSampleInformation)(nil)
-

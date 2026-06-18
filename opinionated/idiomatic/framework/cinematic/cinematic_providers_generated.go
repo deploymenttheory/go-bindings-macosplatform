@@ -17,4 +17,3 @@ type AssetInfoProvider interface {
 type DetectionTrackProvider interface {
 	asDetectionTrack() *raw.CNDetectionTrack
 }
-

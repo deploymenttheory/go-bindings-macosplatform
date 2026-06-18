@@ -20,70 +20,70 @@ type SCStreamConfiguration struct {
 }
 
 var (
-	_clsSCStreamConfiguration = _objcClass("SCStreamConfiguration")
-	_sCStreamConfigurationSelStreamConfigurationWithPreset = objc.RegisterName("streamConfigurationWithPreset:")
-	_sCStreamConfigurationSelWidth = objc.RegisterName("width")
-	_sCStreamConfigurationSelSetWidth = objc.RegisterName("setWidth:")
-	_sCStreamConfigurationSelHeight = objc.RegisterName("height")
-	_sCStreamConfigurationSelSetHeight = objc.RegisterName("setHeight:")
-	_sCStreamConfigurationSelMinimumFrameInterval = objc.RegisterName("minimumFrameInterval")
-	_sCStreamConfigurationSelSetMinimumFrameInterval = objc.RegisterName("setMinimumFrameInterval:")
-	_sCStreamConfigurationSelPixelFormat = objc.RegisterName("pixelFormat")
-	_sCStreamConfigurationSelSetPixelFormat = objc.RegisterName("setPixelFormat:")
-	_sCStreamConfigurationSelScalesToFit = objc.RegisterName("scalesToFit")
-	_sCStreamConfigurationSelSetScalesToFit = objc.RegisterName("setScalesToFit:")
-	_sCStreamConfigurationSelPreservesAspectRatio = objc.RegisterName("preservesAspectRatio")
-	_sCStreamConfigurationSelSetPreservesAspectRatio = objc.RegisterName("setPreservesAspectRatio:")
-	_sCStreamConfigurationSelStreamName = objc.RegisterName("streamName")
-	_sCStreamConfigurationSelSetStreamName = objc.RegisterName("setStreamName:")
-	_sCStreamConfigurationSelShowsCursor = objc.RegisterName("showsCursor")
-	_sCStreamConfigurationSelSetShowsCursor = objc.RegisterName("setShowsCursor:")
-	_sCStreamConfigurationSelShowMouseClicks = objc.RegisterName("showMouseClicks")
-	_sCStreamConfigurationSelSetShowMouseClicks = objc.RegisterName("setShowMouseClicks:")
-	_sCStreamConfigurationSelBackgroundColor = objc.RegisterName("backgroundColor")
-	_sCStreamConfigurationSelSetBackgroundColor = objc.RegisterName("setBackgroundColor:")
-	_sCStreamConfigurationSelSourceRect = objc.RegisterName("sourceRect")
-	_sCStreamConfigurationSelSetSourceRect = objc.RegisterName("setSourceRect:")
-	_sCStreamConfigurationSelDestinationRect = objc.RegisterName("destinationRect")
-	_sCStreamConfigurationSelSetDestinationRect = objc.RegisterName("setDestinationRect:")
-	_sCStreamConfigurationSelQueueDepth = objc.RegisterName("queueDepth")
-	_sCStreamConfigurationSelSetQueueDepth = objc.RegisterName("setQueueDepth:")
-	_sCStreamConfigurationSelColorMatrix = objc.RegisterName("colorMatrix")
-	_sCStreamConfigurationSelSetColorMatrix = objc.RegisterName("setColorMatrix:")
-	_sCStreamConfigurationSelColorSpaceName = objc.RegisterName("colorSpaceName")
-	_sCStreamConfigurationSelSetColorSpaceName = objc.RegisterName("setColorSpaceName:")
-	_sCStreamConfigurationSelCapturesAudio = objc.RegisterName("capturesAudio")
-	_sCStreamConfigurationSelSetCapturesAudio = objc.RegisterName("setCapturesAudio:")
-	_sCStreamConfigurationSelSampleRate = objc.RegisterName("sampleRate")
-	_sCStreamConfigurationSelSetSampleRate = objc.RegisterName("setSampleRate:")
-	_sCStreamConfigurationSelChannelCount = objc.RegisterName("channelCount")
-	_sCStreamConfigurationSelSetChannelCount = objc.RegisterName("setChannelCount:")
-	_sCStreamConfigurationSelExcludesCurrentProcessAudio = objc.RegisterName("excludesCurrentProcessAudio")
-	_sCStreamConfigurationSelSetExcludesCurrentProcessAudio = objc.RegisterName("setExcludesCurrentProcessAudio:")
-	_sCStreamConfigurationSelIgnoreShadowsDisplay = objc.RegisterName("ignoreShadowsDisplay")
-	_sCStreamConfigurationSelSetIgnoreShadowsDisplay = objc.RegisterName("setIgnoreShadowsDisplay:")
-	_sCStreamConfigurationSelIgnoreShadowsSingleWindow = objc.RegisterName("ignoreShadowsSingleWindow")
-	_sCStreamConfigurationSelSetIgnoreShadowsSingleWindow = objc.RegisterName("setIgnoreShadowsSingleWindow:")
-	_sCStreamConfigurationSelCaptureResolution = objc.RegisterName("captureResolution")
-	_sCStreamConfigurationSelSetCaptureResolution = objc.RegisterName("setCaptureResolution:")
-	_sCStreamConfigurationSelCapturesShadowsOnly = objc.RegisterName("capturesShadowsOnly")
-	_sCStreamConfigurationSelSetCapturesShadowsOnly = objc.RegisterName("setCapturesShadowsOnly:")
-	_sCStreamConfigurationSelShouldBeOpaque = objc.RegisterName("shouldBeOpaque")
-	_sCStreamConfigurationSelSetShouldBeOpaque = objc.RegisterName("setShouldBeOpaque:")
-	_sCStreamConfigurationSelIgnoreGlobalClipDisplay = objc.RegisterName("ignoreGlobalClipDisplay")
-	_sCStreamConfigurationSelSetIgnoreGlobalClipDisplay = objc.RegisterName("setIgnoreGlobalClipDisplay:")
-	_sCStreamConfigurationSelIgnoreGlobalClipSingleWindow = objc.RegisterName("ignoreGlobalClipSingleWindow")
-	_sCStreamConfigurationSelSetIgnoreGlobalClipSingleWindow = objc.RegisterName("setIgnoreGlobalClipSingleWindow:")
-	_sCStreamConfigurationSelPresenterOverlayPrivacyAlertSetting = objc.RegisterName("presenterOverlayPrivacyAlertSetting")
+	_clsSCStreamConfiguration                                       = _objcClass("SCStreamConfiguration")
+	_sCStreamConfigurationSelStreamConfigurationWithPreset          = objc.RegisterName("streamConfigurationWithPreset:")
+	_sCStreamConfigurationSelWidth                                  = objc.RegisterName("width")
+	_sCStreamConfigurationSelSetWidth                               = objc.RegisterName("setWidth:")
+	_sCStreamConfigurationSelHeight                                 = objc.RegisterName("height")
+	_sCStreamConfigurationSelSetHeight                              = objc.RegisterName("setHeight:")
+	_sCStreamConfigurationSelMinimumFrameInterval                   = objc.RegisterName("minimumFrameInterval")
+	_sCStreamConfigurationSelSetMinimumFrameInterval                = objc.RegisterName("setMinimumFrameInterval:")
+	_sCStreamConfigurationSelPixelFormat                            = objc.RegisterName("pixelFormat")
+	_sCStreamConfigurationSelSetPixelFormat                         = objc.RegisterName("setPixelFormat:")
+	_sCStreamConfigurationSelScalesToFit                            = objc.RegisterName("scalesToFit")
+	_sCStreamConfigurationSelSetScalesToFit                         = objc.RegisterName("setScalesToFit:")
+	_sCStreamConfigurationSelPreservesAspectRatio                   = objc.RegisterName("preservesAspectRatio")
+	_sCStreamConfigurationSelSetPreservesAspectRatio                = objc.RegisterName("setPreservesAspectRatio:")
+	_sCStreamConfigurationSelStreamName                             = objc.RegisterName("streamName")
+	_sCStreamConfigurationSelSetStreamName                          = objc.RegisterName("setStreamName:")
+	_sCStreamConfigurationSelShowsCursor                            = objc.RegisterName("showsCursor")
+	_sCStreamConfigurationSelSetShowsCursor                         = objc.RegisterName("setShowsCursor:")
+	_sCStreamConfigurationSelShowMouseClicks                        = objc.RegisterName("showMouseClicks")
+	_sCStreamConfigurationSelSetShowMouseClicks                     = objc.RegisterName("setShowMouseClicks:")
+	_sCStreamConfigurationSelBackgroundColor                        = objc.RegisterName("backgroundColor")
+	_sCStreamConfigurationSelSetBackgroundColor                     = objc.RegisterName("setBackgroundColor:")
+	_sCStreamConfigurationSelSourceRect                             = objc.RegisterName("sourceRect")
+	_sCStreamConfigurationSelSetSourceRect                          = objc.RegisterName("setSourceRect:")
+	_sCStreamConfigurationSelDestinationRect                        = objc.RegisterName("destinationRect")
+	_sCStreamConfigurationSelSetDestinationRect                     = objc.RegisterName("setDestinationRect:")
+	_sCStreamConfigurationSelQueueDepth                             = objc.RegisterName("queueDepth")
+	_sCStreamConfigurationSelSetQueueDepth                          = objc.RegisterName("setQueueDepth:")
+	_sCStreamConfigurationSelColorMatrix                            = objc.RegisterName("colorMatrix")
+	_sCStreamConfigurationSelSetColorMatrix                         = objc.RegisterName("setColorMatrix:")
+	_sCStreamConfigurationSelColorSpaceName                         = objc.RegisterName("colorSpaceName")
+	_sCStreamConfigurationSelSetColorSpaceName                      = objc.RegisterName("setColorSpaceName:")
+	_sCStreamConfigurationSelCapturesAudio                          = objc.RegisterName("capturesAudio")
+	_sCStreamConfigurationSelSetCapturesAudio                       = objc.RegisterName("setCapturesAudio:")
+	_sCStreamConfigurationSelSampleRate                             = objc.RegisterName("sampleRate")
+	_sCStreamConfigurationSelSetSampleRate                          = objc.RegisterName("setSampleRate:")
+	_sCStreamConfigurationSelChannelCount                           = objc.RegisterName("channelCount")
+	_sCStreamConfigurationSelSetChannelCount                        = objc.RegisterName("setChannelCount:")
+	_sCStreamConfigurationSelExcludesCurrentProcessAudio            = objc.RegisterName("excludesCurrentProcessAudio")
+	_sCStreamConfigurationSelSetExcludesCurrentProcessAudio         = objc.RegisterName("setExcludesCurrentProcessAudio:")
+	_sCStreamConfigurationSelIgnoreShadowsDisplay                   = objc.RegisterName("ignoreShadowsDisplay")
+	_sCStreamConfigurationSelSetIgnoreShadowsDisplay                = objc.RegisterName("setIgnoreShadowsDisplay:")
+	_sCStreamConfigurationSelIgnoreShadowsSingleWindow              = objc.RegisterName("ignoreShadowsSingleWindow")
+	_sCStreamConfigurationSelSetIgnoreShadowsSingleWindow           = objc.RegisterName("setIgnoreShadowsSingleWindow:")
+	_sCStreamConfigurationSelCaptureResolution                      = objc.RegisterName("captureResolution")
+	_sCStreamConfigurationSelSetCaptureResolution                   = objc.RegisterName("setCaptureResolution:")
+	_sCStreamConfigurationSelCapturesShadowsOnly                    = objc.RegisterName("capturesShadowsOnly")
+	_sCStreamConfigurationSelSetCapturesShadowsOnly                 = objc.RegisterName("setCapturesShadowsOnly:")
+	_sCStreamConfigurationSelShouldBeOpaque                         = objc.RegisterName("shouldBeOpaque")
+	_sCStreamConfigurationSelSetShouldBeOpaque                      = objc.RegisterName("setShouldBeOpaque:")
+	_sCStreamConfigurationSelIgnoreGlobalClipDisplay                = objc.RegisterName("ignoreGlobalClipDisplay")
+	_sCStreamConfigurationSelSetIgnoreGlobalClipDisplay             = objc.RegisterName("setIgnoreGlobalClipDisplay:")
+	_sCStreamConfigurationSelIgnoreGlobalClipSingleWindow           = objc.RegisterName("ignoreGlobalClipSingleWindow")
+	_sCStreamConfigurationSelSetIgnoreGlobalClipSingleWindow        = objc.RegisterName("setIgnoreGlobalClipSingleWindow:")
+	_sCStreamConfigurationSelPresenterOverlayPrivacyAlertSetting    = objc.RegisterName("presenterOverlayPrivacyAlertSetting")
 	_sCStreamConfigurationSelSetPresenterOverlayPrivacyAlertSetting = objc.RegisterName("setPresenterOverlayPrivacyAlertSetting:")
-	_sCStreamConfigurationSelIncludeChildWindows = objc.RegisterName("includeChildWindows")
-	_sCStreamConfigurationSelSetIncludeChildWindows = objc.RegisterName("setIncludeChildWindows:")
-	_sCStreamConfigurationSelCaptureMicrophone = objc.RegisterName("captureMicrophone")
-	_sCStreamConfigurationSelSetCaptureMicrophone = objc.RegisterName("setCaptureMicrophone:")
-	_sCStreamConfigurationSelMicrophoneCaptureDeviceID = objc.RegisterName("microphoneCaptureDeviceID")
-	_sCStreamConfigurationSelSetMicrophoneCaptureDeviceID = objc.RegisterName("setMicrophoneCaptureDeviceID:")
-	_sCStreamConfigurationSelCaptureDynamicRange = objc.RegisterName("captureDynamicRange")
-	_sCStreamConfigurationSelSetCaptureDynamicRange = objc.RegisterName("setCaptureDynamicRange:")
+	_sCStreamConfigurationSelIncludeChildWindows                    = objc.RegisterName("includeChildWindows")
+	_sCStreamConfigurationSelSetIncludeChildWindows                 = objc.RegisterName("setIncludeChildWindows:")
+	_sCStreamConfigurationSelCaptureMicrophone                      = objc.RegisterName("captureMicrophone")
+	_sCStreamConfigurationSelSetCaptureMicrophone                   = objc.RegisterName("setCaptureMicrophone:")
+	_sCStreamConfigurationSelMicrophoneCaptureDeviceID              = objc.RegisterName("microphoneCaptureDeviceID")
+	_sCStreamConfigurationSelSetMicrophoneCaptureDeviceID           = objc.RegisterName("setMicrophoneCaptureDeviceID:")
+	_sCStreamConfigurationSelCaptureDynamicRange                    = objc.RegisterName("captureDynamicRange")
+	_sCStreamConfigurationSelSetCaptureDynamicRange                 = objc.RegisterName("setCaptureDynamicRange:")
 )
 
 func SCStreamConfigurationFromID(id objc.ID) *SCStreamConfiguration {
@@ -99,7 +99,9 @@ func SCStreamConfigurationFromID(id objc.ID) *SCStreamConfiguration {
 // @method streamConfigurationWithPreset: @abstract Returns an instance of SCStreamConfiguration corresponding to the given preset @param preset The enum identifier for the desired preset @discussion The SCStreamConfiguration of the returned object can be used as a guide for creating and configuring an SCStream. If all the suggested properties are respected in creating the SCStream, the resulting capture result will conform to the criteria implied by the preset.
 func SCStreamConfigurationStreamConfigurationWithPreset(preset SCStreamConfigurationPreset) *SCStreamConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCStreamConfiguration), _sCStreamConfigurationSelStreamConfigurationWithPreset, preset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCStreamConfigurationFromID(_ret)
 }
 
@@ -166,7 +168,9 @@ func (o *SCStreamConfiguration) SetPreservesAspectRatio(preservesAspectRatio boo
 // @abstract SCStreamProperty the name of the stream
 func (o *SCStreamConfiguration) StreamName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCStreamConfigurationSelStreamName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -397,7 +401,9 @@ func (o *SCStreamConfiguration) SetCaptureMicrophone(captureMicrophone bool) {
 // @abstract SCStreamProperty that specifies which microphone device to capture. This deviceID is the uniqueID from AVCaptureDevice for the microphone. System Default Microphone will be used if not specified by client. For Mac Catalyst apps, the System Default Microphone will be captured.
 func (o *SCStreamConfiguration) MicrophoneCaptureDeviceID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCStreamConfigurationSelMicrophoneCaptureDeviceID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -414,4 +420,3 @@ func (o *SCStreamConfiguration) CaptureDynamicRange() SCCaptureDynamicRange {
 func (o *SCStreamConfiguration) SetCaptureDynamicRange(captureDynamicRange SCCaptureDynamicRange) {
 	o.Ptr().Send(_sCStreamConfigurationSelSetCaptureDynamicRange, captureDynamicRange)
 }
-

@@ -18,7 +18,7 @@ type AAAttribution struct {
 }
 
 var (
-	_clsAAAttribution = _objcClass("AAAttribution")
+	_clsAAAttribution                          = _objcClass("AAAttribution")
 	_aAAttributionSelAttributionTokenWithError = objc.RegisterName("attributionTokenWithError:")
 )
 
@@ -36,10 +36,11 @@ func AAAttributionFromID(id objc.ID) *AAAttribution {
 func AAAttributionAttributionTokenWithError() (*foundation.NSString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsAAAttribution), _aAAttributionSelAttributionTokenWithError, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSStringFromID(_ret), nil
 }
-

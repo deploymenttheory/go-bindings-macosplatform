@@ -41,4 +41,3 @@ type SafariExtensionManagerable interface {
 }
 
 var _ SafariExtensionManagerable = (*SafariExtensionManager)(nil)
-

@@ -61,4 +61,3 @@ type AuthorizationAppleIDButtonable interface {
 }
 
 var _ AuthorizationAppleIDButtonable = (*AuthorizationAppleIDButton)(nil)
-

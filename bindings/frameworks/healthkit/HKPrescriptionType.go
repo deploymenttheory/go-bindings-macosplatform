@@ -25,4 +25,3 @@ func HKPrescriptionTypeFromID(id objc.ID) *HKPrescriptionType {
 	purego.Track(o)
 	return o
 }
-

@@ -12,19 +12,19 @@ import (
 )
 
 var (
-	_fnVTCompressionSessionBeginPass func(unsafe.Pointer, VTCompressionSessionOptionFlags, *uint32) int
-	_fnVTCompressionSessionCompleteFrames func(unsafe.Pointer, coremedia.CMTime) int
-	_fnVTCompressionSessionCreate func(unsafe.Pointer, int32, int32, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnVTCompressionSessionEncodeFrame func(unsafe.Pointer, unsafe.Pointer, coremedia.CMTime, coremedia.CMTime, unsafe.Pointer, unsafe.Pointer, *VTEncodeInfoFlags) int
-	_fnVTCompressionSessionEncodeFrameWithOutputHandler func(unsafe.Pointer, unsafe.Pointer, coremedia.CMTime, coremedia.CMTime, unsafe.Pointer, *VTEncodeInfoFlags, objc.Block) int
-	_fnVTCompressionSessionEncodeMultiImageFrame func(unsafe.Pointer, unsafe.Pointer, coremedia.CMTime, coremedia.CMTime, unsafe.Pointer, unsafe.Pointer, *VTEncodeInfoFlags) int
+	_fnVTCompressionSessionBeginPass                              func(unsafe.Pointer, VTCompressionSessionOptionFlags, *uint32) int
+	_fnVTCompressionSessionCompleteFrames                         func(unsafe.Pointer, coremedia.CMTime) int
+	_fnVTCompressionSessionCreate                                 func(unsafe.Pointer, int32, int32, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnVTCompressionSessionEncodeFrame                            func(unsafe.Pointer, unsafe.Pointer, coremedia.CMTime, coremedia.CMTime, unsafe.Pointer, unsafe.Pointer, *VTEncodeInfoFlags) int
+	_fnVTCompressionSessionEncodeFrameWithOutputHandler           func(unsafe.Pointer, unsafe.Pointer, coremedia.CMTime, coremedia.CMTime, unsafe.Pointer, *VTEncodeInfoFlags, objc.Block) int
+	_fnVTCompressionSessionEncodeMultiImageFrame                  func(unsafe.Pointer, unsafe.Pointer, coremedia.CMTime, coremedia.CMTime, unsafe.Pointer, unsafe.Pointer, *VTEncodeInfoFlags) int
 	_fnVTCompressionSessionEncodeMultiImageFrameWithOutputHandler func(unsafe.Pointer, unsafe.Pointer, coremedia.CMTime, coremedia.CMTime, unsafe.Pointer, *VTEncodeInfoFlags, objc.Block) int
-	_fnVTCompressionSessionEndPass func(unsafe.Pointer, *uint8, *uint32) int
-	_fnVTCompressionSessionGetPixelBufferPool func(unsafe.Pointer) unsafe.Pointer
-	_fnVTCompressionSessionGetTimeRangesForNextPass func(unsafe.Pointer, *int, *coremedia.CMTimeRange) int
-	_fnVTCompressionSessionGetTypeID func() uint
-	_fnVTCompressionSessionInvalidate func(unsafe.Pointer)
-	_fnVTCompressionSessionPrepareToEncodeFrames func(unsafe.Pointer) int
+	_fnVTCompressionSessionEndPass                                func(unsafe.Pointer, *uint8, *uint32) int
+	_fnVTCompressionSessionGetPixelBufferPool                     func(unsafe.Pointer) unsafe.Pointer
+	_fnVTCompressionSessionGetTimeRangesForNextPass               func(unsafe.Pointer, *int, *coremedia.CMTimeRange) int
+	_fnVTCompressionSessionGetTypeID                              func() uint
+	_fnVTCompressionSessionInvalidate                             func(unsafe.Pointer)
+	_fnVTCompressionSessionPrepareToEncodeFrames                  func(unsafe.Pointer) int
 	// @function		VTCopyRAWProcessorExtensionProperties @abstract		Returns information about the Media Extension RAW processor supporting the specified format. @discussion		If a Media Extension RAW processor will be used to process the specified format, this function will return information about the Media Extension that will be used. @param			formatDesc The format description for the video format for which information is being requested. @param			mediaExtensionPropertiesOut If a Media Extension RAW processor  will be used to process the specified format, this pointer will return a dictionary with a set of properties describing the extension RAW processor. The dictionary keys VTExtensionPropertiesKey values. @result			If the function succeeds and a Media Extension RAW processor will be used to process this format, the return value will be noErr. If the function succeeds but a Media Extension RAW processor will not be used to process this format, the return value will be kVTCouldNotFindExtensionErr. If a Media Extension RAW processor for the format was found but is disabled, the function will return kVTExtensionDisabledErr. Otherwise, the return value will be an error code describing the failure.
 	_fnVTCopyRAWProcessorExtensionProperties func(unsafe.Pointer, unsafe.Pointer) int
 	// @function	VTCopySupportedPropertyDictionaryForEncoder @abstract	Builds a list of supported properties and encoder ID for an encoder @discussion The caller must CFRelease the returned supported properties and encoder ID.
@@ -32,73 +32,73 @@ var (
 	// @function		VTCopyVideoDecoderExtensionProperties @abstract		Returns information about the Media Extension video decoder required to decode the specified format. @discussion		If a Media Extension video decoder will be used to decode the specified format, this function will return information about the Media Extension that will be used. @param			formatDesc The format description for the video format for which information is being requested. @param			mediaExtensionPropertiesOut If a Media Extension video decoder will be used to decode the specified format, this pointer will return a dictionary with a set of properties describing the extension video decoder. The dictionary keys are VTExtensionPropertiesKey values. @result			If the function succeeds and a Media Extension video decoder will be used to decode this format, the return value will be noErr. If the function succeeds but a Media Extension video decoder will not be used to decode this format, the return value will be kVTCouldNotFindExtensionErr. If a Media Extension video decoder for the format was found but is disabled, the function will return kVTExtensionDisabledErr. Otherwise, the return value will be an error code describing the failure.
 	_fnVTCopyVideoDecoderExtensionProperties func(unsafe.Pointer, unsafe.Pointer) int
 	// @function	VTCopyVideoEncoderList @abstract	Builds a list of available video encoders. @discussion The caller must CFRelease the returned list.
-	_fnVTCopyVideoEncoderList func(unsafe.Pointer, unsafe.Pointer) int
-	_fnVTCreateCGImageFromCVPixelBuffer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnVTDecompressionSessionCanAcceptFormatDescription func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnVTDecompressionSessionCopyBlackPixelBuffer func(unsafe.Pointer, unsafe.Pointer) int
-	_fnVTDecompressionSessionCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *VTDecompressionOutputCallbackRecord, unsafe.Pointer) int
-	_fnVTDecompressionSessionDecodeFrame func(unsafe.Pointer, unsafe.Pointer, VTDecodeFrameFlags, unsafe.Pointer, *VTDecodeInfoFlags) int
+	_fnVTCopyVideoEncoderList                                              func(unsafe.Pointer, unsafe.Pointer) int
+	_fnVTCreateCGImageFromCVPixelBuffer                                    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnVTDecompressionSessionCanAcceptFormatDescription                    func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnVTDecompressionSessionCopyBlackPixelBuffer                          func(unsafe.Pointer, unsafe.Pointer) int
+	_fnVTDecompressionSessionCreate                                        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *VTDecompressionOutputCallbackRecord, unsafe.Pointer) int
+	_fnVTDecompressionSessionDecodeFrame                                   func(unsafe.Pointer, unsafe.Pointer, VTDecodeFrameFlags, unsafe.Pointer, *VTDecodeInfoFlags) int
 	_fnVTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler func(unsafe.Pointer, unsafe.Pointer, VTDecodeFrameFlags, *VTDecodeInfoFlags, objc.Block) int
-	_fnVTDecompressionSessionDecodeFrameWithOptions func(unsafe.Pointer, unsafe.Pointer, VTDecodeFrameFlags, unsafe.Pointer, unsafe.Pointer, *VTDecodeInfoFlags) int
-	_fnVTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler func(unsafe.Pointer, unsafe.Pointer, VTDecodeFrameFlags, unsafe.Pointer, *VTDecodeInfoFlags, objc.Block) int
-	_fnVTDecompressionSessionDecodeFrameWithOutputHandler func(unsafe.Pointer, unsafe.Pointer, VTDecodeFrameFlags, *VTDecodeInfoFlags, objc.Block) int
-	_fnVTDecompressionSessionFinishDelayedFrames func(unsafe.Pointer) int
-	_fnVTDecompressionSessionGetTypeID func() uint
-	_fnVTDecompressionSessionInvalidate func(unsafe.Pointer)
-	_fnVTDecompressionSessionSetMultiImageCallback func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnVTDecompressionSessionWaitForAsynchronousFrames func(unsafe.Pointer) int
-	_fnVTFrameSiloAddSampleBuffer func(unsafe.Pointer, unsafe.Pointer) int
-	_fnVTFrameSiloCallBlockForEachSampleBuffer func(unsafe.Pointer, coremedia.CMTimeRange, objc.Block) int
-	_fnVTFrameSiloCallFunctionForEachSampleBuffer func(unsafe.Pointer, coremedia.CMTimeRange, unsafe.Pointer, unsafe.Pointer) int
-	_fnVTFrameSiloCreate func(unsafe.Pointer, unsafe.Pointer, coremedia.CMTimeRange, unsafe.Pointer, unsafe.Pointer) int
-	_fnVTFrameSiloGetProgressOfCurrentPass func(unsafe.Pointer, *float32) int
-	_fnVTFrameSiloGetTypeID func() uint
-	_fnVTFrameSiloSetTimeRangesForNextPass func(unsafe.Pointer, int, *coremedia.CMTimeRange) int
-	_fnVTHDRPerFrameMetadataGenerationSessionAttachMetadata func(unsafe.Pointer, unsafe.Pointer, uint8) int
-	_fnVTHDRPerFrameMetadataGenerationSessionCreate func(unsafe.Pointer, float32, unsafe.Pointer, unsafe.Pointer) int
-	_fnVTHDRPerFrameMetadataGenerationSessionGetTypeID func() uint
-	_fnVTIsHardwareDecodeSupported func(uint) uint8
-	_fnVTIsStereoMVHEVCDecodeSupported func() uint8
-	_fnVTIsStereoMVHEVCEncodeSupported func() uint8
-	_fnVTMotionEstimationSessionCompleteFrames func(unsafe.Pointer) int
-	_fnVTMotionEstimationSessionCopySourcePixelBufferAttributes func(unsafe.Pointer, unsafe.Pointer) int
-	_fnVTMotionEstimationSessionCreate func(unsafe.Pointer, unsafe.Pointer, uint32, uint32, unsafe.Pointer) int
-	_fnVTMotionEstimationSessionEstimateMotionVectors func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, VTMotionEstimationFrameFlags, unsafe.Pointer, objc.Block) int
+	_fnVTDecompressionSessionDecodeFrameWithOptions                        func(unsafe.Pointer, unsafe.Pointer, VTDecodeFrameFlags, unsafe.Pointer, unsafe.Pointer, *VTDecodeInfoFlags) int
+	_fnVTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler        func(unsafe.Pointer, unsafe.Pointer, VTDecodeFrameFlags, unsafe.Pointer, *VTDecodeInfoFlags, objc.Block) int
+	_fnVTDecompressionSessionDecodeFrameWithOutputHandler                  func(unsafe.Pointer, unsafe.Pointer, VTDecodeFrameFlags, *VTDecodeInfoFlags, objc.Block) int
+	_fnVTDecompressionSessionFinishDelayedFrames                           func(unsafe.Pointer) int
+	_fnVTDecompressionSessionGetTypeID                                     func() uint
+	_fnVTDecompressionSessionInvalidate                                    func(unsafe.Pointer)
+	_fnVTDecompressionSessionSetMultiImageCallback                         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnVTDecompressionSessionWaitForAsynchronousFrames                     func(unsafe.Pointer) int
+	_fnVTFrameSiloAddSampleBuffer                                          func(unsafe.Pointer, unsafe.Pointer) int
+	_fnVTFrameSiloCallBlockForEachSampleBuffer                             func(unsafe.Pointer, coremedia.CMTimeRange, objc.Block) int
+	_fnVTFrameSiloCallFunctionForEachSampleBuffer                          func(unsafe.Pointer, coremedia.CMTimeRange, unsafe.Pointer, unsafe.Pointer) int
+	_fnVTFrameSiloCreate                                                   func(unsafe.Pointer, unsafe.Pointer, coremedia.CMTimeRange, unsafe.Pointer, unsafe.Pointer) int
+	_fnVTFrameSiloGetProgressOfCurrentPass                                 func(unsafe.Pointer, *float32) int
+	_fnVTFrameSiloGetTypeID                                                func() uint
+	_fnVTFrameSiloSetTimeRangesForNextPass                                 func(unsafe.Pointer, int, *coremedia.CMTimeRange) int
+	_fnVTHDRPerFrameMetadataGenerationSessionAttachMetadata                func(unsafe.Pointer, unsafe.Pointer, uint8) int
+	_fnVTHDRPerFrameMetadataGenerationSessionCreate                        func(unsafe.Pointer, float32, unsafe.Pointer, unsafe.Pointer) int
+	_fnVTHDRPerFrameMetadataGenerationSessionGetTypeID                     func() uint
+	_fnVTIsHardwareDecodeSupported                                         func(uint) uint8
+	_fnVTIsStereoMVHEVCDecodeSupported                                     func() uint8
+	_fnVTIsStereoMVHEVCEncodeSupported                                     func() uint8
+	_fnVTMotionEstimationSessionCompleteFrames                             func(unsafe.Pointer) int
+	_fnVTMotionEstimationSessionCopySourcePixelBufferAttributes            func(unsafe.Pointer, unsafe.Pointer) int
+	_fnVTMotionEstimationSessionCreate                                     func(unsafe.Pointer, unsafe.Pointer, uint32, uint32, unsafe.Pointer) int
+	_fnVTMotionEstimationSessionEstimateMotionVectors                      func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, VTMotionEstimationFrameFlags, unsafe.Pointer, objc.Block) int
 	// Get the CoreFoundation type identifier for motion-estimation session type.
-	_fnVTMotionEstimationSessionGetTypeID func() uint
-	_fnVTMotionEstimationSessionInvalidate func(unsafe.Pointer)
-	_fnVTMultiPassStorageClose func(unsafe.Pointer) int
-	_fnVTMultiPassStorageCreate func(unsafe.Pointer, unsafe.Pointer, coremedia.CMTimeRange, unsafe.Pointer, unsafe.Pointer) int
-	_fnVTMultiPassStorageGetTypeID func() uint
-	_fnVTPixelRotationSessionCreate func(unsafe.Pointer, unsafe.Pointer) int
-	_fnVTPixelRotationSessionGetTypeID func() uint
-	_fnVTPixelRotationSessionInvalidate func(unsafe.Pointer)
-	_fnVTPixelRotationSessionRotateImage func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnVTPixelTransferSessionCreate func(unsafe.Pointer, unsafe.Pointer) int
-	_fnVTPixelTransferSessionGetTypeID func() uint
-	_fnVTPixelTransferSessionInvalidate func(unsafe.Pointer)
-	_fnVTPixelTransferSessionTransferImage func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnVTRAWProcessingSessionCompleteFrames func(unsafe.Pointer) int
+	_fnVTMotionEstimationSessionGetTypeID             func() uint
+	_fnVTMotionEstimationSessionInvalidate            func(unsafe.Pointer)
+	_fnVTMultiPassStorageClose                        func(unsafe.Pointer) int
+	_fnVTMultiPassStorageCreate                       func(unsafe.Pointer, unsafe.Pointer, coremedia.CMTimeRange, unsafe.Pointer, unsafe.Pointer) int
+	_fnVTMultiPassStorageGetTypeID                    func() uint
+	_fnVTPixelRotationSessionCreate                   func(unsafe.Pointer, unsafe.Pointer) int
+	_fnVTPixelRotationSessionGetTypeID                func() uint
+	_fnVTPixelRotationSessionInvalidate               func(unsafe.Pointer)
+	_fnVTPixelRotationSessionRotateImage              func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnVTPixelTransferSessionCreate                   func(unsafe.Pointer, unsafe.Pointer) int
+	_fnVTPixelTransferSessionGetTypeID                func() uint
+	_fnVTPixelTransferSessionInvalidate               func(unsafe.Pointer)
+	_fnVTPixelTransferSessionTransferImage            func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnVTRAWProcessingSessionCompleteFrames           func(unsafe.Pointer) int
 	_fnVTRAWProcessingSessionCopyProcessingParameters func(unsafe.Pointer, unsafe.Pointer) int
-	_fnVTRAWProcessingSessionCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnVTRAWProcessingSessionGetTypeID func() uint
-	_fnVTRAWProcessingSessionInvalidate func(unsafe.Pointer)
-	_fnVTRAWProcessingSessionProcessFrame func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, objc.Block) int
-// Deprecated: since macOS 26.0.
-	_fnVTRAWProcessingSessionSetParameterChangedHander func(unsafe.Pointer, objc.Block) int
+	_fnVTRAWProcessingSessionCreate                   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnVTRAWProcessingSessionGetTypeID                func() uint
+	_fnVTRAWProcessingSessionInvalidate               func(unsafe.Pointer)
+	_fnVTRAWProcessingSessionProcessFrame             func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, objc.Block) int
+	// Deprecated: since macOS 26.0.
+	_fnVTRAWProcessingSessionSetParameterChangedHander  func(unsafe.Pointer, objc.Block) int
 	_fnVTRAWProcessingSessionSetParameterChangedHandler func(unsafe.Pointer, objc.Block) int
-	_fnVTRAWProcessingSessionSetProcessingParameters func(unsafe.Pointer, unsafe.Pointer) int
+	_fnVTRAWProcessingSessionSetProcessingParameters    func(unsafe.Pointer, unsafe.Pointer) int
 	// @function	VTRegisterProfessionalVideoWorkflowVideoDecoders @abstract	Allows the client to use video decoders appropriate for professional video workflows. @discussion	By calling this function, a client indicates to VideoToolbox that it wishes to support Media Extension video decoders. Any associated Video RAW Processors will also be supported as well. Note that this functionality is intended for applications supporting professional video workflows. It is not recommended for network-facing applications such as web browsers, messaging clients, mail clients, etc.
 	_fnVTRegisterProfessionalVideoWorkflowVideoDecoders func()
 	// @function	VTRegisterProfessionalVideoWorkflowVideoEncoders @abstract	Allows the client to use encoders appropriate for professional video workflows.
 	_fnVTRegisterProfessionalVideoWorkflowVideoEncoders func()
 	// @function	VTRegisterSupplementalVideoDecoderIfAvailable @abstract	Requests that a video decoder, if available, be registered for the specified CMVideoCodecType @param	codecType The CMVideoCodecType corresponding the format being requested @discussion This call will register a video decoder for the provided CMVideoCodecType if such a decoder is present on the system but not registered by default. You can call VTIsHardwareDecodeAvailable to confirm availability of the decoder after calling VTRegisterSupplementalVideoDecoderIfAvailable. Supplemental video decoders registered through this API will not work in applications which have not performed this opt in.  For broadest ecosystem compatibility, we encourage use of platform-standard formats such as H.264, HEVC, and AV1.
 	_fnVTRegisterSupplementalVideoDecoderIfAvailable func(uint)
-	_fnVTSessionCopyProperty func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnVTSessionCopySerializableProperties func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnVTSessionCopySupportedPropertyDictionary func(unsafe.Pointer, unsafe.Pointer) int
-	_fnVTSessionSetProperties func(unsafe.Pointer, unsafe.Pointer) int
-	_fnVTSessionSetProperty func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnVTSessionCopyProperty                         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnVTSessionCopySerializableProperties           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnVTSessionCopySupportedPropertyDictionary      func(unsafe.Pointer, unsafe.Pointer) int
+	_fnVTSessionSetProperties                        func(unsafe.Pointer, unsafe.Pointer) int
+	_fnVTSessionSetProperty                          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 )
 
 func VTCompressionSessionBeginPass(session unsafe.Pointer, beginPassFlags VTCompressionSessionOptionFlags, reserved *uint32) int {
@@ -470,4 +470,3 @@ func VTSessionSetProperties(session unsafe.Pointer, propertyDictionary unsafe.Po
 func VTSessionSetProperty(session unsafe.Pointer, propertyKey unsafe.Pointer, propertyValue unsafe.Pointer) int {
 	return _fnVTSessionSetProperty(session, propertyKey, propertyValue)
 }
-

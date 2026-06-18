@@ -26,4 +26,3 @@ func VZBootLoaderFromID(id objc.ID) *VZBootLoader {
 	purego.Track(o)
 	return o
 }
-

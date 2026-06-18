@@ -60,4 +60,3 @@ type Stickerable interface {
 }
 
 var _ Stickerable = (*Sticker)(nil)
-

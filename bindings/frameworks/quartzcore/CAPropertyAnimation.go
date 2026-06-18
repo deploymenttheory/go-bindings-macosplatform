@@ -16,16 +16,16 @@ type CAPropertyAnimation struct {
 }
 
 var (
-	_clsCAPropertyAnimation = _objcClass("CAPropertyAnimation")
+	_clsCAPropertyAnimation                     = _objcClass("CAPropertyAnimation")
 	_cAPropertyAnimationSelAnimationWithKeyPath = objc.RegisterName("animationWithKeyPath:")
-	_cAPropertyAnimationSelKeyPath = objc.RegisterName("keyPath")
-	_cAPropertyAnimationSelSetKeyPath = objc.RegisterName("setKeyPath:")
-	_cAPropertyAnimationSelIsAdditive = objc.RegisterName("isAdditive")
-	_cAPropertyAnimationSelSetAdditive = objc.RegisterName("setAdditive:")
-	_cAPropertyAnimationSelIsCumulative = objc.RegisterName("isCumulative")
-	_cAPropertyAnimationSelSetCumulative = objc.RegisterName("setCumulative:")
-	_cAPropertyAnimationSelValueFunction = objc.RegisterName("valueFunction")
-	_cAPropertyAnimationSelSetValueFunction = objc.RegisterName("setValueFunction:")
+	_cAPropertyAnimationSelKeyPath              = objc.RegisterName("keyPath")
+	_cAPropertyAnimationSelSetKeyPath           = objc.RegisterName("setKeyPath:")
+	_cAPropertyAnimationSelIsAdditive           = objc.RegisterName("isAdditive")
+	_cAPropertyAnimationSelSetAdditive          = objc.RegisterName("setAdditive:")
+	_cAPropertyAnimationSelIsCumulative         = objc.RegisterName("isCumulative")
+	_cAPropertyAnimationSelSetCumulative        = objc.RegisterName("setCumulative:")
+	_cAPropertyAnimationSelValueFunction        = objc.RegisterName("valueFunction")
+	_cAPropertyAnimationSelSetValueFunction     = objc.RegisterName("setValueFunction:")
 )
 
 func CAPropertyAnimationFromID(id objc.ID) *CAPropertyAnimation {
@@ -40,13 +40,17 @@ func CAPropertyAnimationFromID(id objc.ID) *CAPropertyAnimation {
 
 func CAPropertyAnimationAnimationWithKeyPath(path *foundation.NSString) *CAPropertyAnimation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCAPropertyAnimation), _cAPropertyAnimationSelAnimationWithKeyPath, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CAPropertyAnimationFromID(_ret)
 }
 
 func (o *CAPropertyAnimation) KeyPath() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cAPropertyAnimationSelKeyPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -74,11 +78,12 @@ func (o *CAPropertyAnimation) SetCumulative(cumulative bool) {
 
 func (o *CAPropertyAnimation) ValueFunction() *CAValueFunction {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cAPropertyAnimationSelValueFunction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CAValueFunctionFromID(_ret)
 }
 
 func (o *CAPropertyAnimation) SetValueFunction(valueFunction *CAValueFunction) {
 	o.Ptr().Send(_cAPropertyAnimationSelSetValueFunction, valueFunction.Ptr())
 }
-

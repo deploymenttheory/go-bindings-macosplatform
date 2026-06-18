@@ -72,4 +72,3 @@ type AssetDownloadURLSessionable interface {
 }
 
 var _ AssetDownloadURLSessionable = (*AssetDownloadURLSession)(nil)
-

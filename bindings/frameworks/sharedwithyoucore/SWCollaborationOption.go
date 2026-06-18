@@ -16,17 +16,17 @@ type SWCollaborationOption struct {
 }
 
 var (
-	_clsSWCollaborationOption = _objcClass("SWCollaborationOption")
-	_sWCollaborationOptionSelInitWithTitleIdentifier = objc.RegisterName("initWithTitle:identifier:")
-	_sWCollaborationOptionSelOptionWithTitleIdentifier = objc.RegisterName("optionWithTitle:identifier:")
-	_sWCollaborationOptionSelTitle = objc.RegisterName("title")
-	_sWCollaborationOptionSelSetTitle = objc.RegisterName("setTitle:")
-	_sWCollaborationOptionSelIdentifier = objc.RegisterName("identifier")
-	_sWCollaborationOptionSelSubtitle = objc.RegisterName("subtitle")
-	_sWCollaborationOptionSelSetSubtitle = objc.RegisterName("setSubtitle:")
-	_sWCollaborationOptionSelIsSelected = objc.RegisterName("isSelected")
-	_sWCollaborationOptionSelSetSelected = objc.RegisterName("setSelected:")
-	_sWCollaborationOptionSelRequiredOptionsIdentifiers = objc.RegisterName("requiredOptionsIdentifiers")
+	_clsSWCollaborationOption                              = _objcClass("SWCollaborationOption")
+	_sWCollaborationOptionSelInitWithTitleIdentifier       = objc.RegisterName("initWithTitle:identifier:")
+	_sWCollaborationOptionSelOptionWithTitleIdentifier     = objc.RegisterName("optionWithTitle:identifier:")
+	_sWCollaborationOptionSelTitle                         = objc.RegisterName("title")
+	_sWCollaborationOptionSelSetTitle                      = objc.RegisterName("setTitle:")
+	_sWCollaborationOptionSelIdentifier                    = objc.RegisterName("identifier")
+	_sWCollaborationOptionSelSubtitle                      = objc.RegisterName("subtitle")
+	_sWCollaborationOptionSelSetSubtitle                   = objc.RegisterName("setSubtitle:")
+	_sWCollaborationOptionSelIsSelected                    = objc.RegisterName("isSelected")
+	_sWCollaborationOptionSelSetSelected                   = objc.RegisterName("setSelected:")
+	_sWCollaborationOptionSelRequiredOptionsIdentifiers    = objc.RegisterName("requiredOptionsIdentifiers")
 	_sWCollaborationOptionSelSetRequiredOptionsIdentifiers = objc.RegisterName("setRequiredOptionsIdentifiers:")
 )
 
@@ -43,21 +43,27 @@ func SWCollaborationOptionFromID(id objc.ID) *SWCollaborationOption {
 // @abstract Initializes a collaboration option object with a title and unique identifier @param title A localized title string to be used when displaying the option @param identifier The unique identifier for the option
 func (o *SWCollaborationOption) InitWithTitleIdentifier(title *foundation.NSString, identifier *foundation.NSString) *SWCollaborationOption {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationOptionSelInitWithTitleIdentifier, title.Ptr(), identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SWCollaborationOptionFromID(_ret)
 }
 
 // @abstract Initializes a collaboration option with a title and unique identifier @param title A localized title string to be used when displaying the option @param identifier The unique identifier for the option
 func SWCollaborationOptionOptionWithTitleIdentifier(title *foundation.NSString, identifier *foundation.NSString) *SWCollaborationOption {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSWCollaborationOption), _sWCollaborationOptionSelOptionWithTitleIdentifier, title.Ptr(), identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SWCollaborationOptionFromID(_ret)
 }
 
 // @abstract A localized title string to be used when displaying the option
 func (o *SWCollaborationOption) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationOptionSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -68,14 +74,18 @@ func (o *SWCollaborationOption) SetTitle(title *foundation.NSString) {
 // @abstract Unique identifier
 func (o *SWCollaborationOption) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationOptionSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract A localized subtitle string to be used when displaying the option
 func (o *SWCollaborationOption) Subtitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationOptionSelSubtitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -102,4 +112,3 @@ func (o *SWCollaborationOption) RequiredOptionsIdentifiers() *foundation.NSArray
 func (o *SWCollaborationOption) SetRequiredOptionsIdentifiers(requiredOptionsIdentifiers *foundation.NSArray[*foundation.NSString]) {
 	o.Ptr().Send(_sWCollaborationOptionSelSetRequiredOptionsIdentifiers, requiredOptionsIdentifiers)
 }
-

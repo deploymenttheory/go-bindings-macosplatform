@@ -15,7 +15,9 @@ type PaymentInformationEventExtension struct {
 }
 
 // Unwrap returns the underlying [raw.PKPaymentInformationEventExtension].
-func (x *PaymentInformationEventExtension) Unwrap() *raw.PKPaymentInformationEventExtension { return x.inner }
+func (x *PaymentInformationEventExtension) Unwrap() *raw.PKPaymentInformationEventExtension {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -41,4 +43,3 @@ type PaymentInformationEventExtensionable interface {
 }
 
 var _ PaymentInformationEventExtensionable = (*PaymentInformationEventExtension)(nil)
-

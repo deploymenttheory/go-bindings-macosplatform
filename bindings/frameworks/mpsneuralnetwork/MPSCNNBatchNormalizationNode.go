@@ -15,13 +15,13 @@ type MPSCNNBatchNormalizationNode struct {
 }
 
 var (
-	_clsMPSCNNBatchNormalizationNode = _objcClass("MPSCNNBatchNormalizationNode")
+	_clsMPSCNNBatchNormalizationNode                         = _objcClass("MPSCNNBatchNormalizationNode")
 	_mPSCNNBatchNormalizationNodeSelNodeWithSourceDataSource = objc.RegisterName("nodeWithSource:dataSource:")
 	_mPSCNNBatchNormalizationNodeSelInitWithSourceDataSource = objc.RegisterName("initWithSource:dataSource:")
-	_mPSCNNBatchNormalizationNodeSelFlags = objc.RegisterName("flags")
-	_mPSCNNBatchNormalizationNodeSelSetFlags = objc.RegisterName("setFlags:")
-	_mPSCNNBatchNormalizationNodeSelTrainingStyle = objc.RegisterName("trainingStyle")
-	_mPSCNNBatchNormalizationNodeSelSetTrainingStyle = objc.RegisterName("setTrainingStyle:")
+	_mPSCNNBatchNormalizationNodeSelFlags                    = objc.RegisterName("flags")
+	_mPSCNNBatchNormalizationNodeSelSetFlags                 = objc.RegisterName("setFlags:")
+	_mPSCNNBatchNormalizationNodeSelTrainingStyle            = objc.RegisterName("trainingStyle")
+	_mPSCNNBatchNormalizationNodeSelSetTrainingStyle         = objc.RegisterName("setTrainingStyle:")
 )
 
 func MPSCNNBatchNormalizationNodeFromID(id objc.ID) *MPSCNNBatchNormalizationNode {
@@ -36,13 +36,17 @@ func MPSCNNBatchNormalizationNodeFromID(id objc.ID) *MPSCNNBatchNormalizationNod
 
 func MPSCNNBatchNormalizationNodeNodeWithSourceDataSource(source *MPSNNImageNode, dataSource MPSCNNBatchNormalizationDataSource) *MPSCNNBatchNormalizationNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNBatchNormalizationNode), _mPSCNNBatchNormalizationNodeSelNodeWithSourceDataSource, source.Ptr(), dataSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNBatchNormalizationNodeFromID(_ret)
 }
 
 func (o *MPSCNNBatchNormalizationNode) InitWithSourceDataSource(source *MPSNNImageNode, dataSource MPSCNNBatchNormalizationDataSource) *MPSCNNBatchNormalizationNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNBatchNormalizationNodeSelInitWithSourceDataSource, source.Ptr(), dataSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNBatchNormalizationNodeFromID(_ret)
 }
 
@@ -66,4 +70,3 @@ func (o *MPSCNNBatchNormalizationNode) TrainingStyle() MPSNNTrainingStyle {
 func (o *MPSCNNBatchNormalizationNode) SetTrainingStyle(trainingStyle MPSNNTrainingStyle) {
 	o.Ptr().Send(_mPSCNNBatchNormalizationNodeSelSetTrainingStyle, trainingStyle)
 }
-

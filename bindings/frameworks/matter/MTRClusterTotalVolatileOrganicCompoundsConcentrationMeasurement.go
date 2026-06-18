@@ -16,24 +16,24 @@ type MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement struct {
 }
 
 var (
-	_clsMTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement = _objcClass("MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement")
-	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelReadAttributeMeasuredValueWithParams = objc.RegisterName("readAttributeMeasuredValueWithParams:")
-	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelReadAttributeMinMeasuredValueWithParams = objc.RegisterName("readAttributeMinMeasuredValueWithParams:")
-	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelReadAttributeMaxMeasuredValueWithParams = objc.RegisterName("readAttributeMaxMeasuredValueWithParams:")
-	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelReadAttributePeakMeasuredValueWithParams = objc.RegisterName("readAttributePeakMeasuredValueWithParams:")
-	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelReadAttributePeakMeasuredValueWindowWithParams = objc.RegisterName("readAttributePeakMeasuredValueWindowWithParams:")
-	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelReadAttributeAverageMeasuredValueWithParams = objc.RegisterName("readAttributeAverageMeasuredValueWithParams:")
+	_clsMTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement                                                  = _objcClass("MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement")
+	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelReadAttributeMeasuredValueWithParams              = objc.RegisterName("readAttributeMeasuredValueWithParams:")
+	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelReadAttributeMinMeasuredValueWithParams           = objc.RegisterName("readAttributeMinMeasuredValueWithParams:")
+	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelReadAttributeMaxMeasuredValueWithParams           = objc.RegisterName("readAttributeMaxMeasuredValueWithParams:")
+	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelReadAttributePeakMeasuredValueWithParams          = objc.RegisterName("readAttributePeakMeasuredValueWithParams:")
+	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelReadAttributePeakMeasuredValueWindowWithParams    = objc.RegisterName("readAttributePeakMeasuredValueWindowWithParams:")
+	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelReadAttributeAverageMeasuredValueWithParams       = objc.RegisterName("readAttributeAverageMeasuredValueWithParams:")
 	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelReadAttributeAverageMeasuredValueWindowWithParams = objc.RegisterName("readAttributeAverageMeasuredValueWindowWithParams:")
-	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelReadAttributeUncertaintyWithParams = objc.RegisterName("readAttributeUncertaintyWithParams:")
-	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelReadAttributeMeasurementUnitWithParams = objc.RegisterName("readAttributeMeasurementUnitWithParams:")
-	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelReadAttributeMeasurementMediumWithParams = objc.RegisterName("readAttributeMeasurementMediumWithParams:")
-	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelReadAttributeLevelValueWithParams = objc.RegisterName("readAttributeLevelValueWithParams:")
-	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelReadAttributeUncertaintyWithParams                = objc.RegisterName("readAttributeUncertaintyWithParams:")
+	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelReadAttributeMeasurementUnitWithParams            = objc.RegisterName("readAttributeMeasurementUnitWithParams:")
+	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelReadAttributeMeasurementMediumWithParams          = objc.RegisterName("readAttributeMeasurementMediumWithParams:")
+	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelReadAttributeLevelValueWithParams                 = objc.RegisterName("readAttributeLevelValueWithParams:")
+	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelReadAttributeGeneratedCommandListWithParams       = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelReadAttributeAcceptedCommandListWithParams        = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelReadAttributeAttributeListWithParams              = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelReadAttributeFeatureMapWithParams                 = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelReadAttributeClusterRevisionWithParams            = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelInitWithDeviceEndpointIDQueue                     = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementFromID(id objc.ID) *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement {
@@ -129,7 +129,8 @@ func (o *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAt
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func (o *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementFromID(_ret)
 }
-

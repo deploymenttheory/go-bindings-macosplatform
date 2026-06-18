@@ -9,16 +9,15 @@ import (
 
 // @typedef	MTAudioProcessingTapCallbacks @discussion Note that for 64-bit architectures, this struct contains misaligned function pointers. To avoid link-time issues, it is recommended that clients fill MTAudioProcessingTapCallbacks' function pointer fields by using assignment statements, rather than declaring them as global or static structs. @field		version The version number of the structure passed in as a parameter to MTAudioProcessingTapCreate(). Must be kMTAudioProcessingTapCallbacksVersion_0. @field		clientInfo Client data that will be passed to the init callback when it is invoked. Can be NULL. @field		init A callback to allow the client to initialize the tap processor. Can be NULL. This callback is called before MTAudioProcessingTapCreate() returns. @field		finalize A callback to allow the client to perform any necessary cleanup. Can be NULL. This callback will be called exactly once when the MTAudioProcessingTap object is finalized. @field		prepare A callback to allow the client to prepare the tap processor (allocate memory buffers, etc). Can be NULL. Note that the callback may be called multiple times. @field		unprepare A callback to allow the client to perform any necessary cleanup for which that is prepared. Can be NULL. @field		process A callback for processing the audio.
 type MTAudioProcessingTapCallbacks struct {
-	Version int
+	Version    int
 	ClientInfo unsafe.Pointer
-	Init unsafe.Pointer
-	Finalize unsafe.Pointer
-	Prepare unsafe.Pointer
-	Unprepare unsafe.Pointer
-	Process unsafe.Pointer
+	Init       unsafe.Pointer
+	Finalize   unsafe.Pointer
+	Prepare    unsafe.Pointer
+	Unprepare  unsafe.Pointer
+	Process    unsafe.Pointer
 }
 
 // C struct: opaqueMTAudioProcessingTap
 // OpaqueMTAudioProcessingTap is an opaque type.
 type OpaqueMTAudioProcessingTap struct{}
-

@@ -319,9 +319,13 @@ func (x *MTRBaseClusterLowPower) SubscribeAttributeClusterRevisionWithMinInterva
 	}
 }
 
-func (x *MTRBaseClusterLowPower) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterLowPower) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterLowPower) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterLowPower) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterLowPowerable is the interface implemented by [MTRBaseClusterLowPower], for mocking and DI.
 type MTRBaseClusterLowPowerable interface {
@@ -353,4 +357,3 @@ type MTRBaseClusterLowPowerable interface {
 }
 
 var _ MTRBaseClusterLowPowerable = (*MTRBaseClusterLowPower)(nil)
-

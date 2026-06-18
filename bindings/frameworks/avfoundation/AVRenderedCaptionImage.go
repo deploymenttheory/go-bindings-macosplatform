@@ -19,9 +19,9 @@ type AVRenderedCaptionImage struct {
 }
 
 var (
-	_clsAVRenderedCaptionImage = _objcClass("AVRenderedCaptionImage")
+	_clsAVRenderedCaptionImage            = _objcClass("AVRenderedCaptionImage")
 	_aVRenderedCaptionImageSelPixelBuffer = objc.RegisterName("pixelBuffer")
-	_aVRenderedCaptionImageSelPosition = objc.RegisterName("position")
+	_aVRenderedCaptionImageSelPosition    = objc.RegisterName("position")
 )
 
 func AVRenderedCaptionImageFromID(id objc.ID) *AVRenderedCaptionImage {
@@ -45,4 +45,3 @@ func (o *AVRenderedCaptionImage) Position() corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _aVRenderedCaptionImageSelPosition)
 	return _ret
 }
-

@@ -341,4 +341,3 @@ func QCViewDidStopRenderingNotification() uintptr {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCViewDidStopRenderingNotification")
 	return ptr
 }
-

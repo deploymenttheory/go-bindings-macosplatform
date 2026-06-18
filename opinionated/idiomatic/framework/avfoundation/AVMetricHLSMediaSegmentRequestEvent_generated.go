@@ -17,7 +17,9 @@ type MetricHLSMediaSegmentRequestEvent struct {
 }
 
 // Unwrap returns the underlying [raw.AVMetricHLSMediaSegmentRequestEvent].
-func (x *MetricHLSMediaSegmentRequestEvent) Unwrap() *raw.AVMetricHLSMediaSegmentRequestEvent { return x.inner }
+func (x *MetricHLSMediaSegmentRequestEvent) Unwrap() *raw.AVMetricHLSMediaSegmentRequestEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -80,7 +82,9 @@ func (x *MetricHLSMediaSegmentRequestEvent) MediaResourceRequestEvent() *MetricM
 	return &MetricMediaResourceRequestEvent{inner: _r}
 }
 
-func (x *MetricHLSMediaSegmentRequestEvent) asMetricEvent() *raw.AVMetricEvent { return &x.inner.AVMetricEvent }
+func (x *MetricHLSMediaSegmentRequestEvent) asMetricEvent() *raw.AVMetricEvent {
+	return &x.inner.AVMetricEvent
+}
 
 // MetricHLSMediaSegmentRequestEventable is the interface implemented by [MetricHLSMediaSegmentRequestEvent], for mocking and DI.
 type MetricHLSMediaSegmentRequestEventable interface {
@@ -95,4 +99,3 @@ type MetricHLSMediaSegmentRequestEventable interface {
 }
 
 var _ MetricHLSMediaSegmentRequestEventable = (*MetricHLSMediaSegmentRequestEvent)(nil)
-

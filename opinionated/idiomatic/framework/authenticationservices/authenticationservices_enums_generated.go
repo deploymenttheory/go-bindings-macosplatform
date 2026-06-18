@@ -12,9 +12,9 @@ import (
 type ASAuthorizationAppleIDButtonStyle int64
 
 const (
-	ASAuthorizationAppleIDButtonStyleWhite ASAuthorizationAppleIDButtonStyle = 0
+	ASAuthorizationAppleIDButtonStyleWhite        ASAuthorizationAppleIDButtonStyle = 0
 	ASAuthorizationAppleIDButtonStyleWhiteOutline ASAuthorizationAppleIDButtonStyle = 1
-	ASAuthorizationAppleIDButtonStyleBlack ASAuthorizationAppleIDButtonStyle = 2
+	ASAuthorizationAppleIDButtonStyleBlack        ASAuthorizationAppleIDButtonStyle = 2
 )
 
 func (e ASAuthorizationAppleIDButtonStyle) String() string {
@@ -33,10 +33,10 @@ func (e ASAuthorizationAppleIDButtonStyle) String() string {
 type ASAuthorizationAppleIDButtonType int64
 
 const (
-	ASAuthorizationAppleIDButtonTypeSignIn ASAuthorizationAppleIDButtonType = 0
+	ASAuthorizationAppleIDButtonTypeSignIn   ASAuthorizationAppleIDButtonType = 0
 	ASAuthorizationAppleIDButtonTypeContinue ASAuthorizationAppleIDButtonType = 1
-	ASAuthorizationAppleIDButtonTypeSignUp ASAuthorizationAppleIDButtonType = 2
-	ASAuthorizationAppleIDButtonTypeDefault ASAuthorizationAppleIDButtonType = 0
+	ASAuthorizationAppleIDButtonTypeSignUp   ASAuthorizationAppleIDButtonType = 2
+	ASAuthorizationAppleIDButtonTypeDefault  ASAuthorizationAppleIDButtonType = 0
 )
 
 func (e ASAuthorizationAppleIDButtonType) String() string {
@@ -55,9 +55,9 @@ func (e ASAuthorizationAppleIDButtonType) String() string {
 type ASAuthorizationAppleIDProviderCredentialState int64
 
 const (
-	ASAuthorizationAppleIDProviderCredentialRevoked ASAuthorizationAppleIDProviderCredentialState = 0
-	ASAuthorizationAppleIDProviderCredentialAuthorized ASAuthorizationAppleIDProviderCredentialState = 1
-	ASAuthorizationAppleIDProviderCredentialNotFound ASAuthorizationAppleIDProviderCredentialState = 2
+	ASAuthorizationAppleIDProviderCredentialRevoked     ASAuthorizationAppleIDProviderCredentialState = 0
+	ASAuthorizationAppleIDProviderCredentialAuthorized  ASAuthorizationAppleIDProviderCredentialState = 1
+	ASAuthorizationAppleIDProviderCredentialNotFound    ASAuthorizationAppleIDProviderCredentialState = 2
 	ASAuthorizationAppleIDProviderCredentialTransferred ASAuthorizationAppleIDProviderCredentialState = 3
 )
 
@@ -118,9 +118,9 @@ func (e ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle) Stri
 type ASAuthorizationProviderExtensionAuthenticationMethod int64
 
 const (
-	ASAuthorizationProviderExtensionAuthenticationMethodPassword ASAuthorizationProviderExtensionAuthenticationMethod = 1
+	ASAuthorizationProviderExtensionAuthenticationMethodPassword             ASAuthorizationProviderExtensionAuthenticationMethod = 1
 	ASAuthorizationProviderExtensionAuthenticationMethodUserSecureEnclaveKey ASAuthorizationProviderExtensionAuthenticationMethod = 2
-	ASAuthorizationProviderExtensionAuthenticationMethodSmartCard ASAuthorizationProviderExtensionAuthenticationMethod = 3
+	ASAuthorizationProviderExtensionAuthenticationMethodSmartCard            ASAuthorizationProviderExtensionAuthenticationMethod = 3
 )
 
 func (e ASAuthorizationProviderExtensionAuthenticationMethod) String() string {
@@ -139,8 +139,8 @@ func (e ASAuthorizationProviderExtensionAuthenticationMethod) String() string {
 type ASAuthorizationProviderExtensionFederationType int64
 
 const (
-	ASAuthorizationProviderExtensionFederationTypeNone ASAuthorizationProviderExtensionFederationType = 0
-	ASAuthorizationProviderExtensionFederationTypeWSTrust ASAuthorizationProviderExtensionFederationType = 1
+	ASAuthorizationProviderExtensionFederationTypeNone           ASAuthorizationProviderExtensionFederationType = 0
+	ASAuthorizationProviderExtensionFederationTypeWSTrust        ASAuthorizationProviderExtensionFederationType = 1
 	ASAuthorizationProviderExtensionFederationTypeDynamicWSTrust ASAuthorizationProviderExtensionFederationType = 2
 )
 
@@ -174,7 +174,7 @@ const (
 	ASAuthorizationProviderExtensionKeyTypeCurrentDeviceSigning ASAuthorizationProviderExtensionKeyType = 10
 	// The current device encryption key.
 	ASAuthorizationProviderExtensionKeyTypeCurrentDeviceEncryption ASAuthorizationProviderExtensionKeyType = 11
-	ASAuthorizationProviderExtensionKeyTypeUserSmartCard ASAuthorizationProviderExtensionKeyType = 20
+	ASAuthorizationProviderExtensionKeyTypeUserSmartCard           ASAuthorizationProviderExtensionKeyType = 20
 )
 
 func (e ASAuthorizationProviderExtensionKeyType) String() string {
@@ -205,9 +205,9 @@ type ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy uint64
 
 const (
 	ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyTouchIDOrWatchCurrentSet ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy = 1
-	ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyTouchIDOrWatchAny ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy = 2
-	ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyReuseDuringUnlock ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy = 4
-	ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyPasswordFallback ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy = 8
+	ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyTouchIDOrWatchAny        ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy = 2
+	ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyReuseDuringUnlock        ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy = 4
+	ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyPasswordFallback         ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy = 8
 )
 
 func (e ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy) String() string {
@@ -233,7 +233,7 @@ func (e ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy) Str
 type ASAuthorizationPublicKeyCredentialAttachment int64
 
 const (
-	ASAuthorizationPublicKeyCredentialAttachmentPlatform ASAuthorizationPublicKeyCredentialAttachment = 0
+	ASAuthorizationPublicKeyCredentialAttachmentPlatform      ASAuthorizationPublicKeyCredentialAttachment = 0
 	ASAuthorizationPublicKeyCredentialAttachmentCrossPlatform ASAuthorizationPublicKeyCredentialAttachment = 1
 )
 
@@ -251,7 +251,7 @@ func (e ASAuthorizationPublicKeyCredentialAttachment) String() string {
 type ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation int64
 
 const (
-	ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperationRead ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation = 0
+	ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperationRead  ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation = 0
 	ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperationWrite ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation = 1
 )
 
@@ -269,7 +269,7 @@ func (e ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation) String() 
 type ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement int64
 
 const (
-	ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirementRequired ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement = 0
+	ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirementRequired  ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement = 0
 	ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirementPreferred ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement = 1
 )
 
@@ -287,8 +287,8 @@ func (e ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement) String() 
 type ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState int64
 
 const (
-	ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationStateAuthorized ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState = 0
-	ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationStateDenied ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState = 1
+	ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationStateAuthorized    ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState = 0
+	ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationStateDenied        ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState = 1
 	ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationStateNotDetermined ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState = 2
 )
 
@@ -309,9 +309,9 @@ func (e ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState) S
 type ASCredentialIdentityTypes uint64
 
 const (
-	ASCredentialIdentityTypesAll ASCredentialIdentityTypes = 0
-	ASCredentialIdentityTypesPassword ASCredentialIdentityTypes = 1
-	ASCredentialIdentityTypesPasskey ASCredentialIdentityTypes = 2
+	ASCredentialIdentityTypesAll         ASCredentialIdentityTypes = 0
+	ASCredentialIdentityTypesPassword    ASCredentialIdentityTypes = 1
+	ASCredentialIdentityTypesPasskey     ASCredentialIdentityTypes = 2
 	ASCredentialIdentityTypesOneTimeCode ASCredentialIdentityTypes = 4
 )
 
@@ -336,7 +336,7 @@ type ASCredentialServiceIdentifierType int64
 
 const (
 	ASCredentialServiceIdentifierTypeDomain ASCredentialServiceIdentifierType = 0
-	ASCredentialServiceIdentifierTypeURL ASCredentialServiceIdentifierType = 1
+	ASCredentialServiceIdentifierTypeURL    ASCredentialServiceIdentifierType = 1
 	// The service identifier represents an App ID. When a service identifier of this type is provided to your extension for saving a password, the ASCredentialServiceIdentifier object will have a non-nil `displayName` property that contains a user friendly name for the app.
 	ASCredentialServiceIdentifierTypeApp ASCredentialServiceIdentifierType = 2
 )
@@ -357,8 +357,8 @@ func (e ASCredentialServiceIdentifierType) String() string {
 type ASPublicKeyCredentialClientDataCrossOriginValue int64
 
 const (
-	ASPublicKeyCredentialClientDataCrossOriginValueNotSet ASPublicKeyCredentialClientDataCrossOriginValue = 0
-	ASPublicKeyCredentialClientDataCrossOriginValueCrossOrigin ASPublicKeyCredentialClientDataCrossOriginValue = 1
+	ASPublicKeyCredentialClientDataCrossOriginValueNotSet                  ASPublicKeyCredentialClientDataCrossOriginValue = 0
+	ASPublicKeyCredentialClientDataCrossOriginValueCrossOrigin             ASPublicKeyCredentialClientDataCrossOriginValue = 1
 	ASPublicKeyCredentialClientDataCrossOriginValueSameOriginWithAncestors ASPublicKeyCredentialClientDataCrossOriginValue = 2
 )
 
@@ -378,8 +378,8 @@ func (e ASPublicKeyCredentialClientDataCrossOriginValue) String() string {
 type ASUserAgeRange int64
 
 const (
-	ASUserAgeRangeUnknown ASUserAgeRange = 0
-	ASUserAgeRangeChild ASUserAgeRange = 1
+	ASUserAgeRangeUnknown  ASUserAgeRange = 0
+	ASUserAgeRangeChild    ASUserAgeRange = 1
 	ASUserAgeRangeNotChild ASUserAgeRange = 2
 )
 
@@ -400,8 +400,8 @@ type ASUserDetectionStatus int64
 
 const (
 	ASUserDetectionStatusUnsupported ASUserDetectionStatus = 0
-	ASUserDetectionStatusUnknown ASUserDetectionStatus = 1
-	ASUserDetectionStatusLikelyReal ASUserDetectionStatus = 2
+	ASUserDetectionStatusUnknown     ASUserDetectionStatus = 1
+	ASUserDetectionStatusLikelyReal  ASUserDetectionStatus = 2
 )
 
 func (e ASUserDetectionStatus) String() string {
@@ -416,4 +416,3 @@ func (e ASUserDetectionStatus) String() string {
 		return fmt.Sprintf("ASUserDetectionStatus(%d)", int64(e))
 	}
 }
-

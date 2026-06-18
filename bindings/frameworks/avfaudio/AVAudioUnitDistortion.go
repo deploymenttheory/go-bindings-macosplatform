@@ -15,12 +15,12 @@ type AVAudioUnitDistortion struct {
 }
 
 var (
-	_clsAVAudioUnitDistortion = _objcClass("AVAudioUnitDistortion")
+	_clsAVAudioUnitDistortion                  = _objcClass("AVAudioUnitDistortion")
 	_aVAudioUnitDistortionSelLoadFactoryPreset = objc.RegisterName("loadFactoryPreset:")
-	_aVAudioUnitDistortionSelPreGain = objc.RegisterName("preGain")
-	_aVAudioUnitDistortionSelSetPreGain = objc.RegisterName("setPreGain:")
-	_aVAudioUnitDistortionSelWetDryMix = objc.RegisterName("wetDryMix")
-	_aVAudioUnitDistortionSelSetWetDryMix = objc.RegisterName("setWetDryMix:")
+	_aVAudioUnitDistortionSelPreGain           = objc.RegisterName("preGain")
+	_aVAudioUnitDistortionSelSetPreGain        = objc.RegisterName("setPreGain:")
+	_aVAudioUnitDistortionSelWetDryMix         = objc.RegisterName("wetDryMix")
+	_aVAudioUnitDistortionSelSetWetDryMix      = objc.RegisterName("setWetDryMix:")
 )
 
 func AVAudioUnitDistortionFromID(id objc.ID) *AVAudioUnitDistortion {
@@ -57,4 +57,3 @@ func (o *AVAudioUnitDistortion) WetDryMix() float32 {
 func (o *AVAudioUnitDistortion) SetWetDryMix(wetDryMix float32) {
 	o.Ptr().Send(_aVAudioUnitDistortionSelSetWetDryMix, wetDryMix)
 }
-

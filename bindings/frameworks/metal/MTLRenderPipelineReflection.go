@@ -16,15 +16,15 @@ type MTLRenderPipelineReflection struct {
 }
 
 var (
-	_clsMTLRenderPipelineReflection = _objcClass("MTLRenderPipelineReflection")
-	_mTLRenderPipelineReflectionSelVertexBindings = objc.RegisterName("vertexBindings")
-	_mTLRenderPipelineReflectionSelFragmentBindings = objc.RegisterName("fragmentBindings")
-	_mTLRenderPipelineReflectionSelTileBindings = objc.RegisterName("tileBindings")
-	_mTLRenderPipelineReflectionSelObjectBindings = objc.RegisterName("objectBindings")
-	_mTLRenderPipelineReflectionSelMeshBindings = objc.RegisterName("meshBindings")
-	_mTLRenderPipelineReflectionSelVertexArguments = objc.RegisterName("vertexArguments")
+	_clsMTLRenderPipelineReflection                  = _objcClass("MTLRenderPipelineReflection")
+	_mTLRenderPipelineReflectionSelVertexBindings    = objc.RegisterName("vertexBindings")
+	_mTLRenderPipelineReflectionSelFragmentBindings  = objc.RegisterName("fragmentBindings")
+	_mTLRenderPipelineReflectionSelTileBindings      = objc.RegisterName("tileBindings")
+	_mTLRenderPipelineReflectionSelObjectBindings    = objc.RegisterName("objectBindings")
+	_mTLRenderPipelineReflectionSelMeshBindings      = objc.RegisterName("meshBindings")
+	_mTLRenderPipelineReflectionSelVertexArguments   = objc.RegisterName("vertexArguments")
 	_mTLRenderPipelineReflectionSelFragmentArguments = objc.RegisterName("fragmentArguments")
-	_mTLRenderPipelineReflectionSelTileArguments = objc.RegisterName("tileArguments")
+	_mTLRenderPipelineReflectionSelTileArguments     = objc.RegisterName("tileArguments")
 )
 
 func MTLRenderPipelineReflectionFromID(id objc.ID) *MTLRenderPipelineReflection {
@@ -39,52 +39,67 @@ func MTLRenderPipelineReflectionFromID(id objc.ID) *MTLRenderPipelineReflection 
 
 func (o *MTLRenderPipelineReflection) VertexBindings() *foundation.NSArray[MTLBinding] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRenderPipelineReflectionSelVertexBindings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTLBinding](_ret)
 }
 
 func (o *MTLRenderPipelineReflection) FragmentBindings() *foundation.NSArray[MTLBinding] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRenderPipelineReflectionSelFragmentBindings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTLBinding](_ret)
 }
 
 func (o *MTLRenderPipelineReflection) TileBindings() *foundation.NSArray[MTLBinding] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRenderPipelineReflectionSelTileBindings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTLBinding](_ret)
 }
 
 func (o *MTLRenderPipelineReflection) ObjectBindings() *foundation.NSArray[MTLBinding] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRenderPipelineReflectionSelObjectBindings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTLBinding](_ret)
 }
 
 func (o *MTLRenderPipelineReflection) MeshBindings() *foundation.NSArray[MTLBinding] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRenderPipelineReflectionSelMeshBindings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTLBinding](_ret)
 }
 
 // Deprecated: since macOS 13.0.
 func (o *MTLRenderPipelineReflection) VertexArguments() *foundation.NSArray[*MTLArgument] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRenderPipelineReflectionSelVertexArguments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MTLArgument](_ret)
 }
 
 // Deprecated: since macOS 13.0.
 func (o *MTLRenderPipelineReflection) FragmentArguments() *foundation.NSArray[*MTLArgument] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRenderPipelineReflectionSelFragmentArguments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MTLArgument](_ret)
 }
 
 // Deprecated: since macOS 13.0.
 func (o *MTLRenderPipelineReflection) TileArguments() *foundation.NSArray[*MTLArgument] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRenderPipelineReflectionSelTileArguments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MTLArgument](_ret)
 }
-

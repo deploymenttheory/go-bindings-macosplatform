@@ -18,10 +18,10 @@ type MPSImageGaussianBlur struct {
 }
 
 var (
-	_clsMPSImageGaussianBlur = _objcClass("MPSImageGaussianBlur")
+	_clsMPSImageGaussianBlur                    = _objcClass("MPSImageGaussianBlur")
 	_mPSImageGaussianBlurSelInitWithDeviceSigma = objc.RegisterName("initWithDevice:sigma:")
 	_mPSImageGaussianBlurSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSImageGaussianBlurSelSigma = objc.RegisterName("sigma")
+	_mPSImageGaussianBlurSelSigma               = objc.RegisterName("sigma")
 )
 
 func MPSImageGaussianBlurFromID(id objc.ID) *MPSImageGaussianBlur {
@@ -36,14 +36,18 @@ func MPSImageGaussianBlurFromID(id objc.ID) *MPSImageGaussianBlur {
 
 func (o *MPSImageGaussianBlur) InitWithDeviceSigma(device metal.MTLDevice, sigma float32) *MPSImageGaussianBlur {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageGaussianBlurSelInitWithDeviceSigma, device, sigma)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageGaussianBlurFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSImageGaussianBlur) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSImageGaussianBlur {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageGaussianBlurSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageGaussianBlurFromID(_ret)
 }
 
@@ -52,4 +56,3 @@ func (o *MPSImageGaussianBlur) Sigma() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _mPSImageGaussianBlurSelSigma)
 	return _ret
 }
-

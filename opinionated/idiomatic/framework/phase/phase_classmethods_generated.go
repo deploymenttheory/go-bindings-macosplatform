@@ -32,4 +32,3 @@ func Up() unsafe.Pointer {
 func Forward() unsafe.Pointer {
 	return raw.PHASEObjectForward()
 }
-

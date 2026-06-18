@@ -27,4 +27,3 @@ func MPSCNNPoolingL2NormNodeFromID(id objc.ID) *MPSCNNPoolingL2NormNode {
 	purego.Track(o)
 	return o
 }
-

@@ -16,13 +16,13 @@ type MTL4LibraryDescriptor struct {
 }
 
 var (
-	_clsMTL4LibraryDescriptor = _objcClass("MTL4LibraryDescriptor")
-	_mTL4LibraryDescriptorSelSource = objc.RegisterName("source")
-	_mTL4LibraryDescriptorSelSetSource = objc.RegisterName("setSource:")
-	_mTL4LibraryDescriptorSelOptions = objc.RegisterName("options")
+	_clsMTL4LibraryDescriptor           = _objcClass("MTL4LibraryDescriptor")
+	_mTL4LibraryDescriptorSelSource     = objc.RegisterName("source")
+	_mTL4LibraryDescriptorSelSetSource  = objc.RegisterName("setSource:")
+	_mTL4LibraryDescriptorSelOptions    = objc.RegisterName("options")
 	_mTL4LibraryDescriptorSelSetOptions = objc.RegisterName("setOptions:")
-	_mTL4LibraryDescriptorSelName = objc.RegisterName("name")
-	_mTL4LibraryDescriptorSelSetName = objc.RegisterName("setName:")
+	_mTL4LibraryDescriptorSelName       = objc.RegisterName("name")
+	_mTL4LibraryDescriptorSelSetName    = objc.RegisterName("setName:")
 )
 
 func MTL4LibraryDescriptorFromID(id objc.ID) *MTL4LibraryDescriptor {
@@ -38,7 +38,9 @@ func MTL4LibraryDescriptorFromID(id objc.ID) *MTL4LibraryDescriptor {
 // Assigns an optional string containing the source code of the shader language program to compile into a Metal library.
 func (o *MTL4LibraryDescriptor) Source() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4LibraryDescriptorSelSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTL4LibraryDescriptor) SetSource(source *foundation.NSString) {
 // Provides compile-time options for the Metal library.
 func (o *MTL4LibraryDescriptor) Options() *MTLCompileOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4LibraryDescriptorSelOptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLCompileOptionsFromID(_ret)
 }
 
@@ -60,11 +64,12 @@ func (o *MTL4LibraryDescriptor) SetOptions(options *MTLCompileOptions) {
 // Assigns an optional name to the Metal library.
 func (o *MTL4LibraryDescriptor) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4LibraryDescriptorSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTL4LibraryDescriptor) SetName(name *foundation.NSString) {
 	o.Ptr().Send(_mTL4LibraryDescriptorSelSetName, name.Ptr())
 }
-

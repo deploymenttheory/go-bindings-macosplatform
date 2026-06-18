@@ -41,4 +41,3 @@ type MTRCertificatesable interface {
 }
 
 var _ MTRCertificatesable = (*MTRCertificates)(nil)
-

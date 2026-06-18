@@ -16,24 +16,24 @@ type AttestationInfo struct {
 }
 
 var (
-	_clsAttestationInfo = _objcClass("AttestationInfo")
+	_clsAttestationInfo                                                                                          = _objcClass("AttestationInfo")
 	_attestationInfoSelInitWithChallengeNonceElementsElementsSignatureDacPaiCertificationDeclarationFirmwareInfo = objc.RegisterName("initWithChallenge:nonce:elements:elementsSignature:dac:pai:certificationDeclaration:firmwareInfo:")
-	_attestationInfoSelChallenge = objc.RegisterName("challenge")
-	_attestationInfoSelSetChallenge = objc.RegisterName("setChallenge:")
-	_attestationInfoSelNonce = objc.RegisterName("nonce")
-	_attestationInfoSelSetNonce = objc.RegisterName("setNonce:")
-	_attestationInfoSelElements = objc.RegisterName("elements")
-	_attestationInfoSelSetElements = objc.RegisterName("setElements:")
-	_attestationInfoSelElementsSignature = objc.RegisterName("elementsSignature")
-	_attestationInfoSelSetElementsSignature = objc.RegisterName("setElementsSignature:")
-	_attestationInfoSelDac = objc.RegisterName("dac")
-	_attestationInfoSelSetDac = objc.RegisterName("setDac:")
-	_attestationInfoSelPai = objc.RegisterName("pai")
-	_attestationInfoSelSetPai = objc.RegisterName("setPai:")
-	_attestationInfoSelCertificationDeclaration = objc.RegisterName("certificationDeclaration")
-	_attestationInfoSelSetCertificationDeclaration = objc.RegisterName("setCertificationDeclaration:")
-	_attestationInfoSelFirmwareInfo = objc.RegisterName("firmwareInfo")
-	_attestationInfoSelSetFirmwareInfo = objc.RegisterName("setFirmwareInfo:")
+	_attestationInfoSelChallenge                                                                                 = objc.RegisterName("challenge")
+	_attestationInfoSelSetChallenge                                                                              = objc.RegisterName("setChallenge:")
+	_attestationInfoSelNonce                                                                                     = objc.RegisterName("nonce")
+	_attestationInfoSelSetNonce                                                                                  = objc.RegisterName("setNonce:")
+	_attestationInfoSelElements                                                                                  = objc.RegisterName("elements")
+	_attestationInfoSelSetElements                                                                               = objc.RegisterName("setElements:")
+	_attestationInfoSelElementsSignature                                                                         = objc.RegisterName("elementsSignature")
+	_attestationInfoSelSetElementsSignature                                                                      = objc.RegisterName("setElementsSignature:")
+	_attestationInfoSelDac                                                                                       = objc.RegisterName("dac")
+	_attestationInfoSelSetDac                                                                                    = objc.RegisterName("setDac:")
+	_attestationInfoSelPai                                                                                       = objc.RegisterName("pai")
+	_attestationInfoSelSetPai                                                                                    = objc.RegisterName("setPai:")
+	_attestationInfoSelCertificationDeclaration                                                                  = objc.RegisterName("certificationDeclaration")
+	_attestationInfoSelSetCertificationDeclaration                                                               = objc.RegisterName("setCertificationDeclaration:")
+	_attestationInfoSelFirmwareInfo                                                                              = objc.RegisterName("firmwareInfo")
+	_attestationInfoSelSetFirmwareInfo                                                                           = objc.RegisterName("setFirmwareInfo:")
 )
 
 func AttestationInfoFromID(id objc.ID) *AttestationInfo {
@@ -48,13 +48,17 @@ func AttestationInfoFromID(id objc.ID) *AttestationInfo {
 
 func (o *AttestationInfo) InitWithChallengeNonceElementsElementsSignatureDacPaiCertificationDeclarationFirmwareInfo(challenge *foundation.NSData, nonce *foundation.NSData, elements *foundation.NSData, elementsSignature *foundation.NSData, dac *foundation.NSData, pai *foundation.NSData, certificationDeclaration *foundation.NSData, firmwareInfo *foundation.NSData) *AttestationInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _attestationInfoSelInitWithChallengeNonceElementsElementsSignatureDacPaiCertificationDeclarationFirmwareInfo, challenge.Ptr(), nonce.Ptr(), elements.Ptr(), elementsSignature.Ptr(), dac.Ptr(), pai.Ptr(), certificationDeclaration.Ptr(), firmwareInfo.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AttestationInfoFromID(_ret)
 }
 
 func (o *AttestationInfo) Challenge() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _attestationInfoSelChallenge)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -64,7 +68,9 @@ func (o *AttestationInfo) SetChallenge(challenge *foundation.NSData) {
 
 func (o *AttestationInfo) Nonce() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _attestationInfoSelNonce)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -74,7 +80,9 @@ func (o *AttestationInfo) SetNonce(nonce *foundation.NSData) {
 
 func (o *AttestationInfo) Elements() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _attestationInfoSelElements)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -84,7 +92,9 @@ func (o *AttestationInfo) SetElements(elements *foundation.NSData) {
 
 func (o *AttestationInfo) ElementsSignature() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _attestationInfoSelElementsSignature)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -94,7 +104,9 @@ func (o *AttestationInfo) SetElementsSignature(elementsSignature *foundation.NSD
 
 func (o *AttestationInfo) Dac() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _attestationInfoSelDac)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -104,7 +116,9 @@ func (o *AttestationInfo) SetDac(dac *foundation.NSData) {
 
 func (o *AttestationInfo) Pai() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _attestationInfoSelPai)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -114,7 +128,9 @@ func (o *AttestationInfo) SetPai(pai *foundation.NSData) {
 
 func (o *AttestationInfo) CertificationDeclaration() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _attestationInfoSelCertificationDeclaration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -124,11 +140,12 @@ func (o *AttestationInfo) SetCertificationDeclaration(certificationDeclaration *
 
 func (o *AttestationInfo) FirmwareInfo() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _attestationInfoSelFirmwareInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *AttestationInfo) SetFirmwareInfo(firmwareInfo *foundation.NSData) {
 	o.Ptr().Send(_attestationInfoSelSetFirmwareInfo, firmwareInfo.Ptr())
 }
-

@@ -19,105 +19,105 @@ type SKEmitterNode struct {
 }
 
 var (
-	_clsSKEmitterNode = _objcClass("SKEmitterNode")
-	_sKEmitterNodeSelAdvanceSimulationTime = objc.RegisterName("advanceSimulationTime:")
-	_sKEmitterNodeSelResetSimulation = objc.RegisterName("resetSimulation")
-	_sKEmitterNodeSelParticleTexture = objc.RegisterName("particleTexture")
-	_sKEmitterNodeSelSetParticleTexture = objc.RegisterName("setParticleTexture:")
-	_sKEmitterNodeSelParticleBlendMode = objc.RegisterName("particleBlendMode")
-	_sKEmitterNodeSelSetParticleBlendMode = objc.RegisterName("setParticleBlendMode:")
-	_sKEmitterNodeSelParticleColor = objc.RegisterName("particleColor")
-	_sKEmitterNodeSelSetParticleColor = objc.RegisterName("setParticleColor:")
-	_sKEmitterNodeSelParticleColorRedRange = objc.RegisterName("particleColorRedRange")
-	_sKEmitterNodeSelSetParticleColorRedRange = objc.RegisterName("setParticleColorRedRange:")
-	_sKEmitterNodeSelParticleColorGreenRange = objc.RegisterName("particleColorGreenRange")
-	_sKEmitterNodeSelSetParticleColorGreenRange = objc.RegisterName("setParticleColorGreenRange:")
-	_sKEmitterNodeSelParticleColorBlueRange = objc.RegisterName("particleColorBlueRange")
-	_sKEmitterNodeSelSetParticleColorBlueRange = objc.RegisterName("setParticleColorBlueRange:")
-	_sKEmitterNodeSelParticleColorAlphaRange = objc.RegisterName("particleColorAlphaRange")
-	_sKEmitterNodeSelSetParticleColorAlphaRange = objc.RegisterName("setParticleColorAlphaRange:")
-	_sKEmitterNodeSelParticleColorRedSpeed = objc.RegisterName("particleColorRedSpeed")
-	_sKEmitterNodeSelSetParticleColorRedSpeed = objc.RegisterName("setParticleColorRedSpeed:")
-	_sKEmitterNodeSelParticleColorGreenSpeed = objc.RegisterName("particleColorGreenSpeed")
-	_sKEmitterNodeSelSetParticleColorGreenSpeed = objc.RegisterName("setParticleColorGreenSpeed:")
-	_sKEmitterNodeSelParticleColorBlueSpeed = objc.RegisterName("particleColorBlueSpeed")
-	_sKEmitterNodeSelSetParticleColorBlueSpeed = objc.RegisterName("setParticleColorBlueSpeed:")
-	_sKEmitterNodeSelParticleColorAlphaSpeed = objc.RegisterName("particleColorAlphaSpeed")
-	_sKEmitterNodeSelSetParticleColorAlphaSpeed = objc.RegisterName("setParticleColorAlphaSpeed:")
-	_sKEmitterNodeSelParticleColorSequence = objc.RegisterName("particleColorSequence")
-	_sKEmitterNodeSelSetParticleColorSequence = objc.RegisterName("setParticleColorSequence:")
-	_sKEmitterNodeSelParticleColorBlendFactor = objc.RegisterName("particleColorBlendFactor")
-	_sKEmitterNodeSelSetParticleColorBlendFactor = objc.RegisterName("setParticleColorBlendFactor:")
-	_sKEmitterNodeSelParticleColorBlendFactorRange = objc.RegisterName("particleColorBlendFactorRange")
-	_sKEmitterNodeSelSetParticleColorBlendFactorRange = objc.RegisterName("setParticleColorBlendFactorRange:")
-	_sKEmitterNodeSelParticleColorBlendFactorSpeed = objc.RegisterName("particleColorBlendFactorSpeed")
-	_sKEmitterNodeSelSetParticleColorBlendFactorSpeed = objc.RegisterName("setParticleColorBlendFactorSpeed:")
-	_sKEmitterNodeSelParticleColorBlendFactorSequence = objc.RegisterName("particleColorBlendFactorSequence")
+	_clsSKEmitterNode                                    = _objcClass("SKEmitterNode")
+	_sKEmitterNodeSelAdvanceSimulationTime               = objc.RegisterName("advanceSimulationTime:")
+	_sKEmitterNodeSelResetSimulation                     = objc.RegisterName("resetSimulation")
+	_sKEmitterNodeSelParticleTexture                     = objc.RegisterName("particleTexture")
+	_sKEmitterNodeSelSetParticleTexture                  = objc.RegisterName("setParticleTexture:")
+	_sKEmitterNodeSelParticleBlendMode                   = objc.RegisterName("particleBlendMode")
+	_sKEmitterNodeSelSetParticleBlendMode                = objc.RegisterName("setParticleBlendMode:")
+	_sKEmitterNodeSelParticleColor                       = objc.RegisterName("particleColor")
+	_sKEmitterNodeSelSetParticleColor                    = objc.RegisterName("setParticleColor:")
+	_sKEmitterNodeSelParticleColorRedRange               = objc.RegisterName("particleColorRedRange")
+	_sKEmitterNodeSelSetParticleColorRedRange            = objc.RegisterName("setParticleColorRedRange:")
+	_sKEmitterNodeSelParticleColorGreenRange             = objc.RegisterName("particleColorGreenRange")
+	_sKEmitterNodeSelSetParticleColorGreenRange          = objc.RegisterName("setParticleColorGreenRange:")
+	_sKEmitterNodeSelParticleColorBlueRange              = objc.RegisterName("particleColorBlueRange")
+	_sKEmitterNodeSelSetParticleColorBlueRange           = objc.RegisterName("setParticleColorBlueRange:")
+	_sKEmitterNodeSelParticleColorAlphaRange             = objc.RegisterName("particleColorAlphaRange")
+	_sKEmitterNodeSelSetParticleColorAlphaRange          = objc.RegisterName("setParticleColorAlphaRange:")
+	_sKEmitterNodeSelParticleColorRedSpeed               = objc.RegisterName("particleColorRedSpeed")
+	_sKEmitterNodeSelSetParticleColorRedSpeed            = objc.RegisterName("setParticleColorRedSpeed:")
+	_sKEmitterNodeSelParticleColorGreenSpeed             = objc.RegisterName("particleColorGreenSpeed")
+	_sKEmitterNodeSelSetParticleColorGreenSpeed          = objc.RegisterName("setParticleColorGreenSpeed:")
+	_sKEmitterNodeSelParticleColorBlueSpeed              = objc.RegisterName("particleColorBlueSpeed")
+	_sKEmitterNodeSelSetParticleColorBlueSpeed           = objc.RegisterName("setParticleColorBlueSpeed:")
+	_sKEmitterNodeSelParticleColorAlphaSpeed             = objc.RegisterName("particleColorAlphaSpeed")
+	_sKEmitterNodeSelSetParticleColorAlphaSpeed          = objc.RegisterName("setParticleColorAlphaSpeed:")
+	_sKEmitterNodeSelParticleColorSequence               = objc.RegisterName("particleColorSequence")
+	_sKEmitterNodeSelSetParticleColorSequence            = objc.RegisterName("setParticleColorSequence:")
+	_sKEmitterNodeSelParticleColorBlendFactor            = objc.RegisterName("particleColorBlendFactor")
+	_sKEmitterNodeSelSetParticleColorBlendFactor         = objc.RegisterName("setParticleColorBlendFactor:")
+	_sKEmitterNodeSelParticleColorBlendFactorRange       = objc.RegisterName("particleColorBlendFactorRange")
+	_sKEmitterNodeSelSetParticleColorBlendFactorRange    = objc.RegisterName("setParticleColorBlendFactorRange:")
+	_sKEmitterNodeSelParticleColorBlendFactorSpeed       = objc.RegisterName("particleColorBlendFactorSpeed")
+	_sKEmitterNodeSelSetParticleColorBlendFactorSpeed    = objc.RegisterName("setParticleColorBlendFactorSpeed:")
+	_sKEmitterNodeSelParticleColorBlendFactorSequence    = objc.RegisterName("particleColorBlendFactorSequence")
 	_sKEmitterNodeSelSetParticleColorBlendFactorSequence = objc.RegisterName("setParticleColorBlendFactorSequence:")
-	_sKEmitterNodeSelParticlePosition = objc.RegisterName("particlePosition")
-	_sKEmitterNodeSelSetParticlePosition = objc.RegisterName("setParticlePosition:")
-	_sKEmitterNodeSelParticlePositionRange = objc.RegisterName("particlePositionRange")
-	_sKEmitterNodeSelSetParticlePositionRange = objc.RegisterName("setParticlePositionRange:")
-	_sKEmitterNodeSelParticleSpeed = objc.RegisterName("particleSpeed")
-	_sKEmitterNodeSelSetParticleSpeed = objc.RegisterName("setParticleSpeed:")
-	_sKEmitterNodeSelParticleSpeedRange = objc.RegisterName("particleSpeedRange")
-	_sKEmitterNodeSelSetParticleSpeedRange = objc.RegisterName("setParticleSpeedRange:")
-	_sKEmitterNodeSelEmissionAngle = objc.RegisterName("emissionAngle")
-	_sKEmitterNodeSelSetEmissionAngle = objc.RegisterName("setEmissionAngle:")
-	_sKEmitterNodeSelEmissionAngleRange = objc.RegisterName("emissionAngleRange")
-	_sKEmitterNodeSelSetEmissionAngleRange = objc.RegisterName("setEmissionAngleRange:")
-	_sKEmitterNodeSelXAcceleration = objc.RegisterName("xAcceleration")
-	_sKEmitterNodeSelSetXAcceleration = objc.RegisterName("setXAcceleration:")
-	_sKEmitterNodeSelYAcceleration = objc.RegisterName("yAcceleration")
-	_sKEmitterNodeSelSetYAcceleration = objc.RegisterName("setYAcceleration:")
-	_sKEmitterNodeSelParticleBirthRate = objc.RegisterName("particleBirthRate")
-	_sKEmitterNodeSelSetParticleBirthRate = objc.RegisterName("setParticleBirthRate:")
-	_sKEmitterNodeSelNumParticlesToEmit = objc.RegisterName("numParticlesToEmit")
-	_sKEmitterNodeSelSetNumParticlesToEmit = objc.RegisterName("setNumParticlesToEmit:")
-	_sKEmitterNodeSelParticleLifetime = objc.RegisterName("particleLifetime")
-	_sKEmitterNodeSelSetParticleLifetime = objc.RegisterName("setParticleLifetime:")
-	_sKEmitterNodeSelParticleLifetimeRange = objc.RegisterName("particleLifetimeRange")
-	_sKEmitterNodeSelSetParticleLifetimeRange = objc.RegisterName("setParticleLifetimeRange:")
-	_sKEmitterNodeSelParticleRotation = objc.RegisterName("particleRotation")
-	_sKEmitterNodeSelSetParticleRotation = objc.RegisterName("setParticleRotation:")
-	_sKEmitterNodeSelParticleRotationRange = objc.RegisterName("particleRotationRange")
-	_sKEmitterNodeSelSetParticleRotationRange = objc.RegisterName("setParticleRotationRange:")
-	_sKEmitterNodeSelParticleRotationSpeed = objc.RegisterName("particleRotationSpeed")
-	_sKEmitterNodeSelSetParticleRotationSpeed = objc.RegisterName("setParticleRotationSpeed:")
-	_sKEmitterNodeSelParticleSize = objc.RegisterName("particleSize")
-	_sKEmitterNodeSelSetParticleSize = objc.RegisterName("setParticleSize:")
-	_sKEmitterNodeSelParticleScale = objc.RegisterName("particleScale")
-	_sKEmitterNodeSelSetParticleScale = objc.RegisterName("setParticleScale:")
-	_sKEmitterNodeSelParticleScaleRange = objc.RegisterName("particleScaleRange")
-	_sKEmitterNodeSelSetParticleScaleRange = objc.RegisterName("setParticleScaleRange:")
-	_sKEmitterNodeSelParticleScaleSpeed = objc.RegisterName("particleScaleSpeed")
-	_sKEmitterNodeSelSetParticleScaleSpeed = objc.RegisterName("setParticleScaleSpeed:")
-	_sKEmitterNodeSelParticleScaleSequence = objc.RegisterName("particleScaleSequence")
-	_sKEmitterNodeSelSetParticleScaleSequence = objc.RegisterName("setParticleScaleSequence:")
-	_sKEmitterNodeSelParticleAlpha = objc.RegisterName("particleAlpha")
-	_sKEmitterNodeSelSetParticleAlpha = objc.RegisterName("setParticleAlpha:")
-	_sKEmitterNodeSelParticleAlphaRange = objc.RegisterName("particleAlphaRange")
-	_sKEmitterNodeSelSetParticleAlphaRange = objc.RegisterName("setParticleAlphaRange:")
-	_sKEmitterNodeSelParticleAlphaSpeed = objc.RegisterName("particleAlphaSpeed")
-	_sKEmitterNodeSelSetParticleAlphaSpeed = objc.RegisterName("setParticleAlphaSpeed:")
-	_sKEmitterNodeSelParticleAlphaSequence = objc.RegisterName("particleAlphaSequence")
-	_sKEmitterNodeSelSetParticleAlphaSequence = objc.RegisterName("setParticleAlphaSequence:")
-	_sKEmitterNodeSelParticleAction = objc.RegisterName("particleAction")
-	_sKEmitterNodeSelSetParticleAction = objc.RegisterName("setParticleAction:")
-	_sKEmitterNodeSelFieldBitMask = objc.RegisterName("fieldBitMask")
-	_sKEmitterNodeSelSetFieldBitMask = objc.RegisterName("setFieldBitMask:")
-	_sKEmitterNodeSelTargetNode = objc.RegisterName("targetNode")
-	_sKEmitterNodeSelSetTargetNode = objc.RegisterName("setTargetNode:")
-	_sKEmitterNodeSelShader = objc.RegisterName("shader")
-	_sKEmitterNodeSelSetShader = objc.RegisterName("setShader:")
-	_sKEmitterNodeSelParticleZPosition = objc.RegisterName("particleZPosition")
-	_sKEmitterNodeSelSetParticleZPosition = objc.RegisterName("setParticleZPosition:")
-	_sKEmitterNodeSelParticleRenderOrder = objc.RegisterName("particleRenderOrder")
-	_sKEmitterNodeSelSetParticleRenderOrder = objc.RegisterName("setParticleRenderOrder:")
-	_sKEmitterNodeSelParticleZPositionRange = objc.RegisterName("particleZPositionRange")
-	_sKEmitterNodeSelSetParticleZPositionRange = objc.RegisterName("setParticleZPositionRange:")
-	_sKEmitterNodeSelParticleZPositionSpeed = objc.RegisterName("particleZPositionSpeed")
-	_sKEmitterNodeSelSetParticleZPositionSpeed = objc.RegisterName("setParticleZPositionSpeed:")
+	_sKEmitterNodeSelParticlePosition                    = objc.RegisterName("particlePosition")
+	_sKEmitterNodeSelSetParticlePosition                 = objc.RegisterName("setParticlePosition:")
+	_sKEmitterNodeSelParticlePositionRange               = objc.RegisterName("particlePositionRange")
+	_sKEmitterNodeSelSetParticlePositionRange            = objc.RegisterName("setParticlePositionRange:")
+	_sKEmitterNodeSelParticleSpeed                       = objc.RegisterName("particleSpeed")
+	_sKEmitterNodeSelSetParticleSpeed                    = objc.RegisterName("setParticleSpeed:")
+	_sKEmitterNodeSelParticleSpeedRange                  = objc.RegisterName("particleSpeedRange")
+	_sKEmitterNodeSelSetParticleSpeedRange               = objc.RegisterName("setParticleSpeedRange:")
+	_sKEmitterNodeSelEmissionAngle                       = objc.RegisterName("emissionAngle")
+	_sKEmitterNodeSelSetEmissionAngle                    = objc.RegisterName("setEmissionAngle:")
+	_sKEmitterNodeSelEmissionAngleRange                  = objc.RegisterName("emissionAngleRange")
+	_sKEmitterNodeSelSetEmissionAngleRange               = objc.RegisterName("setEmissionAngleRange:")
+	_sKEmitterNodeSelXAcceleration                       = objc.RegisterName("xAcceleration")
+	_sKEmitterNodeSelSetXAcceleration                    = objc.RegisterName("setXAcceleration:")
+	_sKEmitterNodeSelYAcceleration                       = objc.RegisterName("yAcceleration")
+	_sKEmitterNodeSelSetYAcceleration                    = objc.RegisterName("setYAcceleration:")
+	_sKEmitterNodeSelParticleBirthRate                   = objc.RegisterName("particleBirthRate")
+	_sKEmitterNodeSelSetParticleBirthRate                = objc.RegisterName("setParticleBirthRate:")
+	_sKEmitterNodeSelNumParticlesToEmit                  = objc.RegisterName("numParticlesToEmit")
+	_sKEmitterNodeSelSetNumParticlesToEmit               = objc.RegisterName("setNumParticlesToEmit:")
+	_sKEmitterNodeSelParticleLifetime                    = objc.RegisterName("particleLifetime")
+	_sKEmitterNodeSelSetParticleLifetime                 = objc.RegisterName("setParticleLifetime:")
+	_sKEmitterNodeSelParticleLifetimeRange               = objc.RegisterName("particleLifetimeRange")
+	_sKEmitterNodeSelSetParticleLifetimeRange            = objc.RegisterName("setParticleLifetimeRange:")
+	_sKEmitterNodeSelParticleRotation                    = objc.RegisterName("particleRotation")
+	_sKEmitterNodeSelSetParticleRotation                 = objc.RegisterName("setParticleRotation:")
+	_sKEmitterNodeSelParticleRotationRange               = objc.RegisterName("particleRotationRange")
+	_sKEmitterNodeSelSetParticleRotationRange            = objc.RegisterName("setParticleRotationRange:")
+	_sKEmitterNodeSelParticleRotationSpeed               = objc.RegisterName("particleRotationSpeed")
+	_sKEmitterNodeSelSetParticleRotationSpeed            = objc.RegisterName("setParticleRotationSpeed:")
+	_sKEmitterNodeSelParticleSize                        = objc.RegisterName("particleSize")
+	_sKEmitterNodeSelSetParticleSize                     = objc.RegisterName("setParticleSize:")
+	_sKEmitterNodeSelParticleScale                       = objc.RegisterName("particleScale")
+	_sKEmitterNodeSelSetParticleScale                    = objc.RegisterName("setParticleScale:")
+	_sKEmitterNodeSelParticleScaleRange                  = objc.RegisterName("particleScaleRange")
+	_sKEmitterNodeSelSetParticleScaleRange               = objc.RegisterName("setParticleScaleRange:")
+	_sKEmitterNodeSelParticleScaleSpeed                  = objc.RegisterName("particleScaleSpeed")
+	_sKEmitterNodeSelSetParticleScaleSpeed               = objc.RegisterName("setParticleScaleSpeed:")
+	_sKEmitterNodeSelParticleScaleSequence               = objc.RegisterName("particleScaleSequence")
+	_sKEmitterNodeSelSetParticleScaleSequence            = objc.RegisterName("setParticleScaleSequence:")
+	_sKEmitterNodeSelParticleAlpha                       = objc.RegisterName("particleAlpha")
+	_sKEmitterNodeSelSetParticleAlpha                    = objc.RegisterName("setParticleAlpha:")
+	_sKEmitterNodeSelParticleAlphaRange                  = objc.RegisterName("particleAlphaRange")
+	_sKEmitterNodeSelSetParticleAlphaRange               = objc.RegisterName("setParticleAlphaRange:")
+	_sKEmitterNodeSelParticleAlphaSpeed                  = objc.RegisterName("particleAlphaSpeed")
+	_sKEmitterNodeSelSetParticleAlphaSpeed               = objc.RegisterName("setParticleAlphaSpeed:")
+	_sKEmitterNodeSelParticleAlphaSequence               = objc.RegisterName("particleAlphaSequence")
+	_sKEmitterNodeSelSetParticleAlphaSequence            = objc.RegisterName("setParticleAlphaSequence:")
+	_sKEmitterNodeSelParticleAction                      = objc.RegisterName("particleAction")
+	_sKEmitterNodeSelSetParticleAction                   = objc.RegisterName("setParticleAction:")
+	_sKEmitterNodeSelFieldBitMask                        = objc.RegisterName("fieldBitMask")
+	_sKEmitterNodeSelSetFieldBitMask                     = objc.RegisterName("setFieldBitMask:")
+	_sKEmitterNodeSelTargetNode                          = objc.RegisterName("targetNode")
+	_sKEmitterNodeSelSetTargetNode                       = objc.RegisterName("setTargetNode:")
+	_sKEmitterNodeSelShader                              = objc.RegisterName("shader")
+	_sKEmitterNodeSelSetShader                           = objc.RegisterName("setShader:")
+	_sKEmitterNodeSelParticleZPosition                   = objc.RegisterName("particleZPosition")
+	_sKEmitterNodeSelSetParticleZPosition                = objc.RegisterName("setParticleZPosition:")
+	_sKEmitterNodeSelParticleRenderOrder                 = objc.RegisterName("particleRenderOrder")
+	_sKEmitterNodeSelSetParticleRenderOrder              = objc.RegisterName("setParticleRenderOrder:")
+	_sKEmitterNodeSelParticleZPositionRange              = objc.RegisterName("particleZPositionRange")
+	_sKEmitterNodeSelSetParticleZPositionRange           = objc.RegisterName("setParticleZPositionRange:")
+	_sKEmitterNodeSelParticleZPositionSpeed              = objc.RegisterName("particleZPositionSpeed")
+	_sKEmitterNodeSelSetParticleZPositionSpeed           = objc.RegisterName("setParticleZPositionSpeed:")
 )
 
 func SKEmitterNodeFromID(id objc.ID) *SKEmitterNode {
@@ -141,7 +141,9 @@ func (o *SKEmitterNode) ResetSimulation() {
 // The texture to be used for the particles.
 func (o *SKEmitterNode) ParticleTexture() *SKTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKEmitterNodeSelParticleTexture)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTextureFromID(_ret)
 }
 
@@ -162,7 +164,9 @@ func (o *SKEmitterNode) SetParticleBlendMode(particleBlendMode SKBlendMode) {
 // The starting color for each particle. Defaults to clear.
 func (o *SKEmitterNode) ParticleColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKEmitterNodeSelParticleColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -246,7 +250,9 @@ func (o *SKEmitterNode) SetParticleColorAlphaSpeed(particleColorAlphaSpeed float
 
 func (o *SKEmitterNode) ParticleColorSequence() *SKKeyframeSequence {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKEmitterNodeSelParticleColorSequence)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKKeyframeSequenceFromID(_ret)
 }
 
@@ -286,7 +292,9 @@ func (o *SKEmitterNode) SetParticleColorBlendFactorSpeed(particleColorBlendFacto
 
 func (o *SKEmitterNode) ParticleColorBlendFactorSequence() *SKKeyframeSequence {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKEmitterNodeSelParticleColorBlendFactorSequence)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKKeyframeSequenceFromID(_ret)
 }
 
@@ -485,7 +493,9 @@ func (o *SKEmitterNode) SetParticleScaleSpeed(particleScaleSpeed float64) {
 
 func (o *SKEmitterNode) ParticleScaleSequence() *SKKeyframeSequence {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKEmitterNodeSelParticleScaleSequence)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKKeyframeSequenceFromID(_ret)
 }
 
@@ -525,7 +535,9 @@ func (o *SKEmitterNode) SetParticleAlphaSpeed(particleAlphaSpeed float64) {
 
 func (o *SKEmitterNode) ParticleAlphaSequence() *SKKeyframeSequence {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKEmitterNodeSelParticleAlphaSequence)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKKeyframeSequenceFromID(_ret)
 }
 
@@ -536,7 +548,9 @@ func (o *SKEmitterNode) SetParticleAlphaSequence(particleAlphaSequence *SKKeyfra
 // Specifies an action executed by new particles.
 func (o *SKEmitterNode) ParticleAction() *SKAction {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKEmitterNodeSelParticleAction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKActionFromID(_ret)
 }
 
@@ -557,7 +571,9 @@ func (o *SKEmitterNode) SetFieldBitMask(fieldBitMask uint32) {
 // Normally the particles are rendered as if they were a child of the SKEmitterNode, they can also be rendered as if they were a child of any other node in the scene by setting the targetNode property. Defaults to nil (standard behavior).
 func (o *SKEmitterNode) TargetNode() *SKNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKEmitterNodeSelTargetNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKNodeFromID(_ret)
 }
 
@@ -567,7 +583,9 @@ func (o *SKEmitterNode) SetTargetNode(targetNode *SKNode) {
 
 func (o *SKEmitterNode) Shader() *SKShader {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKEmitterNodeSelShader)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKShaderFromID(_ret)
 }
 
@@ -618,4 +636,3 @@ func (o *SKEmitterNode) ParticleZPositionSpeed() float64 {
 func (o *SKEmitterNode) SetParticleZPositionSpeed(particleZPositionSpeed float64) {
 	o.Ptr().Send(_sKEmitterNodeSelSetParticleZPositionSpeed, particleZPositionSpeed)
 }
-

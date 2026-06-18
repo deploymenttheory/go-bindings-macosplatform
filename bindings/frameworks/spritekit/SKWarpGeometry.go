@@ -26,4 +26,3 @@ func SKWarpGeometryFromID(id objc.ID) *SKWarpGeometry {
 	purego.Track(o)
 	return o
 }
-

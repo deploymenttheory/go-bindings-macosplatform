@@ -15,18 +15,18 @@ type SCNCone struct {
 }
 
 var (
-	_clsSCNCone = _objcClass("SCNCone")
+	_clsSCNCone                                    = _objcClass("SCNCone")
 	_sCNConeSelConeWithTopRadiusBottomRadiusHeight = objc.RegisterName("coneWithTopRadius:bottomRadius:height:")
-	_sCNConeSelTopRadius = objc.RegisterName("topRadius")
-	_sCNConeSelSetTopRadius = objc.RegisterName("setTopRadius:")
-	_sCNConeSelBottomRadius = objc.RegisterName("bottomRadius")
-	_sCNConeSelSetBottomRadius = objc.RegisterName("setBottomRadius:")
-	_sCNConeSelHeight = objc.RegisterName("height")
-	_sCNConeSelSetHeight = objc.RegisterName("setHeight:")
-	_sCNConeSelRadialSegmentCount = objc.RegisterName("radialSegmentCount")
-	_sCNConeSelSetRadialSegmentCount = objc.RegisterName("setRadialSegmentCount:")
-	_sCNConeSelHeightSegmentCount = objc.RegisterName("heightSegmentCount")
-	_sCNConeSelSetHeightSegmentCount = objc.RegisterName("setHeightSegmentCount:")
+	_sCNConeSelTopRadius                           = objc.RegisterName("topRadius")
+	_sCNConeSelSetTopRadius                        = objc.RegisterName("setTopRadius:")
+	_sCNConeSelBottomRadius                        = objc.RegisterName("bottomRadius")
+	_sCNConeSelSetBottomRadius                     = objc.RegisterName("setBottomRadius:")
+	_sCNConeSelHeight                              = objc.RegisterName("height")
+	_sCNConeSelSetHeight                           = objc.RegisterName("setHeight:")
+	_sCNConeSelRadialSegmentCount                  = objc.RegisterName("radialSegmentCount")
+	_sCNConeSelSetRadialSegmentCount               = objc.RegisterName("setRadialSegmentCount:")
+	_sCNConeSelHeightSegmentCount                  = objc.RegisterName("heightSegmentCount")
+	_sCNConeSelSetHeightSegmentCount               = objc.RegisterName("setHeightSegmentCount:")
 )
 
 func SCNConeFromID(id objc.ID) *SCNCone {
@@ -42,7 +42,9 @@ func SCNConeFromID(id objc.ID) *SCNCone {
 // @method coneWithTopRadius:bottomRadius:height: @abstract Creates and returns a cone with given top radius, bottom radius and height. @param topRadius The radius at the top of the cone. @param bottomRadius The radius at the bottom of the cone. @param height The height of the cone.
 func SCNConeConeWithTopRadiusBottomRadiusHeight(topRadius float64, bottomRadius float64, height float64) *SCNCone {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNCone), _sCNConeSelConeWithTopRadiusBottomRadiusHeight, topRadius, bottomRadius, height)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNConeFromID(_ret)
 }
 
@@ -95,4 +97,3 @@ func (o *SCNCone) HeightSegmentCount() int {
 func (o *SCNCone) SetHeightSegmentCount(heightSegmentCount int) {
 	o.Ptr().Send(_sCNConeSelSetHeightSegmentCount, heightSegmentCount)
 }
-

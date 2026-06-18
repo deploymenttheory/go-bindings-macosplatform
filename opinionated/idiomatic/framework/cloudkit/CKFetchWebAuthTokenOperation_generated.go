@@ -157,9 +157,13 @@ func (x *FetchWebAuthTokenOperation) SetFetchWebAuthTokenCompletionBlock(ctx con
 	}
 }
 
-func (x *FetchWebAuthTokenOperation) asDatabaseOperation() *raw.CKDatabaseOperation { return &x.inner.CKDatabaseOperation }
+func (x *FetchWebAuthTokenOperation) asDatabaseOperation() *raw.CKDatabaseOperation {
+	return &x.inner.CKDatabaseOperation
+}
 
-func (x *FetchWebAuthTokenOperation) asOperation() *raw.CKOperation { return &x.inner.CKDatabaseOperation.CKOperation }
+func (x *FetchWebAuthTokenOperation) asOperation() *raw.CKOperation {
+	return &x.inner.CKDatabaseOperation.CKOperation
+}
 
 // FetchWebAuthTokenOperationable is the interface implemented by [FetchWebAuthTokenOperation], for mocking and DI.
 type FetchWebAuthTokenOperationable interface {
@@ -182,4 +186,3 @@ type FetchWebAuthTokenOperationable interface {
 }
 
 var _ FetchWebAuthTokenOperationable = (*FetchWebAuthTokenOperation)(nil)
-

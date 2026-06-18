@@ -25,4 +25,3 @@ func NSPurgeableDataFromID(id objc.ID) *NSPurgeableData {
 	purego.Track(o)
 	return o
 }
-

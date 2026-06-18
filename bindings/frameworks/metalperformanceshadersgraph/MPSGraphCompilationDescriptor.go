@@ -18,23 +18,23 @@ type MPSGraphCompilationDescriptor struct {
 }
 
 var (
-	_clsMPSGraphCompilationDescriptor = _objcClass("MPSGraphCompilationDescriptor")
-	_mPSGraphCompilationDescriptorSelDisableTypeInference = objc.RegisterName("disableTypeInference")
-	_mPSGraphCompilationDescriptorSelConvertLayoutToNHWC = objc.RegisterName("convertLayoutToNHWC")
-	_mPSGraphCompilationDescriptorSelOptimizationLevel = objc.RegisterName("optimizationLevel")
-	_mPSGraphCompilationDescriptorSelSetOptimizationLevel = objc.RegisterName("setOptimizationLevel:")
-	_mPSGraphCompilationDescriptorSelWaitForCompilationCompletion = objc.RegisterName("waitForCompilationCompletion")
+	_clsMPSGraphCompilationDescriptor                                = _objcClass("MPSGraphCompilationDescriptor")
+	_mPSGraphCompilationDescriptorSelDisableTypeInference            = objc.RegisterName("disableTypeInference")
+	_mPSGraphCompilationDescriptorSelConvertLayoutToNHWC             = objc.RegisterName("convertLayoutToNHWC")
+	_mPSGraphCompilationDescriptorSelOptimizationLevel               = objc.RegisterName("optimizationLevel")
+	_mPSGraphCompilationDescriptorSelSetOptimizationLevel            = objc.RegisterName("setOptimizationLevel:")
+	_mPSGraphCompilationDescriptorSelWaitForCompilationCompletion    = objc.RegisterName("waitForCompilationCompletion")
 	_mPSGraphCompilationDescriptorSelSetWaitForCompilationCompletion = objc.RegisterName("setWaitForCompilationCompletion:")
-	_mPSGraphCompilationDescriptorSelCompilationCompletionHandler = objc.RegisterName("compilationCompletionHandler")
+	_mPSGraphCompilationDescriptorSelCompilationCompletionHandler    = objc.RegisterName("compilationCompletionHandler")
 	_mPSGraphCompilationDescriptorSelSetCompilationCompletionHandler = objc.RegisterName("setCompilationCompletionHandler:")
-	_mPSGraphCompilationDescriptorSelDispatchQueue = objc.RegisterName("dispatchQueue")
-	_mPSGraphCompilationDescriptorSelSetDispatchQueue = objc.RegisterName("setDispatchQueue:")
-	_mPSGraphCompilationDescriptorSelOptimizationProfile = objc.RegisterName("optimizationProfile")
-	_mPSGraphCompilationDescriptorSelSetOptimizationProfile = objc.RegisterName("setOptimizationProfile:")
-	_mPSGraphCompilationDescriptorSelCallables = objc.RegisterName("callables")
-	_mPSGraphCompilationDescriptorSelSetCallables = objc.RegisterName("setCallables:")
-	_mPSGraphCompilationDescriptorSelReducedPrecisionFastMath = objc.RegisterName("reducedPrecisionFastMath")
-	_mPSGraphCompilationDescriptorSelSetReducedPrecisionFastMath = objc.RegisterName("setReducedPrecisionFastMath:")
+	_mPSGraphCompilationDescriptorSelDispatchQueue                   = objc.RegisterName("dispatchQueue")
+	_mPSGraphCompilationDescriptorSelSetDispatchQueue                = objc.RegisterName("setDispatchQueue:")
+	_mPSGraphCompilationDescriptorSelOptimizationProfile             = objc.RegisterName("optimizationProfile")
+	_mPSGraphCompilationDescriptorSelSetOptimizationProfile          = objc.RegisterName("setOptimizationProfile:")
+	_mPSGraphCompilationDescriptorSelCallables                       = objc.RegisterName("callables")
+	_mPSGraphCompilationDescriptorSelSetCallables                    = objc.RegisterName("setCallables:")
+	_mPSGraphCompilationDescriptorSelReducedPrecisionFastMath        = objc.RegisterName("reducedPrecisionFastMath")
+	_mPSGraphCompilationDescriptorSelSetReducedPrecisionFastMath     = objc.RegisterName("setReducedPrecisionFastMath:")
 )
 
 func MPSGraphCompilationDescriptorFromID(id objc.ID) *MPSGraphCompilationDescriptor {
@@ -100,7 +100,9 @@ func (o *MPSGraphCompilationDescriptor) SetCompilationCompletionHandler(compilat
 // The dispatch queue used for the compilation. Default value is nil.
 func (o *MPSGraphCompilationDescriptor) DispatchQueue() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphCompilationDescriptorSelDispatchQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
@@ -119,7 +121,7 @@ func (o *MPSGraphCompilationDescriptor) SetOptimizationProfile(optimizationProfi
 	o.Ptr().Send(_mPSGraphCompilationDescriptorSelSetOptimizationProfile, optimizationProfile)
 }
 
-// The dictionary used during runtime to lookup the ``MPSGraphExecutable`` which correspond to the ``symbolName``.
+// The dictionary used during runtime to lookup the “MPSGraphExecutable“ which correspond to the “symbolName“.
 func (o *MPSGraphCompilationDescriptor) Callables() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mPSGraphCompilationDescriptorSelCallables)
 	return _ret
@@ -138,4 +140,3 @@ func (o *MPSGraphCompilationDescriptor) ReducedPrecisionFastMath() MPSGraphReduc
 func (o *MPSGraphCompilationDescriptor) SetReducedPrecisionFastMath(reducedPrecisionFastMath MPSGraphReducedPrecisionFastMath) {
 	o.Ptr().Send(_mPSGraphCompilationDescriptorSelSetReducedPrecisionFastMath, reducedPrecisionFastMath)
 }
-

@@ -152,7 +152,9 @@ func (x *RotationGestureRecognizer) SetRotationInDegrees(rotationInDegrees float
 	x.inner.SetRotationInDegrees(rotationInDegrees)
 }
 
-func (x *RotationGestureRecognizer) asGestureRecognizer() *raw.NSGestureRecognizer { return &x.inner.NSGestureRecognizer }
+func (x *RotationGestureRecognizer) asGestureRecognizer() *raw.NSGestureRecognizer {
+	return &x.inner.NSGestureRecognizer
+}
 
 // RotationGestureRecognizerable is the interface implemented by [RotationGestureRecognizer], for mocking and DI.
 type RotationGestureRecognizerable interface {
@@ -180,4 +182,3 @@ type RotationGestureRecognizerable interface {
 }
 
 var _ RotationGestureRecognizerable = (*RotationGestureRecognizer)(nil)
-

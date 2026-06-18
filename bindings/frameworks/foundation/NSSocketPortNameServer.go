@@ -16,12 +16,12 @@ type NSSocketPortNameServer struct {
 }
 
 var (
-	_clsNSSocketPortNameServer = _objcClass("NSSocketPortNameServer")
-	_nSSocketPortNameServerSelSharedInstance = objc.RegisterName("sharedInstance")
-	_nSSocketPortNameServerSelPortForNameHostNameServerPortNumber = objc.RegisterName("portForName:host:nameServerPortNumber:")
+	_clsNSSocketPortNameServer                                     = _objcClass("NSSocketPortNameServer")
+	_nSSocketPortNameServerSelSharedInstance                       = objc.RegisterName("sharedInstance")
+	_nSSocketPortNameServerSelPortForNameHostNameServerPortNumber  = objc.RegisterName("portForName:host:nameServerPortNumber:")
 	_nSSocketPortNameServerSelRegisterPortNameNameServerPortNumber = objc.RegisterName("registerPort:name:nameServerPortNumber:")
-	_nSSocketPortNameServerSelDefaultNameServerPortNumber = objc.RegisterName("defaultNameServerPortNumber")
-	_nSSocketPortNameServerSelSetDefaultNameServerPortNumber = objc.RegisterName("setDefaultNameServerPortNumber:")
+	_nSSocketPortNameServerSelDefaultNameServerPortNumber          = objc.RegisterName("defaultNameServerPortNumber")
+	_nSSocketPortNameServerSelSetDefaultNameServerPortNumber       = objc.RegisterName("setDefaultNameServerPortNumber:")
 )
 
 func NSSocketPortNameServerFromID(id objc.ID) *NSSocketPortNameServer {
@@ -41,7 +41,9 @@ func NSSocketPortNameServerSharedInstance() objc.ID {
 
 func (o *NSSocketPortNameServer) PortForNameHostNameServerPortNumber(name *NSString, host *NSString, portNumber uint16) *NSPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSocketPortNameServerSelPortForNameHostNameServerPortNumber, name.Ptr(), host.Ptr(), portNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPortFromID(_ret)
 }
 
@@ -58,4 +60,3 @@ func (o *NSSocketPortNameServer) DefaultNameServerPortNumber() uint16 {
 func (o *NSSocketPortNameServer) SetDefaultNameServerPortNumber(defaultNameServerPortNumber uint16) {
 	o.Ptr().Send(_nSSocketPortNameServerSelSetDefaultNameServerPortNumber, defaultNameServerPortNumber)
 }
-

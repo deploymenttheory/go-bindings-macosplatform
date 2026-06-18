@@ -74,4 +74,3 @@ type EnvelopeSegmentable interface {
 }
 
 var _ EnvelopeSegmentable = (*EnvelopeSegment)(nil)
-

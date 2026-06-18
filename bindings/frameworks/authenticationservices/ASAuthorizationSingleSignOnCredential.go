@@ -16,13 +16,13 @@ type ASAuthorizationSingleSignOnCredential struct {
 }
 
 var (
-	_clsASAuthorizationSingleSignOnCredential = _objcClass("ASAuthorizationSingleSignOnCredential")
-	_aSAuthorizationSingleSignOnCredentialSelState = objc.RegisterName("state")
-	_aSAuthorizationSingleSignOnCredentialSelAccessToken = objc.RegisterName("accessToken")
-	_aSAuthorizationSingleSignOnCredentialSelIdentityToken = objc.RegisterName("identityToken")
-	_aSAuthorizationSingleSignOnCredentialSelAuthorizedScopes = objc.RegisterName("authorizedScopes")
+	_clsASAuthorizationSingleSignOnCredential                      = _objcClass("ASAuthorizationSingleSignOnCredential")
+	_aSAuthorizationSingleSignOnCredentialSelState                 = objc.RegisterName("state")
+	_aSAuthorizationSingleSignOnCredentialSelAccessToken           = objc.RegisterName("accessToken")
+	_aSAuthorizationSingleSignOnCredentialSelIdentityToken         = objc.RegisterName("identityToken")
+	_aSAuthorizationSingleSignOnCredentialSelAuthorizedScopes      = objc.RegisterName("authorizedScopes")
 	_aSAuthorizationSingleSignOnCredentialSelAuthenticatedResponse = objc.RegisterName("authenticatedResponse")
-	_aSAuthorizationSingleSignOnCredentialSelPrivateKeys = objc.RegisterName("privateKeys")
+	_aSAuthorizationSingleSignOnCredentialSelPrivateKeys           = objc.RegisterName("privateKeys")
 )
 
 func ASAuthorizationSingleSignOnCredentialFromID(id objc.ID) *ASAuthorizationSingleSignOnCredential {
@@ -38,21 +38,27 @@ func ASAuthorizationSingleSignOnCredentialFromID(id objc.ID) *ASAuthorizationSin
 // @abstract A state returned from the AuthenticationServices extension.
 func (o *ASAuthorizationSingleSignOnCredential) State() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationSingleSignOnCredentialSelState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract An access token used to access other systems with the authorized scopes.
 func (o *ASAuthorizationSingleSignOnCredential) AccessToken() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationSingleSignOnCredentialSelAccessToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @abstract A JSON Web Token (JWT) used to communicate information about the identity of the user in a secure way to the app.
 func (o *ASAuthorizationSingleSignOnCredential) IdentityToken() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationSingleSignOnCredentialSelIdentityToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -65,7 +71,9 @@ func (o *ASAuthorizationSingleSignOnCredential) AuthorizedScopes() *foundation.N
 // @abstract The complete AuthenticationServices extension response with the additional outputs used by the specific technology used by the Authorization Server instance and AuthenticationServices Extension. @note for some operations all properties can be null and the response will indicate just successful result of the operation.
 func (o *ASAuthorizationSingleSignOnCredential) AuthenticatedResponse() *foundation.NSHTTPURLResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationSingleSignOnCredentialSelAuthenticatedResponse)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSHTTPURLResponseFromID(_ret)
 }
 
@@ -74,4 +82,3 @@ func (o *ASAuthorizationSingleSignOnCredential) PrivateKeys() *foundation.NSArra
 	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _aSAuthorizationSingleSignOnCredentialSelPrivateKeys)
 	return _ret
 }
-

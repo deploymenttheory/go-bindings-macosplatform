@@ -16,7 +16,9 @@ type MTRGroupsClusterRemoveGroupParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRGroupsClusterRemoveGroupParams].
-func (x *MTRGroupsClusterRemoveGroupParams) Unwrap() *raw.MTRGroupsClusterRemoveGroupParams { return x.inner }
+func (x *MTRGroupsClusterRemoveGroupParams) Unwrap() *raw.MTRGroupsClusterRemoveGroupParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -118,4 +120,3 @@ type MTRGroupsClusterRemoveGroupParamsable interface {
 }
 
 var _ MTRGroupsClusterRemoveGroupParamsable = (*MTRGroupsClusterRemoveGroupParams)(nil)
-

@@ -18,10 +18,10 @@ type PKIssuerProvisioningExtensionPassEntry struct {
 }
 
 var (
-	_clsPKIssuerProvisioningExtensionPassEntry = _objcClass("PKIssuerProvisioningExtensionPassEntry")
+	_clsPKIssuerProvisioningExtensionPassEntry           = _objcClass("PKIssuerProvisioningExtensionPassEntry")
 	_pKIssuerProvisioningExtensionPassEntrySelIdentifier = objc.RegisterName("identifier")
-	_pKIssuerProvisioningExtensionPassEntrySelTitle = objc.RegisterName("title")
-	_pKIssuerProvisioningExtensionPassEntrySelArt = objc.RegisterName("art")
+	_pKIssuerProvisioningExtensionPassEntrySelTitle      = objc.RegisterName("title")
+	_pKIssuerProvisioningExtensionPassEntrySelArt        = objc.RegisterName("art")
 )
 
 func PKIssuerProvisioningExtensionPassEntryFromID(id objc.ID) *PKIssuerProvisioningExtensionPassEntry {
@@ -36,13 +36,17 @@ func PKIssuerProvisioningExtensionPassEntryFromID(id objc.ID) *PKIssuerProvision
 
 func (o *PKIssuerProvisioningExtensionPassEntry) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKIssuerProvisioningExtensionPassEntrySelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKIssuerProvisioningExtensionPassEntry) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKIssuerProvisioningExtensionPassEntrySelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -50,4 +54,3 @@ func (o *PKIssuerProvisioningExtensionPassEntry) Art() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _pKIssuerProvisioningExtensionPassEntrySelArt)
 	return _ret
 }
-

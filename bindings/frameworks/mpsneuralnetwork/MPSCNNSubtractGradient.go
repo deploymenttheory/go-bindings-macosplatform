@@ -16,7 +16,7 @@ type MPSCNNSubtractGradient struct {
 }
 
 var (
-	_clsMPSCNNSubtractGradient = _objcClass("MPSCNNSubtractGradient")
+	_clsMPSCNNSubtractGradient                                      = _objcClass("MPSCNNSubtractGradient")
 	_mPSCNNSubtractGradientSelInitWithDeviceIsSecondarySourceFilter = objc.RegisterName("initWithDevice:isSecondarySourceFilter:")
 )
 
@@ -33,7 +33,8 @@ func MPSCNNSubtractGradientFromID(id objc.ID) *MPSCNNSubtractGradient {
 // @abstract  Initialize the subtraction gradient operator. @param     device                   The device the filter will run on. @param     isSecondarySourceFilter  A boolean indicating whether the arithmetic gradient filter is operating on the primary or secondary source image from the forward pass. @return    A valid MPSCNNSubtractGradient object or nil, if failure.
 func (o *MPSCNNSubtractGradient) InitWithDeviceIsSecondarySourceFilter(device metal.MTLDevice, isSecondarySourceFilter bool) *MPSCNNSubtractGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNSubtractGradientSelInitWithDeviceIsSecondarySourceFilter, device, isSecondarySourceFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNSubtractGradientFromID(_ret)
 }
-

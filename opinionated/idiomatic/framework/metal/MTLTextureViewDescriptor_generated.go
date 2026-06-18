@@ -137,4 +137,3 @@ type TextureViewDescriptorable interface {
 }
 
 var _ TextureViewDescriptorable = (*TextureViewDescriptor)(nil)
-

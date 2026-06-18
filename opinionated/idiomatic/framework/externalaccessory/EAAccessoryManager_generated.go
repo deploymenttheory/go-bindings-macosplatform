@@ -48,4 +48,3 @@ type AccessoryManagerable interface {
 }
 
 var _ AccessoryManagerable = (*AccessoryManager)(nil)
-

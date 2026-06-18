@@ -122,4 +122,3 @@ type WKWebExtensionCommandable interface {
 }
 
 var _ WKWebExtensionCommandable = (*WKWebExtensionCommand)(nil)
-

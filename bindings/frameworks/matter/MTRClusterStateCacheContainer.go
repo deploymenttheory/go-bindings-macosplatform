@@ -16,7 +16,7 @@ type MTRClusterStateCacheContainer struct {
 }
 
 var (
-	_clsMTRClusterStateCacheContainer = _objcClass("MTRClusterStateCacheContainer")
+	_clsMTRClusterStateCacheContainer                                                                = _objcClass("MTRClusterStateCacheContainer")
 	_mTRClusterStateCacheContainerSelReadAttributesWithEndpointIDClusterIDAttributeIDQueueCompletion = objc.RegisterName("readAttributesWithEndpointID:clusterID:attributeID:queue:completion:")
 )
 
@@ -34,4 +34,3 @@ func MTRClusterStateCacheContainerFromID(id objc.ID) *MTRClusterStateCacheContai
 func (o *MTRClusterStateCacheContainer) ReadAttributesWithEndpointIDClusterIDAttributeIDQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, attributeID *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block) {
 	o.Ptr().Send(_mTRClusterStateCacheContainerSelReadAttributesWithEndpointIDClusterIDAttributeIDQueueCompletion, endpointID.Ptr(), clusterID.Ptr(), attributeID.Ptr(), queue.Ptr(), completion)
 }
-

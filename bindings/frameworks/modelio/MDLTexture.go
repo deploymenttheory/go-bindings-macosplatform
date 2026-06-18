@@ -18,35 +18,35 @@ type MDLTexture struct {
 }
 
 var (
-	_clsMDLTexture = _objcClass("MDLTexture")
-	_mDLTextureSelInit = objc.RegisterName("init")
-	_mDLTextureSelTextureNamed = objc.RegisterName("textureNamed:")
-	_mDLTextureSelTextureNamedBundle = objc.RegisterName("textureNamed:bundle:")
-	_mDLTextureSelTextureNamedAssetResolver = objc.RegisterName("textureNamed:assetResolver:")
-	_mDLTextureSelTextureCubeWithImagesNamed = objc.RegisterName("textureCubeWithImagesNamed:")
-	_mDLTextureSelTextureCubeWithImagesNamedBundle = objc.RegisterName("textureCubeWithImagesNamed:bundle:")
-	_mDLTextureSelIrradianceTextureCubeWithTextureNameDimensions = objc.RegisterName("irradianceTextureCubeWithTexture:name:dimensions:")
-	_mDLTextureSelIrradianceTextureCubeWithTextureNameDimensionsRoughness = objc.RegisterName("irradianceTextureCubeWithTexture:name:dimensions:roughness:")
+	_clsMDLTexture                                                                                  = _objcClass("MDLTexture")
+	_mDLTextureSelInit                                                                              = objc.RegisterName("init")
+	_mDLTextureSelTextureNamed                                                                      = objc.RegisterName("textureNamed:")
+	_mDLTextureSelTextureNamedBundle                                                                = objc.RegisterName("textureNamed:bundle:")
+	_mDLTextureSelTextureNamedAssetResolver                                                         = objc.RegisterName("textureNamed:assetResolver:")
+	_mDLTextureSelTextureCubeWithImagesNamed                                                        = objc.RegisterName("textureCubeWithImagesNamed:")
+	_mDLTextureSelTextureCubeWithImagesNamedBundle                                                  = objc.RegisterName("textureCubeWithImagesNamed:bundle:")
+	_mDLTextureSelIrradianceTextureCubeWithTextureNameDimensions                                    = objc.RegisterName("irradianceTextureCubeWithTexture:name:dimensions:")
+	_mDLTextureSelIrradianceTextureCubeWithTextureNameDimensionsRoughness                           = objc.RegisterName("irradianceTextureCubeWithTexture:name:dimensions:roughness:")
 	_mDLTextureSelInitWithDataTopLeftOriginNameDimensionsRowStrideChannelCountChannelEncodingIsCube = objc.RegisterName("initWithData:topLeftOrigin:name:dimensions:rowStride:channelCount:channelEncoding:isCube:")
-	_mDLTextureSelWriteToURL = objc.RegisterName("writeToURL:")
-	_mDLTextureSelWriteToURLLevel = objc.RegisterName("writeToURL:level:")
-	_mDLTextureSelWriteToURLType = objc.RegisterName("writeToURL:type:")
-	_mDLTextureSelWriteToURLTypeLevel = objc.RegisterName("writeToURL:type:level:")
-	_mDLTextureSelImageFromTexture = objc.RegisterName("imageFromTexture")
-	_mDLTextureSelImageFromTextureAtLevel = objc.RegisterName("imageFromTextureAtLevel:")
-	_mDLTextureSelTexelDataWithTopLeftOrigin = objc.RegisterName("texelDataWithTopLeftOrigin")
-	_mDLTextureSelTexelDataWithBottomLeftOrigin = objc.RegisterName("texelDataWithBottomLeftOrigin")
-	_mDLTextureSelTexelDataWithTopLeftOriginAtMipLevelCreate = objc.RegisterName("texelDataWithTopLeftOriginAtMipLevel:create:")
-	_mDLTextureSelTexelDataWithBottomLeftOriginAtMipLevelCreate = objc.RegisterName("texelDataWithBottomLeftOriginAtMipLevel:create:")
-	_mDLTextureSelDimensions = objc.RegisterName("dimensions")
-	_mDLTextureSelRowStride = objc.RegisterName("rowStride")
-	_mDLTextureSelChannelCount = objc.RegisterName("channelCount")
-	_mDLTextureSelMipLevelCount = objc.RegisterName("mipLevelCount")
-	_mDLTextureSelChannelEncoding = objc.RegisterName("channelEncoding")
-	_mDLTextureSelIsCube = objc.RegisterName("isCube")
-	_mDLTextureSelSetIsCube = objc.RegisterName("setIsCube:")
-	_mDLTextureSelHasAlphaValues = objc.RegisterName("hasAlphaValues")
-	_mDLTextureSelSetHasAlphaValues = objc.RegisterName("setHasAlphaValues:")
+	_mDLTextureSelWriteToURL                                                                        = objc.RegisterName("writeToURL:")
+	_mDLTextureSelWriteToURLLevel                                                                   = objc.RegisterName("writeToURL:level:")
+	_mDLTextureSelWriteToURLType                                                                    = objc.RegisterName("writeToURL:type:")
+	_mDLTextureSelWriteToURLTypeLevel                                                               = objc.RegisterName("writeToURL:type:level:")
+	_mDLTextureSelImageFromTexture                                                                  = objc.RegisterName("imageFromTexture")
+	_mDLTextureSelImageFromTextureAtLevel                                                           = objc.RegisterName("imageFromTextureAtLevel:")
+	_mDLTextureSelTexelDataWithTopLeftOrigin                                                        = objc.RegisterName("texelDataWithTopLeftOrigin")
+	_mDLTextureSelTexelDataWithBottomLeftOrigin                                                     = objc.RegisterName("texelDataWithBottomLeftOrigin")
+	_mDLTextureSelTexelDataWithTopLeftOriginAtMipLevelCreate                                        = objc.RegisterName("texelDataWithTopLeftOriginAtMipLevel:create:")
+	_mDLTextureSelTexelDataWithBottomLeftOriginAtMipLevelCreate                                     = objc.RegisterName("texelDataWithBottomLeftOriginAtMipLevel:create:")
+	_mDLTextureSelDimensions                                                                        = objc.RegisterName("dimensions")
+	_mDLTextureSelRowStride                                                                         = objc.RegisterName("rowStride")
+	_mDLTextureSelChannelCount                                                                      = objc.RegisterName("channelCount")
+	_mDLTextureSelMipLevelCount                                                                     = objc.RegisterName("mipLevelCount")
+	_mDLTextureSelChannelEncoding                                                                   = objc.RegisterName("channelEncoding")
+	_mDLTextureSelIsCube                                                                            = objc.RegisterName("isCube")
+	_mDLTextureSelSetIsCube                                                                         = objc.RegisterName("setIsCube:")
+	_mDLTextureSelHasAlphaValues                                                                    = objc.RegisterName("hasAlphaValues")
+	_mDLTextureSelSetHasAlphaValues                                                                 = objc.RegisterName("setHasAlphaValues:")
 )
 
 func MDLTextureFromID(id objc.ID) *MDLTexture {
@@ -61,57 +61,75 @@ func MDLTextureFromID(id objc.ID) *MDLTexture {
 
 func (o *MDLTexture) Init() *MDLTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTextureSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLTextureFromID(_ret)
 }
 
 // Creates a texture from a source in the main bundle named in a manner matching name.
 func MDLTextureTextureNamed(name *foundation.NSString) *MDLTexture {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMDLTexture), _mDLTextureSelTextureNamed, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLTextureFromID(_ret)
 }
 
 func MDLTextureTextureNamedBundle(name *foundation.NSString, bundleOrNil *foundation.NSBundle) *MDLTexture {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMDLTexture), _mDLTextureSelTextureNamedBundle, name.Ptr(), bundleOrNil.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLTextureFromID(_ret)
 }
 
 func MDLTextureTextureNamedAssetResolver(name *foundation.NSString, resolver MDLAssetResolver) *MDLTexture {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMDLTexture), _mDLTextureSelTextureNamedAssetResolver, name.Ptr(), resolver)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLTextureFromID(_ret)
 }
 
 // Creates a cube texture map image using 6 faces of the same dimensions, ordered +X,-X,+Y,-Y,+Z,-Z If the data is read back the image will be compacted into a single vertical stack where dimensions.y = 6 * dimensions.x isCube will return YES @param names a collection of mosaiced images in a cross formation or column or row. - If 6 individual images are given they are assumed to be in order and will be loaded as is. - if 3 images of double height or width are given they will be treated as pairs of + and - in each axis, the order is must be x, then y, then z. - if 2 images of triple height or width are given they will be treates as a positive set and a negative set in the order +x, +y, +z, then -x, -y, -z. - if a single image is given it will be used without conversion if in column orientation and demosaiced in all other instances.
 func MDLTextureTextureCubeWithImagesNamed(names *foundation.NSArray[*foundation.NSString]) *MDLTexture {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMDLTexture), _mDLTextureSelTextureCubeWithImagesNamed, names)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLTextureFromID(_ret)
 }
 
 func MDLTextureTextureCubeWithImagesNamedBundle(names *foundation.NSArray[*foundation.NSString], bundleOrNil *foundation.NSBundle) *MDLTexture {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMDLTexture), _mDLTextureSelTextureCubeWithImagesNamedBundle, names, bundleOrNil.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLTextureFromID(_ret)
 }
 
 func MDLTextureIrradianceTextureCubeWithTextureNameDimensions(texture *MDLTexture, name *foundation.NSString, dimensions unsafe.Pointer) *MDLTexture {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMDLTexture), _mDLTextureSelIrradianceTextureCubeWithTextureNameDimensions, texture.Ptr(), name.Ptr(), dimensions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLTextureFromID(_ret)
 }
 
 func MDLTextureIrradianceTextureCubeWithTextureNameDimensionsRoughness(texture *MDLTexture, name *foundation.NSString, dimensions unsafe.Pointer, roughness float32) *MDLTexture {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMDLTexture), _mDLTextureSelIrradianceTextureCubeWithTextureNameDimensionsRoughness, texture.Ptr(), name.Ptr(), dimensions, roughness)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLTextureFromID(_ret)
 }
 
 func (o *MDLTexture) InitWithDataTopLeftOriginNameDimensionsRowStrideChannelCountChannelEncodingIsCube(pixelData *foundation.NSData, topLeftOrigin bool, name *foundation.NSString, dimensions unsafe.Pointer, rowStride int, channelCount uint, channelEncoding MDLTextureChannelEncoding, isCube bool) *MDLTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTextureSelInitWithDataTopLeftOriginNameDimensionsRowStrideChannelCountChannelEncodingIsCube, pixelData.Ptr(), topLeftOrigin, name.Ptr(), dimensions, rowStride, channelCount, channelEncoding, isCube)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLTextureFromID(_ret)
 }
 
@@ -151,25 +169,33 @@ func (o *MDLTexture) ImageFromTextureAtLevel(level uint) unsafe.Pointer {
 
 func (o *MDLTexture) TexelDataWithTopLeftOrigin() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTextureSelTexelDataWithTopLeftOrigin)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *MDLTexture) TexelDataWithBottomLeftOrigin() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTextureSelTexelDataWithBottomLeftOrigin)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *MDLTexture) TexelDataWithTopLeftOriginAtMipLevelCreate(level int, create bool) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTextureSelTexelDataWithTopLeftOriginAtMipLevelCreate, level, create)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *MDLTexture) TexelDataWithBottomLeftOriginAtMipLevelCreate(level int, create bool) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTextureSelTexelDataWithBottomLeftOriginAtMipLevelCreate, level, create)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -216,4 +242,3 @@ func (o *MDLTexture) HasAlphaValues() bool {
 func (o *MDLTexture) SetHasAlphaValues(hasAlphaValues bool) {
 	o.Ptr().Send(_mDLTextureSelSetHasAlphaValues, hasAlphaValues)
 }
-

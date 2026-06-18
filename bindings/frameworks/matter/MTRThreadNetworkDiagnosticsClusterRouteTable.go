@@ -25,4 +25,3 @@ func MTRThreadNetworkDiagnosticsClusterRouteTableFromID(id objc.ID) *MTRThreadNe
 	purego.Track(o)
 	return o
 }
-

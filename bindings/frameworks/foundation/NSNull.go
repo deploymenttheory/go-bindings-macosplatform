@@ -15,7 +15,7 @@ type NSNull struct {
 }
 
 var (
-	_clsNSNull = _objcClass("NSNull")
+	_clsNSNull     = _objcClass("NSNull")
 	_nSNullSelNull = objc.RegisterName("null")
 )
 
@@ -31,7 +31,8 @@ func NSNullFromID(id objc.ID) *NSNull {
 
 func NSNullNull() *NSNull {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNull), _nSNullSelNull)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNullFromID(_ret)
 }
-

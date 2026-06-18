@@ -15,8 +15,8 @@ type INCallRecordTypeOptionsResolutionResult struct {
 }
 
 var (
-	_clsINCallRecordTypeOptionsResolutionResult = _objcClass("INCallRecordTypeOptionsResolutionResult")
-	_iNCallRecordTypeOptionsResolutionResultSelSuccessWithResolvedCallRecordTypeOptions = objc.RegisterName("successWithResolvedCallRecordTypeOptions:")
+	_clsINCallRecordTypeOptionsResolutionResult                                                       = _objcClass("INCallRecordTypeOptionsResolutionResult")
+	_iNCallRecordTypeOptionsResolutionResultSelSuccessWithResolvedCallRecordTypeOptions               = objc.RegisterName("successWithResolvedCallRecordTypeOptions:")
 	_iNCallRecordTypeOptionsResolutionResultSelConfirmationRequiredWithCallRecordTypeOptionsToConfirm = objc.RegisterName("confirmationRequiredWithCallRecordTypeOptionsToConfirm:")
 )
 
@@ -32,13 +32,16 @@ func INCallRecordTypeOptionsResolutionResultFromID(id objc.ID) *INCallRecordType
 
 func INCallRecordTypeOptionsResolutionResultSuccessWithResolvedCallRecordTypeOptions(resolvedCallRecordTypeOptions INCallRecordTypeOptions) *INCallRecordTypeOptionsResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINCallRecordTypeOptionsResolutionResult), _iNCallRecordTypeOptionsResolutionResultSelSuccessWithResolvedCallRecordTypeOptions, resolvedCallRecordTypeOptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INCallRecordTypeOptionsResolutionResultFromID(_ret)
 }
 
 func INCallRecordTypeOptionsResolutionResultConfirmationRequiredWithCallRecordTypeOptionsToConfirm(callRecordTypeOptionsToConfirm INCallRecordTypeOptions) *INCallRecordTypeOptionsResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINCallRecordTypeOptionsResolutionResult), _iNCallRecordTypeOptionsResolutionResultSelConfirmationRequiredWithCallRecordTypeOptionsToConfirm, callRecordTypeOptionsToConfirm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INCallRecordTypeOptionsResolutionResultFromID(_ret)
 }
-

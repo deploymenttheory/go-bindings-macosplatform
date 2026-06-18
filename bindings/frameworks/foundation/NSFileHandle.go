@@ -17,52 +17,52 @@ type NSFileHandle struct {
 }
 
 var (
-	_clsNSFileHandle = _objcClass("NSFileHandle")
-	_nSFileHandleSelInitWithFileDescriptorCloseOnDealloc = objc.RegisterName("initWithFileDescriptor:closeOnDealloc:")
-	_nSFileHandleSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSFileHandleSelReadDataToEndOfFileAndReturnError = objc.RegisterName("readDataToEndOfFileAndReturnError:")
-	_nSFileHandleSelReadDataUpToLengthError = objc.RegisterName("readDataUpToLength:error:")
-	_nSFileHandleSelWriteDataError = objc.RegisterName("writeData:error:")
-	_nSFileHandleSelGetOffsetError = objc.RegisterName("getOffset:error:")
-	_nSFileHandleSelSeekToEndReturningOffsetError = objc.RegisterName("seekToEndReturningOffset:error:")
-	_nSFileHandleSelSeekToOffsetError = objc.RegisterName("seekToOffset:error:")
-	_nSFileHandleSelTruncateAtOffsetError = objc.RegisterName("truncateAtOffset:error:")
-	_nSFileHandleSelSynchronizeAndReturnError = objc.RegisterName("synchronizeAndReturnError:")
-	_nSFileHandleSelCloseAndReturnError = objc.RegisterName("closeAndReturnError:")
-	_nSFileHandleSelAvailableData = objc.RegisterName("availableData")
-	_nSFileHandleSelFileHandleForReadingAtPath = objc.RegisterName("fileHandleForReadingAtPath:")
-	_nSFileHandleSelFileHandleForWritingAtPath = objc.RegisterName("fileHandleForWritingAtPath:")
-	_nSFileHandleSelFileHandleForUpdatingAtPath = objc.RegisterName("fileHandleForUpdatingAtPath:")
-	_nSFileHandleSelFileHandleForReadingFromURLError = objc.RegisterName("fileHandleForReadingFromURL:error:")
-	_nSFileHandleSelFileHandleForWritingToURLError = objc.RegisterName("fileHandleForWritingToURL:error:")
-	_nSFileHandleSelFileHandleForUpdatingURLError = objc.RegisterName("fileHandleForUpdatingURL:error:")
-	_nSFileHandleSelFileHandleWithStandardInput = objc.RegisterName("fileHandleWithStandardInput")
-	_nSFileHandleSelFileHandleWithStandardOutput = objc.RegisterName("fileHandleWithStandardOutput")
-	_nSFileHandleSelFileHandleWithStandardError = objc.RegisterName("fileHandleWithStandardError")
-	_nSFileHandleSelFileHandleWithNullDevice = objc.RegisterName("fileHandleWithNullDevice")
-	_nSFileHandleSelReadInBackgroundAndNotifyForModes = objc.RegisterName("readInBackgroundAndNotifyForModes:")
-	_nSFileHandleSelReadInBackgroundAndNotify = objc.RegisterName("readInBackgroundAndNotify")
-	_nSFileHandleSelReadToEndOfFileInBackgroundAndNotifyForModes = objc.RegisterName("readToEndOfFileInBackgroundAndNotifyForModes:")
-	_nSFileHandleSelReadToEndOfFileInBackgroundAndNotify = objc.RegisterName("readToEndOfFileInBackgroundAndNotify")
+	_clsNSFileHandle                                              = _objcClass("NSFileHandle")
+	_nSFileHandleSelInitWithFileDescriptorCloseOnDealloc          = objc.RegisterName("initWithFileDescriptor:closeOnDealloc:")
+	_nSFileHandleSelInitWithCoder                                 = objc.RegisterName("initWithCoder:")
+	_nSFileHandleSelReadDataToEndOfFileAndReturnError             = objc.RegisterName("readDataToEndOfFileAndReturnError:")
+	_nSFileHandleSelReadDataUpToLengthError                       = objc.RegisterName("readDataUpToLength:error:")
+	_nSFileHandleSelWriteDataError                                = objc.RegisterName("writeData:error:")
+	_nSFileHandleSelGetOffsetError                                = objc.RegisterName("getOffset:error:")
+	_nSFileHandleSelSeekToEndReturningOffsetError                 = objc.RegisterName("seekToEndReturningOffset:error:")
+	_nSFileHandleSelSeekToOffsetError                             = objc.RegisterName("seekToOffset:error:")
+	_nSFileHandleSelTruncateAtOffsetError                         = objc.RegisterName("truncateAtOffset:error:")
+	_nSFileHandleSelSynchronizeAndReturnError                     = objc.RegisterName("synchronizeAndReturnError:")
+	_nSFileHandleSelCloseAndReturnError                           = objc.RegisterName("closeAndReturnError:")
+	_nSFileHandleSelAvailableData                                 = objc.RegisterName("availableData")
+	_nSFileHandleSelFileHandleForReadingAtPath                    = objc.RegisterName("fileHandleForReadingAtPath:")
+	_nSFileHandleSelFileHandleForWritingAtPath                    = objc.RegisterName("fileHandleForWritingAtPath:")
+	_nSFileHandleSelFileHandleForUpdatingAtPath                   = objc.RegisterName("fileHandleForUpdatingAtPath:")
+	_nSFileHandleSelFileHandleForReadingFromURLError              = objc.RegisterName("fileHandleForReadingFromURL:error:")
+	_nSFileHandleSelFileHandleForWritingToURLError                = objc.RegisterName("fileHandleForWritingToURL:error:")
+	_nSFileHandleSelFileHandleForUpdatingURLError                 = objc.RegisterName("fileHandleForUpdatingURL:error:")
+	_nSFileHandleSelFileHandleWithStandardInput                   = objc.RegisterName("fileHandleWithStandardInput")
+	_nSFileHandleSelFileHandleWithStandardOutput                  = objc.RegisterName("fileHandleWithStandardOutput")
+	_nSFileHandleSelFileHandleWithStandardError                   = objc.RegisterName("fileHandleWithStandardError")
+	_nSFileHandleSelFileHandleWithNullDevice                      = objc.RegisterName("fileHandleWithNullDevice")
+	_nSFileHandleSelReadInBackgroundAndNotifyForModes             = objc.RegisterName("readInBackgroundAndNotifyForModes:")
+	_nSFileHandleSelReadInBackgroundAndNotify                     = objc.RegisterName("readInBackgroundAndNotify")
+	_nSFileHandleSelReadToEndOfFileInBackgroundAndNotifyForModes  = objc.RegisterName("readToEndOfFileInBackgroundAndNotifyForModes:")
+	_nSFileHandleSelReadToEndOfFileInBackgroundAndNotify          = objc.RegisterName("readToEndOfFileInBackgroundAndNotify")
 	_nSFileHandleSelAcceptConnectionInBackgroundAndNotifyForModes = objc.RegisterName("acceptConnectionInBackgroundAndNotifyForModes:")
-	_nSFileHandleSelAcceptConnectionInBackgroundAndNotify = objc.RegisterName("acceptConnectionInBackgroundAndNotify")
-	_nSFileHandleSelWaitForDataInBackgroundAndNotifyForModes = objc.RegisterName("waitForDataInBackgroundAndNotifyForModes:")
-	_nSFileHandleSelWaitForDataInBackgroundAndNotify = objc.RegisterName("waitForDataInBackgroundAndNotify")
-	_nSFileHandleSelReadabilityHandler = objc.RegisterName("readabilityHandler")
-	_nSFileHandleSelSetReadabilityHandler = objc.RegisterName("setReadabilityHandler:")
-	_nSFileHandleSelWriteabilityHandler = objc.RegisterName("writeabilityHandler")
-	_nSFileHandleSelSetWriteabilityHandler = objc.RegisterName("setWriteabilityHandler:")
-	_nSFileHandleSelInitWithFileDescriptor = objc.RegisterName("initWithFileDescriptor:")
-	_nSFileHandleSelFileDescriptor = objc.RegisterName("fileDescriptor")
-	_nSFileHandleSelReadDataToEndOfFile = objc.RegisterName("readDataToEndOfFile")
-	_nSFileHandleSelReadDataOfLength = objc.RegisterName("readDataOfLength:")
-	_nSFileHandleSelWriteData = objc.RegisterName("writeData:")
-	_nSFileHandleSelOffsetInFile = objc.RegisterName("offsetInFile")
-	_nSFileHandleSelSeekToEndOfFile = objc.RegisterName("seekToEndOfFile")
-	_nSFileHandleSelSeekToFileOffset = objc.RegisterName("seekToFileOffset:")
-	_nSFileHandleSelTruncateFileAtOffset = objc.RegisterName("truncateFileAtOffset:")
-	_nSFileHandleSelSynchronizeFile = objc.RegisterName("synchronizeFile")
-	_nSFileHandleSelCloseFile = objc.RegisterName("closeFile")
+	_nSFileHandleSelAcceptConnectionInBackgroundAndNotify         = objc.RegisterName("acceptConnectionInBackgroundAndNotify")
+	_nSFileHandleSelWaitForDataInBackgroundAndNotifyForModes      = objc.RegisterName("waitForDataInBackgroundAndNotifyForModes:")
+	_nSFileHandleSelWaitForDataInBackgroundAndNotify              = objc.RegisterName("waitForDataInBackgroundAndNotify")
+	_nSFileHandleSelReadabilityHandler                            = objc.RegisterName("readabilityHandler")
+	_nSFileHandleSelSetReadabilityHandler                         = objc.RegisterName("setReadabilityHandler:")
+	_nSFileHandleSelWriteabilityHandler                           = objc.RegisterName("writeabilityHandler")
+	_nSFileHandleSelSetWriteabilityHandler                        = objc.RegisterName("setWriteabilityHandler:")
+	_nSFileHandleSelInitWithFileDescriptor                        = objc.RegisterName("initWithFileDescriptor:")
+	_nSFileHandleSelFileDescriptor                                = objc.RegisterName("fileDescriptor")
+	_nSFileHandleSelReadDataToEndOfFile                           = objc.RegisterName("readDataToEndOfFile")
+	_nSFileHandleSelReadDataOfLength                              = objc.RegisterName("readDataOfLength:")
+	_nSFileHandleSelWriteData                                     = objc.RegisterName("writeData:")
+	_nSFileHandleSelOffsetInFile                                  = objc.RegisterName("offsetInFile")
+	_nSFileHandleSelSeekToEndOfFile                               = objc.RegisterName("seekToEndOfFile")
+	_nSFileHandleSelSeekToFileOffset                              = objc.RegisterName("seekToFileOffset:")
+	_nSFileHandleSelTruncateFileAtOffset                          = objc.RegisterName("truncateFileAtOffset:")
+	_nSFileHandleSelSynchronizeFile                               = objc.RegisterName("synchronizeFile")
+	_nSFileHandleSelCloseFile                                     = objc.RegisterName("closeFile")
 )
 
 func NSFileHandleFromID(id objc.ID) *NSFileHandle {
@@ -77,20 +77,26 @@ func NSFileHandleFromID(id objc.ID) *NSFileHandle {
 
 func (o *NSFileHandle) InitWithFileDescriptorCloseOnDealloc(fd int, closeopt bool) *NSFileHandle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileHandleSelInitWithFileDescriptorCloseOnDealloc, fd, closeopt)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileHandleFromID(_ret)
 }
 
 func (o *NSFileHandle) InitWithCoder(coder *NSCoder) *NSFileHandle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileHandleSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileHandleFromID(_ret)
 }
 
 func (o *NSFileHandle) ReadDataToEndOfFileAndReturnError() (*NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileHandleSelReadDataToEndOfFileAndReturnError, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -100,7 +106,9 @@ func (o *NSFileHandle) ReadDataToEndOfFileAndReturnError() (*NSData, error) {
 func (o *NSFileHandle) ReadDataUpToLengthError(length uint) (*NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileHandleSelReadDataUpToLengthError, length, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -172,32 +180,42 @@ func (o *NSFileHandle) CloseAndReturnError() (bool, error) {
 
 func (o *NSFileHandle) AvailableData() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileHandleSelAvailableData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
 func NSFileHandleFileHandleForReadingAtPath(path *NSString) *NSFileHandle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileHandle), _nSFileHandleSelFileHandleForReadingAtPath, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileHandleFromID(_ret)
 }
 
 func NSFileHandleFileHandleForWritingAtPath(path *NSString) *NSFileHandle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileHandle), _nSFileHandleSelFileHandleForWritingAtPath, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileHandleFromID(_ret)
 }
 
 func NSFileHandleFileHandleForUpdatingAtPath(path *NSString) *NSFileHandle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileHandle), _nSFileHandleSelFileHandleForUpdatingAtPath, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileHandleFromID(_ret)
 }
 
 func NSFileHandleFileHandleForReadingFromURLError(url *NSURL) (*NSFileHandle, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileHandle), _nSFileHandleSelFileHandleForReadingFromURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -207,7 +225,9 @@ func NSFileHandleFileHandleForReadingFromURLError(url *NSURL) (*NSFileHandle, er
 func NSFileHandleFileHandleForWritingToURLError(url *NSURL) (*NSFileHandle, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileHandle), _nSFileHandleSelFileHandleForWritingToURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -217,7 +237,9 @@ func NSFileHandleFileHandleForWritingToURLError(url *NSURL) (*NSFileHandle, erro
 func NSFileHandleFileHandleForUpdatingURLError(url *NSURL) (*NSFileHandle, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileHandle), _nSFileHandleSelFileHandleForUpdatingURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -226,25 +248,33 @@ func NSFileHandleFileHandleForUpdatingURLError(url *NSURL) (*NSFileHandle, error
 
 func NSFileHandleFileHandleWithStandardInput() *NSFileHandle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileHandle), _nSFileHandleSelFileHandleWithStandardInput)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileHandleFromID(_ret)
 }
 
 func NSFileHandleFileHandleWithStandardOutput() *NSFileHandle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileHandle), _nSFileHandleSelFileHandleWithStandardOutput)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileHandleFromID(_ret)
 }
 
 func NSFileHandleFileHandleWithStandardError() *NSFileHandle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileHandle), _nSFileHandleSelFileHandleWithStandardError)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileHandleFromID(_ret)
 }
 
 func NSFileHandleFileHandleWithNullDevice() *NSFileHandle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileHandle), _nSFileHandleSelFileHandleWithNullDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileHandleFromID(_ret)
 }
 
@@ -321,7 +351,9 @@ func (o *NSFileHandle) SetWriteabilityHandler(writeabilityHandler func(*NSFileHa
 
 func (o *NSFileHandle) InitWithFileDescriptor(fd int) *NSFileHandle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileHandleSelInitWithFileDescriptor, fd)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileHandleFromID(_ret)
 }
 
@@ -332,13 +364,17 @@ func (o *NSFileHandle) FileDescriptor() int {
 
 func (o *NSFileHandle) ReadDataToEndOfFile() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileHandleSelReadDataToEndOfFile)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
 func (o *NSFileHandle) ReadDataOfLength(length uint) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileHandleSelReadDataOfLength, length)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
@@ -371,4 +407,3 @@ func (o *NSFileHandle) SynchronizeFile() {
 func (o *NSFileHandle) CloseFile() {
 	o.Ptr().Send(_nSFileHandleSelCloseFile)
 }
-

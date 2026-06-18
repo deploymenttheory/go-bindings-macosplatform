@@ -204,4 +204,3 @@ type RNNImageInferenceLayerable interface {
 }
 
 var _ RNNImageInferenceLayerable = (*RNNImageInferenceLayer)(nil)
-

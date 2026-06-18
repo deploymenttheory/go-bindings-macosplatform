@@ -81,4 +81,3 @@ type TrajectoryObservationable interface {
 }
 
 var _ TrajectoryObservationable = (*TrajectoryObservation)(nil)
-

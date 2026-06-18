@@ -11,4 +11,3 @@ import (
 type ABImageClient interface {
 	ConsumeImageDataForTag(data *foundation.NSData, tag int)
 }
-

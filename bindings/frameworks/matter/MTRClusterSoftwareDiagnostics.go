@@ -18,22 +18,22 @@ type MTRClusterSoftwareDiagnostics struct {
 }
 
 var (
-	_clsMTRClusterSoftwareDiagnostics = _objcClass("MTRClusterSoftwareDiagnostics")
-	_mTRClusterSoftwareDiagnosticsSelResetWatermarksWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("resetWatermarksWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterSoftwareDiagnosticsSelResetWatermarksWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("resetWatermarksWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterSoftwareDiagnosticsSelReadAttributeThreadMetricsWithParams = objc.RegisterName("readAttributeThreadMetricsWithParams:")
-	_mTRClusterSoftwareDiagnosticsSelReadAttributeCurrentHeapFreeWithParams = objc.RegisterName("readAttributeCurrentHeapFreeWithParams:")
-	_mTRClusterSoftwareDiagnosticsSelReadAttributeCurrentHeapUsedWithParams = objc.RegisterName("readAttributeCurrentHeapUsedWithParams:")
-	_mTRClusterSoftwareDiagnosticsSelReadAttributeCurrentHeapHighWatermarkWithParams = objc.RegisterName("readAttributeCurrentHeapHighWatermarkWithParams:")
-	_mTRClusterSoftwareDiagnosticsSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterSoftwareDiagnosticsSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterSoftwareDiagnosticsSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterSoftwareDiagnosticsSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterSoftwareDiagnosticsSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterSoftwareDiagnosticsSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterSoftwareDiagnosticsSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_clsMTRClusterSoftwareDiagnostics                                                                              = _objcClass("MTRClusterSoftwareDiagnostics")
+	_mTRClusterSoftwareDiagnosticsSelResetWatermarksWithParamsExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("resetWatermarksWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterSoftwareDiagnosticsSelResetWatermarksWithExpectedValuesExpectedValueIntervalCompletion              = objc.RegisterName("resetWatermarksWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterSoftwareDiagnosticsSelReadAttributeThreadMetricsWithParams                                          = objc.RegisterName("readAttributeThreadMetricsWithParams:")
+	_mTRClusterSoftwareDiagnosticsSelReadAttributeCurrentHeapFreeWithParams                                        = objc.RegisterName("readAttributeCurrentHeapFreeWithParams:")
+	_mTRClusterSoftwareDiagnosticsSelReadAttributeCurrentHeapUsedWithParams                                        = objc.RegisterName("readAttributeCurrentHeapUsedWithParams:")
+	_mTRClusterSoftwareDiagnosticsSelReadAttributeCurrentHeapHighWatermarkWithParams                               = objc.RegisterName("readAttributeCurrentHeapHighWatermarkWithParams:")
+	_mTRClusterSoftwareDiagnosticsSelReadAttributeGeneratedCommandListWithParams                                   = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterSoftwareDiagnosticsSelReadAttributeAcceptedCommandListWithParams                                    = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterSoftwareDiagnosticsSelReadAttributeAttributeListWithParams                                          = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterSoftwareDiagnosticsSelReadAttributeFeatureMapWithParams                                             = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterSoftwareDiagnosticsSelReadAttributeClusterRevisionWithParams                                        = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterSoftwareDiagnosticsSelInitWithDeviceEndpointIDQueue                                                 = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterSoftwareDiagnosticsSelInitWithDeviceEndpointQueue                                                   = objc.RegisterName("initWithDevice:endpoint:queue:")
 	_mTRClusterSoftwareDiagnosticsSelResetWatermarksWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("resetWatermarksWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterSoftwareDiagnosticsSelResetWatermarksWithExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("resetWatermarksWithExpectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterSoftwareDiagnosticsSelResetWatermarksWithExpectedValuesExpectedValueIntervalCompletionHandler       = objc.RegisterName("resetWatermarksWithExpectedValues:expectedValueInterval:completionHandler:")
 )
 
 func MTRClusterSoftwareDiagnosticsFromID(id objc.ID) *MTRClusterSoftwareDiagnostics {
@@ -116,13 +116,17 @@ func (o *MTRClusterSoftwareDiagnostics) ReadAttributeClusterRevisionWithParams(p
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterSoftwareDiagnostics) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterSoftwareDiagnostics {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterSoftwareDiagnosticsSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterSoftwareDiagnosticsFromID(_ret)
 }
 
 func (o *MTRClusterSoftwareDiagnostics) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterSoftwareDiagnostics {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterSoftwareDiagnosticsSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterSoftwareDiagnosticsFromID(_ret)
 }
 
@@ -147,4 +151,3 @@ func (o *MTRClusterSoftwareDiagnostics) ResetWatermarksWithExpectedValuesExpecte
 	}
 	o.Ptr().Send(_mTRClusterSoftwareDiagnosticsSelResetWatermarksWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues, expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
-

@@ -16,11 +16,15 @@ type MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams].
-func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) Unwrap() *raw.MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams { return x.inner }
+func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) Unwrap() *raw.MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsFromID adopts an existing object pointer as a MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams (nil for 0).
 func MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsFromID(id objc.ID) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
@@ -137,4 +141,3 @@ type MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsable interface {
 }
 
 var _ MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsable = (*MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams)(nil)
-

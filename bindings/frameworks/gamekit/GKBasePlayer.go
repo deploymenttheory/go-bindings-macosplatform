@@ -16,8 +16,8 @@ type GKBasePlayer struct {
 }
 
 var (
-	_clsGKBasePlayer = _objcClass("GKBasePlayer")
-	_gKBasePlayerSelPlayerID = objc.RegisterName("playerID")
+	_clsGKBasePlayer            = _objcClass("GKBasePlayer")
+	_gKBasePlayerSelPlayerID    = objc.RegisterName("playerID")
 	_gKBasePlayerSelDisplayName = objc.RegisterName("displayName")
 )
 
@@ -34,7 +34,9 @@ func GKBasePlayerFromID(id objc.ID) *GKBasePlayer {
 // Deprecated: since macOS 10.15.
 func (o *GKBasePlayer) PlayerID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKBasePlayerSelPlayerID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -42,7 +44,8 @@ func (o *GKBasePlayer) PlayerID() *foundation.NSString {
 // Deprecated: since macOS 10.15.
 func (o *GKBasePlayer) DisplayName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKBasePlayerSelDisplayName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

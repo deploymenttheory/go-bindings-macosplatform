@@ -16,10 +16,10 @@ type MXNetworkTransferMetric struct {
 }
 
 var (
-	_clsMXNetworkTransferMetric = _objcClass("MXNetworkTransferMetric")
-	_mXNetworkTransferMetricSelCumulativeWifiUpload = objc.RegisterName("cumulativeWifiUpload")
-	_mXNetworkTransferMetricSelCumulativeWifiDownload = objc.RegisterName("cumulativeWifiDownload")
-	_mXNetworkTransferMetricSelCumulativeCellularUpload = objc.RegisterName("cumulativeCellularUpload")
+	_clsMXNetworkTransferMetric                           = _objcClass("MXNetworkTransferMetric")
+	_mXNetworkTransferMetricSelCumulativeWifiUpload       = objc.RegisterName("cumulativeWifiUpload")
+	_mXNetworkTransferMetricSelCumulativeWifiDownload     = objc.RegisterName("cumulativeWifiDownload")
+	_mXNetworkTransferMetricSelCumulativeCellularUpload   = objc.RegisterName("cumulativeCellularUpload")
 	_mXNetworkTransferMetricSelCumulativeCellularDownload = objc.RegisterName("cumulativeCellularDownload")
 )
 
@@ -56,4 +56,3 @@ func (o *MXNetworkTransferMetric) CumulativeCellularDownload() *foundation.NSMea
 	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitInformationStorage]](o.Ptr(), _mXNetworkTransferMetricSelCumulativeCellularDownload)
 	return _ret
 }
-

@@ -17,10 +17,10 @@ type NSUserAutomatorTask struct {
 }
 
 var (
-	_clsNSUserAutomatorTask = _objcClass("NSUserAutomatorTask")
+	_clsNSUserAutomatorTask                                  = _objcClass("NSUserAutomatorTask")
 	_nSUserAutomatorTaskSelExecuteWithInputCompletionHandler = objc.RegisterName("executeWithInput:completionHandler:")
-	_nSUserAutomatorTaskSelVariables = objc.RegisterName("variables")
-	_nSUserAutomatorTaskSelSetVariables = objc.RegisterName("setVariables:")
+	_nSUserAutomatorTaskSelVariables                         = objc.RegisterName("variables")
+	_nSUserAutomatorTaskSelSetVariables                      = objc.RegisterName("setVariables:")
 )
 
 func NSUserAutomatorTaskFromID(id objc.ID) *NSUserAutomatorTask {
@@ -52,4 +52,3 @@ func (o *NSUserAutomatorTask) Variables() *NSDictionary[*NSString, objc.ID] {
 func (o *NSUserAutomatorTask) SetVariables(variables *NSDictionary[*NSString, objc.ID]) {
 	o.Ptr().Send(_nSUserAutomatorTaskSelSetVariables, variables)
 }
-

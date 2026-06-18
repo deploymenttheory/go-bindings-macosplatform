@@ -18,85 +18,85 @@ type NSResponder struct {
 }
 
 var (
-	_clsNSResponder = _objcClass("NSResponder")
-	_nSResponderSelInit = objc.RegisterName("init")
-	_nSResponderSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSResponderSelTryToPerformWith = objc.RegisterName("tryToPerform:with:")
-	_nSResponderSelPerformKeyEquivalent = objc.RegisterName("performKeyEquivalent:")
-	_nSResponderSelValidRequestorForSendTypeReturnType = objc.RegisterName("validRequestorForSendType:returnType:")
-	_nSResponderSelMouseDown = objc.RegisterName("mouseDown:")
-	_nSResponderSelRightMouseDown = objc.RegisterName("rightMouseDown:")
-	_nSResponderSelOtherMouseDown = objc.RegisterName("otherMouseDown:")
-	_nSResponderSelMouseUp = objc.RegisterName("mouseUp:")
-	_nSResponderSelRightMouseUp = objc.RegisterName("rightMouseUp:")
-	_nSResponderSelOtherMouseUp = objc.RegisterName("otherMouseUp:")
-	_nSResponderSelMouseMoved = objc.RegisterName("mouseMoved:")
-	_nSResponderSelMouseDragged = objc.RegisterName("mouseDragged:")
-	_nSResponderSelMouseCancelled = objc.RegisterName("mouseCancelled:")
-	_nSResponderSelScrollWheel = objc.RegisterName("scrollWheel:")
-	_nSResponderSelRightMouseDragged = objc.RegisterName("rightMouseDragged:")
-	_nSResponderSelOtherMouseDragged = objc.RegisterName("otherMouseDragged:")
-	_nSResponderSelMouseEntered = objc.RegisterName("mouseEntered:")
-	_nSResponderSelMouseExited = objc.RegisterName("mouseExited:")
-	_nSResponderSelKeyDown = objc.RegisterName("keyDown:")
-	_nSResponderSelKeyUp = objc.RegisterName("keyUp:")
-	_nSResponderSelFlagsChanged = objc.RegisterName("flagsChanged:")
-	_nSResponderSelTabletPoint = objc.RegisterName("tabletPoint:")
-	_nSResponderSelTabletProximity = objc.RegisterName("tabletProximity:")
-	_nSResponderSelCursorUpdate = objc.RegisterName("cursorUpdate:")
-	_nSResponderSelMagnifyWithEvent = objc.RegisterName("magnifyWithEvent:")
-	_nSResponderSelRotateWithEvent = objc.RegisterName("rotateWithEvent:")
-	_nSResponderSelSwipeWithEvent = objc.RegisterName("swipeWithEvent:")
-	_nSResponderSelBeginGestureWithEvent = objc.RegisterName("beginGestureWithEvent:")
-	_nSResponderSelEndGestureWithEvent = objc.RegisterName("endGestureWithEvent:")
-	_nSResponderSelSmartMagnifyWithEvent = objc.RegisterName("smartMagnifyWithEvent:")
-	_nSResponderSelChangeModeWithEvent = objc.RegisterName("changeModeWithEvent:")
-	_nSResponderSelTouchesBeganWithEvent = objc.RegisterName("touchesBeganWithEvent:")
-	_nSResponderSelTouchesMovedWithEvent = objc.RegisterName("touchesMovedWithEvent:")
-	_nSResponderSelTouchesEndedWithEvent = objc.RegisterName("touchesEndedWithEvent:")
-	_nSResponderSelTouchesCancelledWithEvent = objc.RegisterName("touchesCancelledWithEvent:")
-	_nSResponderSelQuickLookWithEvent = objc.RegisterName("quickLookWithEvent:")
-	_nSResponderSelPressureChangeWithEvent = objc.RegisterName("pressureChangeWithEvent:")
-	_nSResponderSelContextMenuKeyDown = objc.RegisterName("contextMenuKeyDown:")
-	_nSResponderSelNoResponderFor = objc.RegisterName("noResponderFor:")
-	_nSResponderSelBecomeFirstResponder = objc.RegisterName("becomeFirstResponder")
-	_nSResponderSelResignFirstResponder = objc.RegisterName("resignFirstResponder")
-	_nSResponderSelInterpretKeyEvents = objc.RegisterName("interpretKeyEvents:")
-	_nSResponderSelFlushBufferedKeyEvents = objc.RegisterName("flushBufferedKeyEvents")
-	_nSResponderSelShowContextHelp = objc.RegisterName("showContextHelp:")
-	_nSResponderSelHelpRequested = objc.RegisterName("helpRequested:")
-	_nSResponderSelShouldBeTreatedAsInkEvent = objc.RegisterName("shouldBeTreatedAsInkEvent:")
-	_nSResponderSelWantsScrollEventsForSwipeTrackingOnAxis = objc.RegisterName("wantsScrollEventsForSwipeTrackingOnAxis:")
-	_nSResponderSelWantsForwardedScrollEventsForAxis = objc.RegisterName("wantsForwardedScrollEventsForAxis:")
-	_nSResponderSelSupplementalTargetForActionSender = objc.RegisterName("supplementalTargetForAction:sender:")
-	_nSResponderSelNextResponder = objc.RegisterName("nextResponder")
-	_nSResponderSelSetNextResponder = objc.RegisterName("setNextResponder:")
-	_nSResponderSelAcceptsFirstResponder = objc.RegisterName("acceptsFirstResponder")
-	_nSResponderSelMenu = objc.RegisterName("menu")
-	_nSResponderSelSetMenu = objc.RegisterName("setMenu:")
-	_nSResponderSelUndoManager = objc.RegisterName("undoManager")
-	_nSResponderSelValidateProposedFirstResponderForEvent = objc.RegisterName("validateProposedFirstResponder:forEvent:")
+	_clsNSResponder                                                                = _objcClass("NSResponder")
+	_nSResponderSelInit                                                            = objc.RegisterName("init")
+	_nSResponderSelInitWithCoder                                                   = objc.RegisterName("initWithCoder:")
+	_nSResponderSelTryToPerformWith                                                = objc.RegisterName("tryToPerform:with:")
+	_nSResponderSelPerformKeyEquivalent                                            = objc.RegisterName("performKeyEquivalent:")
+	_nSResponderSelValidRequestorForSendTypeReturnType                             = objc.RegisterName("validRequestorForSendType:returnType:")
+	_nSResponderSelMouseDown                                                       = objc.RegisterName("mouseDown:")
+	_nSResponderSelRightMouseDown                                                  = objc.RegisterName("rightMouseDown:")
+	_nSResponderSelOtherMouseDown                                                  = objc.RegisterName("otherMouseDown:")
+	_nSResponderSelMouseUp                                                         = objc.RegisterName("mouseUp:")
+	_nSResponderSelRightMouseUp                                                    = objc.RegisterName("rightMouseUp:")
+	_nSResponderSelOtherMouseUp                                                    = objc.RegisterName("otherMouseUp:")
+	_nSResponderSelMouseMoved                                                      = objc.RegisterName("mouseMoved:")
+	_nSResponderSelMouseDragged                                                    = objc.RegisterName("mouseDragged:")
+	_nSResponderSelMouseCancelled                                                  = objc.RegisterName("mouseCancelled:")
+	_nSResponderSelScrollWheel                                                     = objc.RegisterName("scrollWheel:")
+	_nSResponderSelRightMouseDragged                                               = objc.RegisterName("rightMouseDragged:")
+	_nSResponderSelOtherMouseDragged                                               = objc.RegisterName("otherMouseDragged:")
+	_nSResponderSelMouseEntered                                                    = objc.RegisterName("mouseEntered:")
+	_nSResponderSelMouseExited                                                     = objc.RegisterName("mouseExited:")
+	_nSResponderSelKeyDown                                                         = objc.RegisterName("keyDown:")
+	_nSResponderSelKeyUp                                                           = objc.RegisterName("keyUp:")
+	_nSResponderSelFlagsChanged                                                    = objc.RegisterName("flagsChanged:")
+	_nSResponderSelTabletPoint                                                     = objc.RegisterName("tabletPoint:")
+	_nSResponderSelTabletProximity                                                 = objc.RegisterName("tabletProximity:")
+	_nSResponderSelCursorUpdate                                                    = objc.RegisterName("cursorUpdate:")
+	_nSResponderSelMagnifyWithEvent                                                = objc.RegisterName("magnifyWithEvent:")
+	_nSResponderSelRotateWithEvent                                                 = objc.RegisterName("rotateWithEvent:")
+	_nSResponderSelSwipeWithEvent                                                  = objc.RegisterName("swipeWithEvent:")
+	_nSResponderSelBeginGestureWithEvent                                           = objc.RegisterName("beginGestureWithEvent:")
+	_nSResponderSelEndGestureWithEvent                                             = objc.RegisterName("endGestureWithEvent:")
+	_nSResponderSelSmartMagnifyWithEvent                                           = objc.RegisterName("smartMagnifyWithEvent:")
+	_nSResponderSelChangeModeWithEvent                                             = objc.RegisterName("changeModeWithEvent:")
+	_nSResponderSelTouchesBeganWithEvent                                           = objc.RegisterName("touchesBeganWithEvent:")
+	_nSResponderSelTouchesMovedWithEvent                                           = objc.RegisterName("touchesMovedWithEvent:")
+	_nSResponderSelTouchesEndedWithEvent                                           = objc.RegisterName("touchesEndedWithEvent:")
+	_nSResponderSelTouchesCancelledWithEvent                                       = objc.RegisterName("touchesCancelledWithEvent:")
+	_nSResponderSelQuickLookWithEvent                                              = objc.RegisterName("quickLookWithEvent:")
+	_nSResponderSelPressureChangeWithEvent                                         = objc.RegisterName("pressureChangeWithEvent:")
+	_nSResponderSelContextMenuKeyDown                                              = objc.RegisterName("contextMenuKeyDown:")
+	_nSResponderSelNoResponderFor                                                  = objc.RegisterName("noResponderFor:")
+	_nSResponderSelBecomeFirstResponder                                            = objc.RegisterName("becomeFirstResponder")
+	_nSResponderSelResignFirstResponder                                            = objc.RegisterName("resignFirstResponder")
+	_nSResponderSelInterpretKeyEvents                                              = objc.RegisterName("interpretKeyEvents:")
+	_nSResponderSelFlushBufferedKeyEvents                                          = objc.RegisterName("flushBufferedKeyEvents")
+	_nSResponderSelShowContextHelp                                                 = objc.RegisterName("showContextHelp:")
+	_nSResponderSelHelpRequested                                                   = objc.RegisterName("helpRequested:")
+	_nSResponderSelShouldBeTreatedAsInkEvent                                       = objc.RegisterName("shouldBeTreatedAsInkEvent:")
+	_nSResponderSelWantsScrollEventsForSwipeTrackingOnAxis                         = objc.RegisterName("wantsScrollEventsForSwipeTrackingOnAxis:")
+	_nSResponderSelWantsForwardedScrollEventsForAxis                               = objc.RegisterName("wantsForwardedScrollEventsForAxis:")
+	_nSResponderSelSupplementalTargetForActionSender                               = objc.RegisterName("supplementalTargetForAction:sender:")
+	_nSResponderSelNextResponder                                                   = objc.RegisterName("nextResponder")
+	_nSResponderSelSetNextResponder                                                = objc.RegisterName("setNextResponder:")
+	_nSResponderSelAcceptsFirstResponder                                           = objc.RegisterName("acceptsFirstResponder")
+	_nSResponderSelMenu                                                            = objc.RegisterName("menu")
+	_nSResponderSelSetMenu                                                         = objc.RegisterName("setMenu:")
+	_nSResponderSelUndoManager                                                     = objc.RegisterName("undoManager")
+	_nSResponderSelValidateProposedFirstResponderForEvent                          = objc.RegisterName("validateProposedFirstResponder:forEvent:")
 	_nSResponderSelPresentErrorModalForWindowDelegateDidPresentSelectorContextInfo = objc.RegisterName("presentError:modalForWindow:delegate:didPresentSelector:contextInfo:")
-	_nSResponderSelPresentError = objc.RegisterName("presentError:")
-	_nSResponderSelWillPresentError = objc.RegisterName("willPresentError:")
-	_nSResponderSelPerformTextFinderAction = objc.RegisterName("performTextFinderAction:")
-	_nSResponderSelNewWindowForTab = objc.RegisterName("newWindowForTab:")
-	_nSResponderSelShowWritingTools = objc.RegisterName("showWritingTools:")
-	_nSResponderSelPerformMnemonic = objc.RegisterName("performMnemonic:")
-	_nSResponderSelUpdateUserActivityState = objc.RegisterName("updateUserActivityState:")
-	_nSResponderSelUserActivity = objc.RegisterName("userActivity")
-	_nSResponderSelSetUserActivity = objc.RegisterName("setUserActivity:")
-	_nSResponderSelMakeTouchBar = objc.RegisterName("makeTouchBar")
-	_nSResponderSelTouchBar = objc.RegisterName("touchBar")
-	_nSResponderSelSetTouchBar = objc.RegisterName("setTouchBar:")
-	_nSResponderSelInterfaceStyle = objc.RegisterName("interfaceStyle")
-	_nSResponderSelSetInterfaceStyle = objc.RegisterName("setInterfaceStyle:")
-	_nSResponderSelEncodeRestorableStateWithCoder = objc.RegisterName("encodeRestorableStateWithCoder:")
-	_nSResponderSelEncodeRestorableStateWithCoderBackgroundQueue = objc.RegisterName("encodeRestorableStateWithCoder:backgroundQueue:")
-	_nSResponderSelRestoreStateWithCoder = objc.RegisterName("restoreStateWithCoder:")
-	_nSResponderSelInvalidateRestorableState = objc.RegisterName("invalidateRestorableState")
-	_nSResponderSelAllowedClassesForRestorableStateKeyPath = objc.RegisterName("allowedClassesForRestorableStateKeyPath:")
-	_nSResponderSelRestorableStateKeyPaths = objc.RegisterName("restorableStateKeyPaths")
+	_nSResponderSelPresentError                                                    = objc.RegisterName("presentError:")
+	_nSResponderSelWillPresentError                                                = objc.RegisterName("willPresentError:")
+	_nSResponderSelPerformTextFinderAction                                         = objc.RegisterName("performTextFinderAction:")
+	_nSResponderSelNewWindowForTab                                                 = objc.RegisterName("newWindowForTab:")
+	_nSResponderSelShowWritingTools                                                = objc.RegisterName("showWritingTools:")
+	_nSResponderSelPerformMnemonic                                                 = objc.RegisterName("performMnemonic:")
+	_nSResponderSelUpdateUserActivityState                                         = objc.RegisterName("updateUserActivityState:")
+	_nSResponderSelUserActivity                                                    = objc.RegisterName("userActivity")
+	_nSResponderSelSetUserActivity                                                 = objc.RegisterName("setUserActivity:")
+	_nSResponderSelMakeTouchBar                                                    = objc.RegisterName("makeTouchBar")
+	_nSResponderSelTouchBar                                                        = objc.RegisterName("touchBar")
+	_nSResponderSelSetTouchBar                                                     = objc.RegisterName("setTouchBar:")
+	_nSResponderSelInterfaceStyle                                                  = objc.RegisterName("interfaceStyle")
+	_nSResponderSelSetInterfaceStyle                                               = objc.RegisterName("setInterfaceStyle:")
+	_nSResponderSelEncodeRestorableStateWithCoder                                  = objc.RegisterName("encodeRestorableStateWithCoder:")
+	_nSResponderSelEncodeRestorableStateWithCoderBackgroundQueue                   = objc.RegisterName("encodeRestorableStateWithCoder:backgroundQueue:")
+	_nSResponderSelRestoreStateWithCoder                                           = objc.RegisterName("restoreStateWithCoder:")
+	_nSResponderSelInvalidateRestorableState                                       = objc.RegisterName("invalidateRestorableState")
+	_nSResponderSelAllowedClassesForRestorableStateKeyPath                         = objc.RegisterName("allowedClassesForRestorableStateKeyPath:")
+	_nSResponderSelRestorableStateKeyPaths                                         = objc.RegisterName("restorableStateKeyPaths")
 )
 
 func NSResponderFromID(id objc.ID) *NSResponder {
@@ -111,13 +111,17 @@ func NSResponderFromID(id objc.ID) *NSResponder {
 
 func (o *NSResponder) Init() *NSResponder {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSResponderSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSResponderFromID(_ret)
 }
 
 func (o *NSResponder) InitWithCoder(coder *foundation.NSCoder) *NSResponder {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSResponderSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSResponderFromID(_ret)
 }
 
@@ -325,7 +329,9 @@ func (o *NSResponder) SupplementalTargetForActionSender(action objc.SEL, sender 
 
 func (o *NSResponder) NextResponder() *NSResponder {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSResponderSelNextResponder)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSResponderFromID(_ret)
 }
 
@@ -340,7 +346,9 @@ func (o *NSResponder) AcceptsFirstResponder() bool {
 
 func (o *NSResponder) Menu() *NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSResponderSelMenu)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuFromID(_ret)
 }
 
@@ -350,7 +358,9 @@ func (o *NSResponder) SetMenu(menu *NSMenu) {
 
 func (o *NSResponder) UndoManager() *foundation.NSUndoManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSResponderSelUndoManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUndoManagerFromID(_ret)
 }
 
@@ -397,7 +407,9 @@ func (o *NSResponder) UpdateUserActivityState(userActivity *foundation.NSUserAct
 
 func (o *NSResponder) UserActivity() *foundation.NSUserActivity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSResponderSelUserActivity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUserActivityFromID(_ret)
 }
 
@@ -407,13 +419,17 @@ func (o *NSResponder) SetUserActivity(userActivity *foundation.NSUserActivity) {
 
 func (o *NSResponder) MakeTouchBar() *NSTouchBar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSResponderSelMakeTouchBar)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTouchBarFromID(_ret)
 }
 
 func (o *NSResponder) TouchBar() *NSTouchBar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSResponderSelTouchBar)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTouchBarFromID(_ret)
 }
 
@@ -458,4 +474,3 @@ func NSResponderRestorableStateKeyPaths() *foundation.NSArray[*foundation.NSStri
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsNSResponder), _nSResponderSelRestorableStateKeyPaths)
 	return _ret
 }
-

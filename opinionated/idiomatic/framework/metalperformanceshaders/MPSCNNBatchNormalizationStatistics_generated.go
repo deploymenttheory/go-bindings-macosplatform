@@ -20,7 +20,9 @@ type CNNBatchNormalizationStatistics struct {
 }
 
 // Unwrap returns the underlying [raw.MPSCNNBatchNormalizationStatistics].
-func (x *CNNBatchNormalizationStatistics) Unwrap() *raw.MPSCNNBatchNormalizationStatistics { return x.inner }
+func (x *CNNBatchNormalizationStatistics) Unwrap() *raw.MPSCNNBatchNormalizationStatistics {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -113,9 +115,13 @@ func (x *CNNBatchNormalizationStatistics) EncodeBatchToCommandBufferSourceImages
 	x.inner.EncodeBatchToCommandBufferSourceImagesBatchNormalizationState(commandBuffer, sourceImages, batchNormalizationState)
 }
 
-func (x *CNNBatchNormalizationStatistics) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNKernel }
+func (x *CNNBatchNormalizationStatistics) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNKernel
+}
 
-func (x *CNNBatchNormalizationStatistics) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
+func (x *CNNBatchNormalizationStatistics) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNKernel.MPSKernel
+}
 
 // CNNBatchNormalizationStatisticsable is the interface implemented by [CNNBatchNormalizationStatistics], for mocking and DI.
 type CNNBatchNormalizationStatisticsable interface {
@@ -134,4 +140,3 @@ type CNNBatchNormalizationStatisticsable interface {
 }
 
 var _ CNNBatchNormalizationStatisticsable = (*CNNBatchNormalizationStatistics)(nil)
-

@@ -28,7 +28,8 @@ func OSRelatedKernelExtensionKey() uintptr {
 
 func OSSystemExtensionErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_systemextensionsLib, "OSSystemExtensionErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
-

@@ -18,14 +18,14 @@ type NSEntityMigrationPolicy struct {
 }
 
 var (
-	_clsNSEntityMigrationPolicy = _objcClass("NSEntityMigrationPolicy")
-	_nSEntityMigrationPolicySelBeginEntityMappingManagerError = objc.RegisterName("beginEntityMapping:manager:error:")
+	_clsNSEntityMigrationPolicy                                                                     = _objcClass("NSEntityMigrationPolicy")
+	_nSEntityMigrationPolicySelBeginEntityMappingManagerError                                       = objc.RegisterName("beginEntityMapping:manager:error:")
 	_nSEntityMigrationPolicySelCreateDestinationInstancesForSourceInstanceEntityMappingManagerError = objc.RegisterName("createDestinationInstancesForSourceInstance:entityMapping:manager:error:")
-	_nSEntityMigrationPolicySelEndInstanceCreationForEntityMappingManagerError = objc.RegisterName("endInstanceCreationForEntityMapping:manager:error:")
-	_nSEntityMigrationPolicySelCreateRelationshipsForDestinationInstanceEntityMappingManagerError = objc.RegisterName("createRelationshipsForDestinationInstance:entityMapping:manager:error:")
-	_nSEntityMigrationPolicySelEndRelationshipCreationForEntityMappingManagerError = objc.RegisterName("endRelationshipCreationForEntityMapping:manager:error:")
-	_nSEntityMigrationPolicySelPerformCustomValidationForEntityMappingManagerError = objc.RegisterName("performCustomValidationForEntityMapping:manager:error:")
-	_nSEntityMigrationPolicySelEndEntityMappingManagerError = objc.RegisterName("endEntityMapping:manager:error:")
+	_nSEntityMigrationPolicySelEndInstanceCreationForEntityMappingManagerError                      = objc.RegisterName("endInstanceCreationForEntityMapping:manager:error:")
+	_nSEntityMigrationPolicySelCreateRelationshipsForDestinationInstanceEntityMappingManagerError   = objc.RegisterName("createRelationshipsForDestinationInstance:entityMapping:manager:error:")
+	_nSEntityMigrationPolicySelEndRelationshipCreationForEntityMappingManagerError                  = objc.RegisterName("endRelationshipCreationForEntityMapping:manager:error:")
+	_nSEntityMigrationPolicySelPerformCustomValidationForEntityMappingManagerError                  = objc.RegisterName("performCustomValidationForEntityMapping:manager:error:")
+	_nSEntityMigrationPolicySelEndEntityMappingManagerError                                         = objc.RegisterName("endEntityMapping:manager:error:")
 )
 
 func NSEntityMigrationPolicyFromID(id objc.ID) *NSEntityMigrationPolicy {
@@ -100,4 +100,3 @@ func (o *NSEntityMigrationPolicy) EndEntityMappingManagerError(mapping *NSEntity
 	}
 	return _ret, nil
 }
-

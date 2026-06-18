@@ -25,4 +25,3 @@ func MTRTestClusterClusterTestUnknownCommandParamsFromID(id objc.ID) *MTRTestClu
 	purego.Track(o)
 	return o
 }
-

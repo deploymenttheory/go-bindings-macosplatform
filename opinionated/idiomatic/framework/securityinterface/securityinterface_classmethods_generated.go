@@ -52,4 +52,3 @@ func SharedKeychainSettingsPanel() *KeychainSettingsPanel {
 	}
 	return &KeychainSettingsPanel{inner: _r}
 }
-

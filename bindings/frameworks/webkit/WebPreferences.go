@@ -16,66 +16,66 @@ type WebPreferences struct {
 }
 
 var (
-	_clsWebPreferences = _objcClass("WebPreferences")
-	_webPreferencesSelStandardPreferences = objc.RegisterName("standardPreferences")
-	_webPreferencesSelInitWithIdentifier = objc.RegisterName("initWithIdentifier:")
-	_webPreferencesSelIdentifier = objc.RegisterName("identifier")
-	_webPreferencesSelStandardFontFamily = objc.RegisterName("standardFontFamily")
-	_webPreferencesSelSetStandardFontFamily = objc.RegisterName("setStandardFontFamily:")
-	_webPreferencesSelFixedFontFamily = objc.RegisterName("fixedFontFamily")
-	_webPreferencesSelSetFixedFontFamily = objc.RegisterName("setFixedFontFamily:")
-	_webPreferencesSelSerifFontFamily = objc.RegisterName("serifFontFamily")
-	_webPreferencesSelSetSerifFontFamily = objc.RegisterName("setSerifFontFamily:")
-	_webPreferencesSelSansSerifFontFamily = objc.RegisterName("sansSerifFontFamily")
-	_webPreferencesSelSetSansSerifFontFamily = objc.RegisterName("setSansSerifFontFamily:")
-	_webPreferencesSelCursiveFontFamily = objc.RegisterName("cursiveFontFamily")
-	_webPreferencesSelSetCursiveFontFamily = objc.RegisterName("setCursiveFontFamily:")
-	_webPreferencesSelFantasyFontFamily = objc.RegisterName("fantasyFontFamily")
-	_webPreferencesSelSetFantasyFontFamily = objc.RegisterName("setFantasyFontFamily:")
-	_webPreferencesSelDefaultFontSize = objc.RegisterName("defaultFontSize")
-	_webPreferencesSelSetDefaultFontSize = objc.RegisterName("setDefaultFontSize:")
-	_webPreferencesSelDefaultFixedFontSize = objc.RegisterName("defaultFixedFontSize")
-	_webPreferencesSelSetDefaultFixedFontSize = objc.RegisterName("setDefaultFixedFontSize:")
-	_webPreferencesSelMinimumFontSize = objc.RegisterName("minimumFontSize")
-	_webPreferencesSelSetMinimumFontSize = objc.RegisterName("setMinimumFontSize:")
-	_webPreferencesSelMinimumLogicalFontSize = objc.RegisterName("minimumLogicalFontSize")
-	_webPreferencesSelSetMinimumLogicalFontSize = objc.RegisterName("setMinimumLogicalFontSize:")
-	_webPreferencesSelDefaultTextEncodingName = objc.RegisterName("defaultTextEncodingName")
-	_webPreferencesSelSetDefaultTextEncodingName = objc.RegisterName("setDefaultTextEncodingName:")
-	_webPreferencesSelUserStyleSheetEnabled = objc.RegisterName("userStyleSheetEnabled")
-	_webPreferencesSelSetUserStyleSheetEnabled = objc.RegisterName("setUserStyleSheetEnabled:")
-	_webPreferencesSelUserStyleSheetLocation = objc.RegisterName("userStyleSheetLocation")
-	_webPreferencesSelSetUserStyleSheetLocation = objc.RegisterName("setUserStyleSheetLocation:")
-	_webPreferencesSelIsJavaEnabled = objc.RegisterName("isJavaEnabled")
-	_webPreferencesSelSetJavaEnabled = objc.RegisterName("setJavaEnabled:")
-	_webPreferencesSelIsJavaScriptEnabled = objc.RegisterName("isJavaScriptEnabled")
-	_webPreferencesSelSetJavaScriptEnabled = objc.RegisterName("setJavaScriptEnabled:")
-	_webPreferencesSelJavaScriptCanOpenWindowsAutomatically = objc.RegisterName("javaScriptCanOpenWindowsAutomatically")
+	_clsWebPreferences                                         = _objcClass("WebPreferences")
+	_webPreferencesSelStandardPreferences                      = objc.RegisterName("standardPreferences")
+	_webPreferencesSelInitWithIdentifier                       = objc.RegisterName("initWithIdentifier:")
+	_webPreferencesSelIdentifier                               = objc.RegisterName("identifier")
+	_webPreferencesSelStandardFontFamily                       = objc.RegisterName("standardFontFamily")
+	_webPreferencesSelSetStandardFontFamily                    = objc.RegisterName("setStandardFontFamily:")
+	_webPreferencesSelFixedFontFamily                          = objc.RegisterName("fixedFontFamily")
+	_webPreferencesSelSetFixedFontFamily                       = objc.RegisterName("setFixedFontFamily:")
+	_webPreferencesSelSerifFontFamily                          = objc.RegisterName("serifFontFamily")
+	_webPreferencesSelSetSerifFontFamily                       = objc.RegisterName("setSerifFontFamily:")
+	_webPreferencesSelSansSerifFontFamily                      = objc.RegisterName("sansSerifFontFamily")
+	_webPreferencesSelSetSansSerifFontFamily                   = objc.RegisterName("setSansSerifFontFamily:")
+	_webPreferencesSelCursiveFontFamily                        = objc.RegisterName("cursiveFontFamily")
+	_webPreferencesSelSetCursiveFontFamily                     = objc.RegisterName("setCursiveFontFamily:")
+	_webPreferencesSelFantasyFontFamily                        = objc.RegisterName("fantasyFontFamily")
+	_webPreferencesSelSetFantasyFontFamily                     = objc.RegisterName("setFantasyFontFamily:")
+	_webPreferencesSelDefaultFontSize                          = objc.RegisterName("defaultFontSize")
+	_webPreferencesSelSetDefaultFontSize                       = objc.RegisterName("setDefaultFontSize:")
+	_webPreferencesSelDefaultFixedFontSize                     = objc.RegisterName("defaultFixedFontSize")
+	_webPreferencesSelSetDefaultFixedFontSize                  = objc.RegisterName("setDefaultFixedFontSize:")
+	_webPreferencesSelMinimumFontSize                          = objc.RegisterName("minimumFontSize")
+	_webPreferencesSelSetMinimumFontSize                       = objc.RegisterName("setMinimumFontSize:")
+	_webPreferencesSelMinimumLogicalFontSize                   = objc.RegisterName("minimumLogicalFontSize")
+	_webPreferencesSelSetMinimumLogicalFontSize                = objc.RegisterName("setMinimumLogicalFontSize:")
+	_webPreferencesSelDefaultTextEncodingName                  = objc.RegisterName("defaultTextEncodingName")
+	_webPreferencesSelSetDefaultTextEncodingName               = objc.RegisterName("setDefaultTextEncodingName:")
+	_webPreferencesSelUserStyleSheetEnabled                    = objc.RegisterName("userStyleSheetEnabled")
+	_webPreferencesSelSetUserStyleSheetEnabled                 = objc.RegisterName("setUserStyleSheetEnabled:")
+	_webPreferencesSelUserStyleSheetLocation                   = objc.RegisterName("userStyleSheetLocation")
+	_webPreferencesSelSetUserStyleSheetLocation                = objc.RegisterName("setUserStyleSheetLocation:")
+	_webPreferencesSelIsJavaEnabled                            = objc.RegisterName("isJavaEnabled")
+	_webPreferencesSelSetJavaEnabled                           = objc.RegisterName("setJavaEnabled:")
+	_webPreferencesSelIsJavaScriptEnabled                      = objc.RegisterName("isJavaScriptEnabled")
+	_webPreferencesSelSetJavaScriptEnabled                     = objc.RegisterName("setJavaScriptEnabled:")
+	_webPreferencesSelJavaScriptCanOpenWindowsAutomatically    = objc.RegisterName("javaScriptCanOpenWindowsAutomatically")
 	_webPreferencesSelSetJavaScriptCanOpenWindowsAutomatically = objc.RegisterName("setJavaScriptCanOpenWindowsAutomatically:")
-	_webPreferencesSelArePlugInsEnabled = objc.RegisterName("arePlugInsEnabled")
-	_webPreferencesSelSetPlugInsEnabled = objc.RegisterName("setPlugInsEnabled:")
-	_webPreferencesSelAllowsAnimatedImages = objc.RegisterName("allowsAnimatedImages")
-	_webPreferencesSelSetAllowsAnimatedImages = objc.RegisterName("setAllowsAnimatedImages:")
-	_webPreferencesSelAllowsAnimatedImageLooping = objc.RegisterName("allowsAnimatedImageLooping")
-	_webPreferencesSelSetAllowsAnimatedImageLooping = objc.RegisterName("setAllowsAnimatedImageLooping:")
-	_webPreferencesSelLoadsImagesAutomatically = objc.RegisterName("loadsImagesAutomatically")
-	_webPreferencesSelSetLoadsImagesAutomatically = objc.RegisterName("setLoadsImagesAutomatically:")
-	_webPreferencesSelAutosaves = objc.RegisterName("autosaves")
-	_webPreferencesSelSetAutosaves = objc.RegisterName("setAutosaves:")
-	_webPreferencesSelShouldPrintBackgrounds = objc.RegisterName("shouldPrintBackgrounds")
-	_webPreferencesSelSetShouldPrintBackgrounds = objc.RegisterName("setShouldPrintBackgrounds:")
-	_webPreferencesSelPrivateBrowsingEnabled = objc.RegisterName("privateBrowsingEnabled")
-	_webPreferencesSelSetPrivateBrowsingEnabled = objc.RegisterName("setPrivateBrowsingEnabled:")
-	_webPreferencesSelTabsToLinks = objc.RegisterName("tabsToLinks")
-	_webPreferencesSelSetTabsToLinks = objc.RegisterName("setTabsToLinks:")
-	_webPreferencesSelUsesPageCache = objc.RegisterName("usesPageCache")
-	_webPreferencesSelSetUsesPageCache = objc.RegisterName("setUsesPageCache:")
-	_webPreferencesSelCacheModel = objc.RegisterName("cacheModel")
-	_webPreferencesSelSetCacheModel = objc.RegisterName("setCacheModel:")
-	_webPreferencesSelSuppressesIncrementalRendering = objc.RegisterName("suppressesIncrementalRendering")
-	_webPreferencesSelSetSuppressesIncrementalRendering = objc.RegisterName("setSuppressesIncrementalRendering:")
-	_webPreferencesSelAllowsAirPlayForMediaPlayback = objc.RegisterName("allowsAirPlayForMediaPlayback")
-	_webPreferencesSelSetAllowsAirPlayForMediaPlayback = objc.RegisterName("setAllowsAirPlayForMediaPlayback:")
+	_webPreferencesSelArePlugInsEnabled                        = objc.RegisterName("arePlugInsEnabled")
+	_webPreferencesSelSetPlugInsEnabled                        = objc.RegisterName("setPlugInsEnabled:")
+	_webPreferencesSelAllowsAnimatedImages                     = objc.RegisterName("allowsAnimatedImages")
+	_webPreferencesSelSetAllowsAnimatedImages                  = objc.RegisterName("setAllowsAnimatedImages:")
+	_webPreferencesSelAllowsAnimatedImageLooping               = objc.RegisterName("allowsAnimatedImageLooping")
+	_webPreferencesSelSetAllowsAnimatedImageLooping            = objc.RegisterName("setAllowsAnimatedImageLooping:")
+	_webPreferencesSelLoadsImagesAutomatically                 = objc.RegisterName("loadsImagesAutomatically")
+	_webPreferencesSelSetLoadsImagesAutomatically              = objc.RegisterName("setLoadsImagesAutomatically:")
+	_webPreferencesSelAutosaves                                = objc.RegisterName("autosaves")
+	_webPreferencesSelSetAutosaves                             = objc.RegisterName("setAutosaves:")
+	_webPreferencesSelShouldPrintBackgrounds                   = objc.RegisterName("shouldPrintBackgrounds")
+	_webPreferencesSelSetShouldPrintBackgrounds                = objc.RegisterName("setShouldPrintBackgrounds:")
+	_webPreferencesSelPrivateBrowsingEnabled                   = objc.RegisterName("privateBrowsingEnabled")
+	_webPreferencesSelSetPrivateBrowsingEnabled                = objc.RegisterName("setPrivateBrowsingEnabled:")
+	_webPreferencesSelTabsToLinks                              = objc.RegisterName("tabsToLinks")
+	_webPreferencesSelSetTabsToLinks                           = objc.RegisterName("setTabsToLinks:")
+	_webPreferencesSelUsesPageCache                            = objc.RegisterName("usesPageCache")
+	_webPreferencesSelSetUsesPageCache                         = objc.RegisterName("setUsesPageCache:")
+	_webPreferencesSelCacheModel                               = objc.RegisterName("cacheModel")
+	_webPreferencesSelSetCacheModel                            = objc.RegisterName("setCacheModel:")
+	_webPreferencesSelSuppressesIncrementalRendering           = objc.RegisterName("suppressesIncrementalRendering")
+	_webPreferencesSelSetSuppressesIncrementalRendering        = objc.RegisterName("setSuppressesIncrementalRendering:")
+	_webPreferencesSelAllowsAirPlayForMediaPlayback            = objc.RegisterName("allowsAirPlayForMediaPlayback")
+	_webPreferencesSelSetAllowsAirPlayForMediaPlayback         = objc.RegisterName("setAllowsAirPlayForMediaPlayback:")
 )
 
 func WebPreferencesFromID(id objc.ID) *WebPreferences {
@@ -91,28 +91,36 @@ func WebPreferencesFromID(id objc.ID) *WebPreferences {
 // @method standardPreferences
 func WebPreferencesStandardPreferences() *WebPreferences {
 	_ret := objc.Send[objc.ID](objc.ID(_clsWebPreferences), _webPreferencesSelStandardPreferences)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebPreferencesFromID(_ret)
 }
 
 // @method initWithIdentifier: @param anIdentifier A string used to identify the WebPreferences. @discussion WebViews can share instances of WebPreferences by using an instance of WebPreferences with the same identifier.  Typically, instance are not created directly.  Instead you set the preferences identifier on a WebView.  The identifier is used as a prefix that is added to the user defaults keys for the WebPreferences. @result Returns a new instance of WebPreferences or a previously allocated instance with the same identifier.
 func (o *WebPreferences) InitWithIdentifier(anIdentifier *foundation.NSString) *WebPreferences {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webPreferencesSelInitWithIdentifier, anIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebPreferencesFromID(_ret)
 }
 
 // @property identifier @result Returns the identifier for this WebPreferences.
 func (o *WebPreferences) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webPreferencesSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property standardFontFamily
 func (o *WebPreferences) StandardFontFamily() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webPreferencesSelStandardFontFamily)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -123,7 +131,9 @@ func (o *WebPreferences) SetStandardFontFamily(standardFontFamily *foundation.NS
 // @property fixedFontFamily
 func (o *WebPreferences) FixedFontFamily() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webPreferencesSelFixedFontFamily)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -134,7 +144,9 @@ func (o *WebPreferences) SetFixedFontFamily(fixedFontFamily *foundation.NSString
 // @property serifFontFamily
 func (o *WebPreferences) SerifFontFamily() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webPreferencesSelSerifFontFamily)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -145,7 +157,9 @@ func (o *WebPreferences) SetSerifFontFamily(serifFontFamily *foundation.NSString
 // @property sansSerifFontFamily
 func (o *WebPreferences) SansSerifFontFamily() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webPreferencesSelSansSerifFontFamily)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -156,7 +170,9 @@ func (o *WebPreferences) SetSansSerifFontFamily(sansSerifFontFamily *foundation.
 // @property cursiveFontFamily
 func (o *WebPreferences) CursiveFontFamily() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webPreferencesSelCursiveFontFamily)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -167,7 +183,9 @@ func (o *WebPreferences) SetCursiveFontFamily(cursiveFontFamily *foundation.NSSt
 // @property fantasyFontFamily
 func (o *WebPreferences) FantasyFontFamily() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webPreferencesSelFantasyFontFamily)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -218,7 +236,9 @@ func (o *WebPreferences) SetMinimumLogicalFontSize(minimumLogicalFontSize int) {
 // @property defaultTextEncodingName
 func (o *WebPreferences) DefaultTextEncodingName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webPreferencesSelDefaultTextEncodingName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -239,7 +259,9 @@ func (o *WebPreferences) SetUserStyleSheetEnabled(userStyleSheetEnabled bool) {
 // @property userStyleSheetLocation @abstract The location of the user style sheet.
 func (o *WebPreferences) UserStyleSheetLocation() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webPreferencesSelUserStyleSheetLocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -396,4 +418,3 @@ func (o *WebPreferences) AllowsAirPlayForMediaPlayback() bool {
 func (o *WebPreferences) SetAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback bool) {
 	o.Ptr().Send(_webPreferencesSelSetAllowsAirPlayForMediaPlayback, allowsAirPlayForMediaPlayback)
 }
-

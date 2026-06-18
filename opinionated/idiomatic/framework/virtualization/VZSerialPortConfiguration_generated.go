@@ -55,7 +55,9 @@ func (x *SerialPortConfiguration) SetAttachment(attachment *raw.VZSerialPortAtta
 	x.inner.SetAttachment(attachment)
 }
 
-func (x *SerialPortConfiguration) asSerialPortConfiguration() *raw.VZSerialPortConfiguration { return x.inner }
+func (x *SerialPortConfiguration) asSerialPortConfiguration() *raw.VZSerialPortConfiguration {
+	return x.inner
+}
 
 // SerialPortConfigurationable is the interface implemented by [SerialPortConfiguration], for mocking and DI.
 type SerialPortConfigurationable interface {
@@ -66,4 +68,3 @@ type SerialPortConfigurationable interface {
 }
 
 var _ SerialPortConfigurationable = (*SerialPortConfiguration)(nil)
-

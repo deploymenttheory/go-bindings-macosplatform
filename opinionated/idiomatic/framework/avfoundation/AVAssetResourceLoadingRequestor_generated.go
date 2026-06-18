@@ -47,4 +47,3 @@ type AssetResourceLoadingRequestorable interface {
 }
 
 var _ AssetResourceLoadingRequestorable = (*AssetResourceLoadingRequestor)(nil)
-

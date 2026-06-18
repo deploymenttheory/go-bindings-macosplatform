@@ -161,7 +161,9 @@ func (x *GameCenterViewController) SetLeaderboardCategory(leaderboardCategory st
 	x.inner.SetLeaderboardCategory(foundation.NSStringStringWithUTF8String(leaderboardCategory))
 }
 
-func (x *GameCenterViewController) asGameCenterViewController() *raw.GKGameCenterViewController { return x.inner }
+func (x *GameCenterViewController) asGameCenterViewController() *raw.GKGameCenterViewController {
+	return x.inner
+}
 
 // GameCenterViewControllerable is the interface implemented by [GameCenterViewController], for mocking and DI.
 type GameCenterViewControllerable interface {
@@ -184,4 +186,3 @@ type GameCenterViewControllerable interface {
 }
 
 var _ GameCenterViewControllerable = (*GameCenterViewController)(nil)
-

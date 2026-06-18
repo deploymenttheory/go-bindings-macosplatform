@@ -19,9 +19,9 @@ type MPSNDArrayBinarySecondaryGradientKernel struct {
 }
 
 var (
-	_clsMPSNDArrayBinarySecondaryGradientKernel = _objcClass("MPSNDArrayBinarySecondaryGradientKernel")
-	_mPSNDArrayBinarySecondaryGradientKernelSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSNDArrayBinarySecondaryGradientKernelSelEncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientState = objc.RegisterName("encodeToCommandBuffer:primarySourceArray:secondarySourceArray:sourceGradient:gradientState:")
+	_clsMPSNDArrayBinarySecondaryGradientKernel                                                                                                       = _objcClass("MPSNDArrayBinarySecondaryGradientKernel")
+	_mPSNDArrayBinarySecondaryGradientKernelSelInitWithCoderDevice                                                                                    = objc.RegisterName("initWithCoder:device:")
+	_mPSNDArrayBinarySecondaryGradientKernelSelEncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientState                 = objc.RegisterName("encodeToCommandBuffer:primarySourceArray:secondarySourceArray:sourceGradient:gradientState:")
 	_mPSNDArrayBinarySecondaryGradientKernelSelEncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientStateDestinationArray = objc.RegisterName("encodeToCommandBuffer:primarySourceArray:secondarySourceArray:sourceGradient:gradientState:destinationArray:")
 )
 
@@ -37,17 +37,20 @@ func MPSNDArrayBinarySecondaryGradientKernelFromID(id objc.ID) *MPSNDArrayBinary
 
 func (o *MPSNDArrayBinarySecondaryGradientKernel) InitWithCoderDevice(coder *foundation.NSCoder, device metal.MTLDevice) *MPSNDArrayBinarySecondaryGradientKernel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayBinarySecondaryGradientKernelSelInitWithCoderDevice, coder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNDArrayBinarySecondaryGradientKernelFromID(_ret)
 }
 
 func (o *MPSNDArrayBinarySecondaryGradientKernel) EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientState(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState) *mpscore.MPSNDArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayBinarySecondaryGradientKernelSelEncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientState, cmdBuf, primarySourceArray.Ptr(), secondarySourceArray.Ptr(), gradient.Ptr(), state.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpscore.MPSNDArrayFromID(_ret)
 }
 
 func (o *MPSNDArrayBinarySecondaryGradientKernel) EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientStateDestinationArray(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState, destination *mpscore.MPSNDArray) {
 	o.Ptr().Send(_mPSNDArrayBinarySecondaryGradientKernelSelEncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientStateDestinationArray, cmdBuf, primarySourceArray.Ptr(), secondarySourceArray.Ptr(), gradient.Ptr(), state.Ptr(), destination.Ptr())
 }
-

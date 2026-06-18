@@ -18,29 +18,29 @@ type MTRBaseClusterPowerTopology struct {
 }
 
 var (
-	_clsMTRBaseClusterPowerTopology = _objcClass("MTRBaseClusterPowerTopology")
-	_mTRBaseClusterPowerTopologySelReadAttributeAvailableEndpointsWithCompletion = objc.RegisterName("readAttributeAvailableEndpointsWithCompletion:")
-	_mTRBaseClusterPowerTopologySelSubscribeAttributeAvailableEndpointsWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAvailableEndpointsWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterPowerTopologySelReadAttributeAvailableEndpointsWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeAvailableEndpointsWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterPowerTopologySelReadAttributeActiveEndpointsWithCompletion = objc.RegisterName("readAttributeActiveEndpointsWithCompletion:")
-	_mTRBaseClusterPowerTopologySelSubscribeAttributeActiveEndpointsWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeActiveEndpointsWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterPowerTopologySelReadAttributeActiveEndpointsWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeActiveEndpointsWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterPowerTopologySelReadAttributeGeneratedCommandListWithCompletion = objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:")
+	_clsMTRBaseClusterPowerTopology                                                                                     = _objcClass("MTRBaseClusterPowerTopology")
+	_mTRBaseClusterPowerTopologySelReadAttributeAvailableEndpointsWithCompletion                                        = objc.RegisterName("readAttributeAvailableEndpointsWithCompletion:")
+	_mTRBaseClusterPowerTopologySelSubscribeAttributeAvailableEndpointsWithParamsSubscriptionEstablishedReportHandler   = objc.RegisterName("subscribeAttributeAvailableEndpointsWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterPowerTopologySelReadAttributeAvailableEndpointsWithClusterStateCacheEndpointQueueCompletion          = objc.RegisterName("readAttributeAvailableEndpointsWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterPowerTopologySelReadAttributeActiveEndpointsWithCompletion                                           = objc.RegisterName("readAttributeActiveEndpointsWithCompletion:")
+	_mTRBaseClusterPowerTopologySelSubscribeAttributeActiveEndpointsWithParamsSubscriptionEstablishedReportHandler      = objc.RegisterName("subscribeAttributeActiveEndpointsWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterPowerTopologySelReadAttributeActiveEndpointsWithClusterStateCacheEndpointQueueCompletion             = objc.RegisterName("readAttributeActiveEndpointsWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterPowerTopologySelReadAttributeGeneratedCommandListWithCompletion                                      = objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:")
 	_mTRBaseClusterPowerTopologySelSubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterPowerTopologySelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeGeneratedCommandListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterPowerTopologySelReadAttributeAcceptedCommandListWithCompletion = objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:")
-	_mTRBaseClusterPowerTopologySelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterPowerTopologySelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeAcceptedCommandListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterPowerTopologySelReadAttributeAttributeListWithCompletion = objc.RegisterName("readAttributeAttributeListWithCompletion:")
-	_mTRBaseClusterPowerTopologySelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterPowerTopologySelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeAttributeListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterPowerTopologySelReadAttributeFeatureMapWithCompletion = objc.RegisterName("readAttributeFeatureMapWithCompletion:")
-	_mTRBaseClusterPowerTopologySelSubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterPowerTopologySelReadAttributeFeatureMapWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeFeatureMapWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterPowerTopologySelReadAttributeClusterRevisionWithCompletion = objc.RegisterName("readAttributeClusterRevisionWithCompletion:")
-	_mTRBaseClusterPowerTopologySelSubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterPowerTopologySelReadAttributeClusterRevisionWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeClusterRevisionWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterPowerTopologySelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRBaseClusterPowerTopologySelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion        = objc.RegisterName("readAttributeGeneratedCommandListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterPowerTopologySelReadAttributeAcceptedCommandListWithCompletion                                       = objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:")
+	_mTRBaseClusterPowerTopologySelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler  = objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterPowerTopologySelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion         = objc.RegisterName("readAttributeAcceptedCommandListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterPowerTopologySelReadAttributeAttributeListWithCompletion                                             = objc.RegisterName("readAttributeAttributeListWithCompletion:")
+	_mTRBaseClusterPowerTopologySelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler        = objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterPowerTopologySelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion               = objc.RegisterName("readAttributeAttributeListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterPowerTopologySelReadAttributeFeatureMapWithCompletion                                                = objc.RegisterName("readAttributeFeatureMapWithCompletion:")
+	_mTRBaseClusterPowerTopologySelSubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler           = objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterPowerTopologySelReadAttributeFeatureMapWithClusterStateCacheEndpointQueueCompletion                  = objc.RegisterName("readAttributeFeatureMapWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterPowerTopologySelReadAttributeClusterRevisionWithCompletion                                           = objc.RegisterName("readAttributeClusterRevisionWithCompletion:")
+	_mTRBaseClusterPowerTopologySelSubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler      = objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterPowerTopologySelReadAttributeClusterRevisionWithClusterStateCacheEndpointQueueCompletion             = objc.RegisterName("readAttributeClusterRevisionWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterPowerTopologySelInitWithDeviceEndpointIDQueue                                                        = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRBaseClusterPowerTopologyFromID(id objc.ID) *MTRBaseClusterPowerTopology {
@@ -249,7 +249,8 @@ func MTRBaseClusterPowerTopologyReadAttributeClusterRevisionWithClusterStateCach
 // For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func (o *MTRBaseClusterPowerTopology) InitWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterPowerTopology {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBaseClusterPowerTopologySelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRBaseClusterPowerTopologyFromID(_ret)
 }
-

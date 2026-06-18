@@ -16,10 +16,10 @@ type SFTranscription struct {
 }
 
 var (
-	_clsSFTranscription = _objcClass("SFTranscription")
-	_sFTranscriptionSelFormattedString = objc.RegisterName("formattedString")
-	_sFTranscriptionSelSegments = objc.RegisterName("segments")
-	_sFTranscriptionSelSpeakingRate = objc.RegisterName("speakingRate")
+	_clsSFTranscription                     = _objcClass("SFTranscription")
+	_sFTranscriptionSelFormattedString      = objc.RegisterName("formattedString")
+	_sFTranscriptionSelSegments             = objc.RegisterName("segments")
+	_sFTranscriptionSelSpeakingRate         = objc.RegisterName("speakingRate")
 	_sFTranscriptionSelAveragePauseDuration = objc.RegisterName("averagePauseDuration")
 )
 
@@ -36,14 +36,18 @@ func SFTranscriptionFromID(id objc.ID) *SFTranscription {
 // The entire transcription of utterances, formatted into a single, user-displayable string.
 func (o *SFTranscription) FormattedString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFTranscriptionSelFormattedString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // An array of transcription segments that represent the parts of the transcription, as identified by the speech recognizer. The order of the segments in the array matches the order in which the corresponding utterances occur in the spoken content.
 func (o *SFTranscription) Segments() *foundation.NSArray[*SFTranscriptionSegment] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFTranscriptionSelSegments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SFTranscriptionSegment](_ret)
 }
 
@@ -60,4 +64,3 @@ func (o *SFTranscription) AveragePauseDuration() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _sFTranscriptionSelAveragePauseDuration)
 	return _ret
 }
-

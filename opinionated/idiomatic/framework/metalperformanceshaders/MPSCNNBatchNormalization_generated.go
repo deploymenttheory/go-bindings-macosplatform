@@ -181,7 +181,9 @@ func (x *CNNBatchNormalization) DataSource() mpsneuralnetwork.MPSCNNBatchNormali
 	return x.inner.DataSource()
 }
 
-func (x *CNNBatchNormalization) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNKernel }
+func (x *CNNBatchNormalization) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNKernel
+}
 
 func (x *CNNBatchNormalization) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
 
@@ -214,4 +216,3 @@ type CNNBatchNormalizationable interface {
 }
 
 var _ CNNBatchNormalizationable = (*CNNBatchNormalization)(nil)
-

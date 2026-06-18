@@ -16,9 +16,9 @@ type PHProject struct {
 }
 
 var (
-	_clsPHProject = _objcClass("PHProject")
+	_clsPHProject                     = _objcClass("PHProject")
 	_pHProjectSelProjectExtensionData = objc.RegisterName("projectExtensionData")
-	_pHProjectSelHasProjectPreview = objc.RegisterName("hasProjectPreview")
+	_pHProjectSelHasProjectPreview    = objc.RegisterName("hasProjectPreview")
 )
 
 func PHProjectFromID(id objc.ID) *PHProject {
@@ -33,7 +33,9 @@ func PHProjectFromID(id objc.ID) *PHProject {
 
 func (o *PHProject) ProjectExtensionData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectSelProjectExtensionData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -42,4 +44,3 @@ func (o *PHProject) HasProjectPreview() bool {
 	_ret := objc.Send[bool](o.Ptr(), _pHProjectSelHasProjectPreview)
 	return _ret
 }
-

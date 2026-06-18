@@ -258,4 +258,3 @@ func UseDictionary(chan_ *raw.SpeechChannelRecord, dictionary *string) int16 {
 func UseSpeechDictionary(chan_ *raw.SpeechChannelRecord, speechDictionary unsafe.Pointer) int16 {
 	return raw.UseSpeechDictionary(chan_, speechDictionary)
 }
-

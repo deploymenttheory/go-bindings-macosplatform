@@ -132,4 +132,3 @@ type PhotoLibraryable interface {
 }
 
 var _ PhotoLibraryable = (*PhotoLibrary)(nil)
-

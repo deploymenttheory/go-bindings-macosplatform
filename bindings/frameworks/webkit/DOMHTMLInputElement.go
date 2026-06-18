@@ -16,55 +16,55 @@ type DOMHTMLInputElement struct {
 }
 
 var (
-	_clsDOMHTMLInputElement = _objcClass("DOMHTMLInputElement")
-	_dOMHTMLInputElementSelSelect = objc.RegisterName("select")
+	_clsDOMHTMLInputElement                     = _objcClass("DOMHTMLInputElement")
+	_dOMHTMLInputElementSelSelect               = objc.RegisterName("select")
 	_dOMHTMLInputElementSelSetSelectionRangeEnd = objc.RegisterName("setSelectionRange:end:")
-	_dOMHTMLInputElementSelAccept = objc.RegisterName("accept")
-	_dOMHTMLInputElementSelSetAccept = objc.RegisterName("setAccept:")
-	_dOMHTMLInputElementSelAlt = objc.RegisterName("alt")
-	_dOMHTMLInputElementSelSetAlt = objc.RegisterName("setAlt:")
-	_dOMHTMLInputElementSelAutofocus = objc.RegisterName("autofocus")
-	_dOMHTMLInputElementSelSetAutofocus = objc.RegisterName("setAutofocus:")
-	_dOMHTMLInputElementSelDefaultChecked = objc.RegisterName("defaultChecked")
-	_dOMHTMLInputElementSelSetDefaultChecked = objc.RegisterName("setDefaultChecked:")
-	_dOMHTMLInputElementSelChecked = objc.RegisterName("checked")
-	_dOMHTMLInputElementSelSetChecked = objc.RegisterName("setChecked:")
-	_dOMHTMLInputElementSelDisabled = objc.RegisterName("disabled")
-	_dOMHTMLInputElementSelSetDisabled = objc.RegisterName("setDisabled:")
-	_dOMHTMLInputElementSelForm = objc.RegisterName("form")
-	_dOMHTMLInputElementSelFiles = objc.RegisterName("files")
-	_dOMHTMLInputElementSelSetFiles = objc.RegisterName("setFiles:")
-	_dOMHTMLInputElementSelIndeterminate = objc.RegisterName("indeterminate")
-	_dOMHTMLInputElementSelSetIndeterminate = objc.RegisterName("setIndeterminate:")
-	_dOMHTMLInputElementSelMaxLength = objc.RegisterName("maxLength")
-	_dOMHTMLInputElementSelSetMaxLength = objc.RegisterName("setMaxLength:")
-	_dOMHTMLInputElementSelMultiple = objc.RegisterName("multiple")
-	_dOMHTMLInputElementSelSetMultiple = objc.RegisterName("setMultiple:")
-	_dOMHTMLInputElementSelName = objc.RegisterName("name")
-	_dOMHTMLInputElementSelSetName = objc.RegisterName("setName:")
-	_dOMHTMLInputElementSelReadOnly = objc.RegisterName("readOnly")
-	_dOMHTMLInputElementSelSetReadOnly = objc.RegisterName("setReadOnly:")
-	_dOMHTMLInputElementSelSize = objc.RegisterName("size")
-	_dOMHTMLInputElementSelSetSize = objc.RegisterName("setSize:")
-	_dOMHTMLInputElementSelSrc = objc.RegisterName("src")
-	_dOMHTMLInputElementSelSetSrc = objc.RegisterName("setSrc:")
-	_dOMHTMLInputElementSelType = objc.RegisterName("type")
-	_dOMHTMLInputElementSelSetType = objc.RegisterName("setType:")
-	_dOMHTMLInputElementSelDefaultValue = objc.RegisterName("defaultValue")
-	_dOMHTMLInputElementSelSetDefaultValue = objc.RegisterName("setDefaultValue:")
-	_dOMHTMLInputElementSelValue = objc.RegisterName("value")
-	_dOMHTMLInputElementSelSetValue = objc.RegisterName("setValue:")
-	_dOMHTMLInputElementSelWillValidate = objc.RegisterName("willValidate")
-	_dOMHTMLInputElementSelSelectionStart = objc.RegisterName("selectionStart")
-	_dOMHTMLInputElementSelSetSelectionStart = objc.RegisterName("setSelectionStart:")
-	_dOMHTMLInputElementSelSelectionEnd = objc.RegisterName("selectionEnd")
-	_dOMHTMLInputElementSelSetSelectionEnd = objc.RegisterName("setSelectionEnd:")
-	_dOMHTMLInputElementSelAlign = objc.RegisterName("align")
-	_dOMHTMLInputElementSelSetAlign = objc.RegisterName("setAlign:")
-	_dOMHTMLInputElementSelUseMap = objc.RegisterName("useMap")
-	_dOMHTMLInputElementSelSetUseMap = objc.RegisterName("setUseMap:")
-	_dOMHTMLInputElementSelAltDisplayString = objc.RegisterName("altDisplayString")
-	_dOMHTMLInputElementSelAbsoluteImageURL = objc.RegisterName("absoluteImageURL")
+	_dOMHTMLInputElementSelAccept               = objc.RegisterName("accept")
+	_dOMHTMLInputElementSelSetAccept            = objc.RegisterName("setAccept:")
+	_dOMHTMLInputElementSelAlt                  = objc.RegisterName("alt")
+	_dOMHTMLInputElementSelSetAlt               = objc.RegisterName("setAlt:")
+	_dOMHTMLInputElementSelAutofocus            = objc.RegisterName("autofocus")
+	_dOMHTMLInputElementSelSetAutofocus         = objc.RegisterName("setAutofocus:")
+	_dOMHTMLInputElementSelDefaultChecked       = objc.RegisterName("defaultChecked")
+	_dOMHTMLInputElementSelSetDefaultChecked    = objc.RegisterName("setDefaultChecked:")
+	_dOMHTMLInputElementSelChecked              = objc.RegisterName("checked")
+	_dOMHTMLInputElementSelSetChecked           = objc.RegisterName("setChecked:")
+	_dOMHTMLInputElementSelDisabled             = objc.RegisterName("disabled")
+	_dOMHTMLInputElementSelSetDisabled          = objc.RegisterName("setDisabled:")
+	_dOMHTMLInputElementSelForm                 = objc.RegisterName("form")
+	_dOMHTMLInputElementSelFiles                = objc.RegisterName("files")
+	_dOMHTMLInputElementSelSetFiles             = objc.RegisterName("setFiles:")
+	_dOMHTMLInputElementSelIndeterminate        = objc.RegisterName("indeterminate")
+	_dOMHTMLInputElementSelSetIndeterminate     = objc.RegisterName("setIndeterminate:")
+	_dOMHTMLInputElementSelMaxLength            = objc.RegisterName("maxLength")
+	_dOMHTMLInputElementSelSetMaxLength         = objc.RegisterName("setMaxLength:")
+	_dOMHTMLInputElementSelMultiple             = objc.RegisterName("multiple")
+	_dOMHTMLInputElementSelSetMultiple          = objc.RegisterName("setMultiple:")
+	_dOMHTMLInputElementSelName                 = objc.RegisterName("name")
+	_dOMHTMLInputElementSelSetName              = objc.RegisterName("setName:")
+	_dOMHTMLInputElementSelReadOnly             = objc.RegisterName("readOnly")
+	_dOMHTMLInputElementSelSetReadOnly          = objc.RegisterName("setReadOnly:")
+	_dOMHTMLInputElementSelSize                 = objc.RegisterName("size")
+	_dOMHTMLInputElementSelSetSize              = objc.RegisterName("setSize:")
+	_dOMHTMLInputElementSelSrc                  = objc.RegisterName("src")
+	_dOMHTMLInputElementSelSetSrc               = objc.RegisterName("setSrc:")
+	_dOMHTMLInputElementSelType                 = objc.RegisterName("type")
+	_dOMHTMLInputElementSelSetType              = objc.RegisterName("setType:")
+	_dOMHTMLInputElementSelDefaultValue         = objc.RegisterName("defaultValue")
+	_dOMHTMLInputElementSelSetDefaultValue      = objc.RegisterName("setDefaultValue:")
+	_dOMHTMLInputElementSelValue                = objc.RegisterName("value")
+	_dOMHTMLInputElementSelSetValue             = objc.RegisterName("setValue:")
+	_dOMHTMLInputElementSelWillValidate         = objc.RegisterName("willValidate")
+	_dOMHTMLInputElementSelSelectionStart       = objc.RegisterName("selectionStart")
+	_dOMHTMLInputElementSelSetSelectionStart    = objc.RegisterName("setSelectionStart:")
+	_dOMHTMLInputElementSelSelectionEnd         = objc.RegisterName("selectionEnd")
+	_dOMHTMLInputElementSelSetSelectionEnd      = objc.RegisterName("setSelectionEnd:")
+	_dOMHTMLInputElementSelAlign                = objc.RegisterName("align")
+	_dOMHTMLInputElementSelSetAlign             = objc.RegisterName("setAlign:")
+	_dOMHTMLInputElementSelUseMap               = objc.RegisterName("useMap")
+	_dOMHTMLInputElementSelSetUseMap            = objc.RegisterName("setUseMap:")
+	_dOMHTMLInputElementSelAltDisplayString     = objc.RegisterName("altDisplayString")
+	_dOMHTMLInputElementSelAbsoluteImageURL     = objc.RegisterName("absoluteImageURL")
 )
 
 func DOMHTMLInputElementFromID(id objc.ID) *DOMHTMLInputElement {
@@ -87,7 +87,9 @@ func (o *DOMHTMLInputElement) SetSelectionRangeEnd(start int, end int) {
 
 func (o *DOMHTMLInputElement) Accept() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLInputElementSelAccept)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -97,7 +99,9 @@ func (o *DOMHTMLInputElement) SetAccept(accept *foundation.NSString) {
 
 func (o *DOMHTMLInputElement) Alt() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLInputElementSelAlt)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -143,13 +147,17 @@ func (o *DOMHTMLInputElement) SetDisabled(disabled bool) {
 
 func (o *DOMHTMLInputElement) Form() *DOMHTMLFormElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLInputElementSelForm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMHTMLFormElementFromID(_ret)
 }
 
 func (o *DOMHTMLInputElement) Files() *DOMFileList {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLInputElementSelFiles)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMFileListFromID(_ret)
 }
 
@@ -186,7 +194,9 @@ func (o *DOMHTMLInputElement) SetMultiple(multiple bool) {
 
 func (o *DOMHTMLInputElement) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLInputElementSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -205,7 +215,9 @@ func (o *DOMHTMLInputElement) SetReadOnly(readOnly bool) {
 
 func (o *DOMHTMLInputElement) Size() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLInputElementSelSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -215,7 +227,9 @@ func (o *DOMHTMLInputElement) SetSize(size *foundation.NSString) {
 
 func (o *DOMHTMLInputElement) Src() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLInputElementSelSrc)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -225,7 +239,9 @@ func (o *DOMHTMLInputElement) SetSrc(src *foundation.NSString) {
 
 func (o *DOMHTMLInputElement) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLInputElementSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -235,7 +251,9 @@ func (o *DOMHTMLInputElement) SetType(type_ *foundation.NSString) {
 
 func (o *DOMHTMLInputElement) DefaultValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLInputElementSelDefaultValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -245,7 +263,9 @@ func (o *DOMHTMLInputElement) SetDefaultValue(defaultValue *foundation.NSString)
 
 func (o *DOMHTMLInputElement) Value() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLInputElementSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -278,7 +298,9 @@ func (o *DOMHTMLInputElement) SetSelectionEnd(selectionEnd int) {
 
 func (o *DOMHTMLInputElement) Align() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLInputElementSelAlign)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -288,7 +310,9 @@ func (o *DOMHTMLInputElement) SetAlign(align *foundation.NSString) {
 
 func (o *DOMHTMLInputElement) UseMap() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLInputElementSelUseMap)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -298,13 +322,16 @@ func (o *DOMHTMLInputElement) SetUseMap(useMap *foundation.NSString) {
 
 func (o *DOMHTMLInputElement) AltDisplayString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLInputElementSelAltDisplayString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLInputElement) AbsoluteImageURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLInputElementSelAbsoluteImageURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
-

@@ -20,88 +20,88 @@ type NSWorkspace struct {
 }
 
 var (
-	_clsNSWorkspace = _objcClass("NSWorkspace")
-	_nSWorkspaceSelOpenURL = objc.RegisterName("openURL:")
-	_nSWorkspaceSelOpenURLConfigurationCompletionHandler = objc.RegisterName("openURL:configuration:completionHandler:")
-	_nSWorkspaceSelOpenURLsWithApplicationAtURLConfigurationCompletionHandler = objc.RegisterName("openURLs:withApplicationAtURL:configuration:completionHandler:")
-	_nSWorkspaceSelOpenApplicationAtURLConfigurationCompletionHandler = objc.RegisterName("openApplicationAtURL:configuration:completionHandler:")
-	_nSWorkspaceSelSelectFileInFileViewerRootedAtPath = objc.RegisterName("selectFile:inFileViewerRootedAtPath:")
-	_nSWorkspaceSelActivateFileViewerSelectingURLs = objc.RegisterName("activateFileViewerSelectingURLs:")
-	_nSWorkspaceSelShowSearchResultsForQueryString = objc.RegisterName("showSearchResultsForQueryString:")
-	_nSWorkspaceSelNoteFileSystemChanged = objc.RegisterName("noteFileSystemChanged:")
-	_nSWorkspaceSelIsFilePackageAtPath = objc.RegisterName("isFilePackageAtPath:")
-	_nSWorkspaceSelIconForFile = objc.RegisterName("iconForFile:")
-	_nSWorkspaceSelIconForFiles = objc.RegisterName("iconForFiles:")
-	_nSWorkspaceSelIconForContentType = objc.RegisterName("iconForContentType:")
-	_nSWorkspaceSelSetIconForFileOptions = objc.RegisterName("setIcon:forFile:options:")
-	_nSWorkspaceSelRecycleURLsCompletionHandler = objc.RegisterName("recycleURLs:completionHandler:")
-	_nSWorkspaceSelDuplicateURLsCompletionHandler = objc.RegisterName("duplicateURLs:completionHandler:")
-	_nSWorkspaceSelGetFileSystemInfoForPathIsRemovableIsWritableIsUnmountableDescriptionType = objc.RegisterName("getFileSystemInfoForPath:isRemovable:isWritable:isUnmountable:description:type:")
-	_nSWorkspaceSelUnmountAndEjectDeviceAtPath = objc.RegisterName("unmountAndEjectDeviceAtPath:")
-	_nSWorkspaceSelUnmountAndEjectDeviceAtURLError = objc.RegisterName("unmountAndEjectDeviceAtURL:error:")
-	_nSWorkspaceSelExtendPowerOffBy = objc.RegisterName("extendPowerOffBy:")
-	_nSWorkspaceSelHideOtherApplications = objc.RegisterName("hideOtherApplications")
-	_nSWorkspaceSelURLForApplicationWithBundleIdentifier = objc.RegisterName("URLForApplicationWithBundleIdentifier:")
-	_nSWorkspaceSelURLsForApplicationsWithBundleIdentifier = objc.RegisterName("URLsForApplicationsWithBundleIdentifier:")
-	_nSWorkspaceSelURLForApplicationToOpenURL = objc.RegisterName("URLForApplicationToOpenURL:")
-	_nSWorkspaceSelURLsForApplicationsToOpenURL = objc.RegisterName("URLsForApplicationsToOpenURL:")
-	_nSWorkspaceSelSetDefaultApplicationAtURLToOpenContentTypeOfFileAtURLCompletionHandler = objc.RegisterName("setDefaultApplicationAtURL:toOpenContentTypeOfFileAtURL:completionHandler:")
-	_nSWorkspaceSelSetDefaultApplicationAtURLToOpenURLsWithSchemeCompletionHandler = objc.RegisterName("setDefaultApplicationAtURL:toOpenURLsWithScheme:completionHandler:")
-	_nSWorkspaceSelSetDefaultApplicationAtURLToOpenFileAtURLCompletionHandler = objc.RegisterName("setDefaultApplicationAtURL:toOpenFileAtURL:completionHandler:")
-	_nSWorkspaceSelURLForApplicationToOpenContentType = objc.RegisterName("URLForApplicationToOpenContentType:")
-	_nSWorkspaceSelURLsForApplicationsToOpenContentType = objc.RegisterName("URLsForApplicationsToOpenContentType:")
-	_nSWorkspaceSelSetDefaultApplicationAtURLToOpenContentTypeCompletionHandler = objc.RegisterName("setDefaultApplicationAtURL:toOpenContentType:completionHandler:")
-	_nSWorkspaceSelSharedWorkspace = objc.RegisterName("sharedWorkspace")
-	_nSWorkspaceSelNotificationCenter = objc.RegisterName("notificationCenter")
-	_nSWorkspaceSelFileLabels = objc.RegisterName("fileLabels")
-	_nSWorkspaceSelFileLabelColors = objc.RegisterName("fileLabelColors")
-	_nSWorkspaceSelFrontmostApplication = objc.RegisterName("frontmostApplication")
-	_nSWorkspaceSelMenuBarOwningApplication = objc.RegisterName("menuBarOwningApplication")
-	_nSWorkspaceSelSetDesktopImageURLForScreenOptionsError = objc.RegisterName("setDesktopImageURL:forScreen:options:error:")
-	_nSWorkspaceSelDesktopImageURLForScreen = objc.RegisterName("desktopImageURLForScreen:")
-	_nSWorkspaceSelDesktopImageOptionsForScreen = objc.RegisterName("desktopImageOptionsForScreen:")
-	_nSWorkspaceSelRequestAuthorizationOfTypeCompletionHandler = objc.RegisterName("requestAuthorizationOfType:completionHandler:")
-	_nSWorkspaceSelOpenFile = objc.RegisterName("openFile:")
-	_nSWorkspaceSelOpenFileWithApplication = objc.RegisterName("openFile:withApplication:")
-	_nSWorkspaceSelOpenFileWithApplicationAndDeactivate = objc.RegisterName("openFile:withApplication:andDeactivate:")
-	_nSWorkspaceSelLaunchApplication = objc.RegisterName("launchApplication:")
-	_nSWorkspaceSelLaunchApplicationAtURLOptionsConfigurationError = objc.RegisterName("launchApplicationAtURL:options:configuration:error:")
-	_nSWorkspaceSelOpenURLOptionsConfigurationError = objc.RegisterName("openURL:options:configuration:error:")
-	_nSWorkspaceSelOpenURLsWithApplicationAtURLOptionsConfigurationError = objc.RegisterName("openURLs:withApplicationAtURL:options:configuration:error:")
-	_nSWorkspaceSelLaunchApplicationShowIconAutolaunch = objc.RegisterName("launchApplication:showIcon:autolaunch:")
-	_nSWorkspaceSelFullPathForApplication = objc.RegisterName("fullPathForApplication:")
-	_nSWorkspaceSelAbsolutePathForAppBundleWithIdentifier = objc.RegisterName("absolutePathForAppBundleWithIdentifier:")
-	_nSWorkspaceSelLaunchAppWithBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifier = objc.RegisterName("launchAppWithBundleIdentifier:options:additionalEventParamDescriptor:launchIdentifier:")
+	_clsNSWorkspace                                                                                      = _objcClass("NSWorkspace")
+	_nSWorkspaceSelOpenURL                                                                               = objc.RegisterName("openURL:")
+	_nSWorkspaceSelOpenURLConfigurationCompletionHandler                                                 = objc.RegisterName("openURL:configuration:completionHandler:")
+	_nSWorkspaceSelOpenURLsWithApplicationAtURLConfigurationCompletionHandler                            = objc.RegisterName("openURLs:withApplicationAtURL:configuration:completionHandler:")
+	_nSWorkspaceSelOpenApplicationAtURLConfigurationCompletionHandler                                    = objc.RegisterName("openApplicationAtURL:configuration:completionHandler:")
+	_nSWorkspaceSelSelectFileInFileViewerRootedAtPath                                                    = objc.RegisterName("selectFile:inFileViewerRootedAtPath:")
+	_nSWorkspaceSelActivateFileViewerSelectingURLs                                                       = objc.RegisterName("activateFileViewerSelectingURLs:")
+	_nSWorkspaceSelShowSearchResultsForQueryString                                                       = objc.RegisterName("showSearchResultsForQueryString:")
+	_nSWorkspaceSelNoteFileSystemChanged                                                                 = objc.RegisterName("noteFileSystemChanged:")
+	_nSWorkspaceSelIsFilePackageAtPath                                                                   = objc.RegisterName("isFilePackageAtPath:")
+	_nSWorkspaceSelIconForFile                                                                           = objc.RegisterName("iconForFile:")
+	_nSWorkspaceSelIconForFiles                                                                          = objc.RegisterName("iconForFiles:")
+	_nSWorkspaceSelIconForContentType                                                                    = objc.RegisterName("iconForContentType:")
+	_nSWorkspaceSelSetIconForFileOptions                                                                 = objc.RegisterName("setIcon:forFile:options:")
+	_nSWorkspaceSelRecycleURLsCompletionHandler                                                          = objc.RegisterName("recycleURLs:completionHandler:")
+	_nSWorkspaceSelDuplicateURLsCompletionHandler                                                        = objc.RegisterName("duplicateURLs:completionHandler:")
+	_nSWorkspaceSelGetFileSystemInfoForPathIsRemovableIsWritableIsUnmountableDescriptionType             = objc.RegisterName("getFileSystemInfoForPath:isRemovable:isWritable:isUnmountable:description:type:")
+	_nSWorkspaceSelUnmountAndEjectDeviceAtPath                                                           = objc.RegisterName("unmountAndEjectDeviceAtPath:")
+	_nSWorkspaceSelUnmountAndEjectDeviceAtURLError                                                       = objc.RegisterName("unmountAndEjectDeviceAtURL:error:")
+	_nSWorkspaceSelExtendPowerOffBy                                                                      = objc.RegisterName("extendPowerOffBy:")
+	_nSWorkspaceSelHideOtherApplications                                                                 = objc.RegisterName("hideOtherApplications")
+	_nSWorkspaceSelURLForApplicationWithBundleIdentifier                                                 = objc.RegisterName("URLForApplicationWithBundleIdentifier:")
+	_nSWorkspaceSelURLsForApplicationsWithBundleIdentifier                                               = objc.RegisterName("URLsForApplicationsWithBundleIdentifier:")
+	_nSWorkspaceSelURLForApplicationToOpenURL                                                            = objc.RegisterName("URLForApplicationToOpenURL:")
+	_nSWorkspaceSelURLsForApplicationsToOpenURL                                                          = objc.RegisterName("URLsForApplicationsToOpenURL:")
+	_nSWorkspaceSelSetDefaultApplicationAtURLToOpenContentTypeOfFileAtURLCompletionHandler               = objc.RegisterName("setDefaultApplicationAtURL:toOpenContentTypeOfFileAtURL:completionHandler:")
+	_nSWorkspaceSelSetDefaultApplicationAtURLToOpenURLsWithSchemeCompletionHandler                       = objc.RegisterName("setDefaultApplicationAtURL:toOpenURLsWithScheme:completionHandler:")
+	_nSWorkspaceSelSetDefaultApplicationAtURLToOpenFileAtURLCompletionHandler                            = objc.RegisterName("setDefaultApplicationAtURL:toOpenFileAtURL:completionHandler:")
+	_nSWorkspaceSelURLForApplicationToOpenContentType                                                    = objc.RegisterName("URLForApplicationToOpenContentType:")
+	_nSWorkspaceSelURLsForApplicationsToOpenContentType                                                  = objc.RegisterName("URLsForApplicationsToOpenContentType:")
+	_nSWorkspaceSelSetDefaultApplicationAtURLToOpenContentTypeCompletionHandler                          = objc.RegisterName("setDefaultApplicationAtURL:toOpenContentType:completionHandler:")
+	_nSWorkspaceSelSharedWorkspace                                                                       = objc.RegisterName("sharedWorkspace")
+	_nSWorkspaceSelNotificationCenter                                                                    = objc.RegisterName("notificationCenter")
+	_nSWorkspaceSelFileLabels                                                                            = objc.RegisterName("fileLabels")
+	_nSWorkspaceSelFileLabelColors                                                                       = objc.RegisterName("fileLabelColors")
+	_nSWorkspaceSelFrontmostApplication                                                                  = objc.RegisterName("frontmostApplication")
+	_nSWorkspaceSelMenuBarOwningApplication                                                              = objc.RegisterName("menuBarOwningApplication")
+	_nSWorkspaceSelSetDesktopImageURLForScreenOptionsError                                               = objc.RegisterName("setDesktopImageURL:forScreen:options:error:")
+	_nSWorkspaceSelDesktopImageURLForScreen                                                              = objc.RegisterName("desktopImageURLForScreen:")
+	_nSWorkspaceSelDesktopImageOptionsForScreen                                                          = objc.RegisterName("desktopImageOptionsForScreen:")
+	_nSWorkspaceSelRequestAuthorizationOfTypeCompletionHandler                                           = objc.RegisterName("requestAuthorizationOfType:completionHandler:")
+	_nSWorkspaceSelOpenFile                                                                              = objc.RegisterName("openFile:")
+	_nSWorkspaceSelOpenFileWithApplication                                                               = objc.RegisterName("openFile:withApplication:")
+	_nSWorkspaceSelOpenFileWithApplicationAndDeactivate                                                  = objc.RegisterName("openFile:withApplication:andDeactivate:")
+	_nSWorkspaceSelLaunchApplication                                                                     = objc.RegisterName("launchApplication:")
+	_nSWorkspaceSelLaunchApplicationAtURLOptionsConfigurationError                                       = objc.RegisterName("launchApplicationAtURL:options:configuration:error:")
+	_nSWorkspaceSelOpenURLOptionsConfigurationError                                                      = objc.RegisterName("openURL:options:configuration:error:")
+	_nSWorkspaceSelOpenURLsWithApplicationAtURLOptionsConfigurationError                                 = objc.RegisterName("openURLs:withApplicationAtURL:options:configuration:error:")
+	_nSWorkspaceSelLaunchApplicationShowIconAutolaunch                                                   = objc.RegisterName("launchApplication:showIcon:autolaunch:")
+	_nSWorkspaceSelFullPathForApplication                                                                = objc.RegisterName("fullPathForApplication:")
+	_nSWorkspaceSelAbsolutePathForAppBundleWithIdentifier                                                = objc.RegisterName("absolutePathForAppBundleWithIdentifier:")
+	_nSWorkspaceSelLaunchAppWithBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifier    = objc.RegisterName("launchAppWithBundleIdentifier:options:additionalEventParamDescriptor:launchIdentifier:")
 	_nSWorkspaceSelOpenURLsWithAppBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifiers = objc.RegisterName("openURLs:withAppBundleIdentifier:options:additionalEventParamDescriptor:launchIdentifiers:")
-	_nSWorkspaceSelOpenTempFile = objc.RegisterName("openTempFile:")
-	_nSWorkspaceSelFindApplications = objc.RegisterName("findApplications")
-	_nSWorkspaceSelNoteUserDefaultsChanged = objc.RegisterName("noteUserDefaultsChanged")
-	_nSWorkspaceSelSlideImageFromTo = objc.RegisterName("slideImage:from:to:")
-	_nSWorkspaceSelCheckForRemovableMedia = objc.RegisterName("checkForRemovableMedia")
-	_nSWorkspaceSelFileSystemChanged = objc.RegisterName("fileSystemChanged")
-	_nSWorkspaceSelUserDefaultsChanged = objc.RegisterName("userDefaultsChanged")
-	_nSWorkspaceSelMountNewRemovableMedia = objc.RegisterName("mountNewRemovableMedia")
-	_nSWorkspaceSelActiveApplication = objc.RegisterName("activeApplication")
-	_nSWorkspaceSelMountedLocalVolumePaths = objc.RegisterName("mountedLocalVolumePaths")
-	_nSWorkspaceSelMountedRemovableMedia = objc.RegisterName("mountedRemovableMedia")
-	_nSWorkspaceSelLaunchedApplications = objc.RegisterName("launchedApplications")
-	_nSWorkspaceSelOpenFileFromImageAtInView = objc.RegisterName("openFile:fromImage:at:inView:")
-	_nSWorkspaceSelPerformFileOperationSourceDestinationFilesTag = objc.RegisterName("performFileOperation:source:destination:files:tag:")
-	_nSWorkspaceSelGetInfoForFileApplicationType = objc.RegisterName("getInfoForFile:application:type:")
-	_nSWorkspaceSelIconForFileType = objc.RegisterName("iconForFileType:")
-	_nSWorkspaceSelTypeOfFileError = objc.RegisterName("typeOfFile:error:")
-	_nSWorkspaceSelLocalizedDescriptionForType = objc.RegisterName("localizedDescriptionForType:")
-	_nSWorkspaceSelPreferredFilenameExtensionForType = objc.RegisterName("preferredFilenameExtensionForType:")
-	_nSWorkspaceSelFilenameExtensionIsValidForType = objc.RegisterName("filenameExtension:isValidForType:")
-	_nSWorkspaceSelTypeConformsToType = objc.RegisterName("type:conformsToType:")
-	_nSWorkspaceSelAccessibilityDisplayShouldIncreaseContrast = objc.RegisterName("accessibilityDisplayShouldIncreaseContrast")
-	_nSWorkspaceSelAccessibilityDisplayShouldDifferentiateWithoutColor = objc.RegisterName("accessibilityDisplayShouldDifferentiateWithoutColor")
-	_nSWorkspaceSelAccessibilityDisplayShouldReduceTransparency = objc.RegisterName("accessibilityDisplayShouldReduceTransparency")
-	_nSWorkspaceSelAccessibilityDisplayShouldReduceMotion = objc.RegisterName("accessibilityDisplayShouldReduceMotion")
-	_nSWorkspaceSelAccessibilityDisplayShouldInvertColors = objc.RegisterName("accessibilityDisplayShouldInvertColors")
-	_nSWorkspaceSelIsVoiceOverEnabled = objc.RegisterName("isVoiceOverEnabled")
-	_nSWorkspaceSelIsSwitchControlEnabled = objc.RegisterName("isSwitchControlEnabled")
-	_nSWorkspaceSelRunningApplications = objc.RegisterName("runningApplications")
+	_nSWorkspaceSelOpenTempFile                                                                          = objc.RegisterName("openTempFile:")
+	_nSWorkspaceSelFindApplications                                                                      = objc.RegisterName("findApplications")
+	_nSWorkspaceSelNoteUserDefaultsChanged                                                               = objc.RegisterName("noteUserDefaultsChanged")
+	_nSWorkspaceSelSlideImageFromTo                                                                      = objc.RegisterName("slideImage:from:to:")
+	_nSWorkspaceSelCheckForRemovableMedia                                                                = objc.RegisterName("checkForRemovableMedia")
+	_nSWorkspaceSelFileSystemChanged                                                                     = objc.RegisterName("fileSystemChanged")
+	_nSWorkspaceSelUserDefaultsChanged                                                                   = objc.RegisterName("userDefaultsChanged")
+	_nSWorkspaceSelMountNewRemovableMedia                                                                = objc.RegisterName("mountNewRemovableMedia")
+	_nSWorkspaceSelActiveApplication                                                                     = objc.RegisterName("activeApplication")
+	_nSWorkspaceSelMountedLocalVolumePaths                                                               = objc.RegisterName("mountedLocalVolumePaths")
+	_nSWorkspaceSelMountedRemovableMedia                                                                 = objc.RegisterName("mountedRemovableMedia")
+	_nSWorkspaceSelLaunchedApplications                                                                  = objc.RegisterName("launchedApplications")
+	_nSWorkspaceSelOpenFileFromImageAtInView                                                             = objc.RegisterName("openFile:fromImage:at:inView:")
+	_nSWorkspaceSelPerformFileOperationSourceDestinationFilesTag                                         = objc.RegisterName("performFileOperation:source:destination:files:tag:")
+	_nSWorkspaceSelGetInfoForFileApplicationType                                                         = objc.RegisterName("getInfoForFile:application:type:")
+	_nSWorkspaceSelIconForFileType                                                                       = objc.RegisterName("iconForFileType:")
+	_nSWorkspaceSelTypeOfFileError                                                                       = objc.RegisterName("typeOfFile:error:")
+	_nSWorkspaceSelLocalizedDescriptionForType                                                           = objc.RegisterName("localizedDescriptionForType:")
+	_nSWorkspaceSelPreferredFilenameExtensionForType                                                     = objc.RegisterName("preferredFilenameExtensionForType:")
+	_nSWorkspaceSelFilenameExtensionIsValidForType                                                       = objc.RegisterName("filenameExtension:isValidForType:")
+	_nSWorkspaceSelTypeConformsToType                                                                    = objc.RegisterName("type:conformsToType:")
+	_nSWorkspaceSelAccessibilityDisplayShouldIncreaseContrast                                            = objc.RegisterName("accessibilityDisplayShouldIncreaseContrast")
+	_nSWorkspaceSelAccessibilityDisplayShouldDifferentiateWithoutColor                                   = objc.RegisterName("accessibilityDisplayShouldDifferentiateWithoutColor")
+	_nSWorkspaceSelAccessibilityDisplayShouldReduceTransparency                                          = objc.RegisterName("accessibilityDisplayShouldReduceTransparency")
+	_nSWorkspaceSelAccessibilityDisplayShouldReduceMotion                                                = objc.RegisterName("accessibilityDisplayShouldReduceMotion")
+	_nSWorkspaceSelAccessibilityDisplayShouldInvertColors                                                = objc.RegisterName("accessibilityDisplayShouldInvertColors")
+	_nSWorkspaceSelIsVoiceOverEnabled                                                                    = objc.RegisterName("isVoiceOverEnabled")
+	_nSWorkspaceSelIsSwitchControlEnabled                                                                = objc.RegisterName("isSwitchControlEnabled")
+	_nSWorkspaceSelRunningApplications                                                                   = objc.RegisterName("runningApplications")
 )
 
 func NSWorkspaceFromID(id objc.ID) *NSWorkspace {
@@ -186,19 +186,25 @@ func (o *NSWorkspace) IsFilePackageAtPath(fullPath *foundation.NSString) bool {
 
 func (o *NSWorkspace) IconForFile(fullPath *foundation.NSString) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelIconForFile, fullPath.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
 func (o *NSWorkspace) IconForFiles(fullPaths *foundation.NSArray[*foundation.NSString]) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelIconForFiles, fullPaths)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
 func (o *NSWorkspace) IconForContentType(contentType *uniformtypeidentifiers.UTType) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelIconForContentType, contentType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -245,7 +251,9 @@ func (o *NSWorkspace) HideOtherApplications() {
 
 func (o *NSWorkspace) URLForApplicationWithBundleIdentifier(bundleIdentifier *foundation.NSString) *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelURLForApplicationWithBundleIdentifier, bundleIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -256,7 +264,9 @@ func (o *NSWorkspace) URLsForApplicationsWithBundleIdentifier(bundleIdentifier *
 
 func (o *NSWorkspace) URLForApplicationToOpenURL(url *foundation.NSURL) *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelURLForApplicationToOpenURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -300,7 +310,9 @@ func (o *NSWorkspace) SetDefaultApplicationAtURLToOpenFileAtURLCompletionHandler
 
 func (o *NSWorkspace) URLForApplicationToOpenContentType(contentType *uniformtypeidentifiers.UTType) *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelURLForApplicationToOpenContentType, contentType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -322,13 +334,17 @@ func (o *NSWorkspace) SetDefaultApplicationAtURLToOpenContentTypeCompletionHandl
 
 func NSWorkspaceSharedWorkspace() *NSWorkspace {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSWorkspace), _nSWorkspaceSelSharedWorkspace)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWorkspaceFromID(_ret)
 }
 
 func (o *NSWorkspace) NotificationCenter() *foundation.NSNotificationCenter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelNotificationCenter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNotificationCenterFromID(_ret)
 }
 
@@ -339,19 +355,25 @@ func (o *NSWorkspace) FileLabels() *foundation.NSArray[*foundation.NSString] {
 
 func (o *NSWorkspace) FileLabelColors() *foundation.NSArray[*NSColor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelFileLabelColors)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSColor](_ret)
 }
 
 func (o *NSWorkspace) FrontmostApplication() *NSRunningApplication {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelFrontmostApplication)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSRunningApplicationFromID(_ret)
 }
 
 func (o *NSWorkspace) MenuBarOwningApplication() *NSRunningApplication {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelMenuBarOwningApplication)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSRunningApplicationFromID(_ret)
 }
 
@@ -366,7 +388,9 @@ func (o *NSWorkspace) SetDesktopImageURLForScreenOptionsError(url *foundation.NS
 
 func (o *NSWorkspace) DesktopImageURLForScreen(screen *NSScreen) *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelDesktopImageURLForScreen, screen.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -417,7 +441,9 @@ func (o *NSWorkspace) LaunchApplication(appName *foundation.NSString) bool {
 func (o *NSWorkspace) LaunchApplicationAtURLOptionsConfigurationError(url *foundation.NSURL, options NSWorkspaceLaunchOptions, configuration *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*NSRunningApplication, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelLaunchApplicationAtURLOptionsConfigurationError, url.Ptr(), options, configuration, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -428,7 +454,9 @@ func (o *NSWorkspace) LaunchApplicationAtURLOptionsConfigurationError(url *found
 func (o *NSWorkspace) OpenURLOptionsConfigurationError(url *foundation.NSURL, options NSWorkspaceLaunchOptions, configuration *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*NSRunningApplication, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelOpenURLOptionsConfigurationError, url.Ptr(), options, configuration, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -439,7 +467,9 @@ func (o *NSWorkspace) OpenURLOptionsConfigurationError(url *foundation.NSURL, op
 func (o *NSWorkspace) OpenURLsWithApplicationAtURLOptionsConfigurationError(urls *foundation.NSArray[*foundation.NSURL], applicationURL *foundation.NSURL, options NSWorkspaceLaunchOptions, configuration *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*NSRunningApplication, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelOpenURLsWithApplicationAtURLOptionsConfigurationError, urls, applicationURL.Ptr(), options, configuration, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -455,14 +485,18 @@ func (o *NSWorkspace) LaunchApplicationShowIconAutolaunch(appName *foundation.NS
 // Deprecated: Use -[NSWorkspace URLForApplicationWithBundleIdentifier:] instead.
 func (o *NSWorkspace) FullPathForApplication(appName *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelFullPathForApplication, appName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Deprecated: Use -[NSWorkspace URLForApplicationWithBundleIdentifier:] instead.
 func (o *NSWorkspace) AbsolutePathForAppBundleWithIdentifier(bundleIdentifier *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelAbsolutePathForAppBundleWithIdentifier, bundleIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -572,7 +606,9 @@ func (o *NSWorkspace) GetInfoForFileApplicationType(fullPath *foundation.NSStrin
 // Deprecated: Use -[NSWorkspace iconForContentType:] instead.
 func (o *NSWorkspace) IconForFileType(fileType *foundation.NSString) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelIconForFileType, fileType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -580,7 +616,9 @@ func (o *NSWorkspace) IconForFileType(fileType *foundation.NSString) *NSImage {
 func (o *NSWorkspace) TypeOfFileError(absoluteFilePath *foundation.NSString) (*foundation.NSString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelTypeOfFileError, absoluteFilePath.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -590,14 +628,18 @@ func (o *NSWorkspace) TypeOfFileError(absoluteFilePath *foundation.NSString) (*f
 // Deprecated: Use UTType.localizedDescription instead.
 func (o *NSWorkspace) LocalizedDescriptionForType(typeName *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelLocalizedDescriptionForType, typeName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Deprecated: Use UTType.preferredFilenameExtension instead.
 func (o *NSWorkspace) PreferredFilenameExtensionForType(typeName *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelPreferredFilenameExtensionForType, typeName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -651,7 +693,8 @@ func (o *NSWorkspace) IsSwitchControlEnabled() bool {
 // @return An array of `NSRunningApplication`s representing currently running applications. The order of the array is unspecified, but it is stable, meaning that the relative order of particular applications will not change across multiple calls to `runningApplications`. Similar to `NSRunningApplication`'s properties, this property will only change when the main run loop is run in a common mode.  Instead of polling, use key-value observing to be notified of changes to this array property. This property is thread safe, in that it may be called from background threads and the result is returned atomically.  This property is observable through KVO.
 func (o *NSWorkspace) RunningApplications() *foundation.NSArray[*NSRunningApplication] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelRunningApplications)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSRunningApplication](_ret)
 }
-

@@ -16,10 +16,10 @@ type PKBarcodeEventConfigurationRequest struct {
 }
 
 var (
-	_clsPKBarcodeEventConfigurationRequest = _objcClass("PKBarcodeEventConfigurationRequest")
+	_clsPKBarcodeEventConfigurationRequest                        = _objcClass("PKBarcodeEventConfigurationRequest")
 	_pKBarcodeEventConfigurationRequestSelDeviceAccountIdentifier = objc.RegisterName("deviceAccountIdentifier")
-	_pKBarcodeEventConfigurationRequestSelConfigurationData = objc.RegisterName("configurationData")
-	_pKBarcodeEventConfigurationRequestSelConfigurationDataType = objc.RegisterName("configurationDataType")
+	_pKBarcodeEventConfigurationRequestSelConfigurationData       = objc.RegisterName("configurationData")
+	_pKBarcodeEventConfigurationRequestSelConfigurationDataType   = objc.RegisterName("configurationDataType")
 )
 
 func PKBarcodeEventConfigurationRequestFromID(id objc.ID) *PKBarcodeEventConfigurationRequest {
@@ -34,13 +34,17 @@ func PKBarcodeEventConfigurationRequestFromID(id objc.ID) *PKBarcodeEventConfigu
 
 func (o *PKBarcodeEventConfigurationRequest) DeviceAccountIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKBarcodeEventConfigurationRequestSelDeviceAccountIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKBarcodeEventConfigurationRequest) ConfigurationData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKBarcodeEventConfigurationRequestSelConfigurationData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -48,4 +52,3 @@ func (o *PKBarcodeEventConfigurationRequest) ConfigurationDataType() PKBarcodeEv
 	_ret := objc.Send[PKBarcodeEventConfigurationDataType](o.Ptr(), _pKBarcodeEventConfigurationRequestSelConfigurationDataType)
 	return _ret
 }
-

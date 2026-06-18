@@ -15,29 +15,29 @@ type MLCLossLayer struct {
 }
 
 var (
-	_clsMLCLossLayer = _objcClass("MLCLossLayer")
-	_mLCLossLayerSelLayerWithDescriptor = objc.RegisterName("layerWithDescriptor:")
-	_mLCLossLayerSelLayerWithDescriptorWeights = objc.RegisterName("layerWithDescriptor:weights:")
-	_mLCLossLayerSelSoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight = objc.RegisterName("softmaxCrossEntropyLossWithReductionType:labelSmoothing:classCount:weight:")
-	_mLCLossLayerSelSoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights = objc.RegisterName("softmaxCrossEntropyLossWithReductionType:labelSmoothing:classCount:weights:")
-	_mLCLossLayerSelCategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight = objc.RegisterName("categoricalCrossEntropyLossWithReductionType:labelSmoothing:classCount:weight:")
+	_clsMLCLossLayer                                                                            = _objcClass("MLCLossLayer")
+	_mLCLossLayerSelLayerWithDescriptor                                                         = objc.RegisterName("layerWithDescriptor:")
+	_mLCLossLayerSelLayerWithDescriptorWeights                                                  = objc.RegisterName("layerWithDescriptor:weights:")
+	_mLCLossLayerSelSoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight      = objc.RegisterName("softmaxCrossEntropyLossWithReductionType:labelSmoothing:classCount:weight:")
+	_mLCLossLayerSelSoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights     = objc.RegisterName("softmaxCrossEntropyLossWithReductionType:labelSmoothing:classCount:weights:")
+	_mLCLossLayerSelCategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight  = objc.RegisterName("categoricalCrossEntropyLossWithReductionType:labelSmoothing:classCount:weight:")
 	_mLCLossLayerSelCategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights = objc.RegisterName("categoricalCrossEntropyLossWithReductionType:labelSmoothing:classCount:weights:")
-	_mLCLossLayerSelSigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeight = objc.RegisterName("sigmoidCrossEntropyLossWithReductionType:labelSmoothing:weight:")
-	_mLCLossLayerSelSigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeights = objc.RegisterName("sigmoidCrossEntropyLossWithReductionType:labelSmoothing:weights:")
-	_mLCLossLayerSelLogLossWithReductionTypeEpsilonWeight = objc.RegisterName("logLossWithReductionType:epsilon:weight:")
-	_mLCLossLayerSelLogLossWithReductionTypeEpsilonWeights = objc.RegisterName("logLossWithReductionType:epsilon:weights:")
-	_mLCLossLayerSelHuberLossWithReductionTypeDeltaWeight = objc.RegisterName("huberLossWithReductionType:delta:weight:")
-	_mLCLossLayerSelHuberLossWithReductionTypeDeltaWeights = objc.RegisterName("huberLossWithReductionType:delta:weights:")
-	_mLCLossLayerSelMeanAbsoluteErrorLossWithReductionTypeWeight = objc.RegisterName("meanAbsoluteErrorLossWithReductionType:weight:")
-	_mLCLossLayerSelMeanAbsoluteErrorLossWithReductionTypeWeights = objc.RegisterName("meanAbsoluteErrorLossWithReductionType:weights:")
-	_mLCLossLayerSelMeanSquaredErrorLossWithReductionTypeWeight = objc.RegisterName("meanSquaredErrorLossWithReductionType:weight:")
-	_mLCLossLayerSelMeanSquaredErrorLossWithReductionTypeWeights = objc.RegisterName("meanSquaredErrorLossWithReductionType:weights:")
-	_mLCLossLayerSelHingeLossWithReductionTypeWeight = objc.RegisterName("hingeLossWithReductionType:weight:")
-	_mLCLossLayerSelHingeLossWithReductionTypeWeights = objc.RegisterName("hingeLossWithReductionType:weights:")
-	_mLCLossLayerSelCosineDistanceLossWithReductionTypeWeight = objc.RegisterName("cosineDistanceLossWithReductionType:weight:")
-	_mLCLossLayerSelCosineDistanceLossWithReductionTypeWeights = objc.RegisterName("cosineDistanceLossWithReductionType:weights:")
-	_mLCLossLayerSelDescriptor = objc.RegisterName("descriptor")
-	_mLCLossLayerSelWeights = objc.RegisterName("weights")
+	_mLCLossLayerSelSigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeight                = objc.RegisterName("sigmoidCrossEntropyLossWithReductionType:labelSmoothing:weight:")
+	_mLCLossLayerSelSigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeights               = objc.RegisterName("sigmoidCrossEntropyLossWithReductionType:labelSmoothing:weights:")
+	_mLCLossLayerSelLogLossWithReductionTypeEpsilonWeight                                       = objc.RegisterName("logLossWithReductionType:epsilon:weight:")
+	_mLCLossLayerSelLogLossWithReductionTypeEpsilonWeights                                      = objc.RegisterName("logLossWithReductionType:epsilon:weights:")
+	_mLCLossLayerSelHuberLossWithReductionTypeDeltaWeight                                       = objc.RegisterName("huberLossWithReductionType:delta:weight:")
+	_mLCLossLayerSelHuberLossWithReductionTypeDeltaWeights                                      = objc.RegisterName("huberLossWithReductionType:delta:weights:")
+	_mLCLossLayerSelMeanAbsoluteErrorLossWithReductionTypeWeight                                = objc.RegisterName("meanAbsoluteErrorLossWithReductionType:weight:")
+	_mLCLossLayerSelMeanAbsoluteErrorLossWithReductionTypeWeights                               = objc.RegisterName("meanAbsoluteErrorLossWithReductionType:weights:")
+	_mLCLossLayerSelMeanSquaredErrorLossWithReductionTypeWeight                                 = objc.RegisterName("meanSquaredErrorLossWithReductionType:weight:")
+	_mLCLossLayerSelMeanSquaredErrorLossWithReductionTypeWeights                                = objc.RegisterName("meanSquaredErrorLossWithReductionType:weights:")
+	_mLCLossLayerSelHingeLossWithReductionTypeWeight                                            = objc.RegisterName("hingeLossWithReductionType:weight:")
+	_mLCLossLayerSelHingeLossWithReductionTypeWeights                                           = objc.RegisterName("hingeLossWithReductionType:weights:")
+	_mLCLossLayerSelCosineDistanceLossWithReductionTypeWeight                                   = objc.RegisterName("cosineDistanceLossWithReductionType:weight:")
+	_mLCLossLayerSelCosineDistanceLossWithReductionTypeWeights                                  = objc.RegisterName("cosineDistanceLossWithReductionType:weights:")
+	_mLCLossLayerSelDescriptor                                                                  = objc.RegisterName("descriptor")
+	_mLCLossLayerSelWeights                                                                     = objc.RegisterName("weights")
 )
 
 func MLCLossLayerFromID(id objc.ID) *MLCLossLayer {
@@ -53,154 +53,197 @@ func MLCLossLayerFromID(id objc.ID) *MLCLossLayer {
 // @abstract   Create a loss layer @param      lossDescriptor          The loss descriptor @return     A new loss layer.
 func MLCLossLayerLayerWithDescriptor(lossDescriptor *MLCLossDescriptor) *MLCLossLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLossLayer), _mLCLossLayerSelLayerWithDescriptor, lossDescriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCLossLayerFromID(_ret)
 }
 
 // @abstract   Create a MLComputeLoss layer @param      lossDescriptor          The loss descriptor @param      weights                          The loss label weights tensor @return     A new loss layer.
 func MLCLossLayerLayerWithDescriptorWeights(lossDescriptor *MLCLossDescriptor, weights *MLCTensor) *MLCLossLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLossLayer), _mLCLossLayerSelLayerWithDescriptorWeights, lossDescriptor.Ptr(), weights.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCLossLayerFromID(_ret)
 }
 
 // @abstract   Create a loss layer @param      reductionType      The reduction type to use @param      labelSmoothing     Label smoothing value @param      classCount             Number of classes @param      weight                      A scalar floating point value @return     A new softmax cross entropy loss layer.
 func MLCLossLayerSoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight(reductionType MLCReductionType, labelSmoothing float32, classCount uint, weight float32) *MLCLossLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLossLayer), _mLCLossLayerSelSoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight, reductionType, labelSmoothing, classCount, weight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCLossLayerFromID(_ret)
 }
 
 // @abstract   Create a loss layer @param      reductionType         The reduction type to use @param      labelSmoothing        Label smoothing value @param      classCount                 Number of classes @param      weights                        The loss label weights tensor @return     A new softmax cross entropy loss layer.
 func MLCLossLayerSoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights(reductionType MLCReductionType, labelSmoothing float32, classCount uint, weights *MLCTensor) *MLCLossLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLossLayer), _mLCLossLayerSelSoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights, reductionType, labelSmoothing, classCount, weights.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCLossLayerFromID(_ret)
 }
 
 // @abstract   Create a loss layer @param      reductionType      The reduction type to use @param      labelSmoothing     Label smoothing value @param      classCount              Number of classes @param      weight                       A scalar floating point value @return     A new categorical cross entropy loss layer.
 func MLCLossLayerCategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight(reductionType MLCReductionType, labelSmoothing float32, classCount uint, weight float32) *MLCLossLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLossLayer), _mLCLossLayerSelCategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight, reductionType, labelSmoothing, classCount, weight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCLossLayerFromID(_ret)
 }
 
 // @abstract   Create a loss layer @param      reductionType         The reduction type to use @param      labelSmoothing        Label smoothing value @param      classCount                 Number of classes @param      weights                        The loss label weights tensor @return     A new categorical cross entropy loss layer.
 func MLCLossLayerCategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights(reductionType MLCReductionType, labelSmoothing float32, classCount uint, weights *MLCTensor) *MLCLossLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLossLayer), _mLCLossLayerSelCategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights, reductionType, labelSmoothing, classCount, weights.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCLossLayerFromID(_ret)
 }
 
 // @abstract   Create a loss layer @param      reductionType         The reduction type to use @param      labelSmoothing       Label smoothing value @param      weight                         A scalar floating-point value @return     A new sigmoid cross entropy loss layer.
 func MLCLossLayerSigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeight(reductionType MLCReductionType, labelSmoothing float32, weight float32) *MLCLossLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLossLayer), _mLCLossLayerSelSigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeight, reductionType, labelSmoothing, weight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCLossLayerFromID(_ret)
 }
 
 // @abstract   Create a loss layer @param      reductionType         The reduction type to use @param      labelSmoothing       Label smoothing value @param      weights                       The loss label weights tensor @return     A new sigmoid cross entropy loss layer.
 func MLCLossLayerSigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeights(reductionType MLCReductionType, labelSmoothing float32, weights *MLCTensor) *MLCLossLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLossLayer), _mLCLossLayerSelSigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeights, reductionType, labelSmoothing, weights.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCLossLayerFromID(_ret)
 }
 
 // @abstract   Create a loss layer @param      reductionType         The reduction type to use @param      epsilon                       The epsilon parameter @param      weight                         A scalar floating-point value @return     A new log loss layer.
 func MLCLossLayerLogLossWithReductionTypeEpsilonWeight(reductionType MLCReductionType, epsilon float32, weight float32) *MLCLossLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLossLayer), _mLCLossLayerSelLogLossWithReductionTypeEpsilonWeight, reductionType, epsilon, weight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCLossLayerFromID(_ret)
 }
 
 // @abstract   Create a loss layer @param      reductionType          The reduction type to use @param      epsilon                       The epsilon parameter @param      weights                       The loss label weights tensor @return     A new log loss layer.
 func MLCLossLayerLogLossWithReductionTypeEpsilonWeights(reductionType MLCReductionType, epsilon float32, weights *MLCTensor) *MLCLossLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLossLayer), _mLCLossLayerSelLogLossWithReductionTypeEpsilonWeights, reductionType, epsilon, weights.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCLossLayerFromID(_ret)
 }
 
 // @abstract   Create a loss layer @param      reductionType         The reduction type to use @param      delta                           The delta parameter @param      weight                         A scalar floating-point value @return     A new huber loss layer.
 func MLCLossLayerHuberLossWithReductionTypeDeltaWeight(reductionType MLCReductionType, delta float32, weight float32) *MLCLossLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLossLayer), _mLCLossLayerSelHuberLossWithReductionTypeDeltaWeight, reductionType, delta, weight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCLossLayerFromID(_ret)
 }
 
 // @abstract   Create a loss layer @param      reductionType          The reduction type to use @param      delta                            The delta parameter @param      weights                        The loss label weights tensor @return     A new huber loss layer.
 func MLCLossLayerHuberLossWithReductionTypeDeltaWeights(reductionType MLCReductionType, delta float32, weights *MLCTensor) *MLCLossLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLossLayer), _mLCLossLayerSelHuberLossWithReductionTypeDeltaWeights, reductionType, delta, weights.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCLossLayerFromID(_ret)
 }
 
 // @abstract   Create a loss layer @param      reductionType         The reduction type to use @param      weight                         A scalar floating-point value @return     A new L1 i.e. mean absolute error loss layer.
 func MLCLossLayerMeanAbsoluteErrorLossWithReductionTypeWeight(reductionType MLCReductionType, weight float32) *MLCLossLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLossLayer), _mLCLossLayerSelMeanAbsoluteErrorLossWithReductionTypeWeight, reductionType, weight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCLossLayerFromID(_ret)
 }
 
 // @abstract   Create a loss layer @param      reductionType          The reduction type to use @param      weights                       The loss label weights tensor @return     A new L1 i.e. mean absolute error loss layer.
 func MLCLossLayerMeanAbsoluteErrorLossWithReductionTypeWeights(reductionType MLCReductionType, weights *MLCTensor) *MLCLossLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLossLayer), _mLCLossLayerSelMeanAbsoluteErrorLossWithReductionTypeWeights, reductionType, weights.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCLossLayerFromID(_ret)
 }
 
 // @abstract   Create a loss layer @param      reductionType          The reduction type to use @param      weight                         A scalar floating-point value @return     A new L2 i.e. mean squared error loss layer.
 func MLCLossLayerMeanSquaredErrorLossWithReductionTypeWeight(reductionType MLCReductionType, weight float32) *MLCLossLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLossLayer), _mLCLossLayerSelMeanSquaredErrorLossWithReductionTypeWeight, reductionType, weight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCLossLayerFromID(_ret)
 }
 
 // @abstract   Create a loss layer @param      reductionType          The reduction type to use @param      weights                       The loss label weights tensor @return     A new L2 i.e. mean squared error loss layer.
 func MLCLossLayerMeanSquaredErrorLossWithReductionTypeWeights(reductionType MLCReductionType, weights *MLCTensor) *MLCLossLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLossLayer), _mLCLossLayerSelMeanSquaredErrorLossWithReductionTypeWeights, reductionType, weights.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCLossLayerFromID(_ret)
 }
 
 // @abstract   Create a loss layer @param      reductionType         The reduction type to use @param      weight                         A scalar floating-point value @return     A new hinge loss layer.
 func MLCLossLayerHingeLossWithReductionTypeWeight(reductionType MLCReductionType, weight float32) *MLCLossLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLossLayer), _mLCLossLayerSelHingeLossWithReductionTypeWeight, reductionType, weight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCLossLayerFromID(_ret)
 }
 
 // @abstract   Create a loss layer @param      reductionType          The reduction type to use @param      weights                       The loss label weights tensor @return     A new hinge loss layer.
 func MLCLossLayerHingeLossWithReductionTypeWeights(reductionType MLCReductionType, weights *MLCTensor) *MLCLossLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLossLayer), _mLCLossLayerSelHingeLossWithReductionTypeWeights, reductionType, weights.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCLossLayerFromID(_ret)
 }
 
 // @abstract   Create a loss layer @param      reductionType          The reduction type to use @param      weight                         A scalar floating-point value @return     A new cosine distance loss layer.
 func MLCLossLayerCosineDistanceLossWithReductionTypeWeight(reductionType MLCReductionType, weight float32) *MLCLossLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLossLayer), _mLCLossLayerSelCosineDistanceLossWithReductionTypeWeight, reductionType, weight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCLossLayerFromID(_ret)
 }
 
 // @abstract   Create a loss layer @param      reductionType          The reduction type to use @param      weights                       The loss label weights tensor @return     A new cosine distance loss layer.
 func MLCLossLayerCosineDistanceLossWithReductionTypeWeights(reductionType MLCReductionType, weights *MLCTensor) *MLCLossLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLossLayer), _mLCLossLayerSelCosineDistanceLossWithReductionTypeWeights, reductionType, weights.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCLossLayerFromID(_ret)
 }
 
 // @property   descriptor @abstract   The loss descriptor
 func (o *MLCLossLayer) Descriptor() *MLCLossDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCLossLayerSelDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCLossDescriptorFromID(_ret)
 }
 
 // @property   weights @abstract   The loss label weights tensor
 func (o *MLCLossLayer) Weights() *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCLossLayerSelWeights)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
-

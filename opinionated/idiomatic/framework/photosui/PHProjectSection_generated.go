@@ -70,4 +70,3 @@ type ProjectSectionable interface {
 }
 
 var _ ProjectSectionable = (*ProjectSection)(nil)
-

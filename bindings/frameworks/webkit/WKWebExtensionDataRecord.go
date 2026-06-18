@@ -16,13 +16,13 @@ type WKWebExtensionDataRecord struct {
 }
 
 var (
-	_clsWKWebExtensionDataRecord = _objcClass("WKWebExtensionDataRecord")
+	_clsWKWebExtensionDataRecord                   = _objcClass("WKWebExtensionDataRecord")
 	_wKWebExtensionDataRecordSelSizeInBytesOfTypes = objc.RegisterName("sizeInBytesOfTypes:")
-	_wKWebExtensionDataRecordSelDisplayName = objc.RegisterName("displayName")
-	_wKWebExtensionDataRecordSelUniqueIdentifier = objc.RegisterName("uniqueIdentifier")
+	_wKWebExtensionDataRecordSelDisplayName        = objc.RegisterName("displayName")
+	_wKWebExtensionDataRecordSelUniqueIdentifier   = objc.RegisterName("uniqueIdentifier")
 	_wKWebExtensionDataRecordSelContainedDataTypes = objc.RegisterName("containedDataTypes")
-	_wKWebExtensionDataRecordSelErrors = objc.RegisterName("errors")
-	_wKWebExtensionDataRecordSelTotalSizeInBytes = objc.RegisterName("totalSizeInBytes")
+	_wKWebExtensionDataRecordSelErrors             = objc.RegisterName("errors")
+	_wKWebExtensionDataRecordSelTotalSizeInBytes   = objc.RegisterName("totalSizeInBytes")
 )
 
 func WKWebExtensionDataRecordFromID(id objc.ID) *WKWebExtensionDataRecord {
@@ -44,14 +44,18 @@ func (o *WKWebExtensionDataRecord) SizeInBytesOfTypes(dataTypes *foundation.NSSe
 // @abstract The display name for the web extension to which this data record belongs.
 func (o *WKWebExtensionDataRecord) DisplayName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionDataRecordSelDisplayName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract Unique identifier for the web extension context to which this data record belongs.
 func (o *WKWebExtensionDataRecord) UniqueIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionDataRecordSelUniqueIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -72,4 +76,3 @@ func (o *WKWebExtensionDataRecord) TotalSizeInBytes() uint {
 	_ret := objc.Send[uint](o.Ptr(), _wKWebExtensionDataRecordSelTotalSizeInBytes)
 	return _ret
 }
-

@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_driverkitLib uintptr
-	_loadOnce sync.Once
+	_driverkitLib  uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -73,12 +73,24 @@ func _loadLibrary() {
 	_register("IORWLockRead", func() { purego.RegisterLibFunc(&_fnIORWLockRead, _driverkitLib, "IORWLockRead") })
 	_register("IORWLockUnlock", func() { purego.RegisterLibFunc(&_fnIORWLockUnlock, _driverkitLib, "IORWLockUnlock") })
 	_register("IORWLockWrite", func() { purego.RegisterLibFunc(&_fnIORWLockWrite, _driverkitLib, "IORWLockWrite") })
-	_register("IORecursiveConditionLockAlloc", func() { purego.RegisterLibFunc(&_fnIORecursiveConditionLockAlloc, _driverkitLib, "IORecursiveConditionLockAlloc") })
-	_register("IORecursiveConditionLockFree", func() { purego.RegisterLibFunc(&_fnIORecursiveConditionLockFree, _driverkitLib, "IORecursiveConditionLockFree") })
-	_register("IORecursiveConditionLockHaveLock", func() { purego.RegisterLibFunc(&_fnIORecursiveConditionLockHaveLock, _driverkitLib, "IORecursiveConditionLockHaveLock") })
-	_register("IORecursiveConditionLockLock", func() { purego.RegisterLibFunc(&_fnIORecursiveConditionLockLock, _driverkitLib, "IORecursiveConditionLockLock") })
-	_register("IORecursiveConditionLockTryLock", func() { purego.RegisterLibFunc(&_fnIORecursiveConditionLockTryLock, _driverkitLib, "IORecursiveConditionLockTryLock") })
-	_register("IORecursiveConditionLockUnlock", func() { purego.RegisterLibFunc(&_fnIORecursiveConditionLockUnlock, _driverkitLib, "IORecursiveConditionLockUnlock") })
+	_register("IORecursiveConditionLockAlloc", func() {
+		purego.RegisterLibFunc(&_fnIORecursiveConditionLockAlloc, _driverkitLib, "IORecursiveConditionLockAlloc")
+	})
+	_register("IORecursiveConditionLockFree", func() {
+		purego.RegisterLibFunc(&_fnIORecursiveConditionLockFree, _driverkitLib, "IORecursiveConditionLockFree")
+	})
+	_register("IORecursiveConditionLockHaveLock", func() {
+		purego.RegisterLibFunc(&_fnIORecursiveConditionLockHaveLock, _driverkitLib, "IORecursiveConditionLockHaveLock")
+	})
+	_register("IORecursiveConditionLockLock", func() {
+		purego.RegisterLibFunc(&_fnIORecursiveConditionLockLock, _driverkitLib, "IORecursiveConditionLockLock")
+	})
+	_register("IORecursiveConditionLockTryLock", func() {
+		purego.RegisterLibFunc(&_fnIORecursiveConditionLockTryLock, _driverkitLib, "IORecursiveConditionLockTryLock")
+	})
+	_register("IORecursiveConditionLockUnlock", func() {
+		purego.RegisterLibFunc(&_fnIORecursiveConditionLockUnlock, _driverkitLib, "IORecursiveConditionLockUnlock")
+	})
 	_register("IORecursiveLockAlloc", func() { purego.RegisterLibFunc(&_fnIORecursiveLockAlloc, _driverkitLib, "IORecursiveLockAlloc") })
 	_register("IORecursiveLockFree", func() { purego.RegisterLibFunc(&_fnIORecursiveLockFree, _driverkitLib, "IORecursiveLockFree") })
 	_register("IORecursiveLockHaveLock", func() { purego.RegisterLibFunc(&_fnIORecursiveLockHaveLock, _driverkitLib, "IORecursiveLockHaveLock") })
@@ -88,8 +100,12 @@ func _loadLibrary() {
 	_register("IOSleep", func() { purego.RegisterLibFunc(&_fnIOSleep, _driverkitLib, "IOSleep") })
 	_register("IOSysCtlByName", func() { purego.RegisterLibFunc(&_fnIOSysCtlByName, _driverkitLib, "IOSysCtlByName") })
 	_register("IOThreadLocalStorageGet", func() { purego.RegisterLibFunc(&_fnIOThreadLocalStorageGet, _driverkitLib, "IOThreadLocalStorageGet") })
-	_register("IOThreadLocalStorageKeyCreate", func() { purego.RegisterLibFunc(&_fnIOThreadLocalStorageKeyCreate, _driverkitLib, "IOThreadLocalStorageKeyCreate") })
-	_register("IOThreadLocalStorageKeyDelete", func() { purego.RegisterLibFunc(&_fnIOThreadLocalStorageKeyDelete, _driverkitLib, "IOThreadLocalStorageKeyDelete") })
+	_register("IOThreadLocalStorageKeyCreate", func() {
+		purego.RegisterLibFunc(&_fnIOThreadLocalStorageKeyCreate, _driverkitLib, "IOThreadLocalStorageKeyCreate")
+	})
+	_register("IOThreadLocalStorageKeyDelete", func() {
+		purego.RegisterLibFunc(&_fnIOThreadLocalStorageKeyDelete, _driverkitLib, "IOThreadLocalStorageKeyDelete")
+	})
 	_register("IOThreadLocalStorageSet", func() { purego.RegisterLibFunc(&_fnIOThreadLocalStorageSet, _driverkitLib, "IOThreadLocalStorageSet") })
 	_register("OSArrayAppendValue", func() { purego.RegisterLibFunc(&_fnOSArrayAppendValue, _driverkitLib, "OSArrayAppendValue") })
 	_register("OSArrayApply", func() { purego.RegisterLibFunc(&_fnOSArrayApply, _driverkitLib, "OSArrayApply") })
@@ -105,9 +121,15 @@ func _loadLibrary() {
 	_register("OSCollectionTypeID", func() { purego.RegisterLibFunc(&_fnOSCollectionTypeID, _driverkitLib, "OSCollectionTypeID") })
 	_register("OSCollectionTypeName", func() { purego.RegisterLibFunc(&_fnOSCollectionTypeName, _driverkitLib, "OSCollectionTypeName") })
 	_register("OSCollectionsInitialize", func() { purego.RegisterLibFunc(&_fnOSCollectionsInitialize, _driverkitLib, "OSCollectionsInitialize") })
-	_register("OSCreateObjectFromSerialization", func() { purego.RegisterLibFunc(&_fnOSCreateObjectFromSerialization, _driverkitLib, "OSCreateObjectFromSerialization") })
-	_register("OSCreateSerializationFromBytes", func() { purego.RegisterLibFunc(&_fnOSCreateSerializationFromBytes, _driverkitLib, "OSCreateSerializationFromBytes") })
-	_register("OSCreateSerializationFromObject", func() { purego.RegisterLibFunc(&_fnOSCreateSerializationFromObject, _driverkitLib, "OSCreateSerializationFromObject") })
+	_register("OSCreateObjectFromSerialization", func() {
+		purego.RegisterLibFunc(&_fnOSCreateObjectFromSerialization, _driverkitLib, "OSCreateObjectFromSerialization")
+	})
+	_register("OSCreateSerializationFromBytes", func() {
+		purego.RegisterLibFunc(&_fnOSCreateSerializationFromBytes, _driverkitLib, "OSCreateSerializationFromBytes")
+	})
+	_register("OSCreateSerializationFromObject", func() {
+		purego.RegisterLibFunc(&_fnOSCreateSerializationFromObject, _driverkitLib, "OSCreateSerializationFromObject")
+	})
 	_register("OSDataAppendBytes", func() { purego.RegisterLibFunc(&_fnOSDataAppendBytes, _driverkitLib, "OSDataAppendBytes") })
 	_register("OSDataCreate", func() { purego.RegisterLibFunc(&_fnOSDataCreate, _driverkitLib, "OSDataCreate") })
 	_register("OSDataGetBytes", func() { purego.RegisterLibFunc(&_fnOSDataGetBytes, _driverkitLib, "OSDataGetBytes") })
@@ -116,13 +138,23 @@ func _loadLibrary() {
 	_register("OSDictionaryApply", func() { purego.RegisterLibFunc(&_fnOSDictionaryApply, _driverkitLib, "OSDictionaryApply") })
 	_register("OSDictionaryCreate", func() { purego.RegisterLibFunc(&_fnOSDictionaryCreate, _driverkitLib, "OSDictionaryCreate") })
 	_register("OSDictionaryGetCount", func() { purego.RegisterLibFunc(&_fnOSDictionaryGetCount, _driverkitLib, "OSDictionaryGetCount") })
-	_register("OSDictionaryGetStringValue", func() { purego.RegisterLibFunc(&_fnOSDictionaryGetStringValue, _driverkitLib, "OSDictionaryGetStringValue") })
-	_register("OSDictionaryGetUInt64Value", func() { purego.RegisterLibFunc(&_fnOSDictionaryGetUInt64Value, _driverkitLib, "OSDictionaryGetUInt64Value") })
+	_register("OSDictionaryGetStringValue", func() {
+		purego.RegisterLibFunc(&_fnOSDictionaryGetStringValue, _driverkitLib, "OSDictionaryGetStringValue")
+	})
+	_register("OSDictionaryGetUInt64Value", func() {
+		purego.RegisterLibFunc(&_fnOSDictionaryGetUInt64Value, _driverkitLib, "OSDictionaryGetUInt64Value")
+	})
 	_register("OSDictionaryGetValue", func() { purego.RegisterLibFunc(&_fnOSDictionaryGetValue, _driverkitLib, "OSDictionaryGetValue") })
-	_register("OSDictionarySetStringValue", func() { purego.RegisterLibFunc(&_fnOSDictionarySetStringValue, _driverkitLib, "OSDictionarySetStringValue") })
-	_register("OSDictionarySetUInt64Value", func() { purego.RegisterLibFunc(&_fnOSDictionarySetUInt64Value, _driverkitLib, "OSDictionarySetUInt64Value") })
+	_register("OSDictionarySetStringValue", func() {
+		purego.RegisterLibFunc(&_fnOSDictionarySetStringValue, _driverkitLib, "OSDictionarySetStringValue")
+	})
+	_register("OSDictionarySetUInt64Value", func() {
+		purego.RegisterLibFunc(&_fnOSDictionarySetUInt64Value, _driverkitLib, "OSDictionarySetUInt64Value")
+	})
 	_register("OSDictionarySetValue", func() { purego.RegisterLibFunc(&_fnOSDictionarySetValue, _driverkitLib, "OSDictionarySetValue") })
-	_register("OSNumberCreateWithUInt64Value", func() { purego.RegisterLibFunc(&_fnOSNumberCreateWithUInt64Value, _driverkitLib, "OSNumberCreateWithUInt64Value") })
+	_register("OSNumberCreateWithUInt64Value", func() {
+		purego.RegisterLibFunc(&_fnOSNumberCreateWithUInt64Value, _driverkitLib, "OSNumberCreateWithUInt64Value")
+	})
 	_register("OSNumberGetUInt64Value", func() { purego.RegisterLibFunc(&_fnOSNumberGetUInt64Value, _driverkitLib, "OSNumberGetUInt64Value") })
 	_register("OSObjectAllocate", func() { purego.RegisterLibFunc(&_fnOSObjectAllocate, _driverkitLib, "OSObjectAllocate") })
 	_register("OSObjectLog", func() { purego.RegisterLibFunc(&_fnOSObjectLog, _driverkitLib, "OSObjectLog") })
@@ -135,8 +167,12 @@ func _loadLibrary() {
 	_register("OSSynchronizeIO", func() { purego.RegisterLibFunc(&_fnOSSynchronizeIO, _driverkitLib, "OSSynchronizeIO") })
 	_register("__DEQUEUE_ELT_CLEANUP", func() { purego.RegisterLibFunc(&___DEQUEUE_ELT_CLEANUP, _driverkitLib, "__DEQUEUE_ELT_CLEANUP") })
 	_register("__QUEUE_ELT_VALIDATE", func() { purego.RegisterLibFunc(&___QUEUE_ELT_VALIDATE, _driverkitLib, "__QUEUE_ELT_VALIDATE") })
-	_register("__QUEUE_ELT_VALIDATE_NEXT", func() { purego.RegisterLibFunc(&___QUEUE_ELT_VALIDATE_NEXT, _driverkitLib, "__QUEUE_ELT_VALIDATE_NEXT") })
-	_register("__QUEUE_ELT_VALIDATE_PREV", func() { purego.RegisterLibFunc(&___QUEUE_ELT_VALIDATE_PREV, _driverkitLib, "__QUEUE_ELT_VALIDATE_PREV") })
+	_register("__QUEUE_ELT_VALIDATE_NEXT", func() {
+		purego.RegisterLibFunc(&___QUEUE_ELT_VALIDATE_NEXT, _driverkitLib, "__QUEUE_ELT_VALIDATE_NEXT")
+	})
+	_register("__QUEUE_ELT_VALIDATE_PREV", func() {
+		purego.RegisterLibFunc(&___QUEUE_ELT_VALIDATE_PREV, _driverkitLib, "__QUEUE_ELT_VALIDATE_PREV")
+	})
 	_register("__builtin_trap", func() { purego.RegisterLibFunc(&___builtin_trap, _driverkitLib, "__builtin_trap") })
 	_register("crc32", func() { purego.RegisterLibFunc(&_crc32, _driverkitLib, "crc32") })
 	_register("dequeue_head", func() { purego.RegisterLibFunc(&_dequeue_head, _driverkitLib, "dequeue_head") })

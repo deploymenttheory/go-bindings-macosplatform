@@ -15,14 +15,14 @@ type SCNIKConstraint struct {
 }
 
 var (
-	_clsSCNIKConstraint = _objcClass("SCNIKConstraint")
-	_sCNIKConstraintSelInitWithChainRootNode = objc.RegisterName("initWithChainRootNode:")
+	_clsSCNIKConstraint                                             = _objcClass("SCNIKConstraint")
+	_sCNIKConstraintSelInitWithChainRootNode                        = objc.RegisterName("initWithChainRootNode:")
 	_sCNIKConstraintSelInverseKinematicsConstraintWithChainRootNode = objc.RegisterName("inverseKinematicsConstraintWithChainRootNode:")
-	_sCNIKConstraintSelSetMaxAllowedRotationAngleForJoint = objc.RegisterName("setMaxAllowedRotationAngle:forJoint:")
-	_sCNIKConstraintSelMaxAllowedRotationAngleForJoint = objc.RegisterName("maxAllowedRotationAngleForJoint:")
-	_sCNIKConstraintSelChainRootNode = objc.RegisterName("chainRootNode")
-	_sCNIKConstraintSelTargetPosition = objc.RegisterName("targetPosition")
-	_sCNIKConstraintSelSetTargetPosition = objc.RegisterName("setTargetPosition:")
+	_sCNIKConstraintSelSetMaxAllowedRotationAngleForJoint           = objc.RegisterName("setMaxAllowedRotationAngle:forJoint:")
+	_sCNIKConstraintSelMaxAllowedRotationAngleForJoint              = objc.RegisterName("maxAllowedRotationAngleForJoint:")
+	_sCNIKConstraintSelChainRootNode                                = objc.RegisterName("chainRootNode")
+	_sCNIKConstraintSelTargetPosition                               = objc.RegisterName("targetPosition")
+	_sCNIKConstraintSelSetTargetPosition                            = objc.RegisterName("setTargetPosition:")
 )
 
 func SCNIKConstraintFromID(id objc.ID) *SCNIKConstraint {
@@ -38,14 +38,18 @@ func SCNIKConstraintFromID(id objc.ID) *SCNIKConstraint {
 // @method initWithChainRootNode: @abstract Creates and returns a SCNIKConstraint object with the specified parameter. @param chainRootNode The root node of the kinematic chain. @discussion "chainRootNode" must be an ancestor of the node on which the constraint is applied.
 func (o *SCNIKConstraint) InitWithChainRootNode(chainRootNode *SCNNode) *SCNIKConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNIKConstraintSelInitWithChainRootNode, chainRootNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNIKConstraintFromID(_ret)
 }
 
 // @method inverseKinematicsConstraintWithChainRootNode: @abstract Creates and returns a SCNIKConstraint object with the specified parameter. @param chainRootNode The root node of the kinematic chain. @discussion "chainRootNode" must be an ancestor of the node on which the constraint is applied.
 func SCNIKConstraintInverseKinematicsConstraintWithChainRootNode(chainRootNode *SCNNode) *SCNIKConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNIKConstraint), _sCNIKConstraintSelInverseKinematicsConstraintWithChainRootNode, chainRootNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNIKConstraintFromID(_ret)
 }
 
@@ -62,7 +66,9 @@ func (o *SCNIKConstraint) MaxAllowedRotationAngleForJoint(node *SCNNode) float64
 // @property chainRootNode @abstract Specifies the root node of the kinematic chain.
 func (o *SCNIKConstraint) ChainRootNode() *SCNNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNIKConstraintSelChainRootNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNNodeFromID(_ret)
 }
 
@@ -75,4 +81,3 @@ func (o *SCNIKConstraint) TargetPosition() SCNVector3 {
 func (o *SCNIKConstraint) SetTargetPosition(targetPosition SCNVector3) {
 	o.Ptr().Send(_sCNIKConstraintSelSetTargetPosition, targetPosition)
 }
-

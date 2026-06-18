@@ -15,20 +15,20 @@ type DOMTreeWalker struct {
 }
 
 var (
-	_clsDOMTreeWalker = _objcClass("DOMTreeWalker")
-	_dOMTreeWalkerSelParentNode = objc.RegisterName("parentNode")
-	_dOMTreeWalkerSelFirstChild = objc.RegisterName("firstChild")
-	_dOMTreeWalkerSelLastChild = objc.RegisterName("lastChild")
-	_dOMTreeWalkerSelPreviousSibling = objc.RegisterName("previousSibling")
-	_dOMTreeWalkerSelNextSibling = objc.RegisterName("nextSibling")
-	_dOMTreeWalkerSelPreviousNode = objc.RegisterName("previousNode")
-	_dOMTreeWalkerSelNextNode = objc.RegisterName("nextNode")
-	_dOMTreeWalkerSelRoot = objc.RegisterName("root")
-	_dOMTreeWalkerSelWhatToShow = objc.RegisterName("whatToShow")
-	_dOMTreeWalkerSelFilter = objc.RegisterName("filter")
+	_clsDOMTreeWalker                       = _objcClass("DOMTreeWalker")
+	_dOMTreeWalkerSelParentNode             = objc.RegisterName("parentNode")
+	_dOMTreeWalkerSelFirstChild             = objc.RegisterName("firstChild")
+	_dOMTreeWalkerSelLastChild              = objc.RegisterName("lastChild")
+	_dOMTreeWalkerSelPreviousSibling        = objc.RegisterName("previousSibling")
+	_dOMTreeWalkerSelNextSibling            = objc.RegisterName("nextSibling")
+	_dOMTreeWalkerSelPreviousNode           = objc.RegisterName("previousNode")
+	_dOMTreeWalkerSelNextNode               = objc.RegisterName("nextNode")
+	_dOMTreeWalkerSelRoot                   = objc.RegisterName("root")
+	_dOMTreeWalkerSelWhatToShow             = objc.RegisterName("whatToShow")
+	_dOMTreeWalkerSelFilter                 = objc.RegisterName("filter")
 	_dOMTreeWalkerSelExpandEntityReferences = objc.RegisterName("expandEntityReferences")
-	_dOMTreeWalkerSelCurrentNode = objc.RegisterName("currentNode")
-	_dOMTreeWalkerSelSetCurrentNode = objc.RegisterName("setCurrentNode:")
+	_dOMTreeWalkerSelCurrentNode            = objc.RegisterName("currentNode")
+	_dOMTreeWalkerSelSetCurrentNode         = objc.RegisterName("setCurrentNode:")
 )
 
 func DOMTreeWalkerFromID(id objc.ID) *DOMTreeWalker {
@@ -43,49 +43,65 @@ func DOMTreeWalkerFromID(id objc.ID) *DOMTreeWalker {
 
 func (o *DOMTreeWalker) ParentNode() *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMTreeWalkerSelParentNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMTreeWalker) FirstChild() *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMTreeWalkerSelFirstChild)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMTreeWalker) LastChild() *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMTreeWalkerSelLastChild)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMTreeWalker) PreviousSibling() *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMTreeWalkerSelPreviousSibling)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMTreeWalker) NextSibling() *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMTreeWalkerSelNextSibling)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMTreeWalker) PreviousNode() *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMTreeWalkerSelPreviousNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMTreeWalker) NextNode() *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMTreeWalkerSelNextNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMTreeWalker) Root() *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMTreeWalkerSelRoot)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
@@ -106,11 +122,12 @@ func (o *DOMTreeWalker) ExpandEntityReferences() bool {
 
 func (o *DOMTreeWalker) CurrentNode() *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMTreeWalkerSelCurrentNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMTreeWalker) SetCurrentNode(currentNode *DOMNode) {
 	o.Ptr().Send(_dOMTreeWalkerSelSetCurrentNode, currentNode.Ptr())
 }
-

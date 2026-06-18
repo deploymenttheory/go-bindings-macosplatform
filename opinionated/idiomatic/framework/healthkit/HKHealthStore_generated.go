@@ -314,4 +314,3 @@ type HealthStoreable interface {
 }
 
 var _ HealthStoreable = (*HealthStore)(nil)
-

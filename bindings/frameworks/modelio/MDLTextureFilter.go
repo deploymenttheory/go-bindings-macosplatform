@@ -16,18 +16,18 @@ type MDLTextureFilter struct {
 }
 
 var (
-	_clsMDLTextureFilter = _objcClass("MDLTextureFilter")
-	_mDLTextureFilterSelSWrapMode = objc.RegisterName("sWrapMode")
+	_clsMDLTextureFilter             = _objcClass("MDLTextureFilter")
+	_mDLTextureFilterSelSWrapMode    = objc.RegisterName("sWrapMode")
 	_mDLTextureFilterSelSetSWrapMode = objc.RegisterName("setSWrapMode:")
-	_mDLTextureFilterSelTWrapMode = objc.RegisterName("tWrapMode")
+	_mDLTextureFilterSelTWrapMode    = objc.RegisterName("tWrapMode")
 	_mDLTextureFilterSelSetTWrapMode = objc.RegisterName("setTWrapMode:")
-	_mDLTextureFilterSelRWrapMode = objc.RegisterName("rWrapMode")
+	_mDLTextureFilterSelRWrapMode    = objc.RegisterName("rWrapMode")
 	_mDLTextureFilterSelSetRWrapMode = objc.RegisterName("setRWrapMode:")
-	_mDLTextureFilterSelMinFilter = objc.RegisterName("minFilter")
+	_mDLTextureFilterSelMinFilter    = objc.RegisterName("minFilter")
 	_mDLTextureFilterSelSetMinFilter = objc.RegisterName("setMinFilter:")
-	_mDLTextureFilterSelMagFilter = objc.RegisterName("magFilter")
+	_mDLTextureFilterSelMagFilter    = objc.RegisterName("magFilter")
 	_mDLTextureFilterSelSetMagFilter = objc.RegisterName("setMagFilter:")
-	_mDLTextureFilterSelMipFilter = objc.RegisterName("mipFilter")
+	_mDLTextureFilterSelMipFilter    = objc.RegisterName("mipFilter")
 	_mDLTextureFilterSelSetMipFilter = objc.RegisterName("setMipFilter:")
 )
 
@@ -94,4 +94,3 @@ func (o *MDLTextureFilter) MipFilter() MDLMaterialMipMapFilterMode {
 func (o *MDLTextureFilter) SetMipFilter(mipFilter MDLMaterialMipMapFilterMode) {
 	o.Ptr().Send(_mDLTextureFilterSelSetMipFilter, mipFilter)
 }
-

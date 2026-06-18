@@ -16,13 +16,13 @@ type MKAddressFilter struct {
 }
 
 var (
-	_clsMKAddressFilter = _objcClass("MKAddressFilter")
+	_clsMKAddressFilter                     = _objcClass("MKAddressFilter")
 	_mKAddressFilterSelInitIncludingOptions = objc.RegisterName("initIncludingOptions:")
 	_mKAddressFilterSelInitExcludingOptions = objc.RegisterName("initExcludingOptions:")
-	_mKAddressFilterSelIncludesOptions = objc.RegisterName("includesOptions:")
-	_mKAddressFilterSelExcludesOptions = objc.RegisterName("excludesOptions:")
-	_mKAddressFilterSelFilterIncludingAll = objc.RegisterName("filterIncludingAll")
-	_mKAddressFilterSelFilterExcludingAll = objc.RegisterName("filterExcludingAll")
+	_mKAddressFilterSelIncludesOptions      = objc.RegisterName("includesOptions:")
+	_mKAddressFilterSelExcludesOptions      = objc.RegisterName("excludesOptions:")
+	_mKAddressFilterSelFilterIncludingAll   = objc.RegisterName("filterIncludingAll")
+	_mKAddressFilterSelFilterExcludingAll   = objc.RegisterName("filterExcludingAll")
 )
 
 func MKAddressFilterFromID(id objc.ID) *MKAddressFilter {
@@ -37,13 +37,17 @@ func MKAddressFilterFromID(id objc.ID) *MKAddressFilter {
 
 func (o *MKAddressFilter) InitIncludingOptions(options MKAddressFilterOption) *MKAddressFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKAddressFilterSelInitIncludingOptions, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKAddressFilterFromID(_ret)
 }
 
 func (o *MKAddressFilter) InitExcludingOptions(options MKAddressFilterOption) *MKAddressFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKAddressFilterSelInitExcludingOptions, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKAddressFilterFromID(_ret)
 }
 
@@ -59,13 +63,16 @@ func (o *MKAddressFilter) ExcludesOptions(options MKAddressFilterOption) bool {
 
 func MKAddressFilterFilterIncludingAll() *MKAddressFilter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKAddressFilter), _mKAddressFilterSelFilterIncludingAll)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKAddressFilterFromID(_ret)
 }
 
 func MKAddressFilterFilterExcludingAll() *MKAddressFilter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKAddressFilter), _mKAddressFilterSelFilterExcludingAll)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKAddressFilterFromID(_ret)
 }
-

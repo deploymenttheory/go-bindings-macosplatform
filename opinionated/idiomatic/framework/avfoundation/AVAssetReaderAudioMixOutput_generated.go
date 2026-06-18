@@ -106,7 +106,9 @@ func (x *AssetReaderAudioMixOutput) SetAudioTimePitchAlgorithm(audioTimePitchAlg
 	x.inner.SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm)
 }
 
-func (x *AssetReaderAudioMixOutput) asAssetReaderOutput() *raw.AVAssetReaderOutput { return &x.inner.AVAssetReaderOutput }
+func (x *AssetReaderAudioMixOutput) asAssetReaderOutput() *raw.AVAssetReaderOutput {
+	return &x.inner.AVAssetReaderOutput
+}
 
 // AssetReaderAudioMixOutputable is the interface implemented by [AssetReaderAudioMixOutput], for mocking and DI.
 type AssetReaderAudioMixOutputable interface {
@@ -124,4 +126,3 @@ type AssetReaderAudioMixOutputable interface {
 }
 
 var _ AssetReaderAudioMixOutputable = (*AssetReaderAudioMixOutput)(nil)
-

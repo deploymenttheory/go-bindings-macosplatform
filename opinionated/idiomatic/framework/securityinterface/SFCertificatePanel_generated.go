@@ -133,4 +133,3 @@ type CertificatePanelable interface {
 }
 
 var _ CertificatePanelable = (*CertificatePanel)(nil)
-

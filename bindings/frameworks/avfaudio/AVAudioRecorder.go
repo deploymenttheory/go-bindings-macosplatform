@@ -18,30 +18,30 @@ type AVAudioRecorder struct {
 }
 
 var (
-	_clsAVAudioRecorder = _objcClass("AVAudioRecorder")
+	_clsAVAudioRecorder                         = _objcClass("AVAudioRecorder")
 	_aVAudioRecorderSelInitWithURLSettingsError = objc.RegisterName("initWithURL:settings:error:")
-	_aVAudioRecorderSelInitWithURLFormatError = objc.RegisterName("initWithURL:format:error:")
-	_aVAudioRecorderSelPrepareToRecord = objc.RegisterName("prepareToRecord")
-	_aVAudioRecorderSelRecord = objc.RegisterName("record")
-	_aVAudioRecorderSelRecordAtTime = objc.RegisterName("recordAtTime:")
-	_aVAudioRecorderSelRecordForDuration = objc.RegisterName("recordForDuration:")
-	_aVAudioRecorderSelRecordAtTimeForDuration = objc.RegisterName("recordAtTime:forDuration:")
-	_aVAudioRecorderSelPause = objc.RegisterName("pause")
-	_aVAudioRecorderSelStop = objc.RegisterName("stop")
-	_aVAudioRecorderSelDeleteRecording = objc.RegisterName("deleteRecording")
-	_aVAudioRecorderSelUpdateMeters = objc.RegisterName("updateMeters")
-	_aVAudioRecorderSelPeakPowerForChannel = objc.RegisterName("peakPowerForChannel:")
-	_aVAudioRecorderSelAveragePowerForChannel = objc.RegisterName("averagePowerForChannel:")
-	_aVAudioRecorderSelIsRecording = objc.RegisterName("isRecording")
-	_aVAudioRecorderSelUrl = objc.RegisterName("url")
-	_aVAudioRecorderSelSettings = objc.RegisterName("settings")
-	_aVAudioRecorderSelFormat = objc.RegisterName("format")
-	_aVAudioRecorderSelDelegate = objc.RegisterName("delegate")
-	_aVAudioRecorderSelSetDelegate = objc.RegisterName("setDelegate:")
-	_aVAudioRecorderSelCurrentTime = objc.RegisterName("currentTime")
-	_aVAudioRecorderSelDeviceCurrentTime = objc.RegisterName("deviceCurrentTime")
-	_aVAudioRecorderSelIsMeteringEnabled = objc.RegisterName("isMeteringEnabled")
-	_aVAudioRecorderSelSetMeteringEnabled = objc.RegisterName("setMeteringEnabled:")
+	_aVAudioRecorderSelInitWithURLFormatError   = objc.RegisterName("initWithURL:format:error:")
+	_aVAudioRecorderSelPrepareToRecord          = objc.RegisterName("prepareToRecord")
+	_aVAudioRecorderSelRecord                   = objc.RegisterName("record")
+	_aVAudioRecorderSelRecordAtTime             = objc.RegisterName("recordAtTime:")
+	_aVAudioRecorderSelRecordForDuration        = objc.RegisterName("recordForDuration:")
+	_aVAudioRecorderSelRecordAtTimeForDuration  = objc.RegisterName("recordAtTime:forDuration:")
+	_aVAudioRecorderSelPause                    = objc.RegisterName("pause")
+	_aVAudioRecorderSelStop                     = objc.RegisterName("stop")
+	_aVAudioRecorderSelDeleteRecording          = objc.RegisterName("deleteRecording")
+	_aVAudioRecorderSelUpdateMeters             = objc.RegisterName("updateMeters")
+	_aVAudioRecorderSelPeakPowerForChannel      = objc.RegisterName("peakPowerForChannel:")
+	_aVAudioRecorderSelAveragePowerForChannel   = objc.RegisterName("averagePowerForChannel:")
+	_aVAudioRecorderSelIsRecording              = objc.RegisterName("isRecording")
+	_aVAudioRecorderSelUrl                      = objc.RegisterName("url")
+	_aVAudioRecorderSelSettings                 = objc.RegisterName("settings")
+	_aVAudioRecorderSelFormat                   = objc.RegisterName("format")
+	_aVAudioRecorderSelDelegate                 = objc.RegisterName("delegate")
+	_aVAudioRecorderSelSetDelegate              = objc.RegisterName("setDelegate:")
+	_aVAudioRecorderSelCurrentTime              = objc.RegisterName("currentTime")
+	_aVAudioRecorderSelDeviceCurrentTime        = objc.RegisterName("deviceCurrentTime")
+	_aVAudioRecorderSelIsMeteringEnabled        = objc.RegisterName("isMeteringEnabled")
+	_aVAudioRecorderSelSetMeteringEnabled       = objc.RegisterName("setMeteringEnabled:")
 )
 
 func AVAudioRecorderFromID(id objc.ID) *AVAudioRecorder {
@@ -58,7 +58,9 @@ func AVAudioRecorderFromID(id objc.ID) *AVAudioRecorder {
 func (o *AVAudioRecorder) InitWithURLSettingsError(url *foundation.NSURL, settings *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*AVAudioRecorder, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioRecorderSelInitWithURLSettingsError, url.Ptr(), settings, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -69,7 +71,9 @@ func (o *AVAudioRecorder) InitWithURLSettingsError(url *foundation.NSURL, settin
 func (o *AVAudioRecorder) InitWithURLFormatError(url *foundation.NSURL, format *AVAudioFormat) (*AVAudioRecorder, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioRecorderSelInitWithURLFormatError, url.Ptr(), format.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -148,7 +152,9 @@ func (o *AVAudioRecorder) IsRecording() bool {
 // @property url @abstract URL of the recorded file.
 func (o *AVAudioRecorder) Url() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioRecorderSelUrl)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -161,7 +167,9 @@ func (o *AVAudioRecorder) Settings() *foundation.NSDictionary[*foundation.NSStri
 // @property format @abstract The audio format of the AudioRecorder. @discussion This property is fully valid only when prepareToRecord has been called.
 func (o *AVAudioRecorder) Format() *AVAudioFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioRecorderSelFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioFormatFromID(_ret)
 }
 
@@ -196,4 +204,3 @@ func (o *AVAudioRecorder) IsMeteringEnabled() bool {
 func (o *AVAudioRecorder) SetMeteringEnabled(meteringEnabled bool) {
 	o.Ptr().Send(_aVAudioRecorderSelSetMeteringEnabled, meteringEnabled)
 }
-

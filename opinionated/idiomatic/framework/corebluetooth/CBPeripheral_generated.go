@@ -176,4 +176,3 @@ type Peripheralable interface {
 }
 
 var _ Peripheralable = (*Peripheral)(nil)
-

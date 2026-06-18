@@ -107,11 +107,17 @@ func (x *CNNUpsamplingBilinear) WithLabel(label string) *CNNUpsamplingBilinear {
 	return x
 }
 
-func (x *CNNUpsamplingBilinear) asCNNUpsampling() *mpsneuralnetwork.MPSCNNUpsampling { return &x.inner.MPSCNNUpsampling }
+func (x *CNNUpsamplingBilinear) asCNNUpsampling() *mpsneuralnetwork.MPSCNNUpsampling {
+	return &x.inner.MPSCNNUpsampling
+}
 
-func (x *CNNUpsamplingBilinear) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNUpsampling.MPSCNNKernel }
+func (x *CNNUpsamplingBilinear) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNUpsampling.MPSCNNKernel
+}
 
-func (x *CNNUpsamplingBilinear) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNUpsampling.MPSCNNKernel.MPSKernel }
+func (x *CNNUpsamplingBilinear) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNUpsampling.MPSCNNKernel.MPSKernel
+}
 
 // CNNUpsamplingBilinearable is the interface implemented by [CNNUpsamplingBilinear], for mocking and DI.
 type CNNUpsamplingBilinearable interface {
@@ -129,4 +135,3 @@ type CNNUpsamplingBilinearable interface {
 }
 
 var _ CNNUpsamplingBilinearable = (*CNNUpsamplingBilinear)(nil)
-

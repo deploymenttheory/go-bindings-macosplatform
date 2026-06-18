@@ -284,9 +284,13 @@ func (x *MTRClusterOccupancySensing) WriteAttributePirUnoccupiedToOccupiedThresh
 	x.inner.WriteAttributePirUnoccupiedToOccupiedThresholdWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
 }
 
-func (x *MTRClusterOccupancySensing) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterOccupancySensing) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterOccupancySensing) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterOccupancySensing) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterOccupancySensingable is the interface implemented by [MTRClusterOccupancySensing], for mocking and DI.
 type MTRClusterOccupancySensingable interface {
@@ -342,4 +346,3 @@ type MTRClusterOccupancySensingable interface {
 }
 
 var _ MTRClusterOccupancySensingable = (*MTRClusterOccupancySensing)(nil)
-

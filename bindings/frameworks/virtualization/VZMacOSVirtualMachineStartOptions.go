@@ -15,8 +15,8 @@ type VZMacOSVirtualMachineStartOptions struct {
 }
 
 var (
-	_clsVZMacOSVirtualMachineStartOptions = _objcClass("VZMacOSVirtualMachineStartOptions")
-	_vZMacOSVirtualMachineStartOptionsSelStartUpFromMacOSRecovery = objc.RegisterName("startUpFromMacOSRecovery")
+	_clsVZMacOSVirtualMachineStartOptions                            = _objcClass("VZMacOSVirtualMachineStartOptions")
+	_vZMacOSVirtualMachineStartOptionsSelStartUpFromMacOSRecovery    = objc.RegisterName("startUpFromMacOSRecovery")
 	_vZMacOSVirtualMachineStartOptionsSelSetStartUpFromMacOSRecovery = objc.RegisterName("setStartUpFromMacOSRecovery:")
 )
 
@@ -38,4 +38,3 @@ func (o *VZMacOSVirtualMachineStartOptions) StartUpFromMacOSRecovery() bool {
 func (o *VZMacOSVirtualMachineStartOptions) SetStartUpFromMacOSRecovery(startUpFromMacOSRecovery bool) {
 	o.Ptr().Send(_vZMacOSVirtualMachineStartOptionsSelSetStartUpFromMacOSRecovery, startUpFromMacOSRecovery)
 }
-

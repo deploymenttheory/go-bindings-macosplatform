@@ -17,10 +17,10 @@ type MPSCNNPooling struct {
 }
 
 var (
-	_clsMPSCNNPooling = _objcClass("MPSCNNPooling")
-	_mPSCNNPoolingSelInitWithDeviceKernelWidthKernelHeight = objc.RegisterName("initWithDevice:kernelWidth:kernelHeight:")
+	_clsMPSCNNPooling                                                                    = _objcClass("MPSCNNPooling")
+	_mPSCNNPoolingSelInitWithDeviceKernelWidthKernelHeight                               = objc.RegisterName("initWithDevice:kernelWidth:kernelHeight:")
 	_mPSCNNPoolingSelInitWithDeviceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY = objc.RegisterName("initWithDevice:kernelWidth:kernelHeight:strideInPixelsX:strideInPixelsY:")
-	_mPSCNNPoolingSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
+	_mPSCNNPoolingSelInitWithCoderDevice                                                 = objc.RegisterName("initWithCoder:device:")
 )
 
 func MPSCNNPoolingFromID(id objc.ID) *MPSCNNPooling {
@@ -36,21 +36,26 @@ func MPSCNNPoolingFromID(id objc.ID) *MPSCNNPooling {
 // @abstract  Initialize a pooling filter @param      device              The device the filter will run on @param      kernelWidth         The width of the kernel.  Can be an odd or even value. @param      kernelHeight        The height of the kernel.  Can be an odd or even value. @return     A valid MPSCNNPooling object or nil, if failure.
 func (o *MPSCNNPooling) InitWithDeviceKernelWidthKernelHeight(device metal.MTLDevice, kernelWidth uint, kernelHeight uint) *MPSCNNPooling {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNPoolingSelInitWithDeviceKernelWidthKernelHeight, device, kernelWidth, kernelHeight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNPoolingFromID(_ret)
 }
 
 // @abstract  Initialize a pooling filter @param      device              The device the filter will run on @param      kernelWidth         The width of the kernel.  Can be an odd or even value. @param      kernelHeight        The height of the kernel.  Can be an odd or even value. @param      strideInPixelsX     The output stride (downsampling factor) in the x dimension. @param      strideInPixelsY     The output stride (downsampling factor) in the y dimension. @return     A valid MPSCNNPooling object or nil, if failure.
 func (o *MPSCNNPooling) InitWithDeviceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY(device metal.MTLDevice, kernelWidth uint, kernelHeight uint, strideInPixelsX uint, strideInPixelsY uint) *MPSCNNPooling {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNPoolingSelInitWithDeviceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY, device, kernelWidth, kernelHeight, strideInPixelsX, strideInPixelsY)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNPoolingFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSCNNPooling @param      device      The MTLDevice on which to make the MPSCNNPooling @return     A new MPSCNNPooling object, or nil if failure.
 func (o *MPSCNNPooling) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSCNNPooling {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNPoolingSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNPoolingFromID(_ret)
 }
-

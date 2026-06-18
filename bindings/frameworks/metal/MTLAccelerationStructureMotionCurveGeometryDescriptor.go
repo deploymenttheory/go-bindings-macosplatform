@@ -16,38 +16,38 @@ type MTLAccelerationStructureMotionCurveGeometryDescriptor struct {
 }
 
 var (
-	_clsMTLAccelerationStructureMotionCurveGeometryDescriptor = _objcClass("MTLAccelerationStructureMotionCurveGeometryDescriptor")
-	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelDescriptor = objc.RegisterName("descriptor")
-	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelControlPointBuffers = objc.RegisterName("controlPointBuffers")
-	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSetControlPointBuffers = objc.RegisterName("setControlPointBuffers:")
-	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelControlPointCount = objc.RegisterName("controlPointCount")
-	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSetControlPointCount = objc.RegisterName("setControlPointCount:")
-	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelControlPointStride = objc.RegisterName("controlPointStride")
-	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSetControlPointStride = objc.RegisterName("setControlPointStride:")
-	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelControlPointFormat = objc.RegisterName("controlPointFormat")
-	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSetControlPointFormat = objc.RegisterName("setControlPointFormat:")
-	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelRadiusBuffers = objc.RegisterName("radiusBuffers")
-	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSetRadiusBuffers = objc.RegisterName("setRadiusBuffers:")
-	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelRadiusFormat = objc.RegisterName("radiusFormat")
-	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSetRadiusFormat = objc.RegisterName("setRadiusFormat:")
-	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelRadiusStride = objc.RegisterName("radiusStride")
-	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSetRadiusStride = objc.RegisterName("setRadiusStride:")
-	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelIndexBuffer = objc.RegisterName("indexBuffer")
-	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSetIndexBuffer = objc.RegisterName("setIndexBuffer:")
-	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelIndexBufferOffset = objc.RegisterName("indexBufferOffset")
-	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSetIndexBufferOffset = objc.RegisterName("setIndexBufferOffset:")
-	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelIndexType = objc.RegisterName("indexType")
-	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSetIndexType = objc.RegisterName("setIndexType:")
-	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSegmentCount = objc.RegisterName("segmentCount")
-	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSetSegmentCount = objc.RegisterName("setSegmentCount:")
-	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSegmentControlPointCount = objc.RegisterName("segmentControlPointCount")
+	_clsMTLAccelerationStructureMotionCurveGeometryDescriptor                            = _objcClass("MTLAccelerationStructureMotionCurveGeometryDescriptor")
+	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelDescriptor                  = objc.RegisterName("descriptor")
+	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelControlPointBuffers         = objc.RegisterName("controlPointBuffers")
+	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSetControlPointBuffers      = objc.RegisterName("setControlPointBuffers:")
+	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelControlPointCount           = objc.RegisterName("controlPointCount")
+	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSetControlPointCount        = objc.RegisterName("setControlPointCount:")
+	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelControlPointStride          = objc.RegisterName("controlPointStride")
+	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSetControlPointStride       = objc.RegisterName("setControlPointStride:")
+	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelControlPointFormat          = objc.RegisterName("controlPointFormat")
+	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSetControlPointFormat       = objc.RegisterName("setControlPointFormat:")
+	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelRadiusBuffers               = objc.RegisterName("radiusBuffers")
+	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSetRadiusBuffers            = objc.RegisterName("setRadiusBuffers:")
+	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelRadiusFormat                = objc.RegisterName("radiusFormat")
+	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSetRadiusFormat             = objc.RegisterName("setRadiusFormat:")
+	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelRadiusStride                = objc.RegisterName("radiusStride")
+	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSetRadiusStride             = objc.RegisterName("setRadiusStride:")
+	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelIndexBuffer                 = objc.RegisterName("indexBuffer")
+	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSetIndexBuffer              = objc.RegisterName("setIndexBuffer:")
+	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelIndexBufferOffset           = objc.RegisterName("indexBufferOffset")
+	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSetIndexBufferOffset        = objc.RegisterName("setIndexBufferOffset:")
+	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelIndexType                   = objc.RegisterName("indexType")
+	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSetIndexType                = objc.RegisterName("setIndexType:")
+	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSegmentCount                = objc.RegisterName("segmentCount")
+	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSetSegmentCount             = objc.RegisterName("setSegmentCount:")
+	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSegmentControlPointCount    = objc.RegisterName("segmentControlPointCount")
 	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSetSegmentControlPointCount = objc.RegisterName("setSegmentControlPointCount:")
-	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelCurveType = objc.RegisterName("curveType")
-	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSetCurveType = objc.RegisterName("setCurveType:")
-	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelCurveBasis = objc.RegisterName("curveBasis")
-	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSetCurveBasis = objc.RegisterName("setCurveBasis:")
-	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelCurveEndCaps = objc.RegisterName("curveEndCaps")
-	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSetCurveEndCaps = objc.RegisterName("setCurveEndCaps:")
+	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelCurveType                   = objc.RegisterName("curveType")
+	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSetCurveType                = objc.RegisterName("setCurveType:")
+	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelCurveBasis                  = objc.RegisterName("curveBasis")
+	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSetCurveBasis               = objc.RegisterName("setCurveBasis:")
+	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelCurveEndCaps                = objc.RegisterName("curveEndCaps")
+	_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSetCurveEndCaps             = objc.RegisterName("setCurveEndCaps:")
 )
 
 func MTLAccelerationStructureMotionCurveGeometryDescriptorFromID(id objc.ID) *MTLAccelerationStructureMotionCurveGeometryDescriptor {
@@ -62,14 +62,18 @@ func MTLAccelerationStructureMotionCurveGeometryDescriptorFromID(id objc.ID) *MT
 
 func MTLAccelerationStructureMotionCurveGeometryDescriptorDescriptor() *MTLAccelerationStructureMotionCurveGeometryDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLAccelerationStructureMotionCurveGeometryDescriptor), _mTLAccelerationStructureMotionCurveGeometryDescriptorSelDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLAccelerationStructureMotionCurveGeometryDescriptorFromID(_ret)
 }
 
 // @brief Buffers containing curve control points for each keyframe. Each control point must be of the format specified by the control point format. Buffer offsets musts be multiples of the control point format's element size and must be aligned to the platform's buffer offset alignment. Must not be nil when the acceleration structure is built.
 func (o *MTLAccelerationStructureMotionCurveGeometryDescriptor) ControlPointBuffers() *foundation.NSArray[*MTLMotionKeyframeData] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLAccelerationStructureMotionCurveGeometryDescriptorSelControlPointBuffers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MTLMotionKeyframeData](_ret)
 }
 
@@ -110,7 +114,9 @@ func (o *MTLAccelerationStructureMotionCurveGeometryDescriptor) SetControlPointF
 // @brief Buffers containing the curve radius for each control point for each keyframe. Each radius must be of the type specified by the radius format. Buffer offsets must be multiples of the radius format size and must be aligned to the platform's buffer offset alignment. Each radius must be at least zero. Must not be nil when the acceleration structure is built.
 func (o *MTLAccelerationStructureMotionCurveGeometryDescriptor) RadiusBuffers() *foundation.NSArray[*MTLMotionKeyframeData] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLAccelerationStructureMotionCurveGeometryDescriptorSelRadiusBuffers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MTLMotionKeyframeData](_ret)
 }
 
@@ -217,4 +223,3 @@ func (o *MTLAccelerationStructureMotionCurveGeometryDescriptor) CurveEndCaps() M
 func (o *MTLAccelerationStructureMotionCurveGeometryDescriptor) SetCurveEndCaps(curveEndCaps MTLCurveEndCaps) {
 	o.Ptr().Send(_mTLAccelerationStructureMotionCurveGeometryDescriptorSelSetCurveEndCaps, curveEndCaps)
 }
-

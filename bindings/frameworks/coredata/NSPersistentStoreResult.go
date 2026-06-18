@@ -26,4 +26,3 @@ func NSPersistentStoreResultFromID(id objc.ID) *NSPersistentStoreResult {
 	purego.Track(o)
 	return o
 }
-

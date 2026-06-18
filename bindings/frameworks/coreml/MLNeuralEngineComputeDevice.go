@@ -16,7 +16,7 @@ type MLNeuralEngineComputeDevice struct {
 }
 
 var (
-	_clsMLNeuralEngineComputeDevice = _objcClass("MLNeuralEngineComputeDevice")
+	_clsMLNeuralEngineComputeDevice               = _objcClass("MLNeuralEngineComputeDevice")
 	_mLNeuralEngineComputeDeviceSelTotalCoreCount = objc.RegisterName("totalCoreCount")
 )
 
@@ -34,4 +34,3 @@ func (o *MLNeuralEngineComputeDevice) TotalCoreCount() int {
 	_ret := objc.Send[int](o.Ptr(), _mLNeuralEngineComputeDeviceSelTotalCoreCount)
 	return _ret
 }
-

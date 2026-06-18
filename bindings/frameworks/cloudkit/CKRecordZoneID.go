@@ -16,10 +16,10 @@ type CKRecordZoneID struct {
 }
 
 var (
-	_clsCKRecordZoneID = _objcClass("CKRecordZoneID")
+	_clsCKRecordZoneID                          = _objcClass("CKRecordZoneID")
 	_cKRecordZoneIDSelInitWithZoneNameOwnerName = objc.RegisterName("initWithZoneName:ownerName:")
-	_cKRecordZoneIDSelZoneName = objc.RegisterName("zoneName")
-	_cKRecordZoneIDSelOwnerName = objc.RegisterName("ownerName")
+	_cKRecordZoneIDSelZoneName                  = objc.RegisterName("zoneName")
+	_cKRecordZoneIDSelOwnerName                 = objc.RegisterName("ownerName")
 )
 
 func CKRecordZoneIDFromID(id objc.ID) *CKRecordZoneID {
@@ -32,24 +32,29 @@ func CKRecordZoneIDFromID(id objc.ID) *CKRecordZoneID {
 	return o
 }
 
-// Creates a record zone ID with the specified name and owner. - Parameters: - zoneName: The name that identifies the record zone. Zone names consist of up to 255 ASCII characters, and don't start with an underscore. To specify the default zone of the current database, use ``CKRecordZoneDefaultName-8mfij``. This parameter must not be `nil` or an empty string. - ownerName: The user who creates the record zone. To specify the current user, use ``CKCurrentUserDefaultName``. If you provide `nil` or an empty string for this parameter, the method throws an exception. - Returns: A new record zone ID.
+// Creates a record zone ID with the specified name and owner. - Parameters: - zoneName: The name that identifies the record zone. Zone names consist of up to 255 ASCII characters, and don't start with an underscore. To specify the default zone of the current database, use “CKRecordZoneDefaultName-8mfij“. This parameter must not be `nil` or an empty string. - ownerName: The user who creates the record zone. To specify the current user, use “CKCurrentUserDefaultName“. If you provide `nil` or an empty string for this parameter, the method throws an exception. - Returns: A new record zone ID.
 func (o *CKRecordZoneID) InitWithZoneNameOwnerName(zoneName *foundation.NSString, ownerName *foundation.NSString) *CKRecordZoneID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKRecordZoneIDSelInitWithZoneNameOwnerName, zoneName.Ptr(), ownerName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKRecordZoneIDFromID(_ret)
 }
 
 // The unique name of the record zone.
 func (o *CKRecordZoneID) ZoneName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKRecordZoneIDSelZoneName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The ID of the user who owns the record zone.
 func (o *CKRecordZoneID) OwnerName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKRecordZoneIDSelOwnerName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

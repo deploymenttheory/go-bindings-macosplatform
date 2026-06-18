@@ -48,11 +48,17 @@ func (x *MTRClusterBasic) MfgSpecificPingWithExpectedValuesExpectedValueInterval
 	x.inner.MfgSpecificPingWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, completionHandler)
 }
 
-func (x *MTRClusterBasic) asMTRClusterBasicInformation() *raw.MTRClusterBasicInformation { return &x.inner.MTRClusterBasicInformation }
+func (x *MTRClusterBasic) asMTRClusterBasicInformation() *raw.MTRClusterBasicInformation {
+	return &x.inner.MTRClusterBasicInformation
+}
 
-func (x *MTRClusterBasic) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRClusterBasicInformation.MTRGenericCluster }
+func (x *MTRClusterBasic) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRClusterBasicInformation.MTRGenericCluster
+}
 
-func (x *MTRClusterBasic) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRClusterBasicInformation.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterBasic) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRClusterBasicInformation.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterBasicable is the interface implemented by [MTRClusterBasic], for mocking and DI.
 type MTRClusterBasicable interface {
@@ -62,4 +68,3 @@ type MTRClusterBasicable interface {
 }
 
 var _ MTRClusterBasicable = (*MTRClusterBasic)(nil)
-

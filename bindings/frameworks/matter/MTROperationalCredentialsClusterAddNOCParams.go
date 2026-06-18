@@ -16,20 +16,20 @@ type MTROperationalCredentialsClusterAddNOCParams struct {
 }
 
 var (
-	_clsMTROperationalCredentialsClusterAddNOCParams = _objcClass("MTROperationalCredentialsClusterAddNOCParams")
-	_mTROperationalCredentialsClusterAddNOCParamsSelNocValue = objc.RegisterName("nocValue")
-	_mTROperationalCredentialsClusterAddNOCParamsSelSetNocValue = objc.RegisterName("setNocValue:")
-	_mTROperationalCredentialsClusterAddNOCParamsSelIcacValue = objc.RegisterName("icacValue")
-	_mTROperationalCredentialsClusterAddNOCParamsSelSetIcacValue = objc.RegisterName("setIcacValue:")
-	_mTROperationalCredentialsClusterAddNOCParamsSelIpkValue = objc.RegisterName("ipkValue")
-	_mTROperationalCredentialsClusterAddNOCParamsSelSetIpkValue = objc.RegisterName("setIpkValue:")
-	_mTROperationalCredentialsClusterAddNOCParamsSelCaseAdminSubject = objc.RegisterName("caseAdminSubject")
-	_mTROperationalCredentialsClusterAddNOCParamsSelSetCaseAdminSubject = objc.RegisterName("setCaseAdminSubject:")
-	_mTROperationalCredentialsClusterAddNOCParamsSelAdminVendorId = objc.RegisterName("adminVendorId")
-	_mTROperationalCredentialsClusterAddNOCParamsSelSetAdminVendorId = objc.RegisterName("setAdminVendorId:")
-	_mTROperationalCredentialsClusterAddNOCParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTROperationalCredentialsClusterAddNOCParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTROperationalCredentialsClusterAddNOCParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTROperationalCredentialsClusterAddNOCParams                               = _objcClass("MTROperationalCredentialsClusterAddNOCParams")
+	_mTROperationalCredentialsClusterAddNOCParamsSelNocValue                       = objc.RegisterName("nocValue")
+	_mTROperationalCredentialsClusterAddNOCParamsSelSetNocValue                    = objc.RegisterName("setNocValue:")
+	_mTROperationalCredentialsClusterAddNOCParamsSelIcacValue                      = objc.RegisterName("icacValue")
+	_mTROperationalCredentialsClusterAddNOCParamsSelSetIcacValue                   = objc.RegisterName("setIcacValue:")
+	_mTROperationalCredentialsClusterAddNOCParamsSelIpkValue                       = objc.RegisterName("ipkValue")
+	_mTROperationalCredentialsClusterAddNOCParamsSelSetIpkValue                    = objc.RegisterName("setIpkValue:")
+	_mTROperationalCredentialsClusterAddNOCParamsSelCaseAdminSubject               = objc.RegisterName("caseAdminSubject")
+	_mTROperationalCredentialsClusterAddNOCParamsSelSetCaseAdminSubject            = objc.RegisterName("setCaseAdminSubject:")
+	_mTROperationalCredentialsClusterAddNOCParamsSelAdminVendorId                  = objc.RegisterName("adminVendorId")
+	_mTROperationalCredentialsClusterAddNOCParamsSelSetAdminVendorId               = objc.RegisterName("setAdminVendorId:")
+	_mTROperationalCredentialsClusterAddNOCParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTROperationalCredentialsClusterAddNOCParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTROperationalCredentialsClusterAddNOCParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTROperationalCredentialsClusterAddNOCParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -45,7 +45,9 @@ func MTROperationalCredentialsClusterAddNOCParamsFromID(id objc.ID) *MTROperatio
 
 func (o *MTROperationalCredentialsClusterAddNOCParams) NocValue() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterAddNOCParamsSelNocValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -55,7 +57,9 @@ func (o *MTROperationalCredentialsClusterAddNOCParams) SetNocValue(nocValue *fou
 
 func (o *MTROperationalCredentialsClusterAddNOCParams) IcacValue() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterAddNOCParamsSelIcacValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -65,7 +69,9 @@ func (o *MTROperationalCredentialsClusterAddNOCParams) SetIcacValue(icacValue *f
 
 func (o *MTROperationalCredentialsClusterAddNOCParams) IpkValue() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterAddNOCParamsSelIpkValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -75,7 +81,9 @@ func (o *MTROperationalCredentialsClusterAddNOCParams) SetIpkValue(ipkValue *fou
 
 func (o *MTROperationalCredentialsClusterAddNOCParams) CaseAdminSubject() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterAddNOCParamsSelCaseAdminSubject)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -85,7 +93,9 @@ func (o *MTROperationalCredentialsClusterAddNOCParams) SetCaseAdminSubject(caseA
 
 func (o *MTROperationalCredentialsClusterAddNOCParams) AdminVendorId() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterAddNOCParamsSelAdminVendorId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -96,7 +106,9 @@ func (o *MTROperationalCredentialsClusterAddNOCParams) SetAdminVendorId(adminVen
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTROperationalCredentialsClusterAddNOCParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterAddNOCParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -107,11 +119,12 @@ func (o *MTROperationalCredentialsClusterAddNOCParams) SetTimedInvokeTimeoutMs(t
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTROperationalCredentialsClusterAddNOCParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterAddNOCParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTROperationalCredentialsClusterAddNOCParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTROperationalCredentialsClusterAddNOCParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

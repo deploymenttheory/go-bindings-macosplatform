@@ -16,11 +16,11 @@ type PHObjectChangeDetails[ObjectType purego.AnyObject] struct {
 }
 
 var (
-	_clsPHObjectChangeDetails = _objcClass("PHObjectChangeDetails")
+	_clsPHObjectChangeDetails                    = _objcClass("PHObjectChangeDetails")
 	_pHObjectChangeDetailsSelObjectBeforeChanges = objc.RegisterName("objectBeforeChanges")
-	_pHObjectChangeDetailsSelObjectAfterChanges = objc.RegisterName("objectAfterChanges")
+	_pHObjectChangeDetailsSelObjectAfterChanges  = objc.RegisterName("objectAfterChanges")
 	_pHObjectChangeDetailsSelAssetContentChanged = objc.RegisterName("assetContentChanged")
-	_pHObjectChangeDetailsSelObjectWasDeleted = objc.RegisterName("objectWasDeleted")
+	_pHObjectChangeDetailsSelObjectWasDeleted    = objc.RegisterName("objectWasDeleted")
 )
 
 func PHObjectChangeDetailsFromID[ObjectType purego.AnyObject](id objc.ID) *PHObjectChangeDetails[ObjectType] {
@@ -52,4 +52,3 @@ func (o *PHObjectChangeDetails[ObjectType]) ObjectWasDeleted() bool {
 	_ret := objc.Send[bool](o.Ptr(), _pHObjectChangeDetailsSelObjectWasDeleted)
 	return _ret
 }
-

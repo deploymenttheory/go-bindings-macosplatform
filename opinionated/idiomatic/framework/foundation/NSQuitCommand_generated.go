@@ -108,4 +108,3 @@ type QuitCommandable interface {
 }
 
 var _ QuitCommandable = (*QuitCommand)(nil)
-

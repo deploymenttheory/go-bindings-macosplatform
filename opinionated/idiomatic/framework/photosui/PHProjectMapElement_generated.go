@@ -68,7 +68,9 @@ func (x *ProjectMapElement) Annotations() *foundation.NSArray[mapkit.MKAnnotatio
 	return x.inner.Annotations()
 }
 
-func (x *ProjectMapElement) asProjectElement() *raw.PHProjectElement { return &x.inner.PHProjectElement }
+func (x *ProjectMapElement) asProjectElement() *raw.PHProjectElement {
+	return &x.inner.PHProjectElement
+}
 
 // ProjectMapElementable is the interface implemented by [ProjectMapElement], for mocking and DI.
 type ProjectMapElementable interface {
@@ -82,4 +84,3 @@ type ProjectMapElementable interface {
 }
 
 var _ ProjectMapElementable = (*ProjectMapElement)(nil)
-

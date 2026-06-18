@@ -17,10 +17,10 @@ type PHProjectRegionOfInterest struct {
 }
 
 var (
-	_clsPHProjectRegionOfInterest = _objcClass("PHProjectRegionOfInterest")
-	_pHProjectRegionOfInterestSelRect = objc.RegisterName("rect")
-	_pHProjectRegionOfInterestSelWeight = objc.RegisterName("weight")
-	_pHProjectRegionOfInterestSelQuality = objc.RegisterName("quality")
+	_clsPHProjectRegionOfInterest           = _objcClass("PHProjectRegionOfInterest")
+	_pHProjectRegionOfInterestSelRect       = objc.RegisterName("rect")
+	_pHProjectRegionOfInterestSelWeight     = objc.RegisterName("weight")
+	_pHProjectRegionOfInterestSelQuality    = objc.RegisterName("quality")
 	_pHProjectRegionOfInterestSelIdentifier = objc.RegisterName("identifier")
 )
 
@@ -54,7 +54,8 @@ func (o *PHProjectRegionOfInterest) Quality() float64 {
 // Identifier of the region of interest. Regions representing the same person or object will have the same identifier across multiple assets.
 func (o *PHProjectRegionOfInterest) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectRegionOfInterestSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

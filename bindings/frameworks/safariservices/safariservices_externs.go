@@ -21,4 +21,3 @@ func SFExtensionProfileKey() uintptr {
 	ptr, _ := purego.Dlsym(_safariservicesLib, "SFExtensionProfileKey")
 	return ptr
 }
-

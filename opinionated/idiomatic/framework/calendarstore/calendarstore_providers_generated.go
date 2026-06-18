@@ -12,4 +12,3 @@ import (
 type CalCalendarItemProvider interface {
 	asCalCalendarItem() *raw.CalCalendarItem
 }
-

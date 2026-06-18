@@ -12,8 +12,8 @@ type SAAuthorizationStatus int64
 
 const (
 	SAAuthorizationStatusNotDetermined SAAuthorizationStatus = 0
-	SAAuthorizationStatusDenied SAAuthorizationStatus = 1
-	SAAuthorizationStatusAuthorized SAAuthorizationStatus = 2
+	SAAuthorizationStatusDenied        SAAuthorizationStatus = 1
+	SAAuthorizationStatusAuthorized    SAAuthorizationStatus = 2
 )
 
 func (e SAAuthorizationStatus) String() string {
@@ -33,7 +33,7 @@ type SACrashDetectionEventResponse int64
 
 const (
 	SACrashDetectionEventResponseAttempted SACrashDetectionEventResponse = 0
-	SACrashDetectionEventResponseDisabled SACrashDetectionEventResponse = 1
+	SACrashDetectionEventResponseDisabled  SACrashDetectionEventResponse = 1
 )
 
 func (e SACrashDetectionEventResponse) String() string {
@@ -46,4 +46,3 @@ func (e SACrashDetectionEventResponse) String() string {
 		return fmt.Sprintf("SACrashDetectionEventResponse(%d)", int64(e))
 	}
 }
-

@@ -68,4 +68,3 @@ type PoolingLayerable interface {
 }
 
 var _ PoolingLayerable = (*PoolingLayer)(nil)
-

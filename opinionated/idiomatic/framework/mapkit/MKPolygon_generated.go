@@ -73,4 +73,3 @@ type Polygonable interface {
 }
 
 var _ Polygonable = (*Polygon)(nil)
-

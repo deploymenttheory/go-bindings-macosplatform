@@ -1454,4 +1454,3 @@ func WorkoutEventWithTypeDateIntervalMetadata(type_ raw.HKWorkoutEventType, date
 	}
 	return &WorkoutEvent{inner: _r}
 }
-

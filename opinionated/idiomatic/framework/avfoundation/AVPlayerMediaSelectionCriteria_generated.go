@@ -87,4 +87,3 @@ type PlayerMediaSelectionCriteriaable interface {
 }
 
 var _ PlayerMediaSelectionCriteriaable = (*PlayerMediaSelectionCriteria)(nil)
-

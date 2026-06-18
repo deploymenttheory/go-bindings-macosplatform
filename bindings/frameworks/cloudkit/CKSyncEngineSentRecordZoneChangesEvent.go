@@ -16,10 +16,10 @@ type CKSyncEngineSentRecordZoneChangesEvent struct {
 }
 
 var (
-	_clsCKSyncEngineSentRecordZoneChangesEvent = _objcClass("CKSyncEngineSentRecordZoneChangesEvent")
-	_cKSyncEngineSentRecordZoneChangesEventSelSavedRecords = objc.RegisterName("savedRecords")
-	_cKSyncEngineSentRecordZoneChangesEventSelFailedRecordSaves = objc.RegisterName("failedRecordSaves")
-	_cKSyncEngineSentRecordZoneChangesEventSelDeletedRecordIDs = objc.RegisterName("deletedRecordIDs")
+	_clsCKSyncEngineSentRecordZoneChangesEvent                    = _objcClass("CKSyncEngineSentRecordZoneChangesEvent")
+	_cKSyncEngineSentRecordZoneChangesEventSelSavedRecords        = objc.RegisterName("savedRecords")
+	_cKSyncEngineSentRecordZoneChangesEventSelFailedRecordSaves   = objc.RegisterName("failedRecordSaves")
+	_cKSyncEngineSentRecordZoneChangesEventSelDeletedRecordIDs    = objc.RegisterName("deletedRecordIDs")
 	_cKSyncEngineSentRecordZoneChangesEventSelFailedRecordDeletes = objc.RegisterName("failedRecordDeletes")
 )
 
@@ -36,21 +36,27 @@ func CKSyncEngineSentRecordZoneChangesEventFromID(id objc.ID) *CKSyncEngineSentR
 // The modified records.
 func (o *CKSyncEngineSentRecordZoneChangesEvent) SavedRecords() *foundation.NSArray[*CKRecord] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineSentRecordZoneChangesEventSelSavedRecords)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CKRecord](_ret)
 }
 
 // The records that CloudKit is unable to modify.
 func (o *CKSyncEngineSentRecordZoneChangesEvent) FailedRecordSaves() *foundation.NSArray[*CKSyncEngineFailedRecordSave] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineSentRecordZoneChangesEventSelFailedRecordSaves)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CKSyncEngineFailedRecordSave](_ret)
 }
 
 // The unique identifiers of the deleted records.
 func (o *CKSyncEngineSentRecordZoneChangesEvent) DeletedRecordIDs() *foundation.NSArray[*CKRecordID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineSentRecordZoneChangesEventSelDeletedRecordIDs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CKRecordID](_ret)
 }
 
@@ -59,4 +65,3 @@ func (o *CKSyncEngineSentRecordZoneChangesEvent) FailedRecordDeletes() *foundati
 	_ret := objc.Send[*foundation.NSDictionary[*CKRecordID, objc.ID]](o.Ptr(), _cKSyncEngineSentRecordZoneChangesEventSelFailedRecordDeletes)
 	return _ret
 }
-

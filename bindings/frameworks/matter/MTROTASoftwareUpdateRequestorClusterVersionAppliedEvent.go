@@ -16,11 +16,11 @@ type MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent struct {
 }
 
 var (
-	_clsMTROTASoftwareUpdateRequestorClusterVersionAppliedEvent = _objcClass("MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent")
-	_mTROTASoftwareUpdateRequestorClusterVersionAppliedEventSelSoftwareVersion = objc.RegisterName("softwareVersion")
+	_clsMTROTASoftwareUpdateRequestorClusterVersionAppliedEvent                   = _objcClass("MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent")
+	_mTROTASoftwareUpdateRequestorClusterVersionAppliedEventSelSoftwareVersion    = objc.RegisterName("softwareVersion")
 	_mTROTASoftwareUpdateRequestorClusterVersionAppliedEventSelSetSoftwareVersion = objc.RegisterName("setSoftwareVersion:")
-	_mTROTASoftwareUpdateRequestorClusterVersionAppliedEventSelProductID = objc.RegisterName("productID")
-	_mTROTASoftwareUpdateRequestorClusterVersionAppliedEventSelSetProductID = objc.RegisterName("setProductID:")
+	_mTROTASoftwareUpdateRequestorClusterVersionAppliedEventSelProductID          = objc.RegisterName("productID")
+	_mTROTASoftwareUpdateRequestorClusterVersionAppliedEventSelSetProductID       = objc.RegisterName("setProductID:")
 )
 
 func MTROTASoftwareUpdateRequestorClusterVersionAppliedEventFromID(id objc.ID) *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent {
@@ -35,7 +35,9 @@ func MTROTASoftwareUpdateRequestorClusterVersionAppliedEventFromID(id objc.ID) *
 
 func (o *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent) SoftwareVersion() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateRequestorClusterVersionAppliedEventSelSoftwareVersion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent) SetSoftwareVer
 
 func (o *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent) ProductID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateRequestorClusterVersionAppliedEventSelProductID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent) SetProductID(productID *foundation.NSNumber) {
 	o.Ptr().Send(_mTROTASoftwareUpdateRequestorClusterVersionAppliedEventSelSetProductID, productID.Ptr())
 }
-

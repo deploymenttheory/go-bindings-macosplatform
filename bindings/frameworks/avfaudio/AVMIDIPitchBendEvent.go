@@ -15,10 +15,10 @@ type AVMIDIPitchBendEvent struct {
 }
 
 var (
-	_clsAVMIDIPitchBendEvent = _objcClass("AVMIDIPitchBendEvent")
+	_clsAVMIDIPitchBendEvent                     = _objcClass("AVMIDIPitchBendEvent")
 	_aVMIDIPitchBendEventSelInitWithChannelValue = objc.RegisterName("initWithChannel:value:")
-	_aVMIDIPitchBendEventSelValue = objc.RegisterName("value")
-	_aVMIDIPitchBendEventSelSetValue = objc.RegisterName("setValue:")
+	_aVMIDIPitchBendEventSelValue                = objc.RegisterName("value")
+	_aVMIDIPitchBendEventSelSetValue             = objc.RegisterName("setValue:")
 )
 
 func AVMIDIPitchBendEventFromID(id objc.ID) *AVMIDIPitchBendEvent {
@@ -34,7 +34,9 @@ func AVMIDIPitchBendEventFromID(id objc.ID) *AVMIDIPitchBendEvent {
 // @method initWithChannel:value: @abstract Initialize the event with a channel and a pitch bend value. @param channel The MIDI channel for the message.  Range: 0-15. @param value The pitch bend value.  Range: 0-16383 (midpoint 8192).
 func (o *AVMIDIPitchBendEvent) InitWithChannelValue(channel uint, value uint) *AVMIDIPitchBendEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMIDIPitchBendEventSelInitWithChannelValue, channel, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMIDIPitchBendEventFromID(_ret)
 }
 
@@ -46,4 +48,3 @@ func (o *AVMIDIPitchBendEvent) Value() uint {
 func (o *AVMIDIPitchBendEvent) SetValue(value uint) {
 	o.Ptr().Send(_aVMIDIPitchBendEventSelSetValue, value)
 }
-

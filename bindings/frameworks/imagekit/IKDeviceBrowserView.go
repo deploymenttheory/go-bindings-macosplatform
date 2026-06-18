@@ -17,20 +17,20 @@ type IKDeviceBrowserView struct {
 }
 
 var (
-	_clsIKDeviceBrowserView = _objcClass("IKDeviceBrowserView")
-	_iKDeviceBrowserViewSelDelegate = objc.RegisterName("delegate")
-	_iKDeviceBrowserViewSelSetDelegate = objc.RegisterName("setDelegate:")
-	_iKDeviceBrowserViewSelDisplaysLocalCameras = objc.RegisterName("displaysLocalCameras")
-	_iKDeviceBrowserViewSelSetDisplaysLocalCameras = objc.RegisterName("setDisplaysLocalCameras:")
-	_iKDeviceBrowserViewSelDisplaysNetworkCameras = objc.RegisterName("displaysNetworkCameras")
-	_iKDeviceBrowserViewSelSetDisplaysNetworkCameras = objc.RegisterName("setDisplaysNetworkCameras:")
-	_iKDeviceBrowserViewSelDisplaysLocalScanners = objc.RegisterName("displaysLocalScanners")
-	_iKDeviceBrowserViewSelSetDisplaysLocalScanners = objc.RegisterName("setDisplaysLocalScanners:")
-	_iKDeviceBrowserViewSelDisplaysNetworkScanners = objc.RegisterName("displaysNetworkScanners")
+	_clsIKDeviceBrowserView                           = _objcClass("IKDeviceBrowserView")
+	_iKDeviceBrowserViewSelDelegate                   = objc.RegisterName("delegate")
+	_iKDeviceBrowserViewSelSetDelegate                = objc.RegisterName("setDelegate:")
+	_iKDeviceBrowserViewSelDisplaysLocalCameras       = objc.RegisterName("displaysLocalCameras")
+	_iKDeviceBrowserViewSelSetDisplaysLocalCameras    = objc.RegisterName("setDisplaysLocalCameras:")
+	_iKDeviceBrowserViewSelDisplaysNetworkCameras     = objc.RegisterName("displaysNetworkCameras")
+	_iKDeviceBrowserViewSelSetDisplaysNetworkCameras  = objc.RegisterName("setDisplaysNetworkCameras:")
+	_iKDeviceBrowserViewSelDisplaysLocalScanners      = objc.RegisterName("displaysLocalScanners")
+	_iKDeviceBrowserViewSelSetDisplaysLocalScanners   = objc.RegisterName("setDisplaysLocalScanners:")
+	_iKDeviceBrowserViewSelDisplaysNetworkScanners    = objc.RegisterName("displaysNetworkScanners")
 	_iKDeviceBrowserViewSelSetDisplaysNetworkScanners = objc.RegisterName("setDisplaysNetworkScanners:")
-	_iKDeviceBrowserViewSelMode = objc.RegisterName("mode")
-	_iKDeviceBrowserViewSelSetMode = objc.RegisterName("setMode:")
-	_iKDeviceBrowserViewSelSelectedDevice = objc.RegisterName("selectedDevice")
+	_iKDeviceBrowserViewSelMode                       = objc.RegisterName("mode")
+	_iKDeviceBrowserViewSelSetMode                    = objc.RegisterName("setMode:")
+	_iKDeviceBrowserViewSelSelectedDevice             = objc.RegisterName("selectedDevice")
 )
 
 func IKDeviceBrowserViewFromID(id objc.ID) *IKDeviceBrowserView {
@@ -106,7 +106,8 @@ func (o *IKDeviceBrowserView) SetMode(mode IKDeviceBrowserViewDisplayMode) {
 // @property selectedDevice @abstract user selected device (ICCameraDevice or ICScannerDevice).
 func (o *IKDeviceBrowserView) SelectedDevice() *imagecapturecore.ICDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKDeviceBrowserViewSelSelectedDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return imagecapturecore.ICDeviceFromID(_ret)
 }
-

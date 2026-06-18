@@ -201,4 +201,3 @@ type ExtensionStreamPropertiesable interface {
 }
 
 var _ ExtensionStreamPropertiesable = (*ExtensionStreamProperties)(nil)
-

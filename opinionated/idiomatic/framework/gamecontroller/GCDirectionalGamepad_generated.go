@@ -61,7 +61,9 @@ func (x *DirectionalGamepad) WithValueDidChangeHandler(valueDidChangeHandler fun
 
 func (x *DirectionalGamepad) asMicroGamepad() *raw.GCMicroGamepad { return &x.inner.GCMicroGamepad }
 
-func (x *DirectionalGamepad) asPhysicalInputProfile() *raw.GCPhysicalInputProfile { return &x.inner.GCMicroGamepad.GCPhysicalInputProfile }
+func (x *DirectionalGamepad) asPhysicalInputProfile() *raw.GCPhysicalInputProfile {
+	return &x.inner.GCMicroGamepad.GCPhysicalInputProfile
+}
 
 // DirectionalGamepadable is the interface implemented by [DirectionalGamepad], for mocking and DI.
 type DirectionalGamepadable interface {
@@ -73,4 +75,3 @@ type DirectionalGamepadable interface {
 }
 
 var _ DirectionalGamepadable = (*DirectionalGamepad)(nil)
-

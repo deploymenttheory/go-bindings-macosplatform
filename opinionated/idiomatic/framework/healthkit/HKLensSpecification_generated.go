@@ -83,4 +83,3 @@ type LensSpecificationable interface {
 }
 
 var _ LensSpecificationable = (*LensSpecification)(nil)
-

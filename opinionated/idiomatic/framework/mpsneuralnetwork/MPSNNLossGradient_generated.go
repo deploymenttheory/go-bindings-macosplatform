@@ -253,7 +253,9 @@ func (x *NNLossGradient) SetComputeLabelGradients(computeLabelGradients bool) {
 	x.inner.SetComputeLabelGradients(computeLabelGradients)
 }
 
-func (x *NNLossGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNBinaryKernel }
+func (x *NNLossGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNBinaryKernel
+}
 
 // NNLossGradientable is the interface implemented by [NNLossGradient], for mocking and DI.
 type NNLossGradientable interface {
@@ -298,4 +300,3 @@ type NNLossGradientable interface {
 }
 
 var _ NNLossGradientable = (*NNLossGradient)(nil)
-

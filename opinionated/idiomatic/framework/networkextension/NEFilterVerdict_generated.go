@@ -62,4 +62,3 @@ type NEFilterVerdictable interface {
 }
 
 var _ NEFilterVerdictable = (*NEFilterVerdict)(nil)
-

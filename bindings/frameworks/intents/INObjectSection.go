@@ -16,10 +16,10 @@ type INObjectSection[ObjectType purego.AnyObject] struct {
 }
 
 var (
-	_clsINObjectSection = _objcClass("INObjectSection")
+	_clsINObjectSection                   = _objcClass("INObjectSection")
 	_iNObjectSectionSelInitWithTitleItems = objc.RegisterName("initWithTitle:items:")
-	_iNObjectSectionSelTitle = objc.RegisterName("title")
-	_iNObjectSectionSelItems = objc.RegisterName("items")
+	_iNObjectSectionSelTitle              = objc.RegisterName("title")
+	_iNObjectSectionSelItems              = objc.RegisterName("items")
 )
 
 func INObjectSectionFromID[ObjectType purego.AnyObject](id objc.ID) *INObjectSection[ObjectType] {
@@ -34,19 +34,24 @@ func INObjectSectionFromID[ObjectType purego.AnyObject](id objc.ID) *INObjectSec
 
 func (o *INObjectSection[ObjectType]) InitWithTitleItems(title *foundation.NSString, items *foundation.NSArray[ObjectType]) *INObjectSection[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNObjectSectionSelInitWithTitleItems, title.Ptr(), items.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INObjectSectionFromID[ObjectType](_ret)
 }
 
 func (o *INObjectSection[ObjectType]) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNObjectSectionSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INObjectSection[ObjectType]) Items() *foundation.NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNObjectSectionSelItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[ObjectType](_ret)
 }
-

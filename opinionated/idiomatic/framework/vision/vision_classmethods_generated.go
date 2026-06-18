@@ -282,4 +282,3 @@ func ZeroVector() *Vector {
 	}
 	return &Vector{inner: _r}
 }
-

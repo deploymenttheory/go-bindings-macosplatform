@@ -16,11 +16,11 @@ type MTRRVCRunModeClusterModeTagStruct struct {
 }
 
 var (
-	_clsMTRRVCRunModeClusterModeTagStruct = _objcClass("MTRRVCRunModeClusterModeTagStruct")
-	_mTRRVCRunModeClusterModeTagStructSelMfgCode = objc.RegisterName("mfgCode")
+	_clsMTRRVCRunModeClusterModeTagStruct           = _objcClass("MTRRVCRunModeClusterModeTagStruct")
+	_mTRRVCRunModeClusterModeTagStructSelMfgCode    = objc.RegisterName("mfgCode")
 	_mTRRVCRunModeClusterModeTagStructSelSetMfgCode = objc.RegisterName("setMfgCode:")
-	_mTRRVCRunModeClusterModeTagStructSelValue = objc.RegisterName("value")
-	_mTRRVCRunModeClusterModeTagStructSelSetValue = objc.RegisterName("setValue:")
+	_mTRRVCRunModeClusterModeTagStructSelValue      = objc.RegisterName("value")
+	_mTRRVCRunModeClusterModeTagStructSelSetValue   = objc.RegisterName("setValue:")
 )
 
 func MTRRVCRunModeClusterModeTagStructFromID(id objc.ID) *MTRRVCRunModeClusterModeTagStruct {
@@ -35,7 +35,9 @@ func MTRRVCRunModeClusterModeTagStructFromID(id objc.ID) *MTRRVCRunModeClusterMo
 
 func (o *MTRRVCRunModeClusterModeTagStruct) MfgCode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRRVCRunModeClusterModeTagStructSelMfgCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRRVCRunModeClusterModeTagStruct) SetMfgCode(mfgCode *foundation.NSNum
 
 func (o *MTRRVCRunModeClusterModeTagStruct) Value() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRRVCRunModeClusterModeTagStructSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRRVCRunModeClusterModeTagStruct) SetValue(value *foundation.NSNumber) {
 	o.Ptr().Send(_mTRRVCRunModeClusterModeTagStructSelSetValue, value.Ptr())
 }
-

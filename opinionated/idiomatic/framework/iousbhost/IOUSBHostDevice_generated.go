@@ -69,4 +69,3 @@ type HostDeviceable interface {
 }
 
 var _ HostDeviceable = (*HostDevice)(nil)
-

@@ -19,16 +19,16 @@ type AVCapturePhoto struct {
 }
 
 var (
-	_clsAVCapturePhoto = _objcClass("AVCapturePhoto")
-	_aVCapturePhotoSelTimestamp = objc.RegisterName("timestamp")
-	_aVCapturePhotoSelPixelBuffer = objc.RegisterName("pixelBuffer")
-	_aVCapturePhotoSelResolvedSettings = objc.RegisterName("resolvedSettings")
-	_aVCapturePhotoSelPhotoCount = objc.RegisterName("photoCount")
-	_aVCapturePhotoSelConstantColorConfidenceMap = objc.RegisterName("constantColorConfidenceMap")
+	_clsAVCapturePhoto                                               = _objcClass("AVCapturePhoto")
+	_aVCapturePhotoSelTimestamp                                      = objc.RegisterName("timestamp")
+	_aVCapturePhotoSelPixelBuffer                                    = objc.RegisterName("pixelBuffer")
+	_aVCapturePhotoSelResolvedSettings                               = objc.RegisterName("resolvedSettings")
+	_aVCapturePhotoSelPhotoCount                                     = objc.RegisterName("photoCount")
+	_aVCapturePhotoSelConstantColorConfidenceMap                     = objc.RegisterName("constantColorConfidenceMap")
 	_aVCapturePhotoSelConstantColorCenterWeightedMeanConfidenceLevel = objc.RegisterName("constantColorCenterWeightedMeanConfidenceLevel")
-	_aVCapturePhotoSelIsConstantColorFallbackPhoto = objc.RegisterName("isConstantColorFallbackPhoto")
-	_aVCapturePhotoSelFileDataRepresentation = objc.RegisterName("fileDataRepresentation")
-	_aVCapturePhotoSelCGImageRepresentation = objc.RegisterName("CGImageRepresentation")
+	_aVCapturePhotoSelIsConstantColorFallbackPhoto                   = objc.RegisterName("isConstantColorFallbackPhoto")
+	_aVCapturePhotoSelFileDataRepresentation                         = objc.RegisterName("fileDataRepresentation")
+	_aVCapturePhotoSelCGImageRepresentation                          = objc.RegisterName("CGImageRepresentation")
 )
 
 func AVCapturePhotoFromID(id objc.ID) *AVCapturePhoto {
@@ -56,7 +56,9 @@ func (o *AVCapturePhoto) PixelBuffer() unsafe.Pointer {
 // @property resolvedSettings @abstract The AVCaptureResolvedPhotoSettings associated with all photo results for a given -[AVCapturePhotoOutput capturePhotoWithSettings:delegate:] request. @discussion Even in the event of an error, the resolved settings are always non nil.
 func (o *AVCapturePhoto) ResolvedSettings() *AVCaptureResolvedPhotoSettings {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCapturePhotoSelResolvedSettings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureResolvedPhotoSettingsFromID(_ret)
 }
 
@@ -87,7 +89,9 @@ func (o *AVCapturePhoto) IsConstantColorFallbackPhoto() bool {
 // @method fileDataRepresentation @abstract Flattens the AVCapturePhoto to an NSData using the file container format (processedFileType or rawFileType) specified in the AVCapturePhotoSettings (e.g. JFIF, HEIF, DNG, DICOM). @result An NSData containing bits in the file container's format, or nil if the flattening process fails.
 func (o *AVCapturePhoto) FileDataRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCapturePhotoSelFileDataRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -96,4 +100,3 @@ func (o *AVCapturePhoto) CGImageRepresentation() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVCapturePhotoSelCGImageRepresentation)
 	return _ret
 }
-

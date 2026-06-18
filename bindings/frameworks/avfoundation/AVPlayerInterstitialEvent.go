@@ -17,51 +17,51 @@ type AVPlayerInterstitialEvent struct {
 }
 
 var (
-	_clsAVPlayerInterstitialEvent = _objcClass("AVPlayerInterstitialEvent")
+	_clsAVPlayerInterstitialEvent                                                                                                                         = _objcClass("AVPlayerInterstitialEvent")
 	_aVPlayerInterstitialEventSelInterstitialEventWithPrimaryItemIdentifierTimeTemplateItemsRestrictionsResumptionOffsetPlayoutLimitUserDefinedAttributes = objc.RegisterName("interstitialEventWithPrimaryItem:identifier:time:templateItems:restrictions:resumptionOffset:playoutLimit:userDefinedAttributes:")
 	_aVPlayerInterstitialEventSelInterstitialEventWithPrimaryItemIdentifierDateTemplateItemsRestrictionsResumptionOffsetPlayoutLimitUserDefinedAttributes = objc.RegisterName("interstitialEventWithPrimaryItem:identifier:date:templateItems:restrictions:resumptionOffset:playoutLimit:userDefinedAttributes:")
-	_aVPlayerInterstitialEventSelInterstitialEventWithPrimaryItemTime = objc.RegisterName("interstitialEventWithPrimaryItem:time:")
-	_aVPlayerInterstitialEventSelInterstitialEventWithPrimaryItemDate = objc.RegisterName("interstitialEventWithPrimaryItem:date:")
-	_aVPlayerInterstitialEventSelPrimaryItem = objc.RegisterName("primaryItem")
-	_aVPlayerInterstitialEventSelIdentifier = objc.RegisterName("identifier")
-	_aVPlayerInterstitialEventSelTime = objc.RegisterName("time")
-	_aVPlayerInterstitialEventSelDate = objc.RegisterName("date")
-	_aVPlayerInterstitialEventSelTemplateItems = objc.RegisterName("templateItems")
-	_aVPlayerInterstitialEventSelRestrictions = objc.RegisterName("restrictions")
-	_aVPlayerInterstitialEventSelResumptionOffset = objc.RegisterName("resumptionOffset")
-	_aVPlayerInterstitialEventSelPlayoutLimit = objc.RegisterName("playoutLimit")
-	_aVPlayerInterstitialEventSelAlignsStartWithPrimarySegmentBoundary = objc.RegisterName("alignsStartWithPrimarySegmentBoundary")
-	_aVPlayerInterstitialEventSelAlignsResumptionWithPrimarySegmentBoundary = objc.RegisterName("alignsResumptionWithPrimarySegmentBoundary")
-	_aVPlayerInterstitialEventSelCue = objc.RegisterName("cue")
-	_aVPlayerInterstitialEventSelWillPlayOnce = objc.RegisterName("willPlayOnce")
-	_aVPlayerInterstitialEventSelUserDefinedAttributes = objc.RegisterName("userDefinedAttributes")
-	_aVPlayerInterstitialEventSelAssetListResponse = objc.RegisterName("assetListResponse")
-	_aVPlayerInterstitialEventSelScheduleIdentifier = objc.RegisterName("scheduleIdentifier")
-	_aVPlayerInterstitialEventSelTimelineOccupancy = objc.RegisterName("timelineOccupancy")
-	_aVPlayerInterstitialEventSelSupplementsPrimaryContent = objc.RegisterName("supplementsPrimaryContent")
-	_aVPlayerInterstitialEventSelContentMayVary = objc.RegisterName("contentMayVary")
-	_aVPlayerInterstitialEventSelSkipControlTimeRange = objc.RegisterName("skipControlTimeRange")
-	_aVPlayerInterstitialEventSelSkipControlLocalizedLabelBundleKey = objc.RegisterName("skipControlLocalizedLabelBundleKey")
-	_aVPlayerInterstitialEventSelSetPrimaryItem = objc.RegisterName("setPrimaryItem:")
-	_aVPlayerInterstitialEventSelSetIdentifier = objc.RegisterName("setIdentifier:")
-	_aVPlayerInterstitialEventSelSetTime = objc.RegisterName("setTime:")
-	_aVPlayerInterstitialEventSelSetDate = objc.RegisterName("setDate:")
-	_aVPlayerInterstitialEventSelSetTemplateItems = objc.RegisterName("setTemplateItems:")
-	_aVPlayerInterstitialEventSelSetRestrictions = objc.RegisterName("setRestrictions:")
-	_aVPlayerInterstitialEventSelSetResumptionOffset = objc.RegisterName("setResumptionOffset:")
-	_aVPlayerInterstitialEventSelSetPlayoutLimit = objc.RegisterName("setPlayoutLimit:")
-	_aVPlayerInterstitialEventSelSetAlignsStartWithPrimarySegmentBoundary = objc.RegisterName("setAlignsStartWithPrimarySegmentBoundary:")
-	_aVPlayerInterstitialEventSelSetAlignsResumptionWithPrimarySegmentBoundary = objc.RegisterName("setAlignsResumptionWithPrimarySegmentBoundary:")
-	_aVPlayerInterstitialEventSelSetCue = objc.RegisterName("setCue:")
-	_aVPlayerInterstitialEventSelSetWillPlayOnce = objc.RegisterName("setWillPlayOnce:")
-	_aVPlayerInterstitialEventSelSetUserDefinedAttributes = objc.RegisterName("setUserDefinedAttributes:")
-	_aVPlayerInterstitialEventSelSetTimelineOccupancy = objc.RegisterName("setTimelineOccupancy:")
-	_aVPlayerInterstitialEventSelSetSupplementsPrimaryContent = objc.RegisterName("setSupplementsPrimaryContent:")
-	_aVPlayerInterstitialEventSelSetContentMayVary = objc.RegisterName("setContentMayVary:")
-	_aVPlayerInterstitialEventSelPlannedDuration = objc.RegisterName("plannedDuration")
-	_aVPlayerInterstitialEventSelSetPlannedDuration = objc.RegisterName("setPlannedDuration:")
-	_aVPlayerInterstitialEventSelSetSkipControlTimeRange = objc.RegisterName("setSkipControlTimeRange:")
-	_aVPlayerInterstitialEventSelSetSkipControlLocalizedLabelBundleKey = objc.RegisterName("setSkipControlLocalizedLabelBundleKey:")
+	_aVPlayerInterstitialEventSelInterstitialEventWithPrimaryItemTime                                                                                     = objc.RegisterName("interstitialEventWithPrimaryItem:time:")
+	_aVPlayerInterstitialEventSelInterstitialEventWithPrimaryItemDate                                                                                     = objc.RegisterName("interstitialEventWithPrimaryItem:date:")
+	_aVPlayerInterstitialEventSelPrimaryItem                                                                                                              = objc.RegisterName("primaryItem")
+	_aVPlayerInterstitialEventSelIdentifier                                                                                                               = objc.RegisterName("identifier")
+	_aVPlayerInterstitialEventSelTime                                                                                                                     = objc.RegisterName("time")
+	_aVPlayerInterstitialEventSelDate                                                                                                                     = objc.RegisterName("date")
+	_aVPlayerInterstitialEventSelTemplateItems                                                                                                            = objc.RegisterName("templateItems")
+	_aVPlayerInterstitialEventSelRestrictions                                                                                                             = objc.RegisterName("restrictions")
+	_aVPlayerInterstitialEventSelResumptionOffset                                                                                                         = objc.RegisterName("resumptionOffset")
+	_aVPlayerInterstitialEventSelPlayoutLimit                                                                                                             = objc.RegisterName("playoutLimit")
+	_aVPlayerInterstitialEventSelAlignsStartWithPrimarySegmentBoundary                                                                                    = objc.RegisterName("alignsStartWithPrimarySegmentBoundary")
+	_aVPlayerInterstitialEventSelAlignsResumptionWithPrimarySegmentBoundary                                                                               = objc.RegisterName("alignsResumptionWithPrimarySegmentBoundary")
+	_aVPlayerInterstitialEventSelCue                                                                                                                      = objc.RegisterName("cue")
+	_aVPlayerInterstitialEventSelWillPlayOnce                                                                                                             = objc.RegisterName("willPlayOnce")
+	_aVPlayerInterstitialEventSelUserDefinedAttributes                                                                                                    = objc.RegisterName("userDefinedAttributes")
+	_aVPlayerInterstitialEventSelAssetListResponse                                                                                                        = objc.RegisterName("assetListResponse")
+	_aVPlayerInterstitialEventSelScheduleIdentifier                                                                                                       = objc.RegisterName("scheduleIdentifier")
+	_aVPlayerInterstitialEventSelTimelineOccupancy                                                                                                        = objc.RegisterName("timelineOccupancy")
+	_aVPlayerInterstitialEventSelSupplementsPrimaryContent                                                                                                = objc.RegisterName("supplementsPrimaryContent")
+	_aVPlayerInterstitialEventSelContentMayVary                                                                                                           = objc.RegisterName("contentMayVary")
+	_aVPlayerInterstitialEventSelSkipControlTimeRange                                                                                                     = objc.RegisterName("skipControlTimeRange")
+	_aVPlayerInterstitialEventSelSkipControlLocalizedLabelBundleKey                                                                                       = objc.RegisterName("skipControlLocalizedLabelBundleKey")
+	_aVPlayerInterstitialEventSelSetPrimaryItem                                                                                                           = objc.RegisterName("setPrimaryItem:")
+	_aVPlayerInterstitialEventSelSetIdentifier                                                                                                            = objc.RegisterName("setIdentifier:")
+	_aVPlayerInterstitialEventSelSetTime                                                                                                                  = objc.RegisterName("setTime:")
+	_aVPlayerInterstitialEventSelSetDate                                                                                                                  = objc.RegisterName("setDate:")
+	_aVPlayerInterstitialEventSelSetTemplateItems                                                                                                         = objc.RegisterName("setTemplateItems:")
+	_aVPlayerInterstitialEventSelSetRestrictions                                                                                                          = objc.RegisterName("setRestrictions:")
+	_aVPlayerInterstitialEventSelSetResumptionOffset                                                                                                      = objc.RegisterName("setResumptionOffset:")
+	_aVPlayerInterstitialEventSelSetPlayoutLimit                                                                                                          = objc.RegisterName("setPlayoutLimit:")
+	_aVPlayerInterstitialEventSelSetAlignsStartWithPrimarySegmentBoundary                                                                                 = objc.RegisterName("setAlignsStartWithPrimarySegmentBoundary:")
+	_aVPlayerInterstitialEventSelSetAlignsResumptionWithPrimarySegmentBoundary                                                                            = objc.RegisterName("setAlignsResumptionWithPrimarySegmentBoundary:")
+	_aVPlayerInterstitialEventSelSetCue                                                                                                                   = objc.RegisterName("setCue:")
+	_aVPlayerInterstitialEventSelSetWillPlayOnce                                                                                                          = objc.RegisterName("setWillPlayOnce:")
+	_aVPlayerInterstitialEventSelSetUserDefinedAttributes                                                                                                 = objc.RegisterName("setUserDefinedAttributes:")
+	_aVPlayerInterstitialEventSelSetTimelineOccupancy                                                                                                     = objc.RegisterName("setTimelineOccupancy:")
+	_aVPlayerInterstitialEventSelSetSupplementsPrimaryContent                                                                                             = objc.RegisterName("setSupplementsPrimaryContent:")
+	_aVPlayerInterstitialEventSelSetContentMayVary                                                                                                        = objc.RegisterName("setContentMayVary:")
+	_aVPlayerInterstitialEventSelPlannedDuration                                                                                                          = objc.RegisterName("plannedDuration")
+	_aVPlayerInterstitialEventSelSetPlannedDuration                                                                                                       = objc.RegisterName("setPlannedDuration:")
+	_aVPlayerInterstitialEventSelSetSkipControlTimeRange                                                                                                  = objc.RegisterName("setSkipControlTimeRange:")
+	_aVPlayerInterstitialEventSelSetSkipControlLocalizedLabelBundleKey                                                                                    = objc.RegisterName("setSkipControlLocalizedLabelBundleKey:")
 )
 
 func AVPlayerInterstitialEventFromID(id objc.ID) *AVPlayerInterstitialEvent {
@@ -78,7 +78,9 @@ func AVPlayerInterstitialEventFromID(id objc.ID) *AVPlayerInterstitialEvent {
 // Deprecated: Use interstitialEventWithPrimaryItem:time: instead
 func AVPlayerInterstitialEventInterstitialEventWithPrimaryItemIdentifierTimeTemplateItemsRestrictionsResumptionOffsetPlayoutLimitUserDefinedAttributes(primaryItem *AVPlayerItem, identifier *foundation.NSString, time_ coremedia.CMTime, templateItems *foundation.NSArray[*AVPlayerItem], restrictions AVPlayerInterstitialEventRestrictions, resumptionOffset coremedia.CMTime, playoutLimit coremedia.CMTime, userDefinedAttributes *foundation.NSDictionary[objc.ID, objc.ID]) *AVPlayerInterstitialEvent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayerInterstitialEvent), _aVPlayerInterstitialEventSelInterstitialEventWithPrimaryItemIdentifierTimeTemplateItemsRestrictionsResumptionOffsetPlayoutLimitUserDefinedAttributes, primaryItem.Ptr(), identifier.Ptr(), time_, templateItems.Ptr(), restrictions, resumptionOffset, playoutLimit, userDefinedAttributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerInterstitialEventFromID(_ret)
 }
 
@@ -86,35 +88,45 @@ func AVPlayerInterstitialEventInterstitialEventWithPrimaryItemIdentifierTimeTemp
 // Deprecated: Use interstitialEventWithPrimaryItem:date: instead
 func AVPlayerInterstitialEventInterstitialEventWithPrimaryItemIdentifierDateTemplateItemsRestrictionsResumptionOffsetPlayoutLimitUserDefinedAttributes(primaryItem *AVPlayerItem, identifier *foundation.NSString, date *foundation.NSDate, templateItems *foundation.NSArray[*AVPlayerItem], restrictions AVPlayerInterstitialEventRestrictions, resumptionOffset coremedia.CMTime, playoutLimit coremedia.CMTime, userDefinedAttributes *foundation.NSDictionary[objc.ID, objc.ID]) *AVPlayerInterstitialEvent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayerInterstitialEvent), _aVPlayerInterstitialEventSelInterstitialEventWithPrimaryItemIdentifierDateTemplateItemsRestrictionsResumptionOffsetPlayoutLimitUserDefinedAttributes, primaryItem.Ptr(), identifier.Ptr(), date.Ptr(), templateItems.Ptr(), restrictions, resumptionOffset, playoutLimit, userDefinedAttributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerInterstitialEventFromID(_ret)
 }
 
 // Returns an instance of AVPlayerInterstitialEvent for use in scheduling interstitial playback. - Parameter primaryItem: An AVPlayerItem representing the primary content during the playback of which the interstitial event should occur. The primaryItem must have an AVAsset that provides an intrinsic mapping from its timeline to real-time dates. - Parameter time: The time within the duration of the primary item at which playback of the primary content should be temporarily suspended and the interstitial items played. - Returns: An instance of AVPlayerInterstitialEvent.
 func AVPlayerInterstitialEventInterstitialEventWithPrimaryItemTime(primaryItem *AVPlayerItem, time_ coremedia.CMTime) *AVPlayerInterstitialEvent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayerInterstitialEvent), _aVPlayerInterstitialEventSelInterstitialEventWithPrimaryItemTime, primaryItem.Ptr(), time_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerInterstitialEventFromID(_ret)
 }
 
 // Returns an instance of AVPlayerInterstitialEvent for use in scheduling interstitial playback. - Parameter primaryItem: An AVPlayerItem representing the primary content during the playback of which the interstitial event should occur. The primaryItem must have an AVAsset that provides an intrinsic mapping from its timeline to real-time dates. - Parameter date: The date within the date range of the primary item at which playback of the primary content should be temporarily suspended and the interstitial items played. - Returns: An instance of AVPlayerInterstitialEvent.
 func AVPlayerInterstitialEventInterstitialEventWithPrimaryItemDate(primaryItem *AVPlayerItem, date *foundation.NSDate) *AVPlayerInterstitialEvent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayerInterstitialEvent), _aVPlayerInterstitialEventSelInterstitialEventWithPrimaryItemDate, primaryItem.Ptr(), date.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerInterstitialEventFromID(_ret)
 }
 
 // An AVPlayerItem representing the primary content during the playback of which the interstitial event should occur. The primaryItem must have an AVAsset that provides an intrinsic mapping from its timeline to real-time dates.
 func (o *AVPlayerInterstitialEvent) PrimaryItem() *AVPlayerItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerInterstitialEventSelPrimaryItem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerItemFromID(_ret)
 }
 
 // An external identifier for the event. If an event is set on an AVPlayerInterstitialEventController that already has an event with the same identifier, the old event will be replaced by the new one.
 func (o *AVPlayerInterstitialEvent) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerInterstitialEventSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -127,14 +139,18 @@ func (o *AVPlayerInterstitialEvent) Time() coremedia.CMTime {
 // The date within the date range of the primary item at which playback of the primary content should be temporarily suspended and the interstitial items played. Will have a value of nil if the event was initialized with a time instead of a date.
 func (o *AVPlayerInterstitialEvent) Date() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerInterstitialEventSelDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // An array of AVPlayerItems with configurations that will be reproduced for the playback of interstitial content. If you want the instances of AVURLAsset used during interstitial playback to be identical to the ones you specify for templateItems in AVPlayerInterstitialEvents that you set on an AVPlayerInterstitialEventController, rather than equivalent AVURLAssets with the same URL, you must create them with a value for the key AVURLAssetPrimarySessionIdentifierKey that's equal to the httpSessionIdentifier of the primary AVPlayerItem's asset. See AVAsset.h. This is especially useful if you require the use of a custom AVAssetResourceLoader delegate for interstitial assets. An NSInvalidArgumentException will be raised if any of the template items employs an AVAsset that lacks a URL, such as an AVComposition.
 func (o *AVPlayerInterstitialEvent) TemplateItems() *foundation.NSArray[*AVPlayerItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerInterstitialEventSelTemplateItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVPlayerItem](_ret)
 }
 
@@ -171,7 +187,9 @@ func (o *AVPlayerInterstitialEvent) AlignsResumptionWithPrimarySegmentBoundary()
 // The cue property is used to schedule event playback at a predefined position of primary playback.
 func (o *AVPlayerInterstitialEvent) Cue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerInterstitialEventSelCue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -196,7 +214,9 @@ func (o *AVPlayerInterstitialEvent) AssetListResponse() *foundation.NSDictionary
 // The identifier of the daterange-schedule that produced this event. nil if the event was not a product of a daterange-schedule.
 func (o *AVPlayerInterstitialEvent) ScheduleIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerInterstitialEventSelScheduleIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -227,7 +247,9 @@ func (o *AVPlayerInterstitialEvent) SkipControlTimeRange() coremedia.CMTimeRange
 // The key defined in the AVPlayerInterstitialEventController's localizedStringsBundle that points to the localized label for the skip button. If the value of the property is nil, the skip button may contain a generic label depending on the implementation of the UI that's in use. To ensure the best available user experience in various playback configurations, including external playback, set a value for this property that provides localized translations of skip control labels.
 func (o *AVPlayerInterstitialEvent) SkipControlLocalizedLabelBundleKey() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerInterstitialEventSelSkipControlLocalizedLabelBundleKey)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -312,4 +334,3 @@ func (o *AVPlayerInterstitialEvent) SetSkipControlTimeRange(skipControlTimeRange
 func (o *AVPlayerInterstitialEvent) SetSkipControlLocalizedLabelBundleKey(skipControlLocalizedLabelBundleKey *foundation.NSString) {
 	o.Ptr().Send(_aVPlayerInterstitialEventSelSetSkipControlLocalizedLabelBundleKey, skipControlLocalizedLabelBundleKey.Ptr())
 }
-

@@ -72,4 +72,3 @@ type MTRDeviceTypeRevisionable interface {
 }
 
 var _ MTRDeviceTypeRevisionable = (*MTRDeviceTypeRevision)(nil)
-

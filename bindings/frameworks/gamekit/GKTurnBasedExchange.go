@@ -18,19 +18,19 @@ type GKTurnBasedExchange struct {
 }
 
 var (
-	_clsGKTurnBasedExchange = _objcClass("GKTurnBasedExchange")
-	_gKTurnBasedExchangeSelCancelWithLocalizableMessageKeyArgumentsCompletionHandler = objc.RegisterName("cancelWithLocalizableMessageKey:arguments:completionHandler:")
+	_clsGKTurnBasedExchange                                                             = _objcClass("GKTurnBasedExchange")
+	_gKTurnBasedExchangeSelCancelWithLocalizableMessageKeyArgumentsCompletionHandler    = objc.RegisterName("cancelWithLocalizableMessageKey:arguments:completionHandler:")
 	_gKTurnBasedExchangeSelReplyWithLocalizableMessageKeyArgumentsDataCompletionHandler = objc.RegisterName("replyWithLocalizableMessageKey:arguments:data:completionHandler:")
-	_gKTurnBasedExchangeSelExchangeID = objc.RegisterName("exchangeID")
-	_gKTurnBasedExchangeSelSender = objc.RegisterName("sender")
-	_gKTurnBasedExchangeSelRecipients = objc.RegisterName("recipients")
-	_gKTurnBasedExchangeSelStatus = objc.RegisterName("status")
-	_gKTurnBasedExchangeSelMessage = objc.RegisterName("message")
-	_gKTurnBasedExchangeSelData = objc.RegisterName("data")
-	_gKTurnBasedExchangeSelSendDate = objc.RegisterName("sendDate")
-	_gKTurnBasedExchangeSelTimeoutDate = objc.RegisterName("timeoutDate")
-	_gKTurnBasedExchangeSelCompletionDate = objc.RegisterName("completionDate")
-	_gKTurnBasedExchangeSelReplies = objc.RegisterName("replies")
+	_gKTurnBasedExchangeSelExchangeID                                                   = objc.RegisterName("exchangeID")
+	_gKTurnBasedExchangeSelSender                                                       = objc.RegisterName("sender")
+	_gKTurnBasedExchangeSelRecipients                                                   = objc.RegisterName("recipients")
+	_gKTurnBasedExchangeSelStatus                                                       = objc.RegisterName("status")
+	_gKTurnBasedExchangeSelMessage                                                      = objc.RegisterName("message")
+	_gKTurnBasedExchangeSelData                                                         = objc.RegisterName("data")
+	_gKTurnBasedExchangeSelSendDate                                                     = objc.RegisterName("sendDate")
+	_gKTurnBasedExchangeSelTimeoutDate                                                  = objc.RegisterName("timeoutDate")
+	_gKTurnBasedExchangeSelCompletionDate                                               = objc.RegisterName("completionDate")
+	_gKTurnBasedExchangeSelReplies                                                      = objc.RegisterName("replies")
 )
 
 func GKTurnBasedExchangeFromID(id objc.ID) *GKTurnBasedExchange {
@@ -67,19 +67,25 @@ func (o *GKTurnBasedExchange) ReplyWithLocalizableMessageKeyArgumentsDataComplet
 
 func (o *GKTurnBasedExchange) ExchangeID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKTurnBasedExchangeSelExchangeID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *GKTurnBasedExchange) Sender() *GKTurnBasedParticipant {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKTurnBasedExchangeSelSender)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKTurnBasedParticipantFromID(_ret)
 }
 
 func (o *GKTurnBasedExchange) Recipients() *foundation.NSArray[*GKTurnBasedParticipant] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKTurnBasedExchangeSelRecipients)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GKTurnBasedParticipant](_ret)
 }
 
@@ -90,37 +96,48 @@ func (o *GKTurnBasedExchange) Status() GKTurnBasedExchangeStatus {
 
 func (o *GKTurnBasedExchange) Message() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKTurnBasedExchangeSelMessage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *GKTurnBasedExchange) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKTurnBasedExchangeSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *GKTurnBasedExchange) SendDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKTurnBasedExchangeSelSendDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *GKTurnBasedExchange) TimeoutDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKTurnBasedExchangeSelTimeoutDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *GKTurnBasedExchange) CompletionDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKTurnBasedExchangeSelCompletionDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *GKTurnBasedExchange) Replies() *foundation.NSArray[*GKTurnBasedExchangeReply] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKTurnBasedExchangeSelReplies)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GKTurnBasedExchangeReply](_ret)
 }
-

@@ -58,4 +58,3 @@ type ReceiptRefreshRequestable interface {
 }
 
 var _ ReceiptRefreshRequestable = (*ReceiptRefreshRequest)(nil)
-

@@ -106,4 +106,3 @@ type ExtensionDeviceable interface {
 }
 
 var _ ExtensionDeviceable = (*ExtensionDevice)(nil)
-

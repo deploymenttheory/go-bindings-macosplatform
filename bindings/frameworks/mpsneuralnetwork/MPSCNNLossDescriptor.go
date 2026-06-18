@@ -16,24 +16,24 @@ type MPSCNNLossDescriptor struct {
 }
 
 var (
-	_clsMPSCNNLossDescriptor = _objcClass("MPSCNNLossDescriptor")
+	_clsMPSCNNLossDescriptor                                       = _objcClass("MPSCNNLossDescriptor")
 	_mPSCNNLossDescriptorSelCnnLossDescriptorWithTypeReductionType = objc.RegisterName("cnnLossDescriptorWithType:reductionType:")
-	_mPSCNNLossDescriptorSelLossType = objc.RegisterName("lossType")
-	_mPSCNNLossDescriptorSelSetLossType = objc.RegisterName("setLossType:")
-	_mPSCNNLossDescriptorSelReductionType = objc.RegisterName("reductionType")
-	_mPSCNNLossDescriptorSelSetReductionType = objc.RegisterName("setReductionType:")
-	_mPSCNNLossDescriptorSelReduceAcrossBatch = objc.RegisterName("reduceAcrossBatch")
-	_mPSCNNLossDescriptorSelSetReduceAcrossBatch = objc.RegisterName("setReduceAcrossBatch:")
-	_mPSCNNLossDescriptorSelWeight = objc.RegisterName("weight")
-	_mPSCNNLossDescriptorSelSetWeight = objc.RegisterName("setWeight:")
-	_mPSCNNLossDescriptorSelLabelSmoothing = objc.RegisterName("labelSmoothing")
-	_mPSCNNLossDescriptorSelSetLabelSmoothing = objc.RegisterName("setLabelSmoothing:")
-	_mPSCNNLossDescriptorSelNumberOfClasses = objc.RegisterName("numberOfClasses")
-	_mPSCNNLossDescriptorSelSetNumberOfClasses = objc.RegisterName("setNumberOfClasses:")
-	_mPSCNNLossDescriptorSelEpsilon = objc.RegisterName("epsilon")
-	_mPSCNNLossDescriptorSelSetEpsilon = objc.RegisterName("setEpsilon:")
-	_mPSCNNLossDescriptorSelDelta = objc.RegisterName("delta")
-	_mPSCNNLossDescriptorSelSetDelta = objc.RegisterName("setDelta:")
+	_mPSCNNLossDescriptorSelLossType                               = objc.RegisterName("lossType")
+	_mPSCNNLossDescriptorSelSetLossType                            = objc.RegisterName("setLossType:")
+	_mPSCNNLossDescriptorSelReductionType                          = objc.RegisterName("reductionType")
+	_mPSCNNLossDescriptorSelSetReductionType                       = objc.RegisterName("setReductionType:")
+	_mPSCNNLossDescriptorSelReduceAcrossBatch                      = objc.RegisterName("reduceAcrossBatch")
+	_mPSCNNLossDescriptorSelSetReduceAcrossBatch                   = objc.RegisterName("setReduceAcrossBatch:")
+	_mPSCNNLossDescriptorSelWeight                                 = objc.RegisterName("weight")
+	_mPSCNNLossDescriptorSelSetWeight                              = objc.RegisterName("setWeight:")
+	_mPSCNNLossDescriptorSelLabelSmoothing                         = objc.RegisterName("labelSmoothing")
+	_mPSCNNLossDescriptorSelSetLabelSmoothing                      = objc.RegisterName("setLabelSmoothing:")
+	_mPSCNNLossDescriptorSelNumberOfClasses                        = objc.RegisterName("numberOfClasses")
+	_mPSCNNLossDescriptorSelSetNumberOfClasses                     = objc.RegisterName("setNumberOfClasses:")
+	_mPSCNNLossDescriptorSelEpsilon                                = objc.RegisterName("epsilon")
+	_mPSCNNLossDescriptorSelSetEpsilon                             = objc.RegisterName("setEpsilon:")
+	_mPSCNNLossDescriptorSelDelta                                  = objc.RegisterName("delta")
+	_mPSCNNLossDescriptorSelSetDelta                               = objc.RegisterName("setDelta:")
 )
 
 func MPSCNNLossDescriptorFromID(id objc.ID) *MPSCNNLossDescriptor {
@@ -49,7 +49,9 @@ func MPSCNNLossDescriptorFromID(id objc.ID) *MPSCNNLossDescriptor {
 // @abstract   Make a descriptor for a MPSCNNLoss or MPSNNLossGradient object. @param      lossType                    The type of a loss filter. @param      reductionType               The type of a reduction operation to apply. This argument is ignored in the MPSNNLossGradient filter. @return     A valid MPSCNNLossDescriptor object or nil, if failure.
 func MPSCNNLossDescriptorCnnLossDescriptorWithTypeReductionType(lossType MPSCNNLossType, reductionType MPSCNNReductionType) *MPSCNNLossDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNLossDescriptor), _mPSCNNLossDescriptorSelCnnLossDescriptorWithTypeReductionType, lossType, reductionType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNLossDescriptorFromID(_ret)
 }
 
@@ -132,4 +134,3 @@ func (o *MPSCNNLossDescriptor) Delta() float32 {
 func (o *MPSCNNLossDescriptor) SetDelta(delta float32) {
 	o.Ptr().Send(_mPSCNNLossDescriptorSelSetDelta, delta)
 }
-

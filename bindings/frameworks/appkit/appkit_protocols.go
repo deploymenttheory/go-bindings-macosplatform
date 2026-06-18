@@ -1150,4 +1150,3 @@ type NSWritingToolsCoordinatorDelegate interface {
 // QLPreviewItem wraps the ObjC protocol QLPreviewItem.
 type QLPreviewItem interface {
 }
-

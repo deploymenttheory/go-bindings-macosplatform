@@ -110,4 +110,3 @@ type Languageable interface {
 }
 
 var _ Languageable = (*Language)(nil)
-

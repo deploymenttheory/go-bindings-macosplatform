@@ -17,7 +17,7 @@ type MPSCNNNeuronSoftSign struct {
 }
 
 var (
-	_clsMPSCNNNeuronSoftSign = _objcClass("MPSCNNNeuronSoftSign")
+	_clsMPSCNNNeuronSoftSign               = _objcClass("MPSCNNNeuronSoftSign")
 	_mPSCNNNeuronSoftSignSelInitWithDevice = objc.RegisterName("initWithDevice:")
 )
 
@@ -34,7 +34,8 @@ func MPSCNNNeuronSoftSignFromID(id objc.ID) *MPSCNNNeuronSoftSign {
 // @abstract   Initialize a softsign neuron filter @param      device          The device the filter will run on @return     A valid MPSCNNNeuronSoftSign object or nil, if failure.
 func (o *MPSCNNNeuronSoftSign) InitWithDevice(device metal.MTLDevice) *MPSCNNNeuronSoftSign {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronSoftSignSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronSoftSignFromID(_ret)
 }
-

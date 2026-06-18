@@ -14,8 +14,8 @@ import (
 
 var (
 	_authenticationservicesLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce                  sync.Once
+	_failedSymbols             = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -48,7 +48,9 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("ASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports", func() { purego.RegisterLibFunc(&_fnASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports, _authenticationservicesLib, "ASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports") })
+	_register("ASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports", func() {
+		purego.RegisterLibFunc(&_fnASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports, _authenticationservicesLib, "ASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports")
+	})
 }
 
 func init() {

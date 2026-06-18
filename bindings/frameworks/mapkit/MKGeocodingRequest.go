@@ -18,17 +18,17 @@ type MKGeocodingRequest struct {
 }
 
 var (
-	_clsMKGeocodingRequest = _objcClass("MKGeocodingRequest")
-	_mKGeocodingRequestSelInitWithAddressString = objc.RegisterName("initWithAddressString:")
+	_clsMKGeocodingRequest                                 = _objcClass("MKGeocodingRequest")
+	_mKGeocodingRequestSelInitWithAddressString            = objc.RegisterName("initWithAddressString:")
 	_mKGeocodingRequestSelGetMapItemsWithCompletionHandler = objc.RegisterName("getMapItemsWithCompletionHandler:")
-	_mKGeocodingRequestSelCancel = objc.RegisterName("cancel")
-	_mKGeocodingRequestSelIsCancelled = objc.RegisterName("isCancelled")
-	_mKGeocodingRequestSelIsLoading = objc.RegisterName("isLoading")
-	_mKGeocodingRequestSelAddressString = objc.RegisterName("addressString")
-	_mKGeocodingRequestSelRegion = objc.RegisterName("region")
-	_mKGeocodingRequestSelSetRegion = objc.RegisterName("setRegion:")
-	_mKGeocodingRequestSelPreferredLocale = objc.RegisterName("preferredLocale")
-	_mKGeocodingRequestSelSetPreferredLocale = objc.RegisterName("setPreferredLocale:")
+	_mKGeocodingRequestSelCancel                           = objc.RegisterName("cancel")
+	_mKGeocodingRequestSelIsCancelled                      = objc.RegisterName("isCancelled")
+	_mKGeocodingRequestSelIsLoading                        = objc.RegisterName("isLoading")
+	_mKGeocodingRequestSelAddressString                    = objc.RegisterName("addressString")
+	_mKGeocodingRequestSelRegion                           = objc.RegisterName("region")
+	_mKGeocodingRequestSelSetRegion                        = objc.RegisterName("setRegion:")
+	_mKGeocodingRequestSelPreferredLocale                  = objc.RegisterName("preferredLocale")
+	_mKGeocodingRequestSelSetPreferredLocale               = objc.RegisterName("setPreferredLocale:")
 )
 
 func MKGeocodingRequestFromID(id objc.ID) *MKGeocodingRequest {
@@ -43,7 +43,9 @@ func MKGeocodingRequestFromID(id objc.ID) *MKGeocodingRequest {
 
 func (o *MKGeocodingRequest) InitWithAddressString(addressString *foundation.NSString) *MKGeocodingRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKGeocodingRequestSelInitWithAddressString, addressString.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKGeocodingRequestFromID(_ret)
 }
 
@@ -77,7 +79,9 @@ func (o *MKGeocodingRequest) IsLoading() bool {
 
 func (o *MKGeocodingRequest) AddressString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKGeocodingRequestSelAddressString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -92,11 +96,12 @@ func (o *MKGeocodingRequest) SetRegion(region MKCoordinateRegion) {
 
 func (o *MKGeocodingRequest) PreferredLocale() *foundation.NSLocale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKGeocodingRequestSelPreferredLocale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSLocaleFromID(_ret)
 }
 
 func (o *MKGeocodingRequest) SetPreferredLocale(preferredLocale *foundation.NSLocale) {
 	o.Ptr().Send(_mKGeocodingRequestSelSetPreferredLocale, preferredLocale.Ptr())
 }
-

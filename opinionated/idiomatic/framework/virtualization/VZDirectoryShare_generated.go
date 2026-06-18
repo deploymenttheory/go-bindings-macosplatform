@@ -43,4 +43,3 @@ type DirectoryShareable interface {
 }
 
 var _ DirectoryShareable = (*DirectoryShare)(nil)
-

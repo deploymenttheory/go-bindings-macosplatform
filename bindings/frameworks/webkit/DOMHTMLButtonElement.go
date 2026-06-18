@@ -16,18 +16,18 @@ type DOMHTMLButtonElement struct {
 }
 
 var (
-	_clsDOMHTMLButtonElement = _objcClass("DOMHTMLButtonElement")
-	_dOMHTMLButtonElementSelAutofocus = objc.RegisterName("autofocus")
+	_clsDOMHTMLButtonElement             = _objcClass("DOMHTMLButtonElement")
+	_dOMHTMLButtonElementSelAutofocus    = objc.RegisterName("autofocus")
 	_dOMHTMLButtonElementSelSetAutofocus = objc.RegisterName("setAutofocus:")
-	_dOMHTMLButtonElementSelDisabled = objc.RegisterName("disabled")
-	_dOMHTMLButtonElementSelSetDisabled = objc.RegisterName("setDisabled:")
-	_dOMHTMLButtonElementSelForm = objc.RegisterName("form")
-	_dOMHTMLButtonElementSelType = objc.RegisterName("type")
-	_dOMHTMLButtonElementSelSetType = objc.RegisterName("setType:")
-	_dOMHTMLButtonElementSelName = objc.RegisterName("name")
-	_dOMHTMLButtonElementSelSetName = objc.RegisterName("setName:")
-	_dOMHTMLButtonElementSelValue = objc.RegisterName("value")
-	_dOMHTMLButtonElementSelSetValue = objc.RegisterName("setValue:")
+	_dOMHTMLButtonElementSelDisabled     = objc.RegisterName("disabled")
+	_dOMHTMLButtonElementSelSetDisabled  = objc.RegisterName("setDisabled:")
+	_dOMHTMLButtonElementSelForm         = objc.RegisterName("form")
+	_dOMHTMLButtonElementSelType         = objc.RegisterName("type")
+	_dOMHTMLButtonElementSelSetType      = objc.RegisterName("setType:")
+	_dOMHTMLButtonElementSelName         = objc.RegisterName("name")
+	_dOMHTMLButtonElementSelSetName      = objc.RegisterName("setName:")
+	_dOMHTMLButtonElementSelValue        = objc.RegisterName("value")
+	_dOMHTMLButtonElementSelSetValue     = objc.RegisterName("setValue:")
 	_dOMHTMLButtonElementSelWillValidate = objc.RegisterName("willValidate")
 )
 
@@ -61,13 +61,17 @@ func (o *DOMHTMLButtonElement) SetDisabled(disabled bool) {
 
 func (o *DOMHTMLButtonElement) Form() *DOMHTMLFormElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLButtonElementSelForm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMHTMLFormElementFromID(_ret)
 }
 
 func (o *DOMHTMLButtonElement) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLButtonElementSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -77,7 +81,9 @@ func (o *DOMHTMLButtonElement) SetType(type_ *foundation.NSString) {
 
 func (o *DOMHTMLButtonElement) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLButtonElementSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -87,7 +93,9 @@ func (o *DOMHTMLButtonElement) SetName(name *foundation.NSString) {
 
 func (o *DOMHTMLButtonElement) Value() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLButtonElementSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -99,4 +107,3 @@ func (o *DOMHTMLButtonElement) WillValidate() bool {
 	_ret := objc.Send[bool](o.Ptr(), _dOMHTMLButtonElementSelWillValidate)
 	return _ret
 }
-

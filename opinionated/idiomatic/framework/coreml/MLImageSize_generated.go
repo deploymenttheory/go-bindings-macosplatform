@@ -53,4 +53,3 @@ type ImageSizeable interface {
 }
 
 var _ ImageSizeable = (*ImageSize)(nil)
-

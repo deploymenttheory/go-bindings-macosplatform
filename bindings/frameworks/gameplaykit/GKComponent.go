@@ -18,11 +18,11 @@ type GKComponent struct {
 }
 
 var (
-	_clsGKComponent = _objcClass("GKComponent")
-	_gKComponentSelUpdateWithDeltaTime = objc.RegisterName("updateWithDeltaTime:")
-	_gKComponentSelDidAddToEntity = objc.RegisterName("didAddToEntity")
+	_clsGKComponent                     = _objcClass("GKComponent")
+	_gKComponentSelUpdateWithDeltaTime  = objc.RegisterName("updateWithDeltaTime:")
+	_gKComponentSelDidAddToEntity       = objc.RegisterName("didAddToEntity")
 	_gKComponentSelWillRemoveFromEntity = objc.RegisterName("willRemoveFromEntity")
-	_gKComponentSelEntity = objc.RegisterName("entity")
+	_gKComponentSelEntity               = objc.RegisterName("entity")
 )
 
 func GKComponentFromID(id objc.ID) *GKComponent {
@@ -53,7 +53,8 @@ func (o *GKComponent) WillRemoveFromEntity() {
 // The entity that this component belongs to. Defaults to nil until the component is added to an entity.
 func (o *GKComponent) Entity() *GKEntity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKComponentSelEntity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKEntityFromID(_ret)
 }
-

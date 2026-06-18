@@ -159,4 +159,3 @@ type PropertyAnimationable interface {
 }
 
 var _ PropertyAnimationable = (*PropertyAnimation)(nil)
-

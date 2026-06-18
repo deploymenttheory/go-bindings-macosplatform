@@ -184,7 +184,9 @@ func (x *URLSessionWebSocketTask) CloseReason() *Data {
 	return &Data{inner: _r}
 }
 
-func (x *URLSessionWebSocketTask) asURLSessionTask() *raw.NSURLSessionTask { return &x.inner.NSURLSessionTask }
+func (x *URLSessionWebSocketTask) asURLSessionTask() *raw.NSURLSessionTask {
+	return &x.inner.NSURLSessionTask
+}
 
 func (x *URLSessionWebSocketTask) asObject() *raw.NSObject { return &x.inner.NSURLSessionTask.NSObject }
 
@@ -211,4 +213,3 @@ type URLSessionWebSocketTaskable interface {
 }
 
 var _ URLSessionWebSocketTaskable = (*URLSessionWebSocketTask)(nil)
-

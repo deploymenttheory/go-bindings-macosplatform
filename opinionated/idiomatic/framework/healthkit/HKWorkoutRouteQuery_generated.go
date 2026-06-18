@@ -52,4 +52,3 @@ type WorkoutRouteQueryable interface {
 }
 
 var _ WorkoutRouteQueryable = (*WorkoutRouteQuery)(nil)
-

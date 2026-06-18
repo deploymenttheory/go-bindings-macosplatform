@@ -54,4 +54,3 @@ type PassRelevantDateable interface {
 }
 
 var _ PassRelevantDateable = (*PassRelevantDate)(nil)
-

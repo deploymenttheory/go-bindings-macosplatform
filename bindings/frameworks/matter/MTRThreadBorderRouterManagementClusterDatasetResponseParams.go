@@ -18,10 +18,10 @@ type MTRThreadBorderRouterManagementClusterDatasetResponseParams struct {
 }
 
 var (
-	_clsMTRThreadBorderRouterManagementClusterDatasetResponseParams = _objcClass("MTRThreadBorderRouterManagementClusterDatasetResponseParams")
+	_clsMTRThreadBorderRouterManagementClusterDatasetResponseParams                           = _objcClass("MTRThreadBorderRouterManagementClusterDatasetResponseParams")
 	_mTRThreadBorderRouterManagementClusterDatasetResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRThreadBorderRouterManagementClusterDatasetResponseParamsSelDataset = objc.RegisterName("dataset")
-	_mTRThreadBorderRouterManagementClusterDatasetResponseParamsSelSetDataset = objc.RegisterName("setDataset:")
+	_mTRThreadBorderRouterManagementClusterDatasetResponseParamsSelDataset                    = objc.RegisterName("dataset")
+	_mTRThreadBorderRouterManagementClusterDatasetResponseParamsSelSetDataset                 = objc.RegisterName("setDataset:")
 )
 
 func MTRThreadBorderRouterManagementClusterDatasetResponseParamsFromID(id objc.ID) *MTRThreadBorderRouterManagementClusterDatasetResponseParams {
@@ -38,7 +38,9 @@ func MTRThreadBorderRouterManagementClusterDatasetResponseParamsFromID(id objc.I
 func (o *MTRThreadBorderRouterManagementClusterDatasetResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRThreadBorderRouterManagementClusterDatasetResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadBorderRouterManagementClusterDatasetResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -47,11 +49,12 @@ func (o *MTRThreadBorderRouterManagementClusterDatasetResponseParams) InitWithRe
 
 func (o *MTRThreadBorderRouterManagementClusterDatasetResponseParams) Dataset() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadBorderRouterManagementClusterDatasetResponseParamsSelDataset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *MTRThreadBorderRouterManagementClusterDatasetResponseParams) SetDataset(dataset *foundation.NSData) {
 	o.Ptr().Send(_mTRThreadBorderRouterManagementClusterDatasetResponseParamsSelSetDataset, dataset.Ptr())
 }
-

@@ -16,36 +16,36 @@ type MTRCommissioningParameters struct {
 }
 
 var (
-	_clsMTRCommissioningParameters = _objcClass("MTRCommissioningParameters")
-	_mTRCommissioningParametersSelCsrNonce = objc.RegisterName("csrNonce")
-	_mTRCommissioningParametersSelSetCsrNonce = objc.RegisterName("setCsrNonce:")
-	_mTRCommissioningParametersSelAttestationNonce = objc.RegisterName("attestationNonce")
-	_mTRCommissioningParametersSelSetAttestationNonce = objc.RegisterName("setAttestationNonce:")
-	_mTRCommissioningParametersSelWifiSSID = objc.RegisterName("wifiSSID")
-	_mTRCommissioningParametersSelSetWifiSSID = objc.RegisterName("setWifiSSID:")
-	_mTRCommissioningParametersSelWifiCredentials = objc.RegisterName("wifiCredentials")
-	_mTRCommissioningParametersSelSetWifiCredentials = objc.RegisterName("setWifiCredentials:")
-	_mTRCommissioningParametersSelThreadOperationalDataset = objc.RegisterName("threadOperationalDataset")
-	_mTRCommissioningParametersSelSetThreadOperationalDataset = objc.RegisterName("setThreadOperationalDataset:")
-	_mTRCommissioningParametersSelDeviceAttestationDelegate = objc.RegisterName("deviceAttestationDelegate")
+	_clsMTRCommissioningParameters                             = _objcClass("MTRCommissioningParameters")
+	_mTRCommissioningParametersSelCsrNonce                     = objc.RegisterName("csrNonce")
+	_mTRCommissioningParametersSelSetCsrNonce                  = objc.RegisterName("setCsrNonce:")
+	_mTRCommissioningParametersSelAttestationNonce             = objc.RegisterName("attestationNonce")
+	_mTRCommissioningParametersSelSetAttestationNonce          = objc.RegisterName("setAttestationNonce:")
+	_mTRCommissioningParametersSelWifiSSID                     = objc.RegisterName("wifiSSID")
+	_mTRCommissioningParametersSelSetWifiSSID                  = objc.RegisterName("setWifiSSID:")
+	_mTRCommissioningParametersSelWifiCredentials              = objc.RegisterName("wifiCredentials")
+	_mTRCommissioningParametersSelSetWifiCredentials           = objc.RegisterName("setWifiCredentials:")
+	_mTRCommissioningParametersSelThreadOperationalDataset     = objc.RegisterName("threadOperationalDataset")
+	_mTRCommissioningParametersSelSetThreadOperationalDataset  = objc.RegisterName("setThreadOperationalDataset:")
+	_mTRCommissioningParametersSelDeviceAttestationDelegate    = objc.RegisterName("deviceAttestationDelegate")
 	_mTRCommissioningParametersSelSetDeviceAttestationDelegate = objc.RegisterName("setDeviceAttestationDelegate:")
-	_mTRCommissioningParametersSelFailSafeTimeout = objc.RegisterName("failSafeTimeout")
-	_mTRCommissioningParametersSelSetFailSafeTimeout = objc.RegisterName("setFailSafeTimeout:")
-	_mTRCommissioningParametersSelSkipCommissioningComplete = objc.RegisterName("skipCommissioningComplete")
+	_mTRCommissioningParametersSelFailSafeTimeout              = objc.RegisterName("failSafeTimeout")
+	_mTRCommissioningParametersSelSetFailSafeTimeout           = objc.RegisterName("setFailSafeTimeout:")
+	_mTRCommissioningParametersSelSkipCommissioningComplete    = objc.RegisterName("skipCommissioningComplete")
 	_mTRCommissioningParametersSelSetSkipCommissioningComplete = objc.RegisterName("setSkipCommissioningComplete:")
-	_mTRCommissioningParametersSelCountryCode = objc.RegisterName("countryCode")
-	_mTRCommissioningParametersSelSetCountryCode = objc.RegisterName("setCountryCode:")
-	_mTRCommissioningParametersSelReadEndpointInformation = objc.RegisterName("readEndpointInformation")
-	_mTRCommissioningParametersSelSetReadEndpointInformation = objc.RegisterName("setReadEndpointInformation:")
-	_mTRCommissioningParametersSelExtraAttributesToRead = objc.RegisterName("extraAttributesToRead")
-	_mTRCommissioningParametersSelSetExtraAttributesToRead = objc.RegisterName("setExtraAttributesToRead:")
-	_mTRCommissioningParametersSelForceWiFiScan = objc.RegisterName("forceWiFiScan")
-	_mTRCommissioningParametersSelSetForceWiFiScan = objc.RegisterName("setForceWiFiScan:")
-	_mTRCommissioningParametersSelForceThreadScan = objc.RegisterName("forceThreadScan")
-	_mTRCommissioningParametersSelSetForceThreadScan = objc.RegisterName("setForceThreadScan:")
-	_mTRCommissioningParametersSelCSRNonce = objc.RegisterName("CSRNonce")
-	_mTRCommissioningParametersSelSetCSRNonce = objc.RegisterName("setCSRNonce:")
-	_mTRCommissioningParametersSelFailSafeExpiryTimeoutSecs = objc.RegisterName("failSafeExpiryTimeoutSecs")
+	_mTRCommissioningParametersSelCountryCode                  = objc.RegisterName("countryCode")
+	_mTRCommissioningParametersSelSetCountryCode               = objc.RegisterName("setCountryCode:")
+	_mTRCommissioningParametersSelReadEndpointInformation      = objc.RegisterName("readEndpointInformation")
+	_mTRCommissioningParametersSelSetReadEndpointInformation   = objc.RegisterName("setReadEndpointInformation:")
+	_mTRCommissioningParametersSelExtraAttributesToRead        = objc.RegisterName("extraAttributesToRead")
+	_mTRCommissioningParametersSelSetExtraAttributesToRead     = objc.RegisterName("setExtraAttributesToRead:")
+	_mTRCommissioningParametersSelForceWiFiScan                = objc.RegisterName("forceWiFiScan")
+	_mTRCommissioningParametersSelSetForceWiFiScan             = objc.RegisterName("setForceWiFiScan:")
+	_mTRCommissioningParametersSelForceThreadScan              = objc.RegisterName("forceThreadScan")
+	_mTRCommissioningParametersSelSetForceThreadScan           = objc.RegisterName("setForceThreadScan:")
+	_mTRCommissioningParametersSelCSRNonce                     = objc.RegisterName("CSRNonce")
+	_mTRCommissioningParametersSelSetCSRNonce                  = objc.RegisterName("setCSRNonce:")
+	_mTRCommissioningParametersSelFailSafeExpiryTimeoutSecs    = objc.RegisterName("failSafeExpiryTimeoutSecs")
 	_mTRCommissioningParametersSelSetFailSafeExpiryTimeoutSecs = objc.RegisterName("setFailSafeExpiryTimeoutSecs:")
 )
 
@@ -62,7 +62,9 @@ func MTRCommissioningParametersFromID(id objc.ID) *MTRCommissioningParameters {
 // The nonce to use when requesting a CSR for the node's operational certificate. If nil, a random nonce will be generated automatically. If not nil, must be 32 bytes of data.
 func (o *MTRCommissioningParameters) CsrNonce() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissioningParametersSelCsrNonce)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -73,7 +75,9 @@ func (o *MTRCommissioningParameters) SetCsrNonce(csrNonce *foundation.NSData) {
 // The nonce to use when requesting attestation information from the device. If nil, a random nonce will be generated automatically. If not nil, must be 32 bytes of data.
 func (o *MTRCommissioningParameters) AttestationNonce() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissioningParametersSelAttestationNonce)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -84,7 +88,9 @@ func (o *MTRCommissioningParameters) SetAttestationNonce(attestationNonce *found
 // The Wi-Fi SSID, if available.
 func (o *MTRCommissioningParameters) WifiSSID() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissioningParametersSelWifiSSID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -95,7 +101,9 @@ func (o *MTRCommissioningParameters) SetWifiSSID(wifiSSID *foundation.NSData) {
 // The Wi-Fi Credentials.  Allowed to be nil or 0-length data for an open network, as long as wifiSSID is not nil.
 func (o *MTRCommissioningParameters) WifiCredentials() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissioningParametersSelWifiCredentials)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -106,7 +114,9 @@ func (o *MTRCommissioningParameters) SetWifiCredentials(wifiCredentials *foundat
 // The Thread operational dataset, if available.
 func (o *MTRCommissioningParameters) ThreadOperationalDataset() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissioningParametersSelThreadOperationalDataset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -127,7 +137,9 @@ func (o *MTRCommissioningParameters) SetDeviceAttestationDelegate(deviceAttestat
 // The timeout, in seconds, to set for the fail-safe when calling into the deviceAttestationDelegate and waiting for it to respond. If nil, the fail-safe will not be extended before calling into the deviceAttestationDelegate.
 func (o *MTRCommissioningParameters) FailSafeTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissioningParametersSelFailSafeTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -148,7 +160,9 @@ func (o *MTRCommissioningParameters) SetSkipCommissioningComplete(skipCommission
 // The country code to provide to the device during commissioning. If not nil, this must be a 2-character ISO 3166-1 country code, which the device can use to decide on things like radio communications bands.
 func (o *MTRCommissioningParameters) CountryCode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissioningParametersSelCountryCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -169,7 +183,9 @@ func (o *MTRCommissioningParameters) SetReadEndpointInformation(readEndpointInfo
 // List of attribute paths to read from the commissionee (in addition to whatever attributes are already read to handle readEndpointInformation being YES, or to handle other commissioning tasks). The FeatureMap attribute of all Network Commissioning clusters on the commissionee will always be read and does not need to be included in this list.
 func (o *MTRCommissioningParameters) ExtraAttributesToRead() *foundation.NSArray[*MTRAttributeRequestPath] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissioningParametersSelExtraAttributesToRead)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MTRAttributeRequestPath](_ret)
 }
 
@@ -199,7 +215,9 @@ func (o *MTRCommissioningParameters) SetForceThreadScan(forceThreadScan bool) {
 
 func (o *MTRCommissioningParameters) CSRNonce() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissioningParametersSelCSRNonce)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -209,11 +227,12 @@ func (o *MTRCommissioningParameters) SetCSRNonce(cSRNonce *foundation.NSData) {
 
 func (o *MTRCommissioningParameters) FailSafeExpiryTimeoutSecs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissioningParametersSelFailSafeExpiryTimeoutSecs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRCommissioningParameters) SetFailSafeExpiryTimeoutSecs(failSafeExpiryTimeoutSecs *foundation.NSNumber) {
 	o.Ptr().Send(_mTRCommissioningParametersSelSetFailSafeExpiryTimeoutSecs, failSafeExpiryTimeoutSecs.Ptr())
 }
-

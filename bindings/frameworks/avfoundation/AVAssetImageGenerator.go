@@ -20,29 +20,29 @@ type AVAssetImageGenerator struct {
 }
 
 var (
-	_clsAVAssetImageGenerator = _objcClass("AVAssetImageGenerator")
-	_aVAssetImageGeneratorSelAssetImageGeneratorWithAsset = objc.RegisterName("assetImageGeneratorWithAsset:")
-	_aVAssetImageGeneratorSelInitWithAsset = objc.RegisterName("initWithAsset:")
-	_aVAssetImageGeneratorSelCopyCGImageAtTimeActualTimeError = objc.RegisterName("copyCGImageAtTime:actualTime:error:")
+	_clsAVAssetImageGenerator                                                        = _objcClass("AVAssetImageGenerator")
+	_aVAssetImageGeneratorSelAssetImageGeneratorWithAsset                            = objc.RegisterName("assetImageGeneratorWithAsset:")
+	_aVAssetImageGeneratorSelInitWithAsset                                           = objc.RegisterName("initWithAsset:")
+	_aVAssetImageGeneratorSelCopyCGImageAtTimeActualTimeError                        = objc.RegisterName("copyCGImageAtTime:actualTime:error:")
 	_aVAssetImageGeneratorSelGenerateCGImagesAsynchronouslyForTimesCompletionHandler = objc.RegisterName("generateCGImagesAsynchronouslyForTimes:completionHandler:")
-	_aVAssetImageGeneratorSelGenerateCGImageAsynchronouslyForTimeCompletionHandler = objc.RegisterName("generateCGImageAsynchronouslyForTime:completionHandler:")
-	_aVAssetImageGeneratorSelCancelAllCGImageGeneration = objc.RegisterName("cancelAllCGImageGeneration")
-	_aVAssetImageGeneratorSelAsset = objc.RegisterName("asset")
-	_aVAssetImageGeneratorSelAppliesPreferredTrackTransform = objc.RegisterName("appliesPreferredTrackTransform")
-	_aVAssetImageGeneratorSelSetAppliesPreferredTrackTransform = objc.RegisterName("setAppliesPreferredTrackTransform:")
-	_aVAssetImageGeneratorSelMaximumSize = objc.RegisterName("maximumSize")
-	_aVAssetImageGeneratorSelSetMaximumSize = objc.RegisterName("setMaximumSize:")
-	_aVAssetImageGeneratorSelApertureMode = objc.RegisterName("apertureMode")
-	_aVAssetImageGeneratorSelSetApertureMode = objc.RegisterName("setApertureMode:")
-	_aVAssetImageGeneratorSelDynamicRangePolicy = objc.RegisterName("dynamicRangePolicy")
-	_aVAssetImageGeneratorSelSetDynamicRangePolicy = objc.RegisterName("setDynamicRangePolicy:")
-	_aVAssetImageGeneratorSelVideoComposition = objc.RegisterName("videoComposition")
-	_aVAssetImageGeneratorSelSetVideoComposition = objc.RegisterName("setVideoComposition:")
-	_aVAssetImageGeneratorSelCustomVideoCompositor = objc.RegisterName("customVideoCompositor")
-	_aVAssetImageGeneratorSelRequestedTimeToleranceBefore = objc.RegisterName("requestedTimeToleranceBefore")
-	_aVAssetImageGeneratorSelSetRequestedTimeToleranceBefore = objc.RegisterName("setRequestedTimeToleranceBefore:")
-	_aVAssetImageGeneratorSelRequestedTimeToleranceAfter = objc.RegisterName("requestedTimeToleranceAfter")
-	_aVAssetImageGeneratorSelSetRequestedTimeToleranceAfter = objc.RegisterName("setRequestedTimeToleranceAfter:")
+	_aVAssetImageGeneratorSelGenerateCGImageAsynchronouslyForTimeCompletionHandler   = objc.RegisterName("generateCGImageAsynchronouslyForTime:completionHandler:")
+	_aVAssetImageGeneratorSelCancelAllCGImageGeneration                              = objc.RegisterName("cancelAllCGImageGeneration")
+	_aVAssetImageGeneratorSelAsset                                                   = objc.RegisterName("asset")
+	_aVAssetImageGeneratorSelAppliesPreferredTrackTransform                          = objc.RegisterName("appliesPreferredTrackTransform")
+	_aVAssetImageGeneratorSelSetAppliesPreferredTrackTransform                       = objc.RegisterName("setAppliesPreferredTrackTransform:")
+	_aVAssetImageGeneratorSelMaximumSize                                             = objc.RegisterName("maximumSize")
+	_aVAssetImageGeneratorSelSetMaximumSize                                          = objc.RegisterName("setMaximumSize:")
+	_aVAssetImageGeneratorSelApertureMode                                            = objc.RegisterName("apertureMode")
+	_aVAssetImageGeneratorSelSetApertureMode                                         = objc.RegisterName("setApertureMode:")
+	_aVAssetImageGeneratorSelDynamicRangePolicy                                      = objc.RegisterName("dynamicRangePolicy")
+	_aVAssetImageGeneratorSelSetDynamicRangePolicy                                   = objc.RegisterName("setDynamicRangePolicy:")
+	_aVAssetImageGeneratorSelVideoComposition                                        = objc.RegisterName("videoComposition")
+	_aVAssetImageGeneratorSelSetVideoComposition                                     = objc.RegisterName("setVideoComposition:")
+	_aVAssetImageGeneratorSelCustomVideoCompositor                                   = objc.RegisterName("customVideoCompositor")
+	_aVAssetImageGeneratorSelRequestedTimeToleranceBefore                            = objc.RegisterName("requestedTimeToleranceBefore")
+	_aVAssetImageGeneratorSelSetRequestedTimeToleranceBefore                         = objc.RegisterName("setRequestedTimeToleranceBefore:")
+	_aVAssetImageGeneratorSelRequestedTimeToleranceAfter                             = objc.RegisterName("requestedTimeToleranceAfter")
+	_aVAssetImageGeneratorSelSetRequestedTimeToleranceAfter                          = objc.RegisterName("setRequestedTimeToleranceAfter:")
 )
 
 func AVAssetImageGeneratorFromID(id objc.ID) *AVAssetImageGenerator {
@@ -58,14 +58,18 @@ func AVAssetImageGeneratorFromID(id objc.ID) *AVAssetImageGenerator {
 // @method			assetImageGeneratorWithAsset: @abstract		Returns an instance of AVAssetImageGenerator for use with the specified asset. @param			asset The asset from which images will be extracted. @result			An instance of AVAssetImageGenerator @discussion		This method may succeed even if the asset possesses no visual tracks at the time of initialization. Clients may wish to test whether an asset has any tracks with the visual characteristic via -[AVAsset tracksWithMediaCharacteristic:]. Note also that assets that belong to a mutable subclass of AVAsset, AVMutableComposition or AVMutableMovie, may gain visual tracks after initialization of an associated AVAssetImageGenerator. However, the results of image generation are undefined if mutations of the asset occur while images are being generated. AVAssetImageGenerator will use the default enabled video track(s) to generate images.
 func AVAssetImageGeneratorAssetImageGeneratorWithAsset(asset *AVAsset) *AVAssetImageGenerator {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetImageGenerator), _aVAssetImageGeneratorSelAssetImageGeneratorWithAsset, asset.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetImageGeneratorFromID(_ret)
 }
 
 // @method			initWithAsset: @abstract		Initializes an instance of AVAssetImageGenerator for use with the specified asset. @param			asset The asset from which images will be extracted. @result			An instance of AVAssetImageGenerator @discussion		This method may succeed even if the asset possesses no visual tracks at the time of initialization. Clients may wish to test whether an asset has any tracks with the visual characteristic via -[AVAsset tracksWithMediaCharacteristic:]. Note also that assets that belong to a mutable subclass of AVAsset, AVMutableComposition or AVMutableMovie, may gain visual tracks after initialization of an associated AVAssetImageGenerator. However, the results of image generation are undefined if mutations of the asset occur while images are being generated. AVAssetImageGenerator will use the default enabled video track(s) to generate images.
 func (o *AVAssetImageGenerator) InitWithAsset(asset *AVAsset) *AVAssetImageGenerator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetImageGeneratorSelInitWithAsset, asset.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetImageGeneratorFromID(_ret)
 }
 
@@ -97,7 +101,9 @@ func (o *AVAssetImageGenerator) CancelAllCGImageGeneration() {
 
 func (o *AVAssetImageGenerator) Asset() *AVAsset {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetImageGeneratorSelAsset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetFromID(_ret)
 }
 
@@ -121,7 +127,9 @@ func (o *AVAssetImageGenerator) SetMaximumSize(maximumSize corefoundation.CGSize
 
 func (o *AVAssetImageGenerator) ApertureMode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetImageGeneratorSelApertureMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -132,7 +140,9 @@ func (o *AVAssetImageGenerator) SetApertureMode(apertureMode *foundation.NSStrin
 // @property		dynamicRangePolicy @abstract		Configures the video dynamic range for the output CGImage @discussion	Default is AVAssetImageGeneratorDynamicRangePolicyForceSDR
 func (o *AVAssetImageGenerator) DynamicRangePolicy() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetImageGeneratorSelDynamicRangePolicy)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -143,7 +153,9 @@ func (o *AVAssetImageGenerator) SetDynamicRangePolicy(dynamicRangePolicy *founda
 // @property		videoComposition @abstract		Specifies the video composition to use when extracting images from assets with multiple video tracks. @discussion	If no videoComposition is specified, only the first enabled video track will be used. If a videoComposition is specified, the value of appliesPreferredTrackTransform is ignored. This property throws an exception if a video composition is set with any of the following property values: - "renderScale" is not equal to one - "renderSize" width or height is less than zero - "frameDuration" is invalid or less than or equal to zero - "sourceTrackIDForFrameTiming" is less than zero - "outputBufferDescription" is non-nil
 func (o *AVAssetImageGenerator) VideoComposition() *AVVideoComposition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetImageGeneratorSelVideoComposition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVVideoCompositionFromID(_ret)
 }
 
@@ -173,4 +185,3 @@ func (o *AVAssetImageGenerator) RequestedTimeToleranceAfter() coremedia.CMTime {
 func (o *AVAssetImageGenerator) SetRequestedTimeToleranceAfter(requestedTimeToleranceAfter coremedia.CMTime) {
 	o.Ptr().Send(_aVAssetImageGeneratorSelSetRequestedTimeToleranceAfter, requestedTimeToleranceAfter)
 }
-

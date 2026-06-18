@@ -25,4 +25,3 @@ func MTROtaSoftwareUpdateProviderClusterQueryImageParamsFromID(id objc.ID) *MTRO
 	purego.Track(o)
 	return o
 }
-

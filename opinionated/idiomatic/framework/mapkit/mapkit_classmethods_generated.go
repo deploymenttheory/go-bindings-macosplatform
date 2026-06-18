@@ -294,4 +294,3 @@ func ZoomControlWithMapView(mapView *raw.MKMapView) *ZoomControl {
 	}
 	return &ZoomControl{inner: _r}
 }
-

@@ -16,10 +16,10 @@ type MLModelStructureProgramBlock struct {
 }
 
 var (
-	_clsMLModelStructureProgramBlock = _objcClass("MLModelStructureProgramBlock")
-	_mLModelStructureProgramBlockSelInputs = objc.RegisterName("inputs")
+	_clsMLModelStructureProgramBlock            = _objcClass("MLModelStructureProgramBlock")
+	_mLModelStructureProgramBlockSelInputs      = objc.RegisterName("inputs")
 	_mLModelStructureProgramBlockSelOutputNames = objc.RegisterName("outputNames")
-	_mLModelStructureProgramBlockSelOperations = objc.RegisterName("operations")
+	_mLModelStructureProgramBlockSelOperations  = objc.RegisterName("operations")
 )
 
 func MLModelStructureProgramBlockFromID(id objc.ID) *MLModelStructureProgramBlock {
@@ -35,7 +35,9 @@ func MLModelStructureProgramBlockFromID(id objc.ID) *MLModelStructureProgramBloc
 // The named inputs to the block.
 func (o *MLModelStructureProgramBlock) Inputs() *foundation.NSArray[*MLModelStructureProgramNamedValueType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelStructureProgramBlockSelInputs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MLModelStructureProgramNamedValueType](_ret)
 }
 
@@ -48,7 +50,8 @@ func (o *MLModelStructureProgramBlock) OutputNames() *foundation.NSArray[*founda
 // The list of topologically sorted operations in the block.
 func (o *MLModelStructureProgramBlock) Operations() *foundation.NSArray[*MLModelStructureProgramOperation] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelStructureProgramBlockSelOperations)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MLModelStructureProgramOperation](_ret)
 }
-

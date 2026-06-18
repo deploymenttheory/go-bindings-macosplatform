@@ -76,4 +76,3 @@ type TimeDurationConstraintable interface {
 }
 
 var _ TimeDurationConstraintable = (*TimeDurationConstraint)(nil)
-

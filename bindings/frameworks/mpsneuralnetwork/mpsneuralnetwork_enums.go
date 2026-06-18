@@ -12,7 +12,7 @@ import (
 type MDLabelDomain int64
 
 const (
-	KMDLabelUserDomain MDLabelDomain = 0
+	KMDLabelUserDomain  MDLabelDomain = 0
 	KMDLabelLocalDomain MDLabelDomain = 1
 )
 
@@ -30,8 +30,8 @@ func (e MDLabelDomain) String() string {
 type MDQueryOptionFlags int64
 
 const (
-	KMDQuerySynchronous MDQueryOptionFlags = 1
-	KMDQueryWantsUpdates MDQueryOptionFlags = 4
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
 	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
 )
 
@@ -81,10 +81,18 @@ const (
 
 func (e MPSCNNBatchNormalizationFlags) String() string {
 	var parts []string
-	if e&MPSCNNBatchNormalizationFlagsCalculateStatisticsAlways != 0 { parts = append(parts, "MPSCNNBatchNormalizationFlagsCalculateStatisticsAlways") }
-	if e&MPSCNNBatchNormalizationFlagsCalculateStatisticsNever != 0 { parts = append(parts, "MPSCNNBatchNormalizationFlagsCalculateStatisticsNever") }
-	if e&MPSCNNBatchNormalizationFlagsCalculateStatisticsMask != 0 { parts = append(parts, "MPSCNNBatchNormalizationFlagsCalculateStatisticsMask") }
-	if len(parts) == 0 { return "0" }
+	if e&MPSCNNBatchNormalizationFlagsCalculateStatisticsAlways != 0 {
+		parts = append(parts, "MPSCNNBatchNormalizationFlagsCalculateStatisticsAlways")
+	}
+	if e&MPSCNNBatchNormalizationFlagsCalculateStatisticsNever != 0 {
+		parts = append(parts, "MPSCNNBatchNormalizationFlagsCalculateStatisticsNever")
+	}
+	if e&MPSCNNBatchNormalizationFlagsCalculateStatisticsMask != 0 {
+		parts = append(parts, "MPSCNNBatchNormalizationFlagsCalculateStatisticsMask")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -151,17 +159,25 @@ func (e MPSCNNConvolutionFlags) String() string {
 type MPSCNNConvolutionGradientOption uint64
 
 const (
-	MPSCNNConvolutionGradientOptionGradientWithData MPSCNNConvolutionGradientOption = 1
+	MPSCNNConvolutionGradientOptionGradientWithData           MPSCNNConvolutionGradientOption = 1
 	MPSCNNConvolutionGradientOptionGradientWithWeightsAndBias MPSCNNConvolutionGradientOption = 2
-	MPSCNNConvolutionGradientOptionAll MPSCNNConvolutionGradientOption = 3
+	MPSCNNConvolutionGradientOptionAll                        MPSCNNConvolutionGradientOption = 3
 )
 
 func (e MPSCNNConvolutionGradientOption) String() string {
 	var parts []string
-	if e&MPSCNNConvolutionGradientOptionGradientWithData != 0 { parts = append(parts, "MPSCNNConvolutionGradientOptionGradientWithData") }
-	if e&MPSCNNConvolutionGradientOptionGradientWithWeightsAndBias != 0 { parts = append(parts, "MPSCNNConvolutionGradientOptionGradientWithWeightsAndBias") }
-	if e&MPSCNNConvolutionGradientOptionAll != 0 { parts = append(parts, "MPSCNNConvolutionGradientOptionAll") }
-	if len(parts) == 0 { return "0" }
+	if e&MPSCNNConvolutionGradientOptionGradientWithData != 0 {
+		parts = append(parts, "MPSCNNConvolutionGradientOptionGradientWithData")
+	}
+	if e&MPSCNNConvolutionGradientOptionGradientWithWeightsAndBias != 0 {
+		parts = append(parts, "MPSCNNConvolutionGradientOptionGradientWithWeightsAndBias")
+	}
+	if e&MPSCNNConvolutionGradientOptionAll != 0 {
+		parts = append(parts, "MPSCNNConvolutionGradientOptionAll")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -183,17 +199,17 @@ func (e MPSCNNConvolutionWeightsLayout) String() string {
 type MPSCNNLossType int64
 
 const (
-	MPSCNNLossTypeMeanAbsoluteError MPSCNNLossType = 0
-	MPSCNNLossTypeMeanSquaredError MPSCNNLossType = 1
-	MPSCNNLossTypeSoftMaxCrossEntropy MPSCNNLossType = 2
-	MPSCNNLossTypeSigmoidCrossEntropy MPSCNNLossType = 3
-	MPSCNNLossTypeCategoricalCrossEntropy MPSCNNLossType = 4
-	MPSCNNLossTypeHinge MPSCNNLossType = 5
-	MPSCNNLossTypeHuber MPSCNNLossType = 6
-	MPSCNNLossTypeCosineDistance MPSCNNLossType = 7
-	MPSCNNLossTypeLog MPSCNNLossType = 8
+	MPSCNNLossTypeMeanAbsoluteError         MPSCNNLossType = 0
+	MPSCNNLossTypeMeanSquaredError          MPSCNNLossType = 1
+	MPSCNNLossTypeSoftMaxCrossEntropy       MPSCNNLossType = 2
+	MPSCNNLossTypeSigmoidCrossEntropy       MPSCNNLossType = 3
+	MPSCNNLossTypeCategoricalCrossEntropy   MPSCNNLossType = 4
+	MPSCNNLossTypeHinge                     MPSCNNLossType = 5
+	MPSCNNLossTypeHuber                     MPSCNNLossType = 6
+	MPSCNNLossTypeCosineDistance            MPSCNNLossType = 7
+	MPSCNNLossTypeLog                       MPSCNNLossType = 8
 	MPSCNNLossTypeKullbackLeiblerDivergence MPSCNNLossType = 9
-	MPSCNNLossTypeCount MPSCNNLossType = 10
+	MPSCNNLossTypeCount                     MPSCNNLossType = 10
 )
 
 func (e MPSCNNLossType) String() string {
@@ -228,23 +244,23 @@ func (e MPSCNNLossType) String() string {
 type MPSCNNNeuronType int64
 
 const (
-	MPSCNNNeuronTypeNone MPSCNNNeuronType = 0
-	MPSCNNNeuronTypeReLU MPSCNNNeuronType = 1
-	MPSCNNNeuronTypeLinear MPSCNNNeuronType = 2
-	MPSCNNNeuronTypeSigmoid MPSCNNNeuronType = 3
+	MPSCNNNeuronTypeNone        MPSCNNNeuronType = 0
+	MPSCNNNeuronTypeReLU        MPSCNNNeuronType = 1
+	MPSCNNNeuronTypeLinear      MPSCNNNeuronType = 2
+	MPSCNNNeuronTypeSigmoid     MPSCNNNeuronType = 3
 	MPSCNNNeuronTypeHardSigmoid MPSCNNNeuronType = 4
-	MPSCNNNeuronTypeTanH MPSCNNNeuronType = 5
-	MPSCNNNeuronTypeAbsolute MPSCNNNeuronType = 6
-	MPSCNNNeuronTypeSoftPlus MPSCNNNeuronType = 7
-	MPSCNNNeuronTypeSoftSign MPSCNNNeuronType = 8
-	MPSCNNNeuronTypeELU MPSCNNNeuronType = 9
-	MPSCNNNeuronTypePReLU MPSCNNNeuronType = 10
-	MPSCNNNeuronTypeReLUN MPSCNNNeuronType = 11
-	MPSCNNNeuronTypePower MPSCNNNeuronType = 12
+	MPSCNNNeuronTypeTanH        MPSCNNNeuronType = 5
+	MPSCNNNeuronTypeAbsolute    MPSCNNNeuronType = 6
+	MPSCNNNeuronTypeSoftPlus    MPSCNNNeuronType = 7
+	MPSCNNNeuronTypeSoftSign    MPSCNNNeuronType = 8
+	MPSCNNNeuronTypeELU         MPSCNNNeuronType = 9
+	MPSCNNNeuronTypePReLU       MPSCNNNeuronType = 10
+	MPSCNNNeuronTypeReLUN       MPSCNNNeuronType = 11
+	MPSCNNNeuronTypePower       MPSCNNNeuronType = 12
 	MPSCNNNeuronTypeExponential MPSCNNNeuronType = 13
-	MPSCNNNeuronTypeLogarithm MPSCNNNeuronType = 14
-	MPSCNNNeuronTypeGeLU MPSCNNNeuronType = 15
-	MPSCNNNeuronTypeCount MPSCNNNeuronType = 16
+	MPSCNNNeuronTypeLogarithm   MPSCNNNeuronType = 14
+	MPSCNNNeuronTypeGeLU        MPSCNNNeuronType = 15
+	MPSCNNNeuronTypeCount       MPSCNNNeuronType = 16
 )
 
 func (e MPSCNNNeuronType) String() string {
@@ -291,11 +307,11 @@ func (e MPSCNNNeuronType) String() string {
 type MPSCNNReductionType int64
 
 const (
-	MPSCNNReductionTypeNone MPSCNNReductionType = 0
-	MPSCNNReductionTypeSum MPSCNNReductionType = 1
-	MPSCNNReductionTypeMean MPSCNNReductionType = 2
+	MPSCNNReductionTypeNone                MPSCNNReductionType = 0
+	MPSCNNReductionTypeSum                 MPSCNNReductionType = 1
+	MPSCNNReductionTypeMean                MPSCNNReductionType = 2
 	MPSCNNReductionTypeSumByNonZeroWeights MPSCNNReductionType = 3
-	MPSCNNReductionTypeCount MPSCNNReductionType = 4
+	MPSCNNReductionTypeCount               MPSCNNReductionType = 4
 )
 
 func (e MPSCNNReductionType) String() string {
@@ -318,8 +334,8 @@ func (e MPSCNNReductionType) String() string {
 type MPSCNNWeightsQuantizationType int64
 
 const (
-	MPSCNNWeightsQuantizationTypeNone MPSCNNWeightsQuantizationType = 0
-	MPSCNNWeightsQuantizationTypeLinear MPSCNNWeightsQuantizationType = 1
+	MPSCNNWeightsQuantizationTypeNone        MPSCNNWeightsQuantizationType = 0
+	MPSCNNWeightsQuantizationTypeLinear      MPSCNNWeightsQuantizationType = 1
 	MPSCNNWeightsQuantizationTypeLookupTable MPSCNNWeightsQuantizationType = 2
 )
 
@@ -339,12 +355,12 @@ func (e MPSCNNWeightsQuantizationType) String() string {
 type MPSCustomKernelIndex int64
 
 const (
-	MPSCustomKernelIndexDestIndex MPSCustomKernelIndex = 0
-	MPSCustomKernelIndexSrc0Index MPSCustomKernelIndex = 0
-	MPSCustomKernelIndexSrc1Index MPSCustomKernelIndex = 1
-	MPSCustomKernelIndexSrc2Index MPSCustomKernelIndex = 2
-	MPSCustomKernelIndexSrc3Index MPSCustomKernelIndex = 3
-	MPSCustomKernelIndexSrc4Index MPSCustomKernelIndex = 4
+	MPSCustomKernelIndexDestIndex     MPSCustomKernelIndex = 0
+	MPSCustomKernelIndexSrc0Index     MPSCustomKernelIndex = 0
+	MPSCustomKernelIndexSrc1Index     MPSCustomKernelIndex = 1
+	MPSCustomKernelIndexSrc2Index     MPSCustomKernelIndex = 2
+	MPSCustomKernelIndexSrc3Index     MPSCustomKernelIndex = 3
+	MPSCustomKernelIndexSrc4Index     MPSCustomKernelIndex = 4
 	MPSCustomKernelIndexUserDataIndex MPSCustomKernelIndex = 30
 )
 
@@ -370,21 +386,21 @@ func (e MPSCustomKernelIndex) String() string {
 type MPSDeviceCapsValues int64
 
 const (
-	MPSDeviceCapsNull MPSDeviceCapsValues = 0
+	MPSDeviceCapsNull                        MPSDeviceCapsValues = 0
 	MPSDeviceSupportsReadableArrayOfTextures MPSDeviceCapsValues = 1
 	MPSDeviceSupportsWritableArrayOfTextures MPSDeviceCapsValues = 2
-	MPSDeviceSupportsReadWriteTextures MPSDeviceCapsValues = 4
-	MPSDeviceSupportsSimdgroupBarrier MPSDeviceCapsValues = 8
-	MPSDeviceSupportsQuadShuffle MPSDeviceCapsValues = 16
-	MPSDeviceSupportsSimdShuffle MPSDeviceCapsValues = 32
-	MPSDeviceSupportsSimdReduction MPSDeviceCapsValues = 64
-	MPSDeviceSupportsFloat32Filtering MPSDeviceCapsValues = 128
-	MPSDeviceSupportsNorm16BicubicFiltering MPSDeviceCapsValues = 256
+	MPSDeviceSupportsReadWriteTextures       MPSDeviceCapsValues = 4
+	MPSDeviceSupportsSimdgroupBarrier        MPSDeviceCapsValues = 8
+	MPSDeviceSupportsQuadShuffle             MPSDeviceCapsValues = 16
+	MPSDeviceSupportsSimdShuffle             MPSDeviceCapsValues = 32
+	MPSDeviceSupportsSimdReduction           MPSDeviceCapsValues = 64
+	MPSDeviceSupportsFloat32Filtering        MPSDeviceCapsValues = 128
+	MPSDeviceSupportsNorm16BicubicFiltering  MPSDeviceCapsValues = 256
 	MPSDeviceSupportsFloat16BicubicFiltering MPSDeviceCapsValues = 512
-	MPSDeviceIsAppleDevice MPSDeviceCapsValues = 1024
-	MPSDeviceSupportsSimdShuffleAndFill MPSDeviceCapsValues = 2048
-	MPSDeviceSupportsBFloat16Arithmetic MPSDeviceCapsValues = 4096
-	MPSDeviceCapsLast MPSDeviceCapsValues = 8192
+	MPSDeviceIsAppleDevice                   MPSDeviceCapsValues = 1024
+	MPSDeviceSupportsSimdShuffleAndFill      MPSDeviceCapsValues = 2048
+	MPSDeviceSupportsBFloat16Arithmetic      MPSDeviceCapsValues = 4096
+	MPSDeviceCapsLast                        MPSDeviceCapsValues = 8192
 )
 
 func (e MPSDeviceCapsValues) String() string {
@@ -427,25 +443,25 @@ func (e MPSDeviceCapsValues) String() string {
 type MPSImageType int64
 
 const (
-	MPSImageType2d MPSImageType = 0
-	MPSImageType2d_array MPSImageType = 1
-	MPSImageTypeArray2d MPSImageType = 2
-	MPSImageTypeArray2d_array MPSImageType = 3
-	MPSImageType_ArrayMask MPSImageType = 1
-	MPSImageType_BatchMask MPSImageType = 2
-	MPSImageType_typeMask MPSImageType = 3
-	MPSImageType_noAlpha MPSImageType = 4
-	MPSImageType_texelFormatMask MPSImageType = 56
-	MPSImageType_texelFormatShift MPSImageType = 3
-	MPSImageType_texelFormatStandard MPSImageType = 0
-	MPSImageType_texelFormatUnorm8 MPSImageType = 8
-	MPSImageType_texelFormatFloat16 MPSImageType = 16
-	MPSImageType_texelFormatBFloat16 MPSImageType = 24
-	MPSImageType_bitCount MPSImageType = 6
-	MPSImageType_mask MPSImageType = 63
-	MPSImageType2d_noAlpha MPSImageType = 4
-	MPSImageType2d_array_noAlpha MPSImageType = 5
-	MPSImageTypeArray2d_noAlpha MPSImageType = 6
+	MPSImageType2d                    MPSImageType = 0
+	MPSImageType2d_array              MPSImageType = 1
+	MPSImageTypeArray2d               MPSImageType = 2
+	MPSImageTypeArray2d_array         MPSImageType = 3
+	MPSImageType_ArrayMask            MPSImageType = 1
+	MPSImageType_BatchMask            MPSImageType = 2
+	MPSImageType_typeMask             MPSImageType = 3
+	MPSImageType_noAlpha              MPSImageType = 4
+	MPSImageType_texelFormatMask      MPSImageType = 56
+	MPSImageType_texelFormatShift     MPSImageType = 3
+	MPSImageType_texelFormatStandard  MPSImageType = 0
+	MPSImageType_texelFormatUnorm8    MPSImageType = 8
+	MPSImageType_texelFormatFloat16   MPSImageType = 16
+	MPSImageType_texelFormatBFloat16  MPSImageType = 24
+	MPSImageType_bitCount             MPSImageType = 6
+	MPSImageType_mask                 MPSImageType = 63
+	MPSImageType2d_noAlpha            MPSImageType = 4
+	MPSImageType2d_array_noAlpha      MPSImageType = 5
+	MPSImageTypeArray2d_noAlpha       MPSImageType = 6
 	MPSImageTypeArray2d_array_noAlpha MPSImageType = 7
 )
 
@@ -485,22 +501,34 @@ func (e MPSImageType) String() string {
 type MPSNNComparisonType uint64
 
 const (
-	MPSNNComparisonTypeEqual MPSNNComparisonType = 0
-	MPSNNComparisonTypeNotEqual MPSNNComparisonType = 1
-	MPSNNComparisonTypeLess MPSNNComparisonType = 2
-	MPSNNComparisonTypeLessOrEqual MPSNNComparisonType = 3
-	MPSNNComparisonTypeGreater MPSNNComparisonType = 4
+	MPSNNComparisonTypeEqual          MPSNNComparisonType = 0
+	MPSNNComparisonTypeNotEqual       MPSNNComparisonType = 1
+	MPSNNComparisonTypeLess           MPSNNComparisonType = 2
+	MPSNNComparisonTypeLessOrEqual    MPSNNComparisonType = 3
+	MPSNNComparisonTypeGreater        MPSNNComparisonType = 4
 	MPSNNComparisonTypeGreaterOrEqual MPSNNComparisonType = 5
 )
 
 func (e MPSNNComparisonType) String() string {
 	var parts []string
-	if e&MPSNNComparisonTypeNotEqual != 0 { parts = append(parts, "MPSNNComparisonTypeNotEqual") }
-	if e&MPSNNComparisonTypeLess != 0 { parts = append(parts, "MPSNNComparisonTypeLess") }
-	if e&MPSNNComparisonTypeLessOrEqual != 0 { parts = append(parts, "MPSNNComparisonTypeLessOrEqual") }
-	if e&MPSNNComparisonTypeGreater != 0 { parts = append(parts, "MPSNNComparisonTypeGreater") }
-	if e&MPSNNComparisonTypeGreaterOrEqual != 0 { parts = append(parts, "MPSNNComparisonTypeGreaterOrEqual") }
-	if len(parts) == 0 { return "0" }
+	if e&MPSNNComparisonTypeNotEqual != 0 {
+		parts = append(parts, "MPSNNComparisonTypeNotEqual")
+	}
+	if e&MPSNNComparisonTypeLess != 0 {
+		parts = append(parts, "MPSNNComparisonTypeLess")
+	}
+	if e&MPSNNComparisonTypeLessOrEqual != 0 {
+		parts = append(parts, "MPSNNComparisonTypeLessOrEqual")
+	}
+	if e&MPSNNComparisonTypeGreater != 0 {
+		parts = append(parts, "MPSNNComparisonTypeGreater")
+	}
+	if e&MPSNNComparisonTypeGreaterOrEqual != 0 {
+		parts = append(parts, "MPSNNComparisonTypeGreaterOrEqual")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -515,55 +543,93 @@ const (
 
 func (e MPSNNConvolutionAccumulatorPrecisionOption) String() string {
 	var parts []string
-	if e&MPSNNConvolutionAccumulatorPrecisionOptionFloat != 0 { parts = append(parts, "MPSNNConvolutionAccumulatorPrecisionOptionFloat") }
-	if len(parts) == 0 { return "0" }
+	if e&MPSNNConvolutionAccumulatorPrecisionOptionFloat != 0 {
+		parts = append(parts, "MPSNNConvolutionAccumulatorPrecisionOptionFloat")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type MPSNNPaddingMethod uint64
 
 const (
-	MPSNNPaddingMethodAlignCentered MPSNNPaddingMethod = 0
-	MPSNNPaddingMethodAlignTopLeft MPSNNPaddingMethod = 1
-	MPSNNPaddingMethodAlignBottomRight MPSNNPaddingMethod = 2
-	MPSNNPaddingMethodAlign_reserved MPSNNPaddingMethod = 3
-	MPSNNPaddingMethodAlignMask MPSNNPaddingMethod = 3
-	MPSNNPaddingMethodAddRemainderToTopLeft MPSNNPaddingMethod = 0
-	MPSNNPaddingMethodAddRemainderToTopRight MPSNNPaddingMethod = 4
-	MPSNNPaddingMethodAddRemainderToBottomLeft MPSNNPaddingMethod = 8
-	MPSNNPaddingMethodAddRemainderToBottomRight MPSNNPaddingMethod = 12
-	MPSNNPaddingMethodAddRemainderToMask MPSNNPaddingMethod = 12
-	MPSNNPaddingMethodSizeValidOnly MPSNNPaddingMethod = 0
-	MPSNNPaddingMethodSizeSame MPSNNPaddingMethod = 16
-	MPSNNPaddingMethodSizeFull MPSNNPaddingMethod = 32
-	MPSNNPaddingMethodSize_reserved MPSNNPaddingMethod = 48
+	MPSNNPaddingMethodAlignCentered                MPSNNPaddingMethod = 0
+	MPSNNPaddingMethodAlignTopLeft                 MPSNNPaddingMethod = 1
+	MPSNNPaddingMethodAlignBottomRight             MPSNNPaddingMethod = 2
+	MPSNNPaddingMethodAlign_reserved               MPSNNPaddingMethod = 3
+	MPSNNPaddingMethodAlignMask                    MPSNNPaddingMethod = 3
+	MPSNNPaddingMethodAddRemainderToTopLeft        MPSNNPaddingMethod = 0
+	MPSNNPaddingMethodAddRemainderToTopRight       MPSNNPaddingMethod = 4
+	MPSNNPaddingMethodAddRemainderToBottomLeft     MPSNNPaddingMethod = 8
+	MPSNNPaddingMethodAddRemainderToBottomRight    MPSNNPaddingMethod = 12
+	MPSNNPaddingMethodAddRemainderToMask           MPSNNPaddingMethod = 12
+	MPSNNPaddingMethodSizeValidOnly                MPSNNPaddingMethod = 0
+	MPSNNPaddingMethodSizeSame                     MPSNNPaddingMethod = 16
+	MPSNNPaddingMethodSizeFull                     MPSNNPaddingMethod = 32
+	MPSNNPaddingMethodSize_reserved                MPSNNPaddingMethod = 48
 	MPSNNPaddingMethodCustomWhitelistForNodeFusion MPSNNPaddingMethod = 8192
-	MPSNNPaddingMethodCustomAllowForNodeFusion MPSNNPaddingMethod = 8192
-	MPSNNPaddingMethodCustom MPSNNPaddingMethod = 16384
-	MPSNNPaddingMethodSizeMask MPSNNPaddingMethod = 2032
+	MPSNNPaddingMethodCustomAllowForNodeFusion     MPSNNPaddingMethod = 8192
+	MPSNNPaddingMethodCustom                       MPSNNPaddingMethod = 16384
+	MPSNNPaddingMethodSizeMask                     MPSNNPaddingMethod = 2032
 	// The caffe framework constrains the average pooling area to the limits of the padding area in cases where a pixel would read beyond the padding area. Set this bit for Caffe emulation with average pooling.
 	MPSNNPaddingMethodExcludeEdges MPSNNPaddingMethod = 32768
 )
 
 func (e MPSNNPaddingMethod) String() string {
 	var parts []string
-	if e&MPSNNPaddingMethodAlignTopLeft != 0 { parts = append(parts, "MPSNNPaddingMethodAlignTopLeft") }
-	if e&MPSNNPaddingMethodAlignBottomRight != 0 { parts = append(parts, "MPSNNPaddingMethodAlignBottomRight") }
-	if e&MPSNNPaddingMethodAlign_reserved != 0 { parts = append(parts, "MPSNNPaddingMethodAlign_reserved") }
-	if e&MPSNNPaddingMethodAlignMask != 0 { parts = append(parts, "MPSNNPaddingMethodAlignMask") }
-	if e&MPSNNPaddingMethodAddRemainderToTopRight != 0 { parts = append(parts, "MPSNNPaddingMethodAddRemainderToTopRight") }
-	if e&MPSNNPaddingMethodAddRemainderToBottomLeft != 0 { parts = append(parts, "MPSNNPaddingMethodAddRemainderToBottomLeft") }
-	if e&MPSNNPaddingMethodAddRemainderToBottomRight != 0 { parts = append(parts, "MPSNNPaddingMethodAddRemainderToBottomRight") }
-	if e&MPSNNPaddingMethodAddRemainderToMask != 0 { parts = append(parts, "MPSNNPaddingMethodAddRemainderToMask") }
-	if e&MPSNNPaddingMethodSizeSame != 0 { parts = append(parts, "MPSNNPaddingMethodSizeSame") }
-	if e&MPSNNPaddingMethodSizeFull != 0 { parts = append(parts, "MPSNNPaddingMethodSizeFull") }
-	if e&MPSNNPaddingMethodSize_reserved != 0 { parts = append(parts, "MPSNNPaddingMethodSize_reserved") }
-	if e&MPSNNPaddingMethodCustomWhitelistForNodeFusion != 0 { parts = append(parts, "MPSNNPaddingMethodCustomWhitelistForNodeFusion") }
-	if e&MPSNNPaddingMethodCustomAllowForNodeFusion != 0 { parts = append(parts, "MPSNNPaddingMethodCustomAllowForNodeFusion") }
-	if e&MPSNNPaddingMethodCustom != 0 { parts = append(parts, "MPSNNPaddingMethodCustom") }
-	if e&MPSNNPaddingMethodSizeMask != 0 { parts = append(parts, "MPSNNPaddingMethodSizeMask") }
-	if e&MPSNNPaddingMethodExcludeEdges != 0 { parts = append(parts, "MPSNNPaddingMethodExcludeEdges") }
-	if len(parts) == 0 { return "0" }
+	if e&MPSNNPaddingMethodAlignTopLeft != 0 {
+		parts = append(parts, "MPSNNPaddingMethodAlignTopLeft")
+	}
+	if e&MPSNNPaddingMethodAlignBottomRight != 0 {
+		parts = append(parts, "MPSNNPaddingMethodAlignBottomRight")
+	}
+	if e&MPSNNPaddingMethodAlign_reserved != 0 {
+		parts = append(parts, "MPSNNPaddingMethodAlign_reserved")
+	}
+	if e&MPSNNPaddingMethodAlignMask != 0 {
+		parts = append(parts, "MPSNNPaddingMethodAlignMask")
+	}
+	if e&MPSNNPaddingMethodAddRemainderToTopRight != 0 {
+		parts = append(parts, "MPSNNPaddingMethodAddRemainderToTopRight")
+	}
+	if e&MPSNNPaddingMethodAddRemainderToBottomLeft != 0 {
+		parts = append(parts, "MPSNNPaddingMethodAddRemainderToBottomLeft")
+	}
+	if e&MPSNNPaddingMethodAddRemainderToBottomRight != 0 {
+		parts = append(parts, "MPSNNPaddingMethodAddRemainderToBottomRight")
+	}
+	if e&MPSNNPaddingMethodAddRemainderToMask != 0 {
+		parts = append(parts, "MPSNNPaddingMethodAddRemainderToMask")
+	}
+	if e&MPSNNPaddingMethodSizeSame != 0 {
+		parts = append(parts, "MPSNNPaddingMethodSizeSame")
+	}
+	if e&MPSNNPaddingMethodSizeFull != 0 {
+		parts = append(parts, "MPSNNPaddingMethodSizeFull")
+	}
+	if e&MPSNNPaddingMethodSize_reserved != 0 {
+		parts = append(parts, "MPSNNPaddingMethodSize_reserved")
+	}
+	if e&MPSNNPaddingMethodCustomWhitelistForNodeFusion != 0 {
+		parts = append(parts, "MPSNNPaddingMethodCustomWhitelistForNodeFusion")
+	}
+	if e&MPSNNPaddingMethodCustomAllowForNodeFusion != 0 {
+		parts = append(parts, "MPSNNPaddingMethodCustomAllowForNodeFusion")
+	}
+	if e&MPSNNPaddingMethodCustom != 0 {
+		parts = append(parts, "MPSNNPaddingMethodCustom")
+	}
+	if e&MPSNNPaddingMethodSizeMask != 0 {
+		parts = append(parts, "MPSNNPaddingMethodSizeMask")
+	}
+	if e&MPSNNPaddingMethodExcludeEdges != 0 {
+		parts = append(parts, "MPSNNPaddingMethodExcludeEdges")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -603,9 +669,15 @@ const (
 
 func (e MPSNNTrainingStyle) String() string {
 	var parts []string
-	if e&MPSNNTrainingStyleUpdateDeviceCPU != 0 { parts = append(parts, "MPSNNTrainingStyleUpdateDeviceCPU") }
-	if e&MPSNNTrainingStyleUpdateDeviceGPU != 0 { parts = append(parts, "MPSNNTrainingStyleUpdateDeviceGPU") }
-	if len(parts) == 0 { return "0" }
+	if e&MPSNNTrainingStyleUpdateDeviceCPU != 0 {
+		parts = append(parts, "MPSNNTrainingStyleUpdateDeviceCPU")
+	}
+	if e&MPSNNTrainingStyleUpdateDeviceGPU != 0 {
+		parts = append(parts, "MPSNNTrainingStyleUpdateDeviceGPU")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -636,36 +708,36 @@ func (e MPSRNNBidirectionalCombineMode) String() string {
 type MPSRNNMatrixId uint64
 
 const (
-	MPSRNNMatrixIdSingleGateInputWeights MPSRNNMatrixId = 0
-	MPSRNNMatrixIdSingleGateRecurrentWeights MPSRNNMatrixId = 1
-	MPSRNNMatrixIdSingleGateBiasTerms MPSRNNMatrixId = 2
-	MPSRNNMatrixIdLSTMInputGateInputWeights MPSRNNMatrixId = 3
-	MPSRNNMatrixIdLSTMInputGateRecurrentWeights MPSRNNMatrixId = 4
-	MPSRNNMatrixIdLSTMInputGateMemoryWeights MPSRNNMatrixId = 5
-	MPSRNNMatrixIdLSTMInputGateBiasTerms MPSRNNMatrixId = 6
-	MPSRNNMatrixIdLSTMForgetGateInputWeights MPSRNNMatrixId = 7
-	MPSRNNMatrixIdLSTMForgetGateRecurrentWeights MPSRNNMatrixId = 8
-	MPSRNNMatrixIdLSTMForgetGateMemoryWeights MPSRNNMatrixId = 9
-	MPSRNNMatrixIdLSTMForgetGateBiasTerms MPSRNNMatrixId = 10
-	MPSRNNMatrixIdLSTMMemoryGateInputWeights MPSRNNMatrixId = 11
-	MPSRNNMatrixIdLSTMMemoryGateRecurrentWeights MPSRNNMatrixId = 12
-	MPSRNNMatrixIdLSTMMemoryGateMemoryWeights MPSRNNMatrixId = 13
-	MPSRNNMatrixIdLSTMMemoryGateBiasTerms MPSRNNMatrixId = 14
-	MPSRNNMatrixIdLSTMOutputGateInputWeights MPSRNNMatrixId = 15
-	MPSRNNMatrixIdLSTMOutputGateRecurrentWeights MPSRNNMatrixId = 16
-	MPSRNNMatrixIdLSTMOutputGateMemoryWeights MPSRNNMatrixId = 17
-	MPSRNNMatrixIdLSTMOutputGateBiasTerms MPSRNNMatrixId = 18
-	MPSRNNMatrixIdGRUInputGateInputWeights MPSRNNMatrixId = 19
-	MPSRNNMatrixIdGRUInputGateRecurrentWeights MPSRNNMatrixId = 20
-	MPSRNNMatrixIdGRUInputGateBiasTerms MPSRNNMatrixId = 21
-	MPSRNNMatrixIdGRURecurrentGateInputWeights MPSRNNMatrixId = 22
+	MPSRNNMatrixIdSingleGateInputWeights           MPSRNNMatrixId = 0
+	MPSRNNMatrixIdSingleGateRecurrentWeights       MPSRNNMatrixId = 1
+	MPSRNNMatrixIdSingleGateBiasTerms              MPSRNNMatrixId = 2
+	MPSRNNMatrixIdLSTMInputGateInputWeights        MPSRNNMatrixId = 3
+	MPSRNNMatrixIdLSTMInputGateRecurrentWeights    MPSRNNMatrixId = 4
+	MPSRNNMatrixIdLSTMInputGateMemoryWeights       MPSRNNMatrixId = 5
+	MPSRNNMatrixIdLSTMInputGateBiasTerms           MPSRNNMatrixId = 6
+	MPSRNNMatrixIdLSTMForgetGateInputWeights       MPSRNNMatrixId = 7
+	MPSRNNMatrixIdLSTMForgetGateRecurrentWeights   MPSRNNMatrixId = 8
+	MPSRNNMatrixIdLSTMForgetGateMemoryWeights      MPSRNNMatrixId = 9
+	MPSRNNMatrixIdLSTMForgetGateBiasTerms          MPSRNNMatrixId = 10
+	MPSRNNMatrixIdLSTMMemoryGateInputWeights       MPSRNNMatrixId = 11
+	MPSRNNMatrixIdLSTMMemoryGateRecurrentWeights   MPSRNNMatrixId = 12
+	MPSRNNMatrixIdLSTMMemoryGateMemoryWeights      MPSRNNMatrixId = 13
+	MPSRNNMatrixIdLSTMMemoryGateBiasTerms          MPSRNNMatrixId = 14
+	MPSRNNMatrixIdLSTMOutputGateInputWeights       MPSRNNMatrixId = 15
+	MPSRNNMatrixIdLSTMOutputGateRecurrentWeights   MPSRNNMatrixId = 16
+	MPSRNNMatrixIdLSTMOutputGateMemoryWeights      MPSRNNMatrixId = 17
+	MPSRNNMatrixIdLSTMOutputGateBiasTerms          MPSRNNMatrixId = 18
+	MPSRNNMatrixIdGRUInputGateInputWeights         MPSRNNMatrixId = 19
+	MPSRNNMatrixIdGRUInputGateRecurrentWeights     MPSRNNMatrixId = 20
+	MPSRNNMatrixIdGRUInputGateBiasTerms            MPSRNNMatrixId = 21
+	MPSRNNMatrixIdGRURecurrentGateInputWeights     MPSRNNMatrixId = 22
 	MPSRNNMatrixIdGRURecurrentGateRecurrentWeights MPSRNNMatrixId = 23
-	MPSRNNMatrixIdGRURecurrentGateBiasTerms MPSRNNMatrixId = 24
-	MPSRNNMatrixIdGRUOutputGateInputWeights MPSRNNMatrixId = 25
-	MPSRNNMatrixIdGRUOutputGateRecurrentWeights MPSRNNMatrixId = 26
-	MPSRNNMatrixIdGRUOutputGateInputGateWeights MPSRNNMatrixId = 27
-	MPSRNNMatrixIdGRUOutputGateBiasTerms MPSRNNMatrixId = 28
-	MPSRNNMatrixId_count MPSRNNMatrixId = 29
+	MPSRNNMatrixIdGRURecurrentGateBiasTerms        MPSRNNMatrixId = 24
+	MPSRNNMatrixIdGRUOutputGateInputWeights        MPSRNNMatrixId = 25
+	MPSRNNMatrixIdGRUOutputGateRecurrentWeights    MPSRNNMatrixId = 26
+	MPSRNNMatrixIdGRUOutputGateInputGateWeights    MPSRNNMatrixId = 27
+	MPSRNNMatrixIdGRUOutputGateBiasTerms           MPSRNNMatrixId = 28
+	MPSRNNMatrixId_count                           MPSRNNMatrixId = 29
 )
 
 func (e MPSRNNMatrixId) String() string {
@@ -759,8 +831,8 @@ type Acl_entry_id_t int64
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
-	ACL_NEXT_ENTRY Acl_entry_id_t = -1
-	ACL_LAST_ENTRY Acl_entry_id_t = -2
+	ACL_NEXT_ENTRY  Acl_entry_id_t = -1
+	ACL_LAST_ENTRY  Acl_entry_id_t = -2
 )
 
 func (e Acl_entry_id_t) String() string {
@@ -779,13 +851,13 @@ func (e Acl_entry_id_t) String() string {
 type Acl_flag_t int64
 
 const (
-	ACL_FLAG_DEFER_INHERIT Acl_flag_t = 1
-	ACL_FLAG_NO_INHERIT Acl_flag_t = 131072
-	ACL_ENTRY_INHERITED Acl_flag_t = 16
-	ACL_ENTRY_FILE_INHERIT Acl_flag_t = 32
+	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
+	ACL_FLAG_NO_INHERIT         Acl_flag_t = 131072
+	ACL_ENTRY_INHERITED         Acl_flag_t = 16
+	ACL_ENTRY_FILE_INHERIT      Acl_flag_t = 32
 	ACL_ENTRY_DIRECTORY_INHERIT Acl_flag_t = 64
-	ACL_ENTRY_LIMIT_INHERIT Acl_flag_t = 128
-	ACL_ENTRY_ONLY_INHERIT Acl_flag_t = 256
+	ACL_ENTRY_LIMIT_INHERIT     Acl_flag_t = 128
+	ACL_ENTRY_ONLY_INHERIT      Acl_flag_t = 256
 )
 
 func (e Acl_flag_t) String() string {
@@ -812,24 +884,24 @@ func (e Acl_flag_t) String() string {
 type Acl_perm_t int64
 
 const (
-	ACL_READ_DATA Acl_perm_t = 2
-	ACL_LIST_DIRECTORY Acl_perm_t = 2
-	ACL_WRITE_DATA Acl_perm_t = 4
-	ACL_ADD_FILE Acl_perm_t = 4
-	ACL_EXECUTE Acl_perm_t = 8
-	ACL_SEARCH Acl_perm_t = 8
-	ACL_DELETE Acl_perm_t = 16
-	ACL_APPEND_DATA Acl_perm_t = 32
-	ACL_ADD_SUBDIRECTORY Acl_perm_t = 32
-	ACL_DELETE_CHILD Acl_perm_t = 64
-	ACL_READ_ATTRIBUTES Acl_perm_t = 128
-	ACL_WRITE_ATTRIBUTES Acl_perm_t = 256
-	ACL_READ_EXTATTRIBUTES Acl_perm_t = 512
+	ACL_READ_DATA           Acl_perm_t = 2
+	ACL_LIST_DIRECTORY      Acl_perm_t = 2
+	ACL_WRITE_DATA          Acl_perm_t = 4
+	ACL_ADD_FILE            Acl_perm_t = 4
+	ACL_EXECUTE             Acl_perm_t = 8
+	ACL_SEARCH              Acl_perm_t = 8
+	ACL_DELETE              Acl_perm_t = 16
+	ACL_APPEND_DATA         Acl_perm_t = 32
+	ACL_ADD_SUBDIRECTORY    Acl_perm_t = 32
+	ACL_DELETE_CHILD        Acl_perm_t = 64
+	ACL_READ_ATTRIBUTES     Acl_perm_t = 128
+	ACL_WRITE_ATTRIBUTES    Acl_perm_t = 256
+	ACL_READ_EXTATTRIBUTES  Acl_perm_t = 512
 	ACL_WRITE_EXTATTRIBUTES Acl_perm_t = 1024
-	ACL_READ_SECURITY Acl_perm_t = 2048
-	ACL_WRITE_SECURITY Acl_perm_t = 4096
-	ACL_CHANGE_OWNER Acl_perm_t = 8192
-	ACL_SYNCHRONIZE Acl_perm_t = 1048576
+	ACL_READ_SECURITY       Acl_perm_t = 2048
+	ACL_WRITE_SECURITY      Acl_perm_t = 4096
+	ACL_CHANGE_OWNER        Acl_perm_t = 8192
+	ACL_SYNCHRONIZE         Acl_perm_t = 1048576
 )
 
 func (e Acl_perm_t) String() string {
@@ -870,9 +942,9 @@ func (e Acl_perm_t) String() string {
 type Acl_tag_t int64
 
 const (
-	ACL_UNDEFINED_TAG Acl_tag_t = 0
+	ACL_UNDEFINED_TAG  Acl_tag_t = 0
 	ACL_EXTENDED_ALLOW Acl_tag_t = 1
-	ACL_EXTENDED_DENY Acl_tag_t = 2
+	ACL_EXTENDED_DENY  Acl_tag_t = 2
 )
 
 func (e Acl_tag_t) String() string {
@@ -892,12 +964,12 @@ type Acl_type_t int64
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
-	ACL_TYPE_ACCESS Acl_type_t = 0
-	ACL_TYPE_DEFAULT Acl_type_t = 1
-	ACL_TYPE_AFS Acl_type_t = 2
-	ACL_TYPE_CODA Acl_type_t = 3
-	ACL_TYPE_NTFS Acl_type_t = 4
-	ACL_TYPE_NWFS Acl_type_t = 5
+	ACL_TYPE_ACCESS   Acl_type_t = 0
+	ACL_TYPE_DEFAULT  Acl_type_t = 1
+	ACL_TYPE_AFS      Acl_type_t = 2
+	ACL_TYPE_CODA     Acl_type_t = 3
+	ACL_TYPE_NTFS     Acl_type_t = 4
+	ACL_TYPE_NWFS     Acl_type_t = 5
 )
 
 func (e Acl_type_t) String() string {
@@ -924,14 +996,14 @@ func (e Acl_type_t) String() string {
 type Clockid_t int64
 
 const (
-	_CLOCK_REALTIME Clockid_t = 0
-	_CLOCK_MONOTONIC Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW Clockid_t = 4
+	_CLOCK_REALTIME             Clockid_t = 0
+	_CLOCK_MONOTONIC            Clockid_t = 6
+	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
 	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID Clockid_t = 16
+	_CLOCK_UPTIME_RAW           Clockid_t = 8
+	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
+	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
+	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
 )
 
 func (e Clockid_t) String() string {
@@ -960,9 +1032,9 @@ func (e Clockid_t) String() string {
 type Dispatch_autorelease_frequency_t uint64
 
 const (
-	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT Dispatch_autorelease_frequency_t = 0
+	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT   Dispatch_autorelease_frequency_t = 0
 	DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM Dispatch_autorelease_frequency_t = 1
-	DISPATCH_AUTORELEASE_FREQUENCY_NEVER Dispatch_autorelease_frequency_t = 2
+	DISPATCH_AUTORELEASE_FREQUENCY_NEVER     Dispatch_autorelease_frequency_t = 2
 )
 
 func (e Dispatch_autorelease_frequency_t) String() string {
@@ -981,36 +1053,50 @@ func (e Dispatch_autorelease_frequency_t) String() string {
 type Dispatch_block_flags_t uint64
 
 const (
-	DISPATCH_BLOCK_BARRIER Dispatch_block_flags_t = 1
-	DISPATCH_BLOCK_DETACHED Dispatch_block_flags_t = 2
-	DISPATCH_BLOCK_ASSIGN_CURRENT Dispatch_block_flags_t = 4
-	DISPATCH_BLOCK_NO_QOS_CLASS Dispatch_block_flags_t = 8
+	DISPATCH_BLOCK_BARRIER           Dispatch_block_flags_t = 1
+	DISPATCH_BLOCK_DETACHED          Dispatch_block_flags_t = 2
+	DISPATCH_BLOCK_ASSIGN_CURRENT    Dispatch_block_flags_t = 4
+	DISPATCH_BLOCK_NO_QOS_CLASS      Dispatch_block_flags_t = 8
 	DISPATCH_BLOCK_INHERIT_QOS_CLASS Dispatch_block_flags_t = 16
 	DISPATCH_BLOCK_ENFORCE_QOS_CLASS Dispatch_block_flags_t = 32
 )
 
 func (e Dispatch_block_flags_t) String() string {
 	var parts []string
-	if e&DISPATCH_BLOCK_BARRIER != 0 { parts = append(parts, "DISPATCH_BLOCK_BARRIER") }
-	if e&DISPATCH_BLOCK_DETACHED != 0 { parts = append(parts, "DISPATCH_BLOCK_DETACHED") }
-	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 { parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT") }
-	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS") }
-	if len(parts) == 0 { return "0" }
+	if e&DISPATCH_BLOCK_BARRIER != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_BARRIER")
+	}
+	if e&DISPATCH_BLOCK_DETACHED != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_DETACHED")
+	}
+	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT")
+	}
+	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Filesec_property_t int64
 
 const (
-	FILESEC_OWNER Filesec_property_t = 1
-	FILESEC_GROUP Filesec_property_t = 2
-	FILESEC_UUID Filesec_property_t = 3
-	FILESEC_MODE Filesec_property_t = 4
-	FILESEC_ACL Filesec_property_t = 5
-	FILESEC_GRPUUID Filesec_property_t = 6
-	FILESEC_ACL_RAW Filesec_property_t = 100
+	FILESEC_OWNER         Filesec_property_t = 1
+	FILESEC_GROUP         Filesec_property_t = 2
+	FILESEC_UUID          Filesec_property_t = 3
+	FILESEC_MODE          Filesec_property_t = 4
+	FILESEC_ACL           Filesec_property_t = 5
+	FILESEC_GRPUUID       Filesec_property_t = 6
+	FILESEC_ACL_RAW       Filesec_property_t = 100
 	FILESEC_ACL_ALLOCSIZE Filesec_property_t = 101
 )
 
@@ -1040,8 +1126,8 @@ func (e Filesec_property_t) String() string {
 type Idtype_t int64
 
 const (
-	P_ALL Idtype_t = 0
-	P_PID Idtype_t = 1
+	P_ALL  Idtype_t = 0
+	P_PID  Idtype_t = 1
 	P_PGID Idtype_t = 2
 )
 
@@ -1061,62 +1147,62 @@ func (e Idtype_t) String() string {
 type Ipc_info_object_type_t int64
 
 const (
-	IPC_OTYPE_NONE Ipc_info_object_type_t = 0
-	IPC_OTYPE_THREAD_CONTROL Ipc_info_object_type_t = 1
-	IPC_OTYPE_TASK_CONTROL Ipc_info_object_type_t = 2
-	IPC_OTYPE_HOST Ipc_info_object_type_t = 3
-	IPC_OTYPE_HOST_PRIV Ipc_info_object_type_t = 4
-	IPC_OTYPE_PROCESSOR Ipc_info_object_type_t = 5
-	IPC_OTYPE_PROCESSOR_SET Ipc_info_object_type_t = 6
-	IPC_OTYPE_PROCESSOR_SET_NAME Ipc_info_object_type_t = 7
-	IPC_OTYPE_TIMER Ipc_info_object_type_t = 8
-	IPC_OTYPE_PORT_SUBST_ONCE Ipc_info_object_type_t = 9
-	IPC_OTYPE_MIG Ipc_info_object_type_t = 10
-	IPC_OTYPE_MEMORY_OBJECT Ipc_info_object_type_t = 11
-	IPC_OTYPE_XMM_PAGER Ipc_info_object_type_t = 12
-	IPC_OTYPE_XMM_KERNEL Ipc_info_object_type_t = 13
-	IPC_OTYPE_XMM_REPLY Ipc_info_object_type_t = 14
-	IPC_OTYPE_UND_REPLY Ipc_info_object_type_t = 15
-	IPC_OTYPE_HOST_NOTIFY Ipc_info_object_type_t = 16
-	IPC_OTYPE_HOST_SECURITY Ipc_info_object_type_t = 17
-	IPC_OTYPE_LEDGER Ipc_info_object_type_t = 18
-	IPC_OTYPE_MAIN_DEVICE Ipc_info_object_type_t = 19
-	IPC_OTYPE_TASK_NAME Ipc_info_object_type_t = 20
-	IPC_OTYPE_SUBSYSTEM Ipc_info_object_type_t = 21
-	IPC_OTYPE_IO_DONE_QUEUE Ipc_info_object_type_t = 22
-	IPC_OTYPE_SEMAPHORE Ipc_info_object_type_t = 23
-	IPC_OTYPE_LOCK_SET Ipc_info_object_type_t = 24
-	IPC_OTYPE_CLOCK Ipc_info_object_type_t = 25
-	IPC_OTYPE_CLOCK_CTRL Ipc_info_object_type_t = 26
-	IPC_OTYPE_IOKIT_IDENT Ipc_info_object_type_t = 27
-	IPC_OTYPE_NAMED_ENTRY Ipc_info_object_type_t = 28
-	IPC_OTYPE_IOKIT_CONNECT Ipc_info_object_type_t = 29
-	IPC_OTYPE_IOKIT_OBJECT Ipc_info_object_type_t = 30
-	IPC_OTYPE_UPL Ipc_info_object_type_t = 31
-	IPC_OTYPE_MEM_OBJ_CONTROL Ipc_info_object_type_t = 32
-	IPC_OTYPE_AU_SESSIONPORT Ipc_info_object_type_t = 33
-	IPC_OTYPE_FILEPORT Ipc_info_object_type_t = 34
-	IPC_OTYPE_LABELH Ipc_info_object_type_t = 35
-	IPC_OTYPE_TASK_RESUME Ipc_info_object_type_t = 36
-	IPC_OTYPE_VOUCHER Ipc_info_object_type_t = 37
+	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
+	IPC_OTYPE_THREAD_CONTROL       Ipc_info_object_type_t = 1
+	IPC_OTYPE_TASK_CONTROL         Ipc_info_object_type_t = 2
+	IPC_OTYPE_HOST                 Ipc_info_object_type_t = 3
+	IPC_OTYPE_HOST_PRIV            Ipc_info_object_type_t = 4
+	IPC_OTYPE_PROCESSOR            Ipc_info_object_type_t = 5
+	IPC_OTYPE_PROCESSOR_SET        Ipc_info_object_type_t = 6
+	IPC_OTYPE_PROCESSOR_SET_NAME   Ipc_info_object_type_t = 7
+	IPC_OTYPE_TIMER                Ipc_info_object_type_t = 8
+	IPC_OTYPE_PORT_SUBST_ONCE      Ipc_info_object_type_t = 9
+	IPC_OTYPE_MIG                  Ipc_info_object_type_t = 10
+	IPC_OTYPE_MEMORY_OBJECT        Ipc_info_object_type_t = 11
+	IPC_OTYPE_XMM_PAGER            Ipc_info_object_type_t = 12
+	IPC_OTYPE_XMM_KERNEL           Ipc_info_object_type_t = 13
+	IPC_OTYPE_XMM_REPLY            Ipc_info_object_type_t = 14
+	IPC_OTYPE_UND_REPLY            Ipc_info_object_type_t = 15
+	IPC_OTYPE_HOST_NOTIFY          Ipc_info_object_type_t = 16
+	IPC_OTYPE_HOST_SECURITY        Ipc_info_object_type_t = 17
+	IPC_OTYPE_LEDGER               Ipc_info_object_type_t = 18
+	IPC_OTYPE_MAIN_DEVICE          Ipc_info_object_type_t = 19
+	IPC_OTYPE_TASK_NAME            Ipc_info_object_type_t = 20
+	IPC_OTYPE_SUBSYSTEM            Ipc_info_object_type_t = 21
+	IPC_OTYPE_IO_DONE_QUEUE        Ipc_info_object_type_t = 22
+	IPC_OTYPE_SEMAPHORE            Ipc_info_object_type_t = 23
+	IPC_OTYPE_LOCK_SET             Ipc_info_object_type_t = 24
+	IPC_OTYPE_CLOCK                Ipc_info_object_type_t = 25
+	IPC_OTYPE_CLOCK_CTRL           Ipc_info_object_type_t = 26
+	IPC_OTYPE_IOKIT_IDENT          Ipc_info_object_type_t = 27
+	IPC_OTYPE_NAMED_ENTRY          Ipc_info_object_type_t = 28
+	IPC_OTYPE_IOKIT_CONNECT        Ipc_info_object_type_t = 29
+	IPC_OTYPE_IOKIT_OBJECT         Ipc_info_object_type_t = 30
+	IPC_OTYPE_UPL                  Ipc_info_object_type_t = 31
+	IPC_OTYPE_MEM_OBJ_CONTROL      Ipc_info_object_type_t = 32
+	IPC_OTYPE_AU_SESSIONPORT       Ipc_info_object_type_t = 33
+	IPC_OTYPE_FILEPORT             Ipc_info_object_type_t = 34
+	IPC_OTYPE_LABELH               Ipc_info_object_type_t = 35
+	IPC_OTYPE_TASK_RESUME          Ipc_info_object_type_t = 36
+	IPC_OTYPE_VOUCHER              Ipc_info_object_type_t = 37
 	IPC_OTYPE_VOUCHER_ATTR_CONTROL Ipc_info_object_type_t = 38
-	IPC_OTYPE_WORK_INTERVAL Ipc_info_object_type_t = 39
-	IPC_OTYPE_UX_HANDLER Ipc_info_object_type_t = 40
-	IPC_OTYPE_UEXT_OBJECT Ipc_info_object_type_t = 41
-	IPC_OTYPE_ARCADE_REG Ipc_info_object_type_t = 42
-	IPC_OTYPE_EVENTLINK Ipc_info_object_type_t = 43
-	IPC_OTYPE_TASK_INSPECT Ipc_info_object_type_t = 44
-	IPC_OTYPE_TASK_READ Ipc_info_object_type_t = 45
-	IPC_OTYPE_THREAD_INSPECT Ipc_info_object_type_t = 46
-	IPC_OTYPE_THREAD_READ Ipc_info_object_type_t = 47
-	IPC_OTYPE_SUID_CRED Ipc_info_object_type_t = 48
-	IPC_OTYPE_HYPERVISOR Ipc_info_object_type_t = 49
-	IPC_OTYPE_TASK_ID_TOKEN Ipc_info_object_type_t = 50
-	IPC_OTYPE_TASK_FATAL Ipc_info_object_type_t = 51
-	IPC_OTYPE_KCDATA Ipc_info_object_type_t = 52
-	IPC_OTYPE_EXCLAVES_RESOURCE Ipc_info_object_type_t = 53
-	IPC_OTYPE_THREAD_RESUME Ipc_info_object_type_t = 54
-	IPC_OTYPE_UNKNOWN Ipc_info_object_type_t = 4294967295
+	IPC_OTYPE_WORK_INTERVAL        Ipc_info_object_type_t = 39
+	IPC_OTYPE_UX_HANDLER           Ipc_info_object_type_t = 40
+	IPC_OTYPE_UEXT_OBJECT          Ipc_info_object_type_t = 41
+	IPC_OTYPE_ARCADE_REG           Ipc_info_object_type_t = 42
+	IPC_OTYPE_EVENTLINK            Ipc_info_object_type_t = 43
+	IPC_OTYPE_TASK_INSPECT         Ipc_info_object_type_t = 44
+	IPC_OTYPE_TASK_READ            Ipc_info_object_type_t = 45
+	IPC_OTYPE_THREAD_INSPECT       Ipc_info_object_type_t = 46
+	IPC_OTYPE_THREAD_READ          Ipc_info_object_type_t = 47
+	IPC_OTYPE_SUID_CRED            Ipc_info_object_type_t = 48
+	IPC_OTYPE_HYPERVISOR           Ipc_info_object_type_t = 49
+	IPC_OTYPE_TASK_ID_TOKEN        Ipc_info_object_type_t = 50
+	IPC_OTYPE_TASK_FATAL           Ipc_info_object_type_t = 51
+	IPC_OTYPE_KCDATA               Ipc_info_object_type_t = 52
+	IPC_OTYPE_EXCLAVES_RESOURCE    Ipc_info_object_type_t = 53
+	IPC_OTYPE_THREAD_RESUME        Ipc_info_object_type_t = 54
+	IPC_OTYPE_UNKNOWN              Ipc_info_object_type_t = 4294967295
 )
 
 func (e Ipc_info_object_type_t) String() string {
@@ -1242,15 +1328,15 @@ type Launch_data_type_t int64
 
 const (
 	LAUNCH_DATA_DICTIONARY Launch_data_type_t = 1
-	LAUNCH_DATA_ARRAY Launch_data_type_t = 2
-	LAUNCH_DATA_FD Launch_data_type_t = 3
-	LAUNCH_DATA_INTEGER Launch_data_type_t = 4
-	LAUNCH_DATA_REAL Launch_data_type_t = 5
-	LAUNCH_DATA_BOOL Launch_data_type_t = 6
-	LAUNCH_DATA_STRING Launch_data_type_t = 7
-	LAUNCH_DATA_OPAQUE Launch_data_type_t = 8
-	LAUNCH_DATA_ERRNO Launch_data_type_t = 9
-	LAUNCH_DATA_MACHPORT Launch_data_type_t = 10
+	LAUNCH_DATA_ARRAY      Launch_data_type_t = 2
+	LAUNCH_DATA_FD         Launch_data_type_t = 3
+	LAUNCH_DATA_INTEGER    Launch_data_type_t = 4
+	LAUNCH_DATA_REAL       Launch_data_type_t = 5
+	LAUNCH_DATA_BOOL       Launch_data_type_t = 6
+	LAUNCH_DATA_STRING     Launch_data_type_t = 7
+	LAUNCH_DATA_OPAQUE     Launch_data_type_t = 8
+	LAUNCH_DATA_ERRNO      Launch_data_type_t = 9
+	LAUNCH_DATA_MACHPORT   Launch_data_type_t = 10
 )
 
 func (e Launch_data_type_t) String() string {
@@ -1288,7 +1374,9 @@ const (
 
 func (e Mach_vm_range_flags_t) String() string {
 	var parts []string
-	if len(parts) == 0 { return "0" }
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1296,7 +1384,7 @@ type Mach_vm_range_flavor_t int64
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
-	MACH_VM_RANGE_FLAVOR_V1 Mach_vm_range_flavor_t = 1
+	MACH_VM_RANGE_FLAVOR_V1      Mach_vm_range_flavor_t = 1
 )
 
 func (e Mach_vm_range_flavor_t) String() string {
@@ -1314,8 +1402,8 @@ type Mach_vm_range_tag_t int64
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
-	MACH_VM_RANGE_DATA Mach_vm_range_tag_t = 1
-	MACH_VM_RANGE_FIXED Mach_vm_range_tag_t = 2
+	MACH_VM_RANGE_DATA    Mach_vm_range_tag_t = 1
+	MACH_VM_RANGE_FIXED   Mach_vm_range_tag_t = 2
 )
 
 func (e Mach_vm_range_tag_t) String() string {
@@ -1334,26 +1422,42 @@ func (e Mach_vm_range_tag_t) String() string {
 type Mpo_flags_t int64
 
 const (
-	MPO_PORT Mpo_flags_t = 0
-	MPO_SERVICE_PORT Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT Mpo_flags_t = 2048
-	MPO_REPLY_PORT Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT Mpo_flags_t = 32768
+	MPO_PORT                            Mpo_flags_t = 0
+	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
+	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
+	MPO_REPLY_PORT                      Mpo_flags_t = 4096
+	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
+	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
+	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
 	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
 )
 
 func (e Mpo_flags_t) String() string {
 	var parts []string
-	if e&MPO_SERVICE_PORT != 0 { parts = append(parts, "MPO_SERVICE_PORT") }
-	if e&MPO_CONNECTION_PORT != 0 { parts = append(parts, "MPO_CONNECTION_PORT") }
-	if e&MPO_REPLY_PORT != 0 { parts = append(parts, "MPO_REPLY_PORT") }
-	if e&MPO_WEAK_REPLY_PORT != 0 { parts = append(parts, "MPO_WEAK_REPLY_PORT") }
-	if e&MPO_NOTIFICATION_PORT != 0 { parts = append(parts, "MPO_NOTIFICATION_PORT") }
-	if e&MPO_EXCEPTION_PORT != 0 { parts = append(parts, "MPO_EXCEPTION_PORT") }
-	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 { parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY") }
-	if len(parts) == 0 { return "0" }
+	if e&MPO_SERVICE_PORT != 0 {
+		parts = append(parts, "MPO_SERVICE_PORT")
+	}
+	if e&MPO_CONNECTION_PORT != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT")
+	}
+	if e&MPO_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_REPLY_PORT")
+	}
+	if e&MPO_WEAK_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_WEAK_REPLY_PORT")
+	}
+	if e&MPO_NOTIFICATION_PORT != 0 {
+		parts = append(parts, "MPO_NOTIFICATION_PORT")
+	}
+	if e&MPO_EXCEPTION_PORT != 0 {
+		parts = append(parts, "MPO_EXCEPTION_PORT")
+	}
+	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1375,27 +1479,27 @@ func (e Os_clockid_t) String() string {
 type Ptrauth_key int64
 
 const (
-	Ptrauth_key_none Ptrauth_key = -1
-	Ptrauth_key_asia Ptrauth_key = 0
-	Ptrauth_key_asib Ptrauth_key = 1
-	Ptrauth_key_asda Ptrauth_key = 2
-	Ptrauth_key_asdb Ptrauth_key = 3
+	Ptrauth_key_none                     Ptrauth_key = -1
+	Ptrauth_key_asia                     Ptrauth_key = 0
+	Ptrauth_key_asib                     Ptrauth_key = 1
+	Ptrauth_key_asda                     Ptrauth_key = 2
+	Ptrauth_key_asdb                     Ptrauth_key = 3
 	Ptrauth_key_process_independent_code Ptrauth_key = 0
-	Ptrauth_key_process_dependent_code Ptrauth_key = 1
+	Ptrauth_key_process_dependent_code   Ptrauth_key = 1
 	Ptrauth_key_process_independent_data Ptrauth_key = 2
-	Ptrauth_key_process_dependent_data Ptrauth_key = 3
-	Ptrauth_key_return_address Ptrauth_key = 1
-	Ptrauth_key_frame_pointer Ptrauth_key = 3
-	Ptrauth_key_function_pointer Ptrauth_key = 0
-	Ptrauth_key_block_function Ptrauth_key = 0
-	Ptrauth_key_cxx_vtable_pointer Ptrauth_key = 2
-	Ptrauth_key_method_list_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_isa_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_super_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_sel_pointer Ptrauth_key = 3
-	Ptrauth_key_objc_class_ro_pointer Ptrauth_key = 2
+	Ptrauth_key_process_dependent_data   Ptrauth_key = 3
+	Ptrauth_key_return_address           Ptrauth_key = 1
+	Ptrauth_key_frame_pointer            Ptrauth_key = 3
+	Ptrauth_key_function_pointer         Ptrauth_key = 0
+	Ptrauth_key_block_function           Ptrauth_key = 0
+	Ptrauth_key_cxx_vtable_pointer       Ptrauth_key = 2
+	Ptrauth_key_method_list_pointer      Ptrauth_key = 2
+	Ptrauth_key_objc_isa_pointer         Ptrauth_key = 2
+	Ptrauth_key_objc_super_pointer       Ptrauth_key = 2
+	Ptrauth_key_objc_sel_pointer         Ptrauth_key = 3
+	Ptrauth_key_objc_class_ro_pointer    Ptrauth_key = 2
 	Ptrauth_key_block_descriptor_pointer Ptrauth_key = 2
-	Ptrauth_key_init_fini_pointer Ptrauth_key = 0
+	Ptrauth_key_init_fini_pointer        Ptrauth_key = 0
 )
 
 func (e Ptrauth_key) String() string {
@@ -1419,11 +1523,11 @@ type Qos_class_t uint32
 
 const (
 	QOS_CLASS_USER_INTERACTIVE Qos_class_t = 33
-	QOS_CLASS_USER_INITIATED Qos_class_t = 25
-	QOS_CLASS_DEFAULT Qos_class_t = 21
-	QOS_CLASS_UTILITY Qos_class_t = 17
-	QOS_CLASS_BACKGROUND Qos_class_t = 9
-	QOS_CLASS_UNSPECIFIED Qos_class_t = 0
+	QOS_CLASS_USER_INITIATED   Qos_class_t = 25
+	QOS_CLASS_DEFAULT          Qos_class_t = 21
+	QOS_CLASS_UTILITY          Qos_class_t = 17
+	QOS_CLASS_BACKGROUND       Qos_class_t = 9
+	QOS_CLASS_UNSPECIFIED      Qos_class_t = 0
 )
 
 func (e Qos_class_t) String() string {
@@ -1448,22 +1552,22 @@ func (e Qos_class_t) String() string {
 type Virtual_memory_guard_exception_code_t int64
 
 const (
-	KGUARD_EXC_DEALLOC_GAP Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
 )
@@ -1514,34 +1618,47 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 type Xpc_listener_create_flags_t int64
 
 const (
-	XPC_LISTENER_CREATE_NONE Xpc_listener_create_flags_t = 0
-	XPC_LISTENER_CREATE_INACTIVE Xpc_listener_create_flags_t = 1
-	XPC_LISTENER_CREATE_FORCE_MACH Xpc_listener_create_flags_t = 2
+	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
+	XPC_LISTENER_CREATE_INACTIVE         Xpc_listener_create_flags_t = 1
+	XPC_LISTENER_CREATE_FORCE_MACH       Xpc_listener_create_flags_t = 2
 	XPC_LISTENER_CREATE_FORCE_XPCSERVICE Xpc_listener_create_flags_t = 4
 )
 
 func (e Xpc_listener_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_LISTENER_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE") }
-	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH") }
-	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_LISTENER_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Xpc_session_create_flags_t int64
 
 const (
-	XPC_SESSION_CREATE_NONE Xpc_session_create_flags_t = 0
-	XPC_SESSION_CREATE_INACTIVE Xpc_session_create_flags_t = 1
+	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0
+	XPC_SESSION_CREATE_INACTIVE        Xpc_session_create_flags_t = 1
 	XPC_SESSION_CREATE_MACH_PRIVILEGED Xpc_session_create_flags_t = 2
 )
 
 func (e Xpc_session_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_SESSION_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_SESSION_CREATE_INACTIVE") }
-	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 { parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_SESSION_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_INACTIVE")
+	}
+	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
-

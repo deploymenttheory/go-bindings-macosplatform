@@ -161,4 +161,3 @@ type NDArrayDescriptorable interface {
 }
 
 var _ NDArrayDescriptorable = (*NDArrayDescriptor)(nil)
-

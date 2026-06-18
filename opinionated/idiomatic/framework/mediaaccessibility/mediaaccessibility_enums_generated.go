@@ -11,7 +11,7 @@ import (
 type MACaptionAppearanceBehavior int64
 
 const (
-	KMACaptionAppearanceBehaviorUseValue MACaptionAppearanceBehavior = 0
+	KMACaptionAppearanceBehaviorUseValue              MACaptionAppearanceBehavior = 0
 	KMACaptionAppearanceBehaviorUseContentIfAvailable MACaptionAppearanceBehavior = 1
 )
 
@@ -30,8 +30,8 @@ type MACaptionAppearanceDisplayType int64
 
 const (
 	KMACaptionAppearanceDisplayTypeForcedOnly MACaptionAppearanceDisplayType = 0
-	KMACaptionAppearanceDisplayTypeAutomatic MACaptionAppearanceDisplayType = 1
-	KMACaptionAppearanceDisplayTypeAlwaysOn MACaptionAppearanceDisplayType = 2
+	KMACaptionAppearanceDisplayTypeAutomatic  MACaptionAppearanceDisplayType = 1
+	KMACaptionAppearanceDisplayTypeAlwaysOn   MACaptionAppearanceDisplayType = 2
 )
 
 func (e MACaptionAppearanceDisplayType) String() string {
@@ -51,7 +51,7 @@ type MACaptionAppearanceDomain int64
 
 const (
 	KMACaptionAppearanceDomainDefault MACaptionAppearanceDomain = 0
-	KMACaptionAppearanceDomainUser MACaptionAppearanceDomain = 1
+	KMACaptionAppearanceDomainUser    MACaptionAppearanceDomain = 1
 )
 
 func (e MACaptionAppearanceDomain) String() string {
@@ -68,14 +68,14 @@ func (e MACaptionAppearanceDomain) String() string {
 type MACaptionAppearanceFontStyle int64
 
 const (
-	KMACaptionAppearanceFontStyleDefault MACaptionAppearanceFontStyle = 0
-	KMACaptionAppearanceFontStyleMonospacedWithSerif MACaptionAppearanceFontStyle = 1
-	KMACaptionAppearanceFontStyleProportionalWithSerif MACaptionAppearanceFontStyle = 2
-	KMACaptionAppearanceFontStyleMonospacedWithoutSerif MACaptionAppearanceFontStyle = 3
+	KMACaptionAppearanceFontStyleDefault                  MACaptionAppearanceFontStyle = 0
+	KMACaptionAppearanceFontStyleMonospacedWithSerif      MACaptionAppearanceFontStyle = 1
+	KMACaptionAppearanceFontStyleProportionalWithSerif    MACaptionAppearanceFontStyle = 2
+	KMACaptionAppearanceFontStyleMonospacedWithoutSerif   MACaptionAppearanceFontStyle = 3
 	KMACaptionAppearanceFontStyleProportionalWithoutSerif MACaptionAppearanceFontStyle = 4
-	KMACaptionAppearanceFontStyleCasual MACaptionAppearanceFontStyle = 5
-	KMACaptionAppearanceFontStyleCursive MACaptionAppearanceFontStyle = 6
-	KMACaptionAppearanceFontStyleSmallCapital MACaptionAppearanceFontStyle = 7
+	KMACaptionAppearanceFontStyleCasual                   MACaptionAppearanceFontStyle = 5
+	KMACaptionAppearanceFontStyleCursive                  MACaptionAppearanceFontStyle = 6
+	KMACaptionAppearanceFontStyleSmallCapital             MACaptionAppearanceFontStyle = 7
 )
 
 func (e MACaptionAppearanceFontStyle) String() string {
@@ -104,11 +104,11 @@ func (e MACaptionAppearanceFontStyle) String() string {
 type MACaptionAppearanceTextEdgeStyle int64
 
 const (
-	KMACaptionAppearanceTextEdgeStyleUndefined MACaptionAppearanceTextEdgeStyle = 0
-	KMACaptionAppearanceTextEdgeStyleNone MACaptionAppearanceTextEdgeStyle = 1
-	KMACaptionAppearanceTextEdgeStyleRaised MACaptionAppearanceTextEdgeStyle = 2
-	KMACaptionAppearanceTextEdgeStyleDepressed MACaptionAppearanceTextEdgeStyle = 3
-	KMACaptionAppearanceTextEdgeStyleUniform MACaptionAppearanceTextEdgeStyle = 4
+	KMACaptionAppearanceTextEdgeStyleUndefined  MACaptionAppearanceTextEdgeStyle = 0
+	KMACaptionAppearanceTextEdgeStyleNone       MACaptionAppearanceTextEdgeStyle = 1
+	KMACaptionAppearanceTextEdgeStyleRaised     MACaptionAppearanceTextEdgeStyle = 2
+	KMACaptionAppearanceTextEdgeStyleDepressed  MACaptionAppearanceTextEdgeStyle = 3
+	KMACaptionAppearanceTextEdgeStyleUniform    MACaptionAppearanceTextEdgeStyle = 4
 	KMACaptionAppearanceTextEdgeStyleDropShadow MACaptionAppearanceTextEdgeStyle = 5
 )
 
@@ -130,4 +130,3 @@ func (e MACaptionAppearanceTextEdgeStyle) String() string {
 		return fmt.Sprintf("MACaptionAppearanceTextEdgeStyle(%d)", int64(e))
 	}
 }
-

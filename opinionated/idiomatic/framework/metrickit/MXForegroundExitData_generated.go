@@ -77,4 +77,3 @@ type ForegroundExitDataable interface {
 }
 
 var _ ForegroundExitDataable = (*ForegroundExitData)(nil)
-

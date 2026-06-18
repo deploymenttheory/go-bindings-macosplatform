@@ -20,22 +20,22 @@ type GKMeshGraph[NodeType purego.AnyObject] struct {
 }
 
 var (
-	_clsGKMeshGraph = _objcClass("GKMeshGraph")
+	_clsGKMeshGraph                                                         = _objcClass("GKMeshGraph")
 	_gKMeshGraphSelGraphWithBufferRadiusMinCoordinateMaxCoordinateNodeClass = objc.RegisterName("graphWithBufferRadius:minCoordinate:maxCoordinate:nodeClass:")
-	_gKMeshGraphSelInitWithBufferRadiusMinCoordinateMaxCoordinateNodeClass = objc.RegisterName("initWithBufferRadius:minCoordinate:maxCoordinate:nodeClass:")
-	_gKMeshGraphSelGraphWithBufferRadiusMinCoordinateMaxCoordinate = objc.RegisterName("graphWithBufferRadius:minCoordinate:maxCoordinate:")
-	_gKMeshGraphSelInitWithBufferRadiusMinCoordinateMaxCoordinate = objc.RegisterName("initWithBufferRadius:minCoordinate:maxCoordinate:")
-	_gKMeshGraphSelAddObstacles = objc.RegisterName("addObstacles:")
-	_gKMeshGraphSelRemoveObstacles = objc.RegisterName("removeObstacles:")
-	_gKMeshGraphSelConnectNodeUsingObstacles = objc.RegisterName("connectNodeUsingObstacles:")
-	_gKMeshGraphSelTriangulate = objc.RegisterName("triangulate")
-	_gKMeshGraphSelTriangleAtIndex = objc.RegisterName("triangleAtIndex:")
-	_gKMeshGraphSelClassForGenericArgumentAtIndex = objc.RegisterName("classForGenericArgumentAtIndex:")
-	_gKMeshGraphSelObstacles = objc.RegisterName("obstacles")
-	_gKMeshGraphSelBufferRadius = objc.RegisterName("bufferRadius")
-	_gKMeshGraphSelTriangulationMode = objc.RegisterName("triangulationMode")
-	_gKMeshGraphSelSetTriangulationMode = objc.RegisterName("setTriangulationMode:")
-	_gKMeshGraphSelTriangleCount = objc.RegisterName("triangleCount")
+	_gKMeshGraphSelInitWithBufferRadiusMinCoordinateMaxCoordinateNodeClass  = objc.RegisterName("initWithBufferRadius:minCoordinate:maxCoordinate:nodeClass:")
+	_gKMeshGraphSelGraphWithBufferRadiusMinCoordinateMaxCoordinate          = objc.RegisterName("graphWithBufferRadius:minCoordinate:maxCoordinate:")
+	_gKMeshGraphSelInitWithBufferRadiusMinCoordinateMaxCoordinate           = objc.RegisterName("initWithBufferRadius:minCoordinate:maxCoordinate:")
+	_gKMeshGraphSelAddObstacles                                             = objc.RegisterName("addObstacles:")
+	_gKMeshGraphSelRemoveObstacles                                          = objc.RegisterName("removeObstacles:")
+	_gKMeshGraphSelConnectNodeUsingObstacles                                = objc.RegisterName("connectNodeUsingObstacles:")
+	_gKMeshGraphSelTriangulate                                              = objc.RegisterName("triangulate")
+	_gKMeshGraphSelTriangleAtIndex                                          = objc.RegisterName("triangleAtIndex:")
+	_gKMeshGraphSelClassForGenericArgumentAtIndex                           = objc.RegisterName("classForGenericArgumentAtIndex:")
+	_gKMeshGraphSelObstacles                                                = objc.RegisterName("obstacles")
+	_gKMeshGraphSelBufferRadius                                             = objc.RegisterName("bufferRadius")
+	_gKMeshGraphSelTriangulationMode                                        = objc.RegisterName("triangulationMode")
+	_gKMeshGraphSelSetTriangulationMode                                     = objc.RegisterName("setTriangulationMode:")
+	_gKMeshGraphSelTriangleCount                                            = objc.RegisterName("triangleCount")
 )
 
 func GKMeshGraphFromID[NodeType purego.AnyObject](id objc.ID) *GKMeshGraph[NodeType] {
@@ -51,26 +51,34 @@ func GKMeshGraphFromID[NodeType purego.AnyObject](id objc.ID) *GKMeshGraph[NodeT
 // Creates a graph with a given buffer radius Obstacles can then be added to this graph prior to a call to [GKMeshGraph trianglulate] @param bufferRadius the circular radius of a potential agent that will navigate this graph.  Obstacles are extruded by this amount to create the graph.  Must be positive.  Negative values are clipped to 0.0f @param min the minimum coordinate (lower left corner) of the bounding box that will encapsulate this graph.  No obstacles should fall outside this bounding box. @param max the maximum coordinate (upper right corner) of the bounding box that will encapsulate this graph.  No obstacles should fall outside this bounding box. @param nodeClass the class of the nodes that this graph should create.  Must descend from GKGraphNode2D
 func GKMeshGraphGraphWithBufferRadiusMinCoordinateMaxCoordinateNodeClass(bufferRadius float32, min unsafe.Pointer, max unsafe.Pointer, nodeClass objc.Class) *GKMeshGraph[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKMeshGraph), _gKMeshGraphSelGraphWithBufferRadiusMinCoordinateMaxCoordinateNodeClass, bufferRadius, min, max, nodeClass)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKMeshGraphFromID[objc.ID](_ret)
 }
 
 func (o *GKMeshGraph[NodeType]) InitWithBufferRadiusMinCoordinateMaxCoordinateNodeClass(bufferRadius float32, min unsafe.Pointer, max unsafe.Pointer, nodeClass objc.Class) *GKMeshGraph[NodeType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKMeshGraphSelInitWithBufferRadiusMinCoordinateMaxCoordinateNodeClass, bufferRadius, min, max, nodeClass)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKMeshGraphFromID[NodeType](_ret)
 }
 
 // Same as [GKMeshGraph graphWithBufferRadius:minCoordinate:maxCoordinate:nodeClass:] where custom node class defaults to GKGraphNode2D
 func GKMeshGraphGraphWithBufferRadiusMinCoordinateMaxCoordinate(bufferRadius float32, min unsafe.Pointer, max unsafe.Pointer) *GKMeshGraph[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKMeshGraph), _gKMeshGraphSelGraphWithBufferRadiusMinCoordinateMaxCoordinate, bufferRadius, min, max)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKMeshGraphFromID[objc.ID](_ret)
 }
 
 func (o *GKMeshGraph[NodeType]) InitWithBufferRadiusMinCoordinateMaxCoordinate(bufferRadius float32, min unsafe.Pointer, max unsafe.Pointer) *GKMeshGraph[NodeType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKMeshGraphSelInitWithBufferRadiusMinCoordinateMaxCoordinate, bufferRadius, min, max)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKMeshGraphFromID[NodeType](_ret)
 }
 
@@ -109,7 +117,9 @@ func (o *GKMeshGraph[NodeType]) ClassForGenericArgumentAtIndex(index uint) objc.
 // Array of the extruded obstacles currently represented by this graph
 func (o *GKMeshGraph[NodeType]) Obstacles() *foundation.NSArray[*GKPolygonObstacle] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKMeshGraphSelObstacles)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GKPolygonObstacle](_ret)
 }
 
@@ -134,4 +144,3 @@ func (o *GKMeshGraph[NodeType]) TriangleCount() uint {
 	_ret := objc.Send[uint](o.Ptr(), _gKMeshGraphSelTriangleCount)
 	return _ret
 }
-

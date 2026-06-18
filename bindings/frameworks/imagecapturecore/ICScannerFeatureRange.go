@@ -15,13 +15,13 @@ type ICScannerFeatureRange struct {
 }
 
 var (
-	_clsICScannerFeatureRange = _objcClass("ICScannerFeatureRange")
-	_iCScannerFeatureRangeSelCurrentValue = objc.RegisterName("currentValue")
+	_clsICScannerFeatureRange                = _objcClass("ICScannerFeatureRange")
+	_iCScannerFeatureRangeSelCurrentValue    = objc.RegisterName("currentValue")
 	_iCScannerFeatureRangeSelSetCurrentValue = objc.RegisterName("setCurrentValue:")
-	_iCScannerFeatureRangeSelDefaultValue = objc.RegisterName("defaultValue")
-	_iCScannerFeatureRangeSelMinValue = objc.RegisterName("minValue")
-	_iCScannerFeatureRangeSelMaxValue = objc.RegisterName("maxValue")
-	_iCScannerFeatureRangeSelStepSize = objc.RegisterName("stepSize")
+	_iCScannerFeatureRangeSelDefaultValue    = objc.RegisterName("defaultValue")
+	_iCScannerFeatureRangeSelMinValue        = objc.RegisterName("minValue")
+	_iCScannerFeatureRangeSelMaxValue        = objc.RegisterName("maxValue")
+	_iCScannerFeatureRangeSelStepSize        = objc.RegisterName("stepSize")
 )
 
 func ICScannerFeatureRangeFromID(id objc.ID) *ICScannerFeatureRange {
@@ -67,4 +67,3 @@ func (o *ICScannerFeatureRange) StepSize() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _iCScannerFeatureRangeSelStepSize)
 	return _ret
 }
-

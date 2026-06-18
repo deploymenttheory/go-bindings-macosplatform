@@ -130,4 +130,3 @@ type PointerArrayable interface {
 }
 
 var _ PointerArrayable = (*PointerArray)(nil)
-

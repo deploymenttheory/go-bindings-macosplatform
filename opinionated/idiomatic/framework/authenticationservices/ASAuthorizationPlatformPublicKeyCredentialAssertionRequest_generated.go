@@ -18,7 +18,9 @@ type AuthorizationPlatformPublicKeyCredentialAssertionRequest struct {
 }
 
 // Unwrap returns the underlying [raw.ASAuthorizationPlatformPublicKeyCredentialAssertionRequest].
-func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) Unwrap() *raw.ASAuthorizationPlatformPublicKeyCredentialAssertionRequest { return x.inner }
+func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) Unwrap() *raw.ASAuthorizationPlatformPublicKeyCredentialAssertionRequest {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -45,7 +47,9 @@ func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) WithAllowedCr
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -110,7 +114,9 @@ func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) SetPrf(prf *r
 	x.inner.SetPrf(prf)
 }
 
-func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) asAuthorizationRequest() *raw.ASAuthorizationRequest { return &x.inner.ASAuthorizationRequest }
+func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) asAuthorizationRequest() *raw.ASAuthorizationRequest {
+	return &x.inner.ASAuthorizationRequest
+}
 
 // AuthorizationPlatformPublicKeyCredentialAssertionRequestable is the interface implemented by [AuthorizationPlatformPublicKeyCredentialAssertionRequest], for mocking and DI.
 type AuthorizationPlatformPublicKeyCredentialAssertionRequestable interface {
@@ -127,4 +133,3 @@ type AuthorizationPlatformPublicKeyCredentialAssertionRequestable interface {
 }
 
 var _ AuthorizationPlatformPublicKeyCredentialAssertionRequestable = (*AuthorizationPlatformPublicKeyCredentialAssertionRequest)(nil)
-

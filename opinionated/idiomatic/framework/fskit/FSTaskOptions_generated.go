@@ -61,4 +61,3 @@ type TaskOptionsable interface {
 }
 
 var _ TaskOptionsable = (*TaskOptions)(nil)
-

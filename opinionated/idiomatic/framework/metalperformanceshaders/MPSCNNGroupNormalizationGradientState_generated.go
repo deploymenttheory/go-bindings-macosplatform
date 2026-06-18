@@ -19,7 +19,9 @@ type CNNGroupNormalizationGradientState struct {
 }
 
 // Unwrap returns the underlying [raw.MPSCNNGroupNormalizationGradientState].
-func (x *CNNGroupNormalizationGradientState) Unwrap() *raw.MPSCNNGroupNormalizationGradientState { return x.inner }
+func (x *CNNGroupNormalizationGradientState) Unwrap() *raw.MPSCNNGroupNormalizationGradientState {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -76,9 +78,13 @@ func (x *CNNGroupNormalizationGradientState) GradientForBeta() metal.MTLBuffer {
 	return x.inner.GradientForBeta()
 }
 
-func (x *CNNGroupNormalizationGradientState) asNNGradientState() *mpsneuralnetwork.MPSNNGradientState { return &x.inner.MPSNNGradientState }
+func (x *CNNGroupNormalizationGradientState) asNNGradientState() *mpsneuralnetwork.MPSNNGradientState {
+	return &x.inner.MPSNNGradientState
+}
 
-func (x *CNNGroupNormalizationGradientState) asState() *mpscore.MPSState { return &x.inner.MPSNNGradientState.MPSState }
+func (x *CNNGroupNormalizationGradientState) asState() *mpscore.MPSState {
+	return &x.inner.MPSNNGradientState.MPSState
+}
 
 // CNNGroupNormalizationGradientStateable is the interface implemented by [CNNGroupNormalizationGradientState], for mocking and DI.
 type CNNGroupNormalizationGradientStateable interface {
@@ -93,4 +99,3 @@ type CNNGroupNormalizationGradientStateable interface {
 }
 
 var _ CNNGroupNormalizationGradientStateable = (*CNNGroupNormalizationGradientState)(nil)
-

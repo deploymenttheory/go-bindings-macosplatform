@@ -18,8 +18,8 @@ type SKCameraNode struct {
 }
 
 var (
-	_clsSKCameraNode = _objcClass("SKCameraNode")
-	_sKCameraNodeSelContainsNode = objc.RegisterName("containsNode:")
+	_clsSKCameraNode                 = _objcClass("SKCameraNode")
+	_sKCameraNodeSelContainsNode     = objc.RegisterName("containsNode:")
 	_sKCameraNodeSelContainedNodeSet = objc.RegisterName("containedNodeSet")
 )
 
@@ -42,7 +42,8 @@ func (o *SKCameraNode) ContainsNode(node *SKNode) bool {
 // Returns the set of nodes in the same scene as the camera that are contained within its viewport. @return the set of nodes contained
 func (o *SKCameraNode) ContainedNodeSet() *foundation.NSSet[*SKNode] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKCameraNodeSelContainedNodeSet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*SKNode](_ret)
 }
-

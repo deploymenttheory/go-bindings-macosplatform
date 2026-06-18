@@ -60,4 +60,3 @@ type ChallengeEventHandlerable interface {
 }
 
 var _ ChallengeEventHandlerable = (*ChallengeEventHandler)(nil)
-

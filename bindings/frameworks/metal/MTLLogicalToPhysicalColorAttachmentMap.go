@@ -16,10 +16,10 @@ type MTLLogicalToPhysicalColorAttachmentMap struct {
 }
 
 var (
-	_clsMTLLogicalToPhysicalColorAttachmentMap = _objcClass("MTLLogicalToPhysicalColorAttachmentMap")
+	_clsMTLLogicalToPhysicalColorAttachmentMap                                = _objcClass("MTLLogicalToPhysicalColorAttachmentMap")
 	_mTLLogicalToPhysicalColorAttachmentMapSelSetPhysicalIndexForLogicalIndex = objc.RegisterName("setPhysicalIndex:forLogicalIndex:")
 	_mTLLogicalToPhysicalColorAttachmentMapSelGetPhysicalIndexForLogicalIndex = objc.RegisterName("getPhysicalIndexForLogicalIndex:")
-	_mTLLogicalToPhysicalColorAttachmentMapSelReset = objc.RegisterName("reset")
+	_mTLLogicalToPhysicalColorAttachmentMapSelReset                           = objc.RegisterName("reset")
 )
 
 func MTLLogicalToPhysicalColorAttachmentMapFromID(id objc.ID) *MTLLogicalToPhysicalColorAttachmentMap {
@@ -46,4 +46,3 @@ func (o *MTLLogicalToPhysicalColorAttachmentMap) GetPhysicalIndexForLogicalIndex
 func (o *MTLLogicalToPhysicalColorAttachmentMap) Reset() {
 	o.Ptr().Send(_mTLLogicalToPhysicalColorAttachmentMapSelReset)
 }
-

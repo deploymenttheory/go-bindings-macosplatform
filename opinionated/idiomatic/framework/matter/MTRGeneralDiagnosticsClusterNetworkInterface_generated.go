@@ -17,7 +17,9 @@ type MTRGeneralDiagnosticsClusterNetworkInterface struct {
 }
 
 // Unwrap returns the underlying [raw.MTRGeneralDiagnosticsClusterNetworkInterface].
-func (x *MTRGeneralDiagnosticsClusterNetworkInterface) Unwrap() *raw.MTRGeneralDiagnosticsClusterNetworkInterface { return x.inner }
+func (x *MTRGeneralDiagnosticsClusterNetworkInterface) Unwrap() *raw.MTRGeneralDiagnosticsClusterNetworkInterface {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -157,7 +159,9 @@ func (x *MTRGeneralDiagnosticsClusterNetworkInterface) SetType(type_ *foundation
 	x.inner.SetType(type_)
 }
 
-func (x *MTRGeneralDiagnosticsClusterNetworkInterface) asMTRGeneralDiagnosticsClusterNetworkInterface() *raw.MTRGeneralDiagnosticsClusterNetworkInterface { return x.inner }
+func (x *MTRGeneralDiagnosticsClusterNetworkInterface) asMTRGeneralDiagnosticsClusterNetworkInterface() *raw.MTRGeneralDiagnosticsClusterNetworkInterface {
+	return x.inner
+}
 
 // MTRGeneralDiagnosticsClusterNetworkInterfaceable is the interface implemented by [MTRGeneralDiagnosticsClusterNetworkInterface], for mocking and DI.
 type MTRGeneralDiagnosticsClusterNetworkInterfaceable interface {
@@ -187,4 +191,3 @@ type MTRGeneralDiagnosticsClusterNetworkInterfaceable interface {
 }
 
 var _ MTRGeneralDiagnosticsClusterNetworkInterfaceable = (*MTRGeneralDiagnosticsClusterNetworkInterface)(nil)
-

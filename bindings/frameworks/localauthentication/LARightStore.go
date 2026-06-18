@@ -18,14 +18,14 @@ type LARightStore struct {
 }
 
 var (
-	_clsLARightStore = _objcClass("LARightStore")
-	_lARightStoreSelRightForIdentifierCompletion = objc.RegisterName("rightForIdentifier:completion:")
-	_lARightStoreSelSaveRightIdentifierCompletion = objc.RegisterName("saveRight:identifier:completion:")
+	_clsLARightStore                                    = _objcClass("LARightStore")
+	_lARightStoreSelRightForIdentifierCompletion        = objc.RegisterName("rightForIdentifier:completion:")
+	_lARightStoreSelSaveRightIdentifierCompletion       = objc.RegisterName("saveRight:identifier:completion:")
 	_lARightStoreSelSaveRightIdentifierSecretCompletion = objc.RegisterName("saveRight:identifier:secret:completion:")
-	_lARightStoreSelRemoveRightCompletion = objc.RegisterName("removeRight:completion:")
-	_lARightStoreSelRemoveRightForIdentifierCompletion = objc.RegisterName("removeRightForIdentifier:completion:")
-	_lARightStoreSelRemoveAllRightsWithCompletion = objc.RegisterName("removeAllRightsWithCompletion:")
-	_lARightStoreSelSharedStore = objc.RegisterName("sharedStore")
+	_lARightStoreSelRemoveRightCompletion               = objc.RegisterName("removeRight:completion:")
+	_lARightStoreSelRemoveRightForIdentifierCompletion  = objc.RegisterName("removeRightForIdentifier:completion:")
+	_lARightStoreSelRemoveAllRightsWithCompletion       = objc.RegisterName("removeAllRightsWithCompletion:")
+	_lARightStoreSelSharedStore                         = objc.RegisterName("sharedStore")
 )
 
 func LARightStoreFromID(id objc.ID) *LARightStore {
@@ -122,7 +122,8 @@ func (o *LARightStore) RemoveAllRightsWithCompletion(handler func(unsafe.Pointer
 // @brief Shared instance of @c LARightStore.
 func LARightStoreSharedStore() *LARightStore {
 	_ret := objc.Send[objc.ID](objc.ID(_clsLARightStore), _lARightStoreSelSharedStore)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return LARightStoreFromID(_ret)
 }
-

@@ -160,4 +160,3 @@ type BeaconRegionable interface {
 }
 
 var _ BeaconRegionable = (*BeaconRegion)(nil)
-

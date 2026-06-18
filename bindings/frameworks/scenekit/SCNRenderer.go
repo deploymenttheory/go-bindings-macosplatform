@@ -21,19 +21,19 @@ type SCNRenderer struct {
 }
 
 var (
-	_clsSCNRenderer = _objcClass("SCNRenderer")
-	_sCNRendererSelRendererWithContextOptions = objc.RegisterName("rendererWithContext:options:")
-	_sCNRendererSelRendererWithDeviceOptions = objc.RegisterName("rendererWithDevice:options:")
+	_clsSCNRenderer                                                = _objcClass("SCNRenderer")
+	_sCNRendererSelRendererWithContextOptions                      = objc.RegisterName("rendererWithContext:options:")
+	_sCNRendererSelRendererWithDeviceOptions                       = objc.RegisterName("rendererWithDevice:options:")
 	_sCNRendererSelRenderAtTimeViewportCommandBufferPassDescriptor = objc.RegisterName("renderAtTime:viewport:commandBuffer:passDescriptor:")
-	_sCNRendererSelRenderAtTime = objc.RegisterName("renderAtTime:")
-	_sCNRendererSelUpdateAtTime = objc.RegisterName("updateAtTime:")
-	_sCNRendererSelRenderWithViewportCommandBufferPassDescriptor = objc.RegisterName("renderWithViewport:commandBuffer:passDescriptor:")
-	_sCNRendererSelSnapshotAtTimeWithSizeAntialiasingMode = objc.RegisterName("snapshotAtTime:withSize:antialiasingMode:")
-	_sCNRendererSelUpdateProbesAtTime = objc.RegisterName("updateProbes:atTime:")
-	_sCNRendererSelScene = objc.RegisterName("scene")
-	_sCNRendererSelSetScene = objc.RegisterName("setScene:")
-	_sCNRendererSelNextFrameTime = objc.RegisterName("nextFrameTime")
-	_sCNRendererSelRender = objc.RegisterName("render")
+	_sCNRendererSelRenderAtTime                                    = objc.RegisterName("renderAtTime:")
+	_sCNRendererSelUpdateAtTime                                    = objc.RegisterName("updateAtTime:")
+	_sCNRendererSelRenderWithViewportCommandBufferPassDescriptor   = objc.RegisterName("renderWithViewport:commandBuffer:passDescriptor:")
+	_sCNRendererSelSnapshotAtTimeWithSizeAntialiasingMode          = objc.RegisterName("snapshotAtTime:withSize:antialiasingMode:")
+	_sCNRendererSelUpdateProbesAtTime                              = objc.RegisterName("updateProbes:atTime:")
+	_sCNRendererSelScene                                           = objc.RegisterName("scene")
+	_sCNRendererSelSetScene                                        = objc.RegisterName("setScene:")
+	_sCNRendererSelNextFrameTime                                   = objc.RegisterName("nextFrameTime")
+	_sCNRendererSelRender                                          = objc.RegisterName("render")
 )
 
 func SCNRendererFromID(id objc.ID) *SCNRenderer {
@@ -49,14 +49,18 @@ func SCNRendererFromID(id objc.ID) *SCNRenderer {
 // @method rendererWithContext:options: @abstract Creates a new renderer object. @param context The context to render into. @param options An optional dictionary for future extensions.
 func SCNRendererRendererWithContextOptions(context_ unsafe.Pointer, options *foundation.NSDictionary[objc.ID, objc.ID]) *SCNRenderer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNRenderer), _sCNRendererSelRendererWithContextOptions, context_, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNRendererFromID(_ret)
 }
 
 // @method rendererWithDevice:options: @abstract Creates a new renderer object that renders using Metal. @param device The metal device to use. Pass nil to let SceneKit choose a default device. @param options An optional dictionary for future extensions.
 func SCNRendererRendererWithDeviceOptions(device metal.MTLDevice, options *foundation.NSDictionary[objc.ID, objc.ID]) *SCNRenderer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNRenderer), _sCNRendererSelRendererWithDeviceOptions, device, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNRendererFromID(_ret)
 }
 
@@ -83,7 +87,9 @@ func (o *SCNRenderer) RenderWithViewportCommandBufferPassDescriptor(viewport cor
 // @method snapshotAtTime:withSize:antialiasingMode: @abstract renders the receiver's scene at the specified time (system time) into an image.
 func (o *SCNRenderer) SnapshotAtTimeWithSizeAntialiasingMode(time_ float64, size corefoundation.CGSize, antialiasingMode SCNAntialiasingMode) *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNRendererSelSnapshotAtTimeWithSizeAntialiasingMode, time_, size, antialiasingMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSImageFromID(_ret)
 }
 
@@ -95,7 +101,9 @@ func (o *SCNRenderer) UpdateProbesAtTime(lightProbes *foundation.NSArray[*SCNNod
 // @property scene @abstract Specifies the scene of the receiver
 func (o *SCNRenderer) Scene() *SCNScene {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNRendererSelScene)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNSceneFromID(_ret)
 }
 
@@ -114,4 +122,3 @@ func (o *SCNRenderer) NextFrameTime() float64 {
 func (o *SCNRenderer) Render() {
 	o.Ptr().Send(_sCNRendererSelRender)
 }
-

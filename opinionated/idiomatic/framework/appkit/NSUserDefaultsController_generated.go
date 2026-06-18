@@ -126,4 +126,3 @@ type UserDefaultsControllerable interface {
 }
 
 var _ UserDefaultsControllerable = (*UserDefaultsController)(nil)
-

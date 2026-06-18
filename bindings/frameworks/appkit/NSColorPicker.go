@@ -17,17 +17,17 @@ type NSColorPicker struct {
 }
 
 var (
-	_clsNSColorPicker = _objcClass("NSColorPicker")
+	_clsNSColorPicker                             = _objcClass("NSColorPicker")
 	_nSColorPickerSelInitWithPickerMaskColorPanel = objc.RegisterName("initWithPickerMask:colorPanel:")
-	_nSColorPickerSelInsertNewButtonImageIn = objc.RegisterName("insertNewButtonImage:in:")
-	_nSColorPickerSelViewSizeChanged = objc.RegisterName("viewSizeChanged:")
-	_nSColorPickerSelAttachColorList = objc.RegisterName("attachColorList:")
-	_nSColorPickerSelDetachColorList = objc.RegisterName("detachColorList:")
-	_nSColorPickerSelSetMode = objc.RegisterName("setMode:")
-	_nSColorPickerSelColorPanel = objc.RegisterName("colorPanel")
-	_nSColorPickerSelProvideNewButtonImage = objc.RegisterName("provideNewButtonImage")
-	_nSColorPickerSelButtonToolTip = objc.RegisterName("buttonToolTip")
-	_nSColorPickerSelMinContentSize = objc.RegisterName("minContentSize")
+	_nSColorPickerSelInsertNewButtonImageIn       = objc.RegisterName("insertNewButtonImage:in:")
+	_nSColorPickerSelViewSizeChanged              = objc.RegisterName("viewSizeChanged:")
+	_nSColorPickerSelAttachColorList              = objc.RegisterName("attachColorList:")
+	_nSColorPickerSelDetachColorList              = objc.RegisterName("detachColorList:")
+	_nSColorPickerSelSetMode                      = objc.RegisterName("setMode:")
+	_nSColorPickerSelColorPanel                   = objc.RegisterName("colorPanel")
+	_nSColorPickerSelProvideNewButtonImage        = objc.RegisterName("provideNewButtonImage")
+	_nSColorPickerSelButtonToolTip                = objc.RegisterName("buttonToolTip")
+	_nSColorPickerSelMinContentSize               = objc.RegisterName("minContentSize")
 )
 
 func NSColorPickerFromID(id objc.ID) *NSColorPicker {
@@ -42,7 +42,9 @@ func NSColorPickerFromID(id objc.ID) *NSColorPicker {
 
 func (o *NSColorPicker) InitWithPickerMaskColorPanel(mask uint, owningColorPanel *NSColorPanel) *NSColorPicker {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorPickerSelInitWithPickerMaskColorPanel, mask, owningColorPanel.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorPickerFromID(_ret)
 }
 
@@ -68,19 +70,25 @@ func (o *NSColorPicker) SetMode(mode NSColorPanelMode) {
 
 func (o *NSColorPicker) ColorPanel() *NSColorPanel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorPickerSelColorPanel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorPanelFromID(_ret)
 }
 
 func (o *NSColorPicker) ProvideNewButtonImage() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorPickerSelProvideNewButtonImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
 func (o *NSColorPicker) ButtonToolTip() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorPickerSelButtonToolTip)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -88,4 +96,3 @@ func (o *NSColorPicker) MinContentSize() corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSColorPickerSelMinContentSize)
 	return _ret
 }
-

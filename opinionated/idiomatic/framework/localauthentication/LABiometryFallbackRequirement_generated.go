@@ -41,4 +41,3 @@ type BiometryFallbackRequirementable interface {
 }
 
 var _ BiometryFallbackRequirementable = (*BiometryFallbackRequirement)(nil)
-

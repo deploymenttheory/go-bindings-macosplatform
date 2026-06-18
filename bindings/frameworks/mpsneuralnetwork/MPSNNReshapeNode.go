@@ -17,7 +17,7 @@ type MPSNNReshapeNode struct {
 }
 
 var (
-	_clsMPSNNReshapeNode = _objcClass("MPSNNReshapeNode")
+	_clsMPSNNReshapeNode                                                           = _objcClass("MPSNNReshapeNode")
 	_mPSNNReshapeNodeSelNodeWithSourceResultWidthResultHeightResultFeatureChannels = objc.RegisterName("nodeWithSource:resultWidth:resultHeight:resultFeatureChannels:")
 	_mPSNNReshapeNodeSelInitWithSourceResultWidthResultHeightResultFeatureChannels = objc.RegisterName("initWithSource:resultWidth:resultHeight:resultFeatureChannels:")
 )
@@ -35,14 +35,17 @@ func MPSNNReshapeNodeFromID(id objc.ID) *MPSNNReshapeNode {
 // @abstract   Init a node representing a autoreleased MPSNNReshape kernel @param      source                  The MPSNNImageNode representing the source MPSImage for the filter @param      resultWidth             The width of the reshaped image. @param      resultHeight            The height of the reshaped image. @param      resultFeatureChannels   The number of feature channels in the reshaped image. @return     A new MPSNNFilter node for a MPSNNReshape kernel.
 func MPSNNReshapeNodeNodeWithSourceResultWidthResultHeightResultFeatureChannels(source *MPSNNImageNode, resultWidth uint, resultHeight uint, resultFeatureChannels uint) *MPSNNReshapeNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNReshapeNode), _mPSNNReshapeNodeSelNodeWithSourceResultWidthResultHeightResultFeatureChannels, source.Ptr(), resultWidth, resultHeight, resultFeatureChannels)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNReshapeNodeFromID(_ret)
 }
 
 // @abstract   Init a node representing a MPSNNReshape kernel @param      source                  The MPSNNImageNode representing the source MPSImage for the filter @param      resultWidth             The width of the reshaped image. @param      resultHeight            The height of the reshaped image. @param      resultFeatureChannels   The number of feature channels in the reshaped image. @return     A new MPSNNFilter node for a MPSNNReshape kernel.
 func (o *MPSNNReshapeNode) InitWithSourceResultWidthResultHeightResultFeatureChannels(source *MPSNNImageNode, resultWidth uint, resultHeight uint, resultFeatureChannels uint) *MPSNNReshapeNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNReshapeNodeSelInitWithSourceResultWidthResultHeightResultFeatureChannels, source.Ptr(), resultWidth, resultHeight, resultFeatureChannels)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNReshapeNodeFromID(_ret)
 }
-

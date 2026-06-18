@@ -18,13 +18,13 @@ type WKContentRuleListStore struct {
 }
 
 var (
-	_clsWKContentRuleListStore = _objcClass("WKContentRuleListStore")
-	_wKContentRuleListStoreSelDefaultStore = objc.RegisterName("defaultStore")
-	_wKContentRuleListStoreSelStoreWithURL = objc.RegisterName("storeWithURL:")
+	_clsWKContentRuleListStore                                                                           = _objcClass("WKContentRuleListStore")
+	_wKContentRuleListStoreSelDefaultStore                                                               = objc.RegisterName("defaultStore")
+	_wKContentRuleListStoreSelStoreWithURL                                                               = objc.RegisterName("storeWithURL:")
 	_wKContentRuleListStoreSelCompileContentRuleListForIdentifierEncodedContentRuleListCompletionHandler = objc.RegisterName("compileContentRuleListForIdentifier:encodedContentRuleList:completionHandler:")
-	_wKContentRuleListStoreSelLookUpContentRuleListForIdentifierCompletionHandler = objc.RegisterName("lookUpContentRuleListForIdentifier:completionHandler:")
-	_wKContentRuleListStoreSelRemoveContentRuleListForIdentifierCompletionHandler = objc.RegisterName("removeContentRuleListForIdentifier:completionHandler:")
-	_wKContentRuleListStoreSelGetAvailableContentRuleListIdentifiers = objc.RegisterName("getAvailableContentRuleListIdentifiers:")
+	_wKContentRuleListStoreSelLookUpContentRuleListForIdentifierCompletionHandler                        = objc.RegisterName("lookUpContentRuleListForIdentifier:completionHandler:")
+	_wKContentRuleListStoreSelRemoveContentRuleListForIdentifierCompletionHandler                        = objc.RegisterName("removeContentRuleListForIdentifier:completionHandler:")
+	_wKContentRuleListStoreSelGetAvailableContentRuleListIdentifiers                                     = objc.RegisterName("getAvailableContentRuleListIdentifiers:")
 )
 
 func WKContentRuleListStoreFromID(id objc.ID) *WKContentRuleListStore {
@@ -39,13 +39,17 @@ func WKContentRuleListStoreFromID(id objc.ID) *WKContentRuleListStore {
 
 func WKContentRuleListStoreDefaultStore() *WKContentRuleListStore {
 	_ret := objc.Send[objc.ID](objc.ID(_clsWKContentRuleListStore), _wKContentRuleListStoreSelDefaultStore)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKContentRuleListStoreFromID(_ret)
 }
 
 func WKContentRuleListStoreStoreWithURL(url *foundation.NSURL) *WKContentRuleListStore {
 	_ret := objc.Send[objc.ID](objc.ID(_clsWKContentRuleListStore), _wKContentRuleListStoreSelStoreWithURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKContentRuleListStoreFromID(_ret)
 }
 
@@ -91,4 +95,3 @@ func (o *WKContentRuleListStore) RemoveContentRuleListForIdentifierCompletionHan
 func (o *WKContentRuleListStore) GetAvailableContentRuleListIdentifiers(completionHandler objc.Block) {
 	o.Ptr().Send(_wKContentRuleListStoreSelGetAvailableContentRuleListIdentifiers, completionHandler)
 }
-

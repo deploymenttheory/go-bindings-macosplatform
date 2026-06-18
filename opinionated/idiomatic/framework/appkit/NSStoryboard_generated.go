@@ -66,4 +66,3 @@ type Storyboardable interface {
 }
 
 var _ Storyboardable = (*Storyboard)(nil)
-

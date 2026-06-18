@@ -18,7 +18,9 @@ func DDDeviceProtocolStringDIAL() uintptr {
 
 func DDDeviceProtocolStringInvalid() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_devicediscoveryextensionLib, "DDDeviceProtocolStringInvalid")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -26,4 +28,3 @@ func DDErrorDomain() uintptr {
 	ptr, _ := purego.Dlsym(_devicediscoveryextensionLib, "DDErrorDomain")
 	return ptr
 }
-

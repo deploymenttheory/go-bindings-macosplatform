@@ -47,4 +47,3 @@ type BiologicalSexObjectable interface {
 }
 
 var _ BiologicalSexObjectable = (*BiologicalSexObject)(nil)
-

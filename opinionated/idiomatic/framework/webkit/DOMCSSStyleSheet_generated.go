@@ -98,7 +98,9 @@ func (x *DOMCSSStyleSheet) asDOMStyleSheet() *raw.DOMStyleSheet { return &x.inne
 
 func (x *DOMCSSStyleSheet) asDOMObject() *raw.DOMObject { return &x.inner.DOMStyleSheet.DOMObject }
 
-func (x *DOMCSSStyleSheet) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMStyleSheet.DOMObject.WebScriptObject }
+func (x *DOMCSSStyleSheet) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMStyleSheet.DOMObject.WebScriptObject
+}
 
 // DOMCSSStyleSheetable is the interface implemented by [DOMCSSStyleSheet], for mocking and DI.
 type DOMCSSStyleSheetable interface {
@@ -115,4 +117,3 @@ type DOMCSSStyleSheetable interface {
 }
 
 var _ DOMCSSStyleSheetable = (*DOMCSSStyleSheet)(nil)
-

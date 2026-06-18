@@ -25,4 +25,3 @@ func HKWorkoutRouteFromID(id objc.ID) *HKWorkoutRoute {
 	purego.Track(o)
 	return o
 }
-

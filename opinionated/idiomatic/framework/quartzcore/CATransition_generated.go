@@ -176,4 +176,3 @@ type Transitionable interface {
 }
 
 var _ Transitionable = (*Transition)(nil)
-

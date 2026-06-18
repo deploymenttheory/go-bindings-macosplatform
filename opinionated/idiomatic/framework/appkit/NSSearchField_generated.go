@@ -48,7 +48,9 @@ func (x *SearchField) WithRecentSearches(items ...*foundation.NSString) *SearchF
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -202,7 +204,9 @@ func (x *SearchField) WithPlaceholderStrings(items ...*foundation.NSString) *Sea
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -218,7 +222,9 @@ func (x *SearchField) WithPlaceholderAttributedStrings(items ...*foundation.NSAt
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSAttributedString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -408,7 +414,9 @@ func (x *SearchField) WithSubviews(items ...ViewProvider) *SearchField {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asView().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSView](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -550,7 +558,9 @@ func (x *SearchField) WithBackgroundFilters(items ...*coreimage.CIFilter) *Searc
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -572,7 +582,9 @@ func (x *SearchField) WithContentFilters(items ...*coreimage.CIFilter) *SearchFi
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -636,7 +648,9 @@ func (x *SearchField) WithGestureRecognizers(items ...GestureRecognizerProvider)
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -855,7 +869,9 @@ func (x *SearchField) asControl() *raw.NSControl { return &x.inner.NSTextField.N
 
 func (x *SearchField) asView() *raw.NSView { return &x.inner.NSTextField.NSControl.NSView }
 
-func (x *SearchField) asResponder() *raw.NSResponder { return &x.inner.NSTextField.NSControl.NSView.NSResponder }
+func (x *SearchField) asResponder() *raw.NSResponder {
+	return &x.inner.NSTextField.NSControl.NSView.NSResponder
+}
 
 // SearchFieldable is the interface implemented by [SearchField], for mocking and DI.
 type SearchFieldable interface {
@@ -987,4 +1003,3 @@ type SearchFieldable interface {
 }
 
 var _ SearchFieldable = (*SearchField)(nil)
-

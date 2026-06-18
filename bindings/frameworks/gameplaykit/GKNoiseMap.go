@@ -20,19 +20,19 @@ type GKNoiseMap struct {
 }
 
 var (
-	_clsGKNoiseMap = _objcClass("GKNoiseMap")
-	_gKNoiseMapSelInit = objc.RegisterName("init")
-	_gKNoiseMapSelNoiseMapWithNoise = objc.RegisterName("noiseMapWithNoise:")
+	_clsGKNoiseMap                                               = _objcClass("GKNoiseMap")
+	_gKNoiseMapSelInit                                           = objc.RegisterName("init")
+	_gKNoiseMapSelNoiseMapWithNoise                              = objc.RegisterName("noiseMapWithNoise:")
 	_gKNoiseMapSelNoiseMapWithNoiseSizeOriginSampleCountSeamless = objc.RegisterName("noiseMapWithNoise:size:origin:sampleCount:seamless:")
-	_gKNoiseMapSelInitWithNoise = objc.RegisterName("initWithNoise:")
-	_gKNoiseMapSelInitWithNoiseSizeOriginSampleCountSeamless = objc.RegisterName("initWithNoise:size:origin:sampleCount:seamless:")
-	_gKNoiseMapSelValueAtPosition = objc.RegisterName("valueAtPosition:")
-	_gKNoiseMapSelInterpolatedValueAtPosition = objc.RegisterName("interpolatedValueAtPosition:")
-	_gKNoiseMapSelSetValueAtPosition = objc.RegisterName("setValue:atPosition:")
-	_gKNoiseMapSelSize = objc.RegisterName("size")
-	_gKNoiseMapSelOrigin = objc.RegisterName("origin")
-	_gKNoiseMapSelSampleCount = objc.RegisterName("sampleCount")
-	_gKNoiseMapSelIsSeamless = objc.RegisterName("isSeamless")
+	_gKNoiseMapSelInitWithNoise                                  = objc.RegisterName("initWithNoise:")
+	_gKNoiseMapSelInitWithNoiseSizeOriginSampleCountSeamless     = objc.RegisterName("initWithNoise:size:origin:sampleCount:seamless:")
+	_gKNoiseMapSelValueAtPosition                                = objc.RegisterName("valueAtPosition:")
+	_gKNoiseMapSelInterpolatedValueAtPosition                    = objc.RegisterName("interpolatedValueAtPosition:")
+	_gKNoiseMapSelSetValueAtPosition                             = objc.RegisterName("setValue:atPosition:")
+	_gKNoiseMapSelSize                                           = objc.RegisterName("size")
+	_gKNoiseMapSelOrigin                                         = objc.RegisterName("origin")
+	_gKNoiseMapSelSampleCount                                    = objc.RegisterName("sampleCount")
+	_gKNoiseMapSelIsSeamless                                     = objc.RegisterName("isSeamless")
 )
 
 func GKNoiseMapFromID(id objc.ID) *GKNoiseMap {
@@ -48,35 +48,45 @@ func GKNoiseMapFromID(id objc.ID) *GKNoiseMap {
 // Initializes a noise map with constant noise of 0.0 at all positions.
 func (o *GKNoiseMap) Init() *GKNoiseMap {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKNoiseMapSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKNoiseMapFromID(_ret)
 }
 
 // Initializes a noise map with specified noise. @param noise The 3D noise from which to sample a 2D plane.
 func GKNoiseMapNoiseMapWithNoise(noise *GKNoise) *GKNoiseMap {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKNoiseMap), _gKNoiseMapSelNoiseMapWithNoise, noise.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKNoiseMapFromID(_ret)
 }
 
 // Initializes a noise map with specified noise and parameters. @param noise The 3D noise from which to sample a 2D plane. @param size The size of the 2D plane to extract from the 3D noise space, in noise space coordinates. @param origin The origin of the 2D plane to extract from the 3D noise space, in noise space coordinates. @param sampleCount The number of equally-spaced samples to make across the 2D plane. @param seamless Whether the values at the edges of the 2D plane are modified to allow seamless tiling of the extracted noise map.
 func GKNoiseMapNoiseMapWithNoiseSizeOriginSampleCountSeamless(noise *GKNoise, size unsafe.Pointer, origin unsafe.Pointer, sampleCount unsafe.Pointer, seamless bool) *GKNoiseMap {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKNoiseMap), _gKNoiseMapSelNoiseMapWithNoiseSizeOriginSampleCountSeamless, noise.Ptr(), size, origin, sampleCount, seamless)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKNoiseMapFromID(_ret)
 }
 
 // Initializes a noise map with specified noise. @param noise The 3D noise from which to sample a 2D plane.
 func (o *GKNoiseMap) InitWithNoise(noise *GKNoise) *GKNoiseMap {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKNoiseMapSelInitWithNoise, noise.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKNoiseMapFromID(_ret)
 }
 
 // Initializes a noise map with specified noise and parameters. @param noise The 3D noise from which to sample a 2D plane. @param size The size of the 2D plane to extract from the 3D noise space, in noise space coordinates. @param origin The origin of the 2D plane to extract from the 3D noise space, in noise space coordinates. @param sampleCount The number of equally-spaced samples to make across the 2D plane. @param seamless Whether the values at the edges of the 2D plane are modified to allow seamless tiling of the extracted noise map.
 func (o *GKNoiseMap) InitWithNoiseSizeOriginSampleCountSeamless(noise *GKNoise, size unsafe.Pointer, origin unsafe.Pointer, sampleCount unsafe.Pointer, seamless bool) *GKNoiseMap {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKNoiseMapSelInitWithNoiseSizeOriginSampleCountSeamless, noise.Ptr(), size, origin, sampleCount, seamless)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKNoiseMapFromID(_ret)
 }
 
@@ -120,4 +130,3 @@ func (o *GKNoiseMap) IsSeamless() bool {
 	_ret := objc.Send[bool](o.Ptr(), _gKNoiseMapSelIsSeamless)
 	return _ret
 }
-

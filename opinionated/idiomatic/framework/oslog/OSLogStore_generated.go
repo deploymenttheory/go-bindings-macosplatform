@@ -98,4 +98,3 @@ type LogStoreable interface {
 }
 
 var _ LogStoreable = (*LogStore)(nil)
-

@@ -16,13 +16,13 @@ type MTRDataTypeLocationDescriptorStruct struct {
 }
 
 var (
-	_clsMTRDataTypeLocationDescriptorStruct = _objcClass("MTRDataTypeLocationDescriptorStruct")
-	_mTRDataTypeLocationDescriptorStructSelLocationName = objc.RegisterName("locationName")
+	_clsMTRDataTypeLocationDescriptorStruct                = _objcClass("MTRDataTypeLocationDescriptorStruct")
+	_mTRDataTypeLocationDescriptorStructSelLocationName    = objc.RegisterName("locationName")
 	_mTRDataTypeLocationDescriptorStructSelSetLocationName = objc.RegisterName("setLocationName:")
-	_mTRDataTypeLocationDescriptorStructSelFloorNumber = objc.RegisterName("floorNumber")
-	_mTRDataTypeLocationDescriptorStructSelSetFloorNumber = objc.RegisterName("setFloorNumber:")
-	_mTRDataTypeLocationDescriptorStructSelAreaType = objc.RegisterName("areaType")
-	_mTRDataTypeLocationDescriptorStructSelSetAreaType = objc.RegisterName("setAreaType:")
+	_mTRDataTypeLocationDescriptorStructSelFloorNumber     = objc.RegisterName("floorNumber")
+	_mTRDataTypeLocationDescriptorStructSelSetFloorNumber  = objc.RegisterName("setFloorNumber:")
+	_mTRDataTypeLocationDescriptorStructSelAreaType        = objc.RegisterName("areaType")
+	_mTRDataTypeLocationDescriptorStructSelSetAreaType     = objc.RegisterName("setAreaType:")
 )
 
 func MTRDataTypeLocationDescriptorStructFromID(id objc.ID) *MTRDataTypeLocationDescriptorStruct {
@@ -37,7 +37,9 @@ func MTRDataTypeLocationDescriptorStructFromID(id objc.ID) *MTRDataTypeLocationD
 
 func (o *MTRDataTypeLocationDescriptorStruct) LocationName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDataTypeLocationDescriptorStructSelLocationName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTRDataTypeLocationDescriptorStruct) SetLocationName(locationName *foun
 
 func (o *MTRDataTypeLocationDescriptorStruct) FloorNumber() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDataTypeLocationDescriptorStructSelFloorNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *MTRDataTypeLocationDescriptorStruct) SetFloorNumber(floorNumber *founda
 
 func (o *MTRDataTypeLocationDescriptorStruct) AreaType() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDataTypeLocationDescriptorStructSelAreaType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDataTypeLocationDescriptorStruct) SetAreaType(areaType *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDataTypeLocationDescriptorStructSelSetAreaType, areaType.Ptr())
 }
-

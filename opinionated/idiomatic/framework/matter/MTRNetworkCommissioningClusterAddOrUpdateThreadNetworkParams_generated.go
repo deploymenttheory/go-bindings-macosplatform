@@ -16,11 +16,15 @@ type MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams].
-func (x *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) Unwrap() *raw.MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams { return x.inner }
+func (x *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) Unwrap() *raw.MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParamsFromID adopts an existing object pointer as a MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams (nil for 0).
 func MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParamsFromID(id objc.ID) *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams {
@@ -118,4 +122,3 @@ type MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParamsable interface 
 }
 
 var _ MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParamsable = (*MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams)(nil)
-

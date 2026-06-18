@@ -85,4 +85,3 @@ type VSAccountMetadataable interface {
 }
 
 var _ VSAccountMetadataable = (*VSAccountMetadata)(nil)
-

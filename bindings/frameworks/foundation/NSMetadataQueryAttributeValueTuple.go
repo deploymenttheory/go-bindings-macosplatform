@@ -15,10 +15,10 @@ type NSMetadataQueryAttributeValueTuple struct {
 }
 
 var (
-	_clsNSMetadataQueryAttributeValueTuple = _objcClass("NSMetadataQueryAttributeValueTuple")
+	_clsNSMetadataQueryAttributeValueTuple          = _objcClass("NSMetadataQueryAttributeValueTuple")
 	_nSMetadataQueryAttributeValueTupleSelAttribute = objc.RegisterName("attribute")
-	_nSMetadataQueryAttributeValueTupleSelValue = objc.RegisterName("value")
-	_nSMetadataQueryAttributeValueTupleSelCount = objc.RegisterName("count")
+	_nSMetadataQueryAttributeValueTupleSelValue     = objc.RegisterName("value")
+	_nSMetadataQueryAttributeValueTupleSelCount     = objc.RegisterName("count")
 )
 
 func NSMetadataQueryAttributeValueTupleFromID(id objc.ID) *NSMetadataQueryAttributeValueTuple {
@@ -33,7 +33,9 @@ func NSMetadataQueryAttributeValueTupleFromID(id objc.ID) *NSMetadataQueryAttrib
 
 func (o *NSMetadataQueryAttributeValueTuple) Attribute() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQueryAttributeValueTupleSelAttribute)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -46,4 +48,3 @@ func (o *NSMetadataQueryAttributeValueTuple) Count() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSMetadataQueryAttributeValueTupleSelCount)
 	return _ret
 }
-

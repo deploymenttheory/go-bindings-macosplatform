@@ -16,37 +16,37 @@ type NSDatePickerCell struct {
 }
 
 var (
-	_clsNSDatePickerCell = _objcClass("NSDatePickerCell")
-	_nSDatePickerCellSelInitTextCell = objc.RegisterName("initTextCell:")
-	_nSDatePickerCellSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSDatePickerCellSelDatePickerStyle = objc.RegisterName("datePickerStyle")
-	_nSDatePickerCellSelSetDatePickerStyle = objc.RegisterName("setDatePickerStyle:")
-	_nSDatePickerCellSelDrawsBackground = objc.RegisterName("drawsBackground")
-	_nSDatePickerCellSelSetDrawsBackground = objc.RegisterName("setDrawsBackground:")
-	_nSDatePickerCellSelBackgroundColor = objc.RegisterName("backgroundColor")
-	_nSDatePickerCellSelSetBackgroundColor = objc.RegisterName("setBackgroundColor:")
-	_nSDatePickerCellSelTextColor = objc.RegisterName("textColor")
-	_nSDatePickerCellSelSetTextColor = objc.RegisterName("setTextColor:")
-	_nSDatePickerCellSelDatePickerMode = objc.RegisterName("datePickerMode")
-	_nSDatePickerCellSelSetDatePickerMode = objc.RegisterName("setDatePickerMode:")
-	_nSDatePickerCellSelDatePickerElements = objc.RegisterName("datePickerElements")
+	_clsNSDatePickerCell                      = _objcClass("NSDatePickerCell")
+	_nSDatePickerCellSelInitTextCell          = objc.RegisterName("initTextCell:")
+	_nSDatePickerCellSelInitWithCoder         = objc.RegisterName("initWithCoder:")
+	_nSDatePickerCellSelDatePickerStyle       = objc.RegisterName("datePickerStyle")
+	_nSDatePickerCellSelSetDatePickerStyle    = objc.RegisterName("setDatePickerStyle:")
+	_nSDatePickerCellSelDrawsBackground       = objc.RegisterName("drawsBackground")
+	_nSDatePickerCellSelSetDrawsBackground    = objc.RegisterName("setDrawsBackground:")
+	_nSDatePickerCellSelBackgroundColor       = objc.RegisterName("backgroundColor")
+	_nSDatePickerCellSelSetBackgroundColor    = objc.RegisterName("setBackgroundColor:")
+	_nSDatePickerCellSelTextColor             = objc.RegisterName("textColor")
+	_nSDatePickerCellSelSetTextColor          = objc.RegisterName("setTextColor:")
+	_nSDatePickerCellSelDatePickerMode        = objc.RegisterName("datePickerMode")
+	_nSDatePickerCellSelSetDatePickerMode     = objc.RegisterName("setDatePickerMode:")
+	_nSDatePickerCellSelDatePickerElements    = objc.RegisterName("datePickerElements")
 	_nSDatePickerCellSelSetDatePickerElements = objc.RegisterName("setDatePickerElements:")
-	_nSDatePickerCellSelCalendar = objc.RegisterName("calendar")
-	_nSDatePickerCellSelSetCalendar = objc.RegisterName("setCalendar:")
-	_nSDatePickerCellSelLocale = objc.RegisterName("locale")
-	_nSDatePickerCellSelSetLocale = objc.RegisterName("setLocale:")
-	_nSDatePickerCellSelTimeZone = objc.RegisterName("timeZone")
-	_nSDatePickerCellSelSetTimeZone = objc.RegisterName("setTimeZone:")
-	_nSDatePickerCellSelDateValue = objc.RegisterName("dateValue")
-	_nSDatePickerCellSelSetDateValue = objc.RegisterName("setDateValue:")
-	_nSDatePickerCellSelTimeInterval = objc.RegisterName("timeInterval")
-	_nSDatePickerCellSelSetTimeInterval = objc.RegisterName("setTimeInterval:")
-	_nSDatePickerCellSelMinDate = objc.RegisterName("minDate")
-	_nSDatePickerCellSelSetMinDate = objc.RegisterName("setMinDate:")
-	_nSDatePickerCellSelMaxDate = objc.RegisterName("maxDate")
-	_nSDatePickerCellSelSetMaxDate = objc.RegisterName("setMaxDate:")
-	_nSDatePickerCellSelDelegate = objc.RegisterName("delegate")
-	_nSDatePickerCellSelSetDelegate = objc.RegisterName("setDelegate:")
+	_nSDatePickerCellSelCalendar              = objc.RegisterName("calendar")
+	_nSDatePickerCellSelSetCalendar           = objc.RegisterName("setCalendar:")
+	_nSDatePickerCellSelLocale                = objc.RegisterName("locale")
+	_nSDatePickerCellSelSetLocale             = objc.RegisterName("setLocale:")
+	_nSDatePickerCellSelTimeZone              = objc.RegisterName("timeZone")
+	_nSDatePickerCellSelSetTimeZone           = objc.RegisterName("setTimeZone:")
+	_nSDatePickerCellSelDateValue             = objc.RegisterName("dateValue")
+	_nSDatePickerCellSelSetDateValue          = objc.RegisterName("setDateValue:")
+	_nSDatePickerCellSelTimeInterval          = objc.RegisterName("timeInterval")
+	_nSDatePickerCellSelSetTimeInterval       = objc.RegisterName("setTimeInterval:")
+	_nSDatePickerCellSelMinDate               = objc.RegisterName("minDate")
+	_nSDatePickerCellSelSetMinDate            = objc.RegisterName("setMinDate:")
+	_nSDatePickerCellSelMaxDate               = objc.RegisterName("maxDate")
+	_nSDatePickerCellSelSetMaxDate            = objc.RegisterName("setMaxDate:")
+	_nSDatePickerCellSelDelegate              = objc.RegisterName("delegate")
+	_nSDatePickerCellSelSetDelegate           = objc.RegisterName("setDelegate:")
 )
 
 func NSDatePickerCellFromID(id objc.ID) *NSDatePickerCell {
@@ -61,13 +61,17 @@ func NSDatePickerCellFromID(id objc.ID) *NSDatePickerCell {
 
 func (o *NSDatePickerCell) InitTextCell(string_ *foundation.NSString) *NSDatePickerCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDatePickerCellSelInitTextCell, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDatePickerCellFromID(_ret)
 }
 
 func (o *NSDatePickerCell) InitWithCoder(coder *foundation.NSCoder) *NSDatePickerCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDatePickerCellSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDatePickerCellFromID(_ret)
 }
 
@@ -91,7 +95,9 @@ func (o *NSDatePickerCell) SetDrawsBackground(drawsBackground bool) {
 
 func (o *NSDatePickerCell) BackgroundColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDatePickerCellSelBackgroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -101,7 +107,9 @@ func (o *NSDatePickerCell) SetBackgroundColor(backgroundColor *NSColor) {
 
 func (o *NSDatePickerCell) TextColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDatePickerCellSelTextColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -129,7 +137,9 @@ func (o *NSDatePickerCell) SetDatePickerElements(datePickerElements NSDatePicker
 
 func (o *NSDatePickerCell) Calendar() *foundation.NSCalendar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDatePickerCellSelCalendar)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSCalendarFromID(_ret)
 }
 
@@ -139,7 +149,9 @@ func (o *NSDatePickerCell) SetCalendar(calendar *foundation.NSCalendar) {
 
 func (o *NSDatePickerCell) Locale() *foundation.NSLocale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDatePickerCellSelLocale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSLocaleFromID(_ret)
 }
 
@@ -149,7 +161,9 @@ func (o *NSDatePickerCell) SetLocale(locale *foundation.NSLocale) {
 
 func (o *NSDatePickerCell) TimeZone() *foundation.NSTimeZone {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDatePickerCellSelTimeZone)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSTimeZoneFromID(_ret)
 }
 
@@ -159,7 +173,9 @@ func (o *NSDatePickerCell) SetTimeZone(timeZone *foundation.NSTimeZone) {
 
 func (o *NSDatePickerCell) DateValue() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDatePickerCellSelDateValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -178,7 +194,9 @@ func (o *NSDatePickerCell) SetTimeInterval(timeInterval float64) {
 
 func (o *NSDatePickerCell) MinDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDatePickerCellSelMinDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -188,7 +206,9 @@ func (o *NSDatePickerCell) SetMinDate(minDate *foundation.NSDate) {
 
 func (o *NSDatePickerCell) MaxDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDatePickerCellSelMaxDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -204,4 +224,3 @@ func (o *NSDatePickerCell) Delegate() NSDatePickerCellDelegate {
 func (o *NSDatePickerCell) SetDelegate(delegate NSDatePickerCellDelegate) {
 	o.Ptr().Send(_nSDatePickerCellSelSetDelegate, delegate)
 }
-

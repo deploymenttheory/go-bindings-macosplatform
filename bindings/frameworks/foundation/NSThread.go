@@ -15,36 +15,36 @@ type NSThread struct {
 }
 
 var (
-	_clsNSThread = _objcClass("NSThread")
-	_nSThreadSelDetachNewThreadWith = objc.RegisterName("detachNewThreadWithBlock:")
+	_clsNSThread                                          = _objcClass("NSThread")
+	_nSThreadSelDetachNewThreadWith                       = objc.RegisterName("detachNewThreadWithBlock:")
 	_nSThreadSelDetachNewThreadSelectorToTargetWithObject = objc.RegisterName("detachNewThreadSelector:toTarget:withObject:")
-	_nSThreadSelIsMultiThreaded = objc.RegisterName("isMultiThreaded")
-	_nSThreadSelSleepUntilDate = objc.RegisterName("sleepUntilDate:")
-	_nSThreadSelSleepForTimeInterval = objc.RegisterName("sleepForTimeInterval:")
-	_nSThreadSelExit = objc.RegisterName("exit")
-	_nSThreadSelThreadPriority = objc.RegisterName("threadPriority")
-	_nSThreadSelSetThreadPriority = objc.RegisterName("setThreadPriority:")
-	_nSThreadSelInit = objc.RegisterName("init")
-	_nSThreadSelInitWithTargetSelectorObject = objc.RegisterName("initWithTarget:selector:object:")
-	_nSThreadSelInitWith = objc.RegisterName("initWithBlock:")
-	_nSThreadSelCancel = objc.RegisterName("cancel")
-	_nSThreadSelStart = objc.RegisterName("start")
-	_nSThreadSelMain = objc.RegisterName("main")
-	_nSThreadSelCurrentThread = objc.RegisterName("currentThread")
-	_nSThreadSelThreadDictionary = objc.RegisterName("threadDictionary")
-	_nSThreadSelQualityOfService = objc.RegisterName("qualityOfService")
-	_nSThreadSelSetQualityOfService = objc.RegisterName("setQualityOfService:")
-	_nSThreadSelCallStackReturnAddresses = objc.RegisterName("callStackReturnAddresses")
-	_nSThreadSelCallStackSymbols = objc.RegisterName("callStackSymbols")
-	_nSThreadSelName = objc.RegisterName("name")
-	_nSThreadSelSetName = objc.RegisterName("setName:")
-	_nSThreadSelStackSize = objc.RegisterName("stackSize")
-	_nSThreadSelSetStackSize = objc.RegisterName("setStackSize:")
-	_nSThreadSelIsMainThread = objc.RegisterName("isMainThread")
-	_nSThreadSelMainThread = objc.RegisterName("mainThread")
-	_nSThreadSelIsExecuting = objc.RegisterName("isExecuting")
-	_nSThreadSelIsFinished = objc.RegisterName("isFinished")
-	_nSThreadSelIsCancelled = objc.RegisterName("isCancelled")
+	_nSThreadSelIsMultiThreaded                           = objc.RegisterName("isMultiThreaded")
+	_nSThreadSelSleepUntilDate                            = objc.RegisterName("sleepUntilDate:")
+	_nSThreadSelSleepForTimeInterval                      = objc.RegisterName("sleepForTimeInterval:")
+	_nSThreadSelExit                                      = objc.RegisterName("exit")
+	_nSThreadSelThreadPriority                            = objc.RegisterName("threadPriority")
+	_nSThreadSelSetThreadPriority                         = objc.RegisterName("setThreadPriority:")
+	_nSThreadSelInit                                      = objc.RegisterName("init")
+	_nSThreadSelInitWithTargetSelectorObject              = objc.RegisterName("initWithTarget:selector:object:")
+	_nSThreadSelInitWith                                  = objc.RegisterName("initWithBlock:")
+	_nSThreadSelCancel                                    = objc.RegisterName("cancel")
+	_nSThreadSelStart                                     = objc.RegisterName("start")
+	_nSThreadSelMain                                      = objc.RegisterName("main")
+	_nSThreadSelCurrentThread                             = objc.RegisterName("currentThread")
+	_nSThreadSelThreadDictionary                          = objc.RegisterName("threadDictionary")
+	_nSThreadSelQualityOfService                          = objc.RegisterName("qualityOfService")
+	_nSThreadSelSetQualityOfService                       = objc.RegisterName("setQualityOfService:")
+	_nSThreadSelCallStackReturnAddresses                  = objc.RegisterName("callStackReturnAddresses")
+	_nSThreadSelCallStackSymbols                          = objc.RegisterName("callStackSymbols")
+	_nSThreadSelName                                      = objc.RegisterName("name")
+	_nSThreadSelSetName                                   = objc.RegisterName("setName:")
+	_nSThreadSelStackSize                                 = objc.RegisterName("stackSize")
+	_nSThreadSelSetStackSize                              = objc.RegisterName("setStackSize:")
+	_nSThreadSelIsMainThread                              = objc.RegisterName("isMainThread")
+	_nSThreadSelMainThread                                = objc.RegisterName("mainThread")
+	_nSThreadSelIsExecuting                               = objc.RegisterName("isExecuting")
+	_nSThreadSelIsFinished                                = objc.RegisterName("isFinished")
+	_nSThreadSelIsCancelled                               = objc.RegisterName("isCancelled")
 )
 
 func NSThreadFromID(id objc.ID) *NSThread {
@@ -101,13 +101,17 @@ func NSThreadSetThreadPriority(p float64) bool {
 
 func (o *NSThread) Init() *NSThread {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSThreadSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSThreadFromID(_ret)
 }
 
 func (o *NSThread) InitWithTargetSelectorObject(target objc.ID, selector objc.SEL, argument objc.ID) *NSThread {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSThreadSelInitWithTargetSelectorObject, target, selector, argument)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSThreadFromID(_ret)
 }
 
@@ -120,7 +124,9 @@ func (o *NSThread) InitWith(block func()) *NSThread {
 		defer __block_block.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSThreadSelInitWith, __block_block)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSThreadFromID(_ret)
 }
 
@@ -138,7 +144,9 @@ func (o *NSThread) Main() {
 
 func NSThreadCurrentThread() *NSThread {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSThread), _nSThreadSelCurrentThread)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSThreadFromID(_ret)
 }
 
@@ -167,19 +175,25 @@ func (o *NSThread) SetQualityOfService(qualityOfService NSQualityOfService) {
 
 func NSThreadCallStackReturnAddresses() *NSArray[*NSNumber] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSThread), _nSThreadSelCallStackReturnAddresses)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSNumber](_ret)
 }
 
 func NSThreadCallStackSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSThread), _nSThreadSelCallStackSymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSThread) Name() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSThreadSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -208,7 +222,9 @@ func NSThreadIsMainThread() bool {
 
 func NSThreadMainThread() *NSThread {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSThread), _nSThreadSelMainThread)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSThreadFromID(_ret)
 }
 
@@ -226,4 +242,3 @@ func (o *NSThread) IsCancelled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSThreadSelIsCancelled)
 	return _ret
 }
-

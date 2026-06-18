@@ -219,11 +219,17 @@ func (x *DOMHTMLHRElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.in
 
 func (x *DOMHTMLHRElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
 
-func (x *DOMHTMLHRElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTMLElement.DOMElement.DOMNode }
+func (x *DOMHTMLHRElement) asDOMNode() *raw.DOMNode {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode
+}
 
-func (x *DOMHTMLHRElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
+func (x *DOMHTMLHRElement) asDOMObject() *raw.DOMObject {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject
+}
 
-func (x *DOMHTMLHRElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+func (x *DOMHTMLHRElement) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject
+}
 
 // DOMHTMLHRElementable is the interface implemented by [DOMHTMLHRElement], for mocking and DI.
 type DOMHTMLHRElementable interface {
@@ -260,4 +266,3 @@ type DOMHTMLHRElementable interface {
 }
 
 var _ DOMHTMLHRElementable = (*DOMHTMLHRElement)(nil)
-

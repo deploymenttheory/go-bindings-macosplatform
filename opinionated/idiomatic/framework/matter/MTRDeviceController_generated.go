@@ -322,4 +322,3 @@ type MTRDeviceControllerable interface {
 }
 
 var _ MTRDeviceControllerable = (*MTRDeviceController)(nil)
-

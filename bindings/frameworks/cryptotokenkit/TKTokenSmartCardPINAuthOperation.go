@@ -16,17 +16,17 @@ type TKTokenSmartCardPINAuthOperation struct {
 }
 
 var (
-	_clsTKTokenSmartCardPINAuthOperation = _objcClass("TKTokenSmartCardPINAuthOperation")
-	_tKTokenSmartCardPINAuthOperationSelPINFormat = objc.RegisterName("PINFormat")
-	_tKTokenSmartCardPINAuthOperationSelSetPINFormat = objc.RegisterName("setPINFormat:")
-	_tKTokenSmartCardPINAuthOperationSelAPDUTemplate = objc.RegisterName("APDUTemplate")
-	_tKTokenSmartCardPINAuthOperationSelSetAPDUTemplate = objc.RegisterName("setAPDUTemplate:")
-	_tKTokenSmartCardPINAuthOperationSelPINByteOffset = objc.RegisterName("PINByteOffset")
+	_clsTKTokenSmartCardPINAuthOperation                 = _objcClass("TKTokenSmartCardPINAuthOperation")
+	_tKTokenSmartCardPINAuthOperationSelPINFormat        = objc.RegisterName("PINFormat")
+	_tKTokenSmartCardPINAuthOperationSelSetPINFormat     = objc.RegisterName("setPINFormat:")
+	_tKTokenSmartCardPINAuthOperationSelAPDUTemplate     = objc.RegisterName("APDUTemplate")
+	_tKTokenSmartCardPINAuthOperationSelSetAPDUTemplate  = objc.RegisterName("setAPDUTemplate:")
+	_tKTokenSmartCardPINAuthOperationSelPINByteOffset    = objc.RegisterName("PINByteOffset")
 	_tKTokenSmartCardPINAuthOperationSelSetPINByteOffset = objc.RegisterName("setPINByteOffset:")
-	_tKTokenSmartCardPINAuthOperationSelSmartCard = objc.RegisterName("smartCard")
-	_tKTokenSmartCardPINAuthOperationSelSetSmartCard = objc.RegisterName("setSmartCard:")
-	_tKTokenSmartCardPINAuthOperationSelPIN = objc.RegisterName("PIN")
-	_tKTokenSmartCardPINAuthOperationSelSetPIN = objc.RegisterName("setPIN:")
+	_tKTokenSmartCardPINAuthOperationSelSmartCard        = objc.RegisterName("smartCard")
+	_tKTokenSmartCardPINAuthOperationSelSetSmartCard     = objc.RegisterName("setSmartCard:")
+	_tKTokenSmartCardPINAuthOperationSelPIN              = objc.RegisterName("PIN")
+	_tKTokenSmartCardPINAuthOperationSelSetPIN           = objc.RegisterName("setPIN:")
 )
 
 func TKTokenSmartCardPINAuthOperationFromID(id objc.ID) *TKTokenSmartCardPINAuthOperation {
@@ -42,7 +42,9 @@ func TKTokenSmartCardPINAuthOperationFromID(id objc.ID) *TKTokenSmartCardPINAuth
 // @discussion PIN formatting properties. @note The property is initialized with a default instance of TKSmartCardPINFormat.
 func (o *TKTokenSmartCardPINAuthOperation) PINFormat() *TKSmartCardPINFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenSmartCardPINAuthOperationSelPINFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return TKSmartCardPINFormatFromID(_ret)
 }
 
@@ -53,7 +55,9 @@ func (o *TKTokenSmartCardPINAuthOperation) SetPINFormat(pINFormat *TKSmartCardPI
 // @discussion APDU template into which PIN gets filled in. If set to nil, the system will not attempt to authenticate by sending the formatted APDU to the SmartCard, but rather the token itself is expected to perform the authentication.  It is preferred to provide APDUTemplate if possible, because it allows using hardware PINPad for secure PIN entry (provided that the reader has one).
 func (o *TKTokenSmartCardPINAuthOperation) APDUTemplate() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenSmartCardPINAuthOperationSelAPDUTemplate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -74,7 +78,9 @@ func (o *TKTokenSmartCardPINAuthOperation) SetPINByteOffset(pINByteOffset int) {
 // @discussion TKSmartCard to which the formatted APDU gets sent in order to authenticate (used only if 'APDUTemplate' is set).
 func (o *TKTokenSmartCardPINAuthOperation) SmartCard() *TKSmartCard {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenSmartCardPINAuthOperationSelSmartCard)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return TKSmartCardFromID(_ret)
 }
 
@@ -85,11 +91,12 @@ func (o *TKTokenSmartCardPINAuthOperation) SetSmartCard(smartCard *TKSmartCard) 
 // @discussion PIN value which will be set when 'finishWithError:' gets triggered.  Note that the PIN is not set in case that APDUTemplate was set.  In this case, PIN was already sent to the card using specified template.
 func (o *TKTokenSmartCardPINAuthOperation) PIN() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenSmartCardPINAuthOperationSelPIN)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *TKTokenSmartCardPINAuthOperation) SetPIN(pIN *foundation.NSString) {
 	o.Ptr().Send(_tKTokenSmartCardPINAuthOperationSelSetPIN, pIN.Ptr())
 }
-

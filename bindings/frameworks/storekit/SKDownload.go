@@ -19,19 +19,19 @@ type SKDownload struct {
 }
 
 var (
-	_clsSKDownload = _objcClass("SKDownload")
-	_sKDownloadSelContentURLForProductID = objc.RegisterName("contentURLForProductID:")
+	_clsSKDownload                          = _objcClass("SKDownload")
+	_sKDownloadSelContentURLForProductID    = objc.RegisterName("contentURLForProductID:")
 	_sKDownloadSelDeleteContentForProductID = objc.RegisterName("deleteContentForProductID:")
-	_sKDownloadSelState = objc.RegisterName("state")
-	_sKDownloadSelContentLength = objc.RegisterName("contentLength")
-	_sKDownloadSelExpectedContentLength = objc.RegisterName("expectedContentLength")
-	_sKDownloadSelContentIdentifier = objc.RegisterName("contentIdentifier")
-	_sKDownloadSelContentURL = objc.RegisterName("contentURL")
-	_sKDownloadSelContentVersion = objc.RegisterName("contentVersion")
-	_sKDownloadSelError = objc.RegisterName("error")
-	_sKDownloadSelProgress = objc.RegisterName("progress")
-	_sKDownloadSelTimeRemaining = objc.RegisterName("timeRemaining")
-	_sKDownloadSelTransaction = objc.RegisterName("transaction")
+	_sKDownloadSelState                     = objc.RegisterName("state")
+	_sKDownloadSelContentLength             = objc.RegisterName("contentLength")
+	_sKDownloadSelExpectedContentLength     = objc.RegisterName("expectedContentLength")
+	_sKDownloadSelContentIdentifier         = objc.RegisterName("contentIdentifier")
+	_sKDownloadSelContentURL                = objc.RegisterName("contentURL")
+	_sKDownloadSelContentVersion            = objc.RegisterName("contentVersion")
+	_sKDownloadSelError                     = objc.RegisterName("error")
+	_sKDownloadSelProgress                  = objc.RegisterName("progress")
+	_sKDownloadSelTimeRemaining             = objc.RegisterName("timeRemaining")
+	_sKDownloadSelTransaction               = objc.RegisterName("transaction")
 )
 
 func SKDownloadFromID(id objc.ID) *SKDownload {
@@ -47,7 +47,9 @@ func SKDownloadFromID(id objc.ID) *SKDownload {
 // Deprecated: Hosted content is no longer supported.
 func SKDownloadContentURLForProductID(productID *foundation.NSString) *foundation.NSURL {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKDownload), _sKDownloadSelContentURLForProductID, productID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -77,21 +79,27 @@ func (o *SKDownload) ExpectedContentLength() int64 {
 // Deprecated: Hosted content is no longer supported.
 func (o *SKDownload) ContentIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKDownloadSelContentIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Deprecated: Hosted content is no longer supported.
 func (o *SKDownload) ContentURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKDownloadSelContentURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // Deprecated: Hosted content is no longer supported.
 func (o *SKDownload) ContentVersion() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKDownloadSelContentVersion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -116,7 +124,8 @@ func (o *SKDownload) TimeRemaining() float64 {
 // Deprecated: Hosted content is no longer supported.
 func (o *SKDownload) Transaction() *SKPaymentTransaction {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKDownloadSelTransaction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPaymentTransactionFromID(_ret)
 }
-

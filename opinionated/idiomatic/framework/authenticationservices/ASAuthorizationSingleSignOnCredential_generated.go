@@ -17,7 +17,9 @@ type AuthorizationSingleSignOnCredential struct {
 }
 
 // Unwrap returns the underlying [raw.ASAuthorizationSingleSignOnCredential].
-func (x *AuthorizationSingleSignOnCredential) Unwrap() *raw.ASAuthorizationSingleSignOnCredential { return x.inner }
+func (x *AuthorizationSingleSignOnCredential) Unwrap() *raw.ASAuthorizationSingleSignOnCredential {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -89,4 +91,3 @@ type AuthorizationSingleSignOnCredentialable interface {
 }
 
 var _ AuthorizationSingleSignOnCredentialable = (*AuthorizationSingleSignOnCredential)(nil)
-

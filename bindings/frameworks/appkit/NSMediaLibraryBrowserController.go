@@ -17,15 +17,15 @@ type NSMediaLibraryBrowserController struct {
 }
 
 var (
-	_clsNSMediaLibraryBrowserController = _objcClass("NSMediaLibraryBrowserController")
-	_nSMediaLibraryBrowserControllerSelTogglePanel = objc.RegisterName("togglePanel:")
+	_clsNSMediaLibraryBrowserController                                    = _objcClass("NSMediaLibraryBrowserController")
+	_nSMediaLibraryBrowserControllerSelTogglePanel                         = objc.RegisterName("togglePanel:")
 	_nSMediaLibraryBrowserControllerSelSharedMediaLibraryBrowserController = objc.RegisterName("sharedMediaLibraryBrowserController")
-	_nSMediaLibraryBrowserControllerSelIsVisible = objc.RegisterName("isVisible")
-	_nSMediaLibraryBrowserControllerSelSetVisible = objc.RegisterName("setVisible:")
-	_nSMediaLibraryBrowserControllerSelFrame = objc.RegisterName("frame")
-	_nSMediaLibraryBrowserControllerSelSetFrame = objc.RegisterName("setFrame:")
-	_nSMediaLibraryBrowserControllerSelMediaLibraries = objc.RegisterName("mediaLibraries")
-	_nSMediaLibraryBrowserControllerSelSetMediaLibraries = objc.RegisterName("setMediaLibraries:")
+	_nSMediaLibraryBrowserControllerSelIsVisible                           = objc.RegisterName("isVisible")
+	_nSMediaLibraryBrowserControllerSelSetVisible                          = objc.RegisterName("setVisible:")
+	_nSMediaLibraryBrowserControllerSelFrame                               = objc.RegisterName("frame")
+	_nSMediaLibraryBrowserControllerSelSetFrame                            = objc.RegisterName("setFrame:")
+	_nSMediaLibraryBrowserControllerSelMediaLibraries                      = objc.RegisterName("mediaLibraries")
+	_nSMediaLibraryBrowserControllerSelSetMediaLibraries                   = objc.RegisterName("setMediaLibraries:")
 )
 
 func NSMediaLibraryBrowserControllerFromID(id objc.ID) *NSMediaLibraryBrowserController {
@@ -44,7 +44,9 @@ func (o *NSMediaLibraryBrowserController) TogglePanel(sender objc.ID) {
 
 func NSMediaLibraryBrowserControllerSharedMediaLibraryBrowserController() *NSMediaLibraryBrowserController {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMediaLibraryBrowserController), _nSMediaLibraryBrowserControllerSelSharedMediaLibraryBrowserController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMediaLibraryBrowserControllerFromID(_ret)
 }
 
@@ -74,4 +76,3 @@ func (o *NSMediaLibraryBrowserController) MediaLibraries() NSMediaLibrary {
 func (o *NSMediaLibraryBrowserController) SetMediaLibraries(mediaLibraries NSMediaLibrary) {
 	o.Ptr().Send(_nSMediaLibraryBrowserControllerSelSetMediaLibraries, mediaLibraries)
 }
-

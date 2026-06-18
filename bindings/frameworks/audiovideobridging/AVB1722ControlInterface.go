@@ -16,11 +16,11 @@ type AVB1722ControlInterface struct {
 }
 
 var (
-	_clsAVB1722ControlInterface = _objcClass("AVB1722ControlInterface")
+	_clsAVB1722ControlInterface                      = _objcClass("AVB1722ControlInterface")
 	_aVB1722ControlInterfaceSelInitWithInterfaceName = objc.RegisterName("initWithInterfaceName:")
-	_aVB1722ControlInterfaceSelInitWithInterface = objc.RegisterName("initWithInterface:")
-	_aVB1722ControlInterfaceSelInterfaceName = objc.RegisterName("interfaceName")
-	_aVB1722ControlInterfaceSelInterface = objc.RegisterName("interface")
+	_aVB1722ControlInterfaceSelInitWithInterface     = objc.RegisterName("initWithInterface:")
+	_aVB1722ControlInterfaceSelInterfaceName         = objc.RegisterName("interfaceName")
+	_aVB1722ControlInterfaceSelInterface             = objc.RegisterName("interface")
 )
 
 func AVB1722ControlInterfaceFromID(id objc.ID) *AVB1722ControlInterface {
@@ -36,27 +36,34 @@ func AVB1722ControlInterfaceFromID(id objc.ID) *AVB1722ControlInterface {
 // @method		initWithInterfaceName: @abstract	Initializes the receiver to work with a 1722 control service on the specified interface. The client must have previously be requested to load on the interface. @param		anInterfaceName	The BSD name of the interface on which to create the object. @result		The initialized receiver.
 func (o *AVB1722ControlInterface) InitWithInterfaceName(anInterfaceName *foundation.NSString) *AVB1722ControlInterface {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVB1722ControlInterfaceSelInitWithInterfaceName, anInterfaceName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVB1722ControlInterfaceFromID(_ret)
 }
 
 // @method		initWithInterface: @abstract	Initializes the receiver to work with a 1722 control service on the specified interface. The client must have previously be requested to load on the interface. @param		anInterface	The AVBInterface object of the interface on which to create the object. @result		The initialized receiver.
 func (o *AVB1722ControlInterface) InitWithInterface(anInterface *AVBInterface) *AVB1722ControlInterface {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVB1722ControlInterfaceSelInitWithInterface, anInterface.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVB1722ControlInterfaceFromID(_ret)
 }
 
 func (o *AVB1722ControlInterface) InterfaceName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVB1722ControlInterfaceSelInterfaceName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property	interface @abstract	The AVBInterface object which owns this object. This may be nil if it was not created by an instance of AVBInterface
 func (o *AVB1722ControlInterface) Interface() *AVBInterface {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVB1722ControlInterfaceSelInterface)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVBInterfaceFromID(_ret)
 }
-

@@ -16,19 +16,19 @@ type AXNumericDataAxisDescriptor struct {
 }
 
 var (
-	_clsAXNumericDataAxisDescriptor = _objcClass("AXNumericDataAxisDescriptor")
-	_aXNumericDataAxisDescriptorSelInitWithTitleLowerBoundUpperBoundGridlinePositionsValueDescriptionProvider = objc.RegisterName("initWithTitle:lowerBound:upperBound:gridlinePositions:valueDescriptionProvider:")
+	_clsAXNumericDataAxisDescriptor                                                                                     = _objcClass("AXNumericDataAxisDescriptor")
+	_aXNumericDataAxisDescriptorSelInitWithTitleLowerBoundUpperBoundGridlinePositionsValueDescriptionProvider           = objc.RegisterName("initWithTitle:lowerBound:upperBound:gridlinePositions:valueDescriptionProvider:")
 	_aXNumericDataAxisDescriptorSelInitWithAttributedTitleLowerBoundUpperBoundGridlinePositionsValueDescriptionProvider = objc.RegisterName("initWithAttributedTitle:lowerBound:upperBound:gridlinePositions:valueDescriptionProvider:")
-	_aXNumericDataAxisDescriptorSelScaleType = objc.RegisterName("scaleType")
-	_aXNumericDataAxisDescriptorSelSetScaleType = objc.RegisterName("setScaleType:")
-	_aXNumericDataAxisDescriptorSelLowerBound = objc.RegisterName("lowerBound")
-	_aXNumericDataAxisDescriptorSelSetLowerBound = objc.RegisterName("setLowerBound:")
-	_aXNumericDataAxisDescriptorSelUpperBound = objc.RegisterName("upperBound")
-	_aXNumericDataAxisDescriptorSelSetUpperBound = objc.RegisterName("setUpperBound:")
-	_aXNumericDataAxisDescriptorSelValueDescriptionProvider = objc.RegisterName("valueDescriptionProvider")
-	_aXNumericDataAxisDescriptorSelSetValueDescriptionProvider = objc.RegisterName("setValueDescriptionProvider:")
-	_aXNumericDataAxisDescriptorSelGridlinePositions = objc.RegisterName("gridlinePositions")
-	_aXNumericDataAxisDescriptorSelSetGridlinePositions = objc.RegisterName("setGridlinePositions:")
+	_aXNumericDataAxisDescriptorSelScaleType                                                                            = objc.RegisterName("scaleType")
+	_aXNumericDataAxisDescriptorSelSetScaleType                                                                         = objc.RegisterName("setScaleType:")
+	_aXNumericDataAxisDescriptorSelLowerBound                                                                           = objc.RegisterName("lowerBound")
+	_aXNumericDataAxisDescriptorSelSetLowerBound                                                                        = objc.RegisterName("setLowerBound:")
+	_aXNumericDataAxisDescriptorSelUpperBound                                                                           = objc.RegisterName("upperBound")
+	_aXNumericDataAxisDescriptorSelSetUpperBound                                                                        = objc.RegisterName("setUpperBound:")
+	_aXNumericDataAxisDescriptorSelValueDescriptionProvider                                                             = objc.RegisterName("valueDescriptionProvider")
+	_aXNumericDataAxisDescriptorSelSetValueDescriptionProvider                                                          = objc.RegisterName("setValueDescriptionProvider:")
+	_aXNumericDataAxisDescriptorSelGridlinePositions                                                                    = objc.RegisterName("gridlinePositions")
+	_aXNumericDataAxisDescriptorSelSetGridlinePositions                                                                 = objc.RegisterName("setGridlinePositions:")
 )
 
 func AXNumericDataAxisDescriptorFromID(id objc.ID) *AXNumericDataAxisDescriptor {
@@ -43,13 +43,17 @@ func AXNumericDataAxisDescriptorFromID(id objc.ID) *AXNumericDataAxisDescriptor 
 
 func (o *AXNumericDataAxisDescriptor) InitWithTitleLowerBoundUpperBoundGridlinePositionsValueDescriptionProvider(title *foundation.NSString, lowerbound float64, upperBound float64, gridlinePositions *foundation.NSArray[*foundation.NSNumber], valueDescriptionProvider objc.Block) *AXNumericDataAxisDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXNumericDataAxisDescriptorSelInitWithTitleLowerBoundUpperBoundGridlinePositionsValueDescriptionProvider, title.Ptr(), lowerbound, upperBound, gridlinePositions, valueDescriptionProvider)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXNumericDataAxisDescriptorFromID(_ret)
 }
 
 func (o *AXNumericDataAxisDescriptor) InitWithAttributedTitleLowerBoundUpperBoundGridlinePositionsValueDescriptionProvider(attributedTitle *foundation.NSAttributedString, lowerbound float64, upperBound float64, gridlinePositions *foundation.NSArray[*foundation.NSNumber], valueDescriptionProvider objc.Block) *AXNumericDataAxisDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXNumericDataAxisDescriptorSelInitWithAttributedTitleLowerBoundUpperBoundGridlinePositionsValueDescriptionProvider, attributedTitle.Ptr(), lowerbound, upperBound, gridlinePositions, valueDescriptionProvider)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXNumericDataAxisDescriptorFromID(_ret)
 }
 
@@ -102,4 +106,3 @@ func (o *AXNumericDataAxisDescriptor) GridlinePositions() *foundation.NSArray[*f
 func (o *AXNumericDataAxisDescriptor) SetGridlinePositions(gridlinePositions *foundation.NSArray[*foundation.NSNumber]) {
 	o.Ptr().Send(_aXNumericDataAxisDescriptorSelSetGridlinePositions, gridlinePositions)
 }
-

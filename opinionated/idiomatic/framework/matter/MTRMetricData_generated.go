@@ -60,4 +60,3 @@ type MTRMetricDataable interface {
 }
 
 var _ MTRMetricDataable = (*MTRMetricData)(nil)
-

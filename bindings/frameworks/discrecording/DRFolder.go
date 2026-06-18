@@ -18,16 +18,16 @@ type DRFolder struct {
 }
 
 var (
-	_clsDRFolder = _objcClass("DRFolder")
-	_dRFolderSelFolderWithPath = objc.RegisterName("folderWithPath:")
-	_dRFolderSelInitWithPath = objc.RegisterName("initWithPath:")
+	_clsDRFolder                      = _objcClass("DRFolder")
+	_dRFolderSelFolderWithPath        = objc.RegisterName("folderWithPath:")
+	_dRFolderSelInitWithPath          = objc.RegisterName("initWithPath:")
 	_dRFolderSelVirtualFolderWithName = objc.RegisterName("virtualFolderWithName:")
-	_dRFolderSelInitWithName = objc.RegisterName("initWithName:")
-	_dRFolderSelMakeVirtual = objc.RegisterName("makeVirtual")
-	_dRFolderSelAddChild = objc.RegisterName("addChild:")
-	_dRFolderSelRemoveChild = objc.RegisterName("removeChild:")
-	_dRFolderSelCount = objc.RegisterName("count")
-	_dRFolderSelChildren = objc.RegisterName("children")
+	_dRFolderSelInitWithName          = objc.RegisterName("initWithName:")
+	_dRFolderSelMakeVirtual           = objc.RegisterName("makeVirtual")
+	_dRFolderSelAddChild              = objc.RegisterName("addChild:")
+	_dRFolderSelRemoveChild           = objc.RegisterName("removeChild:")
+	_dRFolderSelCount                 = objc.RegisterName("count")
+	_dRFolderSelChildren              = objc.RegisterName("children")
 )
 
 func DRFolderFromID(id objc.ID) *DRFolder {
@@ -43,7 +43,9 @@ func DRFolderFromID(id objc.ID) *DRFolder {
 // @method 		folderWithPath: @abstract		Creates a real folder object @discussion		Creates and initializes a DRFolder object that will use the folder contents of the folder located at path as a source. @param 			path	The path to an existing file. @result  		An autoreleased DRFolder object.
 func DRFolderFolderWithPath(path *foundation.NSString) *DRFolder {
 	_ret := objc.Send[objc.ID](objc.ID(_clsDRFolder), _dRFolderSelFolderWithPath, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DRFolderFromID(_ret)
 }
 
@@ -56,7 +58,9 @@ func (o *DRFolder) InitWithPath(path *foundation.NSString) objc.ID {
 // @method 		virtualFolderWithName: @abstract		Creates a virtual folder object @discussion		Creates and initializes a DRFolder object that will be populated with specified @link //apple_ref/occ/cl/DRFile DRFile @/link and DRFolder objects at runtime. @param 			name	The name of the folder on the output disc. @result  		An autoreleased DRFolder object.
 func DRFolderVirtualFolderWithName(name *foundation.NSString) *DRFolder {
 	_ret := objc.Send[objc.ID](objc.ID(_clsDRFolder), _dRFolderSelVirtualFolderWithName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DRFolderFromID(_ret)
 }
 
@@ -92,4 +96,3 @@ func (o *DRFolder) Children() *foundation.NSArray[objc.ID] {
 	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _dRFolderSelChildren)
 	return _ret
 }
-

@@ -55,4 +55,3 @@ type AssetTrackGroupable interface {
 }
 
 var _ AssetTrackGroupable = (*AssetTrackGroup)(nil)
-

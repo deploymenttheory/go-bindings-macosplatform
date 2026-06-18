@@ -16,7 +16,9 @@ type PhysicalInputElementCollection struct {
 }
 
 // Unwrap returns the underlying [raw.GCPhysicalInputElementCollection].
-func (x *PhysicalInputElementCollection) Unwrap() *raw.GCPhysicalInputElementCollection[objc.ID, objc.ID] { return x.inner }
+func (x *PhysicalInputElementCollection) Unwrap() *raw.GCPhysicalInputElementCollection[objc.ID, objc.ID] {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -66,4 +68,3 @@ type PhysicalInputElementCollectionable interface {
 }
 
 var _ PhysicalInputElementCollectionable = (*PhysicalInputElementCollection)(nil)
-

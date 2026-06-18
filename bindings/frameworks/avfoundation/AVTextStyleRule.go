@@ -16,15 +16,15 @@ type AVTextStyleRule struct {
 }
 
 var (
-	_clsAVTextStyleRule = _objcClass("AVTextStyleRule")
-	_aVTextStyleRuleSelPropertyListForTextStyleRules = objc.RegisterName("propertyListForTextStyleRules:")
-	_aVTextStyleRuleSelTextStyleRulesFromPropertyList = objc.RegisterName("textStyleRulesFromPropertyList:")
-	_aVTextStyleRuleSelTextStyleRuleWithTextMarkupAttributes = objc.RegisterName("textStyleRuleWithTextMarkupAttributes:")
+	_clsAVTextStyleRule                                                  = _objcClass("AVTextStyleRule")
+	_aVTextStyleRuleSelPropertyListForTextStyleRules                     = objc.RegisterName("propertyListForTextStyleRules:")
+	_aVTextStyleRuleSelTextStyleRulesFromPropertyList                    = objc.RegisterName("textStyleRulesFromPropertyList:")
+	_aVTextStyleRuleSelTextStyleRuleWithTextMarkupAttributes             = objc.RegisterName("textStyleRuleWithTextMarkupAttributes:")
 	_aVTextStyleRuleSelTextStyleRuleWithTextMarkupAttributesTextSelector = objc.RegisterName("textStyleRuleWithTextMarkupAttributes:textSelector:")
-	_aVTextStyleRuleSelInitWithTextMarkupAttributes = objc.RegisterName("initWithTextMarkupAttributes:")
-	_aVTextStyleRuleSelInitWithTextMarkupAttributesTextSelector = objc.RegisterName("initWithTextMarkupAttributes:textSelector:")
-	_aVTextStyleRuleSelTextMarkupAttributes = objc.RegisterName("textMarkupAttributes")
-	_aVTextStyleRuleSelTextSelector = objc.RegisterName("textSelector")
+	_aVTextStyleRuleSelInitWithTextMarkupAttributes                      = objc.RegisterName("initWithTextMarkupAttributes:")
+	_aVTextStyleRuleSelInitWithTextMarkupAttributesTextSelector          = objc.RegisterName("initWithTextMarkupAttributes:textSelector:")
+	_aVTextStyleRuleSelTextMarkupAttributes                              = objc.RegisterName("textMarkupAttributes")
+	_aVTextStyleRuleSelTextSelector                                      = objc.RegisterName("textSelector")
 )
 
 func AVTextStyleRuleFromID(id objc.ID) *AVTextStyleRule {
@@ -46,35 +46,45 @@ func AVTextStyleRulePropertyListForTextStyleRules(textStyleRules *foundation.NSA
 // @method		textStyleRulesFromPropertyList: @abstract		Converts a property list into an NSArray of AVTextStyleRules. @param			plist A property list, normally obtained previously via an invocation of +propertyListForTextStyleRules:. @result		An NSArray of AVTextStyleRules
 func AVTextStyleRuleTextStyleRulesFromPropertyList(plist objc.ID) *foundation.NSArray[*AVTextStyleRule] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVTextStyleRule), _aVTextStyleRuleSelTextStyleRulesFromPropertyList, plist)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVTextStyleRule](_ret)
 }
 
 // @method		textStyleRuleWithTextMarkupAttributes: @abstract		Creates an instance of AVTextStyleRule with the specified text markup attributes. @param			textMarkupAttributes An NSDictionary with keys representing text style attributes that are specifiable in text markup. Eligible keys are defined in <CoreMedia/CMTextMarkup.h>. @result		An instance of AVTextStyleRule @discussion	Equivalent to invoking +textStyleRuleWithTextMarkupAttributes:textSelector: with a value of nil for textSelector.
 func AVTextStyleRuleTextStyleRuleWithTextMarkupAttributes(textMarkupAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVTextStyleRule {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVTextStyleRule), _aVTextStyleRuleSelTextStyleRuleWithTextMarkupAttributes, textMarkupAttributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVTextStyleRuleFromID(_ret)
 }
 
 // @method		textStyleRuleWithTextMarkupAttributes:textSelector: @abstract		Creates an instance of AVTextStyleRule with the specified text markup attributes and an identifier for the range or ranges of text to which the attributes should be applied. @param			textMarkupAttributes An NSDictionary with keys representing text style attributes that are specifiable in text markup. Eligible keys are defined in <CoreMedia/CMTextMarkup.h>. @param			textSelector An identifier for the range or ranges of text to which the attributes should be applied. Eligible identifiers are determined by the format and content of the legible media. A value of nil indicates that the textMarkupAttributes should be applied as default styles for all text unless overridden by content markup or other applicable text selectors. @result		An instance of AVTextStyleRule
 func AVTextStyleRuleTextStyleRuleWithTextMarkupAttributesTextSelector(textMarkupAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID], textSelector *foundation.NSString) *AVTextStyleRule {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVTextStyleRule), _aVTextStyleRuleSelTextStyleRuleWithTextMarkupAttributesTextSelector, textMarkupAttributes, textSelector.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVTextStyleRuleFromID(_ret)
 }
 
 // @method		initWithTextMarkupAttributes: @abstract		Creates an instance of AVTextStyleRule with the specified text markup attributes. @param			textMarkupAttributes An NSDictionary with keys representing text style attributes that are specifiable in text markup. Eligible keys are defined in <CoreMedia/CMTextMarkup.h>. @result		An instance of AVTextStyleRule @discussion	Equivalent to invoking -initWithTextMarkupAttributes:textSelector: with a value of nil for textSelector.
 func (o *AVTextStyleRule) InitWithTextMarkupAttributes(textMarkupAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVTextStyleRule {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVTextStyleRuleSelInitWithTextMarkupAttributes, textMarkupAttributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVTextStyleRuleFromID(_ret)
 }
 
 // @method		initWithTextMarkupAttributes:textSelector: @abstract		Creates an instance of AVTextStyleRule with the specified text markup attributes and an identifier for the range or ranges of text to which the attributes should be applied. @param			textMarkupAttributes An NSDictionary with keys representing text style attributes that are specifiable in text markup. Eligible keys are defined in <CoreMedia/CMTextMarkup.h>. @param			textSelector An identifier for the range or ranges of text to which the attributes should be applied. Eligible identifiers are determined by the format and content of the legible media. A value of nil indicates that the textMarkupAttributes should be applied as default styles for all text unless overridden by content markup or other applicable text selectors. @result		An instance of AVTextStyleRule
 func (o *AVTextStyleRule) InitWithTextMarkupAttributesTextSelector(textMarkupAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID], textSelector *foundation.NSString) *AVTextStyleRule {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVTextStyleRuleSelInitWithTextMarkupAttributesTextSelector, textMarkupAttributes, textSelector.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVTextStyleRuleFromID(_ret)
 }
 
@@ -87,7 +97,8 @@ func (o *AVTextStyleRule) TextMarkupAttributes() *foundation.NSDictionary[*found
 // @property		textSelector @abstract		A string that identifies the range or ranges of text to which the attributes should be applied. A value of nil indicates that the textMarkupAttributes should be applied as default styles for all text unless overridden by content markup or other applicable text selectors. @dicussion		The syntax of text selectors is determined by the format of the legible media. Eligible selectors may be determined by the content of the legible media (e.g. CSS selectors that are valid for a specific WebVTT document).
 func (o *AVTextStyleRule) TextSelector() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVTextStyleRuleSelTextSelector)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

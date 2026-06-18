@@ -18,12 +18,12 @@ type CHHapticParameterCurve struct {
 }
 
 var (
-	_clsCHHapticParameterCurve = _objcClass("CHHapticParameterCurve")
+	_clsCHHapticParameterCurve                                             = _objcClass("CHHapticParameterCurve")
 	_cHHapticParameterCurveSelInitWithParameterIDControlPointsRelativeTime = objc.RegisterName("initWithParameterID:controlPoints:relativeTime:")
-	_cHHapticParameterCurveSelParameterID = objc.RegisterName("parameterID")
-	_cHHapticParameterCurveSelRelativeTime = objc.RegisterName("relativeTime")
-	_cHHapticParameterCurveSelSetRelativeTime = objc.RegisterName("setRelativeTime:")
-	_cHHapticParameterCurveSelControlPoints = objc.RegisterName("controlPoints")
+	_cHHapticParameterCurveSelParameterID                                  = objc.RegisterName("parameterID")
+	_cHHapticParameterCurveSelRelativeTime                                 = objc.RegisterName("relativeTime")
+	_cHHapticParameterCurveSelSetRelativeTime                              = objc.RegisterName("setRelativeTime:")
+	_cHHapticParameterCurveSelControlPoints                                = objc.RegisterName("controlPoints")
 )
 
 func CHHapticParameterCurveFromID(id objc.ID) *CHHapticParameterCurve {
@@ -39,13 +39,17 @@ func CHHapticParameterCurveFromID(id objc.ID) *CHHapticParameterCurve {
 // @method initWithParameterID:controlPoints:relativeTime @abstract Initialize a CHHapticParameterCurve with a parameter ID, time, and an array of CHHapticParameterCurveControlPoint. @param parameterID The CHHapticDynamicParameterID for the desired parameter. @param controlPoints An array of CHHapticParameterCurveControlPoints. @param relativeTime The time at which this parameter curve should start, relative to the start time of the CHHapticPattern to which this parameter curve belongs.
 func (o *CHHapticParameterCurve) InitWithParameterIDControlPointsRelativeTime(parameterID *foundation.NSString, controlPoints *foundation.NSArray[*CHHapticParameterCurveControlPoint], relativeTime float64) *CHHapticParameterCurve {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticParameterCurveSelInitWithParameterIDControlPointsRelativeTime, parameterID.Ptr(), controlPoints.Ptr(), relativeTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CHHapticParameterCurveFromID(_ret)
 }
 
 func (o *CHHapticParameterCurve) ParameterID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticParameterCurveSelParameterID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -60,7 +64,8 @@ func (o *CHHapticParameterCurve) SetRelativeTime(relativeTime float64) {
 
 func (o *CHHapticParameterCurve) ControlPoints() *foundation.NSArray[*CHHapticParameterCurveControlPoint] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticParameterCurveSelControlPoints)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CHHapticParameterCurveControlPoint](_ret)
 }
-

@@ -191,4 +191,3 @@ type ButtonTouchBarItemable interface {
 }
 
 var _ ButtonTouchBarItemable = (*ButtonTouchBarItem)(nil)
-

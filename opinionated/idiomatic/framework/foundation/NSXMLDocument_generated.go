@@ -327,4 +327,3 @@ type XMLDocumentable interface {
 }
 
 var _ XMLDocumentable = (*XMLDocument)(nil)
-

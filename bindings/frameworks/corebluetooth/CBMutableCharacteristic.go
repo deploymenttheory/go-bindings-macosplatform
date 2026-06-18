@@ -16,14 +16,14 @@ type CBMutableCharacteristic struct {
 }
 
 var (
-	_clsCBMutableCharacteristic = _objcClass("CBMutableCharacteristic")
+	_clsCBMutableCharacteristic                                       = _objcClass("CBMutableCharacteristic")
 	_cBMutableCharacteristicSelInitWithTypePropertiesValuePermissions = objc.RegisterName("initWithType:properties:value:permissions:")
-	_cBMutableCharacteristicSelPermissions = objc.RegisterName("permissions")
-	_cBMutableCharacteristicSelSetPermissions = objc.RegisterName("setPermissions:")
-	_cBMutableCharacteristicSelSubscribedCentrals = objc.RegisterName("subscribedCentrals")
-	_cBMutableCharacteristicSelSetProperties = objc.RegisterName("setProperties:")
-	_cBMutableCharacteristicSelSetValue = objc.RegisterName("setValue:")
-	_cBMutableCharacteristicSelSetDescriptors = objc.RegisterName("setDescriptors:")
+	_cBMutableCharacteristicSelPermissions                            = objc.RegisterName("permissions")
+	_cBMutableCharacteristicSelSetPermissions                         = objc.RegisterName("setPermissions:")
+	_cBMutableCharacteristicSelSubscribedCentrals                     = objc.RegisterName("subscribedCentrals")
+	_cBMutableCharacteristicSelSetProperties                          = objc.RegisterName("setProperties:")
+	_cBMutableCharacteristicSelSetValue                               = objc.RegisterName("setValue:")
+	_cBMutableCharacteristicSelSetDescriptors                         = objc.RegisterName("setDescriptors:")
 )
 
 func CBMutableCharacteristicFromID(id objc.ID) *CBMutableCharacteristic {
@@ -39,7 +39,9 @@ func CBMutableCharacteristicFromID(id objc.ID) *CBMutableCharacteristic {
 // @method initWithType:properties:value:permissions @param UUID			The Bluetooth UUID of the characteristic. @param properties	The properties of the characteristic. @param value		The characteristic value to be cached. If <i>nil</i>, the value will be dynamic and requested on-demand. @param permissions	The permissions of the characteristic value. @discussion			Returns an initialized characteristic.
 func (o *CBMutableCharacteristic) InitWithTypePropertiesValuePermissions(uUID *CBUUID, properties CBCharacteristicProperties, value *foundation.NSData, permissions CBAttributePermissions) *CBMutableCharacteristic {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBMutableCharacteristicSelInitWithTypePropertiesValuePermissions, uUID.Ptr(), properties, value.Ptr(), permissions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CBMutableCharacteristicFromID(_ret)
 }
 
@@ -56,7 +58,9 @@ func (o *CBMutableCharacteristic) SetPermissions(permissions CBAttributePermissi
 // @property subscribedCentrals @discussion For notifying characteristics, the set of currently subscribed centrals.
 func (o *CBMutableCharacteristic) SubscribedCentrals() *foundation.NSArray[*CBCentral] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBMutableCharacteristicSelSubscribedCentrals)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CBCentral](_ret)
 }
 
@@ -71,4 +75,3 @@ func (o *CBMutableCharacteristic) SetValue(value *foundation.NSData) {
 func (o *CBMutableCharacteristic) SetDescriptors(descriptors *foundation.NSArray[*CBDescriptor]) {
 	o.Ptr().Send(_cBMutableCharacteristicSelSetDescriptors, descriptors.Ptr())
 }
-

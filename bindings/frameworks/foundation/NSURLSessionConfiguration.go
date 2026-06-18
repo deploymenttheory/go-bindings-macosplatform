@@ -16,74 +16,74 @@ type NSURLSessionConfiguration struct {
 }
 
 var (
-	_clsNSURLSessionConfiguration = _objcClass("NSURLSessionConfiguration")
+	_clsNSURLSessionConfiguration                                             = _objcClass("NSURLSessionConfiguration")
 	_nSURLSessionConfigurationSelBackgroundSessionConfigurationWithIdentifier = objc.RegisterName("backgroundSessionConfigurationWithIdentifier:")
-	_nSURLSessionConfigurationSelInit = objc.RegisterName("init")
-	_nSURLSessionConfigurationSelNew = objc.RegisterName("new")
-	_nSURLSessionConfigurationSelDefaultSessionConfiguration = objc.RegisterName("defaultSessionConfiguration")
-	_nSURLSessionConfigurationSelEphemeralSessionConfiguration = objc.RegisterName("ephemeralSessionConfiguration")
-	_nSURLSessionConfigurationSelIdentifier = objc.RegisterName("identifier")
-	_nSURLSessionConfigurationSelRequestCachePolicy = objc.RegisterName("requestCachePolicy")
-	_nSURLSessionConfigurationSelSetRequestCachePolicy = objc.RegisterName("setRequestCachePolicy:")
-	_nSURLSessionConfigurationSelTimeoutIntervalForRequest = objc.RegisterName("timeoutIntervalForRequest")
-	_nSURLSessionConfigurationSelSetTimeoutIntervalForRequest = objc.RegisterName("setTimeoutIntervalForRequest:")
-	_nSURLSessionConfigurationSelTimeoutIntervalForResource = objc.RegisterName("timeoutIntervalForResource")
-	_nSURLSessionConfigurationSelSetTimeoutIntervalForResource = objc.RegisterName("setTimeoutIntervalForResource:")
-	_nSURLSessionConfigurationSelNetworkServiceType = objc.RegisterName("networkServiceType")
-	_nSURLSessionConfigurationSelSetNetworkServiceType = objc.RegisterName("setNetworkServiceType:")
-	_nSURLSessionConfigurationSelAllowsCellularAccess = objc.RegisterName("allowsCellularAccess")
-	_nSURLSessionConfigurationSelSetAllowsCellularAccess = objc.RegisterName("setAllowsCellularAccess:")
-	_nSURLSessionConfigurationSelAllowsExpensiveNetworkAccess = objc.RegisterName("allowsExpensiveNetworkAccess")
-	_nSURLSessionConfigurationSelSetAllowsExpensiveNetworkAccess = objc.RegisterName("setAllowsExpensiveNetworkAccess:")
-	_nSURLSessionConfigurationSelAllowsConstrainedNetworkAccess = objc.RegisterName("allowsConstrainedNetworkAccess")
-	_nSURLSessionConfigurationSelSetAllowsConstrainedNetworkAccess = objc.RegisterName("setAllowsConstrainedNetworkAccess:")
-	_nSURLSessionConfigurationSelAllowsUltraConstrainedNetworkAccess = objc.RegisterName("allowsUltraConstrainedNetworkAccess")
-	_nSURLSessionConfigurationSelSetAllowsUltraConstrainedNetworkAccess = objc.RegisterName("setAllowsUltraConstrainedNetworkAccess:")
-	_nSURLSessionConfigurationSelRequiresDNSSECValidation = objc.RegisterName("requiresDNSSECValidation")
-	_nSURLSessionConfigurationSelSetRequiresDNSSECValidation = objc.RegisterName("setRequiresDNSSECValidation:")
-	_nSURLSessionConfigurationSelWaitsForConnectivity = objc.RegisterName("waitsForConnectivity")
-	_nSURLSessionConfigurationSelSetWaitsForConnectivity = objc.RegisterName("setWaitsForConnectivity:")
-	_nSURLSessionConfigurationSelIsDiscretionary = objc.RegisterName("isDiscretionary")
-	_nSURLSessionConfigurationSelSetDiscretionary = objc.RegisterName("setDiscretionary:")
-	_nSURLSessionConfigurationSelSharedContainerIdentifier = objc.RegisterName("sharedContainerIdentifier")
-	_nSURLSessionConfigurationSelSetSharedContainerIdentifier = objc.RegisterName("setSharedContainerIdentifier:")
-	_nSURLSessionConfigurationSelSessionSendsLaunchEvents = objc.RegisterName("sessionSendsLaunchEvents")
-	_nSURLSessionConfigurationSelSetSessionSendsLaunchEvents = objc.RegisterName("setSessionSendsLaunchEvents:")
-	_nSURLSessionConfigurationSelConnectionProxyDictionary = objc.RegisterName("connectionProxyDictionary")
-	_nSURLSessionConfigurationSelSetConnectionProxyDictionary = objc.RegisterName("setConnectionProxyDictionary:")
-	_nSURLSessionConfigurationSelTLSMinimumSupportedProtocol = objc.RegisterName("TLSMinimumSupportedProtocol")
-	_nSURLSessionConfigurationSelSetTLSMinimumSupportedProtocol = objc.RegisterName("setTLSMinimumSupportedProtocol:")
-	_nSURLSessionConfigurationSelTLSMaximumSupportedProtocol = objc.RegisterName("TLSMaximumSupportedProtocol")
-	_nSURLSessionConfigurationSelSetTLSMaximumSupportedProtocol = objc.RegisterName("setTLSMaximumSupportedProtocol:")
-	_nSURLSessionConfigurationSelTLSMinimumSupportedProtocolVersion = objc.RegisterName("TLSMinimumSupportedProtocolVersion")
-	_nSURLSessionConfigurationSelSetTLSMinimumSupportedProtocolVersion = objc.RegisterName("setTLSMinimumSupportedProtocolVersion:")
-	_nSURLSessionConfigurationSelTLSMaximumSupportedProtocolVersion = objc.RegisterName("TLSMaximumSupportedProtocolVersion")
-	_nSURLSessionConfigurationSelSetTLSMaximumSupportedProtocolVersion = objc.RegisterName("setTLSMaximumSupportedProtocolVersion:")
-	_nSURLSessionConfigurationSelHTTPShouldUsePipelining = objc.RegisterName("HTTPShouldUsePipelining")
-	_nSURLSessionConfigurationSelSetHTTPShouldUsePipelining = objc.RegisterName("setHTTPShouldUsePipelining:")
-	_nSURLSessionConfigurationSelHTTPShouldSetCookies = objc.RegisterName("HTTPShouldSetCookies")
-	_nSURLSessionConfigurationSelSetHTTPShouldSetCookies = objc.RegisterName("setHTTPShouldSetCookies:")
-	_nSURLSessionConfigurationSelHTTPCookieAcceptPolicy = objc.RegisterName("HTTPCookieAcceptPolicy")
-	_nSURLSessionConfigurationSelSetHTTPCookieAcceptPolicy = objc.RegisterName("setHTTPCookieAcceptPolicy:")
-	_nSURLSessionConfigurationSelHTTPAdditionalHeaders = objc.RegisterName("HTTPAdditionalHeaders")
-	_nSURLSessionConfigurationSelSetHTTPAdditionalHeaders = objc.RegisterName("setHTTPAdditionalHeaders:")
-	_nSURLSessionConfigurationSelHTTPMaximumConnectionsPerHost = objc.RegisterName("HTTPMaximumConnectionsPerHost")
-	_nSURLSessionConfigurationSelSetHTTPMaximumConnectionsPerHost = objc.RegisterName("setHTTPMaximumConnectionsPerHost:")
-	_nSURLSessionConfigurationSelHTTPCookieStorage = objc.RegisterName("HTTPCookieStorage")
-	_nSURLSessionConfigurationSelSetHTTPCookieStorage = objc.RegisterName("setHTTPCookieStorage:")
-	_nSURLSessionConfigurationSelURLCredentialStorage = objc.RegisterName("URLCredentialStorage")
-	_nSURLSessionConfigurationSelSetURLCredentialStorage = objc.RegisterName("setURLCredentialStorage:")
-	_nSURLSessionConfigurationSelURLCache = objc.RegisterName("URLCache")
-	_nSURLSessionConfigurationSelSetURLCache = objc.RegisterName("setURLCache:")
-	_nSURLSessionConfigurationSelShouldUseExtendedBackgroundIdleMode = objc.RegisterName("shouldUseExtendedBackgroundIdleMode")
-	_nSURLSessionConfigurationSelSetShouldUseExtendedBackgroundIdleMode = objc.RegisterName("setShouldUseExtendedBackgroundIdleMode:")
-	_nSURLSessionConfigurationSelProtocolClasses = objc.RegisterName("protocolClasses")
-	_nSURLSessionConfigurationSelSetProtocolClasses = objc.RegisterName("setProtocolClasses:")
-	_nSURLSessionConfigurationSelUsesClassicLoadingMode = objc.RegisterName("usesClassicLoadingMode")
-	_nSURLSessionConfigurationSelSetUsesClassicLoadingMode = objc.RegisterName("setUsesClassicLoadingMode:")
-	_nSURLSessionConfigurationSelEnablesEarlyData = objc.RegisterName("enablesEarlyData")
-	_nSURLSessionConfigurationSelSetEnablesEarlyData = objc.RegisterName("setEnablesEarlyData:")
-	_nSURLSessionConfigurationSelBackgroundSessionConfiguration = objc.RegisterName("backgroundSessionConfiguration:")
+	_nSURLSessionConfigurationSelInit                                         = objc.RegisterName("init")
+	_nSURLSessionConfigurationSelNew                                          = objc.RegisterName("new")
+	_nSURLSessionConfigurationSelDefaultSessionConfiguration                  = objc.RegisterName("defaultSessionConfiguration")
+	_nSURLSessionConfigurationSelEphemeralSessionConfiguration                = objc.RegisterName("ephemeralSessionConfiguration")
+	_nSURLSessionConfigurationSelIdentifier                                   = objc.RegisterName("identifier")
+	_nSURLSessionConfigurationSelRequestCachePolicy                           = objc.RegisterName("requestCachePolicy")
+	_nSURLSessionConfigurationSelSetRequestCachePolicy                        = objc.RegisterName("setRequestCachePolicy:")
+	_nSURLSessionConfigurationSelTimeoutIntervalForRequest                    = objc.RegisterName("timeoutIntervalForRequest")
+	_nSURLSessionConfigurationSelSetTimeoutIntervalForRequest                 = objc.RegisterName("setTimeoutIntervalForRequest:")
+	_nSURLSessionConfigurationSelTimeoutIntervalForResource                   = objc.RegisterName("timeoutIntervalForResource")
+	_nSURLSessionConfigurationSelSetTimeoutIntervalForResource                = objc.RegisterName("setTimeoutIntervalForResource:")
+	_nSURLSessionConfigurationSelNetworkServiceType                           = objc.RegisterName("networkServiceType")
+	_nSURLSessionConfigurationSelSetNetworkServiceType                        = objc.RegisterName("setNetworkServiceType:")
+	_nSURLSessionConfigurationSelAllowsCellularAccess                         = objc.RegisterName("allowsCellularAccess")
+	_nSURLSessionConfigurationSelSetAllowsCellularAccess                      = objc.RegisterName("setAllowsCellularAccess:")
+	_nSURLSessionConfigurationSelAllowsExpensiveNetworkAccess                 = objc.RegisterName("allowsExpensiveNetworkAccess")
+	_nSURLSessionConfigurationSelSetAllowsExpensiveNetworkAccess              = objc.RegisterName("setAllowsExpensiveNetworkAccess:")
+	_nSURLSessionConfigurationSelAllowsConstrainedNetworkAccess               = objc.RegisterName("allowsConstrainedNetworkAccess")
+	_nSURLSessionConfigurationSelSetAllowsConstrainedNetworkAccess            = objc.RegisterName("setAllowsConstrainedNetworkAccess:")
+	_nSURLSessionConfigurationSelAllowsUltraConstrainedNetworkAccess          = objc.RegisterName("allowsUltraConstrainedNetworkAccess")
+	_nSURLSessionConfigurationSelSetAllowsUltraConstrainedNetworkAccess       = objc.RegisterName("setAllowsUltraConstrainedNetworkAccess:")
+	_nSURLSessionConfigurationSelRequiresDNSSECValidation                     = objc.RegisterName("requiresDNSSECValidation")
+	_nSURLSessionConfigurationSelSetRequiresDNSSECValidation                  = objc.RegisterName("setRequiresDNSSECValidation:")
+	_nSURLSessionConfigurationSelWaitsForConnectivity                         = objc.RegisterName("waitsForConnectivity")
+	_nSURLSessionConfigurationSelSetWaitsForConnectivity                      = objc.RegisterName("setWaitsForConnectivity:")
+	_nSURLSessionConfigurationSelIsDiscretionary                              = objc.RegisterName("isDiscretionary")
+	_nSURLSessionConfigurationSelSetDiscretionary                             = objc.RegisterName("setDiscretionary:")
+	_nSURLSessionConfigurationSelSharedContainerIdentifier                    = objc.RegisterName("sharedContainerIdentifier")
+	_nSURLSessionConfigurationSelSetSharedContainerIdentifier                 = objc.RegisterName("setSharedContainerIdentifier:")
+	_nSURLSessionConfigurationSelSessionSendsLaunchEvents                     = objc.RegisterName("sessionSendsLaunchEvents")
+	_nSURLSessionConfigurationSelSetSessionSendsLaunchEvents                  = objc.RegisterName("setSessionSendsLaunchEvents:")
+	_nSURLSessionConfigurationSelConnectionProxyDictionary                    = objc.RegisterName("connectionProxyDictionary")
+	_nSURLSessionConfigurationSelSetConnectionProxyDictionary                 = objc.RegisterName("setConnectionProxyDictionary:")
+	_nSURLSessionConfigurationSelTLSMinimumSupportedProtocol                  = objc.RegisterName("TLSMinimumSupportedProtocol")
+	_nSURLSessionConfigurationSelSetTLSMinimumSupportedProtocol               = objc.RegisterName("setTLSMinimumSupportedProtocol:")
+	_nSURLSessionConfigurationSelTLSMaximumSupportedProtocol                  = objc.RegisterName("TLSMaximumSupportedProtocol")
+	_nSURLSessionConfigurationSelSetTLSMaximumSupportedProtocol               = objc.RegisterName("setTLSMaximumSupportedProtocol:")
+	_nSURLSessionConfigurationSelTLSMinimumSupportedProtocolVersion           = objc.RegisterName("TLSMinimumSupportedProtocolVersion")
+	_nSURLSessionConfigurationSelSetTLSMinimumSupportedProtocolVersion        = objc.RegisterName("setTLSMinimumSupportedProtocolVersion:")
+	_nSURLSessionConfigurationSelTLSMaximumSupportedProtocolVersion           = objc.RegisterName("TLSMaximumSupportedProtocolVersion")
+	_nSURLSessionConfigurationSelSetTLSMaximumSupportedProtocolVersion        = objc.RegisterName("setTLSMaximumSupportedProtocolVersion:")
+	_nSURLSessionConfigurationSelHTTPShouldUsePipelining                      = objc.RegisterName("HTTPShouldUsePipelining")
+	_nSURLSessionConfigurationSelSetHTTPShouldUsePipelining                   = objc.RegisterName("setHTTPShouldUsePipelining:")
+	_nSURLSessionConfigurationSelHTTPShouldSetCookies                         = objc.RegisterName("HTTPShouldSetCookies")
+	_nSURLSessionConfigurationSelSetHTTPShouldSetCookies                      = objc.RegisterName("setHTTPShouldSetCookies:")
+	_nSURLSessionConfigurationSelHTTPCookieAcceptPolicy                       = objc.RegisterName("HTTPCookieAcceptPolicy")
+	_nSURLSessionConfigurationSelSetHTTPCookieAcceptPolicy                    = objc.RegisterName("setHTTPCookieAcceptPolicy:")
+	_nSURLSessionConfigurationSelHTTPAdditionalHeaders                        = objc.RegisterName("HTTPAdditionalHeaders")
+	_nSURLSessionConfigurationSelSetHTTPAdditionalHeaders                     = objc.RegisterName("setHTTPAdditionalHeaders:")
+	_nSURLSessionConfigurationSelHTTPMaximumConnectionsPerHost                = objc.RegisterName("HTTPMaximumConnectionsPerHost")
+	_nSURLSessionConfigurationSelSetHTTPMaximumConnectionsPerHost             = objc.RegisterName("setHTTPMaximumConnectionsPerHost:")
+	_nSURLSessionConfigurationSelHTTPCookieStorage                            = objc.RegisterName("HTTPCookieStorage")
+	_nSURLSessionConfigurationSelSetHTTPCookieStorage                         = objc.RegisterName("setHTTPCookieStorage:")
+	_nSURLSessionConfigurationSelURLCredentialStorage                         = objc.RegisterName("URLCredentialStorage")
+	_nSURLSessionConfigurationSelSetURLCredentialStorage                      = objc.RegisterName("setURLCredentialStorage:")
+	_nSURLSessionConfigurationSelURLCache                                     = objc.RegisterName("URLCache")
+	_nSURLSessionConfigurationSelSetURLCache                                  = objc.RegisterName("setURLCache:")
+	_nSURLSessionConfigurationSelShouldUseExtendedBackgroundIdleMode          = objc.RegisterName("shouldUseExtendedBackgroundIdleMode")
+	_nSURLSessionConfigurationSelSetShouldUseExtendedBackgroundIdleMode       = objc.RegisterName("setShouldUseExtendedBackgroundIdleMode:")
+	_nSURLSessionConfigurationSelProtocolClasses                              = objc.RegisterName("protocolClasses")
+	_nSURLSessionConfigurationSelSetProtocolClasses                           = objc.RegisterName("setProtocolClasses:")
+	_nSURLSessionConfigurationSelUsesClassicLoadingMode                       = objc.RegisterName("usesClassicLoadingMode")
+	_nSURLSessionConfigurationSelSetUsesClassicLoadingMode                    = objc.RegisterName("setUsesClassicLoadingMode:")
+	_nSURLSessionConfigurationSelEnablesEarlyData                             = objc.RegisterName("enablesEarlyData")
+	_nSURLSessionConfigurationSelSetEnablesEarlyData                          = objc.RegisterName("setEnablesEarlyData:")
+	_nSURLSessionConfigurationSelBackgroundSessionConfiguration               = objc.RegisterName("backgroundSessionConfiguration:")
 )
 
 func NSURLSessionConfigurationFromID(id objc.ID) *NSURLSessionConfiguration {
@@ -98,14 +98,18 @@ func NSURLSessionConfigurationFromID(id objc.ID) *NSURLSessionConfiguration {
 
 func NSURLSessionConfigurationBackgroundSessionConfigurationWithIdentifier(identifier *NSString) *NSURLSessionConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLSessionConfiguration), _nSURLSessionConfigurationSelBackgroundSessionConfigurationWithIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionConfigurationFromID(_ret)
 }
 
 // Deprecated: Please use NSURLSessionConfiguration.defaultSessionConfiguration or other class methods to create instances
 func (o *NSURLSessionConfiguration) Init() *NSURLSessionConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionConfigurationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionConfigurationFromID(_ret)
 }
 
@@ -117,19 +121,25 @@ func NSURLSessionConfigurationNew() *NSURLSessionConfiguration {
 
 func NSURLSessionConfigurationDefaultSessionConfiguration() *NSURLSessionConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLSessionConfiguration), _nSURLSessionConfigurationSelDefaultSessionConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionConfigurationFromID(_ret)
 }
 
 func NSURLSessionConfigurationEphemeralSessionConfiguration() *NSURLSessionConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLSessionConfiguration), _nSURLSessionConfigurationSelEphemeralSessionConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionConfigurationFromID(_ret)
 }
 
 func (o *NSURLSessionConfiguration) Identifier() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionConfigurationSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -234,7 +244,9 @@ func (o *NSURLSessionConfiguration) SetDiscretionary(discretionary bool) {
 
 func (o *NSURLSessionConfiguration) SharedContainerIdentifier() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionConfigurationSelSharedContainerIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -350,7 +362,9 @@ func (o *NSURLSessionConfiguration) SetHTTPMaximumConnectionsPerHost(hTTPMaximum
 
 func (o *NSURLSessionConfiguration) HTTPCookieStorage() *NSHTTPCookieStorage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionConfigurationSelHTTPCookieStorage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSHTTPCookieStorageFromID(_ret)
 }
 
@@ -360,7 +374,9 @@ func (o *NSURLSessionConfiguration) SetHTTPCookieStorage(hTTPCookieStorage *NSHT
 
 func (o *NSURLSessionConfiguration) URLCredentialStorage() *NSURLCredentialStorage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionConfigurationSelURLCredentialStorage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLCredentialStorageFromID(_ret)
 }
 
@@ -370,7 +386,9 @@ func (o *NSURLSessionConfiguration) SetURLCredentialStorage(uRLCredentialStorage
 
 func (o *NSURLSessionConfiguration) URLCache() *NSURLCache {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionConfigurationSelURLCache)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLCacheFromID(_ret)
 }
 
@@ -419,7 +437,8 @@ func (o *NSURLSessionConfiguration) SetEnablesEarlyData(enablesEarlyData bool) {
 // Deprecated: since macOS 10.10.
 func NSURLSessionConfigurationBackgroundSessionConfiguration(identifier *NSString) *NSURLSessionConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLSessionConfiguration), _nSURLSessionConfigurationSelBackgroundSessionConfiguration, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionConfigurationFromID(_ret)
 }
-

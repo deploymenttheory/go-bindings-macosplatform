@@ -18,11 +18,15 @@ type MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeRespon
 }
 
 // Unwrap returns the underlying [raw.MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams].
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) Unwrap() *raw.MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams { return x.inner }
+func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) Unwrap() *raw.MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParamsFromID adopts an existing object pointer as a MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams (nil for 0).
 func MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParamsFromID(id objc.ID) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams {
@@ -91,4 +95,3 @@ type MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeRespon
 }
 
 var _ MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParamsable = (*MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams)(nil)
-

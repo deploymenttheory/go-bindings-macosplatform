@@ -18,30 +18,30 @@ type UTType struct {
 }
 
 var (
-	_clsUTType = _objcClass("UTType")
-	_uTTypeSelTypeWithIdentifier = objc.RegisterName("typeWithIdentifier:")
-	_uTTypeSelTypeWithFilenameExtension = objc.RegisterName("typeWithFilenameExtension:")
-	_uTTypeSelTypeWithFilenameExtensionConformingToType = objc.RegisterName("typeWithFilenameExtension:conformingToType:")
-	_uTTypeSelTypeWithMIMEType = objc.RegisterName("typeWithMIMEType:")
-	_uTTypeSelTypeWithMIMETypeConformingToType = objc.RegisterName("typeWithMIMEType:conformingToType:")
-	_uTTypeSelIdentifier = objc.RegisterName("identifier")
-	_uTTypeSelPreferredFilenameExtension = objc.RegisterName("preferredFilenameExtension")
-	_uTTypeSelPreferredMIMEType = objc.RegisterName("preferredMIMEType")
-	_uTTypeSelLocalizedDescription = objc.RegisterName("localizedDescription")
-	_uTTypeSelReferenceURL = objc.RegisterName("referenceURL")
-	_uTTypeSelIsDynamic = objc.RegisterName("isDynamic")
-	_uTTypeSelIsDeclared = objc.RegisterName("isDeclared")
-	_uTTypeSelIsPublicType = objc.RegisterName("isPublicType")
-	_uTTypeSelConformsToType = objc.RegisterName("conformsToType:")
-	_uTTypeSelIsSupertypeOfType = objc.RegisterName("isSupertypeOfType:")
-	_uTTypeSelIsSubtypeOfType = objc.RegisterName("isSubtypeOfType:")
-	_uTTypeSelSupertypes = objc.RegisterName("supertypes")
-	_uTTypeSelTypeWithTagTagClassConformingToType = objc.RegisterName("typeWithTag:tagClass:conformingToType:")
-	_uTTypeSelTypesWithTagTagClassConformingToType = objc.RegisterName("typesWithTag:tagClass:conformingToType:")
-	_uTTypeSelTags = objc.RegisterName("tags")
-	_uTTypeSelExportedTypeWithIdentifier = objc.RegisterName("exportedTypeWithIdentifier:")
+	_clsUTType                                           = _objcClass("UTType")
+	_uTTypeSelTypeWithIdentifier                         = objc.RegisterName("typeWithIdentifier:")
+	_uTTypeSelTypeWithFilenameExtension                  = objc.RegisterName("typeWithFilenameExtension:")
+	_uTTypeSelTypeWithFilenameExtensionConformingToType  = objc.RegisterName("typeWithFilenameExtension:conformingToType:")
+	_uTTypeSelTypeWithMIMEType                           = objc.RegisterName("typeWithMIMEType:")
+	_uTTypeSelTypeWithMIMETypeConformingToType           = objc.RegisterName("typeWithMIMEType:conformingToType:")
+	_uTTypeSelIdentifier                                 = objc.RegisterName("identifier")
+	_uTTypeSelPreferredFilenameExtension                 = objc.RegisterName("preferredFilenameExtension")
+	_uTTypeSelPreferredMIMEType                          = objc.RegisterName("preferredMIMEType")
+	_uTTypeSelLocalizedDescription                       = objc.RegisterName("localizedDescription")
+	_uTTypeSelReferenceURL                               = objc.RegisterName("referenceURL")
+	_uTTypeSelIsDynamic                                  = objc.RegisterName("isDynamic")
+	_uTTypeSelIsDeclared                                 = objc.RegisterName("isDeclared")
+	_uTTypeSelIsPublicType                               = objc.RegisterName("isPublicType")
+	_uTTypeSelConformsToType                             = objc.RegisterName("conformsToType:")
+	_uTTypeSelIsSupertypeOfType                          = objc.RegisterName("isSupertypeOfType:")
+	_uTTypeSelIsSubtypeOfType                            = objc.RegisterName("isSubtypeOfType:")
+	_uTTypeSelSupertypes                                 = objc.RegisterName("supertypes")
+	_uTTypeSelTypeWithTagTagClassConformingToType        = objc.RegisterName("typeWithTag:tagClass:conformingToType:")
+	_uTTypeSelTypesWithTagTagClassConformingToType       = objc.RegisterName("typesWithTag:tagClass:conformingToType:")
+	_uTTypeSelTags                                       = objc.RegisterName("tags")
+	_uTTypeSelExportedTypeWithIdentifier                 = objc.RegisterName("exportedTypeWithIdentifier:")
 	_uTTypeSelExportedTypeWithIdentifierConformingToType = objc.RegisterName("exportedTypeWithIdentifier:conformingToType:")
-	_uTTypeSelImportedTypeWithIdentifier = objc.RegisterName("importedTypeWithIdentifier:")
+	_uTTypeSelImportedTypeWithIdentifier                 = objc.RegisterName("importedTypeWithIdentifier:")
 	_uTTypeSelImportedTypeWithIdentifierConformingToType = objc.RegisterName("importedTypeWithIdentifier:conformingToType:")
 )
 
@@ -58,70 +58,90 @@ func UTTypeFromID(id objc.ID) *UTType {
 // \brief Create a type given a type identifier. \param identifier The type identifier. \result A type, or \c nil if the type identifier is not known to the system.
 func UTTypeTypeWithIdentifier(identifier *foundation.NSString) *UTType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUTType), _uTTypeSelTypeWithIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UTTypeFromID(_ret)
 }
 
 // \brief Create a type given a filename extension that conforms to \c UTTypeData. \param filenameExtension The filename extension for which a type is desired. \result A type. If no types are known to the system with the specified filename extension and conformance but the inputs were otherwise valid, a dynamic type may be provided. If the inputs were not valid, returns \c nil. This method is equivalent to: \code [UTType typeWithTag:filenameExtension tagClass:UTTagClassFilenameExtension conformingToType:UTTypeData] \endcode To get the type of a file on disk, use the \c NSURLContentTypeKey property. You should not attempt to derive the type of a file system object based solely on its path extension.
 func UTTypeTypeWithFilenameExtension(filenameExtension *foundation.NSString) *UTType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUTType), _uTTypeSelTypeWithFilenameExtension, filenameExtension.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UTTypeFromID(_ret)
 }
 
 // \brief Create a type given a filename extension. \param filenameExtension The filename extension for which a type is desired. \param supertype Another type that the resulting type must conform to. Typically, you would pass \c UTTypeData or \c UTTypePackage. \result A type. If no types are known to the system with the specified filename extension and conformance but the inputs were otherwise valid, a dynamic type may be provided. If the inputs were not valid, returns \c nil. This method is equivalent to: \code [UTType typeWithTag:filenameExtension tagClass:UTTagClassFilenameExtension conformingToType:supertype] \endcode To get the type of a file on disk, use the \c NSURLContentTypeKey property. You should not attempt to derive the type of a file system object based solely on its path extension.
 func UTTypeTypeWithFilenameExtensionConformingToType(filenameExtension *foundation.NSString, supertype *UTType) *UTType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUTType), _uTTypeSelTypeWithFilenameExtensionConformingToType, filenameExtension.Ptr(), supertype.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UTTypeFromID(_ret)
 }
 
 // \brief Create a type given a MIME type that conforms to \c UTTypeData. \param mimeType The MIME type for which a type is desired. \result A type. If no types are known to the system with the specified MIME type and conformance but the inputs were otherwise valid, a dynamic type may be provided. If the inputs were not valid, returns \c nil. This method is equivalent to: \code [UTType typeWithTag:mimeType tagClass:UTTagClassMIMEType conformingToType:UTTypeData] \endcode
 func UTTypeTypeWithMIMEType(mimeType *foundation.NSString) *UTType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUTType), _uTTypeSelTypeWithMIMEType, mimeType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UTTypeFromID(_ret)
 }
 
 // \brief Create a type given a MIME type. \param mimeType The MIME type for which a type is desired. \param supertype Another type that the resulting type must conform to. Typically, you would pass \c UTTypeData. \result A type. If no types are known to the system with the specified MIME type and conformance but the inputs were otherwise valid, a dynamic type may be provided. If the inputs were not valid, returns \c nil. This method is equivalent to: \code [UTType typeWithTag:mimeType tagClass:UTTagClassMIMEType conformingToType:supertype] \endcode
 func UTTypeTypeWithMIMETypeConformingToType(mimeType *foundation.NSString, supertype *UTType) *UTType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUTType), _uTTypeSelTypeWithMIMETypeConformingToType, mimeType.Ptr(), supertype.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UTTypeFromID(_ret)
 }
 
 // \brief The receiver's identifier. A type is \em identified \em by its Uniform Type Identifier (UTI), a reverse-DNS string such as \c "public.jpeg" or \c "com.adobe.pdf". The type itself \em has a UTI, but is not itself the UTI. This terminology is not consistently used across Apple's documentation.
 func (o *UTType) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uTTypeSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // \brief If available, the preferred (first available) tag of class \c UTTagClassFilenameExtension. Many uses of types require the generation of a filename (e.g. when saving a file to disk.) If not \c nil, the value of this property is the best available filename extension for the given type. The value of this property is equivalent to, but more efficient than: \code type.tags[UTTagClassFilenameExtension].firstObject \endcode
 func (o *UTType) PreferredFilenameExtension() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uTTypeSelPreferredFilenameExtension)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // \brief If available, the preferred (first available) tag of class \c UTTagClassMIMEType. If not \c nil, the value of this property is the best available MIME type for the given type, according to its declaration. The value of this property is equivalent to, but more efficient than: \code type.tags[UTTagClassMIMEType].firstObject \endcode
 func (o *UTType) PreferredMIMEType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uTTypeSelPreferredMIMEType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // \brief The localized description of the type. If the type does not provide a description, the system may search its supertypes for one. Dynamic types never have localized descriptions even if their supertypes do.
 func (o *UTType) LocalizedDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uTTypeSelLocalizedDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // \brief The reference URL of the type. A reference URL is a human-readable document describing a type. Most types do not specify reference URLs. \warning This URL is not validated in any way by the system, nor is its scheme or structure guaranteed in any way.
 func (o *UTType) ReferenceURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uTTypeSelReferenceURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -164,21 +184,27 @@ func (o *UTType) IsSubtypeOfType(type_ *UTType) bool {
 // \brief The set of types to which the receiving type conforms, directly or indirectly. If you are just interested in checking if one type conforms to another, it is more efficient to use \c -conformsToType: than this property.
 func (o *UTType) Supertypes() *foundation.NSSet[*UTType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uTTypeSelSupertypes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*UTType](_ret)
 }
 
 // \brief Create a type given a type tag. \param tag The tag, such as the path extension, for which a type is desired. \param tagClass The class of the tag, such as \c UTTagClassFilenameExtension. \param supertype Another type that the resulting type must conform to. If \c nil, no conformance is required. \result A type. If no types are known to the system with the specified tag but the inputs were otherwise valid, a dynamic type may be provided. If the inputs were not valid, returns \c nil.
 func UTTypeTypeWithTagTagClassConformingToType(tag *foundation.NSString, tagClass *foundation.NSString, supertype *UTType) *UTType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUTType), _uTTypeSelTypeWithTagTagClassConformingToType, tag.Ptr(), tagClass.Ptr(), supertype.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UTTypeFromID(_ret)
 }
 
 // \brief Create an array of types given a type tag. \param tag The tag, such as the path extension, for which a set of types is desired. \param tagClass The class of the tag, such as \c UTTagClassFilenameExtension. \param supertype Another type that the resulting types must conform to. If \c nil, no conformance is required. \result An array of types, or the empty array if no such types were available. If no types are known to the system with the specified tag but the inputs were otherwise valid, a dynamic type may be provided.
 func UTTypeTypesWithTagTagClassConformingToType(tag *foundation.NSString, tagClass *foundation.NSString, supertype *UTType) *foundation.NSArray[*UTType] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUTType), _uTTypeSelTypesWithTagTagClassConformingToType, tag.Ptr(), tagClass.Ptr(), supertype.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*UTType](_ret)
 }
 
@@ -191,28 +217,35 @@ func (o *UTType) Tags() *foundation.NSDictionary[*foundation.NSString, objc.ID] 
 // \brief Gets an active \c UTType corresponding to a type that is declared as "exported" by the current process. \param identifier The type identifier for which a type is desired. \result A type. Use this method to get types that are exported by your application. If \a identifier does not correspond to any type known to the system, the result is undefined. Conformance to either \c UTTypeData or \c UTTypePackage is assumed. You would generally use this method with \c dispatch_once(): \code UTType *GetMyFileFormat(void) { static UTType *result = nil; static dispatch_once_t once; dispatch_once(&once, ^ { result = [UTType exportedTypeWithIdentifier:@"com.example.myfileformat"]; }); return result; } \endcode
 func UTTypeExportedTypeWithIdentifier(identifier *foundation.NSString) *UTType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUTType), _uTTypeSelExportedTypeWithIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UTTypeFromID(_ret)
 }
 
 // \brief Gets an active \c UTType corresponding to a type that is declared as "exported" by the current process. \param identifier The type identifier for which a type is desired. \param parentType A parent type that the resulting type is expected to conform to. \result A type. Use this method to get types that are exported by your application. If \a identifier does not correspond to any type known to the system, the result is undefined. You would generally use this method with \c dispatch_once(): \code UTType *GetMyFileFormat(void) { static UTType *result = nil; static dispatch_once_t once; dispatch_once(&once, ^ { result = [UTType exportedTypeWithIdentifier:@"com.example.myfileformat" conformingToType:UTTypeData]; }); return result; } \endcode
 func UTTypeExportedTypeWithIdentifierConformingToType(identifier *foundation.NSString, parentType *UTType) *UTType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUTType), _uTTypeSelExportedTypeWithIdentifierConformingToType, identifier.Ptr(), parentType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UTTypeFromID(_ret)
 }
 
 // \brief Gets an active \c UTType corresponding to a type that is declared as "imported" by the current process. \param identifier The type identifier for which a type is desired. \result A type whose identifier may or may not be equal to \a identifier, but which is functionally equivalent. Use this method to get types that are imported by your application. If \a identifier does not correspond to any type known to the system, the result is undefined. Conformance to either \c UTTypeData or \c UTTypePackage is assumed. You would generally use this method in the body of a funcion or method and would \em not use \c dispatch_once() as the type can change over time: \code UTType *GetCompetitorFileFormat(void) { return [UTType importedTypeWithIdentifier:@"com.example.competitorfileformat"]; } \endcode In the general case, this method returns a type with the same identifier, but if that type has a preferred filename extension and \em another type is the preferred type for that extension, then that \em other type is substituted.
 func UTTypeImportedTypeWithIdentifier(identifier *foundation.NSString) *UTType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUTType), _uTTypeSelImportedTypeWithIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UTTypeFromID(_ret)
 }
 
 // \brief Gets an active \c UTType corresponding to a type that is declared as "imported" by the current process. \param identifier The type identifier for which a type is desired. \param parentType A parent type that the resulting type is expected to conform to. \result A type whose identifier may or may not be equal to \a identifier, but which is functionally equivalent. Use this method to get types that are imported by your application. If \a identifier does not correspond to any type known to the system, the result is undefined. You would generally use this method in the body of a funcion or method and would \em not use \c dispatch_once() as the type can change over time: \code UTType *GetCompetitorFileFormat(void) { return [UTType importedTypeWithIdentifier:@"com.example.competitorfileformat" conformingToType:UTTypeData]; } \endcode In the general case, this method returns a type with the same identifier, but if that type has a preferred filename extension and \em another type is the preferred type for that extension, then that \em other type is substituted.
 func UTTypeImportedTypeWithIdentifierConformingToType(identifier *foundation.NSString, parentType *UTType) *UTType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUTType), _uTTypeSelImportedTypeWithIdentifierConformingToType, identifier.Ptr(), parentType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UTTypeFromID(_ret)
 }
-

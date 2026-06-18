@@ -17,15 +17,15 @@ type NSCollectionLayoutBoundarySupplementaryItem struct {
 }
 
 var (
-	_clsNSCollectionLayoutBoundarySupplementaryItem = _objcClass("NSCollectionLayoutBoundarySupplementaryItem")
-	_nSCollectionLayoutBoundarySupplementaryItemSelBoundarySupplementaryItemWithLayoutSizeElementKindAlignment = objc.RegisterName("boundarySupplementaryItemWithLayoutSize:elementKind:alignment:")
+	_clsNSCollectionLayoutBoundarySupplementaryItem                                                                          = _objcClass("NSCollectionLayoutBoundarySupplementaryItem")
+	_nSCollectionLayoutBoundarySupplementaryItemSelBoundarySupplementaryItemWithLayoutSizeElementKindAlignment               = objc.RegisterName("boundarySupplementaryItemWithLayoutSize:elementKind:alignment:")
 	_nSCollectionLayoutBoundarySupplementaryItemSelBoundarySupplementaryItemWithLayoutSizeElementKindAlignmentAbsoluteOffset = objc.RegisterName("boundarySupplementaryItemWithLayoutSize:elementKind:alignment:absoluteOffset:")
-	_nSCollectionLayoutBoundarySupplementaryItemSelExtendsBoundary = objc.RegisterName("extendsBoundary")
-	_nSCollectionLayoutBoundarySupplementaryItemSelSetExtendsBoundary = objc.RegisterName("setExtendsBoundary:")
-	_nSCollectionLayoutBoundarySupplementaryItemSelPinToVisibleBounds = objc.RegisterName("pinToVisibleBounds")
-	_nSCollectionLayoutBoundarySupplementaryItemSelSetPinToVisibleBounds = objc.RegisterName("setPinToVisibleBounds:")
-	_nSCollectionLayoutBoundarySupplementaryItemSelAlignment = objc.RegisterName("alignment")
-	_nSCollectionLayoutBoundarySupplementaryItemSelOffset = objc.RegisterName("offset")
+	_nSCollectionLayoutBoundarySupplementaryItemSelExtendsBoundary                                                           = objc.RegisterName("extendsBoundary")
+	_nSCollectionLayoutBoundarySupplementaryItemSelSetExtendsBoundary                                                        = objc.RegisterName("setExtendsBoundary:")
+	_nSCollectionLayoutBoundarySupplementaryItemSelPinToVisibleBounds                                                        = objc.RegisterName("pinToVisibleBounds")
+	_nSCollectionLayoutBoundarySupplementaryItemSelSetPinToVisibleBounds                                                     = objc.RegisterName("setPinToVisibleBounds:")
+	_nSCollectionLayoutBoundarySupplementaryItemSelAlignment                                                                 = objc.RegisterName("alignment")
+	_nSCollectionLayoutBoundarySupplementaryItemSelOffset                                                                    = objc.RegisterName("offset")
 )
 
 func NSCollectionLayoutBoundarySupplementaryItemFromID(id objc.ID) *NSCollectionLayoutBoundarySupplementaryItem {
@@ -40,13 +40,17 @@ func NSCollectionLayoutBoundarySupplementaryItemFromID(id objc.ID) *NSCollection
 
 func NSCollectionLayoutBoundarySupplementaryItemBoundarySupplementaryItemWithLayoutSizeElementKindAlignment(layoutSize *NSCollectionLayoutSize, elementKind *foundation.NSString, alignment NSRectAlignment) *NSCollectionLayoutBoundarySupplementaryItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutBoundarySupplementaryItem), _nSCollectionLayoutBoundarySupplementaryItemSelBoundarySupplementaryItemWithLayoutSizeElementKindAlignment, layoutSize.Ptr(), elementKind.Ptr(), alignment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutBoundarySupplementaryItemFromID(_ret)
 }
 
 func NSCollectionLayoutBoundarySupplementaryItemBoundarySupplementaryItemWithLayoutSizeElementKindAlignmentAbsoluteOffset(layoutSize *NSCollectionLayoutSize, elementKind *foundation.NSString, alignment NSRectAlignment, absoluteOffset corefoundation.CGPoint) *NSCollectionLayoutBoundarySupplementaryItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutBoundarySupplementaryItem), _nSCollectionLayoutBoundarySupplementaryItemSelBoundarySupplementaryItemWithLayoutSizeElementKindAlignmentAbsoluteOffset, layoutSize.Ptr(), elementKind.Ptr(), alignment, absoluteOffset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutBoundarySupplementaryItemFromID(_ret)
 }
 
@@ -77,4 +81,3 @@ func (o *NSCollectionLayoutBoundarySupplementaryItem) Offset() corefoundation.CG
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSCollectionLayoutBoundarySupplementaryItemSelOffset)
 	return _ret
 }
-

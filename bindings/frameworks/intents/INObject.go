@@ -16,20 +16,20 @@ type INObject struct {
 }
 
 var (
-	_clsINObject = _objcClass("INObject")
-	_iNObjectSelInitWithIdentifierDisplayStringPronunciationHint = objc.RegisterName("initWithIdentifier:displayString:pronunciationHint:")
-	_iNObjectSelInitWithIdentifierDisplayString = objc.RegisterName("initWithIdentifier:displayString:")
-	_iNObjectSelInitWithIdentifierDisplayStringSubtitleStringDisplayImage = objc.RegisterName("initWithIdentifier:displayString:subtitleString:displayImage:")
+	_clsINObject                                                                           = _objcClass("INObject")
+	_iNObjectSelInitWithIdentifierDisplayStringPronunciationHint                           = objc.RegisterName("initWithIdentifier:displayString:pronunciationHint:")
+	_iNObjectSelInitWithIdentifierDisplayString                                            = objc.RegisterName("initWithIdentifier:displayString:")
+	_iNObjectSelInitWithIdentifierDisplayStringSubtitleStringDisplayImage                  = objc.RegisterName("initWithIdentifier:displayString:subtitleString:displayImage:")
 	_iNObjectSelInitWithIdentifierDisplayStringPronunciationHintSubtitleStringDisplayImage = objc.RegisterName("initWithIdentifier:displayString:pronunciationHint:subtitleString:displayImage:")
-	_iNObjectSelIdentifier = objc.RegisterName("identifier")
-	_iNObjectSelDisplayString = objc.RegisterName("displayString")
-	_iNObjectSelPronunciationHint = objc.RegisterName("pronunciationHint")
-	_iNObjectSelSubtitleString = objc.RegisterName("subtitleString")
-	_iNObjectSelSetSubtitleString = objc.RegisterName("setSubtitleString:")
-	_iNObjectSelDisplayImage = objc.RegisterName("displayImage")
-	_iNObjectSelSetDisplayImage = objc.RegisterName("setDisplayImage:")
-	_iNObjectSelAlternativeSpeakableMatches = objc.RegisterName("alternativeSpeakableMatches")
-	_iNObjectSelSetAlternativeSpeakableMatches = objc.RegisterName("setAlternativeSpeakableMatches:")
+	_iNObjectSelIdentifier                                                                 = objc.RegisterName("identifier")
+	_iNObjectSelDisplayString                                                              = objc.RegisterName("displayString")
+	_iNObjectSelPronunciationHint                                                          = objc.RegisterName("pronunciationHint")
+	_iNObjectSelSubtitleString                                                             = objc.RegisterName("subtitleString")
+	_iNObjectSelSetSubtitleString                                                          = objc.RegisterName("setSubtitleString:")
+	_iNObjectSelDisplayImage                                                               = objc.RegisterName("displayImage")
+	_iNObjectSelSetDisplayImage                                                            = objc.RegisterName("setDisplayImage:")
+	_iNObjectSelAlternativeSpeakableMatches                                                = objc.RegisterName("alternativeSpeakableMatches")
+	_iNObjectSelSetAlternativeSpeakableMatches                                             = objc.RegisterName("setAlternativeSpeakableMatches:")
 )
 
 func INObjectFromID(id objc.ID) *INObject {
@@ -44,49 +44,65 @@ func INObjectFromID(id objc.ID) *INObject {
 
 func (o *INObject) InitWithIdentifierDisplayStringPronunciationHint(identifier *foundation.NSString, displayString *foundation.NSString, pronunciationHint *foundation.NSString) *INObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNObjectSelInitWithIdentifierDisplayStringPronunciationHint, identifier.Ptr(), displayString.Ptr(), pronunciationHint.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INObjectFromID(_ret)
 }
 
 func (o *INObject) InitWithIdentifierDisplayString(identifier *foundation.NSString, displayString *foundation.NSString) *INObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNObjectSelInitWithIdentifierDisplayString, identifier.Ptr(), displayString.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INObjectFromID(_ret)
 }
 
 func (o *INObject) InitWithIdentifierDisplayStringSubtitleStringDisplayImage(identifier *foundation.NSString, displayString *foundation.NSString, subtitleString *foundation.NSString, displayImage *INImage) *INObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNObjectSelInitWithIdentifierDisplayStringSubtitleStringDisplayImage, identifier.Ptr(), displayString.Ptr(), subtitleString.Ptr(), displayImage.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INObjectFromID(_ret)
 }
 
 func (o *INObject) InitWithIdentifierDisplayStringPronunciationHintSubtitleStringDisplayImage(identifier *foundation.NSString, displayString *foundation.NSString, pronunciationHint *foundation.NSString, subtitleString *foundation.NSString, displayImage *INImage) *INObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNObjectSelInitWithIdentifierDisplayStringPronunciationHintSubtitleStringDisplayImage, identifier.Ptr(), displayString.Ptr(), pronunciationHint.Ptr(), subtitleString.Ptr(), displayImage.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INObjectFromID(_ret)
 }
 
 func (o *INObject) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNObjectSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INObject) DisplayString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNObjectSelDisplayString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INObject) PronunciationHint() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNObjectSelPronunciationHint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INObject) SubtitleString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNObjectSelSubtitleString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -96,7 +112,9 @@ func (o *INObject) SetSubtitleString(subtitleString *foundation.NSString) {
 
 func (o *INObject) DisplayImage() *INImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNObjectSelDisplayImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INImageFromID(_ret)
 }
 
@@ -106,11 +124,12 @@ func (o *INObject) SetDisplayImage(displayImage *INImage) {
 
 func (o *INObject) AlternativeSpeakableMatches() *foundation.NSArray[*INSpeakableString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNObjectSelAlternativeSpeakableMatches)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*INSpeakableString](_ret)
 }
 
 func (o *INObject) SetAlternativeSpeakableMatches(alternativeSpeakableMatches *foundation.NSArray[*INSpeakableString]) {
 	o.Ptr().Send(_iNObjectSelSetAlternativeSpeakableMatches, alternativeSpeakableMatches.Ptr())
 }
-

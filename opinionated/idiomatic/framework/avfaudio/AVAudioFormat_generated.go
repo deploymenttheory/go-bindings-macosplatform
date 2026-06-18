@@ -177,4 +177,3 @@ type AudioFormatable interface {
 }
 
 var _ AudioFormatable = (*AudioFormat)(nil)
-

@@ -18,19 +18,19 @@ type AVAudioCompressedBuffer struct {
 }
 
 var (
-	_clsAVAudioCompressedBuffer = _objcClass("AVAudioCompressedBuffer")
+	_clsAVAudioCompressedBuffer                                              = _objcClass("AVAudioCompressedBuffer")
 	_aVAudioCompressedBufferSelInitWithFormatPacketCapacityMaximumPacketSize = objc.RegisterName("initWithFormat:packetCapacity:maximumPacketSize:")
-	_aVAudioCompressedBufferSelInitWithFormatPacketCapacity = objc.RegisterName("initWithFormat:packetCapacity:")
-	_aVAudioCompressedBufferSelPacketCapacity = objc.RegisterName("packetCapacity")
-	_aVAudioCompressedBufferSelPacketCount = objc.RegisterName("packetCount")
-	_aVAudioCompressedBufferSelSetPacketCount = objc.RegisterName("setPacketCount:")
-	_aVAudioCompressedBufferSelMaximumPacketSize = objc.RegisterName("maximumPacketSize")
-	_aVAudioCompressedBufferSelData = objc.RegisterName("data")
-	_aVAudioCompressedBufferSelByteCapacity = objc.RegisterName("byteCapacity")
-	_aVAudioCompressedBufferSelByteLength = objc.RegisterName("byteLength")
-	_aVAudioCompressedBufferSelSetByteLength = objc.RegisterName("setByteLength:")
-	_aVAudioCompressedBufferSelPacketDescriptions = objc.RegisterName("packetDescriptions")
-	_aVAudioCompressedBufferSelPacketDependencies = objc.RegisterName("packetDependencies")
+	_aVAudioCompressedBufferSelInitWithFormatPacketCapacity                  = objc.RegisterName("initWithFormat:packetCapacity:")
+	_aVAudioCompressedBufferSelPacketCapacity                                = objc.RegisterName("packetCapacity")
+	_aVAudioCompressedBufferSelPacketCount                                   = objc.RegisterName("packetCount")
+	_aVAudioCompressedBufferSelSetPacketCount                                = objc.RegisterName("setPacketCount:")
+	_aVAudioCompressedBufferSelMaximumPacketSize                             = objc.RegisterName("maximumPacketSize")
+	_aVAudioCompressedBufferSelData                                          = objc.RegisterName("data")
+	_aVAudioCompressedBufferSelByteCapacity                                  = objc.RegisterName("byteCapacity")
+	_aVAudioCompressedBufferSelByteLength                                    = objc.RegisterName("byteLength")
+	_aVAudioCompressedBufferSelSetByteLength                                 = objc.RegisterName("setByteLength:")
+	_aVAudioCompressedBufferSelPacketDescriptions                            = objc.RegisterName("packetDescriptions")
+	_aVAudioCompressedBufferSelPacketDependencies                            = objc.RegisterName("packetDependencies")
 )
 
 func AVAudioCompressedBufferFromID(id objc.ID) *AVAudioCompressedBuffer {
@@ -46,14 +46,18 @@ func AVAudioCompressedBufferFromID(id objc.ID) *AVAudioCompressedBuffer {
 // @method initWithFormat:packetCapacity:maximumPacketSize: @abstract Initialize a buffer that is to contain compressed audio data. @param format The format of the audio to be contained in the buffer. @param packetCapacity The capacity of the buffer in packets. @param maximumPacketSize The maximum size in bytes of a compressed packet. The maximum packet size can be obtained from the maximumOutputPacketSize property of an AVAudioConverter configured for encoding this format. @discussion An exception is raised if the format is PCM.
 func (o *AVAudioCompressedBuffer) InitWithFormatPacketCapacityMaximumPacketSize(format *AVAudioFormat, packetCapacity uint32, maximumPacketSize int) *AVAudioCompressedBuffer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioCompressedBufferSelInitWithFormatPacketCapacityMaximumPacketSize, format.Ptr(), packetCapacity, maximumPacketSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioCompressedBufferFromID(_ret)
 }
 
 // @method initWithFormat:packetCapacity: @abstract Initialize a buffer that is to contain constant bytes per packet compressed audio data. @param format The format of the audio to be contained in the buffer. @param packetCapacity The capacity of the buffer in packets. @discussion This fails if the format is PCM or if the format has variable bytes per packet (format.streamDescription->mBytesPerPacket == 0).
 func (o *AVAudioCompressedBuffer) InitWithFormatPacketCapacity(format *AVAudioFormat, packetCapacity uint32) *AVAudioCompressedBuffer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioCompressedBufferSelInitWithFormatPacketCapacity, format.Ptr(), packetCapacity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioCompressedBufferFromID(_ret)
 }
 
@@ -112,4 +116,3 @@ func (o *AVAudioCompressedBuffer) PacketDependencies() *coreaudiotypes.AudioStre
 	_ret := objc.Send[*coreaudiotypes.AudioStreamPacketDependencyDescription](o.Ptr(), _aVAudioCompressedBufferSelPacketDependencies)
 	return _ret
 }
-

@@ -17,7 +17,9 @@ type MTRTargetNavigatorClusterNavigateTargetParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRTargetNavigatorClusterNavigateTargetParams].
-func (x *MTRTargetNavigatorClusterNavigateTargetParams) Unwrap() *raw.MTRTargetNavigatorClusterNavigateTargetParams { return x.inner }
+func (x *MTRTargetNavigatorClusterNavigateTargetParams) Unwrap() *raw.MTRTargetNavigatorClusterNavigateTargetParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -123,4 +125,3 @@ type MTRTargetNavigatorClusterNavigateTargetParamsable interface {
 }
 
 var _ MTRTargetNavigatorClusterNavigateTargetParamsable = (*MTRTargetNavigatorClusterNavigateTargetParams)(nil)
-

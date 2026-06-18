@@ -18,65 +18,65 @@ type CLLocationManager struct {
 }
 
 var (
-	_clsCLLocationManager = _objcClass("CLLocationManager")
-	_cLLocationManagerSelLocationServicesEnabled = objc.RegisterName("locationServicesEnabled")
-	_cLLocationManagerSelHeadingAvailable = objc.RegisterName("headingAvailable")
-	_cLLocationManagerSelSignificantLocationChangeMonitoringAvailable = objc.RegisterName("significantLocationChangeMonitoringAvailable")
-	_cLLocationManagerSelIsMonitoringAvailableForClass = objc.RegisterName("isMonitoringAvailableForClass:")
-	_cLLocationManagerSelRegionMonitoringAvailable = objc.RegisterName("regionMonitoringAvailable")
-	_cLLocationManagerSelRegionMonitoringEnabled = objc.RegisterName("regionMonitoringEnabled")
-	_cLLocationManagerSelIsRangingAvailable = objc.RegisterName("isRangingAvailable")
-	_cLLocationManagerSelAuthorizationStatus = objc.RegisterName("authorizationStatus")
-	_cLLocationManagerSelRequestWhenInUseAuthorization = objc.RegisterName("requestWhenInUseAuthorization")
-	_cLLocationManagerSelRequestAlwaysAuthorization = objc.RegisterName("requestAlwaysAuthorization")
+	_clsCLLocationManager                                                                  = _objcClass("CLLocationManager")
+	_cLLocationManagerSelLocationServicesEnabled                                           = objc.RegisterName("locationServicesEnabled")
+	_cLLocationManagerSelHeadingAvailable                                                  = objc.RegisterName("headingAvailable")
+	_cLLocationManagerSelSignificantLocationChangeMonitoringAvailable                      = objc.RegisterName("significantLocationChangeMonitoringAvailable")
+	_cLLocationManagerSelIsMonitoringAvailableForClass                                     = objc.RegisterName("isMonitoringAvailableForClass:")
+	_cLLocationManagerSelRegionMonitoringAvailable                                         = objc.RegisterName("regionMonitoringAvailable")
+	_cLLocationManagerSelRegionMonitoringEnabled                                           = objc.RegisterName("regionMonitoringEnabled")
+	_cLLocationManagerSelIsRangingAvailable                                                = objc.RegisterName("isRangingAvailable")
+	_cLLocationManagerSelAuthorizationStatus                                               = objc.RegisterName("authorizationStatus")
+	_cLLocationManagerSelRequestWhenInUseAuthorization                                     = objc.RegisterName("requestWhenInUseAuthorization")
+	_cLLocationManagerSelRequestAlwaysAuthorization                                        = objc.RegisterName("requestAlwaysAuthorization")
 	_cLLocationManagerSelRequestTemporaryFullAccuracyAuthorizationWithPurposeKeyCompletion = objc.RegisterName("requestTemporaryFullAccuracyAuthorizationWithPurposeKey:completion:")
-	_cLLocationManagerSelRequestTemporaryFullAccuracyAuthorizationWithPurposeKey = objc.RegisterName("requestTemporaryFullAccuracyAuthorizationWithPurposeKey:")
-	_cLLocationManagerSelStartUpdatingLocation = objc.RegisterName("startUpdatingLocation")
-	_cLLocationManagerSelStopUpdatingLocation = objc.RegisterName("stopUpdatingLocation")
-	_cLLocationManagerSelRequestLocation = objc.RegisterName("requestLocation")
-	_cLLocationManagerSelStartUpdatingHeading = objc.RegisterName("startUpdatingHeading")
-	_cLLocationManagerSelDismissHeadingCalibrationDisplay = objc.RegisterName("dismissHeadingCalibrationDisplay")
-	_cLLocationManagerSelStartMonitoringSignificantLocationChanges = objc.RegisterName("startMonitoringSignificantLocationChanges")
-	_cLLocationManagerSelStopMonitoringSignificantLocationChanges = objc.RegisterName("stopMonitoringSignificantLocationChanges")
-	_cLLocationManagerSelStartMonitoringForRegionDesiredAccuracy = objc.RegisterName("startMonitoringForRegion:desiredAccuracy:")
-	_cLLocationManagerSelStopMonitoringForRegion = objc.RegisterName("stopMonitoringForRegion:")
-	_cLLocationManagerSelStartMonitoringForRegion = objc.RegisterName("startMonitoringForRegion:")
-	_cLLocationManagerSelRequestStateForRegion = objc.RegisterName("requestStateForRegion:")
-	_cLLocationManagerSelStartRangingBeaconsInRegion = objc.RegisterName("startRangingBeaconsInRegion:")
-	_cLLocationManagerSelStopRangingBeaconsInRegion = objc.RegisterName("stopRangingBeaconsInRegion:")
-	_cLLocationManagerSelStartRangingBeaconsSatisfyingConstraint = objc.RegisterName("startRangingBeaconsSatisfyingConstraint:")
-	_cLLocationManagerSelStopRangingBeaconsSatisfyingConstraint = objc.RegisterName("stopRangingBeaconsSatisfyingConstraint:")
-	_cLLocationManagerSelAllowDeferredLocationUpdatesUntilTraveledTimeout = objc.RegisterName("allowDeferredLocationUpdatesUntilTraveled:timeout:")
-	_cLLocationManagerSelDisallowDeferredLocationUpdates = objc.RegisterName("disallowDeferredLocationUpdates")
-	_cLLocationManagerSelDeferredLocationUpdatesAvailable = objc.RegisterName("deferredLocationUpdatesAvailable")
-	_cLLocationManagerSelAccuracyAuthorization = objc.RegisterName("accuracyAuthorization")
-	_cLLocationManagerSelIsAuthorizedForWidgetUpdates = objc.RegisterName("isAuthorizedForWidgetUpdates")
-	_cLLocationManagerSelDelegate = objc.RegisterName("delegate")
-	_cLLocationManagerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_cLLocationManagerSelPurpose = objc.RegisterName("purpose")
-	_cLLocationManagerSelSetPurpose = objc.RegisterName("setPurpose:")
-	_cLLocationManagerSelActivityType = objc.RegisterName("activityType")
-	_cLLocationManagerSelSetActivityType = objc.RegisterName("setActivityType:")
-	_cLLocationManagerSelDistanceFilter = objc.RegisterName("distanceFilter")
-	_cLLocationManagerSelSetDistanceFilter = objc.RegisterName("setDistanceFilter:")
-	_cLLocationManagerSelDesiredAccuracy = objc.RegisterName("desiredAccuracy")
-	_cLLocationManagerSelSetDesiredAccuracy = objc.RegisterName("setDesiredAccuracy:")
-	_cLLocationManagerSelPausesLocationUpdatesAutomatically = objc.RegisterName("pausesLocationUpdatesAutomatically")
-	_cLLocationManagerSelSetPausesLocationUpdatesAutomatically = objc.RegisterName("setPausesLocationUpdatesAutomatically:")
-	_cLLocationManagerSelAllowsBackgroundLocationUpdates = objc.RegisterName("allowsBackgroundLocationUpdates")
-	_cLLocationManagerSelSetAllowsBackgroundLocationUpdates = objc.RegisterName("setAllowsBackgroundLocationUpdates:")
-	_cLLocationManagerSelLocation = objc.RegisterName("location")
-	_cLLocationManagerSelHeadingFilter = objc.RegisterName("headingFilter")
-	_cLLocationManagerSelSetHeadingFilter = objc.RegisterName("setHeadingFilter:")
-	_cLLocationManagerSelHeadingOrientation = objc.RegisterName("headingOrientation")
-	_cLLocationManagerSelSetHeadingOrientation = objc.RegisterName("setHeadingOrientation:")
-	_cLLocationManagerSelHeading = objc.RegisterName("heading")
-	_cLLocationManagerSelMaximumRegionMonitoringDistance = objc.RegisterName("maximumRegionMonitoringDistance")
-	_cLLocationManagerSelMonitoredRegions = objc.RegisterName("monitoredRegions")
-	_cLLocationManagerSelRangedRegions = objc.RegisterName("rangedRegions")
-	_cLLocationManagerSelRangedBeaconConstraints = objc.RegisterName("rangedBeaconConstraints")
-	_cLLocationManagerSelStartMonitoringVisits = objc.RegisterName("startMonitoringVisits")
-	_cLLocationManagerSelStopMonitoringVisits = objc.RegisterName("stopMonitoringVisits")
+	_cLLocationManagerSelRequestTemporaryFullAccuracyAuthorizationWithPurposeKey           = objc.RegisterName("requestTemporaryFullAccuracyAuthorizationWithPurposeKey:")
+	_cLLocationManagerSelStartUpdatingLocation                                             = objc.RegisterName("startUpdatingLocation")
+	_cLLocationManagerSelStopUpdatingLocation                                              = objc.RegisterName("stopUpdatingLocation")
+	_cLLocationManagerSelRequestLocation                                                   = objc.RegisterName("requestLocation")
+	_cLLocationManagerSelStartUpdatingHeading                                              = objc.RegisterName("startUpdatingHeading")
+	_cLLocationManagerSelDismissHeadingCalibrationDisplay                                  = objc.RegisterName("dismissHeadingCalibrationDisplay")
+	_cLLocationManagerSelStartMonitoringSignificantLocationChanges                         = objc.RegisterName("startMonitoringSignificantLocationChanges")
+	_cLLocationManagerSelStopMonitoringSignificantLocationChanges                          = objc.RegisterName("stopMonitoringSignificantLocationChanges")
+	_cLLocationManagerSelStartMonitoringForRegionDesiredAccuracy                           = objc.RegisterName("startMonitoringForRegion:desiredAccuracy:")
+	_cLLocationManagerSelStopMonitoringForRegion                                           = objc.RegisterName("stopMonitoringForRegion:")
+	_cLLocationManagerSelStartMonitoringForRegion                                          = objc.RegisterName("startMonitoringForRegion:")
+	_cLLocationManagerSelRequestStateForRegion                                             = objc.RegisterName("requestStateForRegion:")
+	_cLLocationManagerSelStartRangingBeaconsInRegion                                       = objc.RegisterName("startRangingBeaconsInRegion:")
+	_cLLocationManagerSelStopRangingBeaconsInRegion                                        = objc.RegisterName("stopRangingBeaconsInRegion:")
+	_cLLocationManagerSelStartRangingBeaconsSatisfyingConstraint                           = objc.RegisterName("startRangingBeaconsSatisfyingConstraint:")
+	_cLLocationManagerSelStopRangingBeaconsSatisfyingConstraint                            = objc.RegisterName("stopRangingBeaconsSatisfyingConstraint:")
+	_cLLocationManagerSelAllowDeferredLocationUpdatesUntilTraveledTimeout                  = objc.RegisterName("allowDeferredLocationUpdatesUntilTraveled:timeout:")
+	_cLLocationManagerSelDisallowDeferredLocationUpdates                                   = objc.RegisterName("disallowDeferredLocationUpdates")
+	_cLLocationManagerSelDeferredLocationUpdatesAvailable                                  = objc.RegisterName("deferredLocationUpdatesAvailable")
+	_cLLocationManagerSelAccuracyAuthorization                                             = objc.RegisterName("accuracyAuthorization")
+	_cLLocationManagerSelIsAuthorizedForWidgetUpdates                                      = objc.RegisterName("isAuthorizedForWidgetUpdates")
+	_cLLocationManagerSelDelegate                                                          = objc.RegisterName("delegate")
+	_cLLocationManagerSelSetDelegate                                                       = objc.RegisterName("setDelegate:")
+	_cLLocationManagerSelPurpose                                                           = objc.RegisterName("purpose")
+	_cLLocationManagerSelSetPurpose                                                        = objc.RegisterName("setPurpose:")
+	_cLLocationManagerSelActivityType                                                      = objc.RegisterName("activityType")
+	_cLLocationManagerSelSetActivityType                                                   = objc.RegisterName("setActivityType:")
+	_cLLocationManagerSelDistanceFilter                                                    = objc.RegisterName("distanceFilter")
+	_cLLocationManagerSelSetDistanceFilter                                                 = objc.RegisterName("setDistanceFilter:")
+	_cLLocationManagerSelDesiredAccuracy                                                   = objc.RegisterName("desiredAccuracy")
+	_cLLocationManagerSelSetDesiredAccuracy                                                = objc.RegisterName("setDesiredAccuracy:")
+	_cLLocationManagerSelPausesLocationUpdatesAutomatically                                = objc.RegisterName("pausesLocationUpdatesAutomatically")
+	_cLLocationManagerSelSetPausesLocationUpdatesAutomatically                             = objc.RegisterName("setPausesLocationUpdatesAutomatically:")
+	_cLLocationManagerSelAllowsBackgroundLocationUpdates                                   = objc.RegisterName("allowsBackgroundLocationUpdates")
+	_cLLocationManagerSelSetAllowsBackgroundLocationUpdates                                = objc.RegisterName("setAllowsBackgroundLocationUpdates:")
+	_cLLocationManagerSelLocation                                                          = objc.RegisterName("location")
+	_cLLocationManagerSelHeadingFilter                                                     = objc.RegisterName("headingFilter")
+	_cLLocationManagerSelSetHeadingFilter                                                  = objc.RegisterName("setHeadingFilter:")
+	_cLLocationManagerSelHeadingOrientation                                                = objc.RegisterName("headingOrientation")
+	_cLLocationManagerSelSetHeadingOrientation                                             = objc.RegisterName("setHeadingOrientation:")
+	_cLLocationManagerSelHeading                                                           = objc.RegisterName("heading")
+	_cLLocationManagerSelMaximumRegionMonitoringDistance                                   = objc.RegisterName("maximumRegionMonitoringDistance")
+	_cLLocationManagerSelMonitoredRegions                                                  = objc.RegisterName("monitoredRegions")
+	_cLLocationManagerSelRangedRegions                                                     = objc.RegisterName("rangedRegions")
+	_cLLocationManagerSelRangedBeaconConstraints                                           = objc.RegisterName("rangedBeaconConstraints")
+	_cLLocationManagerSelStartMonitoringVisits                                             = objc.RegisterName("startMonitoringVisits")
+	_cLLocationManagerSelStopMonitoringVisits                                              = objc.RegisterName("stopMonitoringVisits")
 )
 
 func CLLocationManagerFromID(id objc.ID) *CLLocationManager {
@@ -270,7 +270,9 @@ func (o *CLLocationManager) LocationServicesEnabled() bool {
 // Deprecated: Set the purpose string in Info.plist using key NSLocationUsageDescription
 func (o *CLLocationManager) Purpose() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLLocationManagerSelPurpose)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -355,7 +357,9 @@ func (o *CLLocationManager) SetHeadingOrientation(headingOrientation CLDeviceOri
 
 func (o *CLLocationManager) Heading() *CLHeading {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLLocationManagerSelHeading)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLHeadingFromID(_ret)
 }
 
@@ -366,20 +370,26 @@ func (o *CLLocationManager) MaximumRegionMonitoringDistance() unsafe.Pointer {
 
 func (o *CLLocationManager) MonitoredRegions() *foundation.NSSet[*CLRegion] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLLocationManagerSelMonitoredRegions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*CLRegion](_ret)
 }
 
 // Deprecated: Use -rangedBeaconConstraints
 func (o *CLLocationManager) RangedRegions() *foundation.NSSet[*CLRegion] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLLocationManagerSelRangedRegions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*CLRegion](_ret)
 }
 
 func (o *CLLocationManager) RangedBeaconConstraints() *foundation.NSSet[*CLBeaconIdentityConstraint] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLLocationManagerSelRangedBeaconConstraints)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*CLBeaconIdentityConstraint](_ret)
 }
 
@@ -390,4 +400,3 @@ func (o *CLLocationManager) StartMonitoringVisits() {
 func (o *CLLocationManager) StopMonitoringVisits() {
 	o.Ptr().Send(_cLLocationManagerSelStopMonitoringVisits)
 }
-

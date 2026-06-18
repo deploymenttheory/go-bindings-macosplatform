@@ -17,7 +17,9 @@ type MacGraphicsDisplayConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.VZMacGraphicsDisplayConfiguration].
-func (x *MacGraphicsDisplayConfiguration) Unwrap() *raw.VZMacGraphicsDisplayConfiguration { return x.inner }
+func (x *MacGraphicsDisplayConfiguration) Unwrap() *raw.VZMacGraphicsDisplayConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -93,7 +95,9 @@ func (x *MacGraphicsDisplayConfiguration) SetPixelsPerInch(pixelsPerInch int) {
 	x.inner.SetPixelsPerInch(pixelsPerInch)
 }
 
-func (x *MacGraphicsDisplayConfiguration) asGraphicsDisplayConfiguration() *raw.VZGraphicsDisplayConfiguration { return &x.inner.VZGraphicsDisplayConfiguration }
+func (x *MacGraphicsDisplayConfiguration) asGraphicsDisplayConfiguration() *raw.VZGraphicsDisplayConfiguration {
+	return &x.inner.VZGraphicsDisplayConfiguration
+}
 
 // MacGraphicsDisplayConfigurationable is the interface implemented by [MacGraphicsDisplayConfiguration], for mocking and DI.
 type MacGraphicsDisplayConfigurationable interface {
@@ -110,4 +114,3 @@ type MacGraphicsDisplayConfigurationable interface {
 }
 
 var _ MacGraphicsDisplayConfigurationable = (*MacGraphicsDisplayConfiguration)(nil)
-

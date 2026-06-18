@@ -17,24 +17,24 @@ type MPSPolygonBuffer struct {
 }
 
 var (
-	_clsMPSPolygonBuffer = _objcClass("MPSPolygonBuffer")
-	_mPSPolygonBufferSelInit = objc.RegisterName("init")
-	_mPSPolygonBufferSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_mPSPolygonBufferSelPolygonBuffer = objc.RegisterName("polygonBuffer")
-	_mPSPolygonBufferSelVertexBuffer = objc.RegisterName("vertexBuffer")
-	_mPSPolygonBufferSelSetVertexBuffer = objc.RegisterName("setVertexBuffer:")
-	_mPSPolygonBufferSelVertexBufferOffset = objc.RegisterName("vertexBufferOffset")
+	_clsMPSPolygonBuffer                      = _objcClass("MPSPolygonBuffer")
+	_mPSPolygonBufferSelInit                  = objc.RegisterName("init")
+	_mPSPolygonBufferSelInitWithCoder         = objc.RegisterName("initWithCoder:")
+	_mPSPolygonBufferSelPolygonBuffer         = objc.RegisterName("polygonBuffer")
+	_mPSPolygonBufferSelVertexBuffer          = objc.RegisterName("vertexBuffer")
+	_mPSPolygonBufferSelSetVertexBuffer       = objc.RegisterName("setVertexBuffer:")
+	_mPSPolygonBufferSelVertexBufferOffset    = objc.RegisterName("vertexBufferOffset")
 	_mPSPolygonBufferSelSetVertexBufferOffset = objc.RegisterName("setVertexBufferOffset:")
-	_mPSPolygonBufferSelIndexBuffer = objc.RegisterName("indexBuffer")
-	_mPSPolygonBufferSelSetIndexBuffer = objc.RegisterName("setIndexBuffer:")
-	_mPSPolygonBufferSelIndexBufferOffset = objc.RegisterName("indexBufferOffset")
-	_mPSPolygonBufferSelSetIndexBufferOffset = objc.RegisterName("setIndexBufferOffset:")
-	_mPSPolygonBufferSelMaskBuffer = objc.RegisterName("maskBuffer")
-	_mPSPolygonBufferSelSetMaskBuffer = objc.RegisterName("setMaskBuffer:")
-	_mPSPolygonBufferSelMaskBufferOffset = objc.RegisterName("maskBufferOffset")
-	_mPSPolygonBufferSelSetMaskBufferOffset = objc.RegisterName("setMaskBufferOffset:")
-	_mPSPolygonBufferSelPolygonCount = objc.RegisterName("polygonCount")
-	_mPSPolygonBufferSelSetPolygonCount = objc.RegisterName("setPolygonCount:")
+	_mPSPolygonBufferSelIndexBuffer           = objc.RegisterName("indexBuffer")
+	_mPSPolygonBufferSelSetIndexBuffer        = objc.RegisterName("setIndexBuffer:")
+	_mPSPolygonBufferSelIndexBufferOffset     = objc.RegisterName("indexBufferOffset")
+	_mPSPolygonBufferSelSetIndexBufferOffset  = objc.RegisterName("setIndexBufferOffset:")
+	_mPSPolygonBufferSelMaskBuffer            = objc.RegisterName("maskBuffer")
+	_mPSPolygonBufferSelSetMaskBuffer         = objc.RegisterName("setMaskBuffer:")
+	_mPSPolygonBufferSelMaskBufferOffset      = objc.RegisterName("maskBufferOffset")
+	_mPSPolygonBufferSelSetMaskBufferOffset   = objc.RegisterName("setMaskBufferOffset:")
+	_mPSPolygonBufferSelPolygonCount          = objc.RegisterName("polygonCount")
+	_mPSPolygonBufferSelSetPolygonCount       = objc.RegisterName("setPolygonCount:")
 )
 
 func MPSPolygonBufferFromID(id objc.ID) *MPSPolygonBuffer {
@@ -50,20 +50,26 @@ func MPSPolygonBufferFromID(id objc.ID) *MPSPolygonBuffer {
 // @brief Initialize the polygon buffer
 func (o *MPSPolygonBuffer) Init() *MPSPolygonBuffer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSPolygonBufferSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSPolygonBufferFromID(_ret)
 }
 
 // @brief Initialize the polygon buffer with an NSCoder. Buffer properties such as the vertex buffer, instance buffer, etc. are set to nil. Encode and decode these buffers along with the polygon buffer instead.
 func (o *MPSPolygonBuffer) InitWithCoder(aDecoder *foundation.NSCoder) *MPSPolygonBuffer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSPolygonBufferSelInitWithCoder, aDecoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSPolygonBufferFromID(_ret)
 }
 
 func MPSPolygonBufferPolygonBuffer() *MPSPolygonBuffer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSPolygonBuffer), _mPSPolygonBufferSelPolygonBuffer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSPolygonBufferFromID(_ret)
 }
 
@@ -136,4 +142,3 @@ func (o *MPSPolygonBuffer) PolygonCount() uint {
 func (o *MPSPolygonBuffer) SetPolygonCount(polygonCount uint) {
 	o.Ptr().Send(_mPSPolygonBufferSelSetPolygonCount, polygonCount)
 }
-

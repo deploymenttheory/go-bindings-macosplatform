@@ -16,11 +16,11 @@ type HKVisionPrescription struct {
 }
 
 var (
-	_clsHKVisionPrescription = _objcClass("HKVisionPrescription")
+	_clsHKVisionPrescription                                                           = _objcClass("HKVisionPrescription")
 	_hKVisionPrescriptionSelPrescriptionWithTypeDateIssuedExpirationDateDeviceMetadata = objc.RegisterName("prescriptionWithType:dateIssued:expirationDate:device:metadata:")
-	_hKVisionPrescriptionSelPrescriptionType = objc.RegisterName("prescriptionType")
-	_hKVisionPrescriptionSelDateIssued = objc.RegisterName("dateIssued")
-	_hKVisionPrescriptionSelExpirationDate = objc.RegisterName("expirationDate")
+	_hKVisionPrescriptionSelPrescriptionType                                           = objc.RegisterName("prescriptionType")
+	_hKVisionPrescriptionSelDateIssued                                                 = objc.RegisterName("dateIssued")
+	_hKVisionPrescriptionSelExpirationDate                                             = objc.RegisterName("expirationDate")
 )
 
 func HKVisionPrescriptionFromID(id objc.ID) *HKVisionPrescription {
@@ -36,7 +36,9 @@ func HKVisionPrescriptionFromID(id objc.ID) *HKVisionPrescription {
 // @method        prescriptionWithType:dateIssued:expirationDate:device:metadata @param         type           The prescription type @param         dateIssued     The date the prescription was issued @param         expirationDate The date the prescription expires @param         device         The device that generated the sample @param         metadata       The metadata for the sample
 func HKVisionPrescriptionPrescriptionWithTypeDateIssuedExpirationDateDeviceMetadata(type_ HKVisionPrescriptionType, dateIssued *foundation.NSDate, expirationDate *foundation.NSDate, device *HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKVisionPrescription {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKVisionPrescription), _hKVisionPrescriptionSelPrescriptionWithTypeDateIssuedExpirationDateDeviceMetadata, type_, dateIssued.Ptr(), expirationDate.Ptr(), device.Ptr(), metadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKVisionPrescriptionFromID(_ret)
 }
 
@@ -49,14 +51,17 @@ func (o *HKVisionPrescription) PrescriptionType() HKVisionPrescriptionType {
 // @property      dateIssued @abstract      The date the prescription was issued
 func (o *HKVisionPrescription) DateIssued() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKVisionPrescriptionSelDateIssued)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // @property      expirationDate @abstract      The date the prescription will expire
 func (o *HKVisionPrescription) ExpirationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKVisionPrescriptionSelExpirationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
-

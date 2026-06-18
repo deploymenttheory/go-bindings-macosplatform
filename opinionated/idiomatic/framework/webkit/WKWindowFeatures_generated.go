@@ -90,4 +90,3 @@ type WKWindowFeaturesable interface {
 }
 
 var _ WKWindowFeaturesable = (*WKWindowFeatures)(nil)
-

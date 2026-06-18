@@ -85,4 +85,3 @@ type Destinationable interface {
 }
 
 var _ Destinationable = (*Destination)(nil)
-

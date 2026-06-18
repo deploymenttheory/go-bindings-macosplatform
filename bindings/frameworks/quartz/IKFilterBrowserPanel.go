@@ -19,9 +19,9 @@ type IKFilterBrowserPanel struct {
 }
 
 var (
-	_clsIKFilterBrowserPanel = _objcClass("IKFilterBrowserPanel")
+	_clsIKFilterBrowserPanel                                = _objcClass("IKFilterBrowserPanel")
 	_iKFilterBrowserPanelSelFilterBrowserPanelWithStyleMask = objc.RegisterName("filterBrowserPanelWithStyleMask:")
-	_iKFilterBrowserPanelSelFilterName = objc.RegisterName("filterName")
+	_iKFilterBrowserPanelSelFilterName                      = objc.RegisterName("filterName")
 )
 
 func IKFilterBrowserPanelFromID(id objc.ID) *IKFilterBrowserPanel {
@@ -43,7 +43,8 @@ func IKFilterBrowserPanelFilterBrowserPanelWithStyleMask(styleMask uint) objc.ID
 // @method     filterName @abstract   Returns the name of the currently selected filter. @discussion Use this method in response to a IKFilterBrowserFilterSelectedNotification or IKFilterBrowserFilterDoubleClickNotification or afer returning from a modal session.
 func (o *IKFilterBrowserPanel) FilterName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKFilterBrowserPanelSelFilterName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

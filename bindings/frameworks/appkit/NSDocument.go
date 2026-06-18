@@ -18,184 +18,184 @@ type NSDocument struct {
 }
 
 var (
-	_clsNSDocument = _objcClass("NSDocument")
-	_nSDocumentSelInit = objc.RegisterName("init")
-	_nSDocumentSelInitWithTypeError = objc.RegisterName("initWithType:error:")
-	_nSDocumentSelCanConcurrentlyReadDocumentsOfType = objc.RegisterName("canConcurrentlyReadDocumentsOfType:")
-	_nSDocumentSelInitWithContentsOfURLOfTypeError = objc.RegisterName("initWithContentsOfURL:ofType:error:")
-	_nSDocumentSelInitForURLWithContentsOfURLOfTypeError = objc.RegisterName("initForURL:withContentsOfURL:ofType:error:")
-	_nSDocumentSelPerformActivityWithSynchronousWaitingUsing = objc.RegisterName("performActivityWithSynchronousWaiting:usingBlock:")
-	_nSDocumentSelContinueActivityUsing = objc.RegisterName("continueActivityUsingBlock:")
-	_nSDocumentSelContinueAsynchronousWorkOnMainThreadUsing = objc.RegisterName("continueAsynchronousWorkOnMainThreadUsingBlock:")
-	_nSDocumentSelPerformSynchronousFileAccessUsing = objc.RegisterName("performSynchronousFileAccessUsingBlock:")
-	_nSDocumentSelPerformAsynchronousFileAccessUsing = objc.RegisterName("performAsynchronousFileAccessUsingBlock:")
-	_nSDocumentSelRevertDocumentToSaved = objc.RegisterName("revertDocumentToSaved:")
-	_nSDocumentSelRevertToContentsOfURLOfTypeError = objc.RegisterName("revertToContentsOfURL:ofType:error:")
-	_nSDocumentSelReadFromURLOfTypeError = objc.RegisterName("readFromURL:ofType:error:")
-	_nSDocumentSelReadFromFileWrapperOfTypeError = objc.RegisterName("readFromFileWrapper:ofType:error:")
-	_nSDocumentSelReadFromDataOfTypeError = objc.RegisterName("readFromData:ofType:error:")
-	_nSDocumentSelWriteToURLOfTypeError = objc.RegisterName("writeToURL:ofType:error:")
-	_nSDocumentSelFileWrapperOfTypeError = objc.RegisterName("fileWrapperOfType:error:")
-	_nSDocumentSelDataOfTypeError = objc.RegisterName("dataOfType:error:")
-	_nSDocumentSelUnblockUserInteraction = objc.RegisterName("unblockUserInteraction")
-	_nSDocumentSelWriteSafelyToURLOfTypeForSaveOperationError = objc.RegisterName("writeSafelyToURL:ofType:forSaveOperation:error:")
-	_nSDocumentSelWriteToURLOfTypeForSaveOperationOriginalContentsURLError = objc.RegisterName("writeToURL:ofType:forSaveOperation:originalContentsURL:error:")
-	_nSDocumentSelFileAttributesToWriteToURLOfTypeForSaveOperationOriginalContentsURLError = objc.RegisterName("fileAttributesToWriteToURL:ofType:forSaveOperation:originalContentsURL:error:")
-	_nSDocumentSelSaveDocument = objc.RegisterName("saveDocument:")
-	_nSDocumentSelSaveDocumentAs = objc.RegisterName("saveDocumentAs:")
-	_nSDocumentSelSaveDocumentTo = objc.RegisterName("saveDocumentTo:")
-	_nSDocumentSelSaveDocumentWithDelegateDidSaveSelectorContextInfo = objc.RegisterName("saveDocumentWithDelegate:didSaveSelector:contextInfo:")
-	_nSDocumentSelRunModalSavePanelForSaveOperationDelegateDidSaveSelectorContextInfo = objc.RegisterName("runModalSavePanelForSaveOperation:delegate:didSaveSelector:contextInfo:")
-	_nSDocumentSelPrepareSavePanel = objc.RegisterName("prepareSavePanel:")
-	_nSDocumentSelSaveToURLOfTypeForSaveOperationDelegateDidSaveSelectorContextInfo = objc.RegisterName("saveToURL:ofType:forSaveOperation:delegate:didSaveSelector:contextInfo:")
-	_nSDocumentSelSaveToURLOfTypeForSaveOperationCompletionHandler = objc.RegisterName("saveToURL:ofType:forSaveOperation:completionHandler:")
-	_nSDocumentSelCanAsynchronouslyWriteToURLOfTypeForSaveOperation = objc.RegisterName("canAsynchronouslyWriteToURL:ofType:forSaveOperation:")
-	_nSDocumentSelCheckAutosavingSafetyAndReturnError = objc.RegisterName("checkAutosavingSafetyAndReturnError:")
-	_nSDocumentSelScheduleAutosaving = objc.RegisterName("scheduleAutosaving")
-	_nSDocumentSelAutosaveDocumentWithDelegateDidAutosaveSelectorContextInfo = objc.RegisterName("autosaveDocumentWithDelegate:didAutosaveSelector:contextInfo:")
-	_nSDocumentSelAutosaveWithImplicitCancellabilityCompletionHandler = objc.RegisterName("autosaveWithImplicitCancellability:completionHandler:")
-	_nSDocumentSelBrowseDocumentVersions = objc.RegisterName("browseDocumentVersions:")
-	_nSDocumentSelStopBrowsingVersionsWithCompletionHandler = objc.RegisterName("stopBrowsingVersionsWithCompletionHandler:")
-	_nSDocumentSelCanCloseDocumentWithDelegateShouldCloseSelectorContextInfo = objc.RegisterName("canCloseDocumentWithDelegate:shouldCloseSelector:contextInfo:")
-	_nSDocumentSelClose = objc.RegisterName("close")
-	_nSDocumentSelDuplicateDocument = objc.RegisterName("duplicateDocument:")
-	_nSDocumentSelDuplicateDocumentWithDelegateDidDuplicateSelectorContextInfo = objc.RegisterName("duplicateDocumentWithDelegate:didDuplicateSelector:contextInfo:")
-	_nSDocumentSelDuplicateAndReturnError = objc.RegisterName("duplicateAndReturnError:")
-	_nSDocumentSelRenameDocument = objc.RegisterName("renameDocument:")
-	_nSDocumentSelMoveDocumentToUbiquityContainer = objc.RegisterName("moveDocumentToUbiquityContainer:")
-	_nSDocumentSelMoveDocument = objc.RegisterName("moveDocument:")
-	_nSDocumentSelMoveDocumentWithCompletionHandler = objc.RegisterName("moveDocumentWithCompletionHandler:")
-	_nSDocumentSelMoveToURLCompletionHandler = objc.RegisterName("moveToURL:completionHandler:")
-	_nSDocumentSelLockDocument = objc.RegisterName("lockDocument:")
-	_nSDocumentSelUnlockDocument = objc.RegisterName("unlockDocument:")
-	_nSDocumentSelLockDocumentWithCompletionHandler = objc.RegisterName("lockDocumentWithCompletionHandler:")
-	_nSDocumentSelLockWithCompletionHandler = objc.RegisterName("lockWithCompletionHandler:")
-	_nSDocumentSelUnlockDocumentWithCompletionHandler = objc.RegisterName("unlockDocumentWithCompletionHandler:")
-	_nSDocumentSelUnlockWithCompletionHandler = objc.RegisterName("unlockWithCompletionHandler:")
-	_nSDocumentSelRunPageLayout = objc.RegisterName("runPageLayout:")
-	_nSDocumentSelRunModalPageLayoutWithPrintInfoDelegateDidRunSelectorContextInfo = objc.RegisterName("runModalPageLayoutWithPrintInfo:delegate:didRunSelector:contextInfo:")
-	_nSDocumentSelPreparePageLayout = objc.RegisterName("preparePageLayout:")
-	_nSDocumentSelShouldChangePrintInfo = objc.RegisterName("shouldChangePrintInfo:")
-	_nSDocumentSelPrintDocument = objc.RegisterName("printDocument:")
+	_clsNSDocument                                                                           = _objcClass("NSDocument")
+	_nSDocumentSelInit                                                                       = objc.RegisterName("init")
+	_nSDocumentSelInitWithTypeError                                                          = objc.RegisterName("initWithType:error:")
+	_nSDocumentSelCanConcurrentlyReadDocumentsOfType                                         = objc.RegisterName("canConcurrentlyReadDocumentsOfType:")
+	_nSDocumentSelInitWithContentsOfURLOfTypeError                                           = objc.RegisterName("initWithContentsOfURL:ofType:error:")
+	_nSDocumentSelInitForURLWithContentsOfURLOfTypeError                                     = objc.RegisterName("initForURL:withContentsOfURL:ofType:error:")
+	_nSDocumentSelPerformActivityWithSynchronousWaitingUsing                                 = objc.RegisterName("performActivityWithSynchronousWaiting:usingBlock:")
+	_nSDocumentSelContinueActivityUsing                                                      = objc.RegisterName("continueActivityUsingBlock:")
+	_nSDocumentSelContinueAsynchronousWorkOnMainThreadUsing                                  = objc.RegisterName("continueAsynchronousWorkOnMainThreadUsingBlock:")
+	_nSDocumentSelPerformSynchronousFileAccessUsing                                          = objc.RegisterName("performSynchronousFileAccessUsingBlock:")
+	_nSDocumentSelPerformAsynchronousFileAccessUsing                                         = objc.RegisterName("performAsynchronousFileAccessUsingBlock:")
+	_nSDocumentSelRevertDocumentToSaved                                                      = objc.RegisterName("revertDocumentToSaved:")
+	_nSDocumentSelRevertToContentsOfURLOfTypeError                                           = objc.RegisterName("revertToContentsOfURL:ofType:error:")
+	_nSDocumentSelReadFromURLOfTypeError                                                     = objc.RegisterName("readFromURL:ofType:error:")
+	_nSDocumentSelReadFromFileWrapperOfTypeError                                             = objc.RegisterName("readFromFileWrapper:ofType:error:")
+	_nSDocumentSelReadFromDataOfTypeError                                                    = objc.RegisterName("readFromData:ofType:error:")
+	_nSDocumentSelWriteToURLOfTypeError                                                      = objc.RegisterName("writeToURL:ofType:error:")
+	_nSDocumentSelFileWrapperOfTypeError                                                     = objc.RegisterName("fileWrapperOfType:error:")
+	_nSDocumentSelDataOfTypeError                                                            = objc.RegisterName("dataOfType:error:")
+	_nSDocumentSelUnblockUserInteraction                                                     = objc.RegisterName("unblockUserInteraction")
+	_nSDocumentSelWriteSafelyToURLOfTypeForSaveOperationError                                = objc.RegisterName("writeSafelyToURL:ofType:forSaveOperation:error:")
+	_nSDocumentSelWriteToURLOfTypeForSaveOperationOriginalContentsURLError                   = objc.RegisterName("writeToURL:ofType:forSaveOperation:originalContentsURL:error:")
+	_nSDocumentSelFileAttributesToWriteToURLOfTypeForSaveOperationOriginalContentsURLError   = objc.RegisterName("fileAttributesToWriteToURL:ofType:forSaveOperation:originalContentsURL:error:")
+	_nSDocumentSelSaveDocument                                                               = objc.RegisterName("saveDocument:")
+	_nSDocumentSelSaveDocumentAs                                                             = objc.RegisterName("saveDocumentAs:")
+	_nSDocumentSelSaveDocumentTo                                                             = objc.RegisterName("saveDocumentTo:")
+	_nSDocumentSelSaveDocumentWithDelegateDidSaveSelectorContextInfo                         = objc.RegisterName("saveDocumentWithDelegate:didSaveSelector:contextInfo:")
+	_nSDocumentSelRunModalSavePanelForSaveOperationDelegateDidSaveSelectorContextInfo        = objc.RegisterName("runModalSavePanelForSaveOperation:delegate:didSaveSelector:contextInfo:")
+	_nSDocumentSelPrepareSavePanel                                                           = objc.RegisterName("prepareSavePanel:")
+	_nSDocumentSelSaveToURLOfTypeForSaveOperationDelegateDidSaveSelectorContextInfo          = objc.RegisterName("saveToURL:ofType:forSaveOperation:delegate:didSaveSelector:contextInfo:")
+	_nSDocumentSelSaveToURLOfTypeForSaveOperationCompletionHandler                           = objc.RegisterName("saveToURL:ofType:forSaveOperation:completionHandler:")
+	_nSDocumentSelCanAsynchronouslyWriteToURLOfTypeForSaveOperation                          = objc.RegisterName("canAsynchronouslyWriteToURL:ofType:forSaveOperation:")
+	_nSDocumentSelCheckAutosavingSafetyAndReturnError                                        = objc.RegisterName("checkAutosavingSafetyAndReturnError:")
+	_nSDocumentSelScheduleAutosaving                                                         = objc.RegisterName("scheduleAutosaving")
+	_nSDocumentSelAutosaveDocumentWithDelegateDidAutosaveSelectorContextInfo                 = objc.RegisterName("autosaveDocumentWithDelegate:didAutosaveSelector:contextInfo:")
+	_nSDocumentSelAutosaveWithImplicitCancellabilityCompletionHandler                        = objc.RegisterName("autosaveWithImplicitCancellability:completionHandler:")
+	_nSDocumentSelBrowseDocumentVersions                                                     = objc.RegisterName("browseDocumentVersions:")
+	_nSDocumentSelStopBrowsingVersionsWithCompletionHandler                                  = objc.RegisterName("stopBrowsingVersionsWithCompletionHandler:")
+	_nSDocumentSelCanCloseDocumentWithDelegateShouldCloseSelectorContextInfo                 = objc.RegisterName("canCloseDocumentWithDelegate:shouldCloseSelector:contextInfo:")
+	_nSDocumentSelClose                                                                      = objc.RegisterName("close")
+	_nSDocumentSelDuplicateDocument                                                          = objc.RegisterName("duplicateDocument:")
+	_nSDocumentSelDuplicateDocumentWithDelegateDidDuplicateSelectorContextInfo               = objc.RegisterName("duplicateDocumentWithDelegate:didDuplicateSelector:contextInfo:")
+	_nSDocumentSelDuplicateAndReturnError                                                    = objc.RegisterName("duplicateAndReturnError:")
+	_nSDocumentSelRenameDocument                                                             = objc.RegisterName("renameDocument:")
+	_nSDocumentSelMoveDocumentToUbiquityContainer                                            = objc.RegisterName("moveDocumentToUbiquityContainer:")
+	_nSDocumentSelMoveDocument                                                               = objc.RegisterName("moveDocument:")
+	_nSDocumentSelMoveDocumentWithCompletionHandler                                          = objc.RegisterName("moveDocumentWithCompletionHandler:")
+	_nSDocumentSelMoveToURLCompletionHandler                                                 = objc.RegisterName("moveToURL:completionHandler:")
+	_nSDocumentSelLockDocument                                                               = objc.RegisterName("lockDocument:")
+	_nSDocumentSelUnlockDocument                                                             = objc.RegisterName("unlockDocument:")
+	_nSDocumentSelLockDocumentWithCompletionHandler                                          = objc.RegisterName("lockDocumentWithCompletionHandler:")
+	_nSDocumentSelLockWithCompletionHandler                                                  = objc.RegisterName("lockWithCompletionHandler:")
+	_nSDocumentSelUnlockDocumentWithCompletionHandler                                        = objc.RegisterName("unlockDocumentWithCompletionHandler:")
+	_nSDocumentSelUnlockWithCompletionHandler                                                = objc.RegisterName("unlockWithCompletionHandler:")
+	_nSDocumentSelRunPageLayout                                                              = objc.RegisterName("runPageLayout:")
+	_nSDocumentSelRunModalPageLayoutWithPrintInfoDelegateDidRunSelectorContextInfo           = objc.RegisterName("runModalPageLayoutWithPrintInfo:delegate:didRunSelector:contextInfo:")
+	_nSDocumentSelPreparePageLayout                                                          = objc.RegisterName("preparePageLayout:")
+	_nSDocumentSelShouldChangePrintInfo                                                      = objc.RegisterName("shouldChangePrintInfo:")
+	_nSDocumentSelPrintDocument                                                              = objc.RegisterName("printDocument:")
 	_nSDocumentSelPrintDocumentWithSettingsShowPrintPanelDelegateDidPrintSelectorContextInfo = objc.RegisterName("printDocumentWithSettings:showPrintPanel:delegate:didPrintSelector:contextInfo:")
-	_nSDocumentSelPrintOperationWithSettingsError = objc.RegisterName("printOperationWithSettings:error:")
-	_nSDocumentSelRunModalPrintOperationDelegateDidRunSelectorContextInfo = objc.RegisterName("runModalPrintOperation:delegate:didRunSelector:contextInfo:")
-	_nSDocumentSelSaveDocumentToPDF = objc.RegisterName("saveDocumentToPDF:")
-	_nSDocumentSelShareDocumentWithSharingServiceCompletionHandler = objc.RegisterName("shareDocumentWithSharingService:completionHandler:")
-	_nSDocumentSelPrepareSharingServicePicker = objc.RegisterName("prepareSharingServicePicker:")
-	_nSDocumentSelUpdateChangeCount = objc.RegisterName("updateChangeCount:")
-	_nSDocumentSelChangeCountTokenForSaveOperation = objc.RegisterName("changeCountTokenForSaveOperation:")
-	_nSDocumentSelUpdateChangeCountWithTokenForSaveOperation = objc.RegisterName("updateChangeCountWithToken:forSaveOperation:")
-	_nSDocumentSelPresentErrorModalForWindowDelegateDidPresentSelectorContextInfo = objc.RegisterName("presentError:modalForWindow:delegate:didPresentSelector:contextInfo:")
-	_nSDocumentSelPresentError = objc.RegisterName("presentError:")
-	_nSDocumentSelWillPresentError = objc.RegisterName("willPresentError:")
-	_nSDocumentSelWillNotPresentError = objc.RegisterName("willNotPresentError:")
-	_nSDocumentSelMakeWindowControllers = objc.RegisterName("makeWindowControllers")
-	_nSDocumentSelWindowControllerWillLoadNib = objc.RegisterName("windowControllerWillLoadNib:")
-	_nSDocumentSelWindowControllerDidLoadNib = objc.RegisterName("windowControllerDidLoadNib:")
-	_nSDocumentSelSetWindow = objc.RegisterName("setWindow:")
-	_nSDocumentSelAddWindowController = objc.RegisterName("addWindowController:")
-	_nSDocumentSelRemoveWindowController = objc.RegisterName("removeWindowController:")
-	_nSDocumentSelShowWindows = objc.RegisterName("showWindows")
-	_nSDocumentSelShouldCloseWindowControllerDelegateShouldCloseSelectorContextInfo = objc.RegisterName("shouldCloseWindowController:delegate:shouldCloseSelector:contextInfo:")
-	_nSDocumentSelSetDisplayName = objc.RegisterName("setDisplayName:")
-	_nSDocumentSelDefaultDraftName = objc.RegisterName("defaultDraftName")
-	_nSDocumentSelIsNativeType = objc.RegisterName("isNativeType:")
-	_nSDocumentSelWritableTypesForSaveOperation = objc.RegisterName("writableTypesForSaveOperation:")
-	_nSDocumentSelFileNameExtensionForTypeSaveOperation = objc.RegisterName("fileNameExtensionForType:saveOperation:")
-	_nSDocumentSelValidateUserInterfaceItem = objc.RegisterName("validateUserInterfaceItem:")
-	_nSDocumentSelRelinquishPresentedItemToReader = objc.RegisterName("relinquishPresentedItemToReader:")
-	_nSDocumentSelRelinquishPresentedItemToWriter = objc.RegisterName("relinquishPresentedItemToWriter:")
-	_nSDocumentSelSavePresentedItemChangesWithCompletionHandler = objc.RegisterName("savePresentedItemChangesWithCompletionHandler:")
-	_nSDocumentSelAccommodatePresentedItemDeletionWithCompletionHandler = objc.RegisterName("accommodatePresentedItemDeletionWithCompletionHandler:")
-	_nSDocumentSelPresentedItemDidMoveToURL = objc.RegisterName("presentedItemDidMoveToURL:")
-	_nSDocumentSelPresentedItemDidChange = objc.RegisterName("presentedItemDidChange")
-	_nSDocumentSelPresentedItemDidChangeUbiquityAttributes = objc.RegisterName("presentedItemDidChangeUbiquityAttributes:")
-	_nSDocumentSelPresentedItemDidGainVersion = objc.RegisterName("presentedItemDidGainVersion:")
-	_nSDocumentSelPresentedItemDidLoseVersion = objc.RegisterName("presentedItemDidLoseVersion:")
-	_nSDocumentSelPresentedItemDidResolveConflictVersion = objc.RegisterName("presentedItemDidResolveConflictVersion:")
-	_nSDocumentSelFileType = objc.RegisterName("fileType")
-	_nSDocumentSelSetFileType = objc.RegisterName("setFileType:")
-	_nSDocumentSelFileURL = objc.RegisterName("fileURL")
-	_nSDocumentSelSetFileURL = objc.RegisterName("setFileURL:")
-	_nSDocumentSelFileModificationDate = objc.RegisterName("fileModificationDate")
-	_nSDocumentSelSetFileModificationDate = objc.RegisterName("setFileModificationDate:")
-	_nSDocumentSelIsDraft = objc.RegisterName("isDraft")
-	_nSDocumentSelSetDraft = objc.RegisterName("setDraft:")
-	_nSDocumentSelIsEntireFileLoaded = objc.RegisterName("isEntireFileLoaded")
-	_nSDocumentSelAutosavingIsImplicitlyCancellable = objc.RegisterName("autosavingIsImplicitlyCancellable")
-	_nSDocumentSelKeepBackupFile = objc.RegisterName("keepBackupFile")
-	_nSDocumentSelBackupFileURL = objc.RegisterName("backupFileURL")
-	_nSDocumentSelSavePanelShowsFileFormatsControl = objc.RegisterName("savePanelShowsFileFormatsControl")
-	_nSDocumentSelFileNameExtensionWasHiddenInLastRunSavePanel = objc.RegisterName("fileNameExtensionWasHiddenInLastRunSavePanel")
-	_nSDocumentSelFileTypeFromLastRunSavePanel = objc.RegisterName("fileTypeFromLastRunSavePanel")
-	_nSDocumentSelHasUnautosavedChanges = objc.RegisterName("hasUnautosavedChanges")
-	_nSDocumentSelAutosavesInPlace = objc.RegisterName("autosavesInPlace")
-	_nSDocumentSelPreservesVersions = objc.RegisterName("preservesVersions")
-	_nSDocumentSelIsBrowsingVersions = objc.RegisterName("isBrowsingVersions")
-	_nSDocumentSelAutosavesDrafts = objc.RegisterName("autosavesDrafts")
-	_nSDocumentSelAutosavingFileType = objc.RegisterName("autosavingFileType")
-	_nSDocumentSelAutosavedContentsFileURL = objc.RegisterName("autosavedContentsFileURL")
-	_nSDocumentSelSetAutosavedContentsFileURL = objc.RegisterName("setAutosavedContentsFileURL:")
-	_nSDocumentSelIsLocked = objc.RegisterName("isLocked")
-	_nSDocumentSelPrintInfo = objc.RegisterName("printInfo")
-	_nSDocumentSelSetPrintInfo = objc.RegisterName("setPrintInfo:")
-	_nSDocumentSelPDFPrintOperation = objc.RegisterName("PDFPrintOperation")
-	_nSDocumentSelAllowsDocumentSharing = objc.RegisterName("allowsDocumentSharing")
-	_nSDocumentSelPreviewRepresentableActivityItems = objc.RegisterName("previewRepresentableActivityItems")
-	_nSDocumentSelSetPreviewRepresentableActivityItems = objc.RegisterName("setPreviewRepresentableActivityItems:")
-	_nSDocumentSelIsDocumentEdited = objc.RegisterName("isDocumentEdited")
-	_nSDocumentSelIsInViewingMode = objc.RegisterName("isInViewingMode")
-	_nSDocumentSelUndoManager = objc.RegisterName("undoManager")
-	_nSDocumentSelSetUndoManager = objc.RegisterName("setUndoManager:")
-	_nSDocumentSelHasUndoManager = objc.RegisterName("hasUndoManager")
-	_nSDocumentSelSetHasUndoManager = objc.RegisterName("setHasUndoManager:")
-	_nSDocumentSelWindowNibName = objc.RegisterName("windowNibName")
-	_nSDocumentSelWindowControllers = objc.RegisterName("windowControllers")
-	_nSDocumentSelDisplayName = objc.RegisterName("displayName")
-	_nSDocumentSelWindowForSheet = objc.RegisterName("windowForSheet")
-	_nSDocumentSelReadableTypes = objc.RegisterName("readableTypes")
-	_nSDocumentSelWritableTypes = objc.RegisterName("writableTypes")
-	_nSDocumentSelUsesUbiquitousStorage = objc.RegisterName("usesUbiquitousStorage")
-	_nSDocumentSelPresentedItemURL = objc.RegisterName("presentedItemURL")
-	_nSDocumentSelObservedPresentedItemUbiquityAttributes = objc.RegisterName("observedPresentedItemUbiquityAttributes")
-	_nSDocumentSelSaveToURLOfTypeForSaveOperationError = objc.RegisterName("saveToURL:ofType:forSaveOperation:error:")
-	_nSDocumentSelDataRepresentationOfType = objc.RegisterName("dataRepresentationOfType:")
-	_nSDocumentSelFileAttributesToWriteToFileOfTypeSaveOperation = objc.RegisterName("fileAttributesToWriteToFile:ofType:saveOperation:")
-	_nSDocumentSelFileName = objc.RegisterName("fileName")
-	_nSDocumentSelFileWrapperRepresentationOfType = objc.RegisterName("fileWrapperRepresentationOfType:")
-	_nSDocumentSelInitWithContentsOfFileOfType = objc.RegisterName("initWithContentsOfFile:ofType:")
-	_nSDocumentSelInitWithContentsOfURLOfType = objc.RegisterName("initWithContentsOfURL:ofType:")
-	_nSDocumentSelLoadDataRepresentationOfType = objc.RegisterName("loadDataRepresentation:ofType:")
-	_nSDocumentSelLoadFileWrapperRepresentationOfType = objc.RegisterName("loadFileWrapperRepresentation:ofType:")
-	_nSDocumentSelPrintShowingPrintPanel = objc.RegisterName("printShowingPrintPanel:")
-	_nSDocumentSelReadFromFileOfType = objc.RegisterName("readFromFile:ofType:")
-	_nSDocumentSelReadFromURLOfType = objc.RegisterName("readFromURL:ofType:")
-	_nSDocumentSelRevertToSavedFromFileOfType = objc.RegisterName("revertToSavedFromFile:ofType:")
-	_nSDocumentSelRevertToSavedFromURLOfType = objc.RegisterName("revertToSavedFromURL:ofType:")
-	_nSDocumentSelRunModalPageLayoutWithPrintInfo = objc.RegisterName("runModalPageLayoutWithPrintInfo:")
-	_nSDocumentSelSaveToFileSaveOperationDelegateDidSaveSelectorContextInfo = objc.RegisterName("saveToFile:saveOperation:delegate:didSaveSelector:contextInfo:")
-	_nSDocumentSelSetFileName = objc.RegisterName("setFileName:")
-	_nSDocumentSelWriteToFileOfType = objc.RegisterName("writeToFile:ofType:")
-	_nSDocumentSelWriteToFileOfTypeOriginalFileSaveOperation = objc.RegisterName("writeToFile:ofType:originalFile:saveOperation:")
-	_nSDocumentSelWriteToURLOfType = objc.RegisterName("writeToURL:ofType:")
-	_nSDocumentSelWriteWithBackupToFileOfTypeSaveOperation = objc.RegisterName("writeWithBackupToFile:ofType:saveOperation:")
-	_nSDocumentSelShouldRunSavePanelWithAccessoryView = objc.RegisterName("shouldRunSavePanelWithAccessoryView")
-	_nSDocumentSelUpdateUserActivityState = objc.RegisterName("updateUserActivityState:")
-	_nSDocumentSelUserActivity = objc.RegisterName("userActivity")
-	_nSDocumentSelSetUserActivity = objc.RegisterName("setUserActivity:")
-	_nSDocumentSelHandleSaveScriptCommand = objc.RegisterName("handleSaveScriptCommand:")
-	_nSDocumentSelHandleCloseScriptCommand = objc.RegisterName("handleCloseScriptCommand:")
-	_nSDocumentSelHandlePrintScriptCommand = objc.RegisterName("handlePrintScriptCommand:")
-	_nSDocumentSelLastComponentOfFileName = objc.RegisterName("lastComponentOfFileName")
-	_nSDocumentSelSetLastComponentOfFileName = objc.RegisterName("setLastComponentOfFileName:")
-	_nSDocumentSelRestoreDocumentWindowWithIdentifierStateCompletionHandler = objc.RegisterName("restoreDocumentWindowWithIdentifier:state:completionHandler:")
-	_nSDocumentSelEncodeRestorableStateWithCoder = objc.RegisterName("encodeRestorableStateWithCoder:")
-	_nSDocumentSelEncodeRestorableStateWithCoderBackgroundQueue = objc.RegisterName("encodeRestorableStateWithCoder:backgroundQueue:")
-	_nSDocumentSelRestoreStateWithCoder = objc.RegisterName("restoreStateWithCoder:")
-	_nSDocumentSelInvalidateRestorableState = objc.RegisterName("invalidateRestorableState")
-	_nSDocumentSelAllowedClassesForRestorableStateKeyPath = objc.RegisterName("allowedClassesForRestorableStateKeyPath:")
-	_nSDocumentSelRestorableStateKeyPaths = objc.RegisterName("restorableStateKeyPaths")
+	_nSDocumentSelPrintOperationWithSettingsError                                            = objc.RegisterName("printOperationWithSettings:error:")
+	_nSDocumentSelRunModalPrintOperationDelegateDidRunSelectorContextInfo                    = objc.RegisterName("runModalPrintOperation:delegate:didRunSelector:contextInfo:")
+	_nSDocumentSelSaveDocumentToPDF                                                          = objc.RegisterName("saveDocumentToPDF:")
+	_nSDocumentSelShareDocumentWithSharingServiceCompletionHandler                           = objc.RegisterName("shareDocumentWithSharingService:completionHandler:")
+	_nSDocumentSelPrepareSharingServicePicker                                                = objc.RegisterName("prepareSharingServicePicker:")
+	_nSDocumentSelUpdateChangeCount                                                          = objc.RegisterName("updateChangeCount:")
+	_nSDocumentSelChangeCountTokenForSaveOperation                                           = objc.RegisterName("changeCountTokenForSaveOperation:")
+	_nSDocumentSelUpdateChangeCountWithTokenForSaveOperation                                 = objc.RegisterName("updateChangeCountWithToken:forSaveOperation:")
+	_nSDocumentSelPresentErrorModalForWindowDelegateDidPresentSelectorContextInfo            = objc.RegisterName("presentError:modalForWindow:delegate:didPresentSelector:contextInfo:")
+	_nSDocumentSelPresentError                                                               = objc.RegisterName("presentError:")
+	_nSDocumentSelWillPresentError                                                           = objc.RegisterName("willPresentError:")
+	_nSDocumentSelWillNotPresentError                                                        = objc.RegisterName("willNotPresentError:")
+	_nSDocumentSelMakeWindowControllers                                                      = objc.RegisterName("makeWindowControllers")
+	_nSDocumentSelWindowControllerWillLoadNib                                                = objc.RegisterName("windowControllerWillLoadNib:")
+	_nSDocumentSelWindowControllerDidLoadNib                                                 = objc.RegisterName("windowControllerDidLoadNib:")
+	_nSDocumentSelSetWindow                                                                  = objc.RegisterName("setWindow:")
+	_nSDocumentSelAddWindowController                                                        = objc.RegisterName("addWindowController:")
+	_nSDocumentSelRemoveWindowController                                                     = objc.RegisterName("removeWindowController:")
+	_nSDocumentSelShowWindows                                                                = objc.RegisterName("showWindows")
+	_nSDocumentSelShouldCloseWindowControllerDelegateShouldCloseSelectorContextInfo          = objc.RegisterName("shouldCloseWindowController:delegate:shouldCloseSelector:contextInfo:")
+	_nSDocumentSelSetDisplayName                                                             = objc.RegisterName("setDisplayName:")
+	_nSDocumentSelDefaultDraftName                                                           = objc.RegisterName("defaultDraftName")
+	_nSDocumentSelIsNativeType                                                               = objc.RegisterName("isNativeType:")
+	_nSDocumentSelWritableTypesForSaveOperation                                              = objc.RegisterName("writableTypesForSaveOperation:")
+	_nSDocumentSelFileNameExtensionForTypeSaveOperation                                      = objc.RegisterName("fileNameExtensionForType:saveOperation:")
+	_nSDocumentSelValidateUserInterfaceItem                                                  = objc.RegisterName("validateUserInterfaceItem:")
+	_nSDocumentSelRelinquishPresentedItemToReader                                            = objc.RegisterName("relinquishPresentedItemToReader:")
+	_nSDocumentSelRelinquishPresentedItemToWriter                                            = objc.RegisterName("relinquishPresentedItemToWriter:")
+	_nSDocumentSelSavePresentedItemChangesWithCompletionHandler                              = objc.RegisterName("savePresentedItemChangesWithCompletionHandler:")
+	_nSDocumentSelAccommodatePresentedItemDeletionWithCompletionHandler                      = objc.RegisterName("accommodatePresentedItemDeletionWithCompletionHandler:")
+	_nSDocumentSelPresentedItemDidMoveToURL                                                  = objc.RegisterName("presentedItemDidMoveToURL:")
+	_nSDocumentSelPresentedItemDidChange                                                     = objc.RegisterName("presentedItemDidChange")
+	_nSDocumentSelPresentedItemDidChangeUbiquityAttributes                                   = objc.RegisterName("presentedItemDidChangeUbiquityAttributes:")
+	_nSDocumentSelPresentedItemDidGainVersion                                                = objc.RegisterName("presentedItemDidGainVersion:")
+	_nSDocumentSelPresentedItemDidLoseVersion                                                = objc.RegisterName("presentedItemDidLoseVersion:")
+	_nSDocumentSelPresentedItemDidResolveConflictVersion                                     = objc.RegisterName("presentedItemDidResolveConflictVersion:")
+	_nSDocumentSelFileType                                                                   = objc.RegisterName("fileType")
+	_nSDocumentSelSetFileType                                                                = objc.RegisterName("setFileType:")
+	_nSDocumentSelFileURL                                                                    = objc.RegisterName("fileURL")
+	_nSDocumentSelSetFileURL                                                                 = objc.RegisterName("setFileURL:")
+	_nSDocumentSelFileModificationDate                                                       = objc.RegisterName("fileModificationDate")
+	_nSDocumentSelSetFileModificationDate                                                    = objc.RegisterName("setFileModificationDate:")
+	_nSDocumentSelIsDraft                                                                    = objc.RegisterName("isDraft")
+	_nSDocumentSelSetDraft                                                                   = objc.RegisterName("setDraft:")
+	_nSDocumentSelIsEntireFileLoaded                                                         = objc.RegisterName("isEntireFileLoaded")
+	_nSDocumentSelAutosavingIsImplicitlyCancellable                                          = objc.RegisterName("autosavingIsImplicitlyCancellable")
+	_nSDocumentSelKeepBackupFile                                                             = objc.RegisterName("keepBackupFile")
+	_nSDocumentSelBackupFileURL                                                              = objc.RegisterName("backupFileURL")
+	_nSDocumentSelSavePanelShowsFileFormatsControl                                           = objc.RegisterName("savePanelShowsFileFormatsControl")
+	_nSDocumentSelFileNameExtensionWasHiddenInLastRunSavePanel                               = objc.RegisterName("fileNameExtensionWasHiddenInLastRunSavePanel")
+	_nSDocumentSelFileTypeFromLastRunSavePanel                                               = objc.RegisterName("fileTypeFromLastRunSavePanel")
+	_nSDocumentSelHasUnautosavedChanges                                                      = objc.RegisterName("hasUnautosavedChanges")
+	_nSDocumentSelAutosavesInPlace                                                           = objc.RegisterName("autosavesInPlace")
+	_nSDocumentSelPreservesVersions                                                          = objc.RegisterName("preservesVersions")
+	_nSDocumentSelIsBrowsingVersions                                                         = objc.RegisterName("isBrowsingVersions")
+	_nSDocumentSelAutosavesDrafts                                                            = objc.RegisterName("autosavesDrafts")
+	_nSDocumentSelAutosavingFileType                                                         = objc.RegisterName("autosavingFileType")
+	_nSDocumentSelAutosavedContentsFileURL                                                   = objc.RegisterName("autosavedContentsFileURL")
+	_nSDocumentSelSetAutosavedContentsFileURL                                                = objc.RegisterName("setAutosavedContentsFileURL:")
+	_nSDocumentSelIsLocked                                                                   = objc.RegisterName("isLocked")
+	_nSDocumentSelPrintInfo                                                                  = objc.RegisterName("printInfo")
+	_nSDocumentSelSetPrintInfo                                                               = objc.RegisterName("setPrintInfo:")
+	_nSDocumentSelPDFPrintOperation                                                          = objc.RegisterName("PDFPrintOperation")
+	_nSDocumentSelAllowsDocumentSharing                                                      = objc.RegisterName("allowsDocumentSharing")
+	_nSDocumentSelPreviewRepresentableActivityItems                                          = objc.RegisterName("previewRepresentableActivityItems")
+	_nSDocumentSelSetPreviewRepresentableActivityItems                                       = objc.RegisterName("setPreviewRepresentableActivityItems:")
+	_nSDocumentSelIsDocumentEdited                                                           = objc.RegisterName("isDocumentEdited")
+	_nSDocumentSelIsInViewingMode                                                            = objc.RegisterName("isInViewingMode")
+	_nSDocumentSelUndoManager                                                                = objc.RegisterName("undoManager")
+	_nSDocumentSelSetUndoManager                                                             = objc.RegisterName("setUndoManager:")
+	_nSDocumentSelHasUndoManager                                                             = objc.RegisterName("hasUndoManager")
+	_nSDocumentSelSetHasUndoManager                                                          = objc.RegisterName("setHasUndoManager:")
+	_nSDocumentSelWindowNibName                                                              = objc.RegisterName("windowNibName")
+	_nSDocumentSelWindowControllers                                                          = objc.RegisterName("windowControllers")
+	_nSDocumentSelDisplayName                                                                = objc.RegisterName("displayName")
+	_nSDocumentSelWindowForSheet                                                             = objc.RegisterName("windowForSheet")
+	_nSDocumentSelReadableTypes                                                              = objc.RegisterName("readableTypes")
+	_nSDocumentSelWritableTypes                                                              = objc.RegisterName("writableTypes")
+	_nSDocumentSelUsesUbiquitousStorage                                                      = objc.RegisterName("usesUbiquitousStorage")
+	_nSDocumentSelPresentedItemURL                                                           = objc.RegisterName("presentedItemURL")
+	_nSDocumentSelObservedPresentedItemUbiquityAttributes                                    = objc.RegisterName("observedPresentedItemUbiquityAttributes")
+	_nSDocumentSelSaveToURLOfTypeForSaveOperationError                                       = objc.RegisterName("saveToURL:ofType:forSaveOperation:error:")
+	_nSDocumentSelDataRepresentationOfType                                                   = objc.RegisterName("dataRepresentationOfType:")
+	_nSDocumentSelFileAttributesToWriteToFileOfTypeSaveOperation                             = objc.RegisterName("fileAttributesToWriteToFile:ofType:saveOperation:")
+	_nSDocumentSelFileName                                                                   = objc.RegisterName("fileName")
+	_nSDocumentSelFileWrapperRepresentationOfType                                            = objc.RegisterName("fileWrapperRepresentationOfType:")
+	_nSDocumentSelInitWithContentsOfFileOfType                                               = objc.RegisterName("initWithContentsOfFile:ofType:")
+	_nSDocumentSelInitWithContentsOfURLOfType                                                = objc.RegisterName("initWithContentsOfURL:ofType:")
+	_nSDocumentSelLoadDataRepresentationOfType                                               = objc.RegisterName("loadDataRepresentation:ofType:")
+	_nSDocumentSelLoadFileWrapperRepresentationOfType                                        = objc.RegisterName("loadFileWrapperRepresentation:ofType:")
+	_nSDocumentSelPrintShowingPrintPanel                                                     = objc.RegisterName("printShowingPrintPanel:")
+	_nSDocumentSelReadFromFileOfType                                                         = objc.RegisterName("readFromFile:ofType:")
+	_nSDocumentSelReadFromURLOfType                                                          = objc.RegisterName("readFromURL:ofType:")
+	_nSDocumentSelRevertToSavedFromFileOfType                                                = objc.RegisterName("revertToSavedFromFile:ofType:")
+	_nSDocumentSelRevertToSavedFromURLOfType                                                 = objc.RegisterName("revertToSavedFromURL:ofType:")
+	_nSDocumentSelRunModalPageLayoutWithPrintInfo                                            = objc.RegisterName("runModalPageLayoutWithPrintInfo:")
+	_nSDocumentSelSaveToFileSaveOperationDelegateDidSaveSelectorContextInfo                  = objc.RegisterName("saveToFile:saveOperation:delegate:didSaveSelector:contextInfo:")
+	_nSDocumentSelSetFileName                                                                = objc.RegisterName("setFileName:")
+	_nSDocumentSelWriteToFileOfType                                                          = objc.RegisterName("writeToFile:ofType:")
+	_nSDocumentSelWriteToFileOfTypeOriginalFileSaveOperation                                 = objc.RegisterName("writeToFile:ofType:originalFile:saveOperation:")
+	_nSDocumentSelWriteToURLOfType                                                           = objc.RegisterName("writeToURL:ofType:")
+	_nSDocumentSelWriteWithBackupToFileOfTypeSaveOperation                                   = objc.RegisterName("writeWithBackupToFile:ofType:saveOperation:")
+	_nSDocumentSelShouldRunSavePanelWithAccessoryView                                        = objc.RegisterName("shouldRunSavePanelWithAccessoryView")
+	_nSDocumentSelUpdateUserActivityState                                                    = objc.RegisterName("updateUserActivityState:")
+	_nSDocumentSelUserActivity                                                               = objc.RegisterName("userActivity")
+	_nSDocumentSelSetUserActivity                                                            = objc.RegisterName("setUserActivity:")
+	_nSDocumentSelHandleSaveScriptCommand                                                    = objc.RegisterName("handleSaveScriptCommand:")
+	_nSDocumentSelHandleCloseScriptCommand                                                   = objc.RegisterName("handleCloseScriptCommand:")
+	_nSDocumentSelHandlePrintScriptCommand                                                   = objc.RegisterName("handlePrintScriptCommand:")
+	_nSDocumentSelLastComponentOfFileName                                                    = objc.RegisterName("lastComponentOfFileName")
+	_nSDocumentSelSetLastComponentOfFileName                                                 = objc.RegisterName("setLastComponentOfFileName:")
+	_nSDocumentSelRestoreDocumentWindowWithIdentifierStateCompletionHandler                  = objc.RegisterName("restoreDocumentWindowWithIdentifier:state:completionHandler:")
+	_nSDocumentSelEncodeRestorableStateWithCoder                                             = objc.RegisterName("encodeRestorableStateWithCoder:")
+	_nSDocumentSelEncodeRestorableStateWithCoderBackgroundQueue                              = objc.RegisterName("encodeRestorableStateWithCoder:backgroundQueue:")
+	_nSDocumentSelRestoreStateWithCoder                                                      = objc.RegisterName("restoreStateWithCoder:")
+	_nSDocumentSelInvalidateRestorableState                                                  = objc.RegisterName("invalidateRestorableState")
+	_nSDocumentSelAllowedClassesForRestorableStateKeyPath                                    = objc.RegisterName("allowedClassesForRestorableStateKeyPath:")
+	_nSDocumentSelRestorableStateKeyPaths                                                    = objc.RegisterName("restorableStateKeyPaths")
 )
 
 func NSDocumentFromID(id objc.ID) *NSDocument {
@@ -210,14 +210,18 @@ func NSDocumentFromID(id objc.ID) *NSDocument {
 
 func (o *NSDocument) Init() *NSDocument {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDocumentFromID(_ret)
 }
 
 func (o *NSDocument) InitWithTypeError(typeName *foundation.NSString) (*NSDocument, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelInitWithTypeError, typeName.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -232,7 +236,9 @@ func NSDocumentCanConcurrentlyReadDocumentsOfType(typeName *foundation.NSString)
 func (o *NSDocument) InitWithContentsOfURLOfTypeError(url *foundation.NSURL, typeName *foundation.NSString) (*NSDocument, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelInitWithContentsOfURLOfTypeError, url.Ptr(), typeName.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -242,7 +248,9 @@ func (o *NSDocument) InitWithContentsOfURLOfTypeError(url *foundation.NSURL, typ
 func (o *NSDocument) InitForURLWithContentsOfURLOfTypeError(urlOrNil *foundation.NSURL, contentsURL *foundation.NSURL, typeName *foundation.NSString) (*NSDocument, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelInitForURLWithContentsOfURLOfTypeError, urlOrNil.Ptr(), contentsURL.Ptr(), typeName.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -356,7 +364,9 @@ func (o *NSDocument) WriteToURLOfTypeError(url *foundation.NSURL, typeName *foun
 func (o *NSDocument) FileWrapperOfTypeError(typeName *foundation.NSString) (*foundation.NSFileWrapper, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelFileWrapperOfTypeError, typeName.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -366,7 +376,9 @@ func (o *NSDocument) FileWrapperOfTypeError(typeName *foundation.NSString) (*fou
 func (o *NSDocument) DataOfTypeError(typeName *foundation.NSString) (*foundation.NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelDataOfTypeError, typeName.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -511,7 +523,9 @@ func (o *NSDocument) DuplicateDocumentWithDelegateDidDuplicateSelectorContextInf
 func (o *NSDocument) DuplicateAndReturnError() (*NSDocument, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelDuplicateAndReturnError, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -633,7 +647,9 @@ func (o *NSDocument) PrintDocumentWithSettingsShowPrintPanelDelegateDidPrintSele
 func (o *NSDocument) PrintOperationWithSettingsError(printSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*NSPrintOperation, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelPrintOperationWithSettingsError, printSettings, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -732,7 +748,9 @@ func (o *NSDocument) SetDisplayName(displayNameOrNil *foundation.NSString) {
 
 func (o *NSDocument) DefaultDraftName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelDefaultDraftName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -748,7 +766,9 @@ func (o *NSDocument) WritableTypesForSaveOperation(saveOperation NSSaveOperation
 
 func (o *NSDocument) FileNameExtensionForTypeSaveOperation(typeName *foundation.NSString, saveOperation NSSaveOperationType) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelFileNameExtensionForTypeSaveOperation, typeName.Ptr(), saveOperation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -827,7 +847,9 @@ func (o *NSDocument) PresentedItemDidResolveConflictVersion(version *foundation.
 
 func (o *NSDocument) FileType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelFileType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -837,7 +859,9 @@ func (o *NSDocument) SetFileType(fileType *foundation.NSString) {
 
 func (o *NSDocument) FileURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelFileURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -847,7 +871,9 @@ func (o *NSDocument) SetFileURL(fileURL *foundation.NSURL) {
 
 func (o *NSDocument) FileModificationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelFileModificationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -881,7 +907,9 @@ func (o *NSDocument) KeepBackupFile() bool {
 
 func (o *NSDocument) BackupFileURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelBackupFileURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -897,7 +925,9 @@ func (o *NSDocument) FileNameExtensionWasHiddenInLastRunSavePanel() bool {
 
 func (o *NSDocument) FileTypeFromLastRunSavePanel() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelFileTypeFromLastRunSavePanel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -928,13 +958,17 @@ func NSDocumentAutosavesDrafts() bool {
 
 func (o *NSDocument) AutosavingFileType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelAutosavingFileType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSDocument) AutosavedContentsFileURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelAutosavedContentsFileURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -949,7 +983,9 @@ func (o *NSDocument) IsLocked() bool {
 
 func (o *NSDocument) PrintInfo() *NSPrintInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelPrintInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPrintInfoFromID(_ret)
 }
 
@@ -959,7 +995,9 @@ func (o *NSDocument) SetPrintInfo(printInfo *NSPrintInfo) {
 
 func (o *NSDocument) PDFPrintOperation() *NSPrintOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelPDFPrintOperation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPrintOperationFromID(_ret)
 }
 
@@ -970,7 +1008,9 @@ func (o *NSDocument) AllowsDocumentSharing() bool {
 
 func (o *NSDocument) PreviewRepresentableActivityItems() *foundation.NSArray[NSPreviewRepresentableActivityItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelPreviewRepresentableActivityItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[NSPreviewRepresentableActivityItem](_ret)
 }
 
@@ -990,7 +1030,9 @@ func (o *NSDocument) IsInViewingMode() bool {
 
 func (o *NSDocument) UndoManager() *foundation.NSUndoManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelUndoManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUndoManagerFromID(_ret)
 }
 
@@ -1009,25 +1051,33 @@ func (o *NSDocument) SetHasUndoManager(hasUndoManager bool) {
 
 func (o *NSDocument) WindowNibName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelWindowNibName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSDocument) WindowControllers() *foundation.NSArray[*NSWindowController] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelWindowControllers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSWindowController](_ret)
 }
 
 func (o *NSDocument) DisplayName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelDisplayName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSDocument) WindowForSheet() *NSWindow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelWindowForSheet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWindowFromID(_ret)
 }
 
@@ -1048,7 +1098,9 @@ func NSDocumentUsesUbiquitousStorage() bool {
 
 func (o *NSDocument) PresentedItemURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelPresentedItemURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -1070,7 +1122,9 @@ func (o *NSDocument) SaveToURLOfTypeForSaveOperationError(url *foundation.NSURL,
 // Deprecated: since macOS 10.4.
 func (o *NSDocument) DataRepresentationOfType(type_ *foundation.NSString) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelDataRepresentationOfType, type_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -1083,14 +1137,18 @@ func (o *NSDocument) FileAttributesToWriteToFileOfTypeSaveOperation(fullDocument
 // Deprecated: since macOS 10.4.
 func (o *NSDocument) FileName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelFileName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Deprecated: since macOS 10.4.
 func (o *NSDocument) FileWrapperRepresentationOfType(type_ *foundation.NSString) *foundation.NSFileWrapper {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelFileWrapperRepresentationOfType, type_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSFileWrapperFromID(_ret)
 }
 
@@ -1199,7 +1257,9 @@ func (o *NSDocument) UpdateUserActivityState(activity *foundation.NSUserActivity
 
 func (o *NSDocument) UserActivity() *foundation.NSUserActivity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelUserActivity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUserActivityFromID(_ret)
 }
 
@@ -1224,7 +1284,9 @@ func (o *NSDocument) HandlePrintScriptCommand(command *foundation.NSScriptComman
 
 func (o *NSDocument) LastComponentOfFileName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelLastComponentOfFileName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1271,4 +1333,3 @@ func NSDocumentRestorableStateKeyPaths() *foundation.NSArray[*foundation.NSStrin
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsNSDocument), _nSDocumentSelRestorableStateKeyPaths)
 	return _ret
 }
-

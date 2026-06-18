@@ -15,16 +15,16 @@ type NSUnitPower struct {
 }
 
 var (
-	_clsNSUnitPower = _objcClass("NSUnitPower")
-	_nSUnitPowerSelTerawatts = objc.RegisterName("terawatts")
-	_nSUnitPowerSelGigawatts = objc.RegisterName("gigawatts")
-	_nSUnitPowerSelMegawatts = objc.RegisterName("megawatts")
-	_nSUnitPowerSelKilowatts = objc.RegisterName("kilowatts")
-	_nSUnitPowerSelWatts = objc.RegisterName("watts")
+	_clsNSUnitPower           = _objcClass("NSUnitPower")
+	_nSUnitPowerSelTerawatts  = objc.RegisterName("terawatts")
+	_nSUnitPowerSelGigawatts  = objc.RegisterName("gigawatts")
+	_nSUnitPowerSelMegawatts  = objc.RegisterName("megawatts")
+	_nSUnitPowerSelKilowatts  = objc.RegisterName("kilowatts")
+	_nSUnitPowerSelWatts      = objc.RegisterName("watts")
 	_nSUnitPowerSelMilliwatts = objc.RegisterName("milliwatts")
 	_nSUnitPowerSelMicrowatts = objc.RegisterName("microwatts")
-	_nSUnitPowerSelNanowatts = objc.RegisterName("nanowatts")
-	_nSUnitPowerSelPicowatts = objc.RegisterName("picowatts")
+	_nSUnitPowerSelNanowatts  = objc.RegisterName("nanowatts")
+	_nSUnitPowerSelPicowatts  = objc.RegisterName("picowatts")
 	_nSUnitPowerSelFemtowatts = objc.RegisterName("femtowatts")
 	_nSUnitPowerSelHorsepower = objc.RegisterName("horsepower")
 )
@@ -41,67 +41,88 @@ func NSUnitPowerFromID(id objc.ID) *NSUnitPower {
 
 func NSUnitPowerTerawatts() *NSUnitPower {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPower), _nSUnitPowerSelTerawatts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitPowerFromID(_ret)
 }
 
 func NSUnitPowerGigawatts() *NSUnitPower {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPower), _nSUnitPowerSelGigawatts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitPowerFromID(_ret)
 }
 
 func NSUnitPowerMegawatts() *NSUnitPower {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPower), _nSUnitPowerSelMegawatts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitPowerFromID(_ret)
 }
 
 func NSUnitPowerKilowatts() *NSUnitPower {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPower), _nSUnitPowerSelKilowatts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitPowerFromID(_ret)
 }
 
 func NSUnitPowerWatts() *NSUnitPower {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPower), _nSUnitPowerSelWatts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitPowerFromID(_ret)
 }
 
 func NSUnitPowerMilliwatts() *NSUnitPower {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPower), _nSUnitPowerSelMilliwatts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitPowerFromID(_ret)
 }
 
 func NSUnitPowerMicrowatts() *NSUnitPower {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPower), _nSUnitPowerSelMicrowatts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitPowerFromID(_ret)
 }
 
 func NSUnitPowerNanowatts() *NSUnitPower {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPower), _nSUnitPowerSelNanowatts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitPowerFromID(_ret)
 }
 
 func NSUnitPowerPicowatts() *NSUnitPower {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPower), _nSUnitPowerSelPicowatts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitPowerFromID(_ret)
 }
 
 func NSUnitPowerFemtowatts() *NSUnitPower {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPower), _nSUnitPowerSelFemtowatts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitPowerFromID(_ret)
 }
 
 func NSUnitPowerHorsepower() *NSUnitPower {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPower), _nSUnitPowerSelHorsepower)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitPowerFromID(_ret)
 }
-

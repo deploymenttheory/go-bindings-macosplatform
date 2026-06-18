@@ -129,4 +129,3 @@ type OutputSettingsAssistantable interface {
 }
 
 var _ OutputSettingsAssistantable = (*OutputSettingsAssistant)(nil)
-

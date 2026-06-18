@@ -19,86 +19,86 @@ type WKWebExtensionContext struct {
 }
 
 var (
-	_clsWKWebExtensionContext = _objcClass("WKWebExtensionContext")
-	_wKWebExtensionContextSelContextForExtension = objc.RegisterName("contextForExtension:")
-	_wKWebExtensionContextSelInitForExtension = objc.RegisterName("initForExtension:")
-	_wKWebExtensionContextSelHasPermission = objc.RegisterName("hasPermission:")
-	_wKWebExtensionContextSelHasPermissionInTab = objc.RegisterName("hasPermission:inTab:")
-	_wKWebExtensionContextSelHasAccessToURL = objc.RegisterName("hasAccessToURL:")
-	_wKWebExtensionContextSelHasAccessToURLInTab = objc.RegisterName("hasAccessToURL:inTab:")
-	_wKWebExtensionContextSelHasInjectedContentForURL = objc.RegisterName("hasInjectedContentForURL:")
-	_wKWebExtensionContextSelPermissionStatusForPermission = objc.RegisterName("permissionStatusForPermission:")
-	_wKWebExtensionContextSelPermissionStatusForPermissionInTab = objc.RegisterName("permissionStatusForPermission:inTab:")
-	_wKWebExtensionContextSelSetPermissionStatusForPermission = objc.RegisterName("setPermissionStatus:forPermission:")
-	_wKWebExtensionContextSelSetPermissionStatusForPermissionExpirationDate = objc.RegisterName("setPermissionStatus:forPermission:expirationDate:")
-	_wKWebExtensionContextSelPermissionStatusForURL = objc.RegisterName("permissionStatusForURL:")
-	_wKWebExtensionContextSelPermissionStatusForURLInTab = objc.RegisterName("permissionStatusForURL:inTab:")
-	_wKWebExtensionContextSelSetPermissionStatusForURL = objc.RegisterName("setPermissionStatus:forURL:")
-	_wKWebExtensionContextSelSetPermissionStatusForURLExpirationDate = objc.RegisterName("setPermissionStatus:forURL:expirationDate:")
-	_wKWebExtensionContextSelPermissionStatusForMatchPattern = objc.RegisterName("permissionStatusForMatchPattern:")
-	_wKWebExtensionContextSelPermissionStatusForMatchPatternInTab = objc.RegisterName("permissionStatusForMatchPattern:inTab:")
-	_wKWebExtensionContextSelSetPermissionStatusForMatchPattern = objc.RegisterName("setPermissionStatus:forMatchPattern:")
+	_clsWKWebExtensionContext                                                 = _objcClass("WKWebExtensionContext")
+	_wKWebExtensionContextSelContextForExtension                              = objc.RegisterName("contextForExtension:")
+	_wKWebExtensionContextSelInitForExtension                                 = objc.RegisterName("initForExtension:")
+	_wKWebExtensionContextSelHasPermission                                    = objc.RegisterName("hasPermission:")
+	_wKWebExtensionContextSelHasPermissionInTab                               = objc.RegisterName("hasPermission:inTab:")
+	_wKWebExtensionContextSelHasAccessToURL                                   = objc.RegisterName("hasAccessToURL:")
+	_wKWebExtensionContextSelHasAccessToURLInTab                              = objc.RegisterName("hasAccessToURL:inTab:")
+	_wKWebExtensionContextSelHasInjectedContentForURL                         = objc.RegisterName("hasInjectedContentForURL:")
+	_wKWebExtensionContextSelPermissionStatusForPermission                    = objc.RegisterName("permissionStatusForPermission:")
+	_wKWebExtensionContextSelPermissionStatusForPermissionInTab               = objc.RegisterName("permissionStatusForPermission:inTab:")
+	_wKWebExtensionContextSelSetPermissionStatusForPermission                 = objc.RegisterName("setPermissionStatus:forPermission:")
+	_wKWebExtensionContextSelSetPermissionStatusForPermissionExpirationDate   = objc.RegisterName("setPermissionStatus:forPermission:expirationDate:")
+	_wKWebExtensionContextSelPermissionStatusForURL                           = objc.RegisterName("permissionStatusForURL:")
+	_wKWebExtensionContextSelPermissionStatusForURLInTab                      = objc.RegisterName("permissionStatusForURL:inTab:")
+	_wKWebExtensionContextSelSetPermissionStatusForURL                        = objc.RegisterName("setPermissionStatus:forURL:")
+	_wKWebExtensionContextSelSetPermissionStatusForURLExpirationDate          = objc.RegisterName("setPermissionStatus:forURL:expirationDate:")
+	_wKWebExtensionContextSelPermissionStatusForMatchPattern                  = objc.RegisterName("permissionStatusForMatchPattern:")
+	_wKWebExtensionContextSelPermissionStatusForMatchPatternInTab             = objc.RegisterName("permissionStatusForMatchPattern:inTab:")
+	_wKWebExtensionContextSelSetPermissionStatusForMatchPattern               = objc.RegisterName("setPermissionStatus:forMatchPattern:")
 	_wKWebExtensionContextSelSetPermissionStatusForMatchPatternExpirationDate = objc.RegisterName("setPermissionStatus:forMatchPattern:expirationDate:")
-	_wKWebExtensionContextSelLoadBackgroundContentWithCompletionHandler = objc.RegisterName("loadBackgroundContentWithCompletionHandler:")
-	_wKWebExtensionContextSelActionForTab = objc.RegisterName("actionForTab:")
-	_wKWebExtensionContextSelPerformActionForTab = objc.RegisterName("performActionForTab:")
-	_wKWebExtensionContextSelPerformCommand = objc.RegisterName("performCommand:")
-	_wKWebExtensionContextSelPerformCommandForEvent = objc.RegisterName("performCommandForEvent:")
-	_wKWebExtensionContextSelCommandForEvent = objc.RegisterName("commandForEvent:")
-	_wKWebExtensionContextSelMenuItemsForTab = objc.RegisterName("menuItemsForTab:")
-	_wKWebExtensionContextSelUserGesturePerformedInTab = objc.RegisterName("userGesturePerformedInTab:")
-	_wKWebExtensionContextSelHasActiveUserGestureInTab = objc.RegisterName("hasActiveUserGestureInTab:")
-	_wKWebExtensionContextSelClearUserGestureInTab = objc.RegisterName("clearUserGestureInTab:")
-	_wKWebExtensionContextSelDidOpenWindow = objc.RegisterName("didOpenWindow:")
-	_wKWebExtensionContextSelDidCloseWindow = objc.RegisterName("didCloseWindow:")
-	_wKWebExtensionContextSelDidFocusWindow = objc.RegisterName("didFocusWindow:")
-	_wKWebExtensionContextSelDidOpenTab = objc.RegisterName("didOpenTab:")
-	_wKWebExtensionContextSelDidCloseTabWindowIsClosing = objc.RegisterName("didCloseTab:windowIsClosing:")
-	_wKWebExtensionContextSelDidActivateTabPreviousActiveTab = objc.RegisterName("didActivateTab:previousActiveTab:")
-	_wKWebExtensionContextSelDidSelectTabs = objc.RegisterName("didSelectTabs:")
-	_wKWebExtensionContextSelDidDeselectTabs = objc.RegisterName("didDeselectTabs:")
-	_wKWebExtensionContextSelDidMoveTabFromIndexInWindow = objc.RegisterName("didMoveTab:fromIndex:inWindow:")
-	_wKWebExtensionContextSelDidReplaceTabWithTab = objc.RegisterName("didReplaceTab:withTab:")
-	_wKWebExtensionContextSelDidChangeTabPropertiesForTab = objc.RegisterName("didChangeTabProperties:forTab:")
-	_wKWebExtensionContextSelWebExtension = objc.RegisterName("webExtension")
-	_wKWebExtensionContextSelWebExtensionController = objc.RegisterName("webExtensionController")
-	_wKWebExtensionContextSelIsLoaded = objc.RegisterName("isLoaded")
-	_wKWebExtensionContextSelErrors = objc.RegisterName("errors")
-	_wKWebExtensionContextSelBaseURL = objc.RegisterName("baseURL")
-	_wKWebExtensionContextSelSetBaseURL = objc.RegisterName("setBaseURL:")
-	_wKWebExtensionContextSelUniqueIdentifier = objc.RegisterName("uniqueIdentifier")
-	_wKWebExtensionContextSelSetUniqueIdentifier = objc.RegisterName("setUniqueIdentifier:")
-	_wKWebExtensionContextSelIsInspectable = objc.RegisterName("isInspectable")
-	_wKWebExtensionContextSelSetInspectable = objc.RegisterName("setInspectable:")
-	_wKWebExtensionContextSelInspectionName = objc.RegisterName("inspectionName")
-	_wKWebExtensionContextSelSetInspectionName = objc.RegisterName("setInspectionName:")
-	_wKWebExtensionContextSelUnsupportedAPIs = objc.RegisterName("unsupportedAPIs")
-	_wKWebExtensionContextSelSetUnsupportedAPIs = objc.RegisterName("setUnsupportedAPIs:")
-	_wKWebExtensionContextSelWebViewConfiguration = objc.RegisterName("webViewConfiguration")
-	_wKWebExtensionContextSelOptionsPageURL = objc.RegisterName("optionsPageURL")
-	_wKWebExtensionContextSelOverrideNewTabPageURL = objc.RegisterName("overrideNewTabPageURL")
-	_wKWebExtensionContextSelGrantedPermissions = objc.RegisterName("grantedPermissions")
-	_wKWebExtensionContextSelSetGrantedPermissions = objc.RegisterName("setGrantedPermissions:")
-	_wKWebExtensionContextSelGrantedPermissionMatchPatterns = objc.RegisterName("grantedPermissionMatchPatterns")
-	_wKWebExtensionContextSelSetGrantedPermissionMatchPatterns = objc.RegisterName("setGrantedPermissionMatchPatterns:")
-	_wKWebExtensionContextSelDeniedPermissions = objc.RegisterName("deniedPermissions")
-	_wKWebExtensionContextSelSetDeniedPermissions = objc.RegisterName("setDeniedPermissions:")
-	_wKWebExtensionContextSelDeniedPermissionMatchPatterns = objc.RegisterName("deniedPermissionMatchPatterns")
-	_wKWebExtensionContextSelSetDeniedPermissionMatchPatterns = objc.RegisterName("setDeniedPermissionMatchPatterns:")
-	_wKWebExtensionContextSelHasRequestedOptionalAccessToAllHosts = objc.RegisterName("hasRequestedOptionalAccessToAllHosts")
-	_wKWebExtensionContextSelSetHasRequestedOptionalAccessToAllHosts = objc.RegisterName("setHasRequestedOptionalAccessToAllHosts:")
-	_wKWebExtensionContextSelHasAccessToPrivateData = objc.RegisterName("hasAccessToPrivateData")
-	_wKWebExtensionContextSelSetHasAccessToPrivateData = objc.RegisterName("setHasAccessToPrivateData:")
-	_wKWebExtensionContextSelCurrentPermissions = objc.RegisterName("currentPermissions")
-	_wKWebExtensionContextSelCurrentPermissionMatchPatterns = objc.RegisterName("currentPermissionMatchPatterns")
-	_wKWebExtensionContextSelHasAccessToAllURLs = objc.RegisterName("hasAccessToAllURLs")
-	_wKWebExtensionContextSelHasAccessToAllHosts = objc.RegisterName("hasAccessToAllHosts")
-	_wKWebExtensionContextSelHasInjectedContent = objc.RegisterName("hasInjectedContent")
-	_wKWebExtensionContextSelHasContentModificationRules = objc.RegisterName("hasContentModificationRules")
-	_wKWebExtensionContextSelCommands = objc.RegisterName("commands")
-	_wKWebExtensionContextSelOpenWindows = objc.RegisterName("openWindows")
-	_wKWebExtensionContextSelFocusedWindow = objc.RegisterName("focusedWindow")
-	_wKWebExtensionContextSelOpenTabs = objc.RegisterName("openTabs")
+	_wKWebExtensionContextSelLoadBackgroundContentWithCompletionHandler       = objc.RegisterName("loadBackgroundContentWithCompletionHandler:")
+	_wKWebExtensionContextSelActionForTab                                     = objc.RegisterName("actionForTab:")
+	_wKWebExtensionContextSelPerformActionForTab                              = objc.RegisterName("performActionForTab:")
+	_wKWebExtensionContextSelPerformCommand                                   = objc.RegisterName("performCommand:")
+	_wKWebExtensionContextSelPerformCommandForEvent                           = objc.RegisterName("performCommandForEvent:")
+	_wKWebExtensionContextSelCommandForEvent                                  = objc.RegisterName("commandForEvent:")
+	_wKWebExtensionContextSelMenuItemsForTab                                  = objc.RegisterName("menuItemsForTab:")
+	_wKWebExtensionContextSelUserGesturePerformedInTab                        = objc.RegisterName("userGesturePerformedInTab:")
+	_wKWebExtensionContextSelHasActiveUserGestureInTab                        = objc.RegisterName("hasActiveUserGestureInTab:")
+	_wKWebExtensionContextSelClearUserGestureInTab                            = objc.RegisterName("clearUserGestureInTab:")
+	_wKWebExtensionContextSelDidOpenWindow                                    = objc.RegisterName("didOpenWindow:")
+	_wKWebExtensionContextSelDidCloseWindow                                   = objc.RegisterName("didCloseWindow:")
+	_wKWebExtensionContextSelDidFocusWindow                                   = objc.RegisterName("didFocusWindow:")
+	_wKWebExtensionContextSelDidOpenTab                                       = objc.RegisterName("didOpenTab:")
+	_wKWebExtensionContextSelDidCloseTabWindowIsClosing                       = objc.RegisterName("didCloseTab:windowIsClosing:")
+	_wKWebExtensionContextSelDidActivateTabPreviousActiveTab                  = objc.RegisterName("didActivateTab:previousActiveTab:")
+	_wKWebExtensionContextSelDidSelectTabs                                    = objc.RegisterName("didSelectTabs:")
+	_wKWebExtensionContextSelDidDeselectTabs                                  = objc.RegisterName("didDeselectTabs:")
+	_wKWebExtensionContextSelDidMoveTabFromIndexInWindow                      = objc.RegisterName("didMoveTab:fromIndex:inWindow:")
+	_wKWebExtensionContextSelDidReplaceTabWithTab                             = objc.RegisterName("didReplaceTab:withTab:")
+	_wKWebExtensionContextSelDidChangeTabPropertiesForTab                     = objc.RegisterName("didChangeTabProperties:forTab:")
+	_wKWebExtensionContextSelWebExtension                                     = objc.RegisterName("webExtension")
+	_wKWebExtensionContextSelWebExtensionController                           = objc.RegisterName("webExtensionController")
+	_wKWebExtensionContextSelIsLoaded                                         = objc.RegisterName("isLoaded")
+	_wKWebExtensionContextSelErrors                                           = objc.RegisterName("errors")
+	_wKWebExtensionContextSelBaseURL                                          = objc.RegisterName("baseURL")
+	_wKWebExtensionContextSelSetBaseURL                                       = objc.RegisterName("setBaseURL:")
+	_wKWebExtensionContextSelUniqueIdentifier                                 = objc.RegisterName("uniqueIdentifier")
+	_wKWebExtensionContextSelSetUniqueIdentifier                              = objc.RegisterName("setUniqueIdentifier:")
+	_wKWebExtensionContextSelIsInspectable                                    = objc.RegisterName("isInspectable")
+	_wKWebExtensionContextSelSetInspectable                                   = objc.RegisterName("setInspectable:")
+	_wKWebExtensionContextSelInspectionName                                   = objc.RegisterName("inspectionName")
+	_wKWebExtensionContextSelSetInspectionName                                = objc.RegisterName("setInspectionName:")
+	_wKWebExtensionContextSelUnsupportedAPIs                                  = objc.RegisterName("unsupportedAPIs")
+	_wKWebExtensionContextSelSetUnsupportedAPIs                               = objc.RegisterName("setUnsupportedAPIs:")
+	_wKWebExtensionContextSelWebViewConfiguration                             = objc.RegisterName("webViewConfiguration")
+	_wKWebExtensionContextSelOptionsPageURL                                   = objc.RegisterName("optionsPageURL")
+	_wKWebExtensionContextSelOverrideNewTabPageURL                            = objc.RegisterName("overrideNewTabPageURL")
+	_wKWebExtensionContextSelGrantedPermissions                               = objc.RegisterName("grantedPermissions")
+	_wKWebExtensionContextSelSetGrantedPermissions                            = objc.RegisterName("setGrantedPermissions:")
+	_wKWebExtensionContextSelGrantedPermissionMatchPatterns                   = objc.RegisterName("grantedPermissionMatchPatterns")
+	_wKWebExtensionContextSelSetGrantedPermissionMatchPatterns                = objc.RegisterName("setGrantedPermissionMatchPatterns:")
+	_wKWebExtensionContextSelDeniedPermissions                                = objc.RegisterName("deniedPermissions")
+	_wKWebExtensionContextSelSetDeniedPermissions                             = objc.RegisterName("setDeniedPermissions:")
+	_wKWebExtensionContextSelDeniedPermissionMatchPatterns                    = objc.RegisterName("deniedPermissionMatchPatterns")
+	_wKWebExtensionContextSelSetDeniedPermissionMatchPatterns                 = objc.RegisterName("setDeniedPermissionMatchPatterns:")
+	_wKWebExtensionContextSelHasRequestedOptionalAccessToAllHosts             = objc.RegisterName("hasRequestedOptionalAccessToAllHosts")
+	_wKWebExtensionContextSelSetHasRequestedOptionalAccessToAllHosts          = objc.RegisterName("setHasRequestedOptionalAccessToAllHosts:")
+	_wKWebExtensionContextSelHasAccessToPrivateData                           = objc.RegisterName("hasAccessToPrivateData")
+	_wKWebExtensionContextSelSetHasAccessToPrivateData                        = objc.RegisterName("setHasAccessToPrivateData:")
+	_wKWebExtensionContextSelCurrentPermissions                               = objc.RegisterName("currentPermissions")
+	_wKWebExtensionContextSelCurrentPermissionMatchPatterns                   = objc.RegisterName("currentPermissionMatchPatterns")
+	_wKWebExtensionContextSelHasAccessToAllURLs                               = objc.RegisterName("hasAccessToAllURLs")
+	_wKWebExtensionContextSelHasAccessToAllHosts                              = objc.RegisterName("hasAccessToAllHosts")
+	_wKWebExtensionContextSelHasInjectedContent                               = objc.RegisterName("hasInjectedContent")
+	_wKWebExtensionContextSelHasContentModificationRules                      = objc.RegisterName("hasContentModificationRules")
+	_wKWebExtensionContextSelCommands                                         = objc.RegisterName("commands")
+	_wKWebExtensionContextSelOpenWindows                                      = objc.RegisterName("openWindows")
+	_wKWebExtensionContextSelFocusedWindow                                    = objc.RegisterName("focusedWindow")
+	_wKWebExtensionContextSelOpenTabs                                         = objc.RegisterName("openTabs")
 )
 
 func WKWebExtensionContextFromID(id objc.ID) *WKWebExtensionContext {
@@ -114,14 +114,18 @@ func WKWebExtensionContextFromID(id objc.ID) *WKWebExtensionContext {
 // @abstract Returns a web extension context initialized with the specified extension. @param extension The extension to use for the new web extension context. @result An initialized web extension context.
 func WKWebExtensionContextContextForExtension(extension *WKWebExtension) *WKWebExtensionContext {
 	_ret := objc.Send[objc.ID](objc.ID(_clsWKWebExtensionContext), _wKWebExtensionContextSelContextForExtension, extension.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebExtensionContextFromID(_ret)
 }
 
 // @abstract Returns a web extension context initialized with a specified extension. @param extension The extension to use for the new web extension context. @result An initialized web extension context. @discussion This is a designated initializer.
 func (o *WKWebExtensionContext) InitForExtension(extension *WKWebExtension) *WKWebExtensionContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelInitForExtension, extension.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebExtensionContextFromID(_ret)
 }
 
@@ -167,12 +171,12 @@ func (o *WKWebExtensionContext) PermissionStatusForPermissionInTab(permission *f
 	return _ret
 }
 
-// @abstract Sets the status of a permission with a distant future expiration date. @param status The new permission status to set for the given permission. @param permission The permission for which to set the status. @discussion This method will update ``grantedPermissions`` and ``deniedPermissions``. Use this method for changing a single permission's status. Only ``WKWebExtensionContextPermissionStatusDeniedExplicitly``, ``WKWebExtensionContextPermissionStatusUnknown``, and ``WKWebExtensionContextPermissionStatusGrantedExplicitly`` states are allowed to be set using this method. @seealso setPermissionStatus:forPermission:expirationDate: @seealso setPermissionStatus:forPermission:inTab:
+// @abstract Sets the status of a permission with a distant future expiration date. @param status The new permission status to set for the given permission. @param permission The permission for which to set the status. @discussion This method will update “grantedPermissions“ and “deniedPermissions“. Use this method for changing a single permission's status. Only “WKWebExtensionContextPermissionStatusDeniedExplicitly“, “WKWebExtensionContextPermissionStatusUnknown“, and “WKWebExtensionContextPermissionStatusGrantedExplicitly“ states are allowed to be set using this method. @seealso setPermissionStatus:forPermission:expirationDate: @seealso setPermissionStatus:forPermission:inTab:
 func (o *WKWebExtensionContext) SetPermissionStatusForPermission(status WKWebExtensionContextPermissionStatus, permission *foundation.NSString) {
 	o.Ptr().Send(_wKWebExtensionContextSelSetPermissionStatusForPermission, status, permission.Ptr())
 }
 
-// @abstract Sets the status of a permission with a specific expiration date. @param status The new permission status to set for the given permission. @param permission The permission for which to set the status. @param expirationDate The expiration date for the new permission status, or \c nil for distant future. @discussion This method will update ``grantedPermissions`` and ``deniedPermissions``. Use this method for changing a single permission's status. Passing a `nil` expiration date will be treated as a distant future date. Only ``WKWebExtensionContextPermissionStatusDeniedExplicitly``, ``WKWebExtensionContextPermissionStatusUnknown``, and ``WKWebExtensionContextPermissionStatusGrantedExplicitly`` states are allowed to be set using this method. @seealso setPermissionStatus:forPermission: @seealso setPermissionStatus:forPermission:inTab:
+// @abstract Sets the status of a permission with a specific expiration date. @param status The new permission status to set for the given permission. @param permission The permission for which to set the status. @param expirationDate The expiration date for the new permission status, or \c nil for distant future. @discussion This method will update “grantedPermissions“ and “deniedPermissions“. Use this method for changing a single permission's status. Passing a `nil` expiration date will be treated as a distant future date. Only “WKWebExtensionContextPermissionStatusDeniedExplicitly“, “WKWebExtensionContextPermissionStatusUnknown“, and “WKWebExtensionContextPermissionStatusGrantedExplicitly“ states are allowed to be set using this method. @seealso setPermissionStatus:forPermission: @seealso setPermissionStatus:forPermission:inTab:
 func (o *WKWebExtensionContext) SetPermissionStatusForPermissionExpirationDate(status WKWebExtensionContextPermissionStatus, permission *foundation.NSString, expirationDate *foundation.NSDate) {
 	o.Ptr().Send(_wKWebExtensionContextSelSetPermissionStatusForPermissionExpirationDate, status, permission.Ptr(), expirationDate.Ptr())
 }
@@ -189,12 +193,12 @@ func (o *WKWebExtensionContext) PermissionStatusForURLInTab(url *foundation.NSUR
 	return _ret
 }
 
-// @abstract Sets the permission status of a URL with a distant future expiration date. @param status The new permission status to set for the given URL. @param url The URL for which to set the status. @discussion The URL is converted into a match pattern and will update ``grantedPermissionMatchPatterns`` and ``deniedPermissionMatchPatterns``. Use this method for changing a single URL's status. Only ``WKWebExtensionContextPermissionStatusDeniedExplicitly``, ``WKWebExtensionContextPermissionStatusUnknown``, and ``WKWebExtensionContextPermissionStatusGrantedExplicitly`` states are allowed to be set using this method. @seealso setPermissionStatus:forURL:expirationDate: @seealso setPermissionStatus:forURL:inTab:
+// @abstract Sets the permission status of a URL with a distant future expiration date. @param status The new permission status to set for the given URL. @param url The URL for which to set the status. @discussion The URL is converted into a match pattern and will update “grantedPermissionMatchPatterns“ and “deniedPermissionMatchPatterns“. Use this method for changing a single URL's status. Only “WKWebExtensionContextPermissionStatusDeniedExplicitly“, “WKWebExtensionContextPermissionStatusUnknown“, and “WKWebExtensionContextPermissionStatusGrantedExplicitly“ states are allowed to be set using this method. @seealso setPermissionStatus:forURL:expirationDate: @seealso setPermissionStatus:forURL:inTab:
 func (o *WKWebExtensionContext) SetPermissionStatusForURL(status WKWebExtensionContextPermissionStatus, url *foundation.NSURL) {
 	o.Ptr().Send(_wKWebExtensionContextSelSetPermissionStatusForURL, status, url.Ptr())
 }
 
-// @abstract Sets the permission status of a URL with a distant future expiration date. @param status The new permission status to set for the given URL. @param url The URL for which to set the status. @param expirationDate The expiration date for the new permission status, or \c nil for distant future. @discussion The URL is converted into a match pattern and will update ``grantedPermissionMatchPatterns`` and ``deniedPermissionMatchPatterns``. Use this method for changing a single URL's status. Passing a `nil` expiration date will be treated as a distant future date. Only ``WKWebExtensionContextPermissionStatusDeniedExplicitly``, ``WKWebExtensionContextPermissionStatusUnknown``, and ``WKWebExtensionContextPermissionStatusGrantedExplicitly`` states are allowed to be set using this method. @seealso setPermissionStatus:forURL: @seealso setPermissionStatus:forURL:inTab:
+// @abstract Sets the permission status of a URL with a distant future expiration date. @param status The new permission status to set for the given URL. @param url The URL for which to set the status. @param expirationDate The expiration date for the new permission status, or \c nil for distant future. @discussion The URL is converted into a match pattern and will update “grantedPermissionMatchPatterns“ and “deniedPermissionMatchPatterns“. Use this method for changing a single URL's status. Passing a `nil` expiration date will be treated as a distant future date. Only “WKWebExtensionContextPermissionStatusDeniedExplicitly“, “WKWebExtensionContextPermissionStatusUnknown“, and “WKWebExtensionContextPermissionStatusGrantedExplicitly“ states are allowed to be set using this method. @seealso setPermissionStatus:forURL: @seealso setPermissionStatus:forURL:inTab:
 func (o *WKWebExtensionContext) SetPermissionStatusForURLExpirationDate(status WKWebExtensionContextPermissionStatus, url *foundation.NSURL, expirationDate *foundation.NSDate) {
 	o.Ptr().Send(_wKWebExtensionContextSelSetPermissionStatusForURLExpirationDate, status, url.Ptr(), expirationDate.Ptr())
 }
@@ -211,12 +215,12 @@ func (o *WKWebExtensionContext) PermissionStatusForMatchPatternInTab(pattern *WK
 	return _ret
 }
 
-// @abstract Sets the status of a match pattern with a distant future expiration date. @param status The new permission status to set for the given match pattern. @param pattern The match pattern for which to set the status. @discussion This method will update ``grantedPermissionMatchPatterns`` and ``deniedPermissionMatchPatterns``. Use this method for changing a single match pattern's status. Only ``WKWebExtensionContextPermissionStatusDeniedExplicitly``, ``WKWebExtensionContextPermissionStatusUnknown``, and ``WKWebExtensionContextPermissionStatusGrantedExplicitly`` states are allowed to be set using this method. @seealso setPermissionStatus:forMatchPattern:expirationDate: @seealso setPermissionStatus:forMatchPattern:inTab:
+// @abstract Sets the status of a match pattern with a distant future expiration date. @param status The new permission status to set for the given match pattern. @param pattern The match pattern for which to set the status. @discussion This method will update “grantedPermissionMatchPatterns“ and “deniedPermissionMatchPatterns“. Use this method for changing a single match pattern's status. Only “WKWebExtensionContextPermissionStatusDeniedExplicitly“, “WKWebExtensionContextPermissionStatusUnknown“, and “WKWebExtensionContextPermissionStatusGrantedExplicitly“ states are allowed to be set using this method. @seealso setPermissionStatus:forMatchPattern:expirationDate: @seealso setPermissionStatus:forMatchPattern:inTab:
 func (o *WKWebExtensionContext) SetPermissionStatusForMatchPattern(status WKWebExtensionContextPermissionStatus, pattern *WKWebExtensionMatchPattern) {
 	o.Ptr().Send(_wKWebExtensionContextSelSetPermissionStatusForMatchPattern, status, pattern.Ptr())
 }
 
-// @abstract Sets the status of a match pattern with a specific expiration date. @param status The new permission status to set for the given match pattern. @param pattern The match pattern for which to set the status. @param expirationDate The expiration date for the new permission status, or \c nil for distant future. @discussion This method will update ``grantedPermissionMatchPatterns`` and ``deniedPermissionMatchPatterns``. Use this method for changing a single match pattern's status. Passing a `nil` expiration date will be treated as a distant future date. Only ``WKWebExtensionContextPermissionStatusDeniedExplicitly``, ``WKWebExtensionContextPermissionStatusUnknown``, and ``WKWebExtensionContextPermissionStatusGrantedExplicitly`` states are allowed to be set using this method. @seealso setPermissionStatus:forMatchPattern: @seealso setPermissionStatus:forMatchPattern:inTab:
+// @abstract Sets the status of a match pattern with a specific expiration date. @param status The new permission status to set for the given match pattern. @param pattern The match pattern for which to set the status. @param expirationDate The expiration date for the new permission status, or \c nil for distant future. @discussion This method will update “grantedPermissionMatchPatterns“ and “deniedPermissionMatchPatterns“. Use this method for changing a single match pattern's status. Passing a `nil` expiration date will be treated as a distant future date. Only “WKWebExtensionContextPermissionStatusDeniedExplicitly“, “WKWebExtensionContextPermissionStatusUnknown“, and “WKWebExtensionContextPermissionStatusGrantedExplicitly“ states are allowed to be set using this method. @seealso setPermissionStatus:forMatchPattern: @seealso setPermissionStatus:forMatchPattern:inTab:
 func (o *WKWebExtensionContext) SetPermissionStatusForMatchPatternExpirationDate(status WKWebExtensionContextPermissionStatus, pattern *WKWebExtensionMatchPattern, expirationDate *foundation.NSDate) {
 	o.Ptr().Send(_wKWebExtensionContextSelSetPermissionStatusForMatchPatternExpirationDate, status, pattern.Ptr(), expirationDate.Ptr())
 }
@@ -236,11 +240,13 @@ func (o *WKWebExtensionContext) LoadBackgroundContentWithCompletionHandler(compl
 // @abstract Retrieves the extension action for a given tab, or the default action if `nil` is passed. @param tab The tab for which to retrieve the extension action, or `nil` to get the default action. @discussion The returned object represents the action specific to the tab when provided; otherwise, it returns the default action. The default action is useful when the context is unrelated to a specific tab. When possible, specify the tab to get the most context-relevant action. @seealso performActionForTab:
 func (o *WKWebExtensionContext) ActionForTab(tab WKWebExtensionTab) *WKWebExtensionAction {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelActionForTab, tab)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebExtensionActionFromID(_ret)
 }
 
-// @abstract Performs the extension action associated with the specified tab or performs the default action if `nil` is passed. @param tab The tab for which to perform the extension action, or `nil` to perform the default action. @discussion Performing the action will mark the tab, if specified, as having an active user gesture. When the ``tab`` parameter is `nil`, the default action is performed. The action can either trigger an event or display a popup, depending on how the extension is configured. If the action is configured to display a popup, implementing the appropriate web extension controller delegate method is required; otherwise, no action is performed for popup actions.
+// @abstract Performs the extension action associated with the specified tab or performs the default action if `nil` is passed. @param tab The tab for which to perform the extension action, or `nil` to perform the default action. @discussion Performing the action will mark the tab, if specified, as having an active user gesture. When the “tab“ parameter is `nil`, the default action is performed. The action can either trigger an event or display a popup, depending on how the extension is configured. If the action is configured to display a popup, implementing the appropriate web extension controller delegate method is required; otherwise, no action is performed for popup actions.
 func (o *WKWebExtensionContext) PerformActionForTab(tab WKWebExtensionTab) {
 	o.Ptr().Send(_wKWebExtensionContextSelPerformActionForTab, tab)
 }
@@ -250,7 +256,7 @@ func (o *WKWebExtensionContext) PerformCommand(command *WKWebExtensionCommand) {
 	o.Ptr().Send(_wKWebExtensionContextSelPerformCommand, command.Ptr())
 }
 
-// @abstract Performs the command associated with the given event. @discussion This method checks for a command corresponding to the provided event and performs it, if available. The app should use this method to perform any extension commands at an appropriate time in the app's event handling, like in ``sendEvent:`` of ``NSApplication`` or ``NSWindow`` subclasses. @param event The event representing the user input. @result Returns `YES` if a command corresponding to the event was found and performed, `NO` otherwise.
+// @abstract Performs the command associated with the given event. @discussion This method checks for a command corresponding to the provided event and performs it, if available. The app should use this method to perform any extension commands at an appropriate time in the app's event handling, like in “sendEvent:“ of “NSApplication“ or “NSWindow“ subclasses. @param event The event representing the user input. @result Returns `YES` if a command corresponding to the event was found and performed, `NO` otherwise.
 func (o *WKWebExtensionContext) PerformCommandForEvent(event *appkit.NSEvent) bool {
 	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelPerformCommandForEvent, event.Ptr())
 	return _ret
@@ -259,7 +265,9 @@ func (o *WKWebExtensionContext) PerformCommandForEvent(event *appkit.NSEvent) bo
 // @abstract Retrieves the command associated with the given event without performing it. @discussion Returns the command that corresponds to the provided event, if such a command exists. This provides a way to programmatically determine what action would occur for a given event, without triggering the command. @param event The event for which to retrieve the corresponding command. @result The command associated with the event, or `nil` if there is no such command.
 func (o *WKWebExtensionContext) CommandForEvent(event *appkit.NSEvent) *WKWebExtensionCommand {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelCommandForEvent, event.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebExtensionCommandFromID(_ret)
 }
 
@@ -268,7 +276,7 @@ func (o *WKWebExtensionContext) MenuItemsForTab(tab WKWebExtensionTab) *foundati
 	return _ret
 }
 
-// @abstract Should be called by the app when a user gesture is performed in a specific tab. @param tab The tab in which the user gesture was performed. @discussion When a user gesture is performed in a tab, this method should be called to update the extension context. This enables the extension to be aware of the user gesture, potentially granting it access to features that require user interaction, such as `activeTab`. Not required if using ``performActionForTab:``. @seealso hasActiveUserGestureInTab:
+// @abstract Should be called by the app when a user gesture is performed in a specific tab. @param tab The tab in which the user gesture was performed. @discussion When a user gesture is performed in a tab, this method should be called to update the extension context. This enables the extension to be aware of the user gesture, potentially granting it access to features that require user interaction, such as `activeTab`. Not required if using “performActionForTab:“. @seealso hasActiveUserGestureInTab:
 func (o *WKWebExtensionContext) UserGesturePerformedInTab(tab WKWebExtensionTab) {
 	o.Ptr().Send(_wKWebExtensionContextSelUserGesturePerformedInTab, tab)
 }
@@ -342,14 +350,18 @@ func (o *WKWebExtensionContext) DidChangeTabPropertiesForTab(properties WKWebExt
 // @abstract The extension this context represents.
 func (o *WKWebExtensionContext) WebExtension() *WKWebExtension {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelWebExtension)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebExtensionFromID(_ret)
 }
 
 // @abstract The extension controller this context is loaded in, otherwise `nil` if it isn't loaded.
 func (o *WKWebExtensionContext) WebExtensionController() *WKWebExtensionController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelWebExtensionController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebExtensionControllerFromID(_ret)
 }
 
@@ -365,10 +377,12 @@ func (o *WKWebExtensionContext) Errors() *foundation.NSArray[objc.ID] {
 	return _ret
 }
 
-// @abstract The base URL the context uses for loading extension resources or injecting content into webpages. @discussion The default value is a unique URL using the `webkit-extension` scheme. The base URL can be set to any URL, but only the scheme and host will be used. The scheme cannot be a scheme that is already supported by ``WKWebView`` (e.g. http, https, etc.) Setting is only allowed when the context is not loaded.
+// @abstract The base URL the context uses for loading extension resources or injecting content into webpages. @discussion The default value is a unique URL using the `webkit-extension` scheme. The base URL can be set to any URL, but only the scheme and host will be used. The scheme cannot be a scheme that is already supported by “WKWebView“ (e.g. http, https, etc.) Setting is only allowed when the context is not loaded.
 func (o *WKWebExtensionContext) BaseURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelBaseURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -379,7 +393,9 @@ func (o *WKWebExtensionContext) SetBaseURL(baseURL *foundation.NSURL) {
 // @abstract A unique identifier used to distinguish the extension from other extensions and target it for messages. @discussion The default value is a unique value that matches the host in the default base URL. The identifier can be any value that is unique. Setting is only allowed when the context is not loaded. This value is accessible by the extension via `browser.runtime.id` and is used for messaging the extension via `browser.runtime.sendMessage()`.
 func (o *WKWebExtensionContext) UniqueIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelUniqueIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -387,7 +403,7 @@ func (o *WKWebExtensionContext) SetUniqueIdentifier(uniqueIdentifier *foundation
 	o.Ptr().Send(_wKWebExtensionContextSelSetUniqueIdentifier, uniqueIdentifier.Ptr())
 }
 
-// @abstract Determines whether Web Inspector can inspect the ``WKWebView`` instances for this context. @discussion A context can control multiple ``WKWebView`` instances, from the background content, to the popover. You should set this to `YES` when needed for debugging purposes. The default value is `NO`.
+// @abstract Determines whether Web Inspector can inspect the “WKWebView“ instances for this context. @discussion A context can control multiple “WKWebView“ instances, from the background content, to the popover. You should set this to `YES` when needed for debugging purposes. The default value is `NO`.
 func (o *WKWebExtensionContext) IsInspectable() bool {
 	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelIsInspectable)
 	return _ret
@@ -400,7 +416,9 @@ func (o *WKWebExtensionContext) SetInspectable(inspectable bool) {
 // @abstract The name shown when inspecting the background web view. @discussion This is the text that will appear when inspecting the background web view.
 func (o *WKWebExtensionContext) InspectionName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelInspectionName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -421,21 +439,27 @@ func (o *WKWebExtensionContext) SetUnsupportedAPIs(unsupportedAPIs *foundation.N
 // @abstract The web view configuration to use for web views that load pages from this extension. @discussion Returns a customized copy of the configuration, originally set in the web extension controller configuration, for this extension. The app must use this configuration when initializing web views intended to navigate to a URL originating from this extension's base URL. The app must also swap web views in tabs when navigating to and from web extension URLs. This property returns `nil` if the context isn't associated with a web extension controller. The returned configuration copy can be customized prior to web view initialization. @note Navigations will fail if a web view using this configuration attempts to navigate to a URL that doesn't originate from this extension's base URL. Similarly, navigations will be canceled if a web view not configured with this configuration attempts to navigate to a URL that does originate from this extension's base URL.
 func (o *WKWebExtensionContext) WebViewConfiguration() *WKWebViewConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelWebViewConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebViewConfigurationFromID(_ret)
 }
 
 // @abstract The URL of the extension's options page, if the extension has one. @discussion Provides the URL for the dedicated options page, if provided by the extension; otherwise `nil` if no page is defined. The app should provide access to this page through a user interface element. @note Navigation to the options page is only possible after this extension has been loaded. @seealso webViewConfiguration
 func (o *WKWebExtensionContext) OptionsPageURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelOptionsPageURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // @abstract The URL to use as an alternative to the default new tab page, if the extension has one. @discussion Provides the URL for a new tab page, if provided by the extension; otherwise `nil` if no page is defined. The app should prompt the user for permission to use the extension's new tab page as the default. @note Navigation to the override new tab page is only possible after this extension has been loaded. @seealso webViewConfiguration
 func (o *WKWebExtensionContext) OverrideNewTabPageURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelOverrideNewTabPageURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -489,7 +513,7 @@ func (o *WKWebExtensionContext) SetHasRequestedOptionalAccessToAllHosts(hasReque
 	o.Ptr().Send(_wKWebExtensionContextSelSetHasRequestedOptionalAccessToAllHosts, hasRequestedOptionalAccessToAllHosts)
 }
 
-// @abstract A Boolean value indicating if the extension has access to private data. @discussion If this property is `YES`, the extension is granted permission to interact with private windows, tabs, and cookies. Access to private data should be explicitly allowed by the user before setting this property. This value should be saved and restored as needed by the app. @note To ensure proper isolation between private and non-private data, web views associated with private data must use a different ``WKUserContentController``. Likewise, to be identified as a private web view and to ensure that cookies and other website data is not shared, private web views must be configured to use a non-persistent ``WKWebsiteDataStore``.
+// @abstract A Boolean value indicating if the extension has access to private data. @discussion If this property is `YES`, the extension is granted permission to interact with private windows, tabs, and cookies. Access to private data should be explicitly allowed by the user before setting this property. This value should be saved and restored as needed by the app. @note To ensure proper isolation between private and non-private data, web views associated with private data must use a different “WKUserContentController“. Likewise, to be identified as a private web view and to ensure that cookies and other website data is not shared, private web views must be configured to use a non-persistent “WKWebsiteDataStore“.
 func (o *WKWebExtensionContext) HasAccessToPrivateData() bool {
 	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelHasAccessToPrivateData)
 	return _ret
@@ -508,11 +532,13 @@ func (o *WKWebExtensionContext) CurrentPermissions() *foundation.NSSet[*foundati
 // @abstract The currently granted permission match patterns that have not expired. @seealso grantedPermissionMatchPatterns
 func (o *WKWebExtensionContext) CurrentPermissionMatchPatterns() *foundation.NSSet[*WKWebExtensionMatchPattern] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelCurrentPermissionMatchPatterns)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*WKWebExtensionMatchPattern](_ret)
 }
 
-// @abstract A Boolean value indicating if the currently granted permission match patterns set contains the `<all_urls>` pattern. @discussion This does not check for any `*` host patterns. In most cases you should use the broader ``hasAccessToAllHosts``. @seealso currentPermissionMatchPatterns @seealso hasAccessToAllHosts
+// @abstract A Boolean value indicating if the currently granted permission match patterns set contains the `<all_urls>` pattern. @discussion This does not check for any `*` host patterns. In most cases you should use the broader “hasAccessToAllHosts“. @seealso currentPermissionMatchPatterns @seealso hasAccessToAllHosts
 func (o *WKWebExtensionContext) HasAccessToAllURLs() bool {
 	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelHasAccessToAllURLs)
 	return _ret
@@ -539,27 +565,32 @@ func (o *WKWebExtensionContext) HasContentModificationRules() bool {
 // @abstract The commands associated with the extension. @discussion Provides all commands registered within the extension. Each command represents an action or behavior available for the web extension. @seealso performCommand:
 func (o *WKWebExtensionContext) Commands() *foundation.NSArray[*WKWebExtensionCommand] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelCommands)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*WKWebExtensionCommand](_ret)
 }
 
-// @abstract The open windows that are exposed to this extension. @discussion Provides the windows that are open and visible to the extension, as updated by the ``didOpenWindow:`` and ``didCloseWindow:`` methods. Initially populated by the windows returned by the extension controller delegate method ``webExtensionController:openWindowsForExtensionContext:``. @seealso didOpenWindow: @seealso didCloseWindow:
+// @abstract The open windows that are exposed to this extension. @discussion Provides the windows that are open and visible to the extension, as updated by the “didOpenWindow:“ and “didCloseWindow:“ methods. Initially populated by the windows returned by the extension controller delegate method “webExtensionController:openWindowsForExtensionContext:“. @seealso didOpenWindow: @seealso didCloseWindow:
 func (o *WKWebExtensionContext) OpenWindows() *foundation.NSArray[WKWebExtensionWindow] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelOpenWindows)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[WKWebExtensionWindow](_ret)
 }
 
-// @abstract The window that currently has focus for this extension. @discussion Provides the window that currently has focus, as set by the ``didFocusWindow:`` method. It will be `nil` if no window has focus or if a window has focus that is not visible to the extension. Initially populated by the window returned by the extension controller delegate method ``webExtensionController:focusedWindowForExtensionContext:``. @seealso didFocusWindow:
+// @abstract The window that currently has focus for this extension. @discussion Provides the window that currently has focus, as set by the “didFocusWindow:“ method. It will be `nil` if no window has focus or if a window has focus that is not visible to the extension. Initially populated by the window returned by the extension controller delegate method “webExtensionController:focusedWindowForExtensionContext:“. @seealso didFocusWindow:
 func (o *WKWebExtensionContext) FocusedWindow() WKWebExtensionWindow {
 	_ret := objc.Send[WKWebExtensionWindow](o.Ptr(), _wKWebExtensionContextSelFocusedWindow)
 	return _ret
 }
 
-// @abstract A set of open tabs in all open windows that are exposed to this extension. @discussion Provides a set of tabs in all open windows that are visible to the extension, as updated by the ``didOpenTab:`` and ``didCloseTab:`` methods. Initially populated by the tabs in the windows returned by the extension controller delegate method ``webExtensionController:openWindowsForExtensionContext:``. @seealso didOpenTab: @seealso didCloseTab:
+// @abstract A set of open tabs in all open windows that are exposed to this extension. @discussion Provides a set of tabs in all open windows that are visible to the extension, as updated by the “didOpenTab:“ and “didCloseTab:“ methods. Initially populated by the tabs in the windows returned by the extension controller delegate method “webExtensionController:openWindowsForExtensionContext:“. @seealso didOpenTab: @seealso didCloseTab:
 func (o *WKWebExtensionContext) OpenTabs() *foundation.NSSet[WKWebExtensionTab] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelOpenTabs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[WKWebExtensionTab](_ret)
 }
-

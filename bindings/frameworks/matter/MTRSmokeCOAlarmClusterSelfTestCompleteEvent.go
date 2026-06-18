@@ -26,4 +26,3 @@ func MTRSmokeCOAlarmClusterSelfTestCompleteEventFromID(id objc.ID) *MTRSmokeCOAl
 	purego.Track(o)
 	return o
 }
-

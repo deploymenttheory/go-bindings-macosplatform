@@ -15,13 +15,13 @@ type MPSCNNConvolutionNode struct {
 }
 
 var (
-	_clsMPSCNNConvolutionNode = _objcClass("MPSCNNConvolutionNode")
-	_mPSCNNConvolutionNodeSelNodeWithSourceWeights = objc.RegisterName("nodeWithSource:weights:")
-	_mPSCNNConvolutionNodeSelInitWithSourceWeights = objc.RegisterName("initWithSource:weights:")
-	_mPSCNNConvolutionNodeSelTrainingStyle = objc.RegisterName("trainingStyle")
-	_mPSCNNConvolutionNodeSelSetTrainingStyle = objc.RegisterName("setTrainingStyle:")
-	_mPSCNNConvolutionNodeSelAccumulatorPrecision = objc.RegisterName("accumulatorPrecision")
-	_mPSCNNConvolutionNodeSelSetAccumulatorPrecision = objc.RegisterName("setAccumulatorPrecision:")
+	_clsMPSCNNConvolutionNode                         = _objcClass("MPSCNNConvolutionNode")
+	_mPSCNNConvolutionNodeSelNodeWithSourceWeights    = objc.RegisterName("nodeWithSource:weights:")
+	_mPSCNNConvolutionNodeSelInitWithSourceWeights    = objc.RegisterName("initWithSource:weights:")
+	_mPSCNNConvolutionNodeSelTrainingStyle            = objc.RegisterName("trainingStyle")
+	_mPSCNNConvolutionNodeSelSetTrainingStyle         = objc.RegisterName("setTrainingStyle:")
+	_mPSCNNConvolutionNodeSelAccumulatorPrecision     = objc.RegisterName("accumulatorPrecision")
+	_mPSCNNConvolutionNodeSelSetAccumulatorPrecision  = objc.RegisterName("setAccumulatorPrecision:")
 	_mPSCNNConvolutionNodeSelConvolutionGradientState = objc.RegisterName("convolutionGradientState")
 )
 
@@ -38,14 +38,18 @@ func MPSCNNConvolutionNodeFromID(id objc.ID) *MPSCNNConvolutionNode {
 // @abstract   Init an autoreleased not representing a MPSCNNConvolution kernel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      weights                 A pointer to a valid object conforming to the MPSCNNConvolutionDataSource protocol. This object is provided by you to encapsulate storage for convolution weights and biases. If it is used for training, it may not have a neuron embedded in the convolution descriptor. @return     A new MPSNNFilter node for a MPSCNNConvolution kernel.
 func MPSCNNConvolutionNodeNodeWithSourceWeights(sourceNode *MPSNNImageNode, weights MPSCNNConvolutionDataSource) *MPSCNNConvolutionNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNConvolutionNode), _mPSCNNConvolutionNodeSelNodeWithSourceWeights, sourceNode.Ptr(), weights)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNConvolutionNodeFromID(_ret)
 }
 
 // @abstract   Init a node representing a MPSCNNConvolution kernel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      weights                 A pointer to a valid object conforming to the MPSCNNConvolutionDataSource protocol. This object is provided by you to encapsulate storage for convolution weights and biases. If it is used for training, it may not have a neuron embedded in the convolution descriptor. @return     A new MPSNNFilter node for a MPSCNNConvolution kernel.
 func (o *MPSCNNConvolutionNode) InitWithSourceWeights(sourceNode *MPSNNImageNode, weights MPSCNNConvolutionDataSource) *MPSCNNConvolutionNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionNodeSelInitWithSourceWeights, sourceNode.Ptr(), weights)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNConvolutionNodeFromID(_ret)
 }
 
@@ -74,7 +78,8 @@ func (o *MPSCNNConvolutionNode) SetAccumulatorPrecision(accumulatorPrecision MPS
 // @abstract   A node to represent a MPSCNNConvolutionGradientState object @discussion  Use this if the convolution is mirrored by a convolution transpose node later on in the graph to make sure that the size of the image returned from the convolution transpose matches the size of the image passed in to this node.
 func (o *MPSCNNConvolutionNode) ConvolutionGradientState() *MPSCNNConvolutionGradientStateNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionNodeSelConvolutionGradientState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNConvolutionGradientStateNodeFromID(_ret)
 }
-

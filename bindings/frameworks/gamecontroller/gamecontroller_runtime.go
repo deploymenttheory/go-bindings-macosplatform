@@ -14,8 +14,8 @@ import (
 
 var (
 	_gamecontrollerLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce          sync.Once
+	_failedSymbols     = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -48,21 +48,45 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("GCExtendedGamepadSnapShotDataV100FromNSData", func() { purego.RegisterLibFunc(&_fnGCExtendedGamepadSnapShotDataV100FromNSData, _gamecontrollerLib, "GCExtendedGamepadSnapShotDataV100FromNSData") })
-	_register("GCExtendedGamepadSnapshotDataFromNSData", func() { purego.RegisterLibFunc(&_fnGCExtendedGamepadSnapshotDataFromNSData, _gamecontrollerLib, "GCExtendedGamepadSnapshotDataFromNSData") })
-	_register("GCGamepadSnapShotDataV100FromNSData", func() { purego.RegisterLibFunc(&_fnGCGamepadSnapShotDataV100FromNSData, _gamecontrollerLib, "GCGamepadSnapShotDataV100FromNSData") })
-	_register("GCInputArcadeButtonName", func() { purego.RegisterLibFunc(&_fnGCInputArcadeButtonName, _gamecontrollerLib, "GCInputArcadeButtonName") })
+	_register("GCExtendedGamepadSnapShotDataV100FromNSData", func() {
+		purego.RegisterLibFunc(&_fnGCExtendedGamepadSnapShotDataV100FromNSData, _gamecontrollerLib, "GCExtendedGamepadSnapShotDataV100FromNSData")
+	})
+	_register("GCExtendedGamepadSnapshotDataFromNSData", func() {
+		purego.RegisterLibFunc(&_fnGCExtendedGamepadSnapshotDataFromNSData, _gamecontrollerLib, "GCExtendedGamepadSnapshotDataFromNSData")
+	})
+	_register("GCGamepadSnapShotDataV100FromNSData", func() {
+		purego.RegisterLibFunc(&_fnGCGamepadSnapShotDataV100FromNSData, _gamecontrollerLib, "GCGamepadSnapShotDataV100FromNSData")
+	})
+	_register("GCInputArcadeButtonName", func() {
+		purego.RegisterLibFunc(&_fnGCInputArcadeButtonName, _gamecontrollerLib, "GCInputArcadeButtonName")
+	})
 	_register("GCInputBackLeftButton", func() { purego.RegisterLibFunc(&_fnGCInputBackLeftButton, _gamecontrollerLib, "GCInputBackLeftButton") })
-	_register("GCInputBackRightButton", func() { purego.RegisterLibFunc(&_fnGCInputBackRightButton, _gamecontrollerLib, "GCInputBackRightButton") })
-	_register("GCMicroGamepadSnapShotDataV100FromNSData", func() { purego.RegisterLibFunc(&_fnGCMicroGamepadSnapShotDataV100FromNSData, _gamecontrollerLib, "GCMicroGamepadSnapShotDataV100FromNSData") })
-	_register("GCMicroGamepadSnapshotDataFromNSData", func() { purego.RegisterLibFunc(&_fnGCMicroGamepadSnapshotDataFromNSData, _gamecontrollerLib, "GCMicroGamepadSnapshotDataFromNSData") })
+	_register("GCInputBackRightButton", func() {
+		purego.RegisterLibFunc(&_fnGCInputBackRightButton, _gamecontrollerLib, "GCInputBackRightButton")
+	})
+	_register("GCMicroGamepadSnapShotDataV100FromNSData", func() {
+		purego.RegisterLibFunc(&_fnGCMicroGamepadSnapShotDataV100FromNSData, _gamecontrollerLib, "GCMicroGamepadSnapShotDataV100FromNSData")
+	})
+	_register("GCMicroGamepadSnapshotDataFromNSData", func() {
+		purego.RegisterLibFunc(&_fnGCMicroGamepadSnapshotDataFromNSData, _gamecontrollerLib, "GCMicroGamepadSnapshotDataFromNSData")
+	})
 	_register("GCPoint2Equal", func() { purego.RegisterLibFunc(&_fnGCPoint2Equal, _gamecontrollerLib, "GCPoint2Equal") })
 	_register("GCPoint2Make", func() { purego.RegisterLibFunc(&_fnGCPoint2Make, _gamecontrollerLib, "GCPoint2Make") })
-	_register("NSDataFromGCExtendedGamepadSnapShotDataV100", func() { purego.RegisterLibFunc(&_fnNSDataFromGCExtendedGamepadSnapShotDataV100, _gamecontrollerLib, "NSDataFromGCExtendedGamepadSnapShotDataV100") })
-	_register("NSDataFromGCExtendedGamepadSnapshotData", func() { purego.RegisterLibFunc(&_fnNSDataFromGCExtendedGamepadSnapshotData, _gamecontrollerLib, "NSDataFromGCExtendedGamepadSnapshotData") })
-	_register("NSDataFromGCGamepadSnapShotDataV100", func() { purego.RegisterLibFunc(&_fnNSDataFromGCGamepadSnapShotDataV100, _gamecontrollerLib, "NSDataFromGCGamepadSnapShotDataV100") })
-	_register("NSDataFromGCMicroGamepadSnapShotDataV100", func() { purego.RegisterLibFunc(&_fnNSDataFromGCMicroGamepadSnapShotDataV100, _gamecontrollerLib, "NSDataFromGCMicroGamepadSnapShotDataV100") })
-	_register("NSDataFromGCMicroGamepadSnapshotData", func() { purego.RegisterLibFunc(&_fnNSDataFromGCMicroGamepadSnapshotData, _gamecontrollerLib, "NSDataFromGCMicroGamepadSnapshotData") })
+	_register("NSDataFromGCExtendedGamepadSnapShotDataV100", func() {
+		purego.RegisterLibFunc(&_fnNSDataFromGCExtendedGamepadSnapShotDataV100, _gamecontrollerLib, "NSDataFromGCExtendedGamepadSnapShotDataV100")
+	})
+	_register("NSDataFromGCExtendedGamepadSnapshotData", func() {
+		purego.RegisterLibFunc(&_fnNSDataFromGCExtendedGamepadSnapshotData, _gamecontrollerLib, "NSDataFromGCExtendedGamepadSnapshotData")
+	})
+	_register("NSDataFromGCGamepadSnapShotDataV100", func() {
+		purego.RegisterLibFunc(&_fnNSDataFromGCGamepadSnapShotDataV100, _gamecontrollerLib, "NSDataFromGCGamepadSnapShotDataV100")
+	})
+	_register("NSDataFromGCMicroGamepadSnapShotDataV100", func() {
+		purego.RegisterLibFunc(&_fnNSDataFromGCMicroGamepadSnapShotDataV100, _gamecontrollerLib, "NSDataFromGCMicroGamepadSnapShotDataV100")
+	})
+	_register("NSDataFromGCMicroGamepadSnapshotData", func() {
+		purego.RegisterLibFunc(&_fnNSDataFromGCMicroGamepadSnapshotData, _gamecontrollerLib, "NSDataFromGCMicroGamepadSnapshotData")
+	})
 	_register("NSStringFromGCPoint2", func() { purego.RegisterLibFunc(&_fnNSStringFromGCPoint2, _gamecontrollerLib, "NSStringFromGCPoint2") })
 }
 

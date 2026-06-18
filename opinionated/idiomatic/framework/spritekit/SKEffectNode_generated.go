@@ -166,7 +166,9 @@ func (x *EffectNode) WithConstraints(items ...*raw.SKConstraint) *EffectNode {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.SKConstraint](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -352,4 +354,3 @@ type EffectNodeable interface {
 }
 
 var _ EffectNodeable = (*EffectNode)(nil)
-

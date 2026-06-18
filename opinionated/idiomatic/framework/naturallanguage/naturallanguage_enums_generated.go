@@ -52,7 +52,7 @@ type NLModelType int64
 
 const (
 	NLModelTypeClassifier NLModelType = 0
-	NLModelTypeSequence NLModelType = 1
+	NLModelTypeSequence   NLModelType = 1
 )
 
 func (e NLModelType) String() string {
@@ -69,9 +69,9 @@ func (e NLModelType) String() string {
 type NLTaggerAssetsResult int64
 
 const (
-	NLTaggerAssetsResultAvailable NLTaggerAssetsResult = 0
+	NLTaggerAssetsResultAvailable    NLTaggerAssetsResult = 0
 	NLTaggerAssetsResultNotAvailable NLTaggerAssetsResult = 1
-	NLTaggerAssetsResultError NLTaggerAssetsResult = 2
+	NLTaggerAssetsResultError        NLTaggerAssetsResult = 2
 )
 
 func (e NLTaggerAssetsResult) String() string {
@@ -91,11 +91,11 @@ func (e NLTaggerAssetsResult) String() string {
 type NLTaggerOptions uint64
 
 const (
-	NLTaggerOmitWords NLTaggerOptions = 1
-	NLTaggerOmitPunctuation NLTaggerOptions = 2
-	NLTaggerOmitWhitespace NLTaggerOptions = 4
-	NLTaggerOmitOther NLTaggerOptions = 8
-	NLTaggerJoinNames NLTaggerOptions = 16
+	NLTaggerOmitWords        NLTaggerOptions = 1
+	NLTaggerOmitPunctuation  NLTaggerOptions = 2
+	NLTaggerOmitWhitespace   NLTaggerOptions = 4
+	NLTaggerOmitOther        NLTaggerOptions = 8
+	NLTaggerJoinNames        NLTaggerOptions = 16
 	NLTaggerJoinContractions NLTaggerOptions = 32
 )
 
@@ -128,10 +128,10 @@ func (e NLTaggerOptions) String() string {
 type NLTokenUnit int64
 
 const (
-	NLTokenUnitWord NLTokenUnit = 0
-	NLTokenUnitSentence NLTokenUnit = 1
+	NLTokenUnitWord      NLTokenUnit = 0
+	NLTokenUnitSentence  NLTokenUnit = 1
 	NLTokenUnitParagraph NLTokenUnit = 2
-	NLTokenUnitDocument NLTokenUnit = 3
+	NLTokenUnitDocument  NLTokenUnit = 3
 )
 
 func (e NLTokenUnit) String() string {
@@ -148,4 +148,3 @@ func (e NLTokenUnit) String() string {
 		return fmt.Sprintf("NLTokenUnit(%d)", int64(e))
 	}
 }
-

@@ -17,22 +17,22 @@ type NSMutableData struct {
 }
 
 var (
-	_clsNSMutableData = _objcClass("NSMutableData")
-	_nSMutableDataSelMutableBytes = objc.RegisterName("mutableBytes")
-	_nSMutableDataSelSetLength = objc.RegisterName("setLength:")
-	_nSMutableDataSelAppendBytesLength = objc.RegisterName("appendBytes:length:")
-	_nSMutableDataSelAppendData = objc.RegisterName("appendData:")
-	_nSMutableDataSelIncreaseLengthBy = objc.RegisterName("increaseLengthBy:")
-	_nSMutableDataSelReplaceBytesInRangeWithBytes = objc.RegisterName("replaceBytesInRange:withBytes:")
-	_nSMutableDataSelResetBytesInRange = objc.RegisterName("resetBytesInRange:")
-	_nSMutableDataSelSetData = objc.RegisterName("setData:")
+	_clsNSMutableData                                   = _objcClass("NSMutableData")
+	_nSMutableDataSelMutableBytes                       = objc.RegisterName("mutableBytes")
+	_nSMutableDataSelSetLength                          = objc.RegisterName("setLength:")
+	_nSMutableDataSelAppendBytesLength                  = objc.RegisterName("appendBytes:length:")
+	_nSMutableDataSelAppendData                         = objc.RegisterName("appendData:")
+	_nSMutableDataSelIncreaseLengthBy                   = objc.RegisterName("increaseLengthBy:")
+	_nSMutableDataSelReplaceBytesInRangeWithBytes       = objc.RegisterName("replaceBytesInRange:withBytes:")
+	_nSMutableDataSelResetBytesInRange                  = objc.RegisterName("resetBytesInRange:")
+	_nSMutableDataSelSetData                            = objc.RegisterName("setData:")
 	_nSMutableDataSelReplaceBytesInRangeWithBytesLength = objc.RegisterName("replaceBytesInRange:withBytes:length:")
-	_nSMutableDataSelDataWithCapacity = objc.RegisterName("dataWithCapacity:")
-	_nSMutableDataSelDataWithLength = objc.RegisterName("dataWithLength:")
-	_nSMutableDataSelInitWithCapacity = objc.RegisterName("initWithCapacity:")
-	_nSMutableDataSelInitWithLength = objc.RegisterName("initWithLength:")
-	_nSMutableDataSelDecompressUsingAlgorithmError = objc.RegisterName("decompressUsingAlgorithm:error:")
-	_nSMutableDataSelCompressUsingAlgorithmError = objc.RegisterName("compressUsingAlgorithm:error:")
+	_nSMutableDataSelDataWithCapacity                   = objc.RegisterName("dataWithCapacity:")
+	_nSMutableDataSelDataWithLength                     = objc.RegisterName("dataWithLength:")
+	_nSMutableDataSelInitWithCapacity                   = objc.RegisterName("initWithCapacity:")
+	_nSMutableDataSelInitWithLength                     = objc.RegisterName("initWithLength:")
+	_nSMutableDataSelDecompressUsingAlgorithmError      = objc.RegisterName("decompressUsingAlgorithm:error:")
+	_nSMutableDataSelCompressUsingAlgorithmError        = objc.RegisterName("compressUsingAlgorithm:error:")
 )
 
 func NSMutableDataFromID(id objc.ID) *NSMutableData {
@@ -84,25 +84,33 @@ func (o *NSMutableData) ReplaceBytesInRangeWithBytesLength(range_ NSRange, repla
 
 func NSMutableDataDataWithCapacity(aNumItems uint) *NSMutableData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableData), _nSMutableDataSelDataWithCapacity, aNumItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableDataFromID(_ret)
 }
 
 func NSMutableDataDataWithLength(length uint) *NSMutableData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableData), _nSMutableDataSelDataWithLength, length)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableDataFromID(_ret)
 }
 
 func (o *NSMutableData) InitWithCapacity(capacity uint) *NSMutableData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableDataSelInitWithCapacity, capacity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableDataFromID(_ret)
 }
 
 func (o *NSMutableData) InitWithLength(length uint) *NSMutableData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableDataSelInitWithLength, length)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableDataFromID(_ret)
 }
 
@@ -123,4 +131,3 @@ func (o *NSMutableData) CompressUsingAlgorithmError(algorithm NSDataCompressionA
 	}
 	return _ret, nil
 }
-

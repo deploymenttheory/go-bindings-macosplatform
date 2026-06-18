@@ -16,7 +16,9 @@ type MTL4MeshRenderPipelineDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTL4MeshRenderPipelineDescriptor].
-func (x *MTL4MeshRenderPipelineDescriptor) Unwrap() *raw.MTL4MeshRenderPipelineDescriptor { return x.inner }
+func (x *MTL4MeshRenderPipelineDescriptor) Unwrap() *raw.MTL4MeshRenderPipelineDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -470,7 +472,9 @@ func (x *MTL4MeshRenderPipelineDescriptor) SetSupportIndirectCommandBuffers(supp
 	x.inner.SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers)
 }
 
-func (x *MTL4MeshRenderPipelineDescriptor) asMTL4PipelineDescriptor() *raw.MTL4PipelineDescriptor { return &x.inner.MTL4PipelineDescriptor }
+func (x *MTL4MeshRenderPipelineDescriptor) asMTL4PipelineDescriptor() *raw.MTL4PipelineDescriptor {
+	return &x.inner.MTL4PipelineDescriptor
+}
 
 // MTL4MeshRenderPipelineDescriptorable is the interface implemented by [MTL4MeshRenderPipelineDescriptor], for mocking and DI.
 type MTL4MeshRenderPipelineDescriptorable interface {
@@ -554,4 +558,3 @@ type MTL4MeshRenderPipelineDescriptorable interface {
 }
 
 var _ MTL4MeshRenderPipelineDescriptorable = (*MTL4MeshRenderPipelineDescriptor)(nil)
-

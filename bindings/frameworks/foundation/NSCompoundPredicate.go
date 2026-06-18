@@ -15,14 +15,14 @@ type NSCompoundPredicate struct {
 }
 
 var (
-	_clsNSCompoundPredicate = _objcClass("NSCompoundPredicate")
-	_nSCompoundPredicateSelInitWithTypeSubpredicates = objc.RegisterName("initWithType:subpredicates:")
-	_nSCompoundPredicateSelInitWithCoder = objc.RegisterName("initWithCoder:")
+	_clsNSCompoundPredicate                              = _objcClass("NSCompoundPredicate")
+	_nSCompoundPredicateSelInitWithTypeSubpredicates     = objc.RegisterName("initWithType:subpredicates:")
+	_nSCompoundPredicateSelInitWithCoder                 = objc.RegisterName("initWithCoder:")
 	_nSCompoundPredicateSelAndPredicateWithSubpredicates = objc.RegisterName("andPredicateWithSubpredicates:")
-	_nSCompoundPredicateSelOrPredicateWithSubpredicates = objc.RegisterName("orPredicateWithSubpredicates:")
-	_nSCompoundPredicateSelNotPredicateWithSubpredicate = objc.RegisterName("notPredicateWithSubpredicate:")
-	_nSCompoundPredicateSelCompoundPredicateType = objc.RegisterName("compoundPredicateType")
-	_nSCompoundPredicateSelSubpredicates = objc.RegisterName("subpredicates")
+	_nSCompoundPredicateSelOrPredicateWithSubpredicates  = objc.RegisterName("orPredicateWithSubpredicates:")
+	_nSCompoundPredicateSelNotPredicateWithSubpredicate  = objc.RegisterName("notPredicateWithSubpredicate:")
+	_nSCompoundPredicateSelCompoundPredicateType         = objc.RegisterName("compoundPredicateType")
+	_nSCompoundPredicateSelSubpredicates                 = objc.RegisterName("subpredicates")
 )
 
 func NSCompoundPredicateFromID(id objc.ID) *NSCompoundPredicate {
@@ -37,32 +37,42 @@ func NSCompoundPredicateFromID(id objc.ID) *NSCompoundPredicate {
 
 func (o *NSCompoundPredicate) InitWithTypeSubpredicates(type_ NSCompoundPredicateType, subpredicates *NSArray[*NSPredicate]) *NSCompoundPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCompoundPredicateSelInitWithTypeSubpredicates, type_, subpredicates.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCompoundPredicateFromID(_ret)
 }
 
 func (o *NSCompoundPredicate) InitWithCoder(coder *NSCoder) *NSCompoundPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCompoundPredicateSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCompoundPredicateFromID(_ret)
 }
 
 // * Convenience Methods **
 func NSCompoundPredicateAndPredicateWithSubpredicates(subpredicates *NSArray[*NSPredicate]) *NSCompoundPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCompoundPredicate), _nSCompoundPredicateSelAndPredicateWithSubpredicates, subpredicates.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCompoundPredicateFromID(_ret)
 }
 
 func NSCompoundPredicateOrPredicateWithSubpredicates(subpredicates *NSArray[*NSPredicate]) *NSCompoundPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCompoundPredicate), _nSCompoundPredicateSelOrPredicateWithSubpredicates, subpredicates.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCompoundPredicateFromID(_ret)
 }
 
 func NSCompoundPredicateNotPredicateWithSubpredicate(predicate *NSPredicate) *NSCompoundPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCompoundPredicate), _nSCompoundPredicateSelNotPredicateWithSubpredicate, predicate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCompoundPredicateFromID(_ret)
 }
 
@@ -75,4 +85,3 @@ func (o *NSCompoundPredicate) Subpredicates() *NSArray[objc.ID] {
 	_ret := objc.Send[*NSArray[objc.ID]](o.Ptr(), _nSCompoundPredicateSelSubpredicates)
 	return _ret
 }
-

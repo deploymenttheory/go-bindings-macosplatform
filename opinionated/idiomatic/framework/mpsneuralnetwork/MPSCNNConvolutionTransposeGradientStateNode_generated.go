@@ -15,7 +15,9 @@ type CNNConvolutionTransposeGradientStateNode struct {
 }
 
 // Unwrap returns the underlying [raw.MPSCNNConvolutionTransposeGradientStateNode].
-func (x *CNNConvolutionTransposeGradientStateNode) Unwrap() *raw.MPSCNNConvolutionTransposeGradientStateNode { return x.inner }
+func (x *CNNConvolutionTransposeGradientStateNode) Unwrap() *raw.MPSCNNConvolutionTransposeGradientStateNode {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -53,11 +55,17 @@ func (x *CNNConvolutionTransposeGradientStateNode) WithSynchronizeResource(synch
 	return x
 }
 
-func (x *CNNConvolutionTransposeGradientStateNode) asCNNConvolutionGradientStateNode() *raw.MPSCNNConvolutionGradientStateNode { return &x.inner.MPSCNNConvolutionGradientStateNode }
+func (x *CNNConvolutionTransposeGradientStateNode) asCNNConvolutionGradientStateNode() *raw.MPSCNNConvolutionGradientStateNode {
+	return &x.inner.MPSCNNConvolutionGradientStateNode
+}
 
-func (x *CNNConvolutionTransposeGradientStateNode) asNNGradientStateNode() *raw.MPSNNGradientStateNode { return &x.inner.MPSCNNConvolutionGradientStateNode.MPSNNGradientStateNode }
+func (x *CNNConvolutionTransposeGradientStateNode) asNNGradientStateNode() *raw.MPSNNGradientStateNode {
+	return &x.inner.MPSCNNConvolutionGradientStateNode.MPSNNGradientStateNode
+}
 
-func (x *CNNConvolutionTransposeGradientStateNode) asNNStateNode() *raw.MPSNNStateNode { return &x.inner.MPSCNNConvolutionGradientStateNode.MPSNNGradientStateNode.MPSNNStateNode }
+func (x *CNNConvolutionTransposeGradientStateNode) asNNStateNode() *raw.MPSNNStateNode {
+	return &x.inner.MPSCNNConvolutionGradientStateNode.MPSNNGradientStateNode.MPSNNStateNode
+}
 
 // CNNConvolutionTransposeGradientStateNodeable is the interface implemented by [CNNConvolutionTransposeGradientStateNode], for mocking and DI.
 type CNNConvolutionTransposeGradientStateNodeable interface {
@@ -68,4 +76,3 @@ type CNNConvolutionTransposeGradientStateNodeable interface {
 }
 
 var _ CNNConvolutionTransposeGradientStateNodeable = (*CNNConvolutionTransposeGradientStateNode)(nil)
-

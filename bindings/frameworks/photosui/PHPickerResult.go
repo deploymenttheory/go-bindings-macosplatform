@@ -16,8 +16,8 @@ type PHPickerResult struct {
 }
 
 var (
-	_clsPHPickerResult = _objcClass("PHPickerResult")
-	_pHPickerResultSelItemProvider = objc.RegisterName("itemProvider")
+	_clsPHPickerResult                = _objcClass("PHPickerResult")
+	_pHPickerResultSelItemProvider    = objc.RegisterName("itemProvider")
 	_pHPickerResultSelAssetIdentifier = objc.RegisterName("assetIdentifier")
 )
 
@@ -34,14 +34,17 @@ func PHPickerResultFromID(id objc.ID) *PHPickerResult {
 // Representations of the selected asset.
 func (o *PHPickerResult) ItemProvider() *foundation.NSItemProvider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHPickerResultSelItemProvider)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSItemProviderFromID(_ret)
 }
 
 // The local identifier of the selected asset.
 func (o *PHPickerResult) AssetIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHPickerResultSelAssetIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

@@ -94,7 +94,9 @@ func (x *CaptureAudioDataOutput) SetSpatialAudioChannelLayoutTag(spatialAudioCha
 	x.inner.SetSpatialAudioChannelLayoutTag(spatialAudioChannelLayoutTag)
 }
 
-func (x *CaptureAudioDataOutput) asCaptureOutput() *raw.AVCaptureOutput { return &x.inner.AVCaptureOutput }
+func (x *CaptureAudioDataOutput) asCaptureOutput() *raw.AVCaptureOutput {
+	return &x.inner.AVCaptureOutput
+}
 
 // CaptureAudioDataOutputable is the interface implemented by [CaptureAudioDataOutput], for mocking and DI.
 type CaptureAudioDataOutputable interface {
@@ -113,4 +115,3 @@ type CaptureAudioDataOutputable interface {
 }
 
 var _ CaptureAudioDataOutputable = (*CaptureAudioDataOutput)(nil)
-

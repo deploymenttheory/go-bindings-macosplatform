@@ -16,12 +16,12 @@ type CBATTRequest struct {
 }
 
 var (
-	_clsCBATTRequest = _objcClass("CBATTRequest")
-	_cBATTRequestSelCentral = objc.RegisterName("central")
+	_clsCBATTRequest               = _objcClass("CBATTRequest")
+	_cBATTRequestSelCentral        = objc.RegisterName("central")
 	_cBATTRequestSelCharacteristic = objc.RegisterName("characteristic")
-	_cBATTRequestSelOffset = objc.RegisterName("offset")
-	_cBATTRequestSelValue = objc.RegisterName("value")
-	_cBATTRequestSelSetValue = objc.RegisterName("setValue:")
+	_cBATTRequestSelOffset         = objc.RegisterName("offset")
+	_cBATTRequestSelValue          = objc.RegisterName("value")
+	_cBATTRequestSelSetValue       = objc.RegisterName("setValue:")
 )
 
 func CBATTRequestFromID(id objc.ID) *CBATTRequest {
@@ -37,14 +37,18 @@ func CBATTRequestFromID(id objc.ID) *CBATTRequest {
 // @property central @discussion The central that originated the request.
 func (o *CBATTRequest) Central() *CBCentral {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBATTRequestSelCentral)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CBCentralFromID(_ret)
 }
 
 // @property characteristic @discussion The characteristic whose value will be read or written.
 func (o *CBATTRequest) Characteristic() *CBCharacteristic {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBATTRequestSelCharacteristic)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CBCharacteristicFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *CBATTRequest) Offset() uint {
 // @property value @discussion The data being read or written. For read requests, <i>value</i> will be nil and should be set before responding via @link respondToRequest:withResult: @/link. For write requests, <i>value</i> will contain the data to be written.
 func (o *CBATTRequest) Value() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBATTRequestSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *CBATTRequest) SetValue(value *foundation.NSData) {
 	o.Ptr().Send(_cBATTRequestSelSetValue, value.Ptr())
 }
-

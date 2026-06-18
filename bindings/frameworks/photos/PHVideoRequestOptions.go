@@ -16,13 +16,13 @@ type PHVideoRequestOptions struct {
 }
 
 var (
-	_clsPHVideoRequestOptions = _objcClass("PHVideoRequestOptions")
-	_pHVideoRequestOptionsSelIsNetworkAccessAllowed = objc.RegisterName("isNetworkAccessAllowed")
+	_clsPHVideoRequestOptions                        = _objcClass("PHVideoRequestOptions")
+	_pHVideoRequestOptionsSelIsNetworkAccessAllowed  = objc.RegisterName("isNetworkAccessAllowed")
 	_pHVideoRequestOptionsSelSetNetworkAccessAllowed = objc.RegisterName("setNetworkAccessAllowed:")
-	_pHVideoRequestOptionsSelDeliveryMode = objc.RegisterName("deliveryMode")
-	_pHVideoRequestOptionsSelSetDeliveryMode = objc.RegisterName("setDeliveryMode:")
-	_pHVideoRequestOptionsSelProgressHandler = objc.RegisterName("progressHandler")
-	_pHVideoRequestOptionsSelSetProgressHandler = objc.RegisterName("setProgressHandler:")
+	_pHVideoRequestOptionsSelDeliveryMode            = objc.RegisterName("deliveryMode")
+	_pHVideoRequestOptionsSelSetDeliveryMode         = objc.RegisterName("setDeliveryMode:")
+	_pHVideoRequestOptionsSelProgressHandler         = objc.RegisterName("progressHandler")
+	_pHVideoRequestOptionsSelSetProgressHandler      = objc.RegisterName("setProgressHandler:")
 )
 
 func PHVideoRequestOptionsFromID(id objc.ID) *PHVideoRequestOptions {
@@ -61,4 +61,3 @@ func (o *PHVideoRequestOptions) ProgressHandler() objc.Block {
 func (o *PHVideoRequestOptions) SetProgressHandler(progressHandler objc.Block) {
 	o.Ptr().Send(_pHVideoRequestOptionsSelSetProgressHandler, progressHandler)
 }
-

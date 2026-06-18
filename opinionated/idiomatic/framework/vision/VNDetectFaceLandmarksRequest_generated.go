@@ -76,9 +76,13 @@ func (x *DetectFaceLandmarksRequest) SetConstellation(constellation raw.VNReques
 	x.inner.SetConstellation(constellation)
 }
 
-func (x *DetectFaceLandmarksRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
+func (x *DetectFaceLandmarksRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNImageBasedRequest
+}
 
-func (x *DetectFaceLandmarksRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+func (x *DetectFaceLandmarksRequest) asRequest() *raw.VNRequest {
+	return &x.inner.VNImageBasedRequest.VNRequest
+}
 
 // DetectFaceLandmarksRequestable is the interface implemented by [DetectFaceLandmarksRequest], for mocking and DI.
 type DetectFaceLandmarksRequestable interface {
@@ -93,4 +97,3 @@ type DetectFaceLandmarksRequestable interface {
 }
 
 var _ DetectFaceLandmarksRequestable = (*DetectFaceLandmarksRequest)(nil)
-

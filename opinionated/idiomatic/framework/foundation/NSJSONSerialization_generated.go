@@ -50,4 +50,3 @@ type JSONSerializationable interface {
 }
 
 var _ JSONSerializationable = (*JSONSerialization)(nil)
-

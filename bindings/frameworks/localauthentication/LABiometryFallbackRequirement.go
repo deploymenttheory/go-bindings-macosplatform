@@ -18,8 +18,8 @@ type LABiometryFallbackRequirement struct {
 }
 
 var (
-	_clsLABiometryFallbackRequirement = _objcClass("LABiometryFallbackRequirement")
-	_lABiometryFallbackRequirementSelDefaultRequirement = objc.RegisterName("defaultRequirement")
+	_clsLABiometryFallbackRequirement                          = _objcClass("LABiometryFallbackRequirement")
+	_lABiometryFallbackRequirementSelDefaultRequirement        = objc.RegisterName("defaultRequirement")
 	_lABiometryFallbackRequirementSelDevicePasscodeRequirement = objc.RegisterName("devicePasscodeRequirement")
 )
 
@@ -36,14 +36,17 @@ func LABiometryFallbackRequirementFromID(id objc.ID) *LABiometryFallbackRequirem
 // @brief Use default biometric fallback @return @c LABiometryFallbackRequirement instance
 func LABiometryFallbackRequirementDefaultRequirement() *LABiometryFallbackRequirement {
 	_ret := objc.Send[objc.ID](objc.ID(_clsLABiometryFallbackRequirement), _lABiometryFallbackRequirementSelDefaultRequirement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return LABiometryFallbackRequirementFromID(_ret)
 }
 
 // @brief Requires authorization using the device passcode @return @c LABiometryFallbackRequirement instance
 func LABiometryFallbackRequirementDevicePasscodeRequirement() *LABiometryFallbackRequirement {
 	_ret := objc.Send[objc.ID](objc.ID(_clsLABiometryFallbackRequirement), _lABiometryFallbackRequirementSelDevicePasscodeRequirement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return LABiometryFallbackRequirementFromID(_ret)
 }
-

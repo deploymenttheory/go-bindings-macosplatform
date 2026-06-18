@@ -8,59 +8,59 @@ import (
 )
 
 var (
-	_fnCGLChoosePixelFormat func(*_CGLPixelFormatAttribute, unsafe.Pointer, *int32) _CGLError
-	_fnCGLClearDrawable func(unsafe.Pointer) _CGLError
-	_fnCGLCopyContext func(unsafe.Pointer, unsafe.Pointer, uint32) _CGLError
-	_fnCGLCreateContext func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) _CGLError
-	_fnCGLCreatePBuffer func(int32, int32, uint32, uint32, int32, unsafe.Pointer) _CGLError
-	_fnCGLDescribePBuffer func(unsafe.Pointer, *int32, *int32, *uint32, *uint32, *int32) _CGLError
-	_fnCGLDescribePixelFormat func(unsafe.Pointer, int32, _CGLPixelFormatAttribute, *int32) _CGLError
-	_fnCGLDescribeRenderer func(unsafe.Pointer, int32, _CGLRendererProperty, *int32) _CGLError
-	_fnCGLDestroyContext func(unsafe.Pointer) _CGLError
-	_fnCGLDestroyPBuffer func(unsafe.Pointer) _CGLError
-	_fnCGLDestroyPixelFormat func(unsafe.Pointer) _CGLError
-	_fnCGLDestroyRendererInfo func(unsafe.Pointer) _CGLError
-	_fnCGLDisable func(unsafe.Pointer, _CGLContextEnable) _CGLError
-	_fnCGLEnable func(unsafe.Pointer, _CGLContextEnable) _CGLError
-	_fnCGLErrorString func(_CGLError) string
-	_fnCGLFlushDrawable func(unsafe.Pointer) _CGLError
-	_fnCGLGetContextRetainCount func(unsafe.Pointer) uint32
-	_fnCGLGetCurrentContext func() unsafe.Pointer
-	_fnCGLGetDeviceFromGLRenderer func(int32) unsafe.Pointer
-	_fnCGLGetGlobalOption func(_CGLGlobalOption, *int32) _CGLError
-	_fnCGLGetOffScreen func(unsafe.Pointer, *int32, *int32, *int32, unsafe.Pointer) _CGLError
-	_fnCGLGetOption func(_CGLGlobalOption, *int32) _CGLError
-	_fnCGLGetPBuffer func(unsafe.Pointer, unsafe.Pointer, *uint32, *int32, *int32) _CGLError
-	_fnCGLGetPBufferRetainCount func(unsafe.Pointer) uint32
-	_fnCGLGetParameter func(unsafe.Pointer, _CGLContextParameter, *int32) _CGLError
-	_fnCGLGetPixelFormat func(unsafe.Pointer) unsafe.Pointer
+	_fnCGLChoosePixelFormat         func(*_CGLPixelFormatAttribute, unsafe.Pointer, *int32) _CGLError
+	_fnCGLClearDrawable             func(unsafe.Pointer) _CGLError
+	_fnCGLCopyContext               func(unsafe.Pointer, unsafe.Pointer, uint32) _CGLError
+	_fnCGLCreateContext             func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) _CGLError
+	_fnCGLCreatePBuffer             func(int32, int32, uint32, uint32, int32, unsafe.Pointer) _CGLError
+	_fnCGLDescribePBuffer           func(unsafe.Pointer, *int32, *int32, *uint32, *uint32, *int32) _CGLError
+	_fnCGLDescribePixelFormat       func(unsafe.Pointer, int32, _CGLPixelFormatAttribute, *int32) _CGLError
+	_fnCGLDescribeRenderer          func(unsafe.Pointer, int32, _CGLRendererProperty, *int32) _CGLError
+	_fnCGLDestroyContext            func(unsafe.Pointer) _CGLError
+	_fnCGLDestroyPBuffer            func(unsafe.Pointer) _CGLError
+	_fnCGLDestroyPixelFormat        func(unsafe.Pointer) _CGLError
+	_fnCGLDestroyRendererInfo       func(unsafe.Pointer) _CGLError
+	_fnCGLDisable                   func(unsafe.Pointer, _CGLContextEnable) _CGLError
+	_fnCGLEnable                    func(unsafe.Pointer, _CGLContextEnable) _CGLError
+	_fnCGLErrorString               func(_CGLError) string
+	_fnCGLFlushDrawable             func(unsafe.Pointer) _CGLError
+	_fnCGLGetContextRetainCount     func(unsafe.Pointer) uint32
+	_fnCGLGetCurrentContext         func() unsafe.Pointer
+	_fnCGLGetDeviceFromGLRenderer   func(int32) unsafe.Pointer
+	_fnCGLGetGlobalOption           func(_CGLGlobalOption, *int32) _CGLError
+	_fnCGLGetOffScreen              func(unsafe.Pointer, *int32, *int32, *int32, unsafe.Pointer) _CGLError
+	_fnCGLGetOption                 func(_CGLGlobalOption, *int32) _CGLError
+	_fnCGLGetPBuffer                func(unsafe.Pointer, unsafe.Pointer, *uint32, *int32, *int32) _CGLError
+	_fnCGLGetPBufferRetainCount     func(unsafe.Pointer) uint32
+	_fnCGLGetParameter              func(unsafe.Pointer, _CGLContextParameter, *int32) _CGLError
+	_fnCGLGetPixelFormat            func(unsafe.Pointer) unsafe.Pointer
 	_fnCGLGetPixelFormatRetainCount func(unsafe.Pointer) uint32
-	_fnCGLGetShareGroup func(unsafe.Pointer) unsafe.Pointer
-	_fnCGLGetVersion func(*int32, *int32)
-	_fnCGLGetVirtualScreen func(unsafe.Pointer, *int32) _CGLError
-	_fnCGLIsEnabled func(unsafe.Pointer, _CGLContextEnable, *int32) _CGLError
-	_fnCGLLockContext func(unsafe.Pointer) _CGLError
-	_fnCGLQueryRendererInfo func(uint32, unsafe.Pointer, *int32) _CGLError
-	_fnCGLReleaseContext func(unsafe.Pointer)
-	_fnCGLReleasePBuffer func(unsafe.Pointer)
-	_fnCGLReleasePixelFormat func(unsafe.Pointer)
-	_fnCGLRetainContext func(unsafe.Pointer) unsafe.Pointer
-	_fnCGLRetainPBuffer func(unsafe.Pointer) unsafe.Pointer
-	_fnCGLRetainPixelFormat func(unsafe.Pointer) unsafe.Pointer
-	_fnCGLSetCurrentContext func(unsafe.Pointer) _CGLError
-	_fnCGLSetFullScreen func(unsafe.Pointer) _CGLError
-	_fnCGLSetFullScreenOnDisplay func(unsafe.Pointer, uint32) _CGLError
-	_fnCGLSetGlobalOption func(_CGLGlobalOption, *int32) _CGLError
-	_fnCGLSetOffScreen func(unsafe.Pointer, int32, int32, int32, unsafe.Pointer) _CGLError
-	_fnCGLSetOption func(_CGLGlobalOption, int32) _CGLError
-	_fnCGLSetPBuffer func(unsafe.Pointer, unsafe.Pointer, uint32, int32, int32) _CGLError
-	_fnCGLSetParameter func(unsafe.Pointer, _CGLContextParameter, *int32) _CGLError
-	_fnCGLSetVirtualScreen func(unsafe.Pointer, int32) _CGLError
+	_fnCGLGetShareGroup             func(unsafe.Pointer) unsafe.Pointer
+	_fnCGLGetVersion                func(*int32, *int32)
+	_fnCGLGetVirtualScreen          func(unsafe.Pointer, *int32) _CGLError
+	_fnCGLIsEnabled                 func(unsafe.Pointer, _CGLContextEnable, *int32) _CGLError
+	_fnCGLLockContext               func(unsafe.Pointer) _CGLError
+	_fnCGLQueryRendererInfo         func(uint32, unsafe.Pointer, *int32) _CGLError
+	_fnCGLReleaseContext            func(unsafe.Pointer)
+	_fnCGLReleasePBuffer            func(unsafe.Pointer)
+	_fnCGLReleasePixelFormat        func(unsafe.Pointer)
+	_fnCGLRetainContext             func(unsafe.Pointer) unsafe.Pointer
+	_fnCGLRetainPBuffer             func(unsafe.Pointer) unsafe.Pointer
+	_fnCGLRetainPixelFormat         func(unsafe.Pointer) unsafe.Pointer
+	_fnCGLSetCurrentContext         func(unsafe.Pointer) _CGLError
+	_fnCGLSetFullScreen             func(unsafe.Pointer) _CGLError
+	_fnCGLSetFullScreenOnDisplay    func(unsafe.Pointer, uint32) _CGLError
+	_fnCGLSetGlobalOption           func(_CGLGlobalOption, *int32) _CGLError
+	_fnCGLSetOffScreen              func(unsafe.Pointer, int32, int32, int32, unsafe.Pointer) _CGLError
+	_fnCGLSetOption                 func(_CGLGlobalOption, int32) _CGLError
+	_fnCGLSetPBuffer                func(unsafe.Pointer, unsafe.Pointer, uint32, int32, int32) _CGLError
+	_fnCGLSetParameter              func(unsafe.Pointer, _CGLContextParameter, *int32) _CGLError
+	_fnCGLSetVirtualScreen          func(unsafe.Pointer, int32) _CGLError
 	// @function  CGLTexImageIOSurface2D CGLTexImageIOSurface2D() allows you to bind a single image plane from an IOSurfaceRef to an OpenGL texture object.   It is the rough equivalent to glTexImage2D(), except that the underlying source data comes from an IOSurface rather than from an explicit pointer. Note that unlike glTexImage2D(), the binding is "live", in that if the contents of the IOSurface change, the contents become visible to OpenGL without making another call to CGLTexImageIOSurface2D().   That being said, there are a few synchronization things to worry about if you are using IOSurface to pass data between contexts and/or different processes, or between the CPU and OpenGL. In general IOSurface follows Apple's cross-context synchronization rules for OpenGL. Put simply, in order for changes done to an IOSurface on context A to become visible to context B, you must flush context A's command stream (via an explicit call to glFlush, glFlushRenderAPPLE, etc.), and then perform a 'bind' (in this case, glBindTexture()) on context B.  Note that in the case of an IOSurface backed texture used as a color buffer attachment for an FBO, you are only required to call glBindFramebuffer() again.  You do not have to call glFramebufferTexture2D(). Likewise, if you make changes to an IOSurface with the CPU, you *must* wrap those changes with calls to IOSurfaceLock() and IOSurfaceUnlock(), and call glBindTexture() again for OpenGL to pick up the changes. Going in the other direction, if you want changes made with OpenGL to an IOSurface to become visible to the CPU, you must also perform an explicit flush of the OpenGL context before calling IOSurfaceLock(), or you may not get the most recent data. IOSurface and OpenGL make no guarantees about correctness if these rules are not followed. Because of the way IOSurface is currently implemented, it does not allow for any kind of automatic format conversion to take place between the data in the IOSurface and the data seen by the GPU.   This means that OpenGL is going to interpret the data in the IOSurface exactly as how it is specified by the format and type parameters passed to CGLTexImageIOSurface2D(). The upshot if this is that the only supported format/type combinations are those that have exact matching hardware formats.   The table at the bottom of this file lists the format/type/ internalFormat combinations that are supported in Mac OS X 10.6. In cases where a given format/type combination has both an Internal Format and Sized Internal Format, either one may be used. Note that CGLTexImageIOSurface2D for the most part doesn't care what the pixel format or bytes per element of the IOSurface is.  Instead it only enforces the rule that there must be enough data in the plane being bound to cover what is required by the width/height/format/type parameters.   However, if you are using the IOSurface texture as a color buffer attachment to an FBO, then you must ensure that the bytes per element value of the IOSurface must match the effective bytes per pixel value for the format and type combination you are passing to OpenGL. @param ctx              The CGLContextObj for the OpenGL context you are using @param target           Must currently be GL_TEXTURE_RECTANGLE_ARB as of Mac OS X 10.6.0. @param internal_format  One of the supported values from the table below that matches the format/type combination. @param width            The width of the texture in pixels. @param height           The height of the texture in pixels. @param format           The OpenGL texture format enum @param type             The OpenGL texture type enum @param ioSurface        The IOSurfaceRef this texture is being bound to @param plane            Which plane of the IOSurface this texture is being bound to
 	_fnCGLTexImageIOSurface2D func(unsafe.Pointer, uint32, uint32, int32, int32, uint32, uint32, unsafe.Pointer, uint32) _CGLError
-	_fnCGLTexImagePBuffer func(unsafe.Pointer, unsafe.Pointer, uint32) _CGLError
-	_fnCGLUnlockContext func(unsafe.Pointer) _CGLError
-	_fnCGLUpdateContext func(unsafe.Pointer) _CGLError
+	_fnCGLTexImagePBuffer     func(unsafe.Pointer, unsafe.Pointer, uint32) _CGLError
+	_fnCGLUnlockContext       func(unsafe.Pointer) _CGLError
+	_fnCGLUpdateContext       func(unsafe.Pointer) _CGLError
 )
 
 func CGLChoosePixelFormat(attribs *_CGLPixelFormatAttribute, pix unsafe.Pointer, npix *int32) _CGLError {
@@ -271,4 +271,3 @@ func CGLUnlockContext(ctx unsafe.Pointer) _CGLError {
 func CGLUpdateContext(ctx unsafe.Pointer) _CGLError {
 	return _fnCGLUpdateContext(ctx)
 }
-

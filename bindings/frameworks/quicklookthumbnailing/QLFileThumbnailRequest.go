@@ -17,11 +17,11 @@ type QLFileThumbnailRequest struct {
 }
 
 var (
-	_clsQLFileThumbnailRequest = _objcClass("QLFileThumbnailRequest")
+	_clsQLFileThumbnailRequest            = _objcClass("QLFileThumbnailRequest")
 	_qLFileThumbnailRequestSelMaximumSize = objc.RegisterName("maximumSize")
 	_qLFileThumbnailRequestSelMinimumSize = objc.RegisterName("minimumSize")
-	_qLFileThumbnailRequestSelScale = objc.RegisterName("scale")
-	_qLFileThumbnailRequestSelFileURL = objc.RegisterName("fileURL")
+	_qLFileThumbnailRequestSelScale       = objc.RegisterName("scale")
+	_qLFileThumbnailRequestSelFileURL     = objc.RegisterName("fileURL")
 )
 
 func QLFileThumbnailRequestFromID(id objc.ID) *QLFileThumbnailRequest {
@@ -55,7 +55,8 @@ func (o *QLFileThumbnailRequest) Scale() float64 {
 // The url of the file for which a thumbnail is being requested.
 func (o *QLFileThumbnailRequest) FileURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qLFileThumbnailRequestSelFileURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
-

@@ -18,11 +18,11 @@ type MPSCNNNeuronHardSigmoidNode struct {
 }
 
 var (
-	_clsMPSCNNNeuronHardSigmoidNode = _objcClass("MPSCNNNeuronHardSigmoidNode")
+	_clsMPSCNNNeuronHardSigmoidNode                 = _objcClass("MPSCNNNeuronHardSigmoidNode")
 	_mPSCNNNeuronHardSigmoidNodeSelNodeWithSourceAB = objc.RegisterName("nodeWithSource:a:b:")
 	_mPSCNNNeuronHardSigmoidNodeSelInitWithSourceAB = objc.RegisterName("initWithSource:a:b:")
-	_mPSCNNNeuronHardSigmoidNodeSelNodeWithSource = objc.RegisterName("nodeWithSource:")
-	_mPSCNNNeuronHardSigmoidNodeSelInitWithSource = objc.RegisterName("initWithSource:")
+	_mPSCNNNeuronHardSigmoidNodeSelNodeWithSource   = objc.RegisterName("nodeWithSource:")
+	_mPSCNNNeuronHardSigmoidNodeSelInitWithSource   = objc.RegisterName("initWithSource:")
 )
 
 func MPSCNNNeuronHardSigmoidNodeFromID(id objc.ID) *MPSCNNNeuronHardSigmoidNode {
@@ -37,28 +37,35 @@ func MPSCNNNeuronHardSigmoidNodeFromID(id objc.ID) *MPSCNNNeuronHardSigmoidNode 
 
 func MPSCNNNeuronHardSigmoidNodeNodeWithSourceAB(sourceNode *mpsneuralnetwork.MPSNNImageNode, a float32, b float32) *MPSCNNNeuronHardSigmoidNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNNeuronHardSigmoidNode), _mPSCNNNeuronHardSigmoidNodeSelNodeWithSourceAB, sourceNode.Ptr(), a, b)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronHardSigmoidNodeFromID(_ret)
 }
 
 // @abstract   Init a node representing a MPSCNNNeuronHardSigmoid kernel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      a                       See discussion above. @param      b                       See discussion above. @return     A new MPSNNFilter node for a MPSCNNNeuronHardSigmoid kernel.
 func (o *MPSCNNNeuronHardSigmoidNode) InitWithSourceAB(sourceNode *mpsneuralnetwork.MPSNNImageNode, a float32, b float32) *MPSCNNNeuronHardSigmoidNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronHardSigmoidNodeSelInitWithSourceAB, sourceNode.Ptr(), a, b)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronHardSigmoidNodeFromID(_ret)
 }
 
 // @abstract Create an autoreleased node with default values for parameters a & b
 func MPSCNNNeuronHardSigmoidNodeNodeWithSource(sourceNode *mpsneuralnetwork.MPSNNImageNode) *MPSCNNNeuronHardSigmoidNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNNeuronHardSigmoidNode), _mPSCNNNeuronHardSigmoidNodeSelNodeWithSource, sourceNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronHardSigmoidNodeFromID(_ret)
 }
 
 // @abstract Init a node with default values for parameters a & b
 func (o *MPSCNNNeuronHardSigmoidNode) InitWithSource(sourceNode *mpsneuralnetwork.MPSNNImageNode) *MPSCNNNeuronHardSigmoidNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronHardSigmoidNodeSelInitWithSource, sourceNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronHardSigmoidNodeFromID(_ret)
 }
-

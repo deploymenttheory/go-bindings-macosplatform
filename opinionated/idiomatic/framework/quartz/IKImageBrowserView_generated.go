@@ -41,4 +41,3 @@ type IKImageBrowserViewable interface {
 }
 
 var _ IKImageBrowserViewable = (*IKImageBrowserView)(nil)
-

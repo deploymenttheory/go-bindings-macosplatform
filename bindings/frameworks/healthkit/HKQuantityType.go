@@ -15,9 +15,9 @@ type HKQuantityType struct {
 }
 
 var (
-	_clsHKQuantityType = _objcClass("HKQuantityType")
+	_clsHKQuantityType                     = _objcClass("HKQuantityType")
 	_hKQuantityTypeSelIsCompatibleWithUnit = objc.RegisterName("isCompatibleWithUnit:")
-	_hKQuantityTypeSelAggregationStyle = objc.RegisterName("aggregationStyle")
+	_hKQuantityTypeSelAggregationStyle     = objc.RegisterName("aggregationStyle")
 )
 
 func HKQuantityTypeFromID(id objc.ID) *HKQuantityType {
@@ -40,4 +40,3 @@ func (o *HKQuantityType) AggregationStyle() HKQuantityAggregationStyle {
 	_ret := objc.Send[HKQuantityAggregationStyle](o.Ptr(), _hKQuantityTypeSelAggregationStyle)
 	return _ret
 }
-

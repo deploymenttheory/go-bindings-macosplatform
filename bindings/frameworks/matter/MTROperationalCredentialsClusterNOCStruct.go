@@ -16,12 +16,12 @@ type MTROperationalCredentialsClusterNOCStruct struct {
 }
 
 var (
-	_clsMTROperationalCredentialsClusterNOCStruct = _objcClass("MTROperationalCredentialsClusterNOCStruct")
-	_mTROperationalCredentialsClusterNOCStructSelNoc = objc.RegisterName("noc")
-	_mTROperationalCredentialsClusterNOCStructSelSetNoc = objc.RegisterName("setNoc:")
-	_mTROperationalCredentialsClusterNOCStructSelIcac = objc.RegisterName("icac")
-	_mTROperationalCredentialsClusterNOCStructSelSetIcac = objc.RegisterName("setIcac:")
-	_mTROperationalCredentialsClusterNOCStructSelFabricIndex = objc.RegisterName("fabricIndex")
+	_clsMTROperationalCredentialsClusterNOCStruct               = _objcClass("MTROperationalCredentialsClusterNOCStruct")
+	_mTROperationalCredentialsClusterNOCStructSelNoc            = objc.RegisterName("noc")
+	_mTROperationalCredentialsClusterNOCStructSelSetNoc         = objc.RegisterName("setNoc:")
+	_mTROperationalCredentialsClusterNOCStructSelIcac           = objc.RegisterName("icac")
+	_mTROperationalCredentialsClusterNOCStructSelSetIcac        = objc.RegisterName("setIcac:")
+	_mTROperationalCredentialsClusterNOCStructSelFabricIndex    = objc.RegisterName("fabricIndex")
 	_mTROperationalCredentialsClusterNOCStructSelSetFabricIndex = objc.RegisterName("setFabricIndex:")
 )
 
@@ -37,7 +37,9 @@ func MTROperationalCredentialsClusterNOCStructFromID(id objc.ID) *MTROperational
 
 func (o *MTROperationalCredentialsClusterNOCStruct) Noc() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterNOCStructSelNoc)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTROperationalCredentialsClusterNOCStruct) SetNoc(noc *foundation.NSDat
 
 func (o *MTROperationalCredentialsClusterNOCStruct) Icac() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterNOCStructSelIcac)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *MTROperationalCredentialsClusterNOCStruct) SetIcac(icac *foundation.NSD
 
 func (o *MTROperationalCredentialsClusterNOCStruct) FabricIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterNOCStructSelFabricIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTROperationalCredentialsClusterNOCStruct) SetFabricIndex(fabricIndex *foundation.NSNumber) {
 	o.Ptr().Send(_mTROperationalCredentialsClusterNOCStructSelSetFabricIndex, fabricIndex.Ptr())
 }
-

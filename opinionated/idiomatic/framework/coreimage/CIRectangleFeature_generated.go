@@ -68,4 +68,3 @@ type RectangleFeatureable interface {
 }
 
 var _ RectangleFeatureable = (*RectangleFeature)(nil)
-

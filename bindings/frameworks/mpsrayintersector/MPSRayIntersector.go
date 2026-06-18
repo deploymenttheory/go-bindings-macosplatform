@@ -18,40 +18,40 @@ type MPSRayIntersector struct {
 }
 
 var (
-	_clsMPSRayIntersector = _objcClass("MPSRayIntersector")
-	_mPSRayIntersectorSelInitWithDevice = objc.RegisterName("initWithDevice:")
-	_mPSRayIntersectorSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSRayIntersectorSelRecommendedMinimumRayBatchSizeForRayCount = objc.RegisterName("recommendedMinimumRayBatchSizeForRayCount:")
-	_mPSRayIntersectorSelEncodeWithCoder = objc.RegisterName("encodeWithCoder:")
-	_mPSRayIntersectorSelEncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetIntersectionBufferIntersectionBufferOffsetRayCountAccelerationStructure = objc.RegisterName("encodeIntersectionToCommandBuffer:intersectionType:rayBuffer:rayBufferOffset:intersectionBuffer:intersectionBufferOffset:rayCount:accelerationStructure:")
-	_mPSRayIntersectorSelEncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetIntersectionBufferIntersectionBufferOffsetRayCountBufferRayCountBufferOffsetAccelerationStructure = objc.RegisterName("encodeIntersectionToCommandBuffer:intersectionType:rayBuffer:rayBufferOffset:intersectionBuffer:intersectionBufferOffset:rayCountBuffer:rayCountBufferOffset:accelerationStructure:")
-	_mPSRayIntersectorSelEncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetRayIndexBufferRayIndexBufferOffsetIntersectionBufferIntersectionBufferOffsetRayIndexCountAccelerationStructure = objc.RegisterName("encodeIntersectionToCommandBuffer:intersectionType:rayBuffer:rayBufferOffset:rayIndexBuffer:rayIndexBufferOffset:intersectionBuffer:intersectionBufferOffset:rayIndexCount:accelerationStructure:")
+	_clsMPSRayIntersector                                                                                                                                                                                                                       = _objcClass("MPSRayIntersector")
+	_mPSRayIntersectorSelInitWithDevice                                                                                                                                                                                                         = objc.RegisterName("initWithDevice:")
+	_mPSRayIntersectorSelInitWithCoderDevice                                                                                                                                                                                                    = objc.RegisterName("initWithCoder:device:")
+	_mPSRayIntersectorSelRecommendedMinimumRayBatchSizeForRayCount                                                                                                                                                                              = objc.RegisterName("recommendedMinimumRayBatchSizeForRayCount:")
+	_mPSRayIntersectorSelEncodeWithCoder                                                                                                                                                                                                        = objc.RegisterName("encodeWithCoder:")
+	_mPSRayIntersectorSelEncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetIntersectionBufferIntersectionBufferOffsetRayCountAccelerationStructure                                                                       = objc.RegisterName("encodeIntersectionToCommandBuffer:intersectionType:rayBuffer:rayBufferOffset:intersectionBuffer:intersectionBufferOffset:rayCount:accelerationStructure:")
+	_mPSRayIntersectorSelEncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetIntersectionBufferIntersectionBufferOffsetRayCountBufferRayCountBufferOffsetAccelerationStructure                                             = objc.RegisterName("encodeIntersectionToCommandBuffer:intersectionType:rayBuffer:rayBufferOffset:intersectionBuffer:intersectionBufferOffset:rayCountBuffer:rayCountBufferOffset:accelerationStructure:")
+	_mPSRayIntersectorSelEncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetRayIndexBufferRayIndexBufferOffsetIntersectionBufferIntersectionBufferOffsetRayIndexCountAccelerationStructure                                = objc.RegisterName("encodeIntersectionToCommandBuffer:intersectionType:rayBuffer:rayBufferOffset:rayIndexBuffer:rayIndexBufferOffset:intersectionBuffer:intersectionBufferOffset:rayIndexCount:accelerationStructure:")
 	_mPSRayIntersectorSelEncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetRayIndexBufferRayIndexBufferOffsetIntersectionBufferIntersectionBufferOffsetRayIndexCountBufferRayIndexCountBufferOffsetAccelerationStructure = objc.RegisterName("encodeIntersectionToCommandBuffer:intersectionType:rayBuffer:rayBufferOffset:rayIndexBuffer:rayIndexBufferOffset:intersectionBuffer:intersectionBufferOffset:rayIndexCountBuffer:rayIndexCountBufferOffset:accelerationStructure:")
-	_mPSRayIntersectorSelEncodeIntersectionToCommandBufferIntersectionTypeRayTextureIntersectionTextureAccelerationStructure = objc.RegisterName("encodeIntersectionToCommandBuffer:intersectionType:rayTexture:intersectionTexture:accelerationStructure:")
-	_mPSRayIntersectorSelCullMode = objc.RegisterName("cullMode")
-	_mPSRayIntersectorSelSetCullMode = objc.RegisterName("setCullMode:")
-	_mPSRayIntersectorSelFrontFacingWinding = objc.RegisterName("frontFacingWinding")
-	_mPSRayIntersectorSelSetFrontFacingWinding = objc.RegisterName("setFrontFacingWinding:")
-	_mPSRayIntersectorSelTriangleIntersectionTestType = objc.RegisterName("triangleIntersectionTestType")
-	_mPSRayIntersectorSelSetTriangleIntersectionTestType = objc.RegisterName("setTriangleIntersectionTestType:")
-	_mPSRayIntersectorSelBoundingBoxIntersectionTestType = objc.RegisterName("boundingBoxIntersectionTestType")
-	_mPSRayIntersectorSelSetBoundingBoxIntersectionTestType = objc.RegisterName("setBoundingBoxIntersectionTestType:")
-	_mPSRayIntersectorSelRayMaskOptions = objc.RegisterName("rayMaskOptions")
-	_mPSRayIntersectorSelSetRayMaskOptions = objc.RegisterName("setRayMaskOptions:")
-	_mPSRayIntersectorSelRayMaskOperator = objc.RegisterName("rayMaskOperator")
-	_mPSRayIntersectorSelSetRayMaskOperator = objc.RegisterName("setRayMaskOperator:")
-	_mPSRayIntersectorSelRayStride = objc.RegisterName("rayStride")
-	_mPSRayIntersectorSelSetRayStride = objc.RegisterName("setRayStride:")
-	_mPSRayIntersectorSelIntersectionStride = objc.RegisterName("intersectionStride")
-	_mPSRayIntersectorSelSetIntersectionStride = objc.RegisterName("setIntersectionStride:")
-	_mPSRayIntersectorSelRayDataType = objc.RegisterName("rayDataType")
-	_mPSRayIntersectorSelSetRayDataType = objc.RegisterName("setRayDataType:")
-	_mPSRayIntersectorSelIntersectionDataType = objc.RegisterName("intersectionDataType")
-	_mPSRayIntersectorSelSetIntersectionDataType = objc.RegisterName("setIntersectionDataType:")
-	_mPSRayIntersectorSelRayIndexDataType = objc.RegisterName("rayIndexDataType")
-	_mPSRayIntersectorSelSetRayIndexDataType = objc.RegisterName("setRayIndexDataType:")
-	_mPSRayIntersectorSelRayMask = objc.RegisterName("rayMask")
-	_mPSRayIntersectorSelSetRayMask = objc.RegisterName("setRayMask:")
+	_mPSRayIntersectorSelEncodeIntersectionToCommandBufferIntersectionTypeRayTextureIntersectionTextureAccelerationStructure                                                                                                                    = objc.RegisterName("encodeIntersectionToCommandBuffer:intersectionType:rayTexture:intersectionTexture:accelerationStructure:")
+	_mPSRayIntersectorSelCullMode                                                                                                                                                                                                               = objc.RegisterName("cullMode")
+	_mPSRayIntersectorSelSetCullMode                                                                                                                                                                                                            = objc.RegisterName("setCullMode:")
+	_mPSRayIntersectorSelFrontFacingWinding                                                                                                                                                                                                     = objc.RegisterName("frontFacingWinding")
+	_mPSRayIntersectorSelSetFrontFacingWinding                                                                                                                                                                                                  = objc.RegisterName("setFrontFacingWinding:")
+	_mPSRayIntersectorSelTriangleIntersectionTestType                                                                                                                                                                                           = objc.RegisterName("triangleIntersectionTestType")
+	_mPSRayIntersectorSelSetTriangleIntersectionTestType                                                                                                                                                                                        = objc.RegisterName("setTriangleIntersectionTestType:")
+	_mPSRayIntersectorSelBoundingBoxIntersectionTestType                                                                                                                                                                                        = objc.RegisterName("boundingBoxIntersectionTestType")
+	_mPSRayIntersectorSelSetBoundingBoxIntersectionTestType                                                                                                                                                                                     = objc.RegisterName("setBoundingBoxIntersectionTestType:")
+	_mPSRayIntersectorSelRayMaskOptions                                                                                                                                                                                                         = objc.RegisterName("rayMaskOptions")
+	_mPSRayIntersectorSelSetRayMaskOptions                                                                                                                                                                                                      = objc.RegisterName("setRayMaskOptions:")
+	_mPSRayIntersectorSelRayMaskOperator                                                                                                                                                                                                        = objc.RegisterName("rayMaskOperator")
+	_mPSRayIntersectorSelSetRayMaskOperator                                                                                                                                                                                                     = objc.RegisterName("setRayMaskOperator:")
+	_mPSRayIntersectorSelRayStride                                                                                                                                                                                                              = objc.RegisterName("rayStride")
+	_mPSRayIntersectorSelSetRayStride                                                                                                                                                                                                           = objc.RegisterName("setRayStride:")
+	_mPSRayIntersectorSelIntersectionStride                                                                                                                                                                                                     = objc.RegisterName("intersectionStride")
+	_mPSRayIntersectorSelSetIntersectionStride                                                                                                                                                                                                  = objc.RegisterName("setIntersectionStride:")
+	_mPSRayIntersectorSelRayDataType                                                                                                                                                                                                            = objc.RegisterName("rayDataType")
+	_mPSRayIntersectorSelSetRayDataType                                                                                                                                                                                                         = objc.RegisterName("setRayDataType:")
+	_mPSRayIntersectorSelIntersectionDataType                                                                                                                                                                                                   = objc.RegisterName("intersectionDataType")
+	_mPSRayIntersectorSelSetIntersectionDataType                                                                                                                                                                                                = objc.RegisterName("setIntersectionDataType:")
+	_mPSRayIntersectorSelRayIndexDataType                                                                                                                                                                                                       = objc.RegisterName("rayIndexDataType")
+	_mPSRayIntersectorSelSetRayIndexDataType                                                                                                                                                                                                    = objc.RegisterName("setRayIndexDataType:")
+	_mPSRayIntersectorSelRayMask                                                                                                                                                                                                                = objc.RegisterName("rayMask")
+	_mPSRayIntersectorSelSetRayMask                                                                                                                                                                                                             = objc.RegisterName("setRayMask:")
 )
 
 func MPSRayIntersectorFromID(id objc.ID) *MPSRayIntersector {
@@ -67,14 +67,18 @@ func MPSRayIntersectorFromID(id objc.ID) *MPSRayIntersector {
 // @brief Initialize the raytracer with a Metal device
 func (o *MPSRayIntersector) InitWithDevice(device metal.MTLDevice) *MPSRayIntersector {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSRayIntersectorSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSRayIntersectorFromID(_ret)
 }
 
 // @brief Initialize the raytracer with an NSCoder and a Metal device
 func (o *MPSRayIntersector) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSRayIntersector {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSRayIntersectorSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSRayIntersectorFromID(_ret)
 }
 
@@ -232,4 +236,3 @@ func (o *MPSRayIntersector) RayMask() uint {
 func (o *MPSRayIntersector) SetRayMask(rayMask uint) {
 	o.Ptr().Send(_mPSRayIntersectorSelSetRayMask, rayMask)
 }
-

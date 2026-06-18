@@ -15,7 +15,9 @@ type CallCapabilityResolutionResult struct {
 }
 
 // Unwrap returns the underlying [raw.INCallCapabilityResolutionResult].
-func (x *CallCapabilityResolutionResult) Unwrap() *raw.INCallCapabilityResolutionResult { return x.inner }
+func (x *CallCapabilityResolutionResult) Unwrap() *raw.INCallCapabilityResolutionResult {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -35,7 +37,9 @@ func NewCallCapabilityResolutionResult() *CallCapabilityResolutionResult {
 	return &CallCapabilityResolutionResult{inner: raw.INCallCapabilityResolutionResultFromID(_id)}
 }
 
-func (x *CallCapabilityResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
+func (x *CallCapabilityResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
+	return &x.inner.INIntentResolutionResult
+}
 
 // CallCapabilityResolutionResultable is the interface implemented by [CallCapabilityResolutionResult], for mocking and DI.
 type CallCapabilityResolutionResultable interface {
@@ -43,4 +47,3 @@ type CallCapabilityResolutionResultable interface {
 }
 
 var _ CallCapabilityResolutionResultable = (*CallCapabilityResolutionResult)(nil)
-

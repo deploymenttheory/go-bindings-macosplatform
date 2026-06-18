@@ -16,10 +16,10 @@ type MLMultiArrayShapeConstraint struct {
 }
 
 var (
-	_clsMLMultiArrayShapeConstraint = _objcClass("MLMultiArrayShapeConstraint")
-	_mLMultiArrayShapeConstraintSelType = objc.RegisterName("type")
+	_clsMLMultiArrayShapeConstraint                      = _objcClass("MLMultiArrayShapeConstraint")
+	_mLMultiArrayShapeConstraintSelType                  = objc.RegisterName("type")
 	_mLMultiArrayShapeConstraintSelSizeRangeForDimension = objc.RegisterName("sizeRangeForDimension")
-	_mLMultiArrayShapeConstraintSelEnumeratedShapes = objc.RegisterName("enumeratedShapes")
+	_mLMultiArrayShapeConstraintSelEnumeratedShapes      = objc.RegisterName("enumeratedShapes")
 )
 
 func MLMultiArrayShapeConstraintFromID(id objc.ID) *MLMultiArrayShapeConstraint {
@@ -46,4 +46,3 @@ func (o *MLMultiArrayShapeConstraint) EnumeratedShapes() *foundation.NSArray[obj
 	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mLMultiArrayShapeConstraintSelEnumeratedShapes)
 	return _ret
 }
-

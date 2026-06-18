@@ -90,4 +90,3 @@ type SmartCardSlotManagerable interface {
 }
 
 var _ SmartCardSlotManagerable = (*SmartCardSlotManager)(nil)
-

@@ -17,13 +17,13 @@ type AVPlayerItemIntegratedTimelineSnapshot struct {
 }
 
 var (
-	_clsAVPlayerItemIntegratedTimelineSnapshot = _objcClass("AVPlayerItemIntegratedTimelineSnapshot")
+	_clsAVPlayerItemIntegratedTimelineSnapshot                                = _objcClass("AVPlayerItemIntegratedTimelineSnapshot")
 	_aVPlayerItemIntegratedTimelineSnapshotSelMapTimeToSegmentAtSegmentOffset = objc.RegisterName("mapTime:toSegment:atSegmentOffset:")
-	_aVPlayerItemIntegratedTimelineSnapshotSelDuration = objc.RegisterName("duration")
-	_aVPlayerItemIntegratedTimelineSnapshotSelCurrentSegment = objc.RegisterName("currentSegment")
-	_aVPlayerItemIntegratedTimelineSnapshotSelSegments = objc.RegisterName("segments")
-	_aVPlayerItemIntegratedTimelineSnapshotSelCurrentTime = objc.RegisterName("currentTime")
-	_aVPlayerItemIntegratedTimelineSnapshotSelCurrentDate = objc.RegisterName("currentDate")
+	_aVPlayerItemIntegratedTimelineSnapshotSelDuration                        = objc.RegisterName("duration")
+	_aVPlayerItemIntegratedTimelineSnapshotSelCurrentSegment                  = objc.RegisterName("currentSegment")
+	_aVPlayerItemIntegratedTimelineSnapshotSelSegments                        = objc.RegisterName("segments")
+	_aVPlayerItemIntegratedTimelineSnapshotSelCurrentTime                     = objc.RegisterName("currentTime")
+	_aVPlayerItemIntegratedTimelineSnapshotSelCurrentDate                     = objc.RegisterName("currentDate")
 )
 
 func AVPlayerItemIntegratedTimelineSnapshotFromID(id objc.ID) *AVPlayerItemIntegratedTimelineSnapshot {
@@ -50,14 +50,18 @@ func (o *AVPlayerItemIntegratedTimelineSnapshot) Duration() coremedia.CMTime {
 // @property	currentSegment @abstract	Returns the current AVPlayerItemSegment playback is traversing.
 func (o *AVPlayerItemIntegratedTimelineSnapshot) CurrentSegment() *AVPlayerItemSegment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemIntegratedTimelineSnapshotSelCurrentSegment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerItemSegmentFromID(_ret)
 }
 
 // @property	segments @abstract	Returns an array of AVPlayerItemSegment for the snapshot. @discussion Returns an array of AVPlayerItemSegment. The segments are presented in chronological order, contiguous from the previous element, and non-overlapping.
 func (o *AVPlayerItemIntegratedTimelineSnapshot) Segments() *foundation.NSArray[*AVPlayerItemSegment] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemIntegratedTimelineSnapshotSelSegments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVPlayerItemSegment](_ret)
 }
 
@@ -70,7 +74,8 @@ func (o *AVPlayerItemIntegratedTimelineSnapshot) CurrentTime() coremedia.CMTime 
 // @property	currentDate @abstract	Returns the  current date when the snapshot was taken, or nil if playback is not mapped to any date.
 func (o *AVPlayerItemIntegratedTimelineSnapshot) CurrentDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemIntegratedTimelineSnapshotSelCurrentDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
-

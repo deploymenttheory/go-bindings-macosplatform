@@ -70,4 +70,3 @@ type L2CAPChannelable interface {
 }
 
 var _ L2CAPChannelable = (*L2CAPChannel)(nil)
-

@@ -17,10 +17,10 @@ type GKTurnBasedEventHandler struct {
 }
 
 var (
-	_clsGKTurnBasedEventHandler = _objcClass("GKTurnBasedEventHandler")
+	_clsGKTurnBasedEventHandler                            = _objcClass("GKTurnBasedEventHandler")
 	_gKTurnBasedEventHandlerSelSharedTurnBasedEventHandler = objc.RegisterName("sharedTurnBasedEventHandler")
-	_gKTurnBasedEventHandlerSelDelegate = objc.RegisterName("delegate")
-	_gKTurnBasedEventHandlerSelSetDelegate = objc.RegisterName("setDelegate:")
+	_gKTurnBasedEventHandlerSelDelegate                    = objc.RegisterName("delegate")
+	_gKTurnBasedEventHandlerSelSetDelegate                 = objc.RegisterName("setDelegate:")
 )
 
 func GKTurnBasedEventHandlerFromID(id objc.ID) *GKTurnBasedEventHandler {
@@ -36,14 +36,18 @@ func GKTurnBasedEventHandlerFromID(id objc.ID) *GKTurnBasedEventHandler {
 // Deprecated: since macOS 10.10.
 func GKTurnBasedEventHandlerSharedTurnBasedEventHandler() *GKTurnBasedEventHandler {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKTurnBasedEventHandler), _gKTurnBasedEventHandlerSelSharedTurnBasedEventHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKTurnBasedEventHandlerFromID(_ret)
 }
 
 // Deprecated: since macOS 10.10.
 func (o *GKTurnBasedEventHandler) Delegate() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKTurnBasedEventHandlerSelDelegate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
@@ -51,4 +55,3 @@ func (o *GKTurnBasedEventHandler) Delegate() *foundation.NSObject {
 func (o *GKTurnBasedEventHandler) SetDelegate(delegate *foundation.NSObject) {
 	o.Ptr().Send(_gKTurnBasedEventHandlerSelSetDelegate, delegate.Ptr())
 }
-

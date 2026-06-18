@@ -64,4 +64,3 @@ type NNLabelsNodeable interface {
 }
 
 var _ NNLabelsNodeable = (*NNLabelsNode)(nil)
-

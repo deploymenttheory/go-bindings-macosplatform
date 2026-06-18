@@ -16,18 +16,18 @@ type CNContactFormatter struct {
 }
 
 var (
-	_clsCNContactFormatter = _objcClass("CNContactFormatter")
-	_cNContactFormatterSelDescriptorForRequiredKeysForStyle = objc.RegisterName("descriptorForRequiredKeysForStyle:")
-	_cNContactFormatterSelStringFromContactStyle = objc.RegisterName("stringFromContact:style:")
+	_clsCNContactFormatter                                                  = _objcClass("CNContactFormatter")
+	_cNContactFormatterSelDescriptorForRequiredKeysForStyle                 = objc.RegisterName("descriptorForRequiredKeysForStyle:")
+	_cNContactFormatterSelStringFromContactStyle                            = objc.RegisterName("stringFromContact:style:")
 	_cNContactFormatterSelAttributedStringFromContactStyleDefaultAttributes = objc.RegisterName("attributedStringFromContact:style:defaultAttributes:")
-	_cNContactFormatterSelNameOrderForContact = objc.RegisterName("nameOrderForContact:")
-	_cNContactFormatterSelDelimiterForContact = objc.RegisterName("delimiterForContact:")
-	_cNContactFormatterSelStringFromContact = objc.RegisterName("stringFromContact:")
-	_cNContactFormatterSelAttributedStringFromContactDefaultAttributes = objc.RegisterName("attributedStringFromContact:defaultAttributes:")
-	_cNContactFormatterSelDescriptorForRequiredKeysForNameOrder = objc.RegisterName("descriptorForRequiredKeysForNameOrder")
-	_cNContactFormatterSelDescriptorForRequiredKeysForDelimiter = objc.RegisterName("descriptorForRequiredKeysForDelimiter")
-	_cNContactFormatterSelStyle = objc.RegisterName("style")
-	_cNContactFormatterSelSetStyle = objc.RegisterName("setStyle:")
+	_cNContactFormatterSelNameOrderForContact                               = objc.RegisterName("nameOrderForContact:")
+	_cNContactFormatterSelDelimiterForContact                               = objc.RegisterName("delimiterForContact:")
+	_cNContactFormatterSelStringFromContact                                 = objc.RegisterName("stringFromContact:")
+	_cNContactFormatterSelAttributedStringFromContactDefaultAttributes      = objc.RegisterName("attributedStringFromContact:defaultAttributes:")
+	_cNContactFormatterSelDescriptorForRequiredKeysForNameOrder             = objc.RegisterName("descriptorForRequiredKeysForNameOrder")
+	_cNContactFormatterSelDescriptorForRequiredKeysForDelimiter             = objc.RegisterName("descriptorForRequiredKeysForDelimiter")
+	_cNContactFormatterSelStyle                                             = objc.RegisterName("style")
+	_cNContactFormatterSelSetStyle                                          = objc.RegisterName("setStyle:")
 )
 
 func CNContactFormatterFromID(id objc.ID) *CNContactFormatter {
@@ -49,14 +49,18 @@ func CNContactFormatterDescriptorForRequiredKeysForStyle(style CNContactFormatte
 // @abstract Formats the contact name. @param contact The contact whose name is to be formatted. @param style The formatting style to be used for the contact name. @return The formatted contact name.
 func CNContactFormatterStringFromContactStyle(contact *CNContact, style CNContactFormatterStyle) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContactFormatter), _cNContactFormatterSelStringFromContactStyle, contact.Ptr(), style)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract Formats the contact name returning an attributed string. @discussion This behaves like +stringFromContact:style: except it returns an attributed string. Includes the attribute key CNContactPropertyAttribute. @param contact The contact whose name is to be formatted. @param style The formatting style to be used for the contact name. @param attributes The default attributes to use. See NSFormatter for details. @return The formatted contact name as an attributed string.
 func CNContactFormatterAttributedStringFromContactStyleDefaultAttributes(contact *CNContact, style CNContactFormatterStyle, attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContactFormatter), _cNContactFormatterSelAttributedStringFromContactStyleDefaultAttributes, contact.Ptr(), style, attributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
@@ -69,21 +73,27 @@ func CNContactFormatterNameOrderForContact(contact *CNContact) CNContactDisplayN
 // @abstract The recommended delimiter to use between name components for a given contact.
 func CNContactFormatterDelimiterForContact(contact *CNContact) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContactFormatter), _cNContactFormatterSelDelimiterForContact, contact.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract Formats the contact name. @param contact The contact whose name is to be formatted. @return The formatted contact name.
 func (o *CNContactFormatter) StringFromContact(contact *CNContact) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactFormatterSelStringFromContact, contact.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract Formats the contact name returning an attributed string. @discussion This behaves like -stringFromContact:style: except it returns an attributed string. CNContactPropertyAttribute key has the value of a CNContact name property key. @param contact The contact whose name is to be formatted. @param attributes The default attributes to use. See NSFormatter for details. @return The formatted contact name as an attributed string.
 func (o *CNContactFormatter) AttributedStringFromContactDefaultAttributes(contact *CNContact, attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactFormatterSelAttributedStringFromContactDefaultAttributes, contact.Ptr(), attributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
@@ -108,4 +118,3 @@ func (o *CNContactFormatter) Style() CNContactFormatterStyle {
 func (o *CNContactFormatter) SetStyle(style CNContactFormatterStyle) {
 	o.Ptr().Send(_cNContactFormatterSelSetStyle, style)
 }
-

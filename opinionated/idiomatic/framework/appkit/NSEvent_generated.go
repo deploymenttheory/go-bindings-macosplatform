@@ -441,4 +441,3 @@ type Eventable interface {
 }
 
 var _ Eventable = (*Event)(nil)
-

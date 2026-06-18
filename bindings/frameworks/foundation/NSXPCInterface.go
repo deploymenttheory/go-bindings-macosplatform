@@ -17,16 +17,16 @@ type NSXPCInterface struct {
 }
 
 var (
-	_clsNSXPCInterface = _objcClass("NSXPCInterface")
-	_nSXPCInterfaceSelInterfaceWithProtocol = objc.RegisterName("interfaceWithProtocol:")
-	_nSXPCInterfaceSelSetClassesForSelectorArgumentIndexOfReply = objc.RegisterName("setClasses:forSelector:argumentIndex:ofReply:")
-	_nSXPCInterfaceSelClassesForSelectorArgumentIndexOfReply = objc.RegisterName("classesForSelector:argumentIndex:ofReply:")
+	_clsNSXPCInterface                                            = _objcClass("NSXPCInterface")
+	_nSXPCInterfaceSelInterfaceWithProtocol                       = objc.RegisterName("interfaceWithProtocol:")
+	_nSXPCInterfaceSelSetClassesForSelectorArgumentIndexOfReply   = objc.RegisterName("setClasses:forSelector:argumentIndex:ofReply:")
+	_nSXPCInterfaceSelClassesForSelectorArgumentIndexOfReply      = objc.RegisterName("classesForSelector:argumentIndex:ofReply:")
 	_nSXPCInterfaceSelSetInterfaceForSelectorArgumentIndexOfReply = objc.RegisterName("setInterface:forSelector:argumentIndex:ofReply:")
-	_nSXPCInterfaceSelInterfaceForSelectorArgumentIndexOfReply = objc.RegisterName("interfaceForSelector:argumentIndex:ofReply:")
-	_nSXPCInterfaceSelSetXPCTypeForSelectorArgumentIndexOfReply = objc.RegisterName("setXPCType:forSelector:argumentIndex:ofReply:")
-	_nSXPCInterfaceSelXPCTypeForSelectorArgumentIndexOfReply = objc.RegisterName("XPCTypeForSelector:argumentIndex:ofReply:")
-	_nSXPCInterfaceSelProtocol = objc.RegisterName("protocol")
-	_nSXPCInterfaceSelSetProtocol = objc.RegisterName("setProtocol:")
+	_nSXPCInterfaceSelInterfaceForSelectorArgumentIndexOfReply    = objc.RegisterName("interfaceForSelector:argumentIndex:ofReply:")
+	_nSXPCInterfaceSelSetXPCTypeForSelectorArgumentIndexOfReply   = objc.RegisterName("setXPCType:forSelector:argumentIndex:ofReply:")
+	_nSXPCInterfaceSelXPCTypeForSelectorArgumentIndexOfReply      = objc.RegisterName("XPCTypeForSelector:argumentIndex:ofReply:")
+	_nSXPCInterfaceSelProtocol                                    = objc.RegisterName("protocol")
+	_nSXPCInterfaceSelSetProtocol                                 = objc.RegisterName("setProtocol:")
 )
 
 func NSXPCInterfaceFromID(id objc.ID) *NSXPCInterface {
@@ -41,7 +41,9 @@ func NSXPCInterfaceFromID(id objc.ID) *NSXPCInterface {
 
 func NSXPCInterfaceInterfaceWithProtocol(protocol unsafe.Pointer) *NSXPCInterface {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSXPCInterface), _nSXPCInterfaceSelInterfaceWithProtocol, protocol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXPCInterfaceFromID(_ret)
 }
 
@@ -60,7 +62,9 @@ func (o *NSXPCInterface) SetInterfaceForSelectorArgumentIndexOfReply(ifc *NSXPCI
 
 func (o *NSXPCInterface) InterfaceForSelectorArgumentIndexOfReply(sel objc.SEL, arg uint, ofReply bool) *NSXPCInterface {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXPCInterfaceSelInterfaceForSelectorArgumentIndexOfReply, sel, arg, ofReply)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXPCInterfaceFromID(_ret)
 }
 
@@ -81,4 +85,3 @@ func (o *NSXPCInterface) Protocol() unsafe.Pointer {
 func (o *NSXPCInterface) SetProtocol(protocol unsafe.Pointer) {
 	o.Ptr().Send(_nSXPCInterfaceSelSetProtocol, protocol)
 }
-

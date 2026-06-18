@@ -25,4 +25,3 @@ func MTRBridgedDeviceBasicClusterReachableChangedEventFromID(id objc.ID) *MTRBri
 	purego.Track(o)
 	return o
 }
-

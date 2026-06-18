@@ -16,7 +16,7 @@ type MLModelStructureProgramArgument struct {
 }
 
 var (
-	_clsMLModelStructureProgramArgument = _objcClass("MLModelStructureProgramArgument")
+	_clsMLModelStructureProgramArgument         = _objcClass("MLModelStructureProgramArgument")
 	_mLModelStructureProgramArgumentSelBindings = objc.RegisterName("bindings")
 )
 
@@ -32,7 +32,8 @@ func MLModelStructureProgramArgumentFromID(id objc.ID) *MLModelStructureProgramA
 
 func (o *MLModelStructureProgramArgument) Bindings() *foundation.NSArray[*MLModelStructureProgramBinding] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelStructureProgramArgumentSelBindings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MLModelStructureProgramBinding](_ret)
 }
-

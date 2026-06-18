@@ -202,7 +202,9 @@ func (x *EffectPropertyLight) SetTransform(transform *raw.GLKEffectPropertyTrans
 	x.inner.SetTransform(transform)
 }
 
-func (x *EffectPropertyLight) asEffectProperty() *raw.GLKEffectProperty { return &x.inner.GLKEffectProperty }
+func (x *EffectPropertyLight) asEffectProperty() *raw.GLKEffectProperty {
+	return &x.inner.GLKEffectProperty
+}
 
 // EffectPropertyLightable is the interface implemented by [EffectPropertyLight], for mocking and DI.
 type EffectPropertyLightable interface {
@@ -241,4 +243,3 @@ type EffectPropertyLightable interface {
 }
 
 var _ EffectPropertyLightable = (*EffectPropertyLight)(nil)
-

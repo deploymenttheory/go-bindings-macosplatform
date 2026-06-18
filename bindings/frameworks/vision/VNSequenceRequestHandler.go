@@ -20,19 +20,19 @@ type VNSequenceRequestHandler struct {
 }
 
 var (
-	_clsVNSequenceRequestHandler = _objcClass("VNSequenceRequestHandler")
-	_vNSequenceRequestHandlerSelInit = objc.RegisterName("init")
-	_vNSequenceRequestHandlerSelPerformRequestsOnCVPixelBufferError = objc.RegisterName("performRequests:onCVPixelBuffer:error:")
-	_vNSequenceRequestHandlerSelPerformRequestsOnCVPixelBufferOrientationError = objc.RegisterName("performRequests:onCVPixelBuffer:orientation:error:")
-	_vNSequenceRequestHandlerSelPerformRequestsOnCGImageError = objc.RegisterName("performRequests:onCGImage:error:")
-	_vNSequenceRequestHandlerSelPerformRequestsOnCGImageOrientationError = objc.RegisterName("performRequests:onCGImage:orientation:error:")
-	_vNSequenceRequestHandlerSelPerformRequestsOnCIImageError = objc.RegisterName("performRequests:onCIImage:error:")
-	_vNSequenceRequestHandlerSelPerformRequestsOnCIImageOrientationError = objc.RegisterName("performRequests:onCIImage:orientation:error:")
-	_vNSequenceRequestHandlerSelPerformRequestsOnImageURLError = objc.RegisterName("performRequests:onImageURL:error:")
-	_vNSequenceRequestHandlerSelPerformRequestsOnImageURLOrientationError = objc.RegisterName("performRequests:onImageURL:orientation:error:")
-	_vNSequenceRequestHandlerSelPerformRequestsOnImageDataError = objc.RegisterName("performRequests:onImageData:error:")
-	_vNSequenceRequestHandlerSelPerformRequestsOnImageDataOrientationError = objc.RegisterName("performRequests:onImageData:orientation:error:")
-	_vNSequenceRequestHandlerSelPerformRequestsOnCMSampleBufferError = objc.RegisterName("performRequests:onCMSampleBuffer:error:")
+	_clsVNSequenceRequestHandler                                                = _objcClass("VNSequenceRequestHandler")
+	_vNSequenceRequestHandlerSelInit                                            = objc.RegisterName("init")
+	_vNSequenceRequestHandlerSelPerformRequestsOnCVPixelBufferError             = objc.RegisterName("performRequests:onCVPixelBuffer:error:")
+	_vNSequenceRequestHandlerSelPerformRequestsOnCVPixelBufferOrientationError  = objc.RegisterName("performRequests:onCVPixelBuffer:orientation:error:")
+	_vNSequenceRequestHandlerSelPerformRequestsOnCGImageError                   = objc.RegisterName("performRequests:onCGImage:error:")
+	_vNSequenceRequestHandlerSelPerformRequestsOnCGImageOrientationError        = objc.RegisterName("performRequests:onCGImage:orientation:error:")
+	_vNSequenceRequestHandlerSelPerformRequestsOnCIImageError                   = objc.RegisterName("performRequests:onCIImage:error:")
+	_vNSequenceRequestHandlerSelPerformRequestsOnCIImageOrientationError        = objc.RegisterName("performRequests:onCIImage:orientation:error:")
+	_vNSequenceRequestHandlerSelPerformRequestsOnImageURLError                  = objc.RegisterName("performRequests:onImageURL:error:")
+	_vNSequenceRequestHandlerSelPerformRequestsOnImageURLOrientationError       = objc.RegisterName("performRequests:onImageURL:orientation:error:")
+	_vNSequenceRequestHandlerSelPerformRequestsOnImageDataError                 = objc.RegisterName("performRequests:onImageData:error:")
+	_vNSequenceRequestHandlerSelPerformRequestsOnImageDataOrientationError      = objc.RegisterName("performRequests:onImageData:orientation:error:")
+	_vNSequenceRequestHandlerSelPerformRequestsOnCMSampleBufferError            = objc.RegisterName("performRequests:onCMSampleBuffer:error:")
 	_vNSequenceRequestHandlerSelPerformRequestsOnCMSampleBufferOrientationError = objc.RegisterName("performRequests:onCMSampleBuffer:orientation:error:")
 )
 
@@ -49,7 +49,9 @@ func VNSequenceRequestHandlerFromID(id objc.ID) *VNSequenceRequestHandler {
 // @brief	Creates a new object.
 func (o *VNSequenceRequestHandler) Init() *VNSequenceRequestHandler {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNSequenceRequestHandlerSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNSequenceRequestHandlerFromID(_ret)
 }
 
@@ -172,4 +174,3 @@ func (o *VNSequenceRequestHandler) PerformRequestsOnCMSampleBufferOrientationErr
 	}
 	return _ret, nil
 }
-

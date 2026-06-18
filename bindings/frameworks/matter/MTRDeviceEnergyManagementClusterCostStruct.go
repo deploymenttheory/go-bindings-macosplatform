@@ -16,15 +16,15 @@ type MTRDeviceEnergyManagementClusterCostStruct struct {
 }
 
 var (
-	_clsMTRDeviceEnergyManagementClusterCostStruct = _objcClass("MTRDeviceEnergyManagementClusterCostStruct")
-	_mTRDeviceEnergyManagementClusterCostStructSelCostType = objc.RegisterName("costType")
-	_mTRDeviceEnergyManagementClusterCostStructSelSetCostType = objc.RegisterName("setCostType:")
-	_mTRDeviceEnergyManagementClusterCostStructSelValue = objc.RegisterName("value")
-	_mTRDeviceEnergyManagementClusterCostStructSelSetValue = objc.RegisterName("setValue:")
-	_mTRDeviceEnergyManagementClusterCostStructSelDecimalPoints = objc.RegisterName("decimalPoints")
+	_clsMTRDeviceEnergyManagementClusterCostStruct                 = _objcClass("MTRDeviceEnergyManagementClusterCostStruct")
+	_mTRDeviceEnergyManagementClusterCostStructSelCostType         = objc.RegisterName("costType")
+	_mTRDeviceEnergyManagementClusterCostStructSelSetCostType      = objc.RegisterName("setCostType:")
+	_mTRDeviceEnergyManagementClusterCostStructSelValue            = objc.RegisterName("value")
+	_mTRDeviceEnergyManagementClusterCostStructSelSetValue         = objc.RegisterName("setValue:")
+	_mTRDeviceEnergyManagementClusterCostStructSelDecimalPoints    = objc.RegisterName("decimalPoints")
 	_mTRDeviceEnergyManagementClusterCostStructSelSetDecimalPoints = objc.RegisterName("setDecimalPoints:")
-	_mTRDeviceEnergyManagementClusterCostStructSelCurrency = objc.RegisterName("currency")
-	_mTRDeviceEnergyManagementClusterCostStructSelSetCurrency = objc.RegisterName("setCurrency:")
+	_mTRDeviceEnergyManagementClusterCostStructSelCurrency         = objc.RegisterName("currency")
+	_mTRDeviceEnergyManagementClusterCostStructSelSetCurrency      = objc.RegisterName("setCurrency:")
 )
 
 func MTRDeviceEnergyManagementClusterCostStructFromID(id objc.ID) *MTRDeviceEnergyManagementClusterCostStruct {
@@ -39,7 +39,9 @@ func MTRDeviceEnergyManagementClusterCostStructFromID(id objc.ID) *MTRDeviceEner
 
 func (o *MTRDeviceEnergyManagementClusterCostStruct) CostType() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterCostStructSelCostType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTRDeviceEnergyManagementClusterCostStruct) SetCostType(costType *found
 
 func (o *MTRDeviceEnergyManagementClusterCostStruct) Value() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterCostStructSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,7 +63,9 @@ func (o *MTRDeviceEnergyManagementClusterCostStruct) SetValue(value *foundation.
 
 func (o *MTRDeviceEnergyManagementClusterCostStruct) DecimalPoints() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterCostStructSelDecimalPoints)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -69,11 +75,12 @@ func (o *MTRDeviceEnergyManagementClusterCostStruct) SetDecimalPoints(decimalPoi
 
 func (o *MTRDeviceEnergyManagementClusterCostStruct) Currency() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterCostStructSelCurrency)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDeviceEnergyManagementClusterCostStruct) SetCurrency(currency *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDeviceEnergyManagementClusterCostStructSelSetCurrency, currency.Ptr())
 }
-

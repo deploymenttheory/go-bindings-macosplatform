@@ -18,7 +18,7 @@ type HKWorkoutEffortRelationshipQuery struct {
 }
 
 var (
-	_clsHKWorkoutEffortRelationshipQuery = _objcClass("HKWorkoutEffortRelationshipQuery")
+	_clsHKWorkoutEffortRelationshipQuery                                             = _objcClass("HKWorkoutEffortRelationshipQuery")
 	_hKWorkoutEffortRelationshipQuerySelInitWithPredicateAnchorOptionsResultsHandler = objc.RegisterName("initWithPredicate:anchor:options:resultsHandler:")
 )
 
@@ -51,7 +51,8 @@ func (o *HKWorkoutEffortRelationshipQuery) InitWithPredicateAnchorOptionsResults
 		defer __block_resultsHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutEffortRelationshipQuerySelInitWithPredicateAnchorOptionsResultsHandler, predicate.Ptr(), anchor.Ptr(), options, __block_resultsHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKWorkoutEffortRelationshipQueryFromID(_ret)
 }
-

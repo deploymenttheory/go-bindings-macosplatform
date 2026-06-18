@@ -16,7 +16,9 @@ type MTRDeviceEnergyManagementClusterConstraintsStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRDeviceEnergyManagementClusterConstraintsStruct].
-func (x *MTRDeviceEnergyManagementClusterConstraintsStruct) Unwrap() *raw.MTRDeviceEnergyManagementClusterConstraintsStruct { return x.inner }
+func (x *MTRDeviceEnergyManagementClusterConstraintsStruct) Unwrap() *raw.MTRDeviceEnergyManagementClusterConstraintsStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -137,4 +139,3 @@ type MTRDeviceEnergyManagementClusterConstraintsStructable interface {
 }
 
 var _ MTRDeviceEnergyManagementClusterConstraintsStructable = (*MTRDeviceEnergyManagementClusterConstraintsStruct)(nil)
-

@@ -108,4 +108,3 @@ type FullyConnectedLayerable interface {
 }
 
 var _ FullyConnectedLayerable = (*FullyConnectedLayer)(nil)
-

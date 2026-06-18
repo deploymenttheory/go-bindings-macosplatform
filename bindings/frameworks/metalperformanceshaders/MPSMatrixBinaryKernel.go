@@ -17,17 +17,17 @@ type MPSMatrixBinaryKernel struct {
 }
 
 var (
-	_clsMPSMatrixBinaryKernel = _objcClass("MPSMatrixBinaryKernel")
-	_mPSMatrixBinaryKernelSelPrimarySourceMatrixOrigin = objc.RegisterName("primarySourceMatrixOrigin")
-	_mPSMatrixBinaryKernelSelSetPrimarySourceMatrixOrigin = objc.RegisterName("setPrimarySourceMatrixOrigin:")
-	_mPSMatrixBinaryKernelSelSecondarySourceMatrixOrigin = objc.RegisterName("secondarySourceMatrixOrigin")
+	_clsMPSMatrixBinaryKernel                               = _objcClass("MPSMatrixBinaryKernel")
+	_mPSMatrixBinaryKernelSelPrimarySourceMatrixOrigin      = objc.RegisterName("primarySourceMatrixOrigin")
+	_mPSMatrixBinaryKernelSelSetPrimarySourceMatrixOrigin   = objc.RegisterName("setPrimarySourceMatrixOrigin:")
+	_mPSMatrixBinaryKernelSelSecondarySourceMatrixOrigin    = objc.RegisterName("secondarySourceMatrixOrigin")
 	_mPSMatrixBinaryKernelSelSetSecondarySourceMatrixOrigin = objc.RegisterName("setSecondarySourceMatrixOrigin:")
-	_mPSMatrixBinaryKernelSelResultMatrixOrigin = objc.RegisterName("resultMatrixOrigin")
-	_mPSMatrixBinaryKernelSelSetResultMatrixOrigin = objc.RegisterName("setResultMatrixOrigin:")
-	_mPSMatrixBinaryKernelSelBatchStart = objc.RegisterName("batchStart")
-	_mPSMatrixBinaryKernelSelSetBatchStart = objc.RegisterName("setBatchStart:")
-	_mPSMatrixBinaryKernelSelBatchSize = objc.RegisterName("batchSize")
-	_mPSMatrixBinaryKernelSelSetBatchSize = objc.RegisterName("setBatchSize:")
+	_mPSMatrixBinaryKernelSelResultMatrixOrigin             = objc.RegisterName("resultMatrixOrigin")
+	_mPSMatrixBinaryKernelSelSetResultMatrixOrigin          = objc.RegisterName("setResultMatrixOrigin:")
+	_mPSMatrixBinaryKernelSelBatchStart                     = objc.RegisterName("batchStart")
+	_mPSMatrixBinaryKernelSelSetBatchStart                  = objc.RegisterName("setBatchStart:")
+	_mPSMatrixBinaryKernelSelBatchSize                      = objc.RegisterName("batchSize")
+	_mPSMatrixBinaryKernelSelSetBatchSize                   = objc.RegisterName("setBatchSize:")
 )
 
 func MPSMatrixBinaryKernelFromID(id objc.ID) *MPSMatrixBinaryKernel {
@@ -89,4 +89,3 @@ func (o *MPSMatrixBinaryKernel) BatchSize() uint {
 func (o *MPSMatrixBinaryKernel) SetBatchSize(batchSize uint) {
 	o.Ptr().Send(_mPSMatrixBinaryKernelSelSetBatchSize, batchSize)
 }
-

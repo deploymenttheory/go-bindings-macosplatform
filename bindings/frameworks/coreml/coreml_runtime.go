@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_coremlLib uintptr
-	_loadOnce sync.Once
+	_coremlLib     uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 

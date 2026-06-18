@@ -16,47 +16,47 @@ type NSTreeController struct {
 }
 
 var (
-	_clsNSTreeController = _objcClass("NSTreeController")
-	_nSTreeControllerSelRearrangeObjects = objc.RegisterName("rearrangeObjects")
-	_nSTreeControllerSelAddChild = objc.RegisterName("addChild:")
-	_nSTreeControllerSelInsert = objc.RegisterName("insert:")
-	_nSTreeControllerSelInsertChild = objc.RegisterName("insertChild:")
-	_nSTreeControllerSelInsertObjectAtArrangedObjectIndexPath = objc.RegisterName("insertObject:atArrangedObjectIndexPath:")
+	_clsNSTreeController                                        = _objcClass("NSTreeController")
+	_nSTreeControllerSelRearrangeObjects                        = objc.RegisterName("rearrangeObjects")
+	_nSTreeControllerSelAddChild                                = objc.RegisterName("addChild:")
+	_nSTreeControllerSelInsert                                  = objc.RegisterName("insert:")
+	_nSTreeControllerSelInsertChild                             = objc.RegisterName("insertChild:")
+	_nSTreeControllerSelInsertObjectAtArrangedObjectIndexPath   = objc.RegisterName("insertObject:atArrangedObjectIndexPath:")
 	_nSTreeControllerSelInsertObjectsAtArrangedObjectIndexPaths = objc.RegisterName("insertObjects:atArrangedObjectIndexPaths:")
-	_nSTreeControllerSelRemoveObjectAtArrangedObjectIndexPath = objc.RegisterName("removeObjectAtArrangedObjectIndexPath:")
+	_nSTreeControllerSelRemoveObjectAtArrangedObjectIndexPath   = objc.RegisterName("removeObjectAtArrangedObjectIndexPath:")
 	_nSTreeControllerSelRemoveObjectsAtArrangedObjectIndexPaths = objc.RegisterName("removeObjectsAtArrangedObjectIndexPaths:")
-	_nSTreeControllerSelSetSelectionIndexPaths = objc.RegisterName("setSelectionIndexPaths:")
-	_nSTreeControllerSelSetSelectionIndexPath = objc.RegisterName("setSelectionIndexPath:")
-	_nSTreeControllerSelAddSelectionIndexPaths = objc.RegisterName("addSelectionIndexPaths:")
-	_nSTreeControllerSelRemoveSelectionIndexPaths = objc.RegisterName("removeSelectionIndexPaths:")
-	_nSTreeControllerSelMoveNodeToIndexPath = objc.RegisterName("moveNode:toIndexPath:")
-	_nSTreeControllerSelMoveNodesToIndexPath = objc.RegisterName("moveNodes:toIndexPath:")
-	_nSTreeControllerSelChildrenKeyPathForNode = objc.RegisterName("childrenKeyPathForNode:")
-	_nSTreeControllerSelCountKeyPathForNode = objc.RegisterName("countKeyPathForNode:")
-	_nSTreeControllerSelLeafKeyPathForNode = objc.RegisterName("leafKeyPathForNode:")
-	_nSTreeControllerSelArrangedObjects = objc.RegisterName("arrangedObjects")
-	_nSTreeControllerSelChildrenKeyPath = objc.RegisterName("childrenKeyPath")
-	_nSTreeControllerSelSetChildrenKeyPath = objc.RegisterName("setChildrenKeyPath:")
-	_nSTreeControllerSelCountKeyPath = objc.RegisterName("countKeyPath")
-	_nSTreeControllerSelSetCountKeyPath = objc.RegisterName("setCountKeyPath:")
-	_nSTreeControllerSelLeafKeyPath = objc.RegisterName("leafKeyPath")
-	_nSTreeControllerSelSetLeafKeyPath = objc.RegisterName("setLeafKeyPath:")
-	_nSTreeControllerSelSortDescriptors = objc.RegisterName("sortDescriptors")
-	_nSTreeControllerSelSetSortDescriptors = objc.RegisterName("setSortDescriptors:")
-	_nSTreeControllerSelCanInsert = objc.RegisterName("canInsert")
-	_nSTreeControllerSelCanInsertChild = objc.RegisterName("canInsertChild")
-	_nSTreeControllerSelCanAddChild = objc.RegisterName("canAddChild")
-	_nSTreeControllerSelAvoidsEmptySelection = objc.RegisterName("avoidsEmptySelection")
-	_nSTreeControllerSelSetAvoidsEmptySelection = objc.RegisterName("setAvoidsEmptySelection:")
-	_nSTreeControllerSelPreservesSelection = objc.RegisterName("preservesSelection")
-	_nSTreeControllerSelSetPreservesSelection = objc.RegisterName("setPreservesSelection:")
-	_nSTreeControllerSelSelectsInsertedObjects = objc.RegisterName("selectsInsertedObjects")
-	_nSTreeControllerSelSetSelectsInsertedObjects = objc.RegisterName("setSelectsInsertedObjects:")
-	_nSTreeControllerSelAlwaysUsesMultipleValuesMarker = objc.RegisterName("alwaysUsesMultipleValuesMarker")
-	_nSTreeControllerSelSetAlwaysUsesMultipleValuesMarker = objc.RegisterName("setAlwaysUsesMultipleValuesMarker:")
-	_nSTreeControllerSelSelectionIndexPaths = objc.RegisterName("selectionIndexPaths")
-	_nSTreeControllerSelSelectionIndexPath = objc.RegisterName("selectionIndexPath")
-	_nSTreeControllerSelSelectedNodes = objc.RegisterName("selectedNodes")
+	_nSTreeControllerSelSetSelectionIndexPaths                  = objc.RegisterName("setSelectionIndexPaths:")
+	_nSTreeControllerSelSetSelectionIndexPath                   = objc.RegisterName("setSelectionIndexPath:")
+	_nSTreeControllerSelAddSelectionIndexPaths                  = objc.RegisterName("addSelectionIndexPaths:")
+	_nSTreeControllerSelRemoveSelectionIndexPaths               = objc.RegisterName("removeSelectionIndexPaths:")
+	_nSTreeControllerSelMoveNodeToIndexPath                     = objc.RegisterName("moveNode:toIndexPath:")
+	_nSTreeControllerSelMoveNodesToIndexPath                    = objc.RegisterName("moveNodes:toIndexPath:")
+	_nSTreeControllerSelChildrenKeyPathForNode                  = objc.RegisterName("childrenKeyPathForNode:")
+	_nSTreeControllerSelCountKeyPathForNode                     = objc.RegisterName("countKeyPathForNode:")
+	_nSTreeControllerSelLeafKeyPathForNode                      = objc.RegisterName("leafKeyPathForNode:")
+	_nSTreeControllerSelArrangedObjects                         = objc.RegisterName("arrangedObjects")
+	_nSTreeControllerSelChildrenKeyPath                         = objc.RegisterName("childrenKeyPath")
+	_nSTreeControllerSelSetChildrenKeyPath                      = objc.RegisterName("setChildrenKeyPath:")
+	_nSTreeControllerSelCountKeyPath                            = objc.RegisterName("countKeyPath")
+	_nSTreeControllerSelSetCountKeyPath                         = objc.RegisterName("setCountKeyPath:")
+	_nSTreeControllerSelLeafKeyPath                             = objc.RegisterName("leafKeyPath")
+	_nSTreeControllerSelSetLeafKeyPath                          = objc.RegisterName("setLeafKeyPath:")
+	_nSTreeControllerSelSortDescriptors                         = objc.RegisterName("sortDescriptors")
+	_nSTreeControllerSelSetSortDescriptors                      = objc.RegisterName("setSortDescriptors:")
+	_nSTreeControllerSelCanInsert                               = objc.RegisterName("canInsert")
+	_nSTreeControllerSelCanInsertChild                          = objc.RegisterName("canInsertChild")
+	_nSTreeControllerSelCanAddChild                             = objc.RegisterName("canAddChild")
+	_nSTreeControllerSelAvoidsEmptySelection                    = objc.RegisterName("avoidsEmptySelection")
+	_nSTreeControllerSelSetAvoidsEmptySelection                 = objc.RegisterName("setAvoidsEmptySelection:")
+	_nSTreeControllerSelPreservesSelection                      = objc.RegisterName("preservesSelection")
+	_nSTreeControllerSelSetPreservesSelection                   = objc.RegisterName("setPreservesSelection:")
+	_nSTreeControllerSelSelectsInsertedObjects                  = objc.RegisterName("selectsInsertedObjects")
+	_nSTreeControllerSelSetSelectsInsertedObjects               = objc.RegisterName("setSelectsInsertedObjects:")
+	_nSTreeControllerSelAlwaysUsesMultipleValuesMarker          = objc.RegisterName("alwaysUsesMultipleValuesMarker")
+	_nSTreeControllerSelSetAlwaysUsesMultipleValuesMarker       = objc.RegisterName("setAlwaysUsesMultipleValuesMarker:")
+	_nSTreeControllerSelSelectionIndexPaths                     = objc.RegisterName("selectionIndexPaths")
+	_nSTreeControllerSelSelectionIndexPath                      = objc.RegisterName("selectionIndexPath")
+	_nSTreeControllerSelSelectedNodes                           = objc.RegisterName("selectedNodes")
 )
 
 func NSTreeControllerFromID(id objc.ID) *NSTreeController {
@@ -131,31 +131,41 @@ func (o *NSTreeController) MoveNodesToIndexPath(nodes *foundation.NSArray[*NSTre
 
 func (o *NSTreeController) ChildrenKeyPathForNode(node *NSTreeNode) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTreeControllerSelChildrenKeyPathForNode, node.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSTreeController) CountKeyPathForNode(node *NSTreeNode) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTreeControllerSelCountKeyPathForNode, node.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSTreeController) LeafKeyPathForNode(node *NSTreeNode) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTreeControllerSelLeafKeyPathForNode, node.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSTreeController) ArrangedObjects() *NSTreeNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTreeControllerSelArrangedObjects)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTreeNodeFromID(_ret)
 }
 
 func (o *NSTreeController) ChildrenKeyPath() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTreeControllerSelChildrenKeyPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -165,7 +175,9 @@ func (o *NSTreeController) SetChildrenKeyPath(childrenKeyPath *foundation.NSStri
 
 func (o *NSTreeController) CountKeyPath() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTreeControllerSelCountKeyPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -175,7 +187,9 @@ func (o *NSTreeController) SetCountKeyPath(countKeyPath *foundation.NSString) {
 
 func (o *NSTreeController) LeafKeyPath() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTreeControllerSelLeafKeyPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -250,13 +264,16 @@ func (o *NSTreeController) SelectionIndexPaths() *foundation.NSArray[*foundation
 
 func (o *NSTreeController) SelectionIndexPath() *foundation.NSIndexPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTreeControllerSelSelectionIndexPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexPathFromID(_ret)
 }
 
 func (o *NSTreeController) SelectedNodes() *foundation.NSArray[*NSTreeNode] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTreeControllerSelSelectedNodes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSTreeNode](_ret)
 }
-

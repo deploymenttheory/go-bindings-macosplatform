@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_coreaudioLib uintptr
-	_loadOnce sync.Once
+	_coreaudioLib  uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -48,52 +48,118 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("AudioConvertHostTimeToNanos", func() { purego.RegisterLibFunc(&_fnAudioConvertHostTimeToNanos, _coreaudioLib, "AudioConvertHostTimeToNanos") })
-	_register("AudioConvertNanosToHostTime", func() { purego.RegisterLibFunc(&_fnAudioConvertNanosToHostTime, _coreaudioLib, "AudioConvertNanosToHostTime") })
+	_register("AudioConvertHostTimeToNanos", func() {
+		purego.RegisterLibFunc(&_fnAudioConvertHostTimeToNanos, _coreaudioLib, "AudioConvertHostTimeToNanos")
+	})
+	_register("AudioConvertNanosToHostTime", func() {
+		purego.RegisterLibFunc(&_fnAudioConvertNanosToHostTime, _coreaudioLib, "AudioConvertNanosToHostTime")
+	})
 	_register("AudioDeviceAddIOProc", func() { purego.RegisterLibFunc(&_fnAudioDeviceAddIOProc, _coreaudioLib, "AudioDeviceAddIOProc") })
-	_register("AudioDeviceAddPropertyListener", func() { purego.RegisterLibFunc(&_fnAudioDeviceAddPropertyListener, _coreaudioLib, "AudioDeviceAddPropertyListener") })
-	_register("AudioDeviceCreateIOProcID", func() { purego.RegisterLibFunc(&_fnAudioDeviceCreateIOProcID, _coreaudioLib, "AudioDeviceCreateIOProcID") })
-	_register("AudioDeviceCreateIOProcIDWithBlock", func() { purego.RegisterLibFunc(&_fnAudioDeviceCreateIOProcIDWithBlock, _coreaudioLib, "AudioDeviceCreateIOProcIDWithBlock") })
-	_register("AudioDeviceDestroyIOProcID", func() { purego.RegisterLibFunc(&_fnAudioDeviceDestroyIOProcID, _coreaudioLib, "AudioDeviceDestroyIOProcID") })
-	_register("AudioDeviceGetCurrentTime", func() { purego.RegisterLibFunc(&_fnAudioDeviceGetCurrentTime, _coreaudioLib, "AudioDeviceGetCurrentTime") })
-	_register("AudioDeviceGetNearestStartTime", func() { purego.RegisterLibFunc(&_fnAudioDeviceGetNearestStartTime, _coreaudioLib, "AudioDeviceGetNearestStartTime") })
+	_register("AudioDeviceAddPropertyListener", func() {
+		purego.RegisterLibFunc(&_fnAudioDeviceAddPropertyListener, _coreaudioLib, "AudioDeviceAddPropertyListener")
+	})
+	_register("AudioDeviceCreateIOProcID", func() {
+		purego.RegisterLibFunc(&_fnAudioDeviceCreateIOProcID, _coreaudioLib, "AudioDeviceCreateIOProcID")
+	})
+	_register("AudioDeviceCreateIOProcIDWithBlock", func() {
+		purego.RegisterLibFunc(&_fnAudioDeviceCreateIOProcIDWithBlock, _coreaudioLib, "AudioDeviceCreateIOProcIDWithBlock")
+	})
+	_register("AudioDeviceDestroyIOProcID", func() {
+		purego.RegisterLibFunc(&_fnAudioDeviceDestroyIOProcID, _coreaudioLib, "AudioDeviceDestroyIOProcID")
+	})
+	_register("AudioDeviceGetCurrentTime", func() {
+		purego.RegisterLibFunc(&_fnAudioDeviceGetCurrentTime, _coreaudioLib, "AudioDeviceGetCurrentTime")
+	})
+	_register("AudioDeviceGetNearestStartTime", func() {
+		purego.RegisterLibFunc(&_fnAudioDeviceGetNearestStartTime, _coreaudioLib, "AudioDeviceGetNearestStartTime")
+	})
 	_register("AudioDeviceGetProperty", func() { purego.RegisterLibFunc(&_fnAudioDeviceGetProperty, _coreaudioLib, "AudioDeviceGetProperty") })
-	_register("AudioDeviceGetPropertyInfo", func() { purego.RegisterLibFunc(&_fnAudioDeviceGetPropertyInfo, _coreaudioLib, "AudioDeviceGetPropertyInfo") })
+	_register("AudioDeviceGetPropertyInfo", func() {
+		purego.RegisterLibFunc(&_fnAudioDeviceGetPropertyInfo, _coreaudioLib, "AudioDeviceGetPropertyInfo")
+	})
 	_register("AudioDeviceRead", func() { purego.RegisterLibFunc(&_fnAudioDeviceRead, _coreaudioLib, "AudioDeviceRead") })
 	_register("AudioDeviceRemoveIOProc", func() { purego.RegisterLibFunc(&_fnAudioDeviceRemoveIOProc, _coreaudioLib, "AudioDeviceRemoveIOProc") })
-	_register("AudioDeviceRemovePropertyListener", func() { purego.RegisterLibFunc(&_fnAudioDeviceRemovePropertyListener, _coreaudioLib, "AudioDeviceRemovePropertyListener") })
+	_register("AudioDeviceRemovePropertyListener", func() {
+		purego.RegisterLibFunc(&_fnAudioDeviceRemovePropertyListener, _coreaudioLib, "AudioDeviceRemovePropertyListener")
+	})
 	_register("AudioDeviceSetProperty", func() { purego.RegisterLibFunc(&_fnAudioDeviceSetProperty, _coreaudioLib, "AudioDeviceSetProperty") })
 	_register("AudioDeviceStart", func() { purego.RegisterLibFunc(&_fnAudioDeviceStart, _coreaudioLib, "AudioDeviceStart") })
 	_register("AudioDeviceStartAtTime", func() { purego.RegisterLibFunc(&_fnAudioDeviceStartAtTime, _coreaudioLib, "AudioDeviceStartAtTime") })
 	_register("AudioDeviceStop", func() { purego.RegisterLibFunc(&_fnAudioDeviceStop, _coreaudioLib, "AudioDeviceStop") })
-	_register("AudioDeviceTranslateTime", func() { purego.RegisterLibFunc(&_fnAudioDeviceTranslateTime, _coreaudioLib, "AudioDeviceTranslateTime") })
+	_register("AudioDeviceTranslateTime", func() {
+		purego.RegisterLibFunc(&_fnAudioDeviceTranslateTime, _coreaudioLib, "AudioDeviceTranslateTime")
+	})
 	_register("AudioGetCurrentHostTime", func() { purego.RegisterLibFunc(&_fnAudioGetCurrentHostTime, _coreaudioLib, "AudioGetCurrentHostTime") })
-	_register("AudioGetHostClockFrequency", func() { purego.RegisterLibFunc(&_fnAudioGetHostClockFrequency, _coreaudioLib, "AudioGetHostClockFrequency") })
-	_register("AudioGetHostClockMinimumTimeDelta", func() { purego.RegisterLibFunc(&_fnAudioGetHostClockMinimumTimeDelta, _coreaudioLib, "AudioGetHostClockMinimumTimeDelta") })
-	_register("AudioHardwareAddPropertyListener", func() { purego.RegisterLibFunc(&_fnAudioHardwareAddPropertyListener, _coreaudioLib, "AudioHardwareAddPropertyListener") })
-	_register("AudioHardwareAddRunLoopSource", func() { purego.RegisterLibFunc(&_fnAudioHardwareAddRunLoopSource, _coreaudioLib, "AudioHardwareAddRunLoopSource") })
-	_register("AudioHardwareCreateAggregateDevice", func() { purego.RegisterLibFunc(&_fnAudioHardwareCreateAggregateDevice, _coreaudioLib, "AudioHardwareCreateAggregateDevice") })
-	_register("AudioHardwareDestroyAggregateDevice", func() { purego.RegisterLibFunc(&_fnAudioHardwareDestroyAggregateDevice, _coreaudioLib, "AudioHardwareDestroyAggregateDevice") })
-	_register("AudioHardwareGetProperty", func() { purego.RegisterLibFunc(&_fnAudioHardwareGetProperty, _coreaudioLib, "AudioHardwareGetProperty") })
-	_register("AudioHardwareGetPropertyInfo", func() { purego.RegisterLibFunc(&_fnAudioHardwareGetPropertyInfo, _coreaudioLib, "AudioHardwareGetPropertyInfo") })
-	_register("AudioHardwareRemovePropertyListener", func() { purego.RegisterLibFunc(&_fnAudioHardwareRemovePropertyListener, _coreaudioLib, "AudioHardwareRemovePropertyListener") })
-	_register("AudioHardwareRemoveRunLoopSource", func() { purego.RegisterLibFunc(&_fnAudioHardwareRemoveRunLoopSource, _coreaudioLib, "AudioHardwareRemoveRunLoopSource") })
-	_register("AudioHardwareSetProperty", func() { purego.RegisterLibFunc(&_fnAudioHardwareSetProperty, _coreaudioLib, "AudioHardwareSetProperty") })
+	_register("AudioGetHostClockFrequency", func() {
+		purego.RegisterLibFunc(&_fnAudioGetHostClockFrequency, _coreaudioLib, "AudioGetHostClockFrequency")
+	})
+	_register("AudioGetHostClockMinimumTimeDelta", func() {
+		purego.RegisterLibFunc(&_fnAudioGetHostClockMinimumTimeDelta, _coreaudioLib, "AudioGetHostClockMinimumTimeDelta")
+	})
+	_register("AudioHardwareAddPropertyListener", func() {
+		purego.RegisterLibFunc(&_fnAudioHardwareAddPropertyListener, _coreaudioLib, "AudioHardwareAddPropertyListener")
+	})
+	_register("AudioHardwareAddRunLoopSource", func() {
+		purego.RegisterLibFunc(&_fnAudioHardwareAddRunLoopSource, _coreaudioLib, "AudioHardwareAddRunLoopSource")
+	})
+	_register("AudioHardwareCreateAggregateDevice", func() {
+		purego.RegisterLibFunc(&_fnAudioHardwareCreateAggregateDevice, _coreaudioLib, "AudioHardwareCreateAggregateDevice")
+	})
+	_register("AudioHardwareDestroyAggregateDevice", func() {
+		purego.RegisterLibFunc(&_fnAudioHardwareDestroyAggregateDevice, _coreaudioLib, "AudioHardwareDestroyAggregateDevice")
+	})
+	_register("AudioHardwareGetProperty", func() {
+		purego.RegisterLibFunc(&_fnAudioHardwareGetProperty, _coreaudioLib, "AudioHardwareGetProperty")
+	})
+	_register("AudioHardwareGetPropertyInfo", func() {
+		purego.RegisterLibFunc(&_fnAudioHardwareGetPropertyInfo, _coreaudioLib, "AudioHardwareGetPropertyInfo")
+	})
+	_register("AudioHardwareRemovePropertyListener", func() {
+		purego.RegisterLibFunc(&_fnAudioHardwareRemovePropertyListener, _coreaudioLib, "AudioHardwareRemovePropertyListener")
+	})
+	_register("AudioHardwareRemoveRunLoopSource", func() {
+		purego.RegisterLibFunc(&_fnAudioHardwareRemoveRunLoopSource, _coreaudioLib, "AudioHardwareRemoveRunLoopSource")
+	})
+	_register("AudioHardwareSetProperty", func() {
+		purego.RegisterLibFunc(&_fnAudioHardwareSetProperty, _coreaudioLib, "AudioHardwareSetProperty")
+	})
 	_register("AudioHardwareUnload", func() { purego.RegisterLibFunc(&_fnAudioHardwareUnload, _coreaudioLib, "AudioHardwareUnload") })
-	_register("AudioObjectAddPropertyListener", func() { purego.RegisterLibFunc(&_fnAudioObjectAddPropertyListener, _coreaudioLib, "AudioObjectAddPropertyListener") })
-	_register("AudioObjectAddPropertyListenerBlock", func() { purego.RegisterLibFunc(&_fnAudioObjectAddPropertyListenerBlock, _coreaudioLib, "AudioObjectAddPropertyListenerBlock") })
-	_register("AudioObjectGetPropertyData", func() { purego.RegisterLibFunc(&_fnAudioObjectGetPropertyData, _coreaudioLib, "AudioObjectGetPropertyData") })
-	_register("AudioObjectGetPropertyDataSize", func() { purego.RegisterLibFunc(&_fnAudioObjectGetPropertyDataSize, _coreaudioLib, "AudioObjectGetPropertyDataSize") })
+	_register("AudioObjectAddPropertyListener", func() {
+		purego.RegisterLibFunc(&_fnAudioObjectAddPropertyListener, _coreaudioLib, "AudioObjectAddPropertyListener")
+	})
+	_register("AudioObjectAddPropertyListenerBlock", func() {
+		purego.RegisterLibFunc(&_fnAudioObjectAddPropertyListenerBlock, _coreaudioLib, "AudioObjectAddPropertyListenerBlock")
+	})
+	_register("AudioObjectGetPropertyData", func() {
+		purego.RegisterLibFunc(&_fnAudioObjectGetPropertyData, _coreaudioLib, "AudioObjectGetPropertyData")
+	})
+	_register("AudioObjectGetPropertyDataSize", func() {
+		purego.RegisterLibFunc(&_fnAudioObjectGetPropertyDataSize, _coreaudioLib, "AudioObjectGetPropertyDataSize")
+	})
 	_register("AudioObjectHasProperty", func() { purego.RegisterLibFunc(&_fnAudioObjectHasProperty, _coreaudioLib, "AudioObjectHasProperty") })
-	_register("AudioObjectIsPropertySettable", func() { purego.RegisterLibFunc(&_fnAudioObjectIsPropertySettable, _coreaudioLib, "AudioObjectIsPropertySettable") })
-	_register("AudioObjectRemovePropertyListener", func() { purego.RegisterLibFunc(&_fnAudioObjectRemovePropertyListener, _coreaudioLib, "AudioObjectRemovePropertyListener") })
-	_register("AudioObjectRemovePropertyListenerBlock", func() { purego.RegisterLibFunc(&_fnAudioObjectRemovePropertyListenerBlock, _coreaudioLib, "AudioObjectRemovePropertyListenerBlock") })
-	_register("AudioObjectSetPropertyData", func() { purego.RegisterLibFunc(&_fnAudioObjectSetPropertyData, _coreaudioLib, "AudioObjectSetPropertyData") })
+	_register("AudioObjectIsPropertySettable", func() {
+		purego.RegisterLibFunc(&_fnAudioObjectIsPropertySettable, _coreaudioLib, "AudioObjectIsPropertySettable")
+	})
+	_register("AudioObjectRemovePropertyListener", func() {
+		purego.RegisterLibFunc(&_fnAudioObjectRemovePropertyListener, _coreaudioLib, "AudioObjectRemovePropertyListener")
+	})
+	_register("AudioObjectRemovePropertyListenerBlock", func() {
+		purego.RegisterLibFunc(&_fnAudioObjectRemovePropertyListenerBlock, _coreaudioLib, "AudioObjectRemovePropertyListenerBlock")
+	})
+	_register("AudioObjectSetPropertyData", func() {
+		purego.RegisterLibFunc(&_fnAudioObjectSetPropertyData, _coreaudioLib, "AudioObjectSetPropertyData")
+	})
 	_register("AudioObjectShow", func() { purego.RegisterLibFunc(&_fnAudioObjectShow, _coreaudioLib, "AudioObjectShow") })
-	_register("AudioStreamAddPropertyListener", func() { purego.RegisterLibFunc(&_fnAudioStreamAddPropertyListener, _coreaudioLib, "AudioStreamAddPropertyListener") })
+	_register("AudioStreamAddPropertyListener", func() {
+		purego.RegisterLibFunc(&_fnAudioStreamAddPropertyListener, _coreaudioLib, "AudioStreamAddPropertyListener")
+	})
 	_register("AudioStreamGetProperty", func() { purego.RegisterLibFunc(&_fnAudioStreamGetProperty, _coreaudioLib, "AudioStreamGetProperty") })
-	_register("AudioStreamGetPropertyInfo", func() { purego.RegisterLibFunc(&_fnAudioStreamGetPropertyInfo, _coreaudioLib, "AudioStreamGetPropertyInfo") })
-	_register("AudioStreamRemovePropertyListener", func() { purego.RegisterLibFunc(&_fnAudioStreamRemovePropertyListener, _coreaudioLib, "AudioStreamRemovePropertyListener") })
+	_register("AudioStreamGetPropertyInfo", func() {
+		purego.RegisterLibFunc(&_fnAudioStreamGetPropertyInfo, _coreaudioLib, "AudioStreamGetPropertyInfo")
+	})
+	_register("AudioStreamRemovePropertyListener", func() {
+		purego.RegisterLibFunc(&_fnAudioStreamRemovePropertyListener, _coreaudioLib, "AudioStreamRemovePropertyListener")
+	})
 	_register("AudioStreamSetProperty", func() { purego.RegisterLibFunc(&_fnAudioStreamSetProperty, _coreaudioLib, "AudioStreamSetProperty") })
 }
 

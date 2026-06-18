@@ -114,4 +114,3 @@ type Duckerable interface {
 }
 
 var _ Duckerable = (*Ducker)(nil)
-

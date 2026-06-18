@@ -93,11 +93,17 @@ func (x *MatrixLogSoftMaxGradient) WithLabel(label string) *MatrixLogSoftMaxGrad
 	return x
 }
 
-func (x *MatrixLogSoftMaxGradient) asMatrixSoftMaxGradient() *mpsmatrix.MPSMatrixSoftMaxGradient { return &x.inner.MPSMatrixSoftMaxGradient }
+func (x *MatrixLogSoftMaxGradient) asMatrixSoftMaxGradient() *mpsmatrix.MPSMatrixSoftMaxGradient {
+	return &x.inner.MPSMatrixSoftMaxGradient
+}
 
-func (x *MatrixLogSoftMaxGradient) asMatrixBinaryKernel() *mpsmatrix.MPSMatrixBinaryKernel { return &x.inner.MPSMatrixSoftMaxGradient.MPSMatrixBinaryKernel }
+func (x *MatrixLogSoftMaxGradient) asMatrixBinaryKernel() *mpsmatrix.MPSMatrixBinaryKernel {
+	return &x.inner.MPSMatrixSoftMaxGradient.MPSMatrixBinaryKernel
+}
 
-func (x *MatrixLogSoftMaxGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSMatrixSoftMaxGradient.MPSMatrixBinaryKernel.MPSKernel }
+func (x *MatrixLogSoftMaxGradient) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSMatrixSoftMaxGradient.MPSMatrixBinaryKernel.MPSKernel
+}
 
 // MatrixLogSoftMaxGradientable is the interface implemented by [MatrixLogSoftMaxGradient], for mocking and DI.
 type MatrixLogSoftMaxGradientable interface {
@@ -114,4 +120,3 @@ type MatrixLogSoftMaxGradientable interface {
 }
 
 var _ MatrixLogSoftMaxGradientable = (*MatrixLogSoftMaxGradient)(nil)
-

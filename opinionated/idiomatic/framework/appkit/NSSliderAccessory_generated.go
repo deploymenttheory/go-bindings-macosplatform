@@ -83,4 +83,3 @@ type SliderAccessoryable interface {
 }
 
 var _ SliderAccessoryable = (*SliderAccessory)(nil)
-

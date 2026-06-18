@@ -22,8 +22,11 @@ func main() {
 	if err := os.MkdirAll(filepath.Dir(rulesPath), 0o755); err != nil {
 		log.Fatalf("luludaemon: %v", err)
 	}
-	log.Printf("luludaemon: starting (rules=%s)", rulesPath)
-	if err := extension.Run(rulesPath); err != nil {
+	// LULU_CONFIG, if set, names a declarative JSON/YAML config the daemon
+	// reconciles its rule set against at startup.
+	configPath := os.Getenv("LULU_CONFIG")
+	log.Printf("luludaemon: starting (rules=%s config=%q)", rulesPath, configPath)
+	if err := extension.Run(rulesPath, configPath); err != nil {
 		log.Fatalf("luludaemon: %v", err)
 	}
 }

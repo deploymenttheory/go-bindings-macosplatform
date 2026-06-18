@@ -16,13 +16,13 @@ type OSLogMessageComponent struct {
 }
 
 var (
-	_clsOSLogMessageComponent = _objcClass("OSLogMessageComponent")
-	_oSLogMessageComponentSelFormatSubstring = objc.RegisterName("formatSubstring")
-	_oSLogMessageComponentSelPlaceholder = objc.RegisterName("placeholder")
-	_oSLogMessageComponentSelArgumentCategory = objc.RegisterName("argumentCategory")
-	_oSLogMessageComponentSelArgumentDataValue = objc.RegisterName("argumentDataValue")
+	_clsOSLogMessageComponent                    = _objcClass("OSLogMessageComponent")
+	_oSLogMessageComponentSelFormatSubstring     = objc.RegisterName("formatSubstring")
+	_oSLogMessageComponentSelPlaceholder         = objc.RegisterName("placeholder")
+	_oSLogMessageComponentSelArgumentCategory    = objc.RegisterName("argumentCategory")
+	_oSLogMessageComponentSelArgumentDataValue   = objc.RegisterName("argumentDataValue")
 	_oSLogMessageComponentSelArgumentDoubleValue = objc.RegisterName("argumentDoubleValue")
-	_oSLogMessageComponentSelArgumentInt64Value = objc.RegisterName("argumentInt64Value")
+	_oSLogMessageComponentSelArgumentInt64Value  = objc.RegisterName("argumentInt64Value")
 	_oSLogMessageComponentSelArgumentNumberValue = objc.RegisterName("argumentNumberValue")
 	_oSLogMessageComponentSelArgumentStringValue = objc.RegisterName("argumentStringValue")
 	_oSLogMessageComponentSelArgumentUInt64Value = objc.RegisterName("argumentUInt64Value")
@@ -41,14 +41,18 @@ func OSLogMessageComponentFromID(id objc.ID) *OSLogMessageComponent {
 // @property formatSubstring @abstract The text immediately preceding a placeholder. This can be an empty string if there is nothing between two placeholders, or between the placeholder and the bounds of the string.
 func (o *OSLogMessageComponent) FormatSubstring() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSLogMessageComponentSelFormatSubstring)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property placeholder @abstract The placeholder text. Is empty for is the last component.
 func (o *OSLogMessageComponent) Placeholder() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSLogMessageComponentSelPlaceholder)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *OSLogMessageComponent) ArgumentCategory() OSLogMessageComponentArgument
 // @property argumentDataValue @abstract The argument as a sequence of bytes. Can be nil if the argument cannot be decoded (for example, it could be redacted), or if this is the last component.
 func (o *OSLogMessageComponent) ArgumentDataValue() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSLogMessageComponentSelArgumentDataValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -80,14 +86,18 @@ func (o *OSLogMessageComponent) ArgumentInt64Value() int64 {
 // @property argumentNumberValue @abstract The argument as a number. Can be nil if the argument cannot be decoded (for example, it could be redacted), or if this is the last component.
 func (o *OSLogMessageComponent) ArgumentNumberValue() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSLogMessageComponentSelArgumentNumberValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // @property argumentStringValue @abstract The argument as a string. Can be nil if the argument cannot be decoded (for example, it could be redacted), or if this is the last component.
 func (o *OSLogMessageComponent) ArgumentStringValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSLogMessageComponentSelArgumentStringValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -96,4 +106,3 @@ func (o *OSLogMessageComponent) ArgumentUInt64Value() uint64 {
 	_ret := objc.Send[uint64](o.Ptr(), _oSLogMessageComponentSelArgumentUInt64Value)
 	return _ret
 }
-

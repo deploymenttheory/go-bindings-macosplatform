@@ -16,7 +16,7 @@ type MPSNNPadGradientNode struct {
 }
 
 var (
-	_clsMPSNNPadGradientNode = _objcClass("MPSNNPadGradientNode")
+	_clsMPSNNPadGradientNode                                               = _objcClass("MPSNNPadGradientNode")
 	_mPSNNPadGradientNodeSelNodeWithSourceGradientSourceImageGradientState = objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:")
 	_mPSNNPadGradientNodeSelInitWithSourceGradientSourceImageGradientState = objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:")
 )
@@ -34,14 +34,17 @@ func MPSNNPadGradientNodeFromID(id objc.ID) *MPSNNPadGradientNode {
 // @abstract   A node to represent the gradient of a padding node. @param      sourceGradient   The input gradient from the 'downstream' gradient filter. @param      sourceImage      The input image from the forward padding node. @return     A MPSNNPadGradientNode
 func MPSNNPadGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient *mpsneuralnetwork.MPSNNImageNode, sourceImage *mpsneuralnetwork.MPSNNImageNode, gradientState *mpsneuralnetwork.MPSNNGradientStateNode) *MPSNNPadGradientNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNPadGradientNode), _mPSNNPadGradientNodeSelNodeWithSourceGradientSourceImageGradientState, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNPadGradientNodeFromID(_ret)
 }
 
 // @abstract   A node to represent the gradient of a padding node. @param      sourceGradient   The input gradient from the 'downstream' gradient filter. @param      sourceImage      The input image from the forward reshape node. @return     A MPSNNPadGradientNode
 func (o *MPSNNPadGradientNode) InitWithSourceGradientSourceImageGradientState(sourceGradient *mpsneuralnetwork.MPSNNImageNode, sourceImage *mpsneuralnetwork.MPSNNImageNode, gradientState *mpsneuralnetwork.MPSNNGradientStateNode) *MPSNNPadGradientNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNPadGradientNodeSelInitWithSourceGradientSourceImageGradientState, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNPadGradientNodeFromID(_ret)
 }
-

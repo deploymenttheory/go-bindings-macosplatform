@@ -19,7 +19,9 @@ type NDArrayMultiaryGradientKernel struct {
 }
 
 // Unwrap returns the underlying [raw.MPSNDArrayMultiaryGradientKernel].
-func (x *NDArrayMultiaryGradientKernel) Unwrap() *raw.MPSNDArrayMultiaryGradientKernel { return x.inner }
+func (x *NDArrayMultiaryGradientKernel) Unwrap() *raw.MPSNDArrayMultiaryGradientKernel {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -68,9 +70,13 @@ func (x *NDArrayMultiaryGradientKernel) EncodeToCommandBufferSourceArraysSourceG
 	x.inner.EncodeToCommandBufferSourceArraysSourceGradientGradientStateDestinationArray(cmdBuf, sources, gradient, state, destination)
 }
 
-func (x *NDArrayMultiaryGradientKernel) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryBase }
+func (x *NDArrayMultiaryGradientKernel) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase {
+	return &x.inner.MPSNDArrayMultiaryBase
+}
 
-func (x *NDArrayMultiaryGradientKernel) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNDArrayMultiaryBase.MPSKernel }
+func (x *NDArrayMultiaryGradientKernel) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSNDArrayMultiaryBase.MPSKernel
+}
 
 // NDArrayMultiaryGradientKernelable is the interface implemented by [NDArrayMultiaryGradientKernel], for mocking and DI.
 type NDArrayMultiaryGradientKernelable interface {
@@ -83,4 +89,3 @@ type NDArrayMultiaryGradientKernelable interface {
 }
 
 var _ NDArrayMultiaryGradientKernelable = (*NDArrayMultiaryGradientKernel)(nil)
-

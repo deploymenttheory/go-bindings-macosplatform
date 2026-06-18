@@ -17,19 +17,19 @@ type NSURLProtectionSpace struct {
 }
 
 var (
-	_clsNSURLProtectionSpace = _objcClass("NSURLProtectionSpace")
-	_nSURLProtectionSpaceSelInitWithHostPortProtocolRealmAuthenticationMethod = objc.RegisterName("initWithHost:port:protocol:realm:authenticationMethod:")
+	_clsNSURLProtectionSpace                                                   = _objcClass("NSURLProtectionSpace")
+	_nSURLProtectionSpaceSelInitWithHostPortProtocolRealmAuthenticationMethod  = objc.RegisterName("initWithHost:port:protocol:realm:authenticationMethod:")
 	_nSURLProtectionSpaceSelInitWithProxyHostPortTypeRealmAuthenticationMethod = objc.RegisterName("initWithProxyHost:port:type:realm:authenticationMethod:")
-	_nSURLProtectionSpaceSelRealm = objc.RegisterName("realm")
-	_nSURLProtectionSpaceSelReceivesCredentialSecurely = objc.RegisterName("receivesCredentialSecurely")
-	_nSURLProtectionSpaceSelIsProxy = objc.RegisterName("isProxy")
-	_nSURLProtectionSpaceSelHost = objc.RegisterName("host")
-	_nSURLProtectionSpaceSelPort = objc.RegisterName("port")
-	_nSURLProtectionSpaceSelProxyType = objc.RegisterName("proxyType")
-	_nSURLProtectionSpaceSelProtocol = objc.RegisterName("protocol")
-	_nSURLProtectionSpaceSelAuthenticationMethod = objc.RegisterName("authenticationMethod")
-	_nSURLProtectionSpaceSelDistinguishedNames = objc.RegisterName("distinguishedNames")
-	_nSURLProtectionSpaceSelServerTrust = objc.RegisterName("serverTrust")
+	_nSURLProtectionSpaceSelRealm                                              = objc.RegisterName("realm")
+	_nSURLProtectionSpaceSelReceivesCredentialSecurely                         = objc.RegisterName("receivesCredentialSecurely")
+	_nSURLProtectionSpaceSelIsProxy                                            = objc.RegisterName("isProxy")
+	_nSURLProtectionSpaceSelHost                                               = objc.RegisterName("host")
+	_nSURLProtectionSpaceSelPort                                               = objc.RegisterName("port")
+	_nSURLProtectionSpaceSelProxyType                                          = objc.RegisterName("proxyType")
+	_nSURLProtectionSpaceSelProtocol                                           = objc.RegisterName("protocol")
+	_nSURLProtectionSpaceSelAuthenticationMethod                               = objc.RegisterName("authenticationMethod")
+	_nSURLProtectionSpaceSelDistinguishedNames                                 = objc.RegisterName("distinguishedNames")
+	_nSURLProtectionSpaceSelServerTrust                                        = objc.RegisterName("serverTrust")
 )
 
 func NSURLProtectionSpaceFromID(id objc.ID) *NSURLProtectionSpace {
@@ -45,21 +45,27 @@ func NSURLProtectionSpaceFromID(id objc.ID) *NSURLProtectionSpace {
 // @method initWithHost:port:protocol:realm:authenticationMethod: @abstract Initialize a protection space representing an origin server, or a realm on one @param host The hostname of the server @param port The port for the server @param protocol The protocol for this server - e.g. "http", "ftp", "https" @param realm A string indicating a protocol-specific subdivision of a single host. For http and https, this maps to the realm string in http authentication challenges. For many other protocols it is unused. @param authenticationMethod The authentication method to use to access this protection space - valid values include nil (default method), @"digest" and @"form". @result The initialized object.
 func (o *NSURLProtectionSpace) InitWithHostPortProtocolRealmAuthenticationMethod(host *NSString, port int, protocol *NSString, realm *NSString, authenticationMethod *NSString) *NSURLProtectionSpace {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLProtectionSpaceSelInitWithHostPortProtocolRealmAuthenticationMethod, host.Ptr(), port, protocol.Ptr(), realm.Ptr(), authenticationMethod.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLProtectionSpaceFromID(_ret)
 }
 
 // @method initWithProxyHost:port:type:realm:authenticationMethod: @abstract Initialize a protection space representing a proxy server, or a realm on one @param host The hostname of the proxy server @param port The port for the proxy server @param type The type of proxy - e.g. "http", "ftp", "SOCKS" @param realm A string indicating a protocol-specific subdivision of a single host. For http and https, this maps to the realm string in http authentication challenges. For many other protocols it is unused. @param authenticationMethod The authentication method to use to access this protection space - valid values include nil (default method) and @"digest" @result The initialized object.
 func (o *NSURLProtectionSpace) InitWithProxyHostPortTypeRealmAuthenticationMethod(host *NSString, port int, type_ *NSString, realm *NSString, authenticationMethod *NSString) *NSURLProtectionSpace {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLProtectionSpaceSelInitWithProxyHostPortTypeRealmAuthenticationMethod, host.Ptr(), port, type_.Ptr(), realm.Ptr(), authenticationMethod.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLProtectionSpaceFromID(_ret)
 }
 
 // @abstract Get the authentication realm for which the protection space that needs authentication @discussion This is generally only available for http authentication, and may be nil otherwise. @result The realm string
 func (o *NSURLProtectionSpace) Realm() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLProtectionSpaceSelRealm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -78,7 +84,9 @@ func (o *NSURLProtectionSpace) IsProxy() bool {
 // @abstract Get the proxy host if this is a proxy authentication, or the host from the URL. @result The host for this protection space.
 func (o *NSURLProtectionSpace) Host() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLProtectionSpaceSelHost)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -91,27 +99,35 @@ func (o *NSURLProtectionSpace) Port() int {
 // @abstract Get the type of this protection space, if a proxy @result The type string, or nil if not a proxy.
 func (o *NSURLProtectionSpace) ProxyType() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLProtectionSpaceSelProxyType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // @abstract Get the protocol of this protection space, if not a proxy @result The type string, or nil if a proxy.
 func (o *NSURLProtectionSpace) Protocol() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLProtectionSpaceSelProtocol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // @abstract Get the authentication method to be used for this protection space @result The authentication method
 func (o *NSURLProtectionSpace) AuthenticationMethod() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLProtectionSpaceSelAuthenticationMethod)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSURLProtectionSpace) DistinguishedNames() *NSArray[*NSData] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLProtectionSpaceSelDistinguishedNames)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSData](_ret)
 }
 
@@ -119,4 +135,3 @@ func (o *NSURLProtectionSpace) ServerTrust() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSURLProtectionSpaceSelServerTrust)
 	return _ret
 }
-

@@ -16,11 +16,11 @@ type MLImageConstraint struct {
 }
 
 var (
-	_clsMLImageConstraint = _objcClass("MLImageConstraint")
-	_mLImageConstraintSelPixelsHigh = objc.RegisterName("pixelsHigh")
-	_mLImageConstraintSelPixelsWide = objc.RegisterName("pixelsWide")
+	_clsMLImageConstraint                = _objcClass("MLImageConstraint")
+	_mLImageConstraintSelPixelsHigh      = objc.RegisterName("pixelsHigh")
+	_mLImageConstraintSelPixelsWide      = objc.RegisterName("pixelsWide")
 	_mLImageConstraintSelPixelFormatType = objc.RegisterName("pixelFormatType")
-	_mLImageConstraintSelSizeConstraint = objc.RegisterName("sizeConstraint")
+	_mLImageConstraintSelSizeConstraint  = objc.RegisterName("sizeConstraint")
 )
 
 func MLImageConstraintFromID(id objc.ID) *MLImageConstraint {
@@ -54,7 +54,8 @@ func (o *MLImageConstraint) PixelFormatType() uint {
 // Detailed image size constraint
 func (o *MLImageConstraint) SizeConstraint() *MLImageSizeConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLImageConstraintSelSizeConstraint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLImageSizeConstraintFromID(_ret)
 }
-

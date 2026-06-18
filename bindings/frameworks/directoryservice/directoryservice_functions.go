@@ -20,7 +20,7 @@ var (
 	_dsAllocStringsFromList func(uint, *TDataList) string
 	// @function dsAppendAuthBufferWithAuthorityAttribute @abstract	Inserts a user name with authentication authority data into an existing buffer. @discussion	Use this function for authentication methods that contain user or authenticator names and the authentication authority attribute has already been retrieved. @param		inNodeRef a node reference for the record to parse @param		inRecordListBuffPtr the data returned from dsGetDataList @param		inAttributePtr an attribute with authentication authority data @param		inValueRef the reference for the kDSNAttrAuthenticationAuthority attribute. @param		inUserName the name of the user to authenticate @param		inOutAuthBuffer pass in a preallocated buffer, returns with the user data appended. @result		tDirStatus code
 	_dsAppendAuthBufferWithAuthorityAttribute func(uint, *TDataBuffer, *TAttributeEntry, uint, string, *TDataBuffer) TDirStatus
-	_dsAppendAuthBufferWithAuthorityStrings func(string, string, *TDataBuffer) TDirStatus
+	_dsAppendAuthBufferWithAuthorityStrings   func(string, string, *TDataBuffer) TDirStatus
 	// @function dsAppendStringToList @discussion Included only for backward compatibility.
 	_dsAppendStringToList func(*TDataList, string) TDirStatus
 	// @function dsAppendStringToListAlloc
@@ -177,7 +177,7 @@ var (
 	// @function dsRemoveAttribute
 	_dsRemoveAttribute func(uint, *TDataBuffer) TDirStatus
 	// @function dsRemoveAttributeValue
-	_dsRemoveAttributeValue func(uint, *TDataBuffer, uint) TDirStatus
+	_dsRemoveAttributeValue       func(uint, *TDataBuffer, uint) TDirStatus
 	_dsServiceInformationAllocate func(unsafe.Pointer, uint, **TDataBuffer) TDirStatus
 	// @function dsSetAttributeValue
 	_dsSetAttributeValue func(uint, *TDataBuffer, *TAttributeValueEntry) TDirStatus
@@ -739,4 +739,3 @@ func DsSetRecordType(inRecordReference uint, inNewRecordType *TDataBuffer) TDirS
 func DsVerifyDirRefNum(inDirReference uint) TDirStatus {
 	return _dsVerifyDirRefNum(inDirReference)
 }
-

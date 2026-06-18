@@ -152,4 +152,3 @@ type RNNMatrixInferenceLayerable interface {
 }
 
 var _ RNNMatrixInferenceLayerable = (*RNNMatrixInferenceLayer)(nil)
-

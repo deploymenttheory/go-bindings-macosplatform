@@ -13,18 +13,18 @@ import (
 type CGBitmapInfo int64
 
 const (
-	KCGBitmapAlphaInfoMask CGBitmapInfo = 31
-	KCGBitmapComponentInfoMask CGBitmapInfo = 3840
-	KCGBitmapByteOrderInfoMask CGBitmapInfo = 28672
+	KCGBitmapAlphaInfoMask       CGBitmapInfo = 31
+	KCGBitmapComponentInfoMask   CGBitmapInfo = 3840
+	KCGBitmapByteOrderInfoMask   CGBitmapInfo = 28672
 	KCGBitmapPixelFormatInfoMask CGBitmapInfo = 983040
-	KCGBitmapFloatInfoMask CGBitmapInfo = 3840
-	KCGBitmapByteOrderMask CGBitmapInfo = 28672
-	KCGBitmapFloatComponents CGBitmapInfo = 256
-	KCGBitmapByteOrderDefault CGBitmapInfo = 0
-	KCGBitmapByteOrder16Little CGBitmapInfo = 4096
-	KCGBitmapByteOrder32Little CGBitmapInfo = 8192
-	KCGBitmapByteOrder16Big CGBitmapInfo = 12288
-	KCGBitmapByteOrder32Big CGBitmapInfo = 16384
+	KCGBitmapFloatInfoMask       CGBitmapInfo = 3840
+	KCGBitmapByteOrderMask       CGBitmapInfo = 28672
+	KCGBitmapFloatComponents     CGBitmapInfo = 256
+	KCGBitmapByteOrderDefault    CGBitmapInfo = 0
+	KCGBitmapByteOrder16Little   CGBitmapInfo = 4096
+	KCGBitmapByteOrder32Little   CGBitmapInfo = 8192
+	KCGBitmapByteOrder16Big      CGBitmapInfo = 12288
+	KCGBitmapByteOrder32Big      CGBitmapInfo = 16384
 )
 
 func (e CGBitmapInfo) String() string {
@@ -71,34 +71,34 @@ func (e CGBitmapInfo) String() string {
 type CGBlendMode int64
 
 const (
-	KCGBlendModeNormal CGBlendMode = 0
-	KCGBlendModeMultiply CGBlendMode = 1
-	KCGBlendModeScreen CGBlendMode = 2
-	KCGBlendModeOverlay CGBlendMode = 3
-	KCGBlendModeDarken CGBlendMode = 4
-	KCGBlendModeLighten CGBlendMode = 5
-	KCGBlendModeColorDodge CGBlendMode = 6
-	KCGBlendModeColorBurn CGBlendMode = 7
-	KCGBlendModeSoftLight CGBlendMode = 8
-	KCGBlendModeHardLight CGBlendMode = 9
-	KCGBlendModeDifference CGBlendMode = 10
-	KCGBlendModeExclusion CGBlendMode = 11
-	KCGBlendModeHue CGBlendMode = 12
-	KCGBlendModeSaturation CGBlendMode = 13
-	KCGBlendModeColor CGBlendMode = 14
-	KCGBlendModeLuminosity CGBlendMode = 15
-	KCGBlendModeClear CGBlendMode = 16
-	KCGBlendModeCopy CGBlendMode = 17
-	KCGBlendModeSourceIn CGBlendMode = 18
-	KCGBlendModeSourceOut CGBlendMode = 19
-	KCGBlendModeSourceAtop CGBlendMode = 20
+	KCGBlendModeNormal          CGBlendMode = 0
+	KCGBlendModeMultiply        CGBlendMode = 1
+	KCGBlendModeScreen          CGBlendMode = 2
+	KCGBlendModeOverlay         CGBlendMode = 3
+	KCGBlendModeDarken          CGBlendMode = 4
+	KCGBlendModeLighten         CGBlendMode = 5
+	KCGBlendModeColorDodge      CGBlendMode = 6
+	KCGBlendModeColorBurn       CGBlendMode = 7
+	KCGBlendModeSoftLight       CGBlendMode = 8
+	KCGBlendModeHardLight       CGBlendMode = 9
+	KCGBlendModeDifference      CGBlendMode = 10
+	KCGBlendModeExclusion       CGBlendMode = 11
+	KCGBlendModeHue             CGBlendMode = 12
+	KCGBlendModeSaturation      CGBlendMode = 13
+	KCGBlendModeColor           CGBlendMode = 14
+	KCGBlendModeLuminosity      CGBlendMode = 15
+	KCGBlendModeClear           CGBlendMode = 16
+	KCGBlendModeCopy            CGBlendMode = 17
+	KCGBlendModeSourceIn        CGBlendMode = 18
+	KCGBlendModeSourceOut       CGBlendMode = 19
+	KCGBlendModeSourceAtop      CGBlendMode = 20
 	KCGBlendModeDestinationOver CGBlendMode = 21
-	KCGBlendModeDestinationIn CGBlendMode = 22
-	KCGBlendModeDestinationOut CGBlendMode = 23
+	KCGBlendModeDestinationIn   CGBlendMode = 22
+	KCGBlendModeDestinationOut  CGBlendMode = 23
 	KCGBlendModeDestinationAtop CGBlendMode = 24
-	KCGBlendModeXOR CGBlendMode = 25
-	KCGBlendModePlusDarker CGBlendMode = 26
-	KCGBlendModePlusLighter CGBlendMode = 27
+	KCGBlendModeXOR             CGBlendMode = 25
+	KCGBlendModePlusDarker      CGBlendMode = 26
+	KCGBlendModePlusLighter     CGBlendMode = 27
 )
 
 func (e CGBlendMode) String() string {
@@ -169,7 +169,7 @@ type CGCaptureOptions int64
 
 const (
 	KCGCaptureNoOptions CGCaptureOptions = 0
-	KCGCaptureNoFill CGCaptureOptions = 1
+	KCGCaptureNoFill    CGCaptureOptions = 1
 )
 
 func (e CGCaptureOptions) String() string {
@@ -186,8 +186,8 @@ func (e CGCaptureOptions) String() string {
 type CGColorConversionInfoTransformType int64
 
 const (
-	KCGColorConversionTransformFromSpace CGColorConversionInfoTransformType = 0
-	KCGColorConversionTransformToSpace CGColorConversionInfoTransformType = 1
+	KCGColorConversionTransformFromSpace  CGColorConversionInfoTransformType = 0
+	KCGColorConversionTransformToSpace    CGColorConversionInfoTransformType = 1
 	KCGColorConversionTransformApplySpace CGColorConversionInfoTransformType = 2
 )
 
@@ -207,11 +207,11 @@ func (e CGColorConversionInfoTransformType) String() string {
 type CGColorRenderingIntent int64
 
 const (
-	KCGRenderingIntentDefault CGColorRenderingIntent = 0
+	KCGRenderingIntentDefault              CGColorRenderingIntent = 0
 	KCGRenderingIntentAbsoluteColorimetric CGColorRenderingIntent = 1
 	KCGRenderingIntentRelativeColorimetric CGColorRenderingIntent = 2
-	KCGRenderingIntentPerceptual CGColorRenderingIntent = 3
-	KCGRenderingIntentSaturation CGColorRenderingIntent = 4
+	KCGRenderingIntentPerceptual           CGColorRenderingIntent = 3
+	KCGRenderingIntentSaturation           CGColorRenderingIntent = 4
 )
 
 func (e CGColorRenderingIntent) String() string {
@@ -234,15 +234,15 @@ func (e CGColorRenderingIntent) String() string {
 type CGColorSpaceModel int64
 
 const (
-	KCGColorSpaceModelUnknown CGColorSpaceModel = -1
+	KCGColorSpaceModelUnknown    CGColorSpaceModel = -1
 	KCGColorSpaceModelMonochrome CGColorSpaceModel = 0
-	KCGColorSpaceModelRGB CGColorSpaceModel = 1
-	KCGColorSpaceModelCMYK CGColorSpaceModel = 2
-	KCGColorSpaceModelLab CGColorSpaceModel = 3
-	KCGColorSpaceModelDeviceN CGColorSpaceModel = 4
-	KCGColorSpaceModelIndexed CGColorSpaceModel = 5
-	KCGColorSpaceModelPattern CGColorSpaceModel = 6
-	KCGColorSpaceModelXYZ CGColorSpaceModel = 7
+	KCGColorSpaceModelRGB        CGColorSpaceModel = 1
+	KCGColorSpaceModelCMYK       CGColorSpaceModel = 2
+	KCGColorSpaceModelLab        CGColorSpaceModel = 3
+	KCGColorSpaceModelDeviceN    CGColorSpaceModel = 4
+	KCGColorSpaceModelIndexed    CGColorSpaceModel = 5
+	KCGColorSpaceModelPattern    CGColorSpaceModel = 6
+	KCGColorSpaceModelXYZ        CGColorSpaceModel = 7
 )
 
 func (e CGColorSpaceModel) String() string {
@@ -274,8 +274,8 @@ func (e CGColorSpaceModel) String() string {
 type CGConfigureOption int64
 
 const (
-	KCGConfigureForAppOnly CGConfigureOption = 0
-	KCGConfigureForSession CGConfigureOption = 1
+	KCGConfigureForAppOnly  CGConfigureOption = 0
+	KCGConfigureForSession  CGConfigureOption = 1
 	KCGConfigurePermanently CGConfigureOption = 2
 )
 
@@ -296,17 +296,17 @@ func (e CGConfigureOption) String() string {
 type CGError int64
 
 const (
-	KCGErrorSuccess CGError = 0
-	KCGErrorFailure CGError = 1000
-	KCGErrorIllegalArgument CGError = 1001
+	KCGErrorSuccess           CGError = 0
+	KCGErrorFailure           CGError = 1000
+	KCGErrorIllegalArgument   CGError = 1001
 	KCGErrorInvalidConnection CGError = 1002
-	KCGErrorInvalidContext CGError = 1003
-	KCGErrorCannotComplete CGError = 1004
-	KCGErrorNotImplemented CGError = 1006
-	KCGErrorRangeCheck CGError = 1007
-	KCGErrorTypeCheck CGError = 1008
-	KCGErrorInvalidOperation CGError = 1010
-	KCGErrorNoneAvailable CGError = 1011
+	KCGErrorInvalidContext    CGError = 1003
+	KCGErrorCannotComplete    CGError = 1004
+	KCGErrorNotImplemented    CGError = 1006
+	KCGErrorRangeCheck        CGError = 1007
+	KCGErrorTypeCheck         CGError = 1008
+	KCGErrorInvalidOperation  CGError = 1010
+	KCGErrorNoneAvailable     CGError = 1011
 )
 
 func (e CGError) String() string {
@@ -341,71 +341,71 @@ func (e CGError) String() string {
 type CGEventField int64
 
 const (
-	KCGMouseEventNumber CGEventField = 0
-	KCGMouseEventClickState CGEventField = 1
-	KCGMouseEventPressure CGEventField = 2
-	KCGMouseEventButtonNumber CGEventField = 3
-	KCGMouseEventDeltaX CGEventField = 4
-	KCGMouseEventDeltaY CGEventField = 5
-	KCGMouseEventInstantMouser CGEventField = 6
-	KCGMouseEventSubtype CGEventField = 7
-	KCGKeyboardEventAutorepeat CGEventField = 8
-	KCGKeyboardEventKeycode CGEventField = 9
-	KCGKeyboardEventKeyboardType CGEventField = 10
-	KCGScrollWheelEventDeltaAxis1 CGEventField = 11
-	KCGScrollWheelEventDeltaAxis2 CGEventField = 12
-	KCGScrollWheelEventDeltaAxis3 CGEventField = 13
-	KCGScrollWheelEventFixedPtDeltaAxis1 CGEventField = 93
-	KCGScrollWheelEventFixedPtDeltaAxis2 CGEventField = 94
-	KCGScrollWheelEventFixedPtDeltaAxis3 CGEventField = 95
-	KCGScrollWheelEventPointDeltaAxis1 CGEventField = 96
-	KCGScrollWheelEventPointDeltaAxis2 CGEventField = 97
-	KCGScrollWheelEventPointDeltaAxis3 CGEventField = 98
-	KCGScrollWheelEventScrollPhase CGEventField = 99
-	KCGScrollWheelEventScrollCount CGEventField = 100
-	KCGScrollWheelEventMomentumPhase CGEventField = 123
-	KCGScrollWheelEventInstantMouser CGEventField = 14
-	KCGTabletEventPointX CGEventField = 15
-	KCGTabletEventPointY CGEventField = 16
-	KCGTabletEventPointZ CGEventField = 17
-	KCGTabletEventPointButtons CGEventField = 18
-	KCGTabletEventPointPressure CGEventField = 19
-	KCGTabletEventTiltX CGEventField = 20
-	KCGTabletEventTiltY CGEventField = 21
-	KCGTabletEventRotation CGEventField = 22
-	KCGTabletEventTangentialPressure CGEventField = 23
-	KCGTabletEventDeviceID CGEventField = 24
-	KCGTabletEventVendor1 CGEventField = 25
-	KCGTabletEventVendor2 CGEventField = 26
-	KCGTabletEventVendor3 CGEventField = 27
-	KCGTabletProximityEventVendorID CGEventField = 28
-	KCGTabletProximityEventTabletID CGEventField = 29
-	KCGTabletProximityEventPointerID CGEventField = 30
-	KCGTabletProximityEventDeviceID CGEventField = 31
-	KCGTabletProximityEventSystemTabletID CGEventField = 32
-	KCGTabletProximityEventVendorPointerType CGEventField = 33
-	KCGTabletProximityEventVendorPointerSerialNumber CGEventField = 34
-	KCGTabletProximityEventVendorUniqueID CGEventField = 35
-	KCGTabletProximityEventCapabilityMask CGEventField = 36
-	KCGTabletProximityEventPointerType CGEventField = 37
-	KCGTabletProximityEventEnterProximity CGEventField = 38
-	KCGEventTargetProcessSerialNumber CGEventField = 39
-	KCGEventTargetUnixProcessID CGEventField = 40
-	KCGEventSourceUnixProcessID CGEventField = 41
-	KCGEventSourceUserData CGEventField = 42
-	KCGEventSourceUserID CGEventField = 43
-	KCGEventSourceGroupID CGEventField = 44
-	KCGEventSourceStateID CGEventField = 45
-	KCGScrollWheelEventIsContinuous CGEventField = 88
-	KCGMouseEventWindowUnderMousePointer CGEventField = 91
+	KCGMouseEventNumber                                        CGEventField = 0
+	KCGMouseEventClickState                                    CGEventField = 1
+	KCGMouseEventPressure                                      CGEventField = 2
+	KCGMouseEventButtonNumber                                  CGEventField = 3
+	KCGMouseEventDeltaX                                        CGEventField = 4
+	KCGMouseEventDeltaY                                        CGEventField = 5
+	KCGMouseEventInstantMouser                                 CGEventField = 6
+	KCGMouseEventSubtype                                       CGEventField = 7
+	KCGKeyboardEventAutorepeat                                 CGEventField = 8
+	KCGKeyboardEventKeycode                                    CGEventField = 9
+	KCGKeyboardEventKeyboardType                               CGEventField = 10
+	KCGScrollWheelEventDeltaAxis1                              CGEventField = 11
+	KCGScrollWheelEventDeltaAxis2                              CGEventField = 12
+	KCGScrollWheelEventDeltaAxis3                              CGEventField = 13
+	KCGScrollWheelEventFixedPtDeltaAxis1                       CGEventField = 93
+	KCGScrollWheelEventFixedPtDeltaAxis2                       CGEventField = 94
+	KCGScrollWheelEventFixedPtDeltaAxis3                       CGEventField = 95
+	KCGScrollWheelEventPointDeltaAxis1                         CGEventField = 96
+	KCGScrollWheelEventPointDeltaAxis2                         CGEventField = 97
+	KCGScrollWheelEventPointDeltaAxis3                         CGEventField = 98
+	KCGScrollWheelEventScrollPhase                             CGEventField = 99
+	KCGScrollWheelEventScrollCount                             CGEventField = 100
+	KCGScrollWheelEventMomentumPhase                           CGEventField = 123
+	KCGScrollWheelEventInstantMouser                           CGEventField = 14
+	KCGTabletEventPointX                                       CGEventField = 15
+	KCGTabletEventPointY                                       CGEventField = 16
+	KCGTabletEventPointZ                                       CGEventField = 17
+	KCGTabletEventPointButtons                                 CGEventField = 18
+	KCGTabletEventPointPressure                                CGEventField = 19
+	KCGTabletEventTiltX                                        CGEventField = 20
+	KCGTabletEventTiltY                                        CGEventField = 21
+	KCGTabletEventRotation                                     CGEventField = 22
+	KCGTabletEventTangentialPressure                           CGEventField = 23
+	KCGTabletEventDeviceID                                     CGEventField = 24
+	KCGTabletEventVendor1                                      CGEventField = 25
+	KCGTabletEventVendor2                                      CGEventField = 26
+	KCGTabletEventVendor3                                      CGEventField = 27
+	KCGTabletProximityEventVendorID                            CGEventField = 28
+	KCGTabletProximityEventTabletID                            CGEventField = 29
+	KCGTabletProximityEventPointerID                           CGEventField = 30
+	KCGTabletProximityEventDeviceID                            CGEventField = 31
+	KCGTabletProximityEventSystemTabletID                      CGEventField = 32
+	KCGTabletProximityEventVendorPointerType                   CGEventField = 33
+	KCGTabletProximityEventVendorPointerSerialNumber           CGEventField = 34
+	KCGTabletProximityEventVendorUniqueID                      CGEventField = 35
+	KCGTabletProximityEventCapabilityMask                      CGEventField = 36
+	KCGTabletProximityEventPointerType                         CGEventField = 37
+	KCGTabletProximityEventEnterProximity                      CGEventField = 38
+	KCGEventTargetProcessSerialNumber                          CGEventField = 39
+	KCGEventTargetUnixProcessID                                CGEventField = 40
+	KCGEventSourceUnixProcessID                                CGEventField = 41
+	KCGEventSourceUserData                                     CGEventField = 42
+	KCGEventSourceUserID                                       CGEventField = 43
+	KCGEventSourceGroupID                                      CGEventField = 44
+	KCGEventSourceStateID                                      CGEventField = 45
+	KCGScrollWheelEventIsContinuous                            CGEventField = 88
+	KCGMouseEventWindowUnderMousePointer                       CGEventField = 91
 	KCGMouseEventWindowUnderMousePointerThatCanHandleThisEvent CGEventField = 92
-	KCGEventUnacceleratedPointerMovementX CGEventField = 170
-	KCGEventUnacceleratedPointerMovementY CGEventField = 171
-	KCGScrollWheelEventMomentumOptionPhase CGEventField = 173
-	KCGScrollWheelEventAcceleratedDeltaAxis1 CGEventField = 176
-	KCGScrollWheelEventAcceleratedDeltaAxis2 CGEventField = 175
-	KCGScrollWheelEventRawDeltaAxis1 CGEventField = 178
-	KCGScrollWheelEventRawDeltaAxis2 CGEventField = 177
+	KCGEventUnacceleratedPointerMovementX                      CGEventField = 170
+	KCGEventUnacceleratedPointerMovementY                      CGEventField = 171
+	KCGScrollWheelEventMomentumOptionPhase                     CGEventField = 173
+	KCGScrollWheelEventAcceleratedDeltaAxis1                   CGEventField = 176
+	KCGScrollWheelEventAcceleratedDeltaAxis2                   CGEventField = 175
+	KCGScrollWheelEventRawDeltaAxis1                           CGEventField = 178
+	KCGScrollWheelEventRawDeltaAxis2                           CGEventField = 177
 )
 
 func (e CGEventField) String() string {
@@ -549,7 +549,7 @@ func (e CGEventField) String() string {
 type CGEventFilterMask int64
 
 const (
-	KCGEventFilterMaskPermitLocalMouseEvents CGEventFilterMask = 1
+	KCGEventFilterMaskPermitLocalMouseEvents    CGEventFilterMask = 1
 	KCGEventFilterMaskPermitLocalKeyboardEvents CGEventFilterMask = 2
 	KCGEventFilterMaskPermitSystemDefinedEvents CGEventFilterMask = 4
 )
@@ -575,14 +575,14 @@ func (e CGEventFilterMask) String() string {
 type CGEventFlags int64
 
 const (
-	KCGEventFlagMaskAlphaShift CGEventFlags = 65536
-	KCGEventFlagMaskShift CGEventFlags = 131072
-	KCGEventFlagMaskControl CGEventFlags = 262144
-	KCGEventFlagMaskAlternate CGEventFlags = 524288
-	KCGEventFlagMaskCommand CGEventFlags = 1048576
-	KCGEventFlagMaskHelp CGEventFlags = 4194304
-	KCGEventFlagMaskSecondaryFn CGEventFlags = 8388608
-	KCGEventFlagMaskNumericPad CGEventFlags = 2097152
+	KCGEventFlagMaskAlphaShift   CGEventFlags = 65536
+	KCGEventFlagMaskShift        CGEventFlags = 131072
+	KCGEventFlagMaskControl      CGEventFlags = 262144
+	KCGEventFlagMaskAlternate    CGEventFlags = 524288
+	KCGEventFlagMaskCommand      CGEventFlags = 1048576
+	KCGEventFlagMaskHelp         CGEventFlags = 4194304
+	KCGEventFlagMaskSecondaryFn  CGEventFlags = 8388608
+	KCGEventFlagMaskNumericPad   CGEventFlags = 2097152
 	KCGEventFlagMaskNonCoalesced CGEventFlags = 256
 )
 
@@ -624,9 +624,9 @@ func (e CGEventFlags) String() string {
 type CGEventSourceStateID int64
 
 const (
-	KCGEventSourceStatePrivate CGEventSourceStateID = -1
+	KCGEventSourceStatePrivate              CGEventSourceStateID = -1
 	KCGEventSourceStateCombinedSessionState CGEventSourceStateID = 0
-	KCGEventSourceStateHIDSystemState CGEventSourceStateID = 1
+	KCGEventSourceStateHIDSystemState       CGEventSourceStateID = 1
 )
 
 func (e CGEventSourceStateID) String() string {
@@ -646,8 +646,8 @@ type CGEventSuppressionState int64
 
 const (
 	KCGEventSuppressionStateSuppressionInterval CGEventSuppressionState = 0
-	KCGEventSuppressionStateRemoteMouseDrag CGEventSuppressionState = 1
-	KCGNumberOfEventSuppressionStates CGEventSuppressionState = 2
+	KCGEventSuppressionStateRemoteMouseDrag     CGEventSuppressionState = 1
+	KCGNumberOfEventSuppressionStates           CGEventSuppressionState = 2
 )
 
 func (e CGEventSuppressionState) String() string {
@@ -666,8 +666,8 @@ func (e CGEventSuppressionState) String() string {
 type CGEventTapLocation int64
 
 const (
-	KCGHIDEventTap CGEventTapLocation = 0
-	KCGSessionEventTap CGEventTapLocation = 1
+	KCGHIDEventTap              CGEventTapLocation = 0
+	KCGSessionEventTap          CGEventTapLocation = 1
 	KCGAnnotatedSessionEventTap CGEventTapLocation = 2
 )
 
@@ -687,7 +687,7 @@ func (e CGEventTapLocation) String() string {
 type CGEventTapOptions int64
 
 const (
-	KCGEventTapOptionDefault CGEventTapOptions = 0
+	KCGEventTapOptionDefault    CGEventTapOptions = 0
 	KCGEventTapOptionListenOnly CGEventTapOptions = 1
 )
 
@@ -723,24 +723,24 @@ func (e CGEventTapPlacement) String() string {
 type CGEventType int64
 
 const (
-	KCGEventNull CGEventType = 0
-	KCGEventLeftMouseDown CGEventType = 1
-	KCGEventLeftMouseUp CGEventType = 2
-	KCGEventRightMouseDown CGEventType = 3
-	KCGEventRightMouseUp CGEventType = 4
-	KCGEventMouseMoved CGEventType = 5
-	KCGEventLeftMouseDragged CGEventType = 6
-	KCGEventRightMouseDragged CGEventType = 7
-	KCGEventKeyDown CGEventType = 10
-	KCGEventKeyUp CGEventType = 11
-	KCGEventFlagsChanged CGEventType = 12
-	KCGEventScrollWheel CGEventType = 22
-	KCGEventTabletPointer CGEventType = 23
-	KCGEventTabletProximity CGEventType = 24
-	KCGEventOtherMouseDown CGEventType = 25
-	KCGEventOtherMouseUp CGEventType = 26
-	KCGEventOtherMouseDragged CGEventType = 27
-	KCGEventTapDisabledByTimeout CGEventType = 4294967294
+	KCGEventNull                   CGEventType = 0
+	KCGEventLeftMouseDown          CGEventType = 1
+	KCGEventLeftMouseUp            CGEventType = 2
+	KCGEventRightMouseDown         CGEventType = 3
+	KCGEventRightMouseUp           CGEventType = 4
+	KCGEventMouseMoved             CGEventType = 5
+	KCGEventLeftMouseDragged       CGEventType = 6
+	KCGEventRightMouseDragged      CGEventType = 7
+	KCGEventKeyDown                CGEventType = 10
+	KCGEventKeyUp                  CGEventType = 11
+	KCGEventFlagsChanged           CGEventType = 12
+	KCGEventScrollWheel            CGEventType = 22
+	KCGEventTabletPointer          CGEventType = 23
+	KCGEventTabletProximity        CGEventType = 24
+	KCGEventOtherMouseDown         CGEventType = 25
+	KCGEventOtherMouseUp           CGEventType = 26
+	KCGEventOtherMouseDragged      CGEventType = 27
+	KCGEventTapDisabledByTimeout   CGEventType = 4294967294
 	KCGEventTapDisabledByUserInput CGEventType = 4294967295
 )
 
@@ -792,8 +792,8 @@ func (e CGEventType) String() string {
 type CGFontPostScriptFormat int64
 
 const (
-	KCGFontPostScriptFormatType1 CGFontPostScriptFormat = 1
-	KCGFontPostScriptFormatType3 CGFontPostScriptFormat = 3
+	KCGFontPostScriptFormatType1  CGFontPostScriptFormat = 1
+	KCGFontPostScriptFormatType3  CGFontPostScriptFormat = 3
 	KCGFontPostScriptFormatType42 CGFontPostScriptFormat = 42
 )
 
@@ -815,7 +815,7 @@ type CGGradientDrawingOptions int64
 
 const (
 	KCGGradientDrawsBeforeStartLocation CGGradientDrawingOptions = 1
-	KCGGradientDrawsAfterEndLocation CGGradientDrawingOptions = 2
+	KCGGradientDrawsAfterEndLocation    CGGradientDrawingOptions = 2
 )
 
 func (e CGGradientDrawingOptions) String() string {
@@ -835,14 +835,14 @@ func (e CGGradientDrawingOptions) String() string {
 type CGImageAlphaInfo int64
 
 const (
-	KCGImageAlphaNone CGImageAlphaInfo = 0
-	KCGImageAlphaPremultipliedLast CGImageAlphaInfo = 1
+	KCGImageAlphaNone               CGImageAlphaInfo = 0
+	KCGImageAlphaPremultipliedLast  CGImageAlphaInfo = 1
 	KCGImageAlphaPremultipliedFirst CGImageAlphaInfo = 2
-	KCGImageAlphaLast CGImageAlphaInfo = 3
-	KCGImageAlphaFirst CGImageAlphaInfo = 4
-	KCGImageAlphaNoneSkipLast CGImageAlphaInfo = 5
-	KCGImageAlphaNoneSkipFirst CGImageAlphaInfo = 6
-	KCGImageAlphaOnly CGImageAlphaInfo = 7
+	KCGImageAlphaLast               CGImageAlphaInfo = 3
+	KCGImageAlphaFirst              CGImageAlphaInfo = 4
+	KCGImageAlphaNoneSkipLast       CGImageAlphaInfo = 5
+	KCGImageAlphaNoneSkipFirst      CGImageAlphaInfo = 6
+	KCGImageAlphaOnly               CGImageAlphaInfo = 7
 )
 
 func (e CGImageAlphaInfo) String() string {
@@ -871,14 +871,14 @@ func (e CGImageAlphaInfo) String() string {
 type CGImageByteOrderInfo int64
 
 const (
-	KCGImageByteOrderMask CGImageByteOrderInfo = 28672
-	KCGImageByteOrderDefault CGImageByteOrderInfo = 0
+	KCGImageByteOrderMask     CGImageByteOrderInfo = 28672
+	KCGImageByteOrderDefault  CGImageByteOrderInfo = 0
 	KCGImageByteOrder16Little CGImageByteOrderInfo = 4096
 	KCGImageByteOrder32Little CGImageByteOrderInfo = 8192
-	KCGImageByteOrder16Big CGImageByteOrderInfo = 12288
-	KCGImageByteOrder32Big CGImageByteOrderInfo = 16384
-	KCGImageByteOrder16Host CGImageByteOrderInfo = 4096
-	KCGImageByteOrder32Host CGImageByteOrderInfo = 8192
+	KCGImageByteOrder16Big    CGImageByteOrderInfo = 12288
+	KCGImageByteOrder32Big    CGImageByteOrderInfo = 16384
+	KCGImageByteOrder16Host   CGImageByteOrderInfo = 4096
+	KCGImageByteOrder32Host   CGImageByteOrderInfo = 8192
 )
 
 func (e CGImageByteOrderInfo) String() string {
@@ -904,7 +904,7 @@ type CGImageComponentInfo int64
 
 const (
 	KCGImageComponentInteger CGImageComponentInfo = 0
-	KCGImageComponentFloat CGImageComponentInfo = 256
+	KCGImageComponentFloat   CGImageComponentInfo = 256
 )
 
 func (e CGImageComponentInfo) String() string {
@@ -921,12 +921,12 @@ func (e CGImageComponentInfo) String() string {
 type CGImagePixelFormatInfo int64
 
 const (
-	KCGImagePixelFormatMask CGImagePixelFormatInfo = 983040
-	KCGImagePixelFormatPacked CGImagePixelFormatInfo = 0
-	KCGImagePixelFormatRGB555 CGImagePixelFormatInfo = 65536
-	KCGImagePixelFormatRGB565 CGImagePixelFormatInfo = 131072
+	KCGImagePixelFormatMask      CGImagePixelFormatInfo = 983040
+	KCGImagePixelFormatPacked    CGImagePixelFormatInfo = 0
+	KCGImagePixelFormatRGB555    CGImagePixelFormatInfo = 65536
+	KCGImagePixelFormatRGB565    CGImagePixelFormatInfo = 131072
 	KCGImagePixelFormatRGB101010 CGImagePixelFormatInfo = 196608
-	KCGImagePixelFormatRGBCIF10 CGImagePixelFormatInfo = 262144
+	KCGImagePixelFormatRGBCIF10  CGImagePixelFormatInfo = 262144
 )
 
 func (e CGImagePixelFormatInfo) String() string {
@@ -952,10 +952,10 @@ type CGInterpolationQuality int64
 
 const (
 	KCGInterpolationDefault CGInterpolationQuality = 0
-	KCGInterpolationNone CGInterpolationQuality = 1
-	KCGInterpolationLow CGInterpolationQuality = 2
-	KCGInterpolationMedium CGInterpolationQuality = 4
-	KCGInterpolationHigh CGInterpolationQuality = 3
+	KCGInterpolationNone    CGInterpolationQuality = 1
+	KCGInterpolationLow     CGInterpolationQuality = 2
+	KCGInterpolationMedium  CGInterpolationQuality = 4
+	KCGInterpolationHigh    CGInterpolationQuality = 3
 )
 
 func (e CGInterpolationQuality) String() string {
@@ -978,8 +978,8 @@ func (e CGInterpolationQuality) String() string {
 type CGLineCap int64
 
 const (
-	KCGLineCapButt CGLineCap = 0
-	KCGLineCapRound CGLineCap = 1
+	KCGLineCapButt   CGLineCap = 0
+	KCGLineCapRound  CGLineCap = 1
 	KCGLineCapSquare CGLineCap = 2
 )
 
@@ -1020,8 +1020,8 @@ func (e CGLineJoin) String() string {
 type CGMouseButton int64
 
 const (
-	KCGMouseButtonLeft CGMouseButton = 0
-	KCGMouseButtonRight CGMouseButton = 1
+	KCGMouseButtonLeft   CGMouseButton = 0
+	KCGMouseButtonRight  CGMouseButton = 1
 	KCGMouseButtonCenter CGMouseButton = 2
 )
 
@@ -1042,14 +1042,14 @@ func (e CGMouseButton) String() string {
 type CGPDFAccessPermissions int64
 
 const (
-	KCGPDFAllowsLowQualityPrinting CGPDFAccessPermissions = 1
-	KCGPDFAllowsHighQualityPrinting CGPDFAccessPermissions = 2
-	KCGPDFAllowsDocumentChanges CGPDFAccessPermissions = 4
-	KCGPDFAllowsDocumentAssembly CGPDFAccessPermissions = 8
-	KCGPDFAllowsContentCopying CGPDFAccessPermissions = 16
+	KCGPDFAllowsLowQualityPrinting   CGPDFAccessPermissions = 1
+	KCGPDFAllowsHighQualityPrinting  CGPDFAccessPermissions = 2
+	KCGPDFAllowsDocumentChanges      CGPDFAccessPermissions = 4
+	KCGPDFAllowsDocumentAssembly     CGPDFAccessPermissions = 8
+	KCGPDFAllowsContentCopying       CGPDFAccessPermissions = 16
 	KCGPDFAllowsContentAccessibility CGPDFAccessPermissions = 32
-	KCGPDFAllowsCommenting CGPDFAccessPermissions = 64
-	KCGPDFAllowsFormFieldEntry CGPDFAccessPermissions = 128
+	KCGPDFAllowsCommenting           CGPDFAccessPermissions = 64
+	KCGPDFAllowsFormFieldEntry       CGPDFAccessPermissions = 128
 )
 
 func (e CGPDFAccessPermissions) String() string {
@@ -1088,10 +1088,10 @@ type CGPDFBox int64
 
 const (
 	KCGPDFMediaBox CGPDFBox = 0
-	KCGPDFCropBox CGPDFBox = 1
+	KCGPDFCropBox  CGPDFBox = 1
 	KCGPDFBleedBox CGPDFBox = 2
-	KCGPDFTrimBox CGPDFBox = 3
-	KCGPDFArtBox CGPDFBox = 4
+	KCGPDFTrimBox  CGPDFBox = 3
+	KCGPDFArtBox   CGPDFBox = 4
 )
 
 func (e CGPDFBox) String() string {
@@ -1114,9 +1114,9 @@ func (e CGPDFBox) String() string {
 type CGPDFDataFormat int64
 
 const (
-	CGPDFDataFormatRaw CGPDFDataFormat = 0
+	CGPDFDataFormatRaw         CGPDFDataFormat = 0
 	CGPDFDataFormatJPEGEncoded CGPDFDataFormat = 1
-	CGPDFDataFormatJPEG2000 CGPDFDataFormat = 2
+	CGPDFDataFormatJPEG2000    CGPDFDataFormat = 2
 )
 
 func (e CGPDFDataFormat) String() string {
@@ -1135,15 +1135,15 @@ func (e CGPDFDataFormat) String() string {
 type CGPDFObjectType int64
 
 const (
-	KCGPDFObjectTypeNull CGPDFObjectType = 1
-	KCGPDFObjectTypeBoolean CGPDFObjectType = 2
-	KCGPDFObjectTypeInteger CGPDFObjectType = 3
-	KCGPDFObjectTypeReal CGPDFObjectType = 4
-	KCGPDFObjectTypeName CGPDFObjectType = 5
-	KCGPDFObjectTypeString CGPDFObjectType = 6
-	KCGPDFObjectTypeArray CGPDFObjectType = 7
+	KCGPDFObjectTypeNull       CGPDFObjectType = 1
+	KCGPDFObjectTypeBoolean    CGPDFObjectType = 2
+	KCGPDFObjectTypeInteger    CGPDFObjectType = 3
+	KCGPDFObjectTypeReal       CGPDFObjectType = 4
+	KCGPDFObjectTypeName       CGPDFObjectType = 5
+	KCGPDFObjectTypeString     CGPDFObjectType = 6
+	KCGPDFObjectTypeArray      CGPDFObjectType = 7
 	KCGPDFObjectTypeDictionary CGPDFObjectType = 8
-	KCGPDFObjectTypeStream CGPDFObjectType = 9
+	KCGPDFObjectTypeStream     CGPDFObjectType = 9
 )
 
 func (e CGPDFObjectType) String() string {
@@ -1174,56 +1174,56 @@ func (e CGPDFObjectType) String() string {
 type CGPDFTagType int64
 
 const (
-	CGPDFTagTypeDocument CGPDFTagType = 100
-	CGPDFTagTypePart CGPDFTagType = 101
-	CGPDFTagTypeArt CGPDFTagType = 102
-	CGPDFTagTypeSection CGPDFTagType = 103
-	CGPDFTagTypeDiv CGPDFTagType = 104
-	CGPDFTagTypeBlockQuote CGPDFTagType = 105
-	CGPDFTagTypeCaption CGPDFTagType = 106
-	CGPDFTagTypeTOC CGPDFTagType = 107
-	CGPDFTagTypeTOCI CGPDFTagType = 108
-	CGPDFTagTypeIndex CGPDFTagType = 109
-	CGPDFTagTypeNonStructure CGPDFTagType = 110
-	CGPDFTagTypePrivate CGPDFTagType = 111
-	CGPDFTagTypeParagraph CGPDFTagType = 200
-	CGPDFTagTypeHeader CGPDFTagType = 201
-	CGPDFTagTypeHeader1 CGPDFTagType = 202
-	CGPDFTagTypeHeader2 CGPDFTagType = 203
-	CGPDFTagTypeHeader3 CGPDFTagType = 204
-	CGPDFTagTypeHeader4 CGPDFTagType = 205
-	CGPDFTagTypeHeader5 CGPDFTagType = 206
-	CGPDFTagTypeHeader6 CGPDFTagType = 207
-	CGPDFTagTypeList CGPDFTagType = 300
-	CGPDFTagTypeListItem CGPDFTagType = 301
-	CGPDFTagTypeLabel CGPDFTagType = 302
-	CGPDFTagTypeListBody CGPDFTagType = 303
-	CGPDFTagTypeTable CGPDFTagType = 400
-	CGPDFTagTypeTableRow CGPDFTagType = 401
-	CGPDFTagTypeTableHeaderCell CGPDFTagType = 402
-	CGPDFTagTypeTableDataCell CGPDFTagType = 403
-	CGPDFTagTypeTableHeader CGPDFTagType = 404
-	CGPDFTagTypeTableBody CGPDFTagType = 405
-	CGPDFTagTypeTableFooter CGPDFTagType = 406
-	CGPDFTagTypeSpan CGPDFTagType = 500
-	CGPDFTagTypeQuote CGPDFTagType = 501
-	CGPDFTagTypeNote CGPDFTagType = 502
-	CGPDFTagTypeReference CGPDFTagType = 503
-	CGPDFTagTypeBibliography CGPDFTagType = 504
-	CGPDFTagTypeCode CGPDFTagType = 505
-	CGPDFTagTypeLink CGPDFTagType = 506
-	CGPDFTagTypeAnnotation CGPDFTagType = 507
-	CGPDFTagTypeRuby CGPDFTagType = 600
-	CGPDFTagTypeRubyBaseText CGPDFTagType = 601
+	CGPDFTagTypeDocument           CGPDFTagType = 100
+	CGPDFTagTypePart               CGPDFTagType = 101
+	CGPDFTagTypeArt                CGPDFTagType = 102
+	CGPDFTagTypeSection            CGPDFTagType = 103
+	CGPDFTagTypeDiv                CGPDFTagType = 104
+	CGPDFTagTypeBlockQuote         CGPDFTagType = 105
+	CGPDFTagTypeCaption            CGPDFTagType = 106
+	CGPDFTagTypeTOC                CGPDFTagType = 107
+	CGPDFTagTypeTOCI               CGPDFTagType = 108
+	CGPDFTagTypeIndex              CGPDFTagType = 109
+	CGPDFTagTypeNonStructure       CGPDFTagType = 110
+	CGPDFTagTypePrivate            CGPDFTagType = 111
+	CGPDFTagTypeParagraph          CGPDFTagType = 200
+	CGPDFTagTypeHeader             CGPDFTagType = 201
+	CGPDFTagTypeHeader1            CGPDFTagType = 202
+	CGPDFTagTypeHeader2            CGPDFTagType = 203
+	CGPDFTagTypeHeader3            CGPDFTagType = 204
+	CGPDFTagTypeHeader4            CGPDFTagType = 205
+	CGPDFTagTypeHeader5            CGPDFTagType = 206
+	CGPDFTagTypeHeader6            CGPDFTagType = 207
+	CGPDFTagTypeList               CGPDFTagType = 300
+	CGPDFTagTypeListItem           CGPDFTagType = 301
+	CGPDFTagTypeLabel              CGPDFTagType = 302
+	CGPDFTagTypeListBody           CGPDFTagType = 303
+	CGPDFTagTypeTable              CGPDFTagType = 400
+	CGPDFTagTypeTableRow           CGPDFTagType = 401
+	CGPDFTagTypeTableHeaderCell    CGPDFTagType = 402
+	CGPDFTagTypeTableDataCell      CGPDFTagType = 403
+	CGPDFTagTypeTableHeader        CGPDFTagType = 404
+	CGPDFTagTypeTableBody          CGPDFTagType = 405
+	CGPDFTagTypeTableFooter        CGPDFTagType = 406
+	CGPDFTagTypeSpan               CGPDFTagType = 500
+	CGPDFTagTypeQuote              CGPDFTagType = 501
+	CGPDFTagTypeNote               CGPDFTagType = 502
+	CGPDFTagTypeReference          CGPDFTagType = 503
+	CGPDFTagTypeBibliography       CGPDFTagType = 504
+	CGPDFTagTypeCode               CGPDFTagType = 505
+	CGPDFTagTypeLink               CGPDFTagType = 506
+	CGPDFTagTypeAnnotation         CGPDFTagType = 507
+	CGPDFTagTypeRuby               CGPDFTagType = 600
+	CGPDFTagTypeRubyBaseText       CGPDFTagType = 601
 	CGPDFTagTypeRubyAnnotationText CGPDFTagType = 602
-	CGPDFTagTypeRubyPunctuation CGPDFTagType = 603
-	CGPDFTagTypeWarichu CGPDFTagType = 604
-	CGPDFTagTypeWarichuText CGPDFTagType = 605
+	CGPDFTagTypeRubyPunctuation    CGPDFTagType = 603
+	CGPDFTagTypeWarichu            CGPDFTagType = 604
+	CGPDFTagTypeWarichuText        CGPDFTagType = 605
 	CGPDFTagTypeWarichuPunctiation CGPDFTagType = 606
-	CGPDFTagTypeFigure CGPDFTagType = 700
-	CGPDFTagTypeFormula CGPDFTagType = 701
-	CGPDFTagTypeForm CGPDFTagType = 702
-	CGPDFTagTypeObject CGPDFTagType = 800
+	CGPDFTagTypeFigure             CGPDFTagType = 700
+	CGPDFTagTypeFormula            CGPDFTagType = 701
+	CGPDFTagTypeForm               CGPDFTagType = 702
+	CGPDFTagTypeObject             CGPDFTagType = 800
 )
 
 func (e CGPDFTagType) String() string {
@@ -1336,10 +1336,10 @@ func (e CGPDFTagType) String() string {
 type CGPathDrawingMode int64
 
 const (
-	KCGPathFill CGPathDrawingMode = 0
-	KCGPathEOFill CGPathDrawingMode = 1
-	KCGPathStroke CGPathDrawingMode = 2
-	KCGPathFillStroke CGPathDrawingMode = 3
+	KCGPathFill         CGPathDrawingMode = 0
+	KCGPathEOFill       CGPathDrawingMode = 1
+	KCGPathStroke       CGPathDrawingMode = 2
+	KCGPathFillStroke   CGPathDrawingMode = 3
 	KCGPathEOFillStroke CGPathDrawingMode = 4
 )
 
@@ -1363,9 +1363,9 @@ func (e CGPathDrawingMode) String() string {
 type CGPatternTiling int64
 
 const (
-	KCGPatternTilingNoDistortion CGPatternTiling = 0
+	KCGPatternTilingNoDistortion                     CGPatternTiling = 0
 	KCGPatternTilingConstantSpacingMinimalDistortion CGPatternTiling = 1
-	KCGPatternTilingConstantSpacing CGPatternTiling = 2
+	KCGPatternTilingConstantSpacing                  CGPatternTiling = 2
 )
 
 func (e CGPatternTiling) String() string {
@@ -1385,8 +1385,8 @@ func (e CGPatternTiling) String() string {
 type CGScreenUpdateOperation int64
 
 const (
-	KCGScreenUpdateOperationRefresh CGScreenUpdateOperation = 0
-	KCGScreenUpdateOperationMove CGScreenUpdateOperation = 1
+	KCGScreenUpdateOperationRefresh                    CGScreenUpdateOperation = 0
+	KCGScreenUpdateOperationMove                       CGScreenUpdateOperation = 1
 	KCGScreenUpdateOperationReducedDirtyRectangleCount CGScreenUpdateOperation = 2147483648
 )
 
@@ -1408,7 +1408,7 @@ type CGScrollEventUnit int64
 
 const (
 	KCGScrollEventUnitPixel CGScrollEventUnit = 0
-	KCGScrollEventUnitLine CGScrollEventUnit = 1
+	KCGScrollEventUnitLine  CGScrollEventUnit = 1
 )
 
 func (e CGScrollEventUnit) String() string {
@@ -1425,14 +1425,14 @@ func (e CGScrollEventUnit) String() string {
 type CGTextDrawingMode int64
 
 const (
-	KCGTextFill CGTextDrawingMode = 0
-	KCGTextStroke CGTextDrawingMode = 1
-	KCGTextFillStroke CGTextDrawingMode = 2
-	KCGTextInvisible CGTextDrawingMode = 3
-	KCGTextFillClip CGTextDrawingMode = 4
-	KCGTextStrokeClip CGTextDrawingMode = 5
+	KCGTextFill           CGTextDrawingMode = 0
+	KCGTextStroke         CGTextDrawingMode = 1
+	KCGTextFillStroke     CGTextDrawingMode = 2
+	KCGTextInvisible      CGTextDrawingMode = 3
+	KCGTextFillClip       CGTextDrawingMode = 4
+	KCGTextStrokeClip     CGTextDrawingMode = 5
 	KCGTextFillStrokeClip CGTextDrawingMode = 6
-	KCGTextClip CGTextDrawingMode = 7
+	KCGTextClip           CGTextDrawingMode = 7
 )
 
 func (e CGTextDrawingMode) String() string {
@@ -1463,7 +1463,7 @@ type CGTextEncoding int64
 
 const (
 	KCGEncodingFontSpecific CGTextEncoding = 0
-	KCGEncodingMacRoman CGTextEncoding = 1
+	KCGEncodingMacRoman     CGTextEncoding = 1
 )
 
 func (e CGTextEncoding) String() string {
@@ -1480,12 +1480,12 @@ func (e CGTextEncoding) String() string {
 type CGToneMapping int64
 
 const (
-	KCGToneMappingDefault CGToneMapping = 0
+	KCGToneMappingDefault                  CGToneMapping = 0
 	KCGToneMappingImageSpecificLumaScaling CGToneMapping = 1
-	KCGToneMappingReferenceWhiteBased CGToneMapping = 2
-	KCGToneMappingITURecommended CGToneMapping = 3
-	KCGToneMappingEXRGamma CGToneMapping = 4
-	KCGToneMappingNone CGToneMapping = 5
+	KCGToneMappingReferenceWhiteBased      CGToneMapping = 2
+	KCGToneMappingITURecommended           CGToneMapping = 3
+	KCGToneMappingEXRGamma                 CGToneMapping = 4
+	KCGToneMappingNone                     CGToneMapping = 5
 )
 
 func (e CGToneMapping) String() string {
@@ -1511,12 +1511,12 @@ func (e CGToneMapping) String() string {
 type CGWindowImageOption int64
 
 const (
-	KCGWindowImageDefault CGWindowImageOption = 0
+	KCGWindowImageDefault             CGWindowImageOption = 0
 	KCGWindowImageBoundsIgnoreFraming CGWindowImageOption = 1
-	KCGWindowImageShouldBeOpaque CGWindowImageOption = 2
-	KCGWindowImageOnlyShadows CGWindowImageOption = 4
-	KCGWindowImageBestResolution CGWindowImageOption = 8
-	KCGWindowImageNominalResolution CGWindowImageOption = 16
+	KCGWindowImageShouldBeOpaque      CGWindowImageOption = 2
+	KCGWindowImageOnlyShadows         CGWindowImageOption = 4
+	KCGWindowImageBestResolution      CGWindowImageOption = 8
+	KCGWindowImageNominalResolution   CGWindowImageOption = 16
 )
 
 func (e CGWindowImageOption) String() string {
@@ -1545,28 +1545,28 @@ func (e CGWindowImageOption) String() string {
 type CGWindowLevelKey int64
 
 const (
-	KCGBaseWindowLevelKey CGWindowLevelKey = 0
-	KCGMinimumWindowLevelKey CGWindowLevelKey = 1
-	KCGDesktopWindowLevelKey CGWindowLevelKey = 2
-	KCGBackstopMenuLevelKey CGWindowLevelKey = 3
-	KCGNormalWindowLevelKey CGWindowLevelKey = 4
-	KCGFloatingWindowLevelKey CGWindowLevelKey = 5
-	KCGTornOffMenuWindowLevelKey CGWindowLevelKey = 6
-	KCGDockWindowLevelKey CGWindowLevelKey = 7
-	KCGMainMenuWindowLevelKey CGWindowLevelKey = 8
-	KCGStatusWindowLevelKey CGWindowLevelKey = 9
-	KCGModalPanelWindowLevelKey CGWindowLevelKey = 10
-	KCGPopUpMenuWindowLevelKey CGWindowLevelKey = 11
-	KCGDraggingWindowLevelKey CGWindowLevelKey = 12
-	KCGScreenSaverWindowLevelKey CGWindowLevelKey = 13
-	KCGMaximumWindowLevelKey CGWindowLevelKey = 14
-	KCGOverlayWindowLevelKey CGWindowLevelKey = 15
-	KCGHelpWindowLevelKey CGWindowLevelKey = 16
-	KCGUtilityWindowLevelKey CGWindowLevelKey = 17
-	KCGDesktopIconWindowLevelKey CGWindowLevelKey = 18
-	KCGCursorWindowLevelKey CGWindowLevelKey = 19
+	KCGBaseWindowLevelKey              CGWindowLevelKey = 0
+	KCGMinimumWindowLevelKey           CGWindowLevelKey = 1
+	KCGDesktopWindowLevelKey           CGWindowLevelKey = 2
+	KCGBackstopMenuLevelKey            CGWindowLevelKey = 3
+	KCGNormalWindowLevelKey            CGWindowLevelKey = 4
+	KCGFloatingWindowLevelKey          CGWindowLevelKey = 5
+	KCGTornOffMenuWindowLevelKey       CGWindowLevelKey = 6
+	KCGDockWindowLevelKey              CGWindowLevelKey = 7
+	KCGMainMenuWindowLevelKey          CGWindowLevelKey = 8
+	KCGStatusWindowLevelKey            CGWindowLevelKey = 9
+	KCGModalPanelWindowLevelKey        CGWindowLevelKey = 10
+	KCGPopUpMenuWindowLevelKey         CGWindowLevelKey = 11
+	KCGDraggingWindowLevelKey          CGWindowLevelKey = 12
+	KCGScreenSaverWindowLevelKey       CGWindowLevelKey = 13
+	KCGMaximumWindowLevelKey           CGWindowLevelKey = 14
+	KCGOverlayWindowLevelKey           CGWindowLevelKey = 15
+	KCGHelpWindowLevelKey              CGWindowLevelKey = 16
+	KCGUtilityWindowLevelKey           CGWindowLevelKey = 17
+	KCGDesktopIconWindowLevelKey       CGWindowLevelKey = 18
+	KCGCursorWindowLevelKey            CGWindowLevelKey = 19
 	KCGAssistiveTechHighWindowLevelKey CGWindowLevelKey = 20
-	KCGNumberOfWindowLevelKeys CGWindowLevelKey = 21
+	KCGNumberOfWindowLevelKeys         CGWindowLevelKey = 21
 )
 
 func (e CGWindowLevelKey) String() string {
@@ -1624,12 +1624,12 @@ func (e CGWindowLevelKey) String() string {
 type CGWindowListOption int64
 
 const (
-	KCGWindowListOptionAll CGWindowListOption = 0
-	KCGWindowListOptionOnScreenOnly CGWindowListOption = 1
+	KCGWindowListOptionAll                 CGWindowListOption = 0
+	KCGWindowListOptionOnScreenOnly        CGWindowListOption = 1
 	KCGWindowListOptionOnScreenAboveWindow CGWindowListOption = 2
 	KCGWindowListOptionOnScreenBelowWindow CGWindowListOption = 4
-	KCGWindowListOptionIncludingWindow CGWindowListOption = 8
-	KCGWindowListExcludeDesktopElements CGWindowListOption = 16
+	KCGWindowListOptionIncludingWindow     CGWindowListOption = 8
+	KCGWindowListExcludeDesktopElements    CGWindowListOption = 16
 )
 
 func (e CGWindowListOption) String() string {
@@ -1654,4 +1654,3 @@ func (e CGWindowListOption) String() string {
 	}
 	return strings.Join(parts, "|")
 }
-

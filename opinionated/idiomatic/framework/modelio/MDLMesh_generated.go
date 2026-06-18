@@ -135,7 +135,9 @@ func (x *Mesh) WithSubmeshes(items ...*raw.MDLSubmesh) *Mesh {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSMutableArrayFromID[*raw.MDLSubmesh](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -407,4 +409,3 @@ type Meshable interface {
 }
 
 var _ Meshable = (*Mesh)(nil)
-

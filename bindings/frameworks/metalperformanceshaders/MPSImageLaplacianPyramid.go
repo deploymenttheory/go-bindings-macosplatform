@@ -16,9 +16,9 @@ type MPSImageLaplacianPyramid struct {
 }
 
 var (
-	_clsMPSImageLaplacianPyramid = _objcClass("MPSImageLaplacianPyramid")
-	_mPSImageLaplacianPyramidSelGetLaplacianBias = objc.RegisterName("getLaplacianBias")
-	_mPSImageLaplacianPyramidSelSetLaplacianBias = objc.RegisterName("setLaplacianBias:")
+	_clsMPSImageLaplacianPyramid                  = _objcClass("MPSImageLaplacianPyramid")
+	_mPSImageLaplacianPyramidSelGetLaplacianBias  = objc.RegisterName("getLaplacianBias")
+	_mPSImageLaplacianPyramidSelSetLaplacianBias  = objc.RegisterName("setLaplacianBias:")
 	_mPSImageLaplacianPyramidSelGetLaplacianScale = objc.RegisterName("getLaplacianScale")
 	_mPSImageLaplacianPyramidSelSetLaplacianScale = objc.RegisterName("setLaplacianScale:")
 )
@@ -50,4 +50,3 @@ func (o *MPSImageLaplacianPyramid) GetLaplacianScale() float32 {
 func (o *MPSImageLaplacianPyramid) SetLaplacianScale(laplacianScale float32) {
 	o.Ptr().Send(_mPSImageLaplacianPyramidSelSetLaplacianScale, laplacianScale)
 }
-

@@ -18,26 +18,26 @@ type NLTagger struct {
 }
 
 var (
-	_clsNLTagger = _objcClass("NLTagger")
-	_nLTaggerSelInitWithTagSchemes = objc.RegisterName("initWithTagSchemes:")
-	_nLTaggerSelAvailableTagSchemesForUnitLanguage = objc.RegisterName("availableTagSchemesForUnit:language:")
-	_nLTaggerSelTokenRangeAtIndexUnit = objc.RegisterName("tokenRangeAtIndex:unit:")
-	_nLTaggerSelTokenRangeForRangeUnit = objc.RegisterName("tokenRangeForRange:unit:")
-	_nLTaggerSelEnumerateTagsInRangeUnitSchemeOptionsUsing = objc.RegisterName("enumerateTagsInRange:unit:scheme:options:usingBlock:")
-	_nLTaggerSelTagAtIndexUnitSchemeTokenRange = objc.RegisterName("tagAtIndex:unit:scheme:tokenRange:")
-	_nLTaggerSelTagsInRangeUnitSchemeOptionsTokenRanges = objc.RegisterName("tagsInRange:unit:scheme:options:tokenRanges:")
+	_clsNLTagger                                                     = _objcClass("NLTagger")
+	_nLTaggerSelInitWithTagSchemes                                   = objc.RegisterName("initWithTagSchemes:")
+	_nLTaggerSelAvailableTagSchemesForUnitLanguage                   = objc.RegisterName("availableTagSchemesForUnit:language:")
+	_nLTaggerSelTokenRangeAtIndexUnit                                = objc.RegisterName("tokenRangeAtIndex:unit:")
+	_nLTaggerSelTokenRangeForRangeUnit                               = objc.RegisterName("tokenRangeForRange:unit:")
+	_nLTaggerSelEnumerateTagsInRangeUnitSchemeOptionsUsing           = objc.RegisterName("enumerateTagsInRange:unit:scheme:options:usingBlock:")
+	_nLTaggerSelTagAtIndexUnitSchemeTokenRange                       = objc.RegisterName("tagAtIndex:unit:scheme:tokenRange:")
+	_nLTaggerSelTagsInRangeUnitSchemeOptionsTokenRanges              = objc.RegisterName("tagsInRange:unit:scheme:options:tokenRanges:")
 	_nLTaggerSelTagHypothesesAtIndexUnitSchemeMaximumCountTokenRange = objc.RegisterName("tagHypothesesAtIndex:unit:scheme:maximumCount:tokenRange:")
-	_nLTaggerSelSetLanguageRange = objc.RegisterName("setLanguage:range:")
-	_nLTaggerSelSetOrthographyRange = objc.RegisterName("setOrthography:range:")
-	_nLTaggerSelSetModelsForTagScheme = objc.RegisterName("setModels:forTagScheme:")
-	_nLTaggerSelModelsForTagScheme = objc.RegisterName("modelsForTagScheme:")
-	_nLTaggerSelSetGazetteersForTagScheme = objc.RegisterName("setGazetteers:forTagScheme:")
-	_nLTaggerSelGazetteersForTagScheme = objc.RegisterName("gazetteersForTagScheme:")
-	_nLTaggerSelRequestAssetsForLanguageTagSchemeCompletionHandler = objc.RegisterName("requestAssetsForLanguage:tagScheme:completionHandler:")
-	_nLTaggerSelTagSchemes = objc.RegisterName("tagSchemes")
-	_nLTaggerSelString = objc.RegisterName("string")
-	_nLTaggerSelSetString = objc.RegisterName("setString:")
-	_nLTaggerSelDominantLanguage = objc.RegisterName("dominantLanguage")
+	_nLTaggerSelSetLanguageRange                                     = objc.RegisterName("setLanguage:range:")
+	_nLTaggerSelSetOrthographyRange                                  = objc.RegisterName("setOrthography:range:")
+	_nLTaggerSelSetModelsForTagScheme                                = objc.RegisterName("setModels:forTagScheme:")
+	_nLTaggerSelModelsForTagScheme                                   = objc.RegisterName("modelsForTagScheme:")
+	_nLTaggerSelSetGazetteersForTagScheme                            = objc.RegisterName("setGazetteers:forTagScheme:")
+	_nLTaggerSelGazetteersForTagScheme                               = objc.RegisterName("gazetteersForTagScheme:")
+	_nLTaggerSelRequestAssetsForLanguageTagSchemeCompletionHandler   = objc.RegisterName("requestAssetsForLanguage:tagScheme:completionHandler:")
+	_nLTaggerSelTagSchemes                                           = objc.RegisterName("tagSchemes")
+	_nLTaggerSelString                                               = objc.RegisterName("string")
+	_nLTaggerSelSetString                                            = objc.RegisterName("setString:")
+	_nLTaggerSelDominantLanguage                                     = objc.RegisterName("dominantLanguage")
 )
 
 func NLTaggerFromID(id objc.ID) *NLTagger {
@@ -52,7 +52,9 @@ func NLTaggerFromID(id objc.ID) *NLTagger {
 
 func (o *NLTagger) InitWithTagSchemes(tagSchemes *foundation.NSArray[*foundation.NSString]) *NLTagger {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLTaggerSelInitWithTagSchemes, tagSchemes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NLTaggerFromID(_ret)
 }
 
@@ -77,7 +79,9 @@ func (o *NLTagger) EnumerateTagsInRangeUnitSchemeOptionsUsing(range_ foundation.
 
 func (o *NLTagger) TagAtIndexUnitSchemeTokenRange(characterIndex uint, unit NLTokenUnit, scheme *foundation.NSString, tokenRange *foundation.NSRange) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLTaggerSelTagAtIndexUnitSchemeTokenRange, characterIndex, unit, scheme.Ptr(), tokenRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -105,7 +109,9 @@ func (o *NLTagger) SetModelsForTagScheme(models *foundation.NSArray[*NLModel], t
 
 func (o *NLTagger) ModelsForTagScheme(tagScheme *foundation.NSString) *foundation.NSArray[*NLModel] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLTaggerSelModelsForTagScheme, tagScheme.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NLModel](_ret)
 }
 
@@ -115,7 +121,9 @@ func (o *NLTagger) SetGazetteersForTagScheme(gazetteers *foundation.NSArray[*NLG
 
 func (o *NLTagger) GazetteersForTagScheme(tagScheme *foundation.NSString) *foundation.NSArray[*NLGazetteer] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLTaggerSelGazetteersForTagScheme, tagScheme.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NLGazetteer](_ret)
 }
 
@@ -137,7 +145,9 @@ func (o *NLTagger) TagSchemes() *foundation.NSArray[*foundation.NSString] {
 
 func (o *NLTagger) String() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLTaggerSelString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -147,7 +157,8 @@ func (o *NLTagger) SetString(string_ *foundation.NSString) {
 
 func (o *NLTagger) DominantLanguage() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLTaggerSelDominantLanguage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

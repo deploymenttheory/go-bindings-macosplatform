@@ -16,7 +16,9 @@ type TranslationalImageRegistrationRequest struct {
 }
 
 // Unwrap returns the underlying [raw.VNTranslationalImageRegistrationRequest].
-func (x *TranslationalImageRegistrationRequest) Unwrap() *raw.VNTranslationalImageRegistrationRequest { return x.inner }
+func (x *TranslationalImageRegistrationRequest) Unwrap() *raw.VNTranslationalImageRegistrationRequest {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -60,13 +62,21 @@ func (x *TranslationalImageRegistrationRequest) WithRevision(revision uint) *Tra
 	return x
 }
 
-func (x *TranslationalImageRegistrationRequest) asImageRegistrationRequest() *raw.VNImageRegistrationRequest { return &x.inner.VNImageRegistrationRequest }
+func (x *TranslationalImageRegistrationRequest) asImageRegistrationRequest() *raw.VNImageRegistrationRequest {
+	return &x.inner.VNImageRegistrationRequest
+}
 
-func (x *TranslationalImageRegistrationRequest) asTargetedImageRequest() *raw.VNTargetedImageRequest { return &x.inner.VNImageRegistrationRequest.VNTargetedImageRequest }
+func (x *TranslationalImageRegistrationRequest) asTargetedImageRequest() *raw.VNTargetedImageRequest {
+	return &x.inner.VNImageRegistrationRequest.VNTargetedImageRequest
+}
 
-func (x *TranslationalImageRegistrationRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageRegistrationRequest.VNTargetedImageRequest.VNImageBasedRequest }
+func (x *TranslationalImageRegistrationRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNImageRegistrationRequest.VNTargetedImageRequest.VNImageBasedRequest
+}
 
-func (x *TranslationalImageRegistrationRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageRegistrationRequest.VNTargetedImageRequest.VNImageBasedRequest.VNRequest }
+func (x *TranslationalImageRegistrationRequest) asRequest() *raw.VNRequest {
+	return &x.inner.VNImageRegistrationRequest.VNTargetedImageRequest.VNImageBasedRequest.VNRequest
+}
 
 // TranslationalImageRegistrationRequestable is the interface implemented by [TranslationalImageRegistrationRequest], for mocking and DI.
 type TranslationalImageRegistrationRequestable interface {
@@ -78,4 +88,3 @@ type TranslationalImageRegistrationRequestable interface {
 }
 
 var _ TranslationalImageRegistrationRequestable = (*TranslationalImageRegistrationRequest)(nil)
-

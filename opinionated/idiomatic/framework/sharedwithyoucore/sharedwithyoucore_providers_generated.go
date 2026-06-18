@@ -22,4 +22,3 @@ type CollaborationOptionsGroupProvider interface {
 type PersonIdentityProofProvider interface {
 	asPersonIdentityProof() *raw.SWPersonIdentityProof
 }
-

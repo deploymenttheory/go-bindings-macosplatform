@@ -102,4 +102,3 @@ type PasskeyRegistrationCredentialable interface {
 }
 
 var _ PasskeyRegistrationCredentialable = (*PasskeyRegistrationCredential)(nil)
-

@@ -20,107 +20,107 @@ type PDFView struct {
 }
 
 var (
-	_clsPDFView = _objcClass("PDFView")
-	_pDFViewSelGoToFirstPage = objc.RegisterName("goToFirstPage:")
-	_pDFViewSelGoToLastPage = objc.RegisterName("goToLastPage:")
-	_pDFViewSelGoToNextPage = objc.RegisterName("goToNextPage:")
-	_pDFViewSelGoToPreviousPage = objc.RegisterName("goToPreviousPage:")
-	_pDFViewSelGoBack = objc.RegisterName("goBack:")
-	_pDFViewSelGoForward = objc.RegisterName("goForward:")
-	_pDFViewSelGoToPage = objc.RegisterName("goToPage:")
-	_pDFViewSelGoToDestination = objc.RegisterName("goToDestination:")
-	_pDFViewSelGoToSelection = objc.RegisterName("goToSelection:")
-	_pDFViewSelGoToRectOnPage = objc.RegisterName("goToRect:onPage:")
-	_pDFViewSelZoomIn = objc.RegisterName("zoomIn:")
-	_pDFViewSelZoomOut = objc.RegisterName("zoomOut:")
-	_pDFViewSelAreaOfInterestForMouse = objc.RegisterName("areaOfInterestForMouse:")
-	_pDFViewSelAreaOfInterestForPoint = objc.RegisterName("areaOfInterestForPoint:")
-	_pDFViewSelSetCursorForAreaOfInterest = objc.RegisterName("setCursorForAreaOfInterest:")
-	_pDFViewSelPerformAction = objc.RegisterName("performAction:")
-	_pDFViewSelSetCurrentSelectionAnimate = objc.RegisterName("setCurrentSelection:animate:")
-	_pDFViewSelClearSelection = objc.RegisterName("clearSelection")
-	_pDFViewSelSelectAll = objc.RegisterName("selectAll:")
-	_pDFViewSelScrollSelectionToVisible = objc.RegisterName("scrollSelectionToVisible:")
-	_pDFViewSelDrawPageToContext = objc.RegisterName("drawPage:toContext:")
-	_pDFViewSelDrawPagePostToContext = objc.RegisterName("drawPagePost:toContext:")
-	_pDFViewSelCopy = objc.RegisterName("copy:")
-	_pDFViewSelPrintWithInfoAutoRotate = objc.RegisterName("printWithInfo:autoRotate:")
+	_clsPDFView                                   = _objcClass("PDFView")
+	_pDFViewSelGoToFirstPage                      = objc.RegisterName("goToFirstPage:")
+	_pDFViewSelGoToLastPage                       = objc.RegisterName("goToLastPage:")
+	_pDFViewSelGoToNextPage                       = objc.RegisterName("goToNextPage:")
+	_pDFViewSelGoToPreviousPage                   = objc.RegisterName("goToPreviousPage:")
+	_pDFViewSelGoBack                             = objc.RegisterName("goBack:")
+	_pDFViewSelGoForward                          = objc.RegisterName("goForward:")
+	_pDFViewSelGoToPage                           = objc.RegisterName("goToPage:")
+	_pDFViewSelGoToDestination                    = objc.RegisterName("goToDestination:")
+	_pDFViewSelGoToSelection                      = objc.RegisterName("goToSelection:")
+	_pDFViewSelGoToRectOnPage                     = objc.RegisterName("goToRect:onPage:")
+	_pDFViewSelZoomIn                             = objc.RegisterName("zoomIn:")
+	_pDFViewSelZoomOut                            = objc.RegisterName("zoomOut:")
+	_pDFViewSelAreaOfInterestForMouse             = objc.RegisterName("areaOfInterestForMouse:")
+	_pDFViewSelAreaOfInterestForPoint             = objc.RegisterName("areaOfInterestForPoint:")
+	_pDFViewSelSetCursorForAreaOfInterest         = objc.RegisterName("setCursorForAreaOfInterest:")
+	_pDFViewSelPerformAction                      = objc.RegisterName("performAction:")
+	_pDFViewSelSetCurrentSelectionAnimate         = objc.RegisterName("setCurrentSelection:animate:")
+	_pDFViewSelClearSelection                     = objc.RegisterName("clearSelection")
+	_pDFViewSelSelectAll                          = objc.RegisterName("selectAll:")
+	_pDFViewSelScrollSelectionToVisible           = objc.RegisterName("scrollSelectionToVisible:")
+	_pDFViewSelDrawPageToContext                  = objc.RegisterName("drawPage:toContext:")
+	_pDFViewSelDrawPagePostToContext              = objc.RegisterName("drawPagePost:toContext:")
+	_pDFViewSelCopy                               = objc.RegisterName("copy:")
+	_pDFViewSelPrintWithInfoAutoRotate            = objc.RegisterName("printWithInfo:autoRotate:")
 	_pDFViewSelPrintWithInfoAutoRotatePageScaling = objc.RegisterName("printWithInfo:autoRotate:pageScaling:")
-	_pDFViewSelPageForPointNearest = objc.RegisterName("pageForPoint:nearest:")
-	_pDFViewSelConvertPointToPage = objc.RegisterName("convertPoint:toPage:")
-	_pDFViewSelConvertRectToPage = objc.RegisterName("convertRect:toPage:")
-	_pDFViewSelConvertPointFromPage = objc.RegisterName("convertPoint:fromPage:")
-	_pDFViewSelConvertRectFromPage = objc.RegisterName("convertRect:fromPage:")
-	_pDFViewSelLayoutDocumentView = objc.RegisterName("layoutDocumentView")
-	_pDFViewSelAnnotationsChangedOnPage = objc.RegisterName("annotationsChangedOnPage:")
-	_pDFViewSelRowSizeForPage = objc.RegisterName("rowSizeForPage:")
-	_pDFViewSelDocument = objc.RegisterName("document")
-	_pDFViewSelSetDocument = objc.RegisterName("setDocument:")
-	_pDFViewSelCanGoToFirstPage = objc.RegisterName("canGoToFirstPage")
-	_pDFViewSelCanGoToLastPage = objc.RegisterName("canGoToLastPage")
-	_pDFViewSelCanGoToNextPage = objc.RegisterName("canGoToNextPage")
-	_pDFViewSelCanGoToPreviousPage = objc.RegisterName("canGoToPreviousPage")
-	_pDFViewSelCanGoBack = objc.RegisterName("canGoBack")
-	_pDFViewSelCanGoForward = objc.RegisterName("canGoForward")
-	_pDFViewSelCurrentPage = objc.RegisterName("currentPage")
-	_pDFViewSelCurrentDestination = objc.RegisterName("currentDestination")
-	_pDFViewSelDisplayMode = objc.RegisterName("displayMode")
-	_pDFViewSelSetDisplayMode = objc.RegisterName("setDisplayMode:")
-	_pDFViewSelDisplayDirection = objc.RegisterName("displayDirection")
-	_pDFViewSelSetDisplayDirection = objc.RegisterName("setDisplayDirection:")
-	_pDFViewSelDisplaysPageBreaks = objc.RegisterName("displaysPageBreaks")
-	_pDFViewSelSetDisplaysPageBreaks = objc.RegisterName("setDisplaysPageBreaks:")
-	_pDFViewSelPageBreakMargins = objc.RegisterName("pageBreakMargins")
-	_pDFViewSelSetPageBreakMargins = objc.RegisterName("setPageBreakMargins:")
-	_pDFViewSelDisplayBox = objc.RegisterName("displayBox")
-	_pDFViewSelSetDisplayBox = objc.RegisterName("setDisplayBox:")
-	_pDFViewSelDisplaysAsBook = objc.RegisterName("displaysAsBook")
-	_pDFViewSelSetDisplaysAsBook = objc.RegisterName("setDisplaysAsBook:")
-	_pDFViewSelDisplaysRTL = objc.RegisterName("displaysRTL")
-	_pDFViewSelSetDisplaysRTL = objc.RegisterName("setDisplaysRTL:")
-	_pDFViewSelBackgroundColor = objc.RegisterName("backgroundColor")
-	_pDFViewSelSetBackgroundColor = objc.RegisterName("setBackgroundColor:")
-	_pDFViewSelInterpolationQuality = objc.RegisterName("interpolationQuality")
-	_pDFViewSelSetInterpolationQuality = objc.RegisterName("setInterpolationQuality:")
-	_pDFViewSelPageShadowsEnabled = objc.RegisterName("pageShadowsEnabled")
-	_pDFViewSelEnablePageShadows = objc.RegisterName("enablePageShadows:")
-	_pDFViewSelDelegate = objc.RegisterName("delegate")
-	_pDFViewSelSetDelegate = objc.RegisterName("setDelegate:")
-	_pDFViewSelPageOverlayViewProvider = objc.RegisterName("pageOverlayViewProvider")
-	_pDFViewSelSetPageOverlayViewProvider = objc.RegisterName("setPageOverlayViewProvider:")
-	_pDFViewSelScaleFactor = objc.RegisterName("scaleFactor")
-	_pDFViewSelSetScaleFactor = objc.RegisterName("setScaleFactor:")
-	_pDFViewSelMinScaleFactor = objc.RegisterName("minScaleFactor")
-	_pDFViewSelSetMinScaleFactor = objc.RegisterName("setMinScaleFactor:")
-	_pDFViewSelMaxScaleFactor = objc.RegisterName("maxScaleFactor")
-	_pDFViewSelSetMaxScaleFactor = objc.RegisterName("setMaxScaleFactor:")
-	_pDFViewSelAutoScales = objc.RegisterName("autoScales")
-	_pDFViewSelSetAutoScales = objc.RegisterName("setAutoScales:")
-	_pDFViewSelScaleFactorForSizeToFit = objc.RegisterName("scaleFactorForSizeToFit")
-	_pDFViewSelCanZoomIn = objc.RegisterName("canZoomIn")
-	_pDFViewSelCanZoomOut = objc.RegisterName("canZoomOut")
-	_pDFViewSelCurrentSelection = objc.RegisterName("currentSelection")
-	_pDFViewSelSetCurrentSelection = objc.RegisterName("setCurrentSelection:")
-	_pDFViewSelHighlightedSelections = objc.RegisterName("highlightedSelections")
-	_pDFViewSelSetHighlightedSelections = objc.RegisterName("setHighlightedSelections:")
-	_pDFViewSelDocumentView = objc.RegisterName("documentView")
-	_pDFViewSelAcceptsDraggedFiles = objc.RegisterName("acceptsDraggedFiles")
-	_pDFViewSelSetAcceptsDraggedFiles = objc.RegisterName("setAcceptsDraggedFiles:")
-	_pDFViewSelVisiblePages = objc.RegisterName("visiblePages")
-	_pDFViewSelEnableDataDetectors = objc.RegisterName("enableDataDetectors")
-	_pDFViewSelSetEnableDataDetectors = objc.RegisterName("setEnableDataDetectors:")
-	_pDFViewSelIsInMarkupMode = objc.RegisterName("isInMarkupMode")
-	_pDFViewSelSetInMarkupMode = objc.RegisterName("setInMarkupMode:")
-	_pDFViewSelTakePasswordFrom = objc.RegisterName("takePasswordFrom:")
-	_pDFViewSelDrawPage = objc.RegisterName("drawPage:")
-	_pDFViewSelDrawPagePost = objc.RegisterName("drawPagePost:")
-	_pDFViewSelTakeBackgroundColorFrom = objc.RegisterName("takeBackgroundColorFrom:")
-	_pDFViewSelShouldAntiAlias = objc.RegisterName("shouldAntiAlias")
-	_pDFViewSelSetShouldAntiAlias = objc.RegisterName("setShouldAntiAlias:")
-	_pDFViewSelGreekingThreshold = objc.RegisterName("greekingThreshold")
-	_pDFViewSelSetGreekingThreshold = objc.RegisterName("setGreekingThreshold:")
-	_pDFViewSelAllowsDragging = objc.RegisterName("allowsDragging")
-	_pDFViewSelSetAllowsDragging = objc.RegisterName("setAllowsDragging:")
+	_pDFViewSelPageForPointNearest                = objc.RegisterName("pageForPoint:nearest:")
+	_pDFViewSelConvertPointToPage                 = objc.RegisterName("convertPoint:toPage:")
+	_pDFViewSelConvertRectToPage                  = objc.RegisterName("convertRect:toPage:")
+	_pDFViewSelConvertPointFromPage               = objc.RegisterName("convertPoint:fromPage:")
+	_pDFViewSelConvertRectFromPage                = objc.RegisterName("convertRect:fromPage:")
+	_pDFViewSelLayoutDocumentView                 = objc.RegisterName("layoutDocumentView")
+	_pDFViewSelAnnotationsChangedOnPage           = objc.RegisterName("annotationsChangedOnPage:")
+	_pDFViewSelRowSizeForPage                     = objc.RegisterName("rowSizeForPage:")
+	_pDFViewSelDocument                           = objc.RegisterName("document")
+	_pDFViewSelSetDocument                        = objc.RegisterName("setDocument:")
+	_pDFViewSelCanGoToFirstPage                   = objc.RegisterName("canGoToFirstPage")
+	_pDFViewSelCanGoToLastPage                    = objc.RegisterName("canGoToLastPage")
+	_pDFViewSelCanGoToNextPage                    = objc.RegisterName("canGoToNextPage")
+	_pDFViewSelCanGoToPreviousPage                = objc.RegisterName("canGoToPreviousPage")
+	_pDFViewSelCanGoBack                          = objc.RegisterName("canGoBack")
+	_pDFViewSelCanGoForward                       = objc.RegisterName("canGoForward")
+	_pDFViewSelCurrentPage                        = objc.RegisterName("currentPage")
+	_pDFViewSelCurrentDestination                 = objc.RegisterName("currentDestination")
+	_pDFViewSelDisplayMode                        = objc.RegisterName("displayMode")
+	_pDFViewSelSetDisplayMode                     = objc.RegisterName("setDisplayMode:")
+	_pDFViewSelDisplayDirection                   = objc.RegisterName("displayDirection")
+	_pDFViewSelSetDisplayDirection                = objc.RegisterName("setDisplayDirection:")
+	_pDFViewSelDisplaysPageBreaks                 = objc.RegisterName("displaysPageBreaks")
+	_pDFViewSelSetDisplaysPageBreaks              = objc.RegisterName("setDisplaysPageBreaks:")
+	_pDFViewSelPageBreakMargins                   = objc.RegisterName("pageBreakMargins")
+	_pDFViewSelSetPageBreakMargins                = objc.RegisterName("setPageBreakMargins:")
+	_pDFViewSelDisplayBox                         = objc.RegisterName("displayBox")
+	_pDFViewSelSetDisplayBox                      = objc.RegisterName("setDisplayBox:")
+	_pDFViewSelDisplaysAsBook                     = objc.RegisterName("displaysAsBook")
+	_pDFViewSelSetDisplaysAsBook                  = objc.RegisterName("setDisplaysAsBook:")
+	_pDFViewSelDisplaysRTL                        = objc.RegisterName("displaysRTL")
+	_pDFViewSelSetDisplaysRTL                     = objc.RegisterName("setDisplaysRTL:")
+	_pDFViewSelBackgroundColor                    = objc.RegisterName("backgroundColor")
+	_pDFViewSelSetBackgroundColor                 = objc.RegisterName("setBackgroundColor:")
+	_pDFViewSelInterpolationQuality               = objc.RegisterName("interpolationQuality")
+	_pDFViewSelSetInterpolationQuality            = objc.RegisterName("setInterpolationQuality:")
+	_pDFViewSelPageShadowsEnabled                 = objc.RegisterName("pageShadowsEnabled")
+	_pDFViewSelEnablePageShadows                  = objc.RegisterName("enablePageShadows:")
+	_pDFViewSelDelegate                           = objc.RegisterName("delegate")
+	_pDFViewSelSetDelegate                        = objc.RegisterName("setDelegate:")
+	_pDFViewSelPageOverlayViewProvider            = objc.RegisterName("pageOverlayViewProvider")
+	_pDFViewSelSetPageOverlayViewProvider         = objc.RegisterName("setPageOverlayViewProvider:")
+	_pDFViewSelScaleFactor                        = objc.RegisterName("scaleFactor")
+	_pDFViewSelSetScaleFactor                     = objc.RegisterName("setScaleFactor:")
+	_pDFViewSelMinScaleFactor                     = objc.RegisterName("minScaleFactor")
+	_pDFViewSelSetMinScaleFactor                  = objc.RegisterName("setMinScaleFactor:")
+	_pDFViewSelMaxScaleFactor                     = objc.RegisterName("maxScaleFactor")
+	_pDFViewSelSetMaxScaleFactor                  = objc.RegisterName("setMaxScaleFactor:")
+	_pDFViewSelAutoScales                         = objc.RegisterName("autoScales")
+	_pDFViewSelSetAutoScales                      = objc.RegisterName("setAutoScales:")
+	_pDFViewSelScaleFactorForSizeToFit            = objc.RegisterName("scaleFactorForSizeToFit")
+	_pDFViewSelCanZoomIn                          = objc.RegisterName("canZoomIn")
+	_pDFViewSelCanZoomOut                         = objc.RegisterName("canZoomOut")
+	_pDFViewSelCurrentSelection                   = objc.RegisterName("currentSelection")
+	_pDFViewSelSetCurrentSelection                = objc.RegisterName("setCurrentSelection:")
+	_pDFViewSelHighlightedSelections              = objc.RegisterName("highlightedSelections")
+	_pDFViewSelSetHighlightedSelections           = objc.RegisterName("setHighlightedSelections:")
+	_pDFViewSelDocumentView                       = objc.RegisterName("documentView")
+	_pDFViewSelAcceptsDraggedFiles                = objc.RegisterName("acceptsDraggedFiles")
+	_pDFViewSelSetAcceptsDraggedFiles             = objc.RegisterName("setAcceptsDraggedFiles:")
+	_pDFViewSelVisiblePages                       = objc.RegisterName("visiblePages")
+	_pDFViewSelEnableDataDetectors                = objc.RegisterName("enableDataDetectors")
+	_pDFViewSelSetEnableDataDetectors             = objc.RegisterName("setEnableDataDetectors:")
+	_pDFViewSelIsInMarkupMode                     = objc.RegisterName("isInMarkupMode")
+	_pDFViewSelSetInMarkupMode                    = objc.RegisterName("setInMarkupMode:")
+	_pDFViewSelTakePasswordFrom                   = objc.RegisterName("takePasswordFrom:")
+	_pDFViewSelDrawPage                           = objc.RegisterName("drawPage:")
+	_pDFViewSelDrawPagePost                       = objc.RegisterName("drawPagePost:")
+	_pDFViewSelTakeBackgroundColorFrom            = objc.RegisterName("takeBackgroundColorFrom:")
+	_pDFViewSelShouldAntiAlias                    = objc.RegisterName("shouldAntiAlias")
+	_pDFViewSelSetShouldAntiAlias                 = objc.RegisterName("setShouldAntiAlias:")
+	_pDFViewSelGreekingThreshold                  = objc.RegisterName("greekingThreshold")
+	_pDFViewSelSetGreekingThreshold               = objc.RegisterName("setGreekingThreshold:")
+	_pDFViewSelAllowsDragging                     = objc.RegisterName("allowsDragging")
+	_pDFViewSelSetAllowsDragging                  = objc.RegisterName("setAllowsDragging:")
 )
 
 func PDFViewFromID(id objc.ID) *PDFView {
@@ -237,7 +237,9 @@ func (o *PDFView) PrintWithInfoAutoRotatePageScaling(printInfo *appkit.NSPrintIn
 
 func (o *PDFView) PageForPointNearest(point corefoundation.CGPoint, nearest bool) *PDFPage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFViewSelPageForPointNearest, point, nearest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFPageFromID(_ret)
 }
 
@@ -276,7 +278,9 @@ func (o *PDFView) RowSizeForPage(page *PDFPage) corefoundation.CGSize {
 
 func (o *PDFView) Document() *PDFDocument {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFViewSelDocument)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFDocumentFromID(_ret)
 }
 
@@ -316,13 +320,17 @@ func (o *PDFView) CanGoForward() bool {
 
 func (o *PDFView) CurrentPage() *PDFPage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFViewSelCurrentPage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFPageFromID(_ret)
 }
 
 func (o *PDFView) CurrentDestination() *PDFDestination {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFViewSelCurrentDestination)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFDestinationFromID(_ret)
 }
 
@@ -391,7 +399,9 @@ func (o *PDFView) SetDisplaysRTL(displaysRTL bool) {
 
 func (o *PDFView) BackgroundColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFViewSelBackgroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -488,7 +498,9 @@ func (o *PDFView) CanZoomOut() bool {
 
 func (o *PDFView) CurrentSelection() *PDFSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFViewSelCurrentSelection)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFSelectionFromID(_ret)
 }
 
@@ -507,7 +519,9 @@ func (o *PDFView) SetHighlightedSelections(highlightedSelections unsafe.Pointer)
 
 func (o *PDFView) DocumentView() *appkit.NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFViewSelDocumentView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSViewFromID(_ret)
 }
 
@@ -585,4 +599,3 @@ func (o *PDFView) AllowsDragging() bool {
 func (o *PDFView) SetAllowsDragging(allowsDragging bool) {
 	o.Ptr().Send(_pDFViewSelSetAllowsDragging, allowsDragging)
 }
-

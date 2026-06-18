@@ -16,13 +16,13 @@ type MEDecodedMessage struct {
 }
 
 var (
-	_clsMEDecodedMessage = _objcClass("MEDecodedMessage")
-	_mEDecodedMessageSelInitWithDataSecurityInformationContext = objc.RegisterName("initWithData:securityInformation:context:")
+	_clsMEDecodedMessage                                             = _objcClass("MEDecodedMessage")
+	_mEDecodedMessageSelInitWithDataSecurityInformationContext       = objc.RegisterName("initWithData:securityInformation:context:")
 	_mEDecodedMessageSelInitWithDataSecurityInformationContextBanner = objc.RegisterName("initWithData:securityInformation:context:banner:")
-	_mEDecodedMessageSelRawData = objc.RegisterName("rawData")
-	_mEDecodedMessageSelSecurityInformation = objc.RegisterName("securityInformation")
-	_mEDecodedMessageSelContext = objc.RegisterName("context")
-	_mEDecodedMessageSelBanner = objc.RegisterName("banner")
+	_mEDecodedMessageSelRawData                                      = objc.RegisterName("rawData")
+	_mEDecodedMessageSelSecurityInformation                          = objc.RegisterName("securityInformation")
+	_mEDecodedMessageSelContext                                      = objc.RegisterName("context")
+	_mEDecodedMessageSelBanner                                       = objc.RegisterName("banner")
 )
 
 func MEDecodedMessageFromID(id objc.ID) *MEDecodedMessage {
@@ -37,41 +37,52 @@ func MEDecodedMessageFromID(id objc.ID) *MEDecodedMessage {
 
 func (o *MEDecodedMessage) InitWithDataSecurityInformationContext(rawData *foundation.NSData, securityInformation *MEMessageSecurityInformation, context_ *foundation.NSData) *MEDecodedMessage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEDecodedMessageSelInitWithDataSecurityInformationContext, rawData.Ptr(), securityInformation.Ptr(), context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEDecodedMessageFromID(_ret)
 }
 
 func (o *MEDecodedMessage) InitWithDataSecurityInformationContextBanner(rawData *foundation.NSData, securityInformation *MEMessageSecurityInformation, context_ *foundation.NSData, banner *MEDecodedMessageBanner) *MEDecodedMessage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEDecodedMessageSelInitWithDataSecurityInformationContextBanner, rawData.Ptr(), securityInformation.Ptr(), context_.Ptr(), banner.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEDecodedMessageFromID(_ret)
 }
 
 // @brief The decoded MIME data for the message The decoded data should not be encrypted or contain any signatures that were decoded. The @c rawData here should only contain MIME parts that a standard email parser can decode without needing to decrypt. All information on the encryption and signature status should be defined in @c securityInformation. If the message is unable to be decrypted this should be left nil and an error message will be displayed to the user.
 func (o *MEDecodedMessage) RawData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEDecodedMessageSelRawData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @brief The security information for whether or not the message was signed, encrypted, or had an errors in decoding.
 func (o *MEDecodedMessage) SecurityInformation() *MEMessageSecurityInformation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEDecodedMessageSelSecurityInformation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEMessageSecurityInformationFromID(_ret)
 }
 
 // @brief The context for the decoded message. This will be passed back to the extension when Mail loads the extension's custom view controller for the message.
 func (o *MEDecodedMessage) Context() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEDecodedMessageSelContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @brief Suggestion information used to populate a suggestion banner at the top of the message view. Clicking on the action associated with the suggestion banner will present the extension's view controller for the provided message context.
 func (o *MEDecodedMessage) Banner() *MEDecodedMessageBanner {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEDecodedMessageSelBanner)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEDecodedMessageBannerFromID(_ret)
 }
-

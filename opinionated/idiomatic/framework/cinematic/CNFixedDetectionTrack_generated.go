@@ -57,7 +57,9 @@ func (x *FixedDetectionTrack) OriginalDetection() *Detection {
 	return &Detection{inner: _r}
 }
 
-func (x *FixedDetectionTrack) asDetectionTrack() *raw.CNDetectionTrack { return &x.inner.CNDetectionTrack }
+func (x *FixedDetectionTrack) asDetectionTrack() *raw.CNDetectionTrack {
+	return &x.inner.CNDetectionTrack
+}
 
 // FixedDetectionTrackable is the interface implemented by [FixedDetectionTrack], for mocking and DI.
 type FixedDetectionTrackable interface {
@@ -67,4 +69,3 @@ type FixedDetectionTrackable interface {
 }
 
 var _ FixedDetectionTrackable = (*FixedDetectionTrack)(nil)
-

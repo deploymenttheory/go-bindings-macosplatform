@@ -82,4 +82,3 @@ func CWScanCacheDidUpdateNotification() uintptr {
 	ptr, _ := purego.Dlsym(_corewlanLib, "CWScanCacheDidUpdateNotification")
 	return ptr
 }
-

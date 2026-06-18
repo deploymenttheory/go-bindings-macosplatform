@@ -48,4 +48,3 @@ type CompositionPickerPanelable interface {
 }
 
 var _ CompositionPickerPanelable = (*CompositionPickerPanel)(nil)
-

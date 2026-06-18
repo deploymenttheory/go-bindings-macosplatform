@@ -22,4 +22,3 @@ type MTLDevice interface {
 type MTLTexture interface {
 	metal.MTLResource
 }
-

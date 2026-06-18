@@ -154,9 +154,13 @@ func (x *CNNSoftMaxGradient) WithDestinationImageAllocator(destinationImageAlloc
 	return x
 }
 
-func (x *CNNSoftMaxGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
+func (x *CNNSoftMaxGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNGradientKernel
+}
 
-func (x *CNNSoftMaxGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *CNNSoftMaxGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
 // CNNSoftMaxGradientable is the interface implemented by [CNNSoftMaxGradient], for mocking and DI.
 type CNNSoftMaxGradientable interface {
@@ -182,4 +186,3 @@ type CNNSoftMaxGradientable interface {
 }
 
 var _ CNNSoftMaxGradientable = (*CNNSoftMaxGradient)(nil)
-

@@ -18,14 +18,14 @@ type CMPedometer struct {
 }
 
 var (
-	_clsCMPedometer = _objcClass("CMPedometer")
-	_cMPedometerSelIsStepCountingAvailable = objc.RegisterName("isStepCountingAvailable")
-	_cMPedometerSelIsDistanceAvailable = objc.RegisterName("isDistanceAvailable")
-	_cMPedometerSelIsFloorCountingAvailable = objc.RegisterName("isFloorCountingAvailable")
-	_cMPedometerSelIsPaceAvailable = objc.RegisterName("isPaceAvailable")
+	_clsCMPedometer                                            = _objcClass("CMPedometer")
+	_cMPedometerSelIsStepCountingAvailable                     = objc.RegisterName("isStepCountingAvailable")
+	_cMPedometerSelIsDistanceAvailable                         = objc.RegisterName("isDistanceAvailable")
+	_cMPedometerSelIsFloorCountingAvailable                    = objc.RegisterName("isFloorCountingAvailable")
+	_cMPedometerSelIsPaceAvailable                             = objc.RegisterName("isPaceAvailable")
 	_cMPedometerSelQueryPedometerDataFromDateToDateWithHandler = objc.RegisterName("queryPedometerDataFromDate:toDate:withHandler:")
-	_cMPedometerSelStartPedometerUpdatesFromDateWithHandler = objc.RegisterName("startPedometerUpdatesFromDate:withHandler:")
-	_cMPedometerSelStopPedometerUpdates = objc.RegisterName("stopPedometerUpdates")
+	_cMPedometerSelStartPedometerUpdatesFromDateWithHandler    = objc.RegisterName("startPedometerUpdatesFromDate:withHandler:")
+	_cMPedometerSelStopPedometerUpdates                        = objc.RegisterName("stopPedometerUpdates")
 )
 
 func CMPedometerFromID(id objc.ID) *CMPedometer {
@@ -89,4 +89,3 @@ func (o *CMPedometer) StartPedometerUpdatesFromDateWithHandler(start *foundation
 func (o *CMPedometer) StopPedometerUpdates() {
 	o.Ptr().Send(_cMPedometerSelStopPedometerUpdates)
 }
-

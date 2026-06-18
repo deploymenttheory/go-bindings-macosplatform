@@ -112,4 +112,3 @@ type QuerySubscriptionable interface {
 }
 
 var _ QuerySubscriptionable = (*QuerySubscription)(nil)
-

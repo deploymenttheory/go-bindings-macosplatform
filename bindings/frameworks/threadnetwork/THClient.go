@@ -20,17 +20,17 @@ type THClient struct {
 }
 
 var (
-	_clsTHClient = _objcClass("THClient")
-	_tHClientSelInit = objc.RegisterName("init")
-	_tHClientSelRetrieveAllCredentials = objc.RegisterName("retrieveAllCredentials:")
-	_tHClientSelRetrieveAllActiveCredentials = objc.RegisterName("retrieveAllActiveCredentials:")
-	_tHClientSelDeleteCredentialsForBorderAgentCompletion = objc.RegisterName("deleteCredentialsForBorderAgent:completion:")
-	_tHClientSelRetrieveCredentialsForBorderAgentCompletion = objc.RegisterName("retrieveCredentialsForBorderAgent:completion:")
+	_clsTHClient                                                                 = _objcClass("THClient")
+	_tHClientSelInit                                                             = objc.RegisterName("init")
+	_tHClientSelRetrieveAllCredentials                                           = objc.RegisterName("retrieveAllCredentials:")
+	_tHClientSelRetrieveAllActiveCredentials                                     = objc.RegisterName("retrieveAllActiveCredentials:")
+	_tHClientSelDeleteCredentialsForBorderAgentCompletion                        = objc.RegisterName("deleteCredentialsForBorderAgent:completion:")
+	_tHClientSelRetrieveCredentialsForBorderAgentCompletion                      = objc.RegisterName("retrieveCredentialsForBorderAgent:completion:")
 	_tHClientSelStoreCredentialsForBorderAgentActiveOperationalDataSetCompletion = objc.RegisterName("storeCredentialsForBorderAgent:activeOperationalDataSet:completion:")
-	_tHClientSelRetrievePreferredCredentials = objc.RegisterName("retrievePreferredCredentials:")
-	_tHClientSelRetrieveCredentialsForExtendedPANIDCompletion = objc.RegisterName("retrieveCredentialsForExtendedPANID:completion:")
-	_tHClientSelCheckPreferredNetworkForActiveOperationalDatasetCompletion = objc.RegisterName("checkPreferredNetworkForActiveOperationalDataset:completion:")
-	_tHClientSelIsPreferredNetworkAvailableWithCompletion = objc.RegisterName("isPreferredNetworkAvailableWithCompletion:")
+	_tHClientSelRetrievePreferredCredentials                                     = objc.RegisterName("retrievePreferredCredentials:")
+	_tHClientSelRetrieveCredentialsForExtendedPANIDCompletion                    = objc.RegisterName("retrieveCredentialsForExtendedPANID:completion:")
+	_tHClientSelCheckPreferredNetworkForActiveOperationalDatasetCompletion       = objc.RegisterName("checkPreferredNetworkForActiveOperationalDataset:completion:")
+	_tHClientSelIsPreferredNetworkAvailableWithCompletion                        = objc.RegisterName("isPreferredNetworkAvailableWithCompletion:")
 )
 
 func THClientFromID(id objc.ID) *THClient {
@@ -46,7 +46,9 @@ func THClientFromID(id objc.ID) *THClient {
 // Creates the client object. - Returns: An instance of the client object.
 func (o *THClient) Init() *THClient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tHClientSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return THClientFromID(_ret)
 }
 
@@ -172,4 +174,3 @@ func (o *THClient) IsPreferredNetworkAvailableWithCompletion(completion func(boo
 	}
 	o.Ptr().Send(_tHClientSelIsPreferredNetworkAvailableWithCompletion, __block_completion)
 }
-

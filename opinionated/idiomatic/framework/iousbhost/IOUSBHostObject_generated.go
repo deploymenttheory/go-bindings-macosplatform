@@ -225,4 +225,3 @@ type HostObjectable interface {
 }
 
 var _ HostObjectable = (*HostObject)(nil)
-

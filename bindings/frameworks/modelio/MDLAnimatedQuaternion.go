@@ -17,15 +17,15 @@ type MDLAnimatedQuaternion struct {
 }
 
 var (
-	_clsMDLAnimatedQuaternion = _objcClass("MDLAnimatedQuaternion")
-	_mDLAnimatedQuaternionSelSetFloatQuaternionAtTime = objc.RegisterName("setFloatQuaternion:atTime:")
-	_mDLAnimatedQuaternionSelSetDoubleQuaternionAtTime = objc.RegisterName("setDoubleQuaternion:atTime:")
-	_mDLAnimatedQuaternionSelFloatQuaternionAtTime = objc.RegisterName("floatQuaternionAtTime:")
-	_mDLAnimatedQuaternionSelDoubleQuaternionAtTime = objc.RegisterName("doubleQuaternionAtTime:")
-	_mDLAnimatedQuaternionSelResetWithFloatQuaternionArrayAtTimesCount = objc.RegisterName("resetWithFloatQuaternionArray:atTimes:count:")
+	_clsMDLAnimatedQuaternion                                           = _objcClass("MDLAnimatedQuaternion")
+	_mDLAnimatedQuaternionSelSetFloatQuaternionAtTime                   = objc.RegisterName("setFloatQuaternion:atTime:")
+	_mDLAnimatedQuaternionSelSetDoubleQuaternionAtTime                  = objc.RegisterName("setDoubleQuaternion:atTime:")
+	_mDLAnimatedQuaternionSelFloatQuaternionAtTime                      = objc.RegisterName("floatQuaternionAtTime:")
+	_mDLAnimatedQuaternionSelDoubleQuaternionAtTime                     = objc.RegisterName("doubleQuaternionAtTime:")
+	_mDLAnimatedQuaternionSelResetWithFloatQuaternionArrayAtTimesCount  = objc.RegisterName("resetWithFloatQuaternionArray:atTimes:count:")
 	_mDLAnimatedQuaternionSelResetWithDoubleQuaternionArrayAtTimesCount = objc.RegisterName("resetWithDoubleQuaternionArray:atTimes:count:")
-	_mDLAnimatedQuaternionSelGetFloatQuaternionArrayMaxCount = objc.RegisterName("getFloatQuaternionArray:maxCount:")
-	_mDLAnimatedQuaternionSelGetDoubleQuaternionArrayMaxCount = objc.RegisterName("getDoubleQuaternionArray:maxCount:")
+	_mDLAnimatedQuaternionSelGetFloatQuaternionArrayMaxCount            = objc.RegisterName("getFloatQuaternionArray:maxCount:")
+	_mDLAnimatedQuaternionSelGetDoubleQuaternionArrayMaxCount           = objc.RegisterName("getDoubleQuaternionArray:maxCount:")
 )
 
 func MDLAnimatedQuaternionFromID(id objc.ID) *MDLAnimatedQuaternion {
@@ -73,4 +73,3 @@ func (o *MDLAnimatedQuaternion) GetDoubleQuaternionArrayMaxCount(valuesArray uns
 	_ret := objc.Send[uint](o.Ptr(), _mDLAnimatedQuaternionSelGetDoubleQuaternionArrayMaxCount, valuesArray, maxCount)
 	return _ret
 }
-

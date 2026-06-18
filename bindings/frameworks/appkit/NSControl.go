@@ -17,88 +17,88 @@ type NSControl struct {
 }
 
 var (
-	_clsNSControl = _objcClass("NSControl")
-	_nSControlSelInitWithFrame = objc.RegisterName("initWithFrame:")
-	_nSControlSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSControlSelSizeThatFits = objc.RegisterName("sizeThatFits:")
-	_nSControlSelSizeToFit = objc.RegisterName("sizeToFit")
-	_nSControlSelSendActionOn = objc.RegisterName("sendActionOn:")
-	_nSControlSelSendActionTo = objc.RegisterName("sendAction:to:")
-	_nSControlSelTakeIntValueFrom = objc.RegisterName("takeIntValueFrom:")
-	_nSControlSelTakeFloatValueFrom = objc.RegisterName("takeFloatValueFrom:")
-	_nSControlSelTakeDoubleValueFrom = objc.RegisterName("takeDoubleValueFrom:")
-	_nSControlSelTakeStringValueFrom = objc.RegisterName("takeStringValueFrom:")
-	_nSControlSelTakeObjectValueFrom = objc.RegisterName("takeObjectValueFrom:")
-	_nSControlSelTakeIntegerValueFrom = objc.RegisterName("takeIntegerValueFrom:")
-	_nSControlSelPerformClick = objc.RegisterName("performClick:")
-	_nSControlSelExpansionFrameWithFrame = objc.RegisterName("expansionFrameWithFrame:")
-	_nSControlSelDrawWithExpansionFrameInView = objc.RegisterName("drawWithExpansionFrame:inView:")
-	_nSControlSelTarget = objc.RegisterName("target")
-	_nSControlSelSetTarget = objc.RegisterName("setTarget:")
-	_nSControlSelAction = objc.RegisterName("action")
-	_nSControlSelSetAction = objc.RegisterName("setAction:")
-	_nSControlSelSetTag = objc.RegisterName("setTag:")
-	_nSControlSelIgnoresMultiClick = objc.RegisterName("ignoresMultiClick")
-	_nSControlSelSetIgnoresMultiClick = objc.RegisterName("setIgnoresMultiClick:")
-	_nSControlSelIsContinuous = objc.RegisterName("isContinuous")
-	_nSControlSelSetContinuous = objc.RegisterName("setContinuous:")
-	_nSControlSelIsEnabled = objc.RegisterName("isEnabled")
-	_nSControlSelSetEnabled = objc.RegisterName("setEnabled:")
-	_nSControlSelRefusesFirstResponder = objc.RegisterName("refusesFirstResponder")
-	_nSControlSelSetRefusesFirstResponder = objc.RegisterName("setRefusesFirstResponder:")
-	_nSControlSelIsHighlighted = objc.RegisterName("isHighlighted")
-	_nSControlSelSetHighlighted = objc.RegisterName("setHighlighted:")
-	_nSControlSelControlSize = objc.RegisterName("controlSize")
-	_nSControlSelSetControlSize = objc.RegisterName("setControlSize:")
-	_nSControlSelFormatter = objc.RegisterName("formatter")
-	_nSControlSelSetFormatter = objc.RegisterName("setFormatter:")
-	_nSControlSelObjectValue = objc.RegisterName("objectValue")
-	_nSControlSelSetObjectValue = objc.RegisterName("setObjectValue:")
-	_nSControlSelStringValue = objc.RegisterName("stringValue")
-	_nSControlSelSetStringValue = objc.RegisterName("setStringValue:")
-	_nSControlSelAttributedStringValue = objc.RegisterName("attributedStringValue")
-	_nSControlSelSetAttributedStringValue = objc.RegisterName("setAttributedStringValue:")
-	_nSControlSelIntValue = objc.RegisterName("intValue")
-	_nSControlSelSetIntValue = objc.RegisterName("setIntValue:")
-	_nSControlSelIntegerValue = objc.RegisterName("integerValue")
-	_nSControlSelSetIntegerValue = objc.RegisterName("setIntegerValue:")
-	_nSControlSelFloatValue = objc.RegisterName("floatValue")
-	_nSControlSelSetFloatValue = objc.RegisterName("setFloatValue:")
-	_nSControlSelDoubleValue = objc.RegisterName("doubleValue")
-	_nSControlSelSetDoubleValue = objc.RegisterName("setDoubleValue:")
-	_nSControlSelFont = objc.RegisterName("font")
-	_nSControlSelSetFont = objc.RegisterName("setFont:")
-	_nSControlSelUsesSingleLineMode = objc.RegisterName("usesSingleLineMode")
-	_nSControlSelSetUsesSingleLineMode = objc.RegisterName("setUsesSingleLineMode:")
-	_nSControlSelLineBreakMode = objc.RegisterName("lineBreakMode")
-	_nSControlSelSetLineBreakMode = objc.RegisterName("setLineBreakMode:")
-	_nSControlSelAlignment = objc.RegisterName("alignment")
-	_nSControlSelSetAlignment = objc.RegisterName("setAlignment:")
-	_nSControlSelBaseWritingDirection = objc.RegisterName("baseWritingDirection")
-	_nSControlSelSetBaseWritingDirection = objc.RegisterName("setBaseWritingDirection:")
-	_nSControlSelAllowsExpansionToolTips = objc.RegisterName("allowsExpansionToolTips")
-	_nSControlSelSetAllowsExpansionToolTips = objc.RegisterName("setAllowsExpansionToolTips:")
-	_nSControlSelCurrentEditor = objc.RegisterName("currentEditor")
-	_nSControlSelAbortEditing = objc.RegisterName("abortEditing")
-	_nSControlSelValidateEditing = objc.RegisterName("validateEditing")
-	_nSControlSelEditWithFrameEditorDelegateEvent = objc.RegisterName("editWithFrame:editor:delegate:event:")
+	_clsNSControl                                         = _objcClass("NSControl")
+	_nSControlSelInitWithFrame                            = objc.RegisterName("initWithFrame:")
+	_nSControlSelInitWithCoder                            = objc.RegisterName("initWithCoder:")
+	_nSControlSelSizeThatFits                             = objc.RegisterName("sizeThatFits:")
+	_nSControlSelSizeToFit                                = objc.RegisterName("sizeToFit")
+	_nSControlSelSendActionOn                             = objc.RegisterName("sendActionOn:")
+	_nSControlSelSendActionTo                             = objc.RegisterName("sendAction:to:")
+	_nSControlSelTakeIntValueFrom                         = objc.RegisterName("takeIntValueFrom:")
+	_nSControlSelTakeFloatValueFrom                       = objc.RegisterName("takeFloatValueFrom:")
+	_nSControlSelTakeDoubleValueFrom                      = objc.RegisterName("takeDoubleValueFrom:")
+	_nSControlSelTakeStringValueFrom                      = objc.RegisterName("takeStringValueFrom:")
+	_nSControlSelTakeObjectValueFrom                      = objc.RegisterName("takeObjectValueFrom:")
+	_nSControlSelTakeIntegerValueFrom                     = objc.RegisterName("takeIntegerValueFrom:")
+	_nSControlSelPerformClick                             = objc.RegisterName("performClick:")
+	_nSControlSelExpansionFrameWithFrame                  = objc.RegisterName("expansionFrameWithFrame:")
+	_nSControlSelDrawWithExpansionFrameInView             = objc.RegisterName("drawWithExpansionFrame:inView:")
+	_nSControlSelTarget                                   = objc.RegisterName("target")
+	_nSControlSelSetTarget                                = objc.RegisterName("setTarget:")
+	_nSControlSelAction                                   = objc.RegisterName("action")
+	_nSControlSelSetAction                                = objc.RegisterName("setAction:")
+	_nSControlSelSetTag                                   = objc.RegisterName("setTag:")
+	_nSControlSelIgnoresMultiClick                        = objc.RegisterName("ignoresMultiClick")
+	_nSControlSelSetIgnoresMultiClick                     = objc.RegisterName("setIgnoresMultiClick:")
+	_nSControlSelIsContinuous                             = objc.RegisterName("isContinuous")
+	_nSControlSelSetContinuous                            = objc.RegisterName("setContinuous:")
+	_nSControlSelIsEnabled                                = objc.RegisterName("isEnabled")
+	_nSControlSelSetEnabled                               = objc.RegisterName("setEnabled:")
+	_nSControlSelRefusesFirstResponder                    = objc.RegisterName("refusesFirstResponder")
+	_nSControlSelSetRefusesFirstResponder                 = objc.RegisterName("setRefusesFirstResponder:")
+	_nSControlSelIsHighlighted                            = objc.RegisterName("isHighlighted")
+	_nSControlSelSetHighlighted                           = objc.RegisterName("setHighlighted:")
+	_nSControlSelControlSize                              = objc.RegisterName("controlSize")
+	_nSControlSelSetControlSize                           = objc.RegisterName("setControlSize:")
+	_nSControlSelFormatter                                = objc.RegisterName("formatter")
+	_nSControlSelSetFormatter                             = objc.RegisterName("setFormatter:")
+	_nSControlSelObjectValue                              = objc.RegisterName("objectValue")
+	_nSControlSelSetObjectValue                           = objc.RegisterName("setObjectValue:")
+	_nSControlSelStringValue                              = objc.RegisterName("stringValue")
+	_nSControlSelSetStringValue                           = objc.RegisterName("setStringValue:")
+	_nSControlSelAttributedStringValue                    = objc.RegisterName("attributedStringValue")
+	_nSControlSelSetAttributedStringValue                 = objc.RegisterName("setAttributedStringValue:")
+	_nSControlSelIntValue                                 = objc.RegisterName("intValue")
+	_nSControlSelSetIntValue                              = objc.RegisterName("setIntValue:")
+	_nSControlSelIntegerValue                             = objc.RegisterName("integerValue")
+	_nSControlSelSetIntegerValue                          = objc.RegisterName("setIntegerValue:")
+	_nSControlSelFloatValue                               = objc.RegisterName("floatValue")
+	_nSControlSelSetFloatValue                            = objc.RegisterName("setFloatValue:")
+	_nSControlSelDoubleValue                              = objc.RegisterName("doubleValue")
+	_nSControlSelSetDoubleValue                           = objc.RegisterName("setDoubleValue:")
+	_nSControlSelFont                                     = objc.RegisterName("font")
+	_nSControlSelSetFont                                  = objc.RegisterName("setFont:")
+	_nSControlSelUsesSingleLineMode                       = objc.RegisterName("usesSingleLineMode")
+	_nSControlSelSetUsesSingleLineMode                    = objc.RegisterName("setUsesSingleLineMode:")
+	_nSControlSelLineBreakMode                            = objc.RegisterName("lineBreakMode")
+	_nSControlSelSetLineBreakMode                         = objc.RegisterName("setLineBreakMode:")
+	_nSControlSelAlignment                                = objc.RegisterName("alignment")
+	_nSControlSelSetAlignment                             = objc.RegisterName("setAlignment:")
+	_nSControlSelBaseWritingDirection                     = objc.RegisterName("baseWritingDirection")
+	_nSControlSelSetBaseWritingDirection                  = objc.RegisterName("setBaseWritingDirection:")
+	_nSControlSelAllowsExpansionToolTips                  = objc.RegisterName("allowsExpansionToolTips")
+	_nSControlSelSetAllowsExpansionToolTips               = objc.RegisterName("setAllowsExpansionToolTips:")
+	_nSControlSelCurrentEditor                            = objc.RegisterName("currentEditor")
+	_nSControlSelAbortEditing                             = objc.RegisterName("abortEditing")
+	_nSControlSelValidateEditing                          = objc.RegisterName("validateEditing")
+	_nSControlSelEditWithFrameEditorDelegateEvent         = objc.RegisterName("editWithFrame:editor:delegate:event:")
 	_nSControlSelSelectWithFrameEditorDelegateStartLength = objc.RegisterName("selectWithFrame:editor:delegate:start:length:")
-	_nSControlSelEndEditing = objc.RegisterName("endEditing:")
-	_nSControlSelSetFloatingPointFormatLeftRight = objc.RegisterName("setFloatingPointFormat:left:right:")
-	_nSControlSelSelectedCell = objc.RegisterName("selectedCell")
-	_nSControlSelSelectedTag = objc.RegisterName("selectedTag")
-	_nSControlSelSetNeedsDisplay = objc.RegisterName("setNeedsDisplay")
-	_nSControlSelCalcSize = objc.RegisterName("calcSize")
-	_nSControlSelUpdateCell = objc.RegisterName("updateCell:")
-	_nSControlSelUpdateCellInside = objc.RegisterName("updateCellInside:")
-	_nSControlSelDrawCellInside = objc.RegisterName("drawCellInside:")
-	_nSControlSelDrawCell = objc.RegisterName("drawCell:")
-	_nSControlSelSelectCell = objc.RegisterName("selectCell:")
-	_nSControlSelCellClass = objc.RegisterName("cellClass")
-	_nSControlSelSetCellClass = objc.RegisterName("setCellClass:")
-	_nSControlSelCell = objc.RegisterName("cell")
-	_nSControlSelSetCell = objc.RegisterName("setCell:")
-	_nSControlSelInvalidateIntrinsicContentSizeForCell = objc.RegisterName("invalidateIntrinsicContentSizeForCell:")
+	_nSControlSelEndEditing                               = objc.RegisterName("endEditing:")
+	_nSControlSelSetFloatingPointFormatLeftRight          = objc.RegisterName("setFloatingPointFormat:left:right:")
+	_nSControlSelSelectedCell                             = objc.RegisterName("selectedCell")
+	_nSControlSelSelectedTag                              = objc.RegisterName("selectedTag")
+	_nSControlSelSetNeedsDisplay                          = objc.RegisterName("setNeedsDisplay")
+	_nSControlSelCalcSize                                 = objc.RegisterName("calcSize")
+	_nSControlSelUpdateCell                               = objc.RegisterName("updateCell:")
+	_nSControlSelUpdateCellInside                         = objc.RegisterName("updateCellInside:")
+	_nSControlSelDrawCellInside                           = objc.RegisterName("drawCellInside:")
+	_nSControlSelDrawCell                                 = objc.RegisterName("drawCell:")
+	_nSControlSelSelectCell                               = objc.RegisterName("selectCell:")
+	_nSControlSelCellClass                                = objc.RegisterName("cellClass")
+	_nSControlSelSetCellClass                             = objc.RegisterName("setCellClass:")
+	_nSControlSelCell                                     = objc.RegisterName("cell")
+	_nSControlSelSetCell                                  = objc.RegisterName("setCell:")
+	_nSControlSelInvalidateIntrinsicContentSizeForCell    = objc.RegisterName("invalidateIntrinsicContentSizeForCell:")
 )
 
 func NSControlFromID(id objc.ID) *NSControl {
@@ -113,13 +113,17 @@ func NSControlFromID(id objc.ID) *NSControl {
 
 func (o *NSControl) InitWithFrame(frameRect corefoundation.CGRect) *NSControl {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelInitWithFrame, frameRect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSControlFromID(_ret)
 }
 
 func (o *NSControl) InitWithCoder(coder *foundation.NSCoder) *NSControl {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSControlFromID(_ret)
 }
 
@@ -257,7 +261,9 @@ func (o *NSControl) SetControlSize(controlSize NSControlSize) {
 
 func (o *NSControl) Formatter() *foundation.NSFormatter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelFormatter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSFormatterFromID(_ret)
 }
 
@@ -276,7 +282,9 @@ func (o *NSControl) SetObjectValue(objectValue objc.ID) {
 
 func (o *NSControl) StringValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelStringValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -286,7 +294,9 @@ func (o *NSControl) SetStringValue(stringValue *foundation.NSString) {
 
 func (o *NSControl) AttributedStringValue() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelAttributedStringValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
@@ -332,7 +342,9 @@ func (o *NSControl) SetDoubleValue(doubleValue float64) {
 
 func (o *NSControl) Font() *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelFont)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
@@ -387,7 +399,9 @@ func (o *NSControl) SetAllowsExpansionToolTips(allowsExpansionToolTips bool) {
 
 func (o *NSControl) CurrentEditor() *NSText {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelCurrentEditor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextFromID(_ret)
 }
 
@@ -419,7 +433,9 @@ func (o *NSControl) SetFloatingPointFormatLeftRight(autoRange bool, leftDigits u
 
 func (o *NSControl) SelectedCell() *NSCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelSelectedCell)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCellFromID(_ret)
 }
 
@@ -475,7 +491,9 @@ func NSControlSetCellClass(cellClass objc.Class) {
 // Deprecated: since macOS 10.0.
 func (o *NSControl) Cell() *NSCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelCell)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCellFromID(_ret)
 }
 
@@ -487,4 +505,3 @@ func (o *NSControl) SetCell(cell *NSCell) {
 func (o *NSControl) InvalidateIntrinsicContentSizeForCell(cell *NSCell) {
 	o.Ptr().Send(_nSControlSelInvalidateIntrinsicContentSizeForCell, cell.Ptr())
 }
-

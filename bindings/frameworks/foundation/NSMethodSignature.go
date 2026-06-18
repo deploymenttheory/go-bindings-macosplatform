@@ -17,14 +17,14 @@ type NSMethodSignature struct {
 }
 
 var (
-	_clsNSMethodSignature = _objcClass("NSMethodSignature")
+	_clsNSMethodSignature                       = _objcClass("NSMethodSignature")
 	_nSMethodSignatureSelSignatureWithObjCTypes = objc.RegisterName("signatureWithObjCTypes:")
 	_nSMethodSignatureSelGetArgumentTypeAtIndex = objc.RegisterName("getArgumentTypeAtIndex:")
-	_nSMethodSignatureSelIsOneway = objc.RegisterName("isOneway")
-	_nSMethodSignatureSelNumberOfArguments = objc.RegisterName("numberOfArguments")
-	_nSMethodSignatureSelFrameLength = objc.RegisterName("frameLength")
-	_nSMethodSignatureSelMethodReturnType = objc.RegisterName("methodReturnType")
-	_nSMethodSignatureSelMethodReturnLength = objc.RegisterName("methodReturnLength")
+	_nSMethodSignatureSelIsOneway               = objc.RegisterName("isOneway")
+	_nSMethodSignatureSelNumberOfArguments      = objc.RegisterName("numberOfArguments")
+	_nSMethodSignatureSelFrameLength            = objc.RegisterName("frameLength")
+	_nSMethodSignatureSelMethodReturnType       = objc.RegisterName("methodReturnType")
+	_nSMethodSignatureSelMethodReturnLength     = objc.RegisterName("methodReturnLength")
 )
 
 func NSMethodSignatureFromID(id objc.ID) *NSMethodSignature {
@@ -39,7 +39,9 @@ func NSMethodSignatureFromID(id objc.ID) *NSMethodSignature {
 
 func NSMethodSignatureSignatureWithObjCTypes(types string) *NSMethodSignature {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMethodSignature), _nSMethodSignatureSelSignatureWithObjCTypes, types)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMethodSignatureFromID(_ret)
 }
 
@@ -72,4 +74,3 @@ func (o *NSMethodSignature) MethodReturnLength() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSMethodSignatureSelMethodReturnLength)
 	return _ret
 }
-

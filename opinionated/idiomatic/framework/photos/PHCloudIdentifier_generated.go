@@ -54,4 +54,3 @@ type CloudIdentifierable interface {
 }
 
 var _ CloudIdentifierable = (*CloudIdentifier)(nil)
-

@@ -64,4 +64,3 @@ type ZoomControlable interface {
 }
 
 var _ ZoomControlable = (*ZoomControl)(nil)
-

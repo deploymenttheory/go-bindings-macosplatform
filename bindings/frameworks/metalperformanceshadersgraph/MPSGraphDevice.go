@@ -16,10 +16,10 @@ type MPSGraphDevice struct {
 }
 
 var (
-	_clsMPSGraphDevice = _objcClass("MPSGraphDevice")
+	_clsMPSGraphDevice                    = _objcClass("MPSGraphDevice")
 	_mPSGraphDeviceSelDeviceWithMTLDevice = objc.RegisterName("deviceWithMTLDevice:")
-	_mPSGraphDeviceSelType = objc.RegisterName("type")
-	_mPSGraphDeviceSelMetalDevice = objc.RegisterName("metalDevice")
+	_mPSGraphDeviceSelType                = objc.RegisterName("type")
+	_mPSGraphDeviceSelMetalDevice         = objc.RegisterName("metalDevice")
 )
 
 func MPSGraphDeviceFromID(id objc.ID) *MPSGraphDevice {
@@ -35,7 +35,9 @@ func MPSGraphDeviceFromID(id objc.ID) *MPSGraphDevice {
 // Creates a device from a given Metal device. - Parameters: - metalDevice: `MTLDevice` to create an MPSGraphDevice from. - Returns: A valid device.
 func MPSGraphDeviceDeviceWithMTLDevice(metalDevice metal.MTLDevice) *MPSGraphDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphDevice), _mPSGraphDeviceSelDeviceWithMTLDevice, metalDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSGraphDeviceFromID(_ret)
 }
 
@@ -50,4 +52,3 @@ func (o *MPSGraphDevice) MetalDevice() metal.MTLDevice {
 	_ret := objc.Send[metal.MTLDevice](o.Ptr(), _mPSGraphDeviceSelMetalDevice)
 	return _ret
 }
-

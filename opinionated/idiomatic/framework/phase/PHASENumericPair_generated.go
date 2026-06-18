@@ -80,4 +80,3 @@ type NumericPairable interface {
 }
 
 var _ NumericPairable = (*NumericPair)(nil)
-

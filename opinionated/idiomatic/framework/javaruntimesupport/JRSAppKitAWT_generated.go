@@ -41,4 +41,3 @@ type AppKitAWTable interface {
 }
 
 var _ AppKitAWTable = (*AppKitAWT)(nil)
-

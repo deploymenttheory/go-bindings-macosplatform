@@ -79,4 +79,3 @@ type MedicationConceptable interface {
 }
 
 var _ MedicationConceptable = (*MedicationConcept)(nil)
-

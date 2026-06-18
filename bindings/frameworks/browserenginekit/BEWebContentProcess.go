@@ -18,13 +18,13 @@ type BEWebContentProcess struct {
 }
 
 var (
-	_clsBEWebContentProcess = _objcClass("BEWebContentProcess")
-	_bEWebContentProcessSelWebContentProcessWithInterruptionHandlerCompletion = objc.RegisterName("webContentProcessWithInterruptionHandler:completion:")
+	_clsBEWebContentProcess                                                           = _objcClass("BEWebContentProcess")
+	_bEWebContentProcessSelWebContentProcessWithInterruptionHandlerCompletion         = objc.RegisterName("webContentProcessWithInterruptionHandler:completion:")
 	_bEWebContentProcessSelWebContentProcessWithBundleIDInterruptionHandlerCompletion = objc.RegisterName("webContentProcessWithBundleID:interruptionHandler:completion:")
-	_bEWebContentProcessSelInvalidate = objc.RegisterName("invalidate")
-	_bEWebContentProcessSelMakeLibXPCConnectionError = objc.RegisterName("makeLibXPCConnectionError:")
-	_bEWebContentProcessSelGrantCapabilityError = objc.RegisterName("grantCapability:error:")
-	_bEWebContentProcessSelGrantCapabilityErrorInvalidationHandler = objc.RegisterName("grantCapability:error:invalidationHandler:")
+	_bEWebContentProcessSelInvalidate                                                 = objc.RegisterName("invalidate")
+	_bEWebContentProcessSelMakeLibXPCConnectionError                                  = objc.RegisterName("makeLibXPCConnectionError:")
+	_bEWebContentProcessSelGrantCapabilityError                                       = objc.RegisterName("grantCapability:error:")
+	_bEWebContentProcessSelGrantCapabilityErrorInvalidationHandler                    = objc.RegisterName("grantCapability:error:invalidationHandler:")
 )
 
 func BEWebContentProcessFromID(id objc.ID) *BEWebContentProcess {
@@ -37,7 +37,7 @@ func BEWebContentProcessFromID(id objc.ID) *BEWebContentProcess {
 	return o
 }
 
-// Asynchronously launches a web content process This initializer launches a new web content extension process. - Parameters: - `interruptionHandler` : A block that is called if the extension process terminates. - `completion` : A block called with a new ``BEWebContentProcess`` when the extension process has launched or with an error.
+// Asynchronously launches a web content process This initializer launches a new web content extension process. - Parameters: - `interruptionHandler` : A block that is called if the extension process terminates. - `completion` : A block called with a new “BEWebContentProcess“ when the extension process has launched or with an error.
 func BEWebContentProcessWebContentProcessWithInterruptionHandlerCompletion(interruptionHandler func(), completion func(*BEWebContentProcess, unsafe.Pointer)) {
 	var __block_interruptionHandler objc.Block
 	if interruptionHandler != nil {
@@ -59,7 +59,7 @@ func BEWebContentProcessWebContentProcessWithInterruptionHandlerCompletion(inter
 	objc.ID(_clsBEWebContentProcess).Send(_bEWebContentProcessSelWebContentProcessWithInterruptionHandlerCompletion, __block_interruptionHandler, __block_completion)
 }
 
-// Asynchronously launches a web content process This initializer launches a new web content extension process. - Parameters: - `bundleID` : The bundle identifier of the WebContent process to launch. - `interruptionHandler` : A block that is called if the extension process terminates. - `completion` : A block called with a new ``BEWebContentProcess`` when the extension process has launched or with an error.
+// Asynchronously launches a web content process This initializer launches a new web content extension process. - Parameters: - `bundleID` : The bundle identifier of the WebContent process to launch. - `interruptionHandler` : A block that is called if the extension process terminates. - `completion` : A block called with a new “BEWebContentProcess“ when the extension process has launched or with an error.
 func BEWebContentProcessWebContentProcessWithBundleIDInterruptionHandlerCompletion(bundleID *foundation.NSString, interruptionHandler func(), completion func(*BEWebContentProcess, unsafe.Pointer)) {
 	var __block_interruptionHandler objc.Block
 	if interruptionHandler != nil {
@@ -90,7 +90,9 @@ func (o *BEWebContentProcess) Invalidate() {
 func (o *BEWebContentProcess) MakeLibXPCConnectionError() (*foundation.NSObject, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _bEWebContentProcessSelMakeLibXPCConnectionError, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -119,4 +121,3 @@ func (o *BEWebContentProcess) GrantCapabilityErrorInvalidationHandler(capability
 	_ret := objc.Send[BEProcessCapabilityGrant](o.Ptr(), _bEWebContentProcessSelGrantCapabilityErrorInvalidationHandler, capability.Ptr(), error_, __block_invalidationHandler)
 	return _ret
 }
-

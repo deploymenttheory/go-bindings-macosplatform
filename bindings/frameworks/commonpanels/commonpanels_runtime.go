@@ -14,8 +14,8 @@ import (
 
 var (
 	_commonpanelsLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce        sync.Once
+	_failedSymbols   = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -49,22 +49,38 @@ func _loadLibrary() {
 		return
 	}
 	_register("CMCalibrateDisplay", func() { purego.RegisterLibFunc(&_fnCMCalibrateDisplay, _commonpanelsLib, "CMCalibrateDisplay") })
-	_register("DisposeCalibrateEventUPP", func() { purego.RegisterLibFunc(&_fnDisposeCalibrateEventUPP, _commonpanelsLib, "DisposeCalibrateEventUPP") })
+	_register("DisposeCalibrateEventUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeCalibrateEventUPP, _commonpanelsLib, "DisposeCalibrateEventUPP")
+	})
 	_register("DisposeCalibrateUPP", func() { purego.RegisterLibFunc(&_fnDisposeCalibrateUPP, _commonpanelsLib, "DisposeCalibrateUPP") })
 	_register("DisposeCanCalibrateUPP", func() { purego.RegisterLibFunc(&_fnDisposeCanCalibrateUPP, _commonpanelsLib, "DisposeCanCalibrateUPP") })
-	_register("DisposeNColorChangedUPP", func() { purego.RegisterLibFunc(&_fnDisposeNColorChangedUPP, _commonpanelsLib, "DisposeNColorChangedUPP") })
+	_register("DisposeNColorChangedUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeNColorChangedUPP, _commonpanelsLib, "DisposeNColorChangedUPP")
+	})
 	_register("FCAddCollection", func() { purego.RegisterLibFunc(&_fnFCAddCollection, _commonpanelsLib, "FCAddCollection") })
-	_register("FCAddFontDescriptorToCollection", func() { purego.RegisterLibFunc(&_fnFCAddFontDescriptorToCollection, _commonpanelsLib, "FCAddFontDescriptorToCollection") })
+	_register("FCAddFontDescriptorToCollection", func() {
+		purego.RegisterLibFunc(&_fnFCAddFontDescriptorToCollection, _commonpanelsLib, "FCAddFontDescriptorToCollection")
+	})
 	_register("FCCopyCollectionNames", func() { purego.RegisterLibFunc(&_fnFCCopyCollectionNames, _commonpanelsLib, "FCCopyCollectionNames") })
-	_register("FCCopyFontDescriptorsInCollection", func() { purego.RegisterLibFunc(&_fnFCCopyFontDescriptorsInCollection, _commonpanelsLib, "FCCopyFontDescriptorsInCollection") })
-	_register("FCFontDescriptorCreateWithFontAttributes", func() { purego.RegisterLibFunc(&_fnFCFontDescriptorCreateWithFontAttributes, _commonpanelsLib, "FCFontDescriptorCreateWithFontAttributes") })
-	_register("FCFontDescriptorCreateWithName", func() { purego.RegisterLibFunc(&_fnFCFontDescriptorCreateWithName, _commonpanelsLib, "FCFontDescriptorCreateWithName") })
+	_register("FCCopyFontDescriptorsInCollection", func() {
+		purego.RegisterLibFunc(&_fnFCCopyFontDescriptorsInCollection, _commonpanelsLib, "FCCopyFontDescriptorsInCollection")
+	})
+	_register("FCFontDescriptorCreateWithFontAttributes", func() {
+		purego.RegisterLibFunc(&_fnFCFontDescriptorCreateWithFontAttributes, _commonpanelsLib, "FCFontDescriptorCreateWithFontAttributes")
+	})
+	_register("FCFontDescriptorCreateWithName", func() {
+		purego.RegisterLibFunc(&_fnFCFontDescriptorCreateWithName, _commonpanelsLib, "FCFontDescriptorCreateWithName")
+	})
 	_register("FCRemoveCollection", func() { purego.RegisterLibFunc(&_fnFCRemoveCollection, _commonpanelsLib, "FCRemoveCollection") })
-	_register("FCRemoveFontDescriptorFromCollection", func() { purego.RegisterLibFunc(&_fnFCRemoveFontDescriptorFromCollection, _commonpanelsLib, "FCRemoveFontDescriptorFromCollection") })
+	_register("FCRemoveFontDescriptorFromCollection", func() {
+		purego.RegisterLibFunc(&_fnFCRemoveFontDescriptorFromCollection, _commonpanelsLib, "FCRemoveFontDescriptorFromCollection")
+	})
 	_register("FPIsFontPanelVisible", func() { purego.RegisterLibFunc(&_fnFPIsFontPanelVisible, _commonpanelsLib, "FPIsFontPanelVisible") })
 	_register("FPShowHideFontPanel", func() { purego.RegisterLibFunc(&_fnFPShowHideFontPanel, _commonpanelsLib, "FPShowHideFontPanel") })
 	_register("GetColor", func() { purego.RegisterLibFunc(&_fnGetColor, _commonpanelsLib, "GetColor") })
-	_register("InvokeCalibrateEventUPP", func() { purego.RegisterLibFunc(&_fnInvokeCalibrateEventUPP, _commonpanelsLib, "InvokeCalibrateEventUPP") })
+	_register("InvokeCalibrateEventUPP", func() {
+		purego.RegisterLibFunc(&_fnInvokeCalibrateEventUPP, _commonpanelsLib, "InvokeCalibrateEventUPP")
+	})
 	_register("InvokeCalibrateUPP", func() { purego.RegisterLibFunc(&_fnInvokeCalibrateUPP, _commonpanelsLib, "InvokeCalibrateUPP") })
 	_register("InvokeCanCalibrateUPP", func() { purego.RegisterLibFunc(&_fnInvokeCanCalibrateUPP, _commonpanelsLib, "InvokeCanCalibrateUPP") })
 	_register("InvokeNColorChangedUPP", func() { purego.RegisterLibFunc(&_fnInvokeNColorChangedUPP, _commonpanelsLib, "InvokeNColorChangedUPP") })
@@ -73,7 +89,9 @@ func _loadLibrary() {
 	_register("NewCalibrateUPP", func() { purego.RegisterLibFunc(&_fnNewCalibrateUPP, _commonpanelsLib, "NewCalibrateUPP") })
 	_register("NewCanCalibrateUPP", func() { purego.RegisterLibFunc(&_fnNewCanCalibrateUPP, _commonpanelsLib, "NewCanCalibrateUPP") })
 	_register("NewNColorChangedUPP", func() { purego.RegisterLibFunc(&_fnNewNColorChangedUPP, _commonpanelsLib, "NewNColorChangedUPP") })
-	_register("SetFontInfoForSelection", func() { purego.RegisterLibFunc(&_fnSetFontInfoForSelection, _commonpanelsLib, "SetFontInfoForSelection") })
+	_register("SetFontInfoForSelection", func() {
+		purego.RegisterLibFunc(&_fnSetFontInfoForSelection, _commonpanelsLib, "SetFontInfoForSelection")
+	})
 }
 
 func init() {

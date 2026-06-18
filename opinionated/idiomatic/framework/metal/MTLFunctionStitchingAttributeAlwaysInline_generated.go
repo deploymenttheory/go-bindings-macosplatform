@@ -15,7 +15,9 @@ type FunctionStitchingAttributeAlwaysInline struct {
 }
 
 // Unwrap returns the underlying [raw.MTLFunctionStitchingAttributeAlwaysInline].
-func (x *FunctionStitchingAttributeAlwaysInline) Unwrap() *raw.MTLFunctionStitchingAttributeAlwaysInline { return x.inner }
+func (x *FunctionStitchingAttributeAlwaysInline) Unwrap() *raw.MTLFunctionStitchingAttributeAlwaysInline {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -41,4 +43,3 @@ type FunctionStitchingAttributeAlwaysInlineable interface {
 }
 
 var _ FunctionStitchingAttributeAlwaysInlineable = (*FunctionStitchingAttributeAlwaysInline)(nil)
-

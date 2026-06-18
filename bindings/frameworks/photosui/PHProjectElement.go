@@ -17,8 +17,8 @@ type PHProjectElement struct {
 }
 
 var (
-	_clsPHProjectElement = _objcClass("PHProjectElement")
-	_pHProjectElementSelWeight = objc.RegisterName("weight")
+	_clsPHProjectElement          = _objcClass("PHProjectElement")
+	_pHProjectElementSelWeight    = objc.RegisterName("weight")
 	_pHProjectElementSelPlacement = objc.RegisterName("placement")
 )
 
@@ -43,4 +43,3 @@ func (o *PHProjectElement) Placement() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _pHProjectElementSelPlacement)
 	return _ret
 }
-

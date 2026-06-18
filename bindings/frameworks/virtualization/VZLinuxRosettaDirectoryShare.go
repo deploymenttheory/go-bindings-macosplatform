@@ -17,12 +17,12 @@ type VZLinuxRosettaDirectoryShare struct {
 }
 
 var (
-	_clsVZLinuxRosettaDirectoryShare = _objcClass("VZLinuxRosettaDirectoryShare")
-	_vZLinuxRosettaDirectoryShareSelInitWithError = objc.RegisterName("initWithError:")
+	_clsVZLinuxRosettaDirectoryShare                                    = _objcClass("VZLinuxRosettaDirectoryShare")
+	_vZLinuxRosettaDirectoryShareSelInitWithError                       = objc.RegisterName("initWithError:")
 	_vZLinuxRosettaDirectoryShareSelInstallRosettaWithCompletionHandler = objc.RegisterName("installRosettaWithCompletionHandler:")
-	_vZLinuxRosettaDirectoryShareSelOptions = objc.RegisterName("options")
-	_vZLinuxRosettaDirectoryShareSelSetOptions = objc.RegisterName("setOptions:")
-	_vZLinuxRosettaDirectoryShareSelAvailability = objc.RegisterName("availability")
+	_vZLinuxRosettaDirectoryShareSelOptions                             = objc.RegisterName("options")
+	_vZLinuxRosettaDirectoryShareSelSetOptions                          = objc.RegisterName("setOptions:")
+	_vZLinuxRosettaDirectoryShareSelAvailability                        = objc.RegisterName("availability")
 )
 
 func VZLinuxRosettaDirectoryShareFromID(id objc.ID) *VZLinuxRosettaDirectoryShare {
@@ -39,7 +39,9 @@ func VZLinuxRosettaDirectoryShareFromID(id objc.ID) *VZLinuxRosettaDirectoryShar
 func (o *VZLinuxRosettaDirectoryShare) InitWithError() (*VZLinuxRosettaDirectoryShare, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZLinuxRosettaDirectoryShareSelInitWithError, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -61,7 +63,9 @@ func VZLinuxRosettaDirectoryShareInstallRosettaWithCompletionHandler(completionH
 // @abstract Enable translation caching and configure the socket communication type for Rosetta.
 func (o *VZLinuxRosettaDirectoryShare) Options() *VZLinuxRosettaCachingOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZLinuxRosettaDirectoryShareSelOptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZLinuxRosettaCachingOptionsFromID(_ret)
 }
 
@@ -74,4 +78,3 @@ func VZLinuxRosettaDirectoryShareAvailability() VZLinuxRosettaAvailability {
 	_ret := objc.Send[VZLinuxRosettaAvailability](objc.ID(_clsVZLinuxRosettaDirectoryShare), _vZLinuxRosettaDirectoryShareSelAvailability)
 	return _ret
 }
-

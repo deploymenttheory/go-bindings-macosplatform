@@ -16,9 +16,9 @@ type AVMediaDataStorage struct {
 }
 
 var (
-	_clsAVMediaDataStorage = _objcClass("AVMediaDataStorage")
+	_clsAVMediaDataStorage                   = _objcClass("AVMediaDataStorage")
 	_aVMediaDataStorageSelInitWithURLOptions = objc.RegisterName("initWithURL:options:")
-	_aVMediaDataStorageSelURL = objc.RegisterName("URL")
+	_aVMediaDataStorageSelURL                = objc.RegisterName("URL")
 )
 
 func AVMediaDataStorageFromID(id objc.ID) *AVMediaDataStorage {
@@ -34,14 +34,17 @@ func AVMediaDataStorageFromID(id objc.ID) *AVMediaDataStorage {
 // @method			initWithURL:options: @abstract		Creates an AVMediaDataStorage object associated with a file URL. @param			URL An NSURL object that specifies a file where sample data that is added to a movie or track should be written. @param			options An NSDictionary object that contains keys for specifying options for the initialization of the AVMediaDataStorage object. Currently no keys are defined. @result			An AVMediaDataStorage object
 func (o *AVMediaDataStorage) InitWithURLOptions(uRL *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVMediaDataStorage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMediaDataStorageSelInitWithURLOptions, uRL.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMediaDataStorageFromID(_ret)
 }
 
 // @method			URL @abstract       The URL from which the receiver was initialized; may be nil.
 func (o *AVMediaDataStorage) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMediaDataStorageSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
-

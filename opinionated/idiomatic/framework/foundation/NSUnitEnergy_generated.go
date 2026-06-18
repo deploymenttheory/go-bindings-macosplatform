@@ -54,4 +54,3 @@ type UnitEnergyable interface {
 }
 
 var _ UnitEnergyable = (*UnitEnergy)(nil)
-

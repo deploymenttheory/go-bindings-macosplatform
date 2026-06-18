@@ -16,9 +16,9 @@ type MTRDeviceControllerExternalCertificateParameters struct {
 }
 
 var (
-	_clsMTRDeviceControllerExternalCertificateParameters = _objcClass("MTRDeviceControllerExternalCertificateParameters")
+	_clsMTRDeviceControllerExternalCertificateParameters                                                                                                                                                     = _objcClass("MTRDeviceControllerExternalCertificateParameters")
 	_mTRDeviceControllerExternalCertificateParametersSelInitWithStorageDelegateStorageDelegateQueueUniqueIdentifierIpkVendorIDOperationalKeypairOperationalCertificateIntermediateCertificateRootCertificate = objc.RegisterName("initWithStorageDelegate:storageDelegateQueue:uniqueIdentifier:ipk:vendorID:operationalKeypair:operationalCertificate:intermediateCertificate:rootCertificate:")
-	_mTRDeviceControllerExternalCertificateParametersSelRootCertificate = objc.RegisterName("rootCertificate")
+	_mTRDeviceControllerExternalCertificateParametersSelRootCertificate                                                                                                                                      = objc.RegisterName("rootCertificate")
 )
 
 func MTRDeviceControllerExternalCertificateParametersFromID(id objc.ID) *MTRDeviceControllerExternalCertificateParameters {
@@ -34,13 +34,16 @@ func MTRDeviceControllerExternalCertificateParametersFromID(id objc.ID) *MTRDevi
 // Prepare to initialize a controller that is not able to sign operational certificates itself, and therefore needs to be provided with a complete operational certificate chain. A controller created from MTRDeviceControllerStartupParams initialized with this method will not be able to commission devices unless operationalCertificateIssuer and operationalCertificateIssuerQueue are set. The fabric id and node id to use for the controller will be derived from the provided operationalCertificate. @param storageDelegate The storage to use for the controller.  This will be called into on storageDelegateQueue. @param storageDelegateQueue The queue for calls into storageDelegate.  See MTRDeviceControllerStorageDelegate documentation for the rules about what work is allowed to be done on this queue. @param uniqueIdentifier The unique id to assign to the controller. @param vendorID The vendor ID (allocated by the Connectivity Standards Alliance) for this controller. Must not be the "standard" vendor id (0). @param ipk The Identity Protection Key. Must be 16 bytes in length. @param intermediateCertificate Must be nil if operationalCertificate is directly signed by rootCertificate.  Otherwise must be the certificate that signed operationalCertificate.
 func (o *MTRDeviceControllerExternalCertificateParameters) InitWithStorageDelegateStorageDelegateQueueUniqueIdentifierIpkVendorIDOperationalKeypairOperationalCertificateIntermediateCertificateRootCertificate(storageDelegate MTRDeviceControllerStorageDelegate, storageDelegateQueue *foundation.NSObject, uniqueIdentifier *foundation.NSUUID, ipk *foundation.NSData, vendorID *foundation.NSNumber, operationalKeypair MTRKeypair, operationalCertificate *foundation.NSData, intermediateCertificate *foundation.NSData, rootCertificate *foundation.NSData) *MTRDeviceControllerExternalCertificateParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerExternalCertificateParametersSelInitWithStorageDelegateStorageDelegateQueueUniqueIdentifierIpkVendorIDOperationalKeypairOperationalCertificateIntermediateCertificateRootCertificate, storageDelegate, storageDelegateQueue.Ptr(), uniqueIdentifier.Ptr(), ipk.Ptr(), vendorID.Ptr(), operationalKeypair, operationalCertificate.Ptr(), intermediateCertificate.Ptr(), rootCertificate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRDeviceControllerExternalCertificateParametersFromID(_ret)
 }
 
 func (o *MTRDeviceControllerExternalCertificateParameters) RootCertificate() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerExternalCertificateParametersSelRootCertificate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

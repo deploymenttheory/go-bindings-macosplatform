@@ -16,10 +16,10 @@ type NSPressureConfiguration struct {
 }
 
 var (
-	_clsNSPressureConfiguration = _objcClass("NSPressureConfiguration")
+	_clsNSPressureConfiguration                         = _objcClass("NSPressureConfiguration")
 	_nSPressureConfigurationSelInitWithPressureBehavior = objc.RegisterName("initWithPressureBehavior:")
-	_nSPressureConfigurationSelSet = objc.RegisterName("set")
-	_nSPressureConfigurationSelPressureBehavior = objc.RegisterName("pressureBehavior")
+	_nSPressureConfigurationSelSet                      = objc.RegisterName("set")
+	_nSPressureConfigurationSelPressureBehavior         = objc.RegisterName("pressureBehavior")
 )
 
 func NSPressureConfigurationFromID(id objc.ID) *NSPressureConfiguration {
@@ -34,7 +34,9 @@ func NSPressureConfigurationFromID(id objc.ID) *NSPressureConfiguration {
 
 func (o *NSPressureConfiguration) InitWithPressureBehavior(pressureBehavior NSPressureBehavior) *NSPressureConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPressureConfigurationSelInitWithPressureBehavior, pressureBehavior)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPressureConfigurationFromID(_ret)
 }
 
@@ -46,4 +48,3 @@ func (o *NSPressureConfiguration) PressureBehavior() NSPressureBehavior {
 	_ret := objc.Send[NSPressureBehavior](o.Ptr(), _nSPressureConfigurationSelPressureBehavior)
 	return _ret
 }
-

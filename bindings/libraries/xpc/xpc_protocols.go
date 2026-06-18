@@ -31,4 +31,3 @@ type OS_xpc_peer_requirement interface {
 type OS_xpc_session interface {
 	cgo.Object
 }
-

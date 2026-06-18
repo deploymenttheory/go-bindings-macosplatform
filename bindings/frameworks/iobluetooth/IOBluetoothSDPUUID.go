@@ -18,17 +18,17 @@ type IOBluetoothSDPUUID struct {
 }
 
 var (
-	_clsIOBluetoothSDPUUID = _objcClass("IOBluetoothSDPUUID")
+	_clsIOBluetoothSDPUUID                    = _objcClass("IOBluetoothSDPUUID")
 	_iOBluetoothSDPUUIDSelUuidWithBytesLength = objc.RegisterName("uuidWithBytes:length:")
-	_iOBluetoothSDPUUIDSelUuidWithData = objc.RegisterName("uuidWithData:")
-	_iOBluetoothSDPUUIDSelUuid16 = objc.RegisterName("uuid16:")
-	_iOBluetoothSDPUUIDSelUuid32 = objc.RegisterName("uuid32:")
-	_iOBluetoothSDPUUIDSelWithSDPUUIDRef = objc.RegisterName("withSDPUUIDRef:")
-	_iOBluetoothSDPUUIDSelInitWithUUID16 = objc.RegisterName("initWithUUID16:")
-	_iOBluetoothSDPUUIDSelInitWithUUID32 = objc.RegisterName("initWithUUID32:")
-	_iOBluetoothSDPUUIDSelGetSDPUUIDRef = objc.RegisterName("getSDPUUIDRef")
-	_iOBluetoothSDPUUIDSelGetUUIDWithLength = objc.RegisterName("getUUIDWithLength:")
-	_iOBluetoothSDPUUIDSelIsEqualToUUID = objc.RegisterName("isEqualToUUID:")
+	_iOBluetoothSDPUUIDSelUuidWithData        = objc.RegisterName("uuidWithData:")
+	_iOBluetoothSDPUUIDSelUuid16              = objc.RegisterName("uuid16:")
+	_iOBluetoothSDPUUIDSelUuid32              = objc.RegisterName("uuid32:")
+	_iOBluetoothSDPUUIDSelWithSDPUUIDRef      = objc.RegisterName("withSDPUUIDRef:")
+	_iOBluetoothSDPUUIDSelInitWithUUID16      = objc.RegisterName("initWithUUID16:")
+	_iOBluetoothSDPUUIDSelInitWithUUID32      = objc.RegisterName("initWithUUID32:")
+	_iOBluetoothSDPUUIDSelGetSDPUUIDRef       = objc.RegisterName("getSDPUUIDRef")
+	_iOBluetoothSDPUUIDSelGetUUIDWithLength   = objc.RegisterName("getUUIDWithLength:")
+	_iOBluetoothSDPUUIDSelIsEqualToUUID       = objc.RegisterName("isEqualToUUID:")
 )
 
 func IOBluetoothSDPUUIDFromID(id objc.ID) *IOBluetoothSDPUUID {
@@ -43,44 +43,58 @@ func IOBluetoothSDPUUIDFromID(id objc.ID) *IOBluetoothSDPUUID {
 
 func IOBluetoothSDPUUIDUuidWithBytesLength(bytes_ unsafe.Pointer, length uint) *IOBluetoothSDPUUID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothSDPUUID), _iOBluetoothSDPUUIDSelUuidWithBytesLength, bytes_, length)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothSDPUUIDFromID(_ret)
 }
 
 func IOBluetoothSDPUUIDUuidWithData(data *foundation.NSData) *IOBluetoothSDPUUID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothSDPUUID), _iOBluetoothSDPUUIDSelUuidWithData, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothSDPUUIDFromID(_ret)
 }
 
 func IOBluetoothSDPUUIDUuid16(uuid16 uint16) *IOBluetoothSDPUUID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothSDPUUID), _iOBluetoothSDPUUIDSelUuid16, uuid16)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothSDPUUIDFromID(_ret)
 }
 
 func IOBluetoothSDPUUIDUuid32(uuid32 uint32) *IOBluetoothSDPUUID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothSDPUUID), _iOBluetoothSDPUUIDSelUuid32, uuid32)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothSDPUUIDFromID(_ret)
 }
 
 // @method	withSDPUUIDRef: @abstract	Method call to convert an IOBluetoothSDPUUIDRef into an IOBluetoothSDPUUID *. @param	sdpUUIDRef IOBluetoothSDPUUIDRef for which an IOBluetoothSDPUUID * is desired. @result		Returns the IOBluetoothSDPUUID * for the given IOBluetoothSDPUUIDRef.
 func IOBluetoothSDPUUIDWithSDPUUIDRef(sdpUUIDRef unsafe.Pointer) *IOBluetoothSDPUUID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothSDPUUID), _iOBluetoothSDPUUIDSelWithSDPUUIDRef, sdpUUIDRef)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothSDPUUIDFromID(_ret)
 }
 
 func (o *IOBluetoothSDPUUID) InitWithUUID16(uuid16 uint16) *IOBluetoothSDPUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPUUIDSelInitWithUUID16, uuid16)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothSDPUUIDFromID(_ret)
 }
 
 func (o *IOBluetoothSDPUUID) InitWithUUID32(uuid32 uint32) *IOBluetoothSDPUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPUUIDSelInitWithUUID32, uuid32)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothSDPUUIDFromID(_ret)
 }
 
@@ -92,7 +106,9 @@ func (o *IOBluetoothSDPUUID) GetSDPUUIDRef() unsafe.Pointer {
 
 func (o *IOBluetoothSDPUUID) GetUUIDWithLength(newLength uint) *IOBluetoothSDPUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPUUIDSelGetUUIDWithLength, newLength)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothSDPUUIDFromID(_ret)
 }
 
@@ -100,4 +116,3 @@ func (o *IOBluetoothSDPUUID) IsEqualToUUID(otherUUID *IOBluetoothSDPUUID) bool {
 	_ret := objc.Send[bool](o.Ptr(), _iOBluetoothSDPUUIDSelIsEqualToUUID, otherUUID.Ptr())
 	return _ret
 }
-

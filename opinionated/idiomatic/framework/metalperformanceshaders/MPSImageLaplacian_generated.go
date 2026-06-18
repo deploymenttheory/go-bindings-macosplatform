@@ -85,7 +85,9 @@ func (x *ImageLaplacian) SetBias(bias float32) {
 	x.inner.SetBias(bias)
 }
 
-func (x *ImageLaplacian) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageLaplacian) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
 func (x *ImageLaplacian) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
 
@@ -103,4 +105,3 @@ type ImageLaplacianable interface {
 }
 
 var _ ImageLaplacianable = (*ImageLaplacian)(nil)
-

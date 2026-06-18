@@ -12,4 +12,3 @@ import (
 type SpeechRecognitionRequestProvider interface {
 	asSpeechRecognitionRequest() *raw.SFSpeechRecognitionRequest
 }
-

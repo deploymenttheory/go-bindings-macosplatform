@@ -16,14 +16,14 @@ type MTRChannelClusterLineupInfoStruct struct {
 }
 
 var (
-	_clsMTRChannelClusterLineupInfoStruct = _objcClass("MTRChannelClusterLineupInfoStruct")
-	_mTRChannelClusterLineupInfoStructSelOperatorName = objc.RegisterName("operatorName")
-	_mTRChannelClusterLineupInfoStructSelSetOperatorName = objc.RegisterName("setOperatorName:")
-	_mTRChannelClusterLineupInfoStructSelLineupName = objc.RegisterName("lineupName")
-	_mTRChannelClusterLineupInfoStructSelSetLineupName = objc.RegisterName("setLineupName:")
-	_mTRChannelClusterLineupInfoStructSelPostalCode = objc.RegisterName("postalCode")
-	_mTRChannelClusterLineupInfoStructSelSetPostalCode = objc.RegisterName("setPostalCode:")
-	_mTRChannelClusterLineupInfoStructSelLineupInfoType = objc.RegisterName("lineupInfoType")
+	_clsMTRChannelClusterLineupInfoStruct                  = _objcClass("MTRChannelClusterLineupInfoStruct")
+	_mTRChannelClusterLineupInfoStructSelOperatorName      = objc.RegisterName("operatorName")
+	_mTRChannelClusterLineupInfoStructSelSetOperatorName   = objc.RegisterName("setOperatorName:")
+	_mTRChannelClusterLineupInfoStructSelLineupName        = objc.RegisterName("lineupName")
+	_mTRChannelClusterLineupInfoStructSelSetLineupName     = objc.RegisterName("setLineupName:")
+	_mTRChannelClusterLineupInfoStructSelPostalCode        = objc.RegisterName("postalCode")
+	_mTRChannelClusterLineupInfoStructSelSetPostalCode     = objc.RegisterName("setPostalCode:")
+	_mTRChannelClusterLineupInfoStructSelLineupInfoType    = objc.RegisterName("lineupInfoType")
 	_mTRChannelClusterLineupInfoStructSelSetLineupInfoType = objc.RegisterName("setLineupInfoType:")
 )
 
@@ -39,7 +39,9 @@ func MTRChannelClusterLineupInfoStructFromID(id objc.ID) *MTRChannelClusterLineu
 
 func (o *MTRChannelClusterLineupInfoStruct) OperatorName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterLineupInfoStructSelOperatorName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTRChannelClusterLineupInfoStruct) SetOperatorName(operatorName *founda
 
 func (o *MTRChannelClusterLineupInfoStruct) LineupName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterLineupInfoStructSelLineupName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -59,7 +63,9 @@ func (o *MTRChannelClusterLineupInfoStruct) SetLineupName(lineupName *foundation
 
 func (o *MTRChannelClusterLineupInfoStruct) PostalCode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterLineupInfoStructSelPostalCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -69,11 +75,12 @@ func (o *MTRChannelClusterLineupInfoStruct) SetPostalCode(postalCode *foundation
 
 func (o *MTRChannelClusterLineupInfoStruct) LineupInfoType() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterLineupInfoStructSelLineupInfoType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRChannelClusterLineupInfoStruct) SetLineupInfoType(lineupInfoType *foundation.NSNumber) {
 	o.Ptr().Send(_mTRChannelClusterLineupInfoStructSelSetLineupInfoType, lineupInfoType.Ptr())
 }
-

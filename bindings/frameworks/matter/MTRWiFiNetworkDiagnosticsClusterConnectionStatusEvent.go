@@ -16,8 +16,8 @@ type MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent struct {
 }
 
 var (
-	_clsMTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent = _objcClass("MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent")
-	_mTRWiFiNetworkDiagnosticsClusterConnectionStatusEventSelConnectionStatus = objc.RegisterName("connectionStatus")
+	_clsMTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent                    = _objcClass("MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent")
+	_mTRWiFiNetworkDiagnosticsClusterConnectionStatusEventSelConnectionStatus    = objc.RegisterName("connectionStatus")
 	_mTRWiFiNetworkDiagnosticsClusterConnectionStatusEventSelSetConnectionStatus = objc.RegisterName("setConnectionStatus:")
 )
 
@@ -33,11 +33,12 @@ func MTRWiFiNetworkDiagnosticsClusterConnectionStatusEventFromID(id objc.ID) *MT
 
 func (o *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) ConnectionStatus() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRWiFiNetworkDiagnosticsClusterConnectionStatusEventSelConnectionStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) SetConnectionStatus(connectionStatus *foundation.NSNumber) {
 	o.Ptr().Send(_mTRWiFiNetworkDiagnosticsClusterConnectionStatusEventSelSetConnectionStatus, connectionStatus.Ptr())
 }
-

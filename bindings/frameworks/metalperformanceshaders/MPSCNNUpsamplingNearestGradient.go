@@ -17,7 +17,7 @@ type MPSCNNUpsamplingNearestGradient struct {
 }
 
 var (
-	_clsMPSCNNUpsamplingNearestGradient = _objcClass("MPSCNNUpsamplingNearestGradient")
+	_clsMPSCNNUpsamplingNearestGradient                                                     = _objcClass("MPSCNNUpsamplingNearestGradient")
 	_mPSCNNUpsamplingNearestGradientSelInitWithDeviceIntegerScaleFactorXIntegerScaleFactorY = objc.RegisterName("initWithDevice:integerScaleFactorX:integerScaleFactorY:")
 )
 
@@ -34,7 +34,8 @@ func MPSCNNUpsamplingNearestGradientFromID(id objc.ID) *MPSCNNUpsamplingNearestG
 // @abstract  Initialize the nearest spatial upsampling filter. @param     device                   The device the filter will run on. @param     integerScaleFactorX      The downsampling factor for the x dimension. @param     integerScaleFactorY      The downsampling factor for the y dimension. @return    A valid MPSCNNUpsamplingNearestGradient object or nil, if failure.
 func (o *MPSCNNUpsamplingNearestGradient) InitWithDeviceIntegerScaleFactorXIntegerScaleFactorY(device metal.MTLDevice, integerScaleFactorX uint, integerScaleFactorY uint) *MPSCNNUpsamplingNearestGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNUpsamplingNearestGradientSelInitWithDeviceIntegerScaleFactorXIntegerScaleFactorY, device, integerScaleFactorX, integerScaleFactorY)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNUpsamplingNearestGradientFromID(_ret)
 }
-

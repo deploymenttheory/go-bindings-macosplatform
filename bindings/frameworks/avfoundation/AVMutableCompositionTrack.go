@@ -20,22 +20,22 @@ type AVMutableCompositionTrack struct {
 }
 
 var (
-	_clsAVMutableCompositionTrack = _objcClass("AVMutableCompositionTrack")
-	_aVMutableCompositionTrackSelInsertTimeRangeOfTrackAtTimeError = objc.RegisterName("insertTimeRange:ofTrack:atTime:error:")
-	_aVMutableCompositionTrackSelInsertTimeRangesOfTracksAtTimeError = objc.RegisterName("insertTimeRanges:ofTracks:atTime:error:")
-	_aVMutableCompositionTrackSelInsertEmptyTimeRange = objc.RegisterName("insertEmptyTimeRange:")
-	_aVMutableCompositionTrackSelRemoveTimeRange = objc.RegisterName("removeTimeRange:")
-	_aVMutableCompositionTrackSelScaleTimeRangeToDuration = objc.RegisterName("scaleTimeRange:toDuration:")
-	_aVMutableCompositionTrackSelValidateTrackSegmentsError = objc.RegisterName("validateTrackSegments:error:")
-	_aVMutableCompositionTrackSelAddTrackAssociationToTrackType = objc.RegisterName("addTrackAssociationToTrack:type:")
-	_aVMutableCompositionTrackSelRemoveTrackAssociationToTrackType = objc.RegisterName("removeTrackAssociationToTrack:type:")
-	_aVMutableCompositionTrackSelSetEnabled = objc.RegisterName("setEnabled:")
-	_aVMutableCompositionTrackSelSetNaturalTimeScale = objc.RegisterName("setNaturalTimeScale:")
-	_aVMutableCompositionTrackSelSetLanguageCode = objc.RegisterName("setLanguageCode:")
-	_aVMutableCompositionTrackSelSetExtendedLanguageTag = objc.RegisterName("setExtendedLanguageTag:")
-	_aVMutableCompositionTrackSelSetPreferredTransform = objc.RegisterName("setPreferredTransform:")
-	_aVMutableCompositionTrackSelSetPreferredVolume = objc.RegisterName("setPreferredVolume:")
-	_aVMutableCompositionTrackSelSetSegments = objc.RegisterName("setSegments:")
+	_clsAVMutableCompositionTrack                                              = _objcClass("AVMutableCompositionTrack")
+	_aVMutableCompositionTrackSelInsertTimeRangeOfTrackAtTimeError             = objc.RegisterName("insertTimeRange:ofTrack:atTime:error:")
+	_aVMutableCompositionTrackSelInsertTimeRangesOfTracksAtTimeError           = objc.RegisterName("insertTimeRanges:ofTracks:atTime:error:")
+	_aVMutableCompositionTrackSelInsertEmptyTimeRange                          = objc.RegisterName("insertEmptyTimeRange:")
+	_aVMutableCompositionTrackSelRemoveTimeRange                               = objc.RegisterName("removeTimeRange:")
+	_aVMutableCompositionTrackSelScaleTimeRangeToDuration                      = objc.RegisterName("scaleTimeRange:toDuration:")
+	_aVMutableCompositionTrackSelValidateTrackSegmentsError                    = objc.RegisterName("validateTrackSegments:error:")
+	_aVMutableCompositionTrackSelAddTrackAssociationToTrackType                = objc.RegisterName("addTrackAssociationToTrack:type:")
+	_aVMutableCompositionTrackSelRemoveTrackAssociationToTrackType             = objc.RegisterName("removeTrackAssociationToTrack:type:")
+	_aVMutableCompositionTrackSelSetEnabled                                    = objc.RegisterName("setEnabled:")
+	_aVMutableCompositionTrackSelSetNaturalTimeScale                           = objc.RegisterName("setNaturalTimeScale:")
+	_aVMutableCompositionTrackSelSetLanguageCode                               = objc.RegisterName("setLanguageCode:")
+	_aVMutableCompositionTrackSelSetExtendedLanguageTag                        = objc.RegisterName("setExtendedLanguageTag:")
+	_aVMutableCompositionTrackSelSetPreferredTransform                         = objc.RegisterName("setPreferredTransform:")
+	_aVMutableCompositionTrackSelSetPreferredVolume                            = objc.RegisterName("setPreferredVolume:")
+	_aVMutableCompositionTrackSelSetSegments                                   = objc.RegisterName("setSegments:")
 	_aVMutableCompositionTrackSelReplaceFormatDescriptionWithFormatDescription = objc.RegisterName("replaceFormatDescription:withFormatDescription:")
 )
 
@@ -136,4 +136,3 @@ func (o *AVMutableCompositionTrack) SetSegments(segments *foundation.NSArray[*AV
 func (o *AVMutableCompositionTrack) ReplaceFormatDescriptionWithFormatDescription(originalFormatDescription unsafe.Pointer, replacementFormatDescription unsafe.Pointer) {
 	o.Ptr().Send(_aVMutableCompositionTrackSelReplaceFormatDescriptionWithFormatDescription, originalFormatDescription, replacementFormatDescription)
 }
-

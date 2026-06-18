@@ -18,11 +18,11 @@ type UNNotificationAttachment struct {
 }
 
 var (
-	_clsUNNotificationAttachment = _objcClass("UNNotificationAttachment")
+	_clsUNNotificationAttachment                                        = _objcClass("UNNotificationAttachment")
 	_uNNotificationAttachmentSelAttachmentWithIdentifierURLOptionsError = objc.RegisterName("attachmentWithIdentifier:URL:options:error:")
-	_uNNotificationAttachmentSelIdentifier = objc.RegisterName("identifier")
-	_uNNotificationAttachmentSelURL = objc.RegisterName("URL")
-	_uNNotificationAttachmentSelType = objc.RegisterName("type")
+	_uNNotificationAttachmentSelIdentifier                              = objc.RegisterName("identifier")
+	_uNNotificationAttachmentSelURL                                     = objc.RegisterName("URL")
+	_uNNotificationAttachmentSelType                                    = objc.RegisterName("type")
 )
 
 func UNNotificationAttachmentFromID(id objc.ID) *UNNotificationAttachment {
@@ -38,7 +38,9 @@ func UNNotificationAttachmentFromID(id objc.ID) *UNNotificationAttachment {
 func UNNotificationAttachmentAttachmentWithIdentifierURLOptionsError(identifier *foundation.NSString, uRL *foundation.NSURL, options *foundation.NSDictionary[objc.ID, objc.ID]) (*UNNotificationAttachment, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationAttachment), _uNNotificationAttachmentSelAttachmentWithIdentifierURLOptionsError, identifier.Ptr(), uRL.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -47,19 +49,24 @@ func UNNotificationAttachmentAttachmentWithIdentifierURLOptionsError(identifier 
 
 func (o *UNNotificationAttachment) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNNotificationAttachmentSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *UNNotificationAttachment) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNNotificationAttachmentSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *UNNotificationAttachment) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNNotificationAttachmentSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

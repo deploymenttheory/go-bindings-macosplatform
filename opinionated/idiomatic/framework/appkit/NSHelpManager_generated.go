@@ -85,4 +85,3 @@ type HelpManagerable interface {
 }
 
 var _ HelpManagerable = (*HelpManager)(nil)
-

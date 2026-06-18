@@ -15,9 +15,9 @@ type MKMultiPolylineRenderer struct {
 }
 
 var (
-	_clsMKMultiPolylineRenderer = _objcClass("MKMultiPolylineRenderer")
+	_clsMKMultiPolylineRenderer                      = _objcClass("MKMultiPolylineRenderer")
 	_mKMultiPolylineRendererSelInitWithMultiPolyline = objc.RegisterName("initWithMultiPolyline:")
-	_mKMultiPolylineRendererSelMultiPolyline = objc.RegisterName("multiPolyline")
+	_mKMultiPolylineRendererSelMultiPolyline         = objc.RegisterName("multiPolyline")
 )
 
 func MKMultiPolylineRendererFromID(id objc.ID) *MKMultiPolylineRenderer {
@@ -32,13 +32,16 @@ func MKMultiPolylineRendererFromID(id objc.ID) *MKMultiPolylineRenderer {
 
 func (o *MKMultiPolylineRenderer) InitWithMultiPolyline(multiPolyline *MKMultiPolyline) *MKMultiPolylineRenderer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMultiPolylineRendererSelInitWithMultiPolyline, multiPolyline.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMultiPolylineRendererFromID(_ret)
 }
 
 func (o *MKMultiPolylineRenderer) MultiPolyline() *MKMultiPolyline {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMultiPolylineRendererSelMultiPolyline)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMultiPolylineFromID(_ret)
 }
-

@@ -58,4 +58,3 @@ type SequenceConstraintable interface {
 }
 
 var _ SequenceConstraintable = (*SequenceConstraint)(nil)
-

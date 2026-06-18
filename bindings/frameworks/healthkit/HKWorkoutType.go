@@ -25,4 +25,3 @@ func HKWorkoutTypeFromID(id objc.ID) *HKWorkoutType {
 	purego.Track(o)
 	return o
 }
-

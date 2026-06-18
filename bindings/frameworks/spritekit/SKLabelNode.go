@@ -19,37 +19,37 @@ type SKLabelNode struct {
 }
 
 var (
-	_clsSKLabelNode = _objcClass("SKLabelNode")
-	_sKLabelNodeSelLabelNodeWithText = objc.RegisterName("labelNodeWithText:")
+	_clsSKLabelNode                            = _objcClass("SKLabelNode")
+	_sKLabelNodeSelLabelNodeWithText           = objc.RegisterName("labelNodeWithText:")
 	_sKLabelNodeSelLabelNodeWithAttributedText = objc.RegisterName("labelNodeWithAttributedText:")
-	_sKLabelNodeSelLabelNodeWithFontNamed = objc.RegisterName("labelNodeWithFontNamed:")
-	_sKLabelNodeSelInitWithFontNamed = objc.RegisterName("initWithFontNamed:")
-	_sKLabelNodeSelVerticalAlignmentMode = objc.RegisterName("verticalAlignmentMode")
-	_sKLabelNodeSelSetVerticalAlignmentMode = objc.RegisterName("setVerticalAlignmentMode:")
-	_sKLabelNodeSelHorizontalAlignmentMode = objc.RegisterName("horizontalAlignmentMode")
-	_sKLabelNodeSelSetHorizontalAlignmentMode = objc.RegisterName("setHorizontalAlignmentMode:")
-	_sKLabelNodeSelNumberOfLines = objc.RegisterName("numberOfLines")
-	_sKLabelNodeSelSetNumberOfLines = objc.RegisterName("setNumberOfLines:")
-	_sKLabelNodeSelLineBreakMode = objc.RegisterName("lineBreakMode")
-	_sKLabelNodeSelSetLineBreakMode = objc.RegisterName("setLineBreakMode:")
-	_sKLabelNodeSelPreferredMaxLayoutWidth = objc.RegisterName("preferredMaxLayoutWidth")
-	_sKLabelNodeSelSetPreferredMaxLayoutWidth = objc.RegisterName("setPreferredMaxLayoutWidth:")
-	_sKLabelNodeSelFontName = objc.RegisterName("fontName")
-	_sKLabelNodeSelSetFontName = objc.RegisterName("setFontName:")
-	_sKLabelNodeSelText = objc.RegisterName("text")
-	_sKLabelNodeSelSetText = objc.RegisterName("setText:")
-	_sKLabelNodeSelAttributedText = objc.RegisterName("attributedText")
-	_sKLabelNodeSelSetAttributedText = objc.RegisterName("setAttributedText:")
-	_sKLabelNodeSelFontSize = objc.RegisterName("fontSize")
-	_sKLabelNodeSelSetFontSize = objc.RegisterName("setFontSize:")
-	_sKLabelNodeSelFontColor = objc.RegisterName("fontColor")
-	_sKLabelNodeSelSetFontColor = objc.RegisterName("setFontColor:")
-	_sKLabelNodeSelColorBlendFactor = objc.RegisterName("colorBlendFactor")
-	_sKLabelNodeSelSetColorBlendFactor = objc.RegisterName("setColorBlendFactor:")
-	_sKLabelNodeSelColor = objc.RegisterName("color")
-	_sKLabelNodeSelSetColor = objc.RegisterName("setColor:")
-	_sKLabelNodeSelBlendMode = objc.RegisterName("blendMode")
-	_sKLabelNodeSelSetBlendMode = objc.RegisterName("setBlendMode:")
+	_sKLabelNodeSelLabelNodeWithFontNamed      = objc.RegisterName("labelNodeWithFontNamed:")
+	_sKLabelNodeSelInitWithFontNamed           = objc.RegisterName("initWithFontNamed:")
+	_sKLabelNodeSelVerticalAlignmentMode       = objc.RegisterName("verticalAlignmentMode")
+	_sKLabelNodeSelSetVerticalAlignmentMode    = objc.RegisterName("setVerticalAlignmentMode:")
+	_sKLabelNodeSelHorizontalAlignmentMode     = objc.RegisterName("horizontalAlignmentMode")
+	_sKLabelNodeSelSetHorizontalAlignmentMode  = objc.RegisterName("setHorizontalAlignmentMode:")
+	_sKLabelNodeSelNumberOfLines               = objc.RegisterName("numberOfLines")
+	_sKLabelNodeSelSetNumberOfLines            = objc.RegisterName("setNumberOfLines:")
+	_sKLabelNodeSelLineBreakMode               = objc.RegisterName("lineBreakMode")
+	_sKLabelNodeSelSetLineBreakMode            = objc.RegisterName("setLineBreakMode:")
+	_sKLabelNodeSelPreferredMaxLayoutWidth     = objc.RegisterName("preferredMaxLayoutWidth")
+	_sKLabelNodeSelSetPreferredMaxLayoutWidth  = objc.RegisterName("setPreferredMaxLayoutWidth:")
+	_sKLabelNodeSelFontName                    = objc.RegisterName("fontName")
+	_sKLabelNodeSelSetFontName                 = objc.RegisterName("setFontName:")
+	_sKLabelNodeSelText                        = objc.RegisterName("text")
+	_sKLabelNodeSelSetText                     = objc.RegisterName("setText:")
+	_sKLabelNodeSelAttributedText              = objc.RegisterName("attributedText")
+	_sKLabelNodeSelSetAttributedText           = objc.RegisterName("setAttributedText:")
+	_sKLabelNodeSelFontSize                    = objc.RegisterName("fontSize")
+	_sKLabelNodeSelSetFontSize                 = objc.RegisterName("setFontSize:")
+	_sKLabelNodeSelFontColor                   = objc.RegisterName("fontColor")
+	_sKLabelNodeSelSetFontColor                = objc.RegisterName("setFontColor:")
+	_sKLabelNodeSelColorBlendFactor            = objc.RegisterName("colorBlendFactor")
+	_sKLabelNodeSelSetColorBlendFactor         = objc.RegisterName("setColorBlendFactor:")
+	_sKLabelNodeSelColor                       = objc.RegisterName("color")
+	_sKLabelNodeSelSetColor                    = objc.RegisterName("setColor:")
+	_sKLabelNodeSelBlendMode                   = objc.RegisterName("blendMode")
+	_sKLabelNodeSelSetBlendMode                = objc.RegisterName("setBlendMode:")
 )
 
 func SKLabelNodeFromID(id objc.ID) *SKLabelNode {
@@ -64,25 +64,33 @@ func SKLabelNodeFromID(id objc.ID) *SKLabelNode {
 
 func SKLabelNodeLabelNodeWithText(text *foundation.NSString) *SKLabelNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKLabelNode), _sKLabelNodeSelLabelNodeWithText, text.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKLabelNodeFromID(_ret)
 }
 
 func SKLabelNodeLabelNodeWithAttributedText(attributedText *foundation.NSAttributedString) *SKLabelNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKLabelNode), _sKLabelNodeSelLabelNodeWithAttributedText, attributedText.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKLabelNodeFromID(_ret)
 }
 
 func SKLabelNodeLabelNodeWithFontNamed(fontName *foundation.NSString) *SKLabelNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKLabelNode), _sKLabelNodeSelLabelNodeWithFontNamed, fontName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKLabelNodeFromID(_ret)
 }
 
 func (o *SKLabelNode) InitWithFontNamed(fontName *foundation.NSString) *SKLabelNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKLabelNodeSelInitWithFontNamed, fontName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKLabelNodeFromID(_ret)
 }
 
@@ -136,7 +144,9 @@ func (o *SKLabelNode) SetPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64
 
 func (o *SKLabelNode) FontName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKLabelNodeSelFontName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -146,7 +156,9 @@ func (o *SKLabelNode) SetFontName(fontName *foundation.NSString) {
 
 func (o *SKLabelNode) Text() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKLabelNodeSelText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -156,7 +168,9 @@ func (o *SKLabelNode) SetText(text *foundation.NSString) {
 
 func (o *SKLabelNode) AttributedText() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKLabelNodeSelAttributedText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
@@ -176,7 +190,9 @@ func (o *SKLabelNode) SetFontSize(fontSize float64) {
 // Base color that the text is rendered with (if supported by the font)
 func (o *SKLabelNode) FontColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKLabelNodeSelFontColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -197,7 +213,9 @@ func (o *SKLabelNode) SetColorBlendFactor(colorBlendFactor float64) {
 // Color to be blended with the text based on the colorBlendFactor
 func (o *SKLabelNode) Color() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKLabelNodeSelColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -214,4 +232,3 @@ func (o *SKLabelNode) BlendMode() SKBlendMode {
 func (o *SKLabelNode) SetBlendMode(blendMode SKBlendMode) {
 	o.Ptr().Send(_sKLabelNodeSelSetBlendMode, blendMode)
 }
-

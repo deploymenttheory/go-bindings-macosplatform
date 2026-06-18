@@ -17,34 +17,34 @@ type ISyncClient struct {
 }
 
 var (
-	_clsISyncClient = _objcClass("ISyncClient")
-	_iSyncClientSelClientIdentifier = objc.RegisterName("clientIdentifier")
-	_iSyncClientSelClientType = objc.RegisterName("clientType")
-	_iSyncClientSelDisplayName = objc.RegisterName("displayName")
-	_iSyncClientSelSetDisplayName = objc.RegisterName("setDisplayName:")
-	_iSyncClientSelImagePath = objc.RegisterName("imagePath")
-	_iSyncClientSelSetImagePath = objc.RegisterName("setImagePath:")
-	_iSyncClientSelSupportedEntityNames = objc.RegisterName("supportedEntityNames")
-	_iSyncClientSelCanPushChangesForEntityName = objc.RegisterName("canPushChangesForEntityName:")
-	_iSyncClientSelCanPullChangesForEntityName = objc.RegisterName("canPullChangesForEntityName:")
-	_iSyncClientSelLastSyncDateForEntityName = objc.RegisterName("lastSyncDateForEntityName:")
-	_iSyncClientSelLastSyncStatusForEntityName = objc.RegisterName("lastSyncStatusForEntityName:")
-	_iSyncClientSelEnabledEntityNames = objc.RegisterName("enabledEntityNames")
-	_iSyncClientSelIsEnabledForEntityName = objc.RegisterName("isEnabledForEntityName:")
-	_iSyncClientSelSetEnabledForEntityNames = objc.RegisterName("setEnabled:forEntityNames:")
-	_iSyncClientSelFormatsRelationships = objc.RegisterName("formatsRelationships")
-	_iSyncClientSelSetFormatsRelationships = objc.RegisterName("setFormatsRelationships:")
-	_iSyncClientSelShouldReplaceClientRecordsForEntityName = objc.RegisterName("shouldReplaceClientRecordsForEntityName:")
+	_clsISyncClient                                            = _objcClass("ISyncClient")
+	_iSyncClientSelClientIdentifier                            = objc.RegisterName("clientIdentifier")
+	_iSyncClientSelClientType                                  = objc.RegisterName("clientType")
+	_iSyncClientSelDisplayName                                 = objc.RegisterName("displayName")
+	_iSyncClientSelSetDisplayName                              = objc.RegisterName("setDisplayName:")
+	_iSyncClientSelImagePath                                   = objc.RegisterName("imagePath")
+	_iSyncClientSelSetImagePath                                = objc.RegisterName("setImagePath:")
+	_iSyncClientSelSupportedEntityNames                        = objc.RegisterName("supportedEntityNames")
+	_iSyncClientSelCanPushChangesForEntityName                 = objc.RegisterName("canPushChangesForEntityName:")
+	_iSyncClientSelCanPullChangesForEntityName                 = objc.RegisterName("canPullChangesForEntityName:")
+	_iSyncClientSelLastSyncDateForEntityName                   = objc.RegisterName("lastSyncDateForEntityName:")
+	_iSyncClientSelLastSyncStatusForEntityName                 = objc.RegisterName("lastSyncStatusForEntityName:")
+	_iSyncClientSelEnabledEntityNames                          = objc.RegisterName("enabledEntityNames")
+	_iSyncClientSelIsEnabledForEntityName                      = objc.RegisterName("isEnabledForEntityName:")
+	_iSyncClientSelSetEnabledForEntityNames                    = objc.RegisterName("setEnabled:forEntityNames:")
+	_iSyncClientSelFormatsRelationships                        = objc.RegisterName("formatsRelationships")
+	_iSyncClientSelSetFormatsRelationships                     = objc.RegisterName("setFormatsRelationships:")
+	_iSyncClientSelShouldReplaceClientRecordsForEntityName     = objc.RegisterName("shouldReplaceClientRecordsForEntityName:")
 	_iSyncClientSelSetShouldReplaceClientRecordsForEntityNames = objc.RegisterName("setShouldReplaceClientRecords:forEntityNames:")
-	_iSyncClientSelObjectForKey = objc.RegisterName("objectForKey:")
-	_iSyncClientSelSetObjectForKey = objc.RegisterName("setObject:forKey:")
-	_iSyncClientSelFilters = objc.RegisterName("filters")
-	_iSyncClientSelSetFilters = objc.RegisterName("setFilters:")
-	_iSyncClientSelShouldSynchronizeWithClientsOfType = objc.RegisterName("shouldSynchronizeWithClientsOfType:")
-	_iSyncClientSelSetShouldSynchronizeWithClientsOfType = objc.RegisterName("setShouldSynchronize:withClientsOfType:")
-	_iSyncClientSelSyncAlertToolPath = objc.RegisterName("syncAlertToolPath")
-	_iSyncClientSelSetSyncAlertToolPath = objc.RegisterName("setSyncAlertToolPath:")
-	_iSyncClientSelSetSyncAlertHandlerSelector = objc.RegisterName("setSyncAlertHandler:selector:")
+	_iSyncClientSelObjectForKey                                = objc.RegisterName("objectForKey:")
+	_iSyncClientSelSetObjectForKey                             = objc.RegisterName("setObject:forKey:")
+	_iSyncClientSelFilters                                     = objc.RegisterName("filters")
+	_iSyncClientSelSetFilters                                  = objc.RegisterName("setFilters:")
+	_iSyncClientSelShouldSynchronizeWithClientsOfType          = objc.RegisterName("shouldSynchronizeWithClientsOfType:")
+	_iSyncClientSelSetShouldSynchronizeWithClientsOfType       = objc.RegisterName("setShouldSynchronize:withClientsOfType:")
+	_iSyncClientSelSyncAlertToolPath                           = objc.RegisterName("syncAlertToolPath")
+	_iSyncClientSelSetSyncAlertToolPath                        = objc.RegisterName("setSyncAlertToolPath:")
+	_iSyncClientSelSetSyncAlertHandlerSelector                 = objc.RegisterName("setSyncAlertHandler:selector:")
 )
 
 func ISyncClientFromID(id objc.ID) *ISyncClient {
@@ -60,21 +60,27 @@ func ISyncClientFromID(id objc.ID) *ISyncClient {
 // Deprecated: since macOS 10.7.
 func (o *ISyncClient) ClientIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncClientSelClientIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Deprecated: since macOS 10.7.
 func (o *ISyncClient) ClientType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncClientSelClientType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Deprecated: since macOS 10.7.
 func (o *ISyncClient) DisplayName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncClientSelDisplayName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -86,7 +92,9 @@ func (o *ISyncClient) SetDisplayName(displayName *foundation.NSString) {
 // Deprecated: since macOS 10.7.
 func (o *ISyncClient) ImagePath() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncClientSelImagePath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -116,7 +124,9 @@ func (o *ISyncClient) CanPullChangesForEntityName(entityName *foundation.NSStrin
 // Deprecated: since macOS 10.7.
 func (o *ISyncClient) LastSyncDateForEntityName(entityName *foundation.NSString) *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncClientSelLastSyncDateForEntityName, entityName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -201,7 +211,9 @@ func (o *ISyncClient) SetShouldSynchronizeWithClientsOfType(flag bool, clientTyp
 // Deprecated: since macOS 10.7.
 func (o *ISyncClient) SyncAlertToolPath() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncClientSelSyncAlertToolPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -214,4 +226,3 @@ func (o *ISyncClient) SetSyncAlertToolPath(path *foundation.NSString) {
 func (o *ISyncClient) SetSyncAlertHandlerSelector(handler objc.ID, selector objc.SEL) {
 	o.Ptr().Send(_iSyncClientSelSetSyncAlertHandlerSelector, handler, selector)
 }
-

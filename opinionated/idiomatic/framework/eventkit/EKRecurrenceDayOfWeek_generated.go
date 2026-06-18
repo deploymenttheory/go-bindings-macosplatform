@@ -54,4 +54,3 @@ type RecurrenceDayOfWeekable interface {
 }
 
 var _ RecurrenceDayOfWeekable = (*RecurrenceDayOfWeek)(nil)
-

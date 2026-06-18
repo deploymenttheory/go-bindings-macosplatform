@@ -45,7 +45,9 @@ func (x *ChangeRepeatModeCommandEvent) PreservesRepeatMode() bool {
 	return x.inner.PreservesRepeatMode()
 }
 
-func (x *ChangeRepeatModeCommandEvent) asRemoteCommandEvent() *raw.MPRemoteCommandEvent { return &x.inner.MPRemoteCommandEvent }
+func (x *ChangeRepeatModeCommandEvent) asRemoteCommandEvent() *raw.MPRemoteCommandEvent {
+	return &x.inner.MPRemoteCommandEvent
+}
 
 // ChangeRepeatModeCommandEventable is the interface implemented by [ChangeRepeatModeCommandEvent], for mocking and DI.
 type ChangeRepeatModeCommandEventable interface {
@@ -55,4 +57,3 @@ type ChangeRepeatModeCommandEventable interface {
 }
 
 var _ ChangeRepeatModeCommandEventable = (*ChangeRepeatModeCommandEvent)(nil)
-

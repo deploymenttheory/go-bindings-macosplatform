@@ -16,11 +16,11 @@ type HKCDADocument struct {
 }
 
 var (
-	_clsHKCDADocument = _objcClass("HKCDADocument")
-	_hKCDADocumentSelDocumentData = objc.RegisterName("documentData")
-	_hKCDADocumentSelTitle = objc.RegisterName("title")
-	_hKCDADocumentSelPatientName = objc.RegisterName("patientName")
-	_hKCDADocumentSelAuthorName = objc.RegisterName("authorName")
+	_clsHKCDADocument              = _objcClass("HKCDADocument")
+	_hKCDADocumentSelDocumentData  = objc.RegisterName("documentData")
+	_hKCDADocumentSelTitle         = objc.RegisterName("title")
+	_hKCDADocumentSelPatientName   = objc.RegisterName("patientName")
+	_hKCDADocumentSelAuthorName    = objc.RegisterName("authorName")
 	_hKCDADocumentSelCustodianName = objc.RegisterName("custodianName")
 )
 
@@ -37,35 +37,44 @@ func HKCDADocumentFromID(id objc.ID) *HKCDADocument {
 // @property  documentData @abstract  The CDA document content in XML format as specified in the CDA standard. This may be nil if the includeDocumentData option in HKDocumentQuery is specified as NO.
 func (o *HKCDADocument) DocumentData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKCDADocumentSelDocumentData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @property      title @abstract      The title of the document. @discussion    This property is extracted automatically from the document.
 func (o *HKCDADocument) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKCDADocumentSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property      patientName @abstract      The name of the patient receiving treatment. @discussion    This property is extracted automatically from the document.
 func (o *HKCDADocument) PatientName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKCDADocumentSelPatientName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property      authorName @abstract      The person responsible for authoring the document.  Usually, this is the treating physician. @discussion    This property is extracted automatically from the document.
 func (o *HKCDADocument) AuthorName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKCDADocumentSelAuthorName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property      custodianName @abstract      The organization responsible for the document.  This is usually the treating institution name. @discussion    This property is extracted automatically from the document.
 func (o *HKCDADocument) CustodianName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKCDADocumentSelCustodianName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

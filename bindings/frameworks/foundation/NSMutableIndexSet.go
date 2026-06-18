@@ -15,14 +15,14 @@ type NSMutableIndexSet struct {
 }
 
 var (
-	_clsNSMutableIndexSet = _objcClass("NSMutableIndexSet")
-	_nSMutableIndexSetSelAddIndexes = objc.RegisterName("addIndexes:")
-	_nSMutableIndexSetSelRemoveIndexes = objc.RegisterName("removeIndexes:")
-	_nSMutableIndexSetSelRemoveAllIndexes = objc.RegisterName("removeAllIndexes")
-	_nSMutableIndexSetSelAddIndex = objc.RegisterName("addIndex:")
-	_nSMutableIndexSetSelRemoveIndex = objc.RegisterName("removeIndex:")
-	_nSMutableIndexSetSelAddIndexesInRange = objc.RegisterName("addIndexesInRange:")
-	_nSMutableIndexSetSelRemoveIndexesInRange = objc.RegisterName("removeIndexesInRange:")
+	_clsNSMutableIndexSet                              = _objcClass("NSMutableIndexSet")
+	_nSMutableIndexSetSelAddIndexes                    = objc.RegisterName("addIndexes:")
+	_nSMutableIndexSetSelRemoveIndexes                 = objc.RegisterName("removeIndexes:")
+	_nSMutableIndexSetSelRemoveAllIndexes              = objc.RegisterName("removeAllIndexes")
+	_nSMutableIndexSetSelAddIndex                      = objc.RegisterName("addIndex:")
+	_nSMutableIndexSetSelRemoveIndex                   = objc.RegisterName("removeIndex:")
+	_nSMutableIndexSetSelAddIndexesInRange             = objc.RegisterName("addIndexesInRange:")
+	_nSMutableIndexSetSelRemoveIndexesInRange          = objc.RegisterName("removeIndexesInRange:")
 	_nSMutableIndexSetSelShiftIndexesStartingAtIndexBy = objc.RegisterName("shiftIndexesStartingAtIndex:by:")
 )
 
@@ -67,4 +67,3 @@ func (o *NSMutableIndexSet) RemoveIndexesInRange(range_ NSRange) {
 func (o *NSMutableIndexSet) ShiftIndexesStartingAtIndexBy(index uint, delta int) {
 	o.Ptr().Send(_nSMutableIndexSetSelShiftIndexesStartingAtIndexBy, index, delta)
 }
-

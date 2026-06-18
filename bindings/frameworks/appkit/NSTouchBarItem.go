@@ -16,16 +16,16 @@ type NSTouchBarItem struct {
 }
 
 var (
-	_clsNSTouchBarItem = _objcClass("NSTouchBarItem")
-	_nSTouchBarItemSelInitWithIdentifier = objc.RegisterName("initWithIdentifier:")
-	_nSTouchBarItemSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSTouchBarItemSelIdentifier = objc.RegisterName("identifier")
-	_nSTouchBarItemSelVisibilityPriority = objc.RegisterName("visibilityPriority")
+	_clsNSTouchBarItem                      = _objcClass("NSTouchBarItem")
+	_nSTouchBarItemSelInitWithIdentifier    = objc.RegisterName("initWithIdentifier:")
+	_nSTouchBarItemSelInitWithCoder         = objc.RegisterName("initWithCoder:")
+	_nSTouchBarItemSelIdentifier            = objc.RegisterName("identifier")
+	_nSTouchBarItemSelVisibilityPriority    = objc.RegisterName("visibilityPriority")
 	_nSTouchBarItemSelSetVisibilityPriority = objc.RegisterName("setVisibilityPriority:")
-	_nSTouchBarItemSelView = objc.RegisterName("view")
-	_nSTouchBarItemSelViewController = objc.RegisterName("viewController")
-	_nSTouchBarItemSelCustomizationLabel = objc.RegisterName("customizationLabel")
-	_nSTouchBarItemSelIsVisible = objc.RegisterName("isVisible")
+	_nSTouchBarItemSelView                  = objc.RegisterName("view")
+	_nSTouchBarItemSelViewController        = objc.RegisterName("viewController")
+	_nSTouchBarItemSelCustomizationLabel    = objc.RegisterName("customizationLabel")
+	_nSTouchBarItemSelIsVisible             = objc.RegisterName("isVisible")
 )
 
 func NSTouchBarItemFromID(id objc.ID) *NSTouchBarItem {
@@ -40,19 +40,25 @@ func NSTouchBarItemFromID(id objc.ID) *NSTouchBarItem {
 
 func (o *NSTouchBarItem) InitWithIdentifier(identifier *foundation.NSString) *NSTouchBarItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarItemSelInitWithIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTouchBarItemFromID(_ret)
 }
 
 func (o *NSTouchBarItem) InitWithCoder(coder *foundation.NSCoder) *NSTouchBarItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarItemSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTouchBarItemFromID(_ret)
 }
 
 func (o *NSTouchBarItem) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarItemSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -67,20 +73,26 @@ func (o *NSTouchBarItem) SetVisibilityPriority(visibilityPriority float32) {
 
 func (o *NSTouchBarItem) View() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarItemSelView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
 func (o *NSTouchBarItem) ViewController() *NSViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarItemSelViewController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewControllerFromID(_ret)
 }
 
 // The user visible string identifying this item during customization. By default this method returns the empty string.
 func (o *NSTouchBarItem) CustomizationLabel() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarItemSelCustomizationLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -88,4 +100,3 @@ func (o *NSTouchBarItem) IsVisible() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTouchBarItemSelIsVisible)
 	return _ret
 }
-

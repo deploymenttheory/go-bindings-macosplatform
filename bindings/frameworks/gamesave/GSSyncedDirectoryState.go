@@ -12,7 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// Represents the state and its associated properties of the directory Use the ``state`` property to determine the validity of the other properties
+// Represents the state and its associated properties of the directory Use the “state“ property to determine the validity of the other properties
 //
 // Apple documentation: https://developer.apple.com/documentation/gamesave/gssynceddirectorystate
 type GSSyncedDirectoryState struct {
@@ -20,11 +20,11 @@ type GSSyncedDirectoryState struct {
 }
 
 var (
-	_clsGSSyncedDirectoryState = _objcClass("GSSyncedDirectoryState")
-	_gSSyncedDirectoryStateSelState = objc.RegisterName("state")
-	_gSSyncedDirectoryStateSelUrl = objc.RegisterName("url")
+	_clsGSSyncedDirectoryState                   = _objcClass("GSSyncedDirectoryState")
+	_gSSyncedDirectoryStateSelState              = objc.RegisterName("state")
+	_gSSyncedDirectoryStateSelUrl                = objc.RegisterName("url")
 	_gSSyncedDirectoryStateSelConflictedVersions = objc.RegisterName("conflictedVersions")
-	_gSSyncedDirectoryStateSelError = objc.RegisterName("error")
+	_gSSyncedDirectoryStateSelError              = objc.RegisterName("error")
 )
 
 func GSSyncedDirectoryStateFromID(id objc.ID) *GSSyncedDirectoryState {
@@ -46,14 +46,18 @@ func (o *GSSyncedDirectoryState) State() GSSyncState {
 // The URL of a directory to read and write game-save data in. This property's value is `nil` unless the state is `GSSyncStateReady`, `GSSyncStateOffline`, or `GSSyncStateLocal`.
 func (o *GSSyncedDirectoryState) Url() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gSSyncedDirectoryStateSelUrl)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
-// The conflicting versions. If you're implementing your own conflict resolution, read all of the conflicting versions, and modify one of them to incorporate the state and changes from the others. Then call ``GSSyncedDirectory/resolveConflictsWithVersion:``, passing that version. This property's value is `nil` unless the state is `GSSyncStateConflicted`.
+// The conflicting versions. If you're implementing your own conflict resolution, read all of the conflicting versions, and modify one of them to incorporate the state and changes from the others. Then call “GSSyncedDirectory/resolveConflictsWithVersion:“, passing that version. This property's value is `nil` unless the state is `GSSyncStateConflicted`.
 func (o *GSSyncedDirectoryState) ConflictedVersions() *foundation.NSArray[*GSSyncedDirectoryVersion] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gSSyncedDirectoryStateSelConflictedVersions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GSSyncedDirectoryVersion](_ret)
 }
 
@@ -62,4 +66,3 @@ func (o *GSSyncedDirectoryState) Error() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _gSSyncedDirectoryStateSelError)
 	return _ret
 }
-

@@ -16,17 +16,17 @@ type MIDICIDevice struct {
 }
 
 var (
-	_clsMIDICIDevice = _objcClass("MIDICIDevice")
-	_mIDICIDeviceSelDeviceInfo = objc.RegisterName("deviceInfo")
-	_mIDICIDeviceSelMUID = objc.RegisterName("MUID")
-	_mIDICIDeviceSelSupportsProtocolNegotiation = objc.RegisterName("supportsProtocolNegotiation")
+	_clsMIDICIDevice                             = _objcClass("MIDICIDevice")
+	_mIDICIDeviceSelDeviceInfo                   = objc.RegisterName("deviceInfo")
+	_mIDICIDeviceSelMUID                         = objc.RegisterName("MUID")
+	_mIDICIDeviceSelSupportsProtocolNegotiation  = objc.RegisterName("supportsProtocolNegotiation")
 	_mIDICIDeviceSelSupportsProfileConfiguration = objc.RegisterName("supportsProfileConfiguration")
-	_mIDICIDeviceSelSupportsPropertyExchange = objc.RegisterName("supportsPropertyExchange")
-	_mIDICIDeviceSelSupportsProcessInquiry = objc.RegisterName("supportsProcessInquiry")
-	_mIDICIDeviceSelMaxSysExSize = objc.RegisterName("maxSysExSize")
-	_mIDICIDeviceSelMaxPropertyExchangeRequests = objc.RegisterName("maxPropertyExchangeRequests")
-	_mIDICIDeviceSelDeviceType = objc.RegisterName("deviceType")
-	_mIDICIDeviceSelProfiles = objc.RegisterName("profiles")
+	_mIDICIDeviceSelSupportsPropertyExchange     = objc.RegisterName("supportsPropertyExchange")
+	_mIDICIDeviceSelSupportsProcessInquiry       = objc.RegisterName("supportsProcessInquiry")
+	_mIDICIDeviceSelMaxSysExSize                 = objc.RegisterName("maxSysExSize")
+	_mIDICIDeviceSelMaxPropertyExchangeRequests  = objc.RegisterName("maxPropertyExchangeRequests")
+	_mIDICIDeviceSelDeviceType                   = objc.RegisterName("deviceType")
+	_mIDICIDeviceSelProfiles                     = objc.RegisterName("profiles")
 )
 
 func MIDICIDeviceFromID(id objc.ID) *MIDICIDevice {
@@ -42,7 +42,9 @@ func MIDICIDeviceFromID(id objc.ID) *MIDICIDevice {
 // @property   deviceInfo @brief      The basic information describing the CI device.
 func (o *MIDICIDevice) DeviceInfo() *MIDI2DeviceInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICIDeviceSelDeviceInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MIDI2DeviceInfoFromID(_ret)
 }
 
@@ -97,7 +99,8 @@ func (o *MIDICIDevice) DeviceType() MIDICIDeviceType {
 // @property	profiles @brief		The MIDI-CI Profiles that are registered to the  Function Block.
 func (o *MIDICIDevice) Profiles() *foundation.NSArray[*MIDIUMPCIProfile] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICIDeviceSelProfiles)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MIDIUMPCIProfile](_ret)
 }
-

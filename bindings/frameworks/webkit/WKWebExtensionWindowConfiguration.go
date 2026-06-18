@@ -17,12 +17,12 @@ type WKWebExtensionWindowConfiguration struct {
 }
 
 var (
-	_clsWKWebExtensionWindowConfiguration = _objcClass("WKWebExtensionWindowConfiguration")
-	_wKWebExtensionWindowConfigurationSelWindowType = objc.RegisterName("windowType")
-	_wKWebExtensionWindowConfigurationSelWindowState = objc.RegisterName("windowState")
-	_wKWebExtensionWindowConfigurationSelFrame = objc.RegisterName("frame")
-	_wKWebExtensionWindowConfigurationSelTabURLs = objc.RegisterName("tabURLs")
-	_wKWebExtensionWindowConfigurationSelTabs = objc.RegisterName("tabs")
+	_clsWKWebExtensionWindowConfiguration                = _objcClass("WKWebExtensionWindowConfiguration")
+	_wKWebExtensionWindowConfigurationSelWindowType      = objc.RegisterName("windowType")
+	_wKWebExtensionWindowConfigurationSelWindowState     = objc.RegisterName("windowState")
+	_wKWebExtensionWindowConfigurationSelFrame           = objc.RegisterName("frame")
+	_wKWebExtensionWindowConfigurationSelTabURLs         = objc.RegisterName("tabURLs")
+	_wKWebExtensionWindowConfigurationSelTabs            = objc.RegisterName("tabs")
 	_wKWebExtensionWindowConfigurationSelShouldBeFocused = objc.RegisterName("shouldBeFocused")
 	_wKWebExtensionWindowConfigurationSelShouldBePrivate = objc.RegisterName("shouldBePrivate")
 )
@@ -55,16 +55,18 @@ func (o *WKWebExtensionWindowConfiguration) Frame() corefoundation.CGRect {
 	return _ret
 }
 
-// @abstract Indicates the URLs that the window should initially load as tabs. @discussion If ``tabURLs`` and ``tabs`` are both empty, the app's default "start page" should appear in a tab. @seealso tabs
+// @abstract Indicates the URLs that the window should initially load as tabs. @discussion If “tabURLs“ and “tabs“ are both empty, the app's default "start page" should appear in a tab. @seealso tabs
 func (o *WKWebExtensionWindowConfiguration) TabURLs() *foundation.NSArray[*foundation.NSURL] {
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSURL]](o.Ptr(), _wKWebExtensionWindowConfigurationSelTabURLs)
 	return _ret
 }
 
-// @abstract Indicates the existing tabs that should be moved to the window. @discussion If ``tabs`` and ``tabURLs`` are both empty, the app's default "start page" should appear in a tab. @seealso tabURLs
+// @abstract Indicates the existing tabs that should be moved to the window. @discussion If “tabs“ and “tabURLs“ are both empty, the app's default "start page" should appear in a tab. @seealso tabURLs
 func (o *WKWebExtensionWindowConfiguration) Tabs() *foundation.NSArray[WKWebExtensionTab] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionWindowConfigurationSelTabs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[WKWebExtensionTab](_ret)
 }
 
@@ -74,9 +76,8 @@ func (o *WKWebExtensionWindowConfiguration) ShouldBeFocused() bool {
 	return _ret
 }
 
-// @abstract Indicates whether the window should be private. @note To ensure proper isolation between private and non-private data, web views associated with private data must use a different ``WKUserContentController``. Likewise, to be identified as a private web view and to ensure that cookies and other website data is not shared, private web views must be configured to use a non-persistent ``WKWebsiteDataStore``.
+// @abstract Indicates whether the window should be private. @note To ensure proper isolation between private and non-private data, web views associated with private data must use a different “WKUserContentController“. Likewise, to be identified as a private web view and to ensure that cookies and other website data is not shared, private web views must be configured to use a non-persistent “WKWebsiteDataStore“.
 func (o *WKWebExtensionWindowConfiguration) ShouldBePrivate() bool {
 	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionWindowConfigurationSelShouldBePrivate)
 	return _ret
 }
-

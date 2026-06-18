@@ -17,7 +17,9 @@ type NNReductionSpatialMeanGradientNode struct {
 }
 
 // Unwrap returns the underlying [raw.MPSNNReductionSpatialMeanGradientNode].
-func (x *NNReductionSpatialMeanGradientNode) Unwrap() *raw.MPSNNReductionSpatialMeanGradientNode { return x.inner }
+func (x *NNReductionSpatialMeanGradientNode) Unwrap() *raw.MPSNNReductionSpatialMeanGradientNode {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -50,9 +52,13 @@ func (x *NNReductionSpatialMeanGradientNode) WithLabel(label string) *NNReductio
 	return x
 }
 
-func (x *NNReductionSpatialMeanGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
+func (x *NNReductionSpatialMeanGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode {
+	return &x.inner.MPSNNGradientFilterNode
+}
 
-func (x *NNReductionSpatialMeanGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
+func (x *NNReductionSpatialMeanGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode
+}
 
 // NNReductionSpatialMeanGradientNodeable is the interface implemented by [NNReductionSpatialMeanGradientNode], for mocking and DI.
 type NNReductionSpatialMeanGradientNodeable interface {
@@ -62,4 +68,3 @@ type NNReductionSpatialMeanGradientNodeable interface {
 }
 
 var _ NNReductionSpatialMeanGradientNodeable = (*NNReductionSpatialMeanGradientNode)(nil)
-

@@ -64,4 +64,3 @@ type VSAccountApplicationProviderable interface {
 }
 
 var _ VSAccountApplicationProviderable = (*VSAccountApplicationProvider)(nil)
-

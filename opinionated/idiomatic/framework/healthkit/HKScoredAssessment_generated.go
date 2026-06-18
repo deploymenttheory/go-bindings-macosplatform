@@ -53,4 +53,3 @@ type ScoredAssessmentable interface {
 }
 
 var _ ScoredAssessmentable = (*ScoredAssessment)(nil)
-

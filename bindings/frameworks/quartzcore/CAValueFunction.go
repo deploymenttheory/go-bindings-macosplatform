@@ -16,9 +16,9 @@ type CAValueFunction struct {
 }
 
 var (
-	_clsCAValueFunction = _objcClass("CAValueFunction")
+	_clsCAValueFunction                 = _objcClass("CAValueFunction")
 	_cAValueFunctionSelFunctionWithName = objc.RegisterName("functionWithName:")
-	_cAValueFunctionSelName = objc.RegisterName("name")
+	_cAValueFunctionSelName             = objc.RegisterName("name")
 )
 
 func CAValueFunctionFromID(id objc.ID) *CAValueFunction {
@@ -33,13 +33,16 @@ func CAValueFunctionFromID(id objc.ID) *CAValueFunction {
 
 func CAValueFunctionFunctionWithName(name *foundation.NSString) *CAValueFunction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCAValueFunction), _cAValueFunctionSelFunctionWithName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CAValueFunctionFromID(_ret)
 }
 
 func (o *CAValueFunction) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cAValueFunctionSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

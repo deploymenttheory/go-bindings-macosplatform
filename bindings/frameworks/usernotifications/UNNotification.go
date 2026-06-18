@@ -16,8 +16,8 @@ type UNNotification struct {
 }
 
 var (
-	_clsUNNotification = _objcClass("UNNotification")
-	_uNNotificationSelDate = objc.RegisterName("date")
+	_clsUNNotification        = _objcClass("UNNotification")
+	_uNNotificationSelDate    = objc.RegisterName("date")
 	_uNNotificationSelRequest = objc.RegisterName("request")
 )
 
@@ -33,13 +33,16 @@ func UNNotificationFromID(id objc.ID) *UNNotification {
 
 func (o *UNNotification) Date() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNNotificationSelDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *UNNotification) Request() *UNNotificationRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNNotificationSelRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UNNotificationRequestFromID(_ret)
 }
-

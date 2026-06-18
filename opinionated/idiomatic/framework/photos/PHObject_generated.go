@@ -54,4 +54,3 @@ type Objectable interface {
 }
 
 var _ Objectable = (*Object)(nil)
-
